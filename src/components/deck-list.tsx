@@ -17,6 +17,8 @@ interface DeckListProps {
   cards: DeckEntry[];
   onQuantityChange?: (cardId: string, board: string, quantity: number) => void;
   onRemove?: (cardId: string, board: string) => void;
+  onSetCommander?: (cardId: string) => void;
+  isCommanderFormat?: boolean;
   className?: string;
 }
 
@@ -48,6 +50,8 @@ export function DeckList({
   cards,
   onQuantityChange,
   onRemove,
+  onSetCommander,
+  isCommanderFormat,
   className,
 }: DeckListProps) {
   const mainCards = cards.filter((c) => c.board === 'main');
@@ -87,6 +91,8 @@ export function DeckList({
             cards={group}
             onQuantityChange={onQuantityChange}
             onRemove={onRemove}
+            onSetCommander={onSetCommander}
+            isCommanderFormat={isCommanderFormat}
           />
         );
       })}
@@ -126,6 +132,8 @@ function DeckSection({
   cards,
   onQuantityChange,
   onRemove,
+  onSetCommander,
+  isCommanderFormat,
   hideHeader,
 }: {
   title: string;
@@ -133,6 +141,8 @@ function DeckSection({
   cards: DeckEntry[];
   onQuantityChange?: (cardId: string, board: string, quantity: number) => void;
   onRemove?: (cardId: string, board: string) => void;
+  onSetCommander?: (cardId: string) => void;
+  isCommanderFormat?: boolean;
   hideHeader?: boolean;
 }) {
   const sorted = [...cards].sort((a, b) => a.card.cmc - b.card.cmc || a.card.name.localeCompare(b.card.name));
@@ -152,6 +162,8 @@ function DeckSection({
             entry={entry}
             onQuantityChange={onQuantityChange}
             onRemove={onRemove}
+            onSetCommander={onSetCommander}
+            isCommanderFormat={isCommanderFormat}
           />
         ))}
       </div>
@@ -163,16 +175,34 @@ function DeckCardRow({
   entry,
   onQuantityChange,
   onRemove,
+  onSetCommander,
+  isCommanderFormat,
 }: {
   entry: DeckEntry;
   onQuantityChange?: (cardId: string, board: string, quantity: number) => void;
   onRemove?: (cardId: string, board: string) => void;
+  onSetCommander?: (cardId: string) => void;
+  isCommanderFormat?: boolean;
 }) {
   const card = entry.card;
   const previewUrl = card.image_uri_small;
+  const isCommander = entry.board === 'commander';
+  const canBeCommander = isCommanderFormat && !isCommander && entry.board === 'main' &&
+    (card.type_line.includes('Legendary') && card.type_line.includes('Creature') ||
+     card.type_line.includes('Planeswalker') && card.oracle_text?.includes('can be your commander'));
 
   return (
-    <div className="group flex items-center gap-1.5 rounded-lg px-2 py-1 transition-colors hover:bg-accent/50">
+    <div className={cn(
+      'group flex items-center gap-1.5 rounded-lg px-2 py-1 transition-colors hover:bg-accent/50',
+      isCommander && 'bg-primary/10 border border-primary/30'
+    )}>
+      {/* Commander crown */}
+      {isCommander && (
+        <span className="text-xs text-primary" title="Commander">
+          &#x1F451;
+        </span>
+      )}
+
       {/* Quantity controls */}
       <div className="flex items-center gap-0.5">
         <button
@@ -222,6 +252,17 @@ function DeckCardRow({
 
       {/* Mana cost */}
       <ManaCost cost={card.mana_cost} size="xs" />
+
+      {/* Set as Commander button */}
+      {canBeCommander && onSetCommander && (
+        <button
+          onClick={() => onSetCommander(entry.card_id)}
+          className="flex h-4 w-4 items-center justify-center rounded text-[10px] text-muted-foreground opacity-0 transition-opacity hover:text-primary group-hover:opacity-100"
+          title="Set as Commander"
+        >
+          &#x1F451;
+        </button>
+      )}
 
       {/* Remove button */}
       {onRemove && (

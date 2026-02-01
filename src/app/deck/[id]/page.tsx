@@ -12,7 +12,7 @@ import { DeckValidation } from '@/components/deck-validation';
 import { ExportDialog } from '@/components/export-dialog';
 import { PlaytestModal } from '@/components/playtest-modal';
 import { CardDetailModal } from '@/components/card-detail-modal';
-import { FORMAT_LABELS, FORMATS } from '@/lib/constants';
+import { FORMAT_LABELS, FORMATS, COMMANDER_FORMATS } from '@/lib/constants';
 
 interface DeckData {
   id: number;
@@ -181,6 +181,31 @@ export default function DeckEditorPage() {
       setSaving(false);
     }
   };
+
+  const setAsCommander = async (cardId: string) => {
+    if (!deck) return;
+    setSaving(true);
+    try {
+      const res = await fetch(`/api/decks/${deckId}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          op: 'move_card',
+          card_id: cardId,
+          from_board: 'main',
+          to_board: 'commander',
+        }),
+      });
+      const data = await res.json();
+      if (data.deck) setDeck(data.deck);
+    } catch {} finally {
+      setSaving(false);
+    }
+  };
+
+  const isCommanderFormat = COMMANDER_FORMATS.includes(
+    (deck?.format || '') as typeof COMMANDER_FORMATS[number]
+  );
 
   const updateDeckMeta = async (updates: {
     name?: string;
@@ -515,6 +540,8 @@ export default function DeckEditorPage() {
                 }))}
                 onQuantityChange={setQuantity}
                 onRemove={removeCardFromDeck}
+                onSetCommander={setAsCommander}
+                isCommanderFormat={isCommanderFormat}
               />
             </div>
           </div>

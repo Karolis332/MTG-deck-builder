@@ -35,6 +35,12 @@ export default function DeckBuilderPage() {
   const [aiUseCollection, setAiUseCollection] = useState(true);
   const [aiBuilding, setAiBuilding] = useState(false);
   const [aiError, setAiError] = useState('');
+  const [aiCommander, setAiCommander] = useState('');
+  const [commanderSearch, setCommanderSearch] = useState('');
+  const [commanderResults, setCommanderResults] = useState<Array<{ id: string; name: string; image_uri_small: string | null; color_identity: string | null; type_line: string }>>([]);
+  const [commanderSearching, setCommanderSearching] = useState(false);
+
+  const isAiCommanderFormat = ['commander', 'brawl', 'standardbrawl'].includes(aiFormat);
 
   useEffect(() => {
     fetch('/api/decks')
@@ -62,8 +68,41 @@ export default function DeckBuilderPage() {
     }
   };
 
+  const searchCommanders = async (query: string) => {
+    setCommanderSearch(query);
+    if (query.length < 2) { setCommanderResults([]); return; }
+    setCommanderSearching(true);
+    try {
+      const res = await fetch(`/api/cards/search?q=${encodeURIComponent(query)}&limit=8`);
+      const data = await res.json();
+      const filtered = (data.cards || []).filter((c: { type_line: string }) =>
+        c.type_line.includes('Legendary') && (c.type_line.includes('Creature') || c.type_line.includes('Planeswalker'))
+      );
+      setCommanderResults(filtered.slice(0, 6));
+    } catch {} finally {
+      setCommanderSearching(false);
+    }
+  };
+
+  const selectCommander = (card: typeof commanderResults[0]) => {
+    setAiCommander(card.name);
+    setCommanderSearch('');
+    setCommanderResults([]);
+    // Auto-set colors from commander's color identity
+    if (card.color_identity) {
+      try {
+        const ci: string[] = JSON.parse(card.color_identity);
+        setAiColors(ci);
+      } catch {}
+    }
+  };
+
   const handleAiBuild = async () => {
-    if (aiColors.length === 0) {
+    if (isAiCommanderFormat && !aiCommander) {
+      setAiError('Select a commander first');
+      return;
+    }
+    if (!isAiCommanderFormat && aiColors.length === 0) {
       setAiError('Pick at least one color');
       return;
     }
@@ -74,11 +113,12 @@ export default function DeckBuilderPage() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          name: aiName.trim() || `AI ${aiColors.join('')} ${aiStrategy || 'Deck'}`,
+          name: aiName.trim() || (aiCommander ? `${aiCommander} Deck` : `AI ${aiColors.join('')} ${aiStrategy || 'Deck'}`),
           format: aiFormat,
           colors: aiColors,
           strategy: aiStrategy || undefined,
           useCollection: aiUseCollection,
+          commanderName: isAiCommanderFormat ? aiCommander : undefined,
         }),
       });
       const data = await res.json();
@@ -280,9 +320,62 @@ export default function DeckBuilderPage() {
               </select>
             </div>
 
+            {/* Commander search (for commander formats) */}
+            {isAiCommanderFormat && (
+              <div className="mb-3">
+                <label className="mb-1 block text-xs text-muted-foreground">Commander</label>
+                {aiCommander ? (
+                  <div className="flex items-center gap-2 rounded-lg border border-primary/30 bg-primary/5 px-3 py-2">
+                    <span className="text-sm font-medium">{aiCommander}</span>
+                    <button
+                      onClick={() => { setAiCommander(''); setAiColors([]); }}
+                      className="ml-auto text-xs text-muted-foreground hover:text-destructive"
+                    >
+                      Change
+                    </button>
+                  </div>
+                ) : (
+                  <div className="relative">
+                    <input
+                      type="text"
+                      value={commanderSearch}
+                      onChange={(e) => searchCommanders(e.target.value)}
+                      placeholder="Search for a legendary creature..."
+                      className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm outline-none focus:border-primary/50"
+                    />
+                    {commanderResults.length > 0 && (
+                      <div className="absolute left-0 right-0 top-full z-10 mt-1 max-h-48 overflow-auto rounded-lg border border-border bg-card shadow-xl">
+                        {commanderResults.map((card) => (
+                          <button
+                            key={card.id}
+                            onClick={() => selectCommander(card)}
+                            className="flex w-full items-center gap-2 px-3 py-2 text-left text-sm hover:bg-accent"
+                          >
+                            {card.image_uri_small && (
+                              // eslint-disable-next-line @next/next/no-img-element
+                              <img src={card.image_uri_small} alt="" className="h-8 w-6 rounded-sm object-cover" />
+                            )}
+                            <div className="min-w-0 flex-1">
+                              <div className="truncate font-medium">{card.name}</div>
+                              <div className="truncate text-xs text-muted-foreground">{card.type_line}</div>
+                            </div>
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                    {commanderSearching && (
+                      <div className="absolute right-3 top-2.5 text-xs text-muted-foreground">Searching...</div>
+                    )}
+                  </div>
+                )}
+              </div>
+            )}
+
             {/* Colors */}
             <div className="mb-3">
-              <label className="mb-1 block text-xs text-muted-foreground">Colors</label>
+              <label className="mb-1 block text-xs text-muted-foreground">
+                {isAiCommanderFormat ? 'Colors (auto-set from commander)' : 'Colors'}
+              </label>
               <div className="flex gap-2">
                 {[
                   { code: 'W', label: 'White', bg: 'bg-amber-50 text-amber-900 border-amber-300' },

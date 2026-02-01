@@ -83,25 +83,54 @@ interface BuildResult {
 
 export function autoBuildDeck(options: BuildOptions): BuildResult {
   const db = getDb();
-  const { format, colors, strategy, useCollection = false } = options;
+  const { format, strategy, useCollection = false, commanderName } = options;
+
+  // If commander format, derive colors from commander's color identity
+  let colors = options.colors;
+  if (commanderName) {
+    const cmdCard = db.prepare('SELECT * FROM cards WHERE name = ? COLLATE NOCASE').get(commanderName) as DbCard | undefined;
+    if (cmdCard?.color_identity) {
+      try {
+        colors = JSON.parse(cmdCard.color_identity);
+      } catch {}
+    }
+  }
 
   const targetSize = DEFAULT_DECK_SIZE[format] || DEFAULT_DECK_SIZE.default;
   const targetLands = DEFAULT_LAND_COUNT[format] || DEFAULT_LAND_COUNT.default;
-  const nonLandTarget = targetSize - targetLands;
-  const isCommander = format === 'commander' || format === 'brawl';
+  const isCommander = format === 'commander' || format === 'brawl' || format === 'standardbrawl';
+  const nonLandTarget = targetSize - targetLands - (isCommander && commanderName ? 1 : 0);
   const maxCopies = isCommander ? 1 : 4;
 
-  // Build color filter
-  const colorFilter = colors.length > 0
-    ? colors.map((c) => `c.color_identity LIKE '%${c}%'`).join(' OR ')
-    : '1=1';
+  // Build color identity exclusion — cards must fit within the deck's colors
+  const excludeColors = ['W', 'U', 'B', 'R', 'G'].filter((c) => !colors.includes(c));
+  const colorExcludeFilter = excludeColors
+    .map((c) => `c.color_identity NOT LIKE '%${c}%'`)
+    .join(' AND ');
 
   // Only include cards that are legal in the format
   const legalityFilter = format
     ? `AND c.legalities LIKE '%"${format}":"legal"%'`
     : '';
 
-  // Collection join (prefer owned cards)
+  // Exclude commander from the 99
+  const commanderExclude = commanderName
+    ? `AND c.name != '${commanderName.replace(/'/g, "''")}'`
+    : '';
+
+  // ── Collection quantity map ──────────────────────────────────────────────
+  // When useCollection is true, build a map of card_id → total owned quantity
+  const ownedQty = new Map<string, number>();
+  if (useCollection) {
+    const rows = db.prepare(
+      `SELECT card_id, SUM(quantity) as total FROM collection GROUP BY card_id`
+    ).all() as Array<{ card_id: string; total: number }>;
+    for (const row of rows) {
+      ownedQty.set(row.card_id, row.total);
+    }
+  }
+
+  // Collection ordering: owned first, then by quantity descending
   const collectionJoin = useCollection
     ? `LEFT JOIN collection col ON c.id = col.card_id`
     : '';
@@ -114,16 +143,11 @@ export function autoBuildDeck(options: BuildOptions): BuildResult {
     SELECT DISTINCT c.* FROM cards c
     ${collectionJoin}
     WHERE c.type_line NOT LIKE '%Land%'
-    AND (${colorFilter})
-    AND c.color_identity NOT LIKE '%${colors.includes('W') ? '' : 'W'}%'
-    ${colors.includes('W') ? '' : "AND c.color_identity NOT LIKE '%W%'"}
-    ${colors.includes('U') ? '' : "AND c.color_identity NOT LIKE '%U%'"}
-    ${colors.includes('B') ? '' : "AND c.color_identity NOT LIKE '%B%'"}
-    ${colors.includes('R') ? '' : "AND c.color_identity NOT LIKE '%R%'"}
-    ${colors.includes('G') ? '' : "AND c.color_identity NOT LIKE '%G%'"}
+    ${colorExcludeFilter ? `AND ${colorExcludeFilter}` : ''}
     ${legalityFilter}
+    ${commanderExclude}
     ORDER BY ${collectionOrder} c.edhrec_rank ASC NULLS LAST
-    LIMIT 200
+    LIMIT 300
   `;
 
   const pool = db.prepare(poolQuery).all() as DbCard[];
@@ -171,12 +195,14 @@ export function autoBuildDeck(options: BuildOptions): BuildResult {
       if (text.includes('draw') || text.includes('destroy') || text.includes('create')) score += 3;
     }
 
-    // Collection bonus
+    // Collection bonus — owned cards score much higher, unowned much lower
     if (useCollection) {
-      const inCollection = db
-        .prepare('SELECT 1 FROM collection WHERE card_id = ? LIMIT 1')
-        .get(card.id);
-      if (inCollection) score += 25;
+      const owned = ownedQty.get(card.id) || 0;
+      if (owned > 0) {
+        score += 30; // strong preference for owned cards
+      } else {
+        score -= 40; // significant penalty for unowned cards
+      }
     }
 
     return { card, score };
@@ -196,6 +222,16 @@ export function autoBuildDeck(options: BuildOptions): BuildResult {
   const pickedNames = new Set<string>();
   let totalPicked = 0;
 
+  // Helper: determine max quantity for a card (respects collection if enabled)
+  function getMaxQty(card: DbCard): number {
+    const formatMax = isCommander ? 1 : maxCopies;
+    if (!useCollection) return formatMax;
+    const owned = ownedQty.get(card.id) || 0;
+    // Allow unowned cards as fallback but cap at 0 if strict collection mode
+    // For now, still allow unowned but they scored poorly above
+    return owned > 0 ? Math.min(formatMax, owned) : formatMax;
+  }
+
   // First pass: fill curve slots
   for (const { card } of scored) {
     if (totalPicked >= nonLandTarget) break;
@@ -207,7 +243,10 @@ export function autoBuildDeck(options: BuildOptions): BuildResult {
 
     if (currentForBucket >= idealForBucket) continue;
 
-    const qty = isCommander ? 1 : Math.min(maxCopies, idealForBucket - currentForBucket, nonLandTarget - totalPicked);
+    const cardMax = getMaxQty(card);
+    const qty = Math.min(cardMax, idealForBucket - currentForBucket, nonLandTarget - totalPicked);
+    if (qty <= 0) continue;
+
     picked.push({ card, quantity: qty, board: 'main' });
     pickedNames.add(card.name);
     curveCounts[bucket] = currentForBucket + qty;
@@ -219,46 +258,80 @@ export function autoBuildDeck(options: BuildOptions): BuildResult {
     if (totalPicked >= nonLandTarget) break;
     if (pickedNames.has(card.name)) continue;
 
-    const qty = isCommander ? 1 : Math.min(maxCopies, nonLandTarget - totalPicked);
+    const cardMax = getMaxQty(card);
+    const qty = Math.min(cardMax, nonLandTarget - totalPicked);
+    if (qty <= 0) continue;
+
     picked.push({ card, quantity: qty, board: 'main' });
     pickedNames.add(card.name);
     totalPicked += qty;
   }
 
-  // Step 5: Add lands
+  // ── Step 5: Add lands ─────────────────────────────────────────────────────
+  // Land strategy depends heavily on number of colors:
+  //   1 color  → mostly basics, 2-4 utility lands max
+  //   2 colors → ~8-12 non-basics (duals, fastlands, painlands), rest basics
+  //   3+ colors → maximize non-basics for fixing
+
+  const basicLandMap: Record<string, string> = {
+    W: 'Plains', U: 'Island', B: 'Swamp', R: 'Mountain', G: 'Forest',
+  };
+
+  const numColors = colors.length;
+  // How many non-basic land slots to target based on color count
+  const nonBasicTarget = numColors <= 1
+    ? Math.min(4, targetLands)          // mono: at most 4 utility lands
+    : numColors === 2
+      ? Math.min(12, targetLands - 8)   // 2-color: ~12 duals, keep at least 8 basics
+      : Math.min(20, targetLands - 5);  // 3+: heavy on fixing, at least 5 basics
+
+  // Fetch non-basic lands, prioritizing untapped ones
   const landPool = db.prepare(`
     SELECT c.* FROM cards c
     ${collectionJoin}
     WHERE c.type_line LIKE '%Land%'
     AND c.type_line NOT LIKE '%Basic%'
-    AND (${colorFilter})
+    ${colorExcludeFilter ? `AND ${colorExcludeFilter}` : ''}
     ${legalityFilter}
-    ORDER BY ${collectionOrder} c.edhrec_rank ASC NULLS LAST
-    LIMIT 50
+    ORDER BY
+      ${collectionOrder}
+      CASE WHEN c.oracle_text LIKE '%enters the battlefield tapped%' OR c.oracle_text LIKE '%enters tapped%' THEN 1 ELSE 0 END,
+      c.edhrec_rank ASC NULLS LAST
+    LIMIT 60
   `).all() as DbCard[];
 
   let landsAdded = 0;
+
+  // Add non-basic lands up to the target
   for (const land of landPool) {
-    if (landsAdded >= targetLands - (colors.length > 0 ? 6 : targetLands)) break;
+    if (landsAdded >= nonBasicTarget) break;
     if (pickedNames.has(land.name)) continue;
 
-    const qty = isCommander ? 1 : Math.min(4, targetLands - landsAdded);
+    // For mono-color, skip taplands entirely — only untapped utility lands
+    const oracleText = (land.oracle_text || '').toLowerCase();
+    if (numColors <= 1) {
+      const entersTapped = oracleText.includes('enters the battlefield tapped')
+        || oracleText.includes('enters tapped');
+      if (entersTapped) continue;
+    }
+
+    const cardMax = getMaxQty(land);
+    const qty = isCommander ? 1 : Math.min(cardMax, targetLands - landsAdded);
+    if (qty <= 0) continue;
+
     picked.push({ card: land, quantity: qty, board: 'main' });
     pickedNames.add(land.name);
     landsAdded += qty;
   }
 
-  // Fill remaining land slots with basics
-  const basicLandMap: Record<string, string> = {
-    W: 'Plains', U: 'Island', B: 'Swamp', R: 'Mountain', G: 'Forest',
-  };
-
+  // Fill remaining land slots with basics — split evenly across colors
   if (colors.length > 0 && landsAdded < targetLands) {
     const remaining = targetLands - landsAdded;
-    const perColor = Math.ceil(remaining / colors.length);
+    const perColor = Math.floor(remaining / colors.length);
+    const extraForFirst = remaining - perColor * colors.length;
 
-    for (const color of colors) {
-      const basicName = basicLandMap[color];
+    for (let i = 0; i < colors.length; i++) {
+      const basicName = basicLandMap[colors[i]];
       if (!basicName) continue;
 
       const basic = db.prepare(
@@ -266,7 +339,7 @@ export function autoBuildDeck(options: BuildOptions): BuildResult {
       ).get(basicName) as DbCard | undefined;
 
       if (basic) {
-        const qty = Math.min(perColor, targetLands - landsAdded);
+        const qty = Math.min(perColor + (i === 0 ? extraForFirst : 0), targetLands - landsAdded);
         if (qty > 0) {
           picked.push({ card: basic, quantity: qty, board: 'main' });
           landsAdded += qty;
@@ -282,16 +355,18 @@ export function autoBuildDeck(options: BuildOptions): BuildResult {
       if (sideCount >= 15) break;
       if (pickedNames.has(card.name)) continue;
 
-      // Prefer interaction for sideboard
       const text = (card.oracle_text || '').toLowerCase();
       const isInteraction = text.includes('counter target') || text.includes('destroy')
         || text.includes('exile') || text.includes('discard')
         || text.includes('protection') || text.includes('hexproof');
 
       if (isInteraction || sideCount < 10) {
-        picked.push({ card, quantity: isCommander ? 1 : 2, board: 'sideboard' });
+        const cardMax = getMaxQty(card);
+        const qty = Math.min(cardMax, 2);
+        if (qty <= 0) continue;
+        picked.push({ card, quantity: qty, board: 'sideboard' });
         pickedNames.add(card.name);
-        sideCount += 2;
+        sideCount += qty;
       }
     }
   }
