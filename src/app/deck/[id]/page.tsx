@@ -8,7 +8,10 @@ import { SearchBar } from '@/components/search-bar';
 import { CardGrid } from '@/components/card-grid';
 import { DeckList } from '@/components/deck-list';
 import { DeckStats } from '@/components/deck-stats';
+import { DeckValidation } from '@/components/deck-validation';
 import { ExportDialog } from '@/components/export-dialog';
+import { PlaytestModal } from '@/components/playtest-modal';
+import { CardDetailModal } from '@/components/card-detail-modal';
 import { FORMAT_LABELS, FORMATS } from '@/lib/constants';
 
 interface DeckData {
@@ -45,6 +48,8 @@ export default function DeckEditorPage() {
   // UI state
   const [activePanel, setActivePanel] = useState<'search' | 'deck'>('search');
   const [showExport, setShowExport] = useState(false);
+  const [showPlaytest, setShowPlaytest] = useState(false);
+  const [selectedCard, setSelectedCard] = useState<DbCard | null>(null);
   const [editingName, setEditingName] = useState(false);
   const [deckName, setDeckName] = useState('');
 
@@ -327,6 +332,13 @@ export default function DeckEditorPage() {
                 {suggestionsLoading ? 'Thinking...' : 'AI Suggest'}
               </button>
               <button
+                onClick={() => setShowPlaytest(true)}
+                className="flex items-center gap-1.5 rounded-lg bg-accent px-3 py-1.5 text-xs font-medium text-accent-foreground transition-colors hover:bg-accent/80"
+              >
+                <PlayIcon className="h-3.5 w-3.5" />
+                Playtest
+              </button>
+              <button
                 onClick={() => setShowExport(true)}
                 className="flex items-center gap-1.5 rounded-lg bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground transition-colors hover:bg-primary/90"
               >
@@ -435,6 +447,7 @@ export default function DeckEditorPage() {
                 cards={searchResults}
                 loading={searchLoading}
                 size="small"
+                onCardClick={(card) => setSelectedCard(card)}
                 onAddCard={(card) => addCardToDeck(card)}
                 showQuantity={(card) => {
                   const entry = deck.cards.find(
@@ -479,7 +492,18 @@ export default function DeckEditorPage() {
                   board: e.board,
                 }))}
                 format={deck.format}
-                className="mb-4 rounded-xl border border-border bg-card p-3"
+                className="mb-3 rounded-xl border border-border bg-card p-3"
+              />
+
+              <DeckValidation
+                cards={deckEntries.map((e) => ({
+                  card_id: e.card_id,
+                  quantity: e.quantity,
+                  board: e.board,
+                  card: e.card,
+                }))}
+                format={deck.format}
+                className="mb-4"
               />
 
               <DeckList
@@ -502,6 +526,27 @@ export default function DeckEditorPage() {
         onClose={() => setShowExport(false)}
         deckName={deck.name}
         cards={deckEntries}
+      />
+
+      <PlaytestModal
+        open={showPlaytest}
+        onClose={() => setShowPlaytest(false)}
+        cards={deckEntries.map((e) => ({
+          card_id: e.card_id,
+          quantity: e.quantity,
+          board: e.board,
+          card: e.card,
+        }))}
+        deckName={deck.name}
+      />
+
+      <CardDetailModal
+        card={selectedCard}
+        onClose={() => setSelectedCard(null)}
+        onAddToDeck={(card) => {
+          addCardToDeck(card);
+          setSelectedCard(null);
+        }}
       />
     </>
   );
@@ -531,6 +576,14 @@ function ExportIcon({ className }: { className?: string }) {
       <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
       <polyline points="17,8 12,3 7,8" />
       <line x1="12" y1="3" x2="12" y2="15" />
+    </svg>
+  );
+}
+
+function PlayIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <polygon points="5,3 19,12 5,21 5,3" />
     </svg>
   );
 }
