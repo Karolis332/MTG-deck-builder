@@ -58,6 +58,17 @@ export default function DeckEditorPage() {
   const [suggestions, setSuggestions] = useState<AISuggestion[]>([]);
   const [suggestionsLoading, setSuggestionsLoading] = useState(false);
   const [suggestionsSource, setSuggestionsSource] = useState<'rules' | 'ollama'>('rules');
+  const [proposedChanges, setProposedChanges] = useState<Array<{
+    action: 'cut' | 'add';
+    cardId: string;
+    cardName: string;
+    quantity: number;
+    reason: string;
+    winRate?: number;
+    imageUri?: string;
+    selected: boolean;
+  }>>([]);
+  const [applyingChanges, setApplyingChanges] = useState(false);
 
   // Load deck
   useEffect(() => {
@@ -230,6 +241,7 @@ export default function DeckEditorPage() {
   const getSuggestions = async () => {
     setSuggestionsLoading(true);
     setSuggestions([]);
+    setProposedChanges([]);
     try {
       const res = await fetch('/api/ai-suggest', {
         method: 'POST',
@@ -239,8 +251,49 @@ export default function DeckEditorPage() {
       const data = await res.json();
       setSuggestions(data.suggestions || []);
       setSuggestionsSource(data.source || 'rules');
+
+      // Set proposed changes with all selected by default
+      if (data.proposedChanges?.length) {
+        setProposedChanges(
+          data.proposedChanges.map((c: Record<string, unknown>) => ({ ...c, selected: true }))
+        );
+      }
     } catch {} finally {
       setSuggestionsLoading(false);
+    }
+  };
+
+  // Apply selected AI-proposed changes
+  const applySelectedChanges = async () => {
+    const selected = proposedChanges.filter((c) => c.selected);
+    if (selected.length === 0) return;
+
+    setApplyingChanges(true);
+    try {
+      const res = await fetch('/api/ai-suggest/apply', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          deck_id: deckId,
+          changes: selected.map((c) => ({
+            action: c.action,
+            cardId: c.cardId,
+            cardName: c.cardName,
+            quantity: c.quantity,
+          })),
+        }),
+      });
+      const data = await res.json();
+      if (data.ok) {
+        // Reload the deck to reflect changes
+        const deckRes = await fetch(`/api/decks/${deckId}`);
+        const deckData = await deckRes.json();
+        if (deckData.deck) setDeck(deckData.deck);
+        setProposedChanges([]);
+        setSuggestions([]);
+      }
+    } catch {} finally {
+      setApplyingChanges(false);
     }
   };
 
@@ -463,6 +516,73 @@ export default function DeckEditorPage() {
                         + Add to deck
                       </div>
                     </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* AI Proposed Changes (cuts + adds) */}
+            {proposedChanges.length > 0 && (
+              <div className="shrink-0 border-b border-border px-3 pb-3">
+                <div className="mb-2 flex items-center gap-2">
+                  <span className="text-xs font-medium">Proposed Changes</span>
+                  <span className="text-[10px] text-muted-foreground">
+                    {proposedChanges.filter((c) => c.selected).length}/{proposedChanges.length} selected
+                  </span>
+                  <button
+                    onClick={applySelectedChanges}
+                    disabled={applyingChanges || proposedChanges.filter((c) => c.selected).length === 0}
+                    className="ml-auto rounded-md bg-primary px-2.5 py-1 text-[10px] font-medium text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-50"
+                  >
+                    {applyingChanges ? 'Applying...' : 'Apply Selected'}
+                  </button>
+                  <button
+                    onClick={() => setProposedChanges([])}
+                    className="text-[10px] text-muted-foreground hover:text-foreground"
+                  >
+                    Dismiss
+                  </button>
+                </div>
+                <div className="space-y-1">
+                  {proposedChanges.map((change, i) => (
+                    <label
+                      key={`${change.action}-${change.cardId}`}
+                      className={cn(
+                        'flex cursor-pointer items-center gap-2 rounded-lg px-2 py-1.5 transition-colors hover:bg-accent/50',
+                        change.selected && 'bg-accent/30'
+                      )}
+                    >
+                      <input
+                        type="checkbox"
+                        checked={change.selected}
+                        onChange={() => {
+                          setProposedChanges((prev) =>
+                            prev.map((c, j) => j === i ? { ...c, selected: !c.selected } : c)
+                          );
+                        }}
+                        className="h-3 w-3 rounded border-border"
+                      />
+                      <span className={cn(
+                        'shrink-0 rounded px-1.5 py-0.5 text-[10px] font-bold',
+                        change.action === 'cut'
+                          ? 'bg-red-500/20 text-red-400'
+                          : 'bg-green-500/20 text-green-400'
+                      )}>
+                        {change.action === 'cut' ? 'CUT' : 'ADD'}
+                      </span>
+                      <span className="flex-1 truncate text-xs">{change.cardName}</span>
+                      {change.winRate !== undefined && (
+                        <span className={cn(
+                          'text-[10px]',
+                          change.winRate >= 55 ? 'text-green-400' : change.winRate <= 40 ? 'text-red-400' : 'text-muted-foreground'
+                        )}>
+                          {change.winRate}%
+                        </span>
+                      )}
+                      <span className="max-w-[120px] truncate text-[9px] text-muted-foreground">
+                        {change.reason}
+                      </span>
+                    </label>
                   ))}
                 </div>
               </div>

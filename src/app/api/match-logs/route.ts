@@ -2,6 +2,12 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getDb } from '@/lib/db';
 import { parseGameLog } from '@/lib/match-log-parser';
 import { analyzeMatchesForDeck } from '@/lib/match-analyzer';
+import {
+  updateGlobalCardPerformance,
+  updateCardEloRatings,
+  updateMetaSnapshot,
+  updateOpeningHandStats,
+} from '@/lib/global-learner';
 
 // GET /api/match-logs?deck_id=123
 export async function GET(req: NextRequest) {
@@ -76,7 +82,16 @@ export async function POST(req: NextRequest) {
     result.lastInsertRowid
   );
 
-  // Auto-analyze after each upload
+  // Update global learning tables
+  const matchId = Number(result.lastInsertRowid);
+  try {
+    updateGlobalCardPerformance(matchId);
+    updateCardEloRatings(matchId);
+    updateMetaSnapshot(matchId);
+    updateOpeningHandStats(matchId);
+  } catch {}
+
+  // Auto-analyze per-deck insights after each upload
   let analysis = null;
   if (deck_id) {
     try {

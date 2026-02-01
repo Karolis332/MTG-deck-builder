@@ -179,4 +179,103 @@ export const MIGRATIONS = [
       CREATE INDEX IF NOT EXISTS idx_favourite_cards_card ON favourite_cards(card_id);
     `,
   },
+  {
+    version: 5,
+    name: 'add_global_learning',
+    sql: `
+      CREATE TABLE IF NOT EXISTS card_performance (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        card_name TEXT NOT NULL,
+        format TEXT NOT NULL,
+        opponent_colors TEXT NOT NULL DEFAULT '',
+        games_played INTEGER NOT NULL DEFAULT 0,
+        games_in_deck INTEGER NOT NULL DEFAULT 0,
+        wins_when_played INTEGER NOT NULL DEFAULT 0,
+        wins_when_in_deck INTEGER NOT NULL DEFAULT 0,
+        total_drawn INTEGER NOT NULL DEFAULT 0,
+        rating REAL NOT NULL DEFAULT 1500.0,
+        updated_at TEXT NOT NULL DEFAULT (datetime('now')),
+        UNIQUE(card_name, format, opponent_colors)
+      );
+
+      CREATE INDEX IF NOT EXISTS idx_card_perf_name ON card_performance(card_name);
+      CREATE INDEX IF NOT EXISTS idx_card_perf_format ON card_performance(format);
+      CREATE INDEX IF NOT EXISTS idx_card_perf_rating ON card_performance(rating DESC);
+
+      CREATE TABLE IF NOT EXISTS meta_snapshots (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        format TEXT NOT NULL,
+        color_combination TEXT NOT NULL,
+        archetype_id INTEGER,
+        games_seen INTEGER NOT NULL DEFAULT 0,
+        wins INTEGER NOT NULL DEFAULT 0,
+        window_start TEXT NOT NULL,
+        window_end TEXT NOT NULL,
+        UNIQUE(format, color_combination, window_start)
+      );
+
+      CREATE INDEX IF NOT EXISTS idx_meta_format ON meta_snapshots(format);
+      CREATE INDEX IF NOT EXISTS idx_meta_window ON meta_snapshots(window_start);
+
+      CREATE TABLE IF NOT EXISTS opening_hand_stats (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        card_name TEXT NOT NULL,
+        format TEXT NOT NULL,
+        in_opening_hand INTEGER NOT NULL DEFAULT 0,
+        wins_in_opening INTEGER NOT NULL DEFAULT 0,
+        mulliganed_away INTEGER NOT NULL DEFAULT 0,
+        wins_after_mulligan INTEGER NOT NULL DEFAULT 0,
+        updated_at TEXT NOT NULL DEFAULT (datetime('now')),
+        UNIQUE(card_name, format)
+      );
+
+      CREATE INDEX IF NOT EXISTS idx_opening_hand_format ON opening_hand_stats(format);
+      CREATE INDEX IF NOT EXISTS idx_opening_hand_card ON opening_hand_stats(card_name);
+
+      CREATE TABLE IF NOT EXISTS archetype_clusters (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        format TEXT NOT NULL,
+        name TEXT NOT NULL,
+        color_combination TEXT NOT NULL,
+        signature_cards TEXT NOT NULL,
+        centroid TEXT NOT NULL,
+        games_seen INTEGER NOT NULL DEFAULT 0,
+        avg_win_rate REAL NOT NULL DEFAULT 0.5,
+        updated_at TEXT NOT NULL DEFAULT (datetime('now')),
+        UNIQUE(format, name)
+      );
+
+      CREATE TABLE IF NOT EXISTS archetype_matchups (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        format TEXT NOT NULL,
+        archetype_a INTEGER NOT NULL REFERENCES archetype_clusters(id),
+        archetype_b INTEGER NOT NULL REFERENCES archetype_clusters(id),
+        a_wins INTEGER NOT NULL DEFAULT 0,
+        b_wins INTEGER NOT NULL DEFAULT 0,
+        total_games INTEGER NOT NULL DEFAULT 0,
+        updated_at TEXT NOT NULL DEFAULT (datetime('now')),
+        UNIQUE(format, archetype_a, archetype_b)
+      );
+    `,
+  },
+  {
+    version: 6,
+    name: 'add_deck_versions',
+    sql: `
+      CREATE TABLE IF NOT EXISTS deck_versions (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        deck_id INTEGER NOT NULL REFERENCES decks(id) ON DELETE CASCADE,
+        version_number INTEGER NOT NULL,
+        name TEXT,
+        cards_snapshot TEXT NOT NULL,
+        changes_from_previous TEXT,
+        created_at TEXT NOT NULL DEFAULT (datetime('now')),
+        UNIQUE(deck_id, version_number)
+      );
+
+      CREATE INDEX IF NOT EXISTS idx_deck_versions_deck ON deck_versions(deck_id);
+
+      ALTER TABLE match_logs ADD COLUMN deck_version_id INTEGER REFERENCES deck_versions(id);
+    `,
+  },
 ];

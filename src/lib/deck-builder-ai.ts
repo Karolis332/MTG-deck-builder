@@ -1,6 +1,7 @@
 import { getDb } from './db';
 import type { DbCard, AISuggestion } from './types';
 import { DEFAULT_LAND_COUNT, DEFAULT_DECK_SIZE } from './constants';
+import { getCardGlobalScore, getMetaAdjustedScore } from './global-learner';
 
 // ── Synergy keyword groups ──────────────────────────────────────────────────
 // Cards sharing keywords within a group have natural synergy
@@ -160,9 +161,24 @@ export function autoBuildDeck(options: BuildOptions): BuildResult {
   const scored = pool.map((card) => {
     let score = 0;
 
-    // EDHREC rank score (lower rank = better)
-    if (card.edhrec_rank !== null) {
-      score += Math.max(0, 100 - card.edhrec_rank / 200);
+    // Global learned rating (primary signal when data exists)
+    const globalRating = getCardGlobalScore(card.name, format);
+    if (globalRating.confidence > 0.3) {
+      // Elo normalized to 0-100 (typical range 1200-1800)
+      const eloScore = Math.max(0, Math.min(100, (globalRating.elo - 1200) / 6));
+      const winRateScore = globalRating.playedWinRate * 100;
+      score += globalRating.confidence * (eloScore * 0.6 + winRateScore * 0.4);
+      // Residual EDHREC for tiebreaking when learned data is partial
+      if (card.edhrec_rank !== null) {
+        score += (1 - globalRating.confidence) * Math.max(0, 100 - card.edhrec_rank / 200);
+      }
+      // Meta boost: cards that beat popular archetypes score higher
+      score += getMetaAdjustedScore(card.name, format);
+    } else {
+      // Cold start: fall back to EDHREC rank
+      if (card.edhrec_rank !== null) {
+        score += Math.max(0, 100 - card.edhrec_rank / 200);
+      }
     }
 
     // Theme synergy bonus
@@ -457,13 +473,31 @@ export function getSynergySuggestions(
       }
     }
 
-    let score = 80 + matchedThemes.length * 5;
+    // Base score uses global learned data when available
+    const globalScore = getCardGlobalScore(card.name, format);
+    let score: number;
+    if (globalScore.confidence > 0.3) {
+      score = 60 + globalScore.playedWinRate * 40 + matchedThemes.length * 5;
+    } else {
+      score = 80 + matchedThemes.length * 5;
+    }
     const reasons: string[] = [];
+
+    if (globalScore.confidence > 0.3 && globalScore.playedWinRate > 0.55) {
+      reasons.push(`${Math.round(globalScore.playedWinRate * 100)}% win rate across ${globalScore.gamesPlayed} games`);
+    }
 
     if (matchedThemes.length > 0) {
       reasons.push(`Synergizes with your ${matchedThemes.join(' + ')} theme${matchedThemes.length > 1 ? 's' : ''}`);
-    } else if (card.edhrec_rank !== null && card.edhrec_rank < 1000) {
+    } else if (globalScore.confidence <= 0.3 && card.edhrec_rank !== null && card.edhrec_rank < 1000) {
       reasons.push('Top-ranked staple in this color combination');
+    }
+
+    // Meta-awareness boost
+    const metaBoost = getMetaAdjustedScore(card.name, format);
+    if (metaBoost > 0) {
+      score += metaBoost;
+      reasons.push('Strong against popular meta decks');
     }
 
     // ── Match insight scoring ─────────────────────────────────────────
