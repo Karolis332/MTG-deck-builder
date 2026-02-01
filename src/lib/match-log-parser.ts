@@ -13,6 +13,8 @@ export interface ParsedMatch {
   myCardsSeen: string[];
   opponentCardsSeen: string[];
   opponentDeckColors: string[];
+  /** Cards seen per turn — key is turn number (0 = opening hand), value is card names */
+  myCardsByTurn: Record<number, string[]>;
 }
 
 // Color detection from card names (basic lands and common indicators)
@@ -63,15 +65,29 @@ export function parseGameLog(log: string, myPlayerName: string): ParsedMatch {
 
   const opponentNameLower = opponentName?.toLowerCase() || '';
 
-  // Track turn numbers
+  // Track turn numbers and which player's turn it is
   const turnRegex = /^Turn\s+(\d+):\s+(.+)/i;
+  let currentTurn = 0;
+  let currentTurnIsMe = false;
+  const myCardsByTurn: Record<number, string[]> = {};
+
+  function addCardToTurn(cardName: string, turn: number) {
+    if (!myCardsByTurn[turn]) myCardsByTurn[turn] = [];
+    myCardsByTurn[turn].push(cardName);
+  }
 
   for (const line of lines) {
     // Track turns
     const turnMatch = line.match(turnRegex);
     if (turnMatch) {
       const turnNum = parseInt(turnMatch[1], 10);
+      const turnPlayer = turnMatch[2].trim();
       if (turnNum > turns) turns = turnNum;
+      // Track whose turn it is — use the player's turn number (my T1, my T2, etc)
+      currentTurnIsMe = turnPlayer.toLowerCase() === myNameLower;
+      if (currentTurnIsMe) {
+        currentTurn = turnNum;
+      }
     }
 
     // Track life totals
@@ -85,18 +101,25 @@ export function parseGameLog(log: string, myPlayerName: string): ParsedMatch {
       }
     }
 
-    // Track cards cast/played by me
+    // Track cards cast/played by me — with turn tracking
     const myCastMatch = line.match(new RegExp(`${escapeRegex(myPlayerName)}\\s+cast\\s+(.+)`, 'i'));
     if (myCastMatch) {
-      myCardsSeen.add(cleanCardName(myCastMatch[1]));
+      const cardName = cleanCardName(myCastMatch[1]);
+      myCardsSeen.add(cardName);
+      addCardToTurn(cardName, currentTurn);
     }
     const myPlayMatch = line.match(new RegExp(`${escapeRegex(myPlayerName)}\\s+played\\s+(.+)`, 'i'));
     if (myPlayMatch) {
-      myCardsSeen.add(cleanCardName(myPlayMatch[1]));
+      const cardName = cleanCardName(myPlayMatch[1]);
+      myCardsSeen.add(cardName);
+      addCardToTurn(cardName, currentTurn);
     }
     const myDrawMatch = line.match(new RegExp(`${escapeRegex(myPlayerName)}\\s+drew\\s+(.+)`, 'i'));
     if (myDrawMatch && !myDrawMatch[1].match(/^a card$/i)) {
-      myCardsSeen.add(cleanCardName(myDrawMatch[1]));
+      const cardName = cleanCardName(myDrawMatch[1]);
+      myCardsSeen.add(cardName);
+      // Cards drawn on T1 before first play are opening hand (turn 0)
+      addCardToTurn(cardName, currentTurn);
     }
 
     // Track cards cast/played by opponent
@@ -146,6 +169,7 @@ export function parseGameLog(log: string, myPlayerName: string): ParsedMatch {
     myCardsSeen: myCardsArr,
     opponentCardsSeen: oppCardsArr,
     opponentDeckColors: opponentDeckColorsArr,
+    myCardsByTurn,
   };
 }
 

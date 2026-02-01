@@ -545,6 +545,7 @@ export default function DeckEditorPage() {
                   board: e.board,
                   card: e.card,
                 }))}
+                deckId={deckId}
                 onQuantityChange={setQuantity}
                 onRemove={removeCardFromDeck}
                 onSetCommander={setAsCommander}

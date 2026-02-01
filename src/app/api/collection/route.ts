@@ -9,9 +9,10 @@ export async function GET(request: NextRequest) {
   const query = searchParams.get('q') || undefined;
   const rarities = searchParams.get('rarities')?.split(',').filter(Boolean) || undefined;
   const types = searchParams.get('types')?.split(',').filter(Boolean) || undefined;
+  const colors = searchParams.get('colors')?.split(',').filter(Boolean) || undefined;
 
   try {
-    const result = getCollection(limit, offset, { query, rarities, types });
+    const result = getCollection(limit, offset, { query, rarities, types, colors });
     const stats = getCollectionStats();
 
     return NextResponse.json({

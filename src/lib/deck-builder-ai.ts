@@ -382,7 +382,8 @@ export function autoBuildDeck(options: BuildOptions): BuildResult {
 
 export function getSynergySuggestions(
   deckCards: Array<{ quantity: number; board: string } & DbCard>,
-  format: string
+  format: string,
+  deckId?: number
 ): AISuggestion[] {
   const db = getDb();
   const mainCards = deckCards.filter((c) => c.board === 'main' || c.board === 'commander');
@@ -414,8 +415,17 @@ export function getSynergySuggestions(
     ? `AND c.legalities LIKE '%"${format}":"legal"%'`
     : '';
 
+  // ── Load match insights if we have a deck ID ──────────────────────────
+  // This lets the suggestion engine learn from game history
+  const insightData = deckId ? loadDeckInsights(db, deckId) : null;
+
   const synergyFilter = buildSynergyQuery(themes);
   const idPlaceholders = Array.from(existingIds).map(() => '?').join(',') || "''";
+
+  // If match data reveals recurring threats, also search for answers
+  const answerFilter = insightData?.recurringThreats.length
+    ? `OR (c.oracle_text LIKE '%destroy%' OR c.oracle_text LIKE '%exile%' OR c.oracle_text LIKE '%counter target%')`
+    : '';
 
   const query = `
     SELECT c.* FROM cards c
@@ -423,10 +433,10 @@ export function getSynergySuggestions(
     AND (${colorFilter})
     ${excludeFilter ? `AND ${excludeFilter}` : ''}
     ${legalityFilter}
-    ${synergyFilter}
+    AND (1=1 ${synergyFilter} ${answerFilter})
     AND c.id NOT IN (${idPlaceholders})
     ORDER BY c.edhrec_rank ASC NULLS LAST
-    LIMIT 30
+    LIMIT 50
   `;
 
   const candidates = db.prepare(query).all(...Array.from(existingIds)) as DbCard[];
@@ -447,20 +457,132 @@ export function getSynergySuggestions(
       }
     }
 
-    const reason = matchedThemes.length > 0
-      ? `Synergizes with your ${matchedThemes.join(' + ')} theme${matchedThemes.length > 1 ? 's' : ''}`
-      : card.edhrec_rank !== null && card.edhrec_rank < 1000
-        ? 'Top-ranked staple in this color combination'
-        : 'Strong card for this archetype';
+    let score = 80 + matchedThemes.length * 5;
+    const reasons: string[] = [];
+
+    if (matchedThemes.length > 0) {
+      reasons.push(`Synergizes with your ${matchedThemes.join(' + ')} theme${matchedThemes.length > 1 ? 's' : ''}`);
+    } else if (card.edhrec_rank !== null && card.edhrec_rank < 1000) {
+      reasons.push('Top-ranked staple in this color combination');
+    }
+
+    // ── Match insight scoring ─────────────────────────────────────────
+    if (insightData) {
+      // Boost cards that answer recurring threats
+      if (insightData.recurringThreats.length > 0) {
+        const isRemoval = text.includes('destroy') || text.includes('exile target')
+          || text.includes('counter target') || text.includes('return target');
+        if (isRemoval && card.cmc <= 3) {
+          score += 20;
+          reasons.push(`Answers recurring threats (${insightData.recurringThreats.slice(0, 2).join(', ')})`);
+        }
+      }
+
+      // Boost cheap cards if dying too fast
+      if (insightData.dyingFast && card.cmc <= 2) {
+        score += 10;
+        if (text.includes('lifelink') || text.includes('gain') || text.includes('block')) {
+          score += 5;
+          reasons.push('Helps stabilize against fast aggro');
+        }
+      }
+
+      // Boost cards similar to strong performers in the deck
+      for (const strong of insightData.strongCards) {
+        // If this candidate shares keywords with a strong card, boost it
+        const strongInDeck = mainCards.find((dc) => dc.name === strong.name);
+        if (strongInDeck) {
+          const strongText = (strongInDeck.oracle_text || '').toLowerCase();
+          const sharedKeywords = ['draw', 'create', 'counter', 'destroy', 'exile', 'haste', 'flying', 'trample'];
+          const shared = sharedKeywords.filter((kw) => strongText.includes(kw) && text.includes(kw));
+          if (shared.length > 0) {
+            score += 8;
+            reasons.push(`Similar to strong performer ${strong.name}`);
+          }
+        }
+      }
+
+      // Penalize cards similar to weak performers
+      for (const weak of insightData.weakCards) {
+        const weakInDeck = mainCards.find((dc) => dc.name === weak.name);
+        if (weakInDeck) {
+          // If same CMC and same type as a weak card, slight penalty
+          if (card.cmc === weakInDeck.cmc && card.type_line.split('—')[0] === weakInDeck.type_line.split('—')[0]) {
+            score -= 5;
+          }
+        }
+      }
+    }
+
+    const reason = reasons.length > 0
+      ? reasons.join('. ')
+      : 'Strong card for this archetype';
 
     suggestions.push({
       card,
       reason,
-      score: 80 + matchedThemes.length * 5,
+      score,
     });
   }
 
   return suggestions
     .sort((a, b) => b.score - a.score)
     .slice(0, 15);
+}
+
+// ── Load deck insights from match history ──────────────────────────────────
+
+interface DeckInsightData {
+  recurringThreats: string[];
+  dyingFast: boolean;
+  strongCards: Array<{ name: string; winRate: number }>;
+  weakCards: Array<{ name: string; winRate: number }>;
+}
+
+function loadDeckInsights(
+  db: ReturnType<typeof getDb>,
+  deckId: number
+): DeckInsightData | null {
+  const rows = db.prepare(
+    'SELECT insight_type, card_name, data FROM deck_insights WHERE deck_id = ?'
+  ).all(deckId) as Array<{ insight_type: string; card_name: string | null; data: string }>;
+
+  if (rows.length === 0) return null;
+
+  const recurringThreats: string[] = [];
+  let dyingFast = false;
+  const strongCards: Array<{ name: string; winRate: number }> = [];
+  const weakCards: Array<{ name: string; winRate: number }> = [];
+
+  for (const row of rows) {
+    let data: Record<string, unknown> = {};
+    try {
+      data = JSON.parse(row.data);
+    } catch {}
+
+    switch (row.insight_type) {
+      case 'recurring_threats': {
+        const cards = data.cards as Array<{ name: string }> | undefined;
+        if (cards) {
+          for (const c of cards) recurringThreats.push(c.name);
+        }
+        break;
+      }
+      case 'dying_fast':
+        dyingFast = true;
+        break;
+      case 'underperformer':
+        if (row.card_name) {
+          weakCards.push({ name: row.card_name, winRate: (data.winRate as number) || 0 });
+        }
+        break;
+      case 'increase_copies':
+        if (row.card_name) {
+          strongCards.push({ name: row.card_name, winRate: (data.winRate as number) || 0 });
+        }
+        break;
+    }
+  }
+
+  return { recurringThreats, dyingFast, strongCards, weakCards };
 }

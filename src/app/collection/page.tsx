@@ -35,6 +35,7 @@ export default function CollectionPage() {
     if (query) params.set('q', query);
     if (selectedRarities.length) params.set('rarities', selectedRarities.join(','));
     if (selectedTypes.length) params.set('types', selectedTypes.join(','));
+    if (selectedColors.length) params.set('colors', selectedColors.join(','));
 
     try {
       const res = await fetch(`/api/collection?${params}`);
@@ -47,7 +48,7 @@ export default function CollectionPage() {
     } finally {
       setLoading(false);
     }
-  }, [page, query, selectedRarities, selectedTypes]);
+  }, [page, query, selectedRarities, selectedTypes, selectedColors]);
 
   useEffect(() => {
     fetchCollection();

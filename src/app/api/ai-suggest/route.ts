@@ -31,7 +31,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Use synergy-aware suggestions (better than basic rules)
-    const synergySuggestions = getSynergySuggestions(deck.cards, format);
+    const synergySuggestions = getSynergySuggestions(deck.cards, format, deck_id);
     if (synergySuggestions.length > 0) {
       // Merge with rule-based for structural suggestions (lands, removal)
       const ruleSuggestions = getRuleBasedSuggestions(deck.cards, format);

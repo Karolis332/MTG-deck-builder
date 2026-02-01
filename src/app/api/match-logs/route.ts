@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getDb } from '@/lib/db';
 import { parseGameLog } from '@/lib/match-log-parser';
+import { analyzeMatchesForDeck } from '@/lib/match-analyzer';
 
 // GET /api/match-logs?deck_id=123
 export async function GET(req: NextRequest) {
@@ -75,7 +76,15 @@ export async function POST(req: NextRequest) {
     result.lastInsertRowid
   );
 
-  return NextResponse.json({ log, parsed });
+  // Auto-analyze after each upload
+  let analysis = null;
+  if (deck_id) {
+    try {
+      analysis = analyzeMatchesForDeck(Number(deck_id));
+    } catch {}
+  }
+
+  return NextResponse.json({ log, parsed, analysis });
 }
 
 // DELETE /api/match-logs?id=123

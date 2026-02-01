@@ -265,6 +265,12 @@ export function getCollection(limit = 50, offset = 0, filters?: {
     conditions.push(`(${typeConditions.join(' OR ')})`);
     params.push(...filters.types.map((t) => `%${t}%`));
   }
+  if (filters?.colors?.length) {
+    for (const color of filters.colors) {
+      conditions.push('c.color_identity LIKE ?');
+      params.push(`%${color}%`);
+    }
+  }
 
   const where = conditions.length ? `WHERE ${conditions.join(' AND ')}` : '';
 

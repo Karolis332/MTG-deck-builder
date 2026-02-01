@@ -143,4 +143,40 @@ export const MIGRATIONS = [
       CREATE INDEX IF NOT EXISTS idx_match_logs_result ON match_logs(result);
     `,
   },
+  {
+    version: 3,
+    name: 'add_deck_insights',
+    sql: `
+      CREATE TABLE IF NOT EXISTS deck_insights (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        deck_id INTEGER NOT NULL REFERENCES decks(id) ON DELETE CASCADE,
+        insight_type TEXT NOT NULL,
+        card_name TEXT,
+        data TEXT NOT NULL,
+        confidence REAL NOT NULL DEFAULT 0,
+        games_analyzed INTEGER NOT NULL DEFAULT 0,
+        updated_at TEXT NOT NULL DEFAULT (datetime('now')),
+        UNIQUE(deck_id, insight_type, card_name)
+      );
+
+      CREATE INDEX IF NOT EXISTS idx_deck_insights_deck_id ON deck_insights(deck_id);
+      CREATE INDEX IF NOT EXISTS idx_deck_insights_type ON deck_insights(insight_type);
+    `,
+  },
+  {
+    version: 4,
+    name: 'add_favourite_cards',
+    sql: `
+      CREATE TABLE IF NOT EXISTS favourite_cards (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        card_id TEXT NOT NULL REFERENCES cards(id),
+        deck_id INTEGER REFERENCES decks(id) ON DELETE CASCADE,
+        created_at TEXT NOT NULL DEFAULT (datetime('now')),
+        UNIQUE(card_id, deck_id)
+      );
+
+      CREATE INDEX IF NOT EXISTS idx_favourite_cards_deck ON favourite_cards(deck_id);
+      CREATE INDEX IF NOT EXISTS idx_favourite_cards_card ON favourite_cards(card_id);
+    `,
+  },
 ];
