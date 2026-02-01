@@ -113,6 +113,34 @@ export const MIGRATIONS = [
         key TEXT PRIMARY KEY,
         value TEXT NOT NULL
       );
+
+    `,
+  },
+  {
+    version: 2,
+    name: 'add_match_logs',
+    sql: `
+      CREATE TABLE IF NOT EXISTS match_logs (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        deck_id INTEGER REFERENCES decks(id) ON DELETE SET NULL,
+        result TEXT NOT NULL CHECK(result IN ('win', 'loss', 'draw')),
+        play_draw TEXT CHECK(play_draw IN ('play', 'draw')),
+        opponent_name TEXT,
+        opponent_deck_colors TEXT,
+        opponent_deck_archetype TEXT,
+        turns INTEGER,
+        my_life_end INTEGER,
+        opponent_life_end INTEGER,
+        my_cards_seen TEXT,
+        opponent_cards_seen TEXT,
+        notes TEXT,
+        raw_log TEXT,
+        game_format TEXT,
+        created_at TEXT NOT NULL DEFAULT (datetime('now'))
+      );
+
+      CREATE INDEX IF NOT EXISTS idx_match_logs_deck_id ON match_logs(deck_id);
+      CREATE INDEX IF NOT EXISTS idx_match_logs_result ON match_logs(result);
     `,
   },
 ];

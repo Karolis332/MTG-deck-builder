@@ -12,6 +12,7 @@ import { DeckValidation } from '@/components/deck-validation';
 import { ExportDialog } from '@/components/export-dialog';
 import { PlaytestModal } from '@/components/playtest-modal';
 import { CardDetailModal } from '@/components/card-detail-modal';
+import { MatchLogPanel } from '@/components/match-log-panel';
 import { FORMAT_LABELS, FORMATS, COMMANDER_FORMATS } from '@/lib/constants';
 
 interface DeckData {
@@ -527,6 +528,12 @@ export default function DeckEditorPage() {
                   board: e.board,
                   card: e.card,
                 }))}
+                format={deck.format}
+                className="mb-4"
+              />
+
+              <MatchLogPanel
+                deckId={deckId}
                 format={deck.format}
                 className="mb-4"
               />
