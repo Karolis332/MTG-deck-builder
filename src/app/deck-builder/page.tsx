@@ -26,6 +26,16 @@ export default function DeckBuilderPage() {
   const [newFormat, setNewFormat] = useState('standard');
   const [creating, setCreating] = useState(false);
 
+  // AI build state
+  const [showAiBuild, setShowAiBuild] = useState(false);
+  const [aiName, setAiName] = useState('');
+  const [aiFormat, setAiFormat] = useState('standard');
+  const [aiColors, setAiColors] = useState<string[]>([]);
+  const [aiStrategy, setAiStrategy] = useState('');
+  const [aiUseCollection, setAiUseCollection] = useState(true);
+  const [aiBuilding, setAiBuilding] = useState(false);
+  const [aiError, setAiError] = useState('');
+
   useEffect(() => {
     fetch('/api/decks')
       .then((r) => r.json())
@@ -52,6 +62,40 @@ export default function DeckBuilderPage() {
     }
   };
 
+  const handleAiBuild = async () => {
+    if (aiColors.length === 0) {
+      setAiError('Pick at least one color');
+      return;
+    }
+    setAiBuilding(true);
+    setAiError('');
+    try {
+      const res = await fetch('/api/decks/auto-build', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: aiName.trim() || `AI ${aiColors.join('')} ${aiStrategy || 'Deck'}`,
+          format: aiFormat,
+          colors: aiColors,
+          strategy: aiStrategy || undefined,
+          useCollection: aiUseCollection,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Build failed');
+      router.push(`/deck/${data.deckId}`);
+    } catch (err) {
+      setAiError(err instanceof Error ? err.message : 'Build failed');
+      setAiBuilding(false);
+    }
+  };
+
+  const toggleColor = (c: string) => {
+    setAiColors((prev) =>
+      prev.includes(c) ? prev.filter((x) => x !== c) : [...prev, c]
+    );
+  };
+
   const handleDelete = async (id: number, e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
@@ -67,13 +111,22 @@ export default function DeckBuilderPage() {
           <h1 className="text-2xl font-bold">Your Decks</h1>
           <p className="text-sm text-muted-foreground">{decks.length} decks</p>
         </div>
-        <button
-          onClick={() => setShowNewDeck(true)}
-          className="flex items-center gap-2 rounded-xl bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
-        >
-          <PlusIcon className="h-4 w-4" />
-          New Deck
-        </button>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => setShowAiBuild(true)}
+            className="flex items-center gap-2 rounded-xl bg-accent px-4 py-2 text-sm font-medium text-accent-foreground transition-colors hover:bg-accent/80"
+          >
+            <SparklesIcon className="h-4 w-4" />
+            AI Build
+          </button>
+          <button
+            onClick={() => setShowNewDeck(true)}
+            className="flex items-center gap-2 rounded-xl bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+          >
+            <PlusIcon className="h-4 w-4" />
+            New Deck
+          </button>
+        </div>
       </div>
 
       {/* New deck form */}
@@ -196,7 +249,130 @@ export default function DeckBuilderPage() {
           ))}
         </div>
       )}
+
+      {/* AI Build Modal */}
+      {showAiBuild && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setShowAiBuild(false)} />
+          <div className="relative w-full max-w-md rounded-2xl border border-border bg-card p-6 shadow-2xl animate-slide-up">
+            <h2 className="mb-4 text-lg font-semibold">AI Deck Builder</h2>
+
+            {/* Deck name */}
+            <input
+              type="text"
+              value={aiName}
+              onChange={(e) => setAiName(e.target.value)}
+              placeholder="Deck name (optional)..."
+              className="mb-3 w-full rounded-lg border border-border bg-background px-3 py-2 text-sm outline-none focus:border-primary/50"
+            />
+
+            {/* Format */}
+            <div className="mb-3">
+              <label className="mb-1 block text-xs text-muted-foreground">Format</label>
+              <select
+                value={aiFormat}
+                onChange={(e) => setAiFormat(e.target.value)}
+                className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm outline-none"
+              >
+                {FORMATS.map((f) => (
+                  <option key={f} value={f}>{FORMAT_LABELS[f]}</option>
+                ))}
+              </select>
+            </div>
+
+            {/* Colors */}
+            <div className="mb-3">
+              <label className="mb-1 block text-xs text-muted-foreground">Colors</label>
+              <div className="flex gap-2">
+                {[
+                  { code: 'W', label: 'White', bg: 'bg-amber-50 text-amber-900 border-amber-300' },
+                  { code: 'U', label: 'Blue', bg: 'bg-blue-600 text-white border-blue-400' },
+                  { code: 'B', label: 'Black', bg: 'bg-zinc-800 text-zinc-100 border-zinc-600' },
+                  { code: 'R', label: 'Red', bg: 'bg-red-600 text-white border-red-400' },
+                  { code: 'G', label: 'Green', bg: 'bg-green-700 text-white border-green-500' },
+                ].map(({ code, label, bg }) => (
+                  <button
+                    key={code}
+                    onClick={() => toggleColor(code)}
+                    className={cn(
+                      'flex h-10 w-10 items-center justify-center rounded-lg border-2 text-sm font-bold transition-all',
+                      aiColors.includes(code)
+                        ? `${bg} scale-110 shadow-md`
+                        : 'border-border bg-accent/30 text-muted-foreground hover:border-border/80'
+                    )}
+                    title={label}
+                  >
+                    {code}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Strategy */}
+            <div className="mb-3">
+              <label className="mb-1 block text-xs text-muted-foreground">Strategy (optional)</label>
+              <div className="flex flex-wrap gap-2">
+                {['aggro', 'midrange', 'control', 'combo'].map((s) => (
+                  <button
+                    key={s}
+                    onClick={() => setAiStrategy(aiStrategy === s ? '' : s)}
+                    className={cn(
+                      'rounded-lg px-3 py-1.5 text-xs font-medium capitalize transition-colors',
+                      aiStrategy === s
+                        ? 'bg-primary text-primary-foreground'
+                        : 'bg-accent text-accent-foreground hover:bg-accent/80'
+                    )}
+                  >
+                    {s}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Use collection toggle */}
+            <label className="mb-4 flex items-center gap-2 text-sm">
+              <input
+                type="checkbox"
+                checked={aiUseCollection}
+                onChange={(e) => setAiUseCollection(e.target.checked)}
+                className="accent-primary"
+              />
+              <span className="text-muted-foreground">Prefer cards from my collection</span>
+            </label>
+
+            {aiError && (
+              <div className="mb-3 rounded-lg bg-destructive/10 px-3 py-2 text-xs text-destructive">
+                {aiError}
+              </div>
+            )}
+
+            <div className="flex justify-end gap-2">
+              <button
+                onClick={() => { setShowAiBuild(false); setAiError(''); }}
+                className="rounded-lg px-4 py-2 text-sm text-muted-foreground hover:text-foreground"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleAiBuild}
+                disabled={aiBuilding || aiColors.length === 0}
+                className="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-50"
+              >
+                {aiBuilding ? 'Building...' : 'Build Deck'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
+  );
+}
+
+function SparklesIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 3l1.912 5.813a2 2 0 001.275 1.275L21 12l-5.813 1.912a2 2 0 00-1.275 1.275L12 21l-1.912-5.813a2 2 0 00-1.275-1.275L3 12l5.813-1.912a2 2 0 001.275-1.275L12 3z" />
+    </svg>
   );
 }
 
