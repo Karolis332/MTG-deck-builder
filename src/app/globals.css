@@ -1,0 +1,133 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 47 96% 53%;
+    --primary-foreground: 26 83.3% 14.1%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 47 96% 53%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 224 28% 6%;
+    --foreground: 210 40% 98%;
+    --card: 224 28% 8%;
+    --card-foreground: 210 40% 98%;
+    --popover: 224 28% 8%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 47 96% 53%;
+    --primary-foreground: 26 83.3% 14.1%;
+    --secondary: 224 28% 14%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 224 28% 14%;
+    --muted-foreground: 215 20.2% 55.1%;
+    --accent: 224 28% 14%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 50.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 224 28% 16%;
+    --input: 224 28% 16%;
+    --ring: 47 96% 53%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-muted-foreground/20 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-muted-foreground/40;
+}
+
+/* Card hover effects */
+.card-hover {
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+
+.card-hover:hover {
+  transform: scale(1.05) translateY(-4px);
+  box-shadow: 0 12px 24px -4px rgba(0, 0, 0, 0.4), 0 0 12px rgba(203, 172, 93, 0.15);
+}
+
+/* Mana symbol inline styles */
+.mana-symbol {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.2em;
+  height: 1.2em;
+  border-radius: 50%;
+  font-size: 0.75em;
+  font-weight: 700;
+  line-height: 1;
+  vertical-align: middle;
+  margin: 0 1px;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+/* Glass morphism panel */
+.glass-panel {
+  @apply bg-card/80 backdrop-blur-md border border-border/50;
+}
+
+/* Skeleton loading */
+.skeleton {
+  @apply bg-shimmer-gradient bg-[length:400%_100%] animate-shimmer rounded;
+  background-color: hsl(var(--muted));
+}
+
+/* Card grid stagger animation */
+.card-grid > * {
+  animation: card-enter 0.3s ease-out forwards;
+  opacity: 0;
+}
+
+.card-grid > *:nth-child(1) { animation-delay: 0ms; }
+.card-grid > *:nth-child(2) { animation-delay: 30ms; }
+.card-grid > *:nth-child(3) { animation-delay: 60ms; }
+.card-grid > *:nth-child(4) { animation-delay: 90ms; }
+.card-grid > *:nth-child(5) { animation-delay: 120ms; }
+.card-grid > *:nth-child(6) { animation-delay: 150ms; }
+.card-grid > *:nth-child(7) { animation-delay: 180ms; }
+.card-grid > *:nth-child(8) { animation-delay: 210ms; }
+.card-grid > *:nth-child(9) { animation-delay: 240ms; }
+.card-grid > *:nth-child(10) { animation-delay: 270ms; }
+.card-grid > *:nth-child(11) { animation-delay: 300ms; }
+.card-grid > *:nth-child(12) { animation-delay: 330ms; }
