@@ -128,7 +128,7 @@ export function ImportDialog({ open, onClose, onSuccess }: ImportDialogProps) {
         <textarea
           value={text}
           onChange={(e) => setText(e.target.value)}
-          placeholder={`Paste your MTG Arena export here...\n\nExample:\n4 Lightning Bolt (2X2) 117\n2 Counterspell (MH2) 267\n\nSideboard\n2 Mystical Dispute (ELD) 58`}
+          placeholder={`Paste your MTG Arena export or tab-separated collection here...\n\nArena format:\n4 Lightning Bolt (2X2) 117\n2 Counterspell (MH2) 267\n\nTab-separated (MTGA Assistant):\n6947\tEnlightened Tutor\tMIR\tWhite\tUncommon\t4\t0`}
           className="mb-3 h-48 w-full resize-none rounded-xl border border-border bg-background p-3 text-sm font-mono placeholder:text-muted-foreground/40 outline-none focus:border-primary/50 focus:ring-2 focus:ring-primary/20"
           disabled={loading}
         />
