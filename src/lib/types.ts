@@ -179,6 +179,8 @@ export interface AISuggestion {
   card: DbCard;
   reason: string;
   score: number;
+  winRate?: number;
+  edhrecRank?: number;
 }
 
 export type DeckPatchOp =

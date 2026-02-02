@@ -57,7 +57,7 @@ export default function DeckEditorPage() {
   // AI state
   const [suggestions, setSuggestions] = useState<AISuggestion[]>([]);
   const [suggestionsLoading, setSuggestionsLoading] = useState(false);
-  const [suggestionsSource, setSuggestionsSource] = useState<'rules' | 'ollama'>('rules');
+  const [suggestionsSource, setSuggestionsSource] = useState<'rules' | 'ollama' | 'synergy' | 'openai'>('rules');
   const [proposedChanges, setProposedChanges] = useState<Array<{
     action: 'cut' | 'add';
     cardId: string;
@@ -208,6 +208,22 @@ export default function DeckEditorPage() {
           from_board: 'main',
           to_board: 'commander',
         }),
+      });
+      const data = await res.json();
+      if (data.deck) setDeck(data.deck);
+    } catch {} finally {
+      setSaving(false);
+    }
+  };
+
+  const setCoverCard = async (cardId: string) => {
+    if (!deck) return;
+    setSaving(true);
+    try {
+      const res = await fetch(`/api/decks/${deckId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ cover_card_id: cardId }),
       });
       const data = await res.json();
       if (data.deck) setDeck(data.deck);
@@ -505,7 +521,7 @@ export default function DeckEditorPage() {
                   <span className="text-xs font-medium">
                     AI Suggestions
                     <span className="ml-1 text-muted-foreground">
-                      (via {suggestionsSource === 'ollama' ? 'Ollama' : 'rules engine'})
+                      (via {suggestionsSource === 'ollama' ? 'Ollama' : suggestionsSource === 'openai' ? 'GPT' : suggestionsSource === 'synergy' ? 'synergy engine' : 'rules engine'})
                     </span>
                   </span>
                   <button
@@ -533,6 +549,21 @@ export default function DeckEditorPage() {
                       )}
                       <div className="truncate text-[10px] font-medium">
                         {s.card.name}
+                      </div>
+                      <div className="flex items-center gap-1">
+                        {s.winRate !== undefined && (
+                          <span className={cn(
+                            'shrink-0 text-[9px] font-bold',
+                            s.winRate >= 55 ? 'text-green-400' : s.winRate <= 40 ? 'text-red-400' : 'text-muted-foreground'
+                          )}>
+                            {s.winRate}% WR
+                          </span>
+                        )}
+                        {s.edhrecRank !== undefined && s.edhrecRank < 5000 && (
+                          <span className="shrink-0 text-[9px] text-muted-foreground">
+                            #{s.edhrecRank}
+                          </span>
+                        )}
                       </div>
                       <div className="truncate text-[9px] text-muted-foreground">
                         {s.reason}
@@ -694,6 +725,7 @@ export default function DeckEditorPage() {
                 onQuantityChange={setQuantity}
                 onRemove={removeCardFromDeck}
                 onSetCommander={setAsCommander}
+                onSetCoverCard={setCoverCard}
                 isCommanderFormat={isCommanderFormat}
               />
             </div>

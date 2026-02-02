@@ -20,6 +20,7 @@ interface DeckListProps {
   onQuantityChange?: (cardId: string, board: string, quantity: number) => void;
   onRemove?: (cardId: string, board: string) => void;
   onSetCommander?: (cardId: string) => void;
+  onSetCoverCard?: (cardId: string) => void;
   isCommanderFormat?: boolean;
   className?: string;
 }
@@ -54,6 +55,7 @@ export function DeckList({
   onQuantityChange,
   onRemove,
   onSetCommander,
+  onSetCoverCard,
   isCommanderFormat,
   className,
 }: DeckListProps) {
@@ -117,6 +119,7 @@ export function DeckList({
           cards={cmdCards}
           onQuantityChange={onQuantityChange}
           onRemove={onRemove}
+          onSetCoverCard={onSetCoverCard}
           favourites={favourites}
           onToggleFavourite={deckId ? toggleFavourite : undefined}
         />
@@ -139,6 +142,7 @@ export function DeckList({
             onQuantityChange={onQuantityChange}
             onRemove={onRemove}
             onSetCommander={onSetCommander}
+            onSetCoverCard={onSetCoverCard}
             isCommanderFormat={isCommanderFormat}
             favourites={favourites}
             onToggleFavourite={deckId ? toggleFavourite : undefined}
@@ -184,6 +188,7 @@ function DeckSection({
   onQuantityChange,
   onRemove,
   onSetCommander,
+  onSetCoverCard,
   isCommanderFormat,
   hideHeader,
   favourites,
@@ -195,6 +200,7 @@ function DeckSection({
   onQuantityChange?: (cardId: string, board: string, quantity: number) => void;
   onRemove?: (cardId: string, board: string) => void;
   onSetCommander?: (cardId: string) => void;
+  onSetCoverCard?: (cardId: string) => void;
   isCommanderFormat?: boolean;
   hideHeader?: boolean;
   favourites?: Set<string>;
@@ -218,6 +224,7 @@ function DeckSection({
             onQuantityChange={onQuantityChange}
             onRemove={onRemove}
             onSetCommander={onSetCommander}
+            onSetCoverCard={onSetCoverCard}
             isCommanderFormat={isCommanderFormat}
             isFavourite={favourites?.has(entry.card_id)}
             onToggleFavourite={onToggleFavourite}
@@ -233,6 +240,7 @@ function DeckCardRow({
   onQuantityChange,
   onRemove,
   onSetCommander,
+  onSetCoverCard,
   isCommanderFormat,
   isFavourite,
   onToggleFavourite,
@@ -241,6 +249,7 @@ function DeckCardRow({
   onQuantityChange?: (cardId: string, board: string, quantity: number) => void;
   onRemove?: (cardId: string, board: string) => void;
   onSetCommander?: (cardId: string) => void;
+  onSetCoverCard?: (cardId: string) => void;
   isCommanderFormat?: boolean;
   isFavourite?: boolean;
   onToggleFavourite?: (cardId: string) => void;
@@ -347,6 +356,17 @@ function DeckCardRow({
           title={isFavourite ? 'Remove from favourites' : 'Add to favourites'}
         >
           {isFavourite ? '\u2605' : '\u2606'}
+        </button>
+      )}
+
+      {/* Set as deck cover button */}
+      {onSetCoverCard && card.image_uri_art_crop && (
+        <button
+          onClick={() => onSetCoverCard(entry.card_id)}
+          className="flex h-4 w-4 items-center justify-center rounded text-[10px] text-muted-foreground opacity-0 transition-opacity hover:text-primary group-hover:opacity-100"
+          title="Set as deck cover image"
+        >
+          &#x1F5BC;
         </button>
       )}
 

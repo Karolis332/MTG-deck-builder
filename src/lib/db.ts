@@ -146,15 +146,36 @@ export function getAllDecks() {
         )
         .get(d.id) as { count: number }
     ).count;
-    const coverCard = db
-      .prepare(
-        `SELECT c.image_uri_art_crop, c.image_uri_normal FROM deck_cards dc
-         JOIN cards c ON dc.card_id = c.id
-         WHERE dc.deck_id = ? AND dc.board = 'main'
-         ORDER BY c.edhrec_rank ASC NULLS LAST
-         LIMIT 1`
-      )
-      .get(d.id);
+    const dd = d as { id: number; cover_card_id: string | null; format: string | null };
+    // Priority: 1) user-chosen cover card, 2) commander card, 3) first main card by edhrec rank
+    let coverCard = null;
+    if (dd.cover_card_id) {
+      coverCard = db
+        .prepare('SELECT image_uri_art_crop, image_uri_normal FROM cards WHERE id = ?')
+        .get(dd.cover_card_id);
+    }
+    if (!coverCard) {
+      // For commander/brawl formats, use the commander card
+      coverCard = db
+        .prepare(
+          `SELECT c.image_uri_art_crop, c.image_uri_normal FROM deck_cards dc
+           JOIN cards c ON dc.card_id = c.id
+           WHERE dc.deck_id = ? AND dc.board = 'commander'
+           LIMIT 1`
+        )
+        .get(dd.id);
+    }
+    if (!coverCard) {
+      coverCard = db
+        .prepare(
+          `SELECT c.image_uri_art_crop, c.image_uri_normal FROM deck_cards dc
+           JOIN cards c ON dc.card_id = c.id
+           WHERE dc.deck_id = ? AND dc.board = 'main'
+           ORDER BY c.edhrec_rank ASC NULLS LAST
+           LIMIT 1`
+        )
+        .get(dd.id);
+    }
     return { ...d, cardCount, coverCard };
   });
 }
@@ -186,13 +207,14 @@ export function createDeck(name: string, format?: string, description?: string) 
   return { id: result.lastInsertRowid, name, format, description };
 }
 
-export function updateDeck(id: number, data: { name?: string; format?: string; description?: string }) {
+export function updateDeck(id: number, data: { name?: string; format?: string; description?: string; cover_card_id?: string | null }) {
   const db = getDb();
   const sets: string[] = [];
   const vals: unknown[] = [];
   if (data.name !== undefined) { sets.push('name = ?'); vals.push(data.name); }
   if (data.format !== undefined) { sets.push('format = ?'); vals.push(data.format); }
   if (data.description !== undefined) { sets.push('description = ?'); vals.push(data.description); }
+  if (data.cover_card_id !== undefined) { sets.push('cover_card_id = ?'); vals.push(data.cover_card_id); }
   sets.push("updated_at = datetime('now')");
   vals.push(id);
   db.prepare(`UPDATE decks SET ${sets.join(', ')} WHERE id = ?`).run(...vals);

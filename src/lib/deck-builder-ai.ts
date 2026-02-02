@@ -563,6 +563,8 @@ export function getSynergySuggestions(
       card,
       reason,
       score,
+      winRate: globalScore.confidence > 0.3 ? Math.round(globalScore.playedWinRate * 100) : undefined,
+      edhrecRank: card.edhrec_rank ?? undefined,
     });
   }
 
