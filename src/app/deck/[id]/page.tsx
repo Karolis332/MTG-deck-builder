@@ -13,7 +13,7 @@ import { ExportDialog } from '@/components/export-dialog';
 import { PlaytestModal } from '@/components/playtest-modal';
 import { CardDetailModal } from '@/components/card-detail-modal';
 import { MatchLogPanel } from '@/components/match-log-panel';
-import { FORMAT_LABELS, FORMATS, COMMANDER_FORMATS } from '@/lib/constants';
+import { FORMAT_LABELS, FORMATS, COMMANDER_FORMATS, DEFAULT_DECK_SIZE } from '@/lib/constants';
 
 interface DeckData {
   id: number;
@@ -308,6 +308,8 @@ export default function DeckEditorPage() {
         if (deckData.deck) setDeck(deckData.deck);
         setProposedChanges([]);
         setSuggestions([]);
+      } else if (data.error) {
+        alert(data.error);
       }
     } catch {} finally {
       setApplyingChanges(false);
@@ -535,7 +537,38 @@ export default function DeckEditorPage() {
                   {suggestions.slice(0, 8).map((s) => (
                     <button
                       key={s.card.id}
-                      onClick={() => addCardToDeck(s.card)}
+                      onClick={() => {
+                        // For fixed-size formats at/over capacity, don't add directly
+                        const mainCount = deck.cards
+                          .filter((c) => c.board === 'main')
+                          .reduce((sum, c) => sum + c.quantity, 0);
+                        const targetSize = DEFAULT_DECK_SIZE[deck.format || ''] || DEFAULT_DECK_SIZE.default;
+                        const deckAtCapacity = isCommanderFormat && mainCount >= targetSize - (deck.cards.some((c) => c.board === 'commander') ? 1 : 0);
+
+                        if (deckAtCapacity) {
+                          // Add as a proposed swap — auto-pair with lowest priority card
+                          const isAlreadyProposed = proposedChanges.some(
+                            (c) => c.action === 'add' && c.cardName === s.card.name
+                          );
+                          if (!isAlreadyProposed) {
+                            setProposedChanges((prev) => [
+                              ...prev,
+                              {
+                                action: 'add' as const,
+                                cardId: s.card.id,
+                                cardName: s.card.name,
+                                quantity: 1,
+                                reason: s.reason,
+                                winRate: s.winRate,
+                                imageUri: s.card.image_uri_small || undefined,
+                                selected: true,
+                              },
+                            ]);
+                          }
+                        } else {
+                          addCardToDeck(s.card);
+                        }
+                      }}
                       className="group shrink-0 rounded-xl border border-border bg-card p-2 text-left transition-all hover:border-primary/40 hover:shadow"
                       style={{ width: 140 }}
                     >
@@ -569,7 +602,7 @@ export default function DeckEditorPage() {
                         {s.reason}
                       </div>
                       <div className="mt-1 text-[9px] text-primary opacity-0 group-hover:opacity-100">
-                        + Add to deck
+                        {isCommanderFormat ? '+ Swap in' : '+ Add to deck'}
                       </div>
                     </button>
                   ))}

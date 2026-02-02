@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getDb } from '@/lib/db';
+import { DEFAULT_DECK_SIZE, COMMANDER_FORMATS } from '@/lib/constants';
 
 interface ChangeRequest {
   action: 'cut' | 'add';
@@ -23,6 +24,37 @@ export async function POST(request: NextRequest) {
     }
 
     const db = getDb();
+
+    // ── Check deck size constraints for fixed-size formats ───────────
+    const deckRow = db.prepare('SELECT format FROM decks WHERE id = ?').get(deck_id) as { format: string | null } | undefined;
+    const format = deckRow?.format || '';
+    const isFixedSize = COMMANDER_FORMATS.includes(format as typeof COMMANDER_FORMATS[number]);
+
+    if (isFixedSize) {
+      const cuts = changes.filter((c) => c.action === 'cut');
+      const adds = changes.filter((c) => c.action === 'add');
+      const cutQty = cuts.reduce((s, c) => s + c.quantity, 0);
+      const addQty = adds.reduce((s, c) => s + c.quantity, 0);
+
+      // Check current deck size
+      const sizeRow = db.prepare(
+        "SELECT COALESCE(SUM(quantity), 0) as count FROM deck_cards WHERE deck_id = ? AND board = 'main'"
+      ).get(deck_id) as { count: number };
+      const targetSize = DEFAULT_DECK_SIZE[format] || DEFAULT_DECK_SIZE.default;
+      const cmdCount = (db.prepare(
+        "SELECT COUNT(*) as count FROM deck_cards WHERE deck_id = ? AND board = 'commander'"
+      ).get(deck_id) as { count: number }).count;
+      const effectiveTarget = targetSize - (cmdCount > 0 ? 1 : 0);
+
+      // If adds would push deck over limit, reject
+      const afterSize = sizeRow.count - cutQty + addQty;
+      if (afterSize > effectiveTarget) {
+        return NextResponse.json(
+          { error: `Cannot apply: deck would have ${afterSize + cmdCount} cards (limit is ${targetSize}). Select more cards to cut or fewer to add.` },
+          { status: 400 }
+        );
+      }
+    }
 
     // Snapshot current state as a version before applying changes
     const currentCards = db.prepare(`
@@ -68,10 +100,20 @@ export async function POST(request: NextRequest) {
       // Apply each change
       for (const change of changes) {
         if (change.action === 'cut') {
-          // Reduce quantity or remove
-          const existing = db.prepare(
-            'SELECT id, quantity FROM deck_cards WHERE deck_id = ? AND card_id = ? AND board = ?'
+          // Reduce quantity or remove — try by card_id first, then by card name
+          let existing = db.prepare(
+            'SELECT dc.id, dc.quantity FROM deck_cards dc WHERE dc.deck_id = ? AND dc.card_id = ? AND dc.board = ?'
           ).get(deck_id, change.cardId, 'main') as { id: number; quantity: number } | undefined;
+
+          // Fallback: look up by card name (handles different printings of the same card)
+          if (!existing && change.cardName) {
+            existing = db.prepare(
+              `SELECT dc.id, dc.quantity FROM deck_cards dc
+               JOIN cards c ON dc.card_id = c.id
+               WHERE dc.deck_id = ? AND c.name = ? AND dc.board = ?
+               LIMIT 1`
+            ).get(deck_id, change.cardName, 'main') as { id: number; quantity: number } | undefined;
+          }
 
           if (existing) {
             const newQty = existing.quantity - change.quantity;
