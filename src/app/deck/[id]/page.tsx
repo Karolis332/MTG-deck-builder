@@ -13,6 +13,7 @@ import { ExportDialog } from '@/components/export-dialog';
 import { PlaytestModal } from '@/components/playtest-modal';
 import { CardDetailModal } from '@/components/card-detail-modal';
 import { MatchLogPanel } from '@/components/match-log-panel';
+import { AIChatPanel } from '@/components/ai-chat-panel';
 import { FORMAT_LABELS, FORMATS, COMMANDER_FORMATS, DEFAULT_DECK_SIZE } from '@/lib/constants';
 
 interface DeckData {
@@ -235,6 +236,48 @@ export default function DeckEditorPage() {
   const isCommanderFormat = COMMANDER_FORMATS.includes(
     (deck?.format || '') as typeof COMMANDER_FORMATS[number]
   );
+
+  // Apply actions from AI chat panel
+  const handleChatApply = async (
+    actions: Array<{
+      action: 'cut' | 'add';
+      cardId: string;
+      cardName: string;
+      quantity: number;
+      reason: string;
+      imageUri?: string;
+    }>
+  ): Promise<boolean> => {
+    try {
+      const res = await fetch('/api/ai-suggest/apply', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          deck_id: deckId,
+          changes: actions.map((a) => ({
+            action: a.action,
+            cardId: a.cardId,
+            cardName: a.cardName,
+            quantity: a.quantity,
+          })),
+        }),
+      });
+      const data = await res.json();
+      if (data.ok) {
+        // Reload deck
+        const deckRes = await fetch(`/api/decks/${deckId}`);
+        const deckData = await deckRes.json();
+        if (deckData.deck) setDeck(deckData.deck);
+        return true;
+      } else if (data.error) {
+        alert(data.error);
+        return false;
+      }
+      return false;
+    } catch {
+      return false;
+    }
+  };
 
   const updateDeckMeta = async (updates: {
     name?: string;
@@ -792,6 +835,11 @@ export default function DeckEditorPage() {
           addCardToDeck(card);
           setSelectedCard(null);
         }}
+      />
+
+      <AIChatPanel
+        deckId={deckId}
+        onApplyActions={handleChatApply}
       />
     </>
   );
