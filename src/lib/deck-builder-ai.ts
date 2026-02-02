@@ -465,8 +465,12 @@ export function getSynergySuggestions(
   const candidates = db.prepare(query).all(...Array.from(existingIds)) as DbCard[];
 
   const suggestions: AISuggestion[] = [];
+  const suggestedNames = new Set<string>();
   for (const card of candidates) {
     if (existingNames.has(card.name)) continue;
+    // Deduplicate by name — same card has many printings with different IDs
+    if (suggestedNames.has(card.name)) continue;
+    suggestedNames.add(card.name);
 
     // Determine why this card is suggested
     const text = (card.oracle_text || '').toLowerCase();

@@ -69,6 +69,8 @@ export function getRuleBasedSuggestions(
   const analysis = analyzeDeck(deckCards, format);
   const suggestions: AISuggestion[] = [];
   const existingCardIds = new Set(deckCards.map((c) => c.id));
+  const existingCardNames = new Set(deckCards.map((c) => c.name));
+  const suggestedNames = new Set<string>();
   const targetSize = DEFAULT_DECK_SIZE[format] || DEFAULT_DECK_SIZE.default;
   const targetLands = DEFAULT_LAND_COUNT[format] || DEFAULT_LAND_COUNT.default;
 
@@ -100,6 +102,8 @@ export function getRuleBasedSuggestions(
       .all(...colorParams, ...Array.from(existingCardIds)) as DbCard[];
 
     for (const land of lands) {
+      if (existingCardNames.has(land.name) || suggestedNames.has(land.name)) continue;
+      suggestedNames.add(land.name);
       suggestions.push({
         card: land,
         reason: `Deck needs ~${landsNeeded} more lands to reach the recommended ${targetLands} for ${format}`,
@@ -135,6 +139,8 @@ export function getRuleBasedSuggestions(
         .all(cmc, ...colorParams, ...Array.from(existingCardIds)) as DbCard[];
 
       for (const card of fillers) {
+        if (existingCardNames.has(card.name) || suggestedNames.has(card.name)) continue;
+        suggestedNames.add(card.name);
         suggestions.push({
           card,
           reason: `Fill ${cmc}-CMC gap in mana curve (only ${currentCount} cards vs recommended ~${idealCount})`,
@@ -168,6 +174,8 @@ export function getRuleBasedSuggestions(
         .all(...Array.from(existingCardIds)) as DbCard[];
 
       for (const card of drawCards) {
+        if (existingCardNames.has(card.name) || suggestedNames.has(card.name)) continue;
+        suggestedNames.add(card.name);
         suggestions.push({
           card,
           reason: 'Add card draw to improve consistency',
@@ -207,6 +215,8 @@ export function getRuleBasedSuggestions(
       .all(...colorParams, ...Array.from(existingCardIds)) as DbCard[];
 
     for (const card of removal) {
+      if (existingCardNames.has(card.name) || suggestedNames.has(card.name)) continue;
+      suggestedNames.add(card.name);
       suggestions.push({
         card,
         reason: 'Add removal spells for interaction',
@@ -215,13 +225,13 @@ export function getRuleBasedSuggestions(
     }
   }
 
-  // Sort by score and deduplicate
-  const seen = new Set<string>();
+  // Sort by score and deduplicate by name (not ID — same card has many printings)
+  const seenNames = new Set<string>();
   return suggestions
     .sort((a, b) => b.score - a.score)
     .filter((s) => {
-      if (seen.has(s.card.id)) return false;
-      seen.add(s.card.id);
+      if (seenNames.has(s.card.name)) return false;
+      seenNames.add(s.card.name);
       return true;
     })
     .slice(0, 15);

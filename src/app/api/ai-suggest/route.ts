@@ -101,10 +101,15 @@ export async function POST(request: NextRequest) {
     const synergySuggestions = getSynergySuggestions(deck.cards, format, deck_id, collectionOnly);
     const ruleSuggestions = getRuleBasedSuggestions(deck.cards, format, collectionOnly);
 
-    const seenIds = new Set(synergySuggestions.map((s) => s.card.id));
+    // Deduplicate by card NAME (not ID) — same card has many printings
+    const seenNames = new Set(synergySuggestions.map((s) => s.card.name));
     const combined = [
       ...synergySuggestions,
-      ...ruleSuggestions.filter((s) => !seenIds.has(s.card.id)),
+      ...ruleSuggestions.filter((s) => {
+        if (seenNames.has(s.card.name)) return false;
+        seenNames.add(s.card.name);
+        return true;
+      }),
     ].sort((a, b) => b.score - a.score).slice(0, 15);
 
     // ── Build proposed changes (cuts + adds) based on match data ──────
@@ -240,9 +245,19 @@ function buildProposedChanges(
     });
   }
 
-  // ── 3. Propose legal replacement adds ────────────────────────────────
+  // ── 3. Propose legal replacement adds (deduplicated by name) ─────────
   const cutsCount = changes.filter((c) => c.action === 'cut').length;
-  for (const suggestion of suggestions.slice(0, cutsCount || 3)) {
+  const existingCardNames = new Set(allDeckCards.map((c) => c.name));
+  const addedNames = new Set<string>();
+  let addCount = 0;
+  for (const suggestion of suggestions) {
+    if (addCount >= (cutsCount || 3)) break;
+    // Skip if already in deck or already proposed
+    if (existingCardNames.has(suggestion.card.name)) continue;
+    if (addedNames.has(suggestion.card.name)) continue;
+    addedNames.add(suggestion.card.name);
+    addCount++;
+
     const gs = getCardGlobalScore(suggestion.card.name, format);
     changes.push({
       action: 'add',
