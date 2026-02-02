@@ -69,6 +69,7 @@ export default function DeckEditorPage() {
     selected: boolean;
   }>>([]);
   const [applyingChanges, setApplyingChanges] = useState(false);
+  const [collectionOnly, setCollectionOnly] = useState(true);
 
   // Load deck
   useEffect(() => {
@@ -246,7 +247,7 @@ export default function DeckEditorPage() {
       const res = await fetch('/api/ai-suggest', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ deck_id: deckId }),
+        body: JSON.stringify({ deck_id: deckId, collection_only: collectionOnly }),
       });
       const data = await res.json();
       setSuggestions(data.suggestions || []);
@@ -402,6 +403,30 @@ export default function DeckEditorPage() {
             </div>
 
             <div className="flex items-center gap-2">
+              {/* Collection-only toggle */}
+              <label className="flex cursor-pointer items-center gap-1.5" title="When on, AI only suggests cards you own">
+                <span className="text-[10px] text-muted-foreground">
+                  {collectionOnly ? 'My cards' : 'All cards'}
+                </span>
+                <button
+                  type="button"
+                  role="switch"
+                  aria-checked={collectionOnly}
+                  onClick={() => setCollectionOnly((v) => !v)}
+                  className={cn(
+                    'relative inline-flex h-5 w-9 shrink-0 items-center rounded-full transition-colors',
+                    collectionOnly ? 'bg-primary' : 'bg-muted'
+                  )}
+                >
+                  <span
+                    className={cn(
+                      'pointer-events-none block h-3.5 w-3.5 rounded-full bg-white shadow transition-transform',
+                      collectionOnly ? 'translate-x-[18px]' : 'translate-x-[3px]'
+                    )}
+                  />
+                </button>
+              </label>
+
               <button
                 onClick={getSuggestions}
                 disabled={suggestionsLoading}

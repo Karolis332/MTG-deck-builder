@@ -18,7 +18,7 @@ interface ProposedChange {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { deck_id } = body;
+    const { deck_id, collection_only } = body;
 
     if (!deck_id) {
       return NextResponse.json({ error: 'deck_id is required' }, { status: 400 });
@@ -31,6 +31,7 @@ export async function POST(request: NextRequest) {
 
     const deck = deckData as { format: string; cards: Array<{ quantity: number; board: string; card_id?: string } & DbCard> };
     const format = deck.format || 'standard';
+    const collectionOnly = !!collection_only;
 
     // Try Ollama first
     const ollamaSuggestions = await getOllamaSuggestions(deck.cards, format);
@@ -43,8 +44,8 @@ export async function POST(request: NextRequest) {
     }
 
     // Use synergy-aware suggestions (better than basic rules)
-    const synergySuggestions = getSynergySuggestions(deck.cards, format, deck_id);
-    const ruleSuggestions = getRuleBasedSuggestions(deck.cards, format);
+    const synergySuggestions = getSynergySuggestions(deck.cards, format, deck_id, collectionOnly);
+    const ruleSuggestions = getRuleBasedSuggestions(deck.cards, format, collectionOnly);
 
     const seenIds = new Set(synergySuggestions.map((s) => s.card.id));
     const combined = [

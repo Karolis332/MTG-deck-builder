@@ -62,7 +62,8 @@ function analyzeDeck(
 
 export function getRuleBasedSuggestions(
   deckCards: Array<{ quantity: number; board: string } & DbCard>,
-  format: string
+  format: string,
+  collectionOnly?: boolean
 ): AISuggestion[] {
   const db = getDb();
   const analysis = analyzeDeck(deckCards, format);
@@ -70,6 +71,11 @@ export function getRuleBasedSuggestions(
   const existingCardIds = new Set(deckCards.map((c) => c.id));
   const targetSize = DEFAULT_DECK_SIZE[format] || DEFAULT_DECK_SIZE.default;
   const targetLands = DEFAULT_LAND_COUNT[format] || DEFAULT_LAND_COUNT.default;
+
+  // Collection-only mode: INNER JOIN to only suggest owned cards
+  const colJoin = collectionOnly ? 'INNER JOIN collection col ON c.id = col.card_id' : '';
+  // Format legality filter
+  const legalFilter = format ? `AND c.legalities LIKE '%"${format}":"legal"%'` : '';
 
   // 1. Land count suggestions
   if (analysis.totalMain < targetSize && analysis.landCount < targetLands) {
@@ -82,9 +88,11 @@ export function getRuleBasedSuggestions(
 
     const lands = db
       .prepare(
-        `SELECT * FROM cards c
+        `SELECT c.* FROM cards c
+         ${colJoin}
          WHERE c.type_line LIKE '%Land%'
          AND (${colorFilter})
+         ${legalFilter}
          AND c.id NOT IN (${Array.from(existingCardIds).map(() => '?').join(',') || "''"})
          ORDER BY c.edhrec_rank ASC NULLS LAST
          LIMIT 5`
@@ -114,12 +122,13 @@ export function getRuleBasedSuggestions(
 
       const fillers = db
         .prepare(
-          `SELECT * FROM cards c
+          `SELECT c.* FROM cards c
+           ${colJoin}
            WHERE c.cmc = ?
            AND c.type_line NOT LIKE '%Land%'
            AND (${colorConditions})
+           ${legalFilter}
            AND c.id NOT IN (${Array.from(existingCardIds).map(() => '?').join(',') || "''"})
-           ${format !== 'commander' ? '' : ''}
            ORDER BY c.edhrec_rank ASC NULLS LAST
            LIMIT 3`
         )
@@ -146,10 +155,12 @@ export function getRuleBasedSuggestions(
     if (!hasDrawOrRamp && analysis.totalMain > 10) {
       const drawCards = db
         .prepare(
-          `SELECT * FROM cards c
+          `SELECT c.* FROM cards c
+           ${colJoin}
            WHERE c.oracle_text LIKE '%draw%card%'
            AND c.type_line NOT LIKE '%Land%'
            AND c.cmc <= 3
+           ${legalFilter}
            AND c.id NOT IN (${Array.from(existingCardIds).map(() => '?').join(',') || "''"})
            ORDER BY c.edhrec_rank ASC NULLS LAST
            LIMIT 3`
@@ -183,10 +194,12 @@ export function getRuleBasedSuggestions(
 
     const removal = db
       .prepare(
-        `SELECT * FROM cards c
+        `SELECT c.* FROM cards c
+         ${colJoin}
          WHERE (c.oracle_text LIKE '%destroy target%' OR c.oracle_text LIKE '%exile target%')
          AND c.type_line NOT LIKE '%Land%'
          AND (${colorConditions})
+         ${legalFilter}
          AND c.id NOT IN (${Array.from(existingCardIds).map(() => '?').join(',') || "''"})
          ORDER BY c.edhrec_rank ASC NULLS LAST
          LIMIT 3`

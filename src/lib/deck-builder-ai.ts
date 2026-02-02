@@ -399,7 +399,8 @@ export function autoBuildDeck(options: BuildOptions): BuildResult {
 export function getSynergySuggestions(
   deckCards: Array<{ quantity: number; board: string } & DbCard>,
   format: string,
-  deckId?: number
+  deckId?: number,
+  collectionOnly?: boolean
 ): AISuggestion[] {
   const db = getDb();
   const mainCards = deckCards.filter((c) => c.board === 'main' || c.board === 'commander');
@@ -443,8 +444,14 @@ export function getSynergySuggestions(
     ? `OR (c.oracle_text LIKE '%destroy%' OR c.oracle_text LIKE '%exile%' OR c.oracle_text LIKE '%counter target%')`
     : '';
 
+  // Collection-only mode: only suggest cards the user owns
+  const collectionJoin = collectionOnly
+    ? 'INNER JOIN collection col ON c.id = col.card_id'
+    : '';
+
   const query = `
     SELECT c.* FROM cards c
+    ${collectionJoin}
     WHERE c.type_line NOT LIKE '%Land%'
     AND (${colorFilter})
     ${excludeFilter ? `AND ${excludeFilter}` : ''}
