@@ -6,7 +6,7 @@ import type { DbCard } from '@/lib/types';
 interface ChatAction {
   action: 'add' | 'cut' | 'swap';
   cardName: string;
-  replaceWith?: string; // for swap actions
+  replaceWith?: string;
   quantity: number;
   reason: string;
 }
@@ -24,9 +24,6 @@ function getOpenAIKey(): string | null {
   return row?.value || null;
 }
 
-/**
- * Resolve a card name to a DbCard from the database.
- */
 function resolveCard(name: string): DbCard | null {
   const db = getDb();
   return (
@@ -34,6 +31,33 @@ function resolveCard(name: string): DbCard | null {
       .prepare('SELECT * FROM cards WHERE name = ? COLLATE NOCASE LIMIT 1')
       .get(name) as DbCard | undefined) || null
   );
+}
+
+/**
+ * Check if a card fits within the deck's color identity.
+ */
+function fitsColorIdentity(card: DbCard, deckColors: Set<string>): boolean {
+  if (deckColors.size === 0) return true;
+  try {
+    const ci: string[] = card.color_identity ? JSON.parse(card.color_identity) : [];
+    return ci.every((c) => deckColors.has(c));
+  } catch {
+    return true;
+  }
+}
+
+/**
+ * Check if a card is legal in the given format.
+ */
+function isLegalInFormat(card: DbCard, format: string): boolean {
+  if (!format || !card.legalities) return true;
+  try {
+    const legalities = JSON.parse(card.legalities);
+    const status = legalities[format];
+    return !status || status === 'legal' || status === 'restricted';
+  } catch {
+    return true;
+  }
 }
 
 export async function POST(request: NextRequest) {
@@ -60,6 +84,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Always fetch FRESH deck state — the deck may have changed since last turn
     const deckData = getDeckWithCards(deck_id);
     if (!deckData) {
       return NextResponse.json({ error: 'Deck not found' }, { status: 404 });
@@ -84,26 +109,25 @@ export async function POST(request: NextRequest) {
       .filter((c) => (c.type_line || '').includes('Land'))
       .reduce((s, c) => s + c.quantity, 0);
 
-    // Build deck context
-    const deckSummary = mainCards
-      .map((c) => `${c.quantity}x ${c.name} [${c.type_line}] CMC:${c.cmc}`)
-      .join('\n');
-
-    const commanderInfo =
-      commanderCards.length > 0
-        ? `Commander: ${commanderCards.map((c) => c.name).join(', ')}\n`
-        : '';
-
-    // Detect colors
+    // Detect color identity from commander + all cards
     const colorSet = new Set<string>();
-    for (const card of [...mainCards, ...commanderCards]) {
+    // Commander's color identity defines the deck's identity
+    for (const card of commanderCards) {
       try {
-        const ci: string[] = card.color_identity
-          ? JSON.parse(card.color_identity)
-          : [];
+        const ci: string[] = card.color_identity ? JSON.parse(card.color_identity) : [];
         ci.forEach((c) => colorSet.add(c));
       } catch {}
     }
+    // If no commander, derive from deck
+    if (commanderCards.length === 0) {
+      for (const card of mainCards) {
+        try {
+          const ci: string[] = card.color_identity ? JSON.parse(card.color_identity) : [];
+          ci.forEach((c) => colorSet.add(c));
+        } catch {}
+      }
+    }
+    const deckColors = Array.from(colorSet);
 
     // Detect illegal cards
     const illegalCards: string[] = [];
@@ -118,52 +142,86 @@ export async function POST(request: NextRequest) {
       } catch {}
     }
 
-    const systemPrompt = `You are an expert Magic: The Gathering deck tuning assistant. You have deep knowledge of MTG formats, card synergies, mana curves, win rates, and competitive meta.
+    // Detect singleton violations
+    const nameCounts = new Map<string, number>();
+    for (const card of mainCards) {
+      const isBasic = (card.type_line || '').includes('Basic');
+      if (!isBasic) {
+        nameCounts.set(card.name, (nameCounts.get(card.name) || 0) + card.quantity);
+      }
+    }
+    const singletonViolations = isCommanderLike
+      ? Array.from(nameCounts.entries()).filter(([, count]) => count > 1).map(([name, count]) => `${name} (${count})`)
+      : [];
 
-You are helping tune the deck "${deck.name}" in ${format} format.
+    // Build concise deck list grouped by type
+    const deckByType: Record<string, string[]> = {};
+    for (const c of mainCards) {
+      const mainType = c.type_line.split('—')[0].trim().split(' ').pop() || 'Other';
+      if (!deckByType[mainType]) deckByType[mainType] = [];
+      deckByType[mainType].push(`${c.quantity}x ${c.name} (CMC:${c.cmc})`);
+    }
+    const deckSummary = Object.entries(deckByType)
+      .map(([type, cards]) => `${type} (${cards.length}):\n${cards.join(', ')}`)
+      .join('\n\n');
 
-${commanderInfo}Colors: ${Array.from(colorSet).join(', ') || 'Colorless'}
-Current main deck: ${currentMainCount} cards (target: ${isCommanderLike ? targetSize - (commanderCards.length > 0 ? 1 : 0) : targetSize})
-Lands: ${landCount}/${targetLands} recommended
-${illegalCards.length > 0 ? `\nILLEGAL CARDS that must be replaced: ${illegalCards.join(', ')}` : ''}
+    const commanderInfo =
+      commanderCards.length > 0
+        ? `Commander: ${commanderCards.map((c) => c.name).join(', ')}`
+        : '';
 
-Current decklist:
+    const effectiveTarget = isCommanderLike
+      ? targetSize - (commanderCards.length > 0 ? 1 : 0)
+      : targetSize;
+    const sizeStatus = currentMainCount === effectiveTarget
+      ? 'EXACTLY at target'
+      : currentMainCount > effectiveTarget
+        ? `OVER by ${currentMainCount - effectiveTarget}`
+        : `UNDER by ${effectiveTarget - currentMainCount}`;
+
+    // System prompt — kept focused and short to avoid context dilution
+    const systemPrompt = `You are an expert MTG deck tuning assistant.
+
+DECK: "${deck.name}" | Format: ${format} | ${commanderInfo}
+Colors: ${deckColors.join(', ') || 'Colorless'}
+Main deck: ${currentMainCount}/${effectiveTarget} (${sizeStatus})
+Lands: ${landCount}/${targetLands}
+${illegalCards.length > 0 ? `ILLEGAL CARDS: ${illegalCards.join(', ')}` : ''}
+${singletonViolations.length > 0 ? `SINGLETON VIOLATIONS: ${singletonViolations.join(', ')}` : ''}
+
+HARD RULES — NEVER violate these:
+1. ONLY suggest cards in the deck's color identity: {${deckColors.join(', ')}}. Cards with colors outside this set are FORBIDDEN.
+2. ${isCommanderLike ? `Fixed-size format: deck must stay at ${effectiveTarget} main cards. Every ADD MUST be paired with a CUT (use "swap" action).` : 'Standard deck size rules.'}
+3. ${isCommanderLike ? 'Singleton: max 1 copy of each non-basic-land card.' : 'Max 4 copies of non-basic-land cards.'}
+4. Only suggest cards legal in ${format}.
+5. Never cut lands unless deck has ${targetLands + 3}+ lands.
+
+CURRENT DECKLIST:
 ${deckSummary}
 
-RULES:
-1. For ${isCommanderLike ? 'commander/brawl' : format}: ${isCommanderLike ? 'deck must have exactly ' + targetSize + ' cards total (including commander). Every ADD must be paired with a CUT.' : 'standard deck size rules apply.'}
-2. Never suggest cutting lands unless the deck has more than ${targetLands + 2} lands.
-3. Respect format legality — only suggest cards legal in ${format}.
-4. ${isCommanderLike ? 'Singleton rule: only 1 copy of each non-basic land card.' : ''}
-5. Keep suggestions within the deck's color identity: ${Array.from(colorSet).join(', ') || 'any'}.
+RESPONSE FORMAT (strict JSON):
+{"message":"Your explanation","actions":[{"action":"swap","cardName":"Cut This","replaceWith":"Add This","quantity":1,"reason":"why"}]}
+Use "swap" for replacements (preferred). Use "add"/"cut" only when deck size needs adjusting.`;
 
-RESPONSE FORMAT:
-You must respond in JSON with this exact structure:
-{
-  "message": "Your conversational response explaining what you're recommending and why",
-  "actions": [
-    {"action": "swap", "cardName": "Card To Cut", "replaceWith": "Card To Add", "quantity": 1, "reason": "Brief reason"},
-    {"action": "add", "cardName": "Card Name", "quantity": 1, "reason": "Brief reason"},
-    {"action": "cut", "cardName": "Card Name", "quantity": 1, "reason": "Brief reason"}
-  ]
-}
-
-Use "swap" when replacing one card with another (preferred for fixed-size formats).
-Use "add" only when the deck is under the target size.
-Use "cut" only when the deck is over the target size or a card must be removed.
-The "actions" array can be empty if the user asks a question that doesn't require changes.
-The "message" should be conversational and informative — explain your reasoning, mention synergies, and educate the user.`;
-
-    // Build conversation messages
+    // Build messages — short history + fresh state reminder each turn
     const messages: Array<{ role: 'system' | 'user' | 'assistant'; content: string }> = [
       { role: 'system', content: systemPrompt },
     ];
 
-    // Add conversation history (last 10 turns max)
+    // Only keep last 6 history messages to prevent context dilution
     if (history && history.length > 0) {
-      for (const msg of history.slice(-10)) {
+      const trimmed = history.slice(-6);
+      for (const msg of trimmed) {
         messages.push({ role: msg.role, content: msg.content });
       }
+    }
+
+    // Inject a state reminder before the user's message if there's history
+    if (history && history.length > 0) {
+      messages.push({
+        role: 'system',
+        content: `REMINDER: Deck currently has ${currentMainCount}/${effectiveTarget} main cards. Colors: {${deckColors.join(', ')}}. ${sizeStatus}. ${isCommanderLike ? 'Use "swap" for every replacement — do NOT add without cutting.' : ''}`,
+      });
     }
 
     messages.push({ role: 'user', content: prompt });
@@ -211,7 +269,7 @@ The "message" should be conversational and informative — explain your reasonin
       );
     }
 
-    // Resolve card names to actual DB records and build proposed changes
+    // ── Server-side validation & resolution ────────────────────────────
     const resolvedActions: Array<{
       action: 'cut' | 'add';
       cardId: string;
@@ -222,10 +280,11 @@ The "message" should be conversational and informative — explain your reasonin
     }> = [];
 
     const existingCardNames = new Set(deck.cards.map((c) => c.name.toLowerCase()));
+    const rejectedCards: string[] = [];
 
     for (const act of parsed.actions || []) {
       if (act.action === 'swap') {
-        // Swap = cut + add
+        // Swap = cut + add — resolve both
         const cutCard = deck.cards.find(
           (c) => c.name.toLowerCase() === act.cardName.toLowerCase()
         );
@@ -242,15 +301,24 @@ The "message" should be conversational and informative — explain your reasonin
           });
         }
 
-        if (addCard && !existingCardNames.has(addCard.name.toLowerCase())) {
-          resolvedActions.push({
-            action: 'add',
-            cardId: addCard.id,
-            cardName: addCard.name,
-            quantity: act.quantity || 1,
-            reason: act.reason,
-            imageUri: addCard.image_uri_small || undefined,
-          });
+        if (addCard) {
+          // Validate: color identity, format legality, not already in deck
+          if (!fitsColorIdentity(addCard, colorSet)) {
+            rejectedCards.push(`${addCard.name} (wrong colors)`);
+          } else if (!isLegalInFormat(addCard, format)) {
+            rejectedCards.push(`${addCard.name} (not legal in ${format})`);
+          } else if (existingCardNames.has(addCard.name.toLowerCase())) {
+            rejectedCards.push(`${addCard.name} (already in deck)`);
+          } else {
+            resolvedActions.push({
+              action: 'add',
+              cardId: addCard.id,
+              cardName: addCard.name,
+              quantity: act.quantity || 1,
+              reason: act.reason,
+              imageUri: addCard.image_uri_small || undefined,
+            });
+          }
         }
       } else if (act.action === 'cut') {
         const cutCard = deck.cards.find(
@@ -268,26 +336,62 @@ The "message" should be conversational and informative — explain your reasonin
         }
       } else if (act.action === 'add') {
         const addCard = resolveCard(act.cardName);
-        if (addCard && !existingCardNames.has(addCard.name.toLowerCase())) {
-          resolvedActions.push({
-            action: 'add',
-            cardId: addCard.id,
-            cardName: addCard.name,
-            quantity: act.quantity || 1,
-            reason: act.reason,
-            imageUri: addCard.image_uri_small || undefined,
-          });
+        if (addCard) {
+          if (!fitsColorIdentity(addCard, colorSet)) {
+            rejectedCards.push(`${addCard.name} (wrong colors)`);
+          } else if (!isLegalInFormat(addCard, format)) {
+            rejectedCards.push(`${addCard.name} (not legal in ${format})`);
+          } else if (existingCardNames.has(addCard.name.toLowerCase())) {
+            rejectedCards.push(`${addCard.name} (already in deck)`);
+          } else {
+            resolvedActions.push({
+              action: 'add',
+              cardId: addCard.id,
+              cardName: addCard.name,
+              quantity: act.quantity || 1,
+              reason: act.reason,
+              imageUri: addCard.image_uri_small || undefined,
+            });
+          }
         }
       }
     }
 
+    // ── Enforce CUT/ADD balance for fixed-size formats ─────────────────
+    if (isCommanderLike) {
+      const addCount = resolvedActions.filter((a) => a.action === 'add').reduce((s, a) => s + a.quantity, 0);
+      const cutCount = resolvedActions.filter((a) => a.action === 'cut').reduce((s, a) => s + a.quantity, 0);
+      const sizeAfter = currentMainCount - cutCount + addCount;
+
+      if (sizeAfter > effectiveTarget) {
+        // Too many ADDs without CUTs — trim excess adds from the end
+        let excess = sizeAfter - effectiveTarget;
+        for (let i = resolvedActions.length - 1; i >= 0 && excess > 0; i--) {
+          if (resolvedActions[i].action === 'add') {
+            const remove = Math.min(resolvedActions[i].quantity, excess);
+            resolvedActions[i].quantity -= remove;
+            excess -= remove;
+            if (resolvedActions[i].quantity <= 0) {
+              resolvedActions.splice(i, 1);
+            }
+          }
+        }
+      }
+    }
+
+    // Append rejection note to message if any cards were filtered
+    let message = parsed.message;
+    if (rejectedCards.length > 0) {
+      message += `\n\n(Filtered out: ${rejectedCards.join(', ')} — server-side validation)`;
+    }
+
     return NextResponse.json({
-      message: parsed.message,
+      message,
       actions: resolvedActions,
     });
   } catch (error) {
-    const message =
+    const msg =
       error instanceof Error ? error.message : 'AI chat failed';
-    return NextResponse.json({ error: message }, { status: 500 });
+    return NextResponse.json({ error: msg }, { status: 500 });
   }
 }
