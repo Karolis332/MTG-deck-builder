@@ -17,6 +17,42 @@ interface ProposedChange {
   imageUri?: string;
 }
 
+/**
+ * Compute the deck's color identity. For commander formats, this comes
+ * from the commander card(s). For other formats, from all main deck cards.
+ */
+function getDeckColorIdentity(
+  cards: Array<{ quantity: number; board: string } & DbCard>
+): Set<string> {
+  const colorSet = new Set<string>();
+  const commanderCards = cards.filter((c) => c.board === 'commander');
+  const source = commanderCards.length > 0
+    ? commanderCards
+    : cards.filter((c) => c.board === 'main');
+
+  for (const card of source) {
+    try {
+      const ci: string[] = card.color_identity ? JSON.parse(card.color_identity) : [];
+      ci.forEach((c) => colorSet.add(c));
+    } catch {}
+  }
+  return colorSet;
+}
+
+/**
+ * Check if a card fits within the deck's color identity.
+ */
+function cardFitsColorIdentity(card: DbCard, deckColors: Set<string>): boolean {
+  if (deckColors.size === 0) return true;
+  try {
+    const ci: string[] = card.color_identity ? JSON.parse(card.color_identity) : [];
+    if (ci.length === 0) return true; // colorless is always allowed
+    return ci.every((c) => deckColors.has(c));
+  } catch {
+    return true;
+  }
+}
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
@@ -34,16 +70,24 @@ export async function POST(request: NextRequest) {
     const deck = deckData as { format: string; cards: Array<{ quantity: number; board: string; card_id?: string } & DbCard> };
     const format = deck.format || 'standard';
     const collectionOnly = !!collection_only;
+    const isCommanderLike = COMMANDER_FORMATS.includes(format as typeof COMMANDER_FORMATS[number]);
+    // Color identity restriction only applies to commander/brawl formats
+    const deckColors = isCommanderLike ? getDeckColorIdentity(deck.cards) : new Set<string>();
 
     // Try Ollama first
     const ollamaSuggestions = await getOllamaSuggestions(deck.cards, format);
     if (ollamaSuggestions && ollamaSuggestions.length > 0) {
-      const proposedChanges = buildProposedChanges(deck_id, deck, format, ollamaSuggestions);
-      return NextResponse.json({
-        suggestions: ollamaSuggestions,
-        proposedChanges,
-        source: 'ollama',
-      });
+      const filtered = isCommanderLike
+        ? ollamaSuggestions.filter((s) => cardFitsColorIdentity(s.card, deckColors))
+        : ollamaSuggestions;
+      if (filtered.length > 0) {
+        const proposedChanges = buildProposedChanges(deck_id, deck, format, filtered);
+        return NextResponse.json({
+          suggestions: filtered,
+          proposedChanges,
+          source: 'ollama',
+        });
+      }
     }
 
     // Try OpenAI GPT if API key is configured
@@ -59,19 +103,26 @@ export async function POST(request: NextRequest) {
 
     const openAIResult = await getOpenAISuggestions(deck.cards, format, collectionCardNames);
     if (openAIResult && openAIResult.suggestions.length > 0) {
-      const { adds, cutNames } = resolveOpenAISuggestions(openAIResult, existingIds);
+      const { adds, cutNames } = resolveOpenAISuggestions(openAIResult, existingIds, format);
 
       if (adds.length > 0) {
-        // Also build proposed changes (enhanced with GPT cut recommendations)
+        // Build proposed changes — pairs cuts with adds
         const proposedChanges = buildProposedChanges(deck_id, deck, format, adds);
 
-        // Merge GPT-recommended cuts that aren't already in proposedChanges
+        // For GPT-recommended cuts: only add them if we have unmatched adds
+        // Count existing pairs
+        const existingAdds = proposedChanges.filter((c) => c.action === 'add').length;
+        const existingCuts = proposedChanges.filter((c) => c.action === 'cut').length;
         const existingCutNames = new Set(proposedChanges.filter((c) => c.action === 'cut').map((c) => c.cardName));
+
+        // Only add GPT cuts if we need more to balance with adds
+        let gptCutsAdded = 0;
+        const maxGptCuts = Math.max(0, existingAdds - existingCuts);
         for (const cutName of cutNames) {
+          if (gptCutsAdded >= maxGptCuts) break;
           if (existingCutNames.has(cutName)) continue;
           const card = deck.cards.find((c) => c.name === cutName);
           if (!card) continue;
-          // Don't cut lands unless excessive
           const isLand = (card.type_line || '').includes('Land');
           const landCount = deck.cards
             .filter((c) => c.board === 'main' && (c.type_line || '').includes('Land'))
@@ -87,6 +138,7 @@ export async function POST(request: NextRequest) {
             reason: 'GPT recommends replacing this card',
             imageUri: card.image_uri_small || undefined,
           });
+          gptCutsAdded++;
         }
 
         return NextResponse.json({
@@ -102,6 +154,7 @@ export async function POST(request: NextRequest) {
     const ruleSuggestions = getRuleBasedSuggestions(deck.cards, format, collectionOnly);
 
     // Deduplicate by card NAME (not ID) — same card has many printings
+    // Also filter by color identity
     const seenNames = new Set(synergySuggestions.map((s) => s.card.name));
     const combined = [
       ...synergySuggestions,
@@ -110,7 +163,10 @@ export async function POST(request: NextRequest) {
         seenNames.add(s.card.name);
         return true;
       }),
-    ].sort((a, b) => b.score - a.score).slice(0, 15);
+    ]
+      .filter((s) => !isCommanderLike || cardFitsColorIdentity(s.card, deckColors))
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 15);
 
     // ── Build proposed changes (cuts + adds) based on match data ──────
     const proposedChanges = buildProposedChanges(deck_id, deck, format, combined);

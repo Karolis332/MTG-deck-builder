@@ -6,6 +6,7 @@
  */
 
 import { getDb } from '@/lib/db';
+import { COMMANDER_FORMATS } from '@/lib/constants';
 import type { DbCard } from '@/lib/types';
 import type { AISuggestion } from '@/lib/types';
 
@@ -15,6 +16,8 @@ interface OpenAISuggestionResult {
     reason: string;
     action: 'add' | 'cut';
   }>;
+  deckColors: string[];
+  isCommanderLike: boolean;
 }
 
 function getOpenAIKey(): string | null {
@@ -39,6 +42,9 @@ export async function getOpenAISuggestions(
 
   const mainCards = deckCards.filter((c) => c.board === 'main' || c.board === 'commander');
   const commanderCards = deckCards.filter((c) => c.board === 'commander');
+  const isCommanderLike = COMMANDER_FORMATS.includes(
+    format as (typeof COMMANDER_FORMATS)[number]
+  );
 
   // Build deck summary for the prompt
   const deckSummary = mainCards
@@ -49,15 +55,25 @@ export async function getOpenAISuggestions(
     ? `Commander: ${commanderCards.map((c) => c.name).join(', ')}\n`
     : '';
 
-  // Detect colors
+  // Detect color identity — commander defines it for commander formats
   const colorSet = new Set<string>();
-  for (const card of mainCards) {
-    try {
-      const ci: string[] = card.color_identity ? JSON.parse(card.color_identity) : [];
-      ci.forEach((c) => colorSet.add(c));
-    } catch {}
+  if (commanderCards.length > 0) {
+    for (const card of commanderCards) {
+      try {
+        const ci: string[] = card.color_identity ? JSON.parse(card.color_identity) : [];
+        ci.forEach((c) => colorSet.add(c));
+      } catch {}
+    }
+  } else {
+    for (const card of mainCards) {
+      try {
+        const ci: string[] = card.color_identity ? JSON.parse(card.color_identity) : [];
+        ci.forEach((c) => colorSet.add(c));
+      } catch {}
+    }
   }
-  const colors = Array.from(colorSet).join('');
+  const deckColors = Array.from(colorSet);
+  const colors = deckColors.join('');
 
   // Count lands
   const landCount = mainCards
@@ -85,10 +101,19 @@ export async function getOpenAISuggestions(
     ? `\nWARNING: These cards are NOT LEGAL in ${format} and must be replaced: ${illegalCards.join(', ')}`
     : '';
 
+  // Color identity rule only applies to commander/brawl formats
+  const colorRule = isCommanderLike
+    ? `1. ONLY suggest ADD cards within color identity {${colors}}. Cards containing colors outside {${colors}} are FORBIDDEN.`
+    : `1. Suggest cards that work well in a ${colors || 'any color'} deck.`;
+
+  const sizeRule = isCommanderLike
+    ? `4. Commander/brawl: suggest equal numbers of ADDs and CUTs to maintain deck size.`
+    : `4. You may suggest more ADDs than CUTs if the deck is under 60 cards.`;
+
   const prompt = `You are an expert Magic: The Gathering deck builder. Analyze this ${format} deck and suggest improvements.
 
 ${commanderInfo}Format: ${format}
-Colors: ${colors || 'Colorless'}
+${isCommanderLike ? `Color identity: {${colors}} — ONLY these colors allowed` : `Colors used: ${colors || 'Colorless'}`}
 Total cards: ${mainCards.reduce((s, c) => s + c.quantity, 0)}
 Lands: ${landCount}
 
@@ -96,13 +121,13 @@ Decklist:
 ${deckSummary}
 ${illegalNote}${collectionNote}
 
-Provide exactly 5 suggestions. For each, specify whether to ADD a new card or CUT an existing card, the card name, and a brief reason why (focusing on synergy, win rate improvement, or format legality).
+Provide exactly 5 suggestions as ADD/CUT pairs.
 
-IMPORTANT RULES:
-- Never suggest cutting lands unless the deck has significantly more than needed
-- Prioritize replacing illegal cards first
-- Consider mana curve, color balance, and deck synergy
-- For commander/brawl decks, 36-38 lands is standard for 100-card decks
+HARD RULES — NEVER violate:
+${colorRule}
+2. Never suggest cutting lands unless the deck has significantly more than needed.
+3. Prioritize replacing illegal cards first.
+${sizeRule}
 
 Respond in JSON format only:
 {"suggestions": [{"cardName": "Card Name", "reason": "Brief reason", "action": "add|cut"}]}`;
@@ -133,8 +158,8 @@ Respond in JSON format only:
     const content = data.choices?.[0]?.message?.content;
     if (!content) return null;
 
-    const parsed = JSON.parse(content) as OpenAISuggestionResult;
-    return parsed;
+    const parsed = JSON.parse(content) as { suggestions: OpenAISuggestionResult['suggestions'] };
+    return { suggestions: parsed.suggestions, deckColors, isCommanderLike };
   } catch (error) {
     console.error('OpenAI suggestion error:', error);
     return null;
@@ -142,15 +167,33 @@ Respond in JSON format only:
 }
 
 /**
+ * Check if a card fits within the deck's color identity.
+ */
+function fitsColorIdentity(card: DbCard, deckColors: Set<string>): boolean {
+  if (deckColors.size === 0) return true;
+  try {
+    const ci: string[] = card.color_identity ? JSON.parse(card.color_identity) : [];
+    if (ci.length === 0) return true;
+    return ci.every((c) => deckColors.has(c));
+  } catch {
+    return true;
+  }
+}
+
+/**
  * Resolve OpenAI suggestion card names to actual DbCard objects from the database.
+ * Validates color identity (commander formats only) and format legality server-side.
  */
 export function resolveOpenAISuggestions(
   result: OpenAISuggestionResult,
-  existingCardIds: Set<string>
+  existingCardIds: Set<string>,
+  format?: string
 ): { adds: AISuggestion[]; cutNames: string[] } {
   const db = getDb();
   const adds: AISuggestion[] = [];
   const cutNames: string[] = [];
+  const deckColorSet = new Set(result.deckColors);
+  const enforceColorIdentity = result.isCommanderLike;
 
   for (const suggestion of result.suggestions) {
     if (suggestion.action === 'cut') {
@@ -165,10 +208,22 @@ export function resolveOpenAISuggestions(
 
     if (!card || existingCardIds.has(card.id)) continue;
 
+    // Color identity validation — only for commander/brawl formats
+    if (enforceColorIdentity && !fitsColorIdentity(card, deckColorSet)) continue;
+
+    // Format legality check — always applies
+    if (format && card.legalities) {
+      try {
+        const legalities = JSON.parse(card.legalities);
+        const status = legalities[format];
+        if (status && status !== 'legal' && status !== 'restricted') continue;
+      } catch {}
+    }
+
     adds.push({
       card,
       reason: suggestion.reason,
-      score: 95, // High score for GPT suggestions
+      score: 95,
     });
   }
 
