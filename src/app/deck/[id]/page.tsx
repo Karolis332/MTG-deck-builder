@@ -14,6 +14,7 @@ import { PlaytestModal } from '@/components/playtest-modal';
 import { CardDetailModal } from '@/components/card-detail-modal';
 import { MatchLogPanel } from '@/components/match-log-panel';
 import { AIChatPanel } from '@/components/ai-chat-panel';
+import { ImportDialog } from '@/components/import-dialog';
 import { FORMAT_LABELS, FORMATS, COMMANDER_FORMATS, DEFAULT_DECK_SIZE } from '@/lib/constants';
 
 interface DeckData {
@@ -51,6 +52,7 @@ export default function DeckEditorPage() {
   const [activePanel, setActivePanel] = useState<'search' | 'deck'>('search');
   const [showExport, setShowExport] = useState(false);
   const [showPlaytest, setShowPlaytest] = useState(false);
+  const [showImport, setShowImport] = useState(false);
   const [selectedCard, setSelectedCard] = useState<DbCard | null>(null);
   const [editingName, setEditingName] = useState(false);
   const [deckName, setDeckName] = useState('');
@@ -504,6 +506,13 @@ export default function DeckEditorPage() {
                 Playtest
               </button>
               <button
+                onClick={() => setShowImport(true)}
+                className="flex items-center gap-1.5 rounded-lg bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+              >
+                <ImportIcon className="h-3.5 w-3.5" />
+                Import
+              </button>
+              <button
                 onClick={() => setShowExport(true)}
                 className="flex items-center gap-1.5 rounded-lg bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground transition-colors hover:bg-primary/90"
               >
@@ -809,6 +818,19 @@ export default function DeckEditorPage() {
         </div>
       </div>
 
+      <ImportDialog
+        open={showImport}
+        onClose={() => setShowImport(false)}
+        deckId={deckId}
+        deckName={deck.name}
+        onSuccess={() => {
+          // Reload deck after import
+          fetch(`/api/decks/${deckId}`)
+            .then((r) => r.json())
+            .then((data) => { if (data.deck) setDeck(data.deck); });
+        }}
+      />
+
       <ExportDialog
         open={showExport}
         onClose={() => setShowExport(false)}
@@ -859,6 +881,16 @@ function SparklesIcon({ className }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <path d="M12 3l1.912 5.813a2 2 0 001.275 1.275L21 12l-5.813 1.912a2 2 0 00-1.275 1.275L12 21l-1.912-5.813a2 2 0 00-1.275-1.275L3 12l5.813-1.912a2 2 0 001.275-1.275z" />
+    </svg>
+  );
+}
+
+function ImportIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
+      <polyline points="7,10 12,15 17,10" />
+      <line x1="12" y1="15" x2="12" y2="3" />
     </svg>
   );
 }

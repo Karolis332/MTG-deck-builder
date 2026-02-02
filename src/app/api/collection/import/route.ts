@@ -7,7 +7,7 @@ import type { CardIdentifier, ScryfallCard } from '@/lib/types';
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { text, mode = 'merge' } = body;
+    const { text, mode = 'merge', deck_id } = body;
 
     if (!text || typeof text !== 'string') {
       return NextResponse.json(
@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
     if (format === 'tsv') {
       return await handleTsvImport(text, mode);
     }
-    return await handleArenaImport(text, mode);
+    return await handleArenaImport(text, mode, deck_id ? Number(deck_id) : undefined);
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Import failed';
     return NextResponse.json({ error: message }, { status: 500 });
@@ -125,7 +125,7 @@ async function handleTsvImport(text: string, mode: string) {
 }
 
 // ── Arena export format import ──────────────────────────────────────────────
-async function handleArenaImport(text: string, mode: string) {
+async function handleArenaImport(text: string, mode: string, deckId?: number) {
   const parsed = parseArenaExport(text);
   if (parsed.length === 0) {
     return NextResponse.json(
@@ -141,7 +141,35 @@ async function handleArenaImport(text: string, mode: string) {
     return { name: line.name };
   });
 
-  const { found } = await scryfall.getCollection(identifiers);
+  const { found, not_found } = await scryfall.getCollection(identifiers);
+
+  // For cards not found by set+collector_number, retry by name only
+  // This handles cases where the set code doesn't match Scryfall's codes
+  const retryByName: CardIdentifier[] = [];
+  const notFoundNames = new Set<string>();
+  for (const nf of not_found) {
+    // Find the original parsed line for this not-found identifier
+    const originalLine = parsed.find((line) => {
+      if ('set' in nf && 'collector_number' in nf) {
+        return line.setCode?.toLowerCase() === nf.set && line.collectorNumber === nf.collector_number;
+      }
+      if ('name' in nf) {
+        return line.name.toLowerCase() === nf.name?.toLowerCase();
+      }
+      return false;
+    });
+    if (originalLine && !notFoundNames.has(originalLine.name.toLowerCase())) {
+      notFoundNames.add(originalLine.name.toLowerCase());
+      retryByName.push({ name: originalLine.name });
+    }
+  }
+
+  if (retryByName.length > 0) {
+    try {
+      const { found: retryFound } = await scryfall.getCollection(retryByName);
+      found.push(...retryFound);
+    } catch {}
+  }
 
   const db = getDb();
   const insertCard = db.prepare(`
@@ -157,11 +185,12 @@ async function handleArenaImport(text: string, mode: string) {
       updated_at = datetime('now')
   `);
 
-  if (mode === 'replace') {
+  if (mode === 'replace' && !deckId) {
     clearCollection();
   }
 
-  const cardsByName = new Map<string, (typeof found)[0]>();
+  // Build name lookup maps — handle DFCs by mapping both full and front-face names
+  const cardsByName = new Map<string, ScryfallCard>();
   db.transaction(() => {
     for (const card of found) {
       const dbCard = scryfall.scryfallToDbCard(card);
@@ -174,20 +203,54 @@ async function handleArenaImport(text: string, mode: string) {
         dbCard.price_usd_foil, dbCard.legalities, dbCard.power, dbCard.toughness,
         dbCard.loyalty, dbCard.produced_mana, dbCard.edhrec_rank, dbCard.layout
       );
+      // Map full name (e.g. "Ojer Axonil, Deepest Might // Temple of Power")
       cardsByName.set(card.name.toLowerCase(), card);
+      // Also map front face name only for DFCs (e.g. "Ojer Axonil, Deepest Might")
+      if (card.name.includes(' // ')) {
+        const frontFace = card.name.split(' // ')[0].trim().toLowerCase();
+        if (!cardsByName.has(frontFace)) {
+          cardsByName.set(frontFace, card);
+        }
+      }
     }
   })();
 
   let imported = 0;
   const failed: string[] = [];
 
-  for (const line of parsed) {
-    const matchedCard = cardsByName.get(line.name.toLowerCase());
-    if (matchedCard) {
-      upsertCollectionCard(matchedCard.id, line.quantity, false);
-      imported++;
-    } else {
-      failed.push(line.name);
+  // Prepare deck card insert if importing to a deck
+  const insertDeckCard = deckId
+    ? db.prepare(`
+        INSERT INTO deck_cards (deck_id, card_id, quantity, board)
+        VALUES (?, ?, ?, ?)
+        ON CONFLICT(deck_id, card_id, board) DO UPDATE SET
+          quantity = quantity + excluded.quantity
+      `)
+    : null;
+
+  const deckTransaction = deckId ? db.transaction((lines: typeof parsed) => {
+    for (const line of lines) {
+      const matchedCard = cardsByName.get(line.name.toLowerCase());
+      if (matchedCard) {
+        insertDeckCard!.run(deckId, matchedCard.id, line.quantity, line.board || 'main');
+        imported++;
+      } else {
+        failed.push(line.name);
+      }
+    }
+  }) : null;
+
+  if (deckId && deckTransaction) {
+    deckTransaction(parsed);
+  } else {
+    for (const line of parsed) {
+      const matchedCard = cardsByName.get(line.name.toLowerCase());
+      if (matchedCard) {
+        upsertCollectionCard(matchedCard.id, line.quantity, false);
+        imported++;
+      } else {
+        failed.push(line.name);
+      }
     }
   }
 

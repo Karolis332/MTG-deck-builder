@@ -7,12 +7,17 @@ interface ImportDialogProps {
   open: boolean;
   onClose: () => void;
   onSuccess?: (result: { imported: number; failed: string[]; total: number }) => void;
+  /** When set, shows "This Deck" tab that imports directly into the deck */
+  deckId?: number;
+  deckName?: string;
 }
 
-export function ImportDialog({ open, onClose, onSuccess }: ImportDialogProps) {
+export function ImportDialog({ open, onClose, onSuccess, deckId, deckName }: ImportDialogProps) {
   const [text, setText] = useState('');
   const [mode, setMode] = useState<'merge' | 'replace'>('merge');
-  const [importType, setImportType] = useState<'collection' | 'deck'>('collection');
+  const [importType, setImportType] = useState<'collection' | 'deck' | 'this-deck'>(
+    deckId ? 'this-deck' : 'collection'
+  );
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<{ imported: number; failed: string[]; total: number } | null>(null);
   const [error, setError] = useState('');
@@ -42,6 +47,7 @@ export function ImportDialog({ open, onClose, onSuccess }: ImportDialogProps) {
 
     try {
       if (importType === 'collection') {
+        // Import to collection
         const res = await fetch('/api/collection/import', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -51,8 +57,19 @@ export function ImportDialog({ open, onClose, onSuccess }: ImportDialogProps) {
         if (!res.ok) throw new Error(data.error || 'Import failed');
         setResult(data);
         onSuccess?.(data);
+      } else if (importType === 'this-deck' && deckId) {
+        // Import directly into the current deck
+        const res = await fetch('/api/collection/import', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ text, mode: 'merge', deck_id: deckId }),
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Import failed');
+        setResult(data);
+        onSuccess?.(data);
       } else {
-        // Import as a new deck
+        // Import as a new deck: create deck then import cards into it
         const deckRes = await fetch('/api/decks', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -61,11 +78,11 @@ export function ImportDialog({ open, onClose, onSuccess }: ImportDialogProps) {
         const deckData = await deckRes.json();
         if (!deckRes.ok) throw new Error(deckData.error || 'Failed to create deck');
 
-        // Parse and add cards
+        const newDeckId = deckData.deck?.id;
         const importRes = await fetch('/api/collection/import', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ text, mode: 'merge' }),
+          body: JSON.stringify({ text, mode: 'merge', deck_id: newDeckId }),
         });
         const importData = await importRes.json();
         if (!importRes.ok) throw new Error(importData.error || 'Import failed');
@@ -108,20 +125,41 @@ export function ImportDialog({ open, onClose, onSuccess }: ImportDialogProps) {
 
         {/* Import type toggle */}
         <div className="mb-3 flex rounded-lg bg-accent/50 p-0.5">
-          {(['collection', 'deck'] as const).map((type) => (
+          {deckId && (
             <button
-              key={type}
-              onClick={() => setImportType(type)}
+              onClick={() => setImportType('this-deck')}
               className={cn(
                 'flex-1 rounded-md px-3 py-1.5 text-sm font-medium transition-colors',
-                importType === type
+                importType === 'this-deck'
                   ? 'bg-card text-foreground shadow-sm'
                   : 'text-muted-foreground hover:text-foreground'
               )}
             >
-              {type === 'collection' ? 'Collection' : 'New Deck'}
+              {deckName ? `${deckName.slice(0, 16)}` : 'This Deck'}
             </button>
-          ))}
+          )}
+          <button
+            onClick={() => setImportType('collection')}
+            className={cn(
+              'flex-1 rounded-md px-3 py-1.5 text-sm font-medium transition-colors',
+              importType === 'collection'
+                ? 'bg-card text-foreground shadow-sm'
+                : 'text-muted-foreground hover:text-foreground'
+            )}
+          >
+            Collection
+          </button>
+          <button
+            onClick={() => setImportType('deck')}
+            className={cn(
+              'flex-1 rounded-md px-3 py-1.5 text-sm font-medium transition-colors',
+              importType === 'deck'
+                ? 'bg-card text-foreground shadow-sm'
+                : 'text-muted-foreground hover:text-foreground'
+            )}
+          >
+            New Deck
+          </button>
         </div>
 
         {/* Text area */}
