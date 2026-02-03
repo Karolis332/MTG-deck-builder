@@ -1,14 +1,17 @@
 /**
- * TypeScript port of scripts/arena_log_parser.py
+ * MTG Arena Player.log parser
  *
- * Parses MTG Arena Player.log files to extract:
+ * Parses the Arena log to extract:
  * - Match data (results, deck submissions, cards played)
  * - Collection data (PlayerInventory.GetPlayerCardsV3)
  *
- * Arena log format:
- *   ==> MethodName(requestId): {json}
- *   <== MethodName(requestId): {json}
- *   [UnityCrossThreadLogger]{json}
+ * Current Arena log format (2025+):
+ *   [UnityCrossThreadLogger]==> MethodName {"id":"...","request":"..."}
+ *   <== MethodName(requestId)
+ *   { "transactionId": "...", "greToClientEvent": {...} }
+ *   [UnityCrossThreadLogger]Connecting to matchId ...
+ *
+ * JSON payloads appear on standalone lines after the logger header lines.
  */
 
 // ── Types ────────────────────────────────────────────────────────────────────
@@ -34,10 +37,19 @@ export interface ArenaLogResult {
 
 // ── JSON Block Extraction ────────────────────────────────────────────────────
 
-const JSON_LINE_PATTERN =
+// Old format: ==> Method(id): {json} or <== Method(id): {json}
+const METHOD_WITH_PARENS =
   /(?:==>|<==)\s+(\w+(?:\.\w+)*)\s*\([^)]*\)\s*:\s*(\{.*)/;
 
-const STANDALONE_JSON = /\[UnityCrossThreadLogger\]\s*(\{.*)/;
+// New format: [UnityCrossThreadLogger]==> MethodName {json}
+const METHOD_NEW_FORMAT =
+  /\[UnityCrossThreadLogger\]\s*(?:==>|<==)\s+(\w+(?:\.\w+)*)\s+(\{.*)/;
+
+// Standalone JSON with logger prefix: [UnityCrossThreadLogger]{json}
+const STANDALONE_WITH_PREFIX = /\[UnityCrossThreadLogger\]\s*(\{.*)/;
+
+// Bare JSON line (common in current format — game events on their own line)
+const BARE_JSON = /^(\s*\{.*)/;
 
 /**
  * Collect a potentially multi-line JSON string until braces balance.
@@ -69,31 +81,61 @@ export function extractJsonBlocks(logText: string): JsonBlock[] {
   while (i < lines.length) {
     const line = lines[i];
 
-    // Try method call pattern: ==> Method(id): {json}  or  <== Method(id): {json}
-    const methodMatch = JSON_LINE_PATTERN.exec(line);
-    if (methodMatch) {
-      const method = methodMatch[1];
-      const jsonStr = collectJson(methodMatch[2], lines, i + 1);
+    // Old format: ==> Method(id): {json}  or  <== Method(id): {json}
+    const oldMatch = METHOD_WITH_PARENS.exec(line);
+    if (oldMatch) {
+      const method = oldMatch[1];
+      const jsonStr = collectJson(oldMatch[2], lines, i + 1);
       try {
-        const data = JSON.parse(jsonStr);
-        blocks.push([method, data]);
-      } catch {
-        // malformed JSON, skip
-      }
+        blocks.push([method, JSON.parse(jsonStr)]);
+      } catch { /* skip */ }
       i++;
       continue;
     }
 
-    // Try standalone JSON: [UnityCrossThreadLogger]{json}
-    const standaloneMatch = STANDALONE_JSON.exec(line);
-    if (standaloneMatch) {
+    // New format: [UnityCrossThreadLogger]==> MethodName {json}
+    const newMatch = METHOD_NEW_FORMAT.exec(line);
+    if (newMatch) {
+      const method = newMatch[1];
+      const jsonStr = collectJson(newMatch[2], lines, i + 1);
+      try {
+        blocks.push([method, JSON.parse(jsonStr)]);
+      } catch { /* skip */ }
+      i++;
+      continue;
+    }
+
+    // [UnityCrossThreadLogger]{json} (standalone with prefix)
+    const standaloneMatch = STANDALONE_WITH_PREFIX.exec(line);
+    if (standaloneMatch && standaloneMatch[1].startsWith('{')) {
       const jsonStr = collectJson(standaloneMatch[1], lines, i + 1);
       try {
+        blocks.push(['standalone', JSON.parse(jsonStr)]);
+      } catch { /* skip */ }
+      i++;
+      continue;
+    }
+
+    // Bare JSON line (no prefix — current Arena format for game events)
+    const bareMatch = BARE_JSON.exec(line);
+    if (bareMatch) {
+      const jsonStr = collectJson(bareMatch[1], lines, i + 1);
+      try {
         const data = JSON.parse(jsonStr);
-        blocks.push(['standalone', data]);
-      } catch {
-        // malformed JSON, skip
-      }
+        // Only accept objects that look like Arena events (have transactionId or known keys)
+        if (
+          typeof data === 'object' &&
+          data !== null &&
+          ('transactionId' in data ||
+            'greToClientEvent' in data ||
+            'matchGameRoomStateChangedEvent' in data ||
+            'authenticateResponse' in data ||
+            'Courses' in data ||
+            'MatchesV3' in data)
+        ) {
+          blocks.push(['standalone', data]);
+        }
+      } catch { /* skip */ }
       i++;
       continue;
     }
@@ -111,165 +153,275 @@ interface DeckCard {
   qty: number;
 }
 
-interface MatchBuildInput {
+interface MatchContext {
   matchId: string;
-  events: Record<string, unknown>[];
-  deck: DeckCard[] | null;
   playerName: string | null;
-}
-
-function buildMatch(input: MatchBuildInput): ArenaMatch | null {
-  const { matchId, events, deck, playerName } = input;
-  let result: 'win' | 'loss' | 'draw' | null = null;
-  let turns = 0;
-  const cardsPlayed = new Set<string>();
-  const opponentCards = new Set<string>();
-
-  for (const event of events) {
-    // Extract result from match complete
-    if ('_matchComplete' in event) {
-      const mc = event._matchComplete as Record<string, unknown>;
-      const resultStr = (mc.result ?? mc.matchResult ?? '') as string;
-      if (typeof resultStr === 'string') {
-        if (resultStr.includes('Win') || resultStr === 'ResultType_Win') {
-          result = 'win';
-        } else if (resultStr.includes('Loss') || resultStr === 'ResultType_Loss') {
-          result = 'loss';
-        } else if (resultStr.includes('Draw')) {
-          result = 'draw';
-        }
-      }
-    }
-
-    // Extract game state info
-    if ('gameStateMessage' in event) {
-      const gsm = event.gameStateMessage as Record<string, unknown>;
-      const turnInfo = gsm.turnInfo as Record<string, unknown> | undefined;
-      const t = (turnInfo?.turnNumber as number) || 0;
-      if (t > turns) turns = t;
-    }
-
-    // Extract cards played from game objects
-    if ('type' in event && event.type === 'GREMessageType_GameStateMessage') {
-      const gsm = (event.gameStateMessage ?? {}) as Record<string, unknown>;
-      const gameObjects = (gsm.gameObjects ?? []) as Array<Record<string, unknown>>;
-      for (const go of gameObjects) {
-        const grpId = go.grpId as number | undefined;
-        if (!grpId) continue;
-        if (go.ownerSeatId === 1) {
-          cardsPlayed.add(String(grpId));
-        } else if (go.ownerSeatId === 2) {
-          opponentCards.add(String(grpId));
-        }
-      }
-    }
-  }
-
-  if (!result) return null;
-
-  return {
-    matchId,
-    playerName,
-    opponentName: null,
-    result,
-    format: null,
-    turns,
-    deckCards: deck,
-    cardsPlayed: Array.from(cardsPlayed),
-    opponentCardsSeen: Array.from(opponentCards),
-  };
+  opponentName: string | null;
+  playerSeatId: number;
+  playerTeamId: number;
+  format: string | null;
+  deck: DeckCard[] | null;
+  turns: number;
+  cardsPlayed: Set<string>;
+  opponentCards: Set<string>;
+  result: 'win' | 'loss' | 'draw' | null;
 }
 
 /**
- * Extract matches from parsed JSON blocks using a state machine.
+ * Extract matches from parsed JSON blocks.
  */
 export function extractMatches(blocks: JsonBlock[]): ArenaMatch[] {
   const matches: ArenaMatch[] = [];
-  let currentDeck: DeckCard[] | null = null;
-  let currentMatchId: string | null = null;
-  let currentEvents: Record<string, unknown>[] = [];
   let playerName: string | null = null;
+  let currentMatch: MatchContext | null = null;
+  const seenMatchIds = new Set<string>();
 
   for (const [method, data] of blocks) {
-    // Detect player name
-    if ('screenName' in data && typeof data.screenName === 'string') {
-      playerName = data.screenName;
-    } else if ('playerName' in data && typeof data.playerName === 'string') {
-      playerName = data.playerName;
+    // Detect player name from authenticateResponse
+    if ('authenticateResponse' in data) {
+      const auth = data.authenticateResponse as Record<string, unknown>;
+      if (typeof auth.screenName === 'string') {
+        playerName = auth.screenName;
+      }
     }
 
-    // Deck submission
+    // Also detect screenName at top level
+    if ('screenName' in data && typeof data.screenName === 'string') {
+      playerName = data.screenName;
+    }
+
+    // Match room state — contains matchId, player info, format, and final result
+    if ('matchGameRoomStateChangedEvent' in data) {
+      const event = data.matchGameRoomStateChangedEvent as Record<string, unknown>;
+      // Arena format: gameRoomConfig and stateType can be directly in the event
+      // or nested under gameRoomInfo depending on the Arena version
+      const roomInfo = (event.gameRoomInfo ?? event) as Record<string, unknown>;
+
+      const config = roomInfo.gameRoomConfig as Record<string, unknown> | undefined;
+      const stateType = roomInfo.stateType as string | undefined;
+
+      if (config) {
+        const matchId = config.matchId as string | undefined;
+        const reservedPlayers = (config.reservedPlayers ?? []) as Array<Record<string, unknown>>;
+
+        if (matchId && !currentMatch) {
+          // Initialize match context
+          let pName = playerName;
+          let oName: string | null = null;
+          let pSeatId = 1;
+          let pTeamId = 1;
+          let format: string | null = null;
+
+          for (const rp of reservedPlayers) {
+            const rpName = rp.playerName as string | undefined;
+            const rpSeatId = rp.systemSeatId as number | undefined;
+            const rpTeamId = rp.teamId as number | undefined;
+            const rpEventId = rp.eventId as string | undefined;
+
+            if (rpName === playerName || (!playerName && rpSeatId === 1)) {
+              pName = rpName ?? pName;
+              pSeatId = rpSeatId ?? 1;
+              pTeamId = rpTeamId ?? 1;
+              if (rpEventId) format = rpEventId;
+            } else {
+              oName = rpName ?? null;
+            }
+          }
+
+          // If we couldn't identify who we are, use seat 1 as player
+          if (!pName && reservedPlayers.length >= 2) {
+            const rp0 = reservedPlayers[0];
+            const rp1 = reservedPlayers[1];
+            pName = rp0.playerName as string ?? null;
+            oName = rp1.playerName as string ?? null;
+            pSeatId = (rp0.systemSeatId as number) ?? 1;
+            pTeamId = (rp0.teamId as number) ?? 1;
+            format = (rp0.eventId as string) ?? null;
+          }
+
+          currentMatch = {
+            matchId,
+            playerName: pName,
+            opponentName: oName,
+            playerSeatId: pSeatId,
+            playerTeamId: pTeamId,
+            format,
+            deck: null,
+            turns: 0,
+            cardsPlayed: new Set(),
+            opponentCards: new Set(),
+            result: null,
+          };
+        }
+
+        // Check for final match result
+        const finalResult = roomInfo.finalMatchResult as Record<string, unknown> | undefined;
+        if (finalResult && currentMatch && stateType === 'MatchGameRoomStateType_MatchCompleted') {
+          const resultList = (finalResult.resultList ?? []) as Array<Record<string, unknown>>;
+
+          for (const r of resultList) {
+            if (r.scope === 'MatchScope_Match') {
+              const winningTeamId = r.winningTeamId as number | undefined;
+              const resultType = r.result as string | undefined;
+
+              if (resultType === 'ResultType_Draw') {
+                currentMatch.result = 'draw';
+              } else if (winningTeamId === currentMatch.playerTeamId) {
+                currentMatch.result = 'win';
+              } else if (winningTeamId != null) {
+                currentMatch.result = 'loss';
+              }
+              break;
+            }
+          }
+
+          // Finalize match
+          if (currentMatch.result && !seenMatchIds.has(currentMatch.matchId)) {
+            seenMatchIds.add(currentMatch.matchId);
+            matches.push({
+              matchId: currentMatch.matchId,
+              playerName: currentMatch.playerName,
+              opponentName: currentMatch.opponentName,
+              result: currentMatch.result,
+              format: currentMatch.format,
+              turns: currentMatch.turns,
+              deckCards: currentMatch.deck,
+              cardsPlayed: Array.from(currentMatch.cardsPlayed),
+              opponentCardsSeen: Array.from(currentMatch.opponentCards),
+            });
+          }
+          currentMatch = null;
+          continue;
+        }
+      }
+    }
+
+    // Process game events within current match
+    if (!currentMatch) continue;
+
+    // greToClientEvent — contains game state messages
+    if ('greToClientEvent' in data) {
+      const gre = data.greToClientEvent as Record<string, unknown>;
+      const messages = (gre.greToClientMessages ?? []) as Array<Record<string, unknown>>;
+
+      for (const msg of messages) {
+        // Extract deck from connect response
+        if (msg.connectResp) {
+          const resp = msg.connectResp as Record<string, unknown>;
+          const deckMsg = resp.deckMessage as Record<string, unknown> | undefined;
+          if (deckMsg) {
+            const deckCards = (deckMsg.deckCards ?? []) as number[];
+            const commanderCards = (deckMsg.commanderCards ?? []) as number[];
+            const cardCounts = new Map<number, number>();
+            for (const cid of [...deckCards, ...commanderCards]) {
+              cardCounts.set(cid, (cardCounts.get(cid) || 0) + 1);
+            }
+            currentMatch.deck = Array.from(cardCounts.entries()).map(([id, qty]) => ({
+              id: String(id),
+              qty,
+            }));
+          }
+        }
+
+        // Extract game state info
+        const gsm = msg.gameStateMessage as Record<string, unknown> | undefined;
+        if (gsm) {
+          // Turn info
+          const turnInfo = gsm.turnInfo as Record<string, unknown> | undefined;
+          const t = (turnInfo?.turnNumber as number) || 0;
+          if (t > currentMatch.turns) currentMatch.turns = t;
+
+          // Game objects — track cards by owner
+          const gameObjects = (gsm.gameObjects ?? []) as Array<Record<string, unknown>>;
+          for (const go of gameObjects) {
+            const grpId = go.grpId as number | undefined;
+            if (!grpId) continue;
+            if (go.ownerSeatId === currentMatch.playerSeatId) {
+              currentMatch.cardsPlayed.add(String(grpId));
+            } else {
+              currentMatch.opponentCards.add(String(grpId));
+            }
+          }
+
+          // Also check gameInfo for match result (backup detection)
+          const gameInfo = gsm.gameInfo as Record<string, unknown> | undefined;
+          if (gameInfo && gameInfo.matchState === 'MatchState_MatchComplete' && !currentMatch.result) {
+            const results = (gameInfo.results ?? []) as Array<Record<string, unknown>>;
+            for (const r of results) {
+              if (r.scope === 'MatchScope_Match') {
+                const winTeam = r.winningTeamId as number | undefined;
+                const resType = r.result as string | undefined;
+                if (resType === 'ResultType_Draw') {
+                  currentMatch.result = 'draw';
+                } else if (winTeam === currentMatch.playerTeamId) {
+                  currentMatch.result = 'win';
+                } else if (winTeam != null) {
+                  currentMatch.result = 'loss';
+                }
+                break;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    // Legacy: Deck submission events (older log format)
     if (['Event.DeckSubmitV3', 'DeckSubmit', 'DeckSubmitV3'].includes(method)) {
       const deckData = (data.CourseDeck ?? data) as Record<string, unknown>;
       const mainDeck = (deckData.mainDeck ?? deckData.MainDeck ?? []) as unknown[];
-      currentDeck = [];
+      const deck: DeckCard[] = [];
       for (const entry of mainDeck) {
         if (typeof entry === 'object' && entry !== null) {
           const e = entry as Record<string, unknown>;
           const cardId = String(e.cardId ?? e.Id ?? '');
           const qty = (e.quantity ?? e.Quantity ?? 1) as number;
-          currentDeck.push({ id: cardId, qty });
+          deck.push({ id: cardId, qty });
         } else if (typeof entry === 'number') {
-          currentDeck.push({ id: String(entry), qty: 1 });
+          deck.push({ id: String(entry), qty: 1 });
         }
       }
+      if (deck.length > 0) currentMatch.deck = deck;
     }
 
-    // Match start — new matchId detected
-    if ('matchId' in data && currentMatchId !== data.matchId) {
-      // Save previous match if exists
-      if (currentMatchId && currentEvents.length > 0) {
-        const match = buildMatch({
-          matchId: currentMatchId,
-          events: currentEvents,
-          deck: currentDeck,
-          playerName,
-        });
-        if (match) matches.push(match);
-      }
-      currentMatchId = data.matchId as string;
-      currentEvents = [];
+    // Legacy: matchId at top level (older format)
+    if ('matchId' in data && typeof data.matchId === 'string') {
+      // Just update matchId if needed
     }
 
-    // Collect game events
-    if ('greToClientEvent' in data) {
-      const gre = data.greToClientEvent as Record<string, unknown>;
-      const messages = (gre.greToClientMessages ?? []) as Record<string, unknown>[];
-      currentEvents.push(...messages);
-    } else if ('gameStateMessage' in data) {
-      currentEvents.push(data as Record<string, unknown>);
-    }
-
-    // Match complete
+    // Legacy: matchComplete / MatchComplete
     if (
       ['MatchComplete', 'Event.MatchComplete'].includes(method) ||
       'matchComplete' in data
     ) {
-      const resultData = (data.matchComplete ?? data) as Record<string, unknown>;
-      if (currentMatchId) {
-        currentEvents.push({ _matchComplete: resultData });
-        const match = buildMatch({
-          matchId: currentMatchId,
-          events: currentEvents,
-          deck: currentDeck,
-          playerName,
-        });
-        if (match) matches.push(match);
-        currentMatchId = null;
-        currentEvents = [];
+      const mc = (data.matchComplete ?? data) as Record<string, unknown>;
+      const resultStr = (mc.result ?? mc.matchResult ?? '') as string;
+      if (typeof resultStr === 'string' && !currentMatch.result) {
+        if (resultStr.includes('Win') || resultStr === 'ResultType_Win') {
+          currentMatch.result = 'win';
+        } else if (resultStr.includes('Loss') || resultStr === 'ResultType_Loss') {
+          currentMatch.result = 'loss';
+        } else if (resultStr.includes('Draw')) {
+          currentMatch.result = 'draw';
+        }
       }
     }
   }
 
-  // Handle last match
-  if (currentMatchId && currentEvents.length > 0) {
-    const match = buildMatch({
-      matchId: currentMatchId,
-      events: currentEvents,
-      deck: currentDeck,
-      playerName,
+  // Handle last match if it wasn't finalized by a MatchCompleted event
+  if (currentMatch && currentMatch.result && !seenMatchIds.has(currentMatch.matchId)) {
+    seenMatchIds.add(currentMatch.matchId);
+    matches.push({
+      matchId: currentMatch.matchId,
+      playerName: currentMatch.playerName,
+      opponentName: currentMatch.opponentName,
+      result: currentMatch.result,
+      format: currentMatch.format,
+      turns: currentMatch.turns,
+      deckCards: currentMatch.deck,
+      cardsPlayed: Array.from(currentMatch.cardsPlayed),
+      opponentCardsSeen: Array.from(currentMatch.opponentCards),
     });
-    if (match) matches.push(match);
   }
 
   return matches;
@@ -288,18 +440,14 @@ export function extractCollection(
   let lastCollection: Record<string, number> | null = null;
 
   for (const [method, data] of blocks) {
-    // The collection response comes from PlayerInventory.GetPlayerCardsV3
     if (
       method === 'PlayerInventory.GetPlayerCardsV3' ||
       method === 'PlayerInventory_GetPlayerCardsV3'
     ) {
-      // The response payload is { "arena_id_int": qty, ... }
-      // Keys are string representations of arena IDs, values are quantities
       const collection: Record<string, number> = {};
       let hasEntries = false;
 
       for (const [key, value] of Object.entries(data)) {
-        // Keys should be numeric strings, values should be numbers
         if (/^\d+$/.test(key) && typeof value === 'number') {
           collection[key] = value;
           hasEntries = true;

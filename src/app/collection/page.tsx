@@ -103,11 +103,11 @@ export default function CollectionPage() {
         <div className="mb-4 rounded-2xl border border-border bg-card p-4 animate-slide-up">
           <CollectionFilters
             selectedColors={selectedColors}
-            onColorsChange={setSelectedColors}
+            onColorsChange={(c) => { setSelectedColors(c); setPage(1); }}
             selectedTypes={selectedTypes}
-            onTypesChange={setSelectedTypes}
+            onTypesChange={(t) => { setSelectedTypes(t); setPage(1); }}
             selectedRarities={selectedRarities}
-            onRaritiesChange={setSelectedRarities}
+            onRaritiesChange={(r) => { setSelectedRarities(r); setPage(1); }}
           />
         </div>
       )}

@@ -352,10 +352,9 @@ export function getCollection(
     params.push(...filters.types.map((t) => `%${t}%`));
   }
   if (filters?.colors?.length) {
-    for (const color of filters.colors) {
-      conditions.push('c.color_identity LIKE ?');
-      params.push(`%${color}%`);
-    }
+    const colorConditions = filters.colors.map(() => 'c.color_identity LIKE ?');
+    conditions.push(`(${colorConditions.join(' OR ')})`);
+    params.push(...filters.colors.map((c) => `%${c}%`));
   }
 
   const where = conditions.length ? `WHERE ${conditions.join(' AND ')}` : '';
@@ -363,18 +362,22 @@ export function getCollection(
   const total = (
     db
       .prepare(
-        `SELECT COUNT(*) as count FROM collection col JOIN cards c ON col.card_id = c.id ${where}`
+        `SELECT COUNT(DISTINCT col.card_id) as count FROM collection col JOIN cards c ON col.card_id = c.id ${where}`
       )
       .get(...params) as { count: number }
   ).count;
 
   const cards = db
     .prepare(
-      `SELECT col.*, c.*,
-              col.id as collection_id, col.quantity, col.foil, col.source
+      `SELECT c.*,
+              MIN(col.id) as collection_id,
+              SUM(col.quantity) as quantity,
+              MAX(col.foil) as foil,
+              col.source
        FROM collection col
        JOIN cards c ON col.card_id = c.id
        ${where}
+       GROUP BY col.card_id
        ORDER BY c.name
        LIMIT ? OFFSET ?`
     )

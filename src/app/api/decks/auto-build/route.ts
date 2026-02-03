@@ -2,9 +2,13 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createDeck, addCardToDeck, getCardByName } from '@/lib/db';
 import { autoBuildDeck } from '@/lib/deck-builder-ai';
 import { COMMANDER_FORMATS } from '@/lib/constants';
+import { getAuthUser, unauthorizedResponse } from '@/lib/auth-middleware';
 
 export async function POST(request: NextRequest) {
   try {
+    const authUser = await getAuthUser(request);
+    if (!authUser) return unauthorizedResponse();
+
     const body = await request.json();
     const {
       name = 'AI Built Deck',
@@ -51,7 +55,7 @@ export async function POST(request: NextRequest) {
     const description = isCmdFormat && commanderName
       ? `Commander: ${commanderName}. ${result.strategy} strategy${tribalLabel}. Themes: ${result.themes.join(', ') || 'general goodstuff'}`
       : `Auto-built ${result.strategy} deck. Themes: ${result.themes.join(', ') || 'general goodstuff'}`;
-    const deck = createDeck(name, format, description);
+    const deck = createDeck(name, format, description, authUser.userId);
     const deckId = Number(deck.id);
 
     // Add commander to commander zone

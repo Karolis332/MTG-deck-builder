@@ -50,9 +50,12 @@ export default function DeckBuilderPage() {
       .finally(() => setLoading(false));
   }, []);
 
+  const [createError, setCreateError] = useState('');
+
   const handleCreate = async () => {
     if (!newName.trim()) return;
     setCreating(true);
+    setCreateError('');
     try {
       const res = await fetch('/api/decks', {
         method: 'POST',
@@ -60,10 +63,12 @@ export default function DeckBuilderPage() {
         body: JSON.stringify({ name: newName.trim(), format: newFormat }),
       });
       const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Failed to create deck');
       if (data.deck) {
         router.push(`/deck/${data.deck.id}`);
       }
-    } catch {
+    } catch (err) {
+      setCreateError(err instanceof Error ? err.message : 'Failed to create deck');
       setCreating(false);
     }
   };
@@ -206,6 +211,7 @@ export default function DeckBuilderPage() {
                 onClick={() => {
                   setShowNewDeck(false);
                   setNewName('');
+                  setCreateError('');
                 }}
                 className="rounded-lg px-3 py-2 text-sm text-muted-foreground hover:text-foreground"
               >
@@ -213,6 +219,9 @@ export default function DeckBuilderPage() {
               </button>
             </div>
           </div>
+          {createError && (
+            <p className="mt-2 text-sm text-red-500">{createError}</p>
+          )}
         </div>
       )}
 

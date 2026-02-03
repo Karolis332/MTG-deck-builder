@@ -8,6 +8,41 @@ import {
   SAMPLE_COLLECTION_LOG,
 } from '../arena-log-reader';
 
+// Helper to build a matchGameRoomStateChangedEvent JSON line
+function roomStateEvent(
+  matchId: string,
+  stateType: string,
+  player: { name: string; seatId: number; teamId: number; eventId?: string },
+  opponent: { name: string; seatId: number; teamId: number },
+  finalResult?: { winningTeamId: number }
+): string {
+  const reserved = [
+    { userId: 'p1', playerName: player.name, systemSeatId: player.seatId, teamId: player.teamId, eventId: player.eventId || 'Play_Standard' },
+    { userId: 'p2', playerName: opponent.name, systemSeatId: opponent.seatId, teamId: opponent.teamId, eventId: player.eventId || 'Play_Standard' },
+  ];
+  const roomInfo: Record<string, unknown> = {
+    gameRoomConfig: { reservedPlayers: reserved, matchId },
+    stateType,
+  };
+  if (finalResult) {
+    roomInfo.finalMatchResult = {
+      matchId,
+      resultList: [
+        { scope: 'MatchScope_Game', result: 'ResultType_WinLoss', winningTeamId: finalResult.winningTeamId },
+        { scope: 'MatchScope_Match', result: 'ResultType_WinLoss', winningTeamId: finalResult.winningTeamId },
+      ],
+    };
+  }
+  return JSON.stringify({ transactionId: 'tx1', matchGameRoomStateChangedEvent: roomInfo });
+}
+
+function greEvent(matchId: string, messages: unknown[]): string {
+  return JSON.stringify({ transactionId: 'tx2', greToClientEvent: { greToClientMessages: messages } });
+}
+
+const DEFAULT_PLAYER = { name: 'TestPlayer', seatId: 1, teamId: 1 };
+const DEFAULT_OPPONENT = { name: 'Opponent', seatId: 2, teamId: 2 };
+
 // ── extractJsonBlocks ────────────────────────────────────────────────────────
 
 describe('extractJsonBlocks', () => {
@@ -33,6 +68,20 @@ describe('extractJsonBlocks', () => {
     expect(blocks).toHaveLength(1);
     expect(blocks[0][0]).toBe('standalone');
     expect(blocks[0][1]).toEqual({ matchId: 'abc-123' });
+  });
+
+  it('extracts bare JSON lines with transactionId', () => {
+    const log = '{ "transactionId": "abc", "greToClientEvent": {} }';
+    const blocks = extractJsonBlocks(log);
+    expect(blocks).toHaveLength(1);
+    expect(blocks[0][1]).toHaveProperty('transactionId');
+  });
+
+  it('extracts new format [UnityCrossThreadLogger]==> Method {json}', () => {
+    const log = '[UnityCrossThreadLogger]==> EventGetCoursesV2 {"id":"abc","request":"{}"}';
+    const blocks = extractJsonBlocks(log);
+    expect(blocks).toHaveLength(1);
+    expect(blocks[0][0]).toBe('EventGetCoursesV2');
   });
 
   it('handles multi-line JSON', () => {
@@ -78,54 +127,109 @@ describe('extractJsonBlocks', () => {
 // ── extractMatches ───────────────────────────────────────────────────────────
 
 describe('extractMatches', () => {
-  it('extracts win and loss from sample log', () => {
-    const blocks = extractJsonBlocks(SAMPLE_LOG);
-    const matches = extractMatches(blocks);
-    expect(matches).toHaveLength(2);
-    expect(matches[0].matchId).toBe('match-001-test');
-    expect(matches[0].result).toBe('win');
-    expect(matches[1].matchId).toBe('match-002-test');
-    expect(matches[1].result).toBe('loss');
-  });
-
-  it('extracts deck submission', () => {
-    const blocks = extractJsonBlocks(SAMPLE_LOG);
-    const matches = extractMatches(blocks);
-    // Deck was submitted before the first match
-    expect(matches[0].deckCards).toBeDefined();
-    expect(matches[0].deckCards).toEqual([
-      { id: '67890', qty: 4 },
-      { id: '67891', qty: 3 },
-    ]);
-  });
-
-  it('extracts turn count', () => {
-    const blocks = extractJsonBlocks(SAMPLE_LOG);
-    const matches = extractMatches(blocks);
-    expect(matches[0].turns).toBe(1);
-    expect(matches[1].turns).toBe(5);
-  });
-
-  it('handles draw result', () => {
+  it('extracts win from current Arena format', () => {
     const log = [
-      '[UnityCrossThreadLogger]{"matchId":"draw-match","gameStateMessage":{"turnInfo":{"turnNumber":3}}}',
-      '[UnityCrossThreadLogger]==> MatchComplete(99): {"matchComplete":{"result":"ResultType_Draw"}}',
+      `[UnityCrossThreadLogger]{"authenticateResponse":{"screenName":"TestPlayer"}}`,
+      roomStateEvent('m1', 'MatchGameRoomStateType_Playing', DEFAULT_PLAYER, DEFAULT_OPPONENT),
+      roomStateEvent('m1', 'MatchGameRoomStateType_MatchCompleted', DEFAULT_PLAYER, DEFAULT_OPPONENT, { winningTeamId: 1 }),
     ].join('\n');
     const blocks = extractJsonBlocks(log);
     const matches = extractMatches(blocks);
     expect(matches).toHaveLength(1);
-    expect(matches[0].result).toBe('draw');
+    expect(matches[0].matchId).toBe('m1');
+    expect(matches[0].result).toBe('win');
+    expect(matches[0].playerName).toBe('TestPlayer');
+    expect(matches[0].opponentName).toBe('Opponent');
   });
 
-  it('detects player name from screenName', () => {
+  it('extracts loss when opponent wins', () => {
     const log = [
-      '[UnityCrossThreadLogger]{"screenName":"TestPlayer"}',
-      '[UnityCrossThreadLogger]{"matchId":"m1","gameStateMessage":{"turnInfo":{"turnNumber":1}}}',
-      '[UnityCrossThreadLogger]==> MatchComplete(1): {"matchComplete":{"result":"ResultType_Win"}}',
+      `[UnityCrossThreadLogger]{"authenticateResponse":{"screenName":"TestPlayer"}}`,
+      roomStateEvent('m2', 'MatchGameRoomStateType_Playing', DEFAULT_PLAYER, DEFAULT_OPPONENT),
+      roomStateEvent('m2', 'MatchGameRoomStateType_MatchCompleted', DEFAULT_PLAYER, DEFAULT_OPPONENT, { winningTeamId: 2 }),
     ].join('\n');
     const blocks = extractJsonBlocks(log);
     const matches = extractMatches(blocks);
-    expect(matches[0].playerName).toBe('TestPlayer');
+    expect(matches).toHaveLength(1);
+    expect(matches[0].result).toBe('loss');
+  });
+
+  it('extracts format from eventId', () => {
+    const player = { ...DEFAULT_PLAYER, eventId: 'Play_Brawl_Historic' };
+    const log = [
+      `[UnityCrossThreadLogger]{"authenticateResponse":{"screenName":"TestPlayer"}}`,
+      roomStateEvent('m3', 'MatchGameRoomStateType_Playing', player, DEFAULT_OPPONENT),
+      roomStateEvent('m3', 'MatchGameRoomStateType_MatchCompleted', player, DEFAULT_OPPONENT, { winningTeamId: 1 }),
+    ].join('\n');
+    const blocks = extractJsonBlocks(log);
+    const matches = extractMatches(blocks);
+    expect(matches[0].format).toBe('Play_Brawl_Historic');
+  });
+
+  it('extracts deck from connectResp', () => {
+    const log = [
+      `[UnityCrossThreadLogger]{"authenticateResponse":{"screenName":"TestPlayer"}}`,
+      roomStateEvent('m4', 'MatchGameRoomStateType_Playing', DEFAULT_PLAYER, DEFAULT_OPPONENT),
+      greEvent('m4', [{
+        connectResp: {
+          deckMessage: { deckCards: [111, 111, 222, 333], commanderCards: [444] },
+        },
+      }]),
+      roomStateEvent('m4', 'MatchGameRoomStateType_MatchCompleted', DEFAULT_PLAYER, DEFAULT_OPPONENT, { winningTeamId: 1 }),
+    ].join('\n');
+    const blocks = extractJsonBlocks(log);
+    const matches = extractMatches(blocks);
+    expect(matches).toHaveLength(1);
+    expect(matches[0].deckCards).toContainEqual({ id: '111', qty: 2 });
+    expect(matches[0].deckCards).toContainEqual({ id: '222', qty: 1 });
+    expect(matches[0].deckCards).toContainEqual({ id: '444', qty: 1 });
+  });
+
+  it('extracts turn count from game state messages', () => {
+    const log = [
+      `[UnityCrossThreadLogger]{"authenticateResponse":{"screenName":"TestPlayer"}}`,
+      roomStateEvent('m5', 'MatchGameRoomStateType_Playing', DEFAULT_PLAYER, DEFAULT_OPPONENT),
+      greEvent('m5', [{
+        gameStateMessage: { turnInfo: { turnNumber: 7 } },
+      }]),
+      roomStateEvent('m5', 'MatchGameRoomStateType_MatchCompleted', DEFAULT_PLAYER, DEFAULT_OPPONENT, { winningTeamId: 2 }),
+    ].join('\n');
+    const blocks = extractJsonBlocks(log);
+    const matches = extractMatches(blocks);
+    expect(matches[0].turns).toBe(7);
+  });
+
+  it('extracts cards played from game objects', () => {
+    const log = [
+      `[UnityCrossThreadLogger]{"authenticateResponse":{"screenName":"TestPlayer"}}`,
+      roomStateEvent('m6', 'MatchGameRoomStateType_Playing', DEFAULT_PLAYER, DEFAULT_OPPONENT),
+      greEvent('m6', [{
+        gameStateMessage: {
+          turnInfo: { turnNumber: 3 },
+          gameObjects: [
+            { ownerSeatId: 1, grpId: 111 },
+            { ownerSeatId: 2, grpId: 222 },
+          ],
+        },
+      }]),
+      roomStateEvent('m6', 'MatchGameRoomStateType_MatchCompleted', DEFAULT_PLAYER, DEFAULT_OPPONENT, { winningTeamId: 1 }),
+    ].join('\n');
+    const blocks = extractJsonBlocks(log);
+    const matches = extractMatches(blocks);
+    expect(matches).toHaveLength(1);
+    expect(matches[0].cardsPlayed).toContain('111');
+    expect(matches[0].opponentCardsSeen).toContain('222');
+  });
+
+  it('detects player name from authenticateResponse', () => {
+    const log = [
+      `{ "transactionId": "t1", "authenticateResponse": { "screenName": "MyName" } }`,
+      roomStateEvent('m7', 'MatchGameRoomStateType_Playing', { name: 'MyName', seatId: 1, teamId: 1 }, DEFAULT_OPPONENT),
+      roomStateEvent('m7', 'MatchGameRoomStateType_MatchCompleted', { name: 'MyName', seatId: 1, teamId: 1 }, DEFAULT_OPPONENT, { winningTeamId: 1 }),
+    ].join('\n');
+    const blocks = extractJsonBlocks(log);
+    const matches = extractMatches(blocks);
+    expect(matches[0].playerName).toBe('MyName');
   });
 
   it('returns empty array for no matches', () => {
@@ -136,49 +240,21 @@ describe('extractMatches', () => {
   });
 
   it('skips matches without results', () => {
-    const log = '[UnityCrossThreadLogger]{"matchId":"no-result","gameStateMessage":{"turnInfo":{"turnNumber":2}}}';
+    const log = roomStateEvent('no-result', 'MatchGameRoomStateType_Playing', DEFAULT_PLAYER, DEFAULT_OPPONENT);
     const blocks = extractJsonBlocks(log);
     const matches = extractMatches(blocks);
     expect(matches).toEqual([]);
   });
 
-  it('handles DeckSubmit method variant', () => {
+  it('deduplicates matches by matchId', () => {
     const log = [
-      '==> DeckSubmit(1): {"mainDeck":[{"cardId":111,"quantity":2}]}',
-      '[UnityCrossThreadLogger]{"matchId":"m-ds","gameStateMessage":{"turnInfo":{"turnNumber":1}}}',
-      '==> MatchComplete(2): {"matchComplete":{"result":"ResultType_Win"}}',
+      `[UnityCrossThreadLogger]{"authenticateResponse":{"screenName":"TestPlayer"}}`,
+      roomStateEvent('dup', 'MatchGameRoomStateType_Playing', DEFAULT_PLAYER, DEFAULT_OPPONENT),
+      roomStateEvent('dup', 'MatchGameRoomStateType_MatchCompleted', DEFAULT_PLAYER, DEFAULT_OPPONENT, { winningTeamId: 1 }),
     ].join('\n');
     const blocks = extractJsonBlocks(log);
     const matches = extractMatches(blocks);
     expect(matches).toHaveLength(1);
-    expect(matches[0].deckCards).toEqual([{ id: '111', qty: 2 }]);
-  });
-
-  it('handles integer-only mainDeck entries', () => {
-    const log = [
-      '==> Event.DeckSubmitV3(1): {"CourseDeck":{"mainDeck":[12345, 67890]}}',
-      '[UnityCrossThreadLogger]{"matchId":"m-int","gameStateMessage":{"turnInfo":{"turnNumber":1}}}',
-      '==> MatchComplete(2): {"matchComplete":{"result":"ResultType_Win"}}',
-    ].join('\n');
-    const blocks = extractJsonBlocks(log);
-    const matches = extractMatches(blocks);
-    expect(matches[0].deckCards).toEqual([
-      { id: '12345', qty: 1 },
-      { id: '67890', qty: 1 },
-    ]);
-  });
-
-  it('extracts cards played from game objects', () => {
-    const log = [
-      '[UnityCrossThreadLogger]{"matchId":"m-cards"}',
-      '[UnityCrossThreadLogger]{"type":"GREMessageType_GameStateMessage","gameStateMessage":{"turnInfo":{"turnNumber":3},"gameObjects":[{"ownerSeatId":1,"grpId":111},{"ownerSeatId":2,"grpId":222}]}}',
-      '==> MatchComplete(1): {"matchComplete":{"result":"ResultType_Win"}}',
-    ].join('\n');
-    const blocks = extractJsonBlocks(log);
-    const matches = extractMatches(blocks);
-    expect(matches).toHaveLength(1);
-    expect(matches[0].cardsPlayed).toContain('111');
-    expect(matches[0].opponentCardsSeen).toContain('222');
   });
 });
 
@@ -221,9 +297,18 @@ describe('extractCollection', () => {
 // ── parseArenaLogFile (integration) ──────────────────────────────────────────
 
 describe('parseArenaLogFile', () => {
-  it('returns both matches and null collection from match-only log', () => {
-    const result = parseArenaLogFile(SAMPLE_LOG);
+  it('returns matches from current format log', () => {
+    const log = [
+      `[UnityCrossThreadLogger]{"authenticateResponse":{"screenName":"TestPlayer"}}`,
+      roomStateEvent('m1', 'MatchGameRoomStateType_Playing', DEFAULT_PLAYER, DEFAULT_OPPONENT),
+      roomStateEvent('m1', 'MatchGameRoomStateType_MatchCompleted', DEFAULT_PLAYER, DEFAULT_OPPONENT, { winningTeamId: 1 }),
+      roomStateEvent('m2', 'MatchGameRoomStateType_Playing', DEFAULT_PLAYER, { name: 'Opp2', seatId: 2, teamId: 2 }),
+      roomStateEvent('m2', 'MatchGameRoomStateType_MatchCompleted', DEFAULT_PLAYER, { name: 'Opp2', seatId: 2, teamId: 2 }, { winningTeamId: 2 }),
+    ].join('\n');
+    const result = parseArenaLogFile(log);
     expect(result.matches).toHaveLength(2);
+    expect(result.matches[0].result).toBe('win');
+    expect(result.matches[1].result).toBe('loss');
     expect(result.collection).toBeNull();
   });
 
@@ -235,9 +320,14 @@ describe('parseArenaLogFile', () => {
   });
 
   it('returns both matches and collection from combined log', () => {
-    const combined = SAMPLE_LOG + '\n' + SAMPLE_COLLECTION_LOG;
-    const result = parseArenaLogFile(combined);
-    expect(result.matches).toHaveLength(2);
+    const log = [
+      `[UnityCrossThreadLogger]{"authenticateResponse":{"screenName":"TestPlayer"}}`,
+      roomStateEvent('m1', 'MatchGameRoomStateType_Playing', DEFAULT_PLAYER, DEFAULT_OPPONENT),
+      roomStateEvent('m1', 'MatchGameRoomStateType_MatchCompleted', DEFAULT_PLAYER, DEFAULT_OPPONENT, { winningTeamId: 1 }),
+      SAMPLE_COLLECTION_LOG,
+    ].join('\n');
+    const result = parseArenaLogFile(log);
+    expect(result.matches).toHaveLength(1);
     expect(result.collection).not.toBeNull();
   });
 

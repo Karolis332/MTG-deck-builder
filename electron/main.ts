@@ -129,8 +129,8 @@ function startNextServer(): Promise<void> {
       'next'
     );
 
-    const spawnEnv: Record<string, string> = {
-      ...process.env as Record<string, string>,
+    const spawnEnv = {
+      ...process.env,
       ELECTRON_RUN_AS_NODE: '1',
       MTG_DB_DIR: getUserDataDir(),
       PORT,
@@ -142,8 +142,9 @@ function startNextServer(): Promise<void> {
       const system32 = process.env.SystemRoot
         ? path.join(process.env.SystemRoot, 'System32')
         : 'C:\\WINDOWS\\system32';
-      if (!spawnEnv.PATH?.includes(system32)) {
-        spawnEnv.PATH = system32 + ';' + (spawnEnv.PATH ?? '');
+      const currentPath = (spawnEnv as Record<string, string | undefined>).PATH || '';
+      if (!currentPath.includes(system32)) {
+        (spawnEnv as Record<string, string | undefined>).PATH = system32 + ';' + currentPath;
       }
     }
 
