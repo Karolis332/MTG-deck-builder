@@ -6,6 +6,9 @@ import { registerIpcHandlers } from './ipc-handlers';
 let mainWindow: BrowserWindow | null = null;
 let nextServer: ChildProcess | null = null;
 
+// Allow running as root on Linux (e.g. WSL, Docker)
+app.commandLine.appendSwitch('no-sandbox');
+
 const isDev = !app.isPackaged;
 const PORT = process.env.PORT || '3000';
 

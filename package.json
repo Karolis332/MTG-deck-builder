@@ -14,7 +14,7 @@
     "test:python": "python -m pytest scripts/tests/ -v",
     "test:all": "vitest run && python -m pytest scripts/tests/ -v",
     "build:electron": "tsc -p tsconfig.electron.json",
-    "dev:electron": "concurrently \"next dev\" \"wait-on http://localhost:3000 && electron .\"",
+    "dev:electron": "concurrently \"next dev\" \"wait-on http://localhost:3000 && electron --no-sandbox .\"",
     "dist:electron": "npm run build && npm run build:electron && electron-builder",
     "postinstall": "electron-builder install-app-deps || true"
   },
