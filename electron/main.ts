@@ -1,9 +1,13 @@
 import { app, BrowserWindow } from 'electron';
 import path from 'path';
+import fs from 'fs';
 import { spawn, ChildProcess } from 'child_process';
 import { registerIpcHandlers } from './ipc-handlers';
+import { registerSetupHandlers } from './setup-handlers';
+import { runFirstBootActions } from '../src/lib/first-boot';
 
 let mainWindow: BrowserWindow | null = null;
+let setupWindow: BrowserWindow | null = null;
 let nextServer: ChildProcess | null = null;
 
 // Allow running as root on Linux (e.g. WSL, Docker)
@@ -12,7 +16,72 @@ app.commandLine.appendSwitch('no-sandbox');
 const isDev = !app.isPackaged;
 const PORT = process.env.PORT || '3000';
 
-function createWindow() {
+// ── Data directories ────────────────────────────────────────────────────
+
+function getUserDataDir(): string {
+  return path.join(app.getPath('userData'), 'data');
+}
+
+function getConfigPath(): string {
+  return path.join(app.getPath('userData'), 'app-config.json');
+}
+
+export function loadConfig(): Record<string, unknown> {
+  try {
+    const raw = fs.readFileSync(getConfigPath(), 'utf-8');
+    return JSON.parse(raw);
+  } catch {
+    return {};
+  }
+}
+
+export function saveConfig(data: Record<string, unknown>): void {
+  const existing = loadConfig();
+  const merged = { ...existing, ...data };
+  fs.writeFileSync(getConfigPath(), JSON.stringify(merged, null, 2), 'utf-8');
+}
+
+function isFirstRun(): boolean {
+  const config = loadConfig();
+  return config.setupComplete !== true;
+}
+
+// ── Windows ─────────────────────────────────────────────────────────────
+
+function createSetupWindow(): void {
+  setupWindow = new BrowserWindow({
+    width: 640,
+    height: 580,
+    resizable: false,
+    frame: true,
+    webPreferences: {
+      preload: path.join(__dirname, 'setup-preload.js'),
+      contextIsolation: true,
+      nodeIntegration: false,
+    },
+    titleBarStyle: process.platform === 'darwin' ? 'hiddenInset' : 'default',
+    title: 'MTG Deck Builder - Setup',
+    show: false,
+    backgroundColor: '#0a0a0f',
+  });
+
+  setupWindow.once('ready-to-show', () => {
+    setupWindow?.show();
+  });
+
+  // Load setup HTML from resources
+  const setupHtmlPath = isDev
+    ? path.join(__dirname, '..', 'electron', 'resources', 'setup.html')
+    : path.join(process.resourcesPath, 'setup.html');
+
+  setupWindow.loadFile(setupHtmlPath);
+
+  setupWindow.on('closed', () => {
+    setupWindow = null;
+  });
+}
+
+function createMainWindow(): void {
   mainWindow = new BrowserWindow({
     width: 1400,
     height: 900,
@@ -43,6 +112,8 @@ function createWindow() {
   }
 }
 
+// ── Next.js server ──────────────────────────────────────────────────────
+
 function startNextServer(): Promise<void> {
   return new Promise((resolve, reject) => {
     const nextBin = path.join(
@@ -56,7 +127,7 @@ function startNextServer(): Promise<void> {
       cwd: app.getAppPath(),
       env: {
         ...process.env,
-        MTG_DB_DIR: path.join(app.getPath('userData'), 'data'),
+        MTG_DB_DIR: getUserDataDir(),
         PORT,
       },
       shell: process.platform === 'win32',
@@ -75,19 +146,21 @@ function startNextServer(): Promise<void> {
 
     nextServer.on('error', reject);
 
-    // Fallback resolve after 10s in case "Ready" message is missed
-    setTimeout(resolve, 10000);
+    // Fallback resolve after 15s in case "Ready" message is missed
+    setTimeout(resolve, 15000);
   });
 }
 
-// Set DB dir env for Electron mode
-if (!isDev) {
-  process.env.MTG_DB_DIR = path.join(app.getPath('userData'), 'data');
-}
+// ── Transition from setup to main app ───────────────────────────────────
 
-app.whenReady().then(async () => {
-  registerIpcHandlers();
+export async function transitionToMainApp(): Promise<void> {
+  // Close setup window
+  if (setupWindow) {
+    setupWindow.close();
+    setupWindow = null;
+  }
 
+  // Start Next.js server if in production mode
   if (!isDev) {
     try {
       await startNextServer();
@@ -96,11 +169,59 @@ app.whenReady().then(async () => {
     }
   }
 
-  createWindow();
+  // Register main app IPC handlers
+  registerIpcHandlers();
+
+  createMainWindow();
+
+  // Run first-boot actions (account creation, card seeding) after server is ready
+  setTimeout(async () => {
+    try {
+      await runFirstBootActions();
+    } catch (err) {
+      console.error('[FirstBoot] Error running first-boot actions:', err);
+    }
+  }, 2000);
+}
+
+// ── Set DB dir env for Electron mode ────────────────────────────────────
+
+if (!isDev) {
+  process.env.MTG_DB_DIR = getUserDataDir();
+}
+// Also set for dev so setup-handlers can use it
+process.env.MTG_DB_DIR = getUserDataDir();
+
+// ── App lifecycle ───────────────────────────────────────────────────────
+
+app.whenReady().then(async () => {
+  // Register setup IPC handlers (always available)
+  registerSetupHandlers();
+
+  if (isFirstRun()) {
+    // Show setup wizard
+    createSetupWindow();
+  } else {
+    // Normal launch — start Next.js and open main window
+    if (!isDev) {
+      try {
+        await startNextServer();
+      } catch (err) {
+        console.error('Failed to start Next.js server:', err);
+      }
+    }
+
+    registerIpcHandlers();
+    createMainWindow();
+  }
 
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
-      createWindow();
+      if (isFirstRun()) {
+        createSetupWindow();
+      } else {
+        createMainWindow();
+      }
     }
   });
 });

@@ -18,7 +18,8 @@
   },
   "include": [
     "electron/**/*.ts",
-    "src/lib/arena-log-reader.ts"
+    "src/lib/arena-log-reader.ts",
+    "src/lib/first-boot.ts"
   ],
   "exclude": [
     "node_modules"
