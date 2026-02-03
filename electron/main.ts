@@ -1,7 +1,7 @@
 import { app, BrowserWindow } from 'electron';
 import path from 'path';
 import fs from 'fs';
-import { spawn, fork, ChildProcess } from 'child_process';
+import { spawn, ChildProcess } from 'child_process';
 import { registerIpcHandlers } from './ipc-handlers';
 import { registerSetupHandlers } from './setup-handlers';
 import { runFirstBootActions } from '../src/lib/first-boot';
@@ -116,10 +116,10 @@ function createMainWindow(): void {
 
 function startNextServer(): Promise<void> {
   return new Promise((resolve, reject) => {
-    // Use the Next.js CLI JS file directly instead of the .cmd wrapper.
-    // On Windows, cmd.exe cannot read files inside an ASAR archive, so
-    // spawning next.cmd via shell fails with ENOENT. fork() uses
-    // Electron's built-in Node.js runtime and handles ASAR paths natively.
+    // Run Next.js CLI directly using Electron as a Node.js runtime.
+    // ELECTRON_RUN_AS_NODE=1 makes the Electron binary behave as plain
+    // Node.js, avoiding cmd.exe (which can't read ASAR files) and
+    // fork() (which fails when the exe path contains spaces).
     const nextCli = path.join(
       app.getAppPath(),
       'node_modules',
@@ -129,14 +129,14 @@ function startNextServer(): Promise<void> {
       'next'
     );
 
-    nextServer = fork(nextCli, ['start', '-p', PORT], {
+    nextServer = spawn(process.execPath, [nextCli, 'start', '-p', PORT], {
       cwd: app.getAppPath(),
       env: {
         ...process.env,
+        ELECTRON_RUN_AS_NODE: '1',
         MTG_DB_DIR: getUserDataDir(),
         PORT,
       },
-      stdio: ['pipe', 'pipe', 'pipe', 'ipc'],
     });
 
     nextServer.stdout?.on('data', (data: Buffer) => {
