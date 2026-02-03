@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
 import { useTheme } from './theme-provider';
+import { useAuth } from './auth-provider';
 import { ImportDialog } from './import-dialog';
 
 const NAV_ITEMS = [
@@ -16,6 +17,7 @@ const NAV_ITEMS = [
 export function Navbar() {
   const pathname = usePathname();
   const { theme, toggleTheme } = useTheme();
+  const { user, logout } = useAuth();
   const [showImport, setShowImport] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -80,6 +82,26 @@ export function Navbar() {
               )}
             </button>
 
+            {user ? (
+              <div className="hidden items-center gap-2 sm:flex">
+                <span className="text-sm text-muted-foreground">{user.username}</span>
+                <button
+                  onClick={logout}
+                  className="rounded-lg px-2 py-1 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+                >
+                  Sign Out
+                </button>
+              </div>
+            ) : (
+              <Link
+                href="/login"
+                className="hidden rounded-lg px-3 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground sm:flex items-center gap-1"
+              >
+                <UserIcon className="h-4 w-4" />
+                Sign In
+              </Link>
+            )}
+
             {/* Mobile menu toggle */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -116,6 +138,24 @@ export function Navbar() {
                 </Link>
               );
             })}
+            {user ? (
+              <button
+                onClick={() => { logout(); setMobileMenuOpen(false); }}
+                className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground hover:bg-accent"
+              >
+                <UserIcon className="h-4 w-4" />
+                Sign Out ({user.username})
+              </button>
+            ) : (
+              <Link
+                href="/login"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground hover:bg-accent"
+              >
+                <UserIcon className="h-4 w-4" />
+                Sign In
+              </Link>
+            )}
           </nav>
         )}
       </header>
@@ -197,6 +237,15 @@ function MenuIcon({ className }: { className?: string }) {
       <line x1="3" y1="12" x2="21" y2="12" />
       <line x1="3" y1="6" x2="21" y2="6" />
       <line x1="3" y1="18" x2="21" y2="18" />
+    </svg>
+  );
+}
+
+function UserIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
+      <circle cx="12" cy="7" r="4" />
     </svg>
   );
 }

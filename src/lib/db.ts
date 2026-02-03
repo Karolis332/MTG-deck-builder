@@ -132,11 +132,45 @@ export function getCardCount(): number {
   return (getDb().prepare('SELECT COUNT(*) as count FROM cards').get() as { count: number }).count;
 }
 
+// ── User operations ──────────────────────────────────────────────────────
+
+export function createUser(username: string, email: string, passwordHash: string) {
+  const db = getDb();
+  const result = db
+    .prepare('INSERT INTO users (username, email, password_hash) VALUES (?, ?, ?)')
+    .run(username, email, passwordHash);
+  return { id: Number(result.lastInsertRowid), username, email };
+}
+
+export function getUserByUsername(username: string) {
+  return getDb()
+    .prepare('SELECT * FROM users WHERE username = ?')
+    .get(username) as { id: number; username: string; email: string; password_hash: string; created_at: string } | undefined;
+}
+
+export function getUserByEmail(email: string) {
+  return getDb()
+    .prepare('SELECT * FROM users WHERE email = ?')
+    .get(email) as { id: number; username: string; email: string; password_hash: string; created_at: string } | undefined;
+}
+
+export function getUserById(id: number) {
+  return getDb()
+    .prepare('SELECT id, username, email, created_at FROM users WHERE id = ?')
+    .get(id) as { id: number; username: string; email: string; created_at: string } | undefined;
+}
+
 // ── Deck operations ───────────────────────────────────────────────────────
 
-export function getAllDecks() {
+export function getAllDecks(userId?: number) {
   const db = getDb();
-  const decks = db.prepare('SELECT * FROM decks ORDER BY updated_at DESC').all();
+  const whereClause = userId != null ? 'WHERE d.user_id = ?' : '';
+  const queryParams = userId != null ? [userId] : [];
+
+  const decks = db
+    .prepare(`SELECT d.* FROM decks d ${whereClause} ORDER BY d.updated_at DESC`)
+    .all(...queryParams);
+
   return decks.map((deck: unknown) => {
     const d = deck as { id: number };
     const cardCount = (
@@ -159,9 +193,14 @@ export function getAllDecks() {
   });
 }
 
-export function getDeckWithCards(deckId: number) {
+export function getDeckWithCards(deckId: number, userId?: number) {
   const db = getDb();
-  const deck = db.prepare('SELECT * FROM decks WHERE id = ?').get(deckId);
+  const whereClause = userId != null
+    ? 'WHERE id = ? AND user_id = ?'
+    : 'WHERE id = ?';
+  const queryParams = userId != null ? [deckId, userId] : [deckId];
+
+  const deck = db.prepare(`SELECT * FROM decks ${whereClause}`).get(...queryParams);
   if (!deck) return null;
 
   const cards = db
@@ -178,15 +217,19 @@ export function getDeckWithCards(deckId: number) {
   return { ...(deck as object), cards };
 }
 
-export function createDeck(name: string, format?: string, description?: string) {
+export function createDeck(name: string, format?: string, description?: string, userId?: number) {
   const db = getDb();
   const result = db
-    .prepare('INSERT INTO decks (name, format, description) VALUES (?, ?, ?)')
-    .run(name, format || null, description || null);
+    .prepare('INSERT INTO decks (name, format, description, user_id) VALUES (?, ?, ?, ?)')
+    .run(name, format || null, description || null, userId || null);
   return { id: result.lastInsertRowid, name, format, description };
 }
 
-export function updateDeck(id: number, data: { name?: string; format?: string; description?: string }) {
+export function updateDeck(
+  id: number,
+  data: { name?: string; format?: string; description?: string },
+  userId?: number
+) {
   const db = getDb();
   const sets: string[] = [];
   const vals: unknown[] = [];
@@ -195,11 +238,23 @@ export function updateDeck(id: number, data: { name?: string; format?: string; d
   if (data.description !== undefined) { sets.push('description = ?'); vals.push(data.description); }
   sets.push("updated_at = datetime('now')");
   vals.push(id);
-  db.prepare(`UPDATE decks SET ${sets.join(', ')} WHERE id = ?`).run(...vals);
+
+  let whereClause = 'WHERE id = ?';
+  if (userId != null) {
+    whereClause += ' AND user_id = ?';
+    vals.push(userId);
+  }
+
+  db.prepare(`UPDATE decks SET ${sets.join(', ')} ${whereClause}`).run(...vals);
 }
 
-export function deleteDeck(id: number) {
-  getDb().prepare('DELETE FROM decks WHERE id = ?').run(id);
+export function deleteDeck(id: number, userId?: number) {
+  const db = getDb();
+  if (userId != null) {
+    db.prepare('DELETE FROM decks WHERE id = ? AND user_id = ?').run(id, userId);
+  } else {
+    db.prepare('DELETE FROM decks WHERE id = ?').run(id);
+  }
 }
 
 export function addCardToDeck(deckId: number, cardId: string, quantity: number, board: string) {
@@ -242,16 +297,25 @@ export function setCardQuantityInDeck(
 
 // ── Collection operations ─────────────────────────────────────────────────
 
-export function getCollection(limit = 50, offset = 0, filters?: {
-  colors?: string[];
-  types?: string[];
-  rarities?: string[];
-  query?: string;
-}) {
+export function getCollection(
+  limit = 50,
+  offset = 0,
+  filters?: {
+    colors?: string[];
+    types?: string[];
+    rarities?: string[];
+    query?: string;
+  },
+  userId?: number
+) {
   const db = getDb();
   const conditions: string[] = [];
   const params: unknown[] = [];
 
+  if (userId != null) {
+    conditions.push('col.user_id = ?');
+    params.push(userId);
+  }
   if (filters?.query) {
     conditions.push('c.name LIKE ?');
     params.push(`%${filters.query}%`);
@@ -291,39 +355,68 @@ export function getCollection(limit = 50, offset = 0, filters?: {
   return { cards, total };
 }
 
-export function getCollectionStats() {
+export function getCollectionStats(userId?: number) {
   const db = getDb();
+  const where = userId != null ? 'WHERE col.user_id = ?' : '';
+  const params = userId != null ? [userId] : [];
+
   const totalCards = (
-    db.prepare('SELECT COALESCE(SUM(quantity), 0) as count FROM collection').get() as {
-      count: number;
-    }
+    db.prepare(`SELECT COALESCE(SUM(quantity), 0) as count FROM collection col ${where}`).get(
+      ...params
+    ) as { count: number }
   ).count;
   const uniqueCards = (
-    db.prepare('SELECT COUNT(*) as count FROM collection').get() as { count: number }
+    db.prepare(`SELECT COUNT(*) as count FROM collection col ${where}`).get(...params) as {
+      count: number;
+    }
   ).count;
   const totalValue = (
     db
       .prepare(
         `SELECT COALESCE(SUM(CAST(c.price_usd AS REAL) * col.quantity), 0) as value
          FROM collection col JOIN cards c ON col.card_id = c.id
-         WHERE c.price_usd IS NOT NULL`
+         WHERE c.price_usd IS NOT NULL${userId != null ? ' AND col.user_id = ?' : ''}`
       )
-      .get() as { value: number }
+      .get(...params) as { value: number }
   ).value;
 
   return { totalCards, uniqueCards, totalValue: Math.round(totalValue * 100) / 100 };
 }
 
-export function upsertCollectionCard(cardId: string, quantity: number, foil: boolean) {
+export function upsertCollectionCard(
+  cardId: string,
+  quantity: number,
+  foil: boolean,
+  userId?: number
+) {
   const db = getDb();
-  db.prepare(
-    `INSERT INTO collection (card_id, quantity, foil)
-     VALUES (?, ?, ?)
-     ON CONFLICT(card_id, foil) DO UPDATE SET
-       quantity = excluded.quantity`
-  ).run(cardId, quantity, foil ? 1 : 0);
+  if (userId != null) {
+    // For authenticated users, use a different conflict strategy
+    const existing = db
+      .prepare('SELECT id FROM collection WHERE card_id = ? AND foil = ? AND user_id = ?')
+      .get(cardId, foil ? 1 : 0, userId) as { id: number } | undefined;
+
+    if (existing) {
+      db.prepare('UPDATE collection SET quantity = ? WHERE id = ?').run(quantity, existing.id);
+    } else {
+      db.prepare(
+        'INSERT INTO collection (card_id, quantity, foil, user_id) VALUES (?, ?, ?, ?)'
+      ).run(cardId, quantity, foil ? 1 : 0, userId);
+    }
+  } else {
+    db.prepare(
+      `INSERT INTO collection (card_id, quantity, foil)
+       VALUES (?, ?, ?)
+       ON CONFLICT(card_id, foil) DO UPDATE SET
+         quantity = excluded.quantity`
+    ).run(cardId, quantity, foil ? 1 : 0);
+  }
 }
 
-export function clearCollection() {
-  getDb().prepare('DELETE FROM collection').run();
+export function clearCollection(userId?: number) {
+  if (userId != null) {
+    getDb().prepare('DELETE FROM collection WHERE user_id = ?').run(userId);
+  } else {
+    getDb().prepare('DELETE FROM collection').run();
+  }
 }

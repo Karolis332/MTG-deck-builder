@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # MTG Deck Builder - Setup & Run Script
-# Usage: ./setup.sh [--dev | --build | --seed]
+# Usage: ./setup.sh [--dev | --build | --prod | --seed | --test]
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$SCRIPT_DIR"
@@ -49,6 +49,14 @@ install_deps() {
   fi
 }
 
+# ── Initialize data directory ─────────────────────────────────────────────────
+init_data() {
+  if [ ! -d "data" ]; then
+    mkdir -p data
+    log "Created data directory."
+  fi
+}
+
 # ── Seed database ────────────────────────────────────────────────────────────
 seed_db() {
   log "Seeding card database from Scryfall (this downloads ~100MB of card data)..."
@@ -62,6 +70,13 @@ build_app() {
   log "Building for production..."
   npm run build
   log "Build complete!"
+}
+
+# ── Run tests ─────────────────────────────────────────────────────────────────
+run_tests() {
+  log "Running tests..."
+  npm test
+  log "All tests passed!"
 }
 
 # ── Start dev server ─────────────────────────────────────────────────────────
@@ -89,6 +104,7 @@ main() {
   check_node
   check_npm
   install_deps
+  init_data
 
   case "${1:-}" in
     --seed)
@@ -104,6 +120,9 @@ main() {
     --dev)
       start_dev
       ;;
+    --test)
+      run_tests
+      ;;
     *)
       log "Setup complete! Available commands:"
       echo ""
@@ -111,6 +130,7 @@ main() {
       echo "  ./setup.sh --build   Build for production"
       echo "  ./setup.sh --prod    Build and start production server"
       echo "  ./setup.sh --seed    Download card database from Scryfall"
+      echo "  ./setup.sh --test    Run test suite"
       echo ""
       log "Quick start: ./setup.sh --dev"
       log "Then open http://localhost:3000 and click 'Download Card Database'"

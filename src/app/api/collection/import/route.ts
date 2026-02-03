@@ -2,9 +2,13 @@ import { NextRequest, NextResponse } from 'next/server';
 import { parseArenaExport } from '@/lib/arena-parser';
 import { getDb, clearCollection, upsertCollectionCard } from '@/lib/db';
 import * as scryfall from '@/lib/scryfall';
+import { getAuthUser, unauthorizedResponse } from '@/lib/auth-middleware';
 
 export async function POST(request: NextRequest) {
   try {
+    const authUser = await getAuthUser(request);
+    if (!authUser) return unauthorizedResponse();
+
     const body = await request.json();
     const { text, mode = 'merge' } = body;
 
@@ -49,7 +53,7 @@ export async function POST(request: NextRequest) {
     `);
 
     if (mode === 'replace') {
-      clearCollection();
+      clearCollection(authUser.userId);
     }
 
     const cardsByName = new Map<string, typeof found[0]>();
@@ -76,7 +80,7 @@ export async function POST(request: NextRequest) {
     for (const line of parsed) {
       const matchedCard = cardsByName.get(line.name.toLowerCase());
       if (matchedCard) {
-        upsertCollectionCard(matchedCard.id, line.quantity, false);
+        upsertCollectionCard(matchedCard.id, line.quantity, false, authUser.userId);
         imported++;
       } else {
         failed.push(line.name);
