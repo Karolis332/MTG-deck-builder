@@ -1,7 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getCollection, getCollectionStats } from '@/lib/db';
+import { getAuthUser, unauthorizedResponse } from '@/lib/auth-middleware';
 
 export async function GET(request: NextRequest) {
+  const authUser = await getAuthUser(request);
+  if (!authUser) return unauthorizedResponse();
+
   const { searchParams } = new URL(request.url);
   const page = parseInt(searchParams.get('page') || '1', 10);
   const limit = Math.min(parseInt(searchParams.get('limit') || '50', 10), 100);
@@ -12,8 +16,8 @@ export async function GET(request: NextRequest) {
   const colors = searchParams.get('colors')?.split(',').filter(Boolean) || undefined;
 
   try {
-    const result = getCollection(limit, offset, { query, rarities, types, colors });
-    const stats = getCollectionStats();
+    const result = getCollection(limit, offset, { query, rarities, types, colors }, authUser.userId);
+    const stats = getCollectionStats(authUser.userId);
 
     return NextResponse.json({
       cards: result.cards,

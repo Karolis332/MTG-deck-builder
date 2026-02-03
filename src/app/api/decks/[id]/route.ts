@@ -8,18 +8,22 @@ import {
   setCardQuantityInDeck,
 } from '@/lib/db';
 import type { DeckPatchOp } from '@/lib/types';
+import { getAuthUser, unauthorizedResponse } from '@/lib/auth-middleware';
 
 export async function GET(
-  _request: NextRequest,
+  request: NextRequest,
   { params }: { params: { id: string } }
 ) {
   try {
+    const authUser = await getAuthUser(request);
+    if (!authUser) return unauthorizedResponse();
+
     const deckId = parseInt(params.id, 10);
     if (isNaN(deckId)) {
       return NextResponse.json({ error: 'Invalid deck ID' }, { status: 400 });
     }
 
-    const deck = getDeckWithCards(deckId);
+    const deck = getDeckWithCards(deckId, authUser.userId);
     if (!deck) {
       return NextResponse.json({ error: 'Deck not found' }, { status: 404 });
     }
@@ -36,14 +40,17 @@ export async function PUT(
   { params }: { params: { id: string } }
 ) {
   try {
+    const authUser = await getAuthUser(request);
+    if (!authUser) return unauthorizedResponse();
+
     const deckId = parseInt(params.id, 10);
     if (isNaN(deckId)) {
       return NextResponse.json({ error: 'Invalid deck ID' }, { status: 400 });
     }
 
     const body = await request.json();
-    updateDeck(deckId, body);
-    const deck = getDeckWithCards(deckId);
+    updateDeck(deckId, body, authUser.userId);
+    const deck = getDeckWithCards(deckId, authUser.userId);
     return NextResponse.json({ deck });
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Failed to update deck';
@@ -52,16 +59,19 @@ export async function PUT(
 }
 
 export async function DELETE(
-  _request: NextRequest,
+  request: NextRequest,
   { params }: { params: { id: string } }
 ) {
   try {
+    const authUser = await getAuthUser(request);
+    if (!authUser) return unauthorizedResponse();
+
     const deckId = parseInt(params.id, 10);
     if (isNaN(deckId)) {
       return NextResponse.json({ error: 'Invalid deck ID' }, { status: 400 });
     }
 
-    deleteDeck(deckId);
+    deleteDeck(deckId, authUser.userId);
     return NextResponse.json({ success: true });
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Failed to delete deck';
@@ -74,9 +84,18 @@ export async function PATCH(
   { params }: { params: { id: string } }
 ) {
   try {
+    const authUser = await getAuthUser(request);
+    if (!authUser) return unauthorizedResponse();
+
     const deckId = parseInt(params.id, 10);
     if (isNaN(deckId)) {
       return NextResponse.json({ error: 'Invalid deck ID' }, { status: 400 });
+    }
+
+    // Verify ownership
+    const existingDeck = getDeckWithCards(deckId, authUser.userId);
+    if (!existingDeck) {
+      return NextResponse.json({ error: 'Deck not found' }, { status: 404 });
     }
 
     const body = await request.json();
@@ -100,7 +119,7 @@ export async function PATCH(
       }
     }
 
-    const deck = getDeckWithCards(deckId);
+    const deck = getDeckWithCards(deckId, authUser.userId);
     return NextResponse.json({ deck });
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Failed to update deck cards';

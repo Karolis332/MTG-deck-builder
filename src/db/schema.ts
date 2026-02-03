@@ -367,4 +367,26 @@ export const MIGRATIONS = [
       CREATE INDEX IF NOT EXISTS idx_pers_sugg_score ON personalized_suggestions(predicted_score DESC);
     `,
   },
+  {
+    version: 2,
+    name: 'add_users_and_ownership',
+    sql: `
+      CREATE TABLE IF NOT EXISTS users (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        username TEXT NOT NULL UNIQUE,
+        email TEXT NOT NULL UNIQUE,
+        password_hash TEXT NOT NULL,
+        created_at TEXT NOT NULL DEFAULT (datetime('now'))
+      );
+
+      CREATE UNIQUE INDEX IF NOT EXISTS idx_users_username ON users(username);
+      CREATE UNIQUE INDEX IF NOT EXISTS idx_users_email ON users(email);
+
+      ALTER TABLE decks ADD COLUMN user_id INTEGER REFERENCES users(id);
+      ALTER TABLE collection ADD COLUMN user_id INTEGER REFERENCES users(id);
+
+      CREATE INDEX IF NOT EXISTS idx_decks_user_id ON decks(user_id);
+      CREATE INDEX IF NOT EXISTS idx_collection_user_id ON collection(user_id);
+    `,
+  },
 ];
