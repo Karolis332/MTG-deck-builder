@@ -1,5 +1,5 @@
 import type { DbCard } from '@/lib/types';
-import { DEFAULT_DECK_SIZE } from '@/lib/constants';
+import { DEFAULT_DECK_SIZE, COMMANDER_FORMATS } from '@/lib/constants';
 
 export interface ValidationIssue {
   level: 'error' | 'warning';
@@ -34,8 +34,8 @@ const UNLIMITED_COPIES = new Set([
   'Seven Dwarves',
 ]);
 
-function isCommander(format: string | null): boolean {
-  return format === 'commander' || format === 'brawl';
+function isCommanderFormat(format: string | null): boolean {
+  return COMMANDER_FORMATS.includes(format as typeof COMMANDER_FORMATS[number]);
 }
 
 export function validateDeck(
@@ -51,14 +51,15 @@ export function validateDeck(
   const sideTotal = sideCards.reduce((s, c) => s + c.quantity, 0);
 
   const expectedSize = DEFAULT_DECK_SIZE[format || 'default'] || 60;
-  const isCmdFormat = isCommander(format);
+  const isCmd = isCommanderFormat(format);
+  const formatLabel = format === 'standardbrawl' ? 'Standard Brawl' : format === 'brawl' ? 'Brawl' : 'Commander';
 
   // Deck size check
-  if (isCmdFormat) {
+  if (isCmd) {
     if (mainTotal !== expectedSize && mainTotal > 0) {
       issues.push({
         level: mainTotal > expectedSize ? 'error' : 'warning',
-        message: `Commander decks require exactly ${expectedSize} cards (currently ${mainTotal})`,
+        message: `${formatLabel} decks require exactly ${expectedSize} cards (currently ${mainTotal})`,
       });
     }
   } else {
@@ -71,7 +72,7 @@ export function validateDeck(
   }
 
   // Sideboard size check (non-commander)
-  if (!isCmdFormat && sideTotal > 15) {
+  if (!isCmd && sideTotal > 15) {
     issues.push({
       level: 'error',
       message: `Sideboard has ${sideTotal} cards, maximum is 15`,
@@ -79,7 +80,7 @@ export function validateDeck(
   }
 
   // Commander check
-  if (isCmdFormat) {
+  if (isCmd) {
     const commanders = cards.filter((c) => c.board === 'commander');
     if (commanders.length === 0 && mainTotal > 0) {
       issues.push({
@@ -90,7 +91,7 @@ export function validateDeck(
   }
 
   // Copy limit check
-  const maxCopies = isCmdFormat ? 1 : 4;
+  const maxCopies = isCmd ? 1 : 4;
   const cardsByName: Record<string, { total: number; boards: string[] }> = {};
 
   for (const entry of cards) {
@@ -113,7 +114,7 @@ export function validateDeck(
   if (overLimitCards.length > 0) {
     issues.push({
       level: 'error',
-      message: isCmdFormat
+      message: isCmd
         ? `Singleton rule violated: ${overLimitCards.join(', ')}`
         : `More than 4 copies: ${overLimitCards.join(', ')}`,
       cardNames: overLimitCards,

@@ -1,5 +1,57 @@
 import type { ArenaImportLine } from './types';
 
+// ── Tab-separated collection format ─────────────────────────────────────────
+// Handles formats like: "6873\tCrash of Rhinos\tAA4\tGreen\tCommon\t0\t0"
+// Columns: id, name, set, color, rarity, quantity, quantity_foil
+
+const TSV_LINE = /^\d+\t.+\t\w+\t\w+\t\w+\t\d+\t\d+$/;
+
+export function detectFormat(text: string): 'arena' | 'tsv' {
+  const lines = text.split(/\r?\n/).filter((l) => l.trim());
+  if (lines.length === 0) return 'arena';
+  const sample = lines.slice(0, 5);
+  const tsvCount = sample.filter((l) => TSV_LINE.test(l)).length;
+  return tsvCount >= Math.min(2, sample.length) ? 'tsv' : 'arena';
+}
+
+export interface TsvImportLine {
+  name: string;
+  setCode: string;
+  quantity: number;
+  quantityFoil: number;
+}
+
+export function parseTsvCollection(text: string): TsvImportLine[] {
+  const lines = text.split(/\r?\n/);
+  const result: TsvImportLine[] = [];
+
+  for (const rawLine of lines) {
+    const line = rawLine.trim();
+    if (!line) continue;
+
+    const parts = line.split('\t');
+    if (parts.length < 7) continue;
+
+    const [, name, setCode, , , qtyStr, qtyFoilStr] = parts;
+    const quantity = parseInt(qtyStr, 10);
+    const quantityFoil = parseInt(qtyFoilStr, 10);
+
+    // Skip cards you own 0 of
+    if (quantity + quantityFoil <= 0) continue;
+
+    result.push({
+      name: name.trim(),
+      setCode: setCode.trim().toUpperCase(),
+      quantity,
+      quantityFoil,
+    });
+  }
+
+  return result;
+}
+
+// ── Arena export format ─────────────────────────────────────────────────────
+
 const SECTION_HEADERS: Record<string, ArenaImportLine['board']> = {
   deck: 'main',
   maindeck: 'main',

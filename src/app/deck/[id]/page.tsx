@@ -12,7 +12,10 @@ import { DeckValidation } from '@/components/deck-validation';
 import { ExportDialog } from '@/components/export-dialog';
 import { PlaytestModal } from '@/components/playtest-modal';
 import { CardDetailModal } from '@/components/card-detail-modal';
-import { FORMAT_LABELS, FORMATS } from '@/lib/constants';
+import { MatchLogPanel } from '@/components/match-log-panel';
+import { AIChatPanel } from '@/components/ai-chat-panel';
+import { ImportDialog } from '@/components/import-dialog';
+import { FORMAT_LABELS, FORMATS, COMMANDER_FORMATS, DEFAULT_DECK_SIZE } from '@/lib/constants';
 
 interface DeckData {
   id: number;
@@ -49,6 +52,7 @@ export default function DeckEditorPage() {
   const [activePanel, setActivePanel] = useState<'search' | 'deck'>('search');
   const [showExport, setShowExport] = useState(false);
   const [showPlaytest, setShowPlaytest] = useState(false);
+  const [showImport, setShowImport] = useState(false);
   const [selectedCard, setSelectedCard] = useState<DbCard | null>(null);
   const [editingName, setEditingName] = useState(false);
   const [deckName, setDeckName] = useState('');
@@ -56,7 +60,19 @@ export default function DeckEditorPage() {
   // AI state
   const [suggestions, setSuggestions] = useState<AISuggestion[]>([]);
   const [suggestionsLoading, setSuggestionsLoading] = useState(false);
-  const [suggestionsSource, setSuggestionsSource] = useState<'rules' | 'ollama'>('rules');
+  const [suggestionsSource, setSuggestionsSource] = useState<'rules' | 'ollama' | 'synergy' | 'openai'>('rules');
+  const [proposedChanges, setProposedChanges] = useState<Array<{
+    action: 'cut' | 'add';
+    cardId: string;
+    cardName: string;
+    quantity: number;
+    reason: string;
+    winRate?: number;
+    imageUri?: string;
+    selected: boolean;
+  }>>([]);
+  const [applyingChanges, setApplyingChanges] = useState(false);
+  const [collectionOnly, setCollectionOnly] = useState(true);
 
   // Load deck
   useEffect(() => {
@@ -182,6 +198,89 @@ export default function DeckEditorPage() {
     }
   };
 
+  const setAsCommander = async (cardId: string) => {
+    if (!deck) return;
+    setSaving(true);
+    try {
+      const res = await fetch(`/api/decks/${deckId}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          op: 'move_card',
+          card_id: cardId,
+          from_board: 'main',
+          to_board: 'commander',
+        }),
+      });
+      const data = await res.json();
+      if (data.deck) setDeck(data.deck);
+    } catch {} finally {
+      setSaving(false);
+    }
+  };
+
+  const setCoverCard = async (cardId: string) => {
+    if (!deck) return;
+    setSaving(true);
+    try {
+      const res = await fetch(`/api/decks/${deckId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ cover_card_id: cardId }),
+      });
+      const data = await res.json();
+      if (data.deck) setDeck(data.deck);
+    } catch {} finally {
+      setSaving(false);
+    }
+  };
+
+  const isCommanderFormat = COMMANDER_FORMATS.includes(
+    (deck?.format || '') as typeof COMMANDER_FORMATS[number]
+  );
+
+  // Apply actions from AI chat panel
+  const handleChatApply = async (
+    actions: Array<{
+      action: 'cut' | 'add';
+      cardId: string;
+      cardName: string;
+      quantity: number;
+      reason: string;
+      imageUri?: string;
+    }>
+  ): Promise<boolean> => {
+    try {
+      const res = await fetch('/api/ai-suggest/apply', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          deck_id: deckId,
+          changes: actions.map((a) => ({
+            action: a.action,
+            cardId: a.cardId,
+            cardName: a.cardName,
+            quantity: a.quantity,
+          })),
+        }),
+      });
+      const data = await res.json();
+      if (data.ok) {
+        // Reload deck
+        const deckRes = await fetch(`/api/decks/${deckId}`);
+        const deckData = await deckRes.json();
+        if (deckData.deck) setDeck(deckData.deck);
+        return true;
+      } else if (data.error) {
+        alert(data.error);
+        return false;
+      }
+      return false;
+    } catch {
+      return false;
+    }
+  };
+
   const updateDeckMeta = async (updates: {
     name?: string;
     format?: string;
@@ -204,17 +303,61 @@ export default function DeckEditorPage() {
   const getSuggestions = async () => {
     setSuggestionsLoading(true);
     setSuggestions([]);
+    setProposedChanges([]);
     try {
       const res = await fetch('/api/ai-suggest', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ deck_id: deckId }),
+        body: JSON.stringify({ deck_id: deckId, collection_only: collectionOnly }),
       });
       const data = await res.json();
       setSuggestions(data.suggestions || []);
       setSuggestionsSource(data.source || 'rules');
+
+      // Set proposed changes with all selected by default
+      if (data.proposedChanges?.length) {
+        setProposedChanges(
+          data.proposedChanges.map((c: Record<string, unknown>) => ({ ...c, selected: true }))
+        );
+      }
     } catch {} finally {
       setSuggestionsLoading(false);
+    }
+  };
+
+  // Apply selected AI-proposed changes
+  const applySelectedChanges = async () => {
+    const selected = proposedChanges.filter((c) => c.selected);
+    if (selected.length === 0) return;
+
+    setApplyingChanges(true);
+    try {
+      const res = await fetch('/api/ai-suggest/apply', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          deck_id: deckId,
+          changes: selected.map((c) => ({
+            action: c.action,
+            cardId: c.cardId,
+            cardName: c.cardName,
+            quantity: c.quantity,
+          })),
+        }),
+      });
+      const data = await res.json();
+      if (data.ok) {
+        // Reload the deck to reflect changes
+        const deckRes = await fetch(`/api/decks/${deckId}`);
+        const deckData = await deckRes.json();
+        if (deckData.deck) setDeck(deckData.deck);
+        setProposedChanges([]);
+        setSuggestions([]);
+      } else if (data.error) {
+        alert(data.error);
+      }
+    } catch {} finally {
+      setApplyingChanges(false);
     }
   };
 
@@ -323,6 +466,30 @@ export default function DeckEditorPage() {
             </div>
 
             <div className="flex items-center gap-2">
+              {/* Collection-only toggle */}
+              <label className="flex cursor-pointer items-center gap-1.5" title="When on, AI only suggests cards you own">
+                <span className="text-[10px] text-muted-foreground">
+                  {collectionOnly ? 'My cards' : 'All cards'}
+                </span>
+                <button
+                  type="button"
+                  role="switch"
+                  aria-checked={collectionOnly}
+                  onClick={() => setCollectionOnly((v) => !v)}
+                  className={cn(
+                    'relative inline-flex h-5 w-9 shrink-0 items-center rounded-full transition-colors',
+                    collectionOnly ? 'bg-primary' : 'bg-muted'
+                  )}
+                >
+                  <span
+                    className={cn(
+                      'pointer-events-none block h-3.5 w-3.5 rounded-full bg-white shadow transition-transform',
+                      collectionOnly ? 'translate-x-[18px]' : 'translate-x-[3px]'
+                    )}
+                  />
+                </button>
+              </label>
+
               <button
                 onClick={getSuggestions}
                 disabled={suggestionsLoading}
@@ -337,6 +504,13 @@ export default function DeckEditorPage() {
               >
                 <PlayIcon className="h-3.5 w-3.5" />
                 Playtest
+              </button>
+              <button
+                onClick={() => setShowImport(true)}
+                className="flex items-center gap-1.5 rounded-lg bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+              >
+                <ImportIcon className="h-3.5 w-3.5" />
+                Import
               </button>
               <button
                 onClick={() => setShowExport(true)}
@@ -401,7 +575,7 @@ export default function DeckEditorPage() {
                   <span className="text-xs font-medium">
                     AI Suggestions
                     <span className="ml-1 text-muted-foreground">
-                      (via {suggestionsSource === 'ollama' ? 'Ollama' : 'rules engine'})
+                      (via {suggestionsSource === 'ollama' ? 'Ollama' : suggestionsSource === 'openai' ? 'GPT' : suggestionsSource === 'synergy' ? 'synergy engine' : 'rules engine'})
                     </span>
                   </span>
                   <button
@@ -415,7 +589,38 @@ export default function DeckEditorPage() {
                   {suggestions.slice(0, 8).map((s) => (
                     <button
                       key={s.card.id}
-                      onClick={() => addCardToDeck(s.card)}
+                      onClick={() => {
+                        // For fixed-size formats at/over capacity, don't add directly
+                        const mainCount = deck.cards
+                          .filter((c) => c.board === 'main')
+                          .reduce((sum, c) => sum + c.quantity, 0);
+                        const targetSize = DEFAULT_DECK_SIZE[deck.format || ''] || DEFAULT_DECK_SIZE.default;
+                        const deckAtCapacity = isCommanderFormat && mainCount >= targetSize - (deck.cards.some((c) => c.board === 'commander') ? 1 : 0);
+
+                        if (deckAtCapacity) {
+                          // Add as a proposed swap — auto-pair with lowest priority card
+                          const isAlreadyProposed = proposedChanges.some(
+                            (c) => c.action === 'add' && c.cardName === s.card.name
+                          );
+                          if (!isAlreadyProposed) {
+                            setProposedChanges((prev) => [
+                              ...prev,
+                              {
+                                action: 'add' as const,
+                                cardId: s.card.id,
+                                cardName: s.card.name,
+                                quantity: 1,
+                                reason: s.reason,
+                                winRate: s.winRate,
+                                imageUri: s.card.image_uri_small || undefined,
+                                selected: true,
+                              },
+                            ]);
+                          }
+                        } else {
+                          addCardToDeck(s.card);
+                        }
+                      }}
                       className="group shrink-0 rounded-xl border border-border bg-card p-2 text-left transition-all hover:border-primary/40 hover:shadow"
                       style={{ width: 140 }}
                     >
@@ -430,13 +635,95 @@ export default function DeckEditorPage() {
                       <div className="truncate text-[10px] font-medium">
                         {s.card.name}
                       </div>
+                      <div className="flex items-center gap-1">
+                        {s.winRate !== undefined && (
+                          <span className={cn(
+                            'shrink-0 text-[9px] font-bold',
+                            s.winRate >= 55 ? 'text-green-400' : s.winRate <= 40 ? 'text-red-400' : 'text-muted-foreground'
+                          )}>
+                            {s.winRate}% WR
+                          </span>
+                        )}
+                        {s.edhrecRank !== undefined && s.edhrecRank < 5000 && (
+                          <span className="shrink-0 text-[9px] text-muted-foreground">
+                            #{s.edhrecRank}
+                          </span>
+                        )}
+                      </div>
                       <div className="truncate text-[9px] text-muted-foreground">
                         {s.reason}
                       </div>
                       <div className="mt-1 text-[9px] text-primary opacity-0 group-hover:opacity-100">
-                        + Add to deck
+                        {isCommanderFormat ? '+ Swap in' : '+ Add to deck'}
                       </div>
                     </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* AI Proposed Changes (cuts + adds) */}
+            {proposedChanges.length > 0 && (
+              <div className="shrink-0 border-b border-border px-3 pb-3">
+                <div className="mb-2 flex items-center gap-2">
+                  <span className="text-xs font-medium">Proposed Changes</span>
+                  <span className="text-[10px] text-muted-foreground">
+                    {proposedChanges.filter((c) => c.selected).length}/{proposedChanges.length} selected
+                  </span>
+                  <button
+                    onClick={applySelectedChanges}
+                    disabled={applyingChanges || proposedChanges.filter((c) => c.selected).length === 0}
+                    className="ml-auto rounded-md bg-primary px-2.5 py-1 text-[10px] font-medium text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-50"
+                  >
+                    {applyingChanges ? 'Applying...' : 'Apply Selected'}
+                  </button>
+                  <button
+                    onClick={() => setProposedChanges([])}
+                    className="text-[10px] text-muted-foreground hover:text-foreground"
+                  >
+                    Dismiss
+                  </button>
+                </div>
+                <div className="space-y-1">
+                  {proposedChanges.map((change, i) => (
+                    <label
+                      key={`${change.action}-${change.cardId}`}
+                      className={cn(
+                        'flex cursor-pointer items-center gap-2 rounded-lg px-2 py-1.5 transition-colors hover:bg-accent/50',
+                        change.selected && 'bg-accent/30'
+                      )}
+                    >
+                      <input
+                        type="checkbox"
+                        checked={change.selected}
+                        onChange={() => {
+                          setProposedChanges((prev) =>
+                            prev.map((c, j) => j === i ? { ...c, selected: !c.selected } : c)
+                          );
+                        }}
+                        className="h-3 w-3 rounded border-border"
+                      />
+                      <span className={cn(
+                        'shrink-0 rounded px-1.5 py-0.5 text-[10px] font-bold',
+                        change.action === 'cut'
+                          ? 'bg-red-500/20 text-red-400'
+                          : 'bg-green-500/20 text-green-400'
+                      )}>
+                        {change.action === 'cut' ? 'CUT' : 'ADD'}
+                      </span>
+                      <span className="flex-1 truncate text-xs">{change.cardName}</span>
+                      {change.winRate !== undefined && (
+                        <span className={cn(
+                          'text-[10px]',
+                          change.winRate >= 55 ? 'text-green-400' : change.winRate <= 40 ? 'text-red-400' : 'text-muted-foreground'
+                        )}>
+                          {change.winRate}%
+                        </span>
+                      )}
+                      <span className="max-w-[120px] truncate text-[9px] text-muted-foreground">
+                        {change.reason}
+                      </span>
+                    </label>
                   ))}
                 </div>
               </div>
@@ -506,6 +793,12 @@ export default function DeckEditorPage() {
                 className="mb-4"
               />
 
+              <MatchLogPanel
+                deckId={deckId}
+                format={deck.format}
+                className="mb-4"
+              />
+
               <DeckList
                 cards={deckEntries.map((e) => ({
                   card_id: e.card_id,
@@ -513,13 +806,30 @@ export default function DeckEditorPage() {
                   board: e.board,
                   card: e.card,
                 }))}
+                deckId={deckId}
                 onQuantityChange={setQuantity}
                 onRemove={removeCardFromDeck}
+                onSetCommander={setAsCommander}
+                onSetCoverCard={setCoverCard}
+                isCommanderFormat={isCommanderFormat}
               />
             </div>
           </div>
         </div>
       </div>
+
+      <ImportDialog
+        open={showImport}
+        onClose={() => setShowImport(false)}
+        deckId={deckId}
+        deckName={deck.name}
+        onSuccess={() => {
+          // Reload deck after import
+          fetch(`/api/decks/${deckId}`)
+            .then((r) => r.json())
+            .then((data) => { if (data.deck) setDeck(data.deck); });
+        }}
+      />
 
       <ExportDialog
         open={showExport}
@@ -548,6 +858,11 @@ export default function DeckEditorPage() {
           setSelectedCard(null);
         }}
       />
+
+      <AIChatPanel
+        deckId={deckId}
+        onApplyActions={handleChatApply}
+      />
     </>
   );
 }
@@ -566,6 +881,16 @@ function SparklesIcon({ className }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <path d="M12 3l1.912 5.813a2 2 0 001.275 1.275L21 12l-5.813 1.912a2 2 0 00-1.275 1.275L12 21l-1.912-5.813a2 2 0 00-1.275-1.275L3 12l5.813-1.912a2 2 0 001.275-1.275z" />
+    </svg>
+  );
+}
+
+function ImportIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
+      <polyline points="7,10 12,15 17,10" />
+      <line x1="12" y1="15" x2="12" y2="3" />
     </svg>
   );
 }

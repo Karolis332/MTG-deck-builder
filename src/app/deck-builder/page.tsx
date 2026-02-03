@@ -26,6 +26,22 @@ export default function DeckBuilderPage() {
   const [newFormat, setNewFormat] = useState('standard');
   const [creating, setCreating] = useState(false);
 
+  // AI build state
+  const [showAiBuild, setShowAiBuild] = useState(false);
+  const [aiName, setAiName] = useState('');
+  const [aiFormat, setAiFormat] = useState('standard');
+  const [aiColors, setAiColors] = useState<string[]>([]);
+  const [aiStrategy, setAiStrategy] = useState('');
+  const [aiUseCollection, setAiUseCollection] = useState(true);
+  const [aiBuilding, setAiBuilding] = useState(false);
+  const [aiError, setAiError] = useState('');
+  const [aiCommander, setAiCommander] = useState('');
+  const [commanderSearch, setCommanderSearch] = useState('');
+  const [commanderResults, setCommanderResults] = useState<Array<{ id: string; name: string; image_uri_small: string | null; color_identity: string | null; type_line: string }>>([]);
+  const [commanderSearching, setCommanderSearching] = useState(false);
+
+  const isAiCommanderFormat = ['commander', 'brawl', 'standardbrawl'].includes(aiFormat);
+
   useEffect(() => {
     fetch('/api/decks')
       .then((r) => r.json())
@@ -52,6 +68,74 @@ export default function DeckBuilderPage() {
     }
   };
 
+  const searchCommanders = async (query: string) => {
+    setCommanderSearch(query);
+    if (query.length < 2) { setCommanderResults([]); return; }
+    setCommanderSearching(true);
+    try {
+      const res = await fetch(`/api/cards/search?q=${encodeURIComponent(query)}&limit=8`);
+      const data = await res.json();
+      const filtered = (data.cards || []).filter((c: { type_line: string }) =>
+        c.type_line.includes('Legendary') && (c.type_line.includes('Creature') || c.type_line.includes('Planeswalker'))
+      );
+      setCommanderResults(filtered.slice(0, 6));
+    } catch {} finally {
+      setCommanderSearching(false);
+    }
+  };
+
+  const selectCommander = (card: typeof commanderResults[0]) => {
+    setAiCommander(card.name);
+    setCommanderSearch('');
+    setCommanderResults([]);
+    // Auto-set colors from commander's color identity
+    if (card.color_identity) {
+      try {
+        const ci: string[] = JSON.parse(card.color_identity);
+        setAiColors(ci);
+      } catch {}
+    }
+  };
+
+  const handleAiBuild = async () => {
+    if (isAiCommanderFormat && !aiCommander) {
+      setAiError('Select a commander first');
+      return;
+    }
+    if (!isAiCommanderFormat && aiColors.length === 0) {
+      setAiError('Pick at least one color');
+      return;
+    }
+    setAiBuilding(true);
+    setAiError('');
+    try {
+      const res = await fetch('/api/decks/auto-build', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: aiName.trim() || (aiCommander ? `${aiCommander} Deck` : `AI ${aiColors.join('')} ${aiStrategy || 'Deck'}`),
+          format: aiFormat,
+          colors: aiColors,
+          strategy: aiStrategy || undefined,
+          useCollection: aiUseCollection,
+          commanderName: isAiCommanderFormat ? aiCommander : undefined,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Build failed');
+      router.push(`/deck/${data.deckId}`);
+    } catch (err) {
+      setAiError(err instanceof Error ? err.message : 'Build failed');
+      setAiBuilding(false);
+    }
+  };
+
+  const toggleColor = (c: string) => {
+    setAiColors((prev) =>
+      prev.includes(c) ? prev.filter((x) => x !== c) : [...prev, c]
+    );
+  };
+
   const handleDelete = async (id: number, e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
@@ -67,13 +151,22 @@ export default function DeckBuilderPage() {
           <h1 className="text-2xl font-bold">Your Decks</h1>
           <p className="text-sm text-muted-foreground">{decks.length} decks</p>
         </div>
-        <button
-          onClick={() => setShowNewDeck(true)}
-          className="flex items-center gap-2 rounded-xl bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
-        >
-          <PlusIcon className="h-4 w-4" />
-          New Deck
-        </button>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => setShowAiBuild(true)}
+            className="flex items-center gap-2 rounded-xl bg-accent px-4 py-2 text-sm font-medium text-accent-foreground transition-colors hover:bg-accent/80"
+          >
+            <SparklesIcon className="h-4 w-4" />
+            AI Build
+          </button>
+          <button
+            onClick={() => setShowNewDeck(true)}
+            className="flex items-center gap-2 rounded-xl bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+          >
+            <PlusIcon className="h-4 w-4" />
+            New Deck
+          </button>
+        </div>
       </div>
 
       {/* New deck form */}
@@ -196,7 +289,183 @@ export default function DeckBuilderPage() {
           ))}
         </div>
       )}
+
+      {/* AI Build Modal */}
+      {showAiBuild && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setShowAiBuild(false)} />
+          <div className="relative w-full max-w-md rounded-2xl border border-border bg-card p-6 shadow-2xl animate-slide-up">
+            <h2 className="mb-4 text-lg font-semibold">AI Deck Builder</h2>
+
+            {/* Deck name */}
+            <input
+              type="text"
+              value={aiName}
+              onChange={(e) => setAiName(e.target.value)}
+              placeholder="Deck name (optional)..."
+              className="mb-3 w-full rounded-lg border border-border bg-background px-3 py-2 text-sm outline-none focus:border-primary/50"
+            />
+
+            {/* Format */}
+            <div className="mb-3">
+              <label className="mb-1 block text-xs text-muted-foreground">Format</label>
+              <select
+                value={aiFormat}
+                onChange={(e) => setAiFormat(e.target.value)}
+                className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm outline-none"
+              >
+                {FORMATS.map((f) => (
+                  <option key={f} value={f}>{FORMAT_LABELS[f]}</option>
+                ))}
+              </select>
+            </div>
+
+            {/* Commander search (for commander formats) */}
+            {isAiCommanderFormat && (
+              <div className="mb-3">
+                <label className="mb-1 block text-xs text-muted-foreground">Commander</label>
+                {aiCommander ? (
+                  <div className="flex items-center gap-2 rounded-lg border border-primary/30 bg-primary/5 px-3 py-2">
+                    <span className="text-sm font-medium">{aiCommander}</span>
+                    <button
+                      onClick={() => { setAiCommander(''); setAiColors([]); }}
+                      className="ml-auto text-xs text-muted-foreground hover:text-destructive"
+                    >
+                      Change
+                    </button>
+                  </div>
+                ) : (
+                  <div className="relative">
+                    <input
+                      type="text"
+                      value={commanderSearch}
+                      onChange={(e) => searchCommanders(e.target.value)}
+                      placeholder="Search for a legendary creature..."
+                      className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm outline-none focus:border-primary/50"
+                    />
+                    {commanderResults.length > 0 && (
+                      <div className="absolute left-0 right-0 top-full z-10 mt-1 max-h-48 overflow-auto rounded-lg border border-border bg-card shadow-xl">
+                        {commanderResults.map((card) => (
+                          <button
+                            key={card.id}
+                            onClick={() => selectCommander(card)}
+                            className="flex w-full items-center gap-2 px-3 py-2 text-left text-sm hover:bg-accent"
+                          >
+                            {card.image_uri_small && (
+                              // eslint-disable-next-line @next/next/no-img-element
+                              <img src={card.image_uri_small} alt="" className="h-8 w-6 rounded-sm object-cover" />
+                            )}
+                            <div className="min-w-0 flex-1">
+                              <div className="truncate font-medium">{card.name}</div>
+                              <div className="truncate text-xs text-muted-foreground">{card.type_line}</div>
+                            </div>
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                    {commanderSearching && (
+                      <div className="absolute right-3 top-2.5 text-xs text-muted-foreground">Searching...</div>
+                    )}
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Colors */}
+            <div className="mb-3">
+              <label className="mb-1 block text-xs text-muted-foreground">
+                {isAiCommanderFormat ? 'Colors (auto-set from commander)' : 'Colors'}
+              </label>
+              <div className="flex gap-2">
+                {[
+                  { code: 'W', label: 'White', bg: 'bg-amber-50 text-amber-900 border-amber-300' },
+                  { code: 'U', label: 'Blue', bg: 'bg-blue-600 text-white border-blue-400' },
+                  { code: 'B', label: 'Black', bg: 'bg-zinc-800 text-zinc-100 border-zinc-600' },
+                  { code: 'R', label: 'Red', bg: 'bg-red-600 text-white border-red-400' },
+                  { code: 'G', label: 'Green', bg: 'bg-green-700 text-white border-green-500' },
+                ].map(({ code, label, bg }) => (
+                  <button
+                    key={code}
+                    onClick={() => toggleColor(code)}
+                    className={cn(
+                      'flex h-10 w-10 items-center justify-center rounded-lg border-2 text-sm font-bold transition-all',
+                      aiColors.includes(code)
+                        ? `${bg} scale-110 shadow-md`
+                        : 'border-border bg-accent/30 text-muted-foreground hover:border-border/80'
+                    )}
+                    title={label}
+                  >
+                    {code}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Strategy */}
+            <div className="mb-3">
+              <label className="mb-1 block text-xs text-muted-foreground">Strategy (optional)</label>
+              <div className="flex flex-wrap gap-2">
+                {['aggro', 'midrange', 'control', 'combo'].map((s) => (
+                  <button
+                    key={s}
+                    onClick={() => setAiStrategy(aiStrategy === s ? '' : s)}
+                    className={cn(
+                      'rounded-lg px-3 py-1.5 text-xs font-medium capitalize transition-colors',
+                      aiStrategy === s
+                        ? 'bg-primary text-primary-foreground'
+                        : 'bg-accent text-accent-foreground hover:bg-accent/80'
+                    )}
+                  >
+                    {s}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Use collection toggle */}
+            <label className="mb-4 flex items-center gap-2 text-sm">
+              <input
+                type="checkbox"
+                checked={aiUseCollection}
+                onChange={(e) => setAiUseCollection(e.target.checked)}
+                className="accent-primary"
+              />
+              <span className="text-muted-foreground">Prefer cards from my collection</span>
+            </label>
+
+            {aiError && (
+              <div className="mb-3 rounded-lg bg-destructive/10 px-3 py-2 text-xs text-destructive">
+                {aiError}
+              </div>
+            )}
+
+            <div className="flex justify-end gap-2">
+              <button
+                onClick={() => { setShowAiBuild(false); setAiError(''); }}
+                className="rounded-lg px-4 py-2 text-sm text-muted-foreground hover:text-foreground"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleAiBuild}
+                disabled={aiBuilding || aiColors.length === 0}
+                className="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-50"
+              >
+                {aiBuilding ? 'Building...' : 'Build Deck'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
+  );
+}
+
+function SparklesIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 3l1.912 5.813a2 2 0 001.275 1.275L21 12l-5.813 1.912a2 2 0 00-1.275 1.275L12 21l-1.912-5.813a2 2 0 00-1.275-1.275L3 12l5.813-1.912a2 2 0 001.275-1.275L12 3z" />
+    </svg>
   );
 }
 

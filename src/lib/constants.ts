@@ -45,11 +45,12 @@ export const FORMATS = [
   'legacy',
   'vintage',
   'commander',
+  'standardbrawl',
+  'brawl',
   'pauper',
   'historic',
   'alchemy',
   'explorer',
-  'brawl',
 ] as const;
 
 export const FORMAT_LABELS: Record<string, string> = {
@@ -59,11 +60,12 @@ export const FORMAT_LABELS: Record<string, string> = {
   legacy: 'Legacy',
   vintage: 'Vintage',
   commander: 'Commander / EDH',
+  standardbrawl: 'Standard Brawl',
+  brawl: 'Brawl (Historic)',
   pauper: 'Pauper',
   historic: 'Historic',
   alchemy: 'Alchemy',
   explorer: 'Explorer',
-  brawl: 'Brawl',
 };
 
 export const RARITIES = ['common', 'uncommon', 'rare', 'mythic'] as const;
@@ -82,6 +84,8 @@ export const DEFAULT_LAND_COUNT: Record<string, number> = {
   legacy: 20,
   vintage: 16,
   commander: 37,
+  standardbrawl: 24,
+  brawl: 37,
   pauper: 23,
   default: 24,
 };
@@ -93,9 +97,14 @@ export const DEFAULT_DECK_SIZE: Record<string, number> = {
   legacy: 60,
   vintage: 60,
   commander: 100,
+  standardbrawl: 60,
+  brawl: 100,
   pauper: 60,
   default: 60,
 };
+
+// Formats that use a commander/companion zone
+export const COMMANDER_FORMATS = ['commander', 'brawl', 'standardbrawl'] as const;
 
 export const SCRYFALL_API_BASE = 'https://api.scryfall.com';
 export const SCRYFALL_RATE_LIMIT_MS = 100;

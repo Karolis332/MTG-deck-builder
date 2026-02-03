@@ -98,6 +98,8 @@ export interface DbCard {
   edhrec_rank: number | null;
   layout: string;
   updated_at: string;
+  subtypes: string | null;
+  arena_id: number | null;
 }
 
 export interface Deck {
@@ -179,6 +181,8 @@ export interface AISuggestion {
   card: DbCard;
   reason: string;
   score: number;
+  winRate?: number;
+  edhrecRank?: number;
 }
 
 export type DeckPatchOp =
