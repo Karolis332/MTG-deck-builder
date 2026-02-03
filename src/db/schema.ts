@@ -278,4 +278,14 @@ export const MIGRATIONS = [
       ALTER TABLE match_logs ADD COLUMN deck_version_id INTEGER REFERENCES deck_versions(id);
     `,
   },
+  {
+    version: 7,
+    name: 'add_subtypes_and_arena_id',
+    sql: `
+      ALTER TABLE cards ADD COLUMN subtypes TEXT;
+      ALTER TABLE cards ADD COLUMN arena_id INTEGER;
+
+      CREATE INDEX IF NOT EXISTS idx_cards_arena_id ON cards(arena_id);
+    `,
+  },
 ];
