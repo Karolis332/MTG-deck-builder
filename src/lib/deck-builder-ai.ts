@@ -518,12 +518,38 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
 
   const resolvedStrategy = strategy || (themes.includes('aggro') ? 'aggro' : themes.includes('control') ? 'control' : 'midrange');
 
+  // ── ML personalization: load predictions from personalized_suggestions ──
+  const mlScoreMap = new Map<string, number>();
+  if (isCommander && commanderName) {
+    try {
+      // Check for deck-specific or commander-specific ML suggestions
+      const mlRows = db.prepare(
+        `SELECT card_name, predicted_score FROM personalized_suggestions
+         WHERE (commander_name = ? COLLATE NOCASE OR deck_id = 0)
+         ORDER BY predicted_score DESC
+         LIMIT 200`
+      ).all(commanderName) as Array<{ card_name: string; predicted_score: number }>;
+      for (const row of mlRows) {
+        mlScoreMap.set(row.card_name, row.predicted_score);
+      }
+    } catch {
+      // Table may not exist yet
+    }
+  }
+
   // ── Step 3: Score cards ─────────────────────────────────────────────────
   // Key change: EDHREC per-commander synergy score is now the dominant signal
   // for commander format decks, replacing the generic edhrec_rank
 
   const scored = pool.map((card) => {
     let score = 0;
+
+    // ── ML personalization bonus (from trained scikit-learn model) ──
+    const mlScore = mlScoreMap.get(card.name);
+    if (mlScore !== undefined) {
+      // ML predicted win rate (0-1) scaled to 0-25 bonus
+      score += Math.max(0, (mlScore - 0.4) * 40);
+    }
 
     // ── EDHREC commander-specific synergy (primary signal for commander) ──
     const edhrecEntry = edhrecSynergyMap.get(card.name);

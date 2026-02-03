@@ -346,4 +346,25 @@ export const MIGRATIONS = [
       CREATE INDEX IF NOT EXISTS idx_analytics_type ON analytics_snapshots(snapshot_type);
     `,
   },
+  {
+    version: 11,
+    name: 'add_personalized_suggestions',
+    sql: `
+      CREATE TABLE IF NOT EXISTS personalized_suggestions (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        deck_id INTEGER,
+        commander_name TEXT,
+        format TEXT NOT NULL DEFAULT '',
+        card_name TEXT NOT NULL,
+        predicted_score REAL NOT NULL,
+        card_id TEXT,
+        reason TEXT,
+        created_at TEXT NOT NULL DEFAULT (datetime('now')),
+        UNIQUE(deck_id, card_name)
+      );
+
+      CREATE INDEX IF NOT EXISTS idx_pers_sugg_deck ON personalized_suggestions(deck_id);
+      CREATE INDEX IF NOT EXISTS idx_pers_sugg_score ON personalized_suggestions(predicted_score DESC);
+    `,
+  },
 ];
