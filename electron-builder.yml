@@ -1,5 +1,6 @@
 appId: com.mtg-deck-builder.app
 productName: MTG Deck Builder
+executableName: mtg-deck-builder
 copyright: Copyright © 2025 MTG Deck Builder
 
 directories:
