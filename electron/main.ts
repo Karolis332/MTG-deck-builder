@@ -1,7 +1,7 @@
 import { app, BrowserWindow } from 'electron';
 import path from 'path';
 import fs from 'fs';
-import { spawn, ChildProcess } from 'child_process';
+import { spawn, fork, ChildProcess } from 'child_process';
 import { registerIpcHandlers } from './ipc-handlers';
 import { registerSetupHandlers } from './setup-handlers';
 import { runFirstBootActions } from '../src/lib/first-boot';
@@ -116,25 +116,27 @@ function createMainWindow(): void {
 
 function startNextServer(): Promise<void> {
   return new Promise((resolve, reject) => {
-    const nextBin = path.join(
+    // Use the Next.js CLI JS file directly instead of the .cmd wrapper.
+    // On Windows, cmd.exe cannot read files inside an ASAR archive, so
+    // spawning next.cmd via shell fails with ENOENT. fork() uses
+    // Electron's built-in Node.js runtime and handles ASAR paths natively.
+    const nextCli = path.join(
       app.getAppPath(),
       'node_modules',
-      '.bin',
-      process.platform === 'win32' ? 'next.cmd' : 'next'
+      'next',
+      'dist',
+      'bin',
+      'next'
     );
 
-    const isWin = process.platform === 'win32';
-    const comSpec = process.env.ComSpec || process.env.COMSPEC || 'C:\\Windows\\System32\\cmd.exe';
-
-    nextServer = spawn(nextBin, ['start', '-p', PORT], {
+    nextServer = fork(nextCli, ['start', '-p', PORT], {
       cwd: app.getAppPath(),
       env: {
         ...process.env,
-        ComSpec: comSpec,
         MTG_DB_DIR: getUserDataDir(),
         PORT,
       },
-      shell: isWin ? comSpec : false,
+      stdio: ['pipe', 'pipe', 'pipe', 'ipc'],
     });
 
     nextServer.stdout?.on('data', (data: Buffer) => {
