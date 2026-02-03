@@ -308,4 +308,26 @@ export const MIGRATIONS = [
       CREATE INDEX IF NOT EXISTS idx_cmd_syn_score ON commander_synergies(synergy_score DESC);
     `,
   },
+  {
+    version: 9,
+    name: 'add_arena_parsed_matches',
+    sql: `
+      CREATE TABLE IF NOT EXISTS arena_parsed_matches (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        match_id TEXT UNIQUE NOT NULL,
+        player_name TEXT,
+        opponent_name TEXT,
+        result TEXT,
+        format TEXT,
+        turns INTEGER,
+        deck_cards TEXT,
+        cards_played TEXT,
+        opponent_cards_seen TEXT,
+        raw_events TEXT,
+        parsed_at TEXT NOT NULL DEFAULT (datetime('now'))
+      );
+
+      CREATE INDEX IF NOT EXISTS idx_arena_match_id ON arena_parsed_matches(match_id);
+    `,
+  },
 ];
