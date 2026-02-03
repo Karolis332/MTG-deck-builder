@@ -123,14 +123,18 @@ function startNextServer(): Promise<void> {
       process.platform === 'win32' ? 'next.cmd' : 'next'
     );
 
+    const isWin = process.platform === 'win32';
+    const comSpec = process.env.ComSpec || process.env.COMSPEC || 'C:\\Windows\\System32\\cmd.exe';
+
     nextServer = spawn(nextBin, ['start', '-p', PORT], {
       cwd: app.getAppPath(),
       env: {
         ...process.env,
+        ComSpec: comSpec,
         MTG_DB_DIR: getUserDataDir(),
         PORT,
       },
-      shell: process.platform === 'win32',
+      shell: isWin ? comSpec : false,
     });
 
     nextServer.stdout?.on('data', (data: Buffer) => {
