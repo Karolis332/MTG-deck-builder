@@ -45,3 +45,7 @@ __pycache__/
 *.db-journal
 *.db-wal
 *.db-shm
+
+# electron
+/dist-electron/
+/electron-dist/

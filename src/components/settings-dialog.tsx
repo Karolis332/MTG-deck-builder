@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { cn } from '@/lib/utils';
+import { isElectron, getElectronAPI } from '@/lib/electron-bridge';
 
 interface SettingsDialogProps {
   open: boolean;
@@ -14,6 +15,15 @@ export function SettingsDialog({ open, onClose }: SettingsDialogProps) {
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState('');
 
+  // Arena integration state
+  const [arenaLogPath, setArenaLogPath] = useState('');
+  const [watcherRunning, setWatcherRunning] = useState(false);
+  const [watcherMatchCount, setWatcherMatchCount] = useState(0);
+  const [arenaMessage, setArenaMessage] = useState('');
+  const [parsingLog, setParsingLog] = useState(false);
+  const [enriching, setEnriching] = useState(false);
+  const [arenaCoverage, setArenaCoverage] = useState<{ total: number; withArenaId: number } | null>(null);
+
   useEffect(() => {
     if (!open) return;
     fetch('/api/settings')
@@ -24,10 +34,29 @@ export function SettingsDialog({ open, onClose }: SettingsDialogProps) {
         } else {
           setMaskedKey('');
         }
+        if (data.settings?.arena_log_path) {
+          setArenaLogPath(data.settings.arena_log_path);
+        }
         setOpenaiKey('');
         setMessage('');
+        setArenaMessage('');
       })
       .catch(() => {});
+
+    // Load Electron-specific data
+    if (isElectron()) {
+      const api = getElectronAPI()!;
+      api.getWatcherStatus().then((s) => {
+        setWatcherRunning(s.running);
+        if (s.logPath) setArenaLogPath(s.logPath);
+        setWatcherMatchCount(s.matchCount);
+      });
+      // Load arena ID coverage
+      fetch('/api/mtgjson-enrich')
+        .then((r) => r.json())
+        .then((data) => setArenaCoverage(data.coverage))
+        .catch(() => {});
+    }
   }, [open]);
 
   const saveKey = useCallback(async () => {
@@ -73,12 +102,134 @@ export function SettingsDialog({ open, onClose }: SettingsDialogProps) {
     }
   }, []);
 
+  // ── Arena integration handlers ─────────────────────────────────────────────
+
+  const browseForLog = useCallback(async () => {
+    const api = getElectronAPI();
+    if (!api) return;
+    const path = await api.selectArenaLogPath();
+    if (path) {
+      setArenaLogPath(path);
+      // Persist the path
+      await fetch('/api/settings', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ key: 'arena_log_path', value: path }),
+      });
+      setArenaMessage('Log path saved');
+    }
+  }, []);
+
+  const detectDefault = useCallback(async () => {
+    const api = getElectronAPI();
+    if (!api) return;
+    const path = await api.getDefaultArenaLogPath();
+    setArenaLogPath(path);
+    await fetch('/api/settings', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ key: 'arena_log_path', value: path }),
+    });
+    setArenaMessage('Default path detected');
+  }, []);
+
+  const toggleWatcher = useCallback(async () => {
+    const api = getElectronAPI();
+    if (!api) return;
+
+    if (watcherRunning) {
+      await api.stopWatcher();
+      setWatcherRunning(false);
+      setArenaMessage('Watcher stopped');
+    } else {
+      if (!arenaLogPath) {
+        setArenaMessage('Set the Arena log path first');
+        return;
+      }
+      const result = await api.startWatcher(arenaLogPath);
+      if (result.ok) {
+        setWatcherRunning(true);
+        setArenaMessage('Watcher started — monitoring for new matches');
+      } else {
+        setArenaMessage(`Failed: ${result.error}`);
+      }
+    }
+  }, [watcherRunning, arenaLogPath]);
+
+  const parseFullLog = useCallback(async () => {
+    const api = getElectronAPI();
+    if (!api || !arenaLogPath) return;
+
+    setParsingLog(true);
+    setArenaMessage('Parsing full log file...');
+    try {
+      const result = await api.parseFullLog(arenaLogPath);
+      const matchCount = (result.matches as unknown[]).length;
+      const hasCollection = result.collection !== null;
+
+      // Send matches to API
+      for (const match of result.matches as Array<Record<string, unknown>>) {
+        await fetch('/api/arena-matches', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(match),
+        });
+      }
+
+      // Send collection to API
+      if (result.collection) {
+        await fetch('/api/arena-collection', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ collection: result.collection }),
+        });
+      }
+
+      setArenaMessage(
+        `Imported ${matchCount} matches${hasCollection ? ' + collection data' : ''}`
+      );
+    } catch (err) {
+      setArenaMessage(`Parse failed: ${err}`);
+    } finally {
+      setParsingLog(false);
+    }
+  }, [arenaLogPath]);
+
+  const runEnrichment = useCallback(async () => {
+    setEnriching(true);
+    setArenaMessage('Downloading MTGJSON data...');
+    try {
+      const res = await fetch('/api/mtgjson-enrich', { method: 'POST' });
+      const data = await res.json();
+      if (data.ok) {
+        setArenaCoverage(data.coverage);
+        setArenaMessage(
+          `Enriched ${data.updated} cards with Arena IDs (${data.downloaded} total mappings)`
+        );
+      } else {
+        setArenaMessage(`Enrichment failed: ${data.error}`);
+      }
+    } catch (err) {
+      setArenaMessage(`Enrichment failed: ${err}`);
+    } finally {
+      setEnriching(false);
+    }
+  }, []);
+
   if (!open) return null;
+
+  const electronMode = isElectron();
+  const coveragePct = arenaCoverage && arenaCoverage.total > 0
+    ? Math.round((arenaCoverage.withArenaId / arenaCoverage.total) * 100)
+    : 0;
 
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/50 backdrop-blur-sm" onClick={onClose}>
       <div
-        className="w-full max-w-md rounded-2xl border border-border bg-card p-6 shadow-2xl"
+        className={cn(
+          'w-full rounded-2xl border border-border bg-card p-6 shadow-2xl overflow-y-auto',
+          electronMode ? 'max-w-lg max-h-[90vh]' : 'max-w-md'
+        )}
         onClick={(e) => e.stopPropagation()}
       >
         <div className="mb-4 flex items-center justify-between">
@@ -144,6 +295,117 @@ export function SettingsDialog({ open, onClose }: SettingsDialogProps) {
             </p>
           </div>
         </div>
+
+        {/* Arena Integration — Electron only */}
+        {electronMode && (
+          <div className="mt-4 space-y-3 border-t border-border pt-4">
+            <h3 className="text-sm font-bold">Arena Integration</h3>
+            <p className="text-xs text-muted-foreground">
+              Enable Detailed Logs in Arena: Options &rarr; Account &rarr; Detailed Logs (Plugin Support). Restart the client.
+            </p>
+
+            {/* Log path */}
+            <div>
+              <label className="mb-1 block text-xs font-medium">Arena Log Path</label>
+              <div className="flex gap-2">
+                <input
+                  type="text"
+                  value={arenaLogPath}
+                  onChange={(e) => setArenaLogPath(e.target.value)}
+                  placeholder="Path to Player.log"
+                  className="flex-1 rounded-lg border border-border bg-background px-3 py-1.5 text-xs outline-none focus:border-primary font-mono"
+                />
+                <button
+                  onClick={browseForLog}
+                  className="rounded-lg border border-border px-3 py-1.5 text-xs transition-colors hover:bg-accent"
+                >
+                  Browse
+                </button>
+              </div>
+              <button
+                onClick={detectDefault}
+                className="mt-1 text-[10px] text-primary hover:underline"
+              >
+                Detect default path
+              </button>
+            </div>
+
+            {/* Watcher toggle */}
+            <div className="flex items-center justify-between">
+              <div>
+                <span className="text-xs font-medium">Live Watcher</span>
+                {watcherRunning && (
+                  <span className="ml-2 text-[10px] text-muted-foreground">
+                    {watcherMatchCount} matches found
+                  </span>
+                )}
+              </div>
+              <button
+                onClick={toggleWatcher}
+                className={cn(
+                  'rounded-lg px-3 py-1.5 text-xs font-medium transition-colors',
+                  watcherRunning
+                    ? 'bg-red-500/20 text-red-400 hover:bg-red-500/30'
+                    : 'bg-green-500/20 text-green-400 hover:bg-green-500/30'
+                )}
+              >
+                <span className={cn(
+                  'mr-1.5 inline-block h-2 w-2 rounded-full',
+                  watcherRunning ? 'bg-green-400 animate-pulse' : 'bg-gray-500'
+                )} />
+                {watcherRunning ? 'Stop' : 'Start'}
+              </button>
+            </div>
+
+            {/* Parse full log */}
+            <button
+              onClick={parseFullLog}
+              disabled={parsingLog || !arenaLogPath}
+              className="w-full rounded-lg border border-border px-3 py-2 text-xs font-medium transition-colors hover:bg-accent disabled:opacity-50"
+            >
+              {parsingLog ? 'Parsing...' : 'Parse Full Log (import history + collection)'}
+            </button>
+
+            {/* MTGJSON enrichment */}
+            <div className="border-t border-border pt-3">
+              <div className="flex items-center justify-between">
+                <div>
+                  <span className="text-xs font-medium">Arena ID Coverage</span>
+                  {arenaCoverage && (
+                    <span className="ml-2 text-[10px] text-muted-foreground">
+                      {arenaCoverage.withArenaId}/{arenaCoverage.total} cards ({coveragePct}%)
+                    </span>
+                  )}
+                </div>
+                <button
+                  onClick={runEnrichment}
+                  disabled={enriching}
+                  className="rounded-lg border border-border px-3 py-1.5 text-xs transition-colors hover:bg-accent disabled:opacity-50"
+                >
+                  {enriching ? 'Downloading...' : 'Enrich from MTGJSON'}
+                </button>
+              </div>
+              {coveragePct < 50 && arenaCoverage && arenaCoverage.total > 0 && (
+                <p className="mt-1 text-[10px] text-amber-400">
+                  Low coverage — run enrichment to enable Arena ID resolution for matches and collection sync.
+                </p>
+              )}
+            </div>
+
+            {arenaMessage && (
+              <p className={cn(
+                'text-xs',
+                arenaMessage.includes('Imported') || arenaMessage.includes('started') || arenaMessage.includes('Enriched')
+                  ? 'text-green-400'
+                  : arenaMessage.includes('Failed') || arenaMessage.includes('failed')
+                    ? 'text-red-400'
+                    : 'text-muted-foreground'
+              )}>
+                {arenaMessage}
+              </p>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

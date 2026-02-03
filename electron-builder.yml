@@ -1,0 +1,17 @@
+appId: com.mtg-deck-builder.app
+productName: MTG Deck Builder
+directories:
+  output: dist-electron
+files:
+  - "electron-dist/**/*"
+  - ".next/**/*"
+  - "public/**/*"
+  - "package.json"
+  - "node_modules/**/*"
+mac:
+  target: [dmg]
+  category: public.app-category.games
+win:
+  target: [nsis, portable]
+linux:
+  target: [AppImage]
