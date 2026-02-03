@@ -47,8 +47,9 @@ export async function POST(request: NextRequest) {
     }
 
     // Create deck and add all cards
+    const tribalLabel = result.tribalType ? ` (${result.tribalType} tribal)` : '';
     const description = isCmdFormat && commanderName
-      ? `Commander: ${commanderName}. ${result.strategy} strategy. Themes: ${result.themes.join(', ') || 'general goodstuff'}`
+      ? `Commander: ${commanderName}. ${result.strategy} strategy${tribalLabel}. Themes: ${result.themes.join(', ') || 'general goodstuff'}`
       : `Auto-built ${result.strategy} deck. Themes: ${result.themes.join(', ') || 'general goodstuff'}`;
     const deck = createDeck(name, format, description);
     const deckId = Number(deck.id);
@@ -69,6 +70,7 @@ export async function POST(request: NextRequest) {
       deckId: deck.id,
       strategy: result.strategy,
       themes: result.themes,
+      tribalType: result.tribalType || null,
       totalCards: result.cards.reduce((s, c) => s + c.quantity, 0),
       mainCards: result.cards.filter((c) => c.board === 'main').reduce((s, c) => s + c.quantity, 0),
       sideboardCards: result.cards.filter((c) => c.board === 'sideboard').reduce((s, c) => s + c.quantity, 0),

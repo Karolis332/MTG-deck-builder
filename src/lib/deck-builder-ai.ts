@@ -117,6 +117,112 @@ function buildSynergyQuery(themes: string[]): string {
   return conditions.length > 0 ? `AND (${conditions.join(' OR ')})` : '';
 }
 
+// ── Tribal detection ────────────────────────────────────────────────────────
+// Detects if a commander is tribal and returns the creature type to build around
+
+const MAJOR_TRIBES: string[] = [
+  'goblin', 'elf', 'zombie', 'vampire', 'merfolk', 'human', 'angel', 'dragon',
+  'sliver', 'soldier', 'wizard', 'elemental', 'spirit', 'beast', 'warrior',
+  'knight', 'dinosaur', 'cat', 'rat', 'bird', 'demon', 'faerie', 'pirate',
+  'cleric', 'rogue', 'shaman', 'druid', 'sphinx', 'werewolf', 'wolf',
+  'insect', 'fungus', 'saproling', 'treefolk', 'minotaur', 'giant', 'dwarf',
+  'artifact creature', 'construct', 'golem', 'horror', 'nightmare', 'phyrexian',
+  'eldrazi', 'ally', 'snake', 'fish', 'kraken', 'leviathan', 'octopus',
+  'squirrel', 'bear', 'ape', 'hydra', 'wurm', 'drake', 'changeling',
+];
+const MAJOR_TRIBES_SET = new Set(MAJOR_TRIBES);
+
+function detectTribalTheme(
+  db: ReturnType<typeof getDb>,
+  commanderName: string
+): string | null {
+  const cmd = db.prepare(
+    'SELECT type_line, oracle_text, subtypes FROM cards WHERE name = ? COLLATE NOCASE LIMIT 1'
+  ).get(commanderName) as { type_line: string; oracle_text: string | null; subtypes: string | null } | undefined;
+
+  if (!cmd) return null;
+
+  const oracleText = (cmd.oracle_text || '').toLowerCase();
+  const typeLine = cmd.type_line.toLowerCase();
+
+  // Parse subtypes from the enriched column or from the type_line
+  let subtypes: string[] = [];
+  if (cmd.subtypes) {
+    try {
+      subtypes = JSON.parse(cmd.subtypes).map((s: string) => s.toLowerCase());
+    } catch {}
+  }
+  if (subtypes.length === 0) {
+    // Fallback: parse from type_line after the em dash
+    const dashIdx = typeLine.indexOf('—');
+    if (dashIdx !== -1) {
+      subtypes = typeLine.slice(dashIdx + 1).trim().split(/\s+/);
+    }
+  }
+
+  // Check if oracle text explicitly references a creature type for tribal payoff
+  // Patterns like "other Goblins", "Goblins you control", "whenever a Goblin"
+  for (const tribe of MAJOR_TRIBES) {  // iterate over array
+    const tribalPatterns = [
+      `other ${tribe}`,
+      `${tribe}s you control`,
+      `${tribe} you control`,
+      `whenever a ${tribe}`,
+      `whenever another ${tribe}`,
+      `each ${tribe}`,
+      `all ${tribe}s`,
+      `${tribe} creature tokens`,
+      `number of ${tribe}`,
+      `create a .* ${tribe}`,
+    ];
+
+    for (const pattern of tribalPatterns) {
+      if (oracleText.includes(pattern)) {
+        return tribe;
+      }
+    }
+  }
+
+  // Check if the commander IS a notable tribal type and has tribal text
+  for (const subtype of subtypes) {
+    if (MAJOR_TRIBES_SET.has(subtype)) {
+      // Only count it as tribal if oracle text references the type at all
+      if (oracleText.includes(subtype)) {
+        return subtype;
+      }
+    }
+  }
+
+  return null;
+}
+
+function fetchTribalCards(
+  db: ReturnType<typeof getDb>,
+  tribe: string,
+  colorExcludeFilter: string,
+  legalityFilter: string,
+  commanderExclude: string,
+  limit: number = 80
+): DbCard[] {
+  // Search for creatures of the tribe type AND cards that reference the tribe
+  const tribeLike = `%${tribe}%`;
+  const query = `
+    SELECT DISTINCT c.* FROM cards c
+    WHERE (
+      c.type_line LIKE ? COLLATE NOCASE
+      OR c.subtypes LIKE ? COLLATE NOCASE
+      OR c.oracle_text LIKE ? COLLATE NOCASE
+    )
+    ${colorExcludeFilter ? `AND ${colorExcludeFilter}` : ''}
+    ${legalityFilter}
+    ${commanderExclude}
+    ORDER BY c.edhrec_rank ASC NULLS LAST
+    LIMIT ?
+  `;
+
+  return db.prepare(query).all(tribeLike, tribeLike, tribeLike, limit) as DbCard[];
+}
+
 // ── Resolve EDHREC card names to DbCard rows ────────────────────────────────
 
 function resolveEdhrecCards(
@@ -170,6 +276,7 @@ interface BuildResult {
   cards: Array<{ card: DbCard; quantity: number; board: 'main' | 'sideboard' }>;
   themes: string[];
   strategy: string;
+  tribalType?: string;
 }
 
 export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult> {
@@ -279,8 +386,28 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
     }
   }
 
+  // ── Tribal detection ───────────────────────────────────────────────────────
+  // If the commander is a tribal leader, fetch matching creature type cards
+
+  let tribalType: string | null = null;
+  let tribalCards: DbCard[] = [];
+  const tribalNames = new Set<string>();
+
+  if (isCommander && commanderName) {
+    tribalType = detectTribalTheme(db, commanderName);
+    if (tribalType) {
+      tribalCards = fetchTribalCards(db, tribalType, colorExcludeFilter, legalityFilter, commanderExclude);
+      for (const c of tribalCards) tribalNames.add(c.name);
+
+      // Ensure 'tribal' is in the themes
+      if (!edhrecThemes.some((t) => t.toLowerCase().includes('tribal'))) {
+        edhrecThemes.push('Tribal');
+      }
+    }
+  }
+
   // ── Step 1: Build card pool ─────────────────────────────────────────────
-  // For commander: start with EDHREC-recommended cards, then fill with DB pool
+  // For commander: start with EDHREC-recommended cards + tribal cards, then generic
   // For non-commander: use global edhrec_rank as before
 
   const poolQuery = `
@@ -296,12 +423,20 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
 
   const dbPool = db.prepare(poolQuery).all() as DbCard[];
 
-  // Merge: EDHREC cards first (commander-specific), then DB pool (generic)
+  // Merge: EDHREC cards first, then tribal cards, then DB pool
   const seenNames = new Set<string>();
   const pool: DbCard[] = [];
 
   // EDHREC cards go first — these are specifically recommended for this commander
   for (const card of edhrecResolvedCards) {
+    if (!seenNames.has(card.name)) {
+      seenNames.add(card.name);
+      pool.push(card);
+    }
+  }
+
+  // Tribal cards next — creatures and synergy cards of the detected type
+  for (const card of tribalCards) {
     if (!seenNames.has(card.name)) {
       seenNames.add(card.name);
       pool.push(card);
@@ -385,6 +520,17 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
       // Cold start AND no EDHREC data: fall back to global edhrec_rank
       if (card.edhrec_rank !== null) {
         score += Math.max(0, 50 - card.edhrec_rank / 400);
+      }
+    }
+
+    // ── Tribal bonus ──
+    // Cards that match the tribal type get a massive score boost
+    if (tribalType && tribalNames.has(card.name)) {
+      score += 30;
+      // Extra bonus for actual creatures of the type (not just cards that mention it)
+      const tl = card.type_line.toLowerCase();
+      if (tl.includes('creature') && tl.includes(tribalType)) {
+        score += 15; // creature of the tribe type
       }
     }
 
@@ -586,6 +732,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
     cards: picked,
     themes,
     strategy: resolvedStrategy,
+    tribalType: tribalType || undefined,
   };
 }
 
