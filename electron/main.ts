@@ -129,15 +129,38 @@ function startNextServer(): Promise<void> {
       'next'
     );
 
-    nextServer = spawn(process.execPath, [nextCli, 'start', '-p', PORT], {
-      cwd: app.getAppPath(),
-      env: {
-        ...process.env,
-        ELECTRON_RUN_AS_NODE: '1',
-        MTG_DB_DIR: getUserDataDir(),
-        PORT,
+    const spawnEnv: Record<string, string> = {
+      ...process.env as Record<string, string>,
+      ELECTRON_RUN_AS_NODE: '1',
+      MTG_DB_DIR: getUserDataDir(),
+      PORT,
+    };
+
+    // Ensure system directories are in PATH so child_process can find
+    // cmd.exe / ComSpec and other OS utilities on Windows.
+    if (process.platform === 'win32') {
+      const system32 = process.env.SystemRoot
+        ? path.join(process.env.SystemRoot, 'System32')
+        : 'C:\\WINDOWS\\system32';
+      if (!spawnEnv.PATH?.includes(system32)) {
+        spawnEnv.PATH = system32 + ';' + (spawnEnv.PATH ?? '');
+      }
+    }
+
+    // Use the directory containing the exe as cwd instead of app.getAppPath(),
+    // which resolves to an .asar archive that isn't a real directory.
+    // spawn() fails with ENOENT when cwd doesn't exist on the real filesystem.
+    const spawnCwd = path.dirname(process.execPath);
+
+    const appDir = app.getAppPath();
+    nextServer = spawn(
+      process.execPath,
+      [nextCli, 'start', '-p', PORT, appDir],
+      {
+        cwd: spawnCwd,
+        env: spawnEnv,
       },
-    });
+    );
 
     nextServer.stdout?.on('data', (data: Buffer) => {
       const output = data.toString();
