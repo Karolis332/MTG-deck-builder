@@ -2,6 +2,8 @@ import { getDb } from './db';
 import type { DbCard, AISuggestion } from './types';
 import { DEFAULT_LAND_COUNT, DEFAULT_DECK_SIZE } from './constants';
 import { getCardGlobalScore, getMetaAdjustedScore } from './global-learner';
+import { getEdhrecRecommendations, getEdhrecThemeCards } from './edhrec';
+import type { EdhrecRecommendation } from './edhrec';
 
 // ── Synergy keyword groups ──────────────────────────────────────────────────
 // Cards sharing keywords within a group have natural synergy
@@ -23,6 +25,55 @@ const SYNERGY_GROUPS: Record<string, string[]> = {
   draw: ['draw a card', 'draw two', 'draw cards', 'scry'],
   equipment: ['equip', 'equipped creature', 'attach'],
   energy: ['energy counter', '{E}'],
+};
+
+// ── Map EDHREC theme labels to local synergy group keys ─────────────────────
+
+const EDHREC_THEME_MAP: Record<string, string> = {
+  'tribal': 'tribal',
+  'tokens': 'tokens',
+  '+1/+1 counters': 'counters',
+  'counters': 'counters',
+  'sacrifice': 'sacrifice',
+  'aristocrats': 'sacrifice',
+  'artifacts': 'artifacts',
+  'enchantments': 'enchantments',
+  'spellslinger': 'spellslinger',
+  'spell copy': 'spellslinger',
+  'storm': 'spellslinger',
+  'lifegain': 'lifegain',
+  'life gain': 'lifegain',
+  'voltron': 'equipment',
+  'equipment': 'equipment',
+  'auras': 'enchantments',
+  'graveyard': 'graveyard',
+  'reanimator': 'graveyard',
+  'mill': 'graveyard',
+  'self-mill': 'graveyard',
+  'energy': 'energy',
+  'superfriends': 'control',
+  'planeswalkers': 'control',
+  'aggro': 'aggro',
+  'control': 'control',
+  'ramp': 'ramp',
+  'landfall': 'ramp',
+  'lands matter': 'ramp',
+  'flying': 'flying',
+  'flyers': 'flying',
+  'draw': 'draw',
+  'wheels': 'draw',
+  'card draw': 'draw',
+  'go wide': 'tokens',
+  'blink': 'control',
+  'flicker': 'control',
+  'clones': 'control',
+  'infect': 'counters',
+  'proliferate': 'counters',
+  'treasure': 'artifacts',
+  'food': 'artifacts',
+  'vehicles': 'artifacts',
+  'sagas': 'enchantments',
+  'topdeck': 'draw',
 };
 
 function detectDeckThemes(cards: DbCard[]): string[] {
@@ -66,6 +117,45 @@ function buildSynergyQuery(themes: string[]): string {
   return conditions.length > 0 ? `AND (${conditions.join(' OR ')})` : '';
 }
 
+// ── Resolve EDHREC card names to DbCard rows ────────────────────────────────
+
+function resolveEdhrecCards(
+  db: ReturnType<typeof getDb>,
+  edhrecCards: EdhrecRecommendation[],
+  colorExcludeFilter: string,
+  legalityFilter: string,
+  commanderExclude: string
+): Array<{ card: DbCard; edhrecSynergy: number; edhrecInclusion: number }> {
+  const resolved: Array<{ card: DbCard; edhrecSynergy: number; edhrecInclusion: number }> = [];
+  const seen = new Set<string>();
+
+  for (const rec of edhrecCards) {
+    if (seen.has(rec.name)) continue;
+    seen.add(rec.name);
+
+    // Look up the card by exact name in our local DB
+    const row = db.prepare(
+      `SELECT c.* FROM cards c
+       WHERE c.name = ? COLLATE NOCASE
+       AND c.type_line NOT LIKE '%Land%'
+       ${colorExcludeFilter ? `AND ${colorExcludeFilter}` : ''}
+       ${legalityFilter}
+       ${commanderExclude}
+       LIMIT 1`
+    ).get(rec.name) as DbCard | undefined;
+
+    if (row) {
+      resolved.push({
+        card: row,
+        edhrecSynergy: rec.synergy,
+        edhrecInclusion: rec.inclusion,
+      });
+    }
+  }
+
+  return resolved;
+}
+
 // ── Main deck builder ───────────────────────────────────────────────────────
 
 interface BuildOptions {
@@ -82,7 +172,7 @@ interface BuildResult {
   strategy: string;
 }
 
-export function autoBuildDeck(options: BuildOptions): BuildResult {
+export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult> {
   const db = getDb();
   const { format, strategy, useCollection = false, commanderName } = options;
 
@@ -120,7 +210,6 @@ export function autoBuildDeck(options: BuildOptions): BuildResult {
     : '';
 
   // ── Collection quantity map ──────────────────────────────────────────────
-  // When useCollection is true, build a map of card_id → total owned quantity
   const ownedQty = new Map<string, number>();
   if (useCollection) {
     const rows = db.prepare(
@@ -131,7 +220,6 @@ export function autoBuildDeck(options: BuildOptions): BuildResult {
     }
   }
 
-  // Collection ordering: owned first, then by quantity descending
   const collectionJoin = useCollection
     ? `LEFT JOIN collection col ON c.id = col.card_id`
     : '';
@@ -139,7 +227,62 @@ export function autoBuildDeck(options: BuildOptions): BuildResult {
     ? `CASE WHEN col.id IS NOT NULL THEN 0 ELSE 1 END,`
     : '';
 
-  // Step 1: Get a pool of strong non-land cards in these colors
+  // ── EDHREC Integration: fetch commander-specific data ─────────────────────
+  // This is the key change: instead of just using global edhrec_rank,
+  // we fetch the actual EDHREC recommendations for THIS specific commander
+
+  let edhrecSynergyMap = new Map<string, { synergy: number; inclusion: number }>();
+  let edhrecThemes: string[] = [];
+  let edhrecResolvedCards: DbCard[] = [];
+
+  if (isCommander && commanderName) {
+    const edhrecData = await getEdhrecRecommendations(commanderName);
+
+    if (edhrecData) {
+      edhrecThemes = edhrecData.themes;
+
+      // Build synergy lookup from EDHREC's commander-specific data
+      for (const rec of edhrecData.topCards) {
+        edhrecSynergyMap.set(rec.name, { synergy: rec.synergy, inclusion: rec.inclusion });
+      }
+
+      // Resolve EDHREC cards to DB rows
+      const resolved = resolveEdhrecCards(
+        db, edhrecData.topCards, colorExcludeFilter, legalityFilter, commanderExclude
+      );
+      edhrecResolvedCards = resolved.map((r) => r.card);
+
+      // Fetch theme-specific cards for the top 2 EDHREC themes
+      const themePromises = edhrecData.themes.slice(0, 2).map((theme) =>
+        getEdhrecThemeCards(commanderName, theme)
+      );
+      const themeResults = await Promise.all(themePromises);
+
+      for (const themeData of themeResults) {
+        if (!themeData) continue;
+        for (const rec of themeData.cards) {
+          // Don't overwrite higher synergy scores from the main list
+          if (!edhrecSynergyMap.has(rec.name) || rec.synergy > (edhrecSynergyMap.get(rec.name)?.synergy || 0)) {
+            edhrecSynergyMap.set(rec.name, { synergy: rec.synergy, inclusion: rec.inclusion });
+          }
+        }
+        // Resolve theme cards too
+        const themeResolved = resolveEdhrecCards(
+          db, themeData.cards, colorExcludeFilter, legalityFilter, commanderExclude
+        );
+        for (const r of themeResolved) {
+          if (!edhrecResolvedCards.some((c) => c.name === r.card.name)) {
+            edhrecResolvedCards.push(r.card);
+          }
+        }
+      }
+    }
+  }
+
+  // ── Step 1: Build card pool ─────────────────────────────────────────────
+  // For commander: start with EDHREC-recommended cards, then fill with DB pool
+  // For non-commander: use global edhrec_rank as before
+
   const poolQuery = `
     SELECT DISTINCT c.* FROM cards c
     ${collectionJoin}
@@ -151,37 +294,101 @@ export function autoBuildDeck(options: BuildOptions): BuildResult {
     LIMIT 300
   `;
 
-  const pool = db.prepare(poolQuery).all() as DbCard[];
+  const dbPool = db.prepare(poolQuery).all() as DbCard[];
 
-  // Step 2: Detect themes from the initial pool's top cards
-  const themes = detectDeckThemes(pool.slice(0, 40));
-  const resolvedStrategy = strategy || (themes.includes('aggro') ? 'aggro' : themes.includes('control') ? 'control' : 'midrange');
+  // Merge: EDHREC cards first (commander-specific), then DB pool (generic)
+  const seenNames = new Set<string>();
+  const pool: DbCard[] = [];
 
-  // Step 3: Score cards by synergy with detected themes + strategy fit
-  const scored = pool.map((card) => {
-    let score = 0;
+  // EDHREC cards go first — these are specifically recommended for this commander
+  for (const card of edhrecResolvedCards) {
+    if (!seenNames.has(card.name)) {
+      seenNames.add(card.name);
+      pool.push(card);
+    }
+  }
 
-    // Global learned rating (primary signal when data exists)
-    const globalRating = getCardGlobalScore(card.name, format);
-    if (globalRating.confidence > 0.3) {
-      // Elo normalized to 0-100 (typical range 1200-1800)
-      const eloScore = Math.max(0, Math.min(100, (globalRating.elo - 1200) / 6));
-      const winRateScore = globalRating.playedWinRate * 100;
-      score += globalRating.confidence * (eloScore * 0.6 + winRateScore * 0.4);
-      // Residual EDHREC for tiebreaking when learned data is partial
-      if (card.edhrec_rank !== null) {
-        score += (1 - globalRating.confidence) * Math.max(0, 100 - card.edhrec_rank / 200);
-      }
-      // Meta boost: cards that beat popular archetypes score higher
-      score += getMetaAdjustedScore(card.name, format);
-    } else {
-      // Cold start: fall back to EDHREC rank
-      if (card.edhrec_rank !== null) {
-        score += Math.max(0, 100 - card.edhrec_rank / 200);
+  // Fill remaining pool slots from the generic DB query
+  for (const card of dbPool) {
+    if (!seenNames.has(card.name)) {
+      seenNames.add(card.name);
+      pool.push(card);
+    }
+  }
+
+  // ── Step 2: Determine themes ────────────────────────────────────────────
+  // For commander: use EDHREC themes mapped to synergy groups, supplemented
+  // by keyword detection from the EDHREC cards themselves
+  // For non-commander: detect from pool as before
+
+  let themes: string[];
+
+  if (isCommander && edhrecThemes.length > 0) {
+    // Map EDHREC theme labels to our synergy group keys
+    const mappedThemes = new Set<string>();
+    for (const edhTheme of edhrecThemes) {
+      const key = edhTheme.toLowerCase();
+      const mapped = EDHREC_THEME_MAP[key];
+      if (mapped) {
+        mappedThemes.add(mapped);
       }
     }
 
-    // Theme synergy bonus
+    // Also detect themes from the EDHREC-recommended cards themselves
+    const edhrecDetected = detectDeckThemes(edhrecResolvedCards);
+    for (const t of edhrecDetected) {
+      mappedThemes.add(t);
+    }
+
+    themes = Array.from(mappedThemes).slice(0, 5);
+
+    // If we still have no themes, fall back to pool detection
+    if (themes.length === 0) {
+      themes = detectDeckThemes(pool.slice(0, 40));
+    }
+  } else {
+    themes = detectDeckThemes(pool.slice(0, 40));
+  }
+
+  const resolvedStrategy = strategy || (themes.includes('aggro') ? 'aggro' : themes.includes('control') ? 'control' : 'midrange');
+
+  // ── Step 3: Score cards ─────────────────────────────────────────────────
+  // Key change: EDHREC per-commander synergy score is now the dominant signal
+  // for commander format decks, replacing the generic edhrec_rank
+
+  const scored = pool.map((card) => {
+    let score = 0;
+
+    // ── EDHREC commander-specific synergy (primary signal for commander) ──
+    const edhrecEntry = edhrecSynergyMap.get(card.name);
+    if (edhrecEntry) {
+      // Synergy score from EDHREC ranges roughly -1 to +1
+      // Scale to 0-50 with a strong positive bias for high-synergy cards
+      score += Math.max(0, (edhrecEntry.synergy + 0.2) * 50);
+
+      // Inclusion rate bonus: cards in >50% of decks are proven staples
+      if (edhrecEntry.inclusion > 0.5) {
+        score += 15;
+      } else if (edhrecEntry.inclusion > 0.3) {
+        score += 8;
+      }
+    }
+
+    // ── Global learned rating (secondary signal when data exists) ──
+    const globalRating = getCardGlobalScore(card.name, format);
+    if (globalRating.confidence > 0.3) {
+      const eloScore = Math.max(0, Math.min(100, (globalRating.elo - 1200) / 6));
+      const winRateScore = globalRating.playedWinRate * 100;
+      score += globalRating.confidence * (eloScore * 0.4 + winRateScore * 0.3);
+      score += getMetaAdjustedScore(card.name, format);
+    } else if (!edhrecEntry) {
+      // Cold start AND no EDHREC data: fall back to global edhrec_rank
+      if (card.edhrec_rank !== null) {
+        score += Math.max(0, 50 - card.edhrec_rank / 400);
+      }
+    }
+
+    // ── Theme synergy bonus ──
     const text = (card.oracle_text || '').toLowerCase();
     const keywords = (card.keywords || '').toLowerCase();
     for (const theme of themes) {
@@ -195,7 +402,7 @@ export function autoBuildDeck(options: BuildOptions): BuildResult {
       }
     }
 
-    // Strategy fit
+    // ── Strategy fit ──
     if (resolvedStrategy === 'aggro') {
       if (card.cmc <= 2) score += 10;
       if (card.cmc <= 3 && card.type_line.includes('Creature')) score += 8;
@@ -211,13 +418,13 @@ export function autoBuildDeck(options: BuildOptions): BuildResult {
       if (text.includes('draw') || text.includes('destroy') || text.includes('create')) score += 3;
     }
 
-    // Collection bonus — owned cards score much higher, unowned much lower
+    // ── Collection bonus ──
     if (useCollection) {
       const owned = ownedQty.get(card.id) || 0;
       if (owned > 0) {
-        score += 30; // strong preference for owned cards
+        score += 30;
       } else {
-        score -= 40; // significant penalty for unowned cards
+        score -= 40;
       }
     }
 
@@ -238,13 +445,10 @@ export function autoBuildDeck(options: BuildOptions): BuildResult {
   const pickedNames = new Set<string>();
   let totalPicked = 0;
 
-  // Helper: determine max quantity for a card (respects collection if enabled)
   function getMaxQty(card: DbCard): number {
     const formatMax = isCommander ? 1 : maxCopies;
     if (!useCollection) return formatMax;
     const owned = ownedQty.get(card.id) || 0;
-    // Allow unowned cards as fallback but cap at 0 if strict collection mode
-    // For now, still allow unowned but they scored poorly above
     return owned > 0 ? Math.min(formatMax, owned) : formatMax;
   }
 
@@ -284,24 +488,17 @@ export function autoBuildDeck(options: BuildOptions): BuildResult {
   }
 
   // ── Step 5: Add lands ─────────────────────────────────────────────────────
-  // Land strategy depends heavily on number of colors:
-  //   1 color  → mostly basics, 2-4 utility lands max
-  //   2 colors → ~8-12 non-basics (duals, fastlands, painlands), rest basics
-  //   3+ colors → maximize non-basics for fixing
-
   const basicLandMap: Record<string, string> = {
     W: 'Plains', U: 'Island', B: 'Swamp', R: 'Mountain', G: 'Forest',
   };
 
   const numColors = colors.length;
-  // How many non-basic land slots to target based on color count
   const nonBasicTarget = numColors <= 1
-    ? Math.min(4, targetLands)          // mono: at most 4 utility lands
+    ? Math.min(4, targetLands)
     : numColors === 2
-      ? Math.min(12, targetLands - 8)   // 2-color: ~12 duals, keep at least 8 basics
-      : Math.min(20, targetLands - 5);  // 3+: heavy on fixing, at least 5 basics
+      ? Math.min(12, targetLands - 8)
+      : Math.min(20, targetLands - 5);
 
-  // Fetch non-basic lands, prioritizing untapped ones
   const landPool = db.prepare(`
     SELECT c.* FROM cards c
     ${collectionJoin}
@@ -318,12 +515,10 @@ export function autoBuildDeck(options: BuildOptions): BuildResult {
 
   let landsAdded = 0;
 
-  // Add non-basic lands up to the target
   for (const land of landPool) {
     if (landsAdded >= nonBasicTarget) break;
     if (pickedNames.has(land.name)) continue;
 
-    // For mono-color, skip taplands entirely — only untapped utility lands
     const oracleText = (land.oracle_text || '').toLowerCase();
     if (numColors <= 1) {
       const entersTapped = oracleText.includes('enters the battlefield tapped')
@@ -340,7 +535,7 @@ export function autoBuildDeck(options: BuildOptions): BuildResult {
     landsAdded += qty;
   }
 
-  // Fill remaining land slots with basics — split evenly across colors
+  // Fill remaining land slots with basics
   if (colors.length > 0 && landsAdded < targetLands) {
     const remaining = targetLands - landsAdded;
     const perColor = Math.floor(remaining / colors.length);
@@ -364,7 +559,7 @@ export function autoBuildDeck(options: BuildOptions): BuildResult {
     }
   }
 
-  // Step 6: Build sideboard (non-commander, top-scored cards not in main)
+  // Step 6: Build sideboard (non-commander)
   if (!isCommander) {
     let sideCount = 0;
     for (const { card } of scored) {
@@ -433,18 +628,15 @@ export function getSynergySuggestions(
     : '';
 
   // ── Load match insights if we have a deck ID ──────────────────────────
-  // This lets the suggestion engine learn from game history
   const insightData = deckId ? loadDeckInsights(db, deckId) : null;
 
   const synergyFilter = buildSynergyQuery(themes);
   const idPlaceholders = Array.from(existingIds).map(() => '?').join(',') || "''";
 
-  // If match data reveals recurring threats, also search for answers
   const answerFilter = insightData?.recurringThreats.length
     ? `OR (c.oracle_text LIKE '%destroy%' OR c.oracle_text LIKE '%exile%' OR c.oracle_text LIKE '%counter target%')`
     : '';
 
-  // Collection-only mode: only suggest cards the user owns
   const collectionJoin = collectionOnly
     ? 'INNER JOIN collection col ON c.id = col.card_id'
     : '';
@@ -468,11 +660,9 @@ export function getSynergySuggestions(
   const suggestedNames = new Set<string>();
   for (const card of candidates) {
     if (existingNames.has(card.name)) continue;
-    // Deduplicate by name — same card has many printings with different IDs
     if (suggestedNames.has(card.name)) continue;
     suggestedNames.add(card.name);
 
-    // Determine why this card is suggested
     const text = (card.oracle_text || '').toLowerCase();
     const matchedThemes: string[] = [];
 
@@ -484,7 +674,6 @@ export function getSynergySuggestions(
       }
     }
 
-    // Base score uses global learned data when available
     const globalScore = getCardGlobalScore(card.name, format);
     let score: number;
     if (globalScore.confidence > 0.3) {
@@ -504,7 +693,6 @@ export function getSynergySuggestions(
       reasons.push('Top-ranked staple in this color combination');
     }
 
-    // Meta-awareness boost
     const metaBoost = getMetaAdjustedScore(card.name, format);
     if (metaBoost > 0) {
       score += metaBoost;
@@ -513,7 +701,6 @@ export function getSynergySuggestions(
 
     // ── Match insight scoring ─────────────────────────────────────────
     if (insightData) {
-      // Boost cards that answer recurring threats
       if (insightData.recurringThreats.length > 0) {
         const isRemoval = text.includes('destroy') || text.includes('exile target')
           || text.includes('counter target') || text.includes('return target');
@@ -523,7 +710,6 @@ export function getSynergySuggestions(
         }
       }
 
-      // Boost cheap cards if dying too fast
       if (insightData.dyingFast && card.cmc <= 2) {
         score += 10;
         if (text.includes('lifelink') || text.includes('gain') || text.includes('block')) {
@@ -532,9 +718,7 @@ export function getSynergySuggestions(
         }
       }
 
-      // Boost cards similar to strong performers in the deck
       for (const strong of insightData.strongCards) {
-        // If this candidate shares keywords with a strong card, boost it
         const strongInDeck = mainCards.find((dc) => dc.name === strong.name);
         if (strongInDeck) {
           const strongText = (strongInDeck.oracle_text || '').toLowerCase();
@@ -547,11 +731,9 @@ export function getSynergySuggestions(
         }
       }
 
-      // Penalize cards similar to weak performers
       for (const weak of insightData.weakCards) {
         const weakInDeck = mainCards.find((dc) => dc.name === weak.name);
         if (weakInDeck) {
-          // If same CMC and same type as a weak card, slight penalty
           if (card.cmc === weakInDeck.cmc && card.type_line.split('—')[0] === weakInDeck.type_line.split('—')[0]) {
             score -= 5;
           }

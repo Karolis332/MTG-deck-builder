@@ -31,7 +31,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const result = autoBuildDeck({
+    const result = await autoBuildDeck({
       format,
       colors,
       strategy,
