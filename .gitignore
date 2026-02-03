@@ -11,8 +11,7 @@
 /.next/
 /out/
 
-# production
-/build
+# production (not /build — used by electron-builder for icons/resources)
 
 # misc
 .DS_Store

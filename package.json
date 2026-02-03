@@ -16,6 +16,12 @@
     "build:electron": "tsc -p tsconfig.electron.json",
     "dev:electron": "concurrently \"next dev\" \"wait-on http://localhost:3000 && electron --no-sandbox .\"",
     "dist:electron": "npm run build && npm run build:electron && electron-builder",
+    "dist:win": "npm run build && npm run build:electron && electron-builder --win",
+    "dist:mac": "npm run build && npm run build:electron && electron-builder --mac",
+    "dist:linux": "npm run build && npm run build:electron && electron-builder --linux",
+    "dist:all": "npm run build && npm run build:electron && electron-builder --win --mac --linux",
+    "dist:portable": "npm run build && npm run build:electron && electron-builder --win portable",
+    "dist:zip": "npm run build && npm run build:electron && electron-builder --win zip --mac zip --linux tar.gz",
     "postinstall": "electron-builder install-app-deps || true"
   },
   "dependencies": {

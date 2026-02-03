@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MTG Deck Builder - Setup</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #0a0a0f;
+      color: #e2e8f0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .setup-container {
+      width: 580px;
+      max-height: 90vh;
+      background: linear-gradient(145deg, #1a1a2e 0%, #16213e 100%);
+      border: 1px solid #2a2a4a;
+      border-radius: 16px;
+      padding: 40px;
+      box-shadow: 0 25px 80px rgba(0,0,0,0.6);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .setup-container::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: linear-gradient(45deg, #7c3aed, #2563eb, #7c3aed);
+      border-radius: 17px;
+      z-index: -1;
+      opacity: 0.3;
+    }
+
+    .logo {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .logo h1 {
+      font-size: 28px;
+      font-weight: 700;
+      background: linear-gradient(135deg, #a78bfa, #60a5fa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 4px;
+    }
+
+    .logo p {
+      color: #94a3b8;
+      font-size: 14px;
+    }
+
+    /* Steps indicator */
+    .steps {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 32px;
+    }
+
+    .step-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #334155;
+      transition: all 0.3s;
+    }
+
+    .step-dot.active {
+      background: #7c3aed;
+      box-shadow: 0 0 12px rgba(124, 58, 237, 0.5);
+    }
+
+    .step-dot.done {
+      background: #22c55e;
+    }
+
+    /* Step panels */
+    .step-panel {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .step-panel.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .step-title {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .step-desc {
+      color: #94a3b8;
+      font-size: 14px;
+      margin-bottom: 24px;
+      line-height: 1.5;
+    }
+
+    /* Progress bar */
+    .progress-wrap {
+      background: #1e293b;
+      border-radius: 8px;
+      overflow: hidden;
+      height: 8px;
+      margin: 16px 0;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, #7c3aed, #2563eb);
+      border-radius: 8px;
+      transition: width 0.4s ease;
+      width: 0%;
+    }
+
+    .progress-text {
+      color: #94a3b8;
+      font-size: 13px;
+      text-align: center;
+      margin-top: 8px;
+    }
+
+    /* Status items */
+    .status-list {
+      list-style: none;
+      margin: 16px 0;
+    }
+
+    .status-list li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 0;
+      font-size: 14px;
+      color: #94a3b8;
+    }
+
+    .status-list li.done { color: #22c55e; }
+    .status-list li.active { color: #e2e8f0; }
+    .status-list li.error { color: #ef4444; }
+
+    .status-icon {
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+    }
+
+    .spinner {
+      width: 16px;
+      height: 16px;
+      border: 2px solid #334155;
+      border-top-color: #7c3aed;
+      border-radius: 50%;
+      animation: spin 0.6s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Form elements */
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: #94a3b8;
+      margin-bottom: 6px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 10px 14px;
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      color: #e2e8f0;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .form-group input:focus {
+      border-color: #7c3aed;
+    }
+
+    .form-group .hint {
+      font-size: 12px;
+      color: #64748b;
+      margin-top: 4px;
+    }
+
+    .form-error {
+      font-size: 12px;
+      color: #ef4444;
+      margin-top: 4px;
+      display: none;
+    }
+
+    /* Arena path picker */
+    .path-picker {
+      display: flex;
+      gap: 8px;
+    }
+
+    .path-picker input {
+      flex: 1;
+    }
+
+    .path-picker button {
+      padding: 10px 16px;
+      background: #334155;
+      border: 1px solid #475569;
+      border-radius: 8px;
+      color: #e2e8f0;
+      cursor: pointer;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    .path-picker button:hover {
+      background: #475569;
+    }
+
+    /* Buttons */
+    .btn-row {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .btn {
+      padding: 10px 24px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #7c3aed, #2563eb);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .btn-secondary {
+      background: #1e293b;
+      color: #94a3b8;
+      border: 1px solid #334155;
+    }
+
+    .btn-secondary:hover {
+      background: #334155;
+      color: #e2e8f0;
+    }
+
+    .btn-link {
+      background: none;
+      border: none;
+      color: #7c3aed;
+      cursor: pointer;
+      font-size: 13px;
+      padding: 0;
+    }
+
+    .btn-link:hover {
+      text-decoration: underline;
+    }
+
+    /* Checkbox */
+    .checkbox-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 12px 0;
+    }
+
+    .checkbox-row input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      accent-color: #7c3aed;
+    }
+
+    .checkbox-row label {
+      font-size: 14px;
+      color: #94a3b8;
+      cursor: pointer;
+    }
+
+    /* Info card */
+    .info-card {
+      background: #0f172a;
+      border: 1px solid #1e293b;
+      border-radius: 8px;
+      padding: 16px;
+      margin: 16px 0;
+    }
+
+    .info-card h3 {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #a78bfa;
+    }
+
+    .info-card p {
+      font-size: 13px;
+      color: #94a3b8;
+      line-height: 1.5;
+    }
+
+    /* Complete screen */
+    .complete-icon {
+      width: 64px;
+      height: 64px;
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 28px;
+    }
+
+    .complete-text {
+      text-align: center;
+    }
+
+    .complete-text h2 {
+      font-size: 22px;
+      margin-bottom: 8px;
+    }
+
+    .complete-text p {
+      color: #94a3b8;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <div class="setup-container">
+    <div class="logo">
+      <h1>MTG Deck Builder</h1>
+      <p>First-time setup</p>
+    </div>
+
+    <div class="steps">
+      <div class="step-dot active" data-step="0"></div>
+      <div class="step-dot" data-step="1"></div>
+      <div class="step-dot" data-step="2"></div>
+      <div class="step-dot" data-step="3"></div>
+    </div>
+
+    <!-- Step 0: Welcome / Init -->
+    <div class="step-panel active" id="step-0">
+      <div class="step-title">Setting up your environment</div>
+      <div class="step-desc">
+        Initializing the database and preparing the application for first use.
+      </div>
+
+      <ul class="status-list" id="init-status">
+        <li class="active" id="init-db">
+          <span class="status-icon"><div class="spinner"></div></span>
+          Creating local database...
+        </li>
+        <li id="init-migrations">
+          <span class="status-icon">&#x25CB;</span>
+          Running migrations...
+        </li>
+        <li id="init-dirs">
+          <span class="status-icon">&#x25CB;</span>
+          Setting up data directories...
+        </li>
+      </ul>
+
+      <div class="progress-wrap">
+        <div class="progress-bar" id="init-progress" style="width: 0%"></div>
+      </div>
+      <div class="progress-text" id="init-progress-text">Initializing...</div>
+    </div>
+
+    <!-- Step 1: Account creation -->
+    <div class="step-panel" id="step-1">
+      <div class="step-title">Create your account</div>
+      <div class="step-desc">
+        Your account is stored locally on this computer. No data leaves your machine.
+      </div>
+
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" placeholder="Enter a username" autocomplete="off">
+        <div class="form-error" id="username-error"></div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="your@email.com" autocomplete="off">
+        <div class="form-error" id="email-error"></div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="Choose a password (min 6 chars)">
+        <div class="form-error" id="password-error"></div>
+      </div>
+
+      <div class="info-card">
+        <h3>100% Local</h3>
+        <p>Your account and all data are stored in a local SQLite database on your computer. Nothing is sent to any server.</p>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn btn-secondary" onclick="skipAccount()">Skip for now</button>
+        <button class="btn btn-primary" onclick="createAccount()">Create Account</button>
+      </div>
+    </div>
+
+    <!-- Step 2: Card database -->
+    <div class="step-panel" id="step-2">
+      <div class="step-title">Download card database</div>
+      <div class="step-desc">
+        Download the MTG card database from Scryfall (~50,000 cards). This is needed for deck building, search, and collection tracking.
+      </div>
+
+      <div class="checkbox-row">
+        <input type="checkbox" id="seed-now" checked>
+        <label for="seed-now">Download card database now (recommended)</label>
+      </div>
+
+      <div id="seed-progress-section" style="display: none;">
+        <div class="progress-wrap">
+          <div class="progress-bar" id="seed-progress"></div>
+        </div>
+        <div class="progress-text" id="seed-progress-text">Preparing download...</div>
+      </div>
+
+      <div class="info-card">
+        <h3>About the card database</h3>
+        <p>Card data comes from Scryfall's public API. The download is about 50MB and includes card names, images, prices, and Arena IDs. You can always re-download later from the dashboard.</p>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn btn-secondary" onclick="skipSeed()">Skip</button>
+        <button class="btn btn-primary" id="seed-btn" onclick="startSeed()">Download Cards</button>
+      </div>
+    </div>
+
+    <!-- Step 3: Arena integration -->
+    <div class="step-panel" id="step-3">
+      <div class="step-title">Arena log integration</div>
+      <div class="step-desc">
+        Connect to MTG Arena's log file to automatically track your matches, import your collection, and analyze your gameplay.
+      </div>
+
+      <div class="form-group">
+        <label>Arena Player.log location</label>
+        <div class="path-picker">
+          <input type="text" id="arena-path" placeholder="Auto-detected..." readonly>
+          <button onclick="browseArenaLog()">Browse</button>
+        </div>
+        <div class="hint" id="arena-path-hint">We'll try to detect this automatically.</div>
+      </div>
+
+      <div class="checkbox-row">
+        <input type="checkbox" id="auto-watch" checked>
+        <label for="auto-watch">Auto-start log watcher when app opens</label>
+      </div>
+
+      <div class="info-card">
+        <h3>How it works</h3>
+        <p>The app watches Arena's Player.log file for match results and collection data. Launch Arena, play games, and the app automatically records your matches with full deck and card data.</p>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn btn-secondary" onclick="skipArena()">Skip</button>
+        <button class="btn btn-primary" onclick="finishSetup()">Finish Setup</button>
+      </div>
+    </div>
+
+    <!-- Step 4: Complete -->
+    <div class="step-panel" id="step-4">
+      <div class="complete-icon">&#10003;</div>
+      <div class="complete-text">
+        <h2>You're all set!</h2>
+        <p>MTG Deck Builder is ready. The app will launch momentarily.</p>
+      </div>
+      <div class="btn-row" style="justify-content: center; margin-top: 24px;">
+        <button class="btn btn-primary" onclick="launchApp()">Launch App</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // IPC bridge — these methods are exposed by preload
+    const api = window.setupAPI || {};
+
+    let currentStep = 0;
+
+    // ── Step navigation ───────────────────────────────────────────────────
+    function goToStep(n) {
+      document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
+      document.getElementById(`step-${n}`).classList.add('active');
+
+      document.querySelectorAll('.step-dot').forEach((dot, i) => {
+        dot.classList.remove('active', 'done');
+        if (i < n) dot.classList.add('done');
+        if (i === n) dot.classList.add('active');
+      });
+
+      currentStep = n;
+    }
+
+    // ── Step 0: Environment init ──────────────────────────────────────────
+    async function runInit() {
+      try {
+        // DB creation
+        updateInitItem('init-db', 'active');
+        document.getElementById('init-progress').style.width = '20%';
+        await api.initDatabase();
+        updateInitItem('init-db', 'done', 'Database created');
+
+        // Migrations
+        updateInitItem('init-migrations', 'active');
+        document.getElementById('init-progress').style.width = '60%';
+        document.getElementById('init-progress-text').textContent = 'Running migrations...';
+        // Migrations run as part of initDatabase, but small delay for UX
+        await sleep(500);
+        updateInitItem('init-migrations', 'done', 'Migrations applied');
+
+        // Data dirs
+        updateInitItem('init-dirs', 'active');
+        document.getElementById('init-progress').style.width = '100%';
+        document.getElementById('init-progress-text').textContent = 'Complete!';
+        await sleep(300);
+        updateInitItem('init-dirs', 'done', 'Data directories ready');
+
+        await sleep(600);
+        goToStep(1);
+      } catch (err) {
+        document.getElementById('init-progress-text').textContent = 'Error: ' + err.message;
+        updateInitItem('init-db', 'error', 'Setup failed — ' + err.message);
+      }
+    }
+
+    function updateInitItem(id, state, text) {
+      const el = document.getElementById(id);
+      el.className = state;
+      if (state === 'done') {
+        el.querySelector('.status-icon').innerHTML = '&#10003;';
+      } else if (state === 'active') {
+        el.querySelector('.status-icon').innerHTML = '<div class="spinner"></div>';
+      } else if (state === 'error') {
+        el.querySelector('.status-icon').innerHTML = '&#10007;';
+      }
+      if (text) {
+        el.childNodes[el.childNodes.length - 1].textContent = text;
+      }
+    }
+
+    // ── Step 1: Account ───────────────────────────────────────────────────
+    async function createAccount() {
+      const username = document.getElementById('username').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+
+      // Validation
+      let valid = true;
+      if (!username || username.length < 3) {
+        showError('username-error', 'Username must be at least 3 characters');
+        valid = false;
+      } else {
+        hideError('username-error');
+      }
+      if (!email || !email.includes('@')) {
+        showError('email-error', 'Please enter a valid email');
+        valid = false;
+      } else {
+        hideError('email-error');
+      }
+      if (!password || password.length < 6) {
+        showError('password-error', 'Password must be at least 6 characters');
+        valid = false;
+      } else {
+        hideError('password-error');
+      }
+
+      if (!valid) return;
+
+      try {
+        await api.createAccount({ username, email, password });
+        goToStep(2);
+      } catch (err) {
+        showError('username-error', err.message || 'Failed to create account');
+      }
+    }
+
+    function skipAccount() {
+      goToStep(2);
+    }
+
+    function showError(id, msg) {
+      const el = document.getElementById(id);
+      el.textContent = msg;
+      el.style.display = 'block';
+    }
+
+    function hideError(id) {
+      document.getElementById(id).style.display = 'none';
+    }
+
+    // ── Step 2: Card seeding ──────────────────────────────────────────────
+    async function startSeed() {
+      const checkbox = document.getElementById('seed-now');
+      if (!checkbox.checked) {
+        goToStep(3);
+        return;
+      }
+
+      document.getElementById('seed-btn').disabled = true;
+      document.getElementById('seed-progress-section').style.display = 'block';
+
+      try {
+        // Listen for progress updates
+        if (api.onSeedProgress) {
+          api.onSeedProgress((progress) => {
+            document.getElementById('seed-progress').style.width = progress.percent + '%';
+            document.getElementById('seed-progress-text').textContent = progress.message;
+          });
+        }
+
+        await api.seedCards();
+        document.getElementById('seed-progress').style.width = '100%';
+        document.getElementById('seed-progress-text').textContent = 'Card database downloaded!';
+        await sleep(800);
+        goToStep(3);
+      } catch (err) {
+        document.getElementById('seed-progress-text').textContent = 'Error: ' + err.message;
+        document.getElementById('seed-btn').disabled = false;
+      }
+    }
+
+    function skipSeed() {
+      goToStep(3);
+    }
+
+    // ── Step 3: Arena integration ─────────────────────────────────────────
+    async function browseArenaLog() {
+      try {
+        const filePath = await api.selectArenaLogPath();
+        if (filePath) {
+          document.getElementById('arena-path').value = filePath;
+          document.getElementById('arena-path-hint').textContent = 'Log file selected.';
+        }
+      } catch (err) {
+        document.getElementById('arena-path-hint').textContent = 'Error selecting file.';
+      }
+    }
+
+    async function finishSetup() {
+      const arenaPath = document.getElementById('arena-path').value;
+      const autoWatch = document.getElementById('auto-watch').checked;
+
+      try {
+        await api.saveSetupConfig({
+          arenaLogPath: arenaPath || null,
+          autoStartWatcher: autoWatch,
+          setupComplete: true,
+        });
+      } catch (err) {
+        // Non-blocking — save what we can
+        console.error('Failed to save config:', err);
+      }
+
+      goToStep(4);
+    }
+
+    function skipArena() {
+      api.saveSetupConfig({ arenaLogPath: null, autoStartWatcher: false, setupComplete: true })
+        .catch(() => {});
+      goToStep(4);
+    }
+
+    // ── Step 4: Launch ────────────────────────────────────────────────────
+    function launchApp() {
+      api.launchMainApp();
+    }
+
+    // ── Utilities ─────────────────────────────────────────────────────────
+    function sleep(ms) {
+      return new Promise(r => setTimeout(r, ms));
+    }
+
+    // ── Boot ──────────────────────────────────────────────────────────────
+    window.addEventListener('DOMContentLoaded', async () => {
+      // Try to detect arena log path
+      if (api.getDefaultArenaLogPath) {
+        try {
+          const defaultPath = await api.getDefaultArenaLogPath();
+          document.getElementById('arena-path').value = defaultPath || '';
+          if (defaultPath) {
+            document.getElementById('arena-path-hint').textContent = 'Auto-detected Arena log location.';
+          }
+        } catch {}
+      }
+
+      // Start init
+      runInit();
+    });
+  </script>
+</body>
+</html>
