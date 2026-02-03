@@ -368,7 +368,7 @@ export const MIGRATIONS = [
     `,
   },
   {
-    version: 2,
+    version: 12,
     name: 'add_users_and_ownership',
     sql: `
       CREATE TABLE IF NOT EXISTS users (

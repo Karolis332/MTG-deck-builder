@@ -3,7 +3,7 @@ import path from 'path';
 import fs from 'fs';
 import { MIGRATIONS } from '@/db/schema';
 
-const DB_DIR = path.join(process.cwd(), 'data');
+const DB_DIR = process.env.MTG_DB_DIR || path.join(process.cwd(), 'data');
 const DB_PATH = path.join(DB_DIR, 'mtg-deck-builder.db');
 
 function createDatabase(): Database.Database {
@@ -447,4 +447,85 @@ export function clearCollection(userId?: number) {
   } else {
     getDb().prepare('DELETE FROM collection').run();
   }
+}
+
+// ── Arena ID helpers ──────────────────────────────────────────────────────────
+
+export function getCardByArenaId(arenaId: number) {
+  return getDb()
+    .prepare('SELECT * FROM cards WHERE arena_id = ?')
+    .get(arenaId) as Record<string, unknown> | undefined;
+}
+
+export function resolveArenaIds(
+  arenaIds: string[]
+): Map<string, Record<string, unknown>> {
+  const db = getDb();
+  const result = new Map<string, Record<string, unknown>>();
+  const stmt = db.prepare('SELECT * FROM cards WHERE arena_id = ?');
+  for (const aid of arenaIds) {
+    const num = parseInt(aid, 10);
+    if (isNaN(num)) continue;
+    const card = stmt.get(num) as Record<string, unknown> | undefined;
+    if (card) {
+      result.set(aid, card);
+    }
+  }
+  return result;
+}
+
+export function getArenaIdCoverage(): { total: number; withArenaId: number } {
+  const db = getDb();
+  const total = (
+    db.prepare('SELECT COUNT(*) as count FROM cards').get() as { count: number }
+  ).count;
+  const withArenaId = (
+    db
+      .prepare('SELECT COUNT(*) as count FROM cards WHERE arena_id IS NOT NULL')
+      .get() as { count: number }
+  ).count;
+  return { total, withArenaId };
+}
+
+export function storeArenaParsedMatch(match: {
+  matchId: string;
+  playerName: string | null;
+  opponentName: string | null;
+  result: string;
+  format: string | null;
+  turns: number;
+  deckCards: string | null;
+  cardsPlayed: string | null;
+  opponentCardsSeen: string | null;
+}): boolean {
+  const db = getDb();
+  try {
+    db.prepare(
+      `INSERT OR IGNORE INTO arena_parsed_matches
+       (match_id, player_name, opponent_name, result, format, turns,
+        deck_cards, cards_played, opponent_cards_seen)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`
+    ).run(
+      match.matchId,
+      match.playerName,
+      match.opponentName,
+      match.result,
+      match.format,
+      match.turns,
+      match.deckCards,
+      match.cardsPlayed,
+      match.opponentCardsSeen
+    );
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+export function getArenaParsedMatches(limit = 100) {
+  return getDb()
+    .prepare(
+      'SELECT * FROM arena_parsed_matches ORDER BY parsed_at DESC LIMIT ?'
+    )
+    .all(limit);
 }
