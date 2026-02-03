@@ -330,4 +330,20 @@ export const MIGRATIONS = [
       CREATE INDEX IF NOT EXISTS idx_arena_match_id ON arena_parsed_matches(match_id);
     `,
   },
+  {
+    version: 10,
+    name: 'add_analytics_snapshots',
+    sql: `
+      CREATE TABLE IF NOT EXISTS analytics_snapshots (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        snapshot_type TEXT NOT NULL,
+        format TEXT NOT NULL DEFAULT '',
+        data TEXT NOT NULL,
+        created_at TEXT NOT NULL DEFAULT (datetime('now')),
+        UNIQUE(snapshot_type, format)
+      );
+
+      CREATE INDEX IF NOT EXISTS idx_analytics_type ON analytics_snapshots(snapshot_type);
+    `,
+  },
 ];
