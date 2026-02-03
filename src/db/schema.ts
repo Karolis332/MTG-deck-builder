@@ -288,4 +288,24 @@ export const MIGRATIONS = [
       CREATE INDEX IF NOT EXISTS idx_cards_arena_id ON cards(arena_id);
     `,
   },
+  {
+    version: 8,
+    name: 'add_commander_synergies',
+    sql: `
+      CREATE TABLE IF NOT EXISTS commander_synergies (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        commander_name TEXT NOT NULL,
+        card_name TEXT NOT NULL,
+        synergy_score REAL NOT NULL DEFAULT 0,
+        inclusion_rate REAL NOT NULL DEFAULT 0,
+        card_type TEXT DEFAULT NULL,
+        source TEXT NOT NULL DEFAULT 'edhrec',
+        updated_at TEXT NOT NULL DEFAULT (datetime('now')),
+        UNIQUE(commander_name, card_name)
+      );
+
+      CREATE INDEX IF NOT EXISTS idx_cmd_syn_commander ON commander_synergies(commander_name);
+      CREATE INDEX IF NOT EXISTS idx_cmd_syn_score ON commander_synergies(synergy_score DESC);
+    `,
+  },
 ];

@@ -335,14 +335,45 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
     : '';
 
   // ── EDHREC Integration: fetch commander-specific data ─────────────────────
-  // This is the key change: instead of just using global edhrec_rank,
-  // we fetch the actual EDHREC recommendations for THIS specific commander
+  // Check local commander_synergies table first (populated by Python scripts),
+  // then fall back to live EDHREC fetch
 
   let edhrecSynergyMap = new Map<string, { synergy: number; inclusion: number }>();
   let edhrecThemes: string[] = [];
   let edhrecResolvedCards: DbCard[] = [];
 
   if (isCommander && commanderName) {
+    // Check if we have pre-enriched synergies from the Python pipeline
+    try {
+      const localSynergies = db.prepare(
+        `SELECT card_name, synergy_score, inclusion_rate FROM commander_synergies
+         WHERE commander_name = ? COLLATE NOCASE
+         ORDER BY synergy_score DESC`
+      ).all(commanderName) as Array<{ card_name: string; synergy_score: number; inclusion_rate: number }>;
+
+      if (localSynergies.length > 0) {
+        for (const row of localSynergies) {
+          edhrecSynergyMap.set(row.card_name, {
+            synergy: row.synergy_score,
+            inclusion: row.inclusion_rate,
+          });
+        }
+        // Resolve local synergy card names to DB rows
+        const localRecs = localSynergies.map((r) => ({
+          name: r.card_name,
+          synergy: r.synergy_score,
+          inclusion: r.inclusion_rate,
+        }));
+        const resolved = resolveEdhrecCards(
+          db, localRecs, colorExcludeFilter, legalityFilter, commanderExclude
+        );
+        edhrecResolvedCards = resolved.map((r) => r.card);
+      }
+    } catch {
+      // Table may not exist yet — that's fine, the live EDHREC fetch handles it
+    }
+
+    // Always try the live EDHREC fetch for themes + any cards not in local DB
     const edhrecData = await getEdhrecRecommendations(commanderName);
 
     if (edhrecData) {
