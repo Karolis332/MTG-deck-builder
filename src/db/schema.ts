@@ -399,4 +399,59 @@ export const MIGRATIONS = [
       CREATE INDEX IF NOT EXISTS idx_arena_deck_id ON arena_parsed_matches(deck_id);
     `,
   },
+  {
+    version: 14,
+    name: 'add_ml_training_data',
+    sql: `
+      CREATE TABLE IF NOT EXISTS ml_training_data (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        deck_id INTEGER NOT NULL REFERENCES decks(id) ON DELETE CASCADE,
+        match_id INTEGER REFERENCES match_logs(id) ON DELETE CASCADE,
+        arena_match_id INTEGER REFERENCES arena_parsed_matches(id) ON DELETE CASCADE,
+
+        -- Snapshot of deck at match time
+        deck_snapshot TEXT NOT NULL, -- JSON: {cards: [{name, quantity, cmc, colors}], commander: "..."}
+        deck_format TEXT NOT NULL,
+        deck_colors TEXT NOT NULL, -- JSON: ["W", "U", "B", "R", "G"]
+
+        -- Match outcome
+        game_outcome TEXT NOT NULL CHECK(game_outcome IN ('win', 'loss', 'draw')),
+        turn_count INTEGER,
+        opponent_archetype TEXT, -- "Aggro", "Control", "Combo", "Midrange", etc.
+        opponent_colors TEXT, -- JSON array
+
+        -- Deck statistics
+        mana_curve TEXT NOT NULL, -- JSON: {0: count, 1: count, ...}
+        avg_cmc REAL NOT NULL,
+        land_count INTEGER NOT NULL,
+        creature_count INTEGER NOT NULL,
+        spell_count INTEGER NOT NULL,
+
+        -- ML training flags
+        is_training INTEGER NOT NULL DEFAULT 1,      -- 1 = training set, 0 = not training
+        is_validation INTEGER NOT NULL DEFAULT 0,    -- 1 = validation set
+        is_test INTEGER NOT NULL DEFAULT 0,          -- 1 = test set
+        quality_score INTEGER DEFAULT 50 CHECK(quality_score BETWEEN 0 AND 100),
+        reviewed INTEGER NOT NULL DEFAULT 0,         -- 1 = human reviewed
+        notes TEXT,
+
+        -- Metadata
+        created_at TEXT NOT NULL DEFAULT (datetime('now')),
+        updated_at TEXT NOT NULL DEFAULT (datetime('now')),
+
+        CONSTRAINT only_one_match CHECK (
+          (match_id IS NOT NULL AND arena_match_id IS NULL) OR
+          (match_id IS NULL AND arena_match_id IS NOT NULL)
+        )
+      );
+
+      CREATE INDEX IF NOT EXISTS idx_ml_deck_id ON ml_training_data(deck_id);
+      CREATE INDEX IF NOT EXISTS idx_ml_outcome ON ml_training_data(game_outcome);
+      CREATE INDEX IF NOT EXISTS idx_ml_training_flag ON ml_training_data(is_training);
+      CREATE INDEX IF NOT EXISTS idx_ml_validation_flag ON ml_training_data(is_validation);
+      CREATE INDEX IF NOT EXISTS idx_ml_test_flag ON ml_training_data(is_test);
+      CREATE INDEX IF NOT EXISTS idx_ml_quality ON ml_training_data(quality_score);
+      CREATE INDEX IF NOT EXISTS idx_ml_created ON ml_training_data(created_at);
+    `,
+  },
 ];

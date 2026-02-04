@@ -161,11 +161,18 @@ function startNextServer(): Promise<void> {
       'next'
     );
 
+    // With asar disabled, app.getAppPath() is a real directory containing
+    // .next/, node_modules/, public/, etc. Use it as both the app dir and cwd.
+    const appDir = app.getAppPath();
+
     const spawnEnv = {
       ...process.env,
       ELECTRON_RUN_AS_NODE: '1',
       MTG_DB_DIR: getUserDataDir(),
       PORT,
+      // Force Next.js to use the packaged app directory
+      __NEXT_PRIVATE_STANDALONE_CONFIG: JSON.stringify({ cwd: appDir }),
+      NODE_PATH: path.join(appDir, 'node_modules'),
     };
 
     // Ensure system directories are in PATH so child_process can find
@@ -180,9 +187,13 @@ function startNextServer(): Promise<void> {
       }
     }
 
-    // With asar disabled, app.getAppPath() is a real directory containing
-    // .next/, node_modules/, public/, etc. Use it as both the app dir and cwd.
-    const appDir = app.getAppPath();
+    // Change process working directory before spawning to ensure relative paths work
+    const originalCwd = process.cwd();
+    try {
+      process.chdir(appDir);
+    } catch (err) {
+      logCrash('chdir-error', err);
+    }
     nextServer = spawn(
       process.execPath,
       [nextCli, 'start', '-p', PORT],
@@ -191,6 +202,13 @@ function startNextServer(): Promise<void> {
         env: spawnEnv,
       },
     );
+
+    // Restore original cwd
+    try {
+      process.chdir(originalCwd);
+    } catch (err) {
+      logCrash('chdir-restore-error', err);
+    }
 
     nextServer.stdout?.on('data', (data: Buffer) => {
       const output = data.toString();
