@@ -88,10 +88,22 @@ export interface PostGameAnalysis {
 export function analyzeMatchesForDeck(deckId: number): PostGameAnalysis {
   const db = getDb();
 
-  // Get all matches for this deck
-  const matches = db.prepare(
+  // Get all matches for this deck (combine manual logs and arena-parsed matches)
+  const manualMatches = db.prepare(
     'SELECT * FROM match_logs WHERE deck_id = ? ORDER BY created_at ASC'
   ).all(deckId) as MatchRow[];
+
+  // Also pull arena matches linked to this deck
+  const arenaMatches = db.prepare(`
+    SELECT id, deck_id, result, NULL as play_draw, opponent_name,
+           NULL as opponent_deck_colors, turns, NULL as my_life_end,
+           NULL as opponent_life_end, cards_played as my_cards_seen,
+           opponent_cards_seen, format as game_format, NULL as raw_log
+    FROM arena_parsed_matches WHERE deck_id = ?
+    ORDER BY parsed_at ASC
+  `).all(deckId) as MatchRow[];
+
+  const matches = [...manualMatches, ...arenaMatches];
 
   // Get the deck's current card list
   const deckCards = db.prepare(`

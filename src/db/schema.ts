@@ -389,4 +389,14 @@ export const MIGRATIONS = [
       CREATE INDEX IF NOT EXISTS idx_collection_user_id ON collection(user_id);
     `,
   },
+  {
+    version: 13,
+    name: 'add_arena_deck_linking',
+    sql: `
+      ALTER TABLE arena_parsed_matches ADD COLUMN deck_id INTEGER REFERENCES decks(id) ON DELETE SET NULL;
+      ALTER TABLE arena_parsed_matches ADD COLUMN deck_match_confidence REAL;
+
+      CREATE INDEX IF NOT EXISTS idx_arena_deck_id ON arena_parsed_matches(deck_id);
+    `,
+  },
 ];

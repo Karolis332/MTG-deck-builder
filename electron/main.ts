@@ -1,10 +1,42 @@
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, dialog } from 'electron';
 import path from 'path';
 import fs from 'fs';
 import { spawn, ChildProcess } from 'child_process';
 import { registerIpcHandlers } from './ipc-handlers';
 import { registerSetupHandlers } from './setup-handlers';
 import { runFirstBootActions } from '../src/lib/first-boot';
+
+// ── Crash logging ────────────────────────────────────────────────────────
+// Capture uncaught errors to a log file before anything else runs.
+function getCrashLogPath(): string {
+  try {
+    return path.join(app.getPath('userData'), 'crash.log');
+  } catch {
+    return path.join(path.dirname(process.execPath), 'crash.log');
+  }
+}
+
+function logCrash(label: string, err: unknown): void {
+  const msg = `[${new Date().toISOString()}] ${label}: ${err instanceof Error ? err.stack || err.message : String(err)}\n`;
+  try {
+    fs.appendFileSync(getCrashLogPath(), msg);
+  } catch {
+    // Last resort: write next to the exe
+    try {
+      fs.appendFileSync(path.join(path.dirname(process.execPath), 'crash.log'), msg);
+    } catch { /* truly nothing we can do */ }
+  }
+}
+
+process.on('uncaughtException', (err) => {
+  logCrash('uncaughtException', err);
+  dialog.showErrorBox('MTG Deck Builder - Fatal Error', err.message || String(err));
+  app.exit(1);
+});
+
+process.on('unhandledRejection', (reason) => {
+  logCrash('unhandledRejection', reason);
+});
 
 let mainWindow: BrowserWindow | null = null;
 let setupWindow: BrowserWindow | null = null;
@@ -148,33 +180,42 @@ function startNextServer(): Promise<void> {
       }
     }
 
-    // Use the directory containing the exe as cwd instead of app.getAppPath(),
-    // which resolves to an .asar archive that isn't a real directory.
-    // spawn() fails with ENOENT when cwd doesn't exist on the real filesystem.
-    const spawnCwd = path.dirname(process.execPath);
-
+    // With asar disabled, app.getAppPath() is a real directory containing
+    // .next/, node_modules/, public/, etc. Use it as both the app dir and cwd.
     const appDir = app.getAppPath();
     nextServer = spawn(
       process.execPath,
-      [nextCli, 'start', '-p', PORT, appDir],
+      [nextCli, 'start', '-p', PORT],
       {
-        cwd: spawnCwd,
+        cwd: appDir,
         env: spawnEnv,
       },
     );
 
     nextServer.stdout?.on('data', (data: Buffer) => {
       const output = data.toString();
+      logCrash('next-stdout', output.trim());
       if (output.includes('Ready') || output.includes('started')) {
         resolve();
       }
     });
 
     nextServer.stderr?.on('data', (data: Buffer) => {
-      console.error('[Next.js]', data.toString());
+      const output = data.toString();
+      logCrash('next-stderr', output.trim());
+      console.error('[Next.js]', output);
     });
 
-    nextServer.on('error', reject);
+    nextServer.on('error', (err) => {
+      logCrash('next-spawn-error', err);
+      reject(err);
+    });
+
+    nextServer.on('exit', (code, signal) => {
+      if (code !== 0 && code !== null) {
+        logCrash('next-exit', `Process exited with code ${code}, signal ${signal}`);
+      }
+    });
 
     // Fallback resolve after 15s in case "Ready" message is missed
     setTimeout(resolve, 15000);

@@ -18,6 +18,7 @@ interface MatchLog {
   notes: string | null;
   game_format: string | null;
   created_at: string;
+  source?: 'manual' | 'arena';
 }
 
 interface MatchStats {
@@ -337,6 +338,11 @@ export function MatchLogPanel({ deckId, format, className }: MatchLogPanelProps)
                             )}>
                               {log.result}
                             </span>
+                            {log.source === 'arena' && (
+                              <span className="rounded bg-purple-500/15 px-1 py-0.5 text-[9px] font-medium text-purple-400">
+                                Arena
+                              </span>
+                            )}
                             <span className="text-muted-foreground">vs</span>
                             <span className="font-medium">{log.opponent_name || 'Unknown'}</span>
                             {oppColors.length > 0 && (
@@ -355,9 +361,11 @@ export function MatchLogPanel({ deckId, format, className }: MatchLogPanelProps)
                                 {oppCards.length} cards
                               </span>
                             )}
-                            <button onClick={() => deleteLog(log.id)} className="text-muted-foreground/50 hover:text-red-500" title="Delete">
-                              <XIcon className="h-3 w-3" />
-                            </button>
+                            {log.source !== 'arena' && (
+                              <button onClick={() => deleteLog(log.id)} className="text-muted-foreground/50 hover:text-red-500" title="Delete">
+                                <XIcon className="h-3 w-3" />
+                              </button>
+                            )}
                           </div>
                         </div>
                       );

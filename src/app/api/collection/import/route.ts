@@ -104,8 +104,15 @@ async function handleTsvImport(text: string, mode: string, userId: number) {
   let imported = 0;
   const failed: string[] = [];
 
+  // Helper: look up card by name with A- prefix fallback for Alchemy cards
+  const findTsvCard = (name: string) => {
+    const lower = name.toLowerCase();
+    return cardsByName.get(lower)
+      || (lower.startsWith('a-') ? cardsByName.get(lower.slice(2)) : undefined);
+  };
+
   for (const line of parsed) {
-    const matchedCard = cardsByName.get(line.name.toLowerCase());
+    const matchedCard = findTsvCard(line.name);
     if (matchedCard) {
       // Import regular copies
       if (line.quantity > 0) {
@@ -164,7 +171,9 @@ async function handleArenaImport(text: string, mode: string, userId: number, dec
     });
     if (originalLine && !notFoundNames.has(originalLine.name.toLowerCase())) {
       notFoundNames.add(originalLine.name.toLowerCase());
-      retryByName.push({ name: originalLine.name });
+      // Strip A- prefix for Alchemy rebalanced cards (e.g. "A-Vivi Ornitier" → "Vivi Ornitier")
+      const cleanName = originalLine.name.replace(/^A-/, '');
+      retryByName.push({ name: cleanName });
     }
   }
 
@@ -232,9 +241,16 @@ async function handleArenaImport(text: string, mode: string, userId: number, dec
       `)
     : null;
 
+  // Helper: look up card by name with A- prefix fallback for Alchemy cards
+  const findCard = (name: string) => {
+    const lower = name.toLowerCase();
+    return cardsByName.get(lower)
+      || (lower.startsWith('a-') ? cardsByName.get(lower.slice(2)) : undefined);
+  };
+
   const deckTransaction = deckId ? db.transaction((lines: typeof parsed) => {
     for (const line of lines) {
-      const matchedCard = cardsByName.get(line.name.toLowerCase());
+      const matchedCard = findCard(line.name);
       if (matchedCard) {
         insertDeckCard!.run(deckId, matchedCard.id, line.quantity, line.board || 'main');
         imported++;
@@ -248,7 +264,7 @@ async function handleArenaImport(text: string, mode: string, userId: number, dec
     deckTransaction(parsed);
   } else {
     for (const line of parsed) {
-      const matchedCard = cardsByName.get(line.name.toLowerCase());
+      const matchedCard = findCard(line.name);
       if (matchedCard) {
         upsertCollectionCard(matchedCard.id, line.quantity, false, userId);
         imported++;

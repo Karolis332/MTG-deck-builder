@@ -532,3 +532,132 @@ export function getArenaParsedMatches(limit = 100) {
     )
     .all(limit);
 }
+
+/**
+ * Match an Arena match's deck cards to a saved deck.
+ * Compares Arena card IDs from the match against deck_cards entries via cards.arena_id.
+ * Returns { deckId, confidence } or null if no match above threshold.
+ */
+export function matchArenaDeckToSavedDeck(
+  arenaDeckCards: Array<{ id: string; qty: number }>,
+  format?: string | null
+): { deckId: number; deckName: string; confidence: number } | null {
+  const db = getDb();
+
+  // Get all decks, optionally filtered by format
+  const decks = format
+    ? db.prepare('SELECT id, name, format FROM decks WHERE format = ?').all(format) as Array<{ id: number; name: string; format: string }>
+    : db.prepare('SELECT id, name, format FROM decks').all() as Array<{ id: number; name: string; format: string }>;
+
+  if (decks.length === 0) return null;
+
+  // Resolve Arena IDs to card names for the match deck
+  const arenaCardNames = new Map<string, number>();
+  const stmtArena = db.prepare('SELECT name FROM cards WHERE arena_id = ?');
+  for (const ac of arenaDeckCards) {
+    const num = parseInt(ac.id, 10);
+    if (isNaN(num)) continue;
+    const card = stmtArena.get(num) as { name: string } | undefined;
+    if (card) {
+      arenaCardNames.set(card.name, (arenaCardNames.get(card.name) || 0) + ac.qty);
+    }
+  }
+
+  if (arenaCardNames.size === 0) return null;
+
+  // Compare against each saved deck
+  const stmtDeckCards = db.prepare(`
+    SELECT c.name, dc.quantity
+    FROM deck_cards dc
+    JOIN cards c ON dc.card_id = c.id
+    WHERE dc.deck_id = ? AND dc.board IN ('main', 'sideboard', 'commander', 'companion')
+  `);
+
+  let bestMatch: { deckId: number; deckName: string; confidence: number } | null = null;
+
+  for (const deck of decks) {
+    const savedCards = stmtDeckCards.all(deck.id) as Array<{ name: string; quantity: number }>;
+    if (savedCards.length === 0) continue;
+
+    const savedCardMap = new Map<string, number>();
+    for (const sc of savedCards) {
+      savedCardMap.set(sc.name, sc.quantity);
+    }
+
+    // Calculate overlap
+    let matchingCards = 0;
+    let totalArenaCards = 0;
+    for (const [name, qty] of Array.from(arenaCardNames.entries())) {
+      totalArenaCards += qty;
+      const savedQty = savedCardMap.get(name) || 0;
+      matchingCards += Math.min(qty, savedQty);
+    }
+
+    const confidence = totalArenaCards > 0 ? matchingCards / totalArenaCards : 0;
+
+    if (confidence >= 0.7 && (!bestMatch || confidence > bestMatch.confidence)) {
+      bestMatch = { deckId: deck.id, deckName: deck.name, confidence };
+    }
+  }
+
+  return bestMatch;
+}
+
+/**
+ * Link an arena match to a deck (set deck_id and confidence).
+ * Pass deckId=null to unlink.
+ */
+export function linkArenaMatchToDeck(
+  matchId: string,
+  deckId: number | null,
+  confidence: number | null
+): boolean {
+  const db = getDb();
+  try {
+    db.prepare(
+      'UPDATE arena_parsed_matches SET deck_id = ?, deck_match_confidence = ? WHERE match_id = ?'
+    ).run(deckId, confidence, matchId);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Get unlinked arena matches (no deck_id).
+ */
+export function getUnlinkedArenaMatches(limit = 50) {
+  return getDb()
+    .prepare(
+      'SELECT * FROM arena_parsed_matches WHERE deck_id IS NULL ORDER BY parsed_at DESC LIMIT ?'
+    )
+    .all(limit);
+}
+
+/**
+ * Try to auto-link all unlinked arena matches to saved decks.
+ */
+export function autoLinkArenaMatches(): { linked: number; total: number } {
+  const db = getDb();
+  const unlinked = db.prepare(
+    "SELECT id, match_id, deck_cards, format FROM arena_parsed_matches WHERE deck_id IS NULL AND deck_cards IS NOT NULL AND deck_cards != '[]' AND deck_cards != ''"
+  ).all() as Array<{ id: number; match_id: string; deck_cards: string; format: string | null }>;
+
+  let linked = 0;
+  for (const match of unlinked) {
+    try {
+      const deckCards = JSON.parse(match.deck_cards) as Array<{ id: string; qty: number }>;
+      if (deckCards.length === 0) continue;
+
+      const result = matchArenaDeckToSavedDeck(deckCards, match.format);
+      if (result) {
+        linkArenaMatchToDeck(match.match_id, result.deckId, result.confidence);
+        linked++;
+      }
+    } catch {
+      // skip invalid JSON
+    }
+  }
+
+  return { linked, total: unlinked.length };
+}

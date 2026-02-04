@@ -87,7 +87,12 @@ export function extractJsonBlocks(logText: string): JsonBlock[] {
       const method = oldMatch[1];
       const jsonStr = collectJson(oldMatch[2], lines, i + 1);
       try {
-        blocks.push([method, JSON.parse(jsonStr)]);
+        const data = JSON.parse(jsonStr);
+        // Parse nested request field (double-encoded JSON in EventSetDeckV2 etc.)
+        if (typeof data.request === 'string') {
+          try { data._parsed_request = JSON.parse(data.request); } catch { /* skip */ }
+        }
+        blocks.push([method, data]);
       } catch { /* skip */ }
       i++;
       continue;
@@ -99,7 +104,12 @@ export function extractJsonBlocks(logText: string): JsonBlock[] {
       const method = newMatch[1];
       const jsonStr = collectJson(newMatch[2], lines, i + 1);
       try {
-        blocks.push([method, JSON.parse(jsonStr)]);
+        const data = JSON.parse(jsonStr);
+        // Parse nested request field (double-encoded JSON in EventSetDeckV2 etc.)
+        if (typeof data.request === 'string') {
+          try { data._parsed_request = JSON.parse(data.request); } catch { /* skip */ }
+        }
+        blocks.push([method, data]);
       } catch { /* skip */ }
       i++;
       continue;
@@ -364,6 +374,34 @@ export function extractMatches(blocks: JsonBlock[]): ArenaMatch[] {
           }
         }
       }
+    }
+
+    // Deck submission via EventSetDeckV2 (current Arena format)
+    if (method === 'EventSetDeckV2') {
+      const req = (data._parsed_request ?? data) as Record<string, unknown>;
+      const deckData = (req.Deck ?? req.deck ?? {}) as Record<string, unknown>;
+      const mainDeck = (deckData.MainDeck ?? deckData.mainDeck ?? []) as unknown[];
+      const deck: DeckCard[] = [];
+      for (const entry of mainDeck) {
+        if (typeof entry === 'object' && entry !== null) {
+          const e = entry as Record<string, unknown>;
+          const cardId = String(e.cardId ?? e.Id ?? '');
+          const qty = (e.quantity ?? e.Quantity ?? 1) as number;
+          deck.push({ id: cardId, qty });
+        } else if (typeof entry === 'number') {
+          deck.push({ id: String(entry), qty: 1 });
+        }
+      }
+      // Also capture commander zone
+      const cmdZone = (deckData.CommandZone ?? deckData.commandZone ?? []) as unknown[];
+      for (const entry of cmdZone) {
+        if (typeof entry === 'object' && entry !== null) {
+          const e = entry as Record<string, unknown>;
+          const cardId = String(e.cardId ?? e.Id ?? '');
+          deck.push({ id: cardId, qty: 1 });
+        }
+      }
+      if (deck.length > 0) currentMatch.deck = deck;
     }
 
     // Legacy: Deck submission events (older log format)

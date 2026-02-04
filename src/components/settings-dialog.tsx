@@ -195,24 +195,67 @@ export function SettingsDialog({ open, onClose }: SettingsDialogProps) {
     }
   }, [arenaLogPath]);
 
+  const [enrichProgress, setEnrichProgress] = useState<{
+    phase: string;
+    downloadedBytes: number;
+    totalBytes: number;
+    cardsUpdated: number;
+    totalMappings: number;
+  } | null>(null);
+
+  // Poll enrichment progress when running
+  useEffect(() => {
+    if (!enriching) return;
+    const interval = setInterval(async () => {
+      try {
+        const res = await fetch('/api/mtgjson-enrich?progress=true');
+        const data = await res.json();
+        setEnrichProgress(data.progress);
+        if (data.coverage) setArenaCoverage(data.coverage);
+        if (data.progress.phase === 'done') {
+          setEnriching(false);
+          setArenaMessage(`Enriched ${data.progress.cardsUpdated} cards with Arena IDs`);
+        } else if (data.progress.phase === 'error') {
+          setEnriching(false);
+          setArenaMessage(`Enrichment failed: ${data.progress.error || 'Unknown error'}`);
+        } else if (data.progress.phase === 'cancelled') {
+          setEnriching(false);
+          setArenaMessage('Enrichment cancelled');
+        }
+      } catch {
+        // ignore polling errors
+      }
+    }, 500);
+    return () => clearInterval(interval);
+  }, [enriching]);
+
   const runEnrichment = useCallback(async () => {
     setEnriching(true);
-    setArenaMessage('Downloading MTGJSON data...');
+    setEnrichProgress(null);
+    setArenaMessage('');
     try {
       const res = await fetch('/api/mtgjson-enrich', { method: 'POST' });
       const data = await res.json();
-      if (data.ok) {
-        setArenaCoverage(data.coverage);
-        setArenaMessage(
-          `Enriched ${data.updated} cards with Arena IDs (${data.downloaded} total mappings)`
-        );
-      } else {
+      if (!data.ok) {
         setArenaMessage(`Enrichment failed: ${data.error}`);
+        setEnriching(false);
       }
+      // Progress is tracked via polling above
     } catch (err) {
       setArenaMessage(`Enrichment failed: ${err}`);
-    } finally {
       setEnriching(false);
+    }
+  }, []);
+
+  const cancelEnrich = useCallback(async () => {
+    try {
+      await fetch('/api/mtgjson-enrich', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'cancel' }),
+      });
+    } catch {
+      // ignore
     }
   }, []);
 
@@ -377,15 +420,62 @@ export function SettingsDialog({ open, onClose }: SettingsDialogProps) {
                     </span>
                   )}
                 </div>
-                <button
-                  onClick={runEnrichment}
-                  disabled={enriching}
-                  className="rounded-lg border border-border px-3 py-1.5 text-xs transition-colors hover:bg-accent disabled:opacity-50"
-                >
-                  {enriching ? 'Downloading...' : 'Enrich from MTGJSON'}
-                </button>
+                {enriching ? (
+                  <button
+                    onClick={cancelEnrich}
+                    className="rounded-lg border border-red-500/30 bg-red-500/10 px-3 py-1.5 text-xs text-red-400 transition-colors hover:bg-red-500/20"
+                  >
+                    Cancel
+                  </button>
+                ) : (
+                  <button
+                    onClick={runEnrichment}
+                    className="rounded-lg border border-border px-3 py-1.5 text-xs transition-colors hover:bg-accent"
+                  >
+                    Enrich from MTGJSON
+                  </button>
+                )}
               </div>
-              {coveragePct < 50 && arenaCoverage && arenaCoverage.total > 0 && (
+
+              {/* Progress bar */}
+              {enriching && enrichProgress && (
+                <div className="mt-2 space-y-1">
+                  <div className="flex items-center justify-between text-[10px] text-muted-foreground">
+                    <span>
+                      {enrichProgress.phase === 'downloading' && 'Downloading MTGJSON data...'}
+                      {enrichProgress.phase === 'parsing' && 'Parsing card data...'}
+                      {enrichProgress.phase === 'updating' && `Updating database... ${enrichProgress.cardsUpdated}/${enrichProgress.totalMappings}`}
+                    </span>
+                    {enrichProgress.phase === 'downloading' && enrichProgress.totalBytes > 0 && (
+                      <span>
+                        {Math.round(enrichProgress.downloadedBytes / 1024 / 1024)}MB / {Math.round(enrichProgress.totalBytes / 1024 / 1024)}MB
+                      </span>
+                    )}
+                  </div>
+                  <div className="h-1.5 w-full overflow-hidden rounded-full bg-border">
+                    <div
+                      className="h-full rounded-full bg-primary transition-all duration-300"
+                      style={{
+                        width: `${
+                          enrichProgress.phase === 'downloading'
+                            ? enrichProgress.totalBytes > 0
+                              ? Math.min((enrichProgress.downloadedBytes / enrichProgress.totalBytes) * 70, 70)
+                              : 30
+                            : enrichProgress.phase === 'parsing'
+                              ? 75
+                              : enrichProgress.phase === 'updating'
+                                ? enrichProgress.totalMappings > 0
+                                  ? 80 + (enrichProgress.cardsUpdated / enrichProgress.totalMappings) * 20
+                                  : 85
+                                : 0
+                        }%`,
+                      }}
+                    />
+                  </div>
+                </div>
+              )}
+
+              {!enriching && coveragePct < 50 && arenaCoverage && arenaCoverage.total > 0 && (
                 <p className="mt-1 text-[10px] text-amber-400">
                   Low coverage — run enrichment to enable Arena ID resolution for matches and collection sync.
                 </p>

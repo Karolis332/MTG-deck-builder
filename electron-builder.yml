@@ -7,10 +7,12 @@ directories:
   output: dist-electron
   buildResources: build
 
-# Use asar but unpack native modules
-asar: true
-asarUnpack:
-  - "node_modules/better-sqlite3/**"
+# Disable asar — Next.js runs via ELECTRON_RUN_AS_NODE and needs real
+# filesystem access to serve .next/static/ assets and load native modules.
+asar: false
+
+# Rebuild better-sqlite3 native module for the packaged Electron runtime
+afterPack: scripts/afterPack.js
 
 files:
   - "electron-dist/**/*"

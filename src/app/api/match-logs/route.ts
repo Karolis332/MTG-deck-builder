@@ -16,16 +16,42 @@ export async function GET(req: NextRequest) {
 
   let logs;
   if (deckId) {
-    logs = db.prepare(
-      'SELECT * FROM match_logs WHERE deck_id = ? ORDER BY created_at DESC'
-    ).all(Number(deckId));
+    // Combine match_logs and arena_parsed_matches linked to this deck
+    logs = db.prepare(`
+      SELECT id, deck_id, result, play_draw, opponent_name,
+             opponent_deck_colors, turns, my_life_end, opponent_life_end,
+             my_cards_seen, opponent_cards_seen, notes, game_format,
+             created_at, 'manual' as source
+      FROM match_logs WHERE deck_id = ?
+      UNION ALL
+      SELECT id, deck_id, result, NULL as play_draw, opponent_name,
+             NULL as opponent_deck_colors, turns, NULL as my_life_end,
+             NULL as opponent_life_end, cards_played as my_cards_seen,
+             opponent_cards_seen, NULL as notes, format as game_format,
+             parsed_at as created_at, 'arena' as source
+      FROM arena_parsed_matches WHERE deck_id = ?
+      ORDER BY created_at DESC
+    `).all(Number(deckId), Number(deckId));
   } else {
-    logs = db.prepare(
-      'SELECT * FROM match_logs ORDER BY created_at DESC LIMIT 100'
-    ).all();
+    logs = db.prepare(`
+      SELECT id, deck_id, result, play_draw, opponent_name,
+             opponent_deck_colors, turns, my_life_end, opponent_life_end,
+             my_cards_seen, opponent_cards_seen, notes, game_format,
+             created_at, 'manual' as source
+      FROM match_logs
+      UNION ALL
+      SELECT id, deck_id, result, NULL as play_draw, opponent_name,
+             NULL as opponent_deck_colors, turns, NULL as my_life_end,
+             NULL as opponent_life_end, cards_played as my_cards_seen,
+             opponent_cards_seen, NULL as notes, format as game_format,
+             parsed_at as created_at, 'arena' as source
+      FROM arena_parsed_matches
+      ORDER BY created_at DESC
+      LIMIT 100
+    `).all();
   }
 
-  // Stats summary
+  // Stats summary (combined from both tables)
   const stats = deckId
     ? db.prepare(`
         SELECT
@@ -34,8 +60,12 @@ export async function GET(req: NextRequest) {
           SUM(CASE WHEN result = 'loss' THEN 1 ELSE 0 END) as losses,
           SUM(CASE WHEN result = 'draw' THEN 1 ELSE 0 END) as draws,
           AVG(turns) as avg_turns
-        FROM match_logs WHERE deck_id = ?
-      `).get(Number(deckId)) as Record<string, number>
+        FROM (
+          SELECT result, turns FROM match_logs WHERE deck_id = ?
+          UNION ALL
+          SELECT result, turns FROM arena_parsed_matches WHERE deck_id = ?
+        )
+      `).get(Number(deckId), Number(deckId)) as Record<string, number>
     : null;
 
   return NextResponse.json({ logs, stats });

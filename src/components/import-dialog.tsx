@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef } from 'react';
+import { useRouter } from 'next/navigation';
 import { cn } from '@/lib/utils';
 
 interface ImportDialogProps {
@@ -13,6 +14,7 @@ interface ImportDialogProps {
 }
 
 export function ImportDialog({ open, onClose, onSuccess, deckId, deckName }: ImportDialogProps) {
+  const router = useRouter();
   const [text, setText] = useState('');
   const [mode, setMode] = useState<'merge' | 'replace'>('merge');
   const [importType, setImportType] = useState<'collection' | 'deck' | 'this-deck'>(
@@ -20,6 +22,7 @@ export function ImportDialog({ open, onClose, onSuccess, deckId, deckName }: Imp
   );
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<{ imported: number; failed: string[]; total: number } | null>(null);
+  const [newDeckId, setNewDeckId] = useState<number | null>(null);
   const [error, setError] = useState('');
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -69,20 +72,35 @@ export function ImportDialog({ open, onClose, onSuccess, deckId, deckName }: Imp
         setResult(data);
         onSuccess?.(data);
       } else {
-        // Import as a new deck: create deck then import cards into it
+        // Import as a new deck: detect format from card count, create deck, import cards
+        const lines = text.trim().split('\n').filter((l) => l.trim());
+        const cardCount = lines.reduce((sum, line) => {
+          const match = line.match(/^(\d+)\s/);
+          return sum + (match ? parseInt(match[1], 10) : 1);
+        }, 0);
+        // Detect if Commander section exists
+        const hasCommander = text.includes('Commander') || text.includes('COMMANDER');
+        // Brawl/Commander = ~60-100 cards with mostly 1-ofs, Standard = ~60 cards with 4-ofs
+        const uniqueCards = lines.length;
+        const isSingleton = uniqueCards > 0 && cardCount / uniqueCards < 1.5;
+        const detectedFormat = hasCommander || (isSingleton && cardCount >= 58 && cardCount <= 101)
+          ? (cardCount <= 61 ? 'brawl' : 'commander')
+          : cardCount <= 80 ? 'standard' : 'standard';
+
         const deckRes = await fetch('/api/decks', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name: 'Imported Deck', format: 'standard' }),
+          body: JSON.stringify({ name: 'Imported Deck', format: detectedFormat }),
         });
         const deckData = await deckRes.json();
         if (!deckRes.ok) throw new Error(deckData.error || 'Failed to create deck');
 
-        const newDeckId = deckData.deck?.id;
+        const createdDeckId = deckData.deck?.id;
+        setNewDeckId(createdDeckId);
         const importRes = await fetch('/api/collection/import', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ text, mode: 'merge', deck_id: newDeckId }),
+          body: JSON.stringify({ text, mode: 'merge', deck_id: createdDeckId }),
         });
         const importData = await importRes.json();
         if (!importRes.ok) throw new Error(importData.error || 'Import failed');
@@ -97,8 +115,13 @@ export function ImportDialog({ open, onClose, onSuccess, deckId, deckName }: Imp
   };
 
   const handleClose = () => {
+    // Navigate to new deck if one was created
+    if (newDeckId && result) {
+      router.push(`/deck/${newDeckId}`);
+    }
     setText('');
     setResult(null);
+    setNewDeckId(null);
     setError('');
     onClose();
   };
@@ -240,7 +263,7 @@ export function ImportDialog({ open, onClose, onSuccess, deckId, deckName }: Imp
             onClick={handleClose}
             className="rounded-lg px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent"
           >
-            {result ? 'Done' : 'Cancel'}
+            {result ? (newDeckId ? 'Go to Deck' : 'Done') : 'Cancel'}
           </button>
           {!result && (
             <button

@@ -38,14 +38,16 @@ export async function GET() {
 }
 
 function computeLiveAnalytics(db: ReturnType<typeof getDb>) {
-  // Win rates from match_logs
+  // Win rates from match_logs + arena_parsed_matches
+  const winRates: Record<string, { total_games: number; wins: number; losses: number; draws: number; win_rate: number }> = {};
+
+  // Manual match logs
   const matchRows = db.prepare(`
     SELECT game_format, result, COUNT(*) as cnt
     FROM match_logs
     GROUP BY game_format, result
   `).all() as Array<{ game_format: string | null; result: string; cnt: number }>;
 
-  const winRates: Record<string, { total_games: number; wins: number; losses: number; draws: number; win_rate: number }> = {};
   for (const row of matchRows) {
     const fmt = row.game_format || 'unknown';
     if (!winRates[fmt]) {
@@ -56,21 +58,54 @@ function computeLiveAnalytics(db: ReturnType<typeof getDb>) {
     else if (row.result === 'loss') winRates[fmt].losses += row.cnt;
     else if (row.result === 'draw') winRates[fmt].draws += row.cnt;
   }
+
+  // Arena parsed matches
+  const arenaRows = db.prepare(`
+    SELECT format, result, COUNT(*) as cnt
+    FROM arena_parsed_matches
+    GROUP BY format, result
+  `).all() as Array<{ format: string | null; result: string; cnt: number }>;
+
+  for (const row of arenaRows) {
+    const fmt = row.format || 'unknown';
+    if (!winRates[fmt]) {
+      winRates[fmt] = { total_games: 0, wins: 0, losses: 0, draws: 0, win_rate: 0 };
+    }
+    winRates[fmt].total_games += row.cnt;
+    if (row.result === 'win') winRates[fmt].wins += row.cnt;
+    else if (row.result === 'loss') winRates[fmt].losses += row.cnt;
+    else if (row.result === 'draw') winRates[fmt].draws += row.cnt;
+  }
+
   for (const fmt of Object.keys(winRates)) {
     const wr = winRates[fmt];
     wr.win_rate = wr.total_games > 0 ? Math.round(wr.wins / wr.total_games * 1000) / 10 : 0;
   }
 
-  // Deck performance
+  // Deck performance from manual match logs + arena parsed matches
   const deckRows = db.prepare(`
-    SELECT ml.deck_id, d.name as deck_name, d.format,
-           COUNT(*) as total_games,
-           SUM(CASE WHEN ml.result = 'win' THEN 1 ELSE 0 END) as wins
-    FROM match_logs ml
-    LEFT JOIN decks d ON ml.deck_id = d.id
-    WHERE ml.deck_id IS NOT NULL
-    GROUP BY ml.deck_id
-    ORDER BY wins * 1.0 / COUNT(*) DESC
+    SELECT deck_id, deck_name, format,
+           SUM(total_games) as total_games,
+           SUM(wins) as wins
+    FROM (
+      SELECT ml.deck_id, d.name as deck_name, d.format,
+             COUNT(*) as total_games,
+             SUM(CASE WHEN ml.result = 'win' THEN 1 ELSE 0 END) as wins
+      FROM match_logs ml
+      LEFT JOIN decks d ON ml.deck_id = d.id
+      WHERE ml.deck_id IS NOT NULL
+      GROUP BY ml.deck_id
+      UNION ALL
+      SELECT am.deck_id, d.name as deck_name, COALESCE(d.format, am.format) as format,
+             COUNT(*) as total_games,
+             SUM(CASE WHEN am.result = 'win' THEN 1 ELSE 0 END) as wins
+      FROM arena_parsed_matches am
+      LEFT JOIN decks d ON am.deck_id = d.id
+      WHERE am.deck_id IS NOT NULL
+      GROUP BY am.deck_id
+    )
+    GROUP BY deck_id
+    ORDER BY wins * 1.0 / SUM(total_games) DESC
   `).all() as Array<{ deck_id: number; deck_name: string | null; format: string | null; total_games: number; wins: number }>;
 
   const deckPerf = deckRows.map((r) => ({
@@ -145,13 +180,24 @@ function computeLiveAnalytics(db: ReturnType<typeof getDb>) {
     if (!matched) typeDist.Other += r.qty;
   }
 
-  // Games over time (last 30 days)
+  // Games over time (last 30 days) — combine match_logs + arena_parsed_matches
   const timeRows = db.prepare(`
-    SELECT date(created_at) as game_date,
-           COUNT(*) as games,
-           SUM(CASE WHEN result = 'win' THEN 1 ELSE 0 END) as wins
-    FROM match_logs
-    WHERE created_at >= date('now', '-30 days')
+    SELECT game_date, SUM(games) as games, SUM(wins) as wins
+    FROM (
+      SELECT date(created_at) as game_date,
+             COUNT(*) as games,
+             SUM(CASE WHEN result = 'win' THEN 1 ELSE 0 END) as wins
+      FROM match_logs
+      WHERE created_at >= date('now', '-30 days')
+      GROUP BY game_date
+      UNION ALL
+      SELECT date(parsed_at) as game_date,
+             COUNT(*) as games,
+             SUM(CASE WHEN result = 'win' THEN 1 ELSE 0 END) as wins
+      FROM arena_parsed_matches
+      WHERE parsed_at >= date('now', '-30 days')
+      GROUP BY game_date
+    )
     GROUP BY game_date
     ORDER BY game_date
   `).all() as Array<{ game_date: string; games: number; wins: number }>;

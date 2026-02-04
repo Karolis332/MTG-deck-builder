@@ -27,7 +27,7 @@ interface AnalyticsData {
 }
 
 const COLOR_MAP: Record<string, string> = {
-  W: '#F9FAF4', U: '#0E68AB', B: '#150B00', R: '#D3202A', G: '#00733E', C: '#888888',
+  W: '#E8D5A3', U: '#1A7FC4', B: '#4A3A2A', R: '#D3202A', G: '#00733E', C: '#888888',
 };
 const COLOR_NAMES: Record<string, string> = {
   W: 'White', U: 'Blue', B: 'Black', R: 'Red', G: 'Green', C: 'Colorless',
@@ -108,11 +108,19 @@ export default function AnalyticsPage() {
             Deck statistics, match history, and card performance
           </p>
         </div>
-        {data.last_updated && (
-          <span className="text-xs text-muted-foreground">
-            Updated {new Date(data.last_updated).toLocaleString()}
-          </span>
-        )}
+        <div className="flex items-center gap-3">
+          {data.last_updated && (
+            <span className="text-xs text-muted-foreground">
+              Updated {new Date(data.last_updated).toLocaleString()}
+            </span>
+          )}
+          <Link
+            href="/analytics/matches"
+            className="rounded-lg border border-border px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+          >
+            Match Linking
+          </Link>
+        </div>
       </div>
 
       {isEmpty && (
