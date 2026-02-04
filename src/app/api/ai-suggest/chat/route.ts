@@ -69,6 +69,10 @@ export async function POST(request: NextRequest) {
       history?: Array<{ role: 'user' | 'assistant'; content: string }>;
     };
 
+    console.log('[AI Chat] === NEW REQUEST ===');
+    console.log('[AI Chat] Prompt:', prompt);
+    console.log('[AI Chat] Code version: v2-with-fast-path');
+
     if (!deck_id || !prompt) {
       return NextResponse.json(
         { error: 'deck_id and prompt are required' },
@@ -93,15 +97,113 @@ export async function POST(request: NextRequest) {
     const deck = deckData as {
       name: string;
       format: string;
+      user_id: number;
       cards: Array<{ quantity: number; board: string; card_id?: string } & DbCard>;
     };
     const format = deck.format || 'standard';
+
+    // ── Fetch user's collection ────────────────────────────────────────
+    const db = getDb();
+    // Fetch only card names for efficiency (don't need full card data)
+    const collectionCards = db
+      .prepare(`
+        SELECT DISTINCT c.name
+        FROM collection col
+        JOIN cards c ON col.card_id = c.id
+        WHERE col.user_id = (SELECT user_id FROM decks WHERE id = ?)
+        ORDER BY c.name
+      `)
+      .all(deck_id) as Array<{ name: string }>;
+
+    const collectionCardNames = collectionCards.map(c => c.name);
+    const hasCollection = collectionCards.length > 0;
+
+    console.log(`[AI Chat] User collection: ${collectionCards.length} unique cards`);
+
+    // ── FAST PATH: Collection visibility questions ─────────────────────
+    if (prompt.match(/can you see (my )?collection|do you (have|know) (my )?collection/i)) {
+      if (hasCollection) {
+        return NextResponse.json({
+          message: `Yes! I can see your collection with **${collectionCards.length} cards**. I'll prefer suggesting cards you own when making recommendations.\n\nYour collection includes: ${collectionCardNames.slice(0, 10).join(', ')}${collectionCards.length > 10 ? `, and ${collectionCards.length - 10} more...` : ''}`,
+          actions: [],
+        });
+      } else {
+        return NextResponse.json({
+          message: `I don't see any cards in your collection yet. You can import your collection from:\n- Arena log file (automatic import)\n- Manual card entry\n- Bulk import\n\nOnce you have cards in your collection, I'll prefer suggesting those when making recommendations!`,
+          actions: [],
+        });
+      }
+    }
+
+    // ── FAST PATH: Direct card info questions ──────────────────────────
+    // If user asks "what does X do?" or "explain X", return oracle text directly
+    const cardInfoMatch = prompt.match(/(?:what (?:does|is)|explain|tell me about) (.+?)(?:\?|$)/i);
+    if (cardInfoMatch) {
+      let searchName = cardInfoMatch[1].trim().toLowerCase();
+      // Strip common trailing words like "do", "work", "say", etc.
+      searchName = searchName.replace(/\s+(do|does|work|say|mean)$/i, '');
+
+      console.log('[AI Chat] Card info query detected:', searchName);
+
+      // First check if card is in the deck
+      let matchedCard: DbCard | undefined = deck.cards.find(
+        (c) => {
+          const cardLower = c.name.toLowerCase();
+          return cardLower === searchName ||
+                 cardLower.includes(searchName) ||
+                 searchName.includes(cardLower);
+        }
+      );
+
+      // Track if card is in deck
+      const inDeck = !!matchedCard;
+
+      // If not in deck, search the entire card database
+      if (!matchedCard) {
+        const db = getDb();
+        matchedCard = db
+          .prepare('SELECT * FROM cards WHERE name LIKE ? COLLATE NOCASE LIMIT 1')
+          .get(`%${searchName}%`) as DbCard | undefined;
+      }
+
+      if (matchedCard) {
+        console.log('[AI Chat] Returning oracle text for:', matchedCard.name);
+        const deckNote = inDeck ? '' : '\n\n*(Not in your deck)*';
+        return NextResponse.json({
+          message: `**${matchedCard.name}** — ${matchedCard.type_line} (CMC ${matchedCard.cmc})\n\n${matchedCard.oracle_text || 'No rules text.'}${deckNote}`,
+          actions: [],
+        });
+      } else {
+        console.log('[AI Chat] No card found in database, falling through to AI');
+      }
+    }
 
     const mainCards = deck.cards.filter((c) => c.board === 'main');
     const commanderCards = deck.cards.filter((c) => c.board === 'commander');
     const isCommanderLike = COMMANDER_FORMATS.includes(
       format as (typeof COMMANDER_FORMATS)[number]
     );
+
+    // ── FAST PATH: Verify deck cards in collection ─────────────────────
+    if (prompt.match(/are (all )?(these|the|my deck) cards? in (my )?collection|which cards?( in (this|my) deck)? (are ?n[o']?t|not|are) (in )?(my )?collection/i)) {
+      const deckCardNames = [...mainCards, ...commanderCards].map(c => c.name);
+      const collectionSet = new Set(collectionCardNames.map(n => n.toLowerCase()));
+
+      const inCollection = deckCardNames.filter(name => collectionSet.has(name.toLowerCase()));
+      const notInCollection = deckCardNames.filter(name => !collectionSet.has(name.toLowerCase()));
+
+      if (notInCollection.length === 0) {
+        return NextResponse.json({
+          message: `✅ **All ${deckCardNames.length} cards in your deck are in your collection!**\n\nYou own every card in this deck.`,
+          actions: [],
+        });
+      } else {
+        return NextResponse.json({
+          message: `**Collection Status:**\n\n✅ **In collection** (${inCollection.length} cards):\n${inCollection.join(', ')}\n\n❌ **Missing from collection** (${notInCollection.length} cards):\n${notInCollection.join(', ')}\n\n💡 You need to acquire ${notInCollection.length} cards to complete this deck.`,
+          actions: [],
+        });
+      }
+    }
     const targetSize = DEFAULT_DECK_SIZE[format] || DEFAULT_DECK_SIZE.default;
     const currentMainCount = mainCards.reduce((s, c) => s + c.quantity, 0);
     const targetLands = DEFAULT_LAND_COUNT[format] || DEFAULT_LAND_COUNT.default;
@@ -154,20 +256,24 @@ export async function POST(request: NextRequest) {
       ? Array.from(nameCounts.entries()).filter(([, count]) => count > 1).map(([name, count]) => `${name} (${count})`)
       : [];
 
-    // Build concise deck list grouped by type
+    // Build deck list grouped by type — include oracle text so GPT knows what cards actually do
     const deckByType: Record<string, string[]> = {};
     for (const c of mainCards) {
       const mainType = c.type_line.split('—')[0].trim().split(' ').pop() || 'Other';
       if (!deckByType[mainType]) deckByType[mainType] = [];
-      deckByType[mainType].push(`${c.quantity}x ${c.name} (CMC:${c.cmc})`);
+      const oracle = c.oracle_text ? ` — ${c.oracle_text.replace(/\n/g, '; ')}` : '';
+      deckByType[mainType].push(`${c.quantity}x ${c.name} (CMC:${c.cmc})${oracle}`);
     }
     const deckSummary = Object.entries(deckByType)
-      .map(([type, cards]) => `${type} (${cards.length}):\n${cards.join(', ')}`)
+      .map(([type, cards]) => `${type} (${cards.length}):\n${cards.join('\n')}`)
       .join('\n\n');
 
     const commanderInfo =
       commanderCards.length > 0
-        ? `Commander: ${commanderCards.map((c) => c.name).join(', ')}`
+        ? `Commander: ${commanderCards.map((c) => {
+            const oracle = c.oracle_text ? ` — ${c.oracle_text.replace(/\n/g, '; ')}` : '';
+            return `${c.name} (${c.type_line}, CMC:${c.cmc})${oracle}`;
+          }).join('\n')}`
         : '';
 
     const effectiveTarget = isCommanderLike
@@ -179,29 +285,67 @@ export async function POST(request: NextRequest) {
         ? `OVER by ${currentMainCount - effectiveTarget}`
         : `UNDER by ${effectiveTarget - currentMainCount}`;
 
-    // System prompt — kept focused and short to avoid context dilution
+    // Build explicit list of all cards in deck (for duplicate prevention)
+    const allCardNames = [...mainCards, ...commanderCards].map(c => c.name).sort();
+    const cardNameList = allCardNames.join(', ');
+
+    // System prompt — explicit and strict to prevent common errors
     const systemPrompt = `You are an expert MTG deck tuning assistant.
 
-DECK: "${deck.name}" | Format: ${format} | ${commanderInfo}
-Colors: ${deckColors.join(', ') || 'Colorless'}
-Main deck: ${currentMainCount}/${effectiveTarget} (${sizeStatus})
+═══════════════════════════════════════════════════════════
+CURRENT DECK STATE (YOUR SINGLE SOURCE OF TRUTH)
+═══════════════════════════════════════════════════════════
+Deck Name: "${deck.name}"
+Format: ${format}
+${commanderInfo}
+Color Identity: {${deckColors.join(', ') || 'Colorless'}} — ONLY these colors allowed
+Main Deck: ${currentMainCount}/${effectiveTarget} cards (${sizeStatus})
 Lands: ${landCount}/${targetLands}
-${illegalCards.length > 0 ? `ILLEGAL CARDS: ${illegalCards.join(', ')}` : ''}
-${singletonViolations.length > 0 ? `SINGLETON VIOLATIONS: ${singletonViolations.join(', ')}` : ''}
+${illegalCards.length > 0 ? `⚠️ ILLEGAL CARDS TO REPLACE: ${illegalCards.join(', ')}` : ''}
+${singletonViolations.length > 0 ? `⚠️ SINGLETON VIOLATIONS TO FIX: ${singletonViolations.join(', ')}` : ''}
 
-HARD RULES — NEVER violate these:
-1. ONLY suggest cards in the deck's color identity: {${deckColors.join(', ')}}. Cards with colors outside this set are FORBIDDEN.
-2. ${isCommanderLike ? `Fixed-size format: deck must stay at ${effectiveTarget} main cards. Every ADD MUST be paired with a CUT (use "swap" action).` : 'Standard deck size rules.'}
-3. ${isCommanderLike ? 'Singleton: max 1 copy of each non-basic-land card.' : 'Max 4 copies of non-basic-land cards.'}
-4. Only suggest cards legal in ${format}.
-5. Never cut lands unless deck has ${targetLands + 3}+ lands.
+ALL CARDS CURRENTLY IN DECK (${allCardNames.length} cards):
+${cardNameList}
 
-CURRENT DECKLIST:
+${hasCollection ? `
+USER'S COLLECTION (${collectionCards.length} cards owned):
+${collectionCardNames.slice(0, 200).join(', ')}${collectionCards.length > 200 ? ` ... and ${collectionCards.length - 200} more` : ''}
+
+💡 PREFERENCE: When possible, suggest cards from the user's collection (listed above).
+` : ''}
+═══════════════════════════════════════════════════════════
+HARD RULES — NEVER VIOLATE THESE
+═══════════════════════════════════════════════════════════
+1. CHECK THE LIST ABOVE: NEVER suggest cards already in the deck
+2. ONLY suggest cards in color identity {${deckColors.join(', ')}}
+3. ${isCommanderLike ? `CRITICAL: Deck MUST stay at ${effectiveTarget} cards. COUNT YOUR ACTIONS:
+   - Every ADD needs a CUT (use "swap" action)
+   - Before responding: cuts = adds? If not, fix it.
+   - Math check: ${currentMainCount} - cuts + adds = ${effectiveTarget}` : 'Keep deck around 60 cards'}
+4. ${isCommanderLike ? 'Singleton format: max 1 copy of each non-basic land' : 'Max 4 copies per card'}
+5. Only suggest cards legal in ${format}
+6. Never cut lands unless deck has ${targetLands + 3}+ lands
+
+═══════════════════════════════════════════════════════════
+VALIDATION CHECKLIST (ANSWER BEFORE RESPONDING)
+═══════════════════════════════════════════════════════════
+Before you respond, verify:
+${isCommanderLike ? `□ Do my CUTs equal my ADDs? (Required for ${format})` : '□ Is deck size reasonable (58-62 cards)?'}
+□ Did I check "ALL CARDS CURRENTLY IN DECK" to avoid duplicates?
+□ Are all my ADD cards in color identity {${deckColors.join(', ')}}?
+□ Are all my ADD cards legal in ${format}?
+□ Did I count the final deck size: ${currentMainCount} - cuts + adds = ?
+
+═══════════════════════════════════════════════════════════
+CURRENT DECKLIST (with oracle text for reasoning)
+═══════════════════════════════════════════════════════════
 ${deckSummary}
 
-RESPONSE FORMAT (strict JSON):
+═══════════════════════════════════════════════════════════
+RESPONSE FORMAT (strict JSON)
+═══════════════════════════════════════════════════════════
 {"message":"Your explanation","actions":[{"action":"swap","cardName":"Cut This","replaceWith":"Add This","quantity":1,"reason":"why"}]}
-Use "swap" for replacements (preferred). Use "add"/"cut" only when deck size needs adjusting.`;
+Use "swap" for replacements. Only use "add"/"cut" if deck size must change.`;
 
     // Build messages — short history + fresh state reminder each turn
     const messages: Array<{ role: 'system' | 'user' | 'assistant'; content: string }> = [
@@ -214,13 +358,19 @@ Use "swap" for replacements (preferred). Use "add"/"cut" only when deck size nee
       for (const msg of trimmed) {
         messages.push({ role: msg.role, content: msg.content });
       }
-    }
 
-    // Inject a state reminder before the user's message if there's history
-    if (history && history.length > 0) {
+      // Inject a FRESH state reminder before the user's message
+      // This is critical because the deck may have changed since last turn
       messages.push({
         role: 'system',
-        content: `REMINDER: Deck currently has ${currentMainCount}/${effectiveTarget} main cards. Colors: {${deckColors.join(', ')}}. ${sizeStatus}. ${isCommanderLike ? 'Use "swap" for every replacement — do NOT add without cutting.' : ''}`,
+        content: `═══ FRESH DECK STATE UPDATE ═══
+The deck may have changed since your last response. Here is the CURRENT state:
+- Main deck: ${currentMainCount}/${effectiveTarget} cards (${sizeStatus})
+- Lands: ${landCount}/${targetLands}
+- ALL cards now in deck: ${allCardNames.join(', ')}
+
+${isCommanderLike ? `CRITICAL: Deck MUST stay at ${effectiveTarget} cards. Every ADD needs a CUT.` : ''}
+Remember to check the card list above to avoid suggesting duplicates!`,
       });
     }
 
@@ -281,6 +431,12 @@ Use "swap" for replacements (preferred). Use "add"/"cut" only when deck size nee
 
     const existingCardNames = new Set(deck.cards.map((c) => c.name.toLowerCase()));
     const rejectedCards: string[] = [];
+    const rejectionReasons = {
+      wrongColors: [] as string[],
+      notLegal: [] as string[],
+      alreadyInDeck: [] as string[],
+      notFound: [] as string[],
+    };
 
     for (const act of parsed.actions || []) {
       if (act.action === 'swap') {
@@ -305,10 +461,13 @@ Use "swap" for replacements (preferred). Use "add"/"cut" only when deck size nee
           // Validate: color identity, format legality, not already in deck
           if (!fitsColorIdentity(addCard, colorSet)) {
             rejectedCards.push(`${addCard.name} (wrong colors)`);
+            rejectionReasons.wrongColors.push(addCard.name);
           } else if (!isLegalInFormat(addCard, format)) {
             rejectedCards.push(`${addCard.name} (not legal in ${format})`);
+            rejectionReasons.notLegal.push(addCard.name);
           } else if (existingCardNames.has(addCard.name.toLowerCase())) {
             rejectedCards.push(`${addCard.name} (already in deck)`);
+            rejectionReasons.alreadyInDeck.push(addCard.name);
           } else {
             resolvedActions.push({
               action: 'add',
@@ -319,6 +478,10 @@ Use "swap" for replacements (preferred). Use "add"/"cut" only when deck size nee
               imageUri: addCard.image_uri_small || undefined,
             });
           }
+        } else if (act.replaceWith) {
+          // Card not found in database
+          rejectedCards.push(`${act.replaceWith} (not found in database)`);
+          rejectionReasons.notFound.push(act.replaceWith);
         }
       } else if (act.action === 'cut') {
         const cutCard = deck.cards.find(
@@ -339,10 +502,13 @@ Use "swap" for replacements (preferred). Use "add"/"cut" only when deck size nee
         if (addCard) {
           if (!fitsColorIdentity(addCard, colorSet)) {
             rejectedCards.push(`${addCard.name} (wrong colors)`);
+            rejectionReasons.wrongColors.push(addCard.name);
           } else if (!isLegalInFormat(addCard, format)) {
             rejectedCards.push(`${addCard.name} (not legal in ${format})`);
+            rejectionReasons.notLegal.push(addCard.name);
           } else if (existingCardNames.has(addCard.name.toLowerCase())) {
             rejectedCards.push(`${addCard.name} (already in deck)`);
+            rejectionReasons.alreadyInDeck.push(addCard.name);
           } else {
             resolvedActions.push({
               action: 'add',
@@ -353,6 +519,9 @@ Use "swap" for replacements (preferred). Use "add"/"cut" only when deck size nee
               imageUri: addCard.image_uri_small || undefined,
             });
           }
+        } else {
+          rejectedCards.push(`${act.cardName} (not found in database)`);
+          rejectionReasons.notFound.push(act.cardName);
         }
       }
     }
@@ -363,26 +532,74 @@ Use "swap" for replacements (preferred). Use "add"/"cut" only when deck size nee
       const cutCount = resolvedActions.filter((a) => a.action === 'cut').reduce((s, a) => s + a.quantity, 0);
       const sizeAfter = currentMainCount - cutCount + addCount;
 
-      if (sizeAfter > effectiveTarget) {
-        // Too many ADDs without CUTs — trim excess adds from the end
+      // STRICT BALANCE CHECK: Reject if severely unbalanced
+      if (Math.abs(addCount - cutCount) > 2 && (addCount > 0 || cutCount > 0)) {
+        const imbalance = addCount - cutCount;
+        const warning = imbalance > 0
+          ? `Too many ADDs (${addCount}) vs CUTs (${cutCount}). Deck would become ${sizeAfter} cards.`
+          : `Too many CUTs (${cutCount}) vs ADDs (${addCount}). Deck would become ${sizeAfter} cards.`;
+
+        console.error('[AI Chat] Unbalanced suggestions:', { addCount, cutCount, currentMainCount, sizeAfter });
+
+        return NextResponse.json({
+          message: `⚠️ ${warning}\n\nFor ${format} format, every card added must replace a card being cut. Please suggest balanced swaps (use "swap" action) to maintain ${effectiveTarget} cards.`,
+          actions: [],
+        });
+      }
+
+      // MINOR IMBALANCE: Auto-correct by trimming excess
+      if (sizeAfter !== effectiveTarget && (addCount > 0 || cutCount > 0)) {
         let excess = sizeAfter - effectiveTarget;
-        for (let i = resolvedActions.length - 1; i >= 0 && excess > 0; i--) {
-          if (resolvedActions[i].action === 'add') {
-            const remove = Math.min(resolvedActions[i].quantity, excess);
-            resolvedActions[i].quantity -= remove;
-            excess -= remove;
-            if (resolvedActions[i].quantity <= 0) {
-              resolvedActions.splice(i, 1);
+
+        if (excess > 0) {
+          // Too many ADDs — trim from the end
+          for (let i = resolvedActions.length - 1; i >= 0 && excess > 0; i--) {
+            if (resolvedActions[i].action === 'add') {
+              const remove = Math.min(resolvedActions[i].quantity, excess);
+              resolvedActions[i].quantity -= remove;
+              excess -= remove;
+              if (resolvedActions[i].quantity <= 0) {
+                rejectedCards.push(`${resolvedActions[i].cardName} (auto-trimmed to maintain deck size)`);
+                resolvedActions.splice(i, 1);
+              }
+            }
+          }
+        } else if (excess < 0) {
+          // Too many CUTs — trim from the end
+          excess = Math.abs(excess);
+          for (let i = resolvedActions.length - 1; i >= 0 && excess > 0; i--) {
+            if (resolvedActions[i].action === 'cut') {
+              const remove = Math.min(resolvedActions[i].quantity, excess);
+              resolvedActions[i].quantity -= remove;
+              excess -= remove;
+              if (resolvedActions[i].quantity <= 0) {
+                resolvedActions.splice(i, 1);
+              }
             }
           }
         }
       }
     }
 
-    // Append rejection note to message if any cards were filtered
+    // Append detailed rejection feedback to message
     let message = parsed.message;
     if (rejectedCards.length > 0) {
-      message += `\n\n(Filtered out: ${rejectedCards.join(', ')} — server-side validation)`;
+      message += `\n\n⚠️ **Some suggestions were filtered** (server-side validation):`;
+
+      if (rejectionReasons.alreadyInDeck.length > 0) {
+        message += `\n- ❌ Already in deck: ${rejectionReasons.alreadyInDeck.join(', ')}`;
+      }
+      if (rejectionReasons.wrongColors.length > 0) {
+        message += `\n- ❌ Wrong color identity: ${rejectionReasons.wrongColors.join(', ')} (deck is {${deckColors.join(', ')}})`;
+      }
+      if (rejectionReasons.notLegal.length > 0) {
+        message += `\n- ❌ Not legal in ${format}: ${rejectionReasons.notLegal.join(', ')}`;
+      }
+      if (rejectionReasons.notFound.length > 0) {
+        message += `\n- ❌ Not found in database: ${rejectionReasons.notFound.join(', ')}`;
+      }
+
+      message += `\n\n💡 **Tip**: Check the "ALL CARDS CURRENTLY IN DECK" list in my context to avoid duplicates.`;
     }
 
     return NextResponse.json({

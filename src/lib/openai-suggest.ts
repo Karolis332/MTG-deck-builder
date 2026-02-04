@@ -46,13 +46,19 @@ export async function getOpenAISuggestions(
     format as (typeof COMMANDER_FORMATS)[number]
   );
 
-  // Build deck summary for the prompt
+  // Build deck summary for the prompt — include oracle text so GPT knows what cards actually do
   const deckSummary = mainCards
-    .map((c) => `${c.quantity}x ${c.name} (${c.type_line}, CMC ${c.cmc})`)
+    .map((c) => {
+      const oracle = c.oracle_text ? `\n   Text: ${c.oracle_text.replace(/\n/g, '; ')}` : '';
+      return `${c.quantity}x ${c.name} (${c.type_line}, CMC ${c.cmc})${oracle}`;
+    })
     .join('\n');
 
   const commanderInfo = commanderCards.length > 0
-    ? `Commander: ${commanderCards.map((c) => c.name).join(', ')}\n`
+    ? `Commander: ${commanderCards.map((c) => {
+        const oracle = c.oracle_text ? ` — ${c.oracle_text.replace(/\n/g, '; ')}` : '';
+        return `${c.name} (${c.type_line}, CMC ${c.cmc})${oracle}`;
+      }).join('\n')}\n`
     : '';
 
   // Detect color identity — commander defines it for commander formats

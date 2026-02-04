@@ -252,20 +252,23 @@ export async function getOllamaSuggestions(
     if (!models.models?.length) return null;
 
     const modelName = models.models[0].name;
-    const deckList = deckCards
-      .filter((c) => c.board === 'main')
-      .map((c) => `${c.quantity}x ${c.name}`)
+    const mainCards = deckCards.filter((c) => c.board === 'main');
+    const deckList = mainCards
+      .map((c) => {
+        const oracle = c.oracle_text ? ` — ${c.oracle_text.replace(/\n/g, '; ')}` : '';
+        return `${c.quantity}x ${c.name} (${c.type_line}, CMC ${c.cmc})${oracle}`;
+      })
       .join('\n');
 
     const prompt = `You are an expert Magic: The Gathering deck builder. Analyze this ${format} deck and suggest exactly 10 cards to add or swap. For each suggestion, give the exact card name and a brief reason.
 
-Current deck:
+Current deck (with full card text):
 ${deckList}
 
 Respond in JSON format:
 [{"name": "Card Name", "reason": "Brief reason"}, ...]
 
-Only suggest real, existing MTG cards. Focus on improving the deck's power level, consistency, and mana base.`;
+Only suggest real, existing MTG cards. Use the card text above to understand synergies and gaps. Focus on improving the deck's power level, consistency, and mana base.`;
 
     const response = await fetch('http://localhost:11434/api/generate', {
       method: 'POST',
