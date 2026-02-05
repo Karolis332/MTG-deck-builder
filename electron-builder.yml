@@ -37,6 +37,10 @@ extraResources:
     to: "."
     filter:
       - "**/*"
+  - from: "docs/"
+    to: "docs"
+    filter:
+      - "MTG_DECK_BUILDING_KNOWLEDGE.md"
 
 mac:
   target:

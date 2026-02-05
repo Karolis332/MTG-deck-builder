@@ -34,8 +34,20 @@ function getClaudeKey(): string | null {
 // Load MTG deck building knowledge base
 function getMTGKnowledge(): string {
   try {
-    const knowledgePath = path.join(process.cwd(), 'docs', 'MTG_DECK_BUILDING_KNOWLEDGE.md');
-    return fs.readFileSync(knowledgePath, 'utf-8');
+    // In Electron production builds, docs are in extraResources (process.resourcesPath/docs/)
+    // In dev, they're at process.cwd()/docs/
+    const resourcesPath = (process as NodeJS.Process & { resourcesPath?: string }).resourcesPath;
+    const candidates = [
+      resourcesPath ? path.join(resourcesPath, 'docs', 'MTG_DECK_BUILDING_KNOWLEDGE.md') : '',
+      path.join(process.cwd(), 'docs', 'MTG_DECK_BUILDING_KNOWLEDGE.md'),
+    ].filter(Boolean);
+
+    for (const candidate of candidates) {
+      if (fs.existsSync(candidate)) {
+        return fs.readFileSync(candidate, 'utf-8');
+      }
+    }
+    throw new Error('Knowledge base not found');
   } catch {
     // Fallback to basic rules if knowledge base not found
     return `
