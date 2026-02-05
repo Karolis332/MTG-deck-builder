@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState, useCallback } from 'react';
-import { useRouter, useParams } from 'next/navigation';
+import { useRouter, useParams, useSearchParams } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import type { DbCard, DeckCardEntry, AISuggestion } from '@/lib/types';
 import { SearchBar } from '@/components/search-bar';
@@ -31,15 +31,31 @@ interface DeckData {
   } & DbCard>;
 }
 
+interface BuildExplanation {
+  strategy: string;
+  roleBreakdown: Record<string, string[]>;
+  cardReasons: Record<string, string>;
+  modelUsed: string;
+  buildTimeMs: number;
+  commanderName: string;
+  themes: string;
+}
+
 export default function DeckEditorPage() {
   const router = useRouter();
   const params = useParams();
+  const searchParams = useSearchParams();
   const deckId = Number(params.id);
 
   // Deck state
   const [deck, setDeck] = useState<DeckData | null>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+
+  // Build explanation state
+  const [explanation, setExplanation] = useState<BuildExplanation | null>(null);
+  const [showExplanation, setShowExplanation] = useState(false);
+  const [hasExplanation, setHasExplanation] = useState(false);
 
   // Search state
   const [searchResults, setSearchResults] = useState<DbCard[]>([]);
@@ -89,6 +105,23 @@ export default function DeckEditorPage() {
       .catch(() => {})
       .finally(() => setLoading(false));
   }, [deckId]);
+
+  // Fetch build explanation if coming from Claude build
+  useEffect(() => {
+    if (!deckId) return;
+    const shouldShow = searchParams.get('showExplanation') === 'true';
+
+    fetch(`/api/decks/${deckId}/build-explanation`)
+      .then((r) => r.json())
+      .then((data) => {
+        if (data.explanation) {
+          setExplanation(data.explanation);
+          setHasExplanation(true);
+          if (shouldShow) setShowExplanation(true);
+        }
+      })
+      .catch(() => {});
+  }, [deckId, searchParams]);
 
   // Search cards
   const handleSearch = useCallback(
@@ -463,6 +496,22 @@ export default function DeckEditorPage() {
                 {mainCount} cards
                 {saving && ' (saving...)'}
               </span>
+
+              {hasExplanation && (
+                <button
+                  onClick={() => setShowExplanation((v) => !v)}
+                  className={cn(
+                    'flex items-center gap-1 rounded-md px-2 py-0.5 text-[10px] font-medium transition-colors',
+                    showExplanation
+                      ? 'bg-primary/20 text-primary'
+                      : 'bg-accent text-accent-foreground hover:bg-accent/80'
+                  )}
+                  title="Toggle AI build explanation"
+                >
+                  <SparklesIcon className="h-3 w-3" />
+                  AI
+                </button>
+              )}
             </div>
 
             <div className="flex items-center gap-2">
@@ -772,6 +821,65 @@ export default function DeckEditorPage() {
             )}
           >
             <div className="flex-1 overflow-auto p-3">
+              {/* AI Build Explanation Panel */}
+              {showExplanation && explanation && (
+                <div className="mb-3 rounded-xl border border-primary/30 bg-primary/5 p-3 animate-slide-up">
+                  <div className="mb-2 flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <SparklesIcon className="h-4 w-4 text-primary" />
+                      <span className="text-sm font-semibold">AI Build Strategy</span>
+                    </div>
+                    <button
+                      onClick={() => setShowExplanation(false)}
+                      className="text-[10px] text-muted-foreground hover:text-foreground"
+                    >
+                      Dismiss
+                    </button>
+                  </div>
+
+                  <p className="mb-2 text-xs text-foreground/80">{explanation.strategy}</p>
+
+                  {explanation.themes && (
+                    <div className="mb-2 flex flex-wrap gap-1">
+                      {explanation.themes.split(', ').map((t) => (
+                        <span key={t} className="rounded-full bg-accent px-2 py-0.5 text-[10px] font-medium">
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Role breakdown */}
+                  <div className="space-y-1.5">
+                    {Object.entries(explanation.roleBreakdown).map(([role, cards]) => (
+                      <details key={role} className="group">
+                        <summary className="flex cursor-pointer items-center gap-1.5 text-xs font-medium text-foreground/70 hover:text-foreground">
+                          <span className="transition-transform group-open:rotate-90">&#9654;</span>
+                          {role} ({cards.length})
+                        </summary>
+                        <div className="ml-4 mt-1 space-y-0.5">
+                          {cards.map((cardName) => (
+                            <div key={cardName} className="flex items-start gap-1 text-[10px]">
+                              <span className="text-foreground/80">{cardName}</span>
+                              {explanation.cardReasons[cardName] && (
+                                <span className="text-muted-foreground">
+                                  — {explanation.cardReasons[cardName]}
+                                </span>
+                              )}
+                            </div>
+                          ))}
+                        </div>
+                      </details>
+                    ))}
+                  </div>
+
+                  <div className="mt-2 flex items-center gap-3 text-[9px] text-muted-foreground">
+                    <span>Model: {explanation.modelUsed?.split('-').slice(0, 2).join(' ')}</span>
+                    <span>Built in {((explanation.buildTimeMs || 0) / 1000).toFixed(1)}s</span>
+                  </div>
+                </div>
+              )}
+
               <DeckStats
                 cards={deckEntries.map((e) => ({
                   quantity: e.quantity,

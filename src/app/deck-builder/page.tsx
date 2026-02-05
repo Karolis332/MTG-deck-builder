@@ -39,6 +39,9 @@ export default function DeckBuilderPage() {
   const [commanderSearch, setCommanderSearch] = useState('');
   const [commanderResults, setCommanderResults] = useState<Array<{ id: string; name: string; image_uri_small: string | null; color_identity: string | null; type_line: string }>>([]);
   const [commanderSearching, setCommanderSearching] = useState(false);
+  const [useClaudeBuild, setUseClaudeBuild] = useState(false);
+  const [hasApiKey, setHasApiKey] = useState(false);
+  const [aiBuildProgress, setAiBuildProgress] = useState('');
 
   const isAiCommanderFormat = ['commander', 'brawl', 'standardbrawl'].includes(aiFormat);
 
@@ -48,6 +51,12 @@ export default function DeckBuilderPage() {
       .then((d) => setDecks(d.decks || []))
       .catch(() => {})
       .finally(() => setLoading(false));
+
+    // Check if Claude API key is configured
+    fetch('/api/settings')
+      .then((r) => r.json())
+      .then((d) => setHasApiKey(!!d.settings?.anthropic_api_key))
+      .catch(() => {});
   }, []);
 
   const [createError, setCreateError] = useState('');
@@ -113,25 +122,52 @@ export default function DeckBuilderPage() {
     }
     setAiBuilding(true);
     setAiError('');
-    try {
-      const res = await fetch('/api/decks/auto-build', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: aiName.trim() || (aiCommander ? `${aiCommander} Deck` : `AI ${aiColors.join('')} ${aiStrategy || 'Deck'}`),
-          format: aiFormat,
-          colors: aiColors,
-          strategy: aiStrategy || undefined,
-          useCollection: aiUseCollection,
-          commanderName: isAiCommanderFormat ? aiCommander : undefined,
-        }),
-      });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || 'Build failed');
-      router.push(`/deck/${data.deckId}`);
-    } catch (err) {
-      setAiError(err instanceof Error ? err.message : 'Build failed');
-      setAiBuilding(false);
+
+    if (useClaudeBuild && isAiCommanderFormat) {
+      // Claude AI-Reasoned Build
+      setAiBuildProgress(`Claude is analyzing ${aiCommander} strategies...`);
+      try {
+        const res = await fetch('/api/decks/claude-build', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: aiName.trim() || `${aiCommander} Deck`,
+            commanderName: aiCommander,
+            format: aiFormat,
+            strategy: aiStrategy || undefined,
+            useCollection: aiUseCollection,
+          }),
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Claude build failed');
+        router.push(`/deck/${data.deckId}?showExplanation=true`);
+      } catch (err) {
+        setAiError(err instanceof Error ? err.message : 'Claude build failed');
+        setAiBuilding(false);
+        setAiBuildProgress('');
+      }
+    } else {
+      // Quick Build (algorithmic)
+      try {
+        const res = await fetch('/api/decks/auto-build', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: aiName.trim() || (aiCommander ? `${aiCommander} Deck` : `AI ${aiColors.join('')} ${aiStrategy || 'Deck'}`),
+            format: aiFormat,
+            colors: aiColors,
+            strategy: aiStrategy || undefined,
+            useCollection: aiUseCollection,
+            commanderName: isAiCommanderFormat ? aiCommander : undefined,
+          }),
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Build failed');
+        router.push(`/deck/${data.deckId}`);
+      } catch (err) {
+        setAiError(err instanceof Error ? err.message : 'Build failed');
+        setAiBuilding(false);
+      }
     }
   };
 
@@ -432,7 +468,7 @@ export default function DeckBuilderPage() {
             </div>
 
             {/* Use collection toggle */}
-            <label className="mb-4 flex items-center gap-2 text-sm">
+            <label className="mb-3 flex items-center gap-2 text-sm">
               <input
                 type="checkbox"
                 checked={aiUseCollection}
@@ -441,6 +477,54 @@ export default function DeckBuilderPage() {
               />
               <span className="text-muted-foreground">Prefer cards from my collection</span>
             </label>
+
+            {/* Claude Build toggle (commander formats only) */}
+            {isAiCommanderFormat && (
+              <div className="mb-4">
+                <div className="flex items-center gap-3">
+                  <button
+                    type="button"
+                    onClick={() => { setUseClaudeBuild(false); }}
+                    className={cn(
+                      'flex-1 rounded-lg px-3 py-2 text-xs font-medium transition-colors',
+                      !useClaudeBuild
+                        ? 'bg-primary text-primary-foreground'
+                        : 'bg-accent text-accent-foreground hover:bg-accent/80'
+                    )}
+                  >
+                    Quick Build
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => hasApiKey && setUseClaudeBuild(true)}
+                    disabled={!hasApiKey}
+                    className={cn(
+                      'flex-1 rounded-lg px-3 py-2 text-xs font-medium transition-colors',
+                      useClaudeBuild
+                        ? 'bg-primary text-primary-foreground'
+                        : hasApiKey
+                          ? 'bg-accent text-accent-foreground hover:bg-accent/80'
+                          : 'bg-accent/50 text-muted-foreground cursor-not-allowed'
+                    )}
+                  >
+                    <span className="flex items-center justify-center gap-1">
+                      <SparklesIcon className="h-3 w-3" />
+                      AI-Reasoned
+                    </span>
+                  </button>
+                </div>
+                {useClaudeBuild && (
+                  <p className="mt-1.5 text-[10px] text-muted-foreground">
+                    Uses your Claude API key. Takes 15-30s but provides per-card explanations.
+                  </p>
+                )}
+                {!hasApiKey && (
+                  <p className="mt-1.5 text-[10px] text-muted-foreground">
+                    Add a Claude API key in Settings to enable AI-Reasoned builds.
+                  </p>
+                )}
+              </div>
+            )}
 
             {aiError && (
               <div className="mb-3 rounded-lg bg-destructive/10 px-3 py-2 text-xs text-destructive">
@@ -460,7 +544,11 @@ export default function DeckBuilderPage() {
                 disabled={aiBuilding || aiColors.length === 0}
                 className="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-50"
               >
-                {aiBuilding ? 'Building...' : 'Build Deck'}
+                {aiBuilding
+                  ? (aiBuildProgress || 'Building...')
+                  : useClaudeBuild
+                    ? 'Build with Claude'
+                    : 'Build Deck'}
               </button>
             </div>
           </div>
