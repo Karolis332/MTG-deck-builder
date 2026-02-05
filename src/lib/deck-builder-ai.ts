@@ -285,7 +285,7 @@ function resolveEdhrecCards(
 
 // ── Main deck builder ───────────────────────────────────────────────────────
 
-interface BuildOptions {
+export interface BuildOptions {
   format: string;
   colors: string[]; // e.g. ['W', 'U']
   strategy?: string; // optional archetype hint: 'aggro', 'control', 'midrange', 'combo'
@@ -301,18 +301,48 @@ interface BuildResult {
   commanderSynergy?: CommanderSynergyProfile;
 }
 
-export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult> {
+export interface ScoredCandidatePoolResult {
+  pool: Array<{ card: DbCard; score: number }>;
+  themes: string[];
+  resolvedStrategy: string;
+  tribalType: string | null;
+  tribalNames: Set<string>;
+  commanderProfile: CommanderSynergyProfile | null;
+  commanderCard: DbCard | null;
+  landTarget: number;
+  nonLandTarget: number;
+  isCommander: boolean;
+  maxCopies: number;
+  colors: string[];
+  ownedQty: Map<string, number>;
+  useCollection: boolean;
+  colorExcludeFilter: string;
+  legalityFilter: string;
+  commanderExclude: string;
+  collectionJoin: string;
+  collectionOrder: string;
+}
+
+/**
+ * Build a scored candidate pool of nonland cards for deck construction.
+ * Reusable by both autoBuildDeck() and Claude-powered deck building.
+ */
+export async function buildScoredCandidatePool(options: BuildOptions): Promise<ScoredCandidatePoolResult> {
   const db = getDb();
   const { format, strategy, useCollection = false, commanderName } = options;
 
   // If commander format, derive colors from commander's color identity
   let colors = options.colors;
+  let commanderCard: DbCard | null = null;
   if (commanderName) {
     const cmdCard = db.prepare('SELECT * FROM cards WHERE name = ? COLLATE NOCASE').get(commanderName) as DbCard | undefined;
-    if (cmdCard?.color_identity) {
-      try {
-        colors = JSON.parse(cmdCard.color_identity);
-      } catch {}
+    if (cmdCard) {
+      commanderCard = cmdCard;
+      if (cmdCard.color_identity) {
+        try {
+          colors = JSON.parse(cmdCard.color_identity);
+        } catch {}
+      }
     }
   }
 
@@ -737,6 +767,40 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
   });
 
   scored.sort((a, b) => b.score - a.score);
+
+  return {
+    pool: scored,
+    themes,
+    resolvedStrategy,
+    tribalType,
+    tribalNames,
+    commanderProfile,
+    commanderCard,
+    landTarget: targetLands,
+    nonLandTarget,
+    isCommander,
+    maxCopies,
+    colors,
+    ownedQty,
+    useCollection,
+    colorExcludeFilter,
+    legalityFilter,
+    commanderExclude,
+    collectionJoin,
+    collectionOrder,
+  };
+}
+
+export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult> {
+  const db = getDb();
+  const poolResult = await buildScoredCandidatePool(options);
+  const {
+    pool: scored, themes, resolvedStrategy, tribalType, tribalNames,
+    commanderProfile, landTarget: targetLands, nonLandTarget,
+    isCommander, maxCopies, colors, ownedQty, useCollection,
+    colorExcludeFilter, legalityFilter, commanderExclude,
+    collectionJoin, collectionOrder,
+  } = poolResult;
 
   // Step 4: Pick cards respecting mana curve (from archetype templates)
   const idealCurve = getScaledCurve(resolvedStrategy, nonLandTarget);

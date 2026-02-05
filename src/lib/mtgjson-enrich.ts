@@ -7,26 +7,21 @@
  * Downloads: https://mtgjson.com/api/v5/AtomicCards.json.gz
  * Extracts: identifiers.mtgArenaId for each card printing
  * Updates: cards SET arena_id = ? WHERE name = ?
+ *
+ * Uses streaming to temp file + worker thread parsing to avoid blocking
+ * the event loop during the ~400MB JSON parse.
  */
 
 import { getDb } from './db';
 import { createGunzip } from 'zlib';
+import { createWriteStream, unlinkSync, existsSync, mkdtempSync, rmdirSync } from 'fs';
+import { join, dirname } from 'path';
+import { tmpdir } from 'os';
 import https from 'https';
+import { Worker } from 'worker_threads';
 import type { IncomingMessage } from 'http';
 
 const MTGJSON_URL = 'https://mtgjson.com/api/v5/AtomicCards.json.gz';
-
-interface MtgjsonPrinting {
-  identifiers?: {
-    mtgArenaId?: string | number;
-  };
-}
-
-interface MtgjsonCard {
-  name?: string;
-  printings?: string[];
-  [key: string]: unknown;
-}
 
 export interface EnrichmentProgress {
   phase: 'idle' | 'downloading' | 'parsing' | 'updating' | 'done' | 'error' | 'cancelled';
@@ -81,44 +76,55 @@ function resetProgress() {
   activeRequest = null;
 }
 
+function cleanupTemp(filePath: string) {
+  try {
+    if (filePath && existsSync(filePath)) unlinkSync(filePath);
+  } catch { /* ignore */ }
+  try {
+    const dir = dirname(filePath);
+    if (dir.includes('mtgjson-')) rmdirSync(dir);
+  } catch { /* ignore */ }
+}
+
 /**
- * Fetch and decompress the MTGJSON AtomicCards.json.gz file with progress tracking.
+ * Fetch and decompress MTGJSON AtomicCards.json.gz to a temp file.
+ * Streams directly to disk — never holds the full decompressed data in memory.
  */
-function fetchMtgjson(): Promise<Record<string, MtgjsonCard[]>> {
+function fetchMtgjsonToFile(): Promise<string> {
   return new Promise((resolve, reject) => {
+    const tempDir = mkdtempSync(join(tmpdir(), 'mtgjson-'));
+    const tempFile = join(tempDir, 'AtomicCards.json');
+
     function handleResponse(response: IncomingMessage) {
       const totalBytes = parseInt(response.headers['content-length'] || '0', 10);
-      currentProgress.totalBytes = totalBytes || 50_000_000; // estimate ~50MB if unknown
+      currentProgress.totalBytes = totalBytes || 50_000_000;
       currentProgress.downloadedBytes = 0;
 
-      const chunks: Buffer[] = [];
       const gunzip = createGunzip();
+      const writeStream = createWriteStream(tempFile);
 
       response.on('data', (chunk: Buffer) => {
         currentProgress.downloadedBytes += chunk.length;
       });
 
-      response.pipe(gunzip);
+      response.pipe(gunzip).pipe(writeStream);
 
-      gunzip.on('data', (chunk: Buffer) => chunks.push(chunk));
-      gunzip.on('end', () => {
+      writeStream.on('finish', () => {
         if (cancelRequested) {
+          cleanupTemp(tempFile);
           reject(new Error('Cancelled'));
           return;
         }
-        currentProgress.phase = 'parsing';
-        // Use setImmediate to let the event loop breathe before heavy JSON parse
-        setImmediate(() => {
-          try {
-            const text = Buffer.concat(chunks).toString('utf-8');
-            const parsed = JSON.parse(text);
-            resolve(parsed.data || parsed);
-          } catch (err) {
-            reject(new Error(`Failed to parse MTGJSON: ${err}`));
-          }
-        });
+        resolve(tempFile);
       });
+
+      writeStream.on('error', (err) => {
+        cleanupTemp(tempFile);
+        reject(err);
+      });
+
       gunzip.on('error', (err) => {
+        cleanupTemp(tempFile);
         if (cancelRequested) reject(new Error('Cancelled'));
         else reject(err);
       });
@@ -129,8 +135,12 @@ function fetchMtgjson(): Promise<Record<string, MtgjsonCard[]>> {
         const redirectUrl = res.headers.location;
         if (redirectUrl) {
           activeRequest = https.get(redirectUrl, handleResponse);
-          activeRequest.on('error', reject);
+          activeRequest.on('error', (err) => {
+            cleanupTemp(tempFile);
+            reject(err);
+          });
         } else {
+          cleanupTemp(tempFile);
           reject(new Error('Redirect without location'));
         }
         return;
@@ -138,6 +148,7 @@ function fetchMtgjson(): Promise<Record<string, MtgjsonCard[]>> {
       handleResponse(res);
     });
     activeRequest.on('error', (err) => {
+      cleanupTemp(tempFile);
       if (cancelRequested) reject(new Error('Cancelled'));
       else reject(err);
     });
@@ -145,36 +156,73 @@ function fetchMtgjson(): Promise<Record<string, MtgjsonCard[]>> {
 }
 
 /**
- * Extract arena_id mappings from MTGJSON AtomicCards data.
+ * Parse the MTGJSON JSON file in a worker thread.
+ * This avoids blocking the main event loop during the heavy JSON.parse
+ * (~400MB file takes 10-30s to parse synchronously).
  */
-function extractArenaIds(
-  data: Record<string, MtgjsonCard[]>
-): Map<string, number> {
-  const mapping = new Map<string, number>();
+function parseInWorker(filePath: string): Promise<Map<string, number>> {
+  return new Promise((resolve, reject) => {
+    const workerCode = `
+      const { parentPort, workerData } = require('worker_threads');
+      const fs = require('fs');
 
-  for (const [name, printings] of Object.entries(data)) {
-    if (!Array.isArray(printings)) continue;
+      try {
+        const text = fs.readFileSync(workerData.filePath, 'utf-8');
+        const parsed = JSON.parse(text);
+        const data = parsed.data || parsed;
 
-    let arenaId: number | null = null;
-    for (const printing of printings) {
-      const p = printing as unknown as MtgjsonPrinting;
-      const aid = p.identifiers?.mtgArenaId;
-      if (aid != null) {
-        const parsed = typeof aid === 'number' ? aid : parseInt(String(aid), 10);
-        if (!isNaN(parsed)) {
-          arenaId = parsed;
-          break;
+        const mappings = {};
+        let count = 0;
+
+        for (const [name, printings] of Object.entries(data)) {
+          if (!Array.isArray(printings)) continue;
+          for (const p of printings) {
+            const aid = p.identifiers && p.identifiers.mtgArenaId;
+            if (aid != null) {
+              const num = typeof aid === 'number' ? aid : parseInt(String(aid), 10);
+              if (!isNaN(num) && num > 0) {
+                mappings[name] = num;
+                count++;
+                break;
+              }
+            }
+          }
         }
+
+        parentPort.postMessage({ mappings, count });
+      } catch (err) {
+        parentPort.postMessage({ error: err.message });
       }
-    }
+    `;
 
-    if (arenaId !== null) {
-      mapping.set(name, arenaId);
-    }
-  }
+    const worker = new Worker(workerCode, {
+      eval: true,
+      workerData: { filePath },
+      resourceLimits: {
+        maxOldGenerationSizeMb: 2048,
+      },
+    });
 
-  currentProgress.mappingsFound = mapping.size;
-  return mapping;
+    worker.on('message', (msg: { error?: string; mappings?: Record<string, number>; count?: number }) => {
+      if (msg.error) {
+        reject(new Error(`MTGJSON parse failed: ${msg.error}`));
+      } else {
+        const map = new Map<string, number>();
+        for (const [name, id] of Object.entries(msg.mappings || {})) {
+          map.set(name, id as number);
+        }
+        currentProgress.mappingsFound = map.size;
+        resolve(map);
+      }
+    });
+
+    worker.on('error', reject);
+    worker.on('exit', (code) => {
+      if (code !== 0 && !cancelRequested) {
+        reject(new Error(`Worker exited with code ${code}`));
+      }
+    });
+  });
 }
 
 /**
@@ -218,7 +266,7 @@ function updateDatabase(mapping: Map<string, number>): number {
 }
 
 /**
- * Run the full MTGJSON enrichment pipeline (non-blocking start).
+ * Run the full MTGJSON enrichment pipeline (non-blocking).
  * Call getEnrichmentProgress() to poll status.
  */
 export async function enrichArenaIds(): Promise<{
@@ -233,12 +281,19 @@ export async function enrichArenaIds(): Promise<{
   resetProgress();
   currentProgress.phase = 'downloading';
 
+  let tempFile = '';
   try {
-    const data = await fetchMtgjson();
+    // Phase 1: Download + decompress to temp file (streams to disk)
+    tempFile = await fetchMtgjsonToFile();
     if (cancelRequested) throw new Error('Cancelled');
 
+    // Phase 2: Parse JSON in worker thread (doesn't block event loop)
+    currentProgress.phase = 'parsing';
+    const mapping = await parseInWorker(tempFile);
+    if (cancelRequested) throw new Error('Cancelled');
+
+    // Phase 3: Update database in batches
     currentProgress.phase = 'updating';
-    const mapping = extractArenaIds(data);
     const updated = updateDatabase(mapping);
 
     currentProgress.phase = 'done';
@@ -253,5 +308,7 @@ export async function enrichArenaIds(): Promise<{
       currentProgress.error = err instanceof Error ? err.message : String(err);
     }
     throw err;
+  } finally {
+    if (tempFile) cleanupTemp(tempFile);
   }
 }

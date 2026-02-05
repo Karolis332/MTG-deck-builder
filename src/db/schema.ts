@@ -498,4 +498,28 @@ export const MIGRATIONS = [
       CREATE INDEX IF NOT EXISTS idx_edhrec_avg_commander ON edhrec_avg_decks(commander_name);
     `,
   },
+  {
+    version: 16,
+    name: 'add_ai_build_logs',
+    sql: `
+      CREATE TABLE IF NOT EXISTS ai_build_logs (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        deck_id INTEGER NOT NULL,
+        commander_name TEXT,
+        format TEXT NOT NULL,
+        strategy TEXT,
+        model_used TEXT,
+        role_breakdown TEXT,
+        strategy_explanation TEXT,
+        card_reasons TEXT,
+        input_tokens INTEGER,
+        output_tokens INTEGER,
+        build_time_ms INTEGER,
+        created_at TEXT NOT NULL DEFAULT (datetime('now')),
+        FOREIGN KEY (deck_id) REFERENCES decks(id) ON DELETE CASCADE
+      );
+
+      CREATE INDEX IF NOT EXISTS idx_ai_build_deck ON ai_build_logs(deck_id);
+    `,
+  },
 ];
