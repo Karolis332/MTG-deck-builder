@@ -24,6 +24,14 @@ function getOpenAIKey(): string | null {
   return row?.value || null;
 }
 
+function getAnthropicKey(): string | null {
+  const db = getDb();
+  const row = db
+    .prepare("SELECT value FROM app_state WHERE key = 'setting_anthropic_api_key'")
+    .get() as { value: string } | undefined;
+  return row?.value || null;
+}
+
 function resolveCard(name: string): DbCard | null {
   const db = getDb();
   return (
@@ -80,13 +88,20 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const apiKey = getOpenAIKey();
+    // Try Claude first (recommended), fall back to OpenAI
+    const claudeKey = getAnthropicKey();
+    const openaiKey = getOpenAIKey();
+    const useClaude = !!claudeKey;
+    const apiKey = claudeKey || openaiKey;
+
     if (!apiKey) {
       return NextResponse.json(
-        { error: 'OpenAI API key not configured. Go to Settings to add your key.' },
+        { error: 'No AI API key configured. Go to Settings to add Anthropic or OpenAI key.' },
         { status: 400 }
       );
     }
+
+    console.log(`[AI Chat] Using provider: ${useClaude ? 'Claude Sonnet 4.5' : 'OpenAI GPT-4o'}`);
 
     // Always fetch FRESH deck state — the deck may have changed since last turn
     const deckData = getDeckWithCards(deck_id);
@@ -104,8 +119,8 @@ export async function POST(request: NextRequest) {
 
     // ── Fetch user's collection ────────────────────────────────────────
     const db = getDb();
-    // Fetch only card names for efficiency (don't need full card data)
-    const collectionCards = db
+    // Fetch all unique card names in collection (for total count + fast-path queries)
+    const allCollectionCards = db
       .prepare(`
         SELECT DISTINCT c.name
         FROM collection col
@@ -115,16 +130,16 @@ export async function POST(request: NextRequest) {
       `)
       .all(deck_id) as Array<{ name: string }>;
 
-    const collectionCardNames = collectionCards.map(c => c.name);
-    const hasCollection = collectionCards.length > 0;
+    const collectionCardNames = allCollectionCards.map(c => c.name);
+    const hasCollection = allCollectionCards.length > 0;
 
-    console.log(`[AI Chat] User collection: ${collectionCards.length} unique cards`);
+    console.log(`[AI Chat] User collection: ${allCollectionCards.length} unique cards`);
 
     // ── FAST PATH: Collection visibility questions ─────────────────────
     if (prompt.match(/can you see (my )?collection|do you (have|know) (my )?collection/i)) {
       if (hasCollection) {
         return NextResponse.json({
-          message: `Yes! I can see your collection with **${collectionCards.length} cards**. I'll prefer suggesting cards you own when making recommendations.\n\nYour collection includes: ${collectionCardNames.slice(0, 10).join(', ')}${collectionCards.length > 10 ? `, and ${collectionCards.length - 10} more...` : ''}`,
+          message: `Yes! I can see your full collection with **${allCollectionCards.length} unique cards**. I'll only suggest cards you own when making recommendations.\n\nSample from your collection: ${collectionCardNames.slice(0, 10).join(', ')}${allCollectionCards.length > 10 ? `, and ${allCollectionCards.length - 10} more...` : ''}`,
           actions: [],
         });
       } else {
@@ -231,6 +246,39 @@ export async function POST(request: NextRequest) {
     }
     const deckColors = Array.from(colorSet);
 
+    // ── Build color-filtered collection for AI context ──────────────────
+    // Instead of sending arbitrary 200 cards, send ALL cards that match
+    // the deck's color identity (typically 500-1500 vs 2500+ total)
+    let filteredCollectionNames: string[] = [];
+    if (hasCollection) {
+      // Build SQL color filter: exclude cards with colors outside deck identity
+      const excludeColors = ['W', 'U', 'B', 'R', 'G'].filter(c => !colorSet.has(c));
+      const colorClauses = excludeColors.map(c => `c.color_identity NOT LIKE '%${c}%'`);
+      const colorFilter = colorClauses.length > 0 ? `AND ${colorClauses.join(' AND ')}` : '';
+
+      const existingCardNameSet = new Set(
+        [...mainCards, ...commanderCards].map(c => c.name.toLowerCase())
+      );
+
+      const filteredCards = db
+        .prepare(`
+          SELECT DISTINCT c.name
+          FROM collection col
+          JOIN cards c ON col.card_id = c.id
+          WHERE col.user_id = (SELECT user_id FROM decks WHERE id = ?)
+          ${colorFilter}
+          ORDER BY c.edhrec_rank ASC NULLS LAST
+        `)
+        .all(deck_id) as Array<{ name: string }>;
+
+      // Exclude cards already in deck
+      filteredCollectionNames = filteredCards
+        .map(c => c.name)
+        .filter(name => !existingCardNameSet.has(name.toLowerCase()));
+
+      console.log(`[AI Chat] Collection filtered: ${allCollectionCards.length} total → ${filteredCollectionNames.length} in color identity {${deckColors.join(',')}}`);
+    }
+
     // Detect illegal cards
     const illegalCards: string[] = [];
     for (const card of [...mainCards, ...commanderCards]) {
@@ -289,6 +337,38 @@ export async function POST(request: NextRequest) {
     const allCardNames = [...mainCards, ...commanderCards].map(c => c.name).sort();
     const cardNameList = allCardNames.join(', ');
 
+    // ── EDHREC Knowledge Retrieval ──────────────────────────────────────
+    // Search FTS5 for articles matching commander name, archetype, or user query
+    let edhrecKnowledge = '';
+    try {
+      const searchTerms: string[] = [];
+      if (commanderCards.length > 0) {
+        searchTerms.push(commanderCards[0].name);
+      }
+      // Add keywords from the user's prompt
+      const queryWords = prompt.toLowerCase().split(/\s+/).filter(w => w.length > 3);
+      searchTerms.push(...queryWords.slice(0, 3));
+
+      if (searchTerms.length > 0) {
+        const ftsQuery = searchTerms.map(t => `"${t.replace(/"/g, '')}"`).join(' OR ');
+        const knowledgeRows = db.prepare(`
+          SELECT ek.title, ek.chunk_text, ek.category
+          FROM edhrec_knowledge_fts fts
+          JOIN edhrec_knowledge ek ON fts.rowid = ek.id
+          WHERE edhrec_knowledge_fts MATCH ?
+          ORDER BY rank
+          LIMIT 3
+        `).all(ftsQuery) as Array<{ title: string; chunk_text: string; category: string }>;
+
+        if (knowledgeRows.length > 0) {
+          edhrecKnowledge = `\n═══ EDHREC KNOWLEDGE (relevant articles) ═══\n` +
+            knowledgeRows.map(r => `[${r.category}] ${r.title}:\n${r.chunk_text.slice(0, 400)}`).join('\n---\n');
+        }
+      }
+    } catch {
+      // FTS5 table may not exist yet — that's fine
+    }
+
     // System prompt — explicit and strict to prevent common errors
     const systemPrompt = `You are an expert MTG deck tuning assistant.
 
@@ -308,10 +388,10 @@ ALL CARDS CURRENTLY IN DECK (${allCardNames.length} cards):
 ${cardNameList}
 
 ${hasCollection ? `
-USER'S COLLECTION (${collectionCards.length} cards owned):
-${collectionCardNames.slice(0, 200).join(', ')}${collectionCards.length > 200 ? ` ... and ${collectionCards.length - 200} more` : ''}
+USER'S COLLECTION — ${allCollectionCards.length} total cards owned, ${filteredCollectionNames.length} match deck colors {${deckColors.join(', ')}}:
+${filteredCollectionNames.join(', ')}
 
-💡 PREFERENCE: When possible, suggest cards from the user's collection (listed above).
+⚡ CRITICAL: ONLY suggest ADD cards from this collection list above. The user wants to play with cards they own.
 ` : ''}
 ═══════════════════════════════════════════════════════════
 HARD RULES — NEVER VIOLATE THESE
@@ -341,6 +421,7 @@ CURRENT DECKLIST (with oracle text for reasoning)
 ═══════════════════════════════════════════════════════════
 ${deckSummary}
 
+${edhrecKnowledge}
 ═══════════════════════════════════════════════════════════
 RESPONSE FORMAT (strict JSON)
 ═══════════════════════════════════════════════════════════
@@ -368,50 +449,95 @@ The deck may have changed since your last response. Here is the CURRENT state:
 - Main deck: ${currentMainCount}/${effectiveTarget} cards (${sizeStatus})
 - Lands: ${landCount}/${targetLands}
 - ALL cards now in deck: ${allCardNames.join(', ')}
+${hasCollection ? `- Collection cards available (${filteredCollectionNames.length} in deck colors): ${filteredCollectionNames.join(', ')}` : ''}
 
 ${isCommanderLike ? `CRITICAL: Deck MUST stay at ${effectiveTarget} cards. Every ADD needs a CUT.` : ''}
+${hasCollection ? 'ONLY suggest ADD cards from the collection list above.' : ''}
 Remember to check the card list above to avoid suggesting duplicates!`,
       });
     }
 
     messages.push({ role: 'user', content: prompt });
 
-    const response = await fetch('https://api.openai.com/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${apiKey}`,
-      },
-      body: JSON.stringify({
-        model: 'gpt-4o-mini',
-        messages,
-        temperature: 0.7,
-        max_tokens: 2000,
-        response_format: { type: 'json_object' },
-      }),
-    });
+    let content: string;
 
-    if (!response.ok) {
-      const errText = await response.text();
-      console.error('OpenAI chat API error:', response.status, errText);
-      return NextResponse.json(
-        { error: `OpenAI API error: ${response.status}` },
-        { status: 502 }
-      );
+    if (useClaude) {
+      // Claude API call
+      const response = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': apiKey,
+          'anthropic-version': '2023-06-01',
+        },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-5-20250929',
+          max_tokens: 4096,
+          temperature: 0.7,
+          messages: messages.filter(m => m.role !== 'system').map(m => ({
+            role: m.role as 'user' | 'assistant',
+            content: m.content
+          })),
+          system: messages.filter(m => m.role === 'system').map(m => m.content).join('\n\n'),
+        }),
+      });
+
+      if (!response.ok) {
+        const errText = await response.text();
+        console.error('Claude chat API error:', response.status, errText);
+        return NextResponse.json(
+          { error: `Claude API error: ${response.status}` },
+          { status: 502 }
+        );
+      }
+
+      const data = await response.json();
+      content = data.content?.[0]?.text || '';
+    } else {
+      // OpenAI API call
+      const response = await fetch('https://api.openai.com/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${apiKey}`,
+        },
+        body: JSON.stringify({
+          model: 'gpt-4o',
+          messages,
+          temperature: 0.7,
+          max_tokens: 2000,
+          response_format: { type: 'json_object' },
+        }),
+      });
+
+      if (!response.ok) {
+        const errText = await response.text();
+        console.error('OpenAI chat API error:', response.status, errText);
+        return NextResponse.json(
+          { error: `OpenAI API error: ${response.status}` },
+          { status: 502 }
+        );
+      }
+
+      const data = await response.json();
+      content = data.choices?.[0]?.message?.content || '';
     }
-
-    const data = await response.json();
-    const content = data.choices?.[0]?.message?.content;
     if (!content) {
       return NextResponse.json(
-        { error: 'Empty response from OpenAI' },
+        { error: `Empty response from ${useClaude ? 'Claude' : 'OpenAI'}` },
         { status: 502 }
       );
     }
 
     let parsed: ChatResponse;
     try {
-      parsed = JSON.parse(content);
+      // Claude might wrap JSON in markdown code blocks, extract it
+      let jsonText = content;
+      const jsonMatch = content.match(/```json\n([\s\S]*?)\n```/) || content.match(/\{[\s\S]*\}/);
+      if (jsonMatch) {
+        jsonText = jsonMatch[1] || jsonMatch[0];
+      }
+      parsed = JSON.parse(jsonText);
     } catch {
       return NextResponse.json(
         { error: 'Failed to parse AI response', rawContent: content },

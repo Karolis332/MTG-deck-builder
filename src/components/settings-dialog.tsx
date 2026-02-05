@@ -12,8 +12,15 @@ interface SettingsDialogProps {
 export function SettingsDialog({ open, onClose }: SettingsDialogProps) {
   const [openaiKey, setOpenaiKey] = useState('');
   const [maskedKey, setMaskedKey] = useState('');
+  const [anthropicKey, setAnthropicKey] = useState('');
+  const [maskedAnthropicKey, setMaskedAnthropicKey] = useState('');
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState('');
+  const [anthropicMessage, setAnthropicMessage] = useState('');
+
+  // Data export state
+  const [exporting, setExporting] = useState(false);
+  const [exportMessage, setExportMessage] = useState('');
 
   // Arena integration state
   const [arenaLogPath, setArenaLogPath] = useState('');
@@ -34,11 +41,18 @@ export function SettingsDialog({ open, onClose }: SettingsDialogProps) {
         } else {
           setMaskedKey('');
         }
+        if (data.settings?.anthropic_api_key) {
+          setMaskedAnthropicKey(data.settings.anthropic_api_key);
+        } else {
+          setMaskedAnthropicKey('');
+        }
         if (data.settings?.arena_log_path) {
           setArenaLogPath(data.settings.arena_log_path);
         }
         setOpenaiKey('');
+        setAnthropicKey('');
         setMessage('');
+        setAnthropicMessage('');
         setArenaMessage('');
       })
       .catch(() => {});
@@ -97,6 +111,49 @@ export function SettingsDialog({ open, onClose }: SettingsDialogProps) {
       setMessage('API key removed');
     } catch {
       setMessage('Failed to remove API key');
+    } finally {
+      setSaving(false);
+    }
+  }, []);
+
+  const saveAnthropicKey = useCallback(async () => {
+    if (!anthropicKey.trim()) return;
+    setSaving(true);
+    setAnthropicMessage('');
+    try {
+      const res = await fetch('/api/settings', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ key: 'anthropic_api_key', value: anthropicKey.trim() }),
+      });
+      const data = await res.json();
+      if (data.ok) {
+        setAnthropicMessage('Anthropic API key saved successfully');
+        setMaskedAnthropicKey(anthropicKey.slice(0, 4) + '...' + anthropicKey.slice(-4));
+        setAnthropicKey('');
+      } else {
+        setAnthropicMessage('Failed to save: ' + (data.error || 'Unknown error'));
+      }
+    } catch (err) {
+      setAnthropicMessage('Failed to save API key');
+    } finally {
+      setSaving(false);
+    }
+  }, [anthropicKey]);
+
+  const removeAnthropicKey = useCallback(async () => {
+    setSaving(true);
+    try {
+      await fetch('/api/settings', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ key: 'anthropic_api_key', value: '' }),
+      });
+      setMaskedAnthropicKey('');
+      setAnthropicKey('');
+      setAnthropicMessage('Anthropic API key removed');
+    } catch {
+      setAnthropicMessage('Failed to remove API key');
     } finally {
       setSaving(false);
     }
@@ -259,6 +316,41 @@ export function SettingsDialog({ open, onClose }: SettingsDialogProps) {
     }
   }, []);
 
+  const exportData = useCallback(async () => {
+    setExporting(true);
+    setExportMessage('');
+    try {
+      const res = await fetch('/api/data-export');
+      if (!res.ok) {
+        const err = await res.json();
+        setExportMessage(`Export failed: ${err.error || 'Unknown error'}`);
+        return;
+      }
+      const data = await res.json();
+      const json = JSON.stringify(data, null, 2);
+      const blob = new Blob([json], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+
+      // Create download link
+      const a = document.createElement('a');
+      a.href = url;
+      const timestamp = new Date().toISOString().slice(0, 10);
+      a.download = `mtg-deck-builder-export-${timestamp}.json`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+
+      setExportMessage(
+        `Exported ${data.stats.arenaMatches} matches, ${data.stats.decks} decks, ${data.stats.collectionCards} collection cards`
+      );
+    } catch (err) {
+      setExportMessage(`Export failed: ${err}`);
+    } finally {
+      setExporting(false);
+    }
+  }, []);
+
   if (!open) return null;
 
   const electronMode = isElectron();
@@ -288,7 +380,7 @@ export function SettingsDialog({ open, onClose }: SettingsDialogProps) {
             <label className="mb-1 block text-sm font-medium">OpenAI API Key</label>
             <p className="mb-2 text-xs text-muted-foreground">
               Provide your OpenAI API key to enable GPT-powered deck suggestions.
-              Uses gpt-4o-mini for cost-effective analysis.
+              Uses GPT-4o for high-quality analysis.
             </p>
             {maskedKey && (
               <div className="mb-2 flex items-center gap-2">
@@ -331,12 +423,83 @@ export function SettingsDialog({ open, onClose }: SettingsDialogProps) {
             </p>
           )}
 
+          {/* Anthropic API Key */}
+          <div className="border-t border-border pt-3">
+            <label className="mb-1 block text-sm font-medium">Anthropic API Key (Recommended)</label>
+            <p className="mb-2 text-xs text-muted-foreground">
+              Claude Sonnet 4.5 provides superior MTG deck building intelligence with deep strategic knowledge.
+              Highly recommended for best suggestions!
+            </p>
+            {maskedAnthropicKey && (
+              <div className="mb-2 flex items-center gap-2">
+                <span className="rounded bg-accent px-2 py-1 font-mono text-xs">
+                  {maskedAnthropicKey}
+                </span>
+                <button
+                  onClick={removeAnthropicKey}
+                  disabled={saving}
+                  className="text-xs text-red-400 hover:text-red-300"
+                >
+                  Remove
+                </button>
+              </div>
+            )}
+            <div className="flex gap-2">
+              <input
+                type="password"
+                value={anthropicKey}
+                onChange={(e) => setAnthropicKey(e.target.value)}
+                placeholder={maskedAnthropicKey ? 'Enter new key to replace' : 'sk-ant-...'}
+                className="flex-1 rounded-lg border border-border bg-background px-3 py-2 text-sm outline-none focus:border-primary"
+              />
+              <button
+                onClick={saveAnthropicKey}
+                disabled={saving || !anthropicKey.trim()}
+                className="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-50"
+              >
+                {saving ? 'Saving...' : 'Save'}
+              </button>
+            </div>
+            {anthropicMessage && (
+              <p className={cn(
+                'mt-2 text-xs',
+                anthropicMessage.includes('success') || anthropicMessage.includes('saved') ? 'text-green-400' : 'text-muted-foreground'
+              )}>
+                {anthropicMessage}
+              </p>
+            )}
+          </div>
+
           <div className="border-t border-border pt-3">
             <p className="text-[10px] text-muted-foreground">
-              AI Suggestion Priority: Ollama (local) &gt; OpenAI GPT &gt; Synergy Engine &gt; Rules Engine.
-              Your API key is stored locally in your database and never sent to third parties.
+              AI Suggestion Priority: Claude Sonnet 4.5 &gt; Ollama (local) &gt; OpenAI GPT-4o &gt; Synergy Engine.
+              Your API keys are stored locally and never sent to third parties.
             </p>
           </div>
+        </div>
+
+        {/* Data Export */}
+        <div className="mt-4 space-y-3 border-t border-border pt-4">
+          <h3 className="text-sm font-bold">Data Export</h3>
+          <p className="text-xs text-muted-foreground">
+            Export your match data, decks, and collection as a JSON file.
+            Share exports to help improve the ML model.
+          </p>
+          <button
+            onClick={exportData}
+            disabled={exporting}
+            className="w-full rounded-lg border border-border px-3 py-2 text-xs font-medium transition-colors hover:bg-accent disabled:opacity-50"
+          >
+            {exporting ? 'Exporting...' : 'Export Match Data'}
+          </button>
+          {exportMessage && (
+            <p className={cn(
+              'text-xs',
+              exportMessage.includes('Exported') ? 'text-green-400' : 'text-red-400'
+            )}>
+              {exportMessage}
+            </p>
+          )}
         </div>
 
         {/* Arena Integration — Electron only */}

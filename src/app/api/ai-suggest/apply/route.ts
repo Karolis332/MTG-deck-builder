@@ -25,9 +25,35 @@ export async function POST(request: NextRequest) {
 
     const db = getDb();
 
-    // ── Check deck size constraints for fixed-size formats ───────────
-    const deckRow = db.prepare('SELECT format FROM decks WHERE id = ?').get(deck_id) as { format: string | null } | undefined;
+    // ── Get deck info including user_id for collection validation ─────
+    const deckRow = db.prepare('SELECT format, user_id FROM decks WHERE id = ?').get(deck_id) as { format: string | null; user_id: number | null } | undefined;
     const format = deckRow?.format || '';
+    const userId = deckRow?.user_id;
+
+    // ── Validate all 'add' changes are in user's collection ───────────
+    if (userId) {
+      const addChanges = changes.filter(c => c.action === 'add');
+      const invalidCards: string[] = [];
+
+      for (const change of addChanges) {
+        const inCollection = db.prepare(
+          'SELECT 1 FROM collection WHERE user_id = ? AND card_id = ? AND quantity > 0'
+        ).get(userId, change.cardId);
+
+        if (!inCollection) {
+          invalidCards.push(change.cardName);
+        }
+      }
+
+      if (invalidCards.length > 0) {
+        return NextResponse.json(
+          { error: `Cannot add cards not in your collection: ${invalidCards.join(', ')}` },
+          { status: 400 }
+        );
+      }
+    }
+
+    // ── Check deck size constraints for fixed-size formats ───────────
     const isFixedSize = COMMANDER_FORMATS.includes(format as typeof COMMANDER_FORMATS[number]);
 
     if (isFixedSize) {

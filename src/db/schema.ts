@@ -454,4 +454,48 @@ export const MIGRATIONS = [
       CREATE INDEX IF NOT EXISTS idx_ml_created ON ml_training_data(created_at);
     `,
   },
+  {
+    version: 15,
+    name: 'add_edhrec_knowledge_and_avg_decks',
+    sql: `
+      CREATE TABLE IF NOT EXISTS edhrec_knowledge (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        source_url TEXT NOT NULL,
+        title TEXT NOT NULL,
+        author TEXT,
+        category TEXT,
+        chunk_text TEXT NOT NULL,
+        chunk_index INTEGER NOT NULL,
+        content_hash TEXT,
+        tags TEXT,
+        fetched_at TEXT DEFAULT (datetime('now')),
+        UNIQUE(source_url, chunk_index)
+      );
+
+      CREATE VIRTUAL TABLE IF NOT EXISTS edhrec_knowledge_fts
+        USING fts5(title, chunk_text, tags, content='edhrec_knowledge', content_rowid='id');
+
+      CREATE TRIGGER IF NOT EXISTS edhrec_knowledge_ai AFTER INSERT ON edhrec_knowledge BEGIN
+        INSERT INTO edhrec_knowledge_fts(rowid, title, chunk_text, tags)
+        VALUES (new.id, new.title, new.chunk_text, new.tags);
+      END;
+
+      CREATE TRIGGER IF NOT EXISTS edhrec_knowledge_ad AFTER DELETE ON edhrec_knowledge BEGIN
+        INSERT INTO edhrec_knowledge_fts(edhrec_knowledge_fts, rowid, title, chunk_text, tags)
+        VALUES ('delete', old.id, old.title, old.chunk_text, old.tags);
+      END;
+
+      CREATE TABLE IF NOT EXISTS edhrec_avg_decks (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        commander_name TEXT NOT NULL,
+        card_name TEXT NOT NULL,
+        card_type TEXT,
+        category_tag TEXT,
+        fetched_at TEXT DEFAULT (datetime('now')),
+        UNIQUE(commander_name, card_name)
+      );
+
+      CREATE INDEX IF NOT EXISTS idx_edhrec_avg_commander ON edhrec_avg_decks(commander_name);
+    `,
+  },
 ];

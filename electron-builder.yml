@@ -16,6 +16,7 @@ afterPack: scripts/afterPack.js
 
 files:
   - "electron-dist/**/*"
+  - "electron/**/*.js"
   - ".next/**/*"
   - "public/**/*"
   - "package.json"

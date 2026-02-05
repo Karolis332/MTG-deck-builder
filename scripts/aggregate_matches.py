@@ -26,11 +26,33 @@ DB_PATH = PROJECT_ROOT / "data" / "mtg-deck-builder.db"
 
 
 def get_card_name_map(conn: sqlite3.Connection) -> dict:
-    """Build a map of arena_id -> card_name for resolving Arena IDs."""
+    """Build a map of grpId -> card_name for resolving Arena IDs.
+
+    Uses arena_grp_id_map (Scryfall-resolved) as primary source,
+    falls back to cards.arena_id for any remaining IDs.
+    """
+    result = {}
+
+    # Primary: grp_id_map table (Scryfall-resolved, most accurate)
+    try:
+        rows = conn.execute(
+            "SELECT grp_id, card_name FROM arena_grp_id_map"
+        ).fetchall()
+        for row in rows:
+            result[str(row[0])] = row[1]
+    except Exception:
+        pass  # Table may not exist yet
+
+    # Fallback: cards.arena_id (MTGJSON-sourced, lower coverage)
     rows = conn.execute(
         "SELECT arena_id, name FROM cards WHERE arena_id IS NOT NULL"
     ).fetchall()
-    return {str(row[0]): row[1] for row in rows}
+    for row in rows:
+        key = str(row[0])
+        if key not in result:
+            result[key] = row[1]
+
+    return result
 
 
 def aggregate(conn: sqlite3.Connection):
@@ -70,17 +92,31 @@ def aggregate(conn: sqlite3.Connection):
             except (json.JSONDecodeError, TypeError):
                 pass
 
-        # Parse cards actually played
+        # Parse cards actually played (seen in game objects)
         played_ids = set()
         if row["cards_played"]:
             try:
-                played_ids = set(json.loads(row["cards_played"]))
+                played_ids = set()
+                for v in json.loads(row["cards_played"]):
+                    played_ids.add(str(v))
             except (json.JSONDecodeError, TypeError):
                 pass
 
+        # If no deck_cards available, treat cards_played as deck proxy
+        # (these are cards that appeared in game objects, meaning they were
+        # drawn/played — a reasonable proxy for deck composition)
+        if not deck_card_ids and played_ids:
+            deck_card_ids = played_ids
+
         # Resolve Arena IDs to names and accumulate stats
         for card_id in deck_card_ids:
-            card_name = arena_to_name.get(card_id)
+            # Handle card names directly (some entries are names, not IDs)
+            try:
+                int(card_id)
+                card_name = arena_to_name.get(card_id)
+            except ValueError:
+                card_name = card_id  # Already a card name
+
             if not card_name:
                 continue
 

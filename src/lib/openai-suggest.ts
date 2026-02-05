@@ -81,10 +81,46 @@ export async function getOpenAISuggestions(
   const deckColors = Array.from(colorSet);
   const colors = deckColors.join('');
 
-  // Count lands
+  // Analyze deck structure
   const landCount = mainCards
     .filter((c) => (c.type_line || '').includes('Land'))
     .reduce((s, c) => s + c.quantity, 0);
+
+  // Count ramp sources (CRITICAL - never cut these!)
+  const rampCards = mainCards.filter((c) => {
+    const text = (c.oracle_text || '').toLowerCase();
+    const type = (c.type_line || '').toLowerCase();
+    const name = c.name.toLowerCase();
+    return (
+      // Mana rocks
+      (type.includes('artifact') && (text.includes('add') && text.includes('mana'))) ||
+      // Signets and Talismans
+      name.includes('signet') || name.includes('talisman') ||
+      // Land ramp
+      text.includes('search your library for a') && text.includes('land') ||
+      // Specific ramp cards
+      name === 'sol ring' || name === 'arcane signet' || name === "commander's sphere" ||
+      name === 'mind stone' || name === 'thought vessel' || name === 'fellwar stone'
+    );
+  });
+  const rampCount = rampCards.reduce((s, c) => s + c.quantity, 0);
+
+  // Count instants/sorceries (important for spellslinger)
+  const instantSorceryCount = mainCards.filter((c) => {
+    const type = (c.type_line || '').toLowerCase();
+    return type.includes('instant') || type.includes('sorcery');
+  }).reduce((s, c) => s + c.quantity, 0);
+
+  // Calculate average CMC
+  const totalCMC = mainCards.reduce((sum, c) => sum + (c.cmc * c.quantity), 0);
+  const totalCards = mainCards.reduce((s, c) => s + c.quantity, 0);
+  const avgCMC = totalCards > 0 ? (totalCMC / totalCards).toFixed(2) : '0';
+
+  // Detect archetype
+  let archetype = 'midrange';
+  if (instantSorceryCount >= 20) archetype = 'spellslinger';
+  else if (parseFloat(avgCMC) >= 4.0) archetype = 'ramp/control';
+  else if (parseFloat(avgCMC) <= 2.8) archetype = 'aggro/tempo';
 
   // Check format legality issues
   const illegalCards: string[] = [];
@@ -100,43 +136,87 @@ export async function getOpenAISuggestions(
   }
 
   const collectionNote = collectionCardNames
-    ? `\nIMPORTANT: The user only owns these cards in their collection. Only suggest cards from this list:\n${collectionCardNames.slice(0, 200).join(', ')}`
+    ? `\n**CRITICAL CONSTRAINT**: User only owns these ${collectionCardNames.length} cards. You MUST ONLY suggest cards from this list. Any card not in this list will be REJECTED:\n${collectionCardNames.join(', ')}`
     : '';
 
   const illegalNote = illegalCards.length > 0
-    ? `\nWARNING: These cards are NOT LEGAL in ${format} and must be replaced: ${illegalCards.join(', ')}`
+    ? `\n**FORMAT ILLEGAL**: These cards MUST be replaced first: ${illegalCards.join(', ')}`
     : '';
 
-  // Color identity rule only applies to commander/brawl formats
-  const colorRule = isCommanderLike
-    ? `1. ONLY suggest ADD cards within color identity {${colors}}. Cards containing colors outside {${colors}} are FORBIDDEN.`
-    : `1. Suggest cards that work well in a ${colors || 'any color'} deck.`;
+  // List all mana rocks in deck (NEVER cut these!)
+  const rampCardNames = rampCards.map(c => c.name).join(', ');
 
-  const sizeRule = isCommanderLike
-    ? `4. Commander/brawl: suggest equal numbers of ADDs and CUTs to maintain deck size.`
-    : `4. You may suggest more ADDs than CUTs if the deck is under 60 cards.`;
+  const prompt = `You are an expert Magic: The Gathering Commander deck builder with deep strategic knowledge.
 
-  const prompt = `You are an expert Magic: The Gathering deck builder. Analyze this ${format} deck and suggest improvements.
+# DECK ANALYSIS
+${commanderInfo}
+**Format**: ${format}
+**Archetype**: ${archetype}
+**Color Identity**: {${colors}} ${isCommanderLike ? '(STRICT - no other colors allowed)' : ''}
+**Total Cards**: ${totalCards}
+**Lands**: ${landCount}
+**Ramp Sources**: ${rampCount} ${rampCount < 8 ? '⚠️ CRITICALLY LOW' : rampCount < 10 ? '⚠️ LOW' : '✅'}
+**Instants/Sorceries**: ${instantSorceryCount} ${archetype === 'spellslinger' && instantSorceryCount < 25 ? '⚠️ TOO LOW' : ''}
+**Average CMC**: ${avgCMC}
 
-${commanderInfo}Format: ${format}
-${isCommanderLike ? `Color identity: {${colors}} — ONLY these colors allowed` : `Colors used: ${colors || 'Colorless'}`}
-Total cards: ${mainCards.reduce((s, c) => s + c.quantity, 0)}
-Lands: ${landCount}
+**RAMP CARDS IN DECK** (NEVER CUT THESE): ${rampCardNames || 'None'}
 
-Decklist:
+## Current Decklist
 ${deckSummary}
 ${illegalNote}${collectionNote}
 
-Provide exactly 5 suggestions as ADD/CUT pairs.
+# ABSOLUTE RULES (NEVER VIOLATE)
 
-HARD RULES — NEVER violate:
-${colorRule}
-2. Never suggest cutting lands unless the deck has significantly more than needed.
-3. Prioritize replacing illegal cards first.
-${sizeRule}
+## 1. MANA ROCK PROTECTION (HIGHEST PRIORITY)
+**Current ramp count: ${rampCount}**
+- If ramp count < 10: **NEVER suggest cutting ANY of these cards**: ${rampCardNames}
+- Mana rocks (Sol Ring, Arcane Signet, Signets, Talismans, Mind Stone, etc.) are SACRED
+- Only cut a mana rock if: (a) deck has 12+ ramp AND (b) you're replacing with cheaper/better ramp
+- **VIOLATION PENALTY**: Any suggestion cutting a mana rock when ramp < 10 will be REJECTED
+
+## 2. COLOR IDENTITY (STRICT)
+${isCommanderLike ? `- ONLY suggest cards with colors in {${colors}}
+- Any card with colors outside {${colors}} is ABSOLUTELY FORBIDDEN
+- Check EVERY card's color identity before suggesting` : `- Prefer cards that match {${colors}}`}
+
+## 3. COLLECTION CONSTRAINT (MANDATORY)
+${collectionCardNames ? `- You have ${collectionCardNames.length} cards available
+- **ONLY suggest cards from the collection list above**
+- Any card not in that list will be REJECTED by the server
+- This is not optional - the system will block uncollected cards` : '- No collection constraint'}
+
+## 4. ARCHETYPE COHERENCE
+${archetype === 'spellslinger' ? `- This is a SPELLSLINGER deck
+- Current instant/sorcery count: ${instantSorceryCount}
+- NEVER cut instants/sorceries unless replacing with instants/sorceries
+- Need to maintain 25+ instants/sorceries for payoffs to work
+- Don't suggest cutting spell payoffs (Young Pyromancer, Talrand, Storm-Kiln Artist, etc.)
+- **PREMIUM SPELLS PROTECTION**: NEVER cut Lightning Bolt, Abrade, Counterspell, Brainstorm, Ponder, Preordain, Frantic Search, or other foundational spellslinger enablers
+- These cards are the BACKBONE of spellslinger strategy and should only be cut if illegal in format` : ''}
+
+## 5. DECK SIZE
+${isCommanderLike ? `- Commander decks are EXACTLY 99 cards (+ 1 commander)
+- Every ADD must have a matching CUT
+- Suggest exactly 5 ADD/CUT pairs (10 total actions)` : '- Can suggest more ADDs than CUTs if under 60 cards'}
+
+## 6. REPLACEMENT STRATEGY
+- Replace same role with same role (ramp→ramp, draw→draw, removal→removal)
+- Keep CMC within ±1 of card being cut
+- Prioritize replacing illegal cards first
+- Cut lowest-impact cards (not your best cards!)
+
+# YOUR TASK
+Provide **exactly 5 suggestions** as ADD/CUT pairs that improve the deck while following ALL rules above.
+
+**Quality Checklist Before Responding:**
+1. ✅ Did I check ramp count before suggesting to cut any artifact?
+2. ✅ Are all suggested ADD cards in the collection list?
+3. ✅ Are all ADD cards within color identity {${colors}}?
+4. ✅ Am I maintaining spell count for spellslinger archetype?
+5. ✅ Am I suggesting equal ADDs and CUTs (for Commander)?
 
 Respond in JSON format only:
-{"suggestions": [{"cardName": "Card Name", "reason": "Brief reason", "action": "add|cut"}]}`;
+{"suggestions": [{"cardName": "Card Name", "reason": "Why this helps (mention role, CMC, synergy)", "action": "add|cut"}]}`;
 
   try {
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
@@ -146,7 +226,7 @@ Respond in JSON format only:
         Authorization: `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        model: 'gpt-4o-mini',
+        model: 'gpt-4o',
         messages: [{ role: 'user', content: prompt }],
         temperature: 0.7,
         max_tokens: 1000,

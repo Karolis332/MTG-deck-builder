@@ -48,3 +48,10 @@ __pycache__/
 # electron
 /dist-electron/
 /electron-dist/
+
+# misc generated files
+nul
+electron-error.log
+
+# claude code
+.claude/

@@ -4,6 +4,27 @@ import { DEFAULT_LAND_COUNT, DEFAULT_DECK_SIZE } from './constants';
 import { getCardGlobalScore, getMetaAdjustedScore } from './global-learner';
 import { getEdhrecRecommendations, getEdhrecThemeCards } from './edhrec';
 import type { EdhrecRecommendation } from './edhrec';
+import { getTemplate, getScaledCurve, getColorAdjustment, isImpulseDraw, mergeWithCommanderProfile } from './deck-templates';
+import { analyzeCommander } from './commander-synergy';
+import type { CommanderSynergyProfile } from './commander-synergy';
+
+// ── Commander synergy text patterns for card scoring ────────────────────────
+// Maps synergy categories from commander-synergy.ts to oracle text substrings
+
+const SYNERGY_REQUIREMENTS_MAP = {
+  exile_cast: ['exile the top', 'you may play', 'you may cast', 'from exile'],
+  exile_enter: ['exile', 'return', 'to the battlefield', 'flicker', 'blink'],
+  spell_cast: ['instant', 'sorcery', 'magecraft', 'prowess'],
+  creature_dies: ['whenever', 'dies', 'sacrifice', 'death'],
+  creature_etb: ['enters the battlefield', 'enters'],
+  attack_trigger: ['haste', 'extra combat', 'additional combat', 'menace', 'trample', 'can\'t be blocked'],
+  artifact_synergy: ['artifact', 'treasure', 'affinity'],
+  enchantment_synergy: ['enchantment', 'aura', 'constellation'],
+  lifegain: ['lifelink', 'gain life', 'whenever you gain life'],
+  counters: ['+1/+1 counter', 'proliferate', 'put a counter'],
+  graveyard: ['from your graveyard', 'mill', 'reanimate', 'return from'],
+  token_generation: ['create a', 'create two', 'token', 'populate'],
+} as const;
 
 // ── Synergy keyword groups ──────────────────────────────────────────────────
 // Cards sharing keywords within a group have natural synergy
@@ -277,6 +298,7 @@ interface BuildResult {
   themes: string[];
   strategy: string;
   tribalType?: string;
+  commanderSynergy?: CommanderSynergyProfile;
 }
 
 export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult> {
@@ -437,8 +459,40 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
     }
   }
 
+  // ── Commander Synergy Analysis ─────────────────────────────────────────────
+  // Parse the commander's oracle text to detect triggers/payoffs and infer
+  // concrete deck-building requirements (synergy minimums, score bonuses, etc.)
+
+  let commanderProfile: CommanderSynergyProfile | null = null;
+
+  if (isCommander && commanderName) {
+    const cmdRow = db.prepare(
+      'SELECT oracle_text, type_line, color_identity, layout FROM cards WHERE name = ? COLLATE NOCASE LIMIT 1'
+    ).get(commanderName) as { oracle_text: string | null; type_line: string; color_identity: string | null; layout: string } | undefined;
+
+    if (cmdRow) {
+      // For MDFC/double-faced commanders, concatenate both faces' oracle text
+      let fullOracleText = cmdRow.oracle_text || '';
+      if (cmdRow.layout === 'modal_dfc' || cmdRow.layout === 'transform') {
+        // Check if there's a back face in the card_faces data
+        const facesRow = db.prepare(
+          "SELECT oracle_text FROM cards WHERE name LIKE ? AND name != ? COLLATE NOCASE LIMIT 1"
+        ).get(`${commanderName} //%`, commanderName) as { oracle_text: string | null } | undefined;
+        if (facesRow?.oracle_text) {
+          fullOracleText += '\n' + facesRow.oracle_text;
+        }
+      }
+
+      let ci: string[] = [];
+      try { ci = cmdRow.color_identity ? JSON.parse(cmdRow.color_identity) : []; } catch {}
+
+      commanderProfile = analyzeCommander(fullOracleText, cmdRow.type_line, ci);
+    }
+  }
+
   // ── Step 1: Build card pool ─────────────────────────────────────────────
-  // For commander: start with EDHREC-recommended cards + tribal cards, then generic
+  // For commander: start with EDHREC-recommended cards + tribal cards,
+  // then synergy-targeted cards, then generic
   // For non-commander: use global edhrec_rank as before
 
   const poolQuery = `
@@ -471,6 +525,36 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
     if (!seenNames.has(card.name)) {
       seenNames.add(card.name);
       pool.push(card);
+    }
+  }
+
+  // Commander synergy-targeted cards — fetch cards matching synergy patterns
+  if (commanderProfile && commanderProfile.cardPoolPatterns.length > 0) {
+    const synergyConditions = commanderProfile.cardPoolPatterns
+      .map((p) => `c.oracle_text LIKE '${p.replace(/'/g, "''")}'`)
+      .join(' OR ');
+
+    const synergyPoolQuery = `
+      SELECT DISTINCT c.* FROM cards c
+      WHERE c.type_line NOT LIKE '%Land%'
+      AND (${synergyConditions})
+      ${colorExcludeFilter ? `AND ${colorExcludeFilter}` : ''}
+      ${legalityFilter}
+      ${commanderExclude}
+      ORDER BY c.edhrec_rank ASC NULLS LAST
+      LIMIT 80
+    `;
+
+    try {
+      const synergyCards = db.prepare(synergyPoolQuery).all() as DbCard[];
+      for (const card of synergyCards) {
+        if (!seenNames.has(card.name)) {
+          seenNames.add(card.name);
+          pool.push(card);
+        }
+      }
+    } catch {
+      // Query may fail if patterns are malformed — not critical
     }
   }
 
@@ -516,7 +600,10 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
     themes = detectDeckThemes(pool.slice(0, 40));
   }
 
-  const resolvedStrategy = strategy || (themes.includes('aggro') ? 'aggro' : themes.includes('control') ? 'control' : 'midrange');
+  // Commander synergy archetype overrides generic CMC-based detection
+  const resolvedStrategy = strategy
+    || commanderProfile?.detectedArchetype
+    || (themes.includes('aggro') ? 'aggro' : themes.includes('control') ? 'control' : 'midrange');
 
   // ── ML personalization: load predictions from personalized_suggestions ──
   const mlScoreMap = new Map<string, number>();
@@ -605,6 +692,21 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
       }
     }
 
+    // ── Commander synergy bonus ──
+    // Cards matching commander's trigger categories get bonus score
+    if (commanderProfile) {
+      for (const [category, bonus] of Object.entries(commanderProfile.scoreBonuses)) {
+        const catPatterns = SYNERGY_REQUIREMENTS_MAP[category as keyof typeof SYNERGY_REQUIREMENTS_MAP];
+        if (!catPatterns) continue;
+        for (const p of catPatterns) {
+          if (text.includes(p.toLowerCase())) {
+            score += bonus;
+            break;
+          }
+        }
+      }
+    }
+
     // ── Strategy fit ──
     if (resolvedStrategy === 'aggro') {
       if (card.cmc <= 2) score += 10;
@@ -636,12 +738,8 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
 
   scored.sort((a, b) => b.score - a.score);
 
-  // Step 4: Pick cards respecting mana curve
-  const idealCurve: Record<number, number> = resolvedStrategy === 'aggro'
-    ? { 1: 8, 2: 10, 3: 8, 4: 5, 5: 2, 6: 1 }
-    : resolvedStrategy === 'control'
-      ? { 1: 3, 2: 6, 3: 7, 4: 6, 5: 4, 6: 3, 7: 2 }
-      : { 1: 5, 2: 8, 3: 8, 4: 6, 5: 4, 6: 2, 7: 1 };
+  // Step 4: Pick cards respecting mana curve (from archetype templates)
+  const idealCurve = getScaledCurve(resolvedStrategy, nonLandTarget);
 
   const curveCounts: Record<number, number> = {};
   const picked: Array<{ card: DbCard; quantity: number; board: 'main' | 'sideboard' }> = [];
@@ -688,6 +786,96 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
     picked.push({ card, quantity: qty, board: 'main' });
     pickedNames.add(card.name);
     totalPicked += qty;
+  }
+
+  // ── Step 4b: Fill commander synergy minimums ────────────────────────────
+  // After main card picking, check if each synergy category meets its minimum.
+  // If not, swap in synergy cards for the lowest-scored current picks — but
+  // never displace ramp/draw/removal below their baseline.
+  if (commanderProfile && Object.keys(commanderProfile.synergyMinimums).length > 0) {
+    const template = getTemplate(resolvedStrategy);
+    const merged = mergeWithCommanderProfile(template, commanderProfile);
+
+    for (const [category, minCount] of Object.entries(merged.synergyMinimums)) {
+      const catPatterns = SYNERGY_REQUIREMENTS_MAP[category as keyof typeof SYNERGY_REQUIREMENTS_MAP];
+      if (!catPatterns) continue;
+
+      // Count how many picked cards satisfy this category
+      let currentCount = 0;
+      for (const p of picked) {
+        const cardText = (p.card.oracle_text || '').toLowerCase();
+        const cardType = (p.card.type_line || '').toLowerCase();
+        const matchesCat = catPatterns.some((pat) => cardText.includes(pat.toLowerCase()));
+        // For spell_cast, also count instants/sorceries by type
+        const isSpellType = category === 'spell_cast' && (cardType.includes('instant') || cardType.includes('sorcery'));
+        if (matchesCat || isSpellType) {
+          currentCount += p.quantity;
+        }
+      }
+
+      const deficit = minCount - currentCount;
+      if (deficit <= 0) continue;
+
+      // Find synergy cards from the pool that weren't picked
+      const synergyCandidates = scored.filter(({ card }) => {
+        if (pickedNames.has(card.name)) return false;
+        const cardText = (card.oracle_text || '').toLowerCase();
+        const cardType = (card.type_line || '').toLowerCase();
+        const matchesCat = catPatterns.some((pat) => cardText.includes(pat.toLowerCase()));
+        const isSpellType = category === 'spell_cast' && (cardType.includes('instant') || cardType.includes('sorcery'));
+        return matchesCat || isSpellType;
+      });
+
+      // Find the lowest-scored current picks that aren't protected
+      const protectedSet = new Set(merged.protectedPatterns.map((p) => p.toLowerCase()));
+      const isProtected = (cardName: string) => {
+        return protectedSet.has(cardName.toLowerCase())
+          || tribalNames.has(cardName);
+      };
+
+      // Identify non-essential picks (lowest score, non-protected)
+      const displaceable = [...picked]
+        .filter((p) => {
+          if (p.board !== 'main') return false;
+          if (isProtected(p.card.name)) return false;
+          // Never displace ramp if below baseline
+          const text = (p.card.oracle_text || '').toLowerCase();
+          const type = (p.card.type_line || '').toLowerCase();
+          const isRamp = (type.includes('artifact') && text.includes('add') && text.includes('mana'))
+            || text.includes('search your library for a') && text.includes('land');
+          if (isRamp) return false;
+          return true;
+        })
+        .sort((a, b) => {
+          const aScore = scored.find((s) => s.card.name === a.card.name)?.score || 0;
+          const bScore = scored.find((s) => s.card.name === b.card.name)?.score || 0;
+          return aScore - bScore; // lowest score first
+        });
+
+      let filled = 0;
+      for (const candidate of synergyCandidates) {
+        if (filled >= deficit) break;
+        if (displaceable.length === 0) break;
+
+        const displaced = displaceable.shift()!;
+        // Remove displaced card
+        const idx = picked.indexOf(displaced);
+        if (idx !== -1) {
+          picked.splice(idx, 1);
+          pickedNames.delete(displaced.card.name);
+          totalPicked -= displaced.quantity;
+        }
+
+        // Add synergy card
+        const qty = Math.min(getMaxQty(candidate.card), deficit - filled);
+        if (qty > 0) {
+          picked.push({ card: candidate.card, quantity: qty, board: 'main' });
+          pickedNames.add(candidate.card.name);
+          totalPicked += qty;
+          filled += qty;
+        }
+      }
+    }
   }
 
   // ── Step 5: Add lands ─────────────────────────────────────────────────────
@@ -790,6 +978,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
     themes,
     strategy: resolvedStrategy,
     tribalType: tribalType || undefined,
+    commanderSynergy: commanderProfile || undefined,
   };
 }
 

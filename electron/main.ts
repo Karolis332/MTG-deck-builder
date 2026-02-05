@@ -2,6 +2,7 @@ import { app, BrowserWindow, dialog } from 'electron';
 import path from 'path';
 import fs from 'fs';
 import { spawn, ChildProcess } from 'child_process';
+import net from 'net';
 import { registerIpcHandlers } from './ipc-handlers';
 import { registerSetupHandlers } from './setup-handlers';
 import { runFirstBootActions } from '../src/lib/first-boot';
@@ -46,7 +47,7 @@ let nextServer: ChildProcess | null = null;
 app.commandLine.appendSwitch('no-sandbox');
 
 const isDev = !app.isPackaged;
-const PORT = process.env.PORT || '3000';
+let PORT = process.env.PORT || '3000';
 
 // ── Data directories ────────────────────────────────────────────────────
 
@@ -76,6 +77,38 @@ export function saveConfig(data: Record<string, unknown>): void {
 function isFirstRun(): boolean {
   const config = loadConfig();
   return config.setupComplete !== true;
+}
+
+// ── Port utilities ──────────────────────────────────────────────────────
+
+function isPortAvailable(port: number): Promise<boolean> {
+  return new Promise((resolve) => {
+    const server = net.createServer();
+
+    server.once('error', (err: NodeJS.ErrnoException) => {
+      if (err.code === 'EADDRINUSE') {
+        resolve(false);
+      } else {
+        resolve(false);
+      }
+    });
+
+    server.once('listening', () => {
+      server.close();
+      resolve(true);
+    });
+
+    server.listen(port);
+  });
+}
+
+async function findAvailablePort(startPort: number): Promise<number> {
+  for (let port = startPort; port < startPort + 10; port++) {
+    if (await isPortAvailable(port)) {
+      return port;
+    }
+  }
+  throw new Error(`No available ports found between ${startPort} and ${startPort + 9}`);
 }
 
 // ── Windows ─────────────────────────────────────────────────────────────
@@ -146,32 +179,43 @@ function createMainWindow(): void {
 
 // ── Next.js server ──────────────────────────────────────────────────────
 
-function startNextServer(): Promise<void> {
-  return new Promise((resolve, reject) => {
-    // Run Next.js CLI directly using Electron as a Node.js runtime.
-    // ELECTRON_RUN_AS_NODE=1 makes the Electron binary behave as plain
-    // Node.js, avoiding cmd.exe (which can't read ASAR files) and
-    // fork() (which fails when the exe path contains spaces).
-    const nextCli = path.join(
-      app.getAppPath(),
-      'node_modules',
-      'next',
-      'dist',
-      'bin',
-      'next'
-    );
+async function startNextServer(): Promise<void> {
+  // Kill any existing Next.js server first
+  if (nextServer) {
+    try {
+      nextServer.kill('SIGTERM');
+      // Give it a moment to clean up
+      await new Promise((r) => setTimeout(r, 1000));
+    } catch (err) {
+      logCrash('next-kill-error', err);
+    }
+    nextServer = null;
+  }
 
-    // With asar disabled, app.getAppPath() is a real directory containing
-    // .next/, node_modules/, public/, etc. Use it as both the app dir and cwd.
+  // Find an available port
+  const startPort = parseInt(PORT);
+  const availablePort = await findAvailablePort(startPort);
+  PORT = availablePort.toString();
+
+  logCrash('next-server-port', `Using port ${PORT}`);
+
+  return new Promise((resolve, reject) => {
+    // Run our custom Next.js server script using Electron as Node.js runtime
+    // In production, __dirname is electron-dist/electron/ where next-server.js is located
+    const nextServerScript = path.join(__dirname, 'next-server.js');
+
     const appDir = app.getAppPath();
 
-    const spawnEnv = {
+    logCrash('next-appDir', `App directory: ${appDir}`);
+    logCrash('next-server-script', `Next server script: ${nextServerScript}`);
+
+    const spawnEnv: NodeJS.ProcessEnv = {
       ...process.env,
       ELECTRON_RUN_AS_NODE: '1',
       MTG_DB_DIR: getUserDataDir(),
       PORT,
-      // Force Next.js to use the packaged app directory
-      __NEXT_PRIVATE_STANDALONE_CONFIG: JSON.stringify({ cwd: appDir }),
+      NODE_ENV: 'production',
+      APP_DIR: appDir,
       NODE_PATH: path.join(appDir, 'node_modules'),
     };
 
@@ -196,7 +240,7 @@ function startNextServer(): Promise<void> {
     }
     nextServer = spawn(
       process.execPath,
-      [nextCli, 'start', '-p', PORT],
+      [nextServerScript],
       {
         cwd: appDir,
         env: spawnEnv,
@@ -323,7 +367,17 @@ app.on('window-all-closed', () => {
 
 app.on('will-quit', () => {
   if (nextServer) {
-    nextServer.kill();
+    try {
+      nextServer.kill('SIGTERM');
+      // Force kill after 2 seconds if still running
+      setTimeout(() => {
+        if (nextServer) {
+          nextServer.kill('SIGKILL');
+        }
+      }, 2000);
+    } catch (err) {
+      logCrash('quit-kill-error', err);
+    }
     nextServer = null;
   }
 });

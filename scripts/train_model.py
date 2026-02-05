@@ -76,7 +76,7 @@ def build_feature_matrix(conn: sqlite3.Connection) -> pd.DataFrame:
                         THEN CAST(cp.wins_when_played AS REAL) / cp.games_played
                         ELSE 0.5 END as win_rate
             FROM card_performance cp
-            WHERE cp.games_played >= 2
+            WHERE cp.games_played >= 1
         """, conn)
     except Exception as e:
         print(f"No card_performance data: {e}", file=sys.stderr)
