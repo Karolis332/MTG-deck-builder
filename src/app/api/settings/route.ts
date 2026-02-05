@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getDb } from '@/lib/db';
 
+// Force dynamic — static optimization breaks PUT/DELETE methods
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
   try {
     const db = getDb();

@@ -1,11 +1,14 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { getDb, getCardCount } from '@/lib/db';
 import * as scryfall from '@/lib/scryfall';
 
-export async function POST() {
+export async function POST(request: NextRequest) {
   try {
+    const { searchParams } = new URL(request.url);
+    const force = searchParams.get('force') === 'true';
+
     const existingCount = getCardCount();
-    if (existingCount > 10000) {
+    if (existingCount > 10000 && !force) {
       return NextResponse.json({
         message: `Database already has ${existingCount} cards. Use ?force=true to re-seed.`,
         count: existingCount,
@@ -27,8 +30,8 @@ export async function POST() {
         colors, color_identity, keywords, set_code, set_name, collector_number,
         rarity, image_uri_small, image_uri_normal, image_uri_large, image_uri_art_crop,
         price_usd, price_usd_foil, legalities, power, toughness, loyalty,
-        produced_mana, edhrec_rank, layout
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        produced_mana, edhrec_rank, layout, arena_id
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `);
 
     let count = 0;
@@ -76,6 +79,7 @@ export async function POST() {
         card.produced_mana ? JSON.stringify(card.produced_mana) : null,
         card.edhrec_rank || null,
         card.layout || 'normal',
+        card.arena_id || null,
       ]);
 
       if (batch.length >= batchSize) {

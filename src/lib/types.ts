@@ -46,6 +46,7 @@ export interface ScryfallCard {
   produced_mana?: string[];
   edhrec_rank?: number;
   layout: string;
+  arena_id?: number;
 }
 
 export interface ScryfallList<T> {
