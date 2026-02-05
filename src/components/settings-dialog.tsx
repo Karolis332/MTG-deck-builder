@@ -17,6 +17,7 @@ export function SettingsDialog({ open, onClose }: SettingsDialogProps) {
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState('');
   const [anthropicMessage, setAnthropicMessage] = useState('');
+  const [claudeModel, setClaudeModel] = useState('claude-sonnet-4-5-20250929');
 
   // Data export state
   const [exporting, setExporting] = useState(false);
@@ -48,6 +49,9 @@ export function SettingsDialog({ open, onClose }: SettingsDialogProps) {
         }
         if (data.settings?.arena_log_path) {
           setArenaLogPath(data.settings.arena_log_path);
+        }
+        if (data.settings?.claude_model) {
+          setClaudeModel(data.settings.claude_model);
         }
         setOpenaiKey('');
         setAnthropicKey('');
@@ -470,9 +474,35 @@ export function SettingsDialog({ open, onClose }: SettingsDialogProps) {
             )}
           </div>
 
+          {/* Claude Model Selection */}
+          <div className="border-t border-border pt-3">
+            <label className="mb-1 block text-sm font-medium">Claude Model</label>
+            <p className="mb-2 text-xs text-muted-foreground">
+              Opus 4.6 gives the best suggestions but costs ~5x more per request.
+            </p>
+            <select
+              value={claudeModel}
+              onChange={async (e) => {
+                const newModel = e.target.value;
+                setClaudeModel(newModel);
+                try {
+                  await fetch('/api/settings', {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ key: 'claude_model', value: newModel }),
+                  });
+                } catch {}
+              }}
+              className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm outline-none focus:border-primary"
+            >
+              <option value="claude-sonnet-4-5-20250929">Claude Sonnet 4.5 (fast, recommended)</option>
+              <option value="claude-opus-4-6">Claude Opus 4.6 (best quality, slower)</option>
+            </select>
+          </div>
+
           <div className="border-t border-border pt-3">
             <p className="text-[10px] text-muted-foreground">
-              AI Suggestion Priority: Claude Sonnet 4.5 &gt; Ollama (local) &gt; OpenAI GPT-4o &gt; Synergy Engine.
+              AI Suggestion Priority: Claude &gt; Ollama (local) &gt; OpenAI GPT-4o &gt; Synergy Engine.
               Your API keys are stored locally and never sent to third parties.
             </p>
           </div>

@@ -31,6 +31,14 @@ function getClaudeKey(): string | null {
   return row?.value || null;
 }
 
+function getClaudeModel(): string {
+  const db = getDb();
+  const row = db
+    .prepare("SELECT value FROM app_state WHERE key = 'setting_claude_model'")
+    .get() as { value: string } | undefined;
+  return row?.value || 'claude-sonnet-4-5-20250929';
+}
+
 // Load MTG deck building knowledge base
 function getMTGKnowledge(): string {
   try {
@@ -292,7 +300,7 @@ Respond with ONLY valid JSON (no markdown, no code blocks):
         'anthropic-version': '2023-06-01',
       },
       body: JSON.stringify({
-        model: 'claude-opus-4-6',
+        model: getClaudeModel(),
         max_tokens: 4096,
         temperature: 0.7,
         messages: [

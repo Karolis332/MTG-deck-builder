@@ -101,7 +101,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    console.log(`[AI Chat] Using provider: ${useClaude ? 'Claude Sonnet 4.5' : 'OpenAI GPT-4o'}`);
+    console.log(`[AI Chat] Using provider: ${useClaude ? 'Claude' : 'OpenAI GPT-4o'}`);
 
     // Always fetch FRESH deck state — the deck may have changed since last turn
     const deckData = getDeckWithCards(deck_id);
@@ -462,6 +462,10 @@ Remember to check the card list above to avoid suggesting duplicates!`,
     let content: string;
 
     if (useClaude) {
+      // Read configured model (defaults to Sonnet 4.5)
+      const modelRow = db.prepare("SELECT value FROM app_state WHERE key = 'setting_claude_model'").get() as { value: string } | undefined;
+      const claudeModel = modelRow?.value || 'claude-sonnet-4-5-20250929';
+
       // Claude API call
       const response = await fetch('https://api.anthropic.com/v1/messages', {
         method: 'POST',
@@ -471,7 +475,7 @@ Remember to check the card list above to avoid suggesting duplicates!`,
           'anthropic-version': '2023-06-01',
         },
         body: JSON.stringify({
-          model: 'claude-opus-4-6',
+          model: claudeModel,
           max_tokens: 4096,
           temperature: 0.7,
           messages: messages.filter(m => m.role !== 'system').map(m => ({
