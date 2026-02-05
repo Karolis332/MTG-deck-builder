@@ -662,8 +662,15 @@ Remember to check the card list above to avoid suggesting duplicates!`,
       const cutCount = resolvedActions.filter((a) => a.action === 'cut').reduce((s, a) => s + a.quantity, 0);
       const sizeAfter = currentMainCount - cutCount + addCount;
 
-      // STRICT BALANCE CHECK: Reject if severely unbalanced
-      if (Math.abs(addCount - cutCount) > 2 && (addCount > 0 || cutCount > 0)) {
+      // Check if these changes move the deck CLOSER to or FURTHER from the target
+      const currentDistance = Math.abs(currentMainCount - effectiveTarget);
+      const afterDistance = Math.abs(sizeAfter - effectiveTarget);
+      const movingCloser = afterDistance < currentDistance;
+      const atOrBelowTarget = sizeAfter <= effectiveTarget && sizeAfter >= effectiveTarget - 2;
+
+      // STRICT BALANCE CHECK: Reject if severely unbalanced AND moves deck further from target
+      // Allow pure cuts on oversized decks and pure adds on undersized decks
+      if (Math.abs(addCount - cutCount) > 2 && (addCount > 0 || cutCount > 0) && !movingCloser && !atOrBelowTarget) {
         const imbalance = addCount - cutCount;
         const warning = imbalance > 0
           ? `Too many ADDs (${addCount}) vs CUTs (${cutCount}). Deck would become ${sizeAfter} cards.`
