@@ -177,6 +177,7 @@ export default function AnalyticsPage() {
                   border: '1px solid hsl(var(--border))',
                   borderRadius: 8,
                   fontSize: 12,
+                  color: 'hsl(var(--foreground))',
                 }}
               />
               <Legend wrapperStyle={{ fontSize: 11 }} />
