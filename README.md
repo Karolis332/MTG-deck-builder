@@ -8,14 +8,14 @@ A desktop application for building, analyzing, and improving Magic: The Gatherin
 
 - **Claude AI Deck Builder** — Pick a commander, choose a strategy, and Claude builds a complete 100-card deck with per-card explanations and role assignments (Ramp, Draw, Removal, Synergy, etc.)
 - **Quick Build** — Instantly generate a deck using EDHREC data + archetype templates + commander synergy scoring (no API key needed)
-- **AI Chat** — Conversational deck tuning: ask for cuts, additions, strategy advice. Context-aware of your full deck, collection, and format rules
+- **AI Chat** — Conversational deck tuning: ask for cuts, additions, strategy advice. Context-aware of your full deck, collection, and format rules. Selective apply lets you pick which suggestions to keep
 - **Commander Synergy Engine** — Analyzes commander oracle text across 12 trigger categories (ETB, dies, attack, spellcast, etc.) to score every candidate card
 - **11 Archetype Templates** — Aggro, midrange, control, combo, aristocrats, spellslinger, voltron, tribal, group hug, stax, superfriends — with tuned mana curves and slot ratios
 - **EDHREC Integration** — Community synergy data, average decklists, and strategy articles baked into AI prompts
 - **Arena Integration** — Parse your Player.log to import match results, deck submissions, and collection automatically
 - **Analytics Dashboard** — Win rates by deck/format/opponent, card performance tracking, mana curve analysis
 - **Collection Management** — Import your Arena collection and filter AI suggestions to cards you own
-- **ML Pipeline** — Scikit-learn model that learns from your match data to generate personalized card suggestions
+- **ML Pipeline** — 10-step pipeline (MTGJSON, EDHREC, MTGGoldfish, MTGTop8, Arena, aggregation, training, prediction) with tournament W-L data and 25 features. Supports personal, community, and blended training modes
 - **Data Export/Import** — Export everything as JSON for backup or sharing
 - **Multi-User** — Separate accounts with isolated decks, collections, and match history
 
@@ -152,25 +152,33 @@ npm run dist:linux
 
 ### Python Scripts (Optional)
 
-The ML pipeline and EDHREC scraping use Python 3.13+:
+The ML pipeline and community data scraping use Python 3.13+:
 
 ```bash
 # Install Python dependencies
-pip install pandas numpy scikit-learn joblib requests beautifulsoup4
+pip install -r scripts/requirements.txt
 
-# Run full ML pipeline (aggregate → train → predict)
+# Run full 10-step pipeline (scrape → aggregate → train → predict)
 py scripts/pipeline.py
 
-# Or run steps individually:
-py scripts/aggregate_matches.py    # Build card_performance from match data
-py scripts/train_model.py          # Train Gradient Boosting model
-py scripts/predict_suggestions.py  # Generate personalized suggestions
+# Skip scraping (use cached data), just retrain
+py scripts/pipeline.py --skip-scrape
 
-# Scrape EDHREC articles for AI knowledge base
-py scripts/scrape_edhrec_articles.py
+# Train on community data only, or blended (60% personal / 40% community)
+py scripts/train_model.py --target community
+py scripts/train_model.py --target blended
 
-# Fetch average decklists for your commanders
-py scripts/fetch_avg_decklists.py
+# Run individual scrapers
+py scripts/scrape_mtggoldfish.py    # Tournament decks + W-L records
+py scripts/scrape_mtgtop8.py        # Competitive meta decks
+py scripts/scrape_edhrec_articles.py # Strategy articles for AI context
+py scripts/fetch_avg_decklists.py    # Average decklists per commander
+
+# Generate predictions
+py scripts/predict_suggestions.py
+
+# Schedule daily pipeline run (Windows Task Scheduler)
+py scripts/setup_scheduled_task.py
 
 # Import a friend's exported data
 py scripts/import_user_data.py their-export.json
