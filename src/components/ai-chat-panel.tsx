@@ -25,11 +25,77 @@ interface AIChatPanelProps {
   className?: string;
 }
 
+/** Lightweight markdown→JSX for AI messages (bold, bullets, newlines) */
+function renderMarkdown(text: string) {
+  // Split into lines, process each
+  const lines = text.split('\n');
+  const elements: React.ReactNode[] = [];
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+
+    // Bullet points: "- text" or "* text"
+    if (/^[\-\*]\s/.test(line)) {
+      elements.push(
+        <div key={i} className="flex gap-1 ml-1">
+          <span className="shrink-0">•</span>
+          <span>{renderInline(line.slice(2))}</span>
+        </div>
+      );
+    } else if (line.trim() === '') {
+      // Empty line → spacer
+      elements.push(<div key={i} className="h-1.5" />);
+    } else {
+      // Regular line
+      elements.push(<div key={i}>{renderInline(line)}</div>);
+    }
+  }
+
+  return <>{elements}</>;
+}
+
+/** Render inline markdown: **bold**, `code` */
+function renderInline(text: string): React.ReactNode {
+  // Split on **bold** and `code` markers
+  const parts: React.ReactNode[] = [];
+  let remaining = text;
+  let key = 0;
+
+  while (remaining.length > 0) {
+    // Check for **bold**
+    const boldMatch = remaining.match(/\*\*(.+?)\*\*/);
+    // Check for `code`
+    const codeMatch = remaining.match(/`(.+?)`/);
+
+    // Find earliest match
+    const boldIdx = boldMatch?.index ?? Infinity;
+    const codeIdx = codeMatch?.index ?? Infinity;
+
+    if (boldIdx === Infinity && codeIdx === Infinity) {
+      parts.push(remaining);
+      break;
+    }
+
+    if (boldIdx <= codeIdx && boldMatch) {
+      parts.push(remaining.slice(0, boldIdx));
+      parts.push(<strong key={key++} className="font-semibold">{boldMatch[1]}</strong>);
+      remaining = remaining.slice(boldIdx + boldMatch[0].length);
+    } else if (codeMatch) {
+      parts.push(remaining.slice(0, codeIdx));
+      parts.push(<code key={key++} className="rounded bg-black/20 px-1 py-0.5 text-[10px]">{codeMatch[1]}</code>);
+      remaining = remaining.slice(codeIdx + codeMatch[0].length);
+    }
+  }
+
+  return parts.length === 1 ? parts[0] : <>{parts}</>;
+}
+
 export function AIChatPanel({ deckId, onApplyActions, className }: AIChatPanelProps) {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
+  const [checkedActions, setCheckedActions] = useState<Map<number, Set<number>>>(new Map());
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -47,6 +113,34 @@ export function AIChatPanel({ deckId, onApplyActions, className }: AIChatPanelPr
     }
   }, [open]);
 
+  // Initialize all actions as checked when new message with actions arrives
+  useEffect(() => {
+    const lastIdx = messages.length - 1;
+    if (lastIdx < 0) return;
+    const last = messages[lastIdx];
+    if (last.role === 'assistant' && last.actions && last.actions.length > 0 && !checkedActions.has(lastIdx)) {
+      setCheckedActions(prev => {
+        const next = new Map(prev);
+        next.set(lastIdx, new Set(last.actions!.map((_, i) => i)));
+        return next;
+      });
+    }
+  }, [messages]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const toggleAction = (msgIndex: number, actionIndex: number) => {
+    setCheckedActions(prev => {
+      const next = new Map(prev);
+      const set = new Set(prev.get(msgIndex) || []);
+      if (set.has(actionIndex)) {
+        set.delete(actionIndex);
+      } else {
+        set.add(actionIndex);
+      }
+      next.set(msgIndex, set);
+      return next;
+    });
+  };
+
   const sendMessage = async () => {
     const text = input.trim();
     if (!text || loading) return;
@@ -57,11 +151,17 @@ export function AIChatPanel({ deckId, onApplyActions, className }: AIChatPanelPr
     setLoading(true);
 
     try {
-      // Build history for context (exclude actions from content for OpenAI)
-      const history = messages.map((m) => ({
-        role: m.role,
-        content: m.content,
-      }));
+      // Build history for context — include applied-action metadata
+      const history = messages.map((m) => {
+        let content = m.content;
+        // If this assistant message had actions that were applied, append that info
+        if (m.role === 'assistant' && m.actionsApplied && m.actions) {
+          const cuts = m.actions.filter(a => a.action === 'cut').map(a => a.cardName);
+          const adds = m.actions.filter(a => a.action === 'add').map(a => a.cardName);
+          content += `\n\n[APPLIED BY USER: Cut ${cuts.join(', ')}. Added ${adds.join(', ')}.] `;
+        }
+        return { role: m.role, content };
+      });
 
       const res = await fetch('/api/ai-suggest/chat', {
         method: 'POST',
@@ -104,7 +204,11 @@ export function AIChatPanel({ deckId, onApplyActions, className }: AIChatPanelPr
     const msg = messages[msgIndex];
     if (!msg.actions || msg.actionsApplied) return;
 
-    const success = await onApplyActions(msg.actions);
+    const checked = checkedActions.get(msgIndex);
+    const selectedActions = msg.actions.filter((_, i) => checked?.has(i) ?? true);
+    if (selectedActions.length === 0) return;
+
+    const success = await onApplyActions(selectedActions);
     if (success) {
       setMessages((prev) =>
         prev.map((m, i) => (i === msgIndex ? { ...m, actionsApplied: true } : m))
@@ -205,50 +309,77 @@ export function AIChatPanel({ deckId, onApplyActions, className }: AIChatPanelPr
                   : 'bg-accent text-accent-foreground'
               )}
             >
-              {msg.content}
+              {msg.role === 'assistant' ? renderMarkdown(msg.content) : msg.content}
             </div>
 
             {/* Action cards */}
-            {msg.actions && msg.actions.length > 0 && (
-              <div className="mt-1.5 w-full max-w-[90%] space-y-1">
-                {msg.actions.map((act, j) => (
-                  <div
-                    key={j}
-                    className="flex items-center gap-2 rounded-lg border border-border px-2 py-1.5"
-                  >
-                    <span
-                      className={cn(
-                        'shrink-0 rounded px-1.5 py-0.5 text-[10px] font-bold',
-                        act.action === 'cut'
-                          ? 'bg-red-500/20 text-red-400'
-                          : 'bg-green-500/20 text-green-400'
-                      )}
-                    >
-                      {act.action === 'cut' ? 'CUT' : 'ADD'}
-                    </span>
-                    <span className="flex-1 truncate text-[11px]">
-                      {act.cardName}
-                    </span>
-                    <span className="max-w-[80px] truncate text-[9px] text-muted-foreground">
-                      {act.reason}
-                    </span>
-                  </div>
-                ))}
+            {msg.actions && msg.actions.length > 0 && (() => {
+              const checked = checkedActions.get(i);
+              const checkedCount = checked?.size ?? msg.actions.length;
+              const totalCount = msg.actions.length;
+              return (
+                <div className="mt-1.5 w-full max-w-[90%] space-y-1">
+                  {msg.actions.map((act, j) => {
+                    const isChecked = checked?.has(j) ?? true;
+                    return (
+                      <div
+                        key={j}
+                        onClick={() => !msg.actionsApplied && toggleAction(i, j)}
+                        className={cn(
+                          'flex items-center gap-2 rounded-lg border border-border px-2 py-1.5 transition-opacity',
+                          !msg.actionsApplied && 'cursor-pointer hover:bg-accent/30',
+                          !isChecked && !msg.actionsApplied && 'opacity-40'
+                        )}
+                      >
+                        {!msg.actionsApplied && (
+                          <CheckIcon className={cn(
+                            'h-3.5 w-3.5 shrink-0 rounded border',
+                            isChecked
+                              ? 'border-primary bg-primary text-primary-foreground'
+                              : 'border-border text-transparent'
+                          )} />
+                        )}
+                        <span
+                          className={cn(
+                            'shrink-0 rounded px-1.5 py-0.5 text-[10px] font-bold',
+                            act.action === 'cut'
+                              ? 'bg-red-500/20 text-red-400'
+                              : 'bg-green-500/20 text-green-400'
+                          )}
+                        >
+                          {act.action === 'cut' ? 'CUT' : 'ADD'}
+                        </span>
+                        <span className="flex-1 truncate text-[11px]">
+                          {act.cardName}
+                        </span>
+                        <span className="max-w-[80px] truncate text-[9px] text-muted-foreground">
+                          {act.reason}
+                        </span>
+                      </div>
+                    );
+                  })}
 
-                <button
-                  onClick={() => handleApplyActions(i)}
-                  disabled={msg.actionsApplied}
-                  className={cn(
-                    'mt-1 w-full rounded-lg py-1.5 text-[11px] font-medium transition-colors',
-                    msg.actionsApplied
-                      ? 'bg-green-500/20 text-green-400 cursor-default'
-                      : 'bg-primary text-primary-foreground hover:bg-primary/90'
-                  )}
-                >
-                  {msg.actionsApplied ? 'Applied' : `Apply ${msg.actions.length} changes`}
-                </button>
-              </div>
-            )}
+                  <button
+                    onClick={() => handleApplyActions(i)}
+                    disabled={msg.actionsApplied || checkedCount === 0}
+                    className={cn(
+                      'mt-1 w-full rounded-lg py-1.5 text-[11px] font-medium transition-colors',
+                      msg.actionsApplied
+                        ? 'bg-green-500/20 text-green-400 cursor-default'
+                        : checkedCount === 0
+                          ? 'bg-muted text-muted-foreground cursor-not-allowed'
+                          : 'bg-primary text-primary-foreground hover:bg-primary/90'
+                    )}
+                  >
+                    {msg.actionsApplied
+                      ? 'Applied'
+                      : checkedCount === totalCount
+                        ? `Apply ${totalCount} changes`
+                        : `Apply ${checkedCount} of ${totalCount} changes`}
+                  </button>
+                </div>
+              );
+            })()}
           </div>
         ))}
 
@@ -328,6 +459,14 @@ function TrashIcon({ className }: { className?: string }) {
     <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <polyline points="3,6 5,6 21,6" />
       <path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2" />
+    </svg>
+  );
+}
+
+function CheckIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="20,6 9,17 4,12" />
     </svg>
   );
 }

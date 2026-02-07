@@ -333,9 +333,17 @@ export async function POST(request: NextRequest) {
         ? `OVER by ${currentMainCount - effectiveTarget}`
         : `UNDER by ${effectiveTarget - currentMainCount}`;
 
-    // Build explicit list of all cards in deck (for duplicate prevention)
+    // Build explicit list of all cards in deck, grouped by type (for duplicate prevention)
     const allCardNames = [...mainCards, ...commanderCards].map(c => c.name).sort();
-    const cardNameList = allCardNames.join(', ');
+    const cardListByType: Record<string, string[]> = {};
+    for (const c of [...mainCards, ...commanderCards]) {
+      const mainType = c.type_line?.split('—')[0].trim().split(' ').pop() || 'Other';
+      if (!cardListByType[mainType]) cardListByType[mainType] = [];
+      cardListByType[mainType].push(`  ${c.quantity}x ${c.name}`);
+    }
+    const cardNameListGrouped = Object.entries(cardListByType)
+      .map(([type, cards]) => `${type}:\n${cards.join('\n')}`)
+      .join('\n');
 
     // ── EDHREC Knowledge Retrieval ──────────────────────────────────────
     // Search FTS5 for articles matching commander name, archetype, or user query
@@ -369,6 +377,37 @@ export async function POST(request: NextRequest) {
       // FTS5 table may not exist yet — that's fine
     }
 
+    // ── EDHREC Average Decklist for Commander ────────────────────────────
+    let edhrecAvgDeck = '';
+    if (commanderCards.length > 0) {
+      try {
+        const cmdName = commanderCards[0].name;
+        const avgCards = db.prepare(`
+          SELECT card_name, category, inclusion_rate
+          FROM edhrec_avg_decks
+          WHERE commander_name = ?
+          ORDER BY inclusion_rate DESC
+          LIMIT 40
+        `).all(cmdName) as Array<{ card_name: string; category: string; inclusion_rate: number }>;
+
+        if (avgCards.length > 0) {
+          const byCategory: Record<string, string[]> = {};
+          for (const c of avgCards) {
+            if (!byCategory[c.category]) byCategory[c.category] = [];
+            byCategory[c.category].push(`${c.card_name} (${Math.round(c.inclusion_rate * 100)}%)`);
+          }
+          edhrecKnowledge += `\n═══ EDHREC AVERAGE DECKLIST for ${cmdName} ═══\n`;
+          edhrecKnowledge += `These are the most commonly played cards in ${cmdName} decks on EDHREC:\n`;
+          for (const [cat, cards] of Object.entries(byCategory)) {
+            edhrecKnowledge += `\n${cat}: ${cards.join(', ')}`;
+          }
+          edhrecKnowledge += `\n\nUse these as reference when suggesting cards — high inclusion rate means community-validated.`;
+        }
+      } catch {
+        // Table may not exist — that's fine
+      }
+    }
+
     // System prompt — explicit and strict to prevent common errors
     const systemPrompt = `You are an expert MTG deck tuning assistant.
 
@@ -385,7 +424,7 @@ ${illegalCards.length > 0 ? `⚠️ ILLEGAL CARDS TO REPLACE: ${illegalCards.joi
 ${singletonViolations.length > 0 ? `⚠️ SINGLETON VIOLATIONS TO FIX: ${singletonViolations.join(', ')}` : ''}
 
 ALL CARDS CURRENTLY IN DECK (${allCardNames.length} cards):
-${cardNameList}
+${cardNameListGrouped}
 
 ${hasCollection ? `
 USER'S COLLECTION — ${allCollectionCards.length} total cards owned, ${filteredCollectionNames.length} match deck colors {${deckColors.join(', ')}}:
@@ -448,7 +487,8 @@ Use "swap" for replacements. Only use "add"/"cut" if deck size must change.`;
 The deck may have changed since your last response. Here is the CURRENT state:
 - Main deck: ${currentMainCount}/${effectiveTarget} cards (${sizeStatus})
 - Lands: ${landCount}/${targetLands}
-- ALL cards now in deck: ${allCardNames.join(', ')}
+- ALL cards now in deck:
+${cardNameListGrouped}
 ${hasCollection ? `- Collection cards available (${filteredCollectionNames.length} in deck colors): ${filteredCollectionNames.join(', ')}` : ''}
 
 ${isCommanderLike ? `CRITICAL: Deck MUST stay at ${effectiveTarget} cards. Every ADD needs a CUT.` : ''}
@@ -543,10 +583,12 @@ Remember to check the card list above to avoid suggesting duplicates!`,
       }
       parsed = JSON.parse(jsonText);
     } catch {
-      return NextResponse.json(
-        { error: 'Failed to parse AI response', rawContent: content },
-        { status: 502 }
-      );
+      // AI responded with non-JSON text — show it as a message instead of erroring
+      console.warn('[AI Chat] Non-JSON response, returning as plain message');
+      return NextResponse.json({
+        message: content,
+        actions: [],
+      });
     }
 
     // ── Server-side validation & resolution ────────────────────────────
@@ -570,13 +612,36 @@ Remember to check the card list above to avoid suggesting duplicates!`,
 
     for (const act of parsed.actions || []) {
       if (act.action === 'swap') {
-        // Swap = cut + add — resolve both
+        // Swap = cut + add — validate add FIRST, only push both if add passes
         const cutCard = deck.cards.find(
           (c) => c.name.toLowerCase() === act.cardName.toLowerCase()
         );
         const addCard = act.replaceWith ? resolveCard(act.replaceWith) : null;
 
-        if (cutCard) {
+        // Validate the add side first — if it fails, skip the entire swap
+        let addValid = false;
+        let addRejectionReason = '';
+
+        if (addCard) {
+          if (!fitsColorIdentity(addCard, colorSet)) {
+            addRejectionReason = 'wrong colors';
+            rejectionReasons.wrongColors.push(addCard.name);
+          } else if (!isLegalInFormat(addCard, format)) {
+            addRejectionReason = `not legal in ${format}`;
+            rejectionReasons.notLegal.push(addCard.name);
+          } else if (existingCardNames.has(addCard.name.toLowerCase())) {
+            addRejectionReason = 'already in deck';
+            rejectionReasons.alreadyInDeck.push(addCard.name);
+          } else {
+            addValid = true;
+          }
+        } else if (act.replaceWith) {
+          addRejectionReason = 'not found in database';
+          rejectionReasons.notFound.push(act.replaceWith);
+        }
+
+        if (addValid && addCard && cutCard) {
+          // Both sides valid — push cut + add together
           resolvedActions.push({
             action: 'cut',
             cardId: cutCard.id || (cutCard as unknown as { card_id: string }).card_id,
@@ -585,33 +650,18 @@ Remember to check the card list above to avoid suggesting duplicates!`,
             reason: act.reason,
             imageUri: cutCard.image_uri_small || undefined,
           });
-        }
-
-        if (addCard) {
-          // Validate: color identity, format legality, not already in deck
-          if (!fitsColorIdentity(addCard, colorSet)) {
-            rejectedCards.push(`${addCard.name} (wrong colors)`);
-            rejectionReasons.wrongColors.push(addCard.name);
-          } else if (!isLegalInFormat(addCard, format)) {
-            rejectedCards.push(`${addCard.name} (not legal in ${format})`);
-            rejectionReasons.notLegal.push(addCard.name);
-          } else if (existingCardNames.has(addCard.name.toLowerCase())) {
-            rejectedCards.push(`${addCard.name} (already in deck)`);
-            rejectionReasons.alreadyInDeck.push(addCard.name);
-          } else {
-            resolvedActions.push({
-              action: 'add',
-              cardId: addCard.id,
-              cardName: addCard.name,
-              quantity: act.quantity || 1,
-              reason: act.reason,
-              imageUri: addCard.image_uri_small || undefined,
-            });
-          }
-        } else if (act.replaceWith) {
-          // Card not found in database
-          rejectedCards.push(`${act.replaceWith} (not found in database)`);
-          rejectionReasons.notFound.push(act.replaceWith);
+          resolvedActions.push({
+            action: 'add',
+            cardId: addCard.id,
+            cardName: addCard.name,
+            quantity: act.quantity || 1,
+            reason: act.reason,
+            imageUri: addCard.image_uri_small || undefined,
+          });
+        } else {
+          // Add failed — cancel entire swap, keep the cut card in deck
+          const failedName = act.replaceWith || 'unknown';
+          rejectedCards.push(`${failedName} (${addRejectionReason}) — swap cancelled, kept ${act.cardName}`);
         }
       } else if (act.action === 'cut') {
         const cutCard = deck.cards.find(

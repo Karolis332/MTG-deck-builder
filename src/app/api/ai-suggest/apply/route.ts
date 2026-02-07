@@ -30,26 +30,62 @@ export async function POST(request: NextRequest) {
     const format = deckRow?.format || '';
     const userId = deckRow?.user_id;
 
-    // ── Validate all 'add' changes are in user's collection ───────────
+    // ── Filter out 'add' changes not in user's collection (graceful) ──
+    // Instead of blocking entire batch, skip individual non-collection adds
+    let filteredChanges = [...changes];
+    const skippedCards: string[] = [];
+
     if (userId) {
-      const addChanges = changes.filter(c => c.action === 'add');
-      const invalidCards: string[] = [];
+      const collectionCount = (db.prepare(
+        'SELECT COUNT(*) as cnt FROM collection WHERE user_id = ?'
+      ).get(userId) as { cnt: number }).cnt;
 
-      for (const change of addChanges) {
-        const inCollection = db.prepare(
-          'SELECT 1 FROM collection WHERE user_id = ? AND card_id = ? AND quantity > 0'
-        ).get(userId, change.cardId);
+      if (collectionCount > 0) {
+        const invalidCardNames = new Set<string>();
 
-        if (!inCollection) {
-          invalidCards.push(change.cardName);
+        for (const change of filteredChanges) {
+          if (change.action !== 'add') continue;
+          const inCollection = db.prepare(
+            'SELECT 1 FROM collection WHERE user_id = ? AND card_id = ? AND quantity > 0'
+          ).get(userId, change.cardId);
+
+          if (!inCollection) {
+            invalidCardNames.add(change.cardName);
+          }
         }
-      }
 
-      if (invalidCards.length > 0) {
-        return NextResponse.json(
-          { error: `Cannot add cards not in your collection: ${invalidCards.join(', ')}` },
-          { status: 400 }
-        );
+        if (invalidCardNames.size > 0) {
+          // Remove invalid adds
+          filteredChanges = filteredChanges.filter(c => {
+            if (c.action === 'add' && invalidCardNames.has(c.cardName)) {
+              skippedCards.push(c.cardName);
+              return false;
+            }
+            return true;
+          });
+
+          // For fixed-size formats: also trim orphaned cuts to maintain deck size
+          const isFixedSize = COMMANDER_FORMATS.includes(format as typeof COMMANDER_FORMATS[number]);
+          if (isFixedSize) {
+            const addQty = filteredChanges.filter(c => c.action === 'add').reduce((s, c) => s + c.quantity, 0);
+            let cutQty = filteredChanges.filter(c => c.action === 'cut').reduce((s, c) => s + c.quantity, 0);
+            // Trim excess cuts from the end so deck doesn't shrink
+            while (cutQty > addQty) {
+              const lastCutIdx = filteredChanges.findLastIndex(c => c.action === 'cut');
+              if (lastCutIdx === -1) break;
+              filteredChanges.splice(lastCutIdx, 1);
+              cutQty--;
+            }
+          }
+
+          // If ALL changes were filtered out, return error
+          if (filteredChanges.length === 0) {
+            return NextResponse.json(
+              { error: `Cannot add cards not in your collection: ${skippedCards.join(', ')}` },
+              { status: 400 }
+            );
+          }
+        }
       }
     }
 
@@ -57,8 +93,8 @@ export async function POST(request: NextRequest) {
     const isFixedSize = COMMANDER_FORMATS.includes(format as typeof COMMANDER_FORMATS[number]);
 
     if (isFixedSize) {
-      const cuts = changes.filter((c) => c.action === 'cut');
-      const adds = changes.filter((c) => c.action === 'add');
+      const cuts = filteredChanges.filter((c) => c.action === 'cut');
+      const adds = filteredChanges.filter((c) => c.action === 'add');
       const cutQty = cuts.reduce((s, c) => s + c.quantity, 0);
       const addQty = adds.reduce((s, c) => s + c.quantity, 0);
 
@@ -104,7 +140,7 @@ export async function POST(request: NextRequest) {
     const nextVersion = (latest?.version_number || 0) + 1;
 
     // Build changes description
-    const changesSummary = changes.map((c) => ({
+    const changesSummary = filteredChanges.map((c) => ({
       action: c.action === 'cut' ? 'removed' : 'added',
       card: c.cardName,
       quantity: c.quantity,
@@ -124,7 +160,7 @@ export async function POST(request: NextRequest) {
       );
 
       // Apply each change
-      for (const change of changes) {
+      for (const change of filteredChanges) {
         if (change.action === 'cut') {
           // Reduce quantity or remove — try by card_id first, then by card name
           let existing = db.prepare(
@@ -175,7 +211,10 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({
       ok: true,
       version: nextVersion,
-      appliedChanges: changes.length,
+      appliedChanges: filteredChanges.length,
+      ...(skippedCards.length > 0 && {
+        warnings: `Skipped (not in collection): ${skippedCards.join(', ')}`,
+      }),
     });
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Failed to apply changes';

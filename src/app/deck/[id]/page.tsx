@@ -303,6 +303,9 @@ export default function DeckEditorPage() {
         const deckRes = await fetch(`/api/decks/${deckId}`);
         const deckData = await deckRes.json();
         if (deckData.deck) setDeck(deckData.deck);
+        if (data.warnings) {
+          alert(data.warnings);
+        }
         return true;
       } else if (data.error) {
         alert(data.error);
