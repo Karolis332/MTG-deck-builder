@@ -500,14 +500,18 @@ export function storeArenaParsedMatch(match: {
   deckCards: string | null;
   cardsPlayed: string | null;
   opponentCardsSeen: string | null;
-}): boolean {
+  cardsPlayedByTurn?: string | null;
+  commanderCastTurns?: string | null;
+  landsPlayedByTurn?: string | null;
+}): { success: boolean; id?: number } {
   const db = getDb();
   try {
-    db.prepare(
+    const result = db.prepare(
       `INSERT OR IGNORE INTO arena_parsed_matches
        (match_id, player_name, opponent_name, result, format, turns,
-        deck_cards, cards_played, opponent_cards_seen)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`
+        deck_cards, cards_played, opponent_cards_seen,
+        cards_played_by_turn, commander_cast_turns, lands_played_by_turn)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
     ).run(
       match.matchId,
       match.playerName,
@@ -517,11 +521,14 @@ export function storeArenaParsedMatch(match: {
       match.turns,
       match.deckCards,
       match.cardsPlayed,
-      match.opponentCardsSeen
+      match.opponentCardsSeen,
+      match.cardsPlayedByTurn || null,
+      match.commanderCastTurns || null,
+      match.landsPlayedByTurn || null
     );
-    return true;
+    return { success: true, id: Number(result.lastInsertRowid) || undefined };
   } catch {
-    return false;
+    return { success: false };
   }
 }
 

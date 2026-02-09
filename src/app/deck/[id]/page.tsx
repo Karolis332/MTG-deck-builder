@@ -15,6 +15,7 @@ import { CardDetailModal } from '@/components/card-detail-modal';
 import { MatchLogPanel } from '@/components/match-log-panel';
 import { AIChatPanel } from '@/components/ai-chat-panel';
 import { ImportDialog } from '@/components/import-dialog';
+import { VersionHistoryPanel } from '@/components/version-history-panel';
 import { FORMAT_LABELS, FORMATS, COMMANDER_FORMATS, DEFAULT_DECK_SIZE } from '@/lib/constants';
 
 interface DeckData {
@@ -69,6 +70,7 @@ export default function DeckEditorPage() {
   const [showExport, setShowExport] = useState(false);
   const [showPlaytest, setShowPlaytest] = useState(false);
   const [showImport, setShowImport] = useState(false);
+  const [showVersionHistory, setShowVersionHistory] = useState(false);
   const [selectedCard, setSelectedCard] = useState<DbCard | null>(null);
   const [editingName, setEditingName] = useState(false);
   const [deckName, setDeckName] = useState('');
@@ -90,6 +92,10 @@ export default function DeckEditorPage() {
   const [applyingChanges, setApplyingChanges] = useState(false);
   const [collectionOnly, setCollectionOnly] = useState(true);
 
+  // ML state
+  const [mlReady, setMlReady] = useState(false);
+  const [mlGames, setMlGames] = useState(0);
+
   // Load deck
   useEffect(() => {
     if (!deckId) return;
@@ -104,6 +110,18 @@ export default function DeckEditorPage() {
       })
       .catch(() => {})
       .finally(() => setLoading(false));
+  }, [deckId]);
+
+  // Check ML readiness
+  useEffect(() => {
+    if (!deckId) return;
+    fetch(`/api/ai-suggest/ml-check?deck_id=${deckId}`)
+      .then(r => r.json())
+      .then(data => {
+        setMlReady(data.hasEnoughData || false);
+        setMlGames(data.gamesPlayed || 0);
+      })
+      .catch(() => {});
   }, [deckId]);
 
   // Fetch build explanation if coming from Claude build
@@ -518,6 +536,16 @@ export default function DeckEditorPage() {
             </div>
 
             <div className="flex items-center gap-2">
+              {/* Version history button */}
+              <button
+                onClick={() => setShowVersionHistory(true)}
+                className="flex items-center gap-1.5 rounded-lg bg-accent px-3 py-1.5 text-xs font-medium text-accent-foreground transition-colors hover:bg-accent/80"
+                title="Version history"
+              >
+                <HistoryIcon className="h-3.5 w-3.5" />
+                History
+              </button>
+
               {/* Collection-only toggle */}
               <label className="flex cursor-pointer items-center gap-1.5" title="When on, AI only suggests cards you own">
                 <span className="text-[10px] text-muted-foreground">
@@ -545,10 +573,18 @@ export default function DeckEditorPage() {
               <button
                 onClick={getSuggestions}
                 disabled={suggestionsLoading}
-                className="flex items-center gap-1.5 rounded-lg bg-accent px-3 py-1.5 text-xs font-medium text-accent-foreground transition-colors hover:bg-accent/80"
+                className="relative flex items-center gap-1.5 rounded-lg bg-accent px-3 py-1.5 text-xs font-medium text-accent-foreground transition-colors hover:bg-accent/80"
               >
                 <SparklesIcon className="h-3.5 w-3.5" />
                 {suggestionsLoading ? 'Thinking...' : 'AI Suggest'}
+                {mlReady && (
+                  <span
+                    className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[8px] font-bold text-primary-foreground"
+                    title={`ML model ready (${mlGames} games analyzed)`}
+                  >
+                    ML
+                  </span>
+                )}
               </button>
               <button
                 onClick={() => setShowPlaytest(true)}
@@ -974,6 +1010,18 @@ export default function DeckEditorPage() {
         deckId={deckId}
         onApplyActions={handleChatApply}
       />
+
+      <VersionHistoryPanel
+        deckId={deckId}
+        open={showVersionHistory}
+        onClose={() => setShowVersionHistory(false)}
+        onRestore={() => {
+          // Reload deck after restoring a version
+          fetch(`/api/decks/${deckId}`)
+            .then(r => r.json())
+            .then(data => { if (data.deck) setDeck(data.deck); });
+        }}
+      />
     </>
   );
 }
@@ -1020,6 +1068,16 @@ function PlayIcon({ className }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <polygon points="5,3 19,12 5,21 5,3" />
+    </svg>
+  );
+}
+
+function HistoryIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+      <path d="M3 3v5h5" />
+      <path d="M12 7v5l4 2" />
     </svg>
   );
 }

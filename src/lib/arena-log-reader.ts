@@ -26,6 +26,12 @@ export interface ArenaMatch {
   deckCards: Array<{ id: string; qty: number }> | null;
   cardsPlayed: string[];
   opponentCardsSeen: string[];
+  /** Per-turn card play tracking (turn number → grpIds played that turn) */
+  cardsPlayedByTurn: Record<number, string[]>;
+  /** Turns on which the commander was cast */
+  commanderCastTurns: number[];
+  /** Per-turn land plays (turn number → grpIds of lands played) */
+  landsPlayedByTurn: Record<number, string[]>;
 }
 
 export type JsonBlock = [method: string, data: Record<string, unknown>];
@@ -175,6 +181,45 @@ interface MatchContext {
   cardsPlayed: Set<string>;
   opponentCards: Set<string>;
   result: 'win' | 'loss' | 'draw' | null;
+  /** Per-turn card plays: turn → set of grpIds */
+  cardsPlayedByTurn: Map<number, Set<string>>;
+  /** Commander grpIds (from connectResp) */
+  commanderGrpIds: Set<string>;
+  /** Turns on which a commander was cast */
+  commanderCastTurns: number[];
+  /** Per-turn land plays: turn → set of grpIds */
+  landsPlayedByTurn: Map<number, Set<string>>;
+  /** Current turn number from last turnInfo */
+  currentTurn: number;
+  /** Track which zones objects are in to detect plays */
+  prevZones: Map<number, string>;
+}
+
+/** Convert a Map<number, Set<string>> to a plain Record<number, string[]> */
+function mapToRecord(map: Map<number, Set<string>>): Record<number, string[]> {
+  const result: Record<number, string[]> = {};
+  map.forEach((set, turn) => {
+    result[turn] = Array.from(set);
+  });
+  return result;
+}
+
+/** Convert MatchContext to ArenaMatch output format */
+function finalizeMatch(ctx: MatchContext): ArenaMatch {
+  return {
+    matchId: ctx.matchId,
+    playerName: ctx.playerName,
+    opponentName: ctx.opponentName,
+    result: ctx.result!,
+    format: ctx.format,
+    turns: ctx.turns,
+    deckCards: ctx.deck,
+    cardsPlayed: Array.from(ctx.cardsPlayed),
+    opponentCardsSeen: Array.from(ctx.opponentCards),
+    cardsPlayedByTurn: mapToRecord(ctx.cardsPlayedByTurn),
+    commanderCastTurns: [...ctx.commanderCastTurns],
+    landsPlayedByTurn: mapToRecord(ctx.landsPlayedByTurn),
+  };
 }
 
 /**
@@ -261,6 +306,12 @@ export function extractMatches(blocks: JsonBlock[]): ArenaMatch[] {
             cardsPlayed: new Set(),
             opponentCards: new Set(),
             result: null,
+            cardsPlayedByTurn: new Map(),
+            commanderGrpIds: new Set(),
+            commanderCastTurns: [],
+            landsPlayedByTurn: new Map(),
+            currentTurn: 0,
+            prevZones: new Map(),
           };
         }
 
@@ -288,17 +339,7 @@ export function extractMatches(blocks: JsonBlock[]): ArenaMatch[] {
           // Finalize match
           if (currentMatch.result && !seenMatchIds.has(currentMatch.matchId)) {
             seenMatchIds.add(currentMatch.matchId);
-            matches.push({
-              matchId: currentMatch.matchId,
-              playerName: currentMatch.playerName,
-              opponentName: currentMatch.opponentName,
-              result: currentMatch.result,
-              format: currentMatch.format,
-              turns: currentMatch.turns,
-              deckCards: currentMatch.deck,
-              cardsPlayed: Array.from(currentMatch.cardsPlayed),
-              opponentCardsSeen: Array.from(currentMatch.opponentCards),
-            });
+            matches.push(finalizeMatch(currentMatch));
           }
           currentMatch = null;
           continue;
@@ -330,6 +371,10 @@ export function extractMatches(blocks: JsonBlock[]): ArenaMatch[] {
               id: String(id),
               qty,
             }));
+            // Track commander grpIds for cast detection
+            for (const cid of commanderCards) {
+              currentMatch.commanderGrpIds.add(String(cid));
+            }
           }
         }
 
@@ -340,16 +385,52 @@ export function extractMatches(blocks: JsonBlock[]): ArenaMatch[] {
           const turnInfo = gsm.turnInfo as Record<string, unknown> | undefined;
           const t = (turnInfo?.turnNumber as number) || 0;
           if (t > currentMatch.turns) currentMatch.turns = t;
+          if (t > 0) currentMatch.currentTurn = t;
 
-          // Game objects — track cards by owner
+          // Game objects — track cards by owner + zone transitions
           const gameObjects = (gsm.gameObjects ?? []) as Array<Record<string, unknown>>;
           for (const go of gameObjects) {
             const grpId = go.grpId as number | undefined;
             if (!grpId) continue;
+            const grpStr = String(grpId);
+            const instanceId = go.instanceId as number | undefined;
+            const zoneId = go.zoneId as number | undefined;
+            const zoneType = (go.type ?? '') as string;
+
             if (go.ownerSeatId === currentMatch.playerSeatId) {
-              currentMatch.cardsPlayed.add(String(grpId));
+              currentMatch.cardsPlayed.add(grpStr);
+
+              // Track per-turn plays via zone transitions
+              const turn = currentMatch.currentTurn;
+              if (turn > 0 && instanceId && zoneId) {
+                const prevZone = currentMatch.prevZones.get(instanceId);
+                const currZone = String(zoneId);
+
+                // Detect card moving to battlefield (zone change)
+                if (prevZone && prevZone !== currZone) {
+                  if (!currentMatch.cardsPlayedByTurn.has(turn)) {
+                    currentMatch.cardsPlayedByTurn.set(turn, new Set());
+                  }
+                  currentMatch.cardsPlayedByTurn.get(turn)!.add(grpStr);
+
+                  // Detect commander casts
+                  if (currentMatch.commanderGrpIds.has(grpStr)) {
+                    currentMatch.commanderCastTurns.push(turn);
+                  }
+                }
+
+                currentMatch.prevZones.set(instanceId, currZone);
+              }
+
+              // Track lands by checking type
+              if (zoneType.includes('Land') || (typeof go.cardTypes === 'string' && (go.cardTypes as string).includes('Land'))) {
+                if (!currentMatch.landsPlayedByTurn.has(currentMatch.currentTurn)) {
+                  currentMatch.landsPlayedByTurn.set(currentMatch.currentTurn, new Set());
+                }
+                currentMatch.landsPlayedByTurn.get(currentMatch.currentTurn)!.add(grpStr);
+              }
             } else {
-              currentMatch.opponentCards.add(String(grpId));
+              currentMatch.opponentCards.add(grpStr);
             }
           }
 
@@ -449,17 +530,7 @@ export function extractMatches(blocks: JsonBlock[]): ArenaMatch[] {
   // Handle last match if it wasn't finalized by a MatchCompleted event
   if (currentMatch && currentMatch.result && !seenMatchIds.has(currentMatch.matchId)) {
     seenMatchIds.add(currentMatch.matchId);
-    matches.push({
-      matchId: currentMatch.matchId,
-      playerName: currentMatch.playerName,
-      opponentName: currentMatch.opponentName,
-      result: currentMatch.result,
-      format: currentMatch.format,
-      turns: currentMatch.turns,
-      deckCards: currentMatch.deck,
-      cardsPlayed: Array.from(currentMatch.cardsPlayed),
-      opponentCardsSeen: Array.from(currentMatch.opponentCards),
-    });
+    matches.push(finalizeMatch(currentMatch));
   }
 
   return matches;

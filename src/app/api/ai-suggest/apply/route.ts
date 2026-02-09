@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getDb } from '@/lib/db';
 import { DEFAULT_DECK_SIZE, COMMANDER_FORMATS } from '@/lib/constants';
+import { createVersionSnapshot } from '@/lib/deck-versioning';
 
 interface ChangeRequest {
   action: 'cut' | 'add';
@@ -118,47 +119,11 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // Snapshot current state as a version before applying changes
-    const currentCards = db.prepare(`
-      SELECT dc.card_id, c.name, dc.quantity, dc.board
-      FROM deck_cards dc JOIN cards c ON dc.card_id = c.id
-      WHERE dc.deck_id = ?
-      ORDER BY dc.board, c.name
-    `).all(deck_id) as Array<{ card_id: string; name: string; quantity: number; board: string }>;
-
-    const snapshot = currentCards.map((c) => ({
-      cardId: c.card_id,
-      name: c.name,
-      quantity: c.quantity,
-      board: c.board,
-    }));
-
-    // Get next version number
-    const latest = db.prepare(
-      'SELECT version_number FROM deck_versions WHERE deck_id = ? ORDER BY version_number DESC LIMIT 1'
-    ).get(deck_id) as { version_number: number } | undefined;
-    const nextVersion = (latest?.version_number || 0) + 1;
-
-    // Build changes description
-    const changesSummary = filteredChanges.map((c) => ({
-      action: c.action === 'cut' ? 'removed' : 'added',
-      card: c.cardName,
-      quantity: c.quantity,
-    }));
+    // Snapshot current state before applying AI changes
+    const versionInfo = createVersionSnapshot(deck_id, 'ai_suggest', 'ai_tune');
+    const nextVersion = versionInfo?.versionNumber || 0;
 
     const tx = db.transaction(() => {
-      // Save version snapshot
-      db.prepare(`
-        INSERT INTO deck_versions (deck_id, version_number, name, cards_snapshot, changes_from_previous)
-        VALUES (?, ?, ?, ?, ?)
-      `).run(
-        deck_id,
-        nextVersion,
-        `v${nextVersion} (AI tuned)`,
-        JSON.stringify(snapshot),
-        JSON.stringify(changesSummary)
-      );
-
       // Apply each change
       for (const change of filteredChanges) {
         if (change.action === 'cut') {

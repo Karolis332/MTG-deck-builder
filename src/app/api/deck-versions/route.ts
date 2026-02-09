@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getDb } from '@/lib/db';
+import { createVersionSnapshot } from '@/lib/deck-versioning';
 
 interface VersionRow {
   id: number;
@@ -8,6 +9,8 @@ interface VersionRow {
   name: string | null;
   cards_snapshot: string;
   changes_from_previous: string | null;
+  source: string | null;
+  change_type: string | null;
   created_at: string;
 }
 
@@ -44,6 +47,8 @@ export async function GET(request: NextRequest) {
         id: v.id,
         versionNumber: v.version_number,
         name: v.name,
+        source: v.source || 'manual',
+        changeType: v.change_type,
         createdAt: v.created_at,
         changes,
         stats: {
@@ -72,88 +77,18 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'deck_id is required' }, { status: 400 });
     }
 
-    const db = getDb();
+    const versionInfo = createVersionSnapshot(Number(deck_id), 'snapshot', undefined, name);
 
-    // Get current deck cards for snapshot
-    const currentCards = db.prepare(`
-      SELECT dc.card_id, c.name, dc.quantity, dc.board
-      FROM deck_cards dc JOIN cards c ON dc.card_id = c.id
-      WHERE dc.deck_id = ?
-      ORDER BY dc.board, c.name
-    `).all(Number(deck_id)) as Array<{ card_id: string; name: string; quantity: number; board: string }>;
-
-    const snapshot = currentCards.map((c) => ({
-      cardId: c.card_id,
-      name: c.name,
-      quantity: c.quantity,
-      board: c.board,
-    }));
-
-    // Get the latest version to compute diff
-    const latest = db.prepare(
-      'SELECT * FROM deck_versions WHERE deck_id = ? ORDER BY version_number DESC LIMIT 1'
-    ).get(Number(deck_id)) as VersionRow | undefined;
-
-    const nextVersion = latest ? latest.version_number + 1 : 1;
-
-    // Compute changes from previous version
-    let changes: Array<{ action: string; card: string; quantity: number }> = [];
-    if (latest) {
-      let prevCards: Array<{ name: string; quantity: number; board: string }> = [];
-      try { prevCards = JSON.parse(latest.cards_snapshot); } catch {}
-
-      const prevMap = new Map<string, { quantity: number; board: string }>();
-      for (const c of prevCards) prevMap.set(`${c.name}|${c.board}`, { quantity: c.quantity, board: c.board });
-
-      const currMap = new Map<string, { quantity: number; board: string }>();
-      for (const c of snapshot) currMap.set(`${c.name}|${c.board}`, { quantity: c.quantity, board: c.board });
-
-      // Find additions and quantity increases
-      currMap.forEach((curr, key) => {
-        const prev = prevMap.get(key);
-        const cardName = key.split('|')[0];
-        if (!prev) {
-          changes.push({ action: 'added', card: cardName, quantity: curr.quantity });
-        } else if (curr.quantity > prev.quantity) {
-          changes.push({ action: 'added', card: cardName, quantity: curr.quantity - prev.quantity });
-        } else if (curr.quantity < prev.quantity) {
-          changes.push({ action: 'removed', card: cardName, quantity: prev.quantity - curr.quantity });
-        }
-      });
-
-      // Find removals
-      prevMap.forEach((prev, key) => {
-        if (!currMap.has(key)) {
-          const cardName = key.split('|')[0];
-          changes.push({ action: 'removed', card: cardName, quantity: prev.quantity });
-        }
-      });
+    if (!versionInfo) {
+      return NextResponse.json({ error: 'Version creation debounced (too recent)' }, { status: 429 });
     }
 
-    const result = db.prepare(`
-      INSERT INTO deck_versions (deck_id, version_number, name, cards_snapshot, changes_from_previous)
-      VALUES (?, ?, ?, ?, ?)
-    `).run(
-      Number(deck_id),
-      nextVersion,
-      name || `v${nextVersion}`,
-      JSON.stringify(snapshot),
-      JSON.stringify(changes)
-    );
-
-    // Assign this version to any future match logs (unversioned ones for this deck)
-    const versionId = Number(result.lastInsertRowid);
-    db.prepare(`
-      UPDATE match_logs SET deck_version_id = ?
-      WHERE deck_id = ? AND deck_version_id IS NULL
-    `).run(versionId, Number(deck_id));
-
     return NextResponse.json({
-      id: versionId,
-      versionNumber: nextVersion,
-      name: name || `v${nextVersion}`,
-      changes,
-      cardCount: snapshot.filter((c) => c.board === 'main').reduce((s, c) => s + c.quantity, 0),
+      id: versionInfo.id,
+      versionNumber: versionInfo.versionNumber,
+      name: versionInfo.name,
+      changes: versionInfo.changes,
+      cardCount: versionInfo.cardCount,
     });
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Failed to create version';

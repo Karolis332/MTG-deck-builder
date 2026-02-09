@@ -40,6 +40,11 @@ FEATURE_COLS = [
     "is_enchantment", "is_land", "color_count", "has_W", "has_U",
     "has_B", "has_R", "has_G", "edhrec_rank_norm", "avg_synergy",
     "avg_inclusion", "games_played", "rating", "text_length",
+    # Community meta features (from scraped tournament/metagame data)
+    "meta_inclusion_rate", "placement_weighted_score",
+    "archetype_core_rate", "avg_copies_norm", "meta_popularity",
+    # Archetype win rate (from aggregated tournament W-L data)
+    "archetype_win_rate",
 ]
 
 
@@ -182,6 +187,36 @@ def build_candidate_features(conn: sqlite3.Connection, commander_name: str | Non
 
     cards_df["text_length"] = cards_df["oracle_text"].fillna("").str.len() / 500.0
 
+    # Community meta stats
+    meta_df = pd.DataFrame()
+    try:
+        meta_df = pd.read_sql_query("""
+            SELECT card_name, meta_inclusion_rate, placement_weighted_score,
+                   archetype_core_rate, avg_copies, num_decks_in, archetype_win_rate
+            FROM meta_card_stats
+            WHERE format = ?
+        """, conn, params=(fmt or "standard",))
+    except Exception:
+        pass
+
+    if not meta_df.empty:
+        cards_df = cards_df.merge(meta_df, left_on="name", right_on="card_name",
+                                  how="left", suffixes=("", "_meta"))
+        cards_df["meta_inclusion_rate"] = cards_df["meta_inclusion_rate"].fillna(0)
+        cards_df["placement_weighted_score"] = cards_df["placement_weighted_score"].fillna(0)
+        cards_df["archetype_core_rate"] = cards_df["archetype_core_rate"].fillna(0)
+        cards_df["avg_copies_norm"] = cards_df["avg_copies"].fillna(0) / 4.0
+        cards_df["meta_popularity"] = cards_df["num_decks_in"].fillna(0).apply(
+            lambda x: np.log1p(x))
+        cards_df["archetype_win_rate"] = cards_df["archetype_win_rate"].fillna(0)
+    else:
+        cards_df["meta_inclusion_rate"] = 0.0
+        cards_df["placement_weighted_score"] = 0.0
+        cards_df["archetype_core_rate"] = 0.0
+        cards_df["avg_copies_norm"] = 0.0
+        cards_df["meta_popularity"] = 0.0
+        cards_df["archetype_win_rate"] = 0.0
+
     return cards_df
 
 
@@ -191,6 +226,9 @@ def predict_for_deck(conn: sqlite3.Connection, artifact: dict, deck_id: int,
     """Score candidates and write top suggestions to DB."""
     model = artifact["model"]
     scaler = artifact["scaler"]
+
+    # Backward compat: use feature cols from the trained model if available
+    model_features = artifact.get("feature_cols", FEATURE_COLS)
 
     candidates = build_candidate_features(conn, commander_name, colors, fmt)
     if candidates.empty:
@@ -203,7 +241,12 @@ def predict_for_deck(conn: sqlite3.Connection, artifact: dict, deck_id: int,
         print(f"  All candidates already in deck {deck_id}")
         return
 
-    X = candidates[FEATURE_COLS].fillna(0).values
+    # Use model's feature columns — add missing ones as 0
+    for col in model_features:
+        if col not in candidates.columns:
+            candidates[col] = 0.0
+
+    X = candidates[model_features].fillna(0).values
     X_scaled = scaler.transform(X)
     predictions = model.predict(X_scaled)
 
@@ -252,6 +295,22 @@ def generate_reason(row: pd.Series) -> str:
     incl = row.get("avg_inclusion", 0)
     if incl > 0.5:
         parts.append(f"in {int(incl * 100)}% of decks")
+
+    meta_rate = row.get("meta_inclusion_rate", 0)
+    if meta_rate > 0.3:
+        parts.append(f"in {int(meta_rate * 100)}% of competitive decks")
+    elif meta_rate > 0.1:
+        parts.append(f"used in {int(meta_rate * 100)}% of meta decks")
+
+    core_rate = row.get("archetype_core_rate", 0)
+    if core_rate > 0.8:
+        parts.append("archetype staple")
+
+    arch_wr = row.get("archetype_win_rate", 0)
+    if arch_wr > 0.6:
+        parts.append(f"{int(arch_wr * 100)}% archetype win rate")
+    elif arch_wr > 0.52:
+        parts.append(f"winning archetype ({int(arch_wr * 100)}% WR)")
 
     gp = row.get("games_played", 0)
     if gp > 5:

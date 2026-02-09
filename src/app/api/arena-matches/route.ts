@@ -39,7 +39,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ ok, matchId });
     }
 
-    const { matchId, playerName, opponentName, result, format, turns, deckCards, cardsPlayed, opponentCardsSeen } = body;
+    const { matchId, playerName, opponentName, result, format, turns, deckCards, cardsPlayed, opponentCardsSeen, cardsPlayedByTurn, commanderCastTurns, landsPlayedByTurn } = body;
 
     if (!matchId || !result) {
       return NextResponse.json(
@@ -68,7 +68,7 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    const stored = storeArenaParsedMatch({
+    const storeResult = storeArenaParsedMatch({
       matchId,
       playerName: playerName || null,
       opponentName: opponentName || null,
@@ -78,19 +78,46 @@ export async function POST(request: NextRequest) {
       deckCards: deckCards ? JSON.stringify(deckCards) : null,
       cardsPlayed: JSON.stringify(resolvedCardsPlayed),
       opponentCardsSeen: JSON.stringify(resolvedOpponentCards),
+      cardsPlayedByTurn: cardsPlayedByTurn ? JSON.stringify(cardsPlayedByTurn) : null,
+      commanderCastTurns: commanderCastTurns ? JSON.stringify(commanderCastTurns) : null,
+      landsPlayedByTurn: landsPlayedByTurn ? JSON.stringify(landsPlayedByTurn) : null,
     });
 
     // Auto-link to saved deck if we have deck cards
     let deckMatch = null;
-    if (stored && deckCards?.length > 0) {
+    if (storeResult.success && deckCards?.length > 0) {
       deckMatch = matchArenaDeckToSavedDeck(deckCards, format);
       if (deckMatch) {
         linkArenaMatchToDeck(matchId, deckMatch.deckId, deckMatch.confidence);
       }
     }
 
+    // Compute ML features if match was stored
+    if (storeResult.success && storeResult.id) {
+      try {
+        const { computeMatchMLFeatures } = await import('@/lib/match-ml-features');
+        computeMatchMLFeatures(
+          storeResult.id,
+          {
+            matchId, playerName, opponentName, result,
+            format, turns: turns || 0,
+            deckCards: deckCards || null,
+            cardsPlayed: resolvedCardsPlayed,
+            opponentCardsSeen: resolvedOpponentCards,
+            cardsPlayedByTurn: cardsPlayedByTurn || {},
+            commanderCastTurns: commanderCastTurns || [],
+            landsPlayedByTurn: landsPlayedByTurn || {},
+          },
+          deckMatch?.deckId || null,
+          null
+        );
+      } catch {
+        // ML features are optional — don't fail the match store
+      }
+    }
+
     return NextResponse.json({
-      ok: stored,
+      ok: storeResult.success,
       matchId,
       deckMatch: deckMatch ? { deckId: deckMatch.deckId, deckName: deckMatch.deckName, confidence: deckMatch.confidence } : null,
     });

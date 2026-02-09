@@ -25,7 +25,9 @@ export type SynergyCategory =
   | 'lifegain'
   | 'counters'
   | 'graveyard'
-  | 'token_generation';
+  | 'token_generation'
+  | 'land_matters'
+  | 'tribal_lands';
 
 export interface CommanderSynergyProfile {
   /** Override generic CMC-based archetype detection */
@@ -119,6 +121,20 @@ export const TRIGGER_PATTERNS: Record<SynergyCategory, RegExp[]> = {
     /create (?:a |an |two |three )?\d*\/?\.* ?(?:\w+ )*(?:creature )?tokens?/i,
     /whenever .* create (?:a |an )?token/i,
     /tokens? you control/i,
+  ],
+  land_matters: [
+    /landfall/i,
+    /whenever a land enters the battlefield/i,
+    /whenever you play a land/i,
+    /sacrifice (?:a |an )?land/i,
+    /lands you control/i,
+    /land enters the battlefield under your control/i,
+  ],
+  tribal_lands: [
+    /choose a creature type/i,
+    /(?:all|each|other) .* (?:you control )?get \+/i,
+    /creature of the chosen type/i,
+    /creatures? you control .* that share a creature type/i,
   ],
 };
 
@@ -265,6 +281,26 @@ const SYNERGY_REQUIREMENTS: Record<SynergyCategory, {
     ],
     scoreBonus: 15,
   },
+  land_matters: {
+    min: 6,
+    searchPatterns: [
+      '%landfall%',
+      '%whenever a land enters%',
+      '%whenever you play a land%',
+      '%sacrifice%land%',
+      '%search your library for a%land%',
+    ],
+    scoreBonus: 20,
+  },
+  tribal_lands: {
+    min: 5,
+    searchPatterns: [
+      '%choose a creature type%',
+      '%creature of the chosen type%',
+      '%creatures you control%get +%',
+    ],
+    scoreBonus: 15,
+  },
 };
 
 // ── Archetype Inference Rules ────────────────────────────────────────────────
@@ -281,6 +317,7 @@ function inferArchetype(triggers: SynergyCategory[], hasAttackTrigger: boolean):
     return 'midrange';
   }
 
+  if (has('land_matters')) return 'midrange';
   if (has('attack_trigger') && has('counters')) return 'aggro';
   if (has('attack_trigger') && triggers.length <= 2) return 'voltron';
   if (has('artifact_synergy')) return 'midrange';
@@ -402,6 +439,17 @@ export function analyzeCommander(
       'divine visitation',
     );
   }
+  if (triggerCategories.includes('land_matters')) {
+    protectedPatterns.push(
+      'exploration', 'oracle of mul daya', 'azusa, lost but seeking',
+      'dryad of the ilysian grove', 'crucible of worlds', 'ramunap excavator',
+    );
+  }
+  if (triggerCategories.includes('tribal_lands')) {
+    protectedPatterns.push(
+      'cavern of souls', 'unclaimed territory', 'secluded courtyard',
+    );
+  }
 
   // ── Commander-as-engine adjustments ────────────────────────────────
   // If the commander itself generates draw, need less external draw
@@ -498,6 +546,8 @@ function buildStrategyDescription(
     counters: 'Counter synergy cards (proliferate, hardened scales effects)',
     graveyard: 'Self-mill, reanimation spells, graveyard recursion',
     token_generation: 'Token producers and token payoffs (anthems, sacrifice)',
+    land_matters: 'Landfall triggers, extra land drops, land sacrifice/recursion',
+    tribal_lands: 'Tribal lands (Cavern of Souls, Unclaimed Territory, etc.)',
   };
 
   for (const trigger of triggers) {

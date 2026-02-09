@@ -5,11 +5,14 @@ PR9: Full data pipeline orchestrator.
 Runs the complete refresh cycle:
   1. MTGJSON fetch (subtypes + arena IDs)
   2. EDHREC commander synergy enrichment
-  3. Arena log parsing
-  4. Match aggregation
-  5. Meta analysis (pandas)
-  6. Model training (scikit-learn)
-  7. Personalized suggestions generation
+  3. MTGGoldfish metagame scraping
+  4. MTGTop8 tournament scraping
+  5. Arena log parsing
+  6. Match aggregation
+  7. Community meta aggregation
+  8. Meta analysis (pandas)
+  9. Model training (scikit-learn, 24 features)
+  10. Personalized suggestions generation
 
 Each step is optional and can be skipped via flags. Steps that fail
 are logged but don't block subsequent steps.
@@ -17,6 +20,7 @@ are logged but don't block subsequent steps.
 Usage:
     python scripts/pipeline.py                  # run all steps
     python scripts/pipeline.py --skip-mtgjson   # skip MTGJSON fetch
+    python scripts/pipeline.py --skip-scrape    # skip both scrapers
     python scripts/pipeline.py --only train     # run only model training
     python scripts/pipeline.py --dry-run        # show what would run
 """
@@ -48,6 +52,18 @@ STEPS = [
         "args": ["--from-decks"],
     },
     {
+        "name": "goldfish",
+        "label": "MTGGoldfish Metagame + Tournament Scraping",
+        "script": "scrape_mtggoldfish.py",
+        "args": [],
+    },
+    {
+        "name": "mtgtop8",
+        "label": "MTGTop8 Tournament Scraping",
+        "script": "scrape_mtgtop8.py",
+        "args": [],
+    },
+    {
         "name": "arena",
         "label": "Arena Log Parsing",
         "script": "arena_log_parser.py",
@@ -60,6 +76,12 @@ STEPS = [
         "args": [],
     },
     {
+        "name": "meta_aggregate",
+        "label": "Community Meta Aggregation",
+        "script": "aggregate_community_meta.py",
+        "args": [],
+    },
+    {
         "name": "analyze",
         "label": "Pandas Meta Analysis",
         "script": "analyze_meta.py",
@@ -67,9 +89,9 @@ STEPS = [
     },
     {
         "name": "train",
-        "label": "Model Training (scikit-learn)",
+        "label": "Model Training (scikit-learn, 25 features)",
         "script": "train_model.py",
-        "args": ["--model", "gbm"],
+        "args": ["--model", "gbm", "--target", "blended"],
     },
     {
         "name": "predict",
@@ -98,11 +120,14 @@ def run_step(step: dict, db_path: str, dry_run: bool = False) -> bool:
     start = time.time()
 
     try:
+        # Scrapers need longer timeout due to rate-limited HTTP requests
+        step_timeout = 900 if step["name"] in ("goldfish", "mtgtop8") else 300
+
         result = subprocess.run(
             cmd,
             capture_output=True,
             text=True,
-            timeout=300,  # 5 minute timeout per step
+            timeout=step_timeout,
             cwd=PROJECT_DIR,
         )
         elapsed = time.time() - start
@@ -135,6 +160,9 @@ def main():
     parser.add_argument("--dry-run", action="store_true", help="Show commands without running")
     parser.add_argument("--skip-mtgjson", action="store_true", help="Skip MTGJSON fetch")
     parser.add_argument("--skip-edhrec", action="store_true", help="Skip EDHREC enrichment")
+    parser.add_argument("--skip-scrape", action="store_true", help="Skip MTGGoldfish + MTGTop8 scraping")
+    parser.add_argument("--skip-tournaments", action="store_true",
+                        help="Pass --no-tournaments to MTGGoldfish scraper")
     parser.add_argument("--skip-arena", action="store_true", help="Skip Arena log parsing")
     parser.add_argument("--skip-train", action="store_true", help="Skip model training")
     parser.add_argument("--only", choices=[s["name"] for s in STEPS],
@@ -148,11 +176,21 @@ def main():
         skip_set.add("mtgjson")
     if args.skip_edhrec:
         skip_set.add("edhrec")
+    if args.skip_scrape:
+        skip_set.add("goldfish")
+        skip_set.add("mtgtop8")
+        skip_set.add("meta_aggregate")
     if args.skip_arena:
         skip_set.add("arena")
     if args.skip_train:
         skip_set.add("train")
         skip_set.add("predict")
+
+    # Pass --no-tournaments to goldfish scraper if requested
+    if args.skip_tournaments:
+        for step in STEPS:
+            if step["name"] == "goldfish":
+                step["args"] = step["args"] + ["--no-tournaments"]
 
     print("=" * 60)
     print(f"MTG Deck Builder Pipeline")

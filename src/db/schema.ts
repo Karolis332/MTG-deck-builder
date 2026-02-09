@@ -522,4 +522,147 @@ export const MIGRATIONS = [
       CREATE INDEX IF NOT EXISTS idx_ai_build_deck ON ai_build_logs(deck_id);
     `,
   },
+  {
+    version: 17,
+    name: 'add_community_meta_tables',
+    sql: `
+      CREATE TABLE IF NOT EXISTS community_decks (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        source TEXT NOT NULL,
+        source_id TEXT,
+        format TEXT NOT NULL,
+        archetype TEXT,
+        deck_name TEXT,
+        placement INTEGER,
+        meta_share REAL,
+        event_name TEXT,
+        event_date TEXT,
+        scraped_at TEXT NOT NULL DEFAULT (datetime('now')),
+        UNIQUE(source, source_id)
+      );
+
+      CREATE INDEX IF NOT EXISTS idx_community_decks_format ON community_decks(format);
+      CREATE INDEX IF NOT EXISTS idx_community_decks_source ON community_decks(source);
+
+      CREATE TABLE IF NOT EXISTS community_deck_cards (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        community_deck_id INTEGER NOT NULL,
+        card_name TEXT NOT NULL,
+        quantity INTEGER NOT NULL DEFAULT 1,
+        board TEXT NOT NULL DEFAULT 'main',
+        FOREIGN KEY (community_deck_id) REFERENCES community_decks(id) ON DELETE CASCADE
+      );
+
+      CREATE INDEX IF NOT EXISTS idx_cdc_deck ON community_deck_cards(community_deck_id);
+      CREATE INDEX IF NOT EXISTS idx_cdc_card ON community_deck_cards(card_name);
+
+      CREATE TABLE IF NOT EXISTS meta_card_stats (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        card_name TEXT NOT NULL,
+        format TEXT NOT NULL,
+        meta_inclusion_rate REAL NOT NULL DEFAULT 0,
+        placement_weighted_score REAL NOT NULL DEFAULT 0,
+        archetype_core_rate REAL NOT NULL DEFAULT 0,
+        avg_copies REAL NOT NULL DEFAULT 0,
+        num_decks_in INTEGER NOT NULL DEFAULT 0,
+        total_decks_sampled INTEGER NOT NULL DEFAULT 0,
+        updated_at TEXT NOT NULL DEFAULT (datetime('now')),
+        UNIQUE(card_name, format)
+      );
+
+      CREATE INDEX IF NOT EXISTS idx_mcs_format ON meta_card_stats(format);
+      CREATE INDEX IF NOT EXISTS idx_mcs_card ON meta_card_stats(card_name);
+    `,
+  },
+  {
+    version: 18,
+    name: 'add_win_loss_and_archetype_stats',
+    sql: `
+      -- Add win-loss columns to community_decks
+      ALTER TABLE community_decks ADD COLUMN wins INTEGER;
+      ALTER TABLE community_decks ADD COLUMN losses INTEGER;
+      ALTER TABLE community_decks ADD COLUMN draws INTEGER;
+      ALTER TABLE community_decks ADD COLUMN record TEXT;
+      ALTER TABLE community_decks ADD COLUMN tournament_type TEXT;
+      ALTER TABLE community_decks ADD COLUMN player_name TEXT;
+
+      -- Archetype-level win/loss aggregation
+      CREATE TABLE IF NOT EXISTS archetype_win_stats (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        archetype TEXT NOT NULL,
+        format TEXT NOT NULL,
+        total_wins INTEGER NOT NULL DEFAULT 0,
+        total_losses INTEGER NOT NULL DEFAULT 0,
+        total_draws INTEGER NOT NULL DEFAULT 0,
+        total_entries INTEGER NOT NULL DEFAULT 0,
+        avg_placement REAL,
+        best_placement INTEGER,
+        league_5_0_count INTEGER NOT NULL DEFAULT 0,
+        tournament_top8_count INTEGER NOT NULL DEFAULT 0,
+        sample_size INTEGER NOT NULL DEFAULT 0,
+        updated_at TEXT NOT NULL DEFAULT (datetime('now')),
+        UNIQUE(archetype, format)
+      );
+
+      CREATE INDEX IF NOT EXISTS idx_aws_format ON archetype_win_stats(format);
+      CREATE INDEX IF NOT EXISTS idx_aws_archetype ON archetype_win_stats(archetype);
+
+      -- Add archetype_win_rate to meta_card_stats
+      ALTER TABLE meta_card_stats ADD COLUMN archetype_win_rate REAL;
+    `,
+  },
+  {
+    version: 19,
+    name: 'add_versioning_lands_ml_features',
+    sql: `
+      -- Phase 1: Enhanced version tracking
+      ALTER TABLE deck_versions ADD COLUMN source TEXT NOT NULL DEFAULT 'manual';
+      ALTER TABLE deck_versions ADD COLUMN change_type TEXT;
+
+      CREATE INDEX IF NOT EXISTS idx_deck_versions_deck_created
+        ON deck_versions(deck_id, created_at DESC);
+
+      -- Phase 3: Land classification
+      CREATE TABLE IF NOT EXISTS land_classifications (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        card_name TEXT NOT NULL UNIQUE,
+        card_id TEXT REFERENCES cards(id),
+        land_category TEXT NOT NULL,
+        produces_colors TEXT,
+        enters_untapped INTEGER NOT NULL DEFAULT 0,
+        enters_untapped_condition TEXT,
+        tribal_types TEXT,
+        synergy_tags TEXT,
+        tier INTEGER NOT NULL DEFAULT 3,
+        updated_at TEXT NOT NULL DEFAULT (datetime('now'))
+      );
+
+      -- Phase 4: Per-turn Arena match data
+      ALTER TABLE arena_parsed_matches ADD COLUMN cards_played_by_turn TEXT;
+      ALTER TABLE arena_parsed_matches ADD COLUMN commander_cast_turns TEXT;
+      ALTER TABLE arena_parsed_matches ADD COLUMN lands_played_by_turn TEXT;
+
+      -- Phase 4: ML feature extraction per match
+      CREATE TABLE IF NOT EXISTS match_ml_features (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        match_id INTEGER REFERENCES arena_parsed_matches(id) ON DELETE CASCADE,
+        deck_id INTEGER REFERENCES decks(id) ON DELETE SET NULL,
+        deck_version_id INTEGER REFERENCES deck_versions(id),
+        avg_cmc_played REAL,
+        curve_efficiency REAL,
+        first_play_turn INTEGER,
+        cards_drawn_per_turn REAL,
+        unique_cards_played INTEGER,
+        deck_penetration REAL,
+        commander_cast_count INTEGER,
+        commander_first_cast_turn INTEGER,
+        removal_played_count INTEGER,
+        counterspell_count INTEGER,
+        version_age_days INTEGER,
+        changes_since_last_version INTEGER,
+        created_at TEXT NOT NULL DEFAULT (datetime('now')),
+        UNIQUE(match_id)
+      );
+    `,
+  },
 ];

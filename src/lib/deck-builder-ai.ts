@@ -7,6 +7,7 @@ import type { EdhrecRecommendation } from './edhrec';
 import { getTemplate, getScaledCurve, getColorAdjustment, isImpulseDraw, mergeWithCommanderProfile } from './deck-templates';
 import { analyzeCommander } from './commander-synergy';
 import type { CommanderSynergyProfile } from './commander-synergy';
+import { buildOptimalLandBase, analyzeManaDemands } from './land-intelligence';
 
 // ── Commander synergy text patterns for card scoring ────────────────────────
 // Maps synergy categories from commander-synergy.ts to oracle text substrings
@@ -24,6 +25,8 @@ const SYNERGY_REQUIREMENTS_MAP = {
   counters: ['+1/+1 counter', 'proliferate', 'put a counter'],
   graveyard: ['from your graveyard', 'mill', 'reanimate', 'return from'],
   token_generation: ['create a', 'create two', 'token', 'populate'],
+  land_matters: ['landfall', 'whenever a land enters', 'play a land', 'sacrifice a land', 'search your library for a'],
+  tribal_lands: ['choose a creature type', 'creature of the chosen type', 'creatures you control'],
 } as const;
 
 // ── Synergy keyword groups ──────────────────────────────────────────────────
@@ -260,11 +263,10 @@ function resolveEdhrecCards(
     if (seen.has(rec.name)) continue;
     seen.add(rec.name);
 
-    // Look up the card by exact name in our local DB
+    // Look up the card by exact name in our local DB (lands included for land-intelligence)
     const row = db.prepare(
       `SELECT c.* FROM cards c
        WHERE c.name = ? COLLATE NOCASE
-       AND c.type_line NOT LIKE '%Land%'
        ${colorExcludeFilter ? `AND ${colorExcludeFilter}` : ''}
        ${legalityFilter}
        ${commanderExclude}
@@ -796,7 +798,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
   const poolResult = await buildScoredCandidatePool(options);
   const {
     pool: scored, themes, resolvedStrategy, tribalType, tribalNames,
-    commanderProfile, landTarget: targetLands, nonLandTarget,
+    commanderProfile, commanderCard, landTarget: targetLands, nonLandTarget,
     isCommander, maxCopies, colors, ownedQty, useCollection,
     colorExcludeFilter, legalityFilter, commanderExclude,
     collectionJoin, collectionOrder,
@@ -942,73 +944,143 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
     }
   }
 
-  // ── Step 5: Add lands ─────────────────────────────────────────────────────
+  // ── Step 5: Add lands (via land intelligence) ───────────────────────────
   const basicLandMap: Record<string, string> = {
     W: 'Plains', U: 'Island', B: 'Swamp', R: 'Mountain', G: 'Forest',
   };
 
-  const numColors = colors.length;
-  const nonBasicTarget = numColors <= 1
-    ? Math.min(4, targetLands)
-    : numColors === 2
-      ? Math.min(12, targetLands - 8)
-      : Math.min(20, targetLands - 5);
+  // Detect tribal types from picked creatures for tribal land matching
+  const detectedTribalTypes: string[] = [];
+  for (const p of picked) {
+    const subtypes = p.card.subtypes;
+    if (subtypes && p.card.type_line?.includes('Creature')) {
+      try {
+        const parsed = JSON.parse(subtypes);
+        if (Array.isArray(parsed)) {
+          for (const st of parsed) {
+            if (typeof st === 'string') detectedTribalTypes.push(st);
+          }
+        }
+      } catch { /* skip */ }
+    }
+  }
+  // Find the most common tribal type
+  const tribalCounts = new Map<string, number>();
+  for (const t of detectedTribalTypes) {
+    tribalCounts.set(t, (tribalCounts.get(t) || 0) + 1);
+  }
+  const topTribalTypes = Array.from(tribalCounts.entries())
+    .filter(([, count]) => count >= 5)
+    .sort((a, b) => b[1] - a[1])
+    .map(([type]) => type);
 
-  const landPool = db.prepare(`
-    SELECT c.* FROM cards c
-    ${collectionJoin}
-    WHERE c.type_line LIKE '%Land%'
-    AND c.type_line NOT LIKE '%Basic%'
-    ${colorExcludeFilter ? `AND ${colorExcludeFilter}` : ''}
-    ${legalityFilter}
-    ORDER BY
-      ${collectionOrder}
-      CASE WHEN c.oracle_text LIKE '%enters the battlefield tapped%' OR c.oracle_text LIKE '%enters tapped%' THEN 1 ELSE 0 END,
-      c.edhrec_rank ASC NULLS LAST
-    LIMIT 60
-  `).all() as DbCard[];
+  // Build non-land card list for mana demand analysis
+  const nonLandCards = picked.map(p => ({
+    mana_cost: p.card.mana_cost,
+    quantity: p.quantity,
+  }));
 
+  // Try land intelligence system (requires land_classifications table)
   let landsAdded = 0;
+  try {
+    const landBase = buildOptimalLandBase({
+      colors,
+      format: options.format,
+      strategy: resolvedStrategy,
+      targetLandCount: targetLands,
+      tribalTypes: topTribalTypes.length > 0 ? topTribalTypes : undefined,
+      commanderName: commanderCard?.name,
+      existingNonLandCards: nonLandCards,
+      isCommander,
+    });
 
-  for (const land of landPool) {
-    if (landsAdded >= nonBasicTarget) break;
-    if (pickedNames.has(land.name)) continue;
-
-    const oracleText = (land.oracle_text || '').toLowerCase();
-    if (numColors <= 1) {
-      const entersTapped = oracleText.includes('enters the battlefield tapped')
-        || oracleText.includes('enters tapped');
-      if (entersTapped) continue;
+    // Add non-basic lands
+    for (const { card, quantity } of landBase.lands) {
+      if (pickedNames.has(card.name)) continue;
+      const qty = isCommander ? 1 : Math.min(getMaxQty(card), quantity);
+      if (qty <= 0) continue;
+      picked.push({ card, quantity: qty, board: 'main' });
+      pickedNames.add(card.name);
+      landsAdded += qty;
     }
 
-    const cardMax = getMaxQty(land);
-    const qty = isCommander ? 1 : Math.min(cardMax, targetLands - landsAdded);
-    if (qty <= 0) continue;
-
-    picked.push({ card: land, quantity: qty, board: 'main' });
-    pickedNames.add(land.name);
-    landsAdded += qty;
-  }
-
-  // Fill remaining land slots with basics
-  if (colors.length > 0 && landsAdded < targetLands) {
-    const remaining = targetLands - landsAdded;
-    const perColor = Math.floor(remaining / colors.length);
-    const extraForFirst = remaining - perColor * colors.length;
-
-    for (let i = 0; i < colors.length; i++) {
-      const basicName = basicLandMap[colors[i]];
-      if (!basicName) continue;
-
+    // Add basics per distribution
+    for (const [basicName, qty] of Object.entries(landBase.basicDistribution)) {
+      if (qty <= 0) continue;
       const basic = db.prepare(
         'SELECT * FROM cards WHERE name = ? AND set_code IS NOT NULL ORDER BY updated_at DESC LIMIT 1'
       ).get(basicName) as DbCard | undefined;
-
       if (basic) {
-        const qty = Math.min(perColor + (i === 0 ? extraForFirst : 0), targetLands - landsAdded);
-        if (qty > 0) {
-          picked.push({ card: basic, quantity: qty, board: 'main' });
-          landsAdded += qty;
+        const actualQty = Math.min(qty, targetLands - landsAdded);
+        if (actualQty > 0) {
+          picked.push({ card: basic, quantity: actualQty, board: 'main' });
+          landsAdded += actualQty;
+        }
+      }
+    }
+  } catch {
+    // Fallback: land_classifications table may not exist yet
+    const numColors = colors.length;
+    const nonBasicTarget = numColors <= 1
+      ? Math.min(4, targetLands)
+      : numColors === 2
+        ? Math.min(12, targetLands - 8)
+        : Math.min(20, targetLands - 5);
+
+    const landPool = db.prepare(`
+      SELECT c.* FROM cards c
+      ${collectionJoin}
+      WHERE c.type_line LIKE '%Land%'
+      AND c.type_line NOT LIKE '%Basic%'
+      ${colorExcludeFilter ? `AND ${colorExcludeFilter}` : ''}
+      ${legalityFilter}
+      ORDER BY
+        ${collectionOrder}
+        CASE WHEN c.oracle_text LIKE '%enters the battlefield tapped%' OR c.oracle_text LIKE '%enters tapped%' THEN 1 ELSE 0 END,
+        c.edhrec_rank ASC NULLS LAST
+      LIMIT 60
+    `).all() as DbCard[];
+
+    for (const land of landPool) {
+      if (landsAdded >= nonBasicTarget) break;
+      if (pickedNames.has(land.name)) continue;
+
+      const oracleText = (land.oracle_text || '').toLowerCase();
+      if (numColors <= 1) {
+        const entersTapped = oracleText.includes('enters the battlefield tapped')
+          || oracleText.includes('enters tapped');
+        if (entersTapped) continue;
+      }
+
+      const cardMax = getMaxQty(land);
+      const qty = isCommander ? 1 : Math.min(cardMax, targetLands - landsAdded);
+      if (qty <= 0) continue;
+
+      picked.push({ card: land, quantity: qty, board: 'main' });
+      pickedNames.add(land.name);
+      landsAdded += qty;
+    }
+
+    // Fill remaining with basics
+    if (colors.length > 0 && landsAdded < targetLands) {
+      const remaining = targetLands - landsAdded;
+      const perColor = Math.floor(remaining / colors.length);
+      const extraForFirst = remaining - perColor * colors.length;
+
+      for (let i = 0; i < colors.length; i++) {
+        const basicName = basicLandMap[colors[i]];
+        if (!basicName) continue;
+
+        const basic = db.prepare(
+          'SELECT * FROM cards WHERE name = ? AND set_code IS NOT NULL ORDER BY updated_at DESC LIMIT 1'
+        ).get(basicName) as DbCard | undefined;
+
+        if (basic) {
+          const qty = Math.min(perColor + (i === 0 ? extraForFirst : 0), targetLands - landsAdded);
+          if (qty > 0) {
+            picked.push({ card: basic, quantity: qty, board: 'main' });
+            landsAdded += qty;
+          }
         }
       }
     }

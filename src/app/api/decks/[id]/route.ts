@@ -9,6 +9,8 @@ import {
 } from '@/lib/db';
 import type { DeckPatchOp } from '@/lib/types';
 import { getAuthUser, unauthorizedResponse } from '@/lib/auth-middleware';
+import { createVersionSnapshot } from '@/lib/deck-versioning';
+import type { ChangeType } from '@/lib/deck-versioning';
 
 export async function GET(
   request: NextRequest,
@@ -100,6 +102,19 @@ export async function PATCH(
 
     const body = await request.json();
     const operations: DeckPatchOp[] = body.operations || [body];
+
+    // Determine change type for version tracking
+    const opTypes = new Set(operations.map(op => op.op));
+    let changeType: ChangeType = 'add_card';
+    if (opTypes.size === 1) {
+      const single = opTypes.values().next().value as string;
+      if (single === 'add_card' || single === 'remove_card' || single === 'set_quantity' || single === 'move_card') {
+        changeType = single;
+      }
+    }
+
+    // Snapshot before mutation (debounced for manual edits)
+    createVersionSnapshot(deckId, 'manual_edit', changeType);
 
     for (const op of operations) {
       switch (op.op) {
