@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getDb, getDeckWithCards } from '@/lib/db';
 import { DEFAULT_LAND_COUNT, DEFAULT_DECK_SIZE, COMMANDER_FORMATS } from '@/lib/constants';
+import { fitsColorIdentity, isLegalInFormat, extractRejectedCards, buildRejectionReminder } from '@/lib/ai-chat-helpers';
 import type { DbCard } from '@/lib/types';
 
 interface ChatAction {
@@ -41,32 +42,6 @@ function resolveCard(name: string): DbCard | null {
   );
 }
 
-/**
- * Check if a card fits within the deck's color identity.
- */
-function fitsColorIdentity(card: DbCard, deckColors: Set<string>): boolean {
-  if (deckColors.size === 0) return true;
-  try {
-    const ci: string[] = card.color_identity ? JSON.parse(card.color_identity) : [];
-    return ci.every((c) => deckColors.has(c));
-  } catch {
-    return true;
-  }
-}
-
-/**
- * Check if a card is legal in the given format.
- */
-function isLegalInFormat(card: DbCard, format: string): boolean {
-  if (!format || !card.legalities) return true;
-  try {
-    const legalities = JSON.parse(card.legalities);
-    const status = legalities[format];
-    return !status || status === 'legal' || status === 'restricted';
-  } catch {
-    return true;
-  }
-}
 
 export async function POST(request: NextRequest) {
   try {
@@ -408,6 +383,38 @@ export async function POST(request: NextRequest) {
       }
     }
 
+    // ── ML Predictions (from pipeline) ──────────────────────────────────
+    let mlPredictions = '';
+    try {
+      const mlSuggestions = db.prepare(`
+        SELECT card_name, predicted_score, reason
+        FROM personalized_suggestions
+        WHERE deck_id = ?
+        ORDER BY predicted_score DESC
+        LIMIT 15
+      `).all(deck_id) as Array<{ card_name: string; predicted_score: number; reason: string | null }>;
+
+      const mlStats = db.prepare(`
+        SELECT COUNT(*) as game_count, AVG(curve_efficiency) as avg_curve, AVG(deck_penetration) as avg_penetration
+        FROM match_ml_features
+        WHERE deck_id = ?
+      `).get(deck_id) as { game_count: number; avg_curve: number | null; avg_penetration: number | null } | undefined;
+
+      if (mlSuggestions.length > 0) {
+        const gameCount = mlStats?.game_count || 0;
+        mlPredictions = `\n═══ ML PREDICTIONS (from ${gameCount} games played) ═══\nTop predicted cards for this deck:\n`;
+        mlPredictions += mlSuggestions
+          .map(s => `- ${s.card_name} (score: ${s.predicted_score.toFixed(2)})${s.reason ? ` — ${s.reason}` : ''}`)
+          .join('\n');
+        if (mlStats?.avg_curve != null || mlStats?.avg_penetration != null) {
+          mlPredictions += `\nDeck stats: curve efficiency ${(mlStats.avg_curve ?? 0).toFixed(2)}, deck penetration ${(mlStats.avg_penetration ?? 0).toFixed(2)}`;
+        }
+        mlPredictions += `\nPrioritize ML-recommended cards when suggesting ADDs.`;
+      }
+    } catch {
+      // Tables may not exist if ML pipeline hasn't run — that's fine
+    }
+
     // System prompt — explicit and strict to prevent common errors
     const systemPrompt = `You are an expert MTG deck tuning assistant.
 
@@ -461,6 +468,7 @@ CURRENT DECKLIST (with oracle text for reasoning)
 ${deckSummary}
 
 ${edhrecKnowledge}
+${mlPredictions}
 ═══════════════════════════════════════════════════════════
 RESPONSE FORMAT (strict JSON)
 ═══════════════════════════════════════════════════════════
@@ -497,16 +505,237 @@ Remember to check the card list above to avoid suggesting duplicates!`,
       });
     }
 
+    // ── Rejection feedback loop ─────────────────────────────────────────
+    // Scan the last assistant message for rejected cards and remind the AI
+    if (messages.length >= 2) {
+      const lastAssistant = [...messages].reverse().find(m => m.role === 'assistant');
+      if (lastAssistant) {
+        const rejected = extractRejectedCards(lastAssistant.content);
+        const reminder = buildRejectionReminder(rejected);
+        if (reminder) {
+          console.log('[AI Chat] Injecting rejection reminder:', reminder);
+          messages.push({ role: 'system', content: reminder });
+        }
+      }
+    }
+
     messages.push({ role: 'user', content: prompt });
 
-    let content: string;
+    // ── Helper: validate + resolve actions from AI response ─────────────
+    type ResolvedAction = {
+      action: 'cut' | 'add';
+      cardId: string;
+      cardName: string;
+      quantity: number;
+      reason: string;
+      imageUri?: string;
+    };
+    const validateAndResolve = (content: string): { message: string; actions: ResolvedAction[] } => {
+      const resolvedActions: ResolvedAction[] = [];
+      const existingCardNames = new Set(deck.cards.map((c) => c.name.toLowerCase()));
+      const rejectedCards: string[] = [];
+      const rejectionReasons = {
+        wrongColors: [] as string[],
+        notLegal: [] as string[],
+        alreadyInDeck: [] as string[],
+        notFound: [] as string[],
+      };
+
+      let parsed: ChatResponse;
+      try {
+        let jsonText = content;
+        const jsonMatch = content.match(/```json\n([\s\S]*?)\n```/) || content.match(/\{[\s\S]*\}/);
+        if (jsonMatch) {
+          jsonText = jsonMatch[1] || jsonMatch[0];
+        }
+        parsed = JSON.parse(jsonText);
+      } catch {
+        console.warn('[AI Chat] Non-JSON response, returning as plain message');
+        return { message: content, actions: [] };
+      }
+
+      for (const act of parsed.actions || []) {
+        if (act.action === 'swap') {
+          const cutCard = deck.cards.find(
+            (c) => c.name.toLowerCase() === act.cardName.toLowerCase()
+          );
+          const addCard = act.replaceWith ? resolveCard(act.replaceWith) : null;
+
+          let addValid = false;
+          let addRejectionReason = '';
+
+          if (addCard) {
+            if (!fitsColorIdentity(addCard, colorSet)) {
+              addRejectionReason = 'wrong colors';
+              rejectionReasons.wrongColors.push(addCard.name);
+            } else if (!isLegalInFormat(addCard, format)) {
+              addRejectionReason = `not legal in ${format}`;
+              rejectionReasons.notLegal.push(addCard.name);
+            } else if (existingCardNames.has(addCard.name.toLowerCase())) {
+              addRejectionReason = 'already in deck';
+              rejectionReasons.alreadyInDeck.push(addCard.name);
+            } else {
+              addValid = true;
+            }
+          } else if (act.replaceWith) {
+            addRejectionReason = 'not found in database';
+            rejectionReasons.notFound.push(act.replaceWith);
+          }
+
+          if (addValid && addCard && cutCard) {
+            resolvedActions.push({
+              action: 'cut',
+              cardId: cutCard.id || (cutCard as unknown as { card_id: string }).card_id,
+              cardName: cutCard.name,
+              quantity: act.quantity || 1,
+              reason: act.reason,
+              imageUri: cutCard.image_uri_small || undefined,
+            });
+            resolvedActions.push({
+              action: 'add',
+              cardId: addCard.id,
+              cardName: addCard.name,
+              quantity: act.quantity || 1,
+              reason: act.reason,
+              imageUri: addCard.image_uri_small || undefined,
+            });
+          } else {
+            const failedName = act.replaceWith || 'unknown';
+            rejectedCards.push(`${failedName} (${addRejectionReason}) — swap cancelled, kept ${act.cardName}`);
+          }
+        } else if (act.action === 'cut') {
+          const cutCard = deck.cards.find(
+            (c) => c.name.toLowerCase() === act.cardName.toLowerCase()
+          );
+          if (cutCard) {
+            resolvedActions.push({
+              action: 'cut',
+              cardId: cutCard.id || (cutCard as unknown as { card_id: string }).card_id,
+              cardName: cutCard.name,
+              quantity: act.quantity || 1,
+              reason: act.reason,
+              imageUri: cutCard.image_uri_small || undefined,
+            });
+          }
+        } else if (act.action === 'add') {
+          const addCard = resolveCard(act.cardName);
+          if (addCard) {
+            if (!fitsColorIdentity(addCard, colorSet)) {
+              rejectedCards.push(`${addCard.name} (wrong colors)`);
+              rejectionReasons.wrongColors.push(addCard.name);
+            } else if (!isLegalInFormat(addCard, format)) {
+              rejectedCards.push(`${addCard.name} (not legal in ${format})`);
+              rejectionReasons.notLegal.push(addCard.name);
+            } else if (existingCardNames.has(addCard.name.toLowerCase())) {
+              rejectedCards.push(`${addCard.name} (already in deck)`);
+              rejectionReasons.alreadyInDeck.push(addCard.name);
+            } else {
+              resolvedActions.push({
+                action: 'add',
+                cardId: addCard.id,
+                cardName: addCard.name,
+                quantity: act.quantity || 1,
+                reason: act.reason,
+                imageUri: addCard.image_uri_small || undefined,
+              });
+            }
+          } else {
+            rejectedCards.push(`${act.cardName} (not found in database)`);
+            rejectionReasons.notFound.push(act.cardName);
+          }
+        }
+      }
+
+      // Enforce CUT/ADD balance for fixed-size formats
+      if (isCommanderLike) {
+        const addCount = resolvedActions.filter((a) => a.action === 'add').reduce((s, a) => s + a.quantity, 0);
+        const cutCount = resolvedActions.filter((a) => a.action === 'cut').reduce((s, a) => s + a.quantity, 0);
+        const sizeAfter = currentMainCount - cutCount + addCount;
+
+        const currentDistance = Math.abs(currentMainCount - effectiveTarget);
+        const afterDistance = Math.abs(sizeAfter - effectiveTarget);
+        const movingCloser = afterDistance < currentDistance;
+        const atOrBelowTarget = sizeAfter <= effectiveTarget && sizeAfter >= effectiveTarget - 2;
+
+        if (Math.abs(addCount - cutCount) > 2 && (addCount > 0 || cutCount > 0) && !movingCloser && !atOrBelowTarget) {
+          const imbalance = addCount - cutCount;
+          const warning = imbalance > 0
+            ? `Too many ADDs (${addCount}) vs CUTs (${cutCount}). Deck would become ${sizeAfter} cards.`
+            : `Too many CUTs (${cutCount}) vs ADDs (${addCount}). Deck would become ${sizeAfter} cards.`;
+
+          console.error('[AI Chat] Unbalanced suggestions:', { addCount, cutCount, currentMainCount, sizeAfter });
+
+          return {
+            message: `⚠️ ${warning}\n\nFor ${format} format, every card added must replace a card being cut. Please suggest balanced swaps (use "swap" action) to maintain ${effectiveTarget} cards.`,
+            actions: [],
+          };
+        }
+
+        if (sizeAfter !== effectiveTarget && (addCount > 0 || cutCount > 0)) {
+          let excess = sizeAfter - effectiveTarget;
+
+          if (excess > 0) {
+            for (let i = resolvedActions.length - 1; i >= 0 && excess > 0; i--) {
+              if (resolvedActions[i].action === 'add') {
+                const remove = Math.min(resolvedActions[i].quantity, excess);
+                resolvedActions[i].quantity -= remove;
+                excess -= remove;
+                if (resolvedActions[i].quantity <= 0) {
+                  rejectedCards.push(`${resolvedActions[i].cardName} (auto-trimmed to maintain deck size)`);
+                  resolvedActions.splice(i, 1);
+                }
+              }
+            }
+          } else if (excess < 0) {
+            excess = Math.abs(excess);
+            for (let i = resolvedActions.length - 1; i >= 0 && excess > 0; i--) {
+              if (resolvedActions[i].action === 'cut') {
+                const remove = Math.min(resolvedActions[i].quantity, excess);
+                resolvedActions[i].quantity -= remove;
+                excess -= remove;
+                if (resolvedActions[i].quantity <= 0) {
+                  resolvedActions.splice(i, 1);
+                }
+              }
+            }
+          }
+        }
+      }
+
+      let message = parsed.message;
+      if (rejectedCards.length > 0) {
+        message += `\n\n⚠️ **Some suggestions were filtered** (server-side validation):`;
+
+        if (rejectionReasons.alreadyInDeck.length > 0) {
+          message += `\n- ❌ Already in deck: ${rejectionReasons.alreadyInDeck.join(', ')}`;
+        }
+        if (rejectionReasons.wrongColors.length > 0) {
+          message += `\n- ❌ Wrong color identity: ${rejectionReasons.wrongColors.join(', ')} (deck is {${deckColors.join(', ')}})`;
+        }
+        if (rejectionReasons.notLegal.length > 0) {
+          message += `\n- ❌ Not legal in ${format}: ${rejectionReasons.notLegal.join(', ')}`;
+        }
+        if (rejectionReasons.notFound.length > 0) {
+          message += `\n- ❌ Not found in database: ${rejectionReasons.notFound.join(', ')}`;
+        }
+
+        message += `\n\n💡 **Tip**: Check the "ALL CARDS CURRENTLY IN DECK" list in my context to avoid duplicates.`;
+      }
+
+      return { message, actions: resolvedActions };
+    };
+
+    // ── Streaming AI call ───────────────────────────────────────────────
+    const systemContent = messages.filter(m => m.role === 'system').map(m => m.content).join('\n\n');
+    const chatMessages = messages.filter(m => m.role !== 'system').map(m => ({
+      role: m.role as 'user' | 'assistant',
+      content: m.content,
+    }));
 
     if (useClaude) {
-      // Read configured model (defaults to Sonnet 4.5)
       const modelRow = db.prepare("SELECT value FROM app_state WHERE key = 'setting_claude_model'").get() as { value: string } | undefined;
       const claudeModel = modelRow?.value || 'claude-sonnet-4-5-20250929';
 
-      // Claude API call
       const response = await fetch('https://api.anthropic.com/v1/messages', {
         method: 'POST',
         headers: {
@@ -518,11 +747,9 @@ Remember to check the card list above to avoid suggesting duplicates!`,
           model: claudeModel,
           max_tokens: 4096,
           temperature: 0.7,
-          messages: messages.filter(m => m.role !== 'system').map(m => ({
-            role: m.role as 'user' | 'assistant',
-            content: m.content
-          })),
-          system: messages.filter(m => m.role === 'system').map(m => m.content).join('\n\n'),
+          stream: true,
+          messages: chatMessages,
+          system: systemContent,
         }),
       });
 
@@ -535,10 +762,70 @@ Remember to check the card list above to avoid suggesting duplicates!`,
         );
       }
 
-      const data = await response.json();
-      content = data.content?.[0]?.text || '';
+      // Stream SSE to client
+      const encoder = new TextEncoder();
+      const readable = new ReadableStream({
+        async start(controller) {
+          let fullText = '';
+          let completed = false;
+          try {
+            const reader = response.body!.getReader();
+            const decoder = new TextDecoder();
+            let buffer = '';
+
+            while (true) {
+              const { done, value } = await reader.read();
+              if (done) break;
+
+              buffer += decoder.decode(value, { stream: true });
+              const lines = buffer.split('\n');
+              buffer = lines.pop() || '';
+
+              for (const line of lines) {
+                if (!line.startsWith('data: ')) continue;
+                const payload = line.slice(6).trim();
+                if (!payload || payload === '[DONE]') continue;
+
+                try {
+                  const event = JSON.parse(payload);
+
+                  if (event.type === 'content_block_delta' && event.delta?.text) {
+                    fullText += event.delta.text;
+                    controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: 'text', content: event.delta.text })}\n\n`));
+                  } else if (event.type === 'message_stop' && !completed) {
+                    completed = true;
+                    const result = validateAndResolve(fullText);
+                    controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: 'complete', message: result.message, actions: result.actions })}\n\n`));
+                  }
+                } catch {
+                  // Malformed SSE from upstream — skip
+                }
+              }
+            }
+
+            // Fallback: if we never got message_stop, finalize now
+            if (fullText && !completed) {
+              const result = validateAndResolve(fullText);
+              controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: 'complete', message: result.message, actions: result.actions })}\n\n`));
+            }
+          } catch (err) {
+            const errMsg = err instanceof Error ? err.message : 'Stream error';
+            controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: 'error', error: errMsg })}\n\n`));
+          } finally {
+            controller.close();
+          }
+        },
+      });
+
+      return new Response(readable, {
+        headers: {
+          'Content-Type': 'text/event-stream',
+          'Cache-Control': 'no-cache',
+          Connection: 'keep-alive',
+        },
+      });
     } else {
-      // OpenAI API call
+      // OpenAI streaming
       const response = await fetch('https://api.openai.com/v1/chat/completions', {
         method: 'POST',
         headers: {
@@ -550,7 +837,7 @@ Remember to check the card list above to avoid suggesting duplicates!`,
           messages,
           temperature: 0.7,
           max_tokens: 2000,
-          response_format: { type: 'json_object' },
+          stream: true,
         }),
       });
 
@@ -563,236 +850,70 @@ Remember to check the card list above to avoid suggesting duplicates!`,
         );
       }
 
-      const data = await response.json();
-      content = data.choices?.[0]?.message?.content || '';
-    }
-    if (!content) {
-      return NextResponse.json(
-        { error: `Empty response from ${useClaude ? 'Claude' : 'OpenAI'}` },
-        { status: 502 }
-      );
-    }
+      const encoder = new TextEncoder();
+      const readable = new ReadableStream({
+        async start(controller) {
+          let fullText = '';
+          let completed = false;
+          try {
+            const reader = response.body!.getReader();
+            const decoder = new TextDecoder();
+            let buffer = '';
 
-    let parsed: ChatResponse;
-    try {
-      // Claude might wrap JSON in markdown code blocks, extract it
-      let jsonText = content;
-      const jsonMatch = content.match(/```json\n([\s\S]*?)\n```/) || content.match(/\{[\s\S]*\}/);
-      if (jsonMatch) {
-        jsonText = jsonMatch[1] || jsonMatch[0];
-      }
-      parsed = JSON.parse(jsonText);
-    } catch {
-      // AI responded with non-JSON text — show it as a message instead of erroring
-      console.warn('[AI Chat] Non-JSON response, returning as plain message');
-      return NextResponse.json({
-        message: content,
-        actions: [],
+            while (true) {
+              const { done, value } = await reader.read();
+              if (done) break;
+
+              buffer += decoder.decode(value, { stream: true });
+              const lines = buffer.split('\n');
+              buffer = lines.pop() || '';
+
+              for (const line of lines) {
+                if (!line.startsWith('data: ')) continue;
+                const payload = line.slice(6).trim();
+                if (!payload || payload === '[DONE]') continue;
+
+                try {
+                  const event = JSON.parse(payload);
+                  const delta = event.choices?.[0]?.delta?.content;
+                  if (delta) {
+                    fullText += delta;
+                    controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: 'text', content: delta })}\n\n`));
+                  }
+
+                  if (event.choices?.[0]?.finish_reason === 'stop' && !completed) {
+                    completed = true;
+                    const result = validateAndResolve(fullText);
+                    controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: 'complete', message: result.message, actions: result.actions })}\n\n`));
+                  }
+                } catch {
+                  // Malformed SSE from upstream — skip
+                }
+              }
+            }
+
+            // Fallback: if we never got finish_reason, finalize now
+            if (fullText && !completed) {
+              const result = validateAndResolve(fullText);
+              controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: 'complete', message: result.message, actions: result.actions })}\n\n`));
+            }
+          } catch (err) {
+            const errMsg = err instanceof Error ? err.message : 'Stream error';
+            controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: 'error', error: errMsg })}\n\n`));
+          } finally {
+            controller.close();
+          }
+        },
+      });
+
+      return new Response(readable, {
+        headers: {
+          'Content-Type': 'text/event-stream',
+          'Cache-Control': 'no-cache',
+          Connection: 'keep-alive',
+        },
       });
     }
-
-    // ── Server-side validation & resolution ────────────────────────────
-    const resolvedActions: Array<{
-      action: 'cut' | 'add';
-      cardId: string;
-      cardName: string;
-      quantity: number;
-      reason: string;
-      imageUri?: string;
-    }> = [];
-
-    const existingCardNames = new Set(deck.cards.map((c) => c.name.toLowerCase()));
-    const rejectedCards: string[] = [];
-    const rejectionReasons = {
-      wrongColors: [] as string[],
-      notLegal: [] as string[],
-      alreadyInDeck: [] as string[],
-      notFound: [] as string[],
-    };
-
-    for (const act of parsed.actions || []) {
-      if (act.action === 'swap') {
-        // Swap = cut + add — validate add FIRST, only push both if add passes
-        const cutCard = deck.cards.find(
-          (c) => c.name.toLowerCase() === act.cardName.toLowerCase()
-        );
-        const addCard = act.replaceWith ? resolveCard(act.replaceWith) : null;
-
-        // Validate the add side first — if it fails, skip the entire swap
-        let addValid = false;
-        let addRejectionReason = '';
-
-        if (addCard) {
-          if (!fitsColorIdentity(addCard, colorSet)) {
-            addRejectionReason = 'wrong colors';
-            rejectionReasons.wrongColors.push(addCard.name);
-          } else if (!isLegalInFormat(addCard, format)) {
-            addRejectionReason = `not legal in ${format}`;
-            rejectionReasons.notLegal.push(addCard.name);
-          } else if (existingCardNames.has(addCard.name.toLowerCase())) {
-            addRejectionReason = 'already in deck';
-            rejectionReasons.alreadyInDeck.push(addCard.name);
-          } else {
-            addValid = true;
-          }
-        } else if (act.replaceWith) {
-          addRejectionReason = 'not found in database';
-          rejectionReasons.notFound.push(act.replaceWith);
-        }
-
-        if (addValid && addCard && cutCard) {
-          // Both sides valid — push cut + add together
-          resolvedActions.push({
-            action: 'cut',
-            cardId: cutCard.id || (cutCard as unknown as { card_id: string }).card_id,
-            cardName: cutCard.name,
-            quantity: act.quantity || 1,
-            reason: act.reason,
-            imageUri: cutCard.image_uri_small || undefined,
-          });
-          resolvedActions.push({
-            action: 'add',
-            cardId: addCard.id,
-            cardName: addCard.name,
-            quantity: act.quantity || 1,
-            reason: act.reason,
-            imageUri: addCard.image_uri_small || undefined,
-          });
-        } else {
-          // Add failed — cancel entire swap, keep the cut card in deck
-          const failedName = act.replaceWith || 'unknown';
-          rejectedCards.push(`${failedName} (${addRejectionReason}) — swap cancelled, kept ${act.cardName}`);
-        }
-      } else if (act.action === 'cut') {
-        const cutCard = deck.cards.find(
-          (c) => c.name.toLowerCase() === act.cardName.toLowerCase()
-        );
-        if (cutCard) {
-          resolvedActions.push({
-            action: 'cut',
-            cardId: cutCard.id || (cutCard as unknown as { card_id: string }).card_id,
-            cardName: cutCard.name,
-            quantity: act.quantity || 1,
-            reason: act.reason,
-            imageUri: cutCard.image_uri_small || undefined,
-          });
-        }
-      } else if (act.action === 'add') {
-        const addCard = resolveCard(act.cardName);
-        if (addCard) {
-          if (!fitsColorIdentity(addCard, colorSet)) {
-            rejectedCards.push(`${addCard.name} (wrong colors)`);
-            rejectionReasons.wrongColors.push(addCard.name);
-          } else if (!isLegalInFormat(addCard, format)) {
-            rejectedCards.push(`${addCard.name} (not legal in ${format})`);
-            rejectionReasons.notLegal.push(addCard.name);
-          } else if (existingCardNames.has(addCard.name.toLowerCase())) {
-            rejectedCards.push(`${addCard.name} (already in deck)`);
-            rejectionReasons.alreadyInDeck.push(addCard.name);
-          } else {
-            resolvedActions.push({
-              action: 'add',
-              cardId: addCard.id,
-              cardName: addCard.name,
-              quantity: act.quantity || 1,
-              reason: act.reason,
-              imageUri: addCard.image_uri_small || undefined,
-            });
-          }
-        } else {
-          rejectedCards.push(`${act.cardName} (not found in database)`);
-          rejectionReasons.notFound.push(act.cardName);
-        }
-      }
-    }
-
-    // ── Enforce CUT/ADD balance for fixed-size formats ─────────────────
-    if (isCommanderLike) {
-      const addCount = resolvedActions.filter((a) => a.action === 'add').reduce((s, a) => s + a.quantity, 0);
-      const cutCount = resolvedActions.filter((a) => a.action === 'cut').reduce((s, a) => s + a.quantity, 0);
-      const sizeAfter = currentMainCount - cutCount + addCount;
-
-      // Check if these changes move the deck CLOSER to or FURTHER from the target
-      const currentDistance = Math.abs(currentMainCount - effectiveTarget);
-      const afterDistance = Math.abs(sizeAfter - effectiveTarget);
-      const movingCloser = afterDistance < currentDistance;
-      const atOrBelowTarget = sizeAfter <= effectiveTarget && sizeAfter >= effectiveTarget - 2;
-
-      // STRICT BALANCE CHECK: Reject if severely unbalanced AND moves deck further from target
-      // Allow pure cuts on oversized decks and pure adds on undersized decks
-      if (Math.abs(addCount - cutCount) > 2 && (addCount > 0 || cutCount > 0) && !movingCloser && !atOrBelowTarget) {
-        const imbalance = addCount - cutCount;
-        const warning = imbalance > 0
-          ? `Too many ADDs (${addCount}) vs CUTs (${cutCount}). Deck would become ${sizeAfter} cards.`
-          : `Too many CUTs (${cutCount}) vs ADDs (${addCount}). Deck would become ${sizeAfter} cards.`;
-
-        console.error('[AI Chat] Unbalanced suggestions:', { addCount, cutCount, currentMainCount, sizeAfter });
-
-        return NextResponse.json({
-          message: `⚠️ ${warning}\n\nFor ${format} format, every card added must replace a card being cut. Please suggest balanced swaps (use "swap" action) to maintain ${effectiveTarget} cards.`,
-          actions: [],
-        });
-      }
-
-      // MINOR IMBALANCE: Auto-correct by trimming excess
-      if (sizeAfter !== effectiveTarget && (addCount > 0 || cutCount > 0)) {
-        let excess = sizeAfter - effectiveTarget;
-
-        if (excess > 0) {
-          // Too many ADDs — trim from the end
-          for (let i = resolvedActions.length - 1; i >= 0 && excess > 0; i--) {
-            if (resolvedActions[i].action === 'add') {
-              const remove = Math.min(resolvedActions[i].quantity, excess);
-              resolvedActions[i].quantity -= remove;
-              excess -= remove;
-              if (resolvedActions[i].quantity <= 0) {
-                rejectedCards.push(`${resolvedActions[i].cardName} (auto-trimmed to maintain deck size)`);
-                resolvedActions.splice(i, 1);
-              }
-            }
-          }
-        } else if (excess < 0) {
-          // Too many CUTs — trim from the end
-          excess = Math.abs(excess);
-          for (let i = resolvedActions.length - 1; i >= 0 && excess > 0; i--) {
-            if (resolvedActions[i].action === 'cut') {
-              const remove = Math.min(resolvedActions[i].quantity, excess);
-              resolvedActions[i].quantity -= remove;
-              excess -= remove;
-              if (resolvedActions[i].quantity <= 0) {
-                resolvedActions.splice(i, 1);
-              }
-            }
-          }
-        }
-      }
-    }
-
-    // Append detailed rejection feedback to message
-    let message = parsed.message;
-    if (rejectedCards.length > 0) {
-      message += `\n\n⚠️ **Some suggestions were filtered** (server-side validation):`;
-
-      if (rejectionReasons.alreadyInDeck.length > 0) {
-        message += `\n- ❌ Already in deck: ${rejectionReasons.alreadyInDeck.join(', ')}`;
-      }
-      if (rejectionReasons.wrongColors.length > 0) {
-        message += `\n- ❌ Wrong color identity: ${rejectionReasons.wrongColors.join(', ')} (deck is {${deckColors.join(', ')}})`;
-      }
-      if (rejectionReasons.notLegal.length > 0) {
-        message += `\n- ❌ Not legal in ${format}: ${rejectionReasons.notLegal.join(', ')}`;
-      }
-      if (rejectionReasons.notFound.length > 0) {
-        message += `\n- ❌ Not found in database: ${rejectionReasons.notFound.join(', ')}`;
-      }
-
-      message += `\n\n💡 **Tip**: Check the "ALL CARDS CURRENTLY IN DECK" list in my context to avoid duplicates.`;
-    }
-
-    return NextResponse.json({
-      message,
-      actions: resolvedActions,
-    });
   } catch (error) {
     const msg =
       error instanceof Error ? error.message : 'AI chat failed';

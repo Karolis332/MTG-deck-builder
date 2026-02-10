@@ -52,10 +52,10 @@ export default function DeckBuilderPage() {
       .catch(() => {})
       .finally(() => setLoading(false));
 
-    // Check if Claude API key is configured
+    // Check if any AI API key is configured
     fetch('/api/settings')
       .then((r) => r.json())
-      .then((d) => setHasApiKey(!!d.settings?.anthropic_api_key))
+      .then((d) => setHasApiKey(!!d.settings?.anthropic_api_key || !!d.settings?.openai_api_key))
       .catch(() => {});
   }, []);
 
@@ -125,7 +125,7 @@ export default function DeckBuilderPage() {
 
     if (useClaudeBuild && isAiCommanderFormat) {
       // Claude AI-Reasoned Build
-      setAiBuildProgress(`Claude is analyzing ${aiCommander} strategies...`);
+      setAiBuildProgress(`AI is analyzing ${aiCommander} strategies...`);
       try {
         const res = await fetch('/api/decks/claude-build', {
           method: 'POST',
@@ -139,10 +139,10 @@ export default function DeckBuilderPage() {
           }),
         });
         const data = await res.json();
-        if (!res.ok) throw new Error(data.error || 'Claude build failed');
+        if (!res.ok) throw new Error(data.error || 'AI build failed');
         router.push(`/deck/${data.deckId}?showExplanation=true`);
       } catch (err) {
-        setAiError(err instanceof Error ? err.message : 'Claude build failed');
+        setAiError(err instanceof Error ? err.message : 'AI build failed');
         setAiBuilding(false);
         setAiBuildProgress('');
       }
@@ -515,12 +515,12 @@ export default function DeckBuilderPage() {
                 </div>
                 {useClaudeBuild && (
                   <p className="mt-1.5 text-[10px] text-muted-foreground">
-                    Uses your Claude API key. Takes 15-30s but provides per-card explanations.
+                    Uses your Claude or OpenAI API key. Takes 15-30s but provides per-card explanations.
                   </p>
                 )}
                 {!hasApiKey && (
                   <p className="mt-1.5 text-[10px] text-muted-foreground">
-                    Add a Claude API key in Settings to enable AI-Reasoned builds.
+                    Add a Claude or OpenAI API key in Settings to enable AI-Reasoned builds.
                   </p>
                 )}
               </div>
@@ -547,7 +547,7 @@ export default function DeckBuilderPage() {
                 {aiBuilding
                   ? (aiBuildProgress || 'Building...')
                   : useClaudeBuild
-                    ? 'Build with Claude'
+                    ? 'Build with AI'
                     : 'Build Deck'}
               </button>
             </div>

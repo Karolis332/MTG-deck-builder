@@ -30,9 +30,7 @@ export function Navbar() {
         <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 font-bold text-lg">
-            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground text-sm font-black">
-              M
-            </span>
+            <AppLogo className="h-8 w-8" />
             <span className="hidden sm:inline">
               MTG <span className="text-primary">Deck Builder</span>
             </span>
@@ -178,6 +176,42 @@ export function Navbar() {
 }
 
 // ── Inline SVG icons (no external dependency needed) ────────────────────
+
+function AppLogo({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 512 512" fill="none">
+      <defs>
+        <linearGradient id="logo-bg" x1="0" y1="0" x2="512" y2="512" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#020617"/>
+          <stop offset=".5" stopColor="#0c1631"/>
+          <stop offset="1" stopColor="#0a0a1a"/>
+        </linearGradient>
+        <linearGradient id="logo-ice" x1="256" y1="460" x2="256" y2="48" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#1e40af"/>
+          <stop offset=".4" stopColor="#38bdf8"/>
+          <stop offset=".75" stopColor="#e0f2fe"/>
+          <stop offset="1" stopColor="#ffffff"/>
+        </linearGradient>
+      </defs>
+      <rect width="512" height="512" rx="96" fill="url(#logo-bg)"/>
+      {/* Main ice crystal shard */}
+      <polygon points="256,48 288,200 288,360 256,460 224,360 224,200" fill="url(#logo-ice)" opacity=".85"/>
+      {/* Cross shards */}
+      <polygon points="100,108 236,232 252,248 216,264 80,170" fill="url(#logo-ice)" opacity=".55"/>
+      <polygon points="412,108 276,232 260,248 296,264 432,170" fill="url(#logo-ice)" opacity=".55"/>
+      <polygon points="90,408 228,284 248,264 218,248 76,368" fill="url(#logo-ice)" opacity=".45"/>
+      <polygon points="422,408 284,284 264,264 294,248 436,368" fill="url(#logo-ice)" opacity=".45"/>
+      {/* Center bright point */}
+      <circle cx="256" cy="252" r="18" fill="white" opacity=".8"/>
+      {/* Five mana colors */}
+      <circle cx="256" cy="80" r="12" fill="#fbbf24" opacity=".9"/>
+      <circle cx="400" cy="180" r="11" fill="#3b82f6" opacity=".9"/>
+      <circle cx="360" cy="390" r="11" fill="#a855f7" opacity=".85"/>
+      <circle cx="152" cy="390" r="11" fill="#ef4444" opacity=".85"/>
+      <circle cx="112" cy="180" r="11" fill="#22c55e" opacity=".9"/>
+    </svg>
+  );
+}
 
 function HomeIcon({ className }: { className?: string }) {
   return (

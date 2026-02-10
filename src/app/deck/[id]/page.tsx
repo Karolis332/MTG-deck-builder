@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useMemo } from 'react';
 import { useRouter, useParams, useSearchParams } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import type { DbCard, DeckCardEntry, AISuggestion } from '@/lib/types';
@@ -16,6 +16,7 @@ import { MatchLogPanel } from '@/components/match-log-panel';
 import { AIChatPanel } from '@/components/ai-chat-panel';
 import { ImportDialog } from '@/components/import-dialog';
 import { VersionHistoryPanel } from '@/components/version-history-panel';
+import { CardZoomOverlay } from '@/components/card-zoom-overlay';
 import { FORMAT_LABELS, FORMATS, COMMANDER_FORMATS, DEFAULT_DECK_SIZE } from '@/lib/constants';
 
 interface DeckData {
@@ -74,6 +75,15 @@ export default function DeckEditorPage() {
   const [selectedCard, setSelectedCard] = useState<DbCard | null>(null);
   const [editingName, setEditingName] = useState(false);
   const [deckName, setDeckName] = useState('');
+
+  // Zoom state
+  const [zoomedCard, setZoomedCard] = useState<DbCard | null>(null);
+  const [zoomPosition, setZoomPosition] = useState({ x: 0, y: 0 });
+
+  // Filter state
+  const [filterManaValues, setFilterManaValues] = useState<number[]>([]);
+  const [filterColors, setFilterColors] = useState<string[]>([]);
+  const [filterTypes, setFilterTypes] = useState<string[]>([]);
 
   // AI state
   const [suggestions, setSuggestions] = useState<AISuggestion[]>([]);
@@ -182,6 +192,45 @@ export default function DeckEditorPage() {
       setSearchResults((prev) => [...prev, ...(data.cards || [])]);
     } catch {}
   };
+
+  // Filtered search results
+  const filteredSearchResults = useMemo(() => {
+    let cards = searchResults;
+
+    if (filterManaValues.length > 0) {
+      cards = cards.filter((c) => {
+        const has7Plus = filterManaValues.includes(7);
+        const exactValues = filterManaValues.filter((v) => v < 7);
+        return exactValues.includes(c.cmc) || (has7Plus && c.cmc >= 7);
+      });
+    }
+
+    if (filterColors.length > 0) {
+      cards = cards.filter((c) => {
+        const ci: string[] = c.color_identity ? JSON.parse(c.color_identity) : [];
+        return filterColors.some((fc) => ci.includes(fc));
+      });
+    }
+
+    if (filterTypes.length > 0) {
+      cards = cards.filter((c) =>
+        filterTypes.some((ft) => c.type_line.includes(ft))
+      );
+    }
+
+    return cards;
+  }, [searchResults, filterManaValues, filterColors, filterTypes]);
+
+  const hasActiveFilters = filterManaValues.length > 0 || filterColors.length > 0 || filterTypes.length > 0;
+
+  const handleCardZoom = useCallback((card: DbCard, position: { x: number; y: number }) => {
+    setZoomedCard(card);
+    setZoomPosition(position);
+  }, []);
+
+  const closeZoom = useCallback(() => {
+    setZoomedCard(null);
+  }, []);
 
   // Deck mutations
   const addCardToDeck = async (card: DbCard, board = 'main') => {
@@ -647,12 +696,112 @@ export default function DeckEditorPage() {
               activePanel === 'search' ? 'flex w-full' : 'hidden'
             )}
           >
-            <div className="shrink-0 p-3">
+            <div className="shrink-0 p-3 pb-0">
               <SearchBar
                 onSearch={handleSearch}
                 placeholder="Search cards to add..."
                 autoFocus
               />
+            </div>
+
+            {/* Search filters */}
+            <div className="shrink-0 px-3 py-2 space-y-1.5">
+              <div className="flex flex-wrap items-center gap-1">
+                {/* Mana value */}
+                {[0, 1, 2, 3, 4, 5, 6, 7].map((mv) => (
+                  <button
+                    key={mv}
+                    onClick={() =>
+                      setFilterManaValues((prev) =>
+                        prev.includes(mv) ? prev.filter((v) => v !== mv) : [...prev, mv]
+                      )
+                    }
+                    className={cn(
+                      'flex h-6 w-6 items-center justify-center rounded text-[10px] font-medium border transition-colors',
+                      filterManaValues.includes(mv)
+                        ? 'bg-primary text-primary-foreground border-primary'
+                        : 'bg-card text-muted-foreground border-border hover:border-foreground/30'
+                    )}
+                    title={`CMC ${mv === 7 ? '7+' : mv}`}
+                  >
+                    {mv === 7 ? '7+' : mv}
+                  </button>
+                ))}
+
+                <span className="mx-1 h-4 w-px bg-border" />
+
+                {/* Colors */}
+                {(['W', 'U', 'B', 'R', 'G'] as const).map((color) => {
+                  const colorStyles: Record<string, string> = {
+                    W: 'bg-amber-50 text-amber-900 border-amber-300',
+                    U: 'bg-blue-600 text-white border-blue-500',
+                    B: 'bg-zinc-800 text-zinc-100 border-zinc-600',
+                    R: 'bg-red-600 text-white border-red-500',
+                    G: 'bg-green-700 text-white border-green-600',
+                  };
+                  const active = filterColors.includes(color);
+                  return (
+                    <button
+                      key={color}
+                      onClick={() =>
+                        setFilterColors((prev) =>
+                          prev.includes(color) ? prev.filter((c) => c !== color) : [...prev, color]
+                        )
+                      }
+                      className={cn(
+                        'flex h-6 w-6 items-center justify-center rounded text-[10px] font-bold border transition-all',
+                        active
+                          ? colorStyles[color]
+                          : 'bg-card text-muted-foreground border-border hover:border-foreground/30'
+                      )}
+                      title={color}
+                    >
+                      {color}
+                    </button>
+                  );
+                })}
+
+                <span className="mx-1 h-4 w-px bg-border" />
+
+                {/* Types */}
+                {['Creature', 'Instant', 'Sorcery', 'Enchantment', 'Artifact', 'Planeswalker', 'Land'].map((type) => {
+                  const active = filterTypes.includes(type);
+                  return (
+                    <button
+                      key={type}
+                      onClick={() =>
+                        setFilterTypes((prev) =>
+                          prev.includes(type) ? prev.filter((t) => t !== type) : [...prev, type]
+                        )
+                      }
+                      className={cn(
+                        'rounded px-1.5 py-0.5 text-[10px] font-medium border transition-colors',
+                        active
+                          ? 'bg-primary text-primary-foreground border-primary'
+                          : 'bg-card text-muted-foreground border-border hover:border-foreground/30'
+                      )}
+                    >
+                      {type.slice(0, 4)}
+                    </button>
+                  );
+                })}
+
+                {hasActiveFilters && (
+                  <>
+                    <span className="mx-1 h-4 w-px bg-border" />
+                    <button
+                      onClick={() => {
+                        setFilterManaValues([]);
+                        setFilterColors([]);
+                        setFilterTypes([]);
+                      }}
+                      className="text-[10px] text-muted-foreground hover:text-foreground"
+                    >
+                      Clear
+                    </button>
+                  </>
+                )}
+              </div>
             </div>
 
             {/* AI Suggestions */}
@@ -819,11 +968,12 @@ export default function DeckEditorPage() {
 
             <div className="flex-1 overflow-auto p-3">
               <CardGrid
-                cards={searchResults}
+                cards={filteredSearchResults}
                 loading={searchLoading}
                 size="small"
                 onCardClick={(card) => setSelectedCard(card)}
                 onAddCard={(card) => addCardToDeck(card)}
+                onCardZoom={handleCardZoom}
                 showQuantity={(card) => {
                   const entry = deck.cards.find(
                     (c) => (c.card_id || c.id) === card.id
@@ -832,7 +982,9 @@ export default function DeckEditorPage() {
                 }}
                 emptyMessage={
                   searchQuery
-                    ? 'No cards found. Try a different search.'
+                    ? hasActiveFilters
+                      ? 'No cards match your filters. Try adjusting or clearing them.'
+                      : 'No cards found. Try a different search.'
                     : 'Search for cards to add to your deck'
                 }
               />
@@ -958,6 +1110,7 @@ export default function DeckEditorPage() {
                 onRemove={removeCardFromDeck}
                 onSetCommander={setAsCommander}
                 onSetCoverCard={setCoverCard}
+                onCardZoom={handleCardZoom}
                 isCommanderFormat={isCommanderFormat}
               />
             </div>
@@ -1021,6 +1174,12 @@ export default function DeckEditorPage() {
             .then(r => r.json())
             .then(data => { if (data.deck) setDeck(data.deck); });
         }}
+      />
+
+      <CardZoomOverlay
+        card={zoomedCard}
+        position={zoomPosition}
+        onClose={closeZoom}
       />
     </>
   );

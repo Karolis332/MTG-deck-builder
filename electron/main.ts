@@ -168,6 +168,11 @@ function createMainWindow(): void {
 
   mainWindow.loadURL(`http://localhost:${PORT}`);
 
+  // Suppress Electron's native context menu so the app can handle right-click
+  mainWindow.webContents.on('context-menu', (e) => {
+    e.preventDefault();
+  });
+
   mainWindow.on('closed', () => {
     mainWindow = null;
   });

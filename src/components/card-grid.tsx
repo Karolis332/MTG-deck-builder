@@ -10,6 +10,7 @@ interface CardGridProps {
   cards: DbCard[];
   onCardClick?: (card: DbCard) => void;
   onAddCard?: (card: DbCard) => void;
+  onCardZoom?: (card: DbCard, position: { x: number; y: number }) => void;
   showQuantity?: (card: DbCard) => number;
   emptyMessage?: string;
   loading?: boolean;
@@ -21,6 +22,7 @@ export function CardGrid({
   cards,
   onCardClick,
   onAddCard,
+  onCardZoom,
   showQuantity,
   emptyMessage = 'No cards found',
   loading = false,
@@ -74,7 +76,16 @@ export function CardGrid({
       {cards.map((card) => {
         const qty = showQuantity ? showQuantity(card) : 0;
         return (
-          <div key={card.id} className="group relative">
+          <div
+            key={card.id}
+            className="group relative"
+            onContextMenu={(e) => {
+              if (onCardZoom) {
+                e.preventDefault();
+                onCardZoom(card, { x: e.clientX, y: e.clientY });
+              }
+            }}
+          >
             <CardImage
               card={card}
               size={size}

@@ -1,6 +1,6 @@
 {
   "name": "mtg-deck-builder",
-  "version": "0.1.0-alpha.3",
+  "version": "0.1.0-alpha.4",
   "private": true,
   "main": "electron-dist/electron/main.js",
   "scripts": {
@@ -53,6 +53,7 @@
     "eslint": "^8.57.1",
     "eslint-config-next": "^14.2.21",
     "postcss": "^8.4.49",
+    "sharp": "^0.34.5",
     "tailwindcss": "^3.4.17",
     "tsx": "^4.19.2",
     "typescript": "^5.7.3",

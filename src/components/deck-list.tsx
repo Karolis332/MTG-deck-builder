@@ -21,6 +21,7 @@ interface DeckListProps {
   onRemove?: (cardId: string, board: string) => void;
   onSetCommander?: (cardId: string) => void;
   onSetCoverCard?: (cardId: string) => void;
+  onCardZoom?: (card: DbCard, position: { x: number; y: number }) => void;
   isCommanderFormat?: boolean;
   className?: string;
 }
@@ -56,6 +57,7 @@ export function DeckList({
   onRemove,
   onSetCommander,
   onSetCoverCard,
+  onCardZoom,
   isCommanderFormat,
   className,
 }: DeckListProps) {
@@ -120,6 +122,7 @@ export function DeckList({
           onQuantityChange={onQuantityChange}
           onRemove={onRemove}
           onSetCoverCard={onSetCoverCard}
+          onCardZoom={onCardZoom}
           favourites={favourites}
           onToggleFavourite={deckId ? toggleFavourite : undefined}
         />
@@ -143,6 +146,7 @@ export function DeckList({
             onRemove={onRemove}
             onSetCommander={onSetCommander}
             onSetCoverCard={onSetCoverCard}
+            onCardZoom={onCardZoom}
             isCommanderFormat={isCommanderFormat}
             favourites={favourites}
             onToggleFavourite={deckId ? toggleFavourite : undefined}
@@ -162,6 +166,7 @@ export function DeckList({
             cards={sideCards}
             onQuantityChange={onQuantityChange}
             onRemove={onRemove}
+            onCardZoom={onCardZoom}
             hideHeader
             favourites={favourites}
             onToggleFavourite={deckId ? toggleFavourite : undefined}
@@ -189,6 +194,7 @@ function DeckSection({
   onRemove,
   onSetCommander,
   onSetCoverCard,
+  onCardZoom,
   isCommanderFormat,
   hideHeader,
   favourites,
@@ -201,6 +207,7 @@ function DeckSection({
   onRemove?: (cardId: string, board: string) => void;
   onSetCommander?: (cardId: string) => void;
   onSetCoverCard?: (cardId: string) => void;
+  onCardZoom?: (card: DbCard, position: { x: number; y: number }) => void;
   isCommanderFormat?: boolean;
   hideHeader?: boolean;
   favourites?: Set<string>;
@@ -225,6 +232,7 @@ function DeckSection({
             onRemove={onRemove}
             onSetCommander={onSetCommander}
             onSetCoverCard={onSetCoverCard}
+            onCardZoom={onCardZoom}
             isCommanderFormat={isCommanderFormat}
             isFavourite={favourites?.has(entry.card_id)}
             onToggleFavourite={onToggleFavourite}
@@ -241,6 +249,7 @@ function DeckCardRow({
   onRemove,
   onSetCommander,
   onSetCoverCard,
+  onCardZoom,
   isCommanderFormat,
   isFavourite,
   onToggleFavourite,
@@ -250,6 +259,7 @@ function DeckCardRow({
   onRemove?: (cardId: string, board: string) => void;
   onSetCommander?: (cardId: string) => void;
   onSetCoverCard?: (cardId: string) => void;
+  onCardZoom?: (card: DbCard, position: { x: number; y: number }) => void;
   isCommanderFormat?: boolean;
   isFavourite?: boolean;
   onToggleFavourite?: (cardId: string) => void;
@@ -271,6 +281,12 @@ function DeckCardRow({
       )}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
+      onContextMenu={(e) => {
+        if (onCardZoom) {
+          e.preventDefault();
+          onCardZoom(card, { x: e.clientX, y: e.clientY });
+        }
+      }}
     >
       {/* Large card hover preview */}
       {hovered && largeUrl && (

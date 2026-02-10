@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import { cn } from '@/lib/utils';
 
 interface ChatAction {
@@ -98,6 +98,7 @@ export function AIChatPanel({ deckId, onApplyActions, className }: AIChatPanelPr
   const [checkedActions, setCheckedActions] = useState<Map<number, Set<number>>>(new Map());
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const abortControllerRef = useRef<AbortController | null>(null);
 
   // Scroll to bottom on new messages
   useEffect(() => {
@@ -141,20 +142,35 @@ export function AIChatPanel({ deckId, onApplyActions, className }: AIChatPanelPr
     });
   };
 
-  const sendMessage = async () => {
-    const text = input.trim();
+  const stopStreaming = useCallback(() => {
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort();
+      abortControllerRef.current = null;
+    }
+  }, []);
+
+  const sendMessage = useCallback(async (overrideText?: string, retryHint?: boolean) => {
+    const text = overrideText || input.trim();
     if (!text || loading) return;
 
-    const userMsg: ChatMessage = { role: 'user', content: text };
-    setMessages((prev) => [...prev, userMsg]);
-    setInput('');
+    if (!overrideText) {
+      const userMsg: ChatMessage = { role: 'user', content: text };
+      setMessages((prev) => [...prev, userMsg]);
+      setInput('');
+    }
     setLoading(true);
+
+    const abortController = new AbortController();
+    abortControllerRef.current = abortController;
 
     try {
       // Build history for context — include applied-action metadata
-      const history = messages.map((m) => {
+      const currentMessages = await new Promise<ChatMessage[]>(resolve => {
+        setMessages(prev => { resolve(prev); return prev; });
+      });
+
+      const history = currentMessages.map((m) => {
         let content = m.content;
-        // If this assistant message had actions that were applied, append that info
         if (m.role === 'assistant' && m.actionsApplied && m.actions) {
           const cuts = m.actions.filter(a => a.action === 'cut').map(a => a.cardName);
           const adds = m.actions.filter(a => a.action === 'add').map(a => a.cardName);
@@ -163,42 +179,144 @@ export function AIChatPanel({ deckId, onApplyActions, className }: AIChatPanelPr
         return { role: m.role, content };
       });
 
+      const promptText = retryHint
+        ? `[USER REJECTED PREVIOUS RESPONSE — suggest different cards] ${text}`
+        : text;
+
       const res = await fetch('/api/ai-suggest/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           deck_id: deckId,
-          prompt: text,
+          prompt: promptText,
           history,
         }),
+        signal: abortController.signal,
       });
 
-      const data = await res.json();
+      const contentType = res.headers.get('content-type') || '';
 
-      if (data.error) {
-        setMessages((prev) => [
-          ...prev,
-          { role: 'assistant', content: `Error: ${data.error}` },
-        ]);
+      if (contentType.includes('text/event-stream')) {
+        // ── Streaming response ──────────────────────────────────────────
+        // Add placeholder assistant message
+        setMessages(prev => [...prev, { role: 'assistant', content: '' }]);
+
+        const reader = res.body!.getReader();
+        const decoder = new TextDecoder();
+        let buffer = '';
+
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+
+          buffer += decoder.decode(value, { stream: true });
+          const lines = buffer.split('\n');
+          // Keep the last potentially incomplete line in the buffer
+          buffer = lines.pop() || '';
+
+          for (const line of lines) {
+            if (!line.startsWith('data: ')) continue;
+            const payload = line.slice(6).trim();
+            if (!payload || payload === '[DONE]') continue;
+
+            try {
+              const event = JSON.parse(payload);
+
+              if (event.type === 'text') {
+                setMessages(prev => {
+                  const updated = [...prev];
+                  const last = updated[updated.length - 1];
+                  if (last && last.role === 'assistant') {
+                    updated[updated.length - 1] = { ...last, content: last.content + event.content };
+                  }
+                  return updated;
+                });
+              } else if (event.type === 'complete') {
+                setMessages(prev => {
+                  const updated = [...prev];
+                  const last = updated[updated.length - 1];
+                  if (last && last.role === 'assistant') {
+                    updated[updated.length - 1] = {
+                      ...last,
+                      content: event.message || last.content,
+                      actions: event.actions?.length > 0 ? event.actions : undefined,
+                    };
+                  }
+                  return updated;
+                });
+              } else if (event.type === 'error') {
+                setMessages(prev => {
+                  const updated = [...prev];
+                  const last = updated[updated.length - 1];
+                  if (last && last.role === 'assistant') {
+                    updated[updated.length - 1] = { ...last, content: `Error: ${event.error}` };
+                  }
+                  return updated;
+                });
+              }
+            } catch {
+              // Malformed SSE line — skip
+            }
+          }
+        }
+      } else {
+        // ── JSON response (fast-path) ───────────────────────────────────
+        const data = await res.json();
+
+        if (data.error) {
+          setMessages((prev) => [
+            ...prev,
+            { role: 'assistant', content: `Error: ${data.error}` },
+          ]);
+        } else {
+          setMessages((prev) => [
+            ...prev,
+            {
+              role: 'assistant',
+              content: data.message || 'No response',
+              actions: data.actions?.length > 0 ? data.actions : undefined,
+            },
+          ]);
+        }
+      }
+    } catch (err) {
+      if (err instanceof DOMException && err.name === 'AbortError') {
+        // User stopped streaming — keep partial text, no error
       } else {
         setMessages((prev) => [
           ...prev,
-          {
-            role: 'assistant',
-            content: data.message || 'No response',
-            actions: data.actions?.length > 0 ? data.actions : undefined,
-          },
+          { role: 'assistant', content: 'Failed to connect to AI service.' },
         ]);
       }
-    } catch {
-      setMessages((prev) => [
-        ...prev,
-        { role: 'assistant', content: 'Failed to connect to AI service.' },
-      ]);
     } finally {
       setLoading(false);
+      abortControllerRef.current = null;
     }
-  };
+  }, [input, loading, deckId]);
+
+  const handleRetry = useCallback(() => {
+    if (loading) return;
+
+    // Find the last assistant message and the preceding user message
+    setMessages(prev => {
+      const lastAssistantIdx = prev.length - 1;
+      if (lastAssistantIdx < 0 || prev[lastAssistantIdx].role !== 'assistant') return prev;
+
+      // Find the preceding user message
+      let userMsgIdx = lastAssistantIdx - 1;
+      while (userMsgIdx >= 0 && prev[userMsgIdx].role !== 'user') userMsgIdx--;
+      if (userMsgIdx < 0) return prev;
+
+      const userText = prev[userMsgIdx].content;
+      // Remove the last assistant message
+      const updated = prev.slice(0, lastAssistantIdx);
+
+      // Trigger re-send after state update
+      setTimeout(() => sendMessage(userText, true), 0);
+
+      return updated;
+    });
+  }, [loading, sendMessage]);
 
   const handleApplyActions = async (msgIndex: number) => {
     const msg = messages[msgIndex];
@@ -230,6 +348,10 @@ export function AIChatPanel({ deckId, onApplyActions, className }: AIChatPanelPr
       </button>
     );
   }
+
+  const lastMsgIdx = messages.length - 1;
+  const lastMsg = lastMsgIdx >= 0 ? messages[lastMsgIdx] : null;
+  const showRetry = lastMsg?.role === 'assistant' && !loading;
 
   return (
     <div
@@ -311,6 +433,18 @@ export function AIChatPanel({ deckId, onApplyActions, className }: AIChatPanelPr
             >
               {msg.role === 'assistant' ? renderMarkdown(msg.content) : msg.content}
             </div>
+
+            {/* Retry button — only on last assistant message when not loading */}
+            {msg.role === 'assistant' && i === lastMsgIdx && showRetry && (
+              <button
+                onClick={handleRetry}
+                className="mt-1 flex items-center gap-1 rounded px-1.5 py-0.5 text-[10px] text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+                title="Regenerate response"
+              >
+                <RetryIcon className="h-3 w-3" />
+                Retry
+              </button>
+            )}
 
             {/* Action cards */}
             {msg.actions && msg.actions.length > 0 && (() => {
@@ -407,20 +541,34 @@ export function AIChatPanel({ deckId, onApplyActions, className }: AIChatPanelPr
             onKeyDown={(e) => {
               if (e.key === 'Enter' && !e.shiftKey) {
                 e.preventDefault();
-                sendMessage();
+                if (loading) {
+                  stopStreaming();
+                } else {
+                  sendMessage();
+                }
               }
             }}
             placeholder="Ask AI to tune your deck..."
             disabled={loading}
             className="flex-1 rounded-lg border border-border bg-background px-3 py-1.5 text-xs outline-none placeholder:text-muted-foreground focus:border-primary"
           />
-          <button
-            onClick={sendMessage}
-            disabled={loading || !input.trim()}
-            className="shrink-0 rounded-lg bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-50"
-          >
-            <SendIcon className="h-3.5 w-3.5" />
-          </button>
+          {loading ? (
+            <button
+              onClick={stopStreaming}
+              className="shrink-0 rounded-lg bg-red-500/80 px-3 py-1.5 text-xs font-medium text-white transition-colors hover:bg-red-500"
+              title="Stop generating"
+            >
+              <StopIcon className="h-3.5 w-3.5" />
+            </button>
+          ) : (
+            <button
+              onClick={() => sendMessage()}
+              disabled={!input.trim()}
+              className="shrink-0 rounded-lg bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-50"
+            >
+              <SendIcon className="h-3.5 w-3.5" />
+            </button>
+          )}
         </div>
       </div>
     </div>
@@ -441,6 +589,14 @@ function SendIcon({ className }: { className?: string }) {
     <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <line x1="22" y1="2" x2="11" y2="13" />
       <polygon points="22,2 15,22 11,13 2,9 22,2" />
+    </svg>
+  );
+}
+
+function StopIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+      <rect x="6" y="6" width="12" height="12" rx="1" />
     </svg>
   );
 }
@@ -467,6 +623,15 @@ function CheckIcon({ className }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
       <polyline points="20,6 9,17 4,12" />
+    </svg>
+  );
+}
+
+function RetryIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="1,4 1,10 7,10" />
+      <path d="M3.51 15a9 9 0 102.13-9.36L1 10" />
     </svg>
   );
 }

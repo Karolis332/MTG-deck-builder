@@ -11,6 +11,8 @@ A desktop application for building, analyzing, and improving Magic: The Gatherin
 - **AI Chat** — Conversational deck tuning: ask for cuts, additions, strategy advice. Context-aware of your full deck, collection, and format rules. Selective apply lets you pick which suggestions to keep
 - **Commander Synergy Engine** — Analyzes commander oracle text across 12 trigger categories (ETB, dies, attack, spellcast, etc.) to score every candidate card
 - **11 Archetype Templates** — Aggro, midrange, control, combo, aristocrats, spellslinger, voltron, tribal, group hug, stax, superfriends — with tuned mana curves and slot ratios
+- **Right-Click Card Zoom** — Right-click any card in the search grid or deck list to see a large card preview overlay, positioned near the cursor
+- **Search Filters** — Filter card search results by mana value (0–7+), color identity (W/U/B/R/G), and card type — all filters stack with AND logic between categories
 - **EDHREC Integration** — Community synergy data, average decklists, and strategy articles baked into AI prompts
 - **Arena Integration** — Parse your Player.log to import match results, deck submissions, and collection automatically
 - **Analytics Dashboard** — Win rates by deck/format/opponent, card performance tracking, mana curve analysis
@@ -194,7 +196,7 @@ py scripts/import_user_data.py their-export.json
 - **Card Data**: Scryfall API + EDHREC
 - **Auth**: JWT + scrypt password hashing
 - **Language**: TypeScript (strict) + Python 3.13
-- **Testing**: Vitest (161 tests)
+- **Testing**: Vitest (186 tests)
 
 ## License
 

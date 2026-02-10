@@ -24,6 +24,11 @@ export interface ElectronAPI {
   onWatcherCollection: (data: unknown) => () => void;
   onWatcherError: (callback: (error: string) => void) => () => void;
 
+  // ML Pipeline
+  runMLPipeline: (options: { steps?: string; target?: string }) => Promise<{ ok: boolean; error?: string }>;
+  cancelMLPipeline: () => Promise<void>;
+  onMLPipelineOutput: (callback: (data: { type: string; line: string; code?: number }) => void) => () => void;
+
   getPlatform: () => Promise<string>;
   isElectron: boolean;
 }

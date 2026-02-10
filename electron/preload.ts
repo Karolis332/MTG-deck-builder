@@ -26,6 +26,15 @@ contextBridge.exposeInMainWorld('electronAPI', {
     return () => ipcRenderer.removeAllListeners('watcher-error');
   },
 
+  // ML Pipeline
+  runMLPipeline: (options: { steps?: string; target?: string }) =>
+    ipcRenderer.invoke('run-ml-pipeline', options),
+  cancelMLPipeline: () => ipcRenderer.invoke('cancel-ml-pipeline'),
+  onMLPipelineOutput: (callback: (data: { type: string; line: string; code?: number }) => void) => {
+    ipcRenderer.on('ml-pipeline-output', (_event, data) => callback(data));
+    return () => ipcRenderer.removeAllListeners('ml-pipeline-output');
+  },
+
   // Platform info
   getPlatform: () => ipcRenderer.invoke('get-platform'),
   isElectron: true,

@@ -1,12 +1,12 @@
 /**
- * Claude-powered deck builder — uses the Claude API to reason about
+ * AI-powered deck builder — uses Claude or OpenAI to reason about
  * card selection from a pre-scored candidate pool.
  *
  * Flow:
  * 1. Reuse buildScoredCandidatePool() for candidate generation + scoring
  * 2. Compress top 120 candidates into a token-efficient format
  * 3. Inject EDHREC average decklist as "community consensus"
- * 4. Send structured prompt to Claude for final card selection
+ * 4. Send structured prompt to Claude or OpenAI for final card selection
  * 5. Parse response, validate, fill gaps algorithmically, add lands
  */
 
@@ -57,6 +57,14 @@ function getClaudeKey(): string | null {
   return row?.value || null;
 }
 
+function getOpenAIKey(): string | null {
+  const db = getDb();
+  const row = db
+    .prepare("SELECT value FROM app_state WHERE key = 'setting_openai_api_key'")
+    .get() as { value: string } | undefined;
+  return row?.value || null;
+}
+
 function getClaudeModel(): string {
   const db = getDb();
   const row = db
@@ -94,6 +102,70 @@ function extractJson(text: string): string {
   if (jsonObjMatch) return jsonObjMatch[0];
 
   return text;
+}
+
+// ── Provider API Calls ──────────────────────────────────────────────────────
+
+async function callClaude(prompt: string, apiKey: string, model: string) {
+  const response = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-api-key': apiKey,
+      'anthropic-version': '2023-06-01',
+    },
+    body: JSON.stringify({
+      model,
+      max_tokens: 4096,
+      temperature: 0.4,
+      messages: [{ role: 'user', content: prompt }],
+    }),
+    signal: AbortSignal.timeout(60000),
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    console.error('[AI Build] Claude API error:', response.status, errorText);
+    throw new Error(`Claude API error: ${response.status}`);
+  }
+
+  const data = await response.json();
+  return {
+    text: data.content?.[0]?.text || '',
+    inputTokens: data.usage?.input_tokens || 0,
+    outputTokens: data.usage?.output_tokens || 0,
+  };
+}
+
+async function callOpenAI(prompt: string, apiKey: string) {
+  const response = await fetch('https://api.openai.com/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${apiKey}`,
+    },
+    body: JSON.stringify({
+      model: 'gpt-4o',
+      messages: [{ role: 'user', content: prompt }],
+      temperature: 0.4,
+      max_tokens: 4096,
+      response_format: { type: 'json_object' },
+    }),
+    signal: AbortSignal.timeout(90000),
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    console.error('[AI Build] OpenAI API error:', response.status, errorText);
+    throw new Error(`OpenAI API error: ${response.status}`);
+  }
+
+  const data = await response.json();
+  return {
+    text: data.choices?.[0]?.message?.content || '',
+    inputTokens: data.usage?.prompt_tokens || 0,
+    outputTokens: data.usage?.completion_tokens || 0,
+  };
 }
 
 // ── Prompt Builder ───────────────────────────────────────────────────────────
@@ -172,18 +244,18 @@ RULES:
 
 // ── Main Builder ─────────────────────────────────────────────────────────────
 
-export async function buildDeckWithClaude(
+export async function buildDeckWithAI(
   options: ClaudeBuildOptions
 ): Promise<ClaudeBuildResult> {
   const startTime = Date.now();
   const db = getDb();
 
-  const apiKey = getClaudeKey();
-  if (!apiKey) {
-    throw new Error('No Claude API key configured. Add it in Settings.');
+  // Provider selection: Claude preferred, OpenAI fallback
+  const claudeKey = getClaudeKey();
+  const openaiKey = getOpenAIKey();
+  if (!claudeKey && !openaiKey) {
+    throw new Error('No AI API key configured. Add a Claude or OpenAI key in Settings.');
   }
-
-  const modelId = getClaudeModel();
 
   // Step 1: Get scored candidate pool
   const buildOptions: BuildOptions = {
@@ -209,33 +281,26 @@ export async function buildDeckWithClaude(
   // Step 4: Build prompt
   const prompt = buildClaudePrompt(poolResult, candidates, edhrecCards, options.commanderName);
 
-  // Step 5: Call Claude API
-  const response = await fetch('https://api.anthropic.com/v1/messages', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'x-api-key': apiKey,
-      'anthropic-version': '2023-06-01',
-    },
-    body: JSON.stringify({
-      model: modelId,
-      max_tokens: 4096,
-      temperature: 0.4,
-      messages: [{ role: 'user', content: prompt }],
-    }),
-    signal: AbortSignal.timeout(60000),
-  });
+  // Step 5: Call AI provider
+  let content: string;
+  let inputTokens: number;
+  let outputTokens: number;
+  let modelUsed: string;
 
-  if (!response.ok) {
-    const errorText = await response.text();
-    console.error('[Claude Build] API error:', response.status, errorText);
-    throw new Error(`Claude API error: ${response.status}`);
+  if (claudeKey) {
+    const modelId = getClaudeModel();
+    const result = await callClaude(prompt, claudeKey, modelId);
+    content = result.text;
+    inputTokens = result.inputTokens;
+    outputTokens = result.outputTokens;
+    modelUsed = modelId;
+  } else {
+    const result = await callOpenAI(prompt, openaiKey!);
+    content = result.text;
+    inputTokens = result.inputTokens;
+    outputTokens = result.outputTokens;
+    modelUsed = 'gpt-4o';
   }
-
-  const data = await response.json();
-  const content = data.content?.[0]?.text || '';
-  const inputTokens = data.usage?.input_tokens || 0;
-  const outputTokens = data.usage?.output_tokens || 0;
 
   // Step 6: Parse response
   let parsed: { strategy: string; cards: Array<{ name: string; role: string; reason: string }> };
@@ -243,12 +308,12 @@ export async function buildDeckWithClaude(
     const jsonText = extractJson(content);
     parsed = JSON.parse(jsonText);
   } catch (err) {
-    console.error('[Claude Build] Failed to parse response:', content.slice(0, 500));
-    throw new Error('Claude returned invalid JSON. Try again.');
+    console.error('[AI Build] Failed to parse response:', content.slice(0, 500));
+    throw new Error('AI returned invalid JSON. Try again.');
   }
 
   if (!parsed.cards || !Array.isArray(parsed.cards)) {
-    throw new Error('Claude response missing cards array.');
+    throw new Error('AI response missing cards array.');
   }
 
   // Step 7: Resolve card names to DbCard via DB lookup
@@ -294,7 +359,7 @@ export async function buildDeckWithClaude(
     pickedNames.add(key);
   }
 
-  // Step 8: Fill gaps from algorithmic pool if Claude returned fewer cards
+  // Step 8: Fill gaps from algorithmic pool if AI returned fewer cards
   const { nonLandTarget } = poolResult;
   if (resolvedCards.length < nonLandTarget) {
     for (const { card } of candidates) {
@@ -306,7 +371,7 @@ export async function buildDeckWithClaude(
         quantity: 1,
         board: 'main',
         role: 'Utility',
-        reason: 'Algorithmic fill (Claude undercount)',
+        reason: 'Algorithmic fill (AI undercount)',
       });
       pickedNames.add(card.name.toLowerCase());
     }
@@ -340,7 +405,7 @@ export async function buildDeckWithClaude(
     themes: poolResult.themes,
     tribalType: poolResult.tribalType || undefined,
     commanderSynergy: poolResult.commanderProfile || undefined,
-    modelUsed: modelId,
+    modelUsed,
     tokenUsage: { input: inputTokens, output: outputTokens },
     buildTimeMs,
   };

@@ -55,3 +55,16 @@ electron-error.log
 
 # claude code
 .claude/
+
+# temp analysis/reference docs
+AI_ISSUES_ANALYSIS.md
+AI_MODULE_PLAN.md
+DATABASE_ANALYSIS_REPORT.md
+DECK_RATIOS_RESEARCH_COMPLETE.txt
+QUICK_DB_STATUS.md
+TEST_PLAN.md
+_reference/
+test-data-export-import/
+check_community_cards.py
+check_db_data.py
+=4.12.0

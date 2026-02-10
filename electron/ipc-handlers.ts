@@ -1,4 +1,6 @@
 import { ipcMain, dialog, BrowserWindow } from 'electron';
+import { spawn, ChildProcess } from 'child_process';
+import { execSync } from 'child_process';
 import fs from 'fs';
 import os from 'os';
 import path from 'path';
@@ -7,6 +9,7 @@ import { ArenaLogWatcher } from './arena-log-watcher';
 import { parseArenaLogFile } from '../src/lib/arena-log-reader';
 
 let watcher: ArenaLogWatcher | null = null;
+let mlProcess: ChildProcess | null = null;
 
 function getDefaultLogPath(): string {
   if (process.platform === 'win32') {
@@ -167,5 +170,104 @@ export function registerIpcHandlers(): void {
       return { running: false, logPath: null, matchCount: 0 };
     }
     return watcher.getStatus();
+  });
+
+  // ── ML Pipeline ─────────────────────────────────────────────────────────
+
+  ipcMain.handle('run-ml-pipeline', (_event, options: { steps?: string; target?: string }) => {
+    if (mlProcess) {
+      return { ok: false, error: 'Pipeline is already running' };
+    }
+
+    try {
+      // Find Python executable
+      const candidates = process.platform === 'win32'
+        ? ['py', 'python3', 'python']
+        : ['python3', 'python'];
+
+      let pythonCmd = '';
+      for (const cmd of candidates) {
+        try {
+          execSync(`${cmd} --version`, { stdio: 'pipe', timeout: 5000 });
+          pythonCmd = cmd;
+          break;
+        } catch {
+          // try next
+        }
+      }
+
+      if (!pythonCmd) {
+        return { ok: false, error: 'Python not found. Install Python 3.x.' };
+      }
+
+      const projectDir = path.resolve(__dirname, '..');
+      const scriptPath = path.join(projectDir, 'scripts', 'pipeline.py');
+      const dbPath = path.join(projectDir, 'data', 'mtg-deck-builder.db');
+
+      const args = [scriptPath, '--db', dbPath];
+
+      switch (options.steps) {
+        case 'aggregate-train-predict':
+          args.push('--skip-scrape', '--skip-mtgjson', '--skip-edhrec', '--skip-arena');
+          break;
+        case 'train-predict':
+          args.push('--skip-scrape', '--skip-mtgjson', '--skip-edhrec', '--skip-arena');
+          break;
+        case 'predict':
+          args.push('--only', 'predict');
+          break;
+        // 'full' or undefined → no extra flags
+      }
+
+      const broadcast = (data: { type: string; line: string; code?: number }) => {
+        BrowserWindow.getAllWindows().forEach((win) => {
+          win.webContents.send('ml-pipeline-output', data);
+        });
+      };
+
+      broadcast({ type: 'info', line: `$ ${pythonCmd} scripts/pipeline.py ${args.slice(1).join(' ')}` });
+
+      const child = spawn(pythonCmd, args, {
+        cwd: projectDir,
+        stdio: ['ignore', 'pipe', 'pipe'],
+      });
+
+      mlProcess = child;
+
+      child.stdout?.on('data', (chunk: Buffer) => {
+        const text = chunk.toString();
+        for (const line of text.split('\n')) {
+          if (line.trim()) broadcast({ type: 'stdout', line });
+        }
+      });
+
+      child.stderr?.on('data', (chunk: Buffer) => {
+        const text = chunk.toString();
+        for (const line of text.split('\n')) {
+          if (line.trim()) broadcast({ type: 'stderr', line });
+        }
+      });
+
+      child.on('close', (code) => {
+        mlProcess = null;
+        broadcast({ type: 'exit', line: `Process exited with code ${code}`, code: code ?? -1 });
+      });
+
+      child.on('error', (err) => {
+        mlProcess = null;
+        broadcast({ type: 'error', line: err.message });
+      });
+
+      return { ok: true };
+    } catch (err) {
+      return { ok: false, error: String(err) };
+    }
+  });
+
+  ipcMain.handle('cancel-ml-pipeline', () => {
+    if (mlProcess) {
+      mlProcess.kill();
+      mlProcess = null;
+    }
   });
 }

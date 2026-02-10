@@ -23,6 +23,13 @@ export function SettingsDialog({ open, onClose }: SettingsDialogProps) {
   const [exporting, setExporting] = useState(false);
   const [exportMessage, setExportMessage] = useState('');
 
+  // ML Pipeline state
+  const [mlTraining, setMlTraining] = useState(false);
+  const [mlTarget, setMlTarget] = useState('community');
+  const [mlSteps, setMlSteps] = useState('aggregate-train-predict');
+  const [mlOutput, setMlOutput] = useState<string[]>([]);
+  const [mlMessage, setMlMessage] = useState('');
+
   // Arena integration state
   const [arenaLogPath, setArenaLogPath] = useState('');
   const [watcherRunning, setWatcherRunning] = useState(false);
@@ -320,6 +327,85 @@ export function SettingsDialog({ open, onClose }: SettingsDialogProps) {
     }
   }, []);
 
+  // ── ML Pipeline handlers ─────────────────────────────────────────────────
+
+  const runMLPipeline = useCallback(async () => {
+    setMlTraining(true);
+    setMlOutput([]);
+    setMlMessage('');
+
+    const api = getElectronAPI();
+    if (api) {
+      // Electron path: real-time streaming via IPC
+      const cleanup = api.onMLPipelineOutput((data) => {
+        if (data.type === 'exit') {
+          setMlTraining(false);
+          setMlMessage(data.code === 0 ? 'Pipeline completed successfully' : `Pipeline failed (exit ${data.code})`);
+        }
+        setMlOutput((prev) => [...prev.slice(-199), data.line]);
+      });
+
+      const result = await api.runMLPipeline({ steps: mlSteps, target: mlTarget });
+      if (!result.ok) {
+        setMlTraining(false);
+        setMlMessage(`Failed: ${result.error}`);
+        cleanup();
+      }
+    } else {
+      // Web fallback: POST to start, poll GET for progress
+      try {
+        const res = await fetch('/api/ml-pipeline', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ steps: mlSteps, target: mlTarget }),
+        });
+        const data = await res.json();
+        if (!res.ok || data.error) {
+          setMlTraining(false);
+          setMlMessage(`Failed: ${data.error || 'Unknown error'}`);
+        }
+      } catch (err) {
+        setMlTraining(false);
+        setMlMessage(`Failed to start pipeline: ${err}`);
+      }
+    }
+  }, [mlSteps, mlTarget]);
+
+  const cancelMLPipeline = useCallback(async () => {
+    const api = getElectronAPI();
+    if (api) {
+      await api.cancelMLPipeline();
+    } else {
+      await fetch('/api/ml-pipeline', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'cancel' }),
+      }).catch(() => {});
+    }
+    setMlTraining(false);
+    setMlMessage('Pipeline cancelled');
+  }, []);
+
+  // Poll ML pipeline progress (non-Electron fallback)
+  useEffect(() => {
+    if (!mlTraining || isElectron()) return;
+    const interval = setInterval(async () => {
+      try {
+        const res = await fetch('/api/ml-pipeline');
+        const data = await res.json();
+        setMlOutput(data.lines || []);
+        if (!data.running) {
+          setMlTraining(false);
+          setMlMessage(data.exitCode === 0 ? 'Pipeline completed successfully' : `Pipeline failed (exit ${data.exitCode})`);
+          clearInterval(interval);
+        }
+      } catch {
+        // ignore polling errors
+      }
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [mlTraining]);
+
   const exportData = useCallback(async () => {
     setExporting(true);
     setExportMessage('');
@@ -367,7 +453,7 @@ export function SettingsDialog({ open, onClose }: SettingsDialogProps) {
       <div
         className={cn(
           'w-full rounded-2xl border border-border bg-card p-6 shadow-2xl overflow-y-auto',
-          electronMode ? 'max-w-lg max-h-[90vh]' : 'max-w-md'
+          electronMode ? 'max-w-lg max-h-[90vh]' : 'max-w-lg max-h-[90vh]'
         )}
         onClick={(e) => e.stopPropagation()}
       >
@@ -528,6 +614,82 @@ export function SettingsDialog({ open, onClose }: SettingsDialogProps) {
               exportMessage.includes('Exported') ? 'text-green-400' : 'text-red-400'
             )}>
               {exportMessage}
+            </p>
+          )}
+        </div>
+
+        {/* ML Model Training */}
+        <div className="mt-4 space-y-3 border-t border-border pt-4">
+          <h3 className="text-sm font-bold">ML Model Training</h3>
+          <p className="text-xs text-muted-foreground">
+            Train the model on community + personal match data. No API keys needed.
+          </p>
+
+          <div className="flex gap-2">
+            <div className="flex-1">
+              <label className="mb-1 block text-[10px] font-medium text-muted-foreground">Target</label>
+              <select
+                value={mlTarget}
+                onChange={(e) => setMlTarget(e.target.value)}
+                disabled={mlTraining}
+                className="w-full rounded-lg border border-border bg-background px-2 py-1.5 text-xs outline-none focus:border-primary disabled:opacity-50"
+              >
+                <option value="community">Community</option>
+                <option value="personal">Personal</option>
+                <option value="blended">Blended</option>
+              </select>
+            </div>
+            <div className="flex-1">
+              <label className="mb-1 block text-[10px] font-medium text-muted-foreground">Steps</label>
+              <select
+                value={mlSteps}
+                onChange={(e) => setMlSteps(e.target.value)}
+                disabled={mlTraining}
+                className="w-full rounded-lg border border-border bg-background px-2 py-1.5 text-xs outline-none focus:border-primary disabled:opacity-50"
+              >
+                <option value="full">Full pipeline</option>
+                <option value="aggregate-train-predict">Aggregate + Train + Predict</option>
+                <option value="train-predict">Train + Predict</option>
+                <option value="predict">Predict only</option>
+              </select>
+            </div>
+          </div>
+
+          {mlTraining ? (
+            <button
+              onClick={cancelMLPipeline}
+              className="w-full rounded-lg border border-red-500/30 bg-red-500/10 px-3 py-2 text-xs font-medium text-red-400 transition-colors hover:bg-red-500/20"
+            >
+              Cancel Pipeline
+            </button>
+          ) : (
+            <button
+              onClick={runMLPipeline}
+              className="w-full rounded-lg border border-border px-3 py-2 text-xs font-medium transition-colors hover:bg-accent"
+            >
+              Run Pipeline
+            </button>
+          )}
+
+          {/* Console output */}
+          {mlOutput.length > 0 && (
+            <div className="max-h-40 overflow-y-auto rounded-lg bg-black/80 p-2 font-mono text-[10px] leading-relaxed text-green-400">
+              {mlOutput.map((line, i) => (
+                <div key={i} className={line.startsWith('[stderr]') ? 'text-yellow-400' : ''}>
+                  {line}
+                </div>
+              ))}
+            </div>
+          )}
+
+          {mlMessage && (
+            <p className={cn(
+              'text-xs',
+              mlMessage.includes('successfully') || mlMessage.includes('completed') ? 'text-green-400'
+                : mlMessage.includes('cancelled') ? 'text-muted-foreground'
+                : 'text-red-400'
+            )}>
+              {mlMessage}
             </p>
           )}
         </div>

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createDeck, addCardToDeck, getCardByName, getDb } from '@/lib/db';
-import { buildDeckWithClaude } from '@/lib/claude-deck-builder';
+import { buildDeckWithAI } from '@/lib/ai-deck-builder';
 import { COMMANDER_FORMATS } from '@/lib/constants';
 import { getAuthUser, unauthorizedResponse } from '@/lib/auth-middleware';
 
@@ -27,7 +27,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const result = await buildDeckWithClaude({
+    const result = await buildDeckWithAI({
       commanderName,
       format,
       strategy,
@@ -37,7 +37,7 @@ export async function POST(request: NextRequest) {
 
     if (result.cards.length === 0) {
       return NextResponse.json(
-        { error: 'Claude could not build a deck. Try again.' },
+        { error: 'AI could not build a deck. Try again.' },
         { status: 400 }
       );
     }
@@ -104,8 +104,8 @@ export async function POST(request: NextRequest) {
       },
     });
   } catch (error) {
-    const message = error instanceof Error ? error.message : 'Claude build failed';
-    console.error('[Claude Build Route]', error);
+    const message = error instanceof Error ? error.message : 'AI build failed';
+    console.error('[AI Build Route]', error);
     return NextResponse.json({ error: message }, { status: 500 });
   }
 }
