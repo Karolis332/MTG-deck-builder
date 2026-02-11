@@ -7,9 +7,13 @@ import path from 'path';
 import http from 'http';
 import { ArenaLogWatcher } from './arena-log-watcher';
 import { parseArenaLogFile } from '../src/lib/arena-log-reader';
+import { GrpIdResolver } from '../src/lib/grp-id-resolver';
+import { analyzeMulligan } from '../src/lib/mulligan-advisor';
+import type { GameStateSnapshot, ResolvedCard } from '../src/lib/game-state-engine';
 
 let watcher: ArenaLogWatcher | null = null;
 let mlProcess: ChildProcess | null = null;
+let resolver: GrpIdResolver | null = null;
 
 function getDefaultLogPath(): string {
   if (process.platform === 'win32') {
@@ -75,6 +79,37 @@ function postToApi(route: string, body: unknown): void {
   req.end();
 }
 
+/** Broadcast to all windows */
+function broadcast(channel: string, ...args: unknown[]): void {
+  BrowserWindow.getAllWindows().forEach((win) => {
+    if (!win.isDestroyed()) {
+      win.webContents.send(channel, ...args);
+    }
+  });
+}
+
+/** Get or create GrpIdResolver with DB */
+function getResolver(): GrpIdResolver {
+  if (!resolver) {
+    resolver = new GrpIdResolver();
+    // Try to set DB — will be available after Next.js server starts
+    try {
+      const dbPath = process.env.MTG_DB_DIR
+        ? path.join(process.env.MTG_DB_DIR, 'mtg-deck-builder.db')
+        : path.join(process.cwd(), 'data', 'mtg-deck-builder.db');
+      if (fs.existsSync(dbPath)) {
+        // eslint-disable-next-line @typescript-eslint/no-require-imports
+        const Database = require('better-sqlite3');
+        const db = new Database(dbPath, { readonly: false });
+        resolver.setDb(db);
+      }
+    } catch {
+      // DB not available yet — resolver will use API fallback
+    }
+  }
+  return resolver;
+}
+
 export function registerIpcHandlers(): void {
   // ── File operations ──────────────────────────────────────────────────────
 
@@ -111,7 +146,7 @@ export function registerIpcHandlers(): void {
 
   // ── Watcher controls ─────────────────────────────────────────────────────
 
-  ipcMain.handle('start-watcher', (event, logPath: string) => {
+  ipcMain.handle('start-watcher', (_event, logPath: string) => {
     try {
       if (watcher) {
         watcher.stop();
@@ -123,31 +158,43 @@ export function registerIpcHandlers(): void {
       }
 
       watcher = new ArenaLogWatcher(logPath);
+      watcher.setResolver(getResolver());
 
+      // Legacy match/collection events
       watcher.on('match', (match) => {
-        // Forward to renderer
-        const windows = BrowserWindow.getAllWindows();
-        for (const win of windows) {
-          win.webContents.send('watcher-new-match', match);
-        }
-        // Store via API
+        broadcast('watcher-new-match', match);
         postToApi('/api/arena-matches', match);
       });
 
       watcher.on('collection', (collection) => {
-        const windows = BrowserWindow.getAllWindows();
-        for (const win of windows) {
-          win.webContents.send('watcher-collection', collection);
-        }
-        // Store via API
+        broadcast('watcher-collection', collection);
         postToApi('/api/arena-collection', { collection });
       });
 
       watcher.on('error', (err) => {
-        const windows = BrowserWindow.getAllWindows();
-        for (const win of windows) {
-          win.webContents.send('watcher-error', err);
-        }
+        broadcast('watcher-error', err);
+      });
+
+      // ── Overlay events ──────────────────────────────────────────────────
+
+      watcher.on('game-state', (state: GameStateSnapshot) => {
+        broadcast('game-state-update', state);
+      });
+
+      watcher.on('match-start', (data: { matchId: string; format: string | null; playerName: string | null; opponentName: string | null }) => {
+        broadcast('match-started', data);
+      });
+
+      watcher.on('match-end', (data: { matchId: string; result: string }) => {
+        broadcast('match-ended', data);
+      });
+
+      watcher.on('mulligan', (data: { hand: number[]; mulliganCount: number; seatId: number }) => {
+        broadcast('mulligan-prompt', data);
+      });
+
+      watcher.on('intermission', (data: { matchId: string | null; gameNumber: number; opponentCardsSeen: number[] }) => {
+        broadcast('intermission-start', data);
       });
 
       watcher.start();
@@ -167,9 +214,107 @@ export function registerIpcHandlers(): void {
 
   ipcMain.handle('get-watcher-status', () => {
     if (!watcher) {
-      return { running: false, logPath: null, matchCount: 0 };
+      return { running: false, logPath: null, matchCount: 0, hasActiveGame: false };
     }
     return watcher.getStatus();
+  });
+
+  // ── Overlay controls ────────────────────────────────────────────────────
+
+  ipcMain.handle('toggle-overlay', (_event, { visible }: { visible: boolean }) => {
+    // Handled in main.ts via the overlayWindow reference
+    broadcast('overlay-toggle', visible);
+  });
+
+  ipcMain.handle('set-overlay-opacity', (_event, { opacity }: { opacity: number }) => {
+    broadcast('overlay-opacity', opacity);
+  });
+
+  ipcMain.handle('get-mulligan-advice', async (_event, data: {
+    hand: number[];
+    deckList: Array<{ grpId: number; qty: number }>;
+    format: string | null;
+    archetype: string | null;
+    commanderGrpIds?: number[];
+    mulliganCount: number;
+  }) => {
+    const res = getResolver();
+    const grpIds = [...data.hand, ...data.deckList.map(d => d.grpId)];
+    const resolved = await res.resolveMany(grpIds);
+
+    const cardMap = {
+      get: (grpId: number) => resolved.get(grpId) ?? null,
+    };
+
+    // Build deck info
+    const deckLandCount = data.deckList.reduce((count, entry) => {
+      const card = resolved.get(entry.grpId);
+      if (card?.typeLine && /\bland\b/i.test(card.typeLine)) {
+        return count + entry.qty;
+      }
+      return count;
+    }, 0);
+
+    const totalCards = data.deckList.reduce((sum, e) => sum + e.qty, 0);
+    const deckColors: string[] = [];
+    // Infer colors from mana costs
+    Array.from(resolved.values()).forEach((card) => {
+      if (card.manaCost) {
+        if (card.manaCost.includes('W') && !deckColors.includes('W')) deckColors.push('W');
+        if (card.manaCost.includes('U') && !deckColors.includes('U')) deckColors.push('U');
+        if (card.manaCost.includes('B') && !deckColors.includes('B')) deckColors.push('B');
+        if (card.manaCost.includes('R') && !deckColors.includes('R')) deckColors.push('R');
+        if (card.manaCost.includes('G') && !deckColors.includes('G')) deckColors.push('G');
+      }
+    });
+
+    let commanderOracleText: string | undefined;
+    if (data.commanderGrpIds && data.commanderGrpIds.length > 0) {
+      const cmdCard = resolved.get(data.commanderGrpIds[0]);
+      if (cmdCard) commanderOracleText = cmdCard.oracleText ?? undefined;
+    }
+
+    const deckInfo = {
+      totalCards,
+      landCount: deckLandCount,
+      avgCmc: 0,
+      colors: deckColors,
+      commanderGrpIds: data.commanderGrpIds,
+      commanderOracleText,
+    };
+
+    const advice = analyzeMulligan(
+      data.hand,
+      deckInfo,
+      data.format,
+      data.archetype as import('../src/lib/deck-templates').Archetype | null,
+      cardMap,
+      data.mulliganCount,
+    );
+
+    return advice;
+  });
+
+  ipcMain.handle('get-sideboard-guide', async (_event, data: { deckId: number }) => {
+    // Delegate to API route
+    const port = process.env.PORT || '3000';
+    try {
+      const resp = await fetch(`http://localhost:${port}/api/sideboard-guide?deckId=${data.deckId}`);
+      const json = await resp.json();
+      return json;
+    } catch (err) {
+      return { error: String(err) };
+    }
+  });
+
+  ipcMain.handle('get-game-state', () => {
+    return watcher?.getGameState() ?? null;
+  });
+
+  ipcMain.handle('resolve-grp-ids', async (_event, grpIds: number[]) => {
+    const res = getResolver();
+    const resolved = await res.resolveMany(grpIds);
+    return Object.fromEntries(resolved);
   });
 
   // ── ML Pipeline ─────────────────────────────────────────────────────────
@@ -230,13 +375,11 @@ export function registerIpcHandlers(): void {
         // 'full' or undefined → no extra flags
       }
 
-      const broadcast = (data: { type: string; line: string; code?: number }) => {
-        BrowserWindow.getAllWindows().forEach((win) => {
-          win.webContents.send('ml-pipeline-output', data);
-        });
+      const broadcastPipeline = (data: { type: string; line: string; code?: number }) => {
+        broadcast('ml-pipeline-output', data);
       };
 
-      broadcast({ type: 'info', line: `$ ${pythonCmd} scripts/pipeline.py ${args.slice(1).join(' ')}` });
+      broadcastPipeline({ type: 'info', line: `$ ${pythonCmd} scripts/pipeline.py ${args.slice(1).join(' ')}` });
 
       const child = spawn(pythonCmd, args, {
         cwd: isDev ? path.resolve(__dirname, '..') : app.getPath('userData'),
@@ -248,25 +391,25 @@ export function registerIpcHandlers(): void {
       child.stdout?.on('data', (chunk: Buffer) => {
         const text = chunk.toString();
         for (const line of text.split('\n')) {
-          if (line.trim()) broadcast({ type: 'stdout', line });
+          if (line.trim()) broadcastPipeline({ type: 'stdout', line });
         }
       });
 
       child.stderr?.on('data', (chunk: Buffer) => {
         const text = chunk.toString();
         for (const line of text.split('\n')) {
-          if (line.trim()) broadcast({ type: 'stderr', line });
+          if (line.trim()) broadcastPipeline({ type: 'stderr', line });
         }
       });
 
       child.on('close', (code) => {
         mlProcess = null;
-        broadcast({ type: 'exit', line: `Process exited with code ${code}`, code: code ?? -1 });
+        broadcastPipeline({ type: 'exit', line: `Process exited with code ${code}`, code: code ?? -1 });
       });
 
       child.on('error', (err) => {
         mlProcess = null;
-        broadcast({ type: 'error', line: err.message });
+        broadcastPipeline({ type: 'error', line: err.message });
       });
 
       return { ok: true };

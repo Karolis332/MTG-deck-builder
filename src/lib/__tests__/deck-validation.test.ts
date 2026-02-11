@@ -32,6 +32,8 @@ function makeCard(overrides: Partial<DbCard> = {}): DbCard {
     edhrec_rank: null,
     layout: 'normal',
     updated_at: '2024-01-01',
+    subtypes: null,
+    arena_id: null,
     ...overrides,
   };
 }

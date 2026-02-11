@@ -1,4 +1,4 @@
-import { app, BrowserWindow, dialog } from 'electron';
+import { app, BrowserWindow, dialog, globalShortcut } from 'electron';
 import path from 'path';
 import fs from 'fs';
 import { spawn, ChildProcess } from 'child_process';
@@ -42,7 +42,9 @@ process.on('unhandledRejection', (reason) => {
 let mainWindow: BrowserWindow | null = null;
 let setupWindow: BrowserWindow | null = null;
 let splashWindow: BrowserWindow | null = null;
+let overlayWindow: BrowserWindow | null = null;
 let nextServer: ChildProcess | null = null;
+let overlayClickThrough = false;
 
 // Allow running as root on Linux (e.g. WSL, Docker)
 app.commandLine.appendSwitch('no-sandbox');
@@ -295,6 +297,72 @@ function createMainWindow(): void {
   }
 }
 
+// ── Overlay window ──────────────────────────────────────────────────────
+
+function createOverlayWindow(): void {
+  if (overlayWindow && !overlayWindow.isDestroyed()) {
+    overlayWindow.show();
+    return;
+  }
+
+  overlayWindow = new BrowserWindow({
+    width: 320,
+    height: 720,
+    x: 20,
+    y: 100,
+    frame: false,
+    transparent: true,
+    alwaysOnTop: true,
+    skipTaskbar: true,
+    resizable: true,
+    hasShadow: false,
+    webPreferences: {
+      preload: path.join(__dirname, 'preload.js'),
+      contextIsolation: true,
+      nodeIntegration: false,
+    },
+    backgroundColor: '#00000000',
+  });
+
+  overlayWindow.setAlwaysOnTop(true, 'screen-saver');
+  overlayWindow.loadURL(`http://localhost:${PORT}/overlay`);
+
+  overlayWindow.on('closed', () => {
+    overlayWindow = null;
+  });
+
+  // Start in click-through mode
+  overlayClickThrough = true;
+  overlayWindow.setIgnoreMouseEvents(true, { forward: true });
+}
+
+function toggleOverlay(): void {
+  if (overlayWindow && !overlayWindow.isDestroyed()) {
+    if (overlayWindow.isVisible()) {
+      overlayWindow.hide();
+    } else {
+      overlayWindow.show();
+    }
+  } else {
+    createOverlayWindow();
+  }
+}
+
+function toggleClickThrough(): void {
+  if (!overlayWindow || overlayWindow.isDestroyed()) return;
+  overlayClickThrough = !overlayClickThrough;
+  if (overlayClickThrough) {
+    overlayWindow.setIgnoreMouseEvents(true, { forward: true });
+  } else {
+    overlayWindow.setIgnoreMouseEvents(false);
+  }
+}
+
+function registerGlobalShortcuts(): void {
+  globalShortcut.register('Alt+O', toggleOverlay);
+  globalShortcut.register('Alt+L', toggleClickThrough);
+}
+
 // ── Next.js server ──────────────────────────────────────────────────────
 
 async function startNextServer(): Promise<void> {
@@ -431,6 +499,7 @@ export async function transitionToMainApp(): Promise<void> {
   registerIpcHandlers();
 
   createMainWindow();
+  registerGlobalShortcuts();
 
   // Run first-boot actions (account creation, card seeding) after server is ready
   setTimeout(async () => {
@@ -472,6 +541,7 @@ app.whenReady().then(async () => {
 
     registerIpcHandlers();
     createMainWindow();
+    registerGlobalShortcuts();
   }
 
   app.on('activate', () => {
@@ -492,6 +562,13 @@ app.on('window-all-closed', () => {
 });
 
 app.on('will-quit', () => {
+  globalShortcut.unregisterAll();
+
+  if (overlayWindow && !overlayWindow.isDestroyed()) {
+    overlayWindow.close();
+    overlayWindow = null;
+  }
+
   if (nextServer) {
     try {
       nextServer.kill('SIGTERM');

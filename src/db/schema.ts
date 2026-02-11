@@ -703,4 +703,51 @@ export const MIGRATIONS = [
       CREATE INDEX IF NOT EXISTS idx_mgk_published ON mtggoldfish_knowledge(published_date);
     `,
   },
+  {
+    version: 21,
+    name: 'add_overlay_tables',
+    sql: `
+      CREATE TABLE IF NOT EXISTS grp_id_cache (
+        grp_id INTEGER PRIMARY KEY,
+        card_name TEXT NOT NULL,
+        scryfall_id TEXT,
+        image_uri_small TEXT,
+        image_uri_normal TEXT,
+        mana_cost TEXT,
+        cmc REAL,
+        type_line TEXT,
+        oracle_text TEXT,
+        resolved_at TEXT DEFAULT (datetime('now')),
+        source TEXT DEFAULT 'scryfall'
+      );
+
+      CREATE TABLE IF NOT EXISTS sideboard_guides (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        deck_id INTEGER NOT NULL REFERENCES decks(id) ON DELETE CASCADE,
+        opponent_archetype TEXT NOT NULL,
+        opponent_colors TEXT,
+        cards_in TEXT NOT NULL,
+        cards_out TEXT NOT NULL,
+        reasoning TEXT,
+        source TEXT DEFAULT 'ai',
+        created_at TEXT DEFAULT (datetime('now')),
+        UNIQUE(deck_id, opponent_archetype)
+      );
+
+      CREATE INDEX IF NOT EXISTS idx_sb_guides_deck ON sideboard_guides(deck_id);
+
+      CREATE TABLE IF NOT EXISTS live_game_sessions (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        match_id TEXT UNIQUE NOT NULL,
+        deck_id INTEGER REFERENCES decks(id),
+        format TEXT,
+        started_at TEXT DEFAULT (datetime('now')),
+        ended_at TEXT,
+        mulligan_decisions TEXT,
+        sideboard_changes TEXT
+      );
+
+      CREATE INDEX IF NOT EXISTS idx_lgs_match ON live_game_sessions(match_id);
+    `,
+  },
 ];

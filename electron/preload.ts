@@ -35,6 +35,41 @@ contextBridge.exposeInMainWorld('electronAPI', {
     return () => ipcRenderer.removeAllListeners('ml-pipeline-output');
   },
 
+  // ── Overlay / Live Game Events ──────────────────────────────────────────
+
+  onGameStateUpdate: (callback: (state: unknown) => void) => {
+    ipcRenderer.on('game-state-update', (_event, state) => callback(state));
+    return () => ipcRenderer.removeAllListeners('game-state-update');
+  },
+
+  onMatchStarted: (callback: (data: unknown) => void) => {
+    ipcRenderer.on('match-started', (_event, data) => callback(data));
+    return () => ipcRenderer.removeAllListeners('match-started');
+  },
+
+  onMatchEnded: (callback: (data: unknown) => void) => {
+    ipcRenderer.on('match-ended', (_event, data) => callback(data));
+    return () => ipcRenderer.removeAllListeners('match-ended');
+  },
+
+  onMulliganPrompt: (callback: (data: unknown) => void) => {
+    ipcRenderer.on('mulligan-prompt', (_event, data) => callback(data));
+    return () => ipcRenderer.removeAllListeners('mulligan-prompt');
+  },
+
+  onIntermissionStart: (callback: (data: unknown) => void) => {
+    ipcRenderer.on('intermission-start', (_event, data) => callback(data));
+    return () => ipcRenderer.removeAllListeners('intermission-start');
+  },
+
+  // Overlay controls
+  toggleOverlay: (visible: boolean) => ipcRenderer.invoke('toggle-overlay', { visible }),
+  setOverlayOpacity: (opacity: number) => ipcRenderer.invoke('set-overlay-opacity', { opacity }),
+  getMulliganAdvice: (data: unknown) => ipcRenderer.invoke('get-mulligan-advice', data),
+  getSideboardGuide: (data: unknown) => ipcRenderer.invoke('get-sideboard-guide', data),
+  getGameState: () => ipcRenderer.invoke('get-game-state'),
+  resolveGrpIds: (grpIds: number[]) => ipcRenderer.invoke('resolve-grp-ids', grpIds),
+
   // Platform info
   getPlatform: () => ipcRenderer.invoke('get-platform'),
   isElectron: true,
