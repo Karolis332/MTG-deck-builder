@@ -1,7 +1,7 @@
-appId: com.mtg-deck-builder.app
-productName: MTG Deck Builder
-executableName: mtg-deck-builder
-copyright: Copyright © 2025 MTG Deck Builder
+appId: com.the-black-grimoire.app
+productName: The Black Grimoire
+executableName: the-black-grimoire
+copyright: Copyright © 2025 The Black Grimoire
 
 directories:
   output: dist-electron
@@ -17,14 +17,9 @@ afterPack: scripts/afterPack.js
 files:
   - "electron-dist/**/*"
   - "electron/**/*.js"
-  - ".next/**/*"
-  - "public/**/*"
   - "package.json"
   - "next.config.js"
-  - "node_modules/**/*"
-  - "!node_modules/.cache"
-  - "!**/*.ts"
-  - "!**/*.map"
+  - "!node_modules"
   - "!.git"
   - "!src/**"
   - "!tests/**"
@@ -32,7 +27,12 @@ files:
   - "!build/**"
 
 # Extra resources bundled alongside the app (accessible via process.resourcesPath)
+# Standalone goes here to bypass electron-builder's node_modules filtering.
 extraResources:
+  - from: ".next/standalone/"
+    to: "standalone"
+    filter:
+      - "**/*"
   - from: "electron/resources/"
     to: "."
     filter:
@@ -88,7 +88,7 @@ nsis:
   installerHeaderIcon: build/icon.ico
   createDesktopShortcut: true
   createStartMenuShortcut: true
-  shortcutName: MTG Deck Builder
+  shortcutName: The Black Grimoire
   license: LICENSE
 
 portable:

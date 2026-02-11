@@ -6,7 +6,7 @@ import { AuthProvider } from '@/components/auth-provider';
 import { ArenaWatcherPanel } from '@/components/arena-watcher-panel';
 
 export const metadata: Metadata = {
-  title: 'MTG Deck Builder',
+  title: 'The Black Grimoire',
   description: 'Build, analyze, and optimize your Magic: The Gathering decks with AI-powered suggestions',
 };
 

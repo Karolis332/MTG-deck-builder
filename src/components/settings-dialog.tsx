@@ -425,7 +425,7 @@ export function SettingsDialog({ open, onClose }: SettingsDialogProps) {
       const a = document.createElement('a');
       a.href = url;
       const timestamp = new Date().toISOString().slice(0, 10);
-      a.download = `mtg-deck-builder-export-${timestamp}.json`;
+      a.download = `black-grimoire-export-${timestamp}.json`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);

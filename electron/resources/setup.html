@@ -3,31 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MTG Deck Builder - Setup</title>
+  <title>The Black Grimoire - Setup</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: #0a0a0f;
+      font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, Georgia, serif;
+      background: #08060d;
       color: #e2e8f0;
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
+      overflow-y: auto;
     }
 
     .setup-container {
       width: 580px;
-      max-height: 90vh;
-      background: linear-gradient(145deg, #1a1a2e 0%, #16213e 100%);
-      border: 1px solid #2a2a4a;
+      max-height: 95vh;
+      background: linear-gradient(145deg, #1a150e 0%, #12100a 100%);
+      border: 1px solid #2a2010;
       border-radius: 16px;
-      padding: 40px;
+      padding: 32px 40px;
       box-shadow: 0 25px 80px rgba(0,0,0,0.6);
       position: relative;
-      overflow: hidden;
+      overflow-y: auto;
     }
 
     .setup-container::before {
@@ -37,7 +37,7 @@
       left: -2px;
       right: -2px;
       bottom: -2px;
-      background: linear-gradient(45deg, #7c3aed, #2563eb, #7c3aed);
+      background: linear-gradient(45deg, #8b6914, #4a2c0a, #8b6914);
       border-radius: 17px;
       z-index: -1;
       opacity: 0.3;
@@ -51,10 +51,12 @@
     .logo h1 {
       font-size: 28px;
       font-weight: 700;
-      background: linear-gradient(135deg, #a78bfa, #60a5fa);
+      letter-spacing: 2px;
+      background: linear-gradient(135deg, #c9a84c, #8b6914, #c9a84c);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       margin-bottom: 4px;
+      text-transform: uppercase;
     }
 
     .logo p {
@@ -79,8 +81,8 @@
     }
 
     .step-dot.active {
-      background: #7c3aed;
-      box-shadow: 0 0 12px rgba(124, 58, 237, 0.5);
+      background: #8b6914;
+      box-shadow: 0 0 12px rgba(139, 105, 20, 0.5);
     }
 
     .step-dot.done {
@@ -126,7 +128,7 @@
 
     .progress-bar {
       height: 100%;
-      background: linear-gradient(90deg, #7c3aed, #2563eb);
+      background: linear-gradient(90deg, #8b6914, #c9a84c);
       border-radius: 8px;
       transition: width 0.4s ease;
       width: 0%;
@@ -171,7 +173,7 @@
       width: 16px;
       height: 16px;
       border: 2px solid #334155;
-      border-top-color: #7c3aed;
+      border-top-color: #c9a84c;
       border-radius: 50%;
       animation: spin 0.6s linear infinite;
     }
@@ -206,7 +208,7 @@
     }
 
     .form-group input:focus {
-      border-color: #7c3aed;
+      border-color: #c9a84c;
     }
 
     .form-group .hint {
@@ -266,7 +268,7 @@
     }
 
     .btn-primary {
-      background: linear-gradient(135deg, #7c3aed, #2563eb);
+      background: linear-gradient(135deg, #8b6914, #c9a84c);
       color: white;
     }
 
@@ -295,7 +297,7 @@
     .btn-link {
       background: none;
       border: none;
-      color: #7c3aed;
+      color: #c9a84c;
       cursor: pointer;
       font-size: 13px;
       padding: 0;
@@ -316,7 +318,7 @@
     .checkbox-row input[type="checkbox"] {
       width: 16px;
       height: 16px;
-      accent-color: #7c3aed;
+      accent-color: #c9a84c;
     }
 
     .checkbox-row label {
@@ -338,7 +340,7 @@
       font-size: 14px;
       font-weight: 600;
       margin-bottom: 8px;
-      color: #a78bfa;
+      color: #c9a84c;
     }
 
     .info-card p {
@@ -379,7 +381,8 @@
 <body>
   <div class="setup-container">
     <div class="logo">
-      <h1>MTG Deck Builder</h1>
+      <div style="font-size: 36px; margin-bottom: 8px; filter: drop-shadow(0 0 8px rgba(180,140,60,0.4));">&#128214;</div>
+      <h1>The Black Grimoire</h1>
       <p>First-time setup</p>
     </div>
 
@@ -521,7 +524,7 @@
       <div class="complete-icon">&#10003;</div>
       <div class="complete-text">
         <h2>You're all set!</h2>
-        <p>MTG Deck Builder is ready. The app will launch momentarily.</p>
+        <p>The Black Grimoire is ready. The app will launch momentarily.</p>
       </div>
       <div class="btn-row" style="justify-content: center; margin-top: 24px;">
         <button class="btn btn-primary" onclick="launchApp()">Launch App</button>

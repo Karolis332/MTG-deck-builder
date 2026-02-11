@@ -1,68 +1,32 @@
-// Programmatic Next.js server for Electron
-// This file is spawned as a separate process to run the Next.js server
+// Standalone Next.js server launcher for Electron
+// The standalone server.js is fully self-contained — it bundles its own
+// traced node_modules and starts an HTTP server. We just set env vars and run it.
 
 import path from 'path';
+import fs from 'fs';
 
-async function startServer() {
-  const port = parseInt(process.env.PORT || '3000');
-  const appDir = process.env.APP_DIR || process.cwd();
-  const dev = process.env.NODE_ENV !== 'production';
+const appDir = process.env.APP_DIR || process.cwd();
+const port = process.env.PORT || '3000';
 
-  console.log('[Next Server] Starting...');
-  console.log('[Next Server] Port:', port);
-  console.log('[Next Server] App directory:', appDir);
-  console.log('[Next Server] Development mode:', dev);
+// In packaged app, standalone is in extraResources; in dev, it's in .next/
+const standaloneDir = process.env.STANDALONE_DIR || path.join(appDir, '.next', 'standalone');
 
-  try {
-    // Import Next.js dynamically
-    const nextPath = path.join(appDir, 'node_modules', 'next', 'dist', 'server', 'next.js');
-    const { default: next } = await import(nextPath);
+console.log('[Next Server] Starting standalone server...');
+console.log('[Next Server] Port:', port);
+console.log('[Next Server] App directory:', appDir);
+console.log('[Next Server] Standalone directory:', standaloneDir);
 
-    const app = next({
-      dev: false,
-      dir: appDir,
-      quiet: false,
-      hostname: 'localhost',
-      port,
-    });
+const serverPath = path.join(standaloneDir, 'server.js');
 
-    await app.prepare();
-
-    const handle = app.getRequestHandler();
-
-    // Create HTTP server
-    const http = await import('http');
-    const server = http.createServer((req, res) => {
-      handle(req, res);
-    });
-
-    await new Promise<void>((resolve, reject) => {
-      server.listen(port, () => {
-        console.log(`[Next Server] Ready on http://localhost:${port}`);
-        resolve();
-      });
-
-      server.on('error', (err) => {
-        console.error('[Next Server] Error:', err);
-        reject(err);
-      });
-    });
-
-    // Keep alive
-    process.on('SIGTERM', () => {
-      console.log('[Next Server] SIGTERM received, shutting down...');
-      server.close(() => {
-        process.exit(0);
-      });
-    });
-
-  } catch (err) {
-    console.error('[Next Server] Fatal error:', err);
-    process.exit(1);
-  }
+if (!fs.existsSync(serverPath)) {
+  console.error(`[Next Server] server.js not found at: ${serverPath}`);
+  process.exit(1);
 }
 
-startServer().catch((err) => {
-  console.error('[Next Server] Failed to start:', err);
-  process.exit(1);
-});
+// Set env vars the standalone server reads
+process.env.PORT = port;
+process.env.HOSTNAME = 'localhost';
+
+// Run the standalone server — it calls process.chdir(__dirname) internally
+// and starts an HTTP listener, printing "✓ Ready in Xms" when done.
+require(serverPath);

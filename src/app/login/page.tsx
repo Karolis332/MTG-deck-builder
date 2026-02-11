@@ -31,10 +31,10 @@ export default function LoginPage() {
     <div className="flex min-h-[calc(100vh-3.5rem)] items-center justify-center px-4">
       <div className="w-full max-w-md space-y-6">
         <div className="text-center">
-          <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-primary text-primary-foreground text-xl font-black">
-            M
+          <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-amber-900/60 text-amber-200 text-xl">
+            &#128214;
           </div>
-          <h1 className="mt-4 text-2xl font-bold">Sign in to MTG Deck Builder</h1>
+          <h1 className="mt-4 text-2xl font-bold">Sign in to The Black Grimoire</h1>
           <p className="mt-2 text-sm text-muted-foreground">
             Build, analyze, and optimize your decks
           </p>

@@ -31,7 +31,7 @@ function logCrash(label: string, err: unknown): void {
 
 process.on('uncaughtException', (err) => {
   logCrash('uncaughtException', err);
-  dialog.showErrorBox('MTG Deck Builder - Fatal Error', err.message || String(err));
+  dialog.showErrorBox('The Black Grimoire - Fatal Error', err.message || String(err));
   app.exit(1);
 });
 
@@ -41,6 +41,7 @@ process.on('unhandledRejection', (reason) => {
 
 let mainWindow: BrowserWindow | null = null;
 let setupWindow: BrowserWindow | null = null;
+let splashWindow: BrowserWindow | null = null;
 let nextServer: ChildProcess | null = null;
 
 // Allow running as root on Linux (e.g. WSL, Docker)
@@ -125,7 +126,7 @@ function createSetupWindow(): void {
       nodeIntegration: false,
     },
     titleBarStyle: process.platform === 'darwin' ? 'hiddenInset' : 'default',
-    title: 'MTG Deck Builder - Setup',
+    title: 'The Black Grimoire - Setup',
     show: false,
     backgroundColor: '#0a0a0f',
   });
@@ -146,6 +147,116 @@ function createSetupWindow(): void {
   });
 }
 
+function createSplashWindow(): void {
+  const splashHtml = `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+          background: #08060d;
+          color: #d4c4a8;
+          font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, Georgia, serif;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          height: 100vh;
+          overflow: hidden;
+          -webkit-app-region: drag;
+          background-image:
+            radial-gradient(ellipse at 50% 30%, rgba(90,50,20,0.15) 0%, transparent 70%),
+            radial-gradient(ellipse at 50% 80%, rgba(40,20,60,0.1) 0%, transparent 60%);
+        }
+        .grimoire-icon {
+          font-size: 42px;
+          margin-bottom: 12px;
+          filter: drop-shadow(0 0 8px rgba(180,140,60,0.4));
+        }
+        .title {
+          font-size: 24px;
+          font-weight: 700;
+          letter-spacing: 2px;
+          margin-bottom: 6px;
+          background: linear-gradient(135deg, #c9a84c, #8b6914, #c9a84c);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          text-transform: uppercase;
+        }
+        .subtitle {
+          font-size: 11px;
+          letter-spacing: 4px;
+          color: #6b5a3e;
+          margin-bottom: 28px;
+          text-transform: uppercase;
+        }
+        .rune-spinner {
+          width: 36px;
+          height: 36px;
+          border: 2px solid rgba(180,140,60,0.15);
+          border-top-color: #c9a84c;
+          border-radius: 50%;
+          animation: spin 1.2s linear infinite;
+          margin-bottom: 14px;
+          box-shadow: 0 0 12px rgba(180,140,60,0.1);
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .status {
+          font-size: 12px;
+          color: #5a4e3a;
+          letter-spacing: 1px;
+        }
+        .border-line {
+          position: absolute;
+          top: 8px; left: 8px; right: 8px; bottom: 8px;
+          border: 1px solid rgba(180,140,60,0.12);
+          border-radius: 2px;
+          pointer-events: none;
+        }
+      </style>
+    </head>
+    <body>
+      <div class="border-line"></div>
+      <div class="grimoire-icon">&#128214;</div>
+      <div class="title">The Black Grimoire</div>
+      <div class="subtitle">Deck Architect</div>
+      <div class="rune-spinner"></div>
+      <div class="status">Channeling mana...</div>
+    </body>
+    </html>`;
+
+  splashWindow = new BrowserWindow({
+    width: 380,
+    height: 280,
+    frame: false,
+    transparent: false,
+    resizable: false,
+    skipTaskbar: false,
+    alwaysOnTop: true,
+    backgroundColor: '#0a0a0f',
+    webPreferences: {
+      contextIsolation: true,
+      nodeIntegration: false,
+    },
+  });
+
+  splashWindow.loadURL(`data:text/html;charset=utf-8,${encodeURIComponent(splashHtml)}`);
+  splashWindow.center();
+  splashWindow.show();
+
+  splashWindow.on('closed', () => {
+    splashWindow = null;
+  });
+}
+
+function closeSplash(): void {
+  if (splashWindow && !splashWindow.isDestroyed()) {
+    splashWindow.close();
+    splashWindow = null;
+  }
+}
+
 function createMainWindow(): void {
   mainWindow = new BrowserWindow({
     width: 1400,
@@ -158,11 +269,13 @@ function createMainWindow(): void {
       nodeIntegration: false,
     },
     titleBarStyle: process.platform === 'darwin' ? 'hiddenInset' : 'default',
-    title: 'MTG Deck Builder',
+    title: 'The Black Grimoire',
     show: false,
+    backgroundColor: '#08060d',
   });
 
   mainWindow.once('ready-to-show', () => {
+    closeSplash();
     mainWindow?.show();
   });
 
@@ -189,8 +302,7 @@ async function startNextServer(): Promise<void> {
   if (nextServer) {
     try {
       nextServer.kill('SIGTERM');
-      // Give it a moment to clean up
-      await new Promise((r) => setTimeout(r, 1000));
+      await new Promise((r) => setTimeout(r, 500));
     } catch (err) {
       logCrash('next-kill-error', err);
     }
@@ -210,8 +322,13 @@ async function startNextServer(): Promise<void> {
     const nextServerScript = path.join(__dirname, 'next-server.js');
 
     const appDir = app.getAppPath();
+    // In packaged app, standalone is in extraResources; in dev, it's in .next/
+    const standaloneDir = isDev
+      ? path.join(appDir, '.next', 'standalone')
+      : path.join(process.resourcesPath, 'standalone');
 
     logCrash('next-appDir', `App directory: ${appDir}`);
+    logCrash('next-standaloneDir', `Standalone directory: ${standaloneDir}`);
     logCrash('next-server-script', `Next server script: ${nextServerScript}`);
 
     const spawnEnv: NodeJS.ProcessEnv = {
@@ -221,7 +338,9 @@ async function startNextServer(): Promise<void> {
       PORT,
       NODE_ENV: 'production',
       APP_DIR: appDir,
-      NODE_PATH: path.join(appDir, 'node_modules'),
+      STANDALONE_DIR: standaloneDir,
+      // Everything (traced deps + better-sqlite3) is in standalone's node_modules
+      NODE_PATH: path.join(standaloneDir, 'node_modules'),
     };
 
     // Ensure system directories are in PATH so child_process can find
@@ -284,8 +403,8 @@ async function startNextServer(): Promise<void> {
       }
     });
 
-    // Fallback resolve after 15s in case "Ready" message is missed
-    setTimeout(resolve, 15000);
+    // Fallback resolve after 8s — standalone production server starts in 2-4s
+    setTimeout(resolve, 8000);
   });
 }
 
@@ -300,6 +419,7 @@ export async function transitionToMainApp(): Promise<void> {
 
   // Start Next.js server if in production mode
   if (!isDev) {
+    createSplashWindow();
     try {
       await startNextServer();
     } catch (err) {
@@ -340,8 +460,9 @@ app.whenReady().then(async () => {
     // Show setup wizard
     createSetupWindow();
   } else {
-    // Normal launch — start Next.js and open main window
+    // Normal launch — show splash, start Next.js, then open main window
     if (!isDev) {
+      createSplashWindow();
       try {
         await startNextServer();
       } catch (err) {

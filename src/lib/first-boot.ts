@@ -29,7 +29,7 @@ function getConfigPath(): string {
     return path.join(electronUserData, 'app-config.json');
   }
   // Fallback: check common Electron paths
-  const appName = 'MTG Deck Builder';
+  const appName = 'The Black Grimoire';
   const home = process.env.HOME || process.env.USERPROFILE || '';
   const candidates = [
     path.join(home, '.config', appName, 'app-config.json'),

@@ -7,17 +7,14 @@ const path = require('path');
 const fs = require('fs');
 
 function getElectronVersion(context) {
-  // Try various ways to get the Electron version
   if (context.packager?.electronVersion) return context.packager.electronVersion;
   if (context.packager?.config?.electronVersion) return context.packager.config.electronVersion;
 
-  // Read from the installed electron package (devDependency in source)
   try {
     const electronPkg = path.join(process.cwd(), 'node_modules', 'electron', 'package.json');
     return JSON.parse(fs.readFileSync(electronPkg, 'utf-8')).version;
   } catch {}
 
-  // Read the version.txt that electron ships
   try {
     const versionFile = path.join(process.cwd(), 'node_modules', 'electron', 'dist', 'version');
     return fs.readFileSync(versionFile, 'utf-8').trim().replace('v', '');
@@ -27,24 +24,44 @@ function getElectronVersion(context) {
 }
 
 module.exports = async function afterPack(context) {
-  const appDir = path.join(context.appOutDir, 'resources', 'app');
   const electronVersion = getElectronVersion(context);
-  const sqliteDir = path.join(appDir, 'node_modules', 'better-sqlite3');
 
-  console.log(`[afterPack] Rebuilding better-sqlite3 for Electron v${electronVersion}`);
+  // Standalone is now in extraResources, not inside the app directory
+  const resourcesDir = path.join(context.appOutDir, 'resources');
+  const sqliteDir = path.join(resourcesDir, 'standalone', 'node_modules', 'better-sqlite3');
 
-  try {
-    execSync(
-      `npx --yes prebuild-install --runtime electron --target ${electronVersion} --arch x64`,
-      {
-        cwd: sqliteDir,
-        stdio: 'inherit',
-        env: { ...process.env },
-      }
-    );
-    console.log('[afterPack] better-sqlite3 rebuilt successfully');
-  } catch (err) {
-    console.error('[afterPack] Failed to rebuild better-sqlite3:', err.message);
-    throw err;
+  if (!fs.existsSync(sqliteDir)) {
+    // Fallback: check app/node_modules
+    const appSqlite = path.join(resourcesDir, 'app', 'node_modules', 'better-sqlite3');
+    if (fs.existsSync(appSqlite)) {
+      console.log('[afterPack] Found better-sqlite3 in app/node_modules');
+      return rebuild(appSqlite, electronVersion);
+    }
+    throw new Error(`better-sqlite3 not found at ${sqliteDir}`);
   }
+
+  // Check if prebuilt binary already exists (skip network call on repeated builds)
+  const prebuildDir = path.join(sqliteDir, 'prebuilds');
+  const alreadyBuilt = fs.existsSync(prebuildDir) && fs.readdirSync(prebuildDir).length > 0;
+  if (alreadyBuilt) {
+    console.log('[afterPack] Prebuilt binary exists, skipping rebuild');
+    return;
+  }
+
+  rebuild(sqliteDir, electronVersion);
 };
+
+function rebuild(sqliteDir, electronVersion) {
+  console.log(`[afterPack] Rebuilding better-sqlite3 for Electron v${electronVersion}`);
+  console.log(`[afterPack] Location: ${sqliteDir}`);
+
+  execSync(
+    `npx --yes prebuild-install --runtime electron --target ${electronVersion} --arch x64`,
+    {
+      cwd: sqliteDir,
+      stdio: 'inherit',
+      env: { ...process.env },
+    }
+  );
+  console.log('[afterPack] better-sqlite3 rebuilt successfully');
+}
