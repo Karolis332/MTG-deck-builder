@@ -1,18 +1,18 @@
-# MTG Deck Builder
+# The Black Grimoire
 
 [![Alpha Release](https://img.shields.io/github/v/release/Karolis332/MTG-deck-builder?include_prereleases&label=release)](https://github.com/Karolis332/MTG-deck-builder/releases/latest)
 
-A desktop application for building, analyzing, and improving Magic: The Gathering decks. Integrates with MTG Arena to track your matches and uses AI to suggest deck improvements based on your actual game data.
+A dark-themed desktop grimoire for building, analyzing, and mastering Magic: The Gathering decks. Integrates with MTG Arena to track your matches and uses AI to forge deck improvements from your actual game data.
 
 ## Features
 
 - **Claude AI Deck Builder** — Pick a commander, choose a strategy, and Claude builds a complete 100-card deck with per-card explanations and role assignments (Ramp, Draw, Removal, Synergy, etc.)
 - **Quick Build** — Instantly generate a deck using EDHREC data + archetype templates + commander synergy scoring (no API key needed)
 - **AI Chat** — Conversational deck tuning: ask for cuts, additions, strategy advice. Context-aware of your full deck, collection, and format rules. Selective apply lets you pick which suggestions to keep
-- **Commander Synergy Engine** — Analyzes commander oracle text across 12 trigger categories (ETB, dies, attack, spellcast, etc.) to score every candidate card
+- **Commander Synergy Engine** — Analyzes commander oracle text across 12 trigger categories (ETB, dies, attack, spellcast, exile, artifacts, enchantments, lifegain, counters, graveyard, tokens) to score every candidate card
 - **11 Archetype Templates** — Aggro, midrange, control, combo, aristocrats, spellslinger, voltron, tribal, group hug, stax, superfriends — with tuned mana curves and slot ratios
-- **Right-Click Card Zoom** — Right-click any card in the search grid or deck list to see a large card preview overlay, positioned near the cursor
-- **Search Filters** — Filter card search results by mana value (0–7+), color identity (W/U/B/R/G), and card type — all filters stack with AND logic between categories
+- **Right-Click Card Zoom** — Right-click any card to see a large preview overlay positioned near the cursor
+- **Search Filters** — Filter by mana value (0-7+), color identity (W/U/B/R/G), and card type — all filters stack with AND logic
 - **EDHREC Integration** — Community synergy data, average decklists, and strategy articles baked into AI prompts
 - **Arena Integration** — Parse your Player.log to import match results, deck submissions, and collection automatically
 - **Analytics Dashboard** — Win rates by deck/format/opponent, card performance tracking, mana curve analysis
@@ -20,6 +20,8 @@ A desktop application for building, analyzing, and improving Magic: The Gatherin
 - **ML Pipeline** — 10-step pipeline (MTGJSON, EDHREC, MTGGoldfish, MTGTop8, Arena, aggregation, training, prediction) with tournament W-L data and 25 features. Supports personal, community, and blended training modes
 - **Data Export/Import** — Export everything as JSON for backup or sharing
 - **Multi-User** — Separate accounts with isolated decks, collections, and match history
+- **Deck Versioning** — Automatic snapshots track every change to your decks over time
+- **Grimoire Splash Screen** — Instant visual feedback on launch while the server channels mana
 
 ## Download
 
@@ -27,26 +29,26 @@ Download the latest release from the [Releases page](https://github.com/Karolis3
 
 | File | Description |
 |------|-------------|
-| `MTG Deck Builder-*-win-x64.exe` | Windows installer (recommended) |
-| `MTG Deck Builder-*-portable.exe` | Windows portable (no install needed) |
-| `MTG Deck Builder-*-win-x64.zip` | Windows zip archive |
+| `The Black Grimoire-*-win-x64.exe` | Windows installer (recommended) |
+| `The Black Grimoire-*-portable.exe` | Windows portable (no install needed) |
+| `The Black Grimoire-*-win-x64.zip` | Windows zip archive |
 
 > **Note:** Windows may show a SmartScreen warning since the app is not code-signed. Click "More info" then "Run anyway".
 
 ## Quick Start
 
 1. **Download and install** from the link above
-2. **Create an account** (username + password, stored locally)
-3. **Seed the card database** — the app prompts you on first launch to download ~35K cards from Scryfall (takes 2-3 minutes)
-4. **Add your Claude API key** (optional but recommended): Settings → Anthropic API Key
-5. **Import your Arena collection** (optional): Settings → Arena Integration → Parse Full Log
+2. **Create an account** during the setup wizard (username + password, stored locally)
+3. **Seed the card database** — the setup wizard prompts you to download ~35K cards from Scryfall (takes 2-3 minutes)
+4. **Add your Claude API key** (optional but recommended): Settings -> Anthropic API Key
+5. **Import your Arena collection** (optional): Settings -> Arena Integration -> Parse Full Log
 6. **Build your first deck!**
 
 ## How to Use
 
 ### Building a Deck
 
-1. Go to **Deck Builder** → click **New Deck**
+1. Go to **Deck Builder** -> click **New Deck**
 2. Pick a format (Commander, Brawl, Standard, Modern, etc.) and set a commander if applicable
 3. Choose your build method:
    - **Quick Build** — Instant, free, uses EDHREC + synergy scoring
@@ -71,8 +73,8 @@ Keys are stored locally in your database and never sent to third parties.
 
 ### Arena Integration
 
-1. **Enable Detailed Logs in Arena**: Options → Account → Detailed Logs (Plugin Support) → restart Arena
-2. Open **Settings** (gear icon) → **Arena Integration**
+1. **Enable Detailed Logs in Arena**: Options -> Account -> Detailed Logs (Plugin Support) -> restart Arena
+2. Open **Settings** (gear icon) -> **Arena Integration**
 3. Set your Player.log path (or click "Detect default path")
 4. Click **Parse Full Log** to import collection + match history
 5. Enable **Live Watcher** to capture new matches as you play
@@ -91,26 +93,27 @@ Keys are stored locally in your database and never sent to third parties.
 
 ### Data Export
 
-Settings → **Export Match Data** downloads a JSON file with all your matches, decks, collection, and card performance. Share exports to help improve the ML model. No personal info beyond Arena usernames is included.
+Settings -> **Export Match Data** downloads a JSON file with all your matches, decks, collection, and card performance. Share exports to help improve the ML model. No personal info beyond Arena usernames is included.
 
 ## Troubleshooting
 
 ### App won't start
-- **Port conflict**: Another process is using port 3000. Close it or set a different port
-- **Database error**: Delete `data/mtg-deck-builder.db` to start fresh (you'll lose data)
+- Check the crash log at `%APPDATA%/The Black Grimoire/crash.log` for detailed error info
+- **Port conflict**: Another process is using port 3000. The app auto-finds an available port (3000-3009)
+- **Database error**: Delete `%APPDATA%/The Black Grimoire/data/mtg-deck-builder.db` to start fresh (you'll lose data)
 - **Windows**: Make sure you're running the installed version, not the dev version
 
 ### Arena log not found
-- Enable Detailed Logs: Arena → Options → Account → Detailed Logs → restart Arena
+- Enable Detailed Logs: Arena -> Options -> Account -> Detailed Logs -> restart Arena
 - Verify the log path in Settings matches your actual Player.log location
 
 ### AI suggestions not working
 - Add an API key in Settings (Anthropic or OpenAI)
 - Check that the key is valid and has credit
-- The app tries: Claude → Ollama (local) → OpenAI → Rule-based fallback
+- The app tries: Claude -> Ollama (local) -> OpenAI -> Rule-based fallback
 
 ### Collection not showing up
-- Parse the Arena log at least once (Settings → Parse Full Log)
+- Parse the Arena log at least once (Settings -> Parse Full Log)
 - Verify Detailed Logs is enabled in Arena
 
 ### Cards not found in search
@@ -137,19 +140,18 @@ npm run dev
 npm run dev:electron
 
 # Run tests
-npm test
+npm test                # TypeScript tests (Vitest)
+npm run test:python     # Python tests (pytest)
+npm run test:all        # Both
 
-# Build for production
-npm run build
+# Build for production (Next.js standalone + Electron TypeScript)
+npm run build && npm run build:electron
 
-# Package Windows installer
-npm run dist:win
-
-# Package Mac app
-npm run dist:mac
-
-# Package Linux app
-npm run dist:linux
+# Package installers
+npm run dist:win        # Windows (NSIS installer + portable + zip)
+npm run dist:mac        # macOS (DMG + zip)
+npm run dist:linux      # Linux (AppImage + deb + tar.gz)
+npm run dist:all        # All platforms
 ```
 
 ### Python Scripts (Optional)
@@ -160,7 +162,7 @@ The ML pipeline and community data scraping use Python 3.13+:
 # Install Python dependencies
 pip install -r scripts/requirements.txt
 
-# Run full 10-step pipeline (scrape → aggregate → train → predict)
+# Run full 10-step pipeline (scrape -> aggregate -> train -> predict)
 py scripts/pipeline.py
 
 # Skip scraping (use cached data), just retrain
@@ -189,14 +191,14 @@ py scripts/import_user_data.py their-export.json
 ## Tech Stack
 
 - **Frontend**: Next.js 14 (App Router) + Tailwind CSS + Recharts
-- **Desktop**: Electron 33
-- **Database**: SQLite (better-sqlite3, WAL mode, FTS5 full-text search)
+- **Desktop**: Electron 33 (standalone output mode, 443MB packaged)
+- **Database**: SQLite (better-sqlite3, WAL mode, FTS5 full-text search, 20 migrations)
 - **AI**: Claude Sonnet 4.5 / Opus 4.6 / GPT-4o / Ollama (local)
-- **ML**: Scikit-learn (Gradient Boosting) for card performance prediction
-- **Card Data**: Scryfall API + EDHREC
+- **ML**: Scikit-learn (Gradient Boosting) with 25 features for card performance prediction
+- **Card Data**: Scryfall API (35K+ cards) + EDHREC + MTGGoldfish + MTGTop8
 - **Auth**: JWT + scrypt password hashing
 - **Language**: TypeScript (strict) + Python 3.13
-- **Testing**: Vitest (186 tests)
+- **Testing**: Vitest + pytest
 
 ## License
 

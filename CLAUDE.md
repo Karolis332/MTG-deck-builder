@@ -48,36 +48,38 @@ Treat the user as your elite pair-programming partner. Amplify their vision. Pro
 
 ---
 
-# Project Context — MTG Deck Builder
+# Project Context — The Black Grimoire
 
 ## Overview
 
-Desktop application for building, analyzing, and managing Magic: The Gathering decks. Hybrid Electron + Next.js architecture with local SQLite storage, Scryfall card data, Arena integration, and AI-powered suggestions.
+The Black Grimoire is a dark-themed desktop application for building, analyzing, and mastering Magic: The Gathering decks. Hybrid Electron + Next.js architecture with local SQLite storage, Scryfall card data, Arena integration, ML-powered predictions, and AI deck construction.
 
 ## Tech Stack
 
-- **Framework:** Next.js 14 (App Router) + Electron 33
-- **Language:** TypeScript (strict mode)
-- **Database:** SQLite via better-sqlite3 (WAL mode, 12 migrations in `src/db/schema.ts`)
+- **Framework:** Next.js 14 (App Router, standalone output mode) + Electron 33
+- **Language:** TypeScript (strict mode) + Python 3.13 (ML pipeline)
+- **Database:** SQLite via better-sqlite3 (WAL mode, 20 migrations in `src/db/schema.ts`)
 - **Auth:** JWT (jose) + scrypt password hashing, httpOnly cookies
-- **UI:** Tailwind CSS 3 + Lucide icons + Recharts
+- **UI:** Tailwind CSS 3 + Lucide icons + Recharts, grimoire dark theme with gold accents
 - **Validation:** Zod
-- **Testing:** Vitest (95+ tests)
-- **External APIs:** Scryfall (card data), EDHRec (commander recommendations), Ollama (optional AI)
+- **Testing:** Vitest + pytest
+- **AI:** Claude Sonnet 4.5 / Opus 4.6 / GPT-4o / Ollama (local)
+- **ML:** Scikit-learn Gradient Boosting, 25 features, personal/community/blended training
+- **External APIs:** Scryfall (cards), EDHREC (commander data), MTGGoldfish (tournaments), MTGTop8 (meta)
 
 ## Project Structure
 
 ```
 src/
   app/                    # Next.js App Router pages
-    api/                  # API routes (auth, cards, decks, collection, analytics, ai-suggest)
+    api/                  # API routes (auth, cards, decks, collection, analytics, ai-suggest, data-export)
     deck/[id]/            # Deck editor (dynamic route)
     deck-builder/         # Deck list & management
     collection/           # Collection browser
     analytics/            # Analytics dashboard
   components/             # React components (client-side, 'use client')
   db/
-    schema.ts             # All 12 database migrations
+    schema.ts             # All 20 database migrations
   lib/                    # Business logic & utilities
     db.ts                 # SQLite singleton (globalThis for HMR safety)
     auth.ts               # JWT + scrypt auth
@@ -88,18 +90,43 @@ src/
     scryfall.ts           # Scryfall API client (rate-limited, 100ms)
     deck-validation.ts    # Format-specific deck rules
     deck-export.ts        # Export to Arena/MTGO/text
+    deck-templates.ts     # 11 archetype templates with mana curves and slot ratios
+    commander-synergy.ts  # Commander oracle text analyzer (12 trigger categories)
+    deck-builder-ai.ts    # AI deck construction with synergy scoring
+    claude-suggest.ts     # Claude API integration for AI chat and deck building
     arena-parser.ts       # Parse Arena export format
     arena-log-reader.ts   # Parse Arena Player.log
     edhrec.ts             # EDHRec recommendations with caching
     ai-suggest.ts         # Rule-based card suggestions
     match-analyzer.ts     # Match analytics
     electron-bridge.ts    # Electron IPC bridge
+    first-boot.ts         # First-launch account creation and card seeding
     __tests__/            # Unit tests
 electron/
-  main.ts                 # Electron main process (spawns Next.js server)
+  main.ts                 # Electron main process (splash screen, spawns Next.js standalone server)
+  next-server.ts          # Standalone Next.js server launcher
   preload.ts              # Context isolation bridge
   ipc-handlers.ts         # IPC message handlers
+  setup-handlers.ts       # Setup wizard IPC handlers
   arena-log-watcher.ts    # Live Arena.log file monitoring
+  resources/
+    setup.html            # First-run setup wizard UI
+scripts/
+  pipeline.py             # 10-step ML pipeline orchestrator
+  scrape_mtggoldfish.py   # Tournament deck scraper with W-L records
+  scrape_mtgtop8.py       # Competitive meta deck scraper
+  scrape_edhrec_articles.py # EDHREC strategy article scraper
+  fetch_avg_decklists.py  # Average decklist fetcher per commander
+  aggregate_community_meta.py # Community data aggregation + archetype win stats
+  train_model.py          # ML model training (personal/community/blended)
+  predict_suggestions.py  # Generate personalized card suggestions
+  afterPack.js            # electron-builder hook: rebuild better-sqlite3 for Electron
+  postbuild-standalone.js # Copy static assets + native modules into standalone
+  import_user_data.py     # Import exported user data
+  setup_scheduled_task.py # Windows Task Scheduler for daily pipeline runs
+build/
+  icon.svg                # Grimoire book icon with gold pentagram
+  icon.ico / icon.png     # Generated icon variants for all platforms
 ```
 
 ## Key Commands
@@ -107,14 +134,18 @@ electron/
 ```bash
 npm run dev              # Next.js dev server (:3000)
 npm run dev:electron     # Full Electron + Next.js dev mode
-npm run build            # Next.js production build
+npm run build            # Next.js standalone build + postbuild asset copy
+npm run build:electron   # Compile Electron TypeScript
 npm run test             # Vitest (run once)
 npm run test:watch       # Vitest (watch mode)
+npm run test:python      # Python tests (pytest)
+npm run test:all         # Both test suites
 npm run lint             # ESLint via next lint
 npm run db:seed          # Seed card database from Scryfall
-npm run dist:win         # Package Windows installer
-npm run dist:mac         # Package macOS app
-npm run dist:linux       # Package Linux app
+npm run dist:win         # Package Windows installer (NSIS + portable + zip)
+npm run dist:mac         # Package macOS app (DMG + zip)
+npm run dist:linux       # Package Linux app (AppImage + deb + tar.gz)
+npm run dist:all         # All platforms
 ```
 
 ## Code Conventions
@@ -132,33 +163,46 @@ npm run dist:linux       # Package Linux app
 
 ## Architecture Notes
 
-- **Electron main process** spawns Next.js as a child process, loads `http://localhost:3000` in BrowserWindow
+- **Electron main process** spawns Next.js standalone server as a child process via `ELECTRON_RUN_AS_NODE`, loads `http://localhost:{port}` in BrowserWindow
+- **Next.js standalone mode** (`output: 'standalone'`) bundles only traced dependencies (~55MB vs 190MB full node_modules), reducing packaged app from 719MB to 443MB
+- **Standalone deployed via `extraResources`** in electron-builder to bypass `!node_modules` glob filtering — accessed at runtime via `process.resourcesPath`
+- **Splash screen** shows grimoire-themed loading UI immediately while standalone server starts (2-4s)
 - **SQLite connection** uses singleton pattern via `globalThis` to survive Next.js HMR
 - **FTS5** full-text search on cards table (name, oracle_text, type_line)
 - **Card search** tries local FTS5 first, falls back to Scryfall API
 - **Multi-user support** via users table, all queries scoped by user_id
 - **Deck validation** enforces format rules (Standard 60-card, Commander singleton 100-card, etc.)
 - **Arena integration** parses Player.log for match results, collection import, deck submissions
+- **Commander synergy engine** parses oracle text for 12 trigger categories, scores candidates, merges with archetype templates
+- **afterPack hook** rebuilds better-sqlite3 native module for Electron's Node version, caches prebuilt binaries
 
 ## Database
 
-SQLite at `data/mtg-deck-builder.db` (or `MTG_DB_DIR` env var). Key tables:
+SQLite at `data/mtg-deck-builder.db` (or `MTG_DB_DIR` env var). 48 tables across 20 migrations. Key tables:
 
-- `cards` — 30k+ cards from Scryfall with FTS5 index
+- `cards` — 35K+ cards from Scryfall with FTS5 index
 - `users` — Accounts (username, email, password_hash)
 - `decks` / `deck_cards` — Deck metadata and card composition (main/sideboard/commander/companion)
+- `deck_versions` — Automatic deck snapshots for version history
 - `collection` — User card inventory
 - `match_logs` — Game history with opponent info
 - `card_performance` — Win-rate tracking per card/format
+- `community_decks` / `community_deck_cards` — Scraped tournament/community decks with W-L records
+- `meta_card_stats` — Aggregated card statistics across community data
+- `archetype_win_stats` — Win rates by archetype from tournament data
+- `edhrec_knowledge` / `edhrec_avg_decks` — EDHREC strategy articles and average decklists (FTS5)
+- `app_state` — Application settings (API keys, preferences)
+- `arena_parsed_matches` — Parsed Arena log match data with grpId mappings
 
 Migrations run automatically on startup. Schema defined in `src/db/schema.ts`.
 
 ## Environment Variables
 
 ```
-MTG_DB_DIR=       # Custom database directory (default: data/)
+MTG_DB_DIR=       # Custom database directory (default: data/, in Electron: %APPDATA%/The Black Grimoire/data/)
 JWT_SECRET=       # JWT signing secret (has dev default, change for prod)
 NODE_ENV=         # development | production
+PORT=             # Server port (default: 3000, auto-finds available port 3000-3009)
 ```
 
 ## Testing
@@ -171,6 +215,8 @@ Tests live in `src/lib/__tests__/` and `tests/`. Run with `npm test`. Key test s
 - `deck-validation.test.ts` — Format legality rules
 - `constants.test.ts` — Game constants
 - `tests/db.test.ts` — Database operations
+
+Python tests in `scripts/tests/`, run with `npm run test:python`.
 
 ## Common Patterns
 
@@ -190,3 +236,12 @@ Tests live in `src/lib/__tests__/` and `tests/`. Run with `npm test`. Key test s
 1. Add new migration to `MIGRATIONS` array in `src/db/schema.ts`
 2. Increment migration number, add SQL statements
 3. Migration runs automatically on next app startup
+
+## Packaging Notes
+
+- `npm run build` produces `.next/standalone/` with `server.js` + traced node_modules
+- `scripts/postbuild-standalone.js` copies `.next/static`, `public/`, and native modules into standalone
+- `electron-builder.yml` places standalone in `extraResources` (bypasses node_modules filtering)
+- `scripts/afterPack.js` rebuilds better-sqlite3 for Electron, caches prebuilt binaries
+- Packaged app: ~443MB unpacked, ~153MB installer
+- Data stored at `%APPDATA%/The Black Grimoire/` (Windows) with crash log for diagnostics
