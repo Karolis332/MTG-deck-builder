@@ -25,14 +25,24 @@ interface AIChatPanelProps {
   className?: string;
 }
 
-/** Lightweight markdown→JSX for AI messages (bold, bullets, newlines) */
+/** Lightweight markdown→JSX for AI messages (bold, bullets, newlines, code blocks) */
 function renderMarkdown(text: string) {
+  // Strip fenced code blocks (```json ... ```) — these are artifacts from AI returning JSON
+  const cleaned = text
+    .replace(/```(?:json)?\s*\n?/gi, '')
+    .replace(/\n?```\s*/gi, '');
+
   // Split into lines, process each
-  const lines = text.split('\n');
+  const lines = cleaned.split('\n');
   const elements: React.ReactNode[] = [];
 
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
+
+    // Skip lines that look like raw JSON structure (safety net)
+    if (/^\s*[{}\[\]"]\s*$/.test(line) || /^\s*"(message|actions|action|cardName|replaceWith|quantity|reason)"/.test(line)) {
+      continue;
+    }
 
     // Bullet points: "- text" or "* text"
     if (/^[\-\*]\s/.test(line)) {

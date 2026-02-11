@@ -41,6 +41,10 @@ extraResources:
     to: "docs"
     filter:
       - "MTG_DECK_BUILDING_KNOWLEDGE.md"
+  - from: "scripts/"
+    to: "scripts"
+    filter:
+      - "*.py"
 
 mac:
   target:

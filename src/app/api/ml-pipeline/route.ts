@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { spawn, ChildProcess } from 'child_process';
 import path from 'path';
+import fs from 'fs';
 
 // Module-level state for the running pipeline process
 let pipelineProcess: ChildProcess | null = null;
@@ -38,11 +39,31 @@ async function findPython(): Promise<string> {
   throw new Error('Python not found. Install Python 3.x and ensure it is on PATH.');
 }
 
+/** Resolve the scripts directory — check extraResources first (packaged), fall back to cwd (dev) */
+function getScriptsDir(): string {
+  // In packaged Electron, scripts are in process.resourcesPath/scripts/
+  if (process.resourcesPath) {
+    const resourceScripts = path.join(process.resourcesPath, 'scripts');
+    if (fs.existsSync(path.join(resourceScripts, 'pipeline.py'))) {
+      return resourceScripts;
+    }
+  }
+  // Dev mode or Next.js standalone — scripts in project root
+  return path.join(process.cwd(), 'scripts');
+}
+
+/** Resolve the database path — check MTG_DB_DIR env (set by Electron), fall back to cwd/data */
+function getDbPath(): string {
+  if (process.env.MTG_DB_DIR) {
+    return path.join(process.env.MTG_DB_DIR, 'mtg-deck-builder.db');
+  }
+  return path.join(process.cwd(), 'data', 'mtg-deck-builder.db');
+}
+
 /** Map step presets to pipeline.py arguments */
 function buildPipelineArgs(steps: string, target: string): string[] {
   const args: string[] = [];
-  const projectDir = process.cwd();
-  const dbPath = path.join(projectDir, 'data', 'mtg-deck-builder.db');
+  const dbPath = getDbPath();
 
   args.push('--db', dbPath);
 
@@ -51,10 +72,10 @@ function buildPipelineArgs(steps: string, target: string): string[] {
       // No skip flags — run everything
       break;
     case 'aggregate-train-predict':
-      args.push('--skip-scrape', '--skip-mtgjson', '--skip-edhrec', '--skip-arena');
+      args.push('--skip-scrape', '--skip-articles', '--skip-mtgjson', '--skip-edhrec', '--skip-arena');
       break;
     case 'train-predict':
-      args.push('--skip-scrape', '--skip-mtgjson', '--skip-edhrec', '--skip-arena');
+      args.push('--skip-scrape', '--skip-articles', '--skip-mtgjson', '--skip-edhrec', '--skip-arena');
       // Also skip the aggregate steps by adding them individually
       // Pipeline doesn't have granular skip for aggregate, so we'll
       // run with only train by leveraging the existing step flow
@@ -114,15 +135,28 @@ export async function POST(request: NextRequest) {
     };
 
     const python = await findPython();
-    const scriptPath = path.join(process.cwd(), 'scripts', 'pipeline.py');
+    const scriptsDir = getScriptsDir();
+    const scriptPath = path.join(scriptsDir, 'pipeline.py');
     const pipelineArgs = buildPipelineArgs(steps, target);
+
+    if (!fs.existsSync(scriptPath)) {
+      return NextResponse.json(
+        { error: `Pipeline script not found at: ${scriptPath}` },
+        { status: 500 }
+      );
+    }
 
     addLine(`$ ${python} scripts/pipeline.py ${pipelineArgs.join(' ')}`);
     addLine(`Started at ${pipelineStatus.startedAt}`);
     addLine('');
 
+    // Use a writable CWD — process.env.MTG_DB_DIR parent, or project root
+    const cwd = process.env.MTG_DB_DIR
+      ? path.dirname(process.env.MTG_DB_DIR)
+      : process.cwd();
+
     const child = spawn(python, [scriptPath, ...pipelineArgs], {
-      cwd: process.cwd(),
+      cwd,
       stdio: ['ignore', 'pipe', 'pipe'],
     });
 

@@ -66,6 +66,31 @@ const SECTION_HEADERS: Record<string, ArenaImportLine['board']> = {
 // Matches: "4 Lightning Bolt (2X2) 117" or "4 Lightning Bolt" or "4x Lightning Bolt"
 const LINE_REGEX = /^(\d+)x?\s+(.+?)(?:\s+\((\w+)\)\s+(\S+))?$/i;
 
+export interface ArenaParseResult {
+  cards: ArenaImportLine[];
+  deckName?: string;
+}
+
+export function parseArenaExportWithMeta(text: string): ArenaParseResult {
+  const lines = text.split(/\r?\n/);
+  let deckName: string | undefined;
+
+  // Check first non-empty line: if it's not a card line and not a section header, treat it as deck name
+  for (let i = 0; i < lines.length; i++) {
+    const trimmed = lines[i].trim();
+    if (!trimmed) continue; // skip leading blank lines
+    const lower = trimmed.toLowerCase().replace(/:$/, '');
+    if (!LINE_REGEX.test(trimmed) && !SECTION_HEADERS[lower]) {
+      deckName = trimmed;
+      lines.splice(i, 1); // remove name line before parsing cards
+    }
+    break; // only check the first non-empty line
+  }
+
+  const cards = parseArenaExport(lines.join('\n'));
+  return { cards, deckName };
+}
+
 export function parseArenaExport(text: string): ArenaImportLine[] {
   const lines = text.split(/\r?\n/);
   const result: ArenaImportLine[] = [];

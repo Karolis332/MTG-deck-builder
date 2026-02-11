@@ -5,14 +5,16 @@ PR9: Full data pipeline orchestrator.
 Runs the complete refresh cycle:
   1. MTGJSON fetch (subtypes + arena IDs)
   2. EDHREC commander synergy enrichment
-  3. MTGGoldfish metagame scraping
-  4. MTGTop8 tournament scraping
-  5. Arena log parsing
-  6. Match aggregation
-  7. Community meta aggregation
-  8. Meta analysis (pandas)
-  9. Model training (scikit-learn, 24 features)
-  10. Personalized suggestions generation
+  3. EDHREC article scraping
+  4. MTGGoldfish article scraping
+  5. MTGGoldfish metagame scraping
+  6. MTGTop8 tournament scraping
+  7. Arena log parsing
+  8. Match aggregation
+  9. Community meta aggregation
+  10. Meta analysis (pandas)
+  11. Model training (scikit-learn, 25 features)
+  12. Personalized suggestions generation
 
 Each step is optional and can be skipped via flags. Steps that fail
 are logged but don't block subsequent steps.
@@ -20,7 +22,8 @@ are logged but don't block subsequent steps.
 Usage:
     python scripts/pipeline.py                  # run all steps
     python scripts/pipeline.py --skip-mtgjson   # skip MTGJSON fetch
-    python scripts/pipeline.py --skip-scrape    # skip both scrapers
+    python scripts/pipeline.py --skip-scrape    # skip both metagame scrapers
+    python scripts/pipeline.py --skip-articles  # skip article scrapers
     python scripts/pipeline.py --only train     # run only model training
     python scripts/pipeline.py --dry-run        # show what would run
 """
@@ -50,6 +53,18 @@ STEPS = [
         "label": "EDHREC Commander Synergy Enrichment",
         "script": "enrich_commander_synergies.py",
         "args": ["--from-decks"],
+    },
+    {
+        "name": "edhrec_articles",
+        "label": "EDHREC Article Scraping",
+        "script": "scrape_edhrec_articles.py",
+        "args": ["--max-articles", "100"],
+    },
+    {
+        "name": "goldfish_articles",
+        "label": "MTGGoldfish Article Scraping",
+        "script": "scrape_mtggoldfish_articles.py",
+        "args": ["--max-pages", "5", "--max-articles", "100"],
     },
     {
         "name": "goldfish",
@@ -121,7 +136,7 @@ def run_step(step: dict, db_path: str, dry_run: bool = False) -> bool:
 
     try:
         # Scrapers need longer timeout due to rate-limited HTTP requests
-        step_timeout = 900 if step["name"] in ("goldfish", "mtgtop8") else 300
+        step_timeout = 900 if step["name"] in ("goldfish", "mtgtop8", "edhrec_articles", "goldfish_articles") else 300
 
         result = subprocess.run(
             cmd,
@@ -163,6 +178,8 @@ def main():
     parser.add_argument("--skip-scrape", action="store_true", help="Skip MTGGoldfish + MTGTop8 scraping")
     parser.add_argument("--skip-tournaments", action="store_true",
                         help="Pass --no-tournaments to MTGGoldfish scraper")
+    parser.add_argument("--skip-articles", action="store_true",
+                        help="Skip EDHREC + MTGGoldfish article scraping")
     parser.add_argument("--skip-arena", action="store_true", help="Skip Arena log parsing")
     parser.add_argument("--skip-train", action="store_true", help="Skip model training")
     parser.add_argument("--only", choices=[s["name"] for s in STEPS],
@@ -180,6 +197,9 @@ def main():
         skip_set.add("goldfish")
         skip_set.add("mtgtop8")
         skip_set.add("meta_aggregate")
+    if args.skip_articles:
+        skip_set.add("edhrec_articles")
+        skip_set.add("goldfish_articles")
     if args.skip_arena:
         skip_set.add("arena")
     if args.skip_train:
@@ -216,7 +236,9 @@ def main():
 
         # Skip predict if train failed or was skipped
         if name == "predict" and results.get("train") != "success":
-            if not os.path.exists(MODEL_PATH):
+            # Check for model in same directory as the database
+            model_path = os.path.join(os.path.dirname(db_path), "card_model.joblib")
+            if not os.path.exists(model_path) and not os.path.exists(MODEL_PATH):
                 print(f"\n[SKIP] {step['label']} (no trained model)")
                 results[name] = "skipped"
                 continue

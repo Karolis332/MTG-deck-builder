@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { parseArenaExport, formatArenaExport } from '../arena-parser';
+import { parseArenaExport, formatArenaExport, parseArenaExportWithMeta } from '../arena-parser';
 
 describe('parseArenaExport', () => {
   it('parses standard format with set info', () => {
@@ -127,6 +127,60 @@ this is not a card line
     const text = '4 Lightning Bolt\r\n2 Negate\r\n';
     const result = parseArenaExport(text);
     expect(result).toHaveLength(2);
+  });
+});
+
+describe('parseArenaExportWithMeta', () => {
+  it('extracts deck name from first line', () => {
+    const result = parseArenaExportWithMeta('Atraxa Combo\nDeck\n4 Lightning Bolt');
+    expect(result.deckName).toBe('Atraxa Combo');
+    expect(result.cards).toHaveLength(1);
+    expect(result.cards[0].name).toBe('Lightning Bolt');
+  });
+
+  it('returns undefined deckName when section header is first', () => {
+    const result = parseArenaExportWithMeta('Deck\n4 Lightning Bolt');
+    expect(result.deckName).toBeUndefined();
+    expect(result.cards).toHaveLength(1);
+  });
+
+  it('returns undefined deckName when card line is first', () => {
+    const result = parseArenaExportWithMeta('4 Lightning Bolt');
+    expect(result.deckName).toBeUndefined();
+    expect(result.cards).toHaveLength(1);
+  });
+
+  it('handles deck name with special characters', () => {
+    const result = parseArenaExportWithMeta("Atraxa's Big List\nDeck\n4 Lightning Bolt");
+    expect(result.deckName).toBe("Atraxa's Big List");
+    expect(result.cards).toHaveLength(1);
+  });
+
+  it('skips blank lines before deck name', () => {
+    const result = parseArenaExportWithMeta('\n\nMy Deck\nDeck\n4 Lightning Bolt');
+    expect(result.deckName).toBe('My Deck');
+    expect(result.cards).toHaveLength(1);
+  });
+
+  it('parses full commander deck with name', () => {
+    const text = `My Brawl Deck
+Commander
+1 Ashling the Pilgrim
+Deck
+1 Lightning Bolt
+1 Mountain`;
+    const result = parseArenaExportWithMeta(text);
+    expect(result.deckName).toBe('My Brawl Deck');
+    expect(result.cards).toHaveLength(3);
+    expect(result.cards[0].board).toBe('commander');
+    expect(result.cards[1].board).toBe('main');
+  });
+
+  it('does not confuse section header with colon as deck name', () => {
+    const result = parseArenaExportWithMeta('Sideboard:\n2 Negate');
+    expect(result.deckName).toBeUndefined();
+    expect(result.cards).toHaveLength(1);
+    expect(result.cards[0].board).toBe('sideboard');
   });
 });
 

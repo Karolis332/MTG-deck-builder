@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getDb, getDeckWithCards } from '@/lib/db';
 import { DEFAULT_LAND_COUNT, DEFAULT_DECK_SIZE, COMMANDER_FORMATS } from '@/lib/constants';
 import { fitsColorIdentity, isLegalInFormat, extractRejectedCards, buildRejectionReminder } from '@/lib/ai-chat-helpers';
+import { queryKnowledge, formatKnowledgeForPrompt } from '@/lib/knowledge-retrieval';
 import type { DbCard } from '@/lib/types';
 
 interface ChatAction {
@@ -54,7 +55,7 @@ export async function POST(request: NextRequest) {
 
     console.log('[AI Chat] === NEW REQUEST ===');
     console.log('[AI Chat] Prompt:', prompt);
-    console.log('[AI Chat] Code version: v2-with-fast-path');
+    console.log('[AI Chat] Code version: v3-buffered-json-streaming');
 
     if (!deck_id || !prompt) {
       return NextResponse.json(
@@ -320,10 +321,10 @@ export async function POST(request: NextRequest) {
       .map(([type, cards]) => `${type}:\n${cards.join('\n')}`)
       .join('\n');
 
-    // ── EDHREC Knowledge Retrieval ──────────────────────────────────────
-    // Search FTS5 for articles matching commander name, archetype, or user query
-    let edhrecKnowledge = '';
-    try {
+    // ── Community Knowledge Retrieval (EDHREC + MTGGoldfish) ──────────
+    // Search FTS5 tables for articles matching commander name, archetype, or user query
+    let communityKnowledge = '';
+    {
       const searchTerms: string[] = [];
       if (commanderCards.length > 0) {
         searchTerms.push(commanderCards[0].name);
@@ -333,27 +334,17 @@ export async function POST(request: NextRequest) {
       searchTerms.push(...queryWords.slice(0, 3));
 
       if (searchTerms.length > 0) {
-        const ftsQuery = searchTerms.map(t => `"${t.replace(/"/g, '')}"`).join(' OR ');
-        const knowledgeRows = db.prepare(`
-          SELECT ek.title, ek.chunk_text, ek.category
-          FROM edhrec_knowledge_fts fts
-          JOIN edhrec_knowledge ek ON fts.rowid = ek.id
-          WHERE edhrec_knowledge_fts MATCH ?
-          ORDER BY rank
-          LIMIT 3
-        `).all(ftsQuery) as Array<{ title: string; chunk_text: string; category: string }>;
-
-        if (knowledgeRows.length > 0) {
-          edhrecKnowledge = `\n═══ EDHREC KNOWLEDGE (relevant articles) ═══\n` +
-            knowledgeRows.map(r => `[${r.category}] ${r.title}:\n${r.chunk_text.slice(0, 400)}`).join('\n---\n');
-        }
+        const knowledgeChunks = queryKnowledge({
+          searchTerms,
+          commander: commanderCards[0]?.name,
+          format,
+          maxResults: 5,
+        });
+        communityKnowledge = formatKnowledgeForPrompt(knowledgeChunks);
       }
-    } catch {
-      // FTS5 table may not exist yet — that's fine
     }
 
     // ── EDHREC Average Decklist for Commander ────────────────────────────
-    let edhrecAvgDeck = '';
     if (commanderCards.length > 0) {
       try {
         const cmdName = commanderCards[0].name;
@@ -371,12 +362,12 @@ export async function POST(request: NextRequest) {
             if (!byCategory[c.category]) byCategory[c.category] = [];
             byCategory[c.category].push(`${c.card_name} (${Math.round(c.inclusion_rate * 100)}%)`);
           }
-          edhrecKnowledge += `\n═══ EDHREC AVERAGE DECKLIST for ${cmdName} ═══\n`;
-          edhrecKnowledge += `These are the most commonly played cards in ${cmdName} decks on EDHREC:\n`;
+          communityKnowledge += `\n═══ EDHREC AVERAGE DECKLIST for ${cmdName} ═══\n`;
+          communityKnowledge += `These are the most commonly played cards in ${cmdName} decks on EDHREC:\n`;
           for (const [cat, cards] of Object.entries(byCategory)) {
-            edhrecKnowledge += `\n${cat}: ${cards.join(', ')}`;
+            communityKnowledge += `\n${cat}: ${cards.join(', ')}`;
           }
-          edhrecKnowledge += `\n\nUse these as reference when suggesting cards — high inclusion rate means community-validated.`;
+          communityKnowledge += `\n\nUse these as reference when suggesting cards — high inclusion rate means community-validated.`;
         }
       } catch {
         // Table may not exist — that's fine
@@ -467,13 +458,15 @@ CURRENT DECKLIST (with oracle text for reasoning)
 ═══════════════════════════════════════════════════════════
 ${deckSummary}
 
-${edhrecKnowledge}
+${communityKnowledge}
 ${mlPredictions}
 ═══════════════════════════════════════════════════════════
-RESPONSE FORMAT (strict JSON)
+RESPONSE FORMAT (strict JSON — NO MARKDOWN)
 ═══════════════════════════════════════════════════════════
+Respond with ONLY valid JSON. Do NOT wrap in markdown code blocks. Do NOT use \`\`\`json tags. Output raw JSON directly:
 {"message":"Your explanation","actions":[{"action":"swap","cardName":"Cut This","replaceWith":"Add This","quantity":1,"reason":"why"}]}
-Use "swap" for replacements. Only use "add"/"cut" if deck size must change.`;
+Use "swap" for replacements. Only use "add"/"cut" if deck size must change.
+CRITICAL: Your ENTIRE response must be a single JSON object. No prose before or after. No code fences.`;
 
     // Build messages — short history + fresh state reminder each turn
     const messages: Array<{ role: 'system' | 'user' | 'assistant'; content: string }> = [
@@ -543,15 +536,30 @@ Remember to check the card list above to avoid suggesting duplicates!`,
 
       let parsed: ChatResponse;
       try {
-        let jsonText = content;
-        const jsonMatch = content.match(/```json\n([\s\S]*?)\n```/) || content.match(/\{[\s\S]*\}/);
+        // Strip markdown code fences if model wrapped response
+        let jsonText = content.trim();
+        jsonText = jsonText.replace(/^```(?:json)?\s*\n?/i, '').replace(/\n?```\s*$/i, '');
+        // Try to extract a JSON object
+        const jsonMatch = jsonText.match(/\{[\s\S]*\}/);
         if (jsonMatch) {
-          jsonText = jsonMatch[1] || jsonMatch[0];
+          jsonText = jsonMatch[0];
         }
         parsed = JSON.parse(jsonText);
       } catch {
         console.warn('[AI Chat] Non-JSON response, returning as plain message');
-        return { message: content, actions: [] };
+        // Clean code fences from display text so user doesn't see raw ```json blocks
+        const cleaned = content
+          .replace(/^```(?:json)?\s*\n?/gim, '')
+          .replace(/\n?```\s*$/gim, '')
+          .trim();
+        // If it still looks like raw JSON, extract just the message field if possible
+        try {
+          const msgMatch = cleaned.match(/"message"\s*:\s*"((?:[^"\\]|\\.)*)"/);
+          if (msgMatch) {
+            return { message: msgMatch[1].replace(/\\n/g, '\n').replace(/\\"/g, '"'), actions: [] };
+          }
+        } catch {}
+        return { message: cleaned, actions: [] };
       }
 
       for (const act of parsed.actions || []) {
@@ -762,12 +770,14 @@ Remember to check the card list above to avoid suggesting duplicates!`,
         );
       }
 
-      // Stream SSE to client
+      // Stream SSE to client — buffer JSON responses, only stream natural text
       const encoder = new TextEncoder();
       const readable = new ReadableStream({
         async start(controller) {
           let fullText = '';
           let completed = false;
+          let isJsonResponse = false;
+          let jsonDetected = false;
           try {
             const reader = response.body!.getReader();
             const decoder = new TextDecoder();
@@ -791,7 +801,26 @@ Remember to check the card list above to avoid suggesting duplicates!`,
 
                   if (event.type === 'content_block_delta' && event.delta?.text) {
                     fullText += event.delta.text;
-                    controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: 'text', content: event.delta.text })}\n\n`));
+
+                    // Detect if response is JSON (starts with { or ```json)
+                    if (!jsonDetected) {
+                      const trimmed = fullText.trimStart();
+                      if (trimmed.startsWith('{') || trimmed.startsWith('```')) {
+                        isJsonResponse = true;
+                        jsonDetected = true;
+                        // Send a placeholder so user sees activity
+                        controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: 'text', content: 'Analyzing your deck...' })}\n\n`));
+                      } else if (trimmed.length > 5) {
+                        // Not JSON — stream normally
+                        jsonDetected = true;
+                        isJsonResponse = false;
+                        controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: 'text', content: fullText })}\n\n`));
+                      }
+                    } else if (!isJsonResponse) {
+                      // Natural text — stream delta normally
+                      controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: 'text', content: event.delta.text })}\n\n`));
+                    }
+                    // If JSON response, we buffer silently (no streaming to UI)
                   } else if (event.type === 'message_stop' && !completed) {
                     completed = true;
                     const result = validateAndResolve(fullText);
@@ -855,6 +884,8 @@ Remember to check the card list above to avoid suggesting duplicates!`,
         async start(controller) {
           let fullText = '';
           let completed = false;
+          let isJsonResponse = false;
+          let jsonDetected = false;
           try {
             const reader = response.body!.getReader();
             const decoder = new TextDecoder();
@@ -878,7 +909,22 @@ Remember to check the card list above to avoid suggesting duplicates!`,
                   const delta = event.choices?.[0]?.delta?.content;
                   if (delta) {
                     fullText += delta;
-                    controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: 'text', content: delta })}\n\n`));
+
+                    // Detect if response is JSON (starts with { or ```json)
+                    if (!jsonDetected) {
+                      const trimmed = fullText.trimStart();
+                      if (trimmed.startsWith('{') || trimmed.startsWith('```')) {
+                        isJsonResponse = true;
+                        jsonDetected = true;
+                        controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: 'text', content: 'Analyzing your deck...' })}\n\n`));
+                      } else if (trimmed.length > 5) {
+                        jsonDetected = true;
+                        isJsonResponse = false;
+                        controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: 'text', content: fullText })}\n\n`));
+                      }
+                    } else if (!isJsonResponse) {
+                      controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: 'text', content: delta })}\n\n`));
+                    }
                   }
 
                   if (event.choices?.[0]?.finish_reason === 'stop' && !completed) {

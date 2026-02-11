@@ -1,4 +1,4 @@
-import { ipcMain, dialog, BrowserWindow } from 'electron';
+import { ipcMain, dialog, BrowserWindow, app } from 'electron';
 import { spawn, ChildProcess } from 'child_process';
 import { execSync } from 'child_process';
 import fs from 'fs';
@@ -200,18 +200,29 @@ export function registerIpcHandlers(): void {
         return { ok: false, error: 'Python not found. Install Python 3.x.' };
       }
 
-      const projectDir = path.resolve(__dirname, '..');
+      // In production, scripts are bundled as extraResources and DB is in userData.
+      // In dev, both live under the project root.
+      const isDev = !app.isPackaged;
+      const projectDir = isDev
+        ? path.resolve(__dirname, '..')
+        : process.resourcesPath;
       const scriptPath = path.join(projectDir, 'scripts', 'pipeline.py');
-      const dbPath = path.join(projectDir, 'data', 'mtg-deck-builder.db');
+      const dbPath = isDev
+        ? path.join(path.resolve(__dirname, '..'), 'data', 'mtg-deck-builder.db')
+        : path.join(app.getPath('userData'), 'data', 'mtg-deck-builder.db');
+
+      if (!fs.existsSync(scriptPath)) {
+        return { ok: false, error: `Pipeline script not found at: ${scriptPath}` };
+      }
 
       const args = [scriptPath, '--db', dbPath];
 
       switch (options.steps) {
         case 'aggregate-train-predict':
-          args.push('--skip-scrape', '--skip-mtgjson', '--skip-edhrec', '--skip-arena');
+          args.push('--skip-scrape', '--skip-articles', '--skip-mtgjson', '--skip-edhrec', '--skip-arena');
           break;
         case 'train-predict':
-          args.push('--skip-scrape', '--skip-mtgjson', '--skip-edhrec', '--skip-arena');
+          args.push('--skip-scrape', '--skip-articles', '--skip-mtgjson', '--skip-edhrec', '--skip-arena');
           break;
         case 'predict':
           args.push('--only', 'predict');
@@ -228,7 +239,7 @@ export function registerIpcHandlers(): void {
       broadcast({ type: 'info', line: `$ ${pythonCmd} scripts/pipeline.py ${args.slice(1).join(' ')}` });
 
       const child = spawn(pythonCmd, args, {
-        cwd: projectDir,
+        cwd: isDev ? path.resolve(__dirname, '..') : app.getPath('userData'),
         stdio: ['ignore', 'pipe', 'pipe'],
       });
 

@@ -665,4 +665,42 @@ export const MIGRATIONS = [
       );
     `,
   },
+  {
+    version: 20,
+    name: 'add_mtggoldfish_knowledge',
+    sql: `
+      CREATE TABLE IF NOT EXISTS mtggoldfish_knowledge (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        source_url TEXT NOT NULL,
+        title TEXT NOT NULL,
+        author TEXT,
+        category TEXT,
+        article_type TEXT,
+        chunk_text TEXT NOT NULL,
+        chunk_index INTEGER NOT NULL,
+        content_hash TEXT,
+        tags TEXT,
+        published_date TEXT,
+        fetched_at TEXT DEFAULT (datetime('now')),
+        UNIQUE(source_url, chunk_index)
+      );
+
+      CREATE VIRTUAL TABLE IF NOT EXISTS mtggoldfish_knowledge_fts
+        USING fts5(title, chunk_text, tags, content='mtggoldfish_knowledge', content_rowid='id');
+
+      CREATE TRIGGER IF NOT EXISTS mtggoldfish_knowledge_ai AFTER INSERT ON mtggoldfish_knowledge BEGIN
+        INSERT INTO mtggoldfish_knowledge_fts(rowid, title, chunk_text, tags)
+        VALUES (new.id, new.title, new.chunk_text, new.tags);
+      END;
+
+      CREATE TRIGGER IF NOT EXISTS mtggoldfish_knowledge_ad AFTER DELETE ON mtggoldfish_knowledge BEGIN
+        INSERT INTO mtggoldfish_knowledge_fts(mtggoldfish_knowledge_fts, rowid, title, chunk_text, tags)
+        VALUES ('delete', old.id, old.title, old.chunk_text, old.tags);
+      END;
+
+      CREATE INDEX IF NOT EXISTS idx_mgk_category ON mtggoldfish_knowledge(category);
+      CREATE INDEX IF NOT EXISTS idx_mgk_article_type ON mtggoldfish_knowledge(article_type);
+      CREATE INDEX IF NOT EXISTS idx_mgk_published ON mtggoldfish_knowledge(published_date);
+    `,
+  },
 ];

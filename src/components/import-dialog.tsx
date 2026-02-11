@@ -1,8 +1,9 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { cn } from '@/lib/utils';
+import { parseArenaExportWithMeta } from '@/lib/arena-parser';
 
 interface ImportDialogProps {
   open: boolean;
@@ -34,12 +35,23 @@ export function ImportDialog({ open, onClose, onSuccess, deckId, deckName }: Imp
   const [result, setResult] = useState<{ imported: number; failed: string[]; total: number } | null>(null);
   const [newDeckId, setNewDeckId] = useState<number | null>(null);
   const [error, setError] = useState('');
+  const [deckNameInput, setDeckNameInput] = useState('');
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Update mode state
   const [diffPreview, setDiffPreview] = useState<DiffEntry[] | null>(null);
   const [diffFailed, setDiffFailed] = useState<string[]>([]);
   const [confirming, setConfirming] = useState(false);
+
+  // Auto-detect deck name from pasted text when importing as new deck
+  useEffect(() => {
+    if (importType !== 'deck' || !text.trim()) {
+      setDeckNameInput('');
+      return;
+    }
+    const { deckName } = parseArenaExportWithMeta(text);
+    setDeckNameInput(deckName || '');
+  }, [text, importType]);
 
   if (!open) return null;
 
@@ -100,22 +112,21 @@ export function ImportDialog({ open, onClose, onSuccess, deckId, deckName }: Imp
         onSuccess?.(data);
       } else {
         // Import as a new deck: detect format from card count, create deck, import cards
-        const lines = text.trim().split('\n').filter((l) => l.trim());
-        const cardCount = lines.reduce((sum, line) => {
-          const match = line.match(/^(\d+)\s/);
-          return sum + (match ? parseInt(match[1], 10) : 1);
-        }, 0);
-        const hasCommander = text.includes('Commander') || text.includes('COMMANDER');
-        const uniqueCards = lines.length;
+        const { cards: parsedCards, deckName: detectedName } = parseArenaExportWithMeta(text);
+        const cardCount = parsedCards.reduce((sum, c) => sum + c.quantity, 0);
+        const hasCommander = parsedCards.some(c => c.board === 'commander');
+        const uniqueCards = parsedCards.length;
         const isSingleton = uniqueCards > 0 && cardCount / uniqueCards < 1.5;
         const detectedFormat = hasCommander || (isSingleton && cardCount >= 58 && cardCount <= 101)
           ? (cardCount <= 61 ? 'brawl' : 'commander')
           : cardCount <= 80 ? 'standard' : 'standard';
 
+        const finalName = deckNameInput.trim() || detectedName || 'Imported Deck';
+
         const deckRes = await fetch('/api/decks', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name: 'Imported Deck', format: detectedFormat }),
+          body: JSON.stringify({ name: finalName, format: detectedFormat }),
         });
         const deckData = await deckRes.json();
         if (!deckRes.ok) throw new Error(deckData.error || 'Failed to create deck');
@@ -179,6 +190,7 @@ export function ImportDialog({ open, onClose, onSuccess, deckId, deckName }: Imp
     setResult(null);
     setNewDeckId(null);
     setError('');
+    setDeckNameInput('');
     setDiffPreview(null);
     setDiffFailed([]);
     setDeckSubMode('merge');
@@ -325,6 +337,18 @@ export function ImportDialog({ open, onClose, onSuccess, deckId, deckName }: Imp
           </div>
         ) : !result ? (
           <>
+            {/* Deck name input for new deck imports */}
+            {importType === 'deck' && (
+              <input
+                type="text"
+                value={deckNameInput}
+                onChange={(e) => setDeckNameInput(e.target.value)}
+                placeholder="Deck name (auto-detected from paste)"
+                className="mb-2 w-full rounded-lg border border-border bg-background px-3 py-2 text-sm outline-none focus:border-primary/50 focus:ring-2 focus:ring-primary/20 placeholder:text-muted-foreground/40"
+                disabled={loading}
+              />
+            )}
+
             {/* Text area */}
             <textarea
               value={text}
