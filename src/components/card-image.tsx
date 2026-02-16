@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import type { DbCard } from '@/lib/types';
 
@@ -24,7 +23,6 @@ export function CardImage({
   card,
   size = 'normal',
   className,
-  priority = false,
   showHoverEffect = true,
   onClick,
 }: CardImageProps) {
@@ -50,7 +48,7 @@ export function CardImage({
         style={{ width, height }}
         onClick={onClick}
       >
-        <div className="mb-2 text-2xl">🃏</div>
+        <div className="mb-2 text-2xl">{'\u{1F0CF}'}</div>
         <span className="text-xs font-medium text-foreground line-clamp-2">
           {card.name}
         </span>
@@ -77,7 +75,8 @@ export function CardImage({
           style={{ width, height }}
         />
       )}
-      <Image
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
         src={imageUri}
         alt={card.name}
         width={width}
@@ -86,10 +85,9 @@ export function CardImage({
           'rounded-xl transition-opacity duration-200',
           isLoading ? 'opacity-0' : 'opacity-100'
         )}
-        priority={priority}
+        loading={size === 'small' ? 'lazy' : 'eager'}
         onLoad={() => setIsLoading(false)}
         onError={() => setHasError(true)}
-        unoptimized
       />
     </div>
   );
