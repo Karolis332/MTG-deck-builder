@@ -36,6 +36,7 @@ export function ImportDialog({ open, onClose, onSuccess, deckId, deckName }: Imp
   const [newDeckId, setNewDeckId] = useState<number | null>(null);
   const [error, setError] = useState('');
   const [deckNameInput, setDeckNameInput] = useState('');
+  const [collectionSource, setCollectionSource] = useState<'paper' | 'arena'>('paper');
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Update mode state
@@ -93,7 +94,7 @@ export function ImportDialog({ open, onClose, onSuccess, deckId, deckName }: Imp
         const res = await fetch('/api/collection/import', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ text, mode }),
+          body: JSON.stringify({ text, mode, source: collectionSource }),
         });
         const data = await res.json();
         if (!res.ok) throw new Error(data.error || 'Import failed');
@@ -212,7 +213,7 @@ export function ImportDialog({ open, onClose, onSuccess, deckId, deckName }: Imp
       {/* Dialog */}
       <div className="relative w-full max-w-lg rounded-2xl border border-border bg-card p-6 shadow-2xl animate-slide-up">
         <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-lg font-semibold">Import Cards</h2>
+          <h2 className="font-heading text-lg font-semibold tracking-wide text-primary">Import Cards</h2>
           <button
             onClick={handleClose}
             className="flex h-7 w-7 items-center justify-center rounded-lg text-muted-foreground hover:bg-accent hover:text-foreground"
@@ -376,6 +377,33 @@ export function ImportDialog({ open, onClose, onSuccess, deckId, deckName }: Imp
 
               {importType === 'collection' && (
                 <div className="ml-auto flex items-center gap-2">
+                  <div className="flex rounded-md bg-accent/50 p-0.5">
+                    <button
+                      type="button"
+                      onClick={() => setCollectionSource('paper')}
+                      className={cn(
+                        'rounded px-2 py-0.5 text-[10px] font-medium transition-colors',
+                        collectionSource === 'paper'
+                          ? 'bg-card text-foreground shadow-sm'
+                          : 'text-muted-foreground hover:text-foreground'
+                      )}
+                    >
+                      Paper
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setCollectionSource('arena')}
+                      className={cn(
+                        'rounded px-2 py-0.5 text-[10px] font-medium transition-colors',
+                        collectionSource === 'arena'
+                          ? 'bg-card text-foreground shadow-sm'
+                          : 'text-muted-foreground hover:text-foreground'
+                      )}
+                    >
+                      Arena
+                    </button>
+                  </div>
+                  <span className="h-3 w-px bg-border" />
                   <label className="flex items-center gap-1.5 text-xs text-muted-foreground">
                     <input
                       type="radio"

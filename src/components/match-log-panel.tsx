@@ -122,6 +122,7 @@ export function MatchLogPanel({ deckId, format, className }: MatchLogPanelProps)
   useEffect(() => {
     fetchLogs();
     fetchAnalysis();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [deckId]);
 
   const handleUpload = async () => {

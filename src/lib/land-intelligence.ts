@@ -9,6 +9,7 @@
  */
 
 import { getDb } from '@/lib/db';
+import { getLegalityKey } from '@/lib/constants';
 import type { DbCard } from '@/lib/types';
 
 // ── Types ────────────────────────────────────────────────────────────────────
@@ -98,8 +99,8 @@ export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
   const db = getDb();
 
   // Build legality filter
-  const legalityKey = format === 'brawl' ? 'standard' : format;
-  const legalityFilter = `AND json_extract(c.legalities, '$.${legalityKey}') = 'legal'`;
+  const legalityKey = getLegalityKey(format);
+  const legalityFilter = `AND json_extract(c.legalities, '$.${legalityKey}') IN ('legal', 'restricted')`;
 
   // Fetch all non-basic lands with classifications
   const lands = db.prepare(`

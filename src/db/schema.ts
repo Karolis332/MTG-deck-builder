@@ -750,4 +750,162 @@ export const MIGRATIONS = [
       CREATE INDEX IF NOT EXISTS idx_lgs_match ON live_game_sessions(match_id);
     `,
   },
+  {
+    version: 22,
+    name: 'dual_collections',
+    sql: `
+      CREATE TABLE collection_new (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        card_id TEXT NOT NULL REFERENCES cards(id),
+        quantity INTEGER NOT NULL DEFAULT 1,
+        foil INTEGER NOT NULL DEFAULT 0,
+        source TEXT NOT NULL DEFAULT 'paper',
+        imported_at TEXT NOT NULL DEFAULT (datetime('now')),
+        user_id INTEGER REFERENCES users(id)
+      );
+
+      INSERT INTO collection_new (id, card_id, quantity, foil, source, imported_at, user_id)
+      SELECT id, card_id, quantity, foil, 'paper', imported_at, user_id FROM collection;
+
+      DROP TABLE collection;
+      ALTER TABLE collection_new RENAME TO collection;
+
+      CREATE INDEX idx_collection_card_id ON collection(card_id);
+      CREATE INDEX idx_collection_user_id ON collection(user_id);
+      CREATE INDEX idx_collection_source ON collection(source);
+      CREATE UNIQUE INDEX idx_collection_unique ON collection(card_id, foil, source, COALESCE(user_id, 0));
+    `,
+  },
+  {
+    version: 23,
+    name: 'add_spellbook_topdeck_tables',
+    sql: `
+      -- Commander Spellbook combo variants
+      CREATE TABLE IF NOT EXISTS spellbook_combos (
+        id TEXT PRIMARY KEY,
+        identity TEXT,
+        description TEXT,
+        prerequisites TEXT,
+        mana_needed TEXT,
+        popularity INTEGER,
+        bracket_tag TEXT,
+        legal_commander INTEGER DEFAULT 1,
+        legal_brawl INTEGER DEFAULT 0,
+        price_tcgplayer REAL,
+        fetched_at TEXT DEFAULT (datetime('now'))
+      );
+
+      -- Cards in each combo
+      CREATE TABLE IF NOT EXISTS spellbook_combo_cards (
+        combo_id TEXT NOT NULL REFERENCES spellbook_combos(id) ON DELETE CASCADE,
+        card_name TEXT NOT NULL,
+        card_oracle_id TEXT,
+        quantity INTEGER DEFAULT 1,
+        zone_locations TEXT,
+        must_be_commander INTEGER DEFAULT 0,
+        UNIQUE(combo_id, card_name)
+      );
+
+      CREATE INDEX IF NOT EXISTS idx_scc_card_name ON spellbook_combo_cards(card_name);
+      CREATE INDEX IF NOT EXISTS idx_scc_combo_id ON spellbook_combo_cards(combo_id);
+
+      -- What combos produce (results/features)
+      CREATE TABLE IF NOT EXISTS spellbook_combo_results (
+        combo_id TEXT NOT NULL REFERENCES spellbook_combos(id) ON DELETE CASCADE,
+        feature_name TEXT NOT NULL,
+        quantity INTEGER DEFAULT 1,
+        UNIQUE(combo_id, feature_name)
+      );
+
+      CREATE INDEX IF NOT EXISTS idx_scr_combo_id ON spellbook_combo_results(combo_id);
+
+      -- Deck-specific combo findings (from find-my-combos API)
+      CREATE TABLE IF NOT EXISTS spellbook_deck_combos (
+        deck_id INTEGER NOT NULL REFERENCES decks(id) ON DELETE CASCADE,
+        combo_id TEXT NOT NULL REFERENCES spellbook_combos(id) ON DELETE CASCADE,
+        category TEXT NOT NULL,
+        fetched_at TEXT DEFAULT (datetime('now')),
+        UNIQUE(deck_id, combo_id)
+      );
+
+      CREATE INDEX IF NOT EXISTS idx_sdc_deck_id ON spellbook_deck_combos(deck_id);
+
+      -- TopDeck.gg tournament metadata
+      CREATE TABLE IF NOT EXISTS topdeck_tournaments (
+        tid TEXT PRIMARY KEY,
+        name TEXT,
+        format TEXT,
+        start_date TEXT,
+        swiss_rounds INTEGER,
+        top_cut INTEGER,
+        participant_count INTEGER,
+        city TEXT,
+        state_region TEXT,
+        location TEXT
+      );
+
+      -- Player standings per tournament
+      CREATE TABLE IF NOT EXISTS topdeck_standings (
+        tid TEXT NOT NULL REFERENCES topdeck_tournaments(tid) ON DELETE CASCADE,
+        player_id TEXT,
+        player_name TEXT NOT NULL,
+        standing INTEGER,
+        wins INTEGER,
+        losses INTEGER,
+        draws INTEGER,
+        win_rate REAL,
+        opponent_win_rate REAL,
+        wins_swiss INTEGER,
+        wins_bracket INTEGER,
+        byes INTEGER,
+        decklist_url TEXT,
+        commander TEXT,
+        UNIQUE(tid, player_name)
+      );
+
+      CREATE INDEX IF NOT EXISTS idx_ts_tid ON topdeck_standings(tid);
+
+      -- Structured decklists from TopDeck
+      CREATE TABLE IF NOT EXISTS topdeck_deck_cards (
+        tid TEXT NOT NULL,
+        player_id TEXT,
+        section TEXT NOT NULL,
+        card_name TEXT NOT NULL,
+        count INTEGER DEFAULT 1,
+        UNIQUE(tid, player_id, section, card_name)
+      );
+
+      CREATE INDEX IF NOT EXISTS idx_tdc_card_name ON topdeck_deck_cards(card_name);
+
+      -- Round pairings for matchup analysis
+      CREATE TABLE IF NOT EXISTS topdeck_rounds (
+        tid TEXT NOT NULL REFERENCES topdeck_tournaments(tid) ON DELETE CASCADE,
+        round_number INTEGER,
+        table_number INTEGER,
+        player_names TEXT,
+        winner TEXT,
+        status TEXT
+      );
+
+      CREATE INDEX IF NOT EXISTS idx_tr_tid ON topdeck_rounds(tid);
+
+      -- Add combo_score to meta_card_stats for ML feature #26
+      ALTER TABLE meta_card_stats ADD COLUMN combo_score REAL;
+    `,
+  },
+  {
+    version: 24,
+    name: 'add_cf_cache_table',
+    sql: `
+      -- Local cache for Collaborative Filtering API responses
+      CREATE TABLE IF NOT EXISTS cf_cache (
+        deck_hash TEXT NOT NULL,
+        card_name TEXT NOT NULL,
+        cf_score REAL NOT NULL,
+        similar_deck_count INTEGER,
+        fetched_at TEXT DEFAULT (datetime('now')),
+        UNIQUE(deck_hash, card_name)
+      );
+    `,
+  },
 ];

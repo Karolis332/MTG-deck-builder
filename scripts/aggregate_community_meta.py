@@ -367,6 +367,68 @@ def aggregate_format(conn: sqlite3.Connection, fmt: str,
     return stats
 
 
+def compute_combo_score(conn: sqlite3.Connection):
+    """
+    Compute combo_score for each card in meta_card_stats.
+
+    For each card, count how many combos it appears in (from spellbook_combo_cards),
+    weighted by combo popularity, normalized to 0-1 scale.
+    """
+    # Check if spellbook tables exist
+    tables = set()
+    for row in conn.execute("SELECT name FROM sqlite_master WHERE type='table'"):
+        tables.add(row[0])
+    if "spellbook_combo_cards" not in tables or "spellbook_combos" not in tables:
+        print("  Spellbook tables not found, skipping combo_score")
+        return
+
+    # Check if combo_score column exists
+    existing = set()
+    for row in conn.execute("PRAGMA table_info(meta_card_stats)"):
+        existing.add(row[1])
+    if "combo_score" not in existing:
+        try:
+            conn.execute("ALTER TABLE meta_card_stats ADD COLUMN combo_score REAL")
+        except sqlite3.OperationalError:
+            pass
+
+    # Get combo counts weighted by popularity
+    combo_data = pd.read_sql_query("""
+        SELECT scc.card_name,
+               COUNT(DISTINCT scc.combo_id) AS combo_count,
+               SUM(COALESCE(sc.popularity, 1)) AS weighted_combo_count
+        FROM spellbook_combo_cards scc
+        LEFT JOIN spellbook_combos sc ON scc.combo_id = sc.id
+        GROUP BY scc.card_name
+    """, conn)
+
+    if combo_data.empty:
+        print("  No combo data found, skipping combo_score")
+        return
+
+    # Normalize weighted_combo_count to 0-1 scale
+    max_weighted = combo_data["weighted_combo_count"].max()
+    if max_weighted > 0:
+        combo_data["combo_score"] = combo_data["weighted_combo_count"] / max_weighted
+    else:
+        combo_data["combo_score"] = 0.0
+
+    # Update meta_card_stats
+    updated = 0
+    for _, row in combo_data.iterrows():
+        result = conn.execute("""
+            UPDATE meta_card_stats
+            SET combo_score = ?
+            WHERE card_name = ?
+        """, (round(float(row["combo_score"]), 6), row["card_name"]))
+        updated += result.rowcount
+
+    conn.commit()
+    print(f"  Updated combo_score for {updated} cards "
+          f"(from {len(combo_data)} combo-referenced cards, "
+          f"max weighted: {max_weighted})")
+
+
 def main():
     parser = argparse.ArgumentParser(description="Aggregate community meta card statistics")
     parser.add_argument("--db", default=DB_DEFAULT, help="Path to SQLite database")
@@ -403,6 +465,10 @@ def main():
         stats = aggregate_format(conn, fmt, archetype_stats)
         total_cards += stats["cards_computed"]
         total_decks += stats["total_decks"]
+
+    # Compute combo scores across all formats
+    print(f"\n[COMBO SCORES]")
+    compute_combo_score(conn)
 
     print("\n" + "=" * 60)
     print("Summary")

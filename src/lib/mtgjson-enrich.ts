@@ -38,7 +38,7 @@ let currentProgress: EnrichmentProgress = {
 
 let cancelRequested = false;
 let activeRequest: ReturnType<typeof https.get> | null = null;
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+
 let activeStream: any = null;
 
 export function getEnrichmentProgress(): EnrichmentProgress {
@@ -86,7 +86,7 @@ function fetchAndParseMtgjson(): Promise<Map<string, number>> {
     // Dynamic require to avoid bundling issues — stream-json is server-only
     let StreamValues: { withParser: () => NodeJS.ReadWriteStream };
     try {
-      // eslint-disable-next-line @typescript-eslint/no-require-imports
+  
       StreamValues = require('stream-json/streamers/StreamValues');
     } catch {
       reject(new Error('stream-json not installed. Run: npm install stream-json'));
@@ -108,7 +108,7 @@ function fetchAndParseMtgjson(): Promise<Map<string, number>> {
 
       // Stream-parse: AtomicCards.json is {"meta":{...},"data":{"CardName":[...],...}}
       // StreamValues emits each top-level value. We look for "data" key entries.
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      
       const pipeline: any = response.pipe(gunzip).pipe(StreamValues.withParser());
       activeStream = pipeline;
 

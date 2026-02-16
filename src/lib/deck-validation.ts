@@ -1,5 +1,5 @@
 import type { DbCard } from '@/lib/types';
-import { DEFAULT_DECK_SIZE, COMMANDER_FORMATS } from '@/lib/constants';
+import { DEFAULT_DECK_SIZE, COMMANDER_FORMATS, getLegalityKey } from '@/lib/constants';
 
 export interface ValidationIssue {
   level: 'error' | 'warning';
@@ -128,7 +128,7 @@ export function validateDeck(
       if (!entry.card.legalities) continue;
       try {
         const legalities = JSON.parse(entry.card.legalities);
-        const status = legalities[format];
+        const status = legalities[getLegalityKey(format)];
         if (status && status !== 'legal' && status !== 'restricted') {
           illegalCards.push(entry.card.name);
         }

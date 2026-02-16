@@ -1,6 +1,6 @@
 import { getDb } from './db';
 import type { DbCard, AISuggestion } from './types';
-import { DEFAULT_LAND_COUNT, DEFAULT_DECK_SIZE } from './constants';
+import { DEFAULT_LAND_COUNT, DEFAULT_DECK_SIZE, getLegalityKey } from './constants';
 
 interface DeckAnalysis {
   format: string;
@@ -77,7 +77,7 @@ export function getRuleBasedSuggestions(
   // Collection-only mode: INNER JOIN to only suggest owned cards
   const colJoin = collectionOnly ? 'INNER JOIN collection col ON c.id = col.card_id' : '';
   // Format legality filter
-  const legalFilter = format ? `AND c.legalities LIKE '%"${format}":"legal"%'` : '';
+  const legalFilter = format ? `AND c.legalities LIKE '%"${getLegalityKey(format)}":"legal"%'` : '';
 
   // 1. Land count suggestions
   if (analysis.totalMain < targetSize && analysis.landCount < targetLands) {

@@ -188,8 +188,8 @@ describe('GameStateEngine', () => {
     });
 
     const probs = engine.getDrawProbabilities();
-    expect(probs.get(111)).toBeCloseTo(4 / 10);
-    expect(probs.get(222)).toBeCloseTo(6 / 10);
+    expect(probs[111]).toBeCloseTo(4 / 10);
+    expect(probs[222]).toBeCloseTo(6 / 10);
   });
 
   it('should handle intermission (sideboarding)', () => {
@@ -601,10 +601,10 @@ describe('GameStateEngine', () => {
 
     // No deck submitted → library size 0
     const probs = engine.getDrawProbabilities();
-    expect(probs.size).toBe(0);
+    expect(Object.keys(probs).length).toBe(0);
   });
 
-  it('should set brawl starting life to 40', () => {
+  it('should set brawl starting life to 25', () => {
     engine.processEvent({
       type: 'match_start',
       matchId: 'test-brawl',
@@ -616,8 +616,8 @@ describe('GameStateEngine', () => {
     });
 
     const state = engine.getState();
-    expect(state.playerLife).toBe(40);
-    expect(state.opponentLife).toBe(40);
+    expect(state.playerLife).toBe(25);
+    expect(state.opponentLife).toBe(25);
   });
 
   it('should track opponent cards from card_played events', () => {

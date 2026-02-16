@@ -1,6 +1,6 @@
 import { getDb } from './db';
 import type { DbCard, AISuggestion } from './types';
-import { DEFAULT_LAND_COUNT, DEFAULT_DECK_SIZE } from './constants';
+import { DEFAULT_LAND_COUNT, DEFAULT_DECK_SIZE, getLegalityKey } from './constants';
 import { getCardGlobalScore, getMetaAdjustedScore } from './global-learner';
 import { getEdhrecRecommendations, getEdhrecThemeCards } from './edhrec';
 import type { EdhrecRecommendation } from './edhrec';
@@ -362,7 +362,7 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
 
   // Only include cards that are legal in the format
   const legalityFilter = format
-    ? `AND c.legalities LIKE '%"${format}":"legal"%'`
+    ? `AND c.legalities LIKE '%"${getLegalityKey(format)}":"legal"%'`
     : '';
 
   // Exclude commander from the 99
@@ -1153,7 +1153,7 @@ export function getSynergySuggestions(
     .join(' AND ');
 
   const legalityFilter = format
-    ? `AND c.legalities LIKE '%"${format}":"legal"%'`
+    ? `AND c.legalities LIKE '%"${getLegalityKey(format)}":"legal"%'`
     : '';
 
   // ── Load match insights if we have a deck ID ──────────────────────────

@@ -79,7 +79,7 @@ src/
     analytics/            # Analytics dashboard
   components/             # React components (client-side, 'use client')
   db/
-    schema.ts             # All 20 database migrations
+    schema.ts             # All 21 database migrations
   lib/                    # Business logic & utilities
     db.ts                 # SQLite singleton (globalThis for HMR safety)
     auth.ts               # JWT + scrypt auth
@@ -96,19 +96,24 @@ src/
     claude-suggest.ts     # Claude API integration for AI chat and deck building
     arena-parser.ts       # Parse Arena export format
     arena-log-reader.ts   # Parse Arena Player.log
+    arena-game-events.ts  # Game event extraction from Arena JSON blocks (12 event types)
+    game-state-engine.ts  # Real-time game state tracking + draw probabilities
+    grp-id-resolver.ts    # 4-layer Arena grpId → card resolution pipeline
+    mulligan-advisor.ts   # Deterministic keep/mull heuristic engine
+    sideboard-guide.ts    # AI-powered sideboard plan generator
     edhrec.ts             # EDHRec recommendations with caching
     ai-suggest.ts         # Rule-based card suggestions
     match-analyzer.ts     # Match analytics
-    electron-bridge.ts    # Electron IPC bridge
+    electron-bridge.ts    # Electron IPC bridge (includes overlay events)
     first-boot.ts         # First-launch account creation and card seeding
-    __tests__/            # Unit tests
+    __tests__/            # Unit tests (275 tests across 16 files)
 electron/
   main.ts                 # Electron main process (splash screen, spawns Next.js standalone server)
   next-server.ts          # Standalone Next.js server launcher
   preload.ts              # Context isolation bridge
   ipc-handlers.ts         # IPC message handlers
   setup-handlers.ts       # Setup wizard IPC handlers
-  arena-log-watcher.ts    # Live Arena.log file monitoring
+  arena-log-watcher.ts    # Live Arena.log file monitoring (streaming mode + GameStateEngine)
   resources/
     setup.html            # First-run setup wizard UI
 scripts/
@@ -173,12 +178,18 @@ npm run dist:all         # All platforms
 - **Multi-user support** via users table, all queries scoped by user_id
 - **Deck validation** enforces format rules (Standard 60-card, Commander singleton 100-card, etc.)
 - **Arena integration** parses Player.log for match results, collection import, deck submissions
+- **Live Arena overlay** — transparent always-on-top deck tracker during matches (Alt+O toggle, Alt+L click-through)
+- **Game state engine** consumes Arena JSON events, tracks zones/life/cards drawn, computes draw probabilities
+- **GrpId resolver** — 4-layer pipeline: memory cache → grp_id_cache DB → cards.arena_id → Scryfall API
+- **Mulligan advisor** — deterministic heuristic (sub-10ms), archetype-aware, no API calls
+- **Sideboard guide** — Claude-powered boarding plans cached per deck/matchup
 - **Commander synergy engine** parses oracle text for 12 trigger categories, scores candidates, merges with archetype templates
+- **UI theme** — "Black Grimoire" book aesthetic: Cinzel headings, Crimson Text body, leather-brown palette, gold accents, vignette overlay, ornate borders
 - **afterPack hook** rebuilds better-sqlite3 native module for Electron's Node version, caches prebuilt binaries
 
 ## Database
 
-SQLite at `data/mtg-deck-builder.db` (or `MTG_DB_DIR` env var). 48 tables across 20 migrations. Key tables:
+SQLite at `data/mtg-deck-builder.db` (or `MTG_DB_DIR` env var). 51+ tables across 21 migrations. Key tables:
 
 - `cards` — 35K+ cards from Scryfall with FTS5 index
 - `users` — Accounts (username, email, password_hash)
@@ -193,6 +204,9 @@ SQLite at `data/mtg-deck-builder.db` (or `MTG_DB_DIR` env var). 48 tables across
 - `edhrec_knowledge` / `edhrec_avg_decks` — EDHREC strategy articles and average decklists (FTS5)
 - `app_state` — Application settings (API keys, preferences)
 - `arena_parsed_matches` — Parsed Arena log match data with grpId mappings
+- `grp_id_cache` — Arena grpId → card name resolution cache (Scryfall API)
+- `sideboard_guides` — AI-generated sideboard plans per deck/matchup
+- `live_game_sessions` — Live overlay match tracking with mulligan/sideboard data
 
 Migrations run automatically on startup. Schema defined in `src/db/schema.ts`.
 
@@ -207,14 +221,24 @@ PORT=             # Server port (default: 3000, auto-finds available port 3000-3
 
 ## Testing
 
-Tests live in `src/lib/__tests__/` and `tests/`. Run with `npm test`. Key test suites:
+Tests live in `src/lib/__tests__/` and `tests/`. Run with `npm test`. 275 tests across 16 files. Key test suites:
 
 - `utils.test.ts` — Utility functions
 - `arena-parser.test.ts` — Arena format parsing
+- `arena-log-reader.test.ts` — Arena Player.log parsing
+- `arena-game-events.test.ts` — Game event extraction from JSON blocks
+- `game-state-engine.test.ts` — Game state tracking engine
+- `grp-id-resolver.test.ts` — GrpId resolution pipeline
+- `mulligan-advisor.test.ts` — Mulligan keep/mull heuristics
+- `sideboard-guide.test.ts` — Sideboard guide generation
+- `overlay-integration.test.ts` — End-to-end overlay flow
 - `deck-export.test.ts` — Export formats
 - `deck-validation.test.ts` — Format legality rules
+- `ai-chat-helpers.test.ts` — AI chat helper functions
 - `constants.test.ts` — Game constants
 - `tests/db.test.ts` — Database operations
+- `tests/edhrec.test.ts` — EDHREC integration
+- `tests/analytics-api.test.ts` — Analytics API
 
 Python tests in `scripts/tests/`, run with `npm run test:python`.
 

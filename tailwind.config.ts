@@ -58,6 +58,10 @@ const config: Config = {
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)',
       },
+      fontFamily: {
+        heading: ['Cinzel', 'Times New Roman', 'serif'],
+        body: ['Crimson Text', 'Georgia', 'Times New Roman', 'serif'],
+      },
       keyframes: {
         'card-enter': {
           '0%': { opacity: '0', transform: 'scale(0.95) translateY(8px)' },
@@ -84,6 +88,14 @@ const config: Config = {
           '0%, 100%': { boxShadow: '0 0 8px 2px rgba(203,172,93,0.2)' },
           '50%': { boxShadow: '0 0 16px 4px rgba(203,172,93,0.4)' },
         },
+        'gold-shimmer': {
+          '0%': { backgroundPosition: '0% center' },
+          '100%': { backgroundPosition: '200% center' },
+        },
+        'page-turn': {
+          '0%': { opacity: '0', transform: 'rotateY(-8deg) scale(0.98)' },
+          '100%': { opacity: '1', transform: 'rotateY(0deg) scale(1)' },
+        },
       },
       animation: {
         'card-enter': 'card-enter 0.3s ease-out forwards',
@@ -92,6 +104,8 @@ const config: Config = {
         'fade-in': 'fade-in 0.2s ease-out forwards',
         shimmer: 'shimmer 2s linear infinite',
         'pulse-glow': 'pulse-glow 2s ease-in-out infinite',
+        'gold-shimmer': 'gold-shimmer 6s linear infinite',
+        'page-turn': 'page-turn 0.4s ease-out forwards',
       },
       backgroundImage: {
         'shimmer-gradient': 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.05) 50%, transparent 100%)',

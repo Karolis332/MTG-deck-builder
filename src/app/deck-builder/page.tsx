@@ -42,6 +42,7 @@ export default function DeckBuilderPage() {
   const [useClaudeBuild, setUseClaudeBuild] = useState(false);
   const [hasApiKey, setHasApiKey] = useState(false);
   const [aiBuildProgress, setAiBuildProgress] = useState('');
+  const [collectionBuildMode, setCollectionBuildMode] = useState(false);
 
   const isAiCommanderFormat = ['commander', 'brawl', 'standardbrawl'].includes(aiFormat);
 
@@ -87,7 +88,9 @@ export default function DeckBuilderPage() {
     if (query.length < 2) { setCommanderResults([]); return; }
     setCommanderSearching(true);
     try {
-      const res = await fetch(`/api/cards/search?q=${encodeURIComponent(query)}&limit=8`);
+      const searchParams = new URLSearchParams({ q: query, limit: '8' });
+      if (collectionBuildMode) searchParams.set('collectionOnly', 'true');
+      const res = await fetch(`/api/cards/search?${searchParams}`);
       const data = await res.json();
       const filtered = (data.cards || []).filter((c: { type_line: string }) =>
         c.type_line.includes('Legendary') && (c.type_line.includes('Creature') || c.type_line.includes('Planeswalker'))
@@ -189,20 +192,27 @@ export default function DeckBuilderPage() {
     <div className="mx-auto max-w-6xl px-4 py-6">
       <div className="mb-6 flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold">Your Decks</h1>
-          <p className="text-sm text-muted-foreground">{decks.length} decks</p>
+          <h1 className="font-heading text-2xl font-bold tracking-wide text-grimoire">Your Tomes</h1>
+          <p className="text-sm text-muted-foreground">{decks.length} decks constructed</p>
         </div>
         <div className="flex items-center gap-2">
           <button
-            onClick={() => setShowAiBuild(true)}
-            className="flex items-center gap-2 rounded-xl bg-accent px-4 py-2 text-sm font-medium text-accent-foreground transition-colors hover:bg-accent/80"
+            onClick={() => { setCollectionBuildMode(true); setAiUseCollection(true); setShowAiBuild(true); }}
+            className="flex items-center gap-2 rounded-lg border border-primary/30 bg-primary/10 px-4 py-2 text-sm font-heading font-medium text-primary transition-all hover:bg-primary/20 hover:shadow-[0_0_12px_rgba(180,140,50,0.15)]"
+          >
+            <CollectionIcon className="h-4 w-4" />
+            From Collection
+          </button>
+          <button
+            onClick={() => { setCollectionBuildMode(false); setShowAiBuild(true); }}
+            className="flex items-center gap-2 rounded-lg border border-primary/30 bg-primary/10 px-4 py-2 text-sm font-heading font-medium text-primary transition-all hover:bg-primary/20 hover:shadow-[0_0_12px_rgba(180,140,50,0.15)]"
           >
             <SparklesIcon className="h-4 w-4" />
             AI Build
           </button>
           <button
             onClick={() => setShowNewDeck(true)}
-            className="flex items-center gap-2 rounded-xl bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+            className="btn-grimoire flex items-center gap-2"
           >
             <PlusIcon className="h-4 w-4" />
             New Deck
@@ -212,8 +222,8 @@ export default function DeckBuilderPage() {
 
       {/* New deck form */}
       {showNewDeck && (
-        <div className="mb-6 rounded-2xl border border-primary/30 bg-card p-4 animate-slide-up">
-          <div className="mb-3 text-sm font-medium">Create New Deck</div>
+        <div className="mb-6 grimoire-border bg-card/90 p-4 animate-slide-up">
+          <div className="mb-3 font-heading text-sm font-medium tracking-wide text-primary">Create New Deck</div>
           <div className="flex flex-col gap-3 sm:flex-row">
             <input
               type="text"
@@ -222,7 +232,7 @@ export default function DeckBuilderPage() {
               placeholder="Deck name..."
               autoFocus
               onKeyDown={(e) => e.key === 'Enter' && handleCreate()}
-              className="flex-1 rounded-lg border border-border bg-background px-3 py-2 text-sm outline-none focus:border-primary/50 focus:ring-2 focus:ring-primary/20"
+              className="flex-1 rounded-lg border border-border bg-background/80 px-3 py-2 text-sm outline-none transition-all focus:border-primary/60 focus:ring-1 focus:ring-primary/30"
             />
             <select
               value={newFormat}
@@ -269,18 +279,20 @@ export default function DeckBuilderPage() {
           ))}
         </div>
       ) : decks.length === 0 ? (
-        <div className="rounded-2xl border border-dashed border-border p-12 text-center">
-          <div className="mb-3 text-4xl opacity-30">&#x1F0CF;</div>
-          <h2 className="mb-1 text-lg font-semibold">No decks yet</h2>
-          <p className="mb-4 text-sm text-muted-foreground">
-            Create your first deck to start building
-          </p>
-          <button
-            onClick={() => setShowNewDeck(true)}
-            className="rounded-xl bg-primary px-6 py-2.5 text-sm font-medium text-primary-foreground"
-          >
-            Create Your First Deck
-          </button>
+        <div className="grimoire-border bg-card/60 p-12 text-center">
+          <div className="grimoire-corners">
+            <div className="mb-3 text-4xl opacity-30">&#x1F0CF;</div>
+            <h2 className="mb-1 font-heading text-lg font-semibold text-primary">No decks yet</h2>
+            <p className="mb-4 text-sm text-muted-foreground">
+              Create your first deck to begin your journey
+            </p>
+            <button
+              onClick={() => setShowNewDeck(true)}
+              className="btn-grimoire"
+            >
+              Begin Your First Tome
+            </button>
+          </div>
         </div>
       ) : (
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -288,7 +300,7 @@ export default function DeckBuilderPage() {
             <Link
               key={deck.id}
               href={`/deck/${deck.id}`}
-              className="group relative overflow-hidden rounded-2xl border border-border bg-card transition-all hover:border-primary/40 hover:shadow-lg animate-card-enter"
+              className="card-hover group relative overflow-hidden grimoire-border bg-card/80 transition-all animate-card-enter"
               style={{ animationDelay: `${i * 50}ms` }}
             >
               {/* Cover art */}
@@ -319,12 +331,12 @@ export default function DeckBuilderPage() {
 
               {/* Info */}
               <div className="p-3">
-                <div className="text-sm font-semibold">{deck.name}</div>
+                <div className="font-heading text-sm font-semibold tracking-wide">{deck.name}</div>
                 <div className="flex items-center gap-2 text-xs text-muted-foreground">
                   <span>{deck.cardCount} cards</span>
                   {deck.format && (
                     <>
-                      <span>&#x2022;</span>
+                      <span className="text-primary/40">&#x25C6;</span>
                       <span className="capitalize">{FORMAT_LABELS[deck.format] || deck.format}</span>
                     </>
                   )}
@@ -338,9 +350,12 @@ export default function DeckBuilderPage() {
       {/* AI Build Modal */}
       {showAiBuild && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setShowAiBuild(false)} />
-          <div className="relative w-full max-w-md rounded-2xl border border-border bg-card p-6 shadow-2xl animate-slide-up">
-            <h2 className="mb-4 text-lg font-semibold">AI Deck Builder</h2>
+          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => { setShowAiBuild(false); setCollectionBuildMode(false); }} />
+          <div className="relative w-full max-w-md grimoire-border bg-card/95 p-6 shadow-2xl animate-slide-up backdrop-blur-sm">
+            <h2 className="mb-4 font-heading text-lg font-semibold tracking-wide text-primary">
+              {collectionBuildMode ? 'Build from Collection' : 'AI Deck Builder'}
+            </h2>
+            <div className="grimoire-divider mb-4" />
 
             {/* Deck name */}
             <input
@@ -468,15 +483,22 @@ export default function DeckBuilderPage() {
             </div>
 
             {/* Use collection toggle */}
-            <label className="mb-3 flex items-center gap-2 text-sm">
-              <input
-                type="checkbox"
-                checked={aiUseCollection}
-                onChange={(e) => setAiUseCollection(e.target.checked)}
-                className="accent-primary"
-              />
-              <span className="text-muted-foreground">Prefer cards from my collection</span>
-            </label>
+            {collectionBuildMode ? (
+              <div className="mb-3 flex items-center gap-2 text-sm text-muted-foreground">
+                <CollectionIcon className="h-3.5 w-3.5 text-primary" />
+                <span>Building exclusively from your collection</span>
+              </div>
+            ) : (
+              <label className="mb-3 flex items-center gap-2 text-sm">
+                <input
+                  type="checkbox"
+                  checked={aiUseCollection}
+                  onChange={(e) => setAiUseCollection(e.target.checked)}
+                  className="accent-primary"
+                />
+                <span className="text-muted-foreground">Prefer cards from my collection</span>
+              </label>
+            )}
 
             {/* Claude Build toggle (commander formats only) */}
             {isAiCommanderFormat && (
@@ -534,7 +556,7 @@ export default function DeckBuilderPage() {
 
             <div className="flex justify-end gap-2">
               <button
-                onClick={() => { setShowAiBuild(false); setAiError(''); }}
+                onClick={() => { setShowAiBuild(false); setAiError(''); setCollectionBuildMode(false); }}
                 className="rounded-lg px-4 py-2 text-sm text-muted-foreground hover:text-foreground"
               >
                 Cancel
@@ -571,6 +593,15 @@ function PlusIcon({ className }: { className?: string }) {
     <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
       <line x1="12" y1="5" x2="12" y2="19" />
       <line x1="5" y1="12" x2="19" y2="12" />
+    </svg>
+  );
+}
+
+function CollectionIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+      <path d="M16 7V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v3" />
     </svg>
   );
 }

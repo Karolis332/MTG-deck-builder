@@ -76,8 +76,8 @@ export interface GameStateSnapshot {
   isActive: boolean;
   isSideboarding: boolean;
 
-  // Draw probabilities (computed on demand)
-  drawProbabilities: Map<number, number>;
+  // Draw probabilities (plain object for IPC serialization safety)
+  drawProbabilities: Record<number, number>;
 }
 
 export type StateChangeListener = (state: GameStateSnapshot) => void;
@@ -91,6 +91,7 @@ export class GameStateEngine {
   private objectZones: Map<number, number> = new Map(); // instanceId → zoneId
   private objectGrpIds: Map<number, number> = new Map(); // instanceId → grpId
   private objectOwners: Map<number, number> = new Map(); // instanceId → ownerSeatId
+  private objectNames: Map<number, string> = new Map(); // grpId → card name from gameObjects
   private opponentSeatId = 2;
 
   constructor() {
@@ -127,7 +128,7 @@ export class GameStateEngine {
       openingHand: [],
       isActive: false,
       isSideboarding: false,
-      drawProbabilities: new Map(),
+      drawProbabilities: {},
     };
   }
 
@@ -203,8 +204,8 @@ export class GameStateEngine {
    * Get draw probability for each unique card remaining in library.
    * Returns grpId → probability (0-1).
    */
-  getDrawProbabilities(): Map<number, number> {
-    return new Map(this.state.drawProbabilities);
+  getDrawProbabilities(): Record<number, number> {
+    return { ...this.state.drawProbabilities };
   }
 
   getCardsDrawn(): number[] {
@@ -217,6 +218,7 @@ export class GameStateEngine {
     this.objectZones.clear();
     this.objectGrpIds.clear();
     this.objectOwners.clear();
+    this.objectNames.clear();
     this.notifyListeners();
   }
 
@@ -228,6 +230,7 @@ export class GameStateEngine {
     this.objectZones.clear();
     this.objectGrpIds.clear();
     this.objectOwners.clear();
+    this.objectNames.clear();
 
     this.state.matchId = event.matchId;
     this.state.playerSeatId = event.playerSeatId;
@@ -271,10 +274,21 @@ export class GameStateEngine {
       this.objectGrpIds.set(go.instanceId, go.grpId);
       this.objectOwners.set(go.instanceId, go.ownerSeatId);
       this.objectZones.set(go.instanceId, go.zoneId);
+      // Track grpId → name from game objects (Arena provides card names inline)
+      if (go.name && go.grpId) {
+        this.objectNames.set(go.grpId, go.name);
+      }
     }
 
     // Rebuild zone contents from tracked objects
     this.rebuildZoneContents();
+
+    // Populate opening hand from hand zone if mulligan prompt arrived with empty handGrpIds
+    if (this.state.openingHand.length === 0 && this.state.turnNumber <= 1) {
+      if (this.state.hand.length > 0) {
+        this.state.openingHand = [...this.state.hand];
+      }
+    }
 
     // Update turn info
     if (event.turnInfo) {
@@ -440,10 +454,20 @@ export class GameStateEngine {
     this.state.exile = playerExile;
     this.state.opponentBattlefield = opponentBattlefield;
     this.state.opponentGraveyard = opponentGraveyard;
+
+    // Update opponentCardsSeen from visible zones (battlefield + graveyard)
+    // This ensures catch-up mode and zone rebuilds populate the seen list
+    const seenSet = new Set(this.state.opponentCardsSeen);
+    for (const grpId of [...opponentBattlefield, ...opponentGraveyard]) {
+      if (!seenSet.has(grpId)) {
+        seenSet.add(grpId);
+        this.state.opponentCardsSeen.push(grpId);
+      }
+    }
   }
 
   private updateDrawProbabilities(): void {
-    const probs = new Map<number, number>();
+    const probs: Record<number, number> = {};
     if (this.state.librarySize <= 0) {
       this.state.drawProbabilities = probs;
       return;
@@ -451,7 +475,7 @@ export class GameStateEngine {
 
     for (const entry of this.state.deckList) {
       if (entry.remaining > 0) {
-        probs.set(entry.grpId, entry.remaining / this.state.librarySize);
+        probs[entry.grpId] = entry.remaining / this.state.librarySize;
       }
     }
     this.state.drawProbabilities = probs;
@@ -471,9 +495,17 @@ export class GameStateEngine {
   private getStartingLife(format: string | null): number {
     if (!format) return 20;
     const f = format.toLowerCase();
-    if (f.includes('commander') || f.includes('brawl') || f.includes('edh')) return 40;
-    if (f.includes('brawl')) return 25; // Standard Brawl specifically
+    // Brawl (both Historic and Standard) uses 25 life, not 40
+    if (f.includes('brawl')) return 25;
+    if (f.includes('commander') || f.includes('edh')) return 40;
     return 20;
+  }
+
+  /**
+   * Get grpId → name mappings from game objects (for resolver name hints).
+   */
+  getObjectNames(): Map<number, string> {
+    return this.objectNames;
   }
 
   /**

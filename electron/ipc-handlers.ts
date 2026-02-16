@@ -15,6 +15,24 @@ let watcher: ArenaLogWatcher | null = null;
 let mlProcess: ChildProcess | null = null;
 let resolver: GrpIdResolver | null = null;
 
+/**
+ * Ensure the Arena log watcher is running.
+ * Called from main.ts when the overlay opens.
+ * Uses the default log path if no watcher is active.
+ */
+export function ensureWatcherRunning(): void {
+  if (watcher) return; // Already running
+
+  const logPath = getDefaultLogPath();
+  if (!fs.existsSync(logPath)) {
+    console.log('[Watcher] Arena log not found at:', logPath);
+    return;
+  }
+
+  console.log('[Watcher] Auto-starting for overlay:', logPath);
+  startWatcherInternal(logPath, true);
+}
+
 function getDefaultLogPath(): string {
   if (process.platform === 'win32') {
     const appData = process.env.APPDATA || '';
@@ -110,6 +128,64 @@ function getResolver(): GrpIdResolver {
   return resolver;
 }
 
+function startWatcherInternal(logPath: string, catchUp = false): { ok: boolean; error?: string } {
+  try {
+    if (watcher) {
+      watcher.stop();
+      watcher.removeAllListeners();
+    }
+
+    if (!fs.existsSync(logPath)) {
+      return { ok: false, error: `Log file not found: ${logPath}` };
+    }
+
+    watcher = new ArenaLogWatcher(logPath, 500, catchUp);
+    watcher.setResolver(getResolver());
+
+    // Legacy match/collection events
+    watcher.on('match', (match) => {
+      broadcast('watcher-new-match', match);
+      postToApi('/api/arena-matches', match);
+    });
+
+    watcher.on('collection', (collection) => {
+      broadcast('watcher-collection', collection);
+      postToApi('/api/arena-collection', { collection });
+    });
+
+    watcher.on('error', (err) => {
+      broadcast('watcher-error', err);
+    });
+
+    // ── Overlay events ──────────────────────────────────────────────────
+
+    watcher.on('game-state', (state: GameStateSnapshot) => {
+      broadcast('game-state-update', state);
+    });
+
+    watcher.on('match-start', (data: { matchId: string; format: string | null; playerName: string | null; opponentName: string | null }) => {
+      broadcast('match-started', data);
+    });
+
+    watcher.on('match-end', (data: { matchId: string; result: string }) => {
+      broadcast('match-ended', data);
+    });
+
+    watcher.on('mulligan', (data: { hand: number[]; mulliganCount: number; seatId: number }) => {
+      broadcast('mulligan-prompt', data);
+    });
+
+    watcher.on('intermission', (data: { matchId: string | null; gameNumber: number; opponentCardsSeen: number[] }) => {
+      broadcast('intermission-start', data);
+    });
+
+    watcher.start();
+    return { ok: true };
+  } catch (err) {
+    return { ok: false, error: String(err) };
+  }
+}
+
 export function registerIpcHandlers(): void {
   // ── File operations ──────────────────────────────────────────────────────
 
@@ -147,61 +223,7 @@ export function registerIpcHandlers(): void {
   // ── Watcher controls ─────────────────────────────────────────────────────
 
   ipcMain.handle('start-watcher', (_event, logPath: string) => {
-    try {
-      if (watcher) {
-        watcher.stop();
-        watcher.removeAllListeners();
-      }
-
-      if (!fs.existsSync(logPath)) {
-        return { ok: false, error: `Log file not found: ${logPath}` };
-      }
-
-      watcher = new ArenaLogWatcher(logPath);
-      watcher.setResolver(getResolver());
-
-      // Legacy match/collection events
-      watcher.on('match', (match) => {
-        broadcast('watcher-new-match', match);
-        postToApi('/api/arena-matches', match);
-      });
-
-      watcher.on('collection', (collection) => {
-        broadcast('watcher-collection', collection);
-        postToApi('/api/arena-collection', { collection });
-      });
-
-      watcher.on('error', (err) => {
-        broadcast('watcher-error', err);
-      });
-
-      // ── Overlay events ──────────────────────────────────────────────────
-
-      watcher.on('game-state', (state: GameStateSnapshot) => {
-        broadcast('game-state-update', state);
-      });
-
-      watcher.on('match-start', (data: { matchId: string; format: string | null; playerName: string | null; opponentName: string | null }) => {
-        broadcast('match-started', data);
-      });
-
-      watcher.on('match-end', (data: { matchId: string; result: string }) => {
-        broadcast('match-ended', data);
-      });
-
-      watcher.on('mulligan', (data: { hand: number[]; mulliganCount: number; seatId: number }) => {
-        broadcast('mulligan-prompt', data);
-      });
-
-      watcher.on('intermission', (data: { matchId: string | null; gameNumber: number; opponentCardsSeen: number[] }) => {
-        broadcast('intermission-start', data);
-      });
-
-      watcher.start();
-      return { ok: true };
-    } catch (err) {
-      return { ok: false, error: String(err) };
-    }
+    return startWatcherInternal(logPath);
   });
 
   ipcMain.handle('stop-watcher', async () => {

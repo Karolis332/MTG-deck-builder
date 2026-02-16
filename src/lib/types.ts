@@ -186,6 +186,24 @@ export interface AISuggestion {
   edhrecRank?: number;
 }
 
+export interface CFRecommendation {
+  card_name: string;
+  cf_score: number;
+  similar_deck_count: number;
+  reason: string;
+}
+
+export interface SimilarDeck {
+  source: string;
+  source_id: string;
+  deck_name: string | null;
+  author: string | null;
+  similarity: number;
+  commander: string;
+  card_count: number;
+  url: string | null;
+}
+
 export type DeckPatchOp =
   | { op: 'add_card'; card_id: string; quantity: number; board: string }
   | { op: 'remove_card'; card_id: string; board: string }

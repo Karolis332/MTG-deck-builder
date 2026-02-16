@@ -15,7 +15,8 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    const { csv } = await request.json() as { csv: string };
+    const { csv, source: importSource } = await request.json() as { csv: string; source?: 'paper' | 'arena' };
+    const collectionSource = importSource || 'paper';
 
     if (!csv || typeof csv !== 'string') {
       return NextResponse.json(
@@ -108,20 +109,20 @@ export async function POST(request: NextRequest) {
 
       console.log(`[CSV Import] ✅ Found: "${card.name}" (id: ${card.id})`)
 
-      // Check if card already in collection
+      // Check if card already in collection for this source
       const existing = db
-        .prepare('SELECT quantity FROM collection WHERE user_id = ? AND card_id = ?')
-        .get(authUser.userId, card.id) as { quantity: number } | undefined;
+        .prepare('SELECT quantity FROM collection WHERE user_id = ? AND card_id = ? AND source = ?')
+        .get(authUser.userId, card.id, collectionSource) as { quantity: number } | undefined;
 
       if (existing) {
         // Update quantity
-        db.prepare('UPDATE collection SET quantity = ? WHERE user_id = ? AND card_id = ?')
-          .run(count, authUser.userId, card.id);
+        db.prepare('UPDATE collection SET quantity = ? WHERE user_id = ? AND card_id = ? AND source = ?')
+          .run(count, authUser.userId, card.id, collectionSource);
         updated++;
       } else {
         // Insert new
-        db.prepare('INSERT INTO collection (user_id, card_id, quantity) VALUES (?, ?, ?)')
-          .run(authUser.userId, card.id, count);
+        db.prepare('INSERT INTO collection (user_id, card_id, quantity, source) VALUES (?, ?, ?, ?)')
+          .run(authUser.userId, card.id, count, collectionSource);
         imported++;
       }
     }

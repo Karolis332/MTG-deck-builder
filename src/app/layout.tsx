@@ -17,12 +17,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
-      <body className="min-h-screen bg-background font-sans antialiased">
+      <body className="min-h-screen bg-background font-body antialiased grimoire-page">
         <AuthProvider>
           <ThemeProvider>
             <div className="flex min-h-screen flex-col">
               <Navbar />
-              <main className="flex-1">{children}</main>
+              <main className="flex-1 animate-page-turn">{children}</main>
             </div>
             <ArenaWatcherPanel />
           </ThemeProvider>

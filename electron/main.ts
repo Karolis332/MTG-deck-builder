@@ -3,7 +3,7 @@ import path from 'path';
 import fs from 'fs';
 import { spawn, ChildProcess } from 'child_process';
 import net from 'net';
-import { registerIpcHandlers } from './ipc-handlers';
+import { registerIpcHandlers, ensureWatcherRunning } from './ipc-handlers';
 import { registerSetupHandlers } from './setup-handlers';
 import { runFirstBootActions } from '../src/lib/first-boot';
 
@@ -297,6 +297,12 @@ function createMainWindow(): void {
   }
 }
 
+// ── Auto-start watcher for overlay ──────────────────────────────────────
+
+function autoStartWatcher(): void {
+  ensureWatcherRunning();
+}
+
 // ── Overlay window ──────────────────────────────────────────────────────
 
 function createOverlayWindow(): void {
@@ -334,6 +340,9 @@ function createOverlayWindow(): void {
   // Start in click-through mode
   overlayClickThrough = true;
   overlayWindow.setIgnoreMouseEvents(true, { forward: true });
+
+  // Auto-start the Arena log watcher if not already running
+  autoStartWatcher();
 }
 
 function toggleOverlay(): void {

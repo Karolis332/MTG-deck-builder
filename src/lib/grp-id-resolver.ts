@@ -90,13 +90,13 @@ export class GrpIdResolver {
       }
     }
 
-    // Resolve uncached in parallel (respecting rate limits)
-    const promises = uncached.map(async (grpId) => {
+    // Resolve uncached sequentially to respect Scryfall rate limits.
+    // Promise.all would fire all requests concurrently, overwhelming the API.
+    for (const grpId of uncached) {
       const card = await this.resolve(grpId);
       results.set(grpId, card);
-    });
+    }
 
-    await Promise.all(promises);
     return results;
   }
 
@@ -121,6 +121,24 @@ export class GrpIdResolver {
         this.memoryCache.set(grpId, row);
       }
     }
+  }
+
+  /**
+   * Set a name hint for a grpId from Arena game object data.
+   * Only populates cache if not already resolved (avoids overwriting richer data).
+   */
+  setNameHint(grpId: number, name: string): void {
+    if (!name || this.memoryCache.has(grpId)) return;
+    this.memoryCache.set(grpId, {
+      grpId,
+      name,
+      manaCost: null,
+      cmc: 0,
+      typeLine: null,
+      oracleText: null,
+      imageUriSmall: null,
+      imageUriNormal: null,
+    });
   }
 
   /** Number of entries in memory cache */

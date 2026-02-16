@@ -14,9 +14,16 @@ export function SettingsDialog({ open, onClose }: SettingsDialogProps) {
   const [maskedKey, setMaskedKey] = useState('');
   const [anthropicKey, setAnthropicKey] = useState('');
   const [maskedAnthropicKey, setMaskedAnthropicKey] = useState('');
+  const [topdeckKey, setTopdeckKey] = useState('');
+  const [maskedTopdeckKey, setMaskedTopdeckKey] = useState('');
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState('');
   const [anthropicMessage, setAnthropicMessage] = useState('');
+  const [topdeckMessage, setTopdeckMessage] = useState('');
+  const [cfApiUrl, setCfApiUrl] = useState('');
+  const [cfEnabled, setCfEnabled] = useState(true);
+  const [cfMessage, setCfMessage] = useState('');
+  const [cfTesting, setCfTesting] = useState(false);
   const [claudeModel, setClaudeModel] = useState('claude-sonnet-4-5-20250929');
 
   // Data export state
@@ -54,16 +61,29 @@ export function SettingsDialog({ open, onClose }: SettingsDialogProps) {
         } else {
           setMaskedAnthropicKey('');
         }
+        if (data.settings?.topdeck_api_key) {
+          setMaskedTopdeckKey(data.settings.topdeck_api_key);
+        } else {
+          setMaskedTopdeckKey('');
+        }
         if (data.settings?.arena_log_path) {
           setArenaLogPath(data.settings.arena_log_path);
         }
         if (data.settings?.claude_model) {
           setClaudeModel(data.settings.claude_model);
         }
+        if (data.settings?.cf_api_url) {
+          setCfApiUrl(data.settings.cf_api_url);
+        }
+        if (data.settings?.cf_enabled !== undefined) {
+          setCfEnabled(data.settings.cf_enabled !== 'false');
+        }
         setOpenaiKey('');
         setAnthropicKey('');
+        setTopdeckKey('');
         setMessage('');
         setAnthropicMessage('');
+        setTopdeckMessage('');
         setArenaMessage('');
       })
       .catch(() => {});
@@ -169,6 +189,92 @@ export function SettingsDialog({ open, onClose }: SettingsDialogProps) {
       setSaving(false);
     }
   }, []);
+
+  const saveTopdeckKey = useCallback(async () => {
+    if (!topdeckKey.trim()) return;
+    setSaving(true);
+    setTopdeckMessage('');
+    try {
+      const res = await fetch('/api/settings', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ key: 'topdeck_api_key', value: topdeckKey.trim() }),
+      });
+      const data = await res.json();
+      if (data.ok) {
+        setTopdeckMessage('TopDeck API key saved successfully');
+        setMaskedTopdeckKey(topdeckKey.slice(0, 4) + '...' + topdeckKey.slice(-4));
+        setTopdeckKey('');
+      } else {
+        setTopdeckMessage('Failed to save: ' + (data.error || 'Unknown error'));
+      }
+    } catch (err) {
+      setTopdeckMessage('Failed to save API key');
+    } finally {
+      setSaving(false);
+    }
+  }, [topdeckKey]);
+
+  const removeTopdeckKey = useCallback(async () => {
+    setSaving(true);
+    try {
+      await fetch('/api/settings', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ key: 'topdeck_api_key', value: '' }),
+      });
+      setMaskedTopdeckKey('');
+      setTopdeckKey('');
+      setTopdeckMessage('TopDeck API key removed');
+    } catch {
+      setTopdeckMessage('Failed to remove API key');
+    } finally {
+      setSaving(false);
+    }
+  }, []);
+
+  // ── CF API handlers ───────────────────────────────────────────────────────
+
+  const saveCfSettings = useCallback(async () => {
+    setSaving(true);
+    setCfMessage('');
+    try {
+      await fetch('/api/settings', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ key: 'cf_api_url', value: cfApiUrl.trim() }),
+      });
+      await fetch('/api/settings', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ key: 'cf_enabled', value: cfEnabled ? 'true' : 'false' }),
+      });
+      setCfMessage('CF settings saved');
+    } catch {
+      setCfMessage('Failed to save CF settings');
+    } finally {
+      setSaving(false);
+    }
+  }, [cfApiUrl, cfEnabled]);
+
+  const testCfConnection = useCallback(async () => {
+    setCfTesting(true);
+    setCfMessage('');
+    const url = cfApiUrl.trim() || 'http://localhost:8000';
+    try {
+      const resp = await fetch(`${url}/health`, { signal: AbortSignal.timeout(5000) });
+      if (resp.ok) {
+        const data = await resp.json();
+        setCfMessage(`Connected! ${data.deck_count || 0} decks, model: ${data.model_version || 'none'}`);
+      } else {
+        setCfMessage(`Connection failed: HTTP ${resp.status}`);
+      }
+    } catch {
+      setCfMessage('Connection failed: API unreachable');
+    } finally {
+      setCfTesting(false);
+    }
+  }, [cfApiUrl]);
 
   // ── Arena integration handlers ─────────────────────────────────────────────
 
@@ -458,7 +564,7 @@ export function SettingsDialog({ open, onClose }: SettingsDialogProps) {
         onClick={(e) => e.stopPropagation()}
       >
         <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-lg font-bold">Settings</h2>
+          <h2 className="font-heading text-lg font-bold tracking-wide text-primary">Settings</h2>
           <button onClick={onClose} className="text-muted-foreground hover:text-foreground">
             &times;
           </button>
@@ -586,9 +692,106 @@ export function SettingsDialog({ open, onClose }: SettingsDialogProps) {
             </select>
           </div>
 
+          {/* TopDeck.gg API Key */}
+          <div className="border-t border-border pt-3">
+            <label className="mb-1 block text-sm font-medium">TopDeck.gg API Key</label>
+            <p className="mb-2 text-xs text-muted-foreground">
+              Enable tournament data scraping from TopDeck.gg for competitive meta analysis.
+            </p>
+            {maskedTopdeckKey && (
+              <div className="mb-2 flex items-center gap-2">
+                <span className="rounded bg-accent px-2 py-1 font-mono text-xs">
+                  {maskedTopdeckKey}
+                </span>
+                <button
+                  onClick={removeTopdeckKey}
+                  disabled={saving}
+                  className="text-xs text-red-400 hover:text-red-300"
+                >
+                  Remove
+                </button>
+              </div>
+            )}
+            <div className="flex gap-2">
+              <input
+                type="password"
+                value={topdeckKey}
+                onChange={(e) => setTopdeckKey(e.target.value)}
+                placeholder={maskedTopdeckKey ? 'Enter new key to replace' : 'Your TopDeck API key'}
+                className="flex-1 rounded-lg border border-border bg-background px-3 py-2 text-sm outline-none focus:border-primary"
+              />
+              <button
+                onClick={saveTopdeckKey}
+                disabled={saving || !topdeckKey.trim()}
+                className="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-50"
+              >
+                {saving ? 'Saving...' : 'Save'}
+              </button>
+            </div>
+            {topdeckMessage && (
+              <p className={cn(
+                'mt-2 text-xs',
+                topdeckMessage.includes('success') || topdeckMessage.includes('saved') ? 'text-green-400' : 'text-muted-foreground'
+              )}>
+                {topdeckMessage}
+              </p>
+            )}
+          </div>
+
+          {/* Collaborative Filtering API */}
+          <div className="border-t border-border pt-3">
+            <label className="mb-1 block text-sm font-medium">Collaborative Filtering API</label>
+            <p className="mb-2 text-xs text-muted-foreground">
+              Deck-specific card recommendations powered by 50K+ community decks.
+              For Commander/Brawl formats — the primary suggestion source when enabled.
+            </p>
+            <div className="mb-2 flex items-center gap-2">
+              <label className="flex items-center gap-2 text-xs">
+                <input
+                  type="checkbox"
+                  checked={cfEnabled}
+                  onChange={(e) => setCfEnabled(e.target.checked)}
+                  className="rounded"
+                />
+                Enable CF recommendations
+              </label>
+            </div>
+            <div className="flex gap-2">
+              <input
+                type="text"
+                value={cfApiUrl}
+                onChange={(e) => setCfApiUrl(e.target.value)}
+                placeholder="http://localhost:8000"
+                className="flex-1 rounded-lg border border-border bg-background px-3 py-2 text-sm outline-none focus:border-primary"
+              />
+              <button
+                onClick={saveCfSettings}
+                disabled={saving}
+                className="rounded-lg bg-primary px-3 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-50"
+              >
+                Save
+              </button>
+              <button
+                onClick={testCfConnection}
+                disabled={cfTesting}
+                className="rounded-lg border border-border px-3 py-2 text-sm font-medium transition-colors hover:bg-accent disabled:opacity-50"
+              >
+                {cfTesting ? 'Testing...' : 'Test'}
+              </button>
+            </div>
+            {cfMessage && (
+              <p className={cn(
+                'mt-2 text-xs',
+                cfMessage.includes('Connected') || cfMessage.includes('saved') ? 'text-green-400' : 'text-muted-foreground'
+              )}>
+                {cfMessage}
+              </p>
+            )}
+          </div>
+
           <div className="border-t border-border pt-3">
             <p className="text-[10px] text-muted-foreground">
-              AI Suggestion Priority: Claude &gt; Ollama (local) &gt; OpenAI GPT-4o &gt; Synergy Engine.
+              AI Suggestion Priority: CF (Commander) &gt; Claude &gt; Ollama (local) &gt; OpenAI GPT-4o &gt; Synergy Engine.
               Your API keys are stored locally and never sent to third parties.
             </p>
           </div>

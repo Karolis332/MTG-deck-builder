@@ -7,7 +7,7 @@ import { CardLine } from './CardLine';
 interface DeckTrackerProps {
   deckList: DeckCardEntry[];
   librarySize: number;
-  drawProbabilities: Map<number, number> | Record<number, number>;
+  drawProbabilities: Record<number, number>;
   cardsDrawn: number[];
 }
 
@@ -38,13 +38,7 @@ function getCategory(typeLine: string | null): string {
 const CATEGORY_ORDER = ['Creatures', 'Instants', 'Sorceries', 'Enchantments', 'Artifacts', 'Planeswalkers', 'Lands', 'Other'];
 
 export function DeckTracker({ deckList, librarySize, drawProbabilities, cardsDrawn }: DeckTrackerProps) {
-  // Normalize drawProbabilities to a regular object
-  const probMap = useMemo(() => {
-    if (drawProbabilities instanceof Map) {
-      return Object.fromEntries(drawProbabilities);
-    }
-    return drawProbabilities as Record<number, number>;
-  }, [drawProbabilities]);
+  const probMap = drawProbabilities;
 
   const grouped = useMemo(() => {
     const cards: GroupedCard[] = deckList.map(entry => ({

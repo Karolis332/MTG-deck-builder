@@ -12,6 +12,7 @@
 
 import { getDb } from '@/lib/db';
 import { parseGameLog } from '@/lib/match-log-parser';
+import { COMMANDER_FORMATS } from '@/lib/constants';
 
 interface MatchRow {
   id: number;
@@ -111,6 +112,11 @@ export function analyzeMatchesForDeck(deckId: number): PostGameAnalysis {
     FROM deck_cards dc JOIN cards c ON dc.card_id = c.id
     WHERE dc.deck_id = ? AND dc.board = 'main'
   `).all(deckId) as DeckCard[];
+
+  // Get deck format to determine max copies (singleton vs 4-of)
+  const deckRow = db.prepare('SELECT format FROM decks WHERE id = ?').get(deckId) as { format: string } | undefined;
+  const deckFormat = deckRow?.format || '';
+  const isSingleton = COMMANDER_FORMATS.includes(deckFormat as typeof COMMANDER_FORMATS[number]);
 
   const totalGames = matches.length;
   const wins = matches.filter((m) => m.result === 'win').length;
@@ -324,6 +330,8 @@ export function analyzeMatchesForDeck(deckId: number): PostGameAnalysis {
     (c) => c.verdict === 'strong' && c.appearances >= 2
   );
   for (const strong of strongCards.slice(0, 3)) {
+    // Skip "add copies" insight for singleton formats (Commander/Brawl)
+    if (isSingleton) continue;
     // Check if we're running max copies
     const inDeck = deckCards.find((dc) => dc.name === strong.name);
     if (inDeck && inDeck.quantity < 4) {

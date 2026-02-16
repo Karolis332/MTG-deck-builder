@@ -14,10 +14,11 @@ export async function GET(request: NextRequest) {
   const rarities = searchParams.get('rarities')?.split(',').filter(Boolean) || undefined;
   const types = searchParams.get('types')?.split(',').filter(Boolean) || undefined;
   const colors = searchParams.get('colors')?.split(',').filter(Boolean) || undefined;
+  const source = searchParams.get('source') as 'paper' | 'arena' | null || undefined;
 
   try {
-    const result = getCollection(limit, offset, { query, rarities, types, colors }, authUser.userId);
-    const stats = getCollectionStats(authUser.userId);
+    const result = getCollection(limit, offset, { query, rarities, types, colors, source: source || undefined }, authUser.userId);
+    const stats = getCollectionStats(authUser.userId, source || undefined);
 
     return NextResponse.json({
       cards: result.cards,

@@ -11,7 +11,8 @@ export async function POST(request: NextRequest) {
     if (!authUser) return unauthorizedResponse();
 
     const body = await request.json();
-    const { text, mode = 'merge', deck_id } = body;
+    const { text, mode = 'merge', deck_id, source: collectionSource } = body;
+    const importSource = (collectionSource === 'arena' ? 'arena' : 'paper') as 'paper' | 'arena';
 
     if (!text || typeof text !== 'string') {
       return NextResponse.json(
@@ -23,9 +24,9 @@ export async function POST(request: NextRequest) {
     const format = detectFormat(text);
 
     if (format === 'tsv') {
-      return await handleTsvImport(text, mode, authUser.userId);
+      return await handleTsvImport(text, mode, authUser.userId, importSource);
     }
-    return await handleArenaImport(text, mode, authUser.userId, deck_id ? Number(deck_id) : undefined);
+    return await handleArenaImport(text, mode, authUser.userId, deck_id ? Number(deck_id) : undefined, importSource);
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Import failed';
     return NextResponse.json({ error: message }, { status: 500 });
@@ -33,7 +34,7 @@ export async function POST(request: NextRequest) {
 }
 
 // ── TSV collection import (MTGA Assistant / spreadsheet format) ─────────────
-async function handleTsvImport(text: string, mode: string, userId: number) {
+async function handleTsvImport(text: string, mode: string, userId: number, source: 'paper' | 'arena' = 'paper') {
   const parsed = parseTsvCollection(text);
   if (parsed.length === 0) {
     return NextResponse.json(
@@ -81,7 +82,7 @@ async function handleTsvImport(text: string, mode: string, userId: number) {
   `);
 
   if (mode === 'replace') {
-    clearCollection(userId);
+    clearCollection(userId, source);
   }
 
   const cardsByName = new Map<string, (typeof allFound)[0]>();
@@ -116,11 +117,11 @@ async function handleTsvImport(text: string, mode: string, userId: number) {
     if (matchedCard) {
       // Import regular copies
       if (line.quantity > 0) {
-        upsertCollectionCard(matchedCard.id, line.quantity, false, userId);
+        upsertCollectionCard(matchedCard.id, line.quantity, false, userId, source);
       }
       // Import foil copies separately
       if (line.quantityFoil > 0) {
-        upsertCollectionCard(matchedCard.id, line.quantityFoil, true, userId);
+        upsertCollectionCard(matchedCard.id, line.quantityFoil, true, userId, source);
       }
       imported++;
     } else {
@@ -136,7 +137,7 @@ async function handleTsvImport(text: string, mode: string, userId: number) {
 }
 
 // ── Arena export format import ──────────────────────────────────────────────
-async function handleArenaImport(text: string, mode: string, userId: number, deckId?: number) {
+async function handleArenaImport(text: string, mode: string, userId: number, deckId?: number, source: 'paper' | 'arena' = 'paper') {
   const parsed = parseArenaExport(text);
   if (parsed.length === 0) {
     return NextResponse.json(
@@ -199,7 +200,7 @@ async function handleArenaImport(text: string, mode: string, userId: number, dec
   `);
 
   if (mode === 'replace' && !deckId) {
-    clearCollection(userId);
+    clearCollection(userId, source);
   }
 
   // Build name lookup maps — handle DFCs by mapping both full and front-face names
@@ -266,7 +267,7 @@ async function handleArenaImport(text: string, mode: string, userId: number, dec
     for (const line of parsed) {
       const matchedCard = findCard(line.name);
       if (matchedCard) {
-        upsertCollectionCard(matchedCard.id, line.quantity, false, userId);
+        upsertCollectionCard(matchedCard.id, line.quantity, false, userId, source);
         imported++;
       } else {
         failed.push(line.name);

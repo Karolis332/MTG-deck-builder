@@ -13,7 +13,7 @@ Runs the complete refresh cycle:
   8. Match aggregation
   9. Community meta aggregation
   10. Meta analysis (pandas)
-  11. Model training (scikit-learn, 25 features)
+  11. Model training (scikit-learn, 26 features)
   12. Personalized suggestions generation
 
 Each step is optional and can be skipped via flags. Steps that fail
@@ -61,6 +61,12 @@ STEPS = [
         "args": ["--max-articles", "100"],
     },
     {
+        "name": "spellbook",
+        "label": "Commander Spellbook Combo Scraping",
+        "script": "scrape_commander_spellbook.py",
+        "args": [],
+    },
+    {
         "name": "goldfish_articles",
         "label": "MTGGoldfish Article Scraping",
         "script": "scrape_mtggoldfish_articles.py",
@@ -76,6 +82,12 @@ STEPS = [
         "name": "mtgtop8",
         "label": "MTGTop8 Tournament Scraping",
         "script": "scrape_mtgtop8.py",
+        "args": [],
+    },
+    {
+        "name": "topdeck",
+        "label": "TopDeck.gg Tournament Scraping",
+        "script": "scrape_topdeck.py",
         "args": [],
     },
     {
@@ -104,7 +116,7 @@ STEPS = [
     },
     {
         "name": "train",
-        "label": "Model Training (scikit-learn, 25 features)",
+        "label": "Model Training (scikit-learn, 26 features)",
         "script": "train_model.py",
         "args": ["--model", "gbm", "--target", "blended"],
     },
@@ -136,7 +148,7 @@ def run_step(step: dict, db_path: str, dry_run: bool = False) -> bool:
 
     try:
         # Scrapers need longer timeout due to rate-limited HTTP requests
-        step_timeout = 900 if step["name"] in ("goldfish", "mtgtop8", "edhrec_articles", "goldfish_articles") else 300
+        step_timeout = 900 if step["name"] in ("goldfish", "mtgtop8", "edhrec_articles", "goldfish_articles", "spellbook", "topdeck") else 300
 
         result = subprocess.run(
             cmd,
@@ -180,6 +192,8 @@ def main():
                         help="Pass --no-tournaments to MTGGoldfish scraper")
     parser.add_argument("--skip-articles", action="store_true",
                         help="Skip EDHREC + MTGGoldfish article scraping")
+    parser.add_argument("--skip-spellbook", action="store_true", help="Skip Commander Spellbook scraping")
+    parser.add_argument("--skip-topdeck", action="store_true", help="Skip TopDeck.gg scraping")
     parser.add_argument("--skip-arena", action="store_true", help="Skip Arena log parsing")
     parser.add_argument("--skip-train", action="store_true", help="Skip model training")
     parser.add_argument("--only", choices=[s["name"] for s in STEPS],
@@ -200,6 +214,10 @@ def main():
     if args.skip_articles:
         skip_set.add("edhrec_articles")
         skip_set.add("goldfish_articles")
+    if args.skip_spellbook:
+        skip_set.add("spellbook")
+    if args.skip_topdeck:
+        skip_set.add("topdeck")
     if args.skip_arena:
         skip_set.add("arena")
     if args.skip_train:

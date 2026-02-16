@@ -1,6 +1,8 @@
 {
   "name": "the-black-grimoire",
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0-alpha.2",
+  "description": "A dark-themed desktop grimoire for building, analyzing, and mastering Magic: The Gathering decks",
+  "author": "QuLeR",
   "private": true,
   "main": "electron-dist/electron/main.js",
   "scripts": {
@@ -11,10 +13,10 @@
     "db:seed": "tsx src/db/seed.ts",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:python": "python -m pytest scripts/tests/ -v",
-    "test:all": "vitest run && python -m pytest scripts/tests/ -v",
+    "test:python": "py -m pytest scripts/tests/ -v",
+    "test:all": "vitest run && py -m pytest scripts/tests/ -v",
     "build:electron": "tsc -p tsconfig.electron.json",
-    "dev:electron": "concurrently \"next dev\" \"wait-on http://localhost:3000 && electron --no-sandbox .\"",
+    "dev:electron": "node -e \"const p=process.env.PORT||'3000';require('child_process').execSync(`npx concurrently \\\"next dev --port ${p}\\\" \\\"wait-on http://localhost:${p} && electron --no-sandbox .\\\"`,{stdio:'inherit',env:{...process.env,PORT:p}})\"",
     "dist:electron": "concurrently \"npm:build\" \"npm:build:electron\" && electron-builder",
     "dist:win": "concurrently \"npm:build\" \"npm:build:electron\" && electron-builder --win",
     "dist:mac": "concurrently \"npm:build\" \"npm:build:electron\" && electron-builder --mac",

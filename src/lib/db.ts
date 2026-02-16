@@ -2,6 +2,7 @@ import Database from 'better-sqlite3';
 import path from 'path';
 import fs from 'fs';
 import { MIGRATIONS } from '@/db/schema';
+import { getLegalityKey } from '@/lib/constants';
 
 const DB_DIR = process.env.MTG_DB_DIR || path.join(process.cwd(), 'data');
 const DB_PATH = path.join(DB_DIR, 'mtg-deck-builder.db');
@@ -66,16 +67,47 @@ export function getDb(): Database.Database {
 export function searchCards(
   query: string,
   limit = 20,
-  offset = 0
+  offset = 0,
+  options?: { format?: string; collectionOnly?: boolean; userId?: number; colorIdentity?: string[] }
 ): { cards: unknown[]; total: number } {
   const db = getDb();
 
+  // Build optional filter clauses
+  const extraJoins: string[] = [];
+  const extraConditions: string[] = [];
+  const extraParams: unknown[] = [];
+
+  if (options?.format) {
+    const legalKey = getLegalityKey(options.format);
+    extraConditions.push(`json_extract(c.legalities, '$.${legalKey}') IN ('legal', 'restricted')`);
+  }
+
+  if (options?.colorIdentity?.length) {
+    const allColors = ['W', 'U', 'B', 'R', 'G'];
+    const excluded = allColors.filter((c) => !options.colorIdentity!.includes(c));
+    for (const color of excluded) {
+      extraConditions.push(`c.color_identity NOT LIKE ?`);
+      extraParams.push(`%${color}%`);
+    }
+  }
+
+  if (options?.collectionOnly && options?.userId != null) {
+    extraJoins.push('INNER JOIN collection col ON c.id = col.card_id AND col.user_id = ?');
+    extraParams.push(options.userId);
+  }
+
+  const joinClause = extraJoins.length > 0 ? extraJoins.join(' ') : '';
+  const whereExtra = extraConditions.length > 0 ? ' AND ' + extraConditions.join(' AND ') : '';
+
   if (!query.trim()) {
-    const total = (db.prepare('SELECT COUNT(*) as count FROM cards').get() as { count: number })
-      .count;
+    const total = (db.prepare(
+      `SELECT COUNT(*) as count FROM cards c ${joinClause} WHERE 1=1${whereExtra}`
+    ).get(...extraParams) as { count: number }).count;
     const cards = db
-      .prepare('SELECT * FROM cards ORDER BY edhrec_rank ASC NULLS LAST LIMIT ? OFFSET ?')
-      .all(limit, offset);
+      .prepare(
+        `SELECT c.* FROM cards c ${joinClause} WHERE 1=1${whereExtra} ORDER BY c.edhrec_rank ASC NULLS LAST LIMIT ? OFFSET ?`
+      )
+      .all(...extraParams, limit, offset);
     return { cards, total };
   }
 
@@ -88,34 +120,40 @@ export function searchCards(
     const total = (
       db
         .prepare(
-          `SELECT COUNT(*) as count FROM cards_fts WHERE cards_fts MATCH ?`
+          `SELECT COUNT(*) as count FROM cards c
+           INNER JOIN cards_fts fts ON c.rowid = fts.rowid
+           ${joinClause}
+           WHERE cards_fts MATCH ?${whereExtra}`
         )
-        .get(ftsQuery) as { count: number }
+        .get(ftsQuery, ...extraParams) as { count: number }
     ).count;
 
     const cards = db
       .prepare(
         `SELECT c.* FROM cards c
          INNER JOIN cards_fts fts ON c.rowid = fts.rowid
-         WHERE cards_fts MATCH ?
+         ${joinClause}
+         WHERE cards_fts MATCH ?${whereExtra}
          ORDER BY rank
          LIMIT ? OFFSET ?`
       )
-      .all(ftsQuery, limit, offset);
+      .all(ftsQuery, ...extraParams, limit, offset);
 
     return { cards, total };
   } catch {
     const likeQuery = `%${query}%`;
     const total = (
       db
-        .prepare('SELECT COUNT(*) as count FROM cards WHERE name LIKE ?')
-        .get(likeQuery) as { count: number }
+        .prepare(
+          `SELECT COUNT(*) as count FROM cards c ${joinClause} WHERE c.name LIKE ?${whereExtra}`
+        )
+        .get(likeQuery, ...extraParams) as { count: number }
     ).count;
     const cards = db
       .prepare(
-        'SELECT * FROM cards WHERE name LIKE ? ORDER BY edhrec_rank ASC NULLS LAST LIMIT ? OFFSET ?'
+        `SELECT c.* FROM cards c ${joinClause} WHERE c.name LIKE ?${whereExtra} ORDER BY c.edhrec_rank ASC NULLS LAST LIMIT ? OFFSET ?`
       )
-      .all(likeQuery, limit, offset);
+      .all(likeQuery, ...extraParams, limit, offset);
     return { cards, total };
   }
 }
@@ -327,6 +365,7 @@ export function getCollection(
     types?: string[];
     rarities?: string[];
     query?: string;
+    source?: 'paper' | 'arena';
   },
   userId?: number
 ) {
@@ -337,6 +376,10 @@ export function getCollection(
   if (userId != null) {
     conditions.push('col.user_id = ?');
     params.push(userId);
+  }
+  if (filters?.source) {
+    conditions.push('col.source = ?');
+    params.push(filters.source);
   }
   if (filters?.query) {
     conditions.push('c.name LIKE ?');
@@ -386,10 +429,21 @@ export function getCollection(
   return { cards, total };
 }
 
-export function getCollectionStats(userId?: number) {
+export function getCollectionStats(userId?: number, source?: 'paper' | 'arena') {
   const db = getDb();
-  const where = userId != null ? 'WHERE col.user_id = ?' : '';
-  const params = userId != null ? [userId] : [];
+  const conditions: string[] = [];
+  const params: unknown[] = [];
+
+  if (userId != null) {
+    conditions.push('col.user_id = ?');
+    params.push(userId);
+  }
+  if (source) {
+    conditions.push('col.source = ?');
+    params.push(source);
+  }
+
+  const where = conditions.length ? `WHERE ${conditions.join(' AND ')}` : '';
 
   const totalCards = (
     db.prepare(`SELECT COALESCE(SUM(quantity), 0) as count FROM collection col ${where}`).get(
@@ -401,14 +455,20 @@ export function getCollectionStats(userId?: number) {
       count: number;
     }
   ).count;
+
+  const valueConditions = [...conditions];
+  const valueParams = [...params];
+  valueConditions.push('c.price_usd IS NOT NULL');
+  const valueWhere = valueConditions.length ? `WHERE ${valueConditions.join(' AND ')}` : '';
+
   const totalValue = (
     db
       .prepare(
         `SELECT COALESCE(SUM(CAST(c.price_usd AS REAL) * col.quantity), 0) as value
          FROM collection col JOIN cards c ON col.card_id = c.id
-         WHERE c.price_usd IS NOT NULL${userId != null ? ' AND col.user_id = ?' : ''}`
+         ${valueWhere}`
       )
-      .get(...params) as { value: number }
+      .get(...valueParams) as { value: number }
   ).value;
 
   return { totalCards, uniqueCards, totalValue: Math.round(totalValue * 100) / 100 };
@@ -418,37 +478,55 @@ export function upsertCollectionCard(
   cardId: string,
   quantity: number,
   foil: boolean,
-  userId?: number
+  userId?: number,
+  source: 'paper' | 'arena' = 'paper'
 ) {
   const db = getDb();
   if (userId != null) {
-    // For authenticated users, use a different conflict strategy
     const existing = db
-      .prepare('SELECT id FROM collection WHERE card_id = ? AND foil = ? AND user_id = ?')
-      .get(cardId, foil ? 1 : 0, userId) as { id: number } | undefined;
+      .prepare('SELECT id FROM collection WHERE card_id = ? AND foil = ? AND source = ? AND user_id = ?')
+      .get(cardId, foil ? 1 : 0, source, userId) as { id: number } | undefined;
 
     if (existing) {
       db.prepare('UPDATE collection SET quantity = ? WHERE id = ?').run(quantity, existing.id);
     } else {
       db.prepare(
-        'INSERT INTO collection (card_id, quantity, foil, user_id) VALUES (?, ?, ?, ?)'
-      ).run(cardId, quantity, foil ? 1 : 0, userId);
+        'INSERT INTO collection (card_id, quantity, foil, source, user_id) VALUES (?, ?, ?, ?, ?)'
+      ).run(cardId, quantity, foil ? 1 : 0, source, userId);
     }
   } else {
-    db.prepare(
-      `INSERT INTO collection (card_id, quantity, foil)
-       VALUES (?, ?, ?)
-       ON CONFLICT(card_id, foil) DO UPDATE SET
-         quantity = excluded.quantity`
-    ).run(cardId, quantity, foil ? 1 : 0);
+    const existing = db
+      .prepare('SELECT id FROM collection WHERE card_id = ? AND foil = ? AND source = ? AND COALESCE(user_id, 0) = 0')
+      .get(cardId, foil ? 1 : 0, source) as { id: number } | undefined;
+
+    if (existing) {
+      db.prepare('UPDATE collection SET quantity = ? WHERE id = ?').run(quantity, existing.id);
+    } else {
+      db.prepare(
+        'INSERT INTO collection (card_id, quantity, foil, source) VALUES (?, ?, ?, ?)'
+      ).run(cardId, quantity, foil ? 1 : 0, source);
+    }
   }
 }
 
-export function clearCollection(userId?: number) {
+export function clearCollection(userId?: number, source?: 'paper' | 'arena') {
+  const db = getDb();
+  const conditions: string[] = [];
+  const params: unknown[] = [];
+
   if (userId != null) {
-    getDb().prepare('DELETE FROM collection WHERE user_id = ?').run(userId);
+    conditions.push('user_id = ?');
+    params.push(userId);
+  }
+  if (source) {
+    conditions.push('source = ?');
+    params.push(source);
+  }
+
+  if (conditions.length) {
+    db.prepare(`DELETE FROM collection WHERE ${conditions.join(' AND ')}`).run(...params);
   } else {
-    getDb().prepare('DELETE FROM collection').run();
+    db.prepare('DELETE FROM collection').run();
   }
 }
 

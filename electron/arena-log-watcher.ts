@@ -16,7 +16,12 @@ import {
   type ArenaMatch,
   type JsonBlock,
 } from '../src/lib/arena-log-reader';
-import { extractGameEvents, type ArenaGameEvent } from '../src/lib/arena-game-events';
+import {
+  extractGameEventsWithContext,
+  createContext,
+  type ArenaGameEvent,
+  type ExtractionContext,
+} from '../src/lib/arena-game-events';
 import { GameStateEngine, type GameStateSnapshot } from '../src/lib/game-state-engine';
 import { GrpIdResolver } from '../src/lib/grp-id-resolver';
 
@@ -35,11 +40,16 @@ export class ArenaLogWatcher extends EventEmitter {
   private gameEngine: GameStateEngine | null = null;
   private resolver: GrpIdResolver | null = null;
   private streamingBuffer = '';
+  private streamingContext: ExtractionContext = createContext();
+  private processedBlockCount = 0;
 
-  constructor(logPath: string, pollInterval = 500) {
+  private catchUp: boolean;
+
+  constructor(logPath: string, pollInterval = 500, catchUp = false) {
     super();
     this.logPath = logPath;
     this.pollInterval = pollInterval;
+    this.catchUp = catchUp;
   }
 
   /**
@@ -55,9 +65,25 @@ export class ArenaLogWatcher extends EventEmitter {
 
     try {
       const stat = fs.statSync(this.logPath);
-      // Seek to end — only process new content
-      this.lastPosition = stat.size;
       this.lastInode = stat.ino;
+
+      if (this.catchUp) {
+        // Catch-up mode: scan the last portion of the log to detect in-progress matches
+        // Read last 512KB — enough to find a matchGameRoomStateChangedEvent + deck submission
+        const catchUpSize = Math.min(stat.size, 512 * 1024);
+        const startPos = stat.size - catchUpSize;
+        const fd = fs.openSync(this.logPath, 'r');
+        const buf = Buffer.alloc(catchUpSize);
+        fs.readSync(fd, buf, 0, catchUpSize, startPos);
+        fs.closeSync(fd);
+
+        const recentContent = buf.toString('utf-8');
+        this.processContentStreaming(recentContent);
+        this.lastPosition = stat.size;
+      } else {
+        // Normal mode: seek to end, only process new content
+        this.lastPosition = stat.size;
+      }
     } catch (err) {
       this.emit('error', `Cannot access log file: ${err}`);
       this.running = false;
@@ -76,6 +102,8 @@ export class ArenaLogWatcher extends EventEmitter {
     }
     this.gameEngine = null;
     this.streamingBuffer = '';
+    this.streamingContext = createContext();
+    this.processedBlockCount = 0;
     this.emit('stopped');
   }
 
@@ -95,6 +123,8 @@ export class ArenaLogWatcher extends EventEmitter {
         this.lastInode = stat.ino;
         this.buffer = [];
         this.streamingBuffer = '';
+        this.streamingContext = createContext();
+        this.processedBlockCount = 0;
       }
 
       // Truncation detection (file smaller than last read position)
@@ -102,6 +132,8 @@ export class ArenaLogWatcher extends EventEmitter {
         this.lastPosition = 0;
         this.buffer = [];
         this.streamingBuffer = '';
+        this.streamingContext = createContext();
+        this.processedBlockCount = 0;
       }
 
       // No new content
@@ -162,25 +194,35 @@ export class ArenaLogWatcher extends EventEmitter {
    * Streaming game event processing for real-time overlay.
    * Extracts JSON blocks from new content, converts to events,
    * and feeds them into the GameStateEngine.
+   *
+   * Uses a persistent ExtractionContext so zone changes, life totals,
+   * and seat assignments are tracked correctly across polls.
    */
   private processContentStreaming(content: string): void {
     this.streamingBuffer += content;
 
-    // Extract JSON blocks from the accumulated streaming buffer
-    const blocks = extractJsonBlocks(this.streamingBuffer);
-    if (blocks.length === 0) return;
+    // Extract ALL JSON blocks from accumulated buffer
+    const allBlocks = extractJsonBlocks(this.streamingBuffer);
+    if (allBlocks.length === 0) return;
 
-    // Extract granular events
-    const events = extractGameEvents(blocks);
+    // Only process blocks we haven't seen yet
+    const newBlocks = allBlocks.slice(this.processedBlockCount);
+    this.processedBlockCount = allBlocks.length;
+
+    if (newBlocks.length === 0) return;
+
+    // Extract events using persistent context (preserves seat IDs, zone map, etc.)
+    const events = extractGameEventsWithContext(newBlocks, this.streamingContext);
 
     for (const event of events) {
       this.handleStreamingEvent(event);
     }
 
-    // Keep only the last portion of the buffer to handle split blocks
-    // Trim to last 50KB to prevent unbounded growth
+    // Trim buffer to prevent unbounded growth
+    // When trimming, re-count blocks in the remaining buffer
     if (this.streamingBuffer.length > 50000) {
       this.streamingBuffer = this.streamingBuffer.slice(-25000);
+      this.processedBlockCount = extractJsonBlocks(this.streamingBuffer).length;
     }
   }
 
@@ -256,6 +298,16 @@ export class ArenaLogWatcher extends EventEmitter {
         // Feed all other events to the engine
         if (this.gameEngine) {
           this.gameEngine.processEvent(event);
+
+          // Feed game object names into resolver as fallback hints
+          // (handles Alchemy/digital-only cards that Scryfall 404s on)
+          if (this.resolver && event.type === 'game_state_update') {
+            const resolver = this.resolver;
+            const objectNames = this.gameEngine.getObjectNames();
+            objectNames.forEach((name, grpId) => {
+              resolver.setNameHint(grpId, name);
+            });
+          }
         }
         break;
       }

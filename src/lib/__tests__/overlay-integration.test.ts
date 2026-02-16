@@ -227,7 +227,7 @@ describe('Overlay Integration: blocks → events → state', () => {
 
     // Draw probabilities should be computed
     const probs = engine.getDrawProbabilities();
-    expect(probs.size).toBeGreaterThan(0);
+    expect(Object.keys(probs).length).toBeGreaterThan(0);
   });
 
   it('should handle Bo3 with intermission and deck reset', () => {
@@ -426,7 +426,7 @@ describe('Overlay Integration: blocks → events → state', () => {
 
     // Draw probabilities should work with resolved cards
     const probs = engine.getDrawProbabilities();
-    expect(probs.get(1001)).toBeCloseTo(4 / 7); // 4 out of 7 total cards
-    expect(probs.get(2001)).toBeCloseTo(3 / 7);
+    expect(probs[1001]).toBeCloseTo(4 / 7); // 4 out of 7 total cards
+    expect(probs[2001]).toBeCloseTo(3 / 7);
   });
 });

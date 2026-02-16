@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { getElectronAPI } from '@/lib/electron-bridge';
 
 interface OpponentTrackerProps {
@@ -22,11 +22,25 @@ export function OpponentTracker({
 }: OpponentTrackerProps) {
   const [resolvedCards, setResolvedCards] = useState<Record<number, ResolvedCardInfo>>({});
 
+  // Merge all visible opponent cards: seen + battlefield + graveyard (deduplicated)
+  const allVisibleGrpIds = useMemo(() => {
+    const seen = new Set<number>();
+    const result: number[] = [];
+    for (const grpId of [...opponentCardsSeen, ...opponentBattlefield, ...opponentGraveyard]) {
+      if (!seen.has(grpId)) {
+        seen.add(grpId);
+        result.push(grpId);
+      }
+    }
+    return result;
+  }, [opponentCardsSeen, opponentBattlefield, opponentGraveyard]);
+
+  // Resolve all visible grpIds (not just opponentCardsSeen)
   useEffect(() => {
     const api = getElectronAPI();
-    if (!api || opponentCardsSeen.length === 0) return;
+    if (!api || allVisibleGrpIds.length === 0) return;
 
-    api.resolveGrpIds(opponentCardsSeen).then((resolved) => {
+    api.resolveGrpIds(allVisibleGrpIds).then((resolved) => {
       const mapped: Record<number, ResolvedCardInfo> = {};
       for (const [grpIdStr, card] of Object.entries(resolved)) {
         const c = card as { name?: string; manaCost?: string; typeLine?: string };
@@ -38,7 +52,7 @@ export function OpponentTracker({
       }
       setResolvedCards(mapped);
     });
-  }, [opponentCardsSeen]);
+  }, [allVisibleGrpIds]);
 
   const battlefieldSet = new Set(opponentBattlefield);
   const graveyardSet = new Set(opponentGraveyard);
@@ -59,14 +73,14 @@ export function OpponentTracker({
     <div style={styles.container}>
       <div style={styles.colorBar}>
         Opponent colors: {colors.size > 0 ? Array.from(colors).join('') : '?'}
-        <span style={styles.cardCount}>{opponentCardsSeen.length} cards seen</span>
+        <span style={styles.cardCount}>{allVisibleGrpIds.length} cards seen</span>
       </div>
 
-      {opponentCardsSeen.length === 0 ? (
+      {allVisibleGrpIds.length === 0 ? (
         <div style={styles.empty}>No opponent cards seen yet</div>
       ) : (
         <div>
-          {opponentCardsSeen.map((grpId) => {
+          {allVisibleGrpIds.map((grpId) => {
             const card = resolvedCards[grpId];
             const name = card?.name ?? `Card #${grpId}`;
             const inPlay = battlefieldSet.has(grpId);

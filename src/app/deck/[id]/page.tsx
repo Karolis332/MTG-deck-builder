@@ -76,6 +76,20 @@ export default function DeckEditorPage() {
   const [editingName, setEditingName] = useState(false);
   const [deckName, setDeckName] = useState('');
 
+  // Combo state
+  const [showCombos, setShowCombos] = useState(false);
+  const [combosLoading, setCombosLoading] = useState(false);
+  const [includedCombos, setIncludedCombos] = useState<Array<{
+    id: string;
+    description: string | null;
+    prerequisites: string | null;
+    mana_needed: string | null;
+    popularity: number | null;
+    cards: Array<{ card_name: string; must_be_commander: boolean }>;
+    results: Array<{ feature_name: string }>;
+  }>>([]);
+  const [almostIncludedCombos, setAlmostIncludedCombos] = useState<typeof includedCombos>([]);
+
   // Zoom state
   const [zoomedCard, setZoomedCard] = useState<DbCard | null>(null);
   const [zoomPosition, setZoomPosition] = useState({ x: 0, y: 0 });
@@ -106,6 +120,23 @@ export default function DeckEditorPage() {
   const [mlReady, setMlReady] = useState(false);
   const [mlGames, setMlGames] = useState(0);
 
+  const isCommanderFormat = COMMANDER_FORMATS.includes(
+    (deck?.format || '') as typeof COMMANDER_FORMATS[number]
+  );
+
+  // Derive color identity from commander for search filtering
+  const deckColorIdentity = useMemo(() => {
+    if (!isCommanderFormat || !deck) return undefined;
+    const commander = deck.cards.find((c) => c.board === 'commander');
+    if (!commander) return undefined;
+    try {
+      const ci: string[] = commander.color_identity ? JSON.parse(commander.color_identity) : [];
+      return ci.length > 0 ? ci : undefined;
+    } catch {
+      return undefined;
+    }
+  }, [isCommanderFormat, deck]);
+
   // Load deck
   useEffect(() => {
     if (!deckId) return;
@@ -133,6 +164,30 @@ export default function DeckEditorPage() {
       })
       .catch(() => {});
   }, [deckId]);
+
+  // Fetch cached combos for commander/brawl decks
+  const fetchCombos = useCallback(async (forceRefresh = false) => {
+    if (!deckId) return;
+    setCombosLoading(true);
+    try {
+      const url = forceRefresh
+        ? '/api/deck-combos'
+        : `/api/deck-combos?deckId=${deckId}`;
+      const opts = forceRefresh
+        ? { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ deckId }) }
+        : {};
+      const res = await fetch(url, opts);
+      const data = await res.json();
+      setIncludedCombos(data.included || []);
+      setAlmostIncludedCombos(data.almostIncluded || []);
+    } catch {}
+    finally { setCombosLoading(false); }
+  }, [deckId]);
+
+  useEffect(() => {
+    if (!deckId || !isCommanderFormat) return;
+    fetchCombos();
+  }, [deckId, isCommanderFormat, fetchCombos]);
 
   // Fetch build explanation if coming from Claude build
   useEffect(() => {
@@ -162,8 +217,11 @@ export default function DeckEditorPage() {
         const params = new URLSearchParams({
           q: query,
           page: '1',
-          limit: '20',
+          limit: '100',
         });
+        if (deck?.format) params.set('format', deck.format);
+        if (collectionOnly) params.set('collectionOnly', 'true');
+        if (deckColorIdentity) params.set('colors', deckColorIdentity.join(','));
         const res = await fetch(`/api/cards/search?${params}`);
         const data = await res.json();
         setSearchResults(data.cards || []);
@@ -174,8 +232,16 @@ export default function DeckEditorPage() {
         setSearchLoading(false);
       }
     },
-    []
+    [deck?.format, collectionOnly, deckColorIdentity]
   );
+
+  // Re-search when collectionOnly toggles (if there's an active query or results)
+  useEffect(() => {
+    if (searchQuery || searchResults.length > 0) {
+      handleSearch(searchQuery);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [collectionOnly]);
 
   const loadMoreResults = async () => {
     const nextPage = searchPage + 1;
@@ -187,6 +253,9 @@ export default function DeckEditorPage() {
         page: String(nextPage),
         limit: '20',
       });
+      if (deck?.format) params.set('format', deck.format);
+      if (collectionOnly) params.set('collectionOnly', 'true');
+      if (deckColorIdentity) params.set('colors', deckColorIdentity.join(','));
       const res = await fetch(`/api/cards/search?${params}`);
       const data = await res.json();
       setSearchResults((prev) => [...prev, ...(data.cards || [])]);
@@ -334,10 +403,6 @@ export default function DeckEditorPage() {
       setSaving(false);
     }
   };
-
-  const isCommanderFormat = COMMANDER_FORMATS.includes(
-    (deck?.format || '') as typeof COMMANDER_FORMATS[number]
-  );
 
   // Apply actions from AI chat panel
   const handleChatApply = async (
@@ -596,7 +661,7 @@ export default function DeckEditorPage() {
               </button>
 
               {/* Collection-only toggle */}
-              <label className="flex cursor-pointer items-center gap-1.5" title="When on, AI only suggests cards you own">
+              <label className="flex cursor-pointer items-center gap-1.5" title="When on, search and AI only show cards you own">
                 <span className="text-[10px] text-muted-foreground">
                   {collectionOnly ? 'My cards' : 'All cards'}
                 </span>
@@ -641,6 +706,35 @@ export default function DeckEditorPage() {
               >
                 <PlayIcon className="h-3.5 w-3.5" />
                 Playtest
+              </button>
+              <button
+                onClick={async () => {
+                  if (!confirm('Build a new deck from your collection using this deck\'s format and commander?')) return;
+                  try {
+                    const commander = deck.cards.find((c) => c.board === 'commander');
+                    const res = await fetch('/api/decks/auto-build', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({
+                        name: `${deck.name} (Collection)`,
+                        format: deck.format,
+                        colors: deckColorIdentity || [],
+                        useCollection: true,
+                        commanderName: commander?.name,
+                      }),
+                    });
+                    const data = await res.json();
+                    if (!res.ok) throw new Error(data.error || 'Build failed');
+                    router.push(`/deck/${data.deckId}`);
+                  } catch (err) {
+                    alert(err instanceof Error ? err.message : 'Build failed');
+                  }
+                }}
+                className="flex items-center gap-1.5 rounded-lg bg-accent px-3 py-1.5 text-xs font-medium text-accent-foreground transition-colors hover:bg-accent/80"
+                title="Build a new deck using only cards from your collection"
+              >
+                <CollectionBuildIcon className="h-3.5 w-3.5" />
+                From Collection
               </button>
               <button
                 onClick={() => setShowImport(true)}
@@ -1098,6 +1192,173 @@ export default function DeckEditorPage() {
                 className="mb-4"
               />
 
+              {/* Combo Panel — commander/brawl only */}
+              {isCommanderFormat && (
+                <div className="mb-4">
+                  <button
+                    onClick={() => setShowCombos(v => !v)}
+                    className="flex w-full items-center justify-between rounded-xl border border-border bg-card p-3 text-left transition-colors hover:bg-accent/30"
+                  >
+                    <div className="flex items-center gap-2">
+                      <ComboIcon className="h-4 w-4 text-primary" />
+                      <span className="text-sm font-semibold">Combos</span>
+                      {includedCombos.length > 0 && (
+                        <span className="rounded-full bg-primary/20 px-2 py-0.5 text-[10px] font-bold text-primary">
+                          {includedCombos.length}
+                        </span>
+                      )}
+                      {almostIncludedCombos.length > 0 && (
+                        <span className="rounded-full bg-amber-500/20 px-2 py-0.5 text-[10px] font-bold text-amber-400">
+                          +{almostIncludedCombos.length} near
+                        </span>
+                      )}
+                    </div>
+                    <span className={cn(
+                      'text-xs text-muted-foreground transition-transform',
+                      showCombos && 'rotate-180'
+                    )}>
+                      &#9660;
+                    </span>
+                  </button>
+
+                  {showCombos && (
+                    <div className="mt-2 space-y-3 rounded-xl border border-border bg-card p-3 animate-slide-up">
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs text-muted-foreground">
+                          Powered by Commander Spellbook
+                        </span>
+                        <button
+                          onClick={() => fetchCombos(true)}
+                          disabled={combosLoading}
+                          className="rounded-md bg-accent px-2.5 py-1 text-[10px] font-medium text-accent-foreground transition-colors hover:bg-accent/80 disabled:opacity-50"
+                        >
+                          {combosLoading ? 'Scanning...' : 'Scan for Combos'}
+                        </button>
+                      </div>
+
+                      {combosLoading && (
+                        <div className="flex items-center justify-center py-4">
+                          <Spinner className="h-5 w-5 text-primary" />
+                          <span className="ml-2 text-xs text-muted-foreground">Analyzing deck for combos...</span>
+                        </div>
+                      )}
+
+                      {!combosLoading && includedCombos.length === 0 && almostIncludedCombos.length === 0 && (
+                        <p className="py-2 text-center text-xs text-muted-foreground">
+                          No combos found. Click &quot;Scan for Combos&quot; to check.
+                        </p>
+                      )}
+
+                      {/* Included combos */}
+                      {includedCombos.length > 0 && (
+                        <div>
+                          <h4 className="mb-1.5 text-xs font-semibold text-green-400">
+                            Combos in Your Deck ({includedCombos.length})
+                          </h4>
+                          <div className="space-y-2">
+                            {includedCombos.map(combo => (
+                              <details key={combo.id} className="group rounded-lg border border-green-500/20 bg-green-500/5 p-2">
+                                <summary className="flex cursor-pointer items-center gap-2 text-xs">
+                                  <span className="transition-transform group-open:rotate-90">&#9654;</span>
+                                  <span className="flex-1 font-medium">
+                                    {combo.cards.map(c => c.card_name).join(' + ')}
+                                  </span>
+                                  {combo.popularity != null && combo.popularity > 0 && (
+                                    <span className="shrink-0 text-[9px] text-muted-foreground">
+                                      pop: {combo.popularity}
+                                    </span>
+                                  )}
+                                </summary>
+                                <div className="mt-2 space-y-1 pl-4">
+                                  {combo.description && (
+                                    <p className="text-[10px] text-foreground/80">{combo.description}</p>
+                                  )}
+                                  {combo.prerequisites && (
+                                    <p className="text-[10px] text-muted-foreground">
+                                      <span className="font-medium">Prerequisites:</span> {combo.prerequisites}
+                                    </p>
+                                  )}
+                                  {combo.results.length > 0 && (
+                                    <div className="flex flex-wrap gap-1">
+                                      {combo.results.map(r => (
+                                        <span key={r.feature_name} className="rounded-full bg-primary/10 px-1.5 py-0.5 text-[9px] font-medium text-primary">
+                                          {r.feature_name}
+                                        </span>
+                                      ))}
+                                    </div>
+                                  )}
+                                </div>
+                              </details>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Near-miss combos */}
+                      {almostIncludedCombos.length > 0 && (
+                        <div>
+                          <h4 className="mb-1.5 text-xs font-semibold text-amber-400">
+                            Near-Miss Combos ({almostIncludedCombos.length})
+                          </h4>
+                          <div className="space-y-2">
+                            {almostIncludedCombos.slice(0, 10).map(combo => {
+                              const deckCardNames = new Set(deck.cards.map(c => c.name));
+                              return (
+                                <details key={combo.id} className="group rounded-lg border border-amber-500/20 bg-amber-500/5 p-2">
+                                  <summary className="flex cursor-pointer items-center gap-2 text-xs">
+                                    <span className="transition-transform group-open:rotate-90">&#9654;</span>
+                                    <span className="flex-1">
+                                      {combo.cards.map(c => (
+                                        <span
+                                          key={c.card_name}
+                                          className={cn(
+                                            'font-medium',
+                                            deckCardNames.has(c.card_name) ? 'text-foreground' : 'text-red-400'
+                                          )}
+                                        >
+                                          {c.card_name}
+                                          {combo.cards.indexOf(c) < combo.cards.length - 1 ? ' + ' : ''}
+                                        </span>
+                                      ))}
+                                    </span>
+                                  </summary>
+                                  <div className="mt-2 space-y-1 pl-4">
+                                    {combo.description && (
+                                      <p className="text-[10px] text-foreground/80">{combo.description}</p>
+                                    )}
+                                    <div className="text-[10px]">
+                                      <span className="font-medium text-amber-400">Missing: </span>
+                                      {combo.cards
+                                        .filter(c => !deckCardNames.has(c.card_name))
+                                        .map(c => c.card_name)
+                                        .join(', ')}
+                                    </div>
+                                    {combo.results.length > 0 && (
+                                      <div className="flex flex-wrap gap-1">
+                                        {combo.results.map(r => (
+                                          <span key={r.feature_name} className="rounded-full bg-amber-500/10 px-1.5 py-0.5 text-[9px] font-medium text-amber-400">
+                                            {r.feature_name}
+                                          </span>
+                                        ))}
+                                      </div>
+                                    )}
+                                  </div>
+                                </details>
+                              );
+                            })}
+                            {almostIncludedCombos.length > 10 && (
+                              <p className="text-center text-[10px] text-muted-foreground">
+                                +{almostIncludedCombos.length - 10} more near-miss combos
+                              </p>
+                            )}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+              )}
+
               <DeckList
                 cards={deckEntries.map((e) => ({
                   card_id: e.card_id,
@@ -1237,6 +1498,27 @@ function HistoryIcon({ className }: { className?: string }) {
       <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
       <path d="M3 3v5h5" />
       <path d="M12 7v5l4 2" />
+    </svg>
+  );
+}
+
+function CollectionBuildIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+      <path d="M16 7V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v3" />
+    </svg>
+  );
+}
+
+function ComboIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="8" cy="8" r="3" />
+      <circle cx="16" cy="16" r="3" />
+      <path d="M10.5 10.5L13.5 13.5" />
+      <circle cx="16" cy="8" r="3" />
+      <path d="M13.5 10.5L10.5 13.5" />
     </svg>
   );
 }

@@ -329,9 +329,13 @@ export async function buildDeckWithAI(
     const key = entry.name.toLowerCase();
     const match = candidateMap.get(key);
     if (!match) {
-      // Try fuzzy: exact name lookup in DB
+      // Try fuzzy: exact name lookup in DB (with color/legality/commander filters)
       const dbCard = db.prepare(
-        'SELECT * FROM cards WHERE name = ? COLLATE NOCASE LIMIT 1'
+        `SELECT * FROM cards WHERE name = ? COLLATE NOCASE
+         ${poolResult.colorExcludeFilter ? 'AND ' + poolResult.colorExcludeFilter : ''}
+         ${poolResult.legalityFilter}
+         ${poolResult.commanderExclude}
+         LIMIT 1`
       ).get(entry.name) as DbCard | undefined;
 
       if (dbCard && !pickedNames.has(dbCard.name.toLowerCase())) {

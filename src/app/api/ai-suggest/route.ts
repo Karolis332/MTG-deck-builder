@@ -4,6 +4,7 @@ import { getRuleBasedSuggestions, getOllamaSuggestions } from '@/lib/ai-suggest'
 import { getSynergySuggestions } from '@/lib/deck-builder-ai';
 import { getCardGlobalScore } from '@/lib/global-learner';
 import { getOpenAISuggestions, resolveOpenAISuggestions } from '@/lib/openai-suggest';
+import { getCFRecommendations, resolveCFToDbCards } from '@/lib/cf-api-client';
 import { DEFAULT_LAND_COUNT, DEFAULT_DECK_SIZE, COMMANDER_FORMATS } from '@/lib/constants';
 import { validateAgainstTemplate } from '@/lib/deck-templates';
 import { analyzeCommander } from '@/lib/commander-synergy';
@@ -75,6 +76,36 @@ export async function POST(request: NextRequest) {
     const isCommanderLike = COMMANDER_FORMATS.includes(format as typeof COMMANDER_FORMATS[number]);
     // Color identity restriction only applies to commander/brawl formats
     const deckColors = isCommanderLike ? getDeckColorIdentity(deck.cards) : new Set<string>();
+
+    // Try CF API first for Commander/Brawl formats (primary recommendation source)
+    if (isCommanderLike) {
+      try {
+        const commanderCard = deck.cards.find((c) => c.board === 'commander');
+        const commanderName = commanderCard?.name || '';
+        if (commanderName) {
+          const mainCards = deck.cards
+            .filter((c) => c.board === 'main' || c.board === 'commander')
+            .map((c) => c.name);
+          const cfRecs = await getCFRecommendations(mainCards, commanderName);
+          if (cfRecs.length > 0) {
+            const existingCardIds = new Set(deck.cards.map((c) => c.card_id || c.id));
+            const cfSuggestions = resolveCFToDbCards(cfRecs, existingCardIds)
+              .filter((s) => cardFitsColorIdentity(s.card, deckColors))
+              .slice(0, 15);
+            if (cfSuggestions.length > 0) {
+              const proposedChanges = buildProposedChanges(deck_id, deck, format, cfSuggestions);
+              return NextResponse.json({
+                suggestions: cfSuggestions,
+                proposedChanges,
+                source: 'collaborative-filtering',
+              });
+            }
+          }
+        }
+      } catch {
+        // CF API unavailable — fall through to other sources
+      }
+    }
 
     // Try Ollama first
     const ollamaSuggestions = await getOllamaSuggestions(deck.cards, format);

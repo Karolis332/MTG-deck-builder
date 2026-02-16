@@ -66,6 +66,8 @@ FEATURE_COLS = [
     "archetype_core_rate", "avg_copies_norm", "meta_popularity",
     # Archetype win rate (from aggregated tournament W-L data)
     "archetype_win_rate",
+    # Combo synergy (from Commander Spellbook data)
+    "combo_score",
     # Match ML features (from Arena per-game analysis)
     "avg_cmc_played", "curve_efficiency", "first_play_turn",
     "cards_drawn_per_turn", "unique_cards_played", "deck_penetration",

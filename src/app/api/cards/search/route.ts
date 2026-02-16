@@ -1,21 +1,39 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { searchCards, getCardCount } from '@/lib/db';
+import { getAuthUser } from '@/lib/auth-middleware';
 import * as scryfall from '@/lib/scryfall';
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const query = searchParams.get('q') || '';
   const page = parseInt(searchParams.get('page') || '1', 10);
-  const limit = Math.min(parseInt(searchParams.get('limit') || '20', 10), 50);
+  const limit = Math.min(parseInt(searchParams.get('limit') || '100', 10), 200);
   const source = searchParams.get('source') || 'auto';
+  const format = searchParams.get('format') || undefined;
+  const collectionOnly = searchParams.get('collectionOnly') === 'true';
+  const colors = searchParams.get('colors')?.split(',').filter(Boolean) || undefined;
   const offset = (page - 1) * limit;
+
+  // Resolve userId for collection filtering
+  let userId: number | undefined;
+  if (collectionOnly) {
+    const user = await getAuthUser(request);
+    if (user) userId = user.userId;
+  }
+
+  const searchOptions = {
+    format,
+    collectionOnly: collectionOnly && userId != null,
+    userId,
+    colorIdentity: colors,
+  };
 
   try {
     // If we have local cards, search locally first
     const localCardCount = getCardCount();
 
     if (source !== 'scryfall' && localCardCount > 0 && query) {
-      const result = searchCards(query, limit, offset);
+      const result = searchCards(query, limit, offset, searchOptions);
       if (result.cards.length > 0) {
         return NextResponse.json({
           cards: result.cards,
@@ -27,7 +45,7 @@ export async function GET(request: NextRequest) {
       }
     }
 
-    // Fall back to Scryfall API
+    // Fall back to Scryfall API (no format/collection filtering for Scryfall)
     if (query) {
       const scryfallResult = await scryfall.searchCards(query, page);
       return NextResponse.json({
@@ -41,7 +59,7 @@ export async function GET(request: NextRequest) {
 
     // No query — return popular cards from local DB
     if (localCardCount > 0) {
-      const result = searchCards('', limit, offset);
+      const result = searchCards('', limit, offset, searchOptions);
       return NextResponse.json({
         cards: result.cards,
         total: result.total,

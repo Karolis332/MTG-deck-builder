@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { resolveArenaIds, upsertCollectionCard } from '@/lib/db';
+import { getAuthUser } from '@/lib/auth-middleware';
 
 /**
  * POST /api/arena-collection
@@ -8,10 +9,13 @@ import { resolveArenaIds, upsertCollectionCard } from '@/lib/db';
  * Format: { collection: { "arena_id": quantity, ... } }
  *
  * Resolves arena IDs to card database IDs via the cards.arena_id column,
- * then upserts into the collection table.
+ * then upserts into the collection table with source='arena'.
  */
 export async function POST(request: NextRequest) {
   try {
+    const authUser = await getAuthUser(request);
+    const userId = authUser?.userId;
+
     const body = await request.json();
     const { collection } = body as { collection: Record<string, number> };
 
@@ -40,8 +44,7 @@ export async function POST(request: NextRequest) {
       const card = cardMap.get(arenaId);
       if (card && card.id) {
         const cardId = card.id as string;
-        // Upsert into collection (no userId — desktop mode)
-        upsertCollectionCard(cardId, quantity, false);
+        upsertCollectionCard(cardId, quantity, false, userId, 'arena');
         imported++;
       } else {
         failed.push(arenaId);

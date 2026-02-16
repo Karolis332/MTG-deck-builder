@@ -106,5 +106,16 @@ export const DEFAULT_DECK_SIZE: Record<string, number> = {
 // Formats that use a commander/companion zone
 export const COMMANDER_FORMATS = ['commander', 'brawl', 'standardbrawl'] as const;
 
+/**
+ * Map app format names to Scryfall legality JSON keys.
+ * Scryfall uses "brawl" for Historic Brawl and "standardbrawl" for Standard Brawl,
+ * which matches our internal format names — identity mapping.
+ */
+export function getLegalityKey(format: string): string {
+  return format;
+}
+
 export const SCRYFALL_API_BASE = 'https://api.scryfall.com';
 export const SCRYFALL_RATE_LIMIT_MS = 100;
+
+export const CF_API_DEFAULT_URL = 'http://localhost:8000';

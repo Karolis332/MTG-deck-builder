@@ -25,6 +25,7 @@ export default function CollectionPage() {
   const [selectedRarities, setSelectedRarities] = useState<string[]>([]);
   const [showFilters, setShowFilters] = useState(false);
   const [stats, setStats] = useState({ totalCards: 0, uniqueCards: 0, totalValue: 0 });
+  const [activeSource, setActiveSource] = useState<'paper' | 'arena'>('paper');
   const [importing, setImporting] = useState(false);
   const [importResult, setImportResult] = useState<string | null>(null);
   const [importProgress, setImportProgress] = useState<{ current: number; total: number } | null>(null);
@@ -39,6 +40,7 @@ export default function CollectionPage() {
     if (selectedRarities.length) params.set('rarities', selectedRarities.join(','));
     if (selectedTypes.length) params.set('types', selectedTypes.join(','));
     if (selectedColors.length) params.set('colors', selectedColors.join(','));
+    params.set('source', activeSource);
 
     try {
       const res = await fetch(`/api/collection?${params}`);
@@ -51,7 +53,7 @@ export default function CollectionPage() {
     } finally {
       setLoading(false);
     }
-  }, [page, query, selectedRarities, selectedTypes, selectedColors]);
+  }, [page, query, selectedRarities, selectedTypes, selectedColors, activeSource]);
 
   useEffect(() => {
     fetchCollection();
@@ -103,7 +105,7 @@ export default function CollectionPage() {
         const res = await fetch('/api/collection/import-csv', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ csv: chunkCSV }),
+          body: JSON.stringify({ csv: chunkCSV, source: activeSource }),
         });
 
         const data = await res.json();
@@ -142,7 +144,7 @@ export default function CollectionPage() {
       {/* Header */}
       <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-2xl font-bold">Collection</h1>
+          <h1 className="font-heading text-2xl font-bold tracking-wide text-grimoire">Collection</h1>
           <p className="text-sm text-muted-foreground">
             {stats.totalCards} cards / {stats.uniqueCards} unique
             {stats.totalValue > 0 && ` / ~$${stats.totalValue.toFixed(2)}`}
@@ -191,6 +193,32 @@ export default function CollectionPage() {
             )}
           </button>
         </div>
+      </div>
+
+      {/* Paper / Arena tabs */}
+      <div className="mb-4 flex rounded-lg bg-accent/50 p-0.5" style={{ maxWidth: 240 }}>
+        <button
+          onClick={() => { setActiveSource('paper'); setPage(1); }}
+          className={cn(
+            'flex-1 rounded-md px-3 py-1.5 text-sm font-medium transition-colors',
+            activeSource === 'paper'
+              ? 'bg-card text-foreground shadow-sm'
+              : 'text-muted-foreground hover:text-foreground'
+          )}
+        >
+          Paper
+        </button>
+        <button
+          onClick={() => { setActiveSource('arena'); setPage(1); }}
+          className={cn(
+            'flex-1 rounded-md px-3 py-1.5 text-sm font-medium transition-colors',
+            activeSource === 'arena'
+              ? 'bg-card text-foreground shadow-sm'
+              : 'text-muted-foreground hover:text-foreground'
+          )}
+        >
+          Arena
+        </button>
       </div>
 
       {/* Import progress bar */}

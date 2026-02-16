@@ -26,18 +26,18 @@ export function Navbar() {
 
   return (
     <>
-      <header className="sticky top-0 z-50 border-b border-border/40 bg-background/80 backdrop-blur-xl">
+      <header className="sticky top-0 z-50 border-b border-border bg-card/95 backdrop-blur-md" style={{ boxShadow: '0 4px 24px rgba(0,0,0,0.4), inset 0 -1px 0 hsl(43 40% 28% / 0.15)' }}>
         <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 font-bold text-lg">
-            <AppLogo className="h-8 w-8" />
-            <span className="hidden sm:inline">
-              The <span className="text-amber-500">Black Grimoire</span>
+          <Link href="/" className="flex items-center gap-2.5 group">
+            <AppLogo className="h-8 w-8 transition-transform group-hover:scale-105" />
+            <span className="hidden sm:inline font-heading text-lg tracking-wide">
+              The <span className="text-grimoire">Black Grimoire</span>
             </span>
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-1">
+          <nav className="hidden md:flex items-center gap-0.5">
             {NAV_ITEMS.map((item) => {
               const isActive =
                 item.href === '/'
@@ -48,10 +48,10 @@ export function Navbar() {
                   key={item.href}
                   href={item.href}
                   className={cn(
-                    'flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium transition-colors',
+                    'flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium font-heading tracking-wide transition-all',
                     isActive
-                      ? 'bg-primary/10 text-primary'
-                      : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground'
+                      ? 'bg-primary/15 text-primary shadow-inner'
+                      : 'text-muted-foreground hover:bg-accent hover:text-foreground'
                   )}
                 >
                   <item.icon className="h-4 w-4" />
@@ -65,15 +65,15 @@ export function Navbar() {
           <div className="flex items-center gap-2">
             <button
               onClick={() => setShowImport(true)}
-              className="flex items-center gap-2 rounded-lg bg-primary px-3 py-1.5 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+              className="btn-grimoire flex items-center gap-2 !py-1.5 !px-3 !text-xs"
             >
-              <ImportIcon className="h-4 w-4" />
+              <ImportIcon className="h-3.5 w-3.5" />
               <span className="hidden sm:inline">Import</span>
             </button>
 
             <button
               onClick={toggleTheme}
-              className="flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+              className="flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-accent hover:text-primary"
               aria-label="Toggle theme"
             >
               {theme === 'dark' ? (
@@ -85,7 +85,7 @@ export function Navbar() {
 
             <button
               onClick={() => setShowSettings(true)}
-              className="flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+              className="flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-accent hover:text-primary"
               aria-label="Settings"
             >
               <SettingsIcon className="h-4 w-4" />
@@ -93,10 +93,10 @@ export function Navbar() {
 
             {user ? (
               <div className="hidden items-center gap-2 sm:flex">
-                <span className="text-sm text-muted-foreground">{user.username}</span>
+                <span className="text-sm font-heading text-muted-foreground tracking-wide">{user.username}</span>
                 <button
                   onClick={logout}
-                  className="rounded-lg px-2 py-1 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+                  className="rounded-lg px-2 py-1 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
                 >
                   Sign Out
                 </button>
@@ -104,7 +104,7 @@ export function Navbar() {
             ) : (
               <Link
                 href="/login"
-                className="hidden rounded-lg px-3 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground sm:flex items-center gap-1"
+                className="hidden rounded-lg px-3 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground sm:flex items-center gap-1"
               >
                 <UserIcon className="h-4 w-4" />
                 Sign In
@@ -124,7 +124,7 @@ export function Navbar() {
 
         {/* Mobile Nav */}
         {mobileMenuOpen && (
-          <nav className="border-t border-border/40 px-4 py-2 md:hidden animate-slide-up">
+          <nav className="border-t border-border px-4 py-2 md:hidden animate-slide-up bg-card/95">
             {NAV_ITEMS.map((item) => {
               const isActive =
                 item.href === '/'
@@ -136,9 +136,9 @@ export function Navbar() {
                   href={item.href}
                   onClick={() => setMobileMenuOpen(false)}
                   className={cn(
-                    'flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium transition-colors',
+                    'flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-heading tracking-wide transition-colors',
                     isActive
-                      ? 'bg-primary/10 text-primary'
+                      ? 'bg-primary/15 text-primary'
                       : 'text-muted-foreground hover:bg-accent'
                   )}
                 >
@@ -150,7 +150,7 @@ export function Navbar() {
             {user ? (
               <button
                 onClick={() => { logout(); setMobileMenuOpen(false); }}
-                className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground hover:bg-accent"
+                className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-heading text-muted-foreground hover:bg-accent"
               >
                 <UserIcon className="h-4 w-4" />
                 Sign Out ({user.username})
@@ -159,7 +159,7 @@ export function Navbar() {
               <Link
                 href="/login"
                 onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground hover:bg-accent"
+                className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-heading text-muted-foreground hover:bg-accent"
               >
                 <UserIcon className="h-4 w-4" />
                 Sign In

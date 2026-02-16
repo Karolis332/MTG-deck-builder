@@ -1,4 +1,5 @@
 import type { DbCard } from '@/lib/types';
+import { getLegalityKey } from '@/lib/constants';
 
 /**
  * Check if a card fits within the deck's color identity.
@@ -20,7 +21,7 @@ export function isLegalInFormat(card: DbCard, format: string): boolean {
   if (!format || !card.legalities) return true;
   try {
     const legalities = JSON.parse(card.legalities);
-    const status = legalities[format];
+    const status = legalities[getLegalityKey(format)];
     return !status || status === 'legal' || status === 'restricted';
   } catch {
     return true;

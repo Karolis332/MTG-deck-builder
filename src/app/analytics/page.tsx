@@ -103,7 +103,7 @@ export default function AnalyticsPage() {
     <div className="mx-auto max-w-6xl px-4 py-8">
       <div className="mb-6 flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold">Analytics</h1>
+          <h1 className="font-heading text-2xl font-bold tracking-wide text-grimoire">Analytics</h1>
           <p className="text-sm text-muted-foreground">
             Deck statistics, match history, and card performance
           </p>
@@ -124,30 +124,32 @@ export default function AnalyticsPage() {
       </div>
 
       {isEmpty && (
-        <div className="rounded-2xl border border-dashed border-border p-12 text-center">
-          <div className="mb-3 text-4xl opacity-30">&#x1F4CA;</div>
-          <h2 className="mb-1 text-lg font-semibold">No data yet</h2>
-          <p className="mb-4 text-sm text-muted-foreground">
-            Build some decks and log matches to see analytics here.
-          </p>
-          <Link
-            href="/deck-builder"
-            className="inline-block rounded-xl bg-primary px-6 py-2.5 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
-          >
-            Build a Deck
-          </Link>
+        <div className="grimoire-border bg-card/60 p-12 text-center">
+          <div className="grimoire-corners">
+            <div className="mb-3 text-4xl opacity-30">&#x1F4CA;</div>
+            <h2 className="mb-1 font-heading text-lg font-semibold text-primary">No data yet</h2>
+            <p className="mb-4 text-sm text-muted-foreground">
+              Build some decks and log matches to see analytics here.
+            </p>
+            <Link
+              href="/deck-builder"
+              className="btn-grimoire inline-block"
+            >
+              Build a Deck
+            </Link>
+          </div>
         </div>
       )}
 
       {/* Win Rate Summary Cards */}
       {hasMatches && (
         <div className="mb-6">
-          <h2 className="mb-3 text-lg font-semibold">Win Rates by Format</h2>
+          <h2 className="mb-3 font-heading text-lg font-semibold tracking-wide text-primary">Win Rates by Format</h2>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {Object.entries(data.win_rates).map(([fmt, stats]) => (
-              <div key={fmt} className="rounded-2xl border border-border bg-card p-4">
-                <div className="text-xs text-muted-foreground capitalize">{fmt}</div>
-                <div className="text-2xl font-bold">{stats.win_rate}%</div>
+              <div key={fmt} className="grimoire-border bg-card/80 p-4">
+                <div className="font-heading text-[10px] uppercase tracking-widest text-muted-foreground">{fmt}</div>
+                <div className="text-2xl font-bold text-primary">{stats.win_rate}%</div>
                 <div className="text-[10px] text-muted-foreground">
                   {stats.wins}W / {stats.losses}L / {stats.draws}D ({stats.total_games} games)
                 </div>
