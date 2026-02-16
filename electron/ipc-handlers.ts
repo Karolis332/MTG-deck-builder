@@ -339,6 +339,60 @@ export function registerIpcHandlers(): void {
     return Object.fromEntries(resolved);
   });
 
+  // ── MTGA Card Data Import ───────────────────────────────────────────────
+
+  ipcMain.handle('import-mtga-cards', async (_event, mtgaPath?: string) => {
+    try {
+      const candidates = process.platform === 'win32'
+        ? ['py', 'python3', 'python']
+        : ['python3', 'python'];
+
+      let pythonCmd = '';
+      for (const cmd of candidates) {
+        try {
+          execSync(`${cmd} --version`, { stdio: 'pipe', timeout: 5000 });
+          pythonCmd = cmd;
+          break;
+        } catch { /* try next */ }
+      }
+
+      if (!pythonCmd) return { ok: false, error: 'Python not found' };
+
+      const isDev = !app.isPackaged;
+      const projectDir = isDev ? path.resolve(__dirname, '..') : process.resourcesPath;
+      const scriptPath = path.join(projectDir, 'scripts', 'import_mtga_cards.py');
+      const dbPath = isDev
+        ? path.join(path.resolve(__dirname, '..'), 'data', 'mtg-deck-builder.db')
+        : path.join(app.getPath('userData'), 'data', 'mtg-deck-builder.db');
+
+      if (!fs.existsSync(scriptPath)) {
+        return { ok: false, error: 'Import script not found' };
+      }
+
+      const args = [scriptPath, '--db', dbPath];
+      if (mtgaPath) args.push('--mtga-path', mtgaPath);
+
+      const result = execSync(`${pythonCmd} ${args.map(a => `"${a}"`).join(' ')}`, {
+        cwd: isDev ? path.resolve(__dirname, '..') : app.getPath('userData'),
+        timeout: 60000,
+        encoding: 'utf-8',
+      });
+
+      return { ok: true, output: result };
+    } catch (err) {
+      return { ok: false, error: String(err) };
+    }
+  });
+
+  ipcMain.handle('select-mtga-path', async () => {
+    const result = await dialog.showOpenDialog({
+      title: 'Select MTGA Installation Folder',
+      properties: ['openDirectory'],
+      defaultPath: 'C:\\Program Files\\Wizards of the Coast\\MTGA',
+    });
+    return result.canceled ? null : result.filePaths[0];
+  });
+
   // ── ML Pipeline ─────────────────────────────────────────────────────────
 
   ipcMain.handle('run-ml-pipeline', (_event, options: { steps?: string; target?: string }) => {

@@ -43,6 +43,12 @@ MODEL_PATH = os.path.join(PROJECT_DIR, "data", "card_model.joblib")
 
 STEPS = [
     {
+        "name": "mtga_cards",
+        "label": "MTGA Local Card Data Import (grpId resolution)",
+        "script": "import_mtga_cards.py",
+        "args": [],
+    },
+    {
         "name": "mtgjson",
         "label": "MTGJSON Fetch (subtypes + arena IDs)",
         "script": "fetch_mtgjson.py",

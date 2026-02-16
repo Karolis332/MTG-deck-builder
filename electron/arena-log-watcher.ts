@@ -301,12 +301,10 @@ export class ArenaLogWatcher extends EventEmitter {
 
           // Feed game object names into resolver as fallback hints
           // (handles Alchemy/digital-only cards that Scryfall 404s on)
+          // Uses bulk setNameHints for efficient batch DB persistence
           if (this.resolver && event.type === 'game_state_update') {
-            const resolver = this.resolver;
             const objectNames = this.gameEngine.getObjectNames();
-            objectNames.forEach((name, grpId) => {
-              resolver.setNameHint(grpId, name);
-            });
+            this.resolver.setNameHints(objectNames);
           }
         }
         break;

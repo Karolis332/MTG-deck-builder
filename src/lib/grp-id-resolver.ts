@@ -126,10 +126,11 @@ export class GrpIdResolver {
   /**
    * Set a name hint for a grpId from Arena game object data.
    * Only populates cache if not already resolved (avoids overwriting richer data).
+   * Persists to DB so hints survive across sessions — incremental coverage.
    */
   setNameHint(grpId: number, name: string): void {
     if (!name || this.memoryCache.has(grpId)) return;
-    this.memoryCache.set(grpId, {
+    const card: ResolvedCard = {
       grpId,
       name,
       manaCost: null,
@@ -138,7 +139,49 @@ export class GrpIdResolver {
       oracleText: null,
       imageUriSmall: null,
       imageUriNormal: null,
+    };
+    this.memoryCache.set(grpId, card);
+    this.storeToDb(grpId, card, 'arena_gameobject');
+  }
+
+  /**
+   * Bulk set name hints from Arena game objects. Efficient for large batches.
+   * Only inserts grpIds not already in memory cache.
+   */
+  setNameHints(hints: Map<number, string>): void {
+    if (!hints.size) return;
+    const toInsert: Array<{ grpId: number; name: string }> = [];
+
+    hints.forEach((name, grpId) => {
+      if (!name || this.memoryCache.has(grpId)) return;
+      const card: ResolvedCard = {
+        grpId,
+        name,
+        manaCost: null,
+        cmc: 0,
+        typeLine: null,
+        oracleText: null,
+        imageUriSmall: null,
+        imageUriNormal: null,
+      };
+      this.memoryCache.set(grpId, card);
+      toInsert.push({ grpId, name });
     });
+
+    // Batch DB insert
+    if (toInsert.length > 0 && this.db) {
+      try {
+        const stmt = this.db.prepare(
+          `INSERT OR IGNORE INTO grp_id_cache
+           (grp_id, card_name, source) VALUES (?, ?, 'arena_gameobject')`
+        );
+        for (const { grpId, name } of toInsert) {
+          stmt.run(grpId, name);
+        }
+      } catch {
+        // Non-critical
+      }
+    }
   }
 
   /** Number of entries in memory cache */
