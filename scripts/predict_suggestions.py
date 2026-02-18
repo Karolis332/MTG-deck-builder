@@ -336,10 +336,17 @@ def main():
         print(f"Database not found: {db_path}", file=sys.stderr)
         sys.exit(1)
 
+    # When --model-path not explicitly provided, look for model alongside the DB
+    if args.model_path == MODEL_DEFAULT:
+        db_dir = os.path.dirname(db_path)
+        model_path = os.path.join(db_dir, "card_model.joblib")
+    else:
+        model_path = os.path.abspath(args.model_path)
+
     conn = get_conn(db_path)
     ensure_table(conn)
 
-    artifact = load_model(os.path.abspath(args.model_path))
+    artifact = load_model(model_path)
     print(f"Loaded {artifact['model_type']} model (trained {artifact['trained_at']}, "
           f"R²={artifact['cv_r2_mean']:.4f}, {artifact['training_rows']} rows)")
 

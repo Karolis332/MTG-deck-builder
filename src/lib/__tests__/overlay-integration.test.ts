@@ -144,7 +144,7 @@ describe('Overlay Integration: blocks → events → state', () => {
           }],
         },
       }],
-      // 6b. Card moves from library → hand (draw)
+      // 6b. Card moves from library → hand (draw) via ZoneTransfer annotation
       ['standalone', {
         greToClientEvent: {
           greToClientMessages: [{
@@ -153,6 +153,16 @@ describe('Overlay Integration: blocks → events → state', () => {
               gameObjects: [
                 { instanceId: 108, grpId: 1001, ownerSeatId: 1, zoneId: 10 },
               ],
+              annotations: [{
+                id: 50,
+                affectedIds: [108],
+                type: ['AnnotationType_ZoneTransfer'],
+                details: [
+                  { key: 'zone_src', valueInt32: [20] },
+                  { key: 'zone_dest', valueInt32: [10] },
+                  { key: 'category', valueString: ['Draw'] },
+                ],
+              }],
             },
           }],
         },

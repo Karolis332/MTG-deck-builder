@@ -9,7 +9,9 @@ Usage:
   python scripts/aggregate_matches.py
 """
 
+import argparse
 import json
+import os
 import sqlite3
 import sys
 from pathlib import Path
@@ -20,9 +22,7 @@ except ImportError:
     print("Missing 'pandas' package. Run: pip install -r scripts/requirements.txt")
     sys.exit(1)
 
-SCRIPT_DIR = Path(__file__).parent
-PROJECT_ROOT = SCRIPT_DIR.parent
-DB_PATH = PROJECT_ROOT / "data" / "mtg-deck-builder.db"
+DB_DEFAULT = os.path.join(os.path.dirname(__file__), "..", "data", "mtg-deck-builder.db")
 
 
 def get_card_name_map(conn: sqlite3.Connection) -> dict:
@@ -170,13 +170,18 @@ def aggregate(conn: sqlite3.Connection):
 
 
 def main():
+    parser = argparse.ArgumentParser(description="Aggregate match data into card performance stats")
+    parser.add_argument("--db", default=DB_DEFAULT, help="Path to SQLite database")
+    args = parser.parse_args()
+
+    db_path = os.path.abspath(args.db)
     print("=== Match Data Aggregation ===\n")
 
-    if not DB_PATH.exists():
-        print(f"Database not found at {DB_PATH}")
+    if not os.path.exists(db_path):
+        print(f"Database not found at {db_path}")
         sys.exit(1)
 
-    conn = sqlite3.connect(str(DB_PATH), timeout=10)
+    conn = sqlite3.connect(db_path, timeout=10)
     conn.execute("PRAGMA journal_mode=WAL")
     conn.execute("PRAGMA busy_timeout=5000")
 

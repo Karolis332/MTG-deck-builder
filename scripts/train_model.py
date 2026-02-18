@@ -459,8 +459,15 @@ def main():
         print(f"Database not found: {db_path}", file=sys.stderr)
         sys.exit(1)
 
+    # When --output not explicitly provided, save model alongside the DB
+    if args.output == MODEL_DEFAULT:
+        db_dir = os.path.dirname(db_path)
+        model_path = os.path.join(db_dir, "card_model.joblib")
+    else:
+        model_path = os.path.abspath(args.output)
+
     conn = get_conn(db_path)
-    train(conn, args.model, os.path.abspath(args.output), args.target)
+    train(conn, args.model, model_path, args.target)
     conn.close()
 
 

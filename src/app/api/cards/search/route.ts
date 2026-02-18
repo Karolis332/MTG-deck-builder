@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { searchCards, getCardCount } from '@/lib/db';
 import { getAuthUser } from '@/lib/auth-middleware';
 import * as scryfall from '@/lib/scryfall';
+import type { ScryfallCard } from '@/lib/types';
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
@@ -46,10 +47,14 @@ export async function GET(request: NextRequest) {
     }
 
     // Fall back to Scryfall API (no format/collection filtering for Scryfall)
+    // Normalize raw Scryfall objects to match DB card format so CardImage works
     if (query) {
       const scryfallResult = await scryfall.searchCards(query, page);
+      const normalizedCards = scryfallResult.data.map((card: ScryfallCard) =>
+        scryfall.scryfallToDbCard(card)
+      );
       return NextResponse.json({
-        cards: scryfallResult.data,
+        cards: normalizedCards,
         total: scryfallResult.total_cards,
         page,
         hasMore: scryfallResult.has_more,

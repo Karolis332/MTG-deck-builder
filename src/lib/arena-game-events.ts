@@ -161,6 +161,33 @@ export const ZONE_TYPES = {
   LIMBO: 'ZoneType_Limbo',
 } as const;
 
+// ── Annotation Types (from MtgaProto) ───────────────────────────────────────
+
+interface AnnotationDetail {
+  key: string;
+  type?: string;
+  valueInt32?: number[];
+  valueUint32?: number[];
+  valueString?: string[];
+  valueBool?: boolean[];
+}
+
+interface AnnotationInfo {
+  id: number;
+  affectorId?: number;
+  affectedIds?: number[];
+  type: string[]; // ARRAY — e.g. ["AnnotationType_ZoneTransfer"]
+  details?: AnnotationDetail[];
+}
+
+function getAnnotationDetail(ann: AnnotationInfo, key: string): AnnotationDetail | undefined {
+  return ann.details?.find(d => d.key === key);
+}
+
+function hasAnnotationType(ann: AnnotationInfo, typeName: string): boolean {
+  return ann.type?.some(t => t === typeName || t === `AnnotationType_${typeName}`) ?? false;
+}
+
 // ── Event Extraction ─────────────────────────────────────────────────────────
 
 export interface ExtractionContext {
@@ -172,11 +199,25 @@ export interface ExtractionContext {
   prevObjectZones: Map<number, number>;
   objectGrpIds: Map<number, number>;
   objectOwners: Map<number, number>;
+  /** Chain of ObjectIdChanged remaps: newId → origId (for multi-hop resolution) */
+  idChanges: Map<number, number>;
   lastTurnNumber: number;
   lastPhase: string;
   lastStep: string;
   lastLifeTotals: Map<number, number>;
   gameNumber: number;
+  /** Debug counters from the last extraction call */
+  lastStats: ExtractionStats;
+}
+
+export interface ExtractionStats {
+  gsmCount: number;
+  objectIdChanges: number;
+  zoneTransfers: number;
+  shuffleRemaps: number;
+  grpIdHits: number;
+  grpIdMisses: number;
+  diffDeleted: number;
 }
 
 export function createContext(): ExtractionContext {
@@ -189,410 +230,67 @@ export function createContext(): ExtractionContext {
     prevObjectZones: new Map(),
     objectGrpIds: new Map(),
     objectOwners: new Map(),
+    idChanges: new Map(),
     lastTurnNumber: 0,
     lastPhase: '',
     lastStep: '',
     lastLifeTotals: new Map(),
     gameNumber: 1,
+    lastStats: { gsmCount: 0, objectIdChanges: 0, zoneTransfers: 0, shuffleRemaps: 0, grpIdHits: 0, grpIdMisses: 0, diffDeleted: 0 },
   };
 }
 
 /**
- * Extract granular game events from Arena log JSON blocks.
- * Processes the same block format as arena-log-reader but produces
- * fine-grained events instead of final match summaries.
+ * Resolve an instanceId to its grpId, walking the ObjectIdChanged chain
+ * if the direct lookup fails. Returns 0 if unresolvable.
  */
-export function extractGameEvents(blocks: JsonBlock[]): ArenaGameEvent[] {
-  const events: ArenaGameEvent[] = [];
-  const ctx = createContext();
+function resolveGrpId(ctx: ExtractionContext, instanceId: number): number {
+  // Direct lookup
+  const direct = ctx.objectGrpIds.get(instanceId);
+  if (direct && direct > 0) return direct;
 
-  for (const [method, data] of blocks) {
-    // Player name detection
-    if ('authenticateResponse' in data) {
-      const auth = data.authenticateResponse as Record<string, unknown>;
-      if (typeof auth.screenName === 'string') {
-        ctx.playerName = auth.screenName;
-      }
-    }
-    if ('screenName' in data && typeof data.screenName === 'string') {
-      ctx.playerName = data.screenName;
-    }
-
-    // Match room state — start and end
-    if ('matchGameRoomStateChangedEvent' in data) {
-      const event = data.matchGameRoomStateChangedEvent as Record<string, unknown>;
-      const roomInfo = (event.gameRoomInfo ?? event) as Record<string, unknown>;
-      const config = roomInfo.gameRoomConfig as Record<string, unknown> | undefined;
-      const stateType = roomInfo.stateType as string | undefined;
-
-      if (config) {
-        const matchId = config.matchId as string | undefined;
-        const reservedPlayers = (config.reservedPlayers ?? []) as Array<Record<string, unknown>>;
-
-        if (matchId && stateType !== 'MatchGameRoomStateType_MatchCompleted') {
-          let pName = ctx.playerName;
-          let oName: string | null = null;
-          let pSeatId = 1;
-          let pTeamId = 1;
-          let format: string | null = null;
-
-          for (const rp of reservedPlayers) {
-            const rpName = rp.playerName as string | undefined;
-            const rpSeatId = rp.systemSeatId as number | undefined;
-            const rpTeamId = rp.teamId as number | undefined;
-            const rpEventId = rp.eventId as string | undefined;
-
-            if (rpName === ctx.playerName || (!ctx.playerName && rpSeatId === 1)) {
-              pName = rpName ?? pName;
-              pSeatId = rpSeatId ?? 1;
-              pTeamId = rpTeamId ?? 1;
-              if (rpEventId) format = rpEventId;
-            } else {
-              oName = rpName ?? null;
-            }
-          }
-
-          if (!pName && reservedPlayers.length >= 2) {
-            const rp0 = reservedPlayers[0];
-            const rp1 = reservedPlayers[1];
-            pName = rp0.playerName as string ?? null;
-            oName = rp1.playerName as string ?? null;
-            pSeatId = (rp0.systemSeatId as number) ?? 1;
-            pTeamId = (rp0.teamId as number) ?? 1;
-            format = (rp0.eventId as string) ?? null;
-          }
-
-          ctx.playerSeatId = pSeatId;
-          ctx.playerTeamId = pTeamId;
-          ctx.currentMatchId = matchId;
-          ctx.gameNumber = 1;
-
-          events.push({
-            type: 'match_start',
-            matchId,
-            playerSeatId: pSeatId,
-            playerTeamId: pTeamId,
-            playerName: pName,
-            opponentName: oName,
-            format,
-          });
-        }
-
-        // Match complete
-        const finalResult = roomInfo.finalMatchResult as Record<string, unknown> | undefined;
-        if (finalResult && stateType === 'MatchGameRoomStateType_MatchCompleted' && ctx.currentMatchId) {
-          const resultList = (finalResult.resultList ?? []) as Array<Record<string, unknown>>;
-          let result: 'win' | 'loss' | 'draw' = 'draw';
-          let winningTeamId: number | null = null;
-
-          for (const r of resultList) {
-            if (r.scope === 'MatchScope_Match') {
-              winningTeamId = (r.winningTeamId as number) ?? null;
-              const resultType = r.result as string | undefined;
-              if (resultType === 'ResultType_Draw') {
-                result = 'draw';
-              } else if (winningTeamId === ctx.playerTeamId) {
-                result = 'win';
-              } else if (winningTeamId != null) {
-                result = 'loss';
-              }
-              break;
-            }
-          }
-
-          events.push({
-            type: 'match_complete',
-            matchId: ctx.currentMatchId,
-            result,
-            winningTeamId,
-          });
-          ctx.currentMatchId = null;
-        }
-      }
-    }
-
-    // Deck submission events
-    if (method === 'EventSetDeckV2' || ['Event.DeckSubmitV3', 'DeckSubmit', 'DeckSubmitV3'].includes(method)) {
-      const req = (data._parsed_request ?? data) as Record<string, unknown>;
-      const deckData = (req.Deck ?? req.deck ?? req.CourseDeck ?? req) as Record<string, unknown>;
-      const mainDeck = (deckData.MainDeck ?? deckData.mainDeck ?? []) as unknown[];
-      const sideboard = (deckData.Sideboard ?? deckData.sideboard ?? deckData.SideboardCards ?? []) as unknown[];
-      const cmdZone = (deckData.CommandZone ?? deckData.commandZone ?? []) as unknown[];
-
-      const parseDeckEntries = (entries: unknown[]): Array<{ grpId: number; qty: number }> => {
-        const result: Array<{ grpId: number; qty: number }> = [];
-        for (const entry of entries) {
-          if (typeof entry === 'object' && entry !== null) {
-            const e = entry as Record<string, unknown>;
-            const grpId = Number(e.cardId ?? e.Id ?? 0);
-            const qty = Number(e.quantity ?? e.Quantity ?? 1);
-            if (grpId > 0) result.push({ grpId, qty });
-          } else if (typeof entry === 'number') {
-            result.push({ grpId: entry, qty: 1 });
-          }
-        }
-        return result;
-      };
-
-      const deckCards = parseDeckEntries(mainDeck);
-      const sideboardCards = parseDeckEntries(sideboard);
-      const commanderGrpIds: number[] = [];
-      for (const entry of cmdZone) {
-        if (typeof entry === 'object' && entry !== null) {
-          const e = entry as Record<string, unknown>;
-          const grpId = Number(e.cardId ?? e.Id ?? 0);
-          if (grpId > 0) commanderGrpIds.push(grpId);
-        }
-      }
-
-      if (deckCards.length > 0) {
-        events.push({
-          type: 'deck_submission',
-          deckCards,
-          commanderGrpIds,
-          sideboardCards,
-        });
-      }
-    }
-
-    // GRE to client events — game state updates, mulligans, etc.
-    if ('greToClientEvent' in data) {
-      const gre = data.greToClientEvent as Record<string, unknown>;
-      const messages = (gre.greToClientMessages ?? []) as Array<Record<string, unknown>>;
-
-      for (const msg of messages) {
-        const msgType = msg.type as string | undefined;
-
-        // Connect response — contains deck info
-        if (msg.connectResp) {
-          const resp = msg.connectResp as Record<string, unknown>;
-          const deckMsg = resp.deckMessage as Record<string, unknown> | undefined;
-          if (deckMsg) {
-            const deckCards = (deckMsg.deckCards ?? []) as number[];
-            const commanderCards = (deckMsg.commanderCards ?? []) as number[];
-            const cardCounts = new Map<number, number>();
-            for (const cid of [...deckCards, ...commanderCards]) {
-              cardCounts.set(cid, (cardCounts.get(cid) || 0) + 1);
-            }
-            events.push({
-              type: 'deck_submission',
-              deckCards: Array.from(cardCounts.entries()).map(([grpId, qty]) => ({ grpId, qty })),
-              commanderGrpIds: commanderCards,
-              sideboardCards: [],
-            });
-          }
-        }
-
-        // Mulligan prompt
-        if (msgType === 'GREMessageType_MulliganReq' || msgType === 'GREMessageType_GroupReq') {
-          const prompt = msg.mulliganReq as Record<string, unknown> | undefined;
-          if (prompt) {
-            const seatId = (prompt.systemSeatId as number) ?? ctx.playerSeatId;
-            events.push({
-              type: 'mulligan_prompt',
-              seatId,
-              mulliganCount: (prompt.mulliganCount as number) ?? 0,
-              handGrpIds: [], // Will be filled from game state
-            });
-          }
-        }
-
-        // Intermission (sideboarding between games)
-        if (msgType === 'GREMessageType_IntermissionReq') {
-          ctx.gameNumber++;
-          events.push({
-            type: 'intermission',
-            gameNumber: ctx.gameNumber,
-          });
-        }
-
-        // Game state message — the big one
-        const gsm = msg.gameStateMessage as Record<string, unknown> | undefined;
-        if (gsm) {
-          const gameObjects: GameObjectInfo[] = [];
-          const zones: ZoneInfo[] = [];
-
-          // Parse zones
-          const rawZones = (gsm.zones ?? []) as Array<Record<string, unknown>>;
-          for (const z of rawZones) {
-            const zoneId = z.zoneId as number;
-            const zoneType = (z.type ?? '') as string;
-            const ownerSeatId = (z.ownerSeatId as number) ?? 0;
-            ctx.zones.set(zoneId, { type: zoneType, ownerSeatId });
-            zones.push({
-              zoneId,
-              type: zoneType,
-              ownerSeatId,
-              objectInstanceIds: z.objectInstanceIds as number[] | undefined,
-            });
-          }
-
-          // Parse game objects and detect zone transitions
-          const rawObjects = (gsm.gameObjects ?? []) as Array<Record<string, unknown>>;
-          for (const go of rawObjects) {
-            const instanceId = go.instanceId as number;
-            const grpId = go.grpId as number;
-            const ownerSeatId = (go.ownerSeatId as number) ?? 0;
-            const controllerSeatId = (go.controllerSeatId as number) ?? ownerSeatId;
-            const zoneId = go.zoneId as number;
-            const visibility = (go.visibility as string) ?? 'Visibility_Public';
-
-            if (!instanceId || !grpId) continue;
-
-            ctx.objectGrpIds.set(instanceId, grpId);
-            ctx.objectOwners.set(instanceId, ownerSeatId);
-
-            gameObjects.push({
-              instanceId,
-              grpId,
-              ownerSeatId,
-              controllerSeatId,
-              zoneId,
-              visibility,
-              cardTypes: go.cardTypes as string[] | undefined,
-              subtypes: go.subtypes as string[] | undefined,
-              name: go.name as string | undefined,
-            });
-
-            // Zone change detection
-            const prevZoneId = ctx.prevObjectZones.get(instanceId);
-            if (prevZoneId !== undefined && prevZoneId !== zoneId) {
-              const fromZone = ctx.zones.get(prevZoneId);
-              const toZone = ctx.zones.get(zoneId);
-              const fromZoneType = fromZone?.type ?? 'unknown';
-              const toZoneType = toZone?.type ?? 'unknown';
-
-              events.push({
-                type: 'zone_change',
-                instanceId,
-                grpId,
-                ownerSeatId,
-                fromZoneId: prevZoneId,
-                toZoneId: zoneId,
-                fromZoneType,
-                toZoneType,
-              });
-
-              // Library → Hand = card drawn
-              if (fromZoneType === ZONE_TYPES.LIBRARY && toZoneType === ZONE_TYPES.HAND) {
-                events.push({
-                  type: 'card_drawn',
-                  instanceId,
-                  grpId,
-                  ownerSeatId,
-                });
-              }
-
-              // Hand/Library → Battlefield or Stack = card played
-              if (
-                (fromZoneType === ZONE_TYPES.HAND || fromZoneType === ZONE_TYPES.LIBRARY) &&
-                (toZoneType === ZONE_TYPES.BATTLEFIELD || toZoneType === ZONE_TYPES.STACK)
-              ) {
-                events.push({
-                  type: 'card_played',
-                  instanceId,
-                  grpId,
-                  ownerSeatId,
-                  fromZoneType,
-                  toZoneType,
-                });
-              }
-            }
-            ctx.prevObjectZones.set(instanceId, zoneId);
-          }
-
-          // Turn info
-          const turnInfo = gsm.turnInfo as Record<string, unknown> | undefined;
-          let parsedTurnInfo: TurnInfo | undefined;
-          if (turnInfo) {
-            const turnNumber = (turnInfo.turnNumber as number) ?? 0;
-            const activePlayer = (turnInfo.activePlayer as number) ?? 0;
-            const phase = (turnInfo.phase as string) ?? '';
-            const step = (turnInfo.step as string) ?? '';
-
-            parsedTurnInfo = { turnNumber, activePlayer, phase, step };
-
-            if (turnNumber > 0 && turnNumber !== ctx.lastTurnNumber) {
-              ctx.lastTurnNumber = turnNumber;
-              events.push({
-                type: 'turn_change',
-                turnNumber,
-                activePlayer,
-              });
-            }
-
-            if (phase && (phase !== ctx.lastPhase || step !== ctx.lastStep)) {
-              ctx.lastPhase = phase;
-              ctx.lastStep = step;
-              events.push({
-                type: 'phase_change',
-                phase,
-                step,
-                turnNumber: ctx.lastTurnNumber,
-              });
-            }
-          }
-
-          // Player life totals
-          const rawPlayers = (gsm.players ?? []) as Array<Record<string, unknown>>;
-          const players: PlayerInfo[] = [];
-          for (const p of rawPlayers) {
-            const seatId = p.systemSeatId as number ?? p.seatId as number;
-            const lifeTotal = p.lifeTotal as number;
-            if (seatId && lifeTotal !== undefined) {
-              players.push({
-                seatId,
-                lifeTotal,
-                maxHandSize: p.maxHandSize as number | undefined,
-                teamId: p.teamId as number | undefined,
-              });
-
-              const prevLife = ctx.lastLifeTotals.get(seatId);
-              if (prevLife !== undefined && prevLife !== lifeTotal) {
-                events.push({
-                  type: 'life_total_change',
-                  seatId,
-                  lifeTotal,
-                });
-              }
-              ctx.lastLifeTotals.set(seatId, lifeTotal);
-            }
-          }
-
-          events.push({
-            type: 'game_state_update',
-            gameObjects,
-            zones,
-            turnInfo: parsedTurnInfo,
-            players: players.length > 0 ? players : undefined,
-          });
-
-          // Check for mulligan hands — detect when hand zone has exactly 7/6/5 cards
-          // and we're in the opening phase
-          if (parsedTurnInfo?.phase === 'Phase_Beginning' && ctx.lastTurnNumber <= 1) {
-            for (const z of zones) {
-              if (z.type === ZONE_TYPES.HAND && z.ownerSeatId === ctx.playerSeatId && z.objectInstanceIds) {
-                const handGrpIds: number[] = [];
-                for (const instId of z.objectInstanceIds) {
-                  const gid = ctx.objectGrpIds.get(instId);
-                  if (gid) handGrpIds.push(gid);
-                }
-                // Update the most recent mulligan_prompt with actual hand contents
-                for (let i = events.length - 1; i >= 0; i--) {
-                  if (events[i].type === 'mulligan_prompt' && (events[i] as MulliganPromptEvent).handGrpIds.length === 0) {
-                    (events[i] as MulliganPromptEvent).handGrpIds = handGrpIds;
-                    break;
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
+  // Walk the idChanges chain (newId → origId → origOrigId → ...)
+  let current = instanceId;
+  const visited = new Set<number>();
+  while (ctx.idChanges.has(current)) {
+    const prev = ctx.idChanges.get(current)!;
+    if (visited.has(prev)) break; // cycle guard
+    visited.add(prev);
+    const grpId = ctx.objectGrpIds.get(prev);
+    if (grpId && grpId > 0) return grpId;
+    current = prev;
   }
 
-  return events;
+  return 0;
+}
+
+/**
+ * Resolve an instanceId to its ownerSeatId, walking the chain if needed.
+ */
+function resolveOwner(ctx: ExtractionContext, instanceId: number, fallback: number): number {
+  const direct = ctx.objectOwners.get(instanceId);
+  if (direct !== undefined) return direct;
+
+  let current = instanceId;
+  const visited = new Set<number>();
+  while (ctx.idChanges.has(current)) {
+    const prev = ctx.idChanges.get(current)!;
+    if (visited.has(prev)) break;
+    visited.add(prev);
+    const owner = ctx.objectOwners.get(prev);
+    if (owner !== undefined) return owner;
+    current = prev;
+  }
+
+  return fallback;
+}
+
+/**
+ * Extract granular game events from Arena log JSON blocks.
+ * Delegates to extractGameEventsWithContext with a fresh context.
+ */
+export function extractGameEvents(blocks: JsonBlock[]): ArenaGameEvent[] {
+  return extractGameEventsWithContext(blocks, createContext());
 }
 
 /**
@@ -605,6 +303,10 @@ export function extractGameEventsWithContext(
   ctx: ExtractionContext,
 ): ArenaGameEvent[] {
   const events: ArenaGameEvent[] = [];
+  const stats: ExtractionStats = {
+    gsmCount: 0, objectIdChanges: 0, zoneTransfers: 0,
+    shuffleRemaps: 0, grpIdHits: 0, grpIdMisses: 0, diffDeleted: 0,
+  };
 
   for (const [method, data] of blocks) {
     // Player name detection
@@ -811,6 +513,16 @@ export function extractGameEventsWithContext(
         if (gsm) {
           const gameObjects: GameObjectInfo[] = [];
           const zones: ZoneInfo[] = [];
+          stats.gsmCount++;
+
+          // ── Step 0: Clean up deleted instances ────────────────────────
+          const deletedIds = (gsm.diffDeletedInstanceIds ?? []) as number[];
+          for (const delId of deletedIds) {
+            ctx.objectGrpIds.delete(delId);
+            ctx.objectOwners.delete(delId);
+            ctx.prevObjectZones.delete(delId);
+            stats.diffDeleted++;
+          }
 
           // Parse zones
           const rawZones = (gsm.zones ?? []) as Array<Record<string, unknown>>;
@@ -827,7 +539,7 @@ export function extractGameEventsWithContext(
             });
           }
 
-          // Parse game objects and detect zone transitions
+          // Parse game objects — update context maps for grpId/owner/zone tracking
           const rawObjects = (gsm.gameObjects ?? []) as Array<Record<string, unknown>>;
           for (const go of rawObjects) {
             const instanceId = go.instanceId as number;
@@ -841,6 +553,7 @@ export function extractGameEventsWithContext(
 
             ctx.objectGrpIds.set(instanceId, grpId);
             ctx.objectOwners.set(instanceId, ownerSeatId);
+            ctx.prevObjectZones.set(instanceId, zoneId);
 
             gameObjects.push({
               instanceId,
@@ -853,55 +566,193 @@ export function extractGameEventsWithContext(
               subtypes: go.subtypes as string[] | undefined,
               name: go.name as string | undefined,
             });
+          }
 
-            // Zone change detection
-            const prevZoneId = ctx.prevObjectZones.get(instanceId);
-            if (prevZoneId !== undefined && prevZoneId !== zoneId) {
-              const fromZone = ctx.zones.get(prevZoneId);
-              const toZone = ctx.zones.get(zoneId);
-              const fromZoneType = fromZone?.type ?? 'unknown';
-              const toZoneType = toZone?.type ?? 'unknown';
+          // ── Annotation-based event extraction ──────────────────────────
+          // Arena sends zone transfers, life changes, and damage as annotations
+          // on ~70% of game state messages (no gameObjects in those diffs).
+          // The annotation `type` field is an ARRAY, not a string.
 
+          const rawAnnotations = (gsm.annotations ?? []) as Array<Record<string, unknown>>;
+          const annotations: AnnotationInfo[] = rawAnnotations.map(a => ({
+            id: (a.id as number) ?? 0,
+            affectorId: a.affectorId as number | undefined,
+            affectedIds: (a.affectedIds ?? []) as number[],
+            type: (a.type ?? []) as string[],
+            details: (a.details ?? []) as AnnotationDetail[],
+          }));
+
+          // Step 1: Process ObjectIdChanged — map old instanceId → new instanceId
+          // Record in idChanges for chain walking, and copy grpId/owner to new ID.
+          for (const ann of annotations) {
+            if (hasAnnotationType(ann, 'ObjectIdChanged')) {
+              const origDetail = getAnnotationDetail(ann, 'orig_id');
+              const newDetail = getAnnotationDetail(ann, 'new_id');
+              const origId = origDetail?.valueInt32?.[0];
+              const newId = newDetail?.valueInt32?.[0];
+              if (origId && newId) {
+                stats.objectIdChanges++;
+                // Record the chain link: newId came from origId
+                ctx.idChanges.set(newId, origId);
+                // Eagerly copy grpId and owner from old instance to new
+                const grpId = resolveGrpId(ctx, origId);
+                const owner = ctx.objectOwners.get(origId);
+                if (grpId > 0) ctx.objectGrpIds.set(newId, grpId);
+                if (owner !== undefined) ctx.objectOwners.set(newId, owner);
+              }
+            }
+          }
+
+          // Step 1b: Process Shuffle annotations — bulk remap instanceIds
+          // When a library is shuffled, Arena assigns new instanceIds to every card.
+          // Without this, all post-shuffle grpId lookups fail.
+          for (const ann of annotations) {
+            if (!hasAnnotationType(ann, 'Shuffle')) continue;
+
+            const oldIdsDetail = getAnnotationDetail(ann, 'OldIds');
+            const newIdsDetail = getAnnotationDetail(ann, 'NewIds');
+            const oldIds = oldIdsDetail?.valueInt32 ?? [];
+            const newIds = newIdsDetail?.valueInt32 ?? [];
+
+            if (oldIds.length === 0 || oldIds.length !== newIds.length) continue;
+
+            for (let si = 0; si < oldIds.length; si++) {
+              const oldId = oldIds[si];
+              const newId = newIds[si];
+              if (!oldId || !newId || oldId === newId) continue;
+
+              stats.shuffleRemaps++;
+              // Record chain link
+              ctx.idChanges.set(newId, oldId);
+              // Copy grpId and owner
+              const grpId = resolveGrpId(ctx, oldId);
+              const owner = ctx.objectOwners.get(oldId);
+              if (grpId > 0) ctx.objectGrpIds.set(newId, grpId);
+              if (owner !== undefined) ctx.objectOwners.set(newId, owner);
+            }
+          }
+
+          // Step 2: Process ZoneTransfer annotations — the primary source of
+          // card_drawn, card_played, and zone_change events
+          for (const ann of annotations) {
+            if (!hasAnnotationType(ann, 'ZoneTransfer')) continue;
+
+            const instanceId = ann.affectedIds?.[0];
+            if (!instanceId) continue;
+
+            stats.zoneTransfers++;
+
+            const zoneSrcDetail = getAnnotationDetail(ann, 'zone_src');
+            const zoneDestDetail = getAnnotationDetail(ann, 'zone_dest');
+            const categoryDetail = getAnnotationDetail(ann, 'category');
+
+            const fromZoneId = zoneSrcDetail?.valueInt32?.[0];
+            const toZoneId = zoneDestDetail?.valueInt32?.[0];
+            const category = categoryDetail?.valueString?.[0] ?? '';
+
+            if (fromZoneId === undefined || toZoneId === undefined) continue;
+            if (fromZoneId === toZoneId) continue;
+
+            const fromZone = ctx.zones.get(fromZoneId);
+            const toZone = ctx.zones.get(toZoneId);
+            const fromZoneType = fromZone?.type ?? 'unknown';
+            const toZoneType = toZone?.type ?? 'unknown';
+
+            // Use chain-walking resolution for grpId and owner
+            const grpId = resolveGrpId(ctx, instanceId);
+            const ownerSeatId = resolveOwner(ctx, instanceId, fromZone?.ownerSeatId ?? 0);
+
+            // Update zone tracking
+            ctx.prevObjectZones.set(instanceId, toZoneId);
+
+            if (grpId === 0) {
+              stats.grpIdMisses++;
+              continue; // Can't emit events without a card identity
+            }
+            stats.grpIdHits++;
+
+            // Also store the resolved grpId back so future lookups are direct
+            ctx.objectGrpIds.set(instanceId, grpId);
+
+            events.push({
+              type: 'zone_change',
+              instanceId,
+              grpId,
+              ownerSeatId,
+              fromZoneId,
+              toZoneId,
+              fromZoneType,
+              toZoneType,
+            });
+
+            // Library → Hand = card drawn
+            if (fromZoneType === ZONE_TYPES.LIBRARY && toZoneType === ZONE_TYPES.HAND) {
               events.push({
-                type: 'zone_change',
+                type: 'card_drawn',
                 instanceId,
                 grpId,
                 ownerSeatId,
-                fromZoneId: prevZoneId,
-                toZoneId: zoneId,
+              });
+            }
+
+            // Hand/Library → Battlefield or Stack = card played/cast
+            if (
+              (fromZoneType === ZONE_TYPES.HAND || fromZoneType === ZONE_TYPES.LIBRARY) &&
+              (toZoneType === ZONE_TYPES.BATTLEFIELD || toZoneType === ZONE_TYPES.STACK)
+            ) {
+              events.push({
+                type: 'card_played',
+                instanceId,
+                grpId,
+                ownerSeatId,
                 fromZoneType,
                 toZoneType,
               });
-
-              // Library → Hand = card drawn
-              if (fromZoneType === ZONE_TYPES.LIBRARY && toZoneType === ZONE_TYPES.HAND) {
-                events.push({
-                  type: 'card_drawn',
-                  instanceId,
-                  grpId,
-                  ownerSeatId,
-                });
-              }
-
-              // Hand/Library → Battlefield or Stack = card played
-              if (
-                (fromZoneType === ZONE_TYPES.HAND || fromZoneType === ZONE_TYPES.LIBRARY) &&
-                (toZoneType === ZONE_TYPES.BATTLEFIELD || toZoneType === ZONE_TYPES.STACK)
-              ) {
-                events.push({
-                  type: 'card_played',
-                  instanceId,
-                  grpId,
-                  ownerSeatId,
-                  fromZoneType,
-                  toZoneType,
-                });
-              }
             }
-            ctx.prevObjectZones.set(instanceId, zoneId);
+
+            // Stack → Battlefield = spell resolving (also counts as "played" for permanents)
+            if (
+              fromZoneType === ZONE_TYPES.STACK &&
+              toZoneType === ZONE_TYPES.BATTLEFIELD &&
+              category === 'Resolve'
+            ) {
+              events.push({
+                type: 'card_played',
+                instanceId,
+                grpId,
+                ownerSeatId,
+                fromZoneType,
+                toZoneType,
+              });
+            }
           }
 
-          // Turn info
+          // Step 3: Process ModifiedLife annotations for life total changes
+          // (covers the 90% of diffs that don't have a players array)
+          for (const ann of annotations) {
+            if (!hasAnnotationType(ann, 'ModifiedLife')) continue;
+
+            const lifeDetail = getAnnotationDetail(ann, 'life');
+            const seatDetail = getAnnotationDetail(ann, 'systemSeatId');
+            if (!lifeDetail?.valueInt32?.[0]) continue;
+
+            const lifeTotal = lifeDetail.valueInt32[0];
+            // affectedIds[0] can hold the seatId, or use the detail
+            const seatId = seatDetail?.valueInt32?.[0] ?? ann.affectedIds?.[0] ?? 0;
+            if (!seatId) continue;
+
+            const prevLife = ctx.lastLifeTotals.get(seatId);
+            if (prevLife === undefined || prevLife !== lifeTotal) {
+              ctx.lastLifeTotals.set(seatId, lifeTotal);
+              events.push({
+                type: 'life_total_change',
+                seatId,
+                lifeTotal,
+              });
+            }
+          }
+
+          // ── Turn info ──────────────────────────────────────────────────
           const turnInfo = gsm.turnInfo as Record<string, unknown> | undefined;
           let parsedTurnInfo: TurnInfo | undefined;
           if (turnInfo) {
@@ -933,7 +784,7 @@ export function extractGameEventsWithContext(
             }
           }
 
-          // Player life totals
+          // ── Player life totals (from players array, ~10% of diffs) ────
           const rawPlayers = (gsm.players ?? []) as Array<Record<string, unknown>>;
           const players: PlayerInfo[] = [];
           for (const p of rawPlayers) {
@@ -990,5 +841,6 @@ export function extractGameEventsWithContext(
     }
   }
 
+  ctx.lastStats = stats;
   return events;
 }

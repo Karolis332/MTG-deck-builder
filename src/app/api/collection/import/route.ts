@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { parseArenaExport, detectFormat, parseTsvCollection } from '@/lib/arena-parser';
-import { getDb, clearCollection, upsertCollectionCard } from '@/lib/db';
+import { getDb, clearCollection, upsertCollectionCard, resolveCardAliases } from '@/lib/db';
 import * as scryfall from '@/lib/scryfall';
 import type { CardIdentifier, ScryfallCard } from '@/lib/types';
 import { getAuthUser, unauthorizedResponse } from '@/lib/auth-middleware';
@@ -241,6 +241,37 @@ async function handleArenaImport(text: string, mode: string, userId: number, dec
           quantity = quantity + excluded.quantity
       `)
     : null;
+
+  // Resolve Universes Beyond/Within aliases for unmatched cards
+  const unmatchedNames = parsed
+    .filter(line => !cardsByName.has(line.name.toLowerCase()))
+    .map(line => line.name);
+  const aliasMap = resolveCardAliases(unmatchedNames);
+
+  if (aliasMap.size > 0) {
+    const aliasIdentifiers: CardIdentifier[] = Array.from(new Set(aliasMap.values())).map(name => ({ name }));
+    try {
+      const { found: aliasFound } = await scryfall.getCollection(aliasIdentifiers);
+      for (const card of aliasFound) {
+        const dbCard = scryfall.scryfallToDbCard(card);
+        insertCard.run(
+          dbCard.id, dbCard.oracle_id, dbCard.name, dbCard.mana_cost, dbCard.cmc,
+          dbCard.type_line, dbCard.oracle_text, dbCard.colors, dbCard.color_identity,
+          dbCard.keywords, dbCard.set_code, dbCard.set_name, dbCard.collector_number,
+          dbCard.rarity, dbCard.image_uri_small, dbCard.image_uri_normal,
+          dbCard.image_uri_large, dbCard.image_uri_art_crop, dbCard.price_usd,
+          dbCard.price_usd_foil, dbCard.legalities, dbCard.power, dbCard.toughness,
+          dbCard.loyalty, dbCard.produced_mana, dbCard.edhrec_rank, dbCard.layout
+        );
+        cardsByName.set(card.name.toLowerCase(), card);
+      }
+    } catch { /* alias retry failed */ }
+    // Map alias names to their resolved cards
+    aliasMap.forEach((canonical, alias) => {
+      const card = cardsByName.get(canonical.toLowerCase());
+      if (card) cardsByName.set(alias.toLowerCase(), card);
+    });
+  }
 
   // Helper: look up card by name with A- prefix fallback for Alchemy cards
   const findCard = (name: string) => {

@@ -253,13 +253,9 @@ def main():
         data_dir = find_mtga_path()
 
     if not data_dir or not data_dir.exists():
-        print("ERROR: Could not find MTGA data directory.")
-        print("\nSearched:")
-        for p in MTGA_SEARCH_PATHS:
-            print(f"  {p}/{DATA_SUBDIR}")
-        print(f"\nUse --mtga-path to specify your Arena installation path.")
-        print("Example: py scripts/import_mtga_cards.py --mtga-path \"D:\\Games\\MTGA\"")
-        sys.exit(1)
+        print("MTGA not installed — skipping (this is OK)")
+        print("  Use --mtga-path to specify your Arena installation path if installed.")
+        sys.exit(0)
 
     print(f"  MTGA data dir: {data_dir}")
 

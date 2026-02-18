@@ -162,8 +162,7 @@ export async function seedArenaCardCache(): Promise<void> {
       return;
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
-    const Database = require('better-sqlite3');
+    const Database = require('better-sqlite3'); // dynamic require — runs in Electron main process only
     const db = new Database(dbPath, { readonly: false });
 
     // Check stored version

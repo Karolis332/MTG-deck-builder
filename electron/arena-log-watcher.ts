@@ -9,6 +9,7 @@
  */
 
 import fs from 'fs';
+import path from 'path';
 import { EventEmitter } from 'events';
 import {
   parseArenaLogFile,
@@ -24,6 +25,16 @@ import {
 } from '../src/lib/arena-game-events';
 import { GameStateEngine, type GameStateSnapshot } from '../src/lib/game-state-engine';
 import { GrpIdResolver } from '../src/lib/grp-id-resolver';
+import { MatchTelemetryLogger, type TelemetryFlushData } from '../src/lib/match-telemetry';
+
+// File-based debug log (Electron stdout not captured reliably on Windows)
+const DEBUG_LOG = path.join(process.env.APPDATA || '.', 'the-black-grimoire', 'telemetry-debug.log');
+function debugLog(msg: string): void {
+  const ts = new Date().toISOString().slice(11, 19);
+  const line = `[${ts}] ${msg}\n`;
+  try { fs.appendFileSync(DEBUG_LOG, line); } catch { /* ignore */ }
+  console.log(`[Telemetry] ${msg}`);
+}
 
 export class ArenaLogWatcher extends EventEmitter {
   private logPath: string;
@@ -39,6 +50,7 @@ export class ArenaLogWatcher extends EventEmitter {
   // Streaming mode
   private gameEngine: GameStateEngine | null = null;
   private resolver: GrpIdResolver | null = null;
+  private telemetryLogger: MatchTelemetryLogger | null = null;
   private streamingBuffer = '';
   private streamingContext: ExtractionContext = createContext();
   private processedBlockCount = 0;
@@ -62,6 +74,7 @@ export class ArenaLogWatcher extends EventEmitter {
   start(): void {
     if (this.running) return;
     this.running = true;
+    debugLog(`watcher.start() called, catchUp=${this.catchUp}, logPath=${this.logPath}`);
 
     try {
       const stat = fs.statSync(this.logPath);
@@ -69,8 +82,9 @@ export class ArenaLogWatcher extends EventEmitter {
 
       if (this.catchUp) {
         // Catch-up mode: scan the last portion of the log to detect in-progress matches
-        // Read last 512KB — enough to find a matchGameRoomStateChangedEvent + deck submission
-        const catchUpSize = Math.min(stat.size, 512 * 1024);
+        // Read last 5MB — a single game can generate several MB of log data,
+        // and we need to find the matchGameRoomStateChangedEvent (Playing) at the start
+        const catchUpSize = Math.min(stat.size, 5 * 1024 * 1024);
         const startPos = stat.size - catchUpSize;
         const fd = fs.openSync(this.logPath, 'r');
         const buf = Buffer.alloc(catchUpSize);
@@ -101,6 +115,7 @@ export class ArenaLogWatcher extends EventEmitter {
       this.timer = null;
     }
     this.gameEngine = null;
+    this.telemetryLogger = null;
     this.streamingBuffer = '';
     this.streamingContext = createContext();
     this.processedBlockCount = 0;
@@ -199,10 +214,12 @@ export class ArenaLogWatcher extends EventEmitter {
    * and seat assignments are tracked correctly across polls.
    */
   private processContentStreaming(content: string): void {
+    debugLog(`processContentStreaming called, contentLen=${content.length}, bufferLen=${this.streamingBuffer.length}`);
     this.streamingBuffer += content;
 
     // Extract ALL JSON blocks from accumulated buffer
     const allBlocks = extractJsonBlocks(this.streamingBuffer);
+    debugLog(`extracted ${allBlocks.length} total blocks, processed=${this.processedBlockCount}`);
     if (allBlocks.length === 0) return;
 
     // Only process blocks we haven't seen yet
@@ -214,14 +231,31 @@ export class ArenaLogWatcher extends EventEmitter {
     // Extract events using persistent context (preserves seat IDs, zone map, etc.)
     const events = extractGameEventsWithContext(newBlocks, this.streamingContext);
 
+    if (events.length > 0 || newBlocks.length > 0) {
+      // Per-type event counts (not just unique types)
+      const typeCounts: Record<string, number> = {};
+      for (const e of events) {
+        typeCounts[e.type] = (typeCounts[e.type] || 0) + 1;
+      }
+      const typeStr = Object.entries(typeCounts).map(([t, c]) => `${t}:${c}`).join(', ');
+      const s = this.streamingContext.lastStats;
+      debugLog(
+        `streaming: ${newBlocks.length} blocks → ${events.length} events [${typeStr}] ` +
+        `| gsm:${s.gsmCount} zt:${s.zoneTransfers}(hit:${s.grpIdHits}/miss:${s.grpIdMisses}) ` +
+        `oid:${s.objectIdChanges} shuf:${s.shuffleRemaps} del:${s.diffDeleted} ` +
+        `| ctx: grpIds=${this.streamingContext.objectGrpIds.size} zones=${this.streamingContext.zones.size} ` +
+        `chains=${this.streamingContext.idChanges.size}`
+      );
+    }
+
     for (const event of events) {
       this.handleStreamingEvent(event);
     }
 
     // Trim buffer to prevent unbounded growth
-    // When trimming, re-count blocks in the remaining buffer
-    if (this.streamingBuffer.length > 50000) {
-      this.streamingBuffer = this.streamingBuffer.slice(-25000);
+    // Keep enough to span partial JSON blocks across polls
+    if (this.streamingBuffer.length > 500000) {
+      this.streamingBuffer = this.streamingBuffer.slice(-250000);
       this.processedBlockCount = extractJsonBlocks(this.streamingBuffer).length;
     }
   }
@@ -232,6 +266,15 @@ export class ArenaLogWatcher extends EventEmitter {
         // Create new engine for this match
         this.gameEngine = new GameStateEngine();
         this.gameEngine.processEvent(event);
+
+        // Start telemetry logging
+        this.telemetryLogger = new MatchTelemetryLogger();
+        this.telemetryLogger.startMatch(
+          event.matchId, event.format,
+          event.playerName, event.opponentName
+        );
+        debugLog(`match_start: logger created for ${event.matchId}`);
+
         this.emit('match-start', {
           matchId: event.matchId,
           format: event.format,
@@ -255,6 +298,12 @@ export class ArenaLogWatcher extends EventEmitter {
           });
           this.gameEngine = null;
         }
+        // Final telemetry flush with summary
+        if (this.telemetryLogger) {
+          this.telemetryLogger.endMatch(event.result);
+          this.flushTelemetry(true);
+          this.telemetryLogger = null;
+        }
         break;
       }
 
@@ -262,6 +311,12 @@ export class ArenaLogWatcher extends EventEmitter {
         if (this.gameEngine) {
           this.gameEngine.processEvent(event);
           const state = this.gameEngine.getState();
+
+          // Log mulligan decision
+          if (this.telemetryLogger) {
+            this.telemetryLogger.onMulligan(event.mulliganCount, event.handGrpIds);
+          }
+
           this.emit('mulligan', {
             hand: event.handGrpIds,
             mulliganCount: event.mulliganCount,
@@ -276,6 +331,14 @@ export class ArenaLogWatcher extends EventEmitter {
         if (this.gameEngine) {
           this.gameEngine.processEvent(event);
           const state = this.gameEngine.getState();
+
+          // Log intermission (sideboard boundary)
+          if (this.telemetryLogger) {
+            this.telemetryLogger.onIntermission(event.gameNumber);
+            // Flush before sideboarding
+            this.flushTelemetry(false);
+          }
+
           this.emit('intermission', {
             matchId: state.matchId,
             gameNumber: event.gameNumber,
@@ -288,13 +351,108 @@ export class ArenaLogWatcher extends EventEmitter {
       case 'deck_submission': {
         if (this.gameEngine) {
           this.gameEngine.processEvent(event);
+
+          // Log deck submission for telemetry
+          if (this.telemetryLogger) {
+            this.telemetryLogger.onDeckSubmission(event.deckCards, event.sideboardCards);
+          }
+
           // Resolve card names for the deck
           this.resolveDecklist(event.deckCards.map(c => c.grpId));
         }
         break;
       }
 
+      case 'card_drawn': {
+        if (this.gameEngine) {
+          this.gameEngine.processEvent(event);
+          if (this.telemetryLogger) {
+            const state = this.gameEngine.getState();
+            this.telemetryLogger.onCardDrawn(event.grpId, state.turnNumber);
+          }
+        }
+        break;
+      }
+
+      case 'card_played': {
+        if (this.gameEngine) {
+          const stateBefore = this.gameEngine.getState();
+          this.gameEngine.processEvent(event);
+          if (this.telemetryLogger) {
+            this.telemetryLogger.onCardPlayed(
+              event.grpId, event.ownerSeatId, stateBefore.playerSeatId,
+              stateBefore.turnNumber
+            );
+          }
+        }
+        break;
+      }
+
+      case 'life_total_change': {
+        if (this.gameEngine) {
+          this.gameEngine.processEvent(event);
+          if (this.telemetryLogger) {
+            const state = this.gameEngine.getState();
+            this.telemetryLogger.onLifeChange(
+              event.seatId, state.playerSeatId, event.lifeTotal, state.turnNumber
+            );
+          }
+        }
+        break;
+      }
+
+      case 'turn_change': {
+        if (this.gameEngine) {
+          this.gameEngine.processEvent(event);
+          debugLog(`turn_change T${event.turnNumber}, logger=${!!this.telemetryLogger}, actions=${this.telemetryLogger?.getActionCount() ?? 0}`);
+          if (this.telemetryLogger) {
+            const state = this.gameEngine.getState();
+            this.telemetryLogger.onTurnChange(event.turnNumber, event.activePlayer, state.playerSeatId);
+            if (this.telemetryLogger.shouldFlush()) {
+              this.flushTelemetry(false);
+            }
+          }
+        }
+        break;
+      }
+
+      case 'phase_change': {
+        if (this.gameEngine) {
+          this.gameEngine.processEvent(event);
+          if (this.telemetryLogger) {
+            this.telemetryLogger.onPhaseChange(event.phase, event.step, event.turnNumber);
+          }
+        }
+        break;
+      }
+
       default: {
+        // Late-join fallback: if we receive game_state_update events but have no engine,
+        // the watcher started mid-game and missed match_start. Bootstrap from context.
+        if (!this.gameEngine && event.type === 'game_state_update') {
+          debugLog('Late-join detected — bootstrapping engine from game_state_update');
+          this.gameEngine = new GameStateEngine();
+          this.gameEngine.onStateChange((state) => {
+            this.emit('game-state', state);
+          });
+
+          // Create telemetry logger with whatever context we have
+          const matchId = this.streamingContext.currentMatchId || `unknown-${Date.now()}`;
+          this.telemetryLogger = new MatchTelemetryLogger();
+          this.telemetryLogger.startMatch(
+            matchId, null,
+            this.streamingContext.playerName, null
+          );
+          debugLog(`Late-join logger created for match: ${matchId}`);
+
+          this.emit('match-start', {
+            matchId,
+            format: null,
+            playerName: this.streamingContext.playerName,
+            opponentName: null,
+          });
+        }
+
         // Feed all other events to the engine
         if (this.gameEngine) {
           this.gameEngine.processEvent(event);
@@ -313,6 +471,24 @@ export class ArenaLogWatcher extends EventEmitter {
 
     // Emit raw event for anything that wants granular updates
     this.emit('game-event', event);
+  }
+
+  /**
+   * Flush telemetry actions to the API for persistence.
+   * @param final If true, includes the match summary for enriched columns.
+   */
+  private flushTelemetry(final: boolean): void {
+    if (!this.telemetryLogger) {
+      debugLog('flushTelemetry called but no logger');
+      return;
+    }
+    const data: TelemetryFlushData = final
+      ? this.telemetryLogger.flushFinal()
+      : this.telemetryLogger.flush();
+    debugLog(`flush(final=${final}): ${data.actions.length} actions, summary=${!!data.summary}`);
+    if (data.actions.length > 0 || data.summary) {
+      this.emit('telemetry-flush', data);
+    }
   }
 
   /**

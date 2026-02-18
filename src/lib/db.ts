@@ -62,6 +62,60 @@ export function getDb(): Database.Database {
   return globalForDb._db;
 }
 
+// ── Card alias helpers (Universes Beyond <-> Universe Within) ─────────────
+
+/**
+ * Resolve a card name through the alias table.
+ * If the name has an alias (e.g., "Cam and Farrik, Havoc Duo" -> "Hobgoblin, Mantled Marauder"),
+ * returns the canonical name. Otherwise returns the original name.
+ */
+export function resolveCardAlias(name: string): string {
+  const db = getDb();
+  const row = db.prepare(
+    'SELECT canonical_name FROM card_aliases WHERE alias_name = ? COLLATE NOCASE'
+  ).get(name) as { canonical_name: string } | undefined;
+  return row?.canonical_name ?? name;
+}
+
+/**
+ * Resolve multiple card names through the alias table.
+ * Returns a Map of original name -> canonical name (only for names that have aliases).
+ */
+export function resolveCardAliases(names: string[]): Map<string, string> {
+  const db = getDb();
+  const result = new Map<string, string>();
+  const stmt = db.prepare(
+    'SELECT alias_name, canonical_name FROM card_aliases WHERE alias_name = ? COLLATE NOCASE'
+  );
+  for (const name of names) {
+    const row = stmt.get(name) as { alias_name: string; canonical_name: string } | undefined;
+    if (row) {
+      result.set(name, row.canonical_name);
+    }
+  }
+  return result;
+}
+
+/**
+ * Insert or update card aliases in bulk.
+ */
+export function upsertCardAliases(aliases: Array<{ alias_name: string; canonical_name: string; oracle_id?: string; source?: string }>) {
+  const db = getDb();
+  const stmt = db.prepare(`
+    INSERT INTO card_aliases (alias_name, canonical_name, oracle_id, source)
+    VALUES (?, ?, ?, ?)
+    ON CONFLICT(alias_name) DO UPDATE SET
+      canonical_name = excluded.canonical_name,
+      oracle_id = excluded.oracle_id,
+      source = excluded.source
+  `);
+  db.transaction(() => {
+    for (const a of aliases) {
+      stmt.run(a.alias_name, a.canonical_name, a.oracle_id ?? null, a.source ?? 'scryfall');
+    }
+  })();
+}
+
 // ── Query helpers ─────────────────────────────────────────────────────────
 
 export function searchCards(
@@ -745,4 +799,104 @@ export function autoLinkArenaMatches(): { linked: number; total: number } {
   }
 
   return { linked, total: unlinked.length };
+}
+
+// ── Telemetry operations ──────────────────────────────────────────────────
+
+export function insertTelemetryActions(actions: Array<{
+  match_id: string;
+  game_number: number;
+  turn_number: number;
+  phase: string;
+  action_type: string;
+  player: string;
+  grp_id: number | null;
+  card_name: string | null;
+  details: string | null;
+  action_order: number;
+}>): number {
+  const db = getDb();
+  const stmt = db.prepare(`
+    INSERT INTO arena_game_actions
+      (match_id, game_number, turn_number, phase, action_type, player, grp_id, card_name, details, action_order)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+  `);
+
+  let inserted = 0;
+  db.transaction(() => {
+    for (const a of actions) {
+      stmt.run(
+        a.match_id, a.game_number, a.turn_number, a.phase,
+        a.action_type, a.player, a.grp_id, a.card_name, a.details, a.action_order
+      );
+      inserted++;
+    }
+  })();
+
+  return inserted;
+}
+
+export function updateMatchTelemetry(matchId: string, summary: {
+  opening_hand: number[];
+  mulligan_count: number;
+  on_play: boolean | null;
+  match_start_time: string;
+  match_end_time: string;
+  game_count: number;
+  life_progression: unknown[];
+  draw_order: number[];
+  sideboard_changes: unknown[];
+  opponent_cards_by_turn: Record<number, number[]>;
+}): boolean {
+  const db = getDb();
+  try {
+    db.prepare(`
+      UPDATE arena_parsed_matches SET
+        opening_hand = ?,
+        mulligan_count = ?,
+        on_play = ?,
+        match_start_time = ?,
+        match_end_time = ?,
+        game_count = ?,
+        life_progression = ?,
+        draw_order = ?,
+        sideboard_changes = ?,
+        opponent_cards_by_turn = ?
+      WHERE match_id = ?
+    `).run(
+      JSON.stringify(summary.opening_hand),
+      summary.mulligan_count,
+      summary.on_play === null ? null : summary.on_play ? 1 : 0,
+      summary.match_start_time,
+      summary.match_end_time,
+      summary.game_count,
+      JSON.stringify(summary.life_progression),
+      JSON.stringify(summary.draw_order),
+      JSON.stringify(summary.sideboard_changes),
+      JSON.stringify(summary.opponent_cards_by_turn),
+      matchId
+    );
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+export function getMatchTimeline(matchId: string) {
+  return getDb()
+    .prepare('SELECT * FROM arena_game_actions WHERE match_id = ? ORDER BY action_order')
+    .all(matchId);
+}
+
+export function getMatchTelemetrySummary(matchId: string) {
+  return getDb()
+    .prepare(`
+      SELECT match_id, opening_hand, mulligan_count, on_play,
+             match_start_time, match_end_time, game_count,
+             life_progression, draw_order, sideboard_changes, opponent_cards_by_turn,
+             player_name, opponent_name, result, format, turns
+      FROM arena_parsed_matches
+      WHERE match_id = ?
+    `)
+    .get(matchId);
 }

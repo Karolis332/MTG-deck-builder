@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { parseArenaExport } from '@/lib/arena-parser';
-import { getDb, getDeckWithCards } from '@/lib/db';
+import { getDb, getDeckWithCards, resolveCardAliases } from '@/lib/db';
 import * as scryfall from '@/lib/scryfall';
 import type { CardIdentifier, ScryfallCard } from '@/lib/types';
 import { getAuthUser, unauthorizedResponse } from '@/lib/auth-middleware';
@@ -68,15 +68,52 @@ export async function POST(
 
     const BATCH_SIZE = 75;
     const allFound: ScryfallCard[] = [];
+    const allNotFound: CardIdentifier[] = [];
 
     for (let i = 0; i < identifiers.length; i += BATCH_SIZE) {
       const batch = identifiers.slice(i, i + BATCH_SIZE);
       try {
-        const { found } = await scryfall.getCollection(batch);
+        const { found, not_found } = await scryfall.getCollection(batch);
         allFound.push(...found);
+        allNotFound.push(...not_found);
       } catch { /* batch failed */ }
       if (i + BATCH_SIZE < identifiers.length) {
         await new Promise(r => setTimeout(r, 100));
+      }
+    }
+
+    // Retry cards not found by set+collector_number using name only
+    // Handles Arena set codes that don't match Scryfall's codes
+    const retryByName: CardIdentifier[] = [];
+    const retryNames = new Set<string>();
+    for (const nf of allNotFound) {
+      const originalLine = parsed.find((line) => {
+        if ('set' in nf && 'collector_number' in nf) {
+          return line.setCode?.toLowerCase() === (nf as { set: string }).set
+            && line.collectorNumber === (nf as { collector_number: string }).collector_number;
+        }
+        if ('name' in nf) {
+          return line.name.toLowerCase() === (nf as { name: string }).name?.toLowerCase();
+        }
+        return false;
+      });
+      if (originalLine && !retryNames.has(originalLine.name.toLowerCase())) {
+        retryNames.add(originalLine.name.toLowerCase());
+        const cleanName = originalLine.name.replace(/^A-/, '');
+        retryByName.push({ name: cleanName });
+      }
+    }
+
+    if (retryByName.length > 0) {
+      for (let i = 0; i < retryByName.length; i += BATCH_SIZE) {
+        const batch = retryByName.slice(i, i + BATCH_SIZE);
+        try {
+          const { found } = await scryfall.getCollection(batch);
+          allFound.push(...found);
+        } catch { /* retry batch failed */ }
+        if (i + BATCH_SIZE < retryByName.length) {
+          await new Promise(r => setTimeout(r, 100));
+        }
       }
     }
 
@@ -88,6 +125,38 @@ export async function POST(
         const front = card.name.split(' // ')[0].trim().toLowerCase();
         if (!cardsByName.has(front)) cardsByName.set(front, card);
       }
+    }
+
+    // Resolve Universes Beyond/Within aliases for unmatched cards
+    const unmatchedNames = parsed
+      .filter(line => !cardsByName.has(line.name.toLowerCase()))
+      .map(line => line.name);
+    const aliasMap = resolveCardAliases(unmatchedNames);
+
+    // For aliased cards, retry via Scryfall with the canonical name
+    if (aliasMap.size > 0) {
+      const aliasIdentifiers: CardIdentifier[] = Array.from(aliasMap.values()).map(name => ({ name }));
+      for (let i = 0; i < aliasIdentifiers.length; i += BATCH_SIZE) {
+        const batch = aliasIdentifiers.slice(i, i + BATCH_SIZE);
+        try {
+          const { found } = await scryfall.getCollection(batch);
+          for (const card of found) {
+            allFound.push(card);
+            cardsByName.set(card.name.toLowerCase(), card);
+            if (card.name.includes(' // ')) {
+              const front = card.name.split(' // ')[0].trim().toLowerCase();
+              if (!cardsByName.has(front)) cardsByName.set(front, card);
+            }
+          }
+        } catch { /* alias retry failed */ }
+      }
+      // Map alias names to their resolved cards
+      aliasMap.forEach((canonical, alias) => {
+        const card = cardsByName.get(canonical.toLowerCase());
+        if (card) {
+          cardsByName.set(alias.toLowerCase(), card);
+        }
+      });
     }
 
     // Resolve parsed lines to concrete cards

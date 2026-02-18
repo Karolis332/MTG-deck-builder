@@ -908,4 +908,57 @@ export const MIGRATIONS = [
       );
     `,
   },
+  {
+    version: 25,
+    name: 'add_card_aliases_table',
+    sql: `
+      -- Alias table for Universes Beyond <-> Universe Within name mappings
+      -- e.g., "Hobgoblin, Mantled Marauder" (Spiderman) <-> "Cam and Farrik, Havoc Duo" (Magic-native)
+      CREATE TABLE IF NOT EXISTS card_aliases (
+        alias_name TEXT NOT NULL,
+        canonical_name TEXT NOT NULL,
+        oracle_id TEXT,
+        source TEXT DEFAULT 'scryfall',
+        created_at TEXT DEFAULT (datetime('now')),
+        PRIMARY KEY (alias_name)
+      );
+      CREATE INDEX IF NOT EXISTS idx_card_aliases_canonical ON card_aliases(canonical_name);
+      CREATE INDEX IF NOT EXISTS idx_card_aliases_oracle_id ON card_aliases(oracle_id);
+    `,
+  },
+  {
+    version: 26,
+    name: 'add_arena_telemetry',
+    sql: `
+      -- Per-action telemetry log for Arena matches (Arena Tutor-style)
+      CREATE TABLE IF NOT EXISTS arena_game_actions (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        match_id TEXT NOT NULL,
+        game_number INTEGER DEFAULT 1,
+        turn_number INTEGER,
+        phase TEXT,
+        action_type TEXT NOT NULL,
+        player TEXT NOT NULL DEFAULT 'self',
+        grp_id INTEGER,
+        card_name TEXT,
+        details TEXT,
+        action_order INTEGER NOT NULL,
+        created_at TEXT DEFAULT (datetime('now'))
+      );
+      CREATE INDEX IF NOT EXISTS idx_aga_match ON arena_game_actions(match_id);
+      CREATE INDEX IF NOT EXISTS idx_aga_match_turn ON arena_game_actions(match_id, turn_number);
+
+      -- Enrich arena_parsed_matches with telemetry summary columns
+      ALTER TABLE arena_parsed_matches ADD COLUMN opening_hand TEXT;
+      ALTER TABLE arena_parsed_matches ADD COLUMN mulligan_count INTEGER DEFAULT 0;
+      ALTER TABLE arena_parsed_matches ADD COLUMN on_play INTEGER;
+      ALTER TABLE arena_parsed_matches ADD COLUMN match_start_time TEXT;
+      ALTER TABLE arena_parsed_matches ADD COLUMN match_end_time TEXT;
+      ALTER TABLE arena_parsed_matches ADD COLUMN game_count INTEGER DEFAULT 1;
+      ALTER TABLE arena_parsed_matches ADD COLUMN life_progression TEXT;
+      ALTER TABLE arena_parsed_matches ADD COLUMN draw_order TEXT;
+      ALTER TABLE arena_parsed_matches ADD COLUMN sideboard_changes TEXT;
+      ALTER TABLE arena_parsed_matches ADD COLUMN opponent_cards_by_turn TEXT;
+    `,
+  },
 ];
