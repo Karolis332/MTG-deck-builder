@@ -94,6 +94,140 @@ function postJson(route: string, body: unknown): Promise<{ status: number; data:
 }
 
 /**
+ * Seed the grp_id_cache table from the bundled arena_grp_ids.json file.
+ * Runs on first boot or when the bundled version differs from what's stored.
+ */
+export async function seedArenaCardCache(): Promise<void> {
+  // Locate the bundled JSON
+  const candidates = [
+    // Packaged Electron — extraResources
+    process.resourcesPath ? path.join(process.resourcesPath, 'arena_grp_ids.json') : '',
+    // Dev mode — data/ directory
+    path.join(process.cwd(), 'data', 'arena_grp_ids.json'),
+    // Fallback: relative to this file
+    path.join(__dirname, '..', '..', 'data', 'arena_grp_ids.json'),
+  ].filter(Boolean);
+
+  let jsonPath = '';
+  for (const p of candidates) {
+    if (fs.existsSync(p)) {
+      jsonPath = p;
+      break;
+    }
+  }
+
+  if (!jsonPath) {
+    console.log('[ArenaCardCache] No bundled arena_grp_ids.json found — skipping seed');
+    return;
+  }
+
+  let data: { version: string; count: number; cards: Record<string, string> };
+  try {
+    data = JSON.parse(fs.readFileSync(jsonPath, 'utf-8'));
+  } catch (err) {
+    console.error('[ArenaCardCache] Failed to parse arena_grp_ids.json:', err);
+    return;
+  }
+
+  if (!data.cards || !data.version) {
+    console.log('[ArenaCardCache] Invalid arena_grp_ids.json format — skipping');
+    return;
+  }
+
+  // Check stored version in app_state via API
+  const port = process.env.PORT || '3000';
+  try {
+    const versionResp = await new Promise<string>((resolve, reject) => {
+      http.get(`http://localhost:${port}/api/cards/search?q=_arena_card_db_version_check_`, (res) => {
+        res.resume();
+        resolve(''); // We don't actually use this — check DB directly below
+      }).on('error', reject);
+    }).catch(() => '');
+
+    // Use a direct DB check via a lightweight POST to avoid needing a dedicated endpoint
+    // Instead, we'll just always seed if the file exists — the INSERT OR IGNORE makes it idempotent
+  } catch {
+    // Server may not be fully ready — proceed with seed anyway
+  }
+
+  console.log(`[ArenaCardCache] Seeding ${data.count || Object.keys(data.cards).length} grpId mappings from bundled v${data.version}...`);
+
+  // Bulk seed via local DB access (we're in Electron main process)
+  try {
+    const dbDir = process.env.MTG_DB_DIR || path.join(process.cwd(), 'data');
+    const dbPath = path.join(dbDir, 'mtg-deck-builder.db');
+
+    if (!fs.existsSync(dbPath)) {
+      console.log('[ArenaCardCache] Database not found yet — skipping seed');
+      return;
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const Database = require('better-sqlite3');
+    const db = new Database(dbPath, { readonly: false });
+
+    // Check stored version
+    let storedVersion = '';
+    try {
+      const row = db.prepare("SELECT value FROM app_state WHERE key = 'arena_card_db_version'").get() as { value: string } | undefined;
+      storedVersion = row?.value || '';
+    } catch {
+      // app_state table may not exist yet
+    }
+
+    if (storedVersion === data.version) {
+      console.log(`[ArenaCardCache] Already seeded v${data.version} — skipping`);
+      db.close();
+      return;
+    }
+
+    // Ensure grp_id_cache table exists (migration v21 creates it, but be safe)
+    db.exec(`
+      CREATE TABLE IF NOT EXISTS grp_id_cache (
+        grp_id INTEGER PRIMARY KEY,
+        card_name TEXT NOT NULL,
+        scryfall_id TEXT,
+        image_uri_small TEXT,
+        image_uri_normal TEXT,
+        mana_cost TEXT,
+        cmc REAL,
+        type_line TEXT,
+        oracle_text TEXT,
+        source TEXT DEFAULT 'arena_cdn',
+        created_at TEXT DEFAULT (datetime('now'))
+      )
+    `);
+
+    // Bulk insert with INSERT OR IGNORE (won't overwrite richer data from scryfall/arena_id sources)
+    const insert = db.prepare(
+      `INSERT OR IGNORE INTO grp_id_cache (grp_id, card_name, source) VALUES (?, ?, 'arena_cdn')`
+    );
+
+    const bulkInsert = db.transaction(() => {
+      let inserted = 0;
+      for (const [grpId, name] of Object.entries(data.cards)) {
+        const result = insert.run(parseInt(grpId, 10), name);
+        if (result.changes > 0) inserted++;
+      }
+      return inserted;
+    });
+
+    const inserted = bulkInsert();
+    console.log(`[ArenaCardCache] Inserted ${inserted} new grpId mappings (${Object.keys(data.cards).length} total in file)`);
+
+    // Store version
+    db.prepare(
+      `INSERT OR REPLACE INTO app_state (key, value) VALUES ('arena_card_db_version', ?)`
+    ).run(data.version);
+
+    db.close();
+    console.log(`[ArenaCardCache] Seed complete — version ${data.version} stored`);
+  } catch (err) {
+    console.error('[ArenaCardCache] Seed error:', err);
+  }
+}
+
+/**
  * Run pending first-boot actions.
  * Call this after the Next.js server is confirmed running.
  */

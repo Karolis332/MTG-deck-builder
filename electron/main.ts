@@ -3,9 +3,17 @@ import path from 'path';
 import fs from 'fs';
 import { spawn, ChildProcess } from 'child_process';
 import net from 'net';
-import { registerIpcHandlers, ensureWatcherRunning } from './ipc-handlers';
+import { registerIpcHandlers, ensureWatcherRunning, markServerReady, checkArenaCardDbUpdate } from './ipc-handlers';
 import { registerSetupHandlers } from './setup-handlers';
-import { runFirstBootActions } from '../src/lib/first-boot';
+import { runFirstBootActions, seedArenaCardCache } from '../src/lib/first-boot';
+
+// Immediate startup trace — verifies our compiled code is running
+const _TRACE = path.join(process.env.APPDATA || '.', 'the-black-grimoire', 'telemetry-debug.log');
+function mainTrace(msg: string): void {
+  const ts = new Date().toISOString().slice(11, 19);
+  try { fs.appendFileSync(_TRACE, `[${ts}] MAIN: ${msg}\n`); } catch { /* */ }
+}
+mainTrace('main.ts loaded — module init');
 
 // ── Crash logging ────────────────────────────────────────────────────────
 // Capture uncaught errors to a log file before anything else runs.
@@ -346,6 +354,7 @@ function createOverlayWindow(): void {
 }
 
 function toggleOverlay(): void {
+  mainTrace(`toggleOverlay called, overlayWindow=${!!overlayWindow}, destroyed=${overlayWindow?.isDestroyed()}`);
   if (overlayWindow && !overlayWindow.isDestroyed()) {
     if (overlayWindow.isVisible()) {
       overlayWindow.hide();
@@ -353,6 +362,7 @@ function toggleOverlay(): void {
       overlayWindow.show();
     }
   } else {
+    mainTrace('creating new overlay window');
     createOverlayWindow();
   }
 }
@@ -368,8 +378,19 @@ function toggleClickThrough(): void {
 }
 
 function registerGlobalShortcuts(): void {
-  globalShortcut.register('Alt+O', toggleOverlay);
-  globalShortcut.register('Alt+L', toggleClickThrough);
+  // Try primary shortcuts first, fall back to alternatives if another app holds them
+  let regO = globalShortcut.register('Alt+O', toggleOverlay);
+  let regL = globalShortcut.register('Alt+L', toggleClickThrough);
+  mainTrace(`shortcuts (primary): Alt+O=${regO}, Alt+L=${regL}`);
+
+  if (!regO) {
+    regO = globalShortcut.register('Ctrl+Shift+O', toggleOverlay);
+    mainTrace(`fallback shortcut: Ctrl+Shift+O=${regO}`);
+  }
+  if (!regL) {
+    regL = globalShortcut.register('Ctrl+Shift+L', toggleClickThrough);
+    mainTrace(`fallback shortcut: Ctrl+Shift+L=${regL}`);
+  }
 }
 
 // ── Next.js server ──────────────────────────────────────────────────────
@@ -459,6 +480,7 @@ async function startNextServer(): Promise<void> {
       const output = data.toString();
       logCrash('next-stdout', output.trim());
       if (output.includes('Ready') || output.includes('started')) {
+        markServerReady();
         resolve();
       }
     });
@@ -507,8 +529,17 @@ export async function transitionToMainApp(): Promise<void> {
   // Register main app IPC handlers
   registerIpcHandlers();
 
+  // In dev mode, Next.js dev server is already running
+  if (isDev) {
+    markServerReady();
+  }
+
   createMainWindow();
   registerGlobalShortcuts();
+
+  // Auto-start the Arena log watcher for telemetry (doesn't need overlay open)
+  mainTrace('Auto-starting watcher on app launch');
+  autoStartWatcher();
 
   // Run first-boot actions (account creation, card seeding) after server is ready
   setTimeout(async () => {
@@ -517,6 +548,16 @@ export async function transitionToMainApp(): Promise<void> {
     } catch (err) {
       console.error('[FirstBoot] Error running first-boot actions:', err);
     }
+
+    // Seed Arena grpId cache from bundled JSON, then check CDN for updates
+    try {
+      await seedArenaCardCache();
+    } catch (err) {
+      console.error('[ArenaCardCache] Seed error:', err);
+    }
+    checkArenaCardDbUpdate().catch((err) => {
+      console.error('[ArenaCardCache] Background update error:', err);
+    });
   }, 2000);
 }
 
@@ -551,6 +592,20 @@ app.whenReady().then(async () => {
     registerIpcHandlers();
     createMainWindow();
     registerGlobalShortcuts();
+
+    // Auto-start the Arena log watcher for telemetry (dev mode)
+    mainTrace('Auto-starting watcher on app launch (dev mode)');
+    autoStartWatcher();
+
+    // Seed Arena grpId cache + check for CDN updates (non-blocking)
+    setTimeout(async () => {
+      try { await seedArenaCardCache(); } catch (err) {
+        console.error('[ArenaCardCache] Seed error:', err);
+      }
+      checkArenaCardDbUpdate().catch((err) => {
+        console.error('[ArenaCardCache] Background update error:', err);
+      });
+    }, 3000);
   }
 
   app.on('activate', () => {

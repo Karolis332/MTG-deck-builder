@@ -45,6 +45,10 @@ extraResources:
     to: "scripts"
     filter:
       - "*.py"
+  - from: "data/"
+    to: "."
+    filter:
+      - "arena_grp_ids.json"
 
 mac:
   target:

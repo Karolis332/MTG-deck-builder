@@ -24,6 +24,7 @@
     "dist:all": "concurrently \"npm:build\" \"npm:build:electron\" && electron-builder --win --mac --linux",
     "dist:portable": "concurrently \"npm:build\" \"npm:build:electron\" && electron-builder --win portable",
     "dist:zip": "concurrently \"npm:build\" \"npm:build:electron\" && electron-builder --win zip --mac zip --linux tar.gz",
+    "update:arena-cards": "node scripts/download_arena_card_db.js",
     "postinstall": "electron-builder install-app-deps || true"
   },
   "dependencies": {

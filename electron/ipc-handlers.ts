@@ -10,26 +10,94 @@ import { parseArenaLogFile } from '../src/lib/arena-log-reader';
 import { GrpIdResolver } from '../src/lib/grp-id-resolver';
 import { analyzeMulligan } from '../src/lib/mulligan-advisor';
 import type { GameStateSnapshot, ResolvedCard } from '../src/lib/game-state-engine';
+import type { TelemetryFlushData } from '../src/lib/match-telemetry';
 
 let watcher: ArenaLogWatcher | null = null;
 let mlProcess: ChildProcess | null = null;
 let resolver: GrpIdResolver | null = null;
+let arenaDbUpdateInProgress = false;
+
+// ── Telemetry retry queue ────────────────────────────────────────────────
+// Flushes that fail (server not ready during catch-up) are queued and retried.
+let serverReady = false;
+const telemetryQueue: TelemetryFlushData[] = [];
+let retryTimer: ReturnType<typeof setInterval> | null = null;
+
+function markServerReady(): void {
+  if (serverReady) return;
+  serverReady = true;
+  traceLog(`server marked ready, draining ${telemetryQueue.length} queued telemetry flushes`);
+  drainTelemetryQueue();
+}
+
+function drainTelemetryQueue(): void {
+  while (telemetryQueue.length > 0) {
+    const item = telemetryQueue.shift()!;
+    postToApi('/api/arena-telemetry', item);
+  }
+  if (retryTimer) {
+    clearInterval(retryTimer);
+    retryTimer = null;
+  }
+}
+
+function queueTelemetryFlush(data: TelemetryFlushData): void {
+  if (serverReady) {
+    postToApi('/api/arena-telemetry', data);
+    return;
+  }
+  traceLog(`server not ready, queuing telemetry flush (${data.actions.length} actions, queue size: ${telemetryQueue.length + 1})`);
+  telemetryQueue.push(data);
+  // Start a retry timer to periodically check if server is up
+  if (!retryTimer) {
+    retryTimer = setInterval(() => {
+      probeServerReady();
+    }, 2000);
+  }
+}
+
+function probeServerReady(): void {
+  const port = process.env.PORT || '3000';
+  const req = http.request(
+    { hostname: 'localhost', port, path: '/api/cards/search?q=_healthcheck_', method: 'GET', timeout: 2000 },
+    (res) => {
+      res.resume();
+      // Any response means server is up
+      markServerReady();
+    }
+  );
+  req.on('error', () => { /* server still not ready */ });
+  req.on('timeout', () => { req.destroy(); });
+  req.end();
+}
+
+// File-based trace log for debugging watcher startup
+const TRACE_LOG = path.join(process.env.APPDATA || '.', 'the-black-grimoire', 'telemetry-debug.log');
+function traceLog(msg: string): void {
+  const ts = new Date().toISOString().slice(11, 19);
+  try { fs.appendFileSync(TRACE_LOG, `[${ts}] IPC: ${msg}\n`); } catch { /* ignore */ }
+  console.log(`[IPC] ${msg}`);
+}
 
 /**
  * Ensure the Arena log watcher is running.
  * Called from main.ts when the overlay opens.
  * Uses the default log path if no watcher is active.
  */
+export { markServerReady };
+
 export function ensureWatcherRunning(): void {
+  traceLog(`ensureWatcherRunning called, watcher=${!!watcher}`);
   if (watcher) return; // Already running
 
   const logPath = getDefaultLogPath();
+  traceLog(`logPath=${logPath}, exists=${fs.existsSync(logPath)}`);
   if (!fs.existsSync(logPath)) {
-    console.log('[Watcher] Arena log not found at:', logPath);
+    traceLog('Arena log not found — aborting');
     return;
   }
 
-  console.log('[Watcher] Auto-starting for overlay:', logPath);
+  traceLog('Auto-starting watcher with catchUp=true');
   startWatcherInternal(logPath, true);
 }
 
@@ -129,16 +197,20 @@ function getResolver(): GrpIdResolver {
 }
 
 function startWatcherInternal(logPath: string, catchUp = false): { ok: boolean; error?: string } {
+  traceLog(`startWatcherInternal: logPath=${logPath}, catchUp=${catchUp}`);
   try {
     if (watcher) {
+      traceLog('stopping existing watcher');
       watcher.stop();
       watcher.removeAllListeners();
     }
 
     if (!fs.existsSync(logPath)) {
+      traceLog('log file not found');
       return { ok: false, error: `Log file not found: ${logPath}` };
     }
 
+    traceLog('creating ArenaLogWatcher');
     watcher = new ArenaLogWatcher(logPath, 500, catchUp);
     watcher.setResolver(getResolver());
 
@@ -179,10 +251,186 @@ function startWatcherInternal(logPath: string, catchUp = false): { ok: boolean; 
       broadcast('intermission-start', data);
     });
 
+    // ── Telemetry persistence ───────────────────────────────────────────────
+    watcher.on('telemetry-flush', (data: TelemetryFlushData) => {
+      queueTelemetryFlush(data);
+    });
+
+    traceLog('calling watcher.start()');
     watcher.start();
+    traceLog('watcher.start() completed OK');
     return { ok: true };
   } catch (err) {
+    traceLog(`startWatcherInternal ERROR: ${err}`);
     return { ok: false, error: String(err) };
+  }
+}
+
+// ── Arena Card DB CDN Update ────────────────────────────────────────────
+
+function getAppDb(): ReturnType<typeof import('better-sqlite3')> | null {
+  try {
+    const dbPath = process.env.MTG_DB_DIR
+      ? path.join(process.env.MTG_DB_DIR, 'mtg-deck-builder.db')
+      : path.join(process.cwd(), 'data', 'mtg-deck-builder.db');
+    if (!fs.existsSync(dbPath)) return null;
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const Database = require('better-sqlite3');
+    return new Database(dbPath, { readonly: false });
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Check Wizards CDN for a newer Arena card database and update grp_id_cache if found.
+ * Non-blocking — logs progress to trace log.
+ * Skips if already checked within the last 24 hours.
+ */
+export async function checkArenaCardDbUpdate(): Promise<{ updated: boolean; version?: string; count?: number; error?: string }> {
+  if (arenaDbUpdateInProgress) {
+    return { updated: false, error: 'Update already in progress' };
+  }
+
+  arenaDbUpdateInProgress = true;
+  traceLog('checkArenaCardDbUpdate: starting');
+
+  try {
+    const db = getAppDb();
+    if (!db) {
+      traceLog('checkArenaCardDbUpdate: database not available');
+      return { updated: false, error: 'Database not available' };
+    }
+
+    // Check last update time — skip if <24h
+    let lastCheck = '';
+    let storedVersion = '';
+    try {
+      const checkRow = db.prepare("SELECT value FROM app_state WHERE key = 'arena_card_db_last_check'").get() as { value: string } | undefined;
+      lastCheck = checkRow?.value || '';
+      const verRow = db.prepare("SELECT value FROM app_state WHERE key = 'arena_card_db_version'").get() as { value: string } | undefined;
+      storedVersion = verRow?.value || '';
+    } catch {
+      // app_state may not exist yet
+    }
+
+    if (lastCheck) {
+      const elapsed = Date.now() - new Date(lastCheck).getTime();
+      if (elapsed < 24 * 60 * 60 * 1000) {
+        traceLog(`checkArenaCardDbUpdate: checked ${(elapsed / 3600000).toFixed(1)}h ago — skipping`);
+        db.close();
+        return { updated: false };
+      }
+    }
+
+    // Fetch current Arena version from CDN
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const { fetchText, parseVersionResponse, VERSION_URL: versionUrl, downloadArenaCardDb } = require('../scripts/download_arena_card_db.js');
+    let cdnVersion: string;
+    try {
+      const raw = await fetchText(versionUrl);
+      const parsed = parseVersionResponse(raw);
+      cdnVersion = parsed.version;
+    } catch (err) {
+      traceLog(`checkArenaCardDbUpdate: version fetch failed: ${err}`);
+      // Record check time even on failure to avoid hammering
+      try {
+        db.prepare("INSERT OR REPLACE INTO app_state (key, value) VALUES ('arena_card_db_last_check', ?)").run(new Date().toISOString());
+      } catch { /* ignore */ }
+      db.close();
+      return { updated: false, error: `Version check failed: ${err}` };
+    }
+
+    traceLog(`checkArenaCardDbUpdate: CDN version=${cdnVersion}, stored=${storedVersion}`);
+
+    // Record check time
+    try {
+      db.prepare("INSERT OR REPLACE INTO app_state (key, value) VALUES ('arena_card_db_last_check', ?)").run(new Date().toISOString());
+    } catch { /* ignore */ }
+
+    if (cdnVersion === storedVersion) {
+      traceLog('checkArenaCardDbUpdate: version unchanged — no update needed');
+      db.close();
+      return { updated: false, version: cdnVersion };
+    }
+
+    // Version changed — download and update
+    traceLog(`checkArenaCardDbUpdate: new version detected, downloading...`);
+    broadcast('arena-card-db-update', { status: 'downloading', version: cdnVersion });
+
+    const tmpOutput = path.join(os.tmpdir(), `arena_grp_ids_${Date.now()}.json`);
+    let result: { version: string; count: number; cards: Record<string, string> };
+    try {
+      result = await downloadArenaCardDb(tmpOutput);
+    } catch (err) {
+      traceLog(`checkArenaCardDbUpdate: download failed: ${err}`);
+      broadcast('arena-card-db-update', { status: 'error', error: String(err) });
+      db.close();
+      return { updated: false, error: `Download failed: ${err}` };
+    }
+
+    // Bulk insert into grp_id_cache
+    traceLog(`checkArenaCardDbUpdate: inserting ${result.count} cards into grp_id_cache`);
+    broadcast('arena-card-db-update', { status: 'importing', count: result.count });
+
+    // Ensure grp_id_cache table exists
+    db.exec(`
+      CREATE TABLE IF NOT EXISTS grp_id_cache (
+        grp_id INTEGER PRIMARY KEY,
+        card_name TEXT NOT NULL,
+        scryfall_id TEXT,
+        image_uri_small TEXT,
+        image_uri_normal TEXT,
+        mana_cost TEXT,
+        cmc REAL,
+        type_line TEXT,
+        oracle_text TEXT,
+        source TEXT DEFAULT 'arena_cdn',
+        created_at TEXT DEFAULT (datetime('now'))
+      )
+    `);
+
+    const insert = db.prepare(
+      `INSERT OR IGNORE INTO grp_id_cache (grp_id, card_name, source) VALUES (?, ?, 'arena_cdn')`
+    );
+
+    const bulkInsert = db.transaction(() => {
+      let inserted = 0;
+      for (const [grpId, name] of Object.entries(result.cards)) {
+        const res = insert.run(parseInt(grpId, 10), name);
+        if (res.changes > 0) inserted++;
+      }
+      return inserted;
+    });
+
+    const inserted = bulkInsert();
+
+    // Store version and check time
+    db.prepare("INSERT OR REPLACE INTO app_state (key, value) VALUES ('arena_card_db_version', ?)").run(result.version);
+    db.close();
+
+    // Also update the bundled file if in dev mode
+    const isDev = !app.isPackaged;
+    if (isDev) {
+      const devOutput = path.join(path.resolve(__dirname, '..'), 'data', 'arena_grp_ids.json');
+      try {
+        fs.copyFileSync(tmpOutput, devOutput);
+        traceLog(`checkArenaCardDbUpdate: updated dev file at ${devOutput}`);
+      } catch { /* non-critical */ }
+    }
+
+    // Clean up temp file
+    try { fs.unlinkSync(tmpOutput); } catch { /* ignore */ }
+
+    traceLog(`checkArenaCardDbUpdate: done — inserted ${inserted} new, version ${result.version}`);
+    broadcast('arena-card-db-update', { status: 'complete', version: result.version, inserted, total: result.count });
+
+    return { updated: true, version: result.version, count: inserted };
+  } catch (err) {
+    traceLog(`checkArenaCardDbUpdate: unexpected error: ${err}`);
+    return { updated: false, error: String(err) };
+  } finally {
+    arenaDbUpdateInProgress = false;
   }
 }
 
@@ -391,6 +639,12 @@ export function registerIpcHandlers(): void {
       defaultPath: 'C:\\Program Files\\Wizards of the Coast\\MTGA',
     });
     return result.canceled ? null : result.filePaths[0];
+  });
+
+  // ── Arena Card DB CDN Update ────────────────────────────────────────────
+
+  ipcMain.handle('update-arena-card-db', async () => {
+    return checkArenaCardDbUpdate();
   });
 
   // ── ML Pipeline ─────────────────────────────────────────────────────────

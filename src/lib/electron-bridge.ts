@@ -56,6 +56,10 @@ export interface ElectronAPI {
   getGameState: () => Promise<GameStateSnapshot | null>;
   resolveGrpIds: (grpIds: number[]) => Promise<Record<number, unknown>>;
 
+  // Arena Card DB CDN Update
+  updateArenaCardDb: () => Promise<{ updated: boolean; version?: string; count?: number; error?: string }>;
+  onArenaCardDbUpdate: (callback: (data: { status: string; version?: string; inserted?: number; total?: number; error?: string }) => void) => () => void;
+
   getPlatform: () => Promise<string>;
   isElectron: boolean;
 }

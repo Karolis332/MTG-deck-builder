@@ -70,6 +70,13 @@ contextBridge.exposeInMainWorld('electronAPI', {
   getGameState: () => ipcRenderer.invoke('get-game-state'),
   resolveGrpIds: (grpIds: number[]) => ipcRenderer.invoke('resolve-grp-ids', grpIds),
 
+  // Arena Card DB CDN Update
+  updateArenaCardDb: () => ipcRenderer.invoke('update-arena-card-db'),
+  onArenaCardDbUpdate: (callback: (data: unknown) => void) => {
+    ipcRenderer.on('arena-card-db-update', (_event, data) => callback(data));
+    return () => ipcRenderer.removeAllListeners('arena-card-db-update');
+  },
+
   // Platform info
   getPlatform: () => ipcRenderer.invoke('get-platform'),
   isElectron: true,
