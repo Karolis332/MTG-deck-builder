@@ -174,10 +174,22 @@ export async function seedArenaCardCache(): Promise<void> {
       // app_state table may not exist yet
     }
 
-    if (storedVersion === data.version) {
+    // Check for stale localization IDs — if any exist, force re-seed even if version matches
+    let hasStaleEntries = false;
+    try {
+      const staleCount = db.prepare(
+        `SELECT COUNT(*) as c FROM grp_id_cache WHERE card_name GLOB '[0-9]*' AND card_name NOT GLOB '*[^0-9]*'`
+      ).get() as { c: number };
+      hasStaleEntries = staleCount.c > 0;
+    } catch { /* table may not exist */ }
+
+    if (storedVersion === data.version && !hasStaleEntries) {
       console.log(`[ArenaCardCache] Already seeded v${data.version} — skipping`);
       db.close();
       return;
+    }
+    if (hasStaleEntries) {
+      console.log(`[ArenaCardCache] Found stale localization ID entries — forcing re-seed`);
     }
 
     // Ensure grp_id_cache table exists (migration v21 creates it, but be safe)
@@ -197,9 +209,25 @@ export async function seedArenaCardCache(): Promise<void> {
       )
     `);
 
-    // Bulk insert with INSERT OR IGNORE (won't overwrite richer data from scryfall/arena_id sources)
+    // First, clean up stale entries where card_name is a numeric localization ID
+    // (from previous sessions where setNameHints stored Arena's loc IDs as names)
+    const cleanedUp = db.prepare(
+      `DELETE FROM grp_id_cache WHERE source = 'arena_gameobject'
+       AND card_name GLOB '[0-9]*' AND card_name NOT GLOB '*[^0-9]*'`
+    ).run();
+    if (cleanedUp.changes > 0) {
+      console.log(`[ArenaCardCache] Cleaned ${cleanedUp.changes} stale localization ID entries`);
+    }
+
+    // Upsert: insert new entries, overwrite stale arena_gameobject entries with CDN data
+    // (preserves richer scryfall/arena_id data via source priority check)
     const insert = db.prepare(
-      `INSERT OR IGNORE INTO grp_id_cache (grp_id, card_name, source) VALUES (?, ?, 'arena_cdn')`
+      `INSERT INTO grp_id_cache (grp_id, card_name, source) VALUES (?, ?, 'arena_cdn')
+       ON CONFLICT(grp_id) DO UPDATE SET
+         card_name = excluded.card_name,
+         source = excluded.source
+       WHERE source IN ('arena_gameobject', 'arena_cdn')
+         OR card_name GLOB '[0-9]*'`
     );
 
     const bulkInsert = db.transaction(() => {

@@ -1,4 +1,4 @@
-import { app, BrowserWindow, dialog, globalShortcut } from 'electron';
+import { app, BrowserWindow, dialog } from 'electron';
 import path from 'path';
 import fs from 'fs';
 import { spawn, ChildProcess } from 'child_process';
@@ -50,9 +50,7 @@ process.on('unhandledRejection', (reason) => {
 let mainWindow: BrowserWindow | null = null;
 let setupWindow: BrowserWindow | null = null;
 let splashWindow: BrowserWindow | null = null;
-let overlayWindow: BrowserWindow | null = null;
 let nextServer: ChildProcess | null = null;
-let overlayClickThrough = false;
 
 // Allow running as root on Linux (e.g. WSL, Docker)
 app.commandLine.appendSwitch('no-sandbox');
@@ -305,92 +303,10 @@ function createMainWindow(): void {
   }
 }
 
-// ── Auto-start watcher for overlay ──────────────────────────────────────
+// ── Auto-start watcher ──────────────────────────────────────────────────
 
 function autoStartWatcher(): void {
   ensureWatcherRunning();
-}
-
-// ── Overlay window ──────────────────────────────────────────────────────
-
-function createOverlayWindow(): void {
-  if (overlayWindow && !overlayWindow.isDestroyed()) {
-    overlayWindow.show();
-    return;
-  }
-
-  overlayWindow = new BrowserWindow({
-    width: 320,
-    height: 720,
-    x: 20,
-    y: 100,
-    frame: false,
-    transparent: true,
-    alwaysOnTop: true,
-    skipTaskbar: true,
-    resizable: true,
-    hasShadow: false,
-    webPreferences: {
-      preload: path.join(__dirname, 'preload.js'),
-      contextIsolation: true,
-      nodeIntegration: false,
-    },
-    backgroundColor: '#00000000',
-  });
-
-  overlayWindow.setAlwaysOnTop(true, 'screen-saver');
-  overlayWindow.loadURL(`http://localhost:${PORT}/overlay`);
-
-  overlayWindow.on('closed', () => {
-    overlayWindow = null;
-  });
-
-  // Start in click-through mode
-  overlayClickThrough = true;
-  overlayWindow.setIgnoreMouseEvents(true, { forward: true });
-
-  // Auto-start the Arena log watcher if not already running
-  autoStartWatcher();
-}
-
-function toggleOverlay(): void {
-  mainTrace(`toggleOverlay called, overlayWindow=${!!overlayWindow}, destroyed=${overlayWindow?.isDestroyed()}`);
-  if (overlayWindow && !overlayWindow.isDestroyed()) {
-    if (overlayWindow.isVisible()) {
-      overlayWindow.hide();
-    } else {
-      overlayWindow.show();
-    }
-  } else {
-    mainTrace('creating new overlay window');
-    createOverlayWindow();
-  }
-}
-
-function toggleClickThrough(): void {
-  if (!overlayWindow || overlayWindow.isDestroyed()) return;
-  overlayClickThrough = !overlayClickThrough;
-  if (overlayClickThrough) {
-    overlayWindow.setIgnoreMouseEvents(true, { forward: true });
-  } else {
-    overlayWindow.setIgnoreMouseEvents(false);
-  }
-}
-
-function registerGlobalShortcuts(): void {
-  // Try primary shortcuts first, fall back to alternatives if another app holds them
-  let regO = globalShortcut.register('Alt+O', toggleOverlay);
-  let regL = globalShortcut.register('Alt+L', toggleClickThrough);
-  mainTrace(`shortcuts (primary): Alt+O=${regO}, Alt+L=${regL}`);
-
-  if (!regO) {
-    regO = globalShortcut.register('Ctrl+Shift+O', toggleOverlay);
-    mainTrace(`fallback shortcut: Ctrl+Shift+O=${regO}`);
-  }
-  if (!regL) {
-    regL = globalShortcut.register('Ctrl+Shift+L', toggleClickThrough);
-    mainTrace(`fallback shortcut: Ctrl+Shift+L=${regL}`);
-  }
 }
 
 // ── Next.js server ──────────────────────────────────────────────────────
@@ -411,6 +327,8 @@ async function startNextServer(): Promise<void> {
   const startPort = parseInt(PORT);
   const availablePort = await findAvailablePort(startPort);
   PORT = availablePort.toString();
+  // Sync process.env.PORT so IPC handlers (postToApi) use the correct port
+  process.env.PORT = PORT;
 
   logCrash('next-server-port', `Using port ${PORT}`);
 
@@ -535,9 +453,8 @@ export async function transitionToMainApp(): Promise<void> {
   }
 
   createMainWindow();
-  registerGlobalShortcuts();
 
-  // Auto-start the Arena log watcher for telemetry (doesn't need overlay open)
+  // Auto-start the Arena log watcher for telemetry
   mainTrace('Auto-starting watcher on app launch');
   autoStartWatcher();
 
@@ -591,9 +508,8 @@ app.whenReady().then(async () => {
 
     registerIpcHandlers();
     createMainWindow();
-    registerGlobalShortcuts();
 
-    // Auto-start the Arena log watcher for telemetry (dev mode)
+    // Auto-start the Arena log watcher for telemetry
     mainTrace('Auto-starting watcher on app launch (dev mode)');
     autoStartWatcher();
 
@@ -626,13 +542,6 @@ app.on('window-all-closed', () => {
 });
 
 app.on('will-quit', () => {
-  globalShortcut.unregisterAll();
-
-  if (overlayWindow && !overlayWindow.isDestroyed()) {
-    overlayWindow.close();
-    overlayWindow = null;
-  }
-
   if (nextServer) {
     try {
       nextServer.kill('SIGTERM');

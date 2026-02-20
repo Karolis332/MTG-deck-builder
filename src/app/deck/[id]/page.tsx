@@ -1249,6 +1249,12 @@ export default function DeckEditorPage() {
                         </p>
                       )}
 
+                      {!combosLoading && includedCombos.length === 0 && almostIncludedCombos.length > 0 && (
+                        <p className="text-xs text-muted-foreground">
+                          No complete combos yet — expand near-misses below for cards to consider adding.
+                        </p>
+                      )}
+
                       {/* Included combos */}
                       {includedCombos.length > 0 && (
                         <div>
@@ -1294,16 +1300,29 @@ export default function DeckEditorPage() {
                         </div>
                       )}
 
-                      {/* Near-miss combos */}
-                      {almostIncludedCombos.length > 0 && (
-                        <div>
-                          <h4 className="mb-1.5 text-xs font-semibold text-amber-400">
-                            Near-Miss Combos ({almostIncludedCombos.length})
-                          </h4>
-                          <div className="space-y-2">
-                            {almostIncludedCombos.slice(0, 10).map(combo => {
-                              const deckCardNames = new Set(deck.cards.map(c => c.name));
-                              return (
+                      {/* Near-miss combos — sorted by fewest missing, collapsed by default */}
+                      {almostIncludedCombos.length > 0 && (() => {
+                        const deckCardNames = new Set(deck.cards.map(c => c.name));
+                        const sorted = [...almostIncludedCombos]
+                          .map(combo => ({
+                            ...combo,
+                            missingCount: combo.cards.filter(c => !deckCardNames.has(c.card_name)).length,
+                          }))
+                          .sort((a, b) => a.missingCount - b.missingCount);
+
+                        return (
+                          <details className="group/near">
+                            <summary className="flex cursor-pointer items-center gap-2 text-xs">
+                              <span className="transition-transform group-open/near:rotate-90">&#9654;</span>
+                              <h4 className="text-xs font-semibold text-amber-400">
+                                Near-Miss Combos ({almostIncludedCombos.length})
+                              </h4>
+                              {includedCombos.length === 0 && (
+                                <span className="text-[10px] text-muted-foreground">— check these for potential additions</span>
+                              )}
+                            </summary>
+                            <div className="mt-2 space-y-2">
+                              {sorted.slice(0, 15).map(combo => (
                                 <details key={combo.id} className="group rounded-lg border border-amber-500/20 bg-amber-500/5 p-2">
                                   <summary className="flex cursor-pointer items-center gap-2 text-xs">
                                     <span className="transition-transform group-open:rotate-90">&#9654;</span>
@@ -1320,6 +1339,9 @@ export default function DeckEditorPage() {
                                           {combo.cards.indexOf(c) < combo.cards.length - 1 ? ' + ' : ''}
                                         </span>
                                       ))}
+                                    </span>
+                                    <span className="shrink-0 rounded-full bg-amber-500/20 px-1.5 py-0.5 text-[9px] font-bold text-amber-400">
+                                      {combo.missingCount === 1 ? 'Missing 1 card' : `Missing ${combo.missingCount} cards`}
                                     </span>
                                   </summary>
                                   <div className="mt-2 space-y-1 pl-4">
@@ -1344,16 +1366,16 @@ export default function DeckEditorPage() {
                                     )}
                                   </div>
                                 </details>
-                              );
-                            })}
-                            {almostIncludedCombos.length > 10 && (
-                              <p className="text-center text-[10px] text-muted-foreground">
-                                +{almostIncludedCombos.length - 10} more near-miss combos
-                              </p>
-                            )}
-                          </div>
-                        </div>
-                      )}
+                              ))}
+                              {sorted.length > 15 && (
+                                <p className="text-center text-[10px] text-muted-foreground">
+                                  +{sorted.length - 15} more near-miss combos
+                                </p>
+                              )}
+                            </div>
+                          </details>
+                        );
+                      })()}
                     </div>
                   )}
                 </div>

@@ -496,7 +496,7 @@ describe('GameStateEngine', () => {
     expect(state.phase).toBe('Phase_Main2');
   });
 
-  it('should update life from game_state_update players', () => {
+  it('should update life from life_total_change events', () => {
     engine.processEvent({
       type: 'match_start',
       matchId: 'test-life-gsu',
@@ -507,15 +507,17 @@ describe('GameStateEngine', () => {
       format: null,
     });
 
+    // Life is updated via life_total_change events (from ModifiedLife annotations
+    // or the players array in extractGameEvents), not from game_state_update directly
     engine.processEvent({
-      type: 'game_state_update',
-      zones: [],
-      gameObjects: [],
-      turnInfo: undefined,
-      players: [
-        { seatId: 1, lifeTotal: 15 },
-        { seatId: 2, lifeTotal: 8 },
-      ],
+      type: 'life_total_change',
+      seatId: 1,
+      lifeTotal: 15,
+    });
+    engine.processEvent({
+      type: 'life_total_change',
+      seatId: 2,
+      lifeTotal: 8,
     });
 
     const state = engine.getState();
@@ -642,5 +644,32 @@ describe('GameStateEngine', () => {
 
     const state = engine.getState();
     expect(state.opponentCardsSeen).toContain(999);
+  });
+
+  it('should handle damage_dealt events without crashing', () => {
+    engine.processEvent({
+      type: 'match_start',
+      matchId: 'dmg-test',
+      playerSeatId: 1,
+      playerTeamId: 1,
+      playerName: 'Player',
+      opponentName: 'Opponent',
+      format: 'Standard_Ranked',
+    });
+
+    // Should not throw — damage_dealt is informational only
+    engine.processEvent({
+      type: 'damage_dealt',
+      sourceInstanceId: 100,
+      sourceGrpId: 12345,
+      targetSeatId: 2,
+      targetInstanceId: null,
+      targetGrpId: null,
+      amount: 3,
+      isCombat: true,
+    });
+
+    const state = engine.getState();
+    expect(state.isActive).toBe(true);
   });
 });

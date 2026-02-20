@@ -101,10 +101,32 @@ export class GrpIdResolver {
   }
 
   /**
-   * Get a resolved card from cache only (no API calls). Returns null if not cached.
+   * Get a resolved card from cache (no API calls). Checks memory first, then DB.
    */
   getCached(grpId: number): ResolvedCard | null {
-    return this.memoryCache.get(grpId) ?? null;
+    const mem = this.memoryCache.get(grpId);
+    if (mem && !this.isNumericName(mem.name)) return mem;
+
+    // Sync DB fallback — better-sqlite3 is synchronous
+    const dbResult = this.lookupDb(grpId);
+    if (dbResult && !this.isNumericName(dbResult.name)) {
+      this.memoryCache.set(grpId, dbResult);
+      return dbResult;
+    }
+
+    // Also check cards.arena_id for Scryfall-sourced data
+    const arenaResult = this.lookupArenaId(grpId);
+    if (arenaResult) {
+      this.memoryCache.set(grpId, arenaResult);
+      return arenaResult;
+    }
+
+    return null;
+  }
+
+  /** Check if a name is a numeric localization ID (e.g. "748691") rather than a real card name */
+  private isNumericName(name: string): boolean {
+    return /^\d+$/.test(name);
   }
 
   /**
@@ -129,7 +151,7 @@ export class GrpIdResolver {
    * Persists to DB so hints survive across sessions — incremental coverage.
    */
   setNameHint(grpId: number, name: string): void {
-    if (!name || this.memoryCache.has(grpId)) return;
+    if (!name || this.memoryCache.has(grpId) || this.isNumericName(name)) return;
     const card: ResolvedCard = {
       grpId,
       name,
@@ -147,13 +169,14 @@ export class GrpIdResolver {
   /**
    * Bulk set name hints from Arena game objects. Efficient for large batches.
    * Only inserts grpIds not already in memory cache.
+   * Filters out numeric localization IDs (Arena sends name as int loc ID).
    */
   setNameHints(hints: Map<number, string>): void {
     if (!hints.size) return;
     const toInsert: Array<{ grpId: number; name: string }> = [];
 
     hints.forEach((name, grpId) => {
-      if (!name || this.memoryCache.has(grpId)) return;
+      if (!name || this.memoryCache.has(grpId) || this.isNumericName(name)) return;
       const card: ResolvedCard = {
         grpId,
         name,
@@ -182,6 +205,27 @@ export class GrpIdResolver {
         // Non-critical
       }
     }
+  }
+
+  /**
+   * Bulk pre-load card names into memory cache (no DB writes).
+   * Used to warm the resolver from the bundled arena_grp_ids.json at startup.
+   * Skips entries already in cache to preserve richer data from DB/Scryfall.
+   */
+  preloadCards(entries: Map<number, string>): void {
+    entries.forEach((name, grpId) => {
+      if (!name || this.memoryCache.has(grpId) || this.isNumericName(name)) return;
+      this.memoryCache.set(grpId, {
+        grpId,
+        name,
+        manaCost: null,
+        cmc: 0,
+        typeLine: null,
+        oracleText: null,
+        imageUriSmall: null,
+        imageUriNormal: null,
+      });
+    });
   }
 
   /** Number of entries in memory cache */

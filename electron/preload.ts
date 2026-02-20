@@ -62,12 +62,17 @@ contextBridge.exposeInMainWorld('electronAPI', {
     return () => ipcRenderer.removeAllListeners('intermission-start');
   },
 
-  // Overlay controls
-  toggleOverlay: (visible: boolean) => ipcRenderer.invoke('toggle-overlay', { visible }),
-  setOverlayOpacity: (opacity: number) => ipcRenderer.invoke('set-overlay-opacity', { opacity }),
+  onGameLogEntry: (callback: (entry: unknown) => void) => {
+    ipcRenderer.on('game-log-entry', (_event, entry) => callback(entry));
+    return () => ipcRenderer.removeAllListeners('game-log-entry');
+  },
+
+  // Game controls
   getMulliganAdvice: (data: unknown) => ipcRenderer.invoke('get-mulligan-advice', data),
   getSideboardGuide: (data: unknown) => ipcRenderer.invoke('get-sideboard-guide', data),
   getGameState: () => ipcRenderer.invoke('get-game-state'),
+  getGameLog: () => ipcRenderer.invoke('get-game-log'),
+  getLastMatchInfo: () => ipcRenderer.invoke('get-last-match-info'),
   resolveGrpIds: (grpIds: number[]) => ipcRenderer.invoke('resolve-grp-ids', grpIds),
 
   // Arena Card DB CDN Update

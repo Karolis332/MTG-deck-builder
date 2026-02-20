@@ -101,6 +101,8 @@ export interface ZoneChangeEvent {
   toZoneId: number;
   fromZoneType: string;
   toZoneType: string;
+  /** ZoneTransfer category: Draw, CastSpell, Resolve, PlayLand, Destroy, Exile, Discard, Sacrifice, Counter, Mill, etc. */
+  category?: string;
 }
 
 export interface LifeTotalChangeEvent {
@@ -120,6 +122,17 @@ export interface PhaseChangeEvent {
   phase: string;
   step: string;
   turnNumber: number;
+}
+
+export interface DamageDealtEvent {
+  type: 'damage_dealt';
+  sourceInstanceId: number;
+  sourceGrpId: number;
+  targetSeatId: number | null;
+  targetInstanceId: number | null;
+  targetGrpId: number | null;
+  amount: number;
+  isCombat: boolean;
 }
 
 export interface IntermissionEvent {
@@ -145,6 +158,7 @@ export type ArenaGameEvent =
   | LifeTotalChangeEvent
   | TurnChangeEvent
   | PhaseChangeEvent
+  | DamageDealtEvent
   | IntermissionEvent
   | MatchCompleteEvent;
 
@@ -564,7 +578,9 @@ export function extractGameEventsWithContext(
               visibility,
               cardTypes: go.cardTypes as string[] | undefined,
               subtypes: go.subtypes as string[] | undefined,
-              name: go.name as string | undefined,
+              // Arena's name field is often a numeric localization ID (e.g. 748691), not a card name.
+              // Only pass through actual string names, not numeric IDs.
+              name: typeof go.name === 'string' && isNaN(Number(go.name)) ? go.name : undefined,
             });
           }
 
@@ -683,6 +699,7 @@ export function extractGameEventsWithContext(
               toZoneId,
               fromZoneType,
               toZoneType,
+              category: category || undefined,
             });
 
             // Library → Hand = card drawn
@@ -729,25 +746,64 @@ export function extractGameEventsWithContext(
 
           // Step 3: Process ModifiedLife annotations for life total changes
           // (covers the 90% of diffs that don't have a players array)
+          // NOTE: The 'life' detail holds the DELTA (e.g. -2 for damage), NOT the absolute.
           for (const ann of annotations) {
             if (!hasAnnotationType(ann, 'ModifiedLife')) continue;
 
             const lifeDetail = getAnnotationDetail(ann, 'life');
             const seatDetail = getAnnotationDetail(ann, 'systemSeatId');
-            if (!lifeDetail?.valueInt32?.[0]) continue;
+            if (!lifeDetail || lifeDetail.valueInt32 == null || lifeDetail.valueInt32.length === 0) continue;
 
-            const lifeTotal = lifeDetail.valueInt32[0];
+            const lifeDelta = lifeDetail.valueInt32[0];
             // affectedIds[0] can hold the seatId, or use the detail
             const seatId = seatDetail?.valueInt32?.[0] ?? ann.affectedIds?.[0] ?? 0;
             if (!seatId) continue;
 
             const prevLife = ctx.lastLifeTotals.get(seatId);
+            // Compute absolute from delta. If we don't know the previous life, use 20 as fallback.
+            const lifeTotal = (prevLife ?? 20) + lifeDelta;
+
             if (prevLife === undefined || prevLife !== lifeTotal) {
               ctx.lastLifeTotals.set(seatId, lifeTotal);
               events.push({
                 type: 'life_total_change',
                 seatId,
                 lifeTotal,
+              });
+            }
+          }
+
+          // Step 4: Process DamageDealt annotations
+          for (const ann of annotations) {
+            if (!hasAnnotationType(ann, 'DamageDealt')) continue;
+
+            const dmgAmountDetail = getAnnotationDetail(ann, 'damage_amount');
+            const amount = dmgAmountDetail?.valueInt32?.[0] ?? 0;
+            if (amount <= 0) continue;
+
+            const sourceId = ann.affectorId ?? 0;
+            const targetIds = ann.affectedIds ?? [];
+            const sourceGrpId = sourceId ? resolveGrpId(ctx, sourceId) : 0;
+
+            // Check if combat damage
+            const isCombatDetail = getAnnotationDetail(ann, 'is_combat_damage');
+            const isCombat = isCombatDetail?.valueBool?.[0] ?? false;
+
+            for (const targetId of targetIds) {
+              // Target could be a player (seatId) or a creature (instanceId)
+              const targetGrpId = resolveGrpId(ctx, targetId);
+              // If targetGrpId resolves, it's a creature; otherwise check if it's a seat
+              const targetSeatId = targetGrpId === 0 ? targetId : null;
+
+              events.push({
+                type: 'damage_dealt',
+                sourceInstanceId: sourceId,
+                sourceGrpId,
+                targetSeatId: targetGrpId === 0 ? targetSeatId : null,
+                targetInstanceId: targetGrpId > 0 ? targetId : null,
+                targetGrpId: targetGrpId > 0 ? targetGrpId : null,
+                amount,
+                isCombat,
               });
             }
           }
@@ -788,7 +844,7 @@ export function extractGameEventsWithContext(
           const rawPlayers = (gsm.players ?? []) as Array<Record<string, unknown>>;
           const players: PlayerInfo[] = [];
           for (const p of rawPlayers) {
-            const seatId = p.systemSeatId as number ?? p.seatId as number;
+            const seatId = p.systemSeatNumber as number ?? p.systemSeatId as number ?? p.controllerSeatId as number ?? p.seatId as number;
             const lifeTotal = p.lifeTotal as number;
             if (seatId && lifeTotal !== undefined) {
               players.push({
@@ -799,7 +855,7 @@ export function extractGameEventsWithContext(
               });
 
               const prevLife = ctx.lastLifeTotals.get(seatId);
-              if (prevLife !== undefined && prevLife !== lifeTotal) {
+              if (prevLife === undefined || prevLife !== lifeTotal) {
                 events.push({
                   type: 'life_total_change',
                   seatId,

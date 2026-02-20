@@ -4,6 +4,8 @@ import {
   updateMatchTelemetry,
   getMatchTimeline,
   getMatchTelemetrySummary,
+  getCardsByNames,
+  resolveGrpIdsToCards,
 } from '@/lib/db';
 
 /**
@@ -58,10 +60,51 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ summary: summary ?? null });
     }
 
-    const actions = getMatchTimeline(matchId);
+    const actions = getMatchTimeline(matchId) as Array<Record<string, unknown>>;
     const summary = getMatchTelemetrySummary(matchId);
 
-    return NextResponse.json({ actions, summary: summary ?? null });
+    // Collect all unique card names and grpIds from actions for image resolution
+    const cardNames = new Set<string>();
+    const grpIds = new Set<number>();
+    for (const a of actions) {
+      if (a.card_name && typeof a.card_name === 'string') cardNames.add(a.card_name);
+      if (a.grp_id && typeof a.grp_id === 'number') grpIds.add(a.grp_id);
+    }
+
+    // Also resolve opening_hand grpIds from summary
+    const summaryObj = summary as Record<string, unknown> | null;
+    if (summaryObj?.opening_hand) {
+      try {
+        const hand = typeof summaryObj.opening_hand === 'string'
+          ? JSON.parse(summaryObj.opening_hand) as number[]
+          : summaryObj.opening_hand as number[];
+        for (const grpId of hand) {
+          if (typeof grpId === 'number') grpIds.add(grpId);
+        }
+      } catch { /* ignore */ }
+    }
+
+    // Batch resolve to image URIs
+    const cardImageMap: Record<string, { image_uri_small: string | null; image_uri_normal: string | null }> = {};
+
+    if (cardNames.size > 0) {
+      const nameResults = getCardsByNames(Array.from(cardNames));
+      nameResults.forEach((val, key) => { cardImageMap[key] = val; });
+    }
+
+    const grpIdImageMap: Record<number, { card_name: string; image_uri_small: string | null; image_uri_normal: string | null }> = {};
+    if (grpIds.size > 0) {
+      const grpResults = resolveGrpIdsToCards(Array.from(grpIds));
+      grpResults.forEach((val, key) => {
+        grpIdImageMap[key] = val;
+        // Also add to card name map if not already present
+        if (!cardImageMap[val.card_name]) {
+          cardImageMap[val.card_name] = { image_uri_small: val.image_uri_small, image_uri_normal: val.image_uri_normal };
+        }
+      });
+    }
+
+    return NextResponse.json({ actions, summary: summary ?? null, cards: cardImageMap, grpIdCards: grpIdImageMap });
   } catch (err) {
     return NextResponse.json(
       { error: String(err) },

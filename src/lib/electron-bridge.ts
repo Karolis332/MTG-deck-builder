@@ -7,6 +7,12 @@ import type { GameStateSnapshot } from './game-state-engine';
 import type { MulliganAdvice } from './mulligan-advisor';
 import type { SideboardPlan } from './sideboard-guide';
 
+export interface GameLogEntry {
+  type: 'system' | 'turn' | 'phase' | 'action' | 'life' | 'damage' | 'result';
+  text: string;
+  player?: 'self' | 'opponent' | null;
+}
+
 export interface ElectronAPI {
   selectArenaLogPath: () => Promise<string | null>;
   readArenaLog: (filePath: string) => Promise<string>;
@@ -40,10 +46,9 @@ export interface ElectronAPI {
   onMatchEnded: (callback: (data: { matchId: string; result: string }) => void) => () => void;
   onMulliganPrompt: (callback: (data: { hand: number[]; mulliganCount: number; seatId: number }) => void) => () => void;
   onIntermissionStart: (callback: (data: { matchId: string | null; gameNumber: number; opponentCardsSeen: number[] }) => void) => () => void;
+  onGameLogEntry: (callback: (entry: GameLogEntry) => void) => () => void;
 
-  // Overlay controls
-  toggleOverlay: (visible: boolean) => Promise<void>;
-  setOverlayOpacity: (opacity: number) => Promise<void>;
+  // Game controls
   getMulliganAdvice: (data: {
     hand: number[];
     deckList: Array<{ grpId: number; qty: number }>;
@@ -54,6 +59,14 @@ export interface ElectronAPI {
   }) => Promise<MulliganAdvice>;
   getSideboardGuide: (data: { deckId: number }) => Promise<{ guides?: SideboardPlan[]; error?: string }>;
   getGameState: () => Promise<GameStateSnapshot | null>;
+  getGameLog: () => Promise<GameLogEntry[]>;
+  getLastMatchInfo: () => Promise<{
+    matchId: string;
+    format: string | null;
+    playerName: string | null;
+    opponentName: string | null;
+    result?: string;
+  } | null>;
   resolveGrpIds: (grpIds: number[]) => Promise<Record<number, unknown>>;
 
   // Arena Card DB CDN Update

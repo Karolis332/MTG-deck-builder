@@ -190,6 +190,50 @@ describe('extractGameEvents', () => {
     expect(playerLifeChange).toBeDefined();
   });
 
+  it('should extract life_total_change from systemSeatNumber (real Arena format)', () => {
+    const blocks: JsonBlock[] = [
+      ['standalone', {
+        greToClientEvent: {
+          greToClientMessages: [{
+            gameStateMessage: {
+              players: [
+                { systemSeatNumber: 1, lifeTotal: 20, controllerSeatId: 1, startingLifeTotal: 20 },
+                { systemSeatNumber: 2, lifeTotal: 20, controllerSeatId: 2, startingLifeTotal: 20 },
+              ],
+              gameObjects: [],
+            },
+          }],
+        },
+      }],
+      ['standalone', {
+        greToClientEvent: {
+          greToClientMessages: [{
+            gameStateMessage: {
+              players: [
+                { systemSeatNumber: 1, lifeTotal: 15, controllerSeatId: 1 },
+                { systemSeatNumber: 2, lifeTotal: 18, controllerSeatId: 2 },
+              ],
+              gameObjects: [],
+            },
+          }],
+        },
+      }],
+    ];
+
+    const events = extractGameEvents(blocks);
+    const lifeChanges = events.filter(e => e.type === 'life_total_change');
+
+    // Should find life changes for both seats using systemSeatNumber
+    const seat1Change = lifeChanges.find(
+      e => e.type === 'life_total_change' && e.seatId === 1 && e.lifeTotal === 15
+    );
+    const seat2Change = lifeChanges.find(
+      e => e.type === 'life_total_change' && e.seatId === 2 && e.lifeTotal === 18
+    );
+    expect(seat1Change).toBeDefined();
+    expect(seat2Change).toBeDefined();
+  });
+
   it('should extract zone_change and card_drawn events', () => {
     const blocks: JsonBlock[] = [
       // Set up zones and register game object
@@ -806,5 +850,133 @@ describe('extractGameEvents', () => {
     expect(ctx.lastStats.zoneTransfers).toBe(1);
     expect(ctx.lastStats.grpIdHits).toBe(1);
     expect(ctx.lastStats.grpIdMisses).toBe(0);
+  });
+
+  it('should include category on zone_change events from ZoneTransfer annotations', () => {
+    const blocks: JsonBlock[] = [
+      // Set up zones and objects
+      ['standalone', {
+        greToClientEvent: {
+          greToClientMessages: [{
+            gameStateMessage: {
+              zones: [
+                { zoneId: 1, type: ZONE_TYPES.BATTLEFIELD, ownerSeatId: 1 },
+                { zoneId: 2, type: ZONE_TYPES.GRAVEYARD, ownerSeatId: 1 },
+              ],
+              gameObjects: [
+                { instanceId: 800, grpId: 11111, ownerSeatId: 1, zoneId: 1 },
+              ],
+            },
+          }],
+        },
+      }],
+      // Destroy via annotation
+      ['standalone', {
+        greToClientEvent: {
+          greToClientMessages: [{
+            gameStateMessage: {
+              annotations: [{
+                id: 60,
+                affectedIds: [800],
+                type: ['AnnotationType_ZoneTransfer'],
+                details: [
+                  { key: 'zone_src', valueInt32: [1] },
+                  { key: 'zone_dest', valueInt32: [2] },
+                  { key: 'category', valueString: ['Destroy'] },
+                ],
+              }],
+            },
+          }],
+        },
+      }],
+    ];
+
+    const events = extractGameEvents(blocks);
+    const zoneChange = events.find(e => e.type === 'zone_change');
+
+    expect(zoneChange).toBeDefined();
+    if (zoneChange?.type === 'zone_change') {
+      expect(zoneChange.category).toBe('Destroy');
+      expect(zoneChange.grpId).toBe(11111);
+      expect(zoneChange.fromZoneType).toBe(ZONE_TYPES.BATTLEFIELD);
+      expect(zoneChange.toZoneType).toBe(ZONE_TYPES.GRAVEYARD);
+    }
+  });
+
+  it('should extract damage_dealt events from DamageDealt annotations', () => {
+    const blocks: JsonBlock[] = [
+      // Set up creature
+      ['standalone', {
+        greToClientEvent: {
+          greToClientMessages: [{
+            gameStateMessage: {
+              zones: [
+                { zoneId: 1, type: ZONE_TYPES.BATTLEFIELD, ownerSeatId: 1 },
+              ],
+              gameObjects: [
+                { instanceId: 900, grpId: 22222, ownerSeatId: 1, zoneId: 1 },
+              ],
+            },
+          }],
+        },
+      }],
+      // Damage annotation: creature deals 3 to seat 2
+      ['standalone', {
+        greToClientEvent: {
+          greToClientMessages: [{
+            gameStateMessage: {
+              annotations: [{
+                id: 70,
+                affectorId: 900,
+                affectedIds: [2],
+                type: ['AnnotationType_DamageDealt'],
+                details: [
+                  { key: 'damage_amount', valueInt32: [3] },
+                ],
+              }],
+            },
+          }],
+        },
+      }],
+    ];
+
+    const events = extractGameEvents(blocks);
+    const dmg = events.find(e => e.type === 'damage_dealt');
+
+    expect(dmg).toBeDefined();
+    if (dmg?.type === 'damage_dealt') {
+      expect(dmg.sourceGrpId).toBe(22222);
+      expect(dmg.amount).toBe(3);
+      expect(dmg.targetSeatId).toBe(2);
+    }
+  });
+
+  it('should not emit damage_dealt for zero or negative amounts', () => {
+    const blocks: JsonBlock[] = [
+      ['standalone', {
+        greToClientEvent: {
+          greToClientMessages: [{
+            gameStateMessage: {
+              gameObjects: [
+                { instanceId: 950, grpId: 33333, ownerSeatId: 1, zoneId: 1 },
+              ],
+              annotations: [{
+                id: 80,
+                affectorId: 950,
+                affectedIds: [2],
+                type: ['AnnotationType_DamageDealt'],
+                details: [
+                  { key: 'damage_amount', valueInt32: [0] },
+                ],
+              }],
+            },
+          }],
+        },
+      }],
+    ];
+
+    const events = extractGameEvents(blocks);
+    const dmg = events.filter(e => e.type === 'damage_dealt');
+    expect(dmg).toHaveLength(0);
   });
 });

@@ -900,3 +900,119 @@ export function getMatchTelemetrySummary(matchId: string) {
     `)
     .get(matchId);
 }
+
+/**
+ * Bulk-lookup cards by name. Returns a map of name → { image_uri_small, image_uri_normal }.
+ */
+export function getCardsByNames(names: string[]): Map<string, { image_uri_small: string | null; image_uri_normal: string | null }> {
+  const db = getDb();
+  const result = new Map<string, { image_uri_small: string | null; image_uri_normal: string | null }>();
+  if (names.length === 0) return result;
+
+  const stmt = db.prepare('SELECT name, image_uri_small, image_uri_normal FROM cards WHERE name = ? COLLATE NOCASE');
+  for (const name of names) {
+    const row = stmt.get(name) as { name: string; image_uri_small: string | null; image_uri_normal: string | null } | undefined;
+    if (row) {
+      result.set(row.name, { image_uri_small: row.image_uri_small, image_uri_normal: row.image_uri_normal });
+    }
+  }
+  return result;
+}
+
+/**
+ * Bulk-resolve grpIds to card data via grp_id_cache joined with cards table.
+ */
+export function resolveGrpIdsToCards(grpIds: number[]): Map<number, { card_name: string; image_uri_small: string | null; image_uri_normal: string | null }> {
+  const db = getDb();
+  const result = new Map<number, { card_name: string; image_uri_small: string | null; image_uri_normal: string | null }>();
+  if (grpIds.length === 0) return result;
+
+  const stmt = db.prepare(`
+    SELECT gc.grp_id, gc.card_name, c.image_uri_small, c.image_uri_normal
+    FROM grp_id_cache gc
+    LEFT JOIN cards c ON c.name = gc.card_name COLLATE NOCASE
+    WHERE gc.grp_id = ?
+  `);
+  for (const grpId of grpIds) {
+    const row = stmt.get(grpId) as { grp_id: number; card_name: string; image_uri_small: string | null; image_uri_normal: string | null } | undefined;
+    // Skip entries where card_name is a numeric localization ID (stale data)
+    if (row && !/^\d+$/.test(row.card_name)) {
+      result.set(grpId, { card_name: row.card_name, image_uri_small: row.image_uri_small, image_uri_normal: row.image_uri_normal });
+    }
+  }
+  return result;
+}
+
+/**
+ * Auto-link unlinked arena matches using cards_played (resolved card names).
+ * Fallback for matches where deck_cards is NULL (95% of matches).
+ */
+export function autoLinkByCardsPlayed(): { linked: number; total: number } {
+  const db = getDb();
+  const unlinked = db.prepare(
+    "SELECT id, match_id, cards_played, format FROM arena_parsed_matches WHERE deck_id IS NULL AND cards_played IS NOT NULL AND cards_played != '[]' AND cards_played != ''"
+  ).all() as Array<{ id: number; match_id: string; cards_played: string; format: string | null }>;
+
+  // Get all decks with their card names
+  const decks = db.prepare('SELECT id, name, format FROM decks').all() as Array<{ id: number; name: string; format: string | null }>;
+  if (decks.length === 0) return { linked: 0, total: unlinked.length };
+
+  const stmtDeckCards = db.prepare(`
+    SELECT c.name FROM deck_cards dc
+    JOIN cards c ON dc.card_id = c.id
+    WHERE dc.deck_id = ? AND dc.board IN ('main', 'sideboard', 'commander', 'companion')
+  `);
+
+  // Pre-load deck card name sets
+  const deckCardSets = new Map<number, { name: string; format: string | null; cardNames: Set<string> }>();
+  for (const deck of decks) {
+    const cards = stmtDeckCards.all(deck.id) as Array<{ name: string }>;
+    deckCardSets.set(deck.id, {
+      name: deck.name,
+      format: deck.format,
+      cardNames: new Set(cards.map(c => c.name)),
+    });
+  }
+
+  let linked = 0;
+  for (const match of unlinked) {
+    try {
+      const cardsPlayed = JSON.parse(match.cards_played) as string[];
+      if (!Array.isArray(cardsPlayed) || cardsPlayed.length === 0) continue;
+
+      // Deduplicate and filter out raw grpId numbers
+      const uniquePlayed = new Set(cardsPlayed.filter(c => typeof c === 'string' && isNaN(Number(c))));
+      if (uniquePlayed.size < 3) continue; // need at least 3 named cards
+
+      let bestDeckId = -1;
+      let bestDeckName = '';
+      let bestConfidence = 0;
+
+      deckCardSets.forEach((deckInfo, dId) => {
+        // Optional format filter
+        if (match.format && deckInfo.format && match.format !== deckInfo.format) return;
+
+        let matching = 0;
+        uniquePlayed.forEach(cardName => {
+          if (deckInfo.cardNames.has(cardName)) matching++;
+        });
+
+        const confidence = matching / uniquePlayed.size;
+        if (matching >= 8 && confidence >= 0.60 && confidence > bestConfidence) {
+          bestDeckId = dId;
+          bestDeckName = deckInfo.name;
+          bestConfidence = confidence;
+        }
+      });
+
+      if (bestDeckId >= 0) {
+        linkArenaMatchToDeck(match.match_id, bestDeckId, bestConfidence);
+        linked++;
+      }
+    } catch {
+      // skip invalid JSON
+    }
+  }
+
+  return { linked, total: unlinked.length };
+}

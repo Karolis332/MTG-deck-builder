@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useCallback } from 'react';
 import Link from 'next/link';
+import { MatchDetailModal } from '@/components/match-detail-modal';
 
 interface ArenaMatch {
   id: number;
@@ -30,6 +31,7 @@ export default function MatchLinkingPage() {
   const [error, setError] = useState('');
   const [filter, setFilter] = useState<'all' | 'unlinked' | 'linked'>('all');
   const [autoLinkResult, setAutoLinkResult] = useState<string | null>(null);
+  const [selectedMatchId, setSelectedMatchId] = useState<string | null>(null);
 
   const fetchData = useCallback(async () => {
     try {
@@ -177,7 +179,8 @@ export default function MatchLinkingPage() {
         {filteredMatches.map((match) => (
           <div
             key={match.id}
-            className="flex items-center gap-4 rounded-xl border border-border bg-card p-3"
+            className="flex cursor-pointer items-center gap-4 rounded-xl border border-border bg-card p-3 transition-colors hover:border-primary/30 hover:bg-accent/20"
+            onClick={() => setSelectedMatchId(match.match_id)}
           >
             {/* Result badge */}
             <div
@@ -215,7 +218,7 @@ export default function MatchLinkingPage() {
             </div>
 
             {/* Deck link */}
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2" onClick={(e) => e.stopPropagation()}>
               {match.deck_id ? (
                 <>
                   <div className="text-right">
@@ -260,6 +263,14 @@ export default function MatchLinkingPage() {
           </div>
         ))}
       </div>
+
+      {/* Match Detail Modal */}
+      {selectedMatchId && (
+        <MatchDetailModal
+          matchId={selectedMatchId}
+          onClose={() => setSelectedMatchId(null)}
+        />
+      )}
     </div>
   );
 }

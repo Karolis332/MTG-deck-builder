@@ -6,17 +6,26 @@ import {
   matchArenaDeckToSavedDeck,
   linkArenaMatchToDeck,
   autoLinkArenaMatches,
+  autoLinkByCardsPlayed,
   getUnlinkedArenaMatches,
+  getCardsByNames,
 } from '@/lib/db';
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
 
-    // Handle bulk auto-link request
+    // Handle bulk auto-link request — two passes: deck_cards first, then cards_played for remaining
     if (body.action === 'auto-link') {
-      const result = autoLinkArenaMatches();
-      return NextResponse.json({ ok: true, ...result });
+      const pass1 = autoLinkArenaMatches();
+      const pass2 = autoLinkByCardsPlayed();
+      return NextResponse.json({
+        ok: true,
+        linked: pass1.linked + pass2.linked,
+        total: pass1.total + pass2.total,
+        byDeckCards: pass1.linked,
+        byCardsPlayed: pass2.linked,
+      });
     }
 
     // Handle manual link request
@@ -130,7 +139,32 @@ export async function POST(request: NextRequest) {
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
+    const matchId = searchParams.get('match_id');
     const unlinkedOnly = searchParams.get('unlinked') === 'true';
+
+    // Single match detail with resolved card images
+    if (matchId) {
+      const allMatches = getArenaParsedMatches(200) as Array<Record<string, unknown>>;
+      const match = allMatches.find(m => m.match_id === matchId);
+      if (!match) {
+        return NextResponse.json({ error: 'Match not found' }, { status: 404 });
+      }
+
+      // Resolve cards_played names to images
+      let cardsPlayedImages: Record<string, { image_uri_small: string | null; image_uri_normal: string | null }> = {};
+      if (match.cards_played) {
+        try {
+          const played = JSON.parse(match.cards_played as string) as string[];
+          const names = played.filter(n => typeof n === 'string' && isNaN(Number(n)));
+          if (names.length > 0) {
+            const imageMap = getCardsByNames(names);
+            imageMap.forEach((val, key) => { cardsPlayedImages[key] = val; });
+          }
+        } catch { /* ignore */ }
+      }
+
+      return NextResponse.json({ match, cards: cardsPlayedImages });
+    }
 
     if (unlinkedOnly) {
       const matches = getUnlinkedArenaMatches(100);

@@ -11,6 +11,7 @@ import { GrpIdResolver } from '../src/lib/grp-id-resolver';
 import { analyzeMulligan } from '../src/lib/mulligan-advisor';
 import type { GameStateSnapshot, ResolvedCard } from '../src/lib/game-state-engine';
 import type { TelemetryFlushData } from '../src/lib/match-telemetry';
+import type { GameLogEntry } from './arena-log-watcher';
 
 let watcher: ArenaLogWatcher | null = null;
 let mlProcess: ChildProcess | null = null;
@@ -152,13 +153,20 @@ function postToApi(route: string, body: unknown): void {
       },
     },
     (res) => {
-      // Consume response to free memory
-      res.resume();
+      if (res.statusCode && res.statusCode >= 400) {
+        let body = '';
+        res.on('data', (chunk: Buffer) => { body += chunk.toString(); });
+        res.on('end', () => {
+          console.error(`[postToApi] ${route} returned ${res.statusCode}: ${body.slice(0, 200)}`);
+        });
+      } else {
+        res.resume();
+      }
     }
   );
 
   req.on('error', (err) => {
-    console.error(`Failed to POST to ${route}:`, err.message);
+    console.error(`[postToApi] Failed POST ${route} to port ${port}: ${err.message}`);
   });
 
   req.write(data);
@@ -174,23 +182,62 @@ function broadcast(channel: string, ...args: unknown[]): void {
   });
 }
 
+/** Pre-load resolver memory cache from bundled arena_grp_ids.json */
+function warmResolverFromJson(res: GrpIdResolver): void {
+  const candidates = [
+    process.resourcesPath ? path.join(process.resourcesPath, 'arena_grp_ids.json') : '',
+    path.resolve(__dirname, '..', 'data', 'arena_grp_ids.json'),
+  ].filter(Boolean);
+
+  for (const p of candidates) {
+    if (fs.existsSync(p)) {
+      try {
+        const data = JSON.parse(fs.readFileSync(p, 'utf-8'));
+        if (data.cards) {
+          const entries = new Map<number, string>();
+          for (const [grpId, name] of Object.entries(data.cards)) {
+            entries.set(parseInt(grpId, 10), name as string);
+          }
+          res.preloadCards(entries);
+          traceLog(`warmResolverFromJson: loaded ${entries.size} cards from ${path.basename(p)}`);
+        }
+      } catch (err) {
+        traceLog(`warmResolverFromJson: error: ${err}`);
+      }
+      break;
+    }
+  }
+}
+
 /** Get or create GrpIdResolver with DB */
 function getResolver(): GrpIdResolver {
   if (!resolver) {
     resolver = new GrpIdResolver();
-    // Try to set DB — will be available after Next.js server starts
+
+    // Pre-warm from bundled JSON first (instant, no DB dependency)
+    warmResolverFromJson(resolver);
+
+    // Then connect DB for richer lookups (Scryfall data, images, etc.)
     try {
-      const dbPath = process.env.MTG_DB_DIR
-        ? path.join(process.env.MTG_DB_DIR, 'mtg-deck-builder.db')
-        : path.join(process.cwd(), 'data', 'mtg-deck-builder.db');
+      const isDev = !app.isPackaged;
+      let dbPath: string;
+      if (process.env.MTG_DB_DIR) {
+        dbPath = path.join(process.env.MTG_DB_DIR, 'mtg-deck-builder.db');
+      } else if (isDev) {
+        dbPath = path.join(path.resolve(__dirname, '..'), 'data', 'mtg-deck-builder.db');
+      } else {
+        dbPath = path.join(app.getPath('userData'), 'data', 'mtg-deck-builder.db');
+      }
+      traceLog(`getResolver: dbPath=${dbPath}, exists=${fs.existsSync(dbPath)}`);
       if (fs.existsSync(dbPath)) {
         // eslint-disable-next-line @typescript-eslint/no-require-imports
         const Database = require('better-sqlite3');
         const db = new Database(dbPath, { readonly: false });
         resolver.setDb(db);
+        traceLog(`getResolver: DB connected, cache size=${resolver.cacheSize}`);
       }
-    } catch {
-      // DB not available yet — resolver will use API fallback
+    } catch (err) {
+      traceLog(`getResolver: DB connection failed: ${err}`);
     }
   }
   return resolver;
@@ -249,6 +296,10 @@ function startWatcherInternal(logPath: string, catchUp = false): { ok: boolean; 
 
     watcher.on('intermission', (data: { matchId: string | null; gameNumber: number; opponentCardsSeen: number[] }) => {
       broadcast('intermission-start', data);
+    });
+
+    watcher.on('game-log', (entry: GameLogEntry) => {
+      broadcast('game-log-entry', entry);
     });
 
     // ── Telemetry persistence ───────────────────────────────────────────────
@@ -390,8 +441,24 @@ export async function checkArenaCardDbUpdate(): Promise<{ updated: boolean; vers
       )
     `);
 
+    // Clean stale numeric localization ID entries first
+    try {
+      const cleaned = db.prepare(
+        `DELETE FROM grp_id_cache WHERE source = 'arena_gameobject'
+         AND card_name GLOB '[0-9]*' AND card_name NOT GLOB '*[^0-9]*'`
+      ).run();
+      if (cleaned.changes > 0) {
+        traceLog(`checkArenaCardDbUpdate: cleaned ${cleaned.changes} stale loc ID entries`);
+      }
+    } catch { /* ignore */ }
+
     const insert = db.prepare(
-      `INSERT OR IGNORE INTO grp_id_cache (grp_id, card_name, source) VALUES (?, ?, 'arena_cdn')`
+      `INSERT INTO grp_id_cache (grp_id, card_name, source) VALUES (?, ?, 'arena_cdn')
+       ON CONFLICT(grp_id) DO UPDATE SET
+         card_name = excluded.card_name,
+         source = excluded.source
+       WHERE source IN ('arena_gameobject', 'arena_cdn')
+         OR card_name GLOB '[0-9]*'`
     );
 
     const bulkInsert = db.transaction(() => {
@@ -489,16 +556,7 @@ export function registerIpcHandlers(): void {
     return watcher.getStatus();
   });
 
-  // ── Overlay controls ────────────────────────────────────────────────────
-
-  ipcMain.handle('toggle-overlay', (_event, { visible }: { visible: boolean }) => {
-    // Handled in main.ts via the overlayWindow reference
-    broadcast('overlay-toggle', visible);
-  });
-
-  ipcMain.handle('set-overlay-opacity', (_event, { opacity }: { opacity: number }) => {
-    broadcast('overlay-opacity', opacity);
-  });
+  // ── Game controls ──────────────────────────────────────────────────────
 
   ipcMain.handle('get-mulligan-advice', async (_event, data: {
     hand: number[];
@@ -579,6 +637,14 @@ export function registerIpcHandlers(): void {
 
   ipcMain.handle('get-game-state', () => {
     return watcher?.getGameState() ?? null;
+  });
+
+  ipcMain.handle('get-game-log', () => {
+    return watcher?.getLogHistory() ?? [];
+  });
+
+  ipcMain.handle('get-last-match-info', () => {
+    return watcher?.getLastMatchInfo() ?? null;
   });
 
   ipcMain.handle('resolve-grp-ids', async (_event, grpIds: number[]) => {

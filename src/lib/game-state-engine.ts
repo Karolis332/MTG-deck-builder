@@ -167,6 +167,9 @@ export class GameStateEngine {
       case 'phase_change':
         this.handlePhaseChange(event);
         break;
+      case 'damage_dealt':
+        // Damage events are informational — life changes handled by life_total_change
+        break;
       case 'intermission':
         this.handleIntermission(event);
         break;
@@ -274,8 +277,10 @@ export class GameStateEngine {
       this.objectGrpIds.set(go.instanceId, go.grpId);
       this.objectOwners.set(go.instanceId, go.ownerSeatId);
       this.objectZones.set(go.instanceId, go.zoneId);
-      // Track grpId → name from game objects (Arena provides card names inline)
-      if (go.name && go.grpId) {
+      // Track grpId → name from game objects (Arena sometimes provides card names inline).
+      // IMPORTANT: Arena's `name` field is often a numeric localization ID (e.g. 748691),
+      // not an actual card name string. Only store actual string names.
+      if (go.name && go.grpId && typeof go.name === 'string' && isNaN(Number(go.name))) {
         this.objectNames.set(go.grpId, go.name);
       }
     }
@@ -300,16 +305,10 @@ export class GameStateEngine {
       if (event.turnInfo.step) this.state.step = event.turnInfo.step;
     }
 
-    // Update life totals
-    if (event.players) {
-      for (const p of event.players) {
-        if (p.seatId === this.state.playerSeatId) {
-          this.state.playerLife = p.lifeTotal;
-        } else {
-          this.state.opponentLife = p.lifeTotal;
-        }
-      }
-    }
+    // Life totals are handled by life_total_change events (from both ModifiedLife
+    // annotations and the players array in extractGameEvents). Don't double-write
+    // here — the game_state_update's players array can contain stale values that
+    // overwrite correct values already set by handleLifeChange().
   }
 
   private handleMulliganPrompt(event: Extract<ArenaGameEvent, { type: 'mulligan_prompt' }>): void {

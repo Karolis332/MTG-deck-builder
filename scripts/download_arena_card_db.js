@@ -255,6 +255,28 @@ async function downloadArenaCardDb(outputPath) {
     }
   }
 
+  // Include AltToBasePrintings — maps alternate art grpIds to base card grpIds
+  // so alternate art versions also resolve to card names
+  try {
+    const altRows = db.prepare(`
+      SELECT a.AltGrpId, c.GrpId AS BaseGrpId
+      FROM AltToBasePrintings a
+      JOIN Cards c ON a.BaseGrpId = c.GrpId
+    `).all();
+    let altAdded = 0;
+    for (const row of altRows) {
+      if (!cards[row.AltGrpId] && cards[row.BaseGrpId]) {
+        cards[row.AltGrpId] = cards[row.BaseGrpId];
+        altAdded++;
+      }
+    }
+    if (altAdded > 0) {
+      console.log(`[Arena CDN]   Added ${altAdded} alt-art grpId mappings`);
+    }
+  } catch {
+    // AltToBasePrintings table may not exist in older CDN versions
+  }
+
   db.close();
 
   // Clean up temp file
@@ -301,4 +323,4 @@ if (require.main === module) {
 }
 
 // Export for programmatic use (from ipc-handlers)
-module.exports = { downloadArenaCardDb, fetchText, parseVersionResponse, VERSION_URL };
+module.exports = { downloadArenaCardDb, fetchText, fetchBuffer, gunzipBuffer, parseVersionResponse, VERSION_URL };
