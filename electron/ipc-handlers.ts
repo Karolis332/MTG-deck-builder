@@ -13,6 +13,13 @@ import type { GameStateSnapshot, ResolvedCard } from '../src/lib/game-state-engi
 import type { TelemetryFlushData } from '../src/lib/match-telemetry';
 import type { GameLogEntry } from './arena-log-watcher';
 
+/**
+ * In dev mode, __dirname is electron-dist/electron/ (2 levels deep from project root).
+ * In production, __dirname is also electron-dist/electron/ inside asar.
+ * This resolves to the project root for dev-mode file lookups.
+ */
+const DEV_PROJECT_ROOT = path.resolve(__dirname, '..', '..');
+
 let watcher: ArenaLogWatcher | null = null;
 let mlProcess: ChildProcess | null = null;
 let resolver: GrpIdResolver | null = null;
@@ -186,7 +193,7 @@ function broadcast(channel: string, ...args: unknown[]): void {
 function warmResolverFromJson(res: GrpIdResolver): void {
   const candidates = [
     process.resourcesPath ? path.join(process.resourcesPath, 'arena_grp_ids.json') : '',
-    path.resolve(__dirname, '..', 'data', 'arena_grp_ids.json'),
+    path.join(DEV_PROJECT_ROOT, 'data', 'arena_grp_ids.json'),
   ].filter(Boolean);
 
   for (const p of candidates) {
@@ -224,7 +231,7 @@ function getResolver(): GrpIdResolver {
       if (process.env.MTG_DB_DIR) {
         dbPath = path.join(process.env.MTG_DB_DIR, 'mtg-deck-builder.db');
       } else if (isDev) {
-        dbPath = path.join(path.resolve(__dirname, '..'), 'data', 'mtg-deck-builder.db');
+        dbPath = path.join(DEV_PROJECT_ROOT, 'data', 'mtg-deck-builder.db');
       } else {
         dbPath = path.join(app.getPath('userData'), 'data', 'mtg-deck-builder.db');
       }
@@ -299,7 +306,13 @@ function startWatcherInternal(logPath: string, catchUp = false): { ok: boolean; 
     });
 
     watcher.on('game-log', (entry: GameLogEntry) => {
+      traceLog(`broadcast game-log-entry: type=${entry.type} text="${entry.text.slice(0, 60)}"`);
       broadcast('game-log-entry', entry);
+    });
+
+    watcher.on('game-log-update', (entry: GameLogEntry) => {
+      traceLog(`broadcast game-log-update: text="${entry.text.slice(0, 60)}"`);
+      broadcast('game-log-update', entry);
     });
 
     // ── Telemetry persistence ───────────────────────────────────────────────
@@ -479,7 +492,7 @@ export async function checkArenaCardDbUpdate(): Promise<{ updated: boolean; vers
     // Also update the bundled file if in dev mode
     const isDev = !app.isPackaged;
     if (isDev) {
-      const devOutput = path.join(path.resolve(__dirname, '..'), 'data', 'arena_grp_ids.json');
+      const devOutput = path.join(DEV_PROJECT_ROOT, 'data', 'arena_grp_ids.json');
       try {
         fs.copyFileSync(tmpOutput, devOutput);
         traceLog(`checkArenaCardDbUpdate: updated dev file at ${devOutput}`);
@@ -636,11 +649,15 @@ export function registerIpcHandlers(): void {
   });
 
   ipcMain.handle('get-game-state', () => {
-    return watcher?.getGameState() ?? null;
+    const state = watcher?.getGameState() ?? null;
+    traceLog(`get-game-state: returning ${state ? 'snapshot' : 'null'}, isActive=${state?.isActive}`);
+    return state;
   });
 
   ipcMain.handle('get-game-log', () => {
-    return watcher?.getLogHistory() ?? [];
+    const entries = watcher?.getLogHistory() ?? [];
+    traceLog(`get-game-log: returning ${entries.length} entries`);
+    return entries;
   });
 
   ipcMain.handle('get-last-match-info', () => {
@@ -673,10 +690,10 @@ export function registerIpcHandlers(): void {
       if (!pythonCmd) return { ok: false, error: 'Python not found' };
 
       const isDev = !app.isPackaged;
-      const projectDir = isDev ? path.resolve(__dirname, '..') : process.resourcesPath;
+      const projectDir = isDev ? DEV_PROJECT_ROOT : process.resourcesPath;
       const scriptPath = path.join(projectDir, 'scripts', 'import_mtga_cards.py');
       const dbPath = isDev
-        ? path.join(path.resolve(__dirname, '..'), 'data', 'mtg-deck-builder.db')
+        ? path.join(DEV_PROJECT_ROOT, 'data', 'mtg-deck-builder.db')
         : path.join(app.getPath('userData'), 'data', 'mtg-deck-builder.db');
 
       if (!fs.existsSync(scriptPath)) {
@@ -687,7 +704,7 @@ export function registerIpcHandlers(): void {
       if (mtgaPath) args.push('--mtga-path', mtgaPath);
 
       const result = execSync(`${pythonCmd} ${args.map(a => `"${a}"`).join(' ')}`, {
-        cwd: isDev ? path.resolve(__dirname, '..') : app.getPath('userData'),
+        cwd: isDev ? DEV_PROJECT_ROOT : app.getPath('userData'),
         timeout: 60000,
         encoding: 'utf-8',
       });
@@ -745,11 +762,11 @@ export function registerIpcHandlers(): void {
       // In dev, both live under the project root.
       const isDev = !app.isPackaged;
       const projectDir = isDev
-        ? path.resolve(__dirname, '..')
+        ? DEV_PROJECT_ROOT
         : process.resourcesPath;
       const scriptPath = path.join(projectDir, 'scripts', 'pipeline.py');
       const dbPath = isDev
-        ? path.join(path.resolve(__dirname, '..'), 'data', 'mtg-deck-builder.db')
+        ? path.join(DEV_PROJECT_ROOT, 'data', 'mtg-deck-builder.db')
         : path.join(app.getPath('userData'), 'data', 'mtg-deck-builder.db');
 
       if (!fs.existsSync(scriptPath)) {
@@ -778,7 +795,7 @@ export function registerIpcHandlers(): void {
       broadcastPipeline({ type: 'info', line: `$ ${pythonCmd} scripts/pipeline.py ${args.slice(1).join(' ')}` });
 
       const child = spawn(pythonCmd, args, {
-        cwd: isDev ? path.resolve(__dirname, '..') : app.getPath('userData'),
+        cwd: isDev ? DEV_PROJECT_ROOT : app.getPath('userData'),
         stdio: ['ignore', 'pipe', 'pipe'],
       });
 

@@ -64,6 +64,8 @@ export interface ArchetypeTemplate {
   winConditionSlots: [number, number];
   synergyMinimums: Record<string, number>;
   protectedPatterns: string[];
+  /** Card types that are anti-synergy for this archetype (e.g. Equipment in spellslinger) */
+  discouragedTypes?: string[];
 }
 
 export interface ColorAdjustment {
@@ -275,6 +277,7 @@ export const ARCHETYPE_TEMPLATES: Record<Archetype, ArchetypeTemplate> = {
       'sol ring', 'arcane signet', 'counterspell', 'cyclonic rift',
       'rhystic study', 'mystic remora', 'smothering tithe',
     ],
+    discouragedTypes: ['Equipment', 'Vehicle'],
   },
 
   combo: {
@@ -313,6 +316,7 @@ export const ARCHETYPE_TEMPLATES: Record<Archetype, ArchetypeTemplate> = {
       'sol ring', 'arcane signet', 'counterspell', 'mystical tutor',
       'demonic tutor', 'vampiric tutor',
     ],
+    discouragedTypes: ['Equipment', 'Vehicle'],
   },
 
   voltron: {
@@ -427,6 +431,7 @@ export const ARCHETYPE_TEMPLATES: Record<Archetype, ArchetypeTemplate> = {
       'sol ring', 'arcane signet', 'reanimate', 'animate dead',
       'entomb', 'buried alive',
     ],
+    discouragedTypes: ['Equipment'],
   },
 
   spellslinger: {
@@ -466,6 +471,7 @@ export const ARCHETYPE_TEMPLATES: Record<Archetype, ArchetypeTemplate> = {
       'brainstorm', 'ponder', 'preordain', 'young pyromancer',
       'storm-kiln artist', 'talrand, sky summoner', 'guttersnipe',
     ],
+    discouragedTypes: ['Equipment', 'Vehicle'],
   },
 
   aristocrats: {

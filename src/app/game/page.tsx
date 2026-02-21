@@ -1,11 +1,11 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import { isElectron, getElectronAPI } from '@/lib/electron-bridge';
 import type { GameLogEntry } from '@/lib/electron-bridge';
 import type { GameStateSnapshot } from '@/lib/game-state-engine';
 import type { MulliganAdvice } from '@/lib/mulligan-advisor';
-import { GameLog } from '@/components/game-log';
+import { GameNarrative } from '@/components/game-narrative';
 import { GameDeckTracker } from '@/components/game-deck-tracker';
 import { GameOpponentTracker } from '@/components/game-opponent-tracker';
 
@@ -34,6 +34,7 @@ export default function GamePage() {
     matchCount: number;
     hasActiveGame?: boolean;
   } | null>(null);
+  const [cardImages, setCardImages] = useState<Record<number, { name: string; imageUriSmall: string | null; imageUriNormal: string | null }>>({});
 
   useEffect(() => {
     const api = getElectronAPI();
@@ -113,6 +114,20 @@ export default function GamePage() {
       })
     );
 
+    // Game log updates (collapsed consecutive duplicates)
+    if (api.onGameLogUpdate) {
+      cleanups.push(
+        api.onGameLogUpdate((updatedEntry) => {
+          setLogEntries(prev => {
+            if (prev.length === 0) return prev;
+            const next = [...prev];
+            next[next.length - 1] = updatedEntry;
+            return next;
+          });
+        })
+      );
+    }
+
     // Restore state from watcher on mount (covers page navigation + refresh)
     api.getGameState().then((state) => {
       if (state) {
@@ -141,6 +156,37 @@ export default function GamePage() {
     };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+  // Resolve card images for grpIds in log entries
+  useEffect(() => {
+    const api = getElectronAPI();
+    if (!api || logEntries.length === 0) return;
+
+    const unresolvedIds = new Set<number>();
+    for (const entry of logEntries) {
+      if (entry.cardGrpId && !cardImages[entry.cardGrpId]) unresolvedIds.add(entry.cardGrpId);
+      if (entry.targetGrpId && !cardImages[entry.targetGrpId]) unresolvedIds.add(entry.targetGrpId);
+    }
+
+    if (unresolvedIds.size === 0) return;
+
+    api.resolveGrpIds(Array.from(unresolvedIds)).then((resolved) => {
+      const newImages: Record<number, { name: string; imageUriSmall: string | null; imageUriNormal: string | null }> = {};
+      for (const [idStr, card] of Object.entries(resolved)) {
+        const c = card as { name?: string; imageUriSmall?: string | null; imageUriNormal?: string | null } | null;
+        if (c?.name) {
+          newImages[Number(idStr)] = {
+            name: c.name,
+            imageUriSmall: c.imageUriSmall ?? null,
+            imageUriNormal: c.imageUriNormal ?? null,
+          };
+        }
+      }
+      if (Object.keys(newImages).length > 0) {
+        setCardImages(prev => ({ ...prev, ...newImages }));
+      }
+    });
+  }, [logEntries.length]); // eslint-disable-line react-hooks/exhaustive-deps
+
   // Auto-start watcher if not running
   useEffect(() => {
     const api = getElectronAPI();
@@ -163,7 +209,7 @@ export default function GamePage() {
   }
 
   // Determine if we have match data to show (active OR recently completed)
-  const hasMatchData = isMatchActive || gameState?.isActive || logEntries.length > 0;
+  const hasMatchData = isMatchActive || gameState?.isActive || lastGameState !== null || logEntries.length > 0;
 
   // Waiting state — no active match AND no log data from a completed match
   if (!hasMatchData) {
@@ -206,12 +252,16 @@ export default function GamePage() {
         />
       </div>
 
-      {/* Center: Game Log */}
+      {/* Center: Game Narrative */}
       <div className="overflow-hidden">
-        <GameLog
+        <GameNarrative
           entries={logEntries}
           format={displayMatchInfo?.format ?? displayState?.format ?? null}
+          playerName={displayMatchInfo?.playerName ?? displayState?.playerName ?? null}
           opponentName={displayMatchInfo?.opponentName ?? displayState?.opponentName ?? null}
+          playerLife={displayState?.playerLife ?? 20}
+          opponentLife={displayState?.opponentLife ?? 20}
+          cardImages={cardImages}
         />
       </div>
 

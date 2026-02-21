@@ -17,6 +17,7 @@ export async function POST(request: NextRequest) {
       strategy,
       useCollection = false,
       commanderName,
+      powerLevel,
     } = body;
 
     const isCmdFormat = COMMANDER_FORMATS.includes(format);
@@ -35,12 +36,14 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    const validPowerLevels = ['casual', 'optimized', 'cedh'];
     const result = await autoBuildDeck({
       format,
       colors,
       strategy,
       useCollection,
       commanderName: isCmdFormat ? commanderName : undefined,
+      powerLevel: validPowerLevels.includes(powerLevel) ? powerLevel : undefined,
     });
 
     if (result.cards.length === 0) {

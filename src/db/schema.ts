@@ -961,4 +961,181 @@ export const MIGRATIONS = [
       ALTER TABLE arena_parsed_matches ADD COLUMN opponent_cards_by_turn TEXT;
     `,
   },
+  {
+    version: 27,
+    name: 'add_cedh_staples',
+    sql: `
+      CREATE TABLE IF NOT EXISTS cedh_staples (
+        card_name TEXT NOT NULL,
+        color_identity TEXT NOT NULL DEFAULT '',
+        category TEXT NOT NULL,
+        power_tier TEXT NOT NULL DEFAULT 'high',
+        format TEXT NOT NULL DEFAULT 'historic_brawl',
+        notes TEXT,
+        PRIMARY KEY (card_name, format)
+      );
+
+      CREATE INDEX IF NOT EXISTS idx_cedh_staples_category ON cedh_staples(category);
+      CREATE INDEX IF NOT EXISTS idx_cedh_staples_tier ON cedh_staples(power_tier);
+
+      -- Colorless fast mana
+      INSERT OR IGNORE INTO cedh_staples (card_name, color_identity, category, power_tier) VALUES
+        ('Sol Ring', '', 'fast_mana', 'cedh'),
+        ('Mana Crypt', '', 'fast_mana', 'cedh'),
+        ('Chrome Mox', '', 'fast_mana', 'cedh'),
+        ('Mox Amber', '', 'fast_mana', 'cedh'),
+        ('Jeweled Lotus', '', 'fast_mana', 'cedh'),
+        ('Mana Vault', '', 'fast_mana', 'cedh'),
+        ('Mox Opal', '', 'fast_mana', 'high'),
+        ('Lotus Petal', '', 'fast_mana', 'high'),
+        ('Arcane Signet', '', 'mana_rock', 'cedh'),
+        ('Fellwar Stone', '', 'mana_rock', 'high'),
+        ('Mind Stone', '', 'mana_rock', 'high'),
+        ('Thought Vessel', '', 'mana_rock', 'medium'),
+        ('Liquimetal Torque', '', 'mana_rock', 'medium'),
+        ('Everflowing Chalice', '', 'mana_rock', 'medium');
+
+      -- Blue interaction
+      INSERT OR IGNORE INTO cedh_staples (card_name, color_identity, category, power_tier) VALUES
+        ('Force of Negation', 'U', 'free_interaction', 'cedh'),
+        ('Fierce Guardianship', 'U', 'free_interaction', 'cedh'),
+        ('Pact of Negation', 'U', 'free_interaction', 'cedh'),
+        ('Swan Song', 'U', 'efficient_removal', 'cedh'),
+        ('Mental Misstep', '', 'free_interaction', 'cedh'),
+        ('Counterspell', 'U', 'efficient_removal', 'cedh'),
+        ('Negate', 'U', 'efficient_removal', 'high'),
+        ('An Offer You Can''t Refuse', 'U', 'efficient_removal', 'high'),
+        ('Delay', 'U', 'efficient_removal', 'high'),
+        ('Flusterstorm', 'U', 'efficient_removal', 'cedh'),
+        ('Spell Pierce', 'U', 'efficient_removal', 'high'),
+        ('Dispel', 'U', 'efficient_removal', 'medium'),
+        ('Mana Drain', 'U', 'efficient_removal', 'cedh'),
+        ('Arcane Denial', 'U', 'efficient_removal', 'medium');
+
+      -- Blue card advantage
+      INSERT OR IGNORE INTO cedh_staples (card_name, color_identity, category, power_tier) VALUES
+        ('Brainstorm', 'U', 'cantrip', 'cedh'),
+        ('Ponder', 'U', 'cantrip', 'cedh'),
+        ('Preordain', 'U', 'cantrip', 'cedh'),
+        ('Consider', 'U', 'cantrip', 'high'),
+        ('Gitaxian Probe', '', 'cantrip', 'cedh'),
+        ('Treasure Cruise', 'U', 'card_advantage', 'high'),
+        ('Dig Through Time', 'U', 'card_advantage', 'high'),
+        ('Rhystic Study', 'U', 'card_advantage', 'cedh'),
+        ('Mystic Remora', 'U', 'card_advantage', 'cedh'),
+        ('Frantic Search', 'U', 'cantrip', 'high');
+
+      -- Blue tutors
+      INSERT OR IGNORE INTO cedh_staples (card_name, color_identity, category, power_tier) VALUES
+        ('Mystical Tutor', 'U', 'tutor', 'cedh'),
+        ('Personal Tutor', 'U', 'tutor', 'high'),
+        ('Intuition', 'U', 'tutor', 'high');
+
+      -- Multicolor blue
+      INSERT OR IGNORE INTO cedh_staples (card_name, color_identity, category, power_tier) VALUES
+        ('Dovin''s Veto', 'WU', 'efficient_removal', 'cedh'),
+        ('Narset''s Reversal', 'U', 'efficient_removal', 'high');
+
+      -- Red interaction
+      INSERT OR IGNORE INTO cedh_staples (card_name, color_identity, category, power_tier) VALUES
+        ('Deflecting Swat', 'R', 'free_interaction', 'cedh'),
+        ('Pyroblast', 'R', 'efficient_removal', 'cedh'),
+        ('Red Elemental Blast', 'R', 'efficient_removal', 'cedh'),
+        ('Abrade', 'R', 'efficient_removal', 'high'),
+        ('Chaos Warp', 'R', 'efficient_removal', 'high'),
+        ('Vandalblast', 'R', 'efficient_removal', 'high'),
+        ('By Force', 'R', 'efficient_removal', 'medium'),
+        ('Lightning Bolt', 'R', 'efficient_removal', 'high');
+
+      -- Red value
+      INSERT OR IGNORE INTO cedh_staples (card_name, color_identity, category, power_tier) VALUES
+        ('Dockside Extortionist', 'R', 'value_engine', 'cedh'),
+        ('Ragavan, Nimble Pilferer', 'R', 'value_engine', 'cedh'),
+        ('Underworld Breach', 'R', 'win_condition', 'cedh'),
+        ('Jeska''s Will', 'R', 'card_advantage', 'cedh');
+
+      -- White
+      INSERT OR IGNORE INTO cedh_staples (card_name, color_identity, category, power_tier) VALUES
+        ('Swords to Plowshares', 'W', 'efficient_removal', 'cedh'),
+        ('Path to Exile', 'W', 'efficient_removal', 'high'),
+        ('Silence', 'W', 'protection', 'cedh'),
+        ('Grand Abolisher', 'W', 'protection', 'cedh'),
+        ('Esper Sentinel', 'W', 'card_advantage', 'cedh'),
+        ('Teferi''s Protection', 'W', 'protection', 'cedh'),
+        ('Smothering Tithe', 'W', 'value_engine', 'cedh'),
+        ('Enlightened Tutor', 'W', 'tutor', 'cedh'),
+        ('Drannith Magistrate', 'W', 'hatebear', 'cedh'),
+        ('Ranger-Captain of Eos', 'W', 'protection', 'high');
+
+      -- Black
+      INSERT OR IGNORE INTO cedh_staples (card_name, color_identity, category, power_tier) VALUES
+        ('Demonic Tutor', 'B', 'tutor', 'cedh'),
+        ('Vampiric Tutor', 'B', 'tutor', 'cedh'),
+        ('Imperial Seal', 'B', 'tutor', 'cedh'),
+        ('Thoughtseize', 'B', 'efficient_removal', 'high'),
+        ('Fatal Push', 'B', 'efficient_removal', 'high'),
+        ('Deadly Rollick', 'B', 'free_interaction', 'cedh'),
+        ('Necropotence', 'B', 'card_advantage', 'cedh'),
+        ('Ad Nauseam', 'B', 'card_advantage', 'cedh'),
+        ('Dark Confidant', 'B', 'card_advantage', 'high'),
+        ('Bolas''s Citadel', 'B', 'value_engine', 'high'),
+        ('Toxic Deluge', 'B', 'efficient_removal', 'cedh'),
+        ('Feed the Swarm', 'B', 'efficient_removal', 'medium'),
+        ('Entomb', 'B', 'tutor', 'cedh'),
+        ('Dark Ritual', 'B', 'fast_mana', 'cedh'),
+        ('Cabal Ritual', 'B', 'fast_mana', 'high'),
+        ('Opposition Agent', 'B', 'hatebear', 'cedh');
+
+      -- Green
+      INSERT OR IGNORE INTO cedh_staples (card_name, color_identity, category, power_tier) VALUES
+        ('Worldly Tutor', 'G', 'tutor', 'cedh'),
+        ('Green Sun''s Zenith', 'G', 'tutor', 'cedh'),
+        ('Finale of Devastation', 'G', 'tutor', 'cedh'),
+        ('Chord of Calling', 'G', 'tutor', 'high'),
+        ('Nature''s Claim', 'G', 'efficient_removal', 'cedh'),
+        ('Beast Within', 'G', 'efficient_removal', 'high'),
+        ('Collector Ouphe', 'G', 'hatebear', 'cedh'),
+        ('Sylvan Library', 'G', 'card_advantage', 'cedh'),
+        ('Birds of Paradise', 'G', 'ramp', 'cedh'),
+        ('Elvish Mystic', 'G', 'ramp', 'high'),
+        ('Llanowar Elves', 'G', 'ramp', 'high'),
+        ('Elves of Deep Shadow', 'BG', 'ramp', 'high'),
+        ('Carpet of Flowers', 'G', 'ramp', 'cedh'),
+        ('Wild Growth', 'G', 'ramp', 'high'),
+        ('Utopia Sprawl', 'G', 'ramp', 'high');
+
+      -- Win conditions
+      INSERT OR IGNORE INTO cedh_staples (card_name, color_identity, category, power_tier) VALUES
+        ('Thassa''s Oracle', 'U', 'win_condition', 'cedh'),
+        ('Aetherflux Reservoir', '', 'win_condition', 'high'),
+        ('Isochron Scepter', '', 'win_condition', 'cedh'),
+        ('Dramatic Reversal', 'U', 'win_condition', 'cedh'),
+        ('Brain Freeze', 'U', 'win_condition', 'high'),
+        ('Demonic Consultation', 'B', 'win_condition', 'cedh'),
+        ('Tainted Pact', 'B', 'win_condition', 'cedh'),
+        ('Thoracle', 'U', 'win_condition', 'cedh');
+
+      -- Multicolor staples
+      INSERT OR IGNORE INTO cedh_staples (card_name, color_identity, category, power_tier) VALUES
+        ('Orcish Bowmasters', 'B', 'value_engine', 'cedh'),
+        ('Notion Thief', 'UB', 'hatebear', 'high'),
+        ('Aven Mindcensor', 'W', 'hatebear', 'high'),
+        ('Lavinia, Azorius Renegade', 'WU', 'hatebear', 'high'),
+        ('Dauthi Voidwalker', 'B', 'hatebear', 'cedh'),
+        ('Hullbreaker Horror', 'U', 'win_condition', 'high'),
+        ('Ledger Shredder', 'U', 'value_engine', 'high'),
+        ('Malcator, Purity Overseer', 'WU', 'value_engine', 'medium');
+
+      -- Utility lands (colorless identity)
+      INSERT OR IGNORE INTO cedh_staples (card_name, color_identity, category, power_tier) VALUES
+        ('Command Tower', '', 'ramp', 'cedh'),
+        ('Mana Confluence', '', 'ramp', 'cedh'),
+        ('City of Brass', '', 'ramp', 'cedh'),
+        ('Exotic Orchard', '', 'ramp', 'high'),
+        ('Gemstone Caverns', '', 'fast_mana', 'cedh'),
+        ('Ancient Tomb', '', 'fast_mana', 'cedh'),
+        ('Strip Mine', '', 'efficient_removal', 'high'),
+        ('Wasteland', '', 'efficient_removal', 'high');
+    `,
+  },
 ];

@@ -71,15 +71,44 @@ export async function GET(request: NextRequest) {
       if (a.grp_id && typeof a.grp_id === 'number') grpIds.add(a.grp_id);
     }
 
-    // Also resolve opening_hand grpIds from summary
+    // Also resolve grpIds from all summary fields
     const summaryObj = summary as Record<string, unknown> | null;
-    if (summaryObj?.opening_hand) {
+    if (summaryObj) {
+      // opening_hand: number[]
+      // draw_order: number[]
+      // opponent_cards_seen: number[] (JSON string)
+      for (const field of ['opening_hand', 'draw_order', 'opponent_cards_seen']) {
+        try {
+          const raw = summaryObj[field];
+          if (!raw) continue;
+          const ids = typeof raw === 'string' ? JSON.parse(raw) as number[] : raw as number[];
+          for (const grpId of ids) {
+            if (typeof grpId === 'number') grpIds.add(grpId);
+          }
+        } catch { /* ignore */ }
+      }
+
+      // opponent_cards_by_turn: Record<string, number[]>
       try {
-        const hand = typeof summaryObj.opening_hand === 'string'
-          ? JSON.parse(summaryObj.opening_hand) as number[]
-          : summaryObj.opening_hand as number[];
-        for (const grpId of hand) {
-          if (typeof grpId === 'number') grpIds.add(grpId);
+        const raw = summaryObj.opponent_cards_by_turn;
+        if (raw) {
+          const oct = typeof raw === 'string' ? JSON.parse(raw) as Record<string, number[]> : raw as Record<string, number[]>;
+          for (const ids of Object.values(oct)) {
+            for (const grpId of ids) {
+              if (typeof grpId === 'number') grpIds.add(grpId);
+            }
+          }
+        }
+      } catch { /* ignore */ }
+
+      // cards_played: can be number[] or string[]
+      try {
+        const raw = summaryObj.cards_played;
+        if (raw) {
+          const items = typeof raw === 'string' ? JSON.parse(raw) as unknown[] : raw as unknown[];
+          for (const item of items) {
+            if (typeof item === 'number') grpIds.add(item);
+          }
         }
       } catch { /* ignore */ }
     }
@@ -102,6 +131,16 @@ export async function GET(request: NextRequest) {
           cardImageMap[val.card_name] = { image_uri_small: val.image_uri_small, image_uri_normal: val.image_uri_normal };
         }
       });
+    }
+
+    // Backfill card_name from grpId resolution when card_name is null
+    for (const a of actions) {
+      if (!a.card_name && a.grp_id && typeof a.grp_id === 'number') {
+        const resolved = grpIdImageMap[a.grp_id as number];
+        if (resolved?.card_name) {
+          a.card_name = resolved.card_name;
+        }
+      }
     }
 
     return NextResponse.json({ actions, summary: summary ?? null, cards: cardImageMap, grpIdCards: grpIdImageMap });

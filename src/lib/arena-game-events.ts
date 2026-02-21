@@ -712,10 +712,25 @@ export function extractGameEventsWithContext(
               });
             }
 
-            // Hand/Library → Battlefield or Stack = card played/cast
+            // Hand → Battlefield or Stack = card played/cast
+            // Library → Stack = cascade/Citadel cast (legitimate cast from library)
+            // Library → Battlefield is NOT a cast — it's a search/put effect
+            // (Scapeshift, Harrow, Rampant Growth, etc.) and should not emit card_played
             if (
-              (fromZoneType === ZONE_TYPES.HAND || fromZoneType === ZONE_TYPES.LIBRARY) &&
+              fromZoneType === ZONE_TYPES.HAND &&
               (toZoneType === ZONE_TYPES.BATTLEFIELD || toZoneType === ZONE_TYPES.STACK)
+            ) {
+              events.push({
+                type: 'card_played',
+                instanceId,
+                grpId,
+                ownerSeatId,
+                fromZoneType,
+                toZoneType,
+              });
+            } else if (
+              fromZoneType === ZONE_TYPES.LIBRARY &&
+              toZoneType === ZONE_TYPES.STACK
             ) {
               events.push({
                 type: 'card_played',
@@ -727,21 +742,9 @@ export function extractGameEventsWithContext(
               });
             }
 
-            // Stack → Battlefield = spell resolving (also counts as "played" for permanents)
-            if (
-              fromZoneType === ZONE_TYPES.STACK &&
-              toZoneType === ZONE_TYPES.BATTLEFIELD &&
-              category === 'Resolve'
-            ) {
-              events.push({
-                type: 'card_played',
-                instanceId,
-                grpId,
-                ownerSeatId,
-                fromZoneType,
-                toZoneType,
-              });
-            }
+            // Stack → Battlefield = spell resolving — NOT emitted as card_played
+            // because the Hand → Stack transition above already captures the cast.
+            // Emitting here too caused duplicate "cast X" entries in the game log.
           }
 
           // Step 3: Process ModifiedLife annotations for life total changes

@@ -927,6 +927,7 @@ export function resolveGrpIdsToCards(grpIds: number[]): Map<number, { card_name:
   const result = new Map<number, { card_name: string; image_uri_small: string | null; image_uri_normal: string | null }>();
   if (grpIds.length === 0) return result;
 
+  // Layer 1: grp_id_cache → cards join
   const stmt = db.prepare(`
     SELECT gc.grp_id, gc.card_name, c.image_uri_small, c.image_uri_normal
     FROM grp_id_cache gc
@@ -940,6 +941,23 @@ export function resolveGrpIdsToCards(grpIds: number[]): Map<number, { card_name:
       result.set(grpId, { card_name: row.card_name, image_uri_small: row.image_uri_small, image_uri_normal: row.image_uri_normal });
     }
   }
+
+  // Layer 2: For unresolved grpIds, try cards.arena_id match
+  const unresolved = grpIds.filter(id => !result.has(id));
+  if (unresolved.length > 0) {
+    const arenaStmt = db.prepare(`
+      SELECT arena_id, name, image_uri_small, image_uri_normal
+      FROM cards
+      WHERE arena_id = ?
+    `);
+    for (const grpId of unresolved) {
+      const row = arenaStmt.get(grpId) as { arena_id: number; name: string; image_uri_small: string | null; image_uri_normal: string | null } | undefined;
+      if (row) {
+        result.set(grpId, { card_name: row.name, image_uri_small: row.image_uri_small, image_uri_normal: row.image_uri_normal });
+      }
+    }
+  }
+
   return result;
 }
 
@@ -947,6 +965,78 @@ export function resolveGrpIdsToCards(grpIds: number[]): Map<number, { card_name:
  * Auto-link unlinked arena matches using cards_played (resolved card names).
  * Fallback for matches where deck_cards is NULL (95% of matches).
  */
+// ── cEDH staples ─────────────────────────────────────────────────────────
+
+/**
+ * Get cEDH staples whose color identity is a subset of the deck's colors.
+ * Empty color_identity matches any deck (colorless cards).
+ */
+export function getCedhStaples(
+  colorIdentity: string[],
+  format: string = 'historic_brawl'
+): Array<{ card_name: string; category: string; power_tier: string }> {
+  const db = getDb();
+  try {
+    const allStaples = db.prepare(
+      `SELECT card_name, color_identity, category, power_tier
+       FROM cedh_staples WHERE format = ?`
+    ).all(format) as Array<{ card_name: string; color_identity: string; category: string; power_tier: string }>;
+
+    const colorSet = new Set(colorIdentity);
+    return allStaples.filter(s => {
+      // Empty color_identity = colorless, always fits
+      if (!s.color_identity) return true;
+      // Each color in the staple's identity must be in the deck's colors
+      return s.color_identity.split('').every(c => colorSet.has(c));
+    }).map(({ card_name, category, power_tier }) => ({ card_name, category, power_tier }));
+  } catch {
+    return []; // table may not exist yet
+  }
+}
+
+// ── Meta card stats ──────────────────────────────────────────────────────
+
+/**
+ * Bulk-load meta_card_stats for a set of card names in a given format.
+ */
+export function getMetaCardStatsMap(
+  cardNames: string[],
+  format: string
+): Map<string, { inclusionRate: number; placementScore: number; coreRate: number; winRate: number }> {
+  const db = getDb();
+  const result = new Map<string, { inclusionRate: number; placementScore: number; coreRate: number; winRate: number }>();
+  if (cardNames.length === 0) return result;
+
+  try {
+    const stmt = db.prepare(
+      `SELECT card_name, meta_inclusion_rate, placement_weighted_score,
+              archetype_core_rate, COALESCE(archetype_win_rate, 0) as archetype_win_rate
+       FROM meta_card_stats
+       WHERE card_name = ? COLLATE NOCASE AND format = ?`
+    );
+    for (const name of cardNames) {
+      const row = stmt.get(name, format) as {
+        card_name: string;
+        meta_inclusion_rate: number;
+        placement_weighted_score: number;
+        archetype_core_rate: number;
+        archetype_win_rate: number;
+      } | undefined;
+      if (row) {
+        result.set(row.card_name, {
+          inclusionRate: row.meta_inclusion_rate,
+          placementScore: row.placement_weighted_score,
+          coreRate: row.archetype_core_rate,
+          winRate: row.archetype_win_rate,
+        });
+      }
+    }
+  } catch {
+    // table may not exist
+  }
+  return result;
+}
+
 export function autoLinkByCardsPlayed(): { linked: number; total: number } {
   const db = getDb();
   const unlinked = db.prepare(

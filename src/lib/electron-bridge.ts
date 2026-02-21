@@ -11,6 +11,18 @@ export interface GameLogEntry {
   type: 'system' | 'turn' | 'phase' | 'action' | 'life' | 'damage' | 'result';
   text: string;
   player?: 'self' | 'opponent' | null;
+  // Structured fields for rich narrative rendering
+  turnNumber?: number;             // shared turn number (ceil/2)
+  cardName?: string;               // primary card involved
+  cardGrpId?: number;              // for card art lookup
+  targetCardName?: string;         // secondary card (damage target, counter target)
+  targetGrpId?: number;
+  amount?: number;                 // damage or life change amount
+  lifeBefore?: number;             // for life transitions
+  lifeAfter?: number;
+  phase?: string;                  // machine-readable phase name
+  verb?: string;                   // cast/played/drew/discarded/destroyed/exiled/countered/sacrificed
+  isSelf?: boolean;                // quick check: is this the player's action
 }
 
 export interface ElectronAPI {
@@ -47,6 +59,7 @@ export interface ElectronAPI {
   onMulliganPrompt: (callback: (data: { hand: number[]; mulliganCount: number; seatId: number }) => void) => () => void;
   onIntermissionStart: (callback: (data: { matchId: string | null; gameNumber: number; opponentCardsSeen: number[] }) => void) => () => void;
   onGameLogEntry: (callback: (entry: GameLogEntry) => void) => () => void;
+  onGameLogUpdate: (callback: (entry: GameLogEntry) => void) => () => void;
 
   // Game controls
   getMulliganAdvice: (data: {

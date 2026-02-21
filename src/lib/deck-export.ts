@@ -105,5 +105,9 @@ export function exportToMtgo(
 }
 
 function formatLine(c: DeckCardEntry): string {
-  return `${c.quantity} ${c.card.name} (${c.card.set_code.toUpperCase()}) ${c.card.collector_number}`;
+  // Strip Scryfall's "A-" prefix from Alchemy card names and collector numbers
+  // Arena doesn't recognize the A- prefix in its import format
+  const name = c.card.name.replace(/^A-/, '');
+  const collectorNum = c.card.collector_number.replace(/^A-/, '');
+  return `${c.quantity} ${name} (${c.card.set_code.toUpperCase()}) ${collectorNum}`;
 }

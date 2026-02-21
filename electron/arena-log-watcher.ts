@@ -33,6 +33,18 @@ export interface GameLogEntry {
   type: 'system' | 'turn' | 'phase' | 'action' | 'life' | 'damage' | 'result';
   text: string;
   player?: 'self' | 'opponent' | null;
+  // Structured fields for rich narrative rendering
+  turnNumber?: number;
+  cardName?: string;
+  cardGrpId?: number;
+  targetCardName?: string;
+  targetGrpId?: number;
+  amount?: number;
+  lifeBefore?: number;
+  lifeAfter?: number;
+  phase?: string;
+  verb?: string;
+  isSelf?: boolean;
 }
 
 // File-based debug log (Electron stdout not captured reliably on Windows)
@@ -66,6 +78,7 @@ export class ArenaLogWatcher extends EventEmitter {
   private catchUp: boolean;
   private lastLoggedTurn = 0;
   private lastLoggedPhase = '';
+  private pendingPhase: GameLogEntry | null = null;
 
   // Log persistence — survives match end and page navigation
   private logHistory: GameLogEntry[] = [];
@@ -282,8 +295,50 @@ export class ArenaLogWatcher extends EventEmitter {
   }
 
   private emitLog(entry: GameLogEntry): void {
+    // Phase entries are buffered — only emitted when an action follows
+    if (entry.type === 'phase') {
+      this.pendingPhase = entry;
+      debugLog(`EMIT_LOG: PENDING phase="${entry.text}"`);
+      return;
+    }
+
+    // Non-phase entries flush any pending phase first
+    if (entry.type === 'action' || entry.type === 'life' || entry.type === 'damage') {
+      this.flushPendingPhase();
+    }
+
+    // Turn changes clear pending phase (actions from previous phase are done)
+    if (entry.type === 'turn') {
+      this.pendingPhase = null;
+    }
+
+    // Collapse consecutive identical entries (e.g., "sacrificed Snow-Covered Forest" x6)
+    const last = this.logHistory[this.logHistory.length - 1];
+    if (last && last.type === entry.type && last.text === entry.text && last.player === entry.player) {
+      const countMatch = last.text.match(/ \(x(\d+)\)$/);
+      const count = countMatch ? parseInt(countMatch[1]) + 1 : 2;
+      last.text = entry.text + ` (x${count})`;
+      debugLog(`EMIT_LOG[${this.logHistory.length}]: COLLAPSED x${count}: "${last.text.slice(0, 80)}"`);
+      this.emit('game-log-update', last);
+      return;
+    }
     this.logHistory.push(entry);
+    debugLog(`EMIT_LOG[${this.logHistory.length}]: type=${entry.type} text="${entry.text.slice(0, 80)}"`);
     this.emit('game-log', entry);
+  }
+
+  /** Shared game turn (both players' turns under one number). */
+  private sharedTurn(rawTurn: number): number {
+    return Math.ceil(rawTurn / 2);
+  }
+
+  /** Flush pending phase label before an action (suppresses empty phases). */
+  private flushPendingPhase(): void {
+    if (this.pendingPhase) {
+      this.logHistory.push(this.pendingPhase);
+      this.emit('game-log', this.pendingPhase);
+      this.pendingPhase = null;
+    }
   }
 
   private getPlayerLabel(seatId: number): 'self' | 'opponent' | null {
@@ -301,24 +356,45 @@ export class ArenaLogWatcher extends EventEmitter {
   }
 
   private cardName(grpId: number): string {
-    if (!this.gameEngine) return `Card #${grpId}`;
+    if (!this.gameEngine) {
+      // No engine — try resolver cache directly
+      if (this.resolver) {
+        const cached = this.resolver.getCached(grpId);
+        if (cached && !cached.name.startsWith('Unknown')) {
+          debugLog(`cardName(${grpId}): no-engine, cache="${cached.name}"`);
+          return cached.name;
+        }
+      }
+      debugLog(`cardName(${grpId}): no-engine, no-cache → Card #${grpId}`);
+      return `Card #${grpId}`;
+    }
 
     // Layer 1: gameObject names (grpId → cardName from Arena GRE)
     const objectNames = this.gameEngine.getObjectNames();
     const objName = objectNames.get(grpId);
-    if (objName) return objName;
+    if (objName) {
+      debugLog(`cardName(${grpId}): obj="${objName}"`);
+      return objName;
+    }
 
     // Layer 2: resolved deck list entries
     const state = this.gameEngine.getState();
     const entry = state.deckList.find(d => d.grpId === grpId);
-    if (entry?.card?.name) return entry.card.name;
+    if (entry?.card?.name) {
+      debugLog(`cardName(${grpId}): deck="${entry.card.name}"`);
+      return entry.card.name;
+    }
 
     // Layer 3: resolver memory/DB cache (sync, no API call)
     if (this.resolver) {
       const cached = this.resolver.getCached(grpId);
-      if (cached && !cached.name.startsWith('Unknown')) return cached.name;
+      if (cached && !cached.name.startsWith('Unknown')) {
+        debugLog(`cardName(${grpId}): cache="${cached.name}"`);
+        return cached.name;
+      }
     }
 
+    debugLog(`cardName(${grpId}): obj=miss deck=miss cache=miss → Card #${grpId}`);
     return `Card #${grpId}`;
   }
 
@@ -339,6 +415,7 @@ export class ArenaLogWatcher extends EventEmitter {
 
         this.lastLoggedTurn = 0;
         this.lastLoggedPhase = '';
+        this.pendingPhase = null;
 
         // Clear log history for new match
         this.logHistory = [];
@@ -369,6 +446,7 @@ export class ArenaLogWatcher extends EventEmitter {
       case 'match_complete': {
         if (this.gameEngine) {
           this.gameEngine.processEvent(event);
+          debugLog(`match_complete: logHistory=${this.logHistory.length}, result=${event.result}`);
 
           // Save last game state before nullifying engine
           this.lastGameStateSnapshot = this.gameEngine.getState();
@@ -378,7 +456,12 @@ export class ArenaLogWatcher extends EventEmitter {
 
           const resultText = event.result === 'win' ? 'Victory!' :
                              event.result === 'loss' ? 'Defeat.' : `Result: ${event.result}`;
-          this.emitLog({ type: 'result', text: resultText, player: event.result === 'win' ? 'self' : 'opponent' });
+          this.emitLog({
+            type: 'result', text: resultText,
+            player: event.result === 'win' ? 'self' : 'opponent',
+            verb: event.result,
+            isSelf: event.result === 'win',
+          });
 
           this.emit('match-end', {
             matchId: event.matchId,
@@ -460,15 +543,25 @@ export class ArenaLogWatcher extends EventEmitter {
       case 'card_drawn': {
         if (this.gameEngine) {
           this.gameEngine.processEvent(event);
-          const who = this.getPlayerLabel(event.ownerSeatId ?? this.gameEngine.getState().playerSeatId);
+          const state = this.gameEngine.getState();
+          const who = this.getPlayerLabel(event.ownerSeatId ?? state.playerSeatId);
           const name = this.cardName(event.grpId);
+          const shared = this.sharedTurn(state.turnNumber);
           if (who === 'self') {
-            this.emitLog({ type: 'action', text: `${this.seatName(this.gameEngine.getState().playerSeatId)} drew ${name}`, player: 'self' });
+            this.emitLog({
+              type: 'action', player: 'self',
+              text: `${this.seatName(state.playerSeatId)} drew ${name}`,
+              verb: 'drew', cardName: name, cardGrpId: event.grpId,
+              turnNumber: shared, isSelf: true,
+            });
           } else {
-            this.emitLog({ type: 'action', text: `${this.seatName(event.ownerSeatId ?? 0)} drew a card`, player: 'opponent' });
+            this.emitLog({
+              type: 'action', player: 'opponent',
+              text: `${this.seatName(event.ownerSeatId ?? 0)} drew a card`,
+              verb: 'drew', turnNumber: shared, isSelf: false,
+            });
           }
           if (this.telemetryLogger) {
-            const state = this.gameEngine.getState();
             this.telemetryLogger.onCardDrawn(event.grpId, state.turnNumber, name !== `Card #${event.grpId}` ? name : undefined);
           }
         }
@@ -482,7 +575,14 @@ export class ArenaLogWatcher extends EventEmitter {
           const who = this.getPlayerLabel(event.ownerSeatId);
           const name = this.cardName(event.grpId);
           const verb = event.toZoneType === 'ZoneType_Battlefield' && event.fromZoneType === 'ZoneType_Hand' ? 'played' : 'cast';
-          this.emitLog({ type: 'action', text: `${this.seatName(event.ownerSeatId)} ${verb} ${name}`, player: who });
+          const shared = this.sharedTurn(stateBefore.turnNumber);
+          const isSelf = who === 'self';
+          this.emitLog({
+            type: 'action', player: who,
+            text: `${this.seatName(event.ownerSeatId)} ${verb} ${name}`,
+            verb, cardName: name, cardGrpId: event.grpId,
+            turnNumber: shared, isSelf,
+          });
           if (this.telemetryLogger) {
             this.telemetryLogger.onCardPlayed(
               event.grpId, event.ownerSeatId, stateBefore.playerSeatId,
@@ -495,7 +595,6 @@ export class ArenaLogWatcher extends EventEmitter {
 
       case 'life_total_change': {
         if (this.gameEngine) {
-          // Get previous life before engine processes
           const prevState = this.gameEngine.getState();
           const prevLife = event.seatId === prevState.playerSeatId
             ? prevState.playerLife
@@ -504,12 +603,28 @@ export class ArenaLogWatcher extends EventEmitter {
           const who = this.getPlayerLabel(event.seatId);
           const diff = event.lifeTotal - prevLife;
           const label = this.seatName(event.seatId);
+          const shared = this.sharedTurn(prevState.turnNumber);
+          const isSelf = who === 'self';
           if (diff < 0) {
-            this.emitLog({ type: 'life', text: `${label} took ${Math.abs(diff)} damage (${prevLife} → ${event.lifeTotal})`, player: who });
+            this.emitLog({
+              type: 'life', player: who,
+              text: `${label} took ${Math.abs(diff)} damage (${prevLife} → ${event.lifeTotal})`,
+              amount: Math.abs(diff), lifeBefore: prevLife, lifeAfter: event.lifeTotal,
+              turnNumber: shared, isSelf,
+            });
           } else if (diff > 0) {
-            this.emitLog({ type: 'life', text: `${label} gained ${diff} life (${prevLife} → ${event.lifeTotal})`, player: who });
+            this.emitLog({
+              type: 'life', player: who,
+              text: `${label} gained ${diff} life (${prevLife} → ${event.lifeTotal})`,
+              amount: diff, lifeBefore: prevLife, lifeAfter: event.lifeTotal,
+              turnNumber: shared, isSelf,
+            });
           } else {
-            this.emitLog({ type: 'life', text: `${label}'s life is ${event.lifeTotal}`, player: who });
+            this.emitLog({
+              type: 'life', player: who,
+              text: `${label}'s life is ${event.lifeTotal}`,
+              lifeAfter: event.lifeTotal, turnNumber: shared, isSelf,
+            });
           }
           if (this.telemetryLogger) {
             const state = this.gameEngine.getState();
@@ -524,11 +639,17 @@ export class ArenaLogWatcher extends EventEmitter {
       case 'turn_change': {
         if (this.gameEngine) {
           this.gameEngine.processEvent(event);
+          const shared = this.sharedTurn(event.turnNumber);
           if (event.turnNumber !== this.lastLoggedTurn) {
             this.lastLoggedTurn = event.turnNumber;
             this.lastLoggedPhase = '';
             const who = this.getPlayerLabel(event.activePlayer);
-            this.emitLog({ type: 'turn', text: `Turn ${event.turnNumber}: ${this.seatName(event.activePlayer)}`, player: who });
+            const isSelf = who === 'self';
+            this.emitLog({
+              type: 'turn', player: who,
+              text: `Turn ${shared}: ${this.seatName(event.activePlayer)}`,
+              turnNumber: shared, isSelf,
+            });
           }
           debugLog(`turn_change T${event.turnNumber}, logger=${!!this.telemetryLogger}, actions=${this.telemetryLogger?.getActionCount() ?? 0}`);
           if (this.telemetryLogger) {
@@ -561,7 +682,12 @@ export class ArenaLogWatcher extends EventEmitter {
             const label = PHASE_NAMES[event.phase] || STEP_NAMES[event.step] || '';
             if (label && label !== this.lastLoggedPhase) {
               this.lastLoggedPhase = label;
-              this.emitLog({ type: 'phase', text: label });
+              const shared = this.sharedTurn(this.gameEngine.getState().turnNumber);
+              this.emitLog({
+                type: 'phase', text: label,
+                phase: event.step || event.phase,
+                turnNumber: shared,
+              });
             }
           }
           if (this.telemetryLogger) {
@@ -577,24 +703,35 @@ export class ArenaLogWatcher extends EventEmitter {
           const who = this.getPlayerLabel(event.ownerSeatId);
           const name = this.cardName(event.grpId);
           const playerLabel = this.seatName(event.ownerSeatId);
+          const shared = this.sharedTurn(this.gameEngine.getState().turnNumber);
+          const isSelf = who === 'self';
 
-          // Emit rich log based on category
           const CATEGORY_VERBS: Record<string, string> = {
-            Destroy: 'was destroyed',
-            Exile: 'was exiled',
+            Destroy: 'destroyed',
+            Exile: 'exiled',
             Discard: 'discarded',
             Sacrifice: 'sacrificed',
-            Counter: 'was countered',
-            Mill: 'was milled',
-            ReturnToHand: 'returned to hand',
+            Counter: 'countered',
+            Mill: 'milled',
+            ReturnToHand: 'returned',
           };
 
           const verb = event.category ? CATEGORY_VERBS[event.category] : null;
           if (verb) {
             if (event.category === 'Discard' || event.category === 'Sacrifice') {
-              this.emitLog({ type: 'action', text: `${playerLabel} ${verb} ${name}`, player: who });
+              this.emitLog({
+                type: 'action', player: who,
+                text: `${playerLabel} ${verb} ${name}`,
+                verb, cardName: name, cardGrpId: event.grpId,
+                turnNumber: shared, isSelf,
+              });
             } else {
-              this.emitLog({ type: 'action', text: `${name} ${verb}`, player: who });
+              this.emitLog({
+                type: 'action', player: who,
+                text: `${name} was ${verb}`,
+                verb, cardName: name, cardGrpId: event.grpId,
+                turnNumber: shared, isSelf,
+              });
             }
           }
           // Don't log Draw/CastSpell/Resolve/PlayLand — already covered by card_drawn/card_played
@@ -606,18 +743,25 @@ export class ArenaLogWatcher extends EventEmitter {
         if (this.gameEngine) {
           this.gameEngine.processEvent(event);
           const sourceName = this.cardName(event.sourceGrpId);
+          const shared = this.sharedTurn(this.gameEngine.getState().turnNumber);
           if (event.targetSeatId) {
             const targetName = this.seatName(event.targetSeatId);
+            const who = this.getPlayerLabel(event.targetSeatId) === 'self' ? 'opponent' : 'self';
             this.emitLog({
-              type: 'damage',
+              type: 'damage', player: who,
               text: `${sourceName} dealt ${event.amount} damage to ${targetName}`,
-              player: this.getPlayerLabel(event.targetSeatId) === 'self' ? 'opponent' : 'self',
+              cardName: sourceName, cardGrpId: event.sourceGrpId,
+              targetCardName: targetName,
+              amount: event.amount, turnNumber: shared, isSelf: who === 'self',
             });
           } else if (event.targetGrpId) {
             const targetName = this.cardName(event.targetGrpId);
             this.emitLog({
               type: 'damage',
               text: `${sourceName} dealt ${event.amount} damage to ${targetName}`,
+              cardName: sourceName, cardGrpId: event.sourceGrpId,
+              targetCardName: targetName, targetGrpId: event.targetGrpId,
+              amount: event.amount, turnNumber: shared,
             });
           }
         }
@@ -768,6 +912,7 @@ export class ArenaLogWatcher extends EventEmitter {
    * Get accumulated game log entries for the current/last match.
    */
   getLogHistory(): GameLogEntry[] {
+    debugLog(`getLogHistory() called: returning ${this.logHistory.length} entries`);
     return this.logHistory;
   }
 

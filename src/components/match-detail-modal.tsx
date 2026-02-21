@@ -427,10 +427,13 @@ export function MatchDetailModal({ matchId, onClose }: MatchDetailModalProps) {
                         <div className="h-px flex-1 bg-border/50" />
                       </div>
                       <div className="space-y-1 pl-3">
-                        {turnActions.map(action => {
+                        {turnActions
+                          .filter(a => !FILTERED_ACTION_TYPES.has(a.action_type))
+                          .map(action => {
                           const cardName = getCardName(action);
                           const img = getCardImage(action.card_name, action.grp_id);
                           const isSelf = action.player === 'self';
+                          const details = formatDetails(action);
 
                           return (
                             <div key={action.id} className="flex items-center gap-2 text-xs">
@@ -454,8 +457,8 @@ export function MatchDetailModal({ matchId, onClose }: MatchDetailModalProps) {
                               ) : cardName ? (
                                 <span className="font-medium text-foreground">{cardName}</span>
                               ) : null}
-                              {action.details && (
-                                <span className="text-[10px] text-muted-foreground/70">{action.details}</span>
+                              {details && (
+                                <span className="text-[10px] text-muted-foreground/70">{details}</span>
                               )}
                             </div>
                           );
@@ -687,11 +690,22 @@ function MatchHeader({ summary }: { summary: MatchSummary }) {
   );
 }
 
+// Action types that are structural/metadata — don't show as individual rows
+const FILTERED_ACTION_TYPES = new Set([
+  'phase_change',
+  'turn_start',
+  'match_start',
+  'deck_submitted',
+]);
+
 function formatActionType(type: string): string {
   const map: Record<string, string> = {
     'cast_spell': 'cast',
-    'play_land': 'played',
+    'card_played': 'played',
+    'play_land': 'played land',
     'draw': 'drew',
+    'card_drawn': 'drew',
+    'opponent_card_played': 'played',
     'discard': 'discarded',
     'destroy': 'destroyed',
     'exile': 'exiled',
@@ -704,10 +718,43 @@ function formatActionType(type: string): string {
     'counter': 'countered',
     'return_to_hand': 'returned',
     'create_token': 'created',
-    'life_change': 'life changed',
+    'life_change': 'life →',
     'damage': 'dealt damage',
+    'mulligan_keep': 'kept hand',
+    'mulligan_mull': 'mulliganed',
   };
   return map[type] || type.replace(/_/g, ' ');
+}
+
+function formatDetails(action: TelemetryAction): string | null {
+  if (!action.details) return null;
+  try {
+    const d = JSON.parse(action.details);
+    switch (action.action_type) {
+      case 'life_change':
+        if (d.lifeTotal != null) return `${d.lifeTotal}`;
+        return null;
+      case 'mulligan_keep':
+        if (d.handSize != null) return `(${d.handSize} cards)`;
+        return null;
+      case 'mulligan_mull':
+        if (d.mulliganCount != null) return `#${d.mulliganCount}`;
+        return null;
+      case 'damage':
+      case 'damage_dealt':
+        if (d.amount != null) return `(${d.amount} damage)`;
+        if (d.damage_amount != null) return `(${d.damage_amount} damage)`;
+        return null;
+      default:
+        return null;
+    }
+  } catch {
+    // Not JSON — return as-is only if short and meaningful
+    if (action.details.length < 30 && !action.details.startsWith('{')) {
+      return action.details;
+    }
+    return null;
+  }
 }
 
 function Spinner({ className }: { className?: string }) {

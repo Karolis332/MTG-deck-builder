@@ -265,3 +265,129 @@ select,
 textarea {
   font-family: 'Crimson Text', Georgia, serif;
 }
+
+/* ── Game Narrative — Grimoire Chronicle ─────────────────────────────── */
+
+.narrative-scroll {
+  scrollbar-gutter: stable;
+}
+
+.narrative-chapter {
+  position: relative;
+  padding: 0.75rem 0;
+}
+
+.narrative-chapter + .narrative-chapter {
+  border-top: 1px solid hsl(43 40% 28% / 0.15);
+}
+
+.narrative-chapter-header {
+  font-family: 'Cinzel', serif;
+  text-align: center;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: hsl(43 60% 50% / 0.7);
+  margin-bottom: 0.5rem;
+  position: relative;
+}
+
+.narrative-chapter-header::before,
+.narrative-chapter-header::after {
+  content: '◈';
+  font-size: 0.55rem;
+  margin: 0 0.5rem;
+  opacity: 0.5;
+}
+
+.narrative-player-section {
+  padding: 0.25rem 0 0.25rem 0.75rem;
+  margin: 0.25rem 0;
+  border-left: 3px solid transparent;
+}
+
+.narrative-player-self {
+  border-left-color: hsl(43 60% 45% / 0.5);
+}
+
+.narrative-player-opponent {
+  border-left-color: hsl(0 40% 45% / 0.4);
+}
+
+.narrative-player-banner {
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.25rem;
+}
+
+.narrative-phase-label {
+  text-align: center;
+  font-size: 0.55rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: hsl(36 12% 48% / 0.5);
+  margin: 0.35rem 0;
+  font-family: 'Crimson Text', serif;
+}
+
+.narrative-entry {
+  font-family: 'Crimson Text', serif;
+  font-size: 0.75rem;
+  line-height: 1.6;
+  padding: 1px 0;
+}
+
+/* Life bar */
+.narrative-life-bar {
+  height: 6px;
+  border-radius: 3px;
+  background: hsl(24 14% 14%);
+  overflow: hidden;
+  position: relative;
+}
+
+.narrative-life-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 600ms ease, background 600ms ease;
+}
+
+/* Life bar gradient: green → amber → red as life decreases */
+.life-high    { background: linear-gradient(90deg, hsl(120 40% 35%), hsl(90 40% 40%)); }
+.life-medium  { background: linear-gradient(90deg, hsl(43 60% 45%), hsl(30 50% 40%)); }
+.life-low     { background: linear-gradient(90deg, hsl(0 50% 45%), hsl(0 60% 35%)); }
+
+/* Pulse animations for life changes */
+@keyframes life-loss-pulse {
+  0%, 100% { box-shadow: none; }
+  50% { box-shadow: inset 0 0 8px hsl(0 60% 50% / 0.4); }
+}
+
+@keyframes life-gain-pulse {
+  0%, 100% { box-shadow: none; }
+  50% { box-shadow: inset 0 0 8px hsl(120 60% 50% / 0.3); }
+}
+
+.life-loss-pulse { animation: life-loss-pulse 0.6s ease; }
+.life-gain-pulse { animation: life-gain-pulse 0.6s ease; }
+
+/* Victory/Defeat dramatic endings */
+.narrative-victory {
+  text-align: center;
+  padding: 1rem 0;
+  font-family: 'Cinzel', serif;
+  font-size: 1.1rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.narrative-defeat {
+  text-align: center;
+  padding: 1rem 0;
+  font-family: 'Cinzel', serif;
+  font-size: 1.1rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: hsl(0 40% 50% / 0.7);
+}

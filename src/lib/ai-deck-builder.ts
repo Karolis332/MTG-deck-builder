@@ -27,6 +27,7 @@ export interface ClaudeBuildOptions {
   strategy?: string;
   useCollection?: boolean;
   userId?: number;
+  powerLevel?: 'casual' | 'optimized' | 'cedh';
 }
 
 export interface ClaudeBuildResult {
@@ -264,6 +265,7 @@ export async function buildDeckWithAI(
     strategy: options.strategy,
     useCollection: options.useCollection,
     commanderName: options.commanderName,
+    powerLevel: options.powerLevel,
   };
 
   const poolResult = await buildScoredCandidatePool(buildOptions);

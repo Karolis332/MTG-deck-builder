@@ -185,9 +185,13 @@ Return ONLY valid JSON, no markdown fences.`;
     const data = await response.json();
     const text = data.content?.[0]?.text || '';
 
-    // Parse JSON response
+    // Parse JSON response — strip markdown code fences if Claude wrapped them
     try {
-      const analysis = JSON.parse(text);
+      let cleanText = text.trim();
+      if (cleanText.startsWith('```')) {
+        cleanText = cleanText.replace(/^```(?:json)?\s*\n?/, '').replace(/\n?```\s*$/, '');
+      }
+      const analysis = JSON.parse(cleanText);
       return NextResponse.json({ analysis, match_id, action_count: actions.length });
     } catch {
       // If Claude didn't return clean JSON, return raw text

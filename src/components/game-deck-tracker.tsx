@@ -74,7 +74,7 @@ function renderManaCost(manaCost: string) {
 
 export function GameDeckTracker({
   deckList, librarySize, drawProbabilities, cardsDrawn,
-  mulliganAdvice, showMulligan, isSideboarding,
+  mulliganAdvice, showMulligan, isSideboarding, opponentCardsSeen,
 }: GameDeckTrackerProps) {
   const grouped = useMemo(() => {
     const cards: GroupedCard[] = deckList.map(entry => ({

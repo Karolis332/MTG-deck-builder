@@ -67,6 +67,11 @@ contextBridge.exposeInMainWorld('electronAPI', {
     return () => ipcRenderer.removeAllListeners('game-log-entry');
   },
 
+  onGameLogUpdate: (callback: (entry: unknown) => void) => {
+    ipcRenderer.on('game-log-update', (_event, entry) => callback(entry));
+    return () => ipcRenderer.removeAllListeners('game-log-update');
+  },
+
   // Game controls
   getMulliganAdvice: (data: unknown) => ipcRenderer.invoke('get-mulligan-advice', data),
   getSideboardGuide: (data: unknown) => ipcRenderer.invoke('get-sideboard-guide', data),

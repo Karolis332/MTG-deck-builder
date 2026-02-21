@@ -760,14 +760,17 @@ describe('extractGameEvents', () => {
     ];
 
     const events = extractGameEvents(blocks);
-    const cardPlayed = events.filter(e => e.type === 'card_played');
 
-    // 52 → 51 → 50 → grpId 44444 (two hops)
-    expect(cardPlayed).toHaveLength(1);
-    if (cardPlayed[0]?.type === 'card_played') {
-      expect(cardPlayed[0].grpId).toBe(44444);
-      expect(cardPlayed[0].fromZoneType).toBe(ZONE_TYPES.STACK);
-      expect(cardPlayed[0].toZoneType).toBe(ZONE_TYPES.BATTLEFIELD);
+    // Stack→Battlefield Resolve no longer emits card_played (removed to prevent duplicates),
+    // but the multi-hop chain resolution still works — verify via zone_change
+    const zoneChanges = events.filter(e => e.type === 'zone_change');
+    const resolveChange = zoneChanges.find(e =>
+      e.type === 'zone_change' && e.fromZoneType === ZONE_TYPES.STACK && e.toZoneType === ZONE_TYPES.BATTLEFIELD
+    );
+    expect(resolveChange).toBeDefined();
+    // 52 → 51 → 50 → grpId 44444 (two hops chain resolution)
+    if (resolveChange?.type === 'zone_change') {
+      expect(resolveChange.grpId).toBe(44444);
     }
   });
 

@@ -183,8 +183,8 @@ export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
       // Colorless lands are fine but not great
       score += 5;
     } else {
-      // Produces off-colors — big penalty
-      score -= 50;
+      // Produces ONLY off-colors — hard exclude (e.g. Urborg in UR deck)
+      continue;
     }
 
     // ── Tribal match bonus ───────────────────────────────────────

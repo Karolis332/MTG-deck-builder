@@ -1,4 +1,4 @@
-import { getDb } from './db';
+import { getDb, getCedhStaples, getMetaCardStatsMap } from './db';
 import type { DbCard, AISuggestion } from './types';
 import { DEFAULT_LAND_COUNT, DEFAULT_DECK_SIZE, getLegalityKey } from './constants';
 import { getCardGlobalScore, getMetaAdjustedScore } from './global-learner';
@@ -293,6 +293,7 @@ export interface BuildOptions {
   strategy?: string; // optional archetype hint: 'aggro', 'control', 'midrange', 'combo'
   useCollection?: boolean; // prefer cards from user's collection
   commanderName?: string; // for commander format
+  powerLevel?: 'casual' | 'optimized' | 'cedh';
 }
 
 interface BuildResult {
@@ -331,7 +332,7 @@ export interface ScoredCandidatePoolResult {
  */
 export async function buildScoredCandidatePool(options: BuildOptions): Promise<ScoredCandidatePoolResult> {
   const db = getDb();
-  const { format, strategy, useCollection = false, commanderName } = options;
+  const { format, strategy, useCollection = false, commanderName, powerLevel } = options;
 
   // If commander format, derive colors from commander's color identity
   let colors = options.colors;
@@ -656,6 +657,19 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
     }
   }
 
+  // ── cEDH staples lookup ────────────────────────────────────────────────
+  const cedhStapleMap = new Map<string, { category: string; power_tier: string }>();
+  if (powerLevel === 'cedh' || powerLevel === 'optimized') {
+    const staples = getCedhStaples(colors, format);
+    for (const s of staples) {
+      cedhStapleMap.set(s.card_name, { category: s.category, power_tier: s.power_tier });
+    }
+  }
+
+  // ── Meta card stats lookup ────────────────────────────────────────────
+  const poolNames = pool.map(c => c.name);
+  const metaStatsMap = getMetaCardStatsMap(poolNames, format);
+
   // ── Step 3: Score cards ─────────────────────────────────────────────────
   // Key change: EDHREC per-commander synergy score is now the dominant signal
   // for commander format decks, replacing the generic edhrec_rank
@@ -739,6 +753,15 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
       }
     }
 
+    // ── Archetype discouraged types penalty ──
+    const template = getTemplate(resolvedStrategy);
+    if (template.discouragedTypes?.length) {
+      const tl = card.type_line?.toLowerCase() ?? '';
+      if (template.discouragedTypes.some(d => tl.includes(d.toLowerCase()))) {
+        score -= 60;
+      }
+    }
+
     // ── Strategy fit ──
     if (resolvedStrategy === 'aggro') {
       if (card.cmc <= 2) score += 10;
@@ -755,8 +778,52 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
       if (text.includes('draw') || text.includes('destroy') || text.includes('create')) score += 3;
     }
 
+    // ── cEDH power level scoring ──
+    if (powerLevel === 'cedh') {
+      const staple = cedhStapleMap.get(card.name);
+      if (staple) {
+        const tierBonus = staple.power_tier === 'cedh' ? 80
+          : staple.power_tier === 'high' ? 50 : 25;
+        score += tierBonus;
+      }
+      // Penalize high-CMC non-staples in cEDH
+      if (card.cmc >= 5 && !cedhStapleMap.has(card.name)) {
+        score -= 40;
+      }
+      // Reward cheap instants/sorceries
+      if (card.cmc <= 1) {
+        const tl = (card.type_line || '').toLowerCase();
+        if (tl.includes('instant') || tl.includes('sorcery')) {
+          score += 15;
+        }
+      }
+    } else if (powerLevel === 'optimized') {
+      const staple = cedhStapleMap.get(card.name);
+      if (staple) {
+        const tierBonus = staple.power_tier === 'cedh' ? 40
+          : staple.power_tier === 'high' ? 25 : 10;
+        score += tierBonus;
+      }
+    }
+
+    // ── Meta card stats scoring ──
+    const metaStats = metaStatsMap.get(card.name);
+    if (metaStats) {
+      // Proven format staple
+      if (metaStats.coreRate > 0.5) {
+        score += 20;
+      }
+      // Placement weighted score (0-15 scaled)
+      score += Math.min(15, Math.round(metaStats.placementScore * 15));
+      // High archetype win rate
+      if (metaStats.winRate > 0.55) {
+        score += 10;
+      }
+    }
+
     // ── Collection bonus ──
-    if (useCollection) {
+    if (useCollection && powerLevel !== 'cedh') {
+      // In cEDH mode, ignore collection — build the best list possible
       const owned = ownedQty.get(card.id) || 0;
       if (owned > 0) {
         score += 30;
@@ -974,6 +1041,16 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
     .sort((a, b) => b[1] - a[1])
     .map(([type]) => type);
 
+  // Only pass tribal types to land builder if deck is genuinely tribal
+  // (commander has tribal synergy or strategy is tribal). Prevents
+  // Secluded Courtyard / Unclaimed Territory in non-tribal decks.
+  const isTrulyTribal = (
+    commanderProfile?.triggerCategories?.includes('tribal_lands') ||
+    resolvedStrategy === 'tribal' ||
+    tribalType !== null
+  );
+  const tribalTypesForLands = isTrulyTribal ? topTribalTypes : [];
+
   // Build non-land card list for mana demand analysis
   const nonLandCards = picked.map(p => ({
     mana_cost: p.card.mana_cost,
@@ -988,7 +1065,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
       format: options.format,
       strategy: resolvedStrategy,
       targetLandCount: targetLands,
-      tribalTypes: topTribalTypes.length > 0 ? topTribalTypes : undefined,
+      tribalTypes: tribalTypesForLands.length > 0 ? tribalTypesForLands : undefined,
       commanderName: commanderCard?.name,
       existingNonLandCards: nonLandCards,
       isCommander,
