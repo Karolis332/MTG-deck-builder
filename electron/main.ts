@@ -6,6 +6,12 @@ import net from 'net';
 import { registerIpcHandlers, ensureWatcherRunning, markServerReady, checkArenaCardDbUpdate } from './ipc-handlers';
 import { registerSetupHandlers } from './setup-handlers';
 import { runFirstBootActions, seedArenaCardCache } from '../src/lib/first-boot';
+import { isOverwolfRuntime } from './platform-detect';
+import type { OverwolfOverlayManager } from './overwolf-overlay';
+import type { OverwolfGepHandler } from './overwolf-gep';
+
+let overwolfOverlay: OverwolfOverlayManager | null = null;
+let overwolfGep: OverwolfGepHandler | null = null;
 
 // Immediate startup trace — verifies our compiled code is running
 const _TRACE = path.join(process.env.APPDATA || '.', 'the-black-grimoire', 'telemetry-debug.log');
@@ -303,6 +309,33 @@ function createMainWindow(): void {
   }
 }
 
+// ── Overwolf overlay ────────────────────────────────────────────────────
+
+export function getOverwolfOverlay(): OverwolfOverlayManager | null {
+  return overwolfOverlay;
+}
+
+async function initOverwolfOverlay(): Promise<void> {
+  if (!isOverwolfRuntime()) return;
+  try {
+    const { createOverwolfOverlayManager } = await import('./overwolf-overlay');
+    overwolfOverlay = createOverwolfOverlayManager();
+    overwolfOverlay.init(PORT);
+    mainTrace('Overwolf overlay manager initialized');
+  } catch (err) {
+    mainTrace(`Overwolf overlay init failed: ${err}`);
+  }
+
+  try {
+    const { createOverwolfGepHandler } = await import('./overwolf-gep');
+    overwolfGep = createOverwolfGepHandler();
+    overwolfGep.init();
+    mainTrace('Overwolf GEP handler initialized');
+  } catch (err) {
+    mainTrace(`Overwolf GEP init failed: ${err}`);
+  }
+}
+
 // ── Auto-start watcher ──────────────────────────────────────────────────
 
 function autoStartWatcher(): void {
@@ -458,6 +491,9 @@ export async function transitionToMainApp(): Promise<void> {
   mainTrace('Auto-starting watcher on app launch');
   autoStartWatcher();
 
+  // Initialize Overwolf overlay if running in Overwolf mode
+  initOverwolfOverlay();
+
   // Run first-boot actions (account creation, card seeding) after server is ready
   setTimeout(async () => {
     try {
@@ -513,6 +549,9 @@ app.whenReady().then(async () => {
     mainTrace('Auto-starting watcher on app launch (dev mode)');
     autoStartWatcher();
 
+    // Initialize Overwolf overlay if running in Overwolf mode
+    initOverwolfOverlay();
+
     // Seed Arena grpId cache + check for CDN updates (non-blocking)
     setTimeout(async () => {
       try { await seedArenaCardCache(); } catch (err) {
@@ -542,6 +581,14 @@ app.on('window-all-closed', () => {
 });
 
 app.on('will-quit', () => {
+  if (overwolfGep) {
+    overwolfGep.destroy();
+    overwolfGep = null;
+  }
+  if (overwolfOverlay) {
+    overwolfOverlay.destroy();
+    overwolfOverlay = null;
+  }
   if (nextServer) {
     try {
       nextServer.kill('SIGTERM');

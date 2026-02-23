@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { isElectron, getElectronAPI } from '@/lib/electron-bridge';
+import { isElectron, getElectronAPI, checkIsOverwolf } from '@/lib/electron-bridge';
 import type { GameLogEntry } from '@/lib/electron-bridge';
 import type { GameStateSnapshot } from '@/lib/game-state-engine';
 import type { MulliganAdvice } from '@/lib/mulligan-advisor';
@@ -35,6 +35,11 @@ export default function GamePage() {
     hasActiveGame?: boolean;
   } | null>(null);
   const [cardImages, setCardImages] = useState<Record<number, { name: string; imageUriSmall: string | null; imageUriNormal: string | null }>>({});
+  const [isOW, setIsOW] = useState(false);
+
+  useEffect(() => {
+    checkIsOverwolf().then(setIsOW);
+  }, []);
 
   useEffect(() => {
     const api = getElectronAPI();
@@ -238,6 +243,17 @@ export default function GamePage() {
 
   return (
     <div className="grid h-[calc(100vh-3.5rem)] grid-cols-[280px_1fr_280px]">
+      {/* Overwolf overlay toggle */}
+      {isOW && (
+        <div className="col-span-3 flex items-center justify-end px-3 py-1 bg-card/50 border-b border-border">
+          <button
+            onClick={() => getElectronAPI()?.toggleOverlay()}
+            className="text-xs text-muted-foreground hover:text-primary transition-colors"
+          >
+            Toggle In-Game Overlay (Alt+O)
+          </button>
+        </div>
+      )}
       {/* Left: Your Deck */}
       <div className="border-r border-border overflow-hidden">
         <GameDeckTracker

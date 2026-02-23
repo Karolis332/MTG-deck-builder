@@ -87,6 +87,30 @@ contextBridge.exposeInMainWorld('electronAPI', {
     return () => ipcRenderer.removeAllListeners('arena-card-db-update');
   },
 
+  // Overwolf overlay controls
+  isOverwolf: () => ipcRenderer.invoke('is-overwolf'),
+  toggleOverlay: () => ipcRenderer.invoke('toggle-overlay'),
+  setOverlayInteractive: (interactive: boolean) =>
+    ipcRenderer.invoke('set-overlay-interactive', interactive),
+
+  // GEP events (Overwolf only)
+  onGepSceneChange: (callback: (scene: string) => void) => {
+    ipcRenderer.on('gep-scene-change', (_event, scene) => callback(scene));
+    return () => ipcRenderer.removeAllListeners('gep-scene-change');
+  },
+  onGepInventory: (callback: (data: unknown) => void) => {
+    ipcRenderer.on('gep-inventory', (_event, data) => callback(data));
+    return () => ipcRenderer.removeAllListeners('gep-inventory');
+  },
+  onGepDraftPack: (callback: (data: unknown) => void) => {
+    ipcRenderer.on('gep-draft-pack', (_event, data) => callback(data));
+    return () => ipcRenderer.removeAllListeners('gep-draft-pack');
+  },
+  onGepDraftPick: (callback: (data: unknown) => void) => {
+    ipcRenderer.on('gep-draft-pick', (_event, data) => callback(data));
+    return () => ipcRenderer.removeAllListeners('gep-draft-pick');
+  },
+
   // Platform info
   getPlatform: () => ipcRenderer.invoke('get-platform'),
   isElectron: true,

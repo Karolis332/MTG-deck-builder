@@ -86,6 +86,17 @@ export interface ElectronAPI {
   updateArenaCardDb: () => Promise<{ updated: boolean; version?: string; count?: number; error?: string }>;
   onArenaCardDbUpdate: (callback: (data: { status: string; version?: string; inserted?: number; total?: number; error?: string }) => void) => () => void;
 
+  // Overwolf overlay controls
+  isOverwolf: () => Promise<boolean>;
+  toggleOverlay: () => Promise<{ visible: boolean }>;
+  setOverlayInteractive: (interactive: boolean) => Promise<{ interactive: boolean }>;
+
+  // GEP events (Overwolf only)
+  onGepSceneChange: (callback: (scene: string) => void) => () => void;
+  onGepInventory: (callback: (data: unknown) => void) => () => void;
+  onGepDraftPack: (callback: (data: unknown) => void) => () => void;
+  onGepDraftPick: (callback: (data: unknown) => void) => () => void;
+
   getPlatform: () => Promise<string>;
   isElectron: boolean;
 }
@@ -103,4 +114,22 @@ export function isElectron(): boolean {
 export function getElectronAPI(): ElectronAPI | null {
   if (isElectron()) return window.electronAPI!;
   return null;
+}
+
+let _isOverwolfCached: boolean | null = null;
+
+/** Check if running in Overwolf mode (cached after first call) */
+export async function checkIsOverwolf(): Promise<boolean> {
+  if (_isOverwolfCached !== null) return _isOverwolfCached;
+  const api = getElectronAPI();
+  if (!api) {
+    _isOverwolfCached = false;
+    return false;
+  }
+  try {
+    _isOverwolfCached = await api.isOverwolf();
+  } catch {
+    _isOverwolfCached = false;
+  }
+  return _isOverwolfCached;
 }

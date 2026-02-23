@@ -25,7 +25,12 @@
     "dist:portable": "concurrently \"npm:build\" \"npm:build:electron\" && electron-builder --win portable",
     "dist:zip": "concurrently \"npm:build\" \"npm:build:electron\" && electron-builder --win zip --mac zip --linux tar.gz",
     "update:arena-cards": "node scripts/download_arena_card_db.js",
+    "start:ow": "node -e \"const p=process.env.PORT||'3000';require('child_process').execSync(`npx concurrently \\\"next dev --port ${p}\\\" \\\"wait-on http://localhost:${p} && npx @overwolf/ow-electron --no-sandbox .\\\"`,{stdio:'inherit',env:{...process.env,PORT:p}})\"",
+    "dist:overwolf": "concurrently \"npm:build\" \"npm:build:electron\" && npx @overwolf/ow-electron-builder --config ow-electron-builder.yml --win",
     "postinstall": "electron-builder install-app-deps || true"
+  },
+  "overwolf": {
+    "packages": ["gep", "overlay"]
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.72.1",
@@ -43,6 +48,9 @@
     "zod": "^3.24.1"
   },
   "devDependencies": {
+    "@overwolf/electron-is-overwolf": "^0.0.2",
+    "@overwolf/ow-electron": "^37.10.3",
+    "@overwolf/ow-electron-builder": "^26.0.12",
     "@tailwindcss/typography": "^0.5.16",
     "@types/better-sqlite3": "^7.6.12",
     "@types/node": "^22.10.5",

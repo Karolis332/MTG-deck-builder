@@ -20,6 +20,12 @@ function getElectronVersion(context) {
     return fs.readFileSync(versionFile, 'utf-8').trim().replace('v', '');
   } catch {}
 
+  // Fallback: ow-electron (Overwolf's Electron fork)
+  try {
+    const owElectronPkg = path.join(process.cwd(), 'node_modules', '@overwolf', 'ow-electron', 'package.json');
+    return JSON.parse(fs.readFileSync(owElectronPkg, 'utf-8')).version;
+  } catch {}
+
   throw new Error('Could not determine Electron version');
 }
 

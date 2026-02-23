@@ -9,6 +9,7 @@ import { ArenaLogWatcher } from './arena-log-watcher';
 import { parseArenaLogFile } from '../src/lib/arena-log-reader';
 import { GrpIdResolver } from '../src/lib/grp-id-resolver';
 import { analyzeMulligan } from '../src/lib/mulligan-advisor';
+import { isOverwolfRuntime } from './platform-detect';
 import type { GameStateSnapshot, ResolvedCard } from '../src/lib/game-state-engine';
 import type { TelemetryFlushData } from '../src/lib/match-telemetry';
 import type { GameLogEntry } from './arena-log-watcher';
@@ -547,6 +548,36 @@ export function registerIpcHandlers(): void {
   // ── Platform ─────────────────────────────────────────────────────────────
 
   ipcMain.handle('get-platform', () => process.platform);
+
+  // ── Overwolf overlay controls ───────────────────────────────────────────
+
+  ipcMain.handle('is-overwolf', () => isOverwolfRuntime());
+
+  ipcMain.handle('toggle-overlay', () => {
+    try {
+      const { getOverwolfOverlay } = require('./main');
+      const overlay = getOverwolfOverlay();
+      if (overlay) {
+        overlay.toggleVisibility();
+        return { visible: overlay.isOverlayVisible() };
+      }
+    } catch { /* not in Overwolf mode */ }
+    return { visible: false };
+  });
+
+  ipcMain.handle('set-overlay-interactive', (_event, interactive: boolean) => {
+    try {
+      const { getOverwolfOverlay } = require('./main');
+      const overlay = getOverwolfOverlay();
+      if (overlay) {
+        if (interactive !== overlay.isOverlayInteractive()) {
+          overlay.toggleInteractive();
+        }
+        return { interactive: overlay.isOverlayInteractive() };
+      }
+    } catch { /* not in Overwolf mode */ }
+    return { interactive: false };
+  });
 
   // ── Watcher controls ─────────────────────────────────────────────────────
 

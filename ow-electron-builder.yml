@@ -1,0 +1,73 @@
+appId: com.the-black-grimoire.overwolf
+productName: The Black Grimoire
+executableName: the-black-grimoire
+copyright: Copyright © 2025 The Black Grimoire
+
+directories:
+  output: dist-overwolf
+  buildResources: build
+
+# Disable asar — Next.js runs via ELECTRON_RUN_AS_NODE and needs real
+# filesystem access to serve .next/static/ assets and load native modules.
+asar: false
+
+# Rebuild better-sqlite3 native module for the packaged runtime
+afterPack: scripts/afterPack.js
+
+files:
+  - "electron-dist/**/*"
+  - "electron/**/*.js"
+  - "package.json"
+  - "next.config.js"
+  - "!node_modules"
+  - "!.git"
+  - "!src/**"
+  - "!tests/**"
+  - "!scripts/**"
+  - "!build/**"
+
+# Extra resources bundled alongside the app (accessible via process.resourcesPath)
+extraResources:
+  - from: ".next/standalone/"
+    to: "standalone"
+    filter:
+      - "**/*"
+  - from: "electron/resources/"
+    to: "."
+    filter:
+      - "**/*"
+  - from: "docs/"
+    to: "docs"
+    filter:
+      - "MTG_DECK_BUILDING_KNOWLEDGE.md"
+  - from: "scripts/"
+    to: "scripts"
+    filter:
+      - "*.py"
+  - from: "data/"
+    to: "."
+    filter:
+      - "arena_grp_ids.json"
+
+win:
+  target:
+    - target: nsis
+      arch: [x64]
+    - target: portable
+      arch: [x64]
+  icon: build/icon.ico
+  artifactName: "${productName}-${version}-overwolf-${arch}.${ext}"
+
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+  installerIcon: build/icon.ico
+  uninstallerIcon: build/icon.ico
+  installerHeaderIcon: build/icon.ico
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+  shortcutName: The Black Grimoire (Overwolf)
+  license: LICENSE
+
+portable:
+  artifactName: "${productName}-${version}-overwolf-portable.${ext}"
