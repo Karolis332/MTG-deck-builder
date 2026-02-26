@@ -69,14 +69,18 @@ module.exports = async function afterPack(context) {
     }
   }
 
-  // ── Step 3: Check if already built ─────────────────────────────────────
+  // ── Step 3: Clean stale builds ─────────────────────────────────────────
+  // The standalone copy always has a Node.js-compiled binary from next build.
+  // We must rebuild for Electron's ABI, so remove any existing artifacts first.
   const prebuildDir = path.join(targetSqliteDir, 'prebuilds');
   const buildDir = path.join(targetSqliteDir, 'build', 'Release');
-  const alreadyBuilt = (fs.existsSync(prebuildDir) && fs.readdirSync(prebuildDir).length > 0) ||
-    (fs.existsSync(buildDir) && fs.existsSync(path.join(buildDir, 'better_sqlite3.node')));
-  if (alreadyBuilt) {
-    console.log('[afterPack] Native module already built, skipping rebuild');
-    return;
+  if (fs.existsSync(prebuildDir)) {
+    console.log('[afterPack] Removing stale prebuilds/');
+    fs.rmSync(prebuildDir, { recursive: true, force: true });
+  }
+  if (fs.existsSync(buildDir) && fs.existsSync(path.join(buildDir, 'better_sqlite3.node'))) {
+    console.log('[afterPack] Removing stale build/Release/better_sqlite3.node');
+    fs.unlinkSync(path.join(buildDir, 'better_sqlite3.node'));
   }
 
   // ── Step 4: Rebuild ────────────────────────────────────────────────────
