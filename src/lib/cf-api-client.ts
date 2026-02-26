@@ -63,6 +63,25 @@ function isCFEnabled(): boolean {
   }
 }
 
+function getCFApiKey(): string {
+  try {
+    const db = getDb();
+    const row = db.prepare("SELECT value FROM app_state WHERE key = 'cf_api_key'").get() as { value: string } | undefined;
+    return row?.value || '';
+  } catch {
+    return '';
+  }
+}
+
+function buildHeaders(): Record<string, string> {
+  const headers: Record<string, string> = { 'Content-Type': 'application/json' };
+  const apiKey = getCFApiKey();
+  if (apiKey) {
+    headers['X-API-Key'] = apiKey;
+  }
+  return headers;
+}
+
 // ── Deck hashing (must match Python side) ────────────────────────────────────
 
 function hashDeck(cardNames: string[], commander: string): string {
@@ -143,7 +162,7 @@ export async function getCFRecommendations(
 
     const resp = await fetch(`${url}/recommend`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: buildHeaders(),
       body: JSON.stringify({ cards: deckCards, commander, limit }),
       signal: controller.signal,
     });
@@ -176,7 +195,7 @@ export async function getSimilarDecks(
 
     const resp = await fetch(`${url}/similar-decks`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: buildHeaders(),
       body: JSON.stringify({ cards: deckCards, commander, limit }),
       signal: controller.signal,
     });

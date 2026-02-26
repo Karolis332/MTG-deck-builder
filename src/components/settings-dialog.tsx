@@ -21,6 +21,8 @@ export function SettingsDialog({ open, onClose }: SettingsDialogProps) {
   const [anthropicMessage, setAnthropicMessage] = useState('');
   const [topdeckMessage, setTopdeckMessage] = useState('');
   const [cfApiUrl, setCfApiUrl] = useState('');
+  const [cfApiKey, setCfApiKey] = useState('');
+  const [maskedCfApiKey, setMaskedCfApiKey] = useState('');
   const [cfEnabled, setCfEnabled] = useState(true);
   const [cfMessage, setCfMessage] = useState('');
   const [cfTesting, setCfTesting] = useState(false);
@@ -78,9 +80,15 @@ export function SettingsDialog({ open, onClose }: SettingsDialogProps) {
         if (data.settings?.cf_enabled !== undefined) {
           setCfEnabled(data.settings.cf_enabled !== 'false');
         }
+        if (data.settings?.cf_api_key) {
+          setMaskedCfApiKey(data.settings.cf_api_key);
+        } else {
+          setMaskedCfApiKey('');
+        }
         setOpenaiKey('');
         setAnthropicKey('');
         setTopdeckKey('');
+        setCfApiKey('');
         setMessage('');
         setAnthropicMessage('');
         setTopdeckMessage('');
@@ -249,13 +257,22 @@ export function SettingsDialog({ open, onClose }: SettingsDialogProps) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ key: 'cf_enabled', value: cfEnabled ? 'true' : 'false' }),
       });
+      if (cfApiKey.trim()) {
+        await fetch('/api/settings', {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ key: 'cf_api_key', value: cfApiKey.trim() }),
+        });
+        setMaskedCfApiKey(cfApiKey.trim().slice(0, 4) + '...' + cfApiKey.trim().slice(-4));
+        setCfApiKey('');
+      }
       setCfMessage('CF settings saved');
     } catch {
       setCfMessage('Failed to save CF settings');
     } finally {
       setSaving(false);
     }
-  }, [cfApiUrl, cfEnabled]);
+  }, [cfApiUrl, cfEnabled, cfApiKey]);
 
   const testCfConnection = useCallback(async () => {
     setCfTesting(true);
@@ -765,18 +782,27 @@ export function SettingsDialog({ open, onClose }: SettingsDialogProps) {
                 className="flex-1 rounded-lg border border-border bg-background px-3 py-2 text-sm outline-none focus:border-primary"
               />
               <button
-                onClick={saveCfSettings}
-                disabled={saving}
-                className="rounded-lg bg-primary px-3 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-50"
-              >
-                Save
-              </button>
-              <button
                 onClick={testCfConnection}
                 disabled={cfTesting}
                 className="rounded-lg border border-border px-3 py-2 text-sm font-medium transition-colors hover:bg-accent disabled:opacity-50"
               >
                 {cfTesting ? 'Testing...' : 'Test'}
+              </button>
+            </div>
+            <div className="mt-2 flex gap-2">
+              <input
+                type="password"
+                value={cfApiKey}
+                onChange={(e) => setCfApiKey(e.target.value)}
+                placeholder={maskedCfApiKey || 'CF API Key (optional, for cloud deployment)'}
+                className="flex-1 rounded-lg border border-border bg-background px-3 py-2 text-sm outline-none focus:border-primary"
+              />
+              <button
+                onClick={saveCfSettings}
+                disabled={saving}
+                className="rounded-lg bg-primary px-3 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-50"
+              >
+                Save
               </button>
             </div>
             {cfMessage && (
