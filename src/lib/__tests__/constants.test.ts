@@ -27,6 +27,7 @@ describe('FORMATS', () => {
     expect(FORMATS).toContain('commander');
     expect(FORMATS).toContain('pioneer');
     expect(FORMATS).toContain('pauper');
+    expect(FORMATS).toContain('1v1');
   });
 
   it('has a label for every format', () => {
@@ -45,6 +46,7 @@ describe('DEFAULT_DECK_SIZE', () => {
     expect(DEFAULT_DECK_SIZE['standard']).toBe(60);
     expect(DEFAULT_DECK_SIZE['modern']).toBe(60);
     expect(DEFAULT_DECK_SIZE['pioneer']).toBe(60);
+    expect(DEFAULT_DECK_SIZE['1v1']).toBe(60);
   });
 
   it('has a default fallback', () => {
@@ -54,7 +56,7 @@ describe('DEFAULT_DECK_SIZE', () => {
 
 describe('DEFAULT_LAND_COUNT', () => {
   it('has sensible land counts', () => {
-    expect(DEFAULT_LAND_COUNT['commander']).toBe(37);
+    expect(DEFAULT_LAND_COUNT['commander']).toBe(38);
     expect(DEFAULT_LAND_COUNT['standard']).toBe(24);
     expect(DEFAULT_LAND_COUNT['default']).toBe(24);
   });

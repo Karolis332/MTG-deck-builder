@@ -13,6 +13,7 @@ const NAV_ITEMS = [
   { href: '/', label: 'Home', icon: HomeIcon },
   { href: '/collection', label: 'Collection', icon: CollectionIcon },
   { href: '/deck-builder', label: 'Decks', icon: DeckIcon },
+  { href: '/duel', label: 'Duel', icon: DuelIcon },
   { href: '/game', label: 'Game', icon: GameIcon },
   { href: '/analytics', label: 'Analytics', icon: AnalyticsIcon },
 ];
@@ -329,6 +330,17 @@ function UserIcon({ className }: { className?: string }) {
     <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
       <circle cx="12" cy="7" r="4" />
+    </svg>
+  );
+}
+
+function DuelIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M6 3l6 6M18 3l-6 6" />
+      <path d="M4 21l4-4M20 21l-4-4" />
+      <path d="M12 12v9" />
+      <circle cx="12" cy="9" r="3" />
     </svg>
   );
 }

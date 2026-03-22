@@ -23,6 +23,7 @@ except ImportError:
     sys.exit(1)
 
 EDHREC_JSON_BASE = "https://json.edhrec.com/pages/average-decks"
+EDHREC_HTML_BASE = "https://edhrec.com/average-decks"
 RATE_LIMIT = 2.0
 
 
@@ -58,23 +59,59 @@ def commander_to_slug(name: str) -> str:
 
 
 def fetch_average_decklist(session: requests.Session, commander_name: str) -> dict | None:
-    """Fetch average decklist from EDHREC JSON API."""
+    """Fetch average decklist from EDHREC. Tries JSON API first, falls back to HTML __NEXT_DATA__."""
     slug = commander_to_slug(commander_name)
-    url = f"{EDHREC_JSON_BASE}/{slug}.json"
 
+    # Try JSON API first
+    url = f"{EDHREC_JSON_BASE}/{slug}.json"
     time.sleep(RATE_LIMIT)
     try:
         resp = session.get(url, timeout=15)
+        if resp.status_code == 200:
+            data = resp.json()
+            if data:
+                return data
+    except (requests.RequestException, json.JSONDecodeError):
+        pass
+
+    # Fallback: HTML page with __NEXT_DATA__ (EDHREC locked down JSON API)
+    html_url = f"{EDHREC_HTML_BASE}/{slug}"
+    time.sleep(RATE_LIMIT)
+    try:
+        resp = session.get(html_url, timeout=15, headers={
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/131.0.0.0 Safari/537.36",
+            "Accept": "text/html",
+        })
         if resp.status_code == 404:
             print(f"  [WARN] No average deck for {commander_name} (404)")
             return None
-        resp.raise_for_status()
-        return resp.json()
+        if resp.status_code != 200:
+            print(f"  [WARN] HTTP {resp.status_code} for {commander_name}")
+            return None
+
+        # Extract __NEXT_DATA__ JSON from HTML
+        match = re.search(r'__NEXT_DATA__[^>]*>(.*?)</script>', resp.text)
+        if not match:
+            print(f"  [WARN] No __NEXT_DATA__ found for {commander_name}")
+            return None
+
+        next_data = json.loads(match.group(1))
+        page_data = next_data.get("props", {}).get("pageProps", {}).get("data", {})
+        container = page_data.get("container", {}).get("json_dict", {})
+        cardlists = container.get("cardlists", [])
+
+        if not cardlists:
+            print(f"  [WARN] No cardlists in __NEXT_DATA__ for {commander_name}")
+            return None
+
+        # Repackage into the format store_decklist() expects
+        return {"cardlists": cardlists}
+
     except requests.RequestException as e:
-        print(f"  [WARN] Failed to fetch {url}: {e}")
+        print(f"  [WARN] Failed to fetch HTML for {commander_name}: {e}")
         return None
-    except json.JSONDecodeError:
-        print(f"  [WARN] Invalid JSON for {commander_name}")
+    except (json.JSONDecodeError, KeyError) as e:
+        print(f"  [WARN] Failed to parse __NEXT_DATA__ for {commander_name}: {e}")
         return None
 
 
@@ -104,9 +141,16 @@ def store_decklist(conn: sqlite3.Connection, commander_name: str, data: dict) ->
                             "category": "",
                         })
 
-    # Try "cardlists" key
+    # Try "cardlists" at top level or nested under container.json_dict
     if not cards:
         cardlists = data.get("cardlists", [])
+        # EDHREC moved cardlists under container.json_dict (2026 format change)
+        if not cardlists:
+            container = data.get("container", {})
+            if isinstance(container, dict):
+                json_dict = container.get("json_dict", {})
+                if isinstance(json_dict, dict):
+                    cardlists = json_dict.get("cardlists", [])
         if isinstance(cardlists, list):
             for group in cardlists:
                 if not isinstance(group, dict):
@@ -114,10 +158,29 @@ def store_decklist(conn: sqlite3.Connection, commander_name: str, data: dict) ->
                 tag = group.get("tag", "")
                 for card in group.get("cardviews", []):
                     if isinstance(card, dict):
+                        name = card.get("name", "")
+                        # Basics have label like "4 Forests" — extract just the card name
+                        if not name and card.get("label"):
+                            label_match = re.match(r"^\d+\s+(.+)$", card["label"])
+                            name = label_match.group(1) if label_match else card["label"]
                         cards.append({
-                            "name": card.get("name", ""),
-                            "card_type": card.get("type", ""),
+                            "name": name,
+                            "card_type": card.get("type", tag.rstrip("s")),
                             "category": tag,
+                        })
+
+    # Try "deck" array (EDHREC 2026 format: list of "1 Card Name" strings)
+    if not cards:
+        deck_lines = data.get("deck", [])
+        if isinstance(deck_lines, list) and deck_lines:
+            for line in deck_lines:
+                if isinstance(line, str):
+                    match = re.match(r"^(\d+)\s+(.+)$", line.strip())
+                    if match:
+                        cards.append({
+                            "name": match.group(2),
+                            "card_type": "",
+                            "category": "",
                         })
 
     # Try flat "cards" list

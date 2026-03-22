@@ -8,6 +8,8 @@ import type { MulliganAdvice } from '@/lib/mulligan-advisor';
 import { GameNarrative } from '@/components/game-narrative';
 import { GameDeckTracker } from '@/components/game-deck-tracker';
 import { GameOpponentTracker } from '@/components/game-opponent-tracker';
+import { DeckPickerOverlay } from '@/components/deck-picker-overlay';
+import { ScreenRecorderControls } from '@/components/screen-recorder-controls';
 
 export default function GamePage() {
   const [gameState, setGameState] = useState<GameStateSnapshot | null>(null);
@@ -36,6 +38,8 @@ export default function GamePage() {
   } | null>(null);
   const [cardImages, setCardImages] = useState<Record<number, { name: string; imageUriSmall: string | null; imageUriNormal: string | null }>>({});
   const [isOW, setIsOW] = useState(false);
+  const [showDeckPicker, setShowDeckPicker] = useState(false);
+  const [selectedDeckId, setSelectedDeckId] = useState<number | null>(null);
 
   useEffect(() => {
     checkIsOverwolf().then(setIsOW);
@@ -71,14 +75,44 @@ export default function GamePage() {
         setMulliganAdvice(null);
         setShowMulligan(false);
         setLogEntries([]); // Clear previous match log on new match start
+        setShowDeckPicker(true);
+        setSelectedDeckId(null);
       })
     );
 
     cleanups.push(
-      api.onMatchEnded(() => {
+      api.onMatchEnded((data) => {
         setIsMatchActive(false);
         setIsSideboarding(false);
         setShowMulligan(false);
+        setShowDeckPicker(false);
+
+        // Persist match result to live session
+        if (data.matchId) {
+          fetch('/api/live-session/result', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              matchId: data.matchId,
+              result: data.result ?? 'unknown',
+              opponentName: displayMatchInfo?.opponentName ?? null,
+            }),
+          }).catch(() => {});
+        }
+
+        // Fire VW event for match outcome learning
+        if (data.deckCards?.length && data.commander && (data.result === 'win' || data.result === 'loss')) {
+          fetch('/api/cf-events', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              event_type: data.result === 'win' ? 'game_won' : 'game_lost',
+              commander: data.commander,
+              color_identity: '',
+              deck_cards: data.deckCards,
+            }),
+          }).catch(() => {});
+        }
       })
     );
 
@@ -202,6 +236,28 @@ export default function GamePage() {
     });
   }, [watcherStatus]);
 
+  const handleDeckSelect = async (deck: { id: number; name: string; format: string | null }) => {
+    setSelectedDeckId(deck.id);
+    setShowDeckPicker(false);
+
+    const mid = matchInfo?.matchId || lastMatchInfo?.matchId;
+    if (!mid) return;
+
+    // Link match to deck
+    await fetch('/api/live-session', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ matchId: mid, deckId: deck.id }),
+    }).catch(() => {});
+
+    // Save as preference for next game
+    await fetch('/api/game-deck-preference', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ deckId: deck.id }),
+    }).catch(() => {});
+  };
+
   if (!isElectron()) {
     return (
       <div className="mx-auto max-w-xl px-4 py-16 text-center">
@@ -242,18 +298,27 @@ export default function GamePage() {
   const displayMatchInfo = matchInfo ?? lastMatchInfo;
 
   return (
+    <>
+    <DeckPickerOverlay
+      isOpen={showDeckPicker}
+      matchId={matchInfo?.matchId || lastMatchInfo?.matchId || ''}
+      format={matchInfo?.format || lastMatchInfo?.format || null}
+      onSelect={handleDeckSelect}
+      onDismiss={() => setShowDeckPicker(false)}
+    />
     <div className="grid h-[calc(100vh-3.5rem)] grid-cols-[280px_1fr_280px]">
-      {/* Overwolf overlay toggle */}
-      {isOW && (
-        <div className="col-span-3 flex items-center justify-end px-3 py-1 bg-card/50 border-b border-border">
+      {/* Top bar: recording controls + Overwolf toggle */}
+      <div className="col-span-3 flex items-center justify-between px-3 py-1 bg-card/50 border-b border-border">
+        <ScreenRecorderControls />
+        {isOW && (
           <button
             onClick={() => getElectronAPI()?.toggleOverlay()}
             className="text-xs text-muted-foreground hover:text-primary transition-colors"
           >
             Toggle In-Game Overlay (Alt+O)
           </button>
-        </div>
-      )}
+        )}
+      </div>
       {/* Left: Your Deck */}
       <div className="border-r border-border overflow-hidden">
         <GameDeckTracker
@@ -292,5 +357,6 @@ export default function GamePage() {
         />
       </div>
     </div>
+    </>
   );
 }

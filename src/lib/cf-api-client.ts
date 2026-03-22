@@ -50,7 +50,7 @@ function getCFApiUrl(): string {
     const row = db.prepare("SELECT value FROM app_state WHERE key = 'cf_api_url'").get() as { value: string } | undefined;
     if (row?.value) return row.value;
   } catch {}
-  return 'http://localhost:8000';
+  return 'http://187.77.110.100/cf-api';
 }
 
 function isCFEnabled(): boolean {
@@ -238,6 +238,57 @@ export function resolveCFToDbCards(
   }
 
   return results;
+}
+
+/**
+ * Test connection to the CF API.
+ */
+// ── EDHREC Consensus ────────────────────────────────────────────────────────
+
+export interface ConsensusCard {
+  card_name: string;
+  in_edhrec: boolean;
+  in_user_deck: boolean;
+  edhrec_quantity: number;
+  category: 'missing_staple' | 'unique_pick' | 'consensus';
+}
+
+export interface EDHRECConsensusResponse {
+  commander: string;
+  edhrec_deck_found: boolean;
+  edhrec_card_count: number;
+  user_card_count: number;
+  overlap_count: number;
+  overlap_pct: number;
+  missing_staples: ConsensusCard[];
+  unique_picks: ConsensusCard[];
+  consensus_cards: ConsensusCard[];
+}
+
+export async function getEDHRECConsensus(
+  deckCards: string[],
+  commander: string,
+): Promise<EDHRECConsensusResponse | null> {
+  if (!isCFEnabled()) return null;
+
+  const url = getCFApiUrl();
+  try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), CF_TIMEOUT_MS);
+
+    const resp = await fetch(`${url}/edhrec-consensus`, {
+      method: 'POST',
+      headers: buildHeaders(),
+      body: JSON.stringify({ cards: deckCards, commander }),
+      signal: controller.signal,
+    });
+    clearTimeout(timeout);
+
+    if (!resp.ok) return null;
+    return await resp.json();
+  } catch {
+    return null;
+  }
 }
 
 /**

@@ -277,7 +277,7 @@ export function SettingsDialog({ open, onClose }: SettingsDialogProps) {
   const testCfConnection = useCallback(async () => {
     setCfTesting(true);
     setCfMessage('');
-    const url = cfApiUrl.trim() || 'http://localhost:8000';
+    const url = cfApiUrl.trim() || 'http://187.77.110.100/cf-api';
     try {
       const resp = await fetch(`${url}/health`, { signal: AbortSignal.timeout(5000) });
       if (resp.ok) {
@@ -778,7 +778,7 @@ export function SettingsDialog({ open, onClose }: SettingsDialogProps) {
                 type="text"
                 value={cfApiUrl}
                 onChange={(e) => setCfApiUrl(e.target.value)}
-                placeholder="http://localhost:8000"
+                placeholder="http://187.77.110.100/cf-api"
                 className="flex-1 rounded-lg border border-border bg-background px-3 py-2 text-sm outline-none focus:border-primary"
               />
               <button

@@ -8,6 +8,7 @@ import { getTemplate, getScaledCurve, getColorAdjustment, isImpulseDraw, mergeWi
 import { analyzeCommander } from './commander-synergy';
 import type { CommanderSynergyProfile } from './commander-synergy';
 import { buildOptimalLandBase, analyzeManaDemands } from './land-intelligence';
+import { getCFRecommendations, resolveCFToDbCards } from './cf-api-client';
 
 // ── Commander synergy text patterns for card scoring ────────────────────────
 // Maps synergy categories from commander-synergy.ts to oracle text substrings
@@ -32,7 +33,7 @@ const SYNERGY_REQUIREMENTS_MAP = {
 // ── Synergy keyword groups ──────────────────────────────────────────────────
 // Cards sharing keywords within a group have natural synergy
 
-const SYNERGY_GROUPS: Record<string, string[]> = {
+export const SYNERGY_GROUPS: Record<string, string[]> = {
   counters: ['+1/+1 counter', 'proliferate', 'counter on', 'modify', 'adapt', 'evolve', 'bolster'],
   tokens: ['create a', 'create two', 'token', 'populate', 'convoke', 'go wide'],
   graveyard: ['mill', 'return from your graveyard', 'flashback', 'unearth', 'dredge', 'self-mill', 'into your graveyard'],
@@ -100,7 +101,7 @@ const EDHREC_THEME_MAP: Record<string, string> = {
   'topdeck': 'draw',
 };
 
-function detectDeckThemes(cards: DbCard[]): string[] {
+export function detectDeckThemes(cards: DbCard[]): string[] {
   const themeScores: Record<string, number> = {};
 
   for (const card of cards) {
@@ -361,8 +362,8 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
     .map((c) => `c.color_identity NOT LIKE '%${c}%'`)
     .join(' AND ');
 
-  // Only include cards that are legal in the format
-  const legalityFilter = format
+  // Only include cards that are legal in the format (skip for 1v1 — no Scryfall legality data)
+  const legalityFilter = format && format !== '1v1'
     ? `AND c.legalities LIKE '%"${getLegalityKey(format)}":"legal"%'`
     : '';
 
@@ -670,6 +671,31 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
   const poolNames = pool.map(c => c.name);
   const metaStatsMap = getMetaCardStatsMap(poolNames, format);
 
+  // ── Collaborative Filtering recommendations ─────────────────────────
+  const cfScoreMap = new Map<string, number>();
+  if (isCommander && commanderName) {
+    try {
+      const deckCardNames = pool.slice(0, 30).map(c => c.name);
+      const cfRecs = await getCFRecommendations(deckCardNames, commanderName, 50);
+      for (const rec of cfRecs) {
+        cfScoreMap.set(rec.card_name, rec.cf_score);
+      }
+      // Inject CF-recommended cards into pool if not already present
+      if (cfRecs.length > 0) {
+        const existingIds = new Set(pool.map(c => c.id));
+        const cfCards = resolveCFToDbCards(cfRecs, existingIds);
+        for (const { card } of cfCards) {
+          if (!seenNames.has(card.name)) {
+            seenNames.add(card.name);
+            pool.push(card);
+          }
+        }
+      }
+    } catch {
+      // CF API unreachable — non-blocking
+    }
+  }
+
   // ── Step 3: Score cards ─────────────────────────────────────────────────
   // Key change: EDHREC per-commander synergy score is now the dominant signal
   // for commander format decks, replacing the generic edhrec_rank
@@ -682,6 +708,13 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
     if (mlScore !== undefined) {
       // ML predicted win rate (0-1) scaled to 0-25 bonus
       score += Math.max(0, (mlScore - 0.4) * 40);
+    }
+
+    // ── Collaborative Filtering bonus (from similar decks in CF engine) ──
+    const cfScore = cfScoreMap.get(card.name);
+    if (cfScore !== undefined) {
+      // CF score (0-1) scaled to 0-20 bonus
+      score += cfScore * 20;
     }
 
     // ── EDHREC commander-specific synergy (primary signal for commander) ──
@@ -1229,7 +1262,7 @@ export function getSynergySuggestions(
     .map((c) => `c.color_identity NOT LIKE '%${c}%'`)
     .join(' AND ');
 
-  const legalityFilter = format
+  const legalityFilter = format && format !== '1v1'
     ? `AND c.legalities LIKE '%"${getLegalityKey(format)}":"legal"%'`
     : '';
 

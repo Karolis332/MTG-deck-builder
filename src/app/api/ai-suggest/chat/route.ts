@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getDb, getDeckWithCards } from '@/lib/db';
 import { DEFAULT_LAND_COUNT, DEFAULT_DECK_SIZE, COMMANDER_FORMATS } from '@/lib/constants';
-import { fitsColorIdentity, isLegalInFormat, extractRejectedCards, buildRejectionReminder } from '@/lib/ai-chat-helpers';
+import { fitsColorIdentity, isLegalInFormat, extractRejectedCards, buildRejectionReminder, extractAppliedActions, buildAntiOscillationRules } from '@/lib/ai-chat-helpers';
 import { queryKnowledge, formatKnowledgeForPrompt } from '@/lib/knowledge-retrieval';
+import { getCFRecommendations, getEDHRECConsensus } from '@/lib/cf-api-client';
 import type { DbCard } from '@/lib/types';
 
 interface ChatAction {
@@ -255,6 +256,69 @@ export async function POST(request: NextRequest) {
       console.log(`[AI Chat] Collection filtered: ${allCollectionCards.length} total → ${filteredCollectionNames.length} in color identity {${deckColors.join(',')}}`);
     }
 
+    // ── CF Engine Recommendations ────────────────────────────────────────
+    let cfRecommendations = '';
+    let cfConsensus = '';
+    if (commanderCards.length > 0) {
+      const deckCardNames = mainCards.map(c => c.name);
+      const cmdName = commanderCards[0].name;
+      try {
+        const [cfRecs, consensus] = await Promise.all([
+          getCFRecommendations(deckCardNames, cmdName, 20).catch(() => []),
+          getEDHRECConsensus(deckCardNames, cmdName).catch(() => null),
+        ]);
+
+        if (cfRecs.length > 0) {
+          const collectionLower = new Set(filteredCollectionNames.map(n => n.toLowerCase()));
+          const existingLower = new Set([...mainCards, ...commanderCards].map(c => c.name.toLowerCase()));
+          // Filter out cards already in deck
+          const relevantRecs = cfRecs.filter(r => !existingLower.has(r.card_name.toLowerCase()));
+
+          cfRecommendations = `\n═══ CF ENGINE RECOMMENDATIONS (from similar decks in corpus) ═══\n`;
+          cfRecommendations += `These cards appear most frequently in decks similar to yours:\n`;
+
+          if (hasCollection) {
+            const inColl = relevantRecs.filter(r => collectionLower.has(r.card_name.toLowerCase()));
+            const notInColl = relevantRecs.filter(r => !collectionLower.has(r.card_name.toLowerCase()));
+            if (inColl.length > 0) {
+              cfRecommendations += `\nIN YOUR COLLECTION (prioritize these):\n`;
+              cfRecommendations += inColl.map(r => `- ${r.card_name} (CF score: ${r.cf_score.toFixed(2)}, in ${r.similar_deck_count} similar decks)`).join('\n');
+            }
+            if (notInColl.length > 0) {
+              cfRecommendations += `\n\nNOT IN COLLECTION (for reference):\n`;
+              cfRecommendations += notInColl.slice(0, 5).map(r => `- ${r.card_name} (CF score: ${r.cf_score.toFixed(2)})`).join('\n');
+            }
+          } else {
+            cfRecommendations += relevantRecs.map(r => `- ${r.card_name} (CF score: ${r.cf_score.toFixed(2)}, in ${r.similar_deck_count} similar decks)`).join('\n');
+          }
+          cfRecommendations += `\n\nPRIORITIZE CF-recommended cards when suggesting ADDs — they are proven in similar decks.`;
+        }
+
+        if (consensus && consensus.edhrec_deck_found) {
+          cfConsensus = `\n═══ EDHREC CONSENSUS ANALYSIS ═══\n`;
+          cfConsensus += `Your deck overlaps ${consensus.overlap_pct.toFixed(0)}% with the EDHREC average (${consensus.overlap_count}/${consensus.edhrec_card_count} cards).\n`;
+          if (consensus.missing_staples.length > 0) {
+            cfConsensus += `\nMISSING STAPLES (most ${cmdName} decks include these):\n`;
+            cfConsensus += consensus.missing_staples.slice(0, 10).map(c => `- ${c.card_name}`).join('\n');
+          }
+          if (consensus.unique_picks.length > 0) {
+            cfConsensus += `\n\nUNIQUE PICKS (in your deck but uncommon for ${cmdName}):\n`;
+            cfConsensus += consensus.unique_picks.slice(0, 5).map(c => `- ${c.card_name}`).join('\n');
+          }
+          cfConsensus += `\n\nConsider replacing UNIQUE PICKS with MISSING STAPLES for a more consistent build.`;
+        }
+      } catch (e) {
+        console.log('[AI Chat] CF API calls failed (non-blocking):', e);
+      }
+    }
+
+    // ── Applied Actions & Anti-Oscillation ──────────────────────────────
+    const { recentlyAdded, recentlyCut } = extractAppliedActions(history || []);
+    const antiOscillationRules = buildAntiOscillationRules(recentlyAdded, recentlyCut);
+    if (recentlyAdded.size > 0 || recentlyCut.size > 0) {
+      console.log(`[AI Chat] Anti-oscillation: ${recentlyAdded.size} locked adds, ${recentlyCut.size} locked cuts`);
+    }
+
     // Detect illegal cards
     const illegalCards: string[] = [];
     for (const card of [...mainCards, ...commanderCards]) {
@@ -460,6 +524,9 @@ ${deckSummary}
 
 ${communityKnowledge}
 ${mlPredictions}
+${cfRecommendations}
+${cfConsensus}
+${antiOscillationRules}
 ═══════════════════════════════════════════════════════════
 RESPONSE FORMAT (strict JSON — NO MARKDOWN)
 ═══════════════════════════════════════════════════════════
@@ -527,11 +594,17 @@ Remember to check the card list above to avoid suggesting duplicates!`,
       const resolvedActions: ResolvedAction[] = [];
       const existingCardNames = new Set(deck.cards.map((c) => c.name.toLowerCase()));
       const rejectedCards: string[] = [];
+      let antiOscillationFiltered = 0;
+      // Server-side collection enforcement — LLM prompt alone is unreliable
+      const collectionNameSet = hasCollection
+        ? new Set(filteredCollectionNames.map(n => n.toLowerCase()))
+        : null;
       const rejectionReasons = {
         wrongColors: [] as string[],
         notLegal: [] as string[],
         alreadyInDeck: [] as string[],
         notFound: [] as string[],
+        notInCollection: [] as string[],
       };
 
       let parsed: ChatResponse;
@@ -582,12 +655,25 @@ Remember to check the card list above to avoid suggesting duplicates!`,
             } else if (existingCardNames.has(addCard.name.toLowerCase())) {
               addRejectionReason = 'already in deck';
               rejectionReasons.alreadyInDeck.push(addCard.name);
+            } else if (collectionNameSet && !collectionNameSet.has(addCard.name.toLowerCase())) {
+              addRejectionReason = 'not in your collection';
+              rejectionReasons.notInCollection.push(addCard.name);
+            } else if (recentlyCut.has(addCard.name.toLowerCase())) {
+              addRejectionReason = 'was recently cut (anti-oscillation)';
+              antiOscillationFiltered++;
             } else {
               addValid = true;
             }
           } else if (act.replaceWith) {
             addRejectionReason = 'not found in database';
             rejectionReasons.notFound.push(act.replaceWith);
+          }
+
+          // Anti-oscillation: can't cut a card that was recently added
+          if (addValid && cutCard && recentlyAdded.has(cutCard.name.toLowerCase())) {
+            addValid = false;
+            addRejectionReason = 'cutting recently added card (anti-oscillation)';
+            antiOscillationFiltered++;
           }
 
           if (addValid && addCard && cutCard) {
@@ -615,7 +701,10 @@ Remember to check the card list above to avoid suggesting duplicates!`,
           const cutCard = deck.cards.find(
             (c) => c.name.toLowerCase() === act.cardName.toLowerCase()
           );
-          if (cutCard) {
+          if (cutCard && recentlyAdded.has(cutCard.name.toLowerCase())) {
+            rejectedCards.push(`${act.cardName} (anti-oscillation: was recently added)`);
+            antiOscillationFiltered++;
+          } else if (cutCard) {
             resolvedActions.push({
               action: 'cut',
               cardId: cutCard.id || (cutCard as unknown as { card_id: string }).card_id,
@@ -637,6 +726,12 @@ Remember to check the card list above to avoid suggesting duplicates!`,
             } else if (existingCardNames.has(addCard.name.toLowerCase())) {
               rejectedCards.push(`${addCard.name} (already in deck)`);
               rejectionReasons.alreadyInDeck.push(addCard.name);
+            } else if (collectionNameSet && !collectionNameSet.has(addCard.name.toLowerCase())) {
+              rejectedCards.push(`${addCard.name} (not in your collection)`);
+              rejectionReasons.notInCollection.push(addCard.name);
+            } else if (recentlyCut.has(addCard.name.toLowerCase())) {
+              rejectedCards.push(`${addCard.name} (anti-oscillation: was recently cut)`);
+              antiOscillationFiltered++;
             } else {
               resolvedActions.push({
                 action: 'add',
@@ -723,11 +818,25 @@ Remember to check the card list above to avoid suggesting duplicates!`,
         if (rejectionReasons.notLegal.length > 0) {
           message += `\n- ❌ Not legal in ${format}: ${rejectionReasons.notLegal.join(', ')}`;
         }
+        if (rejectionReasons.notInCollection.length > 0) {
+          message += `\n- ❌ Not in your collection: ${rejectionReasons.notInCollection.join(', ')}`;
+        }
         if (rejectionReasons.notFound.length > 0) {
           message += `\n- ❌ Not found in database: ${rejectionReasons.notFound.join(', ')}`;
         }
 
-        message += `\n\n💡 **Tip**: Check the "ALL CARDS CURRENTLY IN DECK" list in my context to avoid duplicates.`;
+        message += `\n\n💡 **Tip**: Only cards you own can be added. Check the collection list for available options.`;
+      }
+
+      // ── Convergence detection (fixed-point guarantee) ──────────────────
+      // If ALL of the AI's suggestions were blocked by anti-oscillation,
+      // the deck has reached a fixed point — no more valid changes exist.
+      if (resolvedActions.length === 0 && antiOscillationFiltered > 0 && (parsed.actions || []).length > 0) {
+        console.log(`[AI Chat] Fixed point reached: ${antiOscillationFiltered} suggestions blocked by anti-oscillation`);
+        return {
+          message: "Your deck is well-optimized! The changes you've already applied address the main areas for improvement. No further swaps needed.",
+          actions: [],
+        };
       }
 
       return { message, actions: resolvedActions };

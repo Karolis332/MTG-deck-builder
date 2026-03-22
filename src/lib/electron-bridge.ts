@@ -55,7 +55,7 @@ export interface ElectronAPI {
   // Overlay / Live Game Events
   onGameStateUpdate: (callback: (state: GameStateSnapshot) => void) => () => void;
   onMatchStarted: (callback: (data: { matchId: string; format: string | null; playerName: string | null; opponentName: string | null }) => void) => () => void;
-  onMatchEnded: (callback: (data: { matchId: string; result: string }) => void) => () => void;
+  onMatchEnded: (callback: (data: { matchId: string; result: string; deckCards?: string[]; commander?: string; format?: string | null }) => void) => () => void;
   onMulliganPrompt: (callback: (data: { hand: number[]; mulliganCount: number; seatId: number }) => void) => () => void;
   onIntermissionStart: (callback: (data: { matchId: string | null; gameNumber: number; opponentCardsSeen: number[] }) => void) => () => void;
   onGameLogEntry: (callback: (entry: GameLogEntry) => void) => () => void;
@@ -96,6 +96,29 @@ export interface ElectronAPI {
   onGepInventory: (callback: (data: unknown) => void) => () => void;
   onGepDraftPack: (callback: (data: unknown) => void) => () => void;
   onGepDraftPick: (callback: (data: unknown) => void) => () => void;
+
+  // Screen Recording
+  getScreenSources: () => Promise<Array<{ id: string; name: string; thumbnailDataUrl: string }>>;
+  startRecording: (sourceId: string, sourceName: string) => Promise<{ ok: boolean }>;
+  stopRecording: (chunks: ArrayBuffer[]) => Promise<{ ok: boolean; filePath: string }>;
+  pauseRecording: () => Promise<{ ok: boolean }>;
+  resumeRecording: () => Promise<{ ok: boolean }>;
+  getRecordingStatus: () => Promise<{
+    state: 'idle' | 'recording' | 'paused';
+    durationMs: number;
+    filePath: string | null;
+    sourceId: string | null;
+    sourceName: string | null;
+  }>;
+  saveRecordingAs: (chunks: ArrayBuffer[]) => Promise<{ ok: boolean; filePath: string | null }>;
+  openRecordingsFolder: () => Promise<void>;
+  onRecordingStateChange: (callback: (status: {
+    state: 'idle' | 'recording' | 'paused';
+    durationMs: number;
+    filePath: string | null;
+    sourceId: string | null;
+    sourceName: string | null;
+  }) => void) => () => void;
 
   getPlatform: () => Promise<string>;
   isElectron: boolean;

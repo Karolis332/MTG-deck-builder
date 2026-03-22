@@ -80,6 +80,10 @@ export class ArenaLogWatcher extends EventEmitter {
   private lastLoggedPhase = '';
   private pendingPhase: GameLogEntry | null = null;
 
+  // Buffer damage sources so life_total_change entries can show what dealt the damage
+  // Key: target seatId, Value: FIFO queue of {name, grpId, amount}
+  private pendingDamageSources = new Map<number, Array<{ name: string; grpId: number; amount: number }>>();
+
   // Log persistence — survives match end and page navigation
   private logHistory: GameLogEntry[] = [];
   private lastMatchInfo: {
@@ -416,6 +420,7 @@ export class ArenaLogWatcher extends EventEmitter {
         this.lastLoggedTurn = 0;
         this.lastLoggedPhase = '';
         this.pendingPhase = null;
+        this.pendingDamageSources.clear();
 
         // Clear log history for new match
         this.logHistory = [];
@@ -463,9 +468,30 @@ export class ArenaLogWatcher extends EventEmitter {
             isSelf: event.result === 'win',
           });
 
+          // Include deck card names + commander for VW learning
+          const finalState = this.lastGameStateSnapshot;
+          const deckCardNames: string[] = [];
+          let commanderName = '';
+          if (finalState) {
+            for (const entry of finalState.deckList) {
+              const name = entry.card?.name;
+              if (name) deckCardNames.push(name);
+            }
+            // Resolve commander name from grpIds
+            if (finalState.commanderGrpIds?.length) {
+              for (const gid of finalState.commanderGrpIds) {
+                const cEntry = finalState.deckList.find(d => d.grpId === gid);
+                if (cEntry?.card?.name) { commanderName = cEntry.card.name; break; }
+              }
+            }
+          }
+
           this.emit('match-end', {
             matchId: event.matchId,
             result: event.result,
+            deckCards: deckCardNames,
+            commander: commanderName,
+            format: finalState?.format || null,
           });
           this.gameEngine = null;
         }
@@ -606,12 +632,27 @@ export class ArenaLogWatcher extends EventEmitter {
           const shared = this.sharedTurn(prevState.turnNumber);
           const isSelf = who === 'self';
           if (diff < 0) {
-            this.emitLog({
-              type: 'life', player: who,
-              text: `${label} took ${Math.abs(diff)} damage (${prevLife} → ${event.lifeTotal})`,
-              amount: Math.abs(diff), lifeBefore: prevLife, lifeAfter: event.lifeTotal,
-              turnNumber: shared, isSelf,
-            });
+            // Check for buffered damage source (from damage_dealt events)
+            const queue = this.pendingDamageSources.get(event.seatId);
+            const source = queue?.shift();
+            if (source) {
+              // Clean up empty queue
+              if (queue && queue.length === 0) this.pendingDamageSources.delete(event.seatId);
+              this.emitLog({
+                type: 'life', player: who,
+                text: `${source.name} dealt ${Math.abs(diff)} to ${label} (${prevLife} → ${event.lifeTotal})`,
+                amount: Math.abs(diff), lifeBefore: prevLife, lifeAfter: event.lifeTotal,
+                cardName: source.name, cardGrpId: source.grpId,
+                turnNumber: shared, isSelf,
+              });
+            } else {
+              this.emitLog({
+                type: 'life', player: who,
+                text: `${label} took ${Math.abs(diff)} damage (${prevLife} → ${event.lifeTotal})`,
+                amount: Math.abs(diff), lifeBefore: prevLife, lifeAfter: event.lifeTotal,
+                turnNumber: shared, isSelf,
+              });
+            }
           } else if (diff > 0) {
             this.emitLog({
               type: 'life', player: who,
@@ -745,16 +786,12 @@ export class ArenaLogWatcher extends EventEmitter {
           const sourceName = this.cardName(event.sourceGrpId);
           const shared = this.sharedTurn(this.gameEngine.getState().turnNumber);
           if (event.targetSeatId) {
-            const targetName = this.seatName(event.targetSeatId);
-            const who = this.getPlayerLabel(event.targetSeatId) === 'self' ? 'opponent' : 'self';
-            this.emitLog({
-              type: 'damage', player: who,
-              text: `${sourceName} dealt ${event.amount} damage to ${targetName}`,
-              cardName: sourceName, cardGrpId: event.sourceGrpId,
-              targetCardName: targetName,
-              amount: event.amount, turnNumber: shared, isSelf: who === 'self',
-            });
+            // Buffer player-targeted damage — will be merged into life_total_change
+            const queue = this.pendingDamageSources.get(event.targetSeatId) || [];
+            queue.push({ name: sourceName, grpId: event.sourceGrpId, amount: event.amount });
+            this.pendingDamageSources.set(event.targetSeatId, queue);
           } else if (event.targetGrpId) {
+            // Creature-targeted damage — emit immediately
             const targetName = this.cardName(event.targetGrpId);
             this.emitLog({
               type: 'damage',

@@ -131,7 +131,7 @@ export function searchCards(
   const extraConditions: string[] = [];
   const extraParams: unknown[] = [];
 
-  if (options?.format) {
+  if (options?.format && options.format !== '1v1') {
     const legalKey = getLegalityKey(options.format);
     extraConditions.push(`json_extract(c.legalities, '$.${legalKey}') IN ('legal', 'restricted')`);
   }
@@ -364,11 +364,24 @@ export function updateDeck(
 
 export function deleteDeck(id: number, userId?: number) {
   const db = getDb();
-  if (userId != null) {
-    db.prepare('DELETE FROM decks WHERE id = ? AND user_id = ?').run(id, userId);
-  } else {
-    db.prepare('DELETE FROM decks WHERE id = ?').run(id);
-  }
+  const tx = db.transaction(() => {
+    // Nullify FKs that lack ON DELETE CASCADE/SET NULL
+    db.prepare('UPDATE live_game_sessions SET deck_id = NULL WHERE deck_id = ?').run(id);
+    // deck_version_id → deck_versions has no ON DELETE action in match_logs and match_ml_features
+    // Must nullify before CASCADE deletes deck_versions rows
+    const versionIds = (db.prepare('SELECT id FROM deck_versions WHERE deck_id = ?').all(id) as Array<{ id: number }>).map(r => r.id);
+    if (versionIds.length > 0) {
+      const placeholders = versionIds.map(() => '?').join(',');
+      db.prepare(`UPDATE match_logs SET deck_version_id = NULL WHERE deck_version_id IN (${placeholders})`).run(...versionIds);
+      db.prepare(`UPDATE match_ml_features SET deck_version_id = NULL WHERE deck_version_id IN (${placeholders})`).run(...versionIds);
+    }
+    if (userId != null) {
+      db.prepare('DELETE FROM decks WHERE id = ? AND user_id = ?').run(id, userId);
+    } else {
+      db.prepare('DELETE FROM decks WHERE id = ?').run(id);
+    }
+  });
+  tx();
 }
 
 export function addCardToDeck(deckId: number, cardId: string, quantity: number, board: string) {
@@ -757,6 +770,40 @@ export function linkArenaMatchToDeck(
       'UPDATE arena_parsed_matches SET deck_id = ?, deck_match_confidence = ? WHERE match_id = ?'
     ).run(deckId, confidence, matchId);
     return true;
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Update live_game_sessions deck assignment (user-selected).
+ */
+export function updateLiveSessionDeck(matchId: string, deckId: number): boolean {
+  const db = getDb();
+  try {
+    const r = db.prepare(
+      'UPDATE live_game_sessions SET deck_id = ? WHERE match_id = ?'
+    ).run(deckId, matchId);
+    return r.changes > 0;
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Update live_game_sessions result on match end.
+ */
+export function updateLiveSessionResult(
+  matchId: string,
+  result: string,
+  opponentName: string | null
+): boolean {
+  const db = getDb();
+  try {
+    const r = db.prepare(
+      "UPDATE live_game_sessions SET result = ?, opponent_name = ?, ended_at = datetime('now') WHERE match_id = ?"
+    ).run(result, opponentName, matchId);
+    return r.changes > 0;
   } catch {
     return false;
   }

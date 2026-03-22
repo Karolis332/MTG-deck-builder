@@ -1,9 +1,9 @@
 # MTG Comprehensive Deck Construction Ratios Guide
 ## Commander (EDH), Brawl, and Standard Formats
 
-**Last Updated:** February 5, 2026
-**Data Sources:** EDHREC, Scryfall, MTGGoldfish, MTGDecks, Draftsim, cEDH Decklist Database, TCGPlayer
-**Purpose:** AI training data and reference guide for optimal deck construction
+**Last Updated:** March 22, 2026
+**Data Sources:** EDHREC, The Command Zone Podcast, MTGArena Zone, Scryfall, MTGGoldfish, MTGDecks, Draftsim, cEDH Decklist Database, TCGPlayer
+**Purpose:** AI training data and reference guide for optimal deck construction across all formats
 
 ---
 
@@ -595,60 +595,273 @@ If you run 42 lands baseline and add:
 
 ---
 
-## BRAWL FORMAT
+## BRAWL FORMATS
+
+### Overview
+Brawl has two main variants based on card legality:
+- **Standard Brawl:** 60 cards (59 + 1 Commander), Standard-legal cards only
+- **Historic Brawl:** 100 cards (99 + 1 Commander), all Magic cards legal (except banlist)
+
+Both are singleton formats (1 copy max per card) on MTG Arena. Historic Brawl is closer to Commander but smaller.
+
+---
+
+## STANDARD BRAWL (60-card, Standard-legal)
 
 ### Overview
 - **Deck Size:** 60 cards (59 + 1 Commander)
+- **Card Copies:** 1 of each (except basic lands, unlimited)
+- **Legal Cards:** Standard-legal only (current block + 4 sets back)
+- **Format rotation:** Every ~2 years when new sets release
+- **Player Count:** 1v1 on MTG Arena
+- **Game length:** 15-25 minutes average
+
+### Core Deck Ratios
+
+| Category | Count | % of Deck | Notes |
+|----------|-------|-----------|-------|
+| **Lands** | 24–26 | 40–43% | Start at 25; adjust based on mana curve |
+| **Mana Ramp** | 5–8 | 8–13% | Mana dorks, rocks (Arcane Signet, etc.), land ramp |
+| **Card Draw/Advantage** | 5–8 | 8–13% | Must include filtering, scrying, tutors |
+| **Targeted Removal** | 5–8 | 8–13% | Single-target removal (sorcery or instant) |
+| **Board Wipes** | 1–3 | 2–5% | Cheap wraths (2–4 mana preferred) |
+| **Commander Synergy** | 3–6 | 5–10% | Direct synergy pieces for commander |
+| **Win Conditions/Finishers** | 3–6 | 5–10% | Creatures, direct damage, or payoffs |
+| **Interaction/Protection** | 2–4 | 3–7% | Counterspells, protection, hand disruption |
+| **Flex/Tech Slots** | 3–8 | 5–13% | Meta answers, format-specific tech |
+
+### Detailed Category Breakdowns (60-card Standard Brawl)
+
+#### Lands (24–26 baseline)
+- **Ideal:** 25 lands
+- **Mana-heavy decks:** 26 lands
+- **Ramp-heavy decks:** 23–24 lands
+- **Composition:**
+  - Basic lands: 4–6
+  - Dual/Shock lands: 8–12
+  - Utility lands: 4–6 (creature lands, cycling lands, etc.)
+
+#### Mana Ramp (5–8 sources)
+- **Mana dorks:** 1–3 (Llanowar Elves, Elvish Mystic if available)
+- **Mana rocks:** 2–4 (Arcane Signet, Mind Stone, etc.)
+- **Land ramp:** 1–2 (Cultivate, Farseek, etc.)
+- **Note:** Green has easier access; non-green decks may run higher land count instead
+
+#### Card Draw (5–8 sources)
+- **Direct draw:** 2–3 (Divination, Fabled Passage effects)
+- **Filtering/Scrying:** 2–3 (Opt, Chromatic Lantern effects)
+- **Tutors:** 1–2 (limited availability in Standard)
+- **Advantage engines:** 1–2 (creatures/permanents that draw)
+
+#### Targeted Removal (5–8 spells)
+- **Creature removal:** 3–5 (Kill spell, damage-based)
+- **Artifact removal:** 1–2 (Nature's Claim, Disenchant effects)
+- **Planeswalker removal:** 0–1 (if meta-relevant)
+- **Efficiency:** Prefer 1–3 CMC for tempo
+
+#### Board Wipes (1–3 spells)
+- **Creature-only:** 1–2 (Wrath of God equivalents)
+- **Conditional:** 1–2 (By Force, Blasphemous Act effects)
+- **Note:** Limited slots in 60-card format; choose wisely
+
+#### Creatures (8–22 total, archetype-dependent)
+- **Aggro:** 18–24 creatures
+- **Midrange:** 12–16 creatures
+- **Control:** 2–5 creatures (finishers only)
+- **Combo:** 3–8 creatures (if combo pieces)
+
+#### Win Conditions (3–6 sources)
+- Combat damage from creatures (primary)
+- Planeswalker ultimates (1–2 if included)
+- Burn/direct damage (0–2 in red decks)
+- Alternate win (rare; 0–1)
+
+#### Mana Curve Target (60-card Standard Brawl)
+- **1 CMC:** 2–4 cards
+- **2 CMC:** 10–14 cards (peak)
+- **3 CMC:** 10–12 cards
+- **4 CMC:** 6–8 cards
+- **5+ CMC:** 4–6 cards
+- **Average CMC:** 2.5–3.2
+
+### Standard Brawl by Archetype
+
+| Archetype | Lands | Creatures | Removal | Draw | Ramp | Avg CMC |
+|-----------|-------|-----------|---------|------|------|---------|
+| **Aggro** | 22–24 | 18–24 | 3–5 | 0–2 | 2–3 | 2.0–2.5 |
+| **Midrange** | 24–25 | 12–16 | 5–7 | 4–6 | 5–7 | 2.8–3.5 |
+| **Control** | 25–27 | 2–5 | 8–10 | 6–8 | 3–5 | 3.5–4.2 |
+| **Ramp** | 24–25 | 6–12 | 3–5 | 4–6 | 8–10 | 2.8–3.8 |
+| **Tempo** | 23–24 | 14–18 | 6–8 | 2–4 | 2–3 | 2.4–3.0 |
+
+---
+
+## HISTORIC BRAWL (100-card, All Magic legal)
+
+### Overview
+- **Deck Size:** 100 cards (99 + 1 Commander)
 - **Card Copies:** 1 of each (except basic lands)
-- **Legal Cards:** Standard-legal only
-- **Unique aspect:** Smaller card pool, faster format, more constrained deckbuilding
-- **Commander-centric:** Legendary creature or Planeswalker
+- **Legal Cards:** All Magic except banlist
+- **Format:** Closer to Commander than Standard Brawl
+- **Player Count:** 1v1 on MTG Arena
+- **Game length:** 20–40 minutes average
+
+### Core Deck Ratios
+
+| Category | Count | % of Deck | Notes |
+|----------|-------|-----------|-------|
+| **Lands** | 35–40 | 35–40% | 38 is typical starting point |
+| **Mana Ramp** | 8–12 | 8–12% | Mana dorks, rocks, land ramp (10 baseline) |
+| **Card Draw/Advantage** | 8–12 | 8–12% | Includes draw, filtering, tutors (10 baseline) |
+| **Targeted Removal** | 8–12 | 8–12% | Single-target removal (10 baseline) |
+| **Board Wipes** | 2–4 | 2–4% | 3 is typical |
+| **Commander Synergy** | 5–10 | 5–10% | Direct synergy pieces |
+| **Win Conditions/Finishers** | 5–10 | 5–10% | Threats and payoffs |
+| **Interaction/Protection** | 3–6 | 3–6% | Counterspells, disruption |
+| **Creatures** (excluding commander) | 18–28 | 18–28% | Varies by archetype |
+| **Flex/Tech Slots** | 4–10 | 4–10% | Meta tech, niche synergies |
+
+### Detailed Category Breakdowns (100-card Historic Brawl)
+
+#### Lands (35–40 baseline)
+- **Ideal:** 38 lands (golden number)
+- **Mana-heavy/4+ color:** 39–40 lands
+- **Low-curve ramp-heavy:** 35–37 lands
+- **Composition:**
+  - Basic lands: 4–8 (varies by color intensity)
+  - Dual lands: 12–16
+  - Utility lands: 6–10 (creature lands, cycling, shrines, etc.)
+  - Fetch lands: 2–4 (if format allows)
+
+#### Mana Ramp (8–12 sources, 10 baseline)
+- **Mana dorks:** 2–4 (Llanowar Elves, Elvish Mystic, Noble Hierarch, etc.)
+- **Mana rocks:** 3–5 (Sol Ring, Arcane Signet, Llanowar Elixir, etc.)
+- **Land ramp:** 2–4 (Cultivate, Farseek, Sakura-Tribe Elder, Three Visits, etc.)
+- **Treasure/special:** 0–2 (if relevant to strategy)
+- **Importance:** Critical for consistency in 100-card singleton
+
+#### Card Draw (8–12 sources, 10 baseline)
+- **Direct draw:** 3–5 (Divination, Treasure Cruise, etc.)
+- **Filtering/Scrying:** 2–4 (Opt, Elvish Visionary, etc.)
+- **Tutors:** 2–4 (Demonic Tutor, Natural Order, etc.)
+- **Repeatable engines:** 2–4 (creatures/permanents with draw)
+- **Wheeleffects:** 0–1 (if strategy allows)
+
+#### Targeted Removal (8–12 spells, 10 baseline)
+- **Creature-only removal:** 4–6 (Path to Exile, Fatal Push, etc.)
+- **Artifact/Enchantment:** 1–2 (Nature's Claim, etc.)
+- **Planeswalker removal:** 1–2 (if meta-relevant)
+- **Any-permanent removal:** 2–3 (Anguished Unmaking, Beast Within, etc.)
+- **Efficiency:** Mix of 1–4 CMC for tempo
+
+#### Board Wipes (2–4 spells, 3 baseline)
+- **Creature-only:** 1–2 (Wrath of God, Supreme Verdict, etc.)
+- **All permanents:** 0–1 (Pernicious Deed, etc.)
+- **Conditional:** 1–2 (Engineered Explosives, Austere Command, etc.)
+- **Sorcery vs Instant:** Mix preferred (instant-speed better vs. tempo)
+
+#### Creatures (18–28 total, archetype-dependent)
+- **Control:** 3–8 creatures (finishers only)
+- **Midrange:** 16–20 creatures
+- **Creature-focused:** 22–28 creatures
+- **Combo:** 5–10 creatures (if combo pieces)
+
+#### Win Conditions (5–10 sources)
+- Combat damage from creatures (primary for most)
+- Planeswalker ultimates (1–2 if included)
+- Combo finishes (1–3 if applicable)
+- Alternate win conditions (0–1)
+
+#### Mana Curve Target (100-card Historic Brawl)
+- **1 CMC:** 4–6 cards
+- **2 CMC:** 12–16 cards (peak)
+- **3 CMC:** 12–16 cards (peak)
+- **4 CMC:** 10–12 cards
+- **5 CMC:** 6–8 cards
+- **6+ CMC:** 4–6 cards
+- **Average CMC:** 2.8–3.5
+
+### Historic Brawl by Archetype
+
+| Archetype | Lands | Creatures | Removal | Draw | Ramp | Avg CMC |
+|-----------|-------|-----------|---------|------|------|---------|
+| **Aggro** | 34–36 | 22–28 | 4–6 | 2–4 | 4–6 | 2.2–2.8 |
+| **Midrange** | 36–38 | 16–20 | 8–10 | 8–10 | 8–10 | 3.0–3.5 |
+| **Control** | 38–40 | 3–8 | 12–14 | 10–12 | 6–8 | 3.5–4.2 |
+| **Ramp/Combo** | 38–40 | 6–12 | 4–6 | 8–10 | 10–12 | 3.0–4.0 |
+| **Tempo** | 36–37 | 16–20 | 8–10 | 4–6 | 4–6 | 2.6–3.2 |
 
 ---
 
-### Land Count (Brawl-specific)
-- **Recommended:** 23-25 lands
-- **Ratio:** ~40% lands (similar to Standard 60-card)
-- **Baseline:** 24 lands as golden number
-- **Adjustment:** For mana-heavy decks, up to 25-26; for ramp-heavy, down to 22-23
+### Standard Brawl vs. Historic Brawl Comparison
 
-#### Land Composition (24-land baseline)
-- **Basic lands:** 4-6 basics
-- **Dual lands:** 8-12 duals (wider availability in Standard-legal)
-- **Utility lands:** 4-6 utility lands
-- **Reason for higher land % than Commander:** Smaller deck size amplifies mana consistency needs
-
----
-
-### Creature Count (Brawl-specific)
-- **Control decks:** 3-5 creatures (aggressive decks often run minimal creatures)
-- **Midrange decks:** 12-16 creatures
-- **Aggro decks:** 18-22 creatures
-- **Overall:** 8-20 creatures (dependent on strategy)
-- **Constraint:** Limited card pool forces more creative choices
-
----
-
-### Other Brawl Ratios
-- **Ramp:** 5-8 sources (mana rocks + land ramp)
-- **Card draw:** 4-6 draw spells
-- **Removal:** 4-8 removal spells
-- **Counterspells (blue):** 3-5 counterspells (if control-heavy)
-- **Tutors:** 1-2 tutors (limited availability in Standard)
-- **Average CMC:** 2.5-3.2
-
-### Brawl vs. Commander Key Differences
-| Aspect | Brawl | Commander |
-|--------|-------|-----------|
+| Aspect | Standard Brawl | Historic Brawl |
+|--------|----------------|----------------|
 | **Deck Size** | 60 cards | 100 cards |
-| **Lands** | 23-25 | 37-38 |
-| **Card Pool** | Standard-legal only | All Magic except banlist |
-| **Ramp Density** | 5-8 sources | 10-13 sources |
-| **Draw** | 4-6 spells | 8-12 sources |
-| **Removal** | 4-8 total | 8-15 total |
-| **Consistency** | Higher variance | More consistency |
-| **Games** | Faster (15-20 min avg) | Longer (30-60 min avg) |
-| **Meta** | Shifts with rotations | More stable |
+| **Lands** | 24–26 (40%) | 35–40 (35–40%) |
+| **Mana Ramp** | 5–8 sources | 8–12 sources |
+| **Card Draw** | 5–8 spells | 8–12 spells |
+| **Removal** | 5–8 spells | 8–12 spells |
+| **Board Wipes** | 1–3 | 2–4 |
+| **Card Pool** | Standard-legal only | All Magic legal |
+| **Consistency** | Lower (small pool) | Higher (larger pool) |
+| **Games** | 15–25 min avg | 20–40 min avg |
+| **Meta** | Rotates every ~2 years | More stable |
+| **Most similar to** | Standard 60-card | Commander (smaller) |
+
+---
+
+---
+
+## COMMANDER/EDH — THE COMMAND ZONE TEMPLATE (Modern Standard)
+
+### Overview
+The Command Zone podcast (Jimmy Wong & Josh Lee Kwai) publishes regularly updated deck-building templates. This is the **current modern standard** for 100-card Commander construction, more optimized than the 8x8 Theory.
+
+### The Command Zone Template Ratios (100-card Commander)
+
+| Category | Count | % of Nonland | Notes |
+|----------|-------|---|-------|
+| **Lands** | 35–38 | N/A | 37 is golden number |
+| **Ramp** | 10–12 | 10–12% | Essential for consistency |
+| **Card Draw** | 10–12 | 10–12% | High-impact category |
+| **Single-Target Removal** | 10–12 | 10–12% | Variety of threat types |
+| **Board Wipes** | 3–4 | 3–4% | Mix of speeds |
+| **Commander Synergy** | 8–12 | 8–12% | Direct payoff cards |
+| **Win Conditions** | 4–6 | 4–6% | Specific close-out lines |
+| **Interaction/Disruption** | 5–8 | 5–8% | Counterspells, taxing, etc. |
+| **Creatures** | 15–25 | 15–25% | Varies heavily by archetype |
+| **Flex/Tech Slots** | 5–10 | 5–10% | Meta answers |
+| **Total Nonland Spells** | ~62 | 100% | |
+
+### Key Principles from The Command Zone
+1. **Ramp is critical:** 10–12 pieces ensure you hit your natural progression
+2. **Card draw separates winners:** 10–12 sources prevent running out of options
+3. **Removal density matters:** 13–16 total interaction (single + wipes + counterspells)
+4. **Speed over perfection:** Don't mulligan excessively for perfect hands
+5. **Synergy packages:** Include 2–3 synergy sub-themes beyond just your commander
+
+### Mana Curve for The Command Zone Template
+- **1 CMC:** 3–5 cards (ramp, early interaction)
+- **2 CMC:** 12–14 cards (peak; ramp, removal, creatures)
+- **3 CMC:** 12–14 cards (peak; creatures, removal, draw)
+- **4 CMC:** 8–10 cards (threats, removal)
+- **5 CMC:** 6–8 cards (payoffs, wipes)
+- **6+ CMC:** 4–6 cards (bomb finishers)
+- **Average CMC:** 2.8–3.2
+
+### Comparison: 8x8 Theory vs. Command Zone Template
+
+| Metric | 8x8 Theory | Command Zone Template |
+|--------|-----------|----------------------|
+| **Framework** | Rigid (8 categories × 8 cards each) | Flexible (min/max ranges) |
+| **Ramp** | 8 cards | 10–12 cards |
+| **Draw** | 8 cards | 10–12 cards |
+| **Removal** | 8 cards | 13–16 total (3–4 wipes + 10–12 spot) |
+| **Synergy** | Custom (3 categories) | 8–12 cards |
+| **Lands** | 35 (fixed) | 35–38 (adjustable) |
+| **Flexibility** | Low (template rigidity) | High (ranges allow adjustment) |
+| **Modern use** | Reference/starting point | Currently recommended |
 
 ---
 
@@ -1132,9 +1345,105 @@ If you run 42 lands baseline and add:
 
 ---
 
+---
+
+## FRANK KARSTEN MANA BASE MATHEMATICS
+
+### Overview
+Frank Karsten's hypergeometric probability model is the gold standard for determining colored mana sources in Magic decks. Instead of guessing, you can calculate exactly how many colored sources you need for a specific probability of casting your spells on curve.
+
+### The Model
+**Question:** "What's the minimum number of colored sources I need to cast spell X with 90% certainty by turn T?"
+
+**Answer:** Use hypergeometric probability to account for:
+- Deck size (60 or 100 cards)
+- Number of lands in opening hand
+- Draw steps by turn T
+- Color requirements of spell X
+
+### Quick Reference: Colored Mana Sources Needed
+
+#### For a "Double Color" Spell (e.g., UU, GG, WW)
+- **90% certainty by turn 3:** 24–26 colored sources
+- **90% certainty by turn 4:** 20–22 colored sources
+- **90% certainty by turn 5:** 16–18 colored sources
+
+#### For Casting on Turn 2 (Double-color spell)
+- **60-card deck:** 24–26 sources minimum
+- **100-card deck:** 28–30 sources minimum
+  - Lands alone: ~12 in opening hand (3-land hand size prob) = 8–10 lands by turn 2
+  - Need 16–18 more colored sources = rocks + dorks = 8–10 mana rocks/dorks
+
+#### Color Identity Adjustments
+- **Mono-color:** 16–18 sources (very easy)
+- **2-color:** 24–26 colored sources (mixed or split across colors)
+- **3-color:** 28–32 colored sources (high fixing required)
+- **4-color:** 32–36 colored sources (maximum fixing)
+- **5-color:** 36+ colored sources (heavily dependent on ramp quality)
+
+### Practical Application for Deck Building
+
+#### Example 1: 2-Color Deck (24-land baseline)
+**Suppose:** Lands = 24, Ramp rocks = 6, Dorks = 2
+- Total colored sources: 24 lands + 6 rocks + 2 dorks = 32 colored sources
+- Breakdown: 12–13 per color for a balanced 2-color deck
+- **Outcome:** Excellent mana fixing; can reliably cast 1-color and double-color spells
+
+#### Example 2: 3-Color Deck (36-land baseline)
+**Suppose:** Lands = 36, Rocks = 6, Dorks = 2
+- Total colored sources: 36 + 6 + 2 = 44 colored sources
+- Distribution needed: 10–12 per color (3 colors)
+- **Outcome:** Good coverage if dual lands are optimal; may need more fixing rocks
+
+#### Example 3: 5-Color Deck (38-land baseline)
+**Suppose:** Lands = 38, Rocks = 10 (Arcane Signet, 5-color rocks), Dorks = 2
+- Total colored sources: 38 + 10 + 2 = 50 colored sources
+- Distribution: 8–10 per color (5 colors)
+- **Outcome:** Tight but playable; ramp rocks must be generic/5-color
+
+### Tools for Calculating Exact Numbers
+
+**Online Calculators (recommended):**
+1. **Scrollvault Mana Base Calculator** — `scrollvault.net/tools/manabase/`
+   - Implements Frank Karsten's exact hypergeometric model
+   - Input: spell requirements, deck size, turn you want to cast by
+   - Output: exact number of colored sources needed
+
+2. **Manabase.gg** — Community-driven, includes sample decklists
+3. **Commander.Land** — EDH-specific mana calculations
+4. **Salubrious Snail Manabase Tool** — Simple interface for quick checks
+
+**Manual Calculation** (approximate):
+- Assume 14 lands in opening hand (3 initial lands + draws over turns)
+- For turn T, add T−1 draw steps
+- Total mana available by turn T ≈ 14 + (T−1) lands drawn
+- Colored sources needed ≈ (total mana available) × (% color in deck)
+
+### Key Insights
+1. **Color intensity scales with deck colors:** Mono costs ~18 sources, 5-color costs ~50
+2. **Ramp rocks count as colored sources** if they produce the needed color
+3. **Generic rocks (Sol Ring, Mana Crypt)** don't count as colored sources
+4. **Fetch lands** effectively count as multiple colored sources (they "find" the right land)
+5. **Dual lands** provide more consistency than split mana bases
+6. **Artifact mana acceleration** frees up land slots for other effects
+
+### Mana Curve Impact
+- **Low average CMC (2.0–2.5):** Fewer colored sources needed; can run fewer lands
+- **High average CMC (4.0+):** More colored sources needed; may need extra lands
+- **Diverse color requirements:** More fixing rocks needed (Arcane Signet, etc.)
+
+### Common Mistakes
+1. **Assuming basic lands are sufficient** → Not true for multi-color; dual lands essential
+2. **Counting colorless rocks as colored sources** → Sol Ring doesn't fix mana
+3. **Not accounting for ramp in total source count** → Mana dorks are colored sources
+4. **Underestimating 3+ color mana bases** → Need 32+ sources minimum
+5. **Ignoring fetch lands** → Fetch lands improve consistency beyond raw source count
+
+---
+
 ## REFERENCES
 
-**Data Sources Used (2025-2026):**
+**Data Sources Used (2026-03-22):**
 - [EDHREC - Superior Numbers: Land Counts](https://edhrec.com/articles/superior-numbers-land-counts)
 - [EDHREC - Commander Mana Curves for Beginners](https://edhrec.com/articles/commander-mana-curves-for-beginners)
 - [EDHREC - A Statistical Look at Commander 2025](https://edhrec.com/articles/a-statistical-look-at-almost-a-year-in-commander-2025)
@@ -1162,7 +1471,42 @@ If you run 42 lands baseline and add:
 
 ---
 
+---
+
+## SOURCES ADDED IN MARCH 2026 UPDATE
+
+**Brawl Format Research:**
+- [The 8x8 Theory](https://the8x8theory.tumblr.com/what-is-the-8x8-theory)
+- [8 by 8 EDH (Interactive)](https://8by8edh.xyz/)
+- [EDH Wiki - SevenByNine](http://wiki.edhrec.com/wiki/SevenByNine)
+- [EDH Fandom - 7 by 9](https://edh.fandom.com/wiki/7_by_9)
+- [Command Zone Template](https://edh.fandom.com/wiki/Command_Zone_Template)
+- [Command Zone Podcast - Deckbuilding Checklist](https://www.mtggoldfish.com/articles/the-power-of-a-deckbuilding-checklist-commander-quickie)
+- [MTGArena Zone - Historic Brawl Deck Building Guide](https://mtgazone.com/historic-brawl-deck-building-guide/)
+- [Draftsim - Ultimate Guide to Standard Brawl](https://draftsim.com/mtg-arena-brawl-guide/)
+- [Draftsim - Ultimate Guide to Historic Brawl](https://draftsim.com/mtg-arena-historic-brawl/)
+- [MTG Salvation - Brawl Hands on Deck](https://www.mtgsalvation.com/articles/49711-brawl-hands-on-deck)
+- [CoolStuffInc - Building Brawl by Bruce Richard](https://www.coolstuffinc.com/a/brucerichard-03232020-fixing-your-brawl-deck-by-adding-40-cards)
+- [CoolStuffInc - The Rules of Brawl](https://www.coolstuffinc.com/a/covertgoblue-03172020-the-rules-of-brawl)
+- [MTGRocks - Don't Make These Mistakes in Historic Brawl](https://mtgrocks.com/dont-make-these-mistakes-when-building-your-historic-brawl-decks)
+- [MTGArena Zone - Historic Brawl Event Guide](https://mtgazone.com/100-card-historic-brawl-fnm-at-home-event-guide-and-decklists/)
+- [Quora - How many lands in Brawl?](https://www.quora.com/In-Magic-the-Gathering-how-many-lands-should-be-in-a-Brawl-deck)
+- [Magic.gg - Building Brawl](https://magic.wizards.com/en/news/feature/building-brawl-2018-05-01)
+- [CardGameBase - Ultimate Guide to MTG Brawl](https://cardgamebase.com/mtg-brawl-guide/)
+
+**Frank Karsten Mana Math:**
+- [Scrollvault Mana Base Calculator](https://scrollvault.net/tools/manabase/)
+- [Manabase.gg - Community Mana Tool](https://manabase.gg/)
+- [Salubrious Snail Manabase Tool](https://www.salubrioussnail.com/manabase-tool/)
+- [Commander.Land - Mana Calculations](https://commander.land/about.html)
+- [Canadian Highlander - Manabase Building Guide](https://canadianhighlander.ca/2023/07/17/how-to-build-a-manabase-for-singleton-formats/)
+- [GitHub - RainbowCalculator (Mana Analysis)](https://github.com/LazarQt/RainbowCalculator)
+- [GitHub - Updated Manabase Guide](https://gist.github.com/teryror/881d60e08480a56043895d3bbb83c374)
+- [Medium - The Math of Manabases in MTG Commander](https://medium.com/@schulze.mtg/the-math-of-landbases-in-magic-the-gathering-commander-3f03aadac92c)
+
+---
+
 **Document Created:** February 5, 2026
-**Last Updated:** February 5, 2026
-**Prepared for:** MTG Deck Builder AI Training
-**Version:** 1.0
+**Last Updated:** March 22, 2026 (Major Brawl expansion + Frank Karsten mana section)
+**Prepared for:** MTG Deck Builder AI Training & Optimization
+**Version:** 2.0

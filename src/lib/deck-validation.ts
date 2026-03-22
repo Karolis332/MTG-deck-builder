@@ -121,8 +121,8 @@ export function validateDeck(
     });
   }
 
-  // Format legality check
-  if (format && mainTotal > 0) {
+  // Format legality check (skip for 1v1 — all cards allowed)
+  if (format && format !== '1v1' && mainTotal > 0) {
     const illegalCards: string[] = [];
     for (const entry of cards) {
       if (!entry.card.legalities) continue;

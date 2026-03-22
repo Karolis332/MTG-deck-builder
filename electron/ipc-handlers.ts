@@ -6,6 +6,7 @@ import os from 'os';
 import path from 'path';
 import http from 'http';
 import { ArenaLogWatcher } from './arena-log-watcher';
+import * as screenRecorder from './screen-recorder';
 import { parseArenaLogFile } from '../src/lib/arena-log-reader';
 import { GrpIdResolver } from '../src/lib/grp-id-resolver';
 import { analyzeMulligan } from '../src/lib/mulligan-advisor';
@@ -294,7 +295,7 @@ function startWatcherInternal(logPath: string, catchUp = false): { ok: boolean; 
       broadcast('match-started', data);
     });
 
-    watcher.on('match-end', (data: { matchId: string; result: string }) => {
+    watcher.on('match-end', (data: { matchId: string; result: string; deckCards: string[]; commander: string; format: string | null }) => {
       broadcast('match-ended', data);
     });
 
@@ -867,5 +868,55 @@ export function registerIpcHandlers(): void {
       mlProcess.kill();
       mlProcess = null;
     }
+  });
+
+  // ── Screen Recording ────────────────────────────────────────────────────
+
+  ipcMain.handle('get-screen-sources', async () => {
+    return screenRecorder.getSources();
+  });
+
+  ipcMain.handle('start-recording', (_event, sourceId: string, sourceName: string) => {
+    screenRecorder.markRecordingStarted(sourceId, sourceName);
+    broadcast('recording-state-change', screenRecorder.getStatus());
+    return { ok: true };
+  });
+
+  ipcMain.handle('stop-recording', async (_event, chunks: ArrayBuffer[]) => {
+    const buffer = Buffer.concat(chunks.map((c) => Buffer.from(c)));
+    const filePath = await screenRecorder.saveRecording(buffer);
+    screenRecorder.markRecordingStopped();
+    broadcast('recording-state-change', screenRecorder.getStatus());
+    return { ok: true, filePath };
+  });
+
+  ipcMain.handle('pause-recording', () => {
+    screenRecorder.markRecordingPaused();
+    broadcast('recording-state-change', screenRecorder.getStatus());
+    return { ok: true };
+  });
+
+  ipcMain.handle('resume-recording', () => {
+    screenRecorder.markRecordingResumed();
+    broadcast('recording-state-change', screenRecorder.getStatus());
+    return { ok: true };
+  });
+
+  ipcMain.handle('get-recording-status', () => {
+    return screenRecorder.getStatus();
+  });
+
+  ipcMain.handle('save-recording-as', async (_event, chunks: ArrayBuffer[]) => {
+    const buffer = Buffer.concat(chunks.map((c) => Buffer.from(c)));
+    const filePath = await screenRecorder.saveRecordingAs(buffer);
+    if (filePath) {
+      screenRecorder.markRecordingStopped();
+      broadcast('recording-state-change', screenRecorder.getStatus());
+    }
+    return { ok: !!filePath, filePath };
+  });
+
+  ipcMain.handle('open-recordings-folder', () => {
+    screenRecorder.openRecordingsFolder();
   });
 }

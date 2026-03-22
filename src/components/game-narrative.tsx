@@ -1,11 +1,16 @@
 'use client';
 
-import { useEffect, useRef, useMemo, useState, useCallback } from 'react';
+import { useEffect, useRef, useMemo, useState } from 'react';
 import { cn } from '@/lib/utils';
-import { CardInlineText } from '@/components/card-inline';
 import type { GameLogEntry } from '@/lib/electron-bridge';
 
 // ── Types ────────────────────────────────────────────────────────────────────
+
+interface CardImageData {
+  name: string;
+  imageUriSmall: string | null;
+  imageUriNormal: string | null;
+}
 
 interface GameNarrativeProps {
   entries: GameLogEntry[];
@@ -15,7 +20,7 @@ interface GameNarrativeProps {
   playerLife: number;
   opponentLife: number;
   /** Map of grpId → { imageUriSmall, imageUriNormal, name } for card art hover */
-  cardImages: Record<number, { name: string; imageUriSmall: string | null; imageUriNormal: string | null }>;
+  cardImages: Record<number, CardImageData>;
 }
 
 interface TurnChapter {
@@ -98,6 +103,112 @@ const VERB_ICONS: Record<string, string> = {
 };
 
 // ── Sub-components ───────────────────────────────────────────────────────────
+
+/** Inline card art thumbnail with hover-to-enlarge preview. */
+function NarrativeCardArt({
+  name, imageUri, imageUriNormal, size = 'md', className,
+}: {
+  name: string;
+  imageUri: string | null;
+  imageUriNormal?: string | null;
+  size?: 'sm' | 'md';
+  className?: string;
+}) {
+  const [showPreview, setShowPreview] = useState(false);
+  const [previewPos, setPreviewPos] = useState({ x: 0, y: 0 });
+  const ref = useRef<HTMLSpanElement>(null);
+
+  if (!imageUri) return null;
+
+  const dims = size === 'sm' ? 'w-[32px] h-[45px]' : 'w-[44px] h-[62px]';
+
+  const handleMouseEnter = () => {
+    if (!imageUriNormal && !imageUri) return;
+    if (ref.current) {
+      const rect = ref.current.getBoundingClientRect();
+      setPreviewPos({ x: rect.left + rect.width / 2, y: rect.top });
+    }
+    setShowPreview(true);
+  };
+
+  return (
+    <>
+      <span
+        ref={ref}
+        className={cn('inline-flex shrink-0 cursor-pointer', className)}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={() => setShowPreview(false)}
+      >
+        <img
+          src={imageUri}
+          alt={name}
+          className={cn(dims, 'rounded border border-border/40 object-cover shadow-sm')}
+          loading="lazy"
+        />
+      </span>
+      {showPreview && (imageUriNormal || imageUri) && (
+        <div
+          className="pointer-events-none fixed z-50"
+          style={{ left: `${previewPos.x}px`, top: `${previewPos.y}px`, transform: 'translate(-50%, -105%)' }}
+        >
+          <img
+            src={imageUriNormal || imageUri || undefined}
+            alt={name}
+            className="h-auto w-[250px] rounded-lg shadow-2xl"
+          />
+        </div>
+      )}
+    </>
+  );
+}
+
+/** Inline card name with underline and hover-to-enlarge preview. */
+function CardNameHover({
+  name, imageUri, imageUriNormal, className,
+}: {
+  name: string;
+  imageUri?: string | null;
+  imageUriNormal?: string | null;
+  className?: string;
+}) {
+  const [showPreview, setShowPreview] = useState(false);
+  const [previewPos, setPreviewPos] = useState({ x: 0, y: 0 });
+  const ref = useRef<HTMLSpanElement>(null);
+
+  const handleMouseEnter = () => {
+    if (!imageUriNormal && !imageUri) return;
+    if (ref.current) {
+      const rect = ref.current.getBoundingClientRect();
+      setPreviewPos({ x: rect.left + rect.width / 2, y: rect.top });
+    }
+    setShowPreview(true);
+  };
+
+  return (
+    <>
+      <span
+        ref={ref}
+        className={cn('cursor-pointer underline decoration-dotted underline-offset-2', className)}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={() => setShowPreview(false)}
+      >
+        {name}
+      </span>
+      {showPreview && (imageUriNormal || imageUri) && (
+        <div
+          className="pointer-events-none fixed z-50"
+          style={{ left: `${previewPos.x}px`, top: `${previewPos.y}px`, transform: 'translate(-50%, -105%)' }}
+        >
+          <img
+            src={imageUriNormal || imageUri || undefined}
+            alt={name}
+            className="h-auto w-[250px] rounded-lg shadow-2xl"
+          />
+        </div>
+      )}
+    </>
+  );
+}
 
 function NarrativeHeader({
   format, playerName, opponentName, playerLife, opponentLife,
@@ -186,7 +297,7 @@ function NarrativeEntry({
   entry, cardImages,
 }: {
   entry: GameLogEntry;
-  cardImages: Record<number, { name: string; imageUriSmall: string | null; imageUriNormal: string | null }>;
+  cardImages: Record<number, CardImageData>;
 }) {
   const icon = entry.verb ? VERB_ICONS[entry.verb] || '\u2B25' : '\u2B25'; // ⬥ default
 
@@ -206,100 +317,290 @@ function NarrativeEntry({
   const cardImg = entry.cardGrpId ? cardImages[entry.cardGrpId] : undefined;
   const targetImg = entry.targetGrpId ? cardImages[entry.targetGrpId] : undefined;
 
-  // Style by verb/type
   const isLand = entry.verb === 'played';
   const isCast = entry.verb === 'cast';
   const isDraw = entry.verb === 'drew';
   const isDestroyed = entry.verb === 'destroyed' || entry.verb === 'sacrificed';
   const isCountered = entry.verb === 'countered';
   const isDiscard = entry.verb === 'discarded' || entry.verb === 'milled';
+  const isReturned = entry.verb === 'returned';
+  const isExiled = entry.verb === 'exiled';
 
-  // Life entries
-  if (entry.type === 'life') {
-    const isLoss = entry.amount && entry.lifeBefore !== undefined && entry.lifeAfter !== undefined && entry.lifeAfter < entry.lifeBefore;
+  // ── Cast / Played — prominent card art display ──
+  if ((isCast || isLand) && entry.cardName) {
+    const hasArt = cardImg?.imageUriSmall;
     return (
       <div className={cn(
-        'narrative-entry flex items-start gap-1.5',
-        isLoss ? 'text-red-400/80' : 'text-emerald-400/80',
+        'narrative-entry-card flex items-center gap-2 my-0.5 py-1 px-1.5 rounded',
+        isCast && 'narrative-cast-bg',
+        isLand && 'narrative-land-bg',
       )}>
-        <span className="mt-0.5 text-[10px] shrink-0">{isLoss ? '\u2764' : '\u2764'}</span>
-        <span>{entry.text}</span>
+        {hasArt && (
+          <NarrativeCardArt
+            name={entry.cardName}
+            imageUri={cardImg!.imageUriSmall}
+            imageUriNormal={cardImg!.imageUriNormal}
+          />
+        )}
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center gap-1">
+            <span className="text-[11px] opacity-60">{icon}</span>
+            <span className={cn(
+              'text-[10px] uppercase tracking-wider font-heading',
+              isCast ? 'text-primary/60' : 'text-amber-600/50',
+            )}>
+              {isCast ? 'Cast' : 'Played'}
+            </span>
+          </div>
+          <CardNameHover
+            name={entry.cardName}
+            imageUri={cardImg?.imageUriSmall}
+            imageUriNormal={cardImg?.imageUriNormal}
+            className={cn(
+              'text-[13px] font-semibold leading-tight',
+              isCast ? 'text-primary' : 'text-amber-500/80',
+            )}
+          />
+        </div>
       </div>
     );
   }
 
-  // Damage entries
+  // ── Damage — source card art + damage number + target ──
   if (entry.type === 'damage') {
     return (
-      <div className="narrative-entry flex items-start gap-1.5 text-red-400/90">
-        <span className="mt-0.5 text-[10px] shrink-0">{'\u2694'}</span>
-        <span>
-          {cardImg && entry.cardName ? (
-            <CardInlineText
+      <div className="narrative-entry-card narrative-damage-bg flex items-center gap-2 my-0.5 py-1 px-1.5 rounded">
+        {cardImg?.imageUriSmall && entry.cardName && (
+          <NarrativeCardArt
+            name={entry.cardName}
+            imageUri={cardImg.imageUriSmall}
+            imageUriNormal={cardImg.imageUriNormal}
+            size="sm"
+          />
+        )}
+        <div className="flex-1 min-w-0 text-red-400/90">
+          <span className="text-[10px] opacity-60">{'\u2694'} </span>
+          {entry.cardName && (
+            <CardNameHover
+              name={entry.cardName}
+              imageUri={cardImg?.imageUriSmall}
+              imageUriNormal={cardImg?.imageUriNormal}
+              className="text-red-300 font-semibold text-xs"
+            />
+          )}
+          <span className="text-xs"> dealt </span>
+          <span className="narrative-damage-number">{entry.amount}</span>
+          <span className="text-xs"> to </span>
+          {targetImg?.imageUriSmall && entry.targetCardName ? (
+            <span className="inline-flex items-center gap-1">
+              <NarrativeCardArt
+                name={entry.targetCardName}
+                imageUri={targetImg.imageUriSmall}
+                imageUriNormal={targetImg.imageUriNormal}
+                size="sm"
+                className="align-middle"
+              />
+              <CardNameHover
+                name={entry.targetCardName}
+                imageUri={targetImg.imageUriSmall}
+                imageUriNormal={targetImg.imageUriNormal}
+                className="text-red-300 text-xs"
+              />
+            </span>
+          ) : (
+            <span className="text-xs font-medium text-red-300">{entry.targetCardName || ''}</span>
+          )}
+        </div>
+      </div>
+    );
+  }
+
+  // ── Destroyed / Sacrificed / Exiled / Countered — card art with verb overlay ──
+  if ((isDestroyed || isExiled || isCountered) && entry.cardName) {
+    const hasArt = cardImg?.imageUriSmall;
+    const verbLabel = entry.verb === 'destroyed' ? 'Destroyed' :
+                      entry.verb === 'sacrificed' ? 'Sacrificed' :
+                      entry.verb === 'exiled' ? 'Exiled' :
+                      entry.verb === 'countered' ? 'Countered' : '';
+    const verbColor = isCountered ? 'text-blue-400/70' :
+                      isExiled ? 'text-purple-400/60' :
+                      'text-red-400/60';
+    return (
+      <div className={cn(
+        'narrative-entry-card flex items-center gap-2 my-0.5 py-1 px-1.5 rounded',
+        isCountered && 'narrative-counter-bg',
+        isExiled && 'narrative-exile-bg',
+        isDestroyed && 'narrative-destroy-bg',
+      )}>
+        {hasArt && (
+          <span className="relative">
+            <NarrativeCardArt
+              name={entry.cardName}
+              imageUri={cardImg!.imageUriSmall}
+              imageUriNormal={cardImg!.imageUriNormal}
+              size="sm"
+              className={cn(isCountered && 'opacity-50', isDestroyed && 'opacity-60')}
+            />
+            {/* Verb badge overlay on the card art */}
+            <span className={cn(
+              'absolute -bottom-0.5 -right-1 text-[8px] font-bold uppercase tracking-wider',
+              'bg-background/80 rounded px-0.5',
+              verbColor,
+            )}>
+              {icon}
+            </span>
+          </span>
+        )}
+        <div className={cn('flex-1 min-w-0', verbColor)}>
+          <span className={cn('text-[10px] uppercase tracking-wider font-heading', verbColor)}>{verbLabel}</span>
+          <br />
+          <CardNameHover
+            name={entry.cardName}
+            imageUri={cardImg?.imageUriSmall}
+            imageUriNormal={cardImg?.imageUriNormal}
+            className={cn('text-xs', isCountered && 'line-through decoration-blue-400/30')}
+          />
+        </div>
+      </div>
+    );
+  }
+
+  // ── Life changes — with source card art when available ──
+  if (entry.type === 'life') {
+    const isLoss = entry.lifeBefore !== undefined && entry.lifeAfter !== undefined && entry.lifeAfter < entry.lifeBefore;
+    const hasSource = isLoss && entry.cardName && entry.cardGrpId;
+    const sourceImg = hasSource ? cardImages[entry.cardGrpId!] : undefined;
+
+    if (hasSource) {
+      return (
+        <div className="narrative-entry-card narrative-damage-bg flex items-center gap-2 my-0.5 py-1 px-1.5 rounded">
+          {sourceImg?.imageUriSmall && (
+            <NarrativeCardArt
+              name={entry.cardName!}
+              imageUri={sourceImg.imageUriSmall}
+              imageUriNormal={sourceImg.imageUriNormal}
+              size="sm"
+            />
+          )}
+          <div className="flex-1 min-w-0 text-red-400/80">
+            <CardNameHover
+              name={entry.cardName!}
+              imageUri={sourceImg?.imageUriSmall}
+              imageUriNormal={sourceImg?.imageUriNormal}
+              className="text-red-300 font-semibold text-xs"
+            />
+            <span className="text-xs"> dealt </span>
+            <span className="narrative-damage-number">{entry.amount}</span>
+            <span className="text-xs text-muted-foreground/60 ml-1">
+              ({entry.lifeBefore} → {entry.lifeAfter})
+            </span>
+          </div>
+        </div>
+      );
+    }
+
+    return (
+      <div className={cn(
+        'narrative-entry flex items-center gap-1.5 py-0.5',
+        isLoss ? 'text-red-400/80' : 'text-emerald-400/80',
+      )}>
+        <span className="text-[11px] shrink-0">{isLoss ? '\u2665' : '\u2665'}</span>
+        <span className="text-xs">{entry.text}</span>
+      </div>
+    );
+  }
+
+  // ── Draw — card art for self, text-only for opponent ──
+  if (isDraw) {
+    if (entry.isSelf && entry.cardName && cardImg?.imageUriSmall) {
+      return (
+        <div className="narrative-entry flex items-center gap-1.5 py-0.5 text-sky-300/80">
+          <NarrativeCardArt
+            name={entry.cardName}
+            imageUri={cardImg.imageUriSmall}
+            imageUriNormal={cardImg.imageUriNormal}
+            size="sm"
+          />
+          <span className="text-xs">
+            Drew{' '}
+            <CardNameHover
               name={entry.cardName}
               imageUri={cardImg.imageUriSmall}
               imageUriNormal={cardImg.imageUriNormal}
-              className="text-red-300 font-semibold"
+              className="text-sky-300 font-medium"
             />
-          ) : entry.cardName || ''}
-          {' dealt '}
-          <span className="font-bold">{entry.amount}</span>
-          {' damage to '}
-          {targetImg && entry.targetCardName ? (
-            <CardInlineText
-              name={entry.targetCardName}
-              imageUri={targetImg.imageUriSmall}
-              imageUriNormal={targetImg.imageUriNormal}
-              className="text-red-300"
-            />
-          ) : entry.targetCardName || ''}
+          </span>
+        </div>
+      );
+    }
+    return (
+      <div className="narrative-entry flex items-center gap-1.5 py-0.5 text-muted-foreground/50 italic">
+        <span className="text-[10px] shrink-0 opacity-50">{icon}</span>
+        <span className="text-xs">{entry.text}</span>
+      </div>
+    );
+  }
+
+  // ── Returned to hand — with card art ──
+  if (isReturned && entry.cardName && cardImg?.imageUriSmall) {
+    return (
+      <div className="narrative-entry flex items-center gap-1.5 py-0.5 text-cyan-400/60">
+        <NarrativeCardArt
+          name={entry.cardName}
+          imageUri={cardImg.imageUriSmall}
+          imageUriNormal={cardImg.imageUriNormal}
+          size="sm"
+        />
+        <span className="text-xs">
+          <span className="text-[10px] opacity-60">{'\u21A9'}</span>{' '}
+          <CardNameHover
+            name={entry.cardName}
+            imageUri={cardImg.imageUriSmall}
+            imageUriNormal={cardImg.imageUriNormal}
+            className="text-cyan-400/80"
+          />{' '}
+          returned to hand
         </span>
       </div>
     );
   }
 
-  // Actions
+  // ── Discard / Mill — text-based with card name hover ──
+  if (isDiscard && entry.cardName) {
+    return (
+      <div className="narrative-entry flex items-center gap-1.5 py-0.5 text-muted-foreground/50">
+        <span className="text-[10px] shrink-0 opacity-50">{icon}</span>
+        <span className="text-xs">
+          {entry.verb === 'discarded' ? 'Discarded' : 'Milled'}{' '}
+          <CardNameHover
+            name={entry.cardName}
+            imageUri={cardImg?.imageUriSmall}
+            imageUriNormal={cardImg?.imageUriNormal}
+            className="text-muted-foreground/70"
+          />
+        </span>
+      </div>
+    );
+  }
+
+  // ── Default fallback — plain text ──
   return (
     <div className={cn(
-      'narrative-entry flex items-start gap-1.5',
-      isLand && 'text-amber-600/50',
-      isCast && 'text-primary/90',
-      isDraw && (entry.isSelf ? 'text-sky-300/80' : 'text-muted-foreground/50 italic'),
-      isDestroyed && 'text-red-400/60',
-      isCountered && 'text-blue-400/70 line-through decoration-blue-400/30',
-      isDiscard && 'text-muted-foreground/50',
+      'narrative-entry flex items-start gap-1.5 py-0.5',
       !entry.verb && 'text-foreground/70',
     )}>
       <span className="mt-0.5 text-[10px] shrink-0 opacity-50">{icon}</span>
-      <span>
+      <span className="text-xs">
         {cardImg && entry.cardName ? (
-          <>
-            {/* Show player name prefix for certain verbs */}
-            {(entry.verb === 'discarded' || entry.verb === 'sacrificed' || entry.verb === 'drew') && (
-              <span className="text-foreground/60">
-                {entry.isSelf ? '' : ''}
-              </span>
-            )}
-            <CardInlineText
-              name={entry.cardName}
-              imageUri={cardImg.imageUriSmall}
-              imageUriNormal={cardImg.imageUriNormal}
-              className={cn(
-                isCast && 'font-semibold text-primary',
-                isLand && 'text-amber-600/70',
-                isDraw && entry.isSelf && 'text-sky-300',
-              )}
-            />
-            {isCast && (
-              <span className="ml-1 inline-block w-1 h-3 bg-primary/20 rounded-full" />
-            )}
-          </>
+          <CardNameHover
+            name={entry.cardName}
+            imageUri={cardImg.imageUriSmall}
+            imageUriNormal={cardImg.imageUriNormal}
+            className="text-foreground/80"
+          />
         ) : (
-          // Fallback to plain text
-          <span>{entry.text}</span>
+          entry.text
         )}
-        {/* If text has more context beyond card name, show the rest */}
-        {!cardImg && entry.cardName && <span>{entry.text}</span>}
       </span>
     </div>
   );
@@ -319,7 +620,7 @@ function PlayerSection({
   player: 'self' | 'opponent';
   playerName: string;
   entries: GameLogEntry[];
-  cardImages: Record<number, { name: string; imageUriSmall: string | null; imageUriNormal: string | null }>;
+  cardImages: Record<number, CardImageData>;
 }) {
   if (entries.length === 0) return null;
 

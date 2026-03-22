@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getDb, getDeckWithCards } from '@/lib/db';
 import { getRuleBasedSuggestions, getOllamaSuggestions } from '@/lib/ai-suggest';
-import { getSynergySuggestions } from '@/lib/deck-builder-ai';
+import { getSynergySuggestions, detectDeckThemes, SYNERGY_GROUPS } from '@/lib/deck-builder-ai';
 import { getCardGlobalScore } from '@/lib/global-learner';
 import { getOpenAISuggestions, resolveOpenAISuggestions } from '@/lib/openai-suggest';
 import { getCFRecommendations, resolveCFToDbCards } from '@/lib/cf-api-client';
-import { DEFAULT_LAND_COUNT, DEFAULT_DECK_SIZE, COMMANDER_FORMATS } from '@/lib/constants';
+import { DEFAULT_LAND_COUNT, DEFAULT_DECK_SIZE, COMMANDER_FORMATS, getLegalityKey } from '@/lib/constants';
 import { validateAgainstTemplate } from '@/lib/deck-templates';
 import { analyzeCommander } from '@/lib/commander-synergy';
 import type { DbCard } from '@/lib/types';
@@ -56,6 +56,21 @@ function cardFitsColorIdentity(card: DbCard, deckColors: Set<string>): boolean {
   }
 }
 
+/**
+ * Check if a card is legal in the given format.
+ */
+function cardIsLegalInFormat(card: DbCard, format: string): boolean {
+  if (!card.legalities || !format) return true;
+  try {
+    const legalities = JSON.parse(card.legalities);
+    const key = getLegalityKey(format);
+    const status = legalities[key];
+    return !status || status === 'legal' || status === 'restricted';
+  } catch {
+    return true;
+  }
+}
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
@@ -89,11 +104,29 @@ export async function POST(request: NextRequest) {
           const cfRecs = await getCFRecommendations(mainCards, commanderName);
           if (cfRecs.length > 0) {
             const existingCardIds = new Set(deck.cards.map((c) => c.card_id || c.id));
-            const cfSuggestions = resolveCFToDbCards(cfRecs, existingCardIds)
+            // Get user's collection if collection_only mode
+          let collectionIds: Set<string> | null = null;
+          if (collectionOnly) {
+            const db = getDb();
+            const collCards = db
+              .prepare('SELECT card_id FROM collection')
+              .all() as Array<{ card_id: string }>;
+            collectionIds = new Set(collCards.map((c) => c.card_id));
+          }
+
+          const allCfSuggestions = resolveCFToDbCards(cfRecs, existingCardIds)
               .filter((s) => cardFitsColorIdentity(s.card, deckColors))
-              .slice(0, 15);
+              .filter((s) => cardIsLegalInFormat(s.card, format))
+              .filter((s) => !collectionIds || collectionIds.has(s.card.id));
+          // ALL CF-recommended card names protect existing deck cards from being cut
+          const cfApprovedNames = new Set(allCfSuggestions.map((s) => s.card.name));
+          // Also protect cards already in the deck that CF scored highly
+          for (const rec of cfRecs) {
+            if (rec.cf_score > 0.3) cfApprovedNames.add(rec.card_name);
+          }
+          const cfSuggestions = allCfSuggestions.slice(0, 15);
             if (cfSuggestions.length > 0) {
-              const proposedChanges = buildProposedChanges(deck_id, deck, format, cfSuggestions);
+              const proposedChanges = buildProposedChanges(deck_id, deck, format, cfSuggestions, cfApprovedNames);
               return NextResponse.json({
                 suggestions: cfSuggestions,
                 proposedChanges,
@@ -189,7 +222,7 @@ export async function POST(request: NextRequest) {
     // Deduplicate by card NAME (not ID) — same card has many printings
     // Also filter by color identity
     const seenNames = new Set(synergySuggestions.map((s) => s.card.name));
-    const combined = [
+    const allSuggestions = [
       ...synergySuggestions,
       ...ruleSuggestions.filter((s) => {
         if (seenNames.has(s.card.name)) return false;
@@ -198,11 +231,16 @@ export async function POST(request: NextRequest) {
       }),
     ]
       .filter((s) => !isCommanderLike || cardFitsColorIdentity(s.card, deckColors))
-      .sort((a, b) => b.score - a.score)
-      .slice(0, 15);
+      .sort((a, b) => b.score - a.score);
+
+    // Build set of ALL engine-approved card names (not just top 15)
+    // to prevent cutting cards the engine considers good for this deck
+    const engineApprovedNames = new Set(allSuggestions.map((s) => s.card.name));
+
+    const combined = allSuggestions.slice(0, 15);
 
     // ── Build proposed changes (cuts + adds) based on match data ──────
-    const proposedChanges = buildProposedChanges(deck_id, deck, format, combined);
+    const proposedChanges = buildProposedChanges(deck_id, deck, format, combined, engineApprovedNames);
 
     // ── Template validation: health check against archetype ratios ────
     const mainDeckCards = deck.cards.filter((c) => c.board === 'main' || c.board === 'commander');
@@ -315,7 +353,8 @@ function buildProposedChanges(
   deckId: number,
   deck: { format: string; cards: Array<{ quantity: number; board: string } & DbCard> },
   format: string,
-  suggestions: Array<{ card: DbCard; reason: string; score: number }>
+  suggestions: Array<{ card: DbCard; reason: string; score: number }>,
+  engineApprovedNames?: Set<string>,
 ): ProposedChange[] {
   const db = getDb();
 
@@ -392,6 +431,38 @@ function buildProposedChanges(
     for (const card of mainCards) {
       if (premiumSpellslingerCards.has(card.name.toLowerCase())) {
         protectedSpellslingerNames.add(card.name);
+      }
+    }
+  }
+
+  // ── ANTI-OSCILLATION: Protect on-theme deck cards from lateral swaps ──
+  // For commander formats, detect deck themes and protect any existing card
+  // that shares synergy themes with the ADD suggestions. Without this, the
+  // engine cuts on-theme cards by EDHREC rank, then suggests re-adding them
+  // next cycle — causing infinite CUT/ADD flip-flopping.
+  if (isCommanderLike && engineApprovedNames) {
+    const deckForThemes = [...mainCards, ...commanderCards];
+    const themes = detectDeckThemes(deckForThemes);
+    if (themes.length > 0) {
+      const addThemes = new Set<string>();
+      for (const s of suggestions) {
+        const sText = (s.card.oracle_text || '').toLowerCase();
+        for (const theme of themes) {
+          const patterns = SYNERGY_GROUPS[theme];
+          if (patterns?.some((p) => sText.includes(p))) addThemes.add(theme);
+        }
+      }
+      const addThemeArr = Array.from(addThemes);
+      for (const card of mainCards) {
+        if (engineApprovedNames.has(card.name)) continue;
+        const cText = (card.oracle_text || '').toLowerCase();
+        for (const theme of addThemeArr) {
+          const patterns = SYNERGY_GROUPS[theme];
+          if (patterns?.some((p) => cText.includes(p))) {
+            engineApprovedNames.add(card.name);
+            break;
+          }
+        }
       }
     }
   }
@@ -494,6 +565,10 @@ function buildProposedChanges(
       // CRITICAL: NEVER cut spellslinger enablers in spellslinger decks
       if (isSpellslinger && protectedSpellslingerNames.has(c.name)) return false;
 
+      // CRITICAL: NEVER cut cards the engine would also recommend adding
+      // This prevents oscillation (CUT X → ADD X → CUT X loop)
+      if (engineApprovedNames?.has(c.name)) return false;
+
       return true;
     })
     .sort((a, b) => {
@@ -527,6 +602,8 @@ function buildProposedChanges(
   for (const suggestion of suggestions) {
     if (existingCardNames.has(suggestion.card.name)) continue;
     if (addedNames.has(suggestion.card.name)) continue;
+    // Never suggest adding cards that aren't legal in the format
+    if (!cardIsLegalInFormat(suggestion.card, format)) continue;
     addedNames.add(suggestion.card.name);
 
     const gs = getCardGlobalScore(suggestion.card.name, format);

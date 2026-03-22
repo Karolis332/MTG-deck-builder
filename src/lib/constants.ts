@@ -51,6 +51,7 @@ export const FORMATS = [
   'historic',
   'alchemy',
   'explorer',
+  '1v1',
 ] as const;
 
 export const FORMAT_LABELS: Record<string, string> = {
@@ -66,6 +67,7 @@ export const FORMAT_LABELS: Record<string, string> = {
   historic: 'Historic',
   alchemy: 'Alchemy',
   explorer: 'Explorer',
+  '1v1': '1v1 (All Cards)',
 };
 
 export const RARITIES = ['common', 'uncommon', 'rare', 'mythic'] as const;
@@ -83,10 +85,11 @@ export const DEFAULT_LAND_COUNT: Record<string, number> = {
   modern: 23,
   legacy: 20,
   vintage: 16,
-  commander: 37,
+  commander: 38,
   standardbrawl: 24,
-  brawl: 37,
+  brawl: 38,
   pauper: 23,
+  '1v1': 24,
   default: 24,
 };
 
@@ -100,6 +103,7 @@ export const DEFAULT_DECK_SIZE: Record<string, number> = {
   standardbrawl: 60,
   brawl: 100,
   pauper: 60,
+  '1v1': 60,
   default: 60,
 };
 

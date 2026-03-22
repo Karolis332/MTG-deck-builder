@@ -4,6 +4,8 @@ import {
   isLegalInFormat,
   extractRejectedCards,
   buildRejectionReminder,
+  extractAppliedActions,
+  buildAntiOscillationRules,
 } from '../ai-chat-helpers';
 import type { DbCard } from '../types';
 
@@ -232,5 +234,106 @@ describe('buildRejectionReminder', () => {
 
     expect(result).toContain('Sol Ring (already in deck)');
     expect(result).toContain('Mana Crypt (already in deck)');
+  });
+});
+
+describe('extractAppliedActions', () => {
+  it('extracts cuts and adds from applied action markers', () => {
+    const history = [
+      { role: 'user', content: 'optimize my deck' },
+      { role: 'assistant', content: 'Here are changes.\n\n[APPLIED BY USER: Cut Storm Crow, Eager Cadet. Added Lightning Bolt, Counterspell.]' },
+    ];
+
+    const { recentlyAdded, recentlyCut } = extractAppliedActions(history);
+    expect(recentlyCut.has('storm crow')).toBe(true);
+    expect(recentlyCut.has('eager cadet')).toBe(true);
+    expect(recentlyAdded.has('lightning bolt')).toBe(true);
+    expect(recentlyAdded.has('counterspell')).toBe(true);
+  });
+
+  it('returns empty sets when no applied markers', () => {
+    const history = [
+      { role: 'user', content: 'help' },
+      { role: 'assistant', content: 'Here are suggestions' },
+    ];
+
+    const { recentlyAdded, recentlyCut } = extractAppliedActions(history);
+    expect(recentlyAdded.size).toBe(0);
+    expect(recentlyCut.size).toBe(0);
+  });
+
+  it('accumulates across multiple messages', () => {
+    const history = [
+      { role: 'assistant', content: '[APPLIED BY USER: Cut Card A. Added Card B.]' },
+      { role: 'user', content: 'more changes' },
+      { role: 'assistant', content: '[APPLIED BY USER: Cut Card C. Added Card D.]' },
+    ];
+
+    const { recentlyAdded, recentlyCut } = extractAppliedActions(history);
+    expect(recentlyCut.has('card a')).toBe(true);
+    expect(recentlyCut.has('card c')).toBe(true);
+    expect(recentlyAdded.has('card b')).toBe(true);
+    expect(recentlyAdded.has('card d')).toBe(true);
+  });
+
+  it('ignores user messages', () => {
+    const history = [
+      { role: 'user', content: '[APPLIED BY USER: Cut Sol Ring. Added Mana Crypt.]' },
+    ];
+
+    const { recentlyAdded, recentlyCut } = extractAppliedActions(history);
+    expect(recentlyAdded.size).toBe(0);
+    expect(recentlyCut.size).toBe(0);
+  });
+
+  it('handles single card cuts and adds', () => {
+    const history = [
+      { role: 'assistant', content: '[APPLIED BY USER: Cut Sol Ring. Added Mana Crypt.]' },
+    ];
+
+    const { recentlyAdded, recentlyCut } = extractAppliedActions(history);
+    expect(recentlyCut.has('sol ring')).toBe(true);
+    expect(recentlyAdded.has('mana crypt')).toBe(true);
+  });
+});
+
+describe('buildAntiOscillationRules', () => {
+  it('returns empty string when no applied actions', () => {
+    const result = buildAntiOscillationRules(new Set(), new Set());
+    expect(result).toBe('');
+  });
+
+  it('includes recently added cards', () => {
+    const result = buildAntiOscillationRules(
+      new Set(['lightning bolt', 'counterspell']),
+      new Set(),
+    );
+    expect(result).toContain('ANTI-OSCILLATION');
+    expect(result).toContain('RECENTLY ADDED');
+    expect(result).toContain('lightning bolt');
+    expect(result).toContain('counterspell');
+    expect(result).not.toContain('RECENTLY CUT');
+  });
+
+  it('includes recently cut cards', () => {
+    const result = buildAntiOscillationRules(
+      new Set(),
+      new Set(['storm crow']),
+    );
+    expect(result).toContain('RECENTLY CUT');
+    expect(result).toContain('storm crow');
+    expect(result).not.toContain('RECENTLY ADDED');
+  });
+
+  it('includes both when present', () => {
+    const result = buildAntiOscillationRules(
+      new Set(['bolt']),
+      new Set(['crow']),
+    );
+    expect(result).toContain('RECENTLY ADDED');
+    expect(result).toContain('bolt');
+    expect(result).toContain('RECENTLY CUT');
+    expect(result).toContain('crow');
+    expect(result).toContain('well-optimized');
   });
 });

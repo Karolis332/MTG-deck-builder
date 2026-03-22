@@ -43,6 +43,8 @@ export default function DeckBuilderPage() {
   const [hasApiKey, setHasApiKey] = useState(false);
   const [aiBuildProgress, setAiBuildProgress] = useState('');
   const [collectionBuildMode, setCollectionBuildMode] = useState(false);
+  const [deleteConfirmId, setDeleteConfirmId] = useState<number | null>(null);
+  const [deleteError, setDeleteError] = useState('');
 
   const isAiCommanderFormat = ['commander', 'brawl', 'standardbrawl'].includes(aiFormat);
 
@@ -180,12 +182,25 @@ export default function DeckBuilderPage() {
     );
   };
 
-  const handleDelete = async (id: number, e: React.MouseEvent) => {
+  const handleDeleteClick = (id: number, e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    if (!confirm('Delete this deck?')) return;
-    await fetch(`/api/decks/${id}`, { method: 'DELETE' });
+    setDeleteConfirmId(id);
+    setDeleteError('');
+  };
+
+  const handleDeleteConfirm = async () => {
+    if (deleteConfirmId === null) return;
+    const id = deleteConfirmId;
+    const res = await fetch(`/api/decks/${id}`, { method: 'DELETE' });
+    if (!res.ok) {
+      const data = await res.json().catch(() => ({ error: 'Delete failed' }));
+      setDeleteError(data.error || 'Failed to delete deck');
+      return;
+    }
     setDecks((prev) => prev.filter((d) => d.id !== id));
+    setDeleteConfirmId(null);
+    setDeleteError('');
   };
 
   return (
@@ -321,7 +336,7 @@ export default function DeckBuilderPage() {
 
                 {/* Delete button */}
                 <button
-                  onClick={(e) => handleDelete(deck.id, e)}
+                  onClick={(e) => handleDeleteClick(deck.id, e)}
                   className="absolute right-2 top-2 flex h-7 w-7 items-center justify-center rounded-lg bg-black/40 text-white/70 opacity-0 transition-all hover:bg-red-600 hover:text-white group-hover:opacity-100"
                   title="Delete deck"
                 >
@@ -344,6 +359,34 @@ export default function DeckBuilderPage() {
               </div>
             </Link>
           ))}
+        </div>
+      )}
+
+      {/* Delete Confirmation Modal */}
+      {deleteConfirmId !== null && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setDeleteConfirmId(null)} />
+          <div className="relative w-full max-w-sm grimoire-border bg-card/95 p-6 shadow-2xl animate-slide-up backdrop-blur-sm">
+            <h3 className="mb-2 font-heading text-sm font-semibold tracking-wide text-primary">Delete Deck</h3>
+            <p className="mb-4 text-sm text-muted-foreground">This action cannot be undone.</p>
+            {deleteError && (
+              <div className="mb-3 rounded-lg bg-destructive/10 px-3 py-2 text-xs text-destructive">{deleteError}</div>
+            )}
+            <div className="flex justify-end gap-2">
+              <button
+                onClick={() => { setDeleteConfirmId(null); setDeleteError(''); }}
+                className="rounded-lg px-4 py-2 text-sm text-muted-foreground hover:text-foreground"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleDeleteConfirm}
+                className="rounded-lg bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
         </div>
       )}
 

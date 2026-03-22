@@ -58,6 +58,8 @@
   body {
     @apply bg-background text-foreground;
     font-family: 'Crimson Text', Georgia, 'Times New Roman', serif;
+    font-size: 18px;
+    line-height: 1.6;
   }
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Cinzel', 'Times New Roman', serif;
@@ -336,6 +338,57 @@ textarea {
   font-size: 0.75rem;
   line-height: 1.6;
   padding: 1px 0;
+}
+
+/* Card art entry cards — prominent event display */
+.narrative-entry-card {
+  font-family: 'Crimson Text', serif;
+  transition: background 200ms ease;
+}
+
+.narrative-cast-bg {
+  background: hsl(43 40% 20% / 0.15);
+  border: 1px solid hsl(43 50% 45% / 0.12);
+}
+
+.narrative-land-bg {
+  background: hsl(30 30% 18% / 0.12);
+  border: 1px solid hsl(30 30% 40% / 0.1);
+}
+
+.narrative-damage-bg {
+  background: hsl(0 40% 20% / 0.1);
+  border: 1px solid hsl(0 40% 40% / 0.1);
+}
+
+.narrative-destroy-bg {
+  background: hsl(0 30% 18% / 0.1);
+  border: 1px solid hsl(0 30% 35% / 0.08);
+}
+
+.narrative-exile-bg {
+  background: hsl(270 30% 20% / 0.1);
+  border: 1px solid hsl(270 30% 40% / 0.1);
+}
+
+.narrative-counter-bg {
+  background: hsl(220 30% 20% / 0.1);
+  border: 1px solid hsl(220 30% 40% / 0.1);
+}
+
+/* Damage number badge */
+.narrative-damage-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 9999px;
+  background: hsl(0 50% 40% / 0.3);
+  color: hsl(0 70% 70%);
+  font-weight: 700;
+  font-size: 0.7rem;
+  padding: 0 0.25rem;
 }
 
 /* Life bar */

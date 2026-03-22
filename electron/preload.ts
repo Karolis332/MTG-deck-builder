@@ -111,6 +111,23 @@ contextBridge.exposeInMainWorld('electronAPI', {
     return () => ipcRenderer.removeAllListeners('gep-draft-pick');
   },
 
+  // Screen Recording
+  getScreenSources: () => ipcRenderer.invoke('get-screen-sources'),
+  startRecording: (sourceId: string, sourceName: string) =>
+    ipcRenderer.invoke('start-recording', sourceId, sourceName),
+  stopRecording: (chunks: ArrayBuffer[]) =>
+    ipcRenderer.invoke('stop-recording', chunks),
+  pauseRecording: () => ipcRenderer.invoke('pause-recording'),
+  resumeRecording: () => ipcRenderer.invoke('resume-recording'),
+  getRecordingStatus: () => ipcRenderer.invoke('get-recording-status'),
+  saveRecordingAs: (chunks: ArrayBuffer[]) =>
+    ipcRenderer.invoke('save-recording-as', chunks),
+  openRecordingsFolder: () => ipcRenderer.invoke('open-recordings-folder'),
+  onRecordingStateChange: (callback: (status: unknown) => void) => {
+    ipcRenderer.on('recording-state-change', (_event, status) => callback(status));
+    return () => ipcRenderer.removeAllListeners('recording-state-change');
+  },
+
   // Platform info
   getPlatform: () => ipcRenderer.invoke('get-platform'),
   isElectron: true,

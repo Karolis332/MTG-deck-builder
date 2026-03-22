@@ -1138,4 +1138,116 @@ export const MIGRATIONS = [
         ('Wasteland', '', 'efficient_removal', 'high');
     `,
   },
+  {
+    version: 28,
+    name: 'seed_cf_api_defaults',
+    sql: `
+      -- Seed Collaborative Filtering API connection defaults
+      INSERT OR IGNORE INTO app_state (key, value) VALUES
+        ('cf_api_url', 'http://187.77.110.100/cf-api'),
+        ('cf_api_key', '97c1d0df913335761afde8d86ac568a061416fa96fdb467e6597e6d9cd9436c1'),
+        ('cf_enabled', 'true');
+    `,
+  },
+  {
+    version: 29,
+    name: 'live_session_result_columns',
+    sql: `
+      ALTER TABLE live_game_sessions ADD COLUMN result TEXT;
+      ALTER TABLE live_game_sessions ADD COLUMN opponent_name TEXT;
+    `,
+  },
+  {
+    version: 30,
+    name: 'fix_live_game_sessions_fk',
+    sql: `
+      CREATE TABLE IF NOT EXISTS live_game_sessions_new (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        match_id TEXT UNIQUE NOT NULL,
+        deck_id INTEGER REFERENCES decks(id) ON DELETE SET NULL,
+        format TEXT,
+        started_at TEXT DEFAULT (datetime('now')),
+        ended_at TEXT,
+        mulligan_decisions TEXT,
+        sideboard_changes TEXT,
+        result TEXT,
+        opponent_name TEXT
+      );
+      INSERT OR IGNORE INTO live_game_sessions_new
+        SELECT id, match_id, deck_id, format, started_at, ended_at,
+               mulligan_decisions, sideboard_changes, result, opponent_name
+        FROM live_game_sessions;
+      DROP TABLE live_game_sessions;
+      ALTER TABLE live_game_sessions_new RENAME TO live_game_sessions;
+      CREATE INDEX IF NOT EXISTS idx_lgs_match ON live_game_sessions(match_id);
+    `,
+  },
+  {
+    version: 31,
+    name: 'fix_deck_version_fk_cascade',
+    sql: `
+      -- Fix match_logs.deck_version_id missing ON DELETE
+      CREATE TABLE IF NOT EXISTS match_logs_new (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        deck_id INTEGER REFERENCES decks(id) ON DELETE SET NULL,
+        result TEXT NOT NULL CHECK(result IN ('win', 'loss', 'draw')),
+        play_draw TEXT CHECK(play_draw IN ('play', 'draw')),
+        opponent_name TEXT,
+        opponent_deck_colors TEXT,
+        opponent_deck_archetype TEXT,
+        turns INTEGER,
+        my_life_end INTEGER,
+        opponent_life_end INTEGER,
+        my_cards_seen TEXT,
+        opponent_cards_seen TEXT,
+        notes TEXT,
+        raw_log TEXT,
+        game_format TEXT,
+        created_at TEXT NOT NULL DEFAULT (datetime('now')),
+        deck_version_id INTEGER REFERENCES deck_versions(id) ON DELETE SET NULL
+      );
+      INSERT OR IGNORE INTO match_logs_new
+        SELECT id, deck_id, result, play_draw, opponent_name,
+               opponent_deck_colors, opponent_deck_archetype, turns,
+               my_life_end, opponent_life_end, my_cards_seen, opponent_cards_seen,
+               notes, raw_log, game_format, created_at, deck_version_id
+        FROM match_logs;
+      DROP TABLE match_logs;
+      ALTER TABLE match_logs_new RENAME TO match_logs;
+      CREATE INDEX IF NOT EXISTS idx_match_logs_deck_id ON match_logs(deck_id);
+      CREATE INDEX IF NOT EXISTS idx_match_logs_result ON match_logs(result);
+
+      -- Fix match_ml_features.deck_version_id missing ON DELETE
+      CREATE TABLE IF NOT EXISTS match_ml_features_new (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        match_id INTEGER REFERENCES arena_parsed_matches(id) ON DELETE CASCADE,
+        deck_id INTEGER REFERENCES decks(id) ON DELETE SET NULL,
+        deck_version_id INTEGER REFERENCES deck_versions(id) ON DELETE SET NULL,
+        avg_cmc_played REAL,
+        curve_efficiency REAL,
+        first_play_turn INTEGER,
+        cards_drawn_per_turn REAL,
+        unique_cards_played INTEGER,
+        deck_penetration REAL,
+        commander_cast_count INTEGER,
+        commander_first_cast_turn INTEGER,
+        removal_played_count INTEGER,
+        counterspell_count INTEGER,
+        version_age_days INTEGER,
+        changes_since_last_version INTEGER,
+        created_at TEXT NOT NULL DEFAULT (datetime('now')),
+        UNIQUE(match_id)
+      );
+      INSERT OR IGNORE INTO match_ml_features_new
+        SELECT id, match_id, deck_id, deck_version_id,
+               avg_cmc_played, curve_efficiency, first_play_turn,
+               cards_drawn_per_turn, unique_cards_played, deck_penetration,
+               commander_cast_count, commander_first_cast_turn,
+               removal_played_count, counterspell_count,
+               version_age_days, changes_since_last_version, created_at
+        FROM match_ml_features;
+      DROP TABLE match_ml_features;
+      ALTER TABLE match_ml_features_new RENAME TO match_ml_features;
+    `,
+  },
 ];

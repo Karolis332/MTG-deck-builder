@@ -4,6 +4,20 @@ import { useEffect, useState, useCallback, useMemo } from 'react';
 import { useRouter, useParams, useSearchParams } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import type { DbCard, DeckCardEntry, AISuggestion } from '@/lib/types';
+// VW event tracking (fire-and-forget to server proxy)
+function trackVWEvent(
+  eventType: string, commander: string, colorIdentity: string,
+  deckCards: string[], cardName?: string,
+) {
+  fetch('/api/cf-events', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      event_type: eventType, commander, color_identity: colorIdentity,
+      deck_cards: deckCards, card_name: cardName,
+    }),
+  }).catch(() => {});
+}
 import { SearchBar } from '@/components/search-bar';
 import { CardGrid } from '@/components/card-grid';
 import { DeckList } from '@/components/deck-list';
@@ -317,7 +331,16 @@ export default function DeckEditorPage() {
         }),
       });
       const data = await res.json();
-      if (data.deck) setDeck(data.deck);
+      if (data.deck) {
+        setDeck(data.deck);
+        // Track VW event: card added
+        const cmdr = deck.cards.find((c) => c.board === 'commander');
+        if (cmdr) {
+          const ci = cmdr.color_identity ? JSON.parse(cmdr.color_identity).sort().join('') : 'C';
+          const deckCardNames = deck.cards.filter(c => c.board === 'main').map(c => c.name);
+          trackVWEvent('card_added', cmdr.name, ci, deckCardNames, card.name);
+        }
+      }
     } catch {} finally {
       setSaving(false);
     }
@@ -333,7 +356,17 @@ export default function DeckEditorPage() {
         body: JSON.stringify({ op: 'remove_card', card_id: cardId, board }),
       });
       const data = await res.json();
-      if (data.deck) setDeck(data.deck);
+      if (data.deck) {
+        setDeck(data.deck);
+        // Track VW event: card removed
+        const cmdr = deck.cards.find((c) => c.board === 'commander');
+        const removedCard = deck.cards.find(c => c.id === cardId);
+        if (cmdr && removedCard) {
+          const ci = cmdr.color_identity ? JSON.parse(cmdr.color_identity).sort().join('') : 'C';
+          const deckCardNames = deck.cards.filter(c => c.board === 'main').map(c => c.name);
+          trackVWEvent('card_removed', cmdr.name, ci, deckCardNames, removedCard.name);
+        }
+      }
     } catch {} finally {
       setSaving(false);
     }

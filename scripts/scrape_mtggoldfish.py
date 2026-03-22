@@ -396,8 +396,8 @@ def classify_tournament(name: str, record: dict | None) -> str:
     if "ptq" in name_lower or "pro tour" in name_lower or "regional" in name_lower:
         return "paper"
     # If we have W-L and total games <= 5, it's probably a league
-    if record and "wins" in record:
-        total = record["wins"] + record["losses"] + record.get("draws", 0)
+    if record and record.get("wins") is not None and record.get("losses") is not None:
+        total = record["wins"] + record["losses"] + (record.get("draws") or 0)
         if total <= 5:
             return "league"
     return "league"

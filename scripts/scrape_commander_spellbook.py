@@ -82,13 +82,13 @@ def ensure_tables(conn: sqlite3.Connection):
     conn.commit()
 
 
-def fetch_page(offset: int, status: str = "ok") -> dict | None:
+def fetch_page(offset: int) -> dict | None:
     """Fetch one page of combo variants from the API."""
     url = f"{API_BASE}/variants/"
     params = {
         "limit": PAGE_SIZE,
         "offset": offset,
-        "q": f"legal:commander status:{status}",
+        "q": "legal:commander",
     }
     try:
         resp = requests.get(url, params=params, timeout=30)
@@ -123,8 +123,8 @@ def save_combo(conn: sqlite3.Connection, variant: dict) -> bool:
     prices = variant.get("prices", {})
     price_tcg = prices.get("tcgplayer") if isinstance(prices, dict) else None
 
-    # Bracket tag
-    bracket = variant.get("bracket", None)
+    # Bracket tag (API uses bracketTag string directly)
+    bracket = variant.get("bracketTag") or variant.get("bracket")
     if isinstance(bracket, dict):
         bracket = bracket.get("tag", bracket.get("name"))
 
@@ -203,7 +203,6 @@ def main():
     parser = argparse.ArgumentParser(description="Scrape Commander Spellbook combo database")
     parser.add_argument("--db", default=DB_DEFAULT, help="Path to SQLite database")
     parser.add_argument("--max-combos", type=int, default=5000, help="Max combos to fetch (default: 5000)")
-    parser.add_argument("--status", default="ok", help="Combo status filter (default: ok)")
     args = parser.parse_args()
 
     db_path = os.path.abspath(args.db)
@@ -218,7 +217,7 @@ def main():
     print("Commander Spellbook Combo Scraping")
     print(f"Database: {db_path}")
     print(f"Max combos: {args.max_combos}")
-    print(f"Status filter: {args.status}")
+    print(f"Filter: legal:commander")
     print(f"Started: {datetime.now().isoformat()}")
     print("=" * 60)
 
@@ -227,7 +226,7 @@ def main():
 
     while total_saved < args.max_combos:
         print(f"\n  Fetching page at offset={offset}...")
-        data = fetch_page(offset, args.status)
+        data = fetch_page(offset)
 
         if data is None:
             print("  Failed to fetch page, stopping.")
@@ -250,9 +249,13 @@ def main():
         print(f"  Saved {page_saved} combos (total: {total_saved})")
 
         # Check if there are more pages
-        total_count = data.get("count", 0)
-        if offset + PAGE_SIZE >= total_count:
-            print(f"  Reached end of results ({total_count} total).")
+        next_url = data.get("next")
+        total_count = data.get("count")
+        if not next_url and (total_count is not None and offset + PAGE_SIZE >= total_count):
+            print(f"  Reached end of results ({total_count or 'unknown'} total).")
+            break
+        if not next_url and len(results) < PAGE_SIZE:
+            print(f"  Last page (got {len(results)} < {PAGE_SIZE}).")
             break
 
         offset += PAGE_SIZE

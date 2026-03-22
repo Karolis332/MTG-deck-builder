@@ -333,7 +333,7 @@ export async function buildDeckWithAI(
     if (!match) {
       // Try fuzzy: exact name lookup in DB (with color/legality/commander filters)
       const dbCard = db.prepare(
-        `SELECT * FROM cards WHERE name = ? COLLATE NOCASE
+        `SELECT c.* FROM cards c WHERE c.name = ? COLLATE NOCASE
          ${poolResult.colorExcludeFilter ? 'AND ' + poolResult.colorExcludeFilter : ''}
          ${poolResult.legalityFilter}
          ${poolResult.commanderExclude}
