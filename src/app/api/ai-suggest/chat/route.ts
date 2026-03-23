@@ -1151,18 +1151,41 @@ Remember to check the card list above to avoid suggesting duplicates!`,
       return NextResponse.json(resolved);
     }
 
-    // ── Streaming AI call ───────────────────────────────────────────────
+    // ── Streaming AI call (with retry + fallback) ─────────────────────
     const systemContent = messages.filter(m => m.role === 'system').map(m => m.content).join('\n\n');
     const chatMessages = messages.filter(m => m.role !== 'system').map(m => ({
       role: m.role as 'user' | 'assistant',
       content: m.content,
     }));
 
+    // Helper: fetch with retry on 429/5xx (up to 2 retries with exponential backoff)
+    const fetchWithRetry = async (url: string, init: RequestInit, maxRetries = 2): Promise<Response> => {
+      let lastResponse: Response | null = null;
+      for (let attempt = 0; attempt <= maxRetries; attempt++) {
+        const response = await fetch(url, init);
+        if (response.ok) return response;
+        lastResponse = response;
+        const status = response.status;
+        // Only retry on rate limit (429) or server error (5xx)
+        if (status !== 429 && status < 500) return response;
+        // Read retry-after header or use exponential backoff
+        const retryAfter = response.headers.get('retry-after');
+        const waitMs = retryAfter
+          ? Math.min(parseInt(retryAfter, 10) * 1000, 30000)
+          : Math.min(1000 * Math.pow(2, attempt), 10000);
+        console.log(`[AI Chat] ${status} on attempt ${attempt + 1}, retrying in ${waitMs}ms`);
+        if (attempt < maxRetries) {
+          await new Promise(resolve => setTimeout(resolve, waitMs));
+        }
+      }
+      return lastResponse!;
+    }
+
     if (useClaude) {
       const modelRow = db.prepare("SELECT value FROM app_state WHERE key = 'setting_claude_model'").get() as { value: string } | undefined;
       const claudeModel = modelRow?.value || 'claude-sonnet-4-5-20250929';
 
-      const response = await fetch('https://api.anthropic.com/v1/messages', {
+      const response = await fetchWithRetry('https://api.anthropic.com/v1/messages', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -1188,6 +1211,13 @@ Remember to check the card list above to avoid suggesting duplicates!`,
           detail = errData.error?.message || errData.message || errText.slice(0, 200);
         } catch {
           detail = errText.slice(0, 200);
+        }
+        // On rate limit or server error, return user-friendly message instead of raw 502
+        if (response.status === 429) {
+          return NextResponse.json({
+            message: `**Rate limited by Claude API.** Too many requests — wait a moment and try again.\n\nYour deck analysis is still available via the local data engine (works without API). Try a simpler question or wait 30 seconds.`,
+            actions: [],
+          });
         }
         return NextResponse.json(
           { error: `Claude API error: ${response.status} — ${detail}` },
@@ -1279,8 +1309,8 @@ Remember to check the card list above to avoid suggesting duplicates!`,
         },
       });
     } else {
-      // OpenAI streaming
-      const response = await fetch('https://api.openai.com/v1/chat/completions', {
+      // OpenAI streaming (with retry on 429)
+      const response = await fetchWithRetry('https://api.openai.com/v1/chat/completions', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -1298,8 +1328,21 @@ Remember to check the card list above to avoid suggesting duplicates!`,
       if (!response.ok) {
         const errText = await response.text();
         console.error('OpenAI chat API error:', response.status, errText);
+        if (response.status === 429) {
+          return NextResponse.json({
+            message: `**Rate limited by OpenAI API (${openaiModel}).** Too many requests — wait a moment and try again.\n\nYour deck analysis is still available via the local data engine. Try a simpler question or wait 30 seconds.`,
+            actions: [],
+          });
+        }
+        let detail = '';
+        try {
+          const errData = JSON.parse(errText);
+          detail = errData.error?.message || errData.message || errText.slice(0, 200);
+        } catch {
+          detail = errText.slice(0, 200);
+        }
         return NextResponse.json(
-          { error: `OpenAI API error: ${response.status}` },
+          { error: `OpenAI API error: ${response.status} — ${detail}` },
           { status: 502 }
         );
       }

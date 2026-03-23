@@ -1,11 +1,20 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import { cn } from '@/lib/utils';
 import { groupBy } from '@/lib/utils';
 import type { DbCard } from '@/lib/types';
 import { ManaCost } from './mana-cost';
 import { RARITY_COLORS } from '@/lib/constants';
+import {
+  classifyCard,
+  getPrimaryCategory,
+  CATEGORY_LABELS,
+  CATEGORY_COLORS,
+  type CardCategory,
+} from '@/lib/card-classifier';
+
+type GroupMode = 'type' | 'role';
 
 interface DeckEntry {
   card_id: string;
@@ -50,6 +59,18 @@ const TYPE_ORDER = [
   'Other',
 ];
 
+const ROLE_ORDER: CardCategory[] = [
+  'ramp',
+  'draw',
+  'removal',
+  'board_wipe',
+  'protection',
+  'synergy',
+  'win_condition',
+  'utility',
+  'land',
+];
+
 export function DeckList({
   cards,
   deckId,
@@ -62,6 +83,7 @@ export function DeckList({
   className,
 }: DeckListProps) {
   const [favourites, setFavourites] = useState<Set<string>>(new Set());
+  const [groupMode, setGroupMode] = useState<GroupMode>('role');
 
   // Load favourites when deckId changes
   useEffect(() => {
@@ -77,7 +99,6 @@ export function DeckList({
   const toggleFavourite = useCallback(
     async (cardId: string) => {
       if (!deckId) return;
-      // Optimistic update
       setFavourites((prev) => {
         const next = new Set(prev);
         if (next.has(cardId)) next.delete(cardId);
@@ -91,7 +112,6 @@ export function DeckList({
           body: JSON.stringify({ card_id: cardId, deck_id: deckId }),
         });
       } catch {
-        // Revert on error
         setFavourites((prev) => {
           const next = new Set(prev);
           if (next.has(cardId)) next.delete(cardId);
@@ -107,9 +127,45 @@ export function DeckList({
   const sideCards = cards.filter((c) => c.board === 'sideboard');
   const cmdCards = cards.filter((c) => c.board === 'commander');
 
-  const mainGrouped = groupBy(mainCards, (c) => getCardMainType(c.card.type_line));
   const mainTotal = mainCards.reduce((sum, c) => sum + c.quantity, 0);
   const sideTotal = sideCards.reduce((sum, c) => sum + c.quantity, 0);
+
+  // Get commander oracle text for synergy classification
+  const commanderOracleText = cmdCards.length > 0
+    ? cmdCards.map((c) => c.card.oracle_text || '').join(' ')
+    : undefined;
+
+  // Classify cards by role (memoized)
+  const roleGrouped = useMemo(() => {
+    const groups: Record<string, DeckEntry[]> = {};
+    for (const entry of mainCards) {
+      const categories = classifyCard(
+        entry.card.name,
+        entry.card.oracle_text || '',
+        entry.card.type_line,
+        entry.card.cmc,
+        commanderOracleText
+      );
+      const primary = getPrimaryCategory(categories);
+      if (!groups[primary]) groups[primary] = [];
+      groups[primary].push(entry);
+    }
+    return groups;
+  }, [mainCards, commanderOracleText]);
+
+  // Type grouping
+  const typeGrouped = groupBy(mainCards, (c) => getCardMainType(c.card.type_line));
+
+  const sectionProps = {
+    onQuantityChange,
+    onRemove,
+    onSetCommander,
+    onSetCoverCard,
+    onCardZoom,
+    isCommanderFormat,
+    favourites,
+    onToggleFavourite: deckId ? toggleFavourite : undefined,
+  };
 
   return (
     <div className={cn('space-y-3', className)}>
@@ -119,45 +175,80 @@ export function DeckList({
           title="Commander"
           count={cmdCards.length}
           cards={cmdCards}
-          onQuantityChange={onQuantityChange}
-          onRemove={onRemove}
-          onSetCoverCard={onSetCoverCard}
-          onCardZoom={onCardZoom}
-          favourites={favourites}
-          onToggleFavourite={deckId ? toggleFavourite : undefined}
+          {...sectionProps}
         />
       )}
 
-      {/* Maindeck by type */}
-      <div className="text-xs font-medium text-muted-foreground">
-        Maindeck ({mainTotal})
+      {/* Group mode toggle + Maindeck header */}
+      <div className="flex items-center justify-between">
+        <div className="text-sm font-medium text-muted-foreground">
+          Maindeck ({mainTotal})
+        </div>
+        <div className="flex rounded-md border border-border text-xs">
+          <button
+            onClick={() => setGroupMode('role')}
+            className={cn(
+              'px-2.5 py-1 transition-colors rounded-l-md',
+              groupMode === 'role'
+                ? 'bg-primary/20 text-primary font-medium'
+                : 'text-muted-foreground hover:text-foreground'
+            )}
+          >
+            Role
+          </button>
+          <button
+            onClick={() => setGroupMode('type')}
+            className={cn(
+              'px-2.5 py-1 transition-colors rounded-r-md border-l border-border',
+              groupMode === 'type'
+                ? 'bg-primary/20 text-primary font-medium'
+                : 'text-muted-foreground hover:text-foreground'
+            )}
+          >
+            Type
+          </button>
+        </div>
       </div>
-      {TYPE_ORDER.map((type) => {
-        const group = mainGrouped[type];
-        if (!group?.length) return null;
-        const count = group.reduce((s, c) => s + c.quantity, 0);
-        return (
-          <DeckSection
-            key={type}
-            title={type}
-            count={count}
-            cards={group}
-            onQuantityChange={onQuantityChange}
-            onRemove={onRemove}
-            onSetCommander={onSetCommander}
-            onSetCoverCard={onSetCoverCard}
-            onCardZoom={onCardZoom}
-            isCommanderFormat={isCommanderFormat}
-            favourites={favourites}
-            onToggleFavourite={deckId ? toggleFavourite : undefined}
-          />
-        );
-      })}
+
+      {/* Maindeck grouped by role */}
+      {groupMode === 'role' &&
+        ROLE_ORDER.map((role) => {
+          const group = roleGrouped[role];
+          if (!group?.length) return null;
+          const count = group.reduce((s, c) => s + c.quantity, 0);
+          return (
+            <DeckSection
+              key={role}
+              title={CATEGORY_LABELS[role]}
+              count={count}
+              cards={group}
+              categoryColor={CATEGORY_COLORS[role]}
+              {...sectionProps}
+            />
+          );
+        })}
+
+      {/* Maindeck grouped by type */}
+      {groupMode === 'type' &&
+        TYPE_ORDER.map((type) => {
+          const group = typeGrouped[type];
+          if (!group?.length) return null;
+          const count = group.reduce((s, c) => s + c.quantity, 0);
+          return (
+            <DeckSection
+              key={type}
+              title={type}
+              count={count}
+              cards={group}
+              {...sectionProps}
+            />
+          );
+        })}
 
       {/* Sideboard */}
       {sideCards.length > 0 && (
         <>
-          <div className="border-t border-border pt-2 text-xs font-medium text-muted-foreground">
+          <div className="border-t border-border pt-2 text-sm font-medium text-muted-foreground">
             Sideboard ({sideTotal})
           </div>
           <DeckSection
@@ -177,7 +268,7 @@ export function DeckList({
       {cards.length === 0 && (
         <div className="flex flex-col items-center py-8 text-center">
           <div className="mb-2 text-3xl opacity-30">📋</div>
-          <p className="text-xs text-muted-foreground">
+          <p className="text-sm text-muted-foreground">
             No cards yet. Search and add cards to start building.
           </p>
         </div>
@@ -190,6 +281,7 @@ function DeckSection({
   title,
   count,
   cards,
+  categoryColor,
   onQuantityChange,
   onRemove,
   onSetCommander,
@@ -203,6 +295,7 @@ function DeckSection({
   title: string;
   count: number;
   cards: DeckEntry[];
+  categoryColor?: string;
   onQuantityChange?: (cardId: string, board: string, quantity: number) => void;
   onRemove?: (cardId: string, board: string) => void;
   onSetCommander?: (cardId: string) => void;
@@ -218,8 +311,14 @@ function DeckSection({
   return (
     <div>
       {!hideHeader && (
-        <div className="mb-1 flex items-center gap-2 text-xs">
-          <span className="font-semibold text-foreground">{title}</span>
+        <div className="mb-1 flex items-center gap-2 text-sm">
+          {categoryColor ? (
+            <span className={cn('rounded px-1.5 py-0.5 text-xs font-semibold border', categoryColor)}>
+              {title}
+            </span>
+          ) : (
+            <span className="font-semibold text-foreground">{title}</span>
+          )}
           <span className="text-muted-foreground">({count})</span>
         </div>
       )}
@@ -276,7 +375,7 @@ function DeckCardRow({
   return (
     <div
       className={cn(
-        'group relative flex items-center gap-1.5 rounded-lg px-2 py-1 transition-colors hover:bg-accent/50',
+        'group relative flex items-center gap-2 rounded-lg px-2 py-1.5 transition-colors hover:bg-accent/50',
         isCommander && 'bg-primary/10 border border-primary/30'
       )}
       onMouseEnter={() => setHovered(true)}
@@ -304,7 +403,7 @@ function DeckCardRow({
 
       {/* Commander crown */}
       {isCommander && (
-        <span className="text-xs text-primary" title="Commander">
+        <span className="text-sm text-primary" title="Commander">
           &#x1F451;
         </span>
       )}
@@ -315,18 +414,18 @@ function DeckCardRow({
           onClick={() =>
             onQuantityChange?.(entry.card_id, entry.board, entry.quantity - 1)
           }
-          className="flex h-4 w-4 items-center justify-center rounded text-[10px] text-muted-foreground opacity-0 transition-opacity hover:bg-accent group-hover:opacity-100"
+          className="flex h-5 w-5 items-center justify-center rounded text-xs text-muted-foreground opacity-0 transition-opacity hover:bg-accent group-hover:opacity-100"
         >
           −
         </button>
-        <span className="w-4 text-center text-xs font-medium text-foreground">
+        <span className="w-5 text-center text-sm font-medium text-foreground">
           {entry.quantity}
         </span>
         <button
           onClick={() =>
             onQuantityChange?.(entry.card_id, entry.board, entry.quantity + 1)
           }
-          className="flex h-4 w-4 items-center justify-center rounded text-[10px] text-muted-foreground opacity-0 transition-opacity hover:bg-accent group-hover:opacity-100"
+          className="flex h-5 w-5 items-center justify-center rounded text-xs text-muted-foreground opacity-0 transition-opacity hover:bg-accent group-hover:opacity-100"
         >
           +
         </button>
@@ -334,7 +433,7 @@ function DeckCardRow({
 
       {/* Card preview thumbnail */}
       {previewUrl && (
-        <div className="relative h-6 w-4 shrink-0 overflow-hidden rounded-sm">
+        <div className="relative h-7 w-5 shrink-0 overflow-hidden rounded-sm">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={previewUrl}
@@ -348,7 +447,7 @@ function DeckCardRow({
       {/* Card name */}
       <span
         className={cn(
-          'flex-1 truncate text-xs',
+          'flex-1 truncate text-sm',
           RARITY_COLORS[card.rarity] || 'text-foreground'
         )}
         title={card.name}
@@ -357,14 +456,14 @@ function DeckCardRow({
       </span>
 
       {/* Mana cost */}
-      <ManaCost cost={card.mana_cost} size="xs" />
+      <ManaCost cost={card.mana_cost} size="sm" />
 
       {/* Favourite button */}
       {onToggleFavourite && (
         <button
           onClick={() => onToggleFavourite(entry.card_id)}
           className={cn(
-            'flex h-4 w-4 items-center justify-center rounded text-[10px] transition-all',
+            'flex h-5 w-5 items-center justify-center rounded text-xs transition-all',
             isFavourite
               ? 'text-yellow-500 opacity-100'
               : 'text-muted-foreground opacity-0 hover:text-yellow-500 group-hover:opacity-100'
@@ -379,7 +478,7 @@ function DeckCardRow({
       {onSetCoverCard && card.image_uri_art_crop && (
         <button
           onClick={() => onSetCoverCard(entry.card_id)}
-          className="flex h-4 w-4 items-center justify-center rounded text-[10px] text-muted-foreground opacity-0 transition-opacity hover:text-primary group-hover:opacity-100"
+          className="flex h-5 w-5 items-center justify-center rounded text-xs text-muted-foreground opacity-0 transition-opacity hover:text-primary group-hover:opacity-100"
           title="Set as deck cover image"
         >
           &#x1F5BC;
@@ -390,7 +489,7 @@ function DeckCardRow({
       {canBeCommander && onSetCommander && (
         <button
           onClick={() => onSetCommander(entry.card_id)}
-          className="flex h-4 w-4 items-center justify-center rounded text-[10px] text-muted-foreground opacity-0 transition-opacity hover:text-primary group-hover:opacity-100"
+          className="flex h-5 w-5 items-center justify-center rounded text-xs text-muted-foreground opacity-0 transition-opacity hover:text-primary group-hover:opacity-100"
           title="Set as Commander"
         >
           &#x1F451;
@@ -401,7 +500,7 @@ function DeckCardRow({
       {onRemove && (
         <button
           onClick={() => onRemove(entry.card_id, entry.board)}
-          className="flex h-4 w-4 items-center justify-center rounded text-[10px] text-muted-foreground opacity-0 transition-opacity hover:text-destructive group-hover:opacity-100"
+          className="flex h-5 w-5 items-center justify-center rounded text-xs text-muted-foreground opacity-0 transition-opacity hover:text-destructive group-hover:opacity-100"
           title="Remove"
         >
           ×
