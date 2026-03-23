@@ -12,6 +12,23 @@ import { getDb } from '@/lib/db';
 import { getLegalityKey } from '@/lib/constants';
 import type { DbCard } from '@/lib/types';
 
+// ── Fetch land relevance check ──────────────────────────────────────────────
+// Fetch lands have color_identity [] but can only search for specific basic types.
+// A Flooded Strand (Plains/Island) is useless in a RG deck.
+const BASIC_TYPE_TO_COLOR: Record<string, string> = {
+  plains: 'W', island: 'U', swamp: 'B', mountain: 'R', forest: 'G',
+};
+
+export function isFetchLandRelevant(oracleText: string, deckColors: string[]): boolean {
+  const lower = oracleText.toLowerCase();
+  if (!lower.includes('search your library for a')) return true;
+  for (const [type, color] of Object.entries(BASIC_TYPE_TO_COLOR)) {
+    if (lower.includes(type) && deckColors.includes(color)) return true;
+  }
+  const mentionsSpecificType = Object.keys(BASIC_TYPE_TO_COLOR).some((t) => lower.includes(t));
+  return !mentionsSpecificType;
+}
+
 // ── Types ────────────────────────────────────────────────────────────────────
 
 export interface LandScore {
@@ -112,7 +129,7 @@ export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
     AND c.type_line NOT LIKE '%Basic%'
     ${legalityFilter}
     ORDER BY lc.tier ASC NULLS LAST, c.edhrec_rank ASC NULLS LAST
-    LIMIT 200
+    LIMIT 1000
   `).all() as Array<DbCard & {
     land_category: string | null;
     produces_colors: string | null;
@@ -186,6 +203,10 @@ export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
       // Produces ONLY off-colors — hard exclude (e.g. Urborg in UR deck)
       continue;
     }
+
+    // Skip fetch lands that search for basic types not in deck colors
+    // (e.g. Flooded Strand in a RG deck)
+    if (!isFetchLandRelevant(land.oracle_text || '', colors)) continue;
 
     // ── Tribal match bonus ───────────────────────────────────────
     if (tribalTypes && tribalTypes.length > 0 && tribalTypesArr.length > 0) {
@@ -281,12 +302,12 @@ export function buildOptimalLandBase(options: BuildOptions): LandBaseResult {
   // Determine non-basic target based on color count
   const numColors = colors.length;
   const nonBasicTarget = numColors <= 1
-    ? Math.min(4, targetLandCount)
+    ? Math.min(10, targetLandCount - 25)
     : numColors === 2
-      ? Math.min(14, targetLandCount - 8)
+      ? Math.min(18, targetLandCount - 8)
       : numColors === 3
-        ? Math.min(22, targetLandCount - 5)
-        : Math.min(28, targetLandCount - 3);
+        ? Math.min(24, targetLandCount - 5)
+        : Math.min(30, targetLandCount - 3);
 
   // Select non-basic lands
   const selectedLands: Array<{ card: DbCard; quantity: number }> = [];

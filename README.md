@@ -9,15 +9,21 @@ A dark-themed desktop grimoire for building, analyzing, and mastering Magic: The
 - **Claude AI Deck Builder** — Pick a commander, choose a strategy, and Claude builds a complete 100-card deck with per-card explanations and role assignments (Ramp, Draw, Removal, Synergy, etc.)
 - **Quick Build** — Instantly generate a deck using EDHREC data + archetype templates + commander synergy scoring (no API key needed)
 - **AI Chat** — Conversational deck tuning: ask for cuts, additions, strategy advice. Context-aware of your full deck, collection, and format rules. Selective apply lets you pick which suggestions to keep
+- **Local Data Engine** — When no API credits remain, the chat fallback parses CF/EDHREC/staples/ML data to produce structured swap actions without any external API call
 - **Commander Synergy Engine** — Analyzes commander oracle text across 12 trigger categories (ETB, dies, attack, spellcast, exile, artifacts, enchantments, lifegain, counters, graveyard, tokens) to score every candidate card
+- **Land Intelligence** — Tier-aware, color-demand-weighted, fetch-land-filtered land selection with mana pip analysis for optimal basic/non-basic distribution
+- **Format Staple Guarantee** — Universal staples (Arcane Signet, Sol Ring, Commander's Sphere, etc.) are force-included before curve-based selection, so commander-synergy cards can never crowd them out
+- **Collaborative Filtering** — SVD-based recommendations from the Black Grimoire CF API (148K+ scraped decks from Moxfield/Archidekt), with contextual bandit real-time learning
 - **11 Archetype Templates** — Aggro, midrange, control, combo, aristocrats, spellslinger, voltron, tribal, group hug, stax, superfriends — with tuned mana curves and slot ratios
+- **MDFC Support** — Modal double-faced cards (spell // land) correctly included in non-land card pool, Art Series cards filtered out
 - **Right-Click Card Zoom** — Right-click any card to see a large preview overlay positioned near the cursor
 - **Search Filters** — Filter by mana value (0-7+), color identity (W/U/B/R/G), and card type — all filters stack with AND logic
 - **EDHREC Integration** — Community synergy data, average decklists, and strategy articles baked into AI prompts
 - **Arena Integration** — Parse your Player.log to import match results, deck submissions, and collection automatically
+- **Live Arena Overlay** — Transparent always-on-top deck tracker during matches with draw probabilities, mulligan advisor, and sideboard guide (Alt+O toggle, Alt+L click-through)
 - **Analytics Dashboard** — Win rates by deck/format/opponent, card performance tracking, mana curve analysis
-- **Collection Management** — Import your Arena collection and filter AI suggestions to cards you own
-- **ML Pipeline** — 10-step pipeline (MTGJSON, EDHREC, MTGGoldfish, MTGTop8, Arena, aggregation, training, prediction) with tournament W-L data and 25 features. Supports personal, community, and blended training modes
+- **Collection Management** — Import your Arena collection and filter AI suggestions to cards you own. Server-side enforcement ensures all suggestions are from your collection
+- **ML Pipeline** — 10-step pipeline (MTGJSON, EDHREC, MTGGoldfish, MTGTop8, Arena, aggregation, training, prediction) with tournament W-L data and 26 features. Supports personal, community, and blended training modes
 - **Data Export/Import** — Export everything as JSON for backup or sharing
 - **Multi-User** — Separate accounts with isolated decks, collections, and match history
 - **Deck Versioning** — Automatic snapshots track every change to your decks over time
@@ -192,13 +198,14 @@ py scripts/import_user_data.py their-export.json
 
 - **Frontend**: Next.js 14 (App Router) + Tailwind CSS + Recharts
 - **Desktop**: Electron 33 (standalone output mode, 443MB packaged)
-- **Database**: SQLite (better-sqlite3, WAL mode, FTS5 full-text search, 20 migrations)
+- **Database**: SQLite (better-sqlite3, WAL mode, FTS5 full-text search, 29 migrations)
 - **AI**: Claude Sonnet 4.5 / Opus 4.6 / GPT-4o / Ollama (local)
-- **ML**: Scikit-learn (Gradient Boosting) with 25 features for card performance prediction
-- **Card Data**: Scryfall API (35K+ cards) + EDHREC + MTGGoldfish + MTGTop8
+- **ML**: Scikit-learn (Gradient Boosting) with 26 features for card performance prediction
+- **CF Engine**: Black Grimoire API (FastAPI + PostgreSQL + Redis + SVD) with 148K+ scraped decks
+- **Card Data**: Scryfall API (35K+ cards) + EDHREC + MTGGoldfish + MTGTop8 + Commander Spellbook
 - **Auth**: JWT + scrypt password hashing
 - **Language**: TypeScript (strict) + Python 3.13
-- **Testing**: Vitest + pytest
+- **Testing**: Vitest (340 tests) + pytest
 
 ## License
 

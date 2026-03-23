@@ -445,8 +445,13 @@ export function getCollection(
     params.push(userId);
   }
   if (filters?.source) {
-    conditions.push('col.source = ?');
-    params.push(filters.source);
+    // Match both canonical source and legacy 'arena_csv' variant
+    if (filters.source === 'arena') {
+      conditions.push("(col.source = 'arena' OR col.source = 'arena_csv')");
+    } else {
+      conditions.push('col.source = ?');
+      params.push(filters.source);
+    }
   }
   if (filters?.query) {
     conditions.push('c.name LIKE ?');
@@ -506,8 +511,13 @@ export function getCollectionStats(userId?: number, source?: 'paper' | 'arena') 
     params.push(userId);
   }
   if (source) {
-    conditions.push('col.source = ?');
-    params.push(source);
+    // Match both canonical source and legacy 'arena_csv' variant
+    if (source === 'arena') {
+      conditions.push("(col.source = 'arena' OR col.source = 'arena_csv')");
+    } else {
+      conditions.push('col.source = ?');
+      params.push(source);
+    }
   }
 
   const where = conditions.length ? `WHERE ${conditions.join(' AND ')}` : '';
@@ -586,8 +596,13 @@ export function clearCollection(userId?: number, source?: 'paper' | 'arena') {
     params.push(userId);
   }
   if (source) {
-    conditions.push('source = ?');
-    params.push(source);
+    // Clear both canonical and legacy source variants
+    if (source === 'arena') {
+      conditions.push("(source = 'arena' OR source = 'arena_csv')");
+    } else {
+      conditions.push('source = ?');
+      params.push(source);
+    }
   }
 
   if (conditions.length) {
@@ -1046,6 +1061,18 @@ export function getCedhStaples(
 /**
  * Bulk-load meta_card_stats for a set of card names in a given format.
  */
+// Brawl is a subset of Commander — use commander data as fallback
+const FORMAT_FALLBACK: Record<string, string[]> = {
+  brawl: ['brawl', 'commander'],
+  standardbrawl: ['standardbrawl', 'standard', 'brawl', 'commander'],
+  historic_brawl: ['historic_brawl', 'brawl', 'commander'],
+  historicbrawl: ['historicbrawl', 'historic_brawl', 'brawl', 'commander'],
+};
+
+function getFormatChain(format: string): string[] {
+  return FORMAT_FALLBACK[format] || [format];
+}
+
 export function getMetaCardStatsMap(
   cardNames: string[],
   format: string
@@ -1053,6 +1080,8 @@ export function getMetaCardStatsMap(
   const db = getDb();
   const result = new Map<string, { inclusionRate: number; placementScore: number; coreRate: number; winRate: number }>();
   if (cardNames.length === 0) return result;
+
+  const formatChain = getFormatChain(format);
 
   try {
     const stmt = db.prepare(
@@ -1062,26 +1091,100 @@ export function getMetaCardStatsMap(
        WHERE card_name = ? COLLATE NOCASE AND format = ?`
     );
     for (const name of cardNames) {
-      const row = stmt.get(name, format) as {
-        card_name: string;
-        meta_inclusion_rate: number;
-        placement_weighted_score: number;
-        archetype_core_rate: number;
-        archetype_win_rate: number;
-      } | undefined;
-      if (row) {
-        result.set(row.card_name, {
-          inclusionRate: row.meta_inclusion_rate,
-          placementScore: row.placement_weighted_score,
-          coreRate: row.archetype_core_rate,
-          winRate: row.archetype_win_rate,
-        });
+      // Try each format in the fallback chain until we find data
+      for (const fmt of formatChain) {
+        const row = stmt.get(name, fmt) as {
+          card_name: string;
+          meta_inclusion_rate: number;
+          placement_weighted_score: number;
+          archetype_core_rate: number;
+          archetype_win_rate: number;
+        } | undefined;
+        if (row) {
+          result.set(row.card_name, {
+            inclusionRate: row.meta_inclusion_rate,
+            placementScore: row.placement_weighted_score,
+            coreRate: row.archetype_core_rate,
+            winRate: row.archetype_win_rate,
+          });
+          break; // found data, stop searching fallback chain
+        }
       }
     }
   } catch {
     // table may not exist
   }
   return result;
+}
+
+/**
+ * Get format staples — cards with high inclusion rate across community decks.
+ * Uses cross-format fallback (brawl → commander) to ensure coverage.
+ * Returns cards sorted by inclusion rate, filtered by color identity.
+ */
+export function getFormatStaples(
+  format: string,
+  colorIdentity: string[],
+  limit: number = 40
+): Array<{ cardName: string; inclusionRate: number; coreRate: number; deckCount: number; totalDecks: number }> {
+  const db = getDb();
+  const formatChain = getFormatChain(format);
+
+  // Enforce legality against the ORIGINAL format, not the fallback format
+  // (e.g. brawl→commander fallback must still only return brawl-legal cards)
+  const legalityKey = getLegalityKey(format);
+  const legalityFilter = `AND json_extract(c.legalities, '$.${legalityKey}') IN ('legal', 'restricted')`;
+
+  // Build color exclusion: cards whose color_identity contains colors NOT in the deck
+  const excludeColors = ['W', 'U', 'B', 'R', 'G'].filter(c => !colorIdentity.includes(c));
+  const colorClauses = excludeColors.map(c => `c.color_identity NOT LIKE '%${c}%'`);
+  const colorFilter = colorClauses.length > 0 ? `AND ${colorClauses.join(' AND ')}` : '';
+
+  const seen = new Map<string, { cardName: string; inclusionRate: number; coreRate: number; deckCount: number; totalDecks: number }>();
+
+  try {
+    for (const fmt of formatChain) {
+      const rows = db.prepare(`
+        SELECT m.card_name, m.meta_inclusion_rate, m.archetype_core_rate,
+               m.num_decks_in, m.total_decks_sampled
+        FROM meta_card_stats m
+        JOIN cards c ON c.name = m.card_name COLLATE NOCASE
+        WHERE m.format = ?
+        AND m.meta_inclusion_rate >= 0.15
+        AND c.type_line NOT LIKE '%Basic Land%'
+        ${legalityFilter}
+        ${colorFilter}
+        ORDER BY m.meta_inclusion_rate DESC
+        LIMIT ?
+      `).all(fmt, limit * 2) as Array<{
+        card_name: string;
+        meta_inclusion_rate: number;
+        archetype_core_rate: number;
+        num_decks_in: number;
+        total_decks_sampled: number;
+      }>;
+
+      for (const row of rows) {
+        if (!seen.has(row.card_name)) {
+          seen.set(row.card_name, {
+            cardName: row.card_name,
+            inclusionRate: row.meta_inclusion_rate,
+            coreRate: row.archetype_core_rate,
+            deckCount: row.num_decks_in,
+            totalDecks: row.total_decks_sampled,
+          });
+        }
+      }
+
+      if (seen.size >= limit) break;
+    }
+  } catch {
+    // table may not exist
+  }
+
+  return Array.from(seen.values())
+    .sort((a, b) => b.inclusionRate - a.inclusionRate)
+    .slice(0, limit);
 }
 
 export function autoLinkByCardsPlayed(): { linked: number; total: number } {

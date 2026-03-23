@@ -1,4 +1,4 @@
-import { getDb, getCedhStaples, getMetaCardStatsMap } from './db';
+import { getDb, getCedhStaples, getMetaCardStatsMap, getFormatStaples } from './db';
 import type { DbCard, AISuggestion } from './types';
 import { DEFAULT_LAND_COUNT, DEFAULT_DECK_SIZE, getLegalityKey } from './constants';
 import { getCardGlobalScore, getMetaAdjustedScore } from './global-learner';
@@ -7,7 +7,7 @@ import type { EdhrecRecommendation } from './edhrec';
 import { getTemplate, getScaledCurve, getColorAdjustment, isImpulseDraw, mergeWithCommanderProfile } from './deck-templates';
 import { analyzeCommander } from './commander-synergy';
 import type { CommanderSynergyProfile } from './commander-synergy';
-import { buildOptimalLandBase, analyzeManaDemands } from './land-intelligence';
+import { buildOptimalLandBase, analyzeManaDemands, isFetchLandRelevant } from './land-intelligence';
 import { getCFRecommendations, resolveCFToDbCards } from './cf-api-client';
 
 // ── Commander synergy text patterns for card scoring ────────────────────────
@@ -297,7 +297,7 @@ export interface BuildOptions {
   powerLevel?: 'casual' | 'optimized' | 'cedh';
 }
 
-interface BuildResult {
+export interface BuildResult {
   cards: Array<{ card: DbCard; quantity: number; board: 'main' | 'sideboard' }>;
   themes: string[];
   strategy: string;
@@ -313,6 +313,7 @@ export interface ScoredCandidatePoolResult {
   tribalNames: Set<string>;
   commanderProfile: CommanderSynergyProfile | null;
   commanderCard: DbCard | null;
+  format: string;
   landTarget: number;
   nonLandTarget: number;
   isCommander: boolean;
@@ -325,6 +326,7 @@ export interface ScoredCandidatePoolResult {
   commanderExclude: string;
   collectionJoin: string;
   collectionOrder: string;
+  metaStatsMap: Map<string, { inclusionRate: number; placementScore: number; coreRate: number; winRate: number }>;
 }
 
 /**
@@ -339,7 +341,17 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
   let colors = options.colors;
   let commanderCard: DbCard | null = null;
   if (commanderName) {
-    const cmdCard = db.prepare('SELECT * FROM cards WHERE name = ? COLLATE NOCASE').get(commanderName) as DbCard | undefined;
+    // Prefer the "real" card over Art Series / token duplicates:
+    // Order by mana_cost IS NOT NULL DESC so entries with actual cost come first,
+    // then by type_line NOT LIKE '%Card%' to deprioritize Art Series (type "Card // Card")
+    const cmdCard = db.prepare(`
+      SELECT * FROM cards WHERE name = ? COLLATE NOCASE
+      ORDER BY
+        CASE WHEN mana_cost IS NOT NULL AND mana_cost != '' THEN 0 ELSE 1 END,
+        CASE WHEN type_line LIKE '%Card //%' OR type_line = 'Card' THEN 1 ELSE 0 END,
+        updated_at DESC
+      LIMIT 1
+    `).get(commanderName) as DbCard | undefined;
     if (cmdCard) {
       commanderCard = cmdCard;
       if (cmdCard.color_identity) {
@@ -532,12 +544,13 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
   const poolQuery = `
     SELECT DISTINCT c.* FROM cards c
     ${collectionJoin}
-    WHERE c.type_line NOT LIKE '%Land%'
+    WHERE (c.type_line NOT LIKE '%Land%' OR c.type_line LIKE '%//%')
+    AND c.type_line != 'Card' AND c.type_line NOT LIKE 'Card //%'
     ${colorExcludeFilter ? `AND ${colorExcludeFilter}` : ''}
     ${legalityFilter}
     ${commanderExclude}
     ORDER BY ${collectionOrder} c.edhrec_rank ASC NULLS LAST
-    LIMIT 300
+    LIMIT 5000
   `;
 
   const dbPool = db.prepare(poolQuery).all() as DbCard[];
@@ -570,13 +583,14 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
 
     const synergyPoolQuery = `
       SELECT DISTINCT c.* FROM cards c
-      WHERE c.type_line NOT LIKE '%Land%'
+      WHERE (c.type_line NOT LIKE '%Land%' OR c.type_line LIKE '%//%')
+      AND c.type_line != 'Card' AND c.type_line NOT LIKE 'Card //%'
       AND (${synergyConditions})
       ${colorExcludeFilter ? `AND ${colorExcludeFilter}` : ''}
       ${legalityFilter}
       ${commanderExclude}
       ORDER BY c.edhrec_rank ASC NULLS LAST
-      LIMIT 80
+      LIMIT 1000
     `;
 
     try {
@@ -597,6 +611,29 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
     if (!seenNames.has(card.name)) {
       seenNames.add(card.name);
       pool.push(card);
+    }
+  }
+
+  // ── Inject format staples that may have been missed ────────────────────
+  // Cards with high inclusion rates in scraped community decks (e.g. Arcane Signet,
+  // Lightning Greaves) must always be in the candidate pool regardless of EDHREC/DB limits
+  if (isCommander) {
+    const formatStaples = getFormatStaples(format, colors, 30);
+    for (const staple of formatStaples) {
+      if (staple.inclusionRate < 0.10) continue; // Only inject meaningful staples
+      if (seenNames.has(staple.cardName)) continue;
+
+      const stapleCard = db.prepare(
+        `SELECT c.* FROM cards c WHERE c.name = ? COLLATE NOCASE
+         ${legalityFilter}
+         ${commanderExclude}
+         LIMIT 1`
+      ).get(staple.cardName) as DbCard | undefined;
+
+      if (stapleCard) {
+        seenNames.add(stapleCard.name);
+        pool.push(stapleCard);
+      }
     }
   }
 
@@ -648,7 +685,7 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
         `SELECT card_name, predicted_score FROM personalized_suggestions
          WHERE (commander_name = ? COLLATE NOCASE OR deck_id = 0)
          ORDER BY predicted_score DESC
-         LIMIT 200`
+         LIMIT 500`
       ).all(commanderName) as Array<{ card_name: string; predicted_score: number }>;
       for (const row of mlRows) {
         mlScoreMap.set(row.card_name, row.predicted_score);
@@ -839,12 +876,22 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
       }
     }
 
-    // ── Meta card stats scoring ──
+    // ── Meta card stats scoring (from 67K+ scraped decks) ──
     const metaStats = metaStatsMap.get(card.name);
     if (metaStats) {
-      // Proven format staple
+      // Tiered inclusion rate bonus — high-inclusion cards are format staples
+      if (metaStats.inclusionRate >= 0.6) {
+        score += 50; // Universal staple (e.g., Arcane Signet, Sol Ring, Command Tower)
+      } else if (metaStats.inclusionRate >= 0.4) {
+        score += 35; // Near-staple
+      } else if (metaStats.inclusionRate >= 0.2) {
+        score += 20; // Common include
+      } else if (metaStats.inclusionRate >= 0.1) {
+        score += 10; // Occasional include
+      }
+      // Archetype core rate (appears in >50% of ONE archetype)
       if (metaStats.coreRate > 0.5) {
-        score += 20;
+        score += 15;
       }
       // Placement weighted score (0-15 scaled)
       score += Math.min(15, Math.round(metaStats.placementScore * 15));
@@ -878,6 +925,7 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
     tribalNames,
     commanderProfile,
     commanderCard,
+    format,
     landTarget: targetLands,
     nonLandTarget,
     isCommander,
@@ -890,6 +938,7 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
     commanderExclude,
     collectionJoin,
     collectionOrder,
+    metaStatsMap,
   };
 }
 
@@ -901,7 +950,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
     commanderProfile, commanderCard, landTarget: targetLands, nonLandTarget,
     isCommander, maxCopies, colors, ownedQty, useCollection,
     colorExcludeFilter, legalityFilter, commanderExclude,
-    collectionJoin, collectionOrder,
+    collectionJoin, collectionOrder, metaStatsMap,
   } = poolResult;
 
   // Step 4: Pick cards respecting mana curve (from archetype templates)
@@ -916,7 +965,37 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
     const formatMax = isCommander ? 1 : maxCopies;
     if (!useCollection) return formatMax;
     const owned = ownedQty.get(card.id) || 0;
-    return owned > 0 ? Math.min(formatMax, owned) : formatMax;
+    // Block unowned cards entirely when building from collection
+    return owned > 0 ? Math.min(formatMax, owned) : 0;
+  }
+
+  // Pre-pass: Force universal format staples into the deck
+  // Cards with very high meta inclusion (>50%) or in template protectedPatterns
+  // must be guaranteed slots — they're proven staples that curve-based selection
+  // can accidentally exclude when commander-synergy cards fill every bucket.
+  const template = getTemplate(resolvedStrategy);
+  const protectedNames = new Set(
+    (template.protectedPatterns || []).map((p: string) => p.toLowerCase())
+  );
+
+  for (const { card, score } of scored) {
+    if (totalPicked >= nonLandTarget) break;
+    if (pickedNames.has(card.name)) continue;
+
+    const isProtectedStaple = protectedNames.has(card.name.toLowerCase());
+    const metaStats = metaStatsMap.get(card.name);
+    const isUniversalStaple = metaStats && metaStats.inclusionRate >= 0.50;
+
+    if (!isProtectedStaple && !isUniversalStaple) continue;
+
+    const qty = getMaxQty(card);
+    if (qty <= 0) continue;
+
+    const bucket = Math.min(Math.floor(card.cmc), 7);
+    picked.push({ card, quantity: qty, board: 'main' });
+    pickedNames.add(card.name);
+    curveCounts[bucket] = (curveCounts[bucket] || 0) + qty;
+    totalPicked += qty;
   }
 
   // First pass: fill curve slots
@@ -1107,7 +1186,8 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
     // Add non-basic lands
     for (const { card, quantity } of landBase.lands) {
       if (pickedNames.has(card.name)) continue;
-      const qty = isCommander ? 1 : Math.min(getMaxQty(card), quantity);
+      const maxQty = getMaxQty(card);
+      const qty = isCommander ? Math.min(1, maxQty) : Math.min(maxQty, quantity);
       if (qty <= 0) continue;
       picked.push({ card, quantity: qty, board: 'main' });
       pickedNames.add(card.name);
@@ -1132,10 +1212,10 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
     // Fallback: land_classifications table may not exist yet
     const numColors = colors.length;
     const nonBasicTarget = numColors <= 1
-      ? Math.min(4, targetLands)
+      ? Math.min(10, targetLands - 25)
       : numColors === 2
-        ? Math.min(12, targetLands - 8)
-        : Math.min(20, targetLands - 5);
+        ? Math.min(18, targetLands - 8)
+        : Math.min(24, targetLands - 5);
 
     const landPool = db.prepare(`
       SELECT c.* FROM cards c
@@ -1148,12 +1228,15 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
         ${collectionOrder}
         CASE WHEN c.oracle_text LIKE '%enters the battlefield tapped%' OR c.oracle_text LIKE '%enters tapped%' THEN 1 ELSE 0 END,
         c.edhrec_rank ASC NULLS LAST
-      LIMIT 60
+      LIMIT 500
     `).all() as DbCard[];
 
     for (const land of landPool) {
       if (landsAdded >= nonBasicTarget) break;
       if (pickedNames.has(land.name)) continue;
+
+      // Skip fetch lands that can't fetch on-color basics (e.g. Flooded Strand in RG)
+      if (!isFetchLandRelevant(land.oracle_text || '', colors)) continue;
 
       const oracleText = (land.oracle_text || '').toLowerCase();
       if (numColors <= 1) {
@@ -1215,6 +1298,42 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
         picked.push({ card, quantity: qty, board: 'sideboard' });
         pickedNames.add(card.name);
         sideCount += qty;
+      }
+    }
+  }
+
+  // ── Step 7: Fill shortfall with basic lands ─────────────────────────────
+  // When collection enforcement blocks unowned cards, the deck may be short.
+  // Basic lands are always available — top off to reach the target size.
+  const targetSize = DEFAULT_DECK_SIZE[options.format] || DEFAULT_DECK_SIZE.default;
+  const currentTotal = picked.reduce((sum, p) => sum + p.quantity, 0)
+    + (isCommander && options.commanderName ? 1 : 0); // Commander counts toward 100
+
+  if (currentTotal < targetSize && colors.length > 0) {
+    const deficit = targetSize - currentTotal;
+    const perColor = Math.floor(deficit / colors.length);
+    const extra = deficit - perColor * colors.length;
+
+    for (let i = 0; i < colors.length; i++) {
+      const basicName = basicLandMap[colors[i]];
+      if (!basicName) continue;
+
+      const addQty = perColor + (i === 0 ? extra : 0);
+      if (addQty <= 0) continue;
+
+      // Find or merge with existing basic land entry
+      const existingBasic = picked.find(
+        (p) => p.card.name === basicName && p.board === 'main'
+      );
+      if (existingBasic) {
+        existingBasic.quantity += addQty;
+      } else {
+        const basic = db.prepare(
+          'SELECT * FROM cards WHERE name = ? AND set_code IS NOT NULL ORDER BY updated_at DESC LIMIT 1'
+        ).get(basicName) as DbCard | undefined;
+        if (basic) {
+          picked.push({ card: basic, quantity: addQty, board: 'main' });
+        }
       }
     }
   }
@@ -1283,14 +1402,15 @@ export function getSynergySuggestions(
   const query = `
     SELECT c.* FROM cards c
     ${collectionJoin}
-    WHERE c.type_line NOT LIKE '%Land%'
+    WHERE (c.type_line NOT LIKE '%Land%' OR c.type_line LIKE '%//%')
+    AND c.type_line != 'Card' AND c.type_line NOT LIKE 'Card //%'
     AND (${colorFilter})
     ${excludeFilter ? `AND ${excludeFilter}` : ''}
     ${legalityFilter}
     AND (1=1 ${synergyFilter} ${answerFilter})
     AND c.id NOT IN (${idPlaceholders})
     ORDER BY c.edhrec_rank ASC NULLS LAST
-    LIMIT 50
+    LIMIT 200
   `;
 
   const candidates = db.prepare(query).all(...Array.from(existingIds)) as DbCard[];

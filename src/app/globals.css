@@ -58,8 +58,8 @@
   body {
     @apply bg-background text-foreground;
     font-family: 'Crimson Text', Georgia, 'Times New Roman', serif;
-    font-size: 18px;
-    line-height: 1.6;
+    font-size: 20px;
+    line-height: 1.65;
   }
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Cinzel', 'Times New Roman', serif;
@@ -286,7 +286,7 @@ textarea {
 .narrative-chapter-header {
   font-family: 'Cinzel', serif;
   text-align: center;
-  font-size: 0.7rem;
+  font-size: 0.85rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: hsl(43 60% 50% / 0.7);
@@ -297,7 +297,7 @@ textarea {
 .narrative-chapter-header::before,
 .narrative-chapter-header::after {
   content: '◈';
-  font-size: 0.55rem;
+  font-size: 0.7rem;
   margin: 0 0.5rem;
   opacity: 0.5;
 }
@@ -318,14 +318,14 @@ textarea {
 
 .narrative-player-banner {
   font-family: 'Cinzel', serif;
-  font-size: 0.65rem;
+  font-size: 0.8rem;
   letter-spacing: 0.08em;
   margin-bottom: 0.25rem;
 }
 
 .narrative-phase-label {
   text-align: center;
-  font-size: 0.55rem;
+  font-size: 0.7rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: hsl(36 12% 48% / 0.5);
@@ -335,7 +335,7 @@ textarea {
 
 .narrative-entry {
   font-family: 'Crimson Text', serif;
-  font-size: 0.75rem;
+  font-size: 0.9rem;
   line-height: 1.6;
   padding: 1px 0;
 }
@@ -387,7 +387,7 @@ textarea {
   background: hsl(0 50% 40% / 0.3);
   color: hsl(0 70% 70%);
   font-weight: 700;
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   padding: 0 0.25rem;
 }
 

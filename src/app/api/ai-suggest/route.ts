@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getDb, getDeckWithCards } from '@/lib/db';
+import { getDb, getDeckWithCards, getFormatStaples } from '@/lib/db';
 import { getRuleBasedSuggestions, getOllamaSuggestions } from '@/lib/ai-suggest';
 import { getSynergySuggestions, detectDeckThemes, SYNERGY_GROUPS } from '@/lib/deck-builder-ai';
 import { getCardGlobalScore } from '@/lib/global-learner';
@@ -435,6 +435,20 @@ function buildProposedChanges(
     }
   }
 
+  // ── CRITICAL: Protect format staples from being cut ──────────────────
+  // Cards with high meta inclusion rates are format staples (Arcane Signet,
+  // Sol Ring, Lightning Greaves, Cultivate, etc.) and should never be cut.
+  const deckColors = isCommanderLike
+    ? Array.from(getDeckColorIdentity(deck.cards))
+    : [];
+  const formatStaplesList = getFormatStaples(format, deckColors, 100);
+  const protectedStapleNames = new Set<string>();
+  for (const staple of formatStaplesList) {
+    if (staple.inclusionRate >= 0.15) {
+      protectedStapleNames.add(staple.cardName);
+    }
+  }
+
   // ── ANTI-OSCILLATION: Protect on-theme deck cards from lateral swaps ──
   // For commander formats, detect deck themes and protect any existing card
   // that shares synergy themes with the ADD suggestions. Without this, the
@@ -506,6 +520,9 @@ function buildProposedChanges(
     // CRITICAL: NEVER cut spellslinger enablers in spellslinger decks
     if (isSpellslinger && protectedSpellslingerNames.has(entry.name)) continue;
 
+    // CRITICAL: NEVER cut format staples (high meta inclusion rate)
+    if (protectedStapleNames.has(entry.name)) continue;
+
     if (cutSeenNames.has(entry.name)) continue;
 
     const gs = getCardGlobalScore(entry.name, format);
@@ -538,6 +555,9 @@ function buildProposedChanges(
     // CRITICAL: NEVER cut spellslinger enablers in spellslinger decks
     if (isSpellslinger && protectedSpellslingerNames.has(card.name)) continue;
 
+    // CRITICAL: NEVER cut format staples
+    if (protectedStapleNames.has(card.name)) continue;
+
     if (cutSeenNames.has(card.name)) continue;
     cutSeenNames.add(card.name);
 
@@ -564,6 +584,9 @@ function buildProposedChanges(
 
       // CRITICAL: NEVER cut spellslinger enablers in spellslinger decks
       if (isSpellslinger && protectedSpellslingerNames.has(c.name)) return false;
+
+      // CRITICAL: NEVER cut format staples
+      if (protectedStapleNames.has(c.name)) return false;
 
       // CRITICAL: NEVER cut cards the engine would also recommend adding
       // This prevents oscillation (CUT X → ADD X → CUT X loop)

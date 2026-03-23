@@ -10,11 +10,12 @@
  * 5. Parse response, validate, fill gaps algorithmically, add lands
  */
 
-import { getDb } from './db';
+import { getDb, getFormatStaples } from './db';
 import type { DbCard } from './types';
 import { DEFAULT_LAND_COUNT, DEFAULT_DECK_SIZE } from './constants';
-import { buildScoredCandidatePool } from './deck-builder-ai';
-import type { BuildOptions, ScoredCandidatePoolResult } from './deck-builder-ai';
+import { buildScoredCandidatePool, autoBuildDeck } from './deck-builder-ai';
+import type { BuildOptions, BuildResult, ScoredCandidatePoolResult } from './deck-builder-ai';
+import { isFetchLandRelevant } from './land-intelligence';
 import { getScaledCurve, getTemplate, getTemplateSummary, mergeWithCommanderProfile } from './deck-templates';
 import { getCommanderStrategyPrompt } from './commander-synergy';
 import type { CommanderSynergyProfile } from './commander-synergy';
@@ -127,7 +128,15 @@ async function callClaude(prompt: string, apiKey: string, model: string) {
   if (!response.ok) {
     const errorText = await response.text();
     console.error('[AI Build] Claude API error:', response.status, errorText);
-    throw new Error(`Claude API error: ${response.status}`);
+    // Extract useful error message from API response
+    let detail = '';
+    try {
+      const errData = JSON.parse(errorText);
+      detail = errData.error?.message || errData.message || errorText.slice(0, 200);
+    } catch {
+      detail = errorText.slice(0, 200);
+    }
+    throw new Error(`Claude API error: ${response.status} — ${detail}`);
   }
 
   const data = await response.json();
@@ -206,6 +215,14 @@ function buildClaudePrompt(
     ? `\n# COMMUNITY CONSENSUS (EDHREC)\nCards in the average ${commanderName} deck: ${edhrecCards.join(', ')}\n`
     : '';
 
+  // Format staples from scraped community decks (67K+ decks)
+  const formatStaples = getFormatStaples(poolResult.format || 'commander', colors, 20);
+  const candidateNames = new Set(candidates.map(c => c.card.name.toLowerCase()));
+  const relevantStaples = formatStaples.filter(s => candidateNames.has(s.cardName.toLowerCase()));
+  const staplesBlock = relevantStaples.length > 0
+    ? `\n# FORMAT STAPLES (from ${relevantStaples[0].totalDecks}+ scraped decks)\nThese cards appear in most decks of this format — STRONGLY prioritize including them:\n${relevantStaples.map(s => `- ${s.cardName} (${Math.round(s.inclusionRate * 100)}% inclusion)`).join('\n')}\n`
+    : '';
+
   // Collection constraint
   const collectionNote = poolResult.useCollection
     ? '\n**COLLECTION MODE**: Prefer cards from the candidate pool that are marked as owned. All candidates are pre-filtered for availability.\n'
@@ -223,6 +240,7 @@ ${strategyBlock}
 Archetype: ${resolvedStrategy}
 ${templateSummary}
 ${edhrecBlock}
+${staplesBlock}
 # CANDIDATE POOL (${candidates.length} cards, pre-filtered for color/legality)
 name | type | CMC | oracle
 ${candidateLines}
@@ -251,14 +269,10 @@ export async function buildDeckWithAI(
   const startTime = Date.now();
   const db = getDb();
 
-  // Provider selection: Claude preferred, OpenAI fallback
+  // Provider selection: Claude preferred, OpenAI fallback, Quick Build last resort
   const claudeKey = getClaudeKey();
   const openaiKey = getOpenAIKey();
-  if (!claudeKey && !openaiKey) {
-    throw new Error('No AI API key configured. Add a Claude or OpenAI key in Settings.');
-  }
 
-  // Step 1: Get scored candidate pool
   const buildOptions: BuildOptions = {
     format: options.format,
     colors: [], // Will be derived from commander
@@ -268,6 +282,13 @@ export async function buildDeckWithAI(
     powerLevel: options.powerLevel,
   };
 
+  // No API key — fall back to algorithmic Quick Build using trained model data
+  if (!claudeKey && !openaiKey) {
+    console.log('[AI Build] No API key configured — falling back to Quick Build (trained model data)');
+    return runQuickBuildFallback(buildOptions, startTime);
+  }
+
+  // Step 1: Get scored candidate pool
   const poolResult = await buildScoredCandidatePool(buildOptions);
 
   // Step 2: Take top 120 candidates
@@ -283,25 +304,30 @@ export async function buildDeckWithAI(
   // Step 4: Build prompt
   const prompt = buildClaudePrompt(poolResult, candidates, edhrecCards, options.commanderName);
 
-  // Step 5: Call AI provider
+  // Step 5: Call AI provider (with fallback to Quick Build on failure)
   let content: string;
   let inputTokens: number;
   let outputTokens: number;
   let modelUsed: string;
 
-  if (claudeKey) {
-    const modelId = getClaudeModel();
-    const result = await callClaude(prompt, claudeKey, modelId);
-    content = result.text;
-    inputTokens = result.inputTokens;
-    outputTokens = result.outputTokens;
-    modelUsed = modelId;
-  } else {
-    const result = await callOpenAI(prompt, openaiKey!);
-    content = result.text;
-    inputTokens = result.inputTokens;
-    outputTokens = result.outputTokens;
-    modelUsed = 'gpt-4o';
+  try {
+    if (claudeKey) {
+      const modelId = getClaudeModel();
+      const result = await callClaude(prompt, claudeKey, modelId);
+      content = result.text;
+      inputTokens = result.inputTokens;
+      outputTokens = result.outputTokens;
+      modelUsed = modelId;
+    } else {
+      const result = await callOpenAI(prompt, openaiKey!);
+      content = result.text;
+      inputTokens = result.inputTokens;
+      outputTokens = result.outputTokens;
+      modelUsed = 'gpt-4o';
+    }
+  } catch (apiError) {
+    console.error('[AI Build] API call failed, falling back to Quick Build:', apiError);
+    return runQuickBuildFallback(buildOptions, startTime);
   }
 
   // Step 6: Parse response
@@ -393,7 +419,36 @@ export async function buildDeckWithAI(
   const landCards = addLands(db, poolResult, allPicked);
   resolvedCards.push(...landCards);
 
-  // Step 10: Build role breakdown
+  // Step 10: Fill shortfall with basic lands when collection blocks unowned cards
+  const currentTotal = resolvedCards.reduce((s, c) => s + c.quantity, 0) + 1; // +1 for commander
+  const deckSize = DEFAULT_DECK_SIZE[options.format] || DEFAULT_DECK_SIZE.default;
+  if (currentTotal < deckSize && poolResult.colors.length > 0) {
+    const basicMap: Record<string, string> = { W: 'Plains', U: 'Island', B: 'Swamp', R: 'Mountain', G: 'Forest' };
+    const deficit = deckSize - currentTotal;
+    const perColor = Math.floor(deficit / poolResult.colors.length);
+    const extra = deficit - perColor * poolResult.colors.length;
+
+    for (let i = 0; i < poolResult.colors.length; i++) {
+      const basicName = basicMap[poolResult.colors[i]];
+      if (!basicName) continue;
+      const addQty = perColor + (i === 0 ? extra : 0);
+      if (addQty <= 0) continue;
+
+      const existing = resolvedCards.find((c) => c.card.name === basicName && c.board === 'main');
+      if (existing) {
+        existing.quantity += addQty;
+      } else {
+        const basic = db.prepare(
+          'SELECT * FROM cards WHERE name = ? AND set_code IS NOT NULL ORDER BY updated_at DESC LIMIT 1'
+        ).get(basicName) as DbCard | undefined;
+        if (basic) {
+          resolvedCards.push({ card: basic, quantity: addQty, board: 'main', role: 'Land', reason: '' });
+        }
+      }
+    }
+  }
+
+  // Step 11: Build role breakdown
   const roleBreakdown: Record<string, string[]> = {};
   for (const c of resolvedCards) {
     if (c.role && !c.card.type_line.includes('Land')) {
@@ -417,6 +472,44 @@ export async function buildDeckWithAI(
   };
 }
 
+// ── Quick Build Fallback ─────────────────────────────────────────────────
+
+async function runQuickBuildFallback(
+  buildOptions: BuildOptions,
+  startTime: number,
+): Promise<ClaudeBuildResult> {
+  const result = await autoBuildDeck(buildOptions);
+  const buildTimeMs = Date.now() - startTime;
+
+  // Convert BuildResult → ClaudeBuildResult format
+  const cards: ClaudeBuildResult['cards'] = result.cards.map((c) => ({
+    card: c.card,
+    quantity: c.quantity,
+    board: c.board,
+    role: c.card.type_line.includes('Land') ? 'Land' : 'Utility',
+    reason: 'Quick Build (trained model fallback)',
+  }));
+
+  const roleBreakdown: Record<string, string[]> = {};
+  for (const c of cards) {
+    if (!c.card.type_line.includes('Land')) {
+      if (!roleBreakdown[c.role]) roleBreakdown[c.role] = [];
+      roleBreakdown[c.role].push(c.card.name);
+    }
+  }
+
+  return {
+    cards,
+    strategyExplanation: `Built using algorithmic Quick Build with trained model data (AI API unavailable). Strategy: ${result.strategy}`,
+    roleBreakdown,
+    themes: result.themes,
+    tribalType: result.tribalType || undefined,
+    commanderSynergy: result.commanderSynergy || undefined,
+    modelUsed: 'quick-build-fallback',
+    buildTimeMs,
+  };
+}
+
 // ── Land Addition ────────────────────────────────────────────────────────────
 
 function addLands(
@@ -436,7 +529,8 @@ function addLands(
     const formatMax = isCommander ? 1 : maxCopies;
     if (!useCollection) return formatMax;
     const owned = ownedQty.get(card.id) || 0;
-    return owned > 0 ? Math.min(formatMax, owned) : formatMax;
+    // Block unowned cards entirely when building from collection
+    return owned > 0 ? Math.min(formatMax, owned) : 0;
   }
 
   const basicLandMap: Record<string, string> = {
@@ -476,6 +570,9 @@ function addLands(
         || oracleText.includes('enters tapped');
       if (entersTapped) continue;
     }
+
+    // Skip fetch lands that search for basic types not in deck colors
+    if (!isFetchLandRelevant(land.oracle_text || '', colors)) continue;
 
     const cardMax = getMaxQty(land);
     const qty = isCommander ? 1 : Math.min(cardMax, targetLands - landsAdded);

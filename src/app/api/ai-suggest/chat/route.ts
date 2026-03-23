@@ -1,9 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getDb, getDeckWithCards } from '@/lib/db';
+import { getDb, getDeckWithCards, getFormatStaples, getMetaCardStatsMap } from '@/lib/db';
 import { DEFAULT_LAND_COUNT, DEFAULT_DECK_SIZE, COMMANDER_FORMATS } from '@/lib/constants';
 import { fitsColorIdentity, isLegalInFormat, extractRejectedCards, buildRejectionReminder, extractAppliedActions, buildAntiOscillationRules } from '@/lib/ai-chat-helpers';
 import { queryKnowledge, formatKnowledgeForPrompt } from '@/lib/knowledge-retrieval';
 import { getCFRecommendations, getEDHRECConsensus } from '@/lib/cf-api-client';
+import { getEdhrecRecommendations } from '@/lib/edhrec';
 import type { DbCard } from '@/lib/types';
 
 interface ChatAction {
@@ -65,20 +66,14 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Try Claude first (recommended), fall back to OpenAI
+    // Try Claude first (recommended), fall back to OpenAI, then local data engine
     const claudeKey = getAnthropicKey();
     const openaiKey = getOpenAIKey();
     const useClaude = !!claudeKey;
     const apiKey = claudeKey || openaiKey;
+    const useLocalEngine = !apiKey;
 
-    if (!apiKey) {
-      return NextResponse.json(
-        { error: 'No AI API key configured. Go to Settings to add Anthropic or OpenAI key.' },
-        { status: 400 }
-      );
-    }
-
-    console.log(`[AI Chat] Using provider: ${useClaude ? 'Claude' : 'OpenAI GPT-4o'}`);
+    console.log(`[AI Chat] Using provider: ${useLocalEngine ? 'Local Data Engine' : useClaude ? 'Claude' : 'OpenAI GPT-4o'}`);
 
     // Always fetch FRESH deck state — the deck may have changed since last turn
     const deckData = getDeckWithCards(deck_id);
@@ -470,6 +465,143 @@ export async function POST(request: NextRequest) {
       // Tables may not exist if ML pipeline hasn't run — that's fine
     }
 
+    // ── EDHREC Live Recommendations (commander-specific) ──────────
+    let edhrecLiveBlock = '';
+    if (commanderCards.length > 0) {
+      try {
+        const cmdName = commanderCards[0].name;
+        const edhrecData = await getEdhrecRecommendations(cmdName);
+        if (edhrecData && edhrecData.topCards.length > 0) {
+          const existingLower = new Set([...mainCards, ...commanderCards].map(c => c.name.toLowerCase()));
+          const collectionLower = hasCollection
+            ? new Set(filteredCollectionNames.map(n => n.toLowerCase()))
+            : null;
+
+          // Split EDHREC cards into owned/unowned, excluding already-in-deck
+          const edhrecMissing = edhrecData.topCards
+            .filter(c => !existingLower.has(c.name.toLowerCase()))
+            .sort((a, b) => b.inclusion - a.inclusion);
+
+          if (edhrecMissing.length > 0) {
+            edhrecLiveBlock = `\n═══ EDHREC LIVE DATA for ${cmdName} ═══\n`;
+            edhrecLiveBlock += `Cards most commonly played in ${cmdName} decks (NOT in your deck):\n`;
+
+            if (collectionLower) {
+              const ownedMissing = edhrecMissing.filter(c => collectionLower.has(c.name.toLowerCase()));
+              const unownedMissing = edhrecMissing.filter(c => !collectionLower.has(c.name.toLowerCase()));
+              if (ownedMissing.length > 0) {
+                edhrecLiveBlock += `\nYOU OWN THESE (high priority adds):\n`;
+                edhrecLiveBlock += ownedMissing.slice(0, 15).map(c =>
+                  `- ${c.name} (${Math.round(c.inclusion * 100)}% of decks, synergy: ${c.synergy.toFixed(2)})`
+                ).join('\n');
+              }
+              if (unownedMissing.length > 0) {
+                edhrecLiveBlock += `\n\nNOT OWNED (reference only):\n`;
+                edhrecLiveBlock += unownedMissing.slice(0, 5).map(c =>
+                  `- ${c.name} (${Math.round(c.inclusion * 100)}% of decks)`
+                ).join('\n');
+              }
+            } else {
+              edhrecLiveBlock += edhrecMissing.slice(0, 15).map(c =>
+                `- ${c.name} (${Math.round(c.inclusion * 100)}% of decks, synergy: ${c.synergy.toFixed(2)})`
+              ).join('\n');
+            }
+
+            if (edhrecData.themes.length > 0) {
+              edhrecLiveBlock += `\n\nPopular themes: ${edhrecData.themes.join(', ')}`;
+            }
+            edhrecLiveBlock += `\n\nPRIORITIZE EDHREC-recommended cards when suggesting ADDs — they are community-validated.`;
+          }
+        }
+      } catch (e) {
+        console.log('[AI Chat] EDHREC live fetch failed (non-blocking):', e);
+      }
+    }
+
+    // ── Format Staples (from 67K scraped decks, cross-format) ────────
+    let formatStaplesBlock = '';
+    {
+      const staples = getFormatStaples(format, deckColors, 30);
+      if (staples.length > 0) {
+        const existingLower = new Set([...mainCards, ...commanderCards].map(c => c.name.toLowerCase()));
+        const collectionLower = hasCollection
+          ? new Set(filteredCollectionNames.map(n => n.toLowerCase()))
+          : null;
+
+        // Split: in deck vs missing
+        const inDeck = staples.filter(s => existingLower.has(s.cardName.toLowerCase()));
+        const missing = staples.filter(s => !existingLower.has(s.cardName.toLowerCase()));
+
+        formatStaplesBlock = `\n═══ FORMAT STAPLES (from ${staples[0].totalDecks}+ scraped decks) ═══\n`;
+
+        if (inDeck.length > 0) {
+          formatStaplesBlock += `Already in deck (good): ${inDeck.slice(0, 10).map(s =>
+            `${s.cardName} (${Math.round(s.inclusionRate * 100)}%)`
+          ).join(', ')}\n`;
+        }
+
+        if (missing.length > 0) {
+          if (collectionLower) {
+            const ownedMissing = missing.filter(s => collectionLower.has(s.cardName.toLowerCase()));
+            const unownedMissing = missing.filter(s => !collectionLower.has(s.cardName.toLowerCase()));
+            if (ownedMissing.length > 0) {
+              formatStaplesBlock += `\nMISSING STAPLES YOU OWN (should strongly consider adding):\n`;
+              formatStaplesBlock += ownedMissing.slice(0, 15).map(s =>
+                `- ${s.cardName} — in ${Math.round(s.inclusionRate * 100)}% of ${format} decks (${s.deckCount}/${s.totalDecks})`
+              ).join('\n');
+            }
+            if (unownedMissing.length > 0) {
+              formatStaplesBlock += `\n\nMISSING STAPLES NOT OWNED:\n`;
+              formatStaplesBlock += unownedMissing.slice(0, 5).map(s =>
+                `- ${s.cardName} — in ${Math.round(s.inclusionRate * 100)}% of decks`
+              ).join('\n');
+            }
+          } else {
+            formatStaplesBlock += `\nMISSING STAPLES:\n`;
+            formatStaplesBlock += missing.slice(0, 15).map(s =>
+              `- ${s.cardName} — in ${Math.round(s.inclusionRate * 100)}% of ${format} decks`
+            ).join('\n');
+          }
+        }
+
+        formatStaplesBlock += `\n\nCards with >50% inclusion rate are FORMAT STAPLES — strongly recommend including them.`;
+      }
+    }
+
+    // ── Meta Stats for Current Deck Cards ──────────────────────────
+    let metaStatsBlock = '';
+    {
+      const deckCardNames = [...mainCards, ...commanderCards].map(c => c.name);
+      const metaMap = getMetaCardStatsMap(deckCardNames, format);
+      if (metaMap.size > 0) {
+        // Find weak cards (low inclusion rate) — cut candidates
+        const weakCards = deckCardNames
+          .map(name => ({ name, stats: metaMap.get(name) }))
+          .filter(c => c.stats && c.stats.inclusionRate < 0.05)
+          .sort((a, b) => (a.stats?.inclusionRate ?? 0) - (b.stats?.inclusionRate ?? 0));
+
+        const strongCards = deckCardNames
+          .map(name => ({ name, stats: metaMap.get(name) }))
+          .filter(c => c.stats && c.stats.inclusionRate > 0.3)
+          .sort((a, b) => (b.stats?.inclusionRate ?? 0) - (a.stats?.inclusionRate ?? 0));
+
+        if (weakCards.length > 0 || strongCards.length > 0) {
+          metaStatsBlock = `\n═══ DECK META ANALYSIS (data-driven) ═══\n`;
+          if (strongCards.length > 0) {
+            metaStatsBlock += `Strong picks (high meta inclusion): ${strongCards.slice(0, 8).map(c =>
+              `${c.name} (${Math.round((c.stats?.inclusionRate ?? 0) * 100)}%)`
+            ).join(', ')}\n`;
+          }
+          if (weakCards.length > 0) {
+            metaStatsBlock += `Weak picks (rare in meta — CUT candidates): ${weakCards.slice(0, 8).map(c =>
+              `${c.name} (<${Math.round((c.stats?.inclusionRate ?? 0) * 100 + 1)}%)`
+            ).join(', ')}\n`;
+          }
+          metaStatsBlock += `Use this data to inform CUT decisions — low-meta cards are prime cut candidates.`;
+        }
+      }
+    }
+
     // System prompt — explicit and strict to prevent common errors
     const systemPrompt = `You are an expert MTG deck tuning assistant.
 
@@ -523,6 +655,9 @@ CURRENT DECKLIST (with oracle text for reasoning)
 ${deckSummary}
 
 ${communityKnowledge}
+${edhrecLiveBlock}
+${formatStaplesBlock}
+${metaStatsBlock}
 ${mlPredictions}
 ${cfRecommendations}
 ${cfConsensus}
@@ -842,6 +977,150 @@ Remember to check the card list above to avoid suggesting duplicates!`,
       return { message, actions: resolvedActions };
     };
 
+    // ── Local Data Engine (no API key fallback) ─────────────────────────
+    if (useLocalEngine) {
+      console.log('[AI Chat] No API key — running local data engine');
+
+      // Gather all recommendation sources into a unified candidate list
+      interface LocalCandidate {
+        cardName: string;
+        score: number;
+        source: string;
+        reason: string;
+      }
+      const candidates: LocalCandidate[] = [];
+      const existingLower = new Set([...mainCards, ...commanderCards].map(c => c.name.toLowerCase()));
+      const collectionLower = hasCollection
+        ? new Set(filteredCollectionNames.map(n => n.toLowerCase()))
+        : null;
+
+      // Parse CF recommendations
+      if (cfRecommendations) {
+        const cfLines = cfRecommendations.match(/- (.+?) \(CF score: ([\d.]+)/g) || [];
+        for (const line of cfLines) {
+          const m = line.match(/- (.+?) \(CF score: ([\d.]+)/);
+          if (m && !existingLower.has(m[1].toLowerCase())) {
+            candidates.push({ cardName: m[1], score: parseFloat(m[2]) * 50, source: 'cf', reason: 'Recommended by similar decks' });
+          }
+        }
+      }
+
+      // Parse EDHREC live data
+      if (edhrecLiveBlock) {
+        const edhLines = edhrecLiveBlock.match(/- (.+?) \((\d+)% of decks/g) || [];
+        for (const line of edhLines) {
+          const m = line.match(/- (.+?) \((\d+)% of decks/);
+          if (m && !existingLower.has(m[1].toLowerCase())) {
+            candidates.push({ cardName: m[1], score: parseInt(m[2]), source: 'edhrec', reason: `In ${m[2]}% of ${commanderCards[0]?.name || ''} decks` });
+          }
+        }
+      }
+
+      // Parse format staples
+      if (formatStaplesBlock) {
+        const stapleLines = formatStaplesBlock.match(/- (.+?) — in (\d+)% of/g) || [];
+        for (const line of stapleLines) {
+          const m = line.match(/- (.+?) — in (\d+)% of/);
+          if (m && !existingLower.has(m[1].toLowerCase())) {
+            candidates.push({ cardName: m[1], score: parseInt(m[2]) + 20, source: 'staple', reason: `Format staple (${m[2]}% inclusion)` });
+          }
+        }
+      }
+
+      // Parse ML predictions
+      if (mlPredictions) {
+        const mlLines = mlPredictions.match(/- (.+?) \(score: ([\d.]+)\)/g) || [];
+        for (const line of mlLines) {
+          const m = line.match(/- (.+?) \(score: ([\d.]+)\)/);
+          if (m && !existingLower.has(m[1].toLowerCase())) {
+            candidates.push({ cardName: m[1], score: parseFloat(m[2]) * 30, source: 'ml', reason: 'ML model prediction' });
+          }
+        }
+      }
+
+      // Deduplicate and sort by score
+      const seen = new Set<string>();
+      const uniqueCandidates = candidates.filter(c => {
+        const key = c.cardName.toLowerCase();
+        if (seen.has(key)) return false;
+        seen.add(key);
+        return true;
+      });
+
+      // Filter to collection if available, boost owned cards
+      const scoredCandidates = uniqueCandidates.map(c => ({
+        ...c,
+        score: c.score + (collectionLower?.has(c.cardName.toLowerCase()) ? 30 : -50),
+        owned: collectionLower ? collectionLower.has(c.cardName.toLowerCase()) : true,
+      })).filter(c => !collectionLower || c.owned);
+
+      scoredCandidates.sort((a, b) => b.score - a.score);
+
+      // Find weak cards in deck (low meta inclusion — cut candidates)
+      const deckCardNames = [...mainCards, ...commanderCards].map(c => c.name);
+      const metaMap = getMetaCardStatsMap(deckCardNames, format);
+      const weakCards = mainCards
+        .filter(c => !c.type_line?.includes('Land'))
+        .map(c => ({ card: c, rate: metaMap.get(c.name)?.inclusionRate ?? -1 }))
+        .filter(c => c.rate >= 0 && c.rate < 0.05)
+        .sort((a, b) => a.rate - b.rate);
+
+      // Build swap actions (up to 5)
+      const actions: Array<{ action: string; cardName: string; replaceWith?: string; quantity: number; reason: string }> = [];
+      const maxSwaps = Math.min(5, scoredCandidates.length, weakCards.length);
+
+      for (let i = 0; i < maxSwaps; i++) {
+        const add = scoredCandidates[i];
+        const cut = weakCards[i];
+        if (!add || !cut) break;
+
+        // Resolve the add card to verify it exists and is legal
+        const addCard = resolveCard(add.cardName);
+        if (!addCard) continue;
+        if (!fitsColorIdentity(addCard, colorSet)) continue;
+        if (!isLegalInFormat(addCard, format)) continue;
+
+        actions.push({
+          action: 'swap',
+          cardName: cut.card.name,
+          replaceWith: add.cardName,
+          quantity: 1,
+          reason: `${add.reason}. Replacing ${cut.card.name} (only ${Math.round(cut.rate * 100)}% meta inclusion).`,
+        });
+      }
+
+      // If no swaps possible but we have add candidates, suggest them as info
+      let message = '';
+      const sourceBreakdown = new Map<string, number>();
+      for (const c of scoredCandidates.slice(0, 10)) {
+        sourceBreakdown.set(c.source, (sourceBreakdown.get(c.source) || 0) + 1);
+      }
+      const sourceSummary = Array.from(sourceBreakdown.entries())
+        .map(([s, n]) => `${n} from ${s === 'cf' ? 'collaborative filtering' : s === 'edhrec' ? 'EDHREC' : s === 'staple' ? 'format staples' : 'ML model'}`)
+        .join(', ');
+
+      if (actions.length > 0) {
+        message = `**Data-Driven Analysis** (no AI API key — using local model + 148K deck corpus)\n\n`;
+        message += `Found ${scoredCandidates.length} upgrade candidates (${sourceSummary}).\n\n`;
+        message += `Here are ${actions.length} recommended swaps based on meta inclusion data, EDHREC consensus, and collaborative filtering:`;
+      } else if (scoredCandidates.length > 0) {
+        message = `**Data-Driven Analysis** (no AI API key — using local model + 148K deck corpus)\n\n`;
+        message += `Top recommendations for your deck:\n`;
+        message += scoredCandidates.slice(0, 8).map(c =>
+          `- **${c.cardName}** — ${c.reason} (score: ${Math.round(c.score)})`
+        ).join('\n');
+        message += `\n\nNo clear cut candidates found in meta data. Consider reviewing your weakest cards manually.`;
+      } else {
+        message = `**Data-Driven Analysis** (no AI API key)\n\nYour deck looks solid based on available data. No strong upgrade candidates found from EDHREC, collaborative filtering, or format staples. Add an Anthropic or OpenAI API key in Settings for more detailed AI analysis.`;
+      }
+
+      // Run through the same validateAndResolve pipeline as API responses
+      const fakeResponse = JSON.stringify({ message, actions });
+      const resolved = validateAndResolve(fakeResponse);
+
+      return NextResponse.json(resolved);
+    }
+
     // ── Streaming AI call ───────────────────────────────────────────────
     const systemContent = messages.filter(m => m.role === 'system').map(m => m.content).join('\n\n');
     const chatMessages = messages.filter(m => m.role !== 'system').map(m => ({
@@ -873,8 +1152,15 @@ Remember to check the card list above to avoid suggesting duplicates!`,
       if (!response.ok) {
         const errText = await response.text();
         console.error('Claude chat API error:', response.status, errText);
+        let detail = '';
+        try {
+          const errData = JSON.parse(errText);
+          detail = errData.error?.message || errData.message || errText.slice(0, 200);
+        } catch {
+          detail = errText.slice(0, 200);
+        }
         return NextResponse.json(
-          { error: `Claude API error: ${response.status}` },
+          { error: `Claude API error: ${response.status} — ${detail}` },
           { status: 502 }
         );
       }
