@@ -27,6 +27,8 @@ export function SettingsDialog({ open, onClose }: SettingsDialogProps) {
   const [cfMessage, setCfMessage] = useState('');
   const [cfTesting, setCfTesting] = useState(false);
   const [claudeModel, setClaudeModel] = useState('claude-sonnet-4-5-20250929');
+  const [openaiModel, setOpenaiModel] = useState('gpt-5.4');
+  const [aiProvider, setAiProvider] = useState('auto');
 
   // Data export state
   const [exporting, setExporting] = useState(false);
@@ -73,6 +75,12 @@ export function SettingsDialog({ open, onClose }: SettingsDialogProps) {
         }
         if (data.settings?.claude_model) {
           setClaudeModel(data.settings.claude_model);
+        }
+        if (data.settings?.openai_model) {
+          setOpenaiModel(data.settings.openai_model);
+        }
+        if (data.settings?.ai_provider) {
+          setAiProvider(data.settings.ai_provider);
         }
         if (data.settings?.cf_api_url) {
           setCfApiUrl(data.settings.cf_api_url);
@@ -587,13 +595,41 @@ export function SettingsDialog({ open, onClose }: SettingsDialogProps) {
           </button>
         </div>
 
-        {/* OpenAI API Key */}
+        {/* Preferred AI Provider */}
         <div className="space-y-3">
+          <div>
+            <label className="mb-1 block text-sm font-medium">Preferred AI Provider</label>
+            <p className="mb-2 text-xs text-muted-foreground">
+              Choose which AI to use for deck chat. Auto uses Claude first, then OpenAI.
+            </p>
+            <select
+              value={aiProvider}
+              onChange={async (e) => {
+                const val = e.target.value;
+                setAiProvider(val);
+                try {
+                  await fetch('/api/settings', {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ key: 'ai_provider', value: val }),
+                  });
+                } catch {}
+              }}
+              className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm outline-none focus:border-primary"
+            >
+              <option value="auto">Auto (Claude first, then OpenAI)</option>
+              <option value="claude">Claude (Anthropic)</option>
+              <option value="openai">OpenAI (GPT)</option>
+            </select>
+          </div>
+
+          <div className="border-t border-border pt-3" />
+
+          {/* OpenAI API Key */}
           <div>
             <label className="mb-1 block text-sm font-medium">OpenAI API Key</label>
             <p className="mb-2 text-xs text-muted-foreground">
               Provide your OpenAI API key to enable GPT-powered deck suggestions.
-              Uses GPT-4o for high-quality analysis.
             </p>
             {maskedKey && (
               <div className="mb-2 flex items-center gap-2">
@@ -635,6 +671,32 @@ export function SettingsDialog({ open, onClose }: SettingsDialogProps) {
               {message}
             </p>
           )}
+
+          {/* OpenAI Model Selection */}
+          <div className="border-t border-border pt-3">
+            <label className="mb-1 block text-sm font-medium">OpenAI Model</label>
+            <p className="mb-2 text-xs text-muted-foreground">
+              GPT-5.4 is the latest and most capable. GPT-4o is cheaper but less accurate.
+            </p>
+            <select
+              value={openaiModel}
+              onChange={async (e) => {
+                const newModel = e.target.value;
+                setOpenaiModel(newModel);
+                try {
+                  await fetch('/api/settings', {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ key: 'openai_model', value: newModel }),
+                  });
+                } catch {}
+              }}
+              className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm outline-none focus:border-primary"
+            >
+              <option value="gpt-5.4">GPT-5.4 (best quality, recommended)</option>
+              <option value="gpt-4o">GPT-4o (cheaper, older)</option>
+            </select>
+          </div>
 
           {/* Anthropic API Key */}
           <div className="border-t border-border pt-3">
@@ -817,7 +879,7 @@ export function SettingsDialog({ open, onClose }: SettingsDialogProps) {
 
           <div className="border-t border-border pt-3">
             <p className="text-[10px] text-muted-foreground">
-              AI Suggestion Priority: CF (Commander) &gt; Claude &gt; Ollama (local) &gt; OpenAI GPT-4o &gt; Synergy Engine.
+              AI Suggestion Priority: CF (Commander) &gt; Preferred Provider (Claude/OpenAI) &gt; Ollama (local) &gt; Synergy Engine.
               Your API keys are stored locally and never sent to third parties.
             </p>
           </div>

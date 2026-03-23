@@ -67,6 +67,14 @@ function getOpenAIKey(): string | null {
   return row?.value || null;
 }
 
+function getOpenAIModel(): string {
+  const db = getDb();
+  const row = db
+    .prepare("SELECT value FROM app_state WHERE key = 'setting_openai_model'")
+    .get() as { value: string } | undefined;
+  return row?.value || 'gpt-5.4';
+}
+
 function getClaudeModel(): string {
   const db = getDb();
   const row = db
@@ -155,7 +163,7 @@ async function callOpenAI(prompt: string, apiKey: string) {
       Authorization: `Bearer ${apiKey}`,
     },
     body: JSON.stringify({
-      model: 'gpt-4o',
+      model: getOpenAIModel(),
       messages: [{ role: 'user', content: prompt }],
       temperature: 0.4,
       max_tokens: 4096,
@@ -323,7 +331,7 @@ export async function buildDeckWithAI(
       content = result.text;
       inputTokens = result.inputTokens;
       outputTokens = result.outputTokens;
-      modelUsed = 'gpt-4o';
+      modelUsed = getOpenAIModel();
     }
   } catch (apiError) {
     console.error('[AI Build] API call failed, falling back to Quick Build:', apiError);

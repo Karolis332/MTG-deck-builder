@@ -28,12 +28,28 @@ function getOpenAIKey(): string | null {
   return row?.value || null;
 }
 
+function getOpenAIModel(): string {
+  const db = getDb();
+  const row = db
+    .prepare("SELECT value FROM app_state WHERE key = 'setting_openai_model'")
+    .get() as { value: string } | undefined;
+  return row?.value || 'gpt-5.4';
+}
+
 function getAnthropicKey(): string | null {
   const db = getDb();
   const row = db
     .prepare("SELECT value FROM app_state WHERE key = 'setting_anthropic_api_key'")
     .get() as { value: string } | undefined;
   return row?.value || null;
+}
+
+function getPreferredProvider(): 'claude' | 'openai' | 'auto' {
+  const db = getDb();
+  const row = db
+    .prepare("SELECT value FROM app_state WHERE key = 'setting_ai_provider'")
+    .get() as { value: string } | undefined;
+  return (row?.value as 'claude' | 'openai' | 'auto') || 'auto';
 }
 
 function resolveCard(name: string): DbCard | null {
@@ -66,14 +82,28 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Try Claude first (recommended), fall back to OpenAI, then local data engine
+    // Provider selection: user preference > Claude > OpenAI > local engine
     const claudeKey = getAnthropicKey();
     const openaiKey = getOpenAIKey();
-    const useClaude = !!claudeKey;
-    const apiKey = claudeKey || openaiKey;
+    const preferredProvider = getPreferredProvider();
+
+    let useClaude: boolean;
+    let apiKey: string | null;
+    if (preferredProvider === 'openai' && openaiKey) {
+      useClaude = false;
+      apiKey = openaiKey;
+    } else if (preferredProvider === 'claude' && claudeKey) {
+      useClaude = true;
+      apiKey = claudeKey;
+    } else {
+      // Auto: Claude first, then OpenAI
+      useClaude = !!claudeKey;
+      apiKey = claudeKey || openaiKey;
+    }
     const useLocalEngine = !apiKey;
 
-    console.log(`[AI Chat] Using provider: ${useLocalEngine ? 'Local Data Engine' : useClaude ? 'Claude' : 'OpenAI GPT-4o'}`);
+    const openaiModel = useClaude ? '' : getOpenAIModel();
+    console.log(`[AI Chat] Using provider: ${useLocalEngine ? 'Local Data Engine' : useClaude ? 'Claude' : `OpenAI ${openaiModel}`} (preference: ${preferredProvider})`);
 
     // Always fetch FRESH deck state — the deck may have changed since last turn
     const deckData = getDeckWithCards(deck_id);
@@ -1136,7 +1166,7 @@ Remember to check the card list above to avoid suggesting duplicates!`,
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'x-api-key': apiKey,
+          'x-api-key': apiKey!,
           'anthropic-version': '2023-06-01',
         },
         body: JSON.stringify({
@@ -1257,10 +1287,10 @@ Remember to check the card list above to avoid suggesting duplicates!`,
           Authorization: `Bearer ${apiKey}`,
         },
         body: JSON.stringify({
-          model: 'gpt-4o',
+          model: openaiModel,
           messages,
           temperature: 0.7,
-          max_tokens: 2000,
+          max_tokens: 4096,
           stream: true,
         }),
       });
