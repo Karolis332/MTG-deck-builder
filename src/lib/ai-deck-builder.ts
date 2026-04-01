@@ -67,6 +67,30 @@ function getOpenAIKey(): string | null {
   return row?.value || null;
 }
 
+function getGroqKey(): string | null {
+  const db = getDb();
+  const row = db
+    .prepare("SELECT value FROM app_state WHERE key = 'setting_groq_api_key'")
+    .get() as { value: string } | undefined;
+  return row?.value || null;
+}
+
+function getXaiKey(): string | null {
+  const db = getDb();
+  const row = db
+    .prepare("SELECT value FROM app_state WHERE key = 'setting_xai_api_key'")
+    .get() as { value: string } | undefined;
+  return row?.value || null;
+}
+
+function getPreferredProvider(): 'claude' | 'openai' | 'groq' | 'xai' | 'auto' {
+  const db = getDb();
+  const row = db
+    .prepare("SELECT value FROM app_state WHERE key = 'setting_ai_provider'")
+    .get() as { value: string } | undefined;
+  return (row?.value as 'claude' | 'openai' | 'groq' | 'xai' | 'auto') || 'auto';
+}
+
 function getOpenAIModel(): string {
   const db = getDb();
   const row = db
@@ -186,6 +210,43 @@ async function callOpenAI(prompt: string, apiKey: string) {
   };
 }
 
+async function callOpenAICompatible(
+  prompt: string,
+  apiKey: string,
+  baseUrl: string,
+  model: string,
+  providerName: string,
+) {
+  const response = await fetch(`${baseUrl}/chat/completions`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${apiKey}`,
+    },
+    body: JSON.stringify({
+      model,
+      messages: [{ role: 'user', content: prompt }],
+      temperature: 0.4,
+      max_completion_tokens: 4096,
+      response_format: { type: 'json_object' },
+    }),
+    signal: AbortSignal.timeout(90000),
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    console.error(`[AI Build] ${providerName} API error:`, response.status, errorText);
+    throw new Error(`${providerName} API error: ${response.status}`);
+  }
+
+  const data = await response.json();
+  return {
+    text: data.choices?.[0]?.message?.content || '',
+    inputTokens: data.usage?.prompt_tokens || 0,
+    outputTokens: data.usage?.completion_tokens || 0,
+  };
+}
+
 // ── Prompt Builder ───────────────────────────────────────────────────────────
 
 function buildClaudePrompt(
@@ -277,9 +338,12 @@ export async function buildDeckWithAI(
   const startTime = Date.now();
   const db = getDb();
 
-  // Provider selection: Claude preferred, OpenAI fallback, Quick Build last resort
+  // Provider selection: preference → Claude → OpenAI → Groq → xAI → Quick Build
   const claudeKey = getClaudeKey();
   const openaiKey = getOpenAIKey();
+  const groqKey = getGroqKey();
+  const xaiKey = getXaiKey();
+  const preferredProvider = getPreferredProvider();
 
   const buildOptions: BuildOptions = {
     format: options.format,
@@ -290,8 +354,8 @@ export async function buildDeckWithAI(
     powerLevel: options.powerLevel,
   };
 
-  // No API key — fall back to algorithmic Quick Build using trained model data
-  if (!claudeKey && !openaiKey) {
+  // No API key at all — fall back to Quick Build
+  if (!claudeKey && !openaiKey && !groqKey && !xaiKey) {
     console.log('[AI Build] No API key configured — falling back to Quick Build (trained model data)');
     return runQuickBuildFallback(buildOptions, startTime);
   }
@@ -312,29 +376,50 @@ export async function buildDeckWithAI(
   // Step 4: Build prompt
   const prompt = buildClaudePrompt(poolResult, candidates, edhrecCards, options.commanderName);
 
-  // Step 5: Call AI provider (with fallback to Quick Build on failure)
-  let content: string;
-  let inputTokens: number;
-  let outputTokens: number;
-  let modelUsed: string;
+  // Step 5: Call AI provider with cascade (preference → Claude → OpenAI → Groq → xAI)
+  type ProviderEntry = { name: string; call: () => Promise<{ text: string; inputTokens: number; outputTokens: number }> };
+  const allProviders: ProviderEntry[] = [];
+  if (claudeKey) {
+    const modelId = getClaudeModel();
+    allProviders.push({ name: modelId, call: () => callClaude(prompt, claudeKey, modelId) });
+  }
+  if (openaiKey) {
+    const oaiModel = getOpenAIModel();
+    allProviders.push({ name: oaiModel, call: () => callOpenAI(prompt, openaiKey) });
+  }
+  if (groqKey) allProviders.push({ name: 'llama-3.3-70b-versatile', call: () => callOpenAICompatible(prompt, groqKey, 'https://api.groq.com/openai/v1', 'llama-3.3-70b-versatile', 'Groq') });
+  if (xaiKey)  allProviders.push({ name: 'grok-3-mini-fast',         call: () => callOpenAICompatible(prompt, xaiKey, 'https://api.x.ai/v1', 'grok-3-mini-fast', 'xAI') });
 
-  try {
-    if (claudeKey) {
-      const modelId = getClaudeModel();
-      const result = await callClaude(prompt, claudeKey, modelId);
+  // Sort preferred provider first
+  const prefKeyMap: Record<string, string> = { claude: getClaudeModel(), openai: getOpenAIModel(), groq: 'llama-3.3-70b-versatile', xai: 'grok-3-mini-fast' };
+  const prefName = prefKeyMap[preferredProvider];
+  const providers: ProviderEntry[] = prefName
+    ? [...allProviders.filter(p => p.name === prefName), ...allProviders.filter(p => p.name !== prefName)]
+    : allProviders;
+
+  let content: string = '';
+  let inputTokens: number = 0;
+  let outputTokens: number = 0;
+  let modelUsed: string = 'quick-build-fallback';
+
+  let succeeded = false;
+  for (const provider of providers) {
+    try {
+      console.log(`[AI Build] Trying ${provider.name}...`);
+      const result = await provider.call();
       content = result.text;
       inputTokens = result.inputTokens;
       outputTokens = result.outputTokens;
-      modelUsed = modelId;
-    } else {
-      const result = await callOpenAI(prompt, openaiKey!);
-      content = result.text;
-      inputTokens = result.inputTokens;
-      outputTokens = result.outputTokens;
-      modelUsed = getOpenAIModel();
+      modelUsed = provider.name;
+      succeeded = true;
+      break;
+    } catch (err) {
+      console.warn(`[AI Build] ${provider.name} failed, trying next:`, err instanceof Error ? err.message : err);
     }
-  } catch (apiError) {
-    console.error('[AI Build] API call failed, falling back to Quick Build:', apiError);
+  }
+
+  if (!succeeded) {
+    console.error('[AI Build] All providers failed, falling back to Quick Build');
     return runQuickBuildFallback(buildOptions, startTime);
   }
 

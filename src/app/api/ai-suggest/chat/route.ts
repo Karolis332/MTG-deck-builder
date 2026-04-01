@@ -65,7 +65,7 @@ function getPreferredProvider(): 'claude' | 'openai' | 'groq' | 'xai' | 'auto' {
   const row = db
     .prepare("SELECT value FROM app_state WHERE key = 'setting_ai_provider'")
     .get() as { value: string } | undefined;
-  return (row?.value as 'claude' | 'openai' | 'groq' | 'auto') || 'auto';
+  return (row?.value as 'claude' | 'openai' | 'groq' | 'xai' | 'auto') || 'auto';
 }
 
 function resolveCard(name: string): DbCard | null {

@@ -32,9 +32,12 @@ export function SettingsDialog({ open, onClose }: SettingsDialogProps) {
   const [groqKey, setGroqKey] = useState('');
   const [maskedGroqKey, setMaskedGroqKey] = useState('');
   const [groqMessage, setGroqMessage] = useState('');
+  const [groqTesting, setGroqTesting] = useState(false);
   const [xaiKey, setXaiKey] = useState('');
   const [maskedXaiKey, setMaskedXaiKey] = useState('');
   const [xaiMessage, setXaiMessage] = useState('');
+  const [xaiTesting, setXaiTesting] = useState(false);
+  const [cfModelVersion, setCfModelVersion] = useState('');
 
   // Data export state
   const [exporting, setExporting] = useState(false);
@@ -99,6 +102,12 @@ export function SettingsDialog({ open, onClose }: SettingsDialogProps) {
         } else {
           setMaskedCfApiKey('');
         }
+        // Load CF model version silently
+        const cfUrl = data.settings?.cf_api_url || 'http://187.77.110.100/cf-api';
+        fetch(`${cfUrl}/health`, { signal: AbortSignal.timeout(4000) })
+          .then(r => r.json())
+          .then(h => { if (h.model_version) setCfModelVersion(h.model_version); })
+          .catch(() => {});
         if (data.settings?.groq_api_key) {
           setMaskedGroqKey(data.settings.groq_api_key);
         } else {
@@ -318,6 +327,42 @@ export function SettingsDialog({ open, onClose }: SettingsDialogProps) {
       setCfTesting(false);
     }
   }, [cfApiUrl]);
+
+  const testGroqConnection = useCallback(async () => {
+    setGroqTesting(true);
+    setGroqMessage('');
+    try {
+      const resp = await fetch('/api/settings/test-provider', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ provider: 'groq' }),
+      });
+      const data = await resp.json();
+      setGroqMessage(data.ok ? `Connected — ${data.model}` : `Failed: ${data.error}`);
+    } catch {
+      setGroqMessage('Connection failed');
+    } finally {
+      setGroqTesting(false);
+    }
+  }, []);
+
+  const testXaiConnection = useCallback(async () => {
+    setXaiTesting(true);
+    setXaiMessage('');
+    try {
+      const resp = await fetch('/api/settings/test-provider', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ provider: 'xai' }),
+      });
+      const data = await resp.json();
+      setXaiMessage(data.ok ? `Connected — ${data.model}` : `Failed: ${data.error}`);
+    } catch {
+      setXaiMessage('Connection failed');
+    } finally {
+      setXaiTesting(false);
+    }
+  }, []);
 
   // ── Arena integration handlers ─────────────────────────────────────────────
 
@@ -866,11 +911,20 @@ export function SettingsDialog({ open, onClose }: SettingsDialogProps) {
               >
                 {saving ? 'Saving...' : 'Save'}
               </button>
+              {maskedGroqKey && (
+                <button
+                  onClick={testGroqConnection}
+                  disabled={groqTesting}
+                  className="rounded-lg border border-border px-3 py-2 text-sm transition-colors hover:bg-accent disabled:opacity-50"
+                >
+                  {groqTesting ? 'Testing...' : 'Test'}
+                </button>
+              )}
             </div>
             {groqMessage && (
               <p className={cn(
                 'mt-2 text-xs',
-                groqMessage.includes('saved') ? 'text-green-400' : 'text-muted-foreground'
+                groqMessage.startsWith('Connected') ? 'text-green-400' : 'text-muted-foreground'
               )}>
                 {groqMessage}
               </p>
@@ -952,11 +1006,20 @@ export function SettingsDialog({ open, onClose }: SettingsDialogProps) {
               >
                 {saving ? 'Saving...' : 'Save'}
               </button>
+              {maskedXaiKey && (
+                <button
+                  onClick={testXaiConnection}
+                  disabled={xaiTesting}
+                  className="rounded-lg border border-border px-3 py-2 text-sm transition-colors hover:bg-accent disabled:opacity-50"
+                >
+                  {xaiTesting ? 'Testing...' : 'Test'}
+                </button>
+              )}
             </div>
             {xaiMessage && (
               <p className={cn(
                 'mt-2 text-xs',
-                xaiMessage.includes('saved') ? 'text-green-400' : 'text-muted-foreground'
+                xaiMessage.startsWith('Connected') ? 'text-green-400' : 'text-muted-foreground'
               )}>
                 {xaiMessage}
               </p>
@@ -1011,7 +1074,14 @@ export function SettingsDialog({ open, onClose }: SettingsDialogProps) {
 
           {/* Collaborative Filtering API */}
           <div className="border-t border-border pt-3">
-            <label className="mb-1 block text-sm font-medium">Collaborative Filtering API</label>
+            <label className="mb-1 flex items-center gap-2 text-sm font-medium">
+              Collaborative Filtering API
+              {cfModelVersion && (
+                <span className="rounded bg-accent px-1.5 py-0.5 font-mono text-xs text-muted-foreground">
+                  {cfModelVersion}
+                </span>
+              )}
+            </label>
             <p className="mb-2 text-xs text-muted-foreground">
               Deck-specific card recommendations powered by 50K+ community decks.
               For Commander/Brawl formats — the primary suggestion source when enabled.
