@@ -166,7 +166,7 @@ async function callOpenAI(prompt: string, apiKey: string) {
       model: getOpenAIModel(),
       messages: [{ role: 'user', content: prompt }],
       temperature: 0.4,
-      max_tokens: 4096,
+      max_completion_tokens: 4096,
       response_format: { type: 'json_object' },
     }),
     signal: AbortSignal.timeout(90000),

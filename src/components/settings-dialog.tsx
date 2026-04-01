@@ -29,6 +29,12 @@ export function SettingsDialog({ open, onClose }: SettingsDialogProps) {
   const [claudeModel, setClaudeModel] = useState('claude-sonnet-4-5-20250929');
   const [openaiModel, setOpenaiModel] = useState('gpt-5.4');
   const [aiProvider, setAiProvider] = useState('auto');
+  const [groqKey, setGroqKey] = useState('');
+  const [maskedGroqKey, setMaskedGroqKey] = useState('');
+  const [groqMessage, setGroqMessage] = useState('');
+  const [xaiKey, setXaiKey] = useState('');
+  const [maskedXaiKey, setMaskedXaiKey] = useState('');
+  const [xaiMessage, setXaiMessage] = useState('');
 
   // Data export state
   const [exporting, setExporting] = useState(false);
@@ -93,9 +99,21 @@ export function SettingsDialog({ open, onClose }: SettingsDialogProps) {
         } else {
           setMaskedCfApiKey('');
         }
+        if (data.settings?.groq_api_key) {
+          setMaskedGroqKey(data.settings.groq_api_key);
+        } else {
+          setMaskedGroqKey('');
+        }
+        if (data.settings?.xai_api_key) {
+          setMaskedXaiKey(data.settings.xai_api_key);
+        } else {
+          setMaskedXaiKey('');
+        }
         setOpenaiKey('');
         setAnthropicKey('');
         setTopdeckKey('');
+        setGroqKey('');
+        setXaiKey('');
         setCfApiKey('');
         setMessage('');
         setAnthropicMessage('');
@@ -617,9 +635,11 @@ export function SettingsDialog({ open, onClose }: SettingsDialogProps) {
               }}
               className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm outline-none focus:border-primary"
             >
-              <option value="auto">Auto (Claude first, then OpenAI)</option>
+              <option value="auto">Auto (Claude → OpenAI → Groq → Grok)</option>
               <option value="claude">Claude (Anthropic)</option>
               <option value="openai">OpenAI (GPT)</option>
+              <option value="groq">Groq (Llama 3.3 70B — free)</option>
+              <option value="xai">xAI Grok ($25/mo free credits)</option>
             </select>
           </div>
 
@@ -769,6 +789,178 @@ export function SettingsDialog({ open, onClose }: SettingsDialogProps) {
               <option value="claude-sonnet-4-5-20250929">Claude Sonnet 4.5 (fast, recommended)</option>
               <option value="claude-opus-4-6">Claude Opus 4.6 (best quality, slower)</option>
             </select>
+          </div>
+
+          {/* Groq API Key */}
+          <div className="border-t border-border pt-3">
+            <label className="mb-1 block text-sm font-medium">Groq API Key (Free)</label>
+            <p className="mb-2 text-xs text-muted-foreground">
+              Groq runs Llama 3.3 70B for free (30 req/min). Get a key at{' '}
+              <a href="https://console.groq.com" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">console.groq.com</a>.
+            </p>
+            {maskedGroqKey && (
+              <div className="mb-2 flex items-center gap-2">
+                <span className="rounded bg-accent px-2 py-1 font-mono text-xs">
+                  {maskedGroqKey}
+                </span>
+                <button
+                  onClick={async () => {
+                    setSaving(true);
+                    try {
+                      await fetch('/api/settings', {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ key: 'groq_api_key', value: '' }),
+                      });
+                      setMaskedGroqKey('');
+                      setGroqKey('');
+                      setGroqMessage('Key removed');
+                    } catch {
+                      setGroqMessage('Failed to remove');
+                    } finally {
+                      setSaving(false);
+                    }
+                  }}
+                  disabled={saving}
+                  className="text-xs text-red-400 hover:text-red-300"
+                >
+                  Remove
+                </button>
+              </div>
+            )}
+            <div className="flex gap-2">
+              <input
+                type="password"
+                value={groqKey}
+                onChange={(e) => setGroqKey(e.target.value)}
+                placeholder={maskedGroqKey ? 'Enter new key to replace' : 'gsk_...'}
+                className="flex-1 rounded-lg border border-border bg-background px-3 py-2 text-sm outline-none focus:border-primary"
+              />
+              <button
+                onClick={async () => {
+                  if (!groqKey.trim()) return;
+                  setSaving(true);
+                  setGroqMessage('');
+                  try {
+                    const res = await fetch('/api/settings', {
+                      method: 'PUT',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({ key: 'groq_api_key', value: groqKey.trim() }),
+                    });
+                    const data = await res.json();
+                    if (data.ok) {
+                      setGroqMessage('API key saved');
+                      setMaskedGroqKey(groqKey.slice(0, 4) + '...' + groqKey.slice(-4));
+                      setGroqKey('');
+                    } else {
+                      setGroqMessage('Failed: ' + (data.error || 'Unknown'));
+                    }
+                  } catch {
+                    setGroqMessage('Failed to save');
+                  } finally {
+                    setSaving(false);
+                  }
+                }}
+                disabled={saving || !groqKey.trim()}
+                className="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-50"
+              >
+                {saving ? 'Saving...' : 'Save'}
+              </button>
+            </div>
+            {groqMessage && (
+              <p className={cn(
+                'mt-2 text-xs',
+                groqMessage.includes('saved') ? 'text-green-400' : 'text-muted-foreground'
+              )}>
+                {groqMessage}
+              </p>
+            )}
+          </div>
+
+          {/* xAI (Grok) API Key */}
+          <div className="border-t border-border pt-3">
+            <label className="mb-1 block text-sm font-medium">xAI API Key ($25/mo free)</label>
+            <p className="mb-2 text-xs text-muted-foreground">
+              Grok model from xAI. $25 free credits/month. Get a key at{' '}
+              <a href="https://console.x.ai" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">console.x.ai</a>.
+            </p>
+            {maskedXaiKey && (
+              <div className="mb-2 flex items-center gap-2">
+                <span className="rounded bg-accent px-2 py-1 font-mono text-xs">
+                  {maskedXaiKey}
+                </span>
+                <button
+                  onClick={async () => {
+                    setSaving(true);
+                    try {
+                      await fetch('/api/settings', {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ key: 'xai_api_key', value: '' }),
+                      });
+                      setMaskedXaiKey('');
+                      setXaiKey('');
+                      setXaiMessage('Key removed');
+                    } catch {
+                      setXaiMessage('Failed to remove');
+                    } finally {
+                      setSaving(false);
+                    }
+                  }}
+                  disabled={saving}
+                  className="text-xs text-red-400 hover:text-red-300"
+                >
+                  Remove
+                </button>
+              </div>
+            )}
+            <div className="flex gap-2">
+              <input
+                type="password"
+                value={xaiKey}
+                onChange={(e) => setXaiKey(e.target.value)}
+                placeholder={maskedXaiKey ? 'Enter new key to replace' : 'xai-...'}
+                className="flex-1 rounded-lg border border-border bg-background px-3 py-2 text-sm outline-none focus:border-primary"
+              />
+              <button
+                onClick={async () => {
+                  if (!xaiKey.trim()) return;
+                  setSaving(true);
+                  setXaiMessage('');
+                  try {
+                    const res = await fetch('/api/settings', {
+                      method: 'PUT',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({ key: 'xai_api_key', value: xaiKey.trim() }),
+                    });
+                    const data = await res.json();
+                    if (data.ok) {
+                      setXaiMessage('API key saved');
+                      setMaskedXaiKey(xaiKey.slice(0, 4) + '...' + xaiKey.slice(-4));
+                      setXaiKey('');
+                    } else {
+                      setXaiMessage('Failed: ' + (data.error || 'Unknown'));
+                    }
+                  } catch {
+                    setXaiMessage('Failed to save');
+                  } finally {
+                    setSaving(false);
+                  }
+                }}
+                disabled={saving || !xaiKey.trim()}
+                className="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-50"
+              >
+                {saving ? 'Saving...' : 'Save'}
+              </button>
+            </div>
+            {xaiMessage && (
+              <p className={cn(
+                'mt-2 text-xs',
+                xaiMessage.includes('saved') ? 'text-green-400' : 'text-muted-foreground'
+              )}>
+                {xaiMessage}
+              </p>
+            )}
           </div>
 
           {/* TopDeck.gg API Key */}

@@ -44,12 +44,28 @@ function getAnthropicKey(): string | null {
   return row?.value || null;
 }
 
-function getPreferredProvider(): 'claude' | 'openai' | 'auto' {
+function getGroqKey(): string | null {
+  const db = getDb();
+  const row = db
+    .prepare("SELECT value FROM app_state WHERE key = 'setting_groq_api_key'")
+    .get() as { value: string } | undefined;
+  return row?.value || null;
+}
+
+function getXaiKey(): string | null {
+  const db = getDb();
+  const row = db
+    .prepare("SELECT value FROM app_state WHERE key = 'setting_xai_api_key'")
+    .get() as { value: string } | undefined;
+  return row?.value || null;
+}
+
+function getPreferredProvider(): 'claude' | 'openai' | 'groq' | 'xai' | 'auto' {
   const db = getDb();
   const row = db
     .prepare("SELECT value FROM app_state WHERE key = 'setting_ai_provider'")
     .get() as { value: string } | undefined;
-  return (row?.value as 'claude' | 'openai' | 'auto') || 'auto';
+  return (row?.value as 'claude' | 'openai' | 'groq' | 'auto') || 'auto';
 }
 
 function resolveCard(name: string): DbCard | null {
@@ -82,28 +98,37 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Provider selection: user preference > Claude > OpenAI > local engine
+    // Provider selection: user preference > Claude > OpenAI > Groq > local engine
     const claudeKey = getAnthropicKey();
     const openaiKey = getOpenAIKey();
+    const groqKey = getGroqKey();
+    const xaiKey = getXaiKey();
     const preferredProvider = getPreferredProvider();
+    const openaiModel = getOpenAIModel();
 
+    // Determine primary provider (used for initial useClaude flag + logging)
     let useClaude: boolean;
     let apiKey: string | null;
-    if (preferredProvider === 'openai' && openaiKey) {
+    if (preferredProvider === 'xai' && xaiKey) {
+      useClaude = false;
+      apiKey = xaiKey;
+    } else if (preferredProvider === 'groq' && groqKey) {
+      useClaude = false;
+      apiKey = groqKey;
+    } else if (preferredProvider === 'openai' && openaiKey) {
       useClaude = false;
       apiKey = openaiKey;
     } else if (preferredProvider === 'claude' && claudeKey) {
       useClaude = true;
       apiKey = claudeKey;
     } else {
-      // Auto: Claude first, then OpenAI
+      // Auto: Claude → OpenAI → Groq → xAI
       useClaude = !!claudeKey;
-      apiKey = claudeKey || openaiKey;
+      apiKey = claudeKey || openaiKey || groqKey || xaiKey;
     }
     const useLocalEngine = !apiKey;
 
-    const openaiModel = useClaude ? '' : getOpenAIModel();
-    console.log(`[AI Chat] Using provider: ${useLocalEngine ? 'Local Data Engine' : useClaude ? 'Claude' : `OpenAI ${openaiModel}`} (preference: ${preferredProvider})`);
+    console.log(`[AI Chat] Has keys: Claude=${!!claudeKey} OpenAI=${!!openaiKey} Groq=${!!groqKey} xAI=${!!xaiKey} (preference: ${preferredProvider})`);
 
     // Always fetch FRESH deck state — the deck may have changed since last turn
     const deckData = getDeckWithCards(deck_id);
@@ -1151,7 +1176,7 @@ Remember to check the card list above to avoid suggesting duplicates!`,
       return NextResponse.json(resolved);
     }
 
-    // ── Streaming AI call (with retry + fallback) ─────────────────────
+    // ── Streaming AI call (with provider cascade) ─────────────────────
     const systemContent = messages.filter(m => m.role === 'system').map(m => m.content).join('\n\n');
     const chatMessages = messages.filter(m => m.role !== 'system').map(m => ({
       role: m.role as 'user' | 'assistant',
@@ -1166,9 +1191,7 @@ Remember to check the card list above to avoid suggesting duplicates!`,
         if (response.ok) return response;
         lastResponse = response;
         const status = response.status;
-        // Only retry on rate limit (429) or server error (5xx)
         if (status !== 429 && status < 500) return response;
-        // Read retry-after header or use exponential backoff
         const retryAfter = response.headers.get('retry-after');
         const waitMs = retryAfter
           ? Math.min(parseInt(retryAfter, 10) * 1000, 30000)
@@ -1179,255 +1202,315 @@ Remember to check the card list above to avoid suggesting duplicates!`,
         }
       }
       return lastResponse!;
+    };
+
+    // Build provider cascade: preferred → alternates → local engine
+    // Groq uses OpenAI-compatible API (different base URL + model)
+    type ProviderConfig = { name: string; key: string; isClaude: boolean; baseUrl: string; model: string };
+    const allProviders: ProviderConfig[] = [];
+    if (claudeKey) allProviders.push({ name: 'Claude', key: claudeKey, isClaude: true, baseUrl: 'https://api.anthropic.com/v1/messages', model: '' });
+    if (openaiKey) allProviders.push({ name: `OpenAI ${openaiModel}`, key: openaiKey, isClaude: false, baseUrl: 'https://api.openai.com/v1/chat/completions', model: openaiModel });
+    if (groqKey) allProviders.push({ name: 'Groq Llama-3.3-70B', key: groqKey, isClaude: false, baseUrl: 'https://api.groq.com/openai/v1/chat/completions', model: 'llama-3.3-70b-versatile' });
+    if (xaiKey) allProviders.push({ name: 'xAI Grok', key: xaiKey, isClaude: false, baseUrl: 'https://api.x.ai/v1/chat/completions', model: 'grok-3-mini-fast' });
+
+    // Sort: preferred provider first, then the rest in original order
+    const providers: ProviderConfig[] = [];
+    const prefMap: Record<string, string> = { claude: 'Claude', openai: `OpenAI ${openaiModel}`, groq: 'Groq Llama-3.3-70B', xai: 'xAI Grok' };
+    const prefName = prefMap[preferredProvider];
+    if (prefName) {
+      const pref = allProviders.find(p => p.name === prefName);
+      if (pref) providers.push(pref);
+    }
+    for (const p of allProviders) {
+      if (!providers.includes(p)) providers.push(p);
     }
 
-    if (useClaude) {
-      const modelRow = db.prepare("SELECT value FROM app_state WHERE key = 'setting_claude_model'").get() as { value: string } | undefined;
-      const claudeModel = modelRow?.value || 'claude-sonnet-4-5-20250929';
+    // Try each provider in order; on 429/5xx, cascade to next
+    let streamResponse: Response | null = null;
+    let activeProvider: ProviderConfig | null = null;
 
-      const response = await fetchWithRetry('https://api.anthropic.com/v1/messages', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'x-api-key': apiKey!,
-          'anthropic-version': '2023-06-01',
-        },
-        body: JSON.stringify({
-          model: claudeModel,
-          max_tokens: 4096,
-          temperature: 0.7,
-          stream: true,
-          messages: chatMessages,
-          system: systemContent,
-        }),
-      });
+    for (const provider of providers) {
+      console.log(`[AI Chat] Trying ${provider.name}...`);
 
-      if (!response.ok) {
-        const errText = await response.text();
-        console.error('Claude chat API error:', response.status, errText);
-        let detail = '';
-        try {
-          const errData = JSON.parse(errText);
-          detail = errData.error?.message || errData.message || errText.slice(0, 200);
-        } catch {
-          detail = errText.slice(0, 200);
-        }
-        // On rate limit or server error, return user-friendly message instead of raw 502
-        if (response.status === 429) {
-          return NextResponse.json({
-            message: `**Rate limited by Claude API.** Too many requests — wait a moment and try again.\n\nYour deck analysis is still available via the local data engine (works without API). Try a simpler question or wait 30 seconds.`,
-            actions: [],
-          });
-        }
-        return NextResponse.json(
-          { error: `Claude API error: ${response.status} — ${detail}` },
-          { status: 502 }
-        );
+      let response: Response;
+      if (provider.isClaude) {
+        const modelRow = db.prepare("SELECT value FROM app_state WHERE key = 'setting_claude_model'").get() as { value: string } | undefined;
+        const claudeModel = modelRow?.value || 'claude-sonnet-4-5-20250929';
+
+        response = await fetchWithRetry(provider.baseUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-api-key': provider.key,
+            'anthropic-version': '2023-06-01',
+          },
+          body: JSON.stringify({
+            model: claudeModel,
+            max_tokens: 4096,
+            temperature: 0.7,
+            stream: true,
+            messages: chatMessages,
+            system: systemContent,
+          }),
+        });
+      } else {
+        // OpenAI-compatible API (works for OpenAI, Groq, xAI, and other compatible providers)
+        response = await fetchWithRetry(provider.baseUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${provider.key}`,
+          },
+          body: JSON.stringify({
+            model: provider.model,
+            messages,
+            temperature: 0.7,
+            max_completion_tokens: 4096,
+            stream: true,
+          }),
+        });
       }
 
-      // Stream SSE to client — buffer JSON responses, only stream natural text
-      const encoder = new TextEncoder();
-      const readable = new ReadableStream({
-        async start(controller) {
-          let fullText = '';
-          let completed = false;
-          let isJsonResponse = false;
-          let jsonDetected = false;
-          try {
-            const reader = response.body!.getReader();
-            const decoder = new TextDecoder();
-            let buffer = '';
-
-            while (true) {
-              const { done, value } = await reader.read();
-              if (done) break;
-
-              buffer += decoder.decode(value, { stream: true });
-              const lines = buffer.split('\n');
-              buffer = lines.pop() || '';
-
-              for (const line of lines) {
-                if (!line.startsWith('data: ')) continue;
-                const payload = line.slice(6).trim();
-                if (!payload || payload === '[DONE]') continue;
-
-                try {
-                  const event = JSON.parse(payload);
-
-                  if (event.type === 'content_block_delta' && event.delta?.text) {
-                    fullText += event.delta.text;
-
-                    // Detect if response is JSON (starts with { or ```json)
-                    if (!jsonDetected) {
-                      const trimmed = fullText.trimStart();
-                      if (trimmed.startsWith('{') || trimmed.startsWith('```')) {
-                        isJsonResponse = true;
-                        jsonDetected = true;
-                        // Send a placeholder so user sees activity
-                        controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: 'text', content: 'Analyzing your deck...' })}\n\n`));
-                      } else if (trimmed.length > 5) {
-                        // Not JSON — stream normally
-                        jsonDetected = true;
-                        isJsonResponse = false;
-                        controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: 'text', content: fullText })}\n\n`));
-                      }
-                    } else if (!isJsonResponse) {
-                      // Natural text — stream delta normally
-                      controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: 'text', content: event.delta.text })}\n\n`));
-                    }
-                    // If JSON response, we buffer silently (no streaming to UI)
-                  } else if (event.type === 'message_stop' && !completed) {
-                    completed = true;
-                    const result = validateAndResolve(fullText);
-                    controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: 'complete', message: result.message, actions: result.actions })}\n\n`));
-                  }
-                } catch {
-                  // Malformed SSE from upstream — skip
-                }
-              }
-            }
-
-            // Fallback: if we never got message_stop, finalize now
-            if (fullText && !completed) {
-              const result = validateAndResolve(fullText);
-              controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: 'complete', message: result.message, actions: result.actions })}\n\n`));
-            }
-          } catch (err) {
-            const errMsg = err instanceof Error ? err.message : 'Stream error';
-            controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: 'error', error: errMsg })}\n\n`));
-          } finally {
-            controller.close();
-          }
-        },
-      });
-
-      return new Response(readable, {
-        headers: {
-          'Content-Type': 'text/event-stream',
-          'Cache-Control': 'no-cache',
-          Connection: 'keep-alive',
-        },
-      });
-    } else {
-      // OpenAI streaming (with retry on 429)
-      const response = await fetchWithRetry('https://api.openai.com/v1/chat/completions', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${apiKey}`,
-        },
-        body: JSON.stringify({
-          model: openaiModel,
-          messages,
-          temperature: 0.7,
-          max_tokens: 4096,
-          stream: true,
-        }),
-      });
-
-      if (!response.ok) {
-        const errText = await response.text();
-        console.error('OpenAI chat API error:', response.status, errText);
-        if (response.status === 429) {
-          return NextResponse.json({
-            message: `**Rate limited by OpenAI API (${openaiModel}).** Too many requests — wait a moment and try again.\n\nYour deck analysis is still available via the local data engine. Try a simpler question or wait 30 seconds.`,
-            actions: [],
-          });
-        }
-        let detail = '';
-        try {
-          const errData = JSON.parse(errText);
-          detail = errData.error?.message || errData.message || errText.slice(0, 200);
-        } catch {
-          detail = errText.slice(0, 200);
-        }
-        return NextResponse.json(
-          { error: `OpenAI API error: ${response.status} — ${detail}` },
-          { status: 502 }
-        );
+      if (response.ok) {
+        streamResponse = response;
+        activeProvider = provider;
+        break;
       }
 
-      const encoder = new TextEncoder();
-      const readable = new ReadableStream({
-        async start(controller) {
-          let fullText = '';
-          let completed = false;
-          let isJsonResponse = false;
-          let jsonDetected = false;
-          try {
-            const reader = response.body!.getReader();
-            const decoder = new TextDecoder();
-            let buffer = '';
+      // On 429/5xx/billing errors: cascade to next provider
+      const errText = await response.text();
+      const isBillingError = response.status === 400 && (
+        errText.includes('credit balance') || errText.includes('billing') ||
+        errText.includes('quota') || errText.includes('insufficient')
+      );
+      if (response.status === 429 || response.status >= 500 || isBillingError) {
+        const reason = isBillingError ? 'billing/quota' : `${response.status}`;
+        console.log(`[AI Chat] ${provider.name} ${reason} after retries, cascading to next provider...`);
+        continue;
+      }
 
-            while (true) {
-              const { done, value } = await reader.read();
-              if (done) break;
-
-              buffer += decoder.decode(value, { stream: true });
-              const lines = buffer.split('\n');
-              buffer = lines.pop() || '';
-
-              for (const line of lines) {
-                if (!line.startsWith('data: ')) continue;
-                const payload = line.slice(6).trim();
-                if (!payload || payload === '[DONE]') continue;
-
-                try {
-                  const event = JSON.parse(payload);
-                  const delta = event.choices?.[0]?.delta?.content;
-                  if (delta) {
-                    fullText += delta;
-
-                    // Detect if response is JSON (starts with { or ```json)
-                    if (!jsonDetected) {
-                      const trimmed = fullText.trimStart();
-                      if (trimmed.startsWith('{') || trimmed.startsWith('```')) {
-                        isJsonResponse = true;
-                        jsonDetected = true;
-                        controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: 'text', content: 'Analyzing your deck...' })}\n\n`));
-                      } else if (trimmed.length > 5) {
-                        jsonDetected = true;
-                        isJsonResponse = false;
-                        controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: 'text', content: fullText })}\n\n`));
-                      }
-                    } else if (!isJsonResponse) {
-                      controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: 'text', content: delta })}\n\n`));
-                    }
-                  }
-
-                  if (event.choices?.[0]?.finish_reason === 'stop' && !completed) {
-                    completed = true;
-                    const result = validateAndResolve(fullText);
-                    controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: 'complete', message: result.message, actions: result.actions })}\n\n`));
-                  }
-                } catch {
-                  // Malformed SSE from upstream — skip
-                }
-              }
-            }
-
-            // Fallback: if we never got finish_reason, finalize now
-            if (fullText && !completed) {
-              const result = validateAndResolve(fullText);
-              controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: 'complete', message: result.message, actions: result.actions })}\n\n`));
-            }
-          } catch (err) {
-            const errMsg = err instanceof Error ? err.message : 'Stream error';
-            controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: 'error', error: errMsg })}\n\n`));
-          } finally {
-            controller.close();
-          }
-        },
-      });
-
-      return new Response(readable, {
-        headers: {
-          'Content-Type': 'text/event-stream',
-          'Cache-Control': 'no-cache',
-          Connection: 'keep-alive',
-        },
-      });
+      // Non-retryable error (auth, bad request, etc.) — return immediately
+      let detail = '';
+      try {
+        const errData = JSON.parse(errText);
+        detail = errData.error?.message || errData.message || errText.slice(0, 200);
+      } catch {
+        detail = errText.slice(0, 200);
+      }
+      return NextResponse.json(
+        { error: `${provider.name} API error: ${response.status} — ${detail}` },
+        { status: 502 }
+      );
     }
+
+    // All API providers exhausted — fall back to local data engine
+    if (!streamResponse || !activeProvider) {
+      console.log('[AI Chat] All API providers rate-limited/failed — falling back to local data engine');
+
+      // Re-use the local engine logic
+      interface FallbackCandidate {
+        cardName: string;
+        score: number;
+        source: string;
+        reason: string;
+      }
+      const fallbackCandidates: FallbackCandidate[] = [];
+      const existingLower = new Set([...mainCards, ...commanderCards].map(c => c.name.toLowerCase()));
+      const collectionLower = hasCollection
+        ? new Set(filteredCollectionNames.map(n => n.toLowerCase()))
+        : null;
+
+      if (cfRecommendations) {
+        const cfLines = cfRecommendations.match(/- (.+?) \(CF score: ([\d.]+)/g) || [];
+        for (const line of cfLines) {
+          const m = line.match(/- (.+?) \(CF score: ([\d.]+)/);
+          if (m && !existingLower.has(m[1].toLowerCase())) {
+            fallbackCandidates.push({ cardName: m[1], score: parseFloat(m[2]) * 50, source: 'cf', reason: 'Recommended by similar decks' });
+          }
+        }
+      }
+      if (edhrecLiveBlock) {
+        const edhLines = edhrecLiveBlock.match(/- (.+?) \((\d+)% of decks/g) || [];
+        for (const line of edhLines) {
+          const m = line.match(/- (.+?) \((\d+)% of decks/);
+          if (m && !existingLower.has(m[1].toLowerCase())) {
+            fallbackCandidates.push({ cardName: m[1], score: parseInt(m[2]), source: 'edhrec', reason: `In ${m[2]}% of ${commanderCards[0]?.name || ''} decks` });
+          }
+        }
+      }
+      if (formatStaplesBlock) {
+        const stapleLines = formatStaplesBlock.match(/- (.+?) — in (\d+)% of/g) || [];
+        for (const line of stapleLines) {
+          const m = line.match(/- (.+?) — in (\d+)% of/);
+          if (m && !existingLower.has(m[1].toLowerCase())) {
+            fallbackCandidates.push({ cardName: m[1], score: parseInt(m[2]) + 20, source: 'staple', reason: `Format staple (${m[2]}% inclusion)` });
+          }
+        }
+      }
+      if (mlPredictions) {
+        const mlLines = mlPredictions.match(/- (.+?) \(score: ([\d.]+)\)/g) || [];
+        for (const line of mlLines) {
+          const m = line.match(/- (.+?) \(score: ([\d.]+)\)/);
+          if (m && !existingLower.has(m[1].toLowerCase())) {
+            fallbackCandidates.push({ cardName: m[1], score: parseFloat(m[2]) * 30, source: 'ml', reason: 'ML model prediction' });
+          }
+        }
+      }
+
+      const seenFallback = new Set<string>();
+      const uniqueFallback = fallbackCandidates.filter(c => {
+        const key = c.cardName.toLowerCase();
+        if (seenFallback.has(key)) return false;
+        seenFallback.add(key);
+        return true;
+      });
+
+      const scoredFallback = uniqueFallback.map(c => ({
+        ...c,
+        score: c.score + (collectionLower?.has(c.cardName.toLowerCase()) ? 30 : -50),
+        owned: collectionLower ? collectionLower.has(c.cardName.toLowerCase()) : true,
+      })).filter(c => !collectionLower || c.owned);
+      scoredFallback.sort((a, b) => b.score - a.score);
+
+      const deckCardNames = [...mainCards, ...commanderCards].map(c => c.name);
+      const metaMap = getMetaCardStatsMap(deckCardNames, format);
+      const weakCards = mainCards
+        .filter(c => !c.type_line?.includes('Land'))
+        .map(c => ({ card: c, rate: metaMap.get(c.name)?.inclusionRate ?? -1 }))
+        .filter(c => c.rate >= 0 && c.rate < 0.05)
+        .sort((a, b) => a.rate - b.rate);
+
+      const fallbackActions: Array<{ action: string; cardName: string; replaceWith?: string; quantity: number; reason: string }> = [];
+      const maxSwaps = Math.min(5, scoredFallback.length, weakCards.length);
+      for (let i = 0; i < maxSwaps; i++) {
+        const add = scoredFallback[i];
+        const cut = weakCards[i];
+        if (!add || !cut) break;
+        const addCard = resolveCard(add.cardName);
+        if (!addCard) continue;
+        if (!fitsColorIdentity(addCard, colorSet)) continue;
+        if (!isLegalInFormat(addCard, format)) continue;
+        fallbackActions.push({
+          action: 'swap',
+          cardName: cut.card.name,
+          replaceWith: add.cardName,
+          quantity: 1,
+          reason: `${add.reason}. Replacing ${cut.card.name} (only ${Math.round(cut.rate * 100)}% meta inclusion).`,
+        });
+      }
+
+      const failedProviders = providers.map(p => p.name).join(' and ');
+      let fallbackMessage = `**${failedProviders} rate-limited** — using local data engine (148K deck corpus)\n\n`;
+      if (fallbackActions.length > 0) {
+        fallbackMessage += `Found ${scoredFallback.length} upgrade candidates. Here are ${fallbackActions.length} recommended swaps:`;
+      } else if (scoredFallback.length > 0) {
+        fallbackMessage += `Top recommendations for your deck:\n`;
+        fallbackMessage += scoredFallback.slice(0, 8).map(c =>
+          `- **${c.cardName}** — ${c.reason} (score: ${Math.round(c.score)})`
+        ).join('\n');
+        fallbackMessage += `\n\nNo clear cut candidates found. Try again in a minute or review manually.`;
+      } else {
+        fallbackMessage += `Your deck looks solid. No strong upgrade candidates found. Try again in a minute when rate limits reset.`;
+      }
+
+      const fakeResponse = JSON.stringify({ message: fallbackMessage, actions: fallbackActions });
+      const resolved = validateAndResolve(fakeResponse);
+      return NextResponse.json(resolved);
+    }
+
+    console.log(`[AI Chat] Streaming from ${activeProvider.name}`);
+
+    // Stream SSE to client — buffer JSON responses, only stream natural text
+    const encoder = new TextEncoder();
+    const isClaude = activeProvider.isClaude;
+    const readable = new ReadableStream({
+      async start(controller) {
+        let fullText = '';
+        let completed = false;
+        let isJsonResponse = false;
+        let jsonDetected = false;
+        try {
+          const reader = streamResponse!.body!.getReader();
+          const decoder = new TextDecoder();
+          let sseBuffer = '';
+
+          while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
+
+            sseBuffer += decoder.decode(value, { stream: true });
+            const lines = sseBuffer.split('\n');
+            sseBuffer = lines.pop() || '';
+
+            for (const line of lines) {
+              if (!line.startsWith('data: ')) continue;
+              const payload = line.slice(6).trim();
+              if (!payload || payload === '[DONE]') continue;
+
+              try {
+                const event = JSON.parse(payload);
+
+                // Extract text delta (different format per provider)
+                const delta = isClaude
+                  ? (event.type === 'content_block_delta' ? event.delta?.text : null)
+                  : event.choices?.[0]?.delta?.content;
+
+                if (delta) {
+                  fullText += delta;
+
+                  if (!jsonDetected) {
+                    const trimmed = fullText.trimStart();
+                    if (trimmed.startsWith('{') || trimmed.startsWith('```')) {
+                      isJsonResponse = true;
+                      jsonDetected = true;
+                      controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: 'text', content: 'Analyzing your deck...' })}\n\n`));
+                    } else if (trimmed.length > 5) {
+                      jsonDetected = true;
+                      isJsonResponse = false;
+                      controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: 'text', content: fullText })}\n\n`));
+                    }
+                  } else if (!isJsonResponse) {
+                    controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: 'text', content: delta })}\n\n`));
+                  }
+                }
+
+                // Detect stream completion (different per provider)
+                const isComplete = isClaude
+                  ? event.type === 'message_stop'
+                  : event.choices?.[0]?.finish_reason === 'stop';
+
+                if (isComplete && !completed) {
+                  completed = true;
+                  const result = validateAndResolve(fullText);
+                  controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: 'complete', message: result.message, actions: result.actions })}\n\n`));
+                }
+              } catch {
+                // Malformed SSE from upstream — skip
+              }
+            }
+          }
+
+          // Fallback: if we never got completion signal, finalize now
+          if (fullText && !completed) {
+            const result = validateAndResolve(fullText);
+            controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: 'complete', message: result.message, actions: result.actions })}\n\n`));
+          }
+        } catch (err) {
+          const errMsg = err instanceof Error ? err.message : 'Stream error';
+          controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: 'error', error: errMsg })}\n\n`));
+        } finally {
+          controller.close();
+        }
+      },
+    });
+
+    return new Response(readable, {
+      headers: {
+        'Content-Type': 'text/event-stream',
+        'Cache-Control': 'no-cache',
+        Connection: 'keep-alive',
+      },
+    });
   } catch (error) {
     const msg =
       error instanceof Error ? error.message : 'AI chat failed';

@@ -226,7 +226,7 @@ def main():
         sys.exit(1)
 
     print("=" * 60)
-    print("PG → SQLite Deck Merge")
+    print("PG -> SQLite Deck Merge")
     print(f"PostgreSQL: {args.pg_user}@{args.pg_host}:{args.pg_port}/{args.pg_db}")
     print(f"SQLite:     {sqlite_path}")
     print(f"Started:    {datetime.now().isoformat()}")
