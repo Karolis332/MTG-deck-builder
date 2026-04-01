@@ -83,6 +83,7 @@ scripts/_*.py
 scripts/diag-*.js
 scripts/scrape_to_100k.py
 .playwright-mcp/
+*mtgahelper_files.txt
 AI_MODULE_PLAN.md
 DATABASE_ANALYSIS_REPORT.md
 DECK_RATIOS_RESEARCH_COMPLETE.txt
