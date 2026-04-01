@@ -62,6 +62,27 @@ electron-error.log
 
 # temp analysis/reference docs
 AI_ISSUES_ANALYSIS.md
+CABBAGE_MERCHANT*.md
+CABBAGE_MERCHANT*.txt
+CabbageMerchant_*.txt
+1v1_RedEquipment.txt
+FINAL_SUMMARY.md
+TEST_PLAN_LIVE.md
+scrape_log.txt
+match-frame*.png
+match-frames*/
+match-frames-g*/
+dist-overwolf/
+add_cards_to_deck.js
+build_deck.js
+final_deck_selection.js
+query_deck.js
+verify_final_deck.js
+scripts/_*.js
+scripts/_*.py
+scripts/diag-*.js
+scripts/scrape_to_100k.py
+.playwright-mcp/
 AI_MODULE_PLAN.md
 DATABASE_ANALYSIS_REPORT.md
 DECK_RATIOS_RESEARCH_COMPLETE.txt
