@@ -10,10 +10,17 @@ interface DeckInfo {
   card_count?: number;
 }
 
+export interface FingerprintResult {
+  matchId: string | null;
+  type: 'auto-link' | 'suggest' | 'no-match';
+  match: { deckId: number; deckName: string; score: number } | null;
+}
+
 interface DeckPickerOverlayProps {
   isOpen: boolean;
   matchId: string;
   format: string | null;
+  fingerprint: FingerprintResult | null;
   onSelect: (deck: DeckInfo) => void;
   onDismiss: () => void;
 }
@@ -46,22 +53,31 @@ function inferFormatFilter(arenaFormat: string | null): string[] {
 
 const COUNTDOWN_SECONDS = 30;
 
-export function DeckPickerOverlay({ isOpen, matchId, format, onSelect, onDismiss }: DeckPickerOverlayProps) {
+export function DeckPickerOverlay({ isOpen, matchId, format, fingerprint, onSelect, onDismiss }: DeckPickerOverlayProps) {
   const [decks, setDecks] = useState<DeckInfo[]>([]);
   const [preferredDeckId, setPreferredDeckId] = useState<number | null>(null);
   const [search, setSearch] = useState('');
   const [focusedIndex, setFocusedIndex] = useState(0);
   const [timeLeft, setTimeLeft] = useState(COUNTDOWN_SECONDS);
   const [loading, setLoading] = useState(true);
+  const [showManualPicker, setShowManualPicker] = useState(false);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLInputElement>(null);
 
-  // Fetch decks and preference on open
+  // Determine display mode from fingerprint result
+  const isAutoLinked = fingerprint?.type === 'auto-link' && fingerprint.match != null;
+  const isSuggested = fingerprint?.type === 'suggest' && fingerprint.match != null;
+  const scorePercent = fingerprint?.match
+    ? Math.round(fingerprint.match.score * 100)
+    : 0;
+
+  // Fetch decks and preference on open (only needed for manual picker / suggestion deny)
   useEffect(() => {
     if (!isOpen) return;
 
     setLoading(true);
+    setShowManualPicker(false);
     Promise.all([
       fetch('/api/decks').then(r => r.json()),
       fetch('/api/game-deck-preference').then(r => r.json()),
@@ -78,7 +94,7 @@ export function DeckPickerOverlay({ isOpen, matchId, format, onSelect, onDismiss
       }
     }).catch(() => setLoading(false));
 
-    // Focus search on open
+    // Focus search on open (only if manual picker shown)
     setTimeout(() => searchRef.current?.focus(), 100);
   }, [isOpen]);
 
@@ -144,8 +160,89 @@ export function DeckPickerOverlay({ isOpen, matchId, format, onSelect, onDismiss
     }
   }, [sorted, focusedIndex, onSelect, onDismiss]);
 
+  const handleSuggestionConfirm = useCallback(() => {
+    if (!fingerprint?.match) return;
+    // Find the deck in the loaded list to pass full DeckInfo
+    const deck = decks.find(d => d.id === fingerprint.match!.deckId);
+    if (deck) {
+      onSelect(deck);
+    } else {
+      // Deck not in list (shouldn't happen, but safe fallback)
+      onSelect({
+        id: fingerprint.match.deckId,
+        name: fingerprint.match.deckName,
+        format: null,
+      });
+    }
+  }, [fingerprint, decks, onSelect]);
+
   if (!isOpen) return null;
 
+  // ── Auto-linked state: compact confirmation banner ──────────────────────
+  if (isAutoLinked && !showManualPicker) {
+    return (
+      <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50">
+        <div className="grimoire-border grimoire-page px-5 py-3 flex items-center gap-4">
+          <div className="flex flex-col">
+            <span className="font-heading text-sm text-primary tracking-wide">
+              Playing: {fingerprint.match!.deckName}
+            </span>
+            <span className="text-[0.65rem] text-muted-foreground">
+              {scorePercent}% match — auto-detected
+            </span>
+          </div>
+          <div className="flex gap-2 shrink-0">
+            <button
+              onClick={onDismiss}
+              className="text-xs px-2.5 py-1 rounded bg-primary/20 text-primary hover:bg-primary/30 transition-colors font-heading tracking-wide"
+            >
+              OK
+            </button>
+            <button
+              onClick={() => setShowManualPicker(true)}
+              className="text-xs px-2.5 py-1 rounded text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Change
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // ── Suggestion state: "Looks like X?" prompt ────────────────────────────
+  if (isSuggested && !showManualPicker) {
+    return (
+      <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50">
+        <div className="grimoire-border grimoire-page px-5 py-3 flex items-center gap-4">
+          <div className="flex flex-col">
+            <span className="font-heading text-sm text-primary tracking-wide">
+              Looks like: {fingerprint.match!.deckName}?
+            </span>
+            <span className="text-[0.65rem] text-muted-foreground">
+              {scorePercent}% match
+            </span>
+          </div>
+          <div className="flex gap-2 shrink-0">
+            <button
+              onClick={handleSuggestionConfirm}
+              className="text-xs px-2.5 py-1 rounded bg-primary/20 text-primary hover:bg-primary/30 transition-colors font-heading tracking-wide"
+            >
+              Yes
+            </button>
+            <button
+              onClick={() => setShowManualPicker(true)}
+              className="text-xs px-2.5 py-1 rounded text-muted-foreground hover:text-foreground transition-colors"
+            >
+              No
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // ── Manual picker (original behavior, also shown on "Change" / "No") ───
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/70"

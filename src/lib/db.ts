@@ -825,6 +825,30 @@ export function updateLiveSessionResult(
 }
 
 /**
+ * Get all decks with their card names (for fingerprinting).
+ * Returns lightweight deck objects: id, name, and flat array of card names.
+ */
+export function getDecksWithCardNames(): Array<{ id: number; name: string; cards: string[] }> {
+  const db = getDb();
+  const decks = db.prepare('SELECT id, name FROM decks').all() as Array<{ id: number; name: string }>;
+  const stmtCards = db.prepare(`
+    SELECT c.name
+    FROM deck_cards dc
+    JOIN cards c ON dc.card_id = c.id
+    WHERE dc.deck_id = ? AND dc.board IN ('main', 'sideboard', 'commander', 'companion')
+  `);
+
+  return decks.map(deck => {
+    const rows = stmtCards.all(deck.id) as Array<{ name: string }>;
+    return {
+      id: deck.id,
+      name: deck.name,
+      cards: rows.map(r => r.name),
+    };
+  });
+}
+
+/**
  * Get unlinked arena matches (no deck_id).
  */
 export function getUnlinkedArenaMatches(limit = 50) {
@@ -1225,7 +1249,6 @@ export function autoLinkByCardsPlayed(): { linked: number; total: number } {
       if (uniquePlayed.size < 3) continue; // need at least 3 named cards
 
       let bestDeckId = -1;
-      let bestDeckName = '';
       let bestConfidence = 0;
 
       deckCardSets.forEach((deckInfo, dId) => {
@@ -1240,7 +1263,6 @@ export function autoLinkByCardsPlayed(): { linked: number; total: number } {
         const confidence = matching / uniquePlayed.size;
         if (matching >= 8 && confidence >= 0.60 && confidence > bestConfidence) {
           bestDeckId = dId;
-          bestDeckName = deckInfo.name;
           bestConfidence = confidence;
         }
       });

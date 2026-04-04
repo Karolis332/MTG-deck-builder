@@ -6,6 +6,7 @@
 import type { GameStateSnapshot } from './game-state-engine';
 import type { MulliganAdvice } from './mulligan-advisor';
 import type { SideboardPlan } from './sideboard-guide';
+import type { PostMatchStats } from './post-match-stats';
 
 export interface GameLogEntry {
   type: 'system' | 'turn' | 'phase' | 'action' | 'life' | 'damage' | 'result';
@@ -60,6 +61,12 @@ export interface ElectronAPI {
   onIntermissionStart: (callback: (data: { matchId: string | null; gameNumber: number; opponentCardsSeen: number[] }) => void) => () => void;
   onGameLogEntry: (callback: (entry: GameLogEntry) => void) => () => void;
   onGameLogUpdate: (callback: (entry: GameLogEntry) => void) => () => void;
+  onDeckFingerprint: (callback: (data: {
+    matchId: string | null;
+    type: 'auto-link' | 'suggest' | 'no-match';
+    match: { deckId: number; deckName: string; score: number } | null;
+  }) => void) => () => void;
+  onPostMatchStats: (callback: (stats: PostMatchStats) => void) => () => void;
 
   // Game controls
   getMulliganAdvice: (data: {

@@ -14,8 +14,6 @@ import { EventEmitter } from 'events';
 import {
   parseArenaLogFile,
   extractJsonBlocks,
-  type ArenaMatch,
-  type JsonBlock,
 } from '../src/lib/arena-log-reader';
 import {
   extractGameEventsWithContext,
@@ -26,6 +24,15 @@ import {
 import { GameStateEngine, type GameStateSnapshot } from '../src/lib/game-state-engine';
 import { GrpIdResolver } from '../src/lib/grp-id-resolver';
 import { MatchTelemetryLogger, type TelemetryFlushData } from '../src/lib/match-telemetry';
+import {
+  findBestMatch,
+  AUTO_LINK_THRESHOLD,
+  SUGGEST_THRESHOLD,
+  MIN_OBSERVED_CARDS,
+  type UserDeck,
+  type FingerprintMatch,
+} from '../src/lib/deck-fingerprint';
+import { generatePostMatchStats, type PostMatchStats } from '../src/lib/post-match-stats';
 
 // ── Game Log Entry ───────────────────────────────────────────────────────────
 
@@ -95,6 +102,12 @@ export class ArenaLogWatcher extends EventEmitter {
   } | null = null;
   private lastGameStateSnapshot: GameStateSnapshot | null = null;
 
+  // Deck fingerprinting — auto-detect which saved deck is being played
+  private observedCardNames = new Set<string>();
+  private fingerprintResolved = false;
+  private userDecks: UserDeck[] = [];
+  private deckFetchCallback: (() => UserDeck[]) | null = null;
+
   constructor(logPath: string, pollInterval = 500, catchUp = false) {
     super();
     this.logPath = logPath;
@@ -107,6 +120,14 @@ export class ArenaLogWatcher extends EventEmitter {
    */
   setResolver(resolver: GrpIdResolver): void {
     this.resolver = resolver;
+  }
+
+  /**
+   * Set a callback to fetch user decks with card names for fingerprinting.
+   * Called lazily on first match start to avoid DB access during init.
+   */
+  setDeckFetchCallback(callback: () => UserDeck[]): void {
+    this.deckFetchCallback = callback;
   }
 
   start(): void {
@@ -422,6 +443,12 @@ export class ArenaLogWatcher extends EventEmitter {
         this.pendingPhase = null;
         this.pendingDamageSources.clear();
 
+        // Reset fingerprint state for new match
+        this.observedCardNames.clear();
+        this.fingerprintResolved = false;
+        // Refresh deck list (user may have edited decks since last match)
+        this.userDecks = [];
+
         // Clear log history for new match
         this.logHistory = [];
         this.lastMatchInfo = {
@@ -493,6 +520,22 @@ export class ArenaLogWatcher extends EventEmitter {
             commander: commanderName,
             format: finalState?.format || null,
           });
+
+          // Generate and emit post-match statistics
+          if (finalState && (event.result === 'win' || event.result === 'loss')) {
+            try {
+              const postMatchStats = generatePostMatchStats(
+                finalState,
+                deckCardNames,
+                event.result as 'win' | 'loss',
+              );
+              debugLog(`post-match-stats: turns=${postMatchStats.totalTurns} drawn=${postMatchStats.cardsDrawn.length} mvp=${postMatchStats.mvpCard}`);
+              this.emit('post-match-stats', postMatchStats);
+            } catch (err) {
+              debugLog(`post-match-stats generation failed: ${err}`);
+            }
+          }
+
           this.gameEngine = null;
         }
         // Final telemetry flush with summary
@@ -511,7 +554,7 @@ export class ArenaLogWatcher extends EventEmitter {
 
           const mulNum = event.mulliganCount > 0 ? ` (mulligan ${event.mulliganCount})` : '';
           // Show card names in opening hand
-          const handNames = event.handGrpIds.map(id => this.cardName(id));
+          const handNames = event.handGrpIds.map((id: number) => this.cardName(id));
           const handStr = handNames.length > 0 ? `: ${handNames.join(', ')}` : '';
           this.emitLog({ type: 'system', text: `Opening hand${mulNum}${handStr}`, player: 'self' });
 
@@ -561,7 +604,7 @@ export class ArenaLogWatcher extends EventEmitter {
           }
 
           // Resolve card names for the deck
-          this.resolveDecklist(event.deckCards.map(c => c.grpId));
+          this.resolveDecklist(event.deckCards.map((c: { grpId: number }) => c.grpId));
         }
         break;
       }
@@ -590,6 +633,11 @@ export class ArenaLogWatcher extends EventEmitter {
           if (this.telemetryLogger) {
             this.telemetryLogger.onCardDrawn(event.grpId, state.turnNumber, name !== `Card #${event.grpId}` ? name : undefined);
           }
+
+          // Track for deck fingerprinting (own cards only)
+          if (who === 'self') {
+            this.trackObservedCard(name);
+          }
         }
         break;
       }
@@ -614,6 +662,11 @@ export class ArenaLogWatcher extends EventEmitter {
               event.grpId, event.ownerSeatId, stateBefore.playerSeatId,
               stateBefore.turnNumber, name !== `Card #${event.grpId}` ? name : undefined
             );
+          }
+
+          // Track for deck fingerprinting (own cards only)
+          if (isSelf) {
+            this.trackObservedCard(name);
           }
         }
         break;
@@ -935,6 +988,82 @@ export class ArenaLogWatcher extends EventEmitter {
 
     // Emit updated state with resolved names
     this.emit('game-state', this.gameEngine.getState());
+  }
+
+  /**
+   * Track an observed card name for fingerprinting.
+   * Once enough unique cards are seen, runs the matching algorithm.
+   */
+  private trackObservedCard(name: string): void {
+    if (!name || this.fingerprintResolved) return;
+    // Skip unresolved placeholder names
+    if (name.startsWith('Card #') || name.startsWith('Unknown')) return;
+
+    this.observedCardNames.add(name);
+
+    if (this.observedCardNames.size >= MIN_OBSERVED_CARDS) {
+      this.tryFingerprintMatch();
+    }
+  }
+
+  /**
+   * Run deck fingerprinting against user's saved decks.
+   * Emits 'deck-fingerprint' with the result (auto-link, suggest, or no match).
+   */
+  private tryFingerprintMatch(): void {
+    if (this.fingerprintResolved) return;
+
+    // Lazy-load user decks on first fingerprint attempt
+    if (this.userDecks.length === 0 && this.deckFetchCallback) {
+      try {
+        this.userDecks = this.deckFetchCallback();
+        debugLog(`fingerprint: loaded ${this.userDecks.length} user decks`);
+      } catch (err) {
+        debugLog(`fingerprint: failed to load decks: ${err}`);
+        return;
+      }
+    }
+
+    if (this.userDecks.length === 0) return;
+
+    const observed = Array.from(this.observedCardNames);
+    const best = findBestMatch(observed, this.userDecks);
+
+    debugLog(
+      `fingerprint: ${observed.length} observed cards, ` +
+      `best=${best ? `${best.deckName} (${(best.score * 100).toFixed(1)}%)` : 'none'}`
+    );
+
+    if (!best) {
+      // No match at all — emit null so UI shows manual picker
+      if (this.observedCardNames.size >= MIN_OBSERVED_CARDS + 5) {
+        // Give some extra cards before declaring no match
+        this.emit('deck-fingerprint', {
+          matchId: this.lastMatchInfo?.matchId ?? null,
+          type: 'no-match' as const,
+          match: null,
+        });
+      }
+      return;
+    }
+
+    if (best.score >= AUTO_LINK_THRESHOLD) {
+      this.fingerprintResolved = true;
+      this.emit('deck-fingerprint', {
+        matchId: this.lastMatchInfo?.matchId ?? null,
+        type: 'auto-link' as const,
+        match: best,
+      });
+      debugLog(`fingerprint: AUTO-LINKED to "${best.deckName}" (${(best.score * 100).toFixed(1)}%)`);
+    } else if (best.score >= SUGGEST_THRESHOLD) {
+      // Don't mark resolved yet — user might confirm or deny
+      this.emit('deck-fingerprint', {
+        matchId: this.lastMatchInfo?.matchId ?? null,
+        type: 'suggest' as const,
+        match: best,
+      });
+      debugLog(`fingerprint: SUGGESTED "${best.deckName}" (${(best.score * 100).toFixed(1)}%)`);
+    }
   }
 
   /**

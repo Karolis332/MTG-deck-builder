@@ -8,7 +8,7 @@ import type { MulliganAdvice } from '@/lib/mulligan-advisor';
 import { GameNarrative } from '@/components/game-narrative';
 import { GameDeckTracker } from '@/components/game-deck-tracker';
 import { GameOpponentTracker } from '@/components/game-opponent-tracker';
-import { DeckPickerOverlay } from '@/components/deck-picker-overlay';
+import { DeckPickerOverlay, type FingerprintResult } from '@/components/deck-picker-overlay';
 import { ScreenRecorderControls } from '@/components/screen-recorder-controls';
 
 export default function GamePage() {
@@ -39,7 +39,8 @@ export default function GamePage() {
   const [cardImages, setCardImages] = useState<Record<number, { name: string; imageUriSmall: string | null; imageUriNormal: string | null }>>({});
   const [isOW, setIsOW] = useState(false);
   const [showDeckPicker, setShowDeckPicker] = useState(false);
-  const [selectedDeckId, setSelectedDeckId] = useState<number | null>(null);
+  const [, setSelectedDeckId] = useState<number | null>(null);
+  const [fingerprintResult, setFingerprintResult] = useState<FingerprintResult | null>(null);
 
   useEffect(() => {
     checkIsOverwolf().then(setIsOW);
@@ -77,6 +78,22 @@ export default function GamePage() {
         setLogEntries([]); // Clear previous match log on new match start
         setShowDeckPicker(true);
         setSelectedDeckId(null);
+        setFingerprintResult(null); // Reset fingerprint for new match
+      })
+    );
+
+    // Deck fingerprint auto-detection
+    cleanups.push(
+      api.onDeckFingerprint((data) => {
+        const fp = data as FingerprintResult;
+        setFingerprintResult(fp);
+
+        // Auto-link already persisted by main process — just close picker
+        if (fp.type === 'auto-link' && fp.match) {
+          setSelectedDeckId(fp.match.deckId);
+          // Keep picker open briefly to show auto-detected banner, then auto-dismiss
+          setTimeout(() => setShowDeckPicker(false), 5000);
+        }
       })
     );
 
@@ -86,6 +103,7 @@ export default function GamePage() {
         setIsSideboarding(false);
         setShowMulligan(false);
         setShowDeckPicker(false);
+        setFingerprintResult(null);
 
         // Persist match result to live session
         if (data.matchId) {
@@ -303,6 +321,7 @@ export default function GamePage() {
       isOpen={showDeckPicker}
       matchId={matchInfo?.matchId || lastMatchInfo?.matchId || ''}
       format={matchInfo?.format || lastMatchInfo?.format || null}
+      fingerprint={fingerprintResult}
       onSelect={handleDeckSelect}
       onDismiss={() => setShowDeckPicker(false)}
     />

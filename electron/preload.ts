@@ -72,6 +72,16 @@ contextBridge.exposeInMainWorld('electronAPI', {
     return () => ipcRenderer.removeAllListeners('game-log-update');
   },
 
+  onDeckFingerprint: (callback: (data: unknown) => void) => {
+    ipcRenderer.on('deck-fingerprint', (_event, data) => callback(data));
+    return () => ipcRenderer.removeAllListeners('deck-fingerprint');
+  },
+
+  onPostMatchStats: (callback: (stats: unknown) => void) => {
+    ipcRenderer.on('post-match-stats', (_event, stats) => callback(stats));
+    return () => ipcRenderer.removeAllListeners('post-match-stats');
+  },
+
   // Game controls
   getMulliganAdvice: (data: unknown) => ipcRenderer.invoke('get-mulligan-advice', data),
   getSideboardGuide: (data: unknown) => ipcRenderer.invoke('get-sideboard-guide', data),

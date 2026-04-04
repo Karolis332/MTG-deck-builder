@@ -11,8 +11,9 @@ import { parseArenaLogFile } from '../src/lib/arena-log-reader';
 import { GrpIdResolver } from '../src/lib/grp-id-resolver';
 import { analyzeMulligan } from '../src/lib/mulligan-advisor';
 import { isOverwolfRuntime } from './platform-detect';
-import type { GameStateSnapshot, ResolvedCard } from '../src/lib/game-state-engine';
+import type { GameStateSnapshot } from '../src/lib/game-state-engine';
 import type { TelemetryFlushData } from '../src/lib/match-telemetry';
+import type { PostMatchStats } from '../src/lib/post-match-stats';
 import type { GameLogEntry } from './arena-log-watcher';
 
 /**
@@ -297,6 +298,50 @@ function startWatcherInternal(logPath: string, catchUp = false): { ok: boolean; 
 
     watcher.on('match-end', (data: { matchId: string; result: string; deckCards: string[]; commander: string; format: string | null }) => {
       broadcast('match-ended', data);
+    });
+
+    watcher.on('post-match-stats', (stats: PostMatchStats) => {
+      broadcast('post-match-stats', stats);
+    });
+
+    // Deck fingerprinting — auto-detect which saved deck is being played
+    watcher.on('deck-fingerprint', (data: {
+      matchId: string | null;
+      type: 'auto-link' | 'suggest' | 'no-match';
+      match: { deckId: number; deckName: string; score: number } | null;
+    }) => {
+      broadcast('deck-fingerprint', data);
+
+      // Auto-link: persist deck_id to live_game_sessions + arena_parsed_matches
+      if (data.type === 'auto-link' && data.matchId && data.match) {
+        postToApi('/api/live-session', {
+          matchId: data.matchId,
+          deckId: data.match.deckId,
+        });
+        traceLog(`fingerprint auto-link: ${data.match.deckName} → ${data.matchId}`);
+      }
+    });
+
+    // Provide deck fetch callback for fingerprinting (lazy, avoids DB at init)
+    watcher.setDeckFetchCallback(() => {
+      const db = getAppDb();
+      if (!db) return [];
+      try {
+        const decks = db.prepare('SELECT id, name FROM decks').all() as Array<{ id: number; name: string }>;
+        const stmtCards = db.prepare(`
+          SELECT c.name FROM deck_cards dc
+          JOIN cards c ON dc.card_id = c.id
+          WHERE dc.deck_id = ? AND dc.board IN ('main', 'sideboard', 'commander', 'companion')
+        `);
+        return decks.map(d => ({
+          id: d.id,
+          name: d.name,
+          cards: (stmtCards.all(d.id) as Array<{ name: string }>).map(r => r.name),
+        }));
+      } catch (err) {
+        traceLog(`deckFetchCallback error: ${err}`);
+        return [];
+      }
     });
 
     watcher.on('mulligan', (data: { hand: number[]; mulliganCount: number; seatId: number }) => {
