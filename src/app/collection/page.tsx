@@ -26,6 +26,7 @@ export default function CollectionPage() {
   const [showFilters, setShowFilters] = useState(false);
   const [stats, setStats] = useState({ totalCards: 0, uniqueCards: 0, totalValue: 0 });
   const [activeSource, setActiveSource] = useState<'paper' | 'arena'>('paper');
+  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [importing, setImporting] = useState(false);
   const [importResult, setImportResult] = useState<string | null>(null);
   const [importProgress, setImportProgress] = useState<{ current: number; total: number } | null>(null);
@@ -176,6 +177,13 @@ export default function CollectionPage() {
             className="hidden"
           />
           <button
+            onClick={() => setViewMode(viewMode === 'grid' ? 'list' : 'grid')}
+            className="flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm font-medium bg-accent text-muted-foreground transition-colors hover:text-foreground"
+            title={viewMode === 'grid' ? 'Switch to list view' : 'Switch to grid view'}
+          >
+            {viewMode === 'grid' ? <ListIcon className="h-4 w-4" /> : <GridIcon className="h-4 w-4" />}
+          </button>
+          <button
             onClick={() => setShowFilters(!showFilters)}
             className={cn(
               'flex items-center gap-2 rounded-lg px-3 py-1.5 text-sm font-medium transition-colors',
@@ -268,19 +276,23 @@ export default function CollectionPage() {
       )}
 
       {/* Results */}
-      <CardGrid
-        cards={cards}
-        loading={loading}
-        showQuantity={(card) => {
-          const match = cards.find((c) => c.id === card.id);
-          return match ? match.quantity : 0;
-        }}
-        emptyMessage={
-          query || selectedColors.length || selectedTypes.length || selectedRarities.length
-            ? 'No cards match your filters'
-            : 'Your collection is empty. Import cards from MTG Arena to get started.'
-        }
-      />
+      {viewMode === 'grid' ? (
+        <CardGrid
+          cards={cards}
+          loading={loading}
+          showQuantity={(card) => {
+            const match = cards.find((c) => c.id === card.id);
+            return match ? match.quantity : 0;
+          }}
+          emptyMessage={
+            query || selectedColors.length || selectedTypes.length || selectedRarities.length
+              ? 'No cards match your filters'
+              : 'Your collection is empty. Import cards from MTG Arena to get started.'
+          }
+        />
+      ) : (
+        <CollectionListView cards={cards} loading={loading} />
+      )}
 
       {/* Pagination */}
       {totalPages > 1 && (
@@ -312,6 +324,126 @@ function FilterIcon({ className }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <polygon points="22,3 2,3 10,12.46 10,19 14,21 14,12.46" />
+    </svg>
+  );
+}
+
+function CollectionListView({ cards, loading }: { cards: CollectionCard[]; loading: boolean }) {
+  if (loading) {
+    return (
+      <div className="space-y-1">
+        {Array.from({ length: 12 }).map((_, i) => (
+          <div key={i} className="skeleton h-12 rounded-lg" />
+        ))}
+      </div>
+    );
+  }
+
+  if (cards.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center py-16 text-center">
+        <p className="text-sm text-muted-foreground">No cards to display</p>
+      </div>
+    );
+  }
+
+  const SET_ICON_URL = 'https://svgs.scryfall.io/sets';
+  const RARITY_COLORS: Record<string, string> = {
+    common: 'text-zinc-400',
+    uncommon: 'text-zinc-300',
+    rare: 'text-yellow-500',
+    mythic: 'text-orange-500',
+  };
+
+  return (
+    <div className="space-y-px">
+      {/* Header row */}
+      <div className="flex items-center gap-3 px-2 py-1.5 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+        <span className="w-10" />
+        <span className="flex-1">Name</span>
+        <span className="w-14 text-center">Set</span>
+        <span className="w-24">Type</span>
+        <span className="w-10 text-center">CMC</span>
+        <span className="w-10 text-center">Qty</span>
+      </div>
+      {cards.map((card) => {
+        const artUrl = card.image_uri_art_crop
+          || `https://api.scryfall.com/cards/named?exact=${encodeURIComponent(card.name)}&format=image&version=art_crop`;
+        const shortType = card.type_line.split('—')[0].trim().replace(/Legendary\s+/, '');
+        return (
+          <div
+            key={card.collection_id}
+            className="group flex items-center gap-3 rounded-lg px-2 py-1.5 transition-colors hover:bg-accent/50"
+          >
+            {/* Art thumbnail */}
+            <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-md bg-accent">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={artUrl}
+                alt=""
+                className="absolute inset-0 h-full w-full object-cover"
+                loading="lazy"
+              />
+            </div>
+
+            {/* Name */}
+            <span className={cn(
+              'flex-1 truncate text-sm font-medium',
+              RARITY_COLORS[card.rarity] || 'text-foreground'
+            )}>
+              {card.name}
+            </span>
+
+            {/* Set icon + code */}
+            <span className="flex w-14 items-center justify-center gap-1" title={card.set_name}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={`${SET_ICON_URL}/${card.set_code.toLowerCase()}.svg`}
+                alt={card.set_code}
+                className="h-4 w-4 opacity-60"
+                loading="lazy"
+                onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+              />
+              <span className="text-[10px] uppercase text-muted-foreground">{card.set_code}</span>
+            </span>
+
+            {/* Type */}
+            <span className="w-24 truncate text-xs text-muted-foreground">{shortType}</span>
+
+            {/* CMC */}
+            <span className="w-10 text-center text-xs text-muted-foreground">{card.cmc}</span>
+
+            {/* Quantity */}
+            <span className="w-10 text-center text-xs font-medium">
+              {card.quantity > 1 ? `x${card.quantity}` : ''}
+            </span>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+function ListIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <line x1="8" y1="6" x2="21" y2="6" />
+      <line x1="8" y1="12" x2="21" y2="12" />
+      <line x1="8" y1="18" x2="21" y2="18" />
+      <line x1="3" y1="6" x2="3.01" y2="6" />
+      <line x1="3" y1="12" x2="3.01" y2="12" />
+      <line x1="3" y1="18" x2="3.01" y2="18" />
+    </svg>
+  );
+}
+
+function GridIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="3" y="3" width="7" height="7" />
+      <rect x="14" y="3" width="7" height="7" />
+      <rect x="3" y="14" width="7" height="7" />
+      <rect x="14" y="14" width="7" height="7" />
     </svg>
   );
 }

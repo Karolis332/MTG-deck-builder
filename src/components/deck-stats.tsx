@@ -27,6 +27,9 @@ export function DeckStats({ cards, format, className }: DeckStatsProps) {
   const typeCounts: Record<string, number> = {};
   let estimatedPrice = 0;
 
+  // Detailed type counts for the breakdown bar
+  const detailedTypeCounts: Record<string, number> = {};
+
   for (const entry of mainCards) {
     const card = entry.card;
     const isLand = card.type_line.includes('Land');
@@ -50,6 +53,17 @@ export function DeckStats({ cards, format, className }: DeckStatsProps) {
         ? 'Lands'
         : 'Spells';
     typeCounts[mainType] = (typeCounts[mainType] || 0) + entry.quantity;
+
+    // Detailed type classification
+    const detailedType = card.type_line.includes('Creature') ? 'Creatures'
+      : card.type_line.includes('Instant') ? 'Instants'
+      : card.type_line.includes('Sorcery') ? 'Sorceries'
+      : card.type_line.includes('Enchantment') ? 'Enchantments'
+      : card.type_line.includes('Artifact') ? 'Artifacts'
+      : card.type_line.includes('Planeswalker') ? 'Planeswalkers'
+      : card.type_line.includes('Land') ? 'Lands'
+      : 'Other';
+    detailedTypeCounts[detailedType] = (detailedTypeCounts[detailedType] || 0) + entry.quantity;
 
     if (card.price_usd) {
       estimatedPrice += parseFloat(card.price_usd) * entry.quantity;
@@ -84,17 +98,54 @@ export function DeckStats({ cards, format, className }: DeckStatsProps) {
         </div>
       )}
 
-      {/* Type distribution */}
-      <div className="space-y-1">
-        <div className="text-xs text-muted-foreground">Type Distribution</div>
-        <div className="flex gap-3">
-          {['Creatures', 'Spells', 'Lands'].map((type) => (
-            <div key={type} className="text-xs">
-              <span className="text-muted-foreground">{type}: </span>
-              <span className="font-medium">{typeCounts[type] || 0}</span>
-            </div>
-          ))}
-        </div>
+      {/* Type distribution — compact bar */}
+      <div className="space-y-1.5">
+        <div className="text-xs text-muted-foreground">Type Breakdown</div>
+        {(() => {
+          const typeColors: Record<string, string> = {
+            Creatures: 'bg-green-500',
+            Instants: 'bg-blue-500',
+            Sorceries: 'bg-red-500',
+            Enchantments: 'bg-yellow-500',
+            Artifacts: 'bg-purple-500',
+            Planeswalkers: 'bg-orange-500',
+            Lands: 'bg-zinc-500',
+            Other: 'bg-zinc-400',
+          };
+          const orderedTypes = ['Creatures', 'Instants', 'Sorceries', 'Enchantments', 'Artifacts', 'Planeswalkers', 'Lands', 'Other'];
+          const activeTypes = orderedTypes.filter((t) => (detailedTypeCounts[t] || 0) > 0);
+          return (
+            <>
+              {/* Stacked bar */}
+              {mainTotal > 0 && (
+                <div className="flex h-3 overflow-hidden rounded-full">
+                  {activeTypes.map((type) => {
+                    const count = detailedTypeCounts[type] || 0;
+                    const pct = (count / mainTotal) * 100;
+                    return (
+                      <div
+                        key={type}
+                        className={cn('transition-all', typeColors[type])}
+                        style={{ width: `${pct}%` }}
+                        title={`${type}: ${count}`}
+                      />
+                    );
+                  })}
+                </div>
+              )}
+              {/* Labels */}
+              <div className="flex flex-wrap gap-x-3 gap-y-0.5">
+                {activeTypes.map((type) => (
+                  <div key={type} className="flex items-center gap-1 text-[10px]">
+                    <span className={cn('inline-block h-2 w-2 rounded-full', typeColors[type])} />
+                    <span className="text-muted-foreground">{type}</span>
+                    <span className="font-medium">{detailedTypeCounts[type]}</span>
+                  </div>
+                ))}
+              </div>
+            </>
+          );
+        })()}
       </div>
 
       {/* Avg CMC */}

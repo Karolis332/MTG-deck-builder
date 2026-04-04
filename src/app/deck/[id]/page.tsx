@@ -603,8 +603,6 @@ export default function DeckEditorPage() {
     .filter((c) => c.board === 'main' || c.board === 'commander')
     .reduce((s, c) => s + c.quantity, 0);
 
-  const cardIdsInDeck = new Set(deck.cards.map((c) => c.card_id || c.id));
-
   return (
     <>
       <div className="flex h-[calc(100vh-3.5rem)] flex-col">

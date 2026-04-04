@@ -364,9 +364,11 @@ function DeckCardRow({
   onToggleFavourite?: (cardId: string) => void;
 }) {
   const [hovered, setHovered] = useState(false);
+  const [mouseY, setMouseY] = useState(0);
   const card = entry.card;
   const previewUrl = card.image_uri_small;
-  const largeUrl = card.image_uri_normal || card.image_uri_large;
+  const largeUrl = card.image_uri_normal || card.image_uri_large
+    || `https://api.scryfall.com/cards/named?exact=${encodeURIComponent(card.name)}&format=image&version=normal`;
   const isCommander = entry.board === 'commander';
   const canBeCommander = isCommanderFormat && !isCommander && entry.board === 'main' &&
     (card.type_line.includes('Legendary') && card.type_line.includes('Creature') ||
@@ -378,7 +380,8 @@ function DeckCardRow({
         'group relative flex items-center gap-2 rounded-lg px-2 py-1.5 transition-colors hover:bg-accent/50',
         isCommander && 'bg-primary/10 border border-primary/30'
       )}
-      onMouseEnter={() => setHovered(true)}
+      onMouseEnter={(e) => { setHovered(true); setMouseY(e.clientY); }}
+      onMouseMove={(e) => setMouseY(e.clientY)}
       onMouseLeave={() => setHovered(false)}
       onContextMenu={(e) => {
         if (onCardZoom) {
@@ -389,8 +392,14 @@ function DeckCardRow({
     >
       {/* Large card hover preview */}
       {hovered && largeUrl && (
-        <div className="pointer-events-none absolute bottom-full left-0 z-50 mb-2 hidden lg:block">
-          <div className="rounded-xl shadow-2xl shadow-black/50 overflow-hidden" style={{ width: 250 }}>
+        <div
+          className={cn(
+            'pointer-events-none fixed left-2 z-50 hidden lg:block',
+            mouseY < window.innerHeight / 2 ? 'mt-2' : '-translate-y-full -mt-2'
+          )}
+          style={{ top: mouseY }}
+        >
+          <div className="rounded-xl shadow-2xl shadow-black/60 overflow-hidden ring-1 ring-primary/20" style={{ width: 250 }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={largeUrl}

@@ -146,15 +146,36 @@ export default function AnalyticsPage() {
         <div className="mb-6">
           <h2 className="mb-3 font-heading text-lg font-semibold tracking-wide text-primary">Win Rates by Format</h2>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {Object.entries(data.win_rates).map(([fmt, stats]) => (
-              <div key={fmt} className="grimoire-border bg-card/80 p-4">
-                <div className="font-heading text-[10px] uppercase tracking-widest text-muted-foreground">{fmt}</div>
-                <div className="text-2xl font-bold text-primary">{stats.win_rate}%</div>
-                <div className="text-[10px] text-muted-foreground">
-                  {stats.wins}W / {stats.losses}L / {stats.draws}D ({stats.total_games} games)
+            {Object.entries(data.win_rates).map(([fmt, stats]) => {
+              const wrColor = stats.win_rate > 55
+                ? 'text-green-400'
+                : stats.win_rate >= 45
+                  ? 'text-yellow-400'
+                  : 'text-red-400';
+              const wrBorder = stats.win_rate > 55
+                ? 'border-green-500/30'
+                : stats.win_rate >= 45
+                  ? 'border-yellow-500/30'
+                  : 'border-red-500/30';
+              return (
+                <div key={fmt} className={`grimoire-border bg-card/80 p-4 ${wrBorder}`}>
+                  <div className="font-heading text-[10px] uppercase tracking-widest text-muted-foreground">{fmt}</div>
+                  <div className={`text-2xl font-bold ${wrColor}`}>{stats.win_rate}%</div>
+                  <div className="text-[10px] text-muted-foreground">
+                    {stats.wins}W / {stats.losses}L / {stats.draws}D ({stats.total_games} games)
+                  </div>
+                  {/* Win rate visual bar */}
+                  <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-accent">
+                    <div
+                      className={`h-full rounded-full transition-all ${
+                        stats.win_rate > 55 ? 'bg-green-500' : stats.win_rate >= 45 ? 'bg-yellow-500' : 'bg-red-500'
+                      }`}
+                      style={{ width: `${Math.min(stats.win_rate, 100)}%` }}
+                    />
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       )}
@@ -187,6 +208,44 @@ export default function AnalyticsPage() {
               <Line type="monotone" dataKey="wins" stroke="#22c55e" name="Wins" strokeWidth={2} />
             </LineChart>
           </ResponsiveContainer>
+        </div>
+      )}
+
+      {/* Recent match sparkline */}
+      {hasTimeline && data.games_over_time.days.length >= 3 && (
+        <div className="mb-6 rounded-2xl border border-border bg-card p-4">
+          <h2 className="mb-2 text-sm font-semibold">Recent Results (last {Math.min(data.games_over_time.days.length, 20)} days)</h2>
+          <div className="flex items-end gap-px" style={{ height: 28 }}>
+            {data.games_over_time.days.slice(-20).map((day, i) => {
+              const maxGames = Math.max(...data.games_over_time.days.slice(-20).map((d) => d.games), 1);
+              const height = (day.games / maxGames) * 100;
+              const wr = day.games > 0 ? (day.wins / day.games) * 100 : 0;
+              const barColor = day.games === 0
+                ? 'bg-accent'
+                : wr > 55
+                  ? 'bg-green-500'
+                  : wr >= 45
+                    ? 'bg-yellow-500'
+                    : 'bg-red-500';
+              return (
+                <div
+                  key={i}
+                  className={`flex-1 rounded-t transition-all ${barColor}`}
+                  style={{ height: `${Math.max(height, day.games > 0 ? 15 : 4)}%` }}
+                  title={`${day.date}: ${day.wins}W/${day.games - day.wins}L (${day.games > 0 ? Math.round(wr) : 0}%)`}
+                />
+              );
+            })}
+          </div>
+          <div className="mt-1 flex justify-between text-[9px] text-muted-foreground">
+            <span>{data.games_over_time.days.slice(-20)[0]?.date.slice(5)}</span>
+            <div className="flex gap-3">
+              <span className="flex items-center gap-1"><span className="inline-block h-1.5 w-1.5 rounded-full bg-green-500" />&gt;55%</span>
+              <span className="flex items-center gap-1"><span className="inline-block h-1.5 w-1.5 rounded-full bg-yellow-500" />45-55%</span>
+              <span className="flex items-center gap-1"><span className="inline-block h-1.5 w-1.5 rounded-full bg-red-500" />&lt;45%</span>
+            </div>
+            <span>{data.games_over_time.days[data.games_over_time.days.length - 1]?.date.slice(5)}</span>
+          </div>
         </div>
       )}
 
@@ -285,15 +344,28 @@ export default function AnalyticsPage() {
                 <Link
                   key={deck.deck_id}
                   href={`/deck/${deck.deck_id}`}
-                  className="flex items-center justify-between rounded-lg px-3 py-2 transition-colors hover:bg-accent/50"
+                  className="group flex items-center gap-3 rounded-lg px-3 py-2 transition-colors hover:bg-accent/50"
                 >
-                  <div>
+                  <div className="flex-1 min-w-0">
                     <div className="text-sm font-medium">{deck.deck_name}</div>
                     <div className="text-[10px] text-muted-foreground capitalize">
-                      {deck.format} &middot; {deck.total_games} games
+                      {deck.format} &middot; {deck.total_games} games &middot; {deck.wins}W
                     </div>
                   </div>
-                  <div className={`text-sm font-bold ${deck.win_rate >= 55 ? 'text-green-400' : deck.win_rate <= 40 ? 'text-red-400' : 'text-muted-foreground'}`}>
+                  {/* Mini win-rate bar */}
+                  <div className="hidden w-16 sm:block">
+                    <div className="h-1.5 w-full overflow-hidden rounded-full bg-accent">
+                      <div
+                        className={`h-full rounded-full ${
+                          deck.win_rate > 55 ? 'bg-green-500' : deck.win_rate >= 45 ? 'bg-yellow-500' : 'bg-red-500'
+                        }`}
+                        style={{ width: `${Math.min(deck.win_rate, 100)}%` }}
+                      />
+                    </div>
+                  </div>
+                  <div className={`text-sm font-bold ${
+                    deck.win_rate > 55 ? 'text-green-400' : deck.win_rate >= 45 ? 'text-yellow-400' : 'text-red-400'
+                  }`}>
                     {deck.win_rate}%
                   </div>
                 </Link>
