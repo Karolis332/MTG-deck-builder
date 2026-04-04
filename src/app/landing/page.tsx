@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 
 /* ── Feature data ─────────────────────────────────────────────────────── */
 
@@ -54,6 +54,7 @@ const FEATURES = [
 const PLANS = [
   {
     name: 'Free',
+    tier: 'free' as const,
     price: '$0',
     period: 'forever',
     description: 'Everything you need to start',
@@ -70,6 +71,7 @@ const PLANS = [
   },
   {
     name: 'Pro',
+    tier: 'pro' as const,
     price: '$4.99',
     period: '/month',
     description: 'Competitive edge for ranked play',
@@ -87,6 +89,7 @@ const PLANS = [
   },
   {
     name: 'Commander',
+    tier: 'commander' as const,
     price: '$14.99',
     period: '/month',
     description: 'Full arsenal for deck masters',
@@ -102,7 +105,7 @@ const PLANS = [
     cta: 'Unlock Commander',
     highlighted: false,
   },
-] as const;
+];
 
 /* ── Testimonials ─────────────────────────────────────────────────────── */
 
@@ -128,6 +131,33 @@ const TESTIMONIALS = [
 
 export default function LandingPage() {
   const [activeTestimonial, setActiveTestimonial] = useState(0);
+  const [checkoutLoading, setCheckoutLoading] = useState<string | null>(null);
+  const [checkoutMsg, setCheckoutMsg] = useState('');
+
+  const handlePlanClick = useCallback(async (tier: string) => {
+    if (tier === 'free') {
+      window.location.href = '/';
+      return;
+    }
+    setCheckoutLoading(tier);
+    setCheckoutMsg('');
+    try {
+      const resp = await fetch('/api/billing/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ tier }),
+      });
+      const data = await resp.json();
+      if (data.error) {
+        setCheckoutMsg(data.error);
+      } else if (data.url) {
+        window.open(data.url, '_blank');
+      }
+    } catch {
+      setCheckoutMsg('Failed to start checkout. Make sure you are logged in and Stripe is configured in Settings.');
+    }
+    setCheckoutLoading(null);
+  }, []);
 
   return (
     <div className="relative overflow-hidden">
@@ -333,7 +363,7 @@ export default function LandingPage() {
                 plan.highlighted
                   ? 'bg-card/80 arcane-glow ring-1 ring-primary/30'
                   : 'bg-card/40'
-              }`}
+              } ${checkoutLoading === plan.tier ? 'opacity-75' : ''}`}
             >
               {plan.highlighted && (
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-primary px-4 py-0.5 font-heading text-[10px] font-semibold uppercase tracking-widest text-primary-foreground">
@@ -360,17 +390,23 @@ export default function LandingPage() {
               </ul>
 
               <button
-                className={`w-full rounded-lg py-2.5 font-heading text-sm font-semibold tracking-wide transition-all ${
+                onClick={() => handlePlanClick(plan.tier)}
+                disabled={checkoutLoading === plan.tier}
+                className={`w-full rounded-lg py-2.5 font-heading text-sm font-semibold tracking-wide transition-all disabled:opacity-50 ${
                   plan.highlighted
                     ? 'btn-grimoire'
                     : 'border border-border bg-card/80 text-foreground hover:border-primary/30 hover:text-primary'
                 }`}
               >
-                {plan.cta}
+                {checkoutLoading === plan.tier ? 'Opening checkout...' : plan.cta}
               </button>
             </div>
           ))}
         </div>
+
+        {checkoutMsg && (
+          <p className="mt-4 text-center text-sm text-red-400">{checkoutMsg}</p>
+        )}
       </section>
 
       {/* ── Gold divider ──────────────────────────────────────────────── */}

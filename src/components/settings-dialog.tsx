@@ -1147,6 +1147,9 @@ export function SettingsDialog({ open, onClose }: SettingsDialogProps) {
           </div>
         </div>
 
+        {/* Billing & Subscription */}
+        <BillingSection />
+
         {/* Data Export */}
         <div className="mt-4 space-y-3 border-t border-border pt-4">
           <h3 className="text-sm font-bold">Data Export</h3>
@@ -1405,6 +1408,293 @@ export function SettingsDialog({ open, onClose }: SettingsDialogProps) {
           </div>
         )}
       </div>
+    </div>
+  );
+}
+
+/* ── Billing Section ─────────────────────────────────────────────────────── */
+
+function BillingSection() {
+  const [tier, setTier] = useState<'free' | 'pro' | 'commander'>('free');
+  const [status, setStatus] = useState('inactive');
+  const [endsAt, setEndsAt] = useState<string | null>(null);
+  const [hasStripe, setHasStripe] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [syncing, setSyncing] = useState(false);
+  const [checkoutLoading, setCheckoutLoading] = useState<string | null>(null);
+  const [portalLoading, setPortalLoading] = useState(false);
+  const [billingMsg, setBillingMsg] = useState('');
+
+  // Stripe key config
+  const [stripeKey, setStripeKey] = useState('');
+  const [maskedStripeKey, setMaskedStripeKey] = useState('');
+  const [proPriceId, setProPriceId] = useState('');
+  const [commanderPriceId, setCommanderPriceId] = useState('');
+  const [savingKeys, setSavingKeys] = useState(false);
+  const [keyMsg, setKeyMsg] = useState('');
+
+  const fetchSubscription = useCallback(async (sync = false) => {
+    try {
+      const url = sync ? '/api/billing/subscription?sync=true' : '/api/billing/subscription';
+      const resp = await fetch(url);
+      if (resp.ok) {
+        const data = await resp.json();
+        setTier(data.tier || 'free');
+        setStatus(data.status || 'inactive');
+        setEndsAt(data.ends_at || null);
+        setHasStripe(data.has_stripe || false);
+      }
+    } catch { /* offline */ }
+    setLoading(false);
+    setSyncing(false);
+  }, []);
+
+  useEffect(() => {
+    fetchSubscription();
+    // Load Stripe settings
+    fetch('/api/settings')
+      .then((r) => r.json())
+      .then((data) => {
+        const s = data.settings || {};
+        if (s.stripe_secret_key) setMaskedStripeKey(s.stripe_secret_key);
+        if (s.stripe_price_pro) setProPriceId(s.stripe_price_pro);
+        if (s.stripe_price_commander) setCommanderPriceId(s.stripe_price_commander);
+      })
+      .catch(() => {});
+  }, [fetchSubscription]);
+
+  const handleSyncFromStripe = async () => {
+    setSyncing(true);
+    setBillingMsg('');
+    await fetchSubscription(true);
+    setBillingMsg('Synced from Stripe.');
+    setTimeout(() => setBillingMsg(''), 3000);
+  };
+
+  const handleCheckout = async (plan: 'pro' | 'commander') => {
+    setCheckoutLoading(plan);
+    setBillingMsg('');
+    try {
+      const resp = await fetch('/api/billing/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ tier: plan }),
+      });
+      const data = await resp.json();
+      if (data.error) {
+        setBillingMsg(data.error);
+      } else if (data.url) {
+        // Open in system browser (works in both Electron and web)
+        window.open(data.url, '_blank');
+        setBillingMsg('Checkout opened in browser. Complete payment, then click "Sync from Stripe".');
+      }
+    } catch {
+      setBillingMsg('Failed to create checkout session.');
+    }
+    setCheckoutLoading(null);
+  };
+
+  const handlePortal = async () => {
+    setPortalLoading(true);
+    setBillingMsg('');
+    try {
+      const resp = await fetch('/api/billing/portal', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+      });
+      const data = await resp.json();
+      if (data.error) {
+        setBillingMsg(data.error);
+      } else if (data.url) {
+        window.open(data.url, '_blank');
+        setBillingMsg('Billing portal opened in browser.');
+      }
+    } catch {
+      setBillingMsg('Failed to open billing portal.');
+    }
+    setPortalLoading(false);
+  };
+
+  const saveStripeKeys = async () => {
+    setSavingKeys(true);
+    setKeyMsg('');
+    try {
+      const saves = [];
+      if (stripeKey) {
+        saves.push(fetch('/api/settings', {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ key: 'stripe_secret_key', value: stripeKey }),
+        }));
+      }
+      if (proPriceId) {
+        saves.push(fetch('/api/settings', {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ key: 'stripe_price_pro', value: proPriceId }),
+        }));
+      }
+      if (commanderPriceId) {
+        saves.push(fetch('/api/settings', {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ key: 'stripe_price_commander', value: commanderPriceId }),
+        }));
+      }
+      await Promise.all(saves);
+      setKeyMsg('Stripe configuration saved.');
+      if (stripeKey) {
+        setMaskedStripeKey(stripeKey.slice(0, 7) + '...' + stripeKey.slice(-4));
+        setStripeKey('');
+      }
+    } catch {
+      setKeyMsg('Failed to save Stripe keys.');
+    }
+    setSavingKeys(false);
+  };
+
+  const isActive = status === 'active' || status === 'trialing';
+  const tierLabel = tier.charAt(0).toUpperCase() + tier.slice(1);
+  const statusColor = isActive ? 'text-green-400' : status === 'past_due' ? 'text-amber-400' : 'text-muted-foreground';
+
+  return (
+    <div className="mt-4 space-y-3 border-t border-border pt-4">
+      <h3 className="text-sm font-bold">Billing & Subscription</h3>
+
+      {/* Current plan status */}
+      <div className="flex items-center justify-between rounded-lg border border-border bg-background/50 px-3 py-2">
+        <div>
+          <div className="flex items-center gap-2">
+            <span className="text-sm font-semibold">{tierLabel}</span>
+            {isActive && (
+              <span className="rounded-full bg-green-500/15 px-2 py-0.5 text-[10px] font-medium text-green-400">
+                {status === 'trialing' ? 'Trial' : 'Active'}
+              </span>
+            )}
+            {status === 'past_due' && (
+              <span className="rounded-full bg-amber-500/15 px-2 py-0.5 text-[10px] font-medium text-amber-400">
+                Past Due
+              </span>
+            )}
+          </div>
+          {endsAt && isActive && (
+            <p className="text-[10px] text-muted-foreground">
+              Renews {new Date(endsAt).toLocaleDateString()}
+            </p>
+          )}
+        </div>
+        <div className="flex gap-1.5">
+          {hasStripe && (
+            <button
+              onClick={handlePortal}
+              disabled={portalLoading}
+              className="rounded-lg border border-border px-2 py-1 text-[10px] transition-colors hover:bg-accent disabled:opacity-50"
+            >
+              {portalLoading ? '...' : 'Manage'}
+            </button>
+          )}
+          <button
+            onClick={handleSyncFromStripe}
+            disabled={syncing || loading}
+            className="rounded-lg border border-border px-2 py-1 text-[10px] transition-colors hover:bg-accent disabled:opacity-50"
+          >
+            {syncing ? 'Syncing...' : 'Sync'}
+          </button>
+        </div>
+      </div>
+
+      {/* Upgrade buttons */}
+      {tier !== 'commander' && (
+        <div className="flex gap-2">
+          {tier === 'free' && (
+            <button
+              onClick={() => handleCheckout('pro')}
+              disabled={!!checkoutLoading}
+              className="flex-1 rounded-lg border border-primary/30 bg-primary/10 px-3 py-2 text-xs font-medium text-primary transition-colors hover:bg-primary/20 disabled:opacity-50"
+            >
+              {checkoutLoading === 'pro' ? 'Opening...' : 'Upgrade to Pro — $4.99/mo'}
+            </button>
+          )}
+          <button
+            onClick={() => handleCheckout('commander')}
+            disabled={!!checkoutLoading}
+            className="flex-1 rounded-lg border border-amber-500/30 bg-amber-500/10 px-3 py-2 text-xs font-medium text-amber-400 transition-colors hover:bg-amber-500/20 disabled:opacity-50"
+          >
+            {checkoutLoading === 'commander' ? 'Opening...' : `Upgrade to Commander — $14.99/mo`}
+          </button>
+        </div>
+      )}
+
+      {billingMsg && (
+        <p className={cn(
+          'text-xs',
+          billingMsg.includes('Synced') || billingMsg.includes('opened') ? 'text-green-400'
+            : billingMsg.includes('Failed') || billingMsg.includes('error') ? 'text-red-400'
+              : 'text-muted-foreground'
+        )}>
+          {billingMsg}
+        </p>
+      )}
+
+      {/* Stripe configuration (collapsible) */}
+      <details className="group">
+        <summary className="cursor-pointer text-[10px] font-medium text-muted-foreground hover:text-foreground">
+          Stripe Configuration
+        </summary>
+        <div className="mt-2 space-y-2">
+          <div>
+            <label className="mb-1 block text-[10px] font-medium text-muted-foreground">Secret Key</label>
+            <input
+              type="password"
+              value={stripeKey}
+              onChange={(e) => setStripeKey(e.target.value)}
+              placeholder={maskedStripeKey || 'sk_live_... or sk_test_...'}
+              className="w-full rounded-lg border border-border bg-background px-3 py-1.5 text-xs outline-none focus:border-primary font-mono"
+            />
+          </div>
+          <div className="flex gap-2">
+            <div className="flex-1">
+              <label className="mb-1 block text-[10px] font-medium text-muted-foreground">Pro Price ID</label>
+              <input
+                type="text"
+                value={proPriceId}
+                onChange={(e) => setProPriceId(e.target.value)}
+                placeholder="price_..."
+                className="w-full rounded-lg border border-border bg-background px-3 py-1.5 text-xs outline-none focus:border-primary font-mono"
+              />
+            </div>
+            <div className="flex-1">
+              <label className="mb-1 block text-[10px] font-medium text-muted-foreground">Commander Price ID</label>
+              <input
+                type="text"
+                value={commanderPriceId}
+                onChange={(e) => setCommanderPriceId(e.target.value)}
+                placeholder="price_..."
+                className="w-full rounded-lg border border-border bg-background px-3 py-1.5 text-xs outline-none focus:border-primary font-mono"
+              />
+            </div>
+          </div>
+          <button
+            onClick={saveStripeKeys}
+            disabled={savingKeys}
+            className="w-full rounded-lg border border-border px-3 py-1.5 text-xs font-medium transition-colors hover:bg-accent disabled:opacity-50"
+          >
+            {savingKeys ? 'Saving...' : 'Save Stripe Config'}
+          </button>
+          {keyMsg && (
+            <p className={cn('text-[10px]', keyMsg.includes('saved') ? 'text-green-400' : 'text-red-400')}>
+              {keyMsg}
+            </p>
+          )}
+          <p className="text-[10px] text-muted-foreground">
+            Create products and prices in your{' '}
+            <a href="https://dashboard.stripe.com/products" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+              Stripe Dashboard
+            </a>
+            , then paste the price IDs here.
+          </p>
+        </div>
+      </details>
     </div>
   );
 }
