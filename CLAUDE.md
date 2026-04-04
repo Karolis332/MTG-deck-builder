@@ -58,7 +58,7 @@ The Black Grimoire is a dark-themed desktop application for building, analyzing,
 
 - **Framework:** Next.js 14 (App Router, standalone output mode) + Electron 33
 - **Language:** TypeScript (strict mode) + Python 3.13 (ML pipeline)
-- **Database:** SQLite via better-sqlite3 (WAL mode, 20 migrations in `src/db/schema.ts`)
+- **Database:** SQLite via better-sqlite3 (WAL mode, 31 migrations in `src/db/schema.ts`)
 - **Auth:** JWT (jose) + scrypt password hashing, httpOnly cookies
 - **UI:** Tailwind CSS 3 + Lucide icons + Recharts, grimoire dark theme with gold accents
 - **Validation:** Zod
@@ -79,7 +79,7 @@ src/
     analytics/            # Analytics dashboard
   components/             # React components (client-side, 'use client')
   db/
-    schema.ts             # All 21 database migrations
+    schema.ts             # All 31 database migrations
   lib/                    # Business logic & utilities
     db.ts                 # SQLite singleton (globalThis for HMR safety)
     auth.ts               # JWT + scrypt auth
@@ -106,7 +106,7 @@ src/
     match-analyzer.ts     # Match analytics
     electron-bridge.ts    # Electron IPC bridge (includes overlay events)
     first-boot.ts         # First-launch account creation and card seeding
-    __tests__/            # Unit tests (275 tests across 16 files)
+    __tests__/            # Unit tests (340 tests across 18 files)
 electron/
   main.ts                 # Electron main process (splash screen, spawns Next.js standalone server)
   next-server.ts          # Standalone Next.js server launcher
@@ -118,6 +118,8 @@ electron/
     setup.html            # First-run setup wizard UI
 scripts/
   pipeline.py             # 10-step ML pipeline orchestrator
+  pipeline_state.py       # Pipeline step state management and degradation tracking
+  pipeline_telegram_bot.py # Telegram notifications for pipeline status
   scrape_mtggoldfish.py   # Tournament deck scraper with W-L records
   scrape_mtgtop8.py       # Competitive meta deck scraper
   scrape_edhrec_articles.py # EDHREC strategy article scraper
@@ -151,6 +153,7 @@ npm run dist:win         # Package Windows installer (NSIS + portable + zip)
 npm run dist:mac         # Package macOS app (DMG + zip)
 npm run dist:linux       # Package Linux app (AppImage + deb + tar.gz)
 npm run dist:all         # All platforms
+py scripts/pipeline.py --reset-step <STEP>  # Clear degraded pipeline step
 ```
 
 ## Code Conventions
@@ -186,10 +189,11 @@ npm run dist:all         # All platforms
 - **Commander synergy engine** parses oracle text for 12 trigger categories, scores candidates, merges with archetype templates
 - **UI theme** — "Black Grimoire" book aesthetic: Cinzel headings, Crimson Text body, leather-brown palette, gold accents, vignette overlay, ornate borders
 - **afterPack hook** rebuilds better-sqlite3 native module for Electron's Node version, caches prebuilt binaries
+- **Pipeline fallback system** — 3x retry per step with backoff, cross-run failure tracking via `data/pipeline_failures.json`, 24h degraded auto-skip for optional scrapers, Telegram notifications
 
 ## Database
 
-SQLite at `data/mtg-deck-builder.db` (or `MTG_DB_DIR` env var). 51+ tables across 21 migrations. Key tables:
+SQLite at `data/mtg-deck-builder.db` (or `MTG_DB_DIR` env var). 51+ tables across 31 migrations. Key tables:
 
 - `cards` — 35K+ cards from Scryfall with FTS5 index
 - `users` — Accounts (username, email, password_hash)
@@ -221,7 +225,7 @@ PORT=             # Server port (default: 3000, auto-finds available port 3000-3
 
 ## Testing
 
-Tests live in `src/lib/__tests__/` and `tests/`. Run with `npm test`. 275 tests across 16 files. Key test suites:
+Tests live in `src/lib/__tests__/` and `tests/`. Run with `npm test`. 340 tests across 18 files. Key test suites:
 
 - `utils.test.ts` — Utility functions
 - `arena-parser.test.ts` — Arena format parsing
@@ -235,7 +239,9 @@ Tests live in `src/lib/__tests__/` and `tests/`. Run with `npm test`. 275 tests 
 - `deck-export.test.ts` — Export formats
 - `deck-validation.test.ts` — Format legality rules
 - `ai-chat-helpers.test.ts` — AI chat helper functions
+- `card-classifier.test.ts` — Card classification utilities
 - `constants.test.ts` — Game constants
+- `platform-detect.test.ts` — Overwolf/Electron detection
 - `tests/db.test.ts` — Database operations
 - `tests/edhrec.test.ts` — EDHREC integration
 - `tests/analytics-api.test.ts` — Analytics API
