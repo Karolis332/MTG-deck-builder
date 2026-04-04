@@ -134,21 +134,7 @@ export async function seedArenaCardCache(): Promise<void> {
     return;
   }
 
-  // Check stored version in app_state via API
-  const port = process.env.PORT || '3000';
-  try {
-    const versionResp = await new Promise<string>((resolve, reject) => {
-      http.get(`http://localhost:${port}/api/cards/search?q=_arena_card_db_version_check_`, (res) => {
-        res.resume();
-        resolve(''); // We don't actually use this — check DB directly below
-      }).on('error', reject);
-    }).catch(() => '');
-
-    // Use a direct DB check via a lightweight POST to avoid needing a dedicated endpoint
-    // Instead, we'll just always seed if the file exists — the INSERT OR IGNORE makes it idempotent
-  } catch {
-    // Server may not be fully ready — proceed with seed anyway
-  }
+  // We always seed if the file exists — the INSERT OR IGNORE makes it idempotent
 
   console.log(`[ArenaCardCache] Seeding ${data.count || Object.keys(data.cards).length} grpId mappings from bundled v${data.version}...`);
 

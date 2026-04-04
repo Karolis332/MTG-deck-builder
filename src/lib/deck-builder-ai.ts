@@ -4,10 +4,10 @@ import { DEFAULT_LAND_COUNT, DEFAULT_DECK_SIZE, getLegalityKey } from './constan
 import { getCardGlobalScore, getMetaAdjustedScore } from './global-learner';
 import { getEdhrecRecommendations, getEdhrecThemeCards } from './edhrec';
 import type { EdhrecRecommendation } from './edhrec';
-import { getTemplate, getScaledCurve, getColorAdjustment, isImpulseDraw, mergeWithCommanderProfile } from './deck-templates';
+import { getTemplate, getScaledCurve, mergeWithCommanderProfile } from './deck-templates';
 import { analyzeCommander } from './commander-synergy';
 import type { CommanderSynergyProfile } from './commander-synergy';
-import { buildOptimalLandBase, analyzeManaDemands, isFetchLandRelevant } from './land-intelligence';
+import { buildOptimalLandBase, isFetchLandRelevant } from './land-intelligence';
 import { getCFRecommendations, resolveCFToDbCards } from './cf-api-client';
 
 // ── Commander synergy text patterns for card scoring ────────────────────────
@@ -949,7 +949,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
     pool: scored, themes, resolvedStrategy, tribalType, tribalNames,
     commanderProfile, commanderCard, landTarget: targetLands, nonLandTarget,
     isCommander, maxCopies, colors, ownedQty, useCollection,
-    colorExcludeFilter, legalityFilter, commanderExclude,
+    colorExcludeFilter, legalityFilter, commanderExclude: _commanderExclude,
     collectionJoin, collectionOrder, metaStatsMap,
   } = poolResult;
 
@@ -978,7 +978,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
     (template.protectedPatterns || []).map((p: string) => p.toLowerCase())
   );
 
-  for (const { card, score } of scored) {
+  for (const { card } of scored) {
     if (totalPicked >= nonLandTarget) break;
     if (pickedNames.has(card.name)) continue;
 

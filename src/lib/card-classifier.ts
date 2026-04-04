@@ -247,10 +247,6 @@ function isLand(typeLine: string): boolean {
   return /\bLand\b/.test(typeLine);
 }
 
-function isBasicLand(typeLine: string, name: string): boolean {
-  return /\bBasic\b/.test(typeLine) || /^(Plains|Island|Swamp|Mountain|Forest|Wastes)$/.test(name);
-}
-
 function isRamp(name: string, oracleText: string, typeLine: string): boolean {
   if (isLand(typeLine)) return false;
   if (RAMP_NAMES.has(name.toLowerCase())) return true;

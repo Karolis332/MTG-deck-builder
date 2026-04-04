@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useMemo, useCallback } from 'react';
 import { cn } from '@/lib/utils';
-import { CardInline, CardInlineText } from '@/components/card-inline';
+import { CardInline } from '@/components/card-inline';
 import {
   LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer,
 } from 'recharts';

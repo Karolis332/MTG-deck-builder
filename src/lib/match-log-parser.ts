@@ -63,7 +63,6 @@ export function parseGameLog(log: string, myPlayerName: string): ParsedMatch {
     }
   }
 
-  const opponentNameLower = opponentName?.toLowerCase() || '';
 
   // Track turn numbers and which player's turn it is
   const turnRegex = /^Turn\s+(\d+):\s+(.+)/i;

@@ -14,17 +14,9 @@ interface CardDetailModalProps {
 export function CardDetailModal({ card, onClose, onAddToDeck }: CardDetailModalProps) {
   if (!card) return null;
 
-  const colors: string[] = card.colors ? JSON.parse(card.colors) : [];
   const legalities: Record<string, string> = card.legalities
     ? JSON.parse(card.legalities)
     : {};
-
-  const legalFormats = Object.entries(legalities)
-    .filter(([, v]) => v === 'legal')
-    .map(([k]) => k);
-  const bannedFormats = Object.entries(legalities)
-    .filter(([, v]) => v === 'banned' || v === 'not_legal')
-    .map(([k]) => k);
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">

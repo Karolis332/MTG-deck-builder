@@ -1,4 +1,4 @@
-import { desktopCapturer, dialog, BrowserWindow } from 'electron';
+import { desktopCapturer, dialog } from 'electron';
 import fs from 'fs';
 import path from 'path';
 import { app } from 'electron';

@@ -99,8 +99,6 @@ export function GameDeckTracker({
     return groups;
   }, [deckList, drawProbabilities]);
 
-  const drawnSet = useMemo(() => new Set(cardsDrawn), [cardsDrawn]);
-
   return (
     <div className="flex h-full flex-col">
       {/* Header */}

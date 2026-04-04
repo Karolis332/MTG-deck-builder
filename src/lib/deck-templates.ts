@@ -619,13 +619,10 @@ export function validateAgainstTemplate(
   }
 ): { score: number; warnings: string[] } {
   const template = getTemplate(archetype);
-  const colorAdj = getColorAdjustment(deckStats.colorCount);
   const warnings: string[] = [];
   let score = 100;
 
   // Land check
-  const expectedLands = Math.round((template.lands[0] + template.lands[1]) / 2);
-  const adjustedLands = Math.round((expectedLands + colorAdj.lands) / 2);
   if (deckStats.landCount < template.lands[0] - 2) {
     warnings.push(`Low land count (${deckStats.landCount}, template suggests ${template.lands[0]}-${template.lands[1]})`);
     score -= 15;

@@ -7,7 +7,6 @@
 
 import type {
   ArenaGameEvent,
-  GameObjectInfo,
   ZoneInfo,
 } from './arena-game-events';
 import { ZONE_TYPES } from './arena-game-events';
@@ -92,7 +91,6 @@ export class GameStateEngine {
   private objectGrpIds: Map<number, number> = new Map(); // instanceId → grpId
   private objectOwners: Map<number, number> = new Map(); // instanceId → ownerSeatId
   private objectNames: Map<number, string> = new Map(); // grpId → card name from gameObjects
-  private opponentSeatId = 2;
 
   constructor() {
     this.state = this.createEmptyState();
@@ -241,7 +239,6 @@ export class GameStateEngine {
     this.state.opponentName = event.opponentName;
     this.state.format = event.format;
     this.state.isActive = true;
-    this.opponentSeatId = event.playerSeatId === 1 ? 2 : 1;
 
     // Set starting life based on format
     const life = this.getStartingLife(event.format);

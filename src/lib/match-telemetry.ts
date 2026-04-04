@@ -47,9 +47,6 @@ const FLUSH_INTERVAL_TURNS = 3;
 
 export class MatchTelemetryLogger {
   private matchId = '';
-  private format: string | null = null;
-  private playerName: string | null = null;
-  private opponentName: string | null = null;
   private gameNumber = 1;
   private actionCounter = 0;
   private pendingActions: TelemetryAction[] = [];
@@ -77,9 +74,6 @@ export class MatchTelemetryLogger {
 
   startMatch(matchId: string, format: string | null, playerName: string | null, opponentName: string | null): void {
     this.matchId = matchId;
-    this.format = format;
-    this.playerName = playerName;
-    this.opponentName = opponentName;
     this.matchStartTime = new Date().toISOString();
     this.gameNumber = 1;
 

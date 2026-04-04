@@ -12,11 +12,11 @@
 
 import { getDb, getFormatStaples } from './db';
 import type { DbCard } from './types';
-import { DEFAULT_LAND_COUNT, DEFAULT_DECK_SIZE } from './constants';
+import { DEFAULT_DECK_SIZE } from './constants';
 import { buildScoredCandidatePool, autoBuildDeck } from './deck-builder-ai';
-import type { BuildOptions, BuildResult, ScoredCandidatePoolResult } from './deck-builder-ai';
+import type { BuildOptions, ScoredCandidatePoolResult } from './deck-builder-ai';
 import { isFetchLandRelevant } from './land-intelligence';
-import { getScaledCurve, getTemplate, getTemplateSummary, mergeWithCommanderProfile } from './deck-templates';
+import { getTemplate, getTemplateSummary, mergeWithCommanderProfile } from './deck-templates';
 import { getCommanderStrategyPrompt } from './commander-synergy';
 import type { CommanderSynergyProfile } from './commander-synergy';
 
@@ -255,8 +255,7 @@ function buildClaudePrompt(
   edhrecCards: string[],
   commanderName: string,
 ): string {
-  const db = getDb();
-  const { commanderCard, commanderProfile, resolvedStrategy, themes, nonLandTarget, landTarget, colors } = poolResult;
+  const { commanderCard, commanderProfile, resolvedStrategy, nonLandTarget, landTarget, colors } = poolResult;
 
   // Commander info
   const cmdOracle = commanderCard?.oracle_text || 'Unknown';

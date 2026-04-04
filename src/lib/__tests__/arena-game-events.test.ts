@@ -4,7 +4,6 @@ import {
   extractGameEventsWithContext,
   createContext,
   ZONE_TYPES,
-  type ArenaGameEvent,
 } from '../arena-game-events';
 import type { JsonBlock } from '../arena-log-reader';
 

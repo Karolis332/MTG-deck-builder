@@ -15,7 +15,7 @@
  * - Draft tracker
  */
 
-import { checkIsOverwolf, getElectronAPI } from './electron-bridge';
+import { checkIsOverwolf } from './electron-bridge';
 
 export type PremiumFeature =
   | 'ai_suggestions'

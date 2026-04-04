@@ -1,6 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import { GameStateEngine } from '../game-state-engine';
-import type { ArenaGameEvent } from '../arena-game-events';
 
 describe('GameStateEngine', () => {
   let engine: GameStateEngine;

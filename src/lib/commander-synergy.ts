@@ -9,7 +9,7 @@
  * deck-building requirements (minimum card counts, search patterns, score bonuses).
  */
 
-import type { Archetype, ArchetypeTemplate } from './deck-templates';
+import type { Archetype } from './deck-templates';
 
 // ── Types ────────────────────────────────────────────────────────────────────
 

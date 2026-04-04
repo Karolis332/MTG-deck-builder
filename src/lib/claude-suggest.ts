@@ -8,7 +8,7 @@
 import { getDb } from '@/lib/db';
 import { COMMANDER_FORMATS } from '@/lib/constants';
 import type { DbCard } from '@/lib/types';
-import { getTemplate, getTemplateSummary, isImpulseDraw } from '@/lib/deck-templates';
+import { getTemplateSummary, isImpulseDraw } from '@/lib/deck-templates';
 import { analyzeCommander, getCommanderStrategyPrompt } from '@/lib/commander-synergy';
 import fs from 'fs';
 import path from 'path';

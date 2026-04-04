@@ -8,8 +8,6 @@ import { ipcMain, dialog, BrowserWindow } from 'electron';
 import fs from 'fs';
 import path from 'path';
 import os from 'os';
-import https from 'https';
-import http from 'http';
 import { saveConfig, transitionToMainApp } from './main';
 
 function getDbDir(): string {

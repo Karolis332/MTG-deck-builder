@@ -106,24 +106,18 @@ export async function POST(request: NextRequest) {
     const preferredProvider = getPreferredProvider();
     const openaiModel = getOpenAIModel();
 
-    // Determine primary provider (used for initial useClaude flag + logging)
-    let useClaude: boolean;
+    // Determine primary API key based on provider preference
     let apiKey: string | null;
     if (preferredProvider === 'xai' && xaiKey) {
-      useClaude = false;
       apiKey = xaiKey;
     } else if (preferredProvider === 'groq' && groqKey) {
-      useClaude = false;
       apiKey = groqKey;
     } else if (preferredProvider === 'openai' && openaiKey) {
-      useClaude = false;
       apiKey = openaiKey;
     } else if (preferredProvider === 'claude' && claudeKey) {
-      useClaude = true;
       apiKey = claudeKey;
     } else {
       // Auto: Claude → OpenAI → Groq → xAI
-      useClaude = !!claudeKey;
       apiKey = claudeKey || openaiKey || groqKey || xaiKey;
     }
     const useLocalEngine = !apiKey;
