@@ -57,6 +57,9 @@ arena_card_database*.sqlite
 nul
 electron-error.log
 
+# marketing screenshots (generated)
+marketing/screenshots/
+
 # claude code
 .claude/
 
