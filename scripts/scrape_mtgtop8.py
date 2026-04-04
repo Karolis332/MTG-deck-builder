@@ -12,12 +12,19 @@ Usage:
 """
 
 import argparse
+import io
 import os
 import re
 import sqlite3
 import sys
 import time
 from datetime import datetime, timedelta
+
+# Force UTF-8 stdout/stderr on Windows to prevent UnicodeEncodeError
+# when printing event names with non-ASCII characters (e.g., right-single-quote)
+if sys.platform == "win32":
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding="utf-8", errors="replace")
 
 try:
     import requests
@@ -36,6 +43,7 @@ FORMATS = {
 
 BASE_URL = "https://www.mtgtop8.com"
 RATE_LIMIT_SEC = 1.0
+MAX_RETRIES = 3
 
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
@@ -119,15 +127,42 @@ def is_event_recent(conn: sqlite3.Connection, event_id: str, days: int = 7) -> b
     return datetime.now() - last < timedelta(days=days)
 
 
-def fetch_page(url: str) -> str | None:
-    """Fetch a page with rate limiting and error handling."""
-    try:
-        resp = requests.get(url, headers=HEADERS, timeout=30)
-        resp.raise_for_status()
-        return resp.text
-    except requests.RequestException as e:
-        print(f"  ERROR fetching {url}: {e}", file=sys.stderr)
-        return None
+def fetch_page(url: str, retries: int = MAX_RETRIES) -> str | None:
+    """Fetch a page with retry logic, exponential backoff, and error handling."""
+    for attempt in range(1, retries + 1):
+        try:
+            resp = requests.get(url, headers=HEADERS, timeout=30)
+
+            # Retry on server errors and rate limits
+            if resp.status_code == 429 or resp.status_code >= 500:
+                wait = 2 ** attempt
+                print(f"  HTTP {resp.status_code} on {url}, retry {attempt}/{retries} in {wait}s",
+                      file=sys.stderr)
+                time.sleep(wait)
+                continue
+
+            resp.raise_for_status()
+            return resp.text
+
+        except requests.ConnectionError as e:
+            wait = 2 ** attempt
+            print(f"  Connection error on {url} (attempt {attempt}/{retries}): {e}",
+                  file=sys.stderr)
+            if attempt < retries:
+                time.sleep(wait)
+            continue
+        except requests.Timeout:
+            wait = 2 ** attempt
+            print(f"  Timeout on {url} (attempt {attempt}/{retries})", file=sys.stderr)
+            if attempt < retries:
+                time.sleep(wait)
+            continue
+        except requests.RequestException as e:
+            print(f"  ERROR fetching {url}: {e}", file=sys.stderr)
+            return None
+
+    print(f"  FAILED after {retries} attempts: {url}", file=sys.stderr)
+    return None
 
 
 def parse_event_list(html: str, fmt_code: str) -> list[dict]:
@@ -427,46 +462,53 @@ def scrape_format(conn: sqlite3.Connection, fmt: str, fmt_code: str,
     print(f"  Found {len(events)} events")
 
     for i, event in enumerate(events[:max_events]):
-        if is_event_recent(conn, event["event_id"], days=7):
-            print(f"  [{i+1}/{min(len(events), max_events)}] SKIP {event['name']} (recent)")
-            stats["skipped"] += 1
-            continue
+        try:
+            if is_event_recent(conn, event["event_id"], days=7):
+                print(f"  [{i+1}/{min(len(events), max_events)}] SKIP {event['name']} (recent)")
+                stats["skipped"] += 1
+                continue
 
-        print(f"  [{i+1}/{min(len(events), max_events)}] {event['name']} ({event.get('date', '?')})")
+            print(f"  [{i+1}/{min(len(events), max_events)}] {event['name']} ({event.get('date', '?')})")
 
-        time.sleep(RATE_LIMIT_SEC)
-
-        event_url = f"{BASE_URL}/event?e={event['event_id']}&f={fmt_code}"
-        event_html = fetch_page(event_url)
-        if not event_html:
-            stats["errors"] += 1
-            continue
-
-        decks = parse_event_decks(event_html, event["event_id"], fmt_code)
-        print(f"    {len(decks)} decks listed")
-
-        for j, deck_info in enumerate(decks[:max_decks_per_event]):
             time.sleep(RATE_LIMIT_SEC)
 
-            deck_html = fetch_page(deck_info["url"])
-            if not deck_html:
+            event_url = f"{BASE_URL}/event?e={event['event_id']}&f={fmt_code}"
+            event_html = fetch_page(event_url)
+            if not event_html:
                 stats["errors"] += 1
                 continue
 
-            cards = parse_decklist(deck_html)
-            if not cards["main"]:
-                print(f"    [{j+1}] {deck_info['deck_name']} — no cards parsed")
-                stats["errors"] += 1
-                continue
+            decks = parse_event_decks(event_html, event["event_id"], fmt_code)
+            print(f"    {len(decks)} decks listed")
 
-            total = sum(q for q, _ in cards["main"]) + sum(q for q, _ in cards.get("sideboard", []))
-            print(f"    [{j+1}] #{deck_info.get('placement', '?')} "
-                  f"{deck_info['deck_name']} — {total} cards")
+            for j, deck_info in enumerate(decks[:max_decks_per_event]):
+                time.sleep(RATE_LIMIT_SEC)
 
-            if save_deck(conn, fmt, event, deck_info, cards):
-                stats["decks_saved"] += 1
-            else:
-                stats["errors"] += 1
+                deck_html = fetch_page(deck_info["url"])
+                if not deck_html:
+                    stats["errors"] += 1
+                    continue
+
+                cards = parse_decklist(deck_html)
+                if not cards["main"]:
+                    print(f"    [{j+1}] {deck_info['deck_name']} — no cards parsed")
+                    stats["errors"] += 1
+                    continue
+
+                total = sum(q for q, _ in cards["main"]) + sum(q for q, _ in cards.get("sideboard", []))
+                print(f"    [{j+1}] #{deck_info.get('placement', '?')} "
+                      f"{deck_info['deck_name']} — {total} cards")
+
+                if save_deck(conn, fmt, event, deck_info, cards):
+                    stats["decks_saved"] += 1
+                else:
+                    stats["errors"] += 1
+
+        except Exception as e:
+            print(f"  ERROR processing event {event.get('event_id', '?')}: {e}",
+                  file=sys.stderr)
+            stats["errors"] += 1
+            continue
 
     return stats
 

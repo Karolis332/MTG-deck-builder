@@ -251,13 +251,22 @@ def aggregate_format(conn: sqlite3.Connection, fmt: str,
     if not deck_ids:
         return stats
 
-    placeholders = ",".join("?" * len(deck_ids))
-    cards_df = pd.read_sql_query(f"""
-        SELECT cdc.community_deck_id, cdc.card_name, cdc.quantity, cdc.board
-        FROM community_deck_cards cdc
-        WHERE cdc.community_deck_id IN ({placeholders})
-        AND cdc.board = 'main'
-    """, conn, params=deck_ids)
+    # SQLite has a limit of 999 variables per query. Batch the IN clause
+    # to avoid "too many SQL variables" when deck count exceeds that limit.
+    BATCH_SIZE = 500
+    card_frames = []
+    for batch_start in range(0, len(deck_ids), BATCH_SIZE):
+        batch = deck_ids[batch_start:batch_start + BATCH_SIZE]
+        placeholders = ",".join("?" * len(batch))
+        batch_df = pd.read_sql_query(f"""
+            SELECT cdc.community_deck_id, cdc.card_name, cdc.quantity, cdc.board
+            FROM community_deck_cards cdc
+            WHERE cdc.community_deck_id IN ({placeholders})
+            AND cdc.board = 'main'
+        """, conn, params=batch)
+        card_frames.append(batch_df)
+
+    cards_df = pd.concat(card_frames, ignore_index=True) if card_frames else pd.DataFrame()
 
     if cards_df.empty:
         print(f"  No card entries found")
