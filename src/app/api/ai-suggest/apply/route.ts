@@ -46,12 +46,18 @@ export async function POST(request: NextRequest) {
 
         for (const change of filteredChanges) {
           if (change.action !== 'add') continue;
+          // Name-based check: different printings of the same card count as owned
           const inCollection = db.prepare(
-            'SELECT 1 FROM collection WHERE user_id = ? AND card_id = ? AND quantity > 0'
-          ).get(userId, change.cardId);
+            `SELECT 1 FROM collection col JOIN cards c ON col.card_id = c.id
+             WHERE col.user_id = ? AND (c.name = ? COLLATE NOCASE OR c.name LIKE ? COLLATE NOCASE) AND col.quantity > 0`
+          ).get(userId, change.cardName, `${change.cardName} //%`);
 
           if (!inCollection) {
-            invalidCardNames.add(change.cardName);
+            // Also allow basic lands (Arena gives unlimited)
+            const isBasic = ['Plains', 'Island', 'Swamp', 'Mountain', 'Forest', 'Wastes'].includes(change.cardName);
+            if (!isBasic) {
+              invalidCardNames.add(change.cardName);
+            }
           }
         }
 
@@ -137,9 +143,9 @@ export async function POST(request: NextRequest) {
             existing = db.prepare(
               `SELECT dc.id, dc.quantity FROM deck_cards dc
                JOIN cards c ON dc.card_id = c.id
-               WHERE dc.deck_id = ? AND c.name = ? AND dc.board = ?
+               WHERE dc.deck_id = ? AND (c.name = ? OR c.name LIKE ? COLLATE NOCASE) AND dc.board = ?
                LIMIT 1`
-            ).get(deck_id, change.cardName, 'main') as { id: number; quantity: number } | undefined;
+            ).get(deck_id, change.cardName, `${change.cardName} //%`, 'main') as { id: number; quantity: number } | undefined;
           }
 
           if (existing) {

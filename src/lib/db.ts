@@ -146,7 +146,11 @@ export function searchCards(
   }
 
   if (options?.collectionOnly && options?.userId != null) {
-    extraJoins.push('INNER JOIN collection col ON c.id = col.card_id AND col.user_id = ?');
+    extraJoins.push(`INNER JOIN (
+      SELECT DISTINCT c2.name AS cname FROM collection col2 JOIN cards c2 ON col2.card_id = c2.id WHERE col2.user_id = ?
+      UNION SELECT 'Plains' UNION SELECT 'Island' UNION SELECT 'Swamp'
+      UNION SELECT 'Mountain' UNION SELECT 'Forest' UNION SELECT 'Wastes'
+    ) owned ON c.name = owned.cname`);
     extraParams.push(options.userId);
   }
 
@@ -1211,6 +1215,82 @@ export function getFormatStaples(
     .slice(0, limit);
 }
 
+/**
+ * Community co-occurrence recommendations.
+ * Given a deck's card names, finds community decks sharing the most cards,
+ * then returns the most popular cards from those similar decks that aren't
+ * already in the input deck.
+ *
+ * Uses "signature" cards (non-basic-lands) to find similar decks efficiently.
+ */
+export function getCommunityRecommendations(
+  deckCardNames: string[],
+  format: string,
+  limit: number = 50
+): Array<{ cardName: string; deckCount: number; totalSimilarDecks: number; score: number }> {
+  const db = getDb();
+
+  // Use up to 20 signature cards (non-basic-lands) for similarity matching
+  const basics = new Set(['plains', 'island', 'swamp', 'mountain', 'forest',
+    'snow-covered plains', 'snow-covered island', 'snow-covered swamp',
+    'snow-covered mountain', 'snow-covered forest', 'wastes']);
+  const signatureCards = deckCardNames
+    .filter(n => !basics.has(n.toLowerCase()))
+    .slice(0, 20);
+
+  if (signatureCards.length < 2) return [];
+
+  const formatChain = getFormatChain(format);
+  const formatPlaceholders = formatChain.map(() => '?').join(',');
+  const cardPlaceholders = signatureCards.map(() => '?').join(',');
+  const excludePlaceholders = deckCardNames.map(() => '?').join(',');
+
+  // Minimum shared cards scales with signature count
+  const minShared = Math.max(2, Math.floor(signatureCards.length * 0.15));
+
+  try {
+    const rows = db.prepare(`
+      WITH similar_decks AS (
+        SELECT cdc.community_deck_id, COUNT(*) as shared_count
+        FROM community_deck_cards cdc
+        JOIN community_decks cd ON cd.id = cdc.community_deck_id
+        WHERE cdc.card_name IN (${cardPlaceholders})
+        AND cd.format IN (${formatPlaceholders})
+        GROUP BY cdc.community_deck_id
+        HAVING COUNT(*) >= ${minShared}
+        ORDER BY shared_count DESC
+        LIMIT 500
+      )
+      SELECT cdc2.card_name,
+             COUNT(DISTINCT cdc2.community_deck_id) as deck_count,
+             (SELECT COUNT(*) FROM similar_decks) as total_similar
+      FROM community_deck_cards cdc2
+      JOIN similar_decks sd ON cdc2.community_deck_id = sd.community_deck_id
+      WHERE cdc2.card_name NOT IN (${excludePlaceholders})
+      AND cdc2.board = 'main'
+      GROUP BY cdc2.card_name
+      ORDER BY deck_count DESC
+      LIMIT ?
+    `).all(
+      ...signatureCards,
+      ...formatChain,
+      ...deckCardNames,
+      limit
+    ) as Array<{ card_name: string; deck_count: number; total_similar: number }>;
+
+    const totalSimilar = rows.length > 0 ? (rows[0].total_similar || 1) : 1;
+
+    return rows.map(r => ({
+      cardName: r.card_name,
+      deckCount: r.deck_count,
+      totalSimilarDecks: totalSimilar,
+      score: r.deck_count / totalSimilar, // 0..1 co-occurrence rate
+    }));
+  } catch {
+    return [];
+  }
+}
+
 export function autoLinkByCardsPlayed(): { linked: number; total: number } {
   const db = getDb();
   const unlinked = db.prepare(
@@ -1277,4 +1357,106 @@ export function autoLinkByCardsPlayed(): { linked: number; total: number } {
   }
 
   return { linked, total: unlinked.length };
+}
+
+/**
+ * Log an AI suggestion call for quality/cost tracking.
+ */
+export function logAISuggestion(entry: {
+  deckId?: number;
+  source: string;
+  model?: string;
+  format?: string;
+  promptTokens?: number;
+  completionTokens?: number;
+  totalTokens?: number;
+  suggestionCount?: number;
+  cardsSuggested?: string[];
+  latencyMs?: number;
+  error?: string;
+}): number {
+  const db = getDb();
+  const result = db.prepare(`
+    INSERT INTO ai_suggestion_log
+      (deck_id, source, model, format, prompt_tokens, completion_tokens, total_tokens,
+       suggestion_count, cards_suggested, latency_ms, error)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+  `).run(
+    entry.deckId ?? null,
+    entry.source,
+    entry.model ?? null,
+    entry.format ?? null,
+    entry.promptTokens ?? 0,
+    entry.completionTokens ?? 0,
+    entry.totalTokens ?? 0,
+    entry.suggestionCount ?? 0,
+    entry.cardsSuggested ? JSON.stringify(entry.cardsSuggested) : null,
+    entry.latencyMs ?? null,
+    entry.error ?? null,
+  );
+  return result.lastInsertRowid as number;
+}
+
+/**
+ * Record that the user accepted/rejected suggestions from a log entry.
+ */
+export function updateSuggestionAcceptance(logId: number, accepted: string[], rejected: string[]) {
+  const db = getDb();
+  db.prepare(`
+    UPDATE ai_suggestion_log
+    SET accepted_count = ?, rejected_count = ?,
+        cards_accepted = ?
+    WHERE id = ?
+  `).run(accepted.length, rejected.length, JSON.stringify(accepted), logId);
+}
+
+/**
+ * Get AI suggestion quality stats by model/source.
+ */
+export function getAISuggestionStats(): Array<{
+  source: string;
+  model: string | null;
+  totalCalls: number;
+  totalSuggestions: number;
+  totalAccepted: number;
+  totalRejected: number;
+  acceptRate: number;
+  avgLatencyMs: number;
+  totalPromptTokens: number;
+  totalCompletionTokens: number;
+  totalTokens: number;
+}> {
+  const db = getDb();
+  return db.prepare(`
+    SELECT
+      source,
+      model,
+      COUNT(*) as totalCalls,
+      SUM(suggestion_count) as totalSuggestions,
+      SUM(accepted_count) as totalAccepted,
+      SUM(rejected_count) as totalRejected,
+      CASE WHEN SUM(accepted_count) + SUM(rejected_count) > 0
+        THEN ROUND(CAST(SUM(accepted_count) AS REAL) / (SUM(accepted_count) + SUM(rejected_count)) * 100, 1)
+        ELSE 0 END as acceptRate,
+      ROUND(AVG(latency_ms)) as avgLatencyMs,
+      SUM(prompt_tokens) as totalPromptTokens,
+      SUM(completion_tokens) as totalCompletionTokens,
+      SUM(total_tokens) as totalTokens
+    FROM ai_suggestion_log
+    WHERE error IS NULL
+    GROUP BY source, model
+    ORDER BY totalCalls DESC
+  `).all() as Array<{
+    source: string;
+    model: string | null;
+    totalCalls: number;
+    totalSuggestions: number;
+    totalAccepted: number;
+    totalRejected: number;
+    acceptRate: number;
+    avgLatencyMs: number;
+    totalPromptTokens: number;
+    totalCompletionTokens: number;
+    totalTokens: number;
+  }>;
 }

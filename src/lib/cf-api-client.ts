@@ -6,6 +6,7 @@
  */
 
 import { getDb } from '@/lib/db';
+import { CF_API_DEFAULT_URL } from '@/lib/constants';
 import type { DbCard } from '@/lib/types';
 
 // ── Types ────────────────────────────────────────────────────────────────────
@@ -44,13 +45,13 @@ export interface SimilarDecksResponse {
 const CF_TIMEOUT_MS = 5000;
 const LOCAL_CACHE_TTL_HOURS = 24;
 
-function getCFApiUrl(): string {
+export function getCFApiUrl(): string {
   try {
     const db = getDb();
     const row = db.prepare("SELECT value FROM app_state WHERE key = 'cf_api_url'").get() as { value: string } | undefined;
     if (row?.value) return row.value;
   } catch {}
-  return 'http://187.77.110.100/cf-api';
+  return CF_API_DEFAULT_URL;
 }
 
 function isCFEnabled(): boolean {
@@ -63,7 +64,7 @@ function isCFEnabled(): boolean {
   }
 }
 
-function getCFApiKey(): string {
+export function getCFApiKey(): string {
   try {
     const db = getDb();
     const row = db.prepare("SELECT value FROM app_state WHERE key = 'cf_api_key'").get() as { value: string } | undefined;
@@ -73,7 +74,7 @@ function getCFApiKey(): string {
   }
 }
 
-function buildHeaders(): Record<string, string> {
+export function buildCFHeaders(): Record<string, string> {
   const headers: Record<string, string> = { 'Content-Type': 'application/json' };
   const apiKey = getCFApiKey();
   if (apiKey) {
@@ -162,7 +163,7 @@ export async function getCFRecommendations(
 
     const resp = await fetch(`${url}/recommend`, {
       method: 'POST',
-      headers: buildHeaders(),
+      headers: buildCFHeaders(),
       body: JSON.stringify({ cards: deckCards, commander, limit }),
       signal: controller.signal,
     });
@@ -195,7 +196,7 @@ export async function getSimilarDecks(
 
     const resp = await fetch(`${url}/similar-decks`, {
       method: 'POST',
-      headers: buildHeaders(),
+      headers: buildCFHeaders(),
       body: JSON.stringify({ cards: deckCards, commander, limit }),
       signal: controller.signal,
     });
@@ -278,7 +279,7 @@ export async function getEDHRECConsensus(
 
     const resp = await fetch(`${url}/edhrec-consensus`, {
       method: 'POST',
-      headers: buildHeaders(),
+      headers: buildCFHeaders(),
       body: JSON.stringify({ cards: deckCards, commander }),
       signal: controller.signal,
     });

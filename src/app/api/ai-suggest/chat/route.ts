@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getDb, getDeckWithCards, getFormatStaples, getMetaCardStatsMap } from '@/lib/db';
+import { getDb, getDeckWithCards, getFormatStaples, getMetaCardStatsMap, getCommunityRecommendations, logAISuggestion } from '@/lib/db';
 import { DEFAULT_LAND_COUNT, DEFAULT_DECK_SIZE, COMMANDER_FORMATS } from '@/lib/constants';
 import { fitsColorIdentity, isLegalInFormat, extractRejectedCards, buildRejectionReminder, extractAppliedActions, buildAntiOscillationRules } from '@/lib/ai-chat-helpers';
 import { queryKnowledge, formatKnowledgeForPrompt } from '@/lib/knowledge-retrieval';
@@ -295,7 +295,8 @@ export async function POST(request: NextRequest) {
       // Exclude cards already in deck
       filteredCollectionNames = filteredCards
         .map(c => c.name)
-        .filter(name => !existingCardNameSet.has(name.toLowerCase()));
+        .filter(name => !existingCardNameSet.has(name.toLowerCase()))
+        .slice(0, 300);
 
       console.log(`[AI Chat] Collection filtered: ${allCollectionCards.length} total → ${filteredCollectionNames.length} in color identity {${deckColors.join(',')}}`);
     }
@@ -393,8 +394,7 @@ export async function POST(request: NextRequest) {
     for (const c of mainCards) {
       const mainType = c.type_line.split('—')[0].trim().split(' ').pop() || 'Other';
       if (!deckByType[mainType]) deckByType[mainType] = [];
-      const oracle = c.oracle_text ? ` — ${c.oracle_text.replace(/\n/g, '; ')}` : '';
-      deckByType[mainType].push(`${c.quantity}x ${c.name} (CMC:${c.cmc})${oracle}`);
+      deckByType[mainType].push(`${c.quantity}x ${c.name} (${c.cmc})`);
     }
     const deckSummary = Object.entries(deckByType)
       .map(([type, cards]) => `${type} (${cards.length}):\n${cards.join('\n')}`)
@@ -423,7 +423,7 @@ export async function POST(request: NextRequest) {
     for (const c of [...mainCards, ...commanderCards]) {
       const mainType = c.type_line?.split('—')[0].trim().split(' ').pop() || 'Other';
       if (!cardListByType[mainType]) cardListByType[mainType] = [];
-      cardListByType[mainType].push(`  ${c.quantity}x ${c.name}`);
+      cardListByType[mainType].push(`  ${c.quantity}x ${c.name} (${c.cmc})`);
     }
     const cardNameListGrouped = Object.entries(cardListByType)
       .map(([type, cards]) => `${type}:\n${cards.join('\n')}`)
@@ -651,6 +651,37 @@ export async function POST(request: NextRequest) {
       }
     }
 
+    // ── Community Co-occurrence Recommendations (from 507k+ decks) ────
+    let communityCoOccBlock = '';
+    {
+      const deckCardNames = [...mainCards, ...commanderCards].map(c => c.name);
+      const coOccRecs = getCommunityRecommendations(deckCardNames, format, 25);
+      if (coOccRecs.length > 0) {
+        const existingLower = new Set(deckCardNames.map(n => n.toLowerCase()));
+        const missing = coOccRecs.filter(r => !existingLower.has(r.cardName.toLowerCase()));
+        const present = coOccRecs.filter(r => existingLower.has(r.cardName.toLowerCase()));
+
+        if (missing.length > 0 || present.length > 0) {
+          communityCoOccBlock = `\n═══ COMMUNITY CO-OCCURRENCE (${coOccRecs[0]?.totalSimilarDecks || 0} similar decks found) ═══\n`;
+          communityCoOccBlock += `Cards most frequently played alongside YOUR deck's cards in 507k+ community decks:\n`;
+
+          if (present.length > 0) {
+            communityCoOccBlock += `\nAlready in deck (validated): ${present.slice(0, 8).map(r =>
+              `${r.cardName} (${Math.round(r.score * 100)}%)`
+            ).join(', ')}\n`;
+          }
+
+          if (missing.length > 0) {
+            communityCoOccBlock += `\nHIGHLY RECOMMENDED ADDS (community co-occurrence):\n`;
+            communityCoOccBlock += missing.slice(0, 15).map(r =>
+              `- ${r.cardName} — in ${Math.round(r.score * 100)}% of similar decks (${r.deckCount}/${r.totalSimilarDecks})`
+            ).join('\n');
+            communityCoOccBlock += `\n\nThese cards are data-backed — they appear frequently alongside your existing cards across hundreds of real decks.`;
+          }
+        }
+      }
+    }
+
     // System prompt — explicit and strict to prevent common errors
     const systemPrompt = `You are an expert MTG deck tuning assistant.
 
@@ -698,15 +729,13 @@ ${isCommanderLike ? `□ Do my CUTs equal my ADDs? (Required for ${format})` : '
 □ Are all my ADD cards legal in ${format}?
 □ Did I count the final deck size: ${currentMainCount} - cuts + adds = ?
 
-═══════════════════════════════════════════════════════════
-CURRENT DECKLIST (with oracle text for reasoning)
-═══════════════════════════════════════════════════════════
-${deckSummary}
+${commanderCards.length > 0 ? `═══ COMMANDER ABILITIES ═══\n${commanderCards.map(c => `${c.name}: ${(c.oracle_text || '').replace(/\n/g, '; ')}`).join('\n')}` : ''}
 
 ${communityKnowledge}
 ${edhrecLiveBlock}
 ${formatStaplesBlock}
 ${metaStatsBlock}
+${communityCoOccBlock}
 ${mlPredictions}
 ${cfRecommendations}
 ${cfConsensus}
@@ -735,17 +764,11 @@ CRITICAL: Your ENTIRE response must be a single JSON object. No prose before or 
       // This is critical because the deck may have changed since last turn
       messages.push({
         role: 'system',
-        content: `═══ FRESH DECK STATE UPDATE ═══
-The deck may have changed since your last response. Here is the CURRENT state:
-- Main deck: ${currentMainCount}/${effectiveTarget} cards (${sizeStatus})
-- Lands: ${landCount}/${targetLands}
-- ALL cards now in deck:
-${cardNameListGrouped}
-${hasCollection ? `- Collection cards available (${filteredCollectionNames.length} in deck colors): ${filteredCollectionNames.join(', ')}` : ''}
-
-${isCommanderLike ? `CRITICAL: Deck MUST stay at ${effectiveTarget} cards. Every ADD needs a CUT.` : ''}
-${hasCollection ? 'ONLY suggest ADD cards from the collection list above.' : ''}
-Remember to check the card list above to avoid suggesting duplicates!`,
+        content: `═══ FRESH DECK STATE ═══
+Main deck: ${currentMainCount}/${effectiveTarget} (${sizeStatus}). Lands: ${landCount}/${targetLands}.
+${isCommanderLike ? `Deck MUST stay at ${effectiveTarget}. Every ADD needs a CUT.` : ''}
+${hasCollection ? `ONLY suggest ADD cards from the collection (${filteredCollectionNames.length} in deck colors).` : ''}
+Refer to the ALL CARDS list in the system prompt to avoid suggesting duplicates.`,
       });
     }
 
@@ -1413,6 +1436,7 @@ Remember to check the card list above to avoid suggesting duplicates!`,
     }
 
     console.log(`[AI Chat] Streaming from ${activeProvider.name}`);
+    const chatStartMs = Date.now();
 
     // Stream SSE to client — buffer JSON responses, only stream natural text
     const encoder = new TextEncoder();
@@ -1476,6 +1500,21 @@ Remember to check the card list above to avoid suggesting duplicates!`,
                 if (isComplete && !completed) {
                   completed = true;
                   const result = validateAndResolve(fullText);
+                  // Log the chat suggestion for quality tracking
+                  try {
+                    const actionCards = result.actions
+                      ?.filter((a: ChatAction) => a.action === 'add' || a.action === 'swap')
+                      .map((a: ChatAction) => a.replaceWith || a.cardName) || [];
+                    logAISuggestion({
+                      deckId: deck_id,
+                      source: `chat-${activeProvider!.name}`,
+                      model: activeProvider!.isClaude ? 'claude' : activeProvider!.model,
+                      format,
+                      suggestionCount: actionCards.length,
+                      cardsSuggested: actionCards,
+                      latencyMs: Date.now() - chatStartMs,
+                    });
+                  } catch { /* logging should never break the response */ }
                   controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: 'complete', message: result.message, actions: result.actions })}\n\n`));
                 }
               } catch {

@@ -105,6 +105,7 @@ interface ScoreOptions {
   commanderName?: string;
   userId?: number;
   manaDemand?: ManaDemand;
+  collectionOnly?: boolean;
 }
 
 /**
@@ -112,18 +113,28 @@ interface ScoreOptions {
  * Returns scored lands sorted by score descending.
  */
 export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
-  const { colors, format, tribalTypes, commanderName, manaDemand } = options;
+  const { colors, format, tribalTypes, commanderName, manaDemand, collectionOnly } = options;
   const db = getDb();
 
   // Build legality filter
   const legalityKey = getLegalityKey(format);
   const legalityFilter = `AND json_extract(c.legalities, '$.${legalityKey}') IN ('legal', 'restricted')`;
 
+  // Collection filter: name-based join with basic land exemptions
+  const colJoin = collectionOnly
+    ? `INNER JOIN (
+        SELECT DISTINCT c2.name AS cname FROM collection col2 JOIN cards c2 ON col2.card_id = c2.id
+        UNION SELECT 'Plains' UNION SELECT 'Island' UNION SELECT 'Swamp'
+        UNION SELECT 'Mountain' UNION SELECT 'Forest' UNION SELECT 'Wastes'
+      ) owned ON c.name = owned.cname`
+    : '';
+
   // Fetch all non-basic lands with classifications
   const lands = db.prepare(`
     SELECT c.*, lc.land_category, lc.produces_colors, lc.enters_untapped,
            lc.enters_untapped_condition, lc.tribal_types, lc.synergy_tags, lc.tier
     FROM cards c
+    ${colJoin}
     LEFT JOIN land_classifications lc ON lc.card_id = c.id
     WHERE c.type_line LIKE '%Land%'
     AND c.type_line NOT LIKE '%Basic%'
@@ -238,6 +249,12 @@ export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
       reasons.push(`meta ${Math.round(metaRate * 100)}%`);
     }
 
+    // ── MDFC bonus — spell//land modal cards are extremely versatile ──
+    if (land.type_line.includes('//')) {
+      score += 25;
+      reasons.push('MDFC (spell+land)');
+    }
+
     // ── EDHREC rank as tiebreaker ────────────────────────────────
     if (land.edhrec_rank && land.edhrec_rank < 5000) {
       score += Math.round(10 * (1 - land.edhrec_rank / 5000));
@@ -286,7 +303,7 @@ interface BuildOptions {
 export function buildOptimalLandBase(options: BuildOptions): LandBaseResult {
   const {
     colors, format, strategy, targetLandCount, tribalTypes,
-    commanderName, existingNonLandCards, userId, isCommander,
+    commanderName, existingNonLandCards, userId, collectionOnly, isCommander,
   } = options;
 
   // Analyze mana demands if we have the non-land cards
@@ -296,7 +313,7 @@ export function buildOptimalLandBase(options: BuildOptions): LandBaseResult {
 
   // Score all available lands
   const scored = scoreLandsForDeck({
-    colors, format, strategy, tribalTypes, commanderName, userId, manaDemand,
+    colors, format, strategy, tribalTypes, commanderName, userId, manaDemand, collectionOnly,
   });
 
   // Determine non-basic target based on color count

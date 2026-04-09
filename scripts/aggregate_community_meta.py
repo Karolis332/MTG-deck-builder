@@ -229,149 +229,177 @@ def compute_archetype_win_stats(conn: sqlite3.Connection, fmt: str) -> dict[str,
 
 def aggregate_format(conn: sqlite3.Connection, fmt: str,
                      archetype_stats: dict[str, dict]) -> dict:
-    """Compute meta stats for all cards in a given format."""
+    """Compute meta stats for all cards in a given format.
+
+    Uses SQL-side aggregation via a temp table to avoid loading millions
+    of community_deck_cards rows into Python/pandas.
+    """
     stats = {"cards_computed": 0, "total_decks": 0}
 
-    decks_df = pd.read_sql_query("""
-        SELECT cd.id, cd.archetype, cd.placement, cd.meta_share, cd.source,
-               cd.wins, cd.losses
-        FROM community_decks cd
-        WHERE cd.format = ?
-    """, conn, params=(fmt,))
+    total_decks = conn.execute(
+        "SELECT COUNT(*) FROM community_decks WHERE format = ?", (fmt,)
+    ).fetchone()[0]
 
-    if decks_df.empty:
+    if total_decks == 0:
         print(f"  No community decks for format '{fmt}'")
         return stats
 
-    total_decks = len(decks_df)
     stats["total_decks"] = total_decks
     print(f"  {total_decks} community decks for '{fmt}'")
 
-    deck_ids = decks_df["id"].tolist()
-    if not deck_ids:
-        return stats
+    # ── Step 1: Build temp table with one row per (card, deck) pair ──
+    # The expensive JOIN happens once; all subsequent queries hit the temp table.
+    print(f"  Building card-deck join (SQL)...")
+    conn.execute("DROP TABLE IF EXISTS temp.card_deck")
+    conn.execute("""
+        CREATE TEMP TABLE card_deck AS
+        SELECT
+            cdc.card_name,
+            cdc.community_deck_id,
+            MAX(cdc.quantity) AS quantity,
+            cd.archetype,
+            cd.placement,
+            cd.meta_share,
+            cd.wins,
+            cd.losses
+        FROM community_deck_cards cdc
+        JOIN community_decks cd ON cdc.community_deck_id = cd.id
+        WHERE cd.format = ? AND cdc.board = 'main'
+        GROUP BY cdc.card_name, cdc.community_deck_id
+    """, (fmt,))
 
-    # SQLite has a limit of 999 variables per query. Batch the IN clause
-    # to avoid "too many SQL variables" when deck count exceeds that limit.
-    BATCH_SIZE = 500
-    card_frames = []
-    for batch_start in range(0, len(deck_ids), BATCH_SIZE):
-        batch = deck_ids[batch_start:batch_start + BATCH_SIZE]
-        placeholders = ",".join("?" * len(batch))
-        batch_df = pd.read_sql_query(f"""
-            SELECT cdc.community_deck_id, cdc.card_name, cdc.quantity, cdc.board
-            FROM community_deck_cards cdc
-            WHERE cdc.community_deck_id IN ({placeholders})
-            AND cdc.board = 'main'
-        """, conn, params=batch)
-        card_frames.append(batch_df)
+    temp_count = conn.execute("SELECT COUNT(*) FROM temp.card_deck").fetchone()[0]
+    print(f"  {temp_count:,} card-deck pairs")
 
-    cards_df = pd.concat(card_frames, ignore_index=True) if card_frames else pd.DataFrame()
-
-    if cards_df.empty:
+    if temp_count == 0:
         print(f"  No card entries found")
+        conn.execute("DROP TABLE IF EXISTS temp.card_deck")
         return stats
 
-    merged = cards_df.merge(decks_df, left_on="community_deck_id", right_on="id", how="left")
+    # ── Step 2: Per-card basic stats via SQL GROUP BY ────────────────
+    print(f"  Aggregating per-card stats...")
+    card_rows = conn.execute("""
+        SELECT
+            card_name,
+            COUNT(*)                 AS num_decks_in,
+            AVG(quantity)            AS avg_copies,
+            AVG(
+                CASE
+                    WHEN wins IS NOT NULL AND losses IS NOT NULL
+                         AND (wins + losses) > 0
+                        THEN CAST(wins AS REAL) / (wins + losses)
+                    WHEN placement = 1  THEN 1.0
+                    WHEN placement = 2  THEN 0.9
+                    WHEN placement <= 4 THEN 0.8
+                    WHEN placement <= 8 THEN 0.65
+                    WHEN placement <= 16 THEN 0.5
+                    ELSE 0.3
+                END
+                * (1.0 + COALESCE(meta_share, 0) / 100.0)
+            ) AS placement_weighted_score
+        FROM temp.card_deck
+        GROUP BY card_name
+    """).fetchall()
 
-    # Compute placement weights using W-L data when available
-    merged["placement_weight"] = merged.apply(
-        lambda row: compute_placement_weight(
-            row.get("placement"), row.get("wins"), row.get("losses")
-        ), axis=1
-    )
+    card_stats_map: dict[str, tuple] = {}
+    for row in card_rows:
+        # row: (card_name, num_decks_in, avg_copies, placement_weighted_score)
+        card_stats_map[row[0]] = (row[1], row[2], row[3])
 
-    card_groups = merged.groupby("card_name")
+    # ── Step 3: Archetype core rate ─────────────────────────────────
+    print(f"  Computing archetype core rates...")
+    arch_totals: dict[str, int] = {}
+    for row in conn.execute("""
+        SELECT archetype, COUNT(*) FROM community_decks
+        WHERE format = ? AND archetype IS NOT NULL
+        GROUP BY archetype
+    """, (fmt,)):
+        arch_totals[row[0]] = row[1]
 
-    results = []
-    for card_name, group in card_groups:
-        num_decks_in = group["community_deck_id"].nunique()
+    arch_core_rates: dict[str, float] = {}
+    card_arch_map: dict[str, list[str]] = {}
 
-        inclusion_rate = num_decks_in / total_decks
+    for row in conn.execute("""
+        SELECT card_name, archetype, COUNT(*) AS card_in_arch
+        FROM temp.card_deck
+        WHERE archetype IS NOT NULL
+        GROUP BY card_name, archetype
+    """):
+        card_name, archetype, card_in_arch = row[0], row[1], row[2]
+        arch_total = arch_totals.get(archetype, 1)
+        rate = card_in_arch / arch_total
 
-        weights = group.drop_duplicates("community_deck_id")["placement_weight"]
-        meta_shares = group.drop_duplicates("community_deck_id")["meta_share"].fillna(0)
+        if card_name not in arch_core_rates or rate > arch_core_rates[card_name]:
+            arch_core_rates[card_name] = rate
 
-        if meta_shares.sum() > 0:
-            placement_score = (weights * (1 + meta_shares / 100)).mean()
-        else:
-            placement_score = weights.mean()
+        if card_name not in card_arch_map:
+            card_arch_map[card_name] = []
+        card_arch_map[card_name].append(archetype)
 
-        # archetype_core_rate
-        archetype_rates = []
-        for archetype, arch_group in group.groupby("archetype"):
-            if pd.isna(archetype):
-                continue
-            arch_deck_count = decks_df[decks_df["archetype"] == archetype]["id"].nunique()
-            if arch_deck_count > 0:
-                card_in_arch = arch_group["community_deck_id"].nunique()
-                archetype_rates.append(card_in_arch / arch_deck_count)
-
-        archetype_core_rate = max(archetype_rates) if archetype_rates else inclusion_rate
-
-        avg_copies = group["quantity"].mean()
-
-        # Compute archetype_win_rate: weighted average of win rates
-        # for archetypes that include this card, weighted by # decks in each
-        card_archetypes = group.dropna(subset=["archetype"])["archetype"].unique()
-        wr_weighted_sum = 0.0
-        wr_weight_total = 0
-        for arch in card_archetypes:
+    # ── Step 4: Archetype win rate per card ─────────────────────────
+    arch_win_rates: dict[str, float] = {}
+    for card_name, archs in card_arch_map.items():
+        wr_sum = 0.0
+        wr_weight = 0
+        for arch in archs:
             if arch in archetype_stats and archetype_stats[arch]["win_rate"] is not None:
-                arch_info = archetype_stats[arch]
-                # Weight by number of entries (sample confidence)
-                weight = arch_info["sample_size"]
-                wr_weighted_sum += arch_info["win_rate"] * weight
-                wr_weight_total += weight
+                info = archetype_stats[arch]
+                w = info["sample_size"]
+                wr_sum += info["win_rate"] * w
+                wr_weight += w
+        if wr_weight > 0:
+            arch_win_rates[card_name] = wr_sum / wr_weight
 
-        archetype_win_rate = wr_weighted_sum / wr_weight_total if wr_weight_total > 0 else None
+    # ── Step 5: Build result tuples and batch upsert ────────────────
+    results = []
+    for card_name, (num_decks_in, avg_copies, pws) in card_stats_map.items():
+        inclusion_rate = num_decks_in / total_decks
+        core_rate = arch_core_rates.get(card_name, inclusion_rate)
+        win_rate = arch_win_rates.get(card_name)
 
-        results.append({
-            "card_name": card_name,
-            "format": fmt,
-            "meta_inclusion_rate": round(inclusion_rate, 6),
-            "placement_weighted_score": round(placement_score, 6),
-            "archetype_core_rate": round(archetype_core_rate, 6),
-            "avg_copies": round(avg_copies, 4),
-            "num_decks_in": int(num_decks_in),
-            "total_decks_sampled": int(total_decks),
-            "archetype_win_rate": round(archetype_win_rate, 6) if archetype_win_rate is not None else None,
-        })
+        results.append((
+            card_name, fmt,
+            round(inclusion_rate, 6),
+            round(pws, 6),
+            round(core_rate, 6),
+            round(avg_copies, 4),
+            int(num_decks_in),
+            int(total_decks),
+            round(win_rate, 6) if win_rate is not None else None,
+        ))
 
-    # Write to meta_card_stats via UPSERT
-    for r in results:
-        conn.execute("""
-            INSERT INTO meta_card_stats
-                (card_name, format, meta_inclusion_rate, placement_weighted_score,
-                 archetype_core_rate, avg_copies, num_decks_in, total_decks_sampled,
-                 archetype_win_rate, updated_at)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, datetime('now'))
-            ON CONFLICT(card_name, format) DO UPDATE SET
-                meta_inclusion_rate = excluded.meta_inclusion_rate,
-                placement_weighted_score = excluded.placement_weighted_score,
-                archetype_core_rate = excluded.archetype_core_rate,
-                avg_copies = excluded.avg_copies,
-                num_decks_in = excluded.num_decks_in,
-                total_decks_sampled = excluded.total_decks_sampled,
-                archetype_win_rate = excluded.archetype_win_rate,
-                updated_at = datetime('now')
-        """, (r["card_name"], r["format"], r["meta_inclusion_rate"],
-              r["placement_weighted_score"], r["archetype_core_rate"],
-              r["avg_copies"], r["num_decks_in"], r["total_decks_sampled"],
-              r["archetype_win_rate"]))
+    print(f"  Upserting {len(results):,} card stats...")
+    conn.executemany("""
+        INSERT INTO meta_card_stats
+            (card_name, format, meta_inclusion_rate, placement_weighted_score,
+             archetype_core_rate, avg_copies, num_decks_in, total_decks_sampled,
+             archetype_win_rate, updated_at)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, datetime('now'))
+        ON CONFLICT(card_name, format) DO UPDATE SET
+            meta_inclusion_rate   = excluded.meta_inclusion_rate,
+            placement_weighted_score = excluded.placement_weighted_score,
+            archetype_core_rate   = excluded.archetype_core_rate,
+            avg_copies            = excluded.avg_copies,
+            num_decks_in          = excluded.num_decks_in,
+            total_decks_sampled   = excluded.total_decks_sampled,
+            archetype_win_rate    = excluded.archetype_win_rate,
+            updated_at            = datetime('now')
+    """, results)
 
     conn.commit()
+    conn.execute("DROP TABLE IF EXISTS temp.card_deck")
+
     stats["cards_computed"] = len(results)
 
     if results:
-        sorted_results = sorted(results, key=lambda x: x["meta_inclusion_rate"], reverse=True)
-        print(f"  Computed stats for {len(results)} unique cards")
+        sorted_results = sorted(results, key=lambda x: x[2], reverse=True)
+        print(f"  Computed stats for {len(results):,} unique cards")
         print(f"  Top 5 by inclusion rate:")
         for r in sorted_results[:5]:
-            wr_str = f", WR={r['archetype_win_rate']:.1%}" if r['archetype_win_rate'] is not None else ""
-            print(f"    {r['card_name']:30s} {r['meta_inclusion_rate']:.1%} "
-                  f"(in {r['num_decks_in']}/{r['total_decks_sampled']} decks, "
-                  f"avg {r['avg_copies']:.1f} copies{wr_str})")
+            cn, _, incl, _, _, avg_c, n_in, total, wr = r
+            wr_str = f", WR={wr:.1%}" if wr is not None else ""
+            print(f"    {cn:30s} {incl:.1%} "
+                  f"(in {n_in}/{total} decks, avg {avg_c:.1f} copies{wr_str})")
 
     return stats
 

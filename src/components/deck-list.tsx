@@ -311,9 +311,9 @@ function DeckSection({
   return (
     <div>
       {!hideHeader && (
-        <div className="mb-1 flex items-center gap-2 text-sm">
+        <div className="mb-1 flex items-center gap-2 text-base">
           {categoryColor ? (
-            <span className={cn('rounded px-1.5 py-0.5 text-xs font-semibold border', categoryColor)}>
+            <span className={cn('rounded px-1.5 py-0.5 text-sm font-semibold border', categoryColor)}>
               {title}
             </span>
           ) : (
@@ -427,7 +427,7 @@ function DeckCardRow({
         >
           −
         </button>
-        <span className="w-5 text-center text-sm font-medium text-foreground">
+        <span className="w-6 text-center text-base font-medium text-foreground">
           {entry.quantity}
         </span>
         <button
@@ -456,7 +456,7 @@ function DeckCardRow({
       {/* Card name */}
       <span
         className={cn(
-          'flex-1 truncate text-sm',
+          'flex-1 truncate text-base',
           RARITY_COLORS[card.rarity] || 'text-foreground'
         )}
         title={card.name}

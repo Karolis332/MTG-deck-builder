@@ -1,4 +1,4 @@
-import { getDb } from './db';
+import { getDb, getCommunityRecommendations } from './db';
 import type { DbCard, AISuggestion } from './types';
 import { DEFAULT_LAND_COUNT, DEFAULT_DECK_SIZE, getLegalityKey } from './constants';
 
@@ -74,8 +74,15 @@ export function getRuleBasedSuggestions(
   const targetSize = DEFAULT_DECK_SIZE[format] || DEFAULT_DECK_SIZE.default;
   const targetLands = DEFAULT_LAND_COUNT[format] || DEFAULT_LAND_COUNT.default;
 
-  // Collection-only mode: INNER JOIN to only suggest owned cards
-  const colJoin = collectionOnly ? 'INNER JOIN collection col ON c.id = col.card_id' : '';
+  // Collection-only mode: name-based join to handle different printings
+  // Basic lands always included (Arena gives unlimited)
+  const colJoin = collectionOnly
+    ? `INNER JOIN (
+        SELECT DISTINCT c2.name AS cname FROM collection col2 JOIN cards c2 ON col2.card_id = c2.id
+        UNION SELECT 'Plains' UNION SELECT 'Island' UNION SELECT 'Swamp'
+        UNION SELECT 'Mountain' UNION SELECT 'Forest' UNION SELECT 'Wastes'
+      ) owned ON c.name = owned.cname`
+    : '';
   // Format legality filter
   const legalFilter = format ? `AND c.legalities LIKE '%"${getLegalityKey(format)}":"legal"%'` : '';
 
@@ -225,6 +232,42 @@ export function getRuleBasedSuggestions(
     }
   }
 
+  // 5. Community co-occurrence recommendations (from 507k+ scraped decks)
+  const deckCardNames = deckCards.map((c) => c.name);
+  const communityRecs = getCommunityRecommendations(deckCardNames, format, 30);
+  for (const rec of communityRecs) {
+    if (existingCardNames.has(rec.cardName) || suggestedNames.has(rec.cardName)) continue;
+    if (rec.score < 0.08) continue; // at least 8% co-occurrence
+
+    const card = db.prepare('SELECT * FROM cards WHERE name = ? COLLATE NOCASE').get(rec.cardName) as DbCard | undefined;
+    if (!card) continue;
+
+    // Apply collection filter (name-based to handle different printings)
+    if (collectionOnly) {
+      const owned = db.prepare(
+        'SELECT 1 FROM collection col JOIN cards c ON col.card_id = c.id WHERE (c.name = ? COLLATE NOCASE OR c.name LIKE ? COLLATE NOCASE)'
+      ).get(card.name, `${card.name} //%`);
+      if (!owned) continue;
+    }
+
+    // Apply format legality filter
+    if (format && card.legalities) {
+      try {
+        const legalities = JSON.parse(card.legalities);
+        const key = getLegalityKey(format);
+        if (legalities[key] && legalities[key] !== 'legal' && legalities[key] !== 'restricted') continue;
+      } catch { /* skip check */ }
+    }
+
+    suggestedNames.add(rec.cardName);
+    const pct = Math.round(rec.score * 100);
+    suggestions.push({
+      card,
+      reason: `In ${pct}% of similar community decks (${rec.deckCount}/${rec.totalSimilarDecks})`,
+      score: 72 + rec.score * 25, // 72-97 range based on co-occurrence rate
+    });
+  }
+
   // Sort by score and deduplicate by name (not ID — same card has many printings)
   const seenNames = new Set<string>();
   return suggestions
@@ -260,11 +303,22 @@ export async function getOllamaSuggestions(
       })
       .join('\n');
 
+    // Community co-occurrence data from 507k+ scraped decks
+    const deckCardNames = mainCards.map((c) => c.name);
+    const communityRecs = getCommunityRecommendations(deckCardNames, format, 15);
+    let communityBlock = '';
+    if (communityRecs.length > 0) {
+      const recLines = communityRecs
+        .map((r) => `- ${r.cardName} (${Math.round(r.score * 100)}% of similar decks)`)
+        .join('\n');
+      communityBlock = `\nCommunity data (507k+ decks): these cards frequently appear alongside this deck's cards:\n${recLines}\nPrioritize cards from this list.\n`;
+    }
+
     const prompt = `You are an expert Magic: The Gathering deck builder. Analyze this ${format} deck and suggest exactly 10 cards to add or swap. For each suggestion, give the exact card name and a brief reason.
 
 Current deck (with full card text):
 ${deckList}
-
+${communityBlock}
 Respond in JSON format:
 [{"name": "Card Name", "reason": "Brief reason"}, ...]
 

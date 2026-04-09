@@ -35,7 +35,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         return null;
       })
       .then((data) => {
-        if (data?.user) setUser(data.user);
+        if (data?.user) {
+          setUser(data.user);
+          // Fire heartbeat to CF API on session restore (non-blocking)
+          fetch('/api/cf-player', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action: 'heartbeat', username: data.user.username }),
+          }).catch(() => {});
+        }
       })
       .catch(() => {})
       .finally(() => setLoading(false));
@@ -50,6 +58,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const data = await res.json();
     if (!res.ok) return data.error || 'Login failed';
     setUser(data.user);
+
+    // Fire heartbeat to CF API (non-blocking)
+    fetch('/api/cf-player', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'heartbeat', username: data.user.username }),
+    }).catch(() => {});
+
     return null;
   }, []);
 

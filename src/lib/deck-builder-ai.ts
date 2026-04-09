@@ -1,4 +1,4 @@
-import { getDb, getCedhStaples, getMetaCardStatsMap, getFormatStaples } from './db';
+import { getDb, getCedhStaples, getMetaCardStatsMap, getFormatStaples, getCommunityRecommendations } from './db';
 import type { DbCard, AISuggestion } from './types';
 import { DEFAULT_LAND_COUNT, DEFAULT_DECK_SIZE, getLegalityKey } from './constants';
 import { getCardGlobalScore, getMetaAdjustedScore } from './global-learner';
@@ -384,22 +384,41 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
     ? `AND c.name != '${commanderName.replace(/'/g, "''")}'`
     : '';
 
-  // ── Collection quantity map ──────────────────────────────────────────────
+  // ── Collection quantity map (name-based to handle different printings) ────
   const ownedQty = new Map<string, number>();
+  const ownedNames = new Set<string>();
   if (useCollection) {
     const rows = db.prepare(
-      `SELECT card_id, SUM(quantity) as total FROM collection GROUP BY card_id`
-    ).all() as Array<{ card_id: string; total: number }>;
+      `SELECT c.name, SUM(col.quantity) as total
+       FROM collection col JOIN cards c ON col.card_id = c.id
+       GROUP BY c.name`
+    ).all() as Array<{ name: string; total: number }>;
     for (const row of rows) {
-      ownedQty.set(row.card_id, row.total);
+      ownedNames.add(row.name);
+      ownedQty.set(row.name, row.total);
+    }
+    // Basic lands are always available (Arena gives unlimited)
+    for (const basic of ['Plains', 'Island', 'Swamp', 'Mountain', 'Forest', 'Wastes']) {
+      ownedNames.add(basic);
+      ownedQty.set(basic, 99);
     }
   }
 
+  // Name-based collection filter: use a subquery on card names the user owns
+  // UNION with basic lands which are always available (Arena gives unlimited)
   const collectionJoin = useCollection
-    ? `LEFT JOIN collection col ON c.id = col.card_id`
+    ? `INNER JOIN (
+        SELECT DISTINCT c2.name AS cname FROM collection col2 JOIN cards c2 ON col2.card_id = c2.id
+        UNION SELECT 'Plains' UNION SELECT 'Island' UNION SELECT 'Swamp'
+        UNION SELECT 'Mountain' UNION SELECT 'Forest' UNION SELECT 'Wastes'
+      ) owned ON c.name = owned.cname`
     : '';
   const collectionOrder = useCollection
-    ? `CASE WHEN col.id IS NOT NULL THEN 0 ELSE 1 END,`
+    ? `CASE WHEN c.name IN (
+        SELECT c3.name FROM collection col3 JOIN cards c3 ON col3.card_id = c3.id
+        UNION SELECT 'Plains' UNION SELECT 'Island' UNION SELECT 'Swamp'
+        UNION SELECT 'Mountain' UNION SELECT 'Forest' UNION SELECT 'Wastes'
+      ) THEN 0 ELSE 1 END,`
     : '';
 
   // ── EDHREC Integration: fetch commander-specific data ─────────────────────
@@ -904,7 +923,7 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
     // ── Collection bonus ──
     if (useCollection && powerLevel !== 'cedh') {
       // In cEDH mode, ignore collection — build the best list possible
-      const owned = ownedQty.get(card.id) || 0;
+      const owned = ownedQty.get(card.name) || 0;
       if (owned > 0) {
         score += 30;
       } else {
@@ -964,7 +983,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
   function getMaxQty(card: DbCard): number {
     const formatMax = isCommander ? 1 : maxCopies;
     if (!useCollection) return formatMax;
-    const owned = ownedQty.get(card.id) || 0;
+    const owned = ownedQty.get(card.name) || 0;
     // Block unowned cards entirely when building from collection
     return owned > 0 ? Math.min(formatMax, owned) : 0;
   }
@@ -1180,6 +1199,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
       tribalTypes: tribalTypesForLands.length > 0 ? tribalTypesForLands : undefined,
       commanderName: commanderCard?.name,
       existingNonLandCards: nonLandCards,
+      collectionOnly: useCollection,
       isCommander,
     });
 
@@ -1396,7 +1416,11 @@ export function getSynergySuggestions(
     : '';
 
   const collectionJoin = collectionOnly
-    ? 'INNER JOIN collection col ON c.id = col.card_id'
+    ? `INNER JOIN (
+        SELECT DISTINCT c2.name AS cname FROM collection col2 JOIN cards c2 ON col2.card_id = c2.id
+        UNION SELECT 'Plains' UNION SELECT 'Island' UNION SELECT 'Swamp'
+        UNION SELECT 'Mountain' UNION SELECT 'Forest' UNION SELECT 'Wastes'
+      ) owned ON c.name = owned.cname`
     : '';
 
   const query = `
@@ -1414,6 +1438,18 @@ export function getSynergySuggestions(
   `;
 
   const candidates = db.prepare(query).all(...Array.from(existingIds)) as DbCard[];
+
+  // ── Community co-occurrence: boost cards that appear in similar decks ──
+  const deckCardNames = mainCards.map((c) => c.name);
+  const communityRecs = getCommunityRecommendations(deckCardNames, format, 200);
+  const communityScoreMap = new Map<string, { score: number; deckCount: number; totalDecks: number }>();
+  for (const rec of communityRecs) {
+    communityScoreMap.set(rec.cardName.toLowerCase(), {
+      score: rec.score,
+      deckCount: rec.deckCount,
+      totalDecks: rec.totalSimilarDecks,
+    });
+  }
 
   const suggestions: AISuggestion[] = [];
   const suggestedNames = new Set<string>();
@@ -1441,6 +1477,14 @@ export function getSynergySuggestions(
       score = 80 + matchedThemes.length * 5;
     }
     const reasons: string[] = [];
+
+    // ── Community co-occurrence boost ─────────────────────────────────
+    const coOcc = communityScoreMap.get(card.name.toLowerCase());
+    if (coOcc && coOcc.score > 0.05) {
+      const pct = Math.round(coOcc.score * 100);
+      score += coOcc.score * 30; // up to +30 for cards in 100% of similar decks
+      reasons.push(`In ${pct}% of similar decks (${coOcc.deckCount}/${coOcc.totalDecks})`);
+    }
 
     if (globalScore.confidence > 0.3 && globalScore.playedWinRate > 0.55) {
       reasons.push(`${Math.round(globalScore.playedWinRate * 100)}% win rate across ${globalScore.gamesPlayed} games`);
@@ -1509,6 +1553,25 @@ export function getSynergySuggestions(
       reason,
       score,
       winRate: globalScore.confidence > 0.3 ? Math.round(globalScore.playedWinRate * 100) : undefined,
+      edhrecRank: card.edhrec_rank ?? undefined,
+    });
+  }
+
+  // Also inject top community recommendations not already in candidates
+  for (const rec of communityRecs.slice(0, 30)) {
+    if (suggestedNames.has(rec.cardName) || existingNames.has(rec.cardName)) continue;
+    if (rec.score < 0.1) continue; // at least 10% co-occurrence
+
+    // Look up the card in DB
+    const card = db.prepare('SELECT * FROM cards WHERE name = ? COLLATE NOCASE').get(rec.cardName) as DbCard | undefined;
+    if (!card) continue;
+
+    suggestedNames.add(rec.cardName);
+    const pct = Math.round(rec.score * 100);
+    suggestions.push({
+      card,
+      reason: `In ${pct}% of similar decks (${rec.deckCount}/${rec.totalSimilarDecks}). Community favorite`,
+      score: 75 + rec.score * 25,
       edhrecRank: card.edhrec_rank ?? undefined,
     });
   }

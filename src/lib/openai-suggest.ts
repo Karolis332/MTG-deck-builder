@@ -5,7 +5,7 @@
  * deck improvement suggestions. Falls back gracefully if no key is set.
  */
 
-import { getDb } from '@/lib/db';
+import { getDb, getCommunityRecommendations } from '@/lib/db';
 import { COMMANDER_FORMATS } from '@/lib/constants';
 import type { DbCard } from '@/lib/types';
 import type { AISuggestion } from '@/lib/types';
@@ -18,6 +18,12 @@ interface OpenAISuggestionResult {
   }>;
   deckColors: string[];
   isCommanderLike: boolean;
+  tokenUsage?: {
+    promptTokens: number;
+    completionTokens: number;
+    totalTokens: number;
+  };
+  model?: string;
 }
 
 function getOpenAIKey(): string | null {
@@ -143,6 +149,20 @@ export async function getOpenAISuggestions(
     } catch {}
   }
 
+  // Community co-occurrence data from 507k+ scraped decks
+  const deckCardNames = mainCards.map((c) => c.name);
+  const communityRecs = getCommunityRecommendations(deckCardNames, format, 20);
+  let communityBlock = '';
+  if (communityRecs.length > 0) {
+    const recLines = communityRecs
+      .map((r) => `  - ${r.cardName} (in ${Math.round(r.score * 100)}% of ${r.totalSimilarDecks} similar decks)`)
+      .join('\n');
+    communityBlock = `\n## Community Data (507k+ decks analyzed)
+These cards appear most frequently alongside the current deck's cards in tournament/community decks:
+${recLines}
+**Prioritize suggesting cards from this list** — they are statistically proven to work well with this deck's strategy.\n`;
+  }
+
   const collectionNote = collectionCardNames
     ? `\n**CRITICAL CONSTRAINT**: User only owns these ${collectionCardNames.length} cards. You MUST ONLY suggest cards from this list. Any card not in this list will be REJECTED:\n${collectionCardNames.join(', ')}`
     : '';
@@ -171,7 +191,7 @@ ${commanderInfo}
 
 ## Current Decklist
 ${deckSummary}
-${illegalNote}${collectionNote}
+${communityBlock}${illegalNote}${collectionNote}
 
 # ABSOLUTE RULES (NEVER VIOLATE)
 
@@ -252,8 +272,21 @@ Respond in JSON format only:
     const content = data.choices?.[0]?.message?.content;
     if (!content) return null;
 
+    // Extract token usage for cost tracking
+    const usage = data.usage as { prompt_tokens?: number; completion_tokens?: number; total_tokens?: number } | undefined;
+
     const parsed = JSON.parse(content) as { suggestions: OpenAISuggestionResult['suggestions'] };
-    return { suggestions: parsed.suggestions, deckColors, isCommanderLike };
+    return {
+      suggestions: parsed.suggestions,
+      deckColors,
+      isCommanderLike,
+      tokenUsage: usage ? {
+        promptTokens: usage.prompt_tokens || 0,
+        completionTokens: usage.completion_tokens || 0,
+        totalTokens: usage.total_tokens || 0,
+      } : undefined,
+      model: getOpenAIModel(),
+    };
   } catch (error) {
     console.error('OpenAI suggestion error:', error);
     return null;

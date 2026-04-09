@@ -52,13 +52,17 @@
 }
 
 @layer base {
+  /* Scale all rem-based sizes up globally for readability */
+  html {
+    font-size: 20px;
+  }
   * {
     @apply border-border;
   }
   body {
     @apply bg-background text-foreground;
     font-family: 'Crimson Text', Georgia, 'Times New Roman', serif;
-    font-size: 20px;
+    font-size: 1.1rem;
     line-height: 1.65;
   }
   h1, h2, h3, h4, h5, h6 {

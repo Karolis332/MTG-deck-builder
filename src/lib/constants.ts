@@ -122,4 +122,4 @@ export function getLegalityKey(format: string): string {
 export const SCRYFALL_API_BASE = 'https://api.scryfall.com';
 export const SCRYFALL_RATE_LIMIT_MS = 100;
 
-export const CF_API_DEFAULT_URL = 'http://localhost:8000';
+export const CF_API_DEFAULT_URL = 'http://187.77.110.100/cf-api';

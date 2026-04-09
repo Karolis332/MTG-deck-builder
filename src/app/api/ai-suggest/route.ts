@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getDb, getDeckWithCards, getFormatStaples } from '@/lib/db';
+import { getDb, getDeckWithCards, getFormatStaples, logAISuggestion } from '@/lib/db';
 import { getRuleBasedSuggestions, getOllamaSuggestions } from '@/lib/ai-suggest';
 import { getSynergySuggestions, detectDeckThemes, SYNERGY_GROUPS } from '@/lib/deck-builder-ai';
 import { getCardGlobalScore } from '@/lib/global-learner';
@@ -92,6 +92,8 @@ export async function POST(request: NextRequest) {
     // Color identity restriction only applies to commander/brawl formats
     const deckColors = isCommanderLike ? getDeckColorIdentity(deck.cards) : new Set<string>();
 
+    const t0 = Date.now();
+
     // Try CF API first for Commander/Brawl formats (primary recommendation source)
     if (isCommanderLike) {
       try {
@@ -127,6 +129,12 @@ export async function POST(request: NextRequest) {
           const cfSuggestions = allCfSuggestions.slice(0, 15);
             if (cfSuggestions.length > 0) {
               const proposedChanges = buildProposedChanges(deck_id, deck, format, cfSuggestions, cfApprovedNames);
+              logAISuggestion({
+                deckId: deck_id, source: 'collaborative-filtering', format,
+                suggestionCount: cfSuggestions.length,
+                cardsSuggested: cfSuggestions.map((s) => s.card.name),
+                latencyMs: Date.now() - t0,
+              });
               return NextResponse.json({
                 suggestions: cfSuggestions,
                 proposedChanges,
@@ -148,6 +156,12 @@ export async function POST(request: NextRequest) {
         : ollamaSuggestions;
       if (filtered.length > 0) {
         const proposedChanges = buildProposedChanges(deck_id, deck, format, filtered);
+        logAISuggestion({
+          deckId: deck_id, source: 'ollama', model: 'local', format,
+          suggestionCount: filtered.length,
+          cardsSuggested: filtered.map((s) => s.card.name),
+          latencyMs: Date.now() - t0,
+        });
         return NextResponse.json({
           suggestions: filtered,
           proposedChanges,
@@ -207,6 +221,15 @@ export async function POST(request: NextRequest) {
           gptCutsAdded++;
         }
 
+        logAISuggestion({
+          deckId: deck_id, source: 'openai', model: openAIResult.model, format,
+          promptTokens: openAIResult.tokenUsage?.promptTokens,
+          completionTokens: openAIResult.tokenUsage?.completionTokens,
+          totalTokens: openAIResult.tokenUsage?.totalTokens,
+          suggestionCount: adds.length,
+          cardsSuggested: adds.map((s) => s.card.name),
+          latencyMs: Date.now() - t0,
+        });
         return NextResponse.json({
           suggestions: adds,
           proposedChanges,
@@ -320,10 +343,17 @@ export async function POST(request: NextRequest) {
       templateValidation.score = Math.max(0, templateValidation.score - commanderSynergyWarnings.length * 5);
     }
 
+    const finalSource = synergySuggestions.length > 0 ? 'synergy' : 'rules';
+    logAISuggestion({
+      deckId: deck_id, source: finalSource, format,
+      suggestionCount: combined.length,
+      cardsSuggested: combined.map((s) => s.card.name),
+      latencyMs: Date.now() - t0,
+    });
     return NextResponse.json({
       suggestions: combined,
       proposedChanges,
-      source: synergySuggestions.length > 0 ? 'synergy' : 'rules',
+      source: finalSource,
       templateValidation,
     });
   } catch (error) {
@@ -563,11 +593,14 @@ function buildProposedChanges(
 
     let data: Record<string, unknown> = {};
     try { data = JSON.parse(insight.data); } catch {}
+    const appearances = (data.appearances as number) || 0;
+    // Require minimum 5 games before flagging as underperformer
+    if (appearances < 5) continue;
     const wr = ((data.winRate as number) || 30) / 100;
     cutCandidates.push({
       card,
       priority: 15,
-      reason: `${Math.round(wr * 100)}% win rate in ${(data.appearances as number) || 0} games — underperforming`,
+      reason: `${Math.round(wr * 100)}% win rate in ${appearances} games — underperforming`,
       winRate: Math.round(wr * 100),
     });
   }

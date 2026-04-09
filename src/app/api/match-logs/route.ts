@@ -8,6 +8,7 @@ import {
   updateMetaSnapshot,
   updateOpeningHandStats,
 } from '@/lib/global-learner';
+import { getCFApiUrl, buildCFHeaders } from '@/lib/cf-api-client';
 
 // GET /api/match-logs?deck_id=123
 export async function GET(req: NextRequest) {
@@ -128,6 +129,34 @@ export async function POST(req: NextRequest) {
       analysis = analyzeMatchesForDeck(Number(deck_id));
     } catch {}
   }
+
+  // Report match to CF API player tracking (non-blocking)
+  try {
+    const deck = deck_id ? db.prepare('SELECT name, format FROM decks WHERE id = ?').get(Number(deck_id)) as { name: string; format: string } | undefined : undefined;
+    const user = db.prepare('SELECT username FROM users LIMIT 1').get() as { username: string } | undefined;
+    if (user?.username) {
+      let commander: string | undefined;
+      let colorIdentity: string | undefined;
+      if (deck_id) {
+        const cmdRow = db.prepare("SELECT c.name, c.color_identity FROM deck_cards dc JOIN cards c ON c.id = dc.card_id WHERE dc.deck_id = ? AND dc.board = 'commander' LIMIT 1").get(Number(deck_id)) as { name: string; color_identity: string } | undefined;
+        commander = cmdRow?.name;
+        colorIdentity = cmdRow?.color_identity;
+      }
+      fetch(`${getCFApiUrl()}/players/match`, {
+        method: 'POST',
+        headers: buildCFHeaders(),
+        body: JSON.stringify({
+          username: user.username,
+          deck_name: deck?.name,
+          commander,
+          color_identity: colorIdentity,
+          opponent_commander: parsed.opponentName,
+          result: parsed.result,
+          format: deck?.format || game_format,
+        }),
+      }).catch(() => {});
+    }
+  } catch {}
 
   return NextResponse.json({ log, parsed, analysis });
 }

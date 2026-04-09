@@ -1263,4 +1263,33 @@ export const MIGRATIONS = [
       CREATE INDEX IF NOT EXISTS idx_users_stripe_customer ON users(stripe_customer_id);
     `,
   },
+  {
+    version: 33,
+    name: 'add_ai_suggestion_log',
+    sql: `
+      -- Track every AI suggestion call: model, tokens, quality, cost
+      CREATE TABLE IF NOT EXISTS ai_suggestion_log (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        deck_id INTEGER REFERENCES decks(id) ON DELETE SET NULL,
+        source TEXT NOT NULL,
+        model TEXT,
+        format TEXT,
+        prompt_tokens INTEGER DEFAULT 0,
+        completion_tokens INTEGER DEFAULT 0,
+        total_tokens INTEGER DEFAULT 0,
+        suggestion_count INTEGER DEFAULT 0,
+        accepted_count INTEGER DEFAULT 0,
+        rejected_count INTEGER DEFAULT 0,
+        cards_suggested TEXT,
+        cards_accepted TEXT,
+        latency_ms INTEGER,
+        error TEXT,
+        created_at TEXT DEFAULT (datetime('now'))
+      );
+      CREATE INDEX IF NOT EXISTS idx_aisl_source ON ai_suggestion_log(source);
+      CREATE INDEX IF NOT EXISTS idx_aisl_model ON ai_suggestion_log(model);
+      CREATE INDEX IF NOT EXISTS idx_aisl_deck ON ai_suggestion_log(deck_id);
+      CREATE INDEX IF NOT EXISTS idx_aisl_created ON ai_suggestion_log(created_at);
+    `,
+  },
 ];

@@ -92,7 +92,7 @@ function renderInline(text: string): React.ReactNode {
       remaining = remaining.slice(boldIdx + boldMatch[0].length);
     } else if (codeMatch) {
       parts.push(remaining.slice(0, codeIdx));
-      parts.push(<code key={key++} className="rounded bg-black/20 px-1 py-0.5 text-[10px]">{codeMatch[1]}</code>);
+      parts.push(<code key={key++} className="rounded bg-black/20 px-1 py-0.5 text-xs">{codeMatch[1]}</code>);
       remaining = remaining.slice(codeIdx + codeMatch[0].length);
     }
   }
@@ -374,7 +374,7 @@ export function AIChatPanel({ deckId, onApplyActions, className }: AIChatPanelPr
       <div className="flex shrink-0 items-center justify-between border-b border-border px-3 py-2">
         <div className="flex items-center gap-2">
           <ChatIcon className="h-4 w-4 text-primary" />
-          <span className="text-sm font-medium">AI Deck Tuner</span>
+          <span className="text-base font-medium">AI Deck Tuner</span>
         </div>
         <div className="flex items-center gap-1">
           <button
@@ -400,7 +400,7 @@ export function AIChatPanel({ deckId, onApplyActions, className }: AIChatPanelPr
         {messages.length === 0 && (
           <div className="flex h-full flex-col items-center justify-center text-center">
             <ChatIcon className="mb-2 h-8 w-8 text-muted-foreground/40" />
-            <p className="text-xs text-muted-foreground">
+            <p className="text-sm text-muted-foreground">
               Ask me anything about your deck.
             </p>
             <div className="mt-3 space-y-1.5">
@@ -416,7 +416,7 @@ export function AIChatPanel({ deckId, onApplyActions, className }: AIChatPanelPr
                     setInput(q);
                     inputRef.current?.focus();
                   }}
-                  className="block w-full rounded-lg border border-border px-3 py-1.5 text-left text-[11px] text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+                  className="block w-full rounded-lg border border-border px-3 py-1.5 text-left text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
                 >
                   {q}
                 </button>
@@ -435,7 +435,7 @@ export function AIChatPanel({ deckId, onApplyActions, className }: AIChatPanelPr
           >
             <div
               className={cn(
-                'max-w-[90%] rounded-xl px-3 py-2 text-xs leading-relaxed',
+                'max-w-[90%] rounded-xl px-3 py-2 text-sm leading-relaxed',
                 msg.role === 'user'
                   ? 'bg-primary text-primary-foreground'
                   : 'bg-accent text-accent-foreground'
@@ -448,7 +448,7 @@ export function AIChatPanel({ deckId, onApplyActions, className }: AIChatPanelPr
             {msg.role === 'assistant' && i === lastMsgIdx && showRetry && (
               <button
                 onClick={handleRetry}
-                className="mt-1 flex items-center gap-1 rounded px-1.5 py-0.5 text-[10px] text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+                className="mt-1 flex items-center gap-1 rounded px-1.5 py-0.5 text-xs text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
                 title="Regenerate response"
               >
                 <RetryIcon className="h-3 w-3" />
@@ -485,7 +485,7 @@ export function AIChatPanel({ deckId, onApplyActions, className }: AIChatPanelPr
                         )}
                         <span
                           className={cn(
-                            'shrink-0 rounded px-1.5 py-0.5 text-[10px] font-bold',
+                            'shrink-0 rounded px-1.5 py-0.5 text-xs font-bold',
                             act.action === 'cut'
                               ? 'bg-red-500/20 text-red-400'
                               : 'bg-green-500/20 text-green-400'
@@ -493,10 +493,10 @@ export function AIChatPanel({ deckId, onApplyActions, className }: AIChatPanelPr
                         >
                           {act.action === 'cut' ? 'CUT' : 'ADD'}
                         </span>
-                        <span className="flex-1 truncate text-[11px]">
+                        <span className="flex-1 truncate text-sm">
                           {act.cardName}
                         </span>
-                        <span className="max-w-[80px] truncate text-[9px] text-muted-foreground">
+                        <span className="max-w-[100px] truncate text-xs text-muted-foreground">
                           {act.reason}
                         </span>
                       </div>
@@ -507,7 +507,7 @@ export function AIChatPanel({ deckId, onApplyActions, className }: AIChatPanelPr
                     onClick={() => handleApplyActions(i)}
                     disabled={msg.actionsApplied || checkedCount === 0}
                     className={cn(
-                      'mt-1 w-full rounded-lg py-1.5 text-[11px] font-medium transition-colors',
+                      'mt-1 w-full rounded-lg py-1.5 text-sm font-medium transition-colors',
                       msg.actionsApplied
                         ? 'bg-green-500/20 text-green-400 cursor-default'
                         : checkedCount === 0
@@ -560,12 +560,12 @@ export function AIChatPanel({ deckId, onApplyActions, className }: AIChatPanelPr
             }}
             placeholder="Ask AI to tune your deck..."
             disabled={loading}
-            className="flex-1 rounded-lg border border-border bg-background px-3 py-1.5 text-xs outline-none placeholder:text-muted-foreground focus:border-primary"
+            className="flex-1 rounded-lg border border-border bg-background px-3 py-1.5 text-sm outline-none placeholder:text-muted-foreground focus:border-primary"
           />
           {loading ? (
             <button
               onClick={stopStreaming}
-              className="shrink-0 rounded-lg bg-red-500/80 px-3 py-1.5 text-xs font-medium text-white transition-colors hover:bg-red-500"
+              className="shrink-0 rounded-lg bg-red-500/80 px-3 py-1.5 text-sm font-medium text-white transition-colors hover:bg-red-500"
               title="Stop generating"
             >
               <StopIcon className="h-3.5 w-3.5" />
@@ -574,7 +574,7 @@ export function AIChatPanel({ deckId, onApplyActions, className }: AIChatPanelPr
             <button
               onClick={() => sendMessage()}
               disabled={!input.trim()}
-              className="shrink-0 rounded-lg bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-50"
+              className="shrink-0 rounded-lg bg-primary px-3 py-1.5 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-50"
             >
               <SendIcon className="h-3.5 w-3.5" />
             </button>
