@@ -157,13 +157,32 @@ export function DeckStats({ cards, format, className }: DeckStatsProps) {
       {/* Mana curve */}
       <ManaCurve cards={cards} />
 
-      {/* Price estimate */}
-      {estimatedPrice > 0 && (
-        <div className="flex items-center gap-2 text-xs">
-          <span className="text-muted-foreground">Est. Price</span>
-          <span className="font-medium">${estimatedPrice.toFixed(2)}</span>
-        </div>
-      )}
+      {/* Price estimate + top cards */}
+      {estimatedPrice > 0 && (() => {
+        const priced = mainCards
+          .filter((e) => e.card.price_usd)
+          .map((e) => ({ name: e.card.name, total: parseFloat(e.card.price_usd!) * e.quantity }))
+          .sort((a, b) => b.total - a.total)
+          .slice(0, 5);
+        return (
+          <div className="space-y-1">
+            <div className="flex items-center gap-2 text-xs">
+              <span className="text-muted-foreground">Est. Price</span>
+              <span className="font-medium">${estimatedPrice.toFixed(2)}</span>
+            </div>
+            {priced.length > 0 && (
+              <div className="space-y-0.5 pl-1">
+                {priced.map((p) => (
+                  <div key={p.name} className="flex items-center justify-between text-[10px] text-muted-foreground/70">
+                    <span className="truncate mr-2">{p.name}</span>
+                    <span className="tabular-nums shrink-0">${p.total.toFixed(2)}</span>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        );
+      })()}
 
       {/* Color bar */}
       {mainTotal > 0 && allColors.length > 0 && (

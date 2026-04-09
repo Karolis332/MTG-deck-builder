@@ -318,6 +318,9 @@ function DeckSection({
   onToggleFavourite?: (cardId: string) => void;
 }) {
   const sorted = [...cards].sort((a, b) => a.card.cmc - b.card.cmc || a.card.name.localeCompare(b.card.name));
+  const sectionPrice = cards.reduce((sum, e) => {
+    return sum + (e.card.price_usd ? parseFloat(e.card.price_usd) * e.quantity : 0);
+  }, 0);
 
   return (
     <div>
@@ -331,6 +334,11 @@ function DeckSection({
             <span className="font-semibold text-foreground">{title}</span>
           )}
           <span className="text-muted-foreground">({count})</span>
+          {sectionPrice > 0 && (
+            <span className="ml-auto text-[11px] tabular-nums text-muted-foreground/60">
+              ${sectionPrice.toFixed(2)}
+            </span>
+          )}
         </div>
       )}
       <div className="space-y-px">
@@ -490,6 +498,13 @@ function DeckCardRow({
       >
         {card.name}
       </span>
+
+      {/* Price */}
+      {card.price_usd && (
+        <span className="text-[11px] tabular-nums text-muted-foreground/70">
+          ${parseFloat(card.price_usd).toFixed(2)}
+        </span>
+      )}
 
       {/* Mana cost */}
       <ManaCost cost={card.mana_cost} size="sm" />
