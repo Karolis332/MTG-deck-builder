@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { isElectron, getElectronAPI } from '@/lib/electron-bridge';
 import type { GameLogEntry } from '@/lib/electron-bridge';
 import type { GameStateSnapshot } from '@/lib/game-state-engine';
@@ -97,27 +97,77 @@ export default function OverlayGamePage() {
     if (api) await api.setOverlayInteractive(interactive);
   }, []);
 
-  if (!isElectron()) {
-    return <div className="p-4 text-sm text-gray-400">Overlay requires desktop app</div>;
-  }
-
-  if (!gameState && !matchInfo && logEntries.length === 0) {
-    return (
-      <div className="flex h-screen items-center justify-center">
-        <div className="text-center text-gray-400 text-xs">
-          <div className="text-lg mb-1">&#128214;</div>
-          <div>Waiting for match...</div>
-        </div>
-      </div>
-    );
-  }
-
+  // Derived state (safe before early returns — no hooks below)
   const deckList = gameState?.deckList ?? [];
   const librarySize = gameState?.librarySize ?? 0;
   const drawProbs = gameState?.drawProbabilities ?? {};
   const playerLife = gameState?.playerLife ?? 20;
   const opponentLife = gameState?.opponentLife ?? 20;
   const opponentCards = gameState?.opponentCardsSeen ?? [];
+
+  // Track previous life totals for pulse animation
+  const prevPlayerLife = useRef(playerLife);
+  const prevOpponentLife = useRef(opponentLife);
+  const [playerLifeFlash, setPlayerLifeFlash] = useState<'up' | 'down' | null>(null);
+  const [opponentLifeFlash, setOpponentLifeFlash] = useState<'up' | 'down' | null>(null);
+
+  useEffect(() => {
+    if (playerLife !== prevPlayerLife.current) {
+      setPlayerLifeFlash(playerLife > prevPlayerLife.current ? 'up' : 'down');
+      prevPlayerLife.current = playerLife;
+      const t = setTimeout(() => setPlayerLifeFlash(null), 600);
+      return () => clearTimeout(t);
+    }
+  }, [playerLife]);
+
+  useEffect(() => {
+    if (opponentLife !== prevOpponentLife.current) {
+      setOpponentLifeFlash(opponentLife > prevOpponentLife.current ? 'up' : 'down');
+      prevOpponentLife.current = opponentLife;
+      const t = setTimeout(() => setOpponentLifeFlash(null), 600);
+      return () => clearTimeout(t);
+    }
+  }, [opponentLife]);
+
+  // Track previous deck state for draw highlight
+  const prevDeckRef = useRef<Map<number, number>>(new Map());
+  const [recentDraws, setRecentDraws] = useState<Set<number>>(new Set());
+
+  useEffect(() => {
+    const drawn = new Set<number>();
+    for (const card of deckList) {
+      const prev = prevDeckRef.current.get(card.grpId);
+      if (prev !== undefined && card.remaining < prev) {
+        drawn.add(card.grpId);
+      }
+    }
+    if (drawn.size > 0) {
+      setRecentDraws(drawn);
+      const t = setTimeout(() => setRecentDraws(new Set()), 1200);
+      prevDeckRef.current = new Map(deckList.map((c) => [c.grpId, c.remaining]));
+      return () => clearTimeout(t);
+    }
+    prevDeckRef.current = new Map(deckList.map((c) => [c.grpId, c.remaining]));
+  }, [deckList]);
+
+  // ── Early returns (after all hooks) ──
+  const isElectronEnv = isElectron();
+
+  if (!isElectronEnv) {
+    return <div className="p-4 text-sm text-gray-400">Overlay requires desktop app</div>;
+  }
+
+  if (!gameState && !matchInfo && logEntries.length === 0) {
+    return (
+      <div className="flex h-screen items-center justify-center">
+        <div className="text-center text-gray-400 text-xs animate-pulse">
+          <div className="text-lg mb-1">&#128214;</div>
+          <div>Waiting for match...</div>
+        </div>
+        <style>{overlayKeyframes}</style>
+      </div>
+    );
+  }
 
   return (
     <div
@@ -143,7 +193,15 @@ export default function OverlayGamePage() {
       {/* Life totals bar */}
       <div className="flex items-center justify-between px-3 py-1.5 bg-black/70">
         <div className="flex items-center gap-1.5">
-          <span className="text-green-400 font-mono font-bold text-sm">{playerLife}</span>
+          <span
+            className={`font-mono font-bold text-sm transition-all duration-300 ${
+              playerLifeFlash === 'up' ? 'text-green-300 scale-125'
+                : playerLifeFlash === 'down' ? 'text-red-400 scale-125'
+                : 'text-green-400 scale-100'
+            }`}
+          >
+            {playerLife}
+          </span>
           <span className="text-gray-500 text-[10px]">You</span>
         </div>
         <div className="text-gray-600 text-[10px]">vs</div>
@@ -151,7 +209,15 @@ export default function OverlayGamePage() {
           <span className="text-gray-500 text-[10px]">
             {matchInfo?.opponentName?.slice(0, 12) ?? 'Opp'}
           </span>
-          <span className="text-red-400 font-mono font-bold text-sm">{opponentLife}</span>
+          <span
+            className={`font-mono font-bold text-sm transition-all duration-300 ${
+              opponentLifeFlash === 'up' ? 'text-green-300 scale-125'
+                : opponentLifeFlash === 'down' ? 'text-red-400 scale-125'
+                : 'text-red-400 scale-100'
+            }`}
+          >
+            {opponentLife}
+          </span>
         </div>
       </div>
 
@@ -172,10 +238,12 @@ export default function OverlayGamePage() {
         ))}
       </div>
 
+      <style>{overlayKeyframes}</style>
+
       {/* Content area */}
-      <div className="flex-1 overflow-y-auto bg-black/60 backdrop-blur-sm">
+      <div className="flex-1 overflow-y-auto bg-black/60 backdrop-blur-sm animate-[fadeIn_0.4s_ease-out]">
         {activeTab === 'deck' && (
-          <OverlayDeckView deckList={deckList} drawProbs={drawProbs} />
+          <OverlayDeckView deckList={deckList} drawProbs={drawProbs} recentDraws={recentDraws} />
         )}
         {activeTab === 'log' && (
           <OverlayLogView entries={logEntries} />
@@ -188,16 +256,28 @@ export default function OverlayGamePage() {
   );
 }
 
+const overlayKeyframes = `
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(8px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+`;
+
 // ── Sub-components ──────────────────────────────────────────────────────
 
 function OverlayDeckView({
   deckList,
   drawProbs,
+  recentDraws,
 }: {
   deckList: Array<{ grpId: number; name?: string; qty: number; remaining: number }>;
   drawProbs: Record<string, number>;
+  recentDraws: Set<number>;
 }) {
-  // Group by CMC bucket for compact display
   const sorted = [...deckList].sort((a, b) => (a.name ?? '').localeCompare(b.name ?? ''));
 
   return (
@@ -213,18 +293,28 @@ function OverlayDeckView({
         </div>
       )}
 
-      {sorted.map((card, i) => (
-        <div
-          key={`${card.grpId}-${i}`}
-          className={`flex items-center justify-between px-1.5 py-0.5 ${
-            card.remaining === 0 ? 'opacity-30 line-through' : ''
-          }`}
-        >
-          <span className="truncate flex-1 text-[11px]">
-            {card.remaining}x {card.name ?? `#${card.grpId}`}
-          </span>
-        </div>
-      ))}
+      {sorted.map((card, i) => {
+        const justDrawn = recentDraws.has(card.grpId);
+        return (
+          <div
+            key={`${card.grpId}-${i}`}
+            className={`flex items-center justify-between px-1.5 py-0.5 rounded transition-all duration-500 ${
+              card.remaining === 0
+                ? 'opacity-30 line-through'
+                : justDrawn
+                  ? 'bg-amber-400/20 text-amber-200'
+                  : ''
+            }`}
+          >
+            <span className="truncate flex-1 text-[11px]">
+              {card.remaining}x {card.name ?? `#${card.grpId}`}
+            </span>
+            {justDrawn && (
+              <span className="text-[9px] text-amber-400 animate-pulse ml-1 shrink-0">DREW</span>
+            )}
+          </div>
+        );
+      })}
 
       {deckList.length === 0 && (
         <div className="p-3 text-center text-gray-500 text-[10px]">No deck data yet</div>
@@ -234,24 +324,38 @@ function OverlayDeckView({
 }
 
 function OverlayLogView({ entries }: { entries: GameLogEntry[] }) {
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  // Auto-scroll to bottom on new entries
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    }
+  }, [entries.length]);
+
   return (
-    <div className="p-1 space-y-0.5">
-      {entries.map((entry, i) => (
-        <div
-          key={i}
-          className={`px-1.5 py-0.5 text-[10px] leading-tight ${
-            entry.type === 'turn'
-              ? 'text-amber-400/80 font-semibold border-t border-gray-700/30 mt-1 pt-1'
-              : entry.type === 'life' || entry.type === 'damage'
-              ? 'text-red-300/80'
-              : entry.type === 'result'
-              ? 'text-amber-300 font-semibold'
-              : 'text-gray-400'
-          }`}
-        >
-          {entry.text}
-        </div>
-      ))}
+    <div ref={scrollRef} className="p-1 space-y-0.5 overflow-y-auto">
+      {entries.map((entry, i) => {
+        const isNew = i === entries.length - 1;
+        return (
+          <div
+            key={i}
+            className={`px-1.5 py-0.5 text-[10px] leading-tight transition-all duration-300 ${
+              isNew ? 'animate-[slideIn_0.3s_ease-out]' : ''
+            } ${
+              entry.type === 'turn'
+                ? 'text-amber-400/80 font-semibold border-t border-gray-700/30 mt-1 pt-1'
+                : entry.type === 'life' || entry.type === 'damage'
+                ? 'text-red-300/80'
+                : entry.type === 'result'
+                ? 'text-amber-300 font-semibold'
+                : 'text-gray-400'
+            }`}
+          >
+            {entry.text}
+          </div>
+        );
+      })}
 
       {entries.length === 0 && (
         <div className="p-3 text-center text-gray-500 text-[10px]">No events yet</div>
