@@ -1,6 +1,6 @@
-import { getDb, getCedhStaples, getMetaCardStatsMap, getFormatStaples, getCommunityRecommendations } from './db';
+import { getDb, getCedhStaples, getMetaCardStatsMap, getMetaRankedCardNames, getFormatStaples, getCommunityRecommendations } from './db';
 import type { DbCard, AISuggestion } from './types';
-import { DEFAULT_LAND_COUNT, DEFAULT_DECK_SIZE, getLegalityKey } from './constants';
+import { DEFAULT_LAND_COUNT, DEFAULT_DECK_SIZE, getLegalityKey, COMMANDER_FORMATS } from './constants';
 import { getCardGlobalScore, getMetaAdjustedScore } from './global-learner';
 import { getEdhrecRecommendations, getEdhrecThemeCards } from './edhrec';
 import type { EdhrecRecommendation } from './edhrec';
@@ -1391,6 +1391,11 @@ export function getSynergySuggestions(
   }
   const colors = Array.from(colorSet);
 
+  // For non-Commander formats, use tournament meta data instead of EDHREC rank
+  const isCommanderLike = COMMANDER_FORMATS.includes(format as typeof COMMANDER_FORMATS[number]);
+  const metaRankMap = !isCommanderLike ? getMetaRankedCardNames(format) : new Map<string, number>();
+  const hasMetaData = metaRankMap.size > 20;
+
   const colorFilter = colors.length > 0
     ? colors.map((c) => `c.color_identity LIKE '%${c}%'`).join(' OR ')
     : '1=1';
@@ -1434,10 +1439,24 @@ export function getSynergySuggestions(
     AND (1=1 ${synergyFilter} ${answerFilter})
     AND c.id NOT IN (${idPlaceholders})
     ORDER BY c.edhrec_rank ASC NULLS LAST
-    LIMIT 200
+    LIMIT ${hasMetaData ? 400 : 200}
   `;
 
-  const candidates = db.prepare(query).all(...Array.from(existingIds)) as DbCard[];
+  let candidates = db.prepare(query).all(...Array.from(existingIds)) as DbCard[];
+
+  // For non-Commander formats with meta data, re-rank candidates by tournament viability
+  if (hasMetaData) {
+    candidates.sort((a, b) => {
+      const aScore = metaRankMap.get(a.name) ?? -1;
+      const bScore = metaRankMap.get(b.name) ?? -1;
+      // Cards with meta data float to top; within non-meta, keep EDHREC order
+      if (aScore >= 0 && bScore >= 0) return bScore - aScore;
+      if (aScore >= 0) return -1;
+      if (bScore >= 0) return 1;
+      return (a.edhrec_rank ?? 99999) - (b.edhrec_rank ?? 99999);
+    });
+    candidates = candidates.slice(0, 200);
+  }
 
   // ── Community co-occurrence: boost cards that appear in similar decks ──
   const deckCardNames = mainCards.map((c) => c.name);
@@ -1500,6 +1519,17 @@ export function getSynergySuggestions(
     if (metaBoost > 0) {
       score += metaBoost;
       reasons.push('Strong against popular meta decks');
+    }
+
+    // ── Tournament meta boost for non-Commander formats ─────────────
+    if (hasMetaData) {
+      const metaScore = metaRankMap.get(card.name);
+      if (metaScore !== undefined) {
+        score += metaScore * 25; // up to +25 for top tournament cards
+        if (!reasons.some(r => r.includes('meta') || r.includes('tournament'))) {
+          reasons.push('Proven in competitive tournament play');
+        }
+      }
     }
 
     // ── Match insight scoring ─────────────────────────────────────────

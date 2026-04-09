@@ -8,6 +8,8 @@ A dark-themed desktop grimoire for building, analyzing, and mastering Magic: The
 
 - **Claude AI Deck Builder** — Pick a commander, choose a strategy, and Claude builds a complete 100-card deck with per-card explanations and role assignments (Ramp, Draw, Removal, Synergy, etc.)
 - **Quick Build** — Instantly generate a deck using EDHREC data + archetype templates + commander synergy scoring (no API key needed)
+- **Meta-Aware Suggestions** — For Standard, Modern, and Pioneer, card suggestions are ranked by tournament viability (inclusion rate, placement score, archetype core rate) instead of Commander-centric EDHREC rank
+- **Archetype-Aware Mana Curves** — Aggro, midrange, and control decks get different ideal curve targets instead of a one-size-fits-all distribution
 - **AI Chat** — Conversational deck tuning: ask for cuts, additions, strategy advice. Context-aware of your full deck, collection, and format rules. Selective apply lets you pick which suggestions to keep
 - **Local Data Engine** — When no API credits remain, the chat fallback parses CF/EDHREC/staples/ML data to produce structured swap actions without any external API call
 - **Commander Synergy Engine** — Analyzes commander oracle text across 12 trigger categories (ETB, dies, attack, spellcast, exile, artifacts, enchantments, lifegain, counters, graveyard, tokens) to score every candidate card
@@ -198,14 +200,14 @@ py scripts/import_user_data.py their-export.json
 
 - **Frontend**: Next.js 14 (App Router) + Tailwind CSS + Recharts
 - **Desktop**: Electron 33 (standalone output mode, 443MB packaged)
-- **Database**: SQLite (better-sqlite3, WAL mode, FTS5 full-text search, 29 migrations)
+- **Database**: SQLite (better-sqlite3, WAL mode, FTS5 full-text search, 32 migrations)
 - **AI**: Claude Sonnet 4.5 / Opus 4.6 / GPT-4o / Ollama (local)
 - **ML**: Scikit-learn (Gradient Boosting) with 26 features for card performance prediction
 - **CF Engine**: Black Grimoire API (FastAPI + PostgreSQL + Redis + SVD) with 148K+ scraped decks
 - **Card Data**: Scryfall API (35K+ cards) + EDHREC + MTGGoldfish + MTGTop8 + Commander Spellbook
 - **Auth**: JWT + scrypt password hashing
 - **Language**: TypeScript (strict) + Python 3.13
-- **Testing**: Vitest (340 tests) + pytest
+- **Testing**: Vitest (383 tests) + pytest
 
 ## License
 

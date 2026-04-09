@@ -1146,6 +1146,50 @@ export function getMetaCardStatsMap(
 }
 
 /**
+ * Get the top meta-ranked card names for a format from tournament data.
+ * Returns a Map of card_name → composite meta score (0..1).
+ * Used by the synergy engine to rank cards by competitive viability
+ * instead of EDHREC rank for 60-card formats.
+ */
+export function getMetaRankedCardNames(
+  format: string,
+  limit: number = 500
+): Map<string, number> {
+  const db = getDb();
+  const result = new Map<string, number>();
+  const formatChain = getFormatChain(format);
+  const formatPlaceholders = formatChain.map(() => '?').join(',');
+
+  try {
+    const rows = db.prepare(`
+      SELECT card_name, meta_inclusion_rate, placement_weighted_score,
+             archetype_core_rate, num_decks_in
+      FROM meta_card_stats
+      WHERE format IN (${formatPlaceholders})
+      AND num_decks_in >= 2
+      ORDER BY (meta_inclusion_rate * 0.5 + placement_weighted_score * 0.3 + archetype_core_rate * 0.2) DESC
+      LIMIT ?
+    `).all(...formatChain, limit) as Array<{
+      card_name: string;
+      meta_inclusion_rate: number;
+      placement_weighted_score: number;
+      archetype_core_rate: number;
+      num_decks_in: number;
+    }>;
+
+    for (const row of rows) {
+      const score = row.meta_inclusion_rate * 0.5
+        + row.placement_weighted_score * 0.3
+        + row.archetype_core_rate * 0.2;
+      result.set(row.card_name, score);
+    }
+  } catch {
+    // table may not exist
+  }
+  return result;
+}
+
+/**
  * Get format staples — cards with high inclusion rate across community decks.
  * Uses cross-format fallback (brawl → commander) to ensure coverage.
  * Returns cards sorted by inclusion rate, filtered by color identity.

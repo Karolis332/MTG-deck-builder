@@ -1,6 +1,6 @@
-import { getDb, getCommunityRecommendations } from './db';
+import { getDb, getCommunityRecommendations, getMetaRankedCardNames } from './db';
 import type { DbCard, AISuggestion } from './types';
-import { DEFAULT_LAND_COUNT, DEFAULT_DECK_SIZE, getLegalityKey } from './constants';
+import { DEFAULT_LAND_COUNT, DEFAULT_DECK_SIZE, getLegalityKey, COMMANDER_FORMATS } from './constants';
 
 interface DeckAnalysis {
   format: string;
@@ -74,6 +74,17 @@ export function getRuleBasedSuggestions(
   const targetSize = DEFAULT_DECK_SIZE[format] || DEFAULT_DECK_SIZE.default;
   const targetLands = DEFAULT_LAND_COUNT[format] || DEFAULT_LAND_COUNT.default;
 
+  // Detect archetype from deck composition for curve targeting
+  const isCommanderLike = COMMANDER_FORMATS.includes(format as typeof COMMANDER_FORMATS[number]);
+  const metaRankMap = !isCommanderLike ? getMetaRankedCardNames(format) : new Map<string, number>();
+  const hasMetaData = metaRankMap.size > 20;
+
+  const instantSorceryCount = (analysis.typeBreakdown['Instant'] || 0) + (analysis.typeBreakdown['Sorcery'] || 0);
+  const archetype: 'aggro' | 'midrange' | 'control' =
+    analysis.avgCmc <= 2.2 && analysis.creatureCount >= 16 ? 'aggro'
+    : analysis.avgCmc >= 3.2 || instantSorceryCount >= 14 ? 'control'
+    : 'midrange';
+
   // Collection-only mode: name-based join to handle different printings
   // Basic lands always included (Arena gives unlimited)
   const colJoin = collectionOnly
@@ -95,7 +106,7 @@ export function getRuleBasedSuggestions(
         : '1=1';
     const colorParams = analysis.colorIdentity.map((col) => `%${col}%`);
 
-    const lands = db
+    let lands = db
       .prepare(
         `SELECT c.* FROM cards c
          ${colJoin}
@@ -104,9 +115,15 @@ export function getRuleBasedSuggestions(
          ${legalFilter}
          AND c.id NOT IN (${Array.from(existingCardIds).map(() => '?').join(',') || "''"})
          ORDER BY c.edhrec_rank ASC NULLS LAST
-         LIMIT 5`
+         LIMIT ${hasMetaData ? 20 : 5}`
       )
       .all(...colorParams, ...Array.from(existingCardIds)) as DbCard[];
+
+    // Re-rank lands by meta data for non-Commander formats
+    if (hasMetaData) {
+      lands.sort((a, b) => (metaRankMap.get(b.name) ?? -1) - (metaRankMap.get(a.name) ?? -1));
+      lands = lands.slice(0, 5);
+    }
 
     for (const land of lands) {
       if (existingCardNames.has(land.name) || suggestedNames.has(land.name)) continue;
@@ -119,8 +136,13 @@ export function getRuleBasedSuggestions(
     }
   }
 
-  // 2. Mana curve gap filling
-  const idealCurve: Record<number, number> = { 1: 6, 2: 8, 3: 7, 4: 5, 5: 3, 6: 2 };
+  // 2. Mana curve gap filling — archetype-aware targets
+  const ARCHETYPE_CURVES: Record<string, Record<number, number>> = {
+    aggro:    { 1: 10, 2: 10, 3: 6, 4: 3, 5: 1, 6: 0 },
+    midrange: { 1: 5, 2: 8, 3: 8, 4: 5, 5: 3, 6: 2 },
+    control:  { 1: 4, 2: 6, 3: 6, 4: 6, 5: 4, 6: 3 },
+  };
+  const idealCurve = ARCHETYPE_CURVES[archetype];
   for (const [cmcStr, idealCount] of Object.entries(idealCurve)) {
     const cmc = parseInt(cmcStr);
     const currentCount = analysis.manaCurve[cmc] || 0;
@@ -131,7 +153,7 @@ export function getRuleBasedSuggestions(
           : '1=1';
       const colorParams = analysis.colorIdentity.map((col) => `%${col}%`);
 
-      const fillers = db
+      let fillers = db
         .prepare(
           `SELECT c.* FROM cards c
            ${colJoin}
@@ -141,9 +163,14 @@ export function getRuleBasedSuggestions(
            ${legalFilter}
            AND c.id NOT IN (${Array.from(existingCardIds).map(() => '?').join(',') || "''"})
            ORDER BY c.edhrec_rank ASC NULLS LAST
-           LIMIT 3`
+           LIMIT ${hasMetaData ? 15 : 3}`
         )
         .all(cmc, ...colorParams, ...Array.from(existingCardIds)) as DbCard[];
+
+      if (hasMetaData) {
+        fillers.sort((a, b) => (metaRankMap.get(b.name) ?? -1) - (metaRankMap.get(a.name) ?? -1));
+        fillers = fillers.slice(0, 3);
+      }
 
       for (const card of fillers) {
         if (existingCardNames.has(card.name) || suggestedNames.has(card.name)) continue;
@@ -166,7 +193,7 @@ export function getRuleBasedSuggestions(
     );
 
     if (!hasDrawOrRamp && analysis.totalMain > 10) {
-      const drawCards = db
+      let drawCards = db
         .prepare(
           `SELECT c.* FROM cards c
            ${colJoin}
@@ -176,9 +203,14 @@ export function getRuleBasedSuggestions(
            ${legalFilter}
            AND c.id NOT IN (${Array.from(existingCardIds).map(() => '?').join(',') || "''"})
            ORDER BY c.edhrec_rank ASC NULLS LAST
-           LIMIT 3`
+           LIMIT ${hasMetaData ? 15 : 3}`
         )
         .all(...Array.from(existingCardIds)) as DbCard[];
+
+      if (hasMetaData) {
+        drawCards.sort((a, b) => (metaRankMap.get(b.name) ?? -1) - (metaRankMap.get(a.name) ?? -1));
+        drawCards = drawCards.slice(0, 3);
+      }
 
       for (const card of drawCards) {
         if (existingCardNames.has(card.name) || suggestedNames.has(card.name)) continue;
@@ -207,7 +239,7 @@ export function getRuleBasedSuggestions(
         : '1=1';
     const colorParams = analysis.colorIdentity.map((col) => `%${col}%`);
 
-    const removal = db
+    let removal = db
       .prepare(
         `SELECT c.* FROM cards c
          ${colJoin}
@@ -217,9 +249,14 @@ export function getRuleBasedSuggestions(
          ${legalFilter}
          AND c.id NOT IN (${Array.from(existingCardIds).map(() => '?').join(',') || "''"})
          ORDER BY c.edhrec_rank ASC NULLS LAST
-         LIMIT 3`
+         LIMIT ${hasMetaData ? 15 : 3}`
       )
       .all(...colorParams, ...Array.from(existingCardIds)) as DbCard[];
+
+    if (hasMetaData) {
+      removal.sort((a, b) => (metaRankMap.get(b.name) ?? -1) - (metaRankMap.get(a.name) ?? -1));
+      removal = removal.slice(0, 3);
+    }
 
     for (const card of removal) {
       if (existingCardNames.has(card.name) || suggestedNames.has(card.name)) continue;
