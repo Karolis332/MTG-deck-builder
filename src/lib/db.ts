@@ -1260,6 +1260,53 @@ export function getFormatStaples(
 }
 
 /**
+ * Get per-commander card inclusion stats from community deck data.
+ * Returns cards sorted by inclusion rate for a specific commander,
+ * with synergy scores (how much more/less common vs global baseline).
+ */
+export function getCommanderCardStats(
+  commanderName: string,
+  limit: number = 200
+): Array<{
+  cardName: string;
+  inclusionRate: number;
+  avgCopies: number;
+  synergyScore: number;
+  deckCount: number;
+  totalDecks: number;
+}> {
+  const db = getDb();
+  try {
+    const rows = db.prepare(`
+      SELECT card_name, inclusion_rate, avg_copies, synergy_score,
+             deck_count, total_commander_decks
+      FROM commander_card_stats
+      WHERE commander_name = ? COLLATE NOCASE
+      ORDER BY inclusion_rate DESC
+      LIMIT ?
+    `).all(commanderName, limit) as Array<{
+      card_name: string;
+      inclusion_rate: number;
+      avg_copies: number;
+      synergy_score: number;
+      deck_count: number;
+      total_commander_decks: number;
+    }>;
+
+    return rows.map(r => ({
+      cardName: r.card_name,
+      inclusionRate: r.inclusion_rate,
+      avgCopies: r.avg_copies,
+      synergyScore: r.synergy_score,
+      deckCount: r.deck_count,
+      totalDecks: r.total_commander_decks,
+    }));
+  } catch {
+    return [];
+  }
+}
+
+/**
  * Community co-occurrence recommendations.
  * Given a deck's card names, finds community decks sharing the most cards,
  * then returns the most popular cards from those similar decks that aren't

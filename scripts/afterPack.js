@@ -45,6 +45,20 @@ module.exports = async function afterPack(context) {
   const resourcesDir = path.join(context.appOutDir, 'resources');
   const sqliteDir = path.join(resourcesDir, 'standalone', 'node_modules', 'better-sqlite3');
 
+  // ── Step 0: Ensure ffmpeg.dll is present ─────────────────────────────
+  // electron-builder sometimes strips ffmpeg.dll from the output. Without it
+  // the exe fails with "ffmpeg.dll was not found" on launch.
+  const ffmpegDest = path.join(context.appOutDir, 'ffmpeg.dll');
+  if (!fs.existsSync(ffmpegDest)) {
+    const ffmpegSrc = path.join(process.cwd(), 'node_modules', 'electron', 'dist', 'ffmpeg.dll');
+    if (fs.existsSync(ffmpegSrc)) {
+      console.log('[afterPack] ffmpeg.dll missing from output — copying from electron/dist/');
+      fs.copyFileSync(ffmpegSrc, ffmpegDest);
+    } else {
+      console.warn('[afterPack] WARNING: ffmpeg.dll not found in electron/dist/ either');
+    }
+  }
+
   // ── Step 1: Ensure standalone/node_modules exists ──────────────────────
   // ow-electron-builder may strip node_modules from extraResources copies.
   if (!fs.existsSync(path.join(resourcesDir, 'standalone', 'node_modules'))) {

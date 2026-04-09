@@ -1,4 +1,4 @@
-import { getDb, getCedhStaples, getMetaCardStatsMap, getMetaRankedCardNames, getFormatStaples, getCommunityRecommendations } from './db';
+import { getDb, getCedhStaples, getMetaCardStatsMap, getMetaRankedCardNames, getFormatStaples, getCommunityRecommendations, getCommanderCardStats } from './db';
 import type { DbCard, AISuggestion } from './types';
 import { DEFAULT_LAND_COUNT, DEFAULT_DECK_SIZE, getLegalityKey, COMMANDER_FORMATS } from './constants';
 import { getCardGlobalScore, getMetaAdjustedScore } from './global-learner';
@@ -752,9 +752,53 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
     }
   }
 
+  // ── Per-commander card stats (from 506K+ community decks) ──────────────
+  // Provides per-commander inclusion rates: "72% of Ur-Dragon decks run Sol Ring"
+  const commanderStatsMap = new Map<string, { inclusionRate: number; synergyScore: number }>();
+  if (isCommander && commanderName) {
+    const cmdrStats = getCommanderCardStats(commanderName, 300);
+    for (const s of cmdrStats) {
+      commanderStatsMap.set(s.cardName, {
+        inclusionRate: s.inclusionRate,
+        synergyScore: s.synergyScore,
+      });
+    }
+    // Inject high-inclusion commander cards into pool if not already present
+    // Cards that 25%+ of this commander's decks run should be candidates
+    const highIncCards = cmdrStats.filter(s => s.inclusionRate >= 0.25 && !seenNames.has(s.cardName));
+    if (highIncCards.length > 0) {
+      const namePlaceholders = highIncCards.map(() => '?').join(',');
+      try {
+        const injected = db.prepare(`
+          SELECT * FROM cards
+          WHERE name IN (${namePlaceholders})
+          ${colorExcludeFilter}
+          ${legalityFilter}
+          LIMIT 100
+        `).all(...highIncCards.map(s => s.cardName)) as DbCard[];
+        for (const card of injected) {
+          if (!seenNames.has(card.name)) {
+            seenNames.add(card.name);
+            pool.push(card);
+          }
+        }
+      } catch {
+        // cards table query failed — non-blocking
+      }
+    }
+  }
+
   // ── Step 3: Score cards ─────────────────────────────────────────────────
   // Key change: EDHREC per-commander synergy score is now the dominant signal
   // for commander format decks, replacing the generic edhrec_rank
+
+  // Color-share estimate: what fraction of all decks can play this color combo?
+  // Used to adjust global inclusion rates into color-specific rates
+  const colorShareEstimate = colors.length <= 1 ? 0.45
+    : colors.length === 2 ? 0.25
+    : colors.length === 3 ? 0.15
+    : colors.length === 4 ? 0.10
+    : 0.05;
 
   const scored = pool.map((card) => {
     let score = 0;
@@ -771,6 +815,32 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
     if (cfScore !== undefined) {
       // CF score (0-1) scaled to 0-20 bonus
       score += cfScore * 20;
+    }
+
+    // ── Per-commander community data (from 506K+ decks) ──
+    // "72% of Ur-Dragon decks run this card" — strongest signal for commander decks
+    const cmdrStats = commanderStatsMap.get(card.name);
+    if (cmdrStats) {
+      // Inclusion rate: 0-1 scaled to 0-70 bonus (highest-weight signal)
+      if (cmdrStats.inclusionRate >= 0.6) {
+        score += 70; // Commander staple — in 60%+ of this commander's decks
+      } else if (cmdrStats.inclusionRate >= 0.4) {
+        score += 50; // Near-staple for this commander
+      } else if (cmdrStats.inclusionRate >= 0.25) {
+        score += 35; // Common pick
+      } else if (cmdrStats.inclusionRate >= 0.15) {
+        score += 20; // Frequent include
+      } else if (cmdrStats.inclusionRate >= 0.08) {
+        score += 10; // Occasional include
+      }
+      // Synergy bonus: cards that appear MORE in this commander's decks than globally
+      if (cmdrStats.synergyScore > 0.3) {
+        score += 25; // Very high commander-specific synergy
+      } else if (cmdrStats.synergyScore > 0.15) {
+        score += 15;
+      } else if (cmdrStats.synergyScore > 0.05) {
+        score += 8;
+      }
     }
 
     // ── EDHREC commander-specific synergy (primary signal for commander) ──
@@ -895,18 +965,23 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
       }
     }
 
-    // ── Meta card stats scoring (from 67K+ scraped decks) ──
+    // ── Meta card stats scoring (from 506K+ scraped decks) ──
+    // Inclusion rates are global — adjust for color identity to properly weight
+    // color-specific staples (e.g., Ponder at 5.8% global ≈ 20% in blue decks)
     const metaStats = metaStatsMap.get(card.name);
     if (metaStats) {
-      // Tiered inclusion rate bonus — high-inclusion cards are format staples
-      if (metaStats.inclusionRate >= 0.6) {
-        score += 50; // Universal staple (e.g., Arcane Signet, Sol Ring, Command Tower)
-      } else if (metaStats.inclusionRate >= 0.4) {
-        score += 35; // Near-staple
-      } else if (metaStats.inclusionRate >= 0.2) {
-        score += 20; // Common include
-      } else if (metaStats.inclusionRate >= 0.1) {
-        score += 10; // Occasional include
+      const colorAdjustedRate = metaStats.inclusionRate / colorShareEstimate;
+      // Tiered bonus using color-adjusted rate — proven staples outscore niche synergy
+      if (colorAdjustedRate >= 0.6 || metaStats.inclusionRate >= 0.6) {
+        score += 80; // Universal staple (Sol Ring, Arcane Signet, Command Tower)
+      } else if (colorAdjustedRate >= 0.4 || metaStats.inclusionRate >= 0.4) {
+        score += 60; // Near-staple (Lightning Greaves, Swiftfoot Boots)
+      } else if (colorAdjustedRate >= 0.25 || metaStats.inclusionRate >= 0.25) {
+        score += 40; // Color staple (Ponder, Counterspell, Negate)
+      } else if (colorAdjustedRate >= 0.15 || metaStats.inclusionRate >= 0.15) {
+        score += 25; // Common include
+      } else if (colorAdjustedRate >= 0.08 || metaStats.inclusionRate >= 0.1) {
+        score += 12; // Occasional include
       }
       // Archetype core rate (appears in >50% of ONE archetype)
       if (metaStats.coreRate > 0.5) {
@@ -988,10 +1063,18 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
     return owned > 0 ? Math.min(formatMax, owned) : 0;
   }
 
-  // Pre-pass: Force universal format staples into the deck
-  // Cards with very high meta inclusion (>50%) or in template protectedPatterns
-  // must be guaranteed slots — they're proven staples that curve-based selection
-  // can accidentally exclude when commander-synergy cards fill every bucket.
+  // Pre-pass: Force format staples into the deck
+  // The meta_inclusion_rate is global (across ALL 506K decks), not color-filtered.
+  // A card like Ponder at 5.8% globally is actually ~20% in blue decks because
+  // only ~30% of decks can play blue. Adjust threshold by color count.
+  const colorShare = colors.length <= 1 ? 0.45
+    : colors.length === 2 ? 0.25
+    : colors.length === 3 ? 0.15
+    : colors.length === 4 ? 0.10
+    : 0.05;
+  // Cards at 8%+ global in a 2-color deck ≈ 32% among matching decks
+  const stapleGlobalThreshold = 0.08 * colorShare / 0.25;
+
   const template = getTemplate(resolvedStrategy);
   const protectedNames = new Set(
     (template.protectedPatterns || []).map((p: string) => p.toLowerCase())
@@ -1003,7 +1086,12 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
 
     const isProtectedStaple = protectedNames.has(card.name.toLowerCase());
     const metaStats = metaStatsMap.get(card.name);
-    const isUniversalStaple = metaStats && metaStats.inclusionRate >= 0.50;
+    // Force-include: either high global inclusion (adjusted for color count)
+    // or very high raw inclusion (20%+ of ALL decks regardless of color)
+    const isUniversalStaple = metaStats && (
+      metaStats.inclusionRate >= 0.20 ||
+      metaStats.inclusionRate >= stapleGlobalThreshold
+    );
 
     if (!isProtectedStaple && !isUniversalStaple) continue;
 

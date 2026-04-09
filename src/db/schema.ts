@@ -1292,4 +1292,30 @@ export const MIGRATIONS = [
       CREATE INDEX IF NOT EXISTS idx_aisl_created ON ai_suggestion_log(created_at);
     `,
   },
+  {
+    version: 34,
+    name: 'commander_card_stats',
+    sql: `
+      -- Per-commander card inclusion rates from 506K+ community decks.
+      -- Tracks how often each card appears alongside a specific commander,
+      -- enabling data-driven deck building: "In 2800 Ur-Dragon decks, 72% run Sol Ring"
+      CREATE TABLE IF NOT EXISTS commander_card_stats (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        commander_name TEXT NOT NULL,
+        card_name TEXT NOT NULL,
+        inclusion_rate REAL NOT NULL DEFAULT 0,
+        avg_copies REAL NOT NULL DEFAULT 1,
+        synergy_score REAL NOT NULL DEFAULT 0,
+        deck_count INTEGER NOT NULL DEFAULT 0,
+        total_commander_decks INTEGER NOT NULL DEFAULT 0,
+        color_identity TEXT,
+        updated_at TEXT NOT NULL DEFAULT (datetime('now')),
+        UNIQUE(commander_name, card_name)
+      );
+
+      CREATE INDEX IF NOT EXISTS idx_ccs_commander ON commander_card_stats(commander_name);
+      CREATE INDEX IF NOT EXISTS idx_ccs_card ON commander_card_stats(card_name);
+      CREATE INDEX IF NOT EXISTS idx_ccs_incl ON commander_card_stats(commander_name, inclusion_rate DESC);
+    `,
+  },
 ];

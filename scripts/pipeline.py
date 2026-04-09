@@ -126,6 +126,12 @@ STEPS = [
         "args": [],
     },
     {
+        "name": "commander_stats",
+        "label": "Per-Commander Card Stats Aggregation",
+        "script": "aggregate_commander_stats.py",
+        "args": [],
+    },
+    {
         "name": "analyze",
         "label": "Pandas Meta Analysis",
         "script": "analyze_meta.py",
@@ -154,7 +160,8 @@ def _attempt_step(step: dict, db_path: str) -> tuple[bool, str]:
 
     cmd = [sys.executable, script_path, "--db", db_path] + step["args"]
     step_timeout = 900 if step["name"] in (
-        "goldfish", "mtgtop8", "edhrec_articles", "goldfish_articles", "spellbook", "topdeck"
+        "goldfish", "mtgtop8", "edhrec_articles", "goldfish_articles", "spellbook", "topdeck",
+        "commander_stats"
     ) else 300
 
     start = time.time()
