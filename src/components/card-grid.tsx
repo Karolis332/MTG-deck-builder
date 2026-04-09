@@ -5,6 +5,8 @@ import type { DbCard } from '@/lib/types';
 import { CardImage } from './card-image';
 import { ManaCost } from './mana-cost';
 import { RARITY_COLORS } from '@/lib/constants';
+import { useDraggable } from '@dnd-kit/core';
+import type { DragCardData } from './deck-dnd-context';
 
 interface CardGridProps {
   cards: DbCard[];
@@ -76,16 +78,7 @@ export function CardGrid({
       {cards.map((card) => {
         const qty = showQuantity ? showQuantity(card) : 0;
         return (
-          <div
-            key={card.id}
-            className="group relative"
-            onContextMenu={(e) => {
-              if (onCardZoom) {
-                e.preventDefault();
-                onCardZoom(card, { x: e.clientX, y: e.clientY });
-              }
-            }}
-          >
+          <DraggableCard key={card.id} card={card} onCardZoom={onCardZoom}>
             <CardImage
               card={card}
               size={size}
@@ -134,9 +127,42 @@ export function CardGrid({
                 </div>
               </div>
             )}
-          </div>
+          </DraggableCard>
         );
       })}
+    </div>
+  );
+}
+
+function DraggableCard({
+  card,
+  onCardZoom,
+  children,
+}: {
+  card: DbCard;
+  onCardZoom?: (card: DbCard, position: { x: number; y: number }) => void;
+  children: React.ReactNode;
+}) {
+  const dragData: DragCardData = { type: 'search-card', card };
+  const { attributes, listeners, setNodeRef, isDragging } = useDraggable({
+    id: `search-${card.id}`,
+    data: dragData,
+  });
+
+  return (
+    <div
+      ref={setNodeRef}
+      {...attributes}
+      {...listeners}
+      className={cn('group relative cursor-grab active:cursor-grabbing', isDragging && 'opacity-30')}
+      onContextMenu={(e) => {
+        if (onCardZoom) {
+          e.preventDefault();
+          onCardZoom(card, { x: e.clientX, y: e.clientY });
+        }
+      }}
+    >
+      {children}
     </div>
   );
 }

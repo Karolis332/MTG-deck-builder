@@ -31,6 +31,7 @@ import { AIChatPanel } from '@/components/ai-chat-panel';
 import { ImportDialog } from '@/components/import-dialog';
 import { VersionHistoryPanel } from '@/components/version-history-panel';
 import { CardZoomOverlay } from '@/components/card-zoom-overlay';
+import { DeckDndContext } from '@/components/deck-dnd-context';
 import { FORMAT_LABELS, FORMATS, COMMANDER_FORMATS, DEFAULT_DECK_SIZE } from '@/lib/constants';
 
 interface DeckData {
@@ -400,6 +401,27 @@ export default function DeckEditorPage() {
     }
   };
 
+  const moveCardBoard = async (cardId: string, fromBoard: string, toBoard: string) => {
+    if (!deck) return;
+    setSaving(true);
+    try {
+      const res = await fetch(`/api/decks/${deckId}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          op: 'move_card',
+          card_id: cardId,
+          from_board: fromBoard,
+          to_board: toBoard,
+        }),
+      });
+      const data = await res.json();
+      if (data.deck) setDeck(data.deck);
+    } catch {} finally {
+      setSaving(false);
+    }
+  };
+
   const setAsCommander = async (cardId: string) => {
     if (!deck) return;
     setSaving(true);
@@ -604,7 +626,11 @@ export default function DeckEditorPage() {
     .reduce((s, c) => s + c.quantity, 0);
 
   return (
-    <>
+    <DeckDndContext
+      onAddCard={addCardToDeck}
+      onMoveCard={moveCardBoard}
+      onRemoveCard={removeCardFromDeck}
+    >
       <div className="flex h-[calc(100vh-3.5rem)] flex-col">
         {/* Deck header */}
         <div className="shrink-0 border-b border-border bg-card/50 px-4 py-2">
@@ -1495,7 +1521,7 @@ export default function DeckEditorPage() {
         position={zoomPosition}
         onClose={closeZoom}
       />
-    </>
+    </DeckDndContext>
   );
 }
 

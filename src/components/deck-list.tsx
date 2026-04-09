@@ -13,6 +13,8 @@ import {
   CATEGORY_COLORS,
   type CardCategory,
 } from '@/lib/card-classifier';
+import { useDroppable, useDraggable } from '@dnd-kit/core';
+import type { DragCardData } from './deck-dnd-context';
 
 type GroupMode = 'type' | 'role';
 
@@ -179,6 +181,8 @@ export function DeckList({
         />
       )}
 
+      {/* Droppable mainboard zone */}
+      <DroppableZone id="drop-main">
       {/* Group mode toggle + Maindeck header */}
       <div className="flex items-center justify-between">
         <div className="text-sm font-medium text-muted-foreground">
@@ -245,12 +249,14 @@ export function DeckList({
           );
         })}
 
-      {/* Sideboard */}
-      {sideCards.length > 0 && (
-        <>
-          <div className="border-t border-border pt-2 text-sm font-medium text-muted-foreground">
-            Sideboard ({sideTotal})
-          </div>
+      </DroppableZone>
+
+      {/* Sideboard — droppable zone */}
+      <DroppableZone id="drop-sideboard">
+        <div className="border-t border-border pt-2 text-sm font-medium text-muted-foreground">
+          Sideboard ({sideTotal})
+        </div>
+        {sideCards.length > 0 && (
           <DeckSection
             title=""
             count={sideTotal}
@@ -262,8 +268,13 @@ export function DeckList({
             favourites={favourites}
             onToggleFavourite={deckId ? toggleFavourite : undefined}
           />
-        </>
-      )}
+        )}
+        {sideCards.length === 0 && (
+          <div className="py-3 text-center text-xs text-muted-foreground/60">
+            Drag cards here for sideboard
+          </div>
+        )}
+      </DroppableZone>
 
       {cards.length === 0 && (
         <div className="flex flex-col items-center py-8 text-center">
@@ -366,6 +377,18 @@ function DeckCardRow({
   const [hovered, setHovered] = useState(false);
   const [mouseY, setMouseY] = useState(0);
   const card = entry.card;
+
+  // Make row draggable
+  const dragData: DragCardData = {
+    type: 'deck-card',
+    card,
+    board: entry.board,
+    cardId: entry.card_id,
+  };
+  const { attributes, listeners, setNodeRef: setDragRef, isDragging } = useDraggable({
+    id: `deck-${entry.card_id}-${entry.board}`,
+    data: dragData,
+  });
   const previewUrl = card.image_uri_small;
   const largeUrl = card.image_uri_normal || card.image_uri_large
     || `https://api.scryfall.com/cards/named?exact=${encodeURIComponent(card.name)}&format=image&version=normal`;
@@ -376,9 +399,13 @@ function DeckCardRow({
 
   return (
     <div
+      ref={setDragRef}
+      {...attributes}
+      {...listeners}
       className={cn(
-        'group relative flex items-center gap-2 rounded-lg px-2 py-1.5 transition-colors hover:bg-accent/50',
-        isCommander && 'bg-primary/10 border border-primary/30'
+        'group relative flex items-center gap-2 rounded-lg px-2 py-1.5 transition-colors hover:bg-accent/50 cursor-grab active:cursor-grabbing',
+        isCommander && 'bg-primary/10 border border-primary/30',
+        isDragging && 'opacity-30'
       )}
       onMouseEnter={(e) => { setHovered(true); setMouseY(e.clientY); }}
       onMouseMove={(e) => setMouseY(e.clientY)}
@@ -515,6 +542,22 @@ function DeckCardRow({
           ×
         </button>
       )}
+    </div>
+  );
+}
+
+function DroppableZone({ id, children }: { id: string; children: React.ReactNode }) {
+  const { isOver, setNodeRef } = useDroppable({ id });
+
+  return (
+    <div
+      ref={setNodeRef}
+      className={cn(
+        'rounded-lg transition-all',
+        isOver && 'ring-2 ring-primary/50 bg-primary/5'
+      )}
+    >
+      {children}
     </div>
   );
 }
