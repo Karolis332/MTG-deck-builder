@@ -1,0 +1,271 @@
+{
+  "name": "MTG Highlight → Social Media Pipeline",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "mtg-highlight-upload",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-trigger",
+      "name": "Webhook: Receive Highlight Clip",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "operation": "write",
+        "fileName": "={{ $json.body.matchId }}_{{ $json.body.highlightType }}_sev{{ $json.body.severity }}.mp4",
+        "filePath": "/data/highlights/incoming/",
+        "binaryPropertyName": "clip"
+      },
+      "id": "save-clip",
+      "name": "Save Clip to Disk",
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "command": "ffmpeg -i \"/data/highlights/incoming/{{ $json.fileName }}\" -i /data/highlights/assets/intro_3s.mp4 -i /data/highlights/assets/outro_2s.mp4 -filter_complex \"[1:v][0:v][2:v]concat=n=3:v=1:a=0[outv];[0:v]drawtext=text='{{ $json.body.caption }}':fontcolor=white:fontsize=36:borderw=2:x=(w-text_w)/2:y=h-80:enable='between(t,0,4)'[captioned]\" -map \"[outv]\" -c:v libx264 -preset fast -crf 22 -movflags +faststart -y \"/data/highlights/processed/{{ $json.fileName }}\"",
+        "options": {}
+      },
+      "id": "ffmpeg-process",
+      "name": "FFmpeg: Add Intro/Outro + Caption",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "command": "ffmpeg -i \"/data/highlights/processed/{{ $json.fileName }}\" -vf \"scale=1080:1920:force_original_aspect_ratio=decrease,pad=1080:1920:(ow-iw)/2:(oh-ih)/2\" -c:v libx264 -preset fast -crf 23 -movflags +faststart -y \"/data/highlights/shorts/{{ $json.fileName }}\"",
+        "options": {}
+      },
+      "id": "ffmpeg-vertical",
+      "name": "FFmpeg: Convert to Vertical (9:16)",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [900, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{ $json.body.severity >= 7 }}",
+              "value2": true
+            }
+          ]
+        }
+      },
+      "id": "severity-filter",
+      "name": "Filter: Severity >= 7",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [1120, 300]
+    },
+    {
+      "parameters": {
+        "resource": "video",
+        "operation": "upload",
+        "title": "={{ $json.body.caption }} | MTG Arena #shorts #mtg #mtgarena",
+        "description": "={{ $json.body.caption }}\n\nFormat: {{ $json.body.format || 'Constructed' }}\nHighlight: {{ $json.body.highlightType }}\n\n#MTGArena #MagicTheGathering #BlackGrimoire #MTG #Shorts #GameplayHighlights",
+        "categoryId": "20",
+        "privacyStatus": "public",
+        "binaryPropertyName": "verticalClip",
+        "options": {
+          "tags": "MTG Arena,Magic The Gathering,MTG,gameplay,highlights,Black Grimoire,deck tracker,shorts",
+          "defaultLanguage": "en"
+        }
+      },
+      "id": "youtube-upload",
+      "name": "YouTube: Upload Short",
+      "type": "n8n-nodes-base.youTube",
+      "typeVersion": 1,
+      "position": [1340, 200],
+      "credentials": {
+        "youTubeOAuth2Api": {
+          "id": "YOUTUBE_CREDENTIAL_ID",
+          "name": "YouTube OAuth2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://open.tiktokapis.com/v2/post/publish/video/init/",
+        "authentication": "predefinedCredentialType",
+        "method": "POST",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "post_info",
+              "value": "={\"title\":\"{{ $json.body.caption }} #mtg #mtgarena #shorts #gaming\",\"privacy_level\":\"PUBLIC_TO_EVERYONE\",\"disable_duet\":false,\"disable_comment\":false,\"disable_stitch\":false}"
+            },
+            {
+              "name": "source_info",
+              "value": "={\"source\":\"FILE_UPLOAD\",\"video_size\":{{ $json.fileSize }}}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "tiktok-upload",
+      "name": "TikTok: Upload Video",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1340, 400],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "TIKTOK_CREDENTIAL_ID",
+          "name": "TikTok API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://graph.instagram.com/v21.0/{{ $credentials.instagramBusinessAccountId }}/media",
+        "authentication": "predefinedCredentialType",
+        "method": "POST",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "media_type",
+              "value": "REELS"
+            },
+            {
+              "name": "video_url",
+              "value": "={{ $json.publicClipUrl }}"
+            },
+            {
+              "name": "caption",
+              "value": "={{ $json.body.caption }} \n\n#MTGArena #MagicTheGathering #MTG #BlackGrimoire #Shorts #Gaming #DeckTracker"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "instagram-upload",
+      "name": "Instagram: Create Reel",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1340, 600],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "INSTAGRAM_CREDENTIAL_ID",
+          "name": "Instagram Graph API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ ok: true, matchId: $json.body.matchId, platforms: ['youtube', 'tiktok', 'instagram'] }) }}"
+      },
+      "id": "webhook-response",
+      "name": "Respond: Success",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1560, 400]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ ok: true, matchId: $json.body.matchId, skipped: true, reason: 'severity below threshold' }) }}"
+      },
+      "id": "webhook-response-skip",
+      "name": "Respond: Skipped (Low Severity)",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1340, 500]
+    },
+    {
+      "parameters": {
+        "url": "https://hooks.slack.com/services/SLACK_WEBHOOK_URL",
+        "method": "POST",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "text",
+              "value": "=New MTG highlight posted!\n*{{ $json.body.caption }}*\nSeverity: {{ $json.body.severity }}/10 | Type: {{ $json.body.highlightType }}\nPlatforms: YouTube, TikTok, Instagram"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "notify-telegram",
+      "name": "Notify: Telegram/Slack",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1560, 200]
+    }
+  ],
+  "connections": {
+    "Webhook: Receive Highlight Clip": {
+      "main": [
+        [
+          { "node": "Save Clip to Disk", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Save Clip to Disk": {
+      "main": [
+        [
+          { "node": "FFmpeg: Add Intro/Outro + Caption", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "FFmpeg: Add Intro/Outro + Caption": {
+      "main": [
+        [
+          { "node": "FFmpeg: Convert to Vertical (9:16)", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "FFmpeg: Convert to Vertical (9:16)": {
+      "main": [
+        [
+          { "node": "Filter: Severity >= 7", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Filter: Severity >= 7": {
+      "main": [
+        [
+          { "node": "YouTube: Upload Short", "type": "main", "index": 0 },
+          { "node": "TikTok: Upload Video", "type": "main", "index": 0 },
+          { "node": "Instagram: Create Reel", "type": "main", "index": 0 }
+        ],
+        [
+          { "node": "Respond: Skipped (Low Severity)", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "YouTube: Upload Short": {
+      "main": [
+        [
+          { "node": "Notify: Telegram/Slack", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Notify: Telegram/Slack": {
+      "main": [
+        [
+          { "node": "Respond: Success", "type": "main", "index": 0 }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "tags": [
+    { "name": "mtg" },
+    { "name": "social-media" },
+    { "name": "automation" }
+  ]
+}

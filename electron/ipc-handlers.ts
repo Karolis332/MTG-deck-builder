@@ -10,6 +10,8 @@ import * as screenRecorder from './screen-recorder';
 import { parseArenaLogFile } from '../src/lib/arena-log-reader';
 import { GrpIdResolver } from '../src/lib/grp-id-resolver';
 import { analyzeMulligan } from '../src/lib/mulligan-advisor';
+import { HighlightDetector } from '../src/lib/highlight-detector';
+import { MatchRecorder } from './match-recorder';
 import { isOverwolfRuntime } from './platform-detect';
 import type { GameStateSnapshot } from '../src/lib/game-state-engine';
 import type { TelemetryFlushData } from '../src/lib/match-telemetry';
@@ -27,6 +29,8 @@ let watcher: ArenaLogWatcher | null = null;
 let mlProcess: ChildProcess | null = null;
 let resolver: GrpIdResolver | null = null;
 let arenaDbUpdateInProgress = false;
+let highlightDetector: HighlightDetector | null = null;
+let matchRecorder: MatchRecorder | null = null;
 
 // ── Telemetry retry queue ────────────────────────────────────────────────
 // Flushes that fail (server not ready during catch-up) are queued and retried.
@@ -294,10 +298,65 @@ function startWatcherInternal(logPath: string, catchUp = false): { ok: boolean; 
 
     watcher.on('match-start', (data: { matchId: string; format: string | null; playerName: string | null; opponentName: string | null }) => {
       broadcast('match-started', data);
+
+      // Initialize highlight detector for this match
+      highlightDetector = new HighlightDetector();
+      highlightDetector.setCardNameResolver((grpId) => {
+        const res = getResolver();
+        const cached = res.getCached(grpId);
+        return cached?.name || `Card #${grpId}`;
+      });
+      highlightDetector.onHighlight((hl) => {
+        broadcast('highlight-detected', hl);
+        traceLog(`highlight: ${hl.type} sev=${hl.severity} "${hl.caption}"`);
+        // Forward to recorder for timestamp marking
+        if (matchRecorder?.isRecording()) {
+          matchRecorder.markHighlight(hl);
+        }
+      });
+
+      // Start recording the match
+      if (!matchRecorder) {
+        matchRecorder = new MatchRecorder();
+      }
+      matchRecorder.startRecording(data).then((started) => {
+        if (started) {
+          traceLog(`recorder: started for match ${data.matchId}`);
+          broadcast('recording-match-state', { recording: true, matchId: data.matchId });
+        }
+      }).catch((err) => {
+        traceLog(`recorder: start failed: ${err}`);
+      });
     });
 
     watcher.on('match-end', (data: { matchId: string; result: string; deckCards: string[]; commander: string; format: string | null }) => {
       broadcast('match-ended', data);
+
+      // Stop recording and extract clips
+      if (matchRecorder?.isRecording()) {
+        matchRecorder.stopRecording(data.result).then((session) => {
+          if (session) {
+            traceLog(`recorder: saved ${session.filePath}, ${session.highlights.length} highlights, ${session.clips.length} clips`);
+            broadcast('recording-match-state', { recording: false, matchId: data.matchId });
+            broadcast('recording-session-complete', {
+              matchId: session.matchId,
+              filePath: session.filePath,
+              highlights: session.highlights.length,
+              clips: session.clips.map(c => ({
+                type: c.type,
+                caption: c.caption,
+                severity: c.severity,
+                filePath: c.filePath,
+                duration: c.durationSeconds,
+              })),
+            });
+          }
+        }).catch((err) => {
+          traceLog(`recorder: stop failed: ${err}`);
+        });
+      }
+
+      highlightDetector = null;
     });
 
     watcher.on('post-match-stats', (stats: PostMatchStats) => {
@@ -360,6 +419,16 @@ function startWatcherInternal(logPath: string, catchUp = false): { ok: boolean; 
     watcher.on('game-log-update', (entry: GameLogEntry) => {
       traceLog(`broadcast game-log-update: text="${entry.text.slice(0, 60)}"`);
       broadcast('game-log-update', entry);
+    });
+
+    // ── Highlight detection (fed from raw game events) ─────────────────────
+    watcher.on('game-event', (event: import('../src/lib/arena-game-events').ArenaGameEvent) => {
+      if (highlightDetector && watcher) {
+        const state = watcher.getGameState();
+        if (state) {
+          highlightDetector.processEvent(event, state);
+        }
+      }
     });
 
     // ── Telemetry persistence ───────────────────────────────────────────────
@@ -963,5 +1032,25 @@ export function registerIpcHandlers(): void {
 
   ipcMain.handle('open-recordings-folder', () => {
     screenRecorder.openRecordingsFolder();
+  });
+
+  // ── Highlight & Match Recording ─────────────────────────────────────────
+
+  ipcMain.handle('get-highlights', () => {
+    return highlightDetector?.getHighlights() ?? [];
+  });
+
+  ipcMain.handle('get-recording-session', () => {
+    return matchRecorder?.getCurrentSession() ?? null;
+  });
+
+  ipcMain.handle('set-recorder-enabled', (_event, enabled: boolean) => {
+    if (!matchRecorder) {
+      matchRecorder = new MatchRecorder({ enabled });
+    } else {
+      // Recreate with updated config
+      matchRecorder = new MatchRecorder({ enabled });
+    }
+    return { enabled };
   });
 }
