@@ -4,7 +4,24 @@ import fs from 'fs';
 import { MIGRATIONS } from '@/db/schema';
 import { getLegalityKey } from '@/lib/constants';
 
-const DB_DIR = process.env.MTG_DB_DIR || path.join(process.cwd(), 'data');
+function resolveDbDir(): string {
+  // Explicit env var takes priority
+  if (process.env.MTG_DB_DIR) return process.env.MTG_DB_DIR;
+
+  // In non-Electron dev mode, use the Electron app's data dir if it exists
+  // so dev server and packaged app share the same database
+  if (process.env.APPDATA) {
+    const electronDir = path.join(process.env.APPDATA, 'the-black-grimoire', 'data');
+    if (fs.existsSync(path.join(electronDir, 'mtg-deck-builder.db'))) {
+      return electronDir;
+    }
+  }
+
+  // Fallback to project-local data dir
+  return path.join(process.cwd(), 'data');
+}
+
+const DB_DIR = resolveDbDir();
 const DB_PATH = path.join(DB_DIR, 'mtg-deck-builder.db');
 
 function createDatabase(): Database.Database {

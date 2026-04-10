@@ -405,10 +405,10 @@ export function AIChatPanel({ deckId, onApplyActions, className }: AIChatPanelPr
             </p>
             <div className="mt-3 space-y-1.5">
               {[
+                'Optimize deck from match history',
                 'Replace my weakest creatures',
                 'Add more card draw',
                 'Fix my mana curve',
-                'What cards should I cut?',
               ].map((q) => (
                 <button
                   key={q}

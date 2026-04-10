@@ -241,9 +241,63 @@ export function resolveCFToDbCards(
   return results;
 }
 
-/**
- * Test connection to the CF API.
- */
+// ── Deck Optimization ────────────────────────────────────────────────────────
+
+export interface MatchRecord {
+  result: 'win' | 'loss';
+  opponent_colors?: string;
+  opponent_archetype?: string;
+  turns?: number;
+  cards_drawn?: string[];
+  cards_played?: string[];
+}
+
+export interface CardSuggestion {
+  card_name: string;
+  score: number;
+  reason: string;
+  category: string;
+}
+
+export interface OptimizeDeckResponse {
+  cuts: CardSuggestion[];
+  adds: CardSuggestion[];
+  win_rate: number;
+  total_matches: number;
+  analysis: string;
+  model_version: string;
+}
+
+export async function optimizeDeck(
+  deckCards: string[],
+  commander: string,
+  matches: MatchRecord[],
+  format: string = 'brawl',
+  limit: number = 10,
+): Promise<OptimizeDeckResponse | null> {
+  if (!isCFEnabled()) return null;
+  if (matches.length === 0) return null;
+
+  const url = getCFApiUrl();
+  try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 10_000);
+
+    const resp = await fetch(`${url}/optimize-deck`, {
+      method: 'POST',
+      headers: buildCFHeaders(),
+      body: JSON.stringify({ cards: deckCards, commander, matches, format, limit }),
+      signal: controller.signal,
+    });
+    clearTimeout(timeout);
+
+    if (!resp.ok) return null;
+    return await resp.json();
+  } catch {
+    return null;
+  }
+}
+
 // ── EDHREC Consensus ────────────────────────────────────────────────────────
 
 export interface ConsensusCard {

@@ -3,7 +3,7 @@ import { getDb, getDeckWithCards, getFormatStaples, getMetaCardStatsMap, getComm
 import { DEFAULT_LAND_COUNT, DEFAULT_DECK_SIZE, COMMANDER_FORMATS } from '@/lib/constants';
 import { fitsColorIdentity, isLegalInFormat, extractRejectedCards, buildRejectionReminder, extractAppliedActions, buildAntiOscillationRules } from '@/lib/ai-chat-helpers';
 import { queryKnowledge, formatKnowledgeForPrompt } from '@/lib/knowledge-retrieval';
-import { getCFRecommendations, getEDHRECConsensus } from '@/lib/cf-api-client';
+import { getCFRecommendations, getEDHRECConsensus, optimizeDeck, type MatchRecord } from '@/lib/cf-api-client';
 import { getEdhrecRecommendations } from '@/lib/edhrec';
 import type { DbCard } from '@/lib/types';
 
@@ -240,6 +240,172 @@ export async function POST(request: NextRequest) {
         });
       }
     }
+    // ── FAST PATH: Optimize deck from match history ─────────────────────
+    if (prompt.match(/optimize.*match|fix.*match|improve.*from.*match|match.*history.*fix|match.*history.*optim/i)) {
+      console.log('[AI Chat] Optimize from match history detected');
+
+      const commanderName = commanderCards[0]?.name || '';
+      const deckCardNames = mainCards.map(c => c.name);
+
+      // Pull match history from local DB
+      const matchRows = db.prepare(`
+        SELECT
+          ml.result,
+          ml.opponent_deck_colors,
+          ml.opponent_deck_archetype,
+          ml.turns,
+          apm.draw_order
+        FROM match_logs ml
+        LEFT JOIN arena_parsed_matches apm ON apm.match_id = ml.arena_match_id
+        WHERE ml.deck_id = ?
+        ORDER BY ml.played_at DESC
+        LIMIT 50
+      `).all(deck_id) as Array<{
+        result: string;
+        opponent_deck_colors: string | null;
+        opponent_deck_archetype: string | null;
+        turns: number | null;
+        draw_order: string | null;
+      }>;
+
+      if (matchRows.length === 0) {
+        return NextResponse.json({
+          message: 'No match history found for this deck. Play some games first, and I\'ll analyze your wins and losses to suggest improvements.',
+          actions: [],
+        });
+      }
+
+      const matches: MatchRecord[] = matchRows.map(m => {
+        const record: MatchRecord = {
+          result: m.result === 'win' ? 'win' : 'loss',
+        };
+        if (m.opponent_deck_colors) record.opponent_colors = m.opponent_deck_colors;
+        if (m.opponent_deck_archetype) record.opponent_archetype = m.opponent_deck_archetype;
+        if (m.turns) record.turns = m.turns;
+        if (m.draw_order) {
+          try { record.cards_drawn = JSON.parse(m.draw_order); } catch {}
+        }
+        return record;
+      });
+
+      const wins = matches.filter(m => m.result === 'win').length;
+      const losses = matches.length - wins;
+      const wr = (wins / matches.length * 100).toFixed(0);
+
+      // Build color identity set for filtering
+      const optColorSet = new Set<string>();
+      for (const card of commanderCards) {
+        try {
+          const ci: string[] = card.color_identity ? JSON.parse(card.color_identity) : [];
+          ci.forEach(c => optColorSet.add(c));
+        } catch {}
+      }
+
+      // Try CF API optimize endpoint
+      const cfResult = await optimizeDeck(
+        deckCardNames,
+        commanderName,
+        matches,
+        format,
+      );
+
+      if (cfResult && (cfResult.cuts.length > 0 || cfResult.adds.length > 0)) {
+        // Build actions from CF response
+        const actions: ChatAction[] = [];
+
+        for (const cut of cfResult.cuts) {
+          const card = resolveCard(cut.card_name);
+          if (card) {
+            actions.push({
+              action: 'cut',
+              cardName: cut.card_name,
+              quantity: 1,
+              reason: cut.reason,
+            });
+          }
+        }
+
+        for (const add of cfResult.adds) {
+          const card = resolveCard(add.card_name);
+          if (card) {
+            // Check color identity and legality
+            if (!fitsColorIdentity(card, optColorSet)) continue;
+            if (!isLegalInFormat(card, format)) continue;
+
+            actions.push({
+              action: 'add',
+              cardName: add.card_name,
+              quantity: 1,
+              reason: add.reason,
+            });
+          }
+        }
+
+        const cutSection = cfResult.cuts.length > 0
+          ? `\n\n**Suggested Cuts:**\n${cfResult.cuts.map(c => `- **${c.card_name}** — ${c.reason}`).join('\n')}`
+          : '';
+        const addSection = cfResult.adds.length > 0
+          ? `\n\n**Suggested Additions:**\n${cfResult.adds.map(a => `- **${a.card_name}** — ${a.reason}`).join('\n')}`
+          : '';
+
+        return NextResponse.json({
+          message: `**Match History Analysis** (${wins}W-${losses}L, ${wr}% win rate)\n\n${cfResult.analysis}${cutSection}${addSection}`,
+          actions,
+        });
+      }
+
+      // Fallback: use local per-commander stats if CF API is down
+      const commanderStats = db.prepare(`
+        SELECT card_name, inclusion_rate, synergy_score
+        FROM commander_card_stats
+        WHERE commander_name = ?
+        ORDER BY inclusion_rate DESC
+        LIMIT 100
+      `).all(commanderName) as Array<{ card_name: string; inclusion_rate: number; synergy_score: number }>;
+
+      const existingLower = new Set(deckCardNames.map(n => n.toLowerCase()));
+      const missingStaples = commanderStats
+        .filter(r => !existingLower.has(r.card_name.toLowerCase()))
+        .filter(r => r.inclusion_rate >= 0.3)
+        .slice(0, 8);
+
+      const lowSynergy = commanderStats
+        .filter(r => existingLower.has(r.card_name.toLowerCase()))
+        .filter(r => r.synergy_score < -0.05 && r.inclusion_rate < 0.15)
+        .slice(0, 5);
+
+      const fallbackActions: ChatAction[] = [];
+      for (const cut of lowSynergy) {
+        fallbackActions.push({
+          action: 'cut',
+          cardName: cut.card_name,
+          quantity: 1,
+          reason: `Low synergy (${(cut.synergy_score * 100).toFixed(0)}%), only ${(cut.inclusion_rate * 100).toFixed(0)}% of ${commanderName} decks`,
+        });
+      }
+      for (const add of missingStaples) {
+        const card = resolveCard(add.card_name);
+        if (!card) continue;
+        if (!fitsColorIdentity(card, optColorSet)) continue;
+        if (!isLegalInFormat(card, format)) continue;
+        fallbackActions.push({
+          action: 'add',
+          cardName: add.card_name,
+          quantity: 1,
+          reason: `${(add.inclusion_rate * 100).toFixed(0)}% of ${commanderName} decks, ${(add.synergy_score * 100).toFixed(0)}% synergy`,
+        });
+      }
+
+      return NextResponse.json({
+        message: `**Match History:** ${wins}W-${losses}L (${wr}% win rate) over ${matches.length} games.\n\nBased on community data from ${commanderStats.length > 0 ? 'per-commander analysis' : 'general statistics'}:${
+          lowSynergy.length > 0 ? `\n\n**Consider Cutting:**\n${lowSynergy.map(c => `- **${c.card_name}** — only ${(c.inclusion_rate * 100).toFixed(0)}% inclusion, ${(c.synergy_score * 100).toFixed(0)}% synergy`).join('\n')}` : ''
+        }${
+          missingStaples.length > 0 ? `\n\n**Missing Staples:**\n${missingStaples.map(c => `- **${c.card_name}** — ${(c.inclusion_rate * 100).toFixed(0)}% of ${commanderName} decks`).join('\n')}` : ''
+        }`,
+        actions: fallbackActions,
+      });
+    }
+
     const targetSize = DEFAULT_DECK_SIZE[format] || DEFAULT_DECK_SIZE.default;
     const currentMainCount = mainCards.reduce((s, c) => s + c.quantity, 0);
     const targetLands = DEFAULT_LAND_COUNT[format] || DEFAULT_LAND_COUNT.default;
