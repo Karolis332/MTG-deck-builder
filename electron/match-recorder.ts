@@ -15,6 +15,7 @@
 
 import { desktopCapturer, BrowserWindow } from 'electron';
 import fs from 'fs';
+import fsPromises from 'fs/promises';
 import path from 'path';
 import { spawn } from 'child_process';
 import type { Highlight } from '../src/lib/highlight-detector';
@@ -79,10 +80,10 @@ const DEFAULT_CONFIG: RecorderConfig = {
 export class MatchRecorder {
   private config: RecorderConfig;
   private currentSession: RecordingSession | null = null;
-  private mediaRecorder: MediaRecorder | null = null;
+  private captureWindow: BrowserWindow | null = null;
   private recordedChunks: Blob[] = [];
   private recordingStartTime = 0;
-  private stream: MediaStream | null = null;
+  private _isRecording = false;
 
   constructor(config?: Partial<RecorderConfig>) {
     this.config = { ...DEFAULT_CONFIG, ...config };
@@ -90,7 +91,7 @@ export class MatchRecorder {
   }
 
   isRecording(): boolean {
-    return this.mediaRecorder !== null && this.mediaRecorder.state === 'recording';
+    return this._isRecording;
   }
 
   getCurrentSession(): RecordingSession | null {
@@ -130,13 +131,13 @@ export class MatchRecorder {
         return false;
       }
 
-      // Create media stream from the source using a hidden window's webContents
-      // Electron's desktopCapturer requires getUserMedia from a renderer process,
-      // so we use a hidden utility window.
-      const stream = await this.createCaptureStream(source.id);
-      if (!stream) return false;
+      // Create a hidden renderer window that handles the actual capture + MediaRecorder.
+      // MediaStream cannot be serialized across the IPC boundary, so the recording
+      // must live inside a renderer context.
+      const captureWindow = await this.createCaptureWindow(source.id);
+      if (!captureWindow) return false;
 
-      this.stream = stream;
+      this.captureWindow = captureWindow;
       this.recordedChunks = [];
       this.recordingStartTime = Date.now();
 
@@ -158,19 +159,33 @@ export class MatchRecorder {
         clips: [],
       };
 
-      // Set up MediaRecorder
-      this.mediaRecorder = new MediaRecorder(stream, {
-        mimeType: 'video/webm;codecs=vp9',
-        videoBitsPerSecond: this.config.videoBitrate,
-      });
+      // Start MediaRecorder inside the renderer
+      const started = await captureWindow.webContents.executeJavaScript(`
+        (async () => {
+          try {
+            window._recorder = new MediaRecorder(window._stream, {
+              mimeType: 'video/webm;codecs=vp9',
+              videoBitsPerSecond: ${this.config.videoBitrate},
+            });
+            window._chunks = [];
+            window._recorder.ondataavailable = (e) => {
+              if (e.data.size > 0) window._chunks.push(e.data);
+            };
+            window._recorder.start(1000);
+            return true;
+          } catch (err) {
+            return false;
+          }
+        })()
+      `);
 
-      this.mediaRecorder.ondataavailable = (event: BlobEvent) => {
-        if (event.data.size > 0) {
-          this.recordedChunks.push(event.data);
-        }
-      };
+      if (!started) {
+        captureWindow.destroy();
+        this.captureWindow = null;
+        return false;
+      }
 
-      this.mediaRecorder.start(1000); // Collect data every second
+      this._isRecording = true;
       console.log(`[Recorder] Started recording: ${fileName}`);
       return true;
     } catch (err) {
@@ -199,65 +214,86 @@ export class MatchRecorder {
    * Stop recording and save the file. Called when a match ends.
    */
   async stopRecording(result: string | null): Promise<RecordingSession | null> {
-    if (!this.mediaRecorder || !this.currentSession) return null;
+    if (!this.captureWindow || !this.currentSession) return null;
 
-    return new Promise((resolve) => {
-      const session = this.currentSession!;
-      session.endTime = Date.now();
-      session.result = result;
+    const session: RecordingSession = {
+      ...this.currentSession,
+      endTime: Date.now(),
+      result,
+    };
 
-      this.mediaRecorder!.onstop = async () => {
-        try {
-          // Combine all chunks into a single buffer
-          const blob = new Blob(this.recordedChunks, { type: 'video/webm' });
-          const arrayBuffer = await blob.arrayBuffer();
-          const buffer = Buffer.from(arrayBuffer);
+    try {
+      // Stop the MediaRecorder in the renderer and collect the recording data
+      const base64Data: string | null = await this.captureWindow.webContents.executeJavaScript(`
+        (async () => {
+          return new Promise((resolve) => {
+            if (!window._recorder || window._recorder.state === 'inactive') {
+              resolve(null);
+              return;
+            }
+            window._recorder.onstop = async () => {
+              try {
+                const blob = new Blob(window._chunks, { type: 'video/webm' });
+                const buf = await blob.arrayBuffer();
+                const bytes = new Uint8Array(buf);
+                let binary = '';
+                for (let i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
+                resolve(btoa(binary));
+              } catch { resolve(null); }
+            };
+            window._recorder.stop();
+          });
+        })()
+      `);
 
-          // Write the recording
-          fs.writeFileSync(session.filePath, buffer);
-          console.log(
-            `[Recorder] Saved recording: ${session.filePath} ` +
-            `(${(buffer.length / 1024 / 1024).toFixed(1)}MB, ` +
-            `${((session.endTime! - session.startTime) / 1000).toFixed(0)}s)`
-          );
+      if (!base64Data) {
+        console.error('[Recorder] No recording data returned from renderer');
+        return null;
+      }
 
-          // Save highlight metadata
-          const metaPath = session.filePath.replace('.webm', '.json');
-          fs.writeFileSync(metaPath, JSON.stringify({
-            matchId: session.matchId,
-            format: session.format,
-            playerName: session.playerName,
-            opponentName: session.opponentName,
-            result: session.result,
-            durationSeconds: (session.endTime! - session.startTime) / 1000,
-            highlights: session.highlights.map(h => ({
-              id: h.highlight.id,
-              type: h.highlight.type,
-              severity: h.highlight.severity,
-              caption: h.highlight.caption,
-              offsetSeconds: h.offsetSeconds,
-              leadIn: h.highlight.leadIn,
-              leadOut: h.highlight.leadOut,
-              involvedCards: h.highlight.involvedCards,
-              perspective: h.highlight.perspective,
-              context: h.highlight.context,
-            })),
-          }, null, 2));
+      const buffer = Buffer.from(base64Data, 'base64');
 
-          // Extract clips for high-severity highlights
-          await this.extractClips(session);
+      // Write the recording asynchronously
+      await fsPromises.writeFile(session.filePath, buffer);
+      console.log(
+        `[Recorder] Saved recording: ${session.filePath} ` +
+        `(${(buffer.length / 1024 / 1024).toFixed(1)}MB, ` +
+        `${((session.endTime! - session.startTime) / 1000).toFixed(0)}s)`
+      );
 
-          resolve(session);
-        } catch (err) {
-          console.error('[Recorder] Failed to save recording:', err);
-          resolve(null);
-        } finally {
-          this.cleanup();
-        }
-      };
+      // Save highlight metadata
+      const metaPath = session.filePath.replace('.webm', '.json');
+      await fsPromises.writeFile(metaPath, JSON.stringify({
+        matchId: session.matchId,
+        format: session.format,
+        playerName: session.playerName,
+        opponentName: session.opponentName,
+        result: session.result,
+        durationSeconds: (session.endTime! - session.startTime) / 1000,
+        highlights: session.highlights.map(h => ({
+          id: h.highlight.id,
+          type: h.highlight.type,
+          severity: h.highlight.severity,
+          caption: h.highlight.caption,
+          offsetSeconds: h.offsetSeconds,
+          leadIn: h.highlight.leadIn,
+          leadOut: h.highlight.leadOut,
+          involvedCards: h.highlight.involvedCards,
+          perspective: h.highlight.perspective,
+          context: h.highlight.context,
+        })),
+      }, null, 2));
 
-      this.mediaRecorder!.stop();
-    });
+      // Extract clips for high-severity highlights
+      await this.extractClips(session);
+
+      return session;
+    } catch (err) {
+      console.error('[Recorder] Failed to save recording:', err);
+      return null;
+    } finally {
+      this.cleanup();
+    }
   }
 
   /**
@@ -330,50 +366,64 @@ export class MatchRecorder {
 
     // Save updated session metadata with clip paths
     const metaPath = session.filePath.replace('.webm', '.json');
-    const meta = JSON.parse(fs.readFileSync(metaPath, 'utf-8'));
+    const metaRaw = await fsPromises.readFile(metaPath, 'utf-8');
+    const meta = JSON.parse(metaRaw);
     meta.clips = session.clips;
-    fs.writeFileSync(metaPath, JSON.stringify(meta, null, 2));
+    await fsPromises.writeFile(metaPath, JSON.stringify(meta, null, 2));
   }
 
   // ── Internal helpers ───────────────────────────────────────────────────────
 
-  private async createCaptureStream(sourceId: string): Promise<MediaStream | null> {
-    // In Electron main process, we need a hidden BrowserWindow to access getUserMedia
+  /**
+   * Create a hidden BrowserWindow that captures the screen and holds the
+   * MediaStream + MediaRecorder. The stream stays inside the renderer to
+   * avoid the IPC serialization problem (MediaStream cannot cross boundaries).
+   */
+  private async createCaptureWindow(sourceId: string): Promise<BrowserWindow | null> {
     const win = new BrowserWindow({
       width: 1,
       height: 1,
       show: false,
-      webPreferences: { offscreen: true },
+      webPreferences: { offscreen: true, contextIsolation: false },
     });
 
     try {
-      const stream = await win.webContents.executeJavaScript(`
+      // Use JSON.stringify to safely inject sourceId — prevents JS injection
+      const ok = await win.webContents.executeJavaScript(`
         (async () => {
-          const stream = await navigator.mediaDevices.getUserMedia({
-            audio: false,
-            video: {
-              mandatory: {
-                chromeMediaSource: 'desktop',
-                chromeMediaSourceId: '${sourceId}',
-                minWidth: 1920,
-                maxWidth: 1920,
-                minHeight: 1080,
-                maxHeight: 1080,
-                minFrameRate: ${this.config.frameRate},
-                maxFrameRate: ${this.config.frameRate},
+          try {
+            const stream = await navigator.mediaDevices.getUserMedia({
+              audio: false,
+              video: {
+                mandatory: {
+                  chromeMediaSource: 'desktop',
+                  chromeMediaSourceId: ${JSON.stringify(sourceId)},
+                  minWidth: 1920,
+                  maxWidth: 1920,
+                  minHeight: 1080,
+                  maxHeight: 1080,
+                  minFrameRate: ${Number(this.config.frameRate)},
+                  maxFrameRate: ${Number(this.config.frameRate)},
+                },
               },
-            },
-          });
-          return stream;
+            });
+            window._stream = stream;
+            return true;
+          } catch (err) {
+            return false;
+          }
         })()
       `);
-      // The stream object from executeJavaScript is serialized — we need the actual handle.
-      // In practice, the recording must happen in the renderer process.
-      // We'll store the source ID and have the recorder page handle capture.
-      win.destroy();
-      return stream;
+
+      if (!ok) {
+        console.error('[Recorder] Failed to acquire capture stream in renderer');
+        win.destroy();
+        return null;
+      }
+
+      return win;
     } catch (err) {
-      console.error('[Recorder] createCaptureStream failed:', err);
+      console.error('[Recorder] createCaptureWindow failed:', err);
       win.destroy();
       return null;
     }
@@ -401,13 +451,20 @@ export class MatchRecorder {
   }
 
   private cleanup(): void {
-    if (this.stream) {
-      for (const track of this.stream.getTracks()) {
-        track.stop();
-      }
-      this.stream = null;
+    if (this.captureWindow && !this.captureWindow.isDestroyed()) {
+      // Stop media tracks inside the renderer before destroying
+      this.captureWindow.webContents.executeJavaScript(`
+        if (window._stream) {
+          window._stream.getTracks().forEach(t => t.stop());
+          window._stream = null;
+        }
+        window._recorder = null;
+        window._chunks = null;
+      `).catch(() => { /* window may already be destroyed */ });
+      this.captureWindow.destroy();
     }
-    this.mediaRecorder = null;
+    this.captureWindow = null;
+    this._isRecording = false;
     this.recordedChunks = [];
     this.currentSession = null;
   }

@@ -701,6 +701,12 @@ export function registerIpcHandlers(): void {
   });
 
   ipcMain.handle('stop-watcher', async () => {
+    // Stop any active recording before tearing down the watcher
+    if (matchRecorder?.isRecording()) {
+      await matchRecorder.stopRecording(null).catch(() => {});
+    }
+    highlightDetector = null;
+
     if (watcher) {
       watcher.stop();
       watcher.removeAllListeners();
@@ -1044,13 +1050,11 @@ export function registerIpcHandlers(): void {
     return matchRecorder?.getCurrentSession() ?? null;
   });
 
-  ipcMain.handle('set-recorder-enabled', (_event, enabled: boolean) => {
-    if (!matchRecorder) {
-      matchRecorder = new MatchRecorder({ enabled });
-    } else {
-      // Recreate with updated config
-      matchRecorder = new MatchRecorder({ enabled });
+  ipcMain.handle('set-recorder-enabled', async (_event, enabled: boolean) => {
+    if (matchRecorder?.isRecording()) {
+      await matchRecorder.stopRecording(null).catch(() => {});
     }
+    matchRecorder = new MatchRecorder({ enabled });
     return { enabled };
   });
 }

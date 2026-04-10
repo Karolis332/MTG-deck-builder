@@ -16,8 +16,18 @@
     },
     {
       "parameters": {
+        "functionCode": "// Sanitize all user-supplied strings before they reach shell commands.\n// Strips characters that could break FFmpeg filter strings or shell quoting.\nfunction sanitize(str) {\n  if (typeof str !== 'string') return '';\n  return str.replace(/[^a-zA-Z0-9 _.,:!?\\-+#\\/()]/g, '').slice(0, 200);\n}\n\nfunction sanitizeFileName(str) {\n  if (typeof str !== 'string') return 'clip';\n  return str.replace(/[^a-zA-Z0-9_\\-]/g, '_').slice(0, 80);\n}\n\nconst body = $json.body || {};\nconst safeCaption = sanitize(body.caption || 'MTG Highlight');\nconst safeMatchId = sanitizeFileName(body.matchId || 'unknown');\nconst safeType = sanitizeFileName(body.highlightType || 'highlight');\nconst safeSeverity = parseInt(body.severity, 10) || 0;\nconst safeFileName = `${safeMatchId}_${safeType}_sev${safeSeverity}.mp4`;\n\nreturn [{\n  json: {\n    ...items[0].json,\n    safe: {\n      caption: safeCaption,\n      fileName: safeFileName,\n      matchId: safeMatchId,\n      highlightType: safeType,\n      severity: safeSeverity\n    }\n  }\n}];"
+      },
+      "id": "sanitize-inputs",
+      "name": "Sanitize Inputs",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [350, 300]
+    },
+    {
+      "parameters": {
         "operation": "write",
-        "fileName": "={{ $json.body.matchId }}_{{ $json.body.highlightType }}_sev{{ $json.body.severity }}.mp4",
+        "fileName": "={{ $json.safe.fileName }}",
         "filePath": "/data/highlights/incoming/",
         "binaryPropertyName": "clip"
       },
@@ -25,36 +35,36 @@
       "name": "Save Clip to Disk",
       "type": "n8n-nodes-base.readWriteFile",
       "typeVersion": 1,
-      "position": [460, 300]
+      "position": [560, 300]
     },
     {
       "parameters": {
-        "command": "ffmpeg -i \"/data/highlights/incoming/{{ $json.fileName }}\" -i /data/highlights/assets/intro_3s.mp4 -i /data/highlights/assets/outro_2s.mp4 -filter_complex \"[1:v][0:v][2:v]concat=n=3:v=1:a=0[outv];[0:v]drawtext=text='{{ $json.body.caption }}':fontcolor=white:fontsize=36:borderw=2:x=(w-text_w)/2:y=h-80:enable='between(t,0,4)'[captioned]\" -map \"[outv]\" -c:v libx264 -preset fast -crf 22 -movflags +faststart -y \"/data/highlights/processed/{{ $json.fileName }}\"",
+        "command": "ffmpeg -i \"/data/highlights/incoming/{{ $json.safe.fileName }}\" -i /data/highlights/assets/intro_3s.mp4 -i /data/highlights/assets/outro_2s.mp4 -filter_complex \"[1:v][0:v][2:v]concat=n=3:v=1:a=0[joined];[joined]drawtext=text='{{ $json.safe.caption }}':fontcolor=white:fontsize=36:borderw=2:x=(w-text_w)/2:y=h-80:enable='between(t,0,4)'[outv]\" -map \"[outv]\" -c:v libx264 -preset fast -crf 22 -movflags +faststart -y \"/data/highlights/processed/{{ $json.safe.fileName }}\"",
         "options": {}
       },
       "id": "ffmpeg-process",
       "name": "FFmpeg: Add Intro/Outro + Caption",
       "type": "n8n-nodes-base.executeCommand",
       "typeVersion": 1,
-      "position": [680, 300]
+      "position": [780, 300]
     },
     {
       "parameters": {
-        "command": "ffmpeg -i \"/data/highlights/processed/{{ $json.fileName }}\" -vf \"scale=1080:1920:force_original_aspect_ratio=decrease,pad=1080:1920:(ow-iw)/2:(oh-ih)/2\" -c:v libx264 -preset fast -crf 23 -movflags +faststart -y \"/data/highlights/shorts/{{ $json.fileName }}\"",
+        "command": "ffmpeg -i \"/data/highlights/processed/{{ $json.safe.fileName }}\" -vf \"scale=1080:1920:force_original_aspect_ratio=decrease,pad=1080:1920:(ow-iw)/2:(oh-ih)/2\" -c:v libx264 -preset fast -crf 23 -movflags +faststart -y \"/data/highlights/shorts/{{ $json.safe.fileName }}\"",
         "options": {}
       },
       "id": "ffmpeg-vertical",
       "name": "FFmpeg: Convert to Vertical (9:16)",
       "type": "n8n-nodes-base.executeCommand",
       "typeVersion": 1,
-      "position": [900, 300]
+      "position": [1000, 300]
     },
     {
       "parameters": {
         "conditions": {
           "boolean": [
             {
-              "value1": "={{ $json.body.severity >= 7 }}",
+              "value1": "={{ $json.safe.severity >= 7 }}",
               "value2": true
             }
           ]
@@ -64,14 +74,14 @@
       "name": "Filter: Severity >= 7",
       "type": "n8n-nodes-base.if",
       "typeVersion": 2,
-      "position": [1120, 300]
+      "position": [1220, 300]
     },
     {
       "parameters": {
         "resource": "video",
         "operation": "upload",
-        "title": "={{ $json.body.caption }} | MTG Arena #shorts #mtg #mtgarena",
-        "description": "={{ $json.body.caption }}\n\nFormat: {{ $json.body.format || 'Constructed' }}\nHighlight: {{ $json.body.highlightType }}\n\n#MTGArena #MagicTheGathering #BlackGrimoire #MTG #Shorts #GameplayHighlights",
+        "title": "={{ $json.safe.caption }} | MTG Arena #shorts #mtg #mtgarena",
+        "description": "={{ $json.safe.caption }}\n\nFormat: {{ $json.body.format || 'Constructed' }}\nHighlight: {{ $json.safe.highlightType }}\n\n#MTGArena #MagicTheGathering #BlackGrimoire #MTG #Shorts #GameplayHighlights",
         "categoryId": "20",
         "privacyStatus": "public",
         "binaryPropertyName": "verticalClip",
@@ -84,7 +94,7 @@
       "name": "YouTube: Upload Short",
       "type": "n8n-nodes-base.youTube",
       "typeVersion": 1,
-      "position": [1340, 200],
+      "position": [1440, 200],
       "credentials": {
         "youTubeOAuth2Api": {
           "id": "YOUTUBE_CREDENTIAL_ID",
@@ -102,7 +112,7 @@
           "parameters": [
             {
               "name": "post_info",
-              "value": "={\"title\":\"{{ $json.body.caption }} #mtg #mtgarena #shorts #gaming\",\"privacy_level\":\"PUBLIC_TO_EVERYONE\",\"disable_duet\":false,\"disable_comment\":false,\"disable_stitch\":false}"
+              "value": "={\"title\":\"{{ $json.safe.caption }} #mtg #mtgarena #shorts #gaming\",\"privacy_level\":\"PUBLIC_TO_EVERYONE\",\"disable_duet\":false,\"disable_comment\":false,\"disable_stitch\":false}"
             },
             {
               "name": "source_info",
@@ -116,7 +126,7 @@
       "name": "TikTok: Upload Video",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4,
-      "position": [1340, 400],
+      "position": [1440, 400],
       "credentials": {
         "httpHeaderAuth": {
           "id": "TIKTOK_CREDENTIAL_ID",
@@ -142,7 +152,7 @@
             },
             {
               "name": "caption",
-              "value": "={{ $json.body.caption }} \n\n#MTGArena #MagicTheGathering #MTG #BlackGrimoire #Shorts #Gaming #DeckTracker"
+              "value": "={{ $json.safe.caption }} \n\n#MTGArena #MagicTheGathering #MTG #BlackGrimoire #Shorts #Gaming #DeckTracker"
             }
           ]
         },
@@ -152,7 +162,7 @@
       "name": "Instagram: Create Reel",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4,
-      "position": [1340, 600],
+      "position": [1440, 600],
       "credentials": {
         "httpHeaderAuth": {
           "id": "INSTAGRAM_CREDENTIAL_ID",
@@ -163,35 +173,35 @@
     {
       "parameters": {
         "respondWith": "json",
-        "responseBody": "={{ JSON.stringify({ ok: true, matchId: $json.body.matchId, platforms: ['youtube', 'tiktok', 'instagram'] }) }}"
+        "responseBody": "={{ JSON.stringify({ ok: true, matchId: $json.safe.matchId, platforms: ['youtube', 'tiktok', 'instagram'] }) }}"
       },
       "id": "webhook-response",
       "name": "Respond: Success",
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1,
-      "position": [1560, 400]
+      "position": [1660, 400]
     },
     {
       "parameters": {
         "respondWith": "json",
-        "responseBody": "={{ JSON.stringify({ ok: true, matchId: $json.body.matchId, skipped: true, reason: 'severity below threshold' }) }}"
+        "responseBody": "={{ JSON.stringify({ ok: true, matchId: $json.safe.matchId, skipped: true, reason: 'severity below threshold' }) }}"
       },
       "id": "webhook-response-skip",
       "name": "Respond: Skipped (Low Severity)",
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1,
-      "position": [1340, 500]
+      "position": [1440, 500]
     },
     {
       "parameters": {
-        "url": "https://hooks.slack.com/services/SLACK_WEBHOOK_URL",
+        "authentication": "predefinedCredentialType",
         "method": "POST",
         "sendBody": true,
         "bodyParameters": {
           "parameters": [
             {
               "name": "text",
-              "value": "=New MTG highlight posted!\n*{{ $json.body.caption }}*\nSeverity: {{ $json.body.severity }}/10 | Type: {{ $json.body.highlightType }}\nPlatforms: YouTube, TikTok, Instagram"
+              "value": "=New MTG highlight posted!\n*{{ $json.safe.caption }}*\nSeverity: {{ $json.safe.severity }}/10 | Type: {{ $json.safe.highlightType }}\nPlatforms: YouTube, TikTok, Instagram"
             }
           ]
         },
@@ -201,11 +211,24 @@
       "name": "Notify: Telegram/Slack",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4,
-      "position": [1560, 200]
+      "position": [1660, 200],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "SLACK_CREDENTIAL_ID",
+          "name": "Slack Webhook"
+        }
+      }
     }
   ],
   "connections": {
     "Webhook: Receive Highlight Clip": {
+      "main": [
+        [
+          { "node": "Sanitize Inputs", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Sanitize Inputs": {
       "main": [
         [
           { "node": "Save Clip to Disk", "type": "main", "index": 0 }

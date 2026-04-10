@@ -12,7 +12,6 @@
  *   - lethal_turn: The turn that kills the opponent
  *   - comeback: Player recovers from <5 life to win or stabilize
  *   - close_game: Final life totals within 5 of each other
- *   - commander_kill: Commander damage lethal (21+)
  *   - topdeck: Card drawn then immediately played when at 0-1 cards in hand
  */
 
@@ -28,7 +27,6 @@ export type HighlightType =
   | 'lethal_turn'
   | 'comeback'
   | 'close_game'
-  | 'commander_kill'
   | 'topdeck';
 
 export interface Highlight {
@@ -75,9 +73,10 @@ export class HighlightDetector {
   private highlights: Highlight[] = [];
   private highlightCount = 0;
 
-  // Per-turn tracking
+  // Per-turn tracking (player spells only)
   private turnSpellCount = 0;
   private turnSpellNames: string[] = [];
+  private playerSeatId: number | null = null;
   private currentTurn = 0;
   private turnLifeStart: { player: number; opponent: number } = { player: 20, opponent: 20 };
   private turnBoardStart: { player: number; opponent: number } = { player: 0, opponent: 0 };
@@ -117,15 +116,17 @@ export class HighlightDetector {
    */
   processEvent(event: ArenaGameEvent, state: GameStateSnapshot): void {
     switch (event.type) {
-      case 'match_start':
+      case 'match_start': {
         this.resetMatch();
         this.matchActive = true;
         this.matchId = event.matchId;
         this.format = event.format;
+        this.playerSeatId = event.playerSeatId;
         const startLife = this.getStartingLife(event.format);
         this.turnLifeStart = { player: startLife, opponent: startLife };
         this.playerMinLife = startLife;
         break;
+      }
 
       case 'turn_change':
         this.onTurnEnd(state);
@@ -142,10 +143,14 @@ export class HighlightDetector {
         };
         break;
 
-      case 'card_played':
-        this.turnSpellCount++;
+      case 'card_played': {
         const spellName = this.resolveName(event.grpId);
-        this.turnSpellNames.push(spellName);
+        // Only count player's own spells for flurry detection
+        const isPlayerSpell = event.ownerSeatId === state.playerSeatId;
+        if (isPlayerSpell) {
+          this.turnSpellCount++;
+          this.turnSpellNames = [...this.turnSpellNames, spellName];
+        }
         // Check topdeck: card was just drawn into near-empty hand then immediately played
         if (
           event.ownerSeatId === state.playerSeatId &&
@@ -166,6 +171,7 @@ export class HighlightDetector {
           this.lastDrawnGrpId = null;
         }
         break;
+      }
 
       case 'card_drawn':
         if (event.ownerSeatId === state.playerSeatId) {
@@ -186,8 +192,7 @@ export class HighlightDetector {
         break;
 
       case 'zone_change':
-        // Detect board wipe: multiple creatures leaving battlefield in quick succession
-        // Handled in onTurnEnd by comparing board sizes
+        // Board wipe detected at turn boundary by comparing board sizes
         break;
 
       case 'match_complete': {
@@ -212,7 +217,7 @@ export class HighlightDetector {
     const maxDelta = Math.max(playerLifeDelta, opponentLifeDelta);
 
     if (maxDelta >= LIFE_SWING_THRESHOLD) {
-      const who = playerLifeDelta >= opponentLifeDelta ? 'opponent' : 'self';
+      const who = opponentLifeDelta >= playerLifeDelta ? 'opponent' : 'self';
       const severity = Math.min(10, Math.floor(maxDelta / 3) + 4);
       this.emit({
         type: 'life_swing',
@@ -383,6 +388,7 @@ export class HighlightDetector {
     this.handSizeAtDraw = 0;
     this.matchId = null;
     this.format = null;
+    this.playerSeatId = null;
   }
 
   reset(): void {

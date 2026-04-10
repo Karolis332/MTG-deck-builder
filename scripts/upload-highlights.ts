@@ -19,8 +19,12 @@ import https from 'https';
 
 // ── Config ───────────────────────────────────────────────────────────────────
 
-const N8N_WEBHOOK_URL = process.env.N8N_HIGHLIGHT_WEBHOOK
-  || 'http://187.77.110.100/n8n/webhook/mtg-highlight-upload';
+const N8N_WEBHOOK_URL = process.env.N8N_HIGHLIGHT_WEBHOOK;
+
+if (!N8N_WEBHOOK_URL && require.main === module) {
+  console.error('[Uploader] N8N_HIGHLIGHT_WEBHOOK env var is required');
+  process.exit(1);
+}
 
 const MIN_SEVERITY = parseInt(process.env.HIGHLIGHT_MIN_SEVERITY || '6', 10);
 
@@ -140,6 +144,9 @@ function uploadClip(
   metadata: Record<string, unknown>,
 ): Promise<Record<string, unknown>> {
   return new Promise((resolve, reject) => {
+    if (!N8N_WEBHOOK_URL) {
+      return reject(new Error('N8N_HIGHLIGHT_WEBHOOK env var is required'));
+    }
     const fileBuffer = fs.readFileSync(filePath);
     const boundary = `----FormBoundary${Date.now()}`;
 
