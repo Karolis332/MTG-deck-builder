@@ -5,10 +5,19 @@ import { getCardGlobalScore, getMetaAdjustedScore } from './global-learner';
 import { getEdhrecRecommendations, getEdhrecThemeCards } from './edhrec';
 import type { EdhrecRecommendation } from './edhrec';
 import { getTemplate, getScaledCurve, mergeWithCommanderProfile } from './deck-templates';
+import type { Archetype } from './deck-templates';
 import { analyzeCommander } from './commander-synergy';
 import type { CommanderSynergyProfile } from './commander-synergy';
 import { buildOptimalLandBase, isFetchLandRelevant } from './land-intelligence';
 import { getCFRecommendations, resolveCFToDbCards } from './cf-api-client';
+import {
+  getPayoffNamesForProfile,
+  getRoleQuotas,
+  pickByRole,
+  buildReasoningSummary,
+} from './deck-builder-constraints';
+import { analyzeCommanderForBuild } from './commander-analysis';
+import type { ArsenalCard } from './commander-analysis';
 
 // ── Commander synergy text patterns for card scoring ────────────────────────
 // Maps synergy categories from commander-synergy.ts to oracle text substrings
@@ -295,6 +304,7 @@ export interface BuildOptions {
   useCollection?: boolean; // prefer cards from user's collection
   commanderName?: string; // for commander format
   powerLevel?: 'casual' | 'optimized' | 'cedh';
+  userId?: number; // for commander-arsenal collection substitutes
 }
 
 export interface BuildResult {
@@ -303,6 +313,10 @@ export interface BuildResult {
   strategy: string;
   tribalType?: string;
   commanderSynergy?: CommanderSynergyProfile;
+  /** Per-card reasoning trail from the role-based picker */
+  reasoning?: Array<{ cardName: string; role: string; reason: string }>;
+  /** Debug summary of role fills */
+  buildReport?: string;
 }
 
 export interface ScoredCandidatePoolResult {
@@ -327,6 +341,7 @@ export interface ScoredCandidatePoolResult {
   collectionJoin: string;
   collectionOrder: string;
   metaStatsMap: Map<string, { inclusionRate: number; placementScore: number; coreRate: number; winRate: number }>;
+  commanderStatsMap: Map<string, { inclusionRate: number; synergyScore: number }>;
 }
 
 /**
@@ -995,15 +1010,32 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
       }
     }
 
-    // ── Collection bonus ──
+    // ── Collection bonus (soft — quality dominates) ──
+    // Old behaviour was +30/-40 which meant a mediocre owned card (Sokka's
+    // Haiku) would outscore an unowned staple by 70 points. That is the
+    // single biggest reason the auto-builder produced filler-heavy decks.
+    // New behaviour: small nudge for ownership, no penalty for missing.
+    // Collection enforcement still happens at pick-time via getMaxQty().
     if (useCollection && powerLevel !== 'cedh') {
-      // In cEDH mode, ignore collection — build the best list possible
       const owned = ownedQty.get(card.name) || 0;
       if (owned > 0) {
-        score += 30;
-      } else {
-        score -= 40;
+        score += 8;
       }
+    }
+
+    // ── Quality floor penalty ──
+    // If a card has NO signal data at all (no commander stat, no meta stat,
+    // no EDHREC rank, no CF, no ML) and isn't on any curated payoff list,
+    // it's almost certainly filler. Penalize hard so staples win.
+    const hasCmdrData = commanderStatsMap.has(card.name);
+    const hasMetaData = metaStatsMap.has(card.name);
+    const hasEdhrecData = edhrecSynergyMap.has(card.name);
+    const hasCfData = cfScoreMap.has(card.name);
+    const hasMlData = mlScoreMap.has(card.name);
+    const edhrecRank = card.edhrec_rank ?? 999999;
+    const hasAnySignal = hasCmdrData || hasMetaData || hasEdhrecData || hasCfData || hasMlData;
+    if (!hasAnySignal && edhrecRank > 18000) {
+      score -= 35;
     }
 
     return { card, score };
@@ -1011,8 +1043,27 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
 
   scored.sort((a, b) => b.score - a.score);
 
+  // ── Strict JS color identity post-filter ─────────────────────────────────
+  // The SQL filter uses c.color_identity NOT LIKE '%X%' which can miss
+  // edge cases (JSON parsing, MDFCs with off-color spell sides). Apply a
+  // bulletproof JS check: parse each card's color_identity as JSON and
+  // require every color to be present in the deck's allowed colors.
+  const allowedColors = new Set(colors);
+  const colorFilteredScored = scored.filter(({ card }) => {
+    if (!card.color_identity) return true;
+    try {
+      const ci: string[] = JSON.parse(card.color_identity);
+      for (const c of ci) {
+        if (!allowedColors.has(c)) return false;
+      }
+      return true;
+    } catch {
+      return true;
+    }
+  });
+
   return {
-    pool: scored,
+    pool: colorFilteredScored,
     themes,
     resolvedStrategy,
     tribalType,
@@ -1033,6 +1084,7 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
     collectionJoin,
     collectionOrder,
     metaStatsMap,
+    commanderStatsMap,
   };
 }
 
@@ -1044,16 +1096,26 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
     commanderProfile, commanderCard, landTarget: targetLands, nonLandTarget,
     isCommander, maxCopies, colors, ownedQty, useCollection,
     colorExcludeFilter, legalityFilter, commanderExclude: _commanderExclude,
-    collectionJoin, collectionOrder, metaStatsMap,
+    collectionJoin, collectionOrder, metaStatsMap, commanderStatsMap,
   } = poolResult;
 
-  // Step 4: Pick cards respecting mana curve (from archetype templates)
-  const idealCurve = getScaledCurve(resolvedStrategy, nonLandTarget);
+  // ── Step 4: Role-based picking (constraint-driven) ──────────────────────
+  // Old approach: fill by curve bucket, then by score. This produced decks
+  // with 10 filler creatures at 3 CMC and no ramp/draw/removal.
+  //
+  // New approach:
+  //   (a) Build a commander arsenal: deep oracle analysis + community top
+  //       cards + curated staples, strictly color-filtered. This is the
+  //       "what a human deck builder would reach for" list.
+  //   (b) Pre-fill the arsenal's high-priority owned cards into the picks.
+  //   (c) Run pickByRole() on the remaining pool to hit hard role quotas
+  //       (ramp / draw / removal / wipes / protection / payoffs / wincons).
+  //   (d) Pass B of pickByRole fills any remaining slots by score.
 
-  const curveCounts: Record<number, number> = {};
   const picked: Array<{ card: DbCard; quantity: number; board: 'main' | 'sideboard' }> = [];
   const pickedNames = new Set<string>();
   let totalPicked = 0;
+  const reasoning: Array<{ cardName: string; role: string; reason: string }> = [];
 
   function getMaxQty(card: DbCard): number {
     const formatMax = isCommander ? 1 : maxCopies;
@@ -1063,82 +1125,108 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
     return owned > 0 ? Math.min(formatMax, owned) : 0;
   }
 
-  // Pre-pass: Force format staples into the deck
-  // The meta_inclusion_rate is global (across ALL 506K decks), not color-filtered.
-  // A card like Ponder at 5.8% globally is actually ~20% in blue decks because
-  // only ~30% of decks can play blue. Adjust threshold by color count.
-  const colorShare = colors.length <= 1 ? 0.45
-    : colors.length === 2 ? 0.25
-    : colors.length === 3 ? 0.15
-    : colors.length === 4 ? 0.10
-    : 0.05;
-  // Cards at 8%+ global in a 2-color deck ≈ 32% among matching decks
-  const stapleGlobalThreshold = 0.08 * colorShare / 0.25;
+  // ── (a) Build commander arsenal ────────────────────────────────────────
+  let arsenal: ArsenalCard[] = [];
+  if (isCommander && options.commanderName && options.userId !== undefined) {
+    try {
+      const analysis = analyzeCommanderForBuild(
+        options.commanderName,
+        options.userId,
+        options.format,
+        150,
+      );
+      if (analysis) {
+        arsenal = analysis.arsenal;
+      }
+    } catch {
+      // analysis failure is non-fatal — fall through to pool-only picking
+    }
+  }
 
-  const template = getTemplate(resolvedStrategy);
-  const protectedNames = new Set(
-    (template.protectedPatterns || []).map((p: string) => p.toLowerCase())
+  // ── (b) Pre-fill from arsenal (highest-priority items first) ──────────
+  // Only pick items that are in the scored pool (ensures legality, color,
+  // and that the card exists with proper DB metadata).
+  const poolByName = new Map<string, (typeof scored)[number]>();
+  for (const s of scored) poolByName.set(s.card.name, s);
+
+  // Reserve ~75% of non-land slots for the arsenal. The rest is for the
+  // constraint picker to fill with role quotas and high-score extras.
+  const arsenalSlotBudget = Math.floor(nonLandTarget * 0.75);
+  let arsenalUsed = 0;
+
+  for (const a of arsenal) {
+    if (arsenalUsed >= arsenalSlotBudget) break;
+    if (pickedNames.has(a.card.name)) continue;
+    // Only pre-fill priority >= 55 (staples and above)
+    if (a.priority < 55) continue;
+    // Must exist in the scored pool (legal, in-color, properly loaded)
+    if (!poolByName.has(a.card.name)) continue;
+    const cardMax = getMaxQty(a.card);
+    if (cardMax <= 0) continue;
+    const qty = isCommander ? 1 : Math.min(cardMax, nonLandTarget - totalPicked);
+    if (qty <= 0) continue;
+    picked.push({ card: a.card, quantity: qty, board: 'main' });
+    pickedNames.add(a.card.name);
+    reasoning.push({
+      cardName: a.card.name,
+      role: `arsenal:${a.reason}`,
+      reason: a.detail,
+    });
+    totalPicked += qty;
+    arsenalUsed += qty;
+  }
+
+  // ── (c) Role-based picker on remaining pool ────────────────────────────
+  const remainingPool = scored.filter(s => !pickedNames.has(s.card.name));
+  const payoffNames = getPayoffNamesForProfile(commanderProfile);
+  const quotas = getRoleQuotas(
+    (resolvedStrategy as Archetype) || 'midrange',
+    nonLandTarget,
+    commanderProfile,
   );
 
-  for (const { card } of scored) {
+  // Pass B allowlist: any card that appears in the commander arsenal OR
+  // in the per-commander stats (commanderStatsMap) is considered a
+  // legitimate archetype pick and can fill remaining slots even if
+  // classifyCard() returns only 'utility'. Everything else without a
+  // role is rejected as filler.
+  const passBAllowed = new Set<string>();
+  for (const a of arsenal) passBAllowed.add(a.card.name);
+  for (const [name] of commanderStatsMap) passBAllowed.add(name);
+
+  // Seed pickByRole with the cards we already placed so it does not
+  // double-count role quotas (arsenal already contributed ramp/draw/etc.).
+  const preFilled = picked.map(p => p.card);
+
+  const pickResult = pickByRole({
+    pool: remainingPool,
+    nonLandTarget,
+    quotas,
+    payoffNames,
+    commanderOracle: commanderCard?.oracle_text || undefined,
+    getMaxQty,
+    isCommanderFormat: isCommander,
+    preFilled,
+    passBAllowed,
+  });
+
+  for (const p of pickResult.picks) {
+    if (pickedNames.has(p.card.name)) continue;
     if (totalPicked >= nonLandTarget) break;
-    if (pickedNames.has(card.name)) continue;
-
-    const isProtectedStaple = protectedNames.has(card.name.toLowerCase());
-    const metaStats = metaStatsMap.get(card.name);
-    // Force-include: either high global inclusion (adjusted for color count)
-    // or very high raw inclusion (20%+ of ALL decks regardless of color)
-    const isUniversalStaple = metaStats && (
-      metaStats.inclusionRate >= 0.20 ||
-      metaStats.inclusionRate >= stapleGlobalThreshold
-    );
-
-    if (!isProtectedStaple && !isUniversalStaple) continue;
-
-    const qty = getMaxQty(card);
+    const qty = Math.min(p.quantity, nonLandTarget - totalPicked);
     if (qty <= 0) continue;
-
-    const bucket = Math.min(Math.floor(card.cmc), 7);
-    picked.push({ card, quantity: qty, board: 'main' });
-    pickedNames.add(card.name);
-    curveCounts[bucket] = (curveCounts[bucket] || 0) + qty;
+    picked.push({ card: p.card, quantity: qty, board: 'main' });
+    pickedNames.add(p.card.name);
+    reasoning.push({ cardName: p.card.name, role: p.role, reason: p.reason });
     totalPicked += qty;
   }
 
-  // First pass: fill curve slots
-  for (const { card } of scored) {
-    if (totalPicked >= nonLandTarget) break;
-    if (pickedNames.has(card.name)) continue;
-
-    const bucket = Math.min(Math.floor(card.cmc), 7);
-    const idealForBucket = idealCurve[bucket] || 1;
-    const currentForBucket = curveCounts[bucket] || 0;
-
-    if (currentForBucket >= idealForBucket) continue;
-
-    const cardMax = getMaxQty(card);
-    const qty = Math.min(cardMax, idealForBucket - currentForBucket, nonLandTarget - totalPicked);
-    if (qty <= 0) continue;
-
-    picked.push({ card, quantity: qty, board: 'main' });
-    pickedNames.add(card.name);
-    curveCounts[bucket] = currentForBucket + qty;
-    totalPicked += qty;
-  }
-
-  // Second pass: fill remaining slots with best available
-  for (const { card } of scored) {
-    if (totalPicked >= nonLandTarget) break;
-    if (pickedNames.has(card.name)) continue;
-
-    const cardMax = getMaxQty(card);
-    const qty = Math.min(cardMax, nonLandTarget - totalPicked);
-    if (qty <= 0) continue;
-
-    picked.push({ card, quantity: qty, board: 'main' });
-    pickedNames.add(card.name);
-    totalPicked += qty;
-  }
+  const buildReport = buildReasoningSummary(
+    (resolvedStrategy as Archetype) || 'midrange',
+    quotas,
+    pickResult,
+    nonLandTarget,
+  );
 
   // ── Step 4b: Fill commander synergy minimums ────────────────────────────
   // After main card picking, check if each synergy category meets its minimum.
@@ -1452,6 +1540,8 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
     strategy: resolvedStrategy,
     tribalType: tribalType || undefined,
     commanderSynergy: commanderProfile || undefined,
+    reasoning,
+    buildReport,
   };
 }
 

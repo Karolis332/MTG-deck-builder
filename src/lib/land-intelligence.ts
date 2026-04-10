@@ -172,8 +172,24 @@ export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
   } catch { /* table might not exist */ }
 
   const scored: LandScore[] = [];
+  const allowedColorSet = new Set(colors);
 
   for (const land of lands) {
+    // ── Hard color-identity filter ───────────────────────────────
+    // MDFCs (e.g. Shatterskull Smashing, Sundering Eruption) carry the
+    // colored spell face's CI even though the land face is colorless.
+    // Reject anything with a CI color outside the deck's identity.
+    if (land.color_identity) {
+      try {
+        const ci: string[] = JSON.parse(land.color_identity);
+        let legal = true;
+        for (const c of ci) {
+          if (!allowedColorSet.has(c)) { legal = false; break; }
+        }
+        if (!legal) continue;
+      } catch { /* malformed CI — fall through */ }
+    }
+
     let producesColors: string[] = [];
     try { producesColors = JSON.parse(land.produces_colors || '[]'); } catch { /* empty */ }
 
