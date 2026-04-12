@@ -752,11 +752,13 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
         cfScoreMap.set(rec.card_name, rec.cf_score);
       }
       // Inject CF-recommended cards into pool if not already present
+      // When useCollection is on, only inject cards the user owns
       if (cfRecs.length > 0) {
         const existingIds = new Set(pool.map(c => c.id));
         const cfCards = resolveCFToDbCards(cfRecs, existingIds);
         for (const { card } of cfCards) {
           if (!seenNames.has(card.name)) {
+            if (useCollection && !ownedNames.has(card.name)) continue;
             seenNames.add(card.name);
             pool.push(card);
           }
@@ -793,6 +795,7 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
         `).all(...highIncCards.map(s => s.cardName)) as DbCard[];
         for (const card of injected) {
           if (!seenNames.has(card.name)) {
+            if (useCollection && !ownedNames.has(card.name)) continue;
             seenNames.add(card.name);
             pool.push(card);
           }
