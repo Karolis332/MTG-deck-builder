@@ -17,6 +17,7 @@ export type SynergyCategory =
   | 'exile_cast'
   | 'exile_enter'
   | 'spell_cast'
+  | 'storm'
   | 'creature_dies'
   | 'creature_etb'
   | 'attack_trigger'
@@ -71,6 +72,11 @@ export const TRIGGER_PATTERNS: Record<SynergyCategory, RegExp[]> = {
     /magecraft/i,
     /prowess/i,
     /whenever you cast (?:a |your )?\w+ spell/i,
+  ],
+  storm: [
+    /\bstorm\b/i,
+    /copy it for each spell cast before it/i,
+    /copies become tokens/i,
   ],
   creature_dies: [
     /whenever (?:a |another )?(?:nontoken )?creature (?:you control )?dies/i,
@@ -192,6 +198,17 @@ const SYNERGY_REQUIREMENTS: Record<SynergyCategory, {
     searchPatterns: [], // type_line filter instead
     scoreBonus: 15,
   },
+  storm: {
+    min: 20,
+    searchPatterns: [
+      '%draw a card%',
+      '%add {%',
+      '%search your library for a%land%',
+      '%create%treasure%',
+      '%untap%',
+    ],
+    scoreBonus: 30,
+  },
   creature_dies: {
     min: 8,
     searchPatterns: [
@@ -308,6 +325,7 @@ const SYNERGY_REQUIREMENTS: Record<SynergyCategory, {
 function inferArchetype(triggers: SynergyCategory[], hasAttackTrigger: boolean): Archetype | null {
   const has = (cat: SynergyCategory) => triggers.includes(cat);
 
+  if (has('storm')) return 'spellslinger';
   if (has('spell_cast')) return 'spellslinger';
   if (has('creature_dies')) return 'aristocrats';
   if (has('graveyard') && !has('creature_dies')) return 'reanimator';
@@ -408,6 +426,13 @@ export function analyzeCommander(
     protectedPatterns.push(
       'outpost siege', 'jeska\'s will', 'light up the stage',
       'chaos warp', 'wild-magic sorcerer', 'delayed blast fireball',
+    );
+  }
+  if (triggerCategories.includes('storm')) {
+    protectedPatterns.push(
+      'birgi, god of storytelling', 'beast whisperer', 'glimpse of nature',
+      'concordant crossroads', 'earthcraft', 'heritage druid',
+      'nettle sentinel', 'elvish visionary', 'quirion ranger',
     );
   }
   if (triggerCategories.includes('spell_cast')) {
@@ -537,6 +562,7 @@ function buildStrategyDescription(
     exile_cast: 'Impulse draw / cast-from-exile effects',
     exile_enter: 'Blink / flicker / exile-and-return effects',
     spell_cast: 'Instants and sorceries (spell density)',
+    storm: 'Cheap spells (CMC 0-2), cantrips, mana dorks, and rituals for storm count',
     creature_dies: 'Death trigger payoffs and sacrifice outlets',
     creature_etb: 'ETB value creatures and blink effects',
     attack_trigger: 'Haste sources, extra combats, evasion',

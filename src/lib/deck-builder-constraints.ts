@@ -146,6 +146,37 @@ export const ARCHETYPE_PAYOFFS: Record<SynergyCategory, Set<string>> = {
     'brilliant spectrum', 'mind\'s desire',
   ]),
 
+  storm: new Set([
+    // Cheap cantrips / storm count builders (EDHREC 20-46% inclusion)
+    'explore', 'elvish visionary', 'wall of blossoms', 'abundant harvest',
+    'once upon a time', 'noxious revival', 'weather the storm', 'chatterstorm',
+    // Mana enablers — cast more spells per turn (EDHREC 32-76% inclusion)
+    'emerald medallion', 'karametra\'s acolyte', 'circle of dreams druid',
+    'birgi, god of storytelling', 'arbor elf', 'heritage druid',
+    'nettle sentinel', 'quirion ranger', 'wild growth',
+    'earthcraft', 'cryptolith rite', 'growing rites of itlimoc',
+    // Creature storm draw engines (EDHREC 29-43%)
+    'beast whisperer', 'guardian project', 'glimpse of nature', 'primordial sage',
+    'soul of the harvest', 'inspiring call', 'shamanic revelation',
+    // Haste / go-wide payoffs — storm tokens attack immediately (EDHREC 32-49%)
+    'concordant crossroads', 'craterhoof behemoth', 'end-raze forerunners',
+    'beastmaster ascension', 'overwhelming stampede', 'triumph of the hordes',
+    // Token/counter doublers — each Aeve copy is a token (EDHREC 22-42%)
+    'doubling season', 'parallel lives', 'primal vigor',
+    'branching evolution', 'hardened scales', 'second harvest',
+    // Bounce / recast enablers (EDHREC 33%)
+    'temur sabertooth', 'vitalize',
+    // Devotion mana (Aeve storm decks lean on Nykthos)
+    'nykthos, shrine to nyx', 'castle garenbrig',
+    // Ooze tribal (high synergy in Aeve, EDHREC 35-68%)
+    'biowaste blob', 'biogenic ooze', 'slime against humanity',
+    'predator ooze', 'oran-rief ooze', 'green slime', 'acidic slime',
+    'ochre jelly', 'ravenous slime', 'mitotic slime', 'slurrk, all-ingesting',
+    'experiment one', 'consuming blob', 'gelatinous genesis',
+    // Counter synergy (EDHREC 24-29%)
+    'the ozolith', 'oran-rief, the vastwood',
+  ]),
+
   creature_etb: new Set([
     // Blink
     'ephemerate', 'cloudshift', 'essence flux', 'ghostway', 'eerie interlude',

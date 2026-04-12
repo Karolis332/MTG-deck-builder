@@ -26,6 +26,7 @@ const SYNERGY_REQUIREMENTS_MAP = {
   exile_cast: ['exile the top', 'you may play', 'you may cast', 'from exile'],
   exile_enter: ['exile', 'return', 'to the battlefield', 'flicker', 'blink'],
   spell_cast: ['instant', 'sorcery', 'magecraft', 'prowess'],
+  storm: ['draw a card', 'add {', 'search your library for a', 'create a treasure', 'untap', 'mana dork'],
   creature_dies: ['whenever', 'dies', 'sacrifice', 'death'],
   creature_etb: ['enters the battlefield', 'enters'],
   attack_trigger: ['haste', 'extra combat', 'additional combat', 'menace', 'trample', 'can\'t be blocked'],
@@ -163,6 +164,7 @@ const MAJOR_TRIBES: string[] = [
   'artifact creature', 'construct', 'golem', 'horror', 'nightmare', 'phyrexian',
   'eldrazi', 'ally', 'snake', 'fish', 'kraken', 'leviathan', 'octopus',
   'squirrel', 'bear', 'ape', 'hydra', 'wurm', 'drake', 'changeling',
+  'ooze',
 ];
 const MAJOR_TRIBES_SET = new Set(MAJOR_TRIBES);
 
@@ -937,6 +939,22 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
       if (template.discouragedTypes.some(d => tl.includes(d.toLowerCase()))) {
         score -= 60;
       }
+    }
+
+    // ── Storm CMC bonus ──
+    // Storm commanders need maximum cheap spells to build storm count.
+    // This overrides normal CMC preferences — heavily reward CMC 0-2.
+    if (commanderProfile?.triggerCategories.includes('storm')) {
+      if (card.cmc <= 1) score += 25;
+      else if (card.cmc <= 2) score += 18;
+      else if (card.cmc <= 3) score += 8;
+      else if (card.cmc >= 5) score -= 20;
+      else if (card.cmc >= 7) score -= 40;
+      // Cantrips are gold for storm — spells that draw + cost little
+      if (card.cmc <= 2 && text.includes('draw a card')) score += 15;
+      // Mana producers fuel more casts per turn
+      if (text.includes('add {') || text.includes('add one mana')) score += 12;
+      if (text.includes('create a treasure') || text.includes('create two treasure')) score += 10;
     }
 
     // ── Strategy fit ──
