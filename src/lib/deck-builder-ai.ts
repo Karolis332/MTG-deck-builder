@@ -1004,21 +1004,29 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
     // ── Meta card stats scoring (from 506K+ scraped decks) ──
     // Inclusion rates are global — adjust for color identity to properly weight
     // color-specific staples (e.g., Ponder at 5.8% global ≈ 20% in blue decks)
+    //
+    // Staple saturation guard (Pitfall 4): if a card has high commander-specific
+    // inclusion (cmdrStats), it's already rewarded above — cap the meta bonus
+    // to prevent Sol Ring/Arcane Signet from crowding out commander synergy cards.
     const metaStats = metaStatsMap.get(card.name);
     if (metaStats) {
       const colorAdjustedRate = metaStats.inclusionRate / colorShareEstimate;
-      // Tiered bonus using color-adjusted rate — proven staples outscore niche synergy
+      // Reduce meta bonus for cards already scoring from per-commander data
+      // to prevent double-dipping (commander staples already get +70 above)
+      const metaDampener = cmdrStats ? 0.5 : 1.0;
+      let metaBonus = 0;
       if (colorAdjustedRate >= 0.6 || metaStats.inclusionRate >= 0.6) {
-        score += 80; // Universal staple (Sol Ring, Arcane Signet, Command Tower)
+        metaBonus = 80;
       } else if (colorAdjustedRate >= 0.4 || metaStats.inclusionRate >= 0.4) {
-        score += 60; // Near-staple (Lightning Greaves, Swiftfoot Boots)
+        metaBonus = 60;
       } else if (colorAdjustedRate >= 0.25 || metaStats.inclusionRate >= 0.25) {
-        score += 40; // Color staple (Ponder, Counterspell, Negate)
+        metaBonus = 40;
       } else if (colorAdjustedRate >= 0.15 || metaStats.inclusionRate >= 0.15) {
-        score += 25; // Common include
+        metaBonus = 25;
       } else if (colorAdjustedRate >= 0.08 || metaStats.inclusionRate >= 0.1) {
-        score += 12; // Occasional include
+        metaBonus = 12;
       }
+      score += Math.round(metaBonus * metaDampener);
       // Archetype core rate (appears in >50% of ONE archetype)
       if (metaStats.coreRate > 0.5) {
         score += 15;

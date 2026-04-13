@@ -8,6 +8,7 @@ import { getCFRecommendations, resolveCFToDbCards } from '@/lib/cf-api-client';
 import { DEFAULT_LAND_COUNT, DEFAULT_DECK_SIZE, COMMANDER_FORMATS, getLegalityKey } from '@/lib/constants';
 import { validateAgainstTemplate } from '@/lib/deck-templates';
 import { analyzeCommander } from '@/lib/commander-synergy';
+import { computeCollectionCoverage } from '@/lib/collection-coverage';
 import type { DbCard } from '@/lib/types';
 
 interface ProposedChange {
@@ -129,6 +130,13 @@ export async function POST(request: NextRequest) {
           const cfSuggestions = allCfSuggestions.slice(0, 15);
             if (cfSuggestions.length > 0) {
               const proposedChanges = buildProposedChanges(deck_id, deck, format, cfSuggestions, cfApprovedNames);
+
+              // Compute collection coverage for commander formats
+              const deckCardNames = deck.cards
+                .filter((c) => c.board === 'main' || c.board === 'commander')
+                .map((c) => c.name);
+              const coverage = computeCollectionCoverage(commanderName, 0, deckCardNames, 80);
+
               logAISuggestion({
                 deckId: deck_id, source: 'collaborative-filtering', format,
                 suggestionCount: cfSuggestions.length,
@@ -139,6 +147,7 @@ export async function POST(request: NextRequest) {
                 suggestions: cfSuggestions,
                 proposedChanges,
                 source: 'collaborative-filtering',
+                ...(coverage && { coverage, upgrades: coverage.upgrades }),
               });
             }
           }
@@ -343,6 +352,18 @@ export async function POST(request: NextRequest) {
       templateValidation.score = Math.max(0, templateValidation.score - commanderSynergyWarnings.length * 5);
     }
 
+    // Compute collection coverage for commander formats
+    let coverageResult = null;
+    if (isCommanderLike) {
+      const cmdCard = deck.cards.find((c: { board: string }) => c.board === 'commander');
+      if (cmdCard) {
+        const deckCardNames = deck.cards
+          .filter((c: { board: string }) => c.board === 'main' || c.board === 'commander')
+          .map((c: { name: string }) => c.name);
+        coverageResult = computeCollectionCoverage(cmdCard.name, 0, deckCardNames, 80);
+      }
+    }
+
     const finalSource = synergySuggestions.length > 0 ? 'synergy' : 'rules';
     logAISuggestion({
       deckId: deck_id, source: finalSource, format,
@@ -355,6 +376,7 @@ export async function POST(request: NextRequest) {
       proposedChanges,
       source: finalSource,
       templateValidation,
+      ...(coverageResult && { coverage: coverageResult, upgrades: coverageResult.upgrades }),
     });
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Suggestion generation failed';
