@@ -115,6 +115,7 @@ export async function GET(request: NextRequest) {
   for (const card of allCards) {
     const oracle = card.oracle_text ?? '';
     const typeLine = card.type_line ?? '';
+    const qty = card.quantity || 1;
     const cats = classifyCard(card.name, oracle, typeLine, card.cmc, commanderOracleText);
     const primary = getPrimaryCategory(cats);
     const meta = metaStats.get(card.name);
@@ -132,11 +133,14 @@ export async function GET(request: NextRequest) {
       synergyScore: synergyScores.get(card.name),
     };
 
-    categories[primary].push(classified);
+    // Push once per quantity so ratio health counts match actual card counts
+    for (let i = 0; i < qty; i++) {
+      categories[primary].push(classified);
+    }
 
     if (!typeLine.includes('Land')) {
-      totalCMC += card.cmc;
-      nonLandCount++;
+      totalCMC += card.cmc * qty;
+      nonLandCount += qty;
     }
   }
 
