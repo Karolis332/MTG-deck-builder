@@ -1318,4 +1318,23 @@ export const MIGRATIONS = [
       CREATE INDEX IF NOT EXISTS idx_ccs_incl ON commander_card_stats(commander_name, inclusion_rate DESC);
     `,
   },
+  {
+    version: 35,
+    name: 'card_deck_index',
+    sql: `
+      -- Inverted index: card_name -> which commanders run it.
+      -- Enables sub-1ms "which commanders run Sol Ring?" lookups.
+      -- Populated by sync_commander_stats.py from CF API data.
+      CREATE TABLE IF NOT EXISTS card_deck_index (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        card_name TEXT NOT NULL,
+        commander_name TEXT NOT NULL,
+        inclusion_rate REAL NOT NULL DEFAULT 0,
+        UNIQUE(card_name, commander_name)
+      );
+
+      CREATE INDEX IF NOT EXISTS idx_cdi_card ON card_deck_index(card_name);
+      CREATE INDEX IF NOT EXISTS idx_cdi_commander ON card_deck_index(commander_name);
+    `,
+  },
 ];

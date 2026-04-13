@@ -101,8 +101,24 @@ def aggregate_commanders(conn: sqlite3.Connection, min_decks: int) -> dict:
         color_id_map[row[0]] = row[1]
 
     # Step 4: Process each commander via SQL aggregation
-    # Clear old data first
-    conn.execute("DELETE FROM commander_card_stats")
+    # Atomic swap: accumulate into staging table, validate, then replace.
+    # Prevents data loss if the script crashes mid-aggregation (Pitfall 1).
+    conn.execute("DROP TABLE IF EXISTS commander_card_stats_staging")
+    conn.execute("""
+        CREATE TABLE commander_card_stats_staging (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            commander_name TEXT NOT NULL,
+            card_name TEXT NOT NULL,
+            inclusion_rate REAL NOT NULL DEFAULT 0,
+            avg_copies REAL NOT NULL DEFAULT 1,
+            synergy_score REAL NOT NULL DEFAULT 0,
+            deck_count INTEGER NOT NULL DEFAULT 0,
+            total_commander_decks INTEGER NOT NULL DEFAULT 0,
+            color_identity TEXT,
+            updated_at TEXT NOT NULL DEFAULT (datetime('now')),
+            UNIQUE(commander_name, card_name)
+        )
+    """)
     conn.commit()
 
     batch: list[tuple] = []
@@ -152,19 +168,11 @@ def aggregate_commanders(conn: sqlite3.Connection, min_decks: int) -> dict:
 
         if len(batch) >= batch_size:
             conn.executemany("""
-                INSERT INTO commander_card_stats
+                INSERT INTO commander_card_stats_staging
                     (commander_name, card_name, inclusion_rate, avg_copies,
                      synergy_score, deck_count, total_commander_decks,
                      color_identity, updated_at)
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, datetime('now'))
-                ON CONFLICT(commander_name, card_name) DO UPDATE SET
-                    inclusion_rate = excluded.inclusion_rate,
-                    avg_copies = excluded.avg_copies,
-                    synergy_score = excluded.synergy_score,
-                    deck_count = excluded.deck_count,
-                    total_commander_decks = excluded.total_commander_decks,
-                    color_identity = excluded.color_identity,
-                    updated_at = datetime('now')
             """, batch)
             total_inserted += len(batch)
             batch.clear()
@@ -177,22 +185,37 @@ def aggregate_commanders(conn: sqlite3.Connection, min_decks: int) -> dict:
     # Flush remaining batch
     if batch:
         conn.executemany("""
-            INSERT INTO commander_card_stats
+            INSERT INTO commander_card_stats_staging
                 (commander_name, card_name, inclusion_rate, avg_copies,
                  synergy_score, deck_count, total_commander_decks,
                  color_identity, updated_at)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, datetime('now'))
-            ON CONFLICT(commander_name, card_name) DO UPDATE SET
-                inclusion_rate = excluded.inclusion_rate,
-                avg_copies = excluded.avg_copies,
-                synergy_score = excluded.synergy_score,
-                deck_count = excluded.deck_count,
-                total_commander_decks = excluded.total_commander_decks,
-                color_identity = excluded.color_identity,
-                updated_at = datetime('now')
         """, batch)
         total_inserted += len(batch)
         conn.commit()
+
+    # Validate: only swap if staging has a reasonable row count
+    staging_count = conn.execute(
+        "SELECT COUNT(*) FROM commander_card_stats_staging"
+    ).fetchone()[0]
+
+    if staging_count < 1000 and len(commanders) > 10:
+        print(f"  ABORT: staging has only {staging_count} rows for {len(commanders)} "
+              f"commanders — refusing to replace production data")
+        conn.execute("DROP TABLE commander_card_stats_staging")
+        conn.commit()
+        stats["commanders_processed"] = 0
+        stats["total_stats"] = 0
+        return stats
+
+    # Atomic swap: drop old, rename staging
+    conn.execute("DROP TABLE IF EXISTS commander_card_stats")
+    conn.execute("ALTER TABLE commander_card_stats_staging RENAME TO commander_card_stats")
+    conn.execute("CREATE INDEX IF NOT EXISTS idx_ccs_commander ON commander_card_stats(commander_name)")
+    conn.execute("CREATE INDEX IF NOT EXISTS idx_ccs_card ON commander_card_stats(card_name)")
+    conn.execute("CREATE INDEX IF NOT EXISTS idx_ccs_incl ON commander_card_stats(commander_name, inclusion_rate DESC)")
+    conn.commit()
+    print(f"  Atomic swap complete: {staging_count:,} rows")
 
     stats["commanders_processed"] = len(commanders)
     stats["total_stats"] = total_inserted

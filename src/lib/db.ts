@@ -1324,6 +1324,40 @@ export function getCommanderCardStats(
 }
 
 /**
+ * Inverted index lookup: which commanders run a given card?
+ * Uses the card_deck_index table populated by sync_commander_stats.py.
+ * Sub-1ms response for "who plays Sol Ring?" queries.
+ */
+export function getCardCommanders(
+  cardName: string,
+  limit: number = 50
+): Array<{
+  commanderName: string;
+  inclusionRate: number;
+}> {
+  const db = getDb();
+  try {
+    const rows = db.prepare(`
+      SELECT commander_name, inclusion_rate
+      FROM card_deck_index
+      WHERE card_name = ? COLLATE NOCASE
+      ORDER BY inclusion_rate DESC
+      LIMIT ?
+    `).all(cardName, limit) as Array<{
+      commander_name: string;
+      inclusion_rate: number;
+    }>;
+
+    return rows.map(r => ({
+      commanderName: r.commander_name,
+      inclusionRate: r.inclusion_rate,
+    }));
+  } catch {
+    return [];
+  }
+}
+
+/**
  * Community co-occurrence recommendations.
  * Given a deck's card names, finds community decks sharing the most cards,
  * then returns the most popular cards from those similar decks that aren't
