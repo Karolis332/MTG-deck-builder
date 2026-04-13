@@ -5,7 +5,7 @@ import { computeCollectionCoverage } from '@/lib/collection-coverage';
 import { COMMANDER_FORMATS } from '@/lib/constants';
 
 export async function GET(request: NextRequest) {
-  const user = getAuthUser(request);
+  const user = await getAuthUser(request);
   if (!user) return unauthorizedResponse();
 
   const deckId = request.nextUrl.searchParams.get('deck_id');
@@ -47,7 +47,7 @@ export async function GET(request: NextRequest) {
 
   const coverage = computeCollectionCoverage(
     commanderCard.name,
-    user.id,
+    user.userId,
     deckCardNames,
     80
   );

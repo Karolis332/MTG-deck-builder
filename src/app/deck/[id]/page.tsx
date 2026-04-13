@@ -32,6 +32,7 @@ import { ImportDialog } from '@/components/import-dialog';
 import { VersionHistoryPanel } from '@/components/version-history-panel';
 import { CardZoomOverlay } from '@/components/card-zoom-overlay';
 import { DeckDndContext } from '@/components/deck-dnd-context';
+import { DeckAnalysisPanel } from '@/components/deck-analysis-panel';
 import { FORMAT_LABELS, FORMATS, COMMANDER_FORMATS, DEFAULT_DECK_SIZE } from '@/lib/constants';
 
 interface DeckData {
@@ -1230,6 +1231,13 @@ export default function DeckEditorPage() {
                 }))}
                 format={deck.format}
                 className="mb-3 rounded-xl border border-border bg-card p-3"
+              />
+
+              <DeckAnalysisPanel
+                deckId={deckId}
+                format={deck.format}
+                isCommanderFormat={isCommanderFormat}
+                className="mb-3"
               />
 
               <DeckValidation
