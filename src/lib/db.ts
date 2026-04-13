@@ -1358,6 +1358,40 @@ export function getCardCommanders(
 }
 
 /**
+ * Get EDHREC average decklist cards for a commander.
+ * Returns card names from the edhrec_avg_decks table (Phase 2 data).
+ * Used as secondary weight (30%) in commander analysis merge.
+ */
+export function getEdhrecAvgDeck(
+  commanderName: string
+): Array<{
+  cardName: string;
+  cardType: string;
+  categoryTag: string;
+}> {
+  const db = getDb();
+  try {
+    const rows = db.prepare(`
+      SELECT card_name, card_type, category_tag
+      FROM edhrec_avg_decks
+      WHERE commander_name = ? COLLATE NOCASE
+    `).all(commanderName) as Array<{
+      card_name: string;
+      card_type: string;
+      category_tag: string;
+    }>;
+
+    return rows.map(r => ({
+      cardName: r.card_name,
+      cardType: r.card_type || '',
+      categoryTag: r.category_tag || '',
+    }));
+  } catch {
+    return [];
+  }
+}
+
+/**
  * Community co-occurrence recommendations.
  * Given a deck's card names, finds community decks sharing the most cards,
  * then returns the most popular cards from those similar decks that aren't

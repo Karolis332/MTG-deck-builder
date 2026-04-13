@@ -24,7 +24,7 @@
  * engine.
  */
 
-import { getDb, getCommanderCardStats } from './db';
+import { getDb, getCommanderCardStats, getEdhrecAvgDeck } from './db';
 import type { DbCard } from './types';
 import { analyzeCommander } from './commander-synergy';
 import type { CommanderSynergyProfile, SynergyCategory } from './commander-synergy';
@@ -401,12 +401,34 @@ export function analyzeCommanderForBuild(
   };
 
   // ── 1. Community top cards for THIS exact commander ─────────────────────
+  // Merge CF API data (primary, 70% weight) with EDHREC avg deck (secondary, 30% boost).
+  // Apply confidence penalty for commanders with few decks (Pitfall 9).
   try {
     const cmdrStats = getCommanderCardStats(commanderName, 150);
+
+    // Build EDHREC set for secondary boost
+    const edhrecCards = new Set<string>();
+    try {
+      const edhrecAvg = getEdhrecAvgDeck(commanderName);
+      for (const e of edhrecAvg) {
+        edhrecCards.add(e.cardName.toLowerCase());
+      }
+    } catch {
+      // edhrec_avg_decks may not exist yet
+    }
+
     for (const stat of cmdrStats) {
+      // Pitfall 9: confidence penalty for rare commanders
+      // Synergy scores from < 30 decks are noisy — dampen them
+      const confidence = Math.min(1.0, stat.deckCount / 30);
+      const adjustedSynergy = stat.synergyScore * confidence;
+
+      // EDHREC boost: if this card also appears in EDHREC avg deck,
+      // bump priority by 5 points (the 30% secondary signal)
+      const edhrecBoost = edhrecCards.has(stat.cardName.toLowerCase()) ? 5 : 0;
+
       if (stat.inclusionRate >= 0.4) {
-        // Top-tier community pick (40%+ of community decks run this)
-        const priority = 85 + Math.round(stat.inclusionRate * 10);
+        const priority = 85 + Math.round(stat.inclusionRate * 10) + edhrecBoost;
         tryAdd(
           stat.cardName,
           priority,
@@ -415,7 +437,7 @@ export function analyzeCommanderForBuild(
           { inclusionRate: stat.inclusionRate },
         );
       } else if (stat.inclusionRate >= 0.2) {
-        const priority = 65 + Math.round(stat.inclusionRate * 10);
+        const priority = 65 + Math.round(stat.inclusionRate * 10) + edhrecBoost;
         tryAdd(
           stat.cardName,
           priority,
@@ -423,15 +445,32 @@ export function analyzeCommanderForBuild(
           `${Math.round(stat.inclusionRate * 100)}% community inclusion`,
           { inclusionRate: stat.inclusionRate },
         );
-      } else if (stat.synergyScore > 0.15) {
-        // Strong positive synergy vs global baseline
+      } else if (adjustedSynergy > 0.15) {
+        // Strong positive synergy vs global baseline (confidence-adjusted)
         tryAdd(
           stat.cardName,
-          60,
+          60 + edhrecBoost,
           'community_synergy',
-          `high synergy score (+${stat.synergyScore.toFixed(2)} vs baseline)`,
+          `synergy +${adjustedSynergy.toFixed(2)} (${stat.deckCount} decks${confidence < 1 ? `, conf ${(confidence * 100).toFixed(0)}%` : ''})`,
           { inclusionRate: stat.inclusionRate },
         );
+      }
+    }
+
+    // Add EDHREC-only cards not already covered by CF data
+    // These are cards EDHREC recommends but CF API didn't return
+    // (lower priority since they lack community inclusion data)
+    if (edhrecCards.size > 0) {
+      const cfCardNames = new Set(cmdrStats.map(s => s.cardName.toLowerCase()));
+      for (const edhrecName of edhrecCards) {
+        if (!cfCardNames.has(edhrecName)) {
+          tryAdd(
+            edhrecName,
+            58, // just below community_synergy base (60)
+            'community_synergy',
+            'EDHREC average decklist recommendation',
+          );
+        }
       }
     }
   } catch {

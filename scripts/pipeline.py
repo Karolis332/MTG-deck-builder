@@ -50,7 +50,7 @@ RETRY_BACKOFF = [15, 30]  # wait 15s after 1st fail, 30s after 2nd — then give
 # Steps where scraper failures are non-critical (data just won't be fresh)
 OPTIONAL_STEPS = {"goldfish", "mtgtop8", "edhrec_articles", "goldfish_articles",
                   "spellbook", "topdeck", "mtga_cards", "mtgjson", "edhrec",
-                  "cf_sync"}
+                  "edhrec_avg", "cf_sync"}
 
 
 STEPS = [
@@ -133,6 +133,12 @@ STEPS = [
         "args": [],
     },
     {
+        "name": "edhrec_avg",
+        "label": "EDHREC Average Decklists Fetch",
+        "script": "fetch_avg_decklists.py",
+        "args": ["--from-cf-stats", "--min-decks", "20"],
+    },
+    {
         "name": "cf_sync",
         "label": "CF API Commander Stats Sync (VPS -> Local)",
         "script": "sync_commander_stats.py",
@@ -168,7 +174,7 @@ def _attempt_step(step: dict, db_path: str) -> tuple[bool, str]:
     cmd = [sys.executable, script_path, "--db", db_path] + step["args"]
     step_timeout = 900 if step["name"] in (
         "goldfish", "mtgtop8", "edhrec_articles", "goldfish_articles", "spellbook", "topdeck",
-        "commander_stats", "cf_sync"
+        "commander_stats", "edhrec_avg", "cf_sync"
     ) else 300
 
     start = time.time()
