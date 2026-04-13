@@ -28,11 +28,32 @@ files:
 
 # Extra resources bundled alongside the app (accessible via process.resourcesPath)
 # Standalone goes here to bypass electron-builder's node_modules filtering.
+#
+# IMPORTANT: The standalone/ directory is produced by `npm run build` via
+# scripts/postbuild-standalone.js. That script copies only arena_grp_ids.json
+# from data/ into standalone/data/ — never the live DB or ML files.
+# The exclusions below are a defense-in-depth guard in case something leaks in.
 extraResources:
   - from: ".next/standalone/"
     to: "standalone"
     filter:
       - "**/*"
+      - "!**/*.db"
+      - "!**/*.db-wal"
+      - "!**/*.db-shm"
+      - "!**/*.sqlite"
+      - "!**/*.sqlite-wal"
+      - "!**/*.sqlite-shm"
+      - "!**/*.joblib"
+      - "!**/pipeline_failures.json"
+      - "!**/pipeline_run.log"
+      - "!**/pipeline_out.txt"
+      - "!**/pipeline_report.json"
+      - "!**/pipeline_monitor*.log"
+      - "!**/AtomicCards.json.gz"
+      - "!**/bridge.log"
+      - "!**/vps_export/**"
+      - "!**/*.pdf"
   - from: "electron/resources/"
     to: "."
     filter:

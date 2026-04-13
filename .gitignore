@@ -64,7 +64,6 @@ marketing/screenshots/
 .claude/
 .claude-flow/
 .mcp.json
-.planning/
 
 # temp analysis/reference docs
 AI_ISSUES_ANALYSIS.md

@@ -52,9 +52,8 @@
 }
 
 @layer base {
-  /* Scale all rem-based sizes up globally for readability */
   html {
-    font-size: 20px;
+    font-size: 15px;
   }
   * {
     @apply border-border;
