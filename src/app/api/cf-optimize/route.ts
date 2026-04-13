@@ -71,19 +71,16 @@ export async function POST(request: NextRequest) {
           ml.result,
           ml.opponent_deck_colors,
           ml.opponent_deck_archetype,
-          ml.turns,
-          apm.draw_order
+          ml.turns
         FROM match_logs ml
-        LEFT JOIN arena_parsed_matches apm ON apm.match_id = ml.arena_match_id
-        WHERE ml.deck_id = ? AND ml.user_id = ?
-        ORDER BY ml.played_at DESC
+        WHERE ml.deck_id = ?
+        ORDER BY ml.created_at DESC
         LIMIT 50
-      `).all(deckId, userId) as Array<{
+      `).all(deckId) as Array<{
         result: string;
         opponent_deck_colors: string | null;
         opponent_deck_archetype: string | null;
         turns: number | null;
-        draw_order: string | null;
       }>;
 
       matches = matchRows.map(m => {
@@ -93,11 +90,6 @@ export async function POST(request: NextRequest) {
         if (m.opponent_deck_colors) record.opponent_colors = m.opponent_deck_colors;
         if (m.opponent_deck_archetype) record.opponent_archetype = m.opponent_deck_archetype;
         if (m.turns) record.turns = m.turns;
-        if (m.draw_order) {
-          try {
-            record.cards_drawn = JSON.parse(m.draw_order);
-          } catch {}
-        }
         return record;
       });
 
