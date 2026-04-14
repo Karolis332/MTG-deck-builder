@@ -18,6 +18,7 @@ import {
 } from './deck-builder-constraints';
 import { analyzeCommanderForBuild } from './commander-analysis';
 import type { ArsenalCard } from './commander-analysis';
+import { classifyCard } from './card-classifier';
 
 // ── Commander synergy text patterns for card scoring ────────────────────────
 // Maps synergy categories from commander-synergy.ts to oracle text substrings
@@ -1248,6 +1249,71 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
     pickedNames.add(p.card.name);
     reasoning.push({ cardName: p.card.name, role: p.role, reason: p.reason });
     totalPicked += qty;
+  }
+
+  // ── Board wipe backfill ─────────────────────────────────────────────────
+  // If pickByRole couldn't fill the board_wipe quota from the scored pool
+  // (common in Voltron/aggro builds where wipes score low), inject them
+  // directly from the DB so every deck ships with at least 2 board wipes.
+  const wipeFilled = pickResult.roleFills.board_wipe || 0;
+  const wipeNeed = Math.max(0, (quotas.board_wipe || 2) - wipeFilled);
+  if (wipeNeed > 0 && totalPicked < nonLandTarget) {
+    const wipePool = db.prepare(`
+      SELECT c.* FROM cards c
+      ${collectionJoin}
+      WHERE c.type_line NOT LIKE '%Land%'
+      AND (c.oracle_text LIKE '%destroy all creatures%'
+        OR c.oracle_text LIKE '%destroy all nonland%'
+        OR c.oracle_text LIKE '%destroy all permanents%'
+        OR c.oracle_text LIKE '%exile all creatures%'
+        OR c.oracle_text LIKE '%exile all nonland%'
+        OR c.oracle_text LIKE '%all creatures get -%'
+        OR c.oracle_text LIKE '%deals % damage to each creature%')
+      ${colorExcludeFilter ? `AND ${colorExcludeFilter}` : ''}
+      ${legalityFilter}
+      ORDER BY ${collectionOrder} c.edhrec_rank ASC NULLS LAST
+      LIMIT 20
+    `).all() as DbCard[];
+
+    let wipesAdded = 0;
+    for (const wipe of wipePool) {
+      if (wipesAdded >= wipeNeed) break;
+      if (totalPicked >= nonLandTarget) break;
+      if (pickedNames.has(wipe.name)) continue;
+      const qty = getMaxQty(wipe);
+      if (qty <= 0) continue;
+      picked.push({ card: wipe, quantity: 1, board: 'main' });
+      pickedNames.add(wipe.name);
+      reasoning.push({ cardName: wipe.name, role: 'board_wipe', reason: `board wipe backfill: ${wipe.name}` });
+      totalPicked += 1;
+      wipesAdded += 1;
+    }
+    if (wipesAdded > 0) {
+      // Remove the same number of lowest-scored non-essential picks to stay at target
+      const removable = picked
+        .filter(p => p.board === 'main' && !['commander'].includes(p.board))
+        .filter(p => {
+          const cats = classifyCard(p.card.name, p.card.oracle_text || '', p.card.type_line || '', p.card.cmc || 0);
+          const primary = cats[0] || 'utility';
+          return primary === 'utility' || primary === 'synergy';
+        })
+        .sort((a, b) => (a.card.edhrec_rank || 99999) - (b.card.edhrec_rank || 99999))
+        .reverse();
+
+      let removed = 0;
+      for (const r of removable) {
+        if (removed >= wipesAdded) break;
+        // Don't remove the wipes we just added
+        if (wipePool.some(w => w.name === r.card.name)) continue;
+        const idx = picked.indexOf(r);
+        if (idx !== -1) {
+          picked.splice(idx, 1);
+          pickedNames.delete(r.card.name);
+          totalPicked -= r.quantity;
+          removed += r.quantity;
+        }
+      }
+    }
   }
 
   const buildReport = buildReasoningSummary(

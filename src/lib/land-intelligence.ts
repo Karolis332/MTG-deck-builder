@@ -224,7 +224,22 @@ export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
         reasons.push(`matches heavy color (${manaDemand.heaviestColor})`);
       }
     } else if (producesColors.length === 0 || producesColors.every(c => c === 'C')) {
-      // Colorless lands are fine but not great
+      // Colorless-producing or unclassified lands — check oracle text for
+      // type-granting effects that only benefit specific colors
+      const oracleLC = (land.oracle_text || '').toLowerCase();
+      const typeGrants: Record<string, string> = {
+        'swamp': 'B', 'mountain': 'R', 'forest': 'G', 'plains': 'W', 'island': 'U',
+      };
+      let grantsOffColor = false;
+      for (const [basicType, grantColor] of Object.entries(typeGrants)) {
+        // Match patterns like "each land is a Swamp" or "lands you control are Swamps"
+        if ((oracleLC.includes(`is a ${basicType}`) || oracleLC.includes(`are ${basicType}`))
+            && !colors.includes(grantColor)) {
+          grantsOffColor = true;
+          break;
+        }
+      }
+      if (grantsOffColor) continue; // e.g. Urborg in a non-black deck
       score += 5;
     } else {
       // Produces ONLY off-colors — hard exclude (e.g. Urborg in UR deck)
