@@ -95,13 +95,14 @@ if (fs.existsSync(grpIdsSrc)) {
   console.warn('[postbuild] WARNING: data/arena_grp_ids.json not found — Arena grpId resolution will be degraded');
 }
 
-// Defensive guard: warn if any .db file ended up in standalone/data by accident
+// Defensive guard: remove any blocked files that Next.js trace pulled into standalone/data
 const standaloneData = path.join(STANDALONE, 'data');
 if (fs.existsSync(standaloneData)) {
   for (const name of fs.readdirSync(standaloneData)) {
     if (isBlocked(name)) {
-      console.error(`[postbuild] ERROR: blocked file found in standalone/data/: ${name} — remove it before packaging`);
-      process.exitCode = 1;
+      const blockedPath = path.join(standaloneData, name);
+      fs.unlinkSync(blockedPath);
+      console.log(`[postbuild] Removed blocked file from standalone/data/: ${name}`);
     }
   }
 }
