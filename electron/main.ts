@@ -1,8 +1,9 @@
-import { app, BrowserWindow, dialog } from 'electron';
+import { app, BrowserWindow, dialog, ipcMain } from 'electron';
 import path from 'path';
 import fs from 'fs';
 import { spawn, ChildProcess } from 'child_process';
 import net from 'net';
+import { autoUpdater } from 'electron-updater';
 import { registerIpcHandlers, ensureWatcherRunning, markServerReady, checkArenaCardDbUpdate } from './ipc-handlers';
 import { registerSetupHandlers } from './setup-handlers';
 import { runFirstBootActions, seedArenaCardCache } from '../src/lib/first-boot';
@@ -486,6 +487,7 @@ export async function transitionToMainApp(): Promise<void> {
   }
 
   createMainWindow();
+  setupAutoUpdater();
 
   // Auto-start the Arena log watcher for telemetry
   mainTrace('Auto-starting watcher on app launch');
@@ -513,6 +515,74 @@ export async function transitionToMainApp(): Promise<void> {
     });
   }, 2000);
 }
+
+// ── Auto-updater ─────────────────────────────────────────────────────────
+
+function setupAutoUpdater(): void {
+  if (isDev) return;
+
+  autoUpdater.autoDownload = false;
+  autoUpdater.autoInstallOnAppQuit = true;
+
+  autoUpdater.on('update-available', (info) => {
+    mainTrace(`Update available: ${info.version}`);
+    mainWindow?.webContents.send('update-available', {
+      version: info.version,
+      releaseNotes: info.releaseNotes,
+    });
+  });
+
+  autoUpdater.on('update-not-available', () => {
+    mainTrace('No updates available');
+  });
+
+  autoUpdater.on('download-progress', (progress) => {
+    mainWindow?.webContents.send('update-download-progress', {
+      percent: Math.round(progress.percent),
+      transferred: progress.transferred,
+      total: progress.total,
+    });
+  });
+
+  autoUpdater.on('update-downloaded', (info) => {
+    mainTrace(`Update downloaded: ${info.version}`);
+    mainWindow?.webContents.send('update-downloaded', {
+      version: info.version,
+    });
+  });
+
+  autoUpdater.on('error', (err) => {
+    mainTrace(`Auto-update error: ${err.message}`);
+    logCrash('auto-update-error', err);
+  });
+
+  // Check for updates after a short delay
+  setTimeout(() => {
+    autoUpdater.checkForUpdates().catch((err) => {
+      mainTrace(`Update check failed: ${err.message}`);
+    });
+  }, 5000);
+}
+
+// IPC handlers for update actions
+ipcMain.handle('update-download', () => {
+  autoUpdater.downloadUpdate().catch((err) => {
+    logCrash('update-download-error', err);
+  });
+});
+
+ipcMain.handle('update-install', () => {
+  autoUpdater.quitAndInstall(false, true);
+});
+
+ipcMain.handle('update-check', async () => {
+  try {
+    const result = await autoUpdater.checkForUpdates();
+    return result?.updateInfo ? { version: result.updateInfo.version } : null;
+  } catch {
+    return null;
+  }
+});
 
 // ── Set DB dir env for Electron mode ────────────────────────────────────
 
@@ -544,6 +614,7 @@ app.whenReady().then(async () => {
 
     registerIpcHandlers();
     createMainWindow();
+    setupAutoUpdater();
 
     // Auto-start the Arena log watcher for telemetry
     mainTrace('Auto-starting watcher on app launch (dev mode)');

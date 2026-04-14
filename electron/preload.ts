@@ -138,6 +138,23 @@ contextBridge.exposeInMainWorld('electronAPI', {
     return () => ipcRenderer.removeAllListeners('recording-state-change');
   },
 
+  // Auto-update
+  onUpdateAvailable: (callback: (data: { version: string; releaseNotes?: string }) => void) => {
+    ipcRenderer.on('update-available', (_event, data) => callback(data));
+    return () => ipcRenderer.removeAllListeners('update-available');
+  },
+  onUpdateDownloadProgress: (callback: (data: { percent: number; transferred: number; total: number }) => void) => {
+    ipcRenderer.on('update-download-progress', (_event, data) => callback(data));
+    return () => ipcRenderer.removeAllListeners('update-download-progress');
+  },
+  onUpdateDownloaded: (callback: (data: { version: string }) => void) => {
+    ipcRenderer.on('update-downloaded', (_event, data) => callback(data));
+    return () => ipcRenderer.removeAllListeners('update-downloaded');
+  },
+  downloadUpdate: () => ipcRenderer.invoke('update-download'),
+  installUpdate: () => ipcRenderer.invoke('update-install'),
+  checkForUpdate: () => ipcRenderer.invoke('update-check'),
+
   // Platform info
   getPlatform: () => ipcRenderer.invoke('get-platform'),
   isElectron: true,

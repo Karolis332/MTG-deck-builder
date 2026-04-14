@@ -3,6 +3,7 @@ import './globals.css';
 import { Navbar } from '@/components/navbar';
 import { ThemeProvider } from '@/components/theme-provider';
 import { AuthProvider } from '@/components/auth-provider';
+import { UpdateBanner } from '@/components/update-banner';
 export const metadata: Metadata = {
   title: 'The Black Grimoire',
   description: 'Build, analyze, and optimize your Magic: The Gathering decks with AI-powered suggestions',
@@ -19,6 +20,7 @@ export default function RootLayout({
         <AuthProvider>
           <ThemeProvider>
             <div className="flex min-h-screen flex-col">
+              <UpdateBanner />
               <Navbar />
               <main className="flex-1 animate-page-turn">{children}</main>
             </div>

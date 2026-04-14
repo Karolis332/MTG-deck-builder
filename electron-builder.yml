@@ -3,6 +3,12 @@ productName: The Black Grimoire
 executableName: the-black-grimoire
 copyright: Copyright © 2025 The Black Grimoire
 
+publish:
+  provider: github
+  owner: Karolis332
+  repo: MTG-deck-builder
+  releaseType: release
+
 directories:
   output: dist-electron
   buildResources: build

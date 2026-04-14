@@ -127,6 +127,14 @@ export interface ElectronAPI {
     sourceName: string | null;
   }) => void) => () => void;
 
+  // Auto-update
+  onUpdateAvailable: (callback: (data: { version: string; releaseNotes?: string }) => void) => () => void;
+  onUpdateDownloadProgress: (callback: (data: { percent: number; transferred: number; total: number }) => void) => () => void;
+  onUpdateDownloaded: (callback: (data: { version: string }) => void) => () => void;
+  downloadUpdate: () => Promise<void>;
+  installUpdate: () => Promise<void>;
+  checkForUpdate: () => Promise<{ version: string } | null>;
+
   getPlatform: () => Promise<string>;
   isElectron: boolean;
 }
