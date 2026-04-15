@@ -597,8 +597,10 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
   const pool: DbCard[] = [];
 
   // EDHREC cards go first — these are specifically recommended for this commander
+  // When building from collection, skip cards the user doesn't own
   for (const card of edhrecResolvedCards) {
     if (!seenNames.has(card.name)) {
+      if (useCollection && !ownedNames.has(card.name)) continue;
       seenNames.add(card.name);
       pool.push(card);
     }
@@ -607,6 +609,7 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
   // Tribal cards next — creatures and synergy cards of the detected type
   for (const card of tribalCards) {
     if (!seenNames.has(card.name)) {
+      if (useCollection && !ownedNames.has(card.name)) continue;
       seenNames.add(card.name);
       pool.push(card);
     }
@@ -620,13 +623,14 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
 
     const synergyPoolQuery = `
       SELECT DISTINCT c.* FROM cards c
+      ${collectionJoin}
       WHERE (c.type_line NOT LIKE '%Land%' OR c.type_line LIKE '%//%')
       AND c.type_line != 'Card' AND c.type_line NOT LIKE 'Card //%'
       AND (${synergyConditions})
       ${colorExcludeFilter ? `AND ${colorExcludeFilter}` : ''}
       ${legalityFilter}
       ${commanderExclude}
-      ORDER BY c.edhrec_rank ASC NULLS LAST
+      ORDER BY ${collectionOrder} c.edhrec_rank ASC NULLS LAST
       LIMIT 1000
     `;
 
@@ -659,6 +663,8 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
     for (const staple of formatStaples) {
       if (staple.inclusionRate < 0.10) continue; // Only inject meaningful staples
       if (seenNames.has(staple.cardName)) continue;
+
+      if (useCollection && !ownedNames.has(staple.cardName)) continue;
 
       const stapleCard = db.prepare(
         `SELECT c.* FROM cards c WHERE c.name = ? COLLATE NOCASE

@@ -445,6 +445,13 @@ export async function buildDeckWithAI(
   const resolvedCards: ClaudeBuildResult['cards'] = [];
   const pickedNames = new Set<string>();
 
+  // Collection enforcement: block unowned cards when building from collection
+  const { ownedQty, useCollection: collectionMode } = poolResult;
+  const isOwned = (cardName: string): boolean => {
+    if (!collectionMode) return true;
+    return (ownedQty.get(cardName) || 0) > 0;
+  };
+
   for (const entry of parsed.cards) {
     const key = entry.name.toLowerCase();
     const match = candidateMap.get(key);
@@ -460,7 +467,7 @@ export async function buildDeckWithAI(
          LIMIT 1`
       ).get(entry.name) as DbCard | undefined;
 
-      if (dbCard && !pickedNames.has(dbCard.name.toLowerCase())) {
+      if (dbCard && !pickedNames.has(dbCard.name.toLowerCase()) && isOwned(dbCard.name)) {
         resolvedCards.push({
           card: dbCard,
           quantity: 1,
@@ -474,6 +481,7 @@ export async function buildDeckWithAI(
     }
 
     if (pickedNames.has(key)) continue;
+    if (!isOwned(match.card.name)) continue;
 
     resolvedCards.push({
       card: match.card,
@@ -491,6 +499,7 @@ export async function buildDeckWithAI(
     for (const { card } of candidates) {
       if (resolvedCards.length >= nonLandTarget) break;
       if (pickedNames.has(card.name.toLowerCase())) continue;
+      if (!isOwned(card.name)) continue;
 
       resolvedCards.push({
         card,
@@ -622,7 +631,7 @@ function addLands(
   function getMaxQty(card: DbCard): number {
     const formatMax = isCommander ? 1 : maxCopies;
     if (!useCollection) return formatMax;
-    const owned = ownedQty.get(card.id) || 0;
+    const owned = ownedQty.get(card.name) || 0;
     // Block unowned cards entirely when building from collection
     return owned > 0 ? Math.min(formatMax, owned) : 0;
   }
