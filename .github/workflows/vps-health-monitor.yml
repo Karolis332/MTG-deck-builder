@@ -1,0 +1,61 @@
+name: VPS Health Monitor
+
+on:
+  schedule:
+    - cron: '*/15 * * * *'  # every 15min
+  workflow_dispatch:
+
+concurrency:
+  group: vps-health-monitor
+  cancel-in-progress: false
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Probe geo-scraper (HTTP)
+        id: geo
+        run: |
+          code=$(curl -s -o /dev/null -w '%{http_code}' --max-time 10 http://187.77.110.100:3000/ || echo 000)
+          echo "geo_status=$code" >> $GITHUB_OUTPUT
+          # 200/302/401 are all "service is up and responding"
+          case "$code" in
+            200|302|401) echo "geo-scraper: OK ($code)" ;;
+            *) echo "::error::geo-scraper unhealthy (HTTP $code)"; exit 1 ;;
+          esac
+
+      - name: Probe CF API (HTTP + JSON)
+        id: cf
+        run: |
+          body=$(curl -s --max-time 10 http://187.77.110.100:8000/health || echo '{}')
+          status=$(echo "$body" | jq -r '.status // "down"')
+          decks=$(echo "$body" | jq -r '.deck_count // 0')
+          echo "cf_status=$status" >> $GITHUB_OUTPUT
+          echo "cf_decks=$decks" >> $GITHUB_OUTPUT
+          if [ "$status" != "ok" ]; then
+            echo "::error::CF API unhealthy: $body"
+            exit 1
+          fi
+          echo "CF API: OK (decks=$decks)"
+
+      - name: Notify Telegram on failure
+        if: failure()
+        env:
+          BOT: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          CHAT: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          if [ -z "$BOT" ] || [ -z "$CHAT" ]; then
+            echo "::warning::Telegram secrets not configured — skipping notification"
+            exit 0
+          fi
+          MSG=$(printf '🔴 <b>VPS Health Check FAILED</b>%%0A%%0Ageo-scraper: %s%%0ACF API: %s%%0A%%0A<a href="https://github.com/%s/actions/runs/%s">View run</a>' \
+            "${{ steps.geo.outputs.geo_status }}" \
+            "${{ steps.cf.outputs.cf_status }}" \
+            "${{ github.repository }}" \
+            "${{ github.run_id }}")
+          curl -s -X POST "https://api.telegram.org/bot${BOT}/sendMessage" \
+            --data-urlencode "chat_id=${CHAT}" \
+            --data-urlencode "text=${MSG}" \
+            -d "parse_mode=HTML" \
+            -d "disable_web_page_preview=true" > /dev/null
