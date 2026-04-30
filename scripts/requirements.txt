@@ -1,4 +1,4 @@
-requests>=2.31.0
+requests>=2.33.1
 pandas>=2.0.0
 numpy>=1.24.0
 pyedhrec>=0.0.2
