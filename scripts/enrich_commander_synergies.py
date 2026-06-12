@@ -34,7 +34,20 @@ except ImportError:
 
 SCRIPT_DIR = Path(__file__).parent
 PROJECT_ROOT = SCRIPT_DIR.parent
-DB_PATH = PROJECT_ROOT / "data" / "mtg-deck-builder.db"
+
+
+def _default_db() -> Path:
+    """Prefer the production Electron DB (APPDATA) over the legacy repo-local copy."""
+    import os
+    appdata = os.environ.get("APPDATA")
+    if appdata:
+        electron_db = Path(appdata) / "the-black-grimoire" / "data" / "mtg-deck-builder.db"
+        if electron_db.exists():
+            return electron_db
+    return PROJECT_ROOT / "data" / "mtg-deck-builder.db"
+
+
+DB_PATH = _default_db()
 
 
 def ensure_table(conn: sqlite3.Connection):
@@ -169,12 +182,26 @@ def main():
     if "--from-decks" in sys.argv:
         commanders = get_commanders_from_decks(conn)
         print(f"Found {len(commanders)} commanders from existing decks\n")
+    elif "--from-stats" in sys.argv:
+        # Top-N commanders by scraped-deck depth (commander_card_stats)
+        idx = sys.argv.index("--from-stats")
+        limit = int(sys.argv[idx + 1]) if len(sys.argv) > idx + 1 and sys.argv[idx + 1].isdigit() else 120
+        rows = conn.execute("""
+            SELECT commander_name, MAX(deck_count) AS decks
+            FROM commander_card_stats
+            GROUP BY commander_name
+            ORDER BY decks DESC
+            LIMIT ?
+        """, (limit,)).fetchall()
+        commanders = [row[0] for row in rows]
+        print(f"Top {len(commanders)} commanders from commander_card_stats\n")
     elif len(sys.argv) > 1:
         commanders = [arg for arg in sys.argv[1:] if not arg.startswith("--")]
     else:
         print("Usage:")
         print("  python scripts/enrich_commander_synergies.py 'Commander Name' ...")
         print("  python scripts/enrich_commander_synergies.py --from-decks")
+        print("  python scripts/enrich_commander_synergies.py --from-stats [N]")
         sys.exit(0)
 
     if not commanders:

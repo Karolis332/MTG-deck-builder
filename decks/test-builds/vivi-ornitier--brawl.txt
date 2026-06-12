@@ -1,25 +1,25 @@
 // Vivi Ornitier — BRAWL
 // strategy=spellslinger themes=counters,tokens,artifacts,spellslinger,draw,aggro,flying,ramp,enchantments,graveyard,equipment tribal=-
-// total=99 lands=39 avgCMC=2.68
-// categories: removal=14 draw=16 utility=9 win_condition=5 ramp=11 board_wipe=2 protection=3 land=39
+// total=99 lands=38 avgCMC=2.67
+// categories: win_condition=6 removal=14 draw=14 utility=10 ramp=12 board_wipe=2 protection=3 land=38
 
 1 Vivi Ornitier *CMDR*
 
-// ── ramp (11) ──
+// ── ramp (12) ──
+1 Mox Amber
 1 An Offer You Can't Refuse
 1 Strike It Rich
 1 Arcane Signet
-1 Izzet Signet
 1 Talisman of Creativity
 1 Birgi, God of Storytelling // Harnfel, Horn of Bounty
-1 Electro, Assaulting Battery
 1 Jeska's Will
+1 Ashling, Flame Dancer
 1 Galazeth Prismari
+1 Solemn Simulacrum
 1 Storm-Kiln Artist
 1 Goldspan Dragon
 
-// ── draw (16) ──
-1 Mishra's Bauble
+// ── draw (14) ──
 1 Brainstorm
 1 Consider
 1 Curiosity
@@ -28,67 +28,67 @@
 1 Opt
 1 Ponder
 1 Preordain
-1 Baral, Chief of Compliance
-1 Wan Shi Tong, Librarian
+1 Artist's Talent
+1 Ral, Monsoon Mage // Ral, Leyline Prodigy
 1 Frantic Search
 1 Rhystic Study
 1 Archmage Emeritus
-1 Ral, Crackling Wit
-1 Archmage of Runes
+1 Shark Typhoon
 
 // ── removal (14) ──
 1 Lightning Bolt
-1 Monstrous Rage
-1 Pongify
 1 Wild Ride
+1 Grapeshot
+1 Jace, Vryn's Prodigy // Jace, Telepath Unbound
 1 Kozilek's Command
 1 Red Sun's Twilight
 1 Stolen by the Fae
-1 Chaos Warp
-1 Flame of Anor
-1 Prismari Command
-1 Mizzix's Mastery
+1 The Ooze
+1 Warping Wail
+1 Flick a Coin
 1 Urabrask // The Great Work
+1 Virtue of Courage // Embereth Blaze
 1 Niv-Mizzet, Parun
 1 Hullbreaker Horror
 
 // ── board_wipe (2) ──
 1 Cyclonic Rift
-1 Blasphemous Act
+1 Extinguisher Battleship
 
 // ── protection (3) ──
 1 Swan Song
+1 Syncopate
 1 Counterspell
-1 Negate
 
-// ── win_condition (5) ──
-1 Fiery Inscription
+// ── win_condition (6) ──
+1 Coruscation Mage
+1 Firebrand Archer
 1 Guttersnipe
 1 Murmuring Mystic
 1 Talrand, Sky Summoner
 1 Niv-Mizzet, Visionary
 
-// ── utility (9) ──
+// ── utility (10) ──
 1 Hangarback Walker
 1 Shivan Devastator
 1 Crackle with Power
 1 Goblin Electromancer
+1 Harmonic Prodigy
 1 Increasing Vengeance
-1 Jaya's Immolating Inferno
-1 Dualcaster Mage
+1 Young Pyromancer
+1 Adeliz, the Cinder Wind
 1 Expansion // Explosion
 1 Thousand-Year Storm
 
-// ── land (39) ──
+// ── land (38) ──
 1 Cavern of Souls
-1 Command Tower
 1 Echoing Cavern
 1 Eclipsed Realms
 1 Fiery Islet
 1 Frostboil Snarl
 1 Great Hall of the Biblioplex
-10 Island
-10 Mountain
+9 Island
+11 Mountain
 1 Riverglide Pathway // Lavaglide Pathway
 1 Secluded Courtyard
 1 Shivan Reef
@@ -98,6 +98,6 @@
 1 Temple of the Dragon Queen
 1 Three Tree City
 1 Unclaimed Territory
-1 Hydroelectric Specimen // Hydroelectric Laboratory
 1 Rush of Inspiration // Crackling Falls
-1 Sink into Stupor // Soporific Springs
+1 Valakut Awakening // Valakut Stoneforge
+1 Pinnacle Monk // Mystic Peak

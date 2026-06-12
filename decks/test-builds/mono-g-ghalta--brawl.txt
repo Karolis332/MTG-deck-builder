@@ -1,17 +1,22 @@
 // Ghalta, Primal Hunger — BRAWL
 // strategy=aggro themes=draw,artifacts,ramp,tokens,aggro,equipment,sacrifice,tribal tribal=-
-// total=99 lands=44 avgCMC=3.4
-// categories: ramp=16 draw=9 removal=8 board_wipe=2 protection=4 win_condition=5 utility=11 land=44
+// total=99 lands=42 avgCMC=2.95
+// categories: ramp=21 draw=9 removal=7 board_wipe=2 protection=5 win_condition=3 utility=10 land=42
 
 1 Ghalta, Primal Hunger *CMDR*
 
-// ── ramp (16) ──
-1 Delighted Halfling
+// ── ramp (21) ──
+1 Birds of Paradise
 1 Elvish Mystic
+1 Gilded Goose
 1 Llanowar Elves
 1 Arcane Signet
+1 Collector's Vault
 1 Fanatic of Rhonas
-1 Finale of Devastation
+1 Farseek
+1 Goldvein Pick
+1 Mind Stone
+1 Priest of Titania
 1 Rampant Growth
 1 Cultivate
 1 Gwenna, Eyes of Gaea
@@ -24,64 +29,56 @@
 1 The Great Henge
 
 // ── draw (9) ──
-1 Colossal Majesty
-1 Elemental Bond
+1 Currency Converter
+1 Syr Ginger, the Meal Ender
 1 Garruk's Uprising
-1 Tribute to the World Tree
+1 Peregrin Took
+1 Tireless Tracker
 1 Beast Whisperer
-1 Guardian Project
 1 Momentous Fall
 1 Return of the Wildspeaker
 1 Rishkar's Expertise
 
-// ── removal (8) ──
-1 Cankerbloom
-1 Kenrith's Transformation
+// ── removal (7) ──
+1 Insidious Fungus
+1 Masked Vandal
 1 Scavenging Ooze
 1 Beast Within
 1 Reclamation Sage
 1 Rhonas the Indomitable
 1 Thrashing Brontodon
-1 Kogla, the Titan Ape
 
 // ── board_wipe (2) ──
 1 Duskshell Crawler
-1 Season of Gathering
+1 Night of the Sweets' Revenge
 
-// ── protection (4) ──
+// ── protection (5) ──
+1 Allosaurus Shepherd
 1 Frenzied Baloth
 1 Heroic Intervention
 1 Lightning Greaves
 1 Swiftfoot Boots
 
-// ── win_condition (5) ──
+// ── win_condition (3) ──
 1 Goreclaw, Terror of Qal Sisma
-1 Defiler of Vigor
 1 Gigantosaurus
 1 Surrak and Goreclaw
-1 Ghalta, Stampede Tyrant
 
-// ── utility (11) ──
-1 Emerald Medallion
+// ── utility (10) ──
+1 Crashing Drawbridge
 1 Ram Through
 1 Eternal Witness
-1 Fireshrieker
 1 Hunter's Insight
 1 Pugnacious Hammerskull
-1 Rhonas's Monument
+1 Steel Leaf Champion
 1 Yorvo, Lord of Garenbrig
 1 Surrak, the Hunt Caller
 1 Unnatural Growth
 1 The Skullspore Nexus
 
-// ── land (44) ──
-1 Castle Garenbrig
+// ── land (42) ──
 1 Cavern of Souls
-3 Forest
-28 Forest
-1 Nykthos, Shrine to Nyx
-1 Reliquary Tower
-1 Rogue's Passage
+32 Forest
 1 Secluded Courtyard
 1 Shifting Woodland
 1 Three Tree City
@@ -89,4 +86,5 @@
 1 Bala Ged Recovery // Bala Ged Sanctuary
 1 Bridgeworks Battle // Tanglespan Bridgeworks
 1 Khalni Ambush // Khalni Territory
+1 Ojer Kaslem, Deepest Growth // Temple of Cultivation
 1 Disciple of Freyalise // Garden of Freyalise

@@ -1,48 +1,48 @@
 // Heliod, Sun-Crowned — BRAWL
 // strategy=midrange themes=enchantments,artifacts,lifegain,equipment,draw,counters,spellslinger,tokens,flying,aggro tribal=-
-// total=99 lands=38 avgCMC=2.9
-// categories: utility=12 win_condition=9 removal=12 draw=11 ramp=10 board_wipe=4 protection=3 land=38
+// total=99 lands=38 avgCMC=3.08
+// categories: utility=12 win_condition=9 removal=13 draw=10 ramp=10 board_wipe=4 protection=3 land=38
 
 1 Heliod, Sun-Crowned *CMDR*
 
 // ── ramp (10) ──
-1 Land Tax
 1 Arcane Signet
-1 Charitable Levy
 1 Giada, Font of Hope
 1 Idol of False Gods
-1 Knight of the White Orchid
+1 Light-Paws, Emperor's Voice
+1 Mind Stone
 1 Altar of the Pantheon
+1 Phial of Galadriel
 1 Pristine Talisman
 1 Smothering Tithe
 1 Solemn Simulacrum
 
-// ── draw (11) ──
-1 Esper Sentinel
+// ── draw (10) ──
 1 Dawn of Hope
 1 Dusk Legion Duelist
 1 Kor Spiritdancer
+1 Rune of Sustenance
 1 Syr Ginger, the Meal Ender
-1 Enduring Innocence
 1 Pearl-Ear, Imperial Advisor
 1 Exemplar of Light
 1 Mangara, the Diplomat
-1 Sigarda's Splendor
+1 Towashi Guide-Bot
 1 Elspeth Resplendent
 
-// ── removal (12) ──
+// ── removal (13) ──
 1 Hopeful Initiate
 1 Path to Exile
 1 Requisition Raid
 1 Swords to Plowshares
-1 Disenchant
+1 Cathar Commando
 1 Heliod's Intervention
-1 Sheltered by Ghosts
+1 Sunder the Gateway
 1 Collective Effort
 1 Loran of the Third Path
 1 Staff of Compleation
 1 Aetherflux Reservoir
 1 Ajani Steadfast
+1 Elspeth, Storm Slayer
 
 // ── board_wipe (4) ──
 1 Wrath of God
@@ -52,16 +52,16 @@
 
 // ── protection (3) ──
 1 Alseid of Life's Bounty
-1 Mother of Runes
-1 Shadowspear
+1 Take Up the Shield
+1 Odric, Lunarch Marshal
 
 // ── win_condition (9) ──
 1 Blind Obedience
-1 Akroma's Will
-1 Archangel Elspeth
 1 Archon of Sun's Grace
+1 Twinblade Paladin
 1 Angel of Invention
 1 Archangel of Thune
+1 Danitha, Benalia's Hope
 1 Sigil of the Empty Throne
 1 Felidar Sovereign
 1 Nykthos Paragon
@@ -76,9 +76,9 @@
 1 Daxos, Blessed by the Sun
 1 Voice of the Blessed
 1 Ajani, Strength of the Pride
-1 Rhox Faithmender
+1 Cradle of Vitality
 1 Well of Lost Dreams
-1 Cathars' Crusade
+1 Contagion Engine
 
 // ── land (38) ──
 1 Castle Ardenvale

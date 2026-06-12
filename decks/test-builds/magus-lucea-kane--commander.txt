@@ -1,24 +1,23 @@
 // Magus Lucea Kane — COMMANDER
 // strategy=spellslinger themes=aggro,counters,tokens,equipment,draw,ramp tribal=-
-// total=99 lands=38 avgCMC=2.8
-// categories: utility=7 removal=17 draw=13 ramp=13 win_condition=5 protection=4 board_wipe=2 land=38
+// total=99 lands=38 avgCMC=2.7
+// categories: utility=8 draw=13 removal=17 ramp=12 protection=4 win_condition=5 board_wipe=2 land=38
 
 1 Magus Lucea Kane *CMDR*
 
-// ── ramp (13) ──
+// ── ramp (12) ──
 1 Sol Ring
 1 Sporocyst
 1 Arcane Signet
 1 Biophagus
 1 Farseek
-1 Finale of Devastation
 1 Incubation Druid
 1 Nexos
+1 Rampant Growth
 1 Cultivate
 1 Elementalist's Palette
 1 Jugan Defends the Temple // Remnant of the Rising Star
 1 Kami of Whispered Hopes
-1 The Great Henge
 
 // ── draw (13) ──
 1 Hormagaunt Horde
@@ -37,11 +36,10 @@
 
 // ── removal (17) ──
 1 Walking Ballista
-1 Pest Infestation
+1 Monstrous Rage
 1 Aberrant
 1 Cankerbloom
 1 Hull Breach
-1 Kozilek's Command
 1 Red Sun's Twilight
 1 Steelbane Hydra
 1 Voracious Hydra
@@ -50,6 +48,7 @@
 1 Rampaging Yao Guai
 1 Staff of Compleation
 1 Earth Rumble
+1 Siege-Gang Lieutenant
 1 Vorinclex // The Grand Evolution
 1 Flaming Tyrannosaurus
 1 Titan of Industry
@@ -60,7 +59,7 @@
 
 // ── protection (4) ──
 1 Mistcutter Hydra
-1 Silkguard
+1 Gaea's Gift
 1 Rhythm of the Wild
 1 Altered Ego
 
@@ -71,7 +70,8 @@
 1 Winged Hive Tyrant
 1 Old One Eye
 
-// ── utility (7) ──
+// ── utility (8) ──
+1 Hangarback Walker
 1 Hardened Scales
 1 Shivan Devastator
 1 Crackle with Power
@@ -87,13 +87,13 @@
 1 Command Tower
 1 Eclipsed Realms
 1 Exotic Orchard
-11 Forest
+10 Forest
 1 Grand Coliseum
 1 Great Hall of the Biblioplex
 1 Hinterland Harbor
 1 Island
 1 Mana Confluence
-2 Mountain
+3 Mountain
 1 Nykthos, Shrine to Nyx
 1 Primal Beyond
 1 Rootbound Crag

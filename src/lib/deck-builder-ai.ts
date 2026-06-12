@@ -43,6 +43,14 @@ export function getScoringWeights(): Record<string, number> | null {
   return cachedScoringWeights;
 }
 
+// MDFC spell//land budget — shared intuition with land-intelligence's
+// MAX_MDFC_LANDS: a deck wants at most ~4 modal land-back cards total.
+const MAX_MDFC_IN_SPELLS = 4;
+function isLandBackDfc(card: DbCard): boolean {
+  const tl = card.type_line || '';
+  return tl.includes('//') && !tl.split('//')[0].includes('Land') && tl.includes('Land');
+}
+
 // ── Commander synergy text patterns for card scoring ────────────────────────
 // Maps synergy categories from commander-synergy.ts to oracle text substrings
 
@@ -715,13 +723,21 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
       return false;
     }
   };
+  // The candidate pool is for NONLAND selection — lands have their own
+  // pipeline (land-intelligence). EDHREC/tribal/CF injections include
+  // utility lands, which used to leak in and consume spell slots.
+  const validForPool = (card: DbCard): boolean => {
+    if (!cardLegalInFormat(card)) return false;
+    if ((card.type_line || '').split('//')[0].includes('Land')) return false;
+    return true;
+  };
 
   // EDHREC cards go first — these are specifically recommended for this commander
   // When building from collection, skip cards the user doesn't own
   for (const card of edhrecResolvedCards) {
     if (!seenNames.has(card.name)) {
       if (useCollection && !ownedNames.has(card.name)) continue;
-      if (!cardLegalInFormat(card)) continue;
+      if (!validForPool(card)) continue;
       seenNames.add(card.name);
       pool.push(card);
     }
@@ -731,7 +747,7 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
   for (const card of tribalCards) {
     if (!seenNames.has(card.name)) {
       if (useCollection && !ownedNames.has(card.name)) continue;
-      if (!cardLegalInFormat(card)) continue;
+      if (!validForPool(card)) continue;
       seenNames.add(card.name);
       pool.push(card);
     }
@@ -795,7 +811,7 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
          LIMIT 1`
       ).get(staple.cardName) as DbCard | undefined;
 
-      if (stapleCard) {
+      if (stapleCard && validForPool(stapleCard)) {
         seenNames.add(stapleCard.name);
         pool.push(stapleCard);
       }
@@ -890,7 +906,7 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
         for (const { card } of cfCards) {
           if (!seenNames.has(card.name)) {
             if (useCollection && !ownedNames.has(card.name)) continue;
-            if (!cardLegalInFormat(card)) continue;
+            if (!validForPool(card)) continue;
             seenNames.add(card.name);
             pool.push(card);
           }
@@ -931,6 +947,9 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
         for (const card of injected) {
           if (!seenNames.has(card.name)) {
             if (useCollection && !ownedNames.has(card.name)) continue;
+            // Community stats include LANDS (Command Tower, basics, fetches)
+            // at high inclusion — they belong to the land pipeline, not here.
+            if (!validForPool(card)) continue;
             seenNames.add(card.name);
             pool.push(card);
           }
@@ -1557,9 +1576,18 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
       const deficit = minCount - currentCount;
       if (deficit <= 0) continue;
 
-      // Find synergy cards from the pool that weren't picked
+      // Find synergy cards from the pool that weren't picked.
+      // MDFC spell//land cards are capped deck-wide: they live in the
+      // NONLAND pool, so without a budget the spell_cast minimum swaps in
+      // 10+ Instant//Land cards and the deck ends up with ~50 land slots.
+      const mdfcLandBacksPicked = picked.filter(
+        (p) => isLandBackDfc(p.card)
+      ).length;
       const synergyCandidates = scored.filter(({ card }) => {
         if (pickedNames.has(card.name)) return false;
+        // Plain lands never belong in spell slots; modal land-backs are budgeted.
+        if ((card.type_line || '').split('//')[0].includes('Land')) return false;
+        if (isLandBackDfc(card) && mdfcLandBacksPicked >= MAX_MDFC_IN_SPELLS) return false;
         const cardText = (card.oracle_text || '').toLowerCase();
         const cardType = (card.type_line || '').toLowerCase();
         const matchesCat = catPatterns.some((pat) => cardText.includes(pat.toLowerCase()));
@@ -1620,6 +1648,12 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
   }
 
   // ── Step 5: Add lands (via land intelligence) ───────────────────────────
+  // MDFC spell//land cards already in the nonland picks are tapped-land
+  // equivalents — every one of them reduces how many dedicated land slots
+  // the deck needs, otherwise total land-capable cards balloon to 45-52.
+  const mdfcLandBackCount = picked.filter((p) => isLandBackDfc(p.card)).length;
+  const targetLandsEffective = Math.max(30, targetLands - Math.min(6, mdfcLandBackCount));
+
   const basicLandMap: Record<string, string> = {
     W: 'Plains', U: 'Island', B: 'Swamp', R: 'Mountain', G: 'Forest',
   };
@@ -1672,7 +1706,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
       colors,
       format: options.format,
       strategy: resolvedStrategy,
-      targetLandCount: targetLands,
+      targetLandCount: targetLandsEffective,
       tribalTypes: tribalTypesForLands.length > 0 ? tribalTypesForLands : undefined,
       commanderName: commanderCard?.name,
       existingNonLandCards: nonLandCards,
@@ -1698,7 +1732,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
         'SELECT * FROM cards WHERE name = ? AND set_code IS NOT NULL ORDER BY updated_at DESC LIMIT 1'
       ).get(basicName) as DbCard | undefined;
       if (basic) {
-        const actualQty = Math.min(qty, targetLands - landsAdded);
+        const actualQty = Math.min(qty, targetLandsEffective - landsAdded);
         if (actualQty > 0) {
           picked.push({ card: basic, quantity: actualQty, board: 'main' });
           landsAdded += actualQty;
@@ -1709,10 +1743,10 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
     // Fallback: land_classifications table may not exist yet
     const numColors = colors.length;
     const nonBasicTarget = numColors <= 1
-      ? Math.min(10, targetLands - 25)
+      ? Math.min(10, targetLandsEffective - 25)
       : numColors === 2
-        ? Math.min(18, targetLands - 8)
-        : Math.min(24, targetLands - 5);
+        ? Math.min(18, targetLandsEffective - 8)
+        : Math.min(24, targetLandsEffective - 5);
 
     const landPool = db.prepare(`
       SELECT c.* FROM cards c
@@ -1752,7 +1786,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
       }
 
       const cardMax = getMaxQty(land);
-      const qty = isCommander ? 1 : Math.min(cardMax, targetLands - landsAdded);
+      const qty = isCommander ? 1 : Math.min(cardMax, targetLandsEffective - landsAdded);
       if (qty <= 0) continue;
 
       picked.push({ card: land, quantity: qty, board: 'main' });
@@ -1761,8 +1795,8 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
     }
 
     // Fill remaining with basics
-    if (colors.length > 0 && landsAdded < targetLands) {
-      const remaining = targetLands - landsAdded;
+    if (colors.length > 0 && landsAdded < targetLandsEffective) {
+      const remaining = targetLandsEffective - landsAdded;
       const perColor = Math.floor(remaining / colors.length);
       const extraForFirst = remaining - perColor * colors.length;
 
@@ -1775,7 +1809,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
         ).get(basicName) as DbCard | undefined;
 
         if (basic) {
-          const qty = Math.min(perColor + (i === 0 ? extraForFirst : 0), targetLands - landsAdded);
+          const qty = Math.min(perColor + (i === 0 ? extraForFirst : 0), targetLandsEffective - landsAdded);
           if (qty > 0) {
             picked.push({ card: basic, quantity: qty, board: 'main' });
             landsAdded += qty;

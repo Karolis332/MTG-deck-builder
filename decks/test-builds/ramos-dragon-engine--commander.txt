@@ -1,83 +1,86 @@
 // Ramos, Dragon Engine — COMMANDER
 // strategy=midrange themes=artifacts,tokens,counters,ramp,draw tribal=-
-// total=99 lands=41 avgCMC=3.48
-// categories: ramp=23 land=41 draw=6 utility=7 win_condition=7 removal=12 board_wipe=1 protection=2
+// total=99 lands=38 avgCMC=3.28
+// categories: draw=11 ramp=19 utility=7 win_condition=6 removal=13 board_wipe=3 protection=2 land=38
 
 1 Ramos, Dragon Engine *CMDR*
 
-// ── ramp (23) ──
-1 An Offer You Can't Refuse
-1 Delighted Halfling
+// ── ramp (19) ──
+1 Impulsive Pilferer
 1 Sol Ring
 1 Arcane Signet
 1 Deadly Dispute
-1 Farseek
 1 Lotho, Corrupt Shirriff
+1 Mind Stone
 1 Baylen, the Haymaker
 1 Chromatic Lantern
-1 Commander's Sphere
-1 Cultivate
-1 Faeburrow Elder
 1 Seize the Spoils
 1 Tireless Provisioner
+1 Warren Soultrader
 1 Big Score
 1 Kheru Goldkeeper
 1 Pitiless Plunderer
-1 Smothering Tithe
 1 Storm-Kiln Artist
+1 Surly Badgersaur
 1 Unexpected Windfall
+1 Revel in Riches
 1 Vraska, Betrayal's Sting
-1 Chromatic Orrery
-1 The Great Henge
 
-// ── draw (6) ──
+// ── draw (11) ──
 1 Wizard Class
-1 Ozolith, the Shattered Spire
+1 Idol of Oblivion
+1 Black Market Connections
+1 Chasm Skulker
 1 Inspiring Call
 1 Tireless Tracker
+1 Tribute to the World Tree
 1 Archmage Emeritus
-1 Two-Headed Hellkite
+1 Tezzeret's Gambit
+1 The One Ring
+1 Korvold, Fae-Cursed King
 
-// ── removal (12) ──
+// ── removal (13) ──
+1 Walking Ballista
 1 Deathrite Shaman
 1 Agatha's Soul Cauldron
 1 Cankerbloom
+1 Fake Your Own Death
 1 The Ooze
 1 Abzan Charm
 1 Archdruid's Charm
-1 Bant Charm
 1 Loran of the Third Path
 1 Staff of Compleation
 1 Sultai Charm
-1 Aragorn, the Uniter
 1 Lethal Scheme
+1 Elspeth, Storm Slayer
 
-// ── board_wipe (1) ──
-1 Ruinous Ultimatum
+// ── board_wipe (3) ──
+1 Austere Command
+1 Bane of Progress
+1 Season of Gathering
 
 // ── protection (2) ──
-1 Swiftfoot Boots
-1 Rhythm of the Wild
+1 Swan Song
+1 Unbreakable Formation
 
-// ── win_condition (7) ──
+// ── win_condition (6) ──
 1 Marionette Apprentice
-1 Atraxa, Praetors' Voice
-1 Lux Artillery
+1 Guttersnipe
 1 Olivia, Opulent Outlaw
+1 Tekuthal, Inquiry Dominus
 1 Maelstrom Archangel
 1 Avenger of Zendikar
-1 Progenitus
 
 // ── utility (7) ──
-1 Hardened Scales
-1 Branching Evolution
+1 Contagion Clasp
+1 Thrummingbird
 1 Champion of Lambholt
 1 Evolution Sage
-1 Forgotten Ancient
+1 Cathars' Crusade
 1 Door to Nothingness
 1 Maelstrom Nexus
 
-// ── land (41) ──
+// ── land (38) ──
 1 Abstergo Entertainment
 1 Cascading Cataracts
 1 Cavern of Souls
@@ -94,7 +97,7 @@
 1 Great Hall of the Citadel
 1 Haven of the Spirit Dragon
 1 Horizon of Progress
-2 Island
+1 Island
 1 Lazotep Quarry
 1 Mana Confluence
 1 Mountain
@@ -106,11 +109,10 @@
 1 Reflecting Pool
 1 Secluded Courtyard
 1 Spire of Industry
-3 Swamp
+2 Swamp
 1 Talon Gates of Madara
 1 Temple of the Dragon Queen
 1 The Grey Havens
 1 The Mycosynth Gardens
-1 The World Tree
 1 Three Tree City
 1 Unclaimed Territory

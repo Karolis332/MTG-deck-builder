@@ -298,4 +298,35 @@ export async function runFirstBootActions(): Promise<void> {
       console.error('[FirstBoot] Failed to persist CF API credentials:', err);
     }
   }
+
+  // 4. Sync learned scoring weights from the recommendation engine.
+  // The model server publishes calibrated score-component multipliers
+  // (refit as the scraped corpus grows); the deck builder picks them up
+  // from <data-dir>/scoring-weights.json on next build. Non-blocking.
+  try {
+    const dbDir = process.env.MTG_DB_DIR || path.join(process.cwd(), 'data');
+    const dbPath = path.join(dbDir, 'mtg-deck-builder.db');
+    if (fs.existsSync(dbPath)) {
+      const Database = require('better-sqlite3');
+      const db = new Database(dbPath, { readonly: true });
+      const row = db.prepare("SELECT value FROM app_state WHERE key = 'cf_api_url'").get() as { value: string } | undefined;
+      db.close();
+      const baseUrl = (row?.value || '').replace(/\/+$/, '');
+      if (baseUrl) {
+        const controller = new AbortController();
+        const timer = setTimeout(() => controller.abort(), 8000);
+        const res = await fetch(`${baseUrl}/weights`, { signal: controller.signal });
+        clearTimeout(timer);
+        if (res.ok) {
+          const body = await res.json() as { weights?: Record<string, number>; trainedAt?: string };
+          if (body.weights && typeof body.weights === 'object') {
+            fs.writeFileSync(path.join(dbDir, 'scoring-weights.json'), JSON.stringify(body, null, 2));
+            console.log(`[FirstBoot] Scoring weights synced (trained ${body.trainedAt ?? 'unknown'})`);
+          }
+        }
+      }
+    }
+  } catch (err) {
+    console.error('[FirstBoot] Scoring weight sync skipped:', err instanceof Error ? err.message : err);
+  }
 }

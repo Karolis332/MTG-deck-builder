@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+/* Fonts are self-hosted via next/font (see src/app/layout.tsx) — no external
+   @import so the packaged Electron app themes correctly offline. */
 
 @tailwind base;
 @tailwind components;
@@ -99,6 +100,28 @@ body::before {
 
 ::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(180deg, hsl(43 40% 30%), hsl(36 30% 22%));
+}
+
+/* ── Focus & selection — gilded ───────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid hsl(43 60% 52% / 0.85);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+::selection {
+  background: hsl(43 55% 40% / 0.45);
+  color: hsl(40 30% 92%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 /* ── Card hover effects — arcane glow ─────────────────────────────────── */

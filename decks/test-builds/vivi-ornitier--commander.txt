@@ -1,23 +1,25 @@
 // Vivi Ornitier — COMMANDER
 // strategy=spellslinger themes=tokens,artifacts,counters,flying,aggro,spellslinger,ramp,draw,enchantments,graveyard,equipment tribal=-
-// total=99 lands=38 avgCMC=2.56
-// categories: removal=14 draw=15 utility=10 win_condition=7 ramp=10 board_wipe=2 protection=3 land=38
+// total=99 lands=38 avgCMC=2.66
+// categories: utility=10 removal=15 draw=14 win_condition=5 ramp=12 board_wipe=2 protection=3 land=38
 
 1 Vivi Ornitier *CMDR*
 
-// ── ramp (10) ──
+// ── ramp (12) ──
 1 An Offer You Can't Refuse
 1 Sol Ring
 1 Strike It Rich
 1 Arcane Signet
-1 Izzet Signet
 1 Talisman of Creativity
-1 Thought Vessel
-1 Electro, Assaulting Battery
+1 Birgi, God of Storytelling // Harnfel, Horn of Bounty
+1 Elementalist's Palette
 1 Jeska's Will
+1 Galazeth Prismari
 1 Storm-Kiln Artist
+1 Summon: Esper Valigarmanda
+1 Unexpected Windfall
 
-// ── draw (15) ──
+// ── draw (14) ──
 1 Brainstorm
 1 Consider
 1 Curiosity
@@ -32,53 +34,51 @@
 1 Rhystic Study
 1 Tandem Lookout
 1 Archmage Emeritus
-1 Archmage of Runes
 
-// ── removal (14) ──
+// ── removal (15) ──
 1 Walking Ballista
 1 Lightning Bolt
-1 Pongify
-1 Sigil of Sleep
 1 Wild Ride
-1 Abrade
 1 Grapeshot
+1 Jace, Vryn's Prodigy // Jace, Telepath Unbound
 1 Kozilek's Command
 1 Red Sun's Twilight
 1 Snap
-1 Mizzix's Mastery
+1 Stolen by the Fae
+1 The Ooze
+1 Warping Wail
 1 Urabrask // The Great Work
+1 Virtue of Courage // Embereth Blaze
 1 Niv-Mizzet, Parun
 1 Hullbreaker Horror
 
 // ── board_wipe (2) ──
 1 Cyclonic Rift
-1 Blasphemous Act
+1 Extinguisher Battleship
 
 // ── protection (3) ──
 1 Swan Song
 1 Counterspell
-1 Deflecting Swat
+1 Fierce Guardianship
 
-// ── win_condition (7) ──
-1 Coruscation Mage
-1 Fiery Inscription
+// ── win_condition (5) ──
 1 Guttersnipe
 1 Murmuring Mystic
-1 Talrand, Sky Summoner
 1 Quicksilver Elemental
 1 Niv-Mizzet, Visionary
+1 Cavern-Hoard Dragon
 
 // ── utility (10) ──
 1 Hangarback Walker
 1 Shivan Devastator
+1 Comet Storm
 1 Crackle with Power
 1 Goblin Electromancer
 1 Harmonic Prodigy
-1 Jaya's Immolating Inferno
-1 Young Pyromancer
+1 Increasing Vengeance
+1 Reverberate
 1 Veyran, Voice of Duality
 1 Expansion // Explosion
-1 Thousand-Year Storm
 
 // ── land (38) ──
 1 Cavern of Souls

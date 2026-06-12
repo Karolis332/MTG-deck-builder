@@ -627,10 +627,22 @@ export function pickByRole(opts: PickByRoleOptions): PickByRoleResult {
     };
   });
 
+  // MDFC spell//land budget: land-back modal cards are tapped-land
+  // equivalents. Without a cap the picker fills draw/removal quotas with
+  // Sea Gate Restoration-style cards and the deck balloons to ~50 land slots.
+  const isLandBackDfc = (card: { type_line?: string | null }): boolean => {
+    const tl = card.type_line || '';
+    return tl.includes('//') && !tl.split('//')[0].includes('Land') && tl.includes('Land');
+  };
+  const MAX_MDFC_LAND_BACKS = 4;
+  let mdfcLandBacks = preFilled ? preFilled.filter((c) => isLandBackDfc(c)).length : 0;
+
   // Helper to take a pick
   const takePick = (c: Classified, role: PickedRoleCard['role'], reason: string): boolean => {
     if (pickedNames.has(c.card.name)) return false;
     if (totalPicked >= nonLandTarget) return false;
+    const landBack = isLandBackDfc(c.card);
+    if (landBack && mdfcLandBacks >= MAX_MDFC_LAND_BACKS) return false;
     const cardMax = getMaxQty(c.card);
     if (cardMax <= 0) return false;
     const qty = isCommanderFormat ? 1 : Math.min(cardMax, nonLandTarget - totalPicked);
@@ -638,6 +650,7 @@ export function pickByRole(opts: PickByRoleOptions): PickByRoleResult {
     picks.push({ card: c.card, quantity: qty, board: 'main', role, reason });
     pickedNames.add(c.card.name);
     totalPicked += qty;
+    if (landBack) mdfcLandBacks += 1;
     return true;
   };
 

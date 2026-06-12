@@ -59,8 +59,8 @@ const config: Config = {
         sm: 'calc(var(--radius) - 4px)',
       },
       fontFamily: {
-        heading: ['Cinzel', 'Times New Roman', 'serif'],
-        body: ['Crimson Text', 'Georgia', 'Times New Roman', 'serif'],
+        heading: ['var(--font-heading)', 'Cinzel', 'Times New Roman', 'serif'],
+        body: ['var(--font-body)', 'Crimson Text', 'Georgia', 'Times New Roman', 'serif'],
       },
       keyframes: {
         'card-enter': {
