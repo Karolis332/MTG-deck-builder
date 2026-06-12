@@ -19,6 +19,8 @@ export async function POST(request: NextRequest) {
       commanderName,
       partnerName,
       powerLevel,
+      rarityFilter,
+      buildHints,
     } = body;
 
     const isCmdFormat = COMMANDER_FORMATS.includes(format);
@@ -46,6 +48,8 @@ export async function POST(request: NextRequest) {
       commanderName: isCmdFormat ? commanderName : undefined,
       partnerName: isCmdFormat && typeof partnerName === 'string' && partnerName.trim() ? partnerName.trim() : undefined,
       powerLevel: validPowerLevels.includes(powerLevel) ? powerLevel : undefined,
+      rarityFilter: rarityFilter === 'pauper' || rarityFilter === 'peasant' ? rarityFilter : undefined,
+      buildHints: typeof buildHints === 'string' && buildHints.trim() ? buildHints.trim().slice(0, 500) : undefined,
     });
 
     if (result.cards.length === 0) {

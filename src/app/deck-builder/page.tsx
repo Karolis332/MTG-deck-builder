@@ -32,6 +32,8 @@ export default function DeckBuilderPage() {
   const [aiFormat, setAiFormat] = useState('standard');
   const [aiColors, setAiColors] = useState<string[]>([]);
   const [aiStrategy, setAiStrategy] = useState('');
+  const [aiRarity, setAiRarity] = useState('');
+  const [aiHints, setAiHints] = useState('');
   const [aiUseCollection, setAiUseCollection] = useState(true);
   const [aiBuilding, setAiBuilding] = useState(false);
   const [aiError, setAiError] = useState('');
@@ -141,6 +143,8 @@ export default function DeckBuilderPage() {
             format: aiFormat,
             strategy: aiStrategy || undefined,
             useCollection: aiUseCollection,
+            rarityFilter: aiRarity || undefined,
+            buildHints: aiHints.trim() || undefined,
           }),
         });
         const data = await res.json();
@@ -164,6 +168,8 @@ export default function DeckBuilderPage() {
             strategy: aiStrategy || undefined,
             useCollection: aiUseCollection,
             commanderName: isAiCommanderFormat ? aiCommander : undefined,
+            rarityFilter: aiRarity || undefined,
+            buildHints: aiHints.trim() || undefined,
           }),
         });
         const data = await res.json();
@@ -523,6 +529,46 @@ export default function DeckBuilderPage() {
                   </button>
                 ))}
               </div>
+            </div>
+
+            {/* Rarity ceiling (Pauper / Peasant builds) */}
+            <div className="mb-3">
+              <label className="mb-1 block text-xs text-muted-foreground">Rarity restriction (optional)</label>
+              <div className="flex flex-wrap gap-2">
+                {[
+                  { key: '', label: 'Any rarity' },
+                  { key: 'peasant', label: 'Peasant (C + U)' },
+                  { key: 'pauper', label: 'Pauper (commons)' },
+                ].map((r) => (
+                  <button
+                    key={r.key || 'any'}
+                    onClick={() => setAiRarity(r.key)}
+                    className={cn(
+                      'rounded-lg px-3 py-1.5 text-xs font-medium transition-colors',
+                      aiRarity === r.key
+                        ? 'bg-primary text-primary-foreground'
+                        : 'bg-accent text-accent-foreground hover:bg-accent/80'
+                    )}
+                  >
+                    {r.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Fine-tune prompt — parsed by the model directly, no LLM needed */}
+            <div className="mb-3">
+              <label className="mb-1 block text-xs text-muted-foreground">
+                Fine-tune (optional) — e.g. &quot;goblin tokens aggro, budget under $3, no counterspells&quot;
+              </label>
+              <textarea
+                value={aiHints}
+                onChange={(e) => setAiHints(e.target.value)}
+                maxLength={500}
+                rows={2}
+                placeholder="Describe what you want the deck to do..."
+                className="w-full resize-none rounded-lg border border-border bg-background px-3 py-2 text-sm outline-none focus:border-primary/50"
+              />
             </div>
 
             {/* Use collection toggle */}

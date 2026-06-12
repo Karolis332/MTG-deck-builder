@@ -21,6 +21,7 @@ import {
 import { analyzeCommanderForBuild } from './commander-analysis';
 import type { ArsenalCard } from './commander-analysis';
 import { classifyCard } from './card-classifier';
+import { parseBuildHints } from './build-hints';
 
 // ── Learned scoring weights ──────────────────────────────────────────────────
 // Optional per-component multipliers fitted offline against the scraped-deck
@@ -340,6 +341,10 @@ export interface BuildOptions {
   partnerName?: string; // second commander for partner pairs (Thrasios + Tymna)
   powerLevel?: 'casual' | 'optimized' | 'cedh';
   userId?: number; // for commander-arsenal collection substitutes
+  /** Restrict card rarity: pauper = commons only, peasant = commons + uncommons */
+  rarityFilter?: 'pauper' | 'peasant';
+  /** Free-text fine-tune prompt, parsed deterministically (no LLM) */
+  buildHints?: string;
   /** Capture per-card score-component breakdown (training/diagnostics only) */
   captureComponents?: boolean;
 }
@@ -484,9 +489,22 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
     .join(' AND ');
 
   // Only include cards that are legal in the format (skip for 1v1 — no Scryfall legality data)
-  const legalityFilter = format && format !== '1v1'
+  const baseLegalityFilter = format && format !== '1v1'
     ? `AND c.legalities LIKE '%"${getLegalityKey(format)}":"legal"%'`
     : '';
+
+  // Rarity restriction (Pauper Commander etc.). Folded into legalityFilter so
+  // every pool/land/backfill query inherits it automatically.
+  const rarityCondition = options.rarityFilter === 'pauper'
+    ? `AND c.rarity = 'common'`
+    : options.rarityFilter === 'peasant'
+      ? `AND c.rarity IN ('common', 'uncommon')`
+      : '';
+  const legalityFilter = `${baseLegalityFilter} ${rarityCondition}`.trim();
+
+  // Free-text fine-tune hints → deterministic knobs (no LLM)
+  const hints = parseBuildHints(options.buildHints);
+  const resolvedStrategyHint = options.strategy || hints.strategy;
 
   // Exclude commander (and partner, and Alchemy-rebalanced twin) from the 99
   const commanderExclude = [
@@ -729,6 +747,10 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
   const validForPool = (card: DbCard): boolean => {
     if (!cardLegalInFormat(card)) return false;
     if ((card.type_line || '').split('//')[0].includes('Land')) return false;
+    // Rarity ceiling (Pauper/Peasant) applies to injected candidates too —
+    // the EDHREC/tribal paths otherwise leak rares into commons-only builds.
+    if (options.rarityFilter === 'pauper' && card.rarity !== 'common') return false;
+    if (options.rarityFilter === 'peasant' && card.rarity !== 'common' && card.rarity !== 'uncommon') return false;
     return true;
   };
 
@@ -852,8 +874,9 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
     themes = detectDeckThemes(pool.slice(0, 40));
   }
 
-  // Commander synergy archetype overrides generic CMC-based detection
-  const resolvedStrategy = strategy
+  // Commander synergy archetype overrides generic CMC-based detection.
+  // Explicit strategy > hint-derived strategy > commander profile > themes.
+  const resolvedStrategy = resolvedStrategyHint
     || commanderProfile?.detectedArchetype
     || (themes.includes('aggro') ? 'aggro' : themes.includes('control') ? 'control' : 'midrange');
 
@@ -1102,6 +1125,27 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
     }
 
     snap('profileSynergy');
+
+    // ── Free-text hint adjustments (deterministic fine-tune, no LLM) ──
+    if (hints.excludeNames.length && hints.excludeNames.some((n) => card.name.toLowerCase() === n)) {
+      score -= 9999;
+    }
+    if (hints.budgetPerCard !== undefined) {
+      const price = parseFloat(card.price_usd || '0');
+      if (price > hints.budgetPerCard) score -= 9999;
+    }
+    if (hints.emphasize.length || hints.avoid.length) {
+      const hintText = `${card.name} ${card.type_line || ''} ${card.oracle_text || ''}`.toLowerCase();
+      let hintBonus = 0;
+      for (const term of hints.emphasize) {
+        if (hintText.includes(term)) hintBonus += 18;
+      }
+      score += Math.min(36, hintBonus);
+      for (const term of hints.avoid) {
+        if (hintText.includes(term)) score -= 40;
+      }
+    }
+    snap('hints');
     // ── Archetype discouraged types penalty ──
     const template = getTemplate(resolvedStrategy);
     if (template.discouragedTypes?.length) {
@@ -1711,6 +1755,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
       commanderName: commanderCard?.name,
       existingNonLandCards: nonLandCards,
       collectionOnly: useCollection,
+      rarityFilter: options.rarityFilter,
       isCommander,
     });
 

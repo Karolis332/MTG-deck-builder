@@ -106,6 +106,7 @@ interface ScoreOptions {
   userId?: number;
   manaDemand?: ManaDemand;
   collectionOnly?: boolean;
+  rarityFilter?: 'pauper' | 'peasant';
 }
 
 /**
@@ -118,7 +119,8 @@ export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
 
   // Build legality filter
   const legalityKey = getLegalityKey(format);
-  const legalityFilter = `AND json_extract(c.legalities, '$.${legalityKey}') IN ('legal', 'restricted')`;
+  const rarityCondition = options.rarityFilter === 'pauper' ? " AND c.rarity = 'common'" : options.rarityFilter === 'peasant' ? " AND c.rarity IN ('common', 'uncommon')" : '';
+  const legalityFilter = `AND json_extract(c.legalities, '$.${legalityKey}') IN ('legal', 'restricted')${rarityCondition}`;
 
   // Collection filter: name-based join with basic land exemptions
   const colJoin = collectionOnly
@@ -345,6 +347,7 @@ interface BuildOptions {
   existingNonLandCards?: Array<{ mana_cost: string | null; quantity: number }>;
   userId?: number;
   collectionOnly?: boolean;
+  rarityFilter?: 'pauper' | 'peasant';
   isCommander?: boolean;
 }
 
@@ -367,6 +370,7 @@ export function buildOptimalLandBase(options: BuildOptions): LandBaseResult {
   // Score all available lands
   const scored = scoreLandsForDeck({
     colors, format, strategy, tribalTypes, commanderName, userId, manaDemand, collectionOnly,
+    rarityFilter: options.rarityFilter,
   });
 
   // Determine non-basic target based on color count
