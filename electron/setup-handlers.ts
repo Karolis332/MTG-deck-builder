@@ -122,6 +122,44 @@ export function registerSetupHandlers(): void {
     return result.canceled ? null : result.filePaths[0];
   });
 
+  // ── CF recommendation engine connectivity probe ─────────────────────────
+
+  ipcMain.handle('setup:test-cf-api', async (_event, data: { url: string; apiKey: string }) => {
+    const base = data.url.replace(/\/+$/, '');
+    const healthUrl = `${base}/health`;
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 8000);
+
+    try {
+      const headers: Record<string, string> = {};
+      if (data.apiKey) headers['x-api-key'] = data.apiKey;
+
+      const res = await fetch(healthUrl, { headers, signal: controller.signal });
+      clearTimeout(timer);
+
+      if (!res.ok) {
+        return { ok: false, error: `${res.status} ${res.statusText}` };
+      }
+
+      const body = await res.json() as {
+        status?: string;
+        deck_count?: number;
+        model_version?: string;
+      };
+
+      return {
+        ok: true,
+        modelVersion: body.model_version ?? 'unknown',
+        deckCount: body.deck_count ?? 0,
+        requiresAuth: false,
+      };
+    } catch (err: unknown) {
+      clearTimeout(timer);
+      const message = err instanceof Error ? err.message : 'unknown error';
+      return { ok: false, error: message };
+    }
+  });
+
   // ── Save config ─────────────────────────────────────────────────────────
 
   ipcMain.handle('setup:save-config', async (_event, config: Record<string, unknown>) => {

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getDb, getDeckWithCards, getFormatStaples, getMetaCardStatsMap, getCommunityRecommendations, logAISuggestion } from '@/lib/db';
 import { DEFAULT_LAND_COUNT, DEFAULT_DECK_SIZE, COMMANDER_FORMATS } from '@/lib/constants';
 import { fitsColorIdentity, isLegalInFormat, extractRejectedCards, buildRejectionReminder, extractAppliedActions, buildAntiOscillationRules } from '@/lib/ai-chat-helpers';
+import { validateSwapClaims } from '@/lib/card-claim-validator';
 import { queryKnowledge, formatKnowledgeForPrompt } from '@/lib/knowledge-retrieval';
 import { getCFRecommendations, getEDHRECConsensus, optimizeDeck, type MatchRecord } from '@/lib/cf-api-client';
 import { getEdhrecRecommendations } from '@/lib/edhrec';
@@ -869,6 +870,7 @@ ${filteredCollectionNames.join(', ')}
 ═══════════════════════════════════════════════════════════
 HARD RULES — NEVER VIOLATE THESE
 ═══════════════════════════════════════════════════════════
+0. NEVER assert a card's type, supertype, subtype, or keyword unless that fact is verifiable from the card data shown to you. DO NOT claim a card "is a Lesson", "has flashback", "creates treasure", "is a Goblin", etc. unless you have seen that in the card's actual text. Hallucinated card-type claims are auto-rejected and waste the user's time.
 1. CHECK THE LIST ABOVE: NEVER suggest cards already in the deck
 2. ONLY suggest cards in color identity {${deckColors.join(', ')}}
 3. ${isCommanderLike ? `CRITICAL: Deck MUST stay at ${effectiveTarget} cards. COUNT YOUR ACTIONS:
@@ -1013,7 +1015,12 @@ Refer to the ALL CARDS list in the system prompt to avoid suggesting duplicates.
           let addRejectionReason = '';
 
           if (addCard) {
-            if (!fitsColorIdentity(addCard, colorSet)) {
+            // Hallucination guard: verify type/keyword claims in the AI's reasoning
+            const claimCheck = validateSwapClaims(act.reason, addCard);
+            if (!claimCheck.valid) {
+              addRejectionReason = `false claim — ${claimCheck.falseClaims[0]}`;
+              console.warn('[AI Chat] Hallucination detected:', claimCheck.falseClaims);
+            } else if (!fitsColorIdentity(addCard, colorSet)) {
               addRejectionReason = 'wrong colors';
               rejectionReasons.wrongColors.push(addCard.name);
             } else if (!isLegalInFormat(addCard, format)) {
@@ -1084,7 +1091,11 @@ Refer to the ALL CARDS list in the system prompt to avoid suggesting duplicates.
         } else if (act.action === 'add') {
           const addCard = resolveCard(act.cardName);
           if (addCard) {
-            if (!fitsColorIdentity(addCard, colorSet)) {
+            const claimCheck = validateSwapClaims(act.reason, addCard);
+            if (!claimCheck.valid) {
+              rejectedCards.push(`${addCard.name} (false claim: ${claimCheck.falseClaims[0]})`);
+              console.warn('[AI Chat] Hallucination detected on add:', claimCheck.falseClaims);
+            } else if (!fitsColorIdentity(addCard, colorSet)) {
               rejectedCards.push(`${addCard.name} (wrong colors)`);
               rejectionReasons.wrongColors.push(addCard.name);
             } else if (!isLegalInFormat(addCard, format)) {

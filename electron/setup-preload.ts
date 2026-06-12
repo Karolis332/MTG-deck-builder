@@ -24,6 +24,10 @@ contextBridge.exposeInMainWorld('setupAPI', {
   getDefaultArenaLogPath: () => ipcRenderer.invoke('setup:get-default-arena-path'),
   selectArenaLogPath: () => ipcRenderer.invoke('setup:select-arena-log'),
 
+  // CF recommendation engine connectivity probe
+  testCfApi: (data: { url: string; apiKey: string }) =>
+    ipcRenderer.invoke('setup:test-cf-api', data),
+
   // Config
   saveSetupConfig: (config: Record<string, unknown>) =>
     ipcRenderer.invoke('setup:save-config', config),

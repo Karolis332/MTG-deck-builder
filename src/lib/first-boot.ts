@@ -20,6 +20,8 @@ interface AppConfig {
   };
   arenaLogPath?: string | null;
   autoStartWatcher?: boolean;
+  cfApiUrl?: string | null;
+  cfApiKey?: string | null;
 }
 
 function getConfigPath(): string {
@@ -271,6 +273,29 @@ export async function runFirstBootActions(): Promise<void> {
       saveConfig({ seedOnBoot: false });
     } catch (err) {
       console.error('[FirstBoot] Seed error:', err);
+    }
+  }
+
+  // 3. Persist CF API credentials chosen during setup wizard
+  if (config.cfApiUrl !== undefined || config.cfApiKey !== undefined) {
+    try {
+      const dbDir = process.env.MTG_DB_DIR || path.join(process.cwd(), 'data');
+      const dbPath = path.join(dbDir, 'mtg-deck-builder.db');
+      if (fs.existsSync(dbPath)) {
+        const Database = require('better-sqlite3');
+        const db = new Database(dbPath, { readonly: false });
+        const upsert = db.prepare(
+          `INSERT INTO app_state (key, value) VALUES (?, ?)
+           ON CONFLICT(key) DO UPDATE SET value = excluded.value`
+        );
+        if (config.cfApiUrl) upsert.run('cf_api_url', config.cfApiUrl);
+        if (config.cfApiKey) upsert.run('cf_api_key', config.cfApiKey);
+        db.close();
+        console.log('[FirstBoot] CF API credentials persisted to app_state');
+        saveConfig({ cfApiUrl: undefined, cfApiKey: undefined });
+      }
+    } catch (err) {
+      console.error('[FirstBoot] Failed to persist CF API credentials:', err);
     }
   }
 }

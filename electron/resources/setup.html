@@ -391,6 +391,7 @@
       <div class="step-dot" data-step="1"></div>
       <div class="step-dot" data-step="2"></div>
       <div class="step-dot" data-step="3"></div>
+      <div class="step-dot" data-step="4"></div>
     </div>
 
     <!-- Step 0: Welcome / Init -->
@@ -487,8 +488,44 @@
       </div>
     </div>
 
-    <!-- Step 3: Arena integration -->
+    <!-- Step 3: Recommendation engine connection -->
     <div class="step-panel" id="step-3">
+      <div class="step-title">Connect to recommendation engine</div>
+      <div class="step-desc">
+        The Black Grimoire uses a community-trained ML model to suggest cards for your deck. Connecting lets you get real-time recommendations based on 1M+ tournament and EDHREC decks.
+      </div>
+
+      <div class="form-group">
+        <label>API endpoint</label>
+        <input type="text" id="cf-api-url" value="http://187.77.110.100/cf-api" placeholder="https://your-api-host/cf-api">
+        <div class="hint">Default points at the public Black Grimoire engine. You can change this later in Settings.</div>
+      </div>
+
+      <div class="form-group">
+        <label>API key (optional)</label>
+        <input type="password" id="cf-api-key" placeholder="Leave blank to use offline mode only">
+        <div class="hint">Required for live recommendations. Get a key at <span style="color:#c9a84c">blackgrimoire.gg/key</span> (or skip — local AI deck builder still works offline).</div>
+      </div>
+
+      <div class="btn-row" style="margin-bottom: 12px;">
+        <button class="btn btn-secondary" id="cf-test-btn" onclick="testCfConnection()">Test Connection</button>
+        <span id="cf-test-result" style="margin-left: 12px; color:#94a3b8; font-size: 13px;"></span>
+      </div>
+
+      <div class="info-card">
+        <h3>What's the difference?</h3>
+        <p><b>Online (with key):</b> Real-time recommendations from the latest community-trained model. Always up to date.</p>
+        <p style="margin-top: 6px;"><b>Offline:</b> Local AI deck builder (Claude/OpenAI) still works for synergy analysis using your own API key in Settings.</p>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn btn-secondary" onclick="skipCfApi()">Skip / use offline only</button>
+        <button class="btn btn-primary" onclick="saveCfApiAndContinue()">Save &amp; continue</button>
+      </div>
+    </div>
+
+    <!-- Step 4: Arena integration -->
+    <div class="step-panel" id="step-4">
       <div class="step-title">Arena log integration</div>
       <div class="step-desc">
         Connect to MTG Arena's log file to automatically track your matches, import your collection, and analyze your gameplay.
@@ -519,8 +556,8 @@
       </div>
     </div>
 
-    <!-- Step 4: Complete -->
-    <div class="step-panel" id="step-4">
+    <!-- Step 5: Complete -->
+    <div class="step-panel" id="step-5">
       <div class="complete-icon">&#10003;</div>
       <div class="complete-text">
         <h2>You're all set!</h2>
@@ -685,7 +722,60 @@
       goToStep(3);
     }
 
-    // ── Step 3: Arena integration ─────────────────────────────────────────
+    // ── Step 3: CF API connection ─────────────────────────────────────────
+    async function testCfConnection() {
+      const url = document.getElementById('cf-api-url').value.trim();
+      const key = document.getElementById('cf-api-key').value;
+      const result = document.getElementById('cf-test-result');
+      const btn = document.getElementById('cf-test-btn');
+
+      if (!url) {
+        result.style.color = '#fca5a5';
+        result.textContent = 'Enter an API URL first';
+        return;
+      }
+
+      btn.disabled = true;
+      result.style.color = '#94a3b8';
+      result.textContent = 'Testing…';
+
+      try {
+        const res = await api.testCfApi({ url, apiKey: key });
+        if (res.ok) {
+          result.style.color = '#86efac';
+          const auth = res.requiresAuth ? (key ? ' (auth OK)' : ' (anon read works)') : '';
+          result.textContent = `Connected — model ${res.modelVersion}, ${res.deckCount.toLocaleString()} decks${auth}`;
+        } else {
+          result.style.color = '#fca5a5';
+          result.textContent = `Failed: ${res.error}`;
+        }
+      } catch (err) {
+        result.style.color = '#fca5a5';
+        result.textContent = 'Connection error: ' + err.message;
+      } finally {
+        btn.disabled = false;
+      }
+    }
+
+    async function saveCfApiAndContinue() {
+      const url = document.getElementById('cf-api-url').value.trim();
+      const key = document.getElementById('cf-api-key').value;
+
+      try {
+        await api.saveSetupConfig({ cfApiUrl: url || null, cfApiKey: key || null });
+      } catch (err) {
+        console.error('Failed to save CF API config:', err);
+      }
+
+      goToStep(4);
+    }
+
+    function skipCfApi() {
+      api.saveSetupConfig({ cfApiUrl: null, cfApiKey: null }).catch(() => {});
+      goToStep(4);
+    }
+
+    // ── Step 4: Arena integration ─────────────────────────────────────────
     async function browseArenaLog() {
       try {
         const filePath = await api.selectArenaLogPath();
@@ -709,20 +799,19 @@
           setupComplete: true,
         });
       } catch (err) {
-        // Non-blocking — save what we can
         console.error('Failed to save config:', err);
       }
 
-      goToStep(4);
+      goToStep(5);
     }
 
     function skipArena() {
       api.saveSetupConfig({ arenaLogPath: null, autoStartWatcher: false, setupComplete: true })
         .catch(() => {});
-      goToStep(4);
+      goToStep(5);
     }
 
-    // ── Step 4: Launch ────────────────────────────────────────────────────
+    // ── Step 5: Launch ────────────────────────────────────────────────────
     function launchApp() {
       api.launchMainApp();
     }

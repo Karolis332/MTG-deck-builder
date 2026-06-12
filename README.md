@@ -15,7 +15,7 @@ A dark-themed desktop grimoire for building, analyzing, and mastering Magic: The
 - **Commander Synergy Engine** — Analyzes commander oracle text across 12 trigger categories (ETB, dies, attack, spellcast, exile, artifacts, enchantments, lifegain, counters, graveyard, tokens) to score every candidate card
 - **Land Intelligence** — Tier-aware, color-demand-weighted, fetch-land-filtered land selection with mana pip analysis for optimal basic/non-basic distribution
 - **Format Staple Guarantee** — Universal staples (Arcane Signet, Sol Ring, Commander's Sphere, etc.) are force-included before curve-based selection, so commander-synergy cards can never crowd them out
-- **Collaborative Filtering** — SVD-based recommendations from the Black Grimoire CF API (148K+ scraped decks from Moxfield/Archidekt), with contextual bandit real-time learning
+- **Collaborative Filtering** — SVD-based recommendations from the Black Grimoire CF API (1.2M+ scraped decks from Moxfield/Archidekt, retrained nightly), with contextual bandit real-time learning
 - **11 Archetype Templates** — Aggro, midrange, control, combo, aristocrats, spellslinger, voltron, tribal, group hug, stax, superfriends — with tuned mana curves and slot ratios
 - **MDFC Support** — Modal double-faced cards (spell // land) correctly included in non-land card pool, Art Series cards filtered out
 - **Right-Click Card Zoom** — Right-click any card to see a large preview overlay positioned near the cursor
@@ -43,14 +43,17 @@ Download the latest release from the [Releases page](https://github.com/Karolis3
 
 > **Note:** Windows may show a SmartScreen warning since the app is not code-signed. Click "More info" then "Run anyway".
 
+For full installation and first-run instructions across Windows, macOS, and Linux — including troubleshooting, data-folder paths, and resetting — see **[INSTALLATION.md](INSTALLATION.md)**.
+
 ## Quick Start
 
 1. **Download and install** from the link above
 2. **Create an account** during the setup wizard (username + password, stored locally)
 3. **Seed the card database** — the setup wizard prompts you to download ~35K cards from Scryfall (takes 2-3 minutes)
-4. **Add your Claude API key** (optional but recommended): Settings -> Anthropic API Key
-5. **Import your Arena collection** (optional): Settings -> Arena Integration -> Parse Full Log
-6. **Build your first deck!**
+4. **Connect to the recommendation engine** — the wizard's "Connect to Recommendation Engine" step verifies the live CF API (1.2M+ decks, retrained nightly). Skip if you want offline-only mode.
+5. **Add your Claude API key** (optional but recommended): Settings -> Anthropic API Key
+6. **Import your Arena collection** (optional): Settings -> Arena Integration -> Parse Full Log
+7. **Build your first deck!**
 
 ## How to Use
 
@@ -203,7 +206,7 @@ py scripts/import_user_data.py their-export.json
 - **Database**: SQLite (better-sqlite3, WAL mode, FTS5 full-text search, 32 migrations)
 - **AI**: Claude Sonnet 4.5 / Opus 4.6 / GPT-4o / Ollama (local)
 - **ML**: Scikit-learn (Gradient Boosting) with 26 features for card performance prediction
-- **CF Engine**: Black Grimoire API (FastAPI + PostgreSQL + Redis + SVD) with 148K+ scraped decks
+- **CF Engine**: Black Grimoire API (FastAPI + PostgreSQL + Redis + SVD + Vowpal Wabbit contextual bandit) with 1.2M+ scraped decks, nightly retrain pipeline
 - **Card Data**: Scryfall API (35K+ cards) + EDHREC + MTGGoldfish + MTGTop8 + Commander Spellbook
 - **Auth**: JWT + scrypt password hashing
 - **Language**: TypeScript (strict) + Python 3.13

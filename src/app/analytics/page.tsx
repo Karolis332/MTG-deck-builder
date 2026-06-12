@@ -189,11 +189,11 @@ export default function AnalyticsPage() {
               <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
               <XAxis
                 dataKey="date"
-                tick={{ fontSize: 10 }}
+                tick={{ fontSize: 10, fill: 'hsl(var(--foreground))' }}
                 stroke="hsl(var(--muted-foreground))"
                 tickFormatter={(v: string) => v.slice(5)}
               />
-              <YAxis tick={{ fontSize: 10 }} stroke="hsl(var(--muted-foreground))" />
+              <YAxis tick={{ fontSize: 10, fill: 'hsl(var(--foreground))' }} stroke="hsl(var(--muted-foreground))" />
               <Tooltip
                 contentStyle={{
                   backgroundColor: 'hsl(var(--card))',
@@ -258,8 +258,8 @@ export default function AnalyticsPage() {
             <ResponsiveContainer width="100%" height={200}>
               <BarChart data={manaCurveData}>
                 <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
-                <XAxis dataKey="cmc" tick={{ fontSize: 11 }} stroke="hsl(var(--muted-foreground))" />
-                <YAxis tick={{ fontSize: 11 }} stroke="hsl(var(--muted-foreground))" />
+                <XAxis dataKey="cmc" tick={{ fontSize: 11, fill: 'hsl(var(--foreground))' }} stroke="hsl(var(--muted-foreground))" />
+                <YAxis tick={{ fontSize: 11, fill: 'hsl(var(--foreground))' }} stroke="hsl(var(--muted-foreground))" />
                 <Tooltip
                   contentStyle={{
                     backgroundColor: 'hsl(var(--card))',
@@ -315,8 +315,8 @@ export default function AnalyticsPage() {
             <ResponsiveContainer width="100%" height={200}>
               <BarChart data={typeData} layout="vertical">
                 <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
-                <XAxis type="number" tick={{ fontSize: 11 }} stroke="hsl(var(--muted-foreground))" />
-                <YAxis dataKey="name" type="category" width={90} tick={{ fontSize: 11 }} stroke="hsl(var(--muted-foreground))" />
+                <XAxis type="number" tick={{ fontSize: 11, fill: 'hsl(var(--foreground))' }} stroke="hsl(var(--muted-foreground))" />
+                <YAxis dataKey="name" type="category" width={90} tick={{ fontSize: 11, fill: 'hsl(var(--foreground))' }} stroke="hsl(var(--muted-foreground))" />
                 <Tooltip
                   contentStyle={{
                     backgroundColor: 'hsl(var(--card))',
