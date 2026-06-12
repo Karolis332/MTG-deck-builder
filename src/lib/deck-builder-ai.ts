@@ -379,19 +379,33 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
         } catch {}
       }
       // Refuse to build around a commander that isn't legal in the target
-      // format (e.g. Vivi Ornitier is banned in Arena Brawl; Warhammer 40K
-      // commanders don't exist on Arena at all).
+      // format (e.g. Warhammer 40K commanders don't exist on Arena at all).
+      // Arena-rebalanced cards: when the paper card is not_legal but its
+      // Alchemy "A-" counterpart is legal (Vivi Ornitier post-Oct-2025
+      // rebalance), Arena plays the rebalanced version under the same name —
+      // swap to the A- row so oracle analysis matches what's actually played.
       if (format && format !== '1v1') {
-        let status: string | undefined;
-        try {
-          status = cmdCard.legalities
-            ? (JSON.parse(cmdCard.legalities) as Record<string, string>)[getLegalityKey(format)]
-            : undefined;
-        } catch { /* malformed legalities — treat as unknown */ }
+        const readStatus = (card: DbCard): string | undefined => {
+          try {
+            return card.legalities
+              ? (JSON.parse(card.legalities) as Record<string, string>)[getLegalityKey(format)]
+              : undefined;
+          } catch { return undefined; }
+        };
+        let status = readStatus(cmdCard);
         if (status !== 'legal' && status !== 'restricted') {
-          throw new Error(
-            `${cmdCard.name} is not legal as a commander in ${format} (status: ${status ?? 'unknown'})`
-          );
+          const rebalanced = db.prepare(
+            'SELECT * FROM cards WHERE name = ? COLLATE NOCASE LIMIT 1'
+          ).get(`A-${commanderName}`) as DbCard | undefined;
+          const rebalancedStatus = rebalanced ? readStatus(rebalanced) : undefined;
+          if (rebalanced && (rebalancedStatus === 'legal' || rebalancedStatus === 'restricted')) {
+            commanderCard = rebalanced;
+            status = rebalancedStatus;
+          } else {
+            throw new Error(
+              `${cmdCard.name} is not legal as a commander in ${format} (status: ${status ?? 'unknown'})`
+            );
+          }
         }
       }
     }
@@ -437,9 +451,10 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
     ? `AND c.legalities LIKE '%"${getLegalityKey(format)}":"legal"%'`
     : '';
 
-  // Exclude commander (and partner) from the 99
+  // Exclude commander (and partner, and Alchemy-rebalanced twin) from the 99
   const commanderExclude = [
     commanderName ? `AND c.name != '${commanderName.replace(/'/g, "''")}'` : '',
+    commanderName ? `AND c.name != 'A-${commanderName.replace(/'/g, "''")}'` : '',
     partnerCard ? `AND c.name != '${partnerCard.name.replace(/'/g, "''")}'` : '',
   ].join(' ');
 
