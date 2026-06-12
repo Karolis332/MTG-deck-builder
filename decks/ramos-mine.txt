@@ -1,0 +1,103 @@
+Commander
+1 Ramos, Dragon Engine (FDN) 678
+
+Deck
+1 Godless Shrine (EOE) 254
+1 Steam Vents (ECL) 267
+1 Blood Crypt (ECL) 262
+1 Overgrown Tomb (ECL) 266
+1 Hallowed Fountain (ECL) 265
+1 Sacred Foundry (EOE) 256
+1 Temple Garden (ECL) 268
+1 Breeding Pool (EOE) 251
+1 Stomping Ground (RNA) 259
+1 Flooded Strand (MH3) 220
+1 Scalding Tarn (SPG) 112
+1 Jetmir's Garden (SNC) 250
+1 Savai Triome (IKO) 253
+1 Frontier Bivouac (TDM) 256
+1 Nomad Outpost (KTK) 237
+1 Multiversal Passage (OM1) 181
+1 Eiganjo, Seat of the Empire (NEO) 268
+1 Sokenzan, Crucible of Defiance (NEO) 276
+1 Takenuma, Abandoned Mire (NEO) 278
+1 Phyrexian Tower (MH3) 303
+1 Agadeem's Awakening (ZNR) 90
+1 Malakir Rebirth (ZNR) 111
+1 Shatterskull Smashing (ZNR) 161
+1 Sundering Eruption (MH3) 248
+1 Bridgeworks Battle (MH3) 249
+1 Sink into Stupor (MH3) 241
+1 Razorgrass Ambush (MH3) 238
+1 Spirebluff Canal (OTJ) 270
+1 Yavimaya Coast (DMU) 261
+1 Sundown Pass (SOS) 264
+1 Stormcarved Coast (SOS) 263
+1 Shattered Sanctum (SOS) 260
+1 Plains (FIN) 294
+1 Island (FIN) 297
+1 Swamp (FIN) 300
+1 Mountain (FIN) 305
+1 Forest (FIN) 306
+1 Arcane Signet (TLE) 315
+1 Izzet Signet (RVR) 261
+1 Talisman of Progress (MRD) 256
+1 Talisman of Creativity (MH1) 231
+1 Talisman of Indulgence (MRD) 255
+1 Talisman of Resilience (MH1) 234
+1 Talisman of Curiosity (MH1) 232
+1 Farseek (FCA) 45
+1 Nissa, Resurgent Animist (MAT) 22
+1 Izzet Charm (RTR) 172
+1 Prismari Charm (SOS) 211
+1 Witherbloom Charm (SOS) 244
+1 Silverquill Charm (SOS) 225
+1 Lorehold Charm (SOS) 200
+1 Quandrix Charm (SOS) 217
+1 Rakdos Charm (C16) 218
+1 Golgari Charm (RTR) 164
+1 Boros Charm (FDN) 721
+1 Selesnya Charm (PIO) 240
+1 Gruul Charm (GTC) 169
+1 Simic Charm (GTC) 195
+1 Obscura Charm (SNC) 208
+1 Maestros Charm (SNC) 199
+1 Riveteers Charm (SNC) 217
+1 Brokers Charm (SNC) 171
+1 A-Cabaretti Charm (SNC) 173
+1 Jeskai Charm (KTK) 181
+1 Abzan Charm (KTK) 161
+1 Temur Charm (KTK) 208
+1 Mardu Charm (KTK) 186
+1 Sultai Charm (KTK) 204
+1 Loot, the Pathfinder (DFT) 212
+1 Frantic Search (TLE) 159
+1 Expressive Iteration (SOA) 64
+1 Kaito, Bane of Nightmares (DSK) 220
+1 Annie Joins Up (OTJ) 191
+1 Path to Exile (PZA) 0
+1 Lightning Helix (MKM) 218
+1 Dreadbore (PIO) 221
+1 Fell the Profane (MH3) 244
+1 Erode (SOS) 15
+1 Negate (TMT) 47
+1 Mystical Tutor (TLE) 308
+1 Worldly Tutor (TLE) 314
+1 Enlightened Tutor (TLE) 305
+1 Bring to Light (SOA) 61
+1 Progenitus (FDN) 244
+1 Omnath, Locus of All (MOM) 249
+1 Kenrith, the Returned King (FCA) 23
+1 Leyline of the Guildpact (MKM) 217
+1 Jegantha, the Wellspring (MUL) 109
+1 Timeless Lotus (DMU) 239
+1 Infinite Guideline Station (EOE) 219
+1 Crop Rotation (ULG) 98
+1 Bramble Familiar (WOE) 164
+1 Mox Opal (SOM) 179
+1 Mox Amber (DAR) 224
+1 Deflecting Palm (SOA) 63
+1 Burgeoning (SPG) 0
+1 Explore (TLE) 259
+1 A-Vivi Ornitier (FIN) 248
+1 Mardu Siegebreaker (TDM) 206

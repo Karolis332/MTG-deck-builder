@@ -1,0 +1,98 @@
+1 Azorius Guildgate (FDN) 683
+1 Orzhov Guildgate (FDN) 692
+1 Dimir Guildgate (PIO) 260
+1 Boros Guildgate (FDN) 684
+1 Gruul Guildgate (FDN) 690
+1 Golgari Guildgate (FDN) 689
+1 Rakdos Guildgate (FDN) 693
+1 Izzet Guildgate (FDN) 691
+1 Selesnya Guildgate (FDN) 694
+1 Simic Guildgate (FDN) 695
+1 Gateway Plaza (PIO) 262
+1 Gate to Tumbledown (HBG) 81
+1 Gate to Manorborn (HBG) 78
+1 Maze's End (PIO) 269
+1 Agadeem's Awakening (ZNR) 90
+1 Shatterskull Smashing (ZNR) 161
+1 Sundering Eruption (MH3) 248
+1 Bridgeworks Battle (MH3) 249
+1 Sink into Stupor (MH3) 241
+1 Takenuma, Abandoned Mire (NEO) 278
+1 Eiganjo, Seat of the Empire (NEO) 268
+1 Sokenzan, Crucible of Defiance (NEO) 276
+1 Leyline Weaver (OM1) 144
+1 Multiversal Passage (OM1) 181
+1 Gate to Seatower (HBG) 79
+1 Hallowed Fountain (ECL) 265
+1 Steam Vents (ECL) 267
+1 Plains (FIN) 294
+1 Island (FIN) 297
+1 Swamp (FIN) 300
+1 Mountain (FIN) 305
+2 Forest (FIN) 306
+1 Open the Gates (RNA) 133
+1 District Guide (PIO) 172
+1 Arcane Signet (TLE) 315
+1 Spelunking (LCI) 213
+1 Auroral Procession (TDM) 169
+1 Bloom Tender (ECL) 166
+1 Songcrafter Mage (TDM) 225
+1 Elvish Mystic (M14) 169
+1 Fangkeeper's Familiar (TDM) 183
+1 Prismari Charm (SOS) 211
+1 Annie Joins Up (OTJ) 191
+1 Obscura Charm (SNC) 208
+1 Maestros Charm (SNC) 199
+1 Riveteers Charm (SNC) 217
+1 Jeskai Charm (KTK) 181
+1 Abzan Charm (KTK) 161
+1 Temur Charm (KTK) 208
+1 Sultai Charm (KTK) 204
+1 Loot, the Pathfinder (DFT) 212
+1 Frantic Search (TLE) 159
+1 Path to Exile (PZA) 0
+1 Fell the Profane (MH3) 244
+1 Talisman of Progress (MRD) 256
+1 Crop Rotation (ULG) 98
+1 Progenitus (FDN) 244
+1 Kenrith, the Returned King (FCA) 23
+1 Izzet Charm (RTR) 172
+1 Deflecting Palm (SOA) 63
+1 Chromatic Lantern (GRN) 233
+1 Avacyn's Pilgrim (SIS) 48
+1 Dovin's Veto (FCA) 51
+1 Resonating Lute (SOS) 221
+1 Overgrown Tomb (ECL) 266
+1 Vibrance (ECL) 249
+1 Stomping Ground (RNA) 259
+1 Temple Garden (ECL) 268
+1 Breeding Pool (EOE) 251
+1 Underworld Breach (THB) 161
+1 Enlightened Tutor (TLE) 305
+1 Door to Nothingness (BRR) 14
+1 Icetill Explorer (EOE) 192
+1 Mortify (FDN) 662
+1 Brokers Charm (SNC) 171
+1 Fabled Passage (BLB) 252
+1 Omnath, Locus of All (MOM) 249
+1 Aurora Awakener (ECL) 165
+1 Great Divide Guide (TLA) 181
+1 Boros Charm (FDN) 721
+1 Worldly Tutor (TLE) 314
+1 Dark Ritual (STA) 26
+1 Quandrix Charm (SOS) 217
+1 The Wandering Minstrel (FIN) 249
+1 Jeska's Will (SOA) 44
+1 Seething Song (MRD) 104
+1 Animal Attendant (TLE) 128
+1 Badgermole Cub (TLA) 167
+1 Explore (TLE) 259
+1 Fuel Tank Feaster (Y25) 17
+1 Lightning Helix (MKM) 218
+1 Sylvan Library (SPG) 0
+1 A-Vivi Ornitier (FIN) 248
+1 Ruby, Daring Tracker (FDN) 245
+1 Wildgrowth Archaic (SOS) 168
+1 Fusion Elemental (J25) 745
+1 Bring to Light (SOA) 61
+1 Infinite Guideline Station (EOE) 219
