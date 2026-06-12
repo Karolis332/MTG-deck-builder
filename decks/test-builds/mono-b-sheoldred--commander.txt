@@ -1,25 +1,23 @@
 // Sheoldred, the Apocalypse — COMMANDER
 // strategy=control themes=draw,ramp,artifacts,sacrifice,equipment,tokens,control,tribal tribal=-
-// total=99 lands=41 avgCMC=3.62
-// categories: ramp=11 removal=19 draw=12 board_wipe=6 protection=2 win_condition=2 land=41 utility=6
+// total=99 lands=42 avgCMC=3.67
+// categories: ramp=10 removal=20 draw=12 board_wipe=6 protection=1 win_condition=2 land=42 utility=6
 
 1 Sheoldred, the Apocalypse *CMDR*
 
-// ── ramp (11) ──
+// ── ramp (10) ──
 1 Dark Ritual
 1 Sol Ring
 1 Arcane Signet
-1 Collector's Vault
+1 Charcoal Diamond
 1 Deadly Dispute
 1 Mind Stone
 1 Thought Vessel
-1 Ruthless Knave
-1 Skullport Merchant
-1 Warren Soultrader
+1 Commander's Sphere
+1 Decanter of Endless Water
 1 Solemn Simulacrum
 
 // ── draw (12) ──
-1 Night's Whisper
 1 Sign in Blood
 1 Black Market Connections
 1 Phyrexian Arena
@@ -31,8 +29,10 @@
 1 Psychosis Crawler
 1 Seizan, Perverter of Truth
 1 Peer into the Abyss
+1 Kozilek, the Great Distortion
 
-// ── removal (19) ──
+// ── removal (20) ──
+1 Defile
 1 Soul-Guide Lantern
 1 Feed the Swarm
 1 Go for the Throat
@@ -40,6 +40,7 @@
 1 Kozilek's Command
 1 Orcish Bowmasters
 1 Staff of Compleation
+1 Withering Torment
 1 Aetherflux Reservoir
 1 Baleful Mastery
 1 Deadly Rollick
@@ -48,22 +49,20 @@
 1 Snuff Out
 1 Ob Nixilis Reignited
 1 Ob Nixilis, the Hate-Twisted
-1 The Mightstone and Weakstone
-1 Zuko's Exile
+1 Sheoldred // The True Scriptures
 1 Summon: Primal Odin
 1 Vilis, Broker of Blood
 
 // ── board_wipe (6) ──
 1 Toxic Deluge
 1 Damnation
-1 The Rise of Sozin // Fire Lord Sozin
+1 Mutilate
 1 Blood Money
+1 Kindred Dominance
 1 Decree of Pain
-1 Extinguisher Battleship
 
-// ── protection (2) ──
+// ── protection (1) ──
 1 Lightning Greaves
-1 Swiftfoot Boots
 
 // ── win_condition (2) ──
 1 Marauding Blight-Priest
@@ -77,8 +76,9 @@
 1 Teferi's Puzzle Box
 1 Sanguine Bond
 
-// ── land (41) ──
+// ── land (42) ──
 1 Bojuka Bog
+1 Cabal Coffers
 1 Castle Locthwain
 1 Cavern of Souls
 1 City of Brass

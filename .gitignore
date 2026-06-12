@@ -104,3 +104,5 @@ check_db_data.py
 decks/test-builds/.edhrec-raw/
 decks/test-builds/results.json
 decks/test-builds/edhrec-reference.json
+!/data/training/scoring-weights.json
+!/data/training/fit-report-*.md

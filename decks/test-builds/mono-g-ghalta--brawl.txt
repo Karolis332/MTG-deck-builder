@@ -1,21 +1,17 @@
 // Ghalta, Primal Hunger — BRAWL
 // strategy=aggro themes=draw,artifacts,ramp,tokens,aggro,equipment,sacrifice,tribal tribal=-
-// total=99 lands=44 avgCMC=3.31
-// categories: ramp=20 draw=13 removal=6 board_wipe=2 protection=4 win_condition=3 land=44 utility=7
+// total=99 lands=44 avgCMC=3.4
+// categories: ramp=16 draw=9 removal=8 board_wipe=2 protection=4 win_condition=5 utility=11 land=44
 
 1 Ghalta, Primal Hunger *CMDR*
 
-// ── ramp (20) ──
+// ── ramp (16) ──
 1 Delighted Halfling
 1 Elvish Mystic
 1 Llanowar Elves
-1 Prying Blade
 1 Arcane Signet
-1 Collector's Vault
 1 Fanatic of Rhonas
 1 Finale of Devastation
-1 Goldvein Pick
-1 Mind Stone
 1 Rampant Growth
 1 Cultivate
 1 Gwenna, Eyes of Gaea
@@ -27,31 +23,29 @@
 1 Hulking Raptor
 1 The Great Henge
 
-// ── draw (13) ──
+// ── draw (9) ──
 1 Colossal Majesty
 1 Elemental Bond
 1 Garruk's Uprising
-1 Tireless Tracker
 1 Tribute to the World Tree
 1 Beast Whisperer
 1 Guardian Project
 1 Momentous Fall
-1 Elder Gargaroth
 1 Return of the Wildspeaker
 1 Rishkar's Expertise
-1 Soul of the Harvest
-1 Vaultborn Tyrant
 
-// ── removal (6) ──
+// ── removal (8) ──
+1 Cankerbloom
 1 Kenrith's Transformation
 1 Scavenging Ooze
 1 Beast Within
 1 Reclamation Sage
 1 Rhonas the Indomitable
 1 Thrashing Brontodon
+1 Kogla, the Titan Ape
 
 // ── board_wipe (2) ──
-1 Night of the Sweets' Revenge
+1 Duskshell Crawler
 1 Season of Gathering
 
 // ── protection (4) ──
@@ -60,19 +54,25 @@
 1 Lightning Greaves
 1 Swiftfoot Boots
 
-// ── win_condition (3) ──
+// ── win_condition (5) ──
 1 Goreclaw, Terror of Qal Sisma
+1 Defiler of Vigor
+1 Gigantosaurus
 1 Surrak and Goreclaw
 1 Ghalta, Stampede Tyrant
 
-// ── utility (7) ──
+// ── utility (11) ──
 1 Emerald Medallion
 1 Ram Through
 1 Eternal Witness
 1 Fireshrieker
+1 Hunter's Insight
+1 Pugnacious Hammerskull
 1 Rhonas's Monument
+1 Yorvo, Lord of Garenbrig
 1 Surrak, the Hunt Caller
 1 Unnatural Growth
+1 The Skullspore Nexus
 
 // ── land (44) ──
 1 Castle Garenbrig

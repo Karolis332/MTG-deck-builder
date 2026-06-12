@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "trainedAt": "2026-06-12",
+  "labelThreshold": 0.1,
+  "aucTest": 0.6067,
+  "rows": 22638,
+  "commanders": 100,
+  "reference": "edhrec",
+  "weights": {
+    "cmdrStats": 1.0,
+    "ml": 1.0,
+    "cf": 0.25,
+    "edhrec": 1.0,
+    "globalRank": 1.0,
+    "tribal": 1.02,
+    "theme": 0.5,
+    "profileSynergy": 1.0,
+    "typePenalty": 1.0,
+    "stormFit": 1.0,
+    "mechanicFit": 1.0,
+    "strategyFit": 1.0,
+    "powerTier": 1.0,
+    "metaStats": 0.5,
+    "collection": 1.0,
+    "qualityFloor": 1.0
+  }
+}

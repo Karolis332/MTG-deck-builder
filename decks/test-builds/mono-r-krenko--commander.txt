@@ -1,11 +1,11 @@
 // Krenko, Mob Boss — COMMANDER
 // strategy=midrange themes=tribal tribal=goblin
 // total=99 lands=38 avgCMC=2.79
-// categories: ramp=11 removal=10 draw=10 board_wipe=4 protection=3 win_condition=6 utility=17 land=38
+// categories: ramp=12 removal=10 draw=9 board_wipe=4 protection=3 win_condition=6 utility=17 land=38
 
 1 Krenko, Mob Boss *CMDR*
 
-// ── ramp (11) ──
+// ── ramp (12) ──
 1 Brightstone Ritual
 1 Impulsive Pilferer
 1 Reckless Lackey
@@ -14,17 +14,17 @@
 1 Arcane Signet
 1 Battle Hymn
 1 Mind Stone
+1 Crime Novelist
 1 Howlsquad Heavy
+1 Patchwork Banner
 1 Patriar's Seal
-1 Solemn Simulacrum
 
-// ── draw (10) ──
+// ── draw (9) ──
 1 Faithless Looting
 1 Skullclamp
 1 Thrill of Possibility
 1 Gempalm Incinerator
 1 Goblin Matron
-1 Hazoret's Monument
 1 Herald's Horn
 1 Staff of Domination
 1 Goblin Ringleader
@@ -32,9 +32,9 @@
 
 // ── removal (10) ──
 1 Goblin Grenade
-1 Vandalblast
 1 Abrade
 1 Goblin Bombardment
+1 Thornbite Staff
 1 Chaos Warp
 1 Goblin Sharpshooter
 1 Pashalik Mons

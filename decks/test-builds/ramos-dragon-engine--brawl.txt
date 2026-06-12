@@ -1,19 +1,20 @@
 // Ramos, Dragon Engine — BRAWL
 // strategy=midrange themes=tokens,counters,artifacts,ramp,draw tribal=-
-// total=99 lands=40 avgCMC=3.31
-// categories: draw=9 ramp=20 utility=8 land=40 removal=12 board_wipe=4 protection=2 win_condition=4
+// total=99 lands=40 avgCMC=3.59
+// categories: ramp=21 land=40 draw=7 utility=7 win_condition=5 removal=13 board_wipe=4 protection=2
 
 1 Ramos, Dragon Engine *CMDR*
 
-// ── ramp (20) ──
+// ── ramp (21) ──
 1 An Offer You Can't Refuse
 1 Delighted Halfling
 1 Arcane Signet
 1 Deadly Dispute
-1 Fanatic of Rhonas
+1 Farseek
 1 Lotho, Corrupt Shirriff
+1 Baylen, the Haymaker
 1 Chromatic Lantern
-1 Patchwork Banner
+1 Faeburrow Elder
 1 Seize the Spoils
 1 Tireless Provisioner
 1 Big Score
@@ -22,60 +23,59 @@
 1 Smothering Tithe
 1 Storm-Kiln Artist
 1 Unexpected Windfall
-1 Goldspan Dragon
 1 Revel in Riches
+1 Vraska, Betrayal's Sting
 1 Chromatic Orrery
 1 The Great Henge
 
-// ── draw (9) ──
+// ── draw (7) ──
 1 Ozolith, the Shattered Spire
-1 Black Market Connections
-1 Braids, Arisen Nightmare
 1 Inspiring Call
 1 Tireless Tracker
-1 Tribute to the World Tree
 1 Archmage Emeritus
-1 Guardian Project
 1 Tezzeret's Gambit
+1 Infinite Guideline Station
+1 Korvold, Fae-Cursed King
 
-// ── removal (12) ──
-1 Nature's Claim
-1 Pongify
-1 Rapid Hybridization
+// ── removal (13) ──
+1 Deathrite Shaman
+1 Agatha's Soul Cauldron
+1 Boros Charm
+1 Cankerbloom
+1 Fake Your Own Death
 1 The Ooze
 1 Abzan Charm
 1 Archdruid's Charm
 1 Loran of the Third Path
-1 Putrefy
-1 Reclamation Sage
 1 Staff of Compleation
-1 Stroke of Midnight
-1 Aetherflux Reservoir
+1 Sultai Charm
+1 Aragorn, the Uniter
+1 Elspeth, Storm Slayer
 
 // ── board_wipe (4) ──
-1 Toxic Deluge
 1 Damnation
 1 Farewell
 1 Season of Gathering
+1 Ruinous Ultimatum
 
 // ── protection (2) ──
 1 Swan Song
 1 Rhythm of the Wild
 
-// ── win_condition (4) ──
+// ── win_condition (5) ──
 1 Marionette Apprentice
-1 Bastion of Remembrance
-1 Mirkwood Bats
-1 Rampaging Baloths
+1 Atraxa, Praetors' Voice
+1 Olivia, Opulent Outlaw
+1 Maelstrom Archangel
+1 Progenitus
 
-// ── utility (8) ──
+// ── utility (7) ──
 1 Hardened Scales
-1 Thrummingbird
 1 Branching Evolution
 1 Champion of Lambholt
 1 Evolution Sage
 1 Forgotten Ancient
-1 Cathars' Crusade
+1 Leyline of the Guildpact
 1 Door to Nothingness
 
 // ── land (40) ──

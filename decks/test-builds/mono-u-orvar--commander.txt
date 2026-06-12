@@ -1,7 +1,7 @@
 // Orvar, the All-Form — COMMANDER
 // strategy=spellslinger themes=tokens,artifacts,flying,draw,spellslinger,control,ramp,enchantments,counters,equipment tribal=-
-// total=99 lands=40 avgCMC=2.73
-// categories: draw=18 win_condition=7 utility=5 ramp=9 removal=16 board_wipe=2 protection=2 land=40
+// total=99 lands=39 avgCMC=2.9
+// categories: draw=19 win_condition=7 utility=6 ramp=9 removal=15 board_wipe=2 protection=2 land=39
 
 1 Orvar, the All-Form *CMDR*
 
@@ -9,50 +9,50 @@
 1 An Offer You Can't Refuse
 1 Sol Ring
 1 Arcane Signet
-1 Collector's Vault
 1 Mind Stone
 1 Sky Diamond
 1 Thought Vessel
 1 Solemn Simulacrum
-1 Spell Swindle
+1 Gilded Lotus
+1 Coveted Jewel
 
-// ── draw (18) ──
+// ── draw (19) ──
 1 Aquitect's Will
 1 Cerulean Wisps
 1 Leap
 1 Shadow Rift
 1 Skullclamp
 1 Slip Through Space
-1 Three Steps Ahead
+1 Thermal Flux
+1 Twisted Image
 1 Arcane Denial
 1 Baral, Chief of Compliance
+1 Cloud of Faeries
 1 Idol of Oblivion
 1 Aether Channeler
-1 Mirrodin Besieged
 1 Rhystic Study
 1 Sai, Master Thopterist
-1 Uthros Research Craft
 1 Archmage Emeritus
 1 Thopter Spy Network
 1 Mulldrifter
+1 Agent of Treachery
 
-// ── removal (16) ──
+// ── removal (15) ──
 1 Essence Flux
 1 Fleeting Distraction
-1 Ghost Vacuum
 1 Pongify
 1 Rapid Hybridization
 1 Kozilek's Command
+1 Reality Shift
 1 Resculpt
 1 Snap
 1 Teferi's Time Twist
 1 The Ooze
 1 Warping Wail
 1 Ravenform
-1 Canoptek Scarab Swarm
 1 Venser, Shaper Savant
-1 Zuko's Exile
 1 Sublime Epiphany
+1 Hullbreaker Horror
 
 // ── board_wipe (2) ──
 1 Cyclonic Rift
@@ -63,28 +63,28 @@
 1 Counterspell
 
 // ── win_condition (7) ──
-1 Efficient Construction
 1 Irenicus's Vile Duplication
 1 Murmuring Mystic
 1 Talrand, Sky Summoner
 1 Docent of Perfection // Final Iteration
 1 Peregrine Drake
 1 Shipwreck Dowser
+1 Scourge of Fleets
 
-// ── utility (5) ──
+// ── utility (6) ──
 1 Hangarback Walker
 1 Twincast
+1 Ghostly Flicker
 1 Archaeomancer
 1 Vesuvan Duplimancy
 1 Mind's Desire
 
-// ── land (40) ──
+// ── land (39) ──
 1 Cavern of Souls
 1 City of Brass
 28 Island
 1 Mistrise Village
 1 Mystic Sanctuary
-1 Reliquary Tower
 1 Secluded Courtyard
 1 Three Tree City
 1 Unclaimed Territory

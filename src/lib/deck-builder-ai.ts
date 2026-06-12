@@ -1,4 +1,6 @@
-import { getDb, getCedhStaples, getMetaCardStatsMap, getMetaRankedCardNames, getFormatStaples, getCommunityRecommendations, getCommanderCardStats } from './db';
+import fs from 'fs';
+import path from 'path';
+import { getDb, getDataDir, getCedhStaples, getMetaCardStatsMap, getMetaRankedCardNames, getFormatStaples, getCommunityRecommendations, getCommanderCardStats } from './db';
 import type { DbCard, AISuggestion } from './types';
 import { DEFAULT_LAND_COUNT, DEFAULT_DECK_SIZE, getLegalityKey, COMMANDER_FORMATS } from './constants';
 import { getCardGlobalScore, getMetaAdjustedScore } from './global-learner';
@@ -19,6 +21,27 @@ import {
 import { analyzeCommanderForBuild } from './commander-analysis';
 import type { ArsenalCard } from './commander-analysis';
 import { classifyCard } from './card-classifier';
+
+// ── Learned scoring weights ──────────────────────────────────────────────────
+// Optional per-component multipliers fitted offline against the scraped-deck
+// corpus (scripts/fit_scoring_weights.py → <data-dir>/scoring-weights.json).
+// Missing file or component key → identity weight (hand-tuned behaviour).
+let cachedScoringWeights: Record<string, number> | null | undefined;
+export function getScoringWeights(): Record<string, number> | null {
+  if (cachedScoringWeights !== undefined) return cachedScoringWeights;
+  try {
+    const weightsPath = path.join(getDataDir(), 'scoring-weights.json');
+    if (fs.existsSync(weightsPath)) {
+      const parsed = JSON.parse(fs.readFileSync(weightsPath, 'utf8')) as { weights?: Record<string, number> };
+      cachedScoringWeights = parsed.weights && typeof parsed.weights === 'object' ? parsed.weights : null;
+    } else {
+      cachedScoringWeights = null;
+    }
+  } catch {
+    cachedScoringWeights = null;
+  }
+  return cachedScoringWeights;
+}
 
 // ── Commander synergy text patterns for card scoring ────────────────────────
 // Maps synergy categories from commander-synergy.ts to oracle text substrings
@@ -309,6 +332,8 @@ export interface BuildOptions {
   partnerName?: string; // second commander for partner pairs (Thrasios + Tymna)
   powerLevel?: 'casual' | 'optimized' | 'cedh';
   userId?: number; // for commander-arsenal collection substitutes
+  /** Capture per-card score-component breakdown (training/diagnostics only) */
+  captureComponents?: boolean;
 }
 
 export interface BuildResult {
@@ -321,6 +346,8 @@ export interface BuildResult {
   reasoning?: Array<{ cardName: string; role: string; reason: string }>;
   /** Debug summary of role fills */
   buildReport?: string;
+  /** Scored candidate pool with per-card score components (captureComponents only) */
+  scoredPool?: Array<{ name: string; score: number; components: Record<string, number> }>;
 }
 
 export interface ScoredCandidatePoolResult {
@@ -346,6 +373,8 @@ export interface ScoredCandidatePoolResult {
   collectionOrder: string;
   metaStatsMap: Map<string, { inclusionRate: number; placementScore: number; coreRate: number; winRate: number }>;
   commanderStatsMap: Map<string, { inclusionRate: number; synergyScore: number }>;
+  /** Per-card additive score breakdown; populated only when options.captureComponents */
+  componentsByName?: Map<string, Record<string, number>>;
 }
 
 /**
@@ -924,8 +953,18 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
     : colors.length === 4 ? 0.10
     : 0.05;
 
+  // Per-card additive score breakdown, captured only when training/diagnosing.
+  const componentsByName = new Map<string, Record<string, number>>();
+
   const scored = pool.map((card) => {
     let score = 0;
+    const comp: Record<string, number> = {};
+    let snapAt = 0;
+    const snap = (key: string): void => {
+      const delta = score - snapAt;
+      if (delta !== 0) comp[key] = (comp[key] || 0) + delta;
+      snapAt = score;
+    };
 
     // ── ML personalization bonus (from trained scikit-learn model) ──
     const mlScore = mlScoreMap.get(card.name);
@@ -934,6 +973,7 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
       score += Math.max(0, (mlScore - 0.4) * 40);
     }
 
+    snap('ml');
     // ── Collaborative Filtering bonus (from similar decks in CF engine) ──
     const cfScore = cfScoreMap.get(card.name);
     if (cfScore !== undefined) {
@@ -941,6 +981,7 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
       score += cfScore * 20;
     }
 
+    snap('cf');
     // ── Per-commander community data (from 506K+ decks) ──
     // "72% of Ur-Dragon decks run this card" — strongest signal for commander decks
     const cmdrStats = commanderStatsMap.get(card.name);
@@ -967,6 +1008,7 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
       }
     }
 
+    snap('cmdrStats');
     // ── EDHREC commander-specific synergy (primary signal for commander) ──
     const edhrecEntry = edhrecSynergyMap.get(card.name);
     if (edhrecEntry) {
@@ -982,6 +1024,7 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
       }
     }
 
+    snap('edhrec');
     // ── Global learned rating (secondary signal when data exists) ──
     const globalRating = getCardGlobalScore(card.name, format);
     if (globalRating.confidence > 0.3) {
@@ -996,6 +1039,7 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
       }
     }
 
+    snap('globalRank');
     // ── Tribal bonus ──
     // Cards that match the tribal type get a massive score boost
     if (tribalType && tribalNames.has(card.name)) {
@@ -1007,6 +1051,7 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
       }
     }
 
+    snap('tribal');
     // ── Theme synergy bonus ──
     const text = (card.oracle_text || '').toLowerCase();
     const keywords = (card.keywords || '').toLowerCase();
@@ -1021,6 +1066,7 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
       }
     }
 
+    snap('theme');
     // ── Commander synergy bonus ──
     // Cards matching commander's trigger categories get bonus score
     if (commanderProfile) {
@@ -1036,6 +1082,7 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
       }
     }
 
+    snap('profileSynergy');
     // ── Archetype discouraged types penalty ──
     const template = getTemplate(resolvedStrategy);
     if (template.discouragedTypes?.length) {
@@ -1045,6 +1092,7 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
       }
     }
 
+    snap('typePenalty');
     // ── Storm CMC bonus ──
     // Storm commanders need maximum cheap spells to build storm count.
     // This overrides normal CMC preferences — heavily reward CMC 0-2.
@@ -1061,6 +1109,7 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
       if (text.includes('create a treasure') || text.includes('create two treasure')) score += 10;
     }
 
+    snap('stormFit');
     // ── Commander-mechanic bonuses needing card fields, not oracle regexes ──
     if (commanderProfile?.triggerCategories.includes('x_spells')) {
       // X-cost spells are the whole point of Vivi / Magus Lucea Kane / Zaxara
@@ -1077,6 +1126,7 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
       if (/converge|sunburst|one mana of each color|mana of any color|each color of mana spent|five colors?/.test(text)) score += 20;
     }
 
+    snap('mechanicFit');
     // ── Strategy fit ──
     if (resolvedStrategy === 'aggro') {
       if (card.cmc <= 2) score += 10;
@@ -1093,6 +1143,7 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
       if (text.includes('draw') || text.includes('destroy') || text.includes('create')) score += 3;
     }
 
+    snap('strategyFit');
     // ── cEDH power level scoring ──
     if (powerLevel === 'cedh') {
       const staple = cedhStapleMap.get(card.name);
@@ -1121,6 +1172,7 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
       }
     }
 
+    snap('powerTier');
     // ── Meta card stats scoring (from 506K+ scraped decks) ──
     // Inclusion rates are global — adjust for color identity to properly weight
     // color-specific staples (e.g., Ponder at 5.8% global ≈ 20% in blue decks)
@@ -1159,6 +1211,7 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
       }
     }
 
+    snap('metaStats');
     // ── Collection bonus (soft — quality dominates) ──
     // Old behaviour was +30/-40 which meant a mediocre owned card (Sokka's
     // Haiku) would outscore an unowned staple by 70 points. That is the
@@ -1172,6 +1225,7 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
       }
     }
 
+    snap('collection');
     // ── Quality floor penalty ──
     // If a card has NO signal data at all (no commander stat, no meta stat,
     // no EDHREC rank, no CF, no ML) and isn't on any curated payoff list,
@@ -1185,6 +1239,18 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
     const hasAnySignal = hasCmdrData || hasMetaData || hasEdhrecData || hasCfData || hasMlData;
     if (!hasAnySignal && edhrecRank > 18000) {
       score -= 35;
+    }
+
+    snap('qualityFloor');
+    if (options.captureComponents) componentsByName.set(card.name, comp);
+
+    // Learned calibration: reweight the additive components with multipliers
+    // fitted against the scraped-deck corpus. Identity when no weights file.
+    const learned = getScoringWeights();
+    if (learned) {
+      let reweighted = 0;
+      for (const [k, v] of Object.entries(comp)) reweighted += (learned[k] ?? 1) * v;
+      score = reweighted;
     }
 
     return { card, score };
@@ -1213,6 +1279,7 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
 
   return {
     pool: colorFilteredScored,
+    componentsByName: options.captureComponents ? componentsByName : undefined,
     themes,
     resolvedStrategy,
     tribalType,
@@ -1785,6 +1852,13 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
     commanderSynergy: commanderProfile || undefined,
     reasoning,
     buildReport,
+    scoredPool: options.captureComponents
+      ? poolResult.pool.map(({ card, score }) => ({
+          name: card.name,
+          score,
+          components: poolResult.componentsByName?.get(card.name) ?? {},
+        }))
+      : undefined,
   };
 }
 

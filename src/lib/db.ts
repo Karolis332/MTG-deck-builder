@@ -24,6 +24,12 @@ function resolveDbDir(): string {
 const DB_DIR = resolveDbDir();
 const DB_PATH = path.join(DB_DIR, 'mtg-deck-builder.db');
 
+/** Resolved data directory (same dir as the SQLite DB) — for sidecar files
+ *  like scoring-weights.json that must follow the production DB location. */
+export function getDataDir(): string {
+  return DB_DIR;
+}
+
 function createDatabase(): Database.Database {
   if (!fs.existsSync(DB_DIR)) {
     fs.mkdirSync(DB_DIR, { recursive: true });

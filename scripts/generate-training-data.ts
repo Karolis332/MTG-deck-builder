@@ -28,10 +28,13 @@ import { getDb } from '../src/lib/db';
 
 const argIdx = process.argv.indexOf('--sample');
 const SAMPLE = argIdx > -1 ? parseInt(process.argv[argIdx + 1], 10) : 25;
+const offIdx = process.argv.indexOf('--offset');
+const OFFSET = offIdx > -1 ? parseInt(process.argv[offIdx + 1], 10) : 0;
 const fmtIdx = process.argv.indexOf('--format');
 const FORMAT = fmtIdx > -1 ? process.argv[fmtIdx + 1] : 'commander';
 const OUT_DIR = path.join(process.cwd(), 'data', 'training');
 const DATE = new Date().toISOString().slice(0, 10);
+const SHARD = OFFSET > 0 ? `-o${OFFSET}` : '';
 
 interface StatRow { card_name: string; inclusion_rate: number; synergy_score: number }
 
@@ -47,13 +50,13 @@ async function main(): Promise<void> {
     WHERE c.legalities LIKE '%"${FORMAT === 'commander' ? 'commander' : 'brawl'}":"legal"%'
     GROUP BY s.commander_name
     ORDER BY decks DESC
-    LIMIT ?
-  `).all(SAMPLE) as Array<{ commander_name: string; decks: number }>;
+    LIMIT ? OFFSET ?
+  `).all(SAMPLE, OFFSET) as Array<{ commander_name: string; decks: number }>;
 
-  console.log(`Sampling ${commanders.length} commanders (format=${FORMAT})`);
+  console.log(`Sampling ${commanders.length} commanders (format=${FORMAT}, offset=${OFFSET})`);
 
-  const jsonlPath = path.join(OUT_DIR, `deck-eval-${DATE}.jsonl`);
-  const csvPath = path.join(OUT_DIR, `summary-${DATE}.csv`);
+  const jsonlPath = path.join(OUT_DIR, `deck-eval-${DATE}${SHARD}.jsonl`);
+  const csvPath = path.join(OUT_DIR, `summary-${DATE}${SHARD}.csv`);
   const jsonl = fs.createWriteStream(jsonlPath);
   const csv: string[] = ['commander,decks,picks,consensusPrecision,consensusRecall50,fillerRate,elapsedMs'];
 
@@ -67,8 +70,10 @@ async function main(): Promise<void> {
   for (const { commander_name, decks } of commanders) {
     const started = Date.now();
     let picks: Array<{ name: string; isLand: boolean; cmc: number; category: string; edhrecRank: number | null }> = [];
+    let scoredPool: Array<{ name: string; score: number; components: Record<string, number> }> = [];
     try {
-      const result = await autoBuildDeck({ format: FORMAT, colors: [], commanderName: commander_name });
+      const result = await autoBuildDeck({ format: FORMAT, colors: [], commanderName: commander_name, captureComponents: true });
+      scoredPool = result.scoredPool ?? [];
       picks = result.cards
         .filter((e) => e.board === 'main')
         .map((e) => ({
@@ -86,6 +91,7 @@ async function main(): Promise<void> {
     const stats = statStmt.all(commander_name) as StatRow[];
     const statMap = new Map(stats.map((s) => [s.card_name.toLowerCase(), s]));
     const pickedSet = new Set(picks.map((p) => p.name.toLowerCase()));
+    const poolMap = new Map(scoredPool.map((p) => [p.name.toLowerCase(), p]));
 
     // Dataset rows: union of our picks and community top cards
     const allNames = new Set<string>([...pickedSet, ...stats.map((s) => s.card_name.toLowerCase())]);
@@ -100,10 +106,15 @@ async function main(): Promise<void> {
         cmc = row?.cmc ?? 0;
         category = row ? getPrimaryCategory(classifyCard(name, row.oracle_text || '', row.type_line || '', row.cmc ?? 0)) : 'utility';
       }
+      const poolEntry = poolMap.get(lower);
       jsonl.write(JSON.stringify({
         commander: commander_name,
+        commanderDecks: decks,
         card: name,
         picked: pick ? 1 : 0,
+        inPool: poolEntry ? 1 : 0,
+        poolScore: poolEntry ? Math.round(poolEntry.score * 10) / 10 : null,
+        comp: poolEntry?.components ?? null,
         inclusionRate: stat ? Math.round(stat.inclusion_rate * 1000) / 1000 : 0,
         synergyScore: stat ? Math.round(stat.synergy_score * 1000) / 1000 : 0,
         cmc,
@@ -134,7 +145,10 @@ async function main(): Promise<void> {
     console.log(`${commander_name.padEnd(36)} prec=${precision.toFixed(2)} recall50=${recall.toFixed(2)} filler=${fillerRate.toFixed(2)} (${elapsed}ms)`);
   }
 
-  jsonl.end();
+  // Await flush — process.exit() would otherwise drop buffered rows.
+  await new Promise<void>((resolve, reject) => {
+    jsonl.end((err: NodeJS.ErrnoException | null | undefined) => (err ? reject(err) : resolve()));
+  });
   fs.writeFileSync(csvPath, csv.join('\n'));
   console.log(`\nWrote ${jsonlPath}\n      ${csvPath}`);
 }

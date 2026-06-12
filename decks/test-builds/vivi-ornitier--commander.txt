@@ -1,25 +1,21 @@
 // Vivi Ornitier — COMMANDER
 // strategy=spellslinger themes=tokens,artifacts,counters,flying,aggro,spellslinger,ramp,draw,enchantments,graveyard,equipment tribal=-
-// total=99 lands=39 avgCMC=2.67
-// categories: removal=14 draw=15 utility=8 win_condition=5 ramp=14 board_wipe=2 protection=2 land=39
+// total=99 lands=38 avgCMC=2.56
+// categories: removal=14 draw=15 utility=10 win_condition=7 ramp=10 board_wipe=2 protection=3 land=38
 
 1 Vivi Ornitier *CMDR*
 
-// ── ramp (14) ──
+// ── ramp (10) ──
 1 An Offer You Can't Refuse
 1 Sol Ring
 1 Strike It Rich
 1 Arcane Signet
-1 Mind Stone
+1 Izzet Signet
 1 Talisman of Creativity
 1 Thought Vessel
 1 Electro, Assaulting Battery
-1 Elementalist's Palette
 1 Jeska's Will
-1 Galazeth Prismari
 1 Storm-Kiln Artist
-1 Summon: Esper Valigarmanda
-1 Goldspan Dragon
 
 // ── draw (15) ──
 1 Brainstorm
@@ -31,25 +27,25 @@
 1 Opt
 1 Ponder
 1 Preordain
-1 Arcane Denial
 1 Frantic Search
 1 Ophidian Eye
 1 Rhystic Study
-1 Uthros Research Craft
+1 Tandem Lookout
 1 Archmage Emeritus
+1 Archmage of Runes
 
 // ── removal (14) ──
 1 Walking Ballista
 1 Lightning Bolt
-1 Monstrous Rage
 1 Pongify
+1 Sigil of Sleep
 1 Wild Ride
 1 Abrade
 1 Grapeshot
 1 Kozilek's Command
 1 Red Sun's Twilight
 1 Snap
-1 Prismari Command
+1 Mizzix's Mastery
 1 Urabrask // The Great Work
 1 Niv-Mizzet, Parun
 1 Hullbreaker Horror
@@ -58,31 +54,35 @@
 1 Cyclonic Rift
 1 Blasphemous Act
 
-// ── protection (2) ──
+// ── protection (3) ──
 1 Swan Song
 1 Counterspell
+1 Deflecting Swat
 
-// ── win_condition (5) ──
+// ── win_condition (7) ──
+1 Coruscation Mage
+1 Fiery Inscription
 1 Guttersnipe
 1 Murmuring Mystic
 1 Talrand, Sky Summoner
+1 Quicksilver Elemental
 1 Niv-Mizzet, Visionary
-1 Cavern-Hoard Dragon
 
-// ── utility (8) ──
+// ── utility (10) ──
 1 Hangarback Walker
 1 Shivan Devastator
 1 Crackle with Power
 1 Goblin Electromancer
+1 Harmonic Prodigy
+1 Jaya's Immolating Inferno
 1 Young Pyromancer
 1 Veyran, Voice of Duality
 1 Expansion // Explosion
 1 Thousand-Year Storm
 
-// ── land (39) ──
+// ── land (38) ──
 1 Cavern of Souls
 1 City of Brass
-1 Command Tower
 1 Eclipsed Realms
 1 Fiery Islet
 1 Frostboil Snarl

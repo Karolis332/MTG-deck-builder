@@ -1,23 +1,25 @@
 // Vivi Ornitier — BRAWL
 // strategy=spellslinger themes=counters,tokens,artifacts,spellslinger,draw,aggro,flying,ramp,enchantments,graveyard,equipment tribal=-
-// total=99 lands=39 avgCMC=2.8
-// categories: removal=13 draw=17 utility=9 win_condition=6 ramp=10 board_wipe=2 protection=3 land=39
+// total=99 lands=39 avgCMC=2.68
+// categories: removal=14 draw=16 utility=9 win_condition=5 ramp=11 board_wipe=2 protection=3 land=39
 
 1 Vivi Ornitier *CMDR*
 
-// ── ramp (10) ──
+// ── ramp (11) ──
 1 An Offer You Can't Refuse
-1 Sticky Fingers
+1 Strike It Rich
 1 Arcane Signet
+1 Izzet Signet
 1 Talisman of Creativity
+1 Birgi, God of Storytelling // Harnfel, Horn of Bounty
 1 Electro, Assaulting Battery
 1 Jeska's Will
 1 Galazeth Prismari
-1 Solemn Simulacrum
 1 Storm-Kiln Artist
 1 Goldspan Dragon
 
-// ── draw (17) ──
+// ── draw (16) ──
+1 Mishra's Bauble
 1 Brainstorm
 1 Consider
 1 Curiosity
@@ -30,23 +32,22 @@
 1 Wan Shi Tong, Librarian
 1 Frantic Search
 1 Rhystic Study
-1 Sai, Master Thopterist
 1 Archmage Emeritus
 1 Ral, Crackling Wit
 1 Archmage of Runes
-1 Shark Typhoon
 
-// ── removal (13) ──
+// ── removal (14) ──
 1 Lightning Bolt
 1 Monstrous Rage
 1 Pongify
 1 Wild Ride
-1 Ancestors' Aid
 1 Kozilek's Command
 1 Red Sun's Twilight
-1 Sudden Breakthrough
-1 Flick a Coin
+1 Stolen by the Fae
+1 Chaos Warp
+1 Flame of Anor
 1 Prismari Command
+1 Mizzix's Mastery
 1 Urabrask // The Great Work
 1 Niv-Mizzet, Parun
 1 Hullbreaker Horror
@@ -60,10 +61,9 @@
 1 Counterspell
 1 Negate
 
-// ── win_condition (6) ──
+// ── win_condition (5) ──
 1 Fiery Inscription
 1 Guttersnipe
-1 Atsushi, the Blazing Sky
 1 Murmuring Mystic
 1 Talrand, Sky Summoner
 1 Niv-Mizzet, Visionary
@@ -98,6 +98,6 @@
 1 Temple of the Dragon Queen
 1 Three Tree City
 1 Unclaimed Territory
+1 Hydroelectric Specimen // Hydroelectric Laboratory
 1 Rush of Inspiration // Crackling Falls
-1 Valakut Awakening // Valakut Stoneforge
-1 Pinnacle Monk // Mystic Peak
+1 Sink into Stupor // Soporific Springs

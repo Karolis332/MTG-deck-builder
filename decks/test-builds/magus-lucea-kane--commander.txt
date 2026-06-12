@@ -1,6 +1,6 @@
 // Magus Lucea Kane — COMMANDER
 // strategy=spellslinger themes=aggro,counters,tokens,equipment,draw,ramp tribal=-
-// total=99 lands=38 avgCMC=2.74
+// total=99 lands=38 avgCMC=2.8
 // categories: utility=7 removal=17 draw=13 ramp=13 win_condition=5 protection=4 board_wipe=2 land=38
 
 1 Magus Lucea Kane *CMDR*
@@ -12,7 +12,7 @@
 1 Biophagus
 1 Farseek
 1 Finale of Devastation
-1 Mind Stone
+1 Incubation Druid
 1 Nexos
 1 Cultivate
 1 Elementalist's Palette
@@ -37,18 +37,18 @@
 
 // ── removal (17) ──
 1 Walking Ballista
-1 Monstrous Rage
 1 Pest Infestation
-1 Pongify
-1 Vandalblast
 1 Aberrant
 1 Cankerbloom
+1 Hull Breach
 1 Kozilek's Command
 1 Red Sun's Twilight
 1 Steelbane Hydra
 1 Voracious Hydra
+1 Archdruid's Charm
 1 Beast Within
 1 Rampaging Yao Guai
+1 Staff of Compleation
 1 Earth Rumble
 1 Vorinclex // The Grand Evolution
 1 Flaming Tyrannosaurus
@@ -69,7 +69,7 @@
 1 Clamavus
 1 Kalonian Hydra
 1 Winged Hive Tyrant
-1 Avenger of Zendikar
+1 Old One Eye
 
 // ── utility (7) ──
 1 Hardened Scales
@@ -87,13 +87,13 @@
 1 Command Tower
 1 Eclipsed Realms
 1 Exotic Orchard
-10 Forest
+11 Forest
 1 Grand Coliseum
 1 Great Hall of the Biblioplex
 1 Hinterland Harbor
 1 Island
 1 Mana Confluence
-3 Mountain
+2 Mountain
 1 Nykthos, Shrine to Nyx
 1 Primal Beyond
 1 Rootbound Crag
