@@ -28,7 +28,9 @@ export type SynergyCategory =
   | 'graveyard'
   | 'token_generation'
   | 'land_matters'
-  | 'tribal_lands';
+  | 'tribal_lands'
+  | 'x_spells'
+  | 'five_colors';
 
 export interface CommanderSynergyProfile {
   /** Override generic CMC-based archetype detection */
@@ -56,6 +58,23 @@ export interface CommanderSynergyProfile {
 // ── Trigger Pattern Library ──────────────────────────────────────────────────
 
 export const TRIGGER_PATTERNS: Record<SynergyCategory, RegExp[]> = {
+  x_spells: [
+    /spells? with \{?x\}? in (?:its|their) mana costs?/i,
+    /spend this mana only to cast .*\{x\}/i,
+    /(?:cast|copy) (?:a|your next) spell with \{x\}/i,
+    /\{x\} spells? you cast/i,
+    /add x mana/i, // big-mana commanders (Vivi Ornitier) want X-spell sinks
+  ],
+  five_colors: [
+    /for each color of mana spent to cast/i,
+    /one mana of each color/i,
+    /mana of any combination of colors/i,
+    /\bconverge\b/i,
+    /a spell for each of its colors/i,
+    /for each of (?:that|the|this) spell'?s colors/i, // Ramos
+    /five colors? of mana/i,
+    /\{w\}.*\{u\}.*\{b\}.*\{r\}.*\{g\}/i, // any WUBRG pip run, incl. doubles
+  ],
   exile_cast: [
     /(?:whenever you )?cast (?:a |an )?(?:spell|card) from exile/i,
     /play (?:cards?|spells?) from exile/i,
@@ -172,6 +191,26 @@ const SYNERGY_REQUIREMENTS: Record<SynergyCategory, {
   searchPatterns: string[];
   scoreBonus: number;
 }> = {
+  x_spells: {
+    min: 10,
+    searchPatterns: [
+      '%with {x} in%mana cost%',
+      '%{x}{x}%',
+      '%where x is%',
+    ],
+    scoreBonus: 25,
+  },
+  five_colors: {
+    min: 6,
+    searchPatterns: [
+      '%one mana of each color%',
+      '%mana of any color%',
+      '%converge%',
+      '%sunburst%',
+      '%for each color%',
+    ],
+    scoreBonus: 25,
+  },
   exile_cast: {
     min: 10,
     searchPatterns: [
@@ -325,6 +364,10 @@ const SYNERGY_REQUIREMENTS: Record<SynergyCategory, {
 function inferArchetype(triggers: SynergyCategory[], hasAttackTrigger: boolean): Archetype | null {
   const has = (cat: SynergyCategory) => triggers.includes(cat);
 
+  // Five-color "colors matter" commanders (Ramos, Jodah) are goodstuff/counters
+  // shells, not spellslinger — even though their triggers mention casting spells.
+  if (has('five_colors')) return 'midrange';
+  if (has('x_spells')) return 'spellslinger';
   if (has('storm')) return 'spellslinger';
   if (has('spell_cast')) return 'spellslinger';
   if (has('creature_dies')) return 'aristocrats';
@@ -363,7 +406,8 @@ function inferArchetype(triggers: SynergyCategory[], hasAttackTrigger: boolean):
 export function analyzeCommander(
   oracleText: string,
   typeLine: string,
-  colorIdentity: string[]
+  colorIdentity: string[],
+  manaCost?: string
 ): CommanderSynergyProfile | null {
   if (!oracleText || oracleText.trim().length === 0) return null;
 
@@ -378,6 +422,37 @@ export function analyzeCommander(
         triggerCategories.push(category);
         break;
       }
+    }
+  }
+
+  // An {X} in the commander's own cost (Vivi Ornitier, Zaxara, Hydra lords)
+  // is a strong X-spells signal that oracle text alone misses.
+  if (!triggerCategories.includes('x_spells') && (manaCost || '').includes('{X}')) {
+    triggerCategories.push('x_spells');
+  }
+
+  // 5-color identity + "colors of mana" wording = colors-matter commander
+  // even when no single regex matched (oracle phrasing varies a lot).
+  if (
+    !triggerCategories.includes('five_colors')
+    && colorIdentity.length === 5
+    && /color of mana|each color|five color/i.test(text)
+  ) {
+    triggerCategories.push('five_colors');
+  }
+
+  // Suppress the counters theme when every counter mention is the commander
+  // buffing ITSELF (e.g. Vivi Ornitier "+1/+1 counter on Vivi"). A proliferate
+  // package is dead weight in those decks — 34K EDHREC Vivi lists agree.
+  if (triggerCategories.includes('counters')) {
+    const broadCounters = /(?:\+1\/\+1|charge|loyalty)? ?counters? on (?:each|target|another|all|any|up to|a |creatures|permanents)/i.test(text)
+      || /proliferate/i.test(text)
+      || /counters? you control|counters? placed|with counters? on (?:it|them)/i.test(text)
+      // Counters-as-resource commanders (Ramos: "Remove five +1/+1 counters
+      // from Ramos") genuinely want the counters package to refuel.
+      || /remove .{0,40}counters? from/i.test(text);
+    if (!broadCounters) {
+      triggerCategories.splice(triggerCategories.indexOf('counters'), 1);
     }
   }
 
@@ -574,6 +649,8 @@ function buildStrategyDescription(
     token_generation: 'Token producers and token payoffs (anthems, sacrifice)',
     land_matters: 'Landfall triggers, extra land drops, land sacrifice/recursion',
     tribal_lands: 'Tribal lands (Cavern of Souls, Unclaimed Territory, etc.)',
+    x_spells: 'X-cost spells, X-cost payoffs, and "spend on X" mana sources',
+    five_colors: 'Multicolor payoffs, converge/sunburst, and rainbow mana fixing',
   };
 
   for (const trigger of triggers) {

@@ -1,0 +1,93 @@
+// Sheoldred, the Apocalypse — BRAWL
+// strategy=midrange themes=artifacts,ramp,draw,sacrifice,tokens,equipment,tribal tribal=-
+// total=99 lands=44 avgCMC=3.36
+// categories: ramp=11 removal=11 draw=15 board_wipe=4 protection=2 win_condition=5 land=44 utility=7
+
+1 Sheoldred, the Apocalypse *CMDR*
+
+// ── ramp (11) ──
+1 Dark Ritual
+1 Greedy Freebooter
+1 Arcane Signet
+1 Collector's Vault
+1 Deadly Dispute
+1 Goldvein Pick
+1 Mind Stone
+1 Ruthless Knave
+1 Skullport Merchant
+1 Pitiless Plunderer
+1 Solemn Simulacrum
+
+// ── draw (15) ──
+1 Night's Whisper
+1 Sign in Blood
+1 Black Market Connections
+1 Blood Pact
+1 Braids, Arisen Nightmare
+1 Phyrexian Arena
+1 Read the Bones
+1 Scrawling Crawler
+1 Underworld Dreams
+1 Beseech the Mirror
+1 Erebos, God of the Dead
+1 Rankle, Master of Pranks
+1 Psychosis Crawler
+1 Seizan, Perverter of Truth
+1 Peer into the Abyss
+
+// ── removal (11) ──
+1 Fake Your Own Death
+1 Feed the Swarm
+1 Go for the Throat
+1 Infernal Grasp
+1 Aetherflux Reservoir
+1 Baleful Mastery
+1 Dread Presence
+1 Ob Nixilis, the Hate-Twisted
+1 Sidequest: Hunt the Mark // Yiazmat, Ultimate Mark
+1 The Mightstone and Weakstone
+1 Vilis, Broker of Blood
+
+// ── board_wipe (4) ──
+1 Bag of Holding
+1 Toxic Deluge
+1 Damnation
+1 Blood Money
+
+// ── protection (2) ──
+1 Lightning Greaves
+1 Swiftfoot Boots
+
+// ── win_condition (5) ──
+1 Not Dead After All
+1 Marauding Blight-Priest
+1 Gray Merchant of Asphodel
+1 Bolas's Citadel
+1 K'rrik, Son of Yawgmoth
+
+// ── utility (7) ──
+1 Reanimate
+1 Howling Mine
+1 Jet Medallion
+1 Dark Deal
+1 Vito, Thorn of the Dusk Rose
+1 Exquisite Blood
+1 Sanguine Bond
+
+// ── land (44) ──
+1 Bojuka Bog
+1 Cabal Stronghold
+1 Castle Locthwain
+1 Cavern of Souls
+1 Geier Reach Sanitarium
+1 Reliquary Tower
+1 Secluded Courtyard
+1 Spymaster's Vault
+2 Swamp
+28 Swamp
+1 Three Tree City
+1 Unclaimed Territory
+1 Malakir Rebirth // Malakir Mire
+1 Agadeem's Awakening // Agadeem, the Undercrypt
+1 Boggart Trawler // Boggart Bog
+1 Fell the Profane // Fell Mire

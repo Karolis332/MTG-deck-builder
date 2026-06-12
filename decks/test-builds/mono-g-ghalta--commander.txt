@@ -1,0 +1,94 @@
+// Ghalta, Primal Hunger — COMMANDER
+// strategy=aggro themes=ramp,artifacts,draw,tokens,aggro,equipment tribal=-
+// total=99 lands=42 avgCMC=3.25
+// categories: ramp=19 draw=15 removal=5 board_wipe=2 protection=4 win_condition=3 land=42 utility=9
+
+1 Ghalta, Primal Hunger *CMDR*
+
+// ── ramp (19) ──
+1 Elvish Mystic
+1 Fyndhorn Elves
+1 Llanowar Elves
+1 Sol Ring
+1 Arcane Signet
+1 Collector's Vault
+1 Fanatic of Rhonas
+1 Goldvein Pick
+1 Mind Stone
+1 Nature's Lore
+1 Rampant Growth
+1 Cultivate
+1 Llanowar Tribe
+1 Outcaster Trailblazer
+1 Selvala, Heart of the Wilds
+1 Topiary Stomper
+1 Wayward Swordtooth
+1 Hulking Raptor
+1 The Great Henge
+
+// ── draw (15) ──
+1 Skullclamp
+1 Idol of Oblivion
+1 Life's Legacy
+1 Colossal Majesty
+1 Garruk's Uprising
+1 Beast Whisperer
+1 Greater Good
+1 Guardian Project
+1 Momentous Fall
+1 Elder Gargaroth
+1 Garruk, Primal Hunter
+1 Return of the Wildspeaker
+1 Rishkar's Expertise
+1 Soul of the Harvest
+1 Vaultborn Tyrant
+
+// ── removal (5) ──
+1 Scavenging Ooze
+1 Beast Within
+1 Reclamation Sage
+1 Rhonas the Indomitable
+1 Thrashing Brontodon
+
+// ── board_wipe (2) ──
+1 Night of the Sweets' Revenge
+1 Season of Gathering
+
+// ── protection (4) ──
+1 Frenzied Baloth
+1 Heroic Intervention
+1 Lightning Greaves
+1 Swiftfoot Boots
+
+// ── win_condition (3) ──
+1 Goreclaw, Terror of Qal Sisma
+1 Overwhelming Stampede
+1 Surrak and Goreclaw
+
+// ── utility (9) ──
+1 Arbor Elf
+1 Ram Through
+1 Eternal Witness
+1 Fireshrieker
+1 Managorger Hydra
+1 Rhonas's Monument
+1 Surrak, the Hunt Caller
+1 Tangleweave Armor
+1 Unnatural Growth
+
+// ── land (42) ──
+1 Castle Garenbrig
+1 Cavern of Souls
+1 City of Brass
+28 Forest
+1 Mosswort Bridge
+1 Reliquary Tower
+1 Rogue's Passage
+1 Secluded Courtyard
+1 Shifting Woodland
+1 Three Tree City
+1 Unclaimed Territory
+1 Bala Ged Recovery // Bala Ged Sanctuary
+1 Bridgeworks Battle // Tanglespan Bridgeworks
+1 Khalni Ambush // Khalni Territory
+1 Disciple of Freyalise // Garden of Freyalise

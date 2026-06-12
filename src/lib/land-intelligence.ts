@@ -190,14 +190,34 @@ export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
       } catch { /* malformed CI — fall through */ }
     }
 
+    // Only cards that can actually be PLAYED as a land belong in the mana
+    // base: the front face must be a Land, or it must be a modal DFC whose
+    // back face is a land. Transform/meld cards with land back faces
+    // (Dowsing Dagger, Growing Rites, the Ojer gods) are NOT castable as
+    // lands and were polluting every generated mana base.
+    const frontType = (land.type_line || '').split('//')[0];
+    const frontIsLand = frontType.includes('Land');
+    const isModalDfc = land.layout === 'modal_dfc';
+    if (!frontIsLand && !isModalDfc) continue;
+
     let producesColors: string[] = [];
     try { producesColors = JSON.parse(land.produces_colors || '[]'); } catch { /* empty */ }
+    // land_classifications may be unpopulated — fall back to Scryfall's
+    // produced_mana so the color-match bonus still fires.
+    if (producesColors.length === 0 && land.produced_mana) {
+      try {
+        producesColors = (JSON.parse(land.produced_mana) as string[]).filter((c) => 'WUBRG'.includes(c));
+      } catch { /* empty */ }
+    }
 
     let tribalTypesArr: string[] = [];
     try { tribalTypesArr = JSON.parse(land.tribal_types || '[]'); } catch { /* empty */ }
 
     const tier = land.tier || 3;
-    const entersUntapped = (land.enters_untapped ?? 0) === 1;
+    const tapText = (land.oracle_text || '').toLowerCase();
+    const entersUntapped = land.enters_untapped != null
+      ? land.enters_untapped === 1
+      : !(tapText.includes('enters the battlefield tapped') || tapText.includes('enters tapped'));
     const category = land.land_category || 'utility';
     const reasons: string[] = [];
 
@@ -280,9 +300,11 @@ export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
       reasons.push(`meta ${Math.round(metaRate * 100)}%`);
     }
 
-    // ── MDFC bonus — spell//land modal cards are extremely versatile ──
-    if (land.type_line.includes('//')) {
-      score += 25;
+    // ── MDFC bonus — modal spell//land cards are versatile, but they are
+    // tapped-land equivalents at best. Small bonus only, and only for true
+    // modal DFCs (transforms are excluded above).
+    if (isModalDfc && !frontIsLand) {
+      score += 10;
       reasons.push('MDFC (spell+land)');
     }
 
@@ -357,15 +379,25 @@ export function buildOptimalLandBase(options: BuildOptions): LandBaseResult {
         ? Math.min(24, targetLandCount - 5)
         : Math.min(30, targetLandCount - 3);
 
-  // Select non-basic lands
+  // Select non-basic lands. MDFC spell//land cards are capped — EDHREC
+  // consensus decks run 2-4 of them, not 15+, because they are functionally
+  // tapped lands stapled to mediocre spells.
+  const MAX_MDFC_LANDS = 4;
   const selectedLands: Array<{ card: DbCard; quantity: number }> = [];
   const selectedNames = new Set<string>();
   let nonBasicCount = 0;
+  let mdfcCount = 0;
 
   for (const scored_land of scored) {
     if (nonBasicCount >= nonBasicTarget) break;
     if (selectedNames.has(scored_land.card.name)) continue;
     if (scored_land.score < 20) continue; // Skip very low scoring lands
+
+    const isMdfcSpellLand = !(scored_land.card.type_line || '').split('//')[0].includes('Land');
+    if (isMdfcSpellLand) {
+      if (mdfcCount >= MAX_MDFC_LANDS) continue;
+      mdfcCount++;
+    }
 
     const qty = isCommander ? 1 : Math.min(4, nonBasicTarget - nonBasicCount);
     selectedLands.push({ card: scored_land.card, quantity: qty });

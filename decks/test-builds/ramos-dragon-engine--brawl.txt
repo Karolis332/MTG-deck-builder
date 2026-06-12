@@ -1,0 +1,117 @@
+// Ramos, Dragon Engine — BRAWL
+// strategy=midrange themes=tokens,counters,artifacts,ramp,draw tribal=-
+// total=99 lands=40 avgCMC=3.31
+// categories: draw=9 ramp=20 utility=8 land=40 removal=12 board_wipe=4 protection=2 win_condition=4
+
+1 Ramos, Dragon Engine *CMDR*
+
+// ── ramp (20) ──
+1 An Offer You Can't Refuse
+1 Delighted Halfling
+1 Arcane Signet
+1 Deadly Dispute
+1 Fanatic of Rhonas
+1 Lotho, Corrupt Shirriff
+1 Chromatic Lantern
+1 Patchwork Banner
+1 Seize the Spoils
+1 Tireless Provisioner
+1 Big Score
+1 Kheru Goldkeeper
+1 Pitiless Plunderer
+1 Smothering Tithe
+1 Storm-Kiln Artist
+1 Unexpected Windfall
+1 Goldspan Dragon
+1 Revel in Riches
+1 Chromatic Orrery
+1 The Great Henge
+
+// ── draw (9) ──
+1 Ozolith, the Shattered Spire
+1 Black Market Connections
+1 Braids, Arisen Nightmare
+1 Inspiring Call
+1 Tireless Tracker
+1 Tribute to the World Tree
+1 Archmage Emeritus
+1 Guardian Project
+1 Tezzeret's Gambit
+
+// ── removal (12) ──
+1 Nature's Claim
+1 Pongify
+1 Rapid Hybridization
+1 The Ooze
+1 Abzan Charm
+1 Archdruid's Charm
+1 Loran of the Third Path
+1 Putrefy
+1 Reclamation Sage
+1 Staff of Compleation
+1 Stroke of Midnight
+1 Aetherflux Reservoir
+
+// ── board_wipe (4) ──
+1 Toxic Deluge
+1 Damnation
+1 Farewell
+1 Season of Gathering
+
+// ── protection (2) ──
+1 Swan Song
+1 Rhythm of the Wild
+
+// ── win_condition (4) ──
+1 Marionette Apprentice
+1 Bastion of Remembrance
+1 Mirkwood Bats
+1 Rampaging Baloths
+
+// ── utility (8) ──
+1 Hardened Scales
+1 Thrummingbird
+1 Branching Evolution
+1 Champion of Lambholt
+1 Evolution Sage
+1 Forgotten Ancient
+1 Cathars' Crusade
+1 Door to Nothingness
+
+// ── land (40) ──
+1 Aether Hub
+1 Ancient Ziggurat
+1 Baldur's Gate
+1 Cascading Cataracts
+1 Cavern of Souls
+1 Command Tower
+1 Conduit Pylons
+1 Crystal Grotto
+1 Echoing Cavern
+1 Eclipsed Realms
+3 Forest
+1 Gemstone Caverns
+1 Great Hall of the Biblioplex
+1 Great Hall of the Citadel
+1 Haven of the Spirit Dragon
+1 Hidden Grotto
+1 Island
+1 Maelstrom of the Spirit Dragon
+1 Mana Confluence
+1 Mirrex
+1 Mountain
+1 Nykthos, Shrine to Nyx
+1 Plains
+1 Plaza of Heroes
+1 Reflecting Pool
+1 Secluded Courtyard
+1 Spire of Industry
+3 Swamp
+1 Tarnished Citadel
+1 Temple of the Dragon Queen
+1 The Grey Havens
+1 The Mycosynth Gardens
+1 The World Tree
+1 Three Tree City
+1 Unclaimed Territory
+1 Voldaren Estate

@@ -40,6 +40,27 @@ import type { Archetype } from './deck-templates';
 // the rest get filtered by legality checks upstream).
 
 export const ARCHETYPE_PAYOFFS: Record<SynergyCategory, Set<string>> = {
+  x_spells: new Set([
+    // X-matters engines
+    'unbound flourishing', 'elementalist\'s palette', 'rosheen meanderer',
+    'zaxara, the exemplary', 'kalonian hydra',
+    // Premium X spells / finishers
+    'crackle with power', 'comet storm', 'jaya\'s immolating inferno',
+    'genesis hydra', 'hydroid krasis', 'shivan devastator', 'voracious hydra',
+    'steelbane hydra', 'mistcutter hydra', 'torment of hailfire', 'exsanguinate',
+    'finale of devastation', 'walking ballista', 'hangarback walker',
+    'expansion // explosion', 'mind grind', 'villainous wealth',
+  ]),
+  five_colors: new Set([
+    // Rainbow fixing that doubles as payoff
+    'chromatic lantern', 'chromatic orrery', 'the world tree', 'faeburrow elder',
+    'bloom tender', 'jegantha, the wellspring', 'prismatic geoscope',
+    // Colors-matter payoffs
+    'door to nothingness', 'maelstrom nexus', 'maelstrom archangel',
+    'progenitus', 'omnath, locus of all', 'niv-mizzet reborn',
+    'hero of precinct one', 'unite the coalition', 'jodah, archmage eternal',
+    'transguild courier', 'fusion elemental', 'conflux', 'painbow',
+  ]),
   artifact_synergy: new Set([
     // Cost reducers / cheaters
     'foundry inspector', 'inspiring statuary', 'cloud key', 'etherium sculptor',
@@ -703,15 +724,28 @@ export function pickByRole(opts: PickByRoleOptions): PickByRoleResult {
   //
   // Fallback: if we can't hit nonLandTarget with allowlisted picks, do a
   // second sweep that relaxes the filter so the deck still ships 99 cards.
+  // Soft caps keep Pass B from drowning the deck in one role — without them
+  // a bounce-heavy color fills 19 "removal" slots or 28 ramp (observed in
+  // mono-U Orvar / Thrasios baselines). Quota + headroom, never below quota.
+  const roleCaps: Record<string, number> = {
+    ramp: quotas.ramp + 4,
+    draw: quotas.draw + 5,
+    removal: quotas.removal + 3,
+    board_wipe: quotas.board_wipe + 1,
+    protection: quotas.protection + 2,
+  };
+  const underCap = (role: string): boolean =>
+    roleCaps[role] === undefined || (roleFills[role] ?? 0) < roleCaps[role];
+
   const passBFilter = (c: Classified): { accept: boolean; role: PickedRoleCard['role']; reason: string } => {
     if (c.isPayoff) {
       return { accept: true, role: 'payoff', reason: `extra payoff: ${c.card.name}` };
     }
-    if (c.categories.has('ramp')) return { accept: true, role: 'ramp', reason: `extra ramp: ${c.card.name}` };
-    if (c.categories.has('draw')) return { accept: true, role: 'draw', reason: `extra draw: ${c.card.name}` };
-    if (c.categories.has('removal')) return { accept: true, role: 'removal', reason: `extra removal: ${c.card.name}` };
-    if (c.categories.has('board_wipe')) return { accept: true, role: 'board_wipe', reason: `extra wipe: ${c.card.name}` };
-    if (c.categories.has('protection')) return { accept: true, role: 'protection', reason: `extra protection: ${c.card.name}` };
+    if (c.categories.has('ramp') && underCap('ramp')) return { accept: true, role: 'ramp', reason: `extra ramp: ${c.card.name}` };
+    if (c.categories.has('draw') && underCap('draw')) return { accept: true, role: 'draw', reason: `extra draw: ${c.card.name}` };
+    if (c.categories.has('removal') && underCap('removal')) return { accept: true, role: 'removal', reason: `extra removal: ${c.card.name}` };
+    if (c.categories.has('board_wipe') && underCap('board_wipe')) return { accept: true, role: 'board_wipe', reason: `extra wipe: ${c.card.name}` };
+    if (c.categories.has('protection') && underCap('protection')) return { accept: true, role: 'protection', reason: `extra protection: ${c.card.name}` };
     if (c.categories.has('win_condition')) return { accept: true, role: 'win_condition', reason: `finisher: ${c.card.name}` };
     if (c.categories.has('synergy')) return { accept: true, role: 'synergy', reason: `commander synergy: ${c.card.name}` };
     if (passBAllowed && passBAllowed.has(c.card.name)) {
@@ -720,13 +754,15 @@ export function pickByRole(opts: PickByRoleOptions): PickByRoleResult {
     return { accept: false, role: 'utility', reason: `rejected filler: ${c.card.name}` };
   };
 
-  // First sweep: strict filter
+  // First sweep: strict filter (track role fills so caps engage)
   for (const c of classified) {
     if (totalPicked >= nonLandTarget) break;
     if (pickedNames.has(c.card.name)) continue;
     const verdict = passBFilter(c);
     if (!verdict.accept) continue;
-    takePick(c, verdict.role, verdict.reason);
+    if (takePick(c, verdict.role, verdict.reason) && roleFills[verdict.role] !== undefined) {
+      roleFills[verdict.role] += 1;
+    }
   }
 
   // Fallback sweep: if still short, take best-scored unclassified cards so

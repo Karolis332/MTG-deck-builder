@@ -16,7 +16,17 @@ import re
 import sqlite3
 import sys
 
-DB_DEFAULT = os.path.join(os.path.dirname(__file__), "..", "data", "mtg-deck-builder.db")
+def _default_db() -> str:
+    """Prefer the production Electron DB (APPDATA) over the legacy repo-local copy."""
+    appdata = os.environ.get("APPDATA")
+    if appdata:
+        electron_db = os.path.join(appdata, "the-black-grimoire", "data", "mtg-deck-builder.db")
+        if os.path.exists(electron_db):
+            return electron_db
+    return os.path.join(os.path.dirname(__file__), "..", "data", "mtg-deck-builder.db")
+
+
+DB_DEFAULT = _default_db()
 
 
 def get_conn(db_path: str) -> sqlite3.Connection:

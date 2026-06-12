@@ -1,0 +1,103 @@
+// Vivi Ornitier — BRAWL
+// strategy=spellslinger themes=counters,artifacts,draw,flying,spellslinger,tokens,ramp,tribal,control tribal=-
+// total=99 lands=39 avgCMC=2.95
+// categories: removal=14 draw=18 win_condition=5 utility=7 ramp=11 board_wipe=2 protection=3 land=39
+
+1 Vivi Ornitier *CMDR*
+
+// ── ramp (11) ──
+1 An Offer You Can't Refuse
+1 Arcane Signet
+1 Talisman of Creativity
+1 The Emperor of Palamecia // The Lord Master of Hell
+1 Electro, Assaulting Battery
+1 Jeska's Will
+1 Ashling, Flame Dancer
+1 Galazeth Prismari
+1 Solemn Simulacrum
+1 Storm-Kiln Artist
+1 Goldspan Dragon
+
+// ── draw (18) ──
+1 Mishra's Bauble
+1 Brainstorm
+1 Consider
+1 Curiosity
+1 Faithless Looting
+1 Mystic Remora
+1 Opt
+1 Ponder
+1 Preordain
+1 Baral, Chief of Compliance
+1 Frantic Search
+1 Rhystic Study
+1 Sai, Master Thopterist
+1 Archmage Emeritus
+1 Ral, Crackling Wit
+1 Ray Fillet, Man Ray
+1 Tezzeret's Gambit
+1 Archmage of Runes
+
+// ── removal (14) ──
+1 Ghost Vacuum
+1 Lightning Bolt
+1 Pongify
+1 Rapid Hybridization
+1 Planar Incision
+1 The Ooze
+1 Warping Wail
+1 Prismari Command
+1 Ravenform
+1 Staff of Compleation
+1 Mizzix's Mastery
+1 Urabrask // The Great Work
+1 Niv-Mizzet, Parun
+1 Hullbreaker Horror
+
+// ── board_wipe (2) ──
+1 Cyclonic Rift
+1 Blasphemous Act
+
+// ── protection (3) ──
+1 Swan Song
+1 Counterspell
+1 Negate
+
+// ── win_condition (5) ──
+1 Guttersnipe
+1 Murmuring Mystic
+1 Talrand, Sky Summoner
+1 Tekuthal, Inquiry Dominus
+1 Niv-Mizzet, Visionary
+
+// ── utility (7) ──
+1 Goblin Electromancer
+1 Thrummingbird
+1 Young Pyromancer
+1 Dualcaster Mage
+1 Inexorable Tide
+1 Contagion Engine
+1 Thousand-Year Storm
+
+// ── land (39) ──
+1 Command Tower
+12 Island
+1 Jidoor, Aristocratic Capital // Overture
+1 Lindblum, Industrial Regency // Mage Siege
+8 Mountain
+1 Riverglide Pathway // Lavaglide Pathway
+1 Dowsing Dagger // Lost Vale
+1 Shatterskull Smashing // Shatterskull, the Hammer Pass
+1 Brass's Tunnel-Grinder // Tecutlan, the Searing Rift
+1 Glasspool Mimic // Glasspool Shore
+1 Hydroelectric Specimen // Hydroelectric Laboratory
+1 Kazuul's Fury // Kazuul's Cliffs
+1 Matzalantli, the Great Door // The Core
+1 Silundi Vision // Silundi Isle
+1 Sink into Stupor // Soporific Springs
+1 Sundering Eruption // Volcanic Fissure
+1 Valakut Awakening // Valakut Stoneforge
+1 Ojer Axonil, Deepest Might // Temple of Power
+1 Primal Amulet // Primal Wellspring
+1 Pinnacle Monk // Mystic Peak
+1 Sea Gate Restoration // Sea Gate, Reborn

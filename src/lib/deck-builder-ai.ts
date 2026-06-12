@@ -6,7 +6,7 @@ import { getEdhrecRecommendations, getEdhrecThemeCards } from './edhrec';
 import type { EdhrecRecommendation } from './edhrec';
 import { getTemplate, getScaledCurve, mergeWithCommanderProfile } from './deck-templates';
 import type { Archetype } from './deck-templates';
-import { analyzeCommander } from './commander-synergy';
+import { analyzeCommander, mergeProfiles } from './commander-synergy';
 import type { CommanderSynergyProfile } from './commander-synergy';
 import { buildOptimalLandBase, isFetchLandRelevant } from './land-intelligence';
 import { getCFRecommendations, resolveCFToDbCards } from './cf-api-client';
@@ -306,6 +306,7 @@ export interface BuildOptions {
   strategy?: string; // optional archetype hint: 'aggro', 'control', 'midrange', 'combo'
   useCollection?: boolean; // prefer cards from user's collection
   commanderName?: string; // for commander format
+  partnerName?: string; // second commander for partner pairs (Thrasios + Tymna)
   powerLevel?: 'casual' | 'optimized' | 'cedh';
   userId?: number; // for commander-arsenal collection substitutes
 }
@@ -377,13 +378,52 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
           colors = JSON.parse(cmdCard.color_identity);
         } catch {}
       }
+      // Refuse to build around a commander that isn't legal in the target
+      // format (e.g. Vivi Ornitier is banned in Arena Brawl; Warhammer 40K
+      // commanders don't exist on Arena at all).
+      if (format && format !== '1v1') {
+        let status: string | undefined;
+        try {
+          status = cmdCard.legalities
+            ? (JSON.parse(cmdCard.legalities) as Record<string, string>)[getLegalityKey(format)]
+            : undefined;
+        } catch { /* malformed legalities — treat as unknown */ }
+        if (status !== 'legal' && status !== 'restricted') {
+          throw new Error(
+            `${cmdCard.name} is not legal as a commander in ${format} (status: ${status ?? 'unknown'})`
+          );
+        }
+      }
+    }
+  }
+
+  // Partner support: union the partner's color identity and exclude it from
+  // the candidate pool. Synergy profiles are merged later in autoBuildDeck.
+  let partnerCard: DbCard | null = null;
+  if (options.partnerName && commanderCard) {
+    const pCard = db.prepare(`
+      SELECT * FROM cards WHERE name = ? COLLATE NOCASE
+      ORDER BY
+        CASE WHEN mana_cost IS NOT NULL AND mana_cost != '' THEN 0 ELSE 1 END,
+        CASE WHEN type_line LIKE '%Card //%' OR type_line = 'Card' THEN 1 ELSE 0 END,
+        updated_at DESC
+      LIMIT 1
+    `).get(options.partnerName) as DbCard | undefined;
+    if (pCard) {
+      partnerCard = pCard;
+      try {
+        const pColors = JSON.parse(pCard.color_identity || '[]') as string[];
+        colors = Array.from(new Set([...colors, ...pColors]));
+      } catch { /* keep primary colors */ }
     }
   }
 
   const targetSize = DEFAULT_DECK_SIZE[format] || DEFAULT_DECK_SIZE.default;
   const targetLands = DEFAULT_LAND_COUNT[format] || DEFAULT_LAND_COUNT.default;
   const isCommander = format === 'commander' || format === 'brawl' || format === 'standardbrawl';
-  const nonLandTarget = targetSize - targetLands - (isCommander && commanderName ? 1 : 0);
+  const nonLandTarget = targetSize - targetLands
+    - (isCommander && commanderName ? 1 : 0)
+    - (isCommander && partnerCard ? 1 : 0);
   const maxCopies = isCommander ? 1 : 4;
 
   // Build color identity exclusion — cards must fit within the deck's colors
@@ -397,10 +437,11 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
     ? `AND c.legalities LIKE '%"${getLegalityKey(format)}":"legal"%'`
     : '';
 
-  // Exclude commander from the 99
-  const commanderExclude = commanderName
-    ? `AND c.name != '${commanderName.replace(/'/g, "''")}'`
-    : '';
+  // Exclude commander (and partner) from the 99
+  const commanderExclude = [
+    commanderName ? `AND c.name != '${commanderName.replace(/'/g, "''")}'` : '',
+    partnerCard ? `AND c.name != '${partnerCard.name.replace(/'/g, "''")}'` : '',
+  ].join(' ');
 
   // ── Collection quantity map (name-based to handle different printings) ────
   const ownedQty = new Map<string, number>();
@@ -569,7 +610,26 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
       let ci: string[] = [];
       try { ci = cmdRow.color_identity ? JSON.parse(cmdRow.color_identity) : []; } catch {}
 
-      commanderProfile = analyzeCommander(fullOracleText, cmdRow.type_line, ci);
+      commanderProfile = analyzeCommander(
+        fullOracleText, cmdRow.type_line, ci, commanderCard?.mana_cost || undefined,
+      );
+
+      // Partner pair: analyze the second commander and merge both profiles
+      // so the deck serves BOTH halves (e.g. Thrasios ramp/draw + Tymna
+      // lifelink/draw) instead of silently building mono-primary.
+      if (partnerCard) {
+        const partnerProfile = analyzeCommander(
+          partnerCard.oracle_text || '',
+          partnerCard.type_line || '',
+          colors,
+          partnerCard.mana_cost || undefined,
+        );
+        if (commanderProfile && partnerProfile) {
+          commanderProfile = mergeProfiles(commanderProfile, partnerProfile);
+        } else if (partnerProfile) {
+          commanderProfile = partnerProfile;
+        }
+      }
     }
   }
 
@@ -596,11 +656,28 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
   const seenNames = new Set<string>();
   const pool: DbCard[] = [];
 
+  // Format-legality guard for injected candidates. The base SQL pool filters
+  // via legalityFilter, but EDHREC/tribal/CF injection paths resolved cards
+  // by name with no legality check — which is how 40K cards (Tervigon,
+  // Broodlord) leaked into Brawl decks.
+  const poolLegalityKey = format && format !== '1v1' ? getLegalityKey(format) : null;
+  const cardLegalInFormat = (card: DbCard): boolean => {
+    if (!poolLegalityKey) return true;
+    if (!card.legalities) return false;
+    try {
+      const status = (JSON.parse(card.legalities) as Record<string, string>)[poolLegalityKey];
+      return status === 'legal' || status === 'restricted';
+    } catch {
+      return false;
+    }
+  };
+
   // EDHREC cards go first — these are specifically recommended for this commander
   // When building from collection, skip cards the user doesn't own
   for (const card of edhrecResolvedCards) {
     if (!seenNames.has(card.name)) {
       if (useCollection && !ownedNames.has(card.name)) continue;
+      if (!cardLegalInFormat(card)) continue;
       seenNames.add(card.name);
       pool.push(card);
     }
@@ -610,6 +687,7 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
   for (const card of tribalCards) {
     if (!seenNames.has(card.name)) {
       if (useCollection && !ownedNames.has(card.name)) continue;
+      if (!cardLegalInFormat(card)) continue;
       seenNames.add(card.name);
       pool.push(card);
     }
@@ -768,6 +846,7 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
         for (const { card } of cfCards) {
           if (!seenNames.has(card.name)) {
             if (useCollection && !ownedNames.has(card.name)) continue;
+            if (!cardLegalInFormat(card)) continue;
             seenNames.add(card.name);
             pool.push(card);
           }
@@ -795,10 +874,13 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
     if (highIncCards.length > 0) {
       const namePlaceholders = highIncCards.map(() => '?').join(',');
       try {
+        // NOTE: alias `c` is required — colorExcludeFilter/legalityFilter
+        // reference c.*; without it this query threw and the catch silently
+        // disabled stat injection for every build.
         const injected = db.prepare(`
-          SELECT * FROM cards
-          WHERE name IN (${namePlaceholders})
-          ${colorExcludeFilter}
+          SELECT c.* FROM cards c
+          WHERE c.name IN (${namePlaceholders})
+          ${colorExcludeFilter ? `AND ${colorExcludeFilter}` : ''}
           ${legalityFilter}
           LIMIT 100
         `).all(...highIncCards.map(s => s.cardName)) as DbCard[];
@@ -962,6 +1044,22 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
       // Mana producers fuel more casts per turn
       if (text.includes('add {') || text.includes('add one mana')) score += 12;
       if (text.includes('create a treasure') || text.includes('create two treasure')) score += 10;
+    }
+
+    // ── Commander-mechanic bonuses needing card fields, not oracle regexes ──
+    if (commanderProfile?.triggerCategories.includes('x_spells')) {
+      // X-cost spells are the whole point of Vivi / Magus Lucea Kane / Zaxara
+      if ((card.mana_cost || '').includes('{X}')) score += 30;
+      if (text.includes('{x}') || text.includes('x in its mana cost') || text.includes('x in their mana cost')) score += 15;
+    }
+    if (commanderProfile?.triggerCategories.includes('five_colors')) {
+      // "Colors matter" commanders (Ramos, Jodah, Najeela) want multicolor
+      // cards and rainbow fixing, not generic mono-color goodstuff.
+      let ciCount = 0;
+      try { ciCount = (JSON.parse(card.color_identity || '[]') as string[]).length; } catch { /* skip */ }
+      if (ciCount >= 4) score += 30;
+      else if (ciCount === 3) score += 15;
+      if (/converge|sunburst|one mana of each color|mana of any color|each color of mana spent|five colors?/.test(text)) score += 20;
     }
 
     // ── Strategy fit ──
@@ -1173,6 +1271,26 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
       );
       if (analysis) {
         arsenal = analysis.arsenal;
+      }
+      // Partner pair: merge the partner's arsenal so both halves of the
+      // pairing contribute curated payoffs.
+      if (options.partnerName) {
+        const partnerAnalysis = analyzeCommanderForBuild(
+          options.partnerName,
+          options.userId,
+          options.format,
+          150,
+        );
+        if (partnerAnalysis) {
+          const seen = new Set(arsenal.map((a) => a.card.name));
+          for (const a of partnerAnalysis.arsenal) {
+            if (!seen.has(a.card.name)) {
+              seen.add(a.card.name);
+              arsenal.push(a);
+            }
+          }
+          arsenal.sort((a, b) => b.priority - a.priority);
+        }
       }
     } catch {
       // analysis failure is non-fatal — fall through to pool-only picking
@@ -1528,9 +1646,18 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
       LIMIT 500
     `).all() as DbCard[];
 
+    let fallbackMdfcCount = 0;
     for (const land of landPool) {
       if (landsAdded >= nonBasicTarget) break;
       if (pickedNames.has(land.name)) continue;
+
+      // Front face must be a playable Land — transform/meld backs don't count.
+      // Modal DFC spell//land cards are allowed but capped at 4.
+      const frontIsLand = (land.type_line || '').split('//')[0].includes('Land');
+      if (!frontIsLand) {
+        if (land.layout !== 'modal_dfc' || fallbackMdfcCount >= 4) continue;
+        fallbackMdfcCount++;
+      }
 
       // Skip fetch lands that can't fetch on-color basics (e.g. Flooded Strand in RG)
       if (!isFetchLandRelevant(land.oracle_text || '', colors)) continue;

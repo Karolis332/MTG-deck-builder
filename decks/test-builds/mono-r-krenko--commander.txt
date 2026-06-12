@@ -1,0 +1,94 @@
+// Krenko, Mob Boss — COMMANDER
+// strategy=midrange themes=tribal tribal=goblin
+// total=99 lands=38 avgCMC=2.79
+// categories: ramp=11 removal=10 draw=10 board_wipe=4 protection=3 win_condition=6 utility=17 land=38
+
+1 Krenko, Mob Boss *CMDR*
+
+// ── ramp (11) ──
+1 Brightstone Ritual
+1 Impulsive Pilferer
+1 Reckless Lackey
+1 Skirk Prospector
+1 Sol Ring
+1 Arcane Signet
+1 Battle Hymn
+1 Mind Stone
+1 Howlsquad Heavy
+1 Patriar's Seal
+1 Solemn Simulacrum
+
+// ── draw (10) ──
+1 Faithless Looting
+1 Skullclamp
+1 Thrill of Possibility
+1 Gempalm Incinerator
+1 Goblin Matron
+1 Hazoret's Monument
+1 Herald's Horn
+1 Staff of Domination
+1 Goblin Ringleader
+1 Vanquisher's Banner
+
+// ── removal (10) ──
+1 Goblin Grenade
+1 Vandalblast
+1 Abrade
+1 Goblin Bombardment
+1 Chaos Warp
+1 Goblin Sharpshooter
+1 Pashalik Mons
+1 Goblin Trashmaster
+1 Siege-Gang Lieutenant
+1 Siege-Gang Commander
+
+// ── board_wipe (4) ──
+1 Descent into Avernus
+1 Fiery Confluence
+1 Village Pillagers
+1 Blasphemous Act
+
+// ── protection (3) ──
+1 Hexing Squelcher
+1 Lightning Greaves
+1 Swiftfoot Boots
+
+// ── win_condition (6) ──
+1 Impact Tremors
+1 General Kreat, the Boltbringer
+1 Purphoros, God of the Forge
+1 Brash Taunter
+1 Kiki-Jiki, Mirror Breaker
+1 Muxus, Goblin Grandee
+
+// ── utility (17) ──
+1 Goblin Chirurgeon
+1 Battle Cry Goblin
+1 Conspicuous Snoop
+1 Dragon Fodder
+1 Goblin Instigator
+1 Goblin Recruiter
+1 Krenko's Command
+1 Rundvelt Hordemaster
+1 Warren Instigator
+1 Goblin Chieftain
+1 Goblin King
+1 Goblin Warchief
+1 Hobgoblin Bandit Lord
+1 Hordeling Outburst
+1 Krenko, Tin Street Kingpin
+1 Legion Warboss
+1 Treasure Nabber
+
+// ── land (38) ──
+1 Arena of Glory
+1 Cavern of Souls
+1 City of Brass
+28 Mountain
+1 Secluded Courtyard
+1 Three Tree City
+1 Unclaimed Territory
+1 Shatterskull Smashing // Shatterskull, the Hammer Pass
+1 Sundering Eruption // Volcanic Fissure
+1 Valakut Awakening // Valakut Stoneforge
+1 Pinnacle Monk // Mystic Peak

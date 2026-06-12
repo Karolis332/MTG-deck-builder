@@ -99,3 +99,8 @@ test-data-export-import/
 check_community_cards.py
 check_db_data.py
 =4.12.0
+
+# Deck-build test artifacts (regenerable)
+decks/test-builds/.edhrec-raw/
+decks/test-builds/results.json
+decks/test-builds/edhrec-reference.json

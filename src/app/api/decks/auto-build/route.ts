@@ -17,6 +17,7 @@ export async function POST(request: NextRequest) {
       strategy,
       useCollection = false,
       commanderName,
+      partnerName,
       powerLevel,
     } = body;
 
@@ -43,6 +44,7 @@ export async function POST(request: NextRequest) {
       strategy,
       useCollection,
       commanderName: isCmdFormat ? commanderName : undefined,
+      partnerName: isCmdFormat && typeof partnerName === 'string' && partnerName.trim() ? partnerName.trim() : undefined,
       powerLevel: validPowerLevels.includes(powerLevel) ? powerLevel : undefined,
     });
 
@@ -61,11 +63,17 @@ export async function POST(request: NextRequest) {
     const deck = createDeck(name, format, description, authUser.userId);
     const deckId = Number(deck.id);
 
-    // Add commander to commander zone
+    // Add commander (and partner) to commander zone
     if (isCmdFormat && commanderName) {
       const cmdCard = getCardByName(commanderName) as { id: string } | undefined;
       if (cmdCard) {
         addCardToDeck(deckId, cmdCard.id, 1, 'commander');
+      }
+      if (typeof partnerName === 'string' && partnerName.trim()) {
+        const pCard = getCardByName(partnerName.trim()) as { id: string } | undefined;
+        if (pCard) {
+          addCardToDeck(deckId, pCard.id, 1, 'commander');
+        }
       }
     }
 

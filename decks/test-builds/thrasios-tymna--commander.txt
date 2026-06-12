@@ -1,0 +1,116 @@
+// Thrasios, Triton Hero + Tymna the Weaver — COMMANDER
+// strategy=control themes=control,ramp,draw,tokens,artifacts,equipment tribal=-
+// total=99 lands=42 avgCMC=2.6
+// categories: ramp=18 draw=9 removal=16 board_wipe=6 protection=5 win_condition=2 land=42 utility=1
+
+1 Thrasios, Triton Hero *CMDR*
+1 Tymna the Weaver *CMDR* (requested partner — see note)
+
+// ── ramp (18) ──
+1 Chrome Mox
+1 Lotus Petal
+1 Mox Amber
+1 Mox Diamond
+1 An Offer You Can't Refuse
+1 Birds of Paradise
+1 Crop Rotation
+1 Mana Vault
+1 Sol Ring
+1 Arcane Signet
+1 Deadly Dispute
+1 Mind Stone
+1 Talisman of Hierarchy
+1 Chord of Calling
+1 Commander's Sphere
+1 Smothering Tithe
+1 Solemn Simulacrum
+1 The Great Henge
+
+// ── draw (9) ──
+1 Mystic Remora
+1 Sensei's Divining Top
+1 Veil of Summer
+1 Idol of Oblivion
+1 Black Market Connections
+1 Garruk's Uprising
+1 Phyrexian Arena
+1 Rhystic Study
+1 The One Ring
+
+// ── removal (16) ──
+1 Pongify
+1 Rapid Hybridization
+1 Swords to Plowshares
+1 Feed the Swarm
+1 Infernal Grasp
+1 Reality Shift
+1 Snap
+1 Anguished Unmaking
+1 Beast Within
+1 Generous Gift
+1 Loran of the Third Path
+1 Putrefy
+1 Reclamation Sage
+1 Stroke of Midnight
+1 Deadly Rollick
+1 Freyalise, Llanowar's Fury
+
+// ── board_wipe (6) ──
+1 Cyclonic Rift
+1 Damnation
+1 Austere Command
+1 Elspeth, Sun's Champion
+1 Farewell
+1 Season of Gathering
+
+// ── protection (5) ──
+1 Pact of Negation
+1 Mental Misstep
+1 Swan Song
+1 Fierce Guardianship
+1 Force of Will
+
+// ── win_condition (2) ──
+1 Mirkwood Bats
+1 Seedborn Muse
+
+// ── utility (1) ──
+1 Flusterstorm
+
+// ── land (42) ──
+1 Bayou
+1 Boseiju, Who Endures
+1 Breeding Pool
+1 Cavern of Souls
+1 City of Brass
+1 Command Tower
+1 Eclipsed Realms
+1 Exotic Orchard
+1 Forbidden Orchard
+5 Forest
+1 Gemstone Caverns
+1 Godless Shrine
+1 Grand Coliseum
+1 Great Hall of the Biblioplex
+2 Island
+1 Mana Confluence
+1 Nykthos, Shrine to Nyx
+1 Opal Palace
+1 Otawara, Soaring City
+1 Overgrown Tomb
+1 Plains
+1 Plaza of Heroes
+1 Primal Beyond
+1 Reflecting Pool
+1 Savannah
+1 Secluded Courtyard
+1 Spire of Industry
+2 Swamp
+1 Talon Gates of Madara
+1 Temple Garden
+1 Temple of the Dragon Queen
+1 The Mycosynth Gardens
+1 Three Tree City
+1 Tropical Island
+1 Unclaimed Territory
+1 Watery Grave

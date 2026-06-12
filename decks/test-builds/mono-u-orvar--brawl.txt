@@ -1,0 +1,94 @@
+// Orvar, the All-Form — BRAWL
+// strategy=spellslinger themes=tokens,artifacts,control,flying,spellslinger,draw,ramp,counters,enchantments tribal=-
+// total=99 lands=40 avgCMC=3.29
+// categories: draw=13 win_condition=7 utility=7 ramp=8 removal=19 board_wipe=2 protection=3 land=40
+
+1 Orvar, the All-Form *CMDR*
+
+// ── ramp (8) ──
+1 An Offer You Can't Refuse
+1 Arcane Signet
+1 Collector's Vault
+1 Mind Stone
+1 Solemn Simulacrum
+1 Gilded Lotus
+1 Spell Swindle
+1 Coveted Jewel
+
+// ── draw (13) ──
+1 Mystic Remora
+1 Three Steps Ahead
+1 Baral, Chief of Compliance
+1 Ominous Seas
+1 Aether Channeler
+1 Forensic Gadgeteer
+1 Rhystic Study
+1 Sai, Master Thopterist
+1 The Mechanist, Aerial Artisan
+1 Archmage Emeritus
+1 Archmage of Runes
+1 Mulldrifter
+1 Shark Typhoon
+
+// ── removal (19) ──
+1 Essence Flux
+1 Fleeting Distraction
+1 Ghost Vacuum
+1 Pongify
+1 Rapid Hybridization
+1 Bumbleflower's Sharepot
+1 Kozilek's Command
+1 Resculpt
+1 Teferi's Time Twist
+1 The Ooze
+1 Warping Wail
+1 Ravenform
+1 Staff of Compleation
+1 Transmogrifying Wand
+1 Cryptic Command
+1 Venser, Shaper Savant
+1 Zuko's Exile
+1 Sublime Epiphany
+1 Hullbreaker Horror
+
+// ── board_wipe (2) ──
+1 Cyclonic Rift
+1 Extinguisher Battleship
+
+// ── protection (3) ──
+1 Dive Down
+1 Swan Song
+1 Counterspell
+
+// ── win_condition (7) ──
+1 Irenicus's Vile Duplication
+1 Murmuring Mystic
+1 Talrand, Sky Summoner
+1 Docent of Perfection // Final Iteration
+1 Precursor Golem
+1 Shipwreck Dowser
+1 Jin-Gitaxias, Progress Tyrant
+
+// ── utility (7) ──
+1 Hangarback Walker
+1 Archaeomancer
+1 Master of Waves
+1 Phyrexian Metamorph
+1 Spark Double
+1 Vesuvan Duplimancy
+1 Mind's Desire
+
+// ── land (40) ──
+1 Cavern of Souls
+1 Cephalid Coliseum
+28 Island
+1 Mistrise Village
+1 Mystic Sanctuary
+1 Reliquary Tower
+1 Secluded Courtyard
+1 Three Tree City
+1 Unclaimed Territory
+1 Glasspool Mimic // Glasspool Shore
+1 Hydroelectric Specimen // Hydroelectric Laboratory
+1 Sink into Stupor // Soporific Springs
+1 Sea Gate Restoration // Sea Gate, Reborn

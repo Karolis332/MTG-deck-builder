@@ -1,0 +1,94 @@
+// Heliod, Sun-Crowned — COMMANDER
+// strategy=midrange themes=enchantments,artifacts,counters,draw,lifegain,equipment,spellslinger,aggro,tokens tribal=-
+// total=99 lands=38 avgCMC=2.95
+// categories: utility=10 win_condition=9 removal=13 draw=12 ramp=10 board_wipe=4 protection=3 land=38
+
+1 Heliod, Sun-Crowned *CMDR*
+
+// ── ramp (10) ──
+1 Land Tax
+1 Sol Ring
+1 Arcane Signet
+1 Charitable Levy
+1 Idol of False Gods
+1 Knight of the White Orchid
+1 Mind Stone
+1 Altar of the Pantheon
+1 Pristine Talisman
+1 Smothering Tithe
+
+// ── draw (12) ──
+1 Dawn of Hope
+1 Dusk Legion Duelist
+1 Kor Spiritdancer
+1 Rune of Sustenance
+1 Syr Ginger, the Meal Ender
+1 Enduring Innocence
+1 Mesa Enchantress
+1 Pearl-Ear, Imperial Advisor
+1 Exemplar of Light
+1 Mangara, the Diplomat
+1 Sigarda's Splendor
+1 Elspeth Resplendent
+
+// ── removal (13) ──
+1 Walking Ballista
+1 Path to Exile
+1 Requisition Raid
+1 Swords to Plowshares
+1 Disenchant
+1 Heliod's Intervention
+1 Sunder the Gateway
+1 Aura of Silence
+1 Generous Gift
+1 Loran of the Third Path
+1 Staff of Compleation
+1 Aetherflux Reservoir
+1 Triskelion
+
+// ── board_wipe (4) ──
+1 Dismantling Wave
+1 Sunfall
+1 Austere Command
+1 Farewell
+
+// ── protection (3) ──
+1 Alseid of Life's Bounty
+1 Shadowspear
+1 Swiftfoot Boots
+
+// ── win_condition (9) ──
+1 Blind Obedience
+1 Archon of Sun's Grace
+1 Angel of Invention
+1 Archangel of Thune
+1 Sigil of the Empty Throne
+1 Summon: Good King Mog XII
+1 Sunscorch Regent
+1 Felidar Sovereign
+1 Nykthos Paragon
+
+// ── utility (10) ──
+1 Serra Ascendant
+1 Soul Warden
+1 Soul's Attendant
+1 Ajani's Pridemate
+1 Daxos, Blessed by the Sun
+1 Voice of the Blessed
+1 Envoy of the Ancestors
+1 Ajani, Strength of the Pride
+1 Rhox Faithmender
+1 Well of Lost Dreams
+
+// ── land (38) ──
+1 Cavern of Souls
+1 City of Brass
+1 Flagstones of Trokair
+28 Plains
+1 Secluded Courtyard
+1 Three Tree City
+1 Unclaimed Territory
+1 Razorgrass Ambush // Razorgrass Field
+1 Sejiri Shelter // Sejiri Glacier
+1 Witch Enchanter // Witch-Blessed Meadow
+1 Ondu Inversion // Ondu Skyruins
