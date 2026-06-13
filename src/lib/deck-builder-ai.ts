@@ -22,6 +22,8 @@ import { analyzeCommanderForBuild } from './commander-analysis';
 import type { ArsenalCard } from './commander-analysis';
 import { classifyCard } from './card-classifier';
 import { parseBuildHints } from './build-hints';
+import { auditDeck } from './deck-auditor';
+import type { DeckHealth } from './deck-auditor';
 
 // ── Learned scoring weights ──────────────────────────────────────────────────
 // Optional per-component multipliers fitted offline against the scraped-deck
@@ -359,6 +361,8 @@ export interface BuildResult {
   reasoning?: Array<{ cardName: string; role: string; reason: string }>;
   /** Debug summary of role fills */
   buildReport?: string;
+  /** Post-build (and post-repair) deck health audit — mana, draw, lands */
+  health?: DeckHealth;
   /** Scored candidate pool with per-card score components (captureComponents only) */
   scoredPool?: Array<{ name: string; score: number; components: Record<string, number> }>;
 }
@@ -1923,6 +1927,98 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
     }
   }
 
+  // ── Step 8: Self-audit + auto-repair ───────────────────────────────────
+  // The engine grades its own output and fixes mana/draw deficiencies before
+  // shipping, so functionally-broken decks (under-sourced colors, thin draw)
+  // can't reach the user. Repairs are size-preserving swaps; bounded to avoid
+  // thrash. This is the safety net that replaces hand-patching the builder.
+  const DRAW_RE = /draw (?:a|two|three|four|x|that many|cards|\d) cards?|draws? (?:a|two|three|\d|x) cards?/i;
+  const auditOpts = { colors, format: options.format, targetLands, isCommander };
+  let health = auditDeck(picked, auditOpts);
+
+  if (health.deficiencies.length > 0) {
+    const basicByColor: Record<string, string> = { W: 'Plains', U: 'Island', B: 'Swamp', R: 'Mountain', G: 'Forest' };
+    const scoreOf = (name: string): number => poolResult.pool.find((p) => p.card.name === name)?.score ?? 0;
+    let repairs = 0;
+    const MAX_REPAIRS = 8;
+
+    // (a) Color-source shortfalls → rebalance basics from genuinely surplus
+    // colors into the short color. Can't make another color worse because we
+    // only donate from colors at least 3 sources above their own target.
+    for (const def of health.deficiencies.filter((d) => d.kind === 'color_sources')) {
+      if (repairs >= MAX_REPAIRS) break;
+      const recipientName = basicByColor[def.color!];
+      if (!recipientName) continue;
+      let need = def.want - def.have;
+      while (need > 0 && repairs < MAX_REPAIRS) {
+        // donor = a basic whose color is most over its own want
+        const donor = picked
+          .filter((p) => p.board === 'main' && Object.values(basicByColor).includes(p.card.name) && p.card.name !== recipientName && p.quantity > 0)
+          .map((p) => {
+            const col = Object.entries(basicByColor).find(([, n]) => n === p.card.name)?.[0] || '';
+            const want = Math.min(18, Math.max(7, Math.round((health.pipsByColor[col] || 0) * 0.5) + 4));
+            return { p, surplus: (health.sourcesByColor[col] || 0) - want };
+          })
+          .filter((d) => d.surplus >= 3)
+          .sort((a, b) => b.surplus - a.surplus)[0];
+        if (!donor) break;
+        donor.p.quantity -= 1;
+        if (donor.p.quantity === 0) {
+          const i = picked.indexOf(donor.p);
+          if (i >= 0) picked.splice(i, 1);
+        }
+        const rec = picked.find((p) => p.card.name === recipientName && p.board === 'main');
+        if (rec) {
+          rec.quantity += 1;
+        } else {
+          const basic = db.prepare("SELECT * FROM cards WHERE name = ? AND set_code IS NOT NULL ORDER BY updated_at DESC LIMIT 1").get(recipientName) as DbCard | undefined;
+          if (basic) picked.push({ card: basic, quantity: 1, board: 'main' });
+        }
+        reasoning.push({ cardName: recipientName, role: 'repair', reason: `mana fix: +${recipientName} for ${def.color} shortfall` });
+        need -= 1;
+        repairs += 1;
+        health = auditDeck(picked, auditOpts); // refresh surplus/source counts
+      }
+    }
+
+    // (b) Card-draw shortfall → swap weakest utility/synergy picks for the
+    // highest-scored unused draw spells (collection-respecting).
+    const drawDef = health.deficiencies.find((d) => d.kind === 'card_draw');
+    if (drawDef && repairs < MAX_REPAIRS) {
+      const drawCandidates = poolResult.pool
+        .filter((p) => !pickedNames.has(p.card.name)
+          && !(p.card.type_line || '').includes('Land')
+          && DRAW_RE.test(p.card.oracle_text || '')
+          && (!useCollection || (ownedQty.get(p.card.name) || 0) > 0))
+        .sort((a, b) => b.score - a.score);
+      let need = drawDef.want - drawDef.have;
+      const displaceable = picked
+        .filter((p) => p.board === 'main' && !(p.card.type_line || '').includes('Land'))
+        .filter((p) => {
+          const cats = classifyCard(p.card.name, p.card.oracle_text || '', p.card.type_line || '', p.card.cmc || 0);
+          const primary = cats[0] || 'utility';
+          return (primary === 'utility' || primary === 'synergy')
+            && !DRAW_RE.test(p.card.oracle_text || '')
+            && !(commanderProfile && tribalNames.has(p.card.name));
+        })
+        .sort((a, b) => scoreOf(a.card.name) - scoreOf(b.card.name));
+      for (const cand of drawCandidates) {
+        if (need <= 0 || repairs >= MAX_REPAIRS || displaceable.length === 0) break;
+        const out = displaceable.shift()!;
+        const i = picked.indexOf(out);
+        if (i < 0) continue;
+        picked.splice(i, 1);
+        pickedNames.delete(out.card.name);
+        picked.push({ card: cand.card, quantity: 1, board: 'main' });
+        pickedNames.add(cand.card.name);
+        reasoning.push({ cardName: cand.card.name, role: 'repair', reason: `draw fix: +${cand.card.name} for ${out.card.name}` });
+        need -= 1;
+        repairs += 1;
+      }
+      health = auditDeck(picked, auditOpts);
+    }
+  }
+
   return {
     cards: picked,
     themes,
@@ -1931,6 +2027,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
     commanderSynergy: commanderProfile || undefined,
     reasoning,
     buildReport,
+    health,
     scoredPool: options.captureComponents
       ? poolResult.pool.map(({ card, score }) => ({
           name: card.name,

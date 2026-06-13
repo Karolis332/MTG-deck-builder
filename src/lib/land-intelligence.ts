@@ -10,6 +10,7 @@
 
 import { getDb } from '@/lib/db';
 import { getLegalityKey } from '@/lib/constants';
+import { isRestrictedProducer } from '@/lib/mana-sources';
 import type { DbCard } from '@/lib/types';
 
 // ── Fetch land relevance check ──────────────────────────────────────────────
@@ -239,11 +240,9 @@ export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
     // but a spell-heavy deck can't pay for charms or draw with them. Treat
     // their colored production at a steep discount so at most a couple make
     // the cut, instead of 8 of them masquerading as a rainbow mana base.
-    const restrictedText = (land.oracle_text || '').toLowerCase();
-    const isRestrictedProducer = restrictedText.includes('spend this mana only')
-      || restrictedText.includes('only to cast');
-    const colorBonusScale = isRestrictedProducer ? 0.25 : 1;
-    if (isRestrictedProducer) reasons.push('restricted producer');
+    const restricted = isRestrictedProducer(land.oracle_text);
+    const colorBonusScale = restricted ? 0.25 : 1;
+    if (restricted) reasons.push('restricted producer');
 
     const matchingColors = producesColors.filter(c => colors.includes(c));
     if (matchingColors.length > 0) {
