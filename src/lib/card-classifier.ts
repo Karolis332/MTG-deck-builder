@@ -145,7 +145,9 @@ const RAMP_PATTERNS = [
   /add one mana of any/i,
   /add (?:one|two|three) mana/i,
   /search your library for (?:a|up to \w+) (?:basic )?land/i,
-  /put (?:a|that|it) (?:land )?(?:card )?onto the battlefield/i,
+  // Require "land" — was matching creature reanimation ("put target creature
+  // onto the battlefield"). Land-fetch ramp also hits the search pattern above.
+  /put (?:a|that|it|one|them) (?:basic )?land(?: card)?s? onto the battlefield/i,
   /land card (?:from|and) .* onto the battlefield/i,
   /you may play an additional land/i,
   /\{T\}: Add/i,
@@ -167,10 +169,11 @@ const RAMP_NAMES = new Set([
 const DRAW_PATTERNS = [
   /draw (?:a |two |three |four |\d+ )?card/i,
   /draws? (?:a |two |three |\d+ )?card/i,
-  /look at the top .* card/i,
+  // "look at the top" only counts as draw when the card actually enters hand.
+  /look at the top .* (?:put|reveal)[^.]* into your hand/i,
   /reveal the top .* put .* into your hand/i,
-  /search your library for a (?!land)(?!basic)/i,
-  /scry \d/i,
+  // NOTE: bare scry and library tutors are NOT card draw — removed (they were
+  // inflating the draw quota with scry-only and Demonic-Tutor-style cards).
 ];
 
 const DRAW_NAMES = new Set([
@@ -187,7 +190,11 @@ const REMOVAL_PATTERNS = [
   /destroy target (?!all)(?!each)/i,
   /exile target/i,
   /deals? \d+ damage to (?:target|any target)/i,
-  /target creature gets? [+-]\d+\/[+-]\d+/i,
+  // Only NEGATIVE toughness modifiers are removal (-X/-X, +X/-X kill via
+  // toughness). Positive buffs (+2/+2 combat tricks) are NOT removal.
+  /target creature gets? [+-]?\d+\/-[1-9]/i,
+  // -X/-X counter placement (Hapatra-style) is removal too.
+  /put (?:a|one|two|three|x|\d+) -\d+\/-\d+ counters? on (?:up to \w+ )?target creatures?/i,
   /return target .* to (?:its|their) owner/i,
   /target player sacrifices/i,
   /fights? target/i,
@@ -264,7 +271,13 @@ function isDraw(name: string, oracleText: string, typeLine: string): boolean {
 // charms. A deck that "goes stale after the commander" lacks these. We require
 // a draw/advantage effect AND a recurring trigger AND that it sticks around.
 const ENGINE_TRIGGER = /at the beginning of (?:your|each|the next|combat)|whenever you (?:cast|attack|gain|sacrifice|draw|play|create)|whenever (?:a|an|another|one or more|you or)|\{t\}:[^.]*(?:draw|investigate)|whenever .* (?:enters|dies)|for each .* you control/i;
-const ADVANTAGE_EFFECT = /draw (?:a|two|three|x|that many|cards?)|investigate|create a treasure|return .* from your graveyard|put (?:a|the|that) card .* into your hand/i;
+// Card advantage = cards into hand (NOT treasure/ramp/graveyard recursion,
+// which are mana/value but don't refill the hand against running out of gas).
+const ADVANTAGE_EFFECT = /draw (?:a|two|three|x|that many|cards?)|investigate|put (?:a|the|that|those|two|three) cards? .* into your hand/i;
+// A recurring trigger whose SUBJECT is something other than the card itself
+// (e.g. "whenever a creature enters") is a real engine — only a lone self-ETB
+// ("when this enters, draw a card." and nothing else) is one-shot.
+const RECURRING_NON_SELF = /at the beginning of|\{t\}:|whenever you|whenever (?:a|an|another|one or more) (?:creature|artifact|enchantment|player|opponent|nontoken|permanent|land)/i;
 
 export function isDrawEngine(name: string, oracleText: string, typeLine: string): boolean {
   if (isLand(typeLine)) return false;
@@ -278,9 +291,11 @@ export function isDrawEngine(name: string, oracleText: string, typeLine: string)
   // Must draw AND have a recurring trigger (not just a one-time ETB)
   if (!ADVANTAGE_EFFECT.test(o)) return false;
   if (!ENGINE_TRIGGER.test(o)) return false;
-  // Exclude pure ETB-once draw ("when ~ enters, draw a card" with no other trigger)
+  // Exclude pure ETB-once draw ONLY when the lone trigger is the card's own
+  // ETB. Cards that draw off "whenever a creature enters" / upkeep / {T} are
+  // genuine engines (Guardian Project, Kindred Discovery, Tatyova).
   const etbOnly = /when(?:ever)? (?:this|~|[a-z' ,]+) enters[^.]*draw a card\.?$/i.test(oracleText || '')
-    && !/at the beginning|\{t\}:|whenever you/i.test(o);
+    && !RECURRING_NON_SELF.test(o);
   if (etbOnly) return false;
   return true;
 }

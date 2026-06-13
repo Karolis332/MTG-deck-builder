@@ -98,6 +98,24 @@ export function isRestrictedProducer(oracleText: string | null | undefined): boo
   return false;
 }
 
+/**
+ * True when a land's COLORED/any-color production is gated so it isn't a
+ * turn-after-turn fixing source: Mirrex ("activate only if this land entered
+ * this turn"), Nykthos (devotion), Baxter Building / Spire of Industry
+ * ("activate only if you control ..."). Its colorless {C} may still be free,
+ * but it should not count as reliable rainbow fixing.
+ */
+export function isConditionalColoredProducer(card: ManaSourceCard): boolean {
+  const t = (card.oracle_text || '').toLowerCase();
+  if (!t) return false;
+  const makesColor = /add one mana of any color|add an amount of .* mana|add .*\{[wubrg]\}/.test(t);
+  if (!makesColor) return false;
+  if (/activated? only if/.test(t)) return true;
+  if (/entered (?:the battlefield )?this turn/.test(t)) return true;
+  if (/devotion/.test(t)) return true;
+  return false;
+}
+
 /** True for one-shot mana (rituals, sac-for-mana) — burst, not a stable source. */
 function isOneShotMana(card: ManaSourceCard): boolean {
   const t = (card.oracle_text || '').toLowerCase();
@@ -138,6 +156,12 @@ export function realManaSources(card: ManaSourceCard): ManaSourceProfile {
 
   if (isOneShotMana(card)) {
     return { colors: [], kind, reliable: false, anyColor: false, note: 'one-shot burst' };
+  }
+
+  // Conditional any-color lands (Mirrex/Nykthos/Spire) aren't reliable rainbow
+  // fixing — don't credit their colored output as general sources.
+  if (isConditionalColoredProducer(card)) {
+    return { colors: [], kind, reliable: false, anyColor: false, note: 'conditional/gated colored mana' };
   }
 
   // Reliable. A producer of 3+ WUBRG colors taps for any ONE of them per use

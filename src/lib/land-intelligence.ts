@@ -10,7 +10,7 @@
 
 import { getDb } from '@/lib/db';
 import { getLegalityKey } from '@/lib/constants';
-import { isRestrictedProducer, fetchLandColors, implicitLandColors } from '@/lib/mana-sources';
+import { isRestrictedProducer, isConditionalColoredProducer, fetchLandColors, implicitLandColors } from '@/lib/mana-sources';
 import type { DbCard } from '@/lib/types';
 
 // ── Fetch land relevance check ──────────────────────────────────────────────
@@ -226,11 +226,15 @@ export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
 
     const tier = land.tier || 3;
     const tapText = (land.oracle_text || '').toLowerCase();
+    // Some fetches DO enter tapped (Thawing Glaciers, Krosan Verge) or fetch a
+    // tapped basic (Evolving Wilds) — don't blanket-credit fetches as untapped.
+    const ownEntersTapped = tapText.includes('enters the battlefield tapped') || tapText.includes('enters tapped');
+    const depositsTapped = /onto the battlefield tapped/.test(tapText);
     const entersUntapped = isFetch
-      ? true // fetches don't enter tapped (they sacrifice to search)
+      ? !ownEntersTapped && !depositsTapped
       : land.enters_untapped != null
         ? land.enters_untapped === 1
-        : !(tapText.includes('enters the battlefield tapped') || tapText.includes('enters tapped'));
+        : !ownEntersTapped;
     const category = land.land_category || 'utility';
     const reasons: string[] = [];
 
@@ -251,8 +255,10 @@ export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
     // their colored production at a steep discount so at most a couple make
     // the cut, instead of 8 of them masquerading as a rainbow mana base.
     const restricted = isRestrictedProducer(land.oracle_text);
-    const colorBonusScale = restricted ? 0.25 : 1;
+    const conditional = !isFetch && isConditionalColoredProducer(land);
+    const colorBonusScale = restricted ? 0.25 : conditional ? 0.4 : 1;
     if (restricted) reasons.push('restricted producer');
+    if (conditional) reasons.push('conditional colored mana');
 
     const matchingColors = producesColors.filter(c => colors.includes(c));
     if (matchingColors.length > 0) {

@@ -95,7 +95,7 @@ export function getRuleBasedSuggestions(
       ) owned ON c.name = owned.cname`
     : '';
   // Format legality filter
-  const legalFilter = format ? `AND c.legalities LIKE '%"${getLegalityKey(format)}":"legal"%'` : '';
+  const legalFilter = format ? `AND json_extract(c.legalities, '$.${getLegalityKey(format)}') IN ('legal', 'restricted')` : '';
 
   // 1. Land count suggestions
   if (analysis.totalMain < targetSize && analysis.landCount < targetLands) {

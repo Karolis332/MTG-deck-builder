@@ -157,7 +157,10 @@ export const TRIGGER_PATTERNS: Record<SynergyCategory, RegExp[]> = {
   ],
   tribal_lands: [
     /choose a creature type/i,
-    /(?:all|each|other) .* (?:you control )?get \+/i,
+    // A NAMED creature type (not the literal "creature(s)") getting an anthem
+    // — "Goblins you control get +1/+0". Excludes generic "all creatures get
+    // +2/+2" (Nadaar) and "other creatures you control get +1/+1".
+    /\b(?!creatures?\b)[a-z]+s you control (?:get|gain) \+/i,
     /creature of the chosen type/i,
     /creatures? you control .* that share a creature type/i,
   ],
@@ -379,6 +382,9 @@ function inferArchetype(triggers: SynergyCategory[], hasAttackTrigger: boolean):
   }
 
   if (has('land_matters')) return 'midrange';
+  // A tribal anthem + attack trigger is a go-wide tribal deck (Tovolar), not
+  // a single-creature voltron — check before the voltron fallback.
+  if (has('attack_trigger') && has('tribal_lands')) return 'tribal';
   if (has('attack_trigger') && has('counters')) return 'aggro';
   if (has('attack_trigger') && triggers.length <= 2) return 'voltron';
   if (has('artifact_synergy')) return 'midrange';

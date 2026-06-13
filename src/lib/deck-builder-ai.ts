@@ -494,7 +494,7 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
 
   // Only include cards that are legal in the format (skip for 1v1 — no Scryfall legality data)
   const baseLegalityFilter = format && format !== '1v1'
-    ? `AND c.legalities LIKE '%"${getLegalityKey(format)}":"legal"%'`
+    ? `AND json_extract(c.legalities, '$.${getLegalityKey(format)}') IN ('legal', 'restricted')`
     : '';
 
   // Rarity restriction (Pauper Commander etc.). Folded into legalityFilter so
@@ -2024,12 +2024,17 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
       const out = picked
         .filter((p) => p.board === 'main' && !(p.card.type_line || '').includes('Land'))
         .filter((p) => {
-          const cats = classifyCard(p.card.name, p.card.oracle_text || '', p.card.type_line || '', p.card.cmc || 0);
+          // Pass the commander oracle so the 'synergy' category actually fires
+          // (was a 4-arg call → 'synergy' never matched → dead branch).
+          const cats = classifyCard(p.card.name, p.card.oracle_text || '', p.card.type_line || '', p.card.cmc || 0, commanderCard?.oracle_text || undefined);
           const primary = cats[0] || 'utility';
-          return (primary === 'utility' || primary === 'synergy')
+          return primary === 'utility' // synergy cards are no longer displaceable
             && !DRAW_RE.test(p.card.oracle_text || '')
             && !isDrawEngine(p.card.name, p.card.oracle_text || '', p.card.type_line || '')
-            && !(commanderProfile && tribalNames.has(p.card.name));
+            // Never cut a commander payoff (Blood Artist in a sac deck) or a
+            // tribal card — protect both regardless of commanderProfile presence.
+            && !payoffNames.has(p.card.name.toLowerCase())
+            && !tribalNames.has(p.card.name);
         })
         .sort((a, b) => scoreOf(a.card.name) - scoreOf(b.card.name))[0];
       if (!out) break; // nothing safe to displace
@@ -2104,7 +2109,7 @@ export function getSynergySuggestions(
     .join(' AND ');
 
   const legalityFilter = format && format !== '1v1'
-    ? `AND c.legalities LIKE '%"${getLegalityKey(format)}":"legal"%'`
+    ? `AND json_extract(c.legalities, '$.${getLegalityKey(format)}') IN ('legal', 'restricted')`
     : '';
 
   // ── Load match insights if we have a deck ID ──────────────────────────

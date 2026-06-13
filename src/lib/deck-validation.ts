@@ -92,12 +92,12 @@ export function validateDeck(
 
   // Copy limit check
   const maxCopies = isCmd ? 1 : 4;
-  const cardsByName: Record<string, { total: number; boards: string[] }> = {};
+  const cardsByName: Record<string, { total: number; boards: string[]; oracle: string }> = {};
 
   for (const entry of cards) {
     const name = entry.card.name;
     if (!cardsByName[name]) {
-      cardsByName[name] = { total: 0, boards: [] };
+      cardsByName[name] = { total: 0, boards: [], oracle: (entry.card as { oracle_text?: string }).oracle_text || '' };
     }
     cardsByName[name].total += entry.quantity;
     cardsByName[name].boards.push(entry.board);
@@ -105,7 +105,11 @@ export function validateDeck(
 
   const overLimitCards: string[] = [];
   for (const [name, info] of Object.entries(cardsByName)) {
+    // Hardcoded list + runtime detection of the "A deck can have any number of
+    // cards named ~" clause so the exemption never drifts as new sets print
+    // more of these (Hare Apparent, Cid, Slime Against Humanity, ...).
     if (UNLIMITED_COPIES.has(name)) continue;
+    if (/a deck can have any number of cards named/i.test(info.oracle)) continue;
     if (info.total > maxCopies) {
       overLimitCards.push(`${name} (${info.total})`);
     }
