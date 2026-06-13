@@ -73,6 +73,7 @@ const SYNERGY_REQUIREMENTS_MAP = {
   token_generation: ['create a', 'create two', 'token', 'populate'],
   land_matters: ['landfall', 'whenever a land enters', 'play a land', 'sacrifice a land', 'search your library for a'],
   tribal_lands: ['choose a creature type', 'creature of the chosen type', 'creatures you control'],
+  dungeon_venture: ['venture into the dungeon', 'initiative', 'dungeon', 'undercity'],
 } as const;
 
 // ── Synergy keyword groups ──────────────────────────────────────────────────
@@ -458,6 +459,11 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
           }
         }
       }
+    }
+    // Commander name was given but no card matched (e.g. wrong apostrophe/typo).
+    // Fail loud instead of silently building a broken, colorless 72-card deck.
+    if (!commanderCard) {
+      throw new Error(`Commander not found: "${commanderName}" — check the exact card name`);
     }
   }
 

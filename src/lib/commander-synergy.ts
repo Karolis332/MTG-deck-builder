@@ -30,7 +30,8 @@ export type SynergyCategory =
   | 'land_matters'
   | 'tribal_lands'
   | 'x_spells'
-  | 'five_colors';
+  | 'five_colors'
+  | 'dungeon_venture';
 
 export interface CommanderSynergyProfile {
   /** Override generic CMC-based archetype detection */
@@ -74,6 +75,12 @@ export const TRIGGER_PATTERNS: Record<SynergyCategory, RegExp[]> = {
     /for each of (?:that|the|this) spell'?s colors/i, // Ramos
     /five colors? of mana/i,
     /\{w\}.*\{u\}.*\{b\}.*\{r\}.*\{g\}/i, // any WUBRG pip run, incl. doubles
+  ],
+  dungeon_venture: [
+    /venture into the dungeon/i,
+    /\binitiative\b/i,
+    /take the initiative/i,
+    /(?:complete|completed) (?:a |the )?dungeon/i,
   ],
   exile_cast: [
     /(?:whenever you )?cast (?:a |an )?(?:spell|card) from exile/i,
@@ -213,6 +220,16 @@ const SYNERGY_REQUIREMENTS: Record<SynergyCategory, {
       '%for each color%',
     ],
     scoreBonus: 25,
+  },
+  dungeon_venture: {
+    min: 8,
+    searchPatterns: [
+      '%venture into the dungeon%',
+      '%initiative%',
+      '%completed a dungeon%',
+      '%completed the%',
+    ],
+    scoreBonus: 22,
   },
   exile_cast: {
     min: 10,
@@ -657,6 +674,7 @@ function buildStrategyDescription(
     tribal_lands: 'Tribal lands (Cavern of Souls, Unclaimed Territory, etc.)',
     x_spells: 'X-cost spells, X-cost payoffs, and "spend on X" mana sources',
     five_colors: 'Multicolor payoffs, converge/sunburst, and rainbow mana fixing',
+    dungeon_venture: 'Venture/dungeon enablers and initiative payoffs',
   };
 
   for (const trigger of triggers) {

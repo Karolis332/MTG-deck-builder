@@ -9,6 +9,7 @@
 import fs from 'fs';
 import path from 'path';
 import http from 'http';
+import { syncCommanderStatsIfStale } from './sync-commander-stats';
 
 interface AppConfig {
   setupComplete?: boolean;
@@ -329,4 +330,9 @@ export async function runFirstBootActions(): Promise<void> {
   } catch (err) {
     console.error('[FirstBoot] Scoring weight sync skipped:', err instanceof Error ? err.message : err);
   }
+
+  // 5. Refresh per-commander stats from the CF API if stale (>7 days).
+  // Fire-and-forget: the scraper deepens the corpus nightly, and this pulls it
+  // into the local DB so desktop builds keep improving without manual syncs.
+  syncCommanderStatsIfStale();
 }

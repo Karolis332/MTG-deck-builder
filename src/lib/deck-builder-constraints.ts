@@ -51,6 +51,15 @@ export const ARCHETYPE_PAYOFFS: Record<SynergyCategory, Set<string>> = {
     'finale of devastation', 'walking ballista', 'hangarback walker',
     'expansion // explosion', 'mind grind', 'villainous wealth',
   ]),
+  dungeon_venture: new Set([
+    // Venture enablers
+    'cloister gargoyle', 'nadaar, selfless paladin', 'fiendish duo', 'ratadrabik of urborg',
+    'acererak the archlich', 'sefris of the hidden ways', 'death-priest of myrkul',
+    'venture forth', 'underdark explorer', 'precipice of mortality', 'wand of wonder',
+    // Initiative payoffs / dungeon support
+    'undercity', 'caves of chaos adventurer', 'white plume adventurer', 'seasoned dungeoneer',
+    'planar bridge', 'lost mine of phandelver', 'tomb of annihilation', 'dungeon of the mad mage',
+  ]),
   five_colors: new Set([
     // Rainbow fixing that doubles as payoff
     'chromatic lantern', 'chromatic orrery', 'the world tree', 'faeburrow elder',
