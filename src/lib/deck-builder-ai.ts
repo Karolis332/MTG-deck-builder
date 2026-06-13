@@ -1139,14 +1139,23 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
       if (price > hints.budgetPerCard) score -= 9999;
     }
     if (hints.emphasize.length || hints.avoid.length) {
-      const hintText = `${card.name} ${card.type_line || ''} ${card.oracle_text || ''}`.toLowerCase();
+      const nameLC = card.name.toLowerCase();
+      const frontNameLC = nameLC.split(' // ')[0];
+      const hintText = `${nameLC} ${card.type_line || ''} ${card.oracle_text || ''}`.toLowerCase();
       let hintBonus = 0;
       for (const term of hints.emphasize) {
         if (hintText.includes(term)) hintBonus += 18;
       }
       score += Math.min(36, hintBonus);
       for (const term of hints.avoid) {
-        if (hintText.includes(term)) score -= 40;
+        // A multi-word avoid term that matches the card's NAME ("no massacre
+        // wurm") is a deliberate cut, not a theme — hard-exclude it. Theme
+        // avoids ("no counterspells") stay a soft penalty.
+        if (term.length >= 5 && (nameLC === term || frontNameLC === term)) {
+          score -= 9999;
+        } else if (hintText.includes(term)) {
+          score -= 40;
+        }
       }
     }
     snap('hints');
