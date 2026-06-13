@@ -231,9 +231,11 @@ function detectTribalTheme(
     }
   }
 
-  // Check if oracle text explicitly references a creature type for tribal payoff
-  // Patterns like "other Goblins", "Goblins you control", "whenever a Goblin"
-  for (const tribe of MAJOR_TRIBES) {  // iterate over array
+  // Score every tribe the oracle references in a payoff context, then return
+  // the DOMINANT one. Array-order early-return used to mislabel multi-type
+  // commanders (Tovolar = Human Werewolf returned "human" over "wolf").
+  const tribeScores = new Map<string, number>();
+  for (const tribe of MAJOR_TRIBES) {
     const tribalPatterns = [
       `other ${tribe}`,
       `${tribe}s you control`,
@@ -246,21 +248,23 @@ function detectTribalTheme(
       `number of ${tribe}`,
       `create a .* ${tribe}`,
     ];
-
-    for (const pattern of tribalPatterns) {
-      if (oracleText.includes(pattern)) {
-        return tribe;
-      }
-    }
+    const patternHits = tribalPatterns.filter((p) => oracleText.includes(p)).length;
+    if (patternHits === 0) continue;
+    const wordCount = (oracleText.match(new RegExp(`\\b${tribe}s?\\b`, 'g')) || []).length;
+    // Pattern hits dominate; raw mentions break ties. Bonus if the commander
+    // itself is that type (a Goblin lord beats incidental token-tribe text).
+    let score = patternHits * 3 + wordCount;
+    if (subtypes.includes(tribe)) score += 2;
+    tribeScores.set(tribe, score);
+  }
+  if (tribeScores.size > 0) {
+    return [...tribeScores.entries()].sort((a, b) => b[1] - a[1])[0][0];
   }
 
-  // Check if the commander IS a notable tribal type and has tribal text
+  // Fallback: the commander IS a notable tribal type and references it.
   for (const subtype of subtypes) {
-    if (MAJOR_TRIBES_SET.has(subtype)) {
-      // Only count it as tribal if oracle text references the type at all
-      if (oracleText.includes(subtype)) {
-        return subtype;
-      }
+    if (MAJOR_TRIBES_SET.has(subtype) && oracleText.includes(subtype)) {
+      return subtype;
     }
   }
 
@@ -879,9 +883,14 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
   }
 
   // Commander synergy archetype overrides generic CMC-based detection.
-  // Explicit strategy > hint-derived strategy > commander profile > themes.
+  // Explicit strategy > hint-derived > [tribe over a GENERIC profile arch] >
+  // commander profile > themes. A detected tribe outranks the weak voltron/
+  // midrange fallbacks (Tovolar = Werewolf tribal, not voltron) but never a
+  // specific archetype like aristocrats/spellslinger/combo.
+  const profileArch = commanderProfile?.detectedArchetype;
+  const genericArch = !profileArch || profileArch === 'voltron' || profileArch === 'midrange';
   const resolvedStrategy = resolvedStrategyHint
-    || commanderProfile?.detectedArchetype
+    || (tribalType && genericArch ? 'tribal' : profileArch)
     || (themes.includes('aggro') ? 'aggro' : themes.includes('control') ? 'control' : 'midrange');
 
   // ── ML personalization: load predictions from personalized_suggestions ──
