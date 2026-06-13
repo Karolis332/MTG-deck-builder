@@ -10,7 +10,7 @@
 
 import { getDb } from '@/lib/db';
 import { getLegalityKey } from '@/lib/constants';
-import { isRestrictedProducer } from '@/lib/mana-sources';
+import { isRestrictedProducer, fetchLandColors, implicitLandColors } from '@/lib/mana-sources';
 import type { DbCard } from '@/lib/types';
 
 // ── Fetch land relevance check ──────────────────────────────────────────────
@@ -212,15 +212,25 @@ export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
         producesColors = (JSON.parse(land.produced_mana) as string[]).filter((c) => 'WUBRG'.includes(c));
       } catch { /* empty */ }
     }
+    // Fetch / chosen-type lands have no produced_mana but ARE fixing for the
+    // colors they retrieve/become. Credit them; fetches don't enter tapped.
+    const fetched = fetchLandColors(land);
+    const implicit = implicitLandColors(land);
+    const isFetch = fetched !== null;
+    if (implicit && producesColors.length === 0) {
+      producesColors = implicit;
+    }
 
     let tribalTypesArr: string[] = [];
     try { tribalTypesArr = JSON.parse(land.tribal_types || '[]'); } catch { /* empty */ }
 
     const tier = land.tier || 3;
     const tapText = (land.oracle_text || '').toLowerCase();
-    const entersUntapped = land.enters_untapped != null
-      ? land.enters_untapped === 1
-      : !(tapText.includes('enters the battlefield tapped') || tapText.includes('enters tapped'));
+    const entersUntapped = isFetch
+      ? true // fetches don't enter tapped (they sacrifice to search)
+      : land.enters_untapped != null
+        ? land.enters_untapped === 1
+        : !(tapText.includes('enters the battlefield tapped') || tapText.includes('enters tapped'));
     const category = land.land_category || 'utility';
     const reasons: string[] = [];
 

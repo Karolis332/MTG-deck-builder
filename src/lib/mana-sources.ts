@@ -44,6 +44,49 @@ function parseProduced(json: string | null | undefined): string[] {
   }
 }
 
+const BASIC_TYPE_TO_COLOR: Record<string, string> = {
+  plains: 'W', island: 'U', swamp: 'B', mountain: 'R', forest: 'G',
+};
+
+/**
+ * Fetch lands search a land onto the battlefield instead of tapping for mana,
+ * so `produced_mana` is null — but they ARE premium fixing for the colors they
+ * can retrieve. Returns those colors, or null if the card isn't a fetch.
+ */
+export function fetchLandColors(card: ManaSourceCard): string[] | null {
+  const type = (card.type_line || '').toLowerCase();
+  if (!type.includes('land')) return null;
+  const o = (card.oracle_text || '').toLowerCase();
+  if (!o.includes('search your library for') || !o.includes('onto the battlefield')) return null;
+  // Generic "a basic land card" (Prismatic Vista, Fabled Passage, Evolving Wilds)
+  if (/for a basic land/.test(o) || /for a land card/.test(o)) return ['W', 'U', 'B', 'R', 'G'];
+  // Typed fetch (Flooded Strand → Plains/Island). Collect named basic types.
+  const cols = new Set<string>();
+  for (const [t, c] of Object.entries(BASIC_TYPE_TO_COLOR)) {
+    if (o.includes(t)) cols.add(c);
+  }
+  return cols.size ? [...cols] : null;
+}
+
+/**
+ * Lands whose color is chosen on entry (Multiversal Passage: "choose a basic
+ * land type") have null produced_mana but flexibly fix any one color.
+ */
+export function chosenTypeLandColors(card: ManaSourceCard): string[] | null {
+  const type = (card.type_line || '').toLowerCase();
+  if (!type.includes('land')) return null;
+  const o = (card.oracle_text || '').toLowerCase();
+  if (/choose a basic land type/.test(o) || /becomes? a .* of the chosen/.test(o)) {
+    return ['W', 'U', 'B', 'R', 'G'];
+  }
+  return null;
+}
+
+/** Colors a land provides despite null produced_mana (fetch or chosen-type). */
+export function implicitLandColors(card: ManaSourceCard): string[] | null {
+  return fetchLandColors(card) ?? chosenTypeLandColors(card);
+}
+
 /** True when the card's colored mana can only pay for a card-type subset. */
 export function isRestrictedProducer(oracleText: string | null | undefined): boolean {
   const t = (oracleText || '').toLowerCase();
@@ -78,6 +121,12 @@ export function realManaSources(card: ManaSourceCard): ManaSourceProfile {
   const isDork = !isLand && type.includes('creature') && produced.length > 0;
 
   const kind: ManaSourceProfile['kind'] = isLand ? 'land' : isRock ? 'rock' : isDork ? 'dork' : produced.length ? 'other' : 'none';
+
+  // Fetch / chosen-type lands: credit colors despite null produced_mana.
+  const implicit = implicitLandColors(card);
+  if (implicit) {
+    return { colors: implicit, kind: 'land', reliable: true, anyColor: implicit.length >= 3, note: 'fetch/chosen land' };
+  }
 
   if (produced.length === 0) {
     return { colors: [], kind: 'none', reliable: false, anyColor: false };
