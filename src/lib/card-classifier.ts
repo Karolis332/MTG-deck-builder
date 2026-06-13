@@ -259,6 +259,32 @@ function isDraw(name: string, oracleText: string, typeLine: string): boolean {
   return matchesPatterns(oracleText, DRAW_PATTERNS);
 }
 
+// Repeatable card-advantage engines: permanents (or activated abilities) that
+// generate card advantage turn after turn, as opposed to one-shot cantrips and
+// charms. A deck that "goes stale after the commander" lacks these. We require
+// a draw/advantage effect AND a recurring trigger AND that it sticks around.
+const ENGINE_TRIGGER = /at the beginning of (?:your|each|the next|combat)|whenever you (?:cast|attack|gain|sacrifice|draw|play|create)|whenever (?:a|an|another|one or more|you or)|\{t\}:[^.]*(?:draw|investigate)|whenever .* (?:enters|dies)|for each .* you control/i;
+const ADVANTAGE_EFFECT = /draw (?:a|two|three|x|that many|cards?)|investigate|create a treasure|return .* from your graveyard|put (?:a|the|that) card .* into your hand/i;
+
+export function isDrawEngine(name: string, oracleText: string, typeLine: string): boolean {
+  if (isLand(typeLine)) return false;
+  const o = (oracleText || '').toLowerCase();
+  const type = (typeLine || '').toLowerCase();
+  if (!/draw|investigate|card/.test(o)) return false;
+  // Must be a sticky permanent (instants/sorceries are by definition one-shot)
+  const isPermanent = /artifact|creature|enchantment|planeswalker|battle/.test(type)
+    && !/instant|sorcery/.test(type);
+  if (!isPermanent) return false;
+  // Must draw AND have a recurring trigger (not just a one-time ETB)
+  if (!ADVANTAGE_EFFECT.test(o)) return false;
+  if (!ENGINE_TRIGGER.test(o)) return false;
+  // Exclude pure ETB-once draw ("when ~ enters, draw a card" with no other trigger)
+  const etbOnly = /when(?:ever)? (?:this|~|[a-z' ,]+) enters[^.]*draw a card\.?$/i.test(oracleText || '')
+    && !/at the beginning|\{t\}:|whenever you/i.test(o);
+  if (etbOnly) return false;
+  return true;
+}
+
 function isRemoval(name: string, oracleText: string, typeLine: string): boolean {
   if (isLand(typeLine)) return false;
   if (REMOVAL_NAMES.has(name.toLowerCase())) return true;

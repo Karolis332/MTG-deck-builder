@@ -20,7 +20,7 @@ import {
 } from './deck-builder-constraints';
 import { analyzeCommanderForBuild } from './commander-analysis';
 import type { ArsenalCard } from './commander-analysis';
-import { classifyCard } from './card-classifier';
+import { classifyCard, isDrawEngine } from './card-classifier';
 import { parseBuildHints } from './build-hints';
 import { auditDeck } from './deck-auditor';
 import type { DeckHealth } from './deck-auditor';
@@ -1159,6 +1159,16 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
       }
     }
     snap('hints');
+
+    // ── Repeatable draw-engine bonus ──
+    // Decks "go stale" when their card advantage is one-shot cantrips/charms.
+    // Reward sticky engines (Phyrexian Arena, The Great Henge, Sylvan Library)
+    // so they win draw slots over redundant one-shots. Aggro wants fewer.
+    if (isDrawEngine(card.name, card.oracle_text || '', card.type_line || '')) {
+      score += resolvedStrategy === 'aggro' ? 12 : 28;
+    }
+    snap('drawEngine');
+
     // ── Archetype discouraged types penalty ──
     const template = getTemplate(resolvedStrategy);
     if (template.discouragedTypes?.length) {
@@ -1942,7 +1952,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
   // can't reach the user. Repairs are size-preserving swaps; bounded to avoid
   // thrash. This is the safety net that replaces hand-patching the builder.
   const DRAW_RE = /draw (?:a|two|three|four|x|that many|cards|\d) cards?|draws? (?:a|two|three|\d|x) cards?/i;
-  const auditOpts = { colors, format: options.format, targetLands, isCommander };
+  const auditOpts = { colors, format: options.format, targetLands, isCommander, strategy: resolvedStrategy };
   let health = auditDeck(picked, auditOpts);
 
   if (health.deficiencies.length > 0) {
@@ -1990,40 +2000,47 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
       }
     }
 
-    // (b) Card-draw shortfall → swap weakest utility/synergy picks for the
-    // highest-scored unused draw spells (collection-respecting).
-    const drawDef = health.deficiencies.find((d) => d.kind === 'card_draw');
-    if (drawDef && repairs < MAX_REPAIRS) {
-      const drawCandidates = poolResult.pool
+    // (b) Card-draw / draw-engine shortfall → swap weakest utility/synergy
+    // picks for the best unused draw. When the deficiency is specifically a
+    // lack of repeatable ENGINES (deck goes stale), require candidates to be
+    // engines; otherwise any draw counts. Collection-respecting.
+    // Engines first (more impactful), then raw count. Each iteration re-audits
+    // so we stop the moment the deck is healthy.
+    let drawGuard = 0;
+    while (repairs < MAX_REPAIRS && drawGuard++ < 12) {
+      const drawDef = health.deficiencies.find((d) => d.kind === 'draw_engines')
+        ?? health.deficiencies.find((d) => d.kind === 'card_draw');
+      if (!drawDef) break;
+      const needEngine = drawDef.kind === 'draw_engines';
+      const cand = poolResult.pool
         .filter((p) => !pickedNames.has(p.card.name)
           && !(p.card.type_line || '').includes('Land')
-          && DRAW_RE.test(p.card.oracle_text || '')
+          && (needEngine
+            ? isDrawEngine(p.card.name, p.card.oracle_text || '', p.card.type_line || '')
+            : DRAW_RE.test(p.card.oracle_text || ''))
           && (!useCollection || (ownedQty.get(p.card.name) || 0) > 0))
-        .sort((a, b) => b.score - a.score);
-      let need = drawDef.want - drawDef.have;
-      const displaceable = picked
+        .sort((a, b) => b.score - a.score)[0];
+      if (!cand) break; // no candidate available (e.g., collection lacks engines)
+      const out = picked
         .filter((p) => p.board === 'main' && !(p.card.type_line || '').includes('Land'))
         .filter((p) => {
           const cats = classifyCard(p.card.name, p.card.oracle_text || '', p.card.type_line || '', p.card.cmc || 0);
           const primary = cats[0] || 'utility';
           return (primary === 'utility' || primary === 'synergy')
             && !DRAW_RE.test(p.card.oracle_text || '')
+            && !isDrawEngine(p.card.name, p.card.oracle_text || '', p.card.type_line || '')
             && !(commanderProfile && tribalNames.has(p.card.name));
         })
-        .sort((a, b) => scoreOf(a.card.name) - scoreOf(b.card.name));
-      for (const cand of drawCandidates) {
-        if (need <= 0 || repairs >= MAX_REPAIRS || displaceable.length === 0) break;
-        const out = displaceable.shift()!;
-        const i = picked.indexOf(out);
-        if (i < 0) continue;
-        picked.splice(i, 1);
-        pickedNames.delete(out.card.name);
-        picked.push({ card: cand.card, quantity: 1, board: 'main' });
-        pickedNames.add(cand.card.name);
-        reasoning.push({ cardName: cand.card.name, role: 'repair', reason: `draw fix: +${cand.card.name} for ${out.card.name}` });
-        need -= 1;
-        repairs += 1;
-      }
+        .sort((a, b) => scoreOf(a.card.name) - scoreOf(b.card.name))[0];
+      if (!out) break; // nothing safe to displace
+      const i = picked.indexOf(out);
+      if (i < 0) break;
+      picked.splice(i, 1);
+      pickedNames.delete(out.card.name);
+      picked.push({ card: cand.card, quantity: 1, board: 'main' });
+      pickedNames.add(cand.card.name);
+      reasoning.push({ cardName: cand.card.name, role: 'repair', reason: `${needEngine ? 'engine' : 'draw'} fix: +${cand.card.name} for ${out.card.name}` });
+      repairs += 1;
       health = auditDeck(picked, auditOpts);
     }
   }

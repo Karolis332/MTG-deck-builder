@@ -10,6 +10,7 @@
 
 import { realManaSources, countColorSources, countPipDemand } from './mana-sources';
 import type { ManaSourceCard } from './mana-sources';
+import { isDrawEngine } from './card-classifier';
 
 export interface AuditCard {
   card: ManaSourceCard & { cmc?: number };
@@ -17,7 +18,7 @@ export interface AuditCard {
   board: string;
 }
 
-export type DeficiencyKind = 'color_sources' | 'card_draw' | 'ramp' | 'too_few_lands';
+export type DeficiencyKind = 'color_sources' | 'card_draw' | 'draw_engines' | 'ramp' | 'too_few_lands';
 
 export interface Deficiency {
   kind: DeficiencyKind;
@@ -37,6 +38,8 @@ export interface DeckHealth {
   sourcesByColor: Record<string, number>;
   pipsByColor: Record<string, number>;
   drawCount: number;
+  /** repeatable card-advantage engines (subset of drawCount) */
+  drawEngineCount: number;
   rampCount: number;
   fakeLands: string[];
   warnings: string[];
@@ -70,6 +73,8 @@ export interface AuditOptions {
   /** target land count for the format (lands + land-back MDFCs) */
   targetLands: number;
   isCommander: boolean;
+  /** resolved archetype — tunes the draw-engine floor */
+  strategy?: string;
 }
 
 export function auditDeck(cards: AuditCard[], opts: AuditOptions): DeckHealth {
@@ -90,6 +95,7 @@ export function auditDeck(cards: AuditCard[], opts: AuditOptions): DeckHealth {
   const pipsByColor = countPipDemand(nonLands);
 
   const drawCount = nonLands.filter((c) => DRAW_RE.test(c.card.oracle_text || '')).reduce((s, c) => s + c.quantity, 0);
+  const drawEngineCount = nonLands.filter((c) => isDrawEngine(c.card.name, c.card.oracle_text || '', c.card.type_line || '')).reduce((s, c) => s + c.quantity, 0);
   const rampCount = nonLands.filter((c) => {
     const ot = c.card.oracle_text || '';
     return RAMP_LAND_FETCH.test(ot) || (RAMP_ADD.test(ot) && /artifact|creature/i.test(c.card.type_line || ''));
@@ -134,6 +140,23 @@ export function auditDeck(cards: AuditCard[], opts: AuditOptions): DeckHealth {
     });
   }
 
+  // ── Repeatable card-advantage engines ─────────────────────────────────────
+  // The "goes stale after the commander" failure: enough one-shot draw to pass
+  // the count floor, but no sticky engines to refill once you've spent your
+  // hand. Grindy archetypes need several; aggro can run lean.
+  const engineFloor = opts.isCommander
+    ? (['aggro', 'voltron'].includes(opts.strategy ?? '') ? 3 : 5)
+    : 2;
+  if (drawEngineCount < engineFloor) {
+    deficiencies.push({
+      kind: 'draw_engines',
+      have: drawEngineCount,
+      want: engineFloor,
+      severity: drawEngineCount < engineFloor - 2 ? 'fail' : 'warn',
+      message: `only ${drawEngineCount} repeatable draw engines (want >= ${engineFloor}) — deck will run out of gas`,
+    });
+  }
+
   // ── Land count ───────────────────────────────────────────────────────────
   if (totalLandSlots < opts.targetLands - 3) {
     deficiencies.push({
@@ -171,6 +194,7 @@ export function auditDeck(cards: AuditCard[], opts: AuditOptions): DeckHealth {
     sourcesByColor,
     pipsByColor,
     drawCount,
+    drawEngineCount,
     rampCount,
     fakeLands,
     warnings,
