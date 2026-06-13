@@ -33,6 +33,8 @@ import { VersionHistoryPanel } from '@/components/version-history-panel';
 import { CardZoomOverlay } from '@/components/card-zoom-overlay';
 import { DeckDndContext } from '@/components/deck-dnd-context';
 import { DeckAnalysisPanel } from '@/components/deck-analysis-panel';
+import { CraftPathPanel } from '@/components/craft-path-panel';
+import { PilotGuidePanel } from '@/components/pilot-guide-panel';
 import { FORMAT_LABELS, FORMATS, COMMANDER_FORMATS, DEFAULT_DECK_SIZE } from '@/lib/constants';
 
 interface DeckData {
@@ -1239,6 +1241,17 @@ export default function DeckEditorPage() {
                 isCommanderFormat={isCommanderFormat}
                 className="mb-3"
               />
+
+              {isCommanderFormat && (
+                <>
+                  <PilotGuidePanel deckId={deckId} className="mb-3" />
+                  <CraftPathPanel
+                    commanderName={deck.cards.find((c) => c.board === 'commander')?.name ?? null}
+                    format={deck.format}
+                    className="mb-3"
+                  />
+                </>
+              )}
 
               <DeckValidation
                 cards={deckEntries.map((e) => ({
