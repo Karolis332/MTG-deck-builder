@@ -106,3 +106,7 @@ decks/test-builds/results.json
 decks/test-builds/edhrec-reference.json
 !/data/training/scoring-weights.json
 !/data/training/fit-report-*.md
+
+# Throwaway audit/debug probes (tidy-scratch). Kept out of repo root.
+scripts/_scratch/*
+!scripts/_scratch/.gitkeep
