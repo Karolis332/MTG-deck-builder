@@ -55,7 +55,7 @@
   "devDependencies": {
     "@overwolf/electron-is-overwolf": "^0.0.2",
     "@overwolf/ow-electron": "^37.10.3",
-    "@overwolf/ow-electron-builder": "^26.0.12",
+    "@overwolf/ow-electron-builder": "^26.8.5",
     "@types/better-sqlite3": "^7.6.12",
     "@types/node": "^22.10.5",
     "@types/react": "^18.3.18",
@@ -64,7 +64,7 @@
     "autoprefixer": "^10.4.20",
     "concurrently": "^9.1.0",
     "electron": "^33.3.1",
-    "electron-builder": "^25.1.8",
+    "electron-builder": "^26.15.3",
     "eslint": "^8.57.1",
     "eslint-config-next": "^14.2.21",
     "postcss": "^8.4.49",
