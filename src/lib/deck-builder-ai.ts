@@ -1243,6 +1243,10 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
         score += castColors * (cheap ? 16 : 9);      // 2c charm +32 / 3c +48; 5c bomb +45
         if (tlc.includes('instant') || tlc.includes('sorcery')) score += cheap ? 12 : 4; // charms/commands
         if ((card.cmc || 0) >= 6 && !isPayoff) score -= 24; // slow gold goodstuff tax
+      } else if (!isLand && !isPayoff && castColors < 2) {
+        // ponytail: mono/colorless nonlands crowd the charm engine; discount them so
+        // gold spells win each slot. Rainbow-fix artifacts still net positive (+24 above).
+        score -= 18;
       }
       // Cheap dual/rainbow fixing rocks (talisman cycle, signets, Chromatic Lantern,
       // Arcane Signet) are the multicolor-matters ramp backbone — bias ramp to them.
