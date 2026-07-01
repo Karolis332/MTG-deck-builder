@@ -28,7 +28,7 @@ export async function POST(request: NextRequest) {
     const modelRow = db
       .prepare("SELECT value FROM app_state WHERE key = 'setting_claude_model'")
       .get() as { value: string } | undefined;
-    const model = modelRow?.value || 'claude-sonnet-4-5-20250929';
+    const model = modelRow?.value || 'claude-sonnet-4-6';
 
     // Load match data
     const actions = getMatchTimeline(match_id) as Array<{

@@ -1,12 +1,12 @@
 // Thrasios, Triton Hero + Tymna the Weaver — BRAWL
 // strategy=aggro themes=control,draw,ramp,artifacts,tokens,enchantments,aggro tribal=-
-// total=99 lands=40 avgCMC=1.97
-// categories: ramp=19 draw=12 removal=8 board_wipe=2 protection=4 win_condition=1 utility=13 land=40
+// total=99 lands=40 avgCMC=1.98 gold=4 counters=0
+// categories: ramp=20 draw=11 removal=5 board_wipe=2 protection=3 win_condition=1 utility=17 land=40
 
 1 Thrasios, Triton Hero *CMDR*
 1 Tymna the Weaver *CMDR* (requested partner — see note)
 
-// ── ramp (19) ──
+// ── ramp (20) ──
 1 Mox Amber
 1 An Offer You Can't Refuse
 1 Avacyn's Pilgrim
@@ -15,38 +15,35 @@
 1 Delighted Halfling
 1 Noble Hierarch
 1 Arcane Signet
-1 Deadly Dispute
+1 Azorius Signet
 1 Devoted Druid
-1 Finale of Devastation
-1 Invasion of Ikoria // Zilortha, Apex of Ikoria
+1 Dimir Signet
 1 Kinnan, Bonder Prodigy
 1 Lotho, Corrupt Shirriff
 1 Mind Stone
-1 Nature's Rhythm
-1 Chord of Calling
+1 Orzhov Signet
+1 Talisman of Dominance
+1 Talisman of Hierarchy
+1 Talisman of Progress
 1 Enduring Vitality
 1 Smothering Tithe
 
-// ── draw (12) ──
+// ── draw (11) ──
 1 Esper Sentinel
 1 Mystic Remora
-1 Vampiric Tutor
 1 Veil of Summer
 1 Faerie Mastermind
+1 Sram, Senior Edificer
 1 Tataru Taru
 1 Wan Shi Tong, Librarian
 1 Black Market Connections
-1 Formidable Speaker
+1 Braids, Arisen Nightmare
 1 Garruk's Uprising
-1 Ranger-Captain of Eos
 1 Rhystic Study
 
-// ── removal (8) ──
+// ── removal (5) ──
 1 Deathrite Shaman
-1 Insidious Fungus
 1 Swords to Plowshares
-1 Assassin's Trophy
-1 Cankerbloom
 1 Feed the Swarm
 1 Loran of the Third Path
 1 Sowing Mycospawn
@@ -55,56 +52,58 @@
 1 Cyclonic Rift
 1 Farewell
 
-// ── protection (4) ──
+// ── protection (3) ──
 1 Pact of Negation
 1 Swan Song
-1 Lightning Greaves
 1 Force of Will
 
 // ── win_condition (1) ──
 1 Zulaport Cutthroat
 
-// ── utility (13) ──
+// ── utility (17) ──
 1 Enlightened Tutor
 1 Flusterstorm
 1 Mockingbird
 1 Silence
 1 Training Grounds
+1 Vampiric Tutor
 1 Badgermole Cub
 1 Biomancer's Familiar
+1 Finale of Devastation
 1 Grand Abolisher
-1 Phantasmal Image
+1 Nature's Rhythm
 1 Springheart Nantuko
 1 Voice of Victory
+1 Chord of Calling
 1 Eternal Witness
+1 Formidable Speaker
 1 Valley Floodcaller
 
 // ── land (40) ──
+1 A-Thran Portal
+1 Aether Hub
 1 Baldur's Gate
 1 Breeding Pool
 1 Cascading Cataracts
-1 Cavern of Souls
 1 Command Tower
 1 Conduit Pylons
 1 Crystal Grotto
-1 Echoing Cavern
-1 Eclipsed Realms
+1 Demolition Field
+1 Flooded Strand
 5 Forest
 1 Gemstone Caverns
-1 Great Hall of the Biblioplex
-1 Great Hall of the Citadel
-1 Haven of the Spirit Dragon
 1 Hidden Grotto
 2 Island
-1 Maelstrom of the Spirit Dragon
 1 Mana Confluence
-1 Nykthos, Shrine to Nyx
+1 Marsh Flats
+1 Misty Rainforest
+1 Multiversal Passage
 1 Overgrown Tomb
 1 Plains
-1 Plaza of Heroes
+1 Polluted Delta
+1 Prismatic Vista
 1 Reflecting Pool
-1 Secluded Courtyard
-1 Spire of Industry
+1 Rumble Arena
 1 Swamp
 1 Tarnished Citadel
 1 Temple Garden
@@ -112,6 +111,7 @@
 1 The Grey Havens
 1 The Mycosynth Gardens
 1 Three Tree City
-1 Unclaimed Territory
-1 Voldaren Estate
+1 Verdant Catacombs
+1 Watery Grave
+1 Windswept Heath
 1 Growing Rites of Itlimoc // Itlimoc, Cradle of the Sun

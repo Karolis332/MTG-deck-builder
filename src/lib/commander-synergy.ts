@@ -479,6 +479,15 @@ export function analyzeCommander(
     }
   }
 
+  // Multicolor-cast commanders (Ramos, Dragon Engine) accrue +1/+1 counters
+  // ONLY as a mana battery — refueled by casting more multicolored spells, not
+  // by proliferate/doubling. A counters-matters package is dead weight here; the
+  // winning Ramos build runs zero such cards. When the colors-matter trigger is
+  // present, drop counters (and its protected Hardened Scales/Doubling Season).
+  if (triggerCategories.includes('counters') && triggerCategories.includes('five_colors')) {
+    triggerCategories.splice(triggerCategories.indexOf('counters'), 1);
+  }
+
   if (triggerCategories.length === 0) return null;
 
   // ── Detect payoff type ─────────────────────────────────────────────

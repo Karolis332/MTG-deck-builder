@@ -1,3 +1,4 @@
+import './register-aliases'; // MUST be first: enables '@/...' requires in the main process
 import { app, BrowserWindow, dialog, ipcMain } from 'electron';
 import path from 'path';
 import fs from 'fs';

@@ -1,56 +1,56 @@
 // Heliod, Sun-Crowned — COMMANDER
 // strategy=midrange themes=enchantments,artifacts,counters,draw,lifegain,equipment,spellslinger,aggro,tokens tribal=-
-// total=99 lands=38 avgCMC=2.95
-// categories: utility=10 removal=14 win_condition=9 draw=11 ramp=10 board_wipe=4 protection=3 land=38
+// total=99 lands=38 avgCMC=2.85 gold=0 counters=0
+// categories: utility=10 removal=13 win_condition=9 draw=11 ramp=11 board_wipe=4 protection=3 land=38
 
 1 Heliod, Sun-Crowned *CMDR*
 
-// ── ramp (10) ──
+// ── ramp (11) ──
 1 Sol Ring
 1 Arcane Signet
+1 Collector's Vault
 1 Idol of False Gods
 1 Altar of the Pantheon
-1 Codsworth, Handy Helper
-1 Glistening Sphere
+1 Discerning Financier
+1 Dragon's Hoard
+1 Pendant of Prosperity
 1 Pristine Talisman
-1 Coin of Mastery
 1 Smothering Tithe
-1 Solemn Simulacrum
+1 Ugin, Eye of the Storms
 
 // ── draw (11) ──
+1 Esper Sentinel
 1 Dawn of Hope
 1 Dusk Legion Duelist
 1 Kor Spiritdancer
-1 Rune of Sustenance
-1 Syr Ginger, the Meal Ender
+1 Sram, Senior Edificer
 1 Mesa Enchantress
 1 Pearl-Ear, Imperial Advisor
 1 Exemplar of Light
 1 Mangara, the Diplomat
+1 Sigarda's Splendor
 1 Towashi Guide-Bot
-1 Elspeth Resplendent
 
-// ── removal (14) ──
+// ── removal (13) ──
 1 Walking Ballista
 1 Hopeful Initiate
 1 Path to Exile
 1 Requisition Raid
 1 Swords to Plowshares
-1 Cathar Commando
 1 Heliod's Intervention
 1 Sunder the Gateway
 1 Collective Effort
 1 Loran of the Third Path
 1 Staff of Compleation
+1 Venat, Heart of Hydaelyn // Hydaelyn, the Mothercrystal
 1 Aetherflux Reservoir
-1 Ajani Steadfast
 1 Triskelion
 
 // ── board_wipe (4) ──
+1 Bag of Holding
 1 Dismantling Wave
 1 Nevinyrral's Disk
 1 Sunfall
-1 Austere Command
 
 // ── protection (3) ──
 1 Alseid of Life's Bounty
@@ -62,8 +62,8 @@
 1 Archon of Sun's Grace
 1 Angel of Invention
 1 Archangel of Thune
+1 Elspeth Resplendent
 1 Sigil of the Empty Throne
-1 Summon: Good King Mog XII
 1 Sunscorch Regent
 1 Felidar Sovereign
 1 Nykthos Paragon
@@ -81,13 +81,13 @@
 1 Well of Lost Dreams
 
 // ── land (38) ──
-1 Cavern of Souls
+1 Arid Mesa
 1 City of Brass
-1 Flagstones of Trokair
+1 Flooded Strand
+1 Marsh Flats
 28 Plains
-1 Secluded Courtyard
 1 Three Tree City
-1 Unclaimed Territory
+1 Windswept Heath
 1 Razorgrass Ambush // Razorgrass Field
 1 Sejiri Shelter // Sejiri Glacier
 1 Witch Enchanter // Witch-Blessed Meadow

@@ -1,19 +1,23 @@
 // Sheoldred, the Apocalypse — COMMANDER
 // strategy=control themes=draw,ramp,artifacts,sacrifice,equipment,tokens,control,tribal tribal=-
-// total=99 lands=38 avgCMC=3.85
-// categories: ramp=8 removal=22 draw=15 board_wipe=6 protection=1 win_condition=2 utility=7 land=38
+// total=99 lands=38 avgCMC=3.8 gold=0 counters=0
+// categories: ramp=12 draw=15 removal=18 board_wipe=6 protection=1 win_condition=2 utility=7 land=38
 
 1 Sheoldred, the Apocalypse *CMDR*
 
-// ── ramp (8) ──
+// ── ramp (12) ──
 1 Dark Ritual
 1 Sol Ring
 1 Arcane Signet
 1 Collector's Vault
 1 Mind Stone
 1 Thought Vessel
-1 Warren Soultrader
-1 Pitiless Plunderer
+1 Dragon's Hoard
+1 Magnifying Glass
+1 Mastermind Plum
+1 Azula, On the Hunt
+1 Chromatic Orrery
+1 Ugin, Eye of the Storms
 
 // ── draw (15) ──
 1 Sign in Blood
@@ -32,37 +36,33 @@
 1 Peer into the Abyss
 1 Kozilek, the Great Distortion
 
-// ── removal (22) ──
+// ── removal (18) ──
 1 Soul-Guide Lantern
 1 Feed the Swarm
-1 Go for the Throat
 1 Infernal Grasp
 1 Kozilek's Command
 1 Orcish Bowmasters
-1 Warping Wail
 1 Staff of Compleation
 1 Baleful Mastery
 1 Deadly Rollick
 1 Dread Presence
-1 Eldrazi Confluence
+1 Erebos, Bleak-Hearted
 1 Lethal Scheme
-1 Snuff Out
 1 Ob Nixilis Reignited
 1 Ob Nixilis, the Hate-Twisted
 1 Sheoldred // The True Scriptures
-1 The Mightstone and Weakstone
 1 Zuko's Exile
-1 Summon: Primal Odin
+1 Endbringer
+1 Staff of Nin
 1 Vilis, Broker of Blood
-1 Summon: Bahamut
 
 // ── board_wipe (6) ──
+1 Bag of Holding
 1 Toxic Deluge
+1 Coercive Portal
 1 Damnation
-1 Nevinyrral's Disk
 1 Blood Money
 1 Kindred Dominance
-1 Extinguisher Battleship
 
 // ── protection (1) ──
 1 Lightning Greaves
@@ -81,13 +81,13 @@
 1 Sanguine Bond
 
 // ── land (38) ──
-1 Castle Locthwain
-1 Cavern of Souls
+1 Bloodstained Mire
 1 City of Brass
-1 Secluded Courtyard
+1 Marsh Flats
+1 Polluted Delta
 28 Swamp
 1 Three Tree City
-1 Unclaimed Territory
+1 Verdant Catacombs
 1 Malakir Rebirth // Malakir Mire
 1 Agadeem's Awakening // Agadeem, the Undercrypt
 1 Boggart Trawler // Boggart Bog

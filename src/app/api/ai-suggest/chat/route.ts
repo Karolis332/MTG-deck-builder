@@ -1423,7 +1423,7 @@ Refer to the ALL CARDS list in the system prompt to avoid suggesting duplicates.
       let response: Response;
       if (provider.isClaude) {
         const modelRow = db.prepare("SELECT value FROM app_state WHERE key = 'setting_claude_model'").get() as { value: string } | undefined;
-        const claudeModel = modelRow?.value || 'claude-sonnet-4-5-20250929';
+        const claudeModel = modelRow?.value || 'claude-sonnet-4-6';
 
         response = await fetchWithRetry(provider.baseUrl, {
           method: 'POST',

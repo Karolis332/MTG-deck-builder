@@ -26,6 +26,12 @@ files:
   - "package.json"
   - "next.config.js"
   - "!node_modules"
+  # Main process imports db.js (better-sqlite3) on startup (commander-stats sync,
+  # first-boot). @electron/rebuild compiles the root copy for Electron's ABI
+  # before packaging, so bundle it + its runtime deps into resources/app/node_modules.
+  - "node_modules/better-sqlite3/**/*"
+  - "node_modules/bindings/**/*"
+  - "node_modules/file-uri-to-path/**/*"
   - "node_modules/electron-updater/**/*"
   - "node_modules/builder-util-runtime/**/*"
   - "node_modules/fs-extra/**/*"

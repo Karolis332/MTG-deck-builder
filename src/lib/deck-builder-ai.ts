@@ -25,6 +25,16 @@ import { parseBuildHints } from './build-hints';
 import { auditDeck } from './deck-auditor';
 import type { DeckHealth } from './deck-auditor';
 
+// ── Mana-sink payoffs for multicolor-matters commanders (Ramos et al.) ───────
+// Cards that convert a big mana burst (from Ramos's counter-dump) into a win or
+// huge swing. Named explicitly because the oracle text doesn't pattern-match.
+const MANA_SINK_PAYOFFS = new Set<string>([
+  'door to nothingness', 'progenitus', 'maelstrom archangel', 'bring to light',
+  'jodah, the unifier', 'chromanticore', 'timeless lotus', 'omnath, locus of all',
+  'torment of hailfire', 'crackle with power', 'genesis ultimatum',
+  'villainous wealth', 'maelstrom nexus', 'fist of suns',
+]);
+
 // ── Learned scoring weights ──────────────────────────────────────────────────
 // Optional per-component multipliers fitted offline against the scraped-deck
 // corpus (scripts/fit_scoring_weights.py → <data-dir>/scoring-weights.json).
@@ -1218,13 +1228,32 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
       if (text.includes('{x}') || text.includes('x in its mana cost') || text.includes('x in their mana cost')) score += 15;
     }
     if (commanderProfile?.triggerCategories.includes('five_colors')) {
-      // "Colors matter" commanders (Ramos, Jodah, Najeela) want multicolor
-      // cards and rainbow fixing, not generic mono-color goodstuff.
-      let ciCount = 0;
-      try { ciCount = (JSON.parse(card.color_identity || '[]') as string[]).length; } catch { /* skip */ }
-      if (ciCount >= 4) score += 30;
-      else if (ciCount === 3) score += 15;
-      if (/converge|sunburst|one mana of each color|mana of any color|each color of mana spent|five colors?/.test(text)) score += 20;
+      // Multicolor-matters (Ramos, Jodah, Najeela): CAST multicolored spells to
+      // load counters / fuel the mana ability. Reward the spell's ACTUAL cast
+      // colors — and reward CHEAP gold (charms) far more than expensive gold
+      // legends, which curve out too slowly. The winning Ramos deck is a low-curve
+      // charm engine, not a Niv-Mizzet / Ur-Dragon goodstuff pile.
+      const tlc = (card.type_line || '').toLowerCase();
+      const isLand = tlc.includes('land');
+      const isPayoff = MANA_SINK_PAYOFFS.has(card.name.toLowerCase());
+      let castColors = 0;
+      try { castColors = (JSON.parse(card.colors || '[]') as string[]).length; } catch { /* skip */ }
+      if (!isLand && castColors >= 2) {
+        const cheap = (card.cmc || 0) <= 3;
+        score += castColors * (cheap ? 16 : 9);      // 2c charm +32 / 3c +48; 5c bomb +45
+        if (tlc.includes('instant') || tlc.includes('sorcery')) score += cheap ? 12 : 4; // charms/commands
+        if ((card.cmc || 0) >= 6 && !isPayoff) score -= 24; // slow gold goodstuff tax
+      }
+      // Cheap dual/rainbow fixing rocks (talisman cycle, signets, Chromatic Lantern,
+      // Arcane Signet) are the multicolor-matters ramp backbone — bias ramp to them.
+      if (!isLand && tlc.includes('artifact') && (card.cmc || 0) <= 2 &&
+          /add \{[wubrg]\} or \{[wubrg]\}|pay 1 life: add|add \{[wubrg]\}\{[wubrg]\}|add one mana of any|mana of any (?:one )?color|add two mana/i.test(card.oracle_text || '')) {
+        score += 24;
+      }
+      // Rainbow fixing to actually cast all those gold spells.
+      if (/converge|sunburst|one mana of each color|mana of any color|add one mana of any|each color of mana spent|five colors?/.test(text)) score += 18;
+      // Mana-sink payoffs that consume Ramos's burst.
+      if (isPayoff) score += 45;
     }
 
     snap('mechanicFit');
@@ -1511,6 +1540,37 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
     });
     totalPicked += qty;
     arsenalUsed += qty;
+  }
+
+  // ── (b2) Guarantee a cheap fixing-rock floor for 3+ color decks ────────
+  // Rainbow decks need cheap dual/any-color rocks (talisman cycle, signets) to
+  // cast their gold spells on curve. These rarely win a ramp slot on raw score,
+  // so force-include the best-scored available before the role picker runs.
+  if (colors.length >= 3) {
+    const fixingFloor = Math.min(8, colors.length * 2);
+    let fixingAdded = 0;
+    // Repeatable DUAL/rainbow rocks only (talisman + signet cycles, plus the
+    // classic 2-mana fixers). Excludes one-shot fast mana (Moxen, Lotus Petal)
+    // and treasure-makers so the floor reproduces the talisman/signet backbone.
+    const FIXING_ROCK_ALLOW = /^(arcane signet|chromatic lantern|fellwar stone|coalition relic|prismatic lens|mind stone|fractured powerstone|cryptic spires)$/i;
+    const isFixingRock = (c: DbCard): boolean => {
+      const name = (c.name || '').toLowerCase();
+      const tl = (c.type_line || '').toLowerCase();
+      if (!tl.includes('artifact') || tl.includes('creature')) return false;
+      if ((c.cmc || 0) > 2) return false;
+      return /^talisman of /.test(name) || / signet$/.test(name) || FIXING_ROCK_ALLOW.test(name);
+    };
+    for (const s of scored) {
+      if (fixingAdded >= fixingFloor || totalPicked >= nonLandTarget) break;
+      if (pickedNames.has(s.card.name)) continue;
+      if (!isFixingRock(s.card)) continue;
+      if (getMaxQty(s.card) <= 0) continue;
+      picked.push({ card: s.card, quantity: 1, board: 'main' });
+      pickedNames.add(s.card.name);
+      reasoning.push({ cardName: s.card.name, role: 'fixing-floor', reason: 'cheap rainbow fixing for multicolor deck' });
+      totalPicked += 1;
+      fixingAdded += 1;
+    }
   }
 
   // ── (c) Role-based picker on remaining pool ────────────────────────────

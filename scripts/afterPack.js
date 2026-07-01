@@ -114,6 +114,25 @@ module.exports = async function afterPack(context) {
   }
 
   rebuild(targetSqliteDir, electronVersion);
+
+  // ── Step 5: Sync the Electron-ABI binary into the app copy ─────────────
+  // The Electron main process (main.ts → first-boot → db.ts) requires its own
+  // better-sqlite3 from resources/app/node_modules. electron-builder copies that
+  // from the project root, where @electron/rebuild leaves a Node-ABI binary
+  // (NODE_MODULE_VERSION mismatch → "compiled against a different Node.js version").
+  // The standalone copy we just rebuilt has the correct Electron ABI — copy it over.
+  const appSqliteDir = path.join(resourcesDir, 'app', 'node_modules', 'better-sqlite3');
+  if (fs.existsSync(appSqliteDir) && targetSqliteDir !== appSqliteDir) {
+    const builtNode = path.join(targetSqliteDir, 'build', 'Release', 'better_sqlite3.node');
+    if (fs.existsSync(builtNode)) {
+      const appPrebuilds = path.join(appSqliteDir, 'prebuilds');
+      if (fs.existsSync(appPrebuilds)) fs.rmSync(appPrebuilds, { recursive: true, force: true });
+      const appBuildDir = path.join(appSqliteDir, 'build', 'Release');
+      fs.mkdirSync(appBuildDir, { recursive: true });
+      fs.copyFileSync(builtNode, path.join(appBuildDir, 'better_sqlite3.node'));
+      console.log('[afterPack] Synced Electron-ABI better_sqlite3.node into app/node_modules');
+    }
+  }
 };
 
 function copyDirSync(src, dest) {

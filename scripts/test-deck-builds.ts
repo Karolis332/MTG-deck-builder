@@ -66,12 +66,48 @@ interface BuildOut {
   totalCards?: number;
   landCount?: number;
   avgCmcNonLand?: number;
+  /** Multicolored (2+ cast colors) nonland spells — the Ramos engine fuel. */
+  goldSpellCount?: number;
+  /** Counters-matters cards a multicolor-matters deck should NOT run. */
+  counterMattersCount?: number;
+  /** % of build's nonland cards present in the human winning reference (if any). */
+  referenceOverlapPct?: number;
+  /** Reference nonland cards the build MISSED (top gaps). */
+  referenceMissing?: string[];
   categoryCounts?: Record<string, number>;
   curve?: Record<string, number>;
   illegalCardsForFormat?: string[];
   commanderLegalInFormat?: boolean;
   cards?: DeckCardOut[];
   buildReport?: string;
+}
+
+// Cards a multicolor-matters deck (Ramos) should NOT run — counters are a mana
+// battery, not a theme. Used as a regression gate in the testing protocol.
+const COUNTERS_MATTERS = [
+  'hardened scales', 'doubling season', 'branching evolution', 'evolution sage',
+  "ozolith", 'inspiring call', 'conclave mentor', "hydra's growth", 'kami of whispered hopes',
+];
+
+function castColorCount(raw: unknown): number {
+  if (Array.isArray(raw)) return raw.length;
+  if (typeof raw === 'string') { try { return (JSON.parse(raw) as string[]).length; } catch { return 0; } }
+  return 0;
+}
+
+// Load card names from a human winning-reference fixture, if one exists, for
+// convergence scoring. Strips comments, quantities, and the *CMDR* marker.
+function loadReferenceNames(slug: string): Set<string> | null {
+  const file = path.join(OUT_DIR, `${slug}--winning-reference.txt`);
+  if (!fs.existsSync(file)) return null;
+  const names = new Set<string>();
+  for (const raw of fs.readFileSync(file, 'utf8').split(/\r?\n/)) {
+    const line = raw.trim();
+    if (!line || line.startsWith('//')) continue;
+    const m = line.match(/^\d+\s+(.+?)(?:\s+\*CMDR\*)?$/);
+    if (m) names.add(m[1].trim().toLowerCase());
+  }
+  return names.size ? names : null;
 }
 
 function legalIn(card: { legalities?: string | null }, key: string): boolean {
@@ -145,6 +181,36 @@ async function buildOne(scenario: Scenario, format: string): Promise<BuildOut> {
       curve[bucket] = (curve[bucket] || 0) + c.quantity;
     }
 
+    // Engine-fit metrics: gold-spell density (Ramos fuel) + counters-matters leak.
+    let goldSpellCount = 0;
+    let counterMattersCount = 0;
+    for (const e of result.cards) {
+      if (e.board !== 'main') continue;
+      const rc = e.card as DbCard;
+      const tl = (rc.type_line || '').toLowerCase();
+      if (tl.includes('land')) continue;
+      if (castColorCount((rc as { colors?: unknown }).colors) >= 2) goldSpellCount += e.quantity;
+      const nm = rc.name.toLowerCase();
+      if (COUNTERS_MATTERS.some((n) => nm.includes(n))) counterMattersCount += e.quantity;
+    }
+
+    // Convergence vs human winning reference (overlap on ALL nonland cards).
+    let referenceOverlapPct: number | undefined;
+    let referenceMissing: string[] | undefined;
+    const refNames = loadReferenceNames(scenario.slug);
+    if (refNames) {
+      const buildNames = new Set(
+        main.filter((c) => !c.type_line.includes('Land')).map((c) => c.name.toLowerCase())
+      );
+      let hit = 0;
+      for (const n of buildNames) if (refNames.has(n)) hit++;
+      referenceOverlapPct = Math.round((hit / Math.max(1, buildNames.size)) * 100);
+      // Reference nonland cards (best-known includes) the build failed to pick.
+      const refNonlandMissing: string[] = [];
+      for (const r of refNames) if (!buildNames.has(r)) refNonlandMissing.push(r);
+      referenceMissing = refNonlandMissing;
+    }
+
     const legalityKey = format === 'commander' ? 'commander' : format === 'standardbrawl' ? 'standardbrawl' : 'brawl';
     const illegal = main
       .filter((c) => (legalityKey === 'commander' ? !c.commanderLegal : !c.brawlLegal))
@@ -166,6 +232,10 @@ async function buildOne(scenario: Scenario, format: string): Promise<BuildOut> {
       totalCards,
       landCount,
       avgCmcNonLand: Math.round(avgCmc * 100) / 100,
+      goldSpellCount,
+      counterMattersCount,
+      referenceOverlapPct,
+      referenceMissing,
       categoryCounts,
       curve,
       illegalCardsForFormat: illegal,
@@ -184,7 +254,7 @@ function writeDecklist(out: BuildOut, scenario: Scenario): void {
   const lines: string[] = [];
   lines.push(`// ${scenario.commander}${scenario.partner ? ' + ' + scenario.partner : ''} — ${out.format.toUpperCase()}`);
   lines.push(`// strategy=${out.strategy} themes=${(out.themes || []).join(',')} tribal=${out.tribalType || '-'}`);
-  lines.push(`// total=${out.totalCards} lands=${out.landCount} avgCMC=${out.avgCmcNonLand}`);
+  lines.push(`// total=${out.totalCards} lands=${out.landCount} avgCMC=${out.avgCmcNonLand} gold=${out.goldSpellCount} counters=${out.counterMattersCount}`);
   lines.push(`// categories: ${Object.entries(out.categoryCounts || {}).map(([k, v]) => `${k}=${v}`).join(' ')}`);
   if (out.illegalCardsForFormat?.length) {
     lines.push(`// !! ${out.illegalCardsForFormat.length} cards NOT LEGAL in ${out.format}: ${out.illegalCardsForFormat.slice(0, 10).join('; ')}${out.illegalCardsForFormat.length > 10 ? ' …' : ''}`);
@@ -228,7 +298,7 @@ async function main(): Promise<void> {
       const out = await buildOne(scenario, format);
       results.push(out);
       if (out.ok) {
-        console.log(`OK ${out.totalCards} cards, ${out.landCount} lands, avgCMC ${out.avgCmcNonLand}, ${out.elapsedMs}ms${out.illegalCardsForFormat?.length ? ` [${out.illegalCardsForFormat.length} ILLEGAL]` : ''}`);
+        console.log(`OK ${out.totalCards} cards, ${out.landCount} lands, avgCMC ${out.avgCmcNonLand}, gold ${out.goldSpellCount}, counters ${out.counterMattersCount}${out.referenceOverlapPct !== undefined ? `, ref-overlap ${out.referenceOverlapPct}%` : ''}, ${out.elapsedMs}ms${out.illegalCardsForFormat?.length ? ` [${out.illegalCardsForFormat.length} ILLEGAL]` : ''}`);
         writeDecklist(out, scenario);
       } else {
         console.log(`FAILED: ${out.error}`);

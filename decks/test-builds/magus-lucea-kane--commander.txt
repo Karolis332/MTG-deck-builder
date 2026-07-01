@@ -1,25 +1,26 @@
 // Magus Lucea Kane — COMMANDER
 // strategy=spellslinger themes=aggro,counters,tokens,equipment,draw,ramp tribal=-
-// total=99 lands=38 avgCMC=2.7
-// categories: utility=8 draw=13 removal=17 ramp=12 protection=4 win_condition=5 board_wipe=2 land=38
+// total=99 lands=38 avgCMC=2.84 gold=11 counters=4
+// categories: ramp=13 utility=8 removal=17 draw=15 protection=3 board_wipe=2 win_condition=3 land=38
 
 1 Magus Lucea Kane *CMDR*
 
-// ── ramp (12) ──
-1 Sol Ring
+// ── ramp (13) ──
 1 Sporocyst
 1 Arcane Signet
 1 Biophagus
 1 Farseek
-1 Incubation Druid
+1 Fractured Powerstone
+1 Izzet Signet
+1 Mind Stone
 1 Nexos
-1 Rampant Growth
-1 Cultivate
+1 Prismatic Lens
+1 Talisman of Curiosity
 1 Elementalist's Palette
-1 Jugan Defends the Temple // Remnant of the Rising Star
 1 Kami of Whispered Hopes
+1 Contaminant Grafter
 
-// ── draw (13) ──
+// ── draw (15) ──
 1 Hormagaunt Horde
 1 Ingenious Prodigy
 1 Termagant Swarm
@@ -30,26 +31,28 @@
 1 Exocrine
 1 Garruk's Uprising
 1 Inspiring Call
-1 Lifeblood Hydra
 1 Tyrant Guard
+1 Bident of Thassa
 1 Broodlord
+1 The One Ring
+1 Firkraag, Cunning Instigator
 
 // ── removal (17) ──
 1 Walking Ballista
-1 Monstrous Rage
 1 Aberrant
 1 Cankerbloom
 1 Hull Breach
 1 Red Sun's Twilight
 1 Steelbane Hydra
 1 Voracious Hydra
-1 Archdruid's Charm
-1 Beast Within
 1 Rampaging Yao Guai
 1 Staff of Compleation
+1 Zurzoth, Chaos Rider
+1 Chandra, Spark Hunter
 1 Earth Rumble
-1 Siege-Gang Lieutenant
+1 Freyalise, Llanowar's Fury
 1 Vorinclex // The Grand Evolution
+1 Niv-Mizzet, Parun
 1 Flaming Tyrannosaurus
 1 Titan of Industry
 
@@ -57,18 +60,15 @@
 1 Duskshell Crawler
 1 Season of Gathering
 
-// ── protection (4) ──
+// ── protection (3) ──
 1 Mistcutter Hydra
-1 Gaea's Gift
 1 Rhythm of the Wild
 1 Altered Ego
 
-// ── win_condition (5) ──
-1 Chishiro, the Shattered Blade
+// ── win_condition (3) ──
+1 Minsc & Boo, Timeless Heroes
 1 Clamavus
-1 Kalonian Hydra
 1 Winged Hive Tyrant
-1 Old One Eye
 
 // ── utility (8) ──
 1 Hangarback Walker
@@ -81,30 +81,30 @@
 1 Unbound Flourishing
 
 // ── land (38) ──
+1 Bountiful Landscape
 1 Breeding Pool
-1 Cavern of Souls
 1 City of Brass
 1 Command Tower
-1 Eclipsed Realms
 1 Exotic Orchard
-10 Forest
+8 Forest
 1 Grand Coliseum
-1 Great Hall of the Biblioplex
 1 Hinterland Harbor
-1 Island
+2 Island
 1 Mana Confluence
-3 Mountain
-1 Nykthos, Shrine to Nyx
-1 Primal Beyond
+1 Misty Rainforest
+4 Mountain
+1 Multiversal Passage
 1 Rootbound Crag
-1 Secluded Courtyard
+1 Scalding Tarn
 1 Steam Vents
 1 Stomping Ground
 1 Taiga
 1 Temple of the Dragon Queen
+1 Thran Portal
 1 Three Tree City
 1 Tropical Island
-1 Unclaimed Territory
+1 Verdant Catacombs
 1 Volcanic Island
-1 Yavimaya Coast
+1 Windswept Heath
+1 Wooded Foothills
 1 Stump Stomp // Burnwillow Clearing

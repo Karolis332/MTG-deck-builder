@@ -54,7 +54,7 @@ function getClaudeModel(): string {
   const row = db
     .prepare("SELECT value FROM app_state WHERE key = 'setting_claude_model'")
     .get() as { value: string } | undefined;
-  return row?.value || 'claude-sonnet-4-5-20250929';
+  return row?.value || 'claude-sonnet-4-6';
 }
 
 /**

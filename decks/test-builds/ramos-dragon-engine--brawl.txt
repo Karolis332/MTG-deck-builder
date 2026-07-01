@@ -1,118 +1,118 @@
 // Ramos, Dragon Engine — BRAWL
-// strategy=midrange themes=tokens,counters,artifacts,ramp,draw tribal=-
-// total=99 lands=38 avgCMC=3.34
-// categories: utility=7 draw=9 ramp=18 win_condition=8 removal=12 board_wipe=4 protection=3 land=38
+// strategy=midrange themes=artifacts,tokens,ramp,draw,sacrifice,counters,flying,control,spellslinger tribal=-
+// total=99 lands=38 avgCMC=3.25 gold=30 counters=0
+// categories: ramp=18 win_condition=6 draw=13 utility=4 removal=15 board_wipe=4 protection=1 land=38
 
 1 Ramos, Dragon Engine *CMDR*
 
 // ── ramp (18) ──
 1 Arcane Signet
 1 Collector's Vault
-1 Deadly Dispute
-1 Insidious Roots
+1 Dimir Signet
+1 Herd Heirloom
+1 Izzet Signet
 1 Lotho, Corrupt Shirriff
-1 Baylen, the Haymaker
+1 Talisman of Conviction
+1 Talisman of Creativity
+1 Talisman of Dominance
+1 Talisman of Hierarchy
+1 Talisman of Progress
 1 Chromatic Lantern
-1 Patchwork Banner
-1 Seize the Spoils
-1 Tireless Provisioner
-1 Big Score
+1 Faeburrow Elder
+1 Hearthhull, the Worldseed
 1 Kheru Goldkeeper
-1 Pirate's Pillage
-1 Pitiless Plunderer
 1 Storm-Kiln Artist
-1 Unexpected Windfall
-1 Revel in Riches
-1 Vraska, Betrayal's Sting
+1 Omnath, Locus of All
+1 Chromatic Orrery
 
-// ── draw (9) ──
+// ── draw (13) ──
+1 Baral, Chief of Compliance
+1 Likeness Looter
+1 Lunar Convocation
+1 Vohar, Vodalian Desecrator
 1 Black Market Connections
-1 Chasm Skulker
-1 Inspiring Call
+1 Braids, Arisen Nightmare
+1 Kutzil, Malamet Exemplar
 1 Tireless Tracker
-1 Tribute to the World Tree
-1 Woe Strider
+1 Zurgo Stormrender
 1 Archmage Emeritus
-1 Tezzeret's Gambit
+1 Toski, Bearer of Secrets
+1 Infinite Guideline Station
 1 Korvold, Fae-Cursed King
 
-// ── removal (12) ──
+// ── removal (15) ──
 1 Deathrite Shaman
-1 Agatha's Soul Cauldron
-1 Cankerbloom
-1 Fake Your Own Death
-1 Lion Sash
-1 The Ooze
+1 Abrupt Decay
+1 Fracture
 1 Abzan Charm
-1 Archdruid's Charm
+1 Bedevil
+1 Brokers Charm
 1 Loran of the Third Path
-1 Staff of Compleation
+1 Mortify
+1 Obscura Charm
+1 Prismari Command
+1 Putrefy
 1 Sultai Charm
-1 Elspeth, Storm Slayer
+1 Venat, Heart of Hydaelyn // Hydaelyn, the Mothercrystal
+1 Wear // Tear
+1 Niv-Mizzet, Parun
 
 // ── board_wipe (4) ──
 1 Toxic Deluge
 1 Damnation
 1 Night of the Sweets' Revenge
-1 Season of Gathering
+1 Jin-Gitaxias // The Great Synthesis
 
-// ── protection (3) ──
+// ── protection (1) ──
 1 Swan Song
-1 Swiftfoot Boots
-1 Unbreakable Formation
 
-// ── win_condition (8) ──
-1 Marionette Apprentice
-1 Bastion of Remembrance
-1 Mirkwood Bats
-1 Olivia, Opulent Outlaw
+// ── win_condition (6) ──
+1 Guttersnipe
+1 Murmuring Mystic
 1 Talrand, Sky Summoner
-1 Tekuthal, Inquiry Dominus
+1 Chromanticore
 1 Maelstrom Archangel
 1 Progenitus
 
-// ── utility (7) ──
+// ── utility (4) ──
 1 Goblin Electromancer
-1 Thrummingbird
-1 Champion of Lambholt
 1 Dualcaster Mage
-1 Evolution Sage
-1 Cathars' Crusade
+1 Villainous Wealth
 1 Door to Nothingness
 
 // ── land (38) ──
+1 A-Thran Portal
 1 Aether Hub
-1 Ancient Ziggurat
 1 Baldur's Gate
+1 Branch of Vitu-Ghazi
+1 Capital City
+1 Captivating Cave
 1 Cascading Cataracts
-1 Cavern of Souls
+1 Cave of Temptation
 1 Command Tower
 1 Conduit Pylons
 1 Crystal Grotto
-1 Echoing Cavern
-1 Eclipsed Realms
-2 Forest
+1 Crystal Quarry
+1 Daily Bugle Building
+1 Demolition Field
+1 Forest
 1 Gemstone Caverns
-1 Great Hall of the Biblioplex
-1 Great Hall of the Citadel
-1 Haven of the Spirit Dragon
+1 Hall of Oracles
 1 Hidden Grotto
-1 Island
-1 Maelstrom of the Spirit Dragon
+2 Island
 1 Mana Confluence
-1 Mirrex
+1 Meteor Crater
 1 Mountain
-1 Nykthos, Shrine to Nyx
+1 Multiversal Passage
 2 Plains
-1 Plaza of Heroes
+1 Plaza of Harmony
+1 Prismatic Vista
 1 Reflecting Pool
-1 Secluded Courtyard
-1 Spire of Industry
+1 Rumble Arena
 2 Swamp
 1 Tarnished Citadel
 1 Temple of the Dragon Queen
 1 The Grey Havens
 1 The Mycosynth Gardens
 1 Three Tree City
-1 Unclaimed Territory
-1 Voldaren Estate
+1 Unknown Shores

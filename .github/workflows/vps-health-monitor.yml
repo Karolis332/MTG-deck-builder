@@ -17,18 +17,24 @@ jobs:
       - name: Probe geo-scraper (HTTP)
         id: geo
         run: |
-          code=$(curl -s -o /dev/null -w '%{http_code}' --max-time 10 http://187.77.110.100:3000/ || echo 000)
+          # Retry transient failures (timeouts, conn-refused, network blips) before
+          # declaring the service dead — a real outage fails all attempts, a blip recovers.
+          code=$(curl -s -o /dev/null -w '%{http_code}' --max-time 10 \
+            --retry 5 --retry-delay 5 --retry-max-time 90 --retry-connrefused --retry-all-errors \
+            http://187.77.110.100:3000/ || echo 000)
           echo "geo_status=$code" >> $GITHUB_OUTPUT
           # 200/302/401 are all "service is up and responding"
           case "$code" in
             200|302|401) echo "geo-scraper: OK ($code)" ;;
-            *) echo "::error::geo-scraper unhealthy (HTTP $code)"; exit 1 ;;
+            *) echo "::error::geo-scraper unhealthy (HTTP $code after retries)"; exit 1 ;;
           esac
 
       - name: Probe CF API (HTTP + JSON)
         id: cf
         run: |
-          body=$(curl -s --max-time 10 http://187.77.110.100:8000/health || echo '{}')
+          body=$(curl -s --max-time 10 \
+            --retry 5 --retry-delay 5 --retry-max-time 90 --retry-connrefused --retry-all-errors \
+            http://187.77.110.100:8000/health || echo '{}')
           status=$(echo "$body" | jq -r '.status // "down"')
           decks=$(echo "$body" | jq -r '.deck_count // 0')
           echo "cf_status=$status" >> $GITHUB_OUTPUT

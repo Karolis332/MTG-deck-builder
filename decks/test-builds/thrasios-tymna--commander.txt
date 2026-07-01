@@ -1,63 +1,68 @@
 // Thrasios, Triton Hero + Tymna the Weaver — COMMANDER
 // strategy=control themes=control,ramp,draw,tokens,artifacts,equipment tribal=-
-// total=99 lands=40 avgCMC=2.49
-// categories: ramp=15 removal=17 draw=9 board_wipe=6 protection=5 win_condition=2 utility=5 land=40
+// total=99 lands=39 avgCMC=2.68 gold=6 counters=0
+// categories: ramp=17 draw=11 removal=18 board_wipe=6 protection=5 win_condition=1 utility=2 land=39
 
 1 Thrasios, Triton Hero *CMDR*
 1 Tymna the Weaver *CMDR* (requested partner — see note)
 
-// ── ramp (15) ──
+// ── ramp (17) ──
 1 Chrome Mox
 1 Lotus Petal
-1 Mox Amber
-1 Mox Diamond
 1 An Offer You Can't Refuse
 1 Birds of Paradise
 1 Crop Rotation
-1 Mana Vault
 1 Sol Ring
+1 Arcane Signet
+1 Azorius Signet
 1 Deadly Dispute
-1 Kinnan, Bonder Prodigy
-1 Chord of Calling
-1 The Cabbage Merchant
+1 Dimir Signet
+1 Orzhov Signet
+1 Talisman of Dominance
+1 Talisman of Hierarchy
+1 Talisman of Progress
+1 Talisman of Resilience
 1 Smothering Tithe
 1 The Great Henge
 
-// ── draw (9) ──
+// ── draw (11) ──
 1 Esper Sentinel
 1 Mystic Remora
-1 Veil of Summer
-1 Cloud of Faeries
-1 Demonic Tutor
+1 Faerie Mastermind
 1 Idol of Oblivion
 1 Wan Shi Tong, Librarian
 1 Black Market Connections
+1 Garruk's Uprising
+1 Phyrexian Arena
 1 Rhystic Study
+1 Beast Whisperer
+1 Thopter Spy Network
 
-// ── removal (17) ──
+// ── removal (18) ──
 1 Deathrite Shaman
 1 Swords to Plowshares
-1 Abrupt Decay
 1 Assassin's Trophy
 1 Feed the Swarm
 1 Go for the Throat
 1 Infernal Grasp
-1 Snap
 1 Anguished Unmaking
 1 Generous Gift
 1 Loran of the Third Path
 1 Putrefy
-1 Staff of Compleation
 1 Stroke of Midnight
+1 Venat, Heart of Hydaelyn // Hydaelyn, the Mothercrystal
 1 Deadly Rollick
 1 Sowing Mycospawn
+1 Vraska, Golgari Queen
 1 Freyalise, Llanowar's Fury
+1 Ob Nixilis Reignited
+1 Teferi, Hero of Dominaria
 
 // ── board_wipe (6) ──
+1 Bag of Holding
 1 Cyclonic Rift
-1 Damnation
+1 Jin-Gitaxias // The Great Synthesis
 1 Austere Command
-1 Elspeth, Sun's Champion
 1 Farewell
 1 Season of Gathering
 
@@ -68,50 +73,45 @@
 1 Fierce Guardianship
 1 Force of Will
 
-// ── win_condition (2) ──
-1 Mirkwood Bats
+// ── win_condition (1) ──
 1 Seedborn Muse
 
-// ── utility (5) ──
-1 Enlightened Tutor
+// ── utility (2) ──
 1 Flusterstorm
 1 Training Grounds
-1 Biomancer's Familiar
-1 Eternal Witness
 
-// ── land (40) ──
-1 Bayou
+// ── land (39) ──
 1 Breeding Pool
-1 Cavern of Souls
 1 City of Brass
 1 Command Tower
-1 Eclipsed Realms
+1 Demolition Field
 1 Exotic Orchard
+1 Flooded Strand
 1 Forbidden Orchard
-4 Forest
+3 Forest
 1 Gemstone Caverns
 1 Godless Shrine
 1 Grand Coliseum
-1 Great Hall of the Biblioplex
+1 Hallowed Fountain
 2 Island
 1 Mana Confluence
-1 Nykthos, Shrine to Nyx
+1 Marsh Flats
+1 Misty Rainforest
+1 Multiversal Passage
 1 Opal Palace
 1 Overgrown Tomb
 2 Plains
-1 Plaza of Heroes
-1 Primal Beyond
+1 Polluted Delta
+1 Prismatic Vista
 1 Reflecting Pool
-1 Savannah
-1 Secluded Courtyard
-1 Spire of Industry
-1 Swamp
+2 Swamp
 1 Talon Gates of Madara
-1 Temple Garden
 1 Temple of the Dragon Queen
-1 The Mycosynth Gardens
+1 Thran Portal
 1 Three Tree City
 1 Tropical Island
-1 Unclaimed Territory
+1 Tundra
+1 Underground Sea
+1 Verdant Catacombs
 1 Watery Grave
-1 Growing Rites of Itlimoc // Itlimoc, Cradle of the Sun
+1 Windswept Heath

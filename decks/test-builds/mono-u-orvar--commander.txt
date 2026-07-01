@@ -1,45 +1,48 @@
 // Orvar, the All-Form — COMMANDER
 // strategy=spellslinger themes=tokens,artifacts,flying,draw,spellslinger,control,ramp,enchantments,counters,equipment tribal=-
-// total=99 lands=38 avgCMC=2.66
-// categories: draw=17 win_condition=7 utility=7 ramp=9 removal=16 board_wipe=2 protection=3 land=38
+// total=99 lands=38 avgCMC=2.75 gold=0 counters=0
+// categories: draw=21 win_condition=4 utility=7 ramp=10 removal=14 board_wipe=2 protection=3 land=38
 
 1 Orvar, the All-Form *CMDR*
 
-// ── ramp (9) ──
+// ── ramp (10) ──
 1 An Offer You Can't Refuse
 1 Sol Ring
 1 Arcane Signet
 1 Collector's Vault
 1 Mind Stone
-1 Thought Vessel
+1 Kozilek's Unsealing
+1 Magnifying Glass
+1 Osgood, Operation Double
 1 Solemn Simulacrum
-1 Gilded Lotus
 1 Coveted Jewel
 
-// ── draw (17) ──
+// ── draw (21) ──
 1 Aquitect's Will
 1 Cerulean Wisps
 1 Leap
 1 Shadow Rift
 1 Skullclamp
-1 Slip Through Space
 1 Thermal Flux
 1 Twisted Image
 1 Baral, Chief of Compliance
 1 Enervate
 1 Shimmering Mirage
 1 Aether Channeler
+1 Forensic Gadgeteer
+1 Mirrodin Besieged
 1 Sai, Master Thopterist
-1 Twitch
+1 Uthros Research Craft
 1 Archmage Emeritus
+1 Ethereal Investigator
 1 Thopter Spy Network
 1 Mulldrifter
+1 Shark Typhoon
+1 Agent of Treachery
 
-// ── removal (16) ──
+// ── removal (14) ──
 1 Dino DNA
 1 Essence Flux
-1 Fleeting Distraction
-1 Ghost Vacuum
 1 Pongify
 1 Bumbleflower's Sharepot
 1 Kozilek's Command
@@ -55,20 +58,17 @@
 
 // ── board_wipe (2) ──
 1 Cyclonic Rift
-1 Extinguisher Battleship
+1 Jin-Gitaxias // The Great Synthesis
 
 // ── protection (3) ──
 1 Dive Down
 1 Swan Song
 1 Counterspell
 
-// ── win_condition (7) ──
-1 Irenicus's Vile Duplication
+// ── win_condition (4) ──
 1 Murmuring Mystic
 1 Talrand, Sky Summoner
-1 Docent of Perfection // Final Iteration
 1 Peregrine Drake
-1 Precursor Golem
 1 Shipwreck Dowser
 
 // ── utility (7) ──
@@ -81,13 +81,13 @@
 1 Mind's Desire
 
 // ── land (38) ──
-1 Cavern of Souls
 1 City of Brass
+1 Flooded Strand
 28 Island
-1 Mistrise Village
-1 Secluded Courtyard
+1 Misty Rainforest
+1 Polluted Delta
+1 Scalding Tarn
 1 Three Tree City
-1 Unclaimed Territory
 1 Glasspool Mimic // Glasspool Shore
 1 Hydroelectric Specimen // Hydroelectric Laboratory
 1 Sink into Stupor // Soporific Springs

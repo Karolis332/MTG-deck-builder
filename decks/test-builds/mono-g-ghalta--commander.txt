@@ -1,40 +1,41 @@
 // Ghalta, Primal Hunger — COMMANDER
 // strategy=aggro themes=ramp,artifacts,draw,tokens,aggro,equipment tribal=-
-// total=99 lands=40 avgCMC=3.07
-// categories: ramp=22 draw=11 removal=5 board_wipe=2 protection=5 win_condition=4 utility=10 land=40
+// total=99 lands=39 avgCMC=3.03 gold=0 counters=0
+// categories: ramp=20 draw=14 removal=4 board_wipe=2 protection=4 win_condition=4 utility=12 land=39
 
 1 Ghalta, Primal Hunger *CMDR*
 
-// ── ramp (22) ──
+// ── ramp (20) ──
 1 Birds of Paradise
 1 Elvish Mystic
 1 Fyndhorn Elves
 1 Llanowar Elves
 1 Sol Ring
+1 Collector's Vault
 1 Fanatic of Rhonas
 1 Fellwar Stone
 1 Goldvein Pick
-1 Gyre Sage
 1 Mind Stone
 1 Priest of Titania
 1 Rampant Growth
-1 Cultivate
 1 Llanowar Tribe
 1 Outcaster Trailblazer
 1 Runadi, Behemoth Caller
 1 Selvala, Heart of the Wilds
 1 Topiary Stomper
 1 Wayward Swordtooth
-1 Wood Elves
 1 Hulking Raptor
 1 The Great Henge
 
-// ── draw (11) ──
+// ── draw (14) ──
+1 Currency Converter
+1 Sensei's Divining Top
 1 Skullclamp
 1 Idol of Oblivion
 1 Life's Legacy
-1 Syr Ginger, the Meal Ender
+1 Colossal Majesty
 1 Garruk's Uprising
+1 Tireless Tracker
 1 Beast Whisperer
 1 Greater Good
 1 Momentous Fall
@@ -42,19 +43,17 @@
 1 Return of the Wildspeaker
 1 Rishkar's Expertise
 
-// ── removal (5) ──
+// ── removal (4) ──
 1 Scavenging Ooze
 1 Beast Within
 1 Reclamation Sage
-1 Rhonas the Indomitable
 1 Thrashing Brontodon
 
 // ── board_wipe (2) ──
-1 Duskshell Crawler
+1 Bag of Holding
 1 Bane of Progress
 
-// ── protection (5) ──
-1 Shadowspear
+// ── protection (4) ──
 1 Frenzied Baloth
 1 Heroic Intervention
 1 Lightning Greaves
@@ -66,26 +65,28 @@
 1 Overwhelming Stampede
 1 Surrak and Goreclaw
 
-// ── utility (10) ──
+// ── utility (12) ──
 1 Arbor Elf
 1 Ram Through
 1 Managorger Hydra
 1 Pugnacious Hammerskull
+1 Rhonas the Indomitable
 1 Steel Leaf Champion
+1 Wood Elves
 1 Yorvo, Lord of Garenbrig
 1 Surrak, the Hunt Caller
 1 Tangleweave Armor
 1 Unnatural Growth
 1 Majestic Genesis
 
-// ── land (40) ──
-1 Cavern of Souls
+// ── land (39) ──
 1 City of Brass
-30 Forest
-1 Secluded Courtyard
-1 Shifting Woodland
+29 Forest
+1 Misty Rainforest
 1 Three Tree City
-1 Unclaimed Territory
+1 Verdant Catacombs
+1 Windswept Heath
+1 Wooded Foothills
 1 Bala Ged Recovery // Bala Ged Sanctuary
 1 Bridgeworks Battle // Tanglespan Bridgeworks
 1 Khalni Ambush // Khalni Territory

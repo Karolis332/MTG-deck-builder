@@ -26,7 +26,7 @@ export function SettingsDialog({ open, onClose }: SettingsDialogProps) {
   const [cfEnabled, setCfEnabled] = useState(true);
   const [cfMessage, setCfMessage] = useState('');
   const [cfTesting, setCfTesting] = useState(false);
-  const [claudeModel, setClaudeModel] = useState('claude-sonnet-4-5-20250929');
+  const [claudeModel, setClaudeModel] = useState('claude-sonnet-4-6');
   const [openaiModel, setOpenaiModel] = useState('gpt-5.4');
   const [aiProvider, setAiProvider] = useState('auto');
   const [groqKey, setGroqKey] = useState('');
@@ -767,7 +767,7 @@ export function SettingsDialog({ open, onClose }: SettingsDialogProps) {
           <div className="border-t border-border pt-3">
             <label className="mb-1 block text-sm font-medium">Anthropic API Key (Recommended)</label>
             <p className="mb-2 text-xs text-muted-foreground">
-              Claude Sonnet 4.5 provides superior MTG deck building intelligence with deep strategic knowledge.
+              Claude Sonnet 4.6 provides superior MTG deck building intelligence with deep strategic knowledge.
               Highly recommended for best suggestions!
             </p>
             {maskedAnthropicKey && (
@@ -814,7 +814,7 @@ export function SettingsDialog({ open, onClose }: SettingsDialogProps) {
           <div className="border-t border-border pt-3">
             <label className="mb-1 block text-sm font-medium">Claude Model</label>
             <p className="mb-2 text-xs text-muted-foreground">
-              Opus 4.6 gives the best suggestions but costs ~5x more per request.
+              Opus 4.8 gives the best suggestions but costs ~5x more per request.
             </p>
             <select
               value={claudeModel}
@@ -831,8 +831,8 @@ export function SettingsDialog({ open, onClose }: SettingsDialogProps) {
               }}
               className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm outline-none focus:border-primary"
             >
-              <option value="claude-sonnet-4-5-20250929">Claude Sonnet 4.5 (fast, recommended)</option>
-              <option value="claude-opus-4-6">Claude Opus 4.6 (best quality, slower)</option>
+              <option value="claude-sonnet-4-6">Claude Sonnet 4.6 (fast, recommended)</option>
+              <option value="claude-opus-4-8">Claude Opus 4.8 (best quality, slower)</option>
             </select>
           </div>
 

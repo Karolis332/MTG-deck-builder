@@ -1,11 +1,11 @@
 // Ghalta, Primal Hunger — BRAWL
 // strategy=aggro themes=draw,artifacts,ramp,tokens,aggro,equipment,sacrifice,tribal tribal=-
-// total=99 lands=42 avgCMC=2.95
-// categories: ramp=21 draw=9 removal=7 board_wipe=2 protection=5 win_condition=3 utility=10 land=42
+// total=99 lands=42 avgCMC=2.89 gold=0 counters=0
+// categories: ramp=19 draw=13 removal=5 board_wipe=2 protection=5 win_condition=3 utility=10 land=42
 
 1 Ghalta, Primal Hunger *CMDR*
 
-// ── ramp (21) ──
+// ── ramp (19) ──
 1 Birds of Paradise
 1 Elvish Mystic
 1 Gilded Goose
@@ -13,9 +13,7 @@
 1 Arcane Signet
 1 Collector's Vault
 1 Fanatic of Rhonas
-1 Farseek
 1 Goldvein Pick
-1 Mind Stone
 1 Priest of Titania
 1 Rampant Growth
 1 Cultivate
@@ -28,29 +26,31 @@
 1 Hulking Raptor
 1 The Great Henge
 
-// ── draw (9) ──
+// ── draw (13) ──
+1 Mishra's Bauble
 1 Currency Converter
-1 Syr Ginger, the Meal Ender
+1 Vexing Bauble
+1 Leaf-Crowned Visionary
+1 Colossal Majesty
+1 Elemental Bond
 1 Garruk's Uprising
-1 Peregrin Took
 1 Tireless Tracker
 1 Beast Whisperer
 1 Momentous Fall
+1 Toski, Bearer of Secrets
 1 Return of the Wildspeaker
 1 Rishkar's Expertise
 
-// ── removal (7) ──
+// ── removal (5) ──
 1 Insidious Fungus
-1 Masked Vandal
 1 Scavenging Ooze
 1 Beast Within
 1 Reclamation Sage
-1 Rhonas the Indomitable
 1 Thrashing Brontodon
 
 // ── board_wipe (2) ──
+1 Bag of Holding
 1 Duskshell Crawler
-1 Night of the Sweets' Revenge
 
 // ── protection (5) ──
 1 Allosaurus Shepherd
@@ -65,11 +65,11 @@
 1 Surrak and Goreclaw
 
 // ── utility (10) ──
-1 Crashing Drawbridge
 1 Ram Through
 1 Eternal Witness
 1 Hunter's Insight
 1 Pugnacious Hammerskull
+1 Rhonas the Indomitable
 1 Steel Leaf Champion
 1 Yorvo, Lord of Garenbrig
 1 Surrak, the Hunt Caller
@@ -77,12 +77,12 @@
 1 The Skullspore Nexus
 
 // ── land (42) ──
-1 Cavern of Souls
 32 Forest
-1 Secluded Courtyard
-1 Shifting Woodland
+1 Misty Rainforest
 1 Three Tree City
-1 Unclaimed Territory
+1 Verdant Catacombs
+1 Windswept Heath
+1 Wooded Foothills
 1 Bala Ged Recovery // Bala Ged Sanctuary
 1 Bridgeworks Battle // Tanglespan Bridgeworks
 1 Khalni Ambush // Khalni Territory

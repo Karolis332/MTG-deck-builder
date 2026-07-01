@@ -295,3 +295,8 @@ The desktop app calls the CF API for collaborative-filtering recommendations. Th
 - **Production**: VPS only. All traffic to `187.77.110.100`.
 - **Standby**: Railway project `nurturing-radiance` (Hobby plan). Postgres + Redis online. Hosts a duplicate `grimoire-cf-api` deployment that serves as DR target. Data synced from VPS via weekly pg_dump → psql restore (set up 2026-05-05).
 - **Fail-over runbook**: If VPS dies, point desktop apps at `https://grimoire-cf-api-production.up.railway.app/cf-api` by changing `app_state.cf_api_url` (or via Settings dialog).
+
+## graphify
+This repo has a graphify knowledge graph at `graphify-out/graph.json` (interactive `graphify-out/graph.html`, report `graphify-out/GRAPH_REPORT.md`).
+Before answering architecture/codebase questions here, query it instead of cold-grepping: `/graphify query "<question>"`.
+After changing code, refresh it: `/graphify . --update`.

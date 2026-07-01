@@ -1,7 +1,7 @@
 // Krenko, Mob Boss — BRAWL
-// strategy=midrange themes=tribal tribal=goblin
-// total=99 lands=38 avgCMC=2.82
-// categories: ramp=11 removal=11 draw=9 board_wipe=4 protection=3 win_condition=6 utility=17 land=38
+// strategy=tribal themes=tribal tribal=goblin
+// total=99 lands=38 avgCMC=2.74 gold=0 counters=0
+// categories: ramp=11 draw=10 removal=6 board_wipe=3 protection=3 win_condition=4 utility=24 land=38
 
 1 Krenko, Mob Boss *CMDR*
 
@@ -9,43 +9,38 @@
 1 Reckless Lackey
 1 Skirk Prospector
 1 Arcane Signet
+1 Collector's Vault
 1 Dockside Extortionist
-1 Mind Stone
 1 Scuzzback Scrounger
 1 Wily Goblin
 1 Crime Novelist
+1 Dragon's Hoard
 1 Howlsquad Heavy
-1 Hedron Archive
-1 Solemn Simulacrum
+1 Ashling, Flame Dancer
 
-// ── draw (9) ──
+// ── draw (10) ──
 1 Faithless Looting
+1 Humble Defector
 1 Thrill of Possibility
-1 Tormenting Voice
 1 Gempalm Incinerator
-1 Goblin Matron
-1 Scrawling Crawler
+1 Hazoret's Monument
+1 Palantír of Orthanc
 1 Staff of Domination
 1 Goblin Ringleader
+1 Jaxis, the Troublemaker
 1 Vanquisher's Banner
 
-// ── removal (11) ──
-1 Fanatical Firebrand
+// ── removal (6) ──
 1 Goblin Grenade
-1 Abrade
 1 Goblin Bombardment
-1 Goblin Cratermaker
-1 Chaos Warp
 1 Goblin Sharpshooter
 1 Pashalik Mons
 1 Goblin Trashmaster
 1 Siege-Gang Commander
-1 Spawn-Gang Commander
 
-// ── board_wipe (4) ──
+// ── board_wipe (3) ──
 1 Bag of Holding
 1 Smash to Dust
-1 Star of Extinction
 1 Blasphemous Act
 
 // ── protection (3) ──
@@ -53,15 +48,14 @@
 1 Lightning Greaves
 1 Swiftfoot Boots
 
-// ── win_condition (6) ──
+// ── win_condition (4) ──
 1 Impact Tremors
 1 General Kreat, the Boltbringer
-1 Goblin Chainwhirler
-1 Guttersnipe
 1 Purphoros, God of the Forge
 1 Muxus, Goblin Grandee
 
-// ── utility (17) ──
+// ── utility (24) ──
+1 Goblin Motivator
 1 Battle Cry Goblin
 1 Conspicuous Snoop
 1 Dragon Fodder
@@ -69,25 +63,31 @@
 1 Goblin Piledriver
 1 Goro-Goro, Disciple of Ryusei
 1 Krenko's Command
+1 Moria Marauder
 1 Rundvelt Hordemaster
 1 Searslicer Goblin
+1 Sting, the Glinting Dagger
+1 Fable of the Mirror-Breaker // Reflection of Kiki-Jiki
 1 Goblin Chieftain
+1 Goblin Matron
 1 Goblin Warchief
 1 Hobgoblin Bandit Lord
 1 Hordeling Outburst
 1 Krenko, Tin Street Kingpin
 1 Legion Warboss
 1 Shared Animosity
+1 Squee, Dubious Monarch
 1 Beetleback Chief
+1 Volley Veteran
 
 // ── land (38) ──
 1 Arena of Glory
-1 Castle Embereth
-1 Cavern of Souls
+1 Arid Mesa
+1 Bloodstained Mire
 28 Mountain
-1 Secluded Courtyard
+1 Scalding Tarn
 1 Three Tree City
-1 Unclaimed Territory
+1 Wooded Foothills
 1 Shatterskull Smashing // Shatterskull, the Hammer Pass
 1 Sundering Eruption // Volcanic Fissure
 1 Valakut Awakening // Valakut Stoneforge
