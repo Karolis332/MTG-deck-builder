@@ -1246,7 +1246,7 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
       } else if (!isLand && !isPayoff && castColors < 2) {
         // ponytail: mono/colorless nonlands crowd the charm engine; discount them so
         // gold spells win each slot. Rainbow-fix artifacts still net positive (+24 above).
-        score -= 18;
+        score -= 25;
       }
       // Cheap dual/rainbow fixing rocks (talisman cycle, signets, Chromatic Lantern,
       // Arcane Signet) are the multicolor-matters ramp backbone — bias ramp to them.
