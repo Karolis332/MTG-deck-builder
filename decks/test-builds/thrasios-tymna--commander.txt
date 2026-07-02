@@ -1,6 +1,6 @@
 // Thrasios, Triton Hero + Tymna the Weaver — COMMANDER
 // strategy=control themes=control,ramp,draw,tokens,artifacts,equipment tribal=-
-// total=99 lands=39 avgCMC=2.68 gold=6 counters=0
+// total=99 lands=39 avgCMC=2.7 gold=6 counters=0
 // categories: ramp=17 draw=11 removal=18 board_wipe=6 protection=5 win_condition=1 utility=2 land=39
 
 1 Thrasios, Triton Hero *CMDR*
@@ -28,11 +28,11 @@
 // ── draw (11) ──
 1 Esper Sentinel
 1 Mystic Remora
-1 Faerie Mastermind
 1 Idol of Oblivion
 1 Wan Shi Tong, Librarian
 1 Black Market Connections
 1 Garruk's Uprising
+1 Morbid Opportunist
 1 Phyrexian Arena
 1 Rhystic Study
 1 Beast Whisperer
@@ -87,7 +87,6 @@
 1 Demolition Field
 1 Exotic Orchard
 1 Flooded Strand
-1 Forbidden Orchard
 3 Forest
 1 Gemstone Caverns
 1 Godless Shrine
@@ -106,6 +105,7 @@
 1 Reflecting Pool
 2 Swamp
 1 Talon Gates of Madara
+1 Temple Garden
 1 Temple of the Dragon Queen
 1 Thran Portal
 1 Three Tree City

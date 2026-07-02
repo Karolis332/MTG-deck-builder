@@ -1,16 +1,14 @@
 // Ramos, Dragon Engine — COMMANDER
 // strategy=midrange themes=artifacts,tokens,ramp,draw,sacrifice,flying tribal=-
-// total=99 lands=38 avgCMC=3.33 gold=32 counters=0
-// categories: ramp=21 utility=5 win_condition=5 draw=14 removal=12 board_wipe=4 land=38
+// total=99 lands=38 avgCMC=3.38 gold=47 counters=0
+// categories: ramp=18 utility=6 win_condition=3 removal=18 draw=12 board_wipe=4 land=38
 
 1 Ramos, Dragon Engine *CMDR*
 
-// ── ramp (21) ──
+// ── ramp (18) ──
 1 Arcane Signet
 1 Collector's Vault
-1 Deadly Dispute
 1 Dimir Signet
-1 Herd Heirloom
 1 Lotho, Corrupt Shirriff
 1 Sorcerer Class
 1 Talisman of Conviction
@@ -21,62 +19,64 @@
 1 Talisman of Progress
 1 Chromatic Lantern
 1 Faeburrow Elder
-1 Big Score
+1 Mahadi, Emporium Master
 1 Hearthhull, the Worldseed
 1 Kheru Goldkeeper
-1 Storm-Kiln Artist
 1 Omnath, Locus of All
-1 Chromatic Orrery
+1 The Gitrog Monster
 
-// ── draw (14) ──
+// ── draw (12) ──
 1 Baral, Chief of Compliance
-1 Idol of Oblivion
 1 Likeness Looter
 1 Lunar Convocation
 1 Akiri, Fearless Voyager
-1 Black Market Connections
-1 Braids, Arisen Nightmare
 1 Gluntch, the Bestower
+1 Jeskai Ascendancy
 1 Kutzil, Malamet Exemplar
+1 Tannuk, Memorial Ensign
 1 Zurgo Stormrender
 1 Archmage Emeritus
-1 The One Ring
-1 Toski, Bearer of Secrets
 1 Korvold, Fae-Cursed King
+1 Tatyova, Benthic Druid
 
-// ── removal (12) ──
+// ── removal (18) ──
 1 Deathrite Shaman
+1 Abrupt Decay
+1 Artifact Mutation
+1 Boros Charm
+1 Fracture
 1 Abzan Charm
 1 Bant Charm
 1 Bedevil
 1 Esper Charm
-1 Loran of the Third Path
 1 Mortify
 1 Prismari Command
 1 Putrefy
 1 Sultai Charm
+1 Void Rend
 1 Wear // Tear
 1 Niv-Mizzet, Parun
+1 Niv-Mizzet, the Firemind
+1 Unite the Coalition
 
 // ── board_wipe (4) ──
+1 Golgari Charm
 1 Jund Charm
-1 Damnation
 1 Jin-Gitaxias // The Great Synthesis
-1 Austere Command
+1 Time Wipe
 
-// ── win_condition (5) ──
-1 Guttersnipe
-1 Talrand, Sky Summoner
+// ── win_condition (3) ──
 1 Chromanticore
 1 Maelstrom Archangel
 1 Progenitus
 
-// ── utility (5) ──
+// ── utility (6) ──
 1 Goblin Electromancer
 1 Veyran, Voice of Duality
 1 Villainous Wealth
 1 Door to Nothingness
 1 Maelstrom Nexus
+1 Conflux
 
 // ── land (38) ──
 1 Abstergo Entertainment

@@ -1,6 +1,6 @@
 // Sheoldred, the Apocalypse — COMMANDER
 // strategy=control themes=draw,ramp,artifacts,sacrifice,equipment,tokens,control,tribal tribal=-
-// total=99 lands=38 avgCMC=3.8 gold=0 counters=0
+// total=99 lands=38 avgCMC=3.82 gold=0 counters=0
 // categories: ramp=12 draw=15 removal=18 board_wipe=6 protection=1 win_condition=2 utility=7 land=38
 
 1 Sheoldred, the Apocalypse *CMDR*
@@ -51,9 +51,9 @@
 1 Ob Nixilis Reignited
 1 Ob Nixilis, the Hate-Twisted
 1 Sheoldred // The True Scriptures
-1 Zuko's Exile
 1 Endbringer
 1 Staff of Nin
+1 Summon: Primal Odin
 1 Vilis, Broker of Blood
 
 // ── board_wipe (6) ──

@@ -1,15 +1,13 @@
 // Ramos, Dragon Engine — BRAWL
 // strategy=midrange themes=artifacts,tokens,ramp,draw,sacrifice,counters,flying,control,spellslinger tribal=-
-// total=99 lands=38 avgCMC=3.25 gold=30 counters=0
-// categories: ramp=18 win_condition=6 draw=13 utility=4 removal=15 board_wipe=4 protection=1 land=38
+// total=99 lands=38 avgCMC=3.31 gold=44 counters=0
+// categories: ramp=16 win_condition=5 utility=4 removal=16 draw=16 board_wipe=4 land=38
 
 1 Ramos, Dragon Engine *CMDR*
 
-// ── ramp (18) ──
+// ── ramp (16) ──
 1 Arcane Signet
-1 Collector's Vault
 1 Dimir Signet
-1 Herd Heirloom
 1 Izzet Signet
 1 Lotho, Corrupt Shirriff
 1 Talisman of Conviction
@@ -19,55 +17,55 @@
 1 Talisman of Progress
 1 Chromatic Lantern
 1 Faeburrow Elder
+1 Helga, Skittish Seer
 1 Hearthhull, the Worldseed
 1 Kheru Goldkeeper
-1 Storm-Kiln Artist
 1 Omnath, Locus of All
 1 Chromatic Orrery
 
-// ── draw (13) ──
+// ── draw (16) ──
 1 Baral, Chief of Compliance
 1 Likeness Looter
 1 Lunar Convocation
+1 Sythis, Harvest's Hand
 1 Vohar, Vodalian Desecrator
-1 Black Market Connections
-1 Braids, Arisen Nightmare
+1 Akiri, Fearless Voyager
+1 Eshki, Temur's Roar
+1 Jeskai Ascendancy
 1 Kutzil, Malamet Exemplar
-1 Tireless Tracker
 1 Zurgo Stormrender
 1 Archmage Emeritus
-1 Toski, Bearer of Secrets
+1 Jhoira, Weatherlight Captain
 1 Infinite Guideline Station
 1 Korvold, Fae-Cursed King
+1 Niv-Mizzet Reborn
+1 Tatyova, Benthic Druid
 
-// ── removal (15) ──
+// ── removal (16) ──
 1 Deathrite Shaman
 1 Abrupt Decay
+1 Boros Charm
 1 Fracture
 1 Abzan Charm
 1 Bedevil
 1 Brokers Charm
-1 Loran of the Third Path
+1 Grist, the Hunger Tide
 1 Mortify
 1 Obscura Charm
 1 Prismari Command
 1 Putrefy
 1 Sultai Charm
-1 Venat, Heart of Hydaelyn // Hydaelyn, the Mothercrystal
+1 Void Rend
 1 Wear // Tear
 1 Niv-Mizzet, Parun
 
 // ── board_wipe (4) ──
-1 Toxic Deluge
-1 Damnation
-1 Night of the Sweets' Revenge
+1 Golgari Charm
+1 Deafening Clarion
 1 Jin-Gitaxias // The Great Synthesis
+1 Time Wipe
 
-// ── protection (1) ──
-1 Swan Song
-
-// ── win_condition (6) ──
-1 Guttersnipe
+// ── win_condition (5) ──
 1 Murmuring Mystic
 1 Talrand, Sky Summoner
 1 Chromanticore

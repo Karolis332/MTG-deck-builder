@@ -38,6 +38,20 @@ const SCENARIOS: Scenario[] = [
 
 const FORMATS = ['commander', 'brawl'] as const;
 
+// --collection: build only from the user's owned cards (paper collection),
+// commander format only (Brawl is Arena-digital). Outputs get a "-collection"
+// filename suffix and results-collection.json so the auto-improve gate's
+// baseline results.json is never touched.
+const COLLECTION_MODE = process.argv.includes('--collection');
+const COLLECTION_USER_ID = 1;
+const ACTIVE_FORMATS: readonly string[] = COLLECTION_MODE ? ['commander'] : FORMATS;
+
+// Active paper commanders — only built in collection mode.
+const COLLECTION_EXTRA: Scenario[] = [
+  { slug: 'meren-nel-toth', commander: 'Meren of Clan Nel Toth', note: 'BG graveyard value (active paper deck).' },
+  { slug: 'general-tazri', commander: 'General Tazri', note: '5C allies (active paper deck).' },
+];
+
 interface DeckCardOut {
   name: string;
   quantity: number;
@@ -97,8 +111,13 @@ function castColorCount(raw: unknown): number {
 
 // Load card names from a human winning-reference fixture, if one exists, for
 // convergence scoring. Strips comments, quantities, and the *CMDR* marker.
-function loadReferenceNames(slug: string): Set<string> | null {
-  const file = path.join(OUT_DIR, `${slug}--winning-reference.txt`);
+// Prefers a format-specific reference (e.g. --brawl-winning-reference.txt);
+// falls back to the generic one.
+function loadReferenceNames(slug: string, format?: string): Set<string> | null {
+  const specific = format ? path.join(OUT_DIR, `${slug}--${format}-winning-reference.txt`) : null;
+  const file = specific && fs.existsSync(specific)
+    ? specific
+    : path.join(OUT_DIR, `${slug}--winning-reference.txt`);
   if (!fs.existsSync(file)) return null;
   const names = new Set<string>();
   for (const raw of fs.readFileSync(file, 'utf8').split(/\r?\n/)) {
@@ -136,6 +155,8 @@ async function buildOne(scenario: Scenario, format: string): Promise<BuildOut> {
       colors: [],
       commanderName: scenario.commander,
       partnerName: scenario.partner,
+      useCollection: COLLECTION_MODE,
+      userId: COLLECTION_MODE ? COLLECTION_USER_ID : undefined,
     });
     base.elapsedMs = Date.now() - started;
     if (!result.cards.length) {
@@ -197,7 +218,7 @@ async function buildOne(scenario: Scenario, format: string): Promise<BuildOut> {
     // Convergence vs human winning reference (overlap on ALL nonland cards).
     let referenceOverlapPct: number | undefined;
     let referenceMissing: string[] | undefined;
-    const refNames = loadReferenceNames(scenario.slug);
+    const refNames = loadReferenceNames(scenario.slug, format);
     if (refNames) {
       const buildNames = new Set(
         main.filter((c) => !c.type_line.includes('Land')).map((c) => c.name.toLowerCase())
@@ -281,7 +302,8 @@ function writeDecklist(out: BuildOut, scenario: Scenario): void {
     lines.push('');
   }
 
-  const file = path.join(OUT_DIR, `${scenario.slug}--${out.format}.txt`);
+  const suffix = COLLECTION_MODE ? '-collection' : '';
+  const file = path.join(OUT_DIR, `${scenario.slug}--${out.format}${suffix}.txt`);
   fs.writeFileSync(file, lines.join('\n'));
 }
 
@@ -291,9 +313,10 @@ async function main(): Promise<void> {
   const only = onlyIdx > -1 ? process.argv[onlyIdx + 1] : null;
 
   const results: BuildOut[] = [];
-  for (const scenario of SCENARIOS) {
+  const roster = COLLECTION_MODE ? [...SCENARIOS, ...COLLECTION_EXTRA] : SCENARIOS;
+  for (const scenario of roster) {
     if (only && scenario.slug !== only) continue;
-    for (const format of FORMATS) {
+    for (const format of ACTIVE_FORMATS) {
       process.stdout.write(`Building ${scenario.slug} [${format}] ... `);
       const out = await buildOne(scenario, format);
       results.push(out);
@@ -314,7 +337,8 @@ async function main(): Promise<void> {
       brawlLegal: c.brawlLegal, commanderLegal: c.commanderLegal,
     })),
   }));
-  fs.writeFileSync(path.join(OUT_DIR, 'results.json'), JSON.stringify(jsonOut, null, 1));
+  const resultsFile = COLLECTION_MODE ? 'results-collection.json' : 'results.json';
+  fs.writeFileSync(path.join(OUT_DIR, resultsFile), JSON.stringify(jsonOut, null, 1));
   console.log(`\nWrote ${results.length} builds to ${OUT_DIR}`);
   const failures = results.filter((r) => !r.ok);
   if (failures.length) {
