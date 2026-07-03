@@ -1,11 +1,11 @@
 // Vivi Ornitier — BRAWL
 // strategy=spellslinger themes=counters,tokens,artifacts,spellslinger,draw,aggro,flying,ramp,enchantments,graveyard,equipment tribal=-
-// total=99 lands=38 avgCMC=2.84 gold=7 counters=0
-// categories: removal=13 draw=19 win_condition=5 utility=10 ramp=10 board_wipe=2 protection=2 land=38
+// total=99 lands=38 avgCMC=2.87 gold=8 counters=0
+// categories: removal=14 win_condition=4 draw=20 utility=10 ramp=9 board_wipe=2 protection=2 land=38
 
 1 Vivi Ornitier *CMDR*
 
-// ── ramp (10) ──
+// ── ramp (9) ──
 1 An Offer You Can't Refuse
 1 Strike It Rich
 1 Arcane Signet
@@ -13,38 +13,39 @@
 1 Talisman of Creativity
 1 Birgi, God of Storytelling // Harnfel, Horn of Bounty
 1 Dragon's Hoard
-1 Jeska's Will
 1 Ashling, Flame Dancer
 1 Storm-Kiln Artist
 
-// ── draw (19) ──
+// ── draw (20) ──
 1 Brainstorm
 1 Curiosity
 1 Faithless Looting
+1 Ingenious Prodigy
 1 Mystic Remora
-1 Opt
 1 Ponder
-1 Preordain
 1 Artist's Talent
 1 Baral, Chief of Compliance
+1 Extraordinary Journey
 1 Ral, Monsoon Mage // Ral, Leyline Prodigy
 1 Rhystic Study
 1 Sai, Master Thopterist
 1 Archmage Emeritus
 1 Jaxis, the Troublemaker
 1 Padeem, Consul of Innovation
-1 Archmage of Runes
+1 Alania, Divergent Storm
+1 Tezzeret, Artifice Master
 1 Shark Typhoon
 1 The Locust God
 1 Thought Monitor
 
-// ── removal (13) ──
+// ── removal (14) ──
 1 Lightning Bolt
 1 Firemind's Research
 1 Grapeshot
 1 Kozilek's Command
 1 Red Sun's Twilight
 1 Stolen by the Fae
+1 The Ooze
 1 Warping Wail
 1 Zurzoth, Chaos Rider
 1 Chandra, Spark Hunter
@@ -61,11 +62,10 @@
 1 Swan Song
 1 Counterspell
 
-// ── win_condition (5) ──
-1 Coruscation Mage
-1 Firebrand Archer
+// ── win_condition (4) ──
 1 Guttersnipe
 1 Murmuring Mystic
+1 Talrand, Sky Summoner
 1 Niv-Mizzet, Visionary
 
 // ── utility (10) ──
@@ -77,18 +77,18 @@
 1 Increasing Vengeance
 1 Jaya's Immolating Inferno
 1 Young Pyromancer
+1 Adeliz, the Cinder Wind
 1 Expansion // Explosion
-1 Thousand-Year Storm
 
 // ── land (38) ──
-1 A-Thran Portal
 1 Arid Mesa
 1 Bloodstained Mire
 1 Fiery Islet
 1 Flooded Strand
 1 Frostboil Snarl
-9 Island
-11 Mountain
+10 Island
+1 Misty Rainforest
+10 Mountain
 1 Multiversal Passage
 1 Polluted Delta
 1 Riverglide Pathway // Lavaglide Pathway

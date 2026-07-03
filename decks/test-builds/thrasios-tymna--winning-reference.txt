@@ -1,0 +1,106 @@
+// Thrasios, Triton Hero — winning reference (EDHREC average decklist, fetched 2026-07-03)
+// SOURCE: crowd consensus of Thrasios, Triton Hero decks on EDHREC — matches user power pref (bracket 2-3, no cEDH staples).
+// PURPOSE: convergence target for referenceOverlapPct in scripts/test-deck-builds.ts.
+// Replace with a real winning human list when one exists (see DECK_ENGINE_TESTING_PROTOCOL.md).
+
+1 Thrasios, Triton Hero *CMDR*
+
+
+// ── artifacts ──
+1 Arcane Signet
+1 Basalt Monolith
+1 Lightning Greaves
+1 Mox Amber
+1 Simic Signet
+1 Sol Ring
+1 Talisman of Curiosity
+1 Thought Vessel
+
+// ── basics ──
+1 Forest
+1 Island
+
+// ── creatures ──
+1 Aesi, Tyrant of Gyre Strait
+1 Avenger of Zendikar
+1 Azusa, Lost but Seeking
+1 Biomancer's Familiar
+1 Birds of Paradise
+1 Coiling Oracle
+1 Delighted Halfling
+1 Elvish Mystic
+1 Eternal Witness
+1 Faerie Mastermind
+1 Fyndhorn Elves
+1 Hullbreaker Horror
+1 Kinnan, Bonder Prodigy
+1 Kiora's Follower
+1 Koma, Cosmos Serpent
+1 Laboratory Maniac
+1 Llanowar Elves
+1 Lotus Cobra
+1 Rampaging Baloths
+1 Scute Swarm
+1 Seedborn Muse
+1 Springheart Nantuko
+1 Tatyova, Benthic Druid
+1 Thassa's Oracle
+1 Tireless Provisioner
+
+// ── enchantments ──
+1 Exploration
+1 Mystic Remora
+1 Rhystic Study
+1 Sylvan Library
+1 Training Grounds
+1 Wild Growth
+1 Wilderness Reclamation
+
+// ── instants ──
+1 An Offer You Can't Refuse
+1 Arcane Denial
+1 Beast Within
+1 Counterspell
+1 Cyclonic Rift
+1 Fierce Guardianship
+1 Force of Will
+1 Growth Spiral
+1 Heroic Intervention
+1 Mana Drain
+1 Mystical Tutor
+1 Pongify
+1 Rapid Hybridization
+1 Swan Song
+1 Worldly Tutor
+
+// ── lands ──
+1 Alchemist's Refuge
+1 Boseiju, Who Endures
+1 Breeding Pool
+1 Command Tower
+1 Dreamroot Cascade
+1 Flooded Grove
+1 Flooded Strand
+1 Hedge Maze
+1 Hinterland Harbor
+1 Misty Rainforest
+1 Otawara, Soaring City
+1 Rejuvenating Springs
+1 Reliquary Tower
+1 Simic Growth Chamber
+1 Tropical Island
+1 Vineglimmer Snarl
+1 Waterlogged Grove
+1 Yavimaya Coast
+
+// ── planeswalkers ──
+1 Oko, Thief of Crowns
+
+// ── sorceries ──
+1 Cultivate
+1 Farseek
+1 Finale of Devastation
+1 Kodama's Reach
+1 Nature's Lore
+1 Rampant Growth
+1 Three Visits

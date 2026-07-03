@@ -1,0 +1,94 @@
+// Krenko, Mob Boss — COMMANDER
+// strategy=tribal themes=tribal tribal=goblin
+// total=99 lands=38 avgCMC=2.51 gold=0 counters=0
+// categories: utility=20 ramp=10 win_condition=4 removal=10 protection=4 board_wipe=3 draw=10 land=38
+
+1 Krenko, Mob Boss *CMDR*
+
+// ── ramp (10) ──
+1 Skirk Prospector
+1 Arcane Signet
+1 Scuzzback Scrounger
+1 Ashnod's Altar
+1 Howlsquad Heavy
+1 Jeska's Will
+1 Seething Song
+1 Starting Column
+1 Ashling, Flame Dancer
+1 Solemn Simulacrum
+
+// ── draw (10) ──
+1 Mishra's Bauble
+1 Faithless Looting
+1 Vexing Bauble
+1 Artist's Talent
+1 Humble Defector
+1 Mirror of Galadriel
+1 Thrill of Possibility
+1 Witch's Mark
+1 Rescue Leopard
+1 Anticausal Vestige
+
+// ── removal (10) ──
+1 Goblin Grenade
+1 Lightning Bolt
+1 Abrade
+1 Agatha's Soul Cauldron
+1 Blooming Blast
+1 Goblin Bombardment
+1 Steampath Charger
+1 Goblin Sharpshooter
+1 Goblin Trashmaster
+1 Heated Argument
+
+// ── board_wipe (3) ──
+1 Bag of Holding
+1 Fiery Confluence
+1 Blasphemous Act
+
+// ── protection (4) ──
+1 Hexing Squelcher
+1 Lightning Greaves
+1 Swiftfoot Boots
+1 Deflecting Swat
+
+// ── win_condition (4) ──
+1 Impact Tremors
+1 General Kreat, the Boltbringer
+1 Guttersnipe
+1 Purphoros, God of the Forge
+
+// ── utility (20) ──
+1 Gamble
+1 Goblin Bushwhacker
+1 Goblin Motivator
+1 Stadium Headliner
+1 Torch Courier
+1 Dragon Fodder
+1 Enterprising Scallywag
+1 Goblin Engineer
+1 Goblin Instigator
+1 Goblin Negotiation
+1 Krenko's Command
+1 Searslicer Goblin
+1 Breeches, Eager Pillager
+1 Fervor
+1 Goblin Matron
+1 Goblin Surprise
+1 Goblin Warchief
+1 Raid Bombardment
+1 Empty the Warrens
+1 Roaming Throne
+
+// ── land (38) ──
+1 Arena of Glory
+1 Cabaretti Courtyard
+1 Cavern of Souls
+1 Command Tower
+1 Cori Mountain Monastery
+1 Gemstone Caverns
+28 Mountain
+1 Multiversal Passage
+1 Scalding Tarn
+1 Secluded Courtyard
+1 Unclaimed Territory

@@ -1,0 +1,133 @@
+// AeveStormProper (post-audit swap: Night of the Sweets''s Revenge -> Craterhoof Behemoth) (deck 102) — AI-Reasoned, gpt-5.4, Historic Brawl, 100% owned
+
+1 Aeve, Progenitor Ooze
+
+1 Mishra's Bauble
+1 Analyze the Pollen
+1 Bag of Holding
+1 Bushwhack
+1 Citanul Stalwart
+1 Crop Rotation
+1 Elvish Mystic
+1 Experiment One
+1 Glimpse of Nature
+1 Hardened Scales
+1 Llanowar Elves
+1 Many Partings
+1 Noxious Revival
+1 Sixth Sense
+1 Springleaf Drum
+1 Utopia Sprawl
+1 Veil of Summer
+1 Vexing Bauble
+1 Wayfarer's Bauble
+1 Worldly Tutor
+1 Arcane Signet
+1 Bloom Tender
+1 Corrosive Ooze
+1 Emerald Medallion
+1 Explore
+1 Commune with Beavers
+1 Heroic Intervention
+1 Kenrith's Transformation
+1 Leaf-Crowned Visionary
+1 Leafkin Druid
+1 Malevolent Rumble
+1 Mind Stone
+1 Mirror of Galadriel
+1 Moonsilver Key
+1 Ornithopter of Paradise
+1 Ozolith, the Shattered Spire
+1 Paradise Druid
+1 Rampant Growth
+1 Scavenging Ooze
+1 Season of Growth
+1 Sylvan Library
+1 Up the Beanstalk
+1 Ashnod's Altar
+1 Beast Within
+1 Colossal Majesty
+1 Cultivate
+1 Elvish Archdruid
+1 Eternal Witness
+1 Garruk's Uprising
+1 Inspiring Call
+1 Outcaster Trailblazer
+1 Surrak, Elusive Hunter
+1 Terrasymbiosis
+1 Tribute to the World Tree
+1 Harmonize
+1 Hedron Archive
+1 Craterhoof Behemoth
+1 Acidic Slime
+1 Doubling Season
+1 The Great Henge
+1 Command Tower
+1 Evolving Wilds
+34 Forest
+1 Reliquary Tower
+1 Rogue's Passage
+1 Bridgeworks Battle // Tanglespan Bridgeworks
+
+// === PER-CARD REASONING ===
+* Llanowar Elves — One-mana dork that boosts storm count and accelerates explosive turns.
+* Elvish Mystic — Redundant one-mana accelerator for early setup and storm sequencing.
+* Arcane Signet — Format staple two-mana ramp piece that smooths early development.
+* Emerald Medallion — Cost reduction is excellent for chaining many green spells.
+* Springleaf Drum — Turns spare creatures into mana during combo turns.
+* Wayfarer's Bauble — Reliable land ramp that increases spell count early.
+* Utopia Sprawl — Efficient one-mana ramp enchantment for explosive starts.
+* Rampant Growth — Simple two-mana land ramp to hit key mana thresholds.
+* Cultivate — Staple ramp that guarantees future land drops.
+* Paradise Druid — Mana creature with built-in protection while untapped.
+* Leafkin Druid — Can produce extra mana once board develops.
+* Citanul Stalwart — Cheap mana creature that uses token bodies well.
+* Bloom Tender — Efficient mana creature that still taps for green here.
+* Ornithopter of Paradise — Two-mana mana creature that helps curve into Aeve.
+* Elvish Archdruid — Massive mana generation with several elf support creatures.
+* Hedron Archive — Big mana rock that later cashes in for cards.
+* Glimpse of Nature — Premier storm draw engine with creature-heavy sequencing.
+* Mishra's Bauble — Zero-mana cantrip that increases storm count efficiently.
+* Explore — Cheap cantrip that also advances mana development.
+* Up the Beanstalk — Aeve and other five-drops trigger extra cards.
+* Season of Growth — Creature entries provide useful card selection all game.
+* Sylvan Library — Top-tier card selection and raw card advantage.
+* Tribute to the World Tree — Aeve tokens often enter large enough to draw.
+* Garruk's Uprising — Draws off large Oozes and grants trample.
+* Inspiring Call — Massive refill with Aeve counters while protecting board.
+* Harmonize — Clean three-card refill in mono-green.
+* The Great Henge — Discounted often, then supplies mana, life, and cards.
+* Colossal Majesty — Aeve reliably enables recurring upkeep card draw.
+* Sixth Sense — Cheap repeatable draw on a large trampling Ooze.
+* Kenrith's Transformation — Cantrip aura that cleanly blanks problematic creatures.
+* Beast Within — Universal permanent answer and format staple.
+* Bushwhack — Flexible early land finder or creature fight spell.
+* Bridgeworks Battle // Tanglespan Bridgeworks — Fight spell attached to a land for flexibility.
+* Acidic Slime — Ooze body that answers key artifacts, lands, enchantments.
+* Scavenging Ooze — Graveyard interaction on a scalable Ooze body.
+* Crop Rotation — Finds key utility lands while adding storm count.
+* Worldly Tutor — Finds combo creatures or payoff pieces cheaply.
+* Noxious Revival — Free recursion spell that also builds storm.
+* Eternal Witness — Recovers key combo, draw, or protection pieces.
+* Moonsilver Key — Finds Sol-like artifacts or utility mana pieces.
+* Malevolent Rumble — Digs for permanents while stocking graveyard for recursion.
+* Many Partings — Cheap spell that fixes land drops and leaves token.
+* Analyze the Pollen — One-mana setup spell that can become a tutor.
+* Leaf-Crowned Visionary — Elf density support with optional card draw.
+* Outcaster Trailblazer — Creature-heavy turns generate mana and cards here.
+* Experiment One — Cheap Ooze body that grows with Aeve tokens.
+* Hardened Scales — Improves every Aeve token's counter output.
+* Ozolith, the Shattered Spire — Counter doubler effect plus card filtering later.
+* Doubling Season — Doubles Aeve tokens and enhances counter production.
+* Terrasymbiosis — Counter placement from Aeve can convert into cards.
+* Heroic Intervention — Best-in-class protection against wipes and spot removal.
+* Veil of Summer — Stops blue-black interaction while replacing itself often.
+* Ashnod's Altar — Converts token swarms into mana for extended combo turns.
+* Night of the Sweets' Revenge — Mass pump turns wide Ooze boards into lethal attacks.
+* Surrak, Elusive Hunter — Adds trample pressure and rewards big-creature attacks.
+* Vexing Bauble — Algorithmic fill (AI undercount)
+* Bag of Holding — Algorithmic fill (AI undercount)
+* Mirror of Galadriel — Algorithmic fill (AI undercount)
+* Corrosive Ooze — Algorithmic fill (AI undercount)
+* Farseek — Algorithmic fill (AI undercount)
+* Mind Stone — Algorithmic fill (AI undercount)

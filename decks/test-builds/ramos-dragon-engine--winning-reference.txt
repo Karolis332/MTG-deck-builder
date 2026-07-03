@@ -1,0 +1,122 @@
+// RAMOS, DRAGON ENGINE — HUMAN WINNING REFERENCE (ground truth)
+// Source: QuLeR's piloted build that wins games. Use as the engine's target.
+//
+// WINNING PLAN (validated in match vs deviousmischief, QuLeR won):
+//   1. Cast cheap MULTICOLORED spells (charms/commands) every turn.
+//   2. Each gold cast loads +1/+1 counters on Ramos FAST (3-color charm = 3).
+//   3. Convert counters to a win — EITHER:
+//        a) commander clock: swing with double strike (Boros Charm) / evasion, OR
+//        b) mana dump → oversized payoff (Door to Nothingness, Progenitus, Bring to Light).
+//   Example turn 7: 4 gold spells in one turn -> +7 counters -> Boros Charm
+//   double strike -> 12 damage. Adeliz-style spellslinger payoffs reward the same casts.
+//
+// COUNTERS ARE A MANA BATTERY / COMBAT CLOCK — NOT A PROLIFERATE THEME.
+//   Run ZERO counters-matters goodstuff (Evolution Sage, Inspiring Call, Conclave
+//   Mentor, Hardened Scales as a package). A single counter-doubler on the commander
+//   (Hydra's Growth) is acceptable tech, not a theme.
+//
+// ENGINE TARGET METRICS (see docs/DECK_ENGINE_TESTING_PROTOCOL.md):
+//   gold (2+ cast colors) nonland spells: ~50  (bot builds pre-fix: ~10)
+//   counters-matters cards: 0
+//
+1 Ramos, Dragon Engine *CMDR*
+
+1 Island
+1 Fracture
+1 Peter Parker
+1 Elusive Otter
+1 Plains
+1 Avacyn's Pilgrim
+1 Forest
+1 Dovin's Veto
+1 Talisman of Progress
+1 Aang, Swift Savior
+1 Hallowed Fountain
+1 Silverquill Charm
+1 Silverquill, the Disputant
+1 Flooded Strand
+1 Moment of Reckoning
+1 Godless Shrine
+1 Sokenzan, Crucible of Defiance
+1 Abandon Attachments
+1 Izzet Signet
+1 Glacial Dragonhunt
+1 Izzet Charm
+1 Talisman of Creativity
+1 The Emperor of Palamecia
+1 A-Vivi Ornitier
+1 Prismari, the Inspiration
+1 Misty Rainforest
+1 Stormcarved Coast
+1 Steam Vents
+1 Talisman of Indulgence
+1 Dreadbore
+1 Rakdos Charm
+1 Blood Crypt
+1 Revitalizing Repast
+1 Golgari Signet
+1 Skull Prophet
+1 Talisman of Resilience
+1 Deathcap Glade
+1 Overgrown Tomb
+1 Manamorphose
+1 Stump Stomp
+1 Spider Manifestation
+1 Vibrance
+1 Stomping Ground
+1 Rockfall Vale
+1 Temple of Abandon
+1 Boros Signet
+1 Deflecting Palm
+1 Aziza, Mage Tower Captain
+1 Talisman of Conviction
+1 Lorehold, the Historian
+1 Elegant Parlor
+1 Sacred Foundry
+1 Sundown Pass
+1 Talisman of Unity
+1 Overgrown Farmland
+1 Temple Garden
+1 Talisman of Curiosity
+1 Simic Charm
+1 Tam, Mindful First-Year
+1 Bring to Light
+1 Embrace the Paradox
+1 Quandrix, the Proof
+1 Dreamroot Cascade
+1 Breeding Pool
+1 Yavimaya Coast
+1 Riveteers Charm
+1 Maestros Charm
+1 Obscura Charm
+1 A-Cabaretti Charm
+1 Jetmir's Garden
+1 Annie Joins Up
+1 Brokers Charm
+1 Mardu Charm
+1 Savai Triome
+1 Mardu Siegebreaker
+1 Songcrafter Mage
+1 Temur Battlecrier
+1 Temur Charm
+1 Loot, the Pathfinder
+1 Abzan Charm
+1 Jeskai Charm
+1 Sultai Charm
+1 Fangkeeper's Familiar
+1 Rakshasa's Bargain
+1 Omnath, Locus of All
+1 Door to Nothingness
+1 Progenitus
+1 Timeless Lotus
+1 Chromanticore
+1 Maelstrom Archangel
+1 Jodah, the Unifier
+1 Eiganjo, Seat of the Empire
+1 Shatterskull Smashing
+1 Pinnacle Monk
+1 Disciple of Freyalise
+1 Scalding Tarn
+1 Multiversal Passage
+1 Starting Town
+1 Agadeem's Awakening

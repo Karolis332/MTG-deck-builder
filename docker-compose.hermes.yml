@@ -1,0 +1,18 @@
+# Hermes autonomous improver. Start: docker compose -f docker-compose.hermes.yml up -d --build
+# Stop:  docker compose -f docker-compose.hermes.yml down
+# Logs:  docker compose -f docker-compose.hermes.yml logs -f
+# Pause without stopping:  docker compose -f docker-compose.hermes.yml exec hermes touch /work/stop
+services:
+  hermes:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    env_file: .env.hermes
+    volumes:
+      - hermes_work:/work                      # persists clone + node_modules + DB snapshot
+      - ${DB_HOST_DIR}:/host-db:ro             # your live card DB, read-only
+    restart: unless-stopped
+    mem_limit: 2g                              # ponytail: cap it; the harness peaks well under this
+
+volumes:
+  hermes_work:

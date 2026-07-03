@@ -1,0 +1,96 @@
+1 Thran Portal
+1 Baldur's Gate
+1 Blood Crypt
+1 Bountiful Landscape
+1 Branch of Vitu-Ghazi
+1 Breeding Pool
+1 Cabaretti Courtyard
+1 Capital City
+1 Captivating Cave
+1 Command Tower
+1 Daily Bugle Building
+1 Escape Tunnel
+1 Evolving Wilds
+1 Fabled Passage
+1 Flooded Strand
+2 Forest
+1 Forgotten Monument
+1 Gemstone Caverns
+1 Godless Shrine
+1 Hallowed Fountain
+2 Island
+1 Misty Rainforest
+2 Mountain
+1 Multiversal Passage
+1 Overgrown Tomb
+1 Plains
+1 Plaza of Harmony
+1 Rumble Arena
+1 Sacred Foundry
+1 Scalding Tarn
+1 Steam Vents
+1 Stomping Ground
+1 Swamp
+1 Temple Garden
+1 Terramorphic Expanse
+1 Arcane Signet
+1 Boros Charm
+1 Boros Signet
+1 Dovin's Veto
+1 Fracture
+1 Goblin Electromancer
+1 Golgari Charm
+1 Gruul Charm
+1 Izzet Signet
+1 Rydia, Summoner of Mist
+1 Swiftfoot Boots
+1 Talisman of Conviction
+1 Talisman of Creativity
+1 Talisman of Curiosity
+1 Talisman of Progress
+1 Talisman of Resilience
+1 Witherbloom Charm
+1 Young Pyromancer
+1 Abzan Charm
+1 Adeliz, the Cinder Wind
+1 Awaken the Honored Dead
+1 Bitter Work
+1 Brokers Charm
+1 Chromatic Lantern
+1 Dualcaster Mage
+1 Guttersnipe
+1 Helga, Skittish Seer
+1 Kutzil, Malamet Exemplar
+1 Mayhem Devil
+1 Mortify
+1 Obscura Charm
+1 Quandrix Command
+1 Risen Reef
+1 Sultai Charm
+1 Tannuk, Memorial Ensign
+1 Temur Charm
+1 Warleader's Call
+1 Zurgo Stormrender
+1 Archmage Emeritus
+1 Ashling, Flame Dancer
+1 Culling Ritual
+1 Leyline of the Guildpact
+1 Murmuring Mystic
+1 Night of the Sweets' Revenge
+1 Ral, Crackling Wit
+1 Resonating Lute
+1 Ashling's Command
+1 Chromanticore
+1 Door to Nothingness
+1 Fusion Elemental
+1 Infinite Guideline Station
+1 Jegantha, the Wellspring
+1 Jodah, the Unifier
+1 Lorehold, the Historian
+1 Maelstrom Archangel
+1 Omnath, Locus of All
+1 SP//dr, Piloted by Peni
+1 Tatyova, Benthic Druid
+1 The Gitrog Monster
+1 Thousand-Year Storm
+1 Progenitus

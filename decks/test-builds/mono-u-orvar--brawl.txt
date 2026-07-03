@@ -1,7 +1,7 @@
 // Orvar, the All-Form — BRAWL
 // strategy=spellslinger themes=tokens,artifacts,control,flying,spellslinger,draw,ramp,counters,enchantments tribal=-
-// total=99 lands=38 avgCMC=3.25 gold=0 counters=0
-// categories: draw=20 win_condition=4 utility=9 ramp=9 removal=15 board_wipe=2 protection=2 land=38
+// total=99 lands=39 avgCMC=3.08 gold=0 counters=0
+// categories: draw=18 utility=8 win_condition=5 ramp=9 removal=15 board_wipe=2 protection=3 land=39
 
 1 Orvar, the All-Form *CMDR*
 
@@ -16,7 +16,7 @@
 1 Solemn Simulacrum
 1 Coveted Jewel
 
-// ── draw (20) ──
+// ── draw (18) ──
 1 Currency Converter
 1 Baral, Chief of Compliance
 1 Ominous Seas
@@ -30,13 +30,11 @@
 1 Wavebreak Hippocamp
 1 Archmage Emeritus
 1 Mu Yanling, Wind Rider
-1 Padeem, Consul of Innovation
 1 Archmage of Runes
 1 Mulldrifter
 1 Tezzeret, Artifice Master
 1 The Watcher in the Water
 1 Shark Typhoon
-1 Thought Monitor
 
 // ── removal (15) ──
 1 Essence Flux
@@ -45,6 +43,7 @@
 1 Rapid Hybridization
 1 Bumbleflower's Sharepot
 1 Kozilek's Command
+1 Resculpt
 1 Teferi's Time Twist
 1 The Ooze
 1 Warping Wail
@@ -53,34 +52,34 @@
 1 Venser, Shaper Savant
 1 Zuko's Exile
 1 Ugin, the Ineffable
-1 Hullbreaker Horror
 
 // ── board_wipe (2) ──
 1 Bag of Holding
 1 Jin-Gitaxias // The Great Synthesis
 
-// ── protection (2) ──
+// ── protection (3) ──
+1 Dive Down
 1 Swan Song
 1 Counterspell
 
-// ── win_condition (4) ──
+// ── win_condition (5) ──
 1 Irenicus's Vile Duplication
 1 Murmuring Mystic
 1 Talrand, Sky Summoner
+1 Precursor Golem
 1 Shipwreck Dowser
 
-// ── utility (9) ──
+// ── utility (8) ──
 1 Hangarback Walker
 1 Hidden Strings
-1 Sapphire Medallion
+1 Mirror Box
 1 Archaeomancer
 1 Master of Waves
-1 Sakashima of a Thousand Faces
 1 Spark Double
 1 Vesuvan Duplimancy
 1 Mind's Desire
 
-// ── land (38) ──
+// ── land (39) ──
 1 Flooded Strand
 28 Island
 1 Mistrise Village
@@ -91,4 +90,5 @@
 1 Glasspool Mimic // Glasspool Shore
 1 Hydroelectric Specimen // Hydroelectric Laboratory
 1 Sink into Stupor // Soporific Springs
+1 Ojer Pakpatiq, Deepest Epoch // Temple of Cyclical Time
 1 Sea Gate Restoration // Sea Gate, Reborn

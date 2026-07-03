@@ -1,0 +1,115 @@
+// Thrasios, Triton Hero + Tymna the Weaver — COMMANDER
+// strategy=aggro themes=control,ramp,draw,artifacts,tokens,aggro,enchantments,sacrifice tribal=-
+// total=99 lands=39 avgCMC=2.33 gold=2 counters=0
+// categories: protection=5 utility=10 ramp=27 draw=12 removal=4 board_wipe=2 land=39
+
+1 Thrasios, Triton Hero *CMDR*
+1 Tymna the Weaver *CMDR* (requested partner — see note)
+
+// ── ramp (27) ──
+1 Mox Amber
+1 An Offer You Can't Refuse
+1 Crop Rotation
+1 Dark Ritual
+1 Arcane Signet
+1 Druid Class
+1 Gleaming Barrier
+1 Golgari Signet
+1 Hydro-Channeler
+1 Mind Stone
+1 Talisman of Curiosity
+1 Talisman of Progress
+1 Talisman of Resilience
+1 Talisman of Unity
+1 Unlucky Cabbage Merchant
+1 Zimone, Quandrix Prodigy
+1 Dauntless Scrapbot
+1 Enduring Vitality
+1 Loot, Exuberant Explorer
+1 Potioner's Trove
+1 Starting Column
+1 The Cabbage Merchant
+1 Tundra Tank
+1 Azula, On the Hunt
+1 Firemind Vessel
+1 White Lotus Tile
+1 The Eternity Elevator
+
+// ── draw (12) ──
+1 Stiltzkin, Moogle Merchant
+1 Veil of Summer
+1 Village Rites
+1 Worldly Tutor
+1 Long River's Pull
+1 Wan Shi Tong, Librarian
+1 Garruk's Uprising
+1 Phyrexian Arena
+1 Ad Nauseam
+1 G'raha Tia
+1 Orysa, Tide Choreographer
+1 Sokka's Haiku
+
+// ── removal (4) ──
+1 Bushwhack
+1 Agatha's Soul Cauldron
+1 Feed the Swarm
+1 Gravestone Strider
+
+// ── board_wipe (2) ──
+1 Bag of Holding
+1 Golgari Charm
+
+// ── protection (5) ──
+1 Chase Inspiration
+1 Overprotect
+1 Wild Unraveling
+1 Fierce Guardianship
+1 Brush Off
+
+// ── utility (10) ──
+1 Enlightened Tutor
+1 Mockingbird
+1 Noxious Revival
+1 Training Grounds
+1 Ajani's Pridemate
+1 Badgermole Cub
+1 Voice of Victory
+1 Eternal Witness
+1 Formidable Speaker
+1 Valley Floodcaller
+
+// ── land (39) ──
+1 Breeding Pool
+1 Brokers Hideout
+1 Cabaretti Courtyard
+1 Capital City
+1 Captivating Cave
+1 Cavern of Souls
+1 Command Tower
+1 Escape Tunnel
+1 Evolving Wilds
+1 Fabled Passage
+1 Flooded Strand
+4 Forest
+1 Forgotten Monument
+1 Fortified Village
+1 Gemstone Caverns
+1 Godless Shrine
+1 Hallowed Fountain
+1 Hinterland Harbor
+3 Island
+1 Misty Rainforest
+1 Multiversal Passage
+1 Overgrown Tomb
+1 Plains
+1 Rumble Arena
+1 Scalding Tarn
+1 Secluded Courtyard
+1 Swamp
+1 Temple Garden
+1 Terramorphic Expanse
+1 Unclaimed Territory
+1 Vibrant Cityscape
+1 Vineglimmer Snarl
+1 Woodland Cemetery
+1 Yavimaya Coast

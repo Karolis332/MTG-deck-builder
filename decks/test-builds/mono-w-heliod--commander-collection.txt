@@ -1,0 +1,94 @@
+// Heliod, Sun-Crowned — COMMANDER
+// strategy=midrange themes=enchantments,lifegain,counters,flying,artifacts,equipment,aggro,control,draw,tokens,ramp tribal=-
+// total=99 lands=38 avgCMC=2.82 gold=0 counters=0
+// categories: removal=10 utility=14 ramp=13 draw=10 protection=3 board_wipe=4 win_condition=7 land=38
+
+1 Heliod, Sun-Crowned *CMDR*
+
+// ── ramp (13) ──
+1 Arcane Signet
+1 Coldsteel Heart
+1 Giada, Font of Hope
+1 Mind Stone
+1 Ornithopter of Paradise
+1 Burnished Hart
+1 Chromatic Lantern
+1 Dauntless Scrapbot
+1 Pristine Talisman
+1 Starting Column
+1 Firemind Vessel
+1 Hedron Archive
+1 Solemn Simulacrum
+
+// ── draw (10) ──
+1 Mishra's Bauble
+1 Stiltzkin, Moogle Merchant
+1 Case of the Pilfered Proof
+1 Feather of Flight
+1 Rune of Sustenance
+1 Sram, Senior Edificer
+1 Caretaker's Talent
+1 Haliya, Guided by Light
+1 G'raha Tia
+1 Chronicle of Victory
+
+// ── removal (10) ──
+1 Path to Exile
+1 Requisition Raid
+1 Agatha's Soul Cauldron
+1 Citizen's Crowbar
+1 Glass Casket
+1 Ossification
+1 Personify
+1 Valorous Stance
+1 Protective Response
+1 Zuko's Exile
+
+// ── board_wipe (4) ──
+1 Bag of Holding
+1 Fumigate
+1 Sunfall
+1 Urza's Ruinous Blast
+
+// ── protection (3) ──
+1 Flawless Maneuver
+1 Hardened Escort
+1 Teferi's Protection
+
+// ── win_condition (7) ──
+1 Archon of Sun's Grace
+1 Rosa, Resolute White Mage
+1 The Wind Crystal
+1 Twinblade Paladin
+1 Danitha, Benalia's Hope
+1 Exalted Sunborn
+1 Lyra Dawnbringer
+
+// ── utility (14) ──
+1 Authority of the Consuls
+1 Enlightened Tutor
+1 Ethereal Armor
+1 Healer's Hawk
+1 Ajani's Pridemate
+1 All That Glitters
+1 Costume Closet
+1 Impassioned Orator
+1 Leonardo, Cutting Edge
+1 Aerith Gainsborough
+1 Angel of Vitality
+1 Nettlecyst
+1 Starnheim Courser
+1 Grand Entryway // Elegant Rotunda
+
+// ── land (38) ──
+1 Brokers Hideout
+1 Cabaretti Courtyard
+1 Cavern of Souls
+1 Command Tower
+1 Eclipsed Realms
+1 Flooded Strand
+1 Gemstone Caverns
+1 Multiversal Passage
+28 Plains
+1 Secluded Courtyard
+1 Unclaimed Territory

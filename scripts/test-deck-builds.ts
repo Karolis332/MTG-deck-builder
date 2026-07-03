@@ -331,6 +331,17 @@ async function main(): Promise<void> {
   for (const scenario of roster) {
     if (only && scenario.slug !== only) continue;
     for (const format of ACTIVE_FORMATS) {
+      // Preflight: skip formats where the commander itself is not legal
+      // (e.g. Magus Lucea Kane in Arena Brawl). A skip is not a failure —
+      // it must not count as a hardFail in the fitness gate.
+      const legKey = format === 'commander' ? 'commander' : 'brawl';
+      const cmdRow = getDb()
+        .prepare('SELECT legalities FROM cards WHERE name = ? COLLATE NOCASE LIMIT 1')
+        .get(scenario.commander) as { legalities?: string } | undefined;
+      if (cmdRow && !legalIn(cmdRow, legKey)) {
+        console.log(`SKIP ${scenario.slug} [${format}] — commander not legal in ${format}`);
+        continue;
+      }
       process.stdout.write(`Building ${scenario.slug} [${format}] ... `);
       const out = await buildOne(scenario, format);
       results.push(out);

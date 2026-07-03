@@ -1,0 +1,98 @@
+// Heliod, Sun-Crowned — winning reference (EDHREC average decklist, fetched 2026-07-03)
+// SOURCE: crowd consensus of Heliod, Sun-Crowned decks on EDHREC — matches user power pref (bracket 2-3, no cEDH staples).
+// PURPOSE: convergence target for referenceOverlapPct in scripts/test-deck-builds.ts.
+// Replace with a real winning human list when one exists (see DECK_ENGINE_TESTING_PROTOCOL.md).
+
+1 Heliod, Sun-Crowned *CMDR*
+
+
+// ── artifacts ──
+1 Aetherflux Reservoir
+1 Altar of the Pantheon
+1 Arcane Signet
+1 Cosmos Elixir
+1 Mind Stone
+1 Oketra's Monument
+1 Pearl Medallion
+1 Pristine Talisman
+1 Sol Ring
+1 The Wind Crystal
+1 Well of Lost Dreams
+
+// ── basics ──
+1 Plains
+
+// ── creatures ──
+1 Ajani's Pridemate
+1 Angel of Vitality
+1 Archangel of Thune
+1 Archivist of Oghma
+1 Auriok Champion
+1 Daxos, Blessed by the Sun
+1 Dusk Legion Duelist
+1 Esper Sentinel
+1 Exemplar of Light
+1 Felidar Sovereign
+1 Grand Abolisher
+1 Haliya, Guided by Light
+1 Knight of the White Orchid
+1 Linden, the Steadfast Queen
+1 Mangara, the Diplomat
+1 Mother of Runes
+1 Ranger of Eos
+1 Ranger-Captain of Eos
+1 Recruiter of the Guard
+1 Resplendent Angel
+1 Serra Ascendant
+1 Soul Warden
+1 Soul's Attendant
+1 Speaker of the Heavens
+1 Sun Titan
+1 Sunscorch Regent
+1 Suture Priest
+1 The Gaffer
+1 Triskelion
+1 Voice of the Blessed
+1 Walking Ballista
+
+// ── enchantments ──
+1 Ajani's Welcome
+1 Authority of the Consuls
+1 Blind Obedience
+1 Cleric Class
+1 Dawn of Hope
+1 Deafening Silence
+1 Ghostly Prison
+1 Land Tax
+1 Sigarda's Splendor
+1 Smothering Tithe
+
+// ── instants ──
+1 Enlightened Tutor
+1 Generous Gift
+1 Heliod's Intervention
+1 Path to Exile
+1 Reprieve
+1 Silence
+1 Stroke of Midnight
+1 Swords to Plowshares
+1 Teferi's Protection
+
+// ── lands ──
+1 Castle Ardenvale
+1 Eiganjo, Seat of the Empire
+1 Emeria, the Sky Ruin
+1 Hall of Heliod's Generosity
+1 Minas Tirith
+1 Nykthos, Shrine to Nyx
+1 Radiant Fountain
+1 War Room
+
+// ── planeswalkers ──
+1 Ajani, Strength of the Pride
+
+// ── sorceries ──
+1 Austere Command
+1 Farewell
+1 Fumigate
+1 Wrath of God

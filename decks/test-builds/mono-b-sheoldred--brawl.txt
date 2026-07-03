@@ -1,7 +1,7 @@
 // Sheoldred, the Apocalypse — BRAWL
 // strategy=midrange themes=artifacts,ramp,draw,sacrifice,tokens,equipment,tribal tribal=-
-// total=99 lands=39 avgCMC=3.72 gold=0 counters=0
-// categories: ramp=12 draw=19 removal=10 board_wipe=4 protection=3 win_condition=4 utility=8 land=39
+// total=99 lands=39 avgCMC=3.7 gold=0 counters=0
+// categories: ramp=12 draw=20 removal=9 board_wipe=4 protection=3 win_condition=3 utility=9 land=39
 
 1 Sheoldred, the Apocalypse *CMDR*
 
@@ -19,14 +19,15 @@
 1 Chromatic Orrery
 1 Ugin, Eye of the Storms
 
-// ── draw (19) ──
+// ── draw (20) ──
 1 Currency Converter
 1 Night's Whisper
 1 Sign in Blood
 1 Black Market Connections
 1 Blood Pact
+1 Grim Haruspex
+1 Midnight Reaper
 1 Phyrexian Arena
-1 Read the Bones
 1 Scrawling Crawler
 1 Staff of Domination
 1 Underworld Dreams
@@ -40,16 +41,15 @@
 1 Liliana, Dreadhorde General
 1 Peer into the Abyss
 
-// ── removal (10) ──
+// ── removal (9) ──
 1 Feed the Swarm
 1 Infernal Grasp
-1 Aetherflux Reservoir
 1 Baleful Mastery
 1 Dread Presence
 1 Erebos, Bleak-Hearted
 1 Ob Nixilis Reignited
 1 Ob Nixilis, the Hate-Twisted
-1 The Mightstone and Weakstone
+1 Sheoldred // The True Scriptures
 1 Vilis, Broker of Blood
 
 // ── board_wipe (4) ──
@@ -63,13 +63,12 @@
 1 Lightning Greaves
 1 Swiftfoot Boots
 
-// ── win_condition (4) ──
+// ── win_condition (3) ──
 1 Marauding Blight-Priest
 1 Gray Merchant of Asphodel
-1 Bolas's Citadel
 1 K'rrik, Son of Yawgmoth
 
-// ── utility (8) ──
+// ── utility (9) ──
 1 Howling Mine
 1 Jet Medallion
 1 Dark Deal
@@ -78,6 +77,7 @@
 1 Enduring Tenacity
 1 Exquisite Blood
 1 Sanguine Bond
+1 Lich's Mastery
 
 // ── land (39) ──
 1 Bloodstained Mire

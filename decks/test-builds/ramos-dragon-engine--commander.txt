@@ -1,57 +1,55 @@
 // Ramos, Dragon Engine — COMMANDER
 // strategy=midrange themes=artifacts,tokens,ramp,draw,sacrifice,flying tribal=-
-// total=99 lands=38 avgCMC=2.97 gold=34 counters=0
-// categories: ramp=26 utility=5 win_condition=2 removal=16 draw=8 board_wipe=4 land=38
+// total=99 lands=38 avgCMC=3.3 gold=47 counters=0
+// categories: ramp=16 win_condition=3 utility=6 removal=18 draw=14 board_wipe=4 land=38
 
 1 Ramos, Dragon Engine *CMDR*
 
-// ── ramp (26) ──
+// ── ramp (16) ──
 1 Arcane Signet
-1 Azorius Signet
-1 Boros Signet
+1 Collector's Vault
 1 Dimir Signet
-1 Fellwar Stone
-1 Golgari Signet
-1 Izzet Signet
-1 Mind Stone
-1 Orzhov Signet
-1 Rakdos Signet
-1 Simic Signet
+1 Lotho, Corrupt Shirriff
 1 Sorcerer Class
 1 Talisman of Conviction
 1 Talisman of Creativity
-1 Talisman of Curiosity
 1 Talisman of Dominance
 1 Talisman of Hierarchy
-1 Talisman of Impulse
 1 Talisman of Indulgence
 1 Talisman of Progress
-1 Talisman of Resilience
 1 Chromatic Lantern
 1 Faeburrow Elder
 1 Hearthhull, the Worldseed
+1 Kheru Goldkeeper
 1 Omnath, Locus of All
-1 Chromatic Orrery
 
-// ── draw (8) ──
+// ── draw (14) ──
 1 Baleful Strix
 1 Baral, Chief of Compliance
 1 Likeness Looter
+1 Lunar Convocation
 1 Akiri, Fearless Voyager
 1 Gluntch, the Bestower
+1 Jeskai Ascendancy
 1 Kutzil, Malamet Exemplar
+1 Tannuk, Memorial Ensign
 1 Zurgo Stormrender
 1 Archmage Emeritus
+1 Korvold, Fae-Cursed King
+1 Niv-Mizzet Reborn
+1 Tatyova, Benthic Druid
 
-// ── removal (16) ──
+// ── removal (18) ──
 1 Deathrite Shaman
 1 Abrupt Decay
 1 Artifact Mutation
 1 Boros Charm
+1 Drown in the Loch
 1 Fracture
 1 Abzan Charm
 1 Bant Charm
 1 Bedevil
+1 Esper Charm
 1 Mortify
 1 Prismari Command
 1 Putrefy
@@ -59,21 +57,23 @@
 1 Void Rend
 1 Wear // Tear
 1 Niv-Mizzet, Parun
-1 Niv-Mizzet, the Firemind
+1 Unite the Coalition
 
 // ── board_wipe (4) ──
 1 Golgari Charm
-1 Kaya's Wrath
+1 Jund Charm
 1 Jin-Gitaxias // The Great Synthesis
 1 Time Wipe
 
-// ── win_condition (2) ──
-1 Guttersnipe
+// ── win_condition (3) ──
+1 Chromanticore
 1 Maelstrom Archangel
+1 Progenitus
 
-// ── utility (5) ──
+// ── utility (6) ──
 1 Goblin Electromancer
 1 Veyran, Voice of Duality
+1 Villainous Wealth
 1 Door to Nothingness
 1 Maelstrom Nexus
 1 Conflux
@@ -101,12 +101,12 @@
 2 Mountain
 1 Multiversal Passage
 1 Opal Palace
-2 Plains
+1 Plains
 1 Prismatic Vista
 1 Reflecting Pool
 1 Steam Vents
 1 Survivors' Encampment
-1 Swamp
+2 Swamp
 1 Talon Gates of Madara
 1 Temple of the Dragon Queen
 1 The Grey Havens

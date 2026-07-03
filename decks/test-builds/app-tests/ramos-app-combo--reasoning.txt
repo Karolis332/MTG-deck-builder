@@ -1,0 +1,77 @@
+// RamosTest1 (deck 99) — AI-Reasoned build log — model gpt-5.4, 37342ms
+
+STRATEGY:
+Ramos wants cheap multicolor spells and a high instant/sorcery count to stock counters fast, then convert them into explosive mana for big turns. This build leans spellslinger-combo with token/value payoffs, strong fixing, and multicolor charms/converge cards that both trigger Ramos heavily and keep interaction density high.
+
+== Ramp (17) ==
+* Arcane Signet — Premium fixing staple for five-color commander decks.
+* Chromatic Lantern — Perfect five-color fixing; makes every land cast multicolor spells.
+* Timeless Lotus — Huge rainbow burst for combo turns and expensive plays.
+* Springleaf Drum — Turns token makers into rainbow mana acceleration.
+* Boros Signet — Efficient two-mana rock that improves color access.
+* Izzet Signet — Cheap rock supporting blue-red spell chains.
+* Talisman of Creativity — Fast fixing for key spellslinger colors.
+* Talisman of Progress — Efficient acceleration and white-blue fixing.
+* Talisman of Conviction — Two-mana ramp that helps cast Boros interaction.
+* Talisman of Curiosity — Excellent fixing for green-blue setup turns.
+* Talisman of Resilience — Covers black-green requirements efficiently.
+* Goblin Electromancer — Cost reduction effectively ramps instant and sorcery chains.
+* Goblin Anarchomancer — Discounts many red and green spells in the deck.
+* Storm-Kiln Artist — Protected card; creates Treasures from every spell cast.
+* Tireless Provisioner — Landfall Treasures provide flexible burst mana.
+* Outcaster Trailblazer — ETB fixing and later creature-based mana generation.
+* Archmage of Runes — Reduces spell costs and rewards casting instants and sorceries.
+
+== Draw (13) ==
+* Archmage Emeritus — Protected card; premier draw engine for spell density.
+* Sylvan Library — Top-tier card selection and sustained card advantage.
+* Expressive Iteration — Efficient two-mana selection and card advantage.
+* Siphon Insight — Instant-speed value spell that can be cast twice.
+* Big Score — Draws cards while making Treasures for combo turns.
+* Unexpected Windfall — Instant-speed draw two plus two Treasures.
+* Seize the Spoils — Cheap rummage spell that also creates Treasure.
+* Thrilling Discovery — Efficient filtering to keep spells flowing.
+* Abandon Attachments — Simple two-mana rummage to maintain spell velocity.
+* Abzan Charm — Flexible charm; draw mode is clean card advantage.
+* Hydroid Krasis — Mana sink that converts Ramos bursts into cards.
+* Kutzil, Malamet Exemplar — Protects your turn and rewards combat with cards.
+* Dreadwing Scavenger — ETB looting on an evasive body adds selection.
+
+== Removal (16) ==
+* Mortify — Clean instant answer to creatures or enchantments.
+* Fracture — Efficient answer to artifact, enchantment, or planeswalker.
+* Dreadbore — Cheap sorcery removal for creature or planeswalker.
+* Lightning Helix — Efficient burn spell with life buffer.
+* Rakdos Charm — Versatile graveyard hate, artifact kill, or finisher.
+* Dovin's Veto — Uncounterable answer to problematic noncreature spells.
+* Izzet Charm — Flexible counter, removal, or looting mode.
+* Decisive Denial — Fight spell or conditional counter in one slot.
+* Quandrix Command — Flexible interaction with bounce and graveyard hate.
+* Sultai Charm — Three useful modes and strong Ramos trigger.
+* Brokers Charm — Can protect, draw, or remove via combat damage.
+* Obscura Charm — Versatile instant with recursion and removal mode.
+* Riveteers Charm — Exiles graveyard, removes threat, or impulse draws.
+* Temur Charm — Counter, removal, or evasion on a multicolor spell.
+* Witherbloom Charm — Flexible utility including creature removal mode.
+* Culling Ritual — Sweeper that often refunds mana for explosive follow-up.
+
+== Utility (1) ==
+* Bring to Light — Converge tutor-caster that loves five-color mana.
+
+== Synergy (6) ==
+* Leyline of the Guildpact — Enhances domain/rainbow mana and supports five-color casting.
+* Young Pyromancer — Protected card; converts spells into a growing token army.
+* Third Path Iconoclast — Cheap token engine for noncreature spell chains.
+* Ral, Crackling Wit — Rewards noncreature spells with counters and token production.
+* Ashling, Flame Dancer — Magecraft payoff that converts spell chains into value.
+* Kraum, Violent Cacophony — Rewards double-spelling, which this deck does often.
+
+== Win Conditions (3) ==
+* Guttersnipe — Protected card; repeated spell casts drain the table.
+* Witherbloom Apprentice — Magecraft drain payoff that pressures all opponents.
+* Door to Nothingness — Ramos mana ability enables immediate alternate-win activation.
+
+== Protection (3) ==
+* Boros Charm — Protects board from wipes or gives surprise lethal damage.
+* Repulsive Mutation — Protects threat with counterspell mode and adds counters.
+* Deflecting Palm — Prevents lethal swings and can reflect huge damage.

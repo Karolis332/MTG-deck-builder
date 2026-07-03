@@ -1,0 +1,118 @@
+// General Tazri — COMMANDER
+// strategy=tribal themes=tribal tribal=ally
+// total=99 lands=38 avgCMC=3 gold=28 counters=0
+// categories: ramp=25 utility=9 removal=10 win_condition=4 draw=7 protection=3 board_wipe=3 land=38
+
+1 General Tazri *CMDR*
+
+// ── ramp (25) ──
+1 Arcane Signet
+1 Bloom Tender
+1 Boros Signet
+1 Coldsteel Heart
+1 Farseek
+1 Golgari Signet
+1 Great Divide Guide
+1 Izzet Signet
+1 Mind Stone
+1 Rampant Growth
+1 Talisman of Conviction
+1 Talisman of Creativity
+1 Talisman of Curiosity
+1 Talisman of Indulgence
+1 Talisman of Progress
+1 Talisman of Resilience
+1 Talisman of Unity
+1 Chromatic Lantern
+1 Cultivate
+1 Helga, Skittish Seer
+1 Kellan, the Kid
+1 Noggle Robber
+1 Jegantha, the Wellspring
+1 Omnath, Locus of All
+1 The Gitrog Monster
+
+// ── draw (7) ──
+1 South Pole Voyager
+1 Kutzil, Malamet Exemplar
+1 Risen Reef
+1 Tannuk, Memorial Ensign
+1 Zurgo Stormrender
+1 Sokka's Haiku
+1 Tatyova, Benthic Druid
+
+// ── removal (10) ──
+1 Bushwhack
+1 Cloudshift
+1 Ephemerate
+1 Path to Exile
+1 Agatha's Soul Cauldron
+1 Boros Charm
+1 Rakdos Charm
+1 Mortify
+1 Temur Charm
+1 Heated Argument
+
+// ── board_wipe (3) ──
+1 Golgari Charm
+1 Gruul Charm
+1 Ashling's Command
+
+// ── protection (3) ──
+1 Dovin's Veto
+1 Wild Unraveling
+1 Hakoda, Selfless Commander
+
+// ── win_condition (4) ──
+1 Sokka, Tenacious Tactician
+1 Fusion Elemental
+1 Katara, Water Tribe's Hope
+1 Progenitus
+
+// ── utility (9) ──
+1 Earth King's Lieutenant
+1 United Front
+1 Katara, the Fearless
+1 Mai and Zuko
+1 Panharmonicon
+1 Suki, Kyoshi Warrior
+1 Wartime Protestors
+1 Bring to Light
+1 Door to Nothingness
+
+// ── land (38) ──
+1 Blood Crypt
+1 Bountiful Landscape
+1 Breeding Pool
+1 Brokers Hideout
+1 Cabaretti Courtyard
+1 Capital City
+1 Captivating Cave
+1 Command Tower
+1 Escape Tunnel
+1 Evolving Wilds
+1 Fabled Passage
+1 Flooded Strand
+2 Forest
+1 Forgotten Monument
+1 Gemstone Caverns
+1 Godless Shrine
+1 Hallowed Fountain
+2 Island
+1 Misty Rainforest
+1 Mountain
+1 Multiversal Passage
+1 Overgrown Tomb
+2 Plains
+1 Rumble Arena
+1 Sacred Foundry
+1 Scalding Tarn
+1 Shattered Landscape
+1 Sheltering Landscape
+1 Steam Vents
+1 Stomping Ground
+1 Swamp
+1 Temple Garden
+1 Terramorphic Expanse
+1 Twisted Landscape
+1 Vibrant Cityscape

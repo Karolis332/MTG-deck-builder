@@ -64,6 +64,26 @@ function isLandBackDfc(card: DbCard): boolean {
   return tl.includes('//') && !tl.split('//')[0].includes('Land') && tl.includes('Land');
 }
 
+// ── Dead land-fetch guard ────────────────────────────────────────────────────
+// Spells that search for specific basic land TYPES are dead when none of those
+// types can exist in the deck's colors (e.g. Farseek — "Plains, Island, Swamp,
+// or Mountain" — in mono-green cannot find anything). Generic "basic land" or
+// "land card" fetches are always fine.
+const BASIC_TYPE_COLOR: Record<string, string> = {
+  plains: 'W', island: 'U', swamp: 'B', mountain: 'R', forest: 'G',
+};
+
+export function isDeadLandFetch(oracleText: string | null | undefined, deckColors: string[]): boolean {
+  if (!oracleText) return false;
+  const m = oracleText.match(/search your library for (?:up to \w+ )?(?:an? )?([^.\n]*?) cards?\b/i);
+  if (!m) return false;
+  const clause = m[1].toLowerCase();
+  if (clause.includes('basic land') || /(^|[^a-z])land($|[^a-z])/.test(clause)) return false;
+  const types = Object.keys(BASIC_TYPE_COLOR).filter((t) => clause.includes(t));
+  if (types.length === 0) return false;
+  return !types.some((t) => deckColors.includes(BASIC_TYPE_COLOR[t]));
+}
+
 // ── Commander synergy text patterns for card scoring ────────────────────────
 // Maps synergy categories from commander-synergy.ts to oracle text substrings
 
@@ -771,6 +791,8 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
   const validForPool = (card: DbCard): boolean => {
     if (!cardLegalInFormat(card)) return false;
     if ((card.type_line || '').split('//')[0].includes('Land')) return false;
+    // Dead in these colors (e.g. Farseek in mono-G fetches nothing)
+    if (isDeadLandFetch(card.oracle_text, colors)) return false;
     // Rarity ceiling (Pauper/Peasant) applies to injected candidates too —
     // the EDHREC/tribal paths otherwise leak rares into commons-only builds.
     if (options.rarityFilter === 'pauper' && card.rarity !== 'common') return false;
@@ -1069,7 +1091,11 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
       } else if (cmdrStats.inclusionRate >= 0.08) {
         score += 10; // Occasional include
       }
-      // Synergy bonus: cards that appear MORE in this commander's decks than globally
+      // Synergy bonus: cards that appear MORE in this commander's decks than globally.
+      // NOTE (2026-07-03): a lift-ratio variant (inclusion/global tiers 8x/4x/2x) was
+      // tried and REVERTED — fitness 897→885 against the EDHREC-consensus references.
+      // Revisit lift when references are predominantly human winning lists (see
+      // docs/RECOMMENDER_METHODS_AUDIT.md #10).
       if (cmdrStats.synergyScore > 0.3) {
         score += 25; // Very high commander-specific synergy
       } else if (cmdrStats.synergyScore > 0.15) {

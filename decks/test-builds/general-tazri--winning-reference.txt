@@ -1,0 +1,116 @@
+// General Tazri — winning reference (EDHREC average decklist, fetched 2026-07-03)
+// SOURCE: crowd consensus of General Tazri decks on EDHREC — matches user power pref (bracket 2-3, no cEDH staples).
+// PURPOSE: convergence target for referenceOverlapPct in scripts/test-deck-builds.ts.
+// Replace with a real winning human list when one exists (see DECK_ENGINE_TESTING_PROTOCOL.md).
+
+1 General Tazri *CMDR*
+
+
+// ── artifacts ──
+1 Arcane Signet
+1 Captain's Claws
+1 Chromatic Lantern
+1 Fellwar Stone
+1 Herald's Horn
+1 Panharmonicon
+1 Sol Ring
+1 Urza's Incubator
+
+// ── basics ──
+1 Forest
+1 Island
+1 Mountain
+1 Plains
+1 Swamp
+
+// ── creatures ──
+1 Agadeem Occultist
+1 Bala Ged Thief
+1 Beastcaller Savant
+1 Chasm Guide
+1 Earth King's Lieutenant
+1 Firemantle Mage
+1 Great Divide Guide
+1 Hada Freeblade
+1 Hagra Diabolist
+1 Hakoda, Selfless Commander
+1 Halimar Excavator
+1 Harabaz Druid
+1 Hero of Goma Fada
+1 Jwari Shapeshifter
+1 Kabira Evangel
+1 Kalastria Healer
+1 Katara, the Fearless
+1 Kazuul Warlord
+1 Kor Bladewhirl
+1 Lantern Scout
+1 Munda, Ambush Leader
+1 Murasa Pyromancer
+1 Ondu Champion
+1 Ondu Cleric
+1 Resolute Blademaster
+1 Sea Gate Loremaster
+1 Seascape Aerialist
+1 Sokka, Tenacious Tactician
+1 South Pole Voyager
+1 Tajuru Warcaller
+1 Talus Paladin
+1 Tuktuk Scrapper
+1 Turntimber Ranger
+
+// ── enchantments ──
+1 Airbender Ascension
+1 Kindred Discovery
+1 Reflections of Littjara
+1 Retreat to Emeria
+1 Sokka's Charge
+
+// ── instants ──
+1 Cloudshift
+1 Eerie Interlude
+1 Ephemerate
+1 Heroic Intervention
+1 Kindred Summons
+1 Lae'zel's Acrobatics
+1 Path to Exile
+1 Semester's End
+1 Swords to Plowshares
+
+// ── lands ──
+1 Ally Encampment
+1 Breeding Pool
+1 Cavern of Souls
+1 Command Tower
+1 Evolving Wilds
+1 Exotic Orchard
+1 Flooded Strand
+1 Godless Shrine
+1 Hallowed Fountain
+1 Jasmine Dragon Tea Shop
+1 Jungle Shrine
+1 Mystic Monastery
+1 Overgrown Tomb
+1 Path of Ancestry
+1 Reliquary Tower
+1 Sacred Foundry
+1 Sandsteppe Citadel
+1 Seaside Citadel
+1 Secluded Courtyard
+1 Stomping Ground
+1 Temple Garden
+1 The World Tree
+1 Unclaimed Territory
+1 Windswept Heath
+
+// ── planeswalkers ──
+1 Gideon, Ally of Zendikar
+
+// ── sorceries ──
+1 Cultivate
+1 Distant Melody
+1 Farseek
+1 Kodama's Reach
+1 March from the Tomb
+1 Rampant Growth
+1 Unified Front
+1 United Front

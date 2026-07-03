@@ -1,0 +1,106 @@
+// Magus Lucea Kane — winning reference (EDHREC average decklist, fetched 2026-07-03)
+// SOURCE: crowd consensus of Magus Lucea Kane decks on EDHREC — matches user power pref (bracket 2-3, no cEDH staples).
+// PURPOSE: convergence target for referenceOverlapPct in scripts/test-deck-builds.ts.
+// Replace with a real winning human list when one exists (see DECK_ENGINE_TESTING_PROTOCOL.md).
+
+1 Magus Lucea Kane *CMDR*
+
+
+// ── artifacts ──
+1 Arcane Signet
+1 Elementalist's Palette
+1 Lightning Greaves
+1 Sol Ring
+1 Swiftfoot Boots
+1 The Ozolith
+1 Twinning Staff
+
+// ── basics ──
+1 Forest
+1 Island
+1 Mountain
+
+// ── creatures ──
+1 Aberrant
+1 Atalan Jackal
+1 Biophagus
+1 Broodlord
+1 Clamavus
+1 Exocrine
+1 Goldvein Hydra
+1 Hormagaunt Horde
+1 Hydroid Krasis
+1 Incubation Druid
+1 Ingenious Prodigy
+1 Kami of Whispered Hopes
+1 Kiora's Follower
+1 Mawloc
+1 Nexos
+1 Old One Eye
+1 Owlin Spiralmancer
+1 Primordial Hydra
+1 Ravener
+1 Shivan Devastator
+1 Sporocyst
+1 Stonecoil Serpent
+1 Termagant Swarm
+1 Tervigon
+1 Tyrant Guard
+1 Voracious Hydra
+1 Winged Hive Tyrant
+1 Zoanthrope
+
+// ── enchantments ──
+1 Branching Evolution
+1 Bred for the Hunt
+1 Garruk's Uprising
+1 Hardened Scales
+1 Shadow in the Warp
+1 Temur Ascendancy
+1 The First Tyrannic War
+1 Unbound Flourishing
+
+// ── instants ──
+1 Aetherize
+1 Beast Within
+1 Comet Storm
+1 Counterspell
+1 Heroic Intervention
+1 Inspiring Call
+1 Pull from Tomorrow
+1 Repulsive Mutation
+1 Starstorm
+
+// ── lands ──
+1 Breeding Pool
+1 Cinder Glade
+1 Command Tower
+1 Evolving Wilds
+1 Exotic Orchard
+1 Frontier Bivouac
+1 Game Trail
+1 Hinterland Harbor
+1 Ketria Triome
+1 Path of Ancestry
+1 Rejuvenating Springs
+1 Reliquary Tower
+1 Spire Garden
+1 Steam Vents
+1 Stomping Ground
+1 Temple of Abandon
+1 Temple of Epiphany
+1 Temple of Mystery
+1 Wooded Foothills
+
+// ── sorceries ──
+1 Animist's Awakening
+1 Crackle with Power
+1 Cultivate
+1 Curse of the Swine
+1 Farseek
+1 Finale of Revelation
+1 Hull Breach
+1 Nature's Lore
+1 Open the Way
+1 Rampant Growth
+1 Three Visits

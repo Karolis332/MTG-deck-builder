@@ -1,0 +1,94 @@
+// Ghalta, Primal Hunger — winning reference (EDHREC average decklist, fetched 2026-07-03)
+// SOURCE: crowd consensus of Ghalta, Primal Hunger decks on EDHREC — matches user power pref (bracket 2-3, no cEDH staples).
+// PURPOSE: convergence target for referenceOverlapPct in scripts/test-deck-builds.ts.
+// Replace with a real winning human list when one exists (see DECK_ENGINE_TESTING_PROTOCOL.md).
+
+1 Ghalta, Primal Hunger *CMDR*
+
+
+// ── artifacts ──
+1 Emerald Medallion
+1 Lightning Greaves
+1 Sol Ring
+1 Swiftfoot Boots
+1 Tangleweave Armor
+1 The Great Henge
+1 The Skullspore Nexus
+
+// ── basics ──
+1 Forest
+
+// ── creatures ──
+1 Arbor Elf
+1 Beast Whisperer
+1 Defiler of Vigor
+1 Disciple of Freyalise
+1 Elvish Mystic
+1 Eternal Witness
+1 Fanatic of Rhonas
+1 Frenzied Baloth
+1 Fyndhorn Elves
+1 Ghalta, Stampede Tyrant
+1 Gigantosaurus
+1 Goreclaw, Terror of Qal Sisma
+1 Gwenna, Eyes of Gaea
+1 Hulking Raptor
+1 Karametra's Acolyte
+1 Kogla, the Titan Ape
+1 Llanowar Elves
+1 Llanowar Tribe
+1 Managorger Hydra
+1 Outcaster Trailblazer
+1 Pugnacious Hammerskull
+1 Reclamation Sage
+1 Rhonas the Indomitable
+1 Selvala, Heart of the Wilds
+1 Slumbering Trudge
+1 Steel Leaf Champion
+1 Surrak and Goreclaw
+1 Surrak, the Hunt Caller
+1 Thrashing Brontodon
+1 Topiary Stomper
+1 Wayward Swordtooth
+1 Yorvo, Lord of Garenbrig
+1 Zopandrel, Hunger Dominus
+
+// ── enchantments ──
+1 Colossal Majesty
+1 Garruk's Uprising
+1 Greater Good
+1 Tribute to the World Tree
+1 Unnatural Growth
+1 Wild Growth
+
+// ── instants ──
+1 Beast Within
+1 Boon of Boseiju
+1 Heroic Intervention
+1 Hunter's Insight
+1 Momentous Fall
+1 Ram Through
+1 Return of the Wildspeaker
+1 Tamiyo's Safekeeping
+
+// ── lands ──
+1 Cactus Preserve
+1 Castle Garenbrig
+1 Mosswort Bridge
+1 Nykthos, Shrine to Nyx
+1 Reliquary Tower
+1 Rogue's Passage
+
+// ── planeswalkers ──
+1 Garruk, Primal Hunter
+
+// ── sorceries ──
+1 Cultivate
+1 Kodama's Reach
+1 Last March of the Ents
+1 Majestic Genesis
+1 Nature's Lore
+1 Overwhelming Stampede
+1 Rampant Growth
+1 Rishkar's Expertise
+1 Traverse the Outlands

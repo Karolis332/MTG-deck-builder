@@ -1,12 +1,12 @@
 // Thrasios, Triton Hero + Tymna the Weaver — BRAWL
 // strategy=aggro themes=control,draw,ramp,artifacts,tokens,enchantments,aggro tribal=-
-// total=99 lands=39 avgCMC=1.97 gold=4 counters=0
-// categories: ramp=20 draw=12 removal=6 board_wipe=2 protection=3 win_condition=1 utility=16 land=39
+// total=99 lands=39 avgCMC=1.93 gold=4 counters=0
+// categories: ramp=21 draw=12 removal=7 board_wipe=2 protection=3 win_condition=1 utility=14 land=39
 
 1 Thrasios, Triton Hero *CMDR*
 1 Tymna the Weaver *CMDR* (requested partner — see note)
 
-// ── ramp (20) ──
+// ── ramp (21) ──
 1 Mox Amber
 1 An Offer You Can't Refuse
 1 Avacyn's Pilgrim
@@ -16,6 +16,7 @@
 1 Noble Hierarch
 1 Arcane Signet
 1 Azorius Signet
+1 Deadly Dispute
 1 Devoted Druid
 1 Dimir Signet
 1 Kinnan, Bonder Prodigy
@@ -42,8 +43,9 @@
 1 Garruk's Uprising
 1 Rhystic Study
 
-// ── removal (6) ──
+// ── removal (7) ──
 1 Deathrite Shaman
+1 Insidious Fungus
 1 Swords to Plowshares
 1 Cankerbloom
 1 Feed the Swarm
@@ -62,7 +64,7 @@
 // ── win_condition (1) ──
 1 Zulaport Cutthroat
 
-// ── utility (16) ──
+// ── utility (14) ──
 1 Enlightened Tutor
 1 Flusterstorm
 1 Mockingbird
@@ -73,10 +75,8 @@
 1 Biomancer's Familiar
 1 Finale of Devastation
 1 Grand Abolisher
-1 Phantasmal Image
 1 Springheart Nantuko
 1 Voice of Victory
-1 Chord of Calling
 1 Eternal Witness
 1 Formidable Speaker
 
@@ -93,6 +93,7 @@
 1 Flooded Strand
 4 Forest
 1 Gemstone Caverns
+1 Godless Shrine
 1 Hidden Grotto
 2 Island
 1 Mana Confluence
@@ -104,7 +105,6 @@
 1 Polluted Delta
 1 Prismatic Vista
 1 Reflecting Pool
-1 Rumble Arena
 1 Swamp
 1 Tarnished Citadel
 1 Temple Garden

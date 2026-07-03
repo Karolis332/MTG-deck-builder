@@ -1,0 +1,86 @@
+1 Ash Barrens
+1 Buried Ruin
+1 Cavern of Souls
+1 Command Tower
+1 Darksteel Citadel
+1 Evolving Wilds
+1 Fabled Passage
+1 Flooded Strand
+3 Forest
+1 Gemstone Caverns
+3 Island
+1 Misty Rainforest
+3 Mountain
+1 Phyrexian Tower
+3 Plains
+1 Reliquary Tower
+1 Rogue's Passage
+1 Scalding Tarn
+1 Secluded Courtyard
+6 Swamp
+1 Takenuma, Abandoned Mire
+1 Terramorphic Expanse
+1 Unclaimed Territory
+1 Urborg, Tomb of Yawgmoth
+1 Yavimaya Coast
+1 Malakir Rebirth
+1 Springleaf Drum
+1 Abandon Attachments
+1 Arcane Signet
+1 Boros Charm
+1 Boros Signet
+1 Decisive Denial
+1 Deflecting Palm
+1 Dovin's Veto
+1 Dreadbore
+1 Expressive Iteration
+1 Fracture
+1 Goblin Anarchomancer
+1 Goblin Electromancer
+1 Hydroid Krasis
+1 Izzet Charm
+1 Izzet Signet
+1 Lightning Helix
+1 Rakdos Charm
+1 Repulsive Mutation
+1 Siphon Insight
+1 Sylvan Library
+1 Talisman of Conviction
+1 Talisman of Creativity
+1 Talisman of Curiosity
+1 Talisman of Progress
+1 Talisman of Resilience
+1 Third Path Iconoclast
+1 Thrilling Discovery
+1 Witherbloom Apprentice
+1 Witherbloom Charm
+1 Young Pyromancer
+1 Abzan Charm
+1 Brokers Charm
+1 Chromatic Lantern
+1 Dreadwing Scavenger
+1 Guttersnipe
+1 Kutzil, Malamet Exemplar
+1 Mortify
+1 Obscura Charm
+1 Outcaster Trailblazer
+1 Quandrix Command
+1 Riveteers Charm
+1 Seize the Spoils
+1 Sultai Charm
+1 Temur Charm
+1 Tireless Provisioner
+1 Archmage Emeritus
+1 Ashling, Flame Dancer
+1 Big Score
+1 Culling Ritual
+1 Fell the Profane
+1 Kraum, Violent Cacophony
+1 Leyline of the Guildpact
+1 Ral, Crackling Wit
+1 Storm-Kiln Artist
+1 Unexpected Windfall
+1 Archmage of Runes
+1 Bring to Light
+1 Door to Nothingness
+1 Timeless Lotus

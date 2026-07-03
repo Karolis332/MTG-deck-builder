@@ -1,0 +1,120 @@
+// Ramos, Dragon Engine — COMMANDER (collection, optimal: 5 counters-matters cards swapped for owned winning-reference gold charms)
+// swap: -[Evolution Sage, Hardened Scales, Inspiring Call, Hydra's Growth, Kami of Whispered Hopes] +[Dovin's Veto, Silverquill Charm, Izzet Charm, Rakdos Charm, Dreadbore] → gold 28→33, counters 5→0
+// strategy=midrange themes=artifacts,tokens,ramp,draw,equipment,control,sacrifice,counters tribal=-
+// total=99 lands=38 avgCMC=3.07 gold=28 counters=5
+// categories: ramp=23 utility=12 draw=7 win_condition=5 removal=9 protection=1 board_wipe=4 land=38
+
+1 Ramos, Dragon Engine *CMDR*
+
+// ── ramp (23) ──
+1 Arcane Signet
+1 Bloom Tender
+1 Boros Signet
+1 Coldsteel Heart
+1 Farseek
+1 Golgari Signet
+1 Izzet Signet
+1 Mind Stone
+1 Rampant Growth
+1 Talisman of Conviction
+1 Talisman of Creativity
+1 Talisman of Curiosity
+1 Talisman of Indulgence
+1 Talisman of Progress
+1 Talisman of Resilience
+1 Talisman of Unity
+1 Chromatic Lantern
+1 Cultivate
+1 Helga, Skittish Seer
+1 Noggle Robber
+1 Jegantha, the Wellspring
+1 Omnath, Locus of All
+
+// ── draw (7) ──
+1 Kutzil, Malamet Exemplar
+1 Zurgo Stormrender
+1 Archmage Emeritus
+1 Ral, Crackling Wit
+1 Infinite Guideline Station
+1 Tatyova, Benthic Druid
+
+// ── removal (9) ──
+1 Boros Charm
+1 Fracture
+1 Abzan Charm
+1 Brokers Charm
+1 Mayhem Devil
+1 Mortify
+1 Obscura Charm
+1 Quandrix Command
+1 Sultai Charm
+
+// ── board_wipe (4) ──
+1 Golgari Charm
+1 Gruul Charm
+1 Night of the Sweets' Revenge
+1 Ashling's Command
+
+// ── protection (1) ──
+1 Swiftfoot Boots
+
+// ── win_condition (5) ──
+1 Firebrand Archer
+1 Guttersnipe
+1 Murmuring Mystic
+1 Fusion Elemental
+1 Progenitus
+
+// ── utility (12) ──
+1 Goblin Electromancer
+1 Young Pyromancer
+1 Adeliz, the Cinder Wind
+1 Dualcaster Mage
+1 Good-Fortune Unicorn
+1 Forgotten Ancient
+1 Leyline of the Guildpact
+1 Door to Nothingness
+1 Thousand-Year Storm
+
+// ── land (38) ──
+1 Blood Crypt
+1 Bountiful Landscape
+1 Breeding Pool
+1 Brokers Hideout
+1 Cabaretti Courtyard
+1 Capital City
+1 Captivating Cave
+1 Command Tower
+1 Escape Tunnel
+1 Evolving Wilds
+1 Fabled Passage
+1 Flooded Strand
+2 Forest
+1 Forgotten Monument
+1 Gemstone Caverns
+1 Godless Shrine
+1 Hallowed Fountain
+2 Island
+1 Misty Rainforest
+2 Mountain
+1 Multiversal Passage
+1 Overgrown Tomb
+1 Plains
+1 Rumble Arena
+1 Sacred Foundry
+1 Scalding Tarn
+1 Shattered Landscape
+1 Sheltering Landscape
+1 Steam Vents
+1 Stomping Ground
+1 Swamp
+1 Temple Garden
+1 Terramorphic Expanse
+1 Twisted Landscape
+1 Vibrant Cityscape
+
+1 Dovin's Veto
+1 Silverquill Charm
+1 Izzet Charm
+1 Rakdos Charm
+1 Dreadbore

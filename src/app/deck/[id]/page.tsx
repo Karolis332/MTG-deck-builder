@@ -569,6 +569,8 @@ export default function DeckEditorPage() {
             cardName: c.cardName,
             quantity: c.quantity,
           })),
+          // What was on screen when the user decided — bandit context (rec_outcomes)
+          candidatesShown: proposedChanges.map((c) => c.cardName),
         }),
       });
       const data = await res.json();

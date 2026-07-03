@@ -1,7 +1,7 @@
 // Sheoldred, the Apocalypse — COMMANDER
 // strategy=control themes=draw,ramp,artifacts,sacrifice,equipment,tokens,control,tribal tribal=-
-// total=99 lands=38 avgCMC=3.82 gold=0 counters=0
-// categories: ramp=12 draw=15 removal=18 board_wipe=6 protection=1 win_condition=2 utility=7 land=38
+// total=99 lands=38 avgCMC=3.8 gold=0 counters=0
+// categories: ramp=12 draw=16 removal=18 board_wipe=6 protection=1 win_condition=1 utility=7 land=38
 
 1 Sheoldred, the Apocalypse *CMDR*
 
@@ -19,16 +19,17 @@
 1 Chromatic Orrery
 1 Ugin, Eye of the Storms
 
-// ── draw (15) ──
+// ── draw (16) ──
 1 Sign in Blood
 1 Black Market Connections
 1 Master of the Feast
 1 Phyrexian Arena
 1 Scrawling Crawler
+1 Temple Bell
 1 Underworld Dreams
 1 Erebos, God of the Dead
 1 Fate Unraveler
-1 Greed
+1 Rankle, Master of Pranks
 1 The One Ring
 1 Alhammarret's Archive
 1 Psychosis Crawler
@@ -67,9 +68,8 @@
 // ── protection (1) ──
 1 Lightning Greaves
 
-// ── win_condition (2) ──
+// ── win_condition (1) ──
 1 Marauding Blight-Priest
-1 Crypt Ghast
 
 // ── utility (7) ──
 1 Damnable Pact
