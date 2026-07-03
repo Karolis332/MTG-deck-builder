@@ -1,47 +1,50 @@
 // Ramos, Dragon Engine — BRAWL
 // strategy=midrange themes=artifacts,tokens,ramp,draw,sacrifice,counters,flying,control,spellslinger tribal=-
-// total=99 lands=38 avgCMC=3.31 gold=44 counters=0
-// categories: ramp=16 win_condition=5 utility=4 removal=16 draw=16 board_wipe=4 land=38
+// total=99 lands=38 avgCMC=3.08 gold=32 counters=0
+// categories: ramp=26 win_condition=4 utility=3 removal=15 draw=9 board_wipe=4 land=38
 
 1 Ramos, Dragon Engine *CMDR*
 
-// ── ramp (16) ──
+// ── ramp (26) ──
 1 Arcane Signet
+1 Azorius Signet
+1 Boros Signet
 1 Dimir Signet
+1 Golgari Signet
+1 Gruul Signet
 1 Izzet Signet
-1 Lotho, Corrupt Shirriff
+1 Orzhov Signet
+1 Rakdos Signet
+1 Selesnya Signet
+1 Simic Signet
 1 Talisman of Conviction
 1 Talisman of Creativity
+1 Talisman of Curiosity
 1 Talisman of Dominance
 1 Talisman of Hierarchy
+1 Talisman of Impulse
 1 Talisman of Progress
+1 Talisman of Resilience
+1 Talisman of Unity
 1 Chromatic Lantern
 1 Faeburrow Elder
 1 Helga, Skittish Seer
 1 Hearthhull, the Worldseed
-1 Kheru Goldkeeper
 1 Omnath, Locus of All
 1 Chromatic Orrery
 
-// ── draw (16) ──
+// ── draw (9) ──
 1 Baral, Chief of Compliance
 1 Likeness Looter
-1 Lunar Convocation
-1 Sythis, Harvest's Hand
-1 Vohar, Vodalian Desecrator
 1 Akiri, Fearless Voyager
-1 Eshki, Temur's Roar
 1 Jeskai Ascendancy
 1 Kutzil, Malamet Exemplar
-1 Zurgo Stormrender
 1 Archmage Emeritus
-1 Jhoira, Weatherlight Captain
 1 Infinite Guideline Station
 1 Korvold, Fae-Cursed King
 1 Niv-Mizzet Reborn
-1 Tatyova, Benthic Druid
 
-// ── removal (16) ──
+// ── removal (15) ──
 1 Deathrite Shaman
 1 Abrupt Decay
 1 Boros Charm
@@ -55,7 +58,6 @@
 1 Prismari Command
 1 Putrefy
 1 Sultai Charm
-1 Void Rend
 1 Wear // Tear
 1 Niv-Mizzet, Parun
 
@@ -65,17 +67,15 @@
 1 Jin-Gitaxias // The Great Synthesis
 1 Time Wipe
 
-// ── win_condition (5) ──
+// ── win_condition (4) ──
 1 Murmuring Mystic
 1 Talrand, Sky Summoner
-1 Chromanticore
 1 Maelstrom Archangel
 1 Progenitus
 
-// ── utility (4) ──
+// ── utility (3) ──
 1 Goblin Electromancer
 1 Dualcaster Mage
-1 Villainous Wealth
 1 Door to Nothingness
 
 // ── land (38) ──
@@ -83,10 +83,10 @@
 1 Aether Hub
 1 Baldur's Gate
 1 Branch of Vitu-Ghazi
+1 Breeding Pool
 1 Capital City
 1 Captivating Cave
 1 Cascading Cataracts
-1 Cave of Temptation
 1 Command Tower
 1 Conduit Pylons
 1 Crystal Grotto
@@ -96,21 +96,21 @@
 1 Forest
 1 Gemstone Caverns
 1 Hall of Oracles
+1 Hallowed Fountain
 1 Hidden Grotto
 2 Island
 1 Mana Confluence
-1 Meteor Crater
-1 Mountain
+2 Mountain
 1 Multiversal Passage
 2 Plains
-1 Plaza of Harmony
 1 Prismatic Vista
 1 Reflecting Pool
 1 Rumble Arena
-2 Swamp
+1 Steam Vents
+1 Swamp
 1 Tarnished Citadel
 1 Temple of the Dragon Queen
 1 The Grey Havens
 1 The Mycosynth Gardens
 1 Three Tree City
-1 Unknown Shores
+1 Watery Grave

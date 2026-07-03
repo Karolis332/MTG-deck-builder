@@ -6,6 +6,7 @@
 1 Heliod, Sun-Crowned *CMDR*
 
 // ── ramp (11) ──
+1 Land Tax
 1 Arcane Signet
 1 Collector's Vault
 1 Idol of False Gods
@@ -13,21 +14,20 @@
 1 Altar of the Pantheon
 1 Discerning Financier
 1 Dragon's Hoard
-1 Magnifying Glass
 1 Pristine Talisman
 1 Smothering Tithe
 1 Ugin, Eye of the Storms
 
 // ── draw (10) ──
-1 Esper Sentinel
+1 Archivist of Oghma
 1 Dawn of Hope
 1 Dusk Legion Duelist
 1 Kor Spiritdancer
 1 Sram, Senior Edificer
+1 Haliya, Guided by Light
 1 Pearl-Ear, Imperial Advisor
 1 Exemplar of Light
 1 Mangara, the Diplomat
-1 Sigarda's Splendor
 1 Towashi Guide-Bot
 
 // ── removal (12) ──
@@ -46,9 +46,9 @@
 
 // ── board_wipe (4) ──
 1 Bag of Holding
-1 Wrath of God
 1 Fumigate
 1 Sunfall
+1 Farewell
 
 // ── protection (3) ──
 1 Alseid of Life's Bounty

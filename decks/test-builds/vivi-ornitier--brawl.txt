@@ -1,7 +1,7 @@
 // Vivi Ornitier — BRAWL
 // strategy=spellslinger themes=counters,tokens,artifacts,spellslinger,draw,aggro,flying,ramp,enchantments,graveyard,equipment tribal=-
-// total=99 lands=38 avgCMC=2.92 gold=8 counters=0
-// categories: removal=13 draw=20 win_condition=5 utility=9 ramp=10 board_wipe=2 protection=2 land=38
+// total=99 lands=38 avgCMC=2.84 gold=7 counters=0
+// categories: removal=13 draw=19 win_condition=5 utility=10 ramp=10 board_wipe=2 protection=2 land=38
 
 1 Vivi Ornitier *CMDR*
 
@@ -17,7 +17,7 @@
 1 Ashling, Flame Dancer
 1 Storm-Kiln Artist
 
-// ── draw (20) ──
+// ── draw (19) ──
 1 Brainstorm
 1 Curiosity
 1 Faithless Looting
@@ -33,7 +33,6 @@
 1 Archmage Emeritus
 1 Jaxis, the Troublemaker
 1 Padeem, Consul of Innovation
-1 Alania, Divergent Storm
 1 Archmage of Runes
 1 Shark Typhoon
 1 The Locust God
@@ -63,32 +62,33 @@
 1 Counterspell
 
 // ── win_condition (5) ──
+1 Coruscation Mage
 1 Firebrand Archer
 1 Guttersnipe
 1 Murmuring Mystic
-1 Talrand, Sky Summoner
 1 Niv-Mizzet, Visionary
 
-// ── utility (9) ──
+// ── utility (10) ──
 1 Hangarback Walker
 1 Shivan Devastator
 1 Crackle with Power
 1 Goblin Electromancer
 1 Harmonic Prodigy
 1 Increasing Vengeance
+1 Jaya's Immolating Inferno
 1 Young Pyromancer
 1 Expansion // Explosion
 1 Thousand-Year Storm
 
 // ── land (38) ──
+1 A-Thran Portal
 1 Arid Mesa
 1 Bloodstained Mire
 1 Fiery Islet
 1 Flooded Strand
 1 Frostboil Snarl
-10 Island
-1 Misty Rainforest
-10 Mountain
+9 Island
+11 Mountain
 1 Multiversal Passage
 1 Polluted Delta
 1 Riverglide Pathway // Lavaglide Pathway

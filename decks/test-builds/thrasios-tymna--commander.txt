@@ -1,14 +1,15 @@
 // Thrasios, Triton Hero + Tymna the Weaver — COMMANDER
 // strategy=control themes=control,ramp,draw,tokens,artifacts,equipment tribal=-
-// total=99 lands=39 avgCMC=2.7 gold=6 counters=0
-// categories: ramp=17 draw=11 removal=18 board_wipe=6 protection=5 win_condition=1 utility=2 land=39
+// total=99 lands=39 avgCMC=2.65 gold=6 counters=0
+// categories: ramp=18 draw=10 removal=18 board_wipe=6 protection=5 win_condition=1 utility=2 land=39
 
 1 Thrasios, Triton Hero *CMDR*
 1 Tymna the Weaver *CMDR* (requested partner — see note)
 
-// ── ramp (17) ──
+// ── ramp (18) ──
 1 Chrome Mox
 1 Lotus Petal
+1 Mox Diamond
 1 An Offer You Can't Refuse
 1 Birds of Paradise
 1 Crop Rotation
@@ -25,14 +26,13 @@
 1 Smothering Tithe
 1 The Great Henge
 
-// ── draw (11) ──
+// ── draw (10) ──
 1 Esper Sentinel
 1 Mystic Remora
 1 Idol of Oblivion
 1 Wan Shi Tong, Librarian
 1 Black Market Connections
 1 Garruk's Uprising
-1 Morbid Opportunist
 1 Phyrexian Arena
 1 Rhystic Study
 1 Beast Whisperer

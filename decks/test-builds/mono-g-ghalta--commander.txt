@@ -1,7 +1,7 @@
 // Ghalta, Primal Hunger — COMMANDER
 // strategy=aggro themes=ramp,artifacts,draw,tokens,aggro,equipment tribal=-
-// total=99 lands=39 avgCMC=3.03 gold=0 counters=0
-// categories: ramp=20 draw=14 removal=4 board_wipe=2 protection=4 win_condition=4 utility=12 land=39
+// total=99 lands=41 avgCMC=3.03 gold=0 counters=0
+// categories: ramp=20 draw=13 removal=4 board_wipe=2 protection=4 win_condition=4 utility=11 land=41
 
 1 Ghalta, Primal Hunger *CMDR*
 
@@ -15,24 +15,23 @@
 1 Fanatic of Rhonas
 1 Fellwar Stone
 1 Goldvein Pick
+1 Gyre Sage
 1 Mind Stone
 1 Priest of Titania
-1 Rampant Growth
+1 Cultivate
 1 Llanowar Tribe
 1 Outcaster Trailblazer
-1 Runadi, Behemoth Caller
 1 Selvala, Heart of the Wilds
 1 Topiary Stomper
 1 Wayward Swordtooth
 1 Hulking Raptor
 1 The Great Henge
 
-// ── draw (14) ──
+// ── draw (13) ──
 1 Currency Converter
 1 Sensei's Divining Top
 1 Skullclamp
 1 Idol of Oblivion
-1 Life's Legacy
 1 Colossal Majesty
 1 Garruk's Uprising
 1 Tireless Tracker
@@ -44,7 +43,7 @@
 1 Rishkar's Expertise
 
 // ── removal (4) ──
-1 Scavenging Ooze
+1 Insidious Fungus
 1 Beast Within
 1 Reclamation Sage
 1 Thrashing Brontodon
@@ -65,23 +64,22 @@
 1 Overwhelming Stampede
 1 Surrak and Goreclaw
 
-// ── utility (12) ──
+// ── utility (11) ──
 1 Arbor Elf
 1 Ram Through
 1 Managorger Hydra
 1 Pugnacious Hammerskull
 1 Rhonas the Indomitable
 1 Steel Leaf Champion
-1 Wood Elves
 1 Yorvo, Lord of Garenbrig
 1 Surrak, the Hunt Caller
 1 Tangleweave Armor
 1 Unnatural Growth
 1 Majestic Genesis
 
-// ── land (39) ──
+// ── land (41) ──
 1 City of Brass
-29 Forest
+31 Forest
 1 Misty Rainforest
 1 Three Tree City
 1 Verdant Catacombs

@@ -164,7 +164,8 @@ def fetch_commander_stats(client: httpx.Client, commander: str, limit: int = 300
 
 
 def sync_all(conn: sqlite3.Connection, client: httpx.Client,
-             min_decks: int, single_commander: str | None = None) -> dict:
+             min_decks: int, single_commander: str | None = None,
+             commanders_file: str | None = None) -> dict:
     """Sync commander stats from CF API into local SQLite.
 
     Uses staging table for atomic swap (Pitfall 1 fix).
@@ -174,6 +175,11 @@ def sync_all(conn: sqlite3.Connection, client: httpx.Client,
     if single_commander:
         commanders = [{"commander_name": single_commander, "deck_count": 0}]
         print(f"  Single commander mode: {single_commander}")
+    elif commanders_file:
+        with open(commanders_file, encoding="utf-8") as f:
+            names = [line.strip() for line in f if line.strip()]
+        commanders = [{"commander_name": n, "deck_count": 0} for n in names]
+        print(f"  Commanders from file: {len(commanders)}")
     else:
         print("  Fetching commander list from CF API...")
         commanders = fetch_commander_list(client, min_decks)
@@ -368,6 +374,8 @@ def main():
                         help="Minimum decks per commander (default: 10)")
     parser.add_argument("--commander", type=str, default=None,
                         help="Sync a single commander only (merge mode)")
+    parser.add_argument("--commanders-file", type=str, default=None,
+                        help="File with one commander name per line (skips slow /commander-list)")
     args = parser.parse_args()
 
     db_path = os.path.abspath(args.db)
@@ -395,7 +403,8 @@ def main():
     )
 
     try:
-        stats = sync_all(conn, client, args.min_decks, args.commander)
+        stats = sync_all(conn, client, args.min_decks, args.commander,
+                         commanders_file=args.commanders_file)
     finally:
         client.close()
         conn.close()

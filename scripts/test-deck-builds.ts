@@ -112,13 +112,21 @@ function castColorCount(raw: unknown): number {
 // Load card names from a human winning-reference fixture, if one exists, for
 // convergence scoring. Strips comments, quantities, and the *CMDR* marker.
 // Prefers a format-specific reference (e.g. --brawl-winning-reference.txt);
-// falls back to the generic one.
-function loadReferenceNames(slug: string, format?: string): Set<string> | null {
+// falls back to the generic one, then to the local EDHREC average decklist
+// (edhrec_avg_decks) so ANY commander gets a convergence signal.
+function loadReferenceNames(slug: string, format?: string, commander?: string): Set<string> | null {
   const specific = format ? path.join(OUT_DIR, `${slug}--${format}-winning-reference.txt`) : null;
   const file = specific && fs.existsSync(specific)
     ? specific
     : path.join(OUT_DIR, `${slug}--winning-reference.txt`);
-  if (!fs.existsSync(file)) return null;
+  if (!fs.existsSync(file)) {
+    if (!commander) return null;
+    const rows = getDb()
+      .prepare('SELECT card_name FROM edhrec_avg_decks WHERE commander_name = ? COLLATE NOCASE')
+      .all(commander) as Array<{ card_name: string }>;
+    if (!rows.length) return null;
+    return new Set(rows.map((r) => r.card_name.toLowerCase()));
+  }
   const names = new Set<string>();
   for (const raw of fs.readFileSync(file, 'utf8').split(/\r?\n/)) {
     const line = raw.trim();
@@ -218,7 +226,7 @@ async function buildOne(scenario: Scenario, format: string): Promise<BuildOut> {
     // Convergence vs human winning reference (overlap on ALL nonland cards).
     let referenceOverlapPct: number | undefined;
     let referenceMissing: string[] | undefined;
-    const refNames = loadReferenceNames(scenario.slug, format);
+    const refNames = loadReferenceNames(scenario.slug, format, scenario.commander);
     if (refNames) {
       const buildNames = new Set(
         main.filter((c) => !c.type_line.includes('Land')).map((c) => c.name.toLowerCase())
@@ -313,7 +321,13 @@ async function main(): Promise<void> {
   const only = onlyIdx > -1 ? process.argv[onlyIdx + 1] : null;
 
   const results: BuildOut[] = [];
-  const roster = COLLECTION_MODE ? [...SCENARIOS, ...COLLECTION_EXTRA] : SCENARIOS;
+  // --commander "Name": build any commander ad-hoc (reference comes from
+  // edhrec_avg_decks fallback if no fixture file exists).
+  const cmdrIdx = process.argv.indexOf('--commander');
+  const adhoc = cmdrIdx > -1 ? process.argv[cmdrIdx + 1] : null;
+  const roster: Scenario[] = adhoc
+    ? [{ slug: adhoc.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''), commander: adhoc, note: 'ad-hoc via --commander' }]
+    : COLLECTION_MODE ? [...SCENARIOS, ...COLLECTION_EXTRA] : SCENARIOS;
   for (const scenario of roster) {
     if (only && scenario.slug !== only) continue;
     for (const format of ACTIVE_FORMATS) {
@@ -337,7 +351,8 @@ async function main(): Promise<void> {
       brawlLegal: c.brawlLegal, commanderLegal: c.commanderLegal,
     })),
   }));
-  const resultsFile = COLLECTION_MODE ? 'results-collection.json' : 'results.json';
+  // Ad-hoc runs must never clobber results.json — it is the auto-improve gate's input.
+  const resultsFile = adhoc ? 'results-adhoc.json' : COLLECTION_MODE ? 'results-collection.json' : 'results.json';
   fs.writeFileSync(path.join(OUT_DIR, resultsFile), JSON.stringify(jsonOut, null, 1));
   console.log(`\nWrote ${results.length} builds to ${OUT_DIR}`);
   const failures = results.filter((r) => !r.ok);

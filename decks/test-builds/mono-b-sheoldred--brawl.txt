@@ -1,7 +1,7 @@
 // Sheoldred, the Apocalypse — BRAWL
 // strategy=midrange themes=artifacts,ramp,draw,sacrifice,tokens,equipment,tribal tribal=-
-// total=99 lands=39 avgCMC=3.78 gold=0 counters=0
-// categories: ramp=12 draw=18 removal=10 board_wipe=4 protection=3 win_condition=5 utility=8 land=39
+// total=99 lands=39 avgCMC=3.72 gold=0 counters=0
+// categories: ramp=12 draw=19 removal=10 board_wipe=4 protection=3 win_condition=4 utility=8 land=39
 
 1 Sheoldred, the Apocalypse *CMDR*
 
@@ -19,7 +19,7 @@
 1 Chromatic Orrery
 1 Ugin, Eye of the Storms
 
-// ── draw (18) ──
+// ── draw (19) ──
 1 Currency Converter
 1 Night's Whisper
 1 Sign in Blood
@@ -28,6 +28,7 @@
 1 Phyrexian Arena
 1 Read the Bones
 1 Scrawling Crawler
+1 Staff of Domination
 1 Underworld Dreams
 1 Erebos, God of the Dead
 1 Rankle, Master of Pranks
@@ -48,7 +49,7 @@
 1 Erebos, Bleak-Hearted
 1 Ob Nixilis Reignited
 1 Ob Nixilis, the Hate-Twisted
-1 Sheoldred // The True Scriptures
+1 The Mightstone and Weakstone
 1 Vilis, Broker of Blood
 
 // ── board_wipe (4) ──
@@ -62,10 +63,9 @@
 1 Lightning Greaves
 1 Swiftfoot Boots
 
-// ── win_condition (5) ──
+// ── win_condition (4) ──
 1 Marauding Blight-Priest
 1 Gray Merchant of Asphodel
-1 Witch of the Moors
 1 Bolas's Citadel
 1 K'rrik, Son of Yawgmoth
 
@@ -75,9 +75,9 @@
 1 Dark Deal
 1 Necrodominance
 1 Vito, Thorn of the Dusk Rose
+1 Enduring Tenacity
 1 Exquisite Blood
 1 Sanguine Bond
-1 Lich's Mastery
 
 // ── land (39) ──
 1 Bloodstained Mire

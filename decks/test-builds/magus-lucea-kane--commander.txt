@@ -11,10 +11,10 @@
 1 Biophagus
 1 Farseek
 1 Fractured Powerstone
-1 Izzet Signet
 1 Mind Stone
 1 Nexos
 1 Prismatic Lens
+1 Simic Signet
 1 Talisman of Curiosity
 1 Elementalist's Palette
 1 Kami of Whispered Hopes
@@ -87,6 +87,7 @@
 1 Command Tower
 1 Exotic Orchard
 8 Forest
+1 Game Trail
 1 Grand Coliseum
 1 Hinterland Harbor
 2 Island
@@ -94,7 +95,6 @@
 1 Misty Rainforest
 4 Mountain
 1 Multiversal Passage
-1 Rootbound Crag
 1 Scalding Tarn
 1 Steam Vents
 1 Stomping Ground

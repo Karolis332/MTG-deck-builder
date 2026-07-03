@@ -1,11 +1,12 @@
 // Heliod, Sun-Crowned — COMMANDER
 // strategy=midrange themes=enchantments,artifacts,counters,draw,lifegain,equipment,spellslinger,aggro,tokens tribal=-
-// total=99 lands=38 avgCMC=2.84 gold=0 counters=0
-// categories: utility=10 removal=13 win_condition=9 draw=11 ramp=11 board_wipe=4 protection=3 land=38
+// total=99 lands=38 avgCMC=2.85 gold=0 counters=0
+// categories: utility=10 removal=13 win_condition=9 draw=12 ramp=11 board_wipe=4 protection=2 land=38
 
 1 Heliod, Sun-Crowned *CMDR*
 
 // ── ramp (11) ──
+1 Land Tax
 1 Sol Ring
 1 Arcane Signet
 1 Collector's Vault
@@ -13,22 +14,22 @@
 1 Altar of the Pantheon
 1 Discerning Financier
 1 Dragon's Hoard
-1 Pendant of Prosperity
 1 Pristine Talisman
 1 Smothering Tithe
 1 Ugin, Eye of the Storms
 
-// ── draw (11) ──
-1 Esper Sentinel
+// ── draw (12) ──
+1 Archivist of Oghma
 1 Dawn of Hope
 1 Dusk Legion Duelist
 1 Kor Spiritdancer
 1 Sram, Senior Edificer
+1 Haliya, Guided by Light
 1 Mesa Enchantress
 1 Pearl-Ear, Imperial Advisor
 1 Exemplar of Light
 1 Mangara, the Diplomat
-1 Sigarda's Splendor
+1 The One Ring
 1 Towashi Guide-Bot
 
 // ── removal (13) ──
@@ -52,9 +53,8 @@
 1 Nevinyrral's Disk
 1 Sunfall
 
-// ── protection (3) ──
+// ── protection (2) ──
 1 Alseid of Life's Bounty
-1 Mother of Runes
 1 Take Up the Shield
 
 // ── win_condition (9) ──
@@ -82,11 +82,11 @@
 
 // ── land (38) ──
 1 Arid Mesa
+1 Castle Ardenvale
 1 City of Brass
 1 Flooded Strand
 1 Marsh Flats
 28 Plains
-1 Three Tree City
 1 Windswept Heath
 1 Razorgrass Ambush // Razorgrass Field
 1 Sejiri Shelter // Sejiri Glacier
