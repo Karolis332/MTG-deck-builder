@@ -62,7 +62,11 @@ electron-error.log
 marketing/screenshots/
 
 # claude code
-.claude/
+.claude/*
+!.claude/skills/
+.claude/skills/*
+!.claude/skills/orchestrate/
+!.claude/skills/audit-work/
 .claude-flow/
 .mcp.json
 
