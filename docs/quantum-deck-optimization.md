@@ -81,6 +81,43 @@ deck = [pool[i] for i, v in enumerate(x.evaluate(result.best.values)) if v > 0.5
 - Qulacs simulator (`pip install qulacs`) for gate-based experiments locally
 - Amplify docs & QUBO patterns: <https://amplify.fixstars.com/en/docs/amplify/v1/>
 
+## Licensing boundaries (free vs paid) — verified 2026-08-07
+
+- **Fixstars Amplify Basic (free)** is "Free Plan for Evaluation and Testing" only.
+  Their FAQ defines commercial use as using the developed program "in your business
+  operations and activities" or deploying it "into the production environment" —
+  that requires the Standard/Premium plan (quote-based; SQBM+ via Amplify from
+  ~¥300k/mo, reportedly ~3-month minimum, 1-month trial). Prototyping on free is
+  fine; shipping a paid feature on free is a ToS violation.
+- **D-Wave Leap**: 1 min/month of real QPU time free — development only; commercial
+  use goes through Leap pay-as-you-go (per-job anneal time is milliseconds, so
+  per-call cost is cents).
+- **IBM Open Plan**: 10 min/month, development only.
+- Practical sequence: prototype on free tiers → launch the commercial feature on a
+  **classical backend** (OR-Tools / simulated annealing — no usage restrictions,
+  same API contract) → switch the backend to paid quantum when revenue covers it.
+
+## Launch plan: "the first quantum-powered MTG deck builder"
+
+Prior-art check (2026-08-07): web + academic search found **no product or paper**
+combining MTG deck building with quantum/QUBO optimization — the "first" claim is
+currently available. Three truth gates before announcing anything:
+
+1. **Real quantum hardware.** The flagship "Optimize" path must run on a real
+   quantum annealer — **D-Wave Advantage via Leap**. Amplify AE and Toshiba SQBM+
+   are quantum-*inspired* GPU machines; calling those "quantum powered" would be
+   false and would be called out immediately.
+2. **Demo + benchmarks before announcement.** The story that lands on HN /
+   r/magicTCG is "here is the deck a quantum annealer assembled, here is the
+   classical comparison" — numbers, not slogans.
+3. **Wording discipline.** "Synergy-optimized on a quantum annealer" — yes.
+   "Quantum builds the best deck" — no (deck strength isn't purely an optimization
+   objective). Also review Wizards of the Coast's Fan Content Policy before any
+   commercial launch — MTG is WotC IP.
+
+Sequence: prototype on D-Wave's free minute → benchmarks → announcement with live
+demo → commercial rollout on Leap PAYG.
+
 ## Full access research
 
 The complete inventory of Japanese quantum machines and access programs (RIKEN,
