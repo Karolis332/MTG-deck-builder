@@ -8,7 +8,7 @@ import {
   updateMetaSnapshot,
   updateOpeningHandStats,
 } from '@/lib/global-learner';
-import { getCFApiUrl, buildCFHeaders } from '@/lib/cf-api-client';
+import { getCFApiUrl, buildCFHeaders, reportGameOutcomeToCF } from '@/lib/cf-api-client';
 
 // GET /api/match-logs?deck_id=123
 export async function GET(req: NextRequest) {
@@ -157,6 +157,11 @@ export async function POST(req: NextRequest) {
       }).catch(() => {});
     }
   } catch {}
+
+  // Feed the bandit: game outcome = delayed reward across the deck's cards
+  if (deck_id) {
+    reportGameOutcomeToCF(Number(deck_id), parsed.result).catch(() => {});
+  }
 
   return NextResponse.json({ log, parsed, analysis });
 }

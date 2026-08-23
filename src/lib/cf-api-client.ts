@@ -346,6 +346,49 @@ export async function getEDHRECConsensus(
   }
 }
 
+// ── Bandit outcome events ────────────────────────────────────────────────────
+
+/**
+ * Report a game outcome (win/loss) for a deck to the CF bandit (POST /events/track).
+ * The server attributes a delayed reward (+1.5 win / -0.2 loss) across all
+ * main-board cards. Fire-and-forget: telemetry must never block match ingestion.
+ */
+export async function reportGameOutcomeToCF(deckId: number, result: string): Promise<void> {
+  if (result !== 'win' && result !== 'loss') return; // draws carry no reward signal
+  if (!isCFEnabled()) return;
+  try {
+    const db = getDb();
+    const cmd = db.prepare(
+      `SELECT c.name, c.color_identity FROM deck_cards dc JOIN cards c ON dc.card_id = c.id
+       WHERE dc.deck_id = ? AND dc.board = 'commander' LIMIT 1`
+    ).get(deckId) as { name: string; color_identity: string | null } | undefined;
+    if (!cmd) return; // bandit events are commander-scoped
+
+    const deckCards = (db.prepare(
+      `SELECT c.name FROM deck_cards dc JOIN cards c ON dc.card_id = c.id
+       WHERE dc.deck_id = ? AND dc.board = 'main'`
+    ).all(deckId) as Array<{ name: string }>).map((r) => r.name);
+    if (deckCards.length === 0) return;
+
+    let colorIdentity = '';
+    try { colorIdentity = (JSON.parse(cmd.color_identity || '[]') as string[]).join(''); } catch { /* leave empty */ }
+
+    const controller = new AbortController();
+    const t = setTimeout(() => controller.abort(), 3000);
+    await fetch(`${getCFApiUrl()}/events/track`, {
+      method: 'POST',
+      headers: buildCFHeaders(),
+      body: JSON.stringify({
+        event_type: result === 'win' ? 'game_won' : 'game_lost',
+        commander: cmd.name,
+        color_identity: colorIdentity,
+        deck_cards: deckCards,
+      }),
+      signal: controller.signal,
+    }).finally(() => clearTimeout(t));
+  } catch { /* never block ingestion on telemetry */ }
+}
+
 /**
  * Test connection to the CF API.
  */

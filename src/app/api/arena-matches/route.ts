@@ -10,6 +10,7 @@ import {
   getUnlinkedArenaMatches,
   getCardsByNames,
 } from '@/lib/db';
+import { reportGameOutcomeToCF } from '@/lib/cf-api-client';
 
 export async function POST(request: NextRequest) {
   try {
@@ -98,6 +99,10 @@ export async function POST(request: NextRequest) {
       deckMatch = matchArenaDeckToSavedDeck(deckCards, format);
       if (deckMatch) {
         linkArenaMatchToDeck(matchId, deckMatch.deckId, deckMatch.confidence);
+        // Feed the bandit: game outcome = delayed reward across the deck's cards.
+        // Re-POSTs of an already-stored match can double-fire; the Arena watcher
+        // posts each match once, so accepted (same quirk as ML features below).
+        reportGameOutcomeToCF(deckMatch.deckId, result).catch(() => {});
       }
     }
 
