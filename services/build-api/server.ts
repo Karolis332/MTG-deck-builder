@@ -22,6 +22,16 @@ const VALID_POWER = ['casual', 'optimized', 'cedh'];
 let activeBuilds = 0;
 const MAX_CONCURRENT = 2;
 
+/** DB stores color_identity as a JSON-encoded array ('["R"]'); serve it compact ('R'). */
+function parseColorIdentity(raw: string | null): string {
+  if (!raw) return '';
+  try {
+    return (JSON.parse(raw) as string[]).join('');
+  } catch {
+    return raw;
+  }
+}
+
 function json(res: http.ServerResponse, code: number, obj: unknown): void {
   res.writeHead(code, { 'Content-Type': 'application/json' });
   res.end(JSON.stringify(obj));
@@ -84,7 +94,7 @@ async function handleBuild(body: string, res: http.ServerResponse): Promise<void
           type_line: card.type_line,
           cmc: card.cmc,
           mana_cost: card.mana_cost,
-          color_identity: card.color_identity,
+          color_identity: parseColorIdentity(card.color_identity),
           image_uri_normal: card.image_uri_normal,
           image_uri_small: card.image_uri_small,
           category: getPrimaryCategory(
