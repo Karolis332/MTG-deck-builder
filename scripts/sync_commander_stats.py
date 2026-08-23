@@ -92,6 +92,23 @@ def ensure_card_deck_index(conn: sqlite3.Connection):
     conn.commit()
 
 
+def _is_partial_sync(conn: sqlite3.Connection) -> bool:
+    """True when staging covers under half of the existing commanders —
+    i.e. a targeted --commanders-file run that must MERGE, never replace
+    the whole table (a swap from a 12-commander list wiped ~3.5K
+    commanders' stats on 2026-08-23)."""
+    try:
+        existing = conn.execute(
+            "SELECT COUNT(DISTINCT commander_name) FROM commander_card_stats"
+        ).fetchone()[0]
+    except sqlite3.OperationalError:
+        return False  # no existing table — swap is safe
+    staging = conn.execute(
+        "SELECT COUNT(DISTINCT commander_name) FROM commander_card_stats_staging"
+    ).fetchone()[0]
+    return bool(existing) and staging < existing * 0.5
+
+
 def normalize_color_identity(val) -> str | None:
     """Normalize color_identity to valid JSON array string.
 
@@ -344,6 +361,40 @@ def sync_all(conn: sqlite3.Connection, client: httpx.Client,
         conn.commit()
         stats["total_stats"] = 0
         return stats
+    elif _is_partial_sync(conn):
+        # Partial sync (e.g. --commanders-file with a short list): merge the
+        # staged commanders, keeping everyone else. A swap here wiped the other
+        # ~3.5K commanders on 2026-08-23 — never replace the table from a subset.
+        staging_distinct = conn.execute(
+            "SELECT COUNT(DISTINCT commander_name) FROM commander_card_stats_staging"
+        ).fetchone()[0]
+        conn.execute("""
+            DELETE FROM commander_card_stats WHERE commander_name IN
+                (SELECT DISTINCT commander_name FROM commander_card_stats_staging)
+        """)
+        conn.execute("""
+            INSERT INTO commander_card_stats
+                (commander_name, card_name, inclusion_rate, avg_copies,
+                 synergy_score, deck_count, total_commander_decks,
+                 color_identity, updated_at)
+            SELECT commander_name, card_name, inclusion_rate, avg_copies,
+                   synergy_score, deck_count, total_commander_decks,
+                   color_identity, updated_at
+            FROM commander_card_stats_staging
+        """)
+        conn.execute("""
+            DELETE FROM card_deck_index WHERE commander_name IN
+                (SELECT DISTINCT commander_name FROM card_deck_index_staging)
+        """)
+        conn.execute("""
+            INSERT OR IGNORE INTO card_deck_index (card_name, commander_name, inclusion_rate)
+            SELECT card_name, commander_name, inclusion_rate FROM card_deck_index_staging
+        """)
+        conn.execute("DROP TABLE commander_card_stats_staging")
+        conn.execute("DROP TABLE IF EXISTS card_deck_index_staging")
+        conn.commit()
+        print(f"  Partial sync: merged {staging_count:,} rows for "
+              f"{staging_distinct} commanders (existing table preserved)")
     else:
         # Atomic swap
         conn.execute("DROP TABLE IF EXISTS commander_card_stats")
