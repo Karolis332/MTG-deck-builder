@@ -176,6 +176,8 @@ async function handleBuild(body: string, res: http.ServerResponse): Promise<void
           cmc: card.cmc,
           mana_cost: card.mana_cost,
           color_identity: parseColorIdentity(card.color_identity),
+          set_code: card.set_code,
+          collector_number: card.collector_number,
           image_uri_normal: card.image_uri_normal,
           image_uri_small: card.image_uri_small,
           category: getPrimaryCategory(
@@ -187,7 +189,8 @@ async function handleBuild(body: string, res: http.ServerResponse): Promise<void
   } catch (error) {
     const message = error instanceof Error ? error.message : 'build failed';
     console.error(`[build-api] build error for "${commanderName}" (${format}):`, message);
-    json(res, 500, { error: message });
+    // Engine throws a clear message for format-illegal commanders — that's caller error, not ours
+    json(res, /not legal as a commander/i.test(message) ? 422 : 500, { error: message });
   } finally {
     activeBuilds--;
     if (ownedCards) {
