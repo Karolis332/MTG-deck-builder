@@ -1824,7 +1824,9 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
   // equivalents — every one of them reduces how many dedicated land slots
   // the deck needs, otherwise total land-capable cards balloon to 45-52.
   const mdfcLandBackCount = picked.filter((p) => isLandBackDfc(p.card)).length;
-  const targetLandsEffective = Math.max(30, targetLands - Math.min(6, mdfcLandBackCount));
+  // Floor at 30 for 100-card formats, but never above the format's own target
+  // (standardbrawl runs 24 lands in a 60-card deck — the flat 30 floor shipped 65-card decks).
+  const targetLandsEffective = Math.max(Math.min(30, targetLands), targetLands - Math.min(6, mdfcLandBackCount));
 
   const basicLandMap: Record<string, string> = {
     W: 'Plains', U: 'Island', B: 'Swamp', R: 'Mountain', G: 'Forest',
