@@ -300,3 +300,20 @@ The desktop app calls the CF API for collaborative-filtering recommendations. Th
 This repo has a graphify knowledge graph at `graphify-out/graph.json` (interactive `graphify-out/graph.html`, report `graphify-out/GRAPH_REPORT.md`).
 Before answering architecture/codebase questions here, query it instead of cold-grepping: `/graphify query "<question>"`.
 After changing code, refresh it: `/graphify . --update`.
+
+## Session Log
+
+Rolling context so a fresh session — or a different model, account or tool — starts where the
+last one stopped. Append one entry per completed unit of work (shipped code, a decision, an
+artifact, a resolved incident); commit it with the work it describes.
+
+```
+### YYYY-MM-DD — <topic>
+- **Did:** what shipped, with commit SHAs / file paths / IDs
+- **Why:** the decision and the reason, especially where the obvious choice was rejected
+- **Open:** what is unfinished, expiring, or deferred — with the trigger
+```
+
+Newest last, **last 10 entries only** — this file loads into context every session, so an
+unbounded log would eat the smart zone it exists to protect. Promote anything still valuable
+past that into the body above, or into `brain/`. No secrets or customer PII: this is committed.
