@@ -357,11 +357,11 @@ export function getDeckWithCards(deckId: number, userId?: number) {
   return { ...(deck as object), cards };
 }
 
-export function createDeck(name: string, format?: string, description?: string, userId?: number) {
+export function createDeck(name: string, format?: string, description?: string, userId?: number, builtBy?: string) {
   const db = getDb();
   const result = db
-    .prepare('INSERT INTO decks (name, format, description, user_id) VALUES (?, ?, ?, ?)')
-    .run(name, format || null, description || null, userId || null);
+    .prepare('INSERT INTO decks (name, format, description, user_id, built_by) VALUES (?, ?, ?, ?, ?)')
+    .run(name, format || null, description || null, userId || null, builtBy || null);
   return { id: result.lastInsertRowid, name, format, description };
 }
 

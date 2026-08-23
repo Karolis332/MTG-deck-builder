@@ -64,7 +64,7 @@ export async function POST(request: NextRequest) {
     const description = isCmdFormat && commanderName
       ? `Commander: ${commanderName}. ${result.strategy} strategy${tribalLabel}. Themes: ${result.themes.join(', ') || 'general goodstuff'}`
       : `Auto-built ${result.strategy} deck. Themes: ${result.themes.join(', ') || 'general goodstuff'}`;
-    const deck = createDeck(name, format, description, authUser.userId);
+    const deck = createDeck(name, format, description, authUser.userId, 'engine');
     const deckId = Number(deck.id);
 
     // Add commander (and partner) to commander zone

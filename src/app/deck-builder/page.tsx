@@ -11,6 +11,7 @@ interface DeckSummary {
   name: string;
   format: string | null;
   description: string | null;
+  built_by?: string | null;
   cardCount: number;
   updated_at: string;
   created_at: string;
@@ -360,6 +361,14 @@ export default function DeckBuilderPage() {
                       <span className="text-primary/40">&#x25C6;</span>
                       <span className="capitalize">{FORMAT_LABELS[deck.format] || deck.format}</span>
                     </>
+                  )}
+                  {deck.built_by && (
+                    <span
+                      className="ml-auto rounded border border-primary/40 px-1 py-px text-[10px] uppercase tracking-wider text-primary/80"
+                      title={deck.built_by === 'claude' ? 'Built by Claude AI chat' : 'Built by the local deck engine'}
+                    >
+                      {deck.built_by === 'claude' ? 'AI · Claude' : 'AI · Engine'}
+                    </span>
                   )}
                 </div>
               </div>

@@ -110,6 +110,8 @@ export interface Deck {
   format: string | null;
   commander_id: string | null;
   cover_card_id: string | null;
+  /** Which engine produced the deck: 'engine' | 'claude' | null (hand-built). */
+  built_by: string | null;
   created_at: string;
   updated_at: string;
 }

@@ -48,7 +48,7 @@ export async function POST(request: NextRequest) {
     // Create deck
     const deckName = name?.trim() || `${commanderName} Deck`;
     const description = `Commander: ${commanderName}. ${result.strategyExplanation}`;
-    const deck = createDeck(deckName, format, description, authUser.userId);
+    const deck = createDeck(deckName, format, description, authUser.userId, 'claude');
     const deckId = Number(deck.id);
 
     // Add commander to commander zone

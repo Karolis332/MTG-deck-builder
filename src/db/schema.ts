@@ -1337,4 +1337,13 @@ export const MIGRATIONS = [
       CREATE INDEX IF NOT EXISTS idx_cdi_commander ON card_deck_index(commander_name);
     `,
   },
+  {
+    version: 36,
+    name: 'deck_built_by',
+    sql: `
+      -- Which engine produced the deck: 'engine' (local auto-build),
+      -- 'claude' (AI chat build). NULL = built by hand.
+      ALTER TABLE decks ADD COLUMN built_by TEXT;
+    `,
+  },
 ];
