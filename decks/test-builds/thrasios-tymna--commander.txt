@@ -1,17 +1,21 @@
 // Thrasios, Triton Hero + Tymna the Weaver — COMMANDER
 // strategy=control themes=control,ramp,draw,tokens,artifacts,equipment tribal=-
-// total=99 lands=39 avgCMC=2.97 gold=6 counters=0
-// categories: ramp=14 draw=16 removal=18 board_wipe=6 protection=4 win_condition=1 utility=1 land=39
+// total=99 lands=39 avgCMC=2.65 gold=6 counters=0
+// categories: ramp=18 draw=10 removal=18 board_wipe=6 protection=5 win_condition=1 utility=2 land=39
 
 1 Thrasios, Triton Hero *CMDR*
 1 Tymna the Weaver *CMDR* (requested partner — see note)
 
-// ── ramp (14) ──
+// ── ramp (18) ──
+1 Chrome Mox
+1 Lotus Petal
+1 Mox Amber
 1 An Offer You Can't Refuse
+1 Birds of Paradise
+1 Crop Rotation
 1 Sol Ring
 1 Arcane Signet
 1 Azorius Signet
-1 Collector's Vault
 1 Deadly Dispute
 1 Dimir Signet
 1 Orzhov Signet
@@ -22,23 +26,17 @@
 1 Smothering Tithe
 1 The Great Henge
 
-// ── draw (16) ──
+// ── draw (10) ──
 1 Esper Sentinel
 1 Mystic Remora
 1 Idol of Oblivion
 1 Wan Shi Tong, Librarian
 1 Black Market Connections
-1 Braids, Arisen Nightmare
 1 Garruk's Uprising
-1 Morbid Opportunist
 1 Phyrexian Arena
 1 Rhystic Study
-1 Sai, Master Thopterist
-1 Tireless Tracker
-1 Archmage Emeritus
 1 Beast Whisperer
 1 Thopter Spy Network
-1 Vanquisher's Banner
 
 // ── removal (18) ──
 1 Deathrite Shaman
@@ -68,8 +66,9 @@
 1 Farewell
 1 Season of Gathering
 
-// ── protection (4) ──
+// ── protection (5) ──
 1 Pact of Negation
+1 Mental Misstep
 1 Swan Song
 1 Fierce Guardianship
 1 Force of Will
@@ -77,7 +76,8 @@
 // ── win_condition (1) ──
 1 Seedborn Muse
 
-// ── utility (1) ──
+// ── utility (2) ──
+1 Flusterstorm
 1 Training Grounds
 
 // ── land (39) ──
@@ -87,7 +87,6 @@
 1 Demolition Field
 1 Exotic Orchard
 1 Flooded Strand
-1 Forbidden Orchard
 3 Forest
 1 Gemstone Caverns
 1 Godless Shrine
@@ -106,6 +105,7 @@
 1 Reflecting Pool
 2 Swamp
 1 Talon Gates of Madara
+1 Temple Garden
 1 Temple of the Dragon Queen
 1 Thran Portal
 1 Three Tree City

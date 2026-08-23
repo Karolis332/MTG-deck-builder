@@ -1,18 +1,17 @@
 // General Tazri — COMMANDER
 // strategy=tribal themes=tribal tribal=ally
-// total=99 lands=38 avgCMC=3 gold=28 counters=0
-// categories: ramp=25 utility=9 removal=10 win_condition=4 draw=7 protection=3 board_wipe=3 land=38
+// total=99 lands=38 avgCMC=3.02 gold=28 counters=0
+// categories: ramp=22 utility=11 removal=10 draw=7 protection=3 win_condition=5 board_wipe=3 land=38
 
 1 General Tazri *CMDR*
 
-// ── ramp (25) ──
+// ── ramp (22) ──
 1 Arcane Signet
 1 Bloom Tender
 1 Boros Signet
-1 Coldsteel Heart
 1 Farseek
-1 Golgari Signet
 1 Great Divide Guide
+1 Hermitic Herbalist
 1 Izzet Signet
 1 Mind Stone
 1 Rampant Growth
@@ -22,7 +21,6 @@
 1 Talisman of Indulgence
 1 Talisman of Progress
 1 Talisman of Resilience
-1 Talisman of Unity
 1 Chromatic Lantern
 1 Cultivate
 1 Helga, Skittish Seer
@@ -30,7 +28,6 @@
 1 Noggle Robber
 1 Jegantha, the Wellspring
 1 Omnath, Locus of All
-1 The Gitrog Monster
 
 // ── draw (7) ──
 1 South Pole Voyager
@@ -56,39 +53,44 @@
 // ── board_wipe (3) ──
 1 Golgari Charm
 1 Gruul Charm
-1 Ashling's Command
+1 Aetherize
 
 // ── protection (3) ──
 1 Dovin's Veto
 1 Wild Unraveling
 1 Hakoda, Selfless Commander
 
-// ── win_condition (4) ──
+// ── win_condition (5) ──
 1 Sokka, Tenacious Tactician
 1 Fusion Elemental
-1 Katara, Water Tribe's Hope
+1 Jodah, the Unifier
+1 Maelstrom Archangel
 1 Progenitus
 
-// ── utility (9) ──
+// ── utility (11) ──
+1 Airbender Ascension
 1 Earth King's Lieutenant
 1 United Front
 1 Katara, the Fearless
 1 Mai and Zuko
 1 Panharmonicon
+1 Roaming Throne
 1 Suki, Kyoshi Warrior
 1 Wartime Protestors
 1 Bring to Light
 1 Door to Nothingness
 
 // ── land (38) ──
+1 Baldur's Gate
 1 Blood Crypt
-1 Bountiful Landscape
+1 Branch of Vitu-Ghazi
 1 Breeding Pool
 1 Brokers Hideout
 1 Cabaretti Courtyard
 1 Capital City
 1 Captivating Cave
 1 Command Tower
+1 Daily Bugle Building
 1 Escape Tunnel
 1 Evolving Wilds
 1 Fabled Passage
@@ -104,15 +106,13 @@
 1 Multiversal Passage
 1 Overgrown Tomb
 2 Plains
+1 Plaza of Harmony
 1 Rumble Arena
 1 Sacred Foundry
 1 Scalding Tarn
-1 Shattered Landscape
-1 Sheltering Landscape
 1 Steam Vents
 1 Stomping Ground
 1 Swamp
 1 Temple Garden
 1 Terramorphic Expanse
-1 Twisted Landscape
-1 Vibrant Cityscape
+1 Thran Portal

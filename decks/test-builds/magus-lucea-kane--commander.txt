@@ -1,6 +1,6 @@
 // Magus Lucea Kane — COMMANDER
 // strategy=spellslinger themes=aggro,counters,tokens,equipment,draw,ramp tribal=-
-// total=99 lands=38 avgCMC=2.84 gold=11 counters=4
+// total=99 lands=38 avgCMC=2.95 gold=11 counters=4
 // categories: ramp=13 utility=8 removal=17 draw=15 protection=3 board_wipe=2 win_condition=3 land=38
 
 1 Magus Lucea Kane *CMDR*
@@ -9,7 +9,6 @@
 1 Sporocyst
 1 Arcane Signet
 1 Biophagus
-1 Farseek
 1 Fractured Powerstone
 1 Mind Stone
 1 Nexos
@@ -19,6 +18,7 @@
 1 Elementalist's Palette
 1 Kami of Whispered Hopes
 1 Contaminant Grafter
+1 The Great Henge
 
 // ── draw (15) ──
 1 Hormagaunt Horde

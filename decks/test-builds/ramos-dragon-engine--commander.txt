@@ -1,7 +1,7 @@
 // Ramos, Dragon Engine — COMMANDER
 // strategy=midrange themes=artifacts,tokens,ramp,draw,sacrifice,flying tribal=-
-// total=99 lands=38 avgCMC=3.3 gold=47 counters=0
-// categories: ramp=16 win_condition=3 utility=6 removal=18 draw=14 board_wipe=4 land=38
+// total=99 lands=38 avgCMC=3.36 gold=47 counters=0
+// categories: ramp=16 utility=6 win_condition=3 removal=18 draw=14 board_wipe=4 land=38
 
 1 Ramos, Dragon Engine *CMDR*
 
@@ -35,8 +35,8 @@
 1 Tannuk, Memorial Ensign
 1 Zurgo Stormrender
 1 Archmage Emeritus
+1 Infinite Guideline Station
 1 Korvold, Fae-Cursed King
-1 Niv-Mizzet Reborn
 1 Tatyova, Benthic Druid
 
 // ── removal (18) ──
@@ -44,7 +44,6 @@
 1 Abrupt Decay
 1 Artifact Mutation
 1 Boros Charm
-1 Drown in the Loch
 1 Fracture
 1 Abzan Charm
 1 Bant Charm
@@ -57,6 +56,7 @@
 1 Void Rend
 1 Wear // Tear
 1 Niv-Mizzet, Parun
+1 Niv-Mizzet, the Firemind
 1 Unite the Coalition
 
 // ── board_wipe (4) ──

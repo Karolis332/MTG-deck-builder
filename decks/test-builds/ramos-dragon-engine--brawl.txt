@@ -1,6 +1,6 @@
 // Ramos, Dragon Engine — BRAWL
 // strategy=midrange themes=artifacts,tokens,ramp,draw,sacrifice,counters,flying,control,spellslinger tribal=-
-// total=99 lands=38 avgCMC=3.3 gold=45 counters=0
+// total=99 lands=38 avgCMC=3.3 gold=44 counters=0
 // categories: ramp=16 win_condition=5 utility=4 removal=16 draw=16 board_wipe=4 land=38
 
 1 Ramos, Dragon Engine *CMDR*
@@ -66,7 +66,7 @@
 1 Time Wipe
 
 // ── win_condition (5) ──
-1 Jodah, Archmage Eternal
+1 Murmuring Mystic
 1 Talrand, Sky Summoner
 1 Chromanticore
 1 Maelstrom Archangel

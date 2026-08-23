@@ -1,7 +1,7 @@
 // Heliod, Sun-Crowned — COMMANDER
-// strategy=midrange themes=enchantments,lifegain,counters,flying,artifacts,equipment,aggro,control,draw,tokens,ramp tribal=-
-// total=99 lands=38 avgCMC=2.82 gold=0 counters=0
-// categories: removal=10 utility=14 ramp=13 draw=10 protection=3 board_wipe=4 win_condition=7 land=38
+// strategy=midrange themes=enchantments,lifegain,artifacts,flying,counters,equipment,control,aggro,ramp,draw,tokens tribal=-
+// total=99 lands=39 avgCMC=2.75 gold=0 counters=0
+// categories: removal=10 utility=14 ramp=13 draw=9 protection=4 board_wipe=4 win_condition=6 land=39
 
 1 Heliod, Sun-Crowned *CMDR*
 
@@ -20,12 +20,11 @@
 1 Hedron Archive
 1 Solemn Simulacrum
 
-// ── draw (10) ──
+// ── draw (9) ──
 1 Mishra's Bauble
 1 Stiltzkin, Moogle Merchant
-1 Case of the Pilfered Proof
-1 Feather of Flight
 1 Rune of Sustenance
+1 Splitskin Doll
 1 Sram, Senior Edificer
 1 Caretaker's Talent
 1 Haliya, Guided by Light
@@ -50,19 +49,19 @@
 1 Sunfall
 1 Urza's Ruinous Blast
 
-// ── protection (3) ──
+// ── protection (4) ──
+1 Take Up the Shield
 1 Flawless Maneuver
 1 Hardened Escort
 1 Teferi's Protection
 
-// ── win_condition (7) ──
+// ── win_condition (6) ──
 1 Archon of Sun's Grace
 1 Rosa, Resolute White Mage
 1 The Wind Crystal
 1 Twinblade Paladin
 1 Danitha, Benalia's Hope
 1 Exalted Sunborn
-1 Lyra Dawnbringer
 
 // ── utility (14) ──
 1 Authority of the Consuls
@@ -77,18 +76,18 @@
 1 Aerith Gainsborough
 1 Angel of Vitality
 1 Nettlecyst
+1 Silver Sable, Mercenary Leader
 1 Starnheim Courser
-1 Grand Entryway // Elegant Rotunda
 
-// ── land (38) ──
+// ── land (39) ──
 1 Brokers Hideout
 1 Cabaretti Courtyard
 1 Cavern of Souls
 1 Command Tower
-1 Eclipsed Realms
+1 Eiganjo, Seat of the Empire
 1 Flooded Strand
-1 Gemstone Caverns
 1 Multiversal Passage
-28 Plains
-1 Secluded Courtyard
-1 Unclaimed Territory
+29 Plains
+1 Thran Portal
+1 Razorgrass Ambush // Razorgrass Field
+1 Witch Enchanter // Witch-Blessed Meadow

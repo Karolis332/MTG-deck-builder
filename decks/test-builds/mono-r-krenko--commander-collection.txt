@@ -23,7 +23,7 @@
 1 Vexing Bauble
 1 Artist's Talent
 1 Humble Defector
-1 Mirror of Galadriel
+1 Shadow of the Goblin
 1 Thrill of Possibility
 1 Witch's Mark
 1 Rescue Leopard
@@ -82,13 +82,13 @@
 
 // ── land (38) ──
 1 Arena of Glory
-1 Cabaretti Courtyard
-1 Cavern of Souls
-1 Command Tower
 1 Cori Mountain Monastery
-1 Gemstone Caverns
+1 Lindblum, Industrial Regency // Mage Siege
 28 Mountain
 1 Multiversal Passage
 1 Scalding Tarn
-1 Secluded Courtyard
-1 Unclaimed Territory
+1 Thran Portal
+1 Spikefield Hazard // Spikefield Cave
+1 Shatterskull Smashing // Shatterskull, the Hammer Pass
+1 Sundering Eruption // Volcanic Fissure
+1 Pinnacle Monk // Mystic Peak

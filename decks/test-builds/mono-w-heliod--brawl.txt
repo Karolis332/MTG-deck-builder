@@ -1,11 +1,12 @@
 // Heliod, Sun-Crowned — BRAWL
 // strategy=midrange themes=enchantments,artifacts,lifegain,equipment,draw,counters,spellslinger,tokens,flying,aggro tribal=-
-// total=99 lands=38 avgCMC=3.03 gold=0 counters=0
+// total=99 lands=38 avgCMC=3 gold=0 counters=0
 // categories: utility=12 win_condition=9 draw=10 removal=12 ramp=11 board_wipe=4 protection=3 land=38
 
 1 Heliod, Sun-Crowned *CMDR*
 
 // ── ramp (11) ──
+1 Land Tax
 1 Arcane Signet
 1 Collector's Vault
 1 Idol of False Gods
@@ -13,7 +14,6 @@
 1 Altar of the Pantheon
 1 Discerning Financier
 1 Dragon's Hoard
-1 Magnifying Glass
 1 Pristine Talisman
 1 Smothering Tithe
 1 Ugin, Eye of the Storms
@@ -24,10 +24,10 @@
 1 Dusk Legion Duelist
 1 Kor Spiritdancer
 1 Sram, Senior Edificer
+1 Haliya, Guided by Light
 1 Pearl-Ear, Imperial Advisor
 1 Exemplar of Light
 1 Mangara, the Diplomat
-1 Sigarda's Splendor
 1 Towashi Guide-Bot
 
 // ── removal (12) ──
@@ -58,9 +58,9 @@
 // ── win_condition (9) ──
 1 Blind Obedience
 1 Archon of Sun's Grace
-1 Twinblade Paladin
 1 Angel of Invention
 1 Archangel of Thune
+1 Danitha, Benalia's Hope
 1 Elspeth Resplendent
 1 Sigil of the Empty Throne
 1 Felidar Sovereign

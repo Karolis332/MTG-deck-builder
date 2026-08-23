@@ -1,17 +1,18 @@
 // Magus Lucea Kane — COMMANDER
-// strategy=spellslinger themes=counters,aggro,draw,tokens,enchantments,ramp,flying,equipment,artifacts,spellslinger tribal=-
-// total=99 lands=38 avgCMC=2.85 gold=8 counters=5
-// categories: ramp=14 utility=10 draw=16 removal=14 protection=4 board_wipe=2 win_condition=1 land=38
+// strategy=spellslinger themes=counters,aggro,draw,tokens,ramp,enchantments,equipment,artifacts,flying,spellslinger tribal=-
+// total=99 lands=38 avgCMC=2.82 gold=8 counters=5
+// categories: ramp=15 utility=9 draw=16 removal=14 protection=4 board_wipe=2 win_condition=1 land=38
 
 1 Magus Lucea Kane *CMDR*
 
-// ── ramp (14) ──
+// ── ramp (15) ──
 1 Arcane Signet
 1 Druid Class
 1 Farseek
 1 Izzet Signet
 1 Mind Stone
 1 Rampant Growth
+1 Simic Signet
 1 Talisman of Creativity
 1 Talisman of Curiosity
 1 Cultivate
@@ -57,7 +58,7 @@
 
 // ── board_wipe (2) ──
 1 Bag of Holding
-1 Night of the Sweets' Revenge
+1 Aetherize
 
 // ── protection (4) ──
 1 Counterspell
@@ -68,29 +69,28 @@
 // ── win_condition (1) ──
 1 Minsc & Boo, Timeless Heroes
 
-// ── utility (10) ──
+// ── utility (9) ──
 1 Goldvein Hydra
 1 Hardened Scales
 1 Hydroid Krasis
 1 Mutagen Man, Living Ooze
+1 Repulsive Mutation
 1 Evolution Sage
 1 Hydra's Growth
 1 Primo, the Unbounded
-1 Terrasymbiosis
-1 Zimone, Infinite Analyst
 1 Forgotten Ancient
 
 // ── land (38) ──
+1 Balamb Garden, SeeD Academy // Balamb Garden, Airborne
+1 Baldur's Gate
 1 Bountiful Landscape
+1 Branch of Vitu-Ghazi
 1 Breeding Pool
-1 Brokers Hideout
-1 Cabaretti Courtyard
 1 Capital City
 1 Captivating Cave
-1 Cavern of Souls
 1 Command Tower
+1 Daily Bugle Building
 1 Evolving Wilds
-1 Fabled Passage
 1 Flooded Strand
 7 Forest
 1 Forgotten Monument
@@ -100,11 +100,11 @@
 1 Misty Rainforest
 2 Mountain
 1 Multiversal Passage
+1 Plaza of Harmony
 1 Rumble Arena
 1 Scalding Tarn
-1 Spirebluff Canal
 1 Steam Vents
 1 Stomping Ground
-1 Terramorphic Expanse
+1 Thran Portal
 1 Vineglimmer Snarl
 1 Yavimaya Coast

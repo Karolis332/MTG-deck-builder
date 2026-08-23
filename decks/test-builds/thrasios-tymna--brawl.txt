@@ -1,7 +1,7 @@
 // Thrasios, Triton Hero + Tymna the Weaver — BRAWL
 // strategy=aggro themes=control,draw,ramp,artifacts,tokens,enchantments,aggro tribal=-
-// total=99 lands=39 avgCMC=1.93 gold=4 counters=0
-// categories: ramp=21 draw=12 removal=7 board_wipe=2 protection=3 win_condition=1 utility=14 land=39
+// total=99 lands=39 avgCMC=1.98 gold=4 counters=0
+// categories: ramp=21 draw=11 removal=5 board_wipe=2 protection=3 win_condition=1 utility=17 land=39
 
 1 Thrasios, Triton Hero *CMDR*
 1 Tymna the Weaver *CMDR* (requested partner — see note)
@@ -29,11 +29,10 @@
 1 Enduring Vitality
 1 Smothering Tithe
 
-// ── draw (12) ──
+// ── draw (11) ──
 1 Esper Sentinel
 1 Mystic Remora
 1 Veil of Summer
-1 Archivist of Oghma
 1 Faerie Mastermind
 1 Sram, Senior Edificer
 1 Tataru Taru
@@ -43,11 +42,9 @@
 1 Garruk's Uprising
 1 Rhystic Study
 
-// ── removal (7) ──
+// ── removal (5) ──
 1 Deathrite Shaman
-1 Insidious Fungus
 1 Swords to Plowshares
-1 Cankerbloom
 1 Feed the Swarm
 1 Loran of the Third Path
 1 Sowing Mycospawn
@@ -64,7 +61,7 @@
 // ── win_condition (1) ──
 1 Zulaport Cutthroat
 
-// ── utility (14) ──
+// ── utility (17) ──
 1 Enlightened Tutor
 1 Flusterstorm
 1 Mockingbird
@@ -75,10 +72,13 @@
 1 Biomancer's Familiar
 1 Finale of Devastation
 1 Grand Abolisher
+1 Phantasmal Image
 1 Springheart Nantuko
 1 Voice of Victory
+1 Chord of Calling
 1 Eternal Witness
 1 Formidable Speaker
+1 Valley Floodcaller
 
 // ── land (39) ──
 1 A-Thran Portal

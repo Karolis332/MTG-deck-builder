@@ -1,6 +1,6 @@
 // Vivi Ornitier — COMMANDER
 // strategy=spellslinger themes=tokens,artifacts,counters,flying,aggro,spellslinger,ramp,draw,enchantments,graveyard,equipment tribal=-
-// total=99 lands=38 avgCMC=2.75 gold=7 counters=0
+// total=99 lands=38 avgCMC=2.74 gold=7 counters=0
 // categories: removal=14 draw=20 utility=9 win_condition=3 ramp=11 board_wipe=2 protection=2 land=38
 
 1 Vivi Ornitier *CMDR*
@@ -14,13 +14,14 @@
 1 Sorcerer Class
 1 Talisman of Creativity
 1 Birgi, God of Storytelling // Harnfel, Horn of Bounty
-1 Dragon's Hoard
 1 Elementalist's Palette
+1 Jeska's Will
 1 Storm-Kiln Artist
 
 // ── draw (20) ──
 1 Brainstorm
 1 Curiosity
+1 Gitaxian Probe
 1 Mystic Remora
 1 Ponder
 1 Baral, Chief of Compliance
@@ -34,7 +35,6 @@
 1 Archmage Emeritus
 1 Curiosity Crafter
 1 Ethereal Investigator
-1 Jaxis, the Troublemaker
 1 Padeem, Consul of Innovation
 1 Thopter Spy Network
 1 Shark Typhoon
@@ -43,16 +43,16 @@
 // ── removal (14) ──
 1 Walking Ballista
 1 Lightning Bolt
-1 Sigil of Sleep
 1 Firemind's Research
 1 Kozilek's Command
 1 Red Sun's Twilight
 1 Snap
 1 Stolen by the Fae
+1 Warping Wail
 1 Zurzoth, Chaos Rider
 1 Chandra, Spark Hunter
 1 Urabrask // The Great Work
-1 Virtue of Courage // Embereth Blaze
+1 Endbringer
 1 Niv-Mizzet, Parun
 1 Hullbreaker Horror
 

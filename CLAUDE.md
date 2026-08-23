@@ -317,3 +317,8 @@ artifact, a resolved incident); commit it with the work it describes.
 Newest last, **last 10 entries only** — this file loads into context every session, so an
 unbounded log would eat the smart zone it exists to protect. Promote anything still valuable
 past that into the body above, or into `brain/`. No secrets or customer PII: this is committed.
+
+### 2026-08-23 — Retrain iteration, Tier-1 completion, launch plan
+- **Did:** Tier 1 done: engine badge (bae8c28), game_won/lost→CF bandit (c324ac3), VPS `/commander-list` 2 min→25 ms via `commander_summary` table (VPS repo commit, weekly rebuild in refresh_ccs.sql), harness legality-skip verified (hardFails 1→0). Stats-sync shrink guard (c92ca96). `docs/LAUNCH_PLAN.md` (455b342). Landing page + DEPLOY.md in black-grimoire-web (14f4163).
+- **Why:** skipped a forced SVD retrain — nightly cron had already retrained at 04:47 UTC (3.79M decks); the stale piece was LOCAL commander stats (7 weeks), so synced those instead. Roster fitness 860→864 post-sync.
+- **Open:** full 3,589-commander local stats re-sync (recovery from partial-sync table wipe — verify `SELECT COUNT(DISTINCT commander_name) FROM commander_card_stats` ≈3.5K). Launch P0 gates: privacy policy + EULA, clean-VM install test, operator publishes first GitHub Release + web deploy.
