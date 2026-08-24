@@ -1,7 +1,7 @@
 // General Tazri — COMMANDER
 // strategy=tribal themes=tribal tribal=ally
-// total=99 lands=38 avgCMC=3.15 gold=34 counters=0
-// categories: ramp=17 utility=11 removal=10 draw=9 protection=3 win_condition=8 board_wipe=3 land=38
+// total=99 lands=38 avgCMC=3.11 gold=35 counters=0
+// categories: ramp=17 utility=10 removal=9 draw=9 protection=3 win_condition=8 tutor=2 board_wipe=3 land=38
 
 1 General Tazri *CMDR*
 
@@ -35,22 +35,21 @@
 1 Sokka's Haiku
 1 Tatyova, Benthic Druid
 
-// ── removal (10) ──
+// ── removal (9) ──
 1 Bushwhack
 1 Cloudshift
 1 Ephemerate
 1 Path to Exile
 1 Agatha's Soul Cauldron
 1 Boros Charm
-1 Rakdos Charm
-1 Abzan Charm
+1 Fracture
 1 Mortify
 1 Temur Charm
 
 // ── board_wipe (3) ──
 1 Golgari Charm
 1 Gruul Charm
-1 Aetherize
+1 Rakdos Charm
 
 // ── protection (3) ──
 1 Dovin's Veto
@@ -67,7 +66,7 @@
 1 Maelstrom Archangel
 1 Progenitus
 
-// ── utility (11) ──
+// ── utility (10) ──
 1 Airbender Ascension
 1 Earth King's Lieutenant
 1 United Front
@@ -77,7 +76,6 @@
 1 Roaming Throne
 1 Suki, Kyoshi Warrior
 1 Wartime Protestors
-1 Bring to Light
 1 Door to Nothingness
 
 // ── land (38) ──

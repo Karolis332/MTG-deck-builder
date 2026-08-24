@@ -4,7 +4,7 @@
   "commander": "Vivi Ornitier",
   "format": "commander",
   "ok": true,
-  "elapsedMs": 42120,
+  "elapsedMs": 58266,
   "strategy": "spellslinger",
   "themes": [
    "spellslinger",
@@ -20,10 +20,10 @@
   "tribalType": null,
   "totalCards": 99,
   "landCount": 38,
-  "avgCmcNonLand": 2.44,
+  "avgCmcNonLand": 2.59,
   "goldSpellCount": 6,
   "counterMattersCount": 0,
-  "referenceOverlapPct": 56,
+  "referenceOverlapPct": 54,
   "referenceMissing": [
    "chrome mox",
    "fellwar stone",
@@ -45,6 +45,7 @@
    "rhystic study",
    "sigil of sleep",
    "arcane denial",
+   "brain freeze",
    "cyclonic rift",
    "flusterstorm",
    "force of negation",
@@ -55,29 +56,30 @@
    "sink into stupor",
    "snap",
    "swan song",
-   "gamble",
    "gitaxian probe",
    "rite of flame",
+   "wild ride",
    "windfall"
   ],
   "categoryCounts": {
    "ramp": 10,
-   "draw": 17,
+   "draw": 18,
    "protection": 4,
-   "utility": 11,
+   "utility": 8,
    "removal": 12,
+   "tutor": 2,
    "win_condition": 5,
    "board_wipe": 2,
    "land": 38
   },
   "curve": {
    "0": 1,
-   "1": 17,
-   "2": 23,
+   "1": 16,
+   "2": 21,
    "3": 8,
-   "4": 4,
+   "4": 6,
    "5": 5,
-   "6": 2,
+   "6": 3,
    "7+": 1
   },
   "illegalCardsForFormat": [],
@@ -254,7 +256,7 @@
     "board": "main",
     "type_line": "Instant",
     "cmc": 1,
-    "primaryCategory": "utility",
+    "primaryCategory": "tutor",
     "edhrec_rank": 146,
     "brawlLegal": true,
     "commanderLegal": true
@@ -458,6 +460,17 @@
     "commanderLegal": true
    },
    {
+    "name": "Gamble",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Sorcery",
+    "cmc": 1,
+    "primaryCategory": "tutor",
+    "edhrec_rank": 236,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
     "name": "Strike It Rich",
     "quantity": 1,
     "board": "main",
@@ -502,17 +515,6 @@
     "commanderLegal": true
    },
    {
-    "name": "Brain Freeze",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Instant",
-    "cmc": 2,
-    "primaryCategory": "utility",
-    "edhrec_rank": 791,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
     "name": "Grapeshot",
     "quantity": 1,
     "board": "main",
@@ -542,17 +544,6 @@
     "cmc": 9,
     "primaryCategory": "board_wipe",
     "edhrec_rank": 22,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Wild Ride",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Sorcery",
-    "cmc": 1,
-    "primaryCategory": "utility",
-    "edhrec_rank": 6368,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -700,17 +691,6 @@
     "commanderLegal": true
    },
    {
-    "name": "Weapons Manufacturing",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Enchantment",
-    "cmc": 2,
-    "primaryCategory": "removal",
-    "edhrec_rank": 3671,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
     "name": "Zuko's Exile",
     "quantity": 1,
     "board": "main",
@@ -733,13 +713,24 @@
     "commanderLegal": true
    },
    {
-    "name": "Bag of Holding",
+    "name": "Goblin Trashmaster",
     "quantity": 1,
     "board": "main",
-    "type_line": "Artifact",
-    "cmc": 1,
+    "type_line": "Creature — Goblin Warrior",
+    "cmc": 4,
+    "primaryCategory": "removal",
+    "edhrec_rank": 3182,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Fiery Confluence",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Sorcery",
+    "cmc": 4,
     "primaryCategory": "board_wipe",
-    "edhrec_rank": 4018,
+    "edhrec_rank": 1461,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -766,28 +757,6 @@
     "commanderLegal": true
    },
    {
-    "name": "Misty Rainforest",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 40,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Flooded Strand",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 39,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
     "name": "Command Tower",
     "quantity": 1,
     "board": "main",
@@ -806,6 +775,28 @@
     "cmc": 0,
     "primaryCategory": "land",
     "edhrec_rank": 1574,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Misty Rainforest",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Land",
+    "cmc": 0,
+    "primaryCategory": "land",
+    "edhrec_rank": 40,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Flooded Strand",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Land",
+    "cmc": 0,
+    "primaryCategory": "land",
+    "edhrec_rank": 39,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -843,28 +834,6 @@
     "commanderLegal": true
    },
    {
-    "name": "Sink into Stupor // Soporific Springs",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Instant // Land",
-    "cmc": 3,
-    "primaryCategory": "land",
-    "edhrec_rank": 178,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Gemstone Caverns",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Legendary Land",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 179,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
     "name": "Pinnacle Monk // Mystic Peak",
     "quantity": 1,
     "board": "main",
@@ -898,6 +867,50 @@
     "commanderLegal": true
    },
    {
+    "name": "Spikefield Hazard // Spikefield Cave",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Instant // Land",
+    "cmc": 1,
+    "primaryCategory": "land",
+    "edhrec_rank": 2857,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Gemstone Caverns",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Legendary Land",
+    "cmc": 0,
+    "primaryCategory": "land",
+    "edhrec_rank": 179,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Arena of Glory",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Land",
+    "cmc": 0,
+    "primaryCategory": "land",
+    "edhrec_rank": 385,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Lindblum, Industrial Regency // Mage Siege",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Land — Town // Instant — Adventure",
+    "cmc": 0,
+    "primaryCategory": "land",
+    "edhrec_rank": 1584,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
     "name": "Baldur's Gate",
     "quantity": 1,
     "board": "main",
@@ -920,24 +933,13 @@
     "commanderLegal": true
    },
    {
-    "name": "Daily Bugle Building",
-    "quantity": 1,
+    "name": "Mountain",
+    "quantity": 10,
     "board": "main",
-    "type_line": "Land",
+    "type_line": "Basic Land — Mountain",
     "cmc": 0,
     "primaryCategory": "land",
-    "edhrec_rank": 3976,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Capital City",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land — Town",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 4077,
+    "edhrec_rank": null,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -946,17 +948,6 @@
     "quantity": 10,
     "board": "main",
     "type_line": "Basic Land — Island",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": null,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Mountain",
-    "quantity": 10,
-    "board": "main",
-    "type_line": "Basic Land — Mountain",
     "cmc": 0,
     "primaryCategory": "land",
     "edhrec_rank": null,
@@ -973,16 +964,27 @@
     "edhrec_rank": 3610,
     "brawlLegal": true,
     "commanderLegal": true
+   },
+   {
+    "name": "Shark Typhoon",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Enchantment",
+    "cmc": 6,
+    "primaryCategory": "draw",
+    "edhrec_rank": 1225,
+    "brawlLegal": true,
+    "commanderLegal": true
    }
   ],
-  "buildReport": "Archetype: Spellslinger — targeting 61 nonland slots\nRole fills:\n  ramp       14/10 OK\n  draw       18/13 OK\n  removal    12/12 OK\n  wipes      2/2 OK\n  protection 5/3 OK\n  payoffs    9/15 SHORT\n  wincons    20/5 OK\nWarnings:\n  - role shortfall: synergy_payoff needs 15, filled 9 — pool exhausted or collection blocked"
+  "buildReport": "Archetype: Spellslinger — targeting 61 nonland slots\nRole fills:\n  ramp       14/10 OK\n  draw       18/13 OK\n  tutor      3/2 OK\n  removal    12/12 OK\n  wipes      2/2 OK\n  protection 5/3 OK\n  payoffs    9/15 SHORT\n  wincons    19/5 OK\nWarnings:\n  - role shortfall: synergy_payoff needs 15, filled 9 — pool exhausted or collection blocked"
  },
  {
   "scenario": "ramos-dragon-engine",
   "commander": "Ramos, Dragon Engine",
   "format": "commander",
   "ok": true,
-  "elapsedMs": 54058,
+  "elapsedMs": 73086,
   "strategy": "midrange",
   "themes": [
    "artifacts",
@@ -997,10 +999,10 @@
   "tribalType": null,
   "totalCards": 99,
   "landCount": 38,
-  "avgCmcNonLand": 3.08,
-  "goldSpellCount": 30,
+  "avgCmcNonLand": 3.03,
+  "goldSpellCount": 31,
   "counterMattersCount": 0,
-  "referenceOverlapPct": 26,
+  "referenceOverlapPct": 30,
   "referenceMissing": [
    "peter parker",
    "elusive otter",
@@ -1018,7 +1020,6 @@
    "a-vivi ornitier",
    "prismari, the inspiration",
    "dreadbore",
-   "rakdos charm",
    "revitalizing repast",
    "golgari signet",
    "skull prophet",
@@ -1034,7 +1035,6 @@
    "talisman of unity",
    "simic charm",
    "tam, mindful first-year",
-   "bring to light",
    "embrace the paradox",
    "riveteers charm",
    "maestros charm",
@@ -1062,15 +1062,16 @@
    "removal": 9,
    "protection": 1,
    "win_condition": 8,
-   "draw": 12,
+   "draw": 10,
+   "tutor": 2,
    "board_wipe": 4,
    "land": 38
   },
   "curve": {
    "1": 6,
-   "2": 20,
-   "3": 17,
-   "4": 6,
+   "2": 22,
+   "3": 16,
+   "4": 5,
    "5": 9,
    "6": 2,
    "7+": 1
@@ -1563,13 +1564,35 @@
     "commanderLegal": true
    },
    {
-    "name": "Worldly Tutor",
+    "name": "Sleight of Hand",
     "quantity": 1,
     "board": "main",
-    "type_line": "Instant",
+    "type_line": "Sorcery",
     "cmc": 1,
     "primaryCategory": "draw",
-    "edhrec_rank": 165,
+    "edhrec_rank": 3391,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Bring to Light",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Sorcery",
+    "cmc": 5,
+    "primaryCategory": "tutor",
+    "edhrec_rank": 5654,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Sanar, Unfinished Genius // Wild Idea",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Legendary Creature — Goblin Sorcerer // Sorcery",
+    "cmc": 2,
+    "primaryCategory": "tutor",
+    "edhrec_rank": 10371,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -1640,6 +1663,17 @@
     "commanderLegal": true
    },
    {
+    "name": "Rakdos Charm",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Instant",
+    "cmc": 2,
+    "primaryCategory": "board_wipe",
+    "edhrec_rank": 325,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
     "name": "Golgari Charm",
     "quantity": 1,
     "board": "main",
@@ -1669,17 +1703,6 @@
     "cmc": 2,
     "primaryCategory": "board_wipe",
     "edhrec_rank": 10727,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Night of the Sweets' Revenge",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Enchantment",
-    "cmc": 4,
-    "primaryCategory": "board_wipe",
-    "edhrec_rank": 2005,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -1724,28 +1747,6 @@
     "cmc": 3,
     "primaryCategory": "ramp",
     "edhrec_rank": 4272,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Tatyova, Benthic Druid",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Legendary Creature — Merfolk Druid",
-    "cmc": 5,
-    "primaryCategory": "draw",
-    "edhrec_rank": 459,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Tannuk, Memorial Ensign",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Legendary Creature — Kavu Pilot",
-    "cmc": 3,
-    "primaryCategory": "draw",
-    "edhrec_rank": 2035,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -1871,28 +1872,6 @@
     "commanderLegal": true
    },
    {
-    "name": "Stomping Ground",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land — Mountain Forest",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 68,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Overgrown Tomb",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land — Swamp Forest",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 70,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
     "name": "Evolving Wilds",
     "quantity": 1,
     "board": "main",
@@ -1944,6 +1923,28 @@
     "cmc": 0,
     "primaryCategory": "land",
     "edhrec_rank": 13380,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Stomping Ground",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Land — Mountain Forest",
+    "cmc": 0,
+    "primaryCategory": "land",
+    "edhrec_rank": 68,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Overgrown Tomb",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Land — Swamp Forest",
+    "cmc": 0,
+    "primaryCategory": "land",
+    "edhrec_rank": 70,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -2091,10 +2092,10 @@
     "commanderLegal": true
    },
    {
-    "name": "Forest",
+    "name": "Mountain",
     "quantity": 2,
     "board": "main",
-    "type_line": "Basic Land — Forest",
+    "type_line": "Basic Land — Mountain",
     "cmc": 0,
     "primaryCategory": "land",
     "edhrec_rank": null,
@@ -2102,10 +2103,10 @@
     "commanderLegal": true
    },
    {
-    "name": "Mountain",
+    "name": "Forest",
     "quantity": 2,
     "board": "main",
-    "type_line": "Basic Land — Mountain",
+    "type_line": "Basic Land — Forest",
     "cmc": 0,
     "primaryCategory": "land",
     "edhrec_rank": null,
@@ -2135,14 +2136,14 @@
     "commanderLegal": true
    }
   ],
-  "buildReport": "Archetype: Midrange — targeting 61 nonland slots\nRole fills:\n  ramp       19/12 OK\n  draw       15/10 OK\n  removal    12/9 OK\n  wipes      4/4 OK\n  protection 5/3 OK\n  payoffs    17/15 OK\n  wincons    26/6 OK"
+  "buildReport": "Archetype: Midrange — targeting 61 nonland slots\nRole fills:\n  ramp       19/12 OK\n  draw       15/10 OK\n  tutor      2/2 OK\n  removal    12/9 OK\n  wipes      4/4 OK\n  protection 5/3 OK\n  payoffs    17/15 OK\n  wincons    26/6 OK"
  },
  {
   "scenario": "magus-lucea-kane",
   "commander": "Magus Lucea Kane",
   "format": "commander",
   "ok": true,
-  "elapsedMs": 72294,
+  "elapsedMs": 74216,
   "strategy": "spellslinger",
   "themes": [
    "counters",
@@ -2159,8 +2160,8 @@
   "tribalType": null,
   "totalCards": 99,
   "landCount": 38,
-  "avgCmcNonLand": 2.77,
-  "goldSpellCount": 9,
+  "avgCmcNonLand": 2.79,
+  "goldSpellCount": 7,
   "counterMattersCount": 5,
   "referenceOverlapPct": 28,
   "referenceMissing": [
@@ -2213,17 +2214,18 @@
   ],
   "categoryCounts": {
    "ramp": 14,
-   "utility": 9,
+   "utility": 8,
    "draw": 17,
    "removal": 14,
    "protection": 4,
    "board_wipe": 2,
+   "tutor": 1,
    "win_condition": 1,
    "land": 38
   },
   "curve": {
-   "1": 6,
-   "2": 27,
+   "1": 5,
+   "2": 28,
    "3": 15,
    "4": 6,
    "5": 5,
@@ -2674,6 +2676,28 @@
     "commanderLegal": true
    },
    {
+    "name": "Tezzeret, Cruel Captain",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Legendary Planeswalker — Tezzeret",
+    "cmc": 3,
+    "primaryCategory": "tutor",
+    "edhrec_rank": 1499,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Cool but Rude",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Enchantment — Class",
+    "cmc": 2,
+    "primaryCategory": "draw",
+    "edhrec_rank": 7600,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
     "name": "Cankerbloom",
     "quantity": 1,
     "board": "main",
@@ -2784,17 +2808,6 @@
     "commanderLegal": true
    },
    {
-    "name": "Zariel, Archduke of Avernus",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Legendary Planeswalker — Zariel",
-    "cmc": 4,
-    "primaryCategory": "removal",
-    "edhrec_rank": 6129,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
     "name": "Kenrith's Transformation",
     "quantity": 1,
     "board": "main",
@@ -2806,13 +2819,24 @@
     "commanderLegal": true
    },
    {
-    "name": "Bag of Holding",
+    "name": "Untimely Malfunction",
     "quantity": 1,
     "board": "main",
-    "type_line": "Artifact",
-    "cmc": 1,
+    "type_line": "Instant",
+    "cmc": 2,
+    "primaryCategory": "removal",
+    "edhrec_rank": 297,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Night of the Sweets' Revenge",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Enchantment",
+    "cmc": 4,
     "primaryCategory": "board_wipe",
-    "edhrec_rank": 4018,
+    "edhrec_rank": 2005,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -2879,28 +2903,6 @@
     "cmc": 3,
     "primaryCategory": "draw",
     "edhrec_rank": 5256,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Primo, the Unbounded",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Legendary Creature — Fractal Wolf",
-    "cmc": 3,
-    "primaryCategory": "utility",
-    "edhrec_rank": 10301,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "The Goose Mother",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Legendary Creature — Bird Hydra",
-    "cmc": 2,
-    "primaryCategory": "draw",
-    "edhrec_rank": 2919,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -3202,7 +3204,7 @@
     "commanderLegal": true
    }
   ],
-  "buildReport": "Archetype: Spellslinger — targeting 61 nonland slots\nRole fills:\n  ramp       14/10 OK\n  draw       18/13 OK\n  removal    14/14 OK\n  wipes      2/2 OK\n  protection 5/3 OK\n  payoffs    10/15 SHORT\n  wincons    13/5 OK\nWarnings:\n  - role shortfall: synergy_payoff needs 15, filled 10 — pool exhausted or collection blocked"
+  "buildReport": "Archetype: Spellslinger — targeting 61 nonland slots\nRole fills:\n  ramp       14/10 OK\n  draw       18/13 OK\n  tutor      2/2 OK\n  removal    14/14 OK\n  wipes      2/2 OK\n  protection 5/3 OK\n  payoffs    10/15 SHORT\n  wincons    13/5 OK\nWarnings:\n  - role shortfall: synergy_payoff needs 15, filled 10 — pool exhausted or collection blocked"
  },
  {
   "scenario": "thrasios-tymna",
@@ -3210,7 +3212,7 @@
   "partner": "Tymna the Weaver",
   "format": "commander",
   "ok": true,
-  "elapsedMs": 100462,
+  "elapsedMs": 103017,
   "strategy": "aggro",
   "themes": [
    "control",
@@ -3225,7 +3227,7 @@
   "tribalType": null,
   "totalCards": 99,
   "landCount": 39,
-  "avgCmcNonLand": 2.03,
+  "avgCmcNonLand": 2.08,
   "goldSpellCount": 5,
   "counterMattersCount": 0,
   "referenceOverlapPct": 15,
@@ -3287,9 +3289,10 @@
   ],
   "categoryCounts": {
    "protection": 3,
-   "utility": 10,
+   "tutor": 3,
    "ramp": 21,
-   "draw": 14,
+   "utility": 8,
+   "draw": 13,
    "removal": 8,
    "board_wipe": 2,
    "win_condition": 2,
@@ -3297,10 +3300,10 @@
   },
   "curve": {
    "0": 1,
-   "1": 19,
+   "1": 18,
    "2": 23,
    "3": 13,
-   "4": 2,
+   "4": 3,
    "5": 2
   },
   "illegalCardsForFormat": [],
@@ -3323,7 +3326,7 @@
     "board": "main",
     "type_line": "Instant",
     "cmc": 1,
-    "primaryCategory": "utility",
+    "primaryCategory": "tutor",
     "edhrec_rank": 122,
     "brawlLegal": true,
     "commanderLegal": true
@@ -3604,6 +3607,17 @@
     "commanderLegal": true
    },
    {
+    "name": "Worldly Tutor",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Instant",
+    "cmc": 1,
+    "primaryCategory": "tutor",
+    "edhrec_rank": 165,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
     "name": "Wan Shi Tong, Librarian",
     "quantity": 1,
     "board": "main",
@@ -3648,13 +3662,13 @@
     "commanderLegal": true
    },
    {
-    "name": "Bag of Holding",
+    "name": "Night of the Sweets' Revenge",
     "quantity": 1,
     "board": "main",
-    "type_line": "Artifact",
-    "cmc": 1,
+    "type_line": "Enchantment",
+    "cmc": 4,
     "primaryCategory": "board_wipe",
-    "edhrec_rank": 4018,
+    "edhrec_rank": 2005,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -3730,7 +3744,7 @@
     "board": "main",
     "type_line": "Creature — Elf Druid",
     "cmc": 3,
-    "primaryCategory": "utility",
+    "primaryCategory": "tutor",
     "edhrec_rank": 1934,
     "brawlLegal": true,
     "commanderLegal": true
@@ -3809,17 +3823,6 @@
     "cmc": 4,
     "primaryCategory": "ramp",
     "edhrec_rank": 529,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Worldly Tutor",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Instant",
-    "cmc": 1,
-    "primaryCategory": "draw",
-    "edhrec_rank": 158,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -4253,17 +4256,6 @@
     "commanderLegal": true
    },
    {
-    "name": "Scalding Tarn",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 49,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
     "name": "Fortified Village",
     "quantity": 1,
     "board": "main",
@@ -4271,6 +4263,17 @@
     "cmc": 0,
     "primaryCategory": "land",
     "edhrec_rank": 343,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Scalding Tarn",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Land",
+    "cmc": 0,
+    "primaryCategory": "land",
+    "edhrec_rank": 49,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -4341,14 +4344,14 @@
     "commanderLegal": true
    }
   ],
-  "buildReport": "Archetype: Aggro — targeting 60 nonland slots\nRole fills:\n  ramp       13/9 OK\n  draw       13/8 OK\n  removal    7/4 OK\n  wipes      3/2 OK\n  protection 5/3 OK\n  payoffs    0/0 OK\n  wincons    11/1 OK"
+  "buildReport": "Archetype: Aggro — targeting 60 nonland slots\nRole fills:\n  ramp       13/9 OK\n  draw       13/8 OK\n  tutor      3/1 OK\n  removal    7/4 OK\n  wipes      2/2 OK\n  protection 5/3 OK\n  payoffs    0/0 OK\n  wincons    12/1 OK"
  },
  {
   "scenario": "mono-w-heliod",
   "commander": "Heliod, Sun-Crowned",
   "format": "commander",
   "ok": true,
-  "elapsedMs": 44481,
+  "elapsedMs": 54049,
   "strategy": "midrange",
   "themes": [
    "enchantments",
@@ -4366,7 +4369,7 @@
   "tribalType": null,
   "totalCards": 99,
   "landCount": 39,
-  "avgCmcNonLand": 2.75,
+  "avgCmcNonLand": 2.8,
   "goldSpellCount": 0,
   "counterMattersCount": 0,
   "referenceOverlapPct": 20,
@@ -4427,9 +4430,10 @@
    "wrath of god"
   ],
   "categoryCounts": {
-   "removal": 10,
-   "utility": 14,
+   "removal": 9,
+   "utility": 13,
    "ramp": 13,
+   "tutor": 2,
    "draw": 9,
    "protection": 4,
    "board_wipe": 4,
@@ -4438,10 +4442,10 @@
   },
   "curve": {
    "0": 1,
-   "1": 8,
+   "1": 7,
    "2": 20,
    "3": 16,
-   "4": 7,
+   "4": 8,
    "5": 7,
    "6": 1
   },
@@ -4487,7 +4491,7 @@
     "board": "main",
     "type_line": "Instant",
     "cmc": 1,
-    "primaryCategory": "utility",
+    "primaryCategory": "tutor",
     "edhrec_rank": 122,
     "brawlLegal": true,
     "commanderLegal": true
@@ -4856,6 +4860,17 @@
     "commanderLegal": true
    },
    {
+    "name": "Tezzeret, Cruel Captain",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Legendary Planeswalker — Tezzeret",
+    "cmc": 3,
+    "primaryCategory": "tutor",
+    "edhrec_rank": 1499,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
     "name": "Requisition Raid",
     "quantity": 1,
     "board": "main",
@@ -4889,17 +4904,6 @@
     "commanderLegal": true
    },
    {
-    "name": "Bag of Holding",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Artifact",
-    "cmc": 1,
-    "primaryCategory": "board_wipe",
-    "edhrec_rank": 4018,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
     "name": "Urza's Ruinous Blast",
     "quantity": 1,
     "board": "main",
@@ -4907,6 +4911,17 @@
     "cmc": 5,
     "primaryCategory": "board_wipe",
     "edhrec_rank": 1575,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Perilous Vault",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Artifact",
+    "cmc": 4,
+    "primaryCategory": "board_wipe",
+    "edhrec_rank": 9543,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -5092,7 +5107,7 @@
     "board": "main",
     "type_line": "Artifact — Equipment",
     "cmc": 2,
-    "primaryCategory": "removal",
+    "primaryCategory": "utility",
     "edhrec_rank": 9986,
     "brawlLegal": true,
     "commanderLegal": true
@@ -5105,17 +5120,6 @@
     "cmc": 2,
     "primaryCategory": "utility",
     "edhrec_rank": 10997,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Starnheim Courser",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Creature — Pegasus",
-    "cmc": 3,
-    "primaryCategory": "utility",
-    "edhrec_rank": 2798,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -5230,14 +5234,14 @@
     "commanderLegal": true
    }
   ],
-  "buildReport": "Archetype: Midrange — targeting 61 nonland slots\nRole fills:\n  ramp       14/12 OK\n  draw       15/10 OK\n  removal    12/9 OK\n  wipes      4/4 OK\n  protection 5/3 OK\n  payoffs    3/15 SHORT\n  wincons    12/6 OK\nWarnings:\n  - role shortfall: synergy_payoff needs 15, filled 3 — pool exhausted or collection blocked"
+  "buildReport": "Archetype: Midrange — targeting 61 nonland slots\nRole fills:\n  ramp       14/12 OK\n  draw       15/10 OK\n  tutor      2/2 OK\n  removal    12/9 OK\n  wipes      4/4 OK\n  protection 5/3 OK\n  payoffs    3/15 SHORT\n  wincons    12/6 OK\nWarnings:\n  - role shortfall: synergy_payoff needs 15, filled 3 — pool exhausted or collection blocked"
  },
  {
   "scenario": "mono-u-orvar",
   "commander": "Orvar, the All-Form",
   "format": "commander",
   "ok": true,
-  "elapsedMs": 40720,
+  "elapsedMs": 56891,
   "strategy": "spellslinger",
   "themes": [
    "tokens",
@@ -5253,7 +5257,7 @@
   "tribalType": null,
   "totalCards": 99,
   "landCount": 39,
-  "avgCmcNonLand": 2.63,
+  "avgCmcNonLand": 2.72,
   "goldSpellCount": 0,
   "counterMattersCount": 0,
   "referenceOverlapPct": 23,
@@ -5314,20 +5318,21 @@
   "categoryCounts": {
    "ramp": 12,
    "draw": 22,
-   "utility": 5,
+   "utility": 3,
    "protection": 4,
    "removal": 14,
+   "tutor": 2,
    "win_condition": 1,
    "board_wipe": 2,
    "land": 39
   },
   "curve": {
-   "1": 17,
+   "1": 16,
    "2": 16,
    "3": 10,
    "4": 8,
    "5": 7,
-   "6": 2
+   "6": 3
   },
   "illegalCardsForFormat": [],
   "commanderLegalInFormat": true,
@@ -5613,7 +5618,7 @@
     "board": "main",
     "type_line": "Instant",
     "cmc": 1,
-    "primaryCategory": "utility",
+    "primaryCategory": "tutor",
     "edhrec_rank": 146,
     "brawlLegal": true,
     "commanderLegal": true
@@ -5690,7 +5695,7 @@
     "board": "main",
     "type_line": "Creature — Human Wizard",
     "cmc": 4,
-    "primaryCategory": "utility",
+    "primaryCategory": "tutor",
     "edhrec_rank": 9922,
     "brawlLegal": true,
     "commanderLegal": true
@@ -5850,17 +5855,6 @@
     "commanderLegal": true
    },
    {
-    "name": "Bag of Holding",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Artifact",
-    "cmc": 1,
-    "primaryCategory": "board_wipe",
-    "edhrec_rank": 4018,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
     "name": "Aetherize",
     "quantity": 1,
     "board": "main",
@@ -5868,6 +5862,17 @@
     "cmc": 4,
     "primaryCategory": "board_wipe",
     "edhrec_rank": 312,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "River's Rebuke",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Sorcery",
+    "cmc": 6,
+    "primaryCategory": "board_wipe",
+    "edhrec_rank": 3113,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -6125,14 +6130,14 @@
     "commanderLegal": true
    }
   ],
-  "buildReport": "Archetype: Spellslinger — targeting 61 nonland slots\nRole fills:\n  ramp       14/10 OK\n  draw       18/13 OK\n  removal    14/14 OK\n  wipes      2/2 OK\n  protection 5/3 OK\n  payoffs    2/15 SHORT\n  wincons    24/5 OK\nWarnings:\n  - role shortfall: synergy_payoff needs 15, filled 2 — pool exhausted or collection blocked"
+  "buildReport": "Archetype: Spellslinger — targeting 61 nonland slots\nRole fills:\n  ramp       14/10 OK\n  draw       18/13 OK\n  tutor      3/2 OK\n  removal    14/14 OK\n  wipes      2/2 OK\n  protection 5/3 OK\n  payoffs    2/15 SHORT\n  wincons    24/5 OK\nWarnings:\n  - role shortfall: synergy_payoff needs 15, filled 2 — pool exhausted or collection blocked"
  },
  {
   "scenario": "mono-b-sheoldred",
   "commander": "Sheoldred, the Apocalypse",
   "format": "commander",
   "ok": true,
-  "elapsedMs": 51130,
+  "elapsedMs": 50767,
   "strategy": "control",
   "themes": [
    "ramp",
@@ -6144,8 +6149,8 @@
   ],
   "tribalType": null,
   "totalCards": 99,
-  "landCount": 40,
-  "avgCmcNonLand": 2.88,
+  "landCount": 39,
+  "avgCmcNonLand": 2.77,
   "goldSpellCount": 0,
   "counterMattersCount": 0,
   "referenceOverlapPct": 22,
@@ -6204,21 +6209,22 @@
   ],
   "categoryCounts": {
    "ramp": 12,
-   "draw": 16,
+   "draw": 15,
    "protection": 3,
    "removal": 16,
    "win_condition": 3,
    "utility": 3,
    "board_wipe": 6,
-   "land": 40
+   "tutor": 2,
+   "land": 39
   },
   "curve": {
    "1": 11,
-   "2": 17,
-   "3": 14,
+   "2": 19,
+   "3": 15,
    "4": 7,
-   "5": 6,
-   "6": 3,
+   "5": 5,
+   "6": 2,
    "7+": 1
   },
   "illegalCardsForFormat": [],
@@ -6555,17 +6561,6 @@
     "commanderLegal": true
    },
    {
-    "name": "Bag of Holding",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Artifact",
-    "cmc": 1,
-    "primaryCategory": "board_wipe",
-    "edhrec_rank": 4094,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
     "name": "Malicious Eclipse",
     "quantity": 1,
     "board": "main",
@@ -6720,6 +6715,28 @@
     "commanderLegal": true
    },
    {
+    "name": "Tezzeret, Cruel Captain",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Legendary Planeswalker — Tezzeret",
+    "cmc": 3,
+    "primaryCategory": "tutor",
+    "edhrec_rank": 1499,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Moonsilver Key",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Artifact",
+    "cmc": 2,
+    "primaryCategory": "tutor",
+    "edhrec_rank": 1611,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
     "name": "Soul-Guide Lantern",
     "quantity": 1,
     "board": "main",
@@ -6830,6 +6847,17 @@
     "commanderLegal": true
    },
    {
+    "name": "Poison the Waters",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Sorcery",
+    "cmc": 2,
+    "primaryCategory": "board_wipe",
+    "edhrec_rank": 13378,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
     "name": "Alesha's Legacy",
     "quantity": 1,
     "board": "main",
@@ -6863,6 +6891,17 @@
     "commanderLegal": true
    },
    {
+    "name": "Bag of Holding",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Artifact",
+    "cmc": 1,
+    "primaryCategory": "draw",
+    "edhrec_rank": 4018,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
     "name": "Fell the Profane // Fell Mire",
     "quantity": 1,
     "board": "main",
@@ -6870,28 +6909,6 @@
     "cmc": 4,
     "primaryCategory": "land",
     "edhrec_rank": 205,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "High-Society Hunter",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Creature — Vampire Noble",
-    "cmc": 5,
-    "primaryCategory": "draw",
-    "edhrec_rank": 4557,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Chronicle of Victory",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Legendary Artifact",
-    "cmc": 6,
-    "primaryCategory": "draw",
-    "edhrec_rank": 2168,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -6985,7 +7002,7 @@
    },
    {
     "name": "Swamp",
-    "quantity": 30,
+    "quantity": 29,
     "board": "main",
     "type_line": "Basic Land — Swamp",
     "cmc": 0,
@@ -6995,14 +7012,14 @@
     "commanderLegal": true
    }
   ],
-  "buildReport": "Archetype: Control — targeting 61 nonland slots\nRole fills:\n  ramp       16/12 OK\n  draw       20/12 OK\n  removal    19/16 OK\n  wipes      6/6 OK\n  protection 3/3 OK\n  payoffs    0/0 OK\n  wincons    35/2 OK"
+  "buildReport": "Archetype: Control — targeting 61 nonland slots\nRole fills:\n  ramp       16/12 OK\n  draw       19/12 OK\n  tutor      4/2 OK\n  removal    19/16 OK\n  wipes      6/6 OK\n  protection 3/3 OK\n  payoffs    0/0 OK\n  wincons    31/2 OK"
  },
  {
   "scenario": "mono-r-krenko",
   "commander": "Krenko, Mob Boss",
   "format": "commander",
   "ok": true,
-  "elapsedMs": 46112,
+  "elapsedMs": 49563,
   "strategy": "tribal",
   "themes": [
    "tribal"
@@ -7059,20 +7076,21 @@
    "vandalblast"
   ],
   "categoryCounts": {
-   "utility": 18,
+   "utility": 15,
    "ramp": 10,
+   "tutor": 3,
    "win_condition": 4,
    "removal": 9,
-   "protection": 3,
+   "protection": 4,
    "board_wipe": 3,
-   "draw": 14,
+   "draw": 13,
    "land": 38
   },
   "curve": {
    "0": 1,
-   "1": 10,
-   "2": 26,
-   "3": 13,
+   "1": 11,
+   "2": 24,
+   "3": 14,
    "4": 8,
    "6": 1,
    "7+": 2
@@ -7108,7 +7126,7 @@
     "board": "main",
     "type_line": "Creature — Goblin",
     "cmc": 3,
-    "primaryCategory": "utility",
+    "primaryCategory": "tutor",
     "edhrec_rank": 1788,
     "brawlLegal": true,
     "commanderLegal": true
@@ -7460,7 +7478,7 @@
     "board": "main",
     "type_line": "Sorcery",
     "cmc": 1,
-    "primaryCategory": "utility",
+    "primaryCategory": "tutor",
     "edhrec_rank": 236,
     "brawlLegal": true,
     "commanderLegal": true
@@ -7485,6 +7503,28 @@
     "primaryCategory": "utility",
     "edhrec_rank": 8267,
     "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Goblin Negotiation",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Sorcery",
+    "cmc": 2,
+    "primaryCategory": "utility",
+    "edhrec_rank": 5674,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Deflecting Swat",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Instant",
+    "cmc": 3,
+    "primaryCategory": "protection",
+    "edhrec_rank": 79,
+    "brawlLegal": false,
     "commanderLegal": true
    },
    {
@@ -7587,17 +7627,6 @@
     "commanderLegal": true
    },
    {
-    "name": "Bag of Holding",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Artifact",
-    "cmc": 1,
-    "primaryCategory": "board_wipe",
-    "edhrec_rank": 4018,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
     "name": "Fiery Confluence",
     "quantity": 1,
     "board": "main",
@@ -7605,6 +7634,17 @@
     "cmc": 4,
     "primaryCategory": "board_wipe",
     "edhrec_rank": 1461,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Fire Magic",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Instant",
+    "cmc": 1,
+    "primaryCategory": "board_wipe",
+    "edhrec_rank": 4117,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -7625,7 +7665,7 @@
     "board": "main",
     "type_line": "Creature — Goblin Artificer",
     "cmc": 2,
-    "primaryCategory": "utility",
+    "primaryCategory": "tutor",
     "edhrec_rank": 1163,
     "brawlLegal": true,
     "commanderLegal": true
@@ -7649,17 +7689,6 @@
     "cmc": 3,
     "primaryCategory": "utility",
     "edhrec_rank": 5811,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Goblin Negotiation",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Sorcery",
-    "cmc": 2,
-    "primaryCategory": "utility",
-    "edhrec_rank": 5674,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -7730,24 +7759,13 @@
     "commanderLegal": true
    },
    {
-    "name": "Cool but Rude",
+    "name": "Bag of Holding",
     "quantity": 1,
     "board": "main",
-    "type_line": "Enchantment — Class",
-    "cmc": 2,
+    "type_line": "Artifact",
+    "cmc": 1,
     "primaryCategory": "draw",
-    "edhrec_rank": 7600,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Irreverent Gremlin",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Creature — Gremlin",
-    "cmc": 2,
-    "primaryCategory": "draw",
-    "edhrec_rank": 8313,
+    "edhrec_rank": 4018,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -7873,14 +7891,14 @@
     "commanderLegal": true
    }
   ],
-  "buildReport": "Archetype: Tribal — targeting 61 nonland slots\nRole fills:\n  ramp       15/11 OK\n  draw       15/10 OK\n  removal    9/6 OK\n  wipes      3/3 OK\n  protection 3/3 OK\n  payoffs    0/0 OK\n  wincons    16/4 OK"
+  "buildReport": "Archetype: Tribal — targeting 61 nonland slots\nRole fills:\n  ramp       15/11 OK\n  draw       15/10 OK\n  tutor      4/2 OK\n  removal    9/6 OK\n  wipes      3/3 OK\n  protection 4/3 OK\n  payoffs    0/0 OK\n  wincons    16/4 OK"
  },
  {
   "scenario": "mono-g-ghalta",
   "commander": "Ghalta, Primal Hunger",
   "format": "commander",
   "ok": true,
-  "elapsedMs": 46080,
+  "elapsedMs": 47345,
   "strategy": "aggro",
   "themes": [
    "draw",
@@ -7895,7 +7913,7 @@
   "tribalType": null,
   "totalCards": 99,
   "landCount": 41,
-  "avgCmcNonLand": 2.6,
+  "avgCmcNonLand": 2.64,
   "goldSpellCount": 0,
   "counterMattersCount": 0,
   "referenceOverlapPct": 36,
@@ -7945,21 +7963,22 @@
    "traverse the outlands"
   ],
   "categoryCounts": {
-   "ramp": 21,
+   "ramp": 20,
    "draw": 15,
    "removal": 7,
    "win_condition": 2,
    "protection": 6,
    "utility": 5,
+   "tutor": 1,
    "board_wipe": 2,
    "land": 41
   },
   "curve": {
    "0": 1,
-   "1": 12,
-   "2": 20,
-   "3": 16,
-   "4": 3,
+   "1": 11,
+   "2": 21,
+   "3": 15,
+   "4": 4,
    "5": 2,
    "6": 2,
    "7+": 2
@@ -8265,6 +8284,17 @@
     "commanderLegal": true
    },
    {
+    "name": "Tribute to the World Tree",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Enchantment",
+    "cmc": 3,
+    "primaryCategory": "draw",
+    "edhrec_rank": 590,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
     "name": "Mind Stone",
     "quantity": 1,
     "board": "main",
@@ -8276,13 +8306,13 @@
     "commanderLegal": true
    },
    {
-    "name": "Outcaster Trailblazer",
+    "name": "Moonsilver Key",
     "quantity": 1,
     "board": "main",
-    "type_line": "Creature — Human Druid",
-    "cmc": 3,
-    "primaryCategory": "ramp",
-    "edhrec_rank": 2932,
+    "type_line": "Artifact",
+    "cmc": 2,
+    "primaryCategory": "tutor",
+    "edhrec_rank": 1611,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -8298,17 +8328,6 @@
     "commanderLegal": true
    },
    {
-    "name": "Bag of Holding",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Artifact",
-    "cmc": 1,
-    "primaryCategory": "board_wipe",
-    "edhrec_rank": 4018,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
     "name": "Night of the Sweets' Revenge",
     "quantity": 1,
     "board": "main",
@@ -8320,6 +8339,28 @@
     "commanderLegal": true
    },
    {
+    "name": "Perilous Vault",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Artifact",
+    "cmc": 4,
+    "primaryCategory": "board_wipe",
+    "edhrec_rank": 9543,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Outcaster Trailblazer",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Creature — Human Druid",
+    "cmc": 3,
+    "primaryCategory": "ramp",
+    "edhrec_rank": 2932,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
     "name": "Disciple of Freyalise // Garden of Freyalise",
     "quantity": 1,
     "board": "main",
@@ -8327,17 +8368,6 @@
     "cmc": 6,
     "primaryCategory": "land",
     "edhrec_rank": 491,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Tribute to the World Tree",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Enchantment",
-    "cmc": 3,
-    "primaryCategory": "draw",
-    "edhrec_rank": 590,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -8628,17 +8658,6 @@
     "commanderLegal": true
    },
    {
-    "name": "The Cabbage Merchant",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Legendary Creature — Human Citizen",
-    "cmc": 3,
-    "primaryCategory": "ramp",
-    "edhrec_rank": 3054,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
     "name": "Misty Rainforest",
     "quantity": 1,
     "board": "main",
@@ -8727,14 +8746,14 @@
     "commanderLegal": true
    }
   ],
-  "buildReport": "Archetype: Aggro — targeting 61 nonland slots\nRole fills:\n  ramp       14/9 OK\n  draw       13/8 OK\n  removal    7/4 OK\n  wipes      2/2 OK\n  protection 5/3 OK\n  payoffs    0/0 OK\n  wincons    9/1 OK"
+  "buildReport": "Archetype: Aggro — targeting 61 nonland slots\nRole fills:\n  ramp       14/9 OK\n  draw       13/8 OK\n  tutor      2/1 OK\n  removal    7/4 OK\n  wipes      2/2 OK\n  protection 5/3 OK\n  payoffs    0/0 OK\n  wincons    9/1 OK"
  },
  {
   "scenario": "meren-nel-toth",
   "commander": "Meren of Clan Nel Toth",
   "format": "commander",
   "ok": true,
-  "elapsedMs": 51377,
+  "elapsedMs": 56840,
   "strategy": "aristocrats",
   "themes": [
    "sacrifice",
@@ -8751,7 +8770,7 @@
   "tribalType": null,
   "totalCards": 99,
   "landCount": 38,
-  "avgCmcNonLand": 2.87,
+  "avgCmcNonLand": 2.95,
   "goldSpellCount": 3,
   "counterMattersCount": 0,
   "referenceOverlapPct": 41,
@@ -8798,22 +8817,23 @@
    "toxic deluge"
   ],
   "categoryCounts": {
-   "utility": 6,
+   "utility": 5,
    "ramp": 21,
    "win_condition": 3,
-   "draw": 20,
+   "draw": 19,
    "removal": 7,
+   "tutor": 2,
    "board_wipe": 3,
    "protection": 1,
    "land": 38
   },
   "curve": {
-   "1": 10,
-   "2": 16,
-   "3": 20,
-   "4": 8,
+   "1": 8,
+   "2": 17,
+   "3": 21,
+   "4": 7,
    "5": 4,
-   "6": 2,
+   "6": 3,
    "7+": 1
   },
   "illegalCardsForFormat": [],
@@ -8924,7 +8944,7 @@
     "board": "main",
     "type_line": "Instant",
     "cmc": 1,
-    "primaryCategory": "utility",
+    "primaryCategory": "tutor",
     "edhrec_rank": 322,
     "brawlLegal": true,
     "commanderLegal": true
@@ -9249,17 +9269,6 @@
     "commanderLegal": true
    },
    {
-    "name": "Worldly Tutor",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Instant",
-    "cmc": 1,
-    "primaryCategory": "draw",
-    "edhrec_rank": 165,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
     "name": "Night's Whisper",
     "quantity": 1,
     "board": "main",
@@ -9304,6 +9313,17 @@
     "commanderLegal": true
    },
    {
+    "name": "Sylvan Library",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Enchantment",
+    "cmc": 2,
+    "primaryCategory": "draw",
+    "edhrec_rank": 256,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
     "name": "Heartless Act",
     "quantity": 1,
     "board": "main",
@@ -9315,13 +9335,13 @@
     "commanderLegal": true
    },
    {
-    "name": "Bag of Holding",
+    "name": "Tezzeret, Cruel Captain",
     "quantity": 1,
     "board": "main",
-    "type_line": "Artifact",
-    "cmc": 1,
-    "primaryCategory": "board_wipe",
-    "edhrec_rank": 4018,
+    "type_line": "Legendary Planeswalker — Tezzeret",
+    "cmc": 3,
+    "primaryCategory": "tutor",
+    "edhrec_rank": 1499,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -9333,6 +9353,17 @@
     "cmc": 4,
     "primaryCategory": "board_wipe",
     "edhrec_rank": 2005,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "The Rise of Sozin // Fire Lord Sozin",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Enchantment — Saga // Legendary Creature — Human Noble",
+    "cmc": 6,
+    "primaryCategory": "board_wipe",
+    "edhrec_rank": 7172,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -9476,17 +9507,6 @@
     "cmc": 3,
     "primaryCategory": "ramp",
     "edhrec_rank": 2932,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Sinister Monolith",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Artifact",
-    "cmc": 4,
-    "primaryCategory": "draw",
-    "edhrec_rank": 6089,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -9711,14 +9731,14 @@
     "commanderLegal": true
    }
   ],
-  "buildReport": "Archetype: Aristocrats — targeting 61 nonland slots\nRole fills:\n  ramp       17/12 OK\n  draw       15/10 OK\n  removal    10/7 OK\n  wipes      3/3 OK\n  protection 5/3 OK\n  payoffs    3/8 SHORT\n  wincons    24/5 OK\nWarnings:\n  - role shortfall: synergy_payoff needs 8, filled 3 — pool exhausted or collection blocked"
+  "buildReport": "Archetype: Aristocrats — targeting 61 nonland slots\nRole fills:\n  ramp       17/12 OK\n  draw       15/10 OK\n  tutor      2/2 OK\n  removal    10/7 OK\n  wipes      3/3 OK\n  protection 5/3 OK\n  payoffs    3/8 SHORT\n  wincons    24/5 OK\nWarnings:\n  - role shortfall: synergy_payoff needs 8, filled 3 — pool exhausted or collection blocked"
  },
  {
   "scenario": "general-tazri",
   "commander": "General Tazri",
   "format": "commander",
   "ok": true,
-  "elapsedMs": 66314,
+  "elapsedMs": 71566,
   "strategy": "tribal",
   "themes": [
    "tribal"
@@ -9726,8 +9746,8 @@
   "tribalType": "ally",
   "totalCards": 99,
   "landCount": 38,
-  "avgCmcNonLand": 3.15,
-  "goldSpellCount": 34,
+  "avgCmcNonLand": 3.11,
+  "goldSpellCount": 35,
   "counterMattersCount": 0,
   "referenceOverlapPct": 28,
   "referenceMissing": [
@@ -9781,19 +9801,20 @@
   ],
   "categoryCounts": {
    "ramp": 17,
-   "utility": 11,
-   "removal": 10,
+   "utility": 10,
+   "removal": 9,
    "draw": 9,
    "protection": 3,
    "win_condition": 8,
+   "tutor": 2,
    "board_wipe": 3,
    "land": 38
   },
   "curve": {
    "1": 4,
-   "2": 22,
+   "2": 23,
    "3": 14,
-   "4": 8,
+   "4": 7,
    "5": 12,
    "7+": 1
   },
@@ -10274,6 +10295,39 @@
     "commanderLegal": true
    },
    {
+    "name": "Bring to Light",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Sorcery",
+    "cmc": 5,
+    "primaryCategory": "tutor",
+    "edhrec_rank": 5654,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Dina's Guidance",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Instant",
+    "cmc": 3,
+    "primaryCategory": "tutor",
+    "edhrec_rank": 8008,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Rakdos Charm",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Instant",
+    "cmc": 2,
+    "primaryCategory": "board_wipe",
+    "edhrec_rank": 325,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
     "name": "Golgari Charm",
     "quantity": 1,
     "board": "main",
@@ -10292,39 +10346,6 @@
     "cmc": 2,
     "primaryCategory": "board_wipe",
     "edhrec_rank": 10727,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Aetherize",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Instant",
-    "cmc": 4,
-    "primaryCategory": "board_wipe",
-    "edhrec_rank": 312,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Rakdos Charm",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Instant",
-    "cmc": 2,
-    "primaryCategory": "removal",
-    "edhrec_rank": 325,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Bring to Light",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Sorcery",
-    "cmc": 5,
-    "primaryCategory": "utility",
-    "edhrec_rank": 5654,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -10406,6 +10427,17 @@
     "commanderLegal": true
    },
    {
+    "name": "Fracture",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Instant",
+    "cmc": 2,
+    "primaryCategory": "removal",
+    "edhrec_rank": 1239,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
     "name": "The Gitrog Monster",
     "quantity": 1,
     "board": "main",
@@ -10457,17 +10489,6 @@
     "cmc": 2,
     "primaryCategory": "win_condition",
     "edhrec_rank": 233,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Abzan Charm",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Instant",
-    "cmc": 3,
-    "primaryCategory": "removal",
-    "edhrec_rank": 4250,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -10857,6 +10878,6 @@
     "commanderLegal": true
    }
   ],
-  "buildReport": "Archetype: Tribal — targeting 61 nonland slots\nRole fills:\n  ramp       15/11 OK\n  draw       15/10 OK\n  removal    9/6 OK\n  wipes      3/3 OK\n  protection 5/3 OK\n  payoffs    8/6 OK\n  wincons    40/4 OK"
+  "buildReport": "Archetype: Tribal — targeting 61 nonland slots\nRole fills:\n  ramp       15/11 OK\n  draw       15/10 OK\n  tutor      3/2 OK\n  removal    9/6 OK\n  wipes      3/3 OK\n  protection 5/3 OK\n  payoffs    8/6 OK\n  wincons    38/4 OK"
  }
 ]

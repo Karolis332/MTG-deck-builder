@@ -1,7 +1,7 @@
 // Ramos, Dragon Engine — COMMANDER
 // strategy=midrange themes=artifacts,tokens,ramp,draw,equipment,control,sacrifice,counters tribal=-
-// total=99 lands=38 avgCMC=3.08 gold=30 counters=0
-// categories: ramp=20 utility=7 removal=9 protection=1 win_condition=8 draw=12 board_wipe=4 land=38
+// total=99 lands=38 avgCMC=3.03 gold=31 counters=0
+// categories: ramp=20 utility=7 removal=9 protection=1 win_condition=8 draw=10 tutor=2 board_wipe=4 land=38
 
 1 Ramos, Dragon Engine *CMDR*
 
@@ -27,19 +27,17 @@
 1 Jegantha, the Wellspring
 1 Omnath, Locus of All
 
-// ── draw (12) ──
+// ── draw (10) ──
 1 Brainstorm
 1 Consider
 1 Opt
 1 Ponder
 1 Preordain
-1 Worldly Tutor
+1 Sleight of Hand
 1 Kutzil, Malamet Exemplar
-1 Tannuk, Memorial Ensign
 1 Zurgo Stormrender
 1 Archmage Emeritus
 1 Infinite Guideline Station
-1 Tatyova, Benthic Druid
 
 // ── removal (9) ──
 1 Boros Charm
@@ -55,7 +53,7 @@
 // ── board_wipe (4) ──
 1 Golgari Charm
 1 Gruul Charm
-1 Night of the Sweets' Revenge
+1 Rakdos Charm
 1 Ashling's Command
 
 // ── protection (1) ──

@@ -1,7 +1,7 @@
 // Vivi Ornitier — COMMANDER
 // strategy=spellslinger themes=tokens,artifacts,counters,flying,aggro,spellslinger,ramp,draw,enchantments,graveyard,equipment tribal=-
-// total=99 lands=38 avgCMC=2.33 gold=6 counters=0
-// categories: ramp=11 draw=17 protection=4 utility=13 removal=11 win_condition=4 board_wipe=1 land=38
+// total=99 lands=38 avgCMC=2.3 gold=6 counters=0
+// categories: ramp=11 draw=17 protection=4 utility=11 removal=11 tutor=2 win_condition=4 board_wipe=1 land=38
 
 1 Vivi Ornitier *CMDR*
 
@@ -45,7 +45,7 @@
 1 Kozilek's Command
 1 Red Sun's Twilight
 1 Snap
-1 Chandra, Spark Hunter
+1 Stolen by the Fae
 1 Urabrask // The Great Work
 1 Niv-Mizzet, Parun
 1 Hullbreaker Horror
@@ -65,11 +65,9 @@
 1 Quicksilver Elemental
 1 Niv-Mizzet, Visionary
 
-// ── utility (13) ──
+// ── utility (11) ──
 1 Hangarback Walker
 1 Flusterstorm
-1 Gamble
-1 Mystical Tutor
 1 Shivan Devastator
 1 Comet Storm
 1 Crackle with Power

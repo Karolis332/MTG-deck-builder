@@ -1,7 +1,7 @@
 // Heliod, Sun-Crowned — COMMANDER
 // strategy=midrange themes=enchantments,lifegain,artifacts,flying,counters,equipment,control,aggro,ramp,draw,tokens tribal=-
-// total=99 lands=39 avgCMC=2.75 gold=0 counters=0
-// categories: removal=10 utility=14 ramp=13 draw=9 protection=4 board_wipe=4 win_condition=6 land=39
+// total=99 lands=39 avgCMC=2.8 gold=0 counters=0
+// categories: removal=9 utility=13 ramp=13 tutor=2 draw=9 protection=4 board_wipe=4 win_condition=6 land=39
 
 1 Heliod, Sun-Crowned *CMDR*
 
@@ -31,11 +31,10 @@
 1 G'raha Tia
 1 Chronicle of Victory
 
-// ── removal (10) ──
+// ── removal (9) ──
 1 Path to Exile
 1 Requisition Raid
 1 Agatha's Soul Cauldron
-1 Citizen's Crowbar
 1 Glass Casket
 1 Ossification
 1 Personify
@@ -44,7 +43,7 @@
 1 Zuko's Exile
 
 // ── board_wipe (4) ──
-1 Bag of Holding
+1 Perilous Vault
 1 Fumigate
 1 Sunfall
 1 Urza's Ruinous Blast
@@ -63,13 +62,13 @@
 1 Danitha, Benalia's Hope
 1 Exalted Sunborn
 
-// ── utility (14) ──
+// ── utility (13) ──
 1 Authority of the Consuls
-1 Enlightened Tutor
 1 Ethereal Armor
 1 Healer's Hawk
 1 Ajani's Pridemate
 1 All That Glitters
+1 Citizen's Crowbar
 1 Costume Closet
 1 Impassioned Orator
 1 Leonardo, Cutting Edge
@@ -77,7 +76,6 @@
 1 Angel of Vitality
 1 Nettlecyst
 1 Silver Sable, Mercenary Leader
-1 Starnheim Courser
 
 // ── land (39) ──
 1 Brokers Hideout

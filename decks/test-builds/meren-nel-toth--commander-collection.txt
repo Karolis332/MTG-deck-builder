@@ -1,7 +1,7 @@
 // Meren of Clan Nel Toth — COMMANDER
 // strategy=aristocrats themes=sacrifice,tokens,draw,counters,ramp,aggro,artifacts,flying,control,enchantments tribal=-
-// total=99 lands=38 avgCMC=2.87 gold=3 counters=0
-// categories: utility=6 ramp=21 win_condition=3 draw=20 removal=7 board_wipe=3 protection=1 land=38
+// total=99 lands=38 avgCMC=2.95 gold=3 counters=0
+// categories: utility=5 ramp=21 win_condition=3 draw=19 removal=7 tutor=2 board_wipe=3 protection=1 land=38
 
 1 Meren of Clan Nel Toth *CMDR*
 
@@ -28,14 +28,14 @@
 1 The Gitrog Monster
 1 The Great Henge
 
-// ── draw (20) ──
+// ── draw (19) ──
 1 Oracle's Restoration
 1 Vexing Bauble
 1 Village Rites
-1 Worldly Tutor
 1 Costly Plunder
 1 Night's Whisper
 1 Satyr Wayfinder
+1 Sylvan Library
 1 Up the Beanstalk
 1 Adventurer's Airship
 1 Garruk's Uprising
@@ -46,7 +46,6 @@
 1 Sephiroth, Fabled SOLDIER // Sephiroth, One-Winged Angel
 1 Surrak, Elusive Hunter
 1 Harmonize
-1 Sinister Monolith
 1 High-Society Hunter
 1 Chronicle of Victory
 
@@ -60,9 +59,9 @@
 1 Venom's Hunger
 
 // ── board_wipe (3) ──
-1 Bag of Holding
 1 Night of the Sweets' Revenge
 1 Massacre Wurm
+1 The Rise of Sozin // Fire Lord Sozin
 
 // ── protection (1) ──
 1 Lightning Greaves
@@ -72,8 +71,7 @@
 1 Cauldron of Essence
 1 Syr Konrad, the Grim
 
-// ── utility (6) ──
-1 Entomb
+// ── utility (5) ──
 1 Umbral Collar Zealot
 1 Eternal Witness
 1 Twilight Diviner

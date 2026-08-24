@@ -1,11 +1,11 @@
 // Ghalta, Primal Hunger — COMMANDER
 // strategy=aggro themes=draw,artifacts,ramp,aggro,tokens,equipment,enchantments,counters tribal=-
-// total=99 lands=41 avgCMC=2.6 gold=0 counters=0
-// categories: ramp=21 draw=15 removal=7 win_condition=2 protection=6 utility=5 board_wipe=2 land=41
+// total=99 lands=41 avgCMC=2.64 gold=0 counters=0
+// categories: ramp=20 draw=15 removal=7 win_condition=2 protection=6 utility=5 tutor=1 board_wipe=2 land=41
 
 1 Ghalta, Primal Hunger *CMDR*
 
-// ── ramp (21) ──
+// ── ramp (20) ──
 1 Elvish Mystic
 1 Llanowar Elves
 1 Open the Gates
@@ -23,7 +23,6 @@
 1 Loot, Exuberant Explorer
 1 Outcaster Trailblazer
 1 Starting Column
-1 The Cabbage Merchant
 1 Hedron Archive
 1 Solemn Simulacrum
 1 The Great Henge
@@ -55,8 +54,8 @@
 1 Reclamation Sage
 
 // ── board_wipe (2) ──
-1 Bag of Holding
 1 Night of the Sweets' Revenge
+1 Perilous Vault
 
 // ── protection (6) ──
 1 Silkguard

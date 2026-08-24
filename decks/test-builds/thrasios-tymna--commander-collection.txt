@@ -1,7 +1,7 @@
 // Thrasios, Triton Hero + Tymna the Weaver — COMMANDER
 // strategy=aggro themes=control,ramp,draw,artifacts,tokens,aggro,enchantments,sacrifice tribal=-
-// total=99 lands=39 avgCMC=2.03 gold=5 counters=0
-// categories: protection=3 utility=10 ramp=21 draw=14 removal=8 board_wipe=2 win_condition=2 land=39
+// total=99 lands=39 avgCMC=2.08 gold=5 counters=0
+// categories: protection=3 tutor=3 ramp=21 utility=8 draw=13 removal=8 board_wipe=2 win_condition=2 land=39
 
 1 Thrasios, Triton Hero *CMDR*
 1 Tymna the Weaver *CMDR* (requested partner — see note)
@@ -29,12 +29,11 @@
 1 Culling Ritual
 1 Hedron Archive
 
-// ── draw (14) ──
+// ── draw (13) ──
 1 Stiltzkin, Moogle Merchant
 1 Veil of Summer
 1 Vexing Bauble
 1 Village Rites
-1 Worldly Tutor
 1 Night's Whisper
 1 Splitskin Doll
 1 Sram, Senior Edificer
@@ -56,8 +55,8 @@
 1 Go for the Throat
 
 // ── board_wipe (2) ──
-1 Bag of Holding
 1 Golgari Charm
+1 Night of the Sweets' Revenge
 
 // ── protection (3) ──
 1 Wild Unraveling
@@ -68,8 +67,7 @@
 1 Exsanguinate
 1 Zulaport Cutthroat
 
-// ── utility (10) ──
-1 Enlightened Tutor
+// ── utility (8) ──
 1 Mockingbird
 1 Training Grounds
 1 Ajani's Pridemate
@@ -77,7 +75,6 @@
 1 Brain Freeze
 1 Voice of Victory
 1 Eternal Witness
-1 Formidable Speaker
 1 Valley Floodcaller
 
 // ── land (39) ──

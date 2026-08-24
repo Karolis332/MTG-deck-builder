@@ -1,7 +1,7 @@
 // Orvar, the All-Form — COMMANDER
 // strategy=spellslinger themes=tokens,artifacts,draw,control,ramp,spellslinger,flying,equipment,counters tribal=-
-// total=99 lands=39 avgCMC=2.63 gold=0 counters=0
-// categories: ramp=12 draw=22 utility=5 protection=4 removal=14 win_condition=1 board_wipe=2 land=39
+// total=99 lands=39 avgCMC=2.72 gold=0 counters=0
+// categories: ramp=12 draw=22 utility=3 protection=4 removal=14 tutor=2 win_condition=1 board_wipe=2 land=39
 
 1 Orvar, the All-Form *CMDR*
 
@@ -60,8 +60,8 @@
 1 Zuko's Exile
 
 // ── board_wipe (2) ──
-1 Bag of Holding
 1 Aetherize
+1 River's Rebuke
 
 // ── protection (4) ──
 1 Dive Down
@@ -72,12 +72,10 @@
 // ── win_condition (1) ──
 1 Murmuring Mystic
 
-// ── utility (5) ──
-1 Mystical Tutor
+// ── utility (3) ──
 1 Spell Pierce
 1 Hidden Strings
 1 Simulacrum Synthesizer
-1 Micromancer
 
 // ── land (39) ──
 1 Brokers Hideout

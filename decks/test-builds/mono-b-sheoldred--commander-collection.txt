@@ -1,7 +1,7 @@
 // Sheoldred, the Apocalypse — COMMANDER
 // strategy=control themes=ramp,artifacts,draw,sacrifice,equipment,control tribal=-
-// total=99 lands=40 avgCMC=2.88 gold=0 counters=0
-// categories: ramp=12 draw=16 protection=3 removal=16 win_condition=3 utility=3 board_wipe=6 land=40
+// total=99 lands=39 avgCMC=2.77 gold=0 counters=0
+// categories: ramp=12 draw=15 protection=3 removal=16 win_condition=3 utility=3 board_wipe=6 tutor=2 land=39
 
 1 Sheoldred, the Apocalypse *CMDR*
 
@@ -19,7 +19,8 @@
 1 Hedron Archive
 1 Solemn Simulacrum
 
-// ── draw (16) ──
+// ── draw (15) ──
+1 Bag of Holding
 1 Candy Trail
 1 Toxin Analysis
 1 Vexing Bauble
@@ -33,9 +34,7 @@
 1 Risky Research
 1 Rowan's Grim Search
 1 Pact Weapon
-1 High-Society Hunter
 1 Seizan, Perverter of Truth
-1 Chronicle of Victory
 
 // ── removal (16) ──
 1 Annihilating Glare
@@ -56,7 +55,7 @@
 1 Meteor Golem
 
 // ── board_wipe (6) ──
-1 Bag of Holding
+1 Poison the Waters
 1 Malicious Eclipse
 1 Withering Curse
 1 Perilous Vault
@@ -78,12 +77,12 @@
 1 Sheoldred's Edict
 1 Enduring Tenacity
 
-// ── land (40) ──
+// ── land (39) ──
 1 Cavern of Souls
 1 Command Tower
 1 Midgar, City of Mako // Reactor Raid
 1 Multiversal Passage
-30 Swamp
+29 Swamp
 1 Thran Portal
 1 Urborg, Tomb of Yawgmoth
 1 Malakir Rebirth // Malakir Mire

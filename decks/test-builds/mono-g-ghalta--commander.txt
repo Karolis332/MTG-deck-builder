@@ -1,7 +1,7 @@
 // Ghalta, Primal Hunger — COMMANDER
 // strategy=aggro themes=ramp,artifacts,draw,tokens,aggro,equipment tribal=-
-// total=99 lands=41 avgCMC=3.12 gold=0 counters=0
-// categories: ramp=19 draw=12 win_condition=4 removal=4 protection=4 utility=13 board_wipe=2 land=41
+// total=99 lands=40 avgCMC=3.2 gold=0 counters=0
+// categories: ramp=19 draw=13 win_condition=4 removal=4 protection=4 utility=13 board_wipe=2 land=40
 
 1 Ghalta, Primal Hunger *CMDR*
 
@@ -26,7 +26,7 @@
 1 Hulking Raptor
 1 The Great Henge
 
-// ── draw (12) ──
+// ── draw (13) ──
 1 Currency Converter
 1 Sensei's Divining Top
 1 Skullclamp
@@ -38,6 +38,7 @@
 1 Momentous Fall
 1 Garruk, Primal Hunter
 1 Return of the Wildspeaker
+1 Tamiyo's Journal
 1 Rishkar's Expertise
 
 // ── removal (4) ──
@@ -47,7 +48,7 @@
 1 Thrashing Brontodon
 
 // ── board_wipe (2) ──
-1 Bag of Holding
+1 Night of the Sweets' Revenge
 1 Bane of Progress
 
 // ── protection (4) ──
@@ -77,9 +78,9 @@
 1 Majestic Genesis
 1 The Skullspore Nexus
 
-// ── land (41) ──
+// ── land (40) ──
 1 City of Brass
-31 Forest
+30 Forest
 1 Misty Rainforest
 1 Three Tree City
 1 Verdant Catacombs

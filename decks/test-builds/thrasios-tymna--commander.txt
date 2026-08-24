@@ -1,7 +1,7 @@
 // Thrasios, Triton Hero + Tymna the Weaver — COMMANDER
 // strategy=control themes=control,ramp,draw,tokens,artifacts,equipment tribal=-
-// total=99 lands=39 avgCMC=2.13 gold=4 counters=0
-// categories: ramp=17 draw=9 utility=20 protection=3 removal=10 win_condition=1 land=39
+// total=99 lands=39 avgCMC=2.28 gold=5 counters=0
+// categories: ramp=17 draw=9 tutor=4 protection=3 utility=13 removal=13 win_condition=1 land=39
 
 1 Thrasios, Triton Hero *CMDR*
 1 Tymna the Weaver *CMDR* (requested partner — see note)
@@ -20,8 +20,8 @@
 1 Arcane Signet
 1 Kinnan, Bonder Prodigy
 1 Lotho, Corrupt Shirriff
-1 Talisman of Hierarchy
-1 Talisman of Progress
+1 Elvish Spirit Guide
+1 Enduring Vitality
 1 Smothering Tithe
 1 The Great Henge
 
@@ -33,10 +33,10 @@
 1 Idol of Oblivion
 1 Wan Shi Tong, Librarian
 1 Black Market Connections
-1 Garruk's Uprising
 1 Rhystic Study
+1 Ad Nauseam
 
-// ── removal (10) ──
+// ── removal (13) ──
 1 Deathrite Shaman
 1 Swords to Plowshares
 1 Feed the Swarm
@@ -44,9 +44,12 @@
 1 Generous Gift
 1 Loran of the Third Path
 1 Stroke of Midnight
+1 Venat, Heart of Hydaelyn // Hydaelyn, the Mothercrystal
 1 Deadly Rollick
 1 Sowing Mycospawn
+1 Vraska, Golgari Queen
 1 Freyalise, Llanowar's Fury
+1 Ob Nixilis Reignited
 
 // ── protection (3) ──
 1 Swan Song
@@ -56,25 +59,18 @@
 // ── win_condition (1) ──
 1 Seedborn Muse
 
-// ── utility (20) ──
+// ── utility (13) ──
 1 Demonic Consultation
-1 Enlightened Tutor
 1 Flusterstorm
-1 Imperial Seal
+1 Mockingbird
 1 Silence
 1 Training Grounds
-1 Vampiric Tutor
 1 Biomancer's Familiar
-1 Demonic Tutor
-1 Diabolic Intent
 1 Finale of Devastation
 1 Grand Abolisher
 1 Tainted Pact
 1 Voice of Victory
-1 Wishclaw Talisman
-1 Chord of Calling
 1 Eternal Witness
-1 Ranger-Captain of Eos
 1 Sevinne's Reclamation
 1 Mindbreak Trap
 
@@ -87,7 +83,7 @@
 1 Exotic Orchard
 1 Flooded Strand
 1 Forbidden Orchard
-4 Forest
+3 Forest
 1 Gemstone Caverns
 1 Godless Shrine
 1 Grand Coliseum
@@ -103,7 +99,7 @@
 1 Prismatic Vista
 1 Reflecting Pool
 1 Savannah
-1 Swamp
+2 Swamp
 1 Talon Gates of Madara
 1 Temple Garden
 1 Temple of the Dragon Queen

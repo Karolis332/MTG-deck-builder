@@ -1,7 +1,7 @@
 // Sheoldred, the Apocalypse — BRAWL
 // strategy=midrange themes=artifacts,ramp,draw,sacrifice,tokens,equipment,tribal tribal=-
-// total=99 lands=39 avgCMC=3.63 gold=0 counters=0
-// categories: ramp=11 draw=16 utility=11 protection=3 removal=10 win_condition=5 board_wipe=4 land=39
+// total=99 lands=39 avgCMC=3.72 gold=0 counters=0
+// categories: ramp=11 draw=16 utility=10 protection=3 removal=10 win_condition=5 board_wipe=4 tutor=1 land=39
 
 1 Sheoldred, the Apocalypse *CMDR*
 
@@ -32,7 +32,7 @@
 1 High-Society Hunter
 1 Psychosis Crawler
 1 Seizan, Perverter of Truth
-1 Harvester of Souls
+1 Tamiyo's Journal
 1 Liliana, Dreadhorde General
 1 Peer into the Abyss
 
@@ -42,17 +42,17 @@
 1 Infernal Grasp
 1 Baleful Mastery
 1 Dread Presence
-1 Erebos, Bleak-Hearted
+1 Sold Out
 1 Ob Nixilis Reignited
 1 Ob Nixilis, the Hate-Twisted
 1 Venom's Hunger
 1 Vilis, Broker of Blood
 
 // ── board_wipe (4) ──
-1 Bag of Holding
 1 Toxic Deluge
 1 Damnation
 1 The Rise of Sozin // Fire Lord Sozin
+1 Blood Money
 
 // ── protection (3) ──
 1 Shadowspear
@@ -66,9 +66,8 @@
 1 Bolas's Citadel
 1 K'rrik, Son of Yawgmoth
 
-// ── utility (11) ──
+// ── utility (10) ──
 1 Reanimate
-1 Vampiric Tutor
 1 Howling Mine
 1 Jet Medallion
 1 Bloodthirsty Aerialist

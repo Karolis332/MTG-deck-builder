@@ -1,7 +1,7 @@
 // Thrasios, Triton Hero + Tymna the Weaver — BRAWL
 // strategy=aggro themes=control,draw,ramp,artifacts,tokens,enchantments,aggro tribal=-
 // total=99 lands=39 avgCMC=2.1 gold=4 counters=0
-// categories: ramp=19 draw=12 utility=18 protection=3 removal=5 board_wipe=2 win_condition=1 land=39
+// categories: ramp=19 draw=12 tutor=5 protection=3 utility=13 removal=5 board_wipe=2 win_condition=1 land=39
 
 1 Thrasios, Triton Hero *CMDR*
 1 Tymna the Weaver *CMDR* (requested partner — see note)
@@ -60,13 +60,11 @@
 // ── win_condition (1) ──
 1 Zulaport Cutthroat
 
-// ── utility (18) ──
-1 Enlightened Tutor
+// ── utility (13) ──
 1 Flusterstorm
 1 Mockingbird
 1 Silence
 1 Training Grounds
-1 Vampiric Tutor
 1 Badgermole Cub
 1 Biomancer's Familiar
 1 Finale of Devastation
@@ -74,10 +72,7 @@
 1 Phantasmal Image
 1 Springheart Nantuko
 1 Voice of Victory
-1 Chord of Calling
 1 Eternal Witness
-1 Formidable Speaker
-1 Ranger-Captain of Eos
 1 Valley Floodcaller
 
 // ── land (39) ──

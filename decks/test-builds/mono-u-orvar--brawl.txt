@@ -1,7 +1,7 @@
 // Orvar, the All-Form — BRAWL
 // strategy=spellslinger themes=tokens,artifacts,control,flying,spellslinger,draw,ramp,counters,enchantments tribal=-
 // total=99 lands=38 avgCMC=3.03 gold=0 counters=0
-// categories: ramp=10 draw=15 utility=13 protection=3 removal=14 win_condition=4 board_wipe=2 land=38
+// categories: ramp=10 draw=15 utility=11 protection=3 removal=14 win_condition=4 board_wipe=2 tutor=2 land=38
 
 1 Orvar, the All-Form *CMDR*
 
@@ -65,13 +65,11 @@
 1 Talrand, Sky Summoner
 1 Shipwreck Dowser
 
-// ── utility (13) ──
+// ── utility (11) ──
 1 Hangarback Walker
-1 Mystical Tutor
 1 Hidden Strings
 1 Sapphire Medallion
 1 Mirror Box
-1 Solve the Equation
 1 Archaeomancer
 1 Master of Waves
 1 Phyrexian Metamorph
