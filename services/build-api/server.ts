@@ -346,11 +346,74 @@ function handleAnalyze(body: string, res: http.ServerResponse): void {
   }
 }
 
+/**
+ * POST /cards/lookup — batched card display data for the web collection viewer.
+ * {names: string[]} (≤1000) → per-name card info from the local DB; no external calls.
+ */
+function handleCardsLookup(body: string, res: http.ServerResponse): void {
+  let parsed: Record<string, unknown>;
+  try {
+    parsed = JSON.parse(body || '{}');
+  } catch {
+    return json(res, 400, { error: 'invalid JSON body' });
+  }
+  const names = Array.isArray(parsed.names) ? (parsed.names as unknown[]).slice(0, 1000) : [];
+  if (!names.length) return json(res, 400, { error: 'names[] required (max 1000)' });
+
+  try {
+    const db = getDb();
+    const find = db.prepare(
+      `SELECT name, type_line, cmc, mana_cost, color_identity, rarity, set_code,
+              image_uri_small, image_uri_normal, price_usd, game_changer
+       FROM cards WHERE name = ? COLLATE NOCASE OR name LIKE ? COLLATE NOCASE
+       ORDER BY (name = ? COLLATE NOCASE) DESC LIMIT 1`
+    );
+    const cards: Record<string, unknown>[] = [];
+    const unresolved: string[] = [];
+    for (const raw of names) {
+      const name = String(raw || '').trim();
+      if (!name || name.length > 200) continue;
+      const row = find.get(name, `${name} //%`, name) as (DbCard & { game_changer?: number }) | undefined;
+      if (!row) { unresolved.push(name); continue; }
+      cards.push({
+        name: row.name,
+        type_line: row.type_line,
+        cmc: row.cmc,
+        mana_cost: row.mana_cost,
+        color_identity: parseColorIdentity(row.color_identity),
+        rarity: row.rarity,
+        set_code: row.set_code,
+        image_uri_small: row.image_uri_small,
+        image_uri_normal: row.image_uri_normal,
+        price_usd: row.price_usd,
+        game_changer: row.game_changer === 1,
+      });
+    }
+    json(res, 200, { cards, unresolved });
+  } catch (error) {
+    const message = error instanceof Error ? error.message : 'lookup failed';
+    json(res, 500, { error: message });
+  }
+}
+
 const server = http.createServer((req, res) => {
   const url = (req.url || '').split('?')[0];
 
   if (req.method === 'GET' && url === '/health') {
     return json(res, 200, { status: 'ok', service: 'build-api', activeBuilds });
+  }
+
+  if (req.method === 'POST' && url === '/cards/lookup') {
+    if (API_KEY && req.headers['x-api-key'] !== API_KEY) {
+      return json(res, 401, { error: 'unauthorized' });
+    }
+    let body = '';
+    req.on('data', (chunk) => {
+      body += chunk;
+      if (body.length > 1_500_000) req.destroy();
+    });
+    req.on('end', () => handleCardsLookup(body, res));
+    return;
   }
 
   if (req.method === 'POST' && url === '/analyze') {
