@@ -88,12 +88,27 @@ ramp if no turn-≤3 play." Surfaces in the deck analysis panel AND the Arena ov
 - **NOT in the builder's scorer yet.** Wiring ISS into card selection changes builds — that is
   a separate, harness-gated round after calibration proves the score orders decks sensibly.
 
-## 6. Calibration (research-dependent)
+## 6. Calibration — research findings (2026-08-24)
 
-Pending rating-scout findings (edhpowerlevel/ratemydecks/bracket criteria): curated lists
-(fast mana, game-changers, 2-card combos), dimension weights, and sanity anchors — top-liked
-catalogue decks should score high-ISS, precon-tier low-mid; harness roster spread should be
-monotone-ish with the review's human grades (Krenko B+ > Tazri C-).
+- **Neither commercial tool discloses weights.** edhpowerlevel: proprietary, price-as-power
+  signal (with deliberate Reserved-List dampening), plus a "Playability" metric = castability
+  on curve given the land base — we can compute that from mana-sources/land-intelligence (v2).
+  ratemydecks: 13 named deterministic factors, no weights — its factor set ≈ our computable
+  set already. Ignore the SEO content-farm "formulas" floating around (six clone sites,
+  fabricated weights).
+- **EDHREC synergy formula confirmed** (their FAQ): commander-inclusion% − color-identity
+  baseline% — exactly what `commander_card_stats.synergy_score` already stores. Our corpus is
+  the same computation at 3.79M decks. Even EDHREC admits theirs is hand-tuned, not principled.
+- **Bracket estimator is concretely buildable** (official WotC gates): Game Changers count
+  (0 / 0 / ≤3 / ∞ / ∞ across B1-5) — **`cards.game_changer` column live as of migration 37,
+  synced from Scryfall's native field, 53 cards backfilled**; 2-card infinite combos (seed
+  list now, Commander Spellbook API v2); mass land denial (small curated list, ~15-30 cards,
+  no clean regex exists); chainable extra turns (regex + list). Tutor count is NO LONGER
+  bracket-defining (Oct 2025 rules update).
+- **Curated lists still needed** (small, stable): fast-mana tiers (premium vs common), mass
+  land denial, stax pieces. Everything else computes from data we hold.
+- Sanity anchors for ISS: top-liked catalogue decks high, precon-tier mid; harness roster
+  ordering roughly monotone with the 2026-08-23 review's human grades (Krenko B+ > Tazri C-).
 
 ## 7. Files
 

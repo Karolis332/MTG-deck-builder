@@ -56,6 +56,7 @@ interface ScryfallBulkCard {
   loyalty?: string;
   produced_mana?: string[];
   edhrec_rank?: number;
+  game_changer?: boolean;
   layout: string;
 }
 
@@ -106,6 +107,7 @@ function toRow(card: ScryfallBulkCard) {
     loyalty: card.loyalty || null,
     produced_mana: card.produced_mana ? JSON.stringify(card.produced_mana) : null,
     edhrec_rank: card.edhrec_rank ?? null,
+    game_changer: card.game_changer ? 1 : 0,
     layout: card.layout,
   };
 }
@@ -141,6 +143,7 @@ async function main(): Promise<void> {
       price_usd = @price_usd, price_usd_foil = @price_usd_foil,
       legalities = @legalities, power = @power, toughness = @toughness,
       loyalty = @loyalty, produced_mana = @produced_mana, edhrec_rank = @edhrec_rank,
+      game_changer = @game_changer,
       layout = @layout,
       image_uri_small = COALESCE(image_uri_small, @image_uri_small),
       image_uri_normal = COALESCE(image_uri_normal, @image_uri_normal),

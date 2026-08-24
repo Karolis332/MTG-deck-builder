@@ -1346,4 +1346,14 @@ export const MIGRATIONS = [
       ALTER TABLE decks ADD COLUMN built_by TEXT;
     `,
   },
+  {
+    version: 37,
+    name: 'cards_game_changer',
+    sql: `
+      -- Scryfall's official Commander-bracket "Game Changer" flag (~53 cards).
+      -- Native Scryfall field (is:gamechanger) — synced by update-card-data.ts,
+      -- used by the bracket estimator (0 allowed in B1/B2, <=3 in B3).
+      ALTER TABLE cards ADD COLUMN game_changer INTEGER NOT NULL DEFAULT 0;
+    `,
+  },
 ];
