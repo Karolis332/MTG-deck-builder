@@ -1,15 +1,14 @@
 // Magus Lucea Kane — COMMANDER
 // strategy=spellslinger themes=counters,aggro,draw,tokens,ramp,enchantments,equipment,artifacts,flying,spellslinger tribal=-
-// total=99 lands=38 avgCMC=2.82 gold=8 counters=5
-// categories: ramp=15 utility=9 draw=16 removal=14 protection=4 board_wipe=2 win_condition=1 land=38
+// total=99 lands=38 avgCMC=2.77 gold=9 counters=5
+// categories: ramp=14 utility=9 draw=17 removal=14 protection=4 board_wipe=2 win_condition=1 land=38
 
 1 Magus Lucea Kane *CMDR*
 
-// ── ramp (15) ──
+// ── ramp (14) ──
 1 Arcane Signet
 1 Druid Class
 1 Farseek
-1 Izzet Signet
 1 Mind Stone
 1 Rampant Growth
 1 Simic Signet
@@ -22,11 +21,12 @@
 1 Starting Column
 1 The Great Henge
 
-// ── draw (16) ──
+// ── draw (17) ──
 1 Curious Obsession
 1 Spectral Sailor
 1 Dress Down
 1 Forecasting Fortune Teller
+1 The Goose Mother
 1 Wan Shi Tong, Librarian
 1 Witch's Mark
 1 Bitter Work
@@ -45,6 +45,7 @@
 1 Abrade
 1 Agatha's Soul Cauldron
 1 Cankerbloom
+1 Kenrith's Transformation
 1 Origin of Metalbending
 1 Planar Incision
 1 Scavenging Ooze
@@ -53,7 +54,6 @@
 1 Reclamation Sage
 1 Earth Rumble
 1 Zariel, Archduke of Avernus
-1 Heated Argument
 1 Loot, the Pathfinder
 
 // ── board_wipe (2) ──

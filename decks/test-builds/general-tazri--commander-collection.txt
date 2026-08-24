@@ -1,26 +1,20 @@
 // General Tazri — COMMANDER
 // strategy=tribal themes=tribal tribal=ally
-// total=99 lands=38 avgCMC=3.02 gold=28 counters=0
-// categories: ramp=22 utility=11 removal=10 draw=7 protection=3 win_condition=5 board_wipe=3 land=38
+// total=99 lands=38 avgCMC=3.15 gold=34 counters=0
+// categories: ramp=17 utility=11 removal=10 draw=9 protection=3 win_condition=8 board_wipe=3 land=38
 
 1 General Tazri *CMDR*
 
-// ── ramp (22) ──
+// ── ramp (17) ──
 1 Arcane Signet
 1 Bloom Tender
-1 Boros Signet
 1 Farseek
 1 Great Divide Guide
 1 Hermitic Herbalist
-1 Izzet Signet
 1 Mind Stone
 1 Rampant Growth
-1 Talisman of Conviction
 1 Talisman of Creativity
-1 Talisman of Curiosity
 1 Talisman of Indulgence
-1 Talisman of Progress
-1 Talisman of Resilience
 1 Chromatic Lantern
 1 Cultivate
 1 Helga, Skittish Seer
@@ -28,11 +22,14 @@
 1 Noggle Robber
 1 Jegantha, the Wellspring
 1 Omnath, Locus of All
+1 The Gitrog Monster
 
-// ── draw (7) ──
+// ── draw (9) ──
+1 Expressive Iteration
 1 South Pole Voyager
 1 Kutzil, Malamet Exemplar
 1 Risen Reef
+1 Sokka, Lateral Strategist
 1 Tannuk, Memorial Ensign
 1 Zurgo Stormrender
 1 Sokka's Haiku
@@ -46,9 +43,9 @@
 1 Agatha's Soul Cauldron
 1 Boros Charm
 1 Rakdos Charm
+1 Abzan Charm
 1 Mortify
 1 Temur Charm
-1 Heated Argument
 
 // ── board_wipe (3) ──
 1 Golgari Charm
@@ -60,10 +57,13 @@
 1 Wild Unraveling
 1 Hakoda, Selfless Commander
 
-// ── win_condition (5) ──
+// ── win_condition (8) ──
+1 Zulaport Cutthroat
 1 Sokka, Tenacious Tactician
+1 Chromanticore
 1 Fusion Elemental
 1 Jodah, the Unifier
+1 Katara, Water Tribe's Hope
 1 Maelstrom Archangel
 1 Progenitus
 

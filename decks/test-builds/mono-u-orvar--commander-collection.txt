@@ -1,7 +1,7 @@
 // Orvar, the All-Form — COMMANDER
 // strategy=spellslinger themes=tokens,artifacts,draw,control,ramp,spellslinger,flying,equipment,counters tribal=-
-// total=99 lands=39 avgCMC=2.47 gold=0 counters=0
-// categories: ramp=12 draw=21 utility=3 protection=7 removal=14 win_condition=1 board_wipe=2 land=39
+// total=99 lands=39 avgCMC=2.63 gold=0 counters=0
+// categories: ramp=12 draw=22 utility=5 protection=4 removal=14 win_condition=1 board_wipe=2 land=39
 
 1 Orvar, the All-Form *CMDR*
 
@@ -19,20 +19,20 @@
 1 Hedron Archive
 1 Solemn Simulacrum
 
-// ── draw (21) ──
-1 Brainstorm
+// ── draw (22) ──
+1 Case of the Filched Falcon
 1 Curious Obsession
 1 Enter the Enigma
 1 Fleeting Distraction
-1 Opt
-1 Ponder
-1 Preordain
 1 Spectral Sailor
 1 Dress Down
 1 Forecasting Fortune Teller
+1 Knowledge Seeker
 1 Kaito, Cunning Infiltrator
+1 Monument to Endurance
 1 The Mechanist, Aerial Artisan
 1 Archmage Emeritus
+1 Clinquant Skymage
 1 The Legend of Kuruk // Avatar Kuruk
 1 Arcane Epiphany
 1 Archmage of Runes
@@ -40,6 +40,7 @@
 1 Orysa, Tide Choreographer
 1 Sokka's Haiku
 1 Stockman, Mad Fly-entist
+1 Chronicle of Victory
 1 Shark Typhoon
 
 // ── removal (14) ──
@@ -62,21 +63,20 @@
 1 Bag of Holding
 1 Aetherize
 
-// ── protection (7) ──
+// ── protection (4) ──
 1 Dive Down
 1 Counterspell
-1 Lightning Greaves
-1 Mana Drain
-1 Negate
 1 Swiftfoot Boots
 1 Fierce Guardianship
 
 // ── win_condition (1) ──
 1 Murmuring Mystic
 
-// ── utility (3) ──
+// ── utility (5) ──
 1 Mystical Tutor
+1 Spell Pierce
 1 Hidden Strings
+1 Simulacrum Synthesizer
 1 Micromancer
 
 // ── land (39) ──

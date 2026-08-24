@@ -1,53 +1,54 @@
 // Ghalta, Primal Hunger — COMMANDER
 // strategy=aggro themes=draw,artifacts,ramp,aggro,tokens,equipment,enchantments,counters tribal=-
-// total=99 lands=41 avgCMC=2.71 gold=0 counters=0
-// categories: ramp=24 draw=11 removal=7 win_condition=3 protection=5 utility=6 land=41 board_wipe=2
+// total=99 lands=41 avgCMC=2.6 gold=0 counters=0
+// categories: ramp=21 draw=15 removal=7 win_condition=2 protection=6 utility=5 board_wipe=2 land=41
 
 1 Ghalta, Primal Hunger *CMDR*
 
-// ── ramp (24) ──
+// ── ramp (21) ──
 1 Elvish Mystic
 1 Llanowar Elves
 1 Open the Gates
-1 Arcane Signet
-1 Coldsteel Heart
 1 Druid Class
 1 Esper Origins // Summon: Esper Maduin
 1 Farseek
 1 Goldvein Pick
 1 Mind Stone
 1 Ornithopter of Paradise
-1 Paradise Druid
 1 Rampant Growth
 1 Sidequest: Raise a Chocobo // Black Chocobo
 1 Unlucky Cabbage Merchant
-1 Chromatic Lantern
 1 Cultivate
 1 Dauntless Scrapbot
 1 Loot, Exuberant Explorer
 1 Outcaster Trailblazer
 1 Starting Column
+1 The Cabbage Merchant
 1 Hedron Archive
 1 Solemn Simulacrum
 1 The Great Henge
 
-// ── draw (11) ──
+// ── draw (15) ──
+1 Mishra's Bauble
 1 Audacity
 1 Oracle's Restoration
 1 Trash the Town
+1 Vexing Bauble
+1 Leaf-Crowned Visionary
 1 Up the Beanstalk
 1 Colossal Majesty
 1 Garruk's Uprising
 1 Monument to Endurance
+1 Surrak, Elusive Hunter
 1 Tribute to the World Tree
-1 Harmonize
 1 Return of the Wildspeaker
+1 Chronicle of Victory
 1 Earthshaker Dreadmaw
 
 // ── removal (7) ──
 1 Bushwhack
+1 Soul-Guide Lantern
 1 Cankerbloom
-1 Kenrith's Transformation
 1 Origin of Metalbending
 1 Scavenging Ooze
 1 Beast Within
@@ -57,22 +58,21 @@
 1 Bag of Holding
 1 Night of the Sweets' Revenge
 
-// ── protection (5) ──
+// ── protection (6) ──
+1 Silkguard
 1 Frenzied Baloth
 1 Heroic Intervention
 1 Lightning Greaves
 1 Swiftfoot Boots
 1 Tyvar, the Pummeler
 
-// ── win_condition (3) ──
+// ── win_condition (2) ──
 1 Gigantosaurus
-1 Quakestrider Ceratops
 1 Ghalta, Stampede Tyrant
 
-// ── utility (6) ──
+// ── utility (5) ──
 1 Slumbering Trudge
 1 Badgermole Cub
-1 Boon of Boseiju
 1 Emerald Medallion
 1 Eternal Witness
 1 Mossborn Hydra

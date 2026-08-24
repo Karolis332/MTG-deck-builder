@@ -1,82 +1,84 @@
 // Thrasios, Triton Hero + Tymna the Weaver — COMMANDER
 // strategy=aggro themes=control,ramp,draw,artifacts,tokens,aggro,enchantments,sacrifice tribal=-
-// total=99 lands=39 avgCMC=2.28 gold=2 counters=0
-// categories: protection=5 utility=9 ramp=29 draw=11 removal=4 board_wipe=2 land=39
+// total=99 lands=39 avgCMC=2.03 gold=5 counters=0
+// categories: protection=3 utility=10 ramp=21 draw=14 removal=8 board_wipe=2 win_condition=2 land=39
 
 1 Thrasios, Triton Hero *CMDR*
 1 Tymna the Weaver *CMDR* (requested partner — see note)
 
-// ── ramp (29) ──
+// ── ramp (21) ──
 1 Mox Amber
 1 An Offer You Can't Refuse
+1 Avacyn's Pilgrim
 1 Crop Rotation
 1 Culling the Weak
 1 Dark Ritual
+1 Elvish Mystic
 1 Llanowar Elves
 1 Arcane Signet
-1 Druid Class
-1 Gleaming Barrier
-1 Golgari Signet
-1 Hydro-Channeler
+1 Bloom Tender
+1 Deadly Dispute
 1 Mind Stone
-1 Simic Signet
-1 Talisman of Curiosity
-1 Talisman of Progress
-1 Talisman of Resilience
-1 Talisman of Unity
 1 The Soul Stone
-1 Unlucky Cabbage Merchant
 1 Zimone, Quandrix Prodigy
-1 Dauntless Scrapbot
 1 Enduring Vitality
 1 Imprisoned in the Moon
-1 Loot, Exuberant Explorer
 1 Starting Column
 1 The Cabbage Merchant
 1 Tundra Tank
-1 Azula, On the Hunt
-1 Firemind Vessel
+1 Culling Ritual
+1 Hedron Archive
 
-// ── draw (11) ──
+// ── draw (14) ──
 1 Stiltzkin, Moogle Merchant
 1 Veil of Summer
+1 Vexing Bauble
+1 Village Rites
 1 Worldly Tutor
-1 Long River's Pull
+1 Night's Whisper
 1 Splitskin Doll
+1 Sram, Senior Edificer
 1 Wan Shi Tong, Librarian
+1 Garruk's Uprising
+1 Kutzil, Malamet Exemplar
 1 Phyrexian Arena
 1 Ad Nauseam
-1 Orysa, Tide Choreographer
 1 Sokka's Haiku
-1 Stockman, Mad Fly-entist
 
-// ── removal (4) ──
+// ── removal (8) ──
 1 Bushwhack
+1 Ephemerate
+1 Path to Exile
 1 Agatha's Soul Cauldron
 1 Cankerbloom
 1 Feed the Swarm
+1 Fracture
+1 Go for the Throat
 
 // ── board_wipe (2) ──
+1 Bag of Holding
 1 Golgari Charm
-1 The Rise of Sozin // Fire Lord Sozin
 
-// ── protection (5) ──
-1 Chase Inspiration
-1 Overprotect
+// ── protection (3) ──
 1 Wild Unraveling
 1 Fierce Guardianship
-1 Brush Off
+1 Teferi's Protection
 
-// ── utility (9) ──
+// ── win_condition (2) ──
+1 Exsanguinate
+1 Zulaport Cutthroat
+
+// ── utility (10) ──
 1 Enlightened Tutor
 1 Mockingbird
-1 Mystical Tutor
 1 Training Grounds
 1 Ajani's Pridemate
 1 Badgermole Cub
+1 Brain Freeze
 1 Voice of Victory
 1 Eternal Witness
 1 Formidable Speaker
+1 Valley Floodcaller
 
 // ── land (39) ──
 1 Baldur's Gate
@@ -97,7 +99,7 @@
 1 Godless Shrine
 1 Hallowed Fountain
 1 Hinterland Harbor
-3 Island
+2 Island
 1 Misty Rainforest
 1 Multiversal Passage
 1 Overgrown Tomb
@@ -105,7 +107,7 @@
 1 Plaza of Harmony
 1 Rumble Arena
 1 Scalding Tarn
-1 Swamp
+2 Swamp
 1 Temple Garden
 1 Terramorphic Expanse
 1 Thran Portal
