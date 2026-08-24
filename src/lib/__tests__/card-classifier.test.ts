@@ -112,6 +112,158 @@ describe('classifyCard', () => {
     expect(cats).toContain('draw');
     expect(cats).toContain('synergy');
   });
+
+  // Review 2026-08-23 C4 — tutors had no category at all (fell to 'utility'
+  // or, worse, were miscounted as 'draw' via name allowlists).
+  describe('tutor classification', () => {
+    it('classifies a generic library tutor as tutor', () => {
+      const cats = classifyCard(
+        'Demonic Tutor',
+        'Search your library for a card, put that card into your hand, then shuffle.',
+        'Sorcery',
+        2
+      );
+      expect(cats).toContain('tutor');
+    });
+
+    it('classifies Vampiric Tutor as tutor', () => {
+      const cats = classifyCard(
+        'Vampiric Tutor',
+        'Search your library for a card and put that card on top of your library. You lose 2 life.',
+        'Instant',
+        1
+      );
+      expect(cats).toContain('tutor');
+    });
+
+    it('classifies a typed library tutor (Mystical Tutor) as tutor', () => {
+      const cats = classifyCard(
+        'Mystical Tutor',
+        'Search your library for an instant or sorcery card, reveal it, then shuffle and put that card on top of your library.',
+        'Instant',
+        1
+      );
+      expect(cats).toContain('tutor');
+    });
+
+    it('classifies named tutors that do not match the search-clause pattern (Bring to Light)', () => {
+      const cats = classifyCard(
+        'Bring to Light',
+        'When you cast this spell, choose a card type. Reveal cards from the top of your library until you reveal a card of the chosen type. You may cast that card without paying its mana cost. Put the rest on the bottom of your library in a random order.',
+        'Sorcery',
+        6
+      );
+      expect(cats).toContain('tutor');
+    });
+
+    it('does NOT classify land-fetch (Cultivate) as tutor — it stays ramp', () => {
+      const cats = classifyCard(
+        'Cultivate',
+        'Search your library for up to two basic land cards, reveal those cards, and put one onto the battlefield tapped and the other into your hand. Then shuffle.',
+        'Sorcery',
+        3
+      );
+      expect(cats).toContain('ramp');
+      expect(cats).not.toContain('tutor');
+    });
+
+    it('does NOT classify land-fetch (Farseek) as tutor — it stays ramp', () => {
+      const cats = classifyCard(
+        'Farseek',
+        'Search your library for a nonbasic land card that has a basic land type, put it onto the battlefield tapped, then shuffle.',
+        'Sorcery',
+        2
+      );
+      expect(cats).toContain('ramp');
+      expect(cats).not.toContain('tutor');
+    });
+
+    it('does NOT classify land-fetch (Nature\'s Lore) as tutor — it stays ramp', () => {
+      const cats = classifyCard(
+        "Nature's Lore",
+        'Search your library for a Forest card, put it onto the battlefield, then shuffle.',
+        'Sorcery',
+        2
+      );
+      expect(cats).toContain('ramp');
+      expect(cats).not.toContain('tutor');
+    });
+  });
+
+  // Review 2026-08-23 C2 — classifier regexes matched token/emblem grant text
+  // (in quotes) and parenthetical reminder text, not just the card's own
+  // abilities.
+  describe('C2 regression: quoted/reminder text is not the card\'s own ability', () => {
+    it('Bag of Holding is not a board wipe (quoted "return all" is its own recall ability, not a wipe object class)', () => {
+      const cats = classifyCard(
+        'Bag of Holding',
+        "Whenever you discard a card, exile that card from your graveyard.\n{2}, {T}: Draw a card, then discard a card.\n{4}, {T}, Sacrifice this artifact: Return all cards exiled with this artifact to their owner's hand.",
+        'Artifact',
+        2
+      );
+      expect(cats).not.toContain('board_wipe');
+    });
+
+    it('Duskshell Crawler is not a board wipe (trample reminder text mentions damage)', () => {
+      const cats = classifyCard(
+        'Duskshell Crawler',
+        "When this creature enters, put a +1/+1 counter on target creature.\nEach creature you control with a +1/+1 counter on it has trample. (It can deal excess combat damage to the player or planeswalker it's attacking.)",
+        'Creature — Insect',
+        3
+      );
+      expect(cats).not.toContain('board_wipe');
+    });
+
+    it('Zurzoth, Chaos Rider is not removal (quoted Devil token grant mentions damage)', () => {
+      const cats = classifyCard(
+        'Zurzoth, Chaos Rider',
+        'Whenever an opponent draws their first card each turn, if it\'s not their turn, you create a 1/1 red Devil creature token with "When this token dies, it deals 1 damage to any target."\nWhenever one or more Devils you control attack one or more players, you and those players each draw a card, then discard a card at random.',
+        'Legendary Creature — Devil',
+        3
+      );
+      expect(cats).not.toContain('removal');
+    });
+
+    it('Weapons Manufacturing is not removal (quoted token grant mentions damage)', () => {
+      const cats = classifyCard(
+        'Weapons Manufacturing',
+        'Whenever a nontoken artifact you control enters, create a colorless artifact token named Munitions with "When this token leaves the battlefield, it deals 2 damage to any target."',
+        'Enchantment',
+        3
+      );
+      expect(cats).not.toContain('removal');
+    });
+
+    it('Aetherize is still a board wipe (real "return all attacking creatures" effect)', () => {
+      const cats = classifyCard(
+        'Aetherize',
+        "Return all attacking creatures to their owner's hand.",
+        'Instant',
+        3
+      );
+      expect(cats).toContain('board_wipe');
+    });
+
+    it('Cyclonic Rift is still a board wipe (name-allowlisted)', () => {
+      const cats = classifyCard(
+        'Cyclonic Rift',
+        "Return target nonland permanent you don't control to its owner's hand.\nOverload {6}{U} (You may cast this spell for its overload cost. If you do, change \"target\" in its text to \"each.\")",
+        'Instant',
+        2
+      );
+      expect(cats).toContain('board_wipe');
+    });
+
+    it('Jin-Gitaxias // The Great Synthesis is still a board wipe (saga chapter II)', () => {
+      const cats = classifyCard(
+        'Jin-Gitaxias // The Great Synthesis',
+        "Ward {2}\nWhenever you cast a noncreature spell with mana value 3 or greater, draw a card.\n{3}{U}: Exile Jin-Gitaxias, then return it to the battlefield transformed under its owner's control. Activate only as a sorcery and only if you have seven or more cards in hand.\n//\n(As this Saga enters and after your draw step, add a lore counter.)\nI — Draw cards equal to the number of cards in your hand. You have no maximum hand size for as long as you control this Saga.\nII — Return all non-Phyrexian creatures to their owners' hands.\nIII — You may cast any number of spells from your hand without paying their mana costs. Exile this Saga, then return it to the battlefield (front face up).",
+        'Legendary Creature — Phyrexian Praetor // Enchantment — Saga',
+        5
+      );
+      expect(cats).toContain('board_wipe');
+    });
+  });
 });
 
 describe('getPrimaryCategory', () => {
@@ -172,6 +324,7 @@ describe('computeRatioHealth', () => {
       land: Array(20).fill({ name: 'x' }) as ClassifiedCard[],
       ramp: [],
       draw: [],
+      tutor: [],
       removal: [],
       board_wipe: [],
       protection: [],
@@ -191,6 +344,7 @@ describe('computeRatioHealth', () => {
       land: Array(38).fill({ name: 'x' }) as ClassifiedCard[],
       ramp: Array(10).fill({ name: 'x' }) as ClassifiedCard[],
       draw: Array(10).fill({ name: 'x' }) as ClassifiedCard[],
+      tutor: [],
       removal: Array(10).fill({ name: 'x' }) as ClassifiedCard[],
       board_wipe: Array(3).fill({ name: 'x' }) as ClassifiedCard[],
       protection: Array(4).fill({ name: 'x' }) as ClassifiedCard[],

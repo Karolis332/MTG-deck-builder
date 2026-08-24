@@ -341,7 +341,10 @@ export const STAPLE_RAMP = new Set([
 export const STAPLE_DRAW = new Set([
   // Cantrips
   'brainstorm', 'ponder', 'preordain', 'opt', 'consider', 'serum visions',
-  'gitaxian probe', 'crop rotation', 'worldly tutor', 'mystical tutor',
+  'gitaxian probe',
+  // 'crop rotation'/'worldly tutor'/'mystical tutor' removed (review
+  // 2026-08-23 C4) — they're tutors, not draw; see TUTOR_NAMES/
+  // TUTOR_SEARCH_CLAUSE in card-classifier.ts, which already catches them.
   'sleight of hand', 'peek',
   // Draw-2 / 3
   'night\'s whisper', 'sign in blood', 'read the bones', 'painful truths',
@@ -472,6 +475,7 @@ export function getPayoffNamesForProfile(
 export interface RoleQuotas {
   ramp: number;
   draw: number;
+  tutor: number;
   removal: number;
   board_wipe: number;
   protection: number;
@@ -489,6 +493,7 @@ export function roleCapsFor(quotas: RoleQuotas): Record<string, number> {
   return {
     ramp: quotas.ramp + 4,
     draw: quotas.draw + 5,
+    tutor: quotas.tutor + 2,
     removal: quotas.removal + 3,
     board_wipe: quotas.board_wipe + 1,
     protection: quotas.protection + 2,
@@ -506,6 +511,7 @@ export function getRoleQuotas(
   archetype: Archetype,
   nonLandTarget: number,
   commanderProfile: CommanderSynergyProfile | null,
+  powerLevel?: 'casual' | 'optimized' | 'cedh',
 ): RoleQuotas {
   const t = ARCHETYPE_TEMPLATES[archetype] || ARCHETYPE_TEMPLATES.midrange;
 
@@ -515,6 +521,16 @@ export function getRoleQuotas(
   const removalTarget = Math.round((t.removal.spot[0] + t.removal.spot[1]) / 2);
   const wipeTarget = Math.round((t.removal.wipes[0] + t.removal.wipes[1]) / 2);
   const counterTarget = Math.round((t.removal.counterspells[0] + t.removal.counterspells[1]) / 2);
+
+  // Tutor target: template's casual/low band by default (docs: ~2-3 casual /
+  // 5-8 optimized / 5-10 cEDH — review 2026-08-23 C4). powerLevel is never
+  // passed by the harness today (R4/C4), so every current build uses the low
+  // band — that's intentional, not a bug: it's still strictly better than the
+  // 0 tutors the dead synergyMinimums.tutors path shipped.
+  const tutorLowBand = Math.round((t.tutors[0] + t.tutors[1]) / 2);
+  let tutorTarget = tutorLowBand;
+  if (powerLevel === 'optimized') tutorTarget = Math.max(tutorLowBand, 6);
+  else if (powerLevel === 'cedh') tutorTarget = Math.max(tutorLowBand, 7);
 
   // Commander-provided draw/removal reduces external requirement
   const drawReduction = commanderProfile?.drawReduction ?? 0;
@@ -533,6 +549,7 @@ export function getRoleQuotas(
   return {
     ramp: Math.max(6, rampTarget),
     draw: Math.max(6, drawTarget - drawReduction),
+    tutor: Math.max(0, tutorTarget),
     removal: Math.max(4, removalTarget + counterTarget - removalReduction),
     board_wipe: Math.max(2, wipeTarget),
     protection: 3,
@@ -602,7 +619,7 @@ export function pickByRole(opts: PickByRoleOptions): PickByRoleResult {
   let totalPicked = 0;
 
   const roleFills: Record<string, number> = {
-    ramp: 0, draw: 0, removal: 0, board_wipe: 0,
+    ramp: 0, draw: 0, tutor: 0, removal: 0, board_wipe: 0,
     protection: 0, synergy_payoff: 0, win_condition: 0,
   };
 
@@ -625,6 +642,7 @@ export function pickByRole(opts: PickByRoleOptions): PickByRoleResult {
       if (isPayoff) roleFills.synergy_payoff += 1;
       if (cats.includes('ramp')) roleFills.ramp += 1;
       if (cats.includes('draw')) roleFills.draw += 1;
+      if (cats.includes('tutor')) roleFills.tutor += 1;
       if (cats.includes('removal')) roleFills.removal += 1;
       if (cats.includes('board_wipe')) roleFills.board_wipe += 1;
       if (cats.includes('protection')) roleFills.protection += 1;
@@ -707,6 +725,12 @@ export function pickByRole(opts: PickByRoleOptions): PickByRoleResult {
       describe: (c) => `card draw (role quota): ${c.card.name}`,
     },
     {
+      key: 'tutor',
+      roleLabel: 'tutor',
+      match: (c) => c.categories.has('tutor'),
+      describe: (c) => `tutor (role quota): ${c.card.name}`,
+    },
+    {
       key: 'removal',
       roleLabel: 'removal',
       match: (c) => c.categories.has('removal'),
@@ -775,6 +799,7 @@ export function pickByRole(opts: PickByRoleOptions): PickByRoleResult {
     }
     if (c.categories.has('ramp') && underCap('ramp')) return { accept: true, role: 'ramp', reason: `extra ramp: ${c.card.name}` };
     if (c.categories.has('draw') && underCap('draw')) return { accept: true, role: 'draw', reason: `extra draw: ${c.card.name}` };
+    if (c.categories.has('tutor') && underCap('tutor')) return { accept: true, role: 'tutor', reason: `extra tutor: ${c.card.name}` };
     if (c.categories.has('removal') && underCap('removal')) return { accept: true, role: 'removal', reason: `extra removal: ${c.card.name}` };
     if (c.categories.has('board_wipe') && underCap('board_wipe')) return { accept: true, role: 'board_wipe', reason: `extra wipe: ${c.card.name}` };
     if (c.categories.has('protection') && underCap('protection')) return { accept: true, role: 'protection', reason: `extra protection: ${c.card.name}` };
@@ -834,6 +859,7 @@ export function buildReasoningSummary(
   const rows: Array<[string, number, number]> = [
     ['ramp', roleGet(result, 'ramp'), quotas.ramp],
     ['draw', roleGet(result, 'draw'), quotas.draw],
+    ['tutor', roleGet(result, 'tutor'), quotas.tutor],
     ['removal', roleGet(result, 'removal'), quotas.removal],
     ['wipes', roleGet(result, 'board_wipe'), quotas.board_wipe],
     ['protection', roleGet(result, 'protection'), quotas.protection],

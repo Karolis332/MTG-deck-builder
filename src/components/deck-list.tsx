@@ -64,6 +64,7 @@ const TYPE_ORDER = [
 const ROLE_ORDER: CardCategory[] = [
   'ramp',
   'draw',
+  'tutor',
   'removal',
   'board_wipe',
   'protection',

@@ -66,7 +66,40 @@ export interface ArchetypeTemplate {
   protectedPatterns: string[];
   /** Card types that are anti-synergy for this archetype (e.g. Equipment in spellslinger) */
   discouragedTypes?: string[];
+  /**
+   * Tutor count band at casual power (docs: ~2-3 casual / 5-8 optimized /
+   * 5-10 cEDH — review 2026-08-23 C4). Scaled up by powerLevel in
+   * getRoleQuotas (deck-builder-constraints.ts); this is the default/low band
+   * used when powerLevel is absent, which is every current harness build.
+   */
+  tutors: [number, number];
 }
+
+/**
+ * `ArchetypeTemplate.synergyMinimums` keys that Step 4b (deck-builder-ai.ts,
+ * "Fill commander synergy minimums") cannot enforce because they have no
+ * entry in `SYNERGY_REQUIREMENTS_MAP` — the enforcement loop `continue`s past
+ * any key it doesn't recognize (review 2026-08-23 C4). Detecting most of
+ * these correctly needs a curated named-card list (ARCHETYPE_PAYOFFS-style)
+ * or a type/CMC signal, not 2-4 oracle-text substrings — wiring them with
+ * loose substrings risks the exact over-matching class of bug C2 exists to
+ * fix. Documented here so the regression test in
+ * deck-templates.test.ts fails loudly if a NEW unenforceable key is added
+ * without a conscious decision, instead of silently joining a growing pile
+ * of dead config.
+ *
+ * `tutors` is deliberately NOT in this list — combo's tutor minimum is now
+ * enforced via the dedicated `tutors: [min, max]` field above and
+ * `RoleQuotas.tutor` (deck-builder-constraints.ts), not this map.
+ */
+export const KNOWN_DEAD_SYNERGY_MINIMUMS = new Set<string>([
+  'haste_sources', 'pump_effects', 'cheap_interaction', 'counterspells',
+  'board_wipes', 'combo_pieces', 'protection', 'equipment_or_auras',
+  'tribe_members', 'lords', 'tribal_payoffs', 'reanimate_spells',
+  'self_mill', 'big_threats', 'instants_sorceries', 'spell_payoffs',
+  'cantrips', 'sac_outlets', 'death_triggers', 'token_producers',
+  'stax_pieces', 'mana_denial',
+]);
 
 export interface ColorAdjustment {
   colorCount: number;
@@ -164,6 +197,7 @@ export const ARCHETYPE_TEMPLATES: Record<Archetype, ArchetypeTemplate> = {
     protectedPatterns: [
       'sol ring', 'arcane signet', 'lightning greaves', 'swiftfoot boots',
     ],
+    tutors: [0, 2],
   },
 
   tempo: {
@@ -202,6 +236,7 @@ export const ARCHETYPE_TEMPLATES: Record<Archetype, ArchetypeTemplate> = {
       'sol ring', 'arcane signet', 'counterspell', 'swan song',
       'lightning greaves', 'cyclonic rift',
     ],
+    tutors: [1, 2],
   },
 
   midrange: {
@@ -239,6 +274,7 @@ export const ARCHETYPE_TEMPLATES: Record<Archetype, ArchetypeTemplate> = {
     protectedPatterns: [
       'sol ring', 'arcane signet', "commander's sphere",
     ],
+    tutors: [1, 3],
   },
 
   control: {
@@ -278,6 +314,7 @@ export const ARCHETYPE_TEMPLATES: Record<Archetype, ArchetypeTemplate> = {
       'rhystic study', 'mystic remora', 'smothering tithe',
     ],
     discouragedTypes: ['Equipment', 'Vehicle'],
+    tutors: [1, 3],
   },
 
   combo: {
@@ -311,12 +348,15 @@ export const ARCHETYPE_TEMPLATES: Record<Archetype, ArchetypeTemplate> = {
     manaCurve: { 1: 6, 2: 10, 3: 9, 4: 6, 5: 4, 6: 2, 7: 1 },
     avgCmc: [2.5, 3.0],
     winConditionSlots: [4, 10],
-    synergyMinimums: { 'tutors': 5, 'combo_pieces': 4, 'protection': 4 },
+    // 'tutors' removed (review 2026-08-23 C4) — enforced via the dedicated
+    // `tutors` field below / RoleQuotas.tutor instead of this dead-config path.
+    synergyMinimums: { 'combo_pieces': 4, 'protection': 4 },
     protectedPatterns: [
       'sol ring', 'arcane signet', 'counterspell', 'mystical tutor',
       'demonic tutor', 'vampiric tutor',
     ],
     discouragedTypes: ['Equipment', 'Vehicle'],
+    tutors: [4, 7],
   },
 
   voltron: {
@@ -355,6 +395,7 @@ export const ARCHETYPE_TEMPLATES: Record<Archetype, ArchetypeTemplate> = {
       'sol ring', 'arcane signet', 'lightning greaves', 'swiftfoot boots',
       "sword of feast and famine", 'sword of fire and ice',
     ],
+    tutors: [1, 3],
   },
 
   tribal: {
@@ -393,6 +434,7 @@ export const ARCHETYPE_TEMPLATES: Record<Archetype, ArchetypeTemplate> = {
       'sol ring', 'arcane signet', 'herald\'s horn', 'vanquisher\'s banner',
       'kindred discovery', 'coat of arms',
     ],
+    tutors: [1, 2],
   },
 
   reanimator: {
@@ -432,6 +474,7 @@ export const ARCHETYPE_TEMPLATES: Record<Archetype, ArchetypeTemplate> = {
       'entomb', 'buried alive',
     ],
     discouragedTypes: ['Equipment'],
+    tutors: [2, 4],
   },
 
   spellslinger: {
@@ -472,6 +515,7 @@ export const ARCHETYPE_TEMPLATES: Record<Archetype, ArchetypeTemplate> = {
       'storm-kiln artist', 'talrand, sky summoner', 'guttersnipe',
     ],
     discouragedTypes: ['Equipment', 'Vehicle'],
+    tutors: [1, 3],
   },
 
   aristocrats: {
@@ -512,6 +556,7 @@ export const ARCHETYPE_TEMPLATES: Record<Archetype, ArchetypeTemplate> = {
       'sol ring', 'arcane signet', 'blood artist', 'zulaport cutthroat',
       'viscera seer', 'ashnod\'s altar', 'phyrexian altar',
     ],
+    tutors: [1, 2],
   },
 
   stax: {
@@ -550,6 +595,7 @@ export const ARCHETYPE_TEMPLATES: Record<Archetype, ArchetypeTemplate> = {
       'sol ring', 'arcane signet', 'winter orb', 'static orb',
       'smothering tithe', 'rhystic study', 'rule of law',
     ],
+    tutors: [1, 3],
   },
 };
 

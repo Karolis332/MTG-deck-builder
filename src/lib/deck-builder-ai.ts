@@ -21,7 +21,7 @@ import {
 } from './deck-builder-constraints';
 import { analyzeCommanderForBuild } from './commander-analysis';
 import type { ArsenalCard } from './commander-analysis';
-import { classifyCard, isDrawEngine } from './card-classifier';
+import { classifyCard, isDrawEngine, isBoardWipe } from './card-classifier';
 import { parseBuildHints } from './build-hints';
 import { auditDeck } from './deck-auditor';
 import type { DeckHealth } from './deck-auditor';
@@ -88,7 +88,7 @@ export function isDeadLandFetch(oracleText: string | null | undefined, deckColor
 // ── Commander synergy text patterns for card scoring ────────────────────────
 // Maps synergy categories from commander-synergy.ts to oracle text substrings
 
-const SYNERGY_REQUIREMENTS_MAP = {
+export const SYNERGY_REQUIREMENTS_MAP = {
   exile_cast: ['exile the top', 'you may play', 'you may cast', 'from exile'],
   exile_enter: ['exile', 'return', 'to the battlefield', 'flicker', 'blink'],
   spell_cast: ['instant', 'sorcery', 'magecraft', 'prowess'],
@@ -1553,6 +1553,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
     (resolvedStrategy as Archetype) || 'midrange',
     nonLandTarget,
     commanderProfile,
+    options.powerLevel,
   );
   const roleCaps = roleCapsFor(quotas);
   const preFillRoleFills: Record<string, number> = {};
@@ -1715,6 +1716,9 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
       if (wipesAdded >= wipeNeed) break;
       if (totalPicked >= nonLandTarget) break;
       if (pickedNames.has(wipe.name)) continue;
+      // Validate against the same classifier the quota accountant uses (C2)
+      // — the SQL LIKE clauses above are a broad net, not the source of truth.
+      if (!isBoardWipe(wipe.name, wipe.oracle_text || '')) continue;
       const qty = getMaxQty(wipe);
       if (qty <= 0) continue;
       picked.push({ card: wipe, quantity: 1, board: 'main' });

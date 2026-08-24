@@ -8,6 +8,7 @@ export type CardCategory =
   | 'land'
   | 'ramp'
   | 'draw'
+  | 'tutor'
   | 'removal'
   | 'board_wipe'
   | 'protection'
@@ -182,8 +183,29 @@ const DRAW_NAMES = new Set([
   'harmonize', 'rishkar\'s expertise', 'beast whisperer', 'guardian project',
   'the great henge', 'return of the wildspeaker', 'garruk\'s uprising',
   'up the beanstalk', 'season of growth', 'inspiring call', 'genesis wave',
-  'many partings', 'worldly tutor', 'bonders\' enclave',
+  'many partings', 'bonders\' enclave',
   'leaves from the vine', 'cache grab',
+  // 'worldly tutor' removed (review 2026-08-23 C4) — it's a tutor, not draw;
+  // see TUTOR_NAMES/TUTOR_SEARCH_CLAUSE below, which already catches it via
+  // its "search your library for a creature card" text.
+]);
+
+// Tutors: effects that find a specific card from the library. Kept separate
+// from 'draw' (a tutor doesn't refill your hand size, it finds a plan piece)
+// per review 2026-08-23 C4 — previously unclassified (fell to 'utility'),
+// which meant the deck-builder had no lever to guarantee any.
+//
+// Land-fetch (Cultivate, Farseek, Nature's Lore, Three Visits, ...) is RAMP,
+// not a tutor — the same "search your library for ... card" phrasing covers
+// both, so the clause between "for" and "card(s)" is checked for land/basic-
+// type words and excluded, mirroring the clause parser in deck-builder-ai.ts's
+// isDeadLandFetch.
+const TUTOR_SEARCH_CLAUSE = /search your library for (?:up to \w+ )?(?:an? )?([^.\n]*?) cards?\b/i;
+const LAND_FETCH_CLAUSE = /\b(?:land|plains|island|swamp|mountain|forest)\b/i;
+
+const TUTOR_NAMES = new Set([
+  'gamble', 'intuition', 'gifts ungiven', 'entomb', 'birthing pod',
+  'eldritch evolution', 'bring to light',
 ]);
 
 const REMOVAL_PATTERNS = [
@@ -214,10 +236,17 @@ const REMOVAL_NAMES = new Set([
 const BOARD_WIPE_PATTERNS = [
   /destroy all (?:creatures|permanents|nonland|artifacts|enchantments)/i,
   /exile all (?:creatures|permanents|nonland)/i,
-  /each (?:creature|player|opponent) .* deals? .* damage/i,
+  // Bounded window + an explicit damage amount — the unbounded ".* .*" was
+  // matching reminder text and unrelated triggers that happen to say "each
+  // ... deals ... damage" without being a symmetric wipe (review 2026-08-23 C2).
+  /each (?:creature|player|opponent)[^.]{0,40}deals? \d+ damage/i,
   /deals? \d+ damage to each creature/i,
   /all creatures get [+-]\d+\/[+-]\d+ until/i,
-  /return all .* to (?:their|its) owner/i,
+  // Requires an actual battlefield object class after "return all" — was
+  // matching Bag of Holding's "Return all cards exiled with this artifact to
+  // their owner's hand" (its own recall ability, not a wipe). Still catches
+  // Aetherize and Jin-Gitaxias // The Great Synthesis chapter II.
+  /return all (?:\w+ )*(?:attacking |blocking |nonland |non-\w+ )?(?:creatures|permanents|artifacts|enchantments|nonland permanents)\b[^.]*to (?:their|its) (?:owner's|owners') hands?/i,
 ];
 
 const BOARD_WIPE_NAMES = new Set([
@@ -246,6 +275,17 @@ const PROTECTION_NAMES = new Set([
 
 // ── Classification logic ──────────────────────────────────────────────────
 
+// Abilities the CARD ITSELF has, for REMOVAL/BOARD_WIPE matching only: drop
+// granted-ability text in quotes (token/emblem grants) and parenthetical
+// reminder text, so those patterns can't fire on text a card merely quotes
+// or explains (Zurzoth's Devil token, Chandra's emblem, Bag of Holding's
+// reminder text — review 2026-08-23 C2). isDrawEngine legitimately reads
+// granted text — a permanent whose triggered ability draws cards is still a
+// draw engine — so it keeps the raw oracle text and does not use this.
+function ownAbilities(oracleText: string): string {
+  return (oracleText || '').replace(/"[^"]*"/g, ' ').replace(/\([^)]*\)/g, ' ');
+}
+
 function matchesPatterns(text: string, patterns: RegExp[]): boolean {
   return patterns.some(p => p.test(text));
 }
@@ -264,6 +304,18 @@ function isDraw(name: string, oracleText: string, typeLine: string): boolean {
   if (isLand(typeLine)) return false;
   if (DRAW_NAMES.has(name.toLowerCase())) return true;
   return matchesPatterns(oracleText, DRAW_PATTERNS);
+}
+
+function isTutor(name: string, oracleText: string, typeLine: string): boolean {
+  if (isLand(typeLine)) return false;
+  if (TUTOR_NAMES.has(name.toLowerCase())) return true;
+  const m = (oracleText || '').match(TUTOR_SEARCH_CLAUSE);
+  if (!m) return false;
+  // Land-fetch is ramp, not a tutor — Cultivate/Farseek/Nature's Lore/Three
+  // Visits already resolve via RAMP_NAMES/RAMP_PATTERNS above; this only
+  // stops the tutor tag from stacking on top of them.
+  if (LAND_FETCH_CLAUSE.test(m[1])) return false;
+  return true;
 }
 
 // Repeatable card-advantage engines: permanents (or activated abilities) that
@@ -303,14 +355,19 @@ export function isDrawEngine(name: string, oracleText: string, typeLine: string)
 function isRemoval(name: string, oracleText: string, typeLine: string): boolean {
   if (isLand(typeLine)) return false;
   if (REMOVAL_NAMES.has(name.toLowerCase())) return true;
+  const own = ownAbilities(oracleText);
   // Check it's targeted, not board wipe
-  if (matchesPatterns(oracleText, BOARD_WIPE_PATTERNS)) return false;
-  return matchesPatterns(oracleText, REMOVAL_PATTERNS);
+  if (matchesPatterns(own, BOARD_WIPE_PATTERNS)) return false;
+  return matchesPatterns(own, REMOVAL_PATTERNS);
 }
 
-function isBoardWipe(name: string, oracleText: string): boolean {
+/** Exported so deck-builder-ai.ts's board-wipe backfill can validate SQL-
+ * fetched candidates against the same source of truth the quota accountant
+ * uses, instead of trusting a second, independent LIKE-clause query
+ * (review 2026-08-23 C2 — "two sources of truth, one wrong"). */
+export function isBoardWipe(name: string, oracleText: string): boolean {
   if (BOARD_WIPE_NAMES.has(name.toLowerCase())) return true;
-  return matchesPatterns(oracleText, BOARD_WIPE_PATTERNS);
+  return matchesPatterns(ownAbilities(oracleText), BOARD_WIPE_PATTERNS);
 }
 
 function isProtection(name: string, oracleText: string, typeLine: string): boolean {
@@ -388,6 +445,7 @@ export function classifyCard(
 
   if (isRamp(name, oracleText, typeLine)) categories.push('ramp');
   if (isDraw(name, oracleText, typeLine)) categories.push('draw');
+  if (isTutor(name, oracleText, typeLine)) categories.push('tutor');
   if (isBoardWipe(name, oracleText)) categories.push('board_wipe');
   else if (isRemoval(name, oracleText, typeLine)) categories.push('removal');
   if (isProtection(name, oracleText, typeLine)) categories.push('protection');
@@ -403,11 +461,11 @@ export function classifyCard(
 
 /**
  * Determine the primary category for display purposes.
- * Priority: board_wipe > removal > ramp > draw > protection > synergy > win_condition > utility
+ * Priority: board_wipe > removal > ramp > draw > tutor > protection > synergy > win_condition > utility
  */
 export function getPrimaryCategory(categories: CardCategory[]): CardCategory {
   const priority: CardCategory[] = [
-    'land', 'board_wipe', 'removal', 'ramp', 'draw',
+    'land', 'board_wipe', 'removal', 'ramp', 'draw', 'tutor',
     'protection', 'synergy', 'win_condition', 'utility',
   ];
   for (const cat of priority) {
@@ -422,6 +480,7 @@ export const CATEGORY_LABELS: Record<CardCategory, string> = {
   land: 'Lands',
   ramp: 'Ramp',
   draw: 'Card Draw',
+  tutor: 'Tutors',
   removal: 'Removal',
   board_wipe: 'Board Wipes',
   protection: 'Protection',
@@ -434,6 +493,7 @@ export const CATEGORY_COLORS: Record<CardCategory, string> = {
   land: 'bg-emerald-900/40 text-emerald-300 border-emerald-700/50',
   ramp: 'bg-green-900/40 text-green-300 border-green-700/50',
   draw: 'bg-blue-900/40 text-blue-300 border-blue-700/50',
+  tutor: 'bg-fuchsia-900/40 text-fuchsia-300 border-fuchsia-700/50',
   removal: 'bg-red-900/40 text-red-300 border-red-700/50',
   board_wipe: 'bg-orange-900/40 text-orange-300 border-orange-700/50',
   protection: 'bg-cyan-900/40 text-cyan-300 border-cyan-700/50',
@@ -446,6 +506,7 @@ export const CATEGORY_BAR_COLORS: Record<CardCategory, string> = {
   land: 'bg-emerald-500',
   ramp: 'bg-green-500',
   draw: 'bg-blue-500',
+  tutor: 'bg-fuchsia-500',
   removal: 'bg-red-500',
   board_wipe: 'bg-orange-500',
   protection: 'bg-cyan-500',

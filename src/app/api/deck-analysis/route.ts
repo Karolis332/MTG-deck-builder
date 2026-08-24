@@ -101,6 +101,7 @@ export async function GET(request: NextRequest) {
     land: [],
     ramp: [],
     draw: [],
+    tutor: [],
     removal: [],
     board_wipe: [],
     protection: [],
