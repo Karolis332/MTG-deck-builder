@@ -4,7 +4,7 @@
   "commander": "Vivi Ornitier",
   "format": "commander",
   "ok": true,
-  "elapsedMs": 47436,
+  "elapsedMs": 42120,
   "strategy": "spellslinger",
   "themes": [
    "spellslinger",
@@ -982,7 +982,7 @@
   "commander": "Ramos, Dragon Engine",
   "format": "commander",
   "ok": true,
-  "elapsedMs": 63062,
+  "elapsedMs": 54058,
   "strategy": "midrange",
   "themes": [
    "artifacts",
@@ -2142,7 +2142,7 @@
   "commander": "Magus Lucea Kane",
   "format": "commander",
   "ok": true,
-  "elapsedMs": 57685,
+  "elapsedMs": 72294,
   "strategy": "spellslinger",
   "themes": [
    "counters",
@@ -3210,7 +3210,7 @@
   "partner": "Tymna the Weaver",
   "format": "commander",
   "ok": true,
-  "elapsedMs": 95114,
+  "elapsedMs": 100462,
   "strategy": "aggro",
   "themes": [
    "control",
@@ -4348,7 +4348,7 @@
   "commander": "Heliod, Sun-Crowned",
   "format": "commander",
   "ok": true,
-  "elapsedMs": 45560,
+  "elapsedMs": 44481,
   "strategy": "midrange",
   "themes": [
    "enchantments",
@@ -5237,7 +5237,7 @@
   "commander": "Orvar, the All-Form",
   "format": "commander",
   "ok": true,
-  "elapsedMs": 49019,
+  "elapsedMs": 40720,
   "strategy": "spellslinger",
   "themes": [
    "tokens",
@@ -6132,7 +6132,7 @@
   "commander": "Sheoldred, the Apocalypse",
   "format": "commander",
   "ok": true,
-  "elapsedMs": 44362,
+  "elapsedMs": 51130,
   "strategy": "control",
   "themes": [
    "ramp",
@@ -7002,7 +7002,7 @@
   "commander": "Krenko, Mob Boss",
   "format": "commander",
   "ok": true,
-  "elapsedMs": 43113,
+  "elapsedMs": 46112,
   "strategy": "tribal",
   "themes": [
    "tribal"
@@ -7880,7 +7880,7 @@
   "commander": "Ghalta, Primal Hunger",
   "format": "commander",
   "ok": true,
-  "elapsedMs": 40325,
+  "elapsedMs": 46080,
   "strategy": "aggro",
   "themes": [
    "draw",
@@ -8734,7 +8734,7 @@
   "commander": "Meren of Clan Nel Toth",
   "format": "commander",
   "ok": true,
-  "elapsedMs": 54244,
+  "elapsedMs": 51377,
   "strategy": "aristocrats",
   "themes": [
    "sacrifice",
@@ -9718,7 +9718,7 @@
   "commander": "General Tazri",
   "format": "commander",
   "ok": true,
-  "elapsedMs": 57026,
+  "elapsedMs": 66314,
   "strategy": "tribal",
   "themes": [
    "tribal"

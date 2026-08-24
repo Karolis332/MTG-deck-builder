@@ -1,11 +1,11 @@
 // Orvar, the All-Form — BRAWL
 // strategy=spellslinger themes=tokens,artifacts,control,flying,spellslinger,draw,ramp,counters,enchantments tribal=-
-// total=99 lands=38 avgCMC=3.25 gold=0 counters=0
-// categories: draw=20 win_condition=4 utility=9 ramp=9 removal=15 board_wipe=2 protection=2 land=38
+// total=99 lands=38 avgCMC=3.03 gold=0 counters=0
+// categories: ramp=10 draw=15 utility=13 protection=3 removal=14 win_condition=4 board_wipe=2 land=38
 
 1 Orvar, the All-Form *CMDR*
 
-// ── ramp (9) ──
+// ── ramp (10) ──
 1 An Offer You Can't Refuse
 1 Arcane Signet
 1 Collector's Vault
@@ -14,54 +14,50 @@
 1 Kozilek's Unsealing
 1 Magnifying Glass
 1 Solemn Simulacrum
+1 Gilded Lotus
 1 Coveted Jewel
 
-// ── draw (20) ──
-1 Currency Converter
+// ── draw (15) ──
+1 Fleeting Distraction
+1 Mystic Remora
 1 Baral, Chief of Compliance
 1 Ominous Seas
 1 Aether Channeler
 1 Chasm Skulker
 1 Forensic Gadgeteer
-1 Nadir Kraken
 1 Rhystic Study
 1 Sai, Master Thopterist
-1 The Mechanist, Aerial Artisan
 1 Wavebreak Hippocamp
 1 Archmage Emeritus
-1 Mu Yanling, Wind Rider
-1 Padeem, Consul of Innovation
 1 Archmage of Runes
 1 Mulldrifter
-1 Tezzeret, Artifice Master
-1 The Watcher in the Water
+1 Sokka's Haiku
 1 Shark Typhoon
-1 Thought Monitor
 
-// ── removal (15) ──
+// ── removal (14) ──
+1 Boomerang Basics
 1 Essence Flux
-1 Ghost Vacuum
 1 Pongify
-1 Rapid Hybridization
+1 Scrap Compactor
+1 Agatha's Soul Cauldron
 1 Bumbleflower's Sharepot
 1 Kozilek's Command
 1 Teferi's Time Twist
 1 The Ooze
 1 Warping Wail
-1 Staff of Compleation
 1 Transmogrifying Wand
 1 Venser, Shaper Savant
 1 Zuko's Exile
-1 Ugin, the Ineffable
 1 Hullbreaker Horror
 
 // ── board_wipe (2) ──
-1 Bag of Holding
+1 Cyclonic Rift
 1 Jin-Gitaxias // The Great Synthesis
 
-// ── protection (2) ──
-1 Swan Song
+// ── protection (3) ──
+1 Dive Down
 1 Counterspell
+1 Swiftfoot Boots
 
 // ── win_condition (4) ──
 1 Irenicus's Vile Duplication
@@ -69,12 +65,16 @@
 1 Talrand, Sky Summoner
 1 Shipwreck Dowser
 
-// ── utility (9) ──
+// ── utility (13) ──
 1 Hangarback Walker
+1 Mystical Tutor
 1 Hidden Strings
 1 Sapphire Medallion
+1 Mirror Box
+1 Solve the Equation
 1 Archaeomancer
 1 Master of Waves
+1 Phyrexian Metamorph
 1 Sakashima of a Thousand Faces
 1 Spark Double
 1 Vesuvan Duplimancy

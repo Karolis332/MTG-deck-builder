@@ -1,7 +1,7 @@
 // Krenko, Mob Boss — COMMANDER
 // strategy=tribal themes=tribal tribal=goblin
-// total=99 lands=38 avgCMC=2.69 gold=0 counters=0
-// categories: ramp=11 draw=10 removal=6 board_wipe=3 protection=3 win_condition=4 utility=24 land=38
+// total=99 lands=38 avgCMC=2.67 gold=0 counters=0
+// categories: utility=24 ramp=11 win_condition=4 removal=6 draw=10 protection=3 board_wipe=3 land=38
 
 1 Krenko, Mob Boss *CMDR*
 
@@ -32,7 +32,7 @@
 
 // ── removal (6) ──
 1 Goblin Bombardment
-1 Goblin Sharpshooter
+1 Chaos Warp
 1 Pashalik Mons
 1 Goblin Trashmaster
 1 Siege-Gang Lieutenant
@@ -51,7 +51,7 @@
 // ── win_condition (4) ──
 1 Impact Tremors
 1 General Kreat, the Boltbringer
-1 Kiki-Jiki, Mirror Breaker
+1 Purphoros, God of the Forge
 1 Muxus, Goblin Grandee
 
 // ── utility (24) ──
@@ -62,11 +62,11 @@
 1 Conspicuous Snoop
 1 Dragon Fodder
 1 Goblin Instigator
-1 Goblin Piledriver
 1 Goblin Recruiter
 1 Goro-Goro, Disciple of Ryusei
 1 Krenko's Command
 1 Mogg War Marshal
+1 Ruby Medallion
 1 Rundvelt Hordemaster
 1 Warren Instigator
 1 Fable of the Mirror-Breaker // Reflection of Kiki-Jiki
@@ -75,9 +75,9 @@
 1 Goblin Matron
 1 Goblin Warchief
 1 Hobgoblin Bandit Lord
-1 Hordeling Outburst
 1 Krenko, Tin Street Kingpin
 1 Legion Warboss
+1 Shared Animosity
 1 Beetleback Chief
 
 // ── land (38) ──

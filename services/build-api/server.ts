@@ -149,7 +149,10 @@ async function handleBuild(body: string, res: http.ServerResponse): Promise<void
       partnerName,
       powerLevel: powerLevel as 'casual' | 'optimized' | 'cedh' | undefined,
       buildHints,
-      ...(ownedCards ? { useCollection: true, userId: TEMP_USER_ID } : {}),
+      // userId always: enables the community-stats arsenal (collection table
+      // is empty for non-collection builds, so no substitutes leak in)
+      useCollection: Boolean(ownedCards),
+      userId: TEMP_USER_ID,
     });
 
     if (!result.cards.length) {

@@ -1,7 +1,7 @@
 // Sheoldred, the Apocalypse — COMMANDER
 // strategy=control themes=draw,ramp,artifacts,sacrifice,equipment,tokens,control,tribal tribal=-
-// total=99 lands=38 avgCMC=3.8 gold=0 counters=0
-// categories: ramp=12 draw=15 removal=18 board_wipe=6 protection=1 win_condition=2 utility=7 land=38
+// total=99 lands=38 avgCMC=3.51 gold=0 counters=0
+// categories: ramp=12 draw=14 utility=12 win_condition=5 protection=2 removal=15 board_wipe=1 land=38
 
 1 Sheoldred, the Apocalypse *CMDR*
 
@@ -19,24 +19,23 @@
 1 Chromatic Orrery
 1 Ugin, Eye of the Storms
 
-// ── draw (15) ──
+// ── draw (14) ──
+1 Night's Whisper
 1 Sign in Blood
 1 Black Market Connections
 1 Master of the Feast
 1 Phyrexian Arena
 1 Scrawling Crawler
+1 Temple Bell
 1 Underworld Dreams
-1 Erebos, God of the Dead
 1 Fate Unraveler
 1 Greed
-1 The One Ring
-1 Alhammarret's Archive
+1 Rankle, Master of Pranks
 1 Psychosis Crawler
 1 Seizan, Perverter of Truth
 1 Peer into the Abyss
-1 Kozilek, the Great Distortion
 
-// ── removal (18) ──
+// ── removal (15) ──
 1 Soul-Guide Lantern
 1 Feed the Swarm
 1 Infernal Grasp
@@ -47,37 +46,38 @@
 1 Deadly Rollick
 1 Dread Presence
 1 Erebos, Bleak-Hearted
-1 Lethal Scheme
 1 Ob Nixilis Reignited
 1 Ob Nixilis, the Hate-Twisted
 1 Sheoldred // The True Scriptures
-1 Zuko's Exile
 1 Endbringer
-1 Staff of Nin
 1 Vilis, Broker of Blood
 
-// ── board_wipe (6) ──
-1 Bag of Holding
+// ── board_wipe (1) ──
 1 Toxic Deluge
-1 Coercive Portal
-1 Damnation
-1 Blood Money
-1 Kindred Dominance
 
-// ── protection (1) ──
+// ── protection (2) ──
 1 Lightning Greaves
+1 Swiftfoot Boots
 
-// ── win_condition (2) ──
+// ── win_condition (5) ──
 1 Marauding Blight-Priest
 1 Crypt Ghast
+1 Gray Merchant of Asphodel
+1 Bolas's Citadel
+1 K'rrik, Son of Yawgmoth
 
-// ── utility (7) ──
+// ── utility (12) ──
+1 Reanimate
 1 Damnable Pact
+1 Demonic Tutor
 1 Howling Mine
+1 Jet Medallion
 1 Dark Deal
 1 Vito, Thorn of the Dusk Rose
+1 Enduring Tenacity
 1 Font of Mythos
 1 Teferi's Puzzle Box
+1 Exquisite Blood
 1 Sanguine Bond
 
 // ── land (38) ──

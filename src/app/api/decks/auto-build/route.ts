@@ -45,6 +45,10 @@ export async function POST(request: NextRequest) {
       colors,
       strategy,
       useCollection,
+      // userId enables the commander-arsenal system (community-stats pre-fill
+      // + collection substitutes) — was never passed, so UI builds ran
+      // arsenal-less (review backlog #11)
+      userId: authUser.userId,
       commanderName: isCmdFormat ? commanderName : undefined,
       partnerName: isCmdFormat && typeof partnerName === 'string' && partnerName.trim() ? partnerName.trim() : undefined,
       powerLevel: validPowerLevels.includes(powerLevel) ? powerLevel : undefined,

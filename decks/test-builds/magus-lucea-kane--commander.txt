@@ -1,29 +1,31 @@
 // Magus Lucea Kane — COMMANDER
 // strategy=spellslinger themes=aggro,counters,tokens,equipment,draw,ramp tribal=-
-// total=99 lands=38 avgCMC=2.95 gold=11 counters=4
-// categories: ramp=13 utility=8 removal=17 draw=15 protection=3 board_wipe=2 win_condition=3 land=38
+// total=99 lands=38 avgCMC=2.51 gold=9 counters=4
+// categories: ramp=14 draw=16 utility=16 removal=12 win_condition=2 protection=1 land=38
 
 1 Magus Lucea Kane *CMDR*
 
-// ── ramp (13) ──
+// ── ramp (14) ──
+1 Sol Ring
 1 Sporocyst
 1 Arcane Signet
 1 Biophagus
-1 Fractured Powerstone
+1 Druid Class
+1 Farseek
 1 Mind Stone
 1 Nexos
-1 Prismatic Lens
-1 Simic Signet
-1 Talisman of Curiosity
+1 Rampant Growth
+1 Cultivate
 1 Elementalist's Palette
 1 Kami of Whispered Hopes
-1 Contaminant Grafter
-1 The Great Henge
+1 Loot, Exuberant Explorer
+1 Starting Column
 
-// ── draw (15) ──
-1 Hormagaunt Horde
-1 Ingenious Prodigy
+// ── draw (16) ──
+1 Curious Obsession
+1 Spectral Sailor
 1 Termagant Swarm
+1 Dress Down
 1 Mawloc
 1 Ravener
 1 Tervigon
@@ -31,53 +33,49 @@
 1 Exocrine
 1 Garruk's Uprising
 1 Inspiring Call
+1 Temur Ascendancy
 1 Tyrant Guard
 1 Bident of Thassa
 1 Broodlord
-1 The One Ring
-1 Firkraag, Cunning Instigator
+1 Sokka's Haiku
 
-// ── removal (17) ──
-1 Walking Ballista
+// ── removal (12) ──
+1 Bushwhack
 1 Aberrant
-1 Cankerbloom
-1 Hull Breach
 1 Red Sun's Twilight
 1 Steelbane Hydra
 1 Voracious Hydra
 1 Rampaging Yao Guai
-1 Staff of Compleation
-1 Zurzoth, Chaos Rider
 1 Chandra, Spark Hunter
 1 Earth Rumble
 1 Freyalise, Llanowar's Fury
 1 Vorinclex // The Grand Evolution
 1 Niv-Mizzet, Parun
 1 Flaming Tyrannosaurus
-1 Titan of Industry
 
-// ── board_wipe (2) ──
-1 Duskshell Crawler
-1 Season of Gathering
-
-// ── protection (3) ──
+// ── protection (1) ──
 1 Mistcutter Hydra
-1 Rhythm of the Wild
-1 Altered Ego
 
-// ── win_condition (3) ──
-1 Minsc & Boo, Timeless Heroes
+// ── win_condition (2) ──
 1 Clamavus
 1 Winged Hive Tyrant
 
-// ── utility (8) ──
+// ── utility (16) ──
 1 Hangarback Walker
+1 Stonecoil Serpent
+1 Animist's Awakening
+1 Goldvein Hydra
 1 Hardened Scales
 1 Shivan Devastator
 1 Crackle with Power
+1 Curse of the Swine
 1 Genesis Hydra
 1 Hydroid Krasis
+1 Kiora's Follower
+1 Open the Way
+1 Primordial Hydra
 1 Branching Evolution
+1 Shadow in the Warp
 1 Unbound Flourishing
 
 // ── land (38) ──
@@ -90,10 +88,10 @@
 1 Game Trail
 1 Grand Coliseum
 1 Hinterland Harbor
-2 Island
+3 Island
 1 Mana Confluence
 1 Misty Rainforest
-4 Mountain
+3 Mountain
 1 Multiversal Passage
 1 Scalding Tarn
 1 Steam Vents

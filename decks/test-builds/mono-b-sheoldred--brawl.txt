@@ -1,31 +1,28 @@
 // Sheoldred, the Apocalypse — BRAWL
 // strategy=midrange themes=artifacts,ramp,draw,sacrifice,tokens,equipment,tribal tribal=-
-// total=99 lands=39 avgCMC=3.72 gold=0 counters=0
-// categories: ramp=12 draw=19 removal=10 board_wipe=4 protection=3 win_condition=4 utility=8 land=39
+// total=99 lands=39 avgCMC=3.63 gold=0 counters=0
+// categories: ramp=11 draw=16 utility=11 protection=3 removal=10 win_condition=5 board_wipe=4 land=39
 
 1 Sheoldred, the Apocalypse *CMDR*
 
-// ── ramp (12) ──
+// ── ramp (11) ──
 1 Dark Ritual
 1 Arcane Signet
 1 Collector's Vault
-1 Deadly Dispute
 1 Gorbag of Minas Morgul
 1 Mind Stone
 1 Dragon's Hoard
 1 Magnifying Glass
+1 Starting Column
 1 Azula, On the Hunt
-1 Pitiless Plunderer
 1 Chromatic Orrery
 1 Ugin, Eye of the Storms
 
-// ── draw (19) ──
-1 Currency Converter
+// ── draw (16) ──
 1 Night's Whisper
 1 Sign in Blood
 1 Black Market Connections
 1 Blood Pact
-1 Midnight Reaper
 1 Phyrexian Arena
 1 Read the Bones
 1 Scrawling Crawler
@@ -35,43 +32,46 @@
 1 High-Society Hunter
 1 Psychosis Crawler
 1 Seizan, Perverter of Truth
-1 Vanquisher's Banner
 1 Harvester of Souls
 1 Liliana, Dreadhorde General
 1 Peer into the Abyss
 
 // ── removal (10) ──
+1 Agatha's Soul Cauldron
 1 Feed the Swarm
 1 Infernal Grasp
-1 Aetherflux Reservoir
 1 Baleful Mastery
 1 Dread Presence
 1 Erebos, Bleak-Hearted
 1 Ob Nixilis Reignited
 1 Ob Nixilis, the Hate-Twisted
-1 The Mightstone and Weakstone
+1 Venom's Hunger
 1 Vilis, Broker of Blood
 
 // ── board_wipe (4) ──
 1 Bag of Holding
 1 Toxic Deluge
 1 Damnation
-1 Blood Money
+1 The Rise of Sozin // Fire Lord Sozin
 
 // ── protection (3) ──
 1 Shadowspear
 1 Lightning Greaves
 1 Swiftfoot Boots
 
-// ── win_condition (4) ──
+// ── win_condition (5) ──
 1 Marauding Blight-Priest
+1 Bloodthirsty Conqueror
 1 Gray Merchant of Asphodel
 1 Bolas's Citadel
 1 K'rrik, Son of Yawgmoth
 
-// ── utility (8) ──
+// ── utility (11) ──
+1 Reanimate
+1 Vampiric Tutor
 1 Howling Mine
 1 Jet Medallion
+1 Bloodthirsty Aerialist
 1 Dark Deal
 1 Necrodominance
 1 Vito, Thorn of the Dusk Rose

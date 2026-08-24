@@ -180,7 +180,10 @@ async function buildOne(scenario: Scenario, format: string): Promise<BuildOut> {
       commanderName: scenario.commander,
       partnerName: scenario.partner,
       useCollection: COLLECTION_MODE,
-      userId: COLLECTION_MODE ? COLLECTION_USER_ID : undefined,
+      // userId in BOTH modes — the arsenal gates on it (deck-builder-ai.ts
+      // ~1506); omitting it in standard mode left the gate blind to arsenal
+      // bugs (review C3 correction + backlog #11)
+      userId: COLLECTION_USER_ID,
     });
     base.elapsedMs = Date.now() - started;
     if (!result.cards.length) {
