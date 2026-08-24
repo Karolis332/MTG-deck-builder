@@ -11,6 +11,13 @@ import http from 'http';
 import { autoBuildDeck } from '../../src/lib/deck-builder-ai';
 import { classifyCard, getPrimaryCategory } from '../../src/lib/card-classifier';
 import { getDb } from '../../src/lib/db';
+import { analyzeCommander } from '../../src/lib/commander-synergy';
+import { computeSynergyGraph } from '../../src/lib/synergy-graph';
+import type { CardLike } from '../../src/lib/synergy-graph';
+import { deriveWinPlan } from '../../src/lib/win-conditions';
+import { computeCurveScore } from '../../src/lib/curve-score';
+import { deriveKeepCriteria } from '../../src/lib/mulligan-advisor';
+import type { Archetype } from '../../src/lib/deck-templates';
 import type { DbCard } from '../../src/lib/types';
 
 const PORT = Number(process.env.PORT || 8100);
@@ -203,11 +210,156 @@ async function handleBuild(body: string, res: http.ServerResponse): Promise<void
   }
 }
 
+/**
+ * POST /analyze — full deck analysis for ANY decklist (the Deck Doctor engine).
+ * No build, just scoring: ISS + explained synergy pairs, win plan, curve score,
+ * mulligan criteria, Game Changer count, category breakdown. Fast (<1s).
+ */
+function handleAnalyze(body: string, res: http.ServerResponse): void {
+  let parsed: Record<string, unknown>;
+  try {
+    parsed = JSON.parse(body || '{}');
+  } catch {
+    return json(res, 400, { error: 'invalid JSON body' });
+  }
+
+  const commanderName = typeof parsed.commanderName === 'string' ? parsed.commanderName.trim() : '';
+  const cardsIn = Array.isArray(parsed.cards) ? (parsed.cards as OwnedCard[]).slice(0, 600) : [];
+  if (!commanderName || commanderName.length > 200) {
+    return json(res, 400, { error: 'commanderName is required' });
+  }
+  if (cardsIn.length < 10) {
+    return json(res, 400, { error: 'cards[] required (at least 10 entries)' });
+  }
+
+  try {
+    const db = getDb();
+    const findCard = db.prepare(
+      'SELECT * FROM cards WHERE name = ? COLLATE NOCASE OR name LIKE ? COLLATE NOCASE LIMIT 1'
+    );
+    const commanderRow = findCard.get(commanderName, `${commanderName} //%`) as DbCard | undefined;
+    if (!commanderRow) {
+      return json(res, 422, { error: `commander not found: ${commanderName}` });
+    }
+
+    const resolved: Array<{ card: DbCard; quantity: number }> = [];
+    const unresolved: string[] = [];
+    for (const c of cardsIn) {
+      const name = String(c.name || '').trim();
+      if (!name) continue;
+      const row = findCard.get(name, `${name} //%`) as DbCard | undefined;
+      if (row) resolved.push({ card: row, quantity: Math.max(1, Math.floor(Number(c.quantity)) || 1) });
+      else unresolved.push(name);
+    }
+    if (resolved.length < 10) {
+      return json(res, 422, { error: `only ${resolved.length} cards recognized`, unresolved: unresolved.slice(0, 20) });
+    }
+
+    let colorIdentity: string[] = [];
+    try { colorIdentity = commanderRow.color_identity ? JSON.parse(commanderRow.color_identity) : []; } catch { /* empty */ }
+    const commanderOracle = commanderRow.oracle_text || '';
+    const synergyProfile = analyzeCommander(commanderOracle, commanderRow.type_line || '', colorIdentity);
+    const archetype: Archetype = (synergyProfile?.detectedArchetype ?? 'midrange') as Archetype;
+
+    const nonLand = resolved.filter((r) => !(r.card.type_line || '').includes('Land'));
+    const nonLandCardLikes: CardLike[] = nonLand.map((r) => ({
+      name: r.card.name,
+      oracleText: r.card.oracle_text,
+      typeLine: r.card.type_line || '',
+    }));
+    const commanderLike: CardLike = {
+      name: commanderRow.name,
+      oracleText: commanderOracle,
+      typeLine: commanderRow.type_line || '',
+    };
+
+    const graph = computeSynergyGraph(nonLandCardLikes, { ...commanderLike, synergyProfile, directNeeds: null });
+    const winPlan = deriveWinPlan({
+      commander: commanderLike,
+      synergyProfile,
+      cards: nonLand.map((r) => ({
+        name: r.card.name,
+        oracleText: r.card.oracle_text,
+        typeLine: r.card.type_line || '',
+        cmc: r.card.cmc ?? 0,
+      })),
+    });
+
+    const nonLandCopies = nonLand.flatMap((r) =>
+      Array.from({ length: r.quantity }, () => ({ cmc: r.card.cmc ?? 0 }))
+    );
+    const curveScore = computeCurveScore(archetype, commanderRow.cmc ?? 0, nonLandCopies);
+
+    const totalCards = resolved.reduce((s, r) => s + r.quantity, 0);
+    const landCount = resolved
+      .filter((r) => (r.card.type_line || '').includes('Land'))
+      .reduce((s, r) => s + r.quantity, 0);
+    const avgCmc = nonLandCopies.length
+      ? nonLandCopies.reduce((s, c) => s + c.cmc, 0) / nonLandCopies.length
+      : 0;
+    const mulliganCriteria = deriveKeepCriteria(
+      { totalCards, landCount, avgCmc, colors: colorIdentity },
+      archetype,
+      winPlan,
+      commanderRow.cmc ?? 0,
+    );
+
+    const gameChangers = resolved
+      .filter((r) => (r.card as DbCard & { game_changer?: number }).game_changer === 1)
+      .map((r) => r.card.name);
+
+    const categories: Record<string, number> = {};
+    for (const r of resolved) {
+      const cat = getPrimaryCategory(
+        classifyCard(r.card.name, r.card.oracle_text || '', r.card.type_line || '', r.card.cmc ?? 0)
+      );
+      categories[cat] = (categories[cat] || 0) + r.quantity;
+    }
+
+    // WinPlan.cardRoles is a Map — swap for a plain object on the wire
+    const winPlanOut = {
+      ...winPlan,
+      cardRoles: winPlan.cardRoles instanceof Map ? Object.fromEntries(winPlan.cardRoles) : winPlan.cardRoles,
+    };
+
+    json(res, 200, {
+      commander: commanderRow.name,
+      archetype,
+      iss: graph.deckISS,
+      topSynergyPairs: graph.topSynergyPairs,
+      curveScore,
+      winPlan: winPlanOut,
+      mulliganCriteria,
+      gameChangers: { count: gameChangers.length, names: gameChangers },
+      categories,
+      stats: { totalCards, landCount, avgCmc: Math.round(avgCmc * 100) / 100 },
+      unresolved: unresolved.slice(0, 30),
+    });
+  } catch (error) {
+    const message = error instanceof Error ? error.message : 'analysis failed';
+    console.error(`[build-api] analyze error for "${commanderName}":`, message);
+    json(res, 500, { error: message });
+  }
+}
+
 const server = http.createServer((req, res) => {
   const url = (req.url || '').split('?')[0];
 
   if (req.method === 'GET' && url === '/health') {
     return json(res, 200, { status: 'ok', service: 'build-api', activeBuilds });
+  }
+
+  if (req.method === 'POST' && url === '/analyze') {
+    if (API_KEY && req.headers['x-api-key'] !== API_KEY) {
+      return json(res, 401, { error: 'unauthorized' });
+    }
+    let body = '';
+    req.on('data', (chunk) => {
+      body += chunk;
+      if (body.length > 1_500_000) req.destroy();
+    });
+    req.on('end', () => handleAnalyze(body, res));
+    return;
   }
 
   if (req.method === 'POST' && url === '/build') {
