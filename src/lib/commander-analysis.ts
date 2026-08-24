@@ -370,6 +370,21 @@ export function analyzeCommanderForBuild(
   );
   const directNeeds = extractDirectNeeds(commander);
 
+  // Anti-synergy strips live in analyzeCommander() (e.g. five_colors drops
+  // 'counters'; self-buff-only counters). directNeeds re-reads raw oracle
+  // text, so it must not resurrect a category the profile deliberately
+  // dropped — this bypass was the Ramos counters-leak (review 2026-08-23 C3).
+  if (synergyProfile) {
+    const trig = new Set(synergyProfile.triggerCategories);
+    if (!trig.has('counters')) directNeeds.countersMatter = false;
+    if (!trig.has('artifact_synergy')) directNeeds.artifactsMatter = false;
+    if (!trig.has('enchantment_synergy')) directNeeds.enchantmentsMatter = false;
+    if (!trig.has('graveyard')) directNeeds.graveyardMatter = false;
+    if (!trig.has('token_generation')) directNeeds.tokenMatter = false;
+    if (!trig.has('land_matters')) directNeeds.landfallMatter = false;
+    if (!trig.has('lifegain')) directNeeds.lifegainMatter = false;
+  }
+
   const arsenal: ArsenalCard[] = [];
   const seen = new Set<string>();
 

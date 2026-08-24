@@ -15,6 +15,7 @@ import { getCFRecommendations, resolveCFToDbCards } from './cf-api-client';
 import {
   getPayoffNamesForProfile,
   getRoleQuotas,
+  roleCapsFor,
   pickByRole,
   buildReasoningSummary,
 } from './deck-builder-constraints';
@@ -1545,10 +1546,35 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
   const poolByName = new Map<string, (typeof scored)[number]>();
   for (const s of scored) poolByName.set(s.card.name, s);
 
-  // Reserve ~75% of non-land slots for the arsenal. The rest is for the
-  // constraint picker to fill with role quotas and high-score extras.
-  const arsenalSlotBudget = Math.floor(nonLandTarget * 0.75);
+  // Role quotas are computed BEFORE the pre-fill so its caps exist while the
+  // arsenal runs (review 2026-08-23 C1: uncapped pre-fill shipped ramp 22-29
+  // vs quota 9 and starved draw/removal — caps could only refuse, not retract).
+  const quotas = getRoleQuotas(
+    (resolvedStrategy as Archetype) || 'midrange',
+    nonLandTarget,
+    commanderProfile,
+  );
+  const roleCaps = roleCapsFor(quotas);
+  const preFillRoleFills: Record<string, number> = {};
+  const cappedRolesFor = (card: DbCard): string[] =>
+    classifyCard(
+      card.name,
+      card.oracle_text || '',
+      card.type_line || '',
+      card.cmc || 0,
+      commanderCard?.oracle_text || undefined,
+    ).filter((cat) => roleCaps[cat] !== undefined);
+
+  // Arsenal budget: bounded by both the old 75% share and the total quota
+  // mass — the pre-fill exists to seed proven cards, not to fill the deck.
+  const quotaSum = Object.values(quotas).reduce((s, v) => s + (v || 0), 0);
+  const arsenalSlotBudget = Math.min(Math.floor(nonLandTarget * 0.75), quotaSum);
   let arsenalUsed = 0;
+
+  // Defence in depth (C3): sub-staple arsenal entries must clear the bottom
+  // scoring decile so anti-synergy penalties (five_colors -25 non-gold,
+  // self-buff -60) actually bite the pre-fill instead of being ignored.
+  const scoreFloor = scored.length >= 10 ? scored[Math.floor(scored.length * 0.9)].score : -Infinity;
 
   for (const a of arsenal) {
     if (arsenalUsed >= arsenalSlotBudget) break;
@@ -1556,7 +1582,18 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
     // Only pre-fill priority >= 55 (staples and above)
     if (a.priority < 55) continue;
     // Must exist in the scored pool (legal, in-color, properly loaded)
-    if (!poolByName.has(a.card.name)) continue;
+    const poolEntry = poolByName.get(a.card.name);
+    if (!poolEntry) continue;
+    // Sub-staple entries must not be bottom-decile scored (C3)
+    if (a.priority < 85 && poolEntry.score < scoreFloor) continue;
+    // Lands are picked by the land pipeline — charging them to the nonland
+    // budget burned 13-18 spell slots per build (C1 aggravator).
+    if ((a.card.type_line || '').includes('Land')) continue;
+    // Cap gate: skip when EVERY role this card fills is already at cap.
+    // Roleless cards (payoffs, synergy pieces) always pass — caps stop role
+    // flooding, not commander-specific tech.
+    const cardRoles = cappedRolesFor(a.card);
+    if (cardRoles.length > 0 && cardRoles.every((r) => (preFillRoleFills[r] ?? 0) >= roleCaps[r])) continue;
     const cardMax = getMaxQty(a.card);
     if (cardMax <= 0) continue;
     const qty = isCommander ? 1 : Math.min(cardMax, nonLandTarget - totalPicked);
@@ -1570,6 +1607,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
     });
     totalPicked += qty;
     arsenalUsed += qty;
+    for (const r of cardRoles) preFillRoleFills[r] = (preFillRoleFills[r] ?? 0) + qty;
   }
 
   // ── (b2) Guarantee a cheap fixing-rock floor for 3+ color decks ────────
@@ -1592,6 +1630,9 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
     };
     for (const s of scored) {
       if (fixingAdded >= fixingFloor || totalPicked >= nonLandTarget) break;
+      // The floor shares the ramp counter with the arsenal pre-fill (C1):
+      // it may top ramp UP to cap for fixing, never stack on top of it.
+      if ((preFillRoleFills.ramp ?? 0) >= roleCaps.ramp) break;
       if (pickedNames.has(s.card.name)) continue;
       if (!isFixingRock(s.card)) continue;
       if (getMaxQty(s.card) <= 0) continue;
@@ -1600,17 +1641,14 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
       reasoning.push({ cardName: s.card.name, role: 'fixing-floor', reason: 'cheap rainbow fixing for multicolor deck' });
       totalPicked += 1;
       fixingAdded += 1;
+      preFillRoleFills.ramp = (preFillRoleFills.ramp ?? 0) + 1;
     }
   }
 
   // ── (c) Role-based picker on remaining pool ────────────────────────────
+  // (quotas were computed above, before the arsenal pre-fill — C1)
   const remainingPool = scored.filter(s => !pickedNames.has(s.card.name));
   const payoffNames = getPayoffNamesForProfile(commanderProfile);
-  const quotas = getRoleQuotas(
-    (resolvedStrategy as Archetype) || 'midrange',
-    nonLandTarget,
-    commanderProfile,
-  );
 
   // Pass B allowlist: any card that appears in the commander arsenal OR
   // in the per-commander stats (commanderStatsMap) is considered a

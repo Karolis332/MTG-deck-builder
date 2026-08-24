@@ -480,6 +480,22 @@ export interface RoleQuotas {
 }
 
 /**
+ * Soft per-role ceilings (quota + headroom). Shared by Pass B AND the arsenal
+ * pre-fill in deck-builder-ai.ts, so no stage can flood a role before the
+ * quota system runs (review 2026-08-23 C1: pre-fill shipped ramp 22-29 vs
+ * quota 9 because caps didn't exist until after it had run).
+ */
+export function roleCapsFor(quotas: RoleQuotas): Record<string, number> {
+  return {
+    ramp: quotas.ramp + 4,
+    draw: quotas.draw + 5,
+    removal: quotas.removal + 3,
+    board_wipe: quotas.board_wipe + 1,
+    protection: quotas.protection + 2,
+  };
+}
+
+/**
  * Derive hard role quotas from an archetype template.
  * These are *minimums* — the picker will try to hit them exactly.
  *
@@ -749,13 +765,7 @@ export function pickByRole(opts: PickByRoleOptions): PickByRoleResult {
   // Soft caps keep Pass B from drowning the deck in one role — without them
   // a bounce-heavy color fills 19 "removal" slots or 28 ramp (observed in
   // mono-U Orvar / Thrasios baselines). Quota + headroom, never below quota.
-  const roleCaps: Record<string, number> = {
-    ramp: quotas.ramp + 4,
-    draw: quotas.draw + 5,
-    removal: quotas.removal + 3,
-    board_wipe: quotas.board_wipe + 1,
-    protection: quotas.protection + 2,
-  };
+  const roleCaps: Record<string, number> = roleCapsFor(quotas);
   const underCap = (role: string): boolean =>
     roleCaps[role] === undefined || (roleFills[role] ?? 0) < roleCaps[role];
 
