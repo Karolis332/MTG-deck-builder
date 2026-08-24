@@ -13,6 +13,10 @@ import { autoBuildDeck } from '../src/lib/deck-builder-ai';
 import { classifyCard, getPrimaryCategory } from '../src/lib/card-classifier';
 import { getDb } from '../src/lib/db';
 import type { DbCard } from '../src/lib/types';
+import { computeSynergyGraph, type CardLike } from '../src/lib/synergy-graph';
+import { deriveWinPlan } from '../src/lib/win-conditions';
+import { computeCurveScore } from '../src/lib/curve-score';
+import type { Archetype } from '../src/lib/deck-templates';
 
 const OUT_DIR = path.join(process.cwd(), 'decks', 'test-builds');
 
@@ -94,6 +98,11 @@ interface BuildOut {
   commanderLegalInFormat?: boolean;
   cards?: DeckCardOut[];
   buildReport?: string;
+  /** Synergy engine v1 (docs/SYNERGY_ENGINE_DESIGN.md) — OBSERVATIONAL ONLY.
+   * Does not feed card selection and deck-fitness.mjs does not read these. */
+  iss?: number;
+  curveScore?: number;
+  winRoute?: string;
 }
 
 // Cards a multicolor-matters deck (Ramos) should NOT run — counters are a mana
@@ -270,6 +279,45 @@ async function buildOne(scenario: Scenario, format: string): Promise<BuildOut> {
       .get(scenario.commander) as { legalities?: string } | undefined;
     const commanderLegalInFormat = cmdRow ? legalIn(cmdRow, legalityKey) : false;
 
+    // ── Synergy engine v1 — OBSERVATIONAL ONLY, not gated by deck-fitness.mjs.
+    // Reuses result.commanderSynergy (already computed by autoBuildDeck) so
+    // this doesn't pay for a second heavyweight commander-arsenal analysis.
+    let iss: number | undefined;
+    let curveScore: number | undefined;
+    let winRoute: string | undefined;
+    const commanderFullRow = getDb()
+      .prepare('SELECT * FROM cards WHERE name = ? COLLATE NOCASE LIMIT 1')
+      .get(scenario.commander) as DbCard | undefined;
+    if (commanderFullRow) {
+      const synergyProfile = result.commanderSynergy ?? null;
+      const commanderLike: CardLike = {
+        name: commanderFullRow.name,
+        oracleText: commanderFullRow.oracle_text,
+        typeLine: commanderFullRow.type_line || '',
+      };
+      const nonLandCardLikes: CardLike[] = result.cards
+        .filter((e) => e.board === 'main' && !(e.card.type_line || '').includes('Land'))
+        .map((e) => ({ name: e.card.name, oracleText: e.card.oracle_text, typeLine: e.card.type_line || '' }));
+
+      const graph = computeSynergyGraph(nonLandCardLikes, { ...commanderLike, synergyProfile, directNeeds: null });
+      iss = graph.deckISS;
+
+      const winPlan = deriveWinPlan({
+        commander: commanderLike,
+        synergyProfile,
+        cards: result.cards
+          .filter((e) => e.board === 'main' && !(e.card.type_line || '').includes('Land'))
+          .map((e) => ({ name: e.card.name, oracleText: e.card.oracle_text, typeLine: e.card.type_line || '', cmc: e.card.cmc ?? 0 })),
+      });
+      winRoute = winPlan.route;
+
+      const archetype: Archetype = (synergyProfile?.detectedArchetype ?? 'midrange') as Archetype;
+      const nonLandCopies = result.cards
+        .filter((e) => e.board === 'main' && !(e.card.type_line || '').includes('Land'))
+        .flatMap((e) => Array.from({ length: e.quantity || 1 }, () => ({ cmc: e.card.cmc ?? 0 })));
+      curveScore = computeCurveScore(archetype, commanderFullRow.cmc ?? 0, nonLandCopies).score;
+    }
+
     return {
       ...base,
       ok: true,
@@ -290,6 +338,9 @@ async function buildOne(scenario: Scenario, format: string): Promise<BuildOut> {
       commanderLegalInFormat,
       cards,
       buildReport: result.buildReport,
+      iss,
+      curveScore,
+      winRoute,
     };
   } catch (err) {
     base.elapsedMs = Date.now() - started;
@@ -365,7 +416,7 @@ async function main(): Promise<void> {
       const out = await buildOne(scenario, format);
       results.push(out);
       if (out.ok) {
-        console.log(`OK ${out.totalCards} cards, ${out.landCount} lands, avgCMC ${out.avgCmcNonLand}, gold ${out.goldSpellCount}, counters ${out.counterMattersCount}${out.referenceOverlapPct !== undefined ? `, ref-overlap ${out.referenceOverlapPct}%` : ''}, ${out.elapsedMs}ms${out.illegalCardsForFormat?.length ? ` [${out.illegalCardsForFormat.length} ILLEGAL]` : ''}`);
+        console.log(`OK ${out.totalCards} cards, ${out.landCount} lands, avgCMC ${out.avgCmcNonLand}, gold ${out.goldSpellCount}, counters ${out.counterMattersCount}${out.referenceOverlapPct !== undefined ? `, ref-overlap ${out.referenceOverlapPct}%` : ''}, iss ${out.iss ?? '-'}, curve ${out.curveScore ?? '-'}, winRoute ${out.winRoute ?? '-'}, ${out.elapsedMs}ms${out.illegalCardsForFormat?.length ? ` [${out.illegalCardsForFormat.length} ILLEGAL]` : ''}`);
         writeDecklist(out, scenario);
       } else {
         console.log(`FAILED: ${out.error}`);

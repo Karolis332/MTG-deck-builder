@@ -8,6 +8,7 @@
 
 import type { ResolvedCard } from './game-state-engine';
 import type { Archetype } from './deck-templates';
+import type { WinPlan } from './win-conditions';
 
 // ── Types ────────────────────────────────────────────────────────────────────
 
@@ -17,6 +18,9 @@ export interface MulliganAdvice {
   score: number; // raw score 0-100
   reasoning: string[];
   handAnalysis: HandAnalysis;
+  /** Human-readable keep criteria for this deck (design doc §4) — present
+   * whenever a winPlan/commanderCmc was supplied; empty otherwise. */
+  keepCriteria: string[];
 }
 
 export interface HandAnalysis {
@@ -147,6 +151,12 @@ const DEFAULT_WEIGHTS = {
  * @param archetype - Deck archetype for weight tuning
  * @param cardMap - Map/object to look up ResolvedCard by grpId
  * @param mulliganCount - Number of mulligans taken so far (0 = first hand)
+ * @param winPlan - Optional WinPlan (design doc §3/§4) — when present, hands
+ *   containing an enabler/payoff score a small bonus and `keepCriteria`
+ *   names the plan piece explicitly. Purely additive: omitting it reproduces
+ *   the exact pre-existing scoring behavior.
+ * @param commanderCmc - Optional commander CMC — when >= 5, keep criteria
+ *   call out the early-ramp requirement explicitly (§4).
  */
 export function analyzeMulligan(
   hand: number[],
@@ -155,6 +165,8 @@ export function analyzeMulligan(
   archetype: Archetype | null,
   cardMap: CardMap,
   mulliganCount: number = 0,
+  winPlan?: WinPlan | null,
+  commanderCmc?: number,
 ): MulliganAdvice {
   const handSize = hand.length;
   const reasoning: string[] = [];
@@ -259,6 +271,27 @@ export function analyzeMulligan(
     reasoning.push(`${analysis.commanderSynergyCards} card(s) synergize with commander`);
   }
 
+  // ── Score: Win Plan Piece (§4 — optional, additive) ────────────────────
+  // A hand containing an enabler or payoff for the deck's derived win plan
+  // is closer to "doing the deck's actual thing" than a generic good curve.
+  // Payoff-only hands (no enabler) get a smaller bonus — the design doc is
+  // explicit that the criterion is "an enabler or engine ... not payoff-only
+  // hands".
+  if (winPlan) {
+    const handNames = new Set(
+      resolvedHand.filter((h) => h.card).map((h) => (h.card as ResolvedCard).name.toLowerCase())
+    );
+    const hasEnabler = winPlan.keyCards.enablers.some((n) => handNames.has(n.toLowerCase()));
+    const hasPayoff = winPlan.keyCards.payoffs.some((n) => handNames.has(n.toLowerCase()));
+    if (hasEnabler) {
+      score += 8;
+      reasoning.push(`Hand has a win-plan enabler (${winPlan.route})`);
+    } else if (hasPayoff) {
+      score += 3;
+      reasoning.push(`Hand has a win-plan payoff (${winPlan.route}) but no enabler`);
+    }
+  }
+
   // ── Score: Mulligan Depth Adjustment ───────────────────────────────────
   // Be more lenient on mulligans — lower hands should be kept more aggressively
   if (mulliganCount >= 1) {
@@ -287,13 +320,52 @@ export function analyzeMulligan(
   const recommendation = score >= threshold ? 'keep' : 'mulligan';
   const confidence = Math.min(1, Math.abs(score - threshold) / 40);
 
+  const keepCriteria = deriveKeepCriteria(deckInfo, archetype, winPlan, commanderCmc);
+
   return {
     recommendation,
     confidence,
     score,
     reasoning,
     handAnalysis: analysis,
+    keepCriteria,
   };
+}
+
+// ── Keep-criteria derivation (§4) ────────────────────────────────────────────
+
+/**
+ * Deck-level (not hand-specific) human-readable keep criteria: "Keep hands
+ * with: 2-4 lands, a token producer or Skullclamp, ramp if no turn-<=3
+ * play." Deterministic, no game-state dependency — callable standalone by
+ * the deck analysis panel, or via analyzeMulligan()'s returned
+ * `keepCriteria` field during a live game.
+ */
+export function deriveKeepCriteria(
+  deckInfo: DeckInfo,
+  archetype: Archetype | null,
+  winPlan?: WinPlan | null,
+  commanderCmc?: number,
+): string[] {
+  const criteria: string[] = [];
+  const weights = ARCHETYPE_WEIGHTS[archetype ?? 'midrange'] ?? DEFAULT_WEIGHTS;
+  const [idealMin, idealMax] = weights.landIdeal;
+  criteria.push(`${idealMin}-${idealMax} lands`);
+
+  if ((commanderCmc ?? 0) >= 5) {
+    criteria.push('ramp that lands before turn 4 — the commander is expensive and needs the mana ready');
+  } else {
+    criteria.push('a play on turn 2 or 3, or ramp if not');
+  }
+
+  if (winPlan && (winPlan.keyCards.enablers.length > 0 || winPlan.keyCards.payoffs.length > 0)) {
+    const pieces = [...winPlan.keyCards.enablers.slice(0, 2), ...winPlan.keyCards.payoffs.slice(0, 1)];
+    if (pieces.length > 0) {
+      criteria.push(`a ${winPlan.route.replace(/_/g, ' ')} plan piece (e.g. ${pieces.join(' or ')})`);
+    }
+  }
+
+  return criteria;
 }
 
 // ── Hand Analysis ────────────────────────────────────────────────────────────

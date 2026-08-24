@@ -282,7 +282,7 @@ const PROTECTION_NAMES = new Set([
 // reminder text — review 2026-08-23 C2). isDrawEngine legitimately reads
 // granted text — a permanent whose triggered ability draws cards is still a
 // draw engine — so it keeps the raw oracle text and does not use this.
-function ownAbilities(oracleText: string): string {
+export function ownAbilities(oracleText: string): string {
   return (oracleText || '').replace(/"[^"]*"/g, ' ').replace(/\([^)]*\)/g, ' ');
 }
 

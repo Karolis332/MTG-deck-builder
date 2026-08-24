@@ -4,7 +4,7 @@
   "commander": "Vivi Ornitier",
   "format": "commander",
   "ok": true,
-  "elapsedMs": 58266,
+  "elapsedMs": 70905,
   "strategy": "spellslinger",
   "themes": [
    "spellslinger",
@@ -977,14 +977,17 @@
     "commanderLegal": true
    }
   ],
-  "buildReport": "Archetype: Spellslinger — targeting 61 nonland slots\nRole fills:\n  ramp       14/10 OK\n  draw       18/13 OK\n  tutor      3/2 OK\n  removal    12/12 OK\n  wipes      2/2 OK\n  protection 5/3 OK\n  payoffs    9/15 SHORT\n  wincons    19/5 OK\nWarnings:\n  - role shortfall: synergy_payoff needs 15, filled 9 — pool exhausted or collection blocked"
+  "buildReport": "Archetype: Spellslinger — targeting 61 nonland slots\nRole fills:\n  ramp       14/10 OK\n  draw       18/13 OK\n  tutor      3/2 OK\n  removal    12/12 OK\n  wipes      2/2 OK\n  protection 5/3 OK\n  payoffs    9/15 SHORT\n  wincons    19/5 OK\nWarnings:\n  - role shortfall: synergy_payoff needs 15, filled 9 — pool exhausted or collection blocked",
+  "iss": 63,
+  "curveScore": 64,
+  "winRoute": "spell_burn"
  },
  {
   "scenario": "ramos-dragon-engine",
   "commander": "Ramos, Dragon Engine",
   "format": "commander",
   "ok": true,
-  "elapsedMs": 73086,
+  "elapsedMs": 86095,
   "strategy": "midrange",
   "themes": [
    "artifacts",
@@ -2136,14 +2139,17 @@
     "commanderLegal": true
    }
   ],
-  "buildReport": "Archetype: Midrange — targeting 61 nonland slots\nRole fills:\n  ramp       19/12 OK\n  draw       15/10 OK\n  tutor      2/2 OK\n  removal    12/9 OK\n  wipes      4/4 OK\n  protection 5/3 OK\n  payoffs    17/15 OK\n  wincons    26/6 OK"
+  "buildReport": "Archetype: Midrange — targeting 61 nonland slots\nRole fills:\n  ramp       19/12 OK\n  draw       15/10 OK\n  tutor      2/2 OK\n  removal    12/9 OK\n  wipes      4/4 OK\n  protection 5/3 OK\n  payoffs    17/15 OK\n  wincons    26/6 OK",
+  "iss": 38,
+  "curveScore": 63,
+  "winRoute": "spell_burn"
  },
  {
   "scenario": "magus-lucea-kane",
   "commander": "Magus Lucea Kane",
   "format": "commander",
   "ok": true,
-  "elapsedMs": 74216,
+  "elapsedMs": 91800,
   "strategy": "spellslinger",
   "themes": [
    "counters",
@@ -3204,7 +3210,10 @@
     "commanderLegal": true
    }
   ],
-  "buildReport": "Archetype: Spellslinger — targeting 61 nonland slots\nRole fills:\n  ramp       14/10 OK\n  draw       18/13 OK\n  tutor      2/2 OK\n  removal    14/14 OK\n  wipes      2/2 OK\n  protection 5/3 OK\n  payoffs    10/15 SHORT\n  wincons    13/5 OK\nWarnings:\n  - role shortfall: synergy_payoff needs 15, filled 10 — pool exhausted or collection blocked"
+  "buildReport": "Archetype: Spellslinger — targeting 61 nonland slots\nRole fills:\n  ramp       14/10 OK\n  draw       18/13 OK\n  tutor      2/2 OK\n  removal    14/14 OK\n  wipes      2/2 OK\n  protection 5/3 OK\n  payoffs    10/15 SHORT\n  wincons    13/5 OK\nWarnings:\n  - role shortfall: synergy_payoff needs 15, filled 10 — pool exhausted or collection blocked",
+  "iss": 29,
+  "curveScore": 51,
+  "winRoute": "spell_burn"
  },
  {
   "scenario": "thrasios-tymna",
@@ -3212,7 +3221,7 @@
   "partner": "Tymna the Weaver",
   "format": "commander",
   "ok": true,
-  "elapsedMs": 103017,
+  "elapsedMs": 115481,
   "strategy": "aggro",
   "themes": [
    "control",
@@ -4344,14 +4353,17 @@
     "commanderLegal": true
    }
   ],
-  "buildReport": "Archetype: Aggro — targeting 60 nonland slots\nRole fills:\n  ramp       13/9 OK\n  draw       13/8 OK\n  tutor      3/1 OK\n  removal    7/4 OK\n  wipes      2/2 OK\n  protection 5/3 OK\n  payoffs    0/0 OK\n  wincons    12/1 OK"
+  "buildReport": "Archetype: Aggro — targeting 60 nonland slots\nRole fills:\n  ramp       13/9 OK\n  draw       13/8 OK\n  tutor      3/1 OK\n  removal    7/4 OK\n  wipes      2/2 OK\n  protection 5/3 OK\n  payoffs    0/0 OK\n  wincons    12/1 OK",
+  "iss": 0,
+  "curveScore": 11,
+  "winRoute": "value_grind"
  },
  {
   "scenario": "mono-w-heliod",
   "commander": "Heliod, Sun-Crowned",
   "format": "commander",
   "ok": true,
-  "elapsedMs": 54049,
+  "elapsedMs": 60856,
   "strategy": "midrange",
   "themes": [
    "enchantments",
@@ -5234,14 +5246,17 @@
     "commanderLegal": true
    }
   ],
-  "buildReport": "Archetype: Midrange — targeting 61 nonland slots\nRole fills:\n  ramp       14/12 OK\n  draw       15/10 OK\n  tutor      2/2 OK\n  removal    12/9 OK\n  wipes      4/4 OK\n  protection 5/3 OK\n  payoffs    3/15 SHORT\n  wincons    12/6 OK\nWarnings:\n  - role shortfall: synergy_payoff needs 15, filled 3 — pool exhausted or collection blocked"
+  "buildReport": "Archetype: Midrange — targeting 61 nonland slots\nRole fills:\n  ramp       14/12 OK\n  draw       15/10 OK\n  tutor      2/2 OK\n  removal    12/9 OK\n  wipes      4/4 OK\n  protection 5/3 OK\n  payoffs    3/15 SHORT\n  wincons    12/6 OK\nWarnings:\n  - role shortfall: synergy_payoff needs 15, filled 3 — pool exhausted or collection blocked",
+  "iss": 49,
+  "curveScore": 63,
+  "winRoute": "combat_tall"
  },
  {
   "scenario": "mono-u-orvar",
   "commander": "Orvar, the All-Form",
   "format": "commander",
   "ok": true,
-  "elapsedMs": 56891,
+  "elapsedMs": 64733,
   "strategy": "spellslinger",
   "themes": [
    "tokens",
@@ -6130,14 +6145,17 @@
     "commanderLegal": true
    }
   ],
-  "buildReport": "Archetype: Spellslinger — targeting 61 nonland slots\nRole fills:\n  ramp       14/10 OK\n  draw       18/13 OK\n  tutor      3/2 OK\n  removal    14/14 OK\n  wipes      2/2 OK\n  protection 5/3 OK\n  payoffs    2/15 SHORT\n  wincons    24/5 OK\nWarnings:\n  - role shortfall: synergy_payoff needs 15, filled 2 — pool exhausted or collection blocked"
+  "buildReport": "Archetype: Spellslinger — targeting 61 nonland slots\nRole fills:\n  ramp       14/10 OK\n  draw       18/13 OK\n  tutor      3/2 OK\n  removal    14/14 OK\n  wipes      2/2 OK\n  protection 5/3 OK\n  payoffs    2/15 SHORT\n  wincons    24/5 OK\nWarnings:\n  - role shortfall: synergy_payoff needs 15, filled 2 — pool exhausted or collection blocked",
+  "iss": 53,
+  "curveScore": 75,
+  "winRoute": "combat_wide"
  },
  {
   "scenario": "mono-b-sheoldred",
   "commander": "Sheoldred, the Apocalypse",
   "format": "commander",
   "ok": true,
-  "elapsedMs": 50767,
+  "elapsedMs": 68198,
   "strategy": "control",
   "themes": [
    "ramp",
@@ -7012,14 +7030,17 @@
     "commanderLegal": true
    }
   ],
-  "buildReport": "Archetype: Control — targeting 61 nonland slots\nRole fills:\n  ramp       16/12 OK\n  draw       19/12 OK\n  tutor      4/2 OK\n  removal    19/16 OK\n  wipes      6/6 OK\n  protection 3/3 OK\n  payoffs    0/0 OK\n  wincons    31/2 OK"
+  "buildReport": "Archetype: Control — targeting 61 nonland slots\nRole fills:\n  ramp       16/12 OK\n  draw       19/12 OK\n  tutor      4/2 OK\n  removal    19/16 OK\n  wipes      6/6 OK\n  protection 3/3 OK\n  payoffs    0/0 OK\n  wincons    31/2 OK",
+  "iss": 23,
+  "curveScore": 59,
+  "winRoute": "value_grind"
  },
  {
   "scenario": "mono-r-krenko",
   "commander": "Krenko, Mob Boss",
   "format": "commander",
   "ok": true,
-  "elapsedMs": 49563,
+  "elapsedMs": 55491,
   "strategy": "tribal",
   "themes": [
    "tribal"
@@ -7891,14 +7912,17 @@
     "commanderLegal": true
    }
   ],
-  "buildReport": "Archetype: Tribal — targeting 61 nonland slots\nRole fills:\n  ramp       15/11 OK\n  draw       15/10 OK\n  tutor      4/2 OK\n  removal    9/6 OK\n  wipes      3/3 OK\n  protection 4/3 OK\n  payoffs    0/0 OK\n  wincons    16/4 OK"
+  "buildReport": "Archetype: Tribal — targeting 61 nonland slots\nRole fills:\n  ramp       15/11 OK\n  draw       15/10 OK\n  tutor      4/2 OK\n  removal    9/6 OK\n  wipes      3/3 OK\n  protection 4/3 OK\n  payoffs    0/0 OK\n  wincons    16/4 OK",
+  "iss": 2,
+  "curveScore": 34,
+  "winRoute": "combat_wide"
  },
  {
   "scenario": "mono-g-ghalta",
   "commander": "Ghalta, Primal Hunger",
   "format": "commander",
   "ok": true,
-  "elapsedMs": 47345,
+  "elapsedMs": 40536,
   "strategy": "aggro",
   "themes": [
    "draw",
@@ -8746,14 +8770,17 @@
     "commanderLegal": true
    }
   ],
-  "buildReport": "Archetype: Aggro — targeting 61 nonland slots\nRole fills:\n  ramp       14/9 OK\n  draw       13/8 OK\n  tutor      2/1 OK\n  removal    7/4 OK\n  wipes      2/2 OK\n  protection 5/3 OK\n  payoffs    0/0 OK\n  wincons    9/1 OK"
+  "buildReport": "Archetype: Aggro — targeting 61 nonland slots\nRole fills:\n  ramp       14/9 OK\n  draw       13/8 OK\n  tutor      2/1 OK\n  removal    7/4 OK\n  wipes      2/2 OK\n  protection 5/3 OK\n  payoffs    0/0 OK\n  wincons    9/1 OK",
+  "iss": 0,
+  "curveScore": 47,
+  "winRoute": "value_grind"
  },
  {
   "scenario": "meren-nel-toth",
   "commander": "Meren of Clan Nel Toth",
   "format": "commander",
   "ok": true,
-  "elapsedMs": 56840,
+  "elapsedMs": 47662,
   "strategy": "aristocrats",
   "themes": [
    "sacrifice",
@@ -9731,14 +9758,17 @@
     "commanderLegal": true
    }
   ],
-  "buildReport": "Archetype: Aristocrats — targeting 61 nonland slots\nRole fills:\n  ramp       17/12 OK\n  draw       15/10 OK\n  tutor      2/2 OK\n  removal    10/7 OK\n  wipes      3/3 OK\n  protection 5/3 OK\n  payoffs    3/8 SHORT\n  wincons    24/5 OK\nWarnings:\n  - role shortfall: synergy_payoff needs 8, filled 3 — pool exhausted or collection blocked"
+  "buildReport": "Archetype: Aristocrats — targeting 61 nonland slots\nRole fills:\n  ramp       17/12 OK\n  draw       15/10 OK\n  tutor      2/2 OK\n  removal    10/7 OK\n  wipes      3/3 OK\n  protection 5/3 OK\n  payoffs    3/8 SHORT\n  wincons    24/5 OK\nWarnings:\n  - role shortfall: synergy_payoff needs 8, filled 3 — pool exhausted or collection blocked",
+  "iss": 28,
+  "curveScore": 67,
+  "winRoute": "drain"
  },
  {
   "scenario": "general-tazri",
   "commander": "General Tazri",
   "format": "commander",
   "ok": true,
-  "elapsedMs": 71566,
+  "elapsedMs": 76308,
   "strategy": "tribal",
   "themes": [
    "tribal"
@@ -10878,6 +10908,9 @@
     "commanderLegal": true
    }
   ],
-  "buildReport": "Archetype: Tribal — targeting 61 nonland slots\nRole fills:\n  ramp       15/11 OK\n  draw       15/10 OK\n  tutor      3/2 OK\n  removal    9/6 OK\n  wipes      3/3 OK\n  protection 5/3 OK\n  payoffs    8/6 OK\n  wincons    38/4 OK"
+  "buildReport": "Archetype: Tribal — targeting 61 nonland slots\nRole fills:\n  ramp       15/11 OK\n  draw       15/10 OK\n  tutor      3/2 OK\n  removal    9/6 OK\n  wipes      3/3 OK\n  protection 5/3 OK\n  payoffs    8/6 OK\n  wincons    38/4 OK",
+  "iss": 0,
+  "curveScore": 46,
+  "winRoute": "value_grind"
  }
 ]

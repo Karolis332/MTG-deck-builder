@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
-import { analyzeMulligan, type DeckInfo } from '../mulligan-advisor';
+import { analyzeMulligan, deriveKeepCriteria, type DeckInfo } from '../mulligan-advisor';
 import type { ResolvedCard } from '../game-state-engine';
+import type { WinPlan } from '../win-conditions';
 
 // Helper to build a card map from grpId → partial card data
 function buildCardMap(cards: Array<[number, Partial<ResolvedCard>]>) {
@@ -189,5 +190,107 @@ describe('analyzeMulligan', () => {
     expect(advice.recommendation).toBeDefined();
     expect(advice.handAnalysis.landCount).toBe(0);
     expect(advice.handAnalysis.nonlandCount).toBe(3);
+  });
+
+  // ── §4 extension: optional WinPlan param — must not change behavior when
+  // omitted (all tests above call analyzeMulligan with 6 args, no winPlan).
+  describe('winPlan / keepCriteria extension (additive)', () => {
+    function makeWinPlan(overrides: Partial<WinPlan> = {}): WinPlan {
+      return {
+        route: 'combat_wide',
+        description: 'Go wide with tokens.',
+        keyCards: { enablers: ['Krenko\'s Command'], payoffs: ['Coat of Arms'], protection: [], tutors: [] },
+        missingPieces: [],
+        cardRoles: new Map(),
+        ...overrides,
+      };
+    }
+
+    it('omitting winPlan reproduces identical scoring to the pre-existing 6-arg call', () => {
+      const hand = [1, 2, 3, 4, 5, 6, 7];
+      const cardMap = buildCardMap([
+        [1, { name: 'Plains', typeLine: 'Basic Land — Plains', cmc: 0, oracleText: '{T}: Add {W}' }],
+        [2, { name: 'Island', typeLine: 'Basic Land — Island', cmc: 0, oracleText: '{T}: Add {U}' }],
+        [3, { name: 'Hallowed Fountain', typeLine: 'Land — Plains Island', cmc: 0, oracleText: '{T}: Add {W} or {U}' }],
+        [4, { name: 'Soldier', typeLine: 'Creature', cmc: 1, manaCost: '{W}' }],
+        [5, { name: 'Counterspell', typeLine: 'Instant', cmc: 2, manaCost: '{U}{U}', oracleText: 'Counter target spell.' }],
+        [6, { name: 'Knight', typeLine: 'Creature', cmc: 3, manaCost: '{2}{W}' }],
+        [7, { name: 'Divination', typeLine: 'Sorcery', cmc: 3, manaCost: '{2}{U}', oracleText: 'Draw two cards.' }],
+      ]);
+      const withoutWinPlan = analyzeMulligan(hand, defaultDeckInfo, 'standard', 'midrange', cardMap, 0);
+      const explicitlyUndefined = analyzeMulligan(hand, defaultDeckInfo, 'standard', 'midrange', cardMap, 0, undefined, undefined);
+      expect(withoutWinPlan.score).toBe(explicitlyUndefined.score);
+      expect(withoutWinPlan.recommendation).toBe(explicitlyUndefined.recommendation);
+    });
+
+    it('a hand containing a win-plan enabler scores >= the identical hand without it', () => {
+      // Deliberately mediocre hand (no early plays, top-heavy curve) so the
+      // baseline score has headroom below the 100 ceiling — otherwise the
+      // enabler bonus would be invisible against an already-maxed score.
+      const withoutEnabler = buildCardMap([
+        [1, { name: 'Plains', typeLine: 'Basic Land', cmc: 0, oracleText: '{T}: Add {W}' }],
+        [2, { name: 'Forest', typeLine: 'Basic Land', cmc: 0, oracleText: '{T}: Add {G}' }],
+        [3, { name: 'Plains 2', typeLine: 'Basic Land', cmc: 0, oracleText: '{T}: Add {W}' }],
+        [4, { name: 'Vanilla', typeLine: 'Creature', cmc: 5, manaCost: '{4}{G}' }],
+        [5, { name: 'Vanilla 2', typeLine: 'Creature', cmc: 5, manaCost: '{4}{W}' }],
+        [6, { name: 'Vanilla 3', typeLine: 'Creature', cmc: 6, manaCost: '{5}{G}' }],
+        [7, { name: 'Vanilla 4', typeLine: 'Creature', cmc: 6, manaCost: '{5}{W}' }],
+      ]);
+      const withEnabler = buildCardMap([
+        [1, { name: 'Plains', typeLine: 'Basic Land', cmc: 0, oracleText: '{T}: Add {W}' }],
+        [2, { name: 'Forest', typeLine: 'Basic Land', cmc: 0, oracleText: '{T}: Add {G}' }],
+        [3, { name: 'Plains 2', typeLine: 'Basic Land', cmc: 0, oracleText: '{T}: Add {W}' }],
+        [4, { name: "Krenko's Command", typeLine: 'Sorcery', cmc: 5, manaCost: '{4}{R}' }],
+        [5, { name: 'Vanilla 2', typeLine: 'Creature', cmc: 5, manaCost: '{4}{W}' }],
+        [6, { name: 'Vanilla 3', typeLine: 'Creature', cmc: 6, manaCost: '{5}{G}' }],
+        [7, { name: 'Vanilla 4', typeLine: 'Creature', cmc: 6, manaCost: '{5}{W}' }],
+      ]);
+      const hand = [1, 2, 3, 4, 5, 6, 7];
+      const deckInfo = { ...defaultDeckInfo, colors: ['W', 'G'] };
+      const winPlan = makeWinPlan();
+      const without = analyzeMulligan(hand, deckInfo, 'standard', 'midrange', withoutEnabler, 0, winPlan, 3);
+      const withE = analyzeMulligan(hand, deckInfo, 'standard', 'midrange', withEnabler, 0, winPlan, 3);
+      expect(without.score).toBeLessThan(100); // headroom check — otherwise this test proves nothing
+      expect(withE.score).toBeGreaterThan(without.score);
+      expect(withE.reasoning.some((r) => r.includes('win-plan enabler'))).toBe(true);
+    });
+
+    it('returns non-empty keepCriteria when winPlan/commanderCmc are supplied', () => {
+      const hand = [1];
+      const cardMap = buildCardMap([[1, { name: 'Plains', typeLine: 'Basic Land', cmc: 0, oracleText: '{T}: Add {W}' }]]);
+      const advice = analyzeMulligan(hand, defaultDeckInfo, 'standard', 'midrange', cardMap, 0, makeWinPlan(), 6);
+      expect(advice.keepCriteria.length).toBeGreaterThan(0);
+      expect(advice.keepCriteria.some((c) => c.toLowerCase().includes('ramp'))).toBe(true);
+    });
+  });
+});
+
+describe('deriveKeepCriteria', () => {
+  it('always includes a land-band criterion', () => {
+    const criteria = deriveKeepCriteria({ totalCards: 99, landCount: 38, avgCmc: 3, colors: ['R'] }, 'midrange');
+    expect(criteria.some((c) => /lands?/i.test(c))).toBe(true);
+  });
+
+  it('calls out early ramp when commander CMC >= 5', () => {
+    const criteria = deriveKeepCriteria({ totalCards: 99, landCount: 38, avgCmc: 3, colors: ['R'] }, 'midrange', null, 5);
+    expect(criteria.some((c) => c.toLowerCase().includes('ramp'))).toBe(true);
+  });
+
+  it('names a win-plan piece when winPlan has key cards', () => {
+    const winPlan: WinPlan = {
+      route: 'combo',
+      description: 'combo',
+      keyCards: { enablers: ['Heliod, Sun-Crowned'], payoffs: ['Walking Ballista'], protection: [], tutors: [] },
+      missingPieces: [],
+      cardRoles: new Map(),
+    };
+    const criteria = deriveKeepCriteria({ totalCards: 99, landCount: 38, avgCmc: 3, colors: ['W'] }, 'combo', winPlan, 3);
+    expect(criteria.some((c) => c.includes('Heliod, Sun-Crowned') || c.includes('Walking Ballista'))).toBe(true);
+  });
+
+  it('is deterministic (same input, same output)', () => {
+    const a = deriveKeepCriteria({ totalCards: 99, landCount: 38, avgCmc: 3, colors: ['R'] }, 'aggro');
+    const b = deriveKeepCriteria({ totalCards: 99, landCount: 38, avgCmc: 3, colors: ['R'] }, 'aggro');
+    expect(a).toEqual(b);
   });
 });

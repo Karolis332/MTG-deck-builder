@@ -12,6 +12,12 @@ import {
   type ClassifiedCard,
   type DeckAnalysis,
 } from '@/lib/card-classifier';
+import { analyzeCommander } from '@/lib/commander-synergy';
+import type { Archetype } from '@/lib/deck-templates';
+import { computeSynergyGraph, type CardLike } from '@/lib/synergy-graph';
+import { deriveWinPlan, type WinPlan } from '@/lib/win-conditions';
+import { computeCurveScore } from '@/lib/curve-score';
+import { deriveKeepCriteria } from '@/lib/mulligan-advisor';
 
 interface DeckCard {
   name: string;
@@ -182,7 +188,77 @@ export async function GET(request: NextRequest) {
     }
   }
 
-  const analysis: DeckAnalysis & { topSuggestions: typeof topSuggestions } = {
+  // ── Synergy engine v1 (docs/SYNERGY_ENGINE_DESIGN.md) ──────────────────
+  // Analysis-only — none of this feeds the deck builder's card selection.
+  let iss: number | undefined;
+  let topSynergyPairs: Array<{ a: string; b: string; weight: number; reasons: string[] }> | undefined;
+  let curveScore: ReturnType<typeof computeCurveScore> | undefined;
+  let winPlan: WinPlan | undefined;
+  let mulliganCriteria: string[] | undefined;
+
+  if (commanderCard) {
+    let colorIdentity: string[] = [];
+    try {
+      colorIdentity = commanderCard.color_identity ? JSON.parse(commanderCard.color_identity) : [];
+    } catch {
+      colorIdentity = [];
+    }
+    const synergyProfile = analyzeCommander(commanderOracleText, commanderCard.type_line ?? '', colorIdentity);
+    const archetype: Archetype = synergyProfile?.detectedArchetype ?? 'midrange';
+
+    const mainOnlyCards = deck.cards.filter((c) => c.board === 'main');
+    const nonLandCardLikes: CardLike[] = mainOnlyCards
+      .filter((c) => !(c.type_line ?? '').includes('Land'))
+      .map((c) => ({ name: c.name, oracleText: c.oracle_text, typeLine: c.type_line ?? '' }));
+    const commanderLike: CardLike = {
+      name: commanderName ?? commanderCard.name,
+      oracleText: commanderOracleText,
+      typeLine: commanderCard.type_line ?? '',
+    };
+
+    const graph = computeSynergyGraph(nonLandCardLikes, { ...commanderLike, synergyProfile, directNeeds: null });
+    iss = graph.deckISS;
+    topSynergyPairs = graph.topSynergyPairs;
+
+    winPlan = deriveWinPlan({
+      commander: commanderLike,
+      synergyProfile,
+      cards: nonLandCardLikes.map((c) => {
+        const src = mainOnlyCards.find((m) => m.name === c.name);
+        return { ...c, cmc: src?.cmc ?? 0 };
+      }),
+    });
+
+    // Curve score wants one entry per COPY (a 2x-in-60 card counts twice
+    // toward the curve shape), unlike the graph/win-plan which reason about
+    // unique cards.
+    const nonLandCopies = mainOnlyCards
+      .filter((c) => !(c.type_line ?? '').includes('Land'))
+      .flatMap((c) => Array.from({ length: c.quantity || 1 }, () => ({ cmc: c.cmc })));
+    curveScore = computeCurveScore(archetype, commanderCard.cmc ?? 0, nonLandCopies);
+
+    mulliganCriteria = deriveKeepCriteria(
+      { totalCards: allCards.length, landCount: allCards.length - nonLandCardLikes.length, avgCmc: avgCMC, colors: colorIdentity },
+      archetype,
+      winPlan,
+      commanderCard.cmc ?? 0,
+    );
+  }
+
+  // WinPlan.cardRoles is a Map — not JSON-serializable as-is, so the wire
+  // shape swaps it for a plain object.
+  const winPlanOut = winPlan
+    ? { ...winPlan, cardRoles: Object.fromEntries(winPlan.cardRoles) }
+    : undefined;
+
+  const analysis: DeckAnalysis & {
+    topSuggestions: typeof topSuggestions;
+    iss?: number;
+    topSynergyPairs?: typeof topSynergyPairs;
+    curveScore?: typeof curveScore;
+    winPlan?: typeof winPlanOut;
+    mulliganCriteria?: string[];
+  } = {
     deckId: deck.id,
     deckName: deck.name,
     format,
@@ -195,6 +271,11 @@ export async function GET(request: NextRequest) {
     manaCurve,
     suggestions,
     topSuggestions,
+    iss,
+    topSynergyPairs,
+    curveScore,
+    winPlan: winPlanOut,
+    mulliganCriteria,
   };
 
   return NextResponse.json(analysis);
