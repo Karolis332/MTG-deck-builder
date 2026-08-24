@@ -114,7 +114,7 @@ function castColorCount(raw: unknown): number {
 // Prefers a format-specific reference (e.g. --brawl-winning-reference.txt);
 // falls back to the generic one, then to the local EDHREC average decklist
 // (edhrec_avg_decks) so ANY commander gets a convergence signal.
-function loadReferenceNames(slug: string, format?: string, commander?: string): Set<string> | null {
+function loadReferenceNames(slug: string, format?: string, commander?: string, partner?: string): Set<string> | null {
   const specific = format ? path.join(OUT_DIR, `${slug}--${format}-winning-reference.txt`) : null;
   const file = specific && fs.existsSync(specific)
     ? specific
@@ -125,7 +125,7 @@ function loadReferenceNames(slug: string, format?: string, commander?: string): 
       .prepare('SELECT card_name FROM edhrec_avg_decks WHERE commander_name = ? COLLATE NOCASE')
       .all(commander) as Array<{ card_name: string }>;
     if (!rows.length) return null;
-    return new Set(rows.map((r) => r.card_name.toLowerCase()));
+    return filterReferenceNames(new Set(rows.map((r) => r.card_name.toLowerCase())), commander, partner);
   }
   const names = new Set<string>();
   for (const raw of fs.readFileSync(file, 'utf8').split(/\r?\n/)) {
@@ -134,7 +134,23 @@ function loadReferenceNames(slug: string, format?: string, commander?: string): 
     const m = line.match(/^\d+\s+(.+?)(?:\s+\*CMDR\*)?$/);
     if (m) names.add(m[1].trim().toLowerCase());
   }
-  return names.size ? names : null;
+  return filterReferenceNames(names, commander, partner);
+}
+
+// The overlap metric is nonland-vs-nonland (the build side filters lands at the
+// comparison site) and the commander is never in the 99 — reference lands and
+// commander/partner names showing up as "missing staples" are false positives.
+function filterReferenceNames(names: Set<string>, commander?: string, partner?: string): Set<string> | null {
+  const typeStmt = getDb().prepare('SELECT type_line FROM cards WHERE name = ? COLLATE NOCASE LIMIT 1');
+  const skip = new Set([commander?.toLowerCase(), partner?.toLowerCase()].filter(Boolean));
+  const out = new Set<string>();
+  for (const n of names) {
+    if (skip.has(n)) continue;
+    const row = typeStmt.get(n) as { type_line: string | null } | undefined;
+    if (row?.type_line?.includes('Land')) continue;
+    out.add(n);
+  }
+  return out.size ? out : null;
 }
 
 function legalIn(card: { legalities?: string | null }, key: string): boolean {
@@ -226,7 +242,7 @@ async function buildOne(scenario: Scenario, format: string): Promise<BuildOut> {
     // Convergence vs human winning reference (overlap on ALL nonland cards).
     let referenceOverlapPct: number | undefined;
     let referenceMissing: string[] | undefined;
-    const refNames = loadReferenceNames(scenario.slug, format, scenario.commander);
+    const refNames = loadReferenceNames(scenario.slug, format, scenario.commander, scenario.partner);
     if (refNames) {
       const buildNames = new Set(
         main.filter((c) => !c.type_line.includes('Land')).map((c) => c.name.toLowerCase())

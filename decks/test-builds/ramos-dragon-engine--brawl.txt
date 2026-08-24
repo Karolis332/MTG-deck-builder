@@ -1,7 +1,7 @@
 // Ramos, Dragon Engine — BRAWL
 // strategy=midrange themes=artifacts,tokens,ramp,draw,sacrifice,counters,flying,control,spellslinger tribal=-
-// total=99 lands=38 avgCMC=3.3 gold=44 counters=0
-// categories: ramp=16 win_condition=5 utility=4 removal=16 draw=16 board_wipe=4 land=38
+// total=99 lands=38 avgCMC=3.26 gold=44 counters=0
+// categories: ramp=16 win_condition=4 utility=4 removal=16 draw=17 board_wipe=4 land=38
 
 1 Ramos, Dragon Engine *CMDR*
 
@@ -23,7 +23,7 @@
 1 Omnath, Locus of All
 1 Chromatic Orrery
 
-// ── draw (16) ──
+// ── draw (17) ──
 1 Baleful Strix
 1 Baral, Chief of Compliance
 1 Likeness Looter
@@ -33,6 +33,7 @@
 1 Akiri, Fearless Voyager
 1 Jeskai Ascendancy
 1 Kutzil, Malamet Exemplar
+1 Tannuk, Memorial Ensign
 1 Zurgo Stormrender
 1 Archmage Emeritus
 1 Jhoira, Weatherlight Captain
@@ -65,10 +66,9 @@
 1 Jin-Gitaxias // The Great Synthesis
 1 Time Wipe
 
-// ── win_condition (5) ──
+// ── win_condition (4) ──
 1 Murmuring Mystic
 1 Talrand, Sky Summoner
-1 Chromanticore
 1 Maelstrom Archangel
 1 Progenitus
 

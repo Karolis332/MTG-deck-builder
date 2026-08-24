@@ -4,42 +4,98 @@
   "commander": "Vivi Ornitier",
   "format": "commander",
   "ok": true,
-  "elapsedMs": 55477,
+  "elapsedMs": 49152,
   "strategy": "spellslinger",
   "themes": [
    "spellslinger",
    "draw",
-   "tokens",
-   "flying",
-   "artifacts",
    "aggro",
+   "artifacts",
+   "flying",
+   "tokens",
+   "ramp",
    "counters",
    "equipment"
   ],
   "tribalType": null,
   "totalCards": 99,
   "landCount": 38,
-  "avgCmcNonLand": 2.49,
-  "goldSpellCount": 6,
+  "avgCmcNonLand": 2.39,
+  "goldSpellCount": 5,
   "counterMattersCount": 0,
+  "referenceOverlapPct": 56,
+  "referenceMissing": [
+   "vivi ornitier",
+   "chrome mox",
+   "fellwar stone",
+   "lightning greaves",
+   "lotus petal",
+   "sol ring",
+   "thought vessel",
+   "island",
+   "mountain",
+   "birgi, god of storytelling",
+   "hullbreaker horror",
+   "niv-mizzet, parun",
+   "quicksilver elemental",
+   "simian spirit guide",
+   "stormcatch mentor",
+   "tandem lookout",
+   "veyran, voice of duality",
+   "mystic remora",
+   "ophidian eye",
+   "rhystic study",
+   "sigil of sleep",
+   "arcane denial",
+   "cyclonic rift",
+   "flusterstorm",
+   "force of negation",
+   "force of will",
+   "magic damper",
+   "pact of negation",
+   "sink into stupor",
+   "snap",
+   "swan song",
+   "cascade bluffs",
+   "command tower",
+   "fiery islet",
+   "frostboil snarl",
+   "mistrise village",
+   "otawara, soaring city",
+   "reliquary tower",
+   "riverpyre verge",
+   "scalding tarn",
+   "shivan reef",
+   "steam vents",
+   "stormcarved coast",
+   "sulfur falls",
+   "thundering falls",
+   "training center",
+   "blasphemous act",
+   "gamble",
+   "gitaxian probe",
+   "rite of flame",
+   "wild ride",
+   "windfall"
+  ],
   "categoryCounts": {
    "ramp": 10,
-   "draw": 19,
-   "protection": 5,
-   "removal": 12,
+   "draw": 17,
+   "protection": 7,
    "utility": 9,
-   "win_condition": 4,
-   "board_wipe": 2,
+   "removal": 12,
+   "win_condition": 5,
+   "board_wipe": 1,
    "land": 38
   },
   "curve": {
    "0": 1,
-   "1": 17,
-   "2": 20,
+   "1": 16,
+   "2": 24,
    "3": 8,
-   "4": 7,
-   "5": 5,
-   "6": 3
+   "4": 4,
+   "5": 6,
+   "6": 2
   },
   "illegalCardsForFormat": [],
   "commanderLegalInFormat": true,
@@ -111,17 +167,6 @@
     "commanderLegal": true
    },
    {
-    "name": "Lightning Bolt",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Instant",
-    "cmc": 1,
-    "primaryCategory": "removal",
-    "edhrec_rank": 157,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
     "name": "Harmonic Prodigy",
     "quantity": 1,
     "board": "main",
@@ -129,6 +174,17 @@
     "cmc": 2,
     "primaryCategory": "utility",
     "edhrec_rank": 682,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Lightning Bolt",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Instant",
+    "cmc": 1,
+    "primaryCategory": "removal",
+    "edhrec_rank": 157,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -199,17 +255,6 @@
     "commanderLegal": true
    },
    {
-    "name": "Mystical Tutor",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Instant",
-    "cmc": 1,
-    "primaryCategory": "utility",
-    "edhrec_rank": 146,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
     "name": "Archmage Emeritus",
     "quantity": 1,
     "board": "main",
@@ -217,6 +262,17 @@
     "cmc": 4,
     "primaryCategory": "draw",
     "edhrec_rank": 258,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Mystical Tutor",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Instant",
+    "cmc": 1,
+    "primaryCategory": "utility",
+    "edhrec_rank": 146,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -283,72 +339,6 @@
     "cmc": 3,
     "primaryCategory": "ramp",
     "edhrec_rank": 8429,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Young Pyromancer",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Creature — Human Shaman",
-    "cmc": 2,
-    "primaryCategory": "utility",
-    "edhrec_rank": 782,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Murmuring Mystic",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Creature — Human Wizard",
-    "cmc": 4,
-    "primaryCategory": "win_condition",
-    "edhrec_rank": 1733,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Firebrand Archer",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Creature — Human Archer",
-    "cmc": 2,
-    "primaryCategory": "win_condition",
-    "edhrec_rank": 1121,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Thousand-Year Storm",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Enchantment",
-    "cmc": 6,
-    "primaryCategory": "utility",
-    "edhrec_rank": 1403,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Dualcaster Mage",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Creature — Human Wizard",
-    "cmc": 3,
-    "primaryCategory": "utility",
-    "edhrec_rank": 634,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Adeliz, the Cinder Wind",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Legendary Creature — Human Wizard",
-    "cmc": 3,
-    "primaryCategory": "utility",
-    "edhrec_rank": 12168,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -496,17 +486,6 @@
     "commanderLegal": true
    },
    {
-    "name": "Gamble",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Sorcery",
-    "cmc": 1,
-    "primaryCategory": "utility",
-    "edhrec_rank": 236,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
     "name": "Strike It Rich",
     "quantity": 1,
     "board": "main",
@@ -540,35 +519,46 @@
     "commanderLegal": true
    },
    {
-    "name": "Goblin Electromancer",
+    "name": "Coruscation Mage",
     "quantity": 1,
     "board": "main",
-    "type_line": "Creature — Goblin Wizard",
+    "type_line": "Creature — Otter Wizard",
     "cmc": 2,
-    "primaryCategory": "utility",
-    "edhrec_rank": 641,
+    "primaryCategory": "win_condition",
+    "edhrec_rank": 812,
     "brawlLegal": true,
     "commanderLegal": true
    },
    {
-    "name": "Solemn Simulacrum",
+    "name": "Mox Amber",
     "quantity": 1,
     "board": "main",
-    "type_line": "Artifact Creature — Golem",
-    "cmc": 4,
+    "type_line": "Legendary Artifact",
+    "cmc": 0,
     "primaryCategory": "ramp",
-    "edhrec_rank": 34,
+    "edhrec_rank": 208,
     "brawlLegal": true,
     "commanderLegal": true
    },
    {
-    "name": "Unexpected Windfall",
+    "name": "Brain Freeze",
     "quantity": 1,
     "board": "main",
     "type_line": "Instant",
-    "cmc": 4,
-    "primaryCategory": "ramp",
-    "edhrec_rank": 283,
+    "cmc": 2,
+    "primaryCategory": "utility",
+    "edhrec_rank": 791,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Hexing Squelcher",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Creature — Goblin Sorcerer",
+    "cmc": 2,
+    "primaryCategory": "protection",
+    "edhrec_rank": 937,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -584,6 +574,105 @@
     "commanderLegal": true
    },
    {
+    "name": "Negate",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Instant",
+    "cmc": 2,
+    "primaryCategory": "protection",
+    "edhrec_rank": 54,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Murmuring Mystic",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Creature — Human Wizard",
+    "cmc": 4,
+    "primaryCategory": "win_condition",
+    "edhrec_rank": 1617,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Goblin Electromancer",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Creature — Goblin Wizard",
+    "cmc": 2,
+    "primaryCategory": "utility",
+    "edhrec_rank": 641,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Thousand-Year Storm",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Enchantment",
+    "cmc": 6,
+    "primaryCategory": "utility",
+    "edhrec_rank": 1403,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Adeliz, the Cinder Wind",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Legendary Creature — Human Wizard",
+    "cmc": 3,
+    "primaryCategory": "utility",
+    "edhrec_rank": 12168,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Young Pyromancer",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Creature — Human Shaman",
+    "cmc": 2,
+    "primaryCategory": "utility",
+    "edhrec_rank": 737,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Firebrand Archer",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Creature — Human Archer",
+    "cmc": 2,
+    "primaryCategory": "win_condition",
+    "edhrec_rank": 1093,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Dualcaster Mage",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Creature — Human Wizard",
+    "cmc": 3,
+    "primaryCategory": "utility",
+    "edhrec_rank": 634,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Unexpected Windfall",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Instant",
+    "cmc": 4,
+    "primaryCategory": "ramp",
+    "edhrec_rank": 283,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
     "name": "Resculpt",
     "quantity": 1,
     "board": "main",
@@ -591,6 +680,17 @@
     "cmc": 2,
     "primaryCategory": "removal",
     "edhrec_rank": 757,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Virtue of Courage // Embereth Blaze",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Enchantment // Instant — Adventure",
+    "cmc": 5,
+    "primaryCategory": "removal",
+    "edhrec_rank": 3866,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -650,17 +750,6 @@
     "commanderLegal": true
    },
    {
-    "name": "Goblin Bombardment",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Enchantment",
-    "cmc": 2,
-    "primaryCategory": "removal",
-    "edhrec_rank": 456,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
     "name": "Bag of Holding",
     "quantity": 1,
     "board": "main",
@@ -668,50 +757,6 @@
     "cmc": 1,
     "primaryCategory": "board_wipe",
     "edhrec_rank": 4018,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Fiery Confluence",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Sorcery",
-    "cmc": 4,
-    "primaryCategory": "board_wipe",
-    "edhrec_rank": 1461,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Shark Typhoon",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Enchantment",
-    "cmc": 6,
-    "primaryCategory": "draw",
-    "edhrec_rank": 1225,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Mishra's Bauble",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Artifact",
-    "cmc": 0,
-    "primaryCategory": "draw",
-    "edhrec_rank": 1101,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Ral, Crackling Wit",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Legendary Planeswalker — Ral",
-    "cmc": 4,
-    "primaryCategory": "draw",
-    "edhrec_rank": 2155,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -760,6 +805,17 @@
     "commanderLegal": true
    },
    {
+    "name": "Command Tower",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Land",
+    "cmc": 0,
+    "primaryCategory": "land",
+    "edhrec_rank": 2,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
     "name": "Spirebluff Canal",
     "quantity": 1,
     "board": "main",
@@ -782,13 +838,35 @@
     "commanderLegal": true
    },
    {
-    "name": "Command Tower",
+    "name": "Thran Portal",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Land — Gate",
+    "cmc": 0,
+    "primaryCategory": "land",
+    "edhrec_rank": 4521,
+    "brawlLegal": false,
+    "commanderLegal": true
+   },
+   {
+    "name": "Mistrise Village",
     "quantity": 1,
     "board": "main",
     "type_line": "Land",
     "cmc": 0,
     "primaryCategory": "land",
-    "edhrec_rank": 2,
+    "edhrec_rank": 435,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Sink into Stupor // Soporific Springs",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Instant // Land",
+    "cmc": 3,
+    "primaryCategory": "land",
+    "edhrec_rank": 178,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -804,13 +882,46 @@
     "commanderLegal": true
    },
    {
-    "name": "Mistrise Village",
+    "name": "Pinnacle Monk // Mystic Peak",
     "quantity": 1,
     "board": "main",
-    "type_line": "Land",
+    "type_line": "Creature — Djinn Monk // Land",
+    "cmc": 5,
+    "primaryCategory": "land",
+    "edhrec_rank": 540,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Sundering Eruption // Volcanic Fissure",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Sorcery // Land",
+    "cmc": 3,
+    "primaryCategory": "land",
+    "edhrec_rank": 731,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Shatterskull Smashing // Shatterskull, the Hammer Pass",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Sorcery // Land",
+    "cmc": 2,
+    "primaryCategory": "land",
+    "edhrec_rank": 1339,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Baldur's Gate",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Legendary Land — Gate",
     "cmc": 0,
     "primaryCategory": "land",
-    "edhrec_rank": 435,
+    "edhrec_rank": 2407,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -826,6 +937,17 @@
     "commanderLegal": true
    },
    {
+    "name": "Daily Bugle Building",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Land",
+    "cmc": 0,
+    "primaryCategory": "land",
+    "edhrec_rank": 3976,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
     "name": "Capital City",
     "quantity": 1,
     "board": "main",
@@ -833,83 +955,6 @@
     "cmc": 0,
     "primaryCategory": "land",
     "edhrec_rank": 4077,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Captivating Cave",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land — Cave",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 5874,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Forgotten Monument",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land — Cave",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 13380,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Cavern of Souls",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 113,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Arena of Glory",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 385,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Brokers Hideout",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 1275,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Secluded Courtyard",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 225,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Unclaimed Territory",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 245,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -934,16 +979,27 @@
     "edhrec_rank": null,
     "brawlLegal": true,
     "commanderLegal": true
+   },
+   {
+    "name": "Ral, Monsoon Mage // Ral, Leyline Prodigy",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Legendary Creature — Human Wizard // Legendary Planeswalker — Ral",
+    "cmc": 2,
+    "primaryCategory": "draw",
+    "edhrec_rank": 3610,
+    "brawlLegal": true,
+    "commanderLegal": true
    }
   ],
-  "buildReport": "Archetype: Spellslinger — targeting 61 nonland slots\nRole fills:\n  ramp       14/10 OK\n  draw       18/13 OK\n  removal    12/12 OK\n  wipes      2/2 OK\n  protection 6/3 OK\n  payoffs    9/15 SHORT\n  wincons    20/5 OK\nWarnings:\n  - role shortfall: synergy_payoff needs 15, filled 9 — pool exhausted or collection blocked"
+  "buildReport": "Archetype: Spellslinger — targeting 61 nonland slots\nRole fills:\n  ramp       14/10 OK\n  draw       18/13 OK\n  removal    12/12 OK\n  wipes      2/2 OK\n  protection 8/3 OK\n  payoffs    9/15 SHORT\n  wincons    18/5 OK\nWarnings:\n  - role shortfall: synergy_payoff needs 15, filled 9 — pool exhausted or collection blocked"
  },
  {
   "scenario": "ramos-dragon-engine",
   "commander": "Ramos, Dragon Engine",
   "format": "commander",
   "ok": true,
-  "elapsedMs": 58738,
+  "elapsedMs": 59076,
   "strategy": "midrange",
   "themes": [
    "artifacts",
@@ -958,10 +1014,10 @@
   "tribalType": null,
   "totalCards": 99,
   "landCount": 38,
-  "avgCmcNonLand": 3.07,
+  "avgCmcNonLand": 3.11,
   "goldSpellCount": 28,
   "counterMattersCount": 5,
-  "referenceOverlapPct": 30,
+  "referenceOverlapPct": 34,
   "referenceMissing": [
    "ramos, dragon engine",
    "island",
@@ -1014,7 +1070,6 @@
    "tam, mindful first-year",
    "bring to light",
    "embrace the paradox",
-   "quandrix, the proof",
    "dreamroot cascade",
    "breeding pool",
    "yavimaya coast",
@@ -1034,8 +1089,6 @@
    "fangkeeper's familiar",
    "rakshasa's bargain",
    "timeless lotus",
-   "chromanticore",
-   "maelstrom archangel",
    "jodah, the unifier",
    "eiganjo, seat of the empire",
    "shatterskull smashing",
@@ -1047,22 +1100,22 @@
    "agadeem's awakening"
   ],
   "categoryCounts": {
-   "ramp": 23,
+   "ramp": 24,
    "utility": 12,
-   "draw": 7,
-   "win_condition": 5,
+   "draw": 5,
    "removal": 9,
    "protection": 1,
-   "board_wipe": 4,
+   "win_condition": 8,
+   "board_wipe": 2,
    "land": 38
   },
   "curve": {
    "1": 1,
    "2": 24,
    "3": 21,
-   "4": 6,
-   "5": 7,
-   "6": 1,
+   "4": 4,
+   "5": 8,
+   "6": 2,
    "7+": 1
   },
   "illegalCardsForFormat": [],
@@ -1098,6 +1151,17 @@
     "cmc": 2,
     "primaryCategory": "ramp",
     "edhrec_rank": 23,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Noggle Robber",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Creature — Noggle Rogue",
+    "cmc": 3,
+    "primaryCategory": "ramp",
+    "edhrec_rank": 22474,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -1175,6 +1239,149 @@
     "cmc": 3,
     "primaryCategory": "utility",
     "edhrec_rank": 3424,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Cultivate",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Sorcery",
+    "cmc": 3,
+    "primaryCategory": "ramp",
+    "edhrec_rank": 20,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Door to Nothingness",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Artifact",
+    "cmc": 5,
+    "primaryCategory": "utility",
+    "edhrec_rank": 7348,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Abzan Charm",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Instant",
+    "cmc": 3,
+    "primaryCategory": "removal",
+    "edhrec_rank": 4250,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Leyline of the Guildpact",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Enchantment",
+    "cmc": 4,
+    "primaryCategory": "utility",
+    "edhrec_rank": 1701,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Boros Charm",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Instant",
+    "cmc": 2,
+    "primaryCategory": "removal",
+    "edhrec_rank": 176,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Swiftfoot Boots",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Artifact — Equipment",
+    "cmc": 2,
+    "primaryCategory": "protection",
+    "edhrec_rank": 12,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Maelstrom Archangel",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Creature — Angel",
+    "cmc": 5,
+    "primaryCategory": "win_condition",
+    "edhrec_rank": 6453,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Sultai Charm",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Instant",
+    "cmc": 3,
+    "primaryCategory": "removal",
+    "edhrec_rank": 4820,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Rampant Growth",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Sorcery",
+    "cmc": 2,
+    "primaryCategory": "ramp",
+    "edhrec_rank": 26,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Progenitus",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Legendary Creature — Hydra Avatar",
+    "cmc": 10,
+    "primaryCategory": "win_condition",
+    "edhrec_rank": 6568,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Bloom Tender",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Creature — Elf Druid",
+    "cmc": 2,
+    "primaryCategory": "ramp",
+    "edhrec_rank": 273,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Omnath, Locus of All",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Legendary Creature — Phyrexian Elemental",
+    "cmc": 5,
+    "primaryCategory": "ramp",
+    "edhrec_rank": 5204,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Chromanticore",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Enchantment Creature — Manticore",
+    "cmc": 5,
+    "primaryCategory": "win_condition",
+    "edhrec_rank": 9446,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -1300,134 +1507,13 @@
     "commanderLegal": true
    },
    {
-    "name": "Noggle Robber",
+    "name": "Quandrix, the Proof",
     "quantity": 1,
     "board": "main",
-    "type_line": "Creature — Noggle Rogue",
-    "cmc": 3,
-    "primaryCategory": "ramp",
-    "edhrec_rank": 22474,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Cultivate",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Sorcery",
-    "cmc": 3,
-    "primaryCategory": "ramp",
-    "edhrec_rank": 20,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Door to Nothingness",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Artifact",
-    "cmc": 5,
-    "primaryCategory": "utility",
-    "edhrec_rank": 7348,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Abzan Charm",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Instant",
-    "cmc": 3,
-    "primaryCategory": "removal",
-    "edhrec_rank": 4250,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Boros Charm",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Instant",
-    "cmc": 2,
-    "primaryCategory": "removal",
-    "edhrec_rank": 176,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Leyline of the Guildpact",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Enchantment",
-    "cmc": 4,
-    "primaryCategory": "utility",
-    "edhrec_rank": 1701,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Swiftfoot Boots",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Artifact — Equipment",
-    "cmc": 2,
-    "primaryCategory": "protection",
-    "edhrec_rank": 12,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Sultai Charm",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Instant",
-    "cmc": 3,
-    "primaryCategory": "removal",
-    "edhrec_rank": 4820,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Rampant Growth",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Sorcery",
-    "cmc": 2,
-    "primaryCategory": "ramp",
-    "edhrec_rank": 26,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Progenitus",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Legendary Creature — Hydra Avatar",
-    "cmc": 10,
+    "type_line": "Legendary Creature — Elder Dragon",
+    "cmc": 6,
     "primaryCategory": "win_condition",
-    "edhrec_rank": 6568,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Bloom Tender",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Creature — Elf Druid",
-    "cmc": 2,
-    "primaryCategory": "ramp",
-    "edhrec_rank": 273,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Omnath, Locus of All",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Legendary Creature — Phyrexian Elemental",
-    "cmc": 5,
-    "primaryCategory": "ramp",
-    "edhrec_rank": 5204,
+    "edhrec_rank": 9468,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -1531,6 +1617,17 @@
     "commanderLegal": true
    },
    {
+    "name": "Izzet Signet",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Artifact",
+    "cmc": 2,
+    "primaryCategory": "ramp",
+    "edhrec_rank": 157,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
     "name": "Boros Signet",
     "quantity": 1,
     "board": "main",
@@ -1542,6 +1639,17 @@
     "commanderLegal": true
    },
    {
+    "name": "Simic Signet",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Artifact",
+    "cmc": 2,
+    "primaryCategory": "ramp",
+    "edhrec_rank": 580,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
     "name": "Golgari Signet",
     "quantity": 1,
     "board": "main",
@@ -1549,17 +1657,6 @@
     "cmc": 2,
     "primaryCategory": "ramp",
     "edhrec_rank": 656,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Izzet Signet",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Artifact",
-    "cmc": 2,
-    "primaryCategory": "ramp",
-    "edhrec_rank": 167,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -1696,46 +1793,13 @@
     "commanderLegal": true
    },
    {
-    "name": "Gruul Charm",
+    "name": "Command Tower",
     "quantity": 1,
     "board": "main",
-    "type_line": "Instant",
-    "cmc": 2,
-    "primaryCategory": "board_wipe",
-    "edhrec_rank": 10727,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Night of the Sweets' Revenge",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Enchantment",
-    "cmc": 4,
-    "primaryCategory": "board_wipe",
-    "edhrec_rank": 2005,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Tatyova, Benthic Druid",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Legendary Creature — Merfolk Druid",
-    "cmc": 5,
-    "primaryCategory": "draw",
-    "edhrec_rank": 459,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Ral, Crackling Wit",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Legendary Planeswalker — Ral",
-    "cmc": 4,
-    "primaryCategory": "draw",
-    "edhrec_rank": 2155,
+    "type_line": "Land",
+    "cmc": 0,
+    "primaryCategory": "land",
+    "edhrec_rank": 2,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -1751,14 +1815,14 @@
     "commanderLegal": true
    },
    {
-    "name": "Command Tower",
+    "name": "Thran Portal",
     "quantity": 1,
     "board": "main",
-    "type_line": "Land",
+    "type_line": "Land — Gate",
     "cmc": 0,
     "primaryCategory": "land",
-    "edhrec_rank": 2,
-    "brawlLegal": true,
+    "edhrec_rank": 4521,
+    "brawlLegal": false,
     "commanderLegal": true
    },
    {
@@ -1769,61 +1833,6 @@
     "cmc": 0,
     "primaryCategory": "land",
     "edhrec_rank": 179,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Rumble Arena",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 3644,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Capital City",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land — Town",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 4077,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Captivating Cave",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land — Cave",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 5874,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Forgotten Monument",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land — Cave",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 13380,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Misty Rainforest",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 40,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -1861,6 +1870,17 @@
     "commanderLegal": true
    },
    {
+    "name": "Baldur's Gate",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Legendary Land — Gate",
+    "cmc": 0,
+    "primaryCategory": "land",
+    "edhrec_rank": 2407,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
     "name": "Temple Garden",
     "quantity": 1,
     "board": "main",
@@ -1872,6 +1892,50 @@
     "commanderLegal": true
    },
    {
+    "name": "Rumble Arena",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Land",
+    "cmc": 0,
+    "primaryCategory": "land",
+    "edhrec_rank": 3644,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Daily Bugle Building",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Land",
+    "cmc": 0,
+    "primaryCategory": "land",
+    "edhrec_rank": 3976,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Capital City",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Land — Town",
+    "cmc": 0,
+    "primaryCategory": "land",
+    "edhrec_rank": 4077,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Steam Vents",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Land — Island Mountain",
+    "cmc": 0,
+    "primaryCategory": "land",
+    "edhrec_rank": 67,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
     "name": "Evolving Wilds",
     "quantity": 1,
     "board": "main",
@@ -1879,6 +1943,72 @@
     "cmc": 0,
     "primaryCategory": "land",
     "edhrec_rank": 18,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Captivating Cave",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Land — Cave",
+    "cmc": 0,
+    "primaryCategory": "land",
+    "edhrec_rank": 5874,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Branch of Vitu-Ghazi",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Land",
+    "cmc": 0,
+    "primaryCategory": "land",
+    "edhrec_rank": 7262,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Plaza of Harmony",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Land",
+    "cmc": 0,
+    "primaryCategory": "land",
+    "edhrec_rank": 7308,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Forgotten Monument",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Land — Cave",
+    "cmc": 0,
+    "primaryCategory": "land",
+    "edhrec_rank": 13380,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Hallowed Fountain",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Land — Plains Island",
+    "cmc": 0,
+    "primaryCategory": "land",
+    "edhrec_rank": 65,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Misty Rainforest",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Land",
+    "cmc": 0,
+    "primaryCategory": "land",
+    "edhrec_rank": 40,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -1916,17 +2046,6 @@
     "commanderLegal": true
    },
    {
-    "name": "Steam Vents",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land — Island Mountain",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 67,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
     "name": "Blood Crypt",
     "quantity": 1,
     "board": "main",
@@ -1934,17 +2053,6 @@
     "cmc": 0,
     "primaryCategory": "land",
     "edhrec_rank": 69,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Hallowed Fountain",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land — Plains Island",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 65,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -2015,61 +2123,6 @@
     "commanderLegal": true
    },
    {
-    "name": "Bountiful Landscape",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 1617,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Twisted Landscape",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 1705,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Sheltering Landscape",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 2113,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Vibrant Cityscape",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 1761,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Shattered Landscape",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 1846,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
     "name": "Forest",
     "quantity": 2,
     "board": "main",
@@ -2081,10 +2134,10 @@
     "commanderLegal": true
    },
    {
-    "name": "Mountain",
+    "name": "Island",
     "quantity": 2,
     "board": "main",
-    "type_line": "Basic Land — Mountain",
+    "type_line": "Basic Land — Island",
     "cmc": 0,
     "primaryCategory": "land",
     "edhrec_rank": null,
@@ -2092,10 +2145,10 @@
     "commanderLegal": true
    },
    {
-    "name": "Island",
+    "name": "Mountain",
     "quantity": 2,
     "board": "main",
-    "type_line": "Basic Land — Island",
+    "type_line": "Basic Land — Mountain",
     "cmc": 0,
     "primaryCategory": "land",
     "edhrec_rank": null,
@@ -2125,36 +2178,108 @@
     "commanderLegal": true
    }
   ],
-  "buildReport": "Archetype: Midrange — targeting 61 nonland slots\nRole fills:\n  ramp       22/12 OK\n  draw       15/10 OK\n  removal    12/9 OK\n  wipes      4/4 OK\n  protection 5/3 OK\n  payoffs    16/15 OK\n  wincons    19/6 OK"
+  "buildReport": "Archetype: Midrange — targeting 61 nonland slots\nRole fills:\n  ramp       23/12 OK\n  draw       15/10 OK\n  removal    12/9 OK\n  wipes      4/4 OK\n  protection 5/3 OK\n  payoffs    17/15 OK\n  wincons    23/6 OK"
  },
  {
   "scenario": "magus-lucea-kane",
   "commander": "Magus Lucea Kane",
   "format": "commander",
   "ok": true,
-  "elapsedMs": 58814,
+  "elapsedMs": 53976,
   "strategy": "spellslinger",
   "themes": [
    "counters",
    "aggro",
    "draw",
    "tokens",
-   "enchantments",
    "ramp",
-   "flying",
+   "enchantments",
    "equipment",
    "artifacts",
+   "flying",
    "spellslinger"
   ],
   "tribalType": null,
   "totalCards": 99,
   "landCount": 38,
-  "avgCmcNonLand": 2.85,
+  "avgCmcNonLand": 2.82,
   "goldSpellCount": 8,
   "counterMattersCount": 5,
+  "referenceOverlapPct": 28,
+  "referenceMissing": [
+   "magus lucea kane",
+   "elementalist's palette",
+   "sol ring",
+   "the ozolith",
+   "twinning staff",
+   "forest",
+   "island",
+   "mountain",
+   "aberrant",
+   "atalan jackal",
+   "biophagus",
+   "broodlord",
+   "clamavus",
+   "exocrine",
+   "hormagaunt horde",
+   "incubation druid",
+   "ingenious prodigy",
+   "kiora's follower",
+   "mawloc",
+   "nexos",
+   "old one eye",
+   "owlin spiralmancer",
+   "primordial hydra",
+   "ravener",
+   "shivan devastator",
+   "sporocyst",
+   "stonecoil serpent",
+   "termagant swarm",
+   "tervigon",
+   "tyrant guard",
+   "voracious hydra",
+   "winged hive tyrant",
+   "zoanthrope",
+   "branching evolution",
+   "bred for the hunt",
+   "shadow in the warp",
+   "temur ascendancy",
+   "the first tyrannic war",
+   "unbound flourishing",
+   "comet storm",
+   "pull from tomorrow",
+   "starstorm",
+   "breeding pool",
+   "cinder glade",
+   "command tower",
+   "evolving wilds",
+   "exotic orchard",
+   "frontier bivouac",
+   "game trail",
+   "hinterland harbor",
+   "ketria triome",
+   "path of ancestry",
+   "rejuvenating springs",
+   "reliquary tower",
+   "spire garden",
+   "steam vents",
+   "stomping ground",
+   "temple of abandon",
+   "temple of epiphany",
+   "temple of mystery",
+   "wooded foothills",
+   "animist's awakening",
+   "crackle with power",
+   "curse of the swine",
+   "finale of revelation",
+   "hull breach",
+   "nature's lore",
+   "open the way",
+   "three visits"
+  ],
   "categoryCounts": {
-   "ramp": 14,
-   "utility": 10,
+   "ramp": 15,
+   "utility": 9,
    "draw": 16,
    "removal": 14,
    "protection": 4,
@@ -2164,8 +2289,8 @@
   },
   "curve": {
    "1": 6,
-   "2": 24,
-   "3": 17,
+   "2": 26,
+   "3": 15,
    "4": 6,
    "5": 6,
    "6": 1,
@@ -2230,28 +2355,6 @@
     "commanderLegal": true
    },
    {
-    "name": "Rampant Growth",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Sorcery",
-    "cmc": 2,
-    "primaryCategory": "ramp",
-    "edhrec_rank": 26,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Garruk's Uprising",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Enchantment",
-    "cmc": 3,
-    "primaryCategory": "draw",
-    "edhrec_rank": 92,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
     "name": "Cultivate",
     "quantity": 1,
     "board": "main",
@@ -2263,6 +2366,17 @@
     "commanderLegal": true
    },
    {
+    "name": "Rampant Growth",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Sorcery",
+    "cmc": 2,
+    "primaryCategory": "ramp",
+    "edhrec_rank": 26,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
     "name": "Hardened Scales",
     "quantity": 1,
     "board": "main",
@@ -2270,6 +2384,17 @@
     "cmc": 1,
     "primaryCategory": "utility",
     "edhrec_rank": 188,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Garruk's Uprising",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Enchantment",
+    "cmc": 3,
+    "primaryCategory": "draw",
+    "edhrec_rank": 92,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -2292,50 +2417,6 @@
     "cmc": 5,
     "primaryCategory": "draw",
     "edhrec_rank": 8769,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Coastal Piracy",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Enchantment",
-    "cmc": 4,
-    "primaryCategory": "draw",
-    "edhrec_rank": 1479,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Evolution Sage",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Creature — Elf Druid",
-    "cmc": 3,
-    "primaryCategory": "utility",
-    "edhrec_rank": 405,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Hydra's Growth",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Enchantment — Aura",
-    "cmc": 3,
-    "primaryCategory": "utility",
-    "edhrec_rank": 2036,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Forgotten Ancient",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Creature — Elemental",
-    "cmc": 4,
-    "primaryCategory": "utility",
-    "edhrec_rank": 394,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -2549,28 +2630,6 @@
     "commanderLegal": true
    },
    {
-    "name": "Terrasymbiosis",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Enchantment",
-    "cmc": 3,
-    "primaryCategory": "utility",
-    "edhrec_rank": 994,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Zimone, Infinite Analyst",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Legendary Creature — Human Wizard",
-    "cmc": 3,
-    "primaryCategory": "utility",
-    "edhrec_rank": 9797,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
     "name": "Swiftfoot Boots",
     "quantity": 1,
     "board": "main",
@@ -2578,6 +2637,72 @@
     "cmc": 2,
     "primaryCategory": "protection",
     "edhrec_rank": 12,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Repulsive Mutation",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Instant",
+    "cmc": 2,
+    "primaryCategory": "utility",
+    "edhrec_rank": 2780,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Aetherize",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Instant",
+    "cmc": 4,
+    "primaryCategory": "board_wipe",
+    "edhrec_rank": 312,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Coastal Piracy",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Enchantment",
+    "cmc": 4,
+    "primaryCategory": "draw",
+    "edhrec_rank": 1479,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Evolution Sage",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Creature — Elf Druid",
+    "cmc": 3,
+    "primaryCategory": "utility",
+    "edhrec_rank": 405,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Hydra's Growth",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Enchantment — Aura",
+    "cmc": 3,
+    "primaryCategory": "utility",
+    "edhrec_rank": 2036,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Forgotten Ancient",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Creature — Elemental",
+    "cmc": 4,
+    "primaryCategory": "utility",
+    "edhrec_rank": 394,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -2611,6 +2736,17 @@
     "cmc": 2,
     "primaryCategory": "ramp",
     "edhrec_rank": 125,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Simic Signet",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Artifact",
+    "cmc": 2,
+    "primaryCategory": "ramp",
+    "edhrec_rank": 580,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -2758,17 +2894,6 @@
     "commanderLegal": true
    },
    {
-    "name": "Night of the Sweets' Revenge",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Enchantment",
-    "cmc": 4,
-    "primaryCategory": "board_wipe",
-    "edhrec_rank": 2005,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
     "name": "Minsc & Boo, Timeless Heroes",
     "quantity": 1,
     "board": "main",
@@ -2846,17 +2971,6 @@
     "commanderLegal": true
    },
    {
-    "name": "Misty Rainforest",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 40,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
     "name": "Breeding Pool",
     "quantity": 1,
     "board": "main",
@@ -2879,17 +2993,6 @@
     "commanderLegal": true
    },
    {
-    "name": "Scalding Tarn",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 49,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
     "name": "Steam Vents",
     "quantity": 1,
     "board": "main",
@@ -2901,24 +3004,13 @@
     "commanderLegal": true
    },
    {
-    "name": "Multiversal Passage",
+    "name": "Misty Rainforest",
     "quantity": 1,
     "board": "main",
     "type_line": "Land",
     "cmc": 0,
     "primaryCategory": "land",
-    "edhrec_rank": 2705,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Bountiful Landscape",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 1617,
+    "edhrec_rank": 40,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -2934,6 +3026,28 @@
     "commanderLegal": true
    },
    {
+    "name": "Scalding Tarn",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Land",
+    "cmc": 0,
+    "primaryCategory": "land",
+    "edhrec_rank": 49,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Multiversal Passage",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Land",
+    "cmc": 0,
+    "primaryCategory": "land",
+    "edhrec_rank": 2705,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
     "name": "Hinterland Harbor",
     "quantity": 1,
     "board": "main",
@@ -2941,6 +3055,28 @@
     "cmc": 0,
     "primaryCategory": "land",
     "edhrec_rank": 100,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Thran Portal",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Land — Gate",
+    "cmc": 0,
+    "primaryCategory": "land",
+    "edhrec_rank": 4521,
+    "brawlLegal": false,
+    "commanderLegal": true
+   },
+   {
+    "name": "Bountiful Landscape",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Land",
+    "cmc": 0,
+    "primaryCategory": "land",
+    "edhrec_rank": 1617,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -2989,6 +3125,17 @@
     "commanderLegal": true
    },
    {
+    "name": "Baldur's Gate",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Legendary Land — Gate",
+    "cmc": 0,
+    "primaryCategory": "land",
+    "edhrec_rank": 2407,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
     "name": "Rumble Arena",
     "quantity": 1,
     "board": "main",
@@ -2996,6 +3143,17 @@
     "cmc": 0,
     "primaryCategory": "land",
     "edhrec_rank": 3644,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Daily Bugle Building",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Land",
+    "cmc": 0,
+    "primaryCategory": "land",
+    "edhrec_rank": 3976,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -3011,57 +3169,13 @@
     "commanderLegal": true
    },
    {
-    "name": "Captivating Cave",
+    "name": "Balamb Garden, SeeD Academy // Balamb Garden, Airborne",
     "quantity": 1,
     "board": "main",
-    "type_line": "Land — Cave",
+    "type_line": "Land — Town // Legendary Artifact — Vehicle",
     "cmc": 0,
     "primaryCategory": "land",
-    "edhrec_rank": 5874,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Forgotten Monument",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land — Cave",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 13380,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Cabaretti Courtyard",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 948,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Brokers Hideout",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 1275,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Spirebluff Canal",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 1574,
+    "edhrec_rank": 6712,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -3077,35 +3191,46 @@
     "commanderLegal": true
    },
    {
-    "name": "Terramorphic Expanse",
+    "name": "Captivating Cave",
     "quantity": 1,
     "board": "main",
-    "type_line": "Land",
+    "type_line": "Land — Cave",
     "cmc": 0,
     "primaryCategory": "land",
-    "edhrec_rank": 28,
+    "edhrec_rank": 5874,
     "brawlLegal": true,
     "commanderLegal": true
    },
    {
-    "name": "Cavern of Souls",
+    "name": "Branch of Vitu-Ghazi",
     "quantity": 1,
     "board": "main",
     "type_line": "Land",
     "cmc": 0,
     "primaryCategory": "land",
-    "edhrec_rank": 113,
+    "edhrec_rank": 7262,
     "brawlLegal": true,
     "commanderLegal": true
    },
    {
-    "name": "Fabled Passage",
+    "name": "Plaza of Harmony",
     "quantity": 1,
     "board": "main",
     "type_line": "Land",
     "cmc": 0,
     "primaryCategory": "land",
-    "edhrec_rank": 53,
+    "edhrec_rank": 7308,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Forgotten Monument",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Land — Cave",
+    "cmc": 0,
+    "primaryCategory": "land",
+    "edhrec_rank": 13380,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -3143,7 +3268,7 @@
     "commanderLegal": true
    }
   ],
-  "buildReport": "Archetype: Spellslinger — targeting 61 nonland slots\nRole fills:\n  ramp       14/10 OK\n  draw       18/13 OK\n  removal    14/14 OK\n  wipes      2/2 OK\n  protection 6/3 OK\n  payoffs    10/15 SHORT\n  wincons    13/5 OK\nWarnings:\n  - role shortfall: synergy_payoff needs 15, filled 10 — pool exhausted or collection blocked"
+  "buildReport": "Archetype: Spellslinger — targeting 61 nonland slots\nRole fills:\n  ramp       15/10 OK\n  draw       18/13 OK\n  removal    14/14 OK\n  wipes      2/2 OK\n  protection 6/3 OK\n  payoffs    10/15 SHORT\n  wincons    13/5 OK\nWarnings:\n  - role shortfall: synergy_payoff needs 15, filled 10 — pool exhausted or collection blocked"
  },
  {
   "scenario": "thrasios-tymna",
@@ -3151,7 +3276,7 @@
   "partner": "Tymna the Weaver",
   "format": "commander",
   "ok": true,
-  "elapsedMs": 89047,
+  "elapsedMs": 83597,
   "strategy": "aggro",
   "themes": [
    "control",
@@ -3166,14 +3291,90 @@
   "tribalType": null,
   "totalCards": 99,
   "landCount": 39,
-  "avgCmcNonLand": 2.33,
+  "avgCmcNonLand": 2.28,
   "goldSpellCount": 2,
   "counterMattersCount": 0,
+  "referenceOverlapPct": 18,
+  "referenceMissing": [
+   "thrasios, triton hero",
+   "basalt monolith",
+   "lightning greaves",
+   "sol ring",
+   "thought vessel",
+   "forest",
+   "island",
+   "aesi, tyrant of gyre strait",
+   "avenger of zendikar",
+   "azusa, lost but seeking",
+   "biomancer's familiar",
+   "birds of paradise",
+   "coiling oracle",
+   "delighted halfling",
+   "elvish mystic",
+   "faerie mastermind",
+   "fyndhorn elves",
+   "hullbreaker horror",
+   "kinnan, bonder prodigy",
+   "kiora's follower",
+   "koma, cosmos serpent",
+   "laboratory maniac",
+   "lotus cobra",
+   "rampaging baloths",
+   "scute swarm",
+   "seedborn muse",
+   "springheart nantuko",
+   "tatyova, benthic druid",
+   "thassa's oracle",
+   "tireless provisioner",
+   "exploration",
+   "mystic remora",
+   "rhystic study",
+   "sylvan library",
+   "wild growth",
+   "wilderness reclamation",
+   "arcane denial",
+   "beast within",
+   "counterspell",
+   "cyclonic rift",
+   "force of will",
+   "growth spiral",
+   "heroic intervention",
+   "mana drain",
+   "pongify",
+   "rapid hybridization",
+   "swan song",
+   "alchemist's refuge",
+   "boseiju, who endures",
+   "breeding pool",
+   "command tower",
+   "dreamroot cascade",
+   "flooded grove",
+   "flooded strand",
+   "hedge maze",
+   "hinterland harbor",
+   "misty rainforest",
+   "otawara, soaring city",
+   "rejuvenating springs",
+   "reliquary tower",
+   "simic growth chamber",
+   "tropical island",
+   "vineglimmer snarl",
+   "waterlogged grove",
+   "yavimaya coast",
+   "oko, thief of crowns",
+   "cultivate",
+   "farseek",
+   "finale of devastation",
+   "kodama's reach",
+   "nature's lore",
+   "rampant growth",
+   "three visits"
+  ],
   "categoryCounts": {
    "protection": 5,
-   "utility": 10,
-   "ramp": 27,
-   "draw": 12,
+   "utility": 9,
+   "ramp": 29,
+   "draw": 11,
    "removal": 4,
    "board_wipe": 2,
    "land": 39
@@ -3181,10 +3382,11 @@
   "curve": {
    "0": 1,
    "1": 14,
-   "2": 23,
-   "3": 13,
-   "4": 4,
-   "5": 5
+   "2": 26,
+   "3": 11,
+   "4": 3,
+   "5": 4,
+   "6": 1
   },
   "illegalCardsForFormat": [],
   "commanderLegalInFormat": true,
@@ -3234,28 +3436,6 @@
     "commanderLegal": true
    },
    {
-    "name": "Crop Rotation",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Instant",
-    "cmc": 1,
-    "primaryCategory": "ramp",
-    "edhrec_rank": 215,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Veil of Summer",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Instant",
-    "cmc": 1,
-    "primaryCategory": "draw",
-    "edhrec_rank": 555,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
     "name": "Training Grounds",
     "quantity": 1,
     "board": "main",
@@ -3278,17 +3458,6 @@
     "commanderLegal": true
    },
    {
-    "name": "Voice of Victory",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Creature — Human Bard",
-    "cmc": 2,
-    "primaryCategory": "utility",
-    "edhrec_rank": 588,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
     "name": "Eternal Witness",
     "quantity": 1,
     "board": "main",
@@ -3300,13 +3469,35 @@
     "commanderLegal": true
    },
    {
-    "name": "Ad Nauseam",
+    "name": "Crop Rotation",
     "quantity": 1,
     "board": "main",
     "type_line": "Instant",
-    "cmc": 5,
+    "cmc": 1,
+    "primaryCategory": "ramp",
+    "edhrec_rank": 215,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Veil of Summer",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Instant",
+    "cmc": 1,
     "primaryCategory": "draw",
-    "edhrec_rank": 1305,
+    "edhrec_rank": 555,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Voice of Victory",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Creature — Human Bard",
+    "cmc": 2,
+    "primaryCategory": "utility",
+    "edhrec_rank": 588,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -3333,13 +3524,24 @@
     "commanderLegal": true
    },
    {
-    "name": "Ajani's Pridemate",
+    "name": "Ad Nauseam",
     "quantity": 1,
     "board": "main",
-    "type_line": "Creature — Cat Soldier",
-    "cmc": 2,
-    "primaryCategory": "utility",
-    "edhrec_rank": 2672,
+    "type_line": "Instant",
+    "cmc": 5,
+    "primaryCategory": "draw",
+    "edhrec_rank": 1305,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Culling the Weak",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Instant",
+    "cmc": 1,
+    "primaryCategory": "ramp",
+    "edhrec_rank": 568,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -3366,13 +3568,13 @@
     "commanderLegal": true
    },
    {
-    "name": "Stiltzkin, Moogle Merchant",
+    "name": "Splitskin Doll",
     "quantity": 1,
     "board": "main",
-    "type_line": "Legendary Creature — Moogle",
-    "cmc": 1,
+    "type_line": "Artifact Creature — Toy",
+    "cmc": 2,
     "primaryCategory": "draw",
-    "edhrec_rank": 7543,
+    "edhrec_rank": 7442,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -3410,6 +3612,149 @@
     "commanderLegal": true
    },
    {
+    "name": "Tundra Tank",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Artifact — Vehicle",
+    "cmc": 3,
+    "primaryCategory": "ramp",
+    "edhrec_rank": 18330,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Brush Off",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Instant",
+    "cmc": 4,
+    "primaryCategory": "protection",
+    "edhrec_rank": 16193,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "The Soul Stone",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Legendary Artifact — Infinity Stone",
+    "cmc": 2,
+    "primaryCategory": "ramp",
+    "edhrec_rank": 1259,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Stiltzkin, Moogle Merchant",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Legendary Creature — Moogle",
+    "cmc": 1,
+    "primaryCategory": "draw",
+    "edhrec_rank": 7543,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Zimone, Quandrix Prodigy",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Legendary Creature — Human Wizard",
+    "cmc": 2,
+    "primaryCategory": "ramp",
+    "edhrec_rank": 6669,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Ajani's Pridemate",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Creature — Cat Soldier",
+    "cmc": 2,
+    "primaryCategory": "utility",
+    "edhrec_rank": 2672,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Agatha's Soul Cauldron",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Legendary Artifact",
+    "cmc": 2,
+    "primaryCategory": "removal",
+    "edhrec_rank": 1389,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "An Offer You Can't Refuse",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Instant",
+    "cmc": 1,
+    "primaryCategory": "ramp",
+    "edhrec_rank": 35,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Stockman, Mad Fly-entist",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Legendary Creature — Insect Mutant Scientist",
+    "cmc": 5,
+    "primaryCategory": "draw",
+    "edhrec_rank": 23947,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Imprisoned in the Moon",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Enchantment — Aura",
+    "cmc": 3,
+    "primaryCategory": "ramp",
+    "edhrec_rank": 748,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Worldly Tutor",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Instant",
+    "cmc": 1,
+    "primaryCategory": "draw",
+    "edhrec_rank": 165,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Mystical Tutor",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Instant",
+    "cmc": 1,
+    "primaryCategory": "utility",
+    "edhrec_rank": 146,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Llanowar Elves",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Creature — Elf Druid",
+    "cmc": 1,
+    "primaryCategory": "ramp",
+    "edhrec_rank": 60,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
     "name": "Druid Class",
     "quantity": 1,
     "board": "main",
@@ -3443,13 +3788,13 @@
     "commanderLegal": true
    },
    {
-    "name": "Tundra Tank",
+    "name": "The Rise of Sozin // Fire Lord Sozin",
     "quantity": 1,
     "board": "main",
-    "type_line": "Artifact — Vehicle",
-    "cmc": 3,
-    "primaryCategory": "ramp",
-    "edhrec_rank": 18330,
+    "type_line": "Enchantment — Saga // Legendary Creature — Human Noble",
+    "cmc": 6,
+    "primaryCategory": "board_wipe",
+    "edhrec_rank": 7172,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -3461,17 +3806,6 @@
     "cmc": 4,
     "primaryCategory": "ramp",
     "edhrec_rank": 4183,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Gleaming Barrier",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Artifact Creature — Wall",
-    "cmc": 2,
-    "primaryCategory": "ramp",
-    "edhrec_rank": 6960,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -3509,17 +3843,6 @@
     "commanderLegal": true
    },
    {
-    "name": "Brush Off",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Instant",
-    "cmc": 4,
-    "primaryCategory": "protection",
-    "edhrec_rank": 16193,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
     "name": "Hydro-Channeler",
     "quantity": 1,
     "board": "main",
@@ -3542,28 +3865,6 @@
     "commanderLegal": true
    },
    {
-    "name": "The Eternity Elevator",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Legendary Artifact — Spacecraft",
-    "cmc": 5,
-    "primaryCategory": "ramp",
-    "edhrec_rank": 2032,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "G'raha Tia",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Legendary Creature — Cat Archer",
-    "cmc": 5,
-    "primaryCategory": "draw",
-    "edhrec_rank": 12613,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
     "name": "Long River's Pull",
     "quantity": 1,
     "board": "main",
@@ -3575,112 +3876,13 @@
     "commanderLegal": true
    },
    {
-    "name": "Zimone, Quandrix Prodigy",
+    "name": "Gleaming Barrier",
     "quantity": 1,
     "board": "main",
-    "type_line": "Legendary Creature — Human Wizard",
+    "type_line": "Artifact Creature — Wall",
     "cmc": 2,
     "primaryCategory": "ramp",
-    "edhrec_rank": 6669,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Agatha's Soul Cauldron",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Legendary Artifact",
-    "cmc": 2,
-    "primaryCategory": "removal",
-    "edhrec_rank": 1389,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "White Lotus Tile",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Artifact",
-    "cmc": 4,
-    "primaryCategory": "ramp",
-    "edhrec_rank": 4626,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Gravestone Strider",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Artifact Creature — Golem",
-    "cmc": 2,
-    "primaryCategory": "removal",
-    "edhrec_rank": 21398,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Potioner's Trove",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Artifact",
-    "cmc": 3,
-    "primaryCategory": "ramp",
-    "edhrec_rank": 14574,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Valley Floodcaller",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Creature — Otter Wizard",
-    "cmc": 3,
-    "primaryCategory": "utility",
-    "edhrec_rank": 787,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "An Offer You Can't Refuse",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Instant",
-    "cmc": 1,
-    "primaryCategory": "ramp",
-    "edhrec_rank": 35,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Noxious Revival",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Instant",
-    "cmc": 1,
-    "primaryCategory": "utility",
-    "edhrec_rank": 609,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Badgermole Cub",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Creature — Badger Mole",
-    "cmc": 2,
-    "primaryCategory": "utility",
-    "edhrec_rank": 1576,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Worldly Tutor",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Instant",
-    "cmc": 1,
-    "primaryCategory": "draw",
-    "edhrec_rank": 165,
+    "edhrec_rank": 6960,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -3751,6 +3953,17 @@
     "commanderLegal": true
    },
    {
+    "name": "Simic Signet",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Artifact",
+    "cmc": 2,
+    "primaryCategory": "ramp",
+    "edhrec_rank": 580,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
     "name": "Feed the Swarm",
     "quantity": 1,
     "board": "main",
@@ -3758,6 +3971,17 @@
     "cmc": 2,
     "primaryCategory": "removal",
     "edhrec_rank": 86,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Cankerbloom",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Creature — Phyrexian Fungus",
+    "cmc": 2,
+    "primaryCategory": "removal",
+    "edhrec_rank": 726,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -3773,17 +3997,6 @@
     "commanderLegal": true
    },
    {
-    "name": "Bag of Holding",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Artifact",
-    "cmc": 1,
-    "primaryCategory": "board_wipe",
-    "edhrec_rank": 4018,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
     "name": "Wan Shi Tong, Librarian",
     "quantity": 1,
     "board": "main",
@@ -3795,6 +4008,17 @@
     "commanderLegal": true
    },
    {
+    "name": "Badgermole Cub",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Creature — Badger Mole",
+    "cmc": 2,
+    "primaryCategory": "utility",
+    "edhrec_rank": 1576,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
     "name": "The Cabbage Merchant",
     "quantity": 1,
     "board": "main",
@@ -3802,17 +4026,6 @@
     "cmc": 3,
     "primaryCategory": "ramp",
     "edhrec_rank": 3054,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Garruk's Uprising",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Enchantment",
-    "cmc": 3,
-    "primaryCategory": "draw",
-    "edhrec_rank": 92,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -3835,28 +4048,6 @@
     "cmc": 3,
     "primaryCategory": "draw",
     "edhrec_rank": 97,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Village Rites",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Instant",
-    "cmc": 1,
-    "primaryCategory": "draw",
-    "edhrec_rank": 194,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Multiversal Passage",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 2705,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -3902,6 +4093,28 @@
     "primaryCategory": "land",
     "edhrec_rank": 63,
     "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Multiversal Passage",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Land",
+    "cmc": 0,
+    "primaryCategory": "land",
+    "edhrec_rank": 2705,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Thran Portal",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Land — Gate",
+    "cmc": 0,
+    "primaryCategory": "land",
+    "edhrec_rank": 4521,
+    "brawlLegal": false,
     "commanderLegal": true
    },
    {
@@ -3960,68 +4173,13 @@
     "commanderLegal": true
    },
    {
-    "name": "Rumble Arena",
+    "name": "Baldur's Gate",
     "quantity": 1,
     "board": "main",
-    "type_line": "Land",
+    "type_line": "Legendary Land — Gate",
     "cmc": 0,
     "primaryCategory": "land",
-    "edhrec_rank": 3644,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Capital City",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land — Town",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 4077,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Captivating Cave",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land — Cave",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 5874,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Forgotten Monument",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land — Cave",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 13380,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Brokers Hideout",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 1275,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Scalding Tarn",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 49,
+    "edhrec_rank": 2407,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -4048,13 +4206,79 @@
     "commanderLegal": true
    },
    {
-    "name": "Evolving Wilds",
+    "name": "Rumble Arena",
     "quantity": 1,
     "board": "main",
     "type_line": "Land",
     "cmc": 0,
     "primaryCategory": "land",
-    "edhrec_rank": 18,
+    "edhrec_rank": 3644,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Daily Bugle Building",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Land",
+    "cmc": 0,
+    "primaryCategory": "land",
+    "edhrec_rank": 3976,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Capital City",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Land — Town",
+    "cmc": 0,
+    "primaryCategory": "land",
+    "edhrec_rank": 4077,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Captivating Cave",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Land — Cave",
+    "cmc": 0,
+    "primaryCategory": "land",
+    "edhrec_rank": 5874,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Branch of Vitu-Ghazi",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Land",
+    "cmc": 0,
+    "primaryCategory": "land",
+    "edhrec_rank": 7262,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Plaza of Harmony",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Land",
+    "cmc": 0,
+    "primaryCategory": "land",
+    "edhrec_rank": 7308,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Forgotten Monument",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Land — Cave",
+    "cmc": 0,
+    "primaryCategory": "land",
+    "edhrec_rank": 13380,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -4066,6 +4290,50 @@
     "cmc": 0,
     "primaryCategory": "land",
     "edhrec_rank": 536,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Brokers Hideout",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Land",
+    "cmc": 0,
+    "primaryCategory": "land",
+    "edhrec_rank": 1275,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Scalding Tarn",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Land",
+    "cmc": 0,
+    "primaryCategory": "land",
+    "edhrec_rank": 49,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Revitalizing Repast // Old-Growth Grove",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Instant // Land",
+    "cmc": 1,
+    "primaryCategory": "land",
+    "edhrec_rank": 737,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Evolving Wilds",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Land",
+    "cmc": 0,
+    "primaryCategory": "land",
+    "edhrec_rank": 18,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -4114,72 +4382,6 @@
     "commanderLegal": true
    },
    {
-    "name": "Escape Tunnel",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 845,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Vibrant Cityscape",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 1761,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Cabaretti Courtyard",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 948,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Cavern of Souls",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 113,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Secluded Courtyard",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 225,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Unclaimed Territory",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 245,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
     "name": "Island",
     "quantity": 3,
     "board": "main",
@@ -4224,51 +4426,118 @@
     "commanderLegal": true
    }
   ],
-  "buildReport": "Archetype: Aggro — targeting 60 nonland slots\nRole fills:\n  ramp       28/9 OK\n  draw       13/8 OK\n  removal    7/4 OK\n  wipes      3/2 OK\n  protection 9/3 OK\n  payoffs    0/0 OK\n  wincons    17/1 OK"
+  "buildReport": "Archetype: Aggro — targeting 60 nonland slots\nRole fills:\n  ramp       30/9 OK\n  draw       13/8 OK\n  removal    7/4 OK\n  wipes      3/2 OK\n  protection 9/3 OK\n  payoffs    0/0 OK\n  wincons    23/1 OK"
  },
  {
   "scenario": "mono-w-heliod",
   "commander": "Heliod, Sun-Crowned",
   "format": "commander",
   "ok": true,
-  "elapsedMs": 46533,
+  "elapsedMs": 41971,
   "strategy": "midrange",
   "themes": [
    "enchantments",
    "lifegain",
-   "counters",
-   "flying",
    "artifacts",
+   "flying",
+   "counters",
    "equipment",
-   "aggro",
    "control",
+   "aggro",
+   "ramp",
    "draw",
-   "tokens",
-   "ramp"
+   "tokens"
   ],
   "tribalType": null,
   "totalCards": 99,
-  "landCount": 38,
-  "avgCmcNonLand": 2.82,
+  "landCount": 39,
+  "avgCmcNonLand": 2.75,
   "goldSpellCount": 0,
   "counterMattersCount": 0,
+  "referenceOverlapPct": 20,
+  "referenceMissing": [
+   "heliod, sun-crowned",
+   "aetherflux reservoir",
+   "altar of the pantheon",
+   "cosmos elixir",
+   "oketra's monument",
+   "pearl medallion",
+   "sol ring",
+   "well of lost dreams",
+   "plains",
+   "archangel of thune",
+   "archivist of oghma",
+   "auriok champion",
+   "daxos, blessed by the sun",
+   "dusk legion duelist",
+   "esper sentinel",
+   "exemplar of light",
+   "felidar sovereign",
+   "grand abolisher",
+   "knight of the white orchid",
+   "linden, the steadfast queen",
+   "mangara, the diplomat",
+   "mother of runes",
+   "ranger of eos",
+   "ranger-captain of eos",
+   "recruiter of the guard",
+   "resplendent angel",
+   "serra ascendant",
+   "soul warden",
+   "soul's attendant",
+   "speaker of the heavens",
+   "sun titan",
+   "sunscorch regent",
+   "suture priest",
+   "the gaffer",
+   "triskelion",
+   "voice of the blessed",
+   "walking ballista",
+   "ajani's welcome",
+   "blind obedience",
+   "cleric class",
+   "dawn of hope",
+   "deafening silence",
+   "ghostly prison",
+   "land tax",
+   "sigarda's splendor",
+   "smothering tithe",
+   "generous gift",
+   "heliod's intervention",
+   "reprieve",
+   "silence",
+   "stroke of midnight",
+   "swords to plowshares",
+   "castle ardenvale",
+   "eiganjo, seat of the empire",
+   "emeria, the sky ruin",
+   "hall of heliod's generosity",
+   "minas tirith",
+   "nykthos, shrine to nyx",
+   "radiant fountain",
+   "war room",
+   "ajani, strength of the pride",
+   "austere command",
+   "farewell",
+   "wrath of god"
+  ],
   "categoryCounts": {
    "removal": 10,
    "utility": 14,
    "ramp": 13,
-   "draw": 10,
-   "protection": 3,
+   "draw": 9,
+   "protection": 4,
    "board_wipe": 4,
-   "win_condition": 7,
-   "land": 38
+   "win_condition": 6,
+   "land": 39
   },
   "curve": {
    "0": 1,
    "1": 8,
    "2": 20,
-   "3": 15,
+   "3": 16,
    "4": 7,
-   "5": 9,
+   "5": 7,
    "6": 1
   },
   "illegalCardsForFormat": [],
@@ -4352,28 +4621,6 @@
     "commanderLegal": true
    },
    {
-    "name": "Ethereal Armor",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Enchantment — Aura",
-    "cmc": 1,
-    "primaryCategory": "utility",
-    "edhrec_rank": 1057,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "All That Glitters",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Enchantment — Aura",
-    "cmc": 2,
-    "primaryCategory": "utility",
-    "edhrec_rank": 604,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
     "name": "Glass Casket",
     "quantity": 1,
     "board": "main",
@@ -4385,13 +4632,13 @@
     "commanderLegal": true
    },
    {
-    "name": "Stiltzkin, Moogle Merchant",
+    "name": "Splitskin Doll",
     "quantity": 1,
     "board": "main",
-    "type_line": "Legendary Creature — Moogle",
-    "cmc": 1,
+    "type_line": "Artifact Creature — Toy",
+    "cmc": 2,
     "primaryCategory": "draw",
-    "edhrec_rank": 7543,
+    "edhrec_rank": 7442,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -4473,6 +4720,17 @@
     "commanderLegal": true
    },
    {
+    "name": "Stiltzkin, Moogle Merchant",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Legendary Creature — Moogle",
+    "cmc": 1,
+    "primaryCategory": "draw",
+    "edhrec_rank": 7543,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
     "name": "G'raha Tia",
     "quantity": 1,
     "board": "main",
@@ -4517,17 +4775,6 @@
     "commanderLegal": true
    },
    {
-    "name": "Angel of Vitality",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Creature — Angel",
-    "cmc": 3,
-    "primaryCategory": "utility",
-    "edhrec_rank": 2083,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
     "name": "Haliya, Guided by Light",
     "quantity": 1,
     "board": "main",
@@ -4535,6 +4782,17 @@
     "cmc": 3,
     "primaryCategory": "draw",
     "edhrec_rank": 1847,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Angel of Vitality",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Creature — Angel",
+    "cmc": 3,
+    "primaryCategory": "utility",
+    "edhrec_rank": 2083,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -4550,17 +4808,6 @@
     "commanderLegal": true
    },
    {
-    "name": "Flawless Maneuver",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Instant",
-    "cmc": 3,
-    "primaryCategory": "protection",
-    "edhrec_rank": 184,
-    "brawlLegal": false,
-    "commanderLegal": true
-   },
-   {
     "name": "Mind Stone",
     "quantity": 1,
     "board": "main",
@@ -4572,6 +4819,39 @@
     "commanderLegal": true
    },
    {
+    "name": "Ethereal Armor",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Enchantment — Aura",
+    "cmc": 1,
+    "primaryCategory": "utility",
+    "edhrec_rank": 1057,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "All That Glitters",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Enchantment — Aura",
+    "cmc": 2,
+    "primaryCategory": "utility",
+    "edhrec_rank": 604,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Flawless Maneuver",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Instant",
+    "cmc": 3,
+    "primaryCategory": "protection",
+    "edhrec_rank": 184,
+    "brawlLegal": false,
+    "commanderLegal": true
+   },
+   {
     "name": "Impassioned Orator",
     "quantity": 1,
     "board": "main",
@@ -4579,6 +4859,17 @@
     "cmc": 2,
     "primaryCategory": "utility",
     "edhrec_rank": 4457,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Witch Enchanter // Witch-Blessed Meadow",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Creature — Human Warlock // Land",
+    "cmc": 4,
+    "primaryCategory": "land",
+    "edhrec_rank": 321,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -4667,17 +4958,6 @@
     "cmc": 2,
     "primaryCategory": "draw",
     "edhrec_rank": 6592,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Caretaker's Talent",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Enchantment — Class",
-    "cmc": 3,
-    "primaryCategory": "draw",
-    "edhrec_rank": 669,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -4781,6 +5061,17 @@
     "commanderLegal": true
    },
    {
+    "name": "Silver Sable, Mercenary Leader",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Legendary Creature — Human Mercenary Hero",
+    "cmc": 3,
+    "primaryCategory": "utility",
+    "edhrec_rank": 12881,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
     "name": "Aerith Gainsborough",
     "quantity": 1,
     "board": "main",
@@ -4799,6 +5090,28 @@
     "cmc": 3,
     "primaryCategory": "utility",
     "edhrec_rank": 1021,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Take Up the Shield",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Instant",
+    "cmc": 2,
+    "primaryCategory": "protection",
+    "edhrec_rank": 3996,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Caretaker's Talent",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Enchantment — Class",
+    "cmc": 3,
+    "primaryCategory": "draw",
+    "edhrec_rank": 669,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -4902,50 +5215,6 @@
     "commanderLegal": true
    },
    {
-    "name": "Feather of Flight",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Enchantment — Aura",
-    "cmc": 2,
-    "primaryCategory": "draw",
-    "edhrec_rank": 4088,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Grand Entryway // Elegant Rotunda",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Enchantment — Room // Enchantment — Room",
-    "cmc": 5,
-    "primaryCategory": "utility",
-    "edhrec_rank": 10131,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Case of the Pilfered Proof",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Enchantment — Case",
-    "cmc": 2,
-    "primaryCategory": "draw",
-    "edhrec_rank": 19093,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Lyra Dawnbringer",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Legendary Creature — Angel",
-    "cmc": 5,
-    "primaryCategory": "win_condition",
-    "edhrec_rank": 1815,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
     "name": "Flooded Strand",
     "quantity": 1,
     "board": "main",
@@ -4957,6 +5226,17 @@
     "commanderLegal": true
    },
    {
+    "name": "Razorgrass Ambush // Razorgrass Field",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Instant // Land",
+    "cmc": 2,
+    "primaryCategory": "land",
+    "edhrec_rank": 1856,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
     "name": "Multiversal Passage",
     "quantity": 1,
     "board": "main",
@@ -4964,6 +5244,28 @@
     "cmc": 0,
     "primaryCategory": "land",
     "edhrec_rank": 2705,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Thran Portal",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Land — Gate",
+    "cmc": 0,
+    "primaryCategory": "land",
+    "edhrec_rank": 4521,
+    "brawlLegal": false,
+    "commanderLegal": true
+   },
+   {
+    "name": "Eiganjo, Seat of the Empire",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Legendary Land",
+    "cmc": 0,
+    "primaryCategory": "land",
+    "edhrec_rank": 376,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -5012,52 +5314,8 @@
     "commanderLegal": true
    },
    {
-    "name": "Secluded Courtyard",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 225,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Unclaimed Territory",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 245,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Gemstone Caverns",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Legendary Land",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 179,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Eclipsed Realms",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 4020,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
     "name": "Plains",
-    "quantity": 28,
+    "quantity": 29,
     "board": "main",
     "type_line": "Basic Land — Plains",
     "cmc": 0,
@@ -5067,14 +5325,14 @@
     "commanderLegal": true
    }
   ],
-  "buildReport": "Archetype: Midrange — targeting 61 nonland slots\nRole fills:\n  ramp       15/12 OK\n  draw       15/10 OK\n  removal    12/9 OK\n  wipes      4/4 OK\n  protection 5/3 OK\n  payoffs    3/15 SHORT\n  wincons    13/6 OK\nWarnings:\n  - role shortfall: synergy_payoff needs 15, filled 3 — pool exhausted or collection blocked"
+  "buildReport": "Archetype: Midrange — targeting 61 nonland slots\nRole fills:\n  ramp       14/12 OK\n  draw       15/10 OK\n  removal    12/9 OK\n  wipes      4/4 OK\n  protection 5/3 OK\n  payoffs    3/15 SHORT\n  wincons    13/6 OK\nWarnings:\n  - role shortfall: synergy_payoff needs 15, filled 3 — pool exhausted or collection blocked"
  },
  {
   "scenario": "mono-u-orvar",
   "commander": "Orvar, the All-Form",
   "format": "commander",
   "ok": true,
-  "elapsedMs": 52103,
+  "elapsedMs": 40062,
   "strategy": "spellslinger",
   "themes": [
    "tokens",
@@ -5085,33 +5343,96 @@
    "spellslinger",
    "flying",
    "equipment",
-   "enchantments",
    "counters"
   ],
   "tribalType": null,
   "totalCards": 99,
-  "landCount": 38,
-  "avgCmcNonLand": 2.62,
+  "landCount": 39,
+  "avgCmcNonLand": 2.47,
   "goldSpellCount": 0,
   "counterMattersCount": 0,
+  "referenceOverlapPct": 23,
+  "referenceMissing": [
+   "orvar, the all-form",
+   "coveted jewel",
+   "fellwar stone",
+   "gilded lotus",
+   "mirror box",
+   "sapphire medallion",
+   "sol ring",
+   "thought vessel",
+   "island",
+   "aether channeler",
+   "agent of treachery",
+   "archaeomancer",
+   "cloud of faeries",
+   "hullbreaker horror",
+   "master of waves",
+   "peregrine drake",
+   "phyrexian metamorph",
+   "sakashima of a thousand faces",
+   "scourge of fleets",
+   "shipwreck dowser",
+   "spark double",
+   "spellseeker",
+   "venser, shaper savant",
+   "wavebreak hippocamp",
+   "mystic remora",
+   "propaganda",
+   "rhystic study",
+   "vesuvan duplimancy",
+   "arcane denial",
+   "cerulean wisps",
+   "clockspinning",
+   "cyclonic rift",
+   "dream's grip",
+   "enervate",
+   "essence flux",
+   "ghostly flicker",
+   "gigadrowse",
+   "high tide",
+   "leap",
+   "mind games",
+   "shadow rift",
+   "shimmering mirage",
+   "snap",
+   "thermal flux",
+   "twiddle",
+   "twisted image",
+   "twitch",
+   "whim of volrath",
+   "cloudpost",
+   "glimmerpost",
+   "myriad landscape",
+   "mystic sanctuary",
+   "otawara, soaring city",
+   "reliquary tower",
+   "riptide laboratory",
+   "swarmyard",
+   "aquitect's will",
+   "energy tap",
+   "irenicus's vile duplication",
+   "slip through space",
+   "solve the equation",
+   "trait doctoring"
+  ],
   "categoryCounts": {
    "ramp": 12,
    "draw": 21,
-   "utility": 4,
+   "utility": 3,
    "protection": 7,
    "removal": 14,
    "win_condition": 1,
    "board_wipe": 2,
-   "land": 38
+   "land": 39
   },
   "curve": {
-   "1": 18,
+   "1": 19,
    "2": 18,
    "3": 8,
    "4": 7,
    "5": 7,
-   "6": 2,
-   "7+": 1
+   "6": 1
   },
   "illegalCardsForFormat": [],
   "commanderLegalInFormat": true,
@@ -5172,17 +5493,6 @@
     "commanderLegal": true
    },
    {
-    "name": "Mind Stone",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Artifact",
-    "cmc": 2,
-    "primaryCategory": "ramp",
-    "edhrec_rank": 32,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
     "name": "Solemn Simulacrum",
     "quantity": 1,
     "board": "main",
@@ -5190,6 +5500,17 @@
     "cmc": 4,
     "primaryCategory": "ramp",
     "edhrec_rank": 38,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Mind Stone",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Artifact",
+    "cmc": 2,
+    "primaryCategory": "ramp",
+    "edhrec_rank": 32,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -5212,17 +5533,6 @@
     "cmc": 3,
     "primaryCategory": "ramp",
     "edhrec_rank": 8429,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Murmuring Mystic",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Creature — Human Wizard",
-    "cmc": 4,
-    "primaryCategory": "win_condition",
-    "edhrec_rank": 1733,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -5359,17 +5669,6 @@
     "commanderLegal": true
    },
    {
-    "name": "Fleeting Distraction",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Instant",
-    "cmc": 1,
-    "primaryCategory": "draw",
-    "edhrec_rank": 9114,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
     "name": "An Offer You Can't Refuse",
     "quantity": 1,
     "board": "main",
@@ -5381,13 +5680,24 @@
     "commanderLegal": true
    },
    {
-    "name": "Mystical Tutor",
+    "name": "Fleeting Distraction",
     "quantity": 1,
     "board": "main",
     "type_line": "Instant",
     "cmc": 1,
-    "primaryCategory": "utility",
-    "edhrec_rank": 146,
+    "primaryCategory": "draw",
+    "edhrec_rank": 9114,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Thaumaton Torpedo",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Artifact",
+    "cmc": 1,
+    "primaryCategory": "removal",
+    "edhrec_rank": 19865,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -5403,6 +5713,17 @@
     "commanderLegal": true
    },
    {
+    "name": "Mystical Tutor",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Instant",
+    "cmc": 1,
+    "primaryCategory": "utility",
+    "edhrec_rank": 146,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
     "name": "Archmage of Runes",
     "quantity": 1,
     "board": "main",
@@ -5410,50 +5731,6 @@
     "cmc": 5,
     "primaryCategory": "draw",
     "edhrec_rank": 1048,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Fierce Guardianship",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Instant",
-    "cmc": 3,
-    "primaryCategory": "protection",
-    "edhrec_rank": 80,
-    "brawlLegal": false,
-    "commanderLegal": true
-   },
-   {
-    "name": "Mana Drain",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Instant",
-    "cmc": 2,
-    "primaryCategory": "protection",
-    "edhrec_rank": 115,
-    "brawlLegal": false,
-    "commanderLegal": true
-   },
-   {
-    "name": "Rapid Hybridization",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Instant",
-    "cmc": 1,
-    "primaryCategory": "removal",
-    "edhrec_rank": 209,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Negate",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Instant",
-    "cmc": 2,
-    "primaryCategory": "protection",
-    "edhrec_rank": 54,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -5469,6 +5746,61 @@
     "commanderLegal": true
    },
    {
+    "name": "Murmuring Mystic",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Creature — Human Wizard",
+    "cmc": 4,
+    "primaryCategory": "win_condition",
+    "edhrec_rank": 1733,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Fierce Guardianship",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Instant",
+    "cmc": 3,
+    "primaryCategory": "protection",
+    "edhrec_rank": 80,
+    "brawlLegal": false,
+    "commanderLegal": true
+   },
+   {
+    "name": "Rapid Hybridization",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Instant",
+    "cmc": 1,
+    "primaryCategory": "removal",
+    "edhrec_rank": 209,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Mana Drain",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Instant",
+    "cmc": 2,
+    "primaryCategory": "protection",
+    "edhrec_rank": 115,
+    "brawlLegal": false,
+    "commanderLegal": true
+   },
+   {
+    "name": "Negate",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Instant",
+    "cmc": 2,
+    "primaryCategory": "protection",
+    "edhrec_rank": 54,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
     "name": "Lightning Greaves",
     "quantity": 1,
     "board": "main",
@@ -5476,17 +5808,6 @@
     "cmc": 2,
     "primaryCategory": "protection",
     "edhrec_rank": 13,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Roaming Throne",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Artifact Creature — Golem",
-    "cmc": 4,
-    "primaryCategory": "utility",
-    "edhrec_rank": 133,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -5700,17 +6021,6 @@
     "commanderLegal": true
    },
    {
-    "name": "Meteor Golem",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Artifact Creature — Golem",
-    "cmc": 7,
-    "primaryCategory": "removal",
-    "edhrec_rank": 772,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
     "name": "Bag of Holding",
     "quantity": 1,
     "board": "main",
@@ -5722,13 +6032,13 @@
     "commanderLegal": true
    },
    {
-    "name": "River's Rebuke",
+    "name": "Aetherize",
     "quantity": 1,
     "board": "main",
-    "type_line": "Sorcery",
-    "cmc": 6,
+    "type_line": "Instant",
+    "cmc": 4,
     "primaryCategory": "board_wipe",
-    "edhrec_rank": 3113,
+    "edhrec_rank": 312,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -5755,6 +6065,17 @@
     "commanderLegal": true
    },
    {
+    "name": "The Legend of Kuruk // Avatar Kuruk",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Enchantment — Saga // Legendary Creature — Avatar",
+    "cmc": 4,
+    "primaryCategory": "draw",
+    "edhrec_rank": 7077,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
     "name": "Kaito, Cunning Infiltrator",
     "quantity": 1,
     "board": "main",
@@ -5762,6 +6083,17 @@
     "cmc": 3,
     "primaryCategory": "draw",
     "edhrec_rank": 4371,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Ojer Pakpatiq, Deepest Epoch // Temple of Cyclical Time",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Legendary Creature — God // Land",
+    "cmc": 4,
+    "primaryCategory": "land",
+    "edhrec_rank": 2978,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -5774,17 +6106,6 @@
     "primaryCategory": "ramp",
     "edhrec_rank": 11937,
     "brawlLegal": false,
-    "commanderLegal": true
-   },
-   {
-    "name": "Clinquant Skymage",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Creature — Bird Wizard",
-    "cmc": 4,
-    "primaryCategory": "draw",
-    "edhrec_rank": 6300,
-    "brawlLegal": true,
     "commanderLegal": true
    },
    {
@@ -5821,6 +6142,17 @@
     "commanderLegal": true
    },
    {
+    "name": "Sink into Stupor // Soporific Springs",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Instant // Land",
+    "cmc": 3,
+    "primaryCategory": "land",
+    "edhrec_rank": 178,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
     "name": "Mistrise Village",
     "quantity": 1,
     "board": "main",
@@ -5840,6 +6172,17 @@
     "primaryCategory": "land",
     "edhrec_rank": 2705,
     "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Thran Portal",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Land — Gate",
+    "cmc": 0,
+    "primaryCategory": "land",
+    "edhrec_rank": 4521,
+    "brawlLegal": false,
     "commanderLegal": true
    },
    {
@@ -5876,28 +6219,6 @@
     "commanderLegal": true
    },
    {
-    "name": "Secluded Courtyard",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 225,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Unclaimed Territory",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 245,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
     "name": "Island",
     "quantity": 28,
     "board": "main",
@@ -5909,45 +6230,111 @@
     "commanderLegal": true
    }
   ],
-  "buildReport": "Archetype: Spellslinger — targeting 61 nonland slots\nRole fills:\n  ramp       14/10 OK\n  draw       22/13 OK\n  removal    14/14 OK\n  wipes      2/2 OK\n  protection 8/3 OK\n  payoffs    2/15 SHORT\n  wincons    26/5 OK\nWarnings:\n  - role shortfall: synergy_payoff needs 15, filled 2 — pool exhausted or collection blocked"
+  "buildReport": "Archetype: Spellslinger — targeting 61 nonland slots\nRole fills:\n  ramp       14/10 OK\n  draw       22/13 OK\n  removal    14/14 OK\n  wipes      2/2 OK\n  protection 8/3 OK\n  payoffs    2/15 SHORT\n  wincons    24/5 OK\nWarnings:\n  - role shortfall: synergy_payoff needs 15, filled 2 — pool exhausted or collection blocked"
  },
  {
   "scenario": "mono-b-sheoldred",
   "commander": "Sheoldred, the Apocalypse",
   "format": "commander",
   "ok": true,
-  "elapsedMs": 45920,
-  "strategy": "midrange",
+  "elapsedMs": 38207,
+  "strategy": "control",
   "themes": [
+   "ramp",
    "artifacts",
    "draw",
-   "ramp",
    "sacrifice",
-   "equipment"
+   "equipment",
+   "control"
   ],
   "tribalType": null,
   "totalCards": 99,
-  "landCount": 38,
-  "avgCmcNonLand": 2.97,
+  "landCount": 40,
+  "avgCmcNonLand": 2.78,
   "goldSpellCount": 0,
   "counterMattersCount": 0,
+  "referenceOverlapPct": 22,
+  "referenceMissing": [
+   "sheoldred, the apocalypse",
+   "alhammarret's archive",
+   "bolas's citadel",
+   "font of mythos",
+   "howling mine",
+   "jet medallion",
+   "sol ring",
+   "teferi's puzzle box",
+   "temple bell",
+   "the one ring",
+   "thought vessel",
+   "swamp",
+   "bloodletter of aclazotz",
+   "crypt ghast",
+   "dread presence",
+   "elder brain",
+   "erebos, god of the dead",
+   "fate unraveler",
+   "gray merchant of asphodel",
+   "k'rrik, son of yawgmoth",
+   "master of the feast",
+   "orcish bowmasters",
+   "psychosis crawler",
+   "rankle, master of pranks",
+   "scrawling crawler",
+   "vilis, broker of blood",
+   "vito, thorn of the dusk rose",
+   "witch of the moors",
+   "black market connections",
+   "bloodchief ascension",
+   "exquisite blood",
+   "greed",
+   "no mercy",
+   "sanguine bond",
+   "underworld dreams",
+   "baleful mastery",
+   "blood pact",
+   "deadly rollick",
+   "defile",
+   "imp's mischief",
+   "infernal grasp",
+   "malakir rebirth",
+   "vampiric tutor",
+   "bojuka bog",
+   "cabal coffers",
+   "cabal stronghold",
+   "geier reach sanitarium",
+   "mikokoro, center of the sea",
+   "nykthos, shrine to nyx",
+   "reliquary tower",
+   "urborg, tomb of yawgmoth",
+   "ob nixilis, the hate-twisted",
+   "damnable pact",
+   "damnation",
+   "dark deal",
+   "demonic tutor",
+   "peer into the abyss",
+   "read the bones",
+   "reanimate",
+   "sign in blood",
+   "toxic deluge"
+  ],
   "categoryCounts": {
-   "ramp": 15,
-   "draw": 24,
+   "ramp": 11,
+   "draw": 17,
    "protection": 3,
-   "removal": 9,
+   "removal": 16,
    "win_condition": 3,
    "utility": 3,
-   "board_wipe": 4,
-   "land": 38
+   "board_wipe": 6,
+   "land": 40
   },
   "curve": {
-   "1": 9,
-   "2": 18,
-   "3": 15,
-   "4": 9,
+   "1": 12,
+   "2": 17,
+   "3": 14,
+   "4": 8,
    "5": 5,
-   "6": 5
+   "6": 2,
+   "7+": 1
   },
   "illegalCardsForFormat": [],
   "commanderLegalInFormat": true,
@@ -6140,13 +6527,13 @@
     "commanderLegal": true
    },
    {
-    "name": "Malicious Eclipse",
+    "name": "The Rise of Sozin // Fire Lord Sozin",
     "quantity": 1,
     "board": "main",
-    "type_line": "Sorcery",
-    "cmc": 3,
+    "type_line": "Enchantment — Saga // Legendary Creature — Human Noble",
+    "cmc": 6,
     "primaryCategory": "board_wipe",
-    "edhrec_rank": 18677,
+    "edhrec_rank": 7172,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -6184,6 +6571,17 @@
     "commanderLegal": true
    },
    {
+    "name": "Risky Research",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Sorcery",
+    "cmc": 3,
+    "primaryCategory": "draw",
+    "edhrec_rank": 8965,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
     "name": "Pact Weapon",
     "quantity": 1,
     "board": "main",
@@ -6195,17 +6593,6 @@
     "commanderLegal": true
    },
    {
-    "name": "Lord Skitter's Butcher",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Creature — Rat Peasant",
-    "cmc": 3,
-    "primaryCategory": "draw",
-    "edhrec_rank": 4868,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
     "name": "Agatha's Soul Cauldron",
     "quantity": 1,
     "board": "main",
@@ -6213,6 +6600,17 @@
     "cmc": 2,
     "primaryCategory": "removal",
     "edhrec_rank": 1389,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Venom's Hunger",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Sorcery",
+    "cmc": 5,
+    "primaryCategory": "removal",
+    "edhrec_rank": 12554,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -6250,13 +6648,13 @@
     "commanderLegal": true
    },
    {
-    "name": "Scrap Compactor",
+    "name": "Lord Skitter's Butcher",
     "quantity": 1,
     "board": "main",
-    "type_line": "Artifact",
-    "cmc": 1,
-    "primaryCategory": "removal",
-    "edhrec_rank": 21238,
+    "type_line": "Creature — Rat Peasant",
+    "cmc": 3,
+    "primaryCategory": "draw",
+    "edhrec_rank": 4868,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -6305,6 +6703,17 @@
     "commanderLegal": true
    },
    {
+    "name": "Malicious Eclipse",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Sorcery",
+    "cmc": 3,
+    "primaryCategory": "board_wipe",
+    "edhrec_rank": 18677,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
     "name": "Vexing Bauble",
     "quantity": 1,
     "board": "main",
@@ -6327,28 +6736,6 @@
     "commanderLegal": true
    },
    {
-    "name": "Massacre Wurm",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Creature — Phyrexian Wurm",
-    "cmc": 6,
-    "primaryCategory": "board_wipe",
-    "edhrec_rank": 514,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Sinister Monolith",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Artifact",
-    "cmc": 4,
-    "primaryCategory": "draw",
-    "edhrec_rank": 6089,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
     "name": "Exsanguinate",
     "quantity": 1,
     "board": "main",
@@ -6356,6 +6743,17 @@
     "cmc": 2,
     "primaryCategory": "win_condition",
     "edhrec_rank": 282,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Malakir Rebirth // Malakir Mire",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Instant // Land",
+    "cmc": 1,
+    "primaryCategory": "land",
+    "edhrec_rank": 248,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -6437,17 +6835,6 @@
     "commanderLegal": true
    },
    {
-    "name": "Burnished Hart",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Artifact Creature — Elk",
-    "cmc": 3,
-    "primaryCategory": "ramp",
-    "edhrec_rank": 447,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
     "name": "Warren Soultrader",
     "quantity": 1,
     "board": "main",
@@ -6492,6 +6879,83 @@
     "commanderLegal": true
    },
    {
+    "name": "Eaten Alive",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Sorcery",
+    "cmc": 1,
+    "primaryCategory": "removal",
+    "edhrec_rank": 3187,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Meteor Golem",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Artifact Creature — Golem",
+    "cmc": 7,
+    "primaryCategory": "removal",
+    "edhrec_rank": 772,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Annihilating Glare",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Sorcery",
+    "cmc": 1,
+    "primaryCategory": "removal",
+    "edhrec_rank": 7480,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "You Are Already Dead",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Instant",
+    "cmc": 1,
+    "primaryCategory": "removal",
+    "edhrec_rank": 6848,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Final Vengeance",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Sorcery",
+    "cmc": 1,
+    "primaryCategory": "removal",
+    "edhrec_rank": 5428,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Fell",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Sorcery",
+    "cmc": 2,
+    "primaryCategory": "removal",
+    "edhrec_rank": 2706,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Worthy Cost",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Sorcery",
+    "cmc": 1,
+    "primaryCategory": "removal",
+    "edhrec_rank": 5937,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
     "name": "Villainous Wrath",
     "quantity": 1,
     "board": "main",
@@ -6499,6 +6963,28 @@
     "cmc": 5,
     "primaryCategory": "board_wipe",
     "edhrec_rank": 5687,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Perilous Vault",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Artifact",
+    "cmc": 4,
+    "primaryCategory": "board_wipe",
+    "edhrec_rank": 9543,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Withering Curse",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Sorcery",
+    "cmc": 3,
+    "primaryCategory": "board_wipe",
+    "edhrec_rank": 12769,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -6514,112 +7000,46 @@
     "commanderLegal": true
    },
    {
-    "name": "High-Society Hunter",
+    "name": "Fell the Profane // Fell Mire",
     "quantity": 1,
     "board": "main",
-    "type_line": "Creature — Vampire Noble",
-    "cmc": 5,
-    "primaryCategory": "draw",
-    "edhrec_rank": 4557,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Refurbished Familiar",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Artifact Creature — Zombie Rat",
+    "type_line": "Instant // Land",
     "cmc": 4,
-    "primaryCategory": "draw",
-    "edhrec_rank": 7059,
+    "primaryCategory": "land",
+    "edhrec_rank": 205,
     "brawlLegal": true,
     "commanderLegal": true
    },
    {
-    "name": "Chronicle of Victory",
+    "name": "Boggart Trawler // Boggart Bog",
     "quantity": 1,
     "board": "main",
-    "type_line": "Legendary Artifact",
-    "cmc": 6,
-    "primaryCategory": "draw",
-    "edhrec_rank": 2168,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Anticausal Vestige",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Creature — Eldrazi",
-    "cmc": 6,
-    "primaryCategory": "draw",
-    "edhrec_rank": 2340,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Ashnod's Altar",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Artifact",
+    "type_line": "Creature — Goblin // Land",
     "cmc": 3,
-    "primaryCategory": "ramp",
-    "edhrec_rank": 129,
+    "primaryCategory": "land",
+    "edhrec_rank": 660,
     "brawlLegal": true,
     "commanderLegal": true
    },
    {
-    "name": "Goldvein Pick",
+    "name": "Agadeem's Awakening // Agadeem, the Undercrypt",
     "quantity": 1,
     "board": "main",
-    "type_line": "Artifact — Equipment",
-    "cmc": 2,
-    "primaryCategory": "ramp",
-    "edhrec_rank": 2120,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Doomsday Excruciator",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Creature — Demon",
-    "cmc": 6,
-    "primaryCategory": "draw",
-    "edhrec_rank": 5956,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Costly Plunder",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Instant",
-    "cmc": 2,
-    "primaryCategory": "draw",
-    "edhrec_rank": 3266,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Monument to Endurance",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Artifact",
+    "type_line": "Sorcery // Land",
     "cmc": 3,
-    "primaryCategory": "draw",
-    "edhrec_rank": 1134,
+    "primaryCategory": "land",
+    "edhrec_rank": 966,
     "brawlLegal": true,
     "commanderLegal": true
    },
    {
-    "name": "Greedy Freebooter",
+    "name": "Midgar, City of Mako // Reactor Raid",
     "quantity": 1,
     "board": "main",
-    "type_line": "Creature — Human Pirate",
-    "cmc": 1,
-    "primaryCategory": "ramp",
-    "edhrec_rank": 2342,
+    "type_line": "Land — Town // Sorcery — Adventure",
+    "cmc": 0,
+    "primaryCategory": "land",
+    "edhrec_rank": 1316,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -6632,6 +7052,28 @@
     "primaryCategory": "land",
     "edhrec_rank": 2705,
     "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Urborg, Tomb of Yawgmoth",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Legendary Land",
+    "cmc": 0,
+    "primaryCategory": "land",
+    "edhrec_rank": 72,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Thran Portal",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Land — Gate",
+    "cmc": 0,
+    "primaryCategory": "land",
+    "edhrec_rank": 4521,
+    "brawlLegal": false,
     "commanderLegal": true
    },
    {
@@ -6657,85 +7099,8 @@
     "commanderLegal": true
    },
    {
-    "name": "Secluded Courtyard",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 225,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Unclaimed Territory",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 245,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Urborg, Tomb of Yawgmoth",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Legendary Land",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 72,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Gemstone Caverns",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Legendary Land",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 179,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Eclipsed Realms",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 4020,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Phyrexian Tower",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Legendary Land",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 199,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Takenuma, Abandoned Mire",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Legendary Land",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 243,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
     "name": "Swamp",
-    "quantity": 28,
+    "quantity": 30,
     "board": "main",
     "type_line": "Basic Land — Swamp",
     "cmc": 0,
@@ -6745,14 +7110,14 @@
     "commanderLegal": true
    }
   ],
-  "buildReport": "Archetype: Midrange — targeting 61 nonland slots\nRole fills:\n  ramp       16/12 OK\n  draw       24/10 OK\n  removal    12/9 OK\n  wipes      4/4 OK\n  protection 3/3 OK\n  payoffs    0/0 OK\n  wincons    43/6 OK"
+  "buildReport": "Archetype: Control — targeting 61 nonland slots\nRole fills:\n  ramp       16/12 OK\n  draw       24/12 OK\n  removal    19/16 OK\n  wipes      6/6 OK\n  protection 3/3 OK\n  payoffs    0/0 OK\n  wincons    34/2 OK"
  },
  {
   "scenario": "mono-r-krenko",
   "commander": "Krenko, Mob Boss",
   "format": "commander",
   "ok": true,
-  "elapsedMs": 48534,
+  "elapsedMs": 38656,
   "strategy": "tribal",
   "themes": [
    "tribal"
@@ -6763,6 +7128,58 @@
   "avgCmcNonLand": 2.51,
   "goldSpellCount": 0,
   "counterMattersCount": 0,
+  "referenceOverlapPct": 38,
+  "referenceMissing": [
+   "krenko, mob boss",
+   "coat of arms",
+   "hazoret's monument",
+   "patriar's seal",
+   "ruby medallion",
+   "skullclamp",
+   "sol ring",
+   "staff of domination",
+   "sting, the glinting dagger",
+   "thousand-year elixir",
+   "mountain",
+   "battle cry goblin",
+   "beetleback chief",
+   "conspicuous snoop",
+   "gempalm incinerator",
+   "goblin chieftain",
+   "goblin chirurgeon",
+   "goblin king",
+   "goblin lackey",
+   "goblin piledriver",
+   "goblin recruiter",
+   "goblin ringleader",
+   "hobgoblin bandit lord",
+   "kiki-jiki, mirror breaker",
+   "krenko, tin street kingpin",
+   "legion warboss",
+   "mogg war marshal",
+   "muxus, goblin grandee",
+   "pashalik mons",
+   "rundvelt hordemaster",
+   "siege-gang commander",
+   "treasure nabber",
+   "warren instigator",
+   "blood moon",
+   "boggart shenanigans",
+   "quest for the goblin lord",
+   "shared animosity",
+   "battle hymn",
+   "brightstone ritual",
+   "chaos warp",
+   "massive raid",
+   "arena of glory",
+   "castle embereth",
+   "den of the bugbear",
+   "path of ancestry",
+   "three tree city",
+   "goblin war strike",
+   "hordeling outburst",
+   "vandalblast"
+  ],
   "categoryCounts": {
    "utility": 20,
    "ramp": 10,
@@ -6897,17 +7314,6 @@
     "commanderLegal": true
    },
    {
-    "name": "Lightning Greaves",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Artifact — Equipment",
-    "cmc": 2,
-    "primaryCategory": "protection",
-    "edhrec_rank": 13,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
     "name": "Arcane Signet",
     "quantity": 1,
     "board": "main",
@@ -6915,6 +7321,17 @@
     "cmc": 2,
     "primaryCategory": "ramp",
     "edhrec_rank": 3,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Lightning Greaves",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Artifact — Equipment",
+    "cmc": 2,
+    "primaryCategory": "protection",
+    "edhrec_rank": 13,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -6930,17 +7347,6 @@
     "commanderLegal": true
    },
    {
-    "name": "Purphoros, God of the Forge",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Legendary Enchantment Creature — God",
-    "cmc": 4,
-    "primaryCategory": "win_condition",
-    "edhrec_rank": 653,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
     "name": "Goblin Instigator",
     "quantity": 1,
     "board": "main",
@@ -6948,6 +7354,17 @@
     "cmc": 2,
     "primaryCategory": "utility",
     "edhrec_rank": 3174,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Purphoros, God of the Forge",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Legendary Enchantment Creature — God",
+    "cmc": 4,
+    "primaryCategory": "win_condition",
+    "edhrec_rank": 653,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -7084,28 +7501,6 @@
     "commanderLegal": true
    },
    {
-    "name": "Empty the Warrens",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Sorcery",
-    "cmc": 4,
-    "primaryCategory": "utility",
-    "edhrec_rank": 2523,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Searslicer Goblin",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Creature — Goblin Warrior",
-    "cmc": 2,
-    "primaryCategory": "utility",
-    "edhrec_rank": 4078,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
     "name": "Goblin Grenade",
     "quantity": 1,
     "board": "main",
@@ -7117,17 +7512,6 @@
     "commanderLegal": true
    },
    {
-    "name": "Goblin Sharpshooter",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Creature — Goblin",
-    "cmc": 3,
-    "primaryCategory": "removal",
-    "edhrec_rank": 3749,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
     "name": "Lightning Bolt",
     "quantity": 1,
     "board": "main",
@@ -7135,28 +7519,6 @@
     "cmc": 1,
     "primaryCategory": "removal",
     "edhrec_rank": 157,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Jeska's Will",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Sorcery",
-    "cmc": 3,
-    "primaryCategory": "ramp",
-    "edhrec_rank": 102,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Gamble",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Sorcery",
-    "cmc": 1,
-    "primaryCategory": "utility",
-    "edhrec_rank": 236,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -7183,6 +7545,61 @@
     "commanderLegal": true
    },
    {
+    "name": "Empty the Warrens",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Sorcery",
+    "cmc": 4,
+    "primaryCategory": "utility",
+    "edhrec_rank": 2523,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Searslicer Goblin",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Creature — Goblin Warrior",
+    "cmc": 2,
+    "primaryCategory": "utility",
+    "edhrec_rank": 4078,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Goblin Sharpshooter",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Creature — Goblin",
+    "cmc": 3,
+    "primaryCategory": "removal",
+    "edhrec_rank": 3749,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Jeska's Will",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Sorcery",
+    "cmc": 3,
+    "primaryCategory": "ramp",
+    "edhrec_rank": 102,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Gamble",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Sorcery",
+    "cmc": 1,
+    "primaryCategory": "utility",
+    "edhrec_rank": 236,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
     "name": "Goblin Motivator",
     "quantity": 1,
     "board": "main",
@@ -7191,17 +7608,6 @@
     "primaryCategory": "utility",
     "edhrec_rank": 7280,
     "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Deflecting Swat",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Instant",
-    "cmc": 3,
-    "primaryCategory": "protection",
-    "edhrec_rank": 79,
-    "brawlLegal": false,
     "commanderLegal": true
    },
    {
@@ -7224,6 +7630,17 @@
     "primaryCategory": "utility",
     "edhrec_rank": 5674,
     "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Deflecting Swat",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Instant",
+    "cmc": 3,
+    "primaryCategory": "protection",
+    "edhrec_rank": 79,
+    "brawlLegal": false,
     "commanderLegal": true
    },
    {
@@ -7447,13 +7864,13 @@
     "commanderLegal": true
    },
    {
-    "name": "Mirror of Galadriel",
+    "name": "Shadow of the Goblin",
     "quantity": 1,
     "board": "main",
-    "type_line": "Legendary Artifact",
+    "type_line": "Enchantment",
     "cmc": 2,
     "primaryCategory": "draw",
-    "edhrec_rank": 5671,
+    "edhrec_rank": 5101,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -7480,6 +7897,61 @@
     "commanderLegal": true
    },
    {
+    "name": "Pinnacle Monk // Mystic Peak",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Creature — Djinn Monk // Land",
+    "cmc": 5,
+    "primaryCategory": "land",
+    "edhrec_rank": 540,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Sundering Eruption // Volcanic Fissure",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Sorcery // Land",
+    "cmc": 3,
+    "primaryCategory": "land",
+    "edhrec_rank": 731,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Shatterskull Smashing // Shatterskull, the Hammer Pass",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Sorcery // Land",
+    "cmc": 2,
+    "primaryCategory": "land",
+    "edhrec_rank": 1339,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Spikefield Hazard // Spikefield Cave",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Instant // Land",
+    "cmc": 1,
+    "primaryCategory": "land",
+    "edhrec_rank": 2857,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Lindblum, Industrial Regency // Mage Siege",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Land — Town // Instant — Adventure",
+    "cmc": 0,
+    "primaryCategory": "land",
+    "edhrec_rank": 1584,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
     "name": "Multiversal Passage",
     "quantity": 1,
     "board": "main",
@@ -7502,69 +7974,14 @@
     "commanderLegal": true
    },
    {
-    "name": "Cabaretti Courtyard",
+    "name": "Thran Portal",
     "quantity": 1,
     "board": "main",
-    "type_line": "Land",
+    "type_line": "Land — Gate",
     "cmc": 0,
     "primaryCategory": "land",
-    "edhrec_rank": 948,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Command Tower",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 2,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Cavern of Souls",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 113,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Secluded Courtyard",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 225,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Unclaimed Territory",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 245,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Gemstone Caverns",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Legendary Land",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 179,
-    "brawlLegal": true,
+    "edhrec_rank": 4521,
+    "brawlLegal": false,
     "commanderLegal": true
    },
    {
@@ -7579,14 +7996,14 @@
     "commanderLegal": true
    }
   ],
-  "buildReport": "Archetype: Tribal — targeting 61 nonland slots\nRole fills:\n  ramp       15/11 OK\n  draw       15/10 OK\n  removal    10/6 OK\n  wipes      3/3 OK\n  protection 4/3 OK\n  payoffs    0/0 OK\n  wincons    19/4 OK"
+  "buildReport": "Archetype: Tribal — targeting 61 nonland slots\nRole fills:\n  ramp       15/11 OK\n  draw       15/10 OK\n  removal    10/6 OK\n  wipes      3/3 OK\n  protection 4/3 OK\n  payoffs    0/0 OK\n  wincons    18/4 OK"
  },
  {
   "scenario": "mono-g-ghalta",
   "commander": "Ghalta, Primal Hunger",
   "format": "commander",
   "ok": true,
-  "elapsedMs": 44221,
+  "elapsedMs": 35535,
   "strategy": "aggro",
   "themes": [
    "draw",
@@ -7600,27 +8017,80 @@
   ],
   "tribalType": null,
   "totalCards": 99,
-  "landCount": 38,
-  "avgCmcNonLand": 2.85,
+  "landCount": 41,
+  "avgCmcNonLand": 2.71,
   "goldSpellCount": 0,
   "counterMattersCount": 0,
+  "referenceOverlapPct": 38,
+  "referenceMissing": [
+   "ghalta, primal hunger",
+   "sol ring",
+   "tangleweave armor",
+   "the skullspore nexus",
+   "forest",
+   "arbor elf",
+   "beast whisperer",
+   "defiler of vigor",
+   "disciple of freyalise",
+   "fanatic of rhonas",
+   "fyndhorn elves",
+   "goreclaw, terror of qal sisma",
+   "gwenna, eyes of gaea",
+   "hulking raptor",
+   "karametra's acolyte",
+   "kogla, the titan ape",
+   "llanowar tribe",
+   "managorger hydra",
+   "pugnacious hammerskull",
+   "rhonas the indomitable",
+   "selvala, heart of the wilds",
+   "steel leaf champion",
+   "surrak and goreclaw",
+   "surrak, the hunt caller",
+   "thrashing brontodon",
+   "topiary stomper",
+   "wayward swordtooth",
+   "yorvo, lord of garenbrig",
+   "zopandrel, hunger dominus",
+   "greater good",
+   "unnatural growth",
+   "wild growth",
+   "hunter's insight",
+   "momentous fall",
+   "ram through",
+   "tamiyo's safekeeping",
+   "cactus preserve",
+   "castle garenbrig",
+   "mosswort bridge",
+   "nykthos, shrine to nyx",
+   "reliquary tower",
+   "rogue's passage",
+   "garruk, primal hunter",
+   "kodama's reach",
+   "last march of the ents",
+   "majestic genesis",
+   "nature's lore",
+   "overwhelming stampede",
+   "rishkar's expertise",
+   "traverse the outlands"
+  ],
   "categoryCounts": {
-   "ramp": 25,
-   "draw": 12,
+   "ramp": 24,
+   "draw": 11,
    "removal": 7,
    "win_condition": 3,
    "protection": 5,
-   "utility": 7,
-   "board_wipe": 2,
-   "land": 38
+   "utility": 6,
+   "land": 41,
+   "board_wipe": 2
   },
   "curve": {
    "1": 9,
-   "2": 23,
-   "3": 16,
-   "4": 5,
+   "2": 24,
+   "3": 15,
+   "4": 4,
    "5": 2,
-   "6": 4,
+   "6": 2,
    "7+": 2
   },
   "illegalCardsForFormat": [],
@@ -7792,6 +8262,17 @@
     "commanderLegal": true
    },
    {
+    "name": "Sidequest: Raise a Chocobo // Black Chocobo",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Enchantment // Creature — Bird",
+    "cmc": 2,
+    "primaryCategory": "ramp",
+    "edhrec_rank": 6993,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
     "name": "Open the Gates",
     "quantity": 1,
     "board": "main",
@@ -7814,35 +8295,13 @@
     "commanderLegal": true
    },
    {
-    "name": "Torgal, A Fine Hound",
+    "name": "Esper Origins // Summon: Esper Maduin",
     "quantity": 1,
     "board": "main",
-    "type_line": "Legendary Creature — Wolf",
+    "type_line": "Sorcery // Enchantment Creature — Saga Elemental",
     "cmc": 2,
     "primaryCategory": "ramp",
-    "edhrec_rank": 6174,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Groundchuck & Dirtbag",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Legendary Creature — Ox Mole Mutant",
-    "cmc": 6,
-    "primaryCategory": "ramp",
-    "edhrec_rank": 11081,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "The Great Henge",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Legendary Artifact",
-    "cmc": 9,
-    "primaryCategory": "ramp",
-    "edhrec_rank": 235,
+    "edhrec_rank": 5555,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -7854,6 +8313,17 @@
     "cmc": 2,
     "primaryCategory": "ramp",
     "edhrec_rank": 26,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "The Great Henge",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Legendary Artifact",
+    "cmc": 9,
+    "primaryCategory": "ramp",
+    "edhrec_rank": 235,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -7880,17 +8350,6 @@
     "commanderLegal": true
    },
    {
-    "name": "Eternal Witness",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Creature — Human Shaman",
-    "cmc": 3,
-    "primaryCategory": "utility",
-    "edhrec_rank": 108,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
     "name": "Oracle's Restoration",
     "quantity": 1,
     "board": "main",
@@ -7902,13 +8361,13 @@
     "commanderLegal": true
    },
    {
-    "name": "Frenzied Baloth",
+    "name": "Eternal Witness",
     "quantity": 1,
     "board": "main",
-    "type_line": "Creature — Beast",
-    "cmc": 2,
-    "primaryCategory": "protection",
-    "edhrec_rank": 2912,
+    "type_line": "Creature — Human Shaman",
+    "cmc": 3,
+    "primaryCategory": "utility",
+    "edhrec_rank": 108,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -7924,6 +8383,17 @@
     "commanderLegal": true
    },
    {
+    "name": "Frenzied Baloth",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Creature — Beast",
+    "cmc": 2,
+    "primaryCategory": "protection",
+    "edhrec_rank": 2912,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
     "name": "Tribute to the World Tree",
     "quantity": 1,
     "board": "main",
@@ -7931,17 +8401,6 @@
     "cmc": 3,
     "primaryCategory": "draw",
     "edhrec_rank": 590,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Outcaster Trailblazer",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Creature — Human Druid",
-    "cmc": 3,
-    "primaryCategory": "ramp",
-    "edhrec_rank": 2932,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -7957,13 +8416,13 @@
     "commanderLegal": true
    },
    {
-    "name": "Scavenging Ooze",
+    "name": "Outcaster Trailblazer",
     "quantity": 1,
     "board": "main",
-    "type_line": "Creature — Ooze",
-    "cmc": 2,
-    "primaryCategory": "removal",
-    "edhrec_rank": 1517,
+    "type_line": "Creature — Human Druid",
+    "cmc": 3,
+    "primaryCategory": "ramp",
+    "edhrec_rank": 2932,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -7979,13 +8438,35 @@
     "commanderLegal": true
    },
    {
-    "name": "Kenrith's Transformation",
+    "name": "Disciple of Freyalise // Garden of Freyalise",
     "quantity": 1,
     "board": "main",
-    "type_line": "Enchantment — Aura",
+    "type_line": "Creature — Elf Druid // Land",
+    "cmc": 6,
+    "primaryCategory": "land",
+    "edhrec_rank": 491,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Bridgeworks Battle // Tanglespan Bridgeworks",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Sorcery // Land",
+    "cmc": 3,
+    "primaryCategory": "land",
+    "edhrec_rank": 700,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Scavenging Ooze",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Creature — Ooze",
     "cmc": 2,
     "primaryCategory": "removal",
-    "edhrec_rank": 688,
+    "edhrec_rank": 1517,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -7997,6 +8478,28 @@
     "cmc": 4,
     "primaryCategory": "draw",
     "edhrec_rank": 318,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Kenrith's Transformation",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Enchantment — Aura",
+    "cmc": 2,
+    "primaryCategory": "removal",
+    "edhrec_rank": 688,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Slumbering Trudge",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Creature — Plant Beast",
+    "cmc": 1,
+    "primaryCategory": "utility",
+    "edhrec_rank": 14363,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -8089,39 +8592,6 @@
     "commanderLegal": true
    },
    {
-    "name": "Burnished Hart",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Artifact Creature — Elk",
-    "cmc": 3,
-    "primaryCategory": "ramp",
-    "edhrec_rank": 447,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Ornithopter of Paradise",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Artifact Creature — Thopter",
-    "cmc": 2,
-    "primaryCategory": "ramp",
-    "edhrec_rank": 223,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Farseek",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Sorcery",
-    "cmc": 2,
-    "primaryCategory": "ramp",
-    "edhrec_rank": 23,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
     "name": "Bag of Holding",
     "quantity": 1,
     "board": "main",
@@ -8166,6 +8636,17 @@
     "commanderLegal": true
    },
    {
+    "name": "Farseek",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Sorcery",
+    "cmc": 2,
+    "primaryCategory": "ramp",
+    "edhrec_rank": 22,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
     "name": "Origin of Metalbending",
     "quantity": 1,
     "board": "main",
@@ -8184,6 +8665,17 @@
     "cmc": 2,
     "primaryCategory": "removal",
     "edhrec_rank": 726,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Ornithopter of Paradise",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Artifact Creature — Thopter",
+    "cmc": 2,
+    "primaryCategory": "ramp",
+    "edhrec_rank": 223,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -8232,17 +8724,6 @@
     "commanderLegal": true
    },
    {
-    "name": "Slumbering Trudge",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Creature — Plant Beast",
-    "cmc": 1,
-    "primaryCategory": "utility",
-    "edhrec_rank": 14363,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
     "name": "Up the Beanstalk",
     "quantity": 1,
     "board": "main",
@@ -8276,24 +8757,13 @@
     "commanderLegal": true
    },
    {
-    "name": "The Earth King",
+    "name": "Tangled Florahedron // Tangled Vale",
     "quantity": 1,
     "board": "main",
-    "type_line": "Legendary Creature — Human Noble Ally",
-    "cmc": 4,
-    "primaryCategory": "utility",
-    "edhrec_rank": 3475,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Chronicle of Victory",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Legendary Artifact",
-    "cmc": 6,
-    "primaryCategory": "draw",
-    "edhrec_rank": 2168,
+    "type_line": "Creature — Elemental // Land",
+    "cmc": 2,
+    "primaryCategory": "land",
+    "edhrec_rank": 3183,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -8331,6 +8801,17 @@
     "commanderLegal": true
    },
    {
+    "name": "Thran Portal",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Land — Gate",
+    "cmc": 0,
+    "primaryCategory": "land",
+    "edhrec_rank": 4521,
+    "brawlLegal": false,
+    "commanderLegal": true
+   },
+   {
     "name": "Kishla Village",
     "quantity": 1,
     "board": "main",
@@ -8364,52 +8845,8 @@
     "commanderLegal": true
    },
    {
-    "name": "Command Tower",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 2,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Cavern of Souls",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 113,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Secluded Courtyard",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 225,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Unclaimed Territory",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 245,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
     "name": "Forest",
-    "quantity": 28,
+    "quantity": 31,
     "board": "main",
     "type_line": "Basic Land — Forest",
     "cmc": 0,
@@ -8419,46 +8856,107 @@
     "commanderLegal": true
    }
   ],
-  "buildReport": "Archetype: Aggro — targeting 61 nonland slots\nRole fills:\n  ramp       25/9 OK\n  draw       13/8 OK\n  removal    7/4 OK\n  wipes      2/2 OK\n  protection 5/3 OK\n  payoffs    0/0 OK\n  wincons    28/1 OK"
+  "buildReport": "Archetype: Aggro — targeting 61 nonland slots\nRole fills:\n  ramp       22/9 OK\n  draw       14/8 OK\n  removal    7/4 OK\n  wipes      2/2 OK\n  protection 5/3 OK\n  payoffs    0/0 OK\n  wincons    23/1 OK"
  },
  {
   "scenario": "meren-nel-toth",
   "commander": "Meren of Clan Nel Toth",
   "format": "commander",
   "ok": true,
-  "elapsedMs": 53271,
+  "elapsedMs": 49671,
   "strategy": "aristocrats",
   "themes": [
    "sacrifice",
    "tokens",
    "draw",
    "counters",
-   "artifacts",
    "ramp",
    "aggro",
+   "artifacts",
    "flying",
    "control",
    "enchantments"
   ],
   "tribalType": null,
   "totalCards": 99,
-  "landCount": 38,
-  "avgCmcNonLand": 2.95,
-  "goldSpellCount": 2,
+  "landCount": 39,
+  "avgCmcNonLand": 2.97,
+  "goldSpellCount": 3,
   "counterMattersCount": 0,
+  "referenceOverlapPct": 42,
+  "referenceMissing": [
+   "meren of clan nel toth",
+   "skullclamp",
+   "sol ring",
+   "forest",
+   "swamp",
+   "accursed marauder",
+   "birds of paradise",
+   "blood artist",
+   "braids, arisen nightmare",
+   "butcher of malakir",
+   "carrion feeder",
+   "caustic caterpillar",
+   "deathrite shaman",
+   "fleshbag marauder",
+   "gray merchant of asphodel",
+   "haywire mite",
+   "mikaeus, the unhallowed",
+   "plaguecrafter",
+   "protean hulk",
+   "ravenous chupacabra",
+   "sakura-tribe elder",
+   "sheoldred, whispering one",
+   "shriekmaw",
+   "spore frog",
+   "viscera seer",
+   "wight of the reliquary",
+   "wood elves",
+   "yawgmoth, thran physician",
+   "animate dead",
+   "dictate of erebos",
+   "insidious roots",
+   "journey to eternity",
+   "moldervine reclamation",
+   "assassin's trophy",
+   "grisly salvage",
+   "putrefy",
+   "bojuka bog",
+   "command tower",
+   "golgari rot farm",
+   "high market",
+   "llanowar wastes",
+   "necroblossom snarl",
+   "overgrown tomb",
+   "phyrexian tower",
+   "tainted wood",
+   "temple of malady",
+   "twilight mire",
+   "undergrowth stadium",
+   "urborg, tomb of yawgmoth",
+   "verdant catacombs",
+   "woodland cemetery",
+   "liliana, dreadhorde general",
+   "buried alive",
+   "diabolic intent",
+   "living death",
+   "reanimate",
+   "rise of the witch-king",
+   "toxic deluge"
+  ],
   "categoryCounts": {
    "utility": 10,
-   "ramp": 19,
-   "win_condition": 2,
-   "draw": 18,
+   "ramp": 18,
+   "win_condition": 3,
+   "draw": 17,
    "removal": 7,
    "board_wipe": 3,
    "protection": 2,
-   "land": 38
+   "land": 39
   },
   "curve": {
    "1": 9,
-   "2": 18,
+   "2": 17,
    "3": 19,
    "4": 6,
    "5": 5,
@@ -8513,17 +9011,6 @@
     "commanderLegal": true
    },
    {
-    "name": "Ashnod's Altar",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Artifact",
-    "cmc": 3,
-    "primaryCategory": "ramp",
-    "edhrec_rank": 131,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
     "name": "Grim Haruspex",
     "quantity": 1,
     "board": "main",
@@ -8531,6 +9018,17 @@
     "cmc": 3,
     "primaryCategory": "draw",
     "edhrec_rank": 1097,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Ashnod's Altar",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Artifact",
+    "cmc": 3,
+    "primaryCategory": "ramp",
+    "edhrec_rank": 131,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -8557,6 +9055,17 @@
     "commanderLegal": true
    },
    {
+    "name": "Syr Konrad, the Grim",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Legendary Creature — Human Knight",
+    "cmc": 5,
+    "primaryCategory": "win_condition",
+    "edhrec_rank": 252,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
     "name": "Entomb",
     "quantity": 1,
     "board": "main",
@@ -8568,13 +9077,35 @@
     "commanderLegal": true
    },
    {
-    "name": "Syr Konrad, the Grim",
+    "name": "Bushwhack",
     "quantity": 1,
     "board": "main",
-    "type_line": "Legendary Creature — Human Knight",
-    "cmc": 5,
-    "primaryCategory": "win_condition",
-    "edhrec_rank": 252,
+    "type_line": "Sorcery",
+    "cmc": 1,
+    "primaryCategory": "removal",
+    "edhrec_rank": 1310,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Starting Column",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Artifact",
+    "cmc": 3,
+    "primaryCategory": "ramp",
+    "edhrec_rank": 8429,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Oracle's Restoration",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Sorcery",
+    "cmc": 1,
+    "primaryCategory": "draw",
+    "edhrec_rank": 17001,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -8645,39 +9176,6 @@
     "commanderLegal": true
    },
    {
-    "name": "Bushwhack",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Sorcery",
-    "cmc": 1,
-    "primaryCategory": "removal",
-    "edhrec_rank": 1310,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Starting Column",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Artifact",
-    "cmc": 3,
-    "primaryCategory": "ramp",
-    "edhrec_rank": 8429,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Oracle's Restoration",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Sorcery",
-    "cmc": 1,
-    "primaryCategory": "draw",
-    "edhrec_rank": 17001,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
     "name": "Agatha's Soul Cauldron",
     "quantity": 1,
     "board": "main",
@@ -8689,13 +9187,13 @@
     "commanderLegal": true
    },
    {
-    "name": "Conclave Naturalists",
+    "name": "Venom's Hunger",
     "quantity": 1,
     "board": "main",
-    "type_line": "Creature — Dryad",
+    "type_line": "Sorcery",
     "cmc": 5,
     "primaryCategory": "removal",
-    "edhrec_rank": 21070,
+    "edhrec_rank": 12554,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -8865,6 +9363,17 @@
     "commanderLegal": true
    },
    {
+    "name": "Cauldron of Essence",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Artifact",
+    "cmc": 3,
+    "primaryCategory": "win_condition",
+    "edhrec_rank": 4216,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
     "name": "Umbral Collar Zealot",
     "quantity": 1,
     "board": "main",
@@ -8894,17 +9403,6 @@
     "cmc": 2,
     "primaryCategory": "ramp",
     "edhrec_rank": 656,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Rampant Growth",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Sorcery",
-    "cmc": 2,
-    "primaryCategory": "ramp",
-    "edhrec_rank": 26,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -8986,6 +9484,17 @@
     "commanderLegal": true
    },
    {
+    "name": "Sephiroth, Fabled SOLDIER // Sephiroth, One-Winged Angel",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Legendary Creature — Human Avatar Soldier // Legendary Creature — Angel Nightmare Avatar",
+    "cmc": 3,
+    "primaryCategory": "draw",
+    "edhrec_rank": 1421,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
     "name": "The Great Henge",
     "quantity": 1,
     "board": "main",
@@ -9015,17 +9524,6 @@
     "cmc": 2,
     "primaryCategory": "draw",
     "edhrec_rank": 6688,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Tribute to the World Tree",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Enchantment",
-    "cmc": 3,
-    "primaryCategory": "draw",
-    "edhrec_rank": 590,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -9129,13 +9627,13 @@
     "commanderLegal": true
    },
    {
-    "name": "Fang, Fearless l'Cie",
+    "name": "Disciple of Freyalise // Garden of Freyalise",
     "quantity": 1,
     "board": "main",
-    "type_line": "Legendary Creature — Human Warrior",
-    "cmc": 3,
-    "primaryCategory": "draw",
-    "edhrec_rank": 6488,
+    "type_line": "Creature — Elf Druid // Land",
+    "cmc": 6,
+    "primaryCategory": "land",
+    "edhrec_rank": 491,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -9162,6 +9660,28 @@
     "commanderLegal": true
    },
    {
+    "name": "Revitalizing Repast // Old-Growth Grove",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Instant // Land",
+    "cmc": 1,
+    "primaryCategory": "land",
+    "edhrec_rank": 737,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Command Tower",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Land",
+    "cmc": 0,
+    "primaryCategory": "land",
+    "edhrec_rank": 2,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
     "name": "Misty Rainforest",
     "quantity": 1,
     "board": "main",
@@ -9184,13 +9704,46 @@
     "commanderLegal": true
    },
    {
-    "name": "Command Tower",
+    "name": "Thran Portal",
     "quantity": 1,
     "board": "main",
-    "type_line": "Land",
+    "type_line": "Land — Gate",
     "cmc": 0,
     "primaryCategory": "land",
-    "edhrec_rank": 2,
+    "edhrec_rank": 4521,
+    "brawlLegal": false,
+    "commanderLegal": true
+   },
+   {
+    "name": "Fell the Profane // Fell Mire",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Instant // Land",
+    "cmc": 4,
+    "primaryCategory": "land",
+    "edhrec_rank": 205,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Malakir Rebirth // Malakir Mire",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Instant // Land",
+    "cmc": 1,
+    "primaryCategory": "land",
+    "edhrec_rank": 248,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Boggart Trawler // Boggart Bog",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Creature — Goblin // Land",
+    "cmc": 3,
+    "primaryCategory": "land",
+    "edhrec_rank": 660,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -9206,6 +9759,39 @@
     "commanderLegal": true
    },
    {
+    "name": "Midgar, City of Mako // Reactor Raid",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Land — Town // Sorcery — Adventure",
+    "cmc": 0,
+    "primaryCategory": "land",
+    "edhrec_rank": 1316,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Baldur's Gate",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Legendary Land — Gate",
+    "cmc": 0,
+    "primaryCategory": "land",
+    "edhrec_rank": 2407,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Urborg, Tomb of Yawgmoth",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Legendary Land",
+    "cmc": 0,
+    "primaryCategory": "land",
+    "edhrec_rank": 72,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
     "name": "Rumble Arena",
     "quantity": 1,
     "board": "main",
@@ -9213,6 +9799,17 @@
     "cmc": 0,
     "primaryCategory": "land",
     "edhrec_rank": 3644,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Daily Bugle Building",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Land",
+    "cmc": 0,
+    "primaryCategory": "land",
+    "edhrec_rank": 3976,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -9228,118 +9825,19 @@
     "commanderLegal": true
    },
    {
-    "name": "Captivating Cave",
+    "name": "Phyrexian Tower",
     "quantity": 1,
     "board": "main",
-    "type_line": "Land — Cave",
+    "type_line": "Legendary Land",
     "cmc": 0,
     "primaryCategory": "land",
-    "edhrec_rank": 5874,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Forgotten Monument",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land — Cave",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 13380,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Cavern of Souls",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 113,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Secluded Courtyard",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 225,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Unclaimed Territory",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 245,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Hashep Oasis",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land — Desert",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 4065,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Kishla Village",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 5125,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Cabaretti Courtyard",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 948,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Brokers Hideout",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 1275,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Eclipsed Realms",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 4020,
+    "edhrec_rank": 199,
     "brawlLegal": true,
     "commanderLegal": true
    },
    {
     "name": "Swamp",
-    "quantity": 10,
+    "quantity": 11,
     "board": "main",
     "type_line": "Basic Land — Swamp",
     "cmc": 0,
@@ -9350,7 +9848,7 @@
    },
    {
     "name": "Forest",
-    "quantity": 10,
+    "quantity": 9,
     "board": "main",
     "type_line": "Basic Land — Forest",
     "cmc": 0,
@@ -9360,14 +9858,14 @@
     "commanderLegal": true
    }
   ],
-  "buildReport": "Archetype: Aristocrats — targeting 61 nonland slots\nRole fills:\n  ramp       16/12 OK\n  draw       15/10 OK\n  removal    10/7 OK\n  wipes      3/3 OK\n  protection 5/3 OK\n  payoffs    3/8 SHORT\n  wincons    23/5 OK\nWarnings:\n  - role shortfall: synergy_payoff needs 8, filled 3 — pool exhausted or collection blocked"
+  "buildReport": "Archetype: Aristocrats — targeting 61 nonland slots\nRole fills:\n  ramp       16/12 OK\n  draw       15/10 OK\n  removal    10/7 OK\n  wipes      3/3 OK\n  protection 4/3 OK\n  payoffs    3/8 SHORT\n  wincons    22/5 OK\nWarnings:\n  - role shortfall: synergy_payoff needs 8, filled 3 — pool exhausted or collection blocked"
  },
  {
   "scenario": "general-tazri",
   "commander": "General Tazri",
   "format": "commander",
   "ok": true,
-  "elapsedMs": 46273,
+  "elapsedMs": 54653,
   "strategy": "tribal",
   "themes": [
    "tribal"
@@ -9375,25 +9873,105 @@
   "tribalType": "ally",
   "totalCards": 99,
   "landCount": 38,
-  "avgCmcNonLand": 3,
+  "avgCmcNonLand": 3.02,
   "goldSpellCount": 28,
   "counterMattersCount": 0,
+  "referenceOverlapPct": 28,
+  "referenceMissing": [
+   "general tazri",
+   "captain's claws",
+   "fellwar stone",
+   "herald's horn",
+   "sol ring",
+   "urza's incubator",
+   "forest",
+   "island",
+   "mountain",
+   "plains",
+   "swamp",
+   "agadeem occultist",
+   "bala ged thief",
+   "beastcaller savant",
+   "chasm guide",
+   "firemantle mage",
+   "hada freeblade",
+   "hagra diabolist",
+   "halimar excavator",
+   "harabaz druid",
+   "hero of goma fada",
+   "jwari shapeshifter",
+   "kabira evangel",
+   "kalastria healer",
+   "kazuul warlord",
+   "kor bladewhirl",
+   "lantern scout",
+   "munda, ambush leader",
+   "murasa pyromancer",
+   "ondu champion",
+   "ondu cleric",
+   "resolute blademaster",
+   "sea gate loremaster",
+   "seascape aerialist",
+   "tajuru warcaller",
+   "talus paladin",
+   "tuktuk scrapper",
+   "turntimber ranger",
+   "kindred discovery",
+   "reflections of littjara",
+   "retreat to emeria",
+   "sokka's charge",
+   "eerie interlude",
+   "heroic intervention",
+   "kindred summons",
+   "lae'zel's acrobatics",
+   "semester's end",
+   "swords to plowshares",
+   "ally encampment",
+   "breeding pool",
+   "cavern of souls",
+   "command tower",
+   "evolving wilds",
+   "exotic orchard",
+   "flooded strand",
+   "godless shrine",
+   "hallowed fountain",
+   "jasmine dragon tea shop",
+   "jungle shrine",
+   "mystic monastery",
+   "overgrown tomb",
+   "path of ancestry",
+   "reliquary tower",
+   "sacred foundry",
+   "sandsteppe citadel",
+   "seaside citadel",
+   "secluded courtyard",
+   "stomping ground",
+   "temple garden",
+   "the world tree",
+   "unclaimed territory",
+   "windswept heath",
+   "gideon, ally of zendikar",
+   "distant melody",
+   "kodama's reach",
+   "march from the tomb",
+   "unified front"
+  ],
   "categoryCounts": {
-   "ramp": 25,
-   "utility": 9,
+   "ramp": 22,
+   "utility": 11,
    "removal": 10,
-   "win_condition": 4,
    "draw": 7,
    "protection": 3,
+   "win_condition": 5,
    "board_wipe": 3,
    "land": 38
   },
   "curve": {
    "1": 4,
-   "2": 27,
+   "2": 26,
    "3": 12,
-   "4": 6,
-   "5": 11,
+   "4": 8,
+   "5": 10,
    "7+": 1
   },
   "illegalCardsForFormat": [],
@@ -9411,6 +9989,17 @@
     "commanderLegal": true
    },
    {
+    "name": "Katara, the Fearless",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Legendary Creature — Human Warrior Ally",
+    "cmc": 3,
+    "primaryCategory": "utility",
+    "edhrec_rank": 5005,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
     "name": "Chromatic Lantern",
     "quantity": 1,
     "board": "main",
@@ -9422,13 +10011,13 @@
     "commanderLegal": true
    },
    {
-    "name": "Katara, the Fearless",
+    "name": "Great Divide Guide",
     "quantity": 1,
     "board": "main",
-    "type_line": "Legendary Creature — Human Warrior Ally",
-    "cmc": 3,
-    "primaryCategory": "utility",
-    "edhrec_rank": 5005,
+    "type_line": "Creature — Human Scout Ally",
+    "cmc": 2,
+    "primaryCategory": "ramp",
+    "edhrec_rank": 3237,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -9455,28 +10044,6 @@
     "commanderLegal": true
    },
    {
-    "name": "Great Divide Guide",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Creature — Human Scout Ally",
-    "cmc": 2,
-    "primaryCategory": "ramp",
-    "edhrec_rank": 3237,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Cultivate",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Sorcery",
-    "cmc": 3,
-    "primaryCategory": "ramp",
-    "edhrec_rank": 20,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
     "name": "Noggle Robber",
     "quantity": 1,
     "board": "main",
@@ -9495,72 +10062,6 @@
     "cmc": 1,
     "primaryCategory": "removal",
     "edhrec_rank": 1310,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Bloom Tender",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Creature — Elf Druid",
-    "cmc": 2,
-    "primaryCategory": "ramp",
-    "edhrec_rank": 273,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Jegantha, the Wellspring",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Legendary Creature — Elemental Elk",
-    "cmc": 5,
-    "primaryCategory": "ramp",
-    "edhrec_rank": 3861,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Door to Nothingness",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Artifact",
-    "cmc": 5,
-    "primaryCategory": "utility",
-    "edhrec_rank": 7348,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Progenitus",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Legendary Creature — Hydra Avatar",
-    "cmc": 10,
-    "primaryCategory": "win_condition",
-    "edhrec_rank": 6568,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Omnath, Locus of All",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Legendary Creature — Phyrexian Elemental",
-    "cmc": 5,
-    "primaryCategory": "ramp",
-    "edhrec_rank": 5204,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Fusion Elemental",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Creature — Elemental",
-    "cmc": 5,
-    "primaryCategory": "win_condition",
-    "edhrec_rank": 15118,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -9620,13 +10121,13 @@
     "commanderLegal": true
    },
    {
-    "name": "Agatha's Soul Cauldron",
+    "name": "Cultivate",
     "quantity": 1,
     "board": "main",
-    "type_line": "Legendary Artifact",
-    "cmc": 2,
-    "primaryCategory": "removal",
-    "edhrec_rank": 1389,
+    "type_line": "Sorcery",
+    "cmc": 3,
+    "primaryCategory": "ramp",
+    "edhrec_rank": 20,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -9638,6 +10139,17 @@
     "cmc": 4,
     "primaryCategory": "protection",
     "edhrec_rank": 5036,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Agatha's Soul Cauldron",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Legendary Artifact",
+    "cmc": 2,
+    "primaryCategory": "removal",
+    "edhrec_rank": 1389,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -9675,6 +10187,17 @@
     "commanderLegal": true
    },
    {
+    "name": "Earth King's Lieutenant",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Creature — Human Soldier Ally",
+    "cmc": 2,
+    "primaryCategory": "utility",
+    "edhrec_rank": 8094,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
     "name": "Cloudshift",
     "quantity": 1,
     "board": "main",
@@ -9693,17 +10216,6 @@
     "cmc": 1,
     "primaryCategory": "removal",
     "edhrec_rank": 15,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Earth King's Lieutenant",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Creature — Human Soldier Ally",
-    "cmc": 2,
-    "primaryCategory": "utility",
-    "edhrec_rank": 8094,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -9730,6 +10242,83 @@
     "commanderLegal": true
    },
    {
+    "name": "Bloom Tender",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Creature — Elf Druid",
+    "cmc": 2,
+    "primaryCategory": "ramp",
+    "edhrec_rank": 273,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Jegantha, the Wellspring",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Legendary Creature — Elemental Elk",
+    "cmc": 5,
+    "primaryCategory": "ramp",
+    "edhrec_rank": 3861,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Door to Nothingness",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Artifact",
+    "cmc": 5,
+    "primaryCategory": "utility",
+    "edhrec_rank": 7348,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Maelstrom Archangel",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Creature — Angel",
+    "cmc": 5,
+    "primaryCategory": "win_condition",
+    "edhrec_rank": 6453,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Progenitus",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Legendary Creature — Hydra Avatar",
+    "cmc": 10,
+    "primaryCategory": "win_condition",
+    "edhrec_rank": 6568,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Omnath, Locus of All",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Legendary Creature — Phyrexian Elemental",
+    "cmc": 5,
+    "primaryCategory": "ramp",
+    "edhrec_rank": 5204,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Fusion Elemental",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Creature — Elemental",
+    "cmc": 5,
+    "primaryCategory": "win_condition",
+    "edhrec_rank": 15118,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
     "name": "Wartime Protestors",
     "quantity": 1,
     "board": "main",
@@ -9752,6 +10341,28 @@
     "commanderLegal": true
    },
    {
+    "name": "Roaming Throne",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Artifact Creature — Golem",
+    "cmc": 4,
+    "primaryCategory": "utility",
+    "edhrec_rank": 133,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Airbender Ascension",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Enchantment",
+    "cmc": 2,
+    "primaryCategory": "utility",
+    "edhrec_rank": 2920,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
     "name": "Mind Stone",
     "quantity": 1,
     "board": "main",
@@ -9759,50 +10370,6 @@
     "cmc": 2,
     "primaryCategory": "ramp",
     "edhrec_rank": 32,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Coldsteel Heart",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Snow Artifact",
-    "cmc": 2,
-    "primaryCategory": "ramp",
-    "edhrec_rank": 2073,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Talisman of Progress",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Artifact",
-    "cmc": 2,
-    "primaryCategory": "ramp",
-    "edhrec_rank": 147,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Talisman of Conviction",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Artifact",
-    "cmc": 2,
-    "primaryCategory": "ramp",
-    "edhrec_rank": 154,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Talisman of Curiosity",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Artifact",
-    "cmc": 2,
-    "primaryCategory": "ramp",
-    "edhrec_rank": 461,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -9829,6 +10396,28 @@
     "commanderLegal": true
    },
    {
+    "name": "Talisman of Progress",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Artifact",
+    "cmc": 2,
+    "primaryCategory": "ramp",
+    "edhrec_rank": 147,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Talisman of Conviction",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Artifact",
+    "cmc": 2,
+    "primaryCategory": "ramp",
+    "edhrec_rank": 154,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
     "name": "Izzet Signet",
     "quantity": 1,
     "board": "main",
@@ -9851,6 +10440,17 @@
     "commanderLegal": true
    },
    {
+    "name": "Talisman of Curiosity",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Artifact",
+    "cmc": 2,
+    "primaryCategory": "ramp",
+    "edhrec_rank": 461,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
     "name": "Talisman of Resilience",
     "quantity": 1,
     "board": "main",
@@ -9858,28 +10458,6 @@
     "cmc": 2,
     "primaryCategory": "ramp",
     "edhrec_rank": 478,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Golgari Signet",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Artifact",
-    "cmc": 2,
-    "primaryCategory": "ramp",
-    "edhrec_rank": 656,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Talisman of Unity",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Artifact",
-    "cmc": 2,
-    "primaryCategory": "ramp",
-    "edhrec_rank": 976,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -9972,13 +10550,13 @@
     "commanderLegal": true
    },
    {
-    "name": "Ashling's Command",
+    "name": "Aetherize",
     "quantity": 1,
     "board": "main",
-    "type_line": "Kindred Instant — Elemental",
-    "cmc": 5,
+    "type_line": "Instant",
+    "cmc": 4,
     "primaryCategory": "board_wipe",
-    "edhrec_rank": 7063,
+    "edhrec_rank": 312,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -10016,6 +10594,28 @@
     "commanderLegal": true
    },
    {
+    "name": "Jodah, the Unifier",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Legendary Creature — Human Wizard",
+    "cmc": 5,
+    "primaryCategory": "win_condition",
+    "edhrec_rank": 2820,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Hermitic Herbalist",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Creature — Human Druid Ally",
+    "cmc": 2,
+    "primaryCategory": "ramp",
+    "edhrec_rank": 7471,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
     "name": "Mortify",
     "quantity": 1,
     "board": "main",
@@ -10049,24 +10649,13 @@
     "commanderLegal": true
    },
    {
-    "name": "Katara, Water Tribe's Hope",
+    "name": "Command Tower",
     "quantity": 1,
     "board": "main",
-    "type_line": "Legendary Creature — Human Warrior Ally",
-    "cmc": 5,
-    "primaryCategory": "win_condition",
-    "edhrec_rank": 5105,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "The Gitrog Monster",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Legendary Creature — Frog Horror",
-    "cmc": 5,
-    "primaryCategory": "ramp",
-    "edhrec_rank": 889,
+    "type_line": "Land",
+    "cmc": 0,
+    "primaryCategory": "land",
+    "edhrec_rank": 2,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -10082,14 +10671,14 @@
     "commanderLegal": true
    },
    {
-    "name": "Command Tower",
+    "name": "Thran Portal",
     "quantity": 1,
     "board": "main",
-    "type_line": "Land",
+    "type_line": "Land — Gate",
     "cmc": 0,
     "primaryCategory": "land",
-    "edhrec_rank": 2,
-    "brawlLegal": true,
+    "edhrec_rank": 4521,
+    "brawlLegal": false,
     "commanderLegal": true
    },
    {
@@ -10100,61 +10689,6 @@
     "cmc": 0,
     "primaryCategory": "land",
     "edhrec_rank": 179,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Rumble Arena",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 3644,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Capital City",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land — Town",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 4077,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Captivating Cave",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land — Cave",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 5874,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Forgotten Monument",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land — Cave",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 13380,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Misty Rainforest",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 40,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -10192,6 +10726,17 @@
     "commanderLegal": true
    },
    {
+    "name": "Baldur's Gate",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Legendary Land — Gate",
+    "cmc": 0,
+    "primaryCategory": "land",
+    "edhrec_rank": 2407,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
     "name": "Temple Garden",
     "quantity": 1,
     "board": "main",
@@ -10199,6 +10744,39 @@
     "cmc": 0,
     "primaryCategory": "land",
     "edhrec_rank": 82,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Rumble Arena",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Land",
+    "cmc": 0,
+    "primaryCategory": "land",
+    "edhrec_rank": 3644,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Daily Bugle Building",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Land",
+    "cmc": 0,
+    "primaryCategory": "land",
+    "edhrec_rank": 3976,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Capital City",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Land — Town",
+    "cmc": 0,
+    "primaryCategory": "land",
+    "edhrec_rank": 4077,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -10214,17 +10792,6 @@
     "commanderLegal": true
    },
    {
-    "name": "Scalding Tarn",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 49,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
     "name": "Godless Shrine",
     "quantity": 1,
     "board": "main",
@@ -10236,28 +10803,6 @@
     "commanderLegal": true
    },
    {
-    "name": "Steam Vents",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land — Island Mountain",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 67,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Blood Crypt",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land — Swamp Mountain",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 69,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
     "name": "Evolving Wilds",
     "quantity": 1,
     "board": "main",
@@ -10265,6 +10810,50 @@
     "cmc": 0,
     "primaryCategory": "land",
     "edhrec_rank": 18,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Captivating Cave",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Land — Cave",
+    "cmc": 0,
+    "primaryCategory": "land",
+    "edhrec_rank": 5874,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Branch of Vitu-Ghazi",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Land",
+    "cmc": 0,
+    "primaryCategory": "land",
+    "edhrec_rank": 7262,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Plaza of Harmony",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Land",
+    "cmc": 0,
+    "primaryCategory": "land",
+    "edhrec_rank": 7308,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Forgotten Monument",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Land — Cave",
+    "cmc": 0,
+    "primaryCategory": "land",
+    "edhrec_rank": 13380,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -10287,6 +10876,50 @@
     "cmc": 0,
     "primaryCategory": "land",
     "edhrec_rank": 77,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Misty Rainforest",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Land",
+    "cmc": 0,
+    "primaryCategory": "land",
+    "edhrec_rank": 40,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Scalding Tarn",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Land",
+    "cmc": 0,
+    "primaryCategory": "land",
+    "edhrec_rank": 49,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Steam Vents",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Land — Island Mountain",
+    "cmc": 0,
+    "primaryCategory": "land",
+    "edhrec_rank": 67,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Blood Crypt",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Land — Swamp Mountain",
+    "cmc": 0,
+    "primaryCategory": "land",
+    "edhrec_rank": 69,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -10346,61 +10979,6 @@
     "commanderLegal": true
    },
    {
-    "name": "Bountiful Landscape",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 1617,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Twisted Landscape",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 1705,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Sheltering Landscape",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 2113,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Vibrant Cityscape",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 1761,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
-    "name": "Shattered Landscape",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Land",
-    "cmc": 0,
-    "primaryCategory": "land",
-    "edhrec_rank": 1846,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
     "name": "Forest",
     "quantity": 2,
     "board": "main",
@@ -10456,6 +11034,6 @@
     "commanderLegal": true
    }
   ],
-  "buildReport": "Archetype: Tribal — targeting 61 nonland slots\nRole fills:\n  ramp       24/11 OK\n  draw       15/10 OK\n  removal    9/6 OK\n  wipes      3/3 OK\n  protection 5/3 OK\n  payoffs    7/6 OK\n  wincons    38/4 OK"
+  "buildReport": "Archetype: Tribal — targeting 61 nonland slots\nRole fills:\n  ramp       21/11 OK\n  draw       15/10 OK\n  removal    9/6 OK\n  wipes      3/3 OK\n  protection 5/3 OK\n  payoffs    8/6 OK\n  wincons    40/4 OK"
  }
 ]
