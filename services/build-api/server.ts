@@ -50,7 +50,8 @@ function seedTempCollection(cards: OwnedCard[]): number {
      VALUES (?, 'web-build-temp', 'temp@build.local', 'unused', 'free', 'active')`
   ).run(TEMP_USER_ID);
   const find = db.prepare(
-    'SELECT id FROM cards WHERE name = ? COLLATE NOCASE OR name LIKE ? COLLATE NOCASE LIMIT 1'
+    `SELECT id FROM cards WHERE name = ? COLLATE NOCASE OR name LIKE ? COLLATE NOCASE
+     ORDER BY (name = ? COLLATE NOCASE) DESC LIMIT 1`
   );
   const ins = db.prepare(
     "INSERT OR IGNORE INTO collection (user_id, card_id, quantity, source) VALUES (?, ?, ?, 'web-build')"
@@ -62,7 +63,7 @@ function seedTempCollection(cards: OwnedCard[]): number {
       const name = String(c.name || '').trim();
       if (!name || name.length > 200) continue;
       const qty = Math.max(1, Math.min(99, Math.floor(Number(c.quantity)) || 1));
-      const row = find.get(name, `${name} //%`) as { id: string } | undefined;
+      const row = find.get(name, `${name} //%`, name) as { id: string } | undefined;
       if (row) {
         ins.run(TEMP_USER_ID, row.id, qty);
         matched++;
@@ -234,10 +235,13 @@ function handleAnalyze(body: string, res: http.ServerResponse): void {
 
   try {
     const db = getDb();
+    // Exact match FIRST: 'Mountain' has a reversible printing named
+    // 'Mountain // Mountain' that the LIKE fallback would otherwise return.
     const findCard = db.prepare(
-      'SELECT * FROM cards WHERE name = ? COLLATE NOCASE OR name LIKE ? COLLATE NOCASE LIMIT 1'
+      `SELECT * FROM cards WHERE name = ? COLLATE NOCASE OR name LIKE ? COLLATE NOCASE
+       ORDER BY (name = ? COLLATE NOCASE) DESC LIMIT 1`
     );
-    const commanderRow = findCard.get(commanderName, `${commanderName} //%`) as DbCard | undefined;
+    const commanderRow = findCard.get(commanderName, `${commanderName} //%`, commanderName) as DbCard | undefined;
     if (!commanderRow) {
       return json(res, 422, { error: `commander not found: ${commanderName}` });
     }
@@ -247,7 +251,7 @@ function handleAnalyze(body: string, res: http.ServerResponse): void {
     for (const c of cardsIn) {
       const name = String(c.name || '').trim();
       if (!name) continue;
-      const row = findCard.get(name, `${name} //%`) as DbCard | undefined;
+      const row = findCard.get(name, `${name} //%`, name) as DbCard | undefined;
       if (row) resolved.push({ card: row, quantity: Math.max(1, Math.floor(Number(c.quantity)) || 1) });
       else unresolved.push(name);
     }
