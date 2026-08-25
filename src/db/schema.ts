@@ -1356,4 +1356,15 @@ export const MIGRATIONS = [
       ALTER TABLE cards ADD COLUMN game_changer INTEGER NOT NULL DEFAULT 0;
     `,
   },
+  {
+    version: 38,
+    name: 'cards_name_nocase_index',
+    sql: `
+      -- idx_cards_name is BINARY-collated, so every "name = ? COLLATE NOCASE"
+      -- lookup was a full 37K-row SCAN (incident 2026-08-25: 400-name batches
+      -- blocked the build-api event loop until the watchdog killed it).
+      -- A NOCASE index serves both exact NOCASE equality and prefix LIKE.
+      CREATE INDEX IF NOT EXISTS idx_cards_name_nocase ON cards(name COLLATE NOCASE);
+    `,
+  },
 ];

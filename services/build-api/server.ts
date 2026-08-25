@@ -49,10 +49,8 @@ function seedTempCollection(cards: OwnedCard[]): number {
     `INSERT OR IGNORE INTO users (id, username, email, password_hash, subscription_tier, subscription_status)
      VALUES (?, 'web-build-temp', 'temp@build.local', 'unused', 'free', 'active')`
   ).run(TEMP_USER_ID);
-  const find = db.prepare(
-    `SELECT id FROM cards WHERE name = ? COLLATE NOCASE OR name LIKE ? COLLATE NOCASE
-     ORDER BY (name = ? COLLATE NOCASE) DESC LIMIT 1`
-  );
+  const findExact = db.prepare('SELECT id FROM cards WHERE name = ? COLLATE NOCASE LIMIT 1');
+  const findDfc = db.prepare('SELECT id FROM cards WHERE name LIKE ? COLLATE NOCASE LIMIT 1');
   const ins = db.prepare(
     "INSERT OR IGNORE INTO collection (user_id, card_id, quantity, source) VALUES (?, ?, ?, 'web-build')"
   );
@@ -63,7 +61,7 @@ function seedTempCollection(cards: OwnedCard[]): number {
       const name = String(c.name || '').trim();
       if (!name || name.length > 200) continue;
       const qty = Math.max(1, Math.min(99, Math.floor(Number(c.quantity)) || 1));
-      const row = find.get(name, `${name} //%`, name) as { id: string } | undefined;
+      const row = (findExact.get(name) || findDfc.get(`${name} //%`)) as { id: string } | undefined;
       if (row) {
         ins.run(TEMP_USER_ID, row.id, qty);
         matched++;
@@ -235,13 +233,15 @@ function handleAnalyze(body: string, res: http.ServerResponse): void {
 
   try {
     const db = getDb();
-    // Exact match FIRST: 'Mountain' has a reversible printing named
-    // 'Mountain // Mountain' that the LIKE fallback would otherwise return.
-    const findCard = db.prepare(
-      `SELECT * FROM cards WHERE name = ? COLLATE NOCASE OR name LIKE ? COLLATE NOCASE
-       ORDER BY (name = ? COLLATE NOCASE) DESC LIMIT 1`
-    );
-    const commanderRow = findCard.get(commanderName, `${commanderName} //%`, commanderName) as DbCard | undefined;
+    // Exact (NOCASE-indexed) first, LIKE DFC fallback only on miss — the OR
+    // form was an unindexed full scan per name (incident 2026-08-25), and
+    // exact-first also keeps 'Mountain' from resolving to its reversible
+    // 'Mountain // Mountain' printing.
+    const findExactCard = db.prepare('SELECT * FROM cards WHERE name = ? COLLATE NOCASE LIMIT 1');
+    const findDfcCard = db.prepare('SELECT * FROM cards WHERE name LIKE ? COLLATE NOCASE LIMIT 1');
+    const findCard = (name: string): DbCard | undefined =>
+      (findExactCard.get(name) || findDfcCard.get(`${name} //%`)) as DbCard | undefined;
+    const commanderRow = findCard(commanderName);
     if (!commanderRow) {
       return json(res, 422, { error: `commander not found: ${commanderName}` });
     }
@@ -251,7 +251,7 @@ function handleAnalyze(body: string, res: http.ServerResponse): void {
     for (const c of cardsIn) {
       const name = String(c.name || '').trim();
       if (!name) continue;
-      const row = findCard.get(name, `${name} //%`, name) as DbCard | undefined;
+      const row = findCard(name);
       if (row) resolved.push({ card: row, quantity: Math.max(1, Math.floor(Number(c.quantity)) || 1) });
       else unresolved.push(name);
     }
@@ -362,18 +362,22 @@ function handleCardsLookup(body: string, res: http.ServerResponse): void {
 
   try {
     const db = getDb();
-    const find = db.prepare(
-      `SELECT name, type_line, cmc, mana_cost, color_identity, rarity, set_code,
-              image_uri_small, image_uri_normal, price_usd, game_changer
-       FROM cards WHERE name = ? COLLATE NOCASE OR name LIKE ? COLLATE NOCASE
-       ORDER BY (name = ? COLLATE NOCASE) DESC LIMIT 1`
+    // Exact (NOCASE-indexed) first; the LIKE DFC fallback only runs on a miss —
+    // the OR-combined form forced a full table scan PER NAME (incident 2026-08-25).
+    const LOOKUP_COLS = `name, type_line, cmc, mana_cost, color_identity, rarity, set_code,
+              image_uri_small, image_uri_normal, price_usd, game_changer`;
+    const findExact = db.prepare(
+      `SELECT ${LOOKUP_COLS} FROM cards WHERE name = ? COLLATE NOCASE LIMIT 1`
+    );
+    const findDfc = db.prepare(
+      `SELECT ${LOOKUP_COLS} FROM cards WHERE name LIKE ? COLLATE NOCASE LIMIT 1`
     );
     const cards: Record<string, unknown>[] = [];
     const unresolved: string[] = [];
     for (const raw of names) {
       const name = String(raw || '').trim();
       if (!name || name.length > 200) continue;
-      const row = find.get(name, `${name} //%`, name) as (DbCard & { game_changer?: number }) | undefined;
+      const row = (findExact.get(name) || findDfc.get(`${name} //%`)) as (DbCard & { game_changer?: number }) | undefined;
       if (!row) { unresolved.push(name); continue; }
       cards.push({
         name: row.name,
