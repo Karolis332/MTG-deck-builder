@@ -110,6 +110,22 @@ ramp if no turn-≤3 play." Surfaces in the deck analysis panel AND the Arena ov
 - Sanity anchors for ISS: top-liked catalogue decks high, precon-tier mid; harness roster
   ordering roughly monotone with the 2026-08-23 review's human grades (Krenko B+ > Tazri C-).
 
+### Calibration OUTCOME (2026-08-25, commit a546f34)
+
+- **Adopted constants: B=6, λ=2, ceiling=24** (best human-vs-random separation; weights
+  triangles over flat credit). Pinned by a test — changing them requires a re-calibration run.
+- **17th resource `tribal_synergy`** added (Krenko 6→40; Heliod bit-identical).
+- **Anchors revised**: random << human < builder (9/24/33 medians). builder>human is
+  EXPECTED — the engine optimizes community-synergy signals harder than casual curation;
+  do not gate on human>builder. Same-mode Krenko(coll)7 < Tazri(coll)13 accepted as
+  truth-telling (Tazri's own text is an anthem; thin-pool Krenko had 2 external lords).
+- **NEXT calibration target — curveScore is broken as a quality signal**: random piles
+  out-score real decks (median 65 vs 46) because hand-written template curves punish
+  intentional deviation. Fix: derive empirical curve targets per commander/archetype from
+  the 3.79M-deck corpus (percentile curves), replacing template guesses.
+- Follow-ups: thread tribalType into deck-analysis + /analyze (needs detectTribalTheme
+  export); wire ISS into builder selection (gated round — the point of all this).
+
 ## 7. Files
 
 - NEW `src/lib/synergy-graph.ts` — taxonomy, tagging, edges, ISS (pure functions + tests)
