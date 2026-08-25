@@ -19,12 +19,14 @@ describe('computeCurveScore', () => {
     const cards = cardsFromCurve(target);
     const result = computeCurveScore('midrange', 3, cards);
     for (const delta of Object.values(result.perBucket)) expect(delta).toBe(0);
-    // Not necessarily exactly 100: the archetype template's manaCurve bucket
-    // counts and its separately-declared avgCmc range aren't perfectly
-    // consistent with each other (pre-existing deck-templates.ts data, out
-    // of this round's scope) — the avg-CMC term can still cost a few points
-    // even on a bucket-perfect curve. High score, not necessarily perfect.
-    expect(result.score).toBeGreaterThanOrEqual(90);
+    // Not asserted as exactly 100: midrange's manaCurve buckets have a true
+    // weighted-average CMC (~3.39) that sits inside but not dead-center of
+    // its avgCmc range ([3.0, 3.5] as of Round 1a calibration — corrected
+    // from the old [2.8, 3.2], which was off by ~0.4), so the avg-CMC term
+    // still costs a fractional point even on a bucket-perfect curve
+    // (currently 99). Assert "high", not brittle-exact, so a future
+    // recalibration of either field doesn't need to touch this test.
+    expect(result.score).toBeGreaterThanOrEqual(95);
   });
 
   it('penalizes a curve that is all high-CMC cards', () => {

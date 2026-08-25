@@ -238,10 +238,20 @@ describe('computeSynergyGraph — triangle counting (synthetic mini-deck)', () =
       synergyProfile: null,
       directNeeds: null,
     });
-    const avg = (14 + 14 + 0) / 3; // (B + lambda*2) twice, filler 0
+    // Each of A/B: base + lambda * pairEdge(2); filler contributes 0.
+    const per = ISS_BASE + ISS_LAMBDA * 2;
+    const avg = (per + per + 0) / 3;
     const expected = Math.max(0, Math.min(100, Math.round((avg / ISS_NORMALIZE_CEILING) * 100)));
     expect(deckISS).toBe(expected);
     expect(deckISS).toBeGreaterThan(0);
+  });
+
+  it('defaults are the 2026-08-25 calibrated constants', () => {
+    // Calibrated via scripts/calibrate-iss.ts (see synergy-graph.ts header
+    // comment). Changing these requires a re-calibration run, not a whim.
+    expect(ISS_BASE).toBe(6);
+    expect(ISS_LAMBDA).toBe(2);
+    expect(ISS_NORMALIZE_CEILING).toBe(24);
   });
 
   it('topSynergyPairs surfaces the A<->B pair with an explanation, not the filler', () => {
@@ -274,5 +284,106 @@ describe('computeSynergyGraph — triangle counting (synthetic mini-deck)', () =
     expect(deckISS).toBe(0);
     expect(cardISS.size).toBe(0);
     expect(topSynergyPairs).toEqual([]);
+  });
+});
+
+// tribal_synergy (Round 1a calibration — the Krenko-vs-Heliod gap: a goblin
+// tribal deck's lords/typal payoffs had no resource to connect through, so
+// Krenko scored far below Heliod despite being the more coherent build).
+// Real oracle text pulled from the live DB (2026-08-24).
+describe('tribal_synergy resource', () => {
+  const GOBLIN_KING: CardLike = {
+    name: 'Goblin King',
+    oracleText: 'Other Goblins get +1/+1 and have mountainwalk.',
+    typeLine: 'Creature — Goblin',
+  };
+  const GOBLIN_CHIEFTAIN: CardLike = {
+    name: 'Goblin Chieftain',
+    oracleText: 'Haste (This creature can attack and {T} as soon as it comes under your control.)\nOther Goblin creatures you control get +1/+1 and have haste.',
+    typeLine: 'Creature — Goblin',
+  };
+  const BEETLEBACK_CHIEF: CardLike = {
+    name: 'Beetleback Chief',
+    oracleText: 'When this creature enters, create two 1/1 red Goblin creature tokens.',
+    typeLine: 'Creature — Goblin Warrior',
+  };
+  const HERALDS_HORN: CardLike = {
+    name: "Herald's Horn",
+    oracleText: "As this artifact enters, choose a creature type.\nCreature spells you cast of the chosen type cost {1} less to cast.\nAt the beginning of your upkeep, look at the top card of your library. If it's a creature card of the chosen type, you may reveal it and put it into your hand.",
+    typeLine: 'Artifact',
+  };
+
+  it('tagCard does nothing tribal-related when no tribalType is given (default, backward compatible)', () => {
+    const tags = tagCard(GOBLIN_KING);
+    expect(tags.produces.has('tribal_synergy')).toBe(false);
+    expect(tags.consumes.has('tribal_synergy')).toBe(false);
+  });
+
+  it('a plain tribe-member creature produces tribal_synergy when tribalType matches', () => {
+    const tags = tagCard(BEETLEBACK_CHIEF, 'goblin');
+    expect(tags.produces.has('tribal_synergy')).toBe(true);
+    expect(tags.consumes.has('tribal_synergy')).toBe(false); // it's not a lord
+  });
+
+  it('a lord ("Other Goblins get +1/+1") consumes tribal_synergy when tribalType matches', () => {
+    expect(tagCard(GOBLIN_KING, 'goblin').consumes.has('tribal_synergy')).toBe(true);
+    expect(tagCard(GOBLIN_CHIEFTAIN, 'goblin').consumes.has('tribal_synergy')).toBe(true);
+  });
+
+  it('a generic "choose a creature type" typal-support card consumes tribal_synergy regardless of the specific tribe', () => {
+    expect(tagCard(HERALDS_HORN, 'goblin').consumes.has('tribal_synergy')).toBe(true);
+    expect(tagCard(HERALDS_HORN, 'ally').consumes.has('tribal_synergy')).toBe(true);
+  });
+
+  it('does NOT tag tribal_synergy when the tribe does not match', () => {
+    const tags = tagCard(GOBLIN_KING, 'ally');
+    expect(tags.produces.has('tribal_synergy')).toBe(false);
+    expect(tags.consumes.has('tribal_synergy')).toBe(false);
+  });
+
+  it('commanderResourceProfile: a commander who IS a tribe member produces tribal_synergy', () => {
+    const profile = commanderResourceProfile({
+      name: 'Krenko, Mob Boss',
+      oracleText: '{T}: Create X 1/1 red Goblin creature tokens, where X is the number of Goblins you control.',
+      typeLine: 'Legendary Creature — Goblin Warrior',
+      synergyProfile: null,
+      directNeeds: null,
+      tribalType: 'goblin',
+    });
+    expect(profile.produces.has('tribal_synergy')).toBe(true);
+  });
+
+  it('computeSynergyGraph: Krenko-like commander + lords + tribe members scores meaningfully higher WITH tribalType than without', () => {
+    const commander: CardLike = {
+      name: 'Krenko, Mob Boss',
+      oracleText: '{T}: Create X 1/1 red Goblin creature tokens, where X is the number of Goblins you control.',
+      typeLine: 'Legendary Creature — Goblin Warrior',
+    };
+    const deck = [GOBLIN_KING, GOBLIN_CHIEFTAIN, BEETLEBACK_CHIEF, HERALDS_HORN];
+
+    const withoutTribe = computeSynergyGraph(deck, { ...commander, synergyProfile: null, directNeeds: null, tribalType: null });
+    const withTribe = computeSynergyGraph(deck, { ...commander, synergyProfile: null, directNeeds: null, tribalType: 'goblin' });
+
+    expect(withTribe.deckISS).toBeGreaterThan(withoutTribe.deckISS);
+    // The lords should now show a nonzero score — they had nothing to
+    // connect through before tribal_synergy existed.
+    expect(withTribe.cardISS.get('Goblin King')).toBeGreaterThan(0);
+    expect(withTribe.cardISS.get('Goblin Chieftain')).toBeGreaterThan(0);
+  });
+
+  it('a non-tribal commander (no tribalType) is completely unaffected — Heliod-style build stays identical', () => {
+    const heliod: CardLike = {
+      name: 'Heliod, Sun-Crowned',
+      oracleText: 'Indestructible\nAs long as your devotion to white is less than five, Heliod isn\'t a creature.\nWhenever you gain life, put a +1/+1 counter on target creature or enchantment you control.\n{1}{W}: Another target creature gains lifelink until end of turn.',
+      typeLine: 'Legendary Enchantment Creature — God',
+    };
+    const deck: CardLike[] = [
+      { name: 'Soul Warden', oracleText: 'Whenever another creature enters the battlefield, you gain 1 life.', typeLine: 'Creature — Human Cleric' },
+      { name: "Ajani's Pridemate", oracleText: 'Whenever you gain life, put a +1/+1 counter on Ajani\'s Pridemate.', typeLine: 'Creature — Cat Soldier' },
+    ];
+    const withoutTribalTypeArg = computeSynergyGraph(deck, { ...heliod, synergyProfile: null, directNeeds: null });
+    const withExplicitNullTribalType = computeSynergyGraph(deck, { ...heliod, synergyProfile: null, directNeeds: null, tribalType: null });
+    expect(withoutTribalTypeArg.deckISS).toBe(withExplicitNullTribalType.deckISS);
+    expect(withoutTribalTypeArg.deckISS).toBeGreaterThan(0); // sanity: the lifegain engine still scores
   });
 });

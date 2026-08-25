@@ -299,12 +299,13 @@ async function buildOne(scenario: Scenario, format: string): Promise<BuildOut> {
         .filter((e) => e.board === 'main' && !(e.card.type_line || '').includes('Land'))
         .map((e) => ({ name: e.card.name, oracleText: e.card.oracle_text, typeLine: e.card.type_line || '' }));
 
-      const graph = computeSynergyGraph(nonLandCardLikes, { ...commanderLike, synergyProfile, directNeeds: null });
+      const graph = computeSynergyGraph(nonLandCardLikes, { ...commanderLike, synergyProfile, directNeeds: null, tribalType: result.tribalType });
       iss = graph.deckISS;
 
       const winPlan = deriveWinPlan({
         commander: commanderLike,
         synergyProfile,
+        tribalType: result.tribalType,
         cards: result.cards
           .filter((e) => e.board === 'main' && !(e.card.type_line || '').includes('Land'))
           .map((e) => ({ name: e.card.name, oracleText: e.card.oracle_text, typeLine: e.card.type_line || '', cmc: e.card.cmc ?? 0 })),

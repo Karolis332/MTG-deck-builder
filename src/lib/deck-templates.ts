@@ -268,7 +268,15 @@ export const ARCHETYPE_TEMPLATES: Record<Archetype, ArchetypeTemplate> = {
     },
     creatures: [20, 30],
     manaCurve: { 1: 4, 2: 10, 3: 10, 4: 8, 5: 5, 6: 3, 7: 2 },
-    avgCmc: [2.8, 3.2],
+    // avgCmc corrected (Round 1a calibration): the manaCurve bucket counts
+    // above have a true weighted-average CMC of ~3.39, well outside the old
+    // declared [2.8, 3.2] — curve-score.ts's "perfect match" test had to be
+    // written around this exact gap. [3.0, 3.5] brackets the real value and
+    // is directly supported by docs/DECK_CONSTRUCTION_RATIOS.md §9 ("Midrange:
+    // 2.8-3.5 average CMC") and its Historic Brawl table ("Midrange | Avg CMC
+    // 3.0-3.5"). Widening the summary field to match the detailed bucket
+    // data, not reshaping manaCurve to match the (less precise) summary.
+    avgCmc: [3.0, 3.5],
     winConditionSlots: [4, 8],
     synergyMinimums: {},
     protectedPatterns: [

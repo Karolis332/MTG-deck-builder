@@ -37,13 +37,14 @@ export type Resource =
   | 'creature_death'
   | 'exile_matters'
   | 'lands_extra'
-  | 'discard';
+  | 'discard'
+  | 'tribal_synergy';
 
 export const ALL_RESOURCES: Resource[] = [
   'tokens', 'treasures', 'plus1_counters', 'graveyard_fill', 'sacrifice_fodder',
   'card_draw', 'mana_ramp', 'lifegain', 'artifacts_matter', 'enchantments_matter',
   'spells_cast', 'creatures_etb', 'creature_death', 'exile_matters', 'lands_extra',
-  'discard',
+  'discard', 'tribal_synergy',
 ];
 
 export interface CardLike {
@@ -57,10 +58,15 @@ export interface CardTags {
   consumes: Set<Resource>;
 }
 
-// ── v1 calibration constants (§1, §6 — "Calibrate in §6", pending research) ─
+// ── Calibrated constants (2026-08-25, scripts/calibrate-iss.ts over 89 human
+// catalogue decks + 9 builder decks + 27 seeded-random baselines; full data in
+// decks/test-builds/iss-calibration.json). Lower base + unchanged lambda shifts
+// weight from flat commander-edge credit toward the pairwise-triangle term —
+// the operator's framing ("the core is to have a LOT of synergies") — and gave
+// the best human-vs-random median separation (16) of the tested sets. ─────────
 
 /** Base ISS awarded to a card that has ANY commander edge. */
-export const ISS_BASE = 10;
+export const ISS_BASE = 6;
 /** Per-triangle multiplier applied to a shared pairEdge with another
  * commander-synergizing card. */
 export const ISS_LAMBDA = 2;
@@ -69,13 +75,13 @@ export const ISS_LAMBDA = 2;
 export const PAIR_EDGE_CAP = 2;
 /**
  * deckISS normalization ceiling: an average cardISS of this value maps to
- * deckISS=100. Not yet calibrated against real decklists (§6 is pending
- * rating-scout research) — chosen so a tight ~15-25 card commander-synergy
- * "engine" package (the common case) lands in the 40-80 range with headroom
- * above for very cohesive decks, not so tight that a single hub card
- * saturates the whole deck's score. Revisit once §6 anchors land.
+ * deckISS=100. Calibration anchors (2026-08-25): random-99 piles must score
+ * clearly below both human decks and builder output (medians 9 vs 24 vs 33
+ * under these constants pre-rescale). NOTE: builder > human is EXPECTED —
+ * the engine optimizes community-synergy signals harder than casually
+ * curated human decks; do not "fix" that ordering.
  */
-export const ISS_NORMALIZE_CEILING = 30;
+export const ISS_NORMALIZE_CEILING = 24;
 
 // ── Own-ability-scoped resource patterns ────────────────────────────────────
 // Matched against ownAbilities(oracleText) — the C2 lesson (2026-08-23):
@@ -313,7 +319,52 @@ const RESOURCE_PATTERNS: Record<Resource, ResourcePatterns> = {
       /cast .* from your (?:hand by discarding|discard)/i,
     ],
   },
+  // tribal_synergy has no static text patterns — it depends on the deck's
+  // tribalType (external context a single card can't know about on its own),
+  // so it's tagged separately in applyTribalTags() below. This placeholder
+  // keeps it a normal member of ALL_RESOURCES/RESOURCE_PATTERNS without ever
+  // matching through the generic pattern loop.
+  tribal_synergy: {
+    produce: [],
+    consume: [],
+  },
 };
+
+// Round 1a calibration gap: Krenko's goblin-tribal package (lords, typal
+// payoffs) had no resource to connect through, so it scored far below a
+// commander like Heliod whose payoffs are all plain keyword-text matches.
+// Needs the deck's tribalType, which a single card can't infer on its own —
+// callers (computeSynergyGraph/commanderResourceProfile) already know it
+// from the build, so it's threaded in as a parameter rather than
+// re-detected here.
+function escapeRegExp(s: string): string {
+  return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function applyTribalTags(card: CardLike, tribalType: string | null | undefined, produces: Set<Resource>, consumes: Set<Resource>): void {
+  if (!tribalType) return;
+  const tribe = escapeRegExp(tribalType.toLowerCase());
+  const typeLower = (card.typeLine || '').toLowerCase();
+  const own = ownAbilities(card.oracleText || '');
+
+  // Produces: the card itself IS a creature of the deck's tribe.
+  if (typeLower.includes('creature') && new RegExp(`\\b${tribe}\\b`, 'i').test(typeLower)) {
+    produces.add('tribal_synergy');
+  }
+
+  // Consumes: lords/typal payoffs — an anthem naming the tribe ("Goblins you
+  // control get +1/+0", "Other Goblin creatures you control get +1/+0"), or
+  // a generic "choose a creature type" typal-support effect (Herald's Horn,
+  // Vanquisher's Banner) that works with any tribe including this one.
+  const tribeAnthemPattern = new RegExp(`\\b${tribe}s?\\b[^.]{0,40}(?:get|gain)s?\\s+[+-]`, 'i');
+  if (
+    tribeAnthemPattern.test(own) ||
+    /choose a creature type/i.test(own) ||
+    /creature of the chosen type/i.test(own)
+  ) {
+    consumes.add('tribal_synergy');
+  }
+}
 
 // ── Own-ability tagging ─────────────────────────────────────────────────────
 
@@ -327,7 +378,7 @@ function isLand(typeLine: string): boolean {
  * type-line signals (an instant/sorcery IS a unit of `spells_cast` supply;
  * a creature entering IS a unit of `creatures_etb` supply).
  */
-export function tagCard(card: CardLike): CardTags {
+export function tagCard(card: CardLike, tribalType?: string | null): CardTags {
   const produces = new Set<Resource>();
   const consumes = new Set<Resource>();
 
@@ -354,6 +405,8 @@ export function tagCard(card: CardLike): CardTags {
   if (type.includes('creature')) produces.add('creatures_etb');
   if (type.includes('artifact')) produces.add('artifacts_matter');
   if (type.includes('enchantment')) produces.add('enchantments_matter');
+
+  applyTribalTags(card, tribalType, produces, consumes);
 
   return { produces, consumes };
 }
@@ -399,6 +452,10 @@ export interface CommanderContext {
   typeLine: string;
   synergyProfile?: CommanderSynergyProfile | null;
   directNeeds?: CommanderDirectNeeds | null;
+  /** The deck's detected tribal theme (lowercase singular, e.g. "goblin"),
+   * if any. Callers (the build/harness) already know this — see
+   * applyTribalTags()'s doc comment for why it isn't re-detected here. */
+  tribalType?: string | null;
 }
 
 /**
@@ -408,7 +465,7 @@ export interface CommanderContext {
  * mature source that catches phrasing the generic patterns miss).
  */
 export function commanderResourceProfile(ctx: CommanderContext): CardTags {
-  const own = tagCard({ name: ctx.name, oracleText: ctx.oracleText, typeLine: ctx.typeLine });
+  const own = tagCard({ name: ctx.name, oracleText: ctx.oracleText, typeLine: ctx.typeLine }, ctx.tribalType);
   const produces = new Set(own.produces);
   const consumes = new Set(own.consumes);
 
@@ -472,9 +529,9 @@ export interface SynergyGraphResult {
  * Human-readable reasons two cards share an edge, e.g.
  * "Skullclamp consumes tokens ← Krenko produces tokens".
  */
-export function explainEdges(a: CardLike, b: CardLike): string[] {
-  const tagsA = tagCard(a);
-  const tagsB = tagCard(b);
+export function explainEdges(a: CardLike, b: CardLike, tribalType?: string | null): string[] {
+  const tagsA = tagCard(a, tribalType);
+  const tagsB = tagCard(b, tribalType);
   const reasons: string[] = [];
   for (const r of tagsA.consumes) {
     if (tagsB.produces.has(r)) reasons.push(`${a.name} consumes ${r} ← ${b.name} produces ${r}`);
@@ -485,13 +542,29 @@ export function explainEdges(a: CardLike, b: CardLike): string[] {
   return reasons;
 }
 
+/** The three tunable ISS constants (§6 calibration). Defaults to the
+ * exported v1 values; the calibration script overrides these to compare
+ * candidate constant sets without re-running the (tribalType-dependent,
+ * regex-driven) tagging pass for every candidate. */
+export interface IssConstants {
+  base: number;
+  lambda: number;
+  ceiling: number;
+}
+
+const DEFAULT_ISS_CONSTANTS: IssConstants = { base: ISS_BASE, lambda: ISS_LAMBDA, ceiling: ISS_NORMALIZE_CEILING };
+
 /**
  * Compute the full synergy graph for a deck's nonland cards, anchored on the
  * commander. Cards are deduped by name (a second copy of a 60-card-format
  * card doesn't gain a synergy edge with its own twin, and dedup keeps this
  * O(n^2) over UNIQUE cards rather than raw copies).
  */
-export function computeSynergyGraph(cards: CardLike[], commander: CommanderContext): SynergyGraphResult {
+export function computeSynergyGraph(
+  cards: CardLike[],
+  commander: CommanderContext,
+  constants: IssConstants = DEFAULT_ISS_CONSTANTS,
+): SynergyGraphResult {
   const unique = new Map<string, CardLike>();
   for (const c of cards) {
     if (isLand(c.typeLine)) continue;
@@ -499,7 +572,7 @@ export function computeSynergyGraph(cards: CardLike[], commander: CommanderConte
   }
   const nodes = Array.from(unique.values());
   const tags = new Map<string, CardTags>();
-  for (const c of nodes) tags.set(c.name, tagCard(c));
+  for (const c of nodes) tags.set(c.name, tagCard(c, commander.tribalType));
 
   const commanderTags = commanderResourceProfile(commander);
   const edgeCount = new Map<string, number>();
@@ -512,7 +585,7 @@ export function computeSynergyGraph(cards: CardLike[], commander: CommanderConte
     const c = nodes[i];
     const cTags = tags.get(c.name)!;
     const cHasEdge = (edgeCount.get(c.name) || 0) > 0;
-    let score = cHasEdge ? ISS_BASE : 0;
+    let score = cHasEdge ? constants.base : 0;
 
     for (let j = 0; j < nodes.length; j++) {
       if (i === j) continue;
@@ -521,7 +594,7 @@ export function computeSynergyGraph(cards: CardLike[], commander: CommanderConte
       const oHasEdge = (edgeCount.get(o.name) || 0) > 0;
       if (!oHasEdge) continue;
       const pe = pairEdge(cTags, oTags);
-      if (pe > 0) score += ISS_LAMBDA * pe;
+      if (pe > 0) score += constants.lambda * pe;
     }
 
     cardISS.set(c.name, score);
@@ -542,8 +615,8 @@ export function computeSynergyGraph(cards: CardLike[], commander: CommanderConte
       const bEdge = (edgeCount.get(b.name) || 0) > 0;
       const sides = (aEdge ? 1 : 0) + (bEdge ? 1 : 0);
       if (sides === 0) continue;
-      const weight = ISS_LAMBDA * pe * sides;
-      pairs.push({ a: a.name, b: b.name, weight, reasons: explainEdges(a, b) });
+      const weight = constants.lambda * pe * sides;
+      pairs.push({ a: a.name, b: b.name, weight, reasons: explainEdges(a, b, commander.tribalType) });
     }
   }
   pairs.sort((x, y) => y.weight - x.weight);
@@ -551,7 +624,7 @@ export function computeSynergyGraph(cards: CardLike[], commander: CommanderConte
 
   const total = Array.from(cardISS.values()).reduce((s, v) => s + v, 0);
   const avg = nodes.length > 0 ? total / nodes.length : 0;
-  const deckISS = Math.max(0, Math.min(100, Math.round((avg / ISS_NORMALIZE_CEILING) * 100)));
+  const deckISS = Math.max(0, Math.min(100, Math.round((avg / constants.ceiling) * 100)));
 
   return { deckISS, cardISS, topSynergyPairs };
 }

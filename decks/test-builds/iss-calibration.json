@@ -1,0 +1,603 @@
+{
+  "perCommander": {
+    "vivi-ornitier": {
+      "commander": "Vivi Ornitier",
+      "archetype": "spellslinger",
+      "tribalType": null,
+      "humanDeckCount": 10,
+      "humanCatalogMatchRate": 0.999,
+      "iss": {
+        "human": {
+          "mean": 63.7,
+          "median": 66.5,
+          "min": 23,
+          "max": 94,
+          "n": 10
+        },
+        "builder": {
+          "mean": 72,
+          "median": 72,
+          "min": 72,
+          "max": 72,
+          "n": 1
+        },
+        "random": {
+          "mean": 18.7,
+          "median": 18,
+          "min": 17,
+          "max": 21,
+          "n": 3
+        }
+      },
+      "curveScore": {
+        "human": {
+          "mean": 43,
+          "median": 44,
+          "min": 0,
+          "max": 80,
+          "n": 10
+        },
+        "builder": {
+          "mean": 55,
+          "median": 55,
+          "min": 55,
+          "max": 55,
+          "n": 1
+        },
+        "random": {
+          "mean": 54.7,
+          "median": 52,
+          "min": 52,
+          "max": 60,
+          "n": 3
+        }
+      }
+    },
+    "ramos-dragon-engine": {
+      "commander": "Ramos, Dragon Engine",
+      "archetype": "midrange",
+      "tribalType": null,
+      "humanDeckCount": 10,
+      "humanCatalogMatchRate": 0.999,
+      "iss": {
+        "human": {
+          "mean": 30.9,
+          "median": 30.5,
+          "min": 13,
+          "max": 53,
+          "n": 10
+        },
+        "builder": {
+          "mean": 32,
+          "median": 32,
+          "min": 32,
+          "max": 32,
+          "n": 1
+        },
+        "random": {
+          "mean": 14.7,
+          "median": 14,
+          "min": 14,
+          "max": 16,
+          "n": 3
+        }
+      },
+      "curveScore": {
+        "human": {
+          "mean": 45,
+          "median": 50,
+          "min": 6,
+          "max": 70,
+          "n": 10
+        },
+        "builder": {
+          "mean": 70,
+          "median": 70,
+          "min": 70,
+          "max": 70,
+          "n": 1
+        },
+        "random": {
+          "mean": 75.3,
+          "median": 70,
+          "min": 65,
+          "max": 91,
+          "n": 3
+        }
+      }
+    },
+    "magus-lucea-kane": {
+      "commander": "Magus Lucea Kane",
+      "archetype": "spellslinger",
+      "tribalType": null,
+      "humanDeckCount": 10,
+      "humanCatalogMatchRate": 0.999,
+      "iss": {
+        "human": {
+          "mean": 32.1,
+          "median": 29.5,
+          "min": 7,
+          "max": 55,
+          "n": 10
+        },
+        "builder": {
+          "mean": 23,
+          "median": 23,
+          "min": 23,
+          "max": 23,
+          "n": 1
+        },
+        "random": {
+          "mean": 7,
+          "median": 7,
+          "min": 5,
+          "max": 9,
+          "n": 3
+        }
+      },
+      "curveScore": {
+        "human": {
+          "mean": 54.3,
+          "median": 63.5,
+          "min": 17,
+          "max": 72,
+          "n": 10
+        },
+        "builder": {
+          "mean": 64,
+          "median": 64,
+          "min": 64,
+          "max": 64,
+          "n": 1
+        },
+        "random": {
+          "mean": 62.3,
+          "median": 64,
+          "min": 55,
+          "max": 68,
+          "n": 3
+        }
+      }
+    },
+    "thrasios-tymna": {
+      "commander": "Thrasios, Triton Hero",
+      "archetype": "control",
+      "tribalType": null,
+      "humanDeckCount": 9,
+      "humanCatalogMatchRate": 0.999,
+      "iss": {
+        "human": {
+          "mean": 0.2,
+          "median": 0,
+          "min": 0,
+          "max": 2,
+          "n": 9
+        },
+        "builder": {
+          "mean": 0,
+          "median": 0,
+          "min": 0,
+          "max": 0,
+          "n": 1
+        },
+        "random": {
+          "mean": 0.7,
+          "median": 0,
+          "min": 0,
+          "max": 2,
+          "n": 3
+        }
+      },
+      "curveScore": {
+        "human": {
+          "mean": 10.9,
+          "median": 0,
+          "min": 0,
+          "max": 40,
+          "n": 9
+        },
+        "builder": {
+          "mean": 14,
+          "median": 14,
+          "min": 14,
+          "max": 14,
+          "n": 1
+        },
+        "random": {
+          "mean": 68.7,
+          "median": 67,
+          "min": 67,
+          "max": 72,
+          "n": 3
+        }
+      }
+    },
+    "mono-w-heliod": {
+      "commander": "Heliod, Sun-Crowned",
+      "archetype": "midrange",
+      "tribalType": null,
+      "humanDeckCount": 10,
+      "humanCatalogMatchRate": 0.993,
+      "iss": {
+        "human": {
+          "mean": 48.8,
+          "median": 48.5,
+          "min": 9,
+          "max": 100,
+          "n": 10
+        },
+        "builder": {
+          "mean": 77,
+          "median": 77,
+          "min": 77,
+          "max": 77,
+          "n": 1
+        },
+        "random": {
+          "mean": 16.3,
+          "median": 13,
+          "min": 12,
+          "max": 24,
+          "n": 3
+        }
+      },
+      "curveScore": {
+        "human": {
+          "mean": 33.5,
+          "median": 45.5,
+          "min": 0,
+          "max": 70,
+          "n": 10
+        },
+        "builder": {
+          "mean": 49,
+          "median": 49,
+          "min": 49,
+          "max": 49,
+          "n": 1
+        },
+        "random": {
+          "mean": 58.7,
+          "median": 71,
+          "min": 30,
+          "max": 75,
+          "n": 3
+        }
+      }
+    },
+    "mono-u-orvar": {
+      "commander": "Orvar, the All-Form",
+      "archetype": "spellslinger",
+      "tribalType": null,
+      "humanDeckCount": 10,
+      "humanCatalogMatchRate": 1,
+      "iss": {
+        "human": {
+          "mean": 41.8,
+          "median": 38,
+          "min": 24,
+          "max": 75,
+          "n": 10
+        },
+        "builder": {
+          "mean": 60,
+          "median": 60,
+          "min": 60,
+          "max": 60,
+          "n": 1
+        },
+        "random": {
+          "mean": 15.3,
+          "median": 15,
+          "min": 15,
+          "max": 16,
+          "n": 3
+        }
+      },
+      "curveScore": {
+        "human": {
+          "mean": 49.4,
+          "median": 50.5,
+          "min": 30,
+          "max": 63,
+          "n": 10
+        },
+        "builder": {
+          "mean": 52,
+          "median": 52,
+          "min": 52,
+          "max": 52,
+          "n": 1
+        },
+        "random": {
+          "mean": 55.7,
+          "median": 51,
+          "min": 48,
+          "max": 68,
+          "n": 3
+        }
+      }
+    },
+    "mono-b-sheoldred": {
+      "commander": "Sheoldred, the Apocalypse",
+      "archetype": "control",
+      "tribalType": null,
+      "humanDeckCount": 10,
+      "humanCatalogMatchRate": 0.991,
+      "iss": {
+        "human": {
+          "mean": 14.8,
+          "median": 16.5,
+          "min": 6,
+          "max": 23,
+          "n": 10
+        },
+        "builder": {
+          "mean": 33,
+          "median": 33,
+          "min": 33,
+          "max": 33,
+          "n": 1
+        },
+        "random": {
+          "mean": 7.7,
+          "median": 5,
+          "min": 5,
+          "max": 13,
+          "n": 3
+        }
+      },
+      "curveScore": {
+        "human": {
+          "mean": 44.3,
+          "median": 48.5,
+          "min": 0,
+          "max": 60,
+          "n": 10
+        },
+        "builder": {
+          "mean": 76,
+          "median": 76,
+          "min": 76,
+          "max": 76,
+          "n": 1
+        },
+        "random": {
+          "mean": 69.7,
+          "median": 71,
+          "min": 63,
+          "max": 75,
+          "n": 3
+        }
+      }
+    },
+    "mono-r-krenko": {
+      "commander": "Krenko, Mob Boss",
+      "archetype": "tribal",
+      "tribalType": "goblin",
+      "humanDeckCount": 10,
+      "humanCatalogMatchRate": 0.98,
+      "iss": {
+        "human": {
+          "mean": 30,
+          "median": 29,
+          "min": 15,
+          "max": 52,
+          "n": 10
+        },
+        "builder": {
+          "mean": 40,
+          "median": 40,
+          "min": 40,
+          "max": 40,
+          "n": 1
+        },
+        "random": {
+          "mean": 2,
+          "median": 1,
+          "min": 0,
+          "max": 5,
+          "n": 3
+        }
+      },
+      "curveScore": {
+        "human": {
+          "mean": 56.2,
+          "median": 60,
+          "min": 31,
+          "max": 75,
+          "n": 10
+        },
+        "builder": {
+          "mean": 60,
+          "median": 60,
+          "min": 60,
+          "max": 60,
+          "n": 1
+        },
+        "random": {
+          "mean": 56,
+          "median": 68,
+          "min": 30,
+          "max": 70,
+          "n": 3
+        }
+      }
+    },
+    "mono-g-ghalta": {
+      "commander": "Ghalta, Primal Hunger",
+      "archetype": "aggro",
+      "tribalType": null,
+      "humanDeckCount": 10,
+      "humanCatalogMatchRate": 0.988,
+      "iss": {
+        "human": {
+          "mean": 2.6,
+          "median": 4,
+          "min": 0,
+          "max": 5,
+          "n": 10
+        },
+        "builder": {
+          "mean": 4,
+          "median": 4,
+          "min": 4,
+          "max": 4,
+          "n": 1
+        },
+        "random": {
+          "mean": 1.7,
+          "median": 0,
+          "min": 0,
+          "max": 5,
+          "n": 3
+        }
+      },
+      "curveScore": {
+        "human": {
+          "mean": 16.9,
+          "median": 19.5,
+          "min": 0,
+          "max": 47,
+          "n": 10
+        },
+        "builder": {
+          "mean": 62,
+          "median": 62,
+          "min": 62,
+          "max": 62,
+          "n": 1
+        },
+        "random": {
+          "mean": 40.3,
+          "median": 38,
+          "min": 37,
+          "max": 46,
+          "n": 3
+        }
+      }
+    }
+  },
+  "overall": {
+    "iss": {
+      "human": {
+        "mean": 29.8,
+        "median": 24,
+        "min": 0,
+        "max": 100,
+        "n": 89
+      },
+      "builder": {
+        "mean": 37.9,
+        "median": 33,
+        "min": 0,
+        "max": 77,
+        "n": 9
+      },
+      "random": {
+        "mean": 9.3,
+        "median": 9,
+        "min": 0,
+        "max": 24,
+        "n": 27
+      }
+    },
+    "curveScore": {
+      "human": {
+        "mean": 39.6,
+        "median": 46,
+        "min": 0,
+        "max": 80,
+        "n": 89
+      },
+      "builder": {
+        "mean": 55.8,
+        "median": 60,
+        "min": 14,
+        "max": 76,
+        "n": 9
+      },
+      "random": {
+        "mean": 60.1,
+        "median": 65,
+        "min": 30,
+        "max": 91,
+        "n": 27
+      }
+    },
+    "constantSets": {
+      "current (B10/L2/C30)": {
+        "human": {
+          "mean": 29.8,
+          "median": 24,
+          "min": 0,
+          "max": 100,
+          "n": 89
+        },
+        "builder": {
+          "mean": 37.9,
+          "median": 33,
+          "min": 0,
+          "max": 77,
+          "n": 9
+        },
+        "random": {
+          "mean": 9.3,
+          "median": 9,
+          "min": 0,
+          "max": 24,
+          "n": 27
+        },
+        "humanVsRandomSeparation": 15
+      },
+      "lower-base (B6/L2/C24)": {
+        "human": {
+          "mean": 31.7,
+          "median": 24,
+          "min": 0,
+          "max": 100,
+          "n": 89
+        },
+        "builder": {
+          "mean": 41.3,
+          "median": 35,
+          "min": 0,
+          "max": 86,
+          "n": 9
+        },
+        "random": {
+          "mean": 8.9,
+          "median": 8,
+          "min": 0,
+          "max": 24,
+          "n": 27
+        },
+        "humanVsRandomSeparation": 16
+      },
+      "higher-lambda (B8/L3/C36)": {
+        "human": {
+          "mean": 30.9,
+          "median": 23,
+          "min": 0,
+          "max": 100,
+          "n": 89
+        },
+        "builder": {
+          "mean": 40.4,
+          "median": 34,
+          "min": 0,
+          "max": 85,
+          "n": 9
+        },
+        "random": {
+          "mean": 8.6,
+          "median": 8,
+          "min": 0,
+          "max": 23,
+          "n": 27
+        },
+        "humanVsRandomSeparation": 15
+      }
+    }
+  }
+}
