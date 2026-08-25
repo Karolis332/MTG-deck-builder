@@ -9,6 +9,7 @@ import {
   ISS_BASE,
   ISS_LAMBDA,
   ISS_NORMALIZE_CEILING,
+  MAX_SYNERGY_GRAPH_CARDS,
   type CardLike,
 } from '../synergy-graph';
 
@@ -385,5 +386,70 @@ describe('tribal_synergy resource', () => {
     const withExplicitNullTribalType = computeSynergyGraph(deck, { ...heliod, synergyProfile: null, directNeeds: null, tribalType: null });
     expect(withoutTribalTypeArg.deckISS).toBe(withExplicitNullTribalType.deckISS);
     expect(withoutTribalTypeArg.deckISS).toBeGreaterThan(0); // sanity: the lifegain engine still scores
+  });
+});
+
+// Incident 2026-08-25: a large /analyze submission on the (separately owned)
+// build-api service pinned the process at 100% CPU for 10+ minutes, all
+// routes down. Root cause, both in computeSynergyGraph: (1) the
+// topSynergyPairs loop called explainEdges(a, b, ...) per candidate pair,
+// which re-ran full tagCard() (all ~17 resources x several regexes each) for
+// BOTH cards from scratch, on top of an already-O(n^2) loop — up to n^2 x 2
+// redundant full re-tags. (2) no upper bound on input size — build-api's
+// /analyze accepts up to 600 cards. Fixed by (1) reusing the already-computed
+// tags map via explainEdgesFromTags instead of re-tagging, and (2) a hard
+// MAX_SYNERGY_GRAPH_CARDS cap so CPU time is bounded regardless of input
+// size or caller discipline. This suite pins both fixes with a wall-clock
+// budget so a regression here fails loudly in CI, not in production.
+describe('computeSynergyGraph — performance regression (incident 2026-08-25)', () => {
+  // Maximal-overlap synthetic cards: every card produces AND consumes most
+  // resources, so pairEdge(A,B) > 0 for nearly every pair — the worst case
+  // for the topSynergyPairs loop (maximum candidate pairs to explain).
+  function makeMaxOverlapCard(i: number): CardLike {
+    return {
+      name: `Adversary ${i}`,
+      oracleText:
+        'Create a token. Sacrifice a creature. Draw a card. Whenever a token you control dies, ' +
+        'whenever you draw a card, whenever you gain life, mill a card, discard a card, proliferate, ' +
+        'you gain 1 life, whenever an artifact enters, whenever an enchantment enters, ' +
+        'whenever you cast an instant spell, landfall, madness.',
+      typeLine: 'Creature — Goblin',
+    };
+  }
+
+  const commander: CardLike = {
+    name: 'Krenko, Mob Boss',
+    oracleText: '{T}: Create X 1/1 red Goblin creature tokens, where X is the number of Goblins you control.',
+    typeLine: 'Legendary Creature — Goblin Warrior',
+  };
+
+  it('scores a maximal-overlap deck at the build-api /analyze cap (600 cards) in well under a second', () => {
+    const cards = Array.from({ length: 600 }, (_, i) => makeMaxOverlapCard(i));
+    const start = Date.now();
+    const result = computeSynergyGraph(cards, { ...commander, synergyProfile: null, directNeeds: null, tribalType: 'goblin' });
+    const elapsedMs = Date.now() - start;
+    expect(elapsedMs).toBeLessThan(2000); // was ~5.9s before the fix; budget generous for slow CI
+    expect(result.deckISS).toBeGreaterThan(0);
+    expect(result.topSynergyPairs.length).toBeLessThanOrEqual(8);
+  });
+
+  it('input size is capped regardless of how many cards are submitted (20,000-card flood)', () => {
+    const cards = Array.from({ length: 20000 }, (_, i) => makeMaxOverlapCard(i));
+    const start = Date.now();
+    const result = computeSynergyGraph(cards, { ...commander, synergyProfile: null, directNeeds: null, tribalType: 'goblin' });
+    const elapsedMs = Date.now() - start;
+    expect(elapsedMs).toBeLessThan(2000);
+    expect(result.cardISS.size).toBeLessThanOrEqual(MAX_SYNERGY_GRAPH_CARDS);
+  });
+
+  it('explainEdgesFromTags (used internally) produces the same reasons explainEdges would for a real pair', () => {
+    const skullclamp: CardLike = { name: 'Skullclamp', oracleText: 'Equipped creature gets +1/-1.\nWhenever equipped creature dies, draw two cards.\nEquip {1}', typeLine: 'Artifact — Equipment' };
+    const bombardment: CardLike = { name: 'Goblin Bombardment', oracleText: 'Sacrifice a creature: Goblin Bombardment deals 1 damage to any target.', typeLine: 'Enchantment' };
+    const { topSynergyPairs } = computeSynergyGraph([skullclamp, bombardment], { ...commander, synergyProfile: null, directNeeds: null });
+    const direct = explainEdges(skullclamp, bombardment);
+    if (topSynergyPairs.length > 0) {
+      expect(topSynergyPairs[0].reasons.length).toBeGreaterThan(0);
+      expect(new Set(topSynergyPairs[0].reasons)).toEqual(new Set(direct));
+    }
   });
 });

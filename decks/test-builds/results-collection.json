@@ -4,7 +4,7 @@
   "commander": "Vivi Ornitier",
   "format": "commander",
   "ok": true,
-  "elapsedMs": 70905,
+  "elapsedMs": 97655,
   "strategy": "spellslinger",
   "themes": [
    "spellslinger",
@@ -987,7 +987,7 @@
   "commander": "Ramos, Dragon Engine",
   "format": "commander",
   "ok": true,
-  "elapsedMs": 86095,
+  "elapsedMs": 88519,
   "strategy": "midrange",
   "themes": [
    "artifacts",
@@ -2141,7 +2141,7 @@
   ],
   "buildReport": "Archetype: Midrange — targeting 61 nonland slots\nRole fills:\n  ramp       19/12 OK\n  draw       15/10 OK\n  tutor      2/2 OK\n  removal    12/9 OK\n  wipes      4/4 OK\n  protection 5/3 OK\n  payoffs    17/15 OK\n  wincons    26/6 OK",
   "iss": 38,
-  "curveScore": 63,
+  "curveScore": 64,
   "winRoute": "spell_burn"
  },
  {
@@ -2149,7 +2149,7 @@
   "commander": "Magus Lucea Kane",
   "format": "commander",
   "ok": true,
-  "elapsedMs": 91800,
+  "elapsedMs": 96617,
   "strategy": "spellslinger",
   "themes": [
    "counters",
@@ -3221,7 +3221,7 @@
   "partner": "Tymna the Weaver",
   "format": "commander",
   "ok": true,
-  "elapsedMs": 115481,
+  "elapsedMs": 143902,
   "strategy": "aggro",
   "themes": [
    "control",
@@ -4355,7 +4355,7 @@
   ],
   "buildReport": "Archetype: Aggro — targeting 60 nonland slots\nRole fills:\n  ramp       13/9 OK\n  draw       13/8 OK\n  tutor      3/1 OK\n  removal    7/4 OK\n  wipes      2/2 OK\n  protection 5/3 OK\n  payoffs    0/0 OK\n  wincons    12/1 OK",
   "iss": 0,
-  "curveScore": 11,
+  "curveScore": 10,
   "winRoute": "value_grind"
  },
  {
@@ -4363,7 +4363,7 @@
   "commander": "Heliod, Sun-Crowned",
   "format": "commander",
   "ok": true,
-  "elapsedMs": 60856,
+  "elapsedMs": 78925,
   "strategy": "midrange",
   "themes": [
    "enchantments",
@@ -5248,7 +5248,7 @@
   ],
   "buildReport": "Archetype: Midrange — targeting 61 nonland slots\nRole fills:\n  ramp       14/12 OK\n  draw       15/10 OK\n  tutor      2/2 OK\n  removal    12/9 OK\n  wipes      4/4 OK\n  protection 5/3 OK\n  payoffs    3/15 SHORT\n  wincons    12/6 OK\nWarnings:\n  - role shortfall: synergy_payoff needs 15, filled 3 — pool exhausted or collection blocked",
   "iss": 49,
-  "curveScore": 63,
+  "curveScore": 62,
   "winRoute": "combat_tall"
  },
  {
@@ -5256,7 +5256,7 @@
   "commander": "Orvar, the All-Form",
   "format": "commander",
   "ok": true,
-  "elapsedMs": 64733,
+  "elapsedMs": 72098,
   "strategy": "spellslinger",
   "themes": [
    "tokens",
@@ -6155,7 +6155,7 @@
   "commander": "Sheoldred, the Apocalypse",
   "format": "commander",
   "ok": true,
-  "elapsedMs": 68198,
+  "elapsedMs": 69475,
   "strategy": "control",
   "themes": [
    "ramp",
@@ -7032,7 +7032,7 @@
   ],
   "buildReport": "Archetype: Control — targeting 61 nonland slots\nRole fills:\n  ramp       16/12 OK\n  draw       19/12 OK\n  tutor      4/2 OK\n  removal    19/16 OK\n  wipes      6/6 OK\n  protection 3/3 OK\n  payoffs    0/0 OK\n  wincons    31/2 OK",
   "iss": 23,
-  "curveScore": 59,
+  "curveScore": 58,
   "winRoute": "value_grind"
  },
  {
@@ -7040,7 +7040,7 @@
   "commander": "Krenko, Mob Boss",
   "format": "commander",
   "ok": true,
-  "elapsedMs": 55491,
+  "elapsedMs": 51230,
   "strategy": "tribal",
   "themes": [
    "tribal"
@@ -7913,8 +7913,8 @@
    }
   ],
   "buildReport": "Archetype: Tribal — targeting 61 nonland slots\nRole fills:\n  ramp       15/11 OK\n  draw       15/10 OK\n  tutor      4/2 OK\n  removal    9/6 OK\n  wipes      3/3 OK\n  protection 4/3 OK\n  payoffs    0/0 OK\n  wincons    16/4 OK",
-  "iss": 2,
-  "curveScore": 34,
+  "iss": 7,
+  "curveScore": 32,
   "winRoute": "combat_wide"
  },
  {
@@ -7922,7 +7922,7 @@
   "commander": "Ghalta, Primal Hunger",
   "format": "commander",
   "ok": true,
-  "elapsedMs": 40536,
+  "elapsedMs": 52915,
   "strategy": "aggro",
   "themes": [
    "draw",
@@ -7937,9 +7937,9 @@
   "tribalType": null,
   "totalCards": 99,
   "landCount": 41,
-  "avgCmcNonLand": 2.64,
+  "avgCmcNonLand": 2.62,
   "goldSpellCount": 0,
-  "counterMattersCount": 0,
+  "counterMattersCount": 1,
   "referenceOverlapPct": 36,
   "referenceMissing": [
    "sol ring",
@@ -8000,8 +8000,8 @@
   "curve": {
    "0": 1,
    "1": 11,
-   "2": 21,
-   "3": 15,
+   "2": 22,
+   "3": 14,
    "4": 4,
    "5": 2,
    "6": 2,
@@ -8396,17 +8396,6 @@
     "commanderLegal": true
    },
    {
-    "name": "Bridgeworks Battle // Tanglespan Bridgeworks",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Sorcery // Land",
-    "cmc": 3,
-    "primaryCategory": "land",
-    "edhrec_rank": 700,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
     "name": "Goldvein Pick",
     "quantity": 1,
     "board": "main",
@@ -8440,6 +8429,17 @@
     "commanderLegal": true
    },
    {
+    "name": "Bridgeworks Battle // Tanglespan Bridgeworks",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Sorcery // Land",
+    "cmc": 3,
+    "primaryCategory": "land",
+    "edhrec_rank": 700,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
     "name": "Vexing Bauble",
     "quantity": 1,
     "board": "main",
@@ -8458,6 +8458,17 @@
     "cmc": 2,
     "primaryCategory": "draw",
     "edhrec_rank": 1991,
+    "brawlLegal": true,
+    "commanderLegal": true
+   },
+   {
+    "name": "Ozolith, the Shattered Spire",
+    "quantity": 1,
+    "board": "main",
+    "type_line": "Legendary Artifact",
+    "cmc": 2,
+    "primaryCategory": "draw",
+    "edhrec_rank": 651,
     "brawlLegal": true,
     "commanderLegal": true
    },
@@ -8671,17 +8682,6 @@
     "commanderLegal": true
    },
    {
-    "name": "Surrak, Elusive Hunter",
-    "quantity": 1,
-    "board": "main",
-    "type_line": "Legendary Creature — Human Warrior",
-    "cmc": 3,
-    "primaryCategory": "draw",
-    "edhrec_rank": 7659,
-    "brawlLegal": true,
-    "commanderLegal": true
-   },
-   {
     "name": "Misty Rainforest",
     "quantity": 1,
     "board": "main",
@@ -8770,9 +8770,9 @@
     "commanderLegal": true
    }
   ],
-  "buildReport": "Archetype: Aggro — targeting 61 nonland slots\nRole fills:\n  ramp       14/9 OK\n  draw       13/8 OK\n  tutor      2/1 OK\n  removal    7/4 OK\n  wipes      2/2 OK\n  protection 5/3 OK\n  payoffs    0/0 OK\n  wincons    9/1 OK",
+  "buildReport": "Archetype: Aggro — targeting 61 nonland slots\nRole fills:\n  ramp       14/9 OK\n  draw       13/8 OK\n  tutor      2/1 OK\n  removal    7/4 OK\n  wipes      2/2 OK\n  protection 5/3 OK\n  payoffs    0/0 OK\n  wincons    8/1 OK",
   "iss": 0,
-  "curveScore": 47,
+  "curveScore": 42,
   "winRoute": "value_grind"
  },
  {
@@ -8780,7 +8780,7 @@
   "commander": "Meren of Clan Nel Toth",
   "format": "commander",
   "ok": true,
-  "elapsedMs": 47662,
+  "elapsedMs": 65301,
   "strategy": "aristocrats",
   "themes": [
    "sacrifice",
@@ -9768,7 +9768,7 @@
   "commander": "General Tazri",
   "format": "commander",
   "ok": true,
-  "elapsedMs": 76308,
+  "elapsedMs": 86125,
   "strategy": "tribal",
   "themes": [
    "tribal"
@@ -10909,8 +10909,8 @@
    }
   ],
   "buildReport": "Archetype: Tribal — targeting 61 nonland slots\nRole fills:\n  ramp       15/11 OK\n  draw       15/10 OK\n  tutor      3/2 OK\n  removal    9/6 OK\n  wipes      3/3 OK\n  protection 5/3 OK\n  payoffs    8/6 OK\n  wincons    38/4 OK",
-  "iss": 0,
-  "curveScore": 46,
-  "winRoute": "value_grind"
+  "iss": 13,
+  "curveScore": 48,
+  "winRoute": "combat_wide"
  }
 ]

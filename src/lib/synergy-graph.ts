@@ -526,20 +526,31 @@ export interface SynergyGraphResult {
 }
 
 /**
- * Human-readable reasons two cards share an edge, e.g.
- * "Skullclamp consumes tokens ← Krenko produces tokens".
+ * Reason strings from PRE-COMPUTED tags — the shared implementation behind
+ * explainEdges(). Perf-critical: computeSynergyGraph's topSynergyPairs loop
+ * calls this per-pair (up to O(n^2) times), so it must never re-run tagCard()
+ * — see the incident note on computeSynergyGraph below.
  */
-export function explainEdges(a: CardLike, b: CardLike, tribalType?: string | null): string[] {
-  const tagsA = tagCard(a, tribalType);
-  const tagsB = tagCard(b, tribalType);
+function explainEdgesFromTags(aName: string, aTags: CardTags, bName: string, bTags: CardTags): string[] {
   const reasons: string[] = [];
-  for (const r of tagsA.consumes) {
-    if (tagsB.produces.has(r)) reasons.push(`${a.name} consumes ${r} ← ${b.name} produces ${r}`);
+  for (const r of aTags.consumes) {
+    if (bTags.produces.has(r)) reasons.push(`${aName} consumes ${r} ← ${bName} produces ${r}`);
   }
-  for (const r of tagsB.consumes) {
-    if (tagsA.produces.has(r)) reasons.push(`${b.name} consumes ${r} ← ${a.name} produces ${r}`);
+  for (const r of bTags.consumes) {
+    if (aTags.produces.has(r)) reasons.push(`${bName} consumes ${r} ← ${aName} produces ${r}`);
   }
   return reasons;
+}
+
+/**
+ * Human-readable reasons two cards share an edge, e.g.
+ * "Skullclamp consumes tokens ← Krenko produces tokens". Tags cards fresh —
+ * fine for one-off/UI calls with a handful of cards. Do NOT call this in a
+ * loop over many pairs; use explainEdgesFromTags with pre-computed tags
+ * instead (see computeSynergyGraph).
+ */
+export function explainEdges(a: CardLike, b: CardLike, tribalType?: string | null): string[] {
+  return explainEdgesFromTags(a.name, tagCard(a, tribalType), b.name, tagCard(b, tribalType));
 }
 
 /** The three tunable ISS constants (§6 calibration). Defaults to the
@@ -555,10 +566,24 @@ export interface IssConstants {
 const DEFAULT_ISS_CONSTANTS: IssConstants = { base: ISS_BASE, lambda: ISS_LAMBDA, ceiling: ISS_NORMALIZE_CEILING };
 
 /**
+ * Hard cap on unique nonland cards scored. The scoring loops below are
+ * O(n^2) by design (every card pair is compared). A real deck never exceeds
+ * ~100 nonland cards in any format; this is 3x that for headroom. Defense in
+ * depth — callers (build-api's /analyze) SHOULD already bound input size,
+ * but this function is reachable from a public endpoint indirectly, and a
+ * pure function shouldn't trust every future caller to enforce that itself
+ * (incident 2026-08-25: a large /analyze submission pinned the build-api
+ * process for 10+ minutes — see the note in the topSynergyPairs loop below
+ * for the OTHER half of that fix).
+ */
+export const MAX_SYNERGY_GRAPH_CARDS = 300;
+
+/**
  * Compute the full synergy graph for a deck's nonland cards, anchored on the
  * commander. Cards are deduped by name (a second copy of a 60-card-format
  * card doesn't gain a synergy edge with its own twin, and dedup keeps this
- * O(n^2) over UNIQUE cards rather than raw copies).
+ * O(n^2) over UNIQUE cards rather than raw copies) and capped at
+ * MAX_SYNERGY_GRAPH_CARDS.
  */
 export function computeSynergyGraph(
   cards: CardLike[],
@@ -569,6 +594,7 @@ export function computeSynergyGraph(
   for (const c of cards) {
     if (isLand(c.typeLine)) continue;
     if (!unique.has(c.name)) unique.set(c.name, c);
+    if (unique.size >= MAX_SYNERGY_GRAPH_CARDS) break;
   }
   const nodes = Array.from(unique.values());
   const tags = new Map<string, CardTags>();
@@ -616,7 +642,13 @@ export function computeSynergyGraph(
       const sides = (aEdge ? 1 : 0) + (bEdge ? 1 : 0);
       if (sides === 0) continue;
       const weight = constants.lambda * pe * sides;
-      pairs.push({ a: a.name, b: b.name, weight, reasons: explainEdges(a, b, commander.tribalType) });
+      // NOT explainEdges(a, b, ...) — that re-tags both cards from scratch
+      // (all ~17 resources x several regexes each). This loop runs up to
+      // O(n^2) times; re-tagging inside it pinned the build-api process for
+      // 10+ minutes on a large /analyze submission (incident 2026-08-25).
+      // tags.get(...) reuses what's already computed above — same reasons,
+      // zero redundant regex work.
+      pairs.push({ a: a.name, b: b.name, weight, reasons: explainEdgesFromTags(a.name, tags.get(a.name)!, b.name, tags.get(b.name)!) });
     }
   }
   pairs.sort((x, y) => y.weight - x.weight);

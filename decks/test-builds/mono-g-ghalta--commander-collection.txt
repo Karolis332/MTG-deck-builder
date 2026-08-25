@@ -1,6 +1,6 @@
 // Ghalta, Primal Hunger — COMMANDER
 // strategy=aggro themes=draw,artifacts,ramp,aggro,tokens,equipment,enchantments,counters tribal=-
-// total=99 lands=41 avgCMC=2.64 gold=0 counters=0
+// total=99 lands=41 avgCMC=2.62 gold=0 counters=1
 // categories: ramp=20 draw=15 removal=7 win_condition=2 protection=6 utility=5 tutor=1 board_wipe=2 land=41
 
 1 Ghalta, Primal Hunger *CMDR*
@@ -34,11 +34,11 @@
 1 Trash the Town
 1 Vexing Bauble
 1 Leaf-Crowned Visionary
+1 Ozolith, the Shattered Spire
 1 Up the Beanstalk
 1 Colossal Majesty
 1 Garruk's Uprising
 1 Monument to Endurance
-1 Surrak, Elusive Hunter
 1 Tribute to the World Tree
 1 Return of the Wildspeaker
 1 Chronicle of Victory
