@@ -281,7 +281,7 @@ Python tests in `scripts/tests/`, run with `npm run test:python`.
 The desktop app calls the CF API for collaborative-filtering recommendations. The default endpoint is configured via the setup wizard (Step 4: "Connect to Recommendation Engine") and persisted to `app_state.cf_api_url`.
 
 - **Production host**: VPS at 187.77.110.100, served at `http://187.77.110.100/cf-api` via nginx → Docker container `grimoire-cf-api-api-1` on port 8000
-- **Data**: 1.2M+ scraped decks (Moxfield + Archidekt + EDHREC + MTGGoldfish + MTGTop8). Retrained nightly via cron at 00:00 + 04:00 UTC on the VPS.
+- **Data**: 3.9M+ scraped decks (Moxfield + Archidekt + EDHREC + MTGGoldfish + MTGTop8). Retraining: cron `0 22 * * *` spawns a pipeline daemon (6h cycles); VW bandit retrains every cycle, SVD retrains after each +50K new decks.
 - **Auth**: `x-api-key` header. Key set in `app_state.cf_api_key` per user, prompted in setup wizard Step 4.
 - **Schema**: Postgres tables `decks`, `deck_cards`, `card_popularity`, `commander_card_stats`, `model_artifacts` (binary SVD model + Vowpal Wabbit contextual bandit model).
 - **Health endpoint**: `GET /health` returns `{status, deck_count, model_version, last_retrained, vw_model_active, vw_model_trained_at, vw_model_size_kb}`.
@@ -353,3 +353,8 @@ past that into the body above, or into `brain/`. No secrets or customer PII: thi
 - **Did:** Two deep infra fixes: NOCASE name index (migration 38, e25b6f9 — every name lookup was a 37K-row SCAN; 400-name batch 504/120s→31ms) and pm2 supervision flatten (pm2 owned the npm wrapper 4 levels up; SIGKILL never reached sync-spinning children → orphaned 100%-CPU zombies invisible to pm2; now --interpreter tsx --kill-timeout 3000). Web (black-grimoire-web): collection viewer grid (4edffce), FCP footer + removal link (a7b8175), retry-vs-unrecognized split + not-found page + rate limits 40/120 (333997d). Full e2e: 3,562/3,562 resolved, $11,709 value, 9 Game Changers, zero errors.
 - **Why:** the week's 502/504/pin incidents were THREE stacked bugs (quadratic re-tagging, unindexed NOCASE lookups, wrapper supervision) — each fix exposed the next; the web agent's PID evidence broke the case.
 - **Open:** Clerk dev quirk: NEVER restart the dev server without `CLERK_SECRET_KEY= NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=` prefixes (stale invalid keys in protected .env.local); if handshake loops, delete `.clerk/.tmp/` entirely. privacy@blackgrimoire.com alias needs wiring when domain is bought.
+
+### 2026-09-01 — Fresh harness verify, friends web deploy, eval-cron finding
+- **Did:** Full harness re-run: 16 builds, **hardFails 0, score 965** (baseline family 963–968 — no regression since a546f34/e25b6f9). Deployed black-grimoire-web to VPS `:8099` behind nginx basic auth with fresh Clerk keyless keys (see black-grimoire-web `db85795`). Fixed stale retrain-cron doc in this file (actual: 22:00 UTC cron + 6h daemon, SVD gated on +50K decks).
+- **Why:** VPS over Vercel for the share URL — Hobby 60s function cap kills ~90s builds.
+- **Open:** VPS monthly full-eval (`0 4 1 * *`) has NEVER run — 3 months of `SKIP: pipeline daemon running`; fix = run eval inside the pipeline cycle or pause the daemon. thrasios-tymna scores ISS 0 / curve 2 — partner-pair blind spot + curveScore anti-signal, both match the open calibration target.
