@@ -10,7 +10,7 @@ import fs from 'fs';
 import path from 'path';
 import http from 'http';
 import { syncCommanderStatsIfStale } from './sync-commander-stats';
-import { hashPassword } from './auth';
+import { hashPassword } from './password';
 
 interface AppConfig {
   setupComplete?: boolean;

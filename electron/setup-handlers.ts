@@ -9,7 +9,7 @@ import fs from 'fs';
 import path from 'path';
 import os from 'os';
 import { saveConfig, transitionToMainApp } from './main';
-import { hashPassword } from '../src/lib/auth';
+import { hashPassword } from '../src/lib/password';
 
 function getDbDir(): string {
   return process.env.MTG_DB_DIR || path.join(process.cwd(), 'data');
