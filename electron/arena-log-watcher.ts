@@ -959,10 +959,15 @@ export class ArenaLogWatcher extends EventEmitter {
     const uniqueGrpIds = Array.from(new Set(grpIds));
     const resolved = await this.resolver.resolveMany(uniqueGrpIds);
 
+    // The match can end (engine cleared) while resolveMany is in flight — seen as
+    // an unhandled rejection during Player.log backfill.
+    const engine = this.gameEngine;
+    if (!engine) return;
+
     Array.from(resolved.entries()).forEach(([grpId, card]) => {
       // Skip entries with numeric localization ID names
       if (!/^\d+$/.test(card.name)) {
-        this.gameEngine!.resolveCard(grpId, card);
+        engine.resolveCard(grpId, card);
       }
     });
 

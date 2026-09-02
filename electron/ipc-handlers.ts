@@ -529,7 +529,12 @@ export async function checkArenaCardDbUpdate(): Promise<{ updated: boolean; vers
 
     // Fetch current Arena version from CDN
     // eslint-disable-next-line @typescript-eslint/no-require-imports
-    const { fetchText, parseVersionResponse, VERSION_URL: versionUrl, downloadArenaCardDb } = require('../scripts/download_arena_card_db.js');
+    // Packaged: scripts/ is excluded from app files and shipped via extraResources
+    // (electron-builder.yml), so it lives under process.resourcesPath, not next to app code.
+    const scriptPath = app.isPackaged
+      ? path.join(process.resourcesPath, 'scripts', 'download_arena_card_db.js')
+      : '../scripts/download_arena_card_db.js';
+    const { fetchText, parseVersionResponse, VERSION_URL: versionUrl, downloadArenaCardDb } = require(scriptPath);
     let cdnVersion: string;
     try {
       const raw = await fetchText(versionUrl);
