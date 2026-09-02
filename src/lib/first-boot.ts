@@ -10,6 +10,7 @@ import fs from 'fs';
 import path from 'path';
 import http from 'http';
 import { syncCommanderStatsIfStale } from './sync-commander-stats';
+import { hashPassword } from './auth';
 
 interface AppConfig {
   setupComplete?: boolean;
@@ -17,7 +18,11 @@ interface AppConfig {
   pendingAccount?: {
     username: string;
     email: string;
-    password: string;
+    // Current setup wizard writes passwordHash (pre-hashed, see
+    // electron/setup-handlers.ts). `password` is only for configs written
+    // by an older build — hashed at consume time below, never persisted.
+    passwordHash?: string;
+    password?: string;
   };
   arenaLogPath?: string | null;
   autoStartWatcher?: boolean;
@@ -25,24 +30,40 @@ interface AppConfig {
   cfApiKey?: string | null;
 }
 
-function getConfigPath(): string {
-  // In Electron, userData is set; in dev, use cwd
-  const electronUserData = process.env.ELECTRON_USER_DATA;
-  if (electronUserData) {
-    return path.join(electronUserData, 'app-config.json');
+/**
+ * Resolve the on-disk path to app-config.json, the file the setup wizard
+ * (electron/setup-handlers.ts) writes and this module reads on first boot.
+ *
+ * Electron's default `app.getPath('userData')` is derived from package.json's
+ * "name" field ("the-black-grimoire", lowercase-dashed) — NOT electron-builder's
+ * "productName" ("The Black Grimoire"). Both casings are checked for safety,
+ * lowercase first since that's what the running app actually uses.
+ *
+ * Pure function (env + cwd injected) so it's unit-testable without touching
+ * real Electron/OS state.
+ */
+export function resolveAppConfigPath(
+  env: NodeJS.ProcessEnv,
+  cwd: string = process.cwd()
+): string {
+  if (env.ELECTRON_USER_DATA) {
+    return path.join(env.ELECTRON_USER_DATA, 'app-config.json');
   }
-  // Fallback: check common Electron paths
-  const appName = 'The Black Grimoire';
-  const home = process.env.HOME || process.env.USERPROFILE || '';
-  const candidates = [
+  const home = env.HOME || env.USERPROFILE || '';
+  const appNames = ['the-black-grimoire', 'The Black Grimoire'];
+  const candidates = appNames.flatMap((appName) => [
     path.join(home, '.config', appName, 'app-config.json'),
     path.join(home, 'Library', 'Application Support', appName, 'app-config.json'),
-    path.join(process.env.APPDATA || '', appName, 'app-config.json'),
-  ];
+    path.join(env.APPDATA || '', appName, 'app-config.json'),
+  ]);
   for (const p of candidates) {
     if (fs.existsSync(p)) return p;
   }
-  return path.join(process.cwd(), 'app-config.json');
+  return path.join(cwd, 'app-config.json');
+}
+
+function getConfigPath(): string {
+  return resolveAppConfigPath(process.env, process.cwd());
 }
 
 function loadConfig(): AppConfig {
@@ -253,7 +274,11 @@ export async function runFirstBootActions(): Promise<void> {
   // 1. Create pending account
   if (config.pendingAccount) {
     try {
-      const result = await postJson('/api/auth/register', config.pendingAccount);
+      const { username, email, passwordHash, password } = config.pendingAccount;
+      const body = passwordHash
+        ? { username, email, passwordHash }
+        : { username, email, passwordHash: hashPassword(password!) };
+      const result = await postJson('/api/auth/register', body);
       if (result.status === 200 || result.status === 201) {
         console.log('[FirstBoot] Account created:', config.pendingAccount.username);
         saveConfig({ pendingAccount: undefined });

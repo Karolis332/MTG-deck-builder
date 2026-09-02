@@ -9,6 +9,7 @@ import fs from 'fs';
 import path from 'path';
 import os from 'os';
 import { saveConfig, transitionToMainApp } from './main';
+import { hashPassword } from '../src/lib/auth';
 
 function getDbDir(): string {
   return process.env.MTG_DB_DIR || path.join(process.cwd(), 'data');
@@ -72,12 +73,12 @@ export function registerSetupHandlers(): void {
     password: string;
   }) => {
     // We need to create the account via the Next.js API once the server is running.
-    // For now, store the credentials so the app can auto-register on first boot.
+    // Hash now so the plaintext password never touches disk in app-config.json.
     saveConfig({
       pendingAccount: {
         username: data.username,
         email: data.email,
-        password: data.password,
+        passwordHash: hashPassword(data.password),
       },
     });
     return { ok: true };

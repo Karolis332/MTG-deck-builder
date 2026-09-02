@@ -386,6 +386,7 @@ async function startNextServer(): Promise<void> {
       ...process.env,
       ELECTRON_RUN_AS_NODE: '1',
       MTG_DB_DIR: getUserDataDir(),
+      ELECTRON_USER_DATA: app.getPath('userData'),
       PORT,
       NODE_ENV: 'production',
       APP_DIR: appDir,
@@ -592,6 +593,9 @@ if (!isDev) {
 }
 // Also set for dev so setup-handlers can use it
 process.env.MTG_DB_DIR = getUserDataDir();
+// first-boot.ts (in the Next.js child + this main process) reads this to
+// locate app-config.json — see resolveAppConfigPath in src/lib/first-boot.ts
+process.env.ELECTRON_USER_DATA = app.getPath('userData');
 
 // ── App lifecycle ───────────────────────────────────────────────────────
 

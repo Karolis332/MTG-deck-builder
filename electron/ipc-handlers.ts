@@ -101,11 +101,35 @@ function traceLog(msg: string): void {
  */
 export { markServerReady };
 
+/**
+ * Read the user-configured Arena log path (Settings dialog → PUT /api/settings
+ * with key 'arena_log_path', stored as app_state.setting_arena_log_path).
+ * Returns null if unset or the DB isn't reachable yet.
+ */
+function getConfiguredLogPath(): string | null {
+  try {
+    const dbDir = process.env.MTG_DB_DIR || path.join(process.cwd(), 'data');
+    const dbPath = path.join(dbDir, 'mtg-deck-builder.db');
+    if (!fs.existsSync(dbPath)) return null;
+
+    const Database = require('better-sqlite3'); // dynamic require — Electron main process only
+    const db = new Database(dbPath, { readonly: true });
+    try {
+      const row = db.prepare("SELECT value FROM app_state WHERE key = 'setting_arena_log_path'").get() as { value: string } | undefined;
+      return row?.value || null;
+    } finally {
+      db.close();
+    }
+  } catch {
+    return null;
+  }
+}
+
 export function ensureWatcherRunning(): void {
   traceLog(`ensureWatcherRunning called, watcher=${!!watcher}`);
   if (watcher) return; // Already running
 
-  const logPath = getDefaultLogPath();
+  const logPath = getConfiguredLogPath() || getDefaultLogPath();
   traceLog(`logPath=${logPath}, exists=${fs.existsSync(logPath)}`);
   if (!fs.existsSync(logPath)) {
     traceLog('Arena log not found — aborting');

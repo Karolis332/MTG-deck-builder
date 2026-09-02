@@ -58,7 +58,7 @@ The Black Grimoire is a dark-themed desktop application for building, analyzing,
 
 - **Framework:** Next.js 14 (App Router, standalone output mode) + Electron 33
 - **Language:** TypeScript (strict mode) + Python 3.13 (ML pipeline)
-- **Database:** SQLite via better-sqlite3 (WAL mode, 31 migrations in `src/db/schema.ts`)
+- **Database:** SQLite via better-sqlite3 (WAL mode, 38 migrations in `src/db/schema.ts`)
 - **Auth:** JWT (jose) + scrypt password hashing, httpOnly cookies
 - **UI:** Tailwind CSS 3 + Lucide icons + Recharts, grimoire dark theme with gold accents
 - **Validation:** Zod
@@ -79,7 +79,7 @@ src/
     analytics/            # Analytics dashboard
   components/             # React components (client-side, 'use client')
   db/
-    schema.ts             # All 31 database migrations
+    schema.ts             # All 38 database migrations
   lib/                    # Business logic & utilities
     db.ts                 # SQLite singleton (globalThis for HMR safety)
     auth.ts               # JWT + scrypt auth
@@ -148,7 +148,7 @@ npm run test:watch       # Vitest (watch mode)
 npm run test:python      # Python tests (pytest)
 npm run test:all         # Both test suites
 npm run lint             # ESLint via next lint
-npm run db:seed          # Seed card database from Scryfall
+# Card database seeding runs automatically on first boot, or trigger manually via POST /api/cards/seed
 npm run dist:win         # Package Windows installer (NSIS + portable + zip)
 npm run dist:mac         # Package macOS app (DMG + zip)
 npm run dist:linux       # Package Linux app (AppImage + deb + tar.gz)
@@ -193,7 +193,7 @@ py scripts/pipeline.py --reset-step <STEP>  # Clear degraded pipeline step
 
 ## Database
 
-SQLite at `data/mtg-deck-builder.db` (or `MTG_DB_DIR` env var). 51+ tables across 31 migrations. Key tables:
+SQLite at `data/mtg-deck-builder.db` (or `MTG_DB_DIR` env var). 51+ tables across 38 migrations. Key tables:
 
 - `cards` — 35K+ cards from Scryfall with FTS5 index
 - `users` — Accounts (username, email, password_hash)
@@ -217,7 +217,7 @@ Migrations run automatically on startup. Schema defined in `src/db/schema.ts`.
 ## Environment Variables
 
 ```
-MTG_DB_DIR=       # Custom database directory (default: data/, in Electron: %APPDATA%/The Black Grimoire/data/)
+MTG_DB_DIR=       # Custom database directory (default: data/, in Electron: %APPDATA%/the-black-grimoire/data/)
 JWT_SECRET=       # JWT signing secret (has dev default, change for prod)
 NODE_ENV=         # development | production
 PORT=             # Server port (default: 3000, auto-finds available port 3000-3009)

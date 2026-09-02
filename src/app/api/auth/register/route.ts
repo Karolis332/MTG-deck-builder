@@ -3,15 +3,27 @@ import { z } from 'zod';
 import { hashPassword, createToken } from '@/lib/auth';
 import { createUser, getUserByUsername, getUserByEmail } from '@/lib/db';
 
-const registerSchema = z.object({
-  username: z
-    .string()
-    .min(3, 'Username must be at least 3 characters')
-    .max(30, 'Username must be at most 30 characters')
-    .regex(/^[a-zA-Z0-9_-]+$/, 'Username can only contain letters, numbers, hyphens, and underscores'),
-  email: z.string().email('Invalid email address'),
-  password: z.string().min(8, 'Password must be at least 8 characters'),
-});
+const registerSchema = z
+  .object({
+    username: z
+      .string()
+      .min(3, 'Username must be at least 3 characters')
+      .max(30, 'Username must be at most 30 characters')
+      .regex(/^[a-zA-Z0-9_-]+$/, 'Username can only contain letters, numbers, hyphens, and underscores'),
+    email: z.string().email('Invalid email address'),
+    // Normal signups send a plaintext password (hashed below). The Electron
+    // first-boot flow (electron/setup-handlers.ts) sends an already-hashed
+    // passwordHash instead, so the plaintext password never touches disk.
+    password: z.string().min(8, 'Password must be at least 8 characters').optional(),
+    passwordHash: z
+      .string()
+      .regex(/^[0-9a-f]{32}:[0-9a-f]{128}$/, 'Invalid password hash format')
+      .optional(),
+  })
+  .refine((data) => data.password || data.passwordHash, {
+    message: 'Password is required',
+    path: ['password'],
+  });
 
 export async function POST(request: NextRequest) {
   try {
@@ -25,7 +37,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const { username, email, password } = parsed.data;
+    const { username, email, password, passwordHash: preHashed } = parsed.data;
 
     if (getUserByUsername(username)) {
       return NextResponse.json({ error: 'Username already taken' }, { status: 409 });
@@ -35,7 +47,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Email already registered' }, { status: 409 });
     }
 
-    const passwordHash = hashPassword(password);
+    const passwordHash = preHashed ?? hashPassword(password!);
     const user = createUser(username, email, passwordHash);
     const token = await createToken(user.id, user.username);
 

@@ -141,8 +141,8 @@ cd MTG-deck-builder
 # Install dependencies
 npm install
 
-# Seed the card database (first time only, downloads from Scryfall)
-npm run db:seed
+# Card database seeding happens automatically on first boot (or trigger it
+# manually with: curl -X POST http://localhost:3000/api/cards/seed)
 
 # Development mode (Next.js only, http://localhost:3000)
 npm run dev

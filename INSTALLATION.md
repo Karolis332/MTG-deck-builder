@@ -52,9 +52,9 @@ When you launch the app for the first time, you'll see a 5-step setup wizard. Ea
 Auto-creates the local SQLite database and runs all migrations. Takes ~3 seconds. No input required.
 
 **Where data goes** (you'll need this for backups):
-- Windows: `%APPDATA%\The Black Grimoire\data\`
-- macOS: `~/Library/Application Support/The Black Grimoire/data/`
-- Linux: `~/.config/The Black Grimoire/data/`
+- Windows: `%APPDATA%\the-black-grimoire\data\`
+- macOS: `~/Library/Application Support/the-black-grimoire/data/`
+- Linux: `~/.config/the-black-grimoire/data/`
 
 ### Step 2 — Account
 
@@ -153,7 +153,7 @@ Your data folder contains everything. To back up:
 
 ```bash
 # Windows (PowerShell)
-Copy-Item -Path "$env:APPDATA\The Black Grimoire\data" -Destination "D:\Backups\bg-data" -Recurse
+Copy-Item -Path "$env:APPDATA\the-black-grimoire\data" -Destination "D:\Backups\bg-data" -Recurse
 
 # macOS / Linux
 cp -r ~/Library/Application\ Support/The\ Black\ Grimoire/data ~/Backups/bg-data

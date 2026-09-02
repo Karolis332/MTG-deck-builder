@@ -10,7 +10,6 @@
     "build": "next build && node scripts/postbuild-standalone.js",
     "start": "next start",
     "lint": "next lint",
-    "db:seed": "tsx src/db/seed.ts",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:python": "py -m pytest scripts/tests/ -v",
