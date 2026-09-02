@@ -71,6 +71,16 @@ export function resolveAppConfigPath(
   return path.join(cwd, 'app-config.json');
 }
 
+/** Pending account as the register API expects it: never carries a plaintext password. */
+export function normalizePendingAccount(
+  pending: NonNullable<AppConfig['pendingAccount']>
+): { username: string; email: string; passwordHash: string } {
+  const { username, email, passwordHash, password } = pending;
+  if (passwordHash) return { username, email, passwordHash };
+  if (!password) throw new Error('pendingAccount has neither passwordHash nor password');
+  return { username, email, passwordHash: hashPassword(password) };
+}
+
 function getConfigPath(): string {
   return resolveAppConfigPath(process.env, process.cwd());
 }
@@ -283,13 +293,20 @@ export async function runFirstBootActions(): Promise<void> {
   // 1. Create pending account
   if (config.pendingAccount) {
     try {
-      const { username, email, passwordHash, password } = config.pendingAccount;
-      const body = passwordHash
-        ? { username, email, passwordHash }
-        : { username, email, passwordHash: hashPassword(password!) };
+      const body = normalizePendingAccount(config.pendingAccount);
+      if (config.pendingAccount.password) {
+        // Config written by an older build: strip the plaintext from disk right away,
+        // whether or not registration succeeds below.
+        saveConfig({ pendingAccount: body });
+      }
       const result = await postJson('/api/auth/register', body);
       if (result.status === 200 || result.status === 201) {
-        fbLog.log('[FirstBoot] Account created:', config.pendingAccount.username);
+        fbLog.log('[FirstBoot] Account created:', body.username);
+        saveConfig({ pendingAccount: undefined });
+      } else if (result.status === 409) {
+        // Account already exists (e.g. created by hand after an earlier first boot
+        // never ran). Nothing left to do — stop retrying on every launch.
+        fbLog.log('[FirstBoot] Account already exists, clearing pending account:', body.username);
         saveConfig({ pendingAccount: undefined });
       } else {
         fbLog.error('[FirstBoot] Account creation failed:', result.data);

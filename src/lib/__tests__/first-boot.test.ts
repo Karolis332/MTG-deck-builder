@@ -60,3 +60,19 @@ describe('pendingAccount password hashing interop', () => {
     expect(verifyPassword('wrong password', hash)).toBe(false);
   });
 });
+
+describe('normalizePendingAccount', () => {
+  it('keeps an existing hash and never returns a plaintext password', async () => {
+    const { normalizePendingAccount } = await import('../first-boot');
+    const out = normalizePendingAccount({ username: 'u', email: 'e@x', passwordHash: 'aa:bb' });
+    expect(out).toEqual({ username: 'u', email: 'e@x', passwordHash: 'aa:bb' });
+  });
+  it('hashes a legacy plaintext password into the scrypt format', async () => {
+    const { normalizePendingAccount } = await import('../first-boot');
+    const { verifyPassword } = await import('../password');
+    const out = normalizePendingAccount({ username: 'u', email: 'e@x', password: 'Secret-123' });
+    expect(out).not.toHaveProperty('password');
+    expect(out.passwordHash).toMatch(/^[0-9a-f]{32}:[0-9a-f]{128}$/);
+    expect(verifyPassword('Secret-123', out.passwordHash)).toBe(true);
+  });
+});
