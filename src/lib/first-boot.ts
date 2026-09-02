@@ -42,6 +42,15 @@ interface AppConfig {
  * Pure function (env + cwd injected) so it's unit-testable without touching
  * real Electron/OS state.
  */
+// Injectable logger: the Electron main process routes these into telemetry-debug.log
+// (see electron/main.ts setFirstBootLogger) so first-boot failures are visible in the
+// packaged app, where console output goes nowhere.
+const fbLog = { log: (...a: unknown[]) => console.log(...a), error: (...a: unknown[]) => console.error(...a) };
+export function setFirstBootLogger(logger: { log: (msg: string) => void; error: (msg: string) => void }): void {
+  fbLog.log = (...a: unknown[]) => logger.log(a.map(String).join(' '));
+  fbLog.error = (...a: unknown[]) => logger.error(a.map((x) => (x instanceof Error ? x.stack || x.message : typeof x === 'object' ? JSON.stringify(x) : String(x))).join(' '));
+}
+
 export function resolveAppConfigPath(
   env: NodeJS.ProcessEnv,
   cwd: string = process.cwd()
@@ -280,25 +289,25 @@ export async function runFirstBootActions(): Promise<void> {
         : { username, email, passwordHash: hashPassword(password!) };
       const result = await postJson('/api/auth/register', body);
       if (result.status === 200 || result.status === 201) {
-        console.log('[FirstBoot] Account created:', config.pendingAccount.username);
+        fbLog.log('[FirstBoot] Account created:', config.pendingAccount.username);
         saveConfig({ pendingAccount: undefined });
       } else {
-        console.error('[FirstBoot] Account creation failed:', result.data);
+        fbLog.error('[FirstBoot] Account creation failed:', result.data);
       }
     } catch (err) {
-      console.error('[FirstBoot] Account creation error:', err);
+      fbLog.error('[FirstBoot] Account creation error:', err);
     }
   }
 
   // 2. Trigger card seeding
   if (config.seedOnBoot) {
     try {
-      console.log('[FirstBoot] Triggering card database seed...');
+      fbLog.log('[FirstBoot] Triggering card database seed...');
       const result = await postJson('/api/cards/seed', {});
-      console.log('[FirstBoot] Seed result:', result.status);
+      fbLog.log('[FirstBoot] Seed result:', result.status);
       saveConfig({ seedOnBoot: false });
     } catch (err) {
-      console.error('[FirstBoot] Seed error:', err);
+      fbLog.error('[FirstBoot] Seed error:', err);
     }
   }
 
@@ -317,11 +326,11 @@ export async function runFirstBootActions(): Promise<void> {
         if (config.cfApiUrl) upsert.run('cf_api_url', config.cfApiUrl);
         if (config.cfApiKey) upsert.run('cf_api_key', config.cfApiKey);
         db.close();
-        console.log('[FirstBoot] CF API credentials persisted to app_state');
+        fbLog.log('[FirstBoot] CF API credentials persisted to app_state');
         saveConfig({ cfApiUrl: undefined, cfApiKey: undefined });
       }
     } catch (err) {
-      console.error('[FirstBoot] Failed to persist CF API credentials:', err);
+      fbLog.error('[FirstBoot] Failed to persist CF API credentials:', err);
     }
   }
 
@@ -347,13 +356,13 @@ export async function runFirstBootActions(): Promise<void> {
           const body = await res.json() as { weights?: Record<string, number>; trainedAt?: string };
           if (body.weights && typeof body.weights === 'object') {
             fs.writeFileSync(path.join(dbDir, 'scoring-weights.json'), JSON.stringify(body, null, 2));
-            console.log(`[FirstBoot] Scoring weights synced (trained ${body.trainedAt ?? 'unknown'})`);
+            fbLog.log(`[FirstBoot] Scoring weights synced (trained ${body.trainedAt ?? 'unknown'})`);
           }
         }
       }
     }
   } catch (err) {
-    console.error('[FirstBoot] Scoring weight sync skipped:', err instanceof Error ? err.message : err);
+    fbLog.error('[FirstBoot] Scoring weight sync skipped:', err instanceof Error ? err.message : err);
   }
 
   // 5. Refresh per-commander stats from the CF API if stale (>7 days).

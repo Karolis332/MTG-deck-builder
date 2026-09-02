@@ -112,7 +112,11 @@ export async function getRandomCard(): Promise<ScryfallCard> {
 export async function getBulkDataUrl(): Promise<string> {
   const response = await rateLimitedFetch(`${SCRYFALL_API_BASE}/bulk-data/oracle-cards`);
   const data = await response.json();
-  return data.download_uri;
+  // Scryfall replaced `download_uri` (JSON array) with `jsonl_download_uri` (gzip JSONL)
+  // in 2026 — see src/lib/scryfall-bulk.ts for the streaming reader.
+  const url = data.jsonl_download_uri ?? data.download_uri;
+  if (!url) throw new Error('Scryfall bulk-data response has no download URI');
+  return url;
 }
 
 export function getCardImageUri(

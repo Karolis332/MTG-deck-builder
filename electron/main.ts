@@ -7,7 +7,7 @@ import net from 'net';
 import { autoUpdater } from 'electron-updater';
 import { registerIpcHandlers, ensureWatcherRunning, markServerReady, checkArenaCardDbUpdate } from './ipc-handlers';
 import { registerSetupHandlers } from './setup-handlers';
-import { runFirstBootActions, seedArenaCardCache } from '../src/lib/first-boot';
+import { runFirstBootActions, seedArenaCardCache, setFirstBootLogger } from '../src/lib/first-boot';
 import { isOverwolfRuntime } from './platform-detect';
 import type { OverwolfOverlayManager } from './overwolf-overlay';
 import type { OverwolfGepHandler } from './overwolf-gep';
@@ -499,11 +499,12 @@ export async function transitionToMainApp(): Promise<void> {
   initOverwolfOverlay();
 
   // Run first-boot actions (account creation, card seeding) after server is ready
+  setFirstBootLogger({ log: mainTrace, error: (m) => { mainTrace(m); logCrash('first-boot', m); } });
   setTimeout(async () => {
     try {
       await runFirstBootActions();
     } catch (err) {
-      console.error('[FirstBoot] Error running first-boot actions:', err);
+      mainTrace(`[FirstBoot] Error running first-boot actions: ${err instanceof Error ? err.stack : String(err)}`);
     }
 
     // Seed Arena grpId cache from bundled JSON, then check CDN for updates

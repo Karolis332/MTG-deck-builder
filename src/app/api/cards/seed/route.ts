@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getDb, getCardCount } from '@/lib/db';
 import * as scryfall from '@/lib/scryfall';
+import { iterateBulkCards } from '@/lib/scryfall-bulk';
 
 export async function POST(request: NextRequest) {
   try {
@@ -21,7 +22,6 @@ export async function POST(request: NextRequest) {
       throw new Error(`Failed to download bulk data: ${response.status}`);
     }
 
-    const cards = await response.json();
     const db = getDb();
 
     const insert = db.prepare(`
@@ -44,7 +44,7 @@ export async function POST(request: NextRequest) {
       }
     });
 
-    for (const card of cards) {
+    for await (const card of iterateBulkCards(response, bulkUrl) as AsyncGenerator<any>) {
       if (!card.id || !card.name) continue;
       // Skip tokens, emblems, etc.
       if (card.layout === 'token' || card.layout === 'double_faced_token' || card.layout === 'emblem') continue;
