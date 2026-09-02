@@ -436,7 +436,8 @@ export interface ScoredCandidatePoolResult {
  */
 export async function buildScoredCandidatePool(options: BuildOptions): Promise<ScoredCandidatePoolResult> {
   const db = getDb();
-  const { format, strategy, useCollection = false, commanderName, powerLevel } = options;
+  const { format, strategy, commanderName, powerLevel } = options;
+  let useCollection = options.useCollection ?? false;
 
   // If commander format, derive colors from commander's color identity
   let colors = options.colors;
@@ -567,6 +568,11 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
        FROM collection col JOIN cards c ON col.card_id = c.id
        GROUP BY c.name`
     ).all() as Array<{ name: string; total: number }>;
+    if (rows.length === 0) {
+      // No collection imported yet: the UI defaults "prefer my collection" on, and
+      // honoring it here yields commander + 99 basics. Fall back to the full pool.
+      useCollection = false;
+    }
     for (const row of rows) {
       ownedNames.add(row.name);
       ownedQty.set(row.name, row.total);
