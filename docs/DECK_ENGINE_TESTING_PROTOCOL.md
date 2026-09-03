@@ -92,3 +92,13 @@ Matches are uploaded continuously. Each win/loss is calibration data, not just h
 
 Keep references current — a stale "winning" list mis-calibrates the engine. Delete a reference
 once a strictly better build for the same commander replaces it.
+
+## Benchmark (observational, added 2026-09-03)
+
+The fitness gate above measures overlap with EDHREC average lists. The benchmark measures each build against *best-regarded and competitive* lists, within its bracket, and reports composition deltas. It never changes the gate.
+
+- References: `npx tsx scripts/fetch-benchmark-refs.ts` → `decks/test-builds/refs/<slug>/<set>.json` (`moxfield-top` = top-30 by likes via the internal CF-API `/commander-top-decks`; `cedhtop16` = edhtop16 GraphQL tournament entries, no quantities; `edhrec-avg` = the winning-reference fixtures; `topdeck` needs `TOPDECK_API_KEY`). `--format brawl` writes `<set>--brawl.json` from Moxfield historicBrawl lists. References are ground truth; never edit them to fit the engine.
+- Brackets: `src/lib/bracket.ts` (`classifyBracket`) labels builds and references by the WotC rules (game changers, mass land denial, chained extra turns, 2-card combos; cEDH is a heuristic flag). `SCENARIOS` carry `targetBracket`.
+- Run: `npx tsx scripts/test-deck-builds.ts` then `npx tsx scripts/deck-benchmark.ts` → `decks/test-builds/benchmark.json` + `docs/DECK_BENCHMARK_<date>.md`. Brawl builds use the `--brawl` reference variants; rows marked "(commander refs)" are format-mismatched and excluded from the most-missed table.
+- Read it as: overlap = how much of the build the best lists also play; staplesMissing = cards in ≥60 % of the set the build lacks; deltas = build minus set median per role; qualityIndex = 50 % overlap + 30 % composition + 20 % bracket match (0–100, uncalibrated).
+- Known limits: no results data exists for casual Commander anywhere, so casual brackets are judged against best-regarded lists; `cedhtop16` has no quantities; unresolved reference names mean the local card data is stale (`scripts/update-card-data.ts`).

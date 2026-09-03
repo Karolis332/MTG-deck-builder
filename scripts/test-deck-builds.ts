@@ -21,7 +21,7 @@ import { classifyBracket, type BracketResult, type BracketCard } from '../src/li
 
 const OUT_DIR = path.join(process.cwd(), 'decks', 'test-builds');
 
-interface Scenario {
+export interface Scenario {
   slug: string;
   commander: string;
   /** secondary partner commander, if testing a duo */
@@ -32,7 +32,7 @@ interface Scenario {
   targetBracket?: number;
 }
 
-const SCENARIOS: Scenario[] = [
+export const SCENARIOS: Scenario[] = [
   { slug: 'vivi-ornitier', commander: 'Vivi Ornitier', note: 'X-spell / noncombat-damage spellslinger (UR). Arena: banned in Brawl per Scryfall.' },
   { slug: 'ramos-dragon-engine', commander: 'Ramos, Dragon Engine', note: '5-color, +1/+1 counters per color of mana spent.', targetBracket: 3 /* operator to confirm */ },
   { slug: 'magus-lucea-kane', commander: 'Magus Lucea Kane', note: 'Temur X-spells tribal copy (40K, not on Arena).' },
@@ -473,7 +473,11 @@ async function main(): Promise<void> {
   }
 }
 
-main().then(() => process.exit(0)).catch((err) => {
-  console.error('HARNESS FAILED:', err);
-  process.exit(1);
-});
+// Only auto-run when executed directly (`tsx test-deck-builds.ts`), not when
+// another script imports SCENARIOS/Scenario from this module.
+if (require.main === module) {
+  main().then(() => process.exit(0)).catch((err) => {
+    console.error('HARNESS FAILED:', err);
+    process.exit(1);
+  });
+}

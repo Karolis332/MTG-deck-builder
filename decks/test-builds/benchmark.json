@@ -1,0 +1,5438 @@
+[
+  {
+    "scenario": "vivi-ornitier",
+    "format": "commander",
+    "commander": "Vivi Ornitier",
+    "targetBracket": 3,
+    "bracket": {
+      "bracket": 4,
+      "gameChangers": [
+        "Jeska's Will",
+        "Mystical Tutor",
+        "Rhystic Study",
+        "Fierce Guardianship",
+        "Underworld Breach",
+        "Cyclonic Rift",
+        "Gamble"
+      ],
+      "twoCardCombos": [],
+      "massLandDenial": [],
+      "extraTurnCards": [],
+      "chainedExtraTurns": false,
+      "tutors": 2,
+      "fastMana": [
+        "Sol Ring",
+        "Lotus Petal"
+      ],
+      "reasons": [
+        "7 game changer(s): Jeska's Will, Mystical Tutor, Rhystic Study, Fierce Guardianship, Underworld Breach, Cyclonic Rift, Gamble"
+      ]
+    },
+    "sets": {
+      "cedhtop16": {
+        "refCount": 30,
+        "bracketFilterApplied": false,
+        "quantitiesAvailable": false,
+        "formatMismatch": false,
+        "refsPerBracket": {
+          "3": 2,
+          "4": 28
+        },
+        "overlapMeanPct": 37,
+        "overlapBestPct": 51,
+        "compositionDistance": 0.45,
+        "curveL1": 36,
+        "qualityIndex": 35,
+        "bracketMatch": false,
+        "deltas": {
+          "lands": {
+            "build": 38,
+            "refMedian": 26,
+            "delta": 12
+          },
+          "ramp": {
+            "build": 13,
+            "refMedian": 17,
+            "delta": -4
+          },
+          "draw": {
+            "build": 21,
+            "refMedian": 13,
+            "delta": 8
+          },
+          "removal": {
+            "build": 11,
+            "refMedian": 9,
+            "delta": 2
+          },
+          "boardWipes": {
+            "build": 1,
+            "refMedian": 1,
+            "delta": 0
+          },
+          "tutors": {
+            "build": 2,
+            "refMedian": 7,
+            "delta": -5
+          },
+          "winCons": {
+            "build": 6,
+            "refMedian": 3,
+            "delta": 3
+          },
+          "protection": {
+            "build": 7,
+            "refMedian": 11,
+            "delta": -4
+          },
+          "avgCmcNonLand": {
+            "build": 2.2950819672131146,
+            "refMedian": 2.013888888888889,
+            "delta": 0.2811930783242258
+          }
+        },
+        "staplesMissing": [
+          {
+            "name": "Rite of Flame",
+            "freq": 1
+          },
+          {
+            "name": "Simian Spirit Guide",
+            "freq": 1
+          },
+          {
+            "name": "Mox Amber",
+            "freq": 0.9666666666666667
+          },
+          {
+            "name": "Mental Misstep",
+            "freq": 0.9666666666666667
+          },
+          {
+            "name": "Chrome Mox",
+            "freq": 0.9666666666666667
+          },
+          {
+            "name": "Mox Opal",
+            "freq": 0.9666666666666667
+          },
+          {
+            "name": "Mox Diamond",
+            "freq": 0.9333333333333333
+          },
+          {
+            "name": "Force of Will",
+            "freq": 0.9333333333333333
+          },
+          {
+            "name": "Mana Vault",
+            "freq": 0.9333333333333333
+          },
+          {
+            "name": "Jeweled Amulet",
+            "freq": 0.9333333333333333
+          }
+        ],
+        "oddCards": [
+          "Guttersnipe",
+          "Starting Column",
+          "Sokka's Haiku",
+          "Hangarback Walker",
+          "Expansion // Explosion",
+          "Shivan Devastator",
+          "Walking Ballista",
+          "Murmuring Mystic",
+          "Elementalist's Palette",
+          "Comet Storm",
+          "Baral, Chief of Compliance",
+          "Crackle with Power",
+          "Increasing Vengeance",
+          "Reverberate",
+          "Kozilek's Command",
+          "Firemind's Research",
+          "Urabrask // The Great Work",
+          "Red Sun's Twilight",
+          "Stolen by the Fae"
+        ]
+      },
+      "edhrec-avg": {
+        "refCount": 1,
+        "bracketFilterApplied": false,
+        "quantitiesAvailable": true,
+        "formatMismatch": false,
+        "refsPerBracket": {
+          "4": 1
+        },
+        "overlapMeanPct": 69,
+        "overlapBestPct": 69,
+        "compositionDistance": 0.36,
+        "curveL1": 13,
+        "qualityIndex": 54,
+        "bracketMatch": false,
+        "deltas": {
+          "lands": {
+            "build": 38,
+            "refMedian": 17,
+            "delta": 21
+          },
+          "ramp": {
+            "build": 13,
+            "refMedian": 15,
+            "delta": -2
+          },
+          "draw": {
+            "build": 21,
+            "refMedian": 18,
+            "delta": 3
+          },
+          "removal": {
+            "build": 11,
+            "refMedian": 7,
+            "delta": 4
+          },
+          "boardWipes": {
+            "build": 1,
+            "refMedian": 2,
+            "delta": -1
+          },
+          "tutors": {
+            "build": 2,
+            "refMedian": 2,
+            "delta": 0
+          },
+          "winCons": {
+            "build": 6,
+            "refMedian": 6,
+            "delta": 0
+          },
+          "protection": {
+            "build": 7,
+            "refMedian": 15,
+            "delta": -8
+          },
+          "avgCmcNonLand": {
+            "build": 2.2950819672131146,
+            "refMedian": 2.1176470588235294,
+            "delta": 0.1774349083895852
+          }
+        },
+        "staplesMissing": [
+          {
+            "name": "Chrome Mox",
+            "freq": 1
+          },
+          {
+            "name": "Fellwar Stone",
+            "freq": 1
+          },
+          {
+            "name": "Lightning Greaves",
+            "freq": 1
+          },
+          {
+            "name": "Mox Amber",
+            "freq": 1
+          },
+          {
+            "name": "Swiftfoot Boots",
+            "freq": 1
+          },
+          {
+            "name": "Thought Vessel",
+            "freq": 1
+          },
+          {
+            "name": "Birgi, God of Storytelling",
+            "freq": 1
+          },
+          {
+            "name": "Coruscation Mage",
+            "freq": 1
+          },
+          {
+            "name": "Hexing Squelcher",
+            "freq": 1
+          },
+          {
+            "name": "Simian Spirit Guide",
+            "freq": 1
+          }
+        ],
+        "oddCards": [
+          "Starting Column",
+          "Sokka's Haiku",
+          "Agatha's Soul Cauldron",
+          "Hangarback Walker",
+          "Expansion // Explosion",
+          "Shivan Devastator",
+          "Walking Ballista",
+          "Murmuring Mystic",
+          "Elementalist's Palette",
+          "Comet Storm",
+          "Baral, Chief of Compliance",
+          "Crackle with Power",
+          "Increasing Vengeance",
+          "Reverberate",
+          "Kozilek's Command",
+          "Firemind's Research",
+          "Urabrask // The Great Work",
+          "Red Sun's Twilight",
+          "Stolen by the Fae"
+        ]
+      },
+      "moxfield-top": {
+        "refCount": 7,
+        "bracketFilterApplied": true,
+        "quantitiesAvailable": true,
+        "formatMismatch": false,
+        "refsPerBracket": {
+          "2": 7,
+          "3": 7,
+          "4": 16
+        },
+        "overlapMeanPct": 29,
+        "overlapBestPct": 38,
+        "compositionDistance": 0.27,
+        "curveL1": 13,
+        "qualityIndex": 36,
+        "bracketMatch": false,
+        "deltas": {
+          "lands": {
+            "build": 38,
+            "refMedian": 33,
+            "delta": 5
+          },
+          "ramp": {
+            "build": 13,
+            "refMedian": 10,
+            "delta": 3
+          },
+          "draw": {
+            "build": 21,
+            "refMedian": 26,
+            "delta": -5
+          },
+          "removal": {
+            "build": 11,
+            "refMedian": 8,
+            "delta": 3
+          },
+          "boardWipes": {
+            "build": 1,
+            "refMedian": 1,
+            "delta": 0
+          },
+          "tutors": {
+            "build": 2,
+            "refMedian": 0,
+            "delta": 2
+          },
+          "winCons": {
+            "build": 6,
+            "refMedian": 6,
+            "delta": 0
+          },
+          "protection": {
+            "build": 7,
+            "refMedian": 8,
+            "delta": -1
+          },
+          "avgCmcNonLand": {
+            "build": 2.2950819672131146,
+            "refMedian": 2.6451612903225805,
+            "delta": -0.3500793231094659
+          }
+        },
+        "staplesMissing": [
+          {
+            "name": "Reality Shift",
+            "freq": 0.8571428571428571
+          },
+          {
+            "name": "Slip Out the Back",
+            "freq": 0.7142857142857143
+          }
+        ],
+        "oddCards": [
+          "Mystical Tutor",
+          "Starting Column",
+          "Sokka's Haiku",
+          "Underworld Breach",
+          "Agatha's Soul Cauldron",
+          "Flusterstorm",
+          "Quicksilver Elemental",
+          "Gamble",
+          "Strike It Rich",
+          "Hangarback Walker",
+          "Shivan Devastator",
+          "Walking Ballista",
+          "Murmuring Mystic",
+          "Elementalist's Palette",
+          "Comet Storm",
+          "Baral, Chief of Compliance",
+          "Increasing Vengeance",
+          "Reverberate",
+          "Kozilek's Command",
+          "Firemind's Research",
+          "Red Sun's Twilight",
+          "Stolen by the Fae"
+        ]
+      }
+    }
+  },
+  {
+    "scenario": "ramos-dragon-engine",
+    "format": "commander",
+    "commander": "Ramos, Dragon Engine",
+    "targetBracket": 3,
+    "bracket": {
+      "bracket": 2,
+      "gameChangers": [],
+      "twoCardCombos": [],
+      "massLandDenial": [],
+      "extraTurnCards": [],
+      "chainedExtraTurns": false,
+      "tutors": 2,
+      "fastMana": [
+        "Sol Ring",
+        "Gemstone Caverns"
+      ],
+      "reasons": []
+    },
+    "sets": {
+      "cedhtop16": {
+        "refCount": 2,
+        "bracketFilterApplied": false,
+        "quantitiesAvailable": false,
+        "formatMismatch": false,
+        "refsPerBracket": {
+          "3": 1,
+          "4": 1
+        },
+        "overlapMeanPct": 7,
+        "overlapBestPct": 8,
+        "compositionDistance": 0.6,
+        "curveL1": 24,
+        "qualityIndex": 15,
+        "bracketMatch": false,
+        "deltas": {
+          "lands": {
+            "build": 38,
+            "refMedian": 26.5,
+            "delta": 11.5
+          },
+          "ramp": {
+            "build": 20,
+            "refMedian": 20,
+            "delta": 0
+          },
+          "draw": {
+            "build": 19,
+            "refMedian": 10,
+            "delta": 9
+          },
+          "removal": {
+            "build": 10,
+            "refMedian": 4,
+            "delta": 6
+          },
+          "boardWipes": {
+            "build": 4,
+            "refMedian": 0,
+            "delta": 4
+          },
+          "tutors": {
+            "build": 2,
+            "refMedian": 4.5,
+            "delta": -2.5
+          },
+          "winCons": {
+            "build": 17,
+            "refMedian": 9.5,
+            "delta": 7.5
+          },
+          "protection": {
+            "build": 3,
+            "refMedian": 3.5,
+            "delta": -0.5
+          },
+          "avgCmcNonLand": {
+            "build": 3.360655737704918,
+            "refMedian": 2.653119307832423,
+            "delta": 0.7075364298724951
+          }
+        },
+        "staplesMissing": [
+          {
+            "name": "Demonic Tutor",
+            "freq": 1
+          }
+        ],
+        "oddCards": [
+          "Chromatic Lantern",
+          "Noggle Robber",
+          "Door to Nothingness",
+          "Abzan Charm",
+          "Leyline of the Guildpact",
+          "Boros Charm",
+          "Swiftfoot Boots",
+          "Maelstrom Archangel",
+          "Sultai Charm",
+          "Faeburrow Elder",
+          "Fellwar Stone",
+          "Maelstrom Nexus",
+          "Growth Spiral",
+          "Kodama's Reach",
+          "Conflux",
+          "Swords to Plowshares",
+          "Ruinous Ultimatum",
+          "Bloom Tender",
+          "Omnath, Locus of All",
+          "Jegantha, the Wellspring",
+          "Young Pyromancer",
+          "Murmuring Mystic",
+          "Guttersnipe",
+          "Firebrand Archer",
+          "Goblin Electromancer",
+          "Thousand-Year Storm",
+          "Dualcaster Mage",
+          "Archmage Emeritus",
+          "Nature's Lore",
+          "Two-Headed Hellkite",
+          "Corpsejack Menace",
+          "Chromatic Orrery",
+          "Niv-Mizzet Reborn",
+          "Jodah, Archmage Eternal",
+          "Talrand, Sky Summoner",
+          "Veyran, Voice of Duality",
+          "Baral, Chief of Compliance",
+          "Niv-Mizzet, Parun",
+          "Niv-Mizzet, the Firemind",
+          "Bring to Light",
+          "Putrefy",
+          "Deathrite Shaman",
+          "Prismari Command",
+          "Rakdos Charm",
+          "Time Wipe",
+          "Golgari Charm",
+          "Kutzil, Malamet Exemplar",
+          "Villainous Wealth",
+          "Likeness Looter",
+          "Hearthhull, the Worldseed",
+          "Gluntch, the Bestower",
+          "Sorcerer Class",
+          "Zurgo Stormrender",
+          "Lunar Convocation",
+          "Bedevil"
+        ]
+      },
+      "edhrec-avg": {
+        "refCount": 1,
+        "bracketFilterApplied": false,
+        "quantitiesAvailable": true,
+        "formatMismatch": false,
+        "refsPerBracket": {
+          "2": 1
+        },
+        "overlapMeanPct": 11,
+        "overlapBestPct": 11,
+        "compositionDistance": 0.43,
+        "curveL1": 32,
+        "qualityIndex": 23,
+        "bracketMatch": false,
+        "deltas": {
+          "lands": {
+            "build": 38,
+            "refMedian": 30,
+            "delta": 8
+          },
+          "ramp": {
+            "build": 20,
+            "refMedian": 20,
+            "delta": 0
+          },
+          "draw": {
+            "build": 19,
+            "refMedian": 13,
+            "delta": 6
+          },
+          "removal": {
+            "build": 10,
+            "refMedian": 20,
+            "delta": -10
+          },
+          "boardWipes": {
+            "build": 4,
+            "refMedian": 1,
+            "delta": 3
+          },
+          "tutors": {
+            "build": 2,
+            "refMedian": 1,
+            "delta": 1
+          },
+          "winCons": {
+            "build": 17,
+            "refMedian": 14,
+            "delta": 3
+          },
+          "protection": {
+            "build": 3,
+            "refMedian": 3,
+            "delta": 0
+          },
+          "avgCmcNonLand": {
+            "build": 3.360655737704918,
+            "refMedian": 2.8550724637681157,
+            "delta": 0.5055832739368022
+          }
+        },
+        "staplesMissing": [
+          {
+            "name": "Fracture",
+            "freq": 1
+          },
+          {
+            "name": "Peter Parker",
+            "freq": 1
+          },
+          {
+            "name": "Elusive Otter",
+            "freq": 1
+          },
+          {
+            "name": "Avacyn's Pilgrim",
+            "freq": 1
+          },
+          {
+            "name": "Dovin's Veto",
+            "freq": 1
+          },
+          {
+            "name": "Talisman of Progress",
+            "freq": 1
+          },
+          {
+            "name": "Aang, Swift Savior",
+            "freq": 1
+          },
+          {
+            "name": "Silverquill Charm",
+            "freq": 1
+          },
+          {
+            "name": "Silverquill, the Disputant",
+            "freq": 1
+          },
+          {
+            "name": "Moment of Reckoning",
+            "freq": 1
+          }
+        ],
+        "oddCards": [
+          "Arcane Signet",
+          "Sol Ring",
+          "Chromatic Lantern",
+          "Farseek",
+          "Noggle Robber",
+          "Cultivate",
+          "Leyline of the Guildpact",
+          "Boros Charm",
+          "Swiftfoot Boots",
+          "Faeburrow Elder",
+          "Fellwar Stone",
+          "Maelstrom Nexus",
+          "Growth Spiral",
+          "Kodama's Reach",
+          "Birds of Paradise",
+          "Conflux",
+          "Swords to Plowshares",
+          "Ruinous Ultimatum",
+          "Rampant Growth",
+          "Bloom Tender",
+          "Jegantha, the Wellspring",
+          "Young Pyromancer",
+          "Murmuring Mystic",
+          "Guttersnipe",
+          "Firebrand Archer",
+          "Goblin Electromancer",
+          "Thousand-Year Storm",
+          "Dualcaster Mage",
+          "Archmage Emeritus",
+          "Nature's Lore",
+          "Two-Headed Hellkite",
+          "Corpsejack Menace",
+          "Chromatic Orrery",
+          "Niv-Mizzet Reborn",
+          "Jodah, Archmage Eternal",
+          "Talrand, Sky Summoner",
+          "Veyran, Voice of Duality",
+          "Baral, Chief of Compliance",
+          "Niv-Mizzet, Parun",
+          "Niv-Mizzet, the Firemind",
+          "Putrefy",
+          "Deathrite Shaman",
+          "Prismari Command",
+          "Time Wipe",
+          "Golgari Charm",
+          "Kutzil, Malamet Exemplar",
+          "Villainous Wealth",
+          "Likeness Looter",
+          "Hearthhull, the Worldseed",
+          "Gluntch, the Bestower",
+          "Sorcerer Class",
+          "Zurgo Stormrender",
+          "Lunar Convocation",
+          "Bedevil"
+        ]
+      },
+      "moxfield-top": {
+        "refCount": 12,
+        "bracketFilterApplied": true,
+        "quantitiesAvailable": true,
+        "formatMismatch": false,
+        "refsPerBracket": {
+          "2": 11,
+          "3": 12,
+          "4": 7
+        },
+        "overlapMeanPct": 15,
+        "overlapBestPct": 28,
+        "compositionDistance": 0.43,
+        "curveL1": 15,
+        "qualityIndex": 25,
+        "bracketMatch": false,
+        "deltas": {
+          "lands": {
+            "build": 38,
+            "refMedian": 37,
+            "delta": 1
+          },
+          "ramp": {
+            "build": 20,
+            "refMedian": 12.5,
+            "delta": 7.5
+          },
+          "draw": {
+            "build": 19,
+            "refMedian": 11,
+            "delta": 8
+          },
+          "removal": {
+            "build": 10,
+            "refMedian": 9,
+            "delta": 1
+          },
+          "boardWipes": {
+            "build": 4,
+            "refMedian": 2,
+            "delta": 2
+          },
+          "tutors": {
+            "build": 2,
+            "refMedian": 1.5,
+            "delta": 0.5
+          },
+          "winCons": {
+            "build": 17,
+            "refMedian": 14,
+            "delta": 3
+          },
+          "protection": {
+            "build": 3,
+            "refMedian": 5,
+            "delta": -2
+          },
+          "avgCmcNonLand": {
+            "build": 3.360655737704918,
+            "refMedian": 3.5529495380241647,
+            "delta": -0.1922938003192467
+          }
+        },
+        "staplesMissing": [],
+        "oddCards": [
+          "Noggle Robber",
+          "Young Pyromancer",
+          "Murmuring Mystic",
+          "Guttersnipe",
+          "Firebrand Archer",
+          "Thousand-Year Storm",
+          "Dualcaster Mage",
+          "Two-Headed Hellkite",
+          "Corpsejack Menace",
+          "Niv-Mizzet Reborn",
+          "Talrand, Sky Summoner",
+          "Veyran, Voice of Duality",
+          "Baral, Chief of Compliance",
+          "Niv-Mizzet, Parun",
+          "Niv-Mizzet, the Firemind",
+          "Putrefy",
+          "Deathrite Shaman",
+          "Prismari Command",
+          "Time Wipe",
+          "Kutzil, Malamet Exemplar",
+          "Likeness Looter",
+          "Hearthhull, the Worldseed",
+          "Gluntch, the Bestower",
+          "Sorcerer Class",
+          "Zurgo Stormrender",
+          "Lunar Convocation",
+          "Bedevil"
+        ]
+      }
+    }
+  },
+  {
+    "scenario": "ramos-dragon-engine",
+    "format": "brawl",
+    "commander": "Ramos, Dragon Engine",
+    "targetBracket": 3,
+    "bracket": {
+      "bracket": 2,
+      "gameChangers": [],
+      "twoCardCombos": [],
+      "massLandDenial": [],
+      "extraTurnCards": [],
+      "chainedExtraTurns": false,
+      "tutors": 2,
+      "fastMana": [
+        "Gemstone Caverns"
+      ],
+      "reasons": []
+    },
+    "sets": {
+      "cedhtop16": {
+        "refCount": 2,
+        "bracketFilterApplied": false,
+        "quantitiesAvailable": false,
+        "formatMismatch": true,
+        "refsPerBracket": {
+          "3": 1,
+          "4": 1
+        },
+        "overlapMeanPct": 6,
+        "overlapBestPct": 8,
+        "compositionDistance": 0.58,
+        "curveL1": 24,
+        "qualityIndex": 15,
+        "bracketMatch": false,
+        "deltas": {
+          "lands": {
+            "build": 38,
+            "refMedian": 26.5,
+            "delta": 11.5
+          },
+          "ramp": {
+            "build": 21,
+            "refMedian": 20,
+            "delta": 1
+          },
+          "draw": {
+            "build": 19,
+            "refMedian": 10,
+            "delta": 9
+          },
+          "removal": {
+            "build": 9,
+            "refMedian": 4,
+            "delta": 5
+          },
+          "boardWipes": {
+            "build": 4,
+            "refMedian": 0,
+            "delta": 4
+          },
+          "tutors": {
+            "build": 2,
+            "refMedian": 4.5,
+            "delta": -2.5
+          },
+          "winCons": {
+            "build": 15,
+            "refMedian": 9.5,
+            "delta": 5.5
+          },
+          "protection": {
+            "build": 4,
+            "refMedian": 3.5,
+            "delta": 0.5
+          },
+          "avgCmcNonLand": {
+            "build": 3.377049180327869,
+            "refMedian": 2.653119307832423,
+            "delta": 0.7239298724954462
+          }
+        },
+        "staplesMissing": [
+          {
+            "name": "Sol Ring",
+            "freq": 1
+          },
+          {
+            "name": "Demonic Tutor",
+            "freq": 1
+          }
+        ],
+        "oddCards": [
+          "Chromatic Lantern",
+          "Door to Nothingness",
+          "Abzan Charm",
+          "Leyline of the Guildpact",
+          "Boros Charm",
+          "Swiftfoot Boots",
+          "Maelstrom Archangel",
+          "Sultai Charm",
+          "Faeburrow Elder",
+          "Growth Spiral",
+          "Swords to Plowshares",
+          "Ruinous Ultimatum",
+          "Progenitus",
+          "Bloom Tender",
+          "Omnath, Locus of All",
+          "Chromanticore",
+          "Jegantha, the Wellspring",
+          "Young Pyromancer",
+          "Murmuring Mystic",
+          "Guttersnipe",
+          "Goblin Electromancer",
+          "Thousand-Year Storm",
+          "Dualcaster Mage",
+          "Archmage Emeritus",
+          "Chromatic Orrery",
+          "Niv-Mizzet Reborn",
+          "Hero of Precinct One",
+          "Jodah, Archmage Eternal",
+          "Monastery Swiftspear",
+          "Talrand, Sky Summoner",
+          "Baral, Chief of Compliance",
+          "Niv-Mizzet, Parun",
+          "Increasing Vengeance",
+          "Mind's Desire",
+          "Mind Stone",
+          "Coldsteel Heart",
+          "Talisman of Progress",
+          "Talisman of Conviction",
+          "Hedron Archive",
+          "Paradise Druid",
+          "Bring to Light",
+          "Kaito Shizuki",
+          "Deathrite Shaman",
+          "Putrefy",
+          "Prismari Command",
+          "Bedevil",
+          "Rakdos Charm",
+          "Time Wipe",
+          "Golgari Charm",
+          "Kutzil, Malamet Exemplar",
+          "Villainous Wealth",
+          "Likeness Looter",
+          "Hearthhull, the Worldseed",
+          "Helga, Skittish Seer",
+          "Korvold, Fae-Cursed King"
+        ]
+      },
+      "edhrec-avg": {
+        "refCount": 1,
+        "bracketFilterApplied": false,
+        "quantitiesAvailable": true,
+        "formatMismatch": false,
+        "refsPerBracket": {
+          "4": 1
+        },
+        "overlapMeanPct": 18,
+        "overlapBestPct": 18,
+        "compositionDistance": 0.39,
+        "curveL1": 18,
+        "qualityIndex": 27,
+        "bracketMatch": false,
+        "deltas": {
+          "lands": {
+            "build": 38,
+            "refMedian": 35,
+            "delta": 3
+          },
+          "ramp": {
+            "build": 21,
+            "refMedian": 32,
+            "delta": -11
+          },
+          "draw": {
+            "build": 19,
+            "refMedian": 16,
+            "delta": 3
+          },
+          "removal": {
+            "build": 9,
+            "refMedian": 9,
+            "delta": 0
+          },
+          "boardWipes": {
+            "build": 4,
+            "refMedian": 0,
+            "delta": 4
+          },
+          "tutors": {
+            "build": 2,
+            "refMedian": 3,
+            "delta": -1
+          },
+          "winCons": {
+            "build": 15,
+            "refMedian": 13,
+            "delta": 2
+          },
+          "protection": {
+            "build": 4,
+            "refMedian": 2,
+            "delta": 2
+          },
+          "avgCmcNonLand": {
+            "build": 3.377049180327869,
+            "refMedian": 2.8153846153846156,
+            "delta": 0.5616645649432535
+          }
+        },
+        "staplesMissing": [
+          {
+            "name": "The Wandering Minstrel",
+            "freq": 1
+          },
+          {
+            "name": "Gates Ablaze",
+            "freq": 1
+          },
+          {
+            "name": "Dovin's Veto",
+            "freq": 1
+          },
+          {
+            "name": "Guild Summit",
+            "freq": 1
+          },
+          {
+            "name": "Circuitous Route",
+            "freq": 1
+          },
+          {
+            "name": "Open the Gates",
+            "freq": 1
+          },
+          {
+            "name": "Glacial Dragonhunt",
+            "freq": 1
+          },
+          {
+            "name": "Broodheart Engine",
+            "freq": 1
+          },
+          {
+            "name": "A-Navigation Orb",
+            "freq": 1
+          },
+          {
+            "name": "Manamorphose",
+            "freq": 1
+          }
+        ],
+        "oddCards": [
+          "Arcane Signet",
+          "Farseek",
+          "Cultivate",
+          "Leyline of the Guildpact",
+          "Boros Charm",
+          "Swiftfoot Boots",
+          "Faeburrow Elder",
+          "Growth Spiral",
+          "Birds of Paradise",
+          "Swords to Plowshares",
+          "Ruinous Ultimatum",
+          "Rampant Growth",
+          "Progenitus",
+          "Bloom Tender",
+          "Young Pyromancer",
+          "Murmuring Mystic",
+          "Guttersnipe",
+          "Goblin Electromancer",
+          "Thousand-Year Storm",
+          "Dualcaster Mage",
+          "Archmage Emeritus",
+          "Chromatic Orrery",
+          "Niv-Mizzet Reborn",
+          "Hero of Precinct One",
+          "Jodah, Archmage Eternal",
+          "Monastery Swiftspear",
+          "Talrand, Sky Summoner",
+          "Baral, Chief of Compliance",
+          "Niv-Mizzet, Parun",
+          "Increasing Vengeance",
+          "Mind's Desire",
+          "Mind Stone",
+          "Coldsteel Heart",
+          "Hedron Archive",
+          "Paradise Druid",
+          "Bring to Light",
+          "Kaito Shizuki",
+          "Deathrite Shaman",
+          "Putrefy",
+          "Prismari Command",
+          "Bedevil",
+          "Rakdos Charm",
+          "Time Wipe",
+          "Golgari Charm",
+          "Kutzil, Malamet Exemplar",
+          "Villainous Wealth",
+          "Likeness Looter",
+          "Hearthhull, the Worldseed",
+          "Helga, Skittish Seer",
+          "Korvold, Fae-Cursed King"
+        ]
+      },
+      "moxfield-top": {
+        "refCount": 4,
+        "bracketFilterApplied": false,
+        "quantitiesAvailable": true,
+        "formatMismatch": false,
+        "refsPerBracket": {
+          "2": 3,
+          "3": 1
+        },
+        "overlapMeanPct": 10,
+        "overlapBestPct": 13,
+        "compositionDistance": 0.47,
+        "curveL1": 15,
+        "qualityIndex": 21,
+        "bracketMatch": false,
+        "deltas": {
+          "lands": {
+            "build": 38,
+            "refMedian": 38.5,
+            "delta": -0.5
+          },
+          "ramp": {
+            "build": 21,
+            "refMedian": 20,
+            "delta": 1
+          },
+          "draw": {
+            "build": 19,
+            "refMedian": 12,
+            "delta": 7
+          },
+          "removal": {
+            "build": 9,
+            "refMedian": 5.5,
+            "delta": 3.5
+          },
+          "boardWipes": {
+            "build": 4,
+            "refMedian": 0.5,
+            "delta": 3.5
+          },
+          "tutors": {
+            "build": 2,
+            "refMedian": 0.5,
+            "delta": 1.5
+          },
+          "winCons": {
+            "build": 15,
+            "refMedian": 18,
+            "delta": -3
+          },
+          "protection": {
+            "build": 4,
+            "refMedian": 3,
+            "delta": 1
+          },
+          "avgCmcNonLand": {
+            "build": 3.377049180327869,
+            "refMedian": 3.6726775956284152,
+            "delta": -0.2956284153005462
+          }
+        },
+        "staplesMissing": [
+          {
+            "name": "Blitzball",
+            "freq": 0.75
+          },
+          {
+            "name": "Dragonlord Kolaghan",
+            "freq": 0.75
+          }
+        ],
+        "oddCards": [
+          "Farseek",
+          "Door to Nothingness",
+          "Abzan Charm",
+          "Swiftfoot Boots",
+          "Maelstrom Archangel",
+          "Sultai Charm",
+          "Faeburrow Elder",
+          "Swords to Plowshares",
+          "Ruinous Ultimatum",
+          "Rampant Growth",
+          "Omnath, Locus of All",
+          "Chromanticore",
+          "Jegantha, the Wellspring",
+          "Young Pyromancer",
+          "Murmuring Mystic",
+          "Guttersnipe",
+          "Goblin Electromancer",
+          "Thousand-Year Storm",
+          "Dualcaster Mage",
+          "Archmage Emeritus",
+          "Niv-Mizzet Reborn",
+          "Hero of Precinct One",
+          "Jodah, Archmage Eternal",
+          "Monastery Swiftspear",
+          "Talrand, Sky Summoner",
+          "Baral, Chief of Compliance",
+          "Niv-Mizzet, Parun",
+          "Increasing Vengeance",
+          "Mind's Desire",
+          "Mind Stone",
+          "Coldsteel Heart",
+          "Talisman of Progress",
+          "Talisman of Conviction",
+          "Hedron Archive",
+          "Paradise Druid",
+          "Bring to Light",
+          "Kaito Shizuki",
+          "Putrefy",
+          "Prismari Command",
+          "Bedevil",
+          "Rakdos Charm",
+          "Time Wipe",
+          "Golgari Charm",
+          "Kutzil, Malamet Exemplar",
+          "Likeness Looter",
+          "Hearthhull, the Worldseed",
+          "Helga, Skittish Seer",
+          "Korvold, Fae-Cursed King"
+        ]
+      }
+    }
+  },
+  {
+    "scenario": "magus-lucea-kane",
+    "format": "commander",
+    "commander": "Magus Lucea Kane",
+    "targetBracket": 3,
+    "bracket": {
+      "bracket": 2,
+      "gameChangers": [],
+      "twoCardCombos": [],
+      "massLandDenial": [],
+      "extraTurnCards": [],
+      "chainedExtraTurns": false,
+      "tutors": 2,
+      "fastMana": [
+        "Sol Ring"
+      ],
+      "reasons": []
+    },
+    "sets": {
+      "cedhtop16": {
+        "refCount": 5,
+        "bracketFilterApplied": true,
+        "quantitiesAvailable": false,
+        "formatMismatch": false,
+        "refsPerBracket": {
+          "2": 4,
+          "3": 5,
+          "4": 4
+        },
+        "overlapMeanPct": 36,
+        "overlapBestPct": 39,
+        "compositionDistance": 0.86,
+        "curveL1": 16,
+        "qualityIndex": 22,
+        "bracketMatch": false,
+        "deltas": {
+          "lands": {
+            "build": 38,
+            "refMedian": 17,
+            "delta": 21
+          },
+          "ramp": {
+            "build": 17,
+            "refMedian": 13,
+            "delta": 4
+          },
+          "draw": {
+            "build": 24,
+            "refMedian": 12,
+            "delta": 12
+          },
+          "removal": {
+            "build": 10,
+            "refMedian": 1,
+            "delta": 9
+          },
+          "boardWipes": {
+            "build": 0,
+            "refMedian": 2,
+            "delta": -2
+          },
+          "tutors": {
+            "build": 2,
+            "refMedian": 0,
+            "delta": 2
+          },
+          "winCons": {
+            "build": 4,
+            "refMedian": 2,
+            "delta": 2
+          },
+          "protection": {
+            "build": 5,
+            "refMedian": 11,
+            "delta": -6
+          },
+          "avgCmcNonLand": {
+            "build": 2.557377049180328,
+            "refMedian": 2.2857142857142856,
+            "delta": 0.27166276346604246
+          }
+        },
+        "staplesMissing": [
+          {
+            "name": "Cyclonic Rift",
+            "freq": 1
+          },
+          {
+            "name": "Lightning Greaves",
+            "freq": 1
+          },
+          {
+            "name": "Ingenious Prodigy",
+            "freq": 1
+          },
+          {
+            "name": "Kiora, Behemoth Beckoner",
+            "freq": 1
+          },
+          {
+            "name": "Jaya's Immolating Inferno",
+            "freq": 1
+          },
+          {
+            "name": "Loading Zone",
+            "freq": 1
+          },
+          {
+            "name": "Lattice Library",
+            "freq": 1
+          },
+          {
+            "name": "Zimone, Infinite Analyst",
+            "freq": 1
+          },
+          {
+            "name": "Swiftfoot Boots",
+            "freq": 0.6
+          },
+          {
+            "name": "Swan Song",
+            "freq": 0.6
+          }
+        ],
+        "oddCards": [
+          "Goldvein Hydra",
+          "Biophagus",
+          "Open the Way",
+          "Temur Ascendancy",
+          "Shivan Devastator",
+          "Curse of the Swine",
+          "Shadow in the Warp",
+          "Voracious Hydra",
+          "Clamavus",
+          "Sokka's Haiku",
+          "Bushwhack",
+          "Starting Column",
+          "Spectral Sailor",
+          "Curious Obsession",
+          "Dress Down",
+          "Druid Class",
+          "Loot, Exuberant Explorer",
+          "Mind Stone",
+          "Mistcutter Hydra",
+          "Kami of Whispered Hopes",
+          "Genesis Hydra",
+          "Bident of Thassa",
+          "Ugin, Eye of the Storms",
+          "Tamiyo's Journal",
+          "Rampaging Yao Guai",
+          "Red Sun's Twilight",
+          "Flaming Tyrannosaurus",
+          "Freyalise, Llanowar's Fury",
+          "Earth Rumble",
+          "Niv-Mizzet, Parun"
+        ]
+      },
+      "edhrec-avg": {
+        "refCount": 1,
+        "bracketFilterApplied": false,
+        "quantitiesAvailable": true,
+        "formatMismatch": false,
+        "refsPerBracket": {
+          "2": 1
+        },
+        "overlapMeanPct": 64,
+        "overlapBestPct": 64,
+        "compositionDistance": 0.56,
+        "curveL1": 14,
+        "qualityIndex": 45,
+        "bracketMatch": false,
+        "deltas": {
+          "lands": {
+            "build": 38,
+            "refMedian": 22,
+            "delta": 16
+          },
+          "ramp": {
+            "build": 17,
+            "refMedian": 14,
+            "delta": 3
+          },
+          "draw": {
+            "build": 24,
+            "refMedian": 17,
+            "delta": 7
+          },
+          "removal": {
+            "build": 10,
+            "refMedian": 4,
+            "delta": 6
+          },
+          "boardWipes": {
+            "build": 0,
+            "refMedian": 1,
+            "delta": -1
+          },
+          "tutors": {
+            "build": 2,
+            "refMedian": 0,
+            "delta": 2
+          },
+          "winCons": {
+            "build": 4,
+            "refMedian": 4,
+            "delta": 0
+          },
+          "protection": {
+            "build": 5,
+            "refMedian": 6,
+            "delta": -1
+          },
+          "avgCmcNonLand": {
+            "build": 2.557377049180328,
+            "refMedian": 2.3492063492063493,
+            "delta": 0.20817069997397875
+          }
+        },
+        "staplesMissing": [
+          {
+            "name": "Lightning Greaves",
+            "freq": 1
+          },
+          {
+            "name": "Swiftfoot Boots",
+            "freq": 1
+          },
+          {
+            "name": "The Ozolith",
+            "freq": 1
+          },
+          {
+            "name": "Twinning Staff",
+            "freq": 1
+          },
+          {
+            "name": "Atalan Jackal",
+            "freq": 1
+          },
+          {
+            "name": "Hormagaunt Horde",
+            "freq": 1
+          },
+          {
+            "name": "Incubation Druid",
+            "freq": 1
+          },
+          {
+            "name": "Ingenious Prodigy",
+            "freq": 1
+          },
+          {
+            "name": "Old One Eye",
+            "freq": 1
+          },
+          {
+            "name": "Owlin Spiralmancer",
+            "freq": 1
+          }
+        ],
+        "oddCards": [
+          "Sokka's Haiku",
+          "Bushwhack",
+          "Starting Column",
+          "Spectral Sailor",
+          "Curious Obsession",
+          "Dress Down",
+          "Druid Class",
+          "Loot, Exuberant Explorer",
+          "Mind Stone",
+          "Mistcutter Hydra",
+          "Steelbane Hydra",
+          "Hangarback Walker",
+          "Genesis Hydra",
+          "Bident of Thassa",
+          "Ugin, Eye of the Storms",
+          "Tamiyo's Journal",
+          "Rampaging Yao Guai",
+          "Red Sun's Twilight",
+          "Flaming Tyrannosaurus",
+          "Freyalise, Llanowar's Fury",
+          "Earth Rumble",
+          "Niv-Mizzet, Parun"
+        ]
+      },
+      "moxfield-top": {
+        "refCount": 10,
+        "bracketFilterApplied": true,
+        "quantitiesAvailable": true,
+        "formatMismatch": false,
+        "refsPerBracket": {
+          "2": 12,
+          "3": 10,
+          "4": 8
+        },
+        "overlapMeanPct": 39,
+        "overlapBestPct": 51,
+        "compositionDistance": 0.45,
+        "curveL1": 9,
+        "qualityIndex": 36,
+        "bracketMatch": false,
+        "deltas": {
+          "lands": {
+            "build": 38,
+            "refMedian": 35.5,
+            "delta": 2.5
+          },
+          "ramp": {
+            "build": 17,
+            "refMedian": 16,
+            "delta": 1
+          },
+          "draw": {
+            "build": 24,
+            "refMedian": 11.5,
+            "delta": 12.5
+          },
+          "removal": {
+            "build": 10,
+            "refMedian": 4.5,
+            "delta": 5.5
+          },
+          "boardWipes": {
+            "build": 0,
+            "refMedian": 0,
+            "delta": 0
+          },
+          "tutors": {
+            "build": 2,
+            "refMedian": 1,
+            "delta": 1
+          },
+          "winCons": {
+            "build": 4,
+            "refMedian": 5,
+            "delta": -1
+          },
+          "protection": {
+            "build": 5,
+            "refMedian": 7,
+            "delta": -2
+          },
+          "avgCmcNonLand": {
+            "build": 2.557377049180328,
+            "refMedian": 2.511780753968254,
+            "delta": 0.04559629521207409
+          }
+        },
+        "staplesMissing": [
+          {
+            "name": "Incubation Druid",
+            "freq": 0.6
+          },
+          {
+            "name": "Lightning Greaves",
+            "freq": 0.6
+          },
+          {
+            "name": "Selvala, Heart of the Wilds",
+            "freq": 0.6
+          },
+          {
+            "name": "Three Visits",
+            "freq": 0.6
+          },
+          {
+            "name": "Bloom Tender",
+            "freq": 0.6
+          }
+        ],
+        "oddCards": [
+          "Sokka's Haiku",
+          "Bushwhack",
+          "Starting Column",
+          "Spectral Sailor",
+          "Curious Obsession",
+          "Dress Down",
+          "Druid Class",
+          "Loot, Exuberant Explorer",
+          "Mind Stone",
+          "Hangarback Walker",
+          "Bident of Thassa",
+          "Ugin, Eye of the Storms",
+          "Tamiyo's Journal",
+          "Red Sun's Twilight",
+          "Flaming Tyrannosaurus",
+          "Freyalise, Llanowar's Fury",
+          "Earth Rumble",
+          "Niv-Mizzet, Parun"
+        ]
+      }
+    }
+  },
+  {
+    "scenario": "thrasios-tymna",
+    "format": "commander",
+    "commander": "Thrasios, Triton Hero",
+    "targetBracket": 5,
+    "bracket": {
+      "bracket": 4,
+      "gameChangers": [
+        "Demonic Tutor",
+        "Vampiric Tutor",
+        "Fierce Guardianship",
+        "Rhystic Study",
+        "Force of Will",
+        "Enlightened Tutor",
+        "Smothering Tithe",
+        "Orcish Bowmasters",
+        "Seedborn Muse",
+        "Chrome Mox",
+        "Crop Rotation",
+        "Mox Diamond",
+        "Mana Vault",
+        "Ad Nauseam"
+      ],
+      "twoCardCombos": [],
+      "massLandDenial": [],
+      "extraTurnCards": [],
+      "chainedExtraTurns": false,
+      "tutors": 4,
+      "fastMana": [
+        "Sol Ring",
+        "Dark Ritual",
+        "Mox Amber",
+        "Chrome Mox",
+        "Lotus Petal",
+        "Mox Diamond",
+        "Mana Vault",
+        "Elvish Spirit Guide",
+        "Gemstone Caverns"
+      ],
+      "reasons": [
+        "14 game changer(s): Demonic Tutor, Vampiric Tutor, Fierce Guardianship, Rhystic Study, Force of Will, Enlightened Tutor, Smothering Tithe, Orcish Bowmasters, Seedborn Muse, Chrome Mox, Crop Rotation, Mox Diamond, Mana Vault, Ad Nauseam"
+      ]
+    },
+    "sets": {
+      "cedhtop16": {
+        "refCount": 26,
+        "bracketFilterApplied": true,
+        "quantitiesAvailable": false,
+        "formatMismatch": false,
+        "refsPerBracket": {
+          "4": 4,
+          "5": 26
+        },
+        "overlapMeanPct": 62,
+        "overlapBestPct": 72,
+        "compositionDistance": 0.47,
+        "curveL1": 20,
+        "qualityIndex": 47,
+        "bracketMatch": false,
+        "deltas": {
+          "lands": {
+            "build": 39,
+            "refMedian": 27,
+            "delta": 12
+          },
+          "ramp": {
+            "build": 20,
+            "refMedian": 20,
+            "delta": 0
+          },
+          "draw": {
+            "build": 17,
+            "refMedian": 9.5,
+            "delta": 7.5
+          },
+          "removal": {
+            "build": 13,
+            "refMedian": 4.5,
+            "delta": 8.5
+          },
+          "boardWipes": {
+            "build": 0,
+            "refMedian": 0,
+            "delta": 0
+          },
+          "tutors": {
+            "build": 4,
+            "refMedian": 10,
+            "delta": -6
+          },
+          "winCons": {
+            "build": 2,
+            "refMedian": 5,
+            "delta": -3
+          },
+          "protection": {
+            "build": 6,
+            "refMedian": 9,
+            "delta": -3
+          },
+          "avgCmcNonLand": {
+            "build": 2.283333333333333,
+            "refMedian": 1.9857142857142858,
+            "delta": 0.29761904761904745
+          }
+        },
+        "staplesMissing": [
+          {
+            "name": "Mental Misstep",
+            "freq": 1
+          },
+          {
+            "name": "Thassa's Oracle",
+            "freq": 1
+          },
+          {
+            "name": "Pact of Negation",
+            "freq": 0.9615384615384616
+          },
+          {
+            "name": "Noble Hierarch",
+            "freq": 0.9230769230769231
+          },
+          {
+            "name": "Eldritch Evolution",
+            "freq": 0.8846153846153846
+          },
+          {
+            "name": "Devoted Druid",
+            "freq": 0.8076923076923077
+          },
+          {
+            "name": "Nature's Rhythm",
+            "freq": 0.7692307692307693
+          },
+          {
+            "name": "Chord of Calling",
+            "freq": 0.7692307692307693
+          },
+          {
+            "name": "Survival of the Fittest",
+            "freq": 0.6923076923076923
+          },
+          {
+            "name": "Hazel's Brewmaster",
+            "freq": 0.6923076923076923
+          }
+        ],
+        "oddCards": [
+          "Black Market Connections",
+          "Idol of Oblivion",
+          "The Great Henge",
+          "Loran of the Third Path",
+          "Freyalise, Llanowar's Fury",
+          "Generous Gift",
+          "Feed the Swarm",
+          "Stroke of Midnight",
+          "Venat, Heart of Hydaelyn // Hydaelyn, the Mothercrystal",
+          "Vraska, Golgari Queen",
+          "Ob Nixilis Reignited"
+        ]
+      },
+      "edhrec-avg": {
+        "refCount": 1,
+        "bracketFilterApplied": false,
+        "quantitiesAvailable": true,
+        "formatMismatch": false,
+        "refsPerBracket": {
+          "4": 1
+        },
+        "overlapMeanPct": 28,
+        "overlapBestPct": 28,
+        "compositionDistance": 0.76,
+        "curveL1": 27,
+        "qualityIndex": 21,
+        "bracketMatch": false,
+        "deltas": {
+          "lands": {
+            "build": 39,
+            "refMedian": 20,
+            "delta": 19
+          },
+          "ramp": {
+            "build": 20,
+            "refMedian": 26,
+            "delta": -6
+          },
+          "draw": {
+            "build": 17,
+            "refMedian": 10,
+            "delta": 7
+          },
+          "removal": {
+            "build": 13,
+            "refMedian": 4,
+            "delta": 9
+          },
+          "boardWipes": {
+            "build": 0,
+            "refMedian": 1,
+            "delta": -1
+          },
+          "tutors": {
+            "build": 4,
+            "refMedian": 2,
+            "delta": 2
+          },
+          "winCons": {
+            "build": 2,
+            "refMedian": 9,
+            "delta": -7
+          },
+          "protection": {
+            "build": 6,
+            "refMedian": 11,
+            "delta": -5
+          },
+          "avgCmcNonLand": {
+            "build": 2.283333333333333,
+            "refMedian": 2.4444444444444446,
+            "delta": -0.16111111111111143
+          }
+        },
+        "staplesMissing": [
+          {
+            "name": "Basalt Monolith",
+            "freq": 1
+          },
+          {
+            "name": "Lightning Greaves",
+            "freq": 1
+          },
+          {
+            "name": "Simic Signet",
+            "freq": 1
+          },
+          {
+            "name": "Talisman of Curiosity",
+            "freq": 1
+          },
+          {
+            "name": "Thought Vessel",
+            "freq": 1
+          },
+          {
+            "name": "Aesi, Tyrant of Gyre Strait",
+            "freq": 1
+          },
+          {
+            "name": "Avenger of Zendikar",
+            "freq": 1
+          },
+          {
+            "name": "Azusa, Lost but Seeking",
+            "freq": 1
+          },
+          {
+            "name": "Coiling Oracle",
+            "freq": 1
+          },
+          {
+            "name": "Elvish Mystic",
+            "freq": 1
+          }
+        ],
+        "oddCards": [
+          "Esper Sentinel",
+          "Demonic Tutor",
+          "Vampiric Tutor",
+          "Enlightened Tutor",
+          "Dark Ritual",
+          "Lotho, Corrupt Shirriff",
+          "Grand Abolisher",
+          "Smothering Tithe",
+          "Orcish Bowmasters",
+          "Swords to Plowshares",
+          "Chrome Mox",
+          "Silence",
+          "Ranger-Captain of Eos",
+          "Crop Rotation",
+          "Veil of Summer",
+          "Flusterstorm",
+          "Lotus Petal",
+          "Mox Diamond",
+          "Mana Vault",
+          "Mindbreak Trap",
+          "Voice of Victory",
+          "Tainted Pact",
+          "Demonic Consultation",
+          "Sevinne's Reclamation",
+          "Mockingbird",
+          "Enduring Vitality",
+          "Elvish Spirit Guide",
+          "Ad Nauseam",
+          "Black Market Connections",
+          "Wan Shi Tong, Librarian",
+          "Idol of Oblivion",
+          "The Great Henge",
+          "Loran of the Third Path",
+          "Freyalise, Llanowar's Fury",
+          "Sowing Mycospawn",
+          "Generous Gift",
+          "Deathrite Shaman",
+          "Feed the Swarm",
+          "Deadly Rollick",
+          "Stroke of Midnight",
+          "Venat, Heart of Hydaelyn // Hydaelyn, the Mothercrystal",
+          "Vraska, Golgari Queen",
+          "Ob Nixilis Reignited"
+        ]
+      },
+      "moxfield-top": {
+        "refCount": 24,
+        "bracketFilterApplied": true,
+        "quantitiesAvailable": true,
+        "formatMismatch": false,
+        "refsPerBracket": {
+          "2": 1,
+          "4": 5,
+          "5": 24
+        },
+        "overlapMeanPct": 55,
+        "overlapBestPct": 70,
+        "compositionDistance": 0.59,
+        "curveL1": 20,
+        "qualityIndex": 40,
+        "bracketMatch": false,
+        "deltas": {
+          "lands": {
+            "build": 39,
+            "refMedian": 28,
+            "delta": 11
+          },
+          "ramp": {
+            "build": 20,
+            "refMedian": 20,
+            "delta": 0
+          },
+          "draw": {
+            "build": 17,
+            "refMedian": 9,
+            "delta": 8
+          },
+          "removal": {
+            "build": 13,
+            "refMedian": 5,
+            "delta": 8
+          },
+          "boardWipes": {
+            "build": 0,
+            "refMedian": 1,
+            "delta": -1
+          },
+          "tutors": {
+            "build": 4,
+            "refMedian": 12,
+            "delta": -8
+          },
+          "winCons": {
+            "build": 2,
+            "refMedian": 4,
+            "delta": -2
+          },
+          "protection": {
+            "build": 6,
+            "refMedian": 8.5,
+            "delta": -2.5
+          },
+          "avgCmcNonLand": {
+            "build": 2.283333333333333,
+            "refMedian": 1.9712215320910973,
+            "delta": 0.3121118012422359
+          }
+        },
+        "staplesMissing": [
+          {
+            "name": "Noble Hierarch",
+            "freq": 1
+          },
+          {
+            "name": "Thassa's Oracle",
+            "freq": 1
+          },
+          {
+            "name": "Mental Misstep",
+            "freq": 0.9166666666666666
+          },
+          {
+            "name": "Pact of Negation",
+            "freq": 0.9166666666666666
+          },
+          {
+            "name": "Eldritch Evolution",
+            "freq": 0.7916666666666666
+          },
+          {
+            "name": "Force of Negation",
+            "freq": 0.7916666666666666
+          },
+          {
+            "name": "Neoform",
+            "freq": 0.75
+          },
+          {
+            "name": "Chord of Calling",
+            "freq": 0.7083333333333334
+          },
+          {
+            "name": "Cyclonic Rift",
+            "freq": 0.7083333333333334
+          },
+          {
+            "name": "Imperial Seal",
+            "freq": 0.7083333333333334
+          }
+        ],
+        "oddCards": [
+          "Black Market Connections",
+          "Idol of Oblivion",
+          "The Great Henge",
+          "Loran of the Third Path",
+          "Freyalise, Llanowar's Fury",
+          "Generous Gift",
+          "Feed the Swarm",
+          "Stroke of Midnight",
+          "Venat, Heart of Hydaelyn // Hydaelyn, the Mothercrystal",
+          "Vraska, Golgari Queen",
+          "Ob Nixilis Reignited"
+        ]
+      }
+    }
+  },
+  {
+    "scenario": "thrasios-tymna",
+    "format": "brawl",
+    "commander": "Thrasios, Triton Hero",
+    "targetBracket": 5,
+    "bracket": {
+      "bracket": 4,
+      "gameChangers": [
+        "Vampiric Tutor",
+        "Rhystic Study",
+        "Force of Will",
+        "Enlightened Tutor",
+        "Smothering Tithe",
+        "Crop Rotation",
+        "Cyclonic Rift",
+        "Farewell"
+      ],
+      "twoCardCombos": [],
+      "massLandDenial": [],
+      "extraTurnCards": [],
+      "chainedExtraTurns": false,
+      "tutors": 5,
+      "fastMana": [
+        "Dark Ritual",
+        "Mox Amber",
+        "Gemstone Caverns"
+      ],
+      "reasons": [
+        "8 game changer(s): Vampiric Tutor, Rhystic Study, Force of Will, Enlightened Tutor, Smothering Tithe, Crop Rotation, Cyclonic Rift, Farewell"
+      ]
+    },
+    "sets": {
+      "cedhtop16": {
+        "refCount": 26,
+        "bracketFilterApplied": true,
+        "quantitiesAvailable": false,
+        "formatMismatch": true,
+        "refsPerBracket": {
+          "4": 4,
+          "5": 26
+        },
+        "overlapMeanPct": 52,
+        "overlapBestPct": 62,
+        "compositionDistance": 0.48,
+        "curveL1": 20,
+        "qualityIndex": 41,
+        "bracketMatch": false,
+        "deltas": {
+          "lands": {
+            "build": 39,
+            "refMedian": 27,
+            "delta": 12
+          },
+          "ramp": {
+            "build": 21,
+            "refMedian": 20,
+            "delta": 1
+          },
+          "draw": {
+            "build": 16,
+            "refMedian": 9.5,
+            "delta": 6.5
+          },
+          "removal": {
+            "build": 5,
+            "refMedian": 4.5,
+            "delta": 0.5
+          },
+          "boardWipes": {
+            "build": 2,
+            "refMedian": 0,
+            "delta": 2
+          },
+          "tutors": {
+            "build": 5,
+            "refMedian": 10,
+            "delta": -5
+          },
+          "winCons": {
+            "build": 2,
+            "refMedian": 5,
+            "delta": -3
+          },
+          "protection": {
+            "build": 5,
+            "refMedian": 9,
+            "delta": -4
+          },
+          "avgCmcNonLand": {
+            "build": 2.1,
+            "refMedian": 1.9857142857142858,
+            "delta": 0.11428571428571432
+          }
+        },
+        "staplesMissing": [
+          {
+            "name": "Lotus Petal",
+            "freq": 1
+          },
+          {
+            "name": "Tainted Pact",
+            "freq": 1
+          },
+          {
+            "name": "Fierce Guardianship",
+            "freq": 1
+          },
+          {
+            "name": "Mental Misstep",
+            "freq": 1
+          },
+          {
+            "name": "Demonic Tutor",
+            "freq": 1
+          },
+          {
+            "name": "Chrome Mox",
+            "freq": 1
+          },
+          {
+            "name": "Demonic Consultation",
+            "freq": 1
+          },
+          {
+            "name": "Mindbreak Trap",
+            "freq": 1
+          },
+          {
+            "name": "Thassa's Oracle",
+            "freq": 1
+          },
+          {
+            "name": "Sol Ring",
+            "freq": 0.9615384615384616
+          }
+        ],
+        "oddCards": [
+          "Talisman of Hierarchy",
+          "Mind Stone",
+          "Talisman of Progress",
+          "Dimir Signet",
+          "Feed the Swarm",
+          "Loran of the Third Path",
+          "Farewell",
+          "Zulaport Cutthroat",
+          "Garruk's Uprising",
+          "Black Market Connections",
+          "Sram, Senior Edificer",
+          "Braids, Arisen Nightmare",
+          "The Great Henge"
+        ]
+      },
+      "edhrec-avg": {
+        "refCount": 0,
+        "bracketFilterApplied": false,
+        "quantitiesAvailable": false,
+        "formatMismatch": false,
+        "refsPerBracket": {},
+        "note": "no reference decks available"
+      },
+      "moxfield-top": {
+        "refCount": 14,
+        "bracketFilterApplied": false,
+        "quantitiesAvailable": true,
+        "formatMismatch": false,
+        "refsPerBracket": {
+          "3": 1,
+          "4": 13
+        },
+        "overlapMeanPct": 22,
+        "overlapBestPct": 47,
+        "compositionDistance": 0.46,
+        "curveL1": 16,
+        "qualityIndex": 27,
+        "bracketMatch": false,
+        "deltas": {
+          "lands": {
+            "build": 39,
+            "refMedian": 38.5,
+            "delta": 0.5
+          },
+          "ramp": {
+            "build": 21,
+            "refMedian": 9,
+            "delta": 12
+          },
+          "draw": {
+            "build": 16,
+            "refMedian": 10,
+            "delta": 6
+          },
+          "removal": {
+            "build": 5,
+            "refMedian": 5.5,
+            "delta": -0.5
+          },
+          "boardWipes": {
+            "build": 2,
+            "refMedian": 1,
+            "delta": 1
+          },
+          "tutors": {
+            "build": 5,
+            "refMedian": 5,
+            "delta": 0
+          },
+          "winCons": {
+            "build": 2,
+            "refMedian": 3.5,
+            "delta": -1.5
+          },
+          "protection": {
+            "build": 5,
+            "refMedian": 10.5,
+            "delta": -5.5
+          },
+          "avgCmcNonLand": {
+            "build": 2.1,
+            "refMedian": 2.256856702619414,
+            "delta": -0.1568567026194141
+          }
+        },
+        "staplesMissing": [
+          {
+            "name": "Thoughtseize",
+            "freq": 0.8571428571428571
+          },
+          {
+            "name": "Inquisition of Kozilek",
+            "freq": 0.7857142857142857
+          },
+          {
+            "name": "Fatal Push",
+            "freq": 0.7142857142857143
+          },
+          {
+            "name": "Force of Negation",
+            "freq": 0.7142857142857143
+          },
+          {
+            "name": "Mystical Tutor",
+            "freq": 0.7142857142857143
+          },
+          {
+            "name": "Reanimate",
+            "freq": 0.7142857142857143
+          },
+          {
+            "name": "Wash Away",
+            "freq": 0.7142857142857143
+          }
+        ],
+        "oddCards": [
+          "Silence",
+          "Flusterstorm",
+          "Talisman of Hierarchy",
+          "Dimir Signet",
+          "Loran of the Third Path",
+          "Farewell",
+          "Zulaport Cutthroat",
+          "Garruk's Uprising",
+          "Tataru Taru",
+          "Sram, Senior Edificer",
+          "Braids, Arisen Nightmare",
+          "Valley Floodcaller",
+          "Sowing Mycospawn",
+          "The Great Henge",
+          "Phantasmal Image",
+          "Archivist of Oghma"
+        ]
+      }
+    }
+  },
+  {
+    "scenario": "mono-w-heliod",
+    "format": "commander",
+    "commander": "Heliod, Sun-Crowned",
+    "targetBracket": 3,
+    "bracket": {
+      "bracket": 3,
+      "gameChangers": [
+        "Enlightened Tutor",
+        "Smothering Tithe"
+      ],
+      "twoCardCombos": [],
+      "massLandDenial": [],
+      "extraTurnCards": [],
+      "chainedExtraTurns": false,
+      "tutors": 3,
+      "fastMana": [
+        "Sol Ring"
+      ],
+      "reasons": [
+        "2 game changer(s): Enlightened Tutor, Smothering Tithe"
+      ]
+    },
+    "sets": {
+      "cedhtop16": {
+        "refCount": 17,
+        "bracketFilterApplied": false,
+        "quantitiesAvailable": false,
+        "formatMismatch": false,
+        "refsPerBracket": {
+          "2": 3,
+          "3": 4,
+          "4": 10
+        },
+        "overlapMeanPct": 29,
+        "overlapBestPct": 41,
+        "compositionDistance": 0.63,
+        "curveL1": 17,
+        "qualityIndex": 46,
+        "bracketMatch": true,
+        "deltas": {
+          "lands": {
+            "build": 38,
+            "refMedian": 13,
+            "delta": 25
+          },
+          "ramp": {
+            "build": 12,
+            "refMedian": 8,
+            "delta": 4
+          },
+          "draw": {
+            "build": 17,
+            "refMedian": 7,
+            "delta": 10
+          },
+          "removal": {
+            "build": 13,
+            "refMedian": 10,
+            "delta": 3
+          },
+          "boardWipes": {
+            "build": 4,
+            "refMedian": 0,
+            "delta": 4
+          },
+          "tutors": {
+            "build": 3,
+            "refMedian": 4,
+            "delta": -1
+          },
+          "winCons": {
+            "build": 8,
+            "refMedian": 5,
+            "delta": 3
+          },
+          "protection": {
+            "build": 3,
+            "refMedian": 5,
+            "delta": -2
+          },
+          "avgCmcNonLand": {
+            "build": 2.7049180327868854,
+            "refMedian": 2.2753623188405796,
+            "delta": 0.42955571394630576
+          }
+        },
+        "staplesMissing": [
+          {
+            "name": "Drannith Magistrate",
+            "freq": 0.7058823529411765
+          },
+          {
+            "name": "Boromir, Warden of the Tower",
+            "freq": 0.7058823529411765
+          },
+          {
+            "name": "Deafening Silence",
+            "freq": 0.7058823529411765
+          },
+          {
+            "name": "Aven Mindcensor",
+            "freq": 0.7058823529411765
+          },
+          {
+            "name": "Silence",
+            "freq": 0.6470588235294118
+          },
+          {
+            "name": "Archon of Emeria",
+            "freq": 0.6470588235294118
+          },
+          {
+            "name": "Giver of Runes",
+            "freq": 0.6470588235294118
+          }
+        ],
+        "oddCards": [
+          "Starting Column",
+          "Glass Casket",
+          "Splitskin Doll",
+          "Valorous Stance",
+          "Dauntless Scrapbot",
+          "Hardened Escort",
+          "Firemind Vessel",
+          "Ossification",
+          "Protective Response",
+          "Stiltzkin, Moogle Merchant",
+          "G'raha Tia",
+          "Kor Spiritdancer",
+          "Mesa Enchantress",
+          "Sigil of the Empty Throne",
+          "Dragon's Hoard",
+          "Collector's Vault",
+          "Ugin, Eye of the Storms",
+          "Pearl-Ear, Imperial Advisor",
+          "Dismantling Wave",
+          "Nevinyrral's Disk",
+          "Sunfall"
+        ]
+      },
+      "edhrec-avg": {
+        "refCount": 1,
+        "bracketFilterApplied": false,
+        "quantitiesAvailable": true,
+        "formatMismatch": false,
+        "refsPerBracket": {
+          "4": 1
+        },
+        "overlapMeanPct": 61,
+        "overlapBestPct": 61,
+        "compositionDistance": 0.4,
+        "curveL1": 15,
+        "qualityIndex": 68,
+        "bracketMatch": true,
+        "deltas": {
+          "lands": {
+            "build": 38,
+            "refMedian": 9,
+            "delta": 29
+          },
+          "ramp": {
+            "build": 12,
+            "refMedian": 7,
+            "delta": 5
+          },
+          "draw": {
+            "build": 17,
+            "refMedian": 13,
+            "delta": 4
+          },
+          "removal": {
+            "build": 13,
+            "refMedian": 9,
+            "delta": 4
+          },
+          "boardWipes": {
+            "build": 4,
+            "refMedian": 4,
+            "delta": 0
+          },
+          "tutors": {
+            "build": 3,
+            "refMedian": 4,
+            "delta": -1
+          },
+          "winCons": {
+            "build": 8,
+            "refMedian": 8,
+            "delta": 0
+          },
+          "protection": {
+            "build": 3,
+            "refMedian": 2,
+            "delta": 1
+          },
+          "avgCmcNonLand": {
+            "build": 2.7049180327868854,
+            "refMedian": 2.712121212121212,
+            "delta": -0.00720317933432657
+          }
+        },
+        "staplesMissing": [
+          {
+            "name": "Cosmos Elixir",
+            "freq": 1
+          },
+          {
+            "name": "Mind Stone",
+            "freq": 1
+          },
+          {
+            "name": "Oketra's Monument",
+            "freq": 1
+          },
+          {
+            "name": "Pristine Talisman",
+            "freq": 1
+          },
+          {
+            "name": "The Wind Crystal",
+            "freq": 1
+          },
+          {
+            "name": "Angel of Vitality",
+            "freq": 1
+          },
+          {
+            "name": "Dusk Legion Duelist",
+            "freq": 1
+          },
+          {
+            "name": "Haliya, Guided by Light",
+            "freq": 1
+          },
+          {
+            "name": "Knight of the White Orchid",
+            "freq": 1
+          },
+          {
+            "name": "Ranger-Captain of Eos",
+            "freq": 1
+          }
+        ],
+        "oddCards": [
+          "Starting Column",
+          "Agatha's Soul Cauldron",
+          "Glass Casket",
+          "Splitskin Doll",
+          "Valorous Stance",
+          "Dauntless Scrapbot",
+          "Hardened Escort",
+          "Firemind Vessel",
+          "Ossification",
+          "Protective Response",
+          "Stiltzkin, Moogle Merchant",
+          "G'raha Tia",
+          "Kor Spiritdancer",
+          "Mesa Enchantress",
+          "Sigil of the Empty Throne",
+          "Dragon's Hoard",
+          "Collector's Vault",
+          "Staff of Compleation",
+          "Ugin, Eye of the Storms",
+          "Pearl-Ear, Imperial Advisor",
+          "Dismantling Wave",
+          "Nevinyrral's Disk",
+          "Sunfall",
+          "Archon of Sun's Grace"
+        ]
+      },
+      "moxfield-top": {
+        "refCount": 8,
+        "bracketFilterApplied": true,
+        "quantitiesAvailable": true,
+        "formatMismatch": false,
+        "refsPerBracket": {
+          "2": 3,
+          "3": 8,
+          "4": 19
+        },
+        "overlapMeanPct": 31,
+        "overlapBestPct": 41,
+        "compositionDistance": 0.51,
+        "curveL1": 6,
+        "qualityIndex": 50,
+        "bracketMatch": true,
+        "deltas": {
+          "lands": {
+            "build": 38,
+            "refMedian": 34,
+            "delta": 4
+          },
+          "ramp": {
+            "build": 12,
+            "refMedian": 7,
+            "delta": 5
+          },
+          "draw": {
+            "build": 17,
+            "refMedian": 9,
+            "delta": 8
+          },
+          "removal": {
+            "build": 13,
+            "refMedian": 7,
+            "delta": 6
+          },
+          "boardWipes": {
+            "build": 4,
+            "refMedian": 1.5,
+            "delta": 2.5
+          },
+          "tutors": {
+            "build": 3,
+            "refMedian": 3,
+            "delta": 0
+          },
+          "winCons": {
+            "build": 8,
+            "refMedian": 7,
+            "delta": 1
+          },
+          "protection": {
+            "build": 3,
+            "refMedian": 4.5,
+            "delta": -1.5
+          },
+          "avgCmcNonLand": {
+            "build": 2.7049180327868854,
+            "refMedian": 2.6881720430107525,
+            "delta": 0.01674598977613284
+          }
+        },
+        "staplesMissing": [
+          {
+            "name": "Speaker of the Heavens",
+            "freq": 0.625
+          }
+        ],
+        "oddCards": [
+          "Starting Column",
+          "Agatha's Soul Cauldron",
+          "Glass Casket",
+          "Splitskin Doll",
+          "Valorous Stance",
+          "Dauntless Scrapbot",
+          "Hardened Escort",
+          "Firemind Vessel",
+          "Ossification",
+          "Protective Response",
+          "Stiltzkin, Moogle Merchant",
+          "G'raha Tia",
+          "Kor Spiritdancer",
+          "Mesa Enchantress",
+          "Sigil of the Empty Throne",
+          "Dragon's Hoard",
+          "Collector's Vault",
+          "Staff of Compleation",
+          "Ugin, Eye of the Storms",
+          "Pearl-Ear, Imperial Advisor",
+          "Dismantling Wave",
+          "Nevinyrral's Disk",
+          "Sunfall",
+          "Archon of Sun's Grace"
+        ]
+      }
+    }
+  },
+  {
+    "scenario": "mono-w-heliod",
+    "format": "brawl",
+    "commander": "Heliod, Sun-Crowned",
+    "targetBracket": 3,
+    "bracket": {
+      "bracket": 4,
+      "gameChangers": [
+        "Enlightened Tutor",
+        "Smothering Tithe",
+        "Teferi's Protection",
+        "Farewell"
+      ],
+      "twoCardCombos": [],
+      "massLandDenial": [],
+      "extraTurnCards": [],
+      "chainedExtraTurns": false,
+      "tutors": 5,
+      "fastMana": [],
+      "reasons": [
+        "4 game changer(s): Enlightened Tutor, Smothering Tithe, Teferi's Protection, Farewell"
+      ]
+    },
+    "sets": {
+      "cedhtop16": {
+        "refCount": 17,
+        "bracketFilterApplied": false,
+        "quantitiesAvailable": false,
+        "formatMismatch": true,
+        "refsPerBracket": {
+          "2": 3,
+          "3": 4,
+          "4": 10
+        },
+        "overlapMeanPct": 26,
+        "overlapBestPct": 38,
+        "compositionDistance": 0.54,
+        "curveL1": 15,
+        "qualityIndex": 27,
+        "bracketMatch": false,
+        "deltas": {
+          "lands": {
+            "build": 38,
+            "refMedian": 13,
+            "delta": 25
+          },
+          "ramp": {
+            "build": 12,
+            "refMedian": 8,
+            "delta": 4
+          },
+          "draw": {
+            "build": 17,
+            "refMedian": 7,
+            "delta": 10
+          },
+          "removal": {
+            "build": 10,
+            "refMedian": 10,
+            "delta": 0
+          },
+          "boardWipes": {
+            "build": 4,
+            "refMedian": 0,
+            "delta": 4
+          },
+          "tutors": {
+            "build": 5,
+            "refMedian": 4,
+            "delta": 1
+          },
+          "winCons": {
+            "build": 6,
+            "refMedian": 5,
+            "delta": 1
+          },
+          "protection": {
+            "build": 3,
+            "refMedian": 5,
+            "delta": -2
+          },
+          "avgCmcNonLand": {
+            "build": 2.7868852459016393,
+            "refMedian": 2.2753623188405796,
+            "delta": 0.5115229270610597
+          }
+        },
+        "staplesMissing": [
+          {
+            "name": "Sol Ring",
+            "freq": 1
+          },
+          {
+            "name": "Triskelion",
+            "freq": 0.7647058823529411
+          },
+          {
+            "name": "Walking Ballista",
+            "freq": 0.7647058823529411
+          },
+          {
+            "name": "Drannith Magistrate",
+            "freq": 0.7058823529411765
+          },
+          {
+            "name": "Boromir, Warden of the Tower",
+            "freq": 0.7058823529411765
+          },
+          {
+            "name": "Deafening Silence",
+            "freq": 0.7058823529411765
+          },
+          {
+            "name": "Aven Mindcensor",
+            "freq": 0.7058823529411765
+          },
+          {
+            "name": "Silence",
+            "freq": 0.6470588235294118
+          },
+          {
+            "name": "Archon of Emeria",
+            "freq": 0.6470588235294118
+          },
+          {
+            "name": "Giver of Runes",
+            "freq": 0.6470588235294118
+          }
+        ],
+        "oddCards": [
+          "Splitskin Doll",
+          "Starting Column",
+          "Valorous Stance",
+          "Dauntless Scrapbot",
+          "Glass Casket",
+          "Ossification",
+          "Stiltzkin, Moogle Merchant",
+          "G'raha Tia",
+          "Angel of Vitality",
+          "Kor Spiritdancer",
+          "Sigil of the Empty Throne",
+          "All That Glitters",
+          "Ethereal Armor",
+          "Contagion Engine",
+          "Cradle of Vitality",
+          "Dragon's Hoard",
+          "Collector's Vault",
+          "Ugin, Eye of the Storms",
+          "Discerning Financier",
+          "Sunfall",
+          "The Battle of Bywater"
+        ]
+      },
+      "edhrec-avg": {
+        "refCount": 0,
+        "bracketFilterApplied": false,
+        "quantitiesAvailable": false,
+        "formatMismatch": false,
+        "refsPerBracket": {},
+        "note": "no reference decks available"
+      },
+      "moxfield-top": {
+        "refCount": 10,
+        "bracketFilterApplied": true,
+        "quantitiesAvailable": true,
+        "formatMismatch": false,
+        "refsPerBracket": {
+          "2": 4,
+          "3": 10,
+          "4": 1
+        },
+        "overlapMeanPct": 27,
+        "overlapBestPct": 36,
+        "compositionDistance": 0.7,
+        "curveL1": 17,
+        "qualityIndex": 22,
+        "bracketMatch": false,
+        "deltas": {
+          "lands": {
+            "build": 38,
+            "refMedian": 36,
+            "delta": 2
+          },
+          "ramp": {
+            "build": 12,
+            "refMedian": 3,
+            "delta": 9
+          },
+          "draw": {
+            "build": 17,
+            "refMedian": 7,
+            "delta": 10
+          },
+          "removal": {
+            "build": 10,
+            "refMedian": 5,
+            "delta": 5
+          },
+          "boardWipes": {
+            "build": 4,
+            "refMedian": 0,
+            "delta": 4
+          },
+          "tutors": {
+            "build": 5,
+            "refMedian": 0,
+            "delta": 5
+          },
+          "winCons": {
+            "build": 6,
+            "refMedian": 6,
+            "delta": 0
+          },
+          "protection": {
+            "build": 3,
+            "refMedian": 7,
+            "delta": -4
+          },
+          "avgCmcNonLand": {
+            "build": 2.7868852459016393,
+            "refMedian": 2.391208791208791,
+            "delta": 0.3956764546928482
+          }
+        },
+        "staplesMissing": [
+          {
+            "name": "Lunarch Veteran // Luminous Phantom",
+            "freq": 0.9
+          },
+          {
+            "name": "Shadowspear",
+            "freq": 0.8
+          },
+          {
+            "name": "Griffin Aerie",
+            "freq": 0.8
+          },
+          {
+            "name": "A-Ocelot Pride",
+            "freq": 0.7
+          },
+          {
+            "name": "Hinterland Sanctifier",
+            "freq": 0.7
+          },
+          {
+            "name": "Essence Channeler",
+            "freq": 0.7
+          },
+          {
+            "name": "A-The One Ring",
+            "freq": 0.6
+          },
+          {
+            "name": "Enduring Innocence",
+            "freq": 0.6
+          },
+          {
+            "name": "Envoy of the Ancestors",
+            "freq": 0.6
+          },
+          {
+            "name": "The Book of Exalted Deeds",
+            "freq": 0.6
+          }
+        ],
+        "oddCards": [
+          "Agatha's Soul Cauldron",
+          "Splitskin Doll",
+          "Starting Column",
+          "Valorous Stance",
+          "Dauntless Scrapbot",
+          "Glass Casket",
+          "Stiltzkin, Moogle Merchant",
+          "G'raha Tia",
+          "Fumigate",
+          "Kor Spiritdancer",
+          "Sigil of the Empty Throne",
+          "All That Glitters",
+          "Ethereal Armor",
+          "Contagion Engine",
+          "Cradle of Vitality",
+          "Dragon's Hoard",
+          "Collector's Vault",
+          "Staff of Compleation",
+          "Ugin, Eye of the Storms",
+          "Discerning Financier",
+          "Loran of the Third Path",
+          "Sunfall",
+          "The Battle of Bywater"
+        ]
+      }
+    }
+  },
+  {
+    "scenario": "mono-u-orvar",
+    "format": "commander",
+    "commander": "Orvar, the All-Form",
+    "targetBracket": 3,
+    "bracket": {
+      "bracket": 3,
+      "gameChangers": [
+        "Rhystic Study"
+      ],
+      "twoCardCombos": [],
+      "massLandDenial": [],
+      "extraTurnCards": [],
+      "chainedExtraTurns": false,
+      "tutors": 2,
+      "fastMana": [
+        "Sol Ring"
+      ],
+      "reasons": [
+        "1 game changer(s): Rhystic Study"
+      ]
+    },
+    "sets": {
+      "cedhtop16": {
+        "refCount": 27,
+        "bracketFilterApplied": false,
+        "quantitiesAvailable": false,
+        "formatMismatch": false,
+        "refsPerBracket": {
+          "2": 1,
+          "3": 3,
+          "4": 23
+        },
+        "overlapMeanPct": 32,
+        "overlapBestPct": 64,
+        "compositionDistance": 0.72,
+        "curveL1": 20,
+        "qualityIndex": 45,
+        "bracketMatch": true,
+        "deltas": {
+          "lands": {
+            "build": 38,
+            "refMedian": 14,
+            "delta": 24
+          },
+          "ramp": {
+            "build": 11,
+            "refMedian": 10,
+            "delta": 1
+          },
+          "draw": {
+            "build": 25,
+            "refMedian": 15,
+            "delta": 10
+          },
+          "removal": {
+            "build": 8,
+            "refMedian": 5,
+            "delta": 3
+          },
+          "boardWipes": {
+            "build": 0,
+            "refMedian": 1,
+            "delta": -1
+          },
+          "tutors": {
+            "build": 2,
+            "refMedian": 7,
+            "delta": -5
+          },
+          "winCons": {
+            "build": 8,
+            "refMedian": 3,
+            "delta": 5
+          },
+          "protection": {
+            "build": 3,
+            "refMedian": 9,
+            "delta": -6
+          },
+          "avgCmcNonLand": {
+            "build": 2.5081967213114753,
+            "refMedian": 2.25,
+            "delta": 0.2581967213114753
+          }
+        },
+        "staplesMissing": [
+          {
+            "name": "Force of Negation",
+            "freq": 0.8888888888888888
+          },
+          {
+            "name": "Flusterstorm",
+            "freq": 0.8888888888888888
+          },
+          {
+            "name": "Mystic Remora",
+            "freq": 0.8888888888888888
+          },
+          {
+            "name": "Force of Will",
+            "freq": 0.8888888888888888
+          },
+          {
+            "name": "Mana Vault",
+            "freq": 0.8888888888888888
+          },
+          {
+            "name": "Fierce Guardianship",
+            "freq": 0.8518518518518519
+          },
+          {
+            "name": "Chrome Mox",
+            "freq": 0.8518518518518519
+          },
+          {
+            "name": "Roaming Throne",
+            "freq": 0.8518518518518519
+          },
+          {
+            "name": "Mystical Tutor",
+            "freq": 0.8148148148148148
+          },
+          {
+            "name": "Mindbreak Trap",
+            "freq": 0.8148148148148148
+          }
+        ],
+        "oddCards": [
+          "Starting Column",
+          "Sokka's Haiku",
+          "Orysa, Tide Choreographer",
+          "Forecasting Fortune Teller",
+          "Spectral Sailor",
+          "Agatha's Soul Cauldron",
+          "Sai, Master Thopterist",
+          "Thopter Spy Network",
+          "Hangarback Walker",
+          "Murmuring Mystic",
+          "Twincast",
+          "Skullclamp",
+          "Mind's Desire",
+          "Collector's Vault",
+          "Kozilek's Unsealing",
+          "Tezzeret, Artifice Master",
+          "Warping Wail",
+          "The Ooze"
+        ]
+      },
+      "edhrec-avg": {
+        "refCount": 1,
+        "bracketFilterApplied": false,
+        "quantitiesAvailable": true,
+        "formatMismatch": false,
+        "refsPerBracket": {
+          "3": 1
+        },
+        "overlapMeanPct": 67,
+        "overlapBestPct": 67,
+        "compositionDistance": 0.45,
+        "curveL1": 11,
+        "qualityIndex": 70,
+        "bracketMatch": true,
+        "deltas": {
+          "lands": {
+            "build": 38,
+            "refMedian": 9,
+            "delta": 29
+          },
+          "ramp": {
+            "build": 11,
+            "refMedian": 9,
+            "delta": 2
+          },
+          "draw": {
+            "build": 25,
+            "refMedian": 24,
+            "delta": 1
+          },
+          "removal": {
+            "build": 8,
+            "refMedian": 5,
+            "delta": 3
+          },
+          "boardWipes": {
+            "build": 0,
+            "refMedian": 1,
+            "delta": -1
+          },
+          "tutors": {
+            "build": 2,
+            "refMedian": 3,
+            "delta": -1
+          },
+          "winCons": {
+            "build": 8,
+            "refMedian": 8,
+            "delta": 0
+          },
+          "protection": {
+            "build": 3,
+            "refMedian": 5,
+            "delta": -2
+          },
+          "avgCmcNonLand": {
+            "build": 2.5081967213114753,
+            "refMedian": 2.590909090909091,
+            "delta": -0.08271236959761552
+          }
+        },
+        "staplesMissing": [
+          {
+            "name": "Fellwar Stone",
+            "freq": 1
+          },
+          {
+            "name": "Gilded Lotus",
+            "freq": 1
+          },
+          {
+            "name": "Mirror Box",
+            "freq": 1
+          },
+          {
+            "name": "Swiftfoot Boots",
+            "freq": 1
+          },
+          {
+            "name": "Aether Channeler",
+            "freq": 1
+          },
+          {
+            "name": "Agent of Treachery",
+            "freq": 1
+          },
+          {
+            "name": "Archmage of Runes",
+            "freq": 1
+          },
+          {
+            "name": "Cloud of Faeries",
+            "freq": 1
+          },
+          {
+            "name": "Master of Waves",
+            "freq": 1
+          },
+          {
+            "name": "Phyrexian Metamorph",
+            "freq": 1
+          }
+        ],
+        "oddCards": [
+          "Starting Column",
+          "Sokka's Haiku",
+          "Orysa, Tide Choreographer",
+          "Forecasting Fortune Teller",
+          "Spectral Sailor",
+          "Agatha's Soul Cauldron",
+          "Sai, Master Thopterist",
+          "Thopter Spy Network",
+          "Talrand, Sky Summoner",
+          "Hangarback Walker",
+          "Murmuring Mystic",
+          "Baral, Chief of Compliance",
+          "Twincast",
+          "Skullclamp",
+          "Mind's Desire",
+          "Collector's Vault",
+          "Kozilek's Unsealing",
+          "Tezzeret, Artifice Master",
+          "Warping Wail",
+          "The Ooze"
+        ]
+      },
+      "moxfield-top": {
+        "refCount": 9,
+        "bracketFilterApplied": true,
+        "quantitiesAvailable": true,
+        "formatMismatch": false,
+        "refsPerBracket": {
+          "2": 5,
+          "3": 9,
+          "4": 16
+        },
+        "overlapMeanPct": 33,
+        "overlapBestPct": 46,
+        "compositionDistance": 0.51,
+        "curveL1": 14,
+        "qualityIndex": 51,
+        "bracketMatch": true,
+        "deltas": {
+          "lands": {
+            "build": 38,
+            "refMedian": 36,
+            "delta": 2
+          },
+          "ramp": {
+            "build": 11,
+            "refMedian": 8,
+            "delta": 3
+          },
+          "draw": {
+            "build": 25,
+            "refMedian": 16,
+            "delta": 9
+          },
+          "removal": {
+            "build": 8,
+            "refMedian": 6,
+            "delta": 2
+          },
+          "boardWipes": {
+            "build": 0,
+            "refMedian": 2,
+            "delta": -2
+          },
+          "tutors": {
+            "build": 2,
+            "refMedian": 5,
+            "delta": -3
+          },
+          "winCons": {
+            "build": 8,
+            "refMedian": 5,
+            "delta": 3
+          },
+          "protection": {
+            "build": 3,
+            "refMedian": 7,
+            "delta": -4
+          },
+          "avgCmcNonLand": {
+            "build": 2.5081967213114753,
+            "refMedian": 2.783333333333333,
+            "delta": -0.2751366120218579
+          }
+        },
+        "staplesMissing": [
+          {
+            "name": "Fellwar Stone",
+            "freq": 0.6666666666666666
+          }
+        ],
+        "oddCards": [
+          "Sakashima of a Thousand Faces",
+          "Starting Column",
+          "Sokka's Haiku",
+          "Orysa, Tide Choreographer",
+          "Forecasting Fortune Teller",
+          "Spectral Sailor",
+          "Agatha's Soul Cauldron",
+          "Sai, Master Thopterist",
+          "Thopter Spy Network",
+          "Talrand, Sky Summoner",
+          "Hangarback Walker",
+          "Murmuring Mystic",
+          "Twincast",
+          "Skullclamp",
+          "Mind's Desire",
+          "Collector's Vault",
+          "Kozilek's Unsealing",
+          "Tezzeret, Artifice Master",
+          "Warping Wail",
+          "The Ooze"
+        ]
+      }
+    }
+  },
+  {
+    "scenario": "mono-u-orvar",
+    "format": "brawl",
+    "commander": "Orvar, the All-Form",
+    "targetBracket": 3,
+    "bracket": {
+      "bracket": 3,
+      "gameChangers": [
+        "Rhystic Study",
+        "Cyclonic Rift",
+        "Mystical Tutor"
+      ],
+      "twoCardCombos": [],
+      "massLandDenial": [],
+      "extraTurnCards": [],
+      "chainedExtraTurns": false,
+      "tutors": 2,
+      "fastMana": [],
+      "reasons": [
+        "3 game changer(s): Rhystic Study, Cyclonic Rift, Mystical Tutor"
+      ]
+    },
+    "sets": {
+      "cedhtop16": {
+        "refCount": 27,
+        "bracketFilterApplied": false,
+        "quantitiesAvailable": false,
+        "formatMismatch": true,
+        "refsPerBracket": {
+          "2": 1,
+          "3": 3,
+          "4": 23
+        },
+        "overlapMeanPct": 21,
+        "overlapBestPct": 44,
+        "compositionDistance": 0.76,
+        "curveL1": 26,
+        "qualityIndex": 38,
+        "bracketMatch": true,
+        "deltas": {
+          "lands": {
+            "build": 38,
+            "refMedian": 14,
+            "delta": 24
+          },
+          "ramp": {
+            "build": 12,
+            "refMedian": 10,
+            "delta": 2
+          },
+          "draw": {
+            "build": 26,
+            "refMedian": 15,
+            "delta": 11
+          },
+          "removal": {
+            "build": 14,
+            "refMedian": 5,
+            "delta": 9
+          },
+          "boardWipes": {
+            "build": 2,
+            "refMedian": 1,
+            "delta": 1
+          },
+          "tutors": {
+            "build": 2,
+            "refMedian": 7,
+            "delta": -5
+          },
+          "winCons": {
+            "build": 9,
+            "refMedian": 3,
+            "delta": 6
+          },
+          "protection": {
+            "build": 5,
+            "refMedian": 9,
+            "delta": -4
+          },
+          "avgCmcNonLand": {
+            "build": 3.0327868852459017,
+            "refMedian": 2.25,
+            "delta": 0.7827868852459017
+          }
+        },
+        "staplesMissing": [
+          {
+            "name": "Sol Ring",
+            "freq": 1
+          },
+          {
+            "name": "Whim of Volrath",
+            "freq": 0.9629629629629629
+          },
+          {
+            "name": "Clockspinning",
+            "freq": 0.9629629629629629
+          },
+          {
+            "name": "High Tide",
+            "freq": 0.9259259259259259
+          },
+          {
+            "name": "Force of Negation",
+            "freq": 0.8888888888888888
+          },
+          {
+            "name": "Flusterstorm",
+            "freq": 0.8888888888888888
+          },
+          {
+            "name": "Force of Will",
+            "freq": 0.8888888888888888
+          },
+          {
+            "name": "Mana Vault",
+            "freq": 0.8888888888888888
+          },
+          {
+            "name": "Fierce Guardianship",
+            "freq": 0.8518518518518519
+          },
+          {
+            "name": "Chrome Mox",
+            "freq": 0.8518518518518519
+          }
+        ],
+        "oddCards": [
+          "Agatha's Soul Cauldron",
+          "Scrap Compactor",
+          "Sokka's Haiku",
+          "Irenicus's Vile Duplication",
+          "Swiftfoot Boots",
+          "Murmuring Mystic",
+          "Mind's Desire",
+          "Hangarback Walker",
+          "Sai, Master Thopterist",
+          "Collector's Vault",
+          "Kozilek's Unsealing",
+          "Magnifying Glass",
+          "Dragon's Hoard",
+          "Warping Wail",
+          "The Ooze",
+          "Kozilek's Command",
+          "Zuko's Exile",
+          "Transmogrifying Wand",
+          "Bumbleflower's Sharepot",
+          "Jin-Gitaxias // The Great Synthesis",
+          "Ominous Seas",
+          "Shark Typhoon",
+          "Chasm Skulker"
+        ]
+      },
+      "edhrec-avg": {
+        "refCount": 0,
+        "bracketFilterApplied": false,
+        "quantitiesAvailable": false,
+        "formatMismatch": false,
+        "refsPerBracket": {},
+        "note": "no reference decks available"
+      },
+      "moxfield-top": {
+        "refCount": 5,
+        "bracketFilterApplied": false,
+        "quantitiesAvailable": true,
+        "formatMismatch": false,
+        "refsPerBracket": {
+          "3": 3,
+          "4": 2
+        },
+        "overlapMeanPct": 35,
+        "overlapBestPct": 51,
+        "compositionDistance": 0.5,
+        "curveL1": 17,
+        "qualityIndex": 52,
+        "bracketMatch": true,
+        "deltas": {
+          "lands": {
+            "build": 38,
+            "refMedian": 35,
+            "delta": 3
+          },
+          "ramp": {
+            "build": 12,
+            "refMedian": 9,
+            "delta": 3
+          },
+          "draw": {
+            "build": 26,
+            "refMedian": 20,
+            "delta": 6
+          },
+          "removal": {
+            "build": 14,
+            "refMedian": 10,
+            "delta": 4
+          },
+          "boardWipes": {
+            "build": 2,
+            "refMedian": 1,
+            "delta": 1
+          },
+          "tutors": {
+            "build": 2,
+            "refMedian": 1,
+            "delta": 1
+          },
+          "winCons": {
+            "build": 9,
+            "refMedian": 7,
+            "delta": 2
+          },
+          "protection": {
+            "build": 5,
+            "refMedian": 12,
+            "delta": -7
+          },
+          "avgCmcNonLand": {
+            "build": 3.0327868852459017,
+            "refMedian": 2.6666666666666665,
+            "delta": 0.36612021857923516
+          }
+        },
+        "staplesMissing": [
+          {
+            "name": "Three Steps Ahead",
+            "freq": 1
+          },
+          {
+            "name": "Eluge, the Shoreless Sea",
+            "freq": 0.6
+          },
+          {
+            "name": "Negate",
+            "freq": 0.6
+          },
+          {
+            "name": "Relm's Sketching",
+            "freq": 0.6
+          },
+          {
+            "name": "Stormchaser Drake",
+            "freq": 0.6
+          },
+          {
+            "name": "Bender's Waterskin",
+            "freq": 0.6
+          },
+          {
+            "name": "Geistwave",
+            "freq": 0.6
+          },
+          {
+            "name": "Ornithopter of Paradise",
+            "freq": 0.6
+          },
+          {
+            "name": "Disdainful Stroke",
+            "freq": 0.6
+          }
+        ],
+        "oddCards": [
+          "Pongify",
+          "Agatha's Soul Cauldron",
+          "Scrap Compactor",
+          "Sokka's Haiku",
+          "Mirror Box",
+          "Mind's Desire",
+          "Hangarback Walker",
+          "Sai, Master Thopterist",
+          "Collector's Vault",
+          "Kozilek's Unsealing",
+          "Magnifying Glass",
+          "Dragon's Hoard",
+          "Warping Wail",
+          "The Ooze",
+          "Kozilek's Command",
+          "Zuko's Exile",
+          "Transmogrifying Wand",
+          "Bumbleflower's Sharepot",
+          "Jin-Gitaxias // The Great Synthesis",
+          "Forensic Gadgeteer",
+          "Ominous Seas",
+          "Shark Typhoon",
+          "Chasm Skulker"
+        ]
+      }
+    }
+  },
+  {
+    "scenario": "mono-b-sheoldred",
+    "format": "commander",
+    "commander": "Sheoldred, the Apocalypse",
+    "targetBracket": 3,
+    "bracket": {
+      "bracket": 4,
+      "gameChangers": [
+        "Bolas's Citadel",
+        "Demonic Tutor",
+        "Orcish Bowmasters"
+      ],
+      "twoCardCombos": [
+        [
+          "Exquisite Blood",
+          "Sanguine Bond"
+        ],
+        [
+          "Exquisite Blood",
+          "Vito, Thorn of the Dusk Rose"
+        ]
+      ],
+      "massLandDenial": [],
+      "extraTurnCards": [],
+      "chainedExtraTurns": false,
+      "tutors": 3,
+      "fastMana": [
+        "Sol Ring",
+        "Dark Ritual"
+      ],
+      "reasons": [
+        "3 game changer(s): Bolas's Citadel, Demonic Tutor, Orcish Bowmasters",
+        "2-card combo(s) present: Exquisite Blood + Sanguine Bond; Exquisite Blood + Vito, Thorn of the Dusk Rose"
+      ]
+    },
+    "sets": {
+      "cedhtop16": {
+        "refCount": 10,
+        "bracketFilterApplied": false,
+        "quantitiesAvailable": false,
+        "formatMismatch": false,
+        "refsPerBracket": {
+          "3": 1,
+          "4": 6,
+          "5": 3
+        },
+        "overlapMeanPct": 36,
+        "overlapBestPct": 57,
+        "compositionDistance": 0.56,
+        "curveL1": 13,
+        "qualityIndex": 31,
+        "bracketMatch": false,
+        "deltas": {
+          "lands": {
+            "build": 38,
+            "refMedian": 11,
+            "delta": 27
+          },
+          "ramp": {
+            "build": 14,
+            "refMedian": 9.5,
+            "delta": 4.5
+          },
+          "draw": {
+            "build": 32,
+            "refMedian": 13,
+            "delta": 19
+          },
+          "removal": {
+            "build": 14,
+            "refMedian": 5.5,
+            "delta": 8.5
+          },
+          "boardWipes": {
+            "build": 1,
+            "refMedian": 2,
+            "delta": -1
+          },
+          "tutors": {
+            "build": 3,
+            "refMedian": 5.5,
+            "delta": -2.5
+          },
+          "winCons": {
+            "build": 11,
+            "refMedian": 11.5,
+            "delta": -0.5
+          },
+          "protection": {
+            "build": 2,
+            "refMedian": 2,
+            "delta": 0
+          },
+          "avgCmcNonLand": {
+            "build": 3.5737704918032787,
+            "refMedian": 3.176470588235294,
+            "delta": 0.3972999035679847
+          }
+        },
+        "staplesMissing": [
+          {
+            "name": "Sensei's Divining Top",
+            "freq": 0.6
+          },
+          {
+            "name": "The One Ring",
+            "freq": 0.6
+          },
+          {
+            "name": "Opposition Agent",
+            "freq": 0.6
+          },
+          {
+            "name": "Aetherflux Reservoir",
+            "freq": 0.6
+          },
+          {
+            "name": "Damnation",
+            "freq": 0.6
+          }
+        ],
+        "oddCards": [
+          "Rankle, Master of Pranks",
+          "Collector's Vault",
+          "Mastermind Plum",
+          "Dragon's Hoard",
+          "Chromatic Orrery",
+          "Ugin, Eye of the Storms",
+          "Magnifying Glass",
+          "Azula, On the Hunt",
+          "Tamiyo's Journal",
+          "Dread Presence",
+          "Kozilek's Command",
+          "Erebos, Bleak-Hearted",
+          "Endbringer",
+          "Staff of Compleation"
+        ]
+      },
+      "edhrec-avg": {
+        "refCount": 1,
+        "bracketFilterApplied": false,
+        "quantitiesAvailable": true,
+        "formatMismatch": false,
+        "refsPerBracket": {
+          "4": 1
+        },
+        "overlapMeanPct": 77,
+        "overlapBestPct": 77,
+        "compositionDistance": 0.55,
+        "curveL1": 11,
+        "qualityIndex": 52,
+        "bracketMatch": false,
+        "deltas": {
+          "lands": {
+            "build": 38,
+            "refMedian": 9,
+            "delta": 29
+          },
+          "ramp": {
+            "build": 14,
+            "refMedian": 5,
+            "delta": 9
+          },
+          "draw": {
+            "build": 32,
+            "refMedian": 24,
+            "delta": 8
+          },
+          "removal": {
+            "build": 14,
+            "refMedian": 9,
+            "delta": 5
+          },
+          "boardWipes": {
+            "build": 1,
+            "refMedian": 2,
+            "delta": -1
+          },
+          "tutors": {
+            "build": 3,
+            "refMedian": 2,
+            "delta": 1
+          },
+          "winCons": {
+            "build": 11,
+            "refMedian": 14,
+            "delta": -3
+          },
+          "protection": {
+            "build": 2,
+            "refMedian": 3,
+            "delta": -1
+          },
+          "avgCmcNonLand": {
+            "build": 3.5737704918032787,
+            "refMedian": 3.34375,
+            "delta": 0.23002049180327866
+          }
+        },
+        "staplesMissing": [
+          {
+            "name": "Alhammarret's Archive",
+            "freq": 1
+          },
+          {
+            "name": "The One Ring",
+            "freq": 1
+          },
+          {
+            "name": "Bloodletter of Aclazotz",
+            "freq": 1
+          },
+          {
+            "name": "Bloodthirsty Conqueror",
+            "freq": 1
+          },
+          {
+            "name": "Elder Brain",
+            "freq": 1
+          },
+          {
+            "name": "Erebos, God of the Dead",
+            "freq": 1
+          },
+          {
+            "name": "Witch of the Moors",
+            "freq": 1
+          },
+          {
+            "name": "Bloodchief Ascension",
+            "freq": 1
+          },
+          {
+            "name": "No Mercy",
+            "freq": 1
+          },
+          {
+            "name": "Blood Pact",
+            "freq": 1
+          }
+        ],
+        "oddCards": [
+          "Collector's Vault",
+          "Mastermind Plum",
+          "Dragon's Hoard",
+          "Chromatic Orrery",
+          "Ugin, Eye of the Storms",
+          "Magnifying Glass",
+          "Azula, On the Hunt",
+          "Tamiyo's Journal",
+          "Ob Nixilis Reignited",
+          "Kozilek's Command",
+          "Erebos, Bleak-Hearted",
+          "Sheoldred // The True Scriptures",
+          "Endbringer",
+          "Staff of Compleation"
+        ]
+      },
+      "moxfield-top": {
+        "refCount": 30,
+        "bracketFilterApplied": false,
+        "quantitiesAvailable": true,
+        "formatMismatch": false,
+        "refsPerBracket": {
+          "2": 3,
+          "3": 4,
+          "4": 19,
+          "5": 4
+        },
+        "overlapMeanPct": 41,
+        "overlapBestPct": 72,
+        "compositionDistance": 0.54,
+        "curveL1": 14,
+        "qualityIndex": 34,
+        "bracketMatch": false,
+        "deltas": {
+          "lands": {
+            "build": 38,
+            "refMedian": 34.5,
+            "delta": 3.5
+          },
+          "ramp": {
+            "build": 14,
+            "refMedian": 9,
+            "delta": 5
+          },
+          "draw": {
+            "build": 32,
+            "refMedian": 15.5,
+            "delta": 16.5
+          },
+          "removal": {
+            "build": 14,
+            "refMedian": 7.5,
+            "delta": 6.5
+          },
+          "boardWipes": {
+            "build": 1,
+            "refMedian": 2,
+            "delta": -1
+          },
+          "tutors": {
+            "build": 3,
+            "refMedian": 4,
+            "delta": -1
+          },
+          "winCons": {
+            "build": 11,
+            "refMedian": 10.5,
+            "delta": 0.5
+          },
+          "protection": {
+            "build": 2,
+            "refMedian": 1,
+            "delta": 1
+          },
+          "avgCmcNonLand": {
+            "build": 3.5737704918032787,
+            "refMedian": 3.1737704918032787,
+            "delta": 0.3999999999999999
+          }
+        },
+        "staplesMissing": [
+          {
+            "name": "Vampiric Tutor",
+            "freq": 0.7666666666666667
+          },
+          {
+            "name": "Bloodchief Ascension",
+            "freq": 0.6
+          }
+        ],
+        "oddCards": [
+          "Collector's Vault",
+          "Mastermind Plum",
+          "Dragon's Hoard",
+          "Chromatic Orrery",
+          "Magnifying Glass",
+          "Azula, On the Hunt",
+          "Tamiyo's Journal",
+          "Kozilek's Command",
+          "Erebos, Bleak-Hearted",
+          "Sheoldred // The True Scriptures",
+          "Endbringer",
+          "Staff of Compleation"
+        ]
+      }
+    }
+  },
+  {
+    "scenario": "mono-b-sheoldred",
+    "format": "brawl",
+    "commander": "Sheoldred, the Apocalypse",
+    "targetBracket": 3,
+    "bracket": {
+      "bracket": 4,
+      "gameChangers": [
+        "Bolas's Citadel",
+        "Vampiric Tutor"
+      ],
+      "twoCardCombos": [
+        [
+          "Exquisite Blood",
+          "Sanguine Bond"
+        ],
+        [
+          "Exquisite Blood",
+          "Vito, Thorn of the Dusk Rose"
+        ]
+      ],
+      "massLandDenial": [],
+      "extraTurnCards": [],
+      "chainedExtraTurns": false,
+      "tutors": 3,
+      "fastMana": [
+        "Dark Ritual"
+      ],
+      "reasons": [
+        "2 game changer(s): Bolas's Citadel, Vampiric Tutor",
+        "2-card combo(s) present: Exquisite Blood + Sanguine Bond; Exquisite Blood + Vito, Thorn of the Dusk Rose"
+      ]
+    },
+    "sets": {
+      "cedhtop16": {
+        "refCount": 10,
+        "bracketFilterApplied": false,
+        "quantitiesAvailable": false,
+        "formatMismatch": true,
+        "refsPerBracket": {
+          "3": 1,
+          "4": 6,
+          "5": 3
+        },
+        "overlapMeanPct": 31,
+        "overlapBestPct": 45,
+        "compositionDistance": 0.63,
+        "curveL1": 19,
+        "qualityIndex": 26,
+        "bracketMatch": false,
+        "deltas": {
+          "lands": {
+            "build": 39,
+            "refMedian": 11,
+            "delta": 28
+          },
+          "ramp": {
+            "build": 12,
+            "refMedian": 9.5,
+            "delta": 2.5
+          },
+          "draw": {
+            "build": 30,
+            "refMedian": 13,
+            "delta": 17
+          },
+          "removal": {
+            "build": 10,
+            "refMedian": 5.5,
+            "delta": 4.5
+          },
+          "boardWipes": {
+            "build": 4,
+            "refMedian": 2,
+            "delta": 2
+          },
+          "tutors": {
+            "build": 3,
+            "refMedian": 5.5,
+            "delta": -2.5
+          },
+          "winCons": {
+            "build": 11,
+            "refMedian": 11.5,
+            "delta": -0.5
+          },
+          "protection": {
+            "build": 3,
+            "refMedian": 2,
+            "delta": 1
+          },
+          "avgCmcNonLand": {
+            "build": 3.716666666666667,
+            "refMedian": 3.176470588235294,
+            "delta": 0.5401960784313729
+          }
+        },
+        "staplesMissing": [
+          {
+            "name": "Sol Ring",
+            "freq": 1
+          },
+          {
+            "name": "Demonic Tutor",
+            "freq": 0.8
+          },
+          {
+            "name": "Teferi's Puzzle Box",
+            "freq": 0.8
+          },
+          {
+            "name": "Sensei's Divining Top",
+            "freq": 0.6
+          },
+          {
+            "name": "The One Ring",
+            "freq": 0.6
+          },
+          {
+            "name": "Orcish Bowmasters",
+            "freq": 0.6
+          },
+          {
+            "name": "Opposition Agent",
+            "freq": 0.6
+          },
+          {
+            "name": "Aetherflux Reservoir",
+            "freq": 0.6
+          }
+        ],
+        "oddCards": [
+          "Rankle, Master of Pranks",
+          "Starting Column",
+          "The Rise of Sozin // Fire Lord Sozin",
+          "Azula, On the Hunt",
+          "Agatha's Soul Cauldron",
+          "Bloodthirsty Aerialist",
+          "Venom's Hunger",
+          "Sold Out",
+          "Collector's Vault",
+          "Dragon's Hoard",
+          "Magnifying Glass",
+          "Chromatic Orrery",
+          "Ugin, Eye of the Storms",
+          "Gorbag of Minas Morgul",
+          "Tamiyo's Journal",
+          "Dread Presence",
+          "Blood Money",
+          "Shadowspear",
+          "Liliana, Dreadhorde General",
+          "High-Society Hunter"
+        ]
+      },
+      "edhrec-avg": {
+        "refCount": 0,
+        "bracketFilterApplied": false,
+        "quantitiesAvailable": false,
+        "formatMismatch": false,
+        "refsPerBracket": {},
+        "note": "no reference decks available"
+      },
+      "moxfield-top": {
+        "refCount": 7,
+        "bracketFilterApplied": true,
+        "quantitiesAvailable": true,
+        "formatMismatch": false,
+        "refsPerBracket": {
+          "2": 9,
+          "3": 7,
+          "4": 9
+        },
+        "overlapMeanPct": 24,
+        "overlapBestPct": 38,
+        "compositionDistance": 0.57,
+        "curveL1": 23,
+        "qualityIndex": 25,
+        "bracketMatch": false,
+        "deltas": {
+          "lands": {
+            "build": 39,
+            "refMedian": 40,
+            "delta": -1
+          },
+          "ramp": {
+            "build": 12,
+            "refMedian": 4,
+            "delta": 8
+          },
+          "draw": {
+            "build": 30,
+            "refMedian": 18,
+            "delta": 12
+          },
+          "removal": {
+            "build": 10,
+            "refMedian": 14,
+            "delta": -4
+          },
+          "boardWipes": {
+            "build": 4,
+            "refMedian": 2,
+            "delta": 2
+          },
+          "tutors": {
+            "build": 3,
+            "refMedian": 2,
+            "delta": 1
+          },
+          "winCons": {
+            "build": 11,
+            "refMedian": 7,
+            "delta": 4
+          },
+          "protection": {
+            "build": 3,
+            "refMedian": 2,
+            "delta": 1
+          },
+          "avgCmcNonLand": {
+            "build": 3.716666666666667,
+            "refMedian": 2.847457627118644,
+            "delta": 0.8692090395480228
+          }
+        },
+        "staplesMissing": [
+          {
+            "name": "Sheoldred's Edict",
+            "freq": 1
+          },
+          {
+            "name": "Dismember",
+            "freq": 0.8571428571428571
+          },
+          {
+            "name": "Thoughtseize",
+            "freq": 0.8571428571428571
+          },
+          {
+            "name": "A-The One Ring",
+            "freq": 0.7142857142857143
+          },
+          {
+            "name": "Bitter Triumph",
+            "freq": 0.7142857142857143
+          },
+          {
+            "name": "Duress",
+            "freq": 0.7142857142857143
+          },
+          {
+            "name": "Go for the Throat",
+            "freq": 0.7142857142857143
+          },
+          {
+            "name": "Invoke Despair",
+            "freq": 0.7142857142857143
+          },
+          {
+            "name": "The Meathook Massacre",
+            "freq": 0.7142857142857143
+          }
+        ],
+        "oddCards": [
+          "Dark Deal",
+          "Howling Mine",
+          "Marauding Blight-Priest",
+          "Sanguine Bond",
+          "Exquisite Blood",
+          "Ob Nixilis, the Hate-Twisted",
+          "Starting Column",
+          "The Rise of Sozin // Fire Lord Sozin",
+          "Azula, On the Hunt",
+          "Agatha's Soul Cauldron",
+          "Bloodthirsty Aerialist",
+          "Bloodthirsty Conqueror",
+          "Venom's Hunger",
+          "Sold Out",
+          "Collector's Vault",
+          "Dragon's Hoard",
+          "Magnifying Glass",
+          "Chromatic Orrery",
+          "Gorbag of Minas Morgul",
+          "Tamiyo's Journal",
+          "Blood Money",
+          "Read the Bones",
+          "High-Society Hunter"
+        ]
+      }
+    }
+  },
+  {
+    "scenario": "mono-r-krenko",
+    "format": "commander",
+    "commander": "Krenko, Mob Boss",
+    "targetBracket": 3,
+    "bracket": {
+      "bracket": 2,
+      "gameChangers": [],
+      "twoCardCombos": [],
+      "massLandDenial": [],
+      "extraTurnCards": [],
+      "chainedExtraTurns": false,
+      "tutors": 2,
+      "fastMana": [
+        "Sol Ring"
+      ],
+      "reasons": []
+    },
+    "sets": {
+      "cedhtop16": {
+        "refCount": 30,
+        "bracketFilterApplied": false,
+        "quantitiesAvailable": false,
+        "formatMismatch": false,
+        "refsPerBracket": {
+          "2": 13,
+          "3": 4,
+          "4": 13
+        },
+        "overlapMeanPct": 46,
+        "overlapBestPct": 75,
+        "compositionDistance": 0.49,
+        "curveL1": 10,
+        "qualityIndex": 38,
+        "bracketMatch": false,
+        "deltas": {
+          "lands": {
+            "build": 38,
+            "refMedian": 5.5,
+            "delta": 32.5
+          },
+          "ramp": {
+            "build": 12,
+            "refMedian": 8.5,
+            "delta": 3.5
+          },
+          "draw": {
+            "build": 13,
+            "refMedian": 5,
+            "delta": 8
+          },
+          "removal": {
+            "build": 6,
+            "refMedian": 7,
+            "delta": -1
+          },
+          "boardWipes": {
+            "build": 3,
+            "refMedian": 0,
+            "delta": 3
+          },
+          "tutors": {
+            "build": 2,
+            "refMedian": 2.5,
+            "delta": -0.5
+          },
+          "winCons": {
+            "build": 7,
+            "refMedian": 6,
+            "delta": 1
+          },
+          "protection": {
+            "build": 3,
+            "refMedian": 3,
+            "delta": 0
+          },
+          "avgCmcNonLand": {
+            "build": 2.721311475409836,
+            "refMedian": 2.455686475409836,
+            "delta": 0.265625
+          }
+        },
+        "staplesMissing": [
+          {
+            "name": "Thousand-Year Elixir",
+            "freq": 0.6
+          },
+          {
+            "name": "Sting, the Glinting Dagger",
+            "freq": 0.6
+          }
+        ],
+        "oddCards": [
+          "Starting Column",
+          "Dragon's Hoard",
+          "Palantír of Orthanc",
+          "Ashling, Flame Dancer",
+          "Artist's Talent",
+          "Village Pillagers",
+          "Coercive Portal"
+        ]
+      },
+      "edhrec-avg": {
+        "refCount": 1,
+        "bracketFilterApplied": false,
+        "quantitiesAvailable": true,
+        "formatMismatch": false,
+        "refsPerBracket": {
+          "4": 1
+        },
+        "overlapMeanPct": 75,
+        "overlapBestPct": 75,
+        "compositionDistance": 0.52,
+        "curveL1": 10,
+        "qualityIndex": 52,
+        "bracketMatch": false,
+        "deltas": {
+          "lands": {
+            "build": 38,
+            "refMedian": 6,
+            "delta": 32
+          },
+          "ramp": {
+            "build": 12,
+            "refMedian": 7,
+            "delta": 5
+          },
+          "draw": {
+            "build": 13,
+            "refMedian": 7,
+            "delta": 6
+          },
+          "removal": {
+            "build": 6,
+            "refMedian": 10,
+            "delta": -4
+          },
+          "boardWipes": {
+            "build": 3,
+            "refMedian": 1,
+            "delta": 2
+          },
+          "tutors": {
+            "build": 2,
+            "refMedian": 2,
+            "delta": 0
+          },
+          "winCons": {
+            "build": 7,
+            "refMedian": 6,
+            "delta": 1
+          },
+          "protection": {
+            "build": 3,
+            "refMedian": 3,
+            "delta": 0
+          },
+          "avgCmcNonLand": {
+            "build": 2.721311475409836,
+            "refMedian": 2.6,
+            "delta": 0.12131147540983589
+          }
+        },
+        "staplesMissing": [
+          {
+            "name": "Coat of Arms",
+            "freq": 1
+          },
+          {
+            "name": "Hazoret's Monument",
+            "freq": 1
+          },
+          {
+            "name": "Patriar's Seal",
+            "freq": 1
+          },
+          {
+            "name": "Sting, the Glinting Dagger",
+            "freq": 1
+          },
+          {
+            "name": "Thousand-Year Elixir",
+            "freq": 1
+          },
+          {
+            "name": "Goblin Piledriver",
+            "freq": 1
+          },
+          {
+            "name": "Kiki-Jiki, Mirror Breaker",
+            "freq": 1
+          },
+          {
+            "name": "Treasure Nabber",
+            "freq": 1
+          },
+          {
+            "name": "Blood Moon",
+            "freq": 1
+          },
+          {
+            "name": "Boggart Shenanigans",
+            "freq": 1
+          }
+        ],
+        "oddCards": [
+          "Starting Column",
+          "Impulsive Pilferer",
+          "Reckless Lackey",
+          "Crime Novelist",
+          "Dragon's Hoard",
+          "Sensei's Divining Top",
+          "Vanquisher's Banner",
+          "Palantír of Orthanc",
+          "Ashling, Flame Dancer",
+          "Artist's Talent",
+          "Siege-Gang Lieutenant",
+          "Village Pillagers",
+          "Coercive Portal",
+          "Fable of the Mirror-Breaker // Reflection of Kiki-Jiki",
+          "Goro-Goro, Disciple of Ryusei"
+        ]
+      },
+      "moxfield-top": {
+        "refCount": 8,
+        "bracketFilterApplied": true,
+        "quantitiesAvailable": true,
+        "formatMismatch": false,
+        "refsPerBracket": {
+          "2": 7,
+          "3": 8,
+          "4": 15
+        },
+        "overlapMeanPct": 49,
+        "overlapBestPct": 57,
+        "compositionDistance": 0.53,
+        "curveL1": 10,
+        "qualityIndex": 39,
+        "bracketMatch": false,
+        "deltas": {
+          "lands": {
+            "build": 38,
+            "refMedian": 33.5,
+            "delta": 4.5
+          },
+          "ramp": {
+            "build": 12,
+            "refMedian": 11,
+            "delta": 1
+          },
+          "draw": {
+            "build": 13,
+            "refMedian": 4.5,
+            "delta": 8.5
+          },
+          "removal": {
+            "build": 6,
+            "refMedian": 10.5,
+            "delta": -4.5
+          },
+          "boardWipes": {
+            "build": 3,
+            "refMedian": 0.5,
+            "delta": 2.5
+          },
+          "tutors": {
+            "build": 2,
+            "refMedian": 3.5,
+            "delta": -1.5
+          },
+          "winCons": {
+            "build": 7,
+            "refMedian": 6,
+            "delta": 1
+          },
+          "protection": {
+            "build": 3,
+            "refMedian": 1.5,
+            "delta": 1.5
+          },
+          "avgCmcNonLand": {
+            "build": 2.721311475409836,
+            "refMedian": 2.531013257575758,
+            "delta": 0.1902982178340782
+          }
+        },
+        "staplesMissing": [
+          {
+            "name": "Abrade",
+            "freq": 0.75
+          },
+          {
+            "name": "Treasure Nabber",
+            "freq": 0.75
+          },
+          {
+            "name": "Dark-Dweller Oracle",
+            "freq": 0.625
+          },
+          {
+            "name": "Goblin Sharpshooter",
+            "freq": 0.625
+          },
+          {
+            "name": "Jeska's Will",
+            "freq": 0.625
+          },
+          {
+            "name": "Kiki-Jiki, Mirror Breaker",
+            "freq": 0.625
+          },
+          {
+            "name": "Lightning Bolt",
+            "freq": 0.625
+          },
+          {
+            "name": "Mana Echoes",
+            "freq": 0.625
+          },
+          {
+            "name": "Umbral Mantle",
+            "freq": 0.625
+          },
+          {
+            "name": "Goblin Lookout",
+            "freq": 0.625
+          }
+        ],
+        "oddCards": [
+          "Starting Column",
+          "Reckless Lackey",
+          "Crime Novelist",
+          "Dragon's Hoard",
+          "Sensei's Divining Top",
+          "Palantír of Orthanc",
+          "Ashling, Flame Dancer",
+          "Artist's Talent",
+          "Village Pillagers",
+          "Coercive Portal"
+        ]
+      }
+    }
+  },
+  {
+    "scenario": "mono-r-krenko",
+    "format": "brawl",
+    "commander": "Krenko, Mob Boss",
+    "targetBracket": 3,
+    "bracket": {
+      "bracket": 2,
+      "gameChangers": [],
+      "twoCardCombos": [],
+      "massLandDenial": [],
+      "extraTurnCards": [],
+      "chainedExtraTurns": false,
+      "tutors": 2,
+      "fastMana": [],
+      "reasons": []
+    },
+    "sets": {
+      "cedhtop16": {
+        "refCount": 30,
+        "bracketFilterApplied": false,
+        "quantitiesAvailable": false,
+        "formatMismatch": true,
+        "refsPerBracket": {
+          "2": 13,
+          "3": 4,
+          "4": 13
+        },
+        "overlapMeanPct": 37,
+        "overlapBestPct": 66,
+        "compositionDistance": 0.47,
+        "curveL1": 22,
+        "qualityIndex": 34,
+        "bracketMatch": false,
+        "deltas": {
+          "lands": {
+            "build": 38,
+            "refMedian": 5.5,
+            "delta": 32.5
+          },
+          "ramp": {
+            "build": 11,
+            "refMedian": 8.5,
+            "delta": 2.5
+          },
+          "draw": {
+            "build": 13,
+            "refMedian": 5,
+            "delta": 8
+          },
+          "removal": {
+            "build": 9,
+            "refMedian": 7,
+            "delta": 2
+          },
+          "boardWipes": {
+            "build": 3,
+            "refMedian": 0,
+            "delta": 3
+          },
+          "tutors": {
+            "build": 2,
+            "refMedian": 2.5,
+            "delta": -0.5
+          },
+          "winCons": {
+            "build": 6,
+            "refMedian": 6,
+            "delta": 0
+          },
+          "protection": {
+            "build": 3,
+            "refMedian": 3,
+            "delta": 0
+          },
+          "avgCmcNonLand": {
+            "build": 2.6885245901639343,
+            "refMedian": 2.455686475409836,
+            "delta": 0.23283811475409832
+          }
+        },
+        "staplesMissing": [
+          {
+            "name": "Sol Ring",
+            "freq": 0.9
+          },
+          {
+            "name": "Goblin Recruiter",
+            "freq": 0.8
+          },
+          {
+            "name": "Brightstone Ritual",
+            "freq": 0.7666666666666667
+          },
+          {
+            "name": "Goblin King",
+            "freq": 0.7666666666666667
+          },
+          {
+            "name": "Skullclamp",
+            "freq": 0.6666666666666666
+          },
+          {
+            "name": "Goblin Chirurgeon",
+            "freq": 0.6333333333333333
+          },
+          {
+            "name": "Goblin War Strike",
+            "freq": 0.6333333333333333
+          },
+          {
+            "name": "Thousand-Year Elixir",
+            "freq": 0.6
+          },
+          {
+            "name": "Sting, the Glinting Dagger",
+            "freq": 0.6
+          }
+        ],
+        "oddCards": [
+          "Steampath Charger",
+          "Starting Column",
+          "Hangarback Walker",
+          "Dockside Extortionist",
+          "Dragon's Hoard",
+          "Wily Goblin",
+          "Ashling, Flame Dancer",
+          "Palantír of Orthanc",
+          "Jaxis, the Troublemaker",
+          "Humble Defector",
+          "Roiling Vortex",
+          "Smash to Dust"
+        ]
+      },
+      "edhrec-avg": {
+        "refCount": 0,
+        "bracketFilterApplied": false,
+        "quantitiesAvailable": false,
+        "formatMismatch": false,
+        "refsPerBracket": {},
+        "note": "no reference decks available"
+      },
+      "moxfield-top": {
+        "refCount": 28,
+        "bracketFilterApplied": false,
+        "quantitiesAvailable": true,
+        "formatMismatch": false,
+        "refsPerBracket": {
+          "2": 16,
+          "3": 1,
+          "4": 11
+        },
+        "overlapMeanPct": 33,
+        "overlapBestPct": 66,
+        "compositionDistance": 0.55,
+        "curveL1": 19,
+        "qualityIndex": 30,
+        "bracketMatch": false,
+        "deltas": {
+          "lands": {
+            "build": 38,
+            "refMedian": 36,
+            "delta": 2
+          },
+          "ramp": {
+            "build": 11,
+            "refMedian": 7,
+            "delta": 4
+          },
+          "draw": {
+            "build": 13,
+            "refMedian": 5.5,
+            "delta": 7.5
+          },
+          "removal": {
+            "build": 9,
+            "refMedian": 10,
+            "delta": -1
+          },
+          "boardWipes": {
+            "build": 3,
+            "refMedian": 0.5,
+            "delta": 2.5
+          },
+          "tutors": {
+            "build": 2,
+            "refMedian": 1,
+            "delta": 1
+          },
+          "winCons": {
+            "build": 6,
+            "refMedian": 5,
+            "delta": 1
+          },
+          "protection": {
+            "build": 3,
+            "refMedian": 2,
+            "delta": 1
+          },
+          "avgCmcNonLand": {
+            "build": 2.6885245901639343,
+            "refMedian": 2.4549071618037135,
+            "delta": 0.2336174283602208
+          }
+        },
+        "staplesMissing": [
+          {
+            "name": "Fanatical Firebrand",
+            "freq": 0.7142857142857143
+          },
+          {
+            "name": "Goblin Gang Leader",
+            "freq": 0.6428571428571429
+          }
+        ],
+        "oddCards": [
+          "Steampath Charger",
+          "Starting Column",
+          "Hangarback Walker",
+          "Dragon's Hoard",
+          "Ashling, Flame Dancer",
+          "Palantír of Orthanc",
+          "Jaxis, the Troublemaker",
+          "Humble Defector",
+          "Goblin Engineer",
+          "Smash to Dust"
+        ]
+      }
+    }
+  },
+  {
+    "scenario": "mono-g-ghalta",
+    "format": "commander",
+    "commander": "Ghalta, Primal Hunger",
+    "targetBracket": 3,
+    "bracket": {
+      "bracket": 2,
+      "gameChangers": [],
+      "twoCardCombos": [],
+      "massLandDenial": [],
+      "extraTurnCards": [],
+      "chainedExtraTurns": false,
+      "tutors": 1,
+      "fastMana": [
+        "Sol Ring"
+      ],
+      "reasons": []
+    },
+    "sets": {
+      "cedhtop16": {
+        "refCount": 2,
+        "bracketFilterApplied": false,
+        "quantitiesAvailable": false,
+        "formatMismatch": false,
+        "refsPerBracket": {
+          "2": 1,
+          "3": 1
+        },
+        "overlapMeanPct": 20,
+        "overlapBestPct": 22,
+        "compositionDistance": 0.63,
+        "curveL1": 9,
+        "qualityIndex": 21,
+        "bracketMatch": false,
+        "deltas": {
+          "lands": {
+            "build": 40,
+            "refMedian": 8,
+            "delta": 32
+          },
+          "ramp": {
+            "build": 21,
+            "refMedian": 16,
+            "delta": 5
+          },
+          "draw": {
+            "build": 19,
+            "refMedian": 11.5,
+            "delta": 7.5
+          },
+          "removal": {
+            "build": 4,
+            "refMedian": 6.5,
+            "delta": -2.5
+          },
+          "boardWipes": {
+            "build": 2,
+            "refMedian": 0,
+            "delta": 2
+          },
+          "tutors": {
+            "build": 1,
+            "refMedian": 1.5,
+            "delta": -0.5
+          },
+          "winCons": {
+            "build": 5,
+            "refMedian": 8,
+            "delta": -3
+          },
+          "protection": {
+            "build": 4,
+            "refMedian": 2,
+            "delta": 2
+          },
+          "avgCmcNonLand": {
+            "build": 3.2033898305084745,
+            "refMedian": 3.3870967741935485,
+            "delta": -0.183706943685074
+          }
+        },
+        "staplesMissing": [
+          {
+            "name": "Pick Your Poison",
+            "freq": 1
+          },
+          {
+            "name": "Bushwhack",
+            "freq": 1
+          },
+          {
+            "name": "Fight Rigging",
+            "freq": 1
+          }
+        ],
+        "oddCards": [
+          "Beast Within",
+          "Rishkar's Expertise",
+          "Llanowar Tribe",
+          "Topiary Stomper",
+          "Fyndhorn Elves",
+          "Gigantosaurus",
+          "Heroic Intervention",
+          "Cultivate",
+          "Selvala, Heart of the Wilds",
+          "Hulking Raptor",
+          "Wayward Swordtooth",
+          "Fanatic of Rhonas",
+          "Emerald Medallion",
+          "Beast Whisperer",
+          "Overwhelming Stampede",
+          "Skullclamp",
+          "Mind Stone",
+          "The Great Henge",
+          "Tamiyo's Journal",
+          "Thrashing Brontodon",
+          "Insidious Fungus",
+          "Bane of Progress",
+          "Night of the Sweets' Revenge",
+          "Frenzied Baloth",
+          "Pugnacious Hammerskull",
+          "Lightning Greaves",
+          "Idol of Oblivion",
+          "Collector's Vault",
+          "Garruk, Primal Hunter",
+          "Currency Converter",
+          "Sensei's Divining Top",
+          "Steel Leaf Champion",
+          "Fellwar Stone",
+          "Greater Good",
+          "Surrak and Goreclaw",
+          "Birds of Paradise",
+          "Rhonas the Indomitable",
+          "Goldvein Pick",
+          "Priest of Titania",
+          "The Skullspore Nexus"
+        ]
+      },
+      "edhrec-avg": {
+        "refCount": 1,
+        "bracketFilterApplied": false,
+        "quantitiesAvailable": true,
+        "formatMismatch": false,
+        "refsPerBracket": {
+          "2": 1
+        },
+        "overlapMeanPct": 75,
+        "overlapBestPct": 75,
+        "compositionDistance": 0.54,
+        "curveL1": 15,
+        "qualityIndex": 51,
+        "bracketMatch": false,
+        "deltas": {
+          "lands": {
+            "build": 40,
+            "refMedian": 7,
+            "delta": 33
+          },
+          "ramp": {
+            "build": 21,
+            "refMedian": 20,
+            "delta": 1
+          },
+          "draw": {
+            "build": 19,
+            "refMedian": 13,
+            "delta": 6
+          },
+          "removal": {
+            "build": 4,
+            "refMedian": 4,
+            "delta": 0
+          },
+          "boardWipes": {
+            "build": 2,
+            "refMedian": 0,
+            "delta": 2
+          },
+          "tutors": {
+            "build": 1,
+            "refMedian": 0,
+            "delta": 1
+          },
+          "winCons": {
+            "build": 5,
+            "refMedian": 8,
+            "delta": -3
+          },
+          "protection": {
+            "build": 4,
+            "refMedian": 7,
+            "delta": -3
+          },
+          "avgCmcNonLand": {
+            "build": 3.2033898305084745,
+            "refMedian": 3.5,
+            "delta": -0.2966101694915255
+          }
+        },
+        "staplesMissing": [
+          {
+            "name": "Defiler of Vigor",
+            "freq": 1
+          },
+          {
+            "name": "Disciple of Freyalise",
+            "freq": 1
+          },
+          {
+            "name": "Eternal Witness",
+            "freq": 1
+          },
+          {
+            "name": "Ghalta, Stampede Tyrant",
+            "freq": 1
+          },
+          {
+            "name": "Gwenna, Eyes of Gaea",
+            "freq": 1
+          },
+          {
+            "name": "Karametra's Acolyte",
+            "freq": 1
+          },
+          {
+            "name": "Kogla, the Titan Ape",
+            "freq": 1
+          },
+          {
+            "name": "Slumbering Trudge",
+            "freq": 1
+          },
+          {
+            "name": "Zopandrel, Hunger Dominus",
+            "freq": 1
+          },
+          {
+            "name": "Colossal Majesty",
+            "freq": 1
+          }
+        ],
+        "oddCards": [
+          "Skullclamp",
+          "Mind Stone",
+          "Tamiyo's Journal",
+          "Insidious Fungus",
+          "Bane of Progress",
+          "Night of the Sweets' Revenge",
+          "Idol of Oblivion",
+          "Collector's Vault",
+          "Currency Converter",
+          "Sensei's Divining Top",
+          "Tireless Tracker",
+          "Fellwar Stone",
+          "Birds of Paradise",
+          "Goldvein Pick",
+          "Priest of Titania"
+        ]
+      },
+      "moxfield-top": {
+        "refCount": 11,
+        "bracketFilterApplied": true,
+        "quantitiesAvailable": true,
+        "formatMismatch": false,
+        "refsPerBracket": {
+          "2": 16,
+          "3": 11,
+          "4": 3
+        },
+        "overlapMeanPct": 35,
+        "overlapBestPct": 63,
+        "compositionDistance": 0.54,
+        "curveL1": 8,
+        "qualityIndex": 31,
+        "bracketMatch": false,
+        "deltas": {
+          "lands": {
+            "build": 40,
+            "refMedian": 34,
+            "delta": 6
+          },
+          "ramp": {
+            "build": 21,
+            "refMedian": 18,
+            "delta": 3
+          },
+          "draw": {
+            "build": 19,
+            "refMedian": 10,
+            "delta": 9
+          },
+          "removal": {
+            "build": 4,
+            "refMedian": 6,
+            "delta": -2
+          },
+          "boardWipes": {
+            "build": 2,
+            "refMedian": 1,
+            "delta": 1
+          },
+          "tutors": {
+            "build": 1,
+            "refMedian": 5,
+            "delta": -4
+          },
+          "winCons": {
+            "build": 5,
+            "refMedian": 14,
+            "delta": -9
+          },
+          "protection": {
+            "build": 4,
+            "refMedian": 3,
+            "delta": 1
+          },
+          "avgCmcNonLand": {
+            "build": 3.2033898305084745,
+            "refMedian": 3.4126984126984126,
+            "delta": -0.20930858218993809
+          }
+        },
+        "staplesMissing": [
+          {
+            "name": "Natural Order",
+            "freq": 0.8181818181818182
+          },
+          {
+            "name": "Finale of Devastation",
+            "freq": 0.7272727272727273
+          },
+          {
+            "name": "Concordant Crossroads",
+            "freq": 0.6363636363636364
+          },
+          {
+            "name": "Eternal Witness",
+            "freq": 0.6363636363636364
+          }
+        ],
+        "oddCards": [
+          "Skullclamp",
+          "Mind Stone",
+          "Tamiyo's Journal",
+          "Thrashing Brontodon",
+          "Insidious Fungus",
+          "Night of the Sweets' Revenge",
+          "Idol of Oblivion",
+          "Collector's Vault",
+          "Currency Converter",
+          "Sensei's Divining Top",
+          "Tireless Tracker",
+          "Fellwar Stone",
+          "Goldvein Pick"
+        ]
+      }
+    }
+  },
+  {
+    "scenario": "mono-g-ghalta",
+    "format": "brawl",
+    "commander": "Ghalta, Primal Hunger",
+    "targetBracket": 3,
+    "bracket": {
+      "bracket": 2,
+      "gameChangers": [],
+      "twoCardCombos": [],
+      "massLandDenial": [],
+      "extraTurnCards": [],
+      "chainedExtraTurns": false,
+      "tutors": 1,
+      "fastMana": [],
+      "reasons": []
+    },
+    "sets": {
+      "cedhtop16": {
+        "refCount": 2,
+        "bracketFilterApplied": false,
+        "quantitiesAvailable": false,
+        "formatMismatch": true,
+        "refsPerBracket": {
+          "2": 1,
+          "3": 1
+        },
+        "overlapMeanPct": 19,
+        "overlapBestPct": 19,
+        "compositionDistance": 0.66,
+        "curveL1": 16,
+        "qualityIndex": 20,
+        "bracketMatch": false,
+        "deltas": {
+          "lands": {
+            "build": 42,
+            "refMedian": 8,
+            "delta": 34
+          },
+          "ramp": {
+            "build": 26,
+            "refMedian": 16,
+            "delta": 10
+          },
+          "draw": {
+            "build": 15,
+            "refMedian": 11.5,
+            "delta": 3.5
+          },
+          "removal": {
+            "build": 4,
+            "refMedian": 6.5,
+            "delta": -2.5
+          },
+          "boardWipes": {
+            "build": 2,
+            "refMedian": 0,
+            "delta": 2
+          },
+          "tutors": {
+            "build": 1,
+            "refMedian": 1.5,
+            "delta": -0.5
+          },
+          "winCons": {
+            "build": 3,
+            "refMedian": 8,
+            "delta": -5
+          },
+          "protection": {
+            "build": 5,
+            "refMedian": 2,
+            "delta": 3
+          },
+          "avgCmcNonLand": {
+            "build": 2.9649122807017543,
+            "refMedian": 3.3870967741935485,
+            "delta": -0.4221844934917942
+          }
+        },
+        "staplesMissing": [
+          {
+            "name": "Arbor Elf",
+            "freq": 1
+          },
+          {
+            "name": "Pick Your Poison",
+            "freq": 1
+          },
+          {
+            "name": "Fight Rigging",
+            "freq": 1
+          },
+          {
+            "name": "Majestic Genesis",
+            "freq": 1
+          }
+        ],
+        "oddCards": [
+          "Beast Within",
+          "Rishkar's Expertise",
+          "Llanowar Tribe",
+          "Topiary Stomper",
+          "Gigantosaurus",
+          "Heroic Intervention",
+          "Cultivate",
+          "Selvala, Heart of the Wilds",
+          "Hulking Raptor",
+          "Wayward Swordtooth",
+          "Fanatic of Rhonas",
+          "Emerald Medallion",
+          "Beast Whisperer",
+          "Starting Column",
+          "Loot, Exuberant Explorer",
+          "Unlucky Cabbage Merchant",
+          "The Great Henge",
+          "Thornvault Forager",
+          "Thrashing Brontodon",
+          "Night of the Sweets' Revenge",
+          "Fade from History",
+          "Lightning Greaves",
+          "Frenzied Baloth",
+          "Pugnacious Hammerskull",
+          "Collector's Vault",
+          "Currency Converter",
+          "Steel Leaf Champion",
+          "Surrak and Goreclaw",
+          "Gilded Goose",
+          "Birds of Paradise",
+          "Rhonas the Indomitable",
+          "Goldvein Pick",
+          "Mishra's Bauble",
+          "Priest of Titania",
+          "Allosaurus Shepherd",
+          "The Skullspore Nexus",
+          "Mind Stone",
+          "Farseek",
+          "Hunter's Insight"
+        ]
+      },
+      "edhrec-avg": {
+        "refCount": 0,
+        "bracketFilterApplied": false,
+        "quantitiesAvailable": false,
+        "formatMismatch": false,
+        "refsPerBracket": {},
+        "note": "no reference decks available"
+      },
+      "moxfield-top": {
+        "refCount": 8,
+        "bracketFilterApplied": false,
+        "quantitiesAvailable": true,
+        "formatMismatch": false,
+        "refsPerBracket": {
+          "2": 7,
+          "3": 1
+        },
+        "overlapMeanPct": 28,
+        "overlapBestPct": 44,
+        "compositionDistance": 0.51,
+        "curveL1": 13,
+        "qualityIndex": 29,
+        "bracketMatch": false,
+        "deltas": {
+          "lands": {
+            "build": 42,
+            "refMedian": 40,
+            "delta": 2
+          },
+          "ramp": {
+            "build": 26,
+            "refMedian": 19,
+            "delta": 7
+          },
+          "draw": {
+            "build": 15,
+            "refMedian": 11,
+            "delta": 4
+          },
+          "removal": {
+            "build": 4,
+            "refMedian": 5,
+            "delta": -1
+          },
+          "boardWipes": {
+            "build": 2,
+            "refMedian": 0,
+            "delta": 2
+          },
+          "tutors": {
+            "build": 1,
+            "refMedian": 0,
+            "delta": 1
+          },
+          "winCons": {
+            "build": 3,
+            "refMedian": 12,
+            "delta": -9
+          },
+          "protection": {
+            "build": 5,
+            "refMedian": 7.5,
+            "delta": -2.5
+          },
+          "avgCmcNonLand": {
+            "build": 2.9649122807017543,
+            "refMedian": 3.2065336249316565,
+            "delta": -0.24162134422990222
+          }
+        },
+        "staplesMissing": [
+          {
+            "name": "Delighted Halfling",
+            "freq": 0.625
+          }
+        ],
+        "oddCards": [
+          "Starting Column",
+          "Unlucky Cabbage Merchant",
+          "Tireless Tracker",
+          "Thornvault Forager",
+          "Night of the Sweets' Revenge",
+          "Fade from History",
+          "Collector's Vault",
+          "Currency Converter",
+          "Gilded Goose",
+          "Goldvein Pick",
+          "Mishra's Bauble",
+          "Mind Stone",
+          "Farseek"
+        ]
+      }
+    }
+  }
+]
