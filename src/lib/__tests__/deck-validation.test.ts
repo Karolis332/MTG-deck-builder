@@ -484,5 +484,23 @@ describe('validateDeck', () => {
       const issues = validateDeck(cards, 'brawl');
       expect(findIssue(issues, 'Banned as commander')).toBeUndefined();
     });
+
+    it('rejects a banned commander stored as a transforming/MDFC front face', () => {
+      const cards = makeDeckEntries(99).concat([
+        {
+          card_id: 'cmdr',
+          quantity: 1,
+          board: 'commander',
+          card: makeCard({
+            id: 'cmdr',
+            name: "Ajani, Nacatl Pariah // Ajani, Nacatl Avenger",
+            legalities: '{"brawl":"legal"}',
+          }),
+        },
+      ]);
+      const issues = validateDeck(cards, 'competitivebrawl');
+      const issue = findIssue(issues, 'Banned as commander in Competitive Brawl');
+      expect(issue).toBeDefined();
+    });
   });
 });

@@ -368,6 +368,44 @@ function resolveEdhrecCards(
   return resolved;
 }
 
+// ── Commander legality / Arena-rebalance ("A-") variant resolution ─────────
+
+/** Read a card's legality status, checking each key in `legalityKeys` in order. */
+export function readLegalityStatus(
+  card: Pick<DbCard, 'legalities'>,
+  legalityKeys: string[]
+): string | undefined {
+  try {
+    if (!card.legalities) return undefined;
+    const parsed = JSON.parse(card.legalities) as Record<string, string>;
+    for (const key of legalityKeys) {
+      const s = parsed[key];
+      if (s === 'legal' || s === 'restricted') return s;
+    }
+    return parsed[legalityKeys[0]];
+  } catch { return undefined; }
+}
+
+/**
+ * Pick whichever variant of a commander — the resolved card or its Arena
+ * "A-" rebalance counterpart (either direction: paper→A- or A-→paper) — is
+ * actually legal/restricted in the target format. Pure and DB-free so the
+ * swap logic is unit-testable without a live SQLite instance.
+ */
+export function resolveLegalCommanderVariant<T extends Pick<DbCard, 'name' | 'legalities'>>(
+  card: T,
+  otherVariant: T | undefined,
+  legalityKeys: string[]
+): { card: T; status: string } | null {
+  const status = readLegalityStatus(card, legalityKeys);
+  if (status === 'legal' || status === 'restricted') return { card, status };
+  const otherStatus = otherVariant ? readLegalityStatus(otherVariant, legalityKeys) : undefined;
+  if (otherVariant && (otherStatus === 'legal' || otherStatus === 'restricted')) {
+    return { card: otherVariant, status: otherStatus };
+  }
+  return null;
+}
+
 // ── Main deck builder ───────────────────────────────────────────────────────
 
 export interface BuildOptions {
@@ -470,50 +508,29 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
 
       // Refuse to build around a commander that isn't legal in the target
       // format (e.g. Warhammer 40K commanders don't exist on Arena at all).
-      // Arena-rebalanced cards: when the paper card is not_legal but its
-      // Alchemy "A-" counterpart is legal (Vivi Ornitier post-Oct-2025
-      // rebalance), Arena plays the rebalanced version under the same name —
-      // swap to the A- row so oracle analysis matches what's actually played.
+      // Arena-rebalanced cards: when one variant (paper or "A-" rebalanced)
+      // is not_legal but the other is legal, Arena plays whichever variant
+      // is actually legal under the same name — swap to it so oracle
+      // analysis matches what's actually played. Symmetric: works whether
+      // the resolved row is the paper or the "A-" card.
       if (format && format !== '1v1') {
         // Competitive Brawl has no Scryfall legality key of its own; a
         // commander is Arena-available if it's legal/restricted in either
         // Historic Brawl or Historic (the article calls the 99 "nearly
         // unrestricted" with no published banlist — conservative fallback).
         const legalityKeys = format === 'competitivebrawl' ? ['brawl', 'historic'] : [getLegalityKey(format)];
-        const readStatus = (card: DbCard): string | undefined => {
-          try {
-            if (!card.legalities) return undefined;
-            const parsed = JSON.parse(card.legalities) as Record<string, string>;
-            for (const key of legalityKeys) {
-              const s = parsed[key];
-              if (s === 'legal' || s === 'restricted') return s;
-            }
-            return parsed[legalityKeys[0]];
-          } catch { return undefined; }
-        };
-        let status = readStatus(cmdCard);
-        if (status !== 'legal' && status !== 'restricted') {
-          // Try the other Arena-rebalance variant: add "A-" if the resolved
-          // name is paper, strip it if the resolved name is already the
-          // rebalanced version (e.g. a saved deck's commander is stored as
-          // "A-Vivi Ornitier" but only the paper "Vivi Ornitier" is legal
-          // in this format).
-          const otherVariant = cmdCard.name.startsWith('A-')
-            ? cmdCard.name.slice(2)
-            : `A-${cmdCard.name}`;
-          const rebalanced = db.prepare(
-            'SELECT * FROM cards WHERE name = ? COLLATE NOCASE LIMIT 1'
-          ).get(otherVariant) as DbCard | undefined;
-          const rebalancedStatus = rebalanced ? readStatus(rebalanced) : undefined;
-          if (rebalanced && (rebalancedStatus === 'legal' || rebalancedStatus === 'restricted')) {
-            commanderCard = rebalanced;
-            status = rebalancedStatus;
-          } else {
-            throw new Error(
-              `${cmdCard.name} is not legal as a commander in ${format} (status: ${status ?? 'unknown'})`
-            );
-          }
+        const otherVariantName = cmdCard.name.startsWith('A-') ? cmdCard.name.slice(2) : `A-${cmdCard.name}`;
+        const otherVariant = db.prepare(
+          'SELECT * FROM cards WHERE name = ? COLLATE NOCASE LIMIT 1'
+        ).get(otherVariantName) as DbCard | undefined;
+        const resolved = resolveLegalCommanderVariant(cmdCard, otherVariant, legalityKeys);
+        if (!resolved) {
+          const status = readLegalityStatus(cmdCard, legalityKeys);
+          throw new Error(
+            `${cmdCard.name} is not legal as a commander in ${format} (status: ${status ?? 'unknown'})`
+          );
         }
+        commanderCard = resolved.card;
       }
     }
     // Commander name was given but no card matched (e.g. wrong apostrophe/typo).

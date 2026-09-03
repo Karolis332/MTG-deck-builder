@@ -12,6 +12,7 @@ import {
   COMMANDER_FORMATS,
   getLegalityKey,
   COMPETITIVE_BRAWL_COMMANDER_BANS,
+  isCompetitiveBrawlBannedCommander,
 } from '../constants';
 
 describe('MANA_COLORS', () => {
@@ -81,6 +82,27 @@ describe('Competitive Brawl', () => {
     expect(COMPETITIVE_BRAWL_COMMANDER_BANS).toContain('Ragavan, Nimble Pilferer');
     expect(COMPETITIVE_BRAWL_COMMANDER_BANS).toContain('Oko, Thief of Crowns');
     expect(COMPETITIVE_BRAWL_COMMANDER_BANS).toContain("Tajic, Legion's Valor");
+  });
+
+  describe('isCompetitiveBrawlBannedCommander', () => {
+    it('matches plain names case-insensitively', () => {
+      expect(isCompetitiveBrawlBannedCommander('ragavan, nimble pilferer')).toBe(true);
+      expect(isCompetitiveBrawlBannedCommander('Ragavan, Nimble Pilferer')).toBe(true);
+    });
+
+    it('matches the Arena-rebalanced A- form', () => {
+      expect(isCompetitiveBrawlBannedCommander('A-Oko, Thief of Crowns')).toBe(true);
+    });
+
+    it('matches the front face of a transforming/MDFC card', () => {
+      expect(isCompetitiveBrawlBannedCommander('Ajani, Nacatl Pariah // Ajani, Nacatl Avenger')).toBe(true);
+      expect(isCompetitiveBrawlBannedCommander('Tamiyo, Inquisitive Student // Tamiyo, Seasoned Scholar')).toBe(true);
+    });
+
+    it('does not match a legal commander', () => {
+      expect(isCompetitiveBrawlBannedCommander('Vivi Ornitier')).toBe(false);
+      expect(isCompetitiveBrawlBannedCommander('A-Vivi Ornitier')).toBe(false);
+    });
   });
 });
 
