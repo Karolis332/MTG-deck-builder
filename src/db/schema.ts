@@ -1367,4 +1367,13 @@ export const MIGRATIONS = [
       CREATE INDEX IF NOT EXISTS idx_cards_name_nocase ON cards(name COLLATE NOCASE);
     `,
   },
+  {
+    version: 39,
+    name: 'decks_target_bracket',
+    sql: `
+      -- Commander bracket (2-5) the user is building toward, for the reference-deck
+      -- benchmark comparison. NULL = unset; code treats NULL as bracket 3 default.
+      ALTER TABLE decks ADD COLUMN target_bracket INTEGER;
+    `,
+  },
 ];

@@ -105,6 +105,11 @@ describe('Database Schema & Migrations', () => {
     expect(names).toContain('predicted_score');
     expect(names).toContain('reason');
   });
+
+  it('adds target_bracket column to decks (migration 39)', () => {
+    const columns = db.prepare("PRAGMA table_info(decks)").all() as Array<{ name: string }>;
+    expect(columns.map((c) => c.name)).toContain('target_bracket');
+  });
 });
 
 describe('Card CRUD Operations', () => {
@@ -207,6 +212,35 @@ describe('Deck Operations', () => {
       'SELECT COUNT(*) as count FROM deck_cards WHERE deck_id = ?'
     ).get(deckId) as { count: number };
     expect(remaining.count).toBe(0);
+  });
+
+  it('getDeckWithCards-style query returns owned_qty summed across collection rows', () => {
+    // Mirrors the LEFT JOIN added to getDeckWithCards in src/lib/db.ts.
+    db.prepare(`
+      INSERT INTO cards (id, oracle_id, name, cmc, type_line, set_code, set_name, collector_number, rarity)
+      VALUES ('c4', 'o4', 'Sol Ring', 0, 'Artifact', 'CMD', 'Commander', '1', 'uncommon')
+    `).run();
+    const { lastInsertRowid: deckId } = db.prepare('INSERT INTO decks (name) VALUES (?)').run('Owned Deck');
+    db.prepare(
+      "INSERT INTO deck_cards (deck_id, card_id, quantity, board) VALUES (?, ?, ?, ?)"
+    ).run(deckId, 'c4', 1, 'main');
+
+    // Two collection rows for the same card (regular + foil) — should sum.
+    db.prepare('INSERT INTO collection (card_id, quantity, foil) VALUES (?, ?, 0)').run('c4', 2);
+    db.prepare('INSERT INTO collection (card_id, quantity, foil) VALUES (?, ?, 1)').run('c4', 1);
+
+    const rows = db.prepare(
+      `SELECT dc.*, c.*, COALESCE(own.owned_qty, 0) as owned_qty
+       FROM deck_cards dc
+       JOIN cards c ON dc.card_id = c.id
+       LEFT JOIN (
+         SELECT card_id, SUM(quantity) as owned_qty FROM collection GROUP BY card_id
+       ) own ON own.card_id = dc.card_id
+       WHERE dc.deck_id = ?`
+    ).all(deckId) as Array<{ owned_qty: number }>;
+
+    expect(rows).toHaveLength(1);
+    expect(rows[0].owned_qty).toBe(3);
   });
 });
 

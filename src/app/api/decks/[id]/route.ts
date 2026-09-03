@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { z } from 'zod';
 import {
   getDeckWithCards,
   updateDeck,
@@ -11,6 +12,14 @@ import type { DeckPatchOp } from '@/lib/types';
 import { getAuthUser, unauthorizedResponse } from '@/lib/auth-middleware';
 import { createVersionSnapshot } from '@/lib/deck-versioning';
 import type { ChangeType } from '@/lib/deck-versioning';
+
+const updateDeckSchema = z.object({
+  name: z.string().min(1).optional(),
+  format: z.string().optional(),
+  description: z.string().optional(),
+  cover_card_id: z.string().nullable().optional(),
+  target_bracket: z.number().int().min(2).max(5).nullable().optional(),
+});
 
 export async function GET(
   request: NextRequest,
@@ -51,7 +60,11 @@ export async function PUT(
     }
 
     const body = await request.json();
-    updateDeck(deckId, body, authUser.userId);
+    const parsed = updateDeckSchema.safeParse(body);
+    if (!parsed.success) {
+      return NextResponse.json({ error: parsed.error.issues.map(i => i.message).join(', ') }, { status: 400 });
+    }
+    updateDeck(deckId, parsed.data, authUser.userId);
     const deck = getDeckWithCards(deckId, authUser.userId);
     return NextResponse.json({ deck });
   } catch (error) {

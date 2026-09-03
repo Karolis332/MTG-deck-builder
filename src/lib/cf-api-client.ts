@@ -101,23 +101,39 @@ function hashDeck(cardNames: string[], commander: string): string {
 
 // ── Local cache ──────────────────────────────────────────────────────────────
 
+// The `reason` column was added after the original cf_cache migration (schema.ts
+// migration 24) shipped. Rather than bump the shared migration array (owned by
+// another slice), add it lazily here — SQLite's ADD COLUMN is a cheap no-op to
+// retry, so a failed "duplicate column" attempt is simply ignored.
+let reasonColumnEnsured = false;
+function ensureCfCacheReasonColumn(db: ReturnType<typeof getDb>): void {
+  if (reasonColumnEnsured) return;
+  reasonColumnEnsured = true;
+  try {
+    db.exec('ALTER TABLE cf_cache ADD COLUMN reason TEXT');
+  } catch {
+    // column already exists — ignore
+  }
+}
+
 function getCachedRecommendations(deckHash: string): CFRecommendation[] | null {
   try {
     const db = getDb();
+    ensureCfCacheReasonColumn(db);
     const cutoff = new Date(Date.now() - LOCAL_CACHE_TTL_HOURS * 3600_000).toISOString();
     const rows = db.prepare(`
-      SELECT card_name, cf_score, similar_deck_count
+      SELECT card_name, cf_score, similar_deck_count, reason
       FROM cf_cache
       WHERE deck_hash = ? AND fetched_at > ?
       ORDER BY cf_score DESC
-    `).all(deckHash, cutoff) as Array<{ card_name: string; cf_score: number; similar_deck_count: number }>;
+    `).all(deckHash, cutoff) as Array<{ card_name: string; cf_score: number; similar_deck_count: number; reason: string | null }>;
 
     if (rows.length === 0) return null;
     return rows.map(r => ({
       card_name: r.card_name,
       cf_score: r.cf_score,
       similar_deck_count: r.similar_deck_count || 0,
-      reason: `Found in ${r.similar_deck_count || 0} similar decks`,
+      reason: r.reason || `Found in ${r.similar_deck_count || 0} similar decks`,
     }));
   } catch {
     return null;
@@ -127,13 +143,14 @@ function getCachedRecommendations(deckHash: string): CFRecommendation[] | null {
 function cacheRecommendations(deckHash: string, recs: CFRecommendation[]): void {
   try {
     const db = getDb();
+    ensureCfCacheReasonColumn(db);
     const stmt = db.prepare(`
-      INSERT OR REPLACE INTO cf_cache (deck_hash, card_name, cf_score, similar_deck_count, fetched_at)
-      VALUES (?, ?, ?, ?, datetime('now'))
+      INSERT OR REPLACE INTO cf_cache (deck_hash, card_name, cf_score, similar_deck_count, reason, fetched_at)
+      VALUES (?, ?, ?, ?, ?, datetime('now'))
     `);
     const tx = db.transaction(() => {
       for (const rec of recs) {
-        stmt.run(deckHash, rec.card_name, rec.cf_score, rec.similar_deck_count);
+        stmt.run(deckHash, rec.card_name, rec.cf_score, rec.similar_deck_count, rec.reason || null);
       }
     });
     tx();
@@ -387,6 +404,121 @@ export async function reportGameOutcomeToCF(deckId: number, result: string): Pro
       signal: controller.signal,
     }).finally(() => clearTimeout(t));
   } catch { /* never block ingestion on telemetry */ }
+}
+
+/**
+ * Fire-and-forget POST to /events/track with an arbitrary event payload.
+ * Shared by the bandit outcome reporters above and by suggestion-impression
+ * tracking (suggestions_shown / suggestion_dismissed). Never throws — a
+ * telemetry failure must never block the caller.
+ */
+export async function trackCFEvent(payload: Record<string, unknown>): Promise<void> {
+  if (!isCFEnabled()) return;
+  try {
+    const controller = new AbortController();
+    const t = setTimeout(() => controller.abort(), 3000);
+    await fetch(`${getCFApiUrl()}/events/track`, {
+      method: 'POST',
+      headers: buildCFHeaders(),
+      body: JSON.stringify(payload),
+      signal: controller.signal,
+    }).finally(() => clearTimeout(t));
+  } catch { /* never block on telemetry */ }
+}
+
+// ── Commander top decks (benchmark reference decks) ─────────────────────────
+
+export interface CFTopDeckCard {
+  card_name: string;
+  board: string;
+  quantity: number;
+}
+
+export interface CFTopDeck {
+  id: string;
+  source: string;
+  source_id: string;
+  url: string | null;
+  deck_name: string | null;
+  author: string | null;
+  likes: number;
+  views: number;
+  format: string;
+  card_count: number;
+  cards: CFTopDeckCard[];
+}
+
+export interface CFTopDecksResponse {
+  commander: string;
+  count: number;
+  decks: CFTopDeck[];
+}
+
+const TOP_DECKS_TIMEOUT_MS = 8000;
+
+function topDecksCacheKey(commander: string, format: string): string {
+  return `topdecks:${format}:${commander.trim().toLowerCase()}`;
+}
+
+function getCachedTopDecks(cacheKey: string): CFTopDecksResponse | null {
+  try {
+    const db = getDb();
+    const cutoff = new Date(Date.now() - LOCAL_CACHE_TTL_HOURS * 3600_000).toISOString();
+    const row = db.prepare(
+      `SELECT card_name FROM cf_cache WHERE deck_hash = ? AND fetched_at > ? LIMIT 1`
+    ).get(cacheKey, cutoff) as { card_name: string } | undefined;
+    if (!row) return null;
+    return JSON.parse(row.card_name) as CFTopDecksResponse;
+  } catch {
+    return null;
+  }
+}
+
+function cacheTopDecks(cacheKey: string, data: CFTopDecksResponse): void {
+  try {
+    const db = getDb();
+    db.prepare(
+      `INSERT OR REPLACE INTO cf_cache (deck_hash, card_name, cf_score, similar_deck_count, fetched_at)
+       VALUES (?, ?, 0, ?, datetime('now'))`
+    ).run(cacheKey, JSON.stringify(data), data.decks.length);
+  } catch { /* cache is best-effort */ }
+}
+
+/**
+ * Fetch the top-liked reference decks for a commander from the VPS CF API
+ * (GET /commander-top-decks), used by the deck benchmark route. Fail-soft:
+ * returns null on any error so the benchmark can degrade gracefully.
+ */
+export async function getCommanderTopDecks(
+  commander: string,
+  format: 'commander' | 'historicBrawl',
+  limit = 30,
+): Promise<CFTopDecksResponse | null> {
+  if (!isCFEnabled()) return null;
+
+  const cacheKey = topDecksCacheKey(commander, format);
+  const cached = getCachedTopDecks(cacheKey);
+  if (cached) return cached;
+
+  const url = getCFApiUrl();
+  try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), TOP_DECKS_TIMEOUT_MS);
+
+    const qs = new URLSearchParams({ commander, limit: String(limit), format });
+    const resp = await fetch(`${url}/commander-top-decks?${qs.toString()}`, {
+      headers: buildCFHeaders(),
+      signal: controller.signal,
+    });
+    clearTimeout(timeout);
+
+    if (!resp.ok) return null;
+    const data: CFTopDecksResponse = await resp.json();
+    cacheTopDecks(cacheKey, data);
+    return data;
+  } catch {
+    return null;
+  }
 }
 
 /**

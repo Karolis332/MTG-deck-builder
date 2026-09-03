@@ -343,12 +343,17 @@ export function getDeckWithCards(deckId: number, userId?: number) {
   const deck = db.prepare(`SELECT * FROM decks ${whereClause}`).get(...queryParams);
   if (!deck) return null;
 
+  // collection has no user_id column (unscoped table) — owned_qty sums across foils.
   const cards = db
     .prepare(
       `SELECT dc.*, c.*,
-              dc.id as entry_id, dc.quantity, dc.board, dc.sort_order
+              dc.id as entry_id, dc.quantity, dc.board, dc.sort_order,
+              COALESCE(own.owned_qty, 0) as owned_qty
        FROM deck_cards dc
        JOIN cards c ON dc.card_id = c.id
+       LEFT JOIN (
+         SELECT card_id, SUM(quantity) as owned_qty FROM collection GROUP BY card_id
+       ) own ON own.card_id = dc.card_id
        WHERE dc.deck_id = ?
        ORDER BY dc.board, dc.sort_order, c.cmc, c.name`
     )
@@ -367,7 +372,7 @@ export function createDeck(name: string, format?: string, description?: string, 
 
 export function updateDeck(
   id: number,
-  data: { name?: string; format?: string; description?: string; cover_card_id?: string | null },
+  data: { name?: string; format?: string; description?: string; cover_card_id?: string | null; target_bracket?: number | null },
   userId?: number
 ) {
   const db = getDb();
@@ -377,6 +382,7 @@ export function updateDeck(
   if (data.format !== undefined) { sets.push('format = ?'); vals.push(data.format); }
   if (data.description !== undefined) { sets.push('description = ?'); vals.push(data.description); }
   if (data.cover_card_id !== undefined) { sets.push('cover_card_id = ?'); vals.push(data.cover_card_id); }
+  if (data.target_bracket !== undefined) { sets.push('target_bracket = ?'); vals.push(data.target_bracket); }
   sets.push("updated_at = datetime('now')");
   vals.push(id);
 

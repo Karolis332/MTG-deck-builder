@@ -18,7 +18,9 @@ async function reportOutcomesToCF(
   db: ReturnType<typeof getDb>,
   deckId: number,
   applied: ChangeRequest[],
-  candidatesShown?: string[]
+  candidatesShown?: string[],
+  impressionId?: string,
+  source?: string
 ): Promise<void> {
   try {
     const cmd = db.prepare(
@@ -46,6 +48,8 @@ async function reportOutcomesToCF(
           headers: buildCFHeaders(),
           body: JSON.stringify({
             event_type: ch.action === 'add' ? 'card_added' : 'card_removed',
+            impression_id: impressionId,
+            source,
             commander: cmd.name,
             color_identity: colorIdentity,
             deck_cards: deckCards,
@@ -66,8 +70,8 @@ async function reportOutcomesToCF(
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { deck_id, changes, candidatesShown } = body as {
-      deck_id: number; changes: ChangeRequest[]; candidatesShown?: string[];
+    const { deck_id, changes, candidatesShown, impression_id, source } = body as {
+      deck_id: number; changes: ChangeRequest[]; candidatesShown?: string[]; impression_id?: string; source?: string;
     };
 
     if (!deck_id || !changes?.length) {
@@ -234,7 +238,7 @@ export async function POST(request: NextRequest) {
 
     // Feed the bandit — the outcomes side of rec_impressions (was never wired; see
     // docs/RECOMMENDER_METHODS_AUDIT.md #8).
-    await reportOutcomesToCF(db, deck_id, filteredChanges, candidatesShown);
+    await reportOutcomesToCF(db, deck_id, filteredChanges, candidatesShown, impression_id, source);
 
     return NextResponse.json({
       ok: true,

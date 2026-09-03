@@ -101,6 +101,7 @@ export interface DbCard {
   updated_at: string;
   subtypes: string | null;
   arena_id: number | null;
+  game_changer?: number | null;
 }
 
 export interface Deck {
@@ -112,6 +113,8 @@ export interface Deck {
   cover_card_id: string | null;
   /** Which engine produced the deck: 'engine' | 'claude' | null (hand-built). */
   built_by: string | null;
+  /** Commander bracket (2-5) the user is building toward; null = unset (treated as 3). */
+  target_bracket?: number | null;
   created_at: string;
   updated_at: string;
 }
@@ -129,6 +132,8 @@ export interface DeckCardEntry {
   board: 'main' | 'sideboard' | 'commander' | 'companion';
   sort_order: number;
   card: DbCard;
+  /** Quantity owned in the collection table (unscoped — table has no user_id). */
+  owned_qty?: number;
 }
 
 export interface DeckStats {

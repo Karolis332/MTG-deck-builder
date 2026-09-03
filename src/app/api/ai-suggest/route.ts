@@ -1,15 +1,62 @@
+import { randomUUID } from 'node:crypto';
 import { NextRequest, NextResponse } from 'next/server';
+import { z } from 'zod';
 import { getDb, getDeckWithCards, getFormatStaples, logAISuggestion } from '@/lib/db';
 import { getRuleBasedSuggestions, getOllamaSuggestions } from '@/lib/ai-suggest';
 import { getSynergySuggestions, detectDeckThemes, SYNERGY_GROUPS } from '@/lib/deck-builder-ai';
 import { getCardGlobalScore } from '@/lib/global-learner';
 import { getOpenAISuggestions, resolveOpenAISuggestions } from '@/lib/openai-suggest';
-import { getCFRecommendations, resolveCFToDbCards } from '@/lib/cf-api-client';
+import { getCFRecommendations, resolveCFToDbCards, trackCFEvent } from '@/lib/cf-api-client';
 import { DEFAULT_LAND_COUNT, DEFAULT_DECK_SIZE, COMMANDER_FORMATS, getLegalityKey } from '@/lib/constants';
 import { validateAgainstTemplate } from '@/lib/deck-templates';
 import { analyzeCommander } from '@/lib/commander-synergy';
 import { computeCollectionCoverage } from '@/lib/collection-coverage';
 import type { DbCard } from '@/lib/types';
+
+const suggestBodySchema = z.object({
+  deck_id: z.coerce.number(),
+  collection_only: z.boolean().optional(),
+  // 'passive' = CF (then synergy/rules fallback) only — never calls an LLM.
+  // Used for the on-every-change consult loop where LLM cost/latency is unwanted.
+  mode: z.enum(['passive', 'full']).optional().default('full'),
+  limit: z.number().int().min(1).max(20).optional(),
+});
+
+/**
+ * Fire the `suggestions_shown` impression event and stamp the response with
+ * source/sources_tried/impression_id. Fire-and-forget — telemetry never
+ * blocks or fails the suggestion response.
+ */
+function finalizeSuggestResponse(
+  payload: Record<string, unknown>,
+  opts: {
+    source: string;
+    mode: string;
+    sourcesTried: string[];
+    impressionId: string;
+    commanderName: string;
+    deckColors: Set<string>;
+    deckCardNames: string[];
+    candidatesShown: string[];
+  }
+): NextResponse {
+  trackCFEvent({
+    event_type: 'suggestions_shown',
+    impression_id: opts.impressionId,
+    commander: opts.commanderName,
+    color_identity: Array.from(opts.deckColors).join(''),
+    deck_cards: opts.deckCardNames,
+    candidates_shown: opts.candidatesShown,
+    source: opts.source,
+    mode: opts.mode,
+  }).catch(() => {});
+  return NextResponse.json({
+    ...payload,
+    source: opts.source,
+    sources_tried: opts.sourcesTried,
+    impression_id: opts.impressionId,
+  });
+}
 
 interface ProposedChange {
   action: 'cut' | 'add';
@@ -74,8 +121,14 @@ function cardIsLegalInFormat(card: DbCard, format: string): boolean {
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
-    const { deck_id, collection_only } = body;
+    const rawBody = await request.json();
+    const parsed = suggestBodySchema.safeParse(rawBody);
+    if (!parsed.success) {
+      return NextResponse.json({ error: 'Invalid request body', details: parsed.error.flatten() }, { status: 400 });
+    }
+    const { deck_id, collection_only, mode, limit } = parsed.data;
+    const isPassiveMode = mode === 'passive';
+    const suggestionLimit = Math.min(limit ?? 15, 20);
 
     if (!deck_id) {
       return NextResponse.json({ error: 'deck_id is required' }, { status: 400 });
@@ -92,11 +145,16 @@ export async function POST(request: NextRequest) {
     const isCommanderLike = COMMANDER_FORMATS.includes(format as typeof COMMANDER_FORMATS[number]);
     // Color identity restriction only applies to commander/brawl formats
     const deckColors = isCommanderLike ? getDeckColorIdentity(deck.cards) : new Set<string>();
+    const commanderName = deck.cards.find((c) => c.board === 'commander')?.name || '';
+    const deckCardNamesForTracking = deck.cards.filter((c) => c.board === 'main').map((c) => c.name);
+    const impressionId = randomUUID();
+    const sourcesTried: string[] = [];
 
     const t0 = Date.now();
 
     // Try CF API first for Commander/Brawl formats (primary recommendation source)
     if (isCommanderLike) {
+      sourcesTried.push('collaborative-filtering');
       try {
         const commanderCard = deck.cards.find((c) => c.board === 'commander');
         const commanderName = commanderCard?.name || '';
@@ -127,7 +185,7 @@ export async function POST(request: NextRequest) {
           for (const rec of cfRecs) {
             if (rec.cf_score > 0.3) cfApprovedNames.add(rec.card_name);
           }
-          const cfSuggestions = allCfSuggestions.slice(0, 15);
+          const cfSuggestions = allCfSuggestions.slice(0, suggestionLimit);
             if (cfSuggestions.length > 0) {
               const proposedChanges = buildProposedChanges(deck_id, deck, format, cfSuggestions, cfApprovedNames);
 
@@ -143,11 +201,14 @@ export async function POST(request: NextRequest) {
                 cardsSuggested: cfSuggestions.map((s) => s.card.name),
                 latencyMs: Date.now() - t0,
               });
-              return NextResponse.json({
+              return finalizeSuggestResponse({
                 suggestions: cfSuggestions,
                 proposedChanges,
-                source: 'collaborative-filtering',
                 ...(coverage && { coverage, upgrades: coverage.upgrades }),
+              }, {
+                source: 'collaborative-filtering', mode, sourcesTried, impressionId,
+                commanderName, deckColors, deckCardNames: deckCardNamesForTracking,
+                candidatesShown: cfSuggestions.map((s) => s.card.name),
               });
             }
           }
@@ -157,7 +218,45 @@ export async function POST(request: NextRequest) {
       }
     }
 
+    // Passive mode never calls an LLM (cost/latency) — CF miss falls straight
+    // through to the synergy/rules engine below.
+    if (isPassiveMode) {
+      const synergySuggestions = getSynergySuggestions(deck.cards, format, deck_id, collectionOnly);
+      const ruleSuggestions = getRuleBasedSuggestions(deck.cards, format, collectionOnly);
+      sourcesTried.push('synergy', 'rules');
+      const seenNames = new Set(synergySuggestions.map((s) => s.card.name));
+      const allSuggestions = [
+        ...synergySuggestions,
+        ...ruleSuggestions.filter((s) => {
+          if (seenNames.has(s.card.name)) return false;
+          seenNames.add(s.card.name);
+          return true;
+        }),
+      ]
+        .filter((s) => !isCommanderLike || cardFitsColorIdentity(s.card, deckColors))
+        .sort((a, b) => b.score - a.score);
+      const engineApprovedNames = new Set(allSuggestions.map((s) => s.card.name));
+      const combined = allSuggestions.slice(0, suggestionLimit);
+      const proposedChanges = buildProposedChanges(deck_id, deck, format, combined, engineApprovedNames);
+      const finalSource = synergySuggestions.length > 0 ? 'synergy' : 'rules';
+      logAISuggestion({
+        deckId: deck_id, source: finalSource, format,
+        suggestionCount: combined.length,
+        cardsSuggested: combined.map((s) => s.card.name),
+        latencyMs: Date.now() - t0,
+      });
+      return finalizeSuggestResponse({
+        suggestions: combined,
+        proposedChanges,
+      }, {
+        source: finalSource, mode, sourcesTried, impressionId,
+        commanderName, deckColors, deckCardNames: deckCardNamesForTracking,
+        candidatesShown: combined.map((s) => s.card.name),
+      });
+    }
+
     // Try Ollama first
+    sourcesTried.push('ollama');
     const ollamaSuggestions = await getOllamaSuggestions(deck.cards, format);
     if (ollamaSuggestions && ollamaSuggestions.length > 0) {
       const filtered = isCommanderLike
@@ -171,15 +270,19 @@ export async function POST(request: NextRequest) {
           cardsSuggested: filtered.map((s) => s.card.name),
           latencyMs: Date.now() - t0,
         });
-        return NextResponse.json({
+        return finalizeSuggestResponse({
           suggestions: filtered,
           proposedChanges,
-          source: 'ollama',
+        }, {
+          source: 'ollama', mode, sourcesTried, impressionId,
+          commanderName, deckColors, deckCardNames: deckCardNamesForTracking,
+          candidatesShown: filtered.map((s) => s.card.name),
         });
       }
     }
 
     // Try OpenAI GPT if API key is configured
+    sourcesTried.push('openai');
     const existingIds = new Set(deck.cards.map((c) => c.card_id || c.id));
     let collectionCardNames: string[] | undefined;
     if (collectionOnly) {
@@ -239,13 +342,17 @@ export async function POST(request: NextRequest) {
           cardsSuggested: adds.map((s) => s.card.name),
           latencyMs: Date.now() - t0,
         });
-        return NextResponse.json({
+        return finalizeSuggestResponse({
           suggestions: adds,
           proposedChanges,
-          source: 'openai',
+        }, {
+          source: 'openai', mode, sourcesTried, impressionId,
+          commanderName, deckColors, deckCardNames: deckCardNamesForTracking,
+          candidatesShown: adds.map((s) => s.card.name),
         });
       }
     }
+    sourcesTried.push('synergy', 'rules');
 
     // Use synergy-aware suggestions (better than basic rules)
     const synergySuggestions = getSynergySuggestions(deck.cards, format, deck_id, collectionOnly);
@@ -269,7 +376,7 @@ export async function POST(request: NextRequest) {
     // to prevent cutting cards the engine considers good for this deck
     const engineApprovedNames = new Set(allSuggestions.map((s) => s.card.name));
 
-    const combined = allSuggestions.slice(0, 15);
+    const combined = allSuggestions.slice(0, suggestionLimit);
 
     // ── Build proposed changes (cuts + adds) based on match data ──────
     const proposedChanges = buildProposedChanges(deck_id, deck, format, combined, engineApprovedNames);
@@ -371,12 +478,15 @@ export async function POST(request: NextRequest) {
       cardsSuggested: combined.map((s) => s.card.name),
       latencyMs: Date.now() - t0,
     });
-    return NextResponse.json({
+    return finalizeSuggestResponse({
       suggestions: combined,
       proposedChanges,
-      source: finalSource,
       templateValidation,
       ...(coverageResult && { coverage: coverageResult, upgrades: coverageResult.upgrades }),
+    }, {
+      source: finalSource, mode, sourcesTried, impressionId,
+      commanderName, deckColors, deckCardNames: deckCardNamesForTracking,
+      candidatesShown: combined.map((s) => s.card.name),
     });
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Suggestion generation failed';
