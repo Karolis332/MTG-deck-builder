@@ -1022,7 +1022,13 @@ export default function DeckEditorPage() {
                         <img
                           src={s.card.image_uri_small}
                           alt={s.card.name}
-                          className="mb-1 h-20 w-full rounded-lg object-cover"
+                          title="Click for card details"
+                          className="mb-1 h-20 w-full cursor-zoom-in rounded-lg object-cover"
+                          onClick={(e) => {
+                            // Image opens the card popout; the surrounding button adds/swaps.
+                            e.stopPropagation();
+                            setSelectedCard(s.card);
+                          }}
                         />
                       )}
                       <div className="truncate text-[10px] font-medium">
@@ -1104,7 +1110,22 @@ export default function DeckEditorPage() {
                       )}>
                         {change.action === 'cut' ? 'CUT' : 'ADD'}
                       </span>
-                      <span className="flex-1 truncate text-xs">{change.cardName}</span>
+                      <button
+                        type="button"
+                        title="Card details"
+                        className="flex-1 truncate text-left text-xs hover:text-primary hover:underline"
+                        onClick={(e) => {
+                          // Open the card popout without toggling the row's checkbox.
+                          e.preventDefault();
+                          e.stopPropagation();
+                          const card =
+                            deck.cards.find((c) => c.card_id === change.cardId) ??
+                            suggestions.find((s) => s.card.id === change.cardId)?.card;
+                          if (card) setSelectedCard(card);
+                        }}
+                      >
+                        {change.cardName}
+                      </button>
                       {change.winRate !== undefined && (
                         <span className={cn(
                           'text-[10px]',
