@@ -548,7 +548,7 @@ function buildProposedChanges(
     if (!entry.legalities) continue;
     try {
       const legalities = JSON.parse(entry.legalities);
-      const status = legalities[format];
+      const status = legalities[getLegalityKey(format)];
       if (status && status !== 'legal' && status !== 'restricted') {
         if (cutSeenNames.has(entry.name)) continue;
         cutSeenNames.add(entry.name);

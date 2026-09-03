@@ -6,7 +6,7 @@
  */
 
 import { getDb } from '@/lib/db';
-import { COMMANDER_FORMATS } from '@/lib/constants';
+import { COMMANDER_FORMATS, getLegalityKey } from '@/lib/constants';
 import type { DbCard } from '@/lib/types';
 import { getTemplateSummary, isImpulseDraw } from '@/lib/deck-templates';
 import { analyzeCommander, getCommanderStrategyPrompt } from '@/lib/commander-synergy';
@@ -160,7 +160,7 @@ export async function getClaudeSuggestions(
     if (!card.legalities) continue;
     try {
       const legalities = JSON.parse(card.legalities);
-      const status = legalities[format];
+      const status = legalities[getLegalityKey(format)];
       if (status && status !== 'legal' && status !== 'restricted') {
         illegalCards.push(`${card.name} (${status})`);
       }

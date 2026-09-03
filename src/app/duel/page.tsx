@@ -40,7 +40,7 @@ interface DeckAnalysisData {
   topSuggestions: Array<{ name: string; score: number; reason: string }>;
 }
 
-const ANALYSIS_FORMATS = ['brawl', 'standardbrawl', 'commander', '1v1'];
+const ANALYSIS_FORMATS = ['brawl', 'standardbrawl', 'competitivebrawl', 'commander', '1v1'];
 
 export default function DuelPage() {
   const router = useRouter();

@@ -34,6 +34,7 @@ const FORMAT_LABELS: Record<string, string> = {
   commander: 'EDH',
   standardbrawl: 'SBRL',
   brawl: 'BRL',
+  competitivebrawl: 'CBRL',
   pauper: 'PAU',
   historic: 'HIS',
   alchemy: 'ALC',
@@ -43,7 +44,7 @@ const FORMAT_LABELS: Record<string, string> = {
 function inferFormatFilter(arenaFormat: string | null): string[] {
   if (!arenaFormat) return [];
   const f = arenaFormat.toLowerCase();
-  if (f.includes('brawl') || f.includes('commander')) return ['commander', 'brawl', 'standardbrawl'];
+  if (f.includes('brawl') || f.includes('commander')) return ['commander', 'brawl', 'standardbrawl', 'competitivebrawl'];
   if (f.includes('standard')) return ['standard', 'standardbrawl'];
   if (f.includes('historic')) return ['historic', 'brawl'];
   if (f.includes('alchemy')) return ['alchemy'];

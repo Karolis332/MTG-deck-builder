@@ -49,7 +49,7 @@ export default function DeckBuilderPage() {
   const [deleteConfirmId, setDeleteConfirmId] = useState<number | null>(null);
   const [deleteError, setDeleteError] = useState('');
 
-  const isAiCommanderFormat = ['commander', 'brawl', 'standardbrawl'].includes(aiFormat);
+  const isAiCommanderFormat = ['commander', 'brawl', 'standardbrawl', 'competitivebrawl'].includes(aiFormat);
 
   useEffect(() => {
     fetch('/api/decks')

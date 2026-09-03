@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { getDb, getDataDir, getCedhStaples, getMetaCardStatsMap, getMetaRankedCardNames, getFormatStaples, getCommunityRecommendations, getCommanderCardStats } from './db';
 import type { DbCard, AISuggestion } from './types';
-import { DEFAULT_LAND_COUNT, DEFAULT_DECK_SIZE, getLegalityKey, COMMANDER_FORMATS } from './constants';
+import { DEFAULT_LAND_COUNT, DEFAULT_DECK_SIZE, getLegalityKey, COMMANDER_FORMATS, isCompetitiveBrawlBannedCommander } from './constants';
 import { getCardGlobalScore, getMetaAdjustedScore } from './global-learner';
 import { getEdhrecRecommendations, getEdhrecThemeCards } from './edhrec';
 import type { EdhrecRecommendation } from './edhrec';
@@ -461,6 +461,13 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
           colors = JSON.parse(cmdCard.color_identity);
         } catch {}
       }
+      // Competitive Brawl has its own 10-commander ban list (magic.wizards.com,
+      // "Introducing Ranked Brawl", 2026-06-23) that applies regardless of
+      // Historic Brawl legality — check it first, name and A- form both banned.
+      if (format === 'competitivebrawl' && isCompetitiveBrawlBannedCommander(cmdCard.name)) {
+        throw new Error(`${cmdCard.name} is banned as a commander in Competitive Brawl`);
+      }
+
       // Refuse to build around a commander that isn't legal in the target
       // format (e.g. Warhammer 40K commanders don't exist on Arena at all).
       // Arena-rebalanced cards: when the paper card is not_legal but its
@@ -468,18 +475,35 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
       // rebalance), Arena plays the rebalanced version under the same name —
       // swap to the A- row so oracle analysis matches what's actually played.
       if (format && format !== '1v1') {
+        // Competitive Brawl has no Scryfall legality key of its own; a
+        // commander is Arena-available if it's legal/restricted in either
+        // Historic Brawl or Historic (the article calls the 99 "nearly
+        // unrestricted" with no published banlist — conservative fallback).
+        const legalityKeys = format === 'competitivebrawl' ? ['brawl', 'historic'] : [getLegalityKey(format)];
         const readStatus = (card: DbCard): string | undefined => {
           try {
-            return card.legalities
-              ? (JSON.parse(card.legalities) as Record<string, string>)[getLegalityKey(format)]
-              : undefined;
+            if (!card.legalities) return undefined;
+            const parsed = JSON.parse(card.legalities) as Record<string, string>;
+            for (const key of legalityKeys) {
+              const s = parsed[key];
+              if (s === 'legal' || s === 'restricted') return s;
+            }
+            return parsed[legalityKeys[0]];
           } catch { return undefined; }
         };
         let status = readStatus(cmdCard);
         if (status !== 'legal' && status !== 'restricted') {
+          // Try the other Arena-rebalance variant: add "A-" if the resolved
+          // name is paper, strip it if the resolved name is already the
+          // rebalanced version (e.g. a saved deck's commander is stored as
+          // "A-Vivi Ornitier" but only the paper "Vivi Ornitier" is legal
+          // in this format).
+          const otherVariant = cmdCard.name.startsWith('A-')
+            ? cmdCard.name.slice(2)
+            : `A-${cmdCard.name}`;
           const rebalanced = db.prepare(
             'SELECT * FROM cards WHERE name = ? COLLATE NOCASE LIMIT 1'
-          ).get(`A-${commanderName}`) as DbCard | undefined;
+          ).get(otherVariant) as DbCard | undefined;
           const rebalancedStatus = rebalanced ? readStatus(rebalanced) : undefined;
           if (rebalanced && (rebalancedStatus === 'legal' || rebalancedStatus === 'restricted')) {
             commanderCard = rebalanced;
@@ -522,7 +546,7 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
 
   const targetSize = DEFAULT_DECK_SIZE[format] || DEFAULT_DECK_SIZE.default;
   const targetLands = DEFAULT_LAND_COUNT[format] || DEFAULT_LAND_COUNT.default;
-  const isCommander = format === 'commander' || format === 'brawl' || format === 'standardbrawl';
+  const isCommander = format === 'commander' || format === 'brawl' || format === 'standardbrawl' || format === 'competitivebrawl';
   const nonLandTarget = targetSize - targetLands
     - (isCommander && commanderName ? 1 : 0)
     - (isCommander && partnerCard ? 1 : 0);

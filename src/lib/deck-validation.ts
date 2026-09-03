@@ -1,5 +1,5 @@
 import type { DbCard } from '@/lib/types';
-import { DEFAULT_DECK_SIZE, COMMANDER_FORMATS, getLegalityKey } from '@/lib/constants';
+import { DEFAULT_DECK_SIZE, COMMANDER_FORMATS, getLegalityKey, isCompetitiveBrawlBannedCommander } from '@/lib/constants';
 
 export interface ValidationIssue {
   level: 'error' | 'warning';
@@ -52,7 +52,11 @@ export function validateDeck(
 
   const expectedSize = DEFAULT_DECK_SIZE[format || 'default'] || 60;
   const isCmd = isCommanderFormat(format);
-  const formatLabel = format === 'standardbrawl' ? 'Standard Brawl' : format === 'brawl' ? 'Brawl' : 'Commander';
+  const formatLabel =
+    format === 'standardbrawl' ? 'Standard Brawl'
+      : format === 'competitivebrawl' ? 'Competitive Brawl'
+      : format === 'brawl' ? 'Brawl'
+      : 'Commander';
 
   // Deck size check
   if (isCmd) {
@@ -87,6 +91,21 @@ export function validateDeck(
         level: 'warning',
         message: 'No commander designated',
       });
+    }
+
+    // Competitive Brawl commander ban list (magic.wizards.com "Introducing
+    // Ranked Brawl", 2026-06-23) — 10 commanders banned outright.
+    if (format === 'competitivebrawl') {
+      const bannedCommanders = commanders
+        .map((c) => c.card.name)
+        .filter(isCompetitiveBrawlBannedCommander);
+      if (bannedCommanders.length > 0) {
+        issues.push({
+          level: 'error',
+          message: `Banned as commander in Competitive Brawl: ${bannedCommanders.join(', ')}`,
+          cardNames: bannedCommanders,
+        });
+      }
     }
   }
 

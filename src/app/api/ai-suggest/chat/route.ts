@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getDb, getDeckWithCards, getFormatStaples, getMetaCardStatsMap, getCommunityRecommendations, logAISuggestion } from '@/lib/db';
-import { DEFAULT_LAND_COUNT, DEFAULT_DECK_SIZE, COMMANDER_FORMATS } from '@/lib/constants';
+import { DEFAULT_LAND_COUNT, DEFAULT_DECK_SIZE, COMMANDER_FORMATS, getLegalityKey } from '@/lib/constants';
 import { fitsColorIdentity, isLegalInFormat, extractRejectedCards, buildRejectionReminder, extractAppliedActions, buildAntiOscillationRules } from '@/lib/ai-chat-helpers';
 import { validateSwapClaims } from '@/lib/card-claim-validator';
 import { queryKnowledge, formatKnowledgeForPrompt } from '@/lib/knowledge-retrieval';
@@ -531,7 +531,7 @@ export async function POST(request: NextRequest) {
       if (!card.legalities) continue;
       try {
         const legalities = JSON.parse(card.legalities);
-        const status = legalities[format];
+        const status = legalities[getLegalityKey(format)];
         if (status && status !== 'legal' && status !== 'restricted') {
           illegalCards.push(`${card.name} (${status})`);
         }

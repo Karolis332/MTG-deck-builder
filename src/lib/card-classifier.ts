@@ -129,6 +129,7 @@ const GENERIC_60_RATIOS: FormatRatios = {
 export function getFormatRatios(format: string): FormatRatios {
   switch (format) {
     case 'brawl':
+    case 'competitivebrawl':
       return BRAWL_100_RATIOS;
     case 'standardbrawl':
       return BRAWL_60_RATIOS;

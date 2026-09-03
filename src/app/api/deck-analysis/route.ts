@@ -60,7 +60,7 @@ export async function GET(request: NextRequest) {
   const cardNames = allCards.map((c) => c.name);
 
   // Fetch meta stats for all cards
-  const metaFormat = format === 'brawl' || format === 'standardbrawl' ? 'commander' : format;
+  const metaFormat = format === 'brawl' || format === 'standardbrawl' || format === 'competitivebrawl' ? 'commander' : format;
   const metaStats = getMetaCardStatsMap(cardNames, metaFormat);
 
   // Fetch ML predictions if available

@@ -6,7 +6,7 @@
  */
 
 import { getDb, getCommunityRecommendations } from '@/lib/db';
-import { COMMANDER_FORMATS } from '@/lib/constants';
+import { COMMANDER_FORMATS, getLegalityKey } from '@/lib/constants';
 import type { DbCard } from '@/lib/types';
 import type { AISuggestion } from '@/lib/types';
 
@@ -142,7 +142,7 @@ export async function getOpenAISuggestions(
     if (!card.legalities) continue;
     try {
       const legalities = JSON.parse(card.legalities);
-      const status = legalities[format];
+      const status = legalities[getLegalityKey(format)];
       if (status && status !== 'legal' && status !== 'restricted') {
         illegalCards.push(`${card.name} (${status})`);
       }
@@ -342,7 +342,7 @@ export function resolveOpenAISuggestions(
     if (format && card.legalities) {
       try {
         const legalities = JSON.parse(card.legalities);
-        const status = legalities[format];
+        const status = legalities[getLegalityKey(format)];
         if (status && status !== 'legal' && status !== 'restricted') continue;
       } catch {}
     }

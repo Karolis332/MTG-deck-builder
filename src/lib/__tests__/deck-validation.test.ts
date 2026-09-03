@@ -422,4 +422,67 @@ describe('validateDeck', () => {
       expect(findIssue(issues, 'minimum is 60')).toBeDefined();
     });
   });
+
+  describe('Competitive Brawl', () => {
+    it('validates like brawl: 100 cards, singleton, color identity', () => {
+      const cards = makeDeckEntries(99).concat([
+        {
+          card_id: 'cmdr',
+          quantity: 1,
+          board: 'commander',
+          card: makeCard({ id: 'cmdr', name: 'Some Legal Commander', legalities: '{"brawl":"legal"}' }),
+        },
+      ]);
+      const issues = validateDeck(cards, 'competitivebrawl');
+      expect(findIssue(issues, 'require exactly 100')).toBeUndefined();
+      expect(findIssue(issues, 'Banned as commander')).toBeUndefined();
+    });
+
+    it('rejects a banned commander with a clear message', () => {
+      const cards = makeDeckEntries(99).concat([
+        {
+          card_id: 'cmdr',
+          quantity: 1,
+          board: 'commander',
+          card: makeCard({ id: 'cmdr', name: 'Ragavan, Nimble Pilferer', legalities: '{"brawl":"legal"}' }),
+        },
+      ]);
+      const issues = validateDeck(cards, 'competitivebrawl');
+      const issue = findIssue(issues, 'Banned as commander in Competitive Brawl');
+      expect(issue).toBeDefined();
+      expect(issue?.message).toContain('Ragavan, Nimble Pilferer');
+    });
+
+    it('accepts Vivi Ornitier as commander via its Arena-rebalanced A- form', () => {
+      // Vivi Ornitier's paper card is brawl: not_legal, but the Alchemy "A-"
+      // rebalanced version (which Arena actually plays) is brawl: legal.
+      // deck-validation.ts checks the commander's own legalities row as
+      // stored — this test documents that an A- row passes the ban-list and
+      // legality checks the same way the plain-name row would.
+      const cards = makeDeckEntries(99).concat([
+        {
+          card_id: 'cmdr',
+          quantity: 1,
+          board: 'commander',
+          card: makeCard({ id: 'cmdr', name: 'A-Vivi Ornitier', legalities: '{"brawl":"legal"}' }),
+        },
+      ]);
+      const issues = validateDeck(cards, 'competitivebrawl');
+      expect(findIssue(issues, 'Banned as commander')).toBeUndefined();
+      expect(findIssue(issues, 'Not legal in competitivebrawl')).toBeUndefined();
+    });
+
+    it('does not flag the ban list for regular brawl', () => {
+      const cards = makeDeckEntries(99).concat([
+        {
+          card_id: 'cmdr',
+          quantity: 1,
+          board: 'commander',
+          card: makeCard({ id: 'cmdr', name: 'Ragavan, Nimble Pilferer', legalities: '{"brawl":"legal"}' }),
+        },
+      ]);
+      const issues = validateDeck(cards, 'brawl');
+      expect(findIssue(issues, 'Banned as commander')).toBeUndefined();
+    });
+  });
 });

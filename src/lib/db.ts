@@ -1115,6 +1115,7 @@ export function getCedhStaples(
 // Brawl is a subset of Commander — use commander data as fallback
 const FORMAT_FALLBACK: Record<string, string[]> = {
   brawl: ['brawl', 'commander'],
+  competitivebrawl: ['competitivebrawl', 'brawl', 'commander'],
   standardbrawl: ['standardbrawl', 'standard', 'brawl', 'commander'],
   historic_brawl: ['historic_brawl', 'brawl', 'commander'],
   historicbrawl: ['historicbrawl', 'historic_brawl', 'brawl', 'commander'],

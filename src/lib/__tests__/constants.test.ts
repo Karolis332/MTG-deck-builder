@@ -9,6 +9,9 @@ import {
   MANA_COLOR_NAMES,
   MANA_COLOR_HEX,
   FORMAT_LABELS,
+  COMMANDER_FORMATS,
+  getLegalityKey,
+  COMPETITIVE_BRAWL_COMMANDER_BANS,
 } from '../constants';
 
 describe('MANA_COLORS', () => {
@@ -51,6 +54,33 @@ describe('DEFAULT_DECK_SIZE', () => {
 
   it('has a default fallback', () => {
     expect(DEFAULT_DECK_SIZE['default']).toBe(60);
+  });
+});
+
+describe('Competitive Brawl', () => {
+  it('is a commander format with a 100-card deck size and 38 default lands', () => {
+    expect(FORMATS).toContain('competitivebrawl');
+    expect(COMMANDER_FORMATS).toContain('competitivebrawl');
+    expect(DEFAULT_DECK_SIZE['competitivebrawl']).toBe(100);
+    expect(DEFAULT_LAND_COUNT['competitivebrawl']).toBe(38);
+    expect(FORMAT_LABELS['competitivebrawl']).toBe('Competitive Brawl');
+  });
+
+  it('maps to the Historic Brawl Scryfall legality key', () => {
+    expect(getLegalityKey('competitivebrawl')).toBe('brawl');
+  });
+
+  it('does not remap other formats', () => {
+    expect(getLegalityKey('brawl')).toBe('brawl');
+    expect(getLegalityKey('standardbrawl')).toBe('standardbrawl');
+    expect(getLegalityKey('commander')).toBe('commander');
+  });
+
+  it('has exactly 10 banned commanders', () => {
+    expect(COMPETITIVE_BRAWL_COMMANDER_BANS).toHaveLength(10);
+    expect(COMPETITIVE_BRAWL_COMMANDER_BANS).toContain('Ragavan, Nimble Pilferer');
+    expect(COMPETITIVE_BRAWL_COMMANDER_BANS).toContain('Oko, Thief of Crowns');
+    expect(COMPETITIVE_BRAWL_COMMANDER_BANS).toContain("Tajic, Legion's Valor");
   });
 });
 
