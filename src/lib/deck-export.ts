@@ -13,6 +13,12 @@ export function exportToArena(
 
   const lines: string[] = [];
 
+  // Arena's import format reads an "About / Name" header; without it every
+  // clipboard import lands as "Imported Deck (N)".
+  if (deckName.trim() && cards.length > 0) {
+    lines.push('About', `Name ${deckName.trim()}`, '');
+  }
+
   if (sections.commander?.length) {
     lines.push('Commander');
     for (const c of sections.commander) {

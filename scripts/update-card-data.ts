@@ -13,6 +13,7 @@ import Database from 'better-sqlite3';
 import fs from 'fs';
 import path from 'path';
 import os from 'os';
+import { iterateBulkCards } from '../src/lib/scryfall-bulk';
 
 const DRY_RUN = process.argv.includes('--dry-run');
 
@@ -66,14 +67,21 @@ async function downloadBulk(): Promise<ScryfallBulkCard[]> {
     headers: { 'User-Agent': 'BlackGrimoire/1.0' },
   });
   if (!manifestRes.ok) throw new Error(`Manifest fetch failed: ${manifestRes.status}`);
-  const manifest = await manifestRes.json() as { download_uri: string; updated_at: string; size: number };
-  console.log(`      Bulk updated_at=${manifest.updated_at} size=${(manifest.size / 1e6).toFixed(0)}MB`);
+  // Scryfall replaced `download_uri` (JSON array) with `jsonl_download_uri` (gzip JSONL)
+  // in 2026 — same change that broke /api/cards/seed. Shared streaming reader.
+  const manifest = await manifestRes.json() as {
+    download_uri?: string; jsonl_download_uri?: string; updated_at: string; size?: number; compressed_size?: number;
+  };
+  const bulkUrl = manifest.jsonl_download_uri ?? manifest.download_uri;
+  if (!bulkUrl) throw new Error('Scryfall bulk-data manifest has no download URI');
+  const mb = ((manifest.compressed_size ?? manifest.size ?? 0) / 1e6).toFixed(0);
+  console.log(`      Bulk updated_at=${manifest.updated_at} size=${mb}MB`);
 
   console.log('[2/4] Downloading oracle-cards bulk...');
-  const bulkRes = await fetch(manifest.download_uri, { headers: { 'User-Agent': 'BlackGrimoire/1.0' } });
+  const bulkRes = await fetch(bulkUrl, { headers: { 'User-Agent': 'BlackGrimoire/1.0' } });
   if (!bulkRes.ok) throw new Error(`Bulk download failed: ${bulkRes.status}`);
-  const text = await bulkRes.text();
-  const cards = JSON.parse(text) as ScryfallBulkCard[];
+  const cards: ScryfallBulkCard[] = [];
+  for await (const card of iterateBulkCards(bulkRes, bulkUrl)) cards.push(card as unknown as ScryfallBulkCard);
   console.log(`      Parsed ${cards.length} oracle cards`);
   return cards;
 }

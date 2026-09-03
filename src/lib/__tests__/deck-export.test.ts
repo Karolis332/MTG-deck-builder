@@ -65,7 +65,8 @@ describe('exportToArena', () => {
       makeEntry({ card: makeCard({ name: 'Plains', set_code: 'mh3', collector_number: '300' }) }),
     ];
     const result = exportToArena('Commander Deck', cards);
-    expect(result.startsWith('Commander')).toBe(true);
+    // Arena import header carries the deck name; the Commander section follows it
+    expect(result.startsWith('About\nName Commander Deck\n\nCommander\n')).toBe(true);
     expect(result).toContain('1 Atraxa (CM2) 10');
   });
 
