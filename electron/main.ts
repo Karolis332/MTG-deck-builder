@@ -631,6 +631,12 @@ app.whenReady().then(async () => {
 
     // Seed Arena grpId cache + check for CDN updates (non-blocking)
     setTimeout(async () => {
+      // Idempotent: consumes any leftover pendingAccount/seedOnBoot from a
+      // profile whose first boot never ran (pre-2026-09-02 builds), otherwise no-op.
+      setFirstBootLogger({ log: mainTrace, error: (m) => { mainTrace(m); logCrash('first-boot', m); } });
+      try { await runFirstBootActions(); } catch (err) {
+        mainTrace(`[FirstBoot] Error: ${err instanceof Error ? err.stack : String(err)}`);
+      }
       try { await seedArenaCardCache(); } catch (err) {
         console.error('[ArenaCardCache] Seed error:', err);
       }
