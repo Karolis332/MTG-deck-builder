@@ -17,6 +17,7 @@ import { computeSynergyGraph, type CardLike } from '../src/lib/synergy-graph';
 import { deriveWinPlan } from '../src/lib/win-conditions';
 import { computeCurveScore } from '../src/lib/curve-score';
 import type { Archetype } from '../src/lib/deck-templates';
+import { classifyBracket, type BracketResult, type BracketCard } from '../src/lib/bracket';
 
 const OUT_DIR = path.join(process.cwd(), 'decks', 'test-builds');
 
@@ -26,13 +27,16 @@ interface Scenario {
   /** secondary partner commander, if testing a duo */
   partner?: string;
   note?: string;
+  /** Expected WotC Commander Bracket (1-5) for this build. Observational —
+   * not gated by deck-fitness.mjs. Default 3 when unset. */
+  targetBracket?: number;
 }
 
 const SCENARIOS: Scenario[] = [
   { slug: 'vivi-ornitier', commander: 'Vivi Ornitier', note: 'X-spell / noncombat-damage spellslinger (UR). Arena: banned in Brawl per Scryfall.' },
-  { slug: 'ramos-dragon-engine', commander: 'Ramos, Dragon Engine', note: '5-color, +1/+1 counters per color of mana spent.' },
+  { slug: 'ramos-dragon-engine', commander: 'Ramos, Dragon Engine', note: '5-color, +1/+1 counters per color of mana spent.', targetBracket: 3 /* operator to confirm */ },
   { slug: 'magus-lucea-kane', commander: 'Magus Lucea Kane', note: 'Temur X-spells tribal copy (40K, not on Arena).' },
-  { slug: 'thrasios-tymna', commander: 'Thrasios, Triton Hero', partner: 'Tymna the Weaver', note: 'Partner duo GWUB. Engine currently single-commander only.' },
+  { slug: 'thrasios-tymna', commander: 'Thrasios, Triton Hero', partner: 'Tymna the Weaver', note: 'Partner duo GWUB. Engine currently single-commander only.', targetBracket: 5 },
   { slug: 'mono-w-heliod', commander: 'Heliod, Sun-Crowned', note: 'Mono-white lifegain.' },
   { slug: 'mono-u-orvar', commander: 'Orvar, the All-Form', note: 'Mono-blue clones/bounce.' },
   { slug: 'mono-b-sheoldred', commander: 'Sheoldred, the Apocalypse', note: 'Mono-black draw-punisher.' },
@@ -103,6 +107,10 @@ interface BuildOut {
   iss?: number;
   curveScore?: number;
   winRoute?: string;
+  /** WotC Commander Bracket classifier (src/lib/bracket.ts) — OBSERVATIONAL
+   * ONLY, not gated by deck-fitness.mjs. */
+  bracket?: BracketResult;
+  targetBracket?: number;
 }
 
 // Cards a multicolor-matters deck (Ramos) should NOT run — counters are a mana
@@ -319,6 +327,26 @@ async function buildOne(scenario: Scenario, format: string): Promise<BuildOut> {
       curveScore = computeCurveScore(archetype, commanderFullRow.cmc ?? 0, nonLandCopies).score;
     }
 
+    // ── Bracket classifier — OBSERVATIONAL ONLY (src/lib/bracket.ts).
+    // game_changer isn't on the DbCard type; look it up per name (one
+    // prepared statement, reused across rows via .get()).
+    const gcStmt = getDb().prepare('SELECT game_changer FROM cards WHERE name = ? COLLATE NOCASE LIMIT 1');
+    const bracketCards: BracketCard[] = result.cards
+      .filter((e) => e.board === 'main')
+      .map((e) => {
+        const gcRow = gcStmt.get(e.card.name) as { game_changer?: number } | undefined;
+        return {
+          name: e.card.name,
+          oracle_text: e.card.oracle_text,
+          type_line: e.card.type_line,
+          cmc: e.card.cmc ?? 0,
+          game_changer: gcRow?.game_changer ?? 0,
+        };
+      });
+    const bracket = classifyBracket(bracketCards, {
+      commanderNames: [scenario.commander, scenario.partner].filter(Boolean) as string[],
+    });
+
     return {
       ...base,
       ok: true,
@@ -342,6 +370,8 @@ async function buildOne(scenario: Scenario, format: string): Promise<BuildOut> {
       iss,
       curveScore,
       winRoute,
+      bracket,
+      targetBracket: scenario.targetBracket ?? 3,
     };
   } catch (err) {
     base.elapsedMs = Date.now() - started;
@@ -417,7 +447,7 @@ async function main(): Promise<void> {
       const out = await buildOne(scenario, format);
       results.push(out);
       if (out.ok) {
-        console.log(`OK ${out.totalCards} cards, ${out.landCount} lands, avgCMC ${out.avgCmcNonLand}, gold ${out.goldSpellCount}, counters ${out.counterMattersCount}${out.referenceOverlapPct !== undefined ? `, ref-overlap ${out.referenceOverlapPct}%` : ''}, iss ${out.iss ?? '-'}, curve ${out.curveScore ?? '-'}, winRoute ${out.winRoute ?? '-'}, ${out.elapsedMs}ms${out.illegalCardsForFormat?.length ? ` [${out.illegalCardsForFormat.length} ILLEGAL]` : ''}`);
+        console.log(`OK ${out.totalCards} cards, ${out.landCount} lands, avgCMC ${out.avgCmcNonLand}, gold ${out.goldSpellCount}, counters ${out.counterMattersCount}${out.referenceOverlapPct !== undefined ? `, ref-overlap ${out.referenceOverlapPct}%` : ''}, iss ${out.iss ?? '-'}, curve ${out.curveScore ?? '-'}, winRoute ${out.winRoute ?? '-'}, bracket ${out.bracket?.bracket ?? '-'}/target ${out.targetBracket ?? '-'}, ${out.elapsedMs}ms${out.illegalCardsForFormat?.length ? ` [${out.illegalCardsForFormat.length} ILLEGAL]` : ''}`);
         writeDecklist(out, scenario);
       } else {
         console.log(`FAILED: ${out.error}`);
