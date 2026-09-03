@@ -13,6 +13,8 @@ import {
   CATEGORY_COLORS,
   type CardCategory,
 } from '@/lib/card-classifier';
+import { groupByRole } from '@/lib/deck-grouping';
+import { DeckRoleChip } from './deck-role-chip';
 import { useDroppable, useDraggable } from '@dnd-kit/core';
 import type { DragCardData } from './deck-dnd-context';
 
@@ -23,6 +25,7 @@ interface DeckEntry {
   quantity: number;
   board: string;
   card: DbCard;
+  role_override?: string | null;
 }
 
 interface DeckListProps {
@@ -33,6 +36,8 @@ interface DeckListProps {
   onSetCommander?: (cardId: string) => void;
   onSetCoverCard?: (cardId: string) => void;
   onCardZoom?: (card: DbCard, position: { x: number; y: number }) => void;
+  onSetRole?: (cardId: string, board: string, role: string | null) => void;
+  onAutoAllRoles?: () => void;
   isCommanderFormat?: boolean;
   className?: string;
 }
@@ -82,6 +87,8 @@ export function DeckList({
   onSetCommander,
   onSetCoverCard,
   onCardZoom,
+  onSetRole,
+  onAutoAllRoles,
   isCommanderFormat,
   className,
 }: DeckListProps) {
@@ -138,23 +145,12 @@ export function DeckList({
     ? cmdCards.map((c) => c.card.oracle_text || '').join(' ')
     : undefined;
 
-  // Classify cards by role (memoized)
-  const roleGrouped = useMemo(() => {
-    const groups: Record<string, DeckEntry[]> = {};
-    for (const entry of mainCards) {
-      const categories = classifyCard(
-        entry.card.name,
-        entry.card.oracle_text || '',
-        entry.card.type_line,
-        entry.card.cmc,
-        commanderOracleText
-      );
-      const primary = getPrimaryCategory(categories);
-      if (!groups[primary]) groups[primary] = [];
-      groups[primary].push(entry);
-    }
-    return groups;
-  }, [mainCards, commanderOracleText]);
+  // Classify cards by role (memoized) — role_override wins over auto-classification.
+  const roleGrouped = useMemo(
+    () => groupByRole(mainCards, commanderOracleText),
+    [mainCards, commanderOracleText]
+  );
+  const hasRoleOverrides = mainCards.some((c) => c.role_override);
 
   // Type grouping
   const typeGrouped = groupBy(mainCards, (c) => getCardMainType(c.card.type_line));
@@ -169,6 +165,8 @@ export function DeckList({
     favourites,
     onToggleFavourite: deckId ? toggleFavourite : undefined,
   };
+  // The role chip only makes sense in role view — keep it out of type/commander sections.
+  const roleSectionProps = { ...sectionProps, onSetRole };
 
   return (
     <div className={cn('space-y-3', className)}>
@@ -213,6 +211,15 @@ export function DeckList({
             Type
           </button>
         </div>
+        {groupMode === 'role' && hasRoleOverrides && onAutoAllRoles && (
+          <button
+            onClick={onAutoAllRoles}
+            className="text-[10px] text-muted-foreground hover:text-foreground"
+            title="Clear all manual role assignments"
+          >
+            Auto all
+          </button>
+        )}
       </div>
 
       {/* Maindeck grouped by role */}
@@ -222,14 +229,15 @@ export function DeckList({
           if (!group?.length) return null;
           const count = group.reduce((s, c) => s + c.quantity, 0);
           return (
-            <DeckSection
-              key={role}
-              title={CATEGORY_LABELS[role]}
-              count={count}
-              cards={group}
-              categoryColor={CATEGORY_COLORS[role]}
-              {...sectionProps}
-            />
+            <DroppableZone key={role} id={`drop-role-${role}`}>
+              <DeckSection
+                title={CATEGORY_LABELS[role]}
+                count={count}
+                cards={group}
+                categoryColor={CATEGORY_COLORS[role]}
+                {...roleSectionProps}
+              />
+            </DroppableZone>
           );
         })}
 
@@ -299,6 +307,7 @@ function DeckSection({
   onSetCommander,
   onSetCoverCard,
   onCardZoom,
+  onSetRole,
   isCommanderFormat,
   hideHeader,
   favourites,
@@ -313,6 +322,7 @@ function DeckSection({
   onSetCommander?: (cardId: string) => void;
   onSetCoverCard?: (cardId: string) => void;
   onCardZoom?: (card: DbCard, position: { x: number; y: number }) => void;
+  onSetRole?: (cardId: string, board: string, role: string | null) => void;
   isCommanderFormat?: boolean;
   hideHeader?: boolean;
   favourites?: Set<string>;
@@ -352,6 +362,7 @@ function DeckSection({
             onSetCommander={onSetCommander}
             onSetCoverCard={onSetCoverCard}
             onCardZoom={onCardZoom}
+            onSetRole={onSetRole}
             isCommanderFormat={isCommanderFormat}
             isFavourite={favourites?.has(entry.card_id)}
             onToggleFavourite={onToggleFavourite}
@@ -369,6 +380,7 @@ function DeckCardRow({
   onSetCommander,
   onSetCoverCard,
   onCardZoom,
+  onSetRole,
   isCommanderFormat,
   isFavourite,
   onToggleFavourite,
@@ -379,6 +391,7 @@ function DeckCardRow({
   onSetCommander?: (cardId: string) => void;
   onSetCoverCard?: (cardId: string) => void;
   onCardZoom?: (card: DbCard, position: { x: number; y: number }) => void;
+  onSetRole?: (cardId: string, board: string, role: string | null) => void;
   isCommanderFormat?: boolean;
   isFavourite?: boolean;
   onToggleFavourite?: (cardId: string) => void;
@@ -405,6 +418,7 @@ function DeckCardRow({
   const canBeCommander = isCommanderFormat && !isCommander && entry.board === 'main' &&
     (card.type_line.includes('Legendary') && card.type_line.includes('Creature') ||
      card.type_line.includes('Planeswalker') && card.oracle_text?.includes('can be your commander'));
+  const autoRole = getPrimaryCategory(classifyCard(card.name, card.oracle_text || '', card.type_line, card.cmc));
 
   return (
     <div
@@ -546,6 +560,15 @@ function DeckCardRow({
         >
           &#x1F451;
         </button>
+      )}
+
+      {/* Role chip (role view only — passed only when the row is rendered there) */}
+      {onSetRole && (
+        <DeckRoleChip
+          autoRole={autoRole}
+          roleOverride={entry.role_override}
+          onChange={(role) => onSetRole(entry.card_id, entry.board, role)}
+        />
       )}
 
       {/* Remove button */}

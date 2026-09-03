@@ -110,6 +110,16 @@ describe('Database Schema & Migrations', () => {
     const columns = db.prepare("PRAGMA table_info(decks)").all() as Array<{ name: string }>;
     expect(columns.map((c) => c.name)).toContain('target_bracket');
   });
+
+  it('adds role_override column to deck_cards (migration 40)', () => {
+    const columns = db.prepare("PRAGMA table_info(deck_cards)").all() as Array<{ name: string }>;
+    expect(columns.map((c) => c.name)).toContain('role_override');
+  });
+
+  it('adds reason column to cf_cache (migration 41)', () => {
+    const columns = db.prepare("PRAGMA table_info(cf_cache)").all() as Array<{ name: string }>;
+    expect(columns.map((c) => c.name)).toContain('reason');
+  });
 });
 
 describe('Card CRUD Operations', () => {
@@ -241,6 +251,35 @@ describe('Deck Operations', () => {
 
     expect(rows).toHaveLength(1);
     expect(rows[0].owned_qty).toBe(3);
+  });
+
+  it('setDeckCardRole-style update round-trips role_override (set, then clear back to auto)', () => {
+    // Mirrors src/lib/db.ts's setDeckCardRole UPDATE statement.
+    db.prepare(`
+      INSERT INTO cards (id, oracle_id, name, cmc, type_line, set_code, set_name, collector_number, rarity)
+      VALUES ('c5', 'o5', 'Rampant Growth', 2, 'Sorcery', 'M21', 'M21', '1', 'common')
+    `).run();
+    const { lastInsertRowid: deckId } = db.prepare('INSERT INTO decks (name) VALUES (?)').run('Role Deck');
+    db.prepare(
+      "INSERT INTO deck_cards (deck_id, card_id, quantity, board) VALUES (?, ?, ?, ?)"
+    ).run(deckId, 'c5', 1, 'main');
+
+    const setRole = (role: string | null) =>
+      db.prepare(
+        'UPDATE deck_cards SET role_override = ? WHERE deck_id = ? AND card_id = ? AND board = ?'
+      ).run(role, deckId, 'c5', 'main');
+
+    setRole('removal');
+    let row = db.prepare(
+      'SELECT role_override FROM deck_cards WHERE deck_id = ? AND card_id = ?'
+    ).get(deckId, 'c5') as { role_override: string | null };
+    expect(row.role_override).toBe('removal');
+
+    setRole(null);
+    row = db.prepare(
+      'SELECT role_override FROM deck_cards WHERE deck_id = ? AND card_id = ?'
+    ).get(deckId, 'c5') as { role_override: string | null };
+    expect(row.role_override).toBeNull();
   });
 });
 

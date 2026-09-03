@@ -36,10 +36,6 @@ interface DeckEditorHeaderProps {
   onShowVersionHistory: () => void;
   collectionOnly: boolean;
   onToggleCollectionOnly: () => void;
-  suggestionsLoading: boolean;
-  onGetSuggestions: () => void;
-  mlReady: boolean;
-  mlGames: number;
   onShowPlaytest: () => void;
   onBuildFromCollection: () => void;
   onShowImport: () => void;
@@ -69,10 +65,6 @@ export function DeckEditorHeader({
   onShowVersionHistory,
   collectionOnly,
   onToggleCollectionOnly,
-  suggestionsLoading,
-  onGetSuggestions,
-  mlReady,
-  mlGames,
   onShowPlaytest,
   onBuildFromCollection,
   onShowImport,
@@ -168,22 +160,6 @@ export function DeckEditorHeader({
             </button>
           </label>
 
-          <button
-            onClick={onGetSuggestions}
-            disabled={suggestionsLoading}
-            className="relative flex items-center gap-1.5 rounded-lg bg-accent px-3 py-1.5 text-xs font-medium text-accent-foreground transition-colors hover:bg-accent/80"
-          >
-            <SparklesIcon className="h-3.5 w-3.5" />
-            {suggestionsLoading ? 'Thinking...' : 'AI Suggest'}
-            {mlReady && (
-              <span
-                className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[8px] font-bold text-primary-foreground"
-                title={`ML model ready (${mlGames} games analyzed)`}
-              >
-                ML
-              </span>
-            )}
-          </button>
           <button
             onClick={onShowPlaytest}
             className="flex items-center gap-1.5 rounded-lg bg-accent px-3 py-1.5 text-xs font-medium text-accent-foreground transition-colors hover:bg-accent/80"

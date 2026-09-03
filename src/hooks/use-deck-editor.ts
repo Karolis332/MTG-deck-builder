@@ -8,12 +8,14 @@ export interface DeckData {
   name: string;
   description: string | null;
   format: string | null;
+  target_bracket?: number | null;
   cards: Array<{
     entry_id: number;
     card_id: string;
     quantity: number;
     board: string;
     sort_order: number;
+    role_override?: string | null;
   } & DbCard>;
 }
 
@@ -78,20 +80,25 @@ export function undoReducer(state: UndoState, action: UndoAction): UndoState {
   }
 }
 
-// Builds the inverse of a single op given the pre-op quantity of the affected card/board.
-// prevQuantity is ignored for move_card (it's a pure board swap on the server: quantity resets to 1).
-export function invertOp(op: DeckPatchOp, prevQuantity: number): DeckPatchOp {
+// Builds the inverse of a single op given the pre-op value of the affected card/board:
+// a quantity (number) for the quantity ops, or a prior role (string|null) for set_role.
+// prevValue is ignored for move_card (it's a pure board swap on the server: quantity resets to 1).
+export function invertOp(op: DeckPatchOp, prevValue: number | string | null): DeckPatchOp {
   switch (op.op) {
-    case 'add_card':
+    case 'add_card': {
+      const prevQuantity = prevValue as number;
       return prevQuantity > 0
         ? { op: 'set_quantity', card_id: op.card_id, board: op.board, quantity: prevQuantity }
         : { op: 'remove_card', card_id: op.card_id, board: op.board };
+    }
     case 'remove_card':
-      return { op: 'add_card', card_id: op.card_id, board: op.board, quantity: Math.max(prevQuantity, 1) };
+      return { op: 'add_card', card_id: op.card_id, board: op.board, quantity: Math.max(prevValue as number, 1) };
     case 'set_quantity':
-      return { op: 'set_quantity', card_id: op.card_id, board: op.board, quantity: prevQuantity };
+      return { op: 'set_quantity', card_id: op.card_id, board: op.board, quantity: prevValue as number };
     case 'move_card':
       return { op: 'move_card', card_id: op.card_id, from_board: op.to_board, to_board: op.from_board };
+    case 'set_role':
+      return { op: 'set_role', card_id: op.card_id, board: op.board, role: prevValue as string | null };
   }
 }
 
@@ -146,6 +153,11 @@ function applyOpOptimistic(deck: DeckData, op: DeckPatchOp, cache: Map<string, D
         cards: deck.cards.map((c) => (c === existing ? { ...c, board: op.to_board, quantity: 1 } : c)),
       };
     }
+    case 'set_role': {
+      const existing = findEntry(deck, op.card_id, op.board);
+      if (!existing) return deck;
+      return { ...deck, cards: deck.cards.map((c) => (c === existing ? { ...c, role_override: op.role } : c)) };
+    }
     default:
       return deck;
   }
@@ -163,11 +175,14 @@ export interface UseDeckEditorResult {
   removeCard: (cardId: string, board: string) => Promise<void>;
   setQuantity: (cardId: string, board: string, quantity: number) => Promise<void>;
   moveCard: (cardId: string, fromBoard: string, toBoard: string) => Promise<void>;
+  setRole: (cardId: string, board: string, role: string | null) => Promise<void>;
   applyOps: (ops: DeckPatchOp[]) => Promise<void>;
   undo: () => Promise<void>;
   redo: () => Promise<void>;
   canUndo: boolean;
   canRedo: boolean;
+  /** Bumped on every successful server mutation — drives dependent-fetch effects (e.g. deck-analysis). */
+  version: number;
 }
 
 export function useDeckEditor(deckId: number): UseDeckEditorResult {
@@ -175,6 +190,7 @@ export function useDeckEditor(deckId: number): UseDeckEditorResult {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [version, setVersion] = useState(0);
   const [undoState, dispatch] = useReducer(undoReducer, initialUndoState);
 
   const deckRef = useRef<DeckData | null>(null);
@@ -225,6 +241,7 @@ export function useDeckEditor(deckId: number): UseDeckEditorResult {
         if (data.deck) {
           setDeck(data.deck);
           cacheCards(data.deck);
+          setVersion((v) => v + 1);
           if (pushUndo) dispatch({ type: 'push', entry: { ops, inverseOps } });
         } else {
           setDeck(prevDeck);
@@ -298,6 +315,17 @@ export function useDeckEditor(deckId: number): UseDeckEditorResult {
     [runOps]
   );
 
+  const setRole = useCallback(
+    async (cardId: string, board: string, role: string | null) => {
+      const prevDeck = deckRef.current;
+      if (!prevDeck) return;
+      const prevRole = findEntry(prevDeck, cardId, board)?.role_override ?? null;
+      const op: DeckPatchOp = { op: 'set_role', card_id: cardId, board, role };
+      await runOps([op], [invertOp(op, prevRole)], true);
+    },
+    [runOps]
+  );
+
   const applyOps = useCallback(
     async (ops: DeckPatchOp[]) => {
       const prevDeck = deckRef.current;
@@ -305,9 +333,13 @@ export function useDeckEditor(deckId: number): UseDeckEditorResult {
       let sim = prevDeck;
       const inverses: DeckPatchOp[] = [];
       for (const op of ops) {
-        const prevQty =
-          op.op === 'move_card' ? 0 : quantityOf(sim, op.card_id, 'board' in op ? op.board : '');
-        inverses.push(invertOp(op, prevQty));
+        const prevValue: number | string | null =
+          op.op === 'move_card'
+            ? 0
+            : op.op === 'set_role'
+              ? findEntry(sim, op.card_id, op.board)?.role_override ?? null
+              : quantityOf(sim, op.card_id, op.board);
+        inverses.push(invertOp(op, prevValue));
         sim = applyOpOptimistic(sim, op, cacheRef.current);
       }
       await runOps(ops, inverses.reverse(), true);
@@ -355,10 +387,12 @@ export function useDeckEditor(deckId: number): UseDeckEditorResult {
     removeCard,
     setQuantity,
     moveCard,
+    setRole,
     applyOps,
     undo,
     redo,
     canUndo: undoState.past.length > 0,
     canRedo: undoState.future.length > 0,
+    version,
   };
 }

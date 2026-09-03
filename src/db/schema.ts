@@ -1376,4 +1376,23 @@ export const MIGRATIONS = [
       ALTER TABLE decks ADD COLUMN target_bracket INTEGER;
     `,
   },
+  {
+    version: 40,
+    name: 'deck_cards_role_override',
+    sql: `
+      -- Manual role pin set via the command-center role view (dropdown or drag-onto-section).
+      -- NULL = auto-classified by classifyCard/getPrimaryCategory; non-null pins the card to
+      -- one CardCategory (src/lib/card-classifier.ts) regardless of oracle-text classification.
+      ALTER TABLE deck_cards ADD COLUMN role_override TEXT;
+    `,
+  },
+  {
+    version: 41,
+    name: 'cf_cache_reason',
+    sql: `
+      -- Formalizes the reason column lazily added at runtime by cf-api-client.ts's
+      -- ensureReasonColumn() guard (guard stays in place for DBs that pre-date this migration).
+      ALTER TABLE cf_cache ADD COLUMN reason TEXT;
+    `,
+  },
 ];

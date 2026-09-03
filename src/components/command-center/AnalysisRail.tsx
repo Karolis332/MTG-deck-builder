@@ -1,12 +1,8 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import type { DeckCardEntry } from '@/lib/types';
 import type { DeckData } from '@/hooks/use-deck-editor';
-import { DeckStats } from '@/components/deck-stats';
-import { DeckValidation } from '@/components/deck-validation';
 import { MatchLogPanel } from '@/components/match-log-panel';
-import { DeckAnalysisPanel } from '@/components/deck-analysis-panel';
 import { CraftPathPanel } from '@/components/craft-path-panel';
 import { PilotGuidePanel } from '@/components/pilot-guide-panel';
 import { SparklesIcon, ComboIcon, Spinner } from './icons';
@@ -34,7 +30,6 @@ export interface ComboEntry {
 interface AnalysisRailProps {
   deck: DeckData;
   deckId: number;
-  deckEntries: DeckCardEntry[];
   isCommanderFormat: boolean;
   showExplanation: boolean;
   explanation: BuildExplanation | null;
@@ -52,7 +47,6 @@ interface AnalysisRailProps {
 export function AnalysisRail({
   deck,
   deckId,
-  deckEntries,
   isCommanderFormat,
   showExplanation,
   explanation,
@@ -120,14 +114,6 @@ export function AnalysisRail({
         </div>
       )}
 
-      <DeckStats
-        cards={deckEntries.map((e) => ({ quantity: e.quantity, card: e.card, board: e.board }))}
-        format={format}
-        className="mb-3 rounded-xl border border-border bg-card p-3"
-      />
-
-      <DeckAnalysisPanel deckId={deckId} format={format} isCommanderFormat={isCommanderFormat} className="mb-3" />
-
       {isCommanderFormat && (
         <>
           <PilotGuidePanel deckId={deckId} className="mb-3" />
@@ -138,12 +124,6 @@ export function AnalysisRail({
           />
         </>
       )}
-
-      <DeckValidation
-        cards={deckEntries.map((e) => ({ card_id: e.card_id, quantity: e.quantity, board: e.board, card: e.card }))}
-        format={format}
-        className="mb-4"
-      />
 
       <MatchLogPanel deckId={deckId} format={format} className="mb-4" />
 

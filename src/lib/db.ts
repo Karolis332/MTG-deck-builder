@@ -64,13 +64,28 @@ function runMigrations(db: Database.Database) {
 
   for (const migration of MIGRATIONS) {
     if (!applied.has(migration.version)) {
-      db.transaction(() => {
-        db.exec(migration.sql);
-        db.prepare('INSERT INTO _migrations (version, name) VALUES (?, ?)').run(
-          migration.version,
-          migration.name
-        );
-      })();
+      try {
+        db.transaction(() => {
+          db.exec(migration.sql);
+          db.prepare('INSERT INTO _migrations (version, name) VALUES (?, ?)').run(
+            migration.version,
+            migration.name
+          );
+        })();
+      } catch (err) {
+        // ponytail: some ADD COLUMN migrations formalize a column a runtime guard already
+        // added lazily (e.g. cf-api-client.ts's cf_cache.reason) on DBs older than this
+        // migration. SQLite has no "ADD COLUMN IF NOT EXISTS" — treat "duplicate column" as
+        // success (record the migration as applied) instead of crashing app startup.
+        if (err instanceof Error && /duplicate column name/i.test(err.message)) {
+          db.prepare('INSERT OR IGNORE INTO _migrations (version, name) VALUES (?, ?)').run(
+            migration.version,
+            migration.name
+          );
+        } else {
+          throw err;
+        }
+      }
     }
   }
 }
@@ -452,6 +467,14 @@ export function setCardQuantityInDeck(
   db.prepare(
     'UPDATE deck_cards SET quantity = ? WHERE deck_id = ? AND card_id = ? AND board = ?'
   ).run(quantity, deckId, cardId, board);
+  db.prepare("UPDATE decks SET updated_at = datetime('now') WHERE id = ?").run(deckId);
+}
+
+export function setDeckCardRole(deckId: number, cardId: string, board: string, role: string | null) {
+  const db = getDb();
+  db.prepare(
+    'UPDATE deck_cards SET role_override = ? WHERE deck_id = ? AND card_id = ? AND board = ?'
+  ).run(role, deckId, cardId, board);
   db.prepare("UPDATE decks SET updated_at = datetime('now') WHERE id = ?").run(deckId);
 }
 

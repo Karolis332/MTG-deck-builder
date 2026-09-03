@@ -7,6 +7,7 @@ import {
   addCardToDeck,
   removeCardFromDeck,
   setCardQuantityInDeck,
+  setDeckCardRole,
 } from '@/lib/db';
 import type { DeckPatchOp } from '@/lib/types';
 import { getAuthUser, unauthorizedResponse } from '@/lib/auth-middleware';
@@ -143,6 +144,9 @@ export async function PATCH(
         case 'move_card':
           removeCardFromDeck(deckId, op.card_id, op.from_board);
           addCardToDeck(deckId, op.card_id, 1, op.to_board);
+          break;
+        case 'set_role':
+          setDeckCardRole(deckId, op.card_id, op.board, op.role);
           break;
       }
     }

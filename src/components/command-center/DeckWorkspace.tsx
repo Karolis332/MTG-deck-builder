@@ -37,6 +37,8 @@ interface DeckWorkspaceProps {
   onRemove: (cardId: string, board: string) => void;
   onSetCommander: (cardId: string) => void;
   onSetCoverCard: (cardId: string) => void;
+  onSetRole?: (cardId: string, board: string, role: string | null) => void;
+  onAutoAllRoles?: () => void;
 }
 
 const MANA_VALUES = [0, 1, 2, 3, 4, 5, 6, 7];
@@ -74,6 +76,8 @@ export function DeckWorkspace({
   onRemove,
   onSetCommander,
   onSetCoverCard,
+  onSetRole,
+  onAutoAllRoles,
 }: DeckWorkspaceProps) {
   // Slim search bar by default once the deck has cards — expands on focus/click.
   const [searchExpanded, setSearchExpanded] = useState(mainCount === 0);
@@ -94,7 +98,13 @@ export function DeckWorkspace({
   const hasActiveFilters = filterManaValues.length > 0 || filterColors.length > 0 || filterTypes.length > 0;
   const collapsedSlim = mainCount > 0 && !searchExpanded;
 
-  const deckListCards = deck.cards.map((c) => ({ card_id: c.card_id, quantity: c.quantity, board: c.board, card: c }));
+  const deckListCards = deck.cards.map((c) => ({
+    card_id: c.card_id,
+    quantity: c.quantity,
+    board: c.board,
+    card: c,
+    role_override: c.role_override,
+  }));
 
   return (
     <div className="flex h-full flex-col">
@@ -219,6 +229,8 @@ export function DeckWorkspace({
           onSetCommander={onSetCommander}
           onSetCoverCard={onSetCoverCard}
           onCardZoom={onCardZoom}
+          onSetRole={onSetRole}
+          onAutoAllRoles={onAutoAllRoles}
           isCommanderFormat={isCommanderFormat}
         />
       </div>

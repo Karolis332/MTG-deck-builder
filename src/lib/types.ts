@@ -134,6 +134,8 @@ export interface DeckCardEntry {
   card: DbCard;
   /** Quantity owned in the collection table (unscoped — table has no user_id). */
   owned_qty?: number;
+  /** Manual role pin (CardCategory name) set via the role-view UI; null/undefined = auto-classified. */
+  role_override?: string | null;
 }
 
 export interface DeckStats {
@@ -215,4 +217,5 @@ export type DeckPatchOp =
   | { op: 'add_card'; card_id: string; quantity: number; board: string }
   | { op: 'remove_card'; card_id: string; board: string }
   | { op: 'set_quantity'; card_id: string; quantity: number; board: string }
-  | { op: 'move_card'; card_id: string; from_board: string; to_board: string };
+  | { op: 'move_card'; card_id: string; from_board: string; to_board: string }
+  | { op: 'set_role'; card_id: string; board: string; role: string | null };

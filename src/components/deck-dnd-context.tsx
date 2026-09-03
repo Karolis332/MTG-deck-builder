@@ -26,6 +26,8 @@ interface DeckDndContextProps {
   onAddCard?: (card: DbCard, board: string) => void;
   onMoveCard?: (cardId: string, fromBoard: string, toBoard: string) => void;
   onRemoveCard?: (cardId: string, board: string) => void;
+  /** Dropping a deck card onto a `drop-role-<category>` zone pins it to that role. */
+  onSetRole?: (cardId: string, board: string, role: string | null) => void;
 }
 
 export function DeckDndContext({
@@ -33,6 +35,7 @@ export function DeckDndContext({
   onAddCard,
   onMoveCard,
   onRemoveCard,
+  onSetRole,
 }: DeckDndContextProps) {
   const [activeCard, setActiveCard] = useState<DbCard | null>(null);
   const [overZone, setOverZone] = useState<string | null>(null);
@@ -75,12 +78,16 @@ export function DeckDndContext({
             onMoveCard?.(data.cardId, data.board, targetBoard);
           }
         }
+      } else if (targetId.startsWith('drop-role-')) {
+        if (data.type === 'deck-card' && data.cardId && data.board) {
+          onSetRole?.(data.cardId, data.board, targetId.slice('drop-role-'.length));
+        }
       }
     }
 
     setActiveCard(null);
     setOverZone(null);
-  }, [onAddCard, onMoveCard, onRemoveCard]);
+  }, [onAddCard, onMoveCard, onRemoveCard, onSetRole]);
 
   const handleDragCancel = useCallback(() => {
     setActiveCard(null);

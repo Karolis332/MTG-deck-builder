@@ -27,6 +27,16 @@ describe('invertOp', () => {
     const op: DeckPatchOp = { op: 'move_card', card_id: 'c1', from_board: 'main', to_board: 'sideboard' };
     expect(invertOp(op, 0)).toEqual({ op: 'move_card', card_id: 'c1', from_board: 'sideboard', to_board: 'main' });
   });
+
+  it('inverts set_role back to the previous role', () => {
+    const op: DeckPatchOp = { op: 'set_role', card_id: 'c1', board: 'main', role: 'removal' };
+    expect(invertOp(op, 'ramp')).toEqual({ op: 'set_role', card_id: 'c1', board: 'main', role: 'ramp' });
+  });
+
+  it('inverts set_role back to auto (null) when there was no prior override', () => {
+    const op: DeckPatchOp = { op: 'set_role', card_id: 'c1', board: 'main', role: 'removal' };
+    expect(invertOp(op, null)).toEqual({ op: 'set_role', card_id: 'c1', board: 'main', role: null });
+  });
 });
 
 describe('undoReducer', () => {

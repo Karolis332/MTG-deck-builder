@@ -2,24 +2,25 @@
 
 import { useEffect, useState, useCallback, useMemo } from 'react';
 import { useRouter, useParams, useSearchParams } from 'next/navigation';
-import { cn } from '@/lib/utils';
-import type { DbCard, DeckCardEntry, AISuggestion } from '@/lib/types';
+import type { DbCard, DeckCardEntry, DeckPatchOp } from '@/lib/types';
 import { useDeckEditor } from '@/hooks/use-deck-editor';
 import { CommandCenterLayout } from '@/components/command-center/CommandCenterLayout';
-import { ConsultantPlaceholder, type ProposedChange } from '@/components/command-center/ConsultantPlaceholder';
+import { ConsultantPane } from '@/components/command-center/ConsultantPane';
+import type { ProposedChange } from '@/components/command-center/consultant/types';
 import { DeckWorkspace } from '@/components/command-center/DeckWorkspace';
 import { AnalysisRail, type BuildExplanation, type ComboEntry } from '@/components/command-center/AnalysisRail';
+import { LiveRail } from '@/components/command-center/LiveRail';
+import type { AnalysisResponse } from '@/components/command-center/tiles/types';
 import { DeckEditorHeader } from '@/components/command-center/DeckEditorHeader';
 import { Spinner } from '@/components/command-center/icons';
 import { ExportDialog } from '@/components/export-dialog';
 import { PlaytestModal } from '@/components/playtest-modal';
 import { CardDetailModal } from '@/components/card-detail-modal';
-import { AIChatPanel } from '@/components/ai-chat-panel';
 import { ImportDialog } from '@/components/import-dialog';
 import { VersionHistoryPanel } from '@/components/version-history-panel';
 import { CardZoomOverlay } from '@/components/card-zoom-overlay';
 import { DeckDndContext } from '@/components/deck-dnd-context';
-import { COMMANDER_FORMATS, DEFAULT_DECK_SIZE } from '@/lib/constants';
+import { COMMANDER_FORMATS } from '@/lib/constants';
 
 export default function DeckEditorPage() {
   const router = useRouter();
@@ -28,7 +29,7 @@ export default function DeckEditorPage() {
   const deckId = Number(params.id);
 
   const deckEditor = useDeckEditor(deckId);
-  const { deck, loading, saving, refetch, addCard, removeCard, setQuantity, moveCard, undo, redo, canUndo, canRedo } = deckEditor;
+  const { deck, loading, saving, refetch, addCard, removeCard, setQuantity, moveCard, setRole, applyOps, undo, redo, canUndo, canRedo, version: deckChangeTick } = deckEditor;
 
   // Build explanation state
   const [explanation, setExplanation] = useState<BuildExplanation | null>(null);
@@ -66,17 +67,10 @@ export default function DeckEditorPage() {
   const [filterColors, setFilterColors] = useState<string[]>([]);
   const [filterTypes, setFilterTypes] = useState<string[]>([]);
 
-  // AI state
-  const [suggestions, setSuggestions] = useState<AISuggestion[]>([]);
-  const [suggestionsLoading, setSuggestionsLoading] = useState(false);
-  const [suggestionsSource, setSuggestionsSource] = useState<'rules' | 'ollama' | 'synergy' | 'openai'>('rules');
-  const [proposedChanges, setProposedChanges] = useState<ProposedChange[]>([]);
-  const [applyingChanges, setApplyingChanges] = useState(false);
+  // Consultant state
   const [collectionOnly, setCollectionOnly] = useState(true);
-
-  // ML state
-  const [mlReady, setMlReady] = useState(false);
-  const [mlGames, setMlGames] = useState(0);
+  const [consultantPrefill, setConsultantPrefill] = useState<string | undefined>(undefined);
+  const [analysis, setAnalysis] = useState<AnalysisResponse | null>(null);
 
   const isCommanderFormat = COMMANDER_FORMATS.includes(
     (deck?.format || '') as typeof COMMANDER_FORMATS[number]
@@ -100,17 +94,28 @@ export default function DeckEditorPage() {
     }
   }, [isCommanderFormat, deck]);
 
-  // Check ML readiness
+  // Fetch deck-analysis (feeds LiveRail's Score/Roles/Coverage/Curve/Synergy tiles),
+  // debounced so a burst of quantity clicks doesn't fire one request per click.
   useEffect(() => {
     if (!deckId) return;
-    fetch(`/api/ai-suggest/ml-check?deck_id=${deckId}`)
-      .then((r) => r.json())
-      .then((data) => {
-        setMlReady(data.hasEnoughData || false);
-        setMlGames(data.gamesPlayed || 0);
-      })
-      .catch(() => {});
-  }, [deckId]);
+    const timer = setTimeout(() => {
+      fetch(`/api/deck-analysis?deckId=${deckId}`)
+        .then((r) => r.json())
+        .then((data) => {
+          if (!data.error) setAnalysis(data);
+        })
+        .catch(() => {});
+    }, 800);
+    return () => clearTimeout(timer);
+  }, [deckId, deckChangeTick]);
+
+  // Clear the consultant prefill after the pane's ChatSection has consumed it (its effect
+  // fires on the [prefill] value — resetting to undefined lets a second identical prompt re-fire it).
+  useEffect(() => {
+    if (!consultantPrefill) return;
+    const timer = setTimeout(() => setConsultantPrefill(undefined), 0);
+    return () => clearTimeout(timer);
+  }, [consultantPrefill]);
 
   // Fetch cached combos for commander/brawl decks
   const fetchCombos = useCallback(async (forceRefresh = false) => {
@@ -245,35 +250,7 @@ export default function DeckEditorPage() {
     } catch {}
   };
 
-  // Apply actions from AI chat panel
-  const handleChatApply = async (
-    actions: Array<{ action: 'cut' | 'add'; cardId: string; cardName: string; quantity: number; reason: string; imageUri?: string }>
-  ): Promise<boolean> => {
-    try {
-      const res = await fetch('/api/ai-suggest/apply', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          deck_id: deckId,
-          changes: actions.map((a) => ({ action: a.action, cardId: a.cardId, cardName: a.cardName, quantity: a.quantity })),
-        }),
-      });
-      const data = await res.json();
-      if (data.ok) {
-        await refetch();
-        if (data.warnings) alert(data.warnings);
-        return true;
-      } else if (data.error) {
-        alert(data.error);
-        return false;
-      }
-      return false;
-    } catch {
-      return false;
-    }
-  };
-
-  const updateDeckMeta = async (updates: { name?: string; format?: string }) => {
+  const updateDeckMeta = async (updates: { name?: string; format?: string; target_bracket?: number }) => {
     try {
       const res = await fetch(`/api/decks/${deckId}`, {
         method: 'PUT',
@@ -288,85 +265,47 @@ export default function DeckEditorPage() {
     } catch {}
   };
 
-  // AI suggestions
-  const getSuggestions = async () => {
-    setSuggestionsLoading(true);
-    setSuggestions([]);
-    setProposedChanges([]);
-    try {
-      const res = await fetch('/api/ai-suggest', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ deck_id: deckId, collection_only: collectionOnly }),
-      });
-      const data = await res.json();
-      setSuggestions(data.suggestions || []);
-      setSuggestionsSource(data.source || 'rules');
+  const setTargetBracket = (n: number) => updateDeckMeta({ target_bracket: n });
 
-      if (data.proposedChanges?.length) {
-        setProposedChanges(data.proposedChanges.map((c: Record<string, unknown>) => ({ ...c, selected: true })));
+  // Consultant pane's model feed / chat both apply through this one path — POST
+  // /api/ai-suggest/apply with the impression/candidate telemetry the CF bandit needs.
+  const onApplyChanges = useCallback(
+    async (changes: ProposedChange[], meta: { impressionId?: string; candidatesShown: string[] }): Promise<boolean> => {
+      try {
+        const res = await fetch('/api/ai-suggest/apply', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            deck_id: deckId,
+            changes: changes.map((c) => ({ action: c.action, cardId: c.cardId, cardName: c.cardName, quantity: c.quantity })),
+            candidatesShown: meta.candidatesShown,
+            impression_id: meta.impressionId,
+            source: 'consultant',
+          }),
+        });
+        const data = await res.json();
+        if (data.ok) {
+          await refetch();
+          if (data.warnings) alert(data.warnings);
+          return true;
+        }
+        if (data.error) alert(data.error);
+        return false;
+      } catch {
+        return false;
       }
-    } catch {} finally {
-      setSuggestionsLoading(false);
-    }
-  };
+    },
+    [deckId, refetch]
+  );
 
-  // Apply selected AI-proposed changes
-  const applySelectedChanges = async () => {
-    const selected = proposedChanges.filter((c) => c.selected);
-    if (selected.length === 0) return;
-
-    setApplyingChanges(true);
-    try {
-      const res = await fetch('/api/ai-suggest/apply', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          deck_id: deckId,
-          changes: selected.map((c) => ({ action: c.action, cardId: c.cardId, cardName: c.cardName, quantity: c.quantity })),
-          candidatesShown: proposedChanges.map((c) => c.cardName),
-        }),
-      });
-      const data = await res.json();
-      if (data.ok) {
-        await refetch();
-        setProposedChanges([]);
-        setSuggestions([]);
-      } else if (data.error) {
-        alert(data.error);
-      }
-    } catch {} finally {
-      setApplyingChanges(false);
-    }
-  };
-
-  const handleSuggestionClick = (s: AISuggestion) => {
+  // "Auto all" in the role view — clears every manual role_override in one undoable batch.
+  const clearAllRoleOverrides = useCallback(() => {
     if (!deck) return;
-    const mainCount = deck.cards.filter((c) => c.board === 'main').reduce((sum, c) => sum + c.quantity, 0);
-    const targetSize = DEFAULT_DECK_SIZE[deck.format || ''] || DEFAULT_DECK_SIZE.default;
-    const deckAtCapacity = isCommanderFormat && mainCount >= targetSize - (deck.cards.some((c) => c.board === 'commander') ? 1 : 0);
-
-    if (deckAtCapacity) {
-      const isAlreadyProposed = proposedChanges.some((c) => c.action === 'add' && c.cardName === s.card.name);
-      if (!isAlreadyProposed) {
-        setProposedChanges((prev) => [
-          ...prev,
-          {
-            action: 'add' as const,
-            cardId: s.card.id,
-            cardName: s.card.name,
-            quantity: 1,
-            reason: s.reason,
-            winRate: s.winRate,
-            imageUri: s.card.image_uri_small || undefined,
-            selected: true,
-          },
-        ]);
-      }
-    } else {
-      addCard(s.card);
-    }
-  };
+    const overridden = deck.cards.filter((c) => c.role_override);
+    if (overridden.length === 0) return;
+    const ops: DeckPatchOp[] = overridden.map((c) => ({ op: 'set_role', card_id: c.card_id || c.id, board: c.board, role: null }));
+    applyOps(ops);
+  }, [deck, applyOps]);
 
   if (loading) {
     return (
@@ -407,7 +346,7 @@ export default function DeckEditorPage() {
     .reduce((s, c) => s + c.quantity, 0);
 
   return (
-    <DeckDndContext onAddCard={addCard} onMoveCard={moveCard} onRemoveCard={removeCard}>
+    <DeckDndContext onAddCard={addCard} onMoveCard={moveCard} onRemoveCard={removeCard} onSetRole={setRole}>
       <div className="flex h-[calc(100vh-3.5rem)] flex-col hud-grid-bg">
         <DeckEditorHeader
           deck={deck}
@@ -433,10 +372,6 @@ export default function DeckEditorPage() {
           onShowVersionHistory={() => setShowVersionHistory(true)}
           collectionOnly={collectionOnly}
           onToggleCollectionOnly={() => setCollectionOnly((v) => !v)}
-          suggestionsLoading={suggestionsLoading}
-          onGetSuggestions={getSuggestions}
-          mlReady={mlReady}
-          mlGames={mlGames}
           onShowPlaytest={() => setShowPlaytest(true)}
           onBuildFromCollection={async () => {
             if (!confirm("Build a new deck from your collection using this deck's format and commander?")) return;
@@ -468,19 +403,16 @@ export default function DeckEditorPage() {
           leftTitle="Consultant"
           rightTitle="Analysis"
           left={
-            <ConsultantPlaceholder
-              deck={deck}
-              isCommanderFormat={isCommanderFormat}
-              suggestions={suggestions}
-              suggestionsSource={suggestionsSource}
-              proposedChanges={proposedChanges}
-              applyingChanges={applyingChanges}
-              onDismissSuggestions={() => setSuggestions([])}
-              onDismissProposedChanges={() => setProposedChanges([])}
-              onToggleProposedChange={(i) => setProposedChanges((prev) => prev.map((c, j) => (j === i ? { ...c, selected: !c.selected } : c)))}
-              onApplySelectedChanges={applySelectedChanges}
-              onSuggestionClick={handleSuggestionClick}
-              onSelectCard={setSelectedCard}
+            <ConsultantPane
+              deckId={deckId}
+              // ConsultantPane's `deck` prop is currently unused (destructured as `_deck`) —
+              // DeckData is a structural subset of Deck missing a few metadata columns.
+              deck={deck as unknown as import('@/lib/types').Deck}
+              collectionOnly={collectionOnly}
+              prefill={consultantPrefill}
+              onOpenCard={setSelectedCard}
+              onApplyChanges={onApplyChanges}
+              onDeckChanged={deckChangeTick}
             />
           }
           center={
@@ -513,24 +445,34 @@ export default function DeckEditorPage() {
               onRemove={removeCard}
               onSetCommander={setAsCommander}
               onSetCoverCard={setCoverCard}
+              onSetRole={setRole}
+              onAutoAllRoles={clearAllRoleOverrides}
             />
           }
           right={
-            <AnalysisRail
-              deck={deck}
-              deckId={deckId}
-              deckEntries={deckEntries}
-              isCommanderFormat={isCommanderFormat}
-              showExplanation={showExplanation}
-              explanation={explanation}
-              onDismissExplanation={() => setShowExplanation(false)}
-              showCombos={showCombos}
-              onToggleCombos={() => setShowCombos((v) => !v)}
-              combosLoading={combosLoading}
-              includedCombos={includedCombos}
-              almostIncludedCombos={almostIncludedCombos}
-              onRescanCombos={() => fetchCombos(true)}
-            />
+            <>
+              <LiveRail
+                deck={deck}
+                analysis={analysis}
+                onOpenCard={setSelectedCard}
+                onAskConsultant={setConsultantPrefill}
+                onSetTargetBracket={setTargetBracket}
+              />
+              <AnalysisRail
+                deck={deck}
+                deckId={deckId}
+                isCommanderFormat={isCommanderFormat}
+                showExplanation={showExplanation}
+                explanation={explanation}
+                onDismissExplanation={() => setShowExplanation(false)}
+                showCombos={showCombos}
+                onToggleCombos={() => setShowCombos((v) => !v)}
+                combosLoading={combosLoading}
+                includedCombos={includedCombos}
+                almostIncludedCombos={almostIncludedCombos}
+                onRescanCombos={() => fetchCombos(true)}
+              />
+            </>
           }
         />
       </div>
@@ -560,8 +502,6 @@ export default function DeckEditorPage() {
           setSelectedCard(null);
         }}
       />
-
-      <AIChatPanel deckId={deckId} onApplyActions={handleChatApply} />
 
       <VersionHistoryPanel
         deckId={deckId}
