@@ -107,3 +107,18 @@ Auto-reject regardless of score: RESERVED area touched without approval; unteste
 
 ## Retrospective
 _appended at initiative end_
+
+## Status 2026-09-04 (paused by operator)
+| Task | State |
+|---|---|
+| T1 research | done, committed `acdde35` |
+| T2 parsing accuracy | done, committed `c81691d`; live DB reparsed (backups `.bak-2026-09-04`, `-04b`) |
+| T3 match visuals | done, committed `a686a43` |
+| T4 engine round | STOPPED mid-run; uncommitted edits in `src/lib/deck-builder-ai.ts`, `deck-builder-constraints.ts` — unaudited, harness not re-run; resume by re-briefing T4 from the spec or `git checkout` those two files |
+| T5 lift synergy | STOPPED mid-run; VPS checkout has uncommitted `app/models.py`, `app/routers/commander_stats.py`, `refresh_ccs.sql`; backup `/opt/grimoire-backups/ccs-2026-09-04.sql.gz` exists; unknown whether the `lift` column was populated or the api redeployed — verify first; local `src/lib/sync-commander-stats.ts` uncommitted |
+| T6 editor backlog | done, committed `c81691d` |
+| T7 web cleanup | done, committed `16ecaaf`, deployed |
+| T8 Overwolf decision | done, committed `ddb5536` |
+| Release build | worktree `C:/Users/QuLeR/MTG-deck-builder-release` at `c81691d` with its own node_modules; build chain was stopped; rerun `npm run build && npm run build:electron && npx electron-builder --win -c.directories.output=C:/Users/QuLeR/MTG-deck-builder/dist-electron-release` there |
+
+Retrospective (interim): failure-mode #4 (shared files) materialised as predicted — three tasks touched `db.ts`/`schema.ts`; ownership tables held but commits had to be batched. Unpredicted: a worker used `git stash` on the shared tree; add "NEVER stash" to artifact 4 on resume. Building from a worktree with a junctioned `node_modules` makes Next emit a symlinked standalone tree — a real install is required.
