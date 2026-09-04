@@ -526,6 +526,8 @@ export default function DeckEditorPage() {
               <AnalysisRail
                 deck={deck}
                 deckId={deckId}
+                onOpenCard={setSelectedCard}
+                onAskConsultant={(p) => setConsultantPrefill(p)}
                 isCommanderFormat={isCommanderFormat}
                 showExplanation={showExplanation}
                 explanation={explanation}

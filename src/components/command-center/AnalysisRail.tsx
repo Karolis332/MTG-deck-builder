@@ -2,7 +2,8 @@
 
 import { cn } from '@/lib/utils';
 import type { DeckData } from '@/hooks/use-deck-editor';
-import { MatchLogPanel } from '@/components/match-log-panel';
+import { MatchHistoryPanel } from '@/components/match/MatchHistoryPanel';
+import type { DbCard } from '@/lib/types';
 import { CraftPathPanel } from '@/components/craft-path-panel';
 import { PilotGuidePanel } from '@/components/pilot-guide-panel';
 import { SparklesIcon, ComboIcon, Spinner } from './icons';
@@ -40,6 +41,9 @@ interface AnalysisRailProps {
   includedCombos: ComboEntry[];
   almostIncludedCombos: ComboEntry[];
   onRescanCombos: () => void;
+  // Optional until page.tsx passes them (it already holds setSelectedCard / setConsultantPrefill for LiveRail).
+  onOpenCard?: (card: DbCard) => void;
+  onAskConsultant?: (prompt: string) => void;
 }
 
 // Right rail: build explanation + stats/analysis/pilot/craft/validation/match-log/combos stack —
@@ -57,6 +61,8 @@ export function AnalysisRail({
   includedCombos,
   almostIncludedCombos,
   onRescanCombos,
+  onOpenCard,
+  onAskConsultant,
 }: AnalysisRailProps) {
   const format = deck.format;
 
@@ -125,7 +131,7 @@ export function AnalysisRail({
         </>
       )}
 
-      <MatchLogPanel deckId={deckId} format={format} className="mb-4" />
+      <MatchHistoryPanel deckId={deckId} onOpenCard={onOpenCard} onAskConsultant={onAskConsultant} className="mb-4" />
 
       {isCommanderFormat && (
         <div className="mb-4">
