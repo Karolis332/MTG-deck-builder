@@ -1,0 +1,534 @@
+[
+ [
+  "standalone",
+  {
+   "authenticateResponse": {
+    "screenName": "PlayerA",
+    "clientId": "USER_A"
+   }
+  }
+ ],
+ [
+  "standalone",
+  {
+   "timestamp": "1788467281201",
+   "matchGameRoomStateChangedEvent": {
+    "gameRoomInfo": {
+     "gameRoomConfig": {
+      "matchId": "ff7a9467-97de-4278-a12e-e09a7d0b7200",
+      "reservedPlayers": [
+       {
+        "userId": "USER_A",
+        "playerName": "PlayerA",
+        "systemSeatId": 1,
+        "teamId": 1,
+        "eventId": "QuickDraft_SOS_20260831"
+       },
+       {
+        "userId": "USER_B",
+        "playerName": "PlayerB",
+        "systemSeatId": 2,
+        "teamId": 2,
+        "eventId": "QuickDraft_SOS_20260831"
+       }
+      ]
+     },
+     "stateType": "MatchGameRoomStateType_Playing"
+    }
+   }
+  }
+ ],
+ [
+  "standalone",
+  {
+   "timestamp": "1788467281227",
+   "greToClientEvent": {
+    "greToClientMessages": [
+     {
+      "systemSeatIds": [
+       1
+      ],
+      "gameStateMessage": {
+       "gameInfo": {
+        "gameNumber": 1,
+        "matchState": "MatchState_GameInProgress"
+       }
+      }
+     }
+    ]
+   }
+  }
+ ],
+ [
+  "standalone",
+  {
+   "timestamp": "1788467313680",
+   "greToClientEvent": {
+    "greToClientMessages": [
+     {
+      "gameStateMessage": {
+       "gameInfo": {
+        "gameNumber": 1,
+        "matchState": "MatchState_GameInProgress",
+        "variant": "GameVariant_Normal"
+       },
+       "turnInfo": {
+        "turnNumber": 1
+       }
+      }
+     }
+    ]
+   }
+  }
+ ],
+ [
+  "standalone",
+  {
+   "timestamp": "1788467338532",
+   "greToClientEvent": {
+    "greToClientMessages": [
+     {
+      "gameStateMessage": {
+       "turnInfo": {
+        "turnNumber": 2
+       },
+       "gameInfo": {
+        "gameNumber": 1,
+        "variant": "GameVariant_Normal"
+       }
+      }
+     }
+    ]
+   }
+  }
+ ],
+ [
+  "standalone",
+  {
+   "timestamp": "1788467343377",
+   "greToClientEvent": {
+    "greToClientMessages": [
+     {
+      "gameStateMessage": {
+       "turnInfo": {
+        "turnNumber": 3
+       },
+       "gameInfo": {
+        "gameNumber": 1,
+        "variant": "GameVariant_Normal"
+       }
+      }
+     }
+    ]
+   }
+  }
+ ],
+ [
+  "standalone",
+  {
+   "timestamp": "1788467345756",
+   "greToClientEvent": {
+    "greToClientMessages": [
+     {
+      "gameStateMessage": {
+       "turnInfo": {
+        "turnNumber": 4
+       },
+       "gameInfo": {
+        "gameNumber": 1,
+        "variant": "GameVariant_Normal"
+       }
+      }
+     }
+    ]
+   }
+  }
+ ],
+ [
+  "standalone",
+  {
+   "timestamp": "1788467356154",
+   "greToClientEvent": {
+    "greToClientMessages": [
+     {
+      "gameStateMessage": {
+       "turnInfo": {
+        "turnNumber": 5
+       },
+       "gameInfo": {
+        "gameNumber": 1,
+        "variant": "GameVariant_Normal"
+       }
+      }
+     }
+    ]
+   }
+  }
+ ],
+ [
+  "standalone",
+  {
+   "timestamp": "1788467360194",
+   "greToClientEvent": {
+    "greToClientMessages": [
+     {
+      "gameStateMessage": {
+       "turnInfo": {
+        "turnNumber": 6
+       },
+       "gameInfo": {
+        "gameNumber": 1,
+        "variant": "GameVariant_Normal"
+       }
+      }
+     }
+    ]
+   }
+  }
+ ],
+ [
+  "standalone",
+  {
+   "timestamp": "1788467375584",
+   "greToClientEvent": {
+    "greToClientMessages": [
+     {
+      "gameStateMessage": {
+       "gameInfo": {
+        "gameNumber": 1,
+        "matchState": "MatchState_GameInProgress"
+       }
+      }
+     }
+    ]
+   }
+  }
+ ],
+ [
+  "standalone",
+  {
+   "timestamp": "1788467391256",
+   "greToClientEvent": {
+    "greToClientMessages": [
+     {
+      "gameStateMessage": {
+       "turnInfo": {
+        "turnNumber": 7
+       },
+       "gameInfo": {
+        "gameNumber": 1,
+        "variant": "GameVariant_Normal"
+       }
+      }
+     }
+    ]
+   }
+  }
+ ],
+ [
+  "standalone",
+  {
+   "timestamp": "1788467399737",
+   "greToClientEvent": {
+    "greToClientMessages": [
+     {
+      "gameStateMessage": {
+       "turnInfo": {
+        "turnNumber": 8
+       },
+       "gameInfo": {
+        "gameNumber": 1,
+        "variant": "GameVariant_Normal"
+       }
+      }
+     }
+    ]
+   }
+  }
+ ],
+ [
+  "standalone",
+  {
+   "timestamp": "1788467454108",
+   "greToClientEvent": {
+    "greToClientMessages": [
+     {
+      "gameStateMessage": {
+       "turnInfo": {
+        "turnNumber": 9
+       },
+       "gameInfo": {
+        "gameNumber": 1,
+        "variant": "GameVariant_Normal"
+       }
+      }
+     }
+    ]
+   }
+  }
+ ],
+ [
+  "standalone",
+  {
+   "timestamp": "1788467505054",
+   "greToClientEvent": {
+    "greToClientMessages": [
+     {
+      "gameStateMessage": {
+       "turnInfo": {
+        "turnNumber": 10
+       },
+       "gameInfo": {
+        "gameNumber": 1,
+        "variant": "GameVariant_Normal"
+       }
+      }
+     }
+    ]
+   }
+  }
+ ],
+ [
+  "standalone",
+  {
+   "timestamp": "1788467530109",
+   "greToClientEvent": {
+    "greToClientMessages": [
+     {
+      "gameStateMessage": {
+       "turnInfo": {
+        "turnNumber": 11
+       },
+       "gameInfo": {
+        "gameNumber": 1,
+        "variant": "GameVariant_Normal"
+       }
+      }
+     }
+    ]
+   }
+  }
+ ],
+ [
+  "standalone",
+  {
+   "timestamp": "1788467578963",
+   "greToClientEvent": {
+    "greToClientMessages": [
+     {
+      "gameStateMessage": {
+       "turnInfo": {
+        "turnNumber": 12
+       },
+       "gameInfo": {
+        "gameNumber": 1,
+        "variant": "GameVariant_Normal"
+       }
+      }
+     }
+    ]
+   }
+  }
+ ],
+ [
+  "standalone",
+  {
+   "timestamp": "1788467614961",
+   "greToClientEvent": {
+    "greToClientMessages": [
+     {
+      "gameStateMessage": {
+       "turnInfo": {
+        "turnNumber": 13
+       },
+       "gameInfo": {
+        "gameNumber": 1,
+        "variant": "GameVariant_Normal"
+       }
+      }
+     }
+    ]
+   }
+  }
+ ],
+ [
+  "standalone",
+  {
+   "timestamp": "1788467695834",
+   "greToClientEvent": {
+    "greToClientMessages": [
+     {
+      "gameStateMessage": {
+       "turnInfo": {
+        "turnNumber": 14
+       },
+       "gameInfo": {
+        "gameNumber": 1,
+        "variant": "GameVariant_Normal"
+       }
+      }
+     }
+    ]
+   }
+  }
+ ],
+ [
+  "standalone",
+  {
+   "timestamp": "1788467738900",
+   "greToClientEvent": {
+    "greToClientMessages": [
+     {
+      "gameStateMessage": {
+       "turnInfo": {
+        "turnNumber": 15
+       },
+       "gameInfo": {
+        "gameNumber": 1,
+        "variant": "GameVariant_Normal"
+       }
+      }
+     }
+    ]
+   }
+  }
+ ],
+ [
+  "standalone",
+  {
+   "timestamp": "1788467775963",
+   "greToClientEvent": {
+    "greToClientMessages": [
+     {
+      "gameStateMessage": {
+       "turnInfo": {
+        "turnNumber": 16
+       },
+       "gameInfo": {
+        "gameNumber": 1,
+        "variant": "GameVariant_Normal"
+       }
+      }
+     }
+    ]
+   }
+  }
+ ],
+ [
+  "standalone",
+  {
+   "timestamp": "1788467790335",
+   "greToClientEvent": {
+    "greToClientMessages": [
+     {
+      "gameStateMessage": {
+       "turnInfo": {
+        "turnNumber": 17
+       },
+       "gameInfo": {
+        "gameNumber": 1,
+        "variant": "GameVariant_Normal"
+       }
+      }
+     }
+    ]
+   }
+  }
+ ],
+ [
+  "standalone",
+  {
+   "timestamp": "1788467825342",
+   "greToClientEvent": {
+    "greToClientMessages": [
+     {
+      "gameStateMessage": {
+       "gameInfo": {
+        "gameNumber": 1,
+        "matchState": "MatchState_GameComplete",
+        "results": [
+         {
+          "scope": "MatchScope_Game",
+          "result": "ResultType_WinLoss",
+          "winningTeamId": 2,
+          "reason": "ResultReason_Concede"
+         }
+        ]
+       }
+      }
+     },
+     {
+      "gameStateMessage": {
+       "gameInfo": {
+        "gameNumber": 1,
+        "matchState": "MatchState_MatchComplete",
+        "results": [
+         {
+          "scope": "MatchScope_Game",
+          "result": "ResultType_WinLoss",
+          "winningTeamId": 2,
+          "reason": "ResultReason_Concede"
+         },
+         {
+          "scope": "MatchScope_Match",
+          "result": "ResultType_WinLoss",
+          "winningTeamId": 2,
+          "reason": "ResultReason_Concede"
+         }
+        ]
+       }
+      }
+     }
+    ]
+   }
+  }
+ ],
+ [
+  "standalone",
+  {
+   "timestamp": "1788467825342",
+   "matchGameRoomStateChangedEvent": {
+    "gameRoomInfo": {
+     "gameRoomConfig": {
+      "matchId": "ff7a9467-97de-4278-a12e-e09a7d0b7200",
+      "reservedPlayers": [
+       {
+        "userId": "USER_A",
+        "playerName": "PlayerA",
+        "systemSeatId": 1,
+        "teamId": 1,
+        "eventId": "QuickDraft_SOS_20260831"
+       },
+       {
+        "userId": "USER_B",
+        "playerName": "PlayerB",
+        "systemSeatId": 2,
+        "teamId": 2,
+        "eventId": "QuickDraft_SOS_20260831"
+       }
+      ]
+     },
+     "stateType": "MatchGameRoomStateType_MatchCompleted",
+     "finalMatchResult": {
+      "matchId": "ff7a9467-97de-4278-a12e-e09a7d0b7200",
+      "matchCompletedReason": "MatchCompletedReasonType_Success",
+      "resultList": [
+       {
+        "scope": "MatchScope_Game",
+        "result": "ResultType_WinLoss",
+        "winningTeamId": 2,
+        "reason": "ResultReason_Concede"
+       },
+       {
+        "scope": "MatchScope_Match",
+        "result": "ResultType_WinLoss",
+        "winningTeamId": 2,
+        "reason": "ResultReason_Concede"
+       }
+      ]
+     }
+    }
+   }
+  }
+ ]
+]

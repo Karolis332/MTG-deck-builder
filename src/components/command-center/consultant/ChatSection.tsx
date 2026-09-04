@@ -5,6 +5,9 @@ import { cn } from '@/lib/utils';
 import { toast } from '@/hooks/use-toast';
 import { renderMarkdown } from './renderMarkdown';
 import { ChatActionRow } from './ChatActionRow';
+import { SuggestionCard, buildApplyPayload } from './SuggestionCard';
+import { actionKey, actionsAsChanges, chatActionToSuggestion, pairedCutIndices, pickCardForAction } from './chatActionCards';
+import type { DbCard } from '@/lib/types';
 import type { ChatAction, ChatMessage, ProposedChange } from './types';
 
 /** Pure helper — detects the "no API key, local engine" fallback from the chat message text. */
@@ -22,14 +25,20 @@ interface ChatSectionProps {
   onActionsApplied?: (cardNames: string[]) => void;
   /** `undo` from the deck editor — attached as the toast's Undo action. */
   onUndo?: () => void;
+  onOpenCard?: (card: DbCard) => void;
 }
 
-export function ChatSection({ deckId, prefill, onApplyChanges, onActionsApplied, onUndo }: ChatSectionProps) {
+export function ChatSection({ deckId, prefill, onApplyChanges, onActionsApplied, onUndo, onOpenCard }: ChatSectionProps) {
   const [collapsed, setCollapsed] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
   const [checkedActions, setCheckedActions] = useState<Map<number, Set<number>>>(new Map());
+  const [appliedActions, setAppliedActions] = useState<Map<number, Set<number>>>(new Map());
+  const [applyingKey, setApplyingKey] = useState<string | null>(null);
+  // actionKey → DbCard (resolved) | null (not found). Absent = still resolving.
+  const [resolvedCards, setResolvedCards] = useState<Record<string, DbCard | null>>({});
+  const inflightRef = useRef<Set<string>>(new Set());
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const abortRef = useRef<AbortController | null>(null);
@@ -59,6 +68,32 @@ export function ChatSection({ deckId, prefill, onApplyChanges, onActionsApplied,
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [messages]);
+
+  // Resolve chat actions to real cards so they can render as SuggestionCards.
+  useEffect(() => {
+    const pending = messages
+      .flatMap((m) => m.actions ?? [])
+      .filter((a) => !(actionKey(a) in resolvedCards) && !inflightRef.current.has(actionKey(a)));
+    const unique = [...new Map(pending.map((a) => [actionKey(a), a])).values()];
+    if (unique.length === 0) return;
+    unique.forEach((a) => inflightRef.current.add(actionKey(a)));
+    Promise.all(
+      unique.map(async (a) => {
+        try {
+          const res = await fetch(`/api/cards/search?q=${encodeURIComponent(a.cardName)}&limit=5`);
+          const data = await res.json();
+          return [actionKey(a), pickCardForAction(a, data.cards ?? []) ?? null] as const;
+        } catch {
+          return [actionKey(a), null] as const;
+        }
+      })
+    ).then((entries) => {
+      entries.forEach(([k]) => inflightRef.current.delete(k));
+      setResolvedCards((prev) => ({ ...prev, ...Object.fromEntries(entries) }));
+    });
+  }, [messages, resolvedCards]);
+
+  const resolveAction = (a: ChatAction) => resolvedCards[actionKey(a)];
 
   const sendMessage = useCallback(async (overrideText?: string) => {
     const text = overrideText || input.trim();
@@ -170,14 +205,50 @@ export function ChatSection({ deckId, prefill, onApplyChanges, onActionsApplied,
     });
   };
 
+  const uncheck = (msgIdx: number, indices: number[]) => {
+    setCheckedActions((prev) => {
+      const next = new Map(prev);
+      const set = new Set(prev.get(msgIdx) || []);
+      indices.forEach((i) => set.delete(i));
+      next.set(msgIdx, set);
+      return next;
+    });
+  };
+
+  /** Apply one resolved add (plus its adjacent cut) straight from its SuggestionCard. */
+  const applyOne = async (msgIdx: number, actionIdx: number, card: DbCard) => {
+    const msg = messages[msgIdx];
+    if (!msg.actions) return;
+    const key = `${msgIdx}:${actionIdx}`;
+    setApplyingKey(key);
+    const changes = actionsAsChanges(msg.actions, resolveAction);
+    const payload = buildApplyPayload(chatActionToSuggestion(msg.actions[actionIdx], card), changes);
+    const ok = await onApplyChanges(payload.changes as ProposedChange[], { candidatesShown: payload.candidatesShown });
+    setApplyingKey(null);
+    if (!ok) {
+      toast({ title: 'Could not apply change', tone: 'error' });
+      return;
+    }
+    const touched = payload.changes.length === 2 ? [actionIdx - 1, actionIdx] : [actionIdx];
+    setAppliedActions((prev) => {
+      const next = new Map(prev);
+      next.set(msgIdx, new Set([...(prev.get(msgIdx) || []), ...touched]));
+      return next;
+    });
+    uncheck(msgIdx, touched);
+    onActionsApplied?.([card.name]);
+    toast({ title: `Added ${card.name}`, action: onUndo ? { label: 'Undo', onClick: onUndo } : undefined });
+  };
+
   const handleApplyActions = async (msgIndex: number) => {
     const msg = messages[msgIndex];
     if (!msg.actions || msg.actionsApplied) return;
     const checked = checkedActions.get(msgIndex);
-    const selected = msg.actions.filter((_, i) => checked?.has(i) ?? true);
+    const applied = appliedActions.get(msgIndex);
+    const selected = msg.actions.filter((_, i) => (checked?.has(i) ?? true) && !applied?.has(i));
     if (selected.length === 0) return;
     const ok = await onApplyChanges(
-      selected.map((a) => ({ ...a } as ChatAction & { selected?: boolean })) as unknown as ProposedChange[],
+      actionsAsChanges(selected, resolveAction),
       { candidatesShown: selected.map((a) => a.cardName) }
     );
     if (ok) {
@@ -221,19 +292,44 @@ export function ChatSection({ deckId, prefill, onApplyChanges, onActionsApplied,
                   </span>
                 )}
                 {msg.actions && msg.actions.length > 0 && (() => {
+                  const actions = msg.actions;
                   const checked = checkedActions.get(i);
-                  const checkedCount = checked?.size ?? msg.actions.length;
+                  const applied = appliedActions.get(i);
+                  const checkedCount = checked?.size ?? actions.length;
+                  const cardFor = (j: number) => (actions[j].action === 'add' ? resolveAction(actions[j]) : undefined);
+                  const hiddenCuts = pairedCutIndices(actions, (j) => !!cardFor(j));
+                  const changes = actionsAsChanges(actions, resolveAction);
                   return (
                     <div className="mt-1.5 w-full max-w-[95%] space-y-1">
-                      {msg.actions.map((act, j) => (
-                        <ChatActionRow
-                          key={j}
-                          action={act}
-                          checked={checked?.has(j) ?? true}
-                          disabled={msg.actionsApplied}
-                          onToggle={() => toggleAction(i, j)}
-                        />
-                      ))}
+                      {actions.map((act, j) => {
+                        if (hiddenCuts.has(j)) return null;
+                        const card = cardFor(j);
+                        if (card) {
+                          return (
+                            <SuggestionCard
+                              key={j}
+                              suggestion={chatActionToSuggestion(act, card)}
+                              proposedChanges={changes}
+                              badge="LLM"
+                              applying={applyingKey === `${i}:${j}`}
+                              applied={msg.actionsApplied || applied?.has(j)}
+                              dismissed={!(checked?.has(j) ?? true) && !applied?.has(j)}
+                              onOpenCard={(c) => onOpenCard?.(c)}
+                              onApply={() => applyOne(i, j, card)}
+                              onDismiss={() => uncheck(i, actions[j - 1]?.action === 'cut' ? [j - 1, j] : [j])}
+                            />
+                          );
+                        }
+                        return (
+                          <ChatActionRow
+                            key={j}
+                            action={act}
+                            checked={checked?.has(j) ?? true}
+                            disabled={msg.actionsApplied || applied?.has(j)}
+                            onToggle={() => toggleAction(i, j)}
+                          />
+                        );
+                      })}
                       <button
                         onClick={() => handleApplyActions(i)}
                         disabled={msg.actionsApplied || checkedCount === 0}
@@ -244,7 +340,7 @@ export function ChatSection({ deckId, prefill, onApplyChanges, onActionsApplied,
                             : 'bg-primary text-primary-foreground hover:bg-primary/90 disabled:opacity-50'
                         )}
                       >
-                        {msg.actionsApplied ? 'Applied' : `Apply ${checkedCount} of ${msg.actions.length}`}
+                        {msg.actionsApplied ? 'Applied' : `Apply ${checkedCount} of ${actions.length}`}
                       </button>
                     </div>
                   );

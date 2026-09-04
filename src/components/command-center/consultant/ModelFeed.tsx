@@ -10,6 +10,17 @@ import type { ModelSuggestion, ProposedChange, SuggestResponse } from './types';
 
 const DEBOUNCE_MS = 800;
 
+/**
+ * Pure helper — true when the trained model (CF API) was attempted but the
+ * response fell back to another engine, or the feed fetch itself failed.
+ * Formats where CF is never tried (non-commander) are not "unreachable".
+ */
+export function isModelUnreachable(data: Pick<SuggestResponse, 'source' | 'sources_tried'> | null, fetchFailed: boolean): boolean {
+  if (fetchFailed) return true;
+  if (!data) return false;
+  return data.sources_tried.includes('collaborative-filtering') && data.source !== 'collaborative-filtering';
+}
+
 export interface ModelFeedHotkeyControls {
   applyAll: () => void;
   dismissTop: () => void;
@@ -167,12 +178,29 @@ export function ModelFeed({
             {SOURCE_LABEL[data.source]?.short ?? data.source}
           </span>
         )}
+        {data && (
+          <span className="hud-number truncate text-[9px] text-muted-foreground" title={`impression ${data.impression_id}`}>
+            {data.suggestions.length} shown · {appliedIds.size} applied · {dismissedIds.size} dismissed
+          </span>
+        )}
         {loading && <span className="text-[9px] text-muted-foreground">refreshing…</span>}
         <span className="ml-auto text-muted-foreground">{collapsed ? '▸' : '▾'}</span>
       </button>
 
       {!collapsed && (
         <div className="px-3 pb-3">
+          {!loading && isModelUnreachable(data, error != null) && (
+            <div className="mb-2 flex items-center gap-2 rounded-md border border-amber-500/30 bg-amber-500/10 px-2 py-1 text-[10px] text-amber-300">
+              <span className="flex-1 truncate">Trained model unreachable — rules fallback</span>
+              <button
+                onClick={() => fetchFeed.current()}
+                className="shrink-0 rounded px-1.5 py-0.5 font-medium hover:bg-amber-500/20"
+              >
+                Retry
+              </button>
+            </div>
+          )}
+
           {data && data.sources_tried.length > 1 && (
             <div className="mb-2 text-[9px] text-muted-foreground">
               sources tried: {data.sources_tried.join(' → ')}
@@ -187,7 +215,6 @@ export function ModelFeed({
             </div>
           )}
 
-          {error && !loading && <div className="text-xs text-muted-foreground">{error}</div>}
 
           {!loading && data && suggestions.length === 0 && (
             <div className="text-xs text-muted-foreground">No suggestions right now.</div>

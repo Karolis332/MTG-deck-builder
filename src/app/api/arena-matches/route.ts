@@ -9,8 +9,12 @@ import {
   autoLinkByCardsPlayed,
   getUnlinkedArenaMatches,
   getCardsByNames,
+  getArenaParsedMatchesPage,
+  resolveGrpIdNames,
 } from '@/lib/db';
 import { reportGameOutcomeToCF } from '@/lib/cf-api-client';
+import { deriveFromMatch, hasContractFields } from './_derive';
+import type { ArenaMatch } from '@/lib/arena-log-reader';
 
 export async function POST(request: NextRequest) {
   try {
@@ -78,6 +82,10 @@ export async function POST(request: NextRequest) {
       }
     }
 
+    // New-parser payloads carry the §1.5 contract fields; derive the migration-42 columns
+    // (commander names via the grpId resolver). A re-POST of a known match updates them in place.
+    const derived = hasContractFields(body) ? await deriveFromMatch(body) : undefined;
+
     const storeResult = storeArenaParsedMatch({
       matchId,
       playerName: playerName || null,
@@ -91,6 +99,7 @@ export async function POST(request: NextRequest) {
       cardsPlayedByTurn: cardsPlayedByTurn ? JSON.stringify(cardsPlayedByTurn) : null,
       commanderCastTurns: commanderCastTurns ? JSON.stringify(commanderCastTurns) : null,
       landsPlayedByTurn: landsPlayedByTurn ? JSON.stringify(landsPlayedByTurn) : null,
+      derived,
     });
 
     // Auto-link to saved deck if we have deck cards
@@ -113,6 +122,7 @@ export async function POST(request: NextRequest) {
         computeMatchMLFeatures(
           storeResult.id,
           {
+            ...(body as ArenaMatch),
             matchId, playerName, opponentName, result,
             format, turns: turns || 0,
             deckCards: deckCards || null,
@@ -132,6 +142,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({
       ok: storeResult.success,
+      updated: storeResult.updated ?? false,
       matchId,
       deckMatch: deckMatch ? { deckId: deckMatch.deckId, deckName: deckMatch.deckName, confidence: deckMatch.confidence } : null,
     });
@@ -176,10 +187,35 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ matches });
     }
 
-    const matches = getArenaParsedMatches(100);
-    return NextResponse.json({ matches });
+    // Paged list: ?limit (1..500, default 100) &offset &deck_id. card_names maps every numeric
+    // grpId in deck_cards / cards_played / opponent_cards_seen on this page to a card name.
+    const deckIdParam = searchParams.get('deck_id');
+    const page = getArenaParsedMatchesPage({
+      limit: Number(searchParams.get('limit') ?? 100) || 100,
+      offset: Number(searchParams.get('offset') ?? 0) || 0,
+      deckId: deckIdParam ? Number(deckIdParam) : null,
+    });
+    const card_names = resolveGrpIdNames(collectGrpIds(page.matches));
+    return NextResponse.json({ matches: page.matches, total: page.total, limit: page.limit, offset: page.offset, card_names });
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Failed to fetch arena matches';
     return NextResponse.json({ error: message }, { status: 500 });
   }
+}
+
+function collectGrpIds(matches: Array<Record<string, unknown>>): Set<string> {
+  const ids = new Set<string>();
+  const add = (v: unknown) => { if (/^\d+$/.test(String(v))) ids.add(String(v)); };
+  for (const m of matches) {
+    for (const col of ['deck_cards', 'cards_played', 'opponent_cards_seen']) {
+      const raw = m[col];
+      if (typeof raw !== 'string' || !raw) continue;
+      try {
+        const parsed = JSON.parse(raw) as unknown;
+        if (!Array.isArray(parsed)) continue;
+        for (const entry of parsed) add(typeof entry === 'object' && entry !== null ? (entry as { id?: unknown }).id : entry);
+      } catch { /* legacy non-JSON value */ }
+    }
+  }
+  return ids;
 }

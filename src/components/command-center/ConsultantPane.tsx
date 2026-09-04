@@ -67,6 +67,7 @@ export function ConsultantPane({
         onApplyChanges={onApplyChanges}
         onActionsApplied={(names) => names.forEach((n) => logApplied(n, 'chat'))}
         onUndo={onUndo}
+        onOpenCard={onOpenCard}
       />
       <HistorySection
         deckId={deckId}

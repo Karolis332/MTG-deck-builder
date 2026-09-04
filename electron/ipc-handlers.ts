@@ -5,7 +5,7 @@ import fs from 'fs';
 import os from 'os';
 import path from 'path';
 import http from 'http';
-import { ArenaLogWatcher } from './arena-log-watcher';
+import { ArenaLogWatcher, readLogWithPrev } from './arena-log-watcher';
 import * as screenRecorder from './screen-recorder';
 import { parseArenaLogFile } from '../src/lib/arena-log-reader';
 import { GrpIdResolver } from '../src/lib/grp-id-resolver';
@@ -684,7 +684,8 @@ export function registerIpcHandlers(): void {
   });
 
   ipcMain.handle('parse-full-log', async (_event, filePath: string) => {
-    const text = fs.readFileSync(filePath, { encoding: 'utf-8' });
+    // Include Player-prev.log so a rotated session is not lost (T2, 2026-09-04)
+    const text = readLogWithPrev(filePath);
     const result = parseArenaLogFile(text);
     return result;
   });

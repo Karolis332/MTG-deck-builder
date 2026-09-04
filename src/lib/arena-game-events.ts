@@ -5,7 +5,7 @@
  * that the GameStateEngine can process into a live game state.
  */
 
-import type { JsonBlock } from './arena-log-reader';
+import { identifyPlayer, type JsonBlock } from './arena-log-reader';
 
 // ── Event Types ──────────────────────────────────────────────────────────────
 
@@ -209,6 +209,12 @@ export interface ExtractionContext {
   playerSeatId: number;
   playerTeamId: number;
   currentMatchId: string | null;
+  /** reservedPlayers of the current match (for GRE-seat identity correction). */
+  reservedPlayers: Array<Record<string, unknown>>;
+  /** Local account id from the GRE header prefix / authenticateResponse.clientId. */
+  localUserId: string | null;
+  /** True once the local seat is established by name or GRE seat (not the seat-1 guess). */
+  identityFromName: boolean;
   zones: Map<number, { type: string; ownerSeatId: number }>;
   prevObjectZones: Map<number, number>;
   objectGrpIds: Map<number, number>;
@@ -240,6 +246,9 @@ export function createContext(): ExtractionContext {
     playerSeatId: 1,
     playerTeamId: 1,
     currentMatchId: null,
+    reservedPlayers: [],
+    localUserId: null,
+    identityFromName: false,
     zones: new Map(),
     prevObjectZones: new Map(),
     objectGrpIds: new Map(),
@@ -329,10 +338,12 @@ export function extractGameEventsWithContext(
       if (typeof auth.screenName === 'string') {
         ctx.playerName = auth.screenName;
       }
+      if (typeof auth.clientId === 'string') ctx.localUserId = auth.clientId;
     }
     if ('screenName' in data && typeof data.screenName === 'string') {
       ctx.playerName = data.screenName;
     }
+    if (typeof data.matchAccountUserId === 'string') ctx.localUserId = data.matchAccountUserId;
 
     // Match room state — start and end
     if ('matchGameRoomStateChangedEvent' in data) {
@@ -346,37 +357,15 @@ export function extractGameEventsWithContext(
         const reservedPlayers = (config.reservedPlayers ?? []) as Array<Record<string, unknown>>;
 
         if (matchId && stateType !== 'MatchGameRoomStateType_MatchCompleted') {
-          let pName = ctx.playerName;
-          let oName: string | null = null;
-          let pSeatId = 1;
-          let pTeamId = 1;
-          let format: string | null = null;
-
-          for (const rp of reservedPlayers) {
-            const rpName = rp.playerName as string | undefined;
-            const rpSeatId = rp.systemSeatId as number | undefined;
-            const rpTeamId = rp.teamId as number | undefined;
-            const rpEventId = rp.eventId as string | undefined;
-
-            if (rpName === ctx.playerName || (!ctx.playerName && rpSeatId === 1)) {
-              pName = rpName ?? pName;
-              pSeatId = rpSeatId ?? 1;
-              pTeamId = rpTeamId ?? 1;
-              if (rpEventId) format = rpEventId;
-            } else {
-              oName = rpName ?? null;
-            }
-          }
-
-          if (!pName && reservedPlayers.length >= 2) {
-            const rp0 = reservedPlayers[0];
-            const rp1 = reservedPlayers[1];
-            pName = rp0.playerName as string ?? null;
-            oName = rp1.playerName as string ?? null;
-            pSeatId = (rp0.systemSeatId as number) ?? 1;
-            pTeamId = (rp0.teamId as number) ?? 1;
-            format = (rp0.eventId as string) ?? null;
-          }
+          // Shared identity rule with arena-log-reader (screen name -> GRE seat -> seat 1).
+          const id = identifyPlayer(reservedPlayers, ctx.playerName, null, ctx.localUserId);
+          const pName = id.player?.playerName ?? null;
+          const oName = id.opponent?.playerName ?? null;
+          const pSeatId = id.player?.systemSeatId ?? 1;
+          const pTeamId = id.player?.teamId ?? 1;
+          const format = id.player?.eventId ?? null;
+          ctx.reservedPlayers = reservedPlayers;
+          ctx.identityFromName = id.source !== 'assumed_seat1';
 
           ctx.playerSeatId = pSeatId;
           ctx.playerTeamId = pTeamId;
@@ -478,6 +467,20 @@ export function extractGameEventsWithContext(
 
       for (const msg of messages) {
         const msgType = msg.type as string | undefined;
+
+        // Single-recipient GRE message = the local seat. Corrects a name-less identity
+        // (watcher started mid-session, no authenticateResponse in the buffer).
+        const seatIds = msg.systemSeatIds as number[] | undefined;
+        if (!ctx.identityFromName && Array.isArray(seatIds) && seatIds.length === 1
+          && seatIds[0] !== ctx.playerSeatId && ctx.reservedPlayers.length > 0) {
+          const id = identifyPlayer(ctx.reservedPlayers, null, seatIds[0]);
+          if (id.source === 'gre_seat' && id.player) {
+            ctx.playerSeatId = id.player.systemSeatId ?? ctx.playerSeatId;
+            ctx.playerTeamId = id.player.teamId ?? ctx.playerTeamId;
+            ctx.playerName = id.player.playerName ?? ctx.playerName;
+            ctx.identityFromName = true;
+          }
+        }
 
         // Connect response — contains deck info
         if (msg.connectResp) {

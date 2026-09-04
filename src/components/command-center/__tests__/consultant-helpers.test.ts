@@ -2,7 +2,10 @@ import { describe, it, expect } from 'vitest';
 import { pairedChangeFor, buildApplyPayload, buildDismissPayload } from '../consultant/SuggestionCard';
 import { mergeHistory } from '../consultant/HistorySection';
 import { isLocalEngineResponse } from '../consultant/ChatSection';
-import type { ModelSuggestion, ProposedChange } from '../consultant/types';
+import { isModelUnreachable } from '../consultant/ModelFeed';
+import { actionsAsChanges, chatActionToSuggestion, pairedCutIndices, pickCardForAction } from '../consultant/chatActionCards';
+import type { DbCard } from '@/lib/types';
+import type { ChatAction, ModelSuggestion, ProposedChange } from '../consultant/types';
 
 function card(id: string, name: string) {
   return { id, name, image_uri_small: null } as unknown as ModelSuggestion['card'];
@@ -103,5 +106,47 @@ describe('mergeHistory', () => {
     const items = mergeHistory([], versions, (id) => restored.push(id));
     items[0].restore?.();
     expect(restored).toEqual([5]);
+  });
+});
+
+describe('chat action → SuggestionCard resolver', () => {
+  const dbCard = (id: string, name: string) => ({ id, name, image_uri_small: null }) as unknown as DbCard;
+  const add = (cardId: string, cardName: string): ChatAction => ({ action: 'add', cardId, cardName, quantity: 1, reason: 'r' });
+  const cut = (cardId: string, cardName: string): ChatAction => ({ action: 'cut', cardId, cardName, quantity: 1, reason: 'r' });
+
+  it('pickCardForAction prefers the id, then exact front-face name case-insensitively', () => {
+    const cards = [dbCard('x1', 'Sol Ring'), dbCard('x2', 'Fire // Ice'), dbCard('x3', 'Firebrand')];
+    expect(pickCardForAction(add('x3', 'Sol Ring'), cards)?.id).toBe('x3');
+    expect(pickCardForAction(add('nope', 'sol ring'), cards)?.id).toBe('x1');
+    expect(pickCardForAction(add('nope', 'Fire'), cards)?.id).toBe('x2');
+    expect(pickCardForAction(add('nope', 'Fir'), cards)).toBeUndefined();
+  });
+
+  it('actionsAsChanges swaps in the resolved id so the adjacent cut pairs with the add', () => {
+    const actions = [cut('c1', 'Mind Stone'), add('llm-guess', 'Sol Ring')];
+    const changes = actionsAsChanges(actions, (a) => (a.cardName === 'Sol Ring' ? dbCard('real', 'Sol Ring') : null));
+    expect(changes.map((c) => c.cardId)).toEqual(['c1', 'real']);
+    const { changes: payload } = buildApplyPayload(chatActionToSuggestion(actions[1], dbCard('real', 'Sol Ring')), changes);
+    expect(payload.map((c) => `${c.action}:${c.cardName}`)).toEqual(['cut:Mind Stone', 'add:Sol Ring']);
+  });
+
+  it('pairedCutIndices hides only cuts directly preceding a resolved add', () => {
+    const actions = [cut('a', 'A'), add('b', 'B'), cut('c', 'C'), add('d', 'D'), cut('e', 'E')];
+    expect([...pairedCutIndices(actions, (i) => i === 1)]).toEqual([0]);
+    expect([...pairedCutIndices(actions, () => true)]).toEqual([0, 2]);
+  });
+
+  it('chatActionToSuggestion carries the LLM reason with a zero score', () => {
+    expect(chatActionToSuggestion(add('x', 'X'), dbCard('x', 'X'))).toEqual({ card: dbCard('x', 'X'), reason: 'r', score: 0 });
+  });
+});
+
+describe('isModelUnreachable', () => {
+  it('flags CF tried-but-fell-back and fetch failures, not formats where CF is never tried', () => {
+    expect(isModelUnreachable({ source: 'rules', sources_tried: ['collaborative-filtering', 'synergy', 'rules'] }, false)).toBe(true);
+    expect(isModelUnreachable({ source: 'collaborative-filtering', sources_tried: ['collaborative-filtering'] }, false)).toBe(false);
+    expect(isModelUnreachable({ source: 'rules', sources_tried: ['synergy', 'rules'] }, false)).toBe(false);
+    expect(isModelUnreachable(null, true)).toBe(true);
+    expect(isModelUnreachable(null, false)).toBe(false);
   });
 });

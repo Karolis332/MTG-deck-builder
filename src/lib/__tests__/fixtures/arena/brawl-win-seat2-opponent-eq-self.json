@@ -1,0 +1,583 @@
+[
+ [
+  "standalone",
+  {
+   "authenticateResponse": {
+    "screenName": "PlayerA",
+    "clientId": "USER_A"
+   }
+  }
+ ],
+ [
+  "standalone",
+  {
+   "timestamp": "1788457240951",
+   "matchGameRoomStateChangedEvent": {
+    "gameRoomInfo": {
+     "gameRoomConfig": {
+      "matchId": "8476a579-2bb1-44e4-ba55-cd0456886e87",
+      "reservedPlayers": [
+       {
+        "userId": "USER_B",
+        "playerName": "PlayerB",
+        "systemSeatId": 1,
+        "teamId": 1,
+        "eventId": "Brawl_Ladder"
+       },
+       {
+        "userId": "USER_A",
+        "playerName": "PlayerA",
+        "systemSeatId": 2,
+        "teamId": 2,
+        "eventId": "Brawl_Ladder"
+       }
+      ]
+     },
+     "stateType": "MatchGameRoomStateType_Playing"
+    }
+   }
+  }
+ ],
+ [
+  "standalone",
+  {
+   "timestamp": "1788457241049",
+   "greToClientEvent": {
+    "greToClientMessages": [
+     {
+      "systemSeatIds": [
+       2
+      ],
+      "connectResp": {
+       "deckMessage": {
+        "deckCards": [
+         91339,
+         91065,
+         81865,
+         70466,
+         90600,
+         91071,
+         97115,
+         96183,
+         96183,
+         96183,
+         96183,
+         96183,
+         96183,
+         96183,
+         96183,
+         96183,
+         96183,
+         96183,
+         95789,
+         95843,
+         96190,
+         96190,
+         96190,
+         96190,
+         96190,
+         96190,
+         96190,
+         96190,
+         96190,
+         67552,
+         97998,
+         97558,
+         95844,
+         90617,
+         68738,
+         93873,
+         97320,
+         98300,
+         98302,
+         72209,
+         96001,
+         88917,
+         91588,
+         98647,
+         95918,
+         98680,
+         77498,
+         98025,
+         102772,
+         37388,
+         97341,
+         94299,
+         80213,
+         95653,
+         93901,
+         86974,
+         70464,
+         93950,
+         91666,
+         77494,
+         91173,
+         93909,
+         68635,
+         76086,
+         100080,
+         100504,
+         79497,
+         88986,
+         76444,
+         91770,
+         96030,
+         93971,
+         71572,
+         97420,
+         72434,
+         67484,
+         102830,
+         97893,
+         12615,
+         67970,
+         105031,
+         90806,
+         102588,
+         90808,
+         94869,
+         90822,
+         102827,
+         90964,
+         68506,
+         91766,
+         102680,
+         76508,
+         93743,
+         102521,
+         90818,
+         97346,
+         93836,
+         93961,
+         75526
+        ],
+        "commanderCards": [
+         102111
+        ]
+       }
+      }
+     },
+     {
+      "gameStateMessage": {
+       "gameInfo": {
+        "gameNumber": 1,
+        "matchState": "MatchState_GameInProgress"
+       },
+       "zones": [
+        {
+         "zoneId": 26,
+         "type": "ZoneType_Command"
+        }
+       ],
+       "gameObjects": [
+        {
+         "grpId": 92705,
+         "ownerSeatId": 1,
+         "zoneId": 26,
+         "type": "GameObjectType_Card"
+        },
+        {
+         "grpId": 102111,
+         "ownerSeatId": 2,
+         "zoneId": 26,
+         "type": "GameObjectType_Card"
+        }
+       ]
+      }
+     }
+    ]
+   }
+  }
+ ],
+ [
+  "standalone",
+  {
+   "timestamp": "1788457263949",
+   "greToClientEvent": {
+    "greToClientMessages": [
+     {
+      "gameStateMessage": {
+       "gameInfo": {
+        "gameNumber": 1,
+        "matchState": "MatchState_GameInProgress",
+        "variant": "GameVariant_Brawl"
+       },
+       "turnInfo": {
+        "turnNumber": 1
+       }
+      }
+     }
+    ]
+   }
+  }
+ ],
+ [
+  "standalone",
+  {
+   "timestamp": "1788457281714",
+   "greToClientEvent": {
+    "greToClientMessages": [
+     {
+      "gameStateMessage": {
+       "turnInfo": {
+        "turnNumber": 2
+       },
+       "gameInfo": {
+        "gameNumber": 1,
+        "variant": "GameVariant_Brawl"
+       }
+      }
+     }
+    ]
+   }
+  }
+ ],
+ [
+  "standalone",
+  {
+   "timestamp": "1788457285416",
+   "greToClientEvent": {
+    "greToClientMessages": [
+     {
+      "gameStateMessage": {
+       "turnInfo": {
+        "turnNumber": 3
+       },
+       "gameInfo": {
+        "gameNumber": 1,
+        "variant": "GameVariant_Brawl"
+       }
+      }
+     }
+    ]
+   }
+  }
+ ],
+ [
+  "standalone",
+  {
+   "timestamp": "1788457327465",
+   "greToClientEvent": {
+    "greToClientMessages": [
+     {
+      "gameStateMessage": {
+       "turnInfo": {
+        "turnNumber": 4
+       },
+       "gameInfo": {
+        "gameNumber": 1,
+        "variant": "GameVariant_Brawl"
+       }
+      }
+     }
+    ]
+   }
+  }
+ ],
+ [
+  "standalone",
+  {
+   "timestamp": "1788457338406",
+   "greToClientEvent": {
+    "greToClientMessages": [
+     {
+      "gameStateMessage": {
+       "turnInfo": {
+        "turnNumber": 5
+       },
+       "gameInfo": {
+        "gameNumber": 1,
+        "variant": "GameVariant_Brawl"
+       }
+      }
+     }
+    ]
+   }
+  }
+ ],
+ [
+  "standalone",
+  {
+   "timestamp": "1788457352054",
+   "greToClientEvent": {
+    "greToClientMessages": [
+     {
+      "gameStateMessage": {
+       "turnInfo": {
+        "turnNumber": 6
+       },
+       "gameInfo": {
+        "gameNumber": 1,
+        "variant": "GameVariant_Brawl"
+       }
+      }
+     }
+    ]
+   }
+  }
+ ],
+ [
+  "standalone",
+  {
+   "timestamp": "1788457362523",
+   "greToClientEvent": {
+    "greToClientMessages": [
+     {
+      "gameStateMessage": {
+       "turnInfo": {
+        "turnNumber": 7
+       },
+       "gameInfo": {
+        "gameNumber": 1,
+        "variant": "GameVariant_Brawl"
+       }
+      }
+     }
+    ]
+   }
+  }
+ ],
+ [
+  "standalone",
+  {
+   "timestamp": "1788457379604",
+   "greToClientEvent": {
+    "greToClientMessages": [
+     {
+      "gameStateMessage": {
+       "turnInfo": {
+        "turnNumber": 8
+       },
+       "gameInfo": {
+        "gameNumber": 1,
+        "variant": "GameVariant_Brawl"
+       }
+      }
+     }
+    ]
+   }
+  }
+ ],
+ [
+  "standalone",
+  {
+   "timestamp": "1788457437006",
+   "greToClientEvent": {
+    "greToClientMessages": [
+     {
+      "gameStateMessage": {
+       "turnInfo": {
+        "turnNumber": 9
+       },
+       "gameInfo": {
+        "gameNumber": 1,
+        "variant": "GameVariant_Brawl"
+       }
+      }
+     }
+    ]
+   }
+  }
+ ],
+ [
+  "standalone",
+  {
+   "timestamp": "1788457509799",
+   "greToClientEvent": {
+    "greToClientMessages": [
+     {
+      "gameStateMessage": {
+       "turnInfo": {
+        "turnNumber": 10
+       },
+       "gameInfo": {
+        "gameNumber": 1,
+        "variant": "GameVariant_Brawl"
+       }
+      }
+     }
+    ]
+   }
+  }
+ ],
+ [
+  "standalone",
+  {
+   "timestamp": "1788457535106",
+   "greToClientEvent": {
+    "greToClientMessages": [
+     {
+      "gameStateMessage": {
+       "turnInfo": {
+        "turnNumber": 11
+       },
+       "gameInfo": {
+        "gameNumber": 1,
+        "variant": "GameVariant_Brawl"
+       }
+      }
+     }
+    ]
+   }
+  }
+ ],
+ [
+  "standalone",
+  {
+   "timestamp": "1788457617309",
+   "greToClientEvent": {
+    "greToClientMessages": [
+     {
+      "gameStateMessage": {
+       "turnInfo": {
+        "turnNumber": 12
+       },
+       "gameInfo": {
+        "gameNumber": 1,
+        "variant": "GameVariant_Brawl"
+       }
+      }
+     }
+    ]
+   }
+  }
+ ],
+ [
+  "standalone",
+  {
+   "timestamp": "1788457708773",
+   "greToClientEvent": {
+    "greToClientMessages": [
+     {
+      "gameStateMessage": {
+       "turnInfo": {
+        "turnNumber": 13
+       },
+       "gameInfo": {
+        "gameNumber": 1,
+        "variant": "GameVariant_Brawl"
+       }
+      }
+     }
+    ]
+   }
+  }
+ ],
+ [
+  "standalone",
+  {
+   "timestamp": "1788457828776",
+   "greToClientEvent": {
+    "greToClientMessages": [
+     {
+      "gameStateMessage": {
+       "turnInfo": {
+        "turnNumber": 14
+       },
+       "gameInfo": {
+        "gameNumber": 1,
+        "variant": "GameVariant_Brawl"
+       }
+      }
+     }
+    ]
+   }
+  }
+ ],
+ [
+  "standalone",
+  {
+   "timestamp": "1788457849071",
+   "greToClientEvent": {
+    "greToClientMessages": [
+     {
+      "gameStateMessage": {
+       "gameInfo": {
+        "gameNumber": 1,
+        "matchState": "MatchState_GameComplete",
+        "results": [
+         {
+          "scope": "MatchScope_Game",
+          "result": "ResultType_WinLoss",
+          "winningTeamId": 2,
+          "reason": "ResultReason_Concede"
+         }
+        ]
+       }
+      }
+     },
+     {
+      "gameStateMessage": {
+       "gameInfo": {
+        "gameNumber": 1,
+        "matchState": "MatchState_MatchComplete",
+        "results": [
+         {
+          "scope": "MatchScope_Game",
+          "result": "ResultType_WinLoss",
+          "winningTeamId": 2,
+          "reason": "ResultReason_Concede"
+         },
+         {
+          "scope": "MatchScope_Match",
+          "result": "ResultType_WinLoss",
+          "winningTeamId": 2,
+          "reason": "ResultReason_Concede"
+         }
+        ]
+       }
+      }
+     }
+    ]
+   }
+  }
+ ],
+ [
+  "standalone",
+  {
+   "timestamp": "1788457849071",
+   "matchGameRoomStateChangedEvent": {
+    "gameRoomInfo": {
+     "gameRoomConfig": {
+      "matchId": "8476a579-2bb1-44e4-ba55-cd0456886e87",
+      "reservedPlayers": [
+       {
+        "userId": "USER_B",
+        "playerName": "PlayerB",
+        "systemSeatId": 1,
+        "teamId": 1,
+        "eventId": "Brawl_Ladder"
+       },
+       {
+        "userId": "USER_A",
+        "playerName": "PlayerA",
+        "systemSeatId": 2,
+        "teamId": 2,
+        "eventId": "Brawl_Ladder"
+       }
+      ]
+     },
+     "stateType": "MatchGameRoomStateType_MatchCompleted",
+     "finalMatchResult": {
+      "matchId": "8476a579-2bb1-44e4-ba55-cd0456886e87",
+      "matchCompletedReason": "MatchCompletedReasonType_Success",
+      "resultList": [
+       {
+        "scope": "MatchScope_Game",
+        "result": "ResultType_WinLoss",
+        "winningTeamId": 2,
+        "reason": "ResultReason_Concede"
+       },
+       {
+        "scope": "MatchScope_Match",
+        "result": "ResultType_WinLoss",
+        "winningTeamId": 2,
+        "reason": "ResultReason_Concede"
+       }
+      ]
+     }
+    }
+   }
+  }
+ ]
+]

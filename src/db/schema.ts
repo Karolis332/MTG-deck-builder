@@ -1395,4 +1395,34 @@ export const MIGRATIONS = [
       ALTER TABLE cf_cache ADD COLUMN reason TEXT;
     `,
   },
+  {
+    version: 43,
+    name: 'commander_card_stats_lift',
+    sql: `
+      -- EDHREC-style lift (Dec 2025 successor to synergy_score):
+      -- LN(P(card | commander decks) / P(card | decks sharing the commander's colour identity)).
+      -- Populated by sync-commander-stats.ts from the CF API /commander-stats 'lift' field.
+      -- NULL until the next sync; nothing in the engine reads it yet (T4 hook point:
+      -- deck-builder-ai.ts commander_card_stats query). synergy_score is unchanged.
+      ALTER TABLE commander_card_stats ADD COLUMN lift REAL;
+    `,
+  },
+  {
+    version: 42,
+    name: 'arena_parsed_matches_contract_fields',
+    sql: `
+      -- Match-history field contract (orchestration/desktop-overhaul-2026-09/spec.md §1.5).
+      -- Derived from raw_events by POST /api/arena-matches/reparse; existing columns keep their meaning.
+      ALTER TABLE arena_parsed_matches ADD COLUMN player_screen_name TEXT;
+      ALTER TABLE arena_parsed_matches ADD COLUMN player_seat INTEGER;
+      ALTER TABLE arena_parsed_matches ADD COLUMN winner_seat INTEGER;
+      ALTER TABLE arena_parsed_matches ADD COLUMN opponent_commander TEXT;
+      ALTER TABLE arena_parsed_matches ADD COLUMN player_commander TEXT;
+      ALTER TABLE arena_parsed_matches ADD COLUMN format_normalized TEXT;
+      ALTER TABLE arena_parsed_matches ADD COLUMN queue_raw TEXT;
+      ALTER TABLE arena_parsed_matches ADD COLUMN game_results TEXT;
+      ALTER TABLE arena_parsed_matches ADD COLUMN duration_seconds INTEGER;
+      CREATE INDEX IF NOT EXISTS idx_arena_format_normalized ON arena_parsed_matches(format_normalized);
+    `,
+  },
 ];

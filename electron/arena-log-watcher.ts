@@ -63,6 +63,19 @@ function debugLog(msg: string): void {
   console.log(`[Telemetry] ${msg}`);
 }
 
+/** Sibling `Player-prev.log` of a Player.log path, or null when absent. */
+export function prevLogPath(logPath: string): string | null {
+  const prev = path.join(path.dirname(logPath), 'Player-prev.log');
+  return fs.existsSync(prev) ? prev : null;
+}
+
+/** Player-prev.log + Player.log text in chronological order (for the full parse / reparse). */
+export function readLogWithPrev(logPath: string): string {
+  const prev = prevLogPath(logPath);
+  const current = fs.readFileSync(logPath, 'utf-8');
+  return prev ? fs.readFileSync(prev, 'utf-8') + '\n' + current : current;
+}
+
 export class ArenaLogWatcher extends EventEmitter {
   private logPath: string;
   private pollInterval: number;
@@ -81,6 +94,7 @@ export class ArenaLogWatcher extends EventEmitter {
   private streamingBuffer = '';
   private streamingContext: ExtractionContext = createContext();
   private processedBlockCount = 0;
+  private knownScreenName: string | null = null;
 
   private catchUp: boolean;
   private lastLoggedTurn = 0;
@@ -140,6 +154,7 @@ export class ArenaLogWatcher extends EventEmitter {
       this.lastInode = stat.ino;
 
       if (this.catchUp) {
+        this.backfillPrevLog();
         // Catch-up mode: scan the last portion of the log to detect in-progress matches
         // Read last 5MB — a single game can generate several MB of log data,
         // and we need to find the matchGameRoomStateChangedEvent (Playing) at the start
@@ -179,6 +194,28 @@ export class ArenaLogWatcher extends EventEmitter {
     this.streamingContext = createContext();
     this.processedBlockCount = 0;
     this.emit('stopped');
+  }
+
+  /**
+   * Arena rotates Player.log per session; the previous session survives as Player-prev.log.
+   * Parse it once on start so matches from the last session are not lost (17Lands/Untapped do the same).
+   */
+  private backfillPrevLog(): void {
+    const prev = prevLogPath(this.logPath);
+    if (!prev) return;
+    try {
+      const { matches, screenName } = parseArenaLogFile(fs.readFileSync(prev, 'utf-8'), { screenName: this.knownScreenName });
+      if (screenName) this.knownScreenName = screenName;
+      for (const match of matches) {
+        if (this.seenMatchIds.has(match.matchId)) continue;
+        this.seenMatchIds.add(match.matchId);
+        this.matchCount++;
+        this.emit('match', match);
+      }
+      debugLog(`backfilled ${matches.length} matches from ${prev}`);
+    } catch (err) {
+      debugLog(`prev-log backfill failed: ${err}`);
+    }
   }
 
   private poll(): void {
@@ -240,7 +277,12 @@ export class ArenaLogWatcher extends EventEmitter {
     this.buffer.push(content);
     const fullText = this.buffer.join('');
 
-    const { matches, collection } = parseArenaLogFile(fullText);
+    // Screen name persists across buffer clears so a mid-session match never falls
+    // back to the "seat 1 is me" guess (root cause of opponent==self + turns=0 rows).
+    const { matches, collection, screenName } = parseArenaLogFile(fullText, {
+      screenName: this.streamingContext.playerName ?? this.knownScreenName,
+    });
+    if (screenName) this.knownScreenName = screenName;
 
     // Emit new matches (dedup by matchId)
     let hasNewMatches = false;
@@ -258,8 +300,9 @@ export class ArenaLogWatcher extends EventEmitter {
       this.emit('collection', collection);
     }
 
-    // Clear buffer if we successfully parsed something
-    if (hasNewMatches || collection) {
+    // Clear the buffer only once a match is emitted — clearing on a collection event
+    // mid-match used to drop the Playing room event, leaving a turns=0 orphan.
+    if (hasNewMatches) {
       this.buffer = [];
     }
   }

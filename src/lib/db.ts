@@ -156,6 +156,48 @@ export function upsertCardAliases(aliases: Array<{ alias_name: string; canonical
 
 // ── Query helpers ─────────────────────────────────────────────────────────
 
+type NamedRow = { id: string; name: string };
+
+/**
+ * Deterministic top-of-page ordering for a rank-sorted FTS page:
+ *  - the exact-name match (case-insensitive) comes first;
+ *  - an Arena-rebalanced `A-<name>` row is always preceded by `<name>`,
+ *    pulling the base card onto the page if FTS ranked it below the fold.
+ * Unrelated rows keep their FTS order. Exported for unit tests.
+ */
+export function pinExactAndBaseNames<T extends NamedRow>(
+  rows: T[],
+  query: string,
+  limit: number,
+  firstPage: boolean,
+  io: { lookup: (name: string) => T | undefined; matches: (row: T) => boolean }
+): T[] {
+  let out = [...rows];
+  const q = query.trim().toLowerCase();
+  const exactIdx = out.findIndex((r) => r.name.toLowerCase() === q);
+  if (exactIdx > 0) out.unshift(...out.splice(exactIdx, 1));
+  else if (exactIdx < 0 && firstPage) {
+    const hit = io.lookup(q);
+    if (hit) out = [hit, ...out].slice(0, limit);
+  }
+  for (let i = 0; i < out.length; i++) {
+    if (!out[i].name.startsWith('A-')) continue;
+    const base = out[i].name.slice(2);
+    const baseIdx = out.findIndex((r) => r.name === base);
+    if (baseIdx > i) {
+      out.splice(i, 0, ...out.splice(baseIdx, 1));
+      i++;
+    } else if (baseIdx < 0 && firstPage) {
+      const hit = io.lookup(base);
+      if (hit && io.matches(hit)) {
+        out = [...out.slice(0, i), hit, ...out.slice(i)].slice(0, limit);
+        i++;
+      }
+    }
+  }
+  return out;
+}
+
 export function searchCards(
   query: string,
   limit = 20,
@@ -167,7 +209,10 @@ export function searchCards(
   // Build optional filter clauses
   const extraJoins: string[] = [];
   const extraConditions: string[] = [];
-  const extraParams: unknown[] = [];
+  // Bind order must follow SQL text order: join params (before WHERE), then
+  // the search term, then condition params.
+  const joinParams: unknown[] = [];
+  const condParams: unknown[] = [];
 
   if (options?.format && options.format !== '1v1') {
     const legalKey = getLegalityKey(options.format);
@@ -179,7 +224,7 @@ export function searchCards(
     const excluded = allColors.filter((c) => !options.colorIdentity!.includes(c));
     for (const color of excluded) {
       extraConditions.push(`c.color_identity NOT LIKE ?`);
-      extraParams.push(`%${color}%`);
+      condParams.push(`%${color}%`);
     }
   }
 
@@ -189,7 +234,7 @@ export function searchCards(
       UNION SELECT 'Plains' UNION SELECT 'Island' UNION SELECT 'Swamp'
       UNION SELECT 'Mountain' UNION SELECT 'Forest' UNION SELECT 'Wastes'
     ) owned ON c.name = owned.cname`);
-    extraParams.push(options.userId);
+    joinParams.push(options.userId);
   }
 
   const joinClause = extraJoins.length > 0 ? extraJoins.join(' ') : '';
@@ -198,12 +243,12 @@ export function searchCards(
   if (!query.trim()) {
     const total = (db.prepare(
       `SELECT COUNT(*) as count FROM cards c ${joinClause} WHERE 1=1${whereExtra}`
-    ).get(...extraParams) as { count: number }).count;
+    ).get(...joinParams, ...condParams) as { count: number }).count;
     const cards = db
       .prepare(
         `SELECT c.* FROM cards c ${joinClause} WHERE 1=1${whereExtra} ORDER BY c.edhrec_rank ASC NULLS LAST LIMIT ? OFFSET ?`
       )
-      .all(...extraParams, limit, offset);
+      .all(...joinParams, ...condParams, limit, offset);
     return { cards, total };
   }
 
@@ -221,7 +266,7 @@ export function searchCards(
            ${joinClause}
            WHERE cards_fts MATCH ?${whereExtra}`
         )
-        .get(ftsQuery, ...extraParams) as { count: number }
+        .get(...joinParams, ftsQuery, ...condParams) as { count: number }
     ).count;
 
     const cards = db
@@ -233,9 +278,22 @@ export function searchCards(
          ORDER BY rank
          LIMIT ? OFFSET ?`
       )
-      .all(ftsQuery, ...extraParams, limit, offset);
+      .all(...joinParams, ftsQuery, ...condParams, limit, offset) as NamedRow[];
 
-    return { cards, total };
+    // ponytail: page-level fixup instead of extra ORDER BY terms — FTS5's
+    // internal `ORDER BY rank` fast path dies with any added sort key
+    // (82 ms → 390 ms on a 60K-row prefix match). Inserts only on page 1.
+    const byName = db.prepare(
+      `SELECT c.* FROM cards c ${joinClause} WHERE c.name = ? COLLATE NOCASE${whereExtra} LIMIT 1`
+    );
+    const ftsHit = db.prepare(
+      `SELECT 1 FROM cards_fts WHERE cards_fts MATCH ? AND rowid = (SELECT rowid FROM cards WHERE id = ?)`
+    );
+    const fixed = pinExactAndBaseNames(cards, query, limit, offset === 0, {
+      lookup: (name) => byName.get(...joinParams, name, ...condParams) as NamedRow | undefined,
+      matches: (row) => ftsHit.get(ftsQuery, row.id) != null,
+    });
+    return { cards: fixed, total };
   } catch {
     const likeQuery = `%${query}%`;
     const total = (
@@ -243,13 +301,13 @@ export function searchCards(
         .prepare(
           `SELECT COUNT(*) as count FROM cards c ${joinClause} WHERE c.name LIKE ?${whereExtra}`
         )
-        .get(likeQuery, ...extraParams) as { count: number }
+        .get(...joinParams, likeQuery, ...condParams) as { count: number }
     ).count;
     const cards = db
       .prepare(
         `SELECT c.* FROM cards c ${joinClause} WHERE c.name LIKE ?${whereExtra} ORDER BY c.edhrec_rank ASC NULLS LAST LIMIT ? OFFSET ?`
       )
-      .all(likeQuery, ...extraParams, limit, offset);
+      .all(...joinParams, likeQuery, ...condParams, limit, offset);
     return { cards, total };
   }
 }
@@ -706,6 +764,50 @@ export function getArenaIdCoverage(): { total: number; withArenaId: number } {
   return { total, withArenaId };
 }
 
+/** Contract columns (migration 42) derived from raw_events — shared by insert, re-POST and reparse. */
+export interface ArenaMatchDerived {
+  playerName: string | null;
+  opponentName: string | null;
+  result: string;
+  turns: number;
+  playerScreenName: string | null;
+  playerSeat: number | null;
+  winnerSeat: number | null;
+  opponentCommander: string | null;
+  playerCommander: string | null;
+  formatNormalized: string;
+  queueRaw: string | null;
+  gameResults: string | null;
+  durationSeconds: number | null;
+  rawEvents: string | null;
+  startedAt: string | null;
+}
+
+const DERIVED_UPDATE_SQL = `
+  UPDATE arena_parsed_matches SET
+    player_name = ?, opponent_name = ?, result = ?, turns = ?,
+    player_screen_name = ?, player_seat = ?, winner_seat = ?,
+    opponent_commander = ?, player_commander = ?,
+    format_normalized = ?, queue_raw = ?, game_results = ?, duration_seconds = ?,
+    raw_events = COALESCE(?, raw_events),
+    match_start_time = COALESCE(match_start_time, ?)
+  WHERE match_id = ?`;
+
+function derivedParams(d: ArenaMatchDerived, matchId: string): unknown[] {
+  return [
+    d.playerName, d.opponentName, d.result, d.turns,
+    d.playerScreenName, d.playerSeat, d.winnerSeat,
+    d.opponentCommander, d.playerCommander,
+    d.formatNormalized, d.queueRaw, d.gameResults, d.durationSeconds,
+    d.rawEvents, d.startedAt, matchId,
+  ];
+}
+
+/** Rebuild derived columns for one existing row. Never inserts or deletes. */
+export function updateArenaMatchDerived(matchId: string, d: ArenaMatchDerived): boolean {
+  return getDb().prepare(DERIVED_UPDATE_SQL).run(...derivedParams(d, matchId)).changes > 0;
+}
+
 export function storeArenaParsedMatch(match: {
   matchId: string;
   playerName: string | null;
@@ -719,7 +821,8 @@ export function storeArenaParsedMatch(match: {
   cardsPlayedByTurn?: string | null;
   commanderCastTurns?: string | null;
   landsPlayedByTurn?: string | null;
-}): { success: boolean; id?: number } {
+  derived?: ArenaMatchDerived;
+}): { success: boolean; id?: number; updated?: boolean } {
   const db = getDb();
   try {
     const result = db.prepare(
@@ -742,10 +845,92 @@ export function storeArenaParsedMatch(match: {
       match.commanderCastTurns || null,
       match.landsPlayedByTurn || null
     );
+    // Re-POST of a known match (e.g. "Parse Full Log") rebuilds derived columns in place.
+    if (match.derived) updateArenaMatchDerived(match.matchId, match.derived);
+    if (result.changes === 0) return { success: true, updated: true };
     return { success: true, id: Number(result.lastInsertRowid) || undefined };
   } catch {
     return { success: false };
   }
+}
+
+export interface ArenaReparseRow {
+  id: number;
+  match_id: string;
+  player_name: string | null;
+  opponent_name: string | null;
+  result: string | null;
+  format: string | null;
+  turns: number | null;
+  raw_events: string | null;
+}
+
+export function getArenaMatchesForReparse(): ArenaReparseRow[] {
+  return getDb()
+    .prepare('SELECT id, match_id, player_name, opponent_name, result, format, turns, raw_events FROM arena_parsed_matches ORDER BY id')
+    .all() as ArenaReparseRow[];
+}
+
+/** Distribution snapshot used for the reparse before/after report. */
+export function getArenaMatchAudit(): Record<string, unknown> {
+  const db = getDb();
+  const rows = (sql: string) => db.prepare(sql).all();
+  const count = (sql: string) => (db.prepare(sql).get() as { c: number }).c;
+  return {
+    total: count('SELECT COUNT(*) c FROM arena_parsed_matches'),
+    byResult: rows('SELECT result, COUNT(*) c FROM arena_parsed_matches GROUP BY result ORDER BY c DESC'),
+    byFormatNormalized: rows('SELECT format_normalized, COUNT(*) c FROM arena_parsed_matches GROUP BY format_normalized ORDER BY c DESC'),
+    opponentEqualsSelf: count(
+      `SELECT COUNT(*) c FROM arena_parsed_matches
+       WHERE opponent_name = COALESCE(player_screen_name,
+         (SELECT player_name FROM arena_parsed_matches GROUP BY player_name ORDER BY COUNT(*) DESC LIMIT 1))`
+    ),
+    turnsZero: count('SELECT COUNT(*) c FROM arena_parsed_matches WHERE turns = 0'),
+    withOpponentCommander: count('SELECT COUNT(*) c FROM arena_parsed_matches WHERE opponent_commander IS NOT NULL'),
+    withRawEvents: count('SELECT COUNT(*) c FROM arena_parsed_matches WHERE raw_events IS NOT NULL'),
+  };
+}
+
+/** Apply a batch of derived-column updates atomically (one transaction). */
+export function applyArenaDerivedBatch(updates: Array<{ matchId: string; derived: ArenaMatchDerived }>): number {
+  const db = getDb();
+  const stmt = db.prepare(DERIVED_UPDATE_SQL);
+  const run = db.transaction((items: typeof updates) => {
+    let n = 0;
+    for (const u of items) n += stmt.run(...derivedParams(u.derived, u.matchId)).changes;
+    return n;
+  });
+  return run(updates);
+}
+
+/** Paged match list for the history UI. limit is clamped to 1..500. */
+export function getArenaParsedMatchesPage(opts: { limit?: number; offset?: number; deckId?: number | null } = {}) {
+  const db = getDb();
+  const limit = Math.min(Math.max(opts.limit ?? 100, 1), 500);
+  const offset = Math.max(opts.offset ?? 0, 0);
+  const where = opts.deckId != null ? 'WHERE deck_id = ?' : '';
+  const params = opts.deckId != null ? [opts.deckId] : [];
+  const total = (db.prepare(`SELECT COUNT(*) c FROM arena_parsed_matches ${where}`).get(...params) as { c: number }).c;
+  const matches = db
+    .prepare(`SELECT * FROM arena_parsed_matches ${where} ORDER BY parsed_at DESC LIMIT ? OFFSET ?`)
+    .all(...params, limit, offset) as Array<Record<string, unknown>>;
+  return { matches, total, limit, offset };
+}
+
+/** grpId → card name via grp_id_cache, then cards.arena_id (paper name preferred over "A-" alias). */
+export function resolveGrpIdNames(grpIds: Iterable<string | number>): Record<string, string> {
+  const db = getDb();
+  const cache = db.prepare('SELECT card_name FROM grp_id_cache WHERE grp_id = ?');
+  const arena = db.prepare("SELECT name FROM cards WHERE arena_id = ? ORDER BY (name LIKE 'A-%') LIMIT 1");
+  const out: Record<string, string> = {};
+  for (const raw of new Set(Array.from(grpIds, String))) {
+    const id = Number(raw);
+    if (!Number.isInteger(id) || id <= 0) continue;
+    const row = (cache.get(id) as { card_name: string } | undefined) ?? (arena.get(id) as { name: string } | undefined);
+    const name = row ? ('card_name' in row ? row.card_name : row.name) : null;
+    if (name) out[raw] = name.startsWith('A-') ? name.slice(2) : name;
+  }
+  return out;
 }
 
 export function getArenaParsedMatches(limit = 100) {

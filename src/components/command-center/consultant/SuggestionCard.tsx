@@ -67,6 +67,8 @@ interface SuggestionCardProps {
   applying?: boolean;
   dismissed?: boolean;
   applied?: boolean;
+  /** Replaces the score pill — chat (LLM) actions carry no model score. */
+  badge?: string;
   onOpenCard: (card: DbCard) => void;
   onApply: () => void;
   onDismiss: () => void;
@@ -78,6 +80,7 @@ export function SuggestionCard({
   applying,
   dismissed,
   applied,
+  badge,
   onOpenCard,
   onApply,
   onDismiss,
@@ -99,9 +102,13 @@ export function SuggestionCard({
       <div className="min-w-0 flex-1">
         <div className="flex items-center gap-1.5">
           <span className="truncate text-xs font-medium">{suggestion.card.name}</span>
-          <span className="hud-number shrink-0 rounded bg-primary/15 px-1 py-0.5 text-[9px] text-primary">
-            {suggestion.score.toFixed(1)}
-          </span>
+          {badge ? (
+            <span className="shrink-0 rounded bg-violet-500/15 px-1 py-0.5 text-[9px] font-bold text-violet-400">{badge}</span>
+          ) : (
+            <span className="hud-number shrink-0 rounded bg-primary/15 px-1 py-0.5 text-[9px] text-primary">
+              {suggestion.score.toFixed(1)}
+            </span>
+          )}
         </div>
         {cut ? (
           <div className="truncate text-[10px] text-muted-foreground">

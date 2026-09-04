@@ -1,8 +1,14 @@
-import { describe, it, expect, beforeEach, afterEach } from 'vitest';
+import { describe, it, expect, beforeEach, afterEach, beforeAll, afterAll } from 'vitest';
 import Database from 'better-sqlite3';
 import path from 'path';
 import fs from 'fs';
 import { MIGRATIONS } from '@/db/schema';
+
+// `@/lib/db` resolves its directory once at import — point it at a scratch dir
+// BEFORE the first (dynamic) import so no test can touch the real database.
+const SEARCH_DIR = path.join(process.cwd(), 'data', 'test-searchcards');
+process.env.MTG_DB_DIR = SEARCH_DIR;
+type DbLib = typeof import('@/lib/db');
 
 // Use a temp DB for each test
 let db: Database.Database;
@@ -364,5 +370,71 @@ describe('Personalized Suggestions', () => {
     expect(rows).toHaveLength(1);
     expect(rows[0].card_name).toBe('Goblin Warchief');
     expect(rows[0].predicted_score).toBe(0.72);
+  });
+});
+
+describe('searchCards ordering (A- rebalanced twins)', () => {
+  let lib: DbLib;
+
+  beforeAll(async () => {
+    fs.rmSync(SEARCH_DIR, { recursive: true, force: true });
+    fs.mkdirSync(SEARCH_DIR, { recursive: true });
+    lib = await import('@/lib/db');
+    expect(lib.getDataDir()).toBe(SEARCH_DIR); // hard stop: never seed the real DB
+    const insert = lib.getDb().prepare(`
+      INSERT INTO cards (id, oracle_id, name, cmc, type_line, oracle_text, set_code, set_name, collector_number, rarity)
+      VALUES (?, ?, ?, 4, 'Legendary Creature — Human Wizard', ?, 'FIN', 'Final Fantasy', '1', 'mythic')
+    `);
+    // A- first so insertion order alone would put it ahead; longer oracle text
+    // gives the base card a *worse* bm25 rank — the real-DB situation.
+    insert.run('a-vivi', 'o-vivi', 'A-Vivi Ornitier', 'Rebalanced. {X}: ping.');
+    insert.run('vivi', 'o-vivi', 'Vivi Ornitier', 'Whenever you cast a noncreature spell, put a +1/+1 counter on Vivi Ornitier. {0}: Add {R} and {U} for each +1/+1 counter. Activate only during your turn and once each turn.');
+    insert.run('vivid', 'o-vivid', 'Vivid Revival', 'Return up to three target multicolored cards from your graveyard to your hand.');
+  });
+
+  afterAll(() => {
+    lib.getDb().close();
+    fs.rmSync(SEARCH_DIR, { recursive: true, force: true });
+  });
+
+  it('puts the base card before its A- twin for a prefix query', () => {
+    const names = (lib.searchCards('vivi', 10).cards as Array<{ name: string }>).map((c) => c.name);
+    expect(names.indexOf('Vivi Ornitier')).toBeGreaterThanOrEqual(0);
+    expect(names.indexOf('A-Vivi Ornitier')).toBe(names.indexOf('Vivi Ornitier') + 1);
+  });
+
+  it('puts the exact-name match first', () => {
+    const names = (lib.searchCards('vivi ornitier', 10).cards as Array<{ name: string }>).map((c) => c.name);
+    expect(names.slice(0, 2)).toEqual(['Vivi Ornitier', 'A-Vivi Ornitier']);
+  });
+
+  it('pulls the base card onto page 1 when FTS ranked it below the fold', () => {
+    const names = (lib.searchCards('vivi', 1).cards as Array<{ name: string }>).map((c) => c.name);
+    expect(names).toHaveLength(1);
+    expect(names[0]).not.toMatch(/^A-/);
+  });
+
+  describe('pinExactAndBaseNames (pure)', () => {
+    const io = { lookup: () => undefined, matches: () => true };
+    const row = (name: string) => ({ id: name, name });
+
+    it('keeps unrelated rows in FTS order and only swaps the twin pair', () => {
+      const out = lib.pinExactAndBaseNames([row('Vivid Revival'), row('A-Vivi Ornitier'), row('Vivi Ornitier'), row('Vivien')], 'vivi', 10, true, io);
+      expect(out.map((r) => r.name)).toEqual(['Vivid Revival', 'Vivi Ornitier', 'A-Vivi Ornitier', 'Vivien']);
+    });
+
+    it('inserts a looked-up base card and trims to the limit on page 1 only', () => {
+      const lookup = (n: string) => (n === 'Vivi Ornitier' ? row(n) : undefined);
+      const p1 = lib.pinExactAndBaseNames([row('A-Vivi Ornitier'), row('Vivien')], 'vivi', 2, true, { lookup, matches: () => true });
+      expect(p1.map((r) => r.name)).toEqual(['Vivi Ornitier', 'A-Vivi Ornitier']);
+      const p2 = lib.pinExactAndBaseNames([row('A-Vivi Ornitier'), row('Vivien')], 'vivi', 2, false, { lookup, matches: () => true });
+      expect(p2.map((r) => r.name)).toEqual(['A-Vivi Ornitier', 'Vivien']);
+    });
+
+    it('does not insert a base card the FTS query would not have matched', () => {
+      const lookup = (n: string) => (n === 'Vivi Ornitier' ? row(n) : undefined);
+      const out = lib.pinExactAndBaseNames([row('A-Vivi Ornitier')], 'rebalanced', 5, true, { lookup, matches: () => false });
+      expect(out.map((r) => r.name)).toEqual(['A-Vivi Ornitier']);
+    });
   });
 });

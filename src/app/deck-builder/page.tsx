@@ -474,7 +474,17 @@ export default function DeckBuilderPage() {
                               <img src={card.image_uri_small} alt="" className="h-8 w-6 rounded-sm object-cover" />
                             )}
                             <div className="min-w-0 flex-1">
-                              <div className="truncate font-medium">{card.name}</div>
+                              <div className="flex items-center gap-1.5">
+                                <span className="truncate font-medium">{card.name}</span>
+                                {card.name.startsWith('A-') && (
+                                  <span
+                                    title="Alchemy-only rebalanced version — not the paper card"
+                                    className="shrink-0 rounded bg-amber-500/15 px-1 py-0.5 text-[9px] font-semibold uppercase text-amber-400"
+                                  >
+                                    Arena rebalanced
+                                  </span>
+                                )}
+                              </div>
                               <div className="truncate text-xs text-muted-foreground">{card.type_line}</div>
                             </div>
                           </button>
