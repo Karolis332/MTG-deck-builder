@@ -98,7 +98,7 @@ export function BenchmarkTile({ deck, onOpenCard, onAskConsultant }: BenchmarkTi
       title="Benchmark"
       headline={
         <span className={cn('hud-number text-sm', ticking && 'hud-tick')}>
-          {data ? `${data.qualityIndex} / vs top ${data.refCount}` : loading ? '…' : '—'}
+          {data ? `Quality ${Math.round(data.qualityIndex)} · vs top ${data.refCount} liked` : loading ? '…' : '—'}
         </span>
       }
     >
@@ -107,8 +107,8 @@ export function BenchmarkTile({ deck, onOpenCard, onAskConsultant }: BenchmarkTi
       {data && (
         <div className="space-y-2 text-xs">
           <div>
-            Overlap: <span className="font-medium">{data.overlapMeanPct}%</span> mean,{' '}
-            <span className="font-medium">{data.overlapBestPct}%</span> best
+            Overlap <span className="font-medium">{Math.round(data.overlapMeanPct)}%</span> mean ·{' '}
+            <span className="font-medium">{Math.round(data.overlapBestPct)}%</span> best
             {data.bracketFilterApplied && (
               <span className="ml-1 rounded bg-primary/20 px-1 text-[10px]">bracket-filtered</span>
             )}

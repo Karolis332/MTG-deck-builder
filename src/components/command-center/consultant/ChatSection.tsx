@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { cn } from '@/lib/utils';
+import { toast } from '@/hooks/use-toast';
 import { renderMarkdown } from './renderMarkdown';
 import { ChatActionRow } from './ChatActionRow';
 import type { ChatAction, ChatMessage, ProposedChange } from './types';
@@ -19,9 +20,11 @@ interface ChatSectionProps {
     meta: { impressionId?: string; candidatesShown: string[] }
   ) => Promise<boolean>;
   onActionsApplied?: (cardNames: string[]) => void;
+  /** `undo` from the deck editor — attached as the toast's Undo action. */
+  onUndo?: () => void;
 }
 
-export function ChatSection({ deckId, prefill, onApplyChanges, onActionsApplied }: ChatSectionProps) {
+export function ChatSection({ deckId, prefill, onApplyChanges, onActionsApplied, onUndo }: ChatSectionProps) {
   const [collapsed, setCollapsed] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState('');
@@ -180,6 +183,12 @@ export function ChatSection({ deckId, prefill, onApplyChanges, onActionsApplied 
     if (ok) {
       setMessages((prev) => prev.map((m, i) => (i === msgIndex ? { ...m, actionsApplied: true } : m)));
       onActionsApplied?.(selected.map((a) => a.cardName));
+      toast({
+        title: `Applied ${selected.length} change${selected.length === 1 ? '' : 's'}`,
+        action: onUndo ? { label: 'Undo', onClick: onUndo } : undefined,
+      });
+    } else {
+      toast({ title: 'Could not apply changes', tone: 'error' });
     }
   };
 

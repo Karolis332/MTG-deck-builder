@@ -1,6 +1,8 @@
 'use client';
 
+import { cn } from '@/lib/utils';
 import { TileFrame } from './TileFrame';
+import { useTickOnChange } from './useTickOnChange';
 import type { AnalysisResponse } from './types';
 
 export function SynergyTile({
@@ -12,9 +14,10 @@ export function SynergyTile({
 }) {
   const pairs = analysis?.topSynergyPairs?.slice(0, 5) ?? [];
   const winPlan = analysis?.winPlan;
+  const ticking = useTickOnChange(analysis?.iss);
 
   return (
-    <TileFrame title="Synergy" headline={<span className="hud-number text-sm">{pairs.length}</span>}>
+    <TileFrame title="Synergy" headline={<span className={cn('hud-number text-sm', ticking && 'hud-tick')}>{pairs.length}</span>}>
       {!analysis ? (
         <p className="text-xs text-muted-foreground">No analysis yet.</p>
       ) : (

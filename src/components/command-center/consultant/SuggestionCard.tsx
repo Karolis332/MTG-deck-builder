@@ -86,7 +86,7 @@ export function SuggestionCard({
   const { add, cut } = pairedChangeFor(suggestion, proposedChanges);
 
   return (
-    <div className="flex items-start gap-2 rounded-lg border border-border bg-card/60 p-2">
+    <div className="flex items-start gap-2 rounded-lg border border-border bg-card/60 p-2 animate-slide-up">
       {suggestion.card.image_uri_small && (
         // eslint-disable-next-line @next/next/no-img-element
         <img

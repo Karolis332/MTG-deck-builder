@@ -4,10 +4,16 @@ import { useEffect, useRef, useState } from 'react';
 import { cn } from '@/lib/utils';
 import type { DbCard } from '@/lib/types';
 import { SOURCE_LABEL } from '@/lib/suggestion-sources';
+import { toast } from '@/hooks/use-toast';
 import { SuggestionCard, buildApplyPayload, buildDismissPayload } from './SuggestionCard';
 import type { ModelSuggestion, ProposedChange, SuggestResponse } from './types';
 
 const DEBOUNCE_MS = 800;
+
+export interface ModelFeedHotkeyControls {
+  applyAll: () => void;
+  dismissTop: () => void;
+}
 
 interface ModelFeedProps {
   deckId: number;
@@ -20,6 +26,10 @@ interface ModelFeedProps {
   ) => Promise<boolean>;
   onSuggestionApplied?: (cardName: string, source: string) => void;
   onSuggestionDismissed?: (cardName: string) => void;
+  /** `undo` from the deck editor — attached as the toast's Undo action on a single apply. */
+  onUndo?: () => void;
+  /** Imperative escape hatch for the `A` / `D` hotkeys. */
+  hotkeyRef?: { current: ModelFeedHotkeyControls | null };
 }
 
 const toneClass: Record<string, string> = {
@@ -36,6 +46,8 @@ export function ModelFeed({
   onApplyChanges,
   onSuggestionApplied,
   onSuggestionDismissed,
+  onUndo,
+  hotkeyRef,
 }: ModelFeedProps) {
   const [collapsed, setCollapsed] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -78,7 +90,7 @@ export function ModelFeed({
 
   const suggestions = (data?.suggestions ?? []).filter((s) => !dismissedIds.has(s.card.id));
 
-  const handleApply = async (s: ModelSuggestion) => {
+  const handleApply = async (s: ModelSuggestion, opts?: { silent?: boolean }) => {
     if (!data) return;
     setApplyingId(s.card.id);
     const { changes, candidatesShown } = buildApplyPayload(s, data.proposedChanges);
@@ -92,18 +104,27 @@ export function ModelFeed({
       setFlash(true);
       setTimeout(() => setFlash(false), 1200);
       onSuggestionApplied?.(s.card.name, data.source);
+      if (!opts?.silent) {
+        toast({
+          title: `Added ${s.card.name}`,
+          action: onUndo ? { label: 'Undo', onClick: onUndo } : undefined,
+        });
+      }
     }
   };
 
   const handleApplyAll = async () => {
     if (!data) return;
     setApplyingAll(true);
+    let count = 0;
     for (const s of suggestions) {
       if (appliedIds.has(s.card.id)) continue;
       // eslint-disable-next-line no-await-in-loop
-      await handleApply(s);
+      await handleApply(s, { silent: true });
+      count += 1;
     }
     setApplyingAll(false);
+    if (count > 0) toast({ title: `Applied ${count} suggestion${count === 1 ? '' : 's'}` });
   };
 
   const handleDismiss = async (s: ModelSuggestion) => {
@@ -121,13 +142,24 @@ export function ModelFeed({
       body: JSON.stringify(payload),
     }).catch(() => {});
     onSuggestionDismissed?.(s.card.name);
+    toast({ title: `Dismissed ${s.card.name}` });
   };
+
+  if (hotkeyRef) {
+    hotkeyRef.current = {
+      applyAll: handleApplyAll,
+      dismissTop: () => {
+        const top = suggestions[0];
+        if (top && !appliedIds.has(top.card.id)) handleDismiss(top);
+      },
+    };
+  }
 
   return (
     <section className="hud-panel border-b border-border/60">
       <button
         onClick={() => setCollapsed((c) => !c)}
-        className="flex w-full items-center gap-2 px-3 py-2.5 text-left"
+        className={cn('flex w-full items-center gap-2 px-3 py-2.5 text-left', loading && !data && 'animate-pulse-glow')}
       >
         <span className="text-xs font-semibold uppercase tracking-wide">Model feed</span>
         {data && (

@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import type { DbCard, Deck } from '@/lib/types';
-import { ModelFeed } from './consultant/ModelFeed';
+import { ModelFeed, type ModelFeedHotkeyControls } from './consultant/ModelFeed';
 import { ChatSection } from './consultant/ChatSection';
 import { HistorySection, type LocalHistoryEvent } from './consultant/HistorySection';
 import type { ProposedChange } from './consultant/types';
@@ -19,6 +19,10 @@ interface ConsultantPaneProps {
   ) => Promise<boolean>;
   /** Bumped by the page on every deck mutation — refetches the model feed. */
   onDeckChanged?: number;
+  /** `undo` from the deck editor — surfaced as the Undo action on apply toasts. */
+  onUndo?: () => void;
+  /** Imperative escape hatch for the `A` / `D` hotkeys. */
+  modelFeedHotkeyRef?: { current: ModelFeedHotkeyControls | null };
 }
 
 // Top-level consultant pane: model feed → chat → history, stacked and
@@ -31,6 +35,8 @@ export function ConsultantPane({
   onOpenCard,
   onApplyChanges,
   onDeckChanged,
+  onUndo,
+  modelFeedHotkeyRef,
 }: ConsultantPaneProps) {
   const [historyEvents, setHistoryEvents] = useState<LocalHistoryEvent[]>([]);
   const [restoreTick, setRestoreTick] = useState(0);
@@ -52,12 +58,15 @@ export function ConsultantPane({
         onApplyChanges={onApplyChanges}
         onSuggestionApplied={logApplied}
         onSuggestionDismissed={logDismissed}
+        onUndo={onUndo}
+        hotkeyRef={modelFeedHotkeyRef}
       />
       <ChatSection
         deckId={deckId}
         prefill={prefill}
         onApplyChanges={onApplyChanges}
         onActionsApplied={(names) => names.forEach((n) => logApplied(n, 'chat'))}
+        onUndo={onUndo}
       />
       <HistorySection
         deckId={deckId}

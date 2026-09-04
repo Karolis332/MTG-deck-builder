@@ -2,6 +2,7 @@
 
 import { cn } from '@/lib/utils';
 import { TileFrame } from './TileFrame';
+import { useTickOnChange } from './useTickOnChange';
 import type { AnalysisResponse } from './types';
 
 function RoleBar({
@@ -36,8 +37,20 @@ export function RolesTile({
   analysis?: AnalysisResponse | null;
   onAskConsultant: (prompt: string) => void;
 }) {
+  const total = analysis?.ratioHealth.length ?? 0;
+  const inRange = analysis?.ratioHealth.filter((h) => h.status === 'ok').length ?? 0;
+  const allOk = total > 0 && inRange === total;
+  const ticking = useTickOnChange(inRange);
+
   return (
-    <TileFrame title="Roles" headline={<span className="hud-number text-sm">{analysis?.ratioHealth.length ?? 0}</span>}>
+    <TileFrame
+      title="Roles"
+      headline={
+        <span className={cn('hud-number text-sm', allOk && 'text-green-400', ticking && 'hud-tick')}>
+          {total > 0 ? `${inRange} of ${total} roles in range` : '—'}
+        </span>
+      }
+    >
       {!analysis || analysis.ratioHealth.length === 0 ? (
         <p className="text-xs text-muted-foreground">No analysis yet.</p>
       ) : (

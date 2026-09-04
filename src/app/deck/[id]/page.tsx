@@ -1,11 +1,14 @@
 'use client';
 
-import { useEffect, useState, useCallback, useMemo } from 'react';
+import { useEffect, useState, useCallback, useMemo, useRef } from 'react';
 import { useRouter, useParams, useSearchParams } from 'next/navigation';
 import type { DbCard, DeckCardEntry, DeckPatchOp } from '@/lib/types';
 import { useDeckEditor } from '@/hooks/use-deck-editor';
-import { CommandCenterLayout } from '@/components/command-center/CommandCenterLayout';
+import { toast } from '@/hooks/use-toast';
+import { useCommandCenterHotkeys } from '@/hooks/use-command-center-hotkeys';
+import { CommandCenterLayout, type CommandCenterPaneControls } from '@/components/command-center/CommandCenterLayout';
 import { ConsultantPane } from '@/components/command-center/ConsultantPane';
+import type { ModelFeedHotkeyControls } from '@/components/command-center/consultant/ModelFeed';
 import type { ProposedChange } from '@/components/command-center/consultant/types';
 import { DeckWorkspace } from '@/components/command-center/DeckWorkspace';
 import { AnalysisRail, type BuildExplanation, type ComboEntry } from '@/components/command-center/AnalysisRail';
@@ -20,7 +23,19 @@ import { ImportDialog } from '@/components/import-dialog';
 import { VersionHistoryPanel } from '@/components/version-history-panel';
 import { CardZoomOverlay } from '@/components/card-zoom-overlay';
 import { DeckDndContext } from '@/components/deck-dnd-context';
+import { ToastHost } from '@/components/toast-host';
 import { COMMANDER_FORMATS } from '@/lib/constants';
+
+const HOTKEYS: Array<[string, string]> = [
+  ['/', 'Focus search'],
+  ['Ctrl+Z / Ctrl+Shift+Z', 'Undo / redo'],
+  ['A', 'Apply all suggestions'],
+  ['D', 'Dismiss top suggestion'],
+  ['Esc', 'Close popout / zoom'],
+  ['1-5', 'Set target bracket'],
+  ['[ / ]', 'Collapse / expand panes'],
+  ['?', 'Toggle this cheat sheet'],
+];
 
 export default function DeckEditorPage() {
   const router = useRouter();
@@ -71,6 +86,11 @@ export default function DeckEditorPage() {
   const [collectionOnly, setCollectionOnly] = useState(true);
   const [consultantPrefill, setConsultantPrefill] = useState<string | undefined>(undefined);
   const [analysis, setAnalysis] = useState<AnalysisResponse | null>(null);
+
+  // Hotkeys / polish state
+  const [showHotkeyHelp, setShowHotkeyHelp] = useState(false);
+  const layoutControlsRef = useRef<CommandCenterPaneControls | null>(null);
+  const modelFeedHotkeyRef = useRef<ModelFeedHotkeyControls | null>(null);
 
   const isCommanderFormat = COMMANDER_FORMATS.includes(
     (deck?.format || '') as typeof COMMANDER_FORMATS[number]
@@ -265,7 +285,46 @@ export default function DeckEditorPage() {
     } catch {}
   };
 
-  const setTargetBracket = (n: number) => updateDeckMeta({ target_bracket: n });
+  const setTargetBracket = (n: number) => {
+    updateDeckMeta({ target_bracket: n });
+    toast({ title: `Target bracket set to ${n}` });
+  };
+
+  const handleUndo = useCallback(() => {
+    if (!canUndo) return;
+    undo();
+    toast({ title: 'Undid last change' });
+  }, [undo, canUndo]);
+
+  const handleRedo = useCallback(() => {
+    if (!canRedo) return;
+    redo();
+    toast({ title: 'Redid change' });
+  }, [redo, canRedo]);
+
+  const handleSetRole = useCallback(
+    async (cardId: string, board: string, role: string | null) => {
+      await setRole(cardId, board, role);
+      toast({ title: role ? `Role set to ${role}` : 'Role reset to auto', action: { label: 'Undo', onClick: handleUndo } });
+    },
+    [setRole, handleUndo]
+  );
+
+  const closeOverlay = useCallback(() => {
+    if (zoomedCard) return closeZoom();
+    if (selectedCard) return setSelectedCard(null);
+    if (showHotkeyHelp) return setShowHotkeyHelp(false);
+  }, [zoomedCard, selectedCard, showHotkeyHelp, closeZoom]);
+
+  useCommandCenterHotkeys({
+    applyAllSuggestions: () => modelFeedHotkeyRef.current?.applyAll(),
+    dismissTopSuggestion: () => modelFeedHotkeyRef.current?.dismissTop(),
+    closeOverlay,
+    setTargetBracket,
+    toggleConsultantPane: () => layoutControlsRef.current?.toggleLeft(),
+    toggleAnalysisPane: () => layoutControlsRef.current?.toggleRight(),
+    toggleCheatSheet: () => setShowHotkeyHelp((v) => !v),
+  });
 
   // Consultant pane's model feed / chat both apply through this one path — POST
   // /api/ai-suggest/apply with the impression/candidate telemetry the CF bandit needs.
@@ -286,10 +345,10 @@ export default function DeckEditorPage() {
         const data = await res.json();
         if (data.ok) {
           await refetch();
-          if (data.warnings) alert(data.warnings);
+          if (data.warnings) toast({ title: data.warnings, tone: 'warn' });
           return true;
         }
-        if (data.error) alert(data.error);
+        if (data.error) toast({ title: data.error, tone: 'error' });
         return false;
       } catch {
         return false;
@@ -346,7 +405,7 @@ export default function DeckEditorPage() {
     .reduce((s, c) => s + c.quantity, 0);
 
   return (
-    <DeckDndContext onAddCard={addCard} onMoveCard={moveCard} onRemoveCard={removeCard} onSetRole={setRole}>
+    <DeckDndContext onAddCard={addCard} onMoveCard={moveCard} onRemoveCard={removeCard} onSetRole={handleSetRole}>
       <div className="flex h-[calc(100vh-3.5rem)] flex-col hud-grid-bg">
         <DeckEditorHeader
           deck={deck}
@@ -354,8 +413,11 @@ export default function DeckEditorPage() {
           saving={saving}
           canUndo={canUndo}
           canRedo={canRedo}
-          onUndo={undo}
-          onRedo={redo}
+          onUndo={handleUndo}
+          onRedo={handleRedo}
+          targetBracket={deck.target_bracket ?? 3}
+          onSetTargetBracket={setTargetBracket}
+          onNavigateToDeck={(id) => router.push(`/deck/${id}`)}
           hasExplanation={hasExplanation}
           showExplanation={showExplanation}
           onToggleExplanation={() => setShowExplanation((v) => !v)}
@@ -392,7 +454,7 @@ export default function DeckEditorPage() {
               if (!res.ok) throw new Error(data.error || 'Build failed');
               router.push(`/deck/${data.deckId}`);
             } catch (err) {
-              alert(err instanceof Error ? err.message : 'Build failed');
+              toast({ title: err instanceof Error ? err.message : 'Build failed', tone: 'error' });
             }
           }}
           onShowImport={() => setShowImport(true)}
@@ -402,6 +464,7 @@ export default function DeckEditorPage() {
         <CommandCenterLayout
           leftTitle="Consultant"
           rightTitle="Analysis"
+          controlRef={layoutControlsRef}
           left={
             <ConsultantPane
               deckId={deckId}
@@ -413,6 +476,8 @@ export default function DeckEditorPage() {
               onOpenCard={setSelectedCard}
               onApplyChanges={onApplyChanges}
               onDeckChanged={deckChangeTick}
+              onUndo={handleUndo}
+              modelFeedHotkeyRef={modelFeedHotkeyRef}
             />
           }
           center={
@@ -445,7 +510,7 @@ export default function DeckEditorPage() {
               onRemove={removeCard}
               onSetCommander={setAsCommander}
               onSetCoverCard={setCoverCard}
-              onSetRole={setRole}
+              onSetRole={handleSetRole}
               onAutoAllRoles={clearAllRoleOverrides}
             />
           }
@@ -511,6 +576,26 @@ export default function DeckEditorPage() {
       />
 
       <CardZoomOverlay card={zoomedCard} position={zoomPosition} onClose={closeZoom} />
+
+      {showHotkeyHelp && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50" onClick={() => setShowHotkeyHelp(false)}>
+          <div className="hud-panel w-72 p-4" onClick={(e) => e.stopPropagation()}>
+            <h2 className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">Hotkeys</h2>
+            <table className="w-full text-xs">
+              <tbody>
+                {HOTKEYS.map(([key, label]) => (
+                  <tr key={key}>
+                    <td className="hud-number py-0.5 pr-3 text-primary">{key}</td>
+                    <td className="py-0.5 text-muted-foreground">{label}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
+
+      <ToastHost />
     </DeckDndContext>
   );
 }

@@ -35,17 +35,24 @@ function loadPersisted(): PersistedState {
   }
 }
 
+export interface CommandCenterPaneControls {
+  toggleLeft: () => void;
+  toggleRight: () => void;
+}
+
 interface CommandCenterLayoutProps {
   left: ReactNode;
   center: ReactNode;
   right: ReactNode;
   leftTitle?: string;
   rightTitle?: string;
+  /** Imperative escape hatch for the `[` / `]` hotkeys — set once, read by the hotkey hook. */
+  controlRef?: { current: CommandCenterPaneControls | null };
 }
 
 type MobileTab = 'consultant' | 'deck' | 'analysis';
 
-export function CommandCenterLayout({ left, center, right, leftTitle, rightTitle }: CommandCenterLayoutProps) {
+export function CommandCenterLayout({ left, center, right, leftTitle, rightTitle, controlRef }: CommandCenterLayoutProps) {
   const [state, setState] = useState<PersistedState>(loadPersisted);
   const [mobileTab, setMobileTab] = useState<MobileTab>('deck');
   const dragRef = useRef<{ side: 'left' | 'right'; startX: number; startWidth: number } | null>(null);
@@ -77,6 +84,10 @@ export function CommandCenterLayout({ left, center, right, leftTitle, rightTitle
   const toggleCollapsed = (side: 'left' | 'right') => {
     setState((s) => (side === 'left' ? { ...s, leftCollapsed: !s.leftCollapsed } : { ...s, rightCollapsed: !s.rightCollapsed }));
   };
+
+  if (controlRef) {
+    controlRef.current = { toggleLeft: () => toggleCollapsed('left'), toggleRight: () => toggleCollapsed('right') };
+  }
 
   const gridColumns = `${state.leftCollapsed ? 0 : state.leftWidth}px 1fr ${state.rightCollapsed ? 0 : state.rightWidth}px`;
 

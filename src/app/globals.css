@@ -210,9 +210,15 @@ body::before {
 }
 
 /* ── Card grid stagger animation ──────────────────────────────────────── */
+/* `backwards` (not a static `opacity: 0` + `forwards`) so that if the
+   animation never actually plays — some headless/throttled/background-tab
+   Chromium instances never create the Animation object at all even though
+   the keyframe rule is present — content still renders at its natural
+   opacity instead of being permanently invisible. `backwards` only applies
+   the 0% keyframe during animation-delay; once the (possibly nonexistent)
+   animation is done, the element reverts to the normal cascade (opacity 1). */
 .card-grid > * {
-  animation: card-enter 0.3s ease-out forwards;
-  opacity: 0;
+  animation: card-enter 0.3s ease-out backwards;
 }
 
 .card-grid > *:nth-child(1) { animation-delay: 0ms; }

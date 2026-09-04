@@ -1,7 +1,9 @@
 'use client';
 
+import { cn } from '@/lib/utils';
 import { ManaCurve } from '@/components/mana-curve';
 import { TileFrame } from './TileFrame';
+import { useTickOnChange } from './useTickOnChange';
 import type { LiveRailDeck, AnalysisResponse } from './types';
 
 // ponytail: no archetype overlay yet — /api/deck-analysis doesn't return an
@@ -9,11 +11,12 @@ import type { LiveRailDeck, AnalysisResponse } from './types';
 // one internally). Add the overlay once the route exposes `archetype`.
 export function CurveTile({ deck, analysis }: { deck: LiveRailDeck; analysis?: AnalysisResponse | null }) {
   const curveNote = analysis?.curveScore?.notes ?? [];
+  const ticking = useTickOnChange(analysis?.curveScore?.score);
 
   return (
     <TileFrame
       title="Curve"
-      headline={<span className="hud-number text-sm">{analysis?.curveScore?.score ?? '—'}</span>}
+      headline={<span className={cn('hud-number text-sm', ticking && 'hud-tick')}>{analysis?.curveScore?.score ?? '—'}</span>}
     >
       <ManaCurve cards={deck.cards.map((c) => ({ quantity: c.quantity, board: c.board, card: c }))} />
       {curveNote.length > 0 && (

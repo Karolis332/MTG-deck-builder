@@ -60,7 +60,7 @@ The Black Grimoire is a dark-themed desktop application for building, analyzing,
 - **Language:** TypeScript (strict mode) + Python 3.13 (ML pipeline)
 - **Database:** SQLite via better-sqlite3 (WAL mode, 38 migrations in `src/db/schema.ts`)
 - **Auth:** JWT (jose) + scrypt password hashing, httpOnly cookies
-- **UI:** Tailwind CSS 3 + Lucide icons + Recharts, grimoire dark theme with gold accents
+- **UI:** Tailwind CSS 3 + inline SVG icons + Recharts, grimoire dark theme with gold accents
 - **Validation:** Zod
 - **Testing:** Vitest + pytest
 - **AI:** Claude Sonnet 4.5 / Opus 4.6 / GPT-4o / Ollama (local)
@@ -78,6 +78,12 @@ src/
     collection/           # Collection browser
     analytics/            # Analytics dashboard
   components/             # React components (client-side, 'use client')
+    command-center/        # Deck editor 3-pane shell — see docs/COMMAND_CENTER.md
+      tiles/                # Live Rail HUD tiles (Score, Roles, Benchmark, Coverage, Synergy, Curve, Bracket)
+      consultant/           # Consultant pane — model feed, chat, history
+    toast-host.tsx          # Mounts the deck-editor toast stack (src/hooks/use-toast.ts)
+    deck-role-chip.tsx      # Role badge/editor chip used in the deck workspace grid
+  hooks/                  # Shared React hooks (deck editor state, toasts, hotkeys)
   db/
     schema.ts             # All 38 database migrations
   lib/                    # Business logic & utilities
@@ -106,7 +112,12 @@ src/
     match-analyzer.ts     # Match analytics
     electron-bridge.ts    # Electron IPC bridge (includes overlay events)
     first-boot.ts         # First-launch account creation and card seeding
-    __tests__/            # Unit tests (340 tests across 18 files)
+    bracket.ts             # Commander bracket (2-5) classifier — game changers, MLD, extra turns, fast mana
+    benchmark-metrics.ts    # Deck-vs-top-decks metric deltas for BenchmarkTile
+    deck-benchmark-live.ts  # Live benchmark computation backing GET /api/decks/{id}/benchmark
+    suggestion-sources.ts   # Shared vocabulary for AI-suggestion source labels (model/llm/rules tone)
+    deck-grouping.ts        # Deck card grouping/sorting helpers for the workspace grid
+    __tests__/            # Unit tests (564 tests across 39 files)
 electron/
   main.ts                 # Electron main process (splash screen, spawns Next.js standalone server)
   next-server.ts          # Standalone Next.js server launcher
@@ -187,6 +198,7 @@ py scripts/pipeline.py --reset-step <STEP>  # Clear degraded pipeline step
 - **Mulligan advisor** — deterministic heuristic (sub-10ms), archetype-aware, no API calls
 - **Sideboard guide** — Claude-powered boarding plans cached per deck/matchup
 - **Commander synergy engine** parses oracle text for 12 trigger categories, scores candidates, merges with archetype templates
+- **Deck editor command center** — 3-pane HUD shell (`src/components/command-center/`) replacing the old single-column editor: a Consultant pane with a passive model feed (CF/bandit-ranked suggestions, auto-refetched on deck change) plus chat, a Live Rail of tick-animated tiles (score/roles/benchmark/coverage/synergy/curve/bracket), and per-card role overrides that persist and feed the ratio-health scoring — see `docs/COMMAND_CENTER.md`
 - **UI theme** — "Black Grimoire" book aesthetic: Cinzel headings, Crimson Text body, leather-brown palette, gold accents, vignette overlay, ornate borders
 - **afterPack hook** rebuilds better-sqlite3 native module for Electron's Node version, caches prebuilt binaries
 - **Pipeline fallback system** — 3x retry per step with backoff, cross-run failure tracking via `data/pipeline_failures.json`, 24h degraded auto-skip for optional scrapers, Telegram notifications

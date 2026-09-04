@@ -11,7 +11,7 @@ import type { LiveRailProps } from './tiles/types';
 
 export function LiveRail({ deck, analysis, onOpenCard, onAskConsultant, onSetTargetBracket }: LiveRailProps) {
   return (
-    <div className="hud-grid-bg flex flex-col gap-3 overflow-y-auto p-2">
+    <div className="card-grid hud-grid-bg flex flex-col gap-3 overflow-y-auto p-2">
       <BracketTile
         deck={deck}
         onOpenCard={onOpenCard}
