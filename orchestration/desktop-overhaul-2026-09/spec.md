@@ -119,6 +119,6 @@ _appended at initiative end_
 | T6 editor backlog | done, committed `c81691d` |
 | T7 web cleanup | done, committed `16ecaaf`, deployed |
 | T8 Overwolf decision | done, committed `ddb5536` |
-| Release build | worktree `C:/Users/QuLeR/MTG-deck-builder-release` at `c81691d` with its own node_modules; build chain was stopped; rerun `npm run build && npm run build:electron && npx electron-builder --win -c.directories.output=C:/Users/QuLeR/MTG-deck-builder/dist-electron-release` there |
+| Release build | BUILT 2026-09-06 from `c81691d` (worktree `../MTG-deck-builder-release`): `dist-electron-release/` — installer `The Black Grimoire-1.0.0-alpha.5-win-x64.exe` (100.7 MB), portable, zip, `latest.yml`; unsigned. Not yet installed/tested by the operator |
 
 Retrospective (interim): failure-mode #4 (shared files) materialised as predicted — three tasks touched `db.ts`/`schema.ts`; ownership tables held but commits had to be batched. Unpredicted: a worker used `git stash` on the shared tree; add "NEVER stash" to artifact 4 on resume. Building from a worktree with a junctioned `node_modules` makes Next emit a symlinked standalone tree — a real install is required.
