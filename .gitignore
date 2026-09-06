@@ -115,3 +115,4 @@ decks/test-builds/edhrec-reference.json
 # Throwaway audit/debug probes (tidy-scratch). Kept out of repo root.
 scripts/_scratch/*
 !scripts/_scratch/.gitkeep
+decks/standard/orzhov-repartee-data.json

@@ -1,0 +1,35 @@
+Deck
+4 Stirring Hopesinger (SOS) 35
+4 Scolding Administrator (SOS) 224
+3 Lecturing Scornmage (SOS) 87
+2 Informed Inkwright (SOS) 20
+2 Requisition Raid (SOA) 10
+3 Snooping Page (SOS) 227
+2 The Soul Stone (SPM) 66
+3 Erode (SOS) 15
+2 Dissection Practice (SOS) 79
+2 Killian's Confidence (SOS) 197
+4 Bitter Triumph (SOA) 26
+2 Elite Interceptor (SOS) 12
+2 Rehearsed Debater (SOS) 282
+2 Mage Tower Referee (SOS) 196
+3 Plains (TRK) 317
+3 Swamp (TRK) 318
+1 Bleachbone Verge (DFT) 250
+2 Godless Shrine (EOE) 254
+2 Abandoned Air Temple (TLA) 263
+4 Shattered Sanctum (SOS) 260
+3 Fabled Passage (BLB) 252
+3 Multiversal Passage (SPM) 180
+
+Sideboard
+2 Erode (SOS) 15
+2 Shambling Cie'th (FIN) 95
+1 The Soul Stone (SPM) 66
+2 Conciliator's Duelist (SOS) 182
+2 Colleen Wing, Street Samurai (MSH) 49
+1 Stirring Hopesinger (SOS) 35
+1 Forum Necroscribe (SOS) 54
+2 Rehearsed Debater (SOS) 282
+1 Mage Tower Referee (SOS) 196
+1 Lecturing Scornmage (SOS) 87
