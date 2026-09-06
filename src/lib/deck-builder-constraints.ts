@@ -29,6 +29,9 @@ import type { CardCategory } from './card-classifier';
 import type { CommanderSynergyProfile, SynergyCategory } from './commander-synergy';
 import { ARCHETYPE_TEMPLATES, getTemplate } from './deck-templates';
 import type { Archetype } from './deck-templates';
+import { classifyBracket } from './bracket';
+import type { BracketCard } from './bracket';
+import { COMBO_PAIRS } from './win-conditions';
 
 // ── Curated archetype payoff lists ─────────────────────────────────────────
 // These are the *actual* named cards that define each archetype. When the
@@ -500,6 +503,12 @@ export function roleCapsFor(quotas: RoleQuotas): Record<string, number> {
   };
 }
 
+// Mono-colour Commander rebalance (benchmark 2026-09-03 medians of top-liked
+// lists). Archetypes whose identity IS the draw/wipe density keep their template.
+const MONO_REBALANCE_FORMATS = new Set(['commander', 'brawl', 'competitivebrawl']);
+const MONO_REBALANCE_SKIP_ARCHETYPES = new Set<Archetype>(['control', 'combo', 'spellslinger', 'stax']);
+const MONO_QUOTAS = { removal: 10, draw: 6, board_wipe: 2, protection: 2 } as const;
+
 /**
  * Derive hard role quotas from an archetype template.
  * These are *minimums* — the picker will try to hit them exactly.
@@ -512,8 +521,12 @@ export function getRoleQuotas(
   nonLandTarget: number,
   commanderProfile: CommanderSynergyProfile | null,
   powerLevel?: 'casual' | 'optimized' | 'cedh',
+  format?: string,
+  colorCount?: number,
 ): RoleQuotas {
   const t = ARCHETYPE_TEMPLATES[archetype] || ARCHETYPE_TEMPLATES.midrange;
+  const monoCommander = colorCount === 1 && !!format && MONO_REBALANCE_FORMATS.has(format)
+    && !MONO_REBALANCE_SKIP_ARCHETYPES.has(archetype);
 
   // Start from template midpoints, biased toward minimums for safety
   const rampTarget = Math.round((t.ramp.totalMin + t.ramp.totalMax) / 2);
@@ -545,6 +558,21 @@ export function getRoleQuotas(
   }
   // Cap payoff at 25% of non-land slots to avoid crowding staples out
   payoffMin = Math.min(payoffMin, Math.round(nonLandTarget * 0.25));
+
+  if (monoCommander) {
+    // Benchmark 2026-09-03 (top-liked mono-colour lists): removal 10-11, draw
+    // 5-7, wipes 1-2, protection 2 — the templates over-drew and under-removed.
+    return {
+      ramp: Math.max(6, rampTarget),
+      draw: Math.max(5, MONO_QUOTAS.draw - drawReduction),
+      tutor: Math.max(0, tutorTarget),
+      removal: Math.max(8, MONO_QUOTAS.removal - removalReduction),
+      board_wipe: MONO_QUOTAS.board_wipe,
+      protection: MONO_QUOTAS.protection,
+      synergy_payoff: payoffMin,
+      win_condition: Math.round((t.winConditionSlots[0] + t.winConditionSlots[1]) / 2),
+    };
+  }
 
   return {
     ramp: Math.max(6, rampTarget),
@@ -879,4 +907,175 @@ export function buildReasoningSummary(
 
 function roleGet(result: PickByRoleResult, key: string): number {
   return result.roleFills[key] ?? 0;
+}
+
+// ── Bracket budget (post-scoring pass) ─────────────────────────────────────
+// Enforces a WotC Commander Bracket target on an already-picked spell list
+// using the SAME oracle the harness/benchmark use (classifyBracket) — no
+// duplicated card lists. Scoring is untouched: offenders are dropped
+// lowest-score-first and slots are refilled from the ranked pool.
+
+export type TargetBracket = 2 | 3 | 4 | 5;
+
+export const GAME_CHANGER_BUDGET: Record<TargetBracket, number> = { 2: 0, 3: 3, 4: Infinity, 5: Infinity };
+
+export function defaultTargetBracket(powerLevel?: 'casual' | 'optimized' | 'cedh'): TargetBracket | undefined {
+  if (powerLevel === 'casual') return 2;
+  if (powerLevel === 'optimized') return 3;
+  if (powerLevel === 'cedh') return 5;
+  return undefined;
+}
+
+export interface BracketBudgetResult<T> {
+  cards: T[];
+  removed: string[];
+  added: string[];
+}
+
+const lname = (n: string): string => (n || '').toLowerCase();
+
+/** Would adding `cand` to `names` complete a curated 2-card combo? */
+function completesCombo(cand: string, names: Set<string>): boolean {
+  const c = lname(cand);
+  return COMBO_PAIRS.some(([a, b]) => (lname(a) === c && names.has(lname(b))) || (lname(b) === c && names.has(lname(a))));
+}
+
+/** Single-card bracket flags (MLD / extra-turn / game changer) via the shared classifier. */
+function soloFlags(card: BracketCard): { mld: boolean; extraTurn: boolean; gc: boolean } {
+  const r = classifyBracket([card]);
+  return { mld: r.massLandDenial.length > 0, extraTurn: r.extraTurnCards.length > 0, gc: r.gameChangers.length > 0 };
+}
+
+export function applyBracketBudget<T extends BracketCard>(
+  cards: T[],
+  pool: Array<{ card: T; score: number }>,
+  target: TargetBracket,
+  commanderNames: string[] = [],
+): BracketBudgetResult<T> {
+  const budget = GAME_CHANGER_BUDGET[target];
+  if (!Number.isFinite(budget)) return { cards: [...cards], removed: [], added: [] };
+
+  const scoreOf = new Map<string, number>();
+  for (const p of pool) scoreOf.set(lname(p.card.name), p.score);
+  const score = (c: BracketCard): number => scoreOf.get(lname(c.name)) ?? 0;
+  const byScoreAsc = (a: BracketCard, b: BracketCard) => score(a) - score(b);
+
+  let current = [...cards];
+  const removed: string[] = [];
+  const added: string[] = [];
+
+  // ── 1. Drop offenders (lowest-scored first) ──
+  const r = classifyBracket(current, { commanderNames });
+  const drop = new Set<string>();
+  for (const n of r.massLandDenial) drop.add(lname(n));
+  if (r.chainedExtraTurns) {
+    // Keep at most one extra-turn card; a lone recastable one is still chained → drop it too.
+    const et = current.filter((c) => r.extraTurnCards.includes(c.name)).sort(byScoreAsc);
+    const keep = et.length >= 2 ? et.slice(-1) : [];
+    for (const c of et) if (!keep.includes(c)) drop.add(lname(c.name));
+    if (keep.length && classifyBracket(keep).chainedExtraTurns) drop.add(lname(keep[0].name));
+  }
+  for (const [a, b] of r.twoCardCombos) {
+    const ca = current.find((c) => lname(c.name) === lname(a));
+    const cb = current.find((c) => lname(c.name) === lname(b));
+    if (ca && cb) drop.add(lname(score(ca) <= score(cb) ? ca.name : cb.name));
+  }
+  const gcs = current.filter((c) => r.gameChangers.includes(c.name)).sort(byScoreAsc).reverse();
+  for (const c of gcs.slice(budget)) drop.add(lname(c.name));
+
+  if (drop.size) {
+    for (const c of current) if (drop.has(lname(c.name))) removed.push(c.name);
+    current = current.filter((c) => !drop.has(lname(c.name)));
+  }
+
+  // ── 2. Refill from the ranked pool without re-offending ──
+  const names = new Set(current.map((c) => lname(c.name)));
+  let gcCount = current.filter((c) => !!c.game_changer).length;
+  const ranked = [...pool].sort((a, b) => b.score - a.score);
+  const hasExtraTurn = () => classifyBracket(current, { commanderNames }).extraTurnCards.length > 0;
+  let need = removed.length;
+  for (const { card } of ranked) {
+    if (need <= 0) break;
+    if (names.has(lname(card.name))) continue;
+    const f = soloFlags(card);
+    if (f.mld || completesCombo(card.name, names)) continue;
+    if (f.extraTurn && hasExtraTurn()) continue;
+    if (f.gc && gcCount >= budget) continue;
+    current = [...current, card];
+    names.add(lname(card.name));
+    added.push(card.name);
+    if (f.gc) gcCount += 1;
+    need -= 1;
+  }
+
+  // ── 3. Pull-in: spend remaining game-changer budget on top-quartile pool GCs ──
+  // ponytail: displaces the lowest-scored non-GC pick regardless of role;
+  // role-aware displacement if quotas visibly suffer.
+  if (gcCount < budget && ranked.length >= 4) {
+    const quartile = ranked[Math.floor(ranked.length / 4)].score;
+    for (const { card, score: sc } of ranked) {
+      if (gcCount >= budget) break;
+      if (sc < quartile) break;
+      if (!card.game_changer || names.has(lname(card.name))) continue;
+      const f = soloFlags(card);
+      if (f.mld || completesCombo(card.name, names) || (f.extraTurn && hasExtraTurn())) continue;
+      const victim = current.filter((c) => !c.game_changer && !removed.includes(c.name)).sort(byScoreAsc)[0];
+      if (!victim) break;
+      current = current.filter((c) => c !== victim);
+      names.delete(lname(victim.name));
+      removed.push(victim.name);
+      current = [...current, card];
+      names.add(lname(card.name));
+      added.push(card.name);
+      gcCount += 1;
+    }
+  }
+
+  return { cards: current, removed, added };
+}
+
+// ── Karsten land count (Frank Karsten, "How Many Lands Do You Need", 2022 Commander update) ──
+// lands(99) = 31.42 + 3.13·avgMV − 0.28·(cheap ramp + draw); MDFC land-backs credit 0.38 (0.74 mythic).
+// 60-card formats scale linearly by deckCards/99 [UNCERTAIN: Karsten's 60-card
+// table is a separate fit; linear scaling is an approximation].
+const KARSTEN = { base: 31.42, perMv: 3.13, perCheap: 0.28, mdfc: 0.38, mdfcMythic: 0.74 } as const;
+
+export interface KarstenSpell {
+  card: Pick<DbCard, 'name' | 'oracle_text' | 'type_line' | 'cmc'> & { rarity?: string | null };
+  quantity: number;
+}
+
+export interface KarstenResult {
+  lands: number;
+  raw: number;
+  avgMv: number;
+  cheapRampDraw: number;
+  mdfcCredit: number;
+}
+
+export function isLandBackDfcType(typeLine: string | null | undefined): boolean {
+  const tl = typeLine || '';
+  return tl.includes('//') && !tl.split('//')[0].includes('Land') && tl.includes('Land');
+}
+
+export function karstenLandCount(
+  spells: KarstenSpell[],
+  opts: { deckCards: number; range: [number, number]; commanderOracle?: string },
+): KarstenResult {
+  let n = 0, mvSum = 0, cheap = 0, mdfcCredit = 0;
+  for (const { card, quantity } of spells) {
+    const q = quantity || 1;
+    n += q;
+    mvSum += (card.cmc || 0) * q;
+    if ((card.cmc || 0) <= 2) {
+      const cats = classifyCard(card.name, card.oracle_text || '', card.type_line || '', card.cmc || 0, opts.commanderOracle);
+      if (cats.includes('ramp') || cats.includes('draw')) cheap += q;
+    }
+    if (isLandBackDfcType(card.type_line)) mdfcCredit += (card.rarity === 'mythic' ? KARSTEN.mdfcMythic : KARSTEN.mdfc) * q;
+  }
+  const avgMv = n > 0 ? mvSum / n : 0;
+  const raw = (opts.deckCards / 99) * (KARSTEN.base + KARSTEN.perMv * avgMv - KARSTEN.perCheap * cheap);
+  const [lo, hi] = opts.range;
+  const lands = Math.min(hi + 2, Math.max(lo - 2, Math.round(raw - mdfcCredit)));
+  return { lands, raw, avgMv, cheapRampDraw: cheap, mdfcCredit };
 }

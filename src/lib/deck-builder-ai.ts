@@ -18,7 +18,11 @@ import {
   roleCapsFor,
   pickByRole,
   buildReasoningSummary,
+  applyBracketBudget,
+  defaultTargetBracket,
+  karstenLandCount,
 } from './deck-builder-constraints';
+import type { TargetBracket } from './deck-builder-constraints';
 import { analyzeCommanderForBuild } from './commander-analysis';
 import type { ArsenalCard } from './commander-analysis';
 import { classifyCard, isDrawEngine, isBoardWipe } from './card-classifier';
@@ -416,6 +420,14 @@ export interface BuildOptions {
   commanderName?: string; // for commander format
   partnerName?: string; // second commander for partner pairs (Thrasios + Tymna)
   powerLevel?: 'casual' | 'optimized' | 'cedh';
+  /** WotC Commander Bracket to build toward; defaults from powerLevel (casual 2 / optimized 3 / cedh 5). */
+  targetBracket?: TargetBracket;
+  /**
+   * 'karsten' re-derives the land count from the picked curve (Karsten 2022);
+   * 'fixed' (default) keeps DEFAULT_LAND_COUNT. Opt-in: the harness overlap
+   * metric is hit/buildNonland, so fewer lands dilute it (2026-09-04: 965→947).
+   */
+  landModel?: 'fixed' | 'karsten';
   userId?: number; // for commander-arsenal collection substitutes
   /** Restrict card rarity: pauper = commons only, peasant = commons + uncommons */
   rarityFilter?: 'pauper' | 'peasant';
@@ -1601,6 +1613,8 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
     nonLandTarget,
     commanderProfile,
     options.powerLevel,
+    options.format,
+    colors.length,
   );
   const roleCaps = roleCapsFor(quotas);
   const preFillRoleFills: Record<string, number> = {};
@@ -1908,14 +1922,96 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
     }
   }
 
-  // ── Step 5: Add lands (via land intelligence) ───────────────────────────
-  // MDFC spell//land cards already in the nonland picks are tapped-land
-  // equivalents — every one of them reduces how many dedicated land slots
-  // the deck needs, otherwise total land-capable cards balloon to 45-52.
+  // ── Step 4b2: Karsten land count ────────────────────────────────────────
+  // The pool sized lands with the flat DEFAULT_LAND_COUNT before any spell was
+  // known. Now that the spells exist, re-derive the land count from the curve
+  // (Karsten 2022) and move the spell count to match: too many lands → cut the
+  // lowest-scored utility/synergy picks; too few → refill from the ranked pool.
+  const isFrontLand = (c: DbCard) => (c.type_line || '').split('//')[0].includes('Land');
+  const deckSizeTotal = DEFAULT_DECK_SIZE[options.format] || DEFAULT_DECK_SIZE.default;
+  const commandersCount = deckSizeTotal - targetLands - nonLandTarget;
+  const karsten = karstenLandCount(
+    picked.filter((p) => p.board === 'main' && !isFrontLand(p.card)),
+    {
+      deckCards: deckSizeTotal - commandersCount,
+      range: isCommander ? getTemplate(resolvedStrategy).lands : [targetLands, targetLands],
+      commanderOracle: commanderCard?.oracle_text || undefined,
+    },
+  );
+  // Fixed model: MDFC land-backs in the spell picks are tapped-land equivalents;
+  // floor at 30 for 100-card formats but never above the format's own target.
   const mdfcLandBackCount = picked.filter((p) => isLandBackDfc(p.card)).length;
-  // Floor at 30 for 100-card formats, but never above the format's own target
-  // (standardbrawl runs 24 lands in a 60-card deck — the flat 30 floor shipped 65-card decks).
-  const targetLandsEffective = Math.max(Math.min(30, targetLands), targetLands - Math.min(6, mdfcLandBackCount));
+  const targetLandsEffective = options.landModel === 'karsten'
+    ? karsten.lands
+    : Math.max(Math.min(30, targetLands), targetLands - Math.min(6, mdfcLandBackCount));
+  {
+    const scoreOf = (c: DbCard) => poolByName.get(c.name)?.score ?? 0;
+    let landDelta = targetLandsEffective - targetLands;
+    if (landDelta > 0) {
+      const protectedNames = new Set(getTemplate(resolvedStrategy).protectedPatterns.map((n) => n.toLowerCase()));
+      const displaceable = picked
+        .filter((p) => p.board === 'main' && !isFrontLand(p.card) && !isLandBackDfc(p.card))
+        .filter((p) => !protectedNames.has(p.card.name.toLowerCase()) && !tribalNames.has(p.card.name))
+        .map((p) => {
+          const primary = classifyCard(p.card.name, p.card.oracle_text || '', p.card.type_line || '', p.card.cmc || 0)[0] || 'utility';
+          return { p, tier: primary === 'utility' || primary === 'synergy' ? 0 : 1, score: scoreOf(p.card) };
+        })
+        .sort((a, b) => a.tier - b.tier || a.score - b.score);
+      for (const { p } of displaceable) {
+        if (landDelta <= 0) break;
+        picked.splice(picked.indexOf(p), 1);
+        pickedNames.delete(p.card.name);
+        totalPicked -= p.quantity;
+        landDelta -= p.quantity;
+      }
+    } else if (landDelta < 0) {
+      for (const s of scored) {
+        if (landDelta >= 0) break;
+        if (pickedNames.has(s.card.name) || isFrontLand(s.card) || isLandBackDfc(s.card)) continue;
+        const qty = Math.min(getMaxQty(s.card), -landDelta);
+        if (qty <= 0) continue;
+        picked.push({ card: s.card, quantity: qty, board: 'main' });
+        pickedNames.add(s.card.name);
+        reasoning.push({ cardName: s.card.name, role: 'karsten', reason: `curve-derived land count ${targetLandsEffective} frees a spell slot` });
+        totalPicked += qty;
+        landDelta += qty;
+      }
+    }
+  }
+
+  // ── Step 4c: Bracket budget ─────────────────────────────────────────────
+  // Post-scoring pass: drop game changers / MLD / chained extra turns /
+  // combo halves that exceed the target bracket, refill from the ranked
+  // pool (same classifier the harness uses — see applyBracketBudget).
+  const targetBracket = options.targetBracket ?? defaultTargetBracket(options.powerLevel);
+  if (isCommander && targetBracket) {
+    const spellPool = scored.filter((s) => !isFrontLand(s.card) && getMaxQty(s.card) > 0);
+    const budget = applyBracketBudget(
+      picked.filter((p) => p.board === 'main').map((p) => p.card),
+      spellPool,
+      targetBracket,
+      [options.commanderName, options.partnerName].filter(Boolean) as string[],
+    );
+    if (budget.removed.length || budget.added.length) {
+      const removedSet = new Set(budget.removed);
+      for (const p of picked.filter((p) => removedSet.has(p.card.name))) {
+        picked.splice(picked.indexOf(p), 1);
+        pickedNames.delete(p.card.name);
+        totalPicked -= p.quantity;
+      }
+      const currentNames = new Set(picked.map((p) => p.card.name));
+      for (const c of budget.cards) {
+        if (currentNames.has(c.name)) continue;
+        picked.push({ card: c, quantity: 1, board: 'main' });
+        pickedNames.add(c.name);
+        totalPicked += 1;
+        reasoning.push({ cardName: c.name, role: 'bracket', reason: `bracket ${targetBracket} refill (replaced ${budget.removed.join(', ')})` });
+      }
+    }
+  }
+
+  // ── Step 5: Add lands (via land intelligence) ───────────────────────────
+  // Land count is the Karsten figure from Step 4b2 (MDFC land-backs already credited).
 
   const basicLandMap: Record<string, string> = {
     W: 'Plains', U: 'Island', B: 'Swamp', R: 'Mountain', G: 'Forest',
@@ -2109,7 +2205,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
   // ── Step 7: Fill shortfall with basic lands ─────────────────────────────
   // When collection enforcement blocks unowned cards, the deck may be short.
   // Basic lands are always available — top off to reach the target size.
-  const targetSize = DEFAULT_DECK_SIZE[options.format] || DEFAULT_DECK_SIZE.default;
+  const targetSize = deckSizeTotal;
   const currentTotal = picked.reduce((sum, p) => sum + p.quantity, 0)
     + (isCommander && options.commanderName ? 1 : 0); // Commander counts toward 100
 
@@ -2148,7 +2244,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
   // can't reach the user. Repairs are size-preserving swaps; bounded to avoid
   // thrash. This is the safety net that replaces hand-patching the builder.
   const DRAW_RE = /draw (?:a|two|three|four|x|that many|cards|\d) cards?|draws? (?:a|two|three|\d|x) cards?/i;
-  const auditOpts = { colors, format: options.format, targetLands, isCommander, strategy: resolvedStrategy };
+  const auditOpts = { colors, format: options.format, targetLands: targetLandsEffective, isCommander, strategy: resolvedStrategy };
   let health = auditDeck(picked, auditOpts);
 
   if (health.deficiencies.length > 0) {
