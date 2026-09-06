@@ -114,8 +114,8 @@ _appended at initiative end_
 | T1 research | done, committed `acdde35` |
 | T2 parsing accuracy | done, committed `c81691d`; live DB reparsed (backups `.bak-2026-09-04`, `-04b`) |
 | T3 match visuals | done, committed `a686a43` |
-| T4 engine round | STOPPED mid-run; uncommitted edits in `src/lib/deck-builder-ai.ts`, `deck-builder-constraints.ts` — unaudited, harness not re-run; resume by re-briefing T4 from the spec or `git checkout` those two files |
-| T5 lift synergy | STOPPED mid-run; VPS checkout has uncommitted `app/models.py`, `app/routers/commander_stats.py`, `refresh_ccs.sql`; backup `/opt/grimoire-backups/ccs-2026-09-04.sql.gz` exists; unknown whether the `lift` column was populated or the api redeployed — verify first; local `src/lib/sync-commander-stats.ts` uncommitted |
+| T4 engine round | PARKED 2026-09-06 on branch `t4-engine-wip` (a2608ec): bracket budget + Karsten (opt-in) + mono rebalance + MDFC refill. Harness with it: hardFails 0 / score 958 vs baseline 965 (band 963–968) → not gated in. Bracket match still 6/16 because `scripts/test-deck-builds.ts` never passes `targetBracket`/`powerLevel` into `autoBuildDeck`. Resume: wire targetBracket through the harness, isolate mono-rebalance vs MDFC-refill, run deck-benchmark |
+| T5 lift synergy | DONE 2026-09-06: VPS `lift` column populated for all 7.78M rows / 3,613 commanders (0 nulls), VPS commit c03c9d8 (`models.py`, `commander_stats.py`, `refresh_ccs.sql`), api rebuilt — `/commander-stats` returns `lift`; desktop sync dd93e8c. Sign agreement lift vs legacy `synergy_score` = 69% on a 2% sample (target ≥ 90% NOT met — legacy formula subtracts the max cross-pool rate, so it is biased negative). Engine use still unwired; token/emblem names (e.g. "Goblin") pollute top-lift rows |
 | T6 editor backlog | done, committed `c81691d` |
 | T7 web cleanup | done, committed `16ecaaf`, deployed |
 | T8 Overwolf decision | done, committed `ddb5536` |
