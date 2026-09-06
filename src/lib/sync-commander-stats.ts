@@ -10,7 +10,7 @@
 import { getDb } from './db';
 
 interface CommanderListEntry { commander_name: string; deck_count: number; color_identity?: string }
-interface CardStat { card_name: string; inclusion_rate: number; avg_copies: number; synergy_score: number; deck_count: number }
+interface CardStat { card_name: string; inclusion_rate: number; avg_copies: number; synergy_score: number; deck_count: number; lift?: number | null }
 interface CommanderStatsResp { total_decks?: number; color_identity?: string | string[] | null; cards?: CardStat[] }
 
 const SYNC_KEY = 'commander_stats_synced_at';
@@ -40,6 +40,11 @@ function normalizeColorIdentity(ci: string | string[] | null | undefined): strin
   if (!ci) return '';
   if (Array.isArray(ci)) return ci.filter((c) => 'WUBRG'.includes(c)).join('');
   return ci.replace(/[^WUBRG]/g, '');
+}
+
+/** Lift is LN(rate/eligible_rate) from the CF API; NULL when the API predates it or has no denominator. */
+export function roundLift(v: number | null | undefined): number | null {
+  return typeof v === 'number' && Number.isFinite(v) ? Math.round(v * 1e4) / 1e4 : null;
 }
 
 async function apiGet(base: string, apiKey: string | null, path: string, params: Record<string, string | number>): Promise<unknown> {
@@ -96,7 +101,7 @@ export async function syncCommanderStats(opts?: { minDecks?: number }): Promise<
     id INTEGER PRIMARY KEY AUTOINCREMENT, commander_name TEXT NOT NULL, card_name TEXT NOT NULL,
     inclusion_rate REAL NOT NULL DEFAULT 0, avg_copies REAL NOT NULL DEFAULT 1, synergy_score REAL NOT NULL DEFAULT 0,
     deck_count INTEGER NOT NULL DEFAULT 0, total_commander_decks INTEGER NOT NULL DEFAULT 0,
-    color_identity TEXT, updated_at TEXT NOT NULL DEFAULT (datetime('now')),
+    color_identity TEXT, lift REAL, updated_at TEXT NOT NULL DEFAULT (datetime('now')),
     UNIQUE(commander_name, card_name))`);
   ddl('DROP TABLE IF EXISTS card_deck_index_staging');
   ddl(`CREATE TABLE card_deck_index_staging (
@@ -104,8 +109,8 @@ export async function syncCommanderStats(opts?: { minDecks?: number }): Promise<
     inclusion_rate REAL NOT NULL DEFAULT 0, UNIQUE(card_name, commander_name))`);
 
   const insStat = db.prepare(`INSERT OR REPLACE INTO commander_card_stats_staging
-    (commander_name, card_name, inclusion_rate, avg_copies, synergy_score, deck_count, total_commander_decks, color_identity, updated_at)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, datetime('now'))`);
+    (commander_name, card_name, inclusion_rate, avg_copies, synergy_score, deck_count, total_commander_decks, color_identity, lift, updated_at)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, datetime('now'))`);
   const insIdx = db.prepare(`INSERT OR IGNORE INTO card_deck_index_staging (card_name, commander_name, inclusion_rate) VALUES (?, ?, ?)`);
 
   let errors = 0;
@@ -125,7 +130,7 @@ export async function syncCommanderStats(opts?: { minDecks?: number }): Promise<
       for (const c of rows) {
         insStat.run(cmdr.commander_name, c.card_name,
           Math.round(c.inclusion_rate * 1e6) / 1e6, Math.round(c.avg_copies * 1e4) / 1e4,
-          Math.round(c.synergy_score * 1e6) / 1e6, Math.trunc(c.deck_count), Math.trunc(totalDecks), ci);
+          Math.round(c.synergy_score * 1e6) / 1e6, Math.trunc(c.deck_count), Math.trunc(totalDecks), ci, roundLift(c.lift));
         if (c.inclusion_rate >= 0.05) insIdx.run(c.card_name, cmdr.commander_name, Math.round(c.inclusion_rate * 1e6) / 1e6);
       }
     });
