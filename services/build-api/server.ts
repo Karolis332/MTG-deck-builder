@@ -11,14 +11,10 @@ import http from 'http';
 import { autoBuildDeck } from '../../src/lib/deck-builder-ai';
 import { classifyCard, getPrimaryCategory } from '../../src/lib/card-classifier';
 import { getDb } from '../../src/lib/db';
-import { analyzeCommander } from '../../src/lib/commander-synergy';
-import { computeSynergyGraph } from '../../src/lib/synergy-graph';
-import type { CardLike } from '../../src/lib/synergy-graph';
-import { deriveWinPlan } from '../../src/lib/win-conditions';
-import { computeCurveScore } from '../../src/lib/curve-score';
-import { deriveKeepCriteria } from '../../src/lib/mulligan-advisor';
-import type { Archetype } from '../../src/lib/deck-templates';
 import type { DbCard } from '../../src/lib/types';
+import { analyzeResolved } from './analysis-core';
+import { handleOptimize } from './optimize';
+import { makeCardResolver, resolveDeckLines } from './resolve';
 
 const PORT = Number(process.env.PORT || 8100);
 const API_KEY = process.env.BUILD_API_KEY || '';
@@ -232,113 +228,19 @@ function handleAnalyze(body: string, res: http.ServerResponse): void {
   }
 
   try {
-    const db = getDb();
-    // Exact (NOCASE-indexed) first, LIKE DFC fallback only on miss — the OR
-    // form was an unindexed full scan per name (incident 2026-08-25), and
-    // exact-first also keeps 'Mountain' from resolving to its reversible
-    // 'Mountain // Mountain' printing.
-    const findExactCard = db.prepare('SELECT * FROM cards WHERE name = ? COLLATE NOCASE LIMIT 1');
-    const findDfcCard = db.prepare('SELECT * FROM cards WHERE name LIKE ? COLLATE NOCASE LIMIT 1');
-    const findCard = (name: string): DbCard | undefined =>
-      (findExactCard.get(name) || findDfcCard.get(`${name} //%`)) as DbCard | undefined;
+    const findCard = makeCardResolver();
     const commanderRow = findCard(commanderName);
     if (!commanderRow) {
       return json(res, 422, { error: `commander not found: ${commanderName}` });
     }
 
-    const resolved: Array<{ card: DbCard; quantity: number }> = [];
-    const unresolved: string[] = [];
-    for (const c of cardsIn) {
-      const name = String(c.name || '').trim();
-      if (!name) continue;
-      const row = findCard(name);
-      if (row) resolved.push({ card: row, quantity: Math.max(1, Math.floor(Number(c.quantity)) || 1) });
-      else unresolved.push(name);
-    }
+    const { resolved, unresolved } = resolveDeckLines(cardsIn, findCard);
     if (resolved.length < 10) {
       return json(res, 422, { error: `only ${resolved.length} cards recognized`, unresolved: unresolved.slice(0, 20) });
     }
 
-    let colorIdentity: string[] = [];
-    try { colorIdentity = commanderRow.color_identity ? JSON.parse(commanderRow.color_identity) : []; } catch { /* empty */ }
-    const commanderOracle = commanderRow.oracle_text || '';
-    const synergyProfile = analyzeCommander(commanderOracle, commanderRow.type_line || '', colorIdentity);
-    const archetype: Archetype = (synergyProfile?.detectedArchetype ?? 'midrange') as Archetype;
-
-    const nonLand = resolved.filter((r) => !(r.card.type_line || '').includes('Land'));
-    const nonLandCardLikes: CardLike[] = nonLand.map((r) => ({
-      name: r.card.name,
-      oracleText: r.card.oracle_text,
-      typeLine: r.card.type_line || '',
-    }));
-    const commanderLike: CardLike = {
-      name: commanderRow.name,
-      oracleText: commanderOracle,
-      typeLine: commanderRow.type_line || '',
-    };
-
-    const graph = computeSynergyGraph(nonLandCardLikes, { ...commanderLike, synergyProfile, directNeeds: null });
-    const winPlan = deriveWinPlan({
-      commander: commanderLike,
-      synergyProfile,
-      cards: nonLand.map((r) => ({
-        name: r.card.name,
-        oracleText: r.card.oracle_text,
-        typeLine: r.card.type_line || '',
-        cmc: r.card.cmc ?? 0,
-      })),
-    });
-
-    const nonLandCopies = nonLand.flatMap((r) =>
-      Array.from({ length: r.quantity }, () => ({ cmc: r.card.cmc ?? 0 }))
-    );
-    const curveScore = computeCurveScore(archetype, commanderRow.cmc ?? 0, nonLandCopies);
-
-    const totalCards = resolved.reduce((s, r) => s + r.quantity, 0);
-    const landCount = resolved
-      .filter((r) => (r.card.type_line || '').includes('Land'))
-      .reduce((s, r) => s + r.quantity, 0);
-    const avgCmc = nonLandCopies.length
-      ? nonLandCopies.reduce((s, c) => s + c.cmc, 0) / nonLandCopies.length
-      : 0;
-    const mulliganCriteria = deriveKeepCriteria(
-      { totalCards, landCount, avgCmc, colors: colorIdentity },
-      archetype,
-      winPlan,
-      commanderRow.cmc ?? 0,
-    );
-
-    const gameChangers = resolved
-      .filter((r) => (r.card as DbCard & { game_changer?: number }).game_changer === 1)
-      .map((r) => r.card.name);
-
-    const categories: Record<string, number> = {};
-    for (const r of resolved) {
-      const cat = getPrimaryCategory(
-        classifyCard(r.card.name, r.card.oracle_text || '', r.card.type_line || '', r.card.cmc ?? 0)
-      );
-      categories[cat] = (categories[cat] || 0) + r.quantity;
-    }
-
-    // WinPlan.cardRoles is a Map — swap for a plain object on the wire
-    const winPlanOut = {
-      ...winPlan,
-      cardRoles: winPlan.cardRoles instanceof Map ? Object.fromEntries(winPlan.cardRoles) : winPlan.cardRoles,
-    };
-
-    json(res, 200, {
-      commander: commanderRow.name,
-      archetype,
-      iss: graph.deckISS,
-      topSynergyPairs: graph.topSynergyPairs,
-      curveScore,
-      winPlan: winPlanOut,
-      mulliganCriteria,
-      gameChangers: { count: gameChangers.length, names: gameChangers },
-      categories,
-      stats: { totalCards, landCount, avgCmc: Math.round(avgCmc * 100) / 100 },
-      unresolved: unresolved.slice(0, 30),
-    });
+    const { payload } = analyzeResolved(commanderRow, resolved);
+    json(res, 200, { ...payload, unresolved: unresolved.slice(0, 30) });
   } catch (error) {
     const message = error instanceof Error ? error.message : 'analysis failed';
     console.error(`[build-api] analyze error for "${commanderName}":`, message);
@@ -430,6 +332,19 @@ const server = http.createServer((req, res) => {
       if (body.length > 1_500_000) req.destroy();
     });
     req.on('end', () => handleAnalyze(body, res));
+    return;
+  }
+
+  if (req.method === 'POST' && url === '/optimize') {
+    if (API_KEY && req.headers['x-api-key'] !== API_KEY) {
+      return json(res, 401, { error: 'unauthorized' });
+    }
+    let body = '';
+    req.on('data', (chunk) => {
+      body += chunk;
+      if (body.length > 1_500_000) req.destroy(); // decklist text + a ~10K-name ownedCards list
+    });
+    req.on('end', () => handleOptimize(body, res));
     return;
   }
 
