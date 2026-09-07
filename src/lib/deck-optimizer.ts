@@ -140,8 +140,15 @@ function bucketKey(cmc: number): string {
   return cmc >= 7 ? '7+' : String(Math.max(0, Math.floor(cmc)));
 }
 
-function issPercentile(values: number[], fraction: number): number | undefined {
-  if (values.length === 0) return undefined;
+const MIN_VALUES_FOR_DECILE = 10;
+
+/**
+ * Value below which a card counts as bottom-decile. Needs at least ten
+ * positive values, and callers compare with `<` so a uniform deck (every card
+ * at the same ISS) never flags everything (review 2026-09-07).
+ */
+function issDecileFloor(values: number[], fraction: number): number | undefined {
+  if (values.length < MIN_VALUES_FOR_DECILE) return undefined;
   const sorted = [...values].sort((a, b) => a - b);
   return sorted[Math.min(sorted.length - 1, Math.floor(sorted.length * fraction))];
 }
@@ -179,7 +186,7 @@ function scoreCard(
     if (iss <= 0) {
       score += 3;
       reasons.push('No synergy edges with the commander or the rest of the deck');
-    } else if (issFloor !== undefined && iss <= issFloor) {
+    } else if (issFloor !== undefined && iss < issFloor) {
       score += 2;
       reasons.push(`Bottom-decile synergy (ISS ${iss.toFixed(1)})`);
     }
@@ -231,7 +238,7 @@ export function rankCuts(cards: OptimizerCard[], ctx: OptimizerContext, limit = 
   const issValues = ctx.cardISS
     ? candidates.map((c) => ctx.cardISS!.get(c.name)).filter((v): v is number => v !== undefined && v > 0)
     : [];
-  const issFloor = issPercentile(issValues, 0.1);
+  const issFloor = issDecileFloor(issValues, 0.1);
   const protectedSet = new Set((ctx.protectedNames || []).map((n) => n.toLowerCase()));
 
   const scored = candidates

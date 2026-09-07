@@ -12,6 +12,7 @@ import { computeCurveScore } from '../../src/lib/curve-score';
 import type { CurveScoreResult } from '../../src/lib/curve-score';
 import { deriveKeepCriteria } from '../../src/lib/mulligan-advisor';
 import type { Archetype } from '../../src/lib/deck-templates';
+import { detectTribalType } from '../../src/lib/tribal-detect';
 import type { DbCard } from '../../src/lib/types';
 
 export interface ResolvedCard {
@@ -47,39 +48,6 @@ function isLandType(typeLine: string | null | undefined): boolean {
   return (typeLine || '').includes('Land');
 }
 
-const MIN_TRIBE_CARDS = 6;
-const NON_TRIBE_SUBTYPES = new Set(['legendary', 'token', 'creature', 'artifact', 'enchantment']);
-
-/**
- * Deck-level tribal type: the most common creature subtype when it appears on
- * at least MIN_TRIBE_CARDS creatures, or on fewer if the commander's text
- * names it (Krenko → Goblin). Pure — the engine's detector needs the DB.
- */
-export function detectTribalType(commanderRow: Pick<DbCard, 'oracle_text' | 'type_line'>, resolved: ResolvedCard[]): string | null {
-  const counts = new Map<string, number>();
-  for (const { card, quantity } of resolved) {
-    const typeLine = card.type_line || '';
-    if (!/\bCreature\b/.test(typeLine) || !typeLine.includes('—')) continue;
-    const subtypes = typeLine.split('—')[1]?.split('//')[0]?.trim().split(/\s+/) ?? [];
-    for (const sub of subtypes) {
-      const key = sub.toLowerCase();
-      if (!key || NON_TRIBE_SUBTYPES.has(key)) continue;
-      counts.set(key, (counts.get(key) || 0) + quantity);
-    }
-  }
-  let best: string | null = null;
-  let bestCount = 0;
-  for (const [sub, n] of counts) {
-    if (n > bestCount) { best = sub; bestCount = n; }
-  }
-  if (!best) return null;
-  const commanderText = `${commanderRow.oracle_text || ''} ${commanderRow.type_line || ''}`.toLowerCase();
-  const namedByCommander = new RegExp(`\\b${best}s?\\b`).test(commanderText);
-  if (bestCount >= MIN_TRIBE_CARDS || (namedByCommander && bestCount >= 3)) {
-    return best.charAt(0).toUpperCase() + best.slice(1);
-  }
-  return null;
-}
 
 export function analyzeResolved(commanderRow: DbCard, resolved: ResolvedCard[]): AnalysisCore {
   let colorIdentity: string[] = [];
@@ -104,7 +72,10 @@ export function analyzeResolved(commanderRow: DbCard, resolved: ResolvedCard[]):
     typeLine: commanderRow.type_line || '',
   };
 
-  const tribalType = detectTribalType(commanderRow, resolved);
+  const tribalType = detectTribalType(
+    commanderRow,
+    resolved.map((r) => ({ type_line: r.card.type_line, quantity: r.quantity })),
+  );
   const graph = computeSynergyGraph(nonLandCardLikes, { ...commanderLike, synergyProfile, directNeeds: null, tribalType });
   const winPlan = deriveWinPlan({
     commander: commanderLike,

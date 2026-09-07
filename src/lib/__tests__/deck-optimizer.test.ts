@@ -116,6 +116,25 @@ describe('rankCuts', () => {
   });
 });
 
+describe('rankCuts bottom-decile guard', () => {
+  it('does not flag every card when ISS values are uniform or the sample is small', () => {
+    const cards = Array.from({ length: 12 }, (_, i) => card({ name: `Even ${i}`, cmc: 3 }));
+    const uniform: OptimizerContext = { format: 'commander', cardISS: new Map(cards.map((c) => [c.name, 5])), health: [] };
+    expect(rankCuts(cards, uniform)).toEqual([]);
+    const few = cards.slice(0, 6);
+    const small: OptimizerContext = { format: 'commander', cardISS: new Map(few.map((c, i) => [c.name, 1 + i])), health: [] };
+    expect(rankCuts(few, small)).toEqual([]);
+  });
+
+  it('flags only the genuinely lowest card in a spread', () => {
+    const cards = Array.from({ length: 12 }, (_, i) => card({ name: `Spread ${i}`, cmc: 3 }));
+    const ctx: OptimizerContext = { format: 'commander', cardISS: new Map(cards.map((c, i) => [c.name, i === 0 ? 1 : 10 + i])), health: [] };
+    const cuts = rankCuts(cards, ctx);
+    expect(cuts.map((c) => c.name)).toEqual(['Spread 0']);
+    expect(cuts[0].reasons[0]).toMatch(/Bottom-decile/);
+  });
+});
+
 describe('pairSwaps', () => {
   it('pairs by category first, falls back to any non-land add, never reuses an add', () => {
     const cuts = rankCuts(

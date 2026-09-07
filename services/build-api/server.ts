@@ -25,6 +25,9 @@ const VALID_POWER = ['casual', 'optimized', 'cedh'];
 // beyond 2 concurrent the box thrashes. Upgrade to a real queue if traffic demands.
 let activeBuilds = 0;
 const MAX_CONCURRENT = 2;
+// /optimize is synchronous (~0.1–1.5 s); a few in flight is plenty (review 2026-09-07).
+let activeOptimizes = 0;
+const MAX_CONCURRENT_OPTIMIZE = 4;
 
 // ponytail: the engine reads the collection table UNSCOPED (single-user design),
 // so collection builds are serialized and the table holds exactly one request's
@@ -242,9 +245,9 @@ function handleAnalyze(body: string, res: http.ServerResponse): void {
     const { payload } = analyzeResolved(commanderRow, resolved);
     json(res, 200, { ...payload, unresolved: unresolved.slice(0, 30) });
   } catch (error) {
-    const message = error instanceof Error ? error.message : 'analysis failed';
-    console.error(`[build-api] analyze error for "${commanderName}":`, message);
-    json(res, 500, { error: message });
+    // Engine/DB exceptions carry SQL text and filesystem paths — log, never return them.
+    console.error(`[build-api] analyze error for "${commanderName}":`, error instanceof Error ? error.stack || error.message : error);
+    json(res, 500, { error: 'Analysis hit an internal error. Try again shortly.' });
   }
 }
 
@@ -339,11 +342,19 @@ const server = http.createServer((req, res) => {
     if (API_KEY && req.headers['x-api-key'] !== API_KEY) {
       return json(res, 401, { error: 'unauthorized' });
     }
+    // Synchronous handler on the same loop as /build — bound it like builds are.
+    if (activeOptimizes >= MAX_CONCURRENT_OPTIMIZE) {
+      return json(res, 429, { error: 'optimizer busy, retry in a few seconds' });
+    }
+    // Counted from the moment the body starts streaming, so pending requests
+    // (not just the one executing) are bounded.
+    activeOptimizes++;
     let body = '';
     req.on('data', (chunk) => {
       body += chunk;
       if (body.length > 1_500_000) req.destroy(); // decklist text + a ~10K-name ownedCards list
     });
+    req.on('close', () => { activeOptimizes = Math.max(0, activeOptimizes - 1); });
     req.on('end', () => handleOptimize(body, res));
     return;
   }
