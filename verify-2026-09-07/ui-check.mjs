@@ -1,0 +1,25 @@
+import { chromium } from 'playwright';
+import fs from 'fs';
+const orz = JSON.parse(fs.readFileSync('verify-2026-09-07/optimize-orzhov.json','utf8')).text;
+const browser = await chromium.launch();
+const page = await browser.newPage({ viewport: { width: 1280, height: 900 } });
+const errors = [];
+page.on('console', (m) => { if (m.type() === 'error') errors.push(m.text()); });
+page.on('pageerror', (e) => errors.push('pageerror: ' + e.message));
+await page.goto('https://theblackgrimoire.com/optimizer', { waitUntil: 'networkidle' });
+await page.fill('textarea#decklist', orz);
+await page.getByRole('button', { name: 'Standard', exact: true }).click();
+const pressed = await page.getByRole('button', { name: 'Standard', exact: true }).getAttribute('aria-pressed');
+await page.locator('button:has-text("Optimize deck")').click();
+await page.getByText('Role quotas').first().waitFor({ state: 'visible', timeout: 30000 });
+const cuts = await page.locator('input[aria-label^="Cut "]').count();
+const adds = await page.locator('input[aria-label^="Add "]').count();
+const score = await page.locator('[aria-label="Deck score"]').textContent();
+const legend = await page.locator('fieldset legend').first().textContent();
+// untick one cut and confirm the total updates + save state resets (button label)
+const totalBefore = (await page.locator('text=/\d+ cards/').first().textContent());
+await page.locator('input[aria-label^="Cut "]').first().click();
+const totalAfter = (await page.locator('text=/\d+ cards/').first().textContent());
+await page.screenshot({ path: 'verify-2026-09-07/optimizer-after-review.png', fullPage: true });
+console.log(JSON.stringify({ pressed, legend, score, cuts, adds, totalBefore, totalAfter, errors }));
+await browser.close();
