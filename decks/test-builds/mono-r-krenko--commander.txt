@@ -1,14 +1,13 @@
 // Krenko, Mob Boss — COMMANDER
 // strategy=tribal themes=tribal tribal=goblin
-// total=99 lands=38 avgCMC=2.72 gold=0 counters=0
-// categories: utility=23 ramp=12 tutor=2 win_condition=4 removal=6 draw=8 protection=3 board_wipe=3 land=38
+// total=99 lands=38 avgCMC=2.8 gold=0 counters=0
+// categories: utility=22 ramp=11 tutor=2 win_condition=5 removal=6 draw=9 protection=3 board_wipe=3 land=38
 
 1 Krenko, Mob Boss *CMDR*
 
-// ── ramp (12) ──
+// ── ramp (11) ──
 1 Brightstone Ritual
 1 Impulsive Pilferer
-1 Reckless Lackey
 1 Skirk Prospector
 1 Sol Ring
 1 Arcane Signet
@@ -19,7 +18,7 @@
 1 Starting Column
 1 Ashling, Flame Dancer
 
-// ── draw (8) ──
+// ── draw (9) ──
 1 Sensei's Divining Top
 1 Skullclamp
 1 Artist's Talent
@@ -27,6 +26,7 @@
 1 Palantír of Orthanc
 1 Staff of Domination
 1 Goblin Ringleader
+1 Jaxis, the Troublemaker
 1 Vanquisher's Banner
 
 // ── removal (6) ──
@@ -39,7 +39,7 @@
 
 // ── board_wipe (3) ──
 1 Coercive Portal
-1 Village Pillagers
+1 Fiery Confluence
 1 Blasphemous Act
 
 // ── protection (3) ──
@@ -47,13 +47,14 @@
 1 Lightning Greaves
 1 Swiftfoot Boots
 
-// ── win_condition (4) ──
+// ── win_condition (5) ──
 1 Impact Tremors
 1 General Kreat, the Boltbringer
 1 Purphoros, God of the Forge
+1 Kiki-Jiki, Mirror Breaker
 1 Muxus, Goblin Grandee
 
-// ── utility (23) ──
+// ── utility (22) ──
 1 Goblin Chirurgeon
 1 Goblin Lackey
 1 Goblin War Strike
@@ -66,7 +67,6 @@
 1 Mogg War Marshal
 1 Ruby Medallion
 1 Rundvelt Hordemaster
-1 Warren Instigator
 1 Fable of the Mirror-Breaker // Reflection of Kiki-Jiki
 1 Goblin Chieftain
 1 Goblin King

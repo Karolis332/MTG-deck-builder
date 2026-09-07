@@ -1,17 +1,16 @@
 // Krenko, Mob Boss — BRAWL
 // strategy=tribal themes=tribal tribal=goblin
-// total=99 lands=38 avgCMC=2.69 gold=0 counters=0
-// categories: utility=20 ramp=11 tutor=2 win_condition=4 removal=9 protection=3 draw=9 board_wipe=3 land=38
+// total=99 lands=38 avgCMC=2.8 gold=0 counters=0
+// categories: utility=20 ramp=10 tutor=2 win_condition=4 removal=10 protection=3 draw=9 board_wipe=3 land=38
 
 1 Krenko, Mob Boss *CMDR*
 
-// ── ramp (11) ──
+// ── ramp (10) ──
 1 Reckless Lackey
 1 Skirk Prospector
 1 Arcane Signet
-1 Dockside Extortionist
+1 Collector's Vault
 1 Scuzzback Scrounger
-1 Wily Goblin
 1 Crime Novelist
 1 Dragon's Hoard
 1 Howlsquad Heavy
@@ -29,8 +28,7 @@
 1 Jaxis, the Troublemaker
 1 Vanquisher's Banner
 
-// ── removal (9) ──
-1 Goblin Grenade
+// ── removal (10) ──
 1 Abrade
 1 Agatha's Soul Cauldron
 1 Goblin Bombardment
@@ -38,7 +36,9 @@
 1 Chaos Warp
 1 Pashalik Mons
 1 Goblin Trashmaster
+1 Heated Argument
 1 Siege-Gang Commander
+1 Spawn-Gang Commander
 
 // ── board_wipe (3) ──
 1 Roiling Vortex

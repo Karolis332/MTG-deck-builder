@@ -1,6 +1,6 @@
 // Ghalta, Primal Hunger — BRAWL
-// strategy=aggro themes=draw,artifacts,ramp,tokens,aggro,equipment,sacrifice,tribal tribal=-
-// total=99 lands=42 avgCMC=2.96 gold=0 counters=0
+// strategy=aggro themes=draw,artifacts,ramp,tokens,equipment,aggro,sacrifice,tribal tribal=-
+// total=99 lands=42 avgCMC=2.98 gold=0 counters=0
 // categories: ramp=24 draw=9 win_condition=3 removal=4 protection=5 utility=10 board_wipe=2 land=42
 
 1 Ghalta, Primal Hunger *CMDR*
@@ -34,11 +34,11 @@
 // ── draw (9) ──
 1 Mishra's Bauble
 1 Currency Converter
-1 Colossal Majesty
 1 Garruk's Uprising
 1 Tireless Tracker
 1 Beast Whisperer
 1 Momentous Fall
+1 Toski, Bearer of Secrets
 1 Return of the Wildspeaker
 1 Rishkar's Expertise
 
@@ -77,7 +77,7 @@
 1 The Skullspore Nexus
 
 // ── land (42) ──
-32 Forest
+33 Forest
 1 Misty Rainforest
 1 Three Tree City
 1 Verdant Catacombs
@@ -86,5 +86,4 @@
 1 Bala Ged Recovery // Bala Ged Sanctuary
 1 Bridgeworks Battle // Tanglespan Bridgeworks
 1 Khalni Ambush // Khalni Territory
-1 Ojer Kaslem, Deepest Growth // Temple of Cultivation
 1 Disciple of Freyalise // Garden of Freyalise

@@ -1,6 +1,6 @@
 // Sheoldred, the Apocalypse — COMMANDER
-// strategy=control themes=draw,ramp,artifacts,sacrifice,equipment,tokens,control,tribal tribal=-
-// total=99 lands=38 avgCMC=3.57 gold=0 counters=0
+// strategy=control themes=draw,ramp,artifacts,equipment,sacrifice,tribal,control,tokens tribal=-
+// total=99 lands=38 avgCMC=3.59 gold=0 counters=0
 // categories: ramp=12 draw=15 utility=11 win_condition=5 protection=2 removal=14 board_wipe=1 tutor=1 land=38
 
 1 Sheoldred, the Apocalypse *CMDR*
@@ -41,11 +41,11 @@
 1 Infernal Grasp
 1 Kozilek's Command
 1 Orcish Bowmasters
-1 Staff of Compleation
 1 Baleful Mastery
 1 Deadly Rollick
 1 Dread Presence
 1 Erebos, Bleak-Hearted
+1 Lethal Scheme
 1 Ob Nixilis Reignited
 1 Ob Nixilis, the Hate-Twisted
 1 Sheoldred // The True Scriptures

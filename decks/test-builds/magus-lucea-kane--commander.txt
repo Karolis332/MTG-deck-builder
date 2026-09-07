@@ -1,11 +1,11 @@
 // Magus Lucea Kane — COMMANDER
 // strategy=spellslinger themes=aggro,counters,tokens,equipment,draw,ramp tribal=-
-// total=99 lands=38 avgCMC=2.56 gold=9 counters=4
-// categories: ramp=15 draw=17 utility=16 removal=10 win_condition=2 protection=1 land=38
+// total=99 lands=38 avgCMC=2.39 gold=9 counters=4
+// categories: ramp=14 draw=17 utility=16 removal=11 win_condition=2 protection=1 land=38
 
 1 Magus Lucea Kane *CMDR*
 
-// ── ramp (15) ──
+// ── ramp (14) ──
 1 Sol Ring
 1 Sporocyst
 1 Arcane Signet
@@ -18,7 +18,6 @@
 1 Cultivate
 1 Elementalist's Palette
 1 Kami of Whispered Hopes
-1 Loot, Exuberant Explorer
 1 Starting Column
 1 Ugin, Eye of the Storms
 
@@ -41,16 +40,17 @@
 1 Sokka's Haiku
 1 Tamiyo's Journal
 
-// ── removal (10) ──
+// ── removal (11) ──
+1 Walking Ballista
 1 Bushwhack
+1 Kinetic Ooze
 1 Aberrant
+1 Apocalypse Hydra
 1 Red Sun's Twilight
 1 Steelbane Hydra
 1 Voracious Hydra
 1 Rampaging Yao Guai
-1 Earth Rumble
 1 Freyalise, Llanowar's Fury
-1 Niv-Mizzet, Parun
 1 Flaming Tyrannosaurus
 
 // ── protection (1) ──
@@ -84,14 +84,14 @@
 1 City of Brass
 1 Command Tower
 1 Exotic Orchard
-8 Forest
+9 Forest
 1 Game Trail
 1 Grand Coliseum
 1 Hinterland Harbor
 3 Island
 1 Mana Confluence
 1 Misty Rainforest
-3 Mountain
+2 Mountain
 1 Multiversal Passage
 1 Scalding Tarn
 1 Steam Vents

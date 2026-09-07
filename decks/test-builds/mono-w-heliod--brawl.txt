@@ -1,6 +1,6 @@
 // Heliod, Sun-Crowned — BRAWL
-// strategy=midrange themes=enchantments,artifacts,lifegain,equipment,draw,counters,spellslinger,tokens,flying,aggro tribal=-
-// total=99 lands=38 avgCMC=2.79 gold=0 counters=0
+// strategy=midrange themes=enchantments,artifacts,lifegain,equipment,counters,draw,spellslinger,flying,tokens,aggro tribal=-
+// total=99 lands=38 avgCMC=2.8 gold=0 counters=0
 // categories: removal=10 utility=17 ramp=11 tutor=4 draw=9 protection=2 win_condition=4 board_wipe=4 land=38
 
 1 Heliod, Sun-Crowned *CMDR*
@@ -42,7 +42,7 @@
 1 Aetherflux Reservoir
 
 // ── board_wipe (4) ──
-1 The Battle of Bywater
+1 Wrath of God
 1 Fumigate
 1 Sunfall
 1 Farewell

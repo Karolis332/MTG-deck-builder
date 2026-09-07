@@ -1,7 +1,7 @@
 // Ghalta, Primal Hunger — COMMANDER
 // strategy=aggro themes=ramp,artifacts,draw,tokens,aggro,equipment tribal=-
-// total=99 lands=40 avgCMC=3.2 gold=0 counters=0
-// categories: ramp=19 draw=13 win_condition=4 removal=4 protection=4 utility=13 board_wipe=2 land=40
+// total=99 lands=41 avgCMC=3.12 gold=0 counters=0
+// categories: ramp=19 draw=13 win_condition=4 removal=4 protection=4 utility=12 board_wipe=2 land=41
 
 1 Ghalta, Primal Hunger *CMDR*
 
@@ -63,7 +63,7 @@
 1 Overwhelming Stampede
 1 Surrak and Goreclaw
 
-// ── utility (13) ──
+// ── utility (12) ──
 1 Arbor Elf
 1 Emerald Medallion
 1 Ram Through
@@ -76,11 +76,10 @@
 1 Tangleweave Armor
 1 Unnatural Growth
 1 Majestic Genesis
-1 The Skullspore Nexus
 
-// ── land (40) ──
+// ── land (41) ──
 1 City of Brass
-30 Forest
+31 Forest
 1 Misty Rainforest
 1 Three Tree City
 1 Verdant Catacombs

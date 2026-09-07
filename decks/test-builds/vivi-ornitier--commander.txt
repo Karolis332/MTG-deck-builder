@@ -1,6 +1,6 @@
 // Vivi Ornitier — COMMANDER
-// strategy=spellslinger themes=tokens,artifacts,counters,flying,aggro,spellslinger,ramp,draw,enchantments,graveyard,equipment tribal=-
-// total=99 lands=38 avgCMC=2.3 gold=6 counters=0
+// strategy=spellslinger themes=tokens,counters,aggro,flying,artifacts,spellslinger,ramp,draw,enchantments,graveyard,equipment tribal=-
+// total=99 lands=38 avgCMC=2.3 gold=5 counters=0
 // categories: ramp=11 draw=17 protection=4 utility=11 removal=11 tutor=2 win_condition=4 board_wipe=1 land=38
 
 1 Vivi Ornitier *CMDR*
@@ -41,11 +41,11 @@
 1 Walking Ballista
 1 Lightning Bolt
 1 Agatha's Soul Cauldron
-1 Firemind's Research
 1 Kozilek's Command
 1 Red Sun's Twilight
 1 Snap
 1 Stolen by the Fae
+1 The Ooze
 1 Urabrask // The Great Work
 1 Niv-Mizzet, Parun
 1 Hullbreaker Horror
@@ -88,6 +88,7 @@
 11 Island
 1 Misty Rainforest
 9 Mountain
+1 Multiversal Passage
 1 Polluted Delta
 1 Riverglide Pathway // Lavaglide Pathway
 1 Scalding Tarn
@@ -95,7 +96,6 @@
 1 Spirebluff Canal
 1 Steam Vents
 1 Sulfur Falls
-1 Temple of the Dragon Queen
 1 Three Tree City
 1 Volcanic Island
 1 Rush of Inspiration // Crackling Falls

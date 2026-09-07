@@ -119,6 +119,37 @@ _appended at initiative end_
 | T6 editor backlog | done, committed `c81691d` |
 | T7 web cleanup | done, committed `16ecaaf`, deployed |
 | T8 Overwolf decision | done, committed `ddb5536` |
-| Release build | BUILT 2026-09-06 from `c81691d` (worktree `../MTG-deck-builder-release`): `dist-electron-release/` — installer `The Black Grimoire-1.0.0-alpha.5-win-x64.exe` (100.7 MB), portable, zip, `latest.yml`; unsigned. Not yet installed/tested by the operator |
+| Release build | BUILT 2026-09-06 from `c81691d` (worktree `../MTG-deck-builder-release`): `dist-electron-release/` — installer `The Black Grimoire-1.0.0-alpha.5-win-x64.exe` (100.7 MB), portable, zip, `latest.yml`; unsigned. SMOKE-TESTED 2026-09-07 via Playwright `_electron` against `win-unpacked` (`verify-2026-09-06/electron-smoke.mjs`): main window in 10 s, no crash. Caveat: the packaged app ignores env profile overrides, so it opened the operator's LIVE profile and applied migration 42 to the live DB (additive). Not yet installed/played by the operator |
 
 Retrospective (interim): failure-mode #4 (shared files) materialised as predicted — three tasks touched `db.ts`/`schema.ts`; ownership tables held but commits had to be batched. Unpredicted: a worker used `git stash` on the shared tree; add "NEVER stash" to artifact 4 on resume. Building from a worktree with a junctioned `node_modules` makes Next emit a symlinked standalone tree — a real install is required.
+
+## Status 2026-09-07 — operator hand-off
+
+Harness on HEAD (`684b3dc`, no engine code changes since the 965 run of 2026-09-04): **hardFails 0, score 961** (`verify-2026-09-06/harness-2026-09-07.log`). 961 sits 2 below the 963–968 band with zero engine diffs. Cause: `autoBuildDeck` calls the live CF API (`getCFRecommendations`, 50 recs injected into the pool + `cfScoreMap`) on every commander build, and the VPS bandit/SVD retrain moves those recs between runs — the gate is not hermetic. The score is a sum of 16 reference-overlap percentages, so ±4 is ~0.25 pt per deck: noise, not a regression. Treat 961 as the current baseline until the harness is made hermetic (follow-up below).
+
+### Success criteria scorecard
+| # | Criterion | State |
+|---|---|---|
+| S1 | Match history accuracy | ✅ for every row the new parser has seen (self-as-opponent 9 → 0, grounded hand-check 5/5, format enum 100 %); ❌ retroactively for 18 legacy `turns = 0` rows and 216/221 legacy Brawl rows without opponent commander — no raw log survives (`docs/MATCH_PARSE_AUDIT.md`) |
+| S2 | Match history visuals | ⚠️ screenshots done (a686a43); **operator acceptance ("looks right") pending** — needs the app restarted on ≥ c81691d |
+| S3 | Engine round | ❌ T4 parked (`t4-engine-wip` a2608ec, 958/0 vs 965); bracket match still 6/16 |
+| S4 | Lift synergy | ⚠️ populated 3,613 commanders ✅, desktop sync ✅, sign agreement 69 % vs 90 % target ❌ (target measured against a biased legacy formula), engine use unwired |
+| S5 | Research | ✅ `docs/RESEARCH_ARENA_LOGS_2026-09-04.md` |
+| S6 | Editor backlog | ✅ c81691d |
+| S7 | Web | ✅ 16ecaaf (superseded by the public launch, accounts ON since 2026-09-07 with Clerk production) |
+
+### Operator checklist (only the operator can do these)
+| # | Action | Why |
+|---|---|---|
+| O1 | Restart the desktop app (or install `dist-electron-release/The Black Grimoire-1.0.0-alpha.5-win-x64.exe`), open Match History, say "looks right" or list what is wrong | closes S2; the running app predates the c81691d parser |
+| O2 | Say "resume T4" or "drop T4" | S3 is the only red criterion; resume = wire `targetBracket` through `scripts/test-deck-builds.ts`, isolate mono-rebalance vs MDFC-refill, gate on harness AND `scripts/deck-benchmark.ts` |
+| O3 | Install `dist-overwolf/The Black Grimoire-1.0.0-alpha.5-overwolf-x64.exe`, play one Arena match | live overlay verification (T8 stays Electron; this is the alternate host) |
+| O4 | Optional: `TOPDECK_API_KEY` | enables the topdeck reference set in `scripts/fetch-benchmark-refs.ts` |
+| O5 | Optional: code-signing certificate | the release build is unsigned; SmartScreen warns on install |
+
+### Agent follow-ups (no operator input needed, next session)
+- Make the harness hermetic: record CF recs per (commander, pool hash) into `decks/test-builds/refs/cf-cache.json` (or `CF_API_OFFLINE=1` → `[]`), re-baseline once, then the band means something again. Do this BEFORE resuming T4, or T4's ±7 will be indistinguishable from drift.
+- Engine backlog carried from the 2026-08-24 log entry: curated lists still missing (fast-mana tiers, mass land denial, stax); overlay wiring of mulligan keep-criteria deferred.
+- T5 hygiene: filter token/emblem names out of top-lift rows on the VPS before any engine use.
+- `.planning/` deletions still uncommitted in the working tree (14 files) — commit or restore before merging `auto-improve`.
+- Add "NEVER `git stash` on the shared tree" to artifact 4 before any worker is spawned again.

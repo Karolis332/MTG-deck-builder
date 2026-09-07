@@ -1,5 +1,5 @@
 // Orvar, the All-Form — COMMANDER
-// strategy=spellslinger themes=tokens,artifacts,flying,draw,spellslinger,control,ramp,enchantments,counters,equipment tribal=-
+// strategy=spellslinger themes=tokens,artifacts,draw,flying,control,spellslinger,ramp,enchantments,equipment,counters tribal=-
 // total=99 lands=38 avgCMC=2.51 gold=0 counters=0
 // categories: ramp=10 utility=19 draw=19 win_condition=3 protection=1 removal=8 tutor=1 land=38
 

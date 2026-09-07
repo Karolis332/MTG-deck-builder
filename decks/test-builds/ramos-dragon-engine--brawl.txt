@@ -1,11 +1,11 @@
 // Ramos, Dragon Engine — BRAWL
-// strategy=midrange themes=artifacts,tokens,ramp,draw,sacrifice,counters,flying,control,spellslinger tribal=-
-// total=99 lands=38 avgCMC=3.38 gold=33 counters=0
-// categories: ramp=20 utility=11 removal=9 protection=1 win_condition=7 board_wipe=4 draw=8 tutor=1 land=38
+// strategy=midrange themes=artifacts,ramp,tokens,draw,sacrifice,flying,control,spellslinger,counters tribal=-
+// total=99 lands=38 avgCMC=3.46 gold=33 counters=0
+// categories: ramp=22 utility=10 removal=9 protection=1 win_condition=7 board_wipe=4 draw=7 tutor=1 land=38
 
 1 Ramos, Dragon Engine *CMDR*
 
-// ── ramp (20) ──
+// ── ramp (22) ──
 1 Birds of Paradise
 1 Arcane Signet
 1 Bloom Tender
@@ -23,13 +23,14 @@
 1 Helga, Skittish Seer
 1 Hearthhull, the Worldseed
 1 Hedron Archive
+1 Kheru Goldkeeper
+1 Solemn Simulacrum
 1 Jegantha, the Wellspring
 1 Omnath, Locus of All
 1 Chromatic Orrery
 
-// ── draw (8) ──
+// ── draw (7) ──
 1 Baral, Chief of Compliance
-1 Likeness Looter
 1 Kaito Shizuki
 1 Kutzil, Malamet Exemplar
 1 Archmage Emeritus
@@ -62,14 +63,13 @@
 1 Jodah, Archmage Eternal
 1 Murmuring Mystic
 1 Talrand, Sky Summoner
-1 Chromanticore
 1 Maelstrom Archangel
+1 Quandrix, the Proof
 1 Progenitus
 
-// ── utility (11) ──
+// ── utility (10) ──
 1 Monastery Swiftspear
 1 Goblin Electromancer
-1 Hero of Precinct One
 1 Increasing Vengeance
 1 Young Pyromancer
 1 Dualcaster Mage
@@ -83,7 +83,6 @@
 1 A-Thran Portal
 1 Aether Hub
 1 Baldur's Gate
-1 Branch of Vitu-Ghazi
 1 Breeding Pool
 1 Capital City
 1 Captivating Cave
@@ -101,6 +100,7 @@
 1 Hidden Grotto
 2 Island
 1 Mana Confluence
+1 Meteor Crater
 2 Mountain
 1 Multiversal Passage
 1 Plains

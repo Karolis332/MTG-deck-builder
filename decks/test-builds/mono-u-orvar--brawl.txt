@@ -1,5 +1,5 @@
 // Orvar, the All-Form — BRAWL
-// strategy=spellslinger themes=tokens,artifacts,control,flying,spellslinger,draw,ramp,counters,enchantments tribal=-
+// strategy=spellslinger themes=tokens,artifacts,spellslinger,draw,control,flying,ramp,enchantments,counters tribal=-
 // total=99 lands=38 avgCMC=3.03 gold=0 counters=0
 // categories: ramp=10 draw=15 utility=11 protection=3 removal=14 win_condition=4 board_wipe=2 tutor=2 land=38
 
