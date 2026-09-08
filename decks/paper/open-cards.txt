@@ -1,13 +1,16 @@
+1 Abraded Bluffs
 1 Accursed Marauder
 1 Acererak the Archlich
 1 Adaptive Automaton
 1 Adept Watershaper
 1 Akul the Unrepentant
 1 Alesha, Who Laughs at Fate
+1 Ankle Biter
 1 Annie Joins Up
 1 Another Round
 1 Archangel of Tithes
 1 Archfiend of Despair
+1 Arid Archway
 1 Arnyn, Deathbloom Botanist
 1 At Knifepoint
 1 Aven Interrupter
@@ -15,8 +18,10 @@
 1 Azula, Ruthless Firebender
 1 Back for More
 1 Baeloth Barrityl, Entertainer
+1 Bandit's Haul
 1 Bandit's Talent
 1 Bar the Gate
+1 Baron Bertram Graywater
 1 Baron Helmut Zemo
 1 Basking Broodscale
 1 Bedevil
@@ -29,15 +34,19 @@
 1 Blade Historian
 1 Blight Mound
 1 Blood Celebrant
+1 Blood Hustler
 3 Blood Pet
 1 Bloodghast
 1 Blooming Marsh
 1 Blossoming Bogbeast
 1 Bond of Revival
 1 Bonny Pall, Clearcutter
+1 Bovine Intervention
 1 Breaker of Creation
 1 Breeches, the Blastmaker
+1 Brimstone Roundup
 1 Bristlebane Battler
+1 Bristling Backwoods
 2 Buried in the Garden
 1 Butcher of Malakir
 1 Bygone Colossus
@@ -45,6 +54,7 @@
 1 Callous Inspector
 1 Carrion Feeder
 1 Case of the Trampled Garden
+1 Caught in the Crossfire
 1 Caves of Chaos Adventurer
 1 Chainer, Dementia Master
 1 Charcoal Diamond
@@ -53,16 +63,22 @@
 1 Cloudkill
 1 Colossal Rattlewurm
 1 Concealed Courtyard
+1 Conduit Pylons
 2 Consuming Corruption
+3 Corrupted Conviction
 1 Coveted Prize
+1 Creosote Heath
 1 Crypt Ghast
 1 Crypt of Agadeem
+3 Dance of the Tumbleweeds
 1 Darigaaz's Charm
 1 Dawnbringer Cleric
 1 Day of Black Sun
+1 Deadeye Duelist
 1 Deadly Brew
 2 Decisive Denial
 1 Decorum Dissertation
+1 Deepmuck Desperado
 1 Defiling Daemogoth
 1 Deliver Unto Evil
 1 Demon's Horn
@@ -86,6 +102,7 @@
 1 Eldrazi Ravager
 1 Elegy Acolyte
 1 Eriette, the Beguiler
+2 Eroded Canyon
 2 Essence Capture
 1 Eusocial Engineering
 1 Everflowing Chalice
@@ -93,9 +110,12 @@
 1 Eviscerator's Insight
 1 Exotic Orchard
 1 Explore
+2 Explosive Derailment
 1 Feed the Swarm
 1 Fell the Mighty
 1 Feral Appetite
+1 Ferocification
+1 Festering Gulch
 1 Feywild Caretaker
 1 Fierce Retribution
 1 Final Act
@@ -105,6 +125,8 @@
 1 Flame of Anor
 1 Fling
 1 Font of Agonies
+1 Forlorn Flats
+2 Forsaken Miner
 1 Fortune, Loyal Steed
 1 Fountainport Bell
 1 Freestrider Lookout
@@ -128,13 +150,15 @@
 1 Gutterbones
 1 Gyome, Master Chef
 1 Hama Pashar, Ruin Seeker
-1 Hardbristle Bandit
+2 Hardbristle Bandit
 1 Haunting Voyage
 1 Haywire Mite
 1 Heartless Pillage
 1 Hellspur Posse Boss
 1 Hidden Grotto
+1 Highway Robbery
 2 Hindering Light
+1 Hollow Marauder
 1 Honest Rutstein
 1 Hornet Nest
 2 Hostile Investigator
@@ -151,8 +175,10 @@
 1 Insatiable Avarice
 1 Insidious Roots
 1 Inspiring Vantage
+1 Intimidation Campaign
 1 Ionize
 1 Jadar, Ghoulcaller of Nephalia
+1 Jagged Barrens
 1 Jailbreak Scheme
 1 Jarad, Golgari Lich Lord
 1 Jem Lightfoote, Sky Explorer
@@ -170,35 +196,44 @@
 1 Kolaghan's Command
 1 Kozilek, the Great Distortion
 1 Kraum, Violent Cacophony
+1 Lavaspur Boots
 1 Lightning Greaves
 1 Lilah, Undefeated Slickshot
+3 Lively Dirge
 1 Lluwen, Imperfect Naturalist
+1 Lonely Arroyo
 1 Long Feng, Grand Secretariat
 1 Lost Jitte
 1 Lotho, Corrupt Shirriff
 1 Lotus Ring
 1 Lumra, Bellow of the Woods
+1 Lush Oasis
 1 Luxurious Locomotive
 1 Lychguard
 1 Magda, the Hoardmaster
+1 Magebane Lizard
 1 Magus of the Candelabra
 1 Manor Gate
+2 Map the Frontier
+1 Marauding Sphinx
 1 Marchesa, Dealer of Death
 1 Marchesa, the Black Rose
 1 Mardu Siegebreaker
 1 Mastermind's Acquisition
 1 Mazemind Tome
 1 Merchant of Venom
-1 Metamorphic Blast
+2 Metamorphic Blast
 1 Metamorphosis Fanatic
 1 Midnight Pathlighter
 1 Midnight Reaper
 1 Mikaeus, the Unhallowed
+1 Mirage Mesa
 1 Moraug, Fury of Akoum
 1 Morlun, Devourer of Spiders
 1 Mortality Spear
 1 Mortuary Mire
 1 Moseo, Vein's New Dean
+1 Mourner's Surprise
 1 Mudflat Village
 1 Murder
 1 Murderous Rider
@@ -207,6 +242,7 @@
 1 Najeela, the Blade-Blossom
 1 Necrotic Ooze
 1 Nether Traitor
+1 Nimble Brigand
 1 No One Left Behind
 1 Nulldrifter
 1 Nyx Lotus
@@ -224,6 +260,7 @@
 1 Outlaws' Merriment
 1 Outrageous Robbery
 1 Overwhelming Forces
+1 Overzealous Muscle
 1 Pact Weapon
 1 Paradise Druid
 1 Patchwork Automaton
@@ -252,33 +289,42 @@
 1 Professor Dellian Fel
 1 Prophetic Prism
 1 Qarsi Revenant
+1 Rakish Crew
+1 Rattleback Apothecary
+1 Raven of Fell Omens
 1 Ravenloft Adventurer
 1 Ravenous Chupacabra
 2 Reanimate
 1 Reiver Demon
 1 Requisition Raid
-1 Return the Favor
+3 Return the Favor
 1 Ribtruss Roaster
 1 Ride Down
 1 Rilsa Rael, Kingpin
 1 Rise of the Dark Realms
 1 Rith's Charm
+1 Rodeo Pyromancers
 2 Roxanne, Starfall Savant
 1 Rune-Scarred Demon
 1 Rush of Dread
 2 Rustler Rampage
+1 Ruthless Lawbringer
 1 Safana, Calimport Cutthroat
 1 Samut, the Driving Force
 1 Samut, Voice of Dissent
+1 Sandstorm Verge
 1 Sanguine Bond
 1 Sautekh Immortal
 2 Savage Smash
 1 Scourge of the Skyclaves
 1 Sea Gate Colossus
 1 Sefris of the Hidden Ways
+1 Seize the Secrets
 1 Selesnya Charm
 1 Seraphic Steed
-1 Shifting Grift
+1 Servant of the Stinger
+2 Shifting Grift
+3 Shoot the Sheriff
 1 Sigil of Myrkul
 1 Sign in Blood
 1 Simic Charm
@@ -289,14 +335,19 @@
 1 Skullcrack
 1 Skycoach Waypoint
 1 Slick Sequence
+1 Slickshot Lockpicker
 1 Slickshot Show-Off
+1 Slickshot Vault-Buster
 1 Slimefoot, the Stowaway
+1 Soured Springs
 1 Spelunking
+1 Spinewoods Armadillo
 1 Spirebluff Canal
 1 Springbloom Druid
 1 Springleaf Parade
 1 Stensian Sanguinist
 1 Step Between Worlds
+1 Sterling Keykeeper
 1 Strix Serenade
 1 Studious First-Year
 1 Study Hall
@@ -304,6 +355,9 @@
 1 Surrak, the Hunt Caller
 1 Syphon Mind
 1 Tablet of Compleation
+1 Take for a Ride
+1 Take the Fall
+1 Take Up the Shield
 1 Teacher's Pest
 1 Tendershoot Dryad
 1 Tendrils of Agony
@@ -328,7 +382,7 @@
 1 Torens, Fist of the Angels
 1 Torpor Orb
 1 Tragedy Feaster
-1 Trash the Town
+3 Trash the Town
 1 Treva's Charm
 1 Triarch Stalker
 1 Triumphant Adventurer
@@ -347,8 +401,10 @@
 1 Vengeful Bloodwitch
 1 Verdant Confluence
 1 Veteran Adventurer
+1 Vial Smasher, Gleeful Grenadier
 1 Vicious Battlerager
 1 Victim of Night
+2 Visage Bandit
 1 Vito, Thorn of the Dusk Rose
 1 Vraska Joins Up
 1 Vraska, the Silencer
