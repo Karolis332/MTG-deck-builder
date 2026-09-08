@@ -128,6 +128,17 @@ export function DeckEditorHeader({
           tone: 'ok',
           ttl: 7000,
         });
+      } else if (!isCommanderFormat) {
+        // 60-card formats: the from-scratch engine has no meta input; "rebuild" means
+        // apply the optimizer's cuts and paired adds as a new deck (2026-09-08).
+        const res = await fetch(`/api/decks/${deck.id}/optimize-apply`, { method: 'POST' });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Optimize failed');
+        toast({
+          title: `Optimized as a new deck: ${data.cuts?.length ?? 0} cut(s), ${data.adds?.length ?? 0} add(s). Your original is untouched.`,
+          tone: 'ok',
+          action: { label: 'Open', onClick: () => onNavigateToDeck(data.deckId) },
+        });
       } else {
         const commander = deck.cards.find((c) => c.board === 'commander');
         const res = await fetch('/api/decks/auto-build', {
@@ -268,7 +279,13 @@ export function DeckEditorHeader({
             title={optimizeMode ? 'Uses your Arena match history via the recommendation model' : 'Not enough match history yet — builds a fresh deck instead'}
           >
             <SparklesIcon className="h-3.5 w-3.5" />
-            {rebuilding ? 'Working…' : optimizeMode ? `Optimize with model (${gamesPlayed} games)` : 'Rebuild with model'}
+            {rebuilding
+              ? 'Working…'
+              : optimizeMode
+                ? `Optimize with model (${gamesPlayed} games)`
+                : isCommanderFormat
+                  ? 'Rebuild with model'
+                  : 'Optimize with model'}
           </button>
 
           <button
