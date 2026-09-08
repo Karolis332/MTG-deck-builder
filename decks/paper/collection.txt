@@ -1,0 +1,514 @@
+1 Accursed Marauder
+1 Acererak the Archlich
+1 Adaptive Automaton
+1 Adept Watershaper
+1 Alesha, Who Laughs at Fate
+1 Altar of Bhaal
+1 Anrakyr the Traveller
+3 Arcane Signet
+1 Archenemy's Charm
+1 Archfiend of Despair
+1 Archpriest of Iona
+1 Arnyn, Deathbloom Botanist
+1 Ash Barrens
+1 Ashnod's Altar
+1 Assassin's Trophy
+1 Astarion, the Decadent
+1 Awakening Zone
+1 Azula, Ruthless Firebender
+1 Baba Lysaga, Night Witch
+1 Baeloth Barrityl, Entertainer
+1 Bandit's Talent
+1 Bar the Gate
+1 Barkform Harvester
+1 Baron Helmut Zemo
+1 Base Camp
+1 Basking Broodscale
+1 Beifong's Bounty Hunters
+1 Beledros Witherbloom
+1 Bioengineered Future
+1 Biotransference
+1 Bismuth Mindrender
+1 Bitter Triumph
+1 Bitterthorn, Nissa's Animus
+1 Black Sun's Twilight
+1 Blade Historian
+1 Blasphemous Act
+1 Blight Mound
+1 Blood Artist
+1 Blood Celebrant
+3 Blood Pet
+1 Bloodghast
+1 Bloodstained Mire
+1 Blossoming Bogbeast
+2 Bojuka Bog
+1 Bond of Revival
+1 Boros Charm
+1 Braids, Arisen Nightmare
+1 Braids, Cabal Minion
+1 Bre of Clan Stoutarm
+1 Breaker of Creation
+1 Bristlebane Battler
+1 Brokers Hideout
+1 Burakos, Party Leader
+2 Buried Alive
+2 Butcher of Malakir
+1 Bygone Colossus
+1 Cabaretti Courtyard
+1 Callous Inspector
+1 Canoptek Wraith
+1 Carrion Feeder
+1 Case of the Trampled Garden
+1 Casualties of War
+1 Cauldron of Souls
+1 Caves of Chaos Adventurer
+1 Caves of Koilos
+1 Chainer, Dementia Master
+1 Changeling Outcast
+1 Charcoal Diamond
+1 Chief Warg's Company
+1 Chromatic Lantern
+1 Chronomancer
+1 Cityscape Leveler
+1 Cloudkill
+2 Command Tower
+1 Commander's Sphere
+1 Concerted Defense
+1 Conduit Pylons
+2 Consuming Corruption
+1 Corpse Augur
+1 Corpse Churn
+1 Coveted Prize
+1 Creakwood Liege
+1 Crypt Ghast
+1 Crypt of Agadeem
+1 Cryptek
+1 Culling Ritual
+1 Culling the Weak
+2 Cultivate
+1 Darigaaz's Charm
+1 Dark Ritual
+1 Dawnbringer Cleric
+1 Day of Black Sun
+1 Deadly Brew
+2 Deadly Dispute
+1 Decorum Dissertation
+1 Defiling Daemogoth
+1 Deliver Unto Evil
+1 Demon's Horn
+1 Desecration Demon
+1 Devourer of Destiny
+1 Diabolic Tutor
+1 Dimir Charm
+1 Dimir House Guard
+1 Dina, Essence Brewer
+1 Dina, Soul Steeper
+1 Dire Fleet Ravager
+1 Dismember
+1 Doomsday Excruciator
+1 Drag to the Underworld
+1 Dread Presence
+2 Dread Return
+1 Dread Summons
+1 Dreadhorde Invasion
+1 Durnan of the Yawning Portal
+1 Earthbender Ascension
+1 Eccentric Pestfinder
+1 Egon, God of Death
+1 Eldrazi Ravager
+1 Elegy Acolyte
+1 Elvish Mystic
+1 Elvish Spirit Guide
+1 Emergency Weld
+1 Emeritus of Ideation
+1 Emeritus of Truce
+1 Eternal Witness
+1 Eusocial Engineering
+1 Everflowing Chalice
+1 Everything Comes to Dust
+1 Eviscerator's Insight
+2 Exotic Orchard
+1 Explore
+1 Explore the Underdark
+1 Fabled Passage
+2 Farseek
+1 Feed the Swarm
+1 Fellwar Stone
+1 Feral Appetite
+1 Festering Thicket
+1 Feywild Caretaker
+1 Final Act
+1 Final Showdown
+1 Firdoch Core
+1 Fire
+1 Firemind Vessel
+1 Flame of Anor
+1 Flayed One
+1 Font of Agonies
+11 Forest
+1 Foundry Inspector
+1 Fountainport Bell
+1 Frog Butler
+1 Garruk's Uprising
+1 Gatecreeper Vine
+1 Gene Pollinator
+1 Ghost Ark
+1 Gilded Goose
+1 Gilded Lotus
+1 Glasspool Mimic
+1 Gleaming Barrier
+1 Golgari Charm
+1 Gonti, Lord of Luxury
+1 Gonti's Machinations
+1 Gorma, the Gullet
+1 Grand Abolisher
+1 Grave Researcher
+1 Gray Merchant of Asphodel
+1 Grim Backwoods
+1 Grim Servant
+1 Grist, Voracious Larva
+1 Growth Spiral
+1 Gruul Charm
+1 Gutterbones
+1 Gyome, Master Chef
+1 Hallowed Fountain
+1 Hama Pashar, Ruin Seeker
+1 Harper Recruiter
+1 Haunted Mire
+1 Haunting Voyage
+1 Haywire Mite
+1 Heroic Intervention
+1 Hexmark Destroyer
+1 Hidden Grotto
+1 High Market
+1 High-Society Hunter
+1 Honest Rutstein
+1 Hornet Nest
+1 Hornet Queen
+1 Hostile Investigator
+1 Huatli, Poet of Unity
+1 Hungry Ghoul
+1 Idol of False Gods
+1 Illuminor Szeras
+1 Immoral Bargain
+1 Imoen, Mystic Trickster
+1 Imotekh the Stormlord
+1 Infernal Grasp
+1 Infestation Sage
+1 Innkeeper's Talent
+1 Insidious Roots
+1 Invasion of Ikoria
+1 Island
+1 Izoni, Thousand-Eyed
+1 Jadar, Ghoulcaller of Nephalia
+1 Jarad, Golgari Lich Lord
+1 Jazal Goldmane
+1 Jenova, Ancient Calamity
+1 Jerren, Corrupted Bishop
+1 Jetmir's Garden
+1 Joo Dee, One of Many
+1 Jungle Hollow
+1 Junji, the Midnight Sky
+1 Kagha, Shadow Archdruid
+1 Kamiz, Obscura Oculus
+1 Karlach, Fury of Avernus
+1 Karplusan Forest
+1 Kiora's Follower
+1 Knockout Maneuver
+2 Kodama's Reach
+1 Koh, the Face Stealer
+1 Kolaghan's Command
+1 Kozilek, the Great Distortion
+1 Krydle of Baldur's Gate
+1 Lembas
+1 Lightning Greaves
+1 Liliana, Dreadhorde General
+1 Linvala, Shield of Sea Gate
+1 Llanowar Elves
+1 Llanowar Wastes
+1 Lluwen, Imperfect Naturalist
+1 Lokhust Heavy Destroyer
+1 Long Feng, Grand Secretariat
+1 Lotho, Corrupt Shirriff
+1 Lumra, Bellow of the Woods
+1 Lychguard
+1 Maestros Theater
+1 Magus of the Candelabra
+1 Manor Gate
+1 Marchesa, the Black Rose
+1 Mardu Siegebreaker
+1 Marionette Apprentice
+1 Marionette Master
+1 Masked Vandal
+1 Massacre Wurm
+1 Mastermind's Acquisition
+1 Mazemind Tome
+1 Mazirek, Kraul Death Priest
+1 Merchant of Venom
+1 Meren of Clan Nel Toth
+1 Metalwork Colossus
+1 Metamorphosis Fanatic
+1 Midnight Pathlighter
+1 Midnight Reaper
+1 Mikaeus, the Unhallowed
+1 Mindblade Render
+1 Minthara, Merciless Soul
+1 Mirkwood Bats
+1 Mirri, Weatherlight Duelist
+1 Mirror Entity
+1 Moldervine Reclamation
+1 Moraug, Fury of Akoum
+1 Morbid Opportunist
+1 Morlun, Devourer of Spiders
+1 Mortality Spear
+1 Mortuary Mire
+1 Moseo, Vein's New Dean
+1 Mosswood Dreadknight
+1 Mountain
+1 Mudflat Village
+1 Multiclass Baldric
+1 Muraganda Raceway
+1 Murder
+1 Murderous Rider
+1 Mutable Explorer
+1 Mycoloth
+1 Myconid Spore Tender
+1 Myr Retriever
+1 Myriad Landscape
+1 Nadaar, Selfless Paladin
+1 Najeela, the Blade-Blossom
+1 Nalia de'Arnise
+1 Nature's Lore
+1 Necroblossom Snarl
+1 Necron Deathmark
+1 Necron Monolith
+1 Necron Overlord
+1 Necrotic Ooze
+1 Negate
+1 Nether Traitor
+1 Night's Whisper
+1 Nimble Trapfinder
+1 No One Left Behind
+1 Nulldrifter
+1 Nullpriest of Oblivion
+1 Nyx Lotus
+1 Ohran Frostfang
+1 Old Stickfingers
+1 Ominous Harvest
+1 Omni-Changeling
+1 Opal Palace
+1 Ophiomancer
+1 Ornithopter of Paradise
+1 Orzhov Charm
+1 Oubliette
+1 Outrageous Robbery
+1 Overgrown Tomb
+1 Pact Weapon
+1 Palladium Myr
+1 Paradise Druid
+1 Patchwork Automaton
+2 Path of Ancestry
+1 Pawn of Ulamog
+1 Peer into the Abyss
+1 Pest Infestation
+1 Pest Rescuer
+1 Pestilence Demon
+1 Peter Parker's Camera
+1 Phoenix Fleet Airship
+1 Phyrexian Arena
+1 Phyrexian Scriptures
+1 Pizza Face, Gastromancer
+1 Plaguecrafter
+2 Plains
+1 Planar Engineering
+1 Planetarium of Wan Shi Tong
+1 Plasmancer
+1 Plaza of Harmony
+1 Plumb the Forbidden
+1 Pontiff of Blight
+1 Portal to Phyrexia
+1 Potioner's Trove
+1 Power Word Kill
+1 Pox
+1 Practiced Tactics
+1 Priest of Forgotten Gods
+1 Primeval Bounty
+1 Professor Dellian Fel
+1 Prophetic Prism
+1 Psychomancer
+1 Qarsi Revenant
+1 Raise Dead
+1 Rankle, Master of Pranks
+1 Ravenloft Adventurer
+1 Ravenous Chupacabra
+1 Razorlash Transmogrant
+1 Realm of Koh
+1 Reanimate
+1 Reconnaissance Mission
+1 Reiver Demon
+1 Return of the Wildspeaker
+1 Revitalizing Repast
+1 Ribtruss Roaster
+1 Rilsa Rael, Kingpin
+1 Ripples of Undeath
+1 Rise of the Dark Realms
+1 Rith's Charm
+1 Riveteers Overlook
+1 Royal Warden
+1 Rune-Scarred Demon
+1 Sacred Foundry
+1 Safana, Calimport Cutthroat
+1 Sakura-Tribe Elder
+1 Samut, the Driving Force
+1 Samut, Voice of Dissent
+1 Sanguine Bond
+1 Sautekh Immortal
+1 Saw in Half
+1 Scourge of the Skyclaves
+1 Sea Gate Colossus
+1 Seasoned Dungeoneer
+1 Sefris of the Hidden Ways
+1 Selesnya Charm
+1 Selfless Spirit
+1 Shadowheart, Dark Justiciar
+1 Shard of the Nightbringer
+1 Shard of the Void Dragon
+1 Sheoldred's Edict
+1 Sigil of Myrkul
+1 Sign in Blood
+1 Simic Charm
+1 Sivriss, Nightmare Speaker
+1 Skirge Familiar
+1 Skorpekh Destroyer
+1 Skorpekh Lord
+1 Skycoach Waypoint
+1 Slimefoot, the Stowaway
+1 Smothering Abomination
+3 Sol Ring
+1 Solemn Doomguide
+2 Solemn Simulacrum
+1 Spara's Headquarters
+1 Spelunking
+1 Spoils of Adventure
+1 Springbloom Druid
+1 Springleaf Parade
+1 Squad Commander
+1 Steam Vents
+1 Steel Overseer
+1 Stensian Sanguinist
+1 Stick Together
+1 Stomping Ground
+1 Stonework Packbeast
+1 Strix Serenade
+1 Studious First-Year
+1 Study Hall
+1 Stump Stomp
+1 Supernatural Stamina
+1 Surrak, the Hunt Caller
+37 Swamp
+1 Sword of the Animist
+1 Swords to Plowshares
+1 Sygg, Wanderwine Wisdom
+1 Sylvan Library
+1 Syncopate
+1 Syphon Mind
+2 Syr Konrad, the Grim
+1 Szarekh, the Silent King
+1 Tablet of Compleation
+1 Tajuru Paragon
+1 Tam, Mindful First-Year
+1 Tangled Florahedron
+1 Tazri, Beacon of Unity
+1 Teacher's Pest
+1 Technomancer
+1 Temple of Malady
+1 Temple of the False God
+1 Tendershoot Dryad
+1 Tendrils of Agony
+1 Tendrils of Corruption
+1 Terra, Herald of Hope
+1 Terramorphic Expanse
+1 The Darkness Crystal
+1 The Destined Thief
+1 The Destined Warrior
+1 The Destined White Mage
+1 The Gitrog, Ravenous Ride
+1 The Swarmweaver
+1 The War in Heaven
+1 Their Name Is Death
+1 Their Number Is Legion
+1 Thieves' Tools
+1 Thought Vessel
+1 Thwart the Grave
+1 Tip the Scales
+1 Titan's Grave
+1 Tomb of Horrors Adventurer
+1 Torens, Fist of the Angels
+1 Toxic Deluge
+1 Tragedy Feaster
+1 Traxos, Scourge of Kroog
+1 Trazyn the Infinite
+1 Treasure Nabber
+1 Treva's Charm
+1 Triarch Praetorian
+1 Triarch Stalker
+1 Triumphant Adventurer
+1 Trudge Garden
+1 Turbulent Fen
+1 Twilight Mire
+1 Twilight Prophet
+1 Umbral Collar Zealot
+1 Undermountain Adventurer
+2 Undying Malice
+1 Unseal the Necropolis
+1 Unsettled Mariner
+1 Uro, Titan of Nature's Wrath
+1 Vampiric Link
+1 Varis, Silverymoon Ranger
+1 Varragoth, Bloodsky Sire
+1 Vastlands Scavenger
+1 Vault of the Archangel
+1 Veil of Summer
+1 Veinwitch Coven
+1 Vengeful Bloodwitch
+1 Verdant Confluence
+1 Vernal Fen
+1 Veteran Adventurer
+1 Vicious Battlerager
+1 Victim of Night
+1 Victimize
+1 Village Rites
+1 Viridescent Bog
+1 Viscera Seer
+1 Vito, Thorn of the Dusk Rose
+1 Vizier of the Menagerie
+1 Vraan, Executioner Thane
+1 Wake the Dead
+1 Wardens of the Cycle
+2 Wayfarer's Bauble
+1 Weathered Wayfarer
+1 Whisper, Blood Liturgist
+1 White Plume Adventurer
+1 Wight of the Reliquary
+1 Windswept Heath
+1 Wishclaw Talisman
+1 Witch of the Moors
+1 Witherbloom Campus
+1 Witherbloom Charm
+1 Witherbloom Command
+1 Woe Strider
+1 Wooded Foothills
+1 Woodland Cemetery
+1 Worn Powerstone
+1 Wreckage Wickerfolk
+1 Yahenni, Undying Partisan
+1 You Find a Cursed Idol
+1 You Find the Villains' Lair
+1 You Happen On a Glade
+1 You Meet in a Tavern
+1 Yuan-Ti Malison
+1 Zagras, Thief of Heartbeats
+1 Zhentarim Bandit
+1 Ziatora's Proving Ground
+1 Zombify
+1 Zulaport Cutthroat
