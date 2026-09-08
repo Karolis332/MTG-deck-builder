@@ -15,6 +15,7 @@
 1 Changeling Outcast
 1 Chromatic Lantern
 1 Command Tower
+1 Concealed Courtyard
 1 Concerted Defense
 1 Coveted Prize
 1 Cultivate
@@ -27,23 +28,25 @@
 1 Fellwar Stone
 1 Firdoch Core
 1 Forest
+1 Glasspool Mimic
 1 Hallowed Fountain
 1 Hama Pashar, Ruin Seeker
 1 Harper Recruiter
 1 Heroic Intervention
 1 Imoen, Mystic Trickster
+1 Inspiring Vantage
 2 Island
 1 Jetmir's Garden
-1 Karplusan Forest
 1 Kodama's Reach
 1 Linvala, Shield of Sea Gate
+1 Lonely Arroyo
 1 Maestros Theater
 1 Mardu Siegebreaker
 1 Masked Vandal
 1 Midnight Pathlighter
 1 Minthara, Merciless Soul
+1 Mirage Mesa
 1 Mirror Entity
-1 Mountain
 1 Multiclass Baldric
 1 Mutable Explorer
 1 Myriad Landscape
@@ -57,10 +60,9 @@
 1 Overgrown Tomb
 1 Path of Ancestry
 1 Path to Exile
-3 Plains
+4 Plains
 1 Reconnaissance Mission
 1 Rilsa Rael, Kingpin
-1 Riveteers Overlook
 1 Sacred Foundry
 1 Seasoned Dungeoneer
 1 Sefris of the Hidden Ways
@@ -69,13 +71,14 @@
 1 Sol Ring
 1 Spara's Headquarters
 1 Spelunking
+1 Spirebluff Canal
 1 Spoils of Adventure
 1 Squad Commander
 1 Steam Vents
 1 Stick Together
 1 Stomping Ground
 1 Stonework Packbeast
-3 Swamp
+1 Swamp
 1 Sword of the Animist
 1 Swords to Plowshares
 1 Sygg, Wanderwine Wisdom
@@ -84,7 +87,6 @@
 1 The Destined Thief
 1 The Destined Warrior
 1 Undermountain Adventurer
-1 Vault of the Archangel
 1 Vizier of the Menagerie
 1 Wayfarer's Bauble
 1 White Plume Adventurer
@@ -92,4 +94,3 @@
 1 Wooded Foothills
 1 You Find a Cursed Idol
 1 Zagras, Thief of Heartbeats
-1 Ziatora's Proving Ground

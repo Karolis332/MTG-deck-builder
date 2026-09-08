@@ -24,7 +24,7 @@
 1 Fabled Passage
 1 Farseek
 1 Festering Thicket
-8 Forest
+4 Forest
 1 Gorma, the Gullet
 1 Grave Researcher
 1 Grim Backwoods
@@ -63,7 +63,7 @@
 1 Smothering Abomination
 1 Sol Ring
 1 Solemn Simulacrum
-7 Swamp
+11 Swamp
 1 Sylvan Library
 1 Syr Konrad, the Grim
 1 Tangled Florahedron

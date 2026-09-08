@@ -35,3 +35,7 @@ Appended by `npx tsx scripts/paper-sync.ts`. Full diffs: `git log -p decks/paper
 
 ## 2026-09-08
 - **Collection** 773 owned, 467 open
+
+## 2026-09-08
+- **Ramos, Dragon Engine** v2, 4 cards: +Manor Gate, +Plaza of Harmony
+- **Collection** 773 owned, 465 open

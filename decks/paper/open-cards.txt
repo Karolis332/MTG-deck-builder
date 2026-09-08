@@ -213,7 +213,6 @@
 1 Magda, the Hoardmaster
 1 Magebane Lizard
 1 Magus of the Candelabra
-1 Manor Gate
 2 Map the Frontier
 1 Marauding Sphinx
 1 Marchesa, Dealer of Death
@@ -279,7 +278,6 @@
 1 Pizza Face, Gastromancer
 1 Planar Engineering
 1 Plasmancer
-1 Plaza of Harmony
 1 Plumb the Forbidden
 1 Pontiff of Blight
 1 Potioner's Trove
