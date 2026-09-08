@@ -205,10 +205,10 @@ ${notes.map((n) => `<p class="note">${esc(n)}</p>`).join('')}
     'h1{font-size:18px;margin:0;color:#d4af37}h2{font-size:20px;color:#d4af37;margin:26px 18px 8px;border-bottom:1px solid #3a2d17;padding-bottom:4px}nav a{color:#d4af37;margin-right:12px}',
     '.stats{margin:0 18px 8px;border-collapse:collapse;font-size:14px}.stats td,.stats th{border:1px solid #3a2d17;padding:4px 10px;text-align:left}.stats th{color:#b5a27b;font-weight:normal}',
     '.note{margin:6px 18px;color:#b5a27b;font-size:13px}code{color:#e8dcc4}',
-    '.swaps{display:grid;gap:12px;padding:6px 18px}.swap{display:grid;grid-template-columns:28px 150px 30px 150px 1fr;gap:12px;align-items:center;background:#221b13;border:1px solid #3a2d17;border-radius:8px;padding:10px;cursor:pointer}',
+    '.swaps{display:grid;gap:12px;padding:6px 18px}.swap{display:grid;grid-template-columns:24px 28px 150px 30px 150px minmax(0,1fr);gap:12px;align-items:center;background:#221b13;border:1px solid #3a2d17;border-radius:8px;padding:10px;cursor:pointer}',
     '.swap:has(input:checked){opacity:.4}.swap input{width:18px;height:18px;accent-color:#d4af37}.n{color:#b5a27b;font-family:monospace}.arrow{color:#d4af37;font-size:22px;text-align:center}',
-    '.tile img{width:100%;aspect-ratio:488/680;border-radius:6px;display:block;background:#0e0b08}.tile b{display:block;font-size:13px;margin-top:4px}.tile small{color:#b5a27b;font-size:11px;display:block}.why{margin:0;font-size:13px}',
-    '.count{font-weight:normal;font-size:13px;color:#b5a27b}@media(max-width:900px){.swap{grid-template-columns:28px 1fr 30px 1fr}.why{grid-column:1/-1}}@media print{header,.swap input{display:none}.swap:has(input:checked){display:none}}',
+    '.tile{width:150px}.tile img{width:150px;height:auto;aspect-ratio:488/680;border-radius:6px;display:block;background:#0e0b08}.tile b{display:block;font-size:13px;margin-top:4px}.tile small{color:#b5a27b;font-size:11px;display:block}.why{margin:0;font-size:13px}',
+    '.count{font-weight:normal;font-size:13px;color:#b5a27b}@media(max-width:900px){.swap{grid-template-columns:24px 28px 150px 30px 150px}.why{grid-column:1/-1}}@media print{header,.swap input{display:none}.swap:has(input:checked){display:none}}',
   ].join(NL);
   const js = [
     "const K='deck-edit-ticks';const s=new Set(JSON.parse(localStorage.getItem(K)||'[]'));const all=[...document.querySelectorAll('.swap')];",
