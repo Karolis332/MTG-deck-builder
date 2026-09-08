@@ -41,6 +41,7 @@
 1 Bloodghast
 1 Bloodstained Mire
 1 Blossoming Bogbeast
+1 Boggart Trawler
 2 Bojuka Bog
 1 Bond of Revival
 1 Boros Charm
