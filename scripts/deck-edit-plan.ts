@@ -162,7 +162,7 @@ function score(list: Line[], commander: string, owned: string[]) {
 }
 
 const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
-const tile = (c: CardInfo) => `<div class="tile"><img loading="lazy" src="${esc(c.img)}" alt="${esc(c.name)}"><b>${esc(face(c.name))}</b><small>${esc(c.role)} · ${c.cmc} MV · ${pct(c.inc)}${esc(liftTxt(c.lift))}${c.cf ? ` · CF #${c.cf}` : ''}</small></div>`;
+const tile = (c: CardInfo) => `<div class="tile"><img src="${esc(c.img)}" alt="${esc(c.name)}"><b>${esc(face(c.name))}</b><small>${esc(c.role)} · ${c.cmc} MV · ${pct(c.inc)}${esc(liftTxt(c.lift))}${c.cf ? ` · CF #${c.cf}` : ''}</small></div>`;
 
 (async () => {
   const open = read(path.join(ROOT, 'open-cards.txt'));
