@@ -97,7 +97,9 @@ function readLines(file: string): Line[] {
     .filter((l) => l && !l.startsWith('#') && !l.startsWith('//'))
     .map((l) => {
       const m = /^(\d+)\s*x?\s+(.+)$/i.exec(l);
-      return m ? { qty: Number(m[1]), raw: m[2].trim() } : { qty: 1, raw: l };
+      // Arena/ManaBox exports carry a trailing "(SET) collector-number"; drop it before resolving.
+      const strip = (n: string) => n.replace(/\s*\([A-Za-z0-9]{2,6}\)\s*[A-Za-z0-9-★]+\s*$/, '').trim();
+      return m ? { qty: Number(m[1]), raw: strip(m[2]) } : { qty: 1, raw: strip(l) };
     });
 }
 

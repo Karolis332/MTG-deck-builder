@@ -29,3 +29,6 @@ Appended by `npx tsx scripts/paper-sync.ts`. Full diffs: `git log -p decks/paper
 ## 2026-09-08
 - **Ramos, Dragon Engine** v1, 2 cards
 - **Collection** 586 owned, 284 open
+
+## 2026-09-08
+- **Collection** 697 owned, 391 open
