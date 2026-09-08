@@ -19,8 +19,8 @@
 1 Concerted Defense
 1 Coveted Prize
 1 Cultivate
-1 Dawnbringer Cleric
 1 Durnan of the Yawning Portal
+1 Elvish Spirit Guide
 1 Emeritus of Ideation
 1 Emeritus of Truce
 1 Exotic Orchard
@@ -28,8 +28,8 @@
 1 Farseek
 1 Fellwar Stone
 1 Final Showdown
+1 Firdoch Core
 1 Forest
-1 Glasspool Mimic
 1 Hallowed Fountain
 1 Hama Pashar, Ruin Seeker
 1 Harper Recruiter
@@ -37,8 +37,8 @@
 1 Imoen, Mystic Trickster
 2 Island
 1 Jetmir's Garden
-1 Kamiz, Obscura Oculus
 1 Karplusan Forest
+1 Kodama's Reach
 1 Krydle of Baldur's Gate
 1 Linvala, Shield of Sea Gate
 1 Maestros Theater
@@ -48,6 +48,7 @@
 1 Mirror Entity
 1 Mountain
 1 Multiclass Baldric
+1 Mutable Explorer
 1 Myriad Landscape
 1 Nadaar, Selfless Paladin
 1 Najeela, the Blade-Blossom
@@ -58,12 +59,10 @@
 1 Overgrown Tomb
 1 Path of Ancestry
 3 Plains
-1 Ravenloft Adventurer
 1 Reconnaissance Mission
 1 Rilsa Rael, Kingpin
 1 Riveteers Overlook
 1 Sacred Foundry
-1 Safana, Calimport Cutthroat
 1 Seasoned Dungeoneer
 1 Sefris of the Hidden Ways
 1 Selfless Spirit
@@ -77,6 +76,7 @@
 1 Stomping Ground
 1 Stonework Packbeast
 3 Swamp
+1 Sword of the Animist
 1 Swords to Plowshares
 1 Sygg, Wanderwine Wisdom
 1 Tajuru Paragon
@@ -86,10 +86,10 @@
 1 Undermountain Adventurer
 1 Vault of the Archangel
 1 Vizier of the Menagerie
+1 Wayfarer's Bauble
 1 White Plume Adventurer
 1 Windswept Heath
 1 Wooded Foothills
 1 You Find a Cursed Idol
-1 Yuan-Ti Malison
 1 Zagras, Thief of Heartbeats
 1 Ziatora's Proving Ground
