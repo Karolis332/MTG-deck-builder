@@ -434,6 +434,7 @@
 1 The Destined Warrior
 1 The Destined White Mage
 1 The Gitrog, Ravenous Ride
+1 The Soul Stone
 1 The Swarmweaver
 1 The War in Heaven
 1 Their Name Is Death

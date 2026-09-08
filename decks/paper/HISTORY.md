@@ -14,3 +14,6 @@ Appended by `npx tsx scripts/paper-sync.ts`. Full diffs: `git log -p decks/paper
 
 ## 2026-09-08
 - **Meren of Clan Nel Toth** v3, 100 cards: +Boggart Trawler
+
+## 2026-09-08
+- **Imotekh the Stormlord** v2, 100 cards: +The Soul Stone
