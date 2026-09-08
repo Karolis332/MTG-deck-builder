@@ -71,7 +71,6 @@
 1 Eviscerator's Insight
 1 Exotic Orchard
 1 Explore
-1 Explore the Underdark
 1 Feed the Swarm
 1 Feral Appetite
 1 Feywild Caretaker

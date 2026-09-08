@@ -339,6 +339,7 @@
 1 Psychomancer
 1 Qarsi Revenant
 1 Raise Dead
+1 Ramos, Dragon Engine
 1 Rankle, Master of Pranks
 1 Ravenloft Adventurer
 1 Ravenous Chupacabra

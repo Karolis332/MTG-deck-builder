@@ -25,3 +25,7 @@ Appended by `npx tsx scripts/paper-sync.ts`. Full diffs: `git log -p decks/paper
 ## 2026-09-08
 - **Tazri, Beacon of Unity** v3, 100 cards: +Nalia de'Arnise, −Terramorphic Expanse
 - **Collection** 585 owned, 285 open
+
+## 2026-09-08
+- **Ramos, Dragon Engine** v1, 2 cards
+- **Collection** 586 owned, 284 open
