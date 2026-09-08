@@ -17,3 +17,7 @@ Appended by `npx tsx scripts/paper-sync.ts`. Full diffs: `git log -p decks/paper
 
 ## 2026-09-08
 - **Imotekh the Stormlord** v2, 100 cards: +The Soul Stone
+
+## 2026-09-08
+- **Tazri, Beacon of Unity** v2, 100 cards: +Terramorphic Expanse
+- **Collection** 585 owned, 285 open
