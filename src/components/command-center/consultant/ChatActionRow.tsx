@@ -22,14 +22,14 @@ export function ChatActionRow({ action, checked, disabled, onToggle }: ChatActio
     >
       <span
         className={cn(
-          'shrink-0 rounded px-1.5 py-0.5 text-[9px] font-bold',
+          'shrink-0 rounded px-1.5 py-0.5 text-[11px] font-bold',
           action.action === 'cut' ? 'bg-red-500/20 text-red-400' : 'bg-green-500/20 text-green-400'
         )}
       >
         {action.action === 'cut' ? 'CUT' : 'ADD'}
       </span>
-      <span className="flex-1 truncate text-xs">{action.cardName}</span>
-      <span className="max-w-[100px] truncate text-[10px] text-muted-foreground">{action.reason}</span>
+      <span className="flex-1 truncate text-sm">{action.cardName}</span>
+      <span className="max-w-[100px] truncate text-xs text-muted-foreground">{action.reason}</span>
     </div>
   );
 }

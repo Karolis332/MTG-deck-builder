@@ -28,11 +28,11 @@ export function CoverageTile({ deck, onOpenCard }: CoverageTileProps) {
       headline={
         <span className={ticking ? 'hud-tick' : undefined}>
           <span className="hud-number text-sm">{stats.ownedPct}%</span>{' '}
-          <span className="hud-number text-xs text-muted-foreground">${stats.totalValueUsd.toFixed(0)}</span>
+          <span className="hud-number text-sm text-muted-foreground">${stats.totalValueUsd.toFixed(0)}</span>
         </span>
       }
     >
-      <div className="space-y-2 text-xs">
+      <div className="space-y-2 text-sm">
         {stats.illegalCardNames.length > 0 && (
           <div>
             <span className="text-red-400">Illegal ({stats.illegalCardNames.length}):</span>{' '}

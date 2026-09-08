@@ -295,6 +295,7 @@ function createMainWindow(): void {
     mainWindow?.show();
   });
 
+  installZoomControls(mainWindow);
   mainWindow.loadURL(`http://localhost:${PORT}`);
 
   // Suppress Electron's native context menu so the app can handle right-click
@@ -687,3 +688,56 @@ app.on('will-quit', () => {
     nextServer = null;
   }
 });
+
+// ── UI zoom (Ctrl+= / Ctrl+- / Ctrl+0), persisted per profile ────────────────
+// The HUD editor packs a lot of small type; a remembered zoom factor is the
+// simplest readability control that survives restarts (operator request 2026-09-08).
+const ZOOM_FILE = 'ui-zoom.json';
+const ZOOM_MIN = 0.8;
+const ZOOM_MAX = 1.8;
+const ZOOM_STEP = 0.1;
+// First-run default: the HUD editor was designed at 1400 px; on the operator's
+// wide window everything read too small even after the type bump.
+const ZOOM_DEFAULT = 1.1;
+
+function zoomFilePath(): string {
+  return path.join(app.getPath('userData'), ZOOM_FILE);
+}
+
+function readZoomFactor(): number {
+  try {
+    const parsed = JSON.parse(fs.readFileSync(zoomFilePath(), 'utf8')) as { zoomFactor?: number };
+    const z = Number(parsed.zoomFactor);
+    return Number.isFinite(z) ? Math.min(ZOOM_MAX, Math.max(ZOOM_MIN, z)) : ZOOM_DEFAULT;
+  } catch {
+    return ZOOM_DEFAULT;
+  }
+}
+
+function writeZoomFactor(zoomFactor: number): void {
+  try {
+    fs.writeFileSync(zoomFilePath(), JSON.stringify({ zoomFactor }));
+  } catch (err) {
+    logCrash('zoom-write-error', err);
+  }
+}
+
+function installZoomControls(win: BrowserWindow): void {
+  const { webContents } = win;
+  webContents.on('did-finish-load', () => {
+    webContents.setZoomFactor(readZoomFactor());
+  });
+  webContents.on('before-input-event', (event, input) => {
+    if (input.type !== 'keyDown' || !(input.control || input.meta)) return;
+    const current = webContents.getZoomFactor();
+    let next: number | null = null;
+    if (input.key === '=' || input.key === '+') next = Math.min(ZOOM_MAX, current + ZOOM_STEP);
+    else if (input.key === '-') next = Math.max(ZOOM_MIN, current - ZOOM_STEP);
+    else if (input.key === '0') next = 1;
+    if (next === null) return;
+    event.preventDefault();
+    const rounded = Math.round(next * 100) / 100;
+    webContents.setZoomFactor(rounded);
+    writeZoomFactor(rounded);
+  });
+}

@@ -114,6 +114,23 @@ export default function DeckEditorPage() {
     }
   }, [isCommanderFormat, deck]);
 
+  // Colours to build with: the commander's identity, or for 60-card formats the
+  // union of the list's own colour identities (auto-build refuses colourless input).
+  const deckColors = useMemo(() => {
+    if (deckColorIdentity) return deckColorIdentity;
+    if (!deck) return [];
+    const seen = new Set<string>();
+    for (const c of deck.cards) {
+      if (c.board !== 'main') continue;
+      try {
+        for (const col of (c.color_identity ? JSON.parse(c.color_identity) : []) as string[]) seen.add(col);
+      } catch {
+        /* skip unparsable */
+      }
+    }
+    return ['W', 'U', 'B', 'R', 'G'].filter((col) => seen.has(col));
+  }, [deckColorIdentity, deck]);
+
   // Fetch deck-analysis (feeds LiveRail's Score/Roles/Coverage/Curve/Synergy tiles),
   // debounced so a burst of quantity clicks doesn't fire one request per click.
   useEffect(() => {
@@ -445,7 +462,7 @@ export default function DeckEditorPage() {
                 body: JSON.stringify({
                   name: `${deck.name} (Collection)`,
                   format: deck.format,
-                  colors: deckColorIdentity || [],
+                  colors: deckColors,
                   useCollection: true,
                   commanderName: commander?.name,
                 }),
@@ -459,6 +476,8 @@ export default function DeckEditorPage() {
           }}
           onShowImport={() => setShowImport(true)}
           onShowExport={() => setShowExport(true)}
+          isCommanderFormat={isCommanderFormat}
+          deckColors={deckColors}
         />
 
         <CommandCenterLayout
@@ -522,6 +541,7 @@ export default function DeckEditorPage() {
                 onOpenCard={setSelectedCard}
                 onAskConsultant={setConsultantPrefill}
                 onSetTargetBracket={setTargetBracket}
+                isCommanderFormat={isCommanderFormat}
               />
               <AnalysisRail
                 deck={deck}

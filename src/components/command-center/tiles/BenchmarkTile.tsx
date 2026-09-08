@@ -87,8 +87,8 @@ export function BenchmarkTile({ deck, onOpenCard, onAskConsultant }: BenchmarkTi
 
   if (!applicable) {
     return (
-      <TileFrame title="Benchmark" headline={<span className="text-xs text-muted-foreground">n/a</span>}>
-        <p className="text-xs text-muted-foreground">Benchmarking is n/a for {deck.format ?? 'this format'}.</p>
+      <TileFrame title="Benchmark" headline={<span className="text-sm text-muted-foreground">n/a</span>}>
+        <p className="text-sm text-muted-foreground">Benchmarking is n/a for {deck.format ?? 'this format'}.</p>
       </TileFrame>
     );
   }
@@ -102,19 +102,19 @@ export function BenchmarkTile({ deck, onOpenCard, onAskConsultant }: BenchmarkTi
         </span>
       }
     >
-      {error && <p className="text-xs text-red-400">{error}</p>}
-      {!data && !error && !loading && <p className="text-xs text-muted-foreground">No benchmark yet.</p>}
+      {error && <p className="text-sm text-red-400">{error}</p>}
+      {!data && !error && !loading && <p className="text-sm text-muted-foreground">No benchmark yet.</p>}
       {data && (
-        <div className="space-y-2 text-xs">
+        <div className="space-y-2 text-sm">
           <div>
             Overlap <span className="font-medium">{Math.round(data.overlapMeanPct)}%</span> mean ·{' '}
             <span className="font-medium">{Math.round(data.overlapBestPct)}%</span> best
             {data.bracketFilterApplied && (
-              <span className="ml-1 rounded bg-primary/20 px-1 text-[10px]">bracket-filtered</span>
+              <span className="ml-1 rounded bg-primary/20 px-1 text-xs">bracket-filtered</span>
             )}
           </div>
           {!data.quantitiesAvailable && (
-            <p className="text-[10px] text-muted-foreground">Owned quantities unavailable for this deck.</p>
+            <p className="text-xs text-muted-foreground">Owned quantities unavailable for this deck.</p>
           )}
           {data.staplesMissing.length > 0 && (
             <div className="flex flex-wrap gap-1">
@@ -150,7 +150,7 @@ export function BenchmarkTile({ deck, onOpenCard, onAskConsultant }: BenchmarkTi
               ))}
             </div>
           )}
-          <table className="w-full text-[11px]">
+          <table className="w-full text-[13px]">
             <tbody>
               {Object.entries(data.deltas).map(([key, d]) => (
                 <tr key={key}>

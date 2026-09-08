@@ -3,11 +3,12 @@
 import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react';
 import { cn } from '@/lib/utils';
 
-const STORAGE_KEY = 'bg.commandCenter.v1';
-const MIN_WIDTH = 240;
-const MAX_WIDTH = 560;
-const DEFAULT_LEFT = 320;
-const DEFAULT_RIGHT = 380;
+// v2: wider defaults after the 2026-09-08 readability pass (type went up one step).
+const STORAGE_KEY = 'bg.commandCenter.v2';
+const MIN_WIDTH = 280;
+const MAX_WIDTH = 680;
+const DEFAULT_LEFT = 400;
+const DEFAULT_RIGHT = 440;
 
 interface PersistedState {
   leftWidth: number;
@@ -124,8 +125,10 @@ export function CommandCenterLayout({ left, center, right, leftTitle, rightTitle
 
       {/* Desktop: resizable grid */}
       <div
-        className="hidden flex-1 overflow-hidden lg:grid"
-        style={{ gridTemplateColumns: gridColumns, transition: 'grid-template-columns 150ms ease' }}
+        className="hidden min-h-0 flex-1 overflow-hidden lg:grid"
+        // minmax(0, 1fr): grid tracks default to min-height:auto, so a pane taller
+        // than the viewport grew the track and the panes could never scroll.
+        style={{ gridTemplateColumns: gridColumns, gridTemplateRows: 'minmax(0, 1fr)', transition: 'grid-template-columns 150ms ease' }}
       >
         <Pane
           collapsed={state.leftCollapsed}
@@ -137,7 +140,7 @@ export function CommandCenterLayout({ left, center, right, leftTitle, rightTitle
           {left}
         </Pane>
 
-        <div className="min-w-0 overflow-y-auto">{center}</div>
+        <div className="min-h-0 min-w-0 overflow-y-auto">{center}</div>
 
         <Pane
           collapsed={state.rightCollapsed}
@@ -181,10 +184,10 @@ function Pane({ collapsed, title, onToggle, side, onDragStart, children }: PaneP
   }
 
   return (
-    <div className={cn('relative flex min-w-0 flex-col', side === 'left' ? 'border-r' : 'border-l', 'border-border')}>
+    <div className={cn('relative flex min-h-0 min-w-0 flex-col', side === 'left' ? 'border-r' : 'border-l', 'border-border')}>
       {title && (
         <div className="flex shrink-0 items-center justify-between border-b border-border px-3 py-2">
-          <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">{title}</span>
+          <span className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">{title}</span>
           <button onClick={onToggle} title="Collapse" className="text-muted-foreground hover:text-foreground">
             {side === 'left' ? '‹' : '›'}
           </button>

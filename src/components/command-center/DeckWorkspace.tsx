@@ -112,10 +112,10 @@ export function DeckWorkspace({
         {collapsedSlim ? (
           <button
             onClick={() => setSearchExpanded(true)}
-            className="flex w-full items-center gap-2 rounded-lg border border-border bg-card px-3 py-1.5 text-left text-xs text-muted-foreground hover:border-primary/40"
+            className="flex w-full items-center gap-2 rounded-lg border border-border bg-card px-3 py-1.5 text-left text-sm text-muted-foreground hover:border-primary/40"
           >
             <SearchIcon className="h-3.5 w-3.5" />
-            Search cards to add... <span className="ml-auto text-[10px] opacity-60">press /</span>
+            Search cards to add... <span className="ml-auto text-xs opacity-60">press /</span>
           </button>
         ) : (
           <SearchBar
@@ -135,7 +135,7 @@ export function DeckWorkspace({
                   key={mv}
                   onClick={() => setFilterManaValues((prev) => (prev.includes(mv) ? prev.filter((v) => v !== mv) : [...prev, mv]))}
                   className={cn(
-                    'flex h-6 w-6 items-center justify-center rounded text-[10px] font-medium border transition-colors',
+                    'flex h-6 w-6 items-center justify-center rounded text-xs font-medium border transition-colors',
                     filterManaValues.includes(mv) ? 'bg-primary text-primary-foreground border-primary' : 'bg-card text-muted-foreground border-border hover:border-foreground/30'
                   )}
                   title={`CMC ${mv === 7 ? '7+' : mv}`}
@@ -152,7 +152,7 @@ export function DeckWorkspace({
                   <button
                     key={color}
                     onClick={() => setFilterColors((prev) => (prev.includes(color) ? prev.filter((c) => c !== color) : [...prev, color]))}
-                    className={cn('flex h-6 w-6 items-center justify-center rounded text-[10px] font-bold border transition-all', active ? COLOR_STYLES[color] : 'bg-card text-muted-foreground border-border hover:border-foreground/30')}
+                    className={cn('flex h-6 w-6 items-center justify-center rounded text-xs font-bold border transition-all', active ? COLOR_STYLES[color] : 'bg-card text-muted-foreground border-border hover:border-foreground/30')}
                     title={color}
                   >
                     {color}
@@ -168,7 +168,7 @@ export function DeckWorkspace({
                   <button
                     key={type}
                     onClick={() => setFilterTypes((prev) => (prev.includes(type) ? prev.filter((t) => t !== type) : [...prev, type]))}
-                    className={cn('rounded px-1.5 py-0.5 text-[10px] font-medium border transition-colors', active ? 'bg-primary text-primary-foreground border-primary' : 'bg-card text-muted-foreground border-border hover:border-foreground/30')}
+                    className={cn('rounded px-1.5 py-0.5 text-xs font-medium border transition-colors', active ? 'bg-primary text-primary-foreground border-primary' : 'bg-card text-muted-foreground border-border hover:border-foreground/30')}
                   >
                     {type.slice(0, 4)}
                   </button>
@@ -178,7 +178,7 @@ export function DeckWorkspace({
               {hasActiveFilters && (
                 <>
                   <span className="mx-1 h-4 w-px bg-border" />
-                  <button onClick={onClearFilters} className="text-[10px] text-muted-foreground hover:text-foreground">
+                  <button onClick={onClearFilters} className="text-xs text-muted-foreground hover:text-foreground">
                     Clear
                   </button>
                 </>
@@ -209,7 +209,7 @@ export function DeckWorkspace({
 
             {searchResults.length > 0 && searchResults.length < searchTotal && (
               <div className="mt-4 text-center">
-                <button onClick={onLoadMore} className="rounded-lg border border-border px-4 py-2 text-xs font-medium text-muted-foreground hover:bg-accent">
+                <button onClick={onLoadMore} className="rounded-lg border border-border px-4 py-2 text-sm font-medium text-muted-foreground hover:bg-accent">
                   Load more ({searchTotal - searchResults.length} remaining)
                 </button>
               </div>

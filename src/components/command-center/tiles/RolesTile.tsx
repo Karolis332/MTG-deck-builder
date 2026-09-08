@@ -17,7 +17,7 @@ function RoleBar({
 
   return (
     <button type="button" onClick={onClick} className="block w-full text-left">
-      <div className="flex items-center justify-between text-[11px]">
+      <div className="flex items-center justify-between text-[13px]">
         <span>{health.label}</span>
         <span className={cn('font-medium', health.color)}>
           {health.current} / {health.target.min}-{health.target.max}
@@ -52,7 +52,7 @@ export function RolesTile({
       }
     >
       {!analysis || analysis.ratioHealth.length === 0 ? (
-        <p className="text-xs text-muted-foreground">No analysis yet.</p>
+        <p className="text-sm text-muted-foreground">No analysis yet.</p>
       ) : (
         <div className="space-y-1.5">
           {analysis.ratioHealth.map((h) => (

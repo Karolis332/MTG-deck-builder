@@ -23,7 +23,7 @@ export function bracketMatchColor(bracket: number, target: number): string {
 
 function CardChip({ name, onClick, onSwap }: { name: string; onClick: () => void; onSwap?: () => void }) {
   return (
-    <span className="inline-flex items-center gap-1 rounded bg-muted/50 px-1.5 py-0.5 text-[11px]">
+    <span className="inline-flex items-center gap-1 rounded bg-muted/50 px-1.5 py-0.5 text-[13px]">
       <button type="button" onClick={onClick} className="hover:text-primary hover:underline">
         {name}
       </button>
@@ -87,7 +87,7 @@ export function BracketTile({ deck, onOpenCard, onAskConsultant, onSetTargetBrac
             type="button"
             onClick={() => onSetTargetBracket(n)}
             className={cn(
-              'rounded px-2 py-0.5 text-xs',
+              'rounded px-2 py-0.5 text-sm',
               n === target ? 'bg-primary/30 text-primary' : 'bg-muted/40 text-muted-foreground hover:bg-muted/70'
             )}
           >
@@ -97,7 +97,7 @@ export function BracketTile({ deck, onOpenCard, onAskConsultant, onSetTargetBrac
       </div>
 
       {result.twoCardCombos.length > 0 && (
-        <div className="mb-1 text-[11px] text-muted-foreground">
+        <div className="mb-1 text-[13px] text-muted-foreground">
           Combos: {result.twoCardCombos.map((pair) => pair.join(' + ')).join(', ')}
         </div>
       )}
@@ -106,7 +106,7 @@ export function BracketTile({ deck, onOpenCard, onAskConsultant, onSetTargetBrac
         (g) =>
           g.cards.length > 0 && (
             <div key={g.label} className="mb-1 flex flex-wrap items-center gap-1">
-              <span className="text-[11px] text-muted-foreground">{g.label}:</span>
+              <span className="text-[13px] text-muted-foreground">{g.label}:</span>
               {g.cards.map((name) => (
                 <CardChip key={name} name={name} onClick={() => openByName(name)} onSwap={() => swapPrompt(name)} />
               ))}
@@ -115,7 +115,7 @@ export function BracketTile({ deck, onOpenCard, onAskConsultant, onSetTargetBrac
       )}
 
       {result.reasons.length > 0 && (
-        <ul className="mt-1 list-disc pl-4 text-[11px] text-muted-foreground">
+        <ul className="mt-1 list-disc pl-4 text-[13px] text-muted-foreground">
           {result.reasons.map((r) => (
             <li key={r}>{r}</li>
           ))}

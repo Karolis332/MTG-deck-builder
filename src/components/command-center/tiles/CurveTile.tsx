@@ -20,13 +20,13 @@ export function CurveTile({ deck, analysis }: { deck: LiveRailDeck; analysis?: A
     >
       <ManaCurve cards={deck.cards.map((c) => ({ quantity: c.quantity, board: c.board, card: c }))} />
       {curveNote.length > 0 && (
-        <ul className="mt-2 list-disc pl-4 text-[11px] text-muted-foreground">
+        <ul className="mt-2 list-disc pl-4 text-[13px] text-muted-foreground">
           {curveNote.map((n) => (
             <li key={n}>{n}</li>
           ))}
         </ul>
       )}
-      <p className="mt-1 text-[10px] text-muted-foreground">Archetype target overlay: n/a (not in analysis response).</p>
+      <p className="mt-1 text-xs text-muted-foreground">Archetype target overlay: n/a (not in analysis response).</p>
     </TileFrame>
   );
 }

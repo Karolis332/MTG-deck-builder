@@ -81,4 +81,6 @@ export interface LiveRailProps {
   onOpenCard: (card: DbCard) => void;
   onAskConsultant: (prompt: string) => void;
   onSetTargetBracket: (n: number) => void;
+  /** Bracket and synergy tiles are Commander-only. */
+  isCommanderFormat: boolean;
 }

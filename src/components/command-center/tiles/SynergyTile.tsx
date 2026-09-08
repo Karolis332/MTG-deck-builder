@@ -19,9 +19,9 @@ export function SynergyTile({
   return (
     <TileFrame title="Synergy" headline={<span className={cn('hud-number text-sm', ticking && 'hud-tick')}>{pairs.length}</span>}>
       {!analysis ? (
-        <p className="text-xs text-muted-foreground">No analysis yet.</p>
+        <p className="text-sm text-muted-foreground">No analysis yet.</p>
       ) : (
-        <div className="space-y-3 text-xs">
+        <div className="space-y-3 text-sm">
           {pairs.length > 0 && (
             <div className="space-y-1">
               {pairs.map((p) => (
@@ -30,7 +30,7 @@ export function SynergyTile({
                     {p.a} + {p.b} <span className="text-muted-foreground">({p.weight})</span>
                   </div>
                   {p.reasons.length > 0 && (
-                    <div className="text-[10px] text-muted-foreground">{p.reasons.join(', ')}</div>
+                    <div className="text-xs text-muted-foreground">{p.reasons.join(', ')}</div>
                   )}
                 </div>
               ))}
@@ -41,9 +41,9 @@ export function SynergyTile({
             <div>
               <div className="font-medium">{winPlan.route}</div>
               {winPlan.secondaryRoute && (
-                <div className="text-[10px] text-muted-foreground">also: {winPlan.secondaryRoute}</div>
+                <div className="text-xs text-muted-foreground">also: {winPlan.secondaryRoute}</div>
               )}
-              <p className="text-[11px] text-muted-foreground">{winPlan.description}</p>
+              <p className="text-[13px] text-muted-foreground">{winPlan.description}</p>
               {(['enablers', 'payoffs', 'protection', 'tutors'] as const).map(
                 (group) =>
                   winPlan.keyCards[group].length > 0 && (
@@ -71,7 +71,7 @@ export function SynergyTile({
           )}
 
           {analysis.mulliganCriteria && analysis.mulliganCriteria.length > 0 && (
-            <ul className="list-disc pl-4 text-[11px] text-muted-foreground">
+            <ul className="list-disc pl-4 text-[13px] text-muted-foreground">
               {analysis.mulliganCriteria.map((c) => (
                 <li key={c}>{c}</li>
               ))}

@@ -47,6 +47,10 @@ interface DeckEditorHeaderProps {
   onShowExport: () => void;
   targetBracket: number;
   onSetTargetBracket: (n: number) => void;
+  /** The 2–5 target-bracket selector is Commander-only. */
+  isCommanderFormat: boolean;
+  /** Colour identity of the current list — 60-card rebuilds need it, the engine cannot infer it. */
+  deckColors: string[];
   onNavigateToDeck: (deckId: number) => void;
 }
 
@@ -79,6 +83,8 @@ export function DeckEditorHeader({
   onShowExport,
   targetBracket,
   onSetTargetBracket,
+  isCommanderFormat,
+  deckColors,
   onNavigateToDeck,
 }: DeckEditorHeaderProps) {
   const [powerLevel, setPowerLevel] = useState<PowerLevel>('optimized');
@@ -130,6 +136,8 @@ export function DeckEditorHeader({
           body: JSON.stringify({
             name: `${deck.name} (Rebuilt)`,
             format: deck.format,
+            // 60-card formats have no commander to infer colours from — send the list's identity.
+            colors: isCommanderFormat ? undefined : deckColors,
             useCollection: collectionOnly,
             commanderName: commander?.name,
             powerLevel,
@@ -183,7 +191,7 @@ export function DeckEditorHeader({
           <select
             value={deck.format || 'standard'}
             onChange={(e) => onFormatChange(e.target.value)}
-            className="rounded-lg border border-border bg-background px-2 py-1 text-xs outline-none"
+            className="rounded-lg border border-border bg-background px-2 py-1 text-sm outline-none"
           >
             {FORMATS.map((f) => (
               <option key={f} value={f}>
@@ -192,7 +200,7 @@ export function DeckEditorHeader({
             ))}
           </select>
 
-          <span className="hud-number whitespace-nowrap text-xs text-muted-foreground">
+          <span className="hud-number whitespace-nowrap text-sm text-muted-foreground">
             {mainCount} cards
             {saving && ' (saving...)'}
           </span>
@@ -210,7 +218,7 @@ export function DeckEditorHeader({
             <button
               onClick={onToggleExplanation}
               className={cn(
-                'flex items-center gap-1 rounded-md px-2 py-0.5 text-[10px] font-medium transition-colors',
+                'flex items-center gap-1 rounded-md px-2 py-0.5 text-xs font-medium transition-colors',
                 showExplanation ? 'bg-primary/20 text-primary' : 'bg-accent text-accent-foreground hover:bg-accent/80'
               )}
               title="Toggle AI build explanation"
@@ -222,27 +230,29 @@ export function DeckEditorHeader({
         </div>
 
         <div className="flex shrink-0 items-center gap-1.5">
-          <div className="flex items-center gap-0.5" title="Target bracket">
-            {[2, 3, 4, 5].map((n) => (
-              <button
-                key={n}
-                type="button"
-                onClick={() => onSetTargetBracket(n)}
-                className={cn(
-                  'rounded px-1.5 py-0.5 text-[10px]',
-                  n === targetBracket ? 'bg-primary/30 text-primary' : 'bg-muted/40 text-muted-foreground hover:bg-muted/70'
-                )}
-              >
-                {n}
-              </button>
-            ))}
-          </div>
+          {isCommanderFormat && (
+            <div className="flex items-center gap-0.5" title="Target bracket">
+              {[2, 3, 4, 5].map((n) => (
+                <button
+                  key={n}
+                  type="button"
+                  onClick={() => onSetTargetBracket(n)}
+                  className={cn(
+                    'rounded px-1.5 py-0.5 text-xs',
+                    n === targetBracket ? 'bg-primary/30 text-primary' : 'bg-muted/40 text-muted-foreground hover:bg-muted/70'
+                  )}
+                >
+                  {n}
+                </button>
+              ))}
+            </div>
+          )}
 
           <select
             value={powerLevel}
             onChange={(e) => setPowerLevel(e.target.value as PowerLevel)}
             title="Power level (used by Rebuild/Optimize with model)"
-            className="rounded-lg border border-border bg-background px-1.5 py-1 text-xs outline-none"
+            className="rounded-lg border border-border bg-background px-1.5 py-1 text-sm outline-none"
           >
             {POWER_LEVELS.map((p) => (
               <option key={p} value={p}>
@@ -254,7 +264,7 @@ export function DeckEditorHeader({
           <button
             onClick={runRebuildOrOptimize}
             disabled={rebuilding}
-            className="flex items-center gap-1.5 whitespace-nowrap rounded-lg bg-accent px-2.5 py-1.5 text-xs font-medium text-accent-foreground transition-colors hover:bg-accent/80 disabled:opacity-50"
+            className="flex items-center gap-1.5 whitespace-nowrap rounded-lg bg-accent px-2.5 py-1.5 text-sm font-medium text-accent-foreground transition-colors hover:bg-accent/80 disabled:opacity-50"
             title={optimizeMode ? 'Uses your Arena match history via the recommendation model' : 'Not enough match history yet — builds a fresh deck instead'}
           >
             <SparklesIcon className="h-3.5 w-3.5" />
@@ -263,7 +273,7 @@ export function DeckEditorHeader({
 
           <button
             onClick={onShowVersionHistory}
-            className="flex items-center gap-1.5 whitespace-nowrap rounded-lg bg-accent px-2.5 py-1.5 text-xs font-medium text-accent-foreground transition-colors hover:bg-accent/80"
+            className="flex items-center gap-1.5 whitespace-nowrap rounded-lg bg-accent px-2.5 py-1.5 text-sm font-medium text-accent-foreground transition-colors hover:bg-accent/80"
             title="Version history"
           >
             <HistoryIcon className="h-3.5 w-3.5" />
@@ -271,7 +281,7 @@ export function DeckEditorHeader({
           </button>
 
           <label className="flex cursor-pointer items-center gap-1.5" title="When on, search and AI only show cards you own">
-            <span className="text-[10px] text-muted-foreground">{collectionOnly ? 'My cards' : 'All cards'}</span>
+            <span className="text-xs text-muted-foreground">{collectionOnly ? 'My cards' : 'All cards'}</span>
             <button
               type="button"
               role="switch"
@@ -285,14 +295,14 @@ export function DeckEditorHeader({
 
           <button
             onClick={onShowPlaytest}
-            className="flex items-center gap-1.5 whitespace-nowrap rounded-lg bg-accent px-2.5 py-1.5 text-xs font-medium text-accent-foreground transition-colors hover:bg-accent/80"
+            className="flex items-center gap-1.5 whitespace-nowrap rounded-lg bg-accent px-2.5 py-1.5 text-sm font-medium text-accent-foreground transition-colors hover:bg-accent/80"
           >
             <PlayIcon className="h-3.5 w-3.5" />
             Playtest
           </button>
           <button
             onClick={onBuildFromCollection}
-            className="flex items-center gap-1.5 whitespace-nowrap rounded-lg bg-accent px-2.5 py-1.5 text-xs font-medium text-accent-foreground transition-colors hover:bg-accent/80"
+            className="flex items-center gap-1.5 whitespace-nowrap rounded-lg bg-accent px-2.5 py-1.5 text-sm font-medium text-accent-foreground transition-colors hover:bg-accent/80"
             title="Build a new deck using only cards from your collection"
           >
             <CollectionBuildIcon className="h-3.5 w-3.5" />
@@ -300,14 +310,14 @@ export function DeckEditorHeader({
           </button>
           <button
             onClick={onShowImport}
-            className="flex items-center gap-1.5 whitespace-nowrap rounded-lg bg-primary px-2.5 py-1.5 text-xs font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+            className="flex items-center gap-1.5 whitespace-nowrap rounded-lg bg-primary px-2.5 py-1.5 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
           >
             <ImportIcon className="h-3.5 w-3.5" />
             Import
           </button>
           <button
             onClick={onShowExport}
-            className="flex items-center gap-1.5 whitespace-nowrap rounded-lg bg-primary px-2.5 py-1.5 text-xs font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+            className="flex items-center gap-1.5 whitespace-nowrap rounded-lg bg-primary px-2.5 py-1.5 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
           >
             <ExportIcon className="h-3.5 w-3.5" />
             Export

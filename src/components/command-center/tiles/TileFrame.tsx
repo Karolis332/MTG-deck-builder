@@ -21,7 +21,7 @@ export function TileFrame({ title, headline, children, defaultOpen = true, class
         onClick={() => setOpen((o) => !o)}
         className="flex w-full items-center justify-between gap-2 px-3 py-2 text-left"
       >
-        <span className="text-[10px] font-medium uppercase tracking-wider text-muted-foreground">{title}</span>
+        <span className="text-xs font-medium uppercase tracking-wider text-muted-foreground">{title}</span>
         <div className="flex items-center gap-2">
           {headline}
           <span className={cn('text-muted-foreground transition-transform', open ? 'rotate-180' : '')}>▾</span>

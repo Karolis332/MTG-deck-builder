@@ -34,7 +34,7 @@ export function ScoreRing({ score }: { score: number }) {
       </svg>
       <div className="absolute inset-0 flex flex-col items-center justify-center">
         <span className="hud-number text-xl font-bold">{score}</span>
-        <span className={cn('text-[10px] font-semibold', bracket.color)}>{bracket.label}</span>
+        <span className={cn('text-xs font-semibold', bracket.color)}>{bracket.label}</span>
       </div>
     </div>
   );

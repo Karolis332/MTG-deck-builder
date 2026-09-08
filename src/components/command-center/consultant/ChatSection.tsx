@@ -266,7 +266,7 @@ export function ChatSection({ deckId, prefill, onApplyChanges, onActionsApplied,
   return (
     <section className="hud-panel border-b border-border/60">
       <button onClick={() => setCollapsed((c) => !c)} className="flex w-full items-center gap-2 px-3 py-2.5 text-left">
-        <span className="text-xs font-semibold uppercase tracking-wide">Chat</span>
+        <span className="text-sm font-semibold uppercase tracking-wide">Chat</span>
         <span className="ml-auto text-muted-foreground">{collapsed ? '▸' : '▾'}</span>
       </button>
 
@@ -274,20 +274,20 @@ export function ChatSection({ deckId, prefill, onApplyChanges, onActionsApplied,
         <div className="flex flex-col">
           <div ref={scrollRef} className="max-h-80 overflow-y-auto px-3 py-2 space-y-2">
             {messages.length === 0 && (
-              <p className="py-2 text-center text-xs text-muted-foreground">Ask me anything about your deck.</p>
+              <p className="py-2 text-center text-sm text-muted-foreground">Ask me anything about your deck.</p>
             )}
             {messages.map((msg, i) => (
               <div key={i} className={cn('flex flex-col', msg.role === 'user' ? 'items-end' : 'items-start')}>
                 <div
                   className={cn(
-                    'max-w-[95%] rounded-xl px-3 py-2 text-xs leading-relaxed',
+                    'max-w-[95%] rounded-xl px-3 py-2 text-sm leading-relaxed',
                     msg.role === 'user' ? 'bg-primary text-primary-foreground' : 'bg-accent text-accent-foreground'
                   )}
                 >
                   {msg.role === 'assistant' ? renderMarkdown(msg.content) : msg.content}
                 </div>
                 {msg.role === 'assistant' && msg.localEngine && (
-                  <span className="mt-1 rounded bg-muted px-1.5 py-0.5 text-[9px] text-muted-foreground">
+                  <span className="mt-1 rounded bg-muted px-1.5 py-0.5 text-[11px] text-muted-foreground">
                     Local engine (no API key)
                   </span>
                 )}
@@ -334,7 +334,7 @@ export function ChatSection({ deckId, prefill, onApplyChanges, onActionsApplied,
                         onClick={() => handleApplyActions(i)}
                         disabled={msg.actionsApplied || checkedCount === 0}
                         className={cn(
-                          'w-full rounded-lg py-1.5 text-xs font-medium transition-colors',
+                          'w-full rounded-lg py-1.5 text-sm font-medium transition-colors',
                           msg.actionsApplied
                             ? 'bg-green-500/20 text-green-400'
                             : 'bg-primary text-primary-foreground hover:bg-primary/90 disabled:opacity-50'
@@ -347,7 +347,7 @@ export function ChatSection({ deckId, prefill, onApplyChanges, onActionsApplied,
                 })()}
               </div>
             ))}
-            {loading && <div className="text-[10px] text-muted-foreground">thinking…</div>}
+            {loading && <div className="text-xs text-muted-foreground">thinking…</div>}
           </div>
 
           <div className="flex gap-2 border-t border-border/60 px-3 py-2">
@@ -364,12 +364,12 @@ export function ChatSection({ deckId, prefill, onApplyChanges, onActionsApplied,
               }}
               placeholder="Ask AI to tune your deck..."
               disabled={loading}
-              className="flex-1 rounded-lg border border-border bg-background px-3 py-1.5 text-xs outline-none placeholder:text-muted-foreground focus:border-primary"
+              className="flex-1 rounded-lg border border-border bg-background px-3 py-1.5 text-sm outline-none placeholder:text-muted-foreground focus:border-primary"
             />
             <button
               onClick={() => sendMessage()}
               disabled={loading || !input.trim()}
-              className="shrink-0 rounded-lg bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-50"
+              className="shrink-0 rounded-lg bg-primary px-3 py-1.5 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-50"
             >
               Send
             </button>

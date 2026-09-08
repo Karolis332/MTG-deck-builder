@@ -172,25 +172,25 @@ export function ModelFeed({
         onClick={() => setCollapsed((c) => !c)}
         className={cn('flex w-full items-center gap-2 px-3 py-2.5 text-left', loading && !data && 'animate-pulse-glow')}
       >
-        <span className="text-xs font-semibold uppercase tracking-wide">Model feed</span>
+        <span className="text-sm font-semibold uppercase tracking-wide">Model feed</span>
         {data && (
-          <span className={cn('shrink-0 rounded px-1.5 py-0.5 text-[9px] font-bold', toneClass[SOURCE_LABEL[data.source]?.tone ?? 'rules'])}>
+          <span className={cn('shrink-0 rounded px-1.5 py-0.5 text-[11px] font-bold', toneClass[SOURCE_LABEL[data.source]?.tone ?? 'rules'])}>
             {SOURCE_LABEL[data.source]?.short ?? data.source}
           </span>
         )}
         {data && (
-          <span className="hud-number truncate text-[9px] text-muted-foreground" title={`impression ${data.impression_id}`}>
+          <span className="hud-number truncate text-[11px] text-muted-foreground" title={`impression ${data.impression_id}`}>
             {data.suggestions.length} shown · {appliedIds.size} applied · {dismissedIds.size} dismissed
           </span>
         )}
-        {loading && <span className="text-[9px] text-muted-foreground">refreshing…</span>}
+        {loading && <span className="text-[11px] text-muted-foreground">refreshing…</span>}
         <span className="ml-auto text-muted-foreground">{collapsed ? '▸' : '▾'}</span>
       </button>
 
       {!collapsed && (
         <div className="px-3 pb-3">
           {!loading && isModelUnreachable(data, error != null) && (
-            <div className="mb-2 flex items-center gap-2 rounded-md border border-amber-500/30 bg-amber-500/10 px-2 py-1 text-[10px] text-amber-300">
+            <div className="mb-2 flex items-center gap-2 rounded-md border border-amber-500/30 bg-amber-500/10 px-2 py-1 text-xs text-amber-300">
               <span className="flex-1 truncate">Trained model unreachable — rules fallback</span>
               <button
                 onClick={() => fetchFeed.current()}
@@ -202,7 +202,7 @@ export function ModelFeed({
           )}
 
           {data && data.sources_tried.length > 1 && (
-            <div className="mb-2 text-[9px] text-muted-foreground">
+            <div className="mb-2 text-[11px] text-muted-foreground">
               sources tried: {data.sources_tried.join(' → ')}
             </div>
           )}
@@ -217,7 +217,7 @@ export function ModelFeed({
 
 
           {!loading && data && suggestions.length === 0 && (
-            <div className="text-xs text-muted-foreground">No suggestions right now.</div>
+            <div className="text-sm text-muted-foreground">No suggestions right now.</div>
           )}
 
           {suggestions.length > 0 && (
@@ -239,7 +239,7 @@ export function ModelFeed({
               <button
                 onClick={handleApplyAll}
                 disabled={applyingAll || suggestions.every((s) => appliedIds.has(s.card.id))}
-                className="mt-2 w-full rounded-lg bg-accent py-1.5 text-xs font-medium transition-colors hover:bg-accent/70 disabled:opacity-50"
+                className="mt-2 w-full rounded-lg bg-accent py-1.5 text-sm font-medium transition-colors hover:bg-accent/70 disabled:opacity-50"
               >
                 {applyingAll ? 'Applying all…' : 'Apply all'}
               </button>

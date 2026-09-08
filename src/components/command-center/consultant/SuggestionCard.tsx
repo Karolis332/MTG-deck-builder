@@ -95,36 +95,36 @@ export function SuggestionCard({
         <img
           src={suggestion.card.image_uri_small}
           alt={suggestion.card.name}
-          className="h-14 w-10 shrink-0 cursor-zoom-in rounded-md object-cover"
+          className="h-[4.5rem] w-[3.25rem] shrink-0 cursor-zoom-in rounded-md object-cover"
           onClick={() => onOpenCard(suggestion.card)}
         />
       )}
       <div className="min-w-0 flex-1">
         <div className="flex items-center gap-1.5">
-          <span className="truncate text-xs font-medium">{suggestion.card.name}</span>
+          <span className="truncate text-sm font-medium">{suggestion.card.name}</span>
           {badge ? (
-            <span className="shrink-0 rounded bg-violet-500/15 px-1 py-0.5 text-[9px] font-bold text-violet-400">{badge}</span>
+            <span className="shrink-0 rounded bg-violet-500/15 px-1 py-0.5 text-[11px] font-bold text-violet-400">{badge}</span>
           ) : (
-            <span className="hud-number shrink-0 rounded bg-primary/15 px-1 py-0.5 text-[9px] text-primary">
+            <span className="hud-number shrink-0 rounded bg-primary/15 px-1 py-0.5 text-[11px] text-primary">
               {suggestion.score.toFixed(1)}
             </span>
           )}
         </div>
         {cut ? (
-          <div className="truncate text-[10px] text-muted-foreground">
+          <div className="truncate text-xs text-muted-foreground">
             cut <span className="text-red-400">{cut.cardName}</span> → add{' '}
             <span className="text-green-400">{add.cardName}</span>
           </div>
         ) : (
-          <div className="truncate text-[10px] text-green-400">+ add {add.cardName}</div>
+          <div className="truncate text-xs text-green-400">+ add {add.cardName}</div>
         )}
-        <div className="truncate text-[9px] text-muted-foreground">{suggestion.reason}</div>
+        <div className="truncate text-[11px] text-muted-foreground">{suggestion.reason}</div>
         <div className="mt-1 flex gap-1.5">
           <button
             onClick={onApply}
             disabled={applying || applied}
             className={cn(
-              'rounded px-2 py-0.5 text-[10px] font-medium transition-colors',
+              'rounded px-2 py-0.5 text-xs font-medium transition-colors',
               applied
                 ? 'bg-green-500/20 text-green-400'
                 : 'bg-primary text-primary-foreground hover:bg-primary/90 disabled:opacity-50'
@@ -135,7 +135,7 @@ export function SuggestionCard({
           {!applied && (
             <button
               onClick={onDismiss}
-              className="rounded px-2 py-0.5 text-[10px] text-muted-foreground hover:bg-accent hover:text-foreground"
+              className="rounded px-2 py-0.5 text-xs text-muted-foreground hover:bg-accent hover:text-foreground"
             >
               Dismiss
             </button>

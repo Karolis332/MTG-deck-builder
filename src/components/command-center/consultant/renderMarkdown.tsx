@@ -47,7 +47,7 @@ function renderInline(text: string): React.ReactNode {
       remaining = remaining.slice(boldIdx + boldMatch[0].length);
     } else if (codeMatch) {
       parts.push(remaining.slice(0, codeIdx));
-      parts.push(<code key={key++} className="rounded bg-black/20 px-1 py-0.5 text-xs">{codeMatch[1]}</code>);
+      parts.push(<code key={key++} className="rounded bg-black/20 px-1 py-0.5 text-sm">{codeMatch[1]}</code>);
       remaining = remaining.slice(codeIdx + codeMatch[0].length);
     }
   }
