@@ -45,8 +45,10 @@ export function clampQuantity(raw: unknown): number {
 
 export function makeCardResolver(): CardResolver {
   const db = getDb();
-  const findExact = db.prepare('SELECT * FROM cards WHERE name = ? COLLATE NOCASE LIMIT 1');
-  const findDfc = db.prepare('SELECT * FROM cards WHERE name LIKE ? COLLATE NOCASE LIMIT 1');
+  // Art-series and token rows share real card names ("Egon, God of Death // Egon, God of Death") — never resolve to them.
+  const NOT_CARD = "layout NOT IN ('art_series','token','double_faced_token','emblem')";
+  const findExact = db.prepare(`SELECT * FROM cards WHERE name = ? COLLATE NOCASE AND ${NOT_CARD} LIMIT 1`);
+  const findDfc = db.prepare(`SELECT * FROM cards WHERE name LIKE ? COLLATE NOCASE AND ${NOT_CARD} ORDER BY length(name) LIMIT 1`);
   // Per-resolver memo: a pasted list repeats names (basic lands, playsets) and
   // collectAdds re-resolves suggestion names — one lookup per distinct name.
   const memo = new Map<string, DbCard | undefined>();
