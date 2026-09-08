@@ -446,18 +446,28 @@ def save_deck(conn: sqlite3.Connection, fmt: str, event: dict,
 
 
 def scrape_format(conn: sqlite3.Connection, fmt: str, fmt_code: str,
-                  max_events: int = 20, max_decks_per_event: int = 16) -> dict:
+                  max_events: int = 20, max_decks_per_event: int = 16, pages: int = 1) -> dict:
     """Scrape tournament events for a format."""
     stats = {"events_found": 0, "decks_saved": 0, "skipped": 0, "errors": 0}
 
-    url = f"{BASE_URL}/format?f={fmt_code}"
-    print(f"\nFetching format page: {url}")
-    html = fetch_page(url)
-    if not html:
-        print("  Failed to fetch format page", file=sys.stderr)
-        return stats
-
-    events = parse_event_list(html, fmt_code)
+    # MTGTop8 lists ~25 events per page; `pages` walks &cp=2.. for backfills (2026-09-08).
+    events = []
+    seen_ids = set()
+    for page in range(1, max(1, pages) + 1):
+        url = f"{BASE_URL}/format?f={fmt_code}" + (f"&cp={page}" if page > 1 else "")
+        print(f"\nFetching format page: {url}")
+        html = fetch_page(url)
+        if not html:
+            print("  Failed to fetch format page", file=sys.stderr)
+            if page == 1:
+                return stats
+            break
+        page_events = [e for e in parse_event_list(html, fmt_code) if e["event_id"] not in seen_ids]
+        if not page_events:
+            break
+        seen_ids.update(e["event_id"] for e in page_events)
+        events.extend(page_events)
+        time.sleep(RATE_LIMIT_SEC)
     stats["events_found"] = len(events)
     print(f"  Found {len(events)} events")
 
@@ -520,6 +530,8 @@ def main():
                         choices=list(FORMATS.keys()), help="Formats to scrape")
     parser.add_argument("--max-events", type=int, default=20,
                         help="Max events per format (default: 20)")
+    parser.add_argument("--pages", type=int, default=1,
+                        help="Listing pages to walk per format (25 events each) for backfills")
     parser.add_argument("--max-decks-per-event", type=int, default=16,
                         help="Max decks per event (default: 16)")
     args = parser.parse_args()
@@ -548,7 +560,7 @@ def main():
             print(f"Unknown format: {fmt}", file=sys.stderr)
             continue
 
-        stats = scrape_format(conn, fmt, FORMATS[fmt], args.max_events, args.max_decks_per_event)
+        stats = scrape_format(conn, fmt, FORMATS[fmt], args.max_events, args.max_decks_per_event, pages=args.pages)
         for k in total_stats:
             total_stats[k] += stats[k]
 
