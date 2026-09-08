@@ -24,7 +24,6 @@
 1 Emeritus of Ideation
 1 Emeritus of Truce
 1 Exotic Orchard
-1 Spelunking
 1 Farseek
 1 Fellwar Stone
 1 Final Showdown
@@ -39,9 +38,9 @@
 1 Jetmir's Garden
 1 Karplusan Forest
 1 Kodama's Reach
-1 Krydle of Baldur's Gate
 1 Linvala, Shield of Sea Gate
 1 Maestros Theater
+1 Mardu Siegebreaker
 1 Masked Vandal
 1 Midnight Pathlighter
 1 Minthara, Merciless Soul
@@ -69,6 +68,7 @@
 1 Shadowheart, Dark Justiciar
 1 Sol Ring
 1 Spara's Headquarters
+1 Spelunking
 1 Spoils of Adventure
 1 Squad Commander
 1 Steam Vents
