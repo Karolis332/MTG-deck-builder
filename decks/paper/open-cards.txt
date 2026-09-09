@@ -389,7 +389,6 @@
 1 Treasure Nabber
 1 Treva's Charm
 1 Triarch Stalker
-1 Triumphant Adventurer
 1 Trudge Garden
 1 Twilight Prophet
 1 Tyrant's Scorn
@@ -412,6 +411,7 @@
 1 Vraska, the Silencer
 1 Wake the Dead
 1 Wardens of the Cycle
+1 Wayfarer's Bauble
 1 Weathered Wayfarer
 1 Whisper, Blood Liturgist
 1 Wishclaw Talisman
