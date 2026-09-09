@@ -71,13 +71,13 @@
 1 Toxic Deluge
 1 Turbulent Fen
 1 Twilight Mire
+1 Umbral Collar Zealot
 1 Veil of Summer
 1 Vernal Fen
 1 Victimize
 1 Village Rites
 1 Viridescent Bog
 1 Viscera Seer
-1 Whisper, Blood Liturgist
 1 Wight of the Reliquary
 1 Woe Strider
 1 Woodland Cemetery
