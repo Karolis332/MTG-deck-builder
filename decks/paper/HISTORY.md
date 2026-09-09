@@ -93,3 +93,9 @@ Appended by `npx tsx scripts/paper-sync.ts`. Full diffs: `git log -p decks/paper
 
 ## 2026-09-09
 - **Collection** 774 owned, 466 open
+
+## 2026-09-09
+- **Imotekh the Stormlord** proposal `proposals/imotekh-powerhouse.txt` (100 cards, NOT sleeved — register stays v2): +5× Swamp, +Bitter Triumph, +Crypt Ghast, +Crypt of Agadeem, +Decorum Dissertation, +Dismember, +Feed the Swarm, +Ghost Ark, +Gilded Lotus, +Imp's Mischief, +Lively Dirge, +Lychguard, +Mirkwood Bats, +Mortuary Mire, +Myriad Landscape, +Night's Whisper, +Ominous Harvest, +Phyrexian Arena, +Pitiless Carnage, +Plasmancer, +Reanimate, +The Darkness Crystal, +Thought Vessel, +Wishclaw Talisman, −Altar of Bhaal, −Barkform Harvester, −Commander's Sphere, −Conduit Pylons, −Corpse Churn, −Diabolic Tutor, −Egon, God of Death, −Emergency Weld, −Gray Merchant of Asphodel, −Hexmark Destroyer, −Lembas, −Muraganda Raceway, −Necron Monolith, −Ornithopter of Paradise, −Palladium Myr, −Planetarium of Wan Shi Tong, −Power Word Kill, −Raise Dead, −Realm of Koh, −Saw in Half, −Shard of the Nightbringer, −Shard of the Void Dragon, −Steel Overseer, −Temple of the False God, −Traxos, Scourge of Kroog, −Undying Malice, −Unseal the Necropolis, −Zombify
+- Revisions decided in chat today: Decorum Dissertation over Sign in Blood (Arena and The War in Heaven kept); The Darkness Crystal over Insatiable Avarice; Mortuary Mire over Realm of Koh; Ominous Harvest over Eviscerator's Insight; Charcoal Diamond, Sword of the Animist, Mikaeus and Victimize (single copy, Meren) rejected
+- Copies to pull from the physical Meren deck (both cut by the Meren plan): Mirkwood Bats, Night's Whisper
+- When sleeved: copy the proposal over `decks/imotekh-the-stormlord.txt` and run `npx tsx scripts/paper-sync.ts` (becomes v3)
