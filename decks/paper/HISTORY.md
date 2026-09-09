@@ -108,3 +108,15 @@ Appended by `npx tsx scripts/paper-sync.ts`. Full diffs: `git log -p decks/paper
 - **Imotekh the Stormlord** v3, 100 cards: +Bitter Triumph, +Crypt Ghast, +Crypt of Agadeem, +Decorum Dissertation, +Dismember, +Feed the Swarm, +Ghost Ark, +Gilded Lotus, +Imp's Mischief, +Insatiable Avarice, +Lively Dirge, +Lychguard, +Mirkwood Bats, +Mortuary Mire, +Myriad Landscape, +Ominous Harvest, +Phyrexian Arena, +Pitiless Carnage, +Plasmancer, +Reanimate, +5 Swamp, +The Darkness Crystal, +Thought Vessel, +Wishclaw Talisman, −Altar of Bhaal, −Barkform Harvester, −Commander's Sphere, −Conduit Pylons, −Corpse Churn, −Diabolic Tutor, −Egon, God of Death, −Emergency Weld, −Gray Merchant of Asphodel, −Hexmark Destroyer, −Lembas, −Muraganda Raceway, −Necron Monolith, −Ornithopter of Paradise, −Palladium Myr, −Planetarium of Wan Shi Tong, −Power Word Kill, −Raise Dead, −Realm of Koh, −Saw in Half, −Shard of the Nightbringer, −Shard of the Void Dragon, −Steel Overseer, −Temple of the False God, −Traxos, Scourge of Kroog, −Undying Malice, −Unseal the Necropolis, −Zombify
 - **Meren of Clan Nel Toth** v5, 99 cards: −Mirkwood Bats
 - **Collection** 779 owned, 473 open
+
+## 2026-09-09
+- **Meren of Clan Nel Toth** v6, 100 cards: +Mikaeus, the Unhallowed, +Saw in Half, −Night's Whisper
+- **Collection** 779 owned, 472 open
+
+## 2026-09-09
+- **Collection** 833 owned, 526 open
+
+## 2026-09-09
+- **Collection** +54 leftover cards from the dismantled Witherbloom Witchcraft precon (EDHREC list; names already present were not double-counted) — 833 owned, 526 open
+- **Meren of Clan Nel Toth** proposal `proposals/meren-powerhouse.txt` (100 cards, 36 lands, NOT sleeved — register stays v6): +Accursed Marauder, +Awakening Zone, +Blooming Marsh, +Butcher of Malakir, +Carrion Feeder, +Corrupted Conviction, +Dread Return, +Exotic Orchard, +Golgari Charm, +Gray Merchant of Asphodel, +Grim Haruspex, +Grim Servant, +Grist, Voracious Larva, +Haywire Mite, +Honest Rutstein, +Insidious Roots, +Jarad, Golgari Lich Lord, +Junji, the Midnight Sky, +Lightning Greaves, +Lively Dirge, +Midnight Reaper, +Pawn of Ulamog, +Ravenous Chupacabra, +Reanimate, +Rune-Scarred Demon, +Springbloom Druid, +4× Swamp, +Tainted Wood, +Talisman of Resilience, +Wake the Dead, +Woe Strider, −Baba Lysaga, −Boggart Trawler, −Casualties of War, −Chief Warg's Company, −Corpse Augur, −Creakwood Liege, −Cultivate, −Dina, Essence Brewer, −Farseek, −Festering Thicket, −Forest, −Gorma, the Gullet, −High-Society Hunter, −Hornet Queen, −Invasion of Ikoria, −Izoni, −Jenova, −Kodama's Reach, −Mazirek, −Mosswood Dreadknight, −Mycoloth, −Old Stickfingers, −Pest Infestation, −Rankle, −Return of the Wildspeaker, −Revitalizing Repast, −Sheoldred's Edict, −Smothering Abomination, −Tangled Florahedron, −The Gitrog, −Undying Malice, −Vraan, −Witherbloom Campus, −Witherbloom Charm
+- When sleeved: copy the proposal over `decks/meren-of-clan-nel-toth.txt` and run `npx tsx scripts/paper-sync.ts`

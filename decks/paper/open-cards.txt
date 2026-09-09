@@ -2,9 +2,12 @@
 1 Accursed Marauder
 1 Adaptive Automaton
 1 Adept Watershaper
+1 Ageless Entity
 1 Akul the Unrepentant
 1 Alesha, Who Laughs at Fate
+1 Alhammarret's Archive
 1 Altar of Bhaal
+1 Ancient Craving
 1 Ankle Biter
 1 Annie Joins Up
 1 Another Round
@@ -33,10 +36,13 @@
 1 Bitterthorn, Nissa's Animus
 1 Blade Historian
 1 Blight Mound
+1 Blighted Woodland
 1 Blood Celebrant
 1 Blood Hustler
 3 Blood Pet
 1 Bloodghast
+1 Bloodthirsty Aerialist
+1 Bloodtracker
 1 Blooming Marsh
 1 Blossoming Bogbeast
 1 Bond of Revival
@@ -71,14 +77,17 @@
 3 Corrupted Conviction
 1 Creosote Heath
 1 Cultivate
+1 Damnable Pact
 3 Dance of the Tumbleweeds
 1 Darigaaz's Charm
 1 Dawnbringer Cleric
 1 Day of Black Sun
 1 Deadeye Duelist
 1 Deadly Brew
+1 Deadly Tempest
 2 Decisive Denial
 1 Deepmuck Desperado
+1 Defiant Bloodlord
 1 Defiling Daemogoth
 1 Deliver Unto Evil
 1 Demon's Horn
@@ -98,18 +107,22 @@
 1 Dread Return
 1 Dread Summons
 1 Dreadhorde Invasion
+1 Druidic Satchel
 1 Earthbender Ascension
 1 Eccentric Pestfinder
 1 Egon, God of Death
 1 Eldrazi Ravager
 1 Elegy Acolyte
+1 Elixir of Immortality
 1 Elvish Spirit Guide
 1 Emergency Weld
 1 Emeritus of Ideation
 1 Emeritus of Truce
+1 Epicure of Blood
 1 Eriette, the Beguiler
 2 Eroded Canyon
 2 Essence Capture
+1 Essence Pulse
 1 Eusocial Engineering
 1 Everflowing Chalice
 1 Everything Comes to Dust
@@ -117,6 +130,7 @@
 1 Exotic Orchard
 1 Explore
 2 Explosive Derailment
+1 Ezzaroot Channeler
 1 Fell the Mighty
 1 Feral Appetite
 1 Ferocification
@@ -138,17 +152,23 @@
 1 Frog Butler
 1 Garruk's Uprising
 1 Gatecreeper Vine
+1 Gaze of Granite
 1 Gene Pollinator
 2 Geralf, the Fleshwright
 1 Getaway Glamer
 1 Ghired, Mirror of the Wilds
+1 Gift of Paradise
 1 Gilded Goose
+1 Gingerbread Cabin
 1 Gleaming Barrier
+1 Gluttonous Troll
 1 Golgari Charm
+1 Golgari Rot Farm
 1 Gonti, Lord of Luxury
 1 Gonti's Machinations
 1 Grand Abolisher
 1 Gray Merchant of Asphodel
+1 Greed
 1 Grim Haruspex
 1 Grim Servant
 1 Grist, Voracious Larva
@@ -159,6 +179,7 @@
 2 Hardbristle Bandit
 1 Haunting Voyage
 1 Haywire Mite
+1 Healing Technique
 1 Heartless Pillage
 1 Hellspur Posse Boss
 1 Hexmark Destroyer
@@ -167,6 +188,7 @@
 2 Hindering Light
 1 Hollow Marauder
 1 Honest Rutstein
+1 Honor Troll
 1 Hornet Nest
 2 Hostile Investigator
 1 Huatli, Poet of Unity
@@ -203,6 +225,7 @@
 1 Krydle of Baldur's Gate
 1 Lavaspur Boots
 1 Lembas
+1 Leyline Prowler
 1 Lightning Greaves
 1 Lilah, Undefeated Slickshot
 2 Lively Dirge
@@ -211,6 +234,7 @@
 1 Long Feng, Grand Secretariat
 1 Lost Jitte
 1 Lotus Ring
+1 Loxodon Warhammer
 1 Lumra, Bellow of the Woods
 1 Lush Oasis
 1 Luxurious Locomotive
@@ -222,13 +246,13 @@
 1 Marauding Sphinx
 1 Marchesa, Dealer of Death
 1 Marchesa, the Black Rose
+1 Marshland Bloodcaster
 1 Mastermind's Acquisition
 1 Mazemind Tome
 1 Merchant of Venom
 2 Metamorphic Blast
 1 Metamorphosis Fanatic
 1 Midnight Reaper
-1 Mikaeus, the Unhallowed
 1 Mindblade Render
 1 Minthara, Merciless Soul
 1 Mirage Mesa
@@ -247,11 +271,15 @@
 1 Necrotic Ooze
 1 Negate
 1 Nether Traitor
+1 Night's Whisper
 1 Nimble Brigand
+1 Nissa's Renewal
 1 No One Left Behind
+1 Noxious Gearhulk
 1 Nulldrifter
 1 Nullpriest of Oblivion
 1 Nyx Lotus
+1 Ob Nixilis Reignited
 1 Obeka, Splitter of Seconds
 1 Ohran Frostfang
 1 Oko, Thief of Crowns
@@ -270,6 +298,7 @@
 1 Pact Weapon
 1 Palladium Myr
 1 Paradise Druid
+1 Paradise Plume
 1 Patchwork Automaton
 1 Path to Exile
 1 Pawn of Ulamog
@@ -291,26 +320,33 @@
 1 Pox
 1 Practiced Tactics
 1 Primeval Bounty
+1 Pristine Talisman
 1 Professor Dellian Fel
 1 Prophetic Prism
+1 Pulse of Murasa
 1 Qarsi Revenant
+1 Radiant Fountain
 1 Raise Dead
 1 Rakish Crew
+1 Rampant Growth
 1 Rattleback Apothecary
 1 Raven of Fell Omens
 1 Ravenous Chupacabra
 1 Realm of Koh
 1 Reanimate
+1 Reckless Spite
 1 Reconnaissance Mission
 1 Reiver Demon
 1 Requisition Raid
 3 Return the Favor
+1 Revival Experiment
 1 Ribtruss Roaster
 1 Ride Down
 1 Rise of the Dark Realms
 1 Rith's Charm
 1 Riveteers Overlook
 1 Rodeo Pyromancers
+1 Rogue's Passage
 2 Roxanne, Starfall Savant
 1 Rune-Scarred Demon
 1 Rush of Dread
@@ -319,10 +355,12 @@
 1 Samut, the Driving Force
 1 Samut, Voice of Dissent
 1 Sandstorm Verge
+1 Sangromancer
 1 Sanguine Bond
+1 Sapling of Colfenor
+1 Sapseep Forest
 1 Sautekh Immortal
 2 Savage Smash
-1 Saw in Half
 1 Scourge of the Skyclaves
 1 Sea Gate Colossus
 1 Seize the Secrets
@@ -335,6 +373,7 @@
 3 Shoot the Sheriff
 1 Sigil of Myrkul
 1 Sign in Blood
+1 Silversmote Ghoul
 1 Simic Charm
 1 Sivriss, Nightmare Speaker
 1 Skewer the Critics
@@ -351,6 +390,7 @@
 1 Spinewoods Armadillo
 1 Springbloom Druid
 1 Springleaf Parade
+1 Sproutback Trudge
 1 Steel Overseer
 1 Stensian Sanguinist
 1 Step Between Worlds
@@ -358,6 +398,8 @@
 1 Strix Serenade
 1 Studious First-Year
 1 Study Hall
+1 Suffer the Past
+1 Sun Droplet
 1 Supernatural Stamina
 1 Surrak, the Hunt Caller
 1 Sword of the Animist
@@ -365,10 +407,13 @@
 1 Syncopate
 1 Syphon Mind
 1 Tablet of Compleation
+1 Tainted Wood
 1 Take for a Ride
 1 Take the Fall
 1 Take Up the Shield
+1 Talisman of Resilience
 1 Tam, Mindful First-Year
+1 Taste of Death
 1 Teacher's Pest
 1 Temple of the False God
 1 Tendershoot Dryad
@@ -386,6 +431,7 @@
 1 Three Steps Ahead
 1 Tip the Scales
 1 Titan's Grave
+1 Tivash, Gloom Summoner
 1 Tomb of Horrors Adventurer
 1 Torens, Fist of the Angels
 1 Torpor Orb
@@ -402,13 +448,16 @@
 2 Unfortunate Accident
 1 Unseal the Necropolis
 1 Uro, Titan of Nature's Wrath
+1 Vampire Nighthawk
 1 Vampiric Link
 1 Varragoth, Bloodsky Sire
 1 Vastlands Scavenger
 1 Vault of the Archangel
 1 Veinwitch Coven
 1 Vengeful Bloodwitch
+1 Venser's Journal
 1 Verdant Confluence
+1 Verdant Sun's Avatar
 1 Veteran Adventurer
 1 Vial Smasher, Gleeful Grenadier
 1 Vicious Battlerager
@@ -421,13 +470,17 @@
 1 Wardens of the Cycle
 1 Wayfarer's Bauble
 1 Weathered Wayfarer
+1 Well of Lost Dreams
 1 Whisper, Blood Liturgist
+1 Willowdusk, Essence Seer
 1 Witch of the Moors
+1 Witch's Clinic
 1 Witherbloom Command
 1 Woe Strider
 1 Worldwalker Helm
 1 Worn Powerstone
 1 Wreckage Wickerfolk
+1 Yedora, Grave Gardener
 1 You Find the Villains' Lair
 1 You Happen On a Glade
 1 You Meet in a Tavern

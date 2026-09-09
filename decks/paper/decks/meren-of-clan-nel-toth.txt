@@ -41,12 +41,12 @@
 1 Llanowar Wastes
 1 Massacre Wurm
 1 Mazirek, Kraul Death Priest
+1 Mikaeus, the Unhallowed
 1 Moldervine Reclamation
 1 Morbid Opportunist
 1 Mosswood Dreadknight
 1 Mycoloth
 1 Necroblossom Snarl
-1 Night's Whisper
 1 Old Stickfingers
 1 Ophiomancer
 1 Path of Ancestry
@@ -57,6 +57,7 @@
 1 Return of the Wildspeaker
 1 Revitalizing Repast
 1 Sakura-Tribe Elder
+1 Saw in Half
 1 Sheoldred's Edict
 1 Smothering Abomination
 1 Sol Ring
