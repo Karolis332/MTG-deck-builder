@@ -36,6 +36,7 @@
 1 Inspiring Vantage
 2 Island
 1 Jetmir's Garden
+1 Karplusan Forest
 1 Kodama's Reach
 1 Linvala, Shield of Sea Gate
 1 Mardu Siegebreaker
@@ -79,7 +80,6 @@
 1 Swords to Plowshares
 1 Sygg, Wanderwine Wisdom
 1 Tajuru Paragon
-1 Terramorphic Expanse
 1 The Destined Thief
 1 The Destined Warrior
 1 Thwart the Grave
