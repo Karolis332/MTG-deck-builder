@@ -25,6 +25,7 @@
 1 Gilded Lotus
 1 Illuminor Szeras
 1 Imp's Mischief
+1 Insatiable Avarice
 1 Lively Dirge
 1 Lokhust Heavy Destroyer
 1 Lychguard
@@ -37,7 +38,6 @@
 1 Myriad Landscape
 1 Necron Deathmark
 1 Necron Overlord
-1 Night's Whisper
 1 Ominous Harvest
 1 Phyrexian Arena
 1 Phyrexian Scriptures
