@@ -39,6 +39,7 @@
 1 Necron Deathmark
 1 Necron Overlord
 1 Night's Whisper
+1 Phyrexian Arena
 1 Phyrexian Scriptures
 1 Pitiless Carnage
 1 Plasmancer
@@ -49,7 +50,6 @@
 1 Reanimate
 1 Ripples of Undeath
 1 Royal Warden
-1 Sign in Blood
 1 Skorpekh Lord
 1 Sol Ring
 1 Solemn Simulacrum
