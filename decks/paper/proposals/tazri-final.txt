@@ -48,7 +48,6 @@
 1 Nalia de'Arnise
 1 Nature's Lore
 1 Nimble Trapfinder
-1 Omni-Changeling
 1 Outlaws' Merriment
 1 Overgrown Tomb
 1 Path of Ancestry
@@ -83,6 +82,7 @@
 1 The Destined Warrior
 1 Thwart the Grave
 1 Undermountain Adventurer
+1 Unsettled Mariner
 1 Vizier of the Menagerie
 1 Wayfarer's Bauble
 1 White Plume Adventurer
