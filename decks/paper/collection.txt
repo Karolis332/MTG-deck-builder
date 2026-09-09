@@ -659,7 +659,7 @@
 1 Twilight Mire
 1 Twilight Prophet
 1 Tyrant's Scorn
-1 Umbral Collar Zealot
+2 Umbral Collar Zealot
 1 Undermountain Adventurer
 2 Undying Malice
 2 Unfortunate Accident
