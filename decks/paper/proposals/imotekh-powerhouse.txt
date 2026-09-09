@@ -15,6 +15,7 @@
 1 Culling the Weak
 1 Dark Ritual
 1 Deadly Dispute
+1 Decorum Dissertation
 1 Dismember
 1 Dread Return
 1 Eviscerator's Insight
@@ -38,7 +39,6 @@
 1 Necron Deathmark
 1 Necron Overlord
 1 Night's Whisper
-1 Phyrexian Arena
 1 Phyrexian Scriptures
 1 Pitiless Carnage
 1 Plasmancer
