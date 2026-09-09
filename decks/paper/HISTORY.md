@@ -103,3 +103,8 @@ Appended by `npx tsx scripts/paper-sync.ts`. Full diffs: `git log -p decks/paper
 ## 2026-09-09
 - **Collection** 775 owned, 467 open
 - **Meren of Clan Nel Toth** plan `proposals/meren-final.txt` (not sleeved): +Grim Haruspex (new card registered; 48 % of Meren lists, lift +2.7), −Pest Infestation (2.5 %, lift −2.2)
+
+## 2026-09-09
+- **Imotekh the Stormlord** v3, 100 cards: +Bitter Triumph, +Crypt Ghast, +Crypt of Agadeem, +Decorum Dissertation, +Dismember, +Feed the Swarm, +Ghost Ark, +Gilded Lotus, +Imp's Mischief, +Insatiable Avarice, +Lively Dirge, +Lychguard, +Mirkwood Bats, +Mortuary Mire, +Myriad Landscape, +Ominous Harvest, +Phyrexian Arena, +Pitiless Carnage, +Plasmancer, +Reanimate, +5 Swamp, +The Darkness Crystal, +Thought Vessel, +Wishclaw Talisman, −Altar of Bhaal, −Barkform Harvester, −Commander's Sphere, −Conduit Pylons, −Corpse Churn, −Diabolic Tutor, −Egon, God of Death, −Emergency Weld, −Gray Merchant of Asphodel, −Hexmark Destroyer, −Lembas, −Muraganda Raceway, −Necron Monolith, −Ornithopter of Paradise, −Palladium Myr, −Planetarium of Wan Shi Tong, −Power Word Kill, −Raise Dead, −Realm of Koh, −Saw in Half, −Shard of the Nightbringer, −Shard of the Void Dragon, −Steel Overseer, −Temple of the False God, −Traxos, Scourge of Kroog, −Undying Malice, −Unseal the Necropolis, −Zombify
+- **Meren of Clan Nel Toth** v5, 99 cards: −Mirkwood Bats
+- **Collection** 779 owned, 473 open

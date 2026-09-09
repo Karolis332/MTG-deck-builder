@@ -538,7 +538,7 @@
 1 Stump Stomp
 1 Supernatural Stamina
 1 Surrak, the Hunt Caller
-37 Swamp
+41 Swamp
 1 Sword of the Animist
 1 Swords to Plowshares
 1 Sygg, Wanderwine Wisdom

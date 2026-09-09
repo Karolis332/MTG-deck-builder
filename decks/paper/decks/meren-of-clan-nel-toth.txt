@@ -41,7 +41,6 @@
 1 Llanowar Wastes
 1 Massacre Wurm
 1 Mazirek, Kraul Death Priest
-1 Mirkwood Bats
 1 Moldervine Reclamation
 1 Morbid Opportunist
 1 Mosswood Dreadknight
