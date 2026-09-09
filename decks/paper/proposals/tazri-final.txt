@@ -54,7 +54,6 @@
 1 Path of Ancestry
 1 Path to Exile
 4 Plains
-1 Practiced Tactics
 1 Ravenloft Adventurer
 1 Rilsa Rael, Kingpin
 1 Sacred Foundry
