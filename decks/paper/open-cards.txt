@@ -342,7 +342,6 @@
 1 Slickshot Vault-Buster
 1 Slimefoot, the Stowaway
 1 Soured Springs
-1 Spelunking
 1 Spinewoods Armadillo
 1 Springbloom Druid
 1 Springleaf Parade
@@ -355,6 +354,7 @@
 1 Supernatural Stamina
 1 Surrak, the Hunt Caller
 1 Sword of the Animist
+1 Sygg, Wanderwine Wisdom
 1 Syncopate
 1 Syphon Mind
 1 Tablet of Compleation
@@ -395,7 +395,6 @@
 2 Unfortunate Accident
 1 Uro, Titan of Nature's Wrath
 1 Vampiric Link
-1 Varis, Silverymoon Ranger
 1 Varragoth, Bloodsky Sire
 1 Vastlands Scavenger
 1 Vault of the Archangel

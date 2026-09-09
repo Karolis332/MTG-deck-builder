@@ -55,3 +55,11 @@ Appended by `npx tsx scripts/paper-sync.ts`. Full diffs: `git log -p decks/paper
 - **Ramos, Dragon Engine** v3, 3 cards: −Explore the Underdark
 - **Tazri, Beacon of Unity** v6, 100 cards: +Explore the Underdark, +Karlach, Fury of Avernus, +Najeela, the Blade-Blossom, −Triumphant Adventurer, −Varis, Silverymoon Ranger, −Veteran Adventurer
 - **Collection** 774 owned, 466 open
+
+## 2026-09-09
+- **Tazri, Beacon of Unity** v7, 101 cards: +Spelunking
+- **Collection** 774 owned, 465 open
+
+## 2026-09-09
+- **Tazri, Beacon of Unity** v8, 101 cards: +Varis, Silverymoon Ranger, −Sygg, Wanderwine Wisdom
+- **Collection** 774 owned, 465 open

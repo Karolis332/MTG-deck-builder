@@ -66,6 +66,7 @@
 1 Sol Ring
 1 Solemn Doomguide
 1 Spara's Headquarters
+1 Spelunking
 1 Spirebluff Canal
 1 Spoils of Adventure
 1 Squad Commander
@@ -76,13 +77,13 @@
 1 Stump Stomp
 2 Swamp
 1 Swords to Plowshares
-1 Sygg, Wanderwine Wisdom
 1 Tajuru Paragon
 1 The Destined Warrior
 1 The Destined White Mage
 1 Thwart the Grave
 1 Undermountain Adventurer
 1 Unsettled Mariner
+1 Varis, Silverymoon Ranger
 1 Vizier of the Menagerie
 1 Wayfarer's Bauble
 1 White Plume Adventurer
