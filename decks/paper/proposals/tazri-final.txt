@@ -39,6 +39,7 @@
 1 Karplusan Forest
 1 Kodama's Reach
 1 Linvala, Shield of Sea Gate
+1 Lotho, Corrupt Shirriff
 1 Mardu Siegebreaker
 1 Masked Vandal
 1 Midnight Pathlighter
@@ -80,7 +81,6 @@
 1 The Destined Warrior
 1 The Destined White Mage
 1 Thwart the Grave
-1 Triumphant Adventurer
 1 Undermountain Adventurer
 1 Unsettled Mariner
 1 Varis, Silverymoon Ranger

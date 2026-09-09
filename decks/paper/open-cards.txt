@@ -208,7 +208,6 @@
 1 Lonely Arroyo
 1 Long Feng, Grand Secretariat
 1 Lost Jitte
-1 Lotho, Corrupt Shirriff
 1 Lotus Ring
 1 Lumra, Bellow of the Woods
 1 Lush Oasis
@@ -389,6 +388,7 @@
 1 Treasure Nabber
 1 Treva's Charm
 1 Triarch Stalker
+1 Triumphant Adventurer
 1 Trudge Garden
 1 Twilight Prophet
 1 Tyrant's Scorn
