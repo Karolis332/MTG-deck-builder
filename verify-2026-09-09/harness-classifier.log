@@ -1,0 +1,21 @@
+Building vivi-ornitier [commander] ... OK 99 cards, 38 lands, avgCMC 2.28, gold 5, counters 0, ref-overlap 70%, iss 86, curve 55, winRoute spell_burn, bracket 4/target 3, 34476ms
+SKIP vivi-ornitier [brawl] — commander not legal in brawl
+Building ramos-dragon-engine [commander] ... OK 99 cards, 38 lands, avgCMC 3.54, gold 38, counters 0, ref-overlap 15%, iss 35, curve 66, winRoute spell_burn, bracket 2/target 3, 39387ms
+Building ramos-dragon-engine [brawl] ... OK 99 cards, 38 lands, avgCMC 3.44, gold 34, counters 0, ref-overlap 20%, iss 36, curve 62, winRoute spell_burn, bracket 2/target 3, 32838ms
+Building magus-lucea-kane [commander] ... OK 99 cards, 38 lands, avgCMC 2.41, gold 10, counters 4, ref-overlap 64%, iss 28, curve 64, winRoute spell_burn, bracket 2/target 3, 37469ms
+SKIP magus-lucea-kane [brawl] — commander not legal in brawl
+Building thrasios-tymna [commander] ... OK 99 cards, 39 lands, avgCMC 2.3, gold 5, counters 0, ref-overlap 28%, iss 0, curve 27, winRoute value_grind, bracket 4/target 5, 67492ms
+Building thrasios-tymna [brawl] ... OK 99 cards, 39 lands, avgCMC 2.08, gold 4, counters 0, ref-overlap 27%, iss 0, curve 2, winRoute value_grind, bracket 4/target 5, 64700ms
+Building mono-w-heliod [commander] ... OK 99 cards, 38 lands, avgCMC 2.64, gold 0, counters 0, ref-overlap 64%, iss 87, curve 41, winRoute combo, bracket 3/target 3, 38508ms
+Building mono-w-heliod [brawl] ... OK 99 cards, 38 lands, avgCMC 2.82, gold 0, counters 0, ref-overlap 64%, iss 78, curve 62, winRoute alt_win, bracket 4/target 3, 37740ms
+Building mono-u-orvar [commander] ... OK 99 cards, 38 lands, avgCMC 2.49, gold 0, counters 0, ref-overlap 67%, iss 62, curve 48, winRoute combat_wide, bracket 3/target 3, 36365ms
+Building mono-u-orvar [brawl] ... OK 99 cards, 38 lands, avgCMC 3.03, gold 0, counters 0, ref-overlap 57%, iss 73, curve 69, winRoute combat_wide, bracket 3/target 3, 33042ms
+Building mono-b-sheoldred [commander] ... OK 99 cards, 38 lands, avgCMC 3.66, gold 0, counters 0, ref-overlap 77%, iss 34, curve 70, winRoute combo, bracket 4/target 3, 32727ms
+Building mono-b-sheoldred [brawl] ... OK 99 cards, 38 lands, avgCMC 3.74, gold 0, counters 0, ref-overlap 67%, iss 35, curve 66, winRoute combo, bracket 4/target 3, 32407ms
+Building mono-r-krenko [commander] ... OK 99 cards, 38 lands, avgCMC 2.8, gold 0, counters 0, ref-overlap 75%, iss 45, curve 50, winRoute combat_wide, bracket 2/target 3, 36400ms
+Building mono-r-krenko [brawl] ... OK 99 cards, 38 lands, avgCMC 2.82, gold 0, counters 0, ref-overlap 64%, iss 36, curve 30, winRoute combat_wide, bracket 2/target 3, 29944ms
+Building mono-g-ghalta [commander] ... OK 99 cards, 41 lands, avgCMC 3.12, gold 0, counters 0, ref-overlap 74%, iss 5, curve 80, winRoute value_grind, bracket 2/target 3, 33169ms
+Building mono-g-ghalta [brawl] ... OK 99 cards, 42 lands, avgCMC 3, gold 0, counters 0, ref-overlap 65%, iss 5, curve 68, winRoute value_grind, bracket 2/target 3, 29731ms
+
+Wrote 16 builds to C:\Users\QuLeR\MTG-deck-builder\decks\test-builds
+{"hardFails":0,"score":970}

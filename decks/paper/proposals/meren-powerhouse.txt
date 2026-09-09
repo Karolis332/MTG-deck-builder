@@ -21,7 +21,7 @@
 1 Eternal Witness
 1 Exotic Orchard
 1 Fabled Passage
-7 Forest
+6 Forest
 1 Golgari Charm
 1 Grave Researcher
 1 Gray Merchant of Asphodel
@@ -47,6 +47,7 @@
 1 Mikaeus, the Unhallowed
 1 Moldervine Reclamation
 1 Morbid Opportunist
+1 Myriad Landscape
 1 Necroblossom Snarl
 1 Ophiomancer
 1 Path of Ancestry

@@ -454,3 +454,125 @@ describe('generateSuggestions', () => {
     expect(suggestions.length).toBe(0);
   });
 });
+
+// Blind-spot fixes 2026-09-09 — see teammate task: an artifact-recursion
+// Commander deck scored 15/100 because these oracle-text shapes weren't
+// recognized as their real function.
+describe('board wipe: type-qualified "destroy all"', () => {
+  it('classifies "Destroy all nonartifact creatures" as board_wipe', () => {
+    const cats = classifyCard('Their Name Is Death', 'Destroy all nonartifact creatures.', 'Sorcery', 4);
+    expect(cats).toContain('board_wipe');
+  });
+
+  it('classifies "Destroy all nonartifact, nonblack creatures" as board_wipe', () => {
+    const cats = classifyCard('Reiver Demon', 'Destroy all nonartifact, nonblack creatures.', 'Creature — Demon', 6);
+    expect(cats).toContain('board_wipe');
+  });
+
+  it('classifies Phyrexian Scriptures chapter II as board_wipe', () => {
+    const cats = classifyCard(
+      'Phyrexian Scriptures',
+      'I — Each opponent sacrifices a creature.\nII — Destroy all nonartifact creatures.\nIII — Each opponent sacrifices a permanent that isn\'t a creature.',
+      'Enchantment — Saga',
+      5
+    );
+    expect(cats).toContain('board_wipe');
+  });
+
+  it('still classifies plain "Destroy all creatures" as board_wipe', () => {
+    const cats = classifyCard('Wrath of God', 'Destroy all creatures. They can\'t be regenerated.', 'Sorcery', 4);
+    expect(cats).toContain('board_wipe');
+  });
+});
+
+describe('removal: X-scaled shrink and edicts', () => {
+  it('classifies X-scaled "-X/-X" shrink as removal', () => {
+    const cats = classifyCard(
+      "Black Sun's Twilight",
+      "Up to one target creature gets -X/-X until end of turn. If this spell was kicked, all creatures your opponents control get -X/-X until end of turn instead.",
+      'Instant',
+      5
+    );
+    expect(cats).toContain('removal');
+  });
+
+  it('classifies "each player sacrifices a creature" edict as removal', () => {
+    const cats = classifyCard('Merchant of Venom', 'When Merchant of Venom enters the battlefield, each player sacrifices a creature.', 'Creature — Human Assassin', 4);
+    expect(cats).toContain('removal');
+  });
+
+  it('classifies "each opponent sacrifices a creature" edict as removal', () => {
+    const cats = classifyCard('Lokhust Heavy Destroyer', 'When Lokhust Heavy Destroyer enters the battlefield, each opponent sacrifices a creature.', 'Artifact Creature — Construct', 5);
+    expect(cats).toContain('removal');
+  });
+
+  it('does not classify positive buffs as removal', () => {
+    const cats = classifyCard('Giant Growth', 'Target creature gets +3/+3 until end of turn.', 'Instant', 1);
+    expect(cats).not.toContain('removal');
+  });
+});
+
+describe('draw: "that many" and mill-into-hand', () => {
+  it('classifies "draw that many cards" as draw', () => {
+    const cats = classifyCard(
+      'Pitiless Carnage',
+      'Sacrifice any number of permanents you control, then draw that many cards. You lose that much life.',
+      'Sorcery',
+      3
+    );
+    expect(cats).toContain('draw');
+  });
+
+  it('classifies "put a card from among those cards into your hand" as draw', () => {
+    const cats = classifyCard(
+      'Ripples of Undeath',
+      'Target player mills three cards. Then you may pay {1} and 3 life. If you do, put a card from among those cards into your hand.',
+      'Instant',
+      2
+    );
+    expect(cats).toContain('draw');
+  });
+
+  it('does not classify bare mill as draw', () => {
+    const cats = classifyCard('Tome Scour', 'Target player mills five cards.', 'Sorcery', 1);
+    expect(cats).not.toContain('draw');
+  });
+});
+
+describe('protection: redirect', () => {
+  it('classifies "change the target of target spell" as protection', () => {
+    const cats = classifyCard("Imp's Mischief", "Change the target of target spell or ability with a single target.", 'Instant', 1);
+    expect(cats).toContain('protection');
+  });
+});
+
+describe('primary category and scoring: win_condition before synergy', () => {
+  it('prioritizes win_condition over synergy', () => {
+    expect(getPrimaryCategory(['synergy', 'win_condition'])).toBe('win_condition');
+  });
+
+  it('still prioritizes board_wipe over win_condition', () => {
+    expect(getPrimaryCategory(['win_condition', 'board_wipe'])).toBe('board_wipe');
+  });
+
+  it('does not penalize a high synergy count', () => {
+    const health = [
+      { category: 'synergy', label: 'Commander Synergy', current: 30, target: { min: 5, max: 12, target: 8 }, status: 'high' as const, color: '' },
+    ];
+    expect(computeOverallScore(health)).toBe(100);
+  });
+
+  it('still penalizes low synergy count', () => {
+    const health = [
+      { category: 'synergy', label: 'Commander Synergy', current: 1, target: { min: 5, max: 12, target: 8 }, status: 'low' as const, color: '' },
+    ];
+    expect(computeOverallScore(health)).toBeLessThan(100);
+  });
+
+  it('still penalizes a high non-synergy category', () => {
+    const health = [
+      { category: 'removal', label: 'Removal', current: 20, target: { min: 8, max: 12, target: 10 }, status: 'high' as const, color: '' },
+    ];
+    expect(computeOverallScore(health)).toBeLessThan(100);
+  });
+});

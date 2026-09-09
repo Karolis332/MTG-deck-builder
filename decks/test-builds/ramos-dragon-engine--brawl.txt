@@ -1,11 +1,11 @@
 // Ramos, Dragon Engine — BRAWL
 // strategy=midrange themes=artifacts,ramp,tokens,draw,sacrifice,flying,control,spellslinger,counters tribal=-
-// total=99 lands=38 avgCMC=3.46 gold=33 counters=0
-// categories: ramp=22 utility=10 removal=9 protection=1 win_condition=7 board_wipe=4 draw=7 tutor=1 land=38
+// total=99 lands=38 avgCMC=3.44 gold=34 counters=0
+// categories: ramp=20 utility=10 removal=9 protection=1 win_condition=8 board_wipe=4 draw=8 tutor=1 land=38
 
 1 Ramos, Dragon Engine *CMDR*
 
-// ── ramp (22) ──
+// ── ramp (20) ──
 1 Birds of Paradise
 1 Arcane Signet
 1 Bloom Tender
@@ -23,14 +23,13 @@
 1 Helga, Skittish Seer
 1 Hearthhull, the Worldseed
 1 Hedron Archive
-1 Kheru Goldkeeper
-1 Solemn Simulacrum
 1 Jegantha, the Wellspring
 1 Omnath, Locus of All
 1 Chromatic Orrery
 
-// ── draw (7) ──
+// ── draw (8) ──
 1 Baral, Chief of Compliance
+1 Likeness Looter
 1 Kaito Shizuki
 1 Kutzil, Malamet Exemplar
 1 Archmage Emeritus
@@ -50,7 +49,7 @@
 1 Niv-Mizzet, Parun
 
 // ── board_wipe (4) ──
-1 Golgari Charm
+1 Blot Out the Sky
 1 Rakdos Charm
 1 Time Wipe
 1 Ruinous Ultimatum
@@ -58,11 +57,12 @@
 // ── protection (1) ──
 1 Swiftfoot Boots
 
-// ── win_condition (7) ──
+// ── win_condition (8) ──
 1 Guttersnipe
 1 Jodah, Archmage Eternal
 1 Murmuring Mystic
 1 Talrand, Sky Summoner
+1 Chromanticore
 1 Maelstrom Archangel
 1 Quandrix, the Proof
 1 Progenitus

@@ -1,7 +1,7 @@
 // Ghalta, Primal Hunger — BRAWL
 // strategy=aggro themes=draw,artifacts,ramp,tokens,equipment,aggro,sacrifice,tribal tribal=-
-// total=99 lands=42 avgCMC=2.98 gold=0 counters=0
-// categories: ramp=24 draw=9 win_condition=3 removal=4 protection=5 utility=10 board_wipe=2 land=42
+// total=99 lands=42 avgCMC=3 gold=0 counters=0
+// categories: ramp=24 draw=10 win_condition=3 removal=4 protection=5 utility=9 board_wipe=2 land=42
 
 1 Ghalta, Primal Hunger *CMDR*
 
@@ -18,11 +18,11 @@
 1 Mind Stone
 1 Priest of Titania
 1 Thornvault Forager
-1 Unlucky Cabbage Merchant
 1 Cultivate
 1 Gwenna, Eyes of Gaea
 1 Llanowar Tribe
 1 Loot, Exuberant Explorer
+1 Lotus Ring
 1 Outcaster Trailblazer
 1 Selvala, Heart of the Wilds
 1 Starting Column
@@ -31,10 +31,11 @@
 1 Hulking Raptor
 1 The Great Henge
 
-// ── draw (9) ──
+// ── draw (10) ──
 1 Mishra's Bauble
 1 Currency Converter
 1 Garruk's Uprising
+1 Hunter's Insight
 1 Tireless Tracker
 1 Beast Whisperer
 1 Momentous Fall
@@ -64,10 +65,9 @@
 1 Gigantosaurus
 1 Surrak and Goreclaw
 
-// ── utility (10) ──
+// ── utility (9) ──
 1 Emerald Medallion
 1 Ram Through
-1 Hunter's Insight
 1 Pugnacious Hammerskull
 1 Rhonas the Indomitable
 1 Steel Leaf Champion

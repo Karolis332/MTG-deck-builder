@@ -267,6 +267,7 @@
 1 Murder
 1 Murderous Rider
 1 Myconid Spore Tender
+1 Myriad Landscape
 1 Necron Monolith
 1 Necrotic Ooze
 1 Negate

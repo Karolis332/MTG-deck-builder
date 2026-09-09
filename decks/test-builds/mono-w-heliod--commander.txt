@@ -1,6 +1,6 @@
 // Heliod, Sun-Crowned — COMMANDER
 // strategy=midrange themes=enchantments,artifacts,counters,draw,lifegain,equipment,spellslinger,aggro,tokens tribal=-
-// total=99 lands=38 avgCMC=2.7 gold=0 counters=0
+// total=99 lands=38 avgCMC=2.64 gold=0 counters=0
 // categories: ramp=11 removal=13 utility=14 tutor=2 draw=10 protection=2 win_condition=5 board_wipe=4 land=38
 
 1 Heliod, Sun-Crowned *CMDR*
@@ -11,10 +11,10 @@
 1 Arcane Signet
 1 Collector's Vault
 1 Altar of the Pantheon
-1 Dauntless Scrapbot
+1 Discerning Financier
 1 Dragon's Hoard
+1 Lotus Ring
 1 Starting Column
-1 Firemind Vessel
 1 Smothering Tithe
 1 Ugin, Eye of the Storms
 
@@ -25,9 +25,9 @@
 1 Kor Spiritdancer
 1 Splitskin Doll
 1 Mesa Enchantress
-1 Pearl-Ear, Imperial Advisor
 1 Exemplar of Light
 1 Mangara, the Diplomat
+1 Well of Lost Dreams
 1 G'raha Tia
 
 // ── removal (13) ──
@@ -52,14 +52,14 @@
 1 Sunfall
 
 // ── protection (2) ──
+1 Alseid of Life's Bounty
 1 Mother of Runes
-1 Hardened Escort
 
 // ── win_condition (5) ──
 1 Blind Obedience
-1 Archon of Sun's Grace
 1 Archangel of Thune
 1 Sigil of the Empty Throne
+1 Sunscorch Regent
 1 Felidar Sovereign
 
 // ── utility (14) ──
@@ -68,6 +68,7 @@
 1 Serra Ascendant
 1 Soul Warden
 1 Soul's Attendant
+1 Speaker of the Heavens
 1 Ajani's Pridemate
 1 Auriok Champion
 1 Daxos, Blessed by the Sun
@@ -76,7 +77,6 @@
 1 Suture Priest
 1 Voice of the Blessed
 1 Linden, the Steadfast Queen
-1 Well of Lost Dreams
 
 // ── land (38) ──
 1 Arid Mesa

@@ -1,11 +1,11 @@
 // Ramos, Dragon Engine — COMMANDER
 // strategy=midrange themes=artifacts,tokens,ramp,draw,sacrifice,flying tribal=-
-// total=99 lands=38 avgCMC=3.56 gold=39 counters=0
-// categories: ramp=19 utility=10 removal=9 protection=1 win_condition=8 tutor=2 board_wipe=4 draw=8 land=38
+// total=99 lands=38 avgCMC=3.54 gold=38 counters=0
+// categories: ramp=18 utility=10 removal=9 protection=1 win_condition=8 tutor=2 board_wipe=4 draw=9 land=38
 
 1 Ramos, Dragon Engine *CMDR*
 
-// ── ramp (19) ──
+// ── ramp (18) ──
 1 Birds of Paradise
 1 Sol Ring
 1 Arcane Signet
@@ -20,13 +20,13 @@
 1 Cultivate
 1 Faeburrow Elder
 1 Kodama's Reach
-1 Noggle Robber
 1 Hearthhull, the Worldseed
 1 Jegantha, the Wellspring
 1 Omnath, Locus of All
 1 Chromatic Orrery
 
-// ── draw (8) ──
+// ── draw (9) ──
+1 Baral, Chief of Compliance
 1 Likeness Looter
 1 Akiri, Fearless Voyager
 1 Gluntch, the Bestower

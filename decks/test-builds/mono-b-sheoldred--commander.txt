@@ -1,7 +1,7 @@
 // Sheoldred, the Apocalypse — COMMANDER
 // strategy=control themes=draw,ramp,artifacts,equipment,sacrifice,tribal,control,tokens tribal=-
-// total=99 lands=38 avgCMC=3.59 gold=0 counters=0
-// categories: ramp=12 draw=15 utility=11 win_condition=5 protection=2 removal=14 board_wipe=1 tutor=1 land=38
+// total=99 lands=38 avgCMC=3.66 gold=0 counters=0
+// categories: ramp=12 draw=14 utility=11 win_condition=5 protection=2 removal=15 board_wipe=1 tutor=1 land=38
 
 1 Sheoldred, the Apocalypse *CMDR*
 
@@ -19,10 +19,9 @@
 1 Chromatic Orrery
 1 Ugin, Eye of the Storms
 
-// ── draw (15) ──
+// ── draw (14) ──
 1 Night's Whisper
 1 Sign in Blood
-1 Black Market Connections
 1 Master of the Feast
 1 Phyrexian Arena
 1 Scrawling Crawler
@@ -30,13 +29,13 @@
 1 Underworld Dreams
 1 Fate Unraveler
 1 Greed
-1 Rankle, Master of Pranks
+1 Alhammarret's Archive
 1 Psychosis Crawler
 1 Seizan, Perverter of Truth
 1 Tamiyo's Journal
 1 Peer into the Abyss
 
-// ── removal (14) ──
+// ── removal (15) ──
 1 Feed the Swarm
 1 Infernal Grasp
 1 Kozilek's Command
@@ -45,11 +44,12 @@
 1 Deadly Rollick
 1 Dread Presence
 1 Erebos, Bleak-Hearted
-1 Lethal Scheme
+1 Rankle, Master of Pranks
 1 Ob Nixilis Reignited
 1 Ob Nixilis, the Hate-Twisted
 1 Sheoldred // The True Scriptures
 1 Endbringer
+1 Liliana, Dreadhorde General
 1 Vilis, Broker of Blood
 
 // ── board_wipe (1) ──

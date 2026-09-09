@@ -1,7 +1,7 @@
 // Orvar, the All-Form — COMMANDER
 // strategy=spellslinger themes=tokens,artifacts,draw,flying,control,spellslinger,ramp,enchantments,equipment,counters tribal=-
-// total=99 lands=38 avgCMC=2.51 gold=0 counters=0
-// categories: ramp=10 utility=19 draw=19 win_condition=3 protection=1 removal=8 tutor=1 land=38
+// total=99 lands=38 avgCMC=2.49 gold=0 counters=0
+// categories: ramp=10 utility=19 draw=20 win_condition=3 protection=1 removal=7 tutor=1 land=38
 
 1 Orvar, the All-Form *CMDR*
 
@@ -13,13 +13,14 @@
 1 Mind Stone
 1 Thought Vessel
 1 Kozilek's Unsealing
-1 Starting Column
+1 Magnifying Glass
 1 Solemn Simulacrum
 1 Coveted Jewel
 
-// ── draw (19) ──
+// ── draw (20) ──
 1 Aquitect's Will
 1 Cerulean Wisps
+1 Curious Obsession
 1 Leap
 1 Shadow Rift
 1 Skullclamp
@@ -38,13 +39,12 @@
 1 Sokka's Haiku
 1 Tezzeret, Artifice Master
 
-// ── removal (8) ──
+// ── removal (7) ──
 1 Essence Flux
 1 Pongify
 1 Agatha's Soul Cauldron
 1 Snap
 1 The Ooze
-1 Warping Wail
 1 Venser, Shaper Savant
 1 Hullbreaker Horror
 

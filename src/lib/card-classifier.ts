@@ -174,6 +174,11 @@ const DRAW_PATTERNS = [
   // "look at the top" only counts as draw when the card actually enters hand.
   /look at the top .* (?:put|reveal)[^.]* into your hand/i,
   /reveal the top .* put .* into your hand/i,
+  // Sacrifice/discard-scaled draw ("draw that many cards") is still draw.
+  /draw (?:that many|x|cards equal to)/i,
+  // Mill-then-select-into-hand ("put a card from among those cards into your
+  // hand") puts a card in hand, unlike bare mill.
+  /put (?:a|one|up to \w+) cards? from among (?:them|those cards|the milled cards) into your hand/i,
   // NOTE: bare scry and library tutors are NOT card draw — removed (they were
   // inflating the draw quota with scry-only and Demonic-Tutor-style cards).
 ];
@@ -216,10 +221,15 @@ const REMOVAL_PATTERNS = [
   // Only NEGATIVE toughness modifiers are removal (-X/-X, +X/-X kill via
   // toughness). Positive buffs (+2/+2 combat tricks) are NOT removal.
   /target creature gets? [+-]?\d+\/-[1-9]/i,
+  // X-scaled shrink ("target creature gets -X/-X") — the toughness delta is
+  // the letter X, not a literal digit, so the pattern above misses it.
+  /target creatures? gets? [+-]?(?:\d+|x)\/-(?:[1-9]\d*|x)/i,
   // -X/-X counter placement (Hapatra-style) is removal too.
   /put (?:a|one|two|three|x|\d+) -\d+\/-\d+ counters? on (?:up to \w+ )?target creatures?/i,
   /return target .* to (?:its|their) owner/i,
   /target player sacrifices/i,
+  // Edicts: forced sacrifice is removal even though it isn't targeted.
+  /each (?:player|opponent) sacrifices (?:a|an|one|two|three|x) creatures?/i,
   /fights? target/i,
   /target .* fights?/i,
   /destroy .* target/i,
@@ -235,8 +245,10 @@ const REMOVAL_NAMES = new Set([
 ]);
 
 const BOARD_WIPE_PATTERNS = [
-  /destroy all (?:creatures|permanents|nonland|artifacts|enchantments)/i,
-  /exile all (?:creatures|permanents|nonland)/i,
+  // Allows type qualifiers between "all" and the noun (Their Name Is Death's
+  // "nonartifact", Reiver Demon's "nonartifact, nonblack") — was requiring
+  // the noun to follow "all" directly.
+  /(?:destroy|exile) all (?:(?:other|non-?\w+|attacking|blocking|tapped|untapped),? )*(?:creatures|permanents|nonland permanents|artifacts|enchantments)/i,
   // Bounded window + an explicit damage amount — the unbounded ".* .*" was
   // matching reminder text and unrelated triggers that happen to say "each
   // ... deals ... damage" without being a symmetric wipe (review 2026-08-23 C2).
@@ -264,6 +276,9 @@ const PROTECTION_PATTERNS = [
   /can't be (?:the target|destroyed|countered)/i,
   /counter target (?:spell|ability)/i,
   /(?:hexproof|indestructible|shroud) until end of turn/i,
+  // Redirect effects ("change the target of target spell") protect the true
+  // target by retargeting the threat elsewhere.
+  /change the target of target spell/i,
 ];
 
 const PROTECTION_NAMES = new Set([
@@ -462,12 +477,14 @@ export function classifyCard(
 
 /**
  * Determine the primary category for display purposes.
- * Priority: board_wipe > removal > ramp > draw > tutor > protection > synergy > win_condition > utility
+ * Priority: board_wipe > removal > ramp > draw > tutor > protection > win_condition > synergy > utility
+ * win_condition ranks above synergy — an on-theme payoff card is a win
+ * condition first, a synergy piece second.
  */
 export function getPrimaryCategory(categories: CardCategory[]): CardCategory {
   const priority: CardCategory[] = [
     'land', 'board_wipe', 'removal', 'ramp', 'draw', 'tutor',
-    'protection', 'synergy', 'win_condition', 'utility',
+    'protection', 'win_condition', 'synergy', 'utility',
   ];
   for (const cat of priority) {
     if (categories.includes(cat)) return cat;
@@ -574,6 +591,9 @@ export function computeOverallScore(health: RatioHealth[]): number {
       const deficit = h.target.min - h.current;
       score -= Math.min(deficit * 5, 15);
     } else if (h.status === 'high') {
+      // A theme deck being over the synergy quota isn't a defect — synergy
+      // has no ceiling, only the 'low' penalty above applies to it.
+      if (h.category === 'synergy') continue;
       const excess = h.current - h.target.max;
       score -= Math.min(excess * 3, 10);
     }

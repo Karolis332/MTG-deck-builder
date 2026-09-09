@@ -387,7 +387,7 @@
 1 Mycoloth
 1 Myconid Spore Tender
 1 Myr Retriever
-1 Myriad Landscape
+2 Myriad Landscape
 1 Nadaar, Selfless Paladin
 1 Najeela, the Blade-Blossom
 1 Nalia de'Arnise

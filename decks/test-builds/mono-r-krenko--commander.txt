@@ -1,7 +1,7 @@
 // Krenko, Mob Boss — COMMANDER
 // strategy=tribal themes=tribal tribal=goblin
 // total=99 lands=38 avgCMC=2.8 gold=0 counters=0
-// categories: utility=22 ramp=11 tutor=2 win_condition=5 removal=6 draw=9 protection=3 board_wipe=3 land=38
+// categories: utility=21 ramp=11 tutor=2 win_condition=5 removal=6 draw=10 protection=3 board_wipe=3 land=38
 
 1 Krenko, Mob Boss *CMDR*
 
@@ -15,18 +15,19 @@
 1 Crime Novelist
 1 Dragon's Hoard
 1 Howlsquad Heavy
-1 Starting Column
+1 Lotus Ring
 1 Ashling, Flame Dancer
 
-// ── draw (9) ──
+// ── draw (10) ──
 1 Sensei's Divining Top
 1 Skullclamp
 1 Artist's Talent
+1 Fable of the Mirror-Breaker // Reflection of Kiki-Jiki
 1 Gempalm Incinerator
 1 Palantír of Orthanc
 1 Staff of Domination
 1 Goblin Ringleader
-1 Jaxis, the Troublemaker
+1 Well of Lost Dreams
 1 Vanquisher's Banner
 
 // ── removal (6) ──
@@ -54,7 +55,7 @@
 1 Kiki-Jiki, Mirror Breaker
 1 Muxus, Goblin Grandee
 
-// ── utility (22) ──
+// ── utility (21) ──
 1 Goblin Chirurgeon
 1 Goblin Lackey
 1 Goblin War Strike
@@ -67,7 +68,6 @@
 1 Mogg War Marshal
 1 Ruby Medallion
 1 Rundvelt Hordemaster
-1 Fable of the Mirror-Breaker // Reflection of Kiki-Jiki
 1 Goblin Chieftain
 1 Goblin King
 1 Goblin Warchief

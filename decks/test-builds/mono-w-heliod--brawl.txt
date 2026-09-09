@@ -1,7 +1,7 @@
 // Heliod, Sun-Crowned — BRAWL
 // strategy=midrange themes=enchantments,artifacts,lifegain,equipment,counters,draw,spellslinger,flying,tokens,aggro tribal=-
-// total=99 lands=38 avgCMC=2.8 gold=0 counters=0
-// categories: removal=10 utility=17 ramp=11 tutor=4 draw=9 protection=2 win_condition=4 board_wipe=4 land=38
+// total=99 lands=38 avgCMC=2.82 gold=0 counters=0
+// categories: removal=10 utility=16 ramp=11 tutor=4 draw=10 protection=2 win_condition=5 board_wipe=3 land=38
 
 1 Heliod, Sun-Crowned *CMDR*
 
@@ -10,15 +10,15 @@
 1 Arcane Signet
 1 Collector's Vault
 1 Altar of the Pantheon
-1 Dauntless Scrapbot
 1 Discerning Financier
 1 Dragon's Hoard
+1 Lotus Ring
 1 Pristine Talisman
 1 Starting Column
 1 Smothering Tithe
 1 Ugin, Eye of the Storms
 
-// ── draw (9) ──
+// ── draw (10) ──
 1 Esper Sentinel
 1 Stiltzkin, Moogle Merchant
 1 Archivist of Oghma
@@ -27,6 +27,7 @@
 1 Haliya, Guided by Light
 1 Exemplar of Light
 1 Mangara, the Diplomat
+1 Well of Lost Dreams
 1 G'raha Tia
 
 // ── removal (10) ──
@@ -35,14 +36,13 @@
 1 Agatha's Soul Cauldron
 1 Glass Casket
 1 Heliod's Intervention
-1 Ossification
 1 Valorous Stance
 1 Loran of the Third Path
 1 Staff of Compleation
+1 Venat, Heart of Hydaelyn // Hydaelyn, the Mothercrystal
 1 Aetherflux Reservoir
 
-// ── board_wipe (4) ──
-1 Wrath of God
+// ── board_wipe (3) ──
 1 Fumigate
 1 Sunfall
 1 Farewell
@@ -51,13 +51,14 @@
 1 Mother of Runes
 1 Teferi's Protection
 
-// ── win_condition (4) ──
+// ── win_condition (5) ──
 1 Blind Obedience
+1 The Wind Crystal
 1 Archangel of Thune
 1 Sigil of the Empty Throne
 1 Felidar Sovereign
 
-// ── utility (17) ──
+// ── utility (16) ──
 1 Authority of the Consuls
 1 Cleric Class
 1 Ethereal Armor
@@ -73,7 +74,6 @@
 1 Angel of Vitality
 1 Linden, the Steadfast Queen
 1 Cradle of Vitality
-1 Well of Lost Dreams
 1 Contagion Engine
 
 // ── land (38) ──
