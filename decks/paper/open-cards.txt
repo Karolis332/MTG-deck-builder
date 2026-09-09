@@ -1,6 +1,5 @@
 1 Aatchik, Emerald Radian
 1 Abraded Bluffs
-1 Accursed Marauder
 1 Adaptive Automaton
 1 Adept Watershaper
 1 Ageless Entity
@@ -22,6 +21,7 @@
 1 Autumn's Veil
 1 Aven Interrupter
 1 Azula, Ruthless Firebender
+1 Baba Lysaga, Night Witch
 1 Back for More
 1 Baeloth Barrityl, Entertainer
 1 Bandit's Haul
@@ -29,7 +29,6 @@
 1 Barkform Harvester
 1 Baron Bertram Graywater
 1 Baron Helmut Zemo
-1 Basking Broodscale
 1 Bedevil
 1 Beifong's Bounty Hunters
 1 Beledros Witherbloom
@@ -42,11 +41,10 @@
 1 Blood Celebrant
 1 Blood Hustler
 3 Blood Pet
-1 Bloodghast
 1 Bloodthirsty Aerialist
 1 Bloodtracker
-1 Blooming Marsh
 1 Blossoming Bogbeast
+1 Boggart Trawler
 1 Bond of Revival
 1 Bonny Pall, Clearcutter
 1 Boros Charm
@@ -59,17 +57,17 @@
 1 Bristling Backwoods
 2 Buried in the Garden
 1 Burnished Hart
-2 Butcher of Malakir
+1 Butcher of Malakir
 1 Bygone Colossus
 2 Calamity, Galloping Inferno
 1 Callous Inspector
-1 Carrion Feeder
 1 Case of the Trampled Garden
+1 Casualties of War
 1 Caught in the Crossfire
 1 Caves of Chaos Adventurer
 1 Chainer, Dementia Master
 1 Charcoal Diamond
-1 Chthonian Nightmare
+1 Chief Warg's Company
 1 Cityscape Leveler
 1 Clear Shot
 1 Cloudkill
@@ -77,10 +75,11 @@
 1 Commander's Sphere
 2 Conduit Pylons
 2 Consuming Corruption
+1 Corpse Augur
 1 Corpse Churn
 3 Corrupted Conviction
 1 Creosote Heath
-1 Cultivate
+2 Cultivate
 1 Cycle of Renewal
 1 Damnable Pact
 3 Dance of the Tumbleweeds
@@ -102,6 +101,7 @@
 1 Diabolic Tutor
 1 Dimir Charm
 1 Dimir House Guard
+1 Dina, Essence Brewer
 1 Dina, Soul Steeper
 1 Dire Fleet Ravager
 2 Doc Aurlock, Grizzled Genius
@@ -122,7 +122,6 @@
 1 Emergency Weld
 1 Emeritus of Ideation
 1 Emeritus of Truce
-1 Emeritus of Woe
 1 Emperor of Bones
 1 Epicure of Blood
 1 Eriette, the Beguiler
@@ -137,6 +136,7 @@
 1 Explore
 2 Explosive Derailment
 1 Ezzaroot Channeler
+1 Farseek
 1 Fell the Mighty
 1 Feral Appetite
 1 Ferocification
@@ -168,15 +168,12 @@
 1 Gingerbread Cabin
 1 Gleaming Barrier
 1 Gluttonous Troll
-1 Golgari Charm
 1 Golgari Rot Farm
 1 Gonti, Lord of Luxury
 1 Gonti's Machinations
+1 Gorma, the Gullet
 1 Grand Abolisher
-1 Gray Merchant of Asphodel
 1 Greed
-1 Grim Haruspex
-1 Grim Servant
 1 Grist, Voracious Larva
 1 Growth Spiral
 1 Gruul Charm
@@ -184,19 +181,21 @@
 1 Gyome, Master Chef
 2 Hardbristle Bandit
 1 Harvest Season
+1 Haunted Mire
 1 Haunting Voyage
-1 Haywire Mite
 1 Healing Technique
 1 Heartless Pillage
 1 Hellspur Posse Boss
 1 Hexmark Destroyer
 1 Hidden Grotto
+1 High-Society Hunter
 1 Highway Robbery
 2 Hindering Light
 1 Hollow Marauder
 1 Honest Rutstein
 1 Honor Troll
 1 Hornet Nest
+1 Hornet Queen
 2 Hostile Investigator
 1 Huatli, Poet of Unity
 1 Humiliate
@@ -208,23 +207,24 @@
 1 Innkeeper's Talent
 1 Insidious Roots
 1 Intimidation Campaign
+1 Invasion of Ikoria
 1 Ionize
-1 Jadar, Ghoulcaller of Nephalia
+1 Izoni, Thousand-Eyed
 1 Jagged Barrens
 1 Jailbreak Scheme
-1 Jarad, Golgari Lich Lord
 1 Jazal Goldmane
 1 Jem Lightfoote, Sky Explorer
+1 Jenova, Ancient Calamity
 1 Jerren, Corrupted Bishop
 1 Jolene, Plundering Pugilist
 1 Joo Dee, One of Many
 1 Journey to Nowhere
 1 Jungle Hollow
-1 Junji, the Midnight Sky
 1 Kagha, Shadow Archdruid
 1 Kamiz, Obscura Oculus
 1 Kiora's Follower
 1 Knockout Maneuver
+1 Kodama's Reach
 1 Koh, the Face Stealer
 1 Kolaghan's Command
 1 Kozilek, the Great Distortion
@@ -233,11 +233,9 @@
 1 Lavaspur Boots
 1 Lembas
 1 Leyline Prowler
-1 Lightning Greaves
 1 Lilah, Undefeated Slickshot
 1 Lluwen, Imperfect Naturalist
 1 Lonely Arroyo
-1 Long Feng, Grand Secretariat
 1 Lost Jitte
 1 Lotus Ring
 1 Loxodon Warhammer
@@ -258,7 +256,6 @@
 1 Merchant of Venom
 2 Metamorphic Blast
 1 Metamorphosis Fanatic
-1 Midnight Reaper
 1 Mindblade Render
 1 Minthara, Merciless Soul
 1 Mirage Mesa
@@ -269,13 +266,14 @@
 1 Morlun, Devourer of Spiders
 1 Mortality Spear
 1 Moseo, Vein's New Dean
+1 Mosswood Dreadknight
 1 Mourner's Surprise
 1 Mudflat Village
 1 Muraganda Raceway
 1 Murder
 1 Murderous Rider
+1 Mycoloth
 1 Myconid Spore Tender
-1 Myriad Landscape
 1 Necron Monolith
 1 Necrotic Ooze
 1 Negate
@@ -292,6 +290,7 @@
 1 Obeka, Splitter of Seconds
 1 Ohran Frostfang
 1 Oko, Thief of Crowns
+1 Old Stickfingers
 1 Omenpath Journey
 1 Omni-Changeling
 1 One Last Job
@@ -313,6 +312,7 @@
 1 Path to Exile
 1 Peer into the Abyss
 1 Pest Control
+1 Pest Infestation
 1 Pest Rescuer
 1 Pestilence Demon
 1 Peter Parker's Camera
@@ -338,17 +338,16 @@
 1 Raise Dead
 1 Rakish Crew
 1 Rampant Growth
-1 Ramunap Excavator
+1 Rankle, Master of Pranks
 1 Rattleback Apothecary
 1 Raven of Fell Omens
-1 Ravenous Chupacabra
 1 Realm of Koh
-1 Reanimate
 1 Reckless Spite
 1 Reconnaissance Mission
 1 Regrowth
 1 Reiver Demon
 1 Requisition Raid
+1 Return of the Wildspeaker
 3 Return the Favor
 1 Revival Experiment
 1 Ribtruss Roaster
@@ -359,7 +358,6 @@
 1 Rodeo Pyromancers
 1 Rogue's Passage
 2 Roxanne, Starfall Savant
-1 Rune-Scarred Demon
 1 Rush of Dread
 2 Rustler Rampage
 1 Ruthless Lawbringer
@@ -382,6 +380,7 @@
 1 Shamanic Revelation
 1 Shard of the Nightbringer
 1 Shard of the Void Dragon
+1 Sheoldred's Edict
 2 Shifting Grift
 3 Shoot the Sheriff
 1 Sigil of Myrkul
@@ -399,6 +398,7 @@
 1 Slickshot Show-Off
 1 Slickshot Vault-Buster
 1 Slimefoot, the Stowaway
+1 Smothering Abomination
 1 Soured Springs
 1 Spinewoods Armadillo
 1 Springleaf Parade
@@ -423,8 +423,8 @@
 1 Take for a Ride
 1 Take the Fall
 1 Take Up the Shield
-1 Talisman of Resilience
 1 Tam, Mindful First-Year
+1 Tangled Florahedron
 1 Taste of Death
 1 Teacher's Pest
 1 Temple of the False God
@@ -456,8 +456,7 @@
 1 Trudge Garden
 1 Twilight Prophet
 1 Tyrant's Scorn
-1 Umbral Collar Zealot
-1 Undying Malice
+2 Undying Malice
 2 Unfortunate Accident
 1 Unseal the Necropolis
 1 Uro, Titan of Nature's Wrath
@@ -477,6 +476,7 @@
 1 Victim of Night
 2 Visage Bandit
 1 Vito, Thorn of the Dusk Rose
+1 Vraan, Executioner Thane
 1 Vraska Joins Up
 1 Vraska, the Silencer
 1 Wardens of the Cycle
@@ -487,8 +487,9 @@
 1 Willowdusk, Essence Seer
 1 Witch of the Moors
 1 Witch's Clinic
+1 Witherbloom Campus
+1 Witherbloom Charm
 1 Witherbloom Command
-1 Woe Strider
 1 Worldwalker Helm
 1 Worn Powerstone
 1 Wreckage Wickerfolk

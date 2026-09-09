@@ -593,7 +593,7 @@
 1 Sun Droplet
 1 Supernatural Stamina
 1 Surrak, the Hunt Caller
-41 Swamp
+46 Swamp
 1 Sweet-Gum Recluse
 1 Sword of the Animist
 1 Swords to Plowshares
