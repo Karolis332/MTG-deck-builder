@@ -26,7 +26,7 @@ const bucket = (cmc: number) => (cmc >= 6 ? '6+' : String(Math.max(1, Math.round
 interface Line { quantity: number; name: string }
 interface CardInfo { name: string; cmc: number; role: string; img: string; ci: string[]; inc: number | null; lift: number | null; cf: number | null; prod: string[]; tapped: boolean }
 interface Deck { key: string; title: string; file: string; commander: string; fixedSwaps?: string; basicsTopUp?: string; minLands?: number; caveat?: string }
-interface Swap { out: CardInfo; in: CardInfo; why: string }
+interface Swap { out: CardInfo; in: CardInfo; why: string; qty?: number }
 
 const DECKS: Deck[] = [
   { key: 'meren', title: 'Meren of Clan Nel Toth', file: 'meren-of-clan-nel-toth.txt', commander: 'Meren of Clan Nel Toth', fixedSwaps: 'meren-final.txt' },
@@ -159,20 +159,57 @@ function autoPlan(deck: Line[], commander: string, open: Line[], cf: Map<string,
 function fixedPlan(deck: Line[], proposalFile: string, commander: string, cf: Map<string, number>): { swaps: Swap[]; notes: string[] } {
   const cur = new Map(deck.map((c) => [c.name, c.quantity]));
   const nxt = new Map(read(path.join(ROOT, 'proposals', proposalFile)).map((c) => [c.name, c.quantity]));
-  const expand = (a: Map<string, number>, b: Map<string, number>) => [...a].filter(([n, q]) => q > (b.get(n) || 0)).flatMap(([n, q]) => Array(q - (b.get(n) || 0)).fill(n) as string[]);
-  const outInfo = expand(cur, nxt).map((n) => info(n, commander, cf)).filter((x): x is CardInfo => !!x);
-  const inInfo = expand(nxt, cur).map((n) => info(n, commander, cf)).filter((x): x is CardInfo => !!x);
-  // Pair cuts with adds of the same role where possible so each row reads as a like-for-like swap.
+  const diff = (a: Map<string, number>, b: Map<string, number>) => [...a].filter(([n, q]) => q > (b.get(n) || 0)).map(([n, q]) => ({ name: n, qty: q - (b.get(n) || 0) }));
+  const outsRaw = diff(cur, nxt); const insRaw = diff(nxt, cur);
+  const withInfo = (l: { name: string; qty: number }[]) => l.map((x) => ({ qty: x.qty, c: info(x.name, commander, cf) })).filter((x): x is { qty: number; c: CardInfo } => !!x.c);
+  const outs = withInfo(outsRaw); const ins = withInfo(insRaw);
+  const before = deck.slice(1).flatMap((l) => { const i = info(l.name, commander, cf); return i ? (Array(l.quantity).fill(i) as CardInfo[]) : []; });
+  const counts = roleCounts(before); const curve = curveCounts(before);
+  const over = (r: string) => Boolean(BAND[r]) && (counts[r] || 0) > BAND[r][1];
+  const under = (r: string) => Boolean(BAND[r]) && (counts[r] || 0) < BAND[r][0];
+  const full = (cmc: number) => (curve[bucket(cmc)] || 0) > (CURVE.find(([b]) => b === bucket(cmc))?.[1] ?? 99) + 2;
   const swaps: Swap[] = [];
-  for (const a of inInfo) {
-    const j = outInfo.findIndex((o) => o.role === a.role);
-    const o = j >= 0 ? outInfo.splice(j, 1)[0] : outInfo.shift();
-    if (!o) break;
-    swaps.push({ out: o, in: a, why: `OUT ${o.name}: in ${pct(o.inc)} of ${commander} decks${liftTxt(o.lift)}, role ${o.role}. IN ${a.name}: in ${pct(a.inc)}${liftTxt(a.lift)}${a.cf ? `, CF model #${a.cf}` : ''}, role ${a.role}.` });
-  }
-  return { swaps, notes: [`Final recommendation (${proposalFile}): corpus plan + Codex gpt-6-astra review + EDHPowerLevel check, reconciled by hand; the numbers are the corpus data behind each swap.`] };
-}
 
+  // Spells: each incoming card (best corpus number first) takes the outgoing card of the same role, else the nearest mana value.
+  const spellOuts = outs.filter((x) => x.c.role !== 'land').flatMap((x) => Array(x.qty).fill(x.c) as CardInfo[]);
+  const spellIns = ins.filter((x) => x.c.role !== 'land').flatMap((x) => Array(x.qty).fill(x.c) as CardInfo[]).sort((a, b) => (b.inc ?? 0) - (a.inc ?? 0));
+  for (const a of spellIns) {
+    let j = spellOuts.findIndex((o) => o.role === a.role);
+    if (j < 0) { let best = Infinity; spellOuts.forEach((o, i) => { const d = Math.abs(o.cmc - a.cmc); if (d < best) { best = d; j = i; } }); }
+    if (j < 0) break;
+    const o = spellOuts.splice(j, 1)[0];
+    const outWhy = `OUT ${o.name}: in ${pct(o.inc)} of ${commander} decks${liftTxt(o.lift)}; ${o.role}${over(o.role) ? ` over quota (${counts[o.role]} vs ${BAND[o.role][1]} max)` : ''}${full(o.cmc) ? `; the ${bucket(o.cmc)}-drop slot is over-full` : ''}.`;
+    const inWhy = `IN ${a.name}: in ${pct(a.inc)}${liftTxt(a.lift)}${a.cf ? `, CF model #${a.cf}` : ''}; ${under(a.role) ? `fills ${a.role} (${counts[a.role] || 0} → ${(counts[a.role] || 0) + 1}, band ${BAND[a.role].join('–')})` : `role ${a.role}`}${a.cmc !== o.cmc ? `; curve ${o.cmc} → ${a.cmc} MV` : ''}.`;
+    swaps.push({ out: o, in: a, why: `${outWhy} ${inWhy}` });
+    counts[o.role] = (counts[o.role] || 1) - 1; counts[a.role] = (counts[a.role] || 0) + 1;
+    curve[bucket(o.cmc)] = (curve[bucket(o.cmc)] || 1) - 1; curve[bucket(a.cmc)] = (curve[bucket(a.cmc)] || 0) + 1;
+  }
+  // Leftover spells (unequal counts) pair with lands below.
+  const leftoverSpellOuts = [...spellOuts];
+
+  // Lands: basics grouped by type, non-basics paired by what colours they produce.
+  const cmdColors = info(commander, commander, cf)?.ci || [];
+  const colorsOf = (c: CardInfo) => landColors(c.name, cmdColors);
+  const landOuts = outs.filter((x) => x.c.role === 'land'); const landIns = ins.filter((x) => x.c.role === 'land');
+  const basicOuts = landOuts.filter((x) => BASICS.has(x.c.name)); const basicIns = landIns.filter((x) => BASICS.has(x.c.name));
+  while (basicOuts.length && basicIns.length) {
+    const o = basicOuts[0]; const a = basicIns[0]; const q = Math.min(o.qty, a.qty);
+    swaps.push({ out: o.c, in: a.c, qty: q, why: `Colour balance: ${q} ${o.c.name} become ${q} ${a.c.name} (${COLOR_NAME[colorsOf(o.c)[0]] || o.c.name} has more sources than its pip share needs, ${COLOR_NAME[colorsOf(a.c)[0]] || a.c.name} fewer).` });
+    o.qty -= q; a.qty -= q; if (!o.qty) basicOuts.shift(); if (!a.qty) basicIns.shift();
+  }
+  const nbOuts = [...landOuts.filter((x) => !BASICS.has(x.c.name)).flatMap((x) => Array(x.qty).fill(x.c) as CardInfo[]), ...basicOuts.flatMap((x) => Array(x.qty).fill(x.c) as CardInfo[]), ...leftoverSpellOuts];
+  const nbIns = [...landIns.filter((x) => !BASICS.has(x.c.name)).flatMap((x) => Array(x.qty).fill(x.c) as CardInfo[]), ...basicIns.flatMap((x) => Array(x.qty).fill(x.c) as CardInfo[])];
+  for (const a of nbIns) {
+    if (!nbOuts.length) break;
+    const ac = colorsOf(a);
+    let j = 0; let best = -1;
+    nbOuts.forEach((o, i) => { const sc = colorsOf(o).filter((x) => ac.includes(x)).length; if (sc > best) { best = sc; j = i; } });
+    const o = nbOuts.splice(j, 1)[0];
+    const desc = (c: CardInfo) => c.role === 'land' ? `${colorsOf(c).length ? colorsOf(c).map((x) => COLOR_NAME[x]).join('/') : 'no reliable colour'}${c.tapped ? ', enters tapped' : ', untapped'}` : `${c.role}, ${c.cmc} MV`;
+    swaps.push({ out: o, in: a, why: `Lands: OUT ${o.name} (${desc(o)}${o.inc != null ? `, in ${pct(o.inc)} of ${commander} decks` : ''}). IN ${a.name} (${desc(a)}${a.inc ? `, in ${pct(a.inc)}` : ''}${liftTxt(a.lift)}).` });
+  }
+  return { swaps, notes: [`Final recommendation (${proposalFile}): corpus plan + Codex gpt-6-astra review + EDHPowerLevel check, reconciled by hand; the numbers are the corpus data behind each swap. Spell rows are paired by role, then by mana value; land rows by the colours they produce.`] };
+}
 
 const COLOR_NAME: Record<string, string> = { W: 'white', U: 'blue', B: 'black', R: 'red', G: 'green' };
 const KEEP_LANDS = new Set(['Command Tower', 'Exotic Orchard', 'Base Camp', 'Path of Ancestry', 'Bojuka Bog', 'Myriad Landscape']);
@@ -207,7 +244,7 @@ function landColors(name: string, colors: string[]): string[] {
 const effProd = (c: CardInfo, colors: string[]): string[] => landColors(c.name, colors);
 
 /** Rebalance colour sources against pip demand: source slots are shared out in proportion to pips; basics move first (free), then owned duals replace lands that feed only surplus colours. */
-function landPass(list: Line[], commander: string, open: Line[], cf: Map<string, number>): { swaps: Swap[]; note: string } {
+function landPass(list: Line[], commander: string, open: Line[], cf: Map<string, number>, apply = true): { swaps: Swap[]; note: string } {
   const r = optimizeDeck({ format: 'commander', cards: list.map((c, i) => ({ ...c, board: i === 0 ? 'commander' : 'main' })), commanderName: commander }) as { mana?: { demand: Record<string, number> } };
   if (!r.mana) return { swaps: [], note: '' };
   const demand = r.mana.demand;
@@ -232,7 +269,7 @@ function landPass(list: Line[], commander: string, open: Line[], cf: Map<string,
   const intro = `Pip demand ${colors.map((c) => `${COLOR_NAME[c]} ${demand[c]} (${Math.round((demand[c] / totalPips) * 100)}%)`).join(', ')} across ${slots} coloured source slots (half by pip share, half even) → targets ${colors.map((c) => `${COLOR_NAME[c]} ${target[c]}`).join(', ')}; before: ${state()}.`;
 
   // A. basics: a basic of a surplus colour becomes a basic of the most-short colour (free).
-  for (let guard = 0; guard < 4; guard++) {
+  for (let guard = 0; apply && guard < 4; guard++) {
     const under = worst(); if (!under) break;
     const overC = richest(under); if (!overC) break;
     const out = landsIn.find((c) => c.name === BASIC_OF[overC] && available(c));
@@ -246,7 +283,7 @@ function landPass(list: Line[], commander: string, open: Line[], cf: Map<string,
   const inDeck = new Set(landsIn.map((c) => face(c.name)));
   const pool = open.map((l) => info(l.name, commander, cf)).filter((c): c is CardInfo => !!c && c.role === 'land' && !inDeck.has(face(c.name)) && !seen.has(c.name) && (seen.add(c.name), true) && c.ci.every((x) => colors.includes(x)) && effProd(c, colors).length > 0);
   const used = new Set<string>();
-  for (let guard = 0; guard < 6; guard++) {
+  for (let guard = 0; apply && guard < 6; guard++) {
     const short = colors.filter((c) => deficit(c) >= 1); if (!short.length) break;
     const ranked = pool.filter((c) => !used.has(c.name)).map((c) => ({ c, s: effProd(c, colors).filter((x) => short.includes(x)).length * 2 + (c.tapped ? 0 : 1) + (c.inc ?? 0) })).filter((x) => x.s >= 2).sort((a, b) => b.s - a.s);
     const add = ranked[0]?.c; if (!add) break;
@@ -263,7 +300,7 @@ function landPass(list: Line[], commander: string, open: Line[], cf: Map<string,
     swaps.push({ out, in: add, why: `Colour balance: ${short.map((x) => `${COLOR_NAME[x]} ${sources[x] - (effProd(add, colors).includes(x) ? 1 : 0)}/${target[x]}`).join(', ')} short. IN ${add.name} adds ${covers}${add.tapped ? ' (enters tapped)' : ' (untapped)'}${add.inc ? `, in ${pct(add.inc)} of ${commander} decks` : ''}. OUT ${out.name}: ${outWhy}${out.inc != null ? `, in ${pct(out.inc)} of ${commander} decks` : ''}.` });
   }
   const left = colors.filter((c) => deficit(c) >= 2).map((c) => `${COLOR_NAME[c]} ${sources[c]}/${target[c]}`);
-  return { swaps, note: `${intro} After: ${state()}. ${left.length ? `Still short: ${left.join(', ')} — only more any-colour lands fix that.` : 'Every colour is within one source of its target.'}` };
+  return { swaps, note: apply ? `${intro} After: ${state()}. ${left.length ? `Still short: ${left.join(', ')} — only more any-colour lands fix that.` : 'Every colour is within one source of its target.'}` : `${intro.replace('before:', 'with this list:')} ${left.length ? `Still short: ${left.join(', ')} — only more any-colour lands fix that.` : 'Every colour is within one source of its target.'}` };
 }
 
 function score(list: Line[], commander: string, owned: string[]) {
@@ -277,7 +314,7 @@ function score(list: Line[], commander: string, owned: string[]) {
 }
 
 const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
-const tile = (c: CardInfo) => `<div class="tile"><img src="${esc(c.img)}" alt="${esc(c.name)}"><b>${esc(face(c.name))}</b><small>${esc(c.role)} · ${c.cmc} MV · ${pct(c.inc)}${esc(liftTxt(c.lift))}${c.cf ? ` · CF #${c.cf}` : ''}</small></div>`;
+const tile = (c: CardInfo, qty = 1) => `<div class="tile"><img src="${esc(c.img)}" alt="${esc(c.name)}"><b>${qty > 1 ? `${qty}× ` : ''}${esc(face(c.name))}</b><small>${esc(c.role)} · ${c.cmc} MV · ${pct(c.inc)}${esc(liftTxt(c.lift))}${c.cf ? ` · CF #${c.cf}` : ''}</small></div>`;
 
 (async () => {
   const open = read(path.join(ROOT, 'open-cards.txt'));
@@ -323,14 +360,14 @@ const tile = (c: CardInfo) => `<div class="tile"><img src="${esc(c.img)}" alt="$
     // Apply the swaps. Deck files carry front-face names; CardInfo carries the full DFC name.
     const next = new Map(deck.map((c) => [face(c.name), c.quantity]));
     for (const sw of plan.swaps) {
-      const o = face(sw.out.name); const a = face(sw.in.name);
-      next.set(o, (next.get(o) || 1) - 1);
+      const o = face(sw.out.name); const a = face(sw.in.name); const q = sw.qty || 1;
+      next.set(o, (next.get(o) || q) - q);
       if ((next.get(o) || 0) <= 0) next.delete(o);
-      next.set(a, (next.get(a) || 0) + 1);
+      next.set(a, (next.get(a) || 0) + q);
     }
     const commanderName = face(deck[0].name);
     const build = () => [{ quantity: 1, name: commanderName }, ...[...next].filter(([n]) => n !== commanderName).map(([name, quantity]) => ({ name, quantity })).sort((a, b) => a.name.localeCompare(b.name))] as Line[];
-    const landFix = landPass(build(), d.commander, open, cf);
+    const landFix = landPass(build(), d.commander, open, cf, !d.fixedSwaps);
     for (const sw of landFix.swaps) {
       const o = face(sw.out.name); const a = face(sw.in.name);
       next.set(o, (next.get(o) || 1) - 1);
@@ -350,11 +387,19 @@ const tile = (c: CardInfo) => `<div class="tile"><img src="${esc(c.img)}" alt="$
     console.log(`${d.title}: ${plan.swaps.length} swaps, score ${before.score} -> ${after.score}, ${total} cards -> proposals/${proposalFile}${vpsLoaded.has(d.commander) ? '' : ' (VPS stats missing!)'}`);
 
     const notes = [...(d.caveat ? [d.caveat] : []), ...plan.notes];
+    if (d.key === 'tazri') {
+      const rows = nextList.slice(1).map((l) => cardQ.get(l.name, l.name + ' // %') as { type_line: string; oracle_text: string } | undefined).filter((r): r is { type_line: string; oracle_text: string } => !!r);
+      const creatures = rows.filter((r) => /Creature/.test(r.type_line));
+      const party = creatures.filter((r) => /Cleric|Rogue|Warrior|Wizard|Shapeshifter/.test(r.type_line) || /changeling/i.test(r.oracle_text));
+      const venture = rows.filter((r) => /venture into the dungeon|take the initiative/i.test(r.oracle_text));
+      const partyVenture = creatures.filter((r) => (/Cleric|Rogue|Warrior|Wizard|Shapeshifter/.test(r.type_line) || /changeling/i.test(r.oracle_text)) && /venture into the dungeon|take the initiative/i.test(r.oracle_text));
+      notes.unshift(`Theme rule for this deck: Tazri digs six cards for Cleric/Rogue/Warrior/Wizard cards, so the venture and initiative creatures are chosen to carry party types — that makes her ability find the dungeon engine. This list: ${creatures.length} creatures, ${party.length} with a party type (${Math.round((party.length / creatures.length) * 100)} %), ${venture.length} cards that venture or take the initiative, ${partyVenture.length} of them party creatures Tazri can dig for.`);
+    }
     sections += `<section id="${d.key}"><h2>${esc(d.title)} <span class="count"></span></h2>
 <table class="stats"><tr><th></th><th>now</th><th>after</th></tr><tr><td>Optimizer score</td><td>${before.score}</td><td><b>${after.score}</b></td></tr><tr><td>Lands</td><td>${esc(before.lands)}</td><td>${esc(after.lands)}</td></tr><tr><td>Role quotas</td><td>${esc(before.flags)}</td><td>${esc(after.flags)}</td></tr><tr><td>Mana curve (nonland by MV)</td><td>${esc(curveBefore)}</td><td>${esc(curveAfter)}</td></tr><tr><td>Colour sources</td><td>${esc(before.mana)}</td><td>${esc(after.mana)}</td></tr></table>
 ${notes.map((n) => `<p class="note">${esc(n)}</p>`).join('')}
 <p class="note">ManaBox list after all swaps: <code>decks/paper/proposals/${esc(proposalFile)}</code> (copy on the Desktop). ${cf.size ? 'CF # = rank in the trained recommender for this exact deck.' : 'The CF recommender was offline for this run; only corpus numbers are shown.'}</p>
-<div class="swaps">${plan.swaps.map((sw, i) => `<label class="swap" data-key="${d.key}:${esc(sw.out.name)}>${esc(sw.in.name)}"><input type="checkbox"><span class="n">${i + 1}</span>${tile(sw.out)}<span class="arrow">→</span>${tile(sw.in)}<p class="why">${esc(sw.why)}</p></label>`).join('')}</div></section>`;
+<div class="swaps">${plan.swaps.map((sw, i) => `<label class="swap" data-key="${d.key}:${esc(sw.out.name)}>${esc(sw.in.name)}"><input type="checkbox"><span class="n">${i + 1}</span>${tile(sw.out, sw.qty)}<span class="arrow">→</span>${tile(sw.in, sw.qty)}<p class="why">${esc(sw.why)}</p></label>`).join('')}</div></section>`;
   }
 
   const css = [

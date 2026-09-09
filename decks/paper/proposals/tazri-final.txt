@@ -21,10 +21,10 @@
 1 Cultivate
 1 Durnan of the Yawning Portal
 1 Elvish Spirit Guide
-1 Emeritus of Truce
 1 Exotic Orchard
 1 Farseek
 1 Fellwar Stone
+1 Feywild Caretaker
 1 Firdoch Core
 1 Forest
 1 Glasspool Mimic
@@ -33,7 +33,6 @@
 1 Harper Recruiter
 1 Heroic Intervention
 1 Imoen, Mystic Trickster
-1 Inspiring Vantage
 2 Island
 1 Jetmir's Garden
 1 Kodama's Reach
@@ -50,7 +49,6 @@
 1 Mutable Explorer
 1 Myriad Landscape
 1 Nadaar, Selfless Paladin
-1 Najeela, the Blade-Blossom
 1 Nalia de'Arnise
 1 Nature's Lore
 1 Nimble Trapfinder
@@ -60,8 +58,10 @@
 1 Path of Ancestry
 1 Path to Exile
 4 Plains
+1 Ravenloft Adventurer
 1 Rilsa Rael, Kingpin
 1 Sacred Foundry
+1 Safana, Calimport Cutthroat
 1 Seasoned Dungeoneer
 1 Sefris of the Hidden Ways
 1 Selfless Spirit
@@ -69,15 +69,13 @@
 1 Sol Ring
 1 Solemn Doomguide
 1 Spara's Headquarters
-1 Spelunking
 1 Spirebluff Canal
 1 Spoils of Adventure
 1 Squad Commander
 1 Steam Vents
 1 Stick Together
-1 Stomping Ground
 1 Stonework Packbeast
-1 Swamp
+3 Swamp
 1 Sword of the Animist
 1 Swords to Plowshares
 1 Sygg, Wanderwine Wisdom
@@ -87,10 +85,10 @@
 1 The Destined Warrior
 1 Thwart the Grave
 1 Undermountain Adventurer
-1 Vizier of the Menagerie
 1 Wayfarer's Bauble
 1 White Plume Adventurer
 1 Windswept Heath
 1 Wooded Foothills
 1 You Find a Cursed Idol
+1 Yuan-Ti Malison
 1 Zagras, Thief of Heartbeats
