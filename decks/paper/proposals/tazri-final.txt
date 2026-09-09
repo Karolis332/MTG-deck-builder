@@ -78,8 +78,8 @@
 1 Swords to Plowshares
 1 Sygg, Wanderwine Wisdom
 1 Tajuru Paragon
-1 The Destined Thief
 1 The Destined Warrior
+1 The Destined White Mage
 1 Thwart the Grave
 1 Undermountain Adventurer
 1 Unsettled Mariner
