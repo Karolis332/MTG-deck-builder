@@ -29,10 +29,10 @@ interface Deck { key: string; title: string; file: string; commander: string; fi
 interface Swap { out: CardInfo; in: CardInfo; why: string }
 
 const DECKS: Deck[] = [
-  { key: 'meren', title: 'Meren of Clan Nel Toth', file: 'meren-of-clan-nel-toth.txt', commander: 'Meren of Clan Nel Toth' },
-  { key: 'imotekh', title: 'Imotekh the Stormlord', file: 'imotekh-the-stormlord.txt', commander: 'Imotekh the Stormlord', basicsTopUp: 'Swamp', minLands: 35,
+  { key: 'meren', title: 'Meren of Clan Nel Toth', file: 'meren-of-clan-nel-toth.txt', commander: 'Meren of Clan Nel Toth', fixedSwaps: 'meren-final.txt' },
+  { key: 'imotekh', title: 'Imotekh the Stormlord', file: 'imotekh-the-stormlord.txt', commander: 'Imotekh the Stormlord', fixedSwaps: 'imotekh-final.txt',
     caveat: 'The optimizer score means little for this deck: its synergy taxonomy has no model of Necron artifact recursion and reads the tribal core as 16 win conditions. Judge the swaps by the corpus columns.' },
-  { key: 'tazri', title: 'Tazri, Beacon of Unity', file: 'tazri-beacon-of-unity.txt', commander: 'Tazri, Beacon of Unity', fixedSwaps: 'tazri-party-dungeon.txt' },
+  { key: 'tazri', title: 'Tazri, Beacon of Unity', file: 'tazri-beacon-of-unity.txt', commander: 'Tazri, Beacon of Unity', fixedSwaps: 'tazri-final.txt' },
 ];
 
 const read = (f: string): Line[] => fs.readFileSync(f, 'utf8').trim().split(/\r?\n/).map((l) => { const m = /^(\d+) (.+)$/.exec(l)!; return { quantity: +m[1], name: m[2] }; });
@@ -170,7 +170,7 @@ function fixedPlan(deck: Line[], proposalFile: string, commander: string, cf: Ma
     if (!o) break;
     swaps.push({ out: o, in: a, why: `OUT ${o.name}: in ${pct(o.inc)} of ${commander} decks${liftTxt(o.lift)}, role ${o.role}. IN ${a.name}: in ${pct(a.inc)}${liftTxt(a.lift)}${a.cf ? `, CF model #${a.cf}` : ''}, role ${a.role}.` });
   }
-  return { swaps, notes: [`Curated list (${proposalFile}): the D&D party and dungeon build agreed earlier, ramp kept as requested; the numbers are the corpus data behind each swap.`] };
+  return { swaps, notes: [`Final recommendation (${proposalFile}): corpus plan + Codex gpt-6-astra review + EDHPowerLevel check, reconciled by hand; the numbers are the corpus data behind each swap.`] };
 }
 
 
@@ -340,7 +340,7 @@ const tile = (c: CardInfo) => `<div class="tile"><img src="${esc(c.img)}" alt="$
     plan.swaps.push(...landFix.swaps);
     if (landFix.note) plan.notes.push(`Lands: ${landFix.note}.`);
     const nextList = build();
-    const proposalFile = d.fixedSwaps ? `${d.key}-model.txt` : `${d.key}-model.txt`;
+    const proposalFile = d.fixedSwaps ? `${d.key}-final.txt` : `${d.key}-model.txt`;
     fs.writeFileSync(path.join(ROOT, 'proposals', proposalFile), nextList.map((c) => `${c.quantity} ${c.name}`).join(NL) + NL);
     const before = score(deck, d.commander, owned);
     const after = score(nextList, d.commander, owned);
@@ -375,7 +375,7 @@ ${notes.map((n) => `<p class="note">${esc(n)}</p>`).join('')}
   ].join(NL);
   const legend = 'Inclusion % = share of that commander\'s decks in the 4M-deck corpus running the card (0% = practically never). Lift = log-ratio against decks of the same colours; positive means commander-specific. CF # = rank from the trained recommender for this exact list. Tick a swap once the cards are sleeved. A single copy is never proposed to two decks: a contested card goes to the curated list first, then to the deck whose corpus rates it highest.';
   const html = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Deck edit plans — ${new Date().toISOString().slice(0, 10)}</title><style>${css}</style></head><body>`
-    + `<header><h1>Deck edit plans from the model</h1><nav>${DECKS.map((d) => `<a href="#${d.key}">${esc(d.title.split(',')[0])}</a>`).join('')}</nav><span id="done"></span><span style="margin-left:auto;font-size:12px;color:#b5a27b;max-width:46%">${esc(legend)}</span></header>`
+    + `<header><h1>Deck edit plans — final recommendation (2026-09-09)</h1><nav>${DECKS.map((d) => `<a href="#${d.key}">${esc(d.title.split(',')[0])}</a>`).join('')}</nav><span id="done"></span><span style="margin-left:auto;font-size:12px;color:#b5a27b;max-width:46%">${esc(legend)}</span></header>`
     + sections + `<script>${js}</script></body></html>`;
   for (const f of OUT_HTML) fs.writeFileSync(f, html);
   console.log('written', OUT_HTML.join(' , '));
