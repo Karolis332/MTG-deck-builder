@@ -314,6 +314,38 @@ function score(list: Line[], commander: string, owned: string[]) {
 }
 
 const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
+
+/** Final list grouped by what the card does in this deck, new cards marked. */
+function groupedList(nextList: Line[], deck: Line[], commander: string, cf: Map<string, number>, key: string): string {
+  const cur = new Set(deck.map((c) => face(c.name)));
+  const rows = nextList.slice(1).map((l) => ({ l, i: info(l.name, commander, cf), row: cardQ.get(l.name, l.name + ' // %') as { type_line: string; oracle_text: string } | undefined })).filter((x): x is { l: Line; i: CardInfo; row: { type_line: string; oracle_text: string } } => !!x.i && !!x.row);
+  const groupOf = (x: { i: CardInfo; row: { type_line: string; oracle_text: string } }) => {
+    const front = x.row.type_line.split(' // ')[0]; const o = x.row.oracle_text || '';
+    const party = /Cleric|Rogue|Warrior|Wizard|Shapeshifter/.test(front) || /changeling/i.test(o);
+    const venture = /venture into the dungeon|take the initiative/i.test(o);
+    if (x.i.role === 'land' || (/Land/.test(x.row.type_line) && !/Creature|Instant|Sorcery/.test(front))) return '9 Lands';
+    if (key === 'tazri') {
+      if (venture && party) return '1 Party creatures that venture / take the initiative';
+      if (venture) return '2 Venture without a party type';
+      if (/Creature/.test(front) && party) return '3 Other party creatures';
+    }
+    if (key === 'imotekh' && /Necron/.test(front)) return '1 Necrons';
+    if (/Creature/.test(front)) return '4 Other creatures';
+    if (x.i.role === 'ramp') return '5 Ramp';
+    if (['removal', 'board_wipe', 'protection'].includes(x.i.role)) return '6 Interaction';
+    if (['draw', 'tutor'].includes(x.i.role)) return '7 Draw and tutors';
+    return '8 Other spells';
+  };
+  const groups = new Map<string, typeof rows>();
+  for (const x of rows) { const g = groupOf(x); if (!groups.has(g)) groups.set(g, []); groups.get(g)!.push(x); }
+  const cols = [...groups.keys()].sort().map((g) => {
+    const items = groups.get(g)!.sort((a, b) => a.i.cmc - b.i.cmc || a.l.name.localeCompare(b.l.name));
+    const n = items.reduce((t, x) => t + x.l.quantity, 0);
+    return `<div class="grp"><h4>${esc(g.slice(2))} <span class="count">${n}</span></h4><ul>${items.map((x) => `<li${cur.has(face(x.l.name)) ? '' : ' class="new"'}>${x.l.quantity > 1 ? x.l.quantity + '× ' : ''}${esc(face(x.l.name))}<small>${x.i.role === 'land' ? '' : x.i.cmc + ' MV · '}${pct(x.i.inc)}${esc(liftTxt(x.i.lift))}</small></li>`).join('')}</ul></div>`;
+  });
+  return `<details class="final"><summary>Final list by group (new cards highlighted)</summary><div class="grps">${cols.join('')}</div></details>`;
+}
+
 const tile = (c: CardInfo, qty = 1) => `<div class="tile"><img src="${esc(c.img)}" alt="${esc(c.name)}"><b>${qty > 1 ? `${qty}× ` : ''}${esc(face(c.name))}</b><small>${esc(c.role)} · ${c.cmc} MV · ${pct(c.inc)}${esc(liftTxt(c.lift))}${c.cf ? ` · CF #${c.cf}` : ''}</small></div>`;
 
 (async () => {
@@ -399,6 +431,7 @@ const tile = (c: CardInfo, qty = 1) => `<div class="tile"><img src="${esc(c.img)
 <table class="stats"><tr><th></th><th>now</th><th>after</th></tr><tr><td>Optimizer score</td><td>${before.score}</td><td><b>${after.score}</b></td></tr><tr><td>Lands</td><td>${esc(before.lands)}</td><td>${esc(after.lands)}</td></tr><tr><td>Role quotas</td><td>${esc(before.flags)}</td><td>${esc(after.flags)}</td></tr><tr><td>Mana curve (nonland by MV)</td><td>${esc(curveBefore)}</td><td>${esc(curveAfter)}</td></tr><tr><td>Colour sources</td><td>${esc(before.mana)}</td><td>${esc(after.mana)}</td></tr></table>
 ${notes.map((n) => `<p class="note">${esc(n)}</p>`).join('')}
 <p class="note">ManaBox list after all swaps: <code>decks/paper/proposals/${esc(proposalFile)}</code> (copy on the Desktop). ${cf.size ? 'CF # = rank in the trained recommender for this exact deck.' : 'The CF recommender was offline for this run; only corpus numbers are shown.'}</p>
+${groupedList(nextList, deck, d.commander, cf, d.key)}
 <div class="swaps">${plan.swaps.map((sw, i) => `<label class="swap" data-key="${d.key}:${esc(sw.out.name)}>${esc(sw.in.name)}"><input type="checkbox"><span class="n">${i + 1}</span>${tile(sw.out, sw.qty)}<span class="arrow">→</span>${tile(sw.in, sw.qty)}<p class="why">${esc(sw.why)}</p></label>`).join('')}</div></section>`;
   }
 
@@ -411,6 +444,7 @@ ${notes.map((n) => `<p class="note">${esc(n)}</p>`).join('')}
     '.swaps{display:grid;gap:12px;padding:6px 18px}.swap{display:grid;grid-template-columns:24px 28px 150px 30px 150px minmax(0,1fr);gap:12px;align-items:center;background:#221b13;border:1px solid #3a2d17;border-radius:8px;padding:10px;cursor:pointer}',
     '.swap:has(input:checked){opacity:.4}.swap input{width:18px;height:18px;accent-color:#d4af37}.n{color:#b5a27b;font-family:monospace}.arrow{color:#d4af37;font-size:22px;text-align:center}',
     '.tile{width:150px}.tile img{width:150px;height:auto;aspect-ratio:488/680;border-radius:6px;display:block;background:#0e0b08}.tile b{display:block;font-size:13px;margin-top:4px}.tile small{color:#b5a27b;font-size:11px;display:block}.why{margin:0;font-size:13px}',
+    '.final{margin:8px 18px 14px;border:1px solid #3a2d17;border-radius:8px;background:#1a140f}.final summary{cursor:pointer;padding:8px 12px;color:#d4af37;font-size:14px}.grps{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px 18px;padding:4px 14px 12px}.grp h4{margin:6px 0 4px;font-size:13px;color:#d4af37;border-bottom:1px solid #3a2d17}.grp ul{list-style:none;margin:0;padding:0}.grp li{font-size:13px;line-height:1.35;padding:1px 0}.grp li.new{color:#f0d78c}.grp li.new::before{content:"NEW ";font:10px monospace;color:#d4af37}.grp li small{color:#b5a27b;font-size:11px;margin-left:6px}',
     '.count{font-weight:normal;font-size:13px;color:#b5a27b}@media(max-width:900px){.swap{grid-template-columns:24px 28px 150px 30px 150px}.why{grid-column:1/-1}}@media print{header,.swap input{display:none}.swap:has(input:checked){display:none}}',
   ].join(NL);
   const js = [
