@@ -42,7 +42,6 @@
 1 Mardu Siegebreaker
 1 Masked Vandal
 1 Midnight Pathlighter
-1 Minthara, Merciless Soul
 1 Mirror Entity
 1 Multiclass Baldric
 1 Mutable Explorer
@@ -78,6 +77,7 @@
 2 Swamp
 1 Sword of the Animist
 1 Swords to Plowshares
+1 Sygg, Wanderwine Wisdom
 1 Tajuru Paragon
 1 The Destined Thief
 1 The Destined Warrior
