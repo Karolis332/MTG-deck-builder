@@ -18,7 +18,6 @@
 1 Astarion, the Decadent
 1 At Knifepoint
 1 Aven Interrupter
-1 Awakening Zone
 1 Azula, Ruthless Firebender
 1 Back for More
 1 Baeloth Barrityl, Entertainer
@@ -302,7 +301,6 @@
 1 Paradise Plume
 1 Patchwork Automaton
 1 Path to Exile
-1 Pawn of Ulamog
 1 Peer into the Abyss
 1 Pest Control
 1 Pest Rescuer

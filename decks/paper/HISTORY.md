@@ -123,3 +123,7 @@ Appended by `npx tsx scripts/paper-sync.ts`. Full diffs: `git log -p decks/paper
 
 ## 2026-09-09
 - **Collection** 834 owned, 527 open
+
+## 2026-09-09
+- **Collection** 832 owned, 525 open
+- **Collection** −Awakening Zone, −Pawn of Ulamog (operator: missing or used elsewhere; both came from `_my collection.txt`) — Meren powerhouse now runs Mazirek, Kraul Death Priest and Bloodghast in their slots
