@@ -139,3 +139,7 @@ Appended by `npx tsx scripts/paper-sync.ts`. Full diffs: `git log -p decks/paper
 ## 2026-09-09
 - **Collection** 830 owned, 523 open
 - **Collection** +Autumn's Veil, +Ramunap Excavator, +Armaggon, Future Shark (operator). Meren powerhouse: Basking Broodscale + Long Feng (operator-found two-card infinite; Mazirek is the redundant half) over Culling Ritual and Deadly Brew; Autumn's Veil over Corrupted Conviction; Ramunap Excavator over Rampant Growth. Beifong's Bounty Hunters and Armaggon benched
+
+## 2026-09-09
+- **Collection** 831 owned, 524 open
+- **Collection** +Haywire Mite (found); Meren powerhouse: Haywire Mite back in over Witherbloom Charm

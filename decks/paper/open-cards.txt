@@ -178,6 +178,7 @@
 1 Gyome, Master Chef
 2 Hardbristle Bandit
 1 Haunting Voyage
+1 Haywire Mite
 1 Healing Technique
 1 Heartless Pillage
 1 Hellspur Posse Boss

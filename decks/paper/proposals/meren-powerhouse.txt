@@ -29,6 +29,7 @@
 1 Grim Haruspex
 1 Grim Servant
 1 Haunted Mire
+1 Haywire Mite
 1 High Market
 1 Honest Rutstein
 1 Infernal Grasp
@@ -78,7 +79,6 @@
 1 Viscera Seer
 1 Whisper, Blood Liturgist
 1 Wight of the Reliquary
-1 Witherbloom Charm
 1 Woe Strider
 1 Woodland Cemetery
 1 Yahenni, Undying Partisan

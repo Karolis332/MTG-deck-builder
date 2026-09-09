@@ -251,6 +251,7 @@
 1 Harper Recruiter
 1 Haunted Mire
 1 Haunting Voyage
+1 Haywire Mite
 1 Healing Technique
 1 Heartless Pillage
 1 Hellspur Posse Boss
