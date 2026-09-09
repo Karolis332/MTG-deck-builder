@@ -152,7 +152,7 @@
 1 Double Down
 1 Drag to the Underworld
 1 Dread Presence
-2 Dread Return
+1 Dread Return
 1 Dread Summons
 1 Dreadhorde Invasion
 1 Druidic Satchel
@@ -249,7 +249,6 @@
 1 Harper Recruiter
 1 Haunted Mire
 1 Haunting Voyage
-1 Haywire Mite
 1 Healing Technique
 1 Heartless Pillage
 1 Hellspur Posse Boss
@@ -320,7 +319,7 @@
 1 Lilah, Undefeated Slickshot
 1 Liliana, Dreadhorde General
 1 Linvala, Shield of Sea Gate
-3 Lively Dirge
+1 Lively Dirge
 1 Llanowar Elves
 1 Llanowar Wastes
 1 Lluwen, Imperfect Naturalist
@@ -560,7 +559,6 @@
 1 Spinewoods Armadillo
 1 Spirebluff Canal
 1 Spoils of Adventure
-1 Springbloom Druid
 1 Springleaf Parade
 1 Sproutback Trudge
 1 Squad Commander
@@ -682,7 +680,6 @@
 1 Vraan, Executioner Thane
 1 Vraska Joins Up
 1 Vraska, the Silencer
-1 Wake the Dead
 1 Wardens of the Cycle
 2 Wayfarer's Bauble
 1 Weathered Wayfarer

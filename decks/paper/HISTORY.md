@@ -131,3 +131,7 @@ Appended by `npx tsx scripts/paper-sync.ts`. Full diffs: `git log -p decks/paper
 ## 2026-09-09
 - **Collection** 833 owned, 526 open
 - **Collection** +Shadow, Mysterious Assassin (operator); Meren powerhouse: Jadar, Ghoulcaller of Nephalia over Grist (steady decayed Zombie each end step for Priest/Braids/outlets); Merchant of Venom and Shadow benched
+
+## 2026-09-09
+- **Collection** 827 owned, 520 open
+- **Collection** corrections while sleeving Meren: Dread Return 2→1 and Lively Dirge 3→1 (the remaining copies are in Imotekh), −Wake the Dead, −Haywire Mite, −Springbloom Druid (not found; re-add when they turn up). Meren powerhouse: Whisper, Blood Liturgist for Wake the Dead; Witherbloom Charm for Haywire Mite; Diabolic Tutor for Lively Dirge; Rampant Growth for Springbloom Druid; Deadly Brew for Dread Return

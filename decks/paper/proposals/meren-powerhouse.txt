@@ -15,8 +15,9 @@
 1 Command Tower
 1 Corrupted Conviction
 1 Culling Ritual
+1 Deadly Brew
 1 Deadly Dispute
-1 Dread Return
+1 Diabolic Tutor
 1 Elvish Mystic
 1 Eternal Witness
 1 Exotic Orchard
@@ -29,7 +30,6 @@
 1 Grim Haruspex
 1 Grim Servant
 1 Haunted Mire
-1 Haywire Mite
 1 High Market
 1 Honest Rutstein
 1 Infernal Grasp
@@ -39,7 +39,6 @@
 1 Junji, the Midnight Sky
 1 Lightning Greaves
 1 Liliana, Dreadhorde General
-1 Lively Dirge
 1 Llanowar Elves
 1 Llanowar Wastes
 1 Massacre Wurm
@@ -54,6 +53,7 @@
 1 Path of Ancestry
 1 Plaguecrafter
 1 Priest of Forgotten Gods
+1 Rampant Growth
 1 Ravenous Chupacabra
 1 Reanimate
 1 Rune-Scarred Demon
@@ -61,7 +61,6 @@
 1 Saw in Half
 1 Sol Ring
 1 Solemn Simulacrum
-1 Springbloom Druid
 11 Swamp
 1 Sylvan Library
 1 Syr Konrad, the Grim
@@ -77,8 +76,9 @@
 1 Village Rites
 1 Viridescent Bog
 1 Viscera Seer
-1 Wake the Dead
+1 Whisper, Blood Liturgist
 1 Wight of the Reliquary
+1 Witherbloom Charm
 1 Woe Strider
 1 Woodland Cemetery
 1 Yahenni, Undying Partisan

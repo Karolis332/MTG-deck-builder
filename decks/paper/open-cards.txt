@@ -103,7 +103,6 @@
 1 Double Down
 1 Drag to the Underworld
 1 Dread Presence
-1 Dread Return
 1 Dread Summons
 1 Dreadhorde Invasion
 1 Druidic Satchel
@@ -177,7 +176,6 @@
 1 Gyome, Master Chef
 2 Hardbristle Bandit
 1 Haunting Voyage
-1 Haywire Mite
 1 Healing Technique
 1 Heartless Pillage
 1 Hellspur Posse Boss
@@ -227,7 +225,6 @@
 1 Leyline Prowler
 1 Lightning Greaves
 1 Lilah, Undefeated Slickshot
-2 Lively Dirge
 1 Lluwen, Imperfect Naturalist
 1 Lonely Arroyo
 1 Long Feng, Grand Secretariat
@@ -388,7 +385,6 @@
 1 Slimefoot, the Stowaway
 1 Soured Springs
 1 Spinewoods Armadillo
-1 Springbloom Druid
 1 Springleaf Parade
 1 Sproutback Trudge
 1 Steel Overseer
@@ -466,7 +462,6 @@
 1 Vito, Thorn of the Dusk Rose
 1 Vraska Joins Up
 1 Vraska, the Silencer
-1 Wake the Dead
 1 Wardens of the Cycle
 1 Wayfarer's Bauble
 1 Weathered Wayfarer
