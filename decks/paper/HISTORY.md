@@ -135,3 +135,7 @@ Appended by `npx tsx scripts/paper-sync.ts`. Full diffs: `git log -p decks/paper
 ## 2026-09-09
 - **Collection** 827 owned, 520 open
 - **Collection** corrections while sleeving Meren: Dread Return 2→1 and Lively Dirge 3→1 (the remaining copies are in Imotekh), −Wake the Dead, −Haywire Mite, −Springbloom Druid (not found; re-add when they turn up). Meren powerhouse: Whisper, Blood Liturgist for Wake the Dead; Witherbloom Charm for Haywire Mite; Diabolic Tutor for Lively Dirge; Rampant Growth for Springbloom Druid; Deadly Brew for Dread Return
+
+## 2026-09-09
+- **Collection** 830 owned, 523 open
+- **Collection** +Autumn's Veil, +Ramunap Excavator, +Armaggon, Future Shark (operator). Meren powerhouse: Basking Broodscale + Long Feng (operator-found two-card infinite; Mazirek is the redundant half) over Culling Ritual and Deadly Brew; Autumn's Veil over Corrupted Conviction; Ramunap Excavator over Rampant Growth. Beifong's Bounty Hunters and Armaggon benched

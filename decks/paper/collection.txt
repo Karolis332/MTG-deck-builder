@@ -19,12 +19,14 @@
 1 Archfiend of Despair
 1 Archpriest of Iona
 1 Arid Archway
+1 Armaggon, Future Shark
 1 Arnyn, Deathbloom Botanist
 1 Ash Barrens
 1 Ashnod's Altar
 1 Assassin's Trophy
 1 Astarion, the Decadent
 1 At Knifepoint
+1 Autumn's Veil
 1 Aven Interrupter
 1 Azula, Ruthless Firebender
 1 Baba Lysaga, Night Witch
@@ -473,6 +475,7 @@
 1 Rakish Crew
 1 Ramos, Dragon Engine
 1 Rampant Growth
+1 Ramunap Excavator
 1 Rankle, Master of Pranks
 1 Rattleback Apothecary
 1 Raven of Fell Omens
