@@ -1,0 +1,107 @@
+Dina, Soul Steeper — identity BG — 105 candidates (collection 730 names, reserved 226)
+inc%  lift  mv  rank   $     mk  name | type | oracle
+ 56.6 +1.6   4   3409   0.2      Mortality Spear | Inst | This spell costs {2} less to cast if you gained life this turn. Destroy target nonland permanent.
+ 54.6 +1.0   0    779   0.1      Jungle Hollow | Land | This land enters tapped. When this land enters, you gain 1 life. {T}: Add {B} or {G}.
+ 51.0 +0.9   1   1151   0.5      Pest Infestation | Sorc | Destroy up to X target artifacts and/or enchantments. Create twice X 1/1 black and green Pest creature tokens 
+ 48.2 +0.9   7   1492   1.4      Beledros Witherbloom | L.Cr — Elder Dragon | Flying At the beginning of each upkeep, create a 1/1 black and green Pest creature token with "When this token
+ 48.0 +0.2   3     20   0.4      2x Cultivate | Sorc | Search your library for up to two basic land cards, reveal those cards, put one onto the battlefield tapped an
+ 42.3 +2.4   3    494  12.1      Vito, Thorn of the Dusk Rose | L.Cr — Vampire Cleric | Whenever you gain life, target opponent loses that much life. {3}{B}{B}: Creatures you control gain lifelink u
+ 40.9 +2.9   3   1350   0.3      Pristine Talisman | Art | {T}: Add {C}. You gain 1 life.
+ 39.9 +2.3   5    504   6.7      Sanguine Bond | Ench | Whenever you gain life, target opponent loses that much life.
+ 38.6 +1.9   3   4139   0.3      Veinwitch Coven | Cr — Vampire Warlock | Menace Whenever you gain life, you may pay {B}. If you do, return target creature card from your graveyard to 
+ 37.5 +1.3   3   3871   0.4      Blight Mound | Ench | Attacking Pests you control get +1/+0 and have menace. Whenever a nontoken creature you control dies, create a
+ 37.3 +0.4   4    577   0.4      Culling Ritual | Sorc | Destroy each nonland permanent with mana value 2 or less. Add {B} or {G} for each permanent destroyed this way
+ 35.8 +0.1   0    332   0.3      Golgari Rot Farm | Land | This land enters tapped. When this land enters, return a land you control to its owner's hand. {T}: Add {B}{G}
+ 35.8 +1.6   5   2613   0.4      Witch of the Moors | Cr — Human Warlock | Deathtouch At the beginning of your end step, if you gained life this turn, each opponent sacrifices a creatur
+ 33.9 +0.2   2     26   0.4      Rampant Growth | Sorc | Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle.
+ 33.0 +2.7   0   1579   1.5      Radiant Fountain | Land | When this land enters, you gain 2 life. {T}: Add {C}.
+ 28.2 +2.7   0   7404   0.6      Sapseep Forest | Land — Forest | ({T}: Add {G}.) This land enters tapped. {G}, {T}: You gain 1 life. Activate only if you control two or more g
+ 27.7 +2.9   4   1127   4.3      Well of Lost Dreams | Art | Whenever you gain life, you may pay {X}, where X is less than or equal to the amount of life you gained. If yo
+ 26.2 +1.1   2   4805   0.3      Deadly Brew | Sorc | Each player sacrifices a creature or planeswalker of their choice. If you sacrificed a permanent this way, you
+ 25.9 +1.6   2    232   3.9      Sign in Blood | Sorc | Target player draws two cards and loses 2 life.
+ 25.7 +1.9   3   8977   0.3      Trudge Garden | Ench | Whenever you gain life, you may pay {2}. If you do, create a 4/4 green Fungus Beast creature token with trampl
+ 24.5 +0.6   2   1157   0.3      Plumb the Forbidden | Inst | As an additional cost to cast this spell, you may sacrifice one or more creatures. When you do, copy this spel
+ 24.5 +3.7   5   6920   0.3      Epicure of Blood | Cr — Vampire | Whenever you gain life, each opponent loses 1 life.
+ 22.5 +0.2   3     37   1.6      Kodama's Reach | Sorc — Arcane | Search your library for up to two basic land cards, reveal those cards, put one onto the battlefield tapped an
+ 21.0 +0.8   3   6672   0.7      Pest Rescuer | Cr — Dryad Druid | At the beginning of each upkeep, if you don't control a Pest creature token, create a 1/1 black and green Pest
+ 20.6 +1.6   0    713   0.2      Riveteers Overlook | Land | When this land enters, sacrifice it. When you do, search your library for a basic Swamp, Mountain, or Forest c
+ 19.8 +0.5   2   5178   0.3      Witherbloom Charm | Inst | Choose one — • You may sacrifice a permanent. If you do, draw two cards. • You gain 5 life. • Destroy target n
+ 19.7 +0.5   2    182   5.4      Night's Whisper | Sorc | You draw two cards and lose 2 life.
+ 17.8 +1.0   0   6492   0.2      Witherbloom Campus | Land | This land enters tapped. {T}: Add {B} or {G}. {4}, {T}: Scry 1. (Look at the top card of your library. You may
+ 17.2 +1.0   5   4587   0.4      Blossoming Bogbeast | Cr — Beast | Whenever this creature attacks, you gain 2 life. Then creatures you control gain trample and get +X/+X until e
+ 17.1 +0.6   4   7643   0.3      Eccentric Pestfinder // Turn Stones | Cr — Troll Druid | Trample At the beginning of each end step, if you gained life this turn, this creature becomes prepared. (Whil
+ 17.0 +0.9   3   4683   1.0      Moseo, Vein's New Dean | L.Cr — Bird Skeleton Warlock | Flying When Moseo enters, create a 1/1 black and green Pest creature token with "Whenever this token attacks, 
+ 16.2 +0.5   2   6786   0.3      Teacher's Pest | Cr — Skeleton Pest | Menace (This creature can't be blocked except by two or more creatures.) Whenever this creature attacks, you g
+ 15.7 -0.2   2     23   0.4      Farseek | Sorc | Search your library for a Plains, Island, Swamp, or Mountain card, put it onto the battlefield tapped, then sh
+ 15.7 +3.0   4   2001   0.8      Sangromancer | Cr — Vampire Shaman | Flying Whenever a creature an opponent controls dies, you may gain 3 life. Whenever an opponent discards a car
+ 15.2 +3.1   4  13917   0.3      Essence Pulse | Sorc | You gain 2 life. Each creature gets -X/-X until end of turn, where X is the amount of life you gained this tur
+ 15.0 -0.0   0   1209   0.3      Haunted Mire | Land — Swamp Forest | ({T}: Add {B} or {G}.) This land enters tapped.
+ 15.0 +1.0   4   7542   4.2      Professor Dellian Fel | L.Planeswalker — Dellian | +2: You gain 3 life. 0: You draw a card and lose 1 life. −3: Destroy target creature. −6: You get an emblem wi
+ 14.9 +3.3   3   6688   0.4      Bloodthirsty Aerialist | Cr — Vampire Rogue | Flying Whenever you gain life, put a +1/+1 counter on this creature.
+ 14.0 +1.6   3   5128   0.4      Leyline Prowler | Cr — Nightmare Beast | Deathtouch, lifelink {T}: Add one mana of any color.
+ 13.2 +1.2   3   6149   1.8      Dina, Essence Brewer | L.Cr — Dryad Druid | Whenever you sacrifice a creature, draw a card. This ability triggers only once each turn. {2}, {T}, Sacrifice
+ 13.1 +1.0   2   8927   0.2      Witherbloom Command | Sorc | Choose two — • Target player mills three cards, then you return a land card from your graveyard to your hand. 
+ 12.8 +0.7   5   7238   0.8      Defiling Daemogoth | Cr — Demon | Menace Whenever a creature you control deals combat damage to a player, you gain 1 life. At the beginning of y
+ 12.3 +3.4   4  10968   0.3      Paradise Plume | Art | As this artifact enters, choose a color. Whenever a player casts a spell of the chosen color, you may gain 1 l
+ 12.0 +2.2   6   3666   1.0      Deadly Tempest | Sorc | Destroy all creatures. Each player loses life equal to the number of creatures they controlled that were destr
+ 11.9 +3.1   3  14739   0.2      Honor Troll | Cr — Troll Druid | Vigilance If you would gain life, you gain that much life plus 1 instead. This creature gets +2/+1 as long as 
+ 11.4 +2.4   5    978  10.5      Alhammarret's Archive | L.Art | If you would gain life, you gain twice that much life instead. If you would draw a card except the first one y
+ 11.1 +1.7   3   1742   0.2      Vampire Nighthawk | Cr — Vampire Shaman | Flying Deathtouch (Any amount of damage this deals to a creature is enough to destroy it.) Lifelink (Damage de
+ 10.9 +3.5   2  10617   0.4      Sun Droplet | Art | Whenever you're dealt damage, put that many charge counters on this artifact. At the beginning of each upkeep,
+ 10.6 +1.0   0   2840   0.4      Gingerbread Cabin | Land — Forest | ({T}: Add {G}.) This land enters tapped unless you control three or more other Forests. When this land enters 
+ 10.4 +0.2   5   7309   0.3      Ribtruss Roaster | Cr — Troll Druid | Devour 1 (As this creature enters, you may sacrifice any number of creatures. This creature enters with that m
+ 10.1 +2.9   2   6482   1.1      Demon's Horn | Art | Whenever a player casts a black spell, you may gain 1 life.
+ 10.1 +0.3   3   8924   0.3      Feral Appetite | Ench | Attacking Pests you control get +1/+0 and have deathtouch. {1}{G}: Exile target card from a graveyard. If a cr
+  9.4 +1.7   2   1787   0.3      Vengeful Bloodwitch | Cr — Vampire Warlock | Whenever this creature or another creature you control dies, target opponent loses 1 life and you gain 1 life.
+  9.4 +2.2   4   2157   0.4      Greed | Ench | {B}, Pay 2 life: Draw a card.
+  9.4 +2.6   3  10628   0.3      Pulse of Murasa | Inst | Return target creature or land card from a graveyard to its owner's hand. You gain 6 life.
+  9.2 +0.0   3   6984   0.6      Immoral Bargain | Sorc | As an additional cost to cast this spell, sacrifice X creatures. Destroy X target nonland permanents.
+  9.2 -0.7   0     19   0.3      Rogue's Passage | Land | {T}: Add {C}. {4}, {T}: Target creature can't be blocked this turn.
+  8.6 +0.7   4    481   2.4      Diabolic Tutor | Sorc | Search your library for a card, put that card into your hand, then shuffle.
+  8.5 -0.3   5   1297   1.0      Tendershoot Dryad | Cr — Dryad | Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.) At the b
+  8.2 +0.7   0    906   0.4      Blighted Woodland | Land | {T}: Add {C}. {3}{G}, {T}, Sacrifice this land: Search your library for up to two basic land cards, put them o
+  8.2 +0.1   0   7631   0.2      Titan's Grave | Land | This land enters tapped. {T}: Add {B} or {G}. {2}{B}{G}, {T}: Surveil 1. (Look at the top card of your library
+  8.1 +2.7   3  10806   0.3      Silversmote Ghoul | Cr — Zombie Vampire | At the beginning of your end step, if you gained 3 or more life this turn, return this card from your graveyar
+  8.1 -0.1   4   5120   0.3      Creakwood Liege | Cr — Horror | Other black creatures you control get +1/+1. Other green creatures you control get +1/+1. At the beginning of 
+  8.1 -0.4   0   2257   0.3      Festering Thicket | Land — Swamp Forest | ({T}: Add {B} or {G}.) This land enters tapped. Cycling {2} ({2}, Discard this card: Draw a card.)
+  8.0 +2.7   7   5893   0.4      Defiant Bloodlord | Cr — Vampire | Flying Whenever you gain life, target opponent loses that much life.
+  7.6 -0.4   6   1738   0.3      Casualties of War | Sorc | Choose one or more — • Destroy target artifact. • Destroy target creature. • Destroy target enchantment. • Des
+  7.6 +0.8   1   3103   0.7      Autumn's Veil | Inst | Spells you control can't be countered by blue or black spells this turn, and creatures you control can't be th
+  7.2 +1.1   0   1067  14.5      Witch's Clinic | Land | {T}: Add {C}. {2}, {T}: Target commander gains lifelink until end of turn.
+  7.0 -1.0   4    228   1.4      Mirkwood Bats | Cr — Bat | Flying Whenever you create or sacrifice a token, each opponent loses 1 life.
+  6.9 +2.3   6   9955   1.4      Ezzaroot Channeler | Cr — Treefolk Druid | Reach Creature spells you cast cost {X} less to cast, where X is the amount of life you gained this turn. {T}:
+  6.8 +0.4   1    596   0.4      3x Corrupted Conviction | Inst | As an additional cost to cast this spell, sacrifice a creature. Draw two cards.
+  6.7 -0.2   2   5133   4.9      Stensian Sanguinist // Exsanguinate | Cr — Vampire Cleric | Whenever you attack, target creature gains deathtouch until end of turn. Whenever that creature deals combat d
+  6.6 +0.4   3    752   3.2      Elvish Spirit Guide | Cr — Elf Spirit | Exile this card from your hand: Add {G}.
+  6.6 +2.4   3   6782   0.3      Gift of Paradise | Ench — Aura | Enchant land When this Aura enters, you gain 3 life. Enchanted land has "{T}: Add two mana of any one color."
+  6.5 +1.1   3   8238   0.3      Arnyn, Deathbloom Botanist | L.Cr — Vampire Druid | Deathtouch Whenever a creature you control with power or toughness 1 or less dies, target opponent loses 2 lif
+  6.2 +0.2   2   2416   0.8      Nether Traitor | Cr — Spirit | Haste Shadow (This creature can block or be blocked by only creatures with shadow.) Whenever another creature 
+  6.1 -0.8   1    780   0.3      Gilded Goose | Cr — Bird | Flying When this creature enters, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this token:
+  6.1 -0.2   3   7698   2.1      Gorma, the Gullet | L.Cr — Pest Frog | Lifelink Whenever another creature you control dies, put a +1/+1 counter on Gorma. Nontoken creatures you cont
+  6.1 +2.5   5  10750   0.7      Tivash, Gloom Summoner | L.Cr — Human Warlock | Lifelink At the beginning of your end step, if you gained life this turn, you may pay X life, where X is the a
+  6.0 +2.2   4  11356   0.4      Healing Technique | Sorc | Demonstrate (When you cast this spell, you may copy it. If you do, choose an opponent to also copy it. Players
+  6.0 +0.2   0     81   0.3      Temple of the False God | Land | {T}: Add {C}{C}. Activate only if you control five or more lands.
+  6.0 +0.2   3     51   0.4      Commander's Sphere | Art | {T}: Add one mana of any color in your commander's color identity. Sacrifice this artifact: Draw a card.
+  5.9 +1.0   3   4978   0.2      Gaze of Granite | Sorc | Destroy each nonland permanent with mana value X or less.
+  5.7 +0.3   0   4261   0.2      Study Hall | Land | {T}: Add {C}. {1}, {T}: Add one mana of any color. When you spend this mana to cast your commander, scry X, wh
+  5.7 +2.0   9  15531   0.3      Sproutback Trudge | Cr — Fungus Beast | This spell costs {X} less to cast, where X is the amount of life you gained this turn. Trample At the beginnin
+  5.7 +0.5   2    233   0.2      Explore | Sorc | You may play an additional land this turn. Draw a card.
+  5.6 +2.1   0   1267   0.3      Maestros Theater | Land | When this land enters, sacrifice it. When you do, search your library for a basic Island, Swamp, or Mountain c
+  5.6 +0.3   2   3155   1.1      Damnable Pact | Sorc | Target player draws X cards and loses X life.
+  5.6 +2.5   2   4204   0.5      Vraan, Executioner Thane | L.Cr — Phyrexian Vampire | Whenever one or more other creatures you control die, each opponent loses 2 life and you gain 2 life. This abi
+  5.5 +2.8   1  13077   0.3      Suffer the Past | Inst | Exile X target cards from target player's graveyard. For each card exiled this way, that player loses 1 life a
+  5.2 +1.7   4   5854   0.3      Ancient Craving | Sorc | You draw three cards and you lose 3 life.
+  5.2 +1.0   2   7710   0.4      Mosswood Dreadknight // Dread Whispers | Cr — Human Knight | Trample When this creature dies, you may cast it from your graveyard as an Adventure until the end of your nex
+  5.1 +0.0   4   3675   0.2      Smothering Abomination | Cr — Eldrazi | Devoid (This card has no color.) Flying At the beginning of your upkeep, sacrifice a creature. Whenever you sa
+  5.1 +0.5   6    990   0.4      Noxious Gearhulk | Art Cr — Construct | Menace When this creature enters, you may destroy another target creature. If a creature is destroyed this way
+  5.0 +2.4   5   1987   9.1      Venser's Journal | Art — Book | You have no maximum hand size. At the beginning of your upkeep, you gain 1 life for each card in your hand.
+  4.9 -0.2   3   1784   0.4      Honest Rutstein | L.Cr — Human Warlock | When Honest Rutstein enters, return target creature card from your graveyard to your hand. Creature spells you
+  4.9 +1.6   1   1424   1.0      Elixir of Immortality | Art | {2}, {T}: You gain 5 life. Shuffle this artifact and your graveyard into their owner's library.
+  4.8 -0.6   5   2105   0.4      Mycoloth | Cr — Fungus | Devour 2 (As this creature enters, you may sacrifice any number of creatures. It enters with twice that many +
+  4.7 -0.1   4   4779   1.4      Gyome, Master Chef | L.Cr — Troll Warlock | Trample At the beginning of your end step, create a number of Food tokens equal to the number of nontoken crea
+  4.5 +1.9   3  10493    -       Willowdusk, Essence Seer | L.Cr — Dryad Druid | {1}, {T}: Choose another target creature. Put a number of +1/+1 counters on it equal to the amount of life you
+  4.3 +0.3   2   1365   0.4      Regrowth | Sorc | Return target card from your graveyard to your hand.
+  4.3 +0.4   3    840   0.3      Murder | Inst | Destroy target creature.
+  4.3 -0.0   6   3753   0.3      Final Act | Sorc | Choose one or more — • Destroy all creatures. • Destroy all planeswalkers. • Destroy all battles. • Exile all 
+  4.0 -0.1   1   3338   0.3      Studious First-Year // Rampant Growth | Cr — Bear Wizard | This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.
+  4.0 +2.0   4   1122   3.3      Twilight Prophet | Cr — Vampire Cleric | Flying Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.) A
