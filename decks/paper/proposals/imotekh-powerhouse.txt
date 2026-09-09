@@ -18,7 +18,6 @@
 1 Decorum Dissertation
 1 Dismember
 1 Dread Return
-1 Eviscerator's Insight
 1 Feed the Swarm
 1 Flayed One
 1 Foundry Inspector
@@ -39,6 +38,7 @@
 1 Necron Deathmark
 1 Necron Overlord
 1 Night's Whisper
+1 Ominous Harvest
 1 Phyrexian Arena
 1 Phyrexian Scriptures
 1 Pitiless Carnage
