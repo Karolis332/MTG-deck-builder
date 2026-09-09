@@ -194,7 +194,6 @@
 1 Junji, the Midnight Sky
 1 Kagha, Shadow Archdruid
 1 Kamiz, Obscura Oculus
-1 Karlach, Fury of Avernus
 1 Kiora's Follower
 1 Knockout Maneuver
 1 Koh, the Face Stealer
@@ -246,7 +245,6 @@
 1 Murderous Rider
 1 Myconid Spore Tender
 1 Myriad Landscape
-1 Najeela, the Blade-Blossom
 1 Necrotic Ooze
 1 Negate
 1 Nether Traitor
@@ -390,18 +388,21 @@
 1 Treasure Nabber
 1 Treva's Charm
 1 Triarch Stalker
+1 Triumphant Adventurer
 1 Trudge Garden
 1 Twilight Prophet
 1 Tyrant's Scorn
 2 Unfortunate Accident
 1 Uro, Titan of Nature's Wrath
 1 Vampiric Link
+1 Varis, Silverymoon Ranger
 1 Varragoth, Bloodsky Sire
 1 Vastlands Scavenger
 1 Vault of the Archangel
 1 Veinwitch Coven
 1 Vengeful Bloodwitch
 1 Verdant Confluence
+1 Veteran Adventurer
 1 Vial Smasher, Gleeful Grenadier
 1 Vicious Battlerager
 1 Victim of Night

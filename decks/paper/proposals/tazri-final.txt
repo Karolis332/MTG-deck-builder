@@ -20,6 +20,7 @@
 1 Coveted Prize
 1 Durnan of the Yawning Portal
 1 Exotic Orchard
+1 Explore the Underdark
 1 Farseek
 1 Fellwar Stone
 1 Feywild Caretaker
@@ -33,6 +34,7 @@
 1 Inspiring Vantage
 2 Island
 1 Jetmir's Garden
+1 Karlach, Fury of Avernus
 1 Karplusan Forest
 1 Kodama's Reach
 1 Linvala, Shield of Sea Gate
@@ -43,6 +45,7 @@
 1 Multiclass Baldric
 1 Mutable Explorer
 1 Nadaar, Selfless Paladin
+1 Najeela, the Blade-Blossom
 1 Nalia de'Arnise
 1 Nature's Lore
 1 Nimble Trapfinder
@@ -78,11 +81,8 @@
 1 The Destined Warrior
 1 The Destined White Mage
 1 Thwart the Grave
-1 Triumphant Adventurer
 1 Undermountain Adventurer
 1 Unsettled Mariner
-1 Varis, Silverymoon Ranger
-1 Veteran Adventurer
 1 Vizier of the Menagerie
 1 Wayfarer's Bauble
 1 White Plume Adventurer
