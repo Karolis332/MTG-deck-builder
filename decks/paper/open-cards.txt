@@ -1,6 +1,5 @@
 1 Abraded Bluffs
 1 Accursed Marauder
-1 Acererak the Archlich
 1 Adaptive Automaton
 1 Adept Watershaper
 1 Akul the Unrepentant
@@ -12,6 +11,7 @@
 1 Archfiend of Despair
 1 Arid Archway
 1 Arnyn, Deathbloom Botanist
+1 Astarion, the Decadent
 1 At Knifepoint
 1 Aven Interrupter
 1 Awakening Zone
@@ -20,7 +20,6 @@
 1 Baeloth Barrityl, Entertainer
 1 Bandit's Haul
 1 Bandit's Talent
-1 Bar the Gate
 1 Baron Bertram Graywater
 1 Baron Helmut Zemo
 1 Basking Broodscale
@@ -41,14 +40,16 @@
 1 Blossoming Bogbeast
 1 Bond of Revival
 1 Bonny Pall, Clearcutter
+1 Boros Charm
 1 Bovine Intervention
+1 Bre of Clan Stoutarm
 1 Breaker of Creation
 1 Breeches, the Blastmaker
 1 Brimstone Roundup
 1 Bristlebane Battler
 1 Bristling Backwoods
 2 Buried in the Garden
-1 Butcher of Malakir
+2 Butcher of Malakir
 1 Bygone Colossus
 2 Calamity, Galloping Inferno
 1 Callous Inspector
@@ -62,11 +63,9 @@
 1 Clear Shot
 1 Cloudkill
 1 Colossal Rattlewurm
-1 Concealed Courtyard
 1 Conduit Pylons
 2 Consuming Corruption
 3 Corrupted Conviction
-1 Coveted Prize
 1 Creosote Heath
 1 Crypt Ghast
 1 Crypt of Agadeem
@@ -88,6 +87,7 @@
 1 Dimir Charm
 1 Dimir House Guard
 1 Dina, Soul Steeper
+1 Dire Fleet Ravager
 1 Dismember
 2 Doc Aurlock, Grizzled Genius
 1 Doomsday Excruciator
@@ -101,6 +101,9 @@
 1 Eccentric Pestfinder
 1 Eldrazi Ravager
 1 Elegy Acolyte
+1 Elvish Spirit Guide
+1 Emeritus of Ideation
+1 Emeritus of Truce
 1 Eriette, the Beguiler
 2 Eroded Canyon
 2 Essence Capture
@@ -116,7 +119,6 @@
 1 Feral Appetite
 1 Ferocification
 1 Festering Gulch
-1 Feywild Caretaker
 1 Fierce Retribution
 1 Final Act
 1 Final Showdown
@@ -131,6 +133,7 @@
 1 Fountainport Bell
 1 Freestrider Lookout
 1 Frog Butler
+1 Garruk's Uprising
 1 Gatecreeper Vine
 1 Gene Pollinator
 2 Geralf, the Fleshwright
@@ -139,17 +142,17 @@
 1 Ghost Ark
 1 Gilded Goose
 1 Gilded Lotus
-1 Glasspool Mimic
 1 Gleaming Barrier
 1 Golgari Charm
+1 Gonti, Lord of Luxury
 1 Gonti's Machinations
+1 Grand Abolisher
 1 Grim Servant
 1 Grist, Voracious Larva
 1 Growth Spiral
 1 Gruul Charm
 1 Gutterbones
 1 Gyome, Master Chef
-1 Hama Pashar, Ruin Seeker
 2 Hardbristle Bandit
 1 Haunting Voyage
 1 Haywire Mite
@@ -168,19 +171,18 @@
 1 Hypothesizzle
 1 Idol of False Gods
 1 Immoral Bargain
-1 Imoen, Mystic Trickster
 1 Imp's Mischief
 1 Infestation Sage
 1 Innkeeper's Talent
 1 Insatiable Avarice
 1 Insidious Roots
-1 Inspiring Vantage
 1 Intimidation Campaign
 1 Ionize
 1 Jadar, Ghoulcaller of Nephalia
 1 Jagged Barrens
 1 Jailbreak Scheme
 1 Jarad, Golgari Lich Lord
+1 Jazal Goldmane
 1 Jem Lightfoote, Sky Explorer
 1 Jerren, Corrupted Bishop
 1 Jolene, Plundering Pugilist
@@ -190,12 +192,14 @@
 1 Junji, the Midnight Sky
 1 Kagha, Shadow Archdruid
 1 Kamiz, Obscura Oculus
+1 Karlach, Fury of Avernus
 1 Kiora's Follower
 1 Knockout Maneuver
 1 Koh, the Face Stealer
 1 Kolaghan's Command
 1 Kozilek, the Great Distortion
 1 Kraum, Violent Cacophony
+1 Krydle of Baldur's Gate
 1 Lavaspur Boots
 1 Lightning Greaves
 1 Lilah, Undefeated Slickshot
@@ -210,6 +214,7 @@
 1 Lush Oasis
 1 Luxurious Locomotive
 1 Lychguard
+1 Maestros Theater
 1 Magda, the Hoardmaster
 1 Magebane Lizard
 1 Magus of the Candelabra
@@ -217,16 +222,17 @@
 1 Marauding Sphinx
 1 Marchesa, Dealer of Death
 1 Marchesa, the Black Rose
-1 Mardu Siegebreaker
 1 Mastermind's Acquisition
 1 Mazemind Tome
 1 Merchant of Venom
 2 Metamorphic Blast
 1 Metamorphosis Fanatic
-1 Midnight Pathlighter
 1 Midnight Reaper
 1 Mikaeus, the Unhallowed
+1 Mindblade Render
+1 Minthara, Merciless Soul
 1 Mirage Mesa
+1 Mirri, Weatherlight Duelist
 1 Moraug, Fury of Akoum
 1 Morlun, Devourer of Spiders
 1 Mortality Spear
@@ -237,33 +243,34 @@
 1 Murder
 1 Murderous Rider
 1 Myconid Spore Tender
-1 Nadaar, Selfless Paladin
+1 Myriad Landscape
 1 Najeela, the Blade-Blossom
 1 Necrotic Ooze
+1 Negate
 1 Nether Traitor
 1 Nimble Brigand
 1 No One Left Behind
 1 Nulldrifter
+1 Nullpriest of Oblivion
 1 Nyx Lotus
 1 Obeka, Splitter of Seconds
 1 Ohran Frostfang
 1 Oko, Thief of Crowns
 1 Omenpath Journey
 1 Ominous Harvest
+1 Omni-Changeling
 1 One Last Job
 1 Opal Palace
 1 Ornery Tumblewagg
 1 Orzhov Charm
 1 Oubliette
 1 Outcaster Trailblazer
-1 Outlaws' Merriment
 1 Outrageous Robbery
 1 Overwhelming Forces
 1 Overzealous Muscle
 1 Pact Weapon
 1 Paradise Druid
 1 Patchwork Automaton
-1 Path to Exile
 1 Pawn of Ulamog
 1 Peer into the Abyss
 1 Pest Control
@@ -282,7 +289,6 @@
 1 Pontiff of Blight
 1 Potioner's Trove
 1 Pox
-1 Practiced Tactics
 1 Primeval Bounty
 1 Professor Dellian Fel
 1 Prophetic Prism
@@ -290,24 +296,23 @@
 1 Rakish Crew
 1 Rattleback Apothecary
 1 Raven of Fell Omens
-1 Ravenloft Adventurer
 1 Ravenous Chupacabra
 2 Reanimate
+1 Reconnaissance Mission
 1 Reiver Demon
 1 Requisition Raid
 3 Return the Favor
 1 Ribtruss Roaster
 1 Ride Down
-1 Rilsa Rael, Kingpin
 1 Rise of the Dark Realms
 1 Rith's Charm
+1 Riveteers Overlook
 1 Rodeo Pyromancers
 2 Roxanne, Starfall Savant
 1 Rune-Scarred Demon
 1 Rush of Dread
 2 Rustler Rampage
 1 Ruthless Lawbringer
-1 Safana, Calimport Cutthroat
 1 Samut, the Driving Force
 1 Samut, Voice of Dissent
 1 Sandstorm Verge
@@ -316,7 +321,6 @@
 2 Savage Smash
 1 Scourge of the Skyclaves
 1 Sea Gate Colossus
-1 Sefris of the Hidden Ways
 1 Seize the Secrets
 1 Selesnya Charm
 1 Seraphic Steed
@@ -340,7 +344,6 @@
 1 Soured Springs
 1 Spelunking
 1 Spinewoods Armadillo
-1 Spirebluff Canal
 1 Springbloom Druid
 1 Springleaf Parade
 1 Stensian Sanguinist
@@ -351,11 +354,13 @@
 1 Study Hall
 1 Supernatural Stamina
 1 Surrak, the Hunt Caller
+1 Syncopate
 1 Syphon Mind
 1 Tablet of Compleation
 1 Take for a Ride
 1 Take the Fall
 1 Take Up the Shield
+1 Tam, Mindful First-Year
 1 Teacher's Pest
 1 Tendershoot Dryad
 1 Tendrils of Agony
@@ -367,8 +372,6 @@
 1 Terror of the Peaks
 1 The Darkness Crystal
 1 The Destined Thief
-1 The Destined Warrior
-1 The Destined White Mage
 1 The Key to the Vault
 1 The Swarmweaver
 1 Thieves' Tools
@@ -381,20 +384,20 @@
 1 Torpor Orb
 1 Tragedy Feaster
 3 Trash the Town
+1 Treasure Nabber
 1 Treva's Charm
 1 Triarch Stalker
 1 Triumphant Adventurer
 1 Trudge Garden
 1 Twilight Prophet
 1 Tyrant's Scorn
-1 Undermountain Adventurer
 2 Unfortunate Accident
-1 Unsettled Mariner
 1 Uro, Titan of Nature's Wrath
 1 Vampiric Link
 1 Varis, Silverymoon Ranger
 1 Varragoth, Bloodsky Sire
 1 Vastlands Scavenger
+1 Vault of the Archangel
 1 Veinwitch Coven
 1 Vengeful Bloodwitch
 1 Verdant Confluence
@@ -410,7 +413,6 @@
 1 Wardens of the Cycle
 1 Weathered Wayfarer
 1 Whisper, Blood Liturgist
-1 White Plume Adventurer
 1 Wishclaw Talisman
 1 Witch of the Moors
 1 Witherbloom Command
@@ -418,10 +420,7 @@
 1 Worldwalker Helm
 1 Worn Powerstone
 1 Wreckage Wickerfolk
-1 You Find a Cursed Idol
 1 You Find the Villains' Lair
 1 You Happen On a Glade
 1 You Meet in a Tavern
-1 Yuan-Ti Malison
-1 Zagras, Thief of Heartbeats
 1 Zhentarim Bandit

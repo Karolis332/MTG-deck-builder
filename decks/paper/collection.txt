@@ -421,7 +421,7 @@
 1 Pitiless Carnage
 1 Pizza Face, Gastromancer
 1 Plaguecrafter
-3 Plains
+4 Plains
 1 Planar Engineering
 1 Planetarium of Wan Shi Tong
 1 Plasmancer
