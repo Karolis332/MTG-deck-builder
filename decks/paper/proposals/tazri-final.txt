@@ -8,6 +8,7 @@
 1 Blasphemous Act
 1 Bloodstained Mire
 1 Bojuka Bog
+1 Boros Charm
 1 Brokers Hideout
 1 Burakos, Party Leader
 1 Cabaretti Courtyard
@@ -52,7 +53,6 @@
 1 Outlaws' Merriment
 1 Overgrown Tomb
 1 Path of Ancestry
-1 Path to Exile
 4 Plains
 1 Ravenloft Adventurer
 1 Rilsa Rael, Kingpin

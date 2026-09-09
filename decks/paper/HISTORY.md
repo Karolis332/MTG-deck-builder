@@ -67,3 +67,7 @@ Appended by `npx tsx scripts/paper-sync.ts`. Full diffs: `git log -p decks/paper
 ## 2026-09-09
 - **Tazri, Beacon of Unity** v9, 100 cards: −Practiced Tactics
 - **Collection** 774 owned, 466 open
+
+## 2026-09-09
+- **Tazri, Beacon of Unity** v10, 100 cards: +Boros Charm, −Path to Exile
+- **Collection** 774 owned, 466 open

@@ -40,7 +40,6 @@
 1 Blossoming Bogbeast
 1 Bond of Revival
 1 Bonny Pall, Clearcutter
-1 Boros Charm
 1 Bovine Intervention
 1 Bre of Clan Stoutarm
 1 Breaker of Creation
@@ -271,6 +270,7 @@
 1 Pact Weapon
 1 Paradise Druid
 1 Patchwork Automaton
+1 Path to Exile
 1 Pawn of Ulamog
 1 Peer into the Abyss
 1 Pest Control
