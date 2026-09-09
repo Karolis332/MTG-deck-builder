@@ -149,3 +149,7 @@ Appended by `npx tsx scripts/paper-sync.ts`. Full diffs: `git log -p decks/paper
 
 ## 2026-09-09
 - **Collection** 839 owned, 532 open
+
+## 2026-09-09
+- **Collection** 841 owned, 534 open
+- **Collection** +Emeritus of Woe, Mirkwood Bats 1→2 (found). Meren powerhouse: Emeritus of Woe (repeatable Demonic Tutor when two creatures die in a turn) over Diabolic Tutor; Lavaspur Boots, Slimefoot and the second Mirkwood Bats benched

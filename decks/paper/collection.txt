@@ -172,6 +172,7 @@
 1 Emergency Weld
 1 Emeritus of Ideation
 1 Emeritus of Truce
+1 Emeritus of Woe
 1 Epicure of Blood
 1 Eriette, the Beguiler
 2 Eroded Canyon
@@ -369,7 +370,7 @@
 1 Mindblade Render
 1 Minthara, Merciless Soul
 1 Mirage Mesa
-1 Mirkwood Bats
+2 Mirkwood Bats
 1 Mirri, Weatherlight Duelist
 1 Mirror Entity
 1 Moldervine Reclamation
