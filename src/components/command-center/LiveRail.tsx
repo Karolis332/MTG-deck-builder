@@ -1,6 +1,7 @@
 'use client';
 
 import { BracketTile } from './tiles/BracketTile';
+import { PowerLevelTile } from './tiles/PowerLevelTile';
 import { ScoreTile } from './tiles/ScoreTile';
 import { RolesTile } from './tiles/RolesTile';
 import { BenchmarkTile } from './tiles/BenchmarkTile';
@@ -26,6 +27,7 @@ export function LiveRail({ deck, analysis, onOpenCard, onAskConsultant, onSetTar
           onSetTargetBracket={onSetTargetBracket}
         />
       )}
+      {isCommanderFormat && <PowerLevelTile deck={deck} />}
       <ScoreTile analysis={railAnalysis} />
       <RolesTile analysis={railAnalysis} onAskConsultant={onAskConsultant} />
       <BenchmarkTile deck={deck} onOpenCard={onOpenCard} onAskConsultant={onAskConsultant} />
