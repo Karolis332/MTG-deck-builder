@@ -79,6 +79,7 @@
 3 Corrupted Conviction
 1 Creosote Heath
 1 Cultivate
+1 Cycle of Renewal
 1 Damnable Pact
 3 Dance of the Tumbleweeds
 1 Darigaaz's Charm
@@ -178,6 +179,7 @@
 1 Gutterbones
 1 Gyome, Master Chef
 2 Hardbristle Bandit
+1 Harvest Season
 1 Haunting Voyage
 1 Haywire Mite
 1 Healing Technique
@@ -257,6 +259,7 @@
 1 Minthara, Merciless Soul
 1 Mirage Mesa
 1 Mirri, Weatherlight Duelist
+1 Moldgraf Millipede
 1 Moraug, Fury of Akoum
 1 Morlun, Devourer of Spiders
 1 Mortality Spear
@@ -338,6 +341,7 @@
 1 Reanimate
 1 Reckless Spite
 1 Reconnaissance Mission
+1 Regrowth
 1 Reiver Demon
 1 Requisition Raid
 3 Return the Favor

@@ -123,6 +123,7 @@
 1 Culling Ritual
 1 Culling the Weak
 2 Cultivate
+1 Cycle of Renewal
 1 Damnable Pact
 3 Dance of the Tumbleweeds
 1 Darigaaz's Charm
@@ -250,6 +251,7 @@
 1 Hama Pashar, Ruin Seeker
 2 Hardbristle Bandit
 1 Harper Recruiter
+1 Harvest Season
 1 Haunted Mire
 1 Haunting Voyage
 1 Haywire Mite
@@ -371,6 +373,7 @@
 1 Mirri, Weatherlight Duelist
 1 Mirror Entity
 1 Moldervine Reclamation
+1 Moldgraf Millipede
 1 Moraug, Fury of Akoum
 1 Morbid Opportunist
 1 Morlun, Devourer of Spiders
@@ -489,6 +492,7 @@
 2 Reanimate
 1 Reckless Spite
 1 Reconnaissance Mission
+1 Regrowth
 1 Reiver Demon
 1 Requisition Raid
 1 Return of the Wildspeaker
