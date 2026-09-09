@@ -20,7 +20,6 @@
 1 Coveted Prize
 1 Cultivate
 1 Durnan of the Yawning Portal
-1 Elvish Spirit Guide
 1 Exotic Orchard
 1 Farseek
 1 Fellwar Stone
@@ -55,6 +54,7 @@
 1 Path of Ancestry
 1 Path to Exile
 4 Plains
+1 Practiced Tactics
 1 Ravenloft Adventurer
 1 Rilsa Rael, Kingpin
 1 Sacred Foundry
