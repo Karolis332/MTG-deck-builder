@@ -33,6 +33,7 @@
 1 Marionette Master
 1 Metalwork Colossus
 1 Mirkwood Bats
+1 Mortuary Mire
 1 Myr Retriever
 1 Myriad Landscape
 1 Necron Deathmark
@@ -45,7 +46,6 @@
 1 Portal to Phyrexia
 1 Psychomancer
 1 Razorlash Transmogrant
-1 Realm of Koh
 1 Reanimate
 1 Ripples of Undeath
 1 Royal Warden
