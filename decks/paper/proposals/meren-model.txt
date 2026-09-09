@@ -11,6 +11,7 @@
 1 Butcher of Malakir
 1 Carrion Feeder
 1 Casualties of War
+1 Cauldron of Essence
 1 Command Tower
 1 Corpse Augur
 1 Creakwood Liege
@@ -47,7 +48,6 @@
 1 Mikaeus, the Unhallowed
 1 Moldervine Reclamation
 1 Morbid Opportunist
-1 Mycoloth
 1 Necroblossom Snarl
 1 Old Stickfingers
 1 Ophiomancer
