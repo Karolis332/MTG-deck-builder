@@ -161,3 +161,7 @@ Appended by `npx tsx scripts/paper-sync.ts`. Full diffs: `git log -p decks/paper
 ## 2026-09-09
 - **Collection** 845 owned, 538 open
 - **Collection** +Emperor of Bones, +Burnished Hart, +Chthonian Nightmare. Meren powerhouse: Chthonian Nightmare (repeatable cheap reanimation, 5 % of Meren lists, lift +0.8) over Saw in Half; Emperor of Bones, Burnished Hart, Final Act benched
+
+## 2026-09-09
+- **Collection** 844 owned, 537 open
+- **Collection** −Tainted Wood (not found). Meren powerhouse: Terramorphic Expanse in its slot (replayable from the graveyard with Ramunap Excavator; each sacrifice is a Long Feng trigger and a Bloodghast landfall)

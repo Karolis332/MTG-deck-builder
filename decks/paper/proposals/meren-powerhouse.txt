@@ -65,9 +65,9 @@
 11 Swamp
 1 Sylvan Library
 1 Syr Konrad, the Grim
-1 Tainted Wood
 1 Talisman of Resilience
 1 Temple of Malady
+1 Terramorphic Expanse
 1 Toxic Deluge
 1 Turbulent Fen
 1 Twilight Mire
