@@ -18,13 +18,11 @@
 1 Concealed Courtyard
 1 Concerted Defense
 1 Coveted Prize
-1 Cultivate
 1 Durnan of the Yawning Portal
 1 Exotic Orchard
 1 Farseek
 1 Fellwar Stone
 1 Feywild Caretaker
-1 Firdoch Core
 2 Forest
 1 Glasspool Mimic
 1 Hallowed Fountain
@@ -74,15 +72,17 @@
 1 Stonework Packbeast
 1 Stump Stomp
 2 Swamp
-1 Sword of the Animist
 1 Swords to Plowshares
 1 Sygg, Wanderwine Wisdom
 1 Tajuru Paragon
 1 The Destined Warrior
 1 The Destined White Mage
 1 Thwart the Grave
+1 Triumphant Adventurer
 1 Undermountain Adventurer
 1 Unsettled Mariner
+1 Varis, Silverymoon Ranger
+1 Veteran Adventurer
 1 Vizier of the Menagerie
 1 Wayfarer's Bauble
 1 White Plume Adventurer
