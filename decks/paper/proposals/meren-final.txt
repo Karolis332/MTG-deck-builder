@@ -29,6 +29,7 @@
 1 Gorma, the Gullet
 1 Grave Researcher
 1 Grim Backwoods
+1 Grim Haruspex
 1 Haunted Mire
 1 Haywire Mite
 1 High Market
@@ -52,7 +53,6 @@
 1 Old Stickfingers
 1 Ophiomancer
 1 Path of Ancestry
-1 Pest Infestation
 1 Plaguecrafter
 1 Priest of Forgotten Gods
 1 Ravenous Chupacabra

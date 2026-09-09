@@ -99,3 +99,7 @@ Appended by `npx tsx scripts/paper-sync.ts`. Full diffs: `git log -p decks/paper
 - Revisions decided in chat today: Decorum Dissertation over Sign in Blood (Arena and The War in Heaven kept); The Darkness Crystal over Insatiable Avarice; Mortuary Mire over Realm of Koh; Ominous Harvest over Eviscerator's Insight; Insatiable Avarice back in over Night's Whisper; Charcoal Diamond, Sword of the Animist, Mikaeus and Victimize (single copy, Meren) rejected
 - Copies to pull from the physical Meren deck (cut by the Meren plan): Mirkwood Bats
 - When sleeved: copy the proposal over `decks/imotekh-the-stormlord.txt` and run `npx tsx scripts/paper-sync.ts` (becomes v3)
+
+## 2026-09-09
+- **Collection** 775 owned, 467 open
+- **Meren of Clan Nel Toth** plan `proposals/meren-final.txt` (not sleeved): +Grim Haruspex (new card registered; 48 % of Meren lists, lift +2.7), −Pest Infestation (2.5 %, lift −2.2)

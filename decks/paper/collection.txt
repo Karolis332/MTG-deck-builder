@@ -217,6 +217,7 @@
 1 Grave Researcher
 1 Gray Merchant of Asphodel
 1 Grim Backwoods
+1 Grim Haruspex
 1 Grim Servant
 1 Grist, Voracious Larva
 1 Growth Spiral
