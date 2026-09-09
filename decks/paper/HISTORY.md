@@ -143,3 +143,6 @@ Appended by `npx tsx scripts/paper-sync.ts`. Full diffs: `git log -p decks/paper
 ## 2026-09-09
 - **Collection** 831 owned, 524 open
 - **Collection** +Haywire Mite (found); Meren powerhouse: Haywire Mite back in over Witherbloom Charm
+
+## 2026-09-09
+- **Collection** 835 owned, 528 open

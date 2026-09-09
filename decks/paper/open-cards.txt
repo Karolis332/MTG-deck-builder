@@ -1,3 +1,4 @@
+1 Aatchik, Emerald Radian
 1 Abraded Bluffs
 1 Accursed Marauder
 1 Adaptive Automaton
@@ -293,6 +294,7 @@
 1 Oubliette
 1 Outcaster Trailblazer
 1 Outrageous Robbery
+1 Overrun
 1 Overwhelming Forces
 1 Overzealous Muscle
 1 Pact Weapon
@@ -368,6 +370,7 @@
 1 Seraphic Steed
 1 Servant of the Stinger
 1 Shadow, Mysterious Assassin
+1 Shamanic Revelation
 1 Shard of the Nightbringer
 1 Shard of the Void Dragon
 2 Shifting Grift
@@ -402,6 +405,7 @@
 1 Sun Droplet
 1 Supernatural Stamina
 1 Surrak, the Hunt Caller
+1 Sweet-Gum Recluse
 1 Sword of the Animist
 1 Sygg, Wanderwine Wisdom
 1 Syncopate

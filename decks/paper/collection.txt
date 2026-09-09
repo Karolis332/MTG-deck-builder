@@ -1,3 +1,4 @@
+1 Aatchik, Emerald Radian
 1 Abraded Bluffs
 1 Accursed Marauder
 1 Acererak the Archlich
@@ -428,6 +429,7 @@
 1 Outlaws' Merriment
 1 Outrageous Robbery
 1 Overgrown Tomb
+1 Overrun
 1 Overwhelming Forces
 1 Overzealous Muscle
 1 Pact Weapon
@@ -532,6 +534,7 @@
 1 Servant of the Stinger
 1 Shadow, Mysterious Assassin
 1 Shadowheart, Dark Justiciar
+1 Shamanic Revelation
 1 Shard of the Nightbringer
 1 Shard of the Void Dragon
 1 Sheoldred's Edict
@@ -583,6 +586,7 @@
 1 Supernatural Stamina
 1 Surrak, the Hunt Caller
 41 Swamp
+1 Sweet-Gum Recluse
 1 Sword of the Animist
 1 Swords to Plowshares
 1 Sygg, Wanderwine Wisdom
