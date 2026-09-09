@@ -165,3 +165,4 @@ Appended by `npx tsx scripts/paper-sync.ts`. Full diffs: `git log -p decks/paper
 ## 2026-09-09
 - **Collection** 844 owned, 537 open
 - **Collection** −Tainted Wood (not found). Meren powerhouse: Terramorphic Expanse in its slot (replayable from the graveyard with Ramunap Excavator; each sacrifice is a Long Feng trigger and a Bloodghast landfall)
+- Meren powerhouse (operator keeps three sleeved cards): Revitalizing Repast stays (takes Haunted Mire's land slot, its back face is the same tapped dual), The Gitrog, Ravenous Ride stays (Autumn's Veil out), Saw in Half stays (Honest Rutstein out)
