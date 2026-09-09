@@ -6,6 +6,7 @@
 1 Barkform Harvester
 1 Biotransference
 1 Bitter Triumph
+1 Black Sun's Twilight
 1 Buried Alive
 1 Canoptek Wraith
 1 Chronomancer
@@ -16,13 +17,13 @@
 1 Dark Ritual
 1 Deadly Dispute
 1 Dread Return
-1 Egon, God of Death
+1 Emergency Weld
 1 Feed the Swarm
 1 Flayed One
 1 Foundry Inspector
+1 Ghost Ark
 1 Hexmark Destroyer
 1 Illuminor Szeras
-1 Lembas
 1 Lokhust Heavy Destroyer
 1 Lychguard
 1 Marionette Apprentice
@@ -32,19 +33,19 @@
 1 Necron Deathmark
 1 Necron Monolith
 1 Necron Overlord
-1 Ornithopter of Paradise
 1 Palladium Myr
+1 Phyrexian Arena
 1 Phyrexian Scriptures
 1 Plasmancer
-1 Portal to Phyrexia
 1 Psychomancer
 1 Razorlash Transmogrant
 1 Realm of Koh
 1 Reanimate
 1 Ripples of Undeath
 1 Royal Warden
-1 Saw in Half
+1 Sautekh Immortal
 1 Shard of the Void Dragon
+1 Skorpekh Destroyer
 1 Skorpekh Lord
 1 Sol Ring
 1 Solemn Simulacrum
@@ -62,6 +63,5 @@
 1 Triarch Praetorian
 1 Triarch Stalker
 1 Umbral Collar Zealot
-1 Undying Malice
 1 Unseal the Necropolis
 1 Wayfarer's Bauble
