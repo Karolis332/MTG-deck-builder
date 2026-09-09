@@ -30,8 +30,8 @@ interface Swap { out: CardInfo; in: CardInfo; why: string; qty?: number }
 
 const DECKS: Deck[] = [
   { key: 'meren', title: 'Meren of Clan Nel Toth', file: 'meren-of-clan-nel-toth.txt', commander: 'Meren of Clan Nel Toth', fixedSwaps: 'meren-final.txt' },
-  { key: 'imotekh', title: 'Imotekh the Stormlord', file: 'imotekh-the-stormlord.txt', commander: 'Imotekh the Stormlord', fixedSwaps: 'imotekh-final.txt',
-    caveat: 'The optimizer score means little for this deck: its synergy taxonomy has no model of Necron artifact recursion and reads the tribal core as 16 win conditions. Judge the swaps by the corpus columns.' },
+  { key: 'imotekh', title: 'Imotekh the Stormlord', file: 'imotekh-the-stormlord.txt', commander: 'Imotekh the Stormlord', fixedSwaps: 'imotekh-powerhouse.txt',
+    caveat: 'Powerhouse build (2026-09-09): the deck now wins through the loop Imotekh + Metalwork Colossus in the graveyard + a free artifact sacrifice outlet (Ashnod\'s Altar or Umbral Collar Zealot) once noncreature artifacts total 11 mana value — Colossus returns for two Warrior tokens, casts free, dies again; Marionette Master/Apprentice, Mirkwood Bats, Psychomancer and Syr Konrad drain on every pass, Biotransference grows the tokens for Necron Overlord. The conservative plan is kept in proposals/imotekh-final.txt. The optimizer score means little here: its synergy taxonomy has no model of Necron artifact recursion. Judge the swaps by the corpus columns.' },
   { key: 'tazri', title: 'Tazri, Beacon of Unity', file: 'tazri-beacon-of-unity.txt', commander: 'Tazri, Beacon of Unity', fixedSwaps: 'tazri-final.txt' },
 ];
 
@@ -366,6 +366,12 @@ const tile = (c: CardInfo, qty = 1) => `<div class="tile"><img src="${esc(c.img)
   // Pass 1: plan every deck independently. Pass 2: a card wanted by more decks than you own copies of goes to
   // the curated list first, then to the deck whose corpus rates it highest; the others are re-planned without it.
   const plans = new Map(DECKS.map((d) => [d.key, planFor(d, new Set())]));
+  // Copies a curated plan cuts from its own deck are free for the other decks.
+  for (const d of DECKS) for (const sw of plans.get(d.key)!.swaps) {
+    if (!d.fixedSwaps) continue;
+    const o = face(sw.out.name);
+    if (!BASICS.has(o)) openQty.set(o, (openQty.get(o) || 0) + (sw.qty || 1));
+  }
   const claims = new Map<string, Array<{ key: string; inc: number; fixed: boolean }>>();
   for (const d of DECKS) for (const sw of plans.get(d.key)!.swaps) {
     const n = face(sw.in.name);
@@ -409,7 +415,7 @@ const tile = (c: CardInfo, qty = 1) => `<div class="tile"><img src="${esc(c.img)
     plan.swaps.push(...landFix.swaps);
     if (landFix.note) plan.notes.push(`Lands: ${landFix.note}.`);
     const nextList = build();
-    const proposalFile = d.fixedSwaps ? `${d.key}-final.txt` : `${d.key}-model.txt`;
+    const proposalFile = d.fixedSwaps || `${d.key}-model.txt`;
     fs.writeFileSync(path.join(ROOT, 'proposals', proposalFile), nextList.map((c) => `${c.quantity} ${c.name}`).join(NL) + NL);
     const before = score(deck, d.commander, owned);
     const after = score(nextList, d.commander, owned);
