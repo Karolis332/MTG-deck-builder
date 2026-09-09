@@ -14,6 +14,7 @@
 1 Butcher of Malakir
 1 Carrion Feeder
 1 Cauldron of Essence
+1 Chthonian Nightmare
 1 Command Tower
 1 Deadly Dispute
 1 Elvish Mystic
@@ -59,7 +60,6 @@
 1 Reanimate
 1 Rune-Scarred Demon
 1 Sakura-Tribe Elder
-1 Saw in Half
 1 Sol Ring
 1 Solemn Simulacrum
 11 Swamp

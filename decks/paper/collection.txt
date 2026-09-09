@@ -82,6 +82,7 @@
 1 Burakos, Party Leader
 2 Buried Alive
 2 Buried in the Garden
+1 Burnished Hart
 2 Butcher of Malakir
 1 Bygone Colossus
 1 Cabaretti Courtyard
@@ -101,6 +102,7 @@
 1 Chief Warg's Company
 1 Chromatic Lantern
 1 Chronomancer
+1 Chthonian Nightmare
 1 Cityscape Leveler
 1 Clear Shot
 1 Cloudkill
@@ -173,6 +175,7 @@
 1 Emeritus of Ideation
 1 Emeritus of Truce
 1 Emeritus of Woe
+1 Emperor of Bones
 1 Epicure of Blood
 1 Eriette, the Beguiler
 2 Eroded Canyon

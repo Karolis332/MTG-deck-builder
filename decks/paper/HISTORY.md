@@ -157,3 +157,7 @@ Appended by `npx tsx scripts/paper-sync.ts`. Full diffs: `git log -p decks/paper
 ## 2026-09-09
 - **Collection** 842 owned, 535 open
 - **Collection** Umbral Collar Zealot 1→2 (found). Meren powerhouse: Umbral Collar Zealot (26 % of Meren lists, lift +1.0) over Whisper, Blood Liturgist
+
+## 2026-09-09
+- **Collection** 845 owned, 538 open
+- **Collection** +Emperor of Bones, +Burnished Hart, +Chthonian Nightmare. Meren powerhouse: Chthonian Nightmare (repeatable cheap reanimation, 5 % of Meren lists, lift +0.8) over Saw in Half; Emperor of Bones, Burnished Hart, Final Act benched
