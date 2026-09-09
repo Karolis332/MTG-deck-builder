@@ -1,0 +1,21 @@
+# Cardmarket wants import — paste the lines below into Wants > Import (format: qty name).
+# Pick the expansion in the import wizard; suggested set per line in the comment.
+1 Copy Token                      # any print (Final Fantasy / Edge of Eternities / Avatar extras all fine)
+1 Dungeon of the Mad Mage         # Adventures in the Forgotten Realms: Extras (TAFR 20)
+1 Lost Mine of Phandelver         # Adventures in the Forgotten Realms: Extras (TAFR 21)
+1 Tomb of Annihilation            # Adventures in the Forgotten Realms: Extras (TAFR 22)
+1 The Atropal Token               # Adventures in the Forgotten Realms: Extras (TAFR 5)
+1 Skeleton Token                  # Adventures in the Forgotten Realms: Extras (TAFR 6, 1/1)
+1 Wolf Token                      # Adventures in the Forgotten Realms: Extras (TAFR 14, 2/2)
+1 Zombie Token                    # Adventures in the Forgotten Realms: Extras (TAFR 9, 2/2)
+1 Undercity                       # Commander Legends: Battle for Baldur's Gate: Extras (TCLB 20, Undercity // The Initiative)
+1 Faerie Dragon Token             # Commander Legends: Battle for Baldur's Gate: Extras (TCLB 6, 1/1 flying)
+1 Skeleton Token                  # Commander Legends: Battle for Baldur's Gate: Extras (TCLB 8, 4/1 menace)
+1 Human Cleric Token              # Outlaws of Thunder Junction / Breaking News: Extras (TOTP 1) — or Throne of Eldraine: Extras (TELD 11)
+1 Human Rogue Token               # Outlaws of Thunder Junction / Breaking News: Extras (TOTP 2) — or Throne of Eldraine: Extras (TELD 12)
+1 Human Warrior Token             # Outlaws of Thunder Junction / Breaking News: Extras (TOTP 3) — or Throne of Eldraine: Extras (TELD 13)
+1 Kor Warrior Token               # Zendikar Rising: Extras (TZNR 4)
+1 Goblin Token                    # Tarkir: Dragonstorm: Extras (TTDM 12) — any vanilla red 1/1 works
+1 Mutavault Token                 # Lorwyn Eclipsed: Extras (TECL 11) — only print
+1 Treasure Token                  # The Lord of the Rings: Tales of Middle-earth: Extras (TLTR 12 or 25) — any print works
+1 Warrior Token                   # Secret Lair Drop Series: Extras (SLD 1752, Black Panther / Wakanda 1/1)

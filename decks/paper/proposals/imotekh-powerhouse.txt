@@ -18,7 +18,6 @@
 1 Decorum Dissertation
 1 Dismember
 1 Dread Return
-1 Eviscerator's Insight
 1 Feed the Swarm
 1 Flayed One
 1 Foundry Inspector
@@ -65,5 +64,6 @@
 1 Trazyn the Infinite
 1 Triarch Praetorian
 1 Umbral Collar Zealot
+1 Victimize
 1 Wayfarer's Bauble
 1 Wishclaw Talisman
