@@ -28,13 +28,13 @@
 1 Grim Backwoods
 1 Grim Haruspex
 1 Grim Servant
-1 Grist, Voracious Larva
 1 Haunted Mire
 1 Haywire Mite
 1 High Market
 1 Honest Rutstein
 1 Infernal Grasp
 1 Insidious Roots
+1 Jadar, Ghoulcaller of Nephalia
 1 Jarad, Golgari Lich Lord
 1 Junji, the Midnight Sky
 1 Lightning Greaves

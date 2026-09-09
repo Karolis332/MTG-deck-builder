@@ -366,6 +366,7 @@
 1 Selesnya Charm
 1 Seraphic Steed
 1 Servant of the Stinger
+1 Shadow, Mysterious Assassin
 1 Shard of the Nightbringer
 1 Shard of the Void Dragon
 2 Shifting Grift

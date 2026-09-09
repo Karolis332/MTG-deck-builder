@@ -127,3 +127,7 @@ Appended by `npx tsx scripts/paper-sync.ts`. Full diffs: `git log -p decks/paper
 ## 2026-09-09
 - **Collection** 832 owned, 525 open
 - **Collection** −Awakening Zone, −Pawn of Ulamog (operator: missing or used elsewhere; both came from `_my collection.txt`) — Meren powerhouse now runs Mazirek, Kraul Death Priest and Bloodghast in their slots
+
+## 2026-09-09
+- **Collection** 833 owned, 526 open
+- **Collection** +Shadow, Mysterious Assassin (operator); Meren powerhouse: Jadar, Ghoulcaller of Nephalia over Grist (steady decayed Zombie each end step for Priest/Braids/outlets); Merchant of Venom and Shadow benched
