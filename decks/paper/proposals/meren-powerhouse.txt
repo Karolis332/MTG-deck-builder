@@ -15,6 +15,7 @@
 1 Cauldron of Essence
 1 Chthonian Nightmare
 1 Command Tower
+1 Culling Ritual
 1 Deadly Dispute
 1 Elvish Mystic
 1 Emeritus of Woe
@@ -31,7 +32,6 @@
 1 Haywire Mite
 1 High Market
 1 Infernal Grasp
-1 Insidious Roots
 1 Jadar, Ghoulcaller of Nephalia
 1 Jarad, Golgari Lich Lord
 1 Junji, the Midnight Sky
