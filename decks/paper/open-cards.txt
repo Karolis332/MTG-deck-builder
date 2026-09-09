@@ -40,6 +40,7 @@
 1 Blossoming Bogbeast
 1 Bond of Revival
 1 Bonny Pall, Clearcutter
+1 Boros Charm
 1 Bovine Intervention
 1 Bre of Clan Stoutarm
 1 Breaker of Creation
@@ -388,7 +389,6 @@
 1 Treasure Nabber
 1 Treva's Charm
 1 Triarch Stalker
-1 Triumphant Adventurer
 1 Trudge Garden
 1 Twilight Prophet
 1 Tyrant's Scorn

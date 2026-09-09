@@ -8,7 +8,6 @@
 1 Blasphemous Act
 1 Bloodstained Mire
 1 Bojuka Bog
-1 Boros Charm
 1 Brokers Hideout
 1 Burakos, Party Leader
 1 Cabaretti Courtyard
@@ -81,6 +80,7 @@
 1 The Destined Warrior
 1 The Destined White Mage
 1 Thwart the Grave
+1 Triumphant Adventurer
 1 Undermountain Adventurer
 1 Unsettled Mariner
 1 Varis, Silverymoon Ranger

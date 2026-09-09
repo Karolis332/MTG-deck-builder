@@ -79,3 +79,11 @@ Appended by `npx tsx scripts/paper-sync.ts`. Full diffs: `git log -p decks/paper
 ## 2026-09-09
 - **Tazri, Beacon of Unity** v12, 100 cards: +Lotho, Corrupt Shirriff, −Triumphant Adventurer
 - **Collection** 774 owned, 466 open
+
+## 2026-09-09
+- **Tazri, Beacon of Unity** v13, 101 cards: +Triumphant Adventurer
+- **Collection** 774 owned, 465 open
+
+## 2026-09-09
+- **Tazri, Beacon of Unity** v14, 100 cards: −Boros Charm
+- **Collection** 774 owned, 466 open
