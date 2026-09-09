@@ -622,7 +622,7 @@
 1 Vial Smasher, Gleeful Grenadier
 1 Vicious Battlerager
 1 Victim of Night
-2 Victimize
+1 Victimize
 1 Village Rites
 1 Viridescent Bog
 2 Visage Bandit
