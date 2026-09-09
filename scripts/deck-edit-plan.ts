@@ -417,7 +417,9 @@ const tile = (c: CardInfo, qty = 1) => `<div class="tile"><img src="${esc(c.img)
     if (landFix.note) plan.notes.push(`Lands: ${landFix.note}.`);
     const nextList = build();
     const proposalFile = d.fixedSwaps || `${d.key}-model.txt`;
-    fs.writeFileSync(path.join(ROOT, 'proposals', proposalFile), nextList.map((c) => `${c.quantity} ${c.name}`).join(NL) + NL);
+    // A curated list is the target itself; only auto plans write their result out (writing register+swaps
+    // back over a curated file corrupts it when the sleeved deck carries extra cards).
+    if (!d.fixedSwaps) fs.writeFileSync(path.join(ROOT, 'proposals', proposalFile), nextList.map((c) => `${c.quantity} ${c.name}`).join(NL) + NL);
     const before = score(deck, d.commander, owned);
     const after = score(nextList, d.commander, owned);
     const infoOf = (l: Line[]) => l.slice(1).flatMap((x) => { const i = info(x.name, d.commander, cf); return i ? (Array(x.quantity).fill(i) as CardInfo[]) : []; });
