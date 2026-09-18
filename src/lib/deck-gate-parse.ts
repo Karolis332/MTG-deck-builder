@@ -11,7 +11,8 @@ import type { DbCard } from './types';
 
 // ── Types ────────────────────────────────────────────────────────────────────
 
-export type GateStatus = 'pass' | 'fail' | 'warn';
+/** `skip` = the check could not run (no input for it); never blocks the verdict. */
+export type GateStatus = 'pass' | 'fail' | 'warn' | 'skip';
 export type Board = 'commander' | 'main' | 'sideboard' | 'companion';
 
 export interface DeckLine {
@@ -29,8 +30,13 @@ export interface GateCheck {
 
 export interface GateOptions {
   format: string;
-  /** user_id whose collection the deck must fit inside. */
+  /** user_id whose collection the deck must fit inside (reads the `collection` table). */
   ownerId?: number | null;
+  /**
+   * Explicit owned card names. Takes priority over `ownerId` — callers with no
+   * access to the desktop `collection` table (the build-api service) pass this.
+   */
+  ownedCards?: string[] | null;
   /** Collection source; defaults to 'arena' for Arena formats, else 'paper'. */
   source?: 'arena' | 'paper';
   /** Extra card names (or "/regex/" strings) that must be present and never cut. */

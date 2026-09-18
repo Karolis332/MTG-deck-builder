@@ -40,6 +40,7 @@ export {
   type GateStatus,
 } from './deck-gate-parse';
 export type { PlanReport } from './deck-gate-plan';
+export { commanderClosers } from './deck-gate-checks';
 
 export interface GateVerdict {
   verdict: GateStatus;
@@ -58,8 +59,12 @@ export interface GateVerdict {
   checks: GateCheck[];
 }
 
+/** Cards that interact at all (satisfy the condition, or name a trigger noun). */
 const PLAN_FAIL_RATIO = 0.4;
 const PLAN_WARN_RATIO = 0.55;
+/** Cards that can actually satisfy the commander's cost/type condition. */
+const ENABLER_FAIL_RATIO = 0.35;
+const ENABLER_WARN_RATIO = 0.5;
 
 export function gateDeck(text: string, opts: GateOptions): GateVerdict {
   const lines = parseDecklist(text);
@@ -112,9 +117,9 @@ export function gateDeck(text: string, opts: GateOptions): GateVerdict {
     // Two numbers, because they differ: naming the commander's trigger is not
     // the same as being able to meet it, and that gap is the 2026-09-18 bug.
     const status: GateStatus =
-      plan.ratio < PLAN_FAIL_RATIO
+      plan.ratio < PLAN_FAIL_RATIO || plan.enablerRatio < ENABLER_FAIL_RATIO
         ? 'fail'
-        : plan.ratio < PLAN_WARN_RATIO || plan.enablerRatio < PLAN_FAIL_RATIO
+        : plan.ratio < PLAN_WARN_RATIO || plan.enablerRatio < ENABLER_WARN_RATIO
           ? 'warn'
           : 'pass';
     const enablerNote =

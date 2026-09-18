@@ -17,6 +17,7 @@ import { handleOptimize } from './optimize';
 import { handleMetaRoute } from './meta-routes';
 import { handleIngestRoute, startIngestSchedule } from './ingest-routes';
 import { makeCardResolver, resolveDeckLines } from './resolve';
+import { deckText, gateDeck, readLocks, readOwnedCardNames } from './gate-wiring';
 
 const PORT = Number(process.env.PORT || 8100);
 const API_KEY = process.env.BUILD_API_KEY || '';
@@ -166,10 +167,16 @@ async function handleBuild(body: string, res: http.ServerResponse): Promise<void
       return json(res, 422, { error: 'Build produced no cards — commander not found or card DB missing' });
     }
 
+    const gate = gateDeck(
+      deckText(result.cards.map((e) => ({ name: (e.card as DbCard).name, quantity: e.quantity, board: e.board }))),
+      { format, ownedCards: readOwnedCardNames(parsed), locks: readLocks(parsed) }
+    );
+
     json(res, 200, {
       commander: commanderName,
       partner: partnerName || null,
       format,
+      gate,
       strategy: result.strategy,
       themes: result.themes,
       tribalType: result.tribalType || null,

@@ -179,6 +179,49 @@ describe('gateDeck — locks', () => {
   });
 });
 
+describe('gateDeck — plan thresholds', () => {
+  /** All three name the commander's trigger; none can ever meet its 4-mana cost. */
+  const spellsMatterOnly = [
+    'Commander',
+    '1 The Emperor of Palamecia',
+    'Deck',
+    '1 Young Pyromancer',
+    '1 Murmuring Mystic',
+    '1 Adeliz, the Cinder Wind',
+  ].join('\n');
+
+  it('fails on the enabler floor even at 100% interaction', () => {
+    const v = gateDeck(spellsMatterOnly, { format: 'brawl' });
+    const plan = check(v, 'plan');
+    expect(v.plan!.ratio).toBe(1);
+    expect(v.plan!.enablerRatio).toBe(0);
+    expect(plan.status).toBe('fail');
+  });
+
+  it('warns, not fails, at the v2 list’s 38% enablers', () => {
+    const v = gateDeck(list('emperor-v2'), { format: 'brawl' });
+    expect(v.plan!.enablerRatio).toBeCloseTo(25 / 65, 3);
+    expect(check(v, 'plan').status).toBe('warn');
+  });
+});
+
+describe('gateDeck — ownership without a collection table', () => {
+  it('skips when neither ownerId nor ownedCards is given', () => {
+    const v = gateDeck(list('emperor-v5'), { format: 'brawl' });
+    expect(check(v, 'ownership').status).toBe('skip');
+    expect(v.verdict).not.toBe('fail');
+  });
+
+  it('checks the caller-supplied pool instead of the DB', () => {
+    const names = parseDecklist(list('emperor-v5')).map((l) => l.name);
+    expect(check(gateDeck(list('emperor-v5'), { format: 'brawl', ownedCards: names }), 'ownership').status).toBe('pass');
+    const short = names.filter((n) => n !== 'Coastal Piracy');
+    const c = check(gateDeck(list('emperor-v5'), { format: 'brawl', ownedCards: short }), 'ownership');
+    expect(c.status).toBe('fail');
+    expect(c.cards).toContain('Coastal Piracy');
+  });
+});
+
 describe('gateDeck — Alchemy names', () => {
   it('accepts A-Thran Portal in Brawl via the rebalanced printing', () => {
     const v = gateDeck(list('emperor-v5'), { format: 'brawl' });

@@ -26,6 +26,13 @@ MTG_DB_DIR="$APPDATA/the-black-grimoire/data" \
 Exit code is 1 when any check fails, 0 otherwise. The library entry point is
 `gateDeck(text, options)` in `src/lib/deck-gate.ts`.
 
+Callers with no access to the desktop `collection` table — the build-api service —
+pass `ownedCards: string[]` instead of `ownerId`; the ownership check then runs
+against that pool and never queries the DB. `POST /build` and `POST /optimize`
+return the whole verdict as a `gate` field, and `/optimize` also returns
+`lockedFromCuts`: cards it wanted to cut but could not, because a lock or a
+commander-implied closer protects them.
+
 ## The checks
 
 | id | What it catches |
@@ -35,7 +42,7 @@ Exit code is 1 when any check fails, 0 otherwise. The library entry point is
 | `legality` | per-format legality from the DB, with the Alchemy rule below |
 | `rules` | anything else `deck-validation.ts` reports (e.g. Competitive Brawl commander bans) |
 | `identity` | every card inside the commander's colour identity (both faces) |
-| `ownership` | every nonbasic card in the owner's collection; warns when the snapshot is over 14 days old, stating its age |
+| `ownership` | every nonbasic card in the owner's collection; warns when the snapshot is over 14 days old, stating its age. `skip` when the caller gives neither `ownerId` nor `ownedCards` |
 | `arenaNames` | `Front // Back` names Arena rejects; reports the corrected line |
 | `lands` | effective land count vs the Karsten target from `land-math.ts`, ±2 |
 | `plan` | how much of the deck can actually turn the commander on |
@@ -68,9 +75,9 @@ It then reports two numbers, because they differ and only one of them matters:
 - **can satisfy it** — cards that can actually meet the cost/type condition.
 
 A deck of "spells matter" cards scores well on the first and badly on the second.
-That gap is the 2026-09-18 bug. `fail` below 40 % interaction; `warn` below 55 %,
-or whenever under 40 % of the deck can satisfy the condition. The non-interacting
-cards are listed cheapest first, so the cut list is the output.
+That gap is the 2026-09-18 bug. `fail` below 40 % interaction or below 35 %
+enablers; `warn` below 55 % interaction or below 50 % enablers. The
+non-interacting cards are listed cheapest first, so the cut list is the output.
 
 ## Adding a lock
 

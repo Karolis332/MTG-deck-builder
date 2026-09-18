@@ -32,11 +32,24 @@ import {
   isWithinColorIdentity,
   type OptimizerCard,
   type OptimizerContext,
+  type CutSuggestion,
+  type SwapSuggestion,
 } from '../../src/lib/deck-optimizer';
 import { FORMATS, FORMAT_LABELS, DEFAULT_DECK_SIZE, MANA_COLOR_NAMES } from '../../src/lib/constants';
 import { normalizeDeckText, normalizeBoard, mergeDeckLines, type DeckLine } from '../../src/lib/decklist-normalize';
 import type { DbCard } from '../../src/lib/types';
 import { analyzeResolved, type AnalysisCore } from './analysis-core';
+import {
+  commanderClosers,
+  cutReason,
+  deckText,
+  gateDeck,
+  lockedNames,
+  readLocks,
+  readOwnedCardNames,
+  type DeckTextLine,
+} from './gate-wiring';
+import { satisfiesCondition, deriveCondition } from '../../src/lib/deck-gate-plan';
 import {
   makeCardResolver,
   resolveDeckLines,
@@ -349,7 +362,9 @@ function collectAdds(ctx: AddContext): AddOut[] {
     if (!isWithinColorIdentity(parseColors(card.color_identity), deckColors)) return;
     seen.add(key);
     const category = getPrimaryCategory(classifyCard(card.name, card.oracle_text || '', card.type_line || '', card.cmc ?? 0, oracle));
-    out.push({ ...toCardOut(card, addQty, category), reason, score, owned: owned ? owned.has(key) : undefined });
+    // Never ship a blank row: the web app renders `reason` verbatim.
+    const why = reason.trim() || `Fills the deck's ${category} slot at ${card.cmc ?? 0} mana`;
+    out.push({ ...toCardOut(card, addQty, category), reason: why, score, owned: owned ? owned.has(key) : undefined });
   };
 
   const deckCards = shape.main.map((r) => ({ ...r.card, quantity: r.quantity, board: r.board }));
@@ -439,6 +454,82 @@ function readFormat(parsed: Record<string, unknown>): string {
   return format;
 }
 
+interface CutOut extends CutSuggestion {
+  /** Always non-empty — the web app renders this row verbatim. */
+  reason: string;
+}
+
+/**
+ * Drop every cut the gate's `locks` check would fail on, fill in a reason for
+ * the rest, and flag the ones that never satisfy the commander's condition.
+ */
+function finishCuts(
+  cuts: CutSuggestion[],
+  shape: DeckShape,
+  locks: string[]
+): { cuts: CutOut[]; lockedFromCuts: string[] } {
+  const commanderOracle = shape.commanders[0]?.oracle_text || '';
+  const pool = shape.main.map((r) => ({ name: r.card.name, oracle_text: r.card.oracle_text }));
+  const locked = lockedNames(
+    pool.map((c) => c.name),
+    locks,
+    commanderClosers(pool, commanderOracle)
+  );
+  const condition = commanderOracle
+    ? deriveCondition(
+        commanderOracle,
+        shape.commanders[0]?.type_line || '',
+        parseColors(shape.commanders[0]?.color_identity ?? null),
+        shape.commanders[0]?.mana_cost
+      )
+    : null;
+  const byName = new Map(shape.main.map((r) => [r.card.name, r.card]));
+
+  const lockedFromCuts: string[] = [];
+  const kept: CutOut[] = [];
+  for (const cut of cuts) {
+    if (locked.has(cut.name)) {
+      lockedFromCuts.push(cut.name);
+      continue;
+    }
+    const card = byName.get(cut.name);
+    const offPlan = Boolean(
+      condition &&
+        card &&
+        !isLandType(card.type_line) &&
+        !satisfiesCondition(
+          {
+            name: cut.name,
+            cmc: card.cmc ?? 0,
+            typeLine: card.type_line || '',
+            oracleText: card.oracle_text || '',
+            quantity: cut.quantity,
+          },
+          condition
+        )
+    );
+    kept.push({ ...cut, reason: cutReason(cut, offPlan) });
+  }
+  return { cuts: kept, lockedFromCuts };
+}
+
+/** The list as it would stand once the proposed swaps are applied. */
+function afterLines(shape: DeckShape, swaps: SwapSuggestion[], cuts: CutOut[]): DeckTextLine[] {
+  const qty = new Map<string, number>(shape.main.map((r) => [r.card.name, r.quantity]));
+  const cutQty = new Map(cuts.map((c) => [c.name, c.quantity]));
+  for (const swap of swaps) {
+    const removed = cutQty.get(swap.cut) ?? 1;
+    const left = (qty.get(swap.cut) ?? 0) - removed;
+    if (left > 0) qty.set(swap.cut, left);
+    else qty.delete(swap.cut);
+    if (swap.add) qty.set(swap.add, (qty.get(swap.add) ?? 0) + removed);
+  }
+  return [
+    ...shape.commanders.map((c) => ({ name: c.name, quantity: 1, board: 'commander' })),
+    ...[...qty.entries()].map(([name, quantity]) => ({ name, quantity, board: 'main' })),
+  ];
+}
+
 export function optimizeDeck(parsed: Record<string, unknown>): Record<string, unknown> {
   const started = Date.now();
   const format = readFormat(parsed);
@@ -457,8 +548,11 @@ export function optimizeDeck(parsed: Record<string, unknown>): Record<string, un
   const d = diagnose(shape);
   const ctx = optimizerContext(d);
   const legality = findLegalityIssues(d.cards, ctx);
-  const cuts = rankCuts(d.cards, ctx, MAX_CUTS);
+  const locks = readLocks(parsed);
+  const { cuts, lockedFromCuts } = finishCuts(rankCuts(d.cards, ctx, MAX_CUTS), shape, locks);
   const adds = collectAdds({ shape, deckColors: d.deckColors, owned: readOwnedNames(parsed), metaRanks: d.metaRanks, findCard });
+  const cutReasonByName = new Map(cuts.map((c) => [c.name, c.reason]));
+  const swaps = pairSwaps(cuts, adds).map((sw) => ({ ...sw, reason: cutReasonByName.get(sw.cut) || sw.reason }));
   const lands = landReport(shape, d.cards, d.avgCmc);
   const mana = manaReport(shape, d.deckColors);
   const byName = new Map(d.cards.map((c) => [c.name, c]));
@@ -484,7 +578,15 @@ export function optimizeDeck(parsed: Record<string, unknown>): Record<string, un
     legality,
     cuts,
     adds,
-    swaps: pairSwaps(cuts, adds),
+    swaps,
+    lockedFromCuts,
+    gate: gateDeck(deckText(afterLines(shape, swaps, cuts)), {
+      format,
+      ownedCards: readOwnedCardNames(parsed),
+      locks,
+      before: [...shape.commanders.map((c) => c.name), ...shape.main.map((r) => r.card.name)],
+      after: afterLines(shape, swaps, cuts).map((l) => l.name),
+    }),
     analysis: d.core?.payload ?? null,
     bracket: bracketFor(shape),
     main: shape.main.map((r) => toCardOut(r.card, r.quantity, byName.get(r.card.name)?.primary ?? 'utility')),

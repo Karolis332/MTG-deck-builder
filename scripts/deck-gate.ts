@@ -66,7 +66,7 @@ function namesOf(file: string): string[] {
     .filter((l) => l && !/^(commander|deck|sideboard|companion|about)s?:?$/i.test(l) && !/^name\s/i.test(l));
 }
 
-const GLYPH: Record<GateCheck['status'], string> = { pass: 'PASS', warn: 'WARN', fail: 'FAIL' };
+const GLYPH: Record<GateCheck['status'], string> = { pass: 'PASS', warn: 'WARN', fail: 'FAIL', skip: 'SKIP' };
 
 function printTable(v: GateVerdict, file: string): void {
   const t = v.totals;

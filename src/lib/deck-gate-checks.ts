@@ -100,8 +100,34 @@ export function identityCheck(
 
 /** Every nonbasic card must be in the owner's collection, and that snapshot must be fresh. */
 export function ownershipCheck(resolved: Resolved[], opts: GateOptions): GateCheck {
+  // Caller-supplied pool (build-api): never touch the desktop `collection` table.
+  if (opts.ownedCards) {
+    const owned = new Set(
+      opts.ownedCards.map((n) => n.toLowerCase()).flatMap((n) => [n, frontName(n)])
+    );
+    const missing = [
+      ...new Set(
+        resolved
+          .filter((r) => !isBasic(r.card))
+          .filter((r) => !owned.has(r.card.name.toLowerCase()) && !owned.has(r.front.toLowerCase()))
+          .map((r) => r.front)
+      ),
+    ];
+    return missing.length
+      ? {
+          id: 'ownership',
+          status: 'fail',
+          detail: `${missing.length} card(s) outside the ${opts.ownedCards.length}-card pool the caller sent`,
+          cards: missing,
+        }
+      : { id: 'ownership', status: 'pass', detail: 'every card is in the caller-supplied pool' };
+  }
   if (opts.ownerId == null) {
-    return { id: 'ownership', status: 'pass', detail: 'no owner given — ownership not checked' };
+    return {
+      id: 'ownership',
+      status: 'skip',
+      detail: 'no ownerId and no ownedCards — nothing to check the list against',
+    };
   }
   const source = opts.source ?? (ARENA_FORMATS.has(opts.format) ? 'arena' : 'paper');
   const rows = getDb()
@@ -232,10 +258,28 @@ export function landsCheck(resolved: Resolved[], deckSize: number, avgMv: number
 
 const EXTRA_COMBAT = /additional combat phase|untap all creatures you control|extra combat/i;
 
+/**
+ * Cards that close the game *because of this commander*: when the commander wins
+ * by attacking (or triggers on attack), an extra-combat effect is a closer, not a
+ * spare slot. The site cut Aggravated Assault from a Lord Master of Hell deck.
+ */
+export function commanderClosers(
+  cards: Array<{ name: string; oracle_text: string | null }>,
+  commanderOracle: string
+): Set<string> {
+  const out = new Set<string>();
+  if (!/attacks/i.test(commanderOracle)) return out;
+  for (const c of cards) if (EXTRA_COMBAT.test(c.oracle_text || '')) out.add(c.name);
+  return out;
+}
+
 /** Win conditions from the classifier, plus closers the commander itself implies. */
 export function winconCheck(resolved: Resolved[], commanderOracle: string): GateCheck {
   const closers = new Set<string>();
-  const commanderAttacks = /attacks/i.test(commanderOracle);
+  const implied = commanderClosers(
+    resolved.filter((r) => r.line.board !== 'commander').map((r) => r.card),
+    commanderOracle
+  );
   for (const r of resolved) {
     if (r.line.board === 'commander') continue;
     const oracle = r.card.oracle_text || '';
@@ -246,9 +290,7 @@ export function winconCheck(resolved: Resolved[], commanderOracle: string): Gate
       r.card.cmc ?? 0,
       commanderOracle
     );
-    if (cats.includes('win_condition') || (commanderAttacks && EXTRA_COMBAT.test(oracle))) {
-      closers.add(r.front);
-    }
+    if (cats.includes('win_condition') || implied.has(r.card.name)) closers.add(r.front);
   }
   const n = closers.size;
   const detail = `${n} win condition(s)/closer(s)`;
