@@ -14,6 +14,8 @@ import { getDb } from '../../src/lib/db';
 import type { DbCard } from '../../src/lib/types';
 import { analyzeResolved } from './analysis-core';
 import { handleOptimize } from './optimize';
+import { handleMetaRoute } from './meta-routes';
+import { handleIngestRoute, startIngestSchedule } from './ingest-routes';
 import { makeCardResolver, resolveDeckLines } from './resolve';
 
 const PORT = Number(process.env.PORT || 8100);
@@ -306,10 +308,38 @@ function handleCardsLookup(body: string, res: http.ServerResponse): void {
 }
 
 const server = http.createServer((req, res) => {
-  const url = (req.url || '').split('?')[0];
+  const [url, search = ''] = (req.url || '').split('?');
 
   if (req.method === 'GET' && url === '/health') {
     return json(res, 200, { status: 'ok', service: 'build-api', activeBuilds });
+  }
+
+  // Read-only meta corpus. Key-gated like the rest of the service; the handler
+  // returns false for paths that are not /meta/*, so other routes still match.
+  if (req.method === 'GET' && url.startsWith('/meta/')) {
+    if (API_KEY && req.headers['x-api-key'] !== API_KEY) {
+      return json(res, 401, { error: 'unauthorized' });
+    }
+    if (handleMetaRoute(url, search, res)) return;
+  }
+
+  // Scraper control. Writes to the corpus and spawns processes, so it is always
+  // key-gated even when the rest of the service is running open.
+  if (url.startsWith('/ingest')) {
+    if (!API_KEY || req.headers['x-api-key'] !== API_KEY) {
+      return json(res, 401, { error: 'unauthorized' });
+    }
+    if (req.method === 'GET') {
+      if (handleIngestRoute('GET', url, '', res)) return;
+    } else if (req.method === 'POST') {
+      let body = '';
+      req.on('data', (chunk) => {
+        body += chunk;
+        if (body.length > 10_000) req.destroy();
+      });
+      req.on('end', () => handleIngestRoute('POST', url, body, res));
+      return;
+    }
   }
 
   if (req.method === 'POST' && url === '/cards/lookup') {
@@ -377,4 +407,6 @@ const server = http.createServer((req, res) => {
 
 server.listen(PORT, '127.0.0.1', () => {
   console.log(`[build-api] listening on 127.0.0.1:${PORT} (db dir: ${process.env.MTG_DB_DIR || 'auto'})`);
+  // No-op unless INGEST_SCHEDULE_HOURS is set.
+  startIngestSchedule();
 });

@@ -182,13 +182,24 @@ def parse_event_list(html: str, fmt_code: str) -> list[dict]:
             continue
 
         event_date = None
-        parent = link.parent
-        if parent:
-            text = parent.get_text()
+        # The date is NOT in the link's own <td class="S14"> -- it sits in a sibling
+        # <td class="S12"> of the same <tr class="hover_tr"> (verified live 2026-09-11).
+        # Searching only link.parent found nothing, which is why all 5931 scraped decks
+        # carried event_date = NULL. Search the whole row instead.
+        row = link.find_parent("tr") or link.parent
+        if row:
+            text = row.get_text(" ", strip=True)
             date_match = re.search(r"(\d{2}/\d{2}/\d{2})", text)
             if date_match:
                 try:
-                    event_date = datetime.strptime(date_match.group(1), "%m/%d/%y").strftime("%Y-%m-%d")
+                    # mtgtop8 renders DD/MM/YY, not MM/DD/YY (verified live 2026-09-11:
+                    # the event list shows 31/08/26). Parsing it as MM/DD/YY failed
+                    # outright for any day > 12 -- swallowed by the except below, which is
+                    # why all 5931 scraped decks carried event_date = NULL -- and, worse,
+                    # SUCCEEDED with day and month transposed for any day <= 12
+                    # (08/09/26 read as 9 Aug instead of 8 Sep). Do not "correct" this
+                    # back to %m/%d/%y.
+                    event_date = datetime.strptime(date_match.group(1), "%d/%m/%y").strftime("%Y-%m-%d")
                 except ValueError:
                     pass
 
@@ -414,6 +425,12 @@ def save_deck(conn: sqlite3.Connection, fmt: str, event: dict,
             ON CONFLICT(source, source_id) DO UPDATE SET
                 placement = excluded.placement,
                 player_name = excluded.player_name,
+                -- Refresh the date on re-scrape. Without this the 5931 decks scraped
+                -- while the date parser was broken could never recover their
+                -- event_date, no matter how often the source was re-scraped.
+                -- COALESCE keeps an existing date if a later scrape can't find one.
+                event_date = COALESCE(excluded.event_date, community_decks.event_date),
+                event_name = COALESCE(excluded.event_name, community_decks.event_name),
                 scraped_at = datetime('now')
         """, (source_id, fmt, deck_info["deck_name"], deck_info["deck_name"],
               deck_info.get("placement"), deck_info.get("player"),

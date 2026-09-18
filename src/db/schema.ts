@@ -1425,4 +1425,39 @@ export const MIGRATIONS = [
       CREATE INDEX IF NOT EXISTS idx_arena_format_normalized ON arena_parsed_matches(format_normalized);
     `,
   },
+  {
+    version: 44,
+    name: 'deck_ingest_idempotency_and_runs',
+    sql: `
+      -- Ingest idempotency is already guaranteed: community_decks declares
+      -- UNIQUE(source, source_id) inline, which is what the scrapers' ON CONFLICT
+      -- clauses bind to. An extra unique index on the same columns was briefly added
+      -- here and is dropped again -- it only duplicated the constraint.
+      DROP INDEX IF EXISTS idx_community_decks_source_key;
+
+      -- One row per scraper run so /ingest/status can answer "how stale is each source"
+      -- without guessing from event_date, and so a failing source is visible instead of
+      -- silently returning nothing.
+      CREATE TABLE IF NOT EXISTS ingest_runs (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        source TEXT NOT NULL,
+        format TEXT,
+        started_at TEXT NOT NULL,
+        finished_at TEXT,
+        status TEXT NOT NULL DEFAULT 'running',   -- running | ok | partial | failed
+        decks_seen INTEGER NOT NULL DEFAULT 0,
+        decks_inserted INTEGER NOT NULL DEFAULT 0,
+        decks_updated INTEGER NOT NULL DEFAULT 0,
+        decks_skipped INTEGER NOT NULL DEFAULT 0,
+        newest_event_date TEXT,
+        error TEXT
+      );
+      CREATE INDEX IF NOT EXISTS idx_ingest_runs_source ON ingest_runs(source, started_at DESC);
+
+      -- event_date drives every recency window; without this index the meta queries
+      -- table-scan 9K+ rows per request.
+      CREATE INDEX IF NOT EXISTS idx_community_decks_window
+        ON community_decks(format, event_date, source);
+    `,
+  },
 ];
