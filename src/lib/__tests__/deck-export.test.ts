@@ -98,6 +98,62 @@ describe('exportToArena', () => {
     const result = exportToArena('Test', cards);
     expect(result).toContain('(ABC)');
   });
+
+  it('writes the front face for a transform DFC', () => {
+    const cards = [makeEntry({
+      card: makeCard({
+        name: 'The Emperor of Palamecia // The Lord Master of Hell',
+        layout: 'transform',
+        set_code: 'fin',
+        collector_number: '1',
+      }),
+    })];
+    const result = exportToArena('Test', cards);
+    expect(result).toContain('4 The Emperor of Palamecia (FIN) 1');
+    expect(result).not.toContain('//');
+  });
+
+  it('writes the front face for a modal DFC, keeping the set/collector suffix', () => {
+    const cards = [makeEntry({
+      card: makeCard({
+        name: "Shatterskull Smashing // Shatterskull, the Hammer Pass",
+        layout: 'modal_dfc',
+        set_code: 'znr',
+        collector_number: '162',
+      }),
+    })];
+    const result = exportToArena('Test', cards);
+    expect(result).toContain('4 Shatterskull Smashing (ZNR) 162');
+  });
+
+  it('writes the front face for an adventure card', () => {
+    const cards = [makeEntry({
+      card: makeCard({
+        name: 'Sanar, Unfinished Genius // Wild Idea',
+        layout: 'adventure',
+        set_code: 'eoe',
+        collector_number: '1',
+      }),
+    })];
+    const result = exportToArena('Test', cards);
+    expect(result).toContain('4 Sanar, Unfinished Genius (EOE) 1');
+  });
+
+  it('keeps a true split card unchanged', () => {
+    const cards = [makeEntry({
+      card: makeCard({ name: 'Fire // Ice', layout: 'split', set_code: 'apc', collector_number: '155' }),
+    })];
+    const result = exportToArena('Test', cards);
+    expect(result).toContain('4 Fire // Ice (APC) 155');
+  });
+
+  it('collapses an identical-faces name to the single name', () => {
+    const cards = [makeEntry({
+      card: makeCard({ name: 'Foo // Foo', layout: 'reversible_card', set_code: 'xxx', collector_number: '1' }),
+    })];
+    const result = exportToArena('Test', cards);
+    expect(result).toContain('4 Foo (XXX) 1');
+  });
 });
 
 describe('exportToText', () => {

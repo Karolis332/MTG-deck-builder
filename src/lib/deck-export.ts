@@ -110,10 +110,21 @@ export function exportToMtgo(
   return lines.join('\n').trim();
 }
 
+// Arena's importer accepts "Front // Back" only for true split/aftermath
+// cards; transform, modal-DFC and adventure cards must be sent as the front
+// face alone, or it rejects the line ("unknown card title"). Ported from
+// black-grimoire-web src/lib/arena-export.ts arenaCardName().
+function arenaCardName(name: string, layout: string): string {
+  const [front, ...backs] = name.split(' // ');
+  if (!backs.length) return name;
+  if (backs.every((back) => back === front)) return front;
+  return layout === 'split' || layout === 'aftermath' ? name : front;
+}
+
 function formatLine(c: DeckCardEntry): string {
   // Strip Scryfall's "A-" prefix from Alchemy card names and collector numbers
   // Arena doesn't recognize the A- prefix in its import format
-  const name = c.card.name.replace(/^A-/, '');
+  const name = arenaCardName(c.card.name, c.card.layout).replace(/^A-/, '');
   const collectorNum = c.card.collector_number.replace(/^A-/, '');
   return `${c.quantity} ${name} (${c.card.set_code.toUpperCase()}) ${collectorNum}`;
 }
