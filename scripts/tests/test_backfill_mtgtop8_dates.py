@@ -58,3 +58,10 @@ def test_update_event_only_touches_matching_undated_rows():
         ("e2_d1", "2026-01-01"),  # untouched
     ]
     assert update_event(conn, "1", "2026-02-01") == 0  # re-run: nothing left undated
+
+
+def test_parse_event_date_bare_single_date_fallback():
+    from backfill_mtgtop8_dates import parse_event_date
+    assert parse_event_date("<div>The Decks to Beat</div><div>19/01/26</div>") == "2026-01-19"
+    # two different bare dates → ambiguous → None
+    assert parse_event_date("<div>19/01/26</div><div>20/01/26</div>") is None

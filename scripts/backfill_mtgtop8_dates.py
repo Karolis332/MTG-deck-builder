@@ -40,15 +40,23 @@ finally:
 # "<N> players - DD/MM/YY" -- same DD/MM/YY convention as parse_event_list
 # in scrape_mtgtop8.py; do not parse as MM/DD/YY (see comment there).
 EVENT_DATE_RE = re.compile(r"\d+\s*players\s*-\s*(\d{2}/\d{2}/\d{2})")
+BARE_DATE_RE = re.compile(r"(?<!\d)(\d{2}/\d{2}/\d{2})(?!\d)")
 
 
 def parse_event_date(html: str) -> str | None:
     """Extract the ISO event date from an mtgtop8 event page, or None."""
     match = EVENT_DATE_RE.search(html)
-    if not match:
-        return None
+    if match:
+        raw = match.group(1)
+    else:
+        # Compilation pages ("The Decks to Beat - January '26") have no player count,
+        # only one bare DD/MM/YY; accept it only when the page holds exactly one date.
+        bare = set(BARE_DATE_RE.findall(html))
+        if len(bare) != 1:
+            return None
+        raw = bare.pop()
     try:
-        return datetime.strptime(match.group(1), "%d/%m/%y").strftime("%Y-%m-%d")
+        return datetime.strptime(raw, "%d/%m/%y").strftime("%Y-%m-%d")
     except ValueError:
         return None
 
