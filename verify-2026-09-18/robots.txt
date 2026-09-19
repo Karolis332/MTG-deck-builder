@@ -1,0 +1,148 @@
+User-Agent: *
+Allow: /
+Disallow: /api/
+Disallow: /dashboard
+Disallow: /sign-in
+Disallow: /sign-up
+
+User-Agent: GPTBot
+Allow: /
+Disallow: /api/
+Disallow: /dashboard
+Disallow: /sign-in
+Disallow: /sign-up
+
+User-Agent: OAI-SearchBot
+Allow: /
+Disallow: /api/
+Disallow: /dashboard
+Disallow: /sign-in
+Disallow: /sign-up
+
+User-Agent: ChatGPT-User
+Allow: /
+Disallow: /api/
+Disallow: /dashboard
+Disallow: /sign-in
+Disallow: /sign-up
+
+User-Agent: ClaudeBot
+Allow: /
+Disallow: /api/
+Disallow: /dashboard
+Disallow: /sign-in
+Disallow: /sign-up
+
+User-Agent: Claude-User
+Allow: /
+Disallow: /api/
+Disallow: /dashboard
+Disallow: /sign-in
+Disallow: /sign-up
+
+User-Agent: Claude-SearchBot
+Allow: /
+Disallow: /api/
+Disallow: /dashboard
+Disallow: /sign-in
+Disallow: /sign-up
+
+User-Agent: PerplexityBot
+Allow: /
+Disallow: /api/
+Disallow: /dashboard
+Disallow: /sign-in
+Disallow: /sign-up
+
+User-Agent: Perplexity-User
+Allow: /
+Disallow: /api/
+Disallow: /dashboard
+Disallow: /sign-in
+Disallow: /sign-up
+
+User-Agent: Google-Extended
+Allow: /
+Disallow: /api/
+Disallow: /dashboard
+Disallow: /sign-in
+Disallow: /sign-up
+
+User-Agent: Applebot
+Allow: /
+Disallow: /api/
+Disallow: /dashboard
+Disallow: /sign-in
+Disallow: /sign-up
+
+User-Agent: Applebot-Extended
+Allow: /
+Disallow: /api/
+Disallow: /dashboard
+Disallow: /sign-in
+Disallow: /sign-up
+
+User-Agent: Bingbot
+Allow: /
+Disallow: /api/
+Disallow: /dashboard
+Disallow: /sign-in
+Disallow: /sign-up
+
+User-Agent: meta-externalagent
+Allow: /
+Disallow: /api/
+Disallow: /dashboard
+Disallow: /sign-in
+Disallow: /sign-up
+
+User-Agent: Meta-ExternalFetcher
+Allow: /
+Disallow: /api/
+Disallow: /dashboard
+Disallow: /sign-in
+Disallow: /sign-up
+
+User-Agent: Amazonbot
+Allow: /
+Disallow: /api/
+Disallow: /dashboard
+Disallow: /sign-in
+Disallow: /sign-up
+
+User-Agent: DuckAssistBot
+Allow: /
+Disallow: /api/
+Disallow: /dashboard
+Disallow: /sign-in
+Disallow: /sign-up
+
+User-Agent: cohere-ai
+Allow: /
+Disallow: /api/
+Disallow: /dashboard
+Disallow: /sign-in
+Disallow: /sign-up
+
+User-Agent: MistralAI-User
+Allow: /
+Disallow: /api/
+Disallow: /dashboard
+Disallow: /sign-in
+Disallow: /sign-up
+
+User-Agent: YouBot
+Allow: /
+Disallow: /api/
+Disallow: /dashboard
+Disallow: /sign-in
+Disallow: /sign-up
+
+User-Agent: CCBot
+Allow: /
+Disallow: /api/
+Disallow: /dashboard
+Disallow: /sign-in
+Disallow: /sign-up
+
+Sitemap: https://theblackgrimoire.com/sitemap.xml

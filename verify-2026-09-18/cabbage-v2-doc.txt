@@ -1,0 +1,47 @@
+Commander
+1 The Cabbage Merchant (TLE) 43
+
+Deck
+1 Gilded Goose (ELD) 160
+1 Peregrin Took (LTR) 181
+1 Academy Manufactor (MH2) 219
+1 Night of the Sweets' Revenge (WOE) 178
+1 Tireless Provisioner (MH2) 180
+1 Trail of Crumbs (ELD) 179
+1 Sarinth Steelseeker (BRO) 182
+1 Many Partings (LTR) 177
+1 Displaced Dinosaurs (LCI) 183
+1 Syr Ginger, the Meal Ender (WOE) 218
+1 Feasting Troll King (ELD) 152
+1 Elanor Gardner (LTR) 163
+1 Revive the Shire (LTR) 187
+1 Feasting Hobbit (LTR) 165
+1 Bristlebud Farmer (BLB) 164
+1 Teething Wurmlet (BRO) 192
+1 Honored Dreyleader (BLB) 180
+1 Killer Service (MH3) 164
+1 Unlucky Cabbage Merchant (TLE) 49
+1 Nuka-Cola Vending Machine (PIP) 164
+1 Idol of Oblivion (CMM) 361
+1 Jaheira, Friend of the Forest (CLB) 229
+1 Wicked Wolf (ELD) 181
+1 Nature's Claim (IMA) 177
+1 Stridehangar Automaton (BRO) 236
+1 Heaped Harvest (BLB) 175
+1 Heroic Intervention (M21) 188
+1 Beast Within (STA) 52
+1 Second Harvest (SOI) 227
+1 Sol Ring (FDN) 269
+1 Llanowar Elves (DAR) 168
+1 Elvish Mystic (M14) 169
+1 Birds of Paradise (M12) 165
+1 Fyndhorn Elves (MH3) 293
+1 Wild Growth (DMR) 187
+1 The Shire (LTR) 260
+1 Gingerbread Cabin (ELD) 245
+1 War Room (CMR) 361
+1 Fomori Vault (DSK) 262
+1 Boseiju, Who Endures (NEO) 266
+1 Nykthos, Shrine to Nyx (THS) 223
+1 Shifting Woodland (DSK) 270
+17 Forest (FDN) 279

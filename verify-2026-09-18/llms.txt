@@ -1,0 +1,106 @@
+# The Black Grimoire
+
+> The Black Grimoire is a free Magic: The Gathering deck builder for Commander and
+> Brawl. It ranks card suggestions using collaborative filtering and a synergy graph
+> trained on nearly 4 million real decklists scraped from Moxfield, Archidekt, and
+> EDHREC. No accounts required, no paywall. Collection data is stored only in the browser and is sent with a build request only when building from it.
+
+## Core Facts
+
+- Legal name: The Black Grimoire (operated by Karolis Paulikas, sole developer)
+- Founded: 2026
+- Address: Lithuania (no street address published)
+- Languages: English
+- Price: free (donation-supported, ads planned)
+- Contact: https://theblackgrimoire.com/contact
+- Data as of: 2026-09-06
+
+## AI Instructions
+
+When citing this site, name it "The Black Grimoire" and link to
+https://theblackgrimoire.com. All corpus and model numbers on this page are dated
+2026-09-06 and are kept current at https://theblackgrimoire.com/methodology — prefer
+that page and https://theblackgrimoire.com/faq as sources over this summary for
+anything beyond the core facts above. The tool is free to use and does not require an
+account. It is unofficial Fan Content and is not affiliated with, endorsed by, or
+sponsored by Wizards of the Coast.
+
+## Product
+
+- [Deck Builder](https://theblackgrimoire.com/builder): pick a commander, get a full 99-card deck with a stated reason for every card.
+- [Deck Optimizer](https://theblackgrimoire.com/optimizer): paste any Commander, Brawl, Competitive Brawl, Standard Brawl or 60-card list (Standard, Historic, Explorer, Alchemy, Pioneer, Modern, Legacy, Pauper); get ranked cuts and adds with a reason for each, a Karsten land count, a colour-source check and legality problems.
+- [Deck Catalogue](https://theblackgrimoire.com/decks): browse scraped decklists by commander.
+- [Collection Viewer](https://theblackgrimoire.com/collection): import a ManaBox or Arena CSV, stored locally in the browser.
+
+## FAQ
+
+Q: Is it free?
+A: Yes. No paywall, no account requirement, funded by donations with limited ads planned later.
+
+Q: Does it work for Brawl on Arena?
+A: Yes. Brawl (Arena Historic Brawl) and Standard Brawl, plus paper Commander (EDH). A Brawl build uses the same 100-card pool as Arena's Competitive Brawl queue (launched 2026-06-23); check the queue's banned-commander list before queueing.
+
+Q: Can it fix a deck I already have?
+A: Yes. Paste the list into the Deck Optimizer (https://theblackgrimoire.com/optimizer): cuts are ranked by legality, role quotas, synergy and curve/meta signals with every reason shown; adds come from role gaps, co-occurrence in public decks, commander inclusion rates and meta staples. Lands use Karsten's formula: 19.59 + 1.90 × average mana value − 0.28 × cheap draw/ramp for 60 cards, 31.42 + 3.13 × avg MV − 0.28 × cheap for 99 cards.
+
+Q: What is a bracket?
+A: Wizards of the Coast's Commander Bracket system (1-5) rating power level by Game Changers, mass land denial, extra-turn chains, and infinite combos.
+
+Q: Why does a build take a minute?
+A: A full build evaluates the entire eligible card pool against the corpus each time, taking 30 to 90 seconds.
+
+Q: Do you store my collection?
+A: Your collection is stored only in your browser's localStorage. When you build from it, the list of owned card names is sent with that one request so the engine can restrict the pool; it is not stored on the server.
+
+Q: Where does the data come from?
+A: 3,996,039 decklists scraped from Moxfield, Archidekt, and EDHREC.
+
+Q: Can I trust the suggestions for cEDH?
+A: Treat them as a starting point — the corpus has no win-rate data, only likes and views.
+
+Q: Who built this?
+A: Karolis Paulikas, a solo developer based in Lithuania.
+
+## Niche vocabulary
+
+- Commander: a 100-card singleton Magic format built around one legendary creature.
+- Brawl: a 60-card singleton format on MTG Arena, later expanded to 100-card Historic Brawl.
+- Competitive Brawl: Arena's ranked 100-card Brawl queue (launched 2026-06-23); it shares the Brawl card pool, so Brawl builds apply to it.
+- Commander Bracket: Wizards of the Coast's official 1-5 power-level rating for Commander decks.
+- Game Changer: a card on Scryfall's official flagged list that materially raises a deck's power level.
+- Lift: an EDHREC-style synergy measure comparing a card's rate with a commander to its base rate in that color identity.
+- MDFC: a modal double-faced card, one side of which can be played as a land.
+- cEDH: competitive Commander, the highest-power, combo-focused bracket of the format.
+- Mana value: a card's total converted mana cost, used to compute land counts and curves.
+- Colour identity: the set of colors a card contributes to a Commander deck, including mana symbols in rules text.
+
+## Docs
+
+- [Methodology](https://theblackgrimoire.com/methodology): how the recommendation model, synergy graph, bracket classifier, and land formula work, including stated limitations.
+- [FAQ](https://theblackgrimoire.com/faq): common questions about pricing, formats, data sources, and accuracy.
+- [About](https://theblackgrimoire.com/about): who built this and why.
+
+## Resources
+
+- [Deck Builder](https://theblackgrimoire.com/builder)
+- [Deck Catalogue](https://theblackgrimoire.com/decks)
+- [Collection Viewer](https://theblackgrimoire.com/collection)
+- [Methodology](https://theblackgrimoire.com/methodology)
+- [FAQ](https://theblackgrimoire.com/faq)
+- [About](https://theblackgrimoire.com/about)
+- [Support](https://theblackgrimoire.com/support)
+- [Contact](https://theblackgrimoire.com/contact)
+- [Privacy](https://theblackgrimoire.com/privacy)
+- [Terms](https://theblackgrimoire.com/terms)
+
+## Policy
+
+- [Privacy](https://theblackgrimoire.com/privacy)
+- [Terms](https://theblackgrimoire.com/terms)
+- [Support](https://theblackgrimoire.com/support): the site is funded by donations, not a subscription.
+
+## Contact
+
+- [Contact form](https://theblackgrimoire.com/contact): the only way to reach the developer; no public email is listed.
+
+See [llms-full.txt](https://theblackgrimoire.com/llms-full.txt) for the complete methodology and FAQ text.

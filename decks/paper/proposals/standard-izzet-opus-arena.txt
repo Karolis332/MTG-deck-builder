@@ -1,0 +1,42 @@
+// Izzet Opus (Maestro) — built from Downloads/collection.csv (Arena export, 2026-09-03)
+// Every creature carries the Opus ability word. Engine: pay 5+ mana on a single spell
+// to flip every Opus trigger into its upgraded mode.
+// Spine = the "Izzet Maestro" archetype (mtggoldfish 2026-05-31 + mtgtop8), owned-adjusted.
+
+// -- Opus creatures --
+4 Colorstorm Stallion       // ward, haste, Elemental; 5+ -> token copy of itself
+3 Molten-Core Maestro       // menace, +1/+1 counters; 5+ -> add {R} equal to its power
+4 Sanar, Unfinished Genius  // Treasure per turn; Wild Idea copy = {3}{U}{R} = a 5-mana tutor
+
+// -- 5-mana enablers (the payoff switch) --
+4 Ashling's Command         // {3}{U}{R} = 5. Copies an Elemental (Stallion) + draws 2
+4 Burst Lightning           // {R} early, kicked {4}{R} = 5 late
+2 Rapturous Moment          // 6 mana, then adds {U}{U}{R}{R}{R} -> second 5+ spell same turn
+2 Improvisation Capstone    // 7 mana, free spells, Paradigm recast
+1 Three Steps Ahead         // Spree: stack modes to hit 5+ mana at will
+
+// -- Ramp + selection --
+4 Tablet of Discovery       // {T}: {R}{R} for instants/sorceries — the main 5-mana bridge
+4 Stock Up
+4 Opt
+2 Spell Pierce
+
+// -- Lands (22) --
+4 Steam Vents
+4 Spirebluff Canal
+4 Riverpyre Verge
+2 Great Hall of the Biblioplex
+2 Multiversal Passage
+1 Stormcarved Coast
+3 Mountain
+2 Island
+
+// Sideboard
+2 Emeritus of Ideation
+2 Ral, Crackling Wit
+2 Spell Snare
+2 Soul-Guide Lantern
+2 Disdainful Stroke
+2 Negate
+2 Sear
+1 Three Steps Ahead

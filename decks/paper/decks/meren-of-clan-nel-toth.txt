@@ -21,6 +21,7 @@
 1 Elvish Mystic
 1 Emeritus of Woe
 1 Eternal Witness
+1 Exotic Orchard
 1 Fabled Passage
 1 Festering Thicket
 6 Forest
@@ -62,7 +63,8 @@
 1 Saw in Half
 1 Sol Ring
 1 Solemn Simulacrum
-12 Swamp
+1 Springbloom Druid
+11 Swamp
 1 Sylvan Library
 1 Syr Konrad, the Grim
 1 Talisman of Resilience
@@ -71,7 +73,6 @@
 1 Toxic Deluge
 1 Turbulent Fen
 1 Twilight Mire
-1 Umbral Collar Zealot
 1 Veil of Summer
 1 Vernal Fen
 1 Victimize

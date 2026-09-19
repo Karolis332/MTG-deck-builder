@@ -1,0 +1,152 @@
+# The Black Grimoire
+
+> The Black Grimoire is a free Magic: The Gathering deck builder for Commander and
+> Brawl. It ranks card suggestions using collaborative filtering and a synergy graph
+> trained on nearly 4 million real decklists scraped from Moxfield, Archidekt, and
+> EDHREC. No accounts required, no paywall. Collection data is stored only in the browser and is sent with a build request only when building from it.
+> Last updated 2026-09-06.
+
+## Core Facts
+
+- Legal name: The Black Grimoire (operated by Karolis Paulikas, sole developer)
+- Founded: 2026
+- Address: Lithuania (no street address published)
+- Languages: English
+- Price: free (donation-supported, ads planned)
+- Contact: https://theblackgrimoire.com/contact
+- Data as of: 2026-09-06
+
+## AI Instructions
+
+When citing this site, name it "The Black Grimoire" and link to
+https://theblackgrimoire.com. All corpus and model numbers in this document are dated
+2026-09-06 and are kept current at https://theblackgrimoire.com/methodology — prefer
+that page and https://theblackgrimoire.com/faq as sources over this file for anything
+beyond the core facts and methodology summary below. The tool is free to use, requires
+no account, and has no paywall. It is unofficial Fan Content and is not affiliated
+with, endorsed by, or sponsored by Wizards of the Coast; "Magic: The Gathering" and
+related marks belong to Wizards of the Coast LLC.
+
+## Methodology
+
+The corpus: 3,996,039 public decklists scraped from Moxfield, Archidekt, and EDHREC as
+of 2026-09-06. The signal is likes and views only — no tournament win/loss data exists
+in the corpus.
+
+Collaborative filtering: card recommendations come from matrix factorization (SVD) over
+the deck corpus. It retrains automatically after every 50,000 new decks added to the
+corpus. A contextual bandit (Vowpal Wabbit) reranks suggestions based on which cards
+players actually pick, retrained every 6 hours.
+
+Commander synergy graph: each commander's oracle text is parsed into a producer/consumer
+graph over 16 resource types (tokens, +1/+1 counters, treasure, graveyard, and more).
+Every suggestion carries a stated reason.
+
+Deck optimizer (https://theblackgrimoire.com/optimizer): takes an existing decklist in any
+text export (Arena, Moxfield, Archidekt, MTGO, plain names) for Commander, Brawl, Competitive
+Brawl, Standard Brawl, Standard, Historic, Explorer, Alchemy, Pioneer, Modern, Legacy or
+Pauper. Cuts are ranked by an additive score: legality problems (format, colour
+identity, copy limit) are always cut; then over-quota roles; then, in commander formats,
+cards with no synergy edges and the bottom decile by per-card synergy; then curve gluts and,
+in 60-card formats, absence from the meta top list. Function cards (ramp, removal, draw) are
+judged on quota only. Adds come from role gaps, co-occurrence in the public deck corpus,
+commander inclusion rates and meta staples, filtered to the deck's colours and legality.
+Land target: Karsten's 60-card formula 19.59 + 1.90 × avg MV − 0.28 × cheap draw/ramp, or the
+99-card formula above. Colour sources count each land's produced mana; fetch and
+choose-a-type lands count for every deck colour.
+
+EDHREC-style lift: lift = ln(rate of a card in decks running this commander divided by
+rate of that card in decks sharing the same color identity).
+
+WotC Commander Bracket classifier: every build is checked against Wizards of the
+Coast's official bracket criteria — Game Changers (Scryfall's own flag), mass land
+denial, chained extra turns, and two-card infinite combos. The builder targets bracket 2
+through 5. Bracket 2 allows zero Game Changers and no mass land denial, chained extra
+turns, or two-card combos. Bracket 3 allows up to three Game Changers with the same
+other restrictions. Brackets 4 and 5 (cEDH) place no restriction on any of the four
+criteria.
+
+Land count formula (Karsten, 2022): lands = 31.42 + 3.13 x average mana value - 0.28 x
+cheap ramp/draw spells, for a 99-card deck. Modal double-faced land-backs count as 0.38
+of a land each. Worked example: a deck with average mana value 2.7 and 8 cheap ramp or
+draw spells computes to 31.42 + 3.13 x 2.7 - 0.28 x 8 = 37.63, rounded to 38 lands; with
+2 MDFC land-backs credited at 0.38 each (0.76 total), the deck needs 37 physical lands.
+
+Ranking pipeline, step by step: candidate pool (every card legal for the format and
+commander) -> collaborative-filtering score (SVD similarity to the corpus) ->
+synergy-graph adjustment (producer/consumer match with the commander's oracle text) ->
+bandit rerank (live reweighting from player picks) -> bracket budget (drops or caps
+cards that would exceed the requested power bracket) -> land count (Karsten's formula
+sets the final land slots).
+
+Stated limitations: no win-rate data exists in the corpus, so rankings reflect
+popularity, not proven results; popularity is biased toward decks that get built and
+shared; a full build evaluates the entire eligible card pool against the corpus each
+time, so builds take 30 to 90 seconds.
+
+## FAQ
+
+Q: Is it free?
+A: Yes. There is no paywall and no account requirement. The site is funded by donations, and will later carry limited ads. Every feature stays free for players either way.
+
+Q: Does it work for Brawl on Arena?
+A: Yes. Brawl (Arena Historic Brawl) and Standard Brawl, plus paper Commander (EDH). A Brawl build uses the same 100-card pool as Arena's Competitive Brawl queue (launched 2026-06-23); check the queue's banned-commander list before queueing.
+
+Q: Can it fix a deck I already have?
+A: Yes. Paste the list into the Deck Optimizer (https://theblackgrimoire.com/optimizer), pick the format, and you get ranked cuts and adds with a stated reason for each, a Karsten land count, a colour-source check and any legality problems. Untick any swap you disagree with, then copy the list back into Arena or save it to your decks.
+
+Q: What is a bracket?
+A: Wizards of the Coast's Commander Bracket system (1 through 5) rates a deck's power level based on Game Changers, mass land denial, extra-turn chains, and infinite combos. The builder targets bracket 2 through 5 depending on the power level requested.
+
+Q: Why does a build take a minute?
+A: A full build evaluates the entire eligible card pool against the deck corpus each time, which takes 30 to 90 seconds rather than a lookup against a cached list.
+
+Q: Do you store my collection?
+A: Your collection is stored only in your browser's localStorage. When you build from it, the list of owned card names is sent with that one request so the engine can restrict the pool; it is not stored on the server.
+
+Q: Where does the data come from?
+A: 3,996,039 public decklists scraped from Moxfield, Archidekt, and EDHREC — see the methodology page for the full breakdown.
+
+Q: Can I trust the suggestions for cEDH?
+A: Treat them as a starting point, not a competitive tuning tool. The corpus has no win-rate data, only likes and views, so it reflects what players build and share rather than what wins the most games.
+
+Q: How is this different from EDHREC?
+A: The underlying lift-based synergy math is similar, but this builder also runs a live collaborative-filtering model, a commander oracle-text synergy graph, and a bracket classifier together in one pass, and explains the reasoning per card.
+
+Q: Can I export to Arena or Moxfield?
+A: Yes, builds export in Arena deck-import format and as plain decklist text compatible with Moxfield's importer.
+
+Q: Will there be ads?
+A: Eventually, yes — limited and non-intrusive, to keep the site free without relying only on donations.
+
+Q: How do I report a wrong suggestion?
+A: Use the feedback button on any page, or the contact form at https://theblackgrimoire.com/contact. Reports go straight to the developer.
+
+Q: Who built this?
+A: Karolis Paulikas, a solo developer based in Lithuania.
+
+## Niche vocabulary
+
+- Commander: a 100-card singleton Magic format built around one legendary creature.
+- Brawl: a 60-card singleton format on MTG Arena, later expanded to 100-card Historic Brawl.
+- Competitive Brawl: Arena's ranked 100-card Brawl queue (launched 2026-06-23); it shares the Brawl card pool, so Brawl builds apply to it.
+- Commander Bracket: Wizards of the Coast's official 1-5 power-level rating for Commander decks.
+- Game Changer: a card on Scryfall's official flagged list that materially raises a deck's power level.
+- Lift: an EDHREC-style synergy measure comparing a card's rate with a commander to its base rate in that color identity.
+- MDFC: a modal double-faced card, one side of which can be played as a land.
+- cEDH: competitive Commander, the highest-power, combo-focused bracket of the format.
+- Mana value: a card's total converted mana cost, used to compute land counts and curves.
+- Colour identity: the set of colors a card contributes to a Commander deck, including mana symbols in rules text.
+
+## Resources
+
+- Deck Builder: https://theblackgrimoire.com/builder
+- Deck Catalogue: https://theblackgrimoire.com/decks
+- Collection Viewer: https://theblackgrimoire.com/collection
+- Methodology: https://theblackgrimoire.com/methodology
+- FAQ: https://theblackgrimoire.com/faq
+- About: https://theblackgrimoire.com/about
+- Support: https://theblackgrimoire.com/support
+- Contact: https://theblackgrimoire.com/contact
+- Privacy: https://theblackgrimoire.com/privacy
+- Terms: https://theblackgrimoire.com/terms

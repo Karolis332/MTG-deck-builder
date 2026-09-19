@@ -171,3 +171,28 @@ Appended by `npx tsx scripts/paper-sync.ts`. Full diffs: `git log -p decks/paper
 ## 2026-09-09
 - **Meren of Clan Nel Toth** v7, 101 cards: +Accursed Marauder, +Basking Broodscale, +Bloodghast, +Blooming Marsh, +Butcher of Malakir, +Carrion Feeder, +Chthonian Nightmare, +Emeritus of Woe, −2 Forest, +Golgari Charm, +Gray Merchant of Asphodel, +Grim Haruspex, +Grim Servant, +Haywire Mite, +Jadar, Ghoulcaller of Nephalia, +Jarad, Golgari Lich Lord, +Junji, the Midnight Sky, +Lightning Greaves, +Long Feng, Grand Secretariat, +Midnight Reaper, +Myriad Landscape, +Ramunap Excavator, +Ravenous Chupacabra, +Reanimate, +Rune-Scarred Demon, +5 Swamp, +Talisman of Resilience, +Umbral Collar Zealot, +Woe Strider, −Baba Lysaga, Night Witch, −Boggart Trawler, −Casualties of War, −Chief Warg's Company, −Corpse Augur, −Cultivate, −Dina, Essence Brewer, −Farseek, −Gorma, the Gullet, −Haunted Mire, −High-Society Hunter, −Hornet Queen, −Invasion of Ikoria, −Izoni, Thousand-Eyed, −Jenova, Ancient Calamity, −Kodama's Reach, −Mosswood Dreadknight, −Mycoloth, −Old Stickfingers, −Pest Infestation, −Rankle, Master of Pranks, −Return of the Wildspeaker, −Sheoldred's Edict, −Smothering Abomination, −Tangled Florahedron, −Undying Malice, −Vraan, Executioner Thane, −Witherbloom Campus, −Witherbloom Charm
 - **Collection** 849 owned, 539 open
+
+## 2026-09-10
+
+- Meren powerhouse (operator): Springbloom Druid over Umbral Collar Zealot — recurrable ramp with Meren (sac a land, two basics tapped; the land hits the graveyard for Ramunap Excavator / Wight of the Reliquary); Zealot to open cards
+- **Meren of Clan Nel Toth** physical: −Umbral Collar Zealot, −1 Swamp, +Springbloom Druid, +Exotic Orchard (from open cards)
+
+- **Meren of Clan Nel Toth** v8, 101 cards: +Exotic Orchard, +Springbloom Druid, −Swamp, −Umbral Collar Zealot
+- **Collection** 850 owned, 539 open
+
+## 2026-09-18
+- **Collection** 986 owned, 593 open
+
+## 2026-09-18
+- **The Cabbage Merchant** v1, 100 cards: registered the physical deck (operator's list of 2026-09-18, one Forest dropped from a 101-card list) and the 96-card spare pile: +14 Forest
+- **The Cabbage Merchant** proposal `proposals/cabbage-merchant-upgrade.txt` (100, owned cards only: deck + spare pile + open cards): 26 out, 21 in, Forest 26→31; lands 32→36, avg MV 3.25→2.81, PL 7.06→7.09. Out: Ash Barrens, Avatar Kyoshi, Bloodspore Thrinax, Cankerbloom, Cream of the Crop, Crystalline Armor, Cycle of Renewal, Escape Tunnel, Explore, Flare of Cultivation, Ghalta, Lifeblood Hydra, Loot, Mishra's Bauble, Monstrous Vortex, Nesting Grounds, Overrun, Oviya, Rumble Arena, Sandman, Selvala, Shamanic Revelation, Shared Roots, Spry and Mighty, The Legend of Kyoshi, Vivien's Arkbow. In: Gilded Goose, Llanowar Elves, Elvish Spirit Guide, Autumn's Veil, Snakeskin Veil, Spider-Ham, Sakura-Tribe Elder, Lembas, Trudge Garden, Eternal Witness, Regrowth, Endurance, Well of Lost Dreams, Pest Infestation, Invasion of Ikoria, Sapseep Forest, Hornet Nest, Tendershoot Dryad, Blossoming Bogbeast, Gingerbread Cabin, Blighted Woodland. Physical deck unchanged until re-sleeved (then copy the proposal over `decks/the-cabbage-merchant.txt` and run paper-sync).
+
+## 2026-09-18
+- **Collection** 1001 owned, 594 open
+- **The Cabbage Merchant** proposal v2: Transmutation Font registered as owned (pile + collection, 1,001 owned / 594 open); on order: Trail of Crumbs, Beast Within, Feasting Hobbit, Feasting Troll King, Quina. Swaps: Many Partings→Trail of Crumbs, Kenrith's Transformation→Beast Within, Sakura-Tribe Elder→Feasting Hobbit, Ohran Frostfang→Feasting Troll King, Forgotten Ancient→Quina, Nissa→Transmutation Font. Add the five to `collection.txt` when they arrive.
+- **The Cabbage Merchant** proposal v2 corrected: only Transmutation Font applied now (Nissa out); the five on-order cards are a separate arrival plan (Tendershoot Dryad→Trail of Crumbs, Kenrith's Transformation→Beast Within, Sakura-Tribe Elder→Feasting Hobbit, Ohran Frostfang→Feasting Troll King, Forgotten Ancient→Quina) in `proposals/cabbage-merchant-upgrade.md` §9.
+- **The Cabbage Merchant** proposal: lands 36→33 (+Tangled Florahedron) after the operator questioned the count (corpus avg ~30): −3 Forest, +Tangled Florahedron, +Helix Pinnacle, +Hornet Queen. Mycoloth rejected.
+- **The Cabbage Merchant** proposal: operator review — Sapseep Forest and Blighted Woodland → Forest (30), Regrowth → Brawn. Trudge Garden and Gingerbread Cabin kept.
+- **The Cabbage Merchant** proposal: operator's sleeved changes — −Lembas, −Hornet Nest, +Spry and Mighty, +Ribtruss Roaster.
+- **The Cabbage Merchant** proposal: −Well of Lost Dreams, −Blossoming Bogbeast (operator); placeholders +Explore, +Hornet Nest.
+- **The Cabbage Merchant** proposal: Ash Barrens, Escape Tunnel, Nesting Grounds kept for three Forests (27).

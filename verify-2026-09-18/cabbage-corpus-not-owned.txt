@@ -1,0 +1,81 @@
+# Top corpus cards NOT in the July Arena export (inc% | lift | name | arena_id/brawl legality)
+83.7 | 0.17 | Sol Ring | arena_id=null brawl=not_legal
+81.5 | 3.60 | Nuka-Cola Vending Machine | arena_id=null brawl=not_legal
+55.5 | 3.89 | Krark-Clan Ironworks | arena_id=null brawl=not_legal
+54.1 | 3.62 | Trail of Crumbs | arena_id=70326 brawl=legal
+53.9 | 2.51 | The Shire | arena_id=84952 brawl=legal
+53.6 | 0.81 | Birds of Paradise | arena_id=null brawl=legal
+52.5 | 3.82 | Transmutation Font | arena_id=90689 brawl=legal
+51.9 | 0.57 | Boseiju, Who Endures | arena_id=79706 brawl=legal
+47.2 | 3.77 | Feasting Hobbit | arena_id=null brawl=not_legal
+46.9 | 1.06 | Delighted Halfling | arena_id=84850 brawl=legal
+46.7 | 1.21 | Shifting Woodland | arena_id=91079 brawl=legal
+46.3 | 0.90 | Finale of Devastation | arena_id=null brawl=legal
+46.2 | 2.34 | Gingerbread Cabin | arena_id=null brawl=legal
+46.0 | 4.03 | Stridehangar Automaton | arena_id=null brawl=not_legal
+45.5 | 3.56 | Feasting Troll King | arena_id=70299 brawl=legal
+45.1 | 3.66 | Quina, Qu Gourmet | arena_id=96061 brawl=legal
+44.9 | 0.53 | Wild Growth | arena_id=null brawl=not_legal
+43.6 | 3.96 | Clock of Omens | arena_id=null brawl=not_legal
+42.7 | 3.46 | Elanor Gardner | arena_id=84979 brawl=legal
+41.3 | 0.47 | Yavimaya, Cradle of Growth | arena_id=null brawl=legal
+41.1 | 1.64 | Nature's Rhythm | arena_id=95672 brawl=legal
+40.8 | 3.85 | Kuldotha Forgemaster | arena_id=null brawl=not_legal
+40.7 | 0.78 | Green Sun's Zenith | arena_id=null brawl=legal
+40.6 | 3.78 | Bristlebud Farmer | arena_id=90678 brawl=legal
+40.3 | 2.45 | Honored Dreyleader | arena_id=91714 brawl=legal
+38.9 | 3.03 | Revive the Shire | arena_id=84877 brawl=legal
+37.4 | 3.53 | Killer Service | arena_id=null brawl=not_legal
+36.8 | 0.58 | Nature's Claim | arena_id=null brawl=legal
+36.6 | 0.74 | Krosan Grip | arena_id=null brawl=legal
+36.6 | 1.61 | Parallel Lives | arena_id=null brawl=legal
+36.1 | 3.66 | Inspiring Statuary | arena_id=null brawl=legal
+35.6 | 1.18 | Ancient Tomb | arena_id=83438 brawl=banned
+35.2 | 3.57 | Fangren Marauder | arena_id=null brawl=not_legal
+34.4 | 0.04 | Fyndhorn Elves | arena_id=null brawl=not_legal
+33.5 | 1.78 | Talon Gates of Madara | arena_id=null brawl=not_legal
+32.6 | 1.75 | Lotus Petal | arena_id=null brawl=not_legal
+32.3 | 1.44 | Turntimber Symbiosis // Turntimber, Serpentine Wood | arena_id=73425 brawl=legal
+31.2 | 3.41 | Gourmand's Talent | arena_id=null brawl=not_legal
+31.2 | 2.86 | Pawpatch Formation | arena_id=91722 brawl=legal
+30.8 | 1.84 | Mana Vault | arena_id=null brawl=not_legal
+30.6 | 1.49 | Invasion of Ikoria // Zilortha, Apex of Ikoria | arena_id=84477 brawl=legal
+29.6 | 2.83 | The Mycosynth Gardens | arena_id=null brawl=legal
+29.3 | 3.90 | Liberator, Urza's Battlethopter | arena_id=82722 brawl=legal
+29.2 | 3.94 | Grinding Station | arena_id=null brawl=not_legal
+29.2 | 3.12 | Ninja Pizza | arena_id=null brawl=not_legal
+29.1 | 1.46 | Legolas's Quick Reflexes | arena_id=103879 brawl=legal
+28.7 | 2.61 | Wandering Archaic // Explore the Vastlands | arena_id=76398 brawl=legal
+28.6 | 1.48 | Urza's Saga | arena_id=null brawl=not_legal
+28.3 | 0.36 | War Room | arena_id=null brawl=not_legal
+27.8 | 1.93 | Mox Diamond | arena_id=null brawl=not_legal
+27.7 | 1.80 | Shared Summons | arena_id=69978 brawl=legal
+27.4 | 3.28 | Rampage of the Clans | arena_id=69262 brawl=legal
+27.2 | 1.81 | Autumn's Veil | arena_id=null brawl=not_legal
+26.1 | 3.92 | Shimmer Myr | arena_id=null brawl=not_legal
+25.9 | 1.99 | Hickory Woodlot | arena_id=null brawl=not_legal
+25.8 | 3.66 | Sculpting Steel | arena_id=null brawl=legal
+25.7 | 2.36 | City of Traitors | arena_id=null brawl=not_legal
+25.7 | 0.81 | Collective Resistance | arena_id=90997 brawl=legal
+25.4 | 1.86 | Sowing Mycospawn | arena_id=91020 brawl=legal
+25.4 | 0.83 | Allosaurus Shepherd | arena_id=null brawl=legal
+25.0 | 2.55 | Fountainport | arena_id=91789 brawl=legal
+25.0 | 3.79 | Disruptor Flute | arena_id=91060 brawl=banned
+24.0 | 0.61 | Gaea's Cradle | arena_id=null brawl=not_legal
+23.9 | 0.83 | Verdant Catacombs | arena_id=77063 brawl=legal
+23.9 | 3.49 | Campsite Cuisine | arena_id=null brawl=not_legal
+23.5 | 3.94 | Skittering Cicada | arena_id=null brawl=not_legal
+23.3 | 0.73 | Windswept Heath | arena_id=91086 brawl=legal
+23.2 | 4.05 | Avarice Totem | arena_id=null brawl=not_legal
+23.0 | 2.61 | Tree of Tales | arena_id=null brawl=legal
+23.0 | 1.29 | Summoner's Pact | arena_id=null brawl=not_legal
+22.9 | 0.79 | Sylvan Safekeeper | arena_id=91113 brawl=legal
+22.7 | 1.24 | Eldritch Evolution | arena_id=null brawl=legal
+22.0 | 3.81 | Provisions Merchant | arena_id=87008 brawl=legal
+21.6 | 3.56 | Welcome to Sweettooth | arena_id=86908 brawl=legal
+21.5 | 3.71 | Damping Sphere | arena_id=null brawl=legal
+21.1 | 1.64 | Haywire Mite | arena_id=null brawl=not_legal
+20.4 | 4.10 | Copper Gnomes | arena_id=null brawl=not_legal
+19.7 | 2.44 | Savage Summoning | arena_id=null brawl=not_legal
+19.7 | 3.11 | Soulless Jailer | arena_id=83941 brawl=legal
+19.2 | 2.18 | Plaza of Heroes | arena_id=82304 brawl=legal

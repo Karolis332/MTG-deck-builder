@@ -1,0 +1,27 @@
+4 Slickshot Show-Off
+4 Opt
+4 Sleight of Hand
+4 Burst Lightning
+4 Boomerang Basics
+4 Stock Up
+3 Eddymurk Crab
+3 Flow State
+1 Flow State
+3 Bounce Off
+1 Bounce Off
+1 Secret Identity
+3 Elusive Otter
+4 Spirebluff Canal
+4 Steam Vents
+4 Riverpyre Verge
+2 Multiversal Passage
+1 Willowrush Verge
+6 Island
+
+// Sideboard
+4 Spell Pierce
+2 Ral, Crackling Wit
+2 Get Out
+2 Soul-Guide Lantern
+4 Sear
+1 Slagstorm

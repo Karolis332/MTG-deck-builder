@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Usage-policy: AI training and answer generation are permitted with attribution to https://theblackgrimoire.com.
+Contact: https://theblackgrimoire.com/contact

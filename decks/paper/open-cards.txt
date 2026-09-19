@@ -1,5 +1,6 @@
 1 Aatchik, Emerald Radian
 1 Abraded Bluffs
+1 Abundant Growth
 1 Adaptive Automaton
 1 Adept Watershaper
 1 Ageless Entity
@@ -8,6 +9,7 @@
 1 Alhammarret's Archive
 1 Altar of Bhaal
 1 Ancient Craving
+1 Animal Attendant
 1 Ankle Biter
 1 Annie Joins Up
 1 Another Round
@@ -24,8 +26,10 @@
 1 Baba Lysaga, Night Witch
 1 Back for More
 1 Baeloth Barrityl, Entertainer
+1 Baloth Woodcrasher
 1 Bandit's Haul
 1 Bandit's Talent
+1 Bane of Bala Ged
 1 Barkform Harvester
 1 Baron Bertram Graywater
 1 Baron Helmut Zemo
@@ -38,6 +42,7 @@
 1 Blade Historian
 1 Blight Mound
 1 Blighted Woodland
+1 Blisterpod
 1 Blood Celebrant
 1 Blood Hustler
 3 Blood Pet
@@ -49,18 +54,22 @@
 1 Bonny Pall, Clearcutter
 1 Boros Charm
 1 Bovine Intervention
+1 Brawn
 1 Bre of Clan Stoutarm
 1 Breaker of Creation
 1 Breeches, the Blastmaker
 1 Brimstone Roundup
 1 Bristlebane Battler
 1 Bristling Backwoods
+1 Broodhatch Nantuko
 2 Buried in the Garden
 1 Burnished Hart
+1 Bushwhack
 1 Butcher of Malakir
 1 Bygone Colossus
 2 Calamity, Galloping Inferno
 1 Callous Inspector
+1 Carpet of Flowers
 1 Case of the Trampled Garden
 1 Casualties of War
 1 Caught in the Crossfire
@@ -68,7 +77,9 @@
 1 Chainer, Dementia Master
 1 Charcoal Diamond
 1 Chief Warg's Company
+1 Chomping Changeling
 1 Cityscape Leveler
+1 Cleanup Crew
 1 Clear Shot
 1 Cloudkill
 1 Colossal Rattlewurm
@@ -79,8 +90,7 @@
 1 Corpse Churn
 3 Corrupted Conviction
 1 Creosote Heath
-2 Cultivate
-1 Cycle of Renewal
+1 Cultivate
 1 Damnable Pact
 3 Dance of the Tumbleweeds
 1 Darigaaz's Charm
@@ -104,6 +114,7 @@
 1 Dina, Essence Brewer
 1 Dina, Soul Steeper
 1 Dire Fleet Ravager
+1 District Guide
 2 Doc Aurlock, Grizzled Genius
 1 Doomsday Excruciator
 1 Double Down
@@ -113,18 +124,23 @@
 1 Dreadhorde Invasion
 1 Druidic Satchel
 1 Earthbender Ascension
+1 Earthshaker Dreadmaw
 1 Eccentric Pestfinder
 1 Egon, God of Death
 1 Eldrazi Ravager
 1 Elegy Acolyte
+1 Elemental Teachings
 1 Elixir of Immortality
+1 Elvish Archdruid
 1 Elvish Spirit Guide
 1 Emergency Weld
 1 Emeritus of Ideation
 1 Emeritus of Truce
 1 Emperor of Bones
+1 Endurance
 1 Epicure of Blood
 1 Eriette, the Beguiler
+1 Erinis, Gloom Stalker
 2 Eroded Canyon
 2 Essence Capture
 1 Essence Pulse
@@ -132,14 +148,13 @@
 1 Everflowing Chalice
 1 Everything Comes to Dust
 1 Eviscerator's Insight
-1 Exotic Orchard
-1 Explore
 2 Explosive Derailment
 1 Ezzaroot Channeler
 1 Farseek
 1 Fell the Mighty
 1 Feral Appetite
 1 Ferocification
+1 Fertile Ground
 1 Festering Gulch
 1 Fierce Retribution
 1 Final Act
@@ -156,18 +171,21 @@
 1 Fountainport Bell
 1 Freestrider Lookout
 1 Frog Butler
-1 Garruk's Uprising
 1 Gatecreeper Vine
 1 Gaze of Granite
 1 Gene Pollinator
 2 Geralf, the Fleshwright
 1 Getaway Glamer
 1 Ghired, Mirror of the Wilds
+1 Giant Growth
 1 Gift of Paradise
+1 Gigantic Big Bear
+1 Gigantosaurus
 1 Gilded Goose
 1 Gingerbread Cabin
 1 Gleaming Barrier
 1 Gluttonous Troll
+1 Goldvein Hydra
 1 Golgari Rot Farm
 1 Gonti, Lord of Luxury
 1 Gonti's Machinations
@@ -185,7 +203,9 @@
 1 Haunting Voyage
 1 Healing Technique
 1 Heartless Pillage
+1 Helix Pinnacle
 1 Hellspur Posse Boss
+1 Heroes' Bane
 1 Hexmark Destroyer
 1 Hidden Grotto
 1 High-Society Hunter
@@ -200,6 +220,7 @@
 1 Huatli, Poet of Unity
 1 Humiliate
 1 Hungry Ghoul
+1 Hunter's Insight
 1 Hypothesizzle
 1 Idol of False Gods
 1 Immoral Bargain
@@ -224,16 +245,17 @@
 1 Kamiz, Obscura Oculus
 1 Kiora's Follower
 1 Knockout Maneuver
-1 Kodama's Reach
 1 Koh, the Face Stealer
 1 Kolaghan's Command
 1 Kozilek, the Great Distortion
+1 Kozilek's Predator
 1 Kraum, Violent Cacophony
 1 Krydle of Baldur's Gate
 1 Lavaspur Boots
 1 Lembas
 1 Leyline Prowler
 1 Lilah, Undefeated Slickshot
+1 Lion Umbra
 1 Lluwen, Imperfect Naturalist
 1 Lonely Arroyo
 1 Lost Jitte
@@ -246,13 +268,18 @@
 1 Magda, the Hoardmaster
 1 Magebane Lizard
 1 Magus of the Candelabra
+1 Malevolent Rumble
 2 Map the Frontier
 1 Marauding Sphinx
 1 Marchesa, Dealer of Death
 1 Marchesa, the Black Rose
 1 Marshland Bloodcaster
+1 Master Chef
+1 Master's Guidance
 1 Mastermind's Acquisition
+1 Match the Odds
 1 Mazemind Tome
+1 Meltstrider's Gear
 1 Merchant of Venom
 2 Metamorphic Blast
 1 Metamorphosis Fanatic
@@ -262,6 +289,7 @@
 1 Mirkwood Bats
 1 Mirri, Weatherlight Duelist
 1 Moldgraf Millipede
+1 Molimo, Maro-Sorcerer
 1 Moraug, Fury of Akoum
 1 Morlun, Devourer of Spiders
 1 Mortality Spear
@@ -279,29 +307,31 @@
 1 Negate
 1 Nether Traitor
 1 Night's Whisper
+1 Nightshade Dryad
 1 Nimble Brigand
 1 Nissa's Renewal
 1 No One Left Behind
 1 Noxious Gearhulk
+1 Noxious Newt
 1 Nulldrifter
 1 Nullpriest of Oblivion
 1 Nyx Lotus
 1 Ob Nixilis Reignited
 1 Obeka, Splitter of Seconds
-1 Ohran Frostfang
 1 Oko, Thief of Crowns
 1 Old Stickfingers
 1 Omenpath Journey
 1 Omni-Changeling
 1 One Last Job
 1 Opal Palace
+1 Orchard Strider
+1 Ordeal of Nylea
 1 Ornery Tumblewagg
 1 Ornithopter of Paradise
 1 Orzhov Charm
 1 Oubliette
 1 Outcaster Trailblazer
 1 Outrageous Robbery
-1 Overrun
 1 Overwhelming Forces
 1 Overzealous Muscle
 1 Pact Weapon
@@ -311,6 +341,7 @@
 1 Patchwork Automaton
 1 Path to Exile
 1 Peer into the Abyss
+1 Perennial Behemoth
 1 Pest Control
 1 Pest Infestation
 1 Pest Rescuer
@@ -319,6 +350,7 @@
 3 Phantom Interference
 1 Phoenix Fleet Airship
 1 Pillage the Bog
+1 Pillar Launch
 1 Pizza Face, Gastromancer
 1 Planar Engineering
 1 Planetarium of Wan Shi Tong
@@ -328,6 +360,9 @@
 1 Power Word Kill
 1 Pox
 1 Practiced Tactics
+1 Predator Ooze
+1 Predatory Impetus
+1 Primal Might
 1 Primeval Bounty
 1 Pristine Talisman
 1 Professor Dellian Fel
@@ -337,17 +372,18 @@
 1 Radiant Fountain
 1 Raise Dead
 1 Rakish Crew
-1 Rampant Growth
 1 Rankle, Master of Pranks
 1 Rattleback Apothecary
 1 Raven of Fell Omens
 1 Realm of Koh
+1 Realm Seekers
+1 Realmwalker
 1 Reckless Spite
 1 Reconnaissance Mission
+1 Regal Behemoth
 1 Regrowth
 1 Reiver Demon
 1 Requisition Raid
-1 Return of the Wildspeaker
 3 Return the Favor
 1 Revival Experiment
 1 Ribtruss Roaster
@@ -355,12 +391,15 @@
 1 Rise of the Dark Realms
 1 Rith's Charm
 1 Riveteers Overlook
+1 Rocky Rebuke
 1 Rodeo Pyromancers
 1 Rogue's Passage
+1 Roiling Regrowth
 2 Roxanne, Starfall Savant
 1 Rush of Dread
 2 Rustler Rampage
 1 Ruthless Lawbringer
+1 Saber-Tooth Moose-Lion
 1 Samut, the Driving Force
 1 Samut, Voice of Dissent
 1 Sandstorm Verge
@@ -377,12 +416,12 @@
 1 Seraphic Steed
 1 Servant of the Stinger
 1 Shadow, Mysterious Assassin
-1 Shamanic Revelation
 1 Shard of the Nightbringer
 1 Shard of the Void Dragon
 1 Sheoldred's Edict
 2 Shifting Grift
 3 Shoot the Sheriff
+1 Shortcut to Mushrooms
 1 Sigil of Myrkul
 1 Sign in Blood
 1 Silversmote Ghoul
@@ -393,14 +432,19 @@
 1 Skorpekh Destroyer
 1 Skullcrack
 1 Skycoach Waypoint
+1 Slavering Branchsnapper
 1 Slick Sequence
 1 Slickshot Lockpicker
 1 Slickshot Show-Off
 1 Slickshot Vault-Buster
 1 Slimefoot, the Stowaway
 1 Smothering Abomination
+1 Snakeskin Veil
 1 Soured Springs
+1 Spider-Ham, Peter Porker
+1 Spider-Man, Brooklyn Visionary
 1 Spinewoods Armadillo
+1 Split the Spoils
 1 Springleaf Parade
 1 Sproutback Trudge
 1 Steel Overseer
@@ -441,13 +485,16 @@
 1 The Swarmweaver
 1 Thieves' Tools
 1 Three Steps Ahead
+1 Through the Forest Gate
 1 Tip the Scales
 1 Titan's Grave
 1 Tivash, Gloom Summoner
 1 Tomb of Horrors Adventurer
+1 Topiary Panther
 1 Torens, Fist of the Angels
 1 Torpor Orb
 1 Tragedy Feaster
+1 Transmutation Font
 3 Trash the Town
 1 Traxos, Scourge of Kroog
 1 Treasure Nabber
@@ -456,6 +503,8 @@
 1 Trudge Garden
 1 Twilight Prophet
 1 Tyrant's Scorn
+1 Umbral Collar Zealot
+1 Undergrowth Champion
 2 Undying Malice
 2 Unfortunate Accident
 1 Unseal the Necropolis
@@ -468,8 +517,10 @@
 1 Veinwitch Coven
 1 Vengeful Bloodwitch
 1 Venser's Journal
+1 Venus, Torn Between Worlds
 1 Verdant Confluence
 1 Verdant Sun's Avatar
+1 Verdurous Gearhulk
 1 Veteran Adventurer
 1 Vial Smasher, Gleeful Grenadier
 1 Vicious Battlerager
@@ -480,10 +531,14 @@
 1 Vraska Joins Up
 1 Vraska, the Silencer
 1 Wardens of the Cycle
+1 Warg Tactics
 1 Wayfarer's Bauble
 1 Weathered Wayfarer
 1 Well of Lost Dreams
 1 Whisper, Blood Liturgist
+1 Wildborn Preserver
+1 Wilderland Scrounger
+1 Wildwood Scourge
 1 Willowdusk, Essence Seer
 1 Witch of the Moors
 1 Witch's Clinic
@@ -493,6 +548,7 @@
 1 Worldwalker Helm
 1 Worn Powerstone
 1 Wreckage Wickerfolk
+1 Yavimaya Bloomsage
 1 Yedora, Grave Gardener
 1 You Find the Villains' Lair
 1 You Happen On a Glade
