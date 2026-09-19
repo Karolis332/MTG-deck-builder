@@ -30,12 +30,12 @@ Ship the **free tracker/builder direct** first (GitHub Releases + landing page) 
 - [ ] Write PRIVACY.md + EULA.md, host on landing page (`/privacy`, `/eula`). Must disclose: local Arena log parsing, card data from Scryfall, optional cloud recommendations (deck contents sent to CF API), no sale of data.
 - [ ] Clean-VM install test: fresh Windows 11, no dev tools → installer → first-boot wizard → card seed → build a deck → Arena overlay on a real match.
 - [ ] Regenerate the 12 screenshots on current UI.
-- [ ] Version bump to `1.0.0-beta.1`.
+- [x] Version bump to `1.0.0-beta.1` (2026-09-19, d20ddcb).
 - **Gate:** operator says the clean-VM run felt shippable.
 
 ### P1 — Direct launch (week 2)
-- [ ] `npm run dist:win` → draft GitHub Release with NSIS + portable artifacts.
-- [ ] Deploy landing page per `black-grimoire-web/DEPLOY.md`; point Download CTA at the release asset.
+- [x] `npm run dist:win` → GitHub Release `v1.0.0-beta.1` (prerelease, NSIS + portable + zip + latest.yml, 2026-09-19; smoke: window in 10 s on a fresh profile).
+- [x] Landing + `/download` page read the latest GitHub release; header Download button, hero CTA (black-grimoire-web 239c283, deployed 2026-09-19).
 - [ ] Auto-update sanity check: install beta.1, publish beta.2, confirm update flows.
 - **Gate (rung 3 — operator only):** publishing the GitHub Release and flipping the landing page live are outbound/publish actions. Draft everything; operator presses publish.
 
