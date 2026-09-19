@@ -18,7 +18,8 @@ export type Archetype =
   | 'reanimator'
   | 'spellslinger'
   | 'aristocrats'
-  | 'stax';
+  | 'stax'
+  | 'tokens';
 
 export interface RampBreakdown {
   rocks: [number, number];        // min, max
@@ -604,6 +605,50 @@ export const ARCHETYPE_TEMPLATES: Record<Archetype, ArchetypeTemplate> = {
       'smothering tithe', 'rhystic study', 'rule of law',
     ],
     tutors: [1, 3],
+  },
+
+  tokens: {
+    name: 'tokens',
+    label: 'Tokens',
+    description: 'Go-wide strategy flooding the board with creature tokens, then closing with anthems or a sacrifice/damage payoff.',
+    lands: [36, 38],
+    ramp: {
+      rocks: [3, 5],
+      dorks: [3, 5],
+      landRamp: [0, 2],
+      totalMin: 8,
+      totalMax: 10,
+    },
+    draw: {
+      cantrips: [3, 5],
+      engines: [2, 3],
+      impulse: [1, 2],
+      wheels: [0, 1],
+      totalMin: 8,
+      totalMax: 10,
+    },
+    removal: {
+      spot: [4, 5],
+      wipes: [1, 2],
+      counterspells: [0, 1],
+      totalMin: 6,
+      totalMax: 8,
+    },
+    creatures: [20, 30],
+    manaCurve: { 1: 5, 2: 12, 3: 10, 4: 6, 5: 3, 6: 2, 7: 1 },
+    avgCmc: [2.4, 2.9],
+    winConditionSlots: [3, 6],
+    // 'token_producers' is already a recognized-but-unenforced key (see
+    // KNOWN_DEAD_SYNERGY_MINIMUMS above) — same pattern every other
+    // template uses for its payoff type (aristocrats: sac_outlets, stax:
+    // stax_pieces). The token-payoff emphasis itself goes through
+    // synergy_payoff (RoleQuotas), not a new role.
+    synergyMinimums: { 'token_producers': 6 },
+    protectedPatterns: [
+      'sol ring', 'arcane signet', 'anointed procession', 'parallel lives',
+      'divine visitation', 'craterhoof behemoth',
+    ],
+    tutors: [0, 2],
   },
 };
 

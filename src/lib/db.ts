@@ -1294,9 +1294,26 @@ export function resolveGrpIdsToCards(grpIds: number[]): Map<number, { card_name:
  */
 // ── cEDH staples ─────────────────────────────────────────────────────────
 
+/** Parses a `cards.legalities` JSON blob and checks one format key; malformed/missing rows read as not legal. */
+function isLegalUnder(legalitiesJson: string | null, legalityKey: string): boolean {
+  if (!legalitiesJson) return false;
+  try {
+    const legalities = JSON.parse(legalitiesJson) as Record<string, string>;
+    return legalities[legalityKey] === 'legal';
+  } catch {
+    return false;
+  }
+}
+
 /**
  * Get cEDH staples whose color identity is a subset of the deck's colors.
  * Empty color_identity matches any deck (colorless cards).
+ *
+ * historic_brawl (the original/default format) keeps its hand-maintained
+ * color_identity column as-is. Commander/Brawl/Standard Brawl instead join
+ * the cards table for the real color identity AND drop anything not
+ * actually legal in that format — the historic_brawl list includes cards
+ * banned in Commander (Mana Crypt, Jeweled Lotus).
  */
 export function getCedhStaples(
   colorIdentity: string[],
@@ -1304,12 +1321,64 @@ export function getCedhStaples(
 ): Array<{ card_name: string; category: string; power_tier: string }> {
   const db = getDb();
   try {
-    const allStaples = db.prepare(
+    // Brawl/Standard Brawl have no staples of their own yet (migration 46
+    // only seeded 'commander') — fall back to the commander list, then the
+    // original historic_brawl list, deduped so the commander row wins.
+    const sourceFormats = format === 'brawl' || format === 'standardbrawl'
+      ? ['commander', 'historic_brawl']
+      : [format];
+    const rows = db.prepare(
       `SELECT card_name, color_identity, category, power_tier
-       FROM cedh_staples WHERE format = ?`
-    ).all(format) as Array<{ card_name: string; color_identity: string; category: string; power_tier: string }>;
+       FROM cedh_staples WHERE format IN (${sourceFormats.map(() => '?').join(',')})
+       ORDER BY CASE format WHEN 'commander' THEN 0 ELSE 1 END`
+    ).all(...sourceFormats) as Array<{ card_name: string; color_identity: string; category: string; power_tier: string }>;
+    const seenNames = new Set<string>();
+    const allStaples = rows.filter((s) => !seenNames.has(s.card_name) && seenNames.add(s.card_name));
 
     const colorSet = new Set(colorIdentity);
+
+    if (format === 'commander' || format === 'brawl' || format === 'standardbrawl') {
+      const legalityKey = getLegalityKey(format);
+
+      // Cards can have many printings; prefer one where this format is
+      // legal so a banned-then-unbanned (or vice versa) reprint can't hide
+      // the card's real status. ONE query for every staple name (was one
+      // query per name — a couple hundred round trips per build), preferred
+      // printing picked in JS from the (small) result set.
+      const names = allStaples.map((s) => s.card_name);
+      const cardRows = names.length > 0
+        ? (db.prepare(
+            `SELECT name, color_identity, legalities FROM cards WHERE name IN (${names.map(() => '?').join(',')})`
+          ).all(...names) as Array<{ name: string; color_identity: string | null; legalities: string | null }>)
+        : [];
+      if (names.length > 0 && cardRows.length === 0) {
+        console.warn(`[cedh-staples] cards table returned 0 rows for ${format} (${names.length} staple names looked up) — is the cards table seeded?`);
+      }
+      const bestRowByName = new Map<string, { color_identity: string | null; legalities: string | null }>();
+      for (const row of cardRows) {
+        const existing = bestRowByName.get(row.name);
+        if (!existing) {
+          bestRowByName.set(row.name, row);
+          continue;
+        }
+        const existingLegal = isLegalUnder(existing.legalities, legalityKey);
+        const rowLegal = isLegalUnder(row.legalities, legalityKey);
+        if (rowLegal && !existingLegal) bestRowByName.set(row.name, row);
+      }
+
+      const out: Array<{ card_name: string; category: string; power_tier: string }> = [];
+      for (const s of allStaples) {
+        const row = bestRowByName.get(s.card_name);
+        if (!row) continue; // no printing in the local DB — drop, don't guess
+        if (!isLegalUnder(row.legalities, legalityKey)) continue;
+        let ci: string[] = [];
+        try { ci = JSON.parse(row.color_identity || '[]'); } catch { /* malformed row — treat as colorless */ }
+        if (!ci.every((c) => colorSet.has(c))) continue;
+        out.push({ card_name: s.card_name, category: s.category, power_tier: s.power_tier });
+      }
+      return out;
+    }
+
     return allStaples.filter(s => {
       // Empty color_identity = colorless, always fits
       if (!s.color_identity) return true;

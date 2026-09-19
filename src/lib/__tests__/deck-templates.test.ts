@@ -1,6 +1,18 @@
 import { describe, it, expect } from 'vitest';
-import { ARCHETYPE_TEMPLATES, KNOWN_DEAD_SYNERGY_MINIMUMS } from '../deck-templates';
+import { ARCHETYPE_TEMPLATES, KNOWN_DEAD_SYNERGY_MINIMUMS, getTemplate } from '../deck-templates';
 import { SYNERGY_REQUIREMENTS_MAP } from '../deck-builder-ai';
+
+// Round 3 refuter MEDIUM-1: 'tokens' had no template, so getTemplate('tokens')
+// silently fell back to midrange (the `ARCHETYPE_TEMPLATES[key] || midrange`
+// fallback in getTemplate hid the missing key instead of failing loudly).
+describe('tokens archetype template', () => {
+  it('getTemplate("tokens") returns the real tokens template, not the midrange fallback', () => {
+    const template = getTemplate('tokens');
+    expect(template.name).toBe('tokens');
+    expect(template).not.toBe(ARCHETYPE_TEMPLATES.midrange);
+    expect(template.lands).toEqual(ARCHETYPE_TEMPLATES.tokens.lands);
+  });
+});
 
 // Review 2026-08-23 C4: ArchetypeTemplate.synergyMinimums keys are only
 // enforced (deck-builder-ai.ts Step 4b) when they appear in

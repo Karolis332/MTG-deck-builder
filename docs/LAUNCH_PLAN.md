@@ -36,7 +36,7 @@ Ship the **free tracker/builder direct** first (GitHub Releases + landing page) 
 ### P1 — Direct launch (week 2)
 - [x] `npm run dist:win` → GitHub Release `v1.0.0-beta.1` (prerelease, NSIS + portable + zip + latest.yml, 2026-09-19; smoke: window in 10 s on a fresh profile).
 - [x] Landing + `/download` page read the latest GitHub release; header Download button, hero CTA (black-grimoire-web 239c283, deployed 2026-09-19).
-- [ ] Auto-update sanity check: beta.2 published 2026-09-19 (updater feed URLs 200, first non-draft release → /download serves it); still to confirm: beta.1 → beta.2 update on a machine with beta.1 installed.
+- [ ] Auto-update sanity check: beta.2 published 2026-09-19 (updater feed URLs 200, first non-draft release; /download picks it up within its hourly revalidate); still to confirm: beta.1 → beta.2 update on a machine with beta.1 installed.
 - **Gate (rung 3 — operator only):** publishing the GitHub Release and flipping the landing page live are outbound/publish actions. Draft everything; operator presses publish.
 
 ### P2 — Overwolf (weeks 2–6, parallel after P1)

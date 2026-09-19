@@ -18,6 +18,10 @@ export interface ParsedBuildHints {
   avoid: string[];
   /** exact card names to exclude */
   excludeNames: string[];
+  /** "low/tight/consistent curve" — bias the top end of the curve down */
+  lowCurve: boolean;
+  /** "consistent manabase" — bias lands/fixing toward the generous end */
+  consistentMana: boolean;
 }
 
 const STRATEGY_WORDS: Record<string, string> = {
@@ -34,6 +38,15 @@ const STRATEGY_WORDS: Record<string, string> = {
   reanimator: 'reanimator', graveyard: 'reanimator',
 };
 
+// Multi-word/compound strategy phrases — checked BEFORE the single-word
+// STRATEGY_WORDS table, since "go wide" contains no standalone archetype
+// word and would otherwise fall through to whatever unrelated word matches.
+const STRATEGY_PHRASES: Array<{ pattern: RegExp; keyword: string; strategy: string }> = [
+  { pattern: /\bgo[- ]wide\b/, keyword: 'wide', strategy: 'tokens' },
+  { pattern: /\bwide board\b/, keyword: 'wide', strategy: 'tokens' },
+  { pattern: /\bswarm\b/, keyword: 'swarm', strategy: 'tokens' },
+];
+
 // Theme nouns worth rewarding directly in oracle/type text.
 const THEME_WORDS = new Set([
   'token', 'tokens', 'treasure', 'treasures', 'lifegain', 'life', 'counters',
@@ -45,12 +58,18 @@ const THEME_WORDS = new Set([
   'humans', 'human', 'soldiers', 'soldier', 'spirits', 'spirit', 'slivers', 'sliver',
   'dinosaurs', 'dinosaur', 'hydras', 'hydra', 'eldrazi', 'merfolk', 'rats', 'rat',
   'cats', 'cat', 'dogs', 'dog', 'birds', 'bird', 'snakes', 'snake', 'squirrels', 'squirrel',
+  'food', 'foods', 'clue', 'clues', 'blood', 'powerstone', 'powerstones', 'map', 'maps', 'incubate',
 ]);
+
+// "consistent curve"/"low curve" or a bare "curve" mention at all.
+const LOW_CURVE_RE = /\b(low|lower|tight|consistent|smooth)\b[^.,;]{0,20}\bcurve\b|\bcurve\b/;
+// "manabase"/"mana base", or a consistency qualifier near "mana"/"lands".
+const CONSISTENT_MANA_RE = /\bmana ?base\b|\b(consistent|stable|reliable|smooth)\b[^.,;]{0,20}\b(mana|lands)\b/;
 
 const singular = (w: string): string => (w.endsWith('s') ? w.slice(0, -1) : w);
 
 export function parseBuildHints(text: string | undefined | null): ParsedBuildHints {
-  const out: ParsedBuildHints = { emphasize: [], avoid: [], excludeNames: [] };
+  const out: ParsedBuildHints = { emphasize: [], avoid: [], excludeNames: [], lowCurve: false, consistentMana: false };
   if (!text || !text.trim()) return out;
   const lower = text.toLowerCase().slice(0, 500);
 
@@ -69,12 +88,21 @@ export function parseBuildHints(text: string | undefined | null): ParsedBuildHin
     if (phrase) out.avoid.push(singular(phrase));
   }
 
-  // Strategy: first archetype word that is NOT in an avoid phrase
+  // Strategy: multi-word phrases first ("go wide" has no single archetype
+  // word), then the first single archetype word that is NOT in an avoid phrase.
   const avoidJoined = out.avoid.join(' ');
-  for (const [word, strat] of Object.entries(STRATEGY_WORDS)) {
-    if (new RegExp(`\\b${word}\\b`).test(lower) && !avoidJoined.includes(singular(word))) {
-      out.strategy = strat;
+  for (const { pattern, keyword, strategy } of STRATEGY_PHRASES) {
+    if (pattern.test(lower) && !avoidJoined.includes(keyword)) {
+      out.strategy = strategy;
       break;
+    }
+  }
+  if (!out.strategy) {
+    for (const [word, strat] of Object.entries(STRATEGY_WORDS)) {
+      if (new RegExp(`\\b${word}\\b`).test(lower) && !avoidJoined.includes(singular(word))) {
+        out.strategy = strat;
+        break;
+      }
     }
   }
 
@@ -85,6 +113,9 @@ export function parseBuildHints(text: string | undefined | null): ParsedBuildHin
       if (!out.emphasize.includes(s)) out.emphasize.push(s);
     }
   }
+
+  out.lowCurve = LOW_CURVE_RE.test(lower);
+  out.consistentMana = CONSISTENT_MANA_RE.test(lower);
 
   return out;
 }

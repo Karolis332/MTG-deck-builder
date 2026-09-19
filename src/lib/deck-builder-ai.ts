@@ -7,7 +7,7 @@ import { getCardGlobalScore, getMetaAdjustedScore } from './global-learner';
 import { getEdhrecRecommendations, getEdhrecThemeCards } from './edhrec';
 import type { EdhrecRecommendation } from './edhrec';
 import { getTemplate, getScaledCurve, mergeWithCommanderProfile } from './deck-templates';
-import type { Archetype } from './deck-templates';
+import type { Archetype, ArchetypeTemplate } from './deck-templates';
 import { analyzeCommander, mergeProfiles } from './commander-synergy';
 import type { CommanderSynergyProfile } from './commander-synergy';
 import { buildOptimalLandBase, isFetchLandRelevant } from './land-intelligence';
@@ -23,6 +23,7 @@ import { analyzeCommanderForBuild } from './commander-analysis';
 import type { ArsenalCard } from './commander-analysis';
 import { classifyCard, isDrawEngine, isBoardWipe } from './card-classifier';
 import { parseBuildHints } from './build-hints';
+import type { ParsedBuildHints } from './build-hints';
 import { auditDeck } from './deck-auditor';
 import type { DeckHealth } from './deck-auditor';
 
@@ -439,10 +440,15 @@ export interface BuildResult {
   health?: DeckHealth;
   /** Scored candidate pool with per-card score components (captureComponents only) */
   scoredPool?: Array<{ name: string; score: number; components: Record<string, number> }>;
+  /** What the free-text buildHints prompt was understood to mean (build-hints.ts) */
+  hints?: { parsed: ParsedBuildHints; boostedCards: number };
 }
 
 export interface ScoredCandidatePoolResult {
   pool: Array<{ card: DbCard; score: number }>;
+  hints: ParsedBuildHints;
+  /** Candidates whose score included a non-zero emphasize-term bonus */
+  boostedCards: number;
   themes: string[];
   resolvedStrategy: string;
   tribalType: string | null;
@@ -1097,6 +1103,10 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
   // Per-card additive score breakdown, captured only when training/diagnosing.
   const componentsByName = new Map<string, Record<string, number>>();
 
+  // Candidates whose score got a non-zero emphasize-term bonus (item 4:
+  // "what the builder understood from the hints" for the API response).
+  let boostedCards = 0;
+
   const scored = pool.map((card) => {
     let score = 0;
     const comp: Record<string, number> = {};
@@ -1245,6 +1255,7 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
       for (const term of hints.emphasize) {
         if (hintText.includes(term)) hintBonus += 18;
       }
+      if (hintBonus > 0) boostedCards += 1;
       score += Math.min(36, hintBonus);
       for (const term of hints.avoid) {
         // A multi-word avoid term that matches the card's NAME ("no massacre
@@ -1381,6 +1392,20 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
     }
 
     snap('powerTier');
+    // ── Free-text hint: "low/consistent curve" ──
+    // Leans the top end of the curve down. cEDH staples and the picker's
+    // actual finishers (win_condition role) are exempt — they need to be
+    // expensive to do their job (Craterhoof, Approach of the Second Sun).
+    if (hints.lowCurve && !(card.type_line || '').split('//')[0].includes('Land')) {
+      const exempt = cedhStapleMap.has(card.name)
+        || classifyCard(card.name, card.oracle_text || '', card.type_line || '', card.cmc || 0).includes('win_condition');
+      if (!exempt) {
+        if (card.cmc >= 6) score -= 60;
+        else if (card.cmc >= 5) score -= 30;
+      }
+    }
+
+    snap('lowCurve');
     // ── Meta card stats scoring (from 506K+ scraped decks) ──
     // Inclusion rates are global — adjust for color identity to properly weight
     // color-specific staples (e.g., Ponder at 5.8% global ≈ 20% in blue decks)
@@ -1487,6 +1512,8 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
 
   return {
     pool: colorFilteredScored,
+    hints,
+    boostedCards,
     componentsByName: options.captureComponents ? componentsByName : undefined,
     themes,
     resolvedStrategy,
@@ -1512,16 +1539,55 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
   };
 }
 
+/**
+ * Land-count adjustment for the "consistent manabase" build hint.
+ *
+ * `hintTemplate` must already be gated to commander-family formats by the
+ * caller (null for 60-card formats) — this function only decides HOW MUCH
+ * to raise lands, not WHETHER the archetype band applies. Round 3 refuter
+ * CRITICAL-1/HIGH-1: the archetype land bands are Commander-scale (33-40 out
+ * of 99/100 cards); applying them to a 60-card format, or letting a band
+ * whose max sits below the format's flat base LOWER the land count, both
+ * shipped as bugs. This function can only raise lands, never lower them.
+ */
+export function resolveConsistentManaLandTarget(
+  baseLandTarget: number,
+  consistentMana: boolean,
+  hintTemplate: ArchetypeTemplate | null,
+): number {
+  if (hintTemplate) return Math.max(baseLandTarget, hintTemplate.lands[1]);
+  if (consistentMana) return Math.min(26, baseLandTarget + 1);
+  return baseLandTarget;
+}
+
 export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult> {
   const db = getDb();
   const poolResult = await buildScoredCandidatePool(options);
   const {
-    pool: scored, themes, resolvedStrategy, tribalType, tribalNames,
-    commanderProfile, commanderCard, landTarget: targetLands, nonLandTarget,
+    pool: scored, hints, boostedCards, themes, resolvedStrategy, tribalType, tribalNames,
+    commanderProfile, commanderCard, landTarget: baseLandTarget, nonLandTarget: baseNonLandTarget,
     isCommander, maxCopies, colors, ownedQty, useCollection,
     colorExcludeFilter, legalityFilter, commanderExclude: _commanderExclude,
     collectionJoin, collectionOrder, metaStatsMap, commanderStatsMap,
   } = poolResult;
+
+  // Free-text hint: "consistent manabase" biases toward the generous end of
+  // the archetype's land band (and shrinks the nonland budget to match, so
+  // the deck still totals the right size) plus the ramp rock/dork ceiling
+  // below, instead of the computed default/midpoint.
+  //
+  // The archetype land bands are Commander-scale (33-40 out of 99/100 cards)
+  // — they must never be applied to a 60-card format (Standard aggro's flat
+  // 24-land base would otherwise jump to a Commander band's 35+, or get cut
+  // if the band's max is below the format's own base). Commander-family
+  // formats (commander/brawl/standardbrawl/competitivebrawl) use the band,
+  // and only ever move lands UP from the flat base. 60-card formats get a
+  // flat +1, capped at 26 since no format-specific max band exists.
+  const hintTemplate = hints.consistentMana && isCommander
+    ? getTemplate((resolvedStrategy as Archetype) || 'midrange')
+    : null;
+  const targetLands = resolveConsistentManaLandTarget(baseLandTarget, hints.consistentMana, hintTemplate);
+  const nonLandTarget = baseNonLandTarget - (targetLands - baseLandTarget);
 
   // ── Step 4: Role-based picking (constraint-driven) ──────────────────────
   // Old approach: fill by curve bucket, then by score. This produced decks
@@ -1596,12 +1662,20 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
   // Role quotas are computed BEFORE the pre-fill so its caps exist while the
   // arsenal runs (review 2026-08-23 C1: uncapped pre-fill shipped ramp 22-29
   // vs quota 9 and starved draw/removal — caps could only refuse, not retract).
-  const quotas = getRoleQuotas(
+  const baseQuotas = getRoleQuotas(
     (resolvedStrategy as Archetype) || 'midrange',
     nonLandTarget,
     commanderProfile,
     options.powerLevel,
   );
+  // "Consistent manabase" also means enough rocks/dorks to hit those land
+  // drops — raise the ramp quota to the template's ramp-band ceiling
+  // (totalMax; rocks[1]+dorks[1] alone is at or below the computed midpoint
+  // for most archetypes — surveyed across all 12 templates — so it would be
+  // a near no-op instead of a real bump).
+  const quotas = hintTemplate
+    ? { ...baseQuotas, ramp: Math.max(baseQuotas.ramp, hintTemplate.ramp.totalMax) }
+    : baseQuotas;
   const roleCaps = roleCapsFor(quotas);
   const preFillRoleFills: Record<string, number> = {};
   const cappedRolesFor = (card: DbCard): string[] =>
@@ -2262,6 +2336,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
           components: poolResult.componentsByName?.get(card.name) ?? {},
         }))
       : undefined,
+    hints: { parsed: hints, boostedCards },
   };
 }
 

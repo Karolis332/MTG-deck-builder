@@ -173,6 +173,39 @@ export const TRIGGER_PATTERNS: Record<SynergyCategory, RegExp[]> = {
   ],
 };
 
+// Damage dealt TO the controller ("Whenever a creature deals combat damage
+// to you, sacrifice a Food token.") reads as an attack_trigger under the
+// generic patterns above but is a defensive/payoff trigger, not the
+// commander attacking — it must not count toward attack_trigger/voltron.
+// Checked per-clause (see matchesAttackTrigger) so the positive patterns
+// above stay untouched.
+const ATTACK_TRIGGER_EXCLUSIONS: RegExp[] = [
+  /deals? combat damage to you\b/i,
+  /deals? damage to you\b/i,
+  /to you or a planeswalker you control/i,
+  /is dealt to you\b/i,
+  // "attacks you" (or "...attacks you or a planeswalker you control" — the
+  // \b boundary after "you" covers both) is the creature attacking the
+  // controller, not the controller's own commander attacking ("whenever you
+  // attack" — different word order — stays a real attack_trigger).
+  /attacks you\b/i,
+];
+
+/**
+ * attack_trigger needs clause-level exclusion (a commander can have one
+ * ability about being attacked and a separate one about attacking), so it
+ * gets its own check instead of the whole-text `some(pattern.test)` used
+ * for every other category.
+ */
+function matchesAttackTrigger(text: string, patterns: RegExp[]): boolean {
+  const clauses = text.split(/[\n.]+/);
+  return clauses.some(
+    (clause) =>
+      patterns.some((p) => p.test(clause)) &&
+      !ATTACK_TRIGGER_EXCLUSIONS.some((ex) => ex.test(clause))
+  );
+}
+
 // ── Payoff Detection ─────────────────────────────────────────────────────────
 
 interface PayoffMatch {
@@ -440,12 +473,11 @@ export function analyzeCommander(
   const triggerCategories: SynergyCategory[] = [];
 
   for (const [category, patterns] of Object.entries(TRIGGER_PATTERNS) as [SynergyCategory, RegExp[]][]) {
-    for (const pattern of patterns) {
-      if (pattern.test(text)) {
-        triggerCategories.push(category);
-        break;
-      }
-    }
+    const matched =
+      category === 'attack_trigger'
+        ? matchesAttackTrigger(text, patterns)
+        : patterns.some((pattern) => pattern.test(text));
+    if (matched) triggerCategories.push(category);
   }
 
   // An {X} in the commander's own cost (Vivi Ornitier, Zaxara, Hydra lords)

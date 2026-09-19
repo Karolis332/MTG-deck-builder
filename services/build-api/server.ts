@@ -182,6 +182,7 @@ async function handleBuild(body: string, res: http.ServerResponse): Promise<void
       tribalType: result.tribalType || null,
       collectionMode: Boolean(ownedCards),
       collectionMatched: ownedCards ? collectionMatched : undefined,
+      hints: result.hints,
       elapsedMs: Date.now() - started,
       cards: result.cards.map((entry) => {
         const card = entry.card as DbCard;
