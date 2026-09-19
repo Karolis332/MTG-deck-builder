@@ -1,0 +1,88 @@
+1 Kraum, Violent Cacophony
+1 Arcane Signet
+1 Command Tower
+1 Opt
+1 Izzet Signet
+1 Frantic Search
+1 Consider
+1 Brainstorm
+1 Goblin Electromancer
+1 Counterspell
+1 Lightning Bolt
+1 Guttersnipe
+1 Negate
+1 Abrade
+1 Ponder
+1 Preordain
+1 Thrill of Possibility
+1 Faithless Looting
+1 Talisman of Creativity
+1 Slick Sequence
+1 Storm-Kiln Artist
+1 Reliquary Tower
+1 Mind Stone
+1 Young Pyromancer
+1 Third Path Iconoclast
+1 Swiftwater Cliffs
+1 Temple of Epiphany
+1 Balmor, Battlemage Captain
+1 Archmage Emeritus
+1 Firebrand Archer
+1 Stormcarved Coast
+1 Stormcatch Mentor
+1 Expressive Iteration
+1 Evolving Wilds
+1 Izzet Charm
+1 Pongify
+1 An Offer You Can't Refuse
+1 Expedite
+1 Fists of Flame
+1 Think Twice
+1 Rapid Hybridization
+1 Murmuring Mystic
+1 Steam Vents
+1 Fiery Inscription
+1 Swiftfoot Boots
+1 Mystic Sanctuary
+1 Blasphemous Act
+1 Big Score
+1 Wayfarer's Bauble
+1 Curiosity
+1 Coruscation Mage
+1 Aetherize
+1 Kessig Flamebreather
+1 Twinferno
+1 Spirebluff Canal
+1 Enter the Enigma
+1 Terramorphic Expanse
+1 Izzet Guildgate
+1 Resculpt
+1 Demand Answers
+1 Quick Study
+1 Treasure Cruise
+1 Unsummon
+1 Sleight of Hand
+1 Spell Pierce
+1 Lightning Greaves
+1 Grapeshot
+1 Electrostatic Infantry
+1 Run Away Together
+1 Rogue's Passage
+1 Mischievous Mystic
+1 Tempest Angler
+1 Crash Through
+1 Shock
+1 Electrostatic Field
+1 Lightning Strike
+1 Thundering Falls
+1 Scalding Tarn
+1 Riverpyre Verge
+1 Pinnacle Monk
+1 Thriving Bluff
+1 Sink into Stupor
+1 Thriving Isle
+1 Ash Barrens
+1 Fabled Passage
+1 Hidden Cataract
+7 Mountain
+7 Island

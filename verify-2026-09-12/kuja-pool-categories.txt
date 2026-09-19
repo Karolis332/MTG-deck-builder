@@ -1,0 +1,599 @@
+
+===== spell_payoffs (49) =====
+Black Waltz No. 3 | {2}{B}{R} | Legendary Creature — Wizard | incl=90.5(n=6318) | Flying, deathtouch Whenever you cast a noncreature spell, Black Waltz No. 3 deals 2 damage to each opponent.
+Black Mage's Rod | {1}{B} | Artifact — Equipment | incl=89.7(n=6261) | Job select (When this Equipment enters, create a 1/1 colorless Hero creature token, then attach this to it.) Equipped creature gets +1/+0, has "Whenever you cast a noncreature spel
+Circle of Power | {3}{B} | Sorcery | incl=89.6(n=6257) | You draw two cards and you lose 2 life. Create a 0/1 black Wizard creature token with "Whenever you cast a noncreature spell, this token deals 1 damage to each opponent." Wizards y
+Cornered by Black Mages | {1}{B}{B} | Sorcery | incl=86.7(n=6054) | Target opponent sacrifices a creature of their choice. Create a 0/1 black Wizard creature token with "Whenever you cast a noncreature spell, this token deals 1 damage to each oppon
+Coruscation Mage | {1}{R} | Creature — Otter Wizard | incl=83.6(n=5840) | Offspring {2} (You may pay an additional {2} as you cast this spell. If you do, when this creature enters, create a 1/1 token copy of it.) Whenever you cast a noncreature spell, th
+Harmonic Prodigy | {1}{R} | Creature — Human Wizard | incl=79.1(n=5526) | Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.) If a triggered ability of a Shaman or another Wizard you control triggers, that ability
+Mysidian Elder | {2}{R} | Creature — Human Wizard | incl=74.7(n=5217) | When this creature enters, create a 0/1 black Wizard creature token with "Whenever you cast a noncreature spell, this token deals 1 damage to each opponent."
+Queen Brahne | {2}{R} | Legendary Creature — Human Noble | incl=73.6(n=5141) | Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.) Whenever Queen Brahne attacks, create a 0/1 black Wizard creature token with "Whenever 
+Guttersnipe | {2}{R} | Creature — Goblin Shaman | incl=59.4(n=4151) | Whenever you cast an instant or sorcery spell, this creature deals 2 damage to each opponent.
+Artist's Talent | {1}{R} | Enchantment — Class | incl=45.7(n=3191) | (Gain the next level as a sorcery to add its ability.) Whenever you cast a noncreature spell, you may discard a card. If you do, draw a card. {2}{R}: Level 2 Noncreature spells you
+Fiery Inscription | {2}{R} | Enchantment | incl=44.4(n=3103) | When this enchantment enters, the Ring tempts you. Whenever you cast an instant or sorcery spell, this enchantment deals 2 damage to each opponent.
+Firebrand Archer | {1}{R} | Creature — Human Archer | incl=29.7(n=2071) | Whenever you cast a noncreature spell, this creature deals 1 damage to each opponent.
+Electro, Assaulting Battery | {1}{R}{R} | Legendary Creature — Human Villain | incl=22.4(n=1565) | Flying You don't lose unspent red mana as steps and phases end. Whenever you cast an instant or sorcery spell, add {R}. When Electro leaves the battlefield, you may pay {X}. When y
+Electrostatic Infantry | {1}{R} | Creature — Dwarf Wizard | incl=22.3(n=1554) | Trample Whenever you cast an instant or sorcery spell, put a +1/+1 counter on this creature.
+Longshot, Rebel Bowman | {3}{R} | Legendary Creature — Human Rebel Ally | incl=17.6(n=1232) | Reach (This creature can block creatures with flying.) Noncreature spells you cast cost {1} less to cast. Whenever you cast a noncreature spell, Longshot deals 2 damage to each opp
+Kessig Flamebreather | {1}{R} | Creature — Human Shaman | incl=17.1(n=1192) | Whenever you cast a noncreature spell, this creature deals 1 damage to each opponent.
+Electrostatic Field | {1}{R} | Creature — Wall | incl=14.2(n=991) | Defender Whenever you cast an instant or sorcery spell, this creature deals 1 damage to each opponent.
+Judith, Carnage Connoisseur | {3}{B}{R} | Legendary Creature — Human Shaman | incl=14(n=977) | Whenever you cast an instant or sorcery spell, choose one — • That spell gains deathtouch and lifelink. • Create a 2/2 red Imp creature token with "When this token dies, it deals 2
+Red Mage's Rapier | {1}{R} | Artifact — Equipment | incl=13.7(n=960) | Job select (When this Equipment enters, create a 1/1 colorless Hero creature token, then attach this to it.) Equipped creature has "Whenever you cast a noncreature spell, this crea
+Garland, Knight of Cornelia // Chaos, the Endless | {B}{R} | Legendary Creature — Human Knight // Legendary Creature — Demon | incl=10.7(n=746) | Whenever you cast a noncreature spell, surveil 1. (Look at the top card of your library. You may put it into your graveyard.) {3}{B}{B}{R}{R}: Return this card from your graveyard 
+Young Pyromancer | {1}{R} | Creature — Human Shaman | incl=10.4(n=729) | Whenever you cast an instant or sorcery spell, create a 1/1 red Elemental creature token.
+Slickshot Show-Off | {1}{R} | Creature — Bird Wizard | incl=8.2(n=575) | Flying, haste Whenever you cast a noncreature spell, this creature gets +2/+0 until end of turn. Plot {1}{R} (You may pay {1}{R} and exile this card from your hand. Cast it as a so
+Harnesser of Storms | {2}{R} | Creature — Otter Wizard | incl=7.4(n=514) | Whenever you cast a noncreature or Otter spell, you may exile the top card of your library. Until end of turn, you may play that card. This ability triggers only once each turn.
+Goliath Daydreamer | {2}{R}{R} | Creature — Giant Wizard | incl=7.3(n=513) | Whenever you cast an instant or sorcery spell from your hand, exile that card with a dream counter on it instead of putting it into your graveyard as it resolves. Whenever this cre
+Heartfire Immolator | {1}{R} | Creature — Human Wizard | incl=4.4(n=305) | Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.) {R}, Sacrifice this creature: It deals damage equal to its power to target creature or 
+A-Leyline of Resonance | {2}{R}{R} | Enchantment | incl=- | If this card is in your opening hand, you may begin the game with it on the battlefield. Whenever you cast an instant or sorcery spell that targets only a single creature you contr
+Blazing Bomb | {R} | Creature — Elemental | incl=- | Whenever you cast a noncreature spell, if at least four mana was spent to cast it, put a +1/+1 counter on this creature. Blow Up — {T}, Sacrifice this creature: It deals damage equ
+Boar-q-pine | {2}{R} | Creature — Boar Porcupine | incl=- | Whenever you cast a noncreature spell, put a +1/+1 counter on this creature.
+Crackling Cyclops | {2}{R} | Creature — Cyclops Wizard | incl=- | Whenever you cast a noncreature spell, this creature gets +3/+0 until end of turn.
+Crescent Island Temple | {3}{R} | Legendary Enchantment — Shrine | incl=- | When Crescent Island Temple enters, for each Shrine you control, create a 1/1 red Monk creature token with prowess. (Whenever you cast a noncreature spell, it gets +1/+1 until end 
+Diary of Dreams | {2} | Artifact — Book | incl=- | Whenever you cast an instant or sorcery spell, put a page counter on this artifact. {5}, {T}: Draw a card. This ability costs {1} less to activate for each page counter on this art
+Emberheart Challenger | {1}{R} | Creature — Mouse Warrior | incl=- | Haste Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.) Valiant — Whenever this creature becomes the target of a spell or ability you con
+Expressive Firedancer | {1}{R} | Creature — Human Sorcerer | incl=- | Opus — Whenever you cast an instant or sorcery spell, this creature gets +1/+1 until end of turn. If five or more mana was spent to cast that spell, this creature also gains double
+Firebending Student | {1}{R} | Creature — Human Monk | incl=- | Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.) Firebending X, where X is this creature's power. (Whenever this creature attacks, add X
+Forum Necroscribe | {5}{B} | Creature — Troll Warlock | incl=- | Ward—Discard a card. Repartee — Whenever you cast an instant or sorcery spell that targets a creature, return target creature card from your graveyard to the battlefield.
+Kuja, Genome Sorcerer // Trance Kuja, Fate Defied | {2}{B}{R} | Legendary Creature — Human Mutant Wizard // Legendary Creature — Avatar Wizard | incl=- | At the beginning of your end step, create a tapped 0/1 black Wizard creature token with "Whenever you cast a noncreature spell, this token deals 1 damage to each opponent." Then if
+Lecturing Scornmage | {B} | Creature — Human Warlock | incl=- | Repartee — Whenever you cast an instant or sorcery spell that targets a creature, put a +1/+1 counter on this creature.
+Magmablood Archaic | {2/R}{2/R}{2/R} | Creature — Avatar | incl=- | Reach, trample Converge — This creature enters with a +1/+1 counter on it for each color of mana spent to cast it. Whenever you cast an instant or sorcery spell, creatures you cont
+Mai, Jaded Edge | {1}{R} | Legendary Creature — Human Noble | incl=- | Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.) Exhaust — {3}: Put a double strike counter on Mai. (Activate each exhaust ability only 
+Melancholic Poet | {1}{B} | Creature — Elf Bard | incl=- | Repartee — Whenever you cast an instant or sorcery spell that targets a creature, each opponent loses 1 life and you gain 1 life.
+Meticulous Artisan | {3}{R} | Creature — Djinn Artificer | incl=- | Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.) When this creature enters, create a Treasure token. (It's an artifact with "{T}, Sacrif
+Mica, Reader of Ruins | {3}{R} | Legendary Creature — Human Artificer | incl=- | Ward—Pay 3 life. (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays 3 life.) Whenever you cast an instant or 
+Molten-Core Maestro | {1}{R} | Creature — Goblin Bard | incl=- | Menace Opus — Whenever you cast an instant or sorcery spell, put a +1/+1 counter on this creature. If five or more mana was spent to cast that spell, add an amount of {R} equal to 
+Prompto Argentum | {1}{R} | Legendary Creature — Human Scout | incl=- | Haste Selfie Shot — Whenever you cast a noncreature spell, if at least four mana was spent to cast it, create a Treasure token.
+Shambling Cie'th | {2}{B} | Creature — Mutant Horror | incl=- | This creature enters tapped. Whenever you cast a noncreature spell, you may pay {B}. If you do, return this card from your graveyard to your hand.
+Spinerock Tyrant | {3}{R}{R} | Creature — Dragon | incl=- | Flying Wither (This deals damage to creatures in the form of -1/-1 counters.) Whenever you cast an instant or sorcery spell with a single target, you may copy it. If you do, those 
+Tackle Artist | {3}{R} | Creature — Orc Sorcerer | incl=- | Trample Opus — Whenever you cast an instant or sorcery spell, put a +1/+1 counter on this creature. If five or more mana was spent to cast that spell, put two +1/+1 counters on thi
+Thunderdrum Soloist | {1}{R} | Creature — Dwarf Bard | incl=- | Reach Opus — Whenever you cast an instant or sorcery spell, this creature deals 1 damage to each opponent. If five or more mana was spent to cast that spell, this creature deals 3 
+Ty Lee, Artful Acrobat | {2}{R} | Legendary Creature — Human Performer | incl=- | Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.) Whenever Ty Lee attacks, you may pay {1}. When you do, target creature can't block this
+
+===== copy (10) =====
+Return the Favor | {R}{R} | Instant | incl=29.1(n=2033) | Spree (Choose one or more additional costs.) + {1} — Copy target instant spell, sorcery spell, activated ability, or triggered ability. You may choose new targets for the copy. + {
+Dualcaster Mage | {1}{R}{R} | Creature — Human Wizard | incl=25.3(n=1770) | Flash When this creature enters, copy target instant or sorcery spell. You may choose new targets for the copy.
+A-Leyline of Resonance | {2}{R}{R} | Enchantment | incl=- | If this card is in your opening hand, you may begin the game with it on the battlefield. Whenever you cast an instant or sorcery spell that targets only a single creature you contr
+Choreographed Sparks | {R}{R} | Instant | incl=- | This spell can't be copied. Choose one or both — • Copy target instant or sorcery spell you control. You may choose new targets for the copy. • Copy target creature spell you contr
+Doublecast | {R}{R} | Sorcery | incl=- | When you next cast an instant or sorcery spell this turn, copy that spell. You may choose new targets for the copy.
+Dual Strike | {R}{R} | Instant | incl=- | When you next cast an instant or sorcery spell with mana value 4 or less this turn, copy that spell. You may choose new targets for the copy. Foretell {R} (During your turn, you ma
+Firebender Ascension | {1}{R} | Enchantment | incl=- | When this enchantment enters, create a 2/2 red Soldier creature token with firebending 1. Whenever a creature you control attacking causes a triggered ability of that creature to t
+Mica, Reader of Ruins | {3}{R} | Legendary Creature — Human Artificer | incl=- | Ward—Pay 3 life. (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays 3 life.) Whenever you cast an instant or 
+Pigment Wrangler // Striking Palette | {4}{R} // {R} | Creature — Orc Sorcerer // Sorcery | incl=- | Flying This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.) // When you next cast an instant or sorcery spell this turn, 
+Twinferno | {1}{R} | Instant | incl=- | Choose one — • When you cast your next instant or sorcery spell this turn, copy that spell. You may choose new targets for the copy. • Target creature you control gains double stri
+
+===== lands (110) =====
+Command Tower |  | Land | incl=86.7(n=6053) | {T}: Add one mana of any color in your commander's color identity.
+Lindblum, Industrial Regency // Mage Siege | {2}{R} | Land — Town // Instant — Adventure | incl=79.8(n=5572) | This land enters tapped. {T}: Add {R}. // Create a 0/1 black Wizard creature token with "Whenever you cast a noncreature spell, this token deals 1 damage to each opponent."
+Blood Crypt |  | Land — Swamp Mountain | incl=50.1(n=3497) | ({T}: Add {B} or {R}.) As this land enters, you may pay 2 life. If you don't, it enters tapped.
+Temple of Malice |  | Land | incl=27.8(n=1939) | This land enters tapped. When this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.) {T}: Add {B} or {R}.
+Midgar, City of Mako // Reactor Raid | {2}{B} | Land — Town // Sorcery — Adventure | incl=27.3(n=1908) | This land enters tapped. {T}: Add {B}. // You may sacrifice an artifact or creature. If you do, draw two cards. (Then exile this card. You may play the land later from exile.)
+Malakir Rebirth // Malakir Mire | {B} | Instant // Land | incl=20.5(n=1433) | Choose target creature. You lose 2 life. Until end of turn, that creature gains "When this creature dies, return it to the battlefield tapped under its owner's control." // This la
+Reliquary Tower |  | Land | incl=20.1(n=1401) | You have no maximum hand size. {T}: Add {C}.
+Evolving Wilds |  | Land | incl=19(n=1330) | {T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
+Bloodfell Caves |  | Land | incl=17.4(n=1212) | This land enters tapped. When this land enters, you gain 1 life. {T}: Add {B} or {R}.
+Pinnacle Monk // Mystic Peak | {3}{R}{R} | Creature — Djinn Monk // Land | incl=16.6(n=1160) | Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.) When this creature enters, return target instant or sorcery card from your graveyard to
+Fell the Profane // Fell Mire | {2}{B}{B} | Instant // Land | incl=16.4(n=1145) | Destroy target creature or planeswalker. // As this land enters, you may pay 3 life. If you don't, it enters tapped. {T}: Add {B}.
+Urborg, Tomb of Yawgmoth |  | Legendary Land | incl=13.9(n=969) | Each land is a Swamp in addition to its other land types.
+Vector, Imperial Capital |  | Land — Town | incl=12.1(n=846) | This land enters tapped. {T}: Add {B} or {R}.
+Terramorphic Expanse |  | Land | incl=11.8(n=822) | {T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
+Fabled Passage |  | Land | incl=10.2(n=715) | {T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle. Then if you control four or more lands, untap that land.
+Spikefield Hazard // Spikefield Cave | {R} | Instant // Land | incl=8.5(n=593) | Spikefield Hazard deals 1 damage to any target. If a permanent dealt damage this way would die this turn, exile it instead. // This land enters tapped. {T}: Add {R}.
+Fire Nation Palace |  | Land | incl=8(n=560) | This land enters tapped unless you control a basic land. {T}: Add {R}. {1}{R}, {T}: Target creature you control gains firebending 4 until end of turn. (Whenever it attacks, add {R}
+Cavern of Souls |  | Land | incl=7.4(n=520) | As this land enters, choose a creature type. {T}: Add {C}. {T}: Add one mana of any color. Spend this mana only to cast a creature spell of the chosen type, and that spell can't be
+Rogue's Passage |  | Land | incl=6.6(n=461) | {T}: Add {C}. {4}, {T}: Target creature can't be blocked this turn.
+Sundering Eruption // Volcanic Fissure | {2}{R} | Sorcery // Land | incl=6.5(n=453) | Destroy target land. Its controller may search their library for a basic land card, put it onto the battlefield tapped, then shuffle. Creatures without flying can't block this turn
+Scalding Tarn |  | Land | incl=5.4(n=376) | {T}, Pay 1 life, Sacrifice this land: Search your library for an Island or Mountain card, put it onto the battlefield, then shuffle.
+Rakdos Guildgate |  | Land — Gate | incl=5.2(n=360) | This land enters tapped. {T}: Add {B} or {R}.
+Ash Barrens |  | Land | incl=4.9(n=344) | {T}: Add {C}. Basic landcycling {1} ({1}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)
+Phyrexian Tower |  | Legendary Land | incl=4.7(n=327) | {T}: Add {C}. {T}, Sacrifice a creature: Add {B}{B}.
+Emergence Zone |  | Land | incl=4.5(n=314) | {T}: Add {C}. {1}, {T}, Sacrifice this land: You may cast spells this turn as though they had flash.
+A-Thran Portal |  | Land — Gate | incl=- | As A-Thran Portal enters, choose a basic land type. Thran Portal is the chosen type in addition to its other types. Mana abilities of A-Thran Portal cost an additional 1 life to ac
+Adventurer's Inn |  | Land — Town | incl=- | When this land enters, you gain 2 life. {T}: Add {C}.
+Agadeem's Awakening // Agadeem, the Undercrypt | {X}{B}{B}{B} | Sorcery // Land | incl=- | Return from your graveyard to the battlefield any number of target creature cards that each have a different mana value X or less. // As this land enters, you may pay 3 life. If yo
+Amonkhet Raceway |  | Land | incl=- | Start your engines! (If you have no speed, it starts at 1. It increases once on each of your turns when an opponent loses life. Max speed is 4.) {T}: Add {C}. Max speed — {T}: Targ
+Arena of Glory |  | Land | incl=- | This land enters tapped unless you control a Mountain. {T}: Add {R}. {R}, {T}, Exert this land: Add {R}{R}. If that mana is spent on a creature spell, it gains haste until end of t
+Arid Archway |  | Land — Desert | incl=- | This land enters tapped. When this land enters, return a land you control to its owner's hand. If another Desert was returned this way, surveil 1. (Look at the top card of your lib
+Avengers Tower |  | Land | incl=- | {T}: Add {C}. {T}: Add one mana of any color. Spend this mana only to cast a Hero spell or to activate an ability of a Hero source. {4}, {T}: Look at the top three cards of your li
+Avishkar Raceway |  | Land | incl=- | Start your engines! (If you have no speed, it starts at 1. It increases once on each of your turns when an opponent loses life. Max speed is 4.) {T}: Add {C}. Max speed — {3}, {T},
+Baldur's Gate |  | Legendary Land — Gate | incl=- | {T}: Add {C}. {2}, {T}: Add X mana of any one color, where X is the number of other Gates you control.
+Boggart Trawler // Boggart Bog | {2}{B} | Creature — Goblin // Land | incl=- | When this creature enters, exile target player's graveyard. // As this land enters, you may pay 3 life. If you don't, it enters tapped. {T}: Add {B}.
+Boiling Rock Prison |  | Land | incl=- | This land enters tapped. {T}: Add {B} or {R}. {4}, {T}, Sacrifice this land: Draw a card.
+Bonders' Enclave |  | Land | incl=- | {T}: Add {C}. {3}, {T}: Draw a card. Activate only if you control a creature with power 4 or greater.
+Branch of Vitu-Ghazi |  | Land | incl=- | {T}: Add {C}. Disguise {3} (You may cast this card face down for {3} as a 2/2 creature with ward {2}. Turn it face up any time for its disguise cost.) When this land is turned face
+Brass's Tunnel-Grinder // Tecutlan, the Searing Rift | {2}{R} | Legendary Artifact // Legendary Land — Cave | incl=- | When Brass's Tunnel-Grinder enters, discard any number of cards, then draw that many cards plus one. At the beginning of your end step, if you descended this turn, put a bore count
+Brokers Hideout |  | Land | incl=- | When this land enters, sacrifice it. When you do, search your library for a basic Forest, Plains, or Island card, put it onto the battlefield tapped, then shuffle and you gain 1 li
+Buried Ruin |  | Land | incl=- | {T}: Add {C}. {2}, {T}, Sacrifice this land: Return target artifact card from your graveyard to your hand.
+Cabaretti Courtyard |  | Land | incl=- | When this land enters, sacrifice it. When you do, search your library for a basic Mountain, Forest, or Plains card, put it onto the battlefield tapped, then shuffle and you gain 1 
+Capital City |  | Land — Town | incl=- | {T}: Add {C}. {1}, {T}: Add one mana of any color. Cycling {2} ({2}, Discard this card: Draw a card.)
+Captivating Cave |  | Land — Cave | incl=- | {T}: Add {C}. {1}, {T}: Add one mana of any color. {4}, {T}, Sacrifice this land: Put two +1/+1 counters on target creature. Activate only as a sorcery.
+Command Bridge |  | Land | incl=- | This land enters tapped. When this land enters, sacrifice it unless you tap an untapped permanent you control. {T}: Add one mana of any color.
+Cori Mountain Monastery |  | Land | incl=- | This land enters tapped unless you control a Plains or an Island. {T}: Add {R}. {3}{R}, {T}: Exile the top card of your library. Until the end of your next turn, you may play that 
+Daily Bugle Building |  | Land | incl=- | {T}: Add {C}. {1}, {T}: Add one mana of any color. Smear Campaign — {1}, {T}: Target legendary creature gains menace until end of turn. Activate only as a sorcery.
+Dark Depths |  | Legendary Snow Land | incl=- | Dark Depths enters with ten ice counters on it. {3}: Remove an ice counter from Dark Depths. When Dark Depths has no ice counters on it, sacrifice it. If you do, create Marit Lage,
+Darksteel Citadel |  | Artifact Land | incl=- | Indestructible {T}: Add {C}.
+Deserted Temple |  | Land | incl=- | {T}: Add {C}. {1}, {T}: Untap target land.
+Dowsing Device // Geode Grotto | {1}{R} | Artifact // Land — Cave | incl=- | Whenever this artifact or another artifact you control enters, up to one target creature you control gets +1/+0 and gains haste until end of turn. Then transform this artifact if y
+Drannith Ruins |  | Land | incl=- | {T}: Add {C}. {2}, {T}: Put two +1/+1 counters on target non-Human creature that entered this turn.
+Eclipsed Realms |  | Land | incl=- | As this land enters, choose Elemental, Elf, Faerie, Giant, Goblin, Kithkin, Merfolk, or Treefolk. {T}: Add {C}. {T}: Add one mana of any color. Spend this mana only to cast a spell
+Eden, Seat of the Sanctum |  | Land — Town | incl=- | {T}: Add {C}. {5}, {T}: Mill two cards. Then you may sacrifice this land. When you do, return another target permanent card from your graveyard to your hand.
+Edgewall Inn |  | Land | incl=- | This land enters tapped. As this land enters, choose a color. {T}: Add one mana of the chosen color. {3}, {T}, Sacrifice this land: Return target card that has an Adventure from yo
+Escape Tunnel |  | Land | incl=- | {T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle. {T}, Sacrifice this land: Target creature with power 2 or les
+Flooded Strand |  | Land | incl=- | {T}, Pay 1 life, Sacrifice this land: Search your library for a Plains or Island card, put it onto the battlefield, then shuffle.
+Fomori Vault |  | Land | incl=- | {T}: Add {C}. {3}, {T}, Discard a card: Look at the top X cards of your library, where X is the number of artifacts you control. Put one of those cards into your hand and the rest 
+Forgotten Monument |  | Land — Cave | incl=- | {T}: Add {C}. Other Caves you control have "{T}, Pay 1 life: Add one mana of any color."
+Foul Roads |  | Land | incl=- | This land enters tapped unless you control a Mount or Vehicle. {T}: Add {B}. {1}{B}, {T}, Sacrifice this land: Create a 1/1 colorless Pilot creature token with "This token saddles 
+Gate of the Black Dragon |  | Land — Swamp Gate | incl=- | ({T}: Add {B}.) Gate of the Black Dragon enters the battlefield tapped. {3}{B}, {T}: Seek a nonland card. Activate only once.
+Gate to Tumbledown |  | Land — Mountain Gate | incl=- | ({T}: Add {R}.) Gate to Tumbledown enters the battlefield tapped. {3}{R}, {T}: Seek a nonland card. Activate only once.
+Gateway Plaza |  | Land — Gate | incl=- | This land enters tapped. When this land enters, sacrifice it unless you pay {1}. {T}: Add one mana of any color.
+Gemstone Caverns |  | Legendary Land | incl=- | If this card is in your opening hand and you're not the starting player, you may begin the game with Gemstone Caverns on the battlefield with a luck counter on it. If you do, exile
+Grasping Shadows // Shadows' Lair | {3}{B} | Enchantment // Land — Cave | incl=- | Whenever a creature you control attacks alone, it gains deathtouch and lifelink until end of turn. Put a dread counter on this enchantment. Then if there are three or more dread co
+Great Hall of the Biblioplex |  | Land | incl=- | {T}: Add {C}. {T}, Pay 1 life: Add one mana of any color. Spend this mana only to cast an instant or sorcery spell. {5}: If this land isn't a creature, it becomes a 2/4 Wizard crea
+Hidden Volcano |  | Land — Cave | incl=- | This land enters tapped. {T}: Add {R}. {4}{R}, {T}, Sacrifice this land: Discover 4. Activate only as a sorcery. (Exile cards from the top of your library until you exile a nonland
+Jagged Barrens |  | Land — Desert | incl=- | This land enters tapped. When this land enters, it deals 1 damage to target opponent. {T}: Add {B} or {R}.
+Jasmine Dragon Tea Shop |  | Land | incl=- | {T}: Add {C}. {T}: Add one mana of any color. Spend this mana only to cast an Ally spell or activate an ability of an Ally source. {5}, {T}: Create a 1/1 white Ally creature token.
+Maze's End |  | Land | incl=- | This land enters tapped. {T}: Add {C}. {3}, {T}, Return this land to its owner's hand: Search your library for a Gate card, put it onto the battlefield, then shuffle. If you contro
+Misty Rainforest |  | Land | incl=- | {T}, Pay 1 life, Sacrifice this land: Search your library for a Forest or Island card, put it onto the battlefield, then shuffle.
+Multiversal Passage |  | Land | incl=- | As this land enters, choose a basic land type. Then you may pay 2 life. If you don't, it enters tapped. This land is the chosen type.
+Nesting Grounds |  | Land | incl=- | {T}: Add {C}. {1}, {T}: Move a counter from target permanent you control onto a second target permanent. Activate only as a sorcery.
+Night Market |  | Land | incl=- | This land enters tapped. As it enters, choose a color. {T}: Add one mana of the chosen color. Cycling {3} ({3}, Discard this card: Draw a card.)
+Northampton Farm |  | Land | incl=- | {T}: Add {C}. {1}, {T}: Exile target creature you own. {2}, {T}, Sacrifice this land: Return a creature card exiled with this land to the battlefield under your control. Return eac
+Ominous Asylum |  | Land | incl=- | This land enters tapped. {T}: Add {B} or {R}. {4}, {T}: Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
+Petrified Hamlet |  | Land | incl=- | When this land enters, choose a land card name. Activated abilities of sources with the chosen name can't be activated unless they're mana abilities. Lands with the chosen name hav
+Plaza of Harmony |  | Land | incl=- | When this land enters, if you control two or more Gates, you gain 3 life. {T}: Add {C}. {T}: Add one mana of any type that a Gate you control could produce.
+Razortrap Gorge |  | Land | incl=- | This land enters tapped unless a player has 13 or less life. {T}: Add {B} or {R}.
+Realm of Koh |  | Land | incl=- | This land enters tapped unless you control a basic land. {T}: Add {B}. {3}{B}, {T}: Create a 1/1 colorless Spirit creature token with "This token can't block or be blocked by non-S
+Roadside Reliquary |  | Land | incl=- | {T}: Add {C}. {2}, {T}, Sacrifice this land: Draw a card if you control an artifact. Draw a card if you control an enchantment.
+Rocky Roads |  | Land | incl=- | This land enters tapped unless you control a Mount or Vehicle. {T}: Add {R}. {1}{R}, {T}, Sacrifice this land: Create a 1/1 colorless Pilot creature token with "This token saddles 
+Rumble Arena |  | Land | incl=- | Vigilance When this land enters, scry 1. (Look at the top card of your library. You may put it on the bottom.) {T}: Add {C}. {1}, {T}: Add one mana of any color.
+Secluded Courtyard |  | Land | incl=- | As this land enters, choose a creature type. {T}: Add {C}. {T}: Add one mana of any color. Spend this mana only to cast a creature spell of the chosen type or activate an ability o
+Secluded Starforge |  | Land | incl=- | {T}: Add {C}. {2}, {T}, Tap X untapped artifacts you control: Target creature gets +X/+0 until end of turn. Activate only as a sorcery. {5}, {T}: Create a 2/2 colorless Robot artif
+Secret Tunnel |  | Land — Cave | incl=- | This land can't be blocked. {T}: Add {C}. {4}, {T}: Two target creatures you control that share a creature type can't be blocked this turn.
+Shatterskull Smashing // Shatterskull, the Hammer Pass | {X}{R}{R} | Sorcery // Land | incl=- | Shatterskull Smashing deals X damage divided as you choose among up to two target creatures and/or planeswalkers. If X is 6 or more, Shatterskull Smashing deals twice X damage divi
+Skycoach Waypoint |  | Land | incl=- | {T}: Add {C}. {3}, {T}: Target creature becomes prepared. (Only creatures with prepare spells can become prepared.)
+Snow-Covered Mountain |  | Basic Snow Land — Mountain | incl=- | ({T}: Add {R}.)
+Snow-Covered Swamp |  | Basic Snow Land — Swamp | incl=- | ({T}: Add {B}.)
+Sokenzan, Crucible of Defiance |  | Legendary Land | incl=- | {T}: Add {R}. Channel — {3}{R}, Discard this card: Create two 1/1 colorless Spirit creature tokens. They gain haste until end of turn. This ability costs {1} less to activate for e
+Soulstone Sanctuary |  | Land | incl=- | {T}: Add {C}. {4}: This land becomes a 3/3 creature with vigilance and all creature types. It's still a land.
+Starting Town |  | Land — Town | incl=- | This land enters tapped unless it's your first, second, or third turn of the game. {T}: Add {C}. {T}, Pay 1 life: Add one mana of any color.
+Sulfurous Mire |  | Snow Land — Swamp Mountain | incl=- | ({T}: Add {B} or {R}.) This land enters tapped.
+Surveillance Room |  | Land | incl=- | When this land enters, surveil 1. (Look at the top card of your library. You may put it into your graveyard.) {T}: Add {C}. {1}, {T}: Add one mana of any color.
+Susur Secundi, Void Altar |  | Land — Planet | incl=- | This land enters tapped. {T}: Add {B}. Station (Tap another creature you control: Put charge counters equal to its power on this Planet. Station only as a sorcery.) 12+ | {1}{B}, {
+Takenuma, Abandoned Mire |  | Legendary Land | incl=- | {T}: Add {B}. Channel — {3}{B}, Discard this card: Mill three cards, then return a creature or planeswalker card from your graveyard to your hand. This ability costs {1} less to ac
+Terrain Generator |  | Land | incl=- | {T}: Add {C}. {2}, {T}: You may put a basic land card from your hand onto the battlefield tapped.
+Thespian's Stage |  | Land | incl=- | {T}: Add {C}. {2}, {T}: This land becomes a copy of target land, except it has this ability.
+Thriving Bluff |  | Land | incl=- | This land enters tapped. As it enters, choose a color other than red. {T}: Add {R} or one mana of the chosen color.
+Thriving Moor |  | Land | incl=- | This land enters tapped. As it enters, choose a color other than black. {T}: Add {B} or one mana of the chosen color.
+Turtle Lair |  | Land | incl=- | {T}: Add {C}. {T}: Add one mana of any color. Spend this mana only to cast a Ninja or Turtle spell. {3}, {T}: Target Ninja or Turtle can't be blocked this turn.
+Unclaimed Territory |  | Land | incl=- | As this land enters, choose a creature type. {T}: Add {C}. {T}: Add one mana of any color. Spend this mana only to cast a creature spell of the chosen type.
+Valakut, the Molten Pinnacle |  | Land | incl=- | This land enters tapped. Whenever a Mountain you control enters, if you control at least five other Mountains, you may have this land deal 3 damage to any target. {T}: Add {R}.
+Valgavoth's Lair |  | Enchantment Land | incl=- | Hexproof This land enters tapped. As it enters, choose a color. {T}: Add one mana of the chosen color.
+Vault of Whispers |  | Artifact Land | incl=- | {T}: Add {B}.
+Vibrant Cityscape |  | Land | incl=- | {T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
+Villainous Hideout |  | Land | incl=- | {T}: Add {C}. {T}: Add one mana of any color. Spend this mana only to cast a Villain spell or to activate an ability of a Villain source. {3}, {T}: Target Villain you control conni
+Wastes |  | Basic Land | incl=- | {T}: Add {C}.
+White Lotus Hideout |  | Land | incl=- | {T}: Add {C}. {T}: Add one mana of any color. Spend this mana only to cast a Lesson or Shrine spell. {1}, {T}: Add one mana of any color.
+
+===== removal (119) =====
+Abrade | {1}{R} | Instant | incl=51.4(n=3588) | Choose one — • Abrade deals 3 damage to target creature. • Destroy target artifact.
+Feed the Swarm | {1}{B} | Sorcery | incl=45.7(n=3191) | Destroy target creature or enchantment an opponent controls. You lose life equal to that permanent's mana value.
+Suplex | {1}{R} | Sorcery | incl=20.6(n=1441) | Choose one — • Suplex deals 3 damage to target creature. If that creature would die this turn, exile it instead. • Exile target artifact.
+Thunder Magic | {R} | Instant | incl=19.7(n=1378) | Tiered (Choose one additional cost.) • Thunder — {0} — Thunder Magic deals 2 damage to target creature. • Thundara — {3} — Thunder Magic deals 4 damage to target creature. • Thunda
+Bitter Triumph | {1}{B} | Instant | incl=5.3(n=372) | As an additional cost to cast this spell, discard a card or pay 3 life. Destroy target creature or planeswalker.
+Murder | {1}{B}{B} | Instant | incl=4.8(n=337) | Destroy target creature.
+Sephiroth's Intervention | {3}{B} | Instant | incl=4.8(n=334) | Destroy target creature. You gain 2 life.
+Abyssal Harvester | {1}{B}{B} | Creature — Demon Warlock | incl=- | {T}: Exile target creature card from a graveyard that was put there this turn. Create a token that's a copy of it, except it's a Nightmare in addition to its other types. Then exil
+Anchovy & Banana Pizza | {2}{B}{B} | Artifact — Food | incl=- | When this artifact enters, destroy target creature. {2}, {T}, Sacrifice this artifact: You gain 3 life.
+Annihilating Glare | {B} | Sorcery | incl=- | As an additional cost to cast this spell, pay {4} or sacrifice an artifact or creature. Destroy target creature or planeswalker.
+Anoint with Affliction | {1}{B} | Instant | incl=- | Exile target creature if it has mana value 3 or less. Corrupted — Exile that creature instead if its controller has three or more poison counters.
+Artistic Process | {3}{R}{R} | Sorcery | incl=- | Choose one — • Artistic Process deals 6 damage to target creature. • Artistic Process deals 2 damage to each creature you don't control. • Create a 3/3 blue and red Elemental creat
+Bake into a Pie | {2}{B}{B} | Instant | incl=- | Destroy target creature. Create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this token: You gain 3 life.")
+Barrels of Blasting Jelly | {1} | Artifact | incl=- | {1}: Add one mana of any color. Activate only once each turn. {5}, {T}, Sacrifice this artifact: It deals 5 damage to target creature.
+Bear Trap | {1} | Artifact | incl=- | Flash {3}, {T}, Sacrifice this artifact: It deals 3 damage to target creature.
+Betrayer's Bargain | {1}{R} | Instant | incl=- | As an additional cost to cast this spell, sacrifice a creature or enchantment or pay {2}. Betrayer's Bargain deals 5 damage to target creature. If that creature would die this turn
+Bituminous Blast | {3}{B}{R} | Instant | incl=- | Cascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the ex
+Blood Spatter Analysis | {B}{R} | Enchantment | incl=- | When this enchantment enters, it deals 3 damage to target creature an opponent controls. Whenever one or more creatures die, mill a card and put a bloodstain counter on this enchan
+Blooming Blast | {1}{R} | Instant | incl=- | Gift a Treasure (You may promise an opponent a gift as you cast this spell. If you do, they create a Treasure token before its other effects. It's an artifact with "{T}, Sacrifice 
+Bogslither's Embrace | {1}{B} | Sorcery | incl=- | As an additional cost to cast this spell, blight 1 or pay {3}. (To blight 1, put a -1/-1 counter on a creature you control.) Exile target creature.
+Bombard | {2}{R} | Instant | incl=- | Bombard deals 4 damage to target creature.
+Bot Bashing Time | {3}{R} | Sorcery | incl=- | Bot Bashing Time deals 6 damage to target creature. If that creature would die this turn, exile it instead.
+Breathe Your Last | {1}{B}{B} | Instant | incl=- | Destroy target creature or planeswalker. You gain 1 life for each of its colors.
+Cinder Strike | {R} | Sorcery | incl=- | As an additional cost to cast this spell, you may blight 1. (You may put a -1/-1 counter on a creature you control.) Cinder Strike deals 2 damage to target creature. It deals 4 dam
+Combustion Man | {3}{R}{R} | Legendary Creature — Human Assassin | incl=- | Whenever Combustion Man attacks, destroy target permanent unless its controller has Combustion Man deal damage to them equal to his power.
+Cruel Cut | {1}{B} | Instant | incl=- | Destroy target creature with power 2 or less.
+Cut Down | {B} | Instant | incl=- | Destroy target creature with total power and toughness 5 or less.
+Deadly Embrace | {3}{B}{B} | Sorcery | incl=- | Destroy target creature an opponent controls. Then draw a card for each creature that died this turn.
+Deadly Precision | {B} | Sorcery | incl=- | As an additional cost to cast this spell, pay {4} or sacrifice an artifact or creature. Destroy target creature.
+Death in the Family | {1}{B} | Instant | incl=- | Exile target creature with mana value 3 or less.
+Downwind Ambusher | {3}{B} | Creature — Skunk Assassin | incl=- | Flash When this creature enters, choose one — • Target creature an opponent controls gets -1/-1 until end of turn. • Destroy target creature an opponent controls that was dealt dam
+Dragon's Prey | {2}{B} | Instant | incl=- | This spell costs {2} more to cast if it targets a Dragon. Destroy target creature.
+Dreadbore | {B}{R} | Sorcery | incl=- | Destroy target creature or planeswalker.
+Duel Tactics | {R} | Sorcery | incl=- | Duel Tactics deals 1 damage to target creature. It can't block this turn. Flashback {1}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
+Early Winter | {4}{B} | Instant | incl=- | Choose one — • Exile target creature. • Target opponent exiles an enchantment they control.
+Eaten Alive | {B} | Sorcery | incl=- | As an additional cost to cast this spell, sacrifice a creature or pay {3}{B}. Exile target creature or planeswalker.
+Electro's Bolt | {2}{R} | Sorcery | incl=- | Electro's Bolt deals 4 damage to target creature. Mayhem {1}{R} (You may cast this card from your graveyard for {1}{R} if you discarded it this turn. Timing rules still apply.)
+Embrace Oblivion | {B} | Sorcery | incl=- | As an additional cost to cast this spell, sacrifice an artifact or creature. Destroy target creature or Spacecraft.
+Epic Downfall | {1}{B} | Sorcery | incl=- | Exile target creature with mana value 3 or greater.
+Essence Extraction | {1}{B}{B} | Instant | incl=- | Essence Extraction deals 3 damage to target creature and you gain 3 life.
+Feed the Cycle | {1}{B} | Instant | incl=- | As an additional cost to cast this spell, forage or pay {B}. (To forage, exile three cards from your graveyard or sacrifice a Food.) Destroy target creature or planeswalker.
+Feed the Flames | {3}{R} | Instant | incl=- | Feed the Flames deals 5 damage to target creature. If that creature would die this turn, exile it instead.
+Feed the Serpent | {2}{B}{B} | Instant | incl=- | Exile target creature or planeswalker.
+Fell | {1}{B} | Sorcery | incl=- | Destroy target creature.
+Fiery Annihilation | {2}{R} | Instant | incl=- | Fiery Annihilation deals 5 damage to target creature. Exile up to one target Equipment attached to that creature. If that creature would die this turn, exile it instead.
+Fiery Intervention | {4}{R} | Sorcery | incl=- | Choose one — • Fiery Intervention deals 5 damage to target creature. • Destroy target artifact.
+Final Vengeance | {B} | Sorcery | incl=- | As an additional cost to cast this spell, sacrifice a creature or enchantment. Exile target creature.
+Firebending Lesson | {R} | Instant — Lesson | incl=- | Kicker {4} (You may pay an additional {4} as you cast this spell.) Firebending Lesson deals 2 damage to target creature. If this spell was kicked, it deals 5 damage to that creatur
+Foolish Fate | {2}{B} | Instant | incl=- | Destroy target creature. Infusion — If you gained life this turn, that creature's controller loses 3 life.
+Galvanize | {1}{R} | Instant | incl=- | Galvanize deals 3 damage to target creature. If you've drawn two or more cards this turn, Galvanize deals 5 damage to that creature instead.
+General Traag, Heart of Stone | {3}{R}{R} | Legendary Artifact Creature — Elemental Soldier | incl=- | Trample When General Traag enters, you may sacrifice another artifact. When you do, General Traag deals 4 damage to target creature.
+Glassworks // Shattered Yard | {2}{R} // {4}{R} | Enchantment — Room // Enchantment — Room | incl=- | When you unlock this door, this Room deals 4 damage to target creature an opponent controls. (You may cast either half. That door unlocks on the battlefield. As a sorcery, you may 
+Goblin Firebomb | {1} | Artifact | incl=- | Flash {7}, {T}, Sacrifice this artifact: Destroy target permanent.
+Gravkill | {3}{B} | Instant | incl=- | Exile target creature or Spacecraft.
+Heartless Act | {1}{B} | Instant | incl=- | Choose one — • Destroy target creature with no counters on it. • Remove up to three counters from target creature.
+Heated Argument | {4}{R} | Instant | incl=- | Heated Argument deals 6 damage to target creature. You may exile a card from your graveyard. If you do, Heated Argument also deals 2 damage to that creature's controller.
+Hellish Sideswipe | {B} | Sorcery | incl=- | As an additional cost to cast this spell, sacrifice an artifact or creature. Destroy target creature or Vehicle. If the sacrificed permanent was a Vehicle, draw a card.
+Hero's Downfall | {1}{B}{B} | Instant | incl=- | Destroy target creature or planeswalker.
+Hour of Defeat | {3}{B} | Instant | incl=- | Destroy target creature. Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
+Impose Hierarchy | {1}{B} | Instant | incl=- | Destroy target creature with mana value 4 or less. You gain 1 life for each creature card in its controller's hand.
+Impossible Inferno | {4}{R} | Instant | incl=- | Impossible Inferno deals 6 damage to target creature. Delirium — If there are four or more card types among cards in your graveyard, exile the top card of your library. You may pla
+Incinerating Blast | {4}{R} | Sorcery | incl=- | Incinerating Blast deals 6 damage to target creature. You may discard a card. If you do, draw a card.
+Introduction to Annihilation | {5} | Sorcery — Lesson | incl=- | Exile target nonland permanent. Its controller draws a card.
+Invasive Maneuvers | {1}{R} | Instant | incl=- | Invasive Maneuvers deals 3 damage to target creature. It deals 5 damage instead if you control a Spacecraft.
+Iroh's Demonstration | {1}{R} | Sorcery — Lesson | incl=- | Choose one — • Iroh's Demonstration deals 1 damage to each creature your opponents control. • Iroh's Demonstration deals 4 damage to target creature.
+Judgment Bolt | {3}{R} | Instant | incl=- | Judgment Bolt deals 5 damage to target creature and X damage to that creature's controller, where X is the number of Equipment you control.
+Light of Judgment | {4}{R} | Instant | incl=- | Light of Judgment deals 6 damage to target creature. Destroy up to one Equipment attached to that creature.
+Lunatic Pandora | {1} | Legendary Artifact | incl=- | {2}, {T}: Surveil 1. (Look at the top card of your library. You may put it into your graveyard.) {6}, {T}, Sacrifice Lunatic Pandora: Destroy target nonland permanent.
+Mage Hunters' Onslaught | {2}{B}{B} | Sorcery | incl=- | Destroy target creature or planeswalker. Whenever a creature blocks this turn, its controller loses 1 life.
+Manhole Missile | {1}{R} | Instant | incl=- | Manhole Missile deals 3 damage to target creature. You may put a card from your hand on the bottom of your library. If you do, draw a card.
+Meteor Golem | {7} | Artifact Creature — Golem | incl=- | When this creature enters, destroy target nonland permanent an opponent controls.
+Meteor Sword | {7} | Artifact — Equipment | incl=- | When this Equipment enters, destroy target permanent. Equipped creature gets +3/+3. Equip {3} ({3}: Attach to target creature you control. Equip only as a sorcery.)
+Mirrodin Avenged | {B} | Instant | incl=- | Destroy target creature that was dealt damage this turn. Draw a card.
+Molten Exhale | {1}{R} | Sorcery | incl=- | You may cast this spell as though it had flash if you behold a Dragon as an additional cost to cast it. (To behold a Dragon, choose a Dragon you control or reveal a Dragon card fro
+Mouser Foundry | {1}{R} | Artifact | incl=- | When this artifact enters or leaves the battlefield, create a 1/1 colorless Robot artifact creature token. {4}{R}, Sacrifice this artifact: It deals 3 damage to target creature.
+Mudbutton Cursetosser | {B} | Creature — Goblin Warlock | incl=- | As an additional cost to cast this spell, behold a Goblin or pay {2}. (To behold a Goblin, choose a Goblin you control or reveal a Goblin card from your hand.) This creature can't 
+Orbital Plunge | {3}{R} | Sorcery | incl=- | Orbital Plunge deals 6 damage to target creature. If excess damage was dealt this way, create a Lander token. (It's an artifact with "{2}, {T}, Sacrifice this token: Search your li
+Overwhelming Surge | {2}{R} | Instant | incl=- | Choose one or both — • Overwhelming Surge deals 3 damage to target creature. • Destroy target noncreature artifact.
+Overwhelming Victory | {4}{R} | Instant — Lesson | incl=- | Overwhelming Victory deals 5 damage to target creature. Each creature you control gains trample and gets +X/+0 until end of turn, where X is the amount of excess damage dealt this 
+Photon Blast Barrage | {X}{R}{R} | Sorcery | incl=- | When you cast this spell, copy it X times. You may choose new targets for the copies. Photon Blast Barrage deals 1 damage to target creature.
+Powerstone Fracture | {1}{B} | Sorcery | incl=- | As an additional cost to cast this spell, sacrifice an artifact or creature. Destroy target creature or planeswalker.
+Pumpkin Bombardment | {B/R} | Sorcery | incl=- | As an additional cost to cast this spell, discard a card or pay {2}. Pumpkin Bombardment deals 3 damage to target creature.
+Qutrub Forayer | {2}{B} | Creature — Zombie Horror | incl=- | When this creature enters, choose one — • Destroy target creature that was dealt damage this turn. • Exile up to two target cards from a single graveyard.
+Ray of Ruin | {4}{B} | Sorcery | incl=- | Exile target creature, Vehicle, or nonbasic land. Scry 1. (Look at the top card of your library. You may put that card on the bottom.)
+Reiterating Bolt | {1}{R} | Sorcery | incl=- | Replicate—Pay {E}{E}{E}. (When you cast this spell, copy it for each time you paid its replicate cost. You may choose new targets for the copies.) Reiterating Bolt deals 3 damage t
+Repulsor Blast | {3}{R} | Sorcery | incl=- | Teamwork 2 (As an additional cost to cast this spell, you may tap any number of creatures you control with total power 2 or more.) Repulsor Blast deals 5 damage to target creature.
+Requiting Hex | {B} | Instant | incl=- | As an additional cost to cast this spell, you may blight 1. (You may put a -1/-1 counter on a creature you control.) Destroy target creature with mana value 2 or less. If this spel
+Rile | {R} | Sorcery | incl=- | Rile deals 1 damage to target creature you control. That creature gains trample until end of turn. Draw a card.
+Salt Road Skirmish | {3}{B} | Sorcery | incl=- | Destroy target creature. Create two 1/1 red Warrior creature tokens. They gain haste until end of turn. Sacrifice them at the beginning of the next end step.
+Scorching Dragonfire | {1}{R} | Instant | incl=- | Scorching Dragonfire deals 3 damage to target creature or planeswalker. If that creature or planeswalker would die this turn, exile it instead.
+
+===== treasure (46) =====
+Storm-Kiln Artist | {3}{R} | Creature — Dwarf Shaman | incl=61.9(n=4325) | This creature gets +1/+0 for each artifact you control. Magecraft — Whenever you cast or copy an instant or sorcery spell, create a Treasure token.
+Big Score | {3}{R} | Instant | incl=54.4(n=3800) | As an additional cost to cast this spell, discard a card. Draw two cards and create two Treasure tokens. (They're artifacts with "{T}, Sacrifice this token: Add one mana of any col
+Deadly Dispute | {1}{B} | Instant | incl=43(n=3003) | As an additional cost to cast this spell, sacrifice an artifact or creature. Draw two cards and create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one 
+Unexpected Windfall | {2}{R}{R} | Instant | incl=32.4(n=2260) | As an additional cost to cast this spell, discard a card. Draw two cards and create two Treasure tokens. (They're artifacts with "{T}, Sacrifice this token: Add one mana of any col
+Seize the Spoils | {2}{R} | Sorcery | incl=14.5(n=1011) | As an additional cost to cast this spell, discard a card. Draw two cards and create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color."
+Strike It Rich | {R} | Sorcery | incl=14(n=978) | Create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.") Flashback {2}{R} (You may cast this card from your graveyard for its flashb
+Fake Your Own Death | {1}{B} | Instant | incl=7.9(n=555) | Until end of turn, target creature gets +2/+0 and gains "When this creature dies, return it to the battlefield tapped under its owner's control and you create a Treasure token." (I
+Ancestors' Aid | {1}{R} | Instant | incl=- | Target creature gets +2/+0 and gains first strike until end of turn. Create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.")
+Beamtown Beatstick | {R} | Artifact — Equipment | incl=- | Equipped creature gets +1/+0 and has menace. (It can't be blocked except by two or more creatures.) Whenever equipped creature deals combat damage to a player or battle, create a T
+Blooming Blast | {1}{R} | Instant | incl=- | Gift a Treasure (You may promise an opponent a gift as you cast this spell. If you do, they create a Treasure token before its other effects. It's an artifact with "{T}, Sacrifice 
+Breeches, Eager Pillager | {2}{R} | Legendary Creature — Goblin Pirate | incl=- | First strike Whenever a Pirate you control attacks, choose one that hasn't been chosen this turn — • Create a Treasure token. • Target creature can't block this turn. • Exile the t
+Careening Mine Cart | {3} | Artifact — Vehicle | incl=- | Whenever this Vehicle attacks, create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.") Crew 1 (Tap any number of creatures you cont
+Charming Scoundrel | {1}{R} | Creature — Human Rogue | incl=- | Haste When this creature enters, choose one — • Discard a card, then draw a card. • Create a Treasure token. • Create a Wicked Role token attached to target creature you control.
+Common Crook | {1}{B} | Creature — Human Rogue Villain | incl=- | When this creature dies, create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.")
+Crucias, Titan of the Waves | {1}{B}{R} | Legendary Creature — Human Pirate | incl=- | At the beginning of your end step, you may discard a card. If you do, create a Treasure token and choose ambitious or expedient. If you chose ambitious, seek a card with greater ma
+Diamond Pick-Axe | {R} | Artifact — Equipment | incl=- | Indestructible (Effects that say "destroy" don't destroy this Equipment.) Equipped creature gets +1/+1 and has "Whenever this creature attacks, create a Treasure token." (It's an a
+Enterprising Scallywag | {1}{R} | Creature — Goblin Pirate | incl=- | At the beginning of your end step, if you descended this turn, create a Treasure token. (You descended if a permanent card was put into your graveyard from anywhere.)
+Flamekin Gildweaver | {3}{R} | Creature — Elemental Sorcerer | incl=- | Trample When this creature enters, create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.")
+Gleaming Barrier | {2} | Artifact Creature — Wall | incl=- | Defender When this creature dies, create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.")
+Goblin Glasswright // Craft with Pride | {1}{R} // {R} | Creature — Goblin Sorcerer // Sorcery | incl=- | This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.) // Create a Treasure token. (It's an artifact with "{T}, Sacrifice t
+Goldspan Dragon | {3}{R}{R} | Creature — Dragon | incl=- | Flying, haste Whenever this creature attacks or becomes the target of a spell, create a Treasure token. Treasures you control have "{T}, Sacrifice this artifact: Add two mana of an
+Goldvein Pick | {2} | Artifact — Equipment | incl=- | Equipped creature gets +1/+1. Whenever equipped creature deals combat damage to a player, create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana o
+Great Train Heist | {R} | Instant | incl=- | Spree (Choose one or more additional costs.) + {2}{R} — Untap all creatures you control. If it's your combat phase, there is an additional combat phase after this phase. + {2} — Cr
+Greedy Freebooter | {B} | Creature — Human Pirate | incl=- | When this creature dies, scry 1 and create a Treasure token. (To scry 1, look at the top card of your library. You may put that card on the bottom. A Treasure token is an artifact 
+Involuntary Employment | {3}{R} | Sorcery | incl=- | Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn. Create a Treasure token. (It's an artifact with "{T}, Sacrifice this token
+J. Jonah Jameson | {2}{R} | Legendary Creature — Human Citizen | incl=- | When J. Jonah Jameson enters, suspect up to one target creature. (A suspected creature has menace and can't block.) Whenever a creature you control with menace attacks, create a Tr
+Luxurious Locomotive | {5} | Artifact — Vehicle | incl=- | Whenever this Vehicle attacks, create a Treasure token for each creature that crewed it this turn. (They're artifacts with "{T}, Sacrifice this token: Add one mana of any color.") 
+Magic Pot | {3} | Artifact Creature — Goblin Construct | incl=- | When this creature dies, create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.") {2}, {T}: Exile target card from a graveyard.
+Meticulous Artisan | {3}{R} | Creature — Djinn Artificer | incl=- | Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.) When this creature enters, create a Treasure token. (It's an artifact with "{T}, Sacrif
+Mine Raider | {2}{R} | Creature — Human Rogue | incl=- | Trample When this creature enters, if you control another outlaw, create a Treasure token. (Assassins, Mercenaries, Pirates, Rogues, and Warlocks are outlaws. A Treasure token is a
+Monument to Endurance | {3} | Artifact | incl=- | Whenever you discard a card, choose one that hasn't been chosen this turn — • Draw a card. • Create a Treasure token. • Each opponent loses 3 life.
+Namazu Trader | {3}{B} | Creature — Fish Citizen | incl=- | When this creature enters, you lose 1 life and create a Treasure token. Whenever this creature attacks, you may sacrifice another creature or artifact. If you do, surveil 2. (Look 
+Plundering Pirate | {2}{R} | Creature — Orc Pirate | incl=- | When this creature enters, create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.")
+Prompto Argentum | {1}{R} | Legendary Creature — Human Scout | incl=- | Haste Selfie Shot — Whenever you cast a noncreature spell, if at least four mana was spent to cast it, create a Treasure token.
+Ragavan, Nimble Pilferer | {R} | Legendary Creature — Monkey Pirate | incl=- | Whenever Ragavan deals combat damage to a player, create a Treasure token and exile the top card of that player's library. Until end of turn, you may cast that card. Dash {1}{R} (Y
+Reckless Ransacking | {1}{R} | Instant | incl=- | Target creature gets +3/+2 until end of turn. Create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.")
+Reckoner Bankbuster | {2} | Artifact — Vehicle | incl=- | This Vehicle enters with three charge counters on it. {2}, {T}, Remove a charge counter from this Vehicle: Draw a card. Then if there are no charge counters on this Vehicle, create
+Scuzzback Scrounger | {1}{R} | Creature — Goblin Warrior | incl=- | At the beginning of your first main phase, you may blight 1. If you do, create a Treasure token. (To blight 1, put a -1/-1 counter on a creature you control. A Treasure token is an
+Stark Industries Executive | {R} | Creature — Human Advisor | incl=- | {2}, {T}: Create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.")
+Sticky Fingers | {R} | Enchantment — Aura | incl=- | Enchant creature Enchanted creature has menace and "Whenever this creature deals combat damage to a player, create a Treasure token." (It can't be blocked except by two or more cre
+Ticket Tortoise | {2} | Artifact Creature — Turtle | incl=- | Defender When this creature enters, if an opponent controls more lands than you, you create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any
+Ultimate Green Goblin | {1}{B/R}{B/R} | Legendary Creature — Goblin Villain | incl=- | At the beginning of your upkeep, discard a card, then create a Treasure token. Mayhem {2}{B/R} (You may cast this card from your graveyard for {2}{B/R} if you discarded it this tur
+Undercity Dire Rat | {1}{B} | Creature — Rat | incl=- | Rat Tail — When this creature dies, create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.")
+Undercity Scrounger | {2}{B} | Artifact Creature — Human Rogue | incl=- | {T}: Create a Treasure token. Activate only if a creature died this turn. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.")
+Vault Robber | {1}{R} | Creature — Dwarf Rogue | incl=- | {1}, {T}, Exile a creature card from your graveyard: Create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.")
+Warren Soultrader | {2}{B} | Creature — Zombie Goblin Wizard | incl=- | Pay 1 life, Sacrifice another creature: Create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.")
+
+===== cantrips (42) =====
+Night's Whisper | {1}{B} | Sorcery | incl=66.5(n=4645) | You draw two cards and lose 2 life.
+Faithless Looting | {R} | Sorcery | incl=62.3(n=4350) | Draw two cards, then discard two cards. Flashback {2}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
+Thrill of Possibility | {1}{R} | Instant | incl=53.1(n=3705) | As an additional cost to cast this spell, discard a card. Draw two cards.
+Deadly Dispute | {1}{B} | Instant | incl=43(n=3003) | As an additional cost to cast this spell, sacrifice an artifact or creature. Draw two cards and create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one 
+Demand Answers | {1}{R} | Instant | incl=40.4(n=2821) | As an additional cost to cast this spell, sacrifice an artifact or discard a card. Draw two cards.
+Grab the Prize | {1}{R} | Sorcery | incl=31.5(n=2200) | As an additional cost to cast this spell, discard a card. Draw two cards. If the discarded card wasn't a land card, Grab the Prize deals 2 damage to each opponent.
+Expedite | {R} | Instant | incl=18.4(n=1284) | Target creature gains haste until end of turn. Draw a card.
+Village Rites | {B} | Instant | incl=14.2(n=993) | As an additional cost to cast this spell, sacrifice a creature. Draw two cards.
+Crimson Wisps | {R} | Instant | incl=13(n=906) | Target creature becomes red and gains haste until end of turn. (It can attack and {T} this turn.) Draw a card.
+Crash Through | {R} | Sorcery | incl=8.5(n=594) | Creatures you control gain trample until end of turn. (Each of those creatures can deal excess combat damage to the player or planeswalker it's attacking.) Draw a card.
+Renegade Tactics | {R} | Sorcery | incl=7.7(n=539) | Target creature can't block this turn. Draw a card.
+Tormenting Voice | {1}{R} | Sorcery | incl=7.4(n=515) | As an additional cost to cast this spell, discard a card. Draw two cards.
+Corrupted Conviction | {B} | Instant | incl=6.6(n=458) | As an additional cost to cast this spell, sacrifice a creature. Draw two cards.
+Ancestral Anger | {R} | Sorcery | incl=- | Target creature gains trample and gets +X/+0 until end of turn, where X is 1 plus the number of cards named Ancestral Anger in your graveyard. Draw a card.
+Costly Plunder | {1}{B} | Instant | incl=- | As an additional cost to cast this spell, sacrifice an artifact or creature. Draw two cards.
+Cunning Maneuver | {1}{R} | Instant | incl=- | Target creature gets +3/+1 until end of turn. Create a Clue token. (It's an artifact with "{2}, Sacrifice this token: Draw a card.")
+Desperate Measures | {B} | Instant | incl=- | Target creature gets +1/-1 until end of turn. When it dies under your control this turn, draw two cards.
+Energybending | {2} | Instant — Lesson | incl=- | Lands you control gain all basic land types until end of turn. Draw a card.
+Fists of Flame | {1}{R} | Instant | incl=- | Draw a card. Until end of turn, target creature gains trample and gets +1/+0 for each card you've drawn this turn. (A creature with trample can deal excess combat damage to the pla
+Hellish Sideswipe | {B} | Sorcery | incl=- | As an additional cost to cast this spell, sacrifice an artifact or creature. Destroy target creature or Vehicle. If the sacrificed permanent was a Vehicle, draw a card.
+Hunt for Specimens | {1}{B} | Sorcery | incl=- | Create a 1/1 black and green Pest creature token with "When this token dies, you gain 1 life." Learn. (You may reveal a Lesson card you own from outside the game and put it into yo
+Hymn of the Faller | {1}{B} | Sorcery | incl=- | Surveil 1, then you draw a card and lose 1 life. (To surveil 1, look at the top card of your library. You may put it into your graveyard.) Void — If a nonland permanent left the ba
+Impolite Entrance | {R} | Sorcery | incl=- | Target creature gains trample and haste until end of turn. Draw a card.
+Jet's Brainwashing | {R} | Sorcery | incl=- | Kicker {3} (You may pay an additional {3} as you cast this spell.) Target creature can't block this turn. If this spell was kicked, gain control of that creature until end of turn,
+Locust Spray | {B} | Instant | incl=- | Target creature gets -1/-1 until end of turn. Cycling {B} ({B}, Discard this card: Draw a card.)
+Magmatic Insight | {R} | Sorcery | incl=- | As an additional cost to cast this spell, discard a land card. Draw two cards.
+Manhole Missile | {1}{R} | Instant | incl=- | Manhole Missile deals 3 damage to target creature. You may put a card from your hand on the bottom of your library. If you do, draw a card.
+Might of the Meek | {R} | Instant | incl=- | Target creature gains trample until end of turn. It also gets +1/+0 until end of turn if you control a Mouse. Draw a card.
+Mirrodin Avenged | {B} | Instant | incl=- | Destroy target creature that was dealt damage this turn. Draw a card.
+Plumb the Forbidden | {1}{B} | Instant | incl=- | As an additional cost to cast this spell, you may sacrifice one or more creatures. When you do, copy this spell for each creature sacrificed this way. You draw a card and lose 1 li
+Price of Freedom | {1}{R} | Sorcery — Lesson | incl=- | Destroy target artifact or land an opponent controls. Its controller may search their library for a basic land card, put it onto the battlefield tapped, then shuffle. Draw a card.
+Rabid Attack | {1}{B} | Instant | incl=- | Until end of turn, any number of target creatures you control each get +1/+0 and gain "When this creature dies, draw a card."
+Rile | {R} | Sorcery | incl=- | Rile deals 1 damage to target creature you control. That creature gains trample until end of turn. Draw a card.
+Romantic Rendezvous | {1}{R} | Sorcery | incl=- | Discard a card, then draw two cards.
+Skycrash | {1}{R} | Instant | incl=- | Destroy target artifact. Cycling {R} ({R}, Discard this card: Draw a card.)
+Swiftspear's Teachings | {R} | Sorcery | incl=- | You get a one-time boon with "When you cast a creature spell, it gains your choice of prowess or haste." Draw a card.
+Torch the Witness | {X}{R} | Sorcery | incl=- | Torch the Witness deals twice X damage to target creature. If excess damage was dealt to that creature this way, investigate. (Create a Clue token. It's an artifact with "{2}, Sacr
+Toxin Analysis | {B} | Instant | incl=- | Target creature gains deathtouch and lifelink until end of turn. Investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this token: Draw a card.")
+Unearth | {B} | Sorcery | incl=- | Return target creature card with mana value 3 or less from your graveyard to the battlefield. Cycling {2} ({2}, Discard this card: Draw a card.)
+Warlord's Fury | {R} | Sorcery | incl=- | Creatures you control gain first strike until end of turn. Draw a card.
+Witch's Mark | {1}{R} | Sorcery | incl=- | You may discard a card. If you do, draw two cards. Create a Wicked Role token attached to up to one target creature you control. (If you control another Role on it, put that one in
+You Are Already Dead | {B} | Instant | incl=- | Destroy target creature that was dealt damage this turn. Draw a card.
+
+===== pingers (80) =====
+Black Waltz No. 3 | {2}{B}{R} | Legendary Creature — Wizard | incl=90.5(n=6318) | Flying, deathtouch Whenever you cast a noncreature spell, Black Waltz No. 3 deals 2 damage to each opponent.
+Black Mage's Rod | {1}{B} | Artifact — Equipment | incl=89.7(n=6261) | Job select (When this Equipment enters, create a 1/1 colorless Hero creature token, then attach this to it.) Equipped creature gets +1/+0, has "Whenever you cast a noncreature spel
+Circle of Power | {3}{B} | Sorcery | incl=89.6(n=6257) | You draw two cards and you lose 2 life. Create a 0/1 black Wizard creature token with "Whenever you cast a noncreature spell, this token deals 1 damage to each opponent." Wizards y
+Cornered by Black Mages | {1}{B}{B} | Sorcery | incl=86.7(n=6054) | Target opponent sacrifices a creature of their choice. Create a 0/1 black Wizard creature token with "Whenever you cast a noncreature spell, this token deals 1 damage to each oppon
+Coruscation Mage | {1}{R} | Creature — Otter Wizard | incl=83.6(n=5840) | Offspring {2} (You may pay an additional {2} as you cast this spell. If you do, when this creature enters, create a 1/1 token copy of it.) Whenever you cast a noncreature spell, th
+Mysidian Elder | {2}{R} | Creature — Human Wizard | incl=74.7(n=5217) | When this creature enters, create a 0/1 black Wizard creature token with "Whenever you cast a noncreature spell, this token deals 1 damage to each opponent."
+Queen Brahne | {2}{R} | Legendary Creature — Human Noble | incl=73.6(n=5141) | Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.) Whenever Queen Brahne attacks, create a 0/1 black Wizard creature token with "Whenever 
+Lightning Bolt | {R} | Instant | incl=68.1(n=4755) | Lightning Bolt deals 3 damage to any target.
+Guttersnipe | {2}{R} | Creature — Goblin Shaman | incl=59.4(n=4151) | Whenever you cast an instant or sorcery spell, this creature deals 2 damage to each opponent.
+Fiery Inscription | {2}{R} | Enchantment | incl=44.4(n=3103) | When this enchantment enters, the Ring tempts you. Whenever you cast an instant or sorcery spell, this enchantment deals 2 damage to each opponent.
+Boltwave | {R} | Sorcery | incl=40.1(n=2798) | Boltwave deals 3 damage to each opponent.
+Grab the Prize | {1}{R} | Sorcery | incl=31.5(n=2200) | As an additional cost to cast this spell, discard a card. Draw two cards. If the discarded card wasn't a land card, Grab the Prize deals 2 damage to each opponent.
+Firebrand Archer | {1}{R} | Creature — Human Archer | incl=29.7(n=2071) | Whenever you cast a noncreature spell, this creature deals 1 damage to each opponent.
+Grapeshot | {1}{R} | Sorcery | incl=21.4(n=1495) | Grapeshot deals 1 damage to any target. Storm (When you cast this spell, copy it for each spell cast before it this turn. You may choose new targets for the copies.)
+Longshot, Rebel Bowman | {3}{R} | Legendary Creature — Human Rebel Ally | incl=17.6(n=1232) | Reach (This creature can block creatures with flying.) Noncreature spells you cast cost {1} less to cast. Whenever you cast a noncreature spell, Longshot deals 2 damage to each opp
+Kessig Flamebreather | {1}{R} | Creature — Human Shaman | incl=17.1(n=1192) | Whenever you cast a noncreature spell, this creature deals 1 damage to each opponent.
+Emeritus of Conflict // Lightning Bolt | {1}{R} // {R} | Creature — Human Wizard // Instant | incl=15.6(n=1090) | First strike Whenever you cast your third spell each turn, this creature becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.) // Light
+Electrostatic Field | {1}{R} | Creature — Wall | incl=14.2(n=991) | Defender Whenever you cast an instant or sorcery spell, this creature deals 1 damage to each opponent.
+Shock | {R} | Instant | incl=14(n=981) | Shock deals 2 damage to any target.
+Lightning Strike | {1}{R} | Instant | incl=9.1(n=637) | Lightning Strike deals 3 damage to any target.
+Ashling, Flame Dancer | {2}{R}{R} | Legendary Creature — Elemental Shaman | incl=7.7(n=538) | You don't lose unspent red mana as steps and phases end. Magecraft — Whenever you cast or copy an instant or sorcery spell, discard a card, then draw a card. If this is the second 
+Fiery Confluence | {2}{R}{R} | Sorcery | incl=7.7(n=536) | Choose three. You may choose the same mode more than once. • Fiery Confluence deals 1 damage to each creature. • Fiery Confluence deals 2 damage to each opponent. • Destroy target 
+Burst Lightning | {R} | Instant | incl=6.6(n=462) | Kicker {4} (You may pay an additional {4} as you cast this spell.) Burst Lightning deals 2 damage to any target. If this spell was kicked, it deals 4 damage instead.
+Angry Rabble | {1}{R} | Creature — Human Citizen | incl=- | Trample Whenever you cast a spell with mana value 4 or greater, this creature deals 1 damage to each opponent. {5}{R}: Put two +1/+1 counters on this creature. Activate only as a s
+Boggart Cursecrafter | {B}{R} | Creature — Goblin Warlock | incl=- | Deathtouch Whenever another Goblin you control dies, this creature deals 1 damage to each opponent.
+Boulder Dash | {1}{R} | Sorcery | incl=- | Boulder Dash deals 2 damage to any target and 1 damage to any other target.
+Channeled Dragonfire | {R} | Sorcery | incl=- | Channeled Dragonfire deals 2 damage to any target. Harmonize {5}{R}{R} (You may cast this card from your graveyard for its harmonize cost. You may tap a creature you control to red
+Cool but Rude | {1}{R} | Enchantment — Class | incl=- | (Gain the next level as a sorcery to add its ability.) Whenever you attack, you may discard a card. If you do, draw a card. {1}{R}: Level 2 Whenever you discard a card, this Class 
+Devoted Duelist | {1}{R} | Creature — Goblin Monk | incl=- | Haste Flurry — Whenever you cast your second spell each turn, this creature deals 1 damage to each opponent.
+Dragon's Approach | {2}{R} | Sorcery | incl=- | Dragon's Approach deals 3 damage to each opponent. You may exile Dragon's Approach and four cards named Dragon's Approach from your graveyard. If you do, search your library for a 
+Dynamite Diver | {R} | Creature — Goblin Pilot | incl=- | This creature saddles Mounts and crews Vehicles as though its power were 2 greater. When this creature dies, it deals 1 damage to any target.
+Enraged Flamecaster | {2}{R} | Creature — Elemental Sorcerer | incl=- | Reach Whenever you cast a spell with mana value 4 or greater, this creature deals 2 damage to each opponent.
+Fanatical Firebrand | {R} | Creature — Goblin Pirate | incl=- | Haste (This creature can attack and {T} as soon as it comes under your control.) {T}, Sacrifice this creature: It deals 1 damage to any target.
+Fear of Lost Teeth | {B} | Enchantment Creature — Nightmare | incl=- | When this creature dies, it deals 1 damage to any target and you gain 1 life.
+General Kreat, the Boltbringer | {2}{R} | Legendary Creature — Goblin Soldier | incl=- | Whenever one or more Goblins you control attack, create a 1/1 red Goblin creature token that's tapped and attacking. Whenever another creature you control enters, General Kreat dea
+Goblin Bombardment | {1}{R} | Enchantment | incl=- | Sacrifice a creature: This enchantment deals 1 damage to any target.
+Goblin Grenade | {R} | Sorcery | incl=- | As an additional cost to cast this spell, sacrifice a Goblin. Goblin Grenade deals 5 damage to any target.
+Goblin Sharpshooter | {2}{R} | Creature — Goblin | incl=- | This creature doesn't untap during your untap step. Whenever a creature dies, untap this creature. {T}: This creature deals 1 damage to any target.
+Hawkeye's Bow | {R} | Artifact — Equipment | incl=- | Equipped creature gets +1/+0 and has reach. Whenever equipped creature becomes tapped, it deals 1 damage to each opponent. Equip {1} ({1}: Attach to target creature you control. Eq
+Hawkeye, Master Marksman | {1}{R} | Legendary Creature — Human Archer Hero | incl=- | Reach, first strike Trick Arrows — Whenever Hawkeye becomes tapped, you may pay {1} up to three times. When you do, choose up to that many — • Net — Target creature can't block thi
+Idol of the Deep King // Sovereign's Macuahuitl | {2}{R} | Artifact // Artifact — Equipment | incl=- | Flash When this artifact enters, it deals 2 damage to any target. Craft with artifact {2}{R} ({2}{R}, Exile this artifact, Exile another artifact you control or an artifact card fr
+Impact Tremors | {1}{R} | Enchantment | incl=- | Whenever a creature you control enters, this enchantment deals 1 damage to each opponent.
+Kuja, Genome Sorcerer // Trance Kuja, Fate Defied | {2}{B}{R} | Legendary Creature — Human Mutant Wizard // Legendary Creature — Avatar Wizard | incl=- | At the beginning of your end step, create a tapped 0/1 black Wizard creature token with "Whenever you cast a noncreature spell, this token deals 1 damage to each opponent." Then if
+Kumano Faces Kakkazan // Etching of Kumano | {R} | Enchantment — Saga // Enchantment Creature — Human Shaman | incl=- | (As this Saga enters and after your draw step, add a lore counter.) I — This Saga deals 1 damage to each opponent and each planeswalker they control. II — When you next cast a crea
+Lasting Tarfire | {1}{R} | Enchantment | incl=- | At the beginning of each end step, if you put a counter on a creature this turn, this enchantment deals 2 damage to each opponent.
+Magmakin Artillerist | {2}{R} | Creature — Elemental Pirate | incl=- | Whenever you discard one or more cards, this creature deals that much damage to each opponent. Cycling {1}{R} ({1}{R}, Discard this card: Draw a card.) When you cycle this card, it
+Mayhem Devil | {1}{B}{R} | Creature — Devil | incl=- | Whenever a player sacrifices a permanent, this creature deals 1 damage to any target.
+Melt Through | {R} | Instant | incl=- | Melt Through deals 2 damage to any target. If it's a creature, it perpetually gains "As long as this creature is on the battlefield, damage isn't removed from it during cleanup ste
+Merciless Enforcers | {1}{B} | Creature — Human Mercenary Villain | incl=- | Lifelink {3}{B}: This creature deals 1 damage to each opponent.
+Oni-Cult Anvil | {B}{R} | Artifact | incl=- | Whenever one or more artifacts you control leave the battlefield during your turn, create a 1/1 colorless Construct artifact creature token. This ability triggers only once each tu
+Ozai's Cruelty | {2}{B} | Sorcery — Lesson | incl=- | Ozai's Cruelty deals 2 damage to target player. That player discards two cards.
+Perilous Myr | {2} | Artifact Creature — Phyrexian Myr | incl=- | When this creature dies, it deals 2 damage to any target.
+Plasma Bolt | {R} | Sorcery | incl=- | Plasma Bolt deals 2 damage to any target. Void — Plasma Bolt deals 3 damage instead if a nonland permanent left the battlefield this turn or a spell was warped this turn.
+Play with Fire | {R} | Instant | incl=- | Play with Fire deals 2 damage to any target. If a player is dealt damage this way, scry 1. (Look at the top card of your library. You may put that card on the bottom.)
+Purphoros, God of the Forge | {3}{R} | Legendary Enchantment Creature — God | incl=- | Indestructible As long as your devotion to red is less than five, Purphoros isn't a creature. Whenever another creature you control enters, Purphoros deals 2 damage to each opponen
+Rubble Rouser | {2}{R} | Creature — Dwarf Sorcerer | incl=- | When this creature enters, you may discard a card. If you do, draw a card. {T}, Exile a card from your graveyard: Add {R}. When you do, this creature deals 1 damage to each opponen
+Ruinous Rampage | {1}{R}{R} | Sorcery | incl=- | Choose one — • Ruinous Rampage deals 3 damage to each opponent. • Exile all artifacts with mana value 3 or less.
+Sabotender | {1}{R} | Creature — Plant | incl=- | Reach Landfall — Whenever a land you control enters, this creature deals 1 damage to each opponent.
+Shadow of the Goblin | {1}{R} | Enchantment | incl=- | Unreliable Visions — At the beginning of your first main phase, discard a card. If you do, draw a card. Undying Vengeance — Whenever you play a land or cast a spell from anywhere o
+Skeleton Archer | {3}{B} | Creature — Skeleton Archer | incl=- | When this creature enters, it deals 1 damage to any target.
+Sorcerer's Wand | {1} | Artifact — Equipment | incl=- | Equipped creature has "{T}: This creature deals 1 damage to target player or planeswalker. If this creature is a Wizard, it deals 2 damage instead." Equip {3}
+Spicy Oatmeal Pizza | {2}{R} | Artifact — Food | incl=- | When this artifact enters, it deals 4 damage to any target and 3 damage to you. {2}, {T}, Sacrifice this artifact: You gain 3 life.
+Spitfire Lagac | {3}{R} | Creature — Lizard | incl=- | Landfall — Whenever a land you control enters, this creature deals 1 damage to each opponent.
+Start from Scratch | {2}{R} | Sorcery — Lesson | incl=- | Choose one — • Start from Scratch deals 1 damage to any target. • Destroy target artifact.
+Steampath Charger | {1}{R} | Creature — Lizard Warlock | incl=- | Offspring {2} (You may pay an additional {2} as you cast this spell. If you do, when this creature enters, create a 1/1 token copy of it.) When this creature dies, it deals 1 damag
+Sting-Slinger | {2}{R} | Creature — Goblin Warrior | incl=- | {1}{R}, {T}, Blight 1: This creature deals 2 damage to each opponent. (To blight 1, put a -1/-1 counter on a creature you control.)
+Sunfire Torch | {R} | Artifact — Equipment | incl=- | Equipped creature gets +1/+0 and has "Whenever this creature attacks, you may sacrifice Sunfire Torch. When you do, this creature deals 2 damage to any target." Equip {1} ({1}: Att
+Sunshot Militia | {1}{R} | Creature — Human Soldier | incl=- | Tap two untapped artifacts and/or creatures you control: This creature deals 1 damage to each opponent. Activate only as a sorcery.
+Tectonic Hazard | {R} | Sorcery | incl=- | Tectonic Hazard deals 1 damage to each opponent and each creature they control.
+Thunderdrum Soloist | {1}{R} | Creature — Dwarf Bard | incl=- | Reach Opus — Whenever you cast an instant or sorcery spell, this creature deals 1 damage to each opponent. If five or more mana was spent to cast that spell, this creature deals 3 
+Tome Blast | {1}{R} | Sorcery | incl=- | Tome Blast deals 2 damage to any target. Flashback {4}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
+Tweeze | {2}{R} | Instant | incl=- | Tweeze deals 3 damage to any target. You may discard a card. If you do, draw a card.
+Twinshot Sniper | {3}{R} | Artifact Creature — Goblin Archer | incl=- | Reach When this creature enters, it deals 2 damage to any target. Channel — {1}{R}, Discard this card: It deals 2 damage to any target.
+Vindictive Warden | {2}{B/R} | Creature — Human Soldier | incl=- | Menace (This creature can't be blocked except by two or more creatures.) Firebending 1 (Whenever this creature attacks, add {R}. This mana lasts until end of combat.) {3}: This cre
+Weapons Manufacturing | {1}{R} | Enchantment | incl=- | Whenever a nontoken artifact you control enters, create a colorless artifact token named Munitions with "When this token leaves the battlefield, it deals 2 damage to any target."
+Weather Maker | {3} | Artifact | incl=- | Landfall — Whenever a land you control enters, put a charge counter on this artifact. {T}: Add one mana of any color. {T}, Remove two charge counters from this artifact: Add {C}{C}
+Weftstalker Ardent | {2}{R} | Creature — Drix Artificer | incl=- | Whenever another creature or artifact you control enters, this creature deals 1 damage to each opponent. Warp {R} (You may cast this card from your hand for its warp cost. Exile th
+Wildfire Howl | {1}{R}{R} | Sorcery | incl=- | Gift a card (You may promise an opponent a gift as you cast this spell. If you do, they draw a card before its other effects.) Wildfire Howl deals 2 damage to each creature. If the
+Witty Roastmaster | {2}{R} | Creature — Devil Citizen | incl=- | Alliance — Whenever another creature you control enters, this creature deals 1 damage to each opponent.
+Zariel, Archduke of Avernus | {2}{R}{R} | Legendary Planeswalker — Zariel | incl=- | +1: Creatures you control get +1/+0 and gain haste until end of turn. 0: Create a 1/1 red Devil creature token with "When this token dies, it deals 1 damage to any target." −6: You
+
+===== damage_doublers (9) =====
+Artist's Talent | {1}{R} | Enchantment — Class | incl=45.7(n=3191) | (Gain the next level as a sorcery to add its ability.) Whenever you cast a noncreature spell, you may discard a card. If you do, draw a card. {2}{R}: Level 2 Noncreature spells you
+Fated Firepower | {X}{R}{R}{R} | Enchantment | incl=11(n=765) | Flash This enchantment enters with X fire counters on it. If a source you control would deal damage to an opponent or a permanent an opponent controls, it deals that much damage pl
+Twinflame Tyrant | {3}{R}{R} | Creature — Dragon | incl=6.1(n=429) | Flying If a source you control would deal damage to an opponent or a permanent an opponent controls, it deals double that damage instead.
+Cut Propulsion | {2}{R} | Instant | incl=- | Target creature deals damage to itself equal to its power. If that creature has flying, it deals twice that much damage to itself instead.
+Goblin Goliath | {4}{R}{R} | Creature — Goblin Mutant | incl=- | When this creature enters, create a number of 1/1 red Goblin creature tokens equal to the number of opponents you have. {3}{R}, {T}: If a source you control would deal damage to an
+Kuja, Genome Sorcerer // Trance Kuja, Fate Defied | {2}{B}{R} | Legendary Creature — Human Mutant Wizard // Legendary Creature — Avatar Wizard | incl=- | At the beginning of your end step, create a tapped 0/1 black Wizard creature token with "Whenever you cast a noncreature spell, this token deals 1 damage to each opponent." Then if
+Stonesplitter Bolt | {X}{R} | Instant | incl=- | Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.) Stonesplitter Bolt deals X damage to target creature or planeswalker. If this spell was barga
+Torch the Witness | {X}{R} | Sorcery | incl=- | Torch the Witness deals twice X damage to target creature. If excess damage was dealt to that creature this way, investigate. (Create a Clue token. It's an artifact with "{2}, Sacr
+Valley Flamecaller | {2}{R} | Creature — Lizard Warlock | incl=- | If a Lizard, Mouse, Otter, or Raccoon you control would deal damage to a permanent or player, it deals that much damage plus 1 instead.
+
+===== cost_reducers (11) =====
+Artist's Talent | {1}{R} | Enchantment — Class | incl=45.7(n=3191) | (Gain the next level as a sorcery to add its ability.) Whenever you cast a noncreature spell, you may discard a card. If you do, draw a card. {2}{R}: Level 2 Noncreature spells you
+Longshot, Rebel Bowman | {3}{R} | Legendary Creature — Human Rebel Ally | incl=17.6(n=1232) | Reach (This creature can block creatures with flying.) Noncreature spells you cast cost {1} less to cast. Whenever you cast a noncreature spell, Longshot deals 2 damage to each opp
+The Darkness Crystal | {2}{B}{B} | Legendary Artifact | incl=11.5(n=800) | Black spells you cast cost {1} less to cast. If a nontoken creature an opponent controls would die, instead exile it and you gain 2 life. {4}{B}{B}, {T}: Put target creature card e
+Baron Strucker, HYDRA Overlord | {2}{B} | Legendary Creature — Human Villain | incl=- | Villain spells you cast cost {1} less to cast. Whenever another Villain you control enters, you may have it connive. Do this only once each turn. (Draw a card, then discard a card.
+Bladegraft Aspirant | {2}{R} | Creature — Phyrexian Warrior | incl=- | Menace Equipment spells you cast cost {1} less to cast. Activated abilities of Equipment you control that target this creature cost {1} less to activate.
+Emerald Medallion | {2} | Artifact | incl=- | Green spells you cast cost {1} less to cast.
+Gathering Stone | {4} | Artifact | incl=- | As this artifact enters, choose a creature type. Spells you cast of the chosen type cost {1} less to cast. When this artifact enters and at the beginning of your upkeep, look at th
+Goblin Warchief | {1}{R}{R} | Creature — Goblin Warrior | incl=- | Goblin spells you cast cost {1} less to cast. Goblins you control have haste.
+Racers' Scoreboard | {4} | Artifact | incl=- | Start your engines! (If you have no speed, it starts at 1. It increases once on each of your turns when an opponent loses life. Max speed is 4.) When this artifact enters, draw two
+The Sibsig Ceremony | {B}{B}{B} | Legendary Enchantment | incl=- | Creature spells you cast cost {2} less to cast. Whenever a creature you control enters, if you cast it, destroy that creature, then create a 2/2 black Zombie Druid creature token.
+Tombstone, Career Criminal | {2}{B} | Legendary Creature — Human Villain | incl=- | When Tombstone enters, return target Villain card from your graveyard to your hand. Villain spells you cast cost {1} less to cast.
+
+===== magecraft (2) =====
+Storm-Kiln Artist | {3}{R} | Creature — Dwarf Shaman | incl=61.9(n=4325) | This creature gets +1/+0 for each artifact you control. Magecraft — Whenever you cast or copy an instant or sorcery spell, create a Treasure token.
+Ashling, Flame Dancer | {2}{R}{R} | Legendary Creature — Elemental Shaman | incl=7.7(n=538) | You don't lose unspent red mana as steps and phases end. Magecraft — Whenever you cast or copy an instant or sorcery spell, discard a card, then draw a card. If this is the second 
+
+===== rocks (15) =====
+Talisman of Indulgence | {2} | Artifact | incl=63.1(n=4409) | {T}: Add {C}. {T}: Add {B} or {R}. This artifact deals 1 damage to you.
+Mind Stone | {2} | Artifact | incl=30.8(n=2154) | {T}: Add {C}. {1}, {T}, Sacrifice this artifact: Draw a card.
+Tablet of Discovery | {2}{R} | Artifact | incl=15.5(n=1079) | When this artifact enters, mill a card. You may play that card this turn. (To mill a card, put the top card of your library into your graveyard.) {T}: Add {R}. {T}: Add {R}{R}. Spe
+Ashnod's Altar | {3} | Artifact | incl=- | Sacrifice a creature: Add {C}{C}.
+Guardian Idol | {2} | Artifact | incl=- | This artifact enters tapped. {T}: Add {C}. {2}: This artifact becomes a 2/2 Golem artifact creature until end of turn.
+Page, Loose Leaf | {2} | Legendary Artifact Creature — Construct | incl=- | {T}: Add {C}. Grandeur — Discard another card named Page, Loose Leaf: Reveal cards from the top of your library until you reveal an instant or sorcery card. Put that card into your
+Palladium Myr | {3} | Artifact Creature — Myr | incl=- | {T}: Add {C}{C}.
+Pit Automaton | {2} | Artifact Creature — Construct | incl=- | Defender {T}: Add {C}{C}. Spend this mana only to activate abilities. {2}, {T}: When you next activate an exhaust ability that isn't a mana ability this turn, copy it. You may choo
+Powerstone Shard | {3} | Artifact | incl=- | {T}: Add {C} for each artifact you control named Powerstone Shard.
+Pristine Talisman | {3} | Artifact | incl=- | {T}: Add {C}. You gain 1 life.
+Rakdos Locket | {3} | Artifact | incl=- | {T}: Add {B} or {R}. {B/R}{B/R}{B/R}{B/R}, {T}, Sacrifice this artifact: Draw two cards.
+Strixhaven Stadium | {3} | Artifact | incl=- | {T}: Add {C}. Put a point counter on this artifact. Whenever a creature deals combat damage to you, remove a point counter from this artifact. Whenever a creature you control deals
+The Soul Stone | {1}{B} | Legendary Artifact — Infinity Stone | incl=- | Indestructible {T}: Add {B}. {6}{B}, {T}, Exile a creature you control: Harness The Soul Stone. (Once harnessed, its ∞ ability is active.) ∞ — At the beginning of your upkeep, retu
+Weather Maker | {3} | Artifact | incl=- | Landfall — Whenever a land you control enters, put a charge counter on this artifact. {T}: Add one mana of any color. {T}, Remove two charge counters from this artifact: Add {C}{C}
+Zookeeper Mechan | {1}{R} | Artifact Creature — Robot | incl=- | {T}: Add {R}. {6}{R}: Target creature you control gets +4/+0 until end of turn. Activate only as a sorcery.
+
+===== wizards (22) =====
+Black Waltz No. 3 | {2}{B}{R} | Legendary Creature — Wizard | incl=90.5(n=6318) | Flying, deathtouch Whenever you cast a noncreature spell, Black Waltz No. 3 deals 2 damage to each opponent.
+Coruscation Mage | {1}{R} | Creature — Otter Wizard | incl=83.6(n=5840) | Offspring {2} (You may pay an additional {2} as you cast this spell. If you do, when this creature enters, create a 1/1 token copy of it.) Whenever you cast a noncreature spell, th
+Harmonic Prodigy | {1}{R} | Creature — Human Wizard | incl=79.1(n=5526) | Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.) If a triggered ability of a Shaman or another Wizard you control triggers, that ability
+Mysidian Elder | {2}{R} | Creature — Human Wizard | incl=74.7(n=5217) | When this creature enters, create a 0/1 black Wizard creature token with "Whenever you cast a noncreature spell, this token deals 1 damage to each opponent."
+Dualcaster Mage | {1}{R}{R} | Creature — Human Wizard | incl=25.3(n=1770) | Flash When this creature enters, copy target instant or sorcery spell. You may choose new targets for the copy.
+Electrostatic Infantry | {1}{R} | Creature — Dwarf Wizard | incl=22.3(n=1554) | Trample Whenever you cast an instant or sorcery spell, put a +1/+1 counter on this creature.
+Emeritus of Conflict // Lightning Bolt | {1}{R} // {R} | Creature — Human Wizard // Instant | incl=15.6(n=1090) | First strike Whenever you cast your third spell each turn, this creature becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.) // Light
+Summon: Esper Ramuh | {2}{R}{R} | Enchantment Creature — Saga Wizard | incl=14.7(n=1026) | (As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.) I — Judgment Bolt — This creature deals damage equal to the number of noncreature, nonland 
+Slickshot Show-Off | {1}{R} | Creature — Bird Wizard | incl=8.2(n=575) | Flying, haste Whenever you cast a noncreature spell, this creature gets +2/+0 until end of turn. Plot {1}{R} (You may pay {1}{R} and exile this card from your hand. Cast it as a so
+Harnesser of Storms | {2}{R} | Creature — Otter Wizard | incl=7.4(n=514) | Whenever you cast a noncreature or Otter spell, you may exile the top card of your library. Until end of turn, you may play that card. This ability triggers only once each turn.
+Goliath Daydreamer | {2}{R}{R} | Creature — Giant Wizard | incl=7.3(n=513) | Whenever you cast an instant or sorcery spell from your hand, exile that card with a dream counter on it instead of putting it into your graveyard as it resolves. Whenever this cre
+Tersa Lightshatter | {2}{R} | Legendary Creature — Orc Wizard | incl=4.7(n=328) | Haste When Tersa Lightshatter enters, discard up to two cards, then draw that many cards. Whenever Tersa Lightshatter attacks, if there are seven or more cards in your graveyard, e
+Heartfire Immolator | {1}{R} | Creature — Human Wizard | incl=4.4(n=305) | Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.) {R}, Sacrifice this creature: It deals damage equal to its power to target creature or 
+Axiom Engraver | {1}{R} | Creature — Phyrexian Wizard | incl=- | This creature enters with two oil counters on it. {T}, Remove an oil counter from this creature, Discard a card: Draw a card.
+Crackling Cyclops | {2}{R} | Creature — Cyclops Wizard | incl=- | Whenever you cast a noncreature spell, this creature gets +3/+0 until end of turn.
+Faller's Faithful | {2}{B} | Creature — Human Wizard | incl=- | When this creature enters, destroy up to one other target creature. If that creature wasn't dealt damage this turn, its controller draws two cards.
+Ghitu Lavarunner | {R} | Creature — Human Wizard | incl=- | As long as there are two or more instant and/or sorcery cards in your graveyard, this creature gets +1/+0 and has haste. (It can attack and {T} as soon as it comes under your contr
+Grim Haruspex | {2}{B} | Creature — Human Wizard | incl=- | Morph {B} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.) Whenever another nontoken creature you control dies, draw a car
+Kuja, Genome Sorcerer // Trance Kuja, Fate Defied | {2}{B}{R} | Legendary Creature — Human Mutant Wizard // Legendary Creature — Avatar Wizard | incl=- | At the beginning of your end step, create a tapped 0/1 black Wizard creature token with "Whenever you cast a noncreature spell, this token deals 1 damage to each opponent." Then if
+Savanti Romero, Time's Exile | {3}{B}{B} | Legendary Creature — Demon Wizard | incl=- | Trample At the beginning of combat on your turn, put a +1/+1 counter on Savanti Romero. Then you draw X cards and lose X life, where X is the number of counters on Savanti Romero.
+Unsparing Boltcaster | {2}{R} | Creature — Ogre Wizard | incl=- | When this creature enters, it deals 5 damage to target creature an opponent controls that was dealt damage this turn.
+Warren Soultrader | {2}{B} | Creature — Zombie Goblin Wizard | incl=- | Pay 1 life, Sacrifice another creature: Create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.")
+
+===== draw (50) =====
+Circle of Power | {3}{B} | Sorcery | incl=89.6(n=6257) | You draw two cards and you lose 2 life. Create a 0/1 black Wizard creature token with "Whenever you cast a noncreature spell, this token deals 1 damage to each opponent." Wizards y
+Night's Whisper | {1}{B} | Sorcery | incl=66.5(n=4645) | You draw two cards and lose 2 life.
+Faithless Looting | {R} | Sorcery | incl=62.3(n=4350) | Draw two cards, then discard two cards. Flashback {2}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
+Big Score | {3}{R} | Instant | incl=54.4(n=3800) | As an additional cost to cast this spell, discard a card. Draw two cards and create two Treasure tokens. (They're artifacts with "{T}, Sacrifice this token: Add one mana of any col
+Thrill of Possibility | {1}{R} | Instant | incl=53.1(n=3705) | As an additional cost to cast this spell, discard a card. Draw two cards.
+Deadly Dispute | {1}{B} | Instant | incl=43(n=3003) | As an additional cost to cast this spell, sacrifice an artifact or creature. Draw two cards and create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one 
+Demand Answers | {1}{R} | Instant | incl=40.4(n=2821) | As an additional cost to cast this spell, sacrifice an artifact or discard a card. Draw two cards.
+Laughing Mad | {2}{R} | Instant | incl=36.7(n=2562) | As an additional cost to cast this spell, discard a card. Draw two cards. Flashback {3}{R} (You may cast this card from your graveyard for its flashback cost and any additional cos
+Unexpected Windfall | {2}{R}{R} | Instant | incl=32.4(n=2260) | As an additional cost to cast this spell, discard a card. Draw two cards and create two Treasure tokens. (They're artifacts with "{T}, Sacrifice this token: Add one mana of any col
+Grab the Prize | {1}{R} | Sorcery | incl=31.5(n=2200) | As an additional cost to cast this spell, discard a card. Draw two cards. If the discarded card wasn't a land card, Grab the Prize deals 2 damage to each opponent.
+Seize the Spoils | {2}{R} | Sorcery | incl=14.5(n=1011) | As an additional cost to cast this spell, discard a card. Draw two cards and create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color."
+Village Rites | {B} | Instant | incl=14.2(n=993) | As an additional cost to cast this spell, sacrifice a creature. Draw two cards.
+Tormenting Voice | {1}{R} | Sorcery | incl=7.4(n=515) | As an additional cost to cast this spell, discard a card. Draw two cards.
+Corrupted Conviction | {B} | Instant | incl=6.6(n=458) | As an additional cost to cast this spell, sacrifice a creature. Draw two cards.
+Cathartic Reunion | {1}{R} | Sorcery | incl=6(n=419) | As an additional cost to cast this spell, discard two cards. Draw three cards.
+Tersa Lightshatter | {2}{R} | Legendary Creature — Orc Wizard | incl=4.7(n=328) | Haste When Tersa Lightshatter enters, discard up to two cards, then draw that many cards. Whenever Tersa Lightshatter attacks, if there are seven or more cards in your graveyard, e
+Bad Deal | {4}{B}{B} | Sorcery | incl=- | You draw two cards and each opponent discards two cards. Each player loses 2 life.
+Bitter Reunion | {1}{R} | Enchantment | incl=- | When this enchantment enters, you may discard a card. If you do, draw two cards. {1}, Sacrifice this enchantment: Creatures you control gain haste until end of turn.
+Byway Barterer | {2}{R} | Creature — Raccoon Rogue | incl=- | Menace Whenever you expend 4, you may discard your hand. If you do, draw two cards. (You expend 4 as you spend your fourth total mana to cast spells during a turn.)
+Casey Jones, Vigilante | {1}{R}{R} | Legendary Creature — Human Berserker | incl=- | When Casey Jones enters, draw three cards. At the beginning of your next upkeep, discard three cards at random.
+Costly Plunder | {1}{B} | Instant | incl=- | As an additional cost to cast this spell, sacrifice an artifact or creature. Draw two cards.
+Cruel Truths | {3}{B} | Instant | incl=- | Surveil 2, then draw two cards. You lose 2 life. (To surveil 2, look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of yo
+Crushing Disappointment | {3}{B} | Instant | incl=- | Each player loses 2 life. You draw two cards.
+Decode Transmissions | {2}{B} | Sorcery | incl=- | You draw two cards and lose 2 life. Void — If a nonland permanent left the battlefield this turn or a spell was warped this turn, instead you draw two cards and each opponent loses
+Derelict Attic // Widow's Walk | {2}{B} // {3}{B} | Enchantment — Room // Enchantment — Room | incl=- | When you unlock this door, you draw two cards and you lose 2 life. (You may cast either half. That door unlocks on the battlefield. As a sorcery, you may pay the mana cost of a loc
+Desperate Measures | {B} | Instant | incl=- | Target creature gets +1/-1 until end of turn. When it dies under your control this turn, draw two cards.
+Disturbing Mirth | {B}{R} | Enchantment | incl=- | When this enchantment enters, you may sacrifice another enchantment or creature. If you do, draw two cards. When you sacrifice this enchantment, manifest dread. (Look at the top tw
+Greasewrench Goblin | {R} | Creature — Goblin Artificer | incl=- | Exhaust — {2}{R}: Discard up to two cards, then draw that many cards. Put a +1/+1 counter on this creature. (Activate each exhaust ability only once.)
+Hearth Elemental // Stoke Genius | {5}{R} // {1}{R} | Creature — Elemental // Sorcery — Adventure | incl=- | This spell costs {X} less to cast, where X is the number of cards in your graveyard that are instant cards, sorcery cards, and/or have an Adventure. // Discard your hand, then draw
+Hedron Archive | {4} | Artifact | incl=- | {T}: Add {C}{C}. {2}, {T}, Sacrifice this artifact: Draw two cards.
+Humble Defector | {1}{R} | Creature — Human Rogue | incl=- | {T}: Draw two cards. Target opponent gains control of this creature. Activate only during your turn.
+Illuminate History | {2}{R}{R} | Sorcery — Lesson | incl=- | Discard any number of cards, then draw that many cards. Then if there are seven or more cards in your graveyard, create a 3/2 red and white Spirit creature token.
+Invasion of Mercadia // Kyren Flamewright | {1}{R} | Battle — Siege // Creature — Goblin Spellshaper | incl=- | (As a Siege enters, choose an opponent to protect it. You and others can attack it. When it's defeated, exile it, then cast it transformed.) When this Siege enters, you may discard
+Kickoff Celebrations | {1}{R} | Enchantment | incl=- | Start your engines! (If you have no speed, it starts at 1. It increases once on each of your turns when an opponent loses life. Max speed is 4.) When this enchantment enters, you m
+Magmatic Insight | {R} | Sorcery | incl=- | As an additional cost to cast this spell, discard a land card. Draw two cards.
+Melded Moxite | {1}{R} | Artifact | incl=- | When this artifact enters, you may discard a card. If you do, draw two cards. {3}, Sacrifice this artifact: Create a tapped 2/2 colorless Robot artifact creature token.
+Racers' Scoreboard | {4} | Artifact | incl=- | Start your engines! (If you have no speed, it starts at 1. It increases once on each of your turns when an opponent loses life. Max speed is 4.) When this artifact enters, draw two
+Rakdos Locket | {3} | Artifact | incl=- | {T}: Add {B} or {R}. {B/R}{B/R}{B/R}{B/R}, {T}, Sacrifice this artifact: Draw two cards.
+Requiem Monolith | {2}{B} | Artifact | incl=- | {T}: Until end of turn, target creature gains "Whenever this creature is dealt damage, you draw that many cards and lose that much life." That creature's controller may have this a
+Risky Research | {2}{B} | Sorcery | incl=- | Surveil 2, then draw two cards. You lose 2 life. (To surveil 2, look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of yo
+Romantic Rendezvous | {1}{R} | Sorcery | incl=- | Discard a card, then draw two cards.
+Rowan's Grim Search | {2}{B} | Instant | incl=- | Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.) If this spell was bargained, look at the top four cards of your library, then put up to two o
+Saheeli's Lattice // Mastercraft Raptor | {1}{R} | Artifact // Artifact Creature — Dinosaur | incl=- | When this artifact enters, you may discard a card. If you do, draw two cards. Craft with one or more Dinosaurs {4}{R} ({4}{R}, Exile this artifact, Exile one or more Dinosaurs you 
+Sephiroth, Fabled SOLDIER // Sephiroth, One-Winged Angel | {2}{B} | Legendary Creature — Human Avatar Soldier // Legendary Creature — Angel Nightmare Avatar | incl=- | Whenever Sephiroth enters or attacks, you may sacrifice another creature. If you do, draw a card. Whenever another creature dies, target opponent loses 1 life and you gain 1 life. 
+Sinister Monolith | {3}{B} | Artifact | incl=- | At the beginning of combat on your turn, each opponent loses 1 life and you gain 1 life. {T}, Pay 2 life, Sacrifice this artifact: Draw two cards. Activate only as a sorcery.
+Starting Column | {3} | Artifact | incl=- | Start your engines! (If you have no speed, it starts at 1. It increases once on each of your turns when an opponent loses life. Max speed is 4.) {T}: Add one mana of any color. Max
+Summon: Primal Odin | {4}{B}{B} | Enchantment Creature — Saga Knight | incl=- | (As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.) I — Gungnir — Destroy target creature an opponent controls. II — Zantetsuken — This creatur
+Vaultguard Trooper | {4}{R} | Creature — Kavu Soldier | incl=- | At the beginning of your end step, if you control two or more tapped creatures, you may discard your hand. If you do, draw two cards.
+Visions of Villainy | {2}{B} | Instant | incl=- | This spell costs {1} less to cast if you control a Villain. You draw two cards and lose 2 life.
+Witch's Mark | {1}{R} | Sorcery | incl=- | You may discard a card. If you do, draw two cards. Create a Wicked Role token attached to up to one target creature you control. (If you control another Role on it, put that one in
+
+===== rituals (8) =====
+Dark Ritual | {B} | Instant | incl=74.1(n=5173) | Add {B}{B}{B}.
+Seething Song | {2}{R} | Instant | incl=39.3(n=2744) | Add {R}{R}{R}{R}{R}.
+Jeska's Will | {2}{R} | Sorcery | incl=35.7(n=2495) | Choose one. If you control a commander as you cast this spell, you may choose both instead. • Add {R} for each card in target opponent's hand. • Exile the top three cards of your l
+Pyretic Ritual | {1}{R} | Instant | incl=20.3(n=1420) | Add {R}{R}{R}.
+Culling the Weak | {B} | Instant | incl=5.4(n=380) | As an additional cost to cast this spell, sacrifice a creature. Add {B}{B}{B}{B}.
+Blazing Firesinger // Seething Song | {2}{R} // {2}{R} | Creature — Dwarf Bard // Instant | incl=- | This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.) // Add {R}{R}{R}{R}{R}.
+Glimpse the Impossible | {2}{R} | Sorcery | incl=- | Exile the top three cards of your library. You may play those cards this turn. At the beginning of the next end step, if any of those cards remain exiled, put them into your gravey
+Sibling Rivalry | {3}{R} | Sorcery | incl=- | Gain control of target artifact or creature until end of turn. Untap it. It gains haste until end of turn. Create a tapped Powerstone token. (It's an artifact with "{T}: Add {C}. T
+
+===== dorks (19) =====
+Blazing Firesinger // Seething Song | {2}{R} // {2}{R} | Creature — Dwarf Bard // Instant | incl=- | This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.) // Add {R}{R}{R}{R}{R}.
+Catalyst Elemental | {2}{R} | Creature — Elemental | incl=- | Sacrifice this creature: Add {R}{R}.
+Chandra's Embercat | {1}{R} | Creature — Elemental Cat | incl=- | {T}: Add {R}. Spend this mana only to cast an Elemental spell or a Chandra planeswalker spell.
+Endrider Catalyzer | {1}{R} | Creature — Human Warrior | incl=- | Start your engines! (If you have no speed, it starts at 1. It increases once on each of your turns when an opponent loses life. Max speed is 4.) Max speed — {T}: Add {R}{R}.
+Freya Crescent | {R} | Legendary Creature — Rat Knight | incl=- | Jump — During your turn, Freya Crescent has flying. {T}: Add {R}. Spend this mana only to cast an Equipment spell or activate an equip ability.
+Howlsquad Heavy | {2}{R} | Creature — Goblin Mercenary | incl=- | Start your engines! Other Goblins you control have haste. At the beginning of combat on your turn, create a 1/1 red Goblin creature token. That token attacks this combat if able. M
+Page, Loose Leaf | {2} | Legendary Artifact Creature — Construct | incl=- | {T}: Add {C}. Grandeur — Discard another card named Page, Loose Leaf: Reveal cards from the top of your library until you reveal an instant or sorcery card. Put that card into your
+Palladium Myr | {3} | Artifact Creature — Myr | incl=- | {T}: Add {C}{C}.
+Pit Automaton | {2} | Artifact Creature — Construct | incl=- | Defender {T}: Add {C}{C}. Spend this mana only to activate abilities. {2}, {T}: When you next activate an exhaust ability that isn't a mana ability this turn, copy it. You may choo
+Purple Dragon Punks | {1}{R} | Creature — Human Rogue | incl=- | {T}: Add {R}. Spend this mana only to cast an artifact spell or to activate an ability.
+Reckless Barbarian | {1}{R} | Creature — Dragon Barbarian | incl=- | Sacrifice this creature: Add {R}{R}.
+Rubble Rouser | {2}{R} | Creature — Dwarf Sorcerer | incl=- | When this creature enters, you may discard a card. If you do, draw a card. {T}, Exile a card from your graveyard: Add {R}. When you do, this creature deals 1 damage to each opponen
+Skirk Prospector | {R} | Creature — Goblin | incl=- | Sacrifice a Goblin: Add {R}.
+Skittering Precursor | {2}{R} | Creature — Eldrazi Drone | incl=- | Devoid (This card has no color.) Menace Whenever you sacrifice a nontoken permanent, create a 0/1 colorless Eldrazi Spawn creature token with "Sacrifice this token: Add {C}."
+Summon: G.F. Ifrit | {2}{R} | Enchantment Creature — Saga Demon | incl=- | (As this Saga enters and after your draw step, add a lore counter. Sacrifice after IV.) I, II — You may discard a card. If you do, draw a card. III, IV — Add {R}.
+Sunset Strikemaster | {1}{R} | Creature — Human Monk | incl=- | {T}: Add {R}. {2}{R}, {T}, Sacrifice this creature: It deals 6 damage to target creature with flying.
+Zhao, the Moon Slayer | {1}{R} | Legendary Creature — Human Soldier | incl=- | Menace Nonbasic lands enter tapped. {7}: Put a conqueror counter on Zhao. As long as Zhao has a conqueror counter on him, nonbasic lands are Mountains. (They lose all other land ty
+Zookeeper Mechan | {1}{R} | Artifact Creature — Robot | incl=- | {T}: Add {R}. {6}{R}: Target creature you control gets +4/+0 until end of turn. Activate only as a sorcery.
+Zuko, Conflicted | {B}{R} | Legendary Creature — Human Rogue | incl=- | At the beginning of your first main phase, choose one that hasn't been chosen and you lose 2 life — • Draw a card. • Put a +1/+1 counter on Zuko. • Add {R}. • Exile Zuko, then retu
+
+===== trigger_doublers (4) =====
+Harmonic Prodigy | {1}{R} | Creature — Human Wizard | incl=79.1(n=5526) | Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.) If a triggered ability of a Shaman or another Wizard you control triggers, that ability
+Roaming Throne | {4} | Artifact Creature — Golem | incl=37.1(n=2594) | Ward {2} As this creature enters, choose a creature type. This creature is the chosen type in addition to its other types. If a triggered ability of another creature you control of
+Panharmonicon | {4} | Artifact | incl=- | If an artifact or creature entering causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.
+The Masamune | {3} | Legendary Artifact — Equipment | incl=- | As long as equipped creature is attacking, it has first strike and must be blocked if able. Equipped creature has "If a creature dying causes a triggered ability of this creature o

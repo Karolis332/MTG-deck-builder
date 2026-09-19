@@ -1,0 +1,1301 @@
+{
+  "generated": "2026-09-10",
+  "source": "live DB $APPDATA/the-black-grimoire/data/mtg-deck-builder.db, community_decks/community_deck_cards, format=standard",
+  "dataQuality": {
+    "mtgo": {
+      "n": 750,
+      "dateRange": [
+        "2026-08-20",
+        "2026-09-08"
+      ],
+      "nullDateCount": 0,
+      "hasWL": 750,
+      "hasArchetypeLabel": 750,
+      "exact60Main15Side": 743,
+      "exact60Main15SidePct": 99.1
+    },
+    "mtggoldfish": {
+      "n": 2495,
+      "dateRange": [
+        "2026-03-18",
+        "2026-09-04"
+      ],
+      "nullDateCount": 48,
+      "hasWL": 0,
+      "hasArchetypeLabel": 2495,
+      "exact60Main15Side": 2467,
+      "exact60Main15SidePct": 98.9
+    },
+    "mtgtop8": {
+      "n": 5931,
+      "dateRange": [
+        null,
+        null
+      ],
+      "nullDateCount": 5931,
+      "hasWL": 0,
+      "hasArchetypeLabel": 5931,
+      "exact60Main15Side": 5811,
+      "exact60Main15SidePct": 98
+    }
+  },
+  "landCounts": {
+    "byArchetype": {
+      "Izzet Prowess": {
+        "n": 1305,
+        "medianLands": 21,
+        "iqrLands": [
+          21,
+          21
+        ],
+        "medianAvgNonlandMv": 1.69
+      },
+      "Izzet Spellementals": {
+        "n": 697,
+        "medianLands": 20,
+        "iqrLands": [
+          20,
+          20
+        ],
+        "medianAvgNonlandMv": 3.23
+      },
+      "Mono Green Landfall": {
+        "n": 445,
+        "medianLands": 26,
+        "iqrLands": [
+          26,
+          26
+        ],
+        "medianAvgNonlandMv": 2.59
+      },
+      "Selesnya Aggro": {
+        "n": 392,
+        "medianLands": 23,
+        "iqrLands": [
+          22,
+          24
+        ],
+        "medianAvgNonlandMv": 2.27
+      },
+      "Mono-Green Landfall": {
+        "n": 364,
+        "medianLands": 26,
+        "iqrLands": [
+          26,
+          26
+        ],
+        "medianAvgNonlandMv": 2.33
+      },
+      "Izzet Lesson": {
+        "n": 358,
+        "medianLands": 22,
+        "iqrLands": [
+          22,
+          23
+        ],
+        "medianAvgNonlandMv": 1.89
+      },
+      "Superior Doomsday": {
+        "n": 349,
+        "medianLands": 26,
+        "iqrLands": [
+          26,
+          26
+        ],
+        "medianAvgNonlandMv": 3.32
+      },
+      "4/5C Control": {
+        "n": 284,
+        "medianLands": 27,
+        "iqrLands": [
+          26,
+          27
+        ],
+        "medianAvgNonlandMv": 3.15
+      },
+      "Izzet Lessons": {
+        "n": 210,
+        "medianLands": 22,
+        "iqrLands": [
+          22,
+          22
+        ],
+        "medianAvgNonlandMv": 1.76
+      },
+      "Jeskai Control": {
+        "n": 206,
+        "medianLands": 26,
+        "iqrLands": [
+          26,
+          26
+        ],
+        "medianAvgNonlandMv": 2.71
+      },
+      "Dimir Excruciator": {
+        "n": 199,
+        "medianLands": 26,
+        "iqrLands": [
+          26,
+          26
+        ],
+        "medianAvgNonlandMv": 3.18
+      },
+      "Dimir Aggro": {
+        "n": 154,
+        "medianLands": 24,
+        "iqrLands": [
+          23,
+          24
+        ],
+        "medianAvgNonlandMv": 2.11
+      }
+    },
+    "byMvQuartile": {
+      "Q1(low curve)": {
+        "n": 2296,
+        "medianLands": 21,
+        "iqrLands": [
+          21,
+          22
+        ]
+      },
+      "Q2": {
+        "n": 2293,
+        "medianLands": 23,
+        "iqrLands": [
+          22,
+          25
+        ]
+      },
+      "Q3": {
+        "n": 2293,
+        "medianLands": 25,
+        "iqrLands": [
+          23,
+          26
+        ]
+      },
+      "Q4(high curve)": {
+        "n": 2294,
+        "medianLands": 25,
+        "iqrLands": [
+          20,
+          26
+        ]
+      }
+    },
+    "correlation": {
+      "n": 750,
+      "pearsonR_landsVsWinRate": 0.006086315803854277
+    }
+  },
+  "curveShapeWinnersVsLosers_mtgoOnly": {
+    "winners": {
+      "n": 474,
+      "avgCardsPerMvBucket": {
+        "1": 11.68,
+        "2": 10.44,
+        "3": 5.51,
+        "4": 4.2,
+        "5": 0.97,
+        "6+": 3.42
+      }
+    },
+    "losers": {
+      "n": 96,
+      "avgCardsPerMvBucket": {
+        "1": 12.17,
+        "2": 9.66,
+        "3": 5.49,
+        "4": 3.5,
+        "5": 1.43,
+        "6+": 4.16
+      }
+    }
+  },
+  "compositionByArchetype": {
+    "Izzet Prowess": {
+      "n": 1305,
+      "sourceMix": [
+        "mtggoldfish",
+        "mtgtop8"
+      ],
+      "avgCreatures": 9.57,
+      "avgInstantSorcery": 27.04,
+      "avgRemoval": 4.99,
+      "avgDraw": 8.39
+    },
+    "Izzet Spellementals": {
+      "n": 697,
+      "sourceMix": [
+        "mtgtop8",
+        "mtggoldfish"
+      ],
+      "avgCreatures": 12,
+      "avgInstantSorcery": 31.87,
+      "avgRemoval": 7.21,
+      "avgDraw": 16.28
+    },
+    "Mono Green Landfall": {
+      "n": 445,
+      "sourceMix": [
+        "mtgtop8"
+      ],
+      "avgCreatures": 24.02,
+      "avgInstantSorcery": 4.39,
+      "avgRemoval": 0.64,
+      "avgDraw": 0.85
+    },
+    "Selesnya Aggro": {
+      "n": 392,
+      "sourceMix": [
+        "mtgtop8",
+        "mtggoldfish"
+      ],
+      "avgCreatures": 28.08,
+      "avgInstantSorcery": 4.87,
+      "avgRemoval": 5.02,
+      "avgDraw": 2.76
+    },
+    "Mono-Green Landfall": {
+      "n": 364,
+      "sourceMix": [
+        "mtggoldfish"
+      ],
+      "avgCreatures": 24.33,
+      "avgInstantSorcery": 4.84,
+      "avgRemoval": 1.15,
+      "avgDraw": 0.8
+    },
+    "Izzet Lesson": {
+      "n": 358,
+      "sourceMix": [
+        "mtgtop8"
+      ],
+      "avgCreatures": 4.47,
+      "avgInstantSorcery": 26.3,
+      "avgRemoval": 10.93,
+      "avgDraw": 15.75
+    },
+    "Superior Doomsday": {
+      "n": 349,
+      "sourceMix": [
+        "mtgtop8"
+      ],
+      "avgCreatures": 13.9,
+      "avgInstantSorcery": 21.74,
+      "avgRemoval": 8.3,
+      "avgDraw": 7.4
+    },
+    "4/5C Control": {
+      "n": 284,
+      "sourceMix": [
+        "mtgtop8"
+      ],
+      "avgCreatures": 0.66,
+      "avgInstantSorcery": 28.3,
+      "avgRemoval": 15.32,
+      "avgDraw": 5.47
+    }
+  },
+  "copyDistributionWinningLists_mtgoOnly": {
+    "note": "\"winning\" = mtgo decks winRate>=0.6 (only source with W/L)",
+    "archetypes": {
+      "Mono-Green": {
+        "n": 96,
+        "nonlandSlotFractionByCopyCount": {
+          "1": 0.08,
+          "2": 0.093,
+          "3": 0.112,
+          "4": 0.715
+        }
+      },
+      "Izzet": {
+        "n": 71,
+        "nonlandSlotFractionByCopyCount": {
+          "1": 0.038,
+          "2": 0.148,
+          "3": 0.159,
+          "4": 0.655
+        }
+      },
+      "Dimir": {
+        "n": 70,
+        "nonlandSlotFractionByCopyCount": {
+          "1": 0.07,
+          "2": 0.277,
+          "3": 0.142,
+          "4": 0.511
+        }
+      },
+      "Boros": {
+        "n": 48,
+        "nonlandSlotFractionByCopyCount": {
+          "1": 0.026,
+          "2": 0.117,
+          "3": 0.166,
+          "4": 0.691
+        }
+      },
+      "Jeskai": {
+        "n": 27,
+        "nonlandSlotFractionByCopyCount": {
+          "1": 0.124,
+          "2": 0.181,
+          "3": 0.164,
+          "4": 0.531
+        }
+      },
+      "Four-Color (no G)": {
+        "n": 26,
+        "nonlandSlotFractionByCopyCount": {
+          "1": 0.071,
+          "2": 0.342,
+          "3": 0.179,
+          "4": 0.408
+        }
+      },
+      "Mardu": {
+        "n": 20,
+        "nonlandSlotFractionByCopyCount": {
+          "1": 0.036,
+          "2": 0.226,
+          "3": 0.077,
+          "4": 0.661
+        }
+      },
+      "Orzhov": {
+        "n": 20,
+        "nonlandSlotFractionByCopyCount": {
+          "1": 0.063,
+          "2": 0.203,
+          "3": 0.312,
+          "4": 0.422
+        }
+      }
+    }
+  },
+  "sideboardShape_mtgoOnly": {
+    "league5_0": {
+      "n": 180,
+      "avgDistinctSideCards": 8.29,
+      "avgSide4ofs": 0.46,
+      "avgSide1ofs": 3.46,
+      "distinctSideCardsMedian": 8
+    },
+    "highWinRate_challenge_and_league": {
+      "n": 474,
+      "avgDistinctSideCards": 8.51,
+      "avgSide4ofs": 0.51,
+      "avgSide1ofs": 3.96,
+      "distinctSideCardsMedian": 8
+    }
+  },
+  "archetypeConsensus_last30Days_mtgoOnly": {
+    "cutoffDate": "2026-08-11",
+    "top8Recent": [
+      "Mono-Green",
+      "Izzet",
+      "Dimir",
+      "Boros",
+      "Four-Color (no G)",
+      "Jeskai",
+      "Selesnya",
+      "Orzhov"
+    ],
+    "consensus": {
+      "Mono-Green": {
+        "deckCount": 144,
+        "consensusCards": [
+          {
+            "name": "Forest",
+            "inclusionPct": 100,
+            "avgQty": 13.93
+          },
+          {
+            "name": "Fabled Passage",
+            "inclusionPct": 100,
+            "avgQty": 4
+          },
+          {
+            "name": "Icetill Explorer",
+            "inclusionPct": 100,
+            "avgQty": 4
+          },
+          {
+            "name": "Sazh's Chocobo",
+            "inclusionPct": 100,
+            "avgQty": 4
+          },
+          {
+            "name": "Llanowar Elves",
+            "inclusionPct": 100,
+            "avgQty": 4
+          },
+          {
+            "name": "Earthbender Ascension",
+            "inclusionPct": 100,
+            "avgQty": 4
+          },
+          {
+            "name": "Mightform Harmonizer",
+            "inclusionPct": 100,
+            "avgQty": 3.75
+          },
+          {
+            "name": "Esper Origins",
+            "inclusionPct": 100,
+            "avgQty": 3.56
+          },
+          {
+            "name": "Escape Tunnel",
+            "inclusionPct": 100,
+            "avgQty": 3.51
+          },
+          {
+            "name": "Ba Sing Se",
+            "inclusionPct": 100,
+            "avgQty": 3.19
+          },
+          {
+            "name": "Sapling Nursery",
+            "inclusionPct": 88.2,
+            "avgQty": 3.31
+          },
+          {
+            "name": "Meltstrider's Resolve",
+            "inclusionPct": 81.9,
+            "avgQty": 1.56
+          },
+          {
+            "name": "Demolition Field",
+            "inclusionPct": 79.2,
+            "avgQty": 1.04
+          },
+          {
+            "name": "Lumbering Worldwagon",
+            "inclusionPct": 72.2,
+            "avgQty": 1.18
+          },
+          {
+            "name": "Shared Roots",
+            "inclusionPct": 70.1,
+            "avgQty": 2.4
+          },
+          {
+            "name": "Keen-Eyed Curator",
+            "inclusionPct": 68.1,
+            "avgQty": 1.38
+          },
+          {
+            "name": "Surrak, Elusive Hunter",
+            "inclusionPct": 61.1,
+            "avgQty": 1.08
+          }
+        ]
+      },
+      "Izzet": {
+        "deckCount": 112,
+        "consensusCards": [
+          {
+            "name": "Steam Vents",
+            "inclusionPct": 100,
+            "avgQty": 4
+          },
+          {
+            "name": "Riverpyre Verge",
+            "inclusionPct": 100,
+            "avgQty": 3.99
+          },
+          {
+            "name": "Spirebluff Canal",
+            "inclusionPct": 100,
+            "avgQty": 3.98
+          },
+          {
+            "name": "Burst Lightning",
+            "inclusionPct": 100,
+            "avgQty": 3.16
+          },
+          {
+            "name": "Island",
+            "inclusionPct": 93.8,
+            "avgQty": 6.09
+          },
+          {
+            "name": "Sleight of Hand",
+            "inclusionPct": 92.9,
+            "avgQty": 4
+          },
+          {
+            "name": "Opt",
+            "inclusionPct": 92.9,
+            "avgQty": 4
+          },
+          {
+            "name": "Eddymurk Crab",
+            "inclusionPct": 92,
+            "avgQty": 3.97
+          },
+          {
+            "name": "Prismari Charm",
+            "inclusionPct": 91.1,
+            "avgQty": 3.9
+          },
+          {
+            "name": "Traumatic Critique",
+            "inclusionPct": 91.1,
+            "avgQty": 3.23
+          },
+          {
+            "name": "Get Out",
+            "inclusionPct": 91.1,
+            "avgQty": 2.19
+          },
+          {
+            "name": "Hearth Elemental",
+            "inclusionPct": 90.2,
+            "avgQty": 3.99
+          },
+          {
+            "name": "Sunderflock",
+            "inclusionPct": 90.2,
+            "avgQty": 3.97
+          },
+          {
+            "name": "Spell Pierce",
+            "inclusionPct": 88.4,
+            "avgQty": 1.56
+          },
+          {
+            "name": "Stormcarved Coast",
+            "inclusionPct": 84.8,
+            "avgQty": 1.22
+          },
+          {
+            "name": "Impractical Joke",
+            "inclusionPct": 83,
+            "avgQty": 1.97
+          },
+          {
+            "name": "Spell Snare",
+            "inclusionPct": 75,
+            "avgQty": 1.61
+          },
+          {
+            "name": "Winternight Stories",
+            "inclusionPct": 53.6,
+            "avgQty": 2.52
+          }
+        ]
+      },
+      "Dimir": {
+        "deckCount": 111,
+        "consensusCards": [
+          {
+            "name": "Swamp",
+            "inclusionPct": 100,
+            "avgQty": 5.24
+          },
+          {
+            "name": "Watery Grave",
+            "inclusionPct": 100,
+            "avgQty": 4
+          },
+          {
+            "name": "Gloomlake Verge",
+            "inclusionPct": 100,
+            "avgQty": 4
+          },
+          {
+            "name": "Requiting Hex",
+            "inclusionPct": 99.1,
+            "avgQty": 3.56
+          },
+          {
+            "name": "Restless Reef",
+            "inclusionPct": 95.5,
+            "avgQty": 2.45
+          },
+          {
+            "name": "Bitter Triumph",
+            "inclusionPct": 95.5,
+            "avgQty": 2.25
+          },
+          {
+            "name": "Hidden Lair",
+            "inclusionPct": 87.4,
+            "avgQty": 2.85
+          },
+          {
+            "name": "Island",
+            "inclusionPct": 77.5,
+            "avgQty": 4.08
+          },
+          {
+            "name": "Shoot the Sheriff",
+            "inclusionPct": 74.8,
+            "avgQty": 2.02
+          },
+          {
+            "name": "Floodpits Drowner",
+            "inclusionPct": 72.1,
+            "avgQty": 3.95
+          },
+          {
+            "name": "Kaito, Bane of Nightmares",
+            "inclusionPct": 71.2,
+            "avgQty": 3.95
+          },
+          {
+            "name": "Spyglass Siren",
+            "inclusionPct": 71.2,
+            "avgQty": 3.87
+          },
+          {
+            "name": "Enduring Curiosity",
+            "inclusionPct": 71.2,
+            "avgQty": 3.65
+          },
+          {
+            "name": "We Say Thee Nay!",
+            "inclusionPct": 71.2,
+            "avgQty": 2.1
+          },
+          {
+            "name": "Soulstone Sanctuary",
+            "inclusionPct": 70.3,
+            "avgQty": 1.92
+          },
+          {
+            "name": "The Wondrous Wasp",
+            "inclusionPct": 69.4,
+            "avgQty": 1.91
+          },
+          {
+            "name": "Dream Beavers",
+            "inclusionPct": 67.6,
+            "avgQty": 3.93
+          },
+          {
+            "name": "Wan Shi Tong, Librarian",
+            "inclusionPct": 63.1,
+            "avgQty": 1.66
+          },
+          {
+            "name": "Tishana's Tidebinder",
+            "inclusionPct": 60.4,
+            "avgQty": 1.69
+          },
+          {
+            "name": "Spell Pierce",
+            "inclusionPct": 58.6,
+            "avgQty": 1.34
+          }
+        ]
+      },
+      "Boros": {
+        "deckCount": 76,
+        "consensusCards": [
+          {
+            "name": "Sacred Foundry",
+            "inclusionPct": 100,
+            "avgQty": 3.97
+          },
+          {
+            "name": "Sunbillow Verge",
+            "inclusionPct": 100,
+            "avgQty": 3.75
+          },
+          {
+            "name": "Inspiring Vantage",
+            "inclusionPct": 98.7,
+            "avgQty": 3.99
+          },
+          {
+            "name": "Plains",
+            "inclusionPct": 89.5,
+            "avgQty": 2.6
+          },
+          {
+            "name": "Cavern of Souls",
+            "inclusionPct": 63.2,
+            "avgQty": 2.38
+          },
+          {
+            "name": "Multiversal Passage",
+            "inclusionPct": 59.2,
+            "avgQty": 2.27
+          },
+          {
+            "name": "Mountain",
+            "inclusionPct": 57.9,
+            "avgQty": 3.59
+          },
+          {
+            "name": "Dáin's Company",
+            "inclusionPct": 55.3,
+            "avgQty": 4
+          },
+          {
+            "name": "Dwarven Mauler",
+            "inclusionPct": 55.3,
+            "avgQty": 4
+          },
+          {
+            "name": "Kíli the Resourceful",
+            "inclusionPct": 55.3,
+            "avgQty": 4
+          },
+          {
+            "name": "Leyline Axe",
+            "inclusionPct": 55.3,
+            "avgQty": 3.98
+          },
+          {
+            "name": "The Lonely Mountain",
+            "inclusionPct": 55.3,
+            "avgQty": 3.88
+          },
+          {
+            "name": "Thorin, Mountain-king",
+            "inclusionPct": 53.9,
+            "avgQty": 3.49
+          },
+          {
+            "name": "Dragonfire Blade",
+            "inclusionPct": 52.6,
+            "avgQty": 3.67
+          },
+          {
+            "name": "Lavaspur Boots",
+            "inclusionPct": 50,
+            "avgQty": 3.29
+          }
+        ]
+      },
+      "Four-Color (no G)": {
+        "deckCount": 44,
+        "consensusCards": [
+          {
+            "name": "Steam Vents",
+            "inclusionPct": 100,
+            "avgQty": 2.48
+          },
+          {
+            "name": "Great Hall of the Biblioplex",
+            "inclusionPct": 97.7,
+            "avgQty": 3.95
+          },
+          {
+            "name": "Jeskai Revelation",
+            "inclusionPct": 97.7,
+            "avgQty": 3.63
+          },
+          {
+            "name": "Inevitable Defeat",
+            "inclusionPct": 97.7,
+            "avgQty": 3.4
+          },
+          {
+            "name": "Shattered Sanctum",
+            "inclusionPct": 97.7,
+            "avgQty": 1.67
+          },
+          {
+            "name": "Stock Up",
+            "inclusionPct": 95.5,
+            "avgQty": 3.95
+          },
+          {
+            "name": "Tablet of Discovery",
+            "inclusionPct": 95.5,
+            "avgQty": 3.55
+          },
+          {
+            "name": "Sacred Foundry",
+            "inclusionPct": 95.5,
+            "avgQty": 2.24
+          },
+          {
+            "name": "Flashback",
+            "inclusionPct": 95.5,
+            "avgQty": 1.74
+          },
+          {
+            "name": "Plains",
+            "inclusionPct": 84.1,
+            "avgQty": 1
+          },
+          {
+            "name": "Island",
+            "inclusionPct": 81.8,
+            "avgQty": 1
+          },
+          {
+            "name": "Consult the Star Charts",
+            "inclusionPct": 75,
+            "avgQty": 2.42
+          },
+          {
+            "name": "Together as One",
+            "inclusionPct": 75,
+            "avgQty": 1.91
+          },
+          {
+            "name": "Firebending Lesson",
+            "inclusionPct": 70.5,
+            "avgQty": 2.39
+          },
+          {
+            "name": "Sear",
+            "inclusionPct": 68.2,
+            "avgQty": 1.87
+          },
+          {
+            "name": "Mistrise Village",
+            "inclusionPct": 68.2,
+            "avgQty": 1.07
+          },
+          {
+            "name": "Sundown Pass",
+            "inclusionPct": 65.9,
+            "avgQty": 1
+          },
+          {
+            "name": "Riverpyre Verge",
+            "inclusionPct": 54.5,
+            "avgQty": 2.17
+          },
+          {
+            "name": "Starting Town",
+            "inclusionPct": 54.5,
+            "avgQty": 1.71
+          },
+          {
+            "name": "Deadly Cover-Up",
+            "inclusionPct": 52.3,
+            "avgQty": 2
+          },
+          {
+            "name": "Hallowed Fountain",
+            "inclusionPct": 52.3,
+            "avgQty": 1.91
+          },
+          {
+            "name": "Swamp",
+            "inclusionPct": 52.3,
+            "avgQty": 1
+          },
+          {
+            "name": "Shoot the Sheriff",
+            "inclusionPct": 50,
+            "avgQty": 2.45
+          },
+          {
+            "name": "Meticulous Archive",
+            "inclusionPct": 50,
+            "avgQty": 1
+          },
+          {
+            "name": "Stormcarved Coast",
+            "inclusionPct": 50,
+            "avgQty": 1
+          }
+        ]
+      },
+      "Jeskai": {
+        "deckCount": 36,
+        "consensusCards": [
+          {
+            "name": "Hallowed Fountain",
+            "inclusionPct": 94.4,
+            "avgQty": 3.47
+          },
+          {
+            "name": "Island",
+            "inclusionPct": 91.7,
+            "avgQty": 1.48
+          },
+          {
+            "name": "Plains",
+            "inclusionPct": 72.2,
+            "avgQty": 2.54
+          },
+          {
+            "name": "Castle Doom",
+            "inclusionPct": 69.4,
+            "avgQty": 3.72
+          },
+          {
+            "name": "Starting Town",
+            "inclusionPct": 69.4,
+            "avgQty": 1.88
+          },
+          {
+            "name": "United Battlefront",
+            "inclusionPct": 63.9,
+            "avgQty": 4
+          },
+          {
+            "name": "Cryogen Relic",
+            "inclusionPct": 63.9,
+            "avgQty": 3.96
+          },
+          {
+            "name": "Pinnacle Starcage",
+            "inclusionPct": 63.9,
+            "avgQty": 2.39
+          },
+          {
+            "name": "Dusk Rose Reliquary",
+            "inclusionPct": 63.9,
+            "avgQty": 2.17
+          },
+          {
+            "name": "Sacred Foundry",
+            "inclusionPct": 63.9,
+            "avgQty": 1.87
+          },
+          {
+            "name": "Candy Trail",
+            "inclusionPct": 61.1,
+            "avgQty": 2.5
+          },
+          {
+            "name": "Petrified Hamlet",
+            "inclusionPct": 61.1,
+            "avgQty": 2.09
+          },
+          {
+            "name": "Floodfarm Verge",
+            "inclusionPct": 58.3,
+            "avgQty": 4
+          },
+          {
+            "name": "Simulacrum Synthesizer",
+            "inclusionPct": 52.8,
+            "avgQty": 4
+          },
+          {
+            "name": "Perilous Snare",
+            "inclusionPct": 52.8,
+            "avgQty": 3.89
+          },
+          {
+            "name": "Meticulous Archive",
+            "inclusionPct": 52.8,
+            "avgQty": 3.68
+          },
+          {
+            "name": "The Mind Stone",
+            "inclusionPct": 52.8,
+            "avgQty": 3.68
+          },
+          {
+            "name": "Repurposing Bay",
+            "inclusionPct": 52.8,
+            "avgQty": 3
+          },
+          {
+            "name": "Braided Net",
+            "inclusionPct": 52.8,
+            "avgQty": 2.21
+          },
+          {
+            "name": "The Fire Crystal",
+            "inclusionPct": 52.8,
+            "avgQty": 1
+          },
+          {
+            "name": "Spring-Loaded Sawblades",
+            "inclusionPct": 50,
+            "avgQty": 1.17
+          }
+        ]
+      },
+      "Selesnya": {
+        "deckCount": 30,
+        "consensusCards": [
+          {
+            "name": "Forest",
+            "inclusionPct": 100,
+            "avgQty": 9.63
+          },
+          {
+            "name": "Llanowar Elves",
+            "inclusionPct": 100,
+            "avgQty": 4
+          },
+          {
+            "name": "Erode",
+            "inclusionPct": 96.7,
+            "avgQty": 3.66
+          },
+          {
+            "name": "Ba Sing Se",
+            "inclusionPct": 96.7,
+            "avgQty": 2.9
+          },
+          {
+            "name": "Fabled Passage",
+            "inclusionPct": 93.3,
+            "avgQty": 4
+          },
+          {
+            "name": "Sazh's Chocobo",
+            "inclusionPct": 93.3,
+            "avgQty": 4
+          },
+          {
+            "name": "Earthbender Ascension",
+            "inclusionPct": 93.3,
+            "avgQty": 4
+          },
+          {
+            "name": "Escape Tunnel",
+            "inclusionPct": 93.3,
+            "avgQty": 3.07
+          },
+          {
+            "name": "Temple Garden",
+            "inclusionPct": 90,
+            "avgQty": 3.74
+          },
+          {
+            "name": "Mossborn Hydra",
+            "inclusionPct": 90,
+            "avgQty": 3.11
+          },
+          {
+            "name": "Mightform Harmonizer",
+            "inclusionPct": 86.7,
+            "avgQty": 4
+          },
+          {
+            "name": "Icetill Explorer",
+            "inclusionPct": 86.7,
+            "avgQty": 3.88
+          },
+          {
+            "name": "Plains",
+            "inclusionPct": 86.7,
+            "avgQty": 1.77
+          },
+          {
+            "name": "Esper Origins",
+            "inclusionPct": 80,
+            "avgQty": 3.04
+          },
+          {
+            "name": "Dyadrine, Synthesis Amalgam",
+            "inclusionPct": 76.7,
+            "avgQty": 1.96
+          },
+          {
+            "name": "Hushwood Verge",
+            "inclusionPct": 76.7,
+            "avgQty": 1.52
+          },
+          {
+            "name": "Shared Roots",
+            "inclusionPct": 66.7,
+            "avgQty": 2.25
+          }
+        ]
+      },
+      "Orzhov": {
+        "deckCount": 29,
+        "consensusCards": [
+          {
+            "name": "Hinterland Sanctifier",
+            "inclusionPct": 100,
+            "avgQty": 4
+          },
+          {
+            "name": "Godless Shrine",
+            "inclusionPct": 100,
+            "avgQty": 4
+          },
+          {
+            "name": "Amalia Benavides Aguirre",
+            "inclusionPct": 100,
+            "avgQty": 3.93
+          },
+          {
+            "name": "Plains",
+            "inclusionPct": 100,
+            "avgQty": 3.83
+          },
+          {
+            "name": "Concealed Courtyard",
+            "inclusionPct": 100,
+            "avgQty": 3.14
+          },
+          {
+            "name": "Haliya, Guided by Light",
+            "inclusionPct": 96.6,
+            "avgQty": 3.04
+          },
+          {
+            "name": "Bleachbone Verge",
+            "inclusionPct": 96.6,
+            "avgQty": 2.18
+          },
+          {
+            "name": "Case of the Uneaten Feast",
+            "inclusionPct": 93.1,
+            "avgQty": 4
+          },
+          {
+            "name": "Starting Town",
+            "inclusionPct": 89.7,
+            "avgQty": 3.65
+          },
+          {
+            "name": "Lunar Convocation",
+            "inclusionPct": 89.7,
+            "avgQty": 3.54
+          },
+          {
+            "name": "Erode",
+            "inclusionPct": 89.7,
+            "avgQty": 2.5
+          },
+          {
+            "name": "Shattered Sanctum",
+            "inclusionPct": 89.7,
+            "avgQty": 2.46
+          },
+          {
+            "name": "Starscape Cleric",
+            "inclusionPct": 89.7,
+            "avgQty": 2.42
+          },
+          {
+            "name": "Moseo, Vein's New Dean",
+            "inclusionPct": 86.2,
+            "avgQty": 3
+          },
+          {
+            "name": "Essence Channeler",
+            "inclusionPct": 82.8,
+            "avgQty": 2.5
+          },
+          {
+            "name": "Voice of Victory",
+            "inclusionPct": 82.8,
+            "avgQty": 2.21
+          },
+          {
+            "name": "Swamp",
+            "inclusionPct": 72.4,
+            "avgQty": 1.81
+          },
+          {
+            "name": "Deep-Cavern Bat",
+            "inclusionPct": 65.5,
+            "avgQty": 2.95
+          },
+          {
+            "name": "Emptiness",
+            "inclusionPct": 65.5,
+            "avgQty": 1.89
+          },
+          {
+            "name": "Multiversal Passage",
+            "inclusionPct": 58.6,
+            "avgQty": 2.29
+          },
+          {
+            "name": "Zoraline, Cosmos Caller",
+            "inclusionPct": 58.6,
+            "avgQty": 1.29
+          }
+        ]
+      }
+    }
+  },
+  "staleness": {
+    "bannedList": [
+      "Stormchaser's Talent",
+      "Vivi Ornitier",
+      "Proft's Eidetic Memory",
+      "Monstrous Rage",
+      "Heartfire Hero"
+    ],
+    "top10ArchetypesByRawDeckCount": {
+      "Izzet Prowess": {
+        "n": 1305,
+        "decksWithBannedCard": 1304,
+        "pct": 99.9,
+        "bannedCardHits": {
+          "Stormchaser's Talent": 1304
+        }
+      },
+      "Izzet Spellementals": {
+        "n": 697,
+        "decksWithBannedCard": 6,
+        "pct": 0.9,
+        "bannedCardHits": {
+          "Stormchaser's Talent": 6
+        }
+      },
+      "Mono Green Landfall": {
+        "n": 445,
+        "decksWithBannedCard": 0,
+        "pct": 0,
+        "bannedCardHits": {}
+      },
+      "Selesnya Aggro": {
+        "n": 392,
+        "decksWithBannedCard": 0,
+        "pct": 0,
+        "bannedCardHits": {}
+      },
+      "Mono-Green Landfall": {
+        "n": 364,
+        "decksWithBannedCard": 0,
+        "pct": 0,
+        "bannedCardHits": {}
+      },
+      "Izzet Lesson": {
+        "n": 358,
+        "decksWithBannedCard": 100,
+        "pct": 27.9,
+        "bannedCardHits": {
+          "Stormchaser's Talent": 100
+        }
+      },
+      "Superior Doomsday": {
+        "n": 349,
+        "decksWithBannedCard": 0,
+        "pct": 0,
+        "bannedCardHits": {}
+      },
+      "4/5C Control": {
+        "n": 284,
+        "decksWithBannedCard": 0,
+        "pct": 0,
+        "bannedCardHits": {}
+      },
+      "Izzet Lessons": {
+        "n": 210,
+        "decksWithBannedCard": 77,
+        "pct": 36.7,
+        "bannedCardHits": {
+          "Stormchaser's Talent": 77
+        }
+      },
+      "Jeskai Control": {
+        "n": 206,
+        "decksWithBannedCard": 0,
+        "pct": 0,
+        "bannedCardHits": {}
+      }
+    },
+    "totalTopDecks": 4610,
+    "totalTopDecksWithBanned": 1487,
+    "pctOfTop10DecksWithBannedCard": 32.3
+  }
+}

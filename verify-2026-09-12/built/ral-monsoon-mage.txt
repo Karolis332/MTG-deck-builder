@@ -1,0 +1,88 @@
+1 Ral, Monsoon Mage
+1 Storm-Kiln Artist
+1 Frantic Search
+1 Seething Song
+1 Command Tower
+1 Pyretic Ritual
+1 Steam Vents
+1 Past in Flames
+1 Jeska's Will
+1 Grapeshot
+1 Strike It Rich
+1 An Offer You Can't Refuse
+1 Brain Freeze
+1 Underworld Breach
+1 Scalding Tarn
+1 Mystical Tutor
+1 Wrenn's Resolve
+1 Demand Answers
+1 Electro, Assaulting Battery
+1 Gamble
+1 Sink into Stupor
+1 Springleaf Drum
+1 Mox Amber
+1 Opera Love Song
+1 Hidden Strings
+1 Gemstone Caverns
+1 Abandon Attachments
+1 Ragavan, Nimble Pilferer
+1 Lightning Bolt
+1 Hexing Squelcher
+1 Flooded Strand
+1 Mox Opal
+1 Tibalt's Trickery
+1 Witch's Mark
+1 Misty Rainforest
+1 Pinnacle Monk
+1 Vexing Bauble
+1 Shatterskull Smashing
+1 Romantic Rendezvous
+1 Storm of Memories
+1 Faithless Looting
+1 Flashback
+1 Thundering Falls
+1 Arcane Signet
+1 Untimely Malfunction
+1 Glimpse the Impossible
+1 Sundering Eruption
+1 Stock Up
+1 Twinferno
+1 Return the Favor
+1 Daze
+1 Flow State
+1 Talisman of Creativity
+1 Big Score
+1 Redirect Lightning
+1 Brainstorm
+1 Thrill of Possibility
+1 Archmage Emeritus
+1 Ponder
+1 Sazacap's Brew
+1 Stormcarved Coast
+1 Izzet Signet
+1 Preordain
+1 Goblin Electromancer
+1 Guttersnipe
+1 Opt
+1 Seize the Spoils
+1 Counterspell
+1 Unexpected Windfall
+1 Expressive Iteration
+1 Stormcatch Mentor
+1 Consider
+1 Riverpyre Verge
+1 Thousand-Year Storm
+1 Spirebluff Canal
+1 Ral, Crackling Wit
+1 Negate
+1 Reliquary Tower
+1 Ashling, Flame Dancer
+1 Mystic Sanctuary
+1 Mistrise Village
+1 Temple of Epiphany
+1 Starting Town
+1 Seat of the Synod
+1 Fabled Passage
+1 Snow-Covered Mountain
+7 Mountain
+7 Island

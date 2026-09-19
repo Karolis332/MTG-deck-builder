@@ -1,0 +1,124 @@
+1 Kuja, Genome Sorcerer
+1 Black Waltz No. 3
+1 Coruscation Mage
+1 Mysidian Elder
+1 Queen Brahne
+1 Guttersnipe
+1 Storm-Kiln Artist
+1 Judith, Carnage Connoisseur
+1 Kessig Flamebreather
+1 Harmonic Prodigy
+1 Firebrand Archer
+1 Longshot, Rebel Bowman
+1 Roaming Throne
+1 Twinflame Tyrant
+1 Purphoros, God of the Forge
+1 Electrostatic Field
+1 Slickshot Show-Off
+1 Emeritus of Conflict
+1 Heartfire Immolator
+1 Dualcaster Mage
+1 Pinnacle Monk
+1 Black Mage's Rod
+1 Lightning Greaves
+1 Fated Firepower
+1 Artist's Talent
+1 Corrupted Conviction
+1 Fiery Inscription
+1 The Darkness Crystal
+1 Circle of Power
+1 Collective Inferno
+1 Doublecast
+1 Return the Favor
+1 Lightning Bolt
+1 Boltwave
+1 Tectonic Hazard
+1 Iroh's Demonstration
+1 Artistic Process
+1 Abrade
+1 Feed the Swarm
+1 Bitter Triumph
+1 Heartless Act
+1 Cut Down
+1 Dreadbore
+1 Epic Downfall
+1 Scorching Dragonfire
+1 Fell
+1 Dark Ritual
+1 Seething Song
+1 Jeska's Will
+1 Pyretic Ritual
+1 Culling the Weak
+1 Talisman of Indulgence
+1 Mind Stone
+1 Arcane Signet
+1 Ashnod's Altar
+1 Night's Whisper
+1 Faithless Looting
+1 Thrill of Possibility
+1 Demand Answers
+1 Big Score
+1 Deadly Dispute
+1 Unexpected Windfall
+1 Grab the Prize
+1 Village Rites
+1 Cathartic Reunion
+1 Seize the Spoils
+1 Command Tower
+1 Blood Crypt
+1 Urborg, Tomb of Yawgmoth
+1 Bloodfell Caves
+1 Temple of Malice
+1 Jagged Barrens
+1 Malakir Rebirth
+1 Spikefield Hazard
+1 Lindblum, Industrial Regency
+1 Midgar, City of Mako
+1 Fell the Profane
+13 Swamp
+10 Mountain
+
+## Play guide
+
+# Mulligan: keep 2+ real mana sources (a Command Tower/Blood Crypt/shockland/Urborg counts
+# double) OR 1 land + a hard ritual (Dark Ritual, Seething Song, Pyretic Ritual, Jeska's Will —
+# NOT Culling the Weak/Ashnod's Altar, both need a creature in play first). A keepable 7 has
+# either a turn-2/3 Wizard pinger (Coruscation Mage, Mysidian Elder, Black Waltz No. 3) or a
+# cheap removal spell (Cut Down, Heartless Act, Lightning Bolt) to survive to turn 3. Mulligan
+# hands with 0-1 lands or with only 4+ MV spells.
+#
+# Priority order: (1) land drop every turn, (2) a Wizard body or cast-trigger pinger on curve,
+# (3) Kuja himself on turn 3, (4) Lightning Greaves online (equip {0}) the turn after Kuja
+# resolves so a removal spell cast on a later turn cannot legally target him, (5) hold up
+# 1-2 mana removal over playing a fourth pinger into an empty board. Sequence Culling the Weak
+# and Ashnod's Altar AFTER you already have a spare token (post end-step, or a creature that
+# already did its job, e.g. Heartfire Immolator after firing) — never sacrifice a body you still
+# need toward Kuja's "four or more Wizards" count. Artistic Process's "2 damage to each creature
+# you don't control" mode is the deck's only sweeper-shaped answer and is asymmetric — it never
+# hits your own 0/1 tokens — hold it for a wide opposing board rather than firing it as removal
+# when a 1-for-1 mode would do.
+#
+# Kill-line math (recomputed correctly, do not multiply the two trigger-doublers together):
+# Harmonic Prodigy and Roaming Throne each say a triggered ability happens "an additional time" —
+# these STACK ADDITIVELY. One trigger with both online fires 1 (original) + 1 (Prodigy) + 1
+# (Throne) = 3 times, not 4. Trance Kuja, Collective Inferno (name Wizard), and Twinflame Tyrant
+# are all "would deal damage instead" REPLACEMENT effects — these stack MULTIPLICATIVELY. Note the
+# OPPONENT (the player being dealt the damage) picks the order they apply, not you — with three
+# straight x2 effects the product is the same either way, so it does not change the number below.
+# Fated Firepower is neither: it is a flat +1 damage per fire counter
+# (set once at cast for {X}), not a doubler — do not count it in either stack.
+#
+# Worked example: a single 0/1 Wizard token's trigger ("whenever you cast a noncreature spell,
+# deal 1 damage to each opponent") with everything online:
+#   1 base damage
+#   x3 instances (Harmonic Prodigy + Roaming Throne, additive: 1+1+1)
+#   x2 (Trance Kuja, Wizard sources)
+#   x2 (Collective Inferno, named Wizard)
+#   x2 (Twinflame Tyrant, all your sources)
+#   = 1 x 3 x 2 x 2 x 2 = 24 damage off ONE spell, ONE token, if all five permanents are alive.
+# Every extra Wizard pinger body (Black Waltz No. 3, Coruscation Mage, Mysidian Elder's token,
+# Firebrand Archer if equipped with Black Mage's Rod, etc.) adds another full copy of that same
+# number for the same one spell — this is the deck's realistic "lethal turn," and it needs the
+# board state above plus 2+ pinger bodies, not just Kuja alone. Treat anything short of that as
+# incremental damage (Purphoros's flat 2 per creature ETB, Fiery Inscription/Guttersnipe's 2 per
+# instant/sorcery) rather than expecting the full stack every game.

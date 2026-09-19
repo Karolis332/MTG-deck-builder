@@ -1,0 +1,88 @@
+1 The Emperor of Palamecia
+1 Big Score
+1 Command Tower
+1 Unexpected Windfall
+1 Hedron Archive
+1 Arcane Signet
+1 Stormcarved Coast
+1 Ring of the Lucii
+1 Swiftfoot Boots
+1 Firemind Vessel
+1 Aetherize
+1 Rogue's Passage
+1 Lightning Greaves
+1 Counterspell
+1 Mystic Sanctuary
+1 Faithless Looting
+1 Frantic Search
+1 Ill-Timed Explosion
+1 Resonating Lute
+1 Steam Vents
+1 Shantotto, Tactician Magician
+1 Harmonic Prodigy
+1 Gandalf's Sanction
+1 Archmage Emeritus
+1 Temple of Epiphany
+1 Experimental Overload
+1 Storm-Kiln Artist
+1 Negate
+1 Blasphemous Act
+1 Izzet Signet
+1 Prompto Argentum
+1 Talisman of Creativity
+1 Rapturous Moment
+1 Slip Out the Back
+1 Seize the Storm
+1 An Offer You Can't Refuse
+1 Guttersnipe
+1 Shark Typhoon
+1 Reliquary Tower
+1 Riverpyre Verge
+1 Thundering Falls
+1 Scalding Tarn
+1 Brainstorm
+1 Swiftwater Cliffs
+1 Illuminate History
+1 Consider
+1 Return the Favor
+1 Exhibition Tidecaller
+1 Goblin Electromancer
+1 Magic Damper
+1 Laughing Mad
+1 Arcane Epiphany
+1 Tablet of Discovery
+1 Sink into Stupor
+1 Ashling, Rekindled
+1 Nibelheim Aflame
+1 Evolving Wilds
+1 Abstract Paintmage
+1 Pinnacle Monk
+1 Pongify
+1 Abrade
+1 Relm's Sketching
+1 Combat Tutorial
+1 Syncopate
+1 Mana Sculpt
+1 Sanar, Unfinished Genius
+1 Mistrise Village
+1 Lightning Bolt
+1 Izzet Charm
+1 Opt
+1 Ponder
+1 Jeska's Will
+1 Thrill of Possibility
+1 Spirebluff Canal
+1 Thunder Magic
+1 Preordain
+1 Terramorphic Expanse
+1 Mind Stone
+1 Eject
+1 Ice Magic
+1 Baron, Airship Kingdom
+1 Third Path Iconoclast
+1 Lindblum, Industrial Regency
+1 Izzet Guildgate
+1 Fabled Passage
+1 Spectacle Summit
+7 Mountain
+7 Island

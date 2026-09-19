@@ -1,0 +1,88 @@
+1 Shantotto, Tactician Magician
+1 Command Tower
+1 Arcane Signet
+1 Big Score
+1 The Emperor of Palamecia
+1 Storm-Kiln Artist
+1 Izzet Signet
+1 Unexpected Windfall
+1 Stormcarved Coast
+1 Talisman of Creativity
+1 Harmonic Prodigy
+1 Reliquary Tower
+1 Counterspell
+1 Archmage Emeritus
+1 Steam Vents
+1 Prompto Argentum
+1 Rogue's Passage
+1 Frantic Search
+1 Swiftfoot Boots
+1 Aetherize
+1 Mystic Sanctuary
+1 Seething Song
+1 Nibelheim Aflame
+1 Temple of Epiphany
+1 Balmor, Battlemage Captain
+1 Blasphemous Act
+1 Enter the Enigma
+1 Shark Typhoon
+1 Brainstorm
+1 Hedron Archive
+1 Thousand-Year Storm
+1 Mind Stone
+1 An Offer You Can't Refuse
+1 Treasure Cruise
+1 Riverpyre Verge
+1 Bulk Up
+1 Negate
+1 Evolving Wilds
+1 Bria, Riptide Rogue
+1 Magic Damper
+1 Ultros, Obnoxious Octopus
+1 Resonating Lute
+1 Lightning Bolt
+1 Relm's Sketching
+1 Jeska's Will
+1 Scalding Tarn
+1 Thunder Magic
+1 Guttersnipe
+1 Goblin Electromancer
+1 Mistrise Village
+1 Lindblum, Industrial Regency
+1 Ice Magic
+1 Rapturous Moment
+1 Ring of the Lucii
+1 Thundering Falls
+1 Lightning Greaves
+1 Ponder
+1 Past in Flames
+1 Swiftwater Cliffs
+1 Red Mage's Rapier
+1 Preordain
+1 Spirebluff Canal
+1 Opt
+1 Abrade
+1 Terramorphic Expanse
+1 Expressive Iteration
+1 Astrologian's Planisphere
+1 Third Path Iconoclast
+1 Stormcatch Mentor
+1 Fire Magic
+1 Ashling, Rekindled
+1 Archmage of Runes
+1 Syncopate
+1 Mana Sculpt
+1 Eject
+1 Ether
+1 Faithless Looting
+1 Firemind Vessel
+1 Memories Returning
+1 Molten-Core Maestro
+1 Sink into Stupor
+1 Pinnacle Monk
+1 Baron, Airship Kingdom
+1 Fabled Passage
+1 Izzet Guildgate
+1 Fire Nation Palace
+7 Mountain
+7 Island
