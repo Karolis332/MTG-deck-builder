@@ -5,7 +5,7 @@ import fs from 'fs';
 import { spawn, ChildProcess } from 'child_process';
 import net from 'net';
 import { autoUpdater } from 'electron-updater';
-import { registerIpcHandlers, ensureWatcherRunning, isWatcherRunning, markServerReady, checkArenaCardDbUpdate } from './ipc-handlers';
+import { registerIpcHandlers, ensureWatcherRunning, isWatcherRunning, markServerReady, checkArenaCardDbUpdate, postToApi } from './ipc-handlers';
 import { setupBackgroundRecording, destroyTray, isQuitting, markQuitting, startedHidden } from './background-recording';
 import { registerSetupHandlers } from './setup-handlers';
 import { runFirstBootActions, seedArenaCardCache, setFirstBootLogger } from '../src/lib/first-boot';
@@ -43,6 +43,17 @@ function logCrash(label: string, err: unknown): void {
     try {
       fs.appendFileSync(path.join(path.dirname(process.execPath), 'crash.log'), msg);
     } catch { /* truly nothing we can do */ }
+  }
+}
+
+/** Fire-and-forget: ask the server to backfill any matches not yet sent to the web
+ *  dashboard. Called once the Next server is ready (both first-run and normal launch
+ *  paths). postToApi already swallows its own network errors and just logs them. */
+function triggerStartupWebSync(): void {
+  try {
+    postToApi('/api/web-sync', { action: 'sync' });
+  } catch (err) {
+    logCrash('web-sync-startup', err);
   }
 }
 
@@ -518,6 +529,8 @@ export async function transitionToMainApp(): Promise<void> {
     markServerReady();
   }
 
+  triggerStartupWebSync();
+
   createMainWindow();
   installTray();
   setupAutoUpdater();
@@ -653,6 +666,7 @@ app.whenReady().then(async () => {
     }
 
     registerIpcHandlers();
+    triggerStartupWebSync();
     if (!hidden) createMainWindow();
     installTray();
     setupAutoUpdater();

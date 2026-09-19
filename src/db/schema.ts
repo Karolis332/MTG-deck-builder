@@ -1460,4 +1460,14 @@ export const MIGRATIONS = [
         ON community_decks(format, event_date, source);
     `,
   },
+  {
+    version: 45,
+    name: 'arena_parsed_matches_web_sync',
+    sql: `
+      -- Desktop -> web match sync (match-sync-contract-2026-09-19.md). NULL = not yet
+      -- synced (or eligible for retry); src/lib/web-sync.ts sets these after each attempt.
+      ALTER TABLE arena_parsed_matches ADD COLUMN web_synced_at TEXT;
+      ALTER TABLE arena_parsed_matches ADD COLUMN web_sync_error TEXT;
+    `,
+  },
 ];

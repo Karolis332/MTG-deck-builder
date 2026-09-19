@@ -99,7 +99,7 @@ function traceLog(msg: string): void {
  * Called from main.ts when the overlay opens.
  * Uses the default log path if no watcher is active.
  */
-export { markServerReady };
+export { markServerReady, postToApi };
 
 /**
  * Read the user-configured Arena log path (Settings dialog → PUT /api/settings

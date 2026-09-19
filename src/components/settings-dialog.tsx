@@ -39,6 +39,16 @@ export function SettingsDialog({ open, onClose }: SettingsDialogProps) {
   const [xaiTesting, setXaiTesting] = useState(false);
   const [cfModelVersion, setCfModelVersion] = useState('');
 
+  // Web sync state
+  const [webSyncUrl, setWebSyncUrl] = useState('https://theblackgrimoire.com');
+  const [webSyncToken, setWebSyncToken] = useState('');
+  const [webSyncConfigured, setWebSyncConfigured] = useState(false);
+  const [webSyncLastAt, setWebSyncLastAt] = useState<string | null>(null);
+  const [webSyncMessage, setWebSyncMessage] = useState('');
+  const [webSyncTesting, setWebSyncTesting] = useState(false);
+  const [webSyncSyncing, setWebSyncSyncing] = useState(false);
+  const [webSyncSaving, setWebSyncSaving] = useState(false);
+
   // Data export state
   const [exporting, setExporting] = useState(false);
   const [exportMessage, setExportMessage] = useState('');
@@ -128,6 +138,17 @@ export function SettingsDialog({ open, onClose }: SettingsDialogProps) {
         setAnthropicMessage('');
         setTopdeckMessage('');
         setArenaMessage('');
+      })
+      .catch(() => {});
+
+    fetch('/api/web-sync')
+      .then((r) => r.json())
+      .then((data) => {
+        if (data.url) setWebSyncUrl(data.url);
+        setWebSyncConfigured(!!data.configured);
+        setWebSyncLastAt(data.lastAt || null);
+        setWebSyncToken('');
+        setWebSyncMessage('');
       })
       .catch(() => {});
 
@@ -327,6 +348,85 @@ export function SettingsDialog({ open, onClose }: SettingsDialogProps) {
       setCfTesting(false);
     }
   }, [cfApiUrl]);
+
+  // ── Web sync handlers ──────────────────────────────────────────────────────
+
+  const saveWebSync = useCallback(async () => {
+    setWebSyncSaving(true);
+    setWebSyncMessage('');
+    try {
+      const body: { action: string; url?: string; token?: string } = { action: 'save' };
+      if (webSyncUrl.trim()) body.url = webSyncUrl.trim();
+      if (webSyncToken.trim()) body.token = webSyncToken.trim();
+      const res = await fetch('/api/web-sync', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+      const data = await res.json();
+      if (data.ok) {
+        setWebSyncMessage('Saved');
+        if (webSyncToken.trim()) setWebSyncConfigured(true);
+        setWebSyncToken('');
+      } else {
+        setWebSyncMessage('Failed to save: ' + (data.error || 'Unknown error'));
+      }
+    } catch {
+      setWebSyncMessage('Failed to save');
+    } finally {
+      setWebSyncSaving(false);
+    }
+  }, [webSyncUrl, webSyncToken]);
+
+  const testWebSyncConnection = useCallback(async () => {
+    setWebSyncTesting(true);
+    setWebSyncMessage('');
+    try {
+      const res = await fetch('/api/web-sync', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'test' }),
+      });
+      const data = await res.json();
+      setWebSyncMessage(
+        data.ok
+          ? `Connected as ${data.userId ?? 'unknown'} · ${data.matches ?? 0} matches on the web`
+          : `Failed: ${data.error || 'Unknown error'}`
+      );
+    } catch {
+      setWebSyncMessage('Connection failed');
+    } finally {
+      setWebSyncTesting(false);
+    }
+  }, []);
+
+  const runWebSync = useCallback(async () => {
+    setWebSyncSyncing(true);
+    setWebSyncMessage('');
+    try {
+      // force: true — this is the user's explicit "retry everything" action, including
+      // rows a prior automatic sync marked web_sync_error (e.g. a 422); without force
+      // those rows would be stuck forever with no other way to retry them from the UI.
+      const res = await fetch('/api/web-sync', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'sync', force: true }),
+      });
+      const data = await res.json();
+      if (data.ok) {
+        setWebSyncMessage(
+          `Sent ${data.sent} · accepted ${data.accepted} · duplicates ${data.duplicates} · rejected ${data.rejected}`
+        );
+        setWebSyncLastAt(new Date().toISOString());
+      } else {
+        setWebSyncMessage(`Sync failed: ${data.error || 'Unknown error'}`);
+      }
+    } catch {
+      setWebSyncMessage('Sync failed');
+    } finally {
+      setWebSyncSyncing(false);
+    }
+  }, []);
 
   const testGroqConnection = useCallback(async () => {
     setGroqTesting(true);
@@ -1144,6 +1244,74 @@ export function SettingsDialog({ open, onClose }: SettingsDialogProps) {
               AI Suggestion Priority: CF (Commander) &gt; Preferred Provider (Claude/OpenAI) &gt; Ollama (local) &gt; Synergy Engine.
               Your API keys are stored locally and never sent to third parties.
             </p>
+          </div>
+
+          {/* Web Sync */}
+          <div className="border-t border-border pt-3">
+            <label className="mb-1 block text-sm font-medium">Web Sync</label>
+            <p className="mb-2 text-xs text-muted-foreground">
+              Send your Arena match history to theblackgrimoire.com. Sign in there, open
+              Dashboard &rarr; Matches &rarr; Connect the desktop app, create a token and paste it below.
+            </p>
+            <div className="flex gap-2">
+              <input
+                type="text"
+                value={webSyncUrl}
+                onChange={(e) => setWebSyncUrl(e.target.value)}
+                placeholder="https://theblackgrimoire.com"
+                className="flex-1 rounded-lg border border-border bg-background px-3 py-2 text-sm outline-none focus:border-primary"
+              />
+              <button
+                onClick={testWebSyncConnection}
+                disabled={webSyncTesting}
+                className="rounded-lg border border-border px-3 py-2 text-sm font-medium transition-colors hover:bg-accent disabled:opacity-50"
+              >
+                {webSyncTesting ? 'Testing...' : 'Test connection'}
+              </button>
+            </div>
+            <div className="mt-2 flex items-center gap-2">
+              {webSyncConfigured && !webSyncToken && (
+                <span className="rounded bg-accent px-2 py-1 font-mono text-xs">token set</span>
+              )}
+              <input
+                type="password"
+                value={webSyncToken}
+                onChange={(e) => setWebSyncToken(e.target.value)}
+                placeholder={webSyncConfigured ? 'Replace token' : 'Paste sync token'}
+                className="flex-1 rounded-lg border border-border bg-background px-3 py-2 text-sm outline-none focus:border-primary"
+              />
+            </div>
+            <div className="mt-2 flex gap-2">
+              <button
+                onClick={saveWebSync}
+                disabled={webSyncSaving}
+                className="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-50"
+              >
+                {webSyncSaving ? 'Saving...' : 'Save'}
+              </button>
+              <button
+                onClick={runWebSync}
+                disabled={webSyncSyncing || !webSyncConfigured}
+                className="rounded-lg border border-border px-3 py-2 text-sm font-medium transition-colors hover:bg-accent disabled:opacity-50"
+              >
+                {webSyncSyncing ? 'Syncing...' : 'Sync now'}
+              </button>
+            </div>
+            {webSyncLastAt && (
+              <p className="mt-2 text-[10px] text-muted-foreground">
+                Last sync: {new Date(webSyncLastAt).toLocaleString()}
+              </p>
+            )}
+            {webSyncMessage && (
+              <p className={cn(
+                'mt-2 text-xs',
+                webSyncMessage.includes('Connected') || webSyncMessage.startsWith('Sent') || webSyncMessage === 'Saved'
+                  ? 'text-green-400'
+                  : 'text-muted-foreground'
+              )}>
+                {webSyncMessage}
+              </p>
+            )}
           </div>
         </div>
 

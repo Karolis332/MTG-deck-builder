@@ -13,6 +13,7 @@ import {
   resolveGrpIdNames,
 } from '@/lib/db';
 import { reportGameOutcomeToCF } from '@/lib/cf-api-client';
+import { isWebSyncConfigured, syncPendingMatches } from '@/lib/web-sync';
 import { deriveFromMatch, hasContractFields } from './_derive';
 import type { ArenaMatch } from '@/lib/arena-log-reader';
 
@@ -140,12 +141,19 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    return NextResponse.json({
+    const responseData = {
       ok: storeResult.success,
       updated: storeResult.updated ?? false,
       matchId,
       deckMatch: deckMatch ? { deckId: deckMatch.deckId, deckName: deckMatch.deckName, confidence: deckMatch.confidence } : null,
-    });
+    };
+
+    // Fire-and-forget: never block match recording on the network.
+    if (storeResult.success && isWebSyncConfigured()) {
+      void syncPendingMatches().catch(() => {});
+    }
+
+    return NextResponse.json(responseData);
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Failed to store arena match';
     return NextResponse.json({ error: message }, { status: 500 });
