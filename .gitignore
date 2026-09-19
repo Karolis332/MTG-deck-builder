@@ -116,3 +116,7 @@ decks/test-builds/edhrec-reference.json
 scripts/_scratch/*
 !scripts/_scratch/.gitkeep
 decks/standard/orzhov-repartee-data.json
+
+# packaged Electron builds (next / release channels)
+/dist-electron-next/
+/dist-electron-release/
