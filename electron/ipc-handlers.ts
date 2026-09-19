@@ -125,6 +125,11 @@ function getConfiguredLogPath(): string | null {
   }
 }
 
+/** True while the Arena log watcher is attached — surfaced in the tray menu. */
+export function isWatcherRunning(): boolean {
+  return watcher !== null;
+}
+
 export function ensureWatcherRunning(): void {
   traceLog(`ensureWatcherRunning called, watcher=${!!watcher}`);
   if (watcher) return; // Already running

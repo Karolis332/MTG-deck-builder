@@ -5,7 +5,8 @@ import fs from 'fs';
 import { spawn, ChildProcess } from 'child_process';
 import net from 'net';
 import { autoUpdater } from 'electron-updater';
-import { registerIpcHandlers, ensureWatcherRunning, markServerReady, checkArenaCardDbUpdate } from './ipc-handlers';
+import { registerIpcHandlers, ensureWatcherRunning, isWatcherRunning, markServerReady, checkArenaCardDbUpdate } from './ipc-handlers';
+import { setupBackgroundRecording, destroyTray, isQuitting, markQuitting, startedHidden } from './background-recording';
 import { registerSetupHandlers } from './setup-handlers';
 import { runFirstBootActions, seedArenaCardCache, setFirstBootLogger } from '../src/lib/first-boot';
 import { isOverwolfRuntime } from './platform-detect';
@@ -303,6 +304,15 @@ function createMainWindow(): void {
     e.preventDefault();
   });
 
+  // Closing the window must not stop match recording — the Arena log watcher
+  // lives in this process. Hide instead, and let the tray's Quit really quit.
+  mainWindow.on('close', (e) => {
+    if (!isQuitting()) {
+      e.preventDefault();
+      mainWindow?.hide();
+    }
+  });
+
   mainWindow.on('closed', () => {
     mainWindow = null;
   });
@@ -343,6 +353,25 @@ async function initOverwolfOverlay(): Promise<void> {
 
 function autoStartWatcher(): void {
   ensureWatcherRunning();
+}
+
+/** Reopen (or create) the main window from the tray. */
+function showMainWindow(): void {
+  if (mainWindow) {
+    if (mainWindow.isMinimized()) mainWindow.restore();
+    mainWindow.show();
+    mainWindow.focus();
+    return;
+  }
+  createMainWindow();
+}
+
+function installTray(): void {
+  setupBackgroundRecording({
+    showWindow: showMainWindow,
+    isRecording: isWatcherRunning,
+    log: mainTrace,
+  });
 }
 
 // ── Next.js server ──────────────────────────────────────────────────────
@@ -490,6 +519,7 @@ export async function transitionToMainApp(): Promise<void> {
   }
 
   createMainWindow();
+  installTray();
   setupAutoUpdater();
 
   // Auto-start the Arena log watcher for telemetry
@@ -609,9 +639,12 @@ app.whenReady().then(async () => {
     // Show setup wizard
     createSetupWindow();
   } else {
-    // Normal launch — show splash, start Next.js, then open main window
+    // Normal launch — show splash, start Next.js, then open main window.
+    // A login-item launch (--hidden) still starts the server, because the
+    // watcher POSTs matches to it; it just skips the splash and the window.
+    const hidden = startedHidden();
     if (!isDev) {
-      createSplashWindow();
+      if (!hidden) createSplashWindow();
       try {
         await startNextServer();
       } catch (err) {
@@ -620,7 +653,8 @@ app.whenReady().then(async () => {
     }
 
     registerIpcHandlers();
-    createMainWindow();
+    if (!hidden) createMainWindow();
+    installTray();
     setupAutoUpdater();
 
     // Auto-start the Arena log watcher for telemetry
@@ -659,9 +693,16 @@ app.whenReady().then(async () => {
 });
 
 app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
+  // Keep running: the tray is the UI and the log watcher is the point.
+  // Quit is only ever reached via the tray menu (which sets the flag first).
+  if (process.platform !== 'darwin' && isQuitting()) {
     app.quit();
   }
+});
+
+app.on('before-quit', () => {
+  markQuitting();
+  destroyTray();
 });
 
 app.on('will-quit', () => {
