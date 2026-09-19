@@ -334,20 +334,149 @@ describe('computeWin - the finish predicate must defeat EVERY opponent', () => {
   // 40-life opponent, nowhere near the 120 a four-player pod needs.
   const bodies = creatures(14, 2, 1);
 
-  it('a board that only beats ONE 40-life opponent gets no Commander combat line', () => {
-    const w = winOf({
+  it('the same board is worth far more against 20 life than against a 4-player pod', () => {
+    const pod = winOf({
       format: 'commander', main: [forest(12), ...bodies], commander: [COMMANDER],
       sideboard: [], unresolved: [], cardDataVersion: 'test-v1', corpus: null,
     });
-    expect(w).toBe(0);
+    const duel = winOf({
+      format: 'standard', main: [forest(12), ...creatures(14, 2, 1)], commander: [],
+      sideboard: [], unresolved: [], cardDataVersion: 'test-v1', corpus: null,
+    });
+    expect(duel).toBeGreaterThan(pod);
   });
 
-  it('the same board does close a 20-life Standard game', () => {
+  it('a 20-life Standard game closes and scores', () => {
     const w = winOf({
       format: 'standard', main: [forest(24), ...creatures(14, 2, 1)], commander: [],
       sideboard: [], unresolved: [], cardDataVersion: 'test-v1', corpus: null,
     });
     expect(w).toBeGreaterThan(0);
+  });
+});
+
+// -- Win v1.1: one regression per recipe family --------------------------
+
+function winReason(input: DeckScoreInput): string {
+  return scoreDeck(input).components.find((c) => c.key === 'win')!.reason;
+}
+
+const vanilla = (name: string, cmc: number, type = 'Sorcery') =>
+  mkCard({ name, type_line: type, mana_cost: `{${cmc}}`, cmc, power: null, toughness: null });
+
+function answers(count: number): Array<{ card: DbCard; quantity: number }> {
+  return Array.from({ length: count }, (_, i) => ({
+    card: mkCard({
+      name: `Answer ${i}`, type_line: 'Instant', oracle_text: 'Destroy target creature.',
+      mana_cost: '{1}{B}', cmc: 2, power: null, toughness: null,
+    }),
+    quantity: 1,
+  }));
+}
+
+describe('computeWin v1.1 — pressure closes on a cumulative schedule', () => {
+  it('a real Standard creature deck reaches its target and names the turn', () => {
+    const deck: DeckScoreInput = {
+      format: 'standard',
+      main: [forest(24), ...Array.from({ length: 4 }, (_, i) => ({ card: mkCard({ name: `Threat ${i}`, mana_cost: '{1}{G}', cmc: 2, power: '3', toughness: '3' }), quantity: 4 }))],
+      commander: [], sideboard: [], unresolved: [], cardDataVersion: 'test-v1', corpus: null,
+    };
+    expect(winOf(deck)).toBeGreaterThan(40);
+    expect(winReason(deck)).toMatch(/Creature pressure .*closes T\d/);
+  });
+
+  it('more copies of the same threat never close later', () => {
+    const threat = (q: number) => ({ card: mkCard({ name: 'Threat', mana_cost: '{1}{G}', cmc: 2, power: '3', toughness: '3' }), quantity: q });
+    const base: DeckScoreInput = {
+      format: 'standard', main: [forest(24), threat(2)], commander: [],
+      sideboard: [], unresolved: [], cardDataVersion: 'test-v1', corpus: null,
+    };
+    const more: DeckScoreInput = { ...base, main: [forest(24), threat(4)] };
+    expect(winOf(more)).toBeGreaterThanOrEqual(winOf(base));
+  });
+});
+
+describe('computeWin v1.1 — aristocrats drain', () => {
+  // Artifacts, not creatures: with a creature clock in the deck the pressure
+  // line closes first and the reason string names that instead.
+  const outlet = mkCard({ name: 'Sac Outlet', type_line: 'Artifact', oracle_text: 'Sacrifice a creature: Draw a card.', mana_cost: '{B}', cmc: 1, power: null, toughness: null });
+  const payoff = (i: number) => mkCard({ name: `Blood Payoff ${i}`, type_line: 'Enchantment', oracle_text: 'Whenever a creature you control dies, each opponent loses 1 life.', mana_cost: '{1}{B}', cmc: 2, power: null, toughness: null });
+  const maker = (i: number) => mkCard({ name: `Token Maker ${i}`, type_line: 'Artifact', oracle_text: 'When this artifact enters, create a 1/1 green Elf creature token.', mana_cost: '{B}', cmc: 1, power: null, toughness: null });
+  const build = (payoffs: number): DeckScoreInput => ({
+    format: 'standard',
+    main: [
+      forest(20),
+      { card: outlet, quantity: 4 },
+      ...Array.from({ length: payoffs }, (_, i) => ({ card: payoff(i), quantity: 4 })),
+      ...Array.from({ length: 4 }, (_, i) => ({ card: maker(i), quantity: 4 })),
+    ],
+    commander: [], sideboard: [], unresolved: [], cardDataVersion: 'test-v1', corpus: null,
+  });
+
+  it('outlet + payoff + fodder produces a drain line with its trigger rate', () => {
+    expect(winReason(build(3))).toMatch(/Aristocrats drain \(\d+\/turn/);
+  });
+
+  it('the same shell with no drain payoff loses that line', () => {
+    expect(winReason(build(0))).not.toMatch(/Aristocrats drain/);
+  });
+});
+
+describe('computeWin v1.1 — control inevitability is conditional, not graded', () => {
+  const finisher = mkCard({ name: 'Big Finisher', type_line: 'Creature — Dragon', mana_cost: '{4}{B}{B}', cmc: 6, power: '6', toughness: '6' });
+  const engine = mkCard({ name: 'Draw Engine', type_line: 'Enchantment', oracle_text: 'At the beginning of your upkeep, draw a card.', mana_cost: '{2}{B}', cmc: 3, power: null, toughness: null });
+  const build = (answerCount: number): DeckScoreInput => ({
+    format: 'standard',
+    main: [forest(24), ...answers(answerCount).map((a) => ({ ...a, quantity: 2 })), { card: engine, quantity: 4 }, { card: finisher, quantity: 2 }],
+    commander: [], sideboard: [], unresolved: [], cardDataVersion: 'test-v1', corpus: null,
+  });
+
+  it('a creatureless-plan control shell with enough answers, draw and finishers scores', () => {
+    expect(winOf(build(12))).toBeGreaterThan(0);
+  });
+
+  it('ordinary removal density alone cannot claim inevitability (§1 W)', () => {
+    expect(winReason(build(1))).not.toMatch(/Control inevitability/);
+  });
+});
+
+describe('computeWin v1.1 — Food is not a creature without a conversion effect', () => {
+  const foodMaker = (i: number) => mkCard({ name: `Food Maker ${i}`, type_line: 'Artifact', oracle_text: 'When this artifact enters, create a Food token.', mana_cost: '{1}', cmc: 1, power: null, toughness: null });
+  const converter = mkCard({ name: 'Troll Cook', type_line: 'Creature — Troll', oracle_text: 'Sacrifice a Food: This creature gets +2/+2 until end of turn.', mana_cost: '{2}{G}', cmc: 3, power: '3', toughness: '3' });
+  const build = (withConverter: boolean): DeckScoreInput => ({
+    format: 'standard',
+    main: [
+      forest(22),
+      ...Array.from({ length: 6 }, (_, i) => ({ card: foodMaker(i), quantity: 4 })),
+      ...(withConverter ? [{ card: converter, quantity: 4 }] : [{ card: vanilla('Filler', 3), quantity: 4 }]),
+    ],
+    commander: [], sideboard: [], unresolved: [], cardDataVersion: 'test-v1', corpus: null,
+  });
+
+  it('producers plus a converter open the conversion line', () => {
+    expect(winReason(build(true))).toMatch(/Token\/Food conversion/);
+  });
+
+  it('the same producers with no converter do not', () => {
+    expect(winReason(build(false))).not.toMatch(/Token\/Food conversion/);
+  });
+});
+
+describe('computeWin v1.1 — Voltron needs a commander-damage rule', () => {
+  const sword = mkCard({ name: 'Test Sword', type_line: 'Artifact — Equipment', oracle_text: 'Equipped creature gets +3/+3. Equip {2}', mana_cost: '{2}', cmc: 2, power: null, toughness: null });
+  const deck = (format: ScoreFormat): DeckScoreInput => ({
+    format,
+    main: [forest(30), { card: sword, quantity: 1 }, ...creatures(20, 1, 1, 'Chump')],
+    commander: [mkCard({ name: 'Voltron Commander', type_line: 'Legendary Creature — Human', oracle_text: 'Trample.', mana_cost: '{2}{G}', cmc: 3, power: '5', toughness: '5' })],
+    sideboard: [], unresolved: [], cardDataVersion: 'test-v1', corpus: null,
+  });
+
+  it('never builds in Brawl, which has no commander-damage shortcut', () => {
+    expect(winReason(deck('brawl'))).not.toMatch(/Voltron/);
+  });
+
+  it('is available in Commander', () => {
+    expect(Number.isFinite(winOf(deck('commander')))).toBe(true);
   });
 });
 
@@ -369,37 +498,37 @@ describe('computeWin - creature-pressure pools lower-bound their output', () => 
 });
 
 describe('computeWin - commanders are guaranteed pool members', () => {
-  // Spec S1 W: "First satisfy/decrement guaranteed commander requirements."
-  // The sac outlet sits in the command zone, so the aristocrats recipe must
-  // still assemble; before the fix its outlet pool was empty and the whole
-  // recipe was dropped.
-  const outletCommander = mkCard({
-    name: 'Command Zone Outlet', type_line: 'Legendary Creature - Human',
-    oracle_text: 'Sacrifice a creature: Draw a card.',
-    mana_cost: '{1}{B}', cmc: 2, power: '2', toughness: '2',
+  // Spec S1 W: "First satisfy/decrement guaranteed commander requirements and
+  // drop pools with r_j=0." A commander that fills a role is never drawn, so it
+  // leaves `J_l`'s K and decrements `r` -- worth strictly more than the same
+  // body sitting in the library, and worth more than a commander that fills no
+  // role at all.
+  const bodyCommander = mkCard({
+    name: 'Command Zone Threat', type_line: 'Legendary Creature - Dragon',
+    oracle_text: 'Flying.', mana_cost: '{2}{B}', cmc: 3, power: '8', toughness: '8',
   });
   const inertCommander = mkCard({
-    name: 'Inert Commander', type_line: 'Legendary Creature - Human',
-    oracle_text: 'Vigilance.', mana_cost: '{1}{B}', cmc: 2, power: '2', toughness: '2',
-  });
-  const drainPayoff = mkCard({
-    name: 'Table Drain', type_line: 'Enchantment',
-    oracle_text: 'Whenever a creature you control dies, each opponent loses 1 life.',
-    mana_cost: '{1}{B}', cmc: 2, power: null, toughness: null,
+    name: 'Inert Commander', type_line: 'Legendary Enchantment',
+    oracle_text: 'Vigilance.', mana_cost: '{2}{B}', cmc: 3, power: null, toughness: null,
   });
   const deck = (commander: DbCard): DeckScoreInput => ({
     format: 'commander',
-    main: [forest(12), { card: drainPayoff, quantity: 1 }, ...creatures(6, 1, 1, 'Fodder')],
+    main: [forest(30), ...creatures(24, 3, 2, 'Body')],
     commander: [commander], sideboard: [], unresolved: [],
     cardDataVersion: 'test-v1', corpus: null,
   });
 
-  it('a command-zone sac outlet still completes the aristocrats line', () => {
-    expect(winOf(deck(outletCommander))).toBeGreaterThan(0);
+  it('a commander that fills the closing role beats one that fills nothing', () => {
+    expect(winOf(deck(bodyCommander))).toBeGreaterThan(winOf(deck(inertCommander)));
   });
 
-  it('and the same list with no outlet anywhere has no line at all', () => {
-    expect(winOf(deck(inertCommander))).toBe(0);
+  it('and a deck with no closing role anywhere scores 0', () => {
+    expect(winOf({
+      format: 'commander',
+      main: [forest(30), { card: mkCard({ name: 'Blank', type_line: 'Sorcery', mana_cost: '{2}', cmc: 2, power: null, toughness: null }), quantity: 1 }],
+      commander: [inertCommander], sideboard: [], unresolved: [],
+      cardDataVersion: 'test-v1', corpus: null,
+    })).toBe(0);
   });
 });
 

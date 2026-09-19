@@ -1,16 +1,28 @@
 /**
- * Deck Score v1 — Win access & redundancy (W). docs/DECK_SCORE_SPEC.md §1 W.
+ * Deck Score v1.1 — Win access & redundancy (W). docs/DECK_SCORE_SPEC.md §1 W.
  *
- * // ponytail: this is the brief's explicitly-sanctioned v1 recipe catalogue
- * // (6 families instead of a versioned combo/plan database) and a "sum of
- * // pool costs <= turn-t mana, one land drop/turn + flat ramp credit"
- * // readiness proxy instead of the spec's 12-turn/8-step scheduler with
- * // colored-mana tie-breaking and summoning-sickness bookkeeping. Both are
- * // named in the brief (deck-score-core-2026-09-19.md scope item 3) as the
- * // accepted v1 simplification; upgrade path is the full scheduler in a v2.
+ * v1 asked "is the whole board in hand at once, inside turn-t mana?" and every
+ * fair deck answered no, so W starved and the §2 quality cap pinned 9 of 16
+ * fixtures to 20-30. v1.1 asks the question the spec actually poses — how fast
+ * does this deck close — by running an EXPECTED CUMULATIVE OUTPUT schedule per
+ * recipe family and reading off `t*`, the first turn the schedule reaches the
+ * finish predicate. Access (`J_l`) and the delay decay stay exactly as §1 W
+ * specifies; only readiness changed.
+ *
+ * Families: compact combo, creature pressure, aristocrats drain, control
+ * inevitability, token/Food conversion, Voltron, alternate win — the seven §1 W
+ * names. Combo and alternate win keep the v1 mana-readiness path (they assemble
+ * a fixed set, they do not accumulate output); the four output families use the
+ * schedule.
+ *
+ * // ponytail: the schedule is a goldfish — no blockers, no removal, no
+ * // interaction from the table, and expected copies rather than a sampled
+ * // distribution. §1 W licenses exactly that ("a conditional goldfish
+ * // scheduling proxy, not a game simulator"). Upgrade path is a sampled
+ * // schedule, not more terms in this one.
  */
 import { COMBO_PAIRS } from './win-conditions';
-import { clip, H, buildDisjointAccessPolynomial, readAccessAt, drawSampleSizes, type Pool } from './deck-score-math';
+import { clip, H, Hf, buildDisjointAccessPolynomial, readAccessAt, drawSampleSizes, type Pool } from './deck-score-math';
 import { gameShape, type FormatNorms, type ScoreFormat } from './deck-score-norms';
 import type { DeckEntry, ComponentOutput } from './deck-score-mana';
 import type { CardFeature } from './deck-score-features';
@@ -19,7 +31,17 @@ import type { Archetype } from './deck-templates';
 /** `guaranteed` = in the command zone: always accessible, never in the library. */
 interface Member { name: string; cmc: number; quantity: number; guaranteed?: boolean }
 interface RecipePool { members: Member[]; r: number }
-interface Recipe { id: string; label: string; pools: RecipePool[]; extraCost: number; criticalNames: Set<string> }
+interface Recipe {
+  id: string;
+  label: string;
+  pools: RecipePool[];
+  extraCost: number;
+  criticalNames: Set<string>;
+  /** Closing turn from an output schedule. Set = skip the mana-readiness scan. */
+  tStar?: number;
+}
+
+const MAX_TURN = 12;
 
 /** Library copies only — a commander is never drawn, so it never enters `J_l`. */
 function poolK(pool: RecipePool): number {
@@ -35,27 +57,18 @@ function poolR(pool: RecipePool): number {
   const guaranteed = pool.members.reduce((s, m) => s + (m.guaranteed ? m.quantity : 0), 0);
   return Math.max(0, pool.r - guaranteed);
 }
-/**
- * S1 W: "action costs upper-bound every eligible member/path". The `r` copies
- * this pool actually supplies are drawn at random from all `K` members, so the
- * cost that bounds the line is the `r` DEAREST members, not the `r` cheapest.
- * Taking the cheapest let a pool claim its bargain member's timing while
- * `J_l` counted every member's access - "never attach the cheapest tutor's
- * timing to a pool containing slower tutors".
- */
+
 /**
  * Mana for the `r` copies this pool must supply: every guaranteed commander
  * slot it consumes (cast from the command zone, not drawn) plus the cheapest
  * remaining library copies.
  *
- * // ponytail: those cheapest remaining copies are a LOWER bound, where §1 W
+ * // ponytail: those cheapest remaining copies are a LOWER bound where §1 W
  * // asks costs to "upper-bound every eligible member/path". Charging the
- * // dearest instead is only sound once every pool is split into cost bins the
- * // way `creaturePressureRecipes` now is; applied to the hand-built
- * // heterogeneous pools (drain outlets, fodder) it bills one 6-drop outlet's
- * // mana to a pool whose other eleven members cost 1-2, and zeroes every
- * // curated deck (measured). Upgrade path is per-pool cost-bin variants, not
- * // a different sort order here.
+ * // dearest instead only works once every pool is split into cost bins; on the
+ * // hand-built heterogeneous pools it bills one 6-drop outlet's mana to a pool
+ * // whose other eleven members cost 1-2 and zeroes every curated deck
+ * // (measured). Upgrade path is per-pool cost-bin variants, not a sort order.
  */
 function poolCost(pool: RecipePool): number {
   let cost = 0;
@@ -70,15 +83,132 @@ function poolCost(pool: RecipePool): number {
   library.sort((a, b) => a - b);
   return cost + library.slice(0, Math.max(0, needed)).reduce((s, c) => s + c, 0);
 }
+
 function toMember(feature: CardFeature, quantity: number, guaranteed = false): Member {
   return { name: feature.card.name, cmc: feature.c, quantity, guaranteed };
 }
+
 /** Command-zone members of a pool: guaranteed access, one copy each. */
 function commanderMembers(commanders: CardFeature[], pred: (f: CardFeature) => boolean): Member[] {
   return commanders.filter(pred).map((f) => toMember(f, 1, true));
 }
 
-// ── Recipe candidate builders — one per §1 W catalogue family ──────────────
+function rampBonusFor(nonLand: DeckEntry[]): number {
+  return Math.min(3, nonLand.filter((e) => e.feature.isRamp && e.feature.c <= 3).reduce((s, e) => s + e.quantity, 0));
+}
+
+/** One land drop per turn plus catalogued cheap ramp, online from turn 3. */
+function availableManaAtTurn(t: number, rampBonus: number): number {
+  return t + (t >= 3 ? rampBonus : 0);
+}
+
+// ── The output schedule ───────────────────────────────────────────────────
+
+/** A permanent that deals `output` damage per combat/turn once it is online. */
+interface Source { name: string; cmc: number; quantity: number; guaranteed: boolean; output: number }
+
+function sourceOf(feature: CardFeature, quantity: number, output: number, guaranteed = false): Source {
+  return { name: feature.card.name, cmc: feature.c, quantity, guaranteed, output };
+}
+
+/**
+ * `E[output at τ] = Σ_i q_i · P(card i seen by τ−1) · [c_i castable by τ−1] · output_i`,
+ * `D(t) = Σ_{τ=2..t} E[output at τ]`, `t* = min t ≤ 12 : D(t) ≥ target`.
+ *
+ * Attacks start on turn 2; a card cast on τ−1 contributes on τ (summoning
+ * sickness). Commanders are always accessible, so only mana gates them, from
+ * turn `ceil(c)`.
+ */
+function closingTurn(
+  format: ScoreFormat, N: number, sources: readonly Source[], rampBonus: number, target: number,
+): number | null {
+  if (target <= 0 || sources.length === 0 || N <= 0) return null;
+  let cumulative = 0;
+  for (let t = 2; t <= MAX_TURN; t++) {
+    const mana = availableManaAtTurn(t - 1, rampBonus);
+    // P(one specific copy is among the cards seen by turn t−1) = n(t−1)/N.
+    const seen = Math.min(1, Hf(format, N, 1, t - 1, 1));
+    let perTurn = 0;
+    for (const s of sources) {
+      if (s.guaranteed) {
+        if (Math.ceil(s.cmc) <= t) perTurn += s.output;
+      } else if (s.cmc <= mana) {
+        perTurn += s.quantity * seen * s.output;
+      }
+    }
+    cumulative += perTurn;
+    if (cumulative >= target) return t;
+  }
+  return null;
+}
+
+/** Attack steps available by `t*` — combat starts on turn 2. */
+function combatsBy(tStar: number): number {
+  return Math.max(1, tStar - 1);
+}
+
+/**
+ * §1 W "bounded cost/output bins": pick the `r` CHEAPEST supported threats and
+ * size `r` from THOSE members' mean output, so cost and output describe the
+ * same cards.
+ *
+ * The cap DECOUPLES the schedule from the access term: a 60-creature random
+ * pile and a 25-creature precon both ask `J_l` for six copies, so access starts
+ * rewarding raw pool size. Measured both ways, neither setting is clean --
+ *
+ *   cap  6 (the brief's constant): Meren 41, piles 8/50 >= 25, pile max 37
+ *   cap 19 (r follows the schedule): Meren 24, piles 2/50 >= 25, pile max 30
+ *
+ * -- because at 19 the pile max (30) clears Meren (24) and the inversion gets
+ * worse, while at 6 it clears only the two weakest anchors. 6 ships; the
+ * constant is here so the calibration pass can move it in one line.
+ */
+const POOL_SIZE_CAP = 6;
+function requiredCopies(members: readonly Source[], target: number, combats: number): number | null {
+  const byCost = [...members].sort((a, b) => a.cmc - b.cmc || b.output - a.output);
+  const units: Source[] = [];
+  for (const m of byCost) for (let i = 0; i < m.quantity; i++) units.push(m);
+  if (units.length === 0) return null;
+  const cap = Math.min(POOL_SIZE_CAP, units.length);
+  // `r` appears on both sides ("the r cheapest"), so iterate to a fixed point,
+  // then CLAMP at 6. Clamping is the point: beyond six copies the pool stops
+  // being an access proxy. Failing instead of clamping killed every Commander
+  // pressure line, since 120 damage over 11 combats wants 8+ small bodies.
+  let r = 1;
+  for (let iter = 0; iter < cap; iter++) {
+    const mean = units.slice(0, r).reduce((sum, m) => sum + m.output, 0) / r;
+    if (mean <= 0) return null;
+    const next = Math.min(cap, Math.max(1, Math.ceil(target / (combats * mean))));
+    if (next === r) break;
+    r = next;
+  }
+  return r;
+}
+
+// ── Recipe families ───────────────────────────────────────────────────────
+
+const RE_REPEATABLE_DAMAGE = /deals? (\d+) damage to (?:each opponent|any target|target player|target opponent)/i;
+const RE_CONVERTER = /sacrifice[^.]*(?:food|artifact|treasure|token|creature)[^.]*(?:deals? \d+ damage|\+\d+\/\+\d+|becomes? an?\b)/i;
+
+/**
+ * Anything that can attack. §1: "Every integer K used in a probability counts
+ * only physical copies with fully verified support (s_i=1); partially
+ * supported effects retain their fractional e_i credit elsewhere" — so an
+ * uncertain creature still contributes `s * power` to the SCHEDULE (not a
+ * probability) while `poolMembers` keeps it out of `J_l`'s K.
+ */
+function isBody(f: CardFeature): boolean {
+  return f.power != null && f.s > 0 && /\bCreature\b/.test(f.card.type_line || '');
+}
+
+function pickMembers(
+  nonLand: DeckEntry[], commanders: CardFeature[], pred: (f: CardFeature) => boolean,
+): Member[] {
+  return [
+    ...commanderMembers(commanders, pred),
+    ...nonLand.filter((e) => pred(e.feature)).map((e) => toMember(e.feature, e.quantity)),
+  ];
+}
 
 function findComboRecipes(all: Array<{ feature: CardFeature; quantity: number; guaranteed?: boolean }>): Recipe[] {
   const byName = new Map<string, { feature: CardFeature; quantity: number; guaranteed?: boolean }>();
@@ -99,112 +229,215 @@ function findComboRecipes(all: Array<{ feature: CardFeature; quantity: number; g
       criticalNames: new Set([a, b]),
     });
   }
-  return out.sort((x, y) => (poolCost(x.pools[0]) + poolCost(x.pools[1])) - (poolCost(y.pools[0]) + poolCost(y.pools[1]))).slice(0, 3);
+  return out
+    .sort((x, y) => (poolCost(x.pools[0]) + poolCost(x.pools[1])) - (poolCost(y.pools[0]) + poolCost(y.pools[1])))
+    .slice(0, 3);
 }
 
-/** Attack steps the goldfish proxy assumes a board gets before the finish. */
-const PRESSURE_ATTACK_STEPS = 3;
-/** S1 W "bounded cost/output bins" - the power floors the variants split on. */
-const PRESSURE_POWER_BINS = [1, 2, 3, 4, 5, 6, 8];
-
 /**
- * S1 W: "Pools use bounded cost/output bins: action costs upper-bound every
- * eligible member/path, and outputs lower-bound them. Split faster or stronger
- * alternatives into catalogue variants."
- *
- * The previous single pool credited the AVERAGE power of every creature in the
- * deck while `poolCost` charged the cheapest members' mana - an output upper
- * bound paired with a cost lower bound. A random legal pile therefore bought a
- * fast clock with 25 unrelated creatures. Each variant here keeps only
- * creatures at or above one power floor, so the pool's credited output is its
- * WEAKEST member; the best-scoring variant wins in `computeWin`.
+ * (1) Creature pressure, and (4) token/Food conversion folded into the same
+ * schedule: a converter turns each producer into an attacking body, so §1 W's
+ * "Food is not a creature without a conversion effect" is satisfied by the
+ * converter's presence, not assumed.
  */
-function creaturePressureRecipes(nonLand: DeckEntry[], commanders: CardFeature[], lifeToRemoveAllOpponents: number): Recipe[] {
-  const isBody = (f: CardFeature) => f.power != null && f.s >= 1 && /\bCreature\b/.test(f.card.type_line || '');
-  const creatures = nonLand.filter((e) => isBody(e.feature));
+function scheduleRecipe(
+  id: string, label: (r: number, t: number) => string, format: ScoreFormat, N: number,
+  sources: Source[], verified: Member[], extraPools: RecipePool[], rampBonus: number, target: number,
+): Recipe | null {
+  if (sources.length === 0 || verified.length === 0) return null;
+  const tStar = closingTurn(format, N, sources, rampBonus, target);
+  if (tStar === null) return null;
+  const r = requiredCopies(sources, target, combatsBy(tStar));
+  if (r === null) return null;
+  const pools: RecipePool[] = [{ members: verified, r }, ...extraPools];
+  return {
+    id, label: label(r, tStar), pools, extraCost: 0, tStar,
+    criticalNames: new Set([...sources.map((s) => s.name), ...extraPools.flatMap((p) => p.members.map((m) => m.name))]),
+  };
+}
+
+function pressureRecipes(
+  format: ScoreFormat, N: number, nonLand: DeckEntry[], commanders: CardFeature[],
+  rampBonus: number, target: number,
+): Recipe[] {
+  const bodies: Source[] = [
+    ...commanders.filter(isBody).map((f) => sourceOf(f, 1, (f.power || 0) * f.s, true)),
+    ...nonLand.filter((e) => isBody(e.feature)).map((e) => sourceOf(e.feature, e.quantity, (e.feature.power || 0) * e.feature.s)),
+  ];
   const out: Recipe[] = [];
-  for (const minPower of PRESSURE_POWER_BINS) {
-    const lib = creatures.filter((e) => (e.feature.power || 0) >= minPower);
-    const cmd = commanderMembers(commanders, (f) => isBody(f) && (f.power || 0) >= minPower);
-    const K = lib.reduce((s, e) => s + e.quantity, 0) + cmd.length;
-    if (K === 0) continue;
-    const r = Math.max(1, Math.ceil(lifeToRemoveAllOpponents / (minPower * PRESSURE_ATTACK_STEPS)));
-    if (r > K) continue;
-    out.push({
-      id: `combat_wide:p${minPower}`,
-      label: `Creature pressure (${r} x power>=${minPower})`,
-      pools: [{ members: [...cmd, ...lib.map((e) => toMember(e.feature, e.quantity))], r }],
-      extraCost: 0,
-      criticalNames: new Set([...cmd.map((m) => m.name), ...lib.map((e) => e.feature.card.name)]),
-    });
+  const verifiedBodies = [
+    ...commanderMembers(commanders, (f) => isBody(f) && f.s >= 1),
+    ...nonLand.filter((e) => isBody(e.feature) && e.feature.s >= 1).map((e) => toMember(e.feature, e.quantity)),
+  ];
+  const pressure = scheduleRecipe('combat_wide', (r) => `Creature pressure (${r} threats)`,
+    format, N, bodies, verifiedBodies, [], rampBonus, target);
+  if (pressure) out.push(pressure);
+
+  // (4) Conversion is its OWN variant, never a replacement: a deck with both a
+  // creature clock and a token engine must be scored on whichever closes
+  // faster, and the converter pool it adds only costs the conversion line
+  // access. Producers become damage only when something converts them (S1 W:
+  // "Food is not a creature without a conversion effect").
+  const isProducer = (f: CardFeature) => f.isTokenProducer || f.isFoodProducer || f.isTreasureProducer;
+  const isConverter = (f: CardFeature) =>
+    f.isAnthemOrOverrun || f.isFoodPayoff || RE_CONVERTER.test(f.card.oracle_text || '');
+  const converters = pickMembers(nonLand, commanders, isConverter);
+  const producers = nonLand.filter((e) => isProducer(e.feature) && !isBody(e.feature));
+  if (converters.length > 0 && producers.length > 0) {
+    // ponytail: a flat 2 power per converted producer, the v1 assumption kept.
+    // Upgrade path is a curated per-card token table.
+    const converted = [...bodies, ...producers.map((e) => sourceOf(e.feature, e.quantity, 2 * e.feature.s))];
+    const verifiedConverted = [
+      ...verifiedBodies,
+      ...producers.filter((e) => e.feature.s >= 1).map((e) => toMember(e.feature, e.quantity)),
+    ];
+    const tokens = scheduleRecipe('tokens', (r) => `Token/Food conversion (${r} bodies)`,
+      format, N, converted, verifiedConverted, [{ members: converters, r: 1 }], rampBonus, target);
+    if (tokens) out.push(tokens);
   }
   return out;
 }
 
-function voltronRecipe(commanders: CardFeature[], nonLand: DeckEntry[]): Recipe | null {
-  if (commanders.length !== 1) return null; // partners split combat damage across two bodies — not modeled in v1
+/**
+ * (2) Aristocrats drain. Output per trigger x triggers per turn, cumulative.
+ * All-player drain removes every opponent at once, so §1 W's "different output
+ * requirements" means the target is ONE opponent's life total, not the pod's.
+ */
+function drainRecipe(
+  format: ScoreFormat, N: number, nonLand: DeckEntry[], commanders: CardFeature[],
+  rampBonus: number, lifePerOpponent: number,
+): Recipe | null {
+  const isFodder = (f: CardFeature) => f.isTokenProducer || (f.c <= 2 && /\bCreature\b/.test(f.card.type_line || ''));
+  const outlets = pickMembers(nonLand, commanders, (f) => f.isSacOutlet);
+  const payoffs = pickMembers(nonLand, commanders, (f) => f.isDrainPayoff);
+  const fodder = pickMembers(nonLand, commanders, isFodder);
+  if (outlets.length === 0 || payoffs.length === 0 || fodder.length === 0) return null;
+
+  // Triggers per turn: one sacrifice, or two when a repeatable fodder engine
+  // (token producer or a dies-trigger recursion commander like Meren) is there.
+  const repeatableFodder = nonLand.some((e) => e.feature.isTokenProducer) ||
+    commanders.some((f) => f.hasDiesTrigger);
+  const triggersPerTurn = repeatableFodder ? 2 : 1;
+  const cheapestOutlet = Math.min(...outlets.map((m) => m.cmc));
+
+  // A payoff only drains once an outlet is also online, so it pays for both.
+  // Same accounting as the pressure family: the schedule weights each payoff by
+  // P(drawn) and `requiredCopies` then sizes the pool `J_l` prices, so the
+  // number of payoffs credited as draining equals the number the access term
+  // demands. Treating every payoff as simultaneously online while the pool
+  // asked for one was the same output-upper-bound/access-lower-bound mismatch
+  // the pressure pool used to have.
+  const sources: Source[] = payoffs.map((m) => ({
+    name: m.name, cmc: Math.max(m.cmc, cheapestOutlet), quantity: m.quantity,
+    guaranteed: !!m.guaranteed, output: triggersPerTurn,
+  }));
+  const tStar = closingTurn(format, N, sources, rampBonus, lifePerOpponent);
+  if (tStar === null) return null;
+  const rPayoff = requiredCopies(sources, lifePerOpponent, combatsBy(tStar));
+  if (rPayoff === null) return null;
+
+  const fodderQty = fodder.reduce((s, m) => s + m.quantity, 0);
+  return {
+    id: 'drain',
+    label: `Aristocrats drain (${triggersPerTurn}/turn, ${rPayoff} payoffs)`,
+    pools: [
+      { members: outlets, r: 1 },
+      { members: payoffs, r: rPayoff },
+      { members: fodder, r: Math.min(3, fodderQty) },
+    ],
+    extraCost: 1,
+    criticalNames: new Set([...outlets, ...payoffs, ...fodder].map((m) => m.name)),
+    tStar,
+  };
+}
+
+/**
+ * (5) Voltron. 21 commander damage to EACH opponent, dealt sequentially, so the
+ * target is 21 x opponents on one body's schedule. Brawl has no commander-damage
+ * rule (CR 903.10/903.12), so this family never builds there.
+ */
+function voltronRecipe(
+  format: ScoreFormat, N: number, nonLand: DeckEntry[], commanders: CardFeature[],
+  rampBonus: number, opponents: number,
+): Recipe | null {
+  if (format !== 'commander' || commanders.length !== 1) return null;
   const commander = commanders[0];
-  const pumpCards = nonLand.filter((e) => e.feature.isEquipmentOrAura);
-  if (pumpCards.length === 0) return null;
-  const commanderPower = commander.power || 0;
-  const neededPump = Math.max(1, 21 - commanderPower);
-  const r = Math.max(1, Math.ceil(neededPump / 3)); // ~+3 power assumed per equipment/aura
-  const pools: RecipePool[] = [{ members: pumpCards.map((e) => toMember(e.feature, e.quantity)), r }];
-  const criticalNames = new Set([commander.card.name, ...pumpCards.map((e) => e.feature.card.name)]);
+  const pump = nonLand.filter((e) => e.feature.isEquipmentOrAura);
+  if (pump.length === 0) return null;
+
+  const sources: Source[] = [
+    sourceOf(commander, 1, (commander.power || 0) * commander.s, true),
+    // ponytail: flat +3 power per equipment/aura, the v1 assumption kept.
+    ...pump.map((e) => sourceOf(e.feature, e.quantity, 3 * e.feature.s)),
+  ];
+  const tStar = closingTurn(format, N, sources, rampBonus, 21 * opponents);
+  if (tStar === null) return null;
+
+  const pumpMembers = pump.map((e) => toMember(e.feature, e.quantity));
+  const r = Math.max(1, Math.ceil((21 - (commander.power || 0)) / 3));
+  const pools: RecipePool[] = [{ members: pumpMembers, r: Math.min(r, pumpMembers.length) }];
+  const criticalNames = new Set([commander.card.name, ...pumpMembers.map((m) => m.name)]);
   if (!commander.hasEvasion) {
-    const evasionSources = nonLand.filter((e) => e.feature.hasEvasion && (e.feature.isEquipmentOrAura || e.feature.categories.includes('protection')));
-    if (evasionSources.length > 0) {
-      pools.push({ members: evasionSources.map((e) => toMember(e.feature, e.quantity)), r: 1 });
-      for (const e of evasionSources) criticalNames.add(e.feature.card.name);
+    const evasion = nonLand.filter((e) => e.feature.hasEvasion && (e.feature.isEquipmentOrAura || e.feature.categories.includes('protection')));
+    if (evasion.length > 0) {
+      pools.push({ members: evasion.map((e) => toMember(e.feature, e.quantity)), r: 1 });
+      for (const e of evasion) criticalNames.add(e.feature.card.name);
     }
   }
-  return { id: 'combat_tall', label: 'Voltron commander damage', pools, extraCost: 1, criticalNames };
+  return { id: 'combat_tall', label: 'Voltron commander damage', pools, extraCost: 1, criticalNames, tStar };
 }
 
-function drainRecipe(nonLand: DeckEntry[], commanders: CardFeature[]): Recipe | null {
-  const isFodder = (f: CardFeature) => f.isTokenProducer || (f.c <= 2 && /\bCreature\b/.test(f.card.type_line || ''));
-  const pick = (pred: (f: CardFeature) => boolean): Member[] => [
-    ...commanderMembers(commanders, pred),
-    ...nonLand.filter((e) => pred(e.feature)).map((e) => toMember(e.feature, e.quantity)),
-  ];
-  const outlets = pick((f) => f.isSacOutlet);
-  const payoffs = pick((f) => f.isDrainPayoff);
-  const fodder = pick(isFodder);
-  if (outlets.length === 0 || payoffs.length === 0) return null;
-  const pools: RecipePool[] = [{ members: outlets, r: 1 }, { members: payoffs, r: 1 }];
-  if (fodder.length > 0) {
-    const fodderQty = fodder.reduce((s, m) => s + m.quantity, 0);
-    pools.push({ members: fodder, r: Math.min(3, fodderQty) });
-  }
-  const names = [...outlets, ...payoffs, ...fodder].map((m) => m.name);
-  return { id: 'drain', label: 'Aristocrats drain', pools, extraCost: 1, criticalNames: new Set(names) };
-}
+/**
+ * (3) Control inevitability. §1 W allows Tfast=6 "only for a validated
+ * control/stax recipe that establishes a durable advantage AND retains a
+ * supported finisher; ordinary removal density cannot establish this
+ * exemption" — hence the conjunction of E/E* and D/D*, and the separate
+ * finisher pool.
+ */
+function controlRecipe(
+  format: ScoreFormat, norms: FormatNorms, N: number, nonLand: DeckEntry[], commanders: CardFeature[],
+  totals: WinTotals,
+): { recipe: Recipe; u: number; access: number } | null {
+  // The spec's exemption is conditional, not graded: "ordinary removal density
+  // cannot establish this exemption". Unless the deck actually MEETS E* and
+  // either D* or a repeatable draw engine, there is no control line at all --
+  // without this gate every deck with a few removal spells and one cantrip
+  // claimed inevitability, random piles included (measured: piles took control
+  // as their best line at u=0.16).
+  if (totals.E < totals.Estar) return null;
+  if (totals.D < totals.Dstar && !totals.hasDrawEngine) return null;
+  const durable = Math.min(clip(totals.E / totals.Estar), clip(totals.D / totals.Dstar));
+  if (durable <= 0) return null;
 
-function tokenConversionRecipe(nonLand: DeckEntry[], commanders: CardFeature[], lifeToRemoveAllOpponents: number): Recipe | null {
-  const pick = (pred: (f: CardFeature) => boolean): Member[] => [
-    ...commanderMembers(commanders, pred),
-    ...nonLand.filter((e) => pred(e.feature)).map((e) => toMember(e.feature, e.quantity)),
-  ];
-  const producers = pick((f) => f.isTokenProducer);
-  const anthems = pick((f) => f.isAnthemOrOverrun);
-  if (producers.length === 0 || anthems.length === 0) return null;
-  const tokensNeeded = Math.max(2, Math.ceil(lifeToRemoveAllOpponents / 6)); // ~2 power/token, 3 attack steps
-  const r = Math.max(1, Math.ceil(tokensNeeded / 2));
-  const names = [...producers, ...anthems].map((m) => m.name);
+  const isFinisher = (f: CardFeature) =>
+    (f.power != null && f.power >= 4) ||
+    /\bPlaneswalker\b/.test(f.card.type_line || '') ||
+    f.isAltWin ||
+    Number(RE_REPEATABLE_DAMAGE.exec(f.card.oracle_text || '')?.[1] ?? 0) >= 3;
+  const finishers = pickMembers(nonLand, commanders, isFinisher);
+  const K = finishers.reduce((s, m) => s + (m.guaranteed ? 0 : m.quantity), 0);
+  const guaranteedFinisher = finishers.some((m) => m.guaranteed);
+  if (K === 0 && !guaranteedFinisher) return null;
+
+  const CONTROL_TURN = 8;
+  const access = guaranteedFinisher ? 1 : Hf(format, N, K, CONTROL_TURN, 1);
+  const decay = Math.pow(2, -Math.max(0, CONTROL_TURN - 6) / norms.delayHalfLifeTurns);
+  const u = durable * clip(access / norms.winAccessTarget) * decay;
   return {
-    id: 'tokens',
-    label: 'Token conversion',
-    pools: [{ members: producers, r }, { members: anthems, r: 1 }],
-    extraCost: 0,
-    criticalNames: new Set(names),
+    u, access,
+    recipe: {
+      id: 'control',
+      label: `Control inevitability (${finishers.length} finishers)`,
+      pools: [{ members: finishers, r: 1 }],
+      extraCost: 0,
+      criticalNames: new Set(finishers.map((m) => m.name)),
+      tStar: CONTROL_TURN,
+    },
   };
 }
 
 function altWinRecipe(nonLand: DeckEntry[], commanders: CardFeature[]): Recipe | null {
-  const altWin: Member[] = [
-    ...commanderMembers(commanders, (f) => f.isAltWin),
-    ...nonLand.filter((e) => e.feature.isAltWin).map((e) => toMember(e.feature, e.quantity)),
-  ];
+  const altWin = pickMembers(nonLand, commanders, (f) => f.isAltWin);
   if (altWin.length === 0) return null;
   return {
     id: 'alt_win',
@@ -215,52 +448,47 @@ function altWinRecipe(nonLand: DeckEntry[], commanders: CardFeature[]): Recipe |
   };
 }
 
-function buildRecipes(
-  format: ScoreFormat,
-  nonLand: DeckEntry[],
-  commanders: CardFeature[],
-  lifeToRemoveAllOpponents: number,
-): Recipe[] {
-  const all = [...nonLand, ...commanders.map((f) => ({ feature: f, quantity: 1, guaranteed: true }))];
-  const recipes: Recipe[] = [...findComboRecipes(all)];
-  recipes.push(...creaturePressureRecipes(nonLand, commanders, lifeToRemoveAllOpponents));
-  if (format === 'commander') {
-    const voltron = voltronRecipe(commanders, nonLand);
-    if (voltron) recipes.push(voltron);
-  }
-  const drain = drainRecipe(nonLand, commanders);
-  if (drain) recipes.push(drain);
-  const tokens = tokenConversionRecipe(nonLand, commanders, lifeToRemoveAllOpponents);
-  if (tokens) recipes.push(tokens);
-  const altWin = altWinRecipe(nonLand, commanders);
-  if (altWin) recipes.push(altWin);
-  return recipes.slice(0, 8); // §1 W: "Retain at most 8 recipes"
-}
-
-function rampBonusFor(nonLand: DeckEntry[]): number {
-  return Math.min(3, nonLand.filter((e) => e.feature.isRamp && e.feature.c <= 3).reduce((s, e) => s + e.quantity, 0));
-}
-function availableManaAtTurn(t: number, rampBonus: number): number {
-  return t + (t >= 3 ? rampBonus : 0);
-}
+// ── Evaluation ────────────────────────────────────────────────────────────
 
 interface RecipeEval { recipe: Recipe; u: number; atTurn: number; access: number }
 
-function evaluateRecipe(format: ScoreFormat, norms: FormatNorms, N: number, recipe: Recipe, rampBonus: number): RecipeEval {
+/**
+ * `u_l = max_t ready_l(t) · clip(J_l(n(t))/pWin) · 2^(−max(0,t−Tfast)/h)` (§1 W).
+ * A recipe carrying `tStar` already knows its turn from its output schedule;
+ * the rest scan for the first turn their fixed cost is affordable.
+ */
+function evaluateRecipe(
+  format: ScoreFormat, norms: FormatNorms, N: number, recipe: Recipe, rampBonus: number,
+): RecipeEval {
   const pools: Pool[] = recipe.pools.map((p) => ({ K: poolK(p), r: poolR(p) }));
   const poly = buildDisjointAccessPolynomial(N, pools);
+  const accessAt = (t: number): number => {
+    const ns = drawSampleSizes(format, t);
+    return ns.reduce((s, n) => s + readAccessAt(poly, N, n), 0) / ns.length;
+  };
+  const scoreAt = (t: number, access: number): number =>
+    clip(access / norms.winAccessTarget) * Math.pow(2, -Math.max(0, t - norms.fastClosingTurn) / norms.delayHalfLifeTurns);
+
+  if (recipe.tStar != null) {
+    const access = accessAt(recipe.tStar);
+    return { recipe, u: scoreAt(recipe.tStar, access), atTurn: recipe.tStar, access };
+  }
+
   const totalCost = recipe.pools.reduce((s, p) => s + poolCost(p), 0) + recipe.extraCost;
   let best: RecipeEval = { recipe, u: 0, atTurn: 0, access: 0 };
-  for (let t = 1; t <= 12; t++) {
-    const ready = totalCost <= availableManaAtTurn(t, rampBonus) ? 1 : 0;
-    if (!ready) continue;
-    const ns = drawSampleSizes(format, t);
-    const access = ns.reduce((s, n) => s + readAccessAt(poly, N, n), 0) / ns.length;
-    const decay = Math.pow(2, -Math.max(0, t - norms.fastClosingTurn) / norms.delayHalfLifeTurns);
-    const u = ready * clip(access / norms.winAccessTarget) * decay;
+  for (let t = 1; t <= MAX_TURN; t++) {
+    if (totalCost > availableManaAtTurn(t, rampBonus)) continue;
+    const access = accessAt(t);
+    const u = scoreAt(t, access);
     if (u > best.u) best = { recipe, u, atTurn: t, access };
   }
   return best;
+}
+
+/** Raw component totals the control family needs (see deck-score-interaction). */
+export interface WinTotals {
+  E: number; Estar: number;
+  D: number; Dstar: number; hasDrawEngine: boolean;
 }
 
 /** `u1`, `u2`, `protect` -> Win access & redundancy (W), §1. */
@@ -271,39 +499,57 @@ export function computeWin(
   N: number,
   mainEntries: DeckEntry[],
   commanders: CardFeature[],
+  totals: WinTotals,
 ): ComponentOutput {
   const nonLand = mainEntries.filter((e) => !e.feature.isLand);
-  // S1 W: "A finish predicate must defeat EVERY remaining opponent: 3x40
-  // combat damage ... 25/20 life in Brawl/Standard." The previous code passed
-  // ONE opponent's life total, so a Commander combat line only had to deal 40 -
-  // a third of the damage the spec requires. That is what let a random legal
-  // pile buy a clock the curated decks could not beat.
+  // §1 W: "A finish predicate must defeat EVERY remaining opponent: 3x40 combat
+  // damage or 21 commander damage to EACH opponent in Commander, 25/20 life in
+  // Brawl/Standard."
   const shape = gameShape(format);
-  const lifeToRemoveAllOpponents = shape.lifePerOpponent * Math.max(1, shape.players - 1);
-  const recipes = buildRecipes(format, nonLand, commanders, lifeToRemoveAllOpponents);
+  const opponents = Math.max(1, shape.players - 1);
+  const combatTarget = shape.lifePerOpponent * opponents;
+  const rampBonus = rampBonusFor(nonLand);
+
+  const all = [...nonLand, ...commanders.map((f) => ({ feature: f, quantity: 1, guaranteed: true }))];
+  const recipes: Recipe[] = [...findComboRecipes(all)];
+
+  recipes.push(...pressureRecipes(format, N, nonLand, commanders, rampBonus, combatTarget));
+  const drain = drainRecipe(format, N, nonLand, commanders, rampBonus, shape.lifePerOpponent);
+  if (drain) recipes.push(drain);
+  const voltron = voltronRecipe(format, N, nonLand, commanders, rampBonus, opponents);
+  if (voltron) recipes.push(voltron);
+  const altWin = altWinRecipe(nonLand, commanders);
+  if (altWin) recipes.push(altWin);
+  const control = controlRecipe(format, norms, N, nonLand, commanders, totals);
+  if (control) recipes.push(control.recipe);
 
   if (recipes.length === 0) {
-    return { score: 0, reason: 'no supported closing line: access 0% by T0, none; no catalogued win recipe present.' };
+    return { score: 0, reason: 'no supported closing line: no catalogued win recipe present; t* never reached within 12 turns.' };
   }
 
-  const rampBonus = rampBonusFor(nonLand);
-  const evals = recipes.map((r) => evaluateRecipe(format, norms, N, r, rampBonus));
-  evals.sort((a, b) => b.u - a.u);
+  const evals = recipes.slice(0, 8) // §1 W: "Retain at most 8 recipes"
+    .map((r) => (control && r.id === 'control'
+      ? { recipe: r, u: control.u, atTurn: 8, access: control.access }
+      : evaluateRecipe(format, norms, N, r, rampBonus)));
+  evals.sort((a, b) => b.u - a.u || a.recipe.id.localeCompare(b.recipe.id));
+
   const best = evals[0];
   const secondDisjoint = evals.find((e) => e !== best && ![...e.recipe.criticalNames].some((n) => best.recipe.criticalNames.has(n)));
   const u1 = best.u;
   const u2 = secondDisjoint?.u ?? 0;
 
-  const protectPool = mainEntries.filter((e) => !e.feature.isLand && e.feature.isProtection && e.feature.c <= 2);
+  const protectPool = nonLand.filter((e) => e.feature.isProtection && e.feature.c <= 2);
   const Kprotect = protectPool.reduce((s, e) => s + e.quantity, 0);
   const ns = drawSampleSizes(format, norms.fastClosingTurn);
   const protect = clip(ns.reduce((s, n) => s + H(N, Kprotect, n, 1), 0) / ns.length / 0.70);
 
   const score = 100 * (0.85 * u1 + 0.15 * Math.max(u2, u1 * protect));
-  const backup = secondDisjoint ? `independent backup: ${secondDisjoint.recipe.label}` : `shared bottleneck, protection access ${Math.round(protect * 100)}%`;
-  const missing = u1 === 0 ? 'no line reaches its access target within 12 turns under available mana' : 'none';
+  const backup = secondDisjoint
+    ? `independent backup ${secondDisjoint.recipe.label} u=${secondDisjoint.u.toFixed(2)}`
+    : `shared bottleneck, protection access ${Math.round(protect * 100)}%`;
+  const missing = u1 === 0 ? 'no line reaches its access target in 12 turns' : 'none';
   return {
     score,
-    reason: `${best.recipe.label}: access ${Math.round(best.access * 100)}% by T${best.atTurn || 12}, ${backup}; ${missing}.`,
+    reason: `${best.recipe.label}: closes T${best.atTurn || MAX_TURN}, access ${Math.round(best.access * 100)}% (u=${u1.toFixed(2)}); ${backup}; ${missing}.`,
   };
 }

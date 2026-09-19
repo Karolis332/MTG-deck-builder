@@ -18,6 +18,12 @@ function immediateDrawUnits(oracleText: string | null): number {
   return DRAW_NUMERAL[m[1].toLowerCase()] ?? 1;
 }
 
+/** Raw interaction/velocity totals W's control-inevitability recipe needs —
+ * §1 W "durable advantage AND a supported finisher" is stated in terms of E*
+ * and D*, so those two components own the numbers and W reads them. */
+export interface AnswerTotals { E: number; Estar: number }
+export interface VelocityTotals { D: number; Dstar: number; hasDrawEngine: boolean }
+
 /** `E`, `Kcheap`, `breadth` -> Interaction (I), §1. */
 export function computeInteraction(
   format: ScoreFormat,
@@ -25,7 +31,7 @@ export function computeInteraction(
   archetype: Archetype,
   N: number,
   mainEntries: DeckEntry[],
-): ComponentOutput {
+): ComponentOutput & AnswerTotals {
   const mult = archetypeMultiplier(archetype);
   const Estar = norms.interactionUnitsTarget * mult.interactionUnits;
   const Kstar = norms.cheapAnswerTarget * mult.cheapAnswers;
@@ -55,7 +61,7 @@ export function computeInteraction(
 
   const score = 100 * (0.55 * clip(E / Estar) + 0.25 * clip(Kcheap / Kstar) + 0.20 * breadth);
   return {
-    score,
+    score, E, Estar,
     reason: `${E.toFixed(1)}/${Estar.toFixed(1)} effective answers, ${Kcheap}/${Kstar.toFixed(1)} cheap; weakest coverage: ${weakestAxis ?? 'none'}.`,
   };
 }
@@ -67,7 +73,7 @@ export function computeAdvantage(
   archetype: Archetype,
   N: number,
   mainEntries: DeckEntry[],
-): ComponentOutput {
+): ComponentOutput & VelocityTotals {
   const mult = archetypeMultiplier(archetype);
   const Dstar = norms.drawUnitTarget * mult.drawUnits;
   const T = norms.drawHorizonTurns;
@@ -94,7 +100,7 @@ export function computeAdvantage(
 
   const score = 100 * (0.65 * clip(D / Dstar) + 0.35 * clip(velocityAccess / norms.velocityAccessTarget));
   return {
-    score,
+    score, D, Dstar, hasDrawEngine: drawCards.some((e) => e.feature.isDrawEngine),
     reason: `${D.toFixed(1)}/${Dstar.toFixed(1)} draw units by turn ${T}; ${Kvel} cheap velocity cards.`,
   };
 }

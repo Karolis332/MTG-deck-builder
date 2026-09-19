@@ -114,7 +114,10 @@ export function scoreDeck(input: Readonly<DeckScoreInput>): DeckScoreResult {
   const curve = computeCurve(format, norms, archetype, N, mainEntries, commanderCmc);
   const interaction = computeInteraction(format, norms, archetype, N, mainEntries);
   const advantage = computeAdvantage(format, norms, archetype, N, mainEntries);
-  const win = computeWin(format, norms, archetype, N, mainEntries, commanderFeatures);
+  const win = computeWin(format, norms, archetype, N, mainEntries, commanderFeatures, {
+    E: interaction.E, Estar: interaction.Estar,
+    D: advantage.D, Dstar: advantage.Dstar, hasDrawEngine: advantage.hasDrawEngine,
+  });
   const synergy = computeSynergy(format, norms, archetype, N, mainEntries);
   const metaResult = computeMeta(format, archetype, mainEntries, input.corpus);
 

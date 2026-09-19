@@ -36,6 +36,7 @@ interface FixtureResult {
   purpose: string;
   inBand: boolean | 'n/a';
   ms: number;
+  winReason: string;
 }
 
 // ── DeckLine[] -> DeckScoreInput, shared by every fixture loader ──────────
@@ -151,7 +152,8 @@ function runFixture(
     failing.length ? `fail:${failing.join(',')}` : '',
     capping.length ? capping.join(',') : '',
   ].filter(Boolean).join('; ') || 'none';
-  return { fixture: name, format, score: result.score, components, gates: gateSummary, band, purpose, inBand: inBand(result.score, band), ms };
+  const winReason = result.components.find((c) => c.key === 'win')?.reason ?? '';
+  return { fixture: name, format, score: result.score, components, gates: gateSummary, band, purpose, inBand: inBand(result.score, band), ms, winReason };
 }
 
 // ── Random constrained legal piles for The Cabbage Merchant ─────────────
@@ -187,10 +189,10 @@ function buildRandomPile(seed: number, commander: DbCard, eligible: DbCard[], la
   };
 }
 
-function runRandomControls(): { min: number; median: number; max: number; n: number } {
+function runRandomControls(): { min: number; median: number; max: number; n: number; over25: number } {
   const { resolved } = resolveLines([{ quantity: 1, name: 'The Cabbage Merchant', board: 'commander' }], 'commander');
   const commander = resolved[0]?.card;
-  if (!commander) return { min: NaN, median: NaN, max: NaN, n: 0 };
+  if (!commander) return { min: NaN, median: NaN, max: NaN, n: 0, over25: 0 };
 
   const db = getDb();
   const identity = parseIdentity(commander.color_identity);
@@ -220,7 +222,10 @@ function runRandomControls(): { min: number; median: number; max: number; n: num
   scores.sort((a, b) => a - b);
   const mid = Math.floor(scores.length / 2);
   const median = scores.length % 2 ? scores[mid] : (scores[mid - 1] + scores[mid]) / 2;
-  return { min: scores[0], median, max: scores[scores.length - 1], n: scores.length };
+  return {
+    min: scores[0], median, max: scores[scores.length - 1], n: scores.length,
+    over25: scores.filter((v) => v >= 25).length,
+  };
 }
 
 // ── Main ──────────────────────────────────────────────────────────────────
@@ -262,6 +267,10 @@ function main() {
     return `| ${f.fixture} | ${f.format} | ${f.score} | ${comps} | ${f.gates} | ${f.band} | ${verdict} | ${f.ms.toFixed(2)} |`;
   }).join('\n');
 
+  const winRows = fixtures
+    .map((f) => `| ${f.fixture} | ${f.components.win} | ${f.winReason.replace(/\|/g, '/')} |`)
+    .join('\n');
+
   const md = `# Deck Score v1 calibration report
 
 Generated ${new Date().toISOString()}. Raw v1 numbers — weights are NOT tuned in this unit (docs/DECK_SCORE_SPEC.md §4 is a separate calibration pass).
@@ -274,13 +283,19 @@ ${header}${rows}
 
 Anchors in band: ${anchorsInBand}/${anchorsTotal} (fixtures with a hard-cap-only band like "0-19" always count as anchors here; "if rule-valid" bands are graded the same way — this report does not re-derive Arena rule-validity separately).
 
+## Win lines — which closing family the deck's best line came from
+
+| Fixture | W | Reason |
+|---|---:|---|
+${winRows}
+
 ## Random constrained-legal piles — The Cabbage Merchant, Commander, seeds 0-49
 
 Per §5: eligible legal singleton cards ordered by SHA-256(seed + canonical id), first N take the nonbasic slots, remaining slots filled with basics split across the commander's color identity. n=${controls.n}, generated+scored in ${controlsMs.toFixed(0)}ms.
 
-| min | median | max | target |
-|---:|---:|---:|---|
-| ${controls.min} | ${controls.median} | ${controls.max} | <25 (§4 release target; not enforced/tuned here) |
+| min | median | max | >=25 | target |
+|---:|---:|---:|---:|---|
+| ${controls.min} | ${controls.median} | ${controls.max} | ${controls.over25}/${controls.n} | §4 wants >=95% under 25 |
 `;
 
   fs.mkdirSync(OUT_DIR, { recursive: true });
