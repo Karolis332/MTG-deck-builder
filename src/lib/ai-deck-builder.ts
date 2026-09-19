@@ -13,7 +13,7 @@
 import { getDb, getFormatStaples } from './db';
 import type { DbCard } from './types';
 import { DEFAULT_DECK_SIZE } from './constants';
-import { buildScoredCandidatePool, autoBuildDeck } from './deck-builder-ai';
+import { buildScoredCandidatePool, autoBuildDeck, ownedPoolPrefix } from './deck-builder-ai';
 import type { BuildOptions, ScoredCandidatePoolResult } from './deck-builder-ai';
 import { isFetchLandRelevant } from './land-intelligence';
 import { getTemplate, getTemplateSummary, mergeWithCommanderProfile } from './deck-templates';
@@ -362,8 +362,12 @@ export async function buildDeckWithAI(
   // Step 1: Get scored candidate pool
   const poolResult = await buildScoredCandidatePool(buildOptions);
 
-  // Step 2: Take top 120 candidates
-  const candidates = poolResult.pool.slice(0, 120);
+  // Step 2: Take top 120 candidates. Collection builds must stay owned-only —
+  // poolResult.pool now also carries unowned candidates (deck-builder-ai.ts
+  // needs them scored for the /build craft list) — see ownedPoolPrefix.
+  const candidates = ownedPoolPrefix(
+    poolResult.pool, (p) => p.card.name, poolResult.ownedQty, poolResult.useCollection, 120
+  );
 
   if (candidates.length === 0) {
     throw new Error('No candidate cards found. Make sure the card database is seeded.');

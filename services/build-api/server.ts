@@ -172,6 +172,22 @@ async function handleBuild(body: string, res: http.ServerResponse): Promise<void
       { format, ownedCards: readOwnedCardNames(parsed), locks: readLocks(parsed) }
     );
 
+    const craftList = result.craftList;
+    const craftSummary = craftList && craftList.length
+      ? {
+          count: craftList.length,
+          byRarity: craftList.reduce(
+            (acc, c) => {
+              const key = c.rarity as 'common' | 'uncommon' | 'rare' | 'mythic';
+              if (key in acc) acc[key] += 1;
+              return acc;
+            },
+            { common: 0, uncommon: 0, rare: 0, mythic: 0 }
+          ),
+          paperUsd: Math.round(craftList.reduce((sum, c) => sum + (c.priceUsd || 0), 0) * 100) / 100,
+        }
+      : undefined;
+
     json(res, 200, {
       commander: commanderName,
       partner: partnerName || null,
@@ -183,6 +199,8 @@ async function handleBuild(body: string, res: http.ServerResponse): Promise<void
       collectionMode: Boolean(ownedCards),
       collectionMatched: ownedCards ? collectionMatched : undefined,
       hints: result.hints,
+      craftList,
+      craftSummary,
       elapsedMs: Date.now() - started,
       cards: result.cards.map((entry) => {
         const card = entry.card as DbCard;

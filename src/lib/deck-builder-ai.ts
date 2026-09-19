@@ -21,7 +21,7 @@ import {
 } from './deck-builder-constraints';
 import { analyzeCommanderForBuild } from './commander-analysis';
 import type { ArsenalCard } from './commander-analysis';
-import { classifyCard, isDrawEngine, isBoardWipe } from './card-classifier';
+import { classifyCard, getPrimaryCategory, isDrawEngine, isBoardWipe } from './card-classifier';
 import { parseBuildHints } from './build-hints';
 import type { ParsedBuildHints } from './build-hints';
 import { auditDeck } from './deck-auditor';
@@ -442,6 +442,25 @@ export interface BuildResult {
   scoredPool?: Array<{ name: string; score: number; components: Record<string, number> }>;
   /** What the free-text buildHints prompt was understood to mean (build-hints.ts) */
   hints?: { parsed: ParsedBuildHints; boostedCards: number };
+  /**
+   * Cards the scored pool ranked ahead of the deck's actual picks but the user
+   * doesn't own — a "needed to craft" / buy list. Populated only when
+   * useCollection is true. Capped at 15, ordered by score descending.
+   */
+  craftList?: CraftListEntry[];
+}
+
+/** One `BuildResult.craftList` entry — see `computeCraftList` below. */
+export interface CraftListEntry {
+  name: string;
+  role: string;
+  rarity: string;
+  priceUsd: number | null;
+  onArena: boolean;
+  score: number;
+  /** The lowest-scored owned pick in the same role, if any exists. */
+  wouldReplace?: string;
+  reason: string;
 }
 
 export interface ScoredCandidatePoolResult {
@@ -472,6 +491,22 @@ export interface ScoredCandidatePoolResult {
   commanderStatsMap: Map<string, { inclusionRate: number; synergyScore: number }>;
   /** Per-card additive score breakdown; populated only when options.captureComponents */
   componentsByName?: Map<string, Record<string, number>>;
+}
+
+/**
+ * Owned-only positional prefix of a candidate pool. `pool` (and
+ * `ScoredCandidatePoolResult.pool`) carries owned+unowned candidates so the
+ * craft list can score unowned cards too — but callers that read a positional
+ * prefix of it (CF recommendation seed, theme-detection sample) must see
+ * exactly the owned subsequence, in the same relative order, on a collection
+ * build. Otherwise those downstream network/prompt inputs — and therefore
+ * scores and final picks — drift from build to build as unowned cards shift
+ * in and out of the top N by score/rank.
+ */
+export function ownedPoolPrefix<T>(
+  pool: T[], getName: (item: T) => string, ownedQty: Map<string, number>, useCollection: boolean, n: number
+): T[] {
+  return (useCollection ? pool.filter((item) => (ownedQty.get(getName(item)) || 0) > 0) : pool).slice(0, n);
 }
 
 /**
@@ -607,8 +642,9 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
   ].join(' ');
 
   // ── Collection quantity map (name-based to handle different printings) ────
+  // Ownership no longer gates pool MEMBERSHIP (see poolQuery note below) — it's
+  // enforced later at pick time via getMaxQty(), so only quantities are needed.
   const ownedQty = new Map<string, number>();
-  const ownedNames = new Set<string>();
   if (useCollection) {
     const rows = db.prepare(
       `SELECT c.name, SUM(col.quantity) as total
@@ -621,12 +657,10 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
       useCollection = false;
     }
     for (const row of rows) {
-      ownedNames.add(row.name);
       ownedQty.set(row.name, row.total);
     }
     // Basic lands are always available (Arena gives unlimited)
     for (const basic of ['Plains', 'Island', 'Swamp', 'Mountain', 'Forest', 'Wastes']) {
-      ownedNames.add(basic);
       ownedQty.set(basic, 99);
     }
   }
@@ -806,9 +840,11 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
   // then synergy-targeted cards, then generic
   // For non-commander: use global edhrec_rank as before
 
+  // NOTE: no collectionJoin here — the pool must include unowned cards too
+  // (craft list needs to score them), sorted owned-first via collectionOrder.
+  // Ownership is enforced later at pick time via getMaxQty().
   const poolQuery = `
     SELECT DISTINCT c.* FROM cards c
-    ${collectionJoin}
     WHERE (c.type_line NOT LIKE '%Land%' OR c.type_line LIKE '%//%')
     AND c.type_line != 'Card' AND c.type_line NOT LIKE 'Card //%'
     ${colorExcludeFilter ? `AND ${colorExcludeFilter}` : ''}
@@ -854,11 +890,11 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
     return true;
   };
 
-  // EDHREC cards go first — these are specifically recommended for this commander
-  // When building from collection, skip cards the user doesn't own
+  // EDHREC cards go first — these are specifically recommended for this
+  // commander. Unowned cards stay in the pool (and get scored) so the craft
+  // list can surface them; ownership is enforced later at pick time.
   for (const card of edhrecResolvedCards) {
     if (!seenNames.has(card.name)) {
-      if (useCollection && !ownedNames.has(card.name)) continue;
       if (!validForPool(card)) continue;
       seenNames.add(card.name);
       pool.push(card);
@@ -868,7 +904,6 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
   // Tribal cards next — creatures and synergy cards of the detected type
   for (const card of tribalCards) {
     if (!seenNames.has(card.name)) {
-      if (useCollection && !ownedNames.has(card.name)) continue;
       if (!validForPool(card)) continue;
       seenNames.add(card.name);
       pool.push(card);
@@ -883,7 +918,6 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
 
     const synergyPoolQuery = `
       SELECT DISTINCT c.* FROM cards c
-      ${collectionJoin}
       WHERE (c.type_line NOT LIKE '%Land%' OR c.type_line LIKE '%//%')
       AND c.type_line != 'Card' AND c.type_line NOT LIKE 'Card //%'
       AND (${synergyConditions})
@@ -924,8 +958,6 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
       if (staple.inclusionRate < 0.10) continue; // Only inject meaningful staples
       if (seenNames.has(staple.cardName)) continue;
 
-      if (useCollection && !ownedNames.has(staple.cardName)) continue;
-
       const stapleCard = db.prepare(
         `SELECT c.* FROM cards c WHERE c.name = ? COLLATE NOCASE
          ${legalityFilter}
@@ -939,6 +971,8 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
       }
     }
   }
+
+  const poolPrefix = (n: number): DbCard[] => ownedPoolPrefix(pool, (c) => c.name, ownedQty, useCollection, n);
 
   // ── Step 2: Determine themes ────────────────────────────────────────────
   // For commander: use EDHREC themes mapped to synergy groups, supplemented
@@ -968,10 +1002,10 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
 
     // If we still have no themes, fall back to pool detection
     if (themes.length === 0) {
-      themes = detectDeckThemes(pool.slice(0, 40));
+      themes = detectDeckThemes(poolPrefix(40));
     }
   } else {
-    themes = detectDeckThemes(pool.slice(0, 40));
+    themes = detectDeckThemes(poolPrefix(40));
   }
 
   // Commander synergy archetype overrides generic CMC-based detection.
@@ -1021,19 +1055,19 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
   const cfScoreMap = new Map<string, number>();
   if (isCommander && commanderName) {
     try {
-      const deckCardNames = pool.slice(0, 30).map(c => c.name);
+      const deckCardNames = poolPrefix(30).map(c => c.name);
       const cfRecs = await getCFRecommendations(deckCardNames, commanderName, 50);
       for (const rec of cfRecs) {
         cfScoreMap.set(rec.card_name, rec.cf_score);
       }
-      // Inject CF-recommended cards into pool if not already present
-      // When useCollection is on, only inject cards the user owns
+      // Inject CF-recommended cards into pool if not already present.
+      // Unowned recs stay in the pool (scored, craft-list candidates); the
+      // final deck still enforces ownership at pick time via getMaxQty().
       if (cfRecs.length > 0) {
         const existingIds = new Set(pool.map(c => c.id));
         const cfCards = resolveCFToDbCards(cfRecs, existingIds);
         for (const { card } of cfCards) {
           if (!seenNames.has(card.name)) {
-            if (useCollection && !ownedNames.has(card.name)) continue;
             if (!validForPool(card)) continue;
             seenNames.add(card.name);
             pool.push(card);
@@ -1074,7 +1108,6 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
         `).all(...highIncCards.map(s => s.cardName)) as DbCard[];
         for (const card of injected) {
           if (!seenNames.has(card.name)) {
-            if (useCollection && !ownedNames.has(card.name)) continue;
             // Community stats include LANDS (Command Tower, basics, fetches)
             // at high inclusion — they belong to the land pipeline, not here.
             if (!validForPool(card)) continue;
@@ -2320,6 +2353,10 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
     }
   }
 
+  const craftList = computeCraftList(
+    poolResult.pool, picked, pickedNames, ownedQty, reasoning, commanderCard?.oracle_text || undefined, useCollection
+  );
+
   return {
     cards: picked,
     themes,
@@ -2337,7 +2374,80 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
         }))
       : undefined,
     hints: { parsed: hints, boostedCards },
+    craftList,
   };
+}
+
+const CRAFT_LIST_CAP = 15;
+
+/**
+ * "Needed to craft" list: the top-scored candidates from this build's own
+ * scored pool that did NOT make the deck and are NOT owned — a wildcard/buy
+ * list. Cheap by design: no DB or network calls, just re-groups the pool the
+ * build already scored once. Ownership is enforced at pick time via
+ * getMaxQty(), so the pool itself (unlike before) already contains unowned
+ * candidates scored right alongside owned ones — see the poolQuery note in
+ * buildScoredCandidatePool.
+ */
+export function computeCraftList(
+  scoredPool: Array<{ card: DbCard; score: number }>,
+  picked: Array<{ card: DbCard; quantity: number; board: 'main' | 'sideboard' }>,
+  pickedNames: Set<string>,
+  ownedQty: Map<string, number>,
+  reasoning: Array<{ cardName: string; role: string; reason: string }>,
+  commanderOracle: string | undefined,
+  useCollection: boolean,
+): CraftListEntry[] | undefined {
+  if (!useCollection) return undefined;
+
+  const primaryRole = (card: DbCard): string =>
+    getPrimaryCategory(
+      classifyCard(card.name, card.oracle_text || '', card.type_line || '', card.cmc || 0, commanderOracle)
+    );
+
+  // A card can be picked, later displaced by a repair swap, and still carry
+  // its original reasoning entry (reasoning is append-only) — reuse that
+  // text verbatim when a craft candidate matches one.
+  const reasonByName = new Map<string, string>();
+  for (const r of reasoning) reasonByName.set(r.cardName, r.reason);
+
+  // Lowest-scored currently-owned pick per role: what an unowned candidate
+  // in that role would bump if it were craftable.
+  const scoreByName = new Map(scoredPool.map((p) => [p.card.name, p.score]));
+  const lowestOwnedByRole = new Map<string, { name: string; score: number }>();
+  for (const p of picked) {
+    if (p.board !== 'main' || (p.card.type_line || '').includes('Land')) continue;
+    const role = primaryRole(p.card);
+    const score = scoreByName.get(p.card.name) ?? 0;
+    const current = lowestOwnedByRole.get(role);
+    if (!current || score < current.score) lowestOwnedByRole.set(role, { name: p.card.name, score });
+  }
+
+  const entries: CraftListEntry[] = [];
+  for (const { card, score } of scoredPool) {
+    if (entries.length >= CRAFT_LIST_CAP) break;
+    if (pickedNames.has(card.name)) continue;
+    if ((card.type_line || '').includes('Land')) continue;
+    if ((ownedQty.get(card.name) || 0) > 0) continue;
+
+    const role = primaryRole(card);
+    let legalities: Record<string, string> = {};
+    try { legalities = card.legalities ? JSON.parse(card.legalities) : {}; } catch { /* leave empty */ }
+    const onArena = legalities.brawl === 'legal' || legalities.standardbrawl === 'legal';
+    const wouldReplace = lowestOwnedByRole.get(role)?.name;
+
+    entries.push({
+      name: card.name,
+      role,
+      rarity: card.rarity || 'unknown',
+      priceUsd: card.price_usd ? parseFloat(card.price_usd) : null,
+      onArena,
+      score,
+      wouldReplace,
+      reason: reasonByName.get(card.name) ?? `Highest-scored unowned ${role.replace(/_/g, ' ')} candidate`,
+    });
+  }
+  return entries;
 }
 
 // ── Enhanced suggestions using synergy detection ────────────────────────────
