@@ -1,0 +1,53 @@
+DB: C:\Users\QuLeR\MTG-deck-builder\data\mtg-deck-builder.db
+Backup: C:\Users\QuLeR\AppData\Local\Temp\mtg-cards-backup-1789832349547.db
+[1/4] Fetching bulk-data manifest...
+      Bulk updated_at=2026-09-19T09:01:55.817+00:00 size=25MB
+[2/4] Downloading oracle-cards bulk...
+      Parsed 38906 oracle cards
+[3/4] Building oracle_id index of existing cards...
+      35646 existing oracle ids
+[4/4] Upserting...
+Done. updated=33602 inserted=1970
+Sample new cards:
+  + Munitions Enthusiast [trk]
+  + Wasp, Shrinking Savior [msc]
+  + Lattice Library [soc]
+  + Vault Guardsman [msc]
+  + Theorist's Proxy [fra]
+  + Rhovanion Rampager [hob]
+  + Theorix Annex [fra]
+  + Surprise! [fj25]
+  + Oracle's Restoration [sos]
+  + Stand Up for Yourself [sos]
+  + Whiplash, Vengeful Engineer [msh]
+  + Saurian Explorer [trk]
+  + Bogwater Lumaret [sos]
+  + Belladonna Took [hob]
+  + Yargle, Goliath of Otaria [fra]
+  + Foe-liage [tmc]
+  + Doorman [msc]
+  + Illegitimate Business [tmt]
+  + Autumn Willow, Harmony [mbc]
+  + Flashback [sos]
+  + April O'Neil, Human Element [tmc]
+  + Uldaros Theorix [fra]
+  + Adventurous Eater // Have a Bite [sos]
+  + Rock Soldiers [tmt]
+  + Thunderbolts [fmsc]
+  + Gollum, Silent Slinker // Meager Meal [hob]
+  + Kiora of Fire and Ashes [fra]
+  + Pest Rescuer [soc]
+  + Nori, Teller of Tales [hob]
+  + Ashaya's Enduring Bond [mbc]
+  + Decoy Ploy [msh]
+  + Maelstrom Artisan // Rocket Volley [sos]
+  + Mindful Biomancer [sos]
+  + Heroic Sacrifice [msc]
+  + Hulkling, Burgeoning Bruiser [msh]
+  + Courier of Comestibles [tmt]
+  + Director Nick Fury [msc]
+  + Flora Colossus [msc]
+  + Spider-Woman, Secret Agent [msh]
+  + Bejeweled Warg [hob]
+Top sets by recency: [{"set_code":"unk","set_name":"Unknown Event","n":500},{"set_code":"cmm","set_name":"Commander Masters","n":493},{"set_code":"clb","set_name":"Commander Legends: Battle for Baldur's Gate","n":473},{"set_code":"fdn","set_name":"Foundations","n":439},{"set_code":"msc","set_name":"Marvel Super Heroes Commander","n":387}]
+EXIT 0

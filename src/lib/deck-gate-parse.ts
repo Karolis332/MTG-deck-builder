@@ -149,7 +149,7 @@ export function parseDecklist(text: string): DeckLine[] {
 // ── Card resolution ──────────────────────────────────────────────────────────
 
 const CARD_COLS =
-  'id, name, mana_cost, cmc, type_line, oracle_text, colors, color_identity, legalities, layout, set_code, produced_mana, rarity, edhrec_rank';
+  'id, name, mana_cost, cmc, type_line, oracle_text, colors, color_identity, legalities, layout, set_code, produced_mana, rarity, edhrec_rank, power, toughness';
 
 /** Never resolve to art-series/token/emblem rows, nor the ~2,240 corrupt doubled-name rows. */
 const CLEAN_ROWS =
