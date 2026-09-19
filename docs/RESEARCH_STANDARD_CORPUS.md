@@ -251,3 +251,12 @@ weighted signal only from mtgo (n=750, 100% W/L coverage, but that's a 19-day, 7
 directly recommends the corpus's largest archetype (14.2% of everything scraped), which is
 99.9% built around a card banned as of this research date. Any consumer of this corpus for
 live recommendations must apply rules 15-16 before rules 6-14.
+
+### Backfill: mtgtop8 event_date (2026-09-19)
+
+`scripts/backfill_mtgtop8_dates.py` dates `community_decks` rows scraped before the
+`scrape_mtgtop8.py` date-parser fix (2026-09-11). On the VPS: `cd /opt/grimoire-scrapers &&
+venv/bin/python -u scripts/backfill_mtgtop8_dates.py --db data/mtg-deck-builder.db 2>&1 |
+tee backfill-mtgtop8-$(date +%F).log` (run under `nohup` for the full ~230-event standard
+backlog; `--dry-run` first to preview, `--formats standard` / `commander` to scope one at a
+time). Idempotent — re-running only touches events still `event_date IS NULL`.
