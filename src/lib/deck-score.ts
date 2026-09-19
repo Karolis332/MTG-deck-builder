@@ -12,7 +12,8 @@ import { analyzeCommander, mergeProfiles } from './commander-synergy';
 import type { Archetype } from './deck-templates';
 import {
   weightsFor, normsFor, qualityCap, SCORE_VERSION,
-  HARD_CAP_INVALID, type ScoreFormat, type ComponentKey,
+  QUALITY_CAP_INTERCEPT, QUALITY_CAP_SLOPE,
+  HARD_CAP_INVALID, type ScoreFormat, type ComponentKey, type ScoreTuning,
 } from './deck-score-norms';
 import { computeStructure, type ScoreGate } from './deck-score-gates';
 import { computeMana, computeCurve, type DeckEntry } from './deck-score-mana';
@@ -23,7 +24,7 @@ import { computeMeta, type ScoreCorpusSnapshot, type CorpusCard } from './deck-s
 import { deriveCardFeature, type CardFeature } from './deck-score-features';
 import { round1 } from './deck-score-math';
 
-export type { ScoreFormat, ComponentKey } from './deck-score-norms';
+export type { ScoreFormat, ComponentKey, ScoreTuning } from './deck-score-norms';
 export type { ScoreCorpusSnapshot, CorpusCard } from './deck-score-meta';
 export { SCORE_VERSION };
 
@@ -76,10 +77,12 @@ function inferArchetype(commanders: CardFeature[]): Archetype {
 }
 
 /** Pure, deterministic, input-order invariant. No HTTP/DB/LLM/clock access. */
-export function scoreDeck(input: Readonly<DeckScoreInput>): DeckScoreResult {
+export function scoreDeck(input: Readonly<DeckScoreInput>, tuning?: Readonly<ScoreTuning>): DeckScoreResult {
   const format = input.format;
-  const weights = weightsFor(format);
-  const norms = normsFor(format);
+  const weights = tuning?.weights ? { ...weightsFor(format), ...tuning.weights } : weightsFor(format);
+  const norms = tuning?.norms ? { ...normsFor(format), ...tuning.norms } : normsFor(format);
+  const capIntercept = tuning?.capIntercept ?? QUALITY_CAP_INTERCEPT;
+  const capSlope = tuning?.capSlope ?? QUALITY_CAP_SLOPE;
 
   const structure = computeStructure({
     format,
@@ -132,7 +135,7 @@ export function scoreDeck(input: Readonly<DeckScoreInput>): DeckScoreResult {
   };
 
   const base = COMPONENT_ORDER.reduce((sum, key) => sum + (weights[key] / 100) * scores[key], 0);
-  const qCap = qualityCap(scores.mana, scores.win, scores.synergy);
+  const qCap = qualityCap(scores.mana, scores.win, scores.synergy, capIntercept, capSlope);
 
   const unsupportedShare = F > 0
     ? mainEntries.filter((e) => !e.feature.isLand && e.feature.s < 1).reduce((s, e) => s + e.quantity, 0) / F
@@ -149,7 +152,7 @@ export function scoreDeck(input: Readonly<DeckScoreInput>): DeckScoreResult {
       key: 'quality_cap', kind: 'quality',
       status: qCap < base ? 'warn' : 'pass',
       cap: qCap < 100 ? round1(qCap) : null,
-      reason: `quality cap 20+.8*min(M,W,S)=${qCap.toFixed(1)} from mana=${scores.mana}, win=${scores.win}, synergy=${scores.synergy}.`,
+      reason: `quality cap ${capIntercept}+${capSlope}*min(M,W,S)=${qCap.toFixed(1)} from mana=${scores.mana}, win=${scores.win}, synergy=${scores.synergy}.`,
     },
     {
       key: 'coverage', kind: 'quality',

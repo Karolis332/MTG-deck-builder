@@ -159,17 +159,21 @@ function combatsBy(tStar: number): number {
  *   cap  6 (the brief's constant): Meren 41, piles 8/50 >= 25, pile max 37
  *   cap 19 (r follows the schedule): Meren 24, piles 2/50 >= 25, pile max 30
  *
+ * It now lives in `FormatNorms.poolSizeCap` so the calibration grid can sweep
+ * it per format (docs/DECK_SCORE_SPEC.md section 7).
+ *
  * -- because at 19 the pile max (30) clears Meren (24) and the inversion gets
  * worse, while at 6 it clears only the two weakest anchors. 6 ships; the
  * constant is here so the calibration pass can move it in one line.
  */
-const POOL_SIZE_CAP = 6;
-function requiredCopies(members: readonly Source[], target: number, combats: number): number | null {
+function requiredCopies(
+  members: readonly Source[], target: number, combats: number, poolSizeCap: number,
+): number | null {
   const byCost = [...members].sort((a, b) => a.cmc - b.cmc || b.output - a.output);
   const units: Source[] = [];
   for (const m of byCost) for (let i = 0; i < m.quantity; i++) units.push(m);
   if (units.length === 0) return null;
-  const cap = Math.min(POOL_SIZE_CAP, units.length);
+  const cap = Math.min(poolSizeCap, units.length);
   // `r` appears on both sides ("the r cheapest"), so iterate to a fixed point,
   // then CLAMP at 6. Clamping is the point: beyond six copies the pool stops
   // being an access proxy. Failing instead of clamping killed every Commander
@@ -243,11 +247,12 @@ function findComboRecipes(all: Array<{ feature: CardFeature; quantity: number; g
 function scheduleRecipe(
   id: string, label: (r: number, t: number) => string, format: ScoreFormat, N: number,
   sources: Source[], verified: Member[], extraPools: RecipePool[], rampBonus: number, target: number,
+  poolSizeCap: number,
 ): Recipe | null {
   if (sources.length === 0 || verified.length === 0) return null;
   const tStar = closingTurn(format, N, sources, rampBonus, target);
   if (tStar === null) return null;
-  const r = requiredCopies(sources, target, combatsBy(tStar));
+  const r = requiredCopies(sources, target, combatsBy(tStar), poolSizeCap);
   if (r === null) return null;
   const pools: RecipePool[] = [{ members: verified, r }, ...extraPools];
   return {
@@ -258,7 +263,7 @@ function scheduleRecipe(
 
 function pressureRecipes(
   format: ScoreFormat, N: number, nonLand: DeckEntry[], commanders: CardFeature[],
-  rampBonus: number, target: number,
+  rampBonus: number, target: number, poolSizeCap: number,
 ): Recipe[] {
   const bodies: Source[] = [
     ...commanders.filter(isBody).map((f) => sourceOf(f, 1, (f.power || 0) * f.s, true)),
@@ -270,7 +275,7 @@ function pressureRecipes(
     ...nonLand.filter((e) => isBody(e.feature) && e.feature.s >= 1).map((e) => toMember(e.feature, e.quantity)),
   ];
   const pressure = scheduleRecipe('combat_wide', (r) => `Creature pressure (${r} threats)`,
-    format, N, bodies, verifiedBodies, [], rampBonus, target);
+    format, N, bodies, verifiedBodies, [], rampBonus, target, poolSizeCap);
   if (pressure) out.push(pressure);
 
   // (4) Conversion is its OWN variant, never a replacement: a deck with both a
@@ -292,7 +297,7 @@ function pressureRecipes(
       ...producers.filter((e) => e.feature.s >= 1).map((e) => toMember(e.feature, e.quantity)),
     ];
     const tokens = scheduleRecipe('tokens', (r) => `Token/Food conversion (${r} bodies)`,
-      format, N, converted, verifiedConverted, [{ members: converters, r: 1 }], rampBonus, target);
+      format, N, converted, verifiedConverted, [{ members: converters, r: 1 }], rampBonus, target, poolSizeCap);
     if (tokens) out.push(tokens);
   }
   return out;
@@ -305,7 +310,7 @@ function pressureRecipes(
  */
 function drainRecipe(
   format: ScoreFormat, N: number, nonLand: DeckEntry[], commanders: CardFeature[],
-  rampBonus: number, lifePerOpponent: number,
+  rampBonus: number, lifePerOpponent: number, poolSizeCap: number,
 ): Recipe | null {
   const isFodder = (f: CardFeature) => f.isTokenProducer || (f.c <= 2 && /\bCreature\b/.test(f.card.type_line || ''));
   const outlets = pickMembers(nonLand, commanders, (f) => f.isSacOutlet);
@@ -333,7 +338,7 @@ function drainRecipe(
   }));
   const tStar = closingTurn(format, N, sources, rampBonus, lifePerOpponent);
   if (tStar === null) return null;
-  const rPayoff = requiredCopies(sources, lifePerOpponent, combatsBy(tStar));
+  const rPayoff = requiredCopies(sources, lifePerOpponent, combatsBy(tStar), poolSizeCap);
   if (rPayoff === null) return null;
 
   const fodderQty = fodder.reduce((s, m) => s + m.quantity, 0);
@@ -513,8 +518,8 @@ export function computeWin(
   const all = [...nonLand, ...commanders.map((f) => ({ feature: f, quantity: 1, guaranteed: true }))];
   const recipes: Recipe[] = [...findComboRecipes(all)];
 
-  recipes.push(...pressureRecipes(format, N, nonLand, commanders, rampBonus, combatTarget));
-  const drain = drainRecipe(format, N, nonLand, commanders, rampBonus, shape.lifePerOpponent);
+  recipes.push(...pressureRecipes(format, N, nonLand, commanders, rampBonus, combatTarget, norms.poolSizeCap));
+  const drain = drainRecipe(format, N, nonLand, commanders, rampBonus, shape.lifePerOpponent, norms.poolSizeCap);
   if (drain) recipes.push(drain);
   const voltron = voltronRecipe(format, N, nonLand, commanders, rampBonus, opponents);
   if (voltron) recipes.push(voltron);

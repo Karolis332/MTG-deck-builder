@@ -1,0 +1,56 @@
+{
+  "commander": {
+    "weights": {
+      "mana": 20,
+      "curve": 10,
+      "interaction": 16,
+      "advantage": 14,
+      "win": 20,
+      "synergy": 17,
+      "meta": 3,
+      "structure": 0
+    },
+    "countMultiplier": 1,
+    "pWin": 0.15000000000000002,
+    "h": 5,
+    "tFast": 7,
+    "poolSizeCap": 10,
+    "capIntercept": 20
+  },
+  "brawl": {
+    "weights": {
+      "mana": 20,
+      "curve": 15,
+      "interaction": 20,
+      "advantage": 12,
+      "win": 16,
+      "synergy": 14,
+      "meta": 3,
+      "structure": 0
+    },
+    "countMultiplier": 0.85,
+    "pWin": 0.25,
+    "h": 4,
+    "tFast": 6,
+    "poolSizeCap": 4,
+    "capIntercept": 15
+  },
+  "standard": {
+    "weights": {
+      "mana": 20,
+      "curve": 16,
+      "interaction": 20,
+      "advantage": 10,
+      "win": 14,
+      "synergy": 12,
+      "meta": 8,
+      "structure": 0
+    },
+    "countMultiplier": 1,
+    "pWin": 0.6,
+    "h": 2,
+    "tFast": 6,
+    "poolSizeCap": 4,
+    "capIntercept": 20
+  }
+}

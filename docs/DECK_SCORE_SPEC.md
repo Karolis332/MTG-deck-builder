@@ -220,3 +220,56 @@ No scoring implementation or calibration run is part of this document. Fixture l
 3. Should Standard v1 explicitly mean main-deck/BO1 quality, as specified here, or include a separately calibrated BO3 sideboard-readiness component?
 4. Who owns review/versioning of exceptional effect and closing recipes, particularly Arena rebalances and uncatalogued combos?
 5. Should the UI suppress a provisional total when mechanical/legality coverage is incomplete, while retaining all component diagnostics and caps?
+
+## 7. v1.1 norm revision (2026-09-19)
+
+Every number here is MEASURED with `scripts/deck-score-calibrate.ts probe` on the frozen 2026-09-19 card data, not predicted. Dataset: the 16 §5 fixtures, all 30 cEDH Top-16 lists, 213 dated Standard positives and 93 negatives from `data/export-standard.db`, and 200 constrained random piles.
+
+**Why v1.0 misses every band.** In all four cohorts the total equals the quality cap and the cap equals `20+.8·W`: Standard positives median W 16.2 → total 33; cEDH median W 42.5 → 54; piles median W 0 → 20. W is the only lever and it decays too early. `Tfast=4` charges a deck half its score for closing two turns "late", but the measured `t*` of a Standard Challenge winner is 6 and of a curated Commander deck is 11. The exponential shape is right; its centre was wrong.
+
+### 7.1 Revised constants
+
+| profile | Tfast | h | pWin | poolSizeCap | cap intercept |
+|---|---|---|---|---|---|
+| commander | 4 → **7** | 4 → **6** | .25 → **.20** | 6 → **4** | 20 (unchanged) |
+| brawl | 4 → **6** | 3 → **4** | .35 → **.30** | 6 → **4** | 20 (unchanged) |
+| standard | 4 → **6** | 2 (unchanged) | .70 → **.60** | 6 → **4** | 20 (unchanged) |
+
+`poolSizeCap` moves into `FormatNorms`; 4 beats 6 on anchors (6/16 vs 4/16 measured) because a 6-copy pool prices access for more threats than the schedule actually needs.
+
+Reachability, measured at these constants:
+
+| class | t* | W | total | band | verdict |
+|---|---:|---:|---:|---|---|
+| Standard winner (univerce) | 6 | 85.0 | 70 | 85-100 | ceiling 70 |
+| cEDH Top-16 (ballooncon6) | 7 | 67.8 | 69 | 85-100 | coverage cap 69 |
+| Commander powerhouse (Meren) | 11 | 57.1 | 66 | 65-80 | IN |
+| precon (Witherbloom) | 12 | 47.7 | 58 | 40-55 | 3 high |
+| Brawl (Azula / Kuja) | 7 / 9 | 83.3 / 53.6 | 83 / 63 | 75-90 / 60-80 | IN / IN |
+| random pile (median / max) | – / 12 | 0 / 46 | 20 / 63 | < 25 | 34 of 200 ≥ 25 |
+
+Anchors in band go 4/16 → 7/16 from these five numbers alone.
+
+**Two bands are unreachable for reasons W cannot fix.** Forcing W to 100 and re-scoring:
+- Standard positives have median M 84.8 and S 65.0, so the cap is `20+.8·65 = 72` and the weighted base tops out at `55.9+.14·100 = 69.9`. The 85-100 band needs the synergy and interaction catalogues (median I 44.8), not `Tfast`.
+- 26 of 30 cEDH lists trip the §2 coverage cap (>20% of nonland copies unsupported) and are pinned at 69.
+
+Until the effect catalogue covers those cards, §5's three 85-100 rows cannot be met by any norm set. Either the catalogue is extended (v1.2) or the bands move; calibration cannot decide it.
+
+### 7.2 Finish predicate: keep whole-table (3×40)
+
+Measured on the same schedule at both targets: at 3×40, 19 of 200 random piles reach `t* ≤ 12`; at 1×40, **200 of 200** do, at median `t*` 8 — faster than the curated Cabbage list (9) and the precon (8). The whole-table predicate IS the pile guard, and "first opponent eliminated" would hand every pile a fast line and destroy the §4 "<25" target. Keep 3×40. The defensible v1.2 variant is a GATED single-opponent target: interaction density separates cleanly (pile E median 2.8, p99 6.7, max 8.2 against cEDH 9.8 and the reviewed Cabbage cEDH list 11.2), so allowing 1×40 only when `E ≥ 9` admits combo/control lists and excludes all 200 piles.
+
+### 7.3 Pressure dominance
+
+Pressure (plus its token/Food variant) wins `max u` on 9 of 16 fixtures; drain, control and Voltron win on none. They are not losing a comparison, they are disabled by thresholds: drain needs 40 damage at 1-2 triggers per turn (>20 turns), and control's `E ≥ E*` gate with `E* = 12` clears on 1 of 30 cEDH lists (measured E: piles 2.8, precon 2.2, Meren 7.8, cEDH 9.8). Acceptable for v1.1 — a deck that also has a pressure line loses nothing — but the minimal correction is to gate the control exemption at `0.75·E*` (= 9), the same threshold 7.2 derives, which no pile reaches. That is a recipe change, not a norm, so it is out of v1.1.
+
+Structural limit worth recording: at `t* ≥ 11` the goldfish schedule cannot separate a random pile from a fair Commander deck, because it measures power density and a 99-card random legal pile has more of it (median creature power 90) than the curated Meren list (105) or the precon (80). Every setting of (Tfast, h, pWin, poolSizeCap) leaves the same 34 of 200 piles above 25; only the pile maximum moves (41 → 63). The ≥95% target therefore needs a recipe or coverage change, not a constant.
+
+### 7.4 The §4 grid, re-centred
+
+Search per profile independently (a Standard tuning cannot move a Commander deck): weights ±4 of the §1 table in 1-point steps summing to 100 with meta fixed at 3/3/8 and structure 0, by greedy 1-point transfer rather than enumeration; one shared count multiplier {.85, 1, 1.15}; `pWin` ±.05; `h` ±1; `Tfast` ±1; `poolSizeCap` {4, 6, 10, 19}; quality-cap intercept {15, 20, 25} with slope `(100−intercept)/100`. Loss is §4 verbatim. Standard splits chronologically by `event_date` (oldest 60% train); Commander holds out 10 of 30 cEDH lists and scores the full 200 piles only at validation.
+
+Acceptance to declare "calibrated": anchors ≥ 12/16; ≥95% of piles < 25; Standard positive median ≥ 85 and negative median ≤ 60 on the validation split; cEDH median ≥ 85; precon in band. On the evidence above the three cohort medians cannot pass until the catalogue work in 7.1 lands, so a v1.1 run reports them as measured, not as achieved.
+
+**Frozen outcome (v1.1.0).** The run is `verify-2026-09-19/deck-score/calibration.md`; 187,011 candidates in 119 s. Held-out losses, section-7 centre → searched winner: commander 212.4 → **163.7**, brawl 501.8 → **0.2**, standard 1775.8 → 1856.2. Two settings were rejected, both recorded in the run: the Standard winner (it loses to the centre on the chronological split, so Standard freezes at the centre) and a per-format quality-cap intercept (§2 defines it globally, and Brawl's preference for 15 rests on n=5). Intercept 25 is dropped from the §4 set entirely — the intercept is a floor, so 25 puts every random pile at exactly 25 and makes the "<25" release target unreachable by construction. Frozen: commander `pWin .15, h 5, Tfast 7, poolSizeCap 10`; brawl `count ×.85, pWin .25, h 4, Tfast 6, poolSizeCap 4`; standard `pWin .60, h 2, Tfast 6, poolSizeCap 4`; weights unchanged in all three; cap `20+.8·min(M,W,S)`. Measured effect: anchors 4/16 → **7/16**, piles ≥25 8/50 → **4/50**, and the control-inevitability family fires for the first time (Kuja, Vivi) because the Brawl count multiplier lowers `E*` to 10.2.

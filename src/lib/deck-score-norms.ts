@@ -1,11 +1,18 @@
 /**
- * Deck Score v1 — frozen constants (weights, format norms, archetype
+ * Deck Score v1.1 — frozen constants (weights, format norms, archetype
  * multipliers, hard caps). docs/DECK_SCORE_SPEC.md §1 "Weights and format
  * norms" + §2 "Gated composition".
  *
  * Every number here is copied straight from the spec tables. Changing a
  * number without bumping SCORE_VERSION breaks the "freeze inference rules
  * and norms by score version" contract (§1).
+ *
+ * v1.1.0 (2026-09-19): the W closing-turn constants and the per-format count
+ * targets are the frozen output of the §4 grid search re-centred on §7 --
+ * see verify-2026-09-19/deck-score/calibration.md for the run, the held-out
+ * losses and the two settings that were REJECTED (the Standard searched
+ * winner, which lost to the §7 centre on the chronological validation split,
+ * and a per-format quality-cap intercept, which §2 defines globally).
  */
 
 export type ScoreFormat = 'commander' | 'brawl' | 'competitivebrawl' | 'standardbrawl' | 'standard';
@@ -83,6 +90,8 @@ export interface FormatNorms {
   /** Fast closing turn; delay half-life (turns). */
   fastClosingTurn: number;
   delayHalfLifeTurns: number;
+  /** Largest `r` a win pool may demand (deck-score-win `requiredCopies`). */
+  poolSizeCap: number;
   /** Complete-line access target. */
   winAccessTarget: number;
   /** Supported plan fraction target. */
@@ -108,8 +117,8 @@ const NORMS: Record<ScoreProfile, FormatNorms> = {
     answerAxisTarget: 2,
     axisWeights: { creature: 0.25, permanent: 0.25, stack: 0.25, graveyard_or_protection: 0.25 },
     drawHorizonTurns: 6, drawUnitTarget: 10, velocityAccessTarget: 0.90,
-    fastClosingTurn: 4, delayHalfLifeTurns: 4,
-    winAccessTarget: 0.25, planFractionTarget: 0.55,
+    fastClosingTurn: 7, delayHalfLifeTurns: 5, poolSizeCap: 10,
+    winAccessTarget: 0.15, planFractionTarget: 0.55,
     enablerSupplyDefault: 8,
     corpusMinLists: 30, corpusShrinkagePrior: 200,
     corpusAgeWindowDays: 180, corpusDecayHalfLifeDays: 90,
@@ -118,12 +127,12 @@ const NORMS: Record<ScoreProfile, FormatNorms> = {
   brawl: {
     landDeadband: 2, landFalloffWidth: 8,
     pColor: 0.90, pEarly: 0.90,
-    interactionUnitsTarget: 12, cheapAnswerTarget: 7,
+    interactionUnitsTarget: 10.2, cheapAnswerTarget: 5.95,
     answerAxisTarget: 2,
     axisWeights: { creature: 0.40, permanent: 0.20, stack: 0.25, graveyard_or_protection: 0.15 },
-    drawHorizonTurns: 5, drawUnitTarget: 8, velocityAccessTarget: 0.90,
-    fastClosingTurn: 4, delayHalfLifeTurns: 3,
-    winAccessTarget: 0.35, planFractionTarget: 0.50,
+    drawHorizonTurns: 5, drawUnitTarget: 6.8, velocityAccessTarget: 0.90,
+    fastClosingTurn: 6, delayHalfLifeTurns: 4, poolSizeCap: 4,
+    winAccessTarget: 0.25, planFractionTarget: 0.50,
     enablerSupplyDefault: 8,
     corpusMinLists: 30, corpusShrinkagePrior: 200,
     corpusAgeWindowDays: 90, corpusDecayHalfLifeDays: 30,
@@ -136,8 +145,8 @@ const NORMS: Record<ScoreProfile, FormatNorms> = {
     answerAxisTarget: 1,
     axisWeights: { creature: 0.50, permanent: 0.20, stack: 0.20, graveyard_or_protection: 0.10 },
     drawHorizonTurns: 4, drawUnitTarget: 4, velocityAccessTarget: 0.90,
-    fastClosingTurn: 4, delayHalfLifeTurns: 2,
-    winAccessTarget: 0.70, planFractionTarget: 0.50,
+    fastClosingTurn: 6, delayHalfLifeTurns: 2, poolSizeCap: 4,
+    winAccessTarget: 0.60, planFractionTarget: 0.50,
     enablerSupplyDefault: 8,
     corpusMinLists: 30, corpusShrinkagePrior: 200,
     corpusAgeWindowDays: 30, corpusDecayHalfLifeDays: 14,
@@ -165,8 +174,13 @@ export function archetypeMultiplier(archetype: string): ArchetypeMultiplier {
 
 /** `qualityCap=20+.8*min(M,W,S)` — an excellent curve/quota tally cannot hide
  * absent mana or a missing win plan. */
-export function qualityCap(mana: number, win: number, synergy: number): number {
-  return 20 + 0.8 * Math.min(mana, win, synergy);
+export const QUALITY_CAP_INTERCEPT = 20;
+export const QUALITY_CAP_SLOPE = 0.8;
+export function qualityCap(
+  mana: number, win: number, synergy: number,
+  intercept: number = QUALITY_CAP_INTERCEPT, slope: number = QUALITY_CAP_SLOPE,
+): number {
+  return intercept + slope * Math.min(mana, win, synergy);
 }
 
 /** §2 hard caps, most restrictive wins (smallest number). */
@@ -174,4 +188,16 @@ export const HARD_CAP_INVALID = 0;
 export const HARD_CAP_STRUCTURE = 19;
 export const HARD_CAP_UNRESOLVED = 39;
 
-export const SCORE_VERSION = '1.0.0';
+export const SCORE_VERSION = '1.1.0';
+
+/**
+ * Calibration surface. `scoreDeck(input, tuning)` overlays these on the frozen
+ * tables for ONE call; nothing is mutated, so a grid search can run thousands
+ * of candidates in-process and the default path stays the frozen constants.
+ */
+export interface ScoreTuning {
+  weights?: Partial<Record<ComponentKey, number>>;
+  norms?: Partial<FormatNorms>;
+  capIntercept?: number;
+  capSlope?: number;
+}

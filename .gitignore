@@ -120,3 +120,4 @@ decks/standard/orzhov-repartee-data.json
 # packaged Electron builds (next / release channels)
 /dist-electron-next/
 /dist-electron-release/
+verify-*/deck-score/dataset-*.json
