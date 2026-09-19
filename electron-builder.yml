@@ -113,7 +113,7 @@ mac:
   entitlementsInherit: build/entitlements.mac.plist
 
 dmg:
-  artifactName: "${productName}-${version}-mac-${arch}.${ext}"
+  artifactName: "${name}-${version}-mac-${arch}.${ext}"
   contents:
     - x: 130
       y: 220
@@ -131,7 +131,7 @@ win:
     - target: zip
       arch: [x64]
   icon: build/icon.ico
-  artifactName: "${productName}-${version}-win-${arch}.${ext}"
+  artifactName: "${name}-${version}-win-${arch}.${ext}"
 
 nsis:
   oneClick: false
@@ -145,7 +145,7 @@ nsis:
   license: LICENSE
 
 portable:
-  artifactName: "${productName}-${version}-portable.${ext}"
+  artifactName: "${name}-${version}-portable.${ext}"
 
 linux:
   target:
@@ -157,7 +157,7 @@ linux:
       arch: [x64]
   category: Game
   icon: build/icons
-  artifactName: "${productName}-${version}-linux-${arch}.${ext}"
+  artifactName: "${name}-${version}-linux-${arch}.${ext}"
 
 appImage:
   license: LICENSE
