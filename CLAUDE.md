@@ -321,10 +321,11 @@ last one stopped. Append one entry per completed unit of work (shipped code, a d
 artifact, a resolved incident); commit it with the work it describes.
 
 ```
-### 2026-09-11 — Match recording made always-on (tray + login item)
-- **Did:** `electron/background-recording.ts` (new: tray, close-to-tray, "Start with Windows" login item registered with `--hidden`), `isWatcherRunning()` exported from `ipc-handlers.ts`, wiring in `main.ts` (window `close` hides; `window-all-closed` no longer quits unless the tray Quit set the flag; `--hidden` launch starts the Next server but skips splash+window). Typecheck + `build:electron` clean, 750/750 tests.
-- **Why:** operator asked "record all of my games". Diagnosis: nothing was broken — the Arena log watcher lives in the Electron main process and `%APPDATA%/The Black Grimoire/crash.log` plus the whole userData dir stop at 2026-09-08, exactly matching the newest `arena_parsed_matches` row (2026-09-08 08:23). No app running = no recording. Arena detailed logging is on (435 `GreToClientEvent` blocks in today's Player.log).
-- **Open:** Sep 8-10 matches are unrecoverable — `Player.log` and `Player-prev.log` both only span 2026-09-11. Dev shell trap: `startNextServer()` is skipped when `!app.isPackaged`, so `process.env.PORT` is never synced and `postToApi` falls back to 3000 (another project's dev server) — launch dev Electron with `PORT=3010`. `better-sqlite3` in the repo is built for NODE_MODULE_VERSION 127, Electron wants 130, so the grpId resolver's DB connect fails in a dev run (caught; card names degrade to `Card #id`). Nothing committed.
+### YYYY-MM-DD — <topic>
+- **Did:** what shipped, with commit SHAs / file paths / IDs
+- **Why:** the decision and the reason, especially where the obvious choice was rejected
+- **Open:** what is unfinished, expiring, or deferred — with the trigger
+```
 
 ### 2026-09-12 — Kuja Brawl deck from the Arena collection; Arena commander ranker
 - **Did:** `decks/brawl/kuja-genome-sorcerer.txt` + `-arena.txt` (100-card Arena Brawl, Kuja Genome Sorcerer, 35 lands, avg MV 2.51, 9 Wizards, play guide inline). Built by two Workflow runs (26 agents: 3 designs → 9 judges → synthesis → 3 adversarial verifiers, then repair → judge → final → verify). New tooling: `verify-2026-09-12/check-deck.cjs` (validates a list against the live DB: owned-on-Arena, `legalities.brawl`, colour identity, singleton, size, curve, back-face name collisions) and `scripts/arena-commander-rank.ts` (`--ci UBR --archetype spellslinger`: corpus support × collection coverage × archetype fit × EDHPL power → `verify-2026-09-12/grixis-rank.md`, model-built lists in `verify-2026-09-12/built/`).
