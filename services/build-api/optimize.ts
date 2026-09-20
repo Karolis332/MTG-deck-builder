@@ -50,6 +50,7 @@ import {
   type DeckTextLine,
 } from './gate-wiring';
 import { satisfiesCondition, deriveCondition } from '../../src/lib/deck-gate-plan';
+import { scoreDeckSafely } from '../../src/lib/deck-score-input';
 import {
   makeCardResolver,
   resolveDeckLines,
@@ -588,6 +589,7 @@ export function optimizeDeck(parsed: Record<string, unknown>): Record<string, un
       after: afterLines(shape, swaps, cuts).map((l) => l.name),
     }),
     analysis: d.core?.payload ?? null,
+    deckScore: scoreDeckSafely({ format: shape.format, main: shape.main, commander: shape.commanders, sideboard: shape.sideboard }),
     bracket: bracketFor(shape),
     main: shape.main.map((r) => toCardOut(r.card, r.quantity, byName.get(r.card.name)?.primary ?? 'utility')),
     sideboard: shape.sideboard.map((r) => ({ name: r.card.name, quantity: r.quantity })),

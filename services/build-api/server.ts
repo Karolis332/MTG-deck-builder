@@ -18,6 +18,7 @@ import { handleMetaRoute } from './meta-routes';
 import { handleIngestRoute, startIngestSchedule } from './ingest-routes';
 import { makeCardResolver, resolveDeckLines } from './resolve';
 import { deckText, gateDeck, readLocks, readOwnedCardNames } from './gate-wiring';
+import { scoreDeckSafely } from '../../src/lib/deck-score-input';
 
 const PORT = Number(process.env.PORT || 8100);
 const API_KEY = process.env.BUILD_API_KEY || '';
@@ -95,7 +96,7 @@ function json(res: http.ServerResponse, code: number, obj: unknown): void {
   res.end(JSON.stringify(obj));
 }
 
-async function handleBuild(body: string, res: http.ServerResponse): Promise<void> {
+export async function handleBuild(body: string, res: http.ServerResponse): Promise<void> {
   let parsed: Record<string, unknown>;
   try {
     parsed = JSON.parse(body || '{}');
@@ -188,11 +189,22 @@ async function handleBuild(body: string, res: http.ServerResponse): Promise<void
         }
       : undefined;
 
+    const findCard = makeCardResolver();
+    const commanderRows = [findCard(commanderName), partnerName ? findCard(partnerName) : undefined].filter(
+      (c): c is DbCard => Boolean(c)
+    );
+    const deckScore = scoreDeckSafely({
+      format,
+      main: result.cards.filter((e) => e.board === 'main'),
+      commander: commanderRows,
+    });
+
     json(res, 200, {
       commander: commanderName,
       partner: partnerName || null,
       format,
       gate,
+      deckScore,
       strategy: result.strategy,
       themes: result.themes,
       tribalType: result.tribalType || null,
@@ -241,7 +253,7 @@ async function handleBuild(body: string, res: http.ServerResponse): Promise<void
  * No build, just scoring: ISS + explained synergy pairs, win plan, curve score,
  * mulligan criteria, Game Changer count, category breakdown. Fast (<1s).
  */
-function handleAnalyze(body: string, res: http.ServerResponse): void {
+export function handleAnalyze(body: string, res: http.ServerResponse): void {
   let parsed: Record<string, unknown>;
   try {
     parsed = JSON.parse(body || '{}');
@@ -251,11 +263,18 @@ function handleAnalyze(body: string, res: http.ServerResponse): void {
 
   const commanderName = typeof parsed.commanderName === 'string' ? parsed.commanderName.trim() : '';
   const cardsIn = Array.isArray(parsed.cards) ? (parsed.cards as OwnedCard[]).slice(0, 600) : [];
+  // Optional — Deck Doctor is a single-commander pass regardless of format, but
+  // the Deck Score profile (commander/brawl/...) changes what's legal and what
+  // "on curve" means, so a Brawl caller must be able to say so.
+  const format = typeof parsed.format === 'string' ? parsed.format : 'commander';
   if (!commanderName || commanderName.length > 200) {
     return json(res, 400, { error: 'commanderName is required' });
   }
   if (cardsIn.length < 10) {
     return json(res, 400, { error: 'cards[] required (at least 10 entries)' });
+  }
+  if (!VALID_FORMATS.includes(format as (typeof VALID_FORMATS)[number])) {
+    return json(res, 400, { error: `format must be one of: ${VALID_FORMATS.join(', ')}` });
   }
 
   try {
@@ -271,7 +290,14 @@ function handleAnalyze(body: string, res: http.ServerResponse): void {
     }
 
     const { payload } = analyzeResolved(commanderRow, resolved);
-    json(res, 200, { ...payload, unresolved: unresolved.slice(0, 30) });
+    const deckScore = scoreDeckSafely({
+      format,
+      main: resolved.filter((r) => r.board === 'main'),
+      commander: [commanderRow],
+      sideboard: resolved.filter((r) => r.board === 'sideboard'),
+      unresolved: unresolved.slice(0, 30).map((name) => ({ name, quantity: 1, board: 'main' })),
+    });
+    json(res, 200, { ...payload, unresolved: unresolved.slice(0, 30), deckScore });
   } catch (error) {
     // Engine/DB exceptions carry SQL text and filesystem paths — log, never return them.
     console.error(`[build-api] analyze error for "${commanderName}":`, error instanceof Error ? error.stack || error.message : error);
@@ -431,7 +457,10 @@ const server = http.createServer((req, res) => {
   json(res, 404, { error: 'not found' });
 });
 
-server.listen(PORT, '127.0.0.1', () => {
+// ponytail: env-flag guard, not require.main === module — this file's request
+// handlers are imported directly by tests (vitest sets VITEST), and require.main
+// doesn't survive ESM/CJS interop the same way tsx and vitest load the file.
+if (!process.env.VITEST) server.listen(PORT, '127.0.0.1', () => {
   console.log(`[build-api] listening on 127.0.0.1:${PORT} (db dir: ${process.env.MTG_DB_DIR || 'auto'})`);
   // No-op unless INGEST_SCHEDULE_HOURS is set.
   startIngestSchedule();

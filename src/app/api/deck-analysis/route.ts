@@ -18,6 +18,8 @@ import { computeSynergyGraph, type CardLike } from '@/lib/synergy-graph';
 import { deriveWinPlan, type WinPlan } from '@/lib/win-conditions';
 import { computeCurveScore } from '@/lib/curve-score';
 import { deriveKeepCriteria } from '@/lib/mulligan-advisor';
+import { scoreDeckSafely, type DeckScorePayload } from '@/lib/deck-score-input';
+import type { DbCard } from '@/lib/types';
 
 interface DeckCard {
   name: string;
@@ -251,6 +253,21 @@ export async function GET(request: NextRequest) {
     ? { ...winPlan, cardRoles: Object.fromEntries(winPlan.cardRoles) }
     : undefined;
 
+  // Deck Score v1.2 (additive, docs/DECK_SCORE_SPEC.md) — `deck.cards` rows
+  // already carry every `cards` column (getDeckWithCards SELECTs `c.*`), so
+  // they satisfy DbCard structurally despite the narrower DeckCard type here.
+  const deckScore: DeckScorePayload | null = scoreDeckSafely({
+    format: deck.format,
+    main: deck.cards
+      .filter((c) => c.board === 'main')
+      .map((c) => ({ card: c as unknown as DbCard, quantity: c.quantity || 1 })),
+    commander: deck.cards.filter((c) => c.board === 'commander').map((c) => c as unknown as DbCard),
+    sideboard: deck.cards
+      .filter((c) => c.board === 'sideboard')
+      .map((c) => ({ card: c as unknown as DbCard, quantity: c.quantity || 1 })),
+    companion: deck.cards.find((c) => c.board === 'companion') as unknown as DbCard | undefined,
+  });
+
   const analysis: DeckAnalysis & {
     topSuggestions: typeof topSuggestions;
     iss?: number;
@@ -258,6 +275,7 @@ export async function GET(request: NextRequest) {
     curveScore?: typeof curveScore;
     winPlan?: typeof winPlanOut;
     mulliganCriteria?: string[];
+    deckScore: DeckScorePayload | null;
   } = {
     deckId: deck.id,
     deckName: deck.name,
@@ -276,6 +294,7 @@ export async function GET(request: NextRequest) {
     curveScore,
     winPlan: winPlanOut,
     mulliganCriteria,
+    deckScore,
   };
 
   return NextResponse.json(analysis);

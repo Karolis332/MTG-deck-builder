@@ -1,4 +1,5 @@
 import type { DbCard } from '@/lib/types';
+import type { DeckScorePayload } from '@/lib/deck-score-input';
 
 /** Card row shape used across the live rail — a DeckData entry. */
 export interface LiveRailCard extends DbCard {
@@ -73,6 +74,7 @@ export interface AnalysisResponse {
   curveScore?: CurveScoreResult;
   winPlan?: WinPlanOut;
   mulliganCriteria?: string[];
+  deckScore?: DeckScorePayload | null;
 }
 
 export interface LiveRailProps {
