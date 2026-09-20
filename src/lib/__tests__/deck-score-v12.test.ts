@@ -86,11 +86,16 @@ function burn(count: number, tag = 'Bolt'): Array<{ card: DbCard; quantity: numb
 /**
  * Synthetic cards are not in the typed catalogue, so `covered` is false and
  * v1.2's evidence gate would give every one of them zero on-plan credit.
- * These suites test the PLAN layer; mark them covered and let
+ * These suites test the PLAN layer; mark them covered and supported, and let
  * `entriesOfUncovered` exercise the evidence gate on its own.
+ *
+ * `s` is forced for the same reason `covered` is. A few fixtures borrow a
+ * REAL card name (`THORACLE`) with hand-written oracle text, which is a
+ * catalogue version mismatch — correctly unsupported once the printing no
+ * longer hashes to the reviewed text, and irrelevant to a plan-layer test.
  */
 function entriesOf(cards: Array<{ card: DbCard; quantity: number }>): DeckEntry[] {
-  return cards.map((c) => ({ feature: { ...deriveCardFeature(c.card), covered: true }, quantity: c.quantity }));
+  return cards.map((c) => ({ feature: { ...deriveCardFeature(c.card), covered: true, s: 1 }, quantity: c.quantity }));
 }
 
 function entriesOfUncovered(cards: Array<{ card: DbCard; quantity: number }>): DeckEntry[] {
@@ -327,6 +332,18 @@ describe('§8 deployment deadline — castable by the plan turn, or no credit', 
   it('scales the budget with the deck\'s own land density', () => {
     expect(deploymentBudget(60, 24)(3)).toBeCloseTo(3, 6);
     expect(deploymentBudget(60, 10)(3)).toBeCloseTo(10 / 60 * 10, 6);
+  });
+
+  it('refuses the modal Standard five-drop at its own deadline (known level defect)', () => {
+    // Pinned so the cost of the current formula is visible, not so it is
+    // endorsed. 24 lands in 60 gives 4.80 at turn 5, so `c <= 4.80` refuses
+    // every five-drop even though those decks demonstrably cast them, and 45
+    // of the 69 Standard tournament lists scoring S = 0 have a fully supplied
+    // recipe once the deadline stops truncating. The hypergeometric-median
+    // replacement was measured and reverted: it moved the held-out Standard
+    // median not at all (43) and cost 11 piles. See `deploymentBudget`.
+    expect(deploymentBudget(60, 24)(5)).toBeLessThan(5);
+    expect(deploymentBudget(60, 24)(5)).toBeGreaterThan(4);
   });
 
   it('withdraws pressure credit from an identical list that cannot cast it', () => {
@@ -821,5 +838,123 @@ describe('§8 Commander bands — measured, not scaled by N/60', () => {
     expect(reqStd).toBeCloseTo(answers.min, 6);
     // The old behaviour scaled the 60-card floor to 4*99/60 = 6.6 at 99 cards.
     expect(reqCmd).toBeLessThan(answers.min * (COMMANDER_BAND_REFERENCE / 60));
+  });
+});
+
+// ── §4 quota gaming: breaking a producer->consumer link must not raise S ───
+//
+// The §4 adversarial operation keeps lands, deck size, the MV histogram and
+// colour identity fixed and only blanks a payoff/converter's rules text. Two
+// measured paths let that RAISE S, and both are asserted closed here.
+
+/** The §4 operation: same name, type, MV and colour; no rules text. */
+function blankText(c: { card: DbCard; quantity: number }): { card: DbCard; quantity: number } {
+  return { ...c, card: { ...c.card, oracle_text: null, keywords: null } };
+}
+
+function sacOutlets(count: number): Array<{ card: DbCard; quantity: number }> {
+  return Array.from({ length: count }, (_, i) => ({
+    card: mkCard({
+      name: `Altar ${i}`, type_line: 'Artifact', oracle_text: 'Sacrifice a creature: Add {C}.',
+      mana_cost: '{1}', cmc: 1, power: null, toughness: null,
+    }),
+    quantity: 1,
+  }));
+}
+
+/** A TYPED dependent payoff: `requirementsOf` reads `creature deaths` off it. */
+function drainPayoffs(count: number): Array<{ card: DbCard; quantity: number }> {
+  return Array.from({ length: count }, (_, i) => ({
+    card: mkCard({
+      name: `Artist ${i}`, type_line: 'Creature — Vampire',
+      oracle_text: 'Whenever another creature dies, each opponent loses 1 life and you gain 1 life.',
+      mana_cost: '{1}{B}', cmc: 2, power: '1', toughness: '1',
+    }),
+    quantity: 1,
+  }));
+}
+
+/** Fills the aristocrats payoff role WITHOUT carrying a typed requirement. */
+function diesTriggers(count: number): Array<{ card: DbCard; quantity: number }> {
+  return Array.from({ length: count }, (_, i) => ({
+    card: mkCard({
+      name: `Mourner ${i}`, type_line: 'Creature — Zombie',
+      oracle_text: 'Whenever another creature you control dies, put a +1/+1 counter on this creature.',
+      mana_cost: '{1}{B}', cmc: 2, power: '1', toughness: '1',
+    }),
+    quantity: 1,
+  }));
+}
+
+describe('§4 quota gaming — S is non-increasing when a producer->consumer link breaks', () => {
+  const aristocrats = [...sacOutlets(6), ...drainPayoffs(8), ...creatures(20, 1, 1, 'Chump'), ...cantrips(4)];
+
+  it('does not raise S when every typed payoff is blanked (whole-deck property)', () => {
+    const before = computeSynergy(null, 99, entriesOf(aristocrats));
+    const after = computeSynergy(null, 99, entriesOf(aristocrats.map((c) =>
+      (deriveCardFeature(c.card).isDrainPayoff ? blankText(c) : c))));
+    expect(before.score).toBeGreaterThan(0);
+    expect(after.score).toBeLessThanOrEqual(before.score);
+  });
+
+  it('does not let a payoff role keep R when its typed copies become vanilla', () => {
+    // The payoff ROLE stays supplied by dies-triggers, so the plan is still
+    // read as aristocrats. The blanked drain payoffs become vanilla bodies:
+    // §4 requires that migration not pay, and the catalogue version-mismatch
+    // guard is what stops a reviewed card's corpse from earning raw-material
+    // credit (measured on `meren-powerhouse`: R .938 -> 1.000 before the fix).
+    const deck = [...sacOutlets(6), ...drainPayoffs(4), ...diesTriggers(6), ...creatures(20, 1, 1, 'Chump')];
+    const before = computeSynergy(null, 99, entriesOf(deck));
+    const after = computeSynergy(null, 99, entriesOf(deck.map((c) =>
+      (deriveCardFeature(c.card).isDrainPayoff ? blankText(c) : c))));
+    expect(before.plan.recipe.key).toBe('aristocrats');
+    expect(after.R).toBeLessThanOrEqual(before.R);
+    expect(after.score).toBeLessThanOrEqual(before.score);
+  });
+
+  it('gives B < 1 when a dependent payoff has no producers to consume', () => {
+    // A life-triggered drain carries the same `creature deaths` requirement
+    // but is NOT itself a dies-trigger, so a deck with no sacrifice outlet
+    // supplies nothing for it and fulfilment falls below 1.
+    const lifeDrains = Array.from({ length: 6 }, (_, i) => ({
+      card: mkCard({
+        name: `Sanguine ${i}`, type_line: 'Enchantment',
+        oracle_text: 'Whenever you gain life, each opponent loses 1 life.',
+        mana_cost: '{2}{B}', cmc: 3, power: null, toughness: null,
+      }),
+      quantity: 1,
+    }));
+    const starved = entriesOf([...lifeDrains, ...creatures(20, 3, 3, 'Beater'), ...removal(6, 2), ...cantrips(6)]);
+    const out = computeSynergy(null, 60, starved);
+    expect(out.B).toBeLessThan(1);
+  });
+
+  it('cannot raise S by re-selecting a looser recipe after copies are removed', () => {
+    // Removing on-plan copies may change which recipe fits best; §8's "Q
+    // counts copies toward ONE compatible plan" means the new reading must
+    // never score above the old one.
+    const full = entriesOf(aristocrats);
+    const before = computeSynergy(null, 99, full);
+    for (const drop of ['Altar', 'Artist', 'Chump']) {
+      const thinned = entriesOf(aristocrats.filter((c) => !c.card.name.startsWith(drop)));
+      const after = computeSynergy(null, 99, thinned);
+      expect(after.score).toBeLessThanOrEqual(before.score);
+    }
+  });
+
+  it('withdraws coverage from a reviewed card whose printing no longer matches', () => {
+    // `catalogFacts` states the contract: "a mismatch sets textMatches=false
+    // and the caller must NOT treat the card as covered". The vanilla branch
+    // used to hand such a card full support because it had no rules text.
+    const reviewed = ['Blood Artist', 'Sol Ring', 'Zulaport Cutthroat']
+      .find((n) => catalogFacts(n, null) !== null);
+    expect(reviewed).toBeDefined();
+    const stale = deriveCardFeature(mkCard({
+      name: reviewed!, type_line: 'Creature — Vampire', oracle_text: null,
+      mana_cost: '{1}{B}', cmc: 2, power: '1', toughness: '1',
+    }));
+    expect(catalogFacts(reviewed!, null)!.textMatches).toBe(false);
+    expect(stale.covered).toBe(false);
+    expect(stale.s).toBe(0.5);
   });
 });

@@ -172,14 +172,27 @@ export function deriveCardFeature(card: DbCard): CardFeature {
   const facts = catalogFacts(card.name, oracle);
   const typed = facts !== null && facts.textMatches && facts.knowledge === 'known';
 
+  // `catalogFacts`: "a mismatch sets textMatches=false and the caller must NOT
+  // treat the card as covered". A name the catalogue has REVIEWED whose live
+  // printing no longer hashes to the reviewed oracle is a version mismatch
+  // (§8 "corpus refreshes cannot silently edit effects"), not a vanilla card:
+  // its reviewed effects are known to exist and are unverifiable on this
+  // printing. Without this guard the `!hasNonTrivialText` branch below handed
+  // full support AND full typed coverage to a reviewed card whose rules text
+  // had been removed — §4's quota-gaming operation, where deleting a payoff's
+  // text turned it into credited raw material. Measured blast radius on real
+  // data: 0 of 26,191 nonland copies across fixtures, cEDH, Standard and piles.
+  const staleEntry = facts !== null && !facts.textMatches;
+
   // Otherwise a card with no meaningful text (vanilla creature/land/mana
   // rock) makes no claim scoring needs to verify — §1 "no requirements means 1."
-  const supported = typed || (!powerUnknown && (isLand || matchedCatalogue || !hasNonTrivialText(oracle)));
+  const supported = typed || isLand ||
+    (!staleEntry && !powerUnknown && (matchedCatalogue || !hasNonTrivialText(oracle)));
   const s = supported ? 1 : 0.5;
   const e = s * Math.min(1, 2 / Math.max(1, c));
   // Lands and textless vanillas make no mechanical claim at all, so they are
   // covered by definition; everything else needs a typed entry (§8).
-  const covered = typed || isLand || (!powerUnknown && !hasNonTrivialText(oracle));
+  const covered = typed || isLand || (!staleEntry && !powerUnknown && !hasNonTrivialText(oracle));
 
   const answerAxes: AnswerAxis[] = [];
   const isWipe = !isLand && isBoardWipe(card.name, oracle);
@@ -197,7 +210,7 @@ export function deriveCardFeature(card: DbCard): CardFeature {
 
   return {
     card, isLand, categories, s,
-    supported: typed || (!powerUnknown && (isLand || matchedCatalogue)),
+    supported: typed || isLand || (!staleEntry && !powerUnknown && matchedCatalogue),
     covered, c, e, power,
     isRamp: categories.includes('ramp') || (cat?.families.has('mana') ?? false),
     isDraw: categories.includes('draw') || produces('cards'),

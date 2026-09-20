@@ -203,7 +203,27 @@ function worst(): void {
   for (const [k, v] of [...tally].sort((a, b) => b[1] - a[1])) console.log(`  empty ${k}: ${v}`);
 }
 
+/** `--gaming <fixture>`: §4's quota-gaming operation (blank every payoff /
+ * converter's rules text, keep name, type, MV and colour) side by side with
+ * the untouched list, so Q / R / B / recipe can be compared term by term. */
+function gaming(name: string): void {
+  const data = loadDataset(200);
+  const f = data.fixtures.find((x) => x.name === name);
+  if (!f) { console.log(`no fixture ${name}`); return; }
+  const feats = f.input.main.map((rc) => deriveCardFeature(rc.card));
+  const isConverter = (x: typeof feats[number]) => x.isAnthemOrOverrun || x.isFoodPayoff || x.isDrainPayoff;
+  const broken = {
+    ...f.input,
+    main: f.input.main.map((rc, i) => (isConverter(feats[i]) ? { ...rc, card: { ...rc.card, oracle_text: '', keywords: null } } : rc)),
+  };
+  console.log(`broken copies: ${f.input.main.filter((_, i) => isConverter(feats[i])).map((rc) => rc.card.name).join(', ')}`);
+  console.log(diag(`${name} BEFORE`, f.input));
+  console.log(diag(`${name} AFTER`, broken));
+}
+
 function main(): void {
+  const gi = process.argv.indexOf('--gaming');
+  if (gi > 0) { gaming(process.argv[gi + 1]); return; }
   const wi = process.argv.indexOf('--win');
   if (wi > 0) { win(process.argv[wi + 1]); return; }
   const pi = process.argv.indexOf('--plans');

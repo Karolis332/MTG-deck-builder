@@ -432,6 +432,8 @@ function probe(tuningByProfile: Partial<Record<ScoreProfile, Candidate>>): void 
   const cmd = tuningByProfile.commander ? toTuning('commander', tuningByProfile.commander) : undefined;
   const piles = data.piles.map((input) => scoreDeck(input, cmd).score).sort((a, b) => a - b);
   console.log(`\npiles n=${piles.length} min=${piles[0]} median=${median(piles)} max=${piles[piles.length - 1]} over25=${piles.filter((v) => v >= 25).length}`);
+  console.log('\nQuota gaming (lands, size and MV histogram preserved; only producer->consumer links broken):');
+  console.log(quotaGamingCheck(data));
 }
 
 // ── Main ──────────────────────────────────────────────────────────────────

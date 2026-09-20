@@ -122,6 +122,18 @@ export function computeSynergy(
     den += entry.quantity;
     if (fulfilment === 0) deadPayoffs += entry.quantity;
   }
+  // KNOWN GAP (§4 quota gaming, `precon-witherbloom`). B is a MEAN over the
+  // payoff copies that carry a typed requirement, so deleting the copies whose
+  // requirement is least fulfilled RAISES it: blanking Dina / Epicure / Gyome
+  // takes den 3 -> 0 and B .808 -> 1, which lifts S 39.7 -> 44.0 even though Q
+  // falls. No functional over that set is monotone under member deletion, and
+  // anchoring the denominator to the plan's payoff ROLE does not help: only 3
+  // of the 9 copies filling `lifegain.payoff` carry a requirement at all.
+  // Defaulting to 0 whenever the selected plan converts a produced resource
+  // was tried and rejected — it also zeroes a legitimate life-gain engine
+  // whose payoffs are life-triggered (no typed requirement exists for "life"),
+  // and a pure dies-trigger aristocrats deck. The gap is bounded by how many
+  // converter mechanics `requirementsOf` can type, not by B's formula.
   const B = den > 0 ? num / den : 1;
 
   const coherence = clip((Q - Q_BASELINE) / (Q_SATURATION - Q_BASELINE));

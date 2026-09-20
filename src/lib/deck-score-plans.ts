@@ -323,9 +323,25 @@ export function recipeFor(key: PlanKey): PlanRecipe {
  * credits no copy it could not cast by then, so a 20-land pile stops earning
  * pressure credit for its three-drops.
  *
+ * MEASURED, NOT ADOPTED (round 4). Using the mean as a hard cutoff is wrong
+ * twice over: a mean is not an achievable land count, and `c <= mean` then
+ * truncates it, discarding the upper half of the draw. It lands on the modal
+ * Standard deck — 24 lands in 60 gives 4.80 at turn 5, so every five-drop was
+ * refused, and 45 of the 69 Standard tournament lists scoring S = 0 have a
+ * fully supplied recipe once the deadline stops truncating (coverage explains
+ * only 19). Replacing it with the hypergeometric MEDIAN (largest `c <= t`
+ * with `H(N, lands, 7+t, c) >= .5`) was implemented and measured: held-out
+ * Standard median stayed at 43 and S = 0 fell only 39 -> 36 of 120, because
+ * the lists that need it want six- and seven-drops at deadline 7, not the one
+ * extra mana the median buys; meanwhile piles under 25 fell 176 -> 165 / 200
+ * and pile S max rose 29.2 -> 33.3. Reverted: it regresses the pile target
+ * and moves no anchor. Take it together with the pile-separation work.
+ *
  * // ponytail: lands only. Rocks/dorks would raise the budget by a fraction
  * // of a mana and need their own availability turn; add them when the
- * // catalogue types production timing (§8 mana family).
+ * // catalogue types production timing (§8 mana family). Measured median
+ * // cheap-accel count on the affected Standard lists is 0, so they would not
+ * // have rescued that cohort either.
  */
 export function deploymentBudget(N: number, lands: number): (turn: number) => number {
   const landShare = N > 0 ? clip(lands / N) : 0;
