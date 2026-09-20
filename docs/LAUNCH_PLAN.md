@@ -92,3 +92,12 @@ Weeks 3-6 P3 Microsoft Store                     (parallel)
 Weeks 6-10 P4 payments + Pro gating              ← first revenue
 Later     P5 macOS/Linux on demand signal
 ```
+
+## Backlog (operator, 2026-09-20)
+
+Unscheduled product items. Each line: what exists today → the gap → the first slice.
+
+- **Automatic Arena collection import after account sync.** Today: the desktop reads the collection block from `Player.log` only when the Arena client starts; the operator's collection was refreshed from an Untapped CSV (`verify-2026-09-19/import-arena-csv.ts`); the app's own `import-csv` route matches by `LIKE`, overwrites instead of summing printings and never clears stale rows (defect). Gap: nothing pushes the collection to the web account. First slice: desktop watcher imports the collection block whenever Arena writes one (dedupe by snapshot hash), fix `import-csv`, then extend the match-sync contract with `POST /api/collection` (same token) so the web builder's "Build from my collection" needs no paste.
+- **Game tracking.** Today: desktop parses matches from `Player.log` (`arena_parsed_matches`), live overlay tracks zones/life/draw odds, results sync to `/dashboard/matches` (beta.2). Gap: results only — no per-game timeline, mulligan/keep, cards seen, opponent archetype, or win rate by deck and matchup on the web. First slice: sync the game-event summary the engine already computes (mulligan decision, turn count, opponent commander/archetype guess, first/draw) and show win rate by deck and by matchup on the web dashboard.
+- **MTG Arena crafting suggestions.** Today: `craftList` on collection builds (web table, rarity, paper price, would-replace). Gap: no wildcard economics — owned wildcards are in `Player.log` inventory, not read; suggestions are per build, not across the user's decks; ranking is by builder score, not by marginal deck-score gain. First slice: read wildcard counts from `Player.log`, rank crafts by "decks improved per wildcard" across saved decks, mark Arena-only legality; switch the ranking to Δdeck-score once the score is calibrated (`docs/DECK_SCORE_SPEC.md`).
+- **Phone application.** Today: the web is mobile-responsive (2026-09-18 pass); match recording is desktop-only. Recommendation: PWA first (manifest, service worker, offline deck view, install prompt, push for sync events) — days, one codebase; native (Expo) only if a store presence or Arena-companion features demand it. Arena runs on phones, but its logs are not readable there, so match recording stays desktop.
