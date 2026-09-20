@@ -490,6 +490,26 @@ function evaluateRecipe(
   return best;
 }
 
+/**
+ * §8 closing/tutor family: the assembled line S needs to read. Only emitted
+ * for the two families that ASSEMBLE a fixed set (compact combo, alternate
+ * win) — the output-schedule families already have a generic plan that
+ * describes them, and their "critical names" are a whole creature suite, not
+ * a combo.
+ */
+export interface ClosingLine {
+  id: string;
+  label: string;
+  /** The pieces that must all be present and castable. */
+  pieces: string[];
+  /** Distinct pieces the line needs (sum of pool r after commander credit). */
+  required: number;
+  /** Total mana the whole line costs, including its `extraCost` slack. */
+  cost: number;
+  /** Turn the line goes off, from W's own evaluation. */
+  tStar: number;
+}
+
 /** Raw component totals the control family needs (see deck-score-interaction). */
 export interface WinTotals {
   E: number; Estar: number;
@@ -497,6 +517,11 @@ export interface WinTotals {
 }
 
 /** `u1`, `u2`, `protect` -> Win access & redundancy (W), §1. */
+export interface WinOutput extends ComponentOutput {
+  /** Non-null only when the best line is compact combo or alternate win. */
+  closing: ClosingLine | null;
+}
+
 export function computeWin(
   format: ScoreFormat,
   norms: FormatNorms,
@@ -505,7 +530,7 @@ export function computeWin(
   mainEntries: DeckEntry[],
   commanders: CardFeature[],
   totals: WinTotals,
-): ComponentOutput {
+): WinOutput {
   const nonLand = mainEntries.filter((e) => !e.feature.isLand);
   // §1 W: "A finish predicate must defeat EVERY remaining opponent: 3x40 combat
   // damage or 21 commander damage to EACH opponent in Commander, 25/20 life in
@@ -529,7 +554,7 @@ export function computeWin(
   if (control) recipes.push(control.recipe);
 
   if (recipes.length === 0) {
-    return { score: 0, reason: 'no supported closing line: no catalogued win recipe present; t* never reached within 12 turns.' };
+    return { score: 0, closing: null, reason: 'no supported closing line: no catalogued win recipe present; t* never reached within 12 turns.' };
   }
 
   const evals = recipes.slice(0, 8) // §1 W: "Retain at most 8 recipes"
@@ -553,8 +578,26 @@ export function computeWin(
     ? `independent backup ${secondDisjoint.recipe.label} u=${secondDisjoint.u.toFixed(2)}`
     : `shared bottleneck, protection access ${Math.round(protect * 100)}%`;
   const missing = u1 === 0 ? 'no line reaches its access target in 12 turns' : 'none';
+  // The plan S reads is the best line the deck ASSEMBLES, not the best line
+  // full stop: a cEDH list whose Thoracle package is out-scored for W by its
+  // own "control inevitability" reading is still built around the combo, and
+  // without this it had no recipe to be read by and fell back to a generic
+  // one. `evals` is already sorted by u, so the first hit is the best of them.
+  // W's own score still comes from `best` - this only exposes the line.
+  const assembling = evals.find((e) => e.recipe.id.startsWith('combo:') || e.recipe.id === 'alt_win');
+  const closing: ClosingLine | null = assembling
+    ? {
+      id: assembling.recipe.id,
+      label: assembling.recipe.label,
+      pieces: assembling.recipe.pools.flatMap((pool) => pool.members.map((m) => m.name)),
+      required: assembling.recipe.pools.reduce((sum, pool) => sum + poolR(pool), 0),
+      cost: assembling.recipe.pools.reduce((sum, pool) => sum + poolCost(pool), 0) + assembling.recipe.extraCost,
+      tStar: assembling.atTurn || MAX_TURN,
+    }
+    : null;
   return {
     score,
+    closing,
     reason: `${best.recipe.label}: closes T${best.atTurn || MAX_TURN}, access ${Math.round(best.access * 100)}% (u=${u1.toFixed(2)}); ${backup}; ${missing}.`,
   };
 }

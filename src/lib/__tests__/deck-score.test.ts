@@ -286,6 +286,13 @@ describe('scoreDeck — component reasons', () => {
   });
 });
 
+// v1.2 evidence policy: Q only credits typed-covered copies. These synthetic
+// cards are not in the catalogue, so mark them covered to exercise the plan
+// layer rather than the evidence gate (the gate has its own test).
+function coveredFeature(card: Parameters<typeof deriveCardFeature>[0]) {
+  return { ...deriveCardFeature(card), covered: true };
+}
+
 // ── Synergy quota-gaming ────────────────────────────────────────────────
 
 describe('computeSynergy - broken producer/consumer links', () => {
@@ -302,13 +309,13 @@ describe('computeSynergy - broken producer/consumer links', () => {
     const value = (i: number) => mkCard({ name: `Value ${i}`, type_line: 'Sorcery', oracle_text: 'Draw a card.', mana_cost: '{G}', cmc: 1, power: null, toughness: null });
 
     const spine = [
-      ...Array.from({ length: 10 }, (_, i) => ({ feature: deriveCardFeature(threat(i)), quantity: 1 })),
-      ...Array.from({ length: 6 }, (_, i) => ({ feature: deriveCardFeature(answer(i)), quantity: 1 })),
-      ...Array.from({ length: 4 }, (_, i) => ({ feature: deriveCardFeature(value(i)), quantity: 1 })),
-      { feature: deriveCardFeature(payoff), quantity: 4 },
+      ...Array.from({ length: 10 }, (_, i) => ({ feature: coveredFeature(threat(i)), quantity: 1 })),
+      ...Array.from({ length: 6 }, (_, i) => ({ feature: coveredFeature(answer(i)), quantity: 1 })),
+      ...Array.from({ length: 4 }, (_, i) => ({ feature: coveredFeature(value(i)), quantity: 1 })),
+      { feature: coveredFeature(payoff), quantity: 4 },
     ];
-    const linked: DeckEntry[] = [...spine, ...Array.from({ length: 4 }, (_, i) => ({ feature: deriveCardFeature(producer(i)), quantity: 1 }))];
-    const broken: DeckEntry[] = [...spine, ...Array.from({ length: 4 }, (_, i) => ({ feature: deriveCardFeature(filler(i)), quantity: 1 }))];
+    const linked: DeckEntry[] = [...spine, ...Array.from({ length: 4 }, (_, i) => ({ feature: coveredFeature(producer(i)), quantity: 1 }))];
+    const broken: DeckEntry[] = [...spine, ...Array.from({ length: 4 }, (_, i) => ({ feature: coveredFeature(filler(i)), quantity: 1 }))];
 
     const linkedScore = computeSynergy(null, 60, linked);
     const brokenScore = computeSynergy(null, 60, broken);

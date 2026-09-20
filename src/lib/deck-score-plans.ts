@@ -22,8 +22,9 @@
 import { clip } from './deck-score-math';
 import type { CardFeature } from './deck-score-features';
 import type { DeckEntry } from './deck-score-mana';
+import type { ClosingLine } from './deck-score-win';
 
-export type PlanKey = 'aggro' | 'midrange' | 'control' | 'aristocrats' | 'lifegain' | 'spells';
+export type PlanKey = 'aggro' | 'midrange' | 'control' | 'aristocrats' | 'lifegain' | 'spells' | 'combo';
 
 export interface PlanRole {
   key: string;
@@ -33,14 +34,25 @@ export interface PlanRole {
    * plan mass it serves (§8 "earns no more Q mass than the directly
    * supported plan cards it serves"). */
   infrastructure?: boolean;
-  /** Required / upper supply band in copies at the reference library size. */
+  /** Required / upper supply band in copies at PLAN_BAND_REFERENCE (60). */
   min: number;
   max: number;
+  /** Commander-shaped band, measured at COMMANDER_BAND_REFERENCE (99) on real
+   * Commander lists. Absent = no cohort of >= 30 lists, so §1's replacement
+   * rule keeps the 60-card band scaled by N/60. */
+  cmd?: { min: number; max: number };
   /** §8 deployment deadline, in turns: a copy only fills this role when the
    * DECK'S OWN mana can cast it by that turn. Enforced in `evaluatePlan`,
    * where the land count is known — not inside `fills`, which stays a pure
    * per-card predicate so the band script can measure raw supply. */
   deadline?: number;
+  /** A raw-material role: its USEFUL supply is capped at `ratio` copies per
+   * copy of the roles that consume it (§8 "bounded infrastructure serving
+   * those roles"). Fifteen cheap bodies beside ONE sacrifice outlet are not
+   * fifteen units of aristocrats plan - that is exactly how random piles
+   * filled the role. Unlike `infrastructure` this also bounds R, because §8
+   * defines R over VERIFIED USEFUL supply, not raw category totals. */
+  servedBy?: { roles: string[]; ratio: number };
   /** Verified useful supply test — timing and actual targets, never a raw
    * category total. Callers only pass features with `s === 1`. */
   fills: (f: CardFeature) => boolean;
@@ -191,8 +203,31 @@ function spellCloser(f: CardFeature): boolean {
 // A corpus refresh cannot move these numbers: that needs a score-version bump
 // (§8 "seed 60-card bands from reviewed same-format lists, then freeze them").
 
-/** Library size the bands below were measured at. */
+/** Library size the 60-card bands below were measured at. */
 export const PLAN_BAND_REFERENCE = 60;
+
+/**
+ * Library size the `cmd` bands were measured at:
+ * `verify-2026-09-20/commander-bands.txt`, 2,777 real Commander lists from the
+ * VPS corpus (`verify-2026-09-20/commander-sample.csv`), bucketed by the same
+ * `shapeCohort` rule as Standard. §8 froze the generic bands on 60-card lists
+ * and `evaluatePlan` scaled them by N/60; a 99-card deck carries ~1.7x the
+ * nonland copies, so the scaling cancelled and the floors landed inside a
+ * random pile's own spread. Measured directly instead. A role with no `cmd`
+ * entry had a cohort below §1's "at least 30 distinct legal, reviewed lists"
+ * (aggro: 11), so its prior stands.
+ *
+ * Measured WITHOUT the typed-coverage gate, exactly as the 60-card bands
+ * were, so both sets describe the predicates rather than the catalogue's
+ * current size. Both must be re-measured when typed coverage stabilises.
+ */
+export const COMMANDER_BAND_REFERENCE = 99;
+
+/** §1 profile table: Commander/Brawl run 99-card libraries. A 59-card Standard
+ * Brawl deck reads the 60-card bands, which is the shape it actually has. */
+function usesCommanderBands(N: number): boolean {
+  return N >= 90;
+}
 
 export const PLAN_RECIPES: readonly PlanRecipe[] = [
   {
@@ -212,9 +247,9 @@ export const PLAN_RECIPES: readonly PlanRecipe[] = [
     key: 'midrange',
     label: 'timely threats, relevant answers, sustained value',
     roles: [
-      { key: 'threats', essential: true, min: 4, max: 10, deadline: 5, fills: threat(3, 5, 0.75) },
-      { key: 'answers', essential: true, min: 4, max: 15, deadline: 5, fills: answer(5) },
-      { key: 'value', essential: true, min: 4, max: 21, deadline: 5, fills: velocity(5) },
+      { key: 'threats', essential: true, min: 4, max: 10, cmd: { min: 7, max: 16 }, deadline: 5, fills: threat(3, 5, 0.75) },
+      { key: 'answers', essential: true, min: 4, max: 15, cmd: { min: 4, max: 11 }, deadline: 5, fills: answer(5) },
+      { key: 'value', essential: true, min: 4, max: 21, cmd: { min: 7, max: 16 }, deadline: 5, fills: velocity(5) },
       { key: 'fixing', essential: false, infrastructure: true, min: 0, max: 8, fills: infrastructure },
     ],
   },
@@ -222,9 +257,9 @@ export const PLAN_RECIPES: readonly PlanRecipe[] = [
     key: 'control',
     label: 'early stabilisation, advantage engine, accessible finisher',
     roles: [
-      { key: 'stabilisation', essential: true, min: 7, max: 12, deadline: 3, fills: answer(3) },
-      { key: 'engine', essential: true, min: 12, max: 19, deadline: 4, fills: (f) => f.isDrawEngine || velocity(4)(f) },
-      { key: 'finisher', essential: true, min: 3, max: 8, deadline: 7, fills: threat(4, 7, 0.6) },
+      { key: 'stabilisation', essential: true, min: 7, max: 12, cmd: { min: 3, max: 8 }, deadline: 3, fills: answer(3) },
+      { key: 'engine', essential: true, min: 12, max: 19, cmd: { min: 8, max: 19 }, deadline: 4, fills: (f) => f.isDrawEngine || velocity(4)(f) },
+      { key: 'finisher', essential: true, min: 3, max: 8, cmd: { min: 7, max: 18 }, deadline: 7, fills: threat(4, 7, 0.6) },
       { key: 'answers', essential: false, min: 0, max: 2, fills: answer(6) },
       { key: 'fixing', essential: false, infrastructure: true, min: 0, max: 4, fills: infrastructure },
     ],
@@ -240,9 +275,9 @@ export const PLAN_RECIPES: readonly PlanRecipe[] = [
     key: 'aristocrats',
     label: 'sacrifice outlets converting expendable bodies into damage',
     roles: [
-      { key: 'outlet', essential: true, min: 3, max: 9, fills: sacOutlet },
-      { key: 'payoff', essential: true, min: 5, max: 12, fills: deathPayoff },
-      { key: 'fodder', essential: true, min: 6, max: 18, deadline: 4, fills: fodder(3) },
+      { key: 'outlet', essential: true, min: 3, max: 9, cmd: { min: 1, max: 10 }, fills: sacOutlet },
+      { key: 'payoff', essential: true, min: 5, max: 12, cmd: { min: 1, max: 13 }, fills: deathPayoff },
+      { key: 'fodder', essential: true, min: 6, max: 18, cmd: { min: 16, max: 29 }, deadline: 4, servedBy: { roles: ['outlet', 'payoff'], ratio: 3 }, fills: fodder(3) },
       { key: 'value', essential: false, min: 0, max: 8, fills: velocity(5) },
       { key: 'answers', essential: false, min: 0, max: 5, fills: answer(5) },
       { key: 'fixing', essential: false, infrastructure: true, min: 0, max: 8, fills: infrastructure },
@@ -252,9 +287,9 @@ export const PLAN_RECIPES: readonly PlanRecipe[] = [
     key: 'lifegain',
     label: 'life gained as a resource, converted by counters or drain',
     roles: [
-      { key: 'payoff', essential: true, min: 5, max: 12, fills: lifePayoff },
-      { key: 'gain', essential: true, min: 8, max: 22, fills: lifeSource },
-      { key: 'value', essential: true, min: 2, max: 10, fills: velocity(6) },
+      { key: 'payoff', essential: true, min: 5, max: 12, cmd: { min: 4, max: 13 }, fills: lifePayoff },
+      { key: 'gain', essential: true, min: 8, max: 22, cmd: { min: 12, max: 26 }, fills: lifeSource },
+      { key: 'value', essential: true, min: 2, max: 10, cmd: { min: 5, max: 14 }, fills: velocity(6) },
       { key: 'answers', essential: false, min: 0, max: 5, fills: answer(6) },
       { key: 'fixing', essential: false, infrastructure: true, min: 0, max: 8, fills: infrastructure },
     ],
@@ -263,9 +298,9 @@ export const PLAN_RECIPES: readonly PlanRecipe[] = [
     key: 'spells',
     label: 'cast-trigger payoffs fed by cheap instants and sorceries',
     roles: [
-      { key: 'payoff', essential: true, min: 3, max: 10, fills: spellPayoff },
-      { key: 'closer', essential: true, min: 2, max: 8, fills: spellCloser },
-      { key: 'spells', essential: true, min: 12, max: 32, deadline: 4, fills: cheapSpell(4) },
+      { key: 'payoff', essential: true, min: 3, max: 10, cmd: { min: 1, max: 10 }, fills: spellPayoff },
+      { key: 'closer', essential: true, min: 2, max: 8, cmd: { min: 4, max: 19 }, fills: spellCloser },
+      { key: 'spells', essential: true, min: 12, max: 32, cmd: { min: 12, max: 27 }, deadline: 4, fills: cheapSpell(4) },
       { key: 'answers', essential: false, min: 0, max: 8, fills: answer(5) },
       { key: 'fixing', essential: false, infrastructure: true, min: 0, max: 10, fills: infrastructure },
     ],
@@ -332,9 +367,12 @@ export interface PlanEvaluation {
  * supply two requirements (§8 "Q counts each supported nonland copy at most
  * once toward ONE compatible plan").
  *
- * `entries` must already be nonland. Only copies with `s === 1` are eligible:
- * §8's evidence policy gives an unknown predicate no on-plan credit and no
- * verified supply, though it still counts in the denominator F.
+ * `entries` must already be nonland. A copy is eligible for on-plan credit
+ * only when it is TYPED-covered AND fully supported (§8 "Evidence, not
+ * popularity-based support": an unknown predicate "supplies no verified
+ * integer K, critical recipe proof or fabricated on-plan link"). A partial
+ * catalogue entry is not `covered`, so it earns nothing here; its fractional
+ * `e_i` still counts everywhere else, and it still counts in the denominator F.
  */
 export function evaluatePlan(
   recipe: PlanRecipe,
@@ -344,7 +382,13 @@ export function evaluatePlan(
   guaranteed: readonly DeckEntry[] = [],
 ): PlanEvaluation {
   const F = nonLand.reduce((s, e) => s + e.quantity, 0);
-  const scale = N / PLAN_BAND_REFERENCE;
+  const commanderShaped = usesCommanderBands(N);
+  const bandOf = (role: PlanRole): { min: number; max: number; scale: number } => {
+    const cmd = commanderShaped ? role.cmd : undefined;
+    return cmd
+      ? { min: cmd.min, max: cmd.max, scale: N / COMMANDER_BAND_REFERENCE }
+      : { min: role.min, max: role.max, scale: N / PLAN_BAND_REFERENCE };
+  };
   const castableBy = deploymentBudget(N, N - F);
   const librarySupply = new Map<string, number>();
   const totalSupply = new Map<string, number>();
@@ -355,7 +399,7 @@ export function evaluatePlan(
 
   const assign = (entries: readonly DeckEntry[], intoLibrary: boolean): void => {
     for (const entry of entries) {
-      if (entry.feature.s < 1) continue; // unknown mechanics earn no on-plan credit
+      if (entry.feature.s < 1 || !entry.feature.covered) continue; // §8 evidence policy
       const role = recipe.roles.find((r) => r.fills(entry.feature) &&
         (r.deadline === undefined || entry.feature.c <= castableBy(r.deadline)));
       if (!role) continue;
@@ -372,15 +416,21 @@ export function evaluatePlan(
   // it does not accelerate.
   let essentialCredited = 0;
   const preliminary = recipe.roles.map((role) => {
-    const have = totalSupply.get(role.key) ?? 0;
-    const credited = Math.min(librarySupply.get(role.key) ?? 0, role.max * scale);
+    const band = bandOf(role);
+    const raw = totalSupply.get(role.key) ?? 0;
+    const served = role.servedBy
+      ? role.servedBy.ratio * role.servedBy.roles.reduce((s, k) => s + (totalSupply.get(k) ?? 0), 0)
+      : Infinity;
+    const have = Math.min(raw, served);
+    const inLibrary = Math.min(librarySupply.get(role.key) ?? 0, served);
+    const credited = Math.min(inLibrary, band.max * band.scale);
     if (role.essential) essentialCredited += credited;
-    return { role, have, credited };
+    return { role, have, credited, required: band.min * band.scale };
   });
 
-  const roles: RoleAssignment[] = preliminary.map(({ role, have, credited }) => ({
+  const roles: RoleAssignment[] = preliminary.map(({ role, have, credited, required }) => ({
     role,
-    required: role.min * scale,
+    required,
     supply: have,
     credited: role.infrastructure ? Math.min(credited, essentialCredited) : credited,
   }));
@@ -422,20 +472,116 @@ export function selectPlan(
   nonLand: readonly DeckEntry[],
   guaranteed: readonly DeckEntry[] = [],
 ): PlanEvaluation {
+  // A recipe with an essential role the deck has NO copies of describes a plan
+  // the deck is not attempting; `betterPlan` drops it before §1's
+  // satisfied-fraction ordering applies. Without that, a Food deck with no
+  // life-gain payoff outranked its own midrange reading on Q and scored S = 0.
+  // Ties fall through to PLAN_RECIPES order, the frozen enum order.
   const evaluations = PLAN_RECIPES.map((recipe) => evaluatePlan(recipe, N, nonLand, guaranteed));
-  return evaluations.reduce((best, candidate) => {
-    // A recipe with an essential role the deck has NO copies of describes a
-    // plan the deck is not attempting; it loses to any partially executed
-    // one before §1's satisfied-fraction ordering applies. Without this, a
-    // Food deck with no life-gain payoff outranked its own midrange reading
-    // on Q and scored S = 0 instead of its real partial coverage.
-    if (candidate.hasEmptyEssential !== best.hasEmptyEssential) {
-      return best.hasEmptyEssential ? candidate : best;
-    }
-    if (candidate.essentialFraction !== best.essentialFraction) {
-      return candidate.essentialFraction > best.essentialFraction ? candidate : best;
-    }
-    if (candidate.Q !== best.Q) return candidate.Q > best.Q ? candidate : best;
-    return best; // stable: PLAN_RECIPES order is the frozen enum order
-  }, evaluations[0]);
+  return evaluations.reduce(betterPlan, evaluations[0]);
+}
+
+
+// ── §8 closing/tutor family ───────────────────────────────────────────────
+//
+// "Closing/tutor family: exact search filters/destination/delay; ... verified
+// loops and library/alternate-win predicates." A compact combo deck holds two
+// pieces, twenty pieces of fast mana and a stack of counterspells; NO generic
+// or engine recipe describes that, so Ballooncon scored W 90.5 and S 17.3 on
+// the same list. This recipe is not frozen like the others: its essentials are
+// derived from the line `deck-score-win.ts` actually selected.
+
+/** A tutor counts only if its search filter can reach one of the pieces.
+ * // ponytail: unrestricted "search your library for a card" plus a type-word
+ * // match against the piece's type line. The exact typed filter/destination/
+ * // delay is catalogue work (§8); this is the reachable subset of it. */
+function tutorReaches(f: CardFeature, pieces: readonly CardFeature[]): boolean {
+  if (!f.isTutor) return false;
+  const oracle = f.card.oracle_text || '';
+  if (/search your library for a card/i.test(oracle)) return true;
+  return pieces.some((p) => (p.card.type_line || '')
+    .split(/[^A-Za-z]+/)
+    .filter((word) => word.length > 3)
+    .some((word) => new RegExp(`search your library for [^.]*\\b${word}`, 'i').test(oracle)));
+}
+
+/** Counterspells and Silence-class taxes: what keeps the line resolving. */
+function stackProtection(f: CardFeature): boolean {
+  return f.isCounterspell || f.isProtection;
+}
+
+/**
+ * Build the plan for an assembled closing line. Roles, in assignment order:
+ * the pieces themselves, the tutors that reach them, the acceleration that
+ * makes the line castable by `tStar`, the protection that resolves it, and
+ * the selection that digs for all of the above.
+ */
+export function closingRecipe(line: ClosingLine, pieces: readonly CardFeature[]): PlanRecipe {
+  const names = new Set(line.pieces.map((n) => n.toLowerCase()));
+  // Mana the line needs beyond a plain land drop per turn by its own t*.
+  const shortfall = Math.max(1, Math.ceil(line.cost - line.tStar));
+  return {
+    key: 'combo',
+    label: `${line.label} — pieces, tutors that reach them, acceleration and protection`,
+    roles: [
+      { key: 'pieces', essential: true, min: line.required, max: line.required + 2, fills: (f) => names.has(f.card.name.toLowerCase()) },
+      { key: 'tutors', essential: true, min: 2, max: 10, fills: (f) => tutorReaches(f, pieces) },
+      { key: 'acceleration', essential: true, min: shortfall, max: 24, fills: (f) => infrastructure(f) && f.c <= 2 },
+      { key: 'protection', essential: true, min: 2, max: 14, fills: stackProtection },
+      { key: 'selection', essential: false, min: 0, max: 14, fills: velocity(4) },
+    ],
+  };
+}
+
+/**
+ * §8 "Q counts each supported nonland copy at most once toward ONE compatible
+ * plan". The closing plan joins the SAME §1 ordering as every other recipe —
+ * it wins only when the deck actually executes it. A pile holding two combo
+ * pieces and no tutors satisfies one essential of four and loses to its own
+ * generic reading.
+ *
+ * Bands are NOT scaled by N: a combo needs its two pieces, two tutors and its
+ * protection whether the library is 60 or 99 cards.
+ */
+export function evaluateClosing(
+  line: ClosingLine,
+  nonLand: readonly DeckEntry[],
+  guaranteed: readonly DeckEntry[] = [],
+): PlanEvaluation {
+  const names = new Set(line.pieces.map((n) => n.toLowerCase()));
+  const pieces = [...nonLand, ...guaranteed]
+    .map((e) => e.feature)
+    .filter((f) => names.has(f.card.name.toLowerCase()));
+  return evaluatePlan(closingRecipe(line, pieces), PLAN_BAND_REFERENCE, nonLand, guaranteed);
+}
+
+/** The §1 ordering, exposed so `deck-score.ts` can fold in the closing plan
+ * once `computeWin` has named the line. */
+/** The plan-side of S: how much of the deck this recipe explains, discounted
+ * by how far its weakest essential falls short. Selection maximises it. */
+export function planFit(p: PlanEvaluation): number {
+  return clip((p.Q - 0.30) / 0.40) * p.R;
+}
+
+export function betterPlan(best: PlanEvaluation, candidate: PlanEvaluation): PlanEvaluation {
+  if (candidate.hasEmptyEssential !== best.hasEmptyEssential) {
+    return best.hasEmptyEssential ? candidate : best;
+  }
+  // §1 orders selection by "satisfied essential-requirement fraction, then
+  // supported main-deck fraction". Taken as a STEP function that key is
+  // discontinuous: meren-powerhouse read as midrange (essFrac 1.00, Q .46,
+  // S 40.1) while its 100-card sibling read as aristocrats (essFrac .67,
+  // Q .73, S 92.8) - one card apart, 53 points of S. A generic recipe with
+  // low floors is satisfied by accident on a 99-card deck, so "all essentials
+  // met" is not evidence the deck is executing it. Rank on the continuous
+  // plan fit instead (the same quantity S reports) and keep the step count
+  // only as a tie-break; known absence of a piece still wins outright above.
+  const fitBest = planFit(best);
+  const fitCandidate = planFit(candidate);
+  if (fitCandidate !== fitBest) return fitCandidate > fitBest ? candidate : best;
+  if (candidate.essentialFraction !== best.essentialFraction) {
+    return candidate.essentialFraction > best.essentialFraction ? candidate : best;
+  }
+  if (candidate.Q !== best.Q) return candidate.Q > best.Q ? candidate : best;
+  return best;
 }

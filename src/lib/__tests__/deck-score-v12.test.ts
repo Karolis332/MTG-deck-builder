@@ -9,7 +9,12 @@ import type { DbCard } from '../types';
 import { scoreDeck, type DeckScoreInput } from '../deck-score';
 import { WEIGHTS, weightsFor, Q_BASELINE, Q_SATURATION, type ScoreFormat } from '../deck-score-norms';
 import { computeSynergy } from '../deck-score-synergy';
-import { selectPlan, evaluatePlan, recipeFor, deploymentBudget, PLAN_RECIPES } from '../deck-score-plans';
+import {
+  selectPlan, evaluatePlan, recipeFor, deploymentBudget, betterPlan, planFit, evaluateClosing, closingRecipe,
+  COMMANDER_BAND_REFERENCE, PLAN_RECIPES,
+} from '../deck-score-plans';
+import { computeWin } from '../deck-score-win';
+import { normsFor } from '../deck-score-norms';
 import { catalogFacts, CATALOG_SIZE, oracleHash } from '../deck-score-catalog';
 import { deriveCardFeature } from '../deck-score-features';
 import type { DeckEntry } from '../deck-score-mana';
@@ -77,7 +82,17 @@ function burn(count: number, tag = 'Bolt'): Array<{ card: DbCard; quantity: numb
   }));
 }
 
+/**
+ * Synthetic cards are not in the typed catalogue, so `covered` is false and
+ * v1.2's evidence gate would give every one of them zero on-plan credit.
+ * These suites test the PLAN layer; mark them covered and let
+ * `entriesOfUncovered` exercise the evidence gate on its own.
+ */
 function entriesOf(cards: Array<{ card: DbCard; quantity: number }>): DeckEntry[] {
+  return cards.map((c) => ({ feature: { ...deriveCardFeature(c.card), covered: true }, quantity: c.quantity }));
+}
+
+function entriesOfUncovered(cards: Array<{ card: DbCard; quantity: number }>): DeckEntry[] {
   return cards.map((c) => ({ feature: deriveCardFeature(c.card), quantity: c.quantity }));
 }
 
@@ -414,5 +429,197 @@ describe('§8 pile separation — same shape, different coherence', () => {
     expect(entriesOf(pile).reduce((s, e) => s + e.quantity, 0)).toBe(entriesOf(coherent).reduce((s, e) => s + e.quantity, 0));
     expect(pileOut.score).toBeLessThanOrEqual(5);
     expect(goodOut.score).toBeGreaterThanOrEqual(60);
+  });
+});
+
+
+// ── Round 2: §8 closing/tutor family, the evidence gate on Q, Commander bands
+
+const THORACLE = "Thassa's Oracle";
+
+function tutor(count: number, text: string, tag: string): Array<{ card: DbCard; quantity: number }> {
+  return Array.from({ length: count }, (_, i) => ({
+    card: mkCard({
+      name: `${tag} ${i}`, type_line: 'Sorcery', oracle_text: text,
+      mana_cost: '{1}{B}', cmc: 2, power: null, toughness: null,
+    }),
+    quantity: 1,
+  }));
+}
+
+function altWinPiece(): { card: DbCard; quantity: number } {
+  return {
+    card: mkCard({
+      name: THORACLE, type_line: 'Creature — Merfolk Wizard', mana_cost: '{U}{U}', cmc: 2,
+      oracle_text: 'When this creature enters, look at the top X cards of your library, where X is your devotion to blue. You win the game if X is greater than or equal to the number of cards in your library.',
+      power: '1', toughness: '3', colors: '["U"]', color_identity: '["U"]',
+    }),
+    quantity: 1,
+  };
+}
+
+const COMBO_LINE = {
+  id: 'alt_win', label: 'Alternate win condition',
+  pieces: [THORACLE], required: 1, cost: 4, tStar: 5,
+};
+
+// ── §1 plan selection: continuous fit, not a step function ──────────────
+
+function outlets(count: number): Array<{ card: DbCard; quantity: number }> {
+  return Array.from({ length: count }, (_, i) => ({
+    card: mkCard({
+      name: `Feeder ${i}`, type_line: 'Creature \u2014 Horror', oracle_text: 'Sacrifice a creature: Scry 1.',
+      mana_cost: '{1}', cmc: 1, power: '1', toughness: '1',
+    }),
+    quantity: 1,
+  }));
+}
+
+function payoffs(count: number): Array<{ card: DbCard; quantity: number }> {
+  return Array.from({ length: count }, (_, i) => ({
+    card: mkCard({
+      name: `Cutthroat ${i}`, type_line: 'Creature \u2014 Rogue',
+      oracle_text: 'Whenever another creature you control dies, each opponent loses 1 life and you gain 1 life.',
+      mana_cost: '{2}', cmc: 2, power: '1', toughness: '1',
+    }),
+    quantity: 1,
+  }));
+}
+
+describe('\u00a71 plan selection ranks recipes on fit, not on essentials-met count', () => {
+  // meren-powerhouse, measured: midrange met 3/3 essentials on Q .46 (S 40.1)
+  // while aristocrats met 2/3 on Q .73 (S 92.8). A 99-card deck clears the
+  // generic floors by accident, so the step function chose the vaguer plan.
+  const deck = entriesOf([
+    ...outlets(9), ...payoffs(11), ...creatures(16, 2, 2, 'Fodder'),
+    ...removal(6, 2), ...cantrips(6),
+  ]);
+
+  it('prefers the recipe that explains more of the deck', () => {
+    const chosen = selectPlan(99, deck);
+    expect(chosen.recipe.key).toBe('aristocrats');
+    const midrange = evaluatePlan(recipeFor('midrange'), 99, deck);
+    expect(planFit(chosen)).toBeGreaterThan(planFit(midrange));
+  });
+
+  it('planFit is the plan side of S: clip((Q-.30)/.40) * R', () => {
+    const plan = evaluatePlan(recipeFor('aristocrats'), 99, deck);
+    const out = computeSynergy(plan, 99, deck);
+    expect(planFit(plan) * 100 * out.B).toBeCloseTo(out.score, 5);
+  });
+});
+
+describe('\u00a78 raw material earns credit only up to what consumes it', () => {
+  // The largest remaining pile leak: 15 random cheap creatures filled the
+  // aristocrats `fodder` floor beside ONE outlet and ONE payoff (pile seed
+  // 145, S 33.9). Bodies with nothing to eat them are not a plan.
+  const bodies = creatures(20, 2, 2, 'Body');
+
+  it('caps fodder at three bodies per outlet/payoff copy', () => {
+    const starved = entriesOf([...outlets(1), ...payoffs(1), ...bodies]);
+    const plan = evaluatePlan(recipeFor('aristocrats'), 99, starved);
+    const fodder = plan.roles.find((r) => r.role.key === 'fodder')!;
+    expect(fodder.supply).toBe(6);
+    expect(fodder.credited).toBeLessThanOrEqual(6);
+    expect(plan.R).toBeLessThan(0.5);
+  });
+
+  it('leaves a deck with real throughput untouched', () => {
+    const engine = entriesOf([...outlets(9), ...payoffs(11), ...bodies]);
+    const plan = evaluatePlan(recipeFor('aristocrats'), 99, engine);
+    expect(plan.roles.find((r) => r.role.key === 'fodder')!.supply).toBe(20);
+  });
+});
+
+describe('§8 closing/tutor family — the plan is the line W actually selected', () => {
+  it('scores an assembled combo deck on its own line', () => {
+    const deck = entriesOf([
+      altWinPiece(),
+      ...tutor(6, 'Search your library for a card, put it into your hand, then shuffle.', 'Demonic'),
+      ...noncreature(18, 1, 'Add one mana of any color.', 'FastMana'),
+      ...noncreature(10, 2, 'Counter target spell.', 'Counter', 'Instant'),
+      ...cantrips(8),
+    ]);
+    const out = computeSynergy(evaluateClosing(COMBO_LINE, deck), 99, deck);
+    expect(out.plan.recipe.key).toBe('combo');
+    expect(out.R).toBe(1);
+    expect(out.score).toBeGreaterThanOrEqual(80);
+  });
+
+  it('gives a pile holding the piece but no tutors nothing for it', () => {
+    const deck = entriesOf([
+      altWinPiece(),
+      ...creatures(20, 1, 3, 'Random'),
+      ...noncreature(18, 3, 'This artifact enters tapped.', 'Junk'),
+    ]);
+    const closing = evaluateClosing(COMBO_LINE, deck);
+    expect(closing.roles.find((r) => r.role.key === 'tutors')!.supply).toBe(0);
+    expect(closing.hasEmptyEssential).toBe(true);
+    expect(closing.R).toBe(0);
+    // …and whichever reading §1's ordering keeps, the pile earns nothing:
+    // every generic recipe is empty-essential here too, so the closing read
+    // can win the tie-break — on R = 0, which is S = 0 either way.
+    const chosen = betterPlan(selectPlan(99, deck), closing);
+    expect(planFit(chosen)).toBe(0);
+    expect(computeSynergy(chosen, 99, deck).score).toBeLessThanOrEqual(5);
+  });
+
+  it('counts a tutor only when its search filter can reach a piece', () => {
+    const pieces = [deriveCardFeature(altWinPiece().card)];
+    const recipe = closingRecipe(COMBO_LINE, pieces);
+    const tutors = recipe.roles.find((r) => r.key === 'tutors')!;
+    const unrestricted = deriveCardFeature(tutor(1, 'Search your library for a card, put it into your hand, then shuffle.', 'Demonic')[0].card);
+    const creatureTutor = deriveCardFeature(tutor(1, 'Search your library for a creature card, reveal it, put it into your hand, then shuffle.', 'Worldly')[0].card);
+    const landTutor = deriveCardFeature(tutor(1, 'Search your library for a Swamp card, put it onto the battlefield tapped, then shuffle.', 'Expanse')[0].card);
+    expect(tutors.fills(unrestricted)).toBe(true);
+    expect(tutors.fills(creatureTutor)).toBe(true);
+    expect(tutors.fills(landTutor)).toBe(false);
+  });
+
+  it('emits a closing line from W only for an assembled family', () => {
+    const norms = normsFor('commander');
+    const totals = { E: 0, Estar: 1, D: 0, Dstar: 1, hasDrawEngine: false };
+    const comboDeck = entriesOf([altWinPiece(), ...noncreature(20, 1, 'Add one mana of any color.', 'FastMana'), ...cantrips(10)]);
+    const beatdown = entriesOf(creatures(30, 4, 3, 'Beater'));
+    const withCombo = computeWin('commander', norms, 'combo', 99, comboDeck, [], totals);
+    const withoutCombo = computeWin('commander', norms, 'aggro', 99, beatdown, [], totals);
+    expect(withCombo.closing?.pieces).toContain(THORACLE);
+    expect(withoutCombo.closing).toBeNull();
+  });
+});
+
+describe('§8 evidence policy — Q counts only typed-covered copies', () => {
+  it('keeps an uncovered copy in F while giving it no on-plan credit', () => {
+    // Regex-identified but NOT typed: `covered` is false, `s` is still 1.
+    const uncovered = mkCard({
+      name: 'Uncatalogued Slayer', type_line: 'Instant', mana_cost: '{1}{B}', cmc: 2,
+      oracle_text: 'Destroy target creature. Its controller loses 2 life and you draw a card.',
+      power: null, toughness: null,
+    });
+    const feature = deriveCardFeature(uncovered);
+    expect(feature.s).toBe(1);
+    expect(feature.covered).toBe(false);
+    const withIt = evaluatePlan(recipeFor('midrange'), 60, entriesOfUncovered([
+      ...creatures(8, 4, 4, 'Threat'), ...cantrips(8), { card: uncovered, quantity: 4 },
+    ]));
+    expect(withIt.roles.find((r) => r.role.key === 'answers')!.supply).toBe(0);
+    expect(withIt.Q).toBeLessThan(1);
+  });
+});
+
+describe('§8 Commander bands — measured, not scaled by N/60', () => {
+  it('applies the Commander floor to a 99-card list and the 60-card floor below it', () => {
+    const midrange = recipeFor('midrange');
+    const answers = midrange.roles.find((r) => r.key === 'answers')!;
+    expect(answers.cmd).toBeDefined();
+    const deck = entriesOf([...creatures(10, 4, 4, 'Threat'), ...removal(6, 2), ...cantrips(10)]);
+    const asCommander = evaluatePlan(midrange, COMMANDER_BAND_REFERENCE, deck);
+    const asStandard = evaluatePlan(midrange, 60, deck);
+    const reqCmd = asCommander.roles.find((r) => r.role.key === 'answers')!.required;
+    const reqStd = asStandard.roles.find((r) => r.role.key === 'answers')!.required;
+    expect(reqCmd).toBeCloseTo(answers.cmd!.min, 6);
+    expect(reqStd).toBeCloseTo(answers.min, 6);
+    // The old behaviour scaled the 60-card floor to 4*99/60 = 6.6 at 99 cards.
+    expect(reqCmd).toBeLessThan(answers.min * (COMMANDER_BAND_REFERENCE / 60));
   });
 });

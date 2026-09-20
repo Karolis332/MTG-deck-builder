@@ -9,7 +9,8 @@
  *   MTG_DB_DIR=... npx tsx scripts/deck-score-pile-diag.ts [topN]
  */
 import { scoreDeck, type DeckScoreInput } from '../src/lib/deck-score';
-import { selectPlan, PLAN_BAND_REFERENCE } from '../src/lib/deck-score-plans';
+import { selectPlan, evaluatePlan, planFit, PLAN_RECIPES, PLAN_BAND_REFERENCE }
+  from '../src/lib/deck-score-plans';
 import { computeSynergy } from '../src/lib/deck-score-synergy';
 import { deriveCardFeature } from '../src/lib/deck-score-features';
 import type { DeckEntry } from '../src/lib/deck-score-mana';
@@ -58,6 +59,22 @@ function diag(label: string, input: DeckScoreInput): string {
   ].join('\n');
 }
 
+/** `--plans <fixture>`: every recipe's fit side by side, including the closing
+ * recipe the win line derives — the only way to see WHY one won. */
+function plans(name: string): void {
+  const ds = loadDataset(200);
+  const hit = ds.fixtures.find((f) => f.name === name);
+  if (!hit) { console.log(`no fixture ${name}`); return; }
+  const { N, nonLand, cmd } = entriesOf(hit.input);
+  const rows = PLAN_RECIPES.map((r) => evaluatePlan(r, Math.max(1, N), nonLand, cmd));
+  console.log(`## ${name} — N=${N}`);
+  console.log('| recipe | Q | R | fit | essFrac | empty | weakest |');
+  console.log('|---|---:|---:|---:|---:|---|---|');
+  for (const e of rows.sort((a, b) => planFit(b) - planFit(a))) {
+    console.log(`| ${e.recipe.key} | ${e.Q.toFixed(3)} | ${e.R.toFixed(3)} | ${planFit(e).toFixed(3)} | ${e.essentialFraction.toFixed(2)} | ${e.hasEmptyEssential ? 'yes' : 'no'} | ${e.weakest.key} ${e.weakest.supply}/${e.weakest.required.toFixed(1)} |`);
+  }
+}
+
 const ANCHORS = [
   'meren-powerhouse', 'precon-witherbloom', 'standard-1445893-univerce', 'vivi-battery-arena',
   'kuja-genome-sorcerer-arena', 'fire-lord-azula-competitive', 'cedhtop16-ballooncon6',
@@ -85,10 +102,11 @@ function summary(): void {
     const rs = inputs.map((i) => scoreDeck(i));
     const sv = rs.map(S).sort((a, b) => a - b);
     const tv = rs.map((r) => r.score).sort((a, b) => a - b);
+    // Read the plan off the SCORED reason, not selectPlan: only scoreDeck
+    // folds in the closing recipe, so selectPlan cannot see a `combo` read.
     const plans = new Map<string, number>();
-    for (const i of inputs) {
-      const { N, nonLand, cmd } = entriesOf(i);
-      const key = selectPlan(Math.max(1, N), nonLand, cmd).recipe.key;
+    for (const r of rs) {
+      const key = /supports (\w+)/.exec(r.components.find((c) => c.key === 'synergy')?.reason ?? '')?.[1] ?? 'none';
       plans.set(key, (plans.get(key) ?? 0) + 1);
     }
     console.log(`${label} n=${inputs.length} S p10 ${q(sv, 0.1)} p50 ${q(sv, 0.5)} p90 ${q(sv, 0.9)} | total p50 ${q(tv, 0.5)} | plans ${[...plans].map(([k, v]) => `${k}=${v}`).join(' ')}`);
@@ -157,6 +175,8 @@ function worst(): void {
 }
 
 function main(): void {
+  const pi = process.argv.indexOf('--plans');
+  if (pi > 0) { plans(process.argv[pi + 1]); return; }
   if (process.argv.includes('--worst')) { worst(); return; }
   if (process.argv.includes('--summary')) { summary(); return; }
   const ci = process.argv.indexOf('--cards');

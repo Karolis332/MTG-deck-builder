@@ -65,7 +65,7 @@ function requirementsOf(feature: CardFeature): PayoffRequirement[] {
  * left out on purpose: it becomes an unknown prerequisite, never a 0 or a 1. */
 function supplyByResource(nonLand: readonly DeckEntry[]): Map<string, number> {
   const sum = (pred: (f: CardFeature) => boolean): number =>
-    nonLand.filter((e) => e.feature.s >= 1 && pred(e.feature)).reduce((s, e) => s + e.quantity, 0);
+    nonLand.filter((e) => e.feature.s >= 1 && e.feature.covered && pred(e.feature)).reduce((s, e) => s + e.quantity, 0);
   const creatures = sum((f) => /\bCreature\b/.test(f.card.type_line || ''));
   return new Map<string, number>([
     ['food', sum((f) => f.isFoodProducer)],
