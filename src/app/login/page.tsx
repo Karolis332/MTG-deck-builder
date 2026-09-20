@@ -40,6 +40,10 @@ export default function LoginPage() {
               <p className="mt-2 text-sm text-muted-foreground italic">
                 Speak the words of power to enter
               </p>
+              <p className="mt-2 text-xs text-muted-foreground">
+                This is your local account on this PC, created in the setup wizard. It is separate
+                from your theblackgrimoire.com sign-in.
+              </p>
             </div>
 
             <div className="grimoire-divider mb-6" />
@@ -53,17 +57,18 @@ export default function LoginPage() {
 
               <div className="space-y-2">
                 <label htmlFor="username" className="font-heading text-xs uppercase tracking-widest text-muted-foreground">
-                  Username
+                  Username or email
                 </label>
                 <input
                   id="username"
                   type="text"
+                  autoComplete="username"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   required
                   autoFocus
                   className="w-full rounded-lg border border-border bg-background/80 px-3 py-2.5 text-sm outline-none transition-all focus:border-primary/60 focus:ring-1 focus:ring-primary/30 focus:shadow-[0_0_12px_rgba(180,140,50,0.1)]"
-                  placeholder="Enter your username"
+                  placeholder="Username or email"
                 />
               </div>
 

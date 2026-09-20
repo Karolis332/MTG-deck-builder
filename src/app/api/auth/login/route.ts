@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { verifyPassword, createToken } from '@/lib/auth';
-import { getUserByUsername } from '@/lib/db';
+import { getUserByUsername, getUserByEmail } from '@/lib/db';
 
 const loginSchema = z.object({
-  username: z.string().min(1, 'Username is required'),
+  username: z.string().min(1, 'Username or email is required'),
   password: z.string().min(1, 'Password is required'),
 });
 
@@ -21,7 +21,10 @@ export async function POST(request: NextRequest) {
     }
 
     const { username, password } = parsed.data;
-    const user = getUserByUsername(username);
+    // The field is labelled "username or email": the setup wizard stores both, and people
+    // type the address they used on the web. Username first (exact), then email.
+    const trimmed = username.trim();
+    const user = getUserByUsername(trimmed) ?? (trimmed.includes('@') ? getUserByEmail(trimmed) : undefined);
 
     if (!user) {
       return NextResponse.json({ error: 'Invalid username or password' }, { status: 401 });
