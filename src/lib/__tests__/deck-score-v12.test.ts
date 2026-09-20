@@ -335,16 +335,23 @@ describe('§8 deployment deadline — castable by the plan turn, or no credit', 
     expect(deploymentBudget(60, 10)(3)).toBeCloseTo(10 / 60 * 10, 6);
   });
 
-  it('refuses the modal Standard five-drop at its own deadline (known level defect)', () => {
-    // Pinned so the cost of the current formula is visible, not so it is
-    // endorsed. 24 lands in 60 gives 4.80 at turn 5, so `c <= 4.80` refuses
-    // every five-drop even though those decks demonstrably cast them, and 45
-    // of the 69 Standard tournament lists scoring S = 0 have a fully supplied
-    // recipe once the deadline stops truncating. The hypergeometric-median
-    // replacement was measured and reverted: it moved the held-out Standard
-    // median not at all (43) and cost 11 piles. See `deploymentBudget`.
-    expect(deploymentBudget(60, 24)(5)).toBeLessThan(5);
-    expect(deploymentBudget(60, 24)(5)).toBeGreaterThan(4);
+  it('keeps the land-mean cutoff for the Commander-family profiles only', () => {
+    // v1.2 pinned the DEFECT here: `deploymentBudget(60,24)(5)` is 4.80, a mean
+    // used as a cutoff, so `c <= 4.80` refused every five-drop of the modal
+    // Standard deck. §9.1 replaced the rule for the Standard profile with a
+    // casting probability; this pin now records what survives — the binary
+    // land-mean rule, which Commander and Brawl still use. The replacement and
+    // its measured repair are pinned in `deck-score-v13-stage2.test.ts`.
+    expect(deploymentBudget(60, 24)(5)).toBeCloseTo(4.8, 6);
+    // 36 nonland copies in a 60-card list, so the deck really does hold the
+    // modal 24 lands; only the five-drop can fill `threats`.
+    const deck = entriesOf([
+      ...creatures(1, 5, 5, 'Five'), ...creatures(11, 2, 2, 'Rush'), ...removal(12, 2), ...cantrips(12),
+    ]);
+    const cmd = evaluatePlan(recipeFor('midrange'), 60, deck, [], undefined, 'commander');
+    const std = evaluatePlan(recipeFor('midrange', 'standard'), 60, deck, [], undefined, 'standard');
+    expect(cmd.roles.find((r) => r.role.key === 'threats')!.supply).toBe(0);
+    expect(std.roles.find((r) => r.role.key === 'threats')!.supply).toBe(1);
   });
 
   it('withdraws pressure credit from an identical list that cannot cast it', () => {

@@ -430,8 +430,33 @@ function probe(tuningByProfile: Partial<Record<ScoreProfile, Candidate>>): void 
   console.log(lines.join('\n'));
 
   const cmd = tuningByProfile.commander ? toTuning('commander', tuningByProfile.commander) : undefined;
-  const piles = data.piles.map((input) => scoreDeck(input, cmd).score).sort((a, b) => a - b);
-  console.log(`\npiles n=${piles.length} min=${piles[0]} median=${median(piles)} max=${piles[piles.length - 1]} over25=${piles.filter((v) => v >= 25).length}`);
+
+  const pileResults = data.piles.map((input) => scoreDeck(input, cmd));
+  const piles = pileResults.map((r) => r.score).sort((a, b) => a - b);
+  const pileS = pileResults.map((r) => r.components.find((c) => c.key === 'synergy')?.score ?? 0);
+  console.log(`\npiles n=${piles.length} min=${piles[0]} median=${median(piles)} max=${piles[piles.length - 1]}` +
+    ` over25=${piles.filter((v) => v >= 25).length} S<=5=${pileS.filter((v) => v <= 5).length}/${pileS.length}`);
+
+  // §9.1 acceptance is a COHORT median, so the probe prints it beside the
+  // fixtures rather than leaving it to a second run of the report.
+  const std = tuningByProfile.standard ? toTuning('standard', tuningByProfile.standard) : undefined;
+  const heldOut = <T extends { eventDate: string }>(rows: readonly T[]): T[] => {
+    const sorted = [...rows].sort((a, b) => a.eventDate.localeCompare(b.eventDate));
+    return sorted.slice(Math.floor(sorted.length * 0.6));
+  };
+  const cohortRow = (name: string, rows: Dataset['standardPositive']): string => {
+    const scored = rows.map((r) => scoreDeck(r.input, std));
+    const pick = (k: ComponentKey) => scored.map((r) => r.components.find((c) => c.key === k)?.score ?? 0);
+    const S = pick('synergy');
+    const W = pick('win');
+    return `| ${name} | ${scored.length} | ${median(scored.map((r) => r.score))} | ${median(S)} | ` +
+      `${S.filter((v) => v === 0).length} | ${median(W)} | ${W.filter((v) => v === 0).length} |`;
+  };
+  console.log('\nStandard held-out cohorts (newest 40% by event_date):');
+  console.log('| cohort | n | total median | S median | S zeros | W median | W zeros |');
+  console.log('|---|---:|---:|---:|---:|---:|---:|');
+  console.log(cohortRow('positives', heldOut(data.standardPositive)));
+  console.log(cohortRow('losing field', heldOut(data.standardNegative)));
   console.log('\nQuota gaming (lands, size and MV histogram preserved; only producer->consumer links broken):');
   console.log(quotaGamingCheck(data));
 }

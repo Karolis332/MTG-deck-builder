@@ -19,11 +19,15 @@
  * // path and reuse the nearest generic recipe for R/Q; upgrade path is one
  * // recipe per engine family, driven by the typed catalogue (slice B).
  */
-import { clip } from './deck-score-math';
+import { clip, H } from './deck-score-math';
 import type { CardFeature } from './deck-score-features';
 import type { DeckEntry } from './deck-score-mana';
 import type { ClosingLine } from './deck-score-win';
 import { producerUtilisation, type Utilisation } from './deck-score-producers';
+import {
+  DEPLOYMENT_PROBABILITY_TARGET, Q_BASELINE, Q_BASELINE_GENERIC_COMMANDER, Q_SATURATION,
+  type ScoreProfile,
+} from './deck-score-norms';
 
 export type PlanKey = 'aggro' | 'midrange' | 'control' | 'aristocrats' | 'lifegain' | 'spells' | 'combo' | 'typal' | 'recursion';
 
@@ -121,6 +125,30 @@ function reach(maxCost: number): (f: CardFeature) => boolean {
 
 function infrastructure(f: CardFeature): boolean {
   return f.isRamp || f.isTreasureProducer;
+}
+
+/**
+ * §9.1: "Typed manland finishers may supply R without entering nonland Q."
+ *
+ * A land that animates itself into a real body is the finisher of most fair
+ * 60-card control decks — `control.finisher` was empty on 56 of the 69 R=0
+ * Standard positives precisely because every one of those bodies lives in the
+ * land slot. The animation clause is the type test; the printed size in the
+ * same sentence is the output bin, so a Clue-cracking or mana-only utility
+ * land earns nothing.
+ *
+ * Lands never enter `nonLand`, so this can only be reached through the
+ * supply-only channel `evaluatePlan` already uses for the command zone: it
+ * moves R, never Q, exactly as §9.1 requires.
+ */
+const RE_MANLAND = /becomes? an?[^.]*\b(\d+)\/\d+[^.]*creature|becomes? a creature[^.]*\b(\d+)\/\d+/i;
+
+export function isManlandFinisher(f: CardFeature): boolean {
+  if (!f.isLand) return false;
+  const m = RE_MANLAND.exec(f.card.oracle_text || '');
+  if (!m) return false;
+  const power = Number(m[1] ?? m[2]);
+  return Number.isFinite(power) && power >= 2;
 }
 
 // ── §8 engine-family predicates ───────────────────────────────────────────
@@ -365,8 +393,75 @@ export const PLAN_RECIPES: readonly PlanRecipe[] = [
   },
 ];
 
-export function recipeFor(key: PlanKey): PlanRecipe {
-  return PLAN_RECIPES.find((r) => r.key === key) ?? PLAN_RECIPES[1];
+// ── §9.1 the Standard generic trio ────────────────────────────────────────
+//
+// "For Standard, essentials/deadlines become aggro pressure T3 plus ONE
+// combined reach/protection/reload role T4; midrange threats T7, answers T5,
+// value T5; control stabilisation T3, engine T5, finisher T10. Keep
+// midrange/control's three essentials; allow verified midrange threat modes
+// through MV7 with their output test. Other profiles retain their clocks."
+//
+// The aggro reload floor was the measured defect: its p25 was ZERO on the
+// 60-card positive cohort while the recipe demanded a mandatory minimum of 1,
+// because the cohort's reach and its reload are the same cards. One combined
+// role is the shape those lists actually have.
+//
+// Bands below are MEASURED with the probability-weighted evaluator on the
+// TRAINING half of the dated Standard positives (oldest 60% by `event_date`,
+// the same chronological split `deck-score-calibrate.ts` validates on) —
+// `npx tsx scripts/deck-score-bands.ts` prints the percentile table and
+// `deck-score-v13.test.ts` pins them. The v1.2 numbers were measured before
+// deployment filtering existed, so they described a different supply.
+
+/** Reach, protection or reload: whatever lets the clock finish the game. */
+function reachOrReload(maxCost: number): (f: CardFeature) => boolean {
+  return (f) => reach(maxCost)(f) || velocity(maxCost)(f) || (f.c <= maxCost && f.isProtection);
+}
+
+export const STANDARD_RECIPES: readonly PlanRecipe[] = [
+  {
+    key: 'aggro',
+    label: 'deployable pressure with reach, protection or reload',
+    roles: [
+      { key: 'pressure', essential: true, min: 4, max: 15, deadline: 3, fills: threat(2, 3, 1) },
+      { key: 'reach', essential: true, min: 7, max: 12, deadline: 4, fills: reachOrReload(4) },
+      { key: 'answers', essential: false, min: 0, max: 6, fills: answer(4) },
+      { key: 'fixing', essential: false, infrastructure: true, min: 0, max: 4, fills: infrastructure },
+    ],
+  },
+  {
+    key: 'midrange',
+    label: 'timely threats, relevant answers, sustained value',
+    roles: [
+      { key: 'threats', essential: true, min: 4, max: 10, deadline: 7, fills: threat(3, 7, 0.75) },
+      { key: 'answers', essential: true, min: 6, max: 15, deadline: 5, fills: answer(5) },
+      { key: 'value', essential: true, min: 4, max: 12, deadline: 5, fills: velocity(5) },
+      { key: 'fixing', essential: false, infrastructure: true, min: 0, max: 8, fills: infrastructure },
+    ],
+  },
+  {
+    key: 'control',
+    label: 'early stabilisation, advantage engine, accessible finisher',
+    roles: [
+      { key: 'stabilisation', essential: true, min: 8, max: 11, deadline: 3, fills: answer(3) },
+      { key: 'engine', essential: true, min: 7, max: 15, deadline: 5, fills: (f) => f.isDrawEngine || velocity(5)(f) },
+      { key: 'finisher', essential: true, min: 4, max: 9, deadline: 10, fills: (f) => threat(4, 7, 0.6)(f) || isManlandFinisher(f) },
+      { key: 'answers', essential: false, min: 0, max: 4, fills: answer(6) },
+      { key: 'fixing', essential: false, infrastructure: true, min: 0, max: 4, fills: infrastructure },
+    ],
+  },
+];
+
+/** The generic trio is profile-specific (§9.1); the engine families are not. */
+export function recipesFor(profile: ScoreProfile): readonly PlanRecipe[] {
+  if (profile !== 'standard') return PLAN_RECIPES;
+  const generic = new Set<PlanKey>(['aggro', 'midrange', 'control']);
+  return [...STANDARD_RECIPES, ...PLAN_RECIPES.filter((r) => !generic.has(r.key))];
+}
+
+export function recipeFor(key: PlanKey, profile: ScoreProfile = 'commander'): PlanRecipe {
+  const list = recipesFor(profile);
+  return list.find((r) => r.key === key) ?? list[1];
 }
 
 // ── Deployment ────────────────────────────────────────────────────────────
@@ -404,6 +499,34 @@ export function recipeFor(key: PlanKey): PlanRecipe {
 export function deploymentBudget(N: number, lands: number): (turn: number) => number {
   const landShare = N > 0 ? clip(lands / N) : 0;
   return (turn) => Math.min(turn, landShare * (7 + turn));
+}
+
+/**
+ * §9.1: "For a known mode costing c by role deadline d, credit `q*a(c,d)`,
+ * where `a=clip(P(cast by d)/.5)`; lands-only P is the mean of
+ * `H(N,L,6+d,ceil(c))` and `H(N,L,7+d,ceil(c))`, zero if c>d."
+ *
+ * P is the probability the deck has drawn `ceil(c)` LANDS by turn d, averaged
+ * over the play/draw hand sizes §1 already uses for 1v1. Nothing here rounds
+ * an expected land count into a cutoff, which is the defect this replaces.
+ *
+ * // ponytail: lands only, printed cost only. An additional or alternate mana
+ * // cost needs a typed executable path (§9.1) and the catalogue does not type
+ * // one yet, so `c` stays `CardFeature.c` = printed MV — the conservative
+ * // direction: an alternate cheap mode is never assumed, only the cost the
+ * // card prints. Rocks/dorks are the same deferral as `deploymentBudget`.
+ */
+export function castingProbability(N: number, lands: number, c: number, deadline: number): number {
+  if (!Number.isFinite(c) || !Number.isFinite(deadline)) return 0;
+  if (c > deadline) return 0;
+  const r = Math.ceil(c);
+  if (r <= 0) return 1;
+  return (H(N, lands, 6 + deadline, r) + H(N, lands, 7 + deadline, r)) / 2;
+}
+
+/** `a(c,d)` — the fractional useful supply one copy contributes (§9.1). */
+export function deploymentCredit(N: number, lands: number, c: number, deadline: number): number {
+  return clip(castingProbability(N, lands, c, deadline) / DEPLOYMENT_PROBABILITY_TARGET);
 }
 
 // ── Assignment ────────────────────────────────────────────────────────────
@@ -452,12 +575,16 @@ export function evaluatePlan(
   recipe: PlanRecipe,
   N: number,
   nonLand: readonly DeckEntry[],
-  /** Command-zone cards: available resources for R, never library Q mass. */
+  /** Supply-only entries: available resources for R, never library Q mass.
+   * Command-zone cards, plus §9.1's typed manland finishers for Standard. */
   guaranteed: readonly DeckEntry[] = [],
   /** Shared across the recipes of one deck so u_p is computed once and every
    * recipe is scored against the SAME assignment (§9.3 "maximise the same
    * score over feasible assignments with the recipe fixed"). */
   utilisation?: Utilisation,
+  /** §9.1 dispatches the deployment rule BY FORMAT, never by library size:
+   * a 59-card Standard Brawl deck keeps the Commander-family clocks. */
+  profile: ScoreProfile = 'commander',
 ): PlanEvaluation {
   const F = nonLand.reduce((s, e) => s + e.quantity, 0);
   const commanderShaped = usesCommanderBands(N);
@@ -467,7 +594,15 @@ export function evaluatePlan(
       ? { min: cmd.min, max: cmd.max, scale: N / COMMANDER_BAND_REFERENCE }
       : { min: role.min, max: role.max, scale: N / PLAN_BAND_REFERENCE };
   };
-  const castableBy = deploymentBudget(N, N - F);
+  // §9.1: Standard weights a copy by the probability its OWN mana casts it by
+  // the deadline; every other profile keeps the v1.2 binary land-mean cutoff.
+  const lands = Math.max(0, N - F);
+  const castableBy = deploymentBudget(N, lands);
+  const deployWeight = (c: number, deadline: number | undefined): number => {
+    if (deadline === undefined) return 1;
+    if (profile === 'standard') return deploymentCredit(N, lands, c, deadline);
+    return c <= castableBy(deadline) ? 1 : 0;
+  };
   const librarySupply = new Map<string, number>();
   const totalSupply = new Map<string, number>();
   for (const role of recipe.roles) {
@@ -482,10 +617,16 @@ export function evaluatePlan(
   const assign = (entries: readonly DeckEntry[], intoLibrary: boolean): void => {
     for (const entry of entries) {
       if (entry.feature.s < 1 || !entry.feature.covered) continue; // §8 evidence policy
-      const role = recipe.roles.find((r) => r.fills(entry.feature) &&
-        (r.deadline === undefined || entry.feature.c <= castableBy(r.deadline)));
+      let weight = 0;
+      const role = recipe.roles.find((r) => {
+        if (!r.fills(entry.feature)) return false;
+        weight = deployWeight(entry.feature.c, r.deadline);
+        return weight > 0;
+      });
       if (!role) continue;
-      const credit = entry.quantity * util.of(entry.feature);
+      // §9.1 "Fractional supply enters Q and R, never an integer probability
+      // pool": the weight multiplies the copy's credit here and nowhere else.
+      const credit = entry.quantity * util.of(entry.feature) * weight;
       totalSupply.set(role.key, (totalSupply.get(role.key) ?? 0) + credit);
       if (intoLibrary) librarySupply.set(role.key, (librarySupply.get(role.key) ?? 0) + credit);
     }
@@ -669,12 +810,12 @@ export function typalRecipe(theme: TypalTheme): PlanRecipe {
 /** Null when the deck names no countable theme at all. */
 export function evaluateTypal(
   N: number, nonLand: readonly DeckEntry[], guaranteed: readonly DeckEntry[] = [],
-  utilisation?: Utilisation,
+  utilisation?: Utilisation, profile: ScoreProfile = 'commander',
 ): PlanEvaluation | null {
   const features = [...nonLand, ...guaranteed].map((e) => e.feature);
   const theme = typalTheme(features);
   if (theme.tribes.length === 0 && !theme.artifacts && !theme.party) return null;
-  return evaluatePlan(typalRecipe(theme), N, nonLand, guaranteed, utilisation);
+  return evaluatePlan(typalRecipe(theme), N, nonLand, guaranteed, utilisation, profile);
 }
 
 export function selectPlan(
@@ -682,6 +823,7 @@ export function selectPlan(
   nonLand: readonly DeckEntry[],
   guaranteed: readonly DeckEntry[] = [],
   shared?: Utilisation,
+  profile: ScoreProfile = 'commander',
 ): PlanEvaluation {
   const utilisation = shared ?? producerUtilisation(nonLand, guaranteed);
   // A recipe with an essential role the deck has NO copies of describes a plan
@@ -689,10 +831,11 @@ export function selectPlan(
   // satisfied-fraction ordering applies. Without that, a Food deck with no
   // life-gain payoff outranked its own midrange reading on Q and scored S = 0.
   // Ties fall through to PLAN_RECIPES order, the frozen enum order.
-  const evaluations = PLAN_RECIPES.map((recipe) => evaluatePlan(recipe, N, nonLand, guaranteed, utilisation));
-  const typal = evaluateTypal(N, nonLand, guaranteed, utilisation);
+  const evaluations = recipesFor(profile)
+    .map((recipe) => evaluatePlan(recipe, N, nonLand, guaranteed, utilisation, profile));
+  const typal = evaluateTypal(N, nonLand, guaranteed, utilisation, profile);
   if (typal) evaluations.push(typal);
-  return evaluations.reduce(betterPlan, evaluations[0]);
+  return evaluations.reduce((best, c) => betterPlan(best, c, profile), evaluations[0]);
 }
 
 
@@ -762,23 +905,48 @@ export function evaluateClosing(
   nonLand: readonly DeckEntry[],
   guaranteed: readonly DeckEntry[] = [],
   utilisation?: Utilisation,
+  profile: ScoreProfile = 'commander',
 ): PlanEvaluation {
   const names = new Set(line.pieces.map((n) => n.toLowerCase()));
   const pieces = [...nonLand, ...guaranteed]
     .map((e) => e.feature)
     .filter((f) => names.has(f.card.name.toLowerCase()));
-  return evaluatePlan(closingRecipe(line, pieces), PLAN_BAND_REFERENCE, nonLand, guaranteed, utilisation);
+  // No role here carries a deadline, so the deployment rule cannot reach it;
+  // the profile is threaded only so the closing plan is ranked by the SAME S
+  // objective as the recipe it competes with (§9.2).
+  return evaluatePlan(closingRecipe(line, pieces), PLAN_BAND_REFERENCE, nonLand, guaranteed, utilisation, profile);
+}
+
+/**
+ * §9.2: the Q floor a plan must clear before it explains anything. The generic
+ * aggro/midrange/control recipes in a Commander-family profile answer to the
+ * MEASURED negative-control prior; an engine or closing plan keeps .30 and
+ * proves itself through its actual resource links instead.
+ *
+ * A 99-card pile has ~1.8x the nonland copies of the cohort the generic bands
+ * were measured on and fills ordinary threat/answer/value roles by accident;
+ * a typed sacrifice outlet beside its payoff and its fodder is not an accident.
+ */
+export function qBaselineFor(profile: ScoreProfile, key: PlanKey): number {
+  const generic = key === 'aggro' || key === 'midrange' || key === 'control';
+  return generic && profile !== 'standard' ? Q_BASELINE_GENERIC_COMMANDER : Q_BASELINE;
+}
+
+/** The plan-side of S: how much of the deck this recipe explains, discounted
+ * by how far its weakest essential falls short. Selection maximises it, and it
+ * is the SAME quantity `computeSynergy` reports (§9.2 "use the same final S
+ * objective in planFit and scoring") — never select on one floor and report
+ * another. */
+export function planFit(p: PlanEvaluation, profile: ScoreProfile = 'commander'): number {
+  const b = qBaselineFor(profile, p.recipe.key);
+  return clip((p.Q - b) / (Q_SATURATION - b)) * p.R;
 }
 
 /** The §1 ordering, exposed so `deck-score.ts` can fold in the closing plan
  * once `computeWin` has named the line. */
-/** The plan-side of S: how much of the deck this recipe explains, discounted
- * by how far its weakest essential falls short. Selection maximises it. */
-export function planFit(p: PlanEvaluation): number {
-  return clip((p.Q - 0.30) / 0.40) * p.R;
-}
-
-export function betterPlan(best: PlanEvaluation, candidate: PlanEvaluation): PlanEvaluation {
+export function betterPlan(
+  best: PlanEvaluation, candidate: PlanEvaluation, profile: ScoreProfile = 'commander',
+): PlanEvaluation {
   if (candidate.hasEmptyEssential !== best.hasEmptyEssential) {
     return best.hasEmptyEssential ? candidate : best;
   }
@@ -791,8 +959,8 @@ export function betterPlan(best: PlanEvaluation, candidate: PlanEvaluation): Pla
   // met" is not evidence the deck is executing it. Rank on the continuous
   // plan fit instead (the same quantity S reports) and keep the step count
   // only as a tie-break; known absence of a piece still wins outright above.
-  const fitBest = planFit(best);
-  const fitCandidate = planFit(candidate);
+  const fitBest = planFit(best, profile);
+  const fitCandidate = planFit(candidate, profile);
   if (fitCandidate !== fitBest) return fitCandidate > fitBest ? candidate : best;
   if (candidate.essentialFraction !== best.essentialFraction) {
     return candidate.essentialFraction > best.essentialFraction ? candidate : best;

@@ -11,11 +11,11 @@ import type { ResolvedCard } from '../../services/build-api/analysis-core';
 import { analyzeCommander, mergeProfiles } from './commander-synergy';
 import type { Archetype } from './deck-templates';
 import {
-  weightsFor, normsFor, qualityCap, SCORE_VERSION,
+  weightsFor, normsFor, qualityCap, profileOf, SCORE_VERSION,
   QUALITY_CAP_INTERCEPT, QUALITY_CAP_SLOPE, COVERAGE_EVIDENCE_THRESHOLD,
   HARD_CAP_INVALID, type ScoreFormat, type ComponentKey, type ScoreTuning,
 } from './deck-score-norms';
-import { selectPlan, evaluateClosing, betterPlan, type PlanKey } from './deck-score-plans';
+import { selectPlan, evaluateClosing, betterPlan, isManlandFinisher, type PlanKey } from './deck-score-plans';
 import { producerUtilisation } from './deck-score-producers';
 import { computeStructure, type ScoreGate } from './deck-score-gates';
 import { computeMana, computeCurve, type DeckEntry } from './deck-score-mana';
@@ -146,10 +146,18 @@ export function scoreDeck(input: Readonly<DeckScoreInput>, tuning?: Readonly<Sco
   // §8: plans are inferred from the whole deck, including commanders as
   // available resources, and the SAME selection feeds S and the archetype.
   const commanderEntries = commanderFeatures.map((f) => ({ feature: f, quantity: 1 }));
+  const profile = profileOf(format);
+  // §9.1: "typed manland finishers may supply R without entering nonland Q".
+  // They ride the same supply-only channel as the command zone, so they move R
+  // and never Q. Standard only — no other profile's recipes were measured with
+  // land-borne threats in them.
+  const planSupply = profile === 'standard'
+    ? [...commanderEntries, ...mainEntries.filter((e) => isManlandFinisher(e.feature))]
+    : commanderEntries;
   // §9.3: one utilisation table per deck, shared by every recipe, so all
   // candidate plans are ranked against the SAME feasible assignment.
   const utilisation = producerUtilisation(nonLandEntries, commanderEntries);
-  const plan = selectPlan(Math.max(1, N), nonLandEntries, commanderEntries, utilisation);
+  const plan = selectPlan(Math.max(1, N), nonLandEntries, planSupply, utilisation, profile);
   const archetype = inferArchetype(commanderFeatures, archetypeOfPlan(plan.recipe.key));
   const commanderCmc = commanderFeatures.reduce((max, f) => Math.max(max, f.c), 0);
 
@@ -169,9 +177,9 @@ export function scoreDeck(input: Readonly<DeckScoreInput>, tuning?: Readonly<Sco
   // were calibrated against it, and re-deriving it here would make W's input
   // depend on W's output.
   const finalPlan = win.closing
-    ? betterPlan(plan, evaluateClosing(win.closing, nonLandEntries, commanderEntries, utilisation))
+    ? betterPlan(plan, evaluateClosing(win.closing, nonLandEntries, planSupply, utilisation, profile), profile)
     : plan;
-  const synergy = computeSynergy(finalPlan, N, mainEntries);
+  const synergy = computeSynergy(finalPlan, N, mainEntries, profile);
   const metaResult = computeMeta(format, archetype, mainEntries, input.corpus);
 
   const scores: Record<ComponentKey, number> = {

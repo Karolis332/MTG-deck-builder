@@ -212,7 +212,7 @@ export const HARD_CAP_INVALID = 0;
 export const HARD_CAP_STRUCTURE = 19;
 export const HARD_CAP_UNRESOLVED = 39;
 
-export const SCORE_VERSION = '1.2.0';
+export const SCORE_VERSION = '1.3.0-rc1';
 
 /**
  * §8 "Pile separation belongs to S": `S = 100*clip((Q-.30)/(.70-.30))*R*B`.
@@ -223,6 +223,52 @@ export const SCORE_VERSION = '1.2.0';
  */
 export const Q_BASELINE = 0.30;
 export const Q_SATURATION = 0.70;
+
+/**
+ * v1.3 §9.2 "learn the generic Commander Q baseline from separate negative
+ * controls". For the GENERIC aggro/midrange/control recipes in a
+ * Commander-family profile only, `S = 100*clip((Q-b)/(.70-b))*R` with this
+ * higher baseline; engine and closing plans keep `Q_BASELINE` and their actual
+ * resource links.
+ *
+ * MEASURED, then frozen: the 95th percentile of `max(Q_aggro, Q_midrange,
+ * Q_control)` over 1,000 land/curve/colour-matched Commander negative controls
+ * (101 distinct commanders) whose commanders and seeds are held out from the
+ * 200 validation piles and from every §5 fixture, drawn at the cEDH cohort's
+ * own median typed coverage (.930) so unknown cards cannot be the
+ * discriminator. Distribution: p50 .458, p90 .530, p95 .542, p99 .581.
+ * `npx tsx scripts/deck-score-bands.ts negative` re-prints it; changing the
+ * number needs a score-version bump.
+ *
+ * A 99-card pile of legal singletons accidentally supplies ordinary threats,
+ * answers and value at Q ~ .46 with R = 1, which at .30 earned S ~ 40. This is
+ * a DENSITY test against accidental role supply.
+ *
+ * The §9.2 forecast was .46. It was measured against the FLAT §5 piles, whose
+ * curve and colours are not a real deck's; a curve-matched control fills the
+ * generic roles better and leaks more. Both values separate the 200 flat
+ * validation piles identically (196/200 total < 25, 193/200 S <= 5), so that
+ * cohort cannot choose between them — the fresh MATCHED controls can, and do:
+ * 189/200 and 145/200 at .542 against 178/200 and 66/200 at .472.
+ *
+ * Known cost, reported not hidden: `the-cabbage-merchant` (Q .600, R 1) falls
+ * to S 36.7 / total 49 and leaves its 55-70 band. Its Food -> body engine has
+ * no recipe — every engine recipe has an empty essential on it — so its only
+ * reading is generic midrange, .058 above a curve-matched pile. That is a
+ * missing recipe, not a wrong prior; §9.5 owns it.
+ */
+export const Q_BASELINE_GENERIC_COMMANDER = 0.542;
+
+/**
+ * §9.1 Standard deployment: a copy credited for a role with deadline `d`
+ * earns `a = clip(P(cast by d) / DEPLOYMENT_PROBABILITY_TARGET)`, where P is
+ * the lands-only hypergeometric probability of holding `ceil(c)` lands by that
+ * turn. .5 is the "even money" reference — a mode the deck casts on time half
+ * the time is one full unit of useful supply; anything rarer is discounted
+ * linearly. It replaces the v1.2 binary cutoff at the truncated land MEAN,
+ * which refused every five-drop of the modal 24-land Standard deck.
+ */
+export const DEPLOYMENT_PROBABILITY_TARGET = 0.5;
 
 /**
  * §8 "Evidence, not popularity-based support": below this TYPED coverage of

@@ -16,10 +16,12 @@ import path from 'path';
 import { scoreDeck } from '../src/lib/deck-score';
 import { deriveCardFeature } from '../src/lib/deck-score-features';
 import { producerUtilisation } from '../src/lib/deck-score-producers';
+import { selectPlan, qBaselineFor } from '../src/lib/deck-score-plans';
+import { profileOf } from '../src/lib/deck-score-norms';
 import type { ScoreFormat } from '../src/lib/deck-score';
 import {
   OUT_DIR as SHARED_OUT_DIR, FIXTURES, inBand, loadDataset,
-  type FixtureSpec, type LoadedDeck,
+  type Dataset, type FixtureSpec, type LoadedDeck,
 } from './deck-score-fixtures';
 
 const OUT_DIR = SHARED_OUT_DIR;
@@ -40,6 +42,11 @@ interface FixtureResult {
   /** §9.6 step 4: producer-utilisation summary — charged copies, how many are
    * stranded (u = 0) and the copy-weighted mean u. */
   utilisation: string;
+  /** §9.2 diagnostics: the selected plan, its Q/R and the floor it answered to. */
+  plan: string;
+  b: number;
+  Q: number;
+  R: number;
 }
 
 // ── Scoring + reporting ─────────────────────────────────────────────────
@@ -66,9 +73,17 @@ function runFixture(spec: FixtureSpec): FixtureResult {
   const charged = util.rows.reduce((a, r) => a + r.quantity, 0);
   const meanU = charged > 0 ? util.rows.reduce((a, r) => a + r.quantity * r.u, 0) / charged : 1;
   const utilisation = `${charged} charged, ${util.rows.filter((r) => r.u === 0).reduce((a, r) => a + r.quantity, 0)} stranded, mean u ${meanU.toFixed(2)}`;
+  const profile = profileOf(spec.format);
+  const cmdEntries = input.commander.map((c) => ({ feature: deriveCardFeature(c), quantity: 1 }));
+  const N = input.main.reduce((a, rc) => a + rc.quantity, 0);
+  const plan = N > 0 ? selectPlan(Math.max(1, N), nonLand, cmdEntries, undefined, profile) : null;
   return {
     fixture: spec.name, format: spec.format, score: result.score, components, gates: gateSummary,
     band: spec.band, purpose: spec.purpose, inBand: inBand(result.score, spec.band), ms, winReason, utilisation,
+    plan: plan?.recipe.key ?? '-',
+    b: plan ? qBaselineFor(profile, plan.recipe.key) : 0,
+    Q: plan?.Q ?? 0,
+    R: plan?.R ?? 0,
   };
 }
 
@@ -106,6 +121,23 @@ function acceptanceBlock(fixtures: FixtureResult[]): string {
   const fixtureS = (name: string): number => fixtures.find((f) => f.fixture === name)?.components.synergy ?? NaN;
   const row = (target: string, measured: string, ok: boolean) => `| ${target} | ${measured} | ${ok ? 'PASS' : 'FAIL'} |`;
 
+  // §9.1 acceptance is stated per COMPONENT, so the held-out Standard cohort
+  // is reported component by component, positives beside the losing field.
+  const cohort = (rows: Dataset['standardPositive']) => {
+    const scored = rows.map((r) => scoreDeck(r.input));
+    const S = scored.map((r) => componentOf(r, 'synergy'));
+    const W = scored.map((r) => componentOf(r, 'win'));
+    return {
+      n: scored.length,
+      total: stats(scored.map((r) => r.score)).median,
+      S: stats(S).median, sZeros: S.filter((v) => v === 0).length,
+      W: stats(W).median, wZeros: W.filter((v) => v === 0).length,
+    };
+  };
+  const negSorted = [...data.standardNegative].sort((a, b) => a.eventDate.localeCompare(b.eventDate));
+  const pos = cohort(heldOut);
+  const neg = cohort(negSorted.slice(Math.floor(negSorted.length * 0.6)));
+
   return [
     `n=${pileTotals.n} piles, ${cedh.n} cEDH lists, ${positives.n} held-out Standard positives.`,
     '',
@@ -117,6 +149,14 @@ function acceptanceBlock(fixtures: FixtureResult[]): string {
     row('S <= 5 on >= 95% of piles', `${piles.filter((r) => componentOf(r, 'synergy') <= 5).length}/${pileTotals.n}`, piles.filter((r) => componentOf(r, 'synergy') <= 5).length >= 0.95 * pileTotals.n),
     row('Meren S >= 85.5', String(fixtureS('meren-powerhouse')), fixtureS('meren-powerhouse') >= 85.5),
     row('precon S >= 70', String(fixtureS('precon-witherbloom')), fixtureS('precon-witherbloom') >= 70),
+    row('held-out Standard S median 75-85', String(pos.S), pos.S >= 75 && pos.S <= 85),
+    row('held-out Standard S zeros <= 6', `${pos.sZeros}/${pos.n}`, pos.sZeros <= 6),
+    row('held-out Standard W zeros = 0', `${pos.wZeros}/${pos.n}`, pos.wZeros === 0),
+    '',
+    '| Standard held-out cohort | n | total median | S median | S zeros | W median | W zeros |',
+    '|---|---:|---:|---:|---:|---:|---:|',
+    `| positives (newest 40%) | ${pos.n} | ${pos.total} | ${pos.S} | ${pos.sZeros} | ${pos.W} | ${pos.wZeros} |`,
+    `| losing field (newest 40%) | ${neg.n} | ${neg.total} | ${neg.S} | ${neg.sZeros} | ${neg.W} | ${neg.wZeros} |`,
     '',
     '| pile distribution | min | median | max |',
     '|---|---:|---:|---:|',
@@ -137,12 +177,12 @@ function main() {
 
   const componentKeys = ['mana', 'curve', 'interaction', 'advantage', 'win', 'synergy', 'meta'];
   const componentAbbrev: Record<string, string> = { mana: 'M', curve: 'C', interaction: 'I', advantage: 'A', win: 'W', synergy: 'S', meta: 'Fmeta' };
-  const header = `| Fixture | Format | Score | ${componentKeys.map((k) => componentAbbrev[k]).join(' | ')} | Gates | Band | IN/OUT | ms |\n` +
-    `|---|---|---:|${componentKeys.map(() => '---:').join('|')}|---|---|---|---:|\n`;
+  const header = `| Fixture | Format | Score | ${componentKeys.map((k) => componentAbbrev[k]).join(' | ')} | plan | Q | R | b | Gates | Band | IN/OUT | ms |\n` +
+    `|---|---|---:|${componentKeys.map(() => '---:').join('|')}|---|---:|---:|---:|---|---|---|---:|\n`;
   const rows = fixtures.map((f) => {
     const comps = componentKeys.map((k) => f.components[k]).join(' | ');
     const verdict = f.inBand === 'n/a' ? 'n/a' : f.inBand ? 'IN' : 'OUT';
-    return `| ${f.fixture} | ${f.format} | ${f.score} | ${comps} | ${f.gates} | ${f.band} | ${verdict} | ${f.ms.toFixed(2)} |`;
+    return `| ${f.fixture} | ${f.format} | ${f.score} | ${comps} | ${f.plan} | ${f.Q.toFixed(3)} | ${f.R.toFixed(3)} | ${f.b.toFixed(3)} | ${f.gates} | ${f.band} | ${verdict} | ${f.ms.toFixed(2)} |`;
   }).join('\n');
 
   const winRows = fixtures

@@ -581,7 +581,9 @@ describe('deriveCardFeature - a creature with no printed power is UNCERTAIN', ()
 
 describe('SCORE_VERSION', () => {
   it('is a frozen semver-shaped string', () => {
-    expect(SCORE_VERSION).toMatch(/^\d+\.\d+\.\d+$/);
+    // v1.3 ships as a release candidate while stages 3-4 land, so a semver
+    // PRERELEASE suffix is allowed; the numeric core still has to be frozen.
+    expect(SCORE_VERSION).toMatch(/^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?$/);
   });
 });
 

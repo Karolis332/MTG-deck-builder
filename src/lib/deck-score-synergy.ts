@@ -26,9 +26,9 @@
  * useful supply over required supply.
  */
 import { clip } from './deck-score-math';
-import { Q_BASELINE, Q_SATURATION } from './deck-score-norms';
+import { Q_SATURATION, type ScoreProfile } from './deck-score-norms';
 import type { DeckEntry, ComponentOutput } from './deck-score-mana';
-import { selectPlan, type PlanEvaluation } from './deck-score-plans';
+import { selectPlan, qBaselineFor, type PlanEvaluation } from './deck-score-plans';
 import { producerUtilisation } from './deck-score-producers';
 
 export interface SynergyOutput extends ComponentOutput {
@@ -37,6 +37,10 @@ export interface SynergyOutput extends ComponentOutput {
   /** LEGACY, always 1. v1.2's payoff-mean multiplier, retired by §9.3. */
   B: number;
   plan: PlanEvaluation;
+  /** The Q floor the selected plan answered to (§9.2). .30 for engine and
+   * closing plans; the measured negative-control prior for the generic trio
+   * in a Commander-family profile. */
+  b: number;
   /** Mean producer utilisation over the charged producers, copy-weighted.
    * 1 when the deck produces nothing that needs a route. */
   U: number;
@@ -50,13 +54,14 @@ export function computeSynergy(
   archetypePlan: PlanEvaluation | null,
   N: number,
   mainEntries: readonly DeckEntry[],
+  profile: ScoreProfile = 'commander',
 ): SynergyOutput {
   const nonLand = mainEntries.filter((e) => !e.feature.isLand);
   const F = nonLand.reduce((s, e) => s + e.quantity, 0);
-  const emptyPlan = archetypePlan ?? selectPlan(Math.max(1, N), nonLand);
+  const emptyPlan = archetypePlan ?? selectPlan(Math.max(1, N), nonLand, [], undefined, profile);
   if (F === 0) {
     return {
-      score: 0, Q: 0, R: 0, B: 1, U: 1, plan: emptyPlan, unknownPrerequisite: null,
+      score: 0, Q: 0, R: 0, B: 1, U: 1, plan: emptyPlan, b: qBaselineFor(profile, emptyPlan.recipe.key), unknownPrerequisite: null,
       reason: '0% supports no plan; weakest dependency none 0/0; 0 unsupported payoffs.',
     };
   }
@@ -74,11 +79,14 @@ export function computeSynergy(
   const U = charged > 0 ? served / charged : 1;
   const stranded = util.rows.filter((r) => r.u === 0).reduce((s, r) => s + r.quantity, 0);
 
-  const coherence = clip((Q - Q_BASELINE) / (Q_SATURATION - Q_BASELINE));
+  // §9.2: `S = 100*clip((Q-b)/(.70-b))*R`, the SAME objective `planFit`
+  // maximised when it picked this recipe.
+  const b = qBaselineFor(profile, plan.recipe.key);
+  const coherence = clip((Q - b) / (Q_SATURATION - b));
   const score = 100 * coherence * R;
 
   return {
-    score, Q, R, B: 1, U, plan, unknownPrerequisite: null,
+    score, Q, R, B: 1, U, plan, b, unknownPrerequisite: null,
     reason: `${Math.round(Q * 100)}% supports ${plan.recipe.key}; weakest dependency ${plan.weakest.key} ${plan.weakest.supply.toFixed(1)}/${Math.round(plan.weakest.required)}; ${stranded} unsupported payoffs.`,
   };
 }

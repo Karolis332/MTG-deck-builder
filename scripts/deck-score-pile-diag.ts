@@ -9,12 +9,14 @@
  *   MTG_DB_DIR=... npx tsx scripts/deck-score-pile-diag.ts [topN]
  */
 import { scoreDeck, type DeckScoreInput } from '../src/lib/deck-score';
-import { selectPlan, evaluatePlan, planFit, PLAN_RECIPES, PLAN_BAND_REFERENCE }
+import { selectPlan, evaluatePlan, planFit, recipesFor, qBaselineFor, PLAN_RECIPES, PLAN_BAND_REFERENCE }
   from '../src/lib/deck-score-plans';
+import { profileOf } from '../src/lib/deck-score-norms';
 import { computeSynergy } from '../src/lib/deck-score-synergy';
 import { deriveCardFeature } from '../src/lib/deck-score-features';
 import type { DeckEntry } from '../src/lib/deck-score-mana';
-import { loadDataset } from './deck-score-fixtures';
+import { loadDataset, loadRandomPiles } from './deck-score-fixtures';
+import { loadMatchedPiles } from './deck-score-piles';
 import { typalTheme, typalRecipe } from '../src/lib/deck-score-plans';
 import { normsFor } from '../src/lib/deck-score-norms';
 import { computeInteraction, computeAdvantage } from '../src/lib/deck-score-interaction';
@@ -236,7 +238,42 @@ function gaming(name: string): void {
   console.log(diag(`${name} AFTER`, broken));
 }
 
+/** `--allplans <fixture>`: every candidate recipe's Q / R / fit side by side,
+ * with the Q floor each one answers to (§9.2). The only way to tell "this deck
+ * has no engine recipe" from "its engine recipe lost the ranking". */
+function allPlans(name: string): void {
+  const data = loadDataset(200);
+  const f = data.fixtures.find((x) => x.name === name);
+  if (!f) { console.log(`no fixture ${name}`); return; }
+  const { N, nonLand, cmd } = entriesOf(f.input);
+  const profile = profileOf(f.format);
+  const util = producerUtilisation(nonLand, cmd);
+  console.log(`${name} (${f.format}, N=${N}) — selected ${selectPlan(Math.max(1, N), nonLand, cmd, util, profile).recipe.key}`);
+  console.log('| recipe | Q | R | b | fit | essFrac | emptyEssential | weakest |');
+  console.log('|---|---:|---:|---:|---:|---:|---|---|');
+  for (const recipe of recipesFor(profile)) {
+    const e = evaluatePlan(recipe, Math.max(1, N), nonLand, cmd, util, profile);
+    console.log(`| ${recipe.key} | ${e.Q.toFixed(3)} | ${e.R.toFixed(3)} | ${qBaselineFor(profile, recipe.key).toFixed(3)} | ` +
+      `${planFit(e, profile).toFixed(3)} | ${e.essentialFraction.toFixed(2)} | ${e.hasEmptyEssential} | ` +
+      `${e.weakest.key} ${e.weakest.supply.toFixed(1)}/${e.weakest.required.toFixed(1)} |`);
+  }
+}
+
+/** `--pins`: the exact numbers the v1.3 regression tests pin, printed in the
+ * shape they are pasted in. Re-run after any scoring change that is MEANT to
+ * move them; a change that moves them silently is the bug the pins catch. */
+function pins(): void {
+  const piles = loadRandomPiles(20).map((input) => scoreDeck(input).score);
+  console.log(`§5 piles 0-19 totals: [${piles.join(', ')}]`);
+  const controls = loadMatchedPiles(10, 2000, 0xf00d0000, 0.93);
+  console.log(`fresh matched controls 0-9 totals: [${controls.map((c) => scoreDeck(c.input).score).join(', ')}]`);
+  console.log(`fresh matched controls commanders: ${controls.map((c) => c.commander).join(' | ')}`);
+}
+
 function main(): void {
+  if (process.argv.includes('--pins')) { pins(); return; }
+  const ai = process.argv.indexOf('--allplans');
+  if (ai > 0) { allPlans(process.argv[ai + 1]); return; }
   const gi = process.argv.indexOf('--gaming');
   if (gi > 0) { gaming(process.argv[gi + 1]); return; }
   const wi = process.argv.indexOf('--win');

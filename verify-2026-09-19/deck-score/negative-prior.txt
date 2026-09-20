@@ -1,0 +1,16 @@
+matched Commander negative controls: n=1000, 101 distinct commanders
+land count p25/median/p90: 34/36/39
+winning generic recipe: aggro 471, midrange 332, control 197
+
+| statistic | value |
+|---|---:|
+| max-generic Q p50 | 0.458 |
+| max-generic Q p90 | 0.530 |
+| max-generic Q p95 (= b) | 0.542 |
+| max-generic Q p99 | 0.581 |
+| max-generic Q max | 0.655 |
+| cEDH positive typed coverage median (draw target) | 0.930 |
+| control typed coverage p25/median/p90 | 0.934/0.938/0.953 |
+
+frozen Q_BASELINE_GENERIC_COMMANDER = 0.542 (measured 0.542; accepted)
+S <= 5 needs Q <= b + .05*(.70-b) = 0.550 at R = 1.

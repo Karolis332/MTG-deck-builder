@@ -1,29 +1,29 @@
 # Deck Score v1 calibration report
 
-Generated 2026-09-20T13:41:37.088Z. Raw v1 numbers — weights are NOT tuned in this unit (docs/DECK_SCORE_SPEC.md §4 is a separate calibration pass).
+Generated 2026-09-20T14:26:34.002Z. Raw v1 numbers — weights are NOT tuned in this unit (docs/DECK_SCORE_SPEC.md §4 is a separate calibration pass).
 Component columns: M=mana C=curve I=interaction A=advantage W=win S=synergy Fmeta=meta.
 "ms" times only the `scoreDeck()` call (feature classification runs inside it); the spec's <20ms budget is stated as "after classification", so this number is a conservative upper bound, not an apples-to-apples comparison.
 
 **Card data:** `data/mtg-deck-builder.db` was refreshed 2026-09-19. Every fixture now resolves completely — the earlier run's "N unresolved" §2 39 caps and its `fail:legality` rows were a stale-card-DB artefact (a missing printing resolved to a row whose `legalities` did not say `legal`), not a scoring defect. The two remaining `fail` rows are the intended structural negatives: `meren-of-clan-nel-toth` is 101 cards as stored, `cabbage-merchant-current` is 101 cards plus Arena-illegal entries.
 
-| Fixture | Format | Score | M | C | I | A | W | S | Fmeta | Gates | Band | IN/OUT | ms |
-|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---|---|---|---:|
-| meren-powerhouse | commander | 75 | 97.8 | 94.4 | 95 | 82 | 68.7 | 100 | 50 | quality_cap<=75 | 65-80 | IN | 38.70 |
-| cabbage-cedh-input | commander | 73 | 82.5 | 85.1 | 97.5 | 85 | 74.3 | 65.7 | 50 | quality_cap<=72.6 | 35-50 | OUT | 12.93 |
-| precon-witherbloom | commander | 54 | 96.9 | 83 | 60.7 | 65 | 42.5 | 100 | 50 | quality_cap<=54 | 40-55 | IN | 8.56 |
-| the-cabbage-merchant | commander | 59 | 92.3 | 94.6 | 62.5 | 74.6 | 48.8 | 75 | 50 | quality_cap<=59 | 55-70 | IN | 9.42 |
-| imotekh-the-stormlord | commander | 60 | 88.1 | 93.4 | 51.9 | 74.6 | 50.6 | 100 | 50 | quality_cap<=60.5 | 45-65 | IN | 13.36 |
-| tazri-beacon-of-unity | commander | 68 | 90.4 | 94.4 | 96 | 70.1 | 59.8 | 79.8 | 50 | quality_cap<=67.8 | 40-60 | OUT | 19.19 |
-| meren-of-clan-nel-toth | commander | 19 | 97.5 | 95.6 | 95 | 81.8 | 68.7 | 99 | 50 | fail:structure,size; size<=19,quality_cap<=75 | 0-19 | IN | 6.63 |
-| ramos-dragon-engine | commander | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 50 | quality_cap<=20 | 0-19 | IN | 1.09 |
-| cabbage-merchant-current-brawl | brawl | 19 | 95.6 | 94.6 | 71 | 73.5 | 85 | 74.3 | 50 | fail:structure,size,legality; size<=19,legality<=19,quality_cap<=79.4 | 0-19 | IN | 10.46 |
-| tazri-upgraded-arena | brawl | 68 | 60.4 | 84.3 | 80.4 | 77.1 | 92.2 | 60.1 | 50 | quality_cap<=68.1 | 45-65 | OUT | 7.98 |
-| kuja-genome-sorcerer-arena | brawl | 71 | 90 | 84.7 | 92 | 91.7 | 63.7 | 100 | 50 | quality_cap<=71 | 60-80 | IN | 7.02 |
-| vivi-battery-arena | brawl | 76 | 87.8 | 82 | 100 | 100 | 69.5 | 85.7 | 50 | quality_cap<=75.6 | 70-85 | IN | 7.04 |
-| fire-lord-azula-competitive | competitivebrawl | 87 | 83.5 | 82 | 96 | 94.6 | 83.6 | 97.3 | 50 | quality_cap<=86.8 | 75-90 | IN | 7.77 |
-| cedhtop16-ballooncon6 | commander | 91 | 93.8 | 75 | 100 | 78.6 | 90.5 | 100 | 50 | quality_cap<=92.4 | 80-95 | IN | 10.04 |
-| standard-1445893-univerce | standard | 73 | 65.8 | 60.5 | 94 | 77.5 | 85 | 100 | 50 | quality_cap<=72.6 | 70-90 | IN | 3.12 |
-| standard-1445867-aljce | standard | 68 | 75.1 | 78.6 | 77.1 | 86.3 | 60.1 | 84.7 | 50 | quality_cap<=68.1 | 65-90 | IN | 2.72 |
+| Fixture | Format | Score | M | C | I | A | W | S | Fmeta | plan | Q | R | b | Gates | Band | IN/OUT | ms |
+|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---|---:|---:|---:|---|---|---|---:|
+| meren-powerhouse | commander | 75 | 97.8 | 94.4 | 95 | 82 | 68.7 | 100 | 50 | aristocrats | 0.778 | 1.000 | 0.300 | quality_cap<=75 | 65-80 | IN | 40.59 |
+| cabbage-cedh-input | commander | 61 | 82.5 | 85.1 | 97.5 | 85 | 74.3 | 51.3 | 50 | spells | 0.574 | 0.750 | 0.300 | quality_cap<=61 | 35-50 | OUT | 13.00 |
+| precon-witherbloom | commander | 54 | 96.9 | 83 | 60.7 | 65 | 42.5 | 100 | 50 | lifegain | 0.814 | 1.000 | 0.300 | quality_cap<=54 | 40-55 | IN | 8.62 |
+| the-cabbage-merchant | commander | 49 | 92.3 | 94.6 | 62.5 | 74.6 | 48.8 | 36.7 | 50 | midrange | 0.600 | 1.000 | 0.542 | quality_cap<=49.4 | 55-70 | OUT | 10.58 |
+| imotekh-the-stormlord | commander | 60 | 88.1 | 93.4 | 51.9 | 74.6 | 50.6 | 100 | 50 | recursion | 0.750 | 1.000 | 0.300 | quality_cap<=60.5 | 45-65 | IN | 12.07 |
+| tazri-beacon-of-unity | commander | 68 | 90.4 | 94.4 | 96 | 70.1 | 59.8 | 79.8 | 50 | typal | 0.619 | 1.000 | 0.300 | quality_cap<=67.8 | 40-60 | OUT | 16.82 |
+| meren-of-clan-nel-toth | commander | 19 | 97.5 | 95.6 | 95 | 81.8 | 68.7 | 99 | 50 | aristocrats | 0.766 | 0.990 | 0.300 | fail:structure,size; size<=19,quality_cap<=75 | 0-19 | IN | 7.49 |
+| ramos-dragon-engine | commander | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 50 | aggro | 0.000 | 0.000 | 0.542 | quality_cap<=20 | 0-19 | IN | 1.37 |
+| cabbage-merchant-current-brawl | brawl | 19 | 95.6 | 94.6 | 71 | 73.5 | 85 | 36.3 | 50 | midrange | 0.600 | 0.990 | 0.542 | fail:structure,size,legality; size<=19,legality<=19,quality_cap<=49 | 0-19 | IN | 7.79 |
+| tazri-upgraded-arena | brawl | 50 | 60.4 | 84.3 | 80.4 | 77.1 | 92.2 | 37.4 | 50 | midrange | 0.621 | 0.750 | 0.542 | quality_cap<=49.9 | 45-65 | IN | 9.69 |
+| kuja-genome-sorcerer-arena | brawl | 71 | 90 | 84.7 | 92 | 91.7 | 63.7 | 100 | 50 | spells | 0.750 | 1.000 | 0.300 | quality_cap<=71 | 60-80 | IN | 6.84 |
+| vivi-battery-arena | brawl | 76 | 87.8 | 82 | 100 | 100 | 69.5 | 85.7 | 50 | spells | 0.643 | 1.000 | 0.300 | quality_cap<=75.6 | 70-85 | IN | 6.41 |
+| fire-lord-azula-competitive | competitivebrawl | 87 | 83.5 | 82 | 96 | 94.6 | 83.6 | 97.3 | 50 | spells | 0.689 | 1.000 | 0.300 | quality_cap<=86.8 | 75-90 | IN | 7.86 |
+| cedhtop16-ballooncon6 | commander | 91 | 93.8 | 75 | 100 | 78.6 | 90.5 | 100 | 50 | spells | 0.705 | 1.000 | 0.300 | quality_cap<=92.4 | 80-95 | IN | 9.99 |
+| standard-1445893-univerce | standard | 73 | 65.8 | 60.5 | 94 | 77.5 | 85 | 100 | 50 | midrange | 0.872 | 1.000 | 0.300 | quality_cap<=72.6 | 70-90 | IN | 2.72 |
+| standard-1445867-aljce | standard | 68 | 75.1 | 86.4 | 89 | 86.3 | 60.1 | 84.7 | 50 | aggro | 0.639 | 1.000 | 0.300 | quality_cap<=68.1 | 65-90 | IN | 3.05 |
 
 Anchors in band: 13/16 (fixtures with a hard-cap-only band like "0-19" always count as anchors here; "if rule-valid" bands are graded the same way — this report does not re-derive Arena rule-validity separately).
 
@@ -58,15 +58,15 @@ pressure, mana, cards or answers is a direct plan use and never appears here.
 | Fixture | S | producers |
 |---|---:|---|
 | meren-powerhouse | 100 | 1 charged, 0 stranded, mean u 1.00 |
-| cabbage-cedh-input | 65.7 | 0 charged, 0 stranded, mean u 1.00 |
+| cabbage-cedh-input | 51.3 | 0 charged, 0 stranded, mean u 1.00 |
 | precon-witherbloom | 100 | 1 charged, 0 stranded, mean u 1.00 |
-| the-cabbage-merchant | 75 | 0 charged, 0 stranded, mean u 1.00 |
+| the-cabbage-merchant | 36.7 | 0 charged, 0 stranded, mean u 1.00 |
 | imotekh-the-stormlord | 100 | 0 charged, 0 stranded, mean u 1.00 |
 | tazri-beacon-of-unity | 79.8 | 0 charged, 0 stranded, mean u 1.00 |
 | meren-of-clan-nel-toth | 99 | 1 charged, 0 stranded, mean u 1.00 |
 | ramos-dragon-engine | 0 | 0 charged, 0 stranded, mean u 1.00 |
-| cabbage-merchant-current-brawl | 74.3 | 0 charged, 0 stranded, mean u 1.00 |
-| tazri-upgraded-arena | 60.1 | 0 charged, 0 stranded, mean u 1.00 |
+| cabbage-merchant-current-brawl | 36.3 | 0 charged, 0 stranded, mean u 1.00 |
+| tazri-upgraded-arena | 37.4 | 0 charged, 0 stranded, mean u 1.00 |
 | kuja-genome-sorcerer-arena | 100 | 0 charged, 0 stranded, mean u 1.00 |
 | vivi-battery-arena | 85.7 | 2 charged, 2 stranded, mean u 0.00 |
 | fire-lord-azula-competitive | 97.3 | 2 charged, 0 stranded, mean u 0.50 |
@@ -80,16 +80,24 @@ n=200 piles, 30 cEDH lists, 120 held-out Standard positives.
 
 | section-8 target | measured | |
 |---|---|---|
-| held-out Standard positive median >= 75 | 46.5 | FAIL |
+| held-out Standard positive median >= 75 | 55 | FAIL |
 | cEDH median >= 85 | 82 | FAIL |
-| >= 95% of piles < 25 | 156/200 | FAIL |
-| S <= 5 on >= 95% of piles | 146/200 | FAIL |
+| >= 95% of piles < 25 | 196/200 | PASS |
+| S <= 5 on >= 95% of piles | 193/200 | PASS |
 | Meren S >= 85.5 | 100 | PASS |
 | precon S >= 70 | 100 | PASS |
+| held-out Standard S median 75-85 | 84.7 | PASS |
+| held-out Standard S zeros <= 6 | 3/120 | PASS |
+| held-out Standard W zeros = 0 | 1/120 | FAIL |
+
+| Standard held-out cohort | n | total median | S median | S zeros | W median | W zeros |
+|---|---:|---:|---:|---:|---:|---:|
+| positives (newest 40%) | 120 | 55 | 84.7 | 3 | 85 | 1 |
+| losing field (newest 40%) | 120 | 56 | 98.1 | 13 | 85 | 0 |
 
 | pile distribution | min | median | max |
 |---|---:|---:|---:|
-| total | 20 | 20 | 46 |
-| S | 0 | 0.7 | 32.6 |
+| total | 20 | 20 | 33 |
+| S | 0 | 0 | 16.8 |
 
 Per section 5: eligible legal singleton cards ordered by SHA-256(seed + canonical id), first N take the nonbasic slots, remaining slots filled with basics split across the commander's color identity. The synthetic basics no longer reuse the commander's card id (section 8), so pile lands are finally scored as lands.
