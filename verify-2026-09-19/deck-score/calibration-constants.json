@@ -46,8 +46,8 @@
       "meta": 0,
       "structure": 0
     },
-    "countMultiplier": 1.15,
-    "pWin": 0.5499999999999999,
+    "countMultiplier": 0.85,
+    "pWin": 0.65,
     "h": 3,
     "tFast": 7,
     "poolSizeCap": 4,

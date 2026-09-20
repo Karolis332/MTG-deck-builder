@@ -25,11 +25,11 @@ import type { DeckEntry } from './deck-score-mana';
 import type { ClosingLine } from './deck-score-win';
 import { producerUtilisation, type Utilisation } from './deck-score-producers';
 import {
-  DEPLOYMENT_PROBABILITY_TARGET, Q_BASELINE, Q_BASELINE_GENERIC_COMMANDER, Q_SATURATION,
-  type ScoreProfile,
+  DEPLOYMENT_PROBABILITY_TARGET, Q_BASELINE, Q_BASELINE_ENGINE, Q_BASELINE_GENERIC_COMMANDER,
+  Q_SATURATION, type ScoreProfile,
 } from './deck-score-norms';
 
-export type PlanKey = 'aggro' | 'midrange' | 'control' | 'aristocrats' | 'lifegain' | 'spells' | 'combo' | 'typal' | 'recursion';
+export type PlanKey = 'aggro' | 'midrange' | 'control' | 'aristocrats' | 'lifegain' | 'spells' | 'combo' | 'typal' | 'recursion' | 'conversion' | 'tokens' | 'counters';
 
 export interface PlanRole {
   key: string;
@@ -67,6 +67,11 @@ export interface PlanRecipe {
   key: PlanKey;
   label: string;
   roles: readonly PlanRole[];
+  /** Bands measured ONLY on the 2,777-list Commander sample. §1's replacement
+   * rule needs a cohort of >= 30 reviewed same-format lists before a band may
+   * be claimed, and no 60-card cohort was measured for these, so they are not
+   * offered to the Standard path at all (§9.1 dispatches by format). */
+  commanderOnly?: boolean;
 }
 
 // ── Role predicates ───────────────────────────────────────────────────────
@@ -231,6 +236,80 @@ function graveyardFuel(f: CardFeature): boolean {
   return RE_GRAVEYARD_ENTRY.test(f.card.oracle_text || '') || f.isSacOutlet;
 }
 
+// ── §9.6 step 3 engine families: conversion / tokens / counters ───────────
+//
+// §8's engine list names "creature versus noncreature tokens, artifact/tribal/
+// spell conditions and conversions" and "lifegain/life-payment/counters". The
+// three recipes below are the conversions that had no recipe at all, which is
+// why `the-cabbage-merchant` — a deck whose whole plan is Food into bodies —
+// read as generic midrange and `--allplans` showed an empty essential in every
+// engine recipe.
+//
+// Each is a PRODUCER/CONSUMER pair test. The consumer role is listed FIRST in
+// every one of them: a card that both makes the resource and spends it (Bosco,
+// Unlucky Cabbage Merchant) is scarce, and `evaluatePlan` assigns each copy to
+// the first role it fills, so putting the abundant producer first would strand
+// the engine's own converters in the wrong slot.
+
+/** Food, Treasure and Clue — stored resources, never bodies. Each is worth a
+ * life, a mana or a card only where something spends it, which is why
+ * `deck-score-producers.ts` charges them and `DIRECT_OUTPUT` excludes Food. */
+const RE_CLUE_PRODUCER = /create[^.]*clue/i;
+
+function storedResourceProducer(f: CardFeature): boolean {
+  return f.isFoodProducer || f.isTreasureProducer || RE_CLUE_PRODUCER.test(f.card.oracle_text || '');
+}
+
+/** The spend side of that link: a sacrifice-for-effect, the Food→life→payoff
+ * route, the counter route, or a trigger/count that reads the tokens. */
+const RE_SAC_STORED = /sacrifice (?:a|an|another|that|two|three|x|\d+) (?:artifact|food|treasure|clue|token)/i;
+const RE_TOKEN_ENTERS = /whenever (?:a|an|another|one or more)[^.]*(?:artifact|token)[^.]*enters/i;
+const RE_TOKEN_COUNT = /for each token you control|number of tokens you control/i;
+
+function storedResourceConverter(f: CardFeature): boolean {
+  const oracle = f.card.oracle_text || '';
+  return f.isFoodPayoff || f.isTokenPayoff || f.isLifegainPayoff || f.isCounterPayoff ||
+    RE_SAC_STORED.test(oracle) || RE_TOKEN_ENTERS.test(oracle) ||
+    RE_ARTIFACT_COUNT.test(oracle) || RE_TOKEN_COUNT.test(oracle);
+}
+
+/** What an engine converts INTO: a body that attacks, an anthem that turns a
+ * board into damage, drain, or burn. Without this role a conversion recipe
+ * would describe a loop that never touches an opponent. */
+function engineOutput(maxCost: number, minPower: number, ratio: number): (f: CardFeature) => boolean {
+  return (f) => threat(minPower, maxCost, ratio)(f) || f.isDrainPayoff || f.isDirectDamage;
+}
+
+/** Reads a wide board: an anthem, a per-creature count, a token payoff, a
+ * sacrifice outlet or a drain. A body alone is not a go-wide payoff. */
+const RE_WIDE_COUNT = /for each creature you control|number of creatures you control|creatures you control get/i;
+
+function widePayoff(f: CardFeature): boolean {
+  return f.isAnthemOrOverrun || f.isTokenPayoff || f.isCounterPayoff || f.isSacOutlet ||
+    f.isDrainPayoff || RE_WIDE_COUNT.test(f.card.oracle_text || '');
+}
+
+/** PUTS +1/+1 counters — the supply side of the counters engine. The keyword
+ * list is the rules-defined set of mechanics that place them, so a card
+ * carrying only the word "counter" (a counterspell, a loyalty ability) is not
+ * a source. */
+const RE_COUNTER_SOURCE = /put (?:a|an|one|two|three|four|five|x|that many|\d+)[^.]*\+1\/\+1 counters? on|enters(?: the battlefield)? with[^.]*\+1\/\+1 counters?|\b(?:adapt|evolve|modular|outlast|bloodthirst|mentor|training|proliferate|graft|riot)\b/i;
+
+function counterSource(f: CardFeature): boolean {
+  return RE_COUNTER_SOURCE.test(f.card.oracle_text || '');
+}
+
+/** Reads the counters rather than merely carrying them. The first predicate
+ * set also accepted "counters on it", `undying`, `persist` and `evolve`, which
+ * is every creature that happens to arrive with a counter: the Cabbage paper
+ * list then read as a counters deck at Q .711 instead of the Food engine it
+ * plays. A payoff READS THE COUNT or multiplies it; carrying one does not. */
+const RE_COUNTER_READS = /for each \+1\/\+1 counter|whenever (?:one or more )?\+1\/\+1 counters? (?:is|are) put|double the number of \+1\/\+1 counters|\bproliferate\b|as long as [^.]*\+1\/\+1 counter/i;
+
+function counterPayoff(f: CardFeature): boolean {
+  return f.isCounterPayoff || RE_COUNTER_READS.test(f.card.oracle_text || '');
+}
+
 /** Worth recurring: a permanent that pays for the trip every time it arrives
  * — a real body, or an artifact/creature carrying an ETB or death trigger. */
 function recursionTarget(f: CardFeature): boolean {
@@ -391,6 +470,65 @@ export const PLAN_RECIPES: readonly PlanRecipe[] = [
       { key: 'fixing', essential: false, infrastructure: true, min: 0, max: 8, fills: infrastructure },
     ],
   },
+  // ── §9.6 step 3: the three conversions that had no recipe ───────────────
+  //
+  // Bands MEASURED on the 2,777-list Commander sample
+  // (`npx tsx scripts/deck-score-bands.ts commander --evaluated --raw`, cohorts
+  // assigned by the band-free `shapeCohort` rule) and frozen here as p25/p90 of
+  // that cohort, with an essential role's min floored at 1 —
+  // `verify-2026-09-19/deck-score/commander-bands-stage3-evaluated.txt`.
+  //
+  // `--evaluated` is §9.1's "remeasure using this SAME evaluator": the v1.2
+  // Commander bands counted bare `fills` matches, so a role with a deadline got
+  // a floor built from copies the scorer then refuses to cast. Measured that
+  // way the conversion `output` floor was 6 while the Cabbage paper list -- a
+  // deck whose whole plan is Food -- could deploy 3, and R was pinned at .50 by
+  // the measurement method rather than by the deck. `--raw` lifts only the
+  // typed-coverage gate, because corpus coverage is a property of the
+  // catalogue's size: gating it here freezes floors of p25 = 0.
+  //
+  // The 60-card `min`/`max` is the Commander band at 60/99 and is a scaled
+  // prior, not a measurement: `commanderOnly` keeps these recipes off the
+  // Standard path entirely, so it is only ever reached by a 59-card Standard
+  // Brawl deck, which is a Commander-family profile.
+  {
+    key: 'conversion',
+    commanderOnly: true,
+    label: 'Food/Treasure/Clue produced, then spent on bodies, life or cards',
+    roles: [
+      { key: 'converters', essential: true, min: 2, max: 10, cmd: { min: 4, max: 17 }, fills: storedResourceConverter },
+      { key: 'producers', essential: true, min: 5, max: 13, cmd: { min: 9, max: 21 }, servedBy: { roles: ['converters'], ratio: 3 }, fills: storedResourceProducer },
+      { key: 'output', essential: true, min: 2, max: 7, cmd: { min: 4, max: 12 }, deadline: 6, fills: engineOutput(6, 3, 0.75) },
+      { key: 'value', essential: false, min: 0, max: 8, fills: velocity(5) },
+      { key: 'answers', essential: false, min: 0, max: 5, fills: answer(5) },
+      { key: 'fixing', essential: false, infrastructure: true, min: 0, max: 8, fills: infrastructure },
+    ],
+  },
+  {
+    key: 'tokens',
+    commanderOnly: true,
+    label: 'a wide board of creature tokens, converted by anthems or an outlet',
+    roles: [
+      { key: 'payoff', essential: true, min: 4, max: 11, cmd: { min: 6, max: 18 }, fills: widePayoff },
+      { key: 'makers', essential: true, min: 3, max: 8, cmd: { min: 5, max: 13 }, deadline: 5, servedBy: { roles: ['payoff'], ratio: 3 }, fills: (f) => f.isCreatureTokenProducer },
+      { key: 'value', essential: true, min: 5, max: 10, cmd: { min: 8, max: 17 }, fills: velocity(5) },
+      { key: 'answers', essential: false, min: 0, max: 5, fills: answer(5) },
+      { key: 'fixing', essential: false, infrastructure: true, min: 0, max: 8, fills: infrastructure },
+    ],
+  },
+  {
+    key: 'counters',
+    commanderOnly: true,
+    label: '+1/+1 counters placed on bodies that read them',
+    roles: [
+      { key: 'payoff', essential: true, min: 1, max: 5, cmd: { min: 2, max: 9 }, fills: counterPayoff },
+      { key: 'sources', essential: true, min: 4, max: 10, cmd: { min: 6, max: 16 }, servedBy: { roles: ['payoff'], ratio: 3 }, fills: counterSource },
+      { key: 'carriers', essential: true, min: 2, max: 7, cmd: { min: 4, max: 12 }, deadline: 5, servedBy: { roles: ['sources'], ratio: 2 }, fills: threat(2, 5, 0.6) },
+      { key: 'value', essential: false, min: 0, max: 8, fills: velocity(5) },
+      { key: 'answers', essential: false, min: 0, max: 5, fills: answer(5) },
+      { key: 'fixing', essential: false, infrastructure: true, min: 0, max: 8, fills: infrastructure },
+    ],
+  },
 ];
 
 // ── §9.1 the Standard generic trio ────────────────────────────────────────
@@ -456,7 +594,7 @@ export const STANDARD_RECIPES: readonly PlanRecipe[] = [
 export function recipesFor(profile: ScoreProfile): readonly PlanRecipe[] {
   if (profile !== 'standard') return PLAN_RECIPES;
   const generic = new Set<PlanKey>(['aggro', 'midrange', 'control']);
-  return [...STANDARD_RECIPES, ...PLAN_RECIPES.filter((r) => !generic.has(r.key))];
+  return [...STANDARD_RECIPES, ...PLAN_RECIPES.filter((r) => !generic.has(r.key) && !r.commanderOnly)];
 }
 
 export function recipeFor(key: PlanKey, profile: ScoreProfile = 'commander'): PlanRecipe {
@@ -848,44 +986,134 @@ export function selectPlan(
 // the same list. This recipe is not frozen like the others: its essentials are
 // derived from the line `deck-score-win.ts` actually selected.
 
-/** A tutor counts only if its search filter can reach one of the pieces.
- * // ponytail: unrestricted "search your library for a card" plus a type-word
- * // match against the piece's type line. The exact typed filter/destination/
- * // delay is catalogue work (§8); this is the reachable subset of it. */
-function tutorReaches(f: CardFeature, pieces: readonly CardFeature[]): boolean {
-  if (!f.isTutor) return false;
-  const oracle = f.card.oracle_text || '';
+/**
+ * §9.5: "exact tutors to present pieces/support (at most two tutor hops, with
+ * target/destination/cost/delay checked)".
+ *
+ * DESTINATION — a search that ends in the graveyard or exile does not deliver
+ * a castable piece; hand, battlefield and top of library do. TARGET — the
+ * filter must name a word from the reachable card's type line, or be
+ * unrestricted. COST/DELAY — the tutor has to be affordable inside the line's
+ * own schedule, so a six-mana tutor earns nothing for a line that goes off on
+ * turn three.
+ */
+const RE_TUTOR_DEAD_END = /search your library for [^.]*(?:put (?:it|them|that card) into (?:your|its owner's) graveyard|exile (?:it|them|that card))/i;
+
+function searchFilterMatches(oracle: string, target: CardFeature): boolean {
   if (/search your library for a card/i.test(oracle)) return true;
-  return pieces.some((p) => (p.card.type_line || '')
+  return (target.card.type_line || '')
     .split(/[^A-Za-z]+/)
     .filter((word) => word.length > 3)
-    .some((word) => new RegExp(`search your library for [^.]*\\b${word}`, 'i').test(oracle)));
+    .some((word) => new RegExp(`search your library for [^.]*\\b${word}`, 'i').test(oracle));
 }
 
-/** Counterspells and Silence-class taxes: what keeps the line resolving. */
-function stackProtection(f: CardFeature): boolean {
-  return f.isCounterspell || f.isProtection;
+export function tutorReaches(f: CardFeature, pieces: readonly CardFeature[], byTurn = Infinity): boolean {
+  if (!f.isTutor) return false;
+  const oracle = f.card.oracle_text || '';
+  if (RE_TUTOR_DEAD_END.test(oracle)) return false;
+  if (f.c > byTurn) return false;
+  return pieces.some((p) => searchFilterMatches(oracle, p));
 }
 
 /**
- * Build the plan for an assembled closing line. Roles, in assignment order:
- * the pieces themselves, the tutors that reach them, the acceleration that
- * makes the line castable by `tStar`, the protection that resolves it, and
- * the selection that digs for all of the above.
+ * Hop two: a tutor that cannot name a piece but CAN find a tutor that can.
+ * Two hops is the spec's limit, so this never recurses — the hop-1 set is
+ * fixed before hop 2 is computed and a hop-2 tutor is never itself a target.
+ * Both hops' costs must fit the line's schedule together, which is what stops
+ * a chain of three-mana tutors from "reaching" a turn-three line.
  */
-export function closingRecipe(line: ClosingLine, pieces: readonly CardFeature[]): PlanRecipe {
-  const names = new Set(line.pieces.map((n) => n.toLowerCase()));
+export function tutorReachesInTwo(
+  f: CardFeature, pieces: readonly CardFeature[], hopOne: readonly CardFeature[], byTurn: number,
+): boolean {
+  if (tutorReaches(f, pieces, byTurn)) return true;
+  if (!f.isTutor) return false;
+  const oracle = f.card.oracle_text || '';
+  if (RE_TUTOR_DEAD_END.test(oracle)) return false;
+  return hopOne.some((t) => f.c + t.c <= byTurn && searchFilterMatches(oracle, t));
+}
+
+/** Counterspells, Silence-class taxes and the recovery that rebuys a piece out
+ * of the graveyard — §9.5's "line-compatible protection/recovery". */
+function stackProtection(f: CardFeature): boolean {
+  return f.isCounterspell || f.isProtection || graveyardRecursion(f);
+}
+
+/**
+ * §9.5: "timely stax that obstructs opponent actions while permitting our line
+ * or a paid exit". A tax or restriction binding OPPONENTS, or a symmetric one
+ * whose exit is a payment, landing inside the line's own clock. Nothing in
+ * this role reaches W by construction — `computeWin` never sees a plan — so a
+ * stax tag "earns neither invented extra turns nor a faster W clock".
+ */
+const RE_STAX_OPPONENT = /opponents? (?:can't|cannot)|each player (?:can't|cannot)|players can't|each opponent (?:sacrifices|skips|loses)|don't untap during|can't (?:be cast|search their|draw more than|untap)/i;
+const RE_STAX_TAX = /(?:spells?|abilities)[^.]*(?:your opponents|opponents)[^.]*cost \{\d+\} more|cost \{\d+\} more to cast/i;
+
+export function timelyStax(f: CardFeature, byTurn: number): boolean {
+  if (f.c > byTurn) return false;
+  const oracle = f.card.oracle_text || '';
+  return RE_STAX_OPPONENT.test(oracle) || RE_STAX_TAX.test(oracle);
+}
+
+/**
+ * §9.5 support-role upper bands, MEASURED on the TRAINING split of the 30
+ * reviewed cEDH Top-16 lists (the first 20 in file order; the last 10 are the
+ * holdout the acceptance run reports separately) —
+ * `npx tsx scripts/deck-score-bands.ts closing`, output in
+ * `verify-2026-09-19/deck-score/closing-bands.txt`: 18 of the 20 training
+ * lists assemble a line, and the upper band is p90 of that cohort's supply
+ * under the same evaluator (tutors 11, acceleration 23, protection 10, stax 3,
+ * selection 11). Only the UPPER bands come from the cohort — §9.5 freezes
+ * upper support bands, and a minimum taken from the same p25 would demand
+ * seven tutors of every deck that holds a combo. The `pieces` band stays
+ * derived from the line itself, because a line needs its own pieces whatever a
+ * cohort of other decks holds.
+ */
+export const CLOSING_SUPPORT_BAND = {
+  tutors: { min: 2, max: 11 },
+  acceleration: { max: 23 },
+  protection: { min: 2, max: 10 },
+  stax: { max: 3 },
+  selection: { max: 11 },
+} as const;
+
+/**
+ * Build the plan for an assembled closing line. Roles, in assignment order:
+ * the pieces themselves (from the root line AND any admitted backup), the
+ * tutors that reach them within two hops, the acceleration that makes the line
+ * castable by `tStar`, the protection or recovery that resolves it, the timely
+ * stax that buys the turns, and the selection that digs for all of the above.
+ *
+ * §9.5 "each copy earns at most one Q unit for a complete line's pieces OR a
+ * proved support path" is `evaluatePlan`'s own first-match assignment: one
+ * copy, one role. "Shared tutors count once" falls out of the same rule — a
+ * tutor that reaches two admitted lines is still one copy in `tutors`.
+ */
+export function closingRecipe(
+  line: ClosingLine,
+  pieces: readonly CardFeature[],
+  /** Every candidate copy in the deck — hop 1 is resolved over ALL of them
+   * before hop 2 is asked about any card, so the predicate cannot depend on
+   * the order `evaluatePlan` walks the deck in. */
+  pool: readonly CardFeature[] = [],
+  backups: readonly ClosingLine[] = [],
+): PlanRecipe {
+  const names = new Set([line, ...backups].flatMap((l) => l.pieces).map((n) => n.toLowerCase()));
   // Mana the line needs beyond a plain land drop per turn by its own t*.
   const shortfall = Math.max(1, Math.ceil(line.cost - line.tStar));
+  // A tutor has until the line goes off, plus the turn it is cast on.
+  const byTurn = Math.max(1, line.tStar);
+  const hopOne = pool.filter((f) => tutorReaches(f, pieces, byTurn));
+  const tutorFills = (f: CardFeature): boolean => tutorReachesInTwo(f, pieces, hopOne, byTurn);
   return {
     key: 'combo',
-    label: `${line.label} — pieces, tutors that reach them, acceleration and protection`,
+    label: `${line.label} — pieces, tutors that reach them, acceleration, protection and stax`,
     roles: [
-      { key: 'pieces', essential: true, min: line.required, max: line.required + 2, fills: (f) => names.has(f.card.name.toLowerCase()) },
-      { key: 'tutors', essential: true, min: 2, max: 10, fills: (f) => tutorReaches(f, pieces) },
-      { key: 'acceleration', essential: true, min: shortfall, max: 24, fills: (f) => infrastructure(f) && f.c <= 2 },
-      { key: 'protection', essential: true, min: 2, max: 14, fills: stackProtection },
-      { key: 'selection', essential: false, min: 0, max: 14, fills: velocity(4) },
+      { key: 'pieces', essential: true, min: line.required, max: line.required + 2 + backups.length * 2, fills: (f) => names.has(f.card.name.toLowerCase()) },
+      { key: 'tutors', essential: true, ...CLOSING_SUPPORT_BAND.tutors, fills: tutorFills },
+      { key: 'acceleration', essential: true, min: shortfall, max: CLOSING_SUPPORT_BAND.acceleration.max, fills: (f) => infrastructure(f) && f.c <= 2 },
+      { key: 'protection', essential: true, ...CLOSING_SUPPORT_BAND.protection, fills: stackProtection },
+      { key: 'stax', essential: false, min: 0, max: CLOSING_SUPPORT_BAND.stax.max, fills: (f) => timelyStax(f, byTurn) },
+      { key: 'selection', essential: false, min: 0, max: CLOSING_SUPPORT_BAND.selection.max, fills: velocity(4) },
     ],
   };
 }
@@ -906,30 +1134,40 @@ export function evaluateClosing(
   guaranteed: readonly DeckEntry[] = [],
   utilisation?: Utilisation,
   profile: ScoreProfile = 'commander',
+  /** §9.5 "admit complete compatible backup lines": their pieces join the same
+   * `pieces` role, so a copy still earns at most one Q unit. */
+  backups: readonly ClosingLine[] = [],
 ): PlanEvaluation {
-  const names = new Set(line.pieces.map((n) => n.toLowerCase()));
-  const pieces = [...nonLand, ...guaranteed]
-    .map((e) => e.feature)
-    .filter((f) => names.has(f.card.name.toLowerCase()));
+  const names = new Set([line, ...backups].flatMap((l) => l.pieces).map((n) => n.toLowerCase()));
+  const pool = [...nonLand, ...guaranteed].map((e) => e.feature);
+  const pieces = pool.filter((f) => names.has(f.card.name.toLowerCase()));
   // No role here carries a deadline, so the deployment rule cannot reach it;
   // the profile is threaded only so the closing plan is ranked by the SAME S
   // objective as the recipe it competes with (§9.2).
-  return evaluatePlan(closingRecipe(line, pieces), PLAN_BAND_REFERENCE, nonLand, guaranteed, utilisation, profile);
+  return evaluatePlan(closingRecipe(line, pieces, pool, backups), PLAN_BAND_REFERENCE, nonLand, guaranteed, utilisation, profile);
 }
 
 /**
- * §9.2: the Q floor a plan must clear before it explains anything. The generic
- * aggro/midrange/control recipes in a Commander-family profile answer to the
- * MEASURED negative-control prior; an engine or closing plan keeps .30 and
- * proves itself through its actual resource links instead.
+ * §9.2 / §9.6 step 3: the Q floor a plan must clear before it explains
+ * anything, measured on the same 1,000 matched negative controls. Two floors,
+ * each the p95 of a per-pile MAXIMUM: the generic trio's (§9.2, .542) and the
+ * engine families' (.559). Taking a maximum is what bounds the LEAK RATE
+ * rather than one family's rate — per-family p95s were measured and rejected
+ * for exactly that reason, see `Q_BASELINE_ENGINE`. `combo` keeps
+ * `Q_BASELINE` and the Standard path is untouched (§9.1 owns it).
  *
  * A 99-card pile has ~1.8x the nonland copies of the cohort the generic bands
  * were measured on and fills ordinary threat/answer/value roles by accident;
- * a typed sacrifice outlet beside its payoff and its fodder is not an accident.
+ * a typed sacrifice outlet beside its payoff and its fodder is not an accident
+ * — but at .30 the accident still scored, which is what these floors price.
  */
 export function qBaselineFor(profile: ScoreProfile, key: PlanKey): number {
+  if (profile === 'standard') return Q_BASELINE;
   const generic = key === 'aggro' || key === 'midrange' || key === 'control';
-  return generic && profile !== 'standard' ? Q_BASELINE_GENERIC_COMMANDER : Q_BASELINE;
+  if (generic) return Q_BASELINE_GENERIC_COMMANDER;
+  // The closing plan proves itself by completing its line's essentials, and
+  // its pile read must stay 0/200 rather than be priced (§9.5).
+  return key === 'combo' ? Q_BASELINE : Q_BASELINE_ENGINE;
 }
 
 /** The plan-side of S: how much of the deck this recipe explains, discounted

@@ -76,6 +76,11 @@ function archetypeOfPlan(key: PlanKey): Archetype {
   if (key === 'spells') return 'spellslinger';
   if (key === 'lifegain') return 'midrange';
   if (key === 'typal') return 'tribal';
+  // Food/Treasure conversion and go-wide both build a board of tokens, which
+  // is the one calibrated `Archetype` that describes them. Counters has no
+  // calibrated curve/E-star profile of its own, so it takes the neutral one.
+  if (key === 'conversion' || key === 'tokens') return 'tokens';
+  if (key === 'counters') return 'midrange';
   // Graveyard recursion has no calibrated curve/E-star profile of its own;
   // midrange is the neutral one, not an invented constant.
   if (key === 'recursion') return 'midrange';
@@ -177,7 +182,15 @@ export function scoreDeck(input: Readonly<DeckScoreInput>, tuning?: Readonly<Sco
   // were calibrated against it, and re-deriving it here would make W's input
   // depend on W's output.
   const finalPlan = win.closing
-    ? betterPlan(plan, evaluateClosing(win.closing, nonLandEntries, planSupply, utilisation, profile), profile)
+    ? betterPlan(
+      plan,
+      evaluateClosing(
+        win.closing, nonLandEntries, planSupply, utilisation, profile,
+        // §9.5: complete compatible backups joining the root line's package.
+        win.closingLines.filter((l) => l.id !== win.closing?.id),
+      ),
+      profile,
+    )
     : plan;
   const synergy = computeSynergy(finalPlan, N, mainEntries, profile);
   const metaResult = computeMeta(format, archetype, mainEntries, input.corpus);

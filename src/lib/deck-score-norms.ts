@@ -260,6 +260,47 @@ export const Q_SATURATION = 0.70;
 export const Q_BASELINE_GENERIC_COMMANDER = 0.542;
 
 /**
+ * v1.3 §9.6 step 3 — the SAME statistic for the engine families, measured on
+ * the SAME 1,000 matched controls at the same .930 coverage target:
+ * `npx tsx scripts/deck-score-bands.ts negative --engine --n 1000`
+ * (`verify-2026-09-19/deck-score/engine-floor.txt`). For each family, the p95
+ * of the Q it reads on a control where that recipe could actually be SELECTED
+ * (no empty essential) — a plan the pile holds no piece of never reaches
+ * `betterPlan`, so its Q would measure a population the floor never grades.
+ *
+ * | family | selectable n | p50 | p90 | p95 (frozen) | p99 | max |
+ * |---|---:|---:|---:|---:|---:|---:|
+ * | aristocrats | 132 | .429 | .489 | .507 | .548 | .571 |
+ * | lifegain    | 620 | .403 | .508 | .531 | .557 | .587 |
+ * | spells      | 966 | .417 | .523 | .554 | .593 | .623 |
+ * | recursion   | 143 | .394 | .507 | .521 | .581 | .603 |
+ * | conversion  | 667 | .459 | .516 | .525 | .547 | .569 |
+ * | tokens      | 861 | .426 | .507 | .523 | .540 | .574 |
+ * | counters    | 569 | .475 | .530 | .540 | .559 | .590 |
+ * | typal       |  65 | .444 | .508 | .517 | .540 | .590 |
+ * | ALL (max)   |1000 | .480 | .540 | .559 | .594 | .623 |
+ *
+ * ONE SHARED FLOOR, at the p95 of the per-pile MAXIMUM, not eight per-family
+ * p95s. Per-family floors were implemented and measured first, and they are
+ * the wrong statistic: each one bounds its OWN family at 5%, and a pile leaks
+ * through whichever of eleven recipes happens to fit it, so the union is not
+ * bounded. Measured in-sample on the very cohort the floors came from
+ * (`npx tsx scripts/deck-score-bands.ts controls --training --n 1000`):
+ * per-family floors give 923/1000 S <= 5 and 950/1000 total < 25, against
+ * 972/1000 and 981/1000 for the shared floor. The shared floor is also
+ * CHEAPER on the reviewed anchors, not dearer, because the spread between
+ * .554 and .559 is a rounding error next to the families it lifts: `vivi-
+ * battery-arena` S 61.0 -> 59.6, while `tazri-beacon-of-unity` returns to its
+ * 40-60 band. `combo` is excluded from the maximum and keeps `Q_BASELINE`.
+ *
+ * `combo` is absent on purpose: its essentials are derived from the assembled
+ * closing line, so §9.5's essential-completion check is its floor, and its
+ * pile read must stay 0/200 rather than be priced. Standard keeps `Q_BASELINE`
+ * for every recipe — §9.1 owns that path and this stage does not touch it.
+ */
+export const Q_BASELINE_ENGINE = 0.559;
+
+/**
  * §9.1 Standard deployment: a copy credited for a role with deadline `d`
  * earns `a = clip(P(cast by d) / DEPLOYMENT_PROBABILITY_TARGET)`, where P is
  * the lands-only hypergeometric probability of holding `ceil(c)` lands by that

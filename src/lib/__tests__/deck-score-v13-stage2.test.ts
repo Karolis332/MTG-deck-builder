@@ -13,7 +13,8 @@ import {
   PLAN_RECIPES, STANDARD_RECIPES, type PlanEvaluation,
 } from '../deck-score-plans';
 import {
-  Q_BASELINE, Q_BASELINE_GENERIC_COMMANDER, Q_SATURATION, DEPLOYMENT_PROBABILITY_TARGET,
+  Q_BASELINE, Q_BASELINE_ENGINE, Q_BASELINE_GENERIC_COMMANDER, Q_SATURATION,
+  DEPLOYMENT_PROBABILITY_TARGET,
 } from '../deck-score-norms';
 import { deriveCardFeature } from '../deck-score-features';
 import { loadRandomPiles } from '../../../scripts/deck-score-fixtures';
@@ -219,10 +220,17 @@ describe('§9.2 generic Q floor b, measured at p95 = .542 over 1,000 matched con
       expect(qBaselineFor('brawl', key)).toBe(Q_BASELINE_GENERIC_COMMANDER);
       expect(qBaselineFor('standard', key)).toBe(Q_BASELINE);
     }
-    for (const key of ['aristocrats', 'lifegain', 'spells', 'combo', 'typal', 'recursion'] as const) {
-      expect(qBaselineFor('commander', key)).toBe(Q_BASELINE);
-      expect(qBaselineFor('brawl', key)).toBe(Q_BASELINE);
+    // SUPERSEDED BY STAGE 3 for the engine families: they answered to
+    // `Q_BASELINE` here because no negative-control measurement existed for
+    // them yet. §9.6 step 3 measured one, so the assertion moves to the engine
+    // floor — except `combo`, which is still proved by completing its line.
+    for (const key of ['aristocrats', 'lifegain', 'spells', 'typal', 'recursion'] as const) {
+      expect(qBaselineFor('commander', key)).toBe(Q_BASELINE_ENGINE);
+      expect(qBaselineFor('brawl', key)).toBe(Q_BASELINE_ENGINE);
+      expect(qBaselineFor('standard', key)).toBe(Q_BASELINE);
     }
+    expect(qBaselineFor('commander', 'combo')).toBe(Q_BASELINE);
+    expect(qBaselineFor('brawl', 'combo')).toBe(Q_BASELINE);
   });
 
   it('scores a generic plan 0 at Q <= b and at most 5 just above it', () => {
@@ -261,10 +269,14 @@ describe('§9.1 dispatch is by FORMAT: the Standard change moves no Commander de
       expect(std.find((r) => r.key === key)).toBe(STANDARD_RECIPES.find((r) => r.key === key));
       expect(std.find((r) => r.key === key)).not.toBe(PLAN_RECIPES.find((r) => r.key === key));
     }
-    // The engine families are shared, not duplicated.
+    // The v1.2 engine families are shared, not duplicated. The three v1.3
+    // recipes are `commanderOnly`: their bands were measured only on the
+    // 2,777-list Commander sample, and §1 needs a >= 30-list same-format
+    // cohort before a band may be claimed, so Standard never sees them.
     const engines = (list: readonly { key: string }[]) =>
       list.filter((r) => !['aggro', 'midrange', 'control'].includes(r.key));
-    expect(engines(std)).toEqual(engines(PLAN_RECIPES));
+    expect(engines(std).map((r) => r.key)).toEqual(['aristocrats', 'lifegain', 'spells', 'recursion']);
+    expect(engines(std)).toEqual(engines(PLAN_RECIPES).filter((r) => !PLAN_RECIPES.find((p) => p.key === r.key)?.commanderOnly));
   });
 
   it('pins the first 20 section-5 validation piles', () => {
@@ -272,8 +284,11 @@ describe('§9.1 dispatch is by FORMAT: the Standard change moves no Commander de
     // Standard deployment rule or the Standard recipes ever leaked into the
     // Commander profile these integers would move.
     // `npx tsx scripts/deck-score-pile-diag.ts --pins` reprints them.
+    // RE-PINNED at stage 3: the three piles that used to reach 21-24 read an
+    // engine recipe at the old .30 floor. With the measured engine floor the
+    // whole validation set is flat at 20 (200/200 under 25, 200/200 S <= 5).
     const scores = loadRandomPiles(20).map((input) => scoreDeck(input).score);
-    expect(scores).toEqual([24, 20, 20, 20, 20, 20, 20, 21, 20, 20, 21, 20, 20, 20, 20, 20, 20, 20, 20, 20]);
+    expect(scores).toEqual(new Array(20).fill(20));
   });
 });
 

@@ -621,6 +621,10 @@ export interface WinTotals {
 export interface WinOutput extends ComponentOutput {
   /** Non-null only when the best line is compact combo or alternate win. */
   closing: ClosingLine | null;
+  /** §9.5: every COMPLETE assembled line that meets the W access target, best
+   * first. `closing` is the root; the rest are the compatible backups S may
+   * admit. Empty when no line assembles. */
+  closingLines: readonly ClosingLine[];
 }
 
 /** Diagnostic twin of `computeWin`: every recipe it built, with pool sizes,
@@ -695,7 +699,7 @@ export function computeWin(
   if (control) recipes.push(control.recipe);
 
   if (recipes.length === 0) {
-    return { score: 0, closing: null, reason: 'no supported closing line: no catalogued win recipe present; t* never reached within 12 turns.' };
+    return { score: 0, closing: null, closingLines: [], reason: 'no supported closing line: no catalogued win recipe present; t* never reached within 12 turns.' };
   }
 
   const evals = recipes.slice(0, 8) // §1 W: "Retain at most 8 recipes"
@@ -725,20 +729,28 @@ export function computeWin(
   // without this it had no recipe to be read by and fell back to a generic
   // one. `evals` is already sorted by u, so the first hit is the best of them.
   // W's own score still comes from `best` - this only exposes the line.
-  const assembling = evals.find((e) => e.recipe.id.startsWith('combo:') || e.recipe.id === 'alt_win');
-  const closing: ClosingLine | null = assembling
-    ? {
-      id: assembling.recipe.id,
-      label: assembling.recipe.label,
-      pieces: assembling.recipe.pools.flatMap((pool) => pool.members.map((m) => m.name)),
-      required: assembling.recipe.pools.reduce((sum, pool) => sum + poolR(pool), 0),
-      cost: assembling.recipe.pools.reduce((sum, pool) => sum + poolCost(pool), 0) + assembling.recipe.extraCost,
-      tStar: assembling.atTurn || MAX_TURN,
-    }
-    : null;
+  const lineOf = (e: typeof evals[number]): ClosingLine => ({
+    id: e.recipe.id,
+    label: e.recipe.label,
+    pieces: e.recipe.pools.flatMap((pool) => pool.members.map((m) => m.name)),
+    required: e.recipe.pools.reduce((sum, pool) => sum + poolR(pool), 0),
+    cost: e.recipe.pools.reduce((sum, pool) => sum + poolCost(pool), 0) + e.recipe.extraCost,
+    tStar: e.atTurn || MAX_TURN,
+  });
+  const assembled = evals.filter((e) => e.recipe.id.startsWith('combo:') || e.recipe.id === 'alt_win');
+  const assembling = assembled[0];
+  const closing: ClosingLine | null = assembling ? lineOf(assembling) : null;
+  // §9.5 "admit complete compatible backup lines from the bounded <= 8-recipe
+  // catalogue": a line is admitted only when it is COMPLETE — every pool has
+  // its members — and reaches the same access target W already holds it to.
+  // `evals` is capped at 8 recipes upstream, so the catalogue bound holds.
+  const closingLines = assembled
+    .filter((e) => e.access >= norms.winAccessTarget && e.recipe.pools.every((pool) => pool.members.length >= poolR(pool)))
+    .map(lineOf);
   return {
     score,
     closing,
+    closingLines,
     reason: `${best.recipe.label}: closes T${best.atTurn || MAX_TURN}, access ${Math.round(best.access * 100)}% (u=${u1.toFixed(2)}); ${backup}; ${missing}.`,
   };
 }
