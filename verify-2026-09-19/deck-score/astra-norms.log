@@ -1,0 +1,5 @@
+[harness 19:36:59] codex gpt-6-astra in /c/Users/QuLeR/MTG-deck-builder
+[harness 19:44:00] codex unavailable (quota / version / auth) — see log.txt
+[harness 19:44:00] done executor=codex rc=75 report=/c/Users/QuLeR/.claude/harness/runs/20260919-193659-deck-score-norms-revision-astra-2026-09-19/report.md
+----- report (codex) -----
+EXIT 75

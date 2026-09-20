@@ -525,7 +525,16 @@ const ATOMS: Atom[] = [
   { kind: 'rider', re: /\bspend this mana only (?:to|on) [^.]*/gi },
   { kind: 'rider', re: /\byou may play (?:those cards|that card|them|it) this turn|you may cast (?:it|that card|them|spells this turn)[^.]*/gi },
   { kind: 'rider', re: /\byou may cast (?:this spell|it) without paying its mana cost|(?:this|that) spell can't be countered/gi },
-  { kind: 'rider', re: /\byou may choose new targets for it|this (?:creature|permanent) can't (?:block|attack)[^.,]*/gi },
+  // Stage 4a: the copy rider read "for it" only, so `Thousand-Year Storm`
+  // ("...copy it for each other instant and sorcery spell you've cast before
+  // it this turn. You may choose new targets for the copies.") finished with
+  // ZERO typed effects and no coverage at all — the marquee payoff of every
+  // storm list. The sentence carries no independent output in either form.
+  { kind: 'rider', re: /\byou may choose new targets for (?:it|the copy|the copies|that copy|those copies)|this (?:creature|permanent) can't (?:block|attack)[^.,]*/gi },
+  // The same class of narrow miss: the `looks? at the top N cards` atom above
+  // consumes its own clause and leaves the reorder tail unclaimed, which is
+  // why `Ponder` and every other look-and-reorder cantrip stayed partial.
+  { kind: 'rider', re: /\bputs? (?:them|it|those cards|these cards) back(?: in any order)?(?: on top(?: of your library)?)?/gi },
   { kind: 'rider', re: /\bwhen you do,?|if you don't,?|if it (?:was|is|does|isn't)[^.,]*,?/gi },
   { kind: 'rider', re: /\bnamed [A-Z][A-Za-z'\u2019-]*(?: [A-Z][A-Za-z'\u2019-]*)*/g },
   { kind: 'rider', re: /\blevel(?: up)?(?: \d+(?:-\d+)?)?\b|\bventure into the dungeon/gi },

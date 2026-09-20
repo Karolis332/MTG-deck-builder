@@ -9,18 +9,18 @@
  *   MTG_DB_DIR=... npx tsx scripts/deck-score-pile-diag.ts [topN]
  */
 import { scoreDeck, type DeckScoreInput } from '../src/lib/deck-score';
-import { selectPlan, evaluatePlan, planFit, recipesFor, qBaselineFor, PLAN_RECIPES, PLAN_BAND_REFERENCE }
+import { selectPlan, evaluatePlan, evaluateClosing, planFit, recipesFor, qBaselineFor, PLAN_RECIPES, PLAN_BAND_REFERENCE }
   from '../src/lib/deck-score-plans';
 import { profileOf } from '../src/lib/deck-score-norms';
 import { computeSynergy } from '../src/lib/deck-score-synergy';
 import { deriveCardFeature } from '../src/lib/deck-score-features';
 import type { DeckEntry } from '../src/lib/deck-score-mana';
 import { loadDataset, loadRandomPiles } from './deck-score-fixtures';
-import { loadMatchedPiles } from './deck-score-piles';
+import { loadMatchedPiles, loadCohortPiles, type SampleCohort } from './deck-score-piles';
 import { typalTheme, typalRecipe } from '../src/lib/deck-score-plans';
 import { normsFor } from '../src/lib/deck-score-norms';
 import { computeInteraction, computeAdvantage } from '../src/lib/deck-score-interaction';
-import { winDiagnostic } from '../src/lib/deck-score-win';
+import { winDiagnostic, computeWin } from '../src/lib/deck-score-win';
 import { producerUtilisation } from '../src/lib/deck-score-producers';
 
 const TOP = Number(process.argv[2] ?? 20);
@@ -102,6 +102,60 @@ function plans(name: string): void {
   console.log(diag(name, hit.input));
 }
 
+/**
+ * `--control <commander substring> [--cohort holdout|training]`: the same
+ * per-recipe table for ONE matched negative control, plus the closing plan the
+ * §9.5 fold-in would compare against it. A pile that reads `combo` is an
+ * acceptance failure, and this is the only way to see whether the cause is the
+ * line W assembled or the floor the other recipes answer to.
+ */
+function control(needle: string, cohort: SampleCohort): void {
+  const piles = loadCohortPiles(cohort, 1000, 0.93);
+  const matches = piles.filter((p) => p.commander.toLowerCase().includes(needle.toLowerCase()) || p.sampleId === needle);
+  if (matches.length === 0) { console.log(`no ${cohort} control matching "${needle}"`); return; }
+  // The round-robin order gives one pile per commander per pass, so a
+  // commander appears up to ten times with ten different seeds. Summarise them
+  // all, then open the one that reads `combo` (the acceptance failure) or the
+  // first otherwise.
+  for (const p of matches) {
+    const scored = scoreDeck(p.input);
+    console.log(`- sample ${p.sampleId}: total ${scored.score}, ` +
+      `S ${(scored.components.find((c) => c.key === 'synergy')?.score ?? 0).toFixed(1)}, ` +
+      `${scored.components.find((c) => c.key === 'synergy')?.reason ?? ''}`);
+  }
+  const hit = matches.find((p) => p.sampleId === needle)
+    ?? matches.find((p) => /supports combo;/.test(
+      scoreDeck(p.input).components.find((c) => c.key === 'synergy')?.reason ?? ''))
+    ?? matches[0];
+  const { N, all, nonLand, cmd } = entriesOf(hit.input);
+  const fmt = hit.input.format;
+  const norms = normsFor(fmt);
+  const util = producerUtilisation(nonLand, cmd);
+  const inter = computeInteraction(fmt, norms, 'midrange', N, all);
+  const adv = computeAdvantage(fmt, norms, 'midrange', N, all);
+  const win = computeWin(fmt, norms, 'midrange', N, all, cmd.map((e) => e.feature), {
+    E: inter.E, Estar: inter.Estar, D: adv.D, Dstar: adv.Dstar, hasDrawEngine: adv.hasDrawEngine,
+  });
+  const rows = recipesFor('commander').map((r) => evaluatePlan(r, Math.max(1, N), nonLand, cmd, util, 'commander'));
+  if (win.closing) {
+    rows.push(evaluateClosing(win.closing, nonLand, [], util, 'commander',
+      win.closingLines.filter((l) => l.id !== win.closing?.id)));
+  }
+  const r = scoreDeck(hit.input);
+  console.log(`## ${hit.commander} (sample ${hit.sampleId}, ${cohort}) — N=${N}, lands ${hit.lands}, ` +
+    `total ${r.score}, S ${(r.components.find((c) => c.key === 'synergy')?.score ?? 0).toFixed(1)}, ` +
+    `closing line ${win.closing?.id ?? 'none'}`);
+  console.log(`W ${win.score.toFixed(1)} — ${win.reason}`);
+  console.log(`closingLines: ${win.closingLines.map((l) => `${l.id} (${l.pieces.length} pieces, r=${l.required}, T${l.tStar})`).join(' | ') || 'none'}`);
+  console.log('| recipe | Q | R | b | fit | essFrac | empty | weakest |');
+  console.log('|---|---:|---:|---:|---:|---:|---|---|');
+  for (const e of rows.sort((a, b) => planFit(b, 'commander') - planFit(a, 'commander'))) {
+    console.log(`| ${e.recipe.key} | ${e.Q.toFixed(3)} | ${e.R.toFixed(3)} | ${qBaselineFor('commander', e.recipe.key).toFixed(3)} | ` +
+      `${planFit(e, 'commander').toFixed(3)} | ${e.essentialFraction.toFixed(2)} | ${e.hasEmptyEssential ? 'yes' : 'no'} | ` +
+      `${e.weakest.key} ${e.weakest.supply.toFixed(1)}/${e.weakest.required.toFixed(1)} |`);
+  }
+}
+
 /** `--win <fixture>`: every W recipe with its pools, t* and u. */
 function win(name: string): void {
   const ds = loadDataset(200);
@@ -172,8 +226,9 @@ function cards(name: string): void {
   const data = loadDataset(200);
   const f = data.fixtures.find((x) => x.name === name);
   if (!f) { console.log(`no fixture ${name}`); return; }
-  const { nonLand } = entriesOf(f.input);
-  console.log(`| q | card | c | pw | s | type | flags |`);
+  const { N, nonLand, cmd } = entriesOf(f.input);
+  const plan = selectPlan(Math.max(1, N), nonLand, cmd, undefined, profileOf(f.input.format));
+  console.log(`| q | card | c | pw | s | covered | role (${plan.recipe.key}) | type | flags |`);
   for (const e of nonLand) {
     const t = e.feature;
     const flags = Object.entries({
@@ -184,7 +239,8 @@ function cards(name: string): void {
       dies: t.hasDiesTrigger, eq: t.isEquipmentOrAura, ev: t.hasKeywordEvasion, anthem: t.isAnthemOrOverrun,
       alt: t.isAltWin, pw: t.isPlaneswalker, dmg: t.isDirectDamage,
     }).filter(([, v]) => v).map(([k]) => k).join(' ');
-    console.log(`| ${e.quantity} | ${t.card.name} | ${t.c} | ${t.power ?? ''} | ${t.s} | ${(t.card.type_line || '').split('—')[0].trim()} | ${flags} |`);
+    const role = t.s >= 1 && t.covered ? plan.recipe.roles.find((r) => r.fills(t))?.key ?? 'NONE' : 'gated';
+    console.log(`| ${e.quantity} | ${t.card.name} | ${t.c} | ${t.power ?? ''} | ${t.s} | ${t.covered ? 'y' : 'N'} | ${role} | ${(t.card.type_line || '').split('—')[0].trim()} | ${flags} |`);
   }
 }
 
@@ -276,6 +332,12 @@ function main(): void {
   if (ai > 0) { allPlans(process.argv[ai + 1]); return; }
   const gi = process.argv.indexOf('--gaming');
   if (gi > 0) { gaming(process.argv[gi + 1]); return; }
+  const coi = process.argv.indexOf('--control');
+  if (coi > 0) {
+    const chi = process.argv.indexOf('--cohort');
+    control(process.argv[coi + 1], chi > 0 ? (process.argv[chi + 1] as SampleCohort) : 'holdout');
+    return;
+  }
   const wi = process.argv.indexOf('--win');
   if (wi > 0) { win(process.argv[wi + 1]); return; }
   const pi = process.argv.indexOf('--plans');

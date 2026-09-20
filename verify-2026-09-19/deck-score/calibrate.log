@@ -1,0 +1,63 @@
+15:21:45 loading dataset (piles=200) ...
+15:21:46   piles=200 cedh=30 std+=300 std-=300
+15:21:46 [commander] self-check ok on 8 decks
+15:21:46 [commander] start loss=130.00
+15:21:54 [commander] 20/324 axis sets, best=130.00
+15:22:01 [commander] 40/324 axis sets, best=130.00
+15:22:09 [commander] 60/324 axis sets, best=130.00
+15:22:17 [commander] 80/324 axis sets, best=130.00
+15:22:24 [commander] 100/324 axis sets, best=130.00
+15:22:32 [commander] 120/324 axis sets, best=130.00
+15:22:41 [commander] 140/324 axis sets, best=130.00
+15:22:52 [commander] 160/324 axis sets, best=130.00
+15:23:01 [commander] 180/324 axis sets, best=130.00
+15:23:11 [commander] 200/324 axis sets, best=130.00
+15:23:21 [commander] 220/324 axis sets, best=130.00
+15:23:32 [commander] 240/324 axis sets, best=130.00
+15:23:43 [commander] 260/324 axis sets, best=130.00
+15:23:52 [commander] 280/324 axis sets, best=130.00
+15:24:03 [commander] 300/324 axis sets, best=130.00
+15:24:14 [commander] 320/324 axis sets, best=130.00
+15:24:16 [commander] final train loss=130.00 after 20413 candidates
+15:24:17 [commander] validation searched=0.83 centre=0.83 keep=searched
+15:24:17 [brawl] self-check ok on 5 decks
+15:24:17 [brawl] start loss=0.80
+15:24:18 [brawl] 20/324 axis sets, best=0.80
+15:24:19 [brawl] 40/324 axis sets, best=0.80
+15:24:20 [brawl] 60/324 axis sets, best=0.80
+15:24:20 [brawl] 80/324 axis sets, best=0.80
+15:24:21 [brawl] 100/324 axis sets, best=0.80
+15:24:22 [brawl] 120/324 axis sets, best=0.80
+15:24:23 [brawl] 140/324 axis sets, best=0.80
+15:24:23 [brawl] 160/324 axis sets, best=0.80
+15:24:24 [brawl] 180/324 axis sets, best=0.80
+15:24:25 [brawl] 200/324 axis sets, best=0.80
+15:24:26 [brawl] 220/324 axis sets, best=0.80
+15:24:27 [brawl] 240/324 axis sets, best=0.80
+15:24:28 [brawl] 260/324 axis sets, best=0.80
+15:24:28 [brawl] 280/324 axis sets, best=0.80
+15:24:29 [brawl] 300/324 axis sets, best=0.80
+15:24:30 [brawl] 320/324 axis sets, best=0.80
+15:24:30 [brawl] final train loss=0.80 after 20413 candidates
+15:24:30 [brawl] validation searched=0.80 centre=0.80 keep=searched
+15:24:30 [standard] self-check ok on 8 decks
+15:24:31 [standard] start loss=467.03
+15:24:43 [standard] 20/324 axis sets, best=462.76
+15:24:55 [standard] 40/324 axis sets, best=453.75
+15:25:06 [standard] 60/324 axis sets, best=453.75
+15:25:19 [standard] 80/324 axis sets, best=453.74
+15:25:33 [standard] 100/324 axis sets, best=453.74
+15:25:47 [standard] 120/324 axis sets, best=453.74
+15:26:01 [standard] 140/324 axis sets, best=453.74
+15:26:16 [standard] 160/324 axis sets, best=453.74
+15:26:28 [standard] 180/324 axis sets, best=453.74
+15:26:42 [standard] 200/324 axis sets, best=453.74
+15:26:53 [standard] 220/324 axis sets, best=453.74
+15:27:06 [standard] 240/324 axis sets, best=453.74
+15:27:19 [standard] 260/324 axis sets, best=453.74
+15:27:33 [standard] 280/324 axis sets, best=453.74
+15:27:47 [standard] 300/324 axis sets, best=453.74
+15:27:59 [standard] 320/324 axis sets, best=453.74
+15:28:01 [standard] final train loss=453.74 after 20413 candidates
+15:28:02 [standard] validation searched=388.60 centre=407.16 keep=searched
+15:28:02 wrote C:\Users\QuLeR\MTG-deck-builder\verify-2026-09-19\deck-score\calibration.md

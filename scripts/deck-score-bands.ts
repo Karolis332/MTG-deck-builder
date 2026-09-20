@@ -17,14 +17,15 @@
  * score-version bump.
  */
 import { loadStandardCohorts, loadStandardDbFixture, loadCedhCohort } from './deck-score-fixtures';
-import { loadMatchedPiles, readCommanderSample, cardsByName } from './deck-score-piles';
+import { loadMatchedPiles, loadCohortPiles, strideOrder, readCommanderSample, cardsByName, COHORT_SEED, HOLDOUT_EVERY, type SampleCohort } from './deck-score-piles';
 import { scoreDeck } from '../src/lib/deck-score';
 import type { DbCard } from '../src/lib/types';
 import { deriveCardFeature } from '../src/lib/deck-score-features';
 import { typalTheme, typalRecipe, evaluatePlan, evaluateTypal, evaluateClosing, isManlandFinisher, recipesFor, selectPlan, CLOSING_SUPPORT_BAND } from '../src/lib/deck-score-plans';
 import { PLAN_RECIPES, recipeFor, qBaselineFor, betterPlan, COMMANDER_BAND_REFERENCE, type PlanKey, type PlanRecipe } from '../src/lib/deck-score-plans';
 import { producerUtilisation } from '../src/lib/deck-score-producers';
-import { Q_BASELINE_GENERIC_COMMANDER, Q_SATURATION, normsFor, type ScoreProfile } from '../src/lib/deck-score-norms';
+import { Q_BASELINE_JOINT_COMMANDER, Q_SATURATION, normsFor, type ScoreProfile } from '../src/lib/deck-score-norms';
+import { clip } from '../src/lib/deck-score-math';
 import { computeInteraction, computeAdvantage } from '../src/lib/deck-score-interaction';
 import { computeWin } from '../src/lib/deck-score-win';
 import type { DeckEntry } from '../src/lib/deck-score-mana';
@@ -102,9 +103,22 @@ function evaluatedSupply(nonLand: DeckEntry[], N: number, recipe: PlanRecipe, ra
   return new Map(evaluation.roles.map((r) => [r.role.key, r.supply]));
 }
 
-function commanderBands(raw: boolean, evaluated = false): void {
+/**
+ * Stage 4a: bands are measured on the TRAINING cohort only — every list of the
+ * 100 holdout commanders is excluded, so no band is fitted to a commander the
+ * acceptance controls are drawn from. The order is `strideOrder`'s round-robin
+ * over commanders, so a truncated run is still commander-balanced.
+ */
+function cohortSample(cohort: SampleCohort | 'all'): SampleDeckWithIndex[] {
+  const sample = readCommanderSample();
+  if (cohort === 'all') return sample.map((deck, i) => ({ deck, i }));
+  return strideOrder(cohort, sample).map((i) => ({ deck: sample[i], i }));
+}
+type SampleDeckWithIndex = { deck: ReturnType<typeof readCommanderSample>[number]; i: number };
+
+function commanderBands(raw: boolean, evaluated = false, cohort: SampleCohort | 'all' = 'training'): void {
   const byName = cardsByName();
-  const decks = readCommanderSample();
+  const decks = cohortSample(cohort).map((r) => r.deck);
   const buckets = Object.fromEntries(PLAN_RECIPES.map((r) => [r.key, [] as DeckEntry[][]])) as Record<PlanKey, DeckEntry[][]>;
   const deckSize = new Map<DeckEntry[], number>();
   let unresolved = 0;
@@ -127,7 +141,7 @@ function commanderBands(raw: boolean, evaluated = false): void {
     deckSize.set(nonLand, entries.reduce((a, e) => a + e.quantity, 0));
   }
 
-  const lines = [`commander sample: ${decks.length} decks, ${resolvedDecks} resolved, ${unresolved} unresolved card rows`];
+  const lines = [`commander sample (${cohort} cohort): ${decks.length} decks, ${resolvedDecks} resolved, ${unresolved} unresolved card rows, ${new Set(decks.map((d) => d.commander.toLowerCase())).size} distinct commanders`];
   for (const recipe of PLAN_RECIPES) {
     const cohort = buckets[recipe.key];
     lines.push('', `## ${recipe.key} (n=${cohort.length}) — ${recipe.label}`);
@@ -169,7 +183,7 @@ function typalBands(): void {
   const byName = cardsByName();
   const rows: Record<string, number[]> = { payoff: [], enabler: [] };
   let decks = 0;
-  for (const deck of readCommanderSample()) {
+  for (const { deck } of cohortSample('training')) {
     const entries: DeckEntry[] = [];
     let missing = 0;
     for (const line of deck.cards) {
@@ -202,7 +216,7 @@ function typalBands(): void {
 //
 //   MTG_DB_DIR=... npx tsx scripts/deck-score-bands.ts negative [--n 1000]
 //
-// Freezes `Q_BASELINE_GENERIC_COMMANDER` at the 95th percentile of
+// Freezes `Q_BASELINE_JOINT_COMMANDER` at the 95th percentile of
 // `max(Q_aggro, Q_midrange, Q_control)` over land/curve/colour-matched
 // Commander controls whose commanders and seeds are held out from the 200
 // validation piles and from every §5 fixture. `b >= .70` rejects the statistic
@@ -238,15 +252,20 @@ function genericQ(input: Parameters<typeof scoreDeck>[0]): { q: number; key: Pla
  * `typal` is derived per deck and `combo` from the assembled closing line, so
  * both are evaluated through their own constructors rather than PLAN_RECIPES.
  */
-function engineFloors(n: number, offset: number, seed: number): void {
+function engineFloors(n: number): void {
   const positives = loadCedhCohort().map((d) => genericQ(d.input).coverage).sort((a, b) => a - b);
   const target = pct(positives, 50);
-  const piles = loadMatchedPiles(n, offset, seed, target);
+  const piles = loadCohortPiles('training', n, target);
   const generic = new Set<PlanKey>(['aggro', 'midrange', 'control']);
   const families = PLAN_RECIPES.filter((r) => !generic.has(r.key));
   const perFamily = new Map<string, number[]>(families.map((r) => [r.key, []]));
   perFamily.set('typal', []);
-  const maxEngine: number[] = [];
+  // One row per pile: every recipe it could be READ as, with the Q and the R
+  // the scorer would use. The floor-choice table below re-derives `planFit`
+  // from these, so a candidate floor is graded on selection as well as on the
+  // leak rate — a higher floor can also change WHICH recipe wins.
+  type Read = { key: string; Q: number; R: number; selectable: boolean; group: 'generic' | 'engine' };
+  const perPile: Read[][] = [];
 
   for (const pile of piles) {
     const entries: DeckEntry[] = pile.input.main.map((rc) => ({ feature: deriveCardFeature(rc.card), quantity: rc.quantity }));
@@ -254,20 +273,33 @@ function engineFloors(n: number, offset: number, seed: number): void {
     const cmd: DeckEntry[] = pile.input.commander.map((c) => ({ feature: deriveCardFeature(c), quantity: 1 }));
     const N = entries.reduce((a, e) => a + e.quantity, 0);
     const util = producerUtilisation(nonLand, cmd);
-    let best = 0;
-    const record = (key: string, e: ReturnType<typeof evaluatePlan>): void => {
-      if (e.hasEmptyEssential) return;
-      perFamily.get(key)?.push(e.Q);
-      if (e.Q > best) best = e.Q;
+    const reads: Read[] = [];
+    const record = (key: string, e: ReturnType<typeof evaluatePlan>, group: 'generic' | 'engine'): void => {
+      reads.push({ key, Q: e.Q, R: e.R, selectable: !e.hasEmptyEssential, group });
+      if (group === 'engine' && !e.hasEmptyEssential) perFamily.get(key)?.push(e.Q);
     };
-    for (const recipe of families) record(recipe.key, evaluatePlan(recipe, N, nonLand, cmd, util, 'commander'));
+    for (const recipe of families) record(recipe.key, evaluatePlan(recipe, N, nonLand, cmd, util, 'commander'), 'engine');
     const typal = evaluateTypal(N, nonLand, cmd, util, 'commander');
-    if (typal) record('typal', typal);
-    maxEngine.push(best);
+    if (typal) record('typal', typal, 'engine');
+    for (const key of GENERIC) record(key, evaluatePlan(recipeFor(key), N, nonLand, cmd, util, 'commander'), 'generic');
+    perPile.push(reads);
   }
 
+  // A family's floor grades only the piles where that family is SELECTABLE —
+  // a plan the pile holds no piece of never reaches `betterPlan`.
+  const maxOf = (group: 'generic' | 'engine' | 'all') => perPile
+    .map((reads) => reads
+      .filter((r) => r.selectable && (group === 'all' || r.group === group))
+      .reduce((m, r) => Math.max(m, r.Q), 0))
+    .sort((a, b) => a - b);
+  const maxEngine = maxOf('engine');
+  const maxGeneric = maxOf('generic');
+  const maxJoint = maxOf('all');
+
   const lines = [
-    `matched Commander negative controls: n=${piles.length}, offset ${offset}, seed 0x${seed.toString(16)}, coverage target ${target.toFixed(3)}`,
+    `matched Commander negative controls: n=${piles.length}, cohort training (commander-disjoint stride, ` +
+      `${new Set(piles.map((p) => p.commander)).size} distinct commanders), seed base 0x${COHORT_SEED.training.toString(16)}, ` +
+      `coverage target ${target.toFixed(3)}`,
     '',
     '| family | selectable n | Q p50 | Q p90 | Q p95 (= floor) | Q p99 | Q max | frozen |',
     '|---|---:|---:|---:|---:|---:|---:|---:|',
@@ -277,18 +309,34 @@ function engineFloors(n: number, offset: number, seed: number): void {
     const fmt = (x: number) => (Number.isFinite(x) ? x.toFixed(3) : '-');
     lines.push(`| ${key} | ${v.length} | ${fmt(pct(v, 50))} | ${fmt(pct(v, 90))} | ${fmt(pct(v, 95))} | ${fmt(pct(v, 99))} | ${fmt(v[v.length - 1])} | ${qBaselineFor('commander', key as PlanKey).toFixed(3)} |`);
   }
-  const me = [...maxEngine].sort((a, b) => a - b);
-  lines.push(`| ALL ENGINE (max per pile) | ${me.length} | ${pct(me, 50).toFixed(3)} | ${pct(me, 90).toFixed(3)} | ${pct(me, 95).toFixed(3)} | ${pct(me, 99).toFixed(3)} | ${me[me.length - 1].toFixed(3)} | - |`);
-  // The generic trio's statistic on the SAME draw, so a stage that moves the
-  // control sample can see whether b = .542 still sits at this cohort's p95.
-  const genericQs = piles.map((p) => genericQ(p.input).q);
-  const mg = [...genericQs].sort((a, b) => a - b);
-  lines.push(`| GENERIC (max per pile) | ${mg.length} | ${pct(mg, 50).toFixed(3)} | ${pct(mg, 90).toFixed(3)} | ${pct(mg, 95).toFixed(3)} | ${pct(mg, 99).toFixed(3)} | ${mg[mg.length - 1].toFixed(3)} | ${Q_BASELINE_GENERIC_COMMANDER.toFixed(3)} |`);
-  // TWO floors at p95 bound two families at 5% EACH, not their union at 5%.
-  // This row is the number that would bound it: the p95 of the maximum over
-  // every recipe a pile can read, generic and engine together.
-  const mj = maxEngine.map((q, i) => Math.max(q, genericQs[i])).sort((a, b) => a - b);
-  lines.push(`| JOINT (max over all recipes) | ${mj.length} | ${pct(mj, 50).toFixed(3)} | ${pct(mj, 90).toFixed(3)} | ${pct(mj, 95).toFixed(3)} | ${pct(mj, 99).toFixed(3)} | ${mj[mj.length - 1].toFixed(3)} | - |`);
+  const row = (label: string, v: number[], frozen: string): void => {
+    lines.push(`| ${label} | ${v.length} | ${pct(v, 50).toFixed(3)} | ${pct(v, 90).toFixed(3)} | ${pct(v, 95).toFixed(3)} | ${pct(v, 99).toFixed(3)} | ${v[v.length - 1].toFixed(3)} | ${frozen} |`);
+  };
+  // THREE candidate statistics. Two p95s bound two groups at 5% EACH, not
+  // their union at 5%: a pile leaks through whichever of eleven recipes fits
+  // it. The JOINT row is the only one that bounds the union.
+  row('ALL ENGINE (max per pile)', maxEngine, '-');
+  row('GENERIC (max per pile)', maxGeneric, '-');
+  row('JOINT (max over all recipes)', maxJoint, Q_BASELINE_JOINT_COMMANDER.toFixed(3));
+
+  // In-sample leak rate under each candidate, reproducing `planFit` + the
+  // selectable-first rule of `betterPlan` from the Q/R already measured.
+  const sUnder = (bGeneric: number, bEngine: number): number[] => perPile.map((reads) => {
+    const fit = (r: Read): number => {
+      const b = r.group === 'generic' ? bGeneric : bEngine;
+      return clip((r.Q - b) / (Q_SATURATION - b)) * r.R;
+    };
+    const pool = reads.some((r) => r.selectable) ? reads.filter((r) => r.selectable) : reads;
+    return 100 * pool.reduce((m, r) => Math.max(m, fit(r)), 0);
+  });
+  lines.push('', '| floor choice | generic b | engine b | in-sample S <= 5 | S median | S p95 |', '|---|---:|---:|---:|---:|---:|');
+  const choice = (label: string, bg: number, be: number): void => {
+    const S = sUnder(bg, be).sort((a, b) => a - b);
+    lines.push(`| ${label} | ${bg.toFixed(3)} | ${be.toFixed(3)} | ${S.filter((v) => v <= 5).length}/${S.length} | ${pct(S, 50).toFixed(1)} | ${pct(S, 95).toFixed(1)} |`);
+  };
+  choice('frozen', Q_BASELINE_JOINT_COMMANDER, Q_BASELINE_JOINT_COMMANDER);
+  choice('two floors (per-group p95)', pct(maxGeneric, 95), pct(maxEngine, 95));
+  choice('one shared floor (joint p95)', pct(maxJoint, 95), pct(maxJoint, 95));
   console.log(lines.join('\n'));
 }
 
@@ -299,7 +347,7 @@ function negativePrior(n: number): void {
   const positives = loadCedhCohort().map((d) => genericQ(d.input).coverage).sort((a, b2) => a - b2);
   const target = pct(positives, 50);
 
-  const piles = loadMatchedPiles(n, 0, 0x5eed0000, target);
+  const piles = loadCohortPiles('training', n, target);
   const rows = piles.map((p) => ({ ...genericQ(p.input), commander: p.commander, lands: p.lands }));
   const qs = rows.map((r) => r.q).sort((a, b2) => a - b2);
   const b = pct(qs, 95);
@@ -322,7 +370,7 @@ function negativePrior(n: number): void {
     `| cEDH positive typed coverage median (draw target) | ${target.toFixed(3)} |`,
     `| control typed coverage p25/median/p90 | ${pct(pileCoverage, 25).toFixed(3)}/${pct(pileCoverage, 50).toFixed(3)}/${pct(pileCoverage, 90).toFixed(3)} |`,
     '',
-    `frozen Q_BASELINE_GENERIC_COMMANDER = ${Q_BASELINE_GENERIC_COMMANDER}` +
+    `frozen Q_BASELINE_JOINT_COMMANDER = ${Q_BASELINE_JOINT_COMMANDER}` +
       ` (measured ${b.toFixed(3)}; ${b >= Q_SATURATION ? 'REJECTED: b >= .70' : 'accepted'})`,
     `S <= 5 needs Q <= b + .05*(.70-b) = ${(b + 0.05 * (Q_SATURATION - b)).toFixed(3)} at R = 1.`,
   ].join('\n'));
@@ -341,15 +389,17 @@ function freshControls(n: number, stride: boolean, training = false): void {
   // and the measurement bears that out: this slice's own max-generic Q p95 is
   // .574 against the training cohort's .542
   // (`verify-2026-09-19/deck-score/engine-floor-fresh.txt`).
-  // `--stride` keeps the same held-out region but takes one pile per commander
-  // block, so the holdout has the training cohort's commander diversity.
+  // Stage 4a replaces the index split with a COMMANDER split (`strideOrder`):
+  // `--stride` is the holdout cohort — 100 commanders that appear in no floor
+  // and in no band — drawn round-robin so any prefix is commander-balanced.
   // `--training` re-runs the acceptance counts on the SAME cohort the floors
   // were frozen from, which is the only way to tell "the floor is too low" from
-  // "the floor is a p95 of a different population".
+  // "the floor is a p95 of a different population". The contiguous default is
+  // KEPT and reported for information only: it is the stage-3 instrument.
   const piles = training
-    ? loadMatchedPiles(n, 0, 0x5eed0000, 0.93)
+    ? loadCohortPiles('training', n, 0.93)
     : stride
-      ? loadMatchedPiles(1700, 1000, 0xc0ffee00, 0.93).filter((_, i) => i % 8 === 0).slice(0, n)
+      ? loadCohortPiles('holdout', n, 0.93)
       : loadMatchedPiles(n, 2000, 0xf00d0000, 0.93);
   const scored = piles.map((p) => {
     const r = scoreDeck(p.input);
@@ -358,9 +408,14 @@ function freshControls(n: number, stride: boolean, training = false): void {
     const cmd: DeckEntry[] = p.input.commander.map((c) => ({ feature: deriveCardFeature(c), quantity: 1 }));
     const N = entries.reduce((a, e) => a + e.quantity, 0);
     const plan = selectPlan(Math.max(1, N), nonLand, cmd, undefined, 'commander');
+    // The closing plan is folded in INSIDE `scoreDeck` (after W names a line),
+    // so the only place its selection shows is the synergy reason line. A pile
+    // must never read as `combo` — §9.5 prices it by completing its own line.
+    const reason = r.components.find((c) => c.key === 'synergy')?.reason ?? '';
     return {
       total: r.score, S: r.components.find((c) => c.key === 'synergy')?.score ?? 0,
       commander: p.commander, key: plan.recipe.key, Q: plan.Q, R: plan.R,
+      scored: /supports ([\w-]+);/.exec(reason)?.[1] ?? '?',
     };
   });
   const totals = scored.map((r) => r.total).sort((a, b) => a - b);
@@ -382,6 +437,8 @@ function freshControls(n: number, stride: boolean, training = false): void {
     `S       min=${syn[0].toFixed(1)} median=${pct(syn, 50).toFixed(1)} p95=${pct(syn, 95).toFixed(1)} max=${syn[syn.length - 1].toFixed(1)}  <=5: ${syn.filter((v) => v <= 5).length}/${syn.length}`,
     `S > 5 by selected recipe: ${byKey.join(', ') || 'none'}`,
     `S > 5 Q/R median: ${pct(leaking.map((r) => r.Q).sort((a, b) => a - b), 50).toFixed(3)} / ${pct(leaking.map((r) => r.R).sort((a, b) => a - b), 50).toFixed(3)}`,
+    `closing (combo) reads: ${scored.filter((r) => r.scored === 'combo').length}/${scored.length}` +
+      `${scored.filter((r) => r.scored === 'combo').map((r) => ` [${r.commander} S ${r.S.toFixed(1)} total ${r.total}]`).join('')}`,
     `S > 5 by commander: ${[...leaking.reduce((m, r) => m.set(r.commander, (m.get(r.commander) ?? 0) + 1), new Map<string, number>())]
       .sort((a, b) => b[1] - a[1]).map(([k, v]) => `${k} ${v}`).join(', ') || 'none'}`,
   ].join('\n'));
@@ -553,7 +610,9 @@ function main(): void {
   if (process.argv.includes('closing')) { closingBands(); return; }
   if (process.argv.includes('cedh')) { cedhSplit(); return; }
   if (process.argv.includes('commander')) {
-    commanderBands(process.argv.includes('--raw'), process.argv.includes('--evaluated'));
+    const cohort: SampleCohort | 'all' = process.argv.includes('--all')
+      ? 'all' : process.argv.includes('--holdout') ? 'holdout' : 'training';
+    commanderBands(process.argv.includes('--raw'), process.argv.includes('--evaluated'), cohort);
     return;
   }
   if (process.argv.includes('controls')) {
@@ -565,11 +624,8 @@ function main(): void {
   if (process.argv.includes('negative')) {
     const nArg = process.argv.indexOf('--n');
     const n = nArg > 0 ? Number(process.argv[nArg + 1]) : 1000;
-    if (process.argv.includes('--engine')) {
-      const oArg = process.argv.indexOf('--offset');
-      const sArg = process.argv.indexOf('--seed');
-      engineFloors(n, oArg > 0 ? Number(process.argv[oArg + 1]) : 0,
-        sArg > 0 ? Number(process.argv[sArg + 1]) : 0x5eed0000);
+    if (process.argv.includes('--engine') || process.argv.includes('--joint')) {
+      engineFloors(n);
       return;
     }
     negativePrior(n);

@@ -1,0 +1,64 @@
+dated Standard positives: 2747 total, 1648 in the training split (oldest 60% by event_date)
+
+## aggro (n=74) — deployable pressure with reach, protection or reload
+| role | p10 | p25 | median | p75 | p90 | frozen min/max |
+|---|---:|---:|---:|---:|---:|---|
+| pressure | 3.0 | 4.0 | 5.0 | 11.0 | 15.0 | 12/22 |
+| reach | 4.0 | 7.0 | 9.0 | 11.0 | 12.0 | 2/14 |
+| answers | 0.0 | 0.0 | 0.0 | 2.0 | 2.0 | 0/6 |
+| fixing | 0.0 | 0.0 | 2.0 | 3.0 | 7.0 | 0/4 |
+
+## midrange (n=672) — timely threats, relevant answers, sustained value
+| role | p10 | p25 | median | p75 | p90 | frozen min/max |
+|---|---:|---:|---:|---:|---:|---|
+| threats | 2.0 | 4.0 | 6.0 | 8.0 | 10.0 | 4/16 |
+| answers | 4.0 | 6.0 | 9.0 | 12.0 | 15.0 | 2/13 |
+| value | 1.0 | 4.0 | 7.0 | 10.0 | 12.0 | 2/12 |
+| fixing | 0.0 | 0.0 | 0.0 | 2.0 | 4.0 | 0/8 |
+
+## control (n=170) — early stabilisation, advantage engine, accessible finisher
+| role | p10 | p25 | median | p75 | p90 | frozen min/max |
+|---|---:|---:|---:|---:|---:|---|
+| stabilisation | 8.0 | 8.0 | 10.0 | 11.0 | 11.0 | 3/12 |
+| engine | 5.0 | 7.0 | 13.0 | 14.0 | 15.0 | 3/14 |
+| finisher | 2.8 | 4.0 | 6.1 | 6.6 | 9.1 | 1/8 |
+| answers | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0/4 |
+| fixing | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0/4 |
+
+## aristocrats (n=478) — sacrifice outlets converting expendable bodies into damage
+| role | p10 | p25 | median | p75 | p90 | frozen min/max |
+|---|---:|---:|---:|---:|---:|---|
+| outlet | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 3/9 |
+| payoff | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 5/12 |
+| fodder | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 6/18 |
+| value | 0.0 | 2.0 | 4.0 | 5.0 | 6.0 | 0/8 |
+| answers | 0.0 | 0.0 | 1.0 | 2.0 | 4.0 | 0/5 |
+| fixing | 0.0 | 0.0 | 5.0 | 8.0 | 9.0 | 0/8 |
+
+## lifegain (n=0) — life gained as a resource, converted by counters or drain
+| role | p10 | p25 | median | p75 | p90 | frozen min/max |
+|---|---:|---:|---:|---:|---:|---|
+| payoff | - | - | - | - | - | 5/12 |
+| gain | - | - | - | - | - | 8/22 |
+| value | - | - | - | - | - | 2/10 |
+| answers | - | - | - | - | - | 0/5 |
+| fixing | - | - | - | - | - | 0/8 |
+
+## spells (n=240) — cast-trigger payoffs fed by cheap instants and sorceries
+| role | p10 | p25 | median | p75 | p90 | frozen min/max |
+|---|---:|---:|---:|---:|---:|---|
+| payoff | 0.0 | 6.0 | 8.0 | 8.0 | 8.0 | 3/10 |
+| closer | 4.0 | 4.0 | 4.0 | 6.0 | 16.0 | 2/8 |
+| spells | 2.0 | 10.0 | 18.0 | 20.0 | 22.0 | 12/32 |
+| answers | 0.0 | 0.0 | 0.0 | 0.0 | 4.0 | 0/8 |
+| fixing | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0/10 |
+
+## recursion (n=14) — permanents recurred from the graveyard, and the fuel that fills it
+| role | p10 | p25 | median | p75 | p90 | frozen min/max |
+|---|---:|---:|---:|---:|---:|---|
+| recursion | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 4/10 |
+| fuel | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 4/14 |
+| targets | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 6/18 |
+| value | 0.0 | 0.0 | 0.0 | 0.0 | 4.0 | 0/8 |
+| answers | 0.0 | 2.0 | 4.0 | 4.0 | 6.0 | 0/5 |
+| fixing | 0.0 | 0.0 | 0.0 | 4.0 | 9.0 | 0/8 |

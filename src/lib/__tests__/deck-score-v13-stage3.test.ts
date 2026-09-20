@@ -12,7 +12,7 @@ import {
   qBaselineFor, tutorReaches, tutorReachesInTwo, timelyStax,
   PLAN_RECIPES, CLOSING_SUPPORT_BAND, type PlanKey,
 } from '../deck-score-plans';
-import { Q_BASELINE, Q_BASELINE_ENGINE, Q_BASELINE_GENERIC_COMMANDER } from '../deck-score-norms';
+import { Q_BASELINE, Q_BASELINE_JOINT_COMMANDER } from '../deck-score-norms';
 import { deriveCardFeature } from '../deck-score-features';
 import type { ClosingLine } from '../deck-score-win';
 import { loadMatchedPiles } from '../../../scripts/deck-score-piles';
@@ -81,14 +81,14 @@ function fires(key: PlanKey, deck: DeckEntry[], N = 99): { Q: number; R: number;
 
 describe('§9.6 step 3 — every recipe family answers to exactly one floor', () => {
   it('maps every recipe key, with no family left on an unmeasured default', () => {
-    const generic: PlanKey[] = ['aggro', 'midrange', 'control'];
     const keys: PlanKey[] = [...PLAN_RECIPES.map((r) => r.key), 'typal', 'combo'];
     expect(new Set(keys).size).toBe(keys.length);
     for (const key of keys) {
       const floor = qBaselineFor('commander', key);
-      if (generic.includes(key)) expect(floor).toBe(Q_BASELINE_GENERIC_COMMANDER);
-      else if (key === 'combo') expect(floor).toBe(Q_BASELINE);
-      else expect(floor).toBe(Q_BASELINE_ENGINE);
+      // Stage 4a: the generic trio no longer selects a different floor — the
+      // two stage-3 floors were replaced by one joint measurement.
+      if (key === 'combo') expect(floor).toBe(Q_BASELINE);
+      else expect(floor).toBe(Q_BASELINE_JOINT_COMMANDER);
       // A family carries the SAME floor in every Commander-family profile and
       // the untouched .30 in Standard (§9.1 owns that path).
       expect(qBaselineFor('brawl', key)).toBe(floor);
@@ -96,19 +96,12 @@ describe('§9.6 step 3 — every recipe family answers to exactly one floor', ()
     }
   });
 
-  it('freezes the engine floor at the MEASURED p95 of the per-pile maximum', () => {
-    // `npx tsx scripts/deck-score-bands.ts negative --engine --n 1000`,
-    // verify-2026-09-19/deck-score/engine-floor.txt: 1,000 land/curve/colour-
-    // matched Commander controls at the cEDH cohort's .930 typed coverage.
-    // ALL ENGINE (max per pile) p50 .480 / p90 .540 / p95 .559 / p99 .594.
-    // The per-family p95s (aristocrats .507, lifegain .531, spells .554,
-    // recursion .521, conversion .525, tokens .523, counters .540, typal .517)
-    // were measured first and rejected: each bounds its OWN family at 5%, so
-    // the union over eleven recipes is not bounded — 923/1000 S <= 5 in-sample
-    // against 939/1000 for this single floor.
-    expect(Q_BASELINE_ENGINE).toBe(0.559);
-    expect(Q_BASELINE_ENGINE).toBeGreaterThan(Q_BASELINE_GENERIC_COMMANDER);
-    expect(Q_BASELINE_ENGINE).toBeLessThan(0.70);
+  it('freezes ONE floor at the MEASURED p95 of the per-pile maximum', () => {
+    // Stage 3 measured the ENGINE families' own p95 (.559) beside the generic
+    // trio's (.542). Stage 4a measured the JOINT statistic on the same kind of
+    // cohort and replaced both — see the stage-4a suite.
+    expect(Q_BASELINE_JOINT_COMMANDER).toBe(0.574);
+    expect(Q_BASELINE_JOINT_COMMANDER).toBeLessThan(0.70);
   });
 
   it('keeps the three v1.3 recipes off the Standard path', () => {
@@ -141,7 +134,7 @@ describe('conversion — Food/Treasure/Clue produced, then spent', () => {
     const r = fires('conversion', nonLand);
     expect(r.empty).toBe(false);
     expect(r.R).toBe(1);
-    expect(r.Q).toBeGreaterThan(Q_BASELINE_ENGINE);
+    expect(r.Q).toBeGreaterThan(Q_BASELINE_JOINT_COMMANDER);
     expect(selectPlan(99, nonLand, [], undefined, 'commander').recipe.key).toBe('conversion');
   });
 
@@ -150,7 +143,7 @@ describe('conversion — Food/Treasure/Clue produced, then spent', () => {
     const e = evaluatePlan(recipeFor('conversion'), pile.N, pile.nonLand, pile.cmd, undefined, 'commander');
     // Either the pile holds no piece of some essential role, or its supply
     // falls short of the measured floor — never a fully supplied engine.
-    expect(e.hasEmptyEssential || e.R < 1 || e.Q <= Q_BASELINE_ENGINE).toBe(true);
+    expect(e.hasEmptyEssential || e.R < 1 || e.Q <= Q_BASELINE_JOINT_COMMANDER).toBe(true);
   });
 
   it('bounds producers by the converters that spend them', () => {
@@ -185,7 +178,7 @@ describe('tokens — a wide board converted by an anthem or an outlet', () => {
   it('does NOT fire on a matched negative control', () => {
     const pile = matchedPile();
     const e = evaluatePlan(recipeFor('tokens'), pile.N, pile.nonLand, pile.cmd, undefined, 'commander');
-    expect(e.hasEmptyEssential || e.R < 1 || e.Q <= Q_BASELINE_ENGINE).toBe(true);
+    expect(e.hasEmptyEssential || e.R < 1 || e.Q <= Q_BASELINE_JOINT_COMMANDER).toBe(true);
   });
 });
 
@@ -225,7 +218,7 @@ describe('counters — +1/+1 counters placed on bodies that read them', () => {
   it('does NOT fire on a matched negative control', () => {
     const pile = matchedPile();
     const e = evaluatePlan(recipeFor('counters'), pile.N, pile.nonLand, pile.cmd, undefined, 'commander');
-    expect(e.hasEmptyEssential || e.R < 1 || e.Q <= Q_BASELINE_ENGINE).toBe(true);
+    expect(e.hasEmptyEssential || e.R < 1 || e.Q <= Q_BASELINE_JOINT_COMMANDER).toBe(true);
   });
 });
 
@@ -420,20 +413,19 @@ describe('stage 3 acceptance, fixture-backed', () => {
     expect(result.components.find((c) => c.key === 'synergy')?.score).toBeGreaterThanOrEqual(84.6);
   });
 
-  it('pins ten fresh matched controls, including the S leaks that still FAIL', () => {
-    // Full run, `npx tsx scripts/deck-score-bands.ts controls`: 199/200 total
-    // < 25 and 175/200 S <= 5 on the contiguous slice (22 commanders);
-    // `--stride` over the same held-out region with 162 commanders gives
-    // 193/200 and 187/200. Both S counts miss the >= 190 target, and the
-    // residual is the GENERIC trio's own 5% tail, not an engine read — so this
-    // pins the leaks rather than asserting an acceptance the stage did not
-    // reach. Four of these ten leak; the total gate holds on all ten.
+  it('pins ten fresh matched controls — stage 3 leaked four of them, stage 4a none', () => {
+    // The stage-3 reading of this same contiguous slice was
+    // [0, 0, 0, 8.6, 0, 6.2, 0, 0, 24.5, 20.1] at the .542/.559 pair: four
+    // leaks, 6/10 at S <= 5. The joint floor closes all four. Full run,
+    // `npx tsx scripts/deck-score-bands.ts controls`: 200/200 total < 25 and
+    // 199/200 S <= 5 on the contiguous slice (22 commanders, kept for
+    // information only); the acceptance instrument is `--stride`.
     const controls = loadMatchedPiles(10, 2000, 0xf00d0000, 0.93);
     const scored = controls.map((c) => scoreDeck(c.input));
     const syn = scored.map((r) => Number((r.components.find((c) => c.key === 'synergy')?.score ?? 0).toFixed(1)));
     expect(scored.map((r) => r.score)).toEqual([20, 20, 20, 20, 20, 20, 20, 20, 20, 20]);
-    expect(syn).toEqual([0, 0, 0, 8.6, 0, 6.2, 0, 0, 24.5, 20.1]);
-    expect(syn.filter((v) => v <= 5).length).toBe(6);
+    expect(syn).toEqual([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+    expect(syn.filter((v) => v <= 5).length).toBe(10);
   });
 
   it('never reads a closing plan on a matched control', () => {

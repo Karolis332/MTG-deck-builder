@@ -1,0 +1,20 @@
+| Fixture | Format | Score | M | C | I | A | W | S | cap | band | in |
+|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---|---|
+| meren-powerhouse | commander | 75 | 97.8 | 94.4 | 95 | 82 | 68.7 | 93.8 | 75 | 65-80 | IN |
+| cabbage-cedh-input | commander | 73 | 82.5 | 85.1 | 95 | 85 | 74.3 | 65.7 | 72.6 | 35-50 | OUT |
+| precon-witherbloom | commander | 52 | 96.9 | 83 | 32.1 | 65 | 42.5 | 39.7 | 51.8 | 40-55 | IN |
+| the-cabbage-merchant | commander | 59 | 92.3 | 94.6 | 62.5 | 74.6 | 48.8 | 71.2 | 59 | 55-70 | IN |
+| imotekh-the-stormlord | commander | 44 | 88.1 | 93.4 | 49.7 | 74.6 | 50.6 | 29.9 | 43.9 | 45-65 | OUT |
+| tazri-beacon-of-unity | commander | 32 | 90.4 | 94.4 | 76.6 | 61.4 | 59.8 | 14.7 | 31.8 | 40-60 | OUT |
+| meren-of-clan-nel-toth | commander | 19 | 97.5 | 95.6 | 95 | 81.8 | 68.7 | 92.8 | 75 | 0-19 | IN |
+| ramos-dragon-engine | commander | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 20 | 0-19 | IN |
+| cabbage-merchant-current-brawl | brawl | 19 | 95.6 | 94.6 | 71 | 73.5 | 85 | 70.4 | 76.3 | 0-19 | IN |
+| tazri-upgraded-arena | brawl | 32 | 60.4 | 84.3 | 77.2 | 77.1 | 92.2 | 15.3 | 32.2 | 45-65 | OUT |
+| kuja-genome-sorcerer-arena | brawl | 71 | 90 | 84.7 | 92 | 91.7 | 63.7 | 100 | 71 | 60-80 | IN |
+| vivi-battery-arena | brawl | 76 | 87.8 | 82 | 100 | 100 | 69.5 | 85.7 | 75.6 | 70-85 | IN |
+| fire-lord-azula-competitive | competitivebrawl | 87 | 83.5 | 82 | 96 | 94.6 | 83.6 | 99.2 | 86.8 | 75-90 | IN |
+| cedhtop16-ballooncon6 | commander | 88 | 93.8 | 75 | 100 | 78.6 | 90.5 | 84.6 | 87.7 | 80-95 | IN |
+| standard-1445893-univerce | standard | 73 | 65.8 | 60.5 | 94 | 77.5 | 85 | 100 | 72.6 | 70-90 | IN |
+| standard-1445867-aljce | standard | 68 | 75.1 | 78.6 | 77.1 | 86.3 | 60.1 | 84.7 | 68.1 | 65-90 | IN |
+
+piles n=200 min=20 median=20 max=38 over25=24

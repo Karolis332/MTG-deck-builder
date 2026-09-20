@@ -1,0 +1,6 @@
+fresh matched controls: n=200, 22 distinct commanders
+total   min=19 median=20 p95=20 max=25  <25: 199/200
+S       min=0.0 median=0.0 p95=18.6 max=34.7  <=5: 175/200
+S > 5 by selected recipe: control 23 (b=0.542, Q med 0.571), midrange 2 (b=0.542, Q med 0.556)
+S > 5 Q/R median: 0.571 / 1.000
+S > 5 by commander: Torgaar, Famine Incarnate 6, Katsumasa, the Animator 5, Myojin of Cryptic Dreams 4, Arno Dorian 2, Hancock, Ghoulish Mayor 2, Unctus, Grand Metatect 2, Hydro-Man, Fluid Felon 1, Lorcan, Warlock Collector 1, Shaun, Father of Synths 1, Kels, Fight Fixer 1

@@ -225,80 +225,50 @@ export const Q_BASELINE = 0.30;
 export const Q_SATURATION = 0.70;
 
 /**
- * v1.3 §9.2 "learn the generic Commander Q baseline from separate negative
- * controls". For the GENERIC aggro/midrange/control recipes in a
- * Commander-family profile only, `S = 100*clip((Q-b)/(.70-b))*R` with this
- * higher baseline; engine and closing plans keep `Q_BASELINE` and their actual
- * resource links.
+ * v1.3 §9.2 / §9.6 + stage 4a: ONE Q floor a plan must clear in a
+ * Commander-family profile before it explains anything. `S = 100 *
+ * clip((Q - b) / (.70 - b)) * R` for every generic and engine recipe; `combo`
+ * keeps `Q_BASELINE` because §9.5's essential-completion check is its floor
+ * and its pile read must stay 0/200 rather than be priced. Standard keeps
+ * `Q_BASELINE` throughout — §9.1 owns that path.
  *
- * MEASURED, then frozen: the 95th percentile of `max(Q_aggro, Q_midrange,
- * Q_control)` over 1,000 land/curve/colour-matched Commander negative controls
- * (101 distinct commanders) whose commanders and seeds are held out from the
- * 200 validation piles and from every §5 fixture, drawn at the cEDH cohort's
- * own median typed coverage (.930) so unknown cards cannot be the
- * discriminator. Distribution: p50 .458, p90 .530, p95 .542, p99 .581.
- * `npx tsx scripts/deck-score-bands.ts negative` re-prints it; changing the
- * number needs a score-version bump.
+ * MEASURED, then frozen: the 95th percentile of the per-pile MAXIMUM Q over
+ * ALL ELEVEN recipes (the three generic plus every engine family, `typal`
+ * included) on 1,000 land/curve/colour-matched Commander negative controls,
+ * drawn round-robin from 172 TRAINING commanders that appear in no §5
+ * fixture, in no band cohort and in no acceptance control, at the cEDH
+ * cohort's own median typed coverage (.930) so unknown cards cannot be the
+ * discriminator. Re-print with
+ * `npx tsx scripts/deck-score-bands.ts negative --joint --n 1000`
+ * (`verify-2026-09-19/deck-score/joint-floor.txt`); changing the number needs
+ * a score-version bump. `b >= .70` would reject the statistic (§9.2) — at
+ * that point the recipes separate nothing and the answer is a recipe change.
+ *
+ * | statistic (n = 1,000) | p50 | p90 | p95 | p99 | max |
+ * |---|---:|---:|---:|---:|---:|
+ * | GENERIC (max per pile) | .467 | .531 | .543 | .576 | .589 |
+ * | ALL ENGINE (max per pile) | .480 | .548 | .565 | .590 | .623 |
+ * | JOINT (max over all recipes) | .492 | .556 | **.574** | .590 | .623 |
+ *
+ * ONE FLOOR, NOT TWO. v1.3 stage 3 froze .542 for the generic trio and .559
+ * for the engine families: two p95s bound two groups at 5% EACH, while a pile
+ * leaks through whichever recipe happens to fit it, so the union was never
+ * bounded. Measured on the very cohort the floors came from, the same table's
+ * lower block: frozen pair 931/1000 piles at S <= 5, per-group p95s
+ * (.543/.565) 938/1000, the shared joint p95 978/1000. Only the joint
+ * statistic delivers the ~95% the floor is defined to deliver.
  *
  * A 99-card pile of legal singletons accidentally supplies ordinary threats,
- * answers and value at Q ~ .46 with R = 1, which at .30 earned S ~ 40. This is
- * a DENSITY test against accidental role supply.
+ * answers and value at Q ~ .49 with R = 1, which at .30 earned S ~ 47. This
+ * is a DENSITY test against accidental role supply, and it is why the number
+ * is measured rather than chosen: it was NOT picked to save an anchor, and
+ * `vivi-battery-arena` pays for it (see the stage 4a report).
  *
  * The §9.2 forecast was .46. It was measured against the FLAT §5 piles, whose
  * curve and colours are not a real deck's; a curve-matched control fills the
- * generic roles better and leaks more. Both values separate the 200 flat
- * validation piles identically (196/200 total < 25, 193/200 S <= 5), so that
- * cohort cannot choose between them — the fresh MATCHED controls can, and do:
- * 189/200 and 145/200 at .542 against 178/200 and 66/200 at .472.
- *
- * Known cost, reported not hidden: `the-cabbage-merchant` (Q .600, R 1) falls
- * to S 36.7 / total 49 and leaves its 55-70 band. Its Food -> body engine has
- * no recipe — every engine recipe has an empty essential on it — so its only
- * reading is generic midrange, .058 above a curve-matched pile. That is a
- * missing recipe, not a wrong prior; §9.5 owns it.
+ * generic roles better and leaks more.
  */
-export const Q_BASELINE_GENERIC_COMMANDER = 0.542;
-
-/**
- * v1.3 §9.6 step 3 — the SAME statistic for the engine families, measured on
- * the SAME 1,000 matched controls at the same .930 coverage target:
- * `npx tsx scripts/deck-score-bands.ts negative --engine --n 1000`
- * (`verify-2026-09-19/deck-score/engine-floor.txt`). For each family, the p95
- * of the Q it reads on a control where that recipe could actually be SELECTED
- * (no empty essential) — a plan the pile holds no piece of never reaches
- * `betterPlan`, so its Q would measure a population the floor never grades.
- *
- * | family | selectable n | p50 | p90 | p95 (frozen) | p99 | max |
- * |---|---:|---:|---:|---:|---:|---:|
- * | aristocrats | 132 | .429 | .489 | .507 | .548 | .571 |
- * | lifegain    | 620 | .403 | .508 | .531 | .557 | .587 |
- * | spells      | 966 | .417 | .523 | .554 | .593 | .623 |
- * | recursion   | 143 | .394 | .507 | .521 | .581 | .603 |
- * | conversion  | 667 | .459 | .516 | .525 | .547 | .569 |
- * | tokens      | 861 | .426 | .507 | .523 | .540 | .574 |
- * | counters    | 569 | .475 | .530 | .540 | .559 | .590 |
- * | typal       |  65 | .444 | .508 | .517 | .540 | .590 |
- * | ALL (max)   |1000 | .480 | .540 | .559 | .594 | .623 |
- *
- * ONE SHARED FLOOR, at the p95 of the per-pile MAXIMUM, not eight per-family
- * p95s. Per-family floors were implemented and measured first, and they are
- * the wrong statistic: each one bounds its OWN family at 5%, and a pile leaks
- * through whichever of eleven recipes happens to fit it, so the union is not
- * bounded. Measured in-sample on the very cohort the floors came from
- * (`npx tsx scripts/deck-score-bands.ts controls --training --n 1000`):
- * per-family floors give 923/1000 S <= 5 and 950/1000 total < 25, against
- * 972/1000 and 981/1000 for the shared floor. The shared floor is also
- * CHEAPER on the reviewed anchors, not dearer, because the spread between
- * .554 and .559 is a rounding error next to the families it lifts: `vivi-
- * battery-arena` S 61.0 -> 59.6, while `tazri-beacon-of-unity` returns to its
- * 40-60 band. `combo` is excluded from the maximum and keeps `Q_BASELINE`.
- *
- * `combo` is absent on purpose: its essentials are derived from the assembled
- * closing line, so §9.5's essential-completion check is its floor, and its
- * pile read must stay 0/200 rather than be priced. Standard keeps `Q_BASELINE`
- * for every recipe — §9.1 owns that path and this stage does not touch it.
- */
-export const Q_BASELINE_ENGINE = 0.559;
+export const Q_BASELINE_JOINT_COMMANDER = 0.574;
 
 /**
  * §9.1 Standard deployment: a copy credited for a role with deadline `d`

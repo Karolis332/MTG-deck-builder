@@ -195,11 +195,20 @@ export function resolveLines(
     // is legal in this format wins, so a rebalanced card Arena accepts is not
     // rejected because the other row's legality JSON disagrees (A-Thran Portal
     // is brawl-legal, plain Thran Portal is not).
-    const candidates = [
+    const exactRows = [
       name !== plain ? (exact.get(name) as DbCard | undefined) : undefined,
       exact.get(plain) as DbCard | undefined,
-      byFront.get(front, front) as DbCard | undefined,
     ].filter(Boolean) as DbCard[];
+    // `byFront`'s `OR name LIKE ? || ' // %'` cannot use an index, so it full-scans
+    // `cards` (35k rows with a json_extract in the ORDER BY): 54 ms per name against
+    // 0.03 ms for the two indexed lookups, i.e. ~5 s to resolve a 100-card list.
+    // It only ever changes the answer when neither exact row is legal in this
+    // format — `candidates.find(legal)` scans in order, so a legal exact row wins
+    // over the front-face row either way. Skipping it then is result-identical.
+    const legalExact = exactRows.find((c) => legalityOf(c, key) === 'legal');
+    const candidates = legalExact
+      ? exactRows
+      : ([...exactRows, byFront.get(front, front) as DbCard | undefined].filter(Boolean) as DbCard[]);
     const card = candidates.find((c) => legalityOf(c, key) === 'legal') ?? candidates[0] ?? null;
     cache.set(name, card);
     return card;

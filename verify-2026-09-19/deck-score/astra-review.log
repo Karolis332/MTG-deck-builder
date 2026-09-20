@@ -1,0 +1,11 @@
+[harness 09:20:01] codex gpt-6-astra in /c/Users/QuLeR/MTG-deck-builder
+[harness 09:31:54] codex unavailable (quota / version / auth) — see log.txt
+[harness 09:31:54] done executor=codex rc=75 report=/c/Users/QuLeR/.claude/harness/runs/20260920-092001-deck-score-review-astra-2026-09-19/report.md
+----- report (codex) -----
+[docs/DECK_SCORE_SPEC.md](/C:/Users/QuLeR/MTG-deck-builder/docs/DECK_SCORE_SPEC.md:277)
+
+- Recognise generic 60-card plans without Commander quotas.
+- Zero meta weight; renormalise core weights by version.
+- Require typed coverage >80%; replace the 69 cap with an evidence gate.
+- Use S coherence: target piles ≤5, Meren ≥85.5.
+- Revise Standard/cEDH bands; retain whole-table W and reject E≥9 shortcuts.EXIT 75

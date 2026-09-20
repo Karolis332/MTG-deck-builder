@@ -1,0 +1,10 @@
+[harness 15:41:43] codex gpt-6-astra in /c/Users/QuLeR/MTG-deck-builder
+[harness 15:53:42] done executor=codex rc=0 report=/c/Users/QuLeR/.claude/harness/runs/20260920-154143-deck-score-s-gap-astra-2026-09-20/report.md
+----- report (codex) -----
+[docs/DECK_SCORE_SPEC.md](C:/Users/QuLeR/MTG-deck-builder/docs/DECK_SCORE_SPEC.md:352)
+
+- Standard: probabilistic deployment; target S median 75–85.
+- Piles: negative-cohort Q baseline; target ≥190/200 with S≤5.
+- Dependencies: replace B with producer credit; deletion cannot improve S.
+- Control: typed finishing schedules and unsaturated access; Cabbage target 35–50.
+- cEDH: verified closing-support credit; median target ≥85, with implementation priorities recorded.

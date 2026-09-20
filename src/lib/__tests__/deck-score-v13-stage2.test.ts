@@ -13,7 +13,7 @@ import {
   PLAN_RECIPES, STANDARD_RECIPES, type PlanEvaluation,
 } from '../deck-score-plans';
 import {
-  Q_BASELINE, Q_BASELINE_ENGINE, Q_BASELINE_GENERIC_COMMANDER, Q_SATURATION,
+  Q_BASELINE, Q_BASELINE_JOINT_COMMANDER, Q_SATURATION,
   DEPLOYMENT_PROBABILITY_TARGET,
 } from '../deck-score-norms';
 import { deriveCardFeature } from '../deck-score-features';
@@ -204,29 +204,23 @@ describe('§9.1 the Standard generic trio', () => {
 
 // ── §9.2 negative-cohort Commander Q prior ────────────────────────────────
 
-describe('§9.2 generic Q floor b, measured at p95 = .542 over 1,000 matched controls', () => {
+describe('§9.2 Commander Q floor b, measured over 1,000 matched controls', () => {
   it('freezes b at the measurement, under the .70 rejection line', () => {
-    // 1,000 land/curve/colour-matched Commander controls, 101 distinct
-    // commanders, drawn at the cEDH cohort's own .930 median typed coverage so
-    // unknown cards are not the discriminator: max-generic Q p50 .458,
-    // p90 .530, p95 .542, p99 .581.
-    expect(Q_BASELINE_GENERIC_COMMANDER).toBe(0.542);
-    expect(Q_BASELINE_GENERIC_COMMANDER).toBeLessThan(Q_SATURATION);
+    // STAGE 4a supersedes the stage-2 number. The .542 frozen here was the
+    // p95 of the max over the GENERIC TRIO only; the floor now answers to the
+    // p95 of the max over ALL ELEVEN recipes. See the stage-4a suite for the
+    // measurement and the in-sample comparison.
+    expect(Q_BASELINE_JOINT_COMMANDER).toBe(0.574);
+    expect(Q_BASELINE_JOINT_COMMANDER).toBeLessThan(Q_SATURATION);
   });
 
-  it('applies b only to the generic trio, and only outside Standard', () => {
-    for (const key of ['aggro', 'midrange', 'control'] as const) {
-      expect(qBaselineFor('commander', key)).toBe(Q_BASELINE_GENERIC_COMMANDER);
-      expect(qBaselineFor('brawl', key)).toBe(Q_BASELINE_GENERIC_COMMANDER);
-      expect(qBaselineFor('standard', key)).toBe(Q_BASELINE);
-    }
-    // SUPERSEDED BY STAGE 3 for the engine families: they answered to
-    // `Q_BASELINE` here because no negative-control measurement existed for
-    // them yet. §9.6 step 3 measured one, so the assertion moves to the engine
-    // floor — except `combo`, which is still proved by completing its line.
-    for (const key of ['aristocrats', 'lifegain', 'spells', 'typal', 'recursion'] as const) {
-      expect(qBaselineFor('commander', key)).toBe(Q_BASELINE_ENGINE);
-      expect(qBaselineFor('brawl', key)).toBe(Q_BASELINE_ENGINE);
+  it('applies b outside Standard only, to every recipe but combo', () => {
+    // SUPERSEDED TWICE: stage 2 gave the engine families `Q_BASELINE` (no
+    // measurement existed), stage 3 gave them a second floor of their own, and
+    // stage 4a collapsed both into one joint statistic.
+    for (const key of ['aggro', 'midrange', 'control', 'aristocrats', 'lifegain', 'spells', 'typal', 'recursion'] as const) {
+      expect(qBaselineFor('commander', key)).toBe(Q_BASELINE_JOINT_COMMANDER);
+      expect(qBaselineFor('brawl', key)).toBe(Q_BASELINE_JOINT_COMMANDER);
       expect(qBaselineFor('standard', key)).toBe(Q_BASELINE);
     }
     expect(qBaselineFor('commander', 'combo')).toBe(Q_BASELINE);
@@ -234,13 +228,14 @@ describe('§9.2 generic Q floor b, measured at p95 = .542 over 1,000 matched con
   });
 
   it('scores a generic plan 0 at Q <= b and at most 5 just above it', () => {
-    const b = Q_BASELINE_GENERIC_COMMANDER;
+    const b = Q_BASELINE_JOINT_COMMANDER;
     const S = (Q: number, R: number) => 100 * Math.max(0, Math.min(1, (Q - b) / (Q_SATURATION - b))) * R;
     expect(S(b, 1)).toBe(0);
     expect(S(b - 0.05, 1)).toBe(0);
-    // Exact bound: at R = 1, S <= 5 iff Q <= b + .05*(.70-b) = .5499.
+    // Exact bound: at R = 1, S <= 5 iff Q <= b + .05*(.70-b). At stage 2's
+    // b = .542 that was .5499; at stage 4a's joint b = .574 it is .5803.
     const bound = b + 0.05 * (Q_SATURATION - b);
-    expect(bound).toBeCloseTo(0.5499, 4);
+    expect(bound).toBeCloseTo(0.5803, 4);
     expect(S(bound, 1)).toBeCloseTo(5, 6);
     expect(S(bound + 0.005, 1)).toBeGreaterThan(5);
   });

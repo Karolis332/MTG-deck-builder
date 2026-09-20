@@ -1,0 +1,6 @@
+fresh matched controls: n=200, 162 distinct commanders
+total   min=19 median=20 p95=22 max=54  <25: 193/200
+S       min=0.0 median=0.0 p95=6.2 max=46.8  <=5: 187/200
+S > 5 by selected recipe: aggro 4 (b=0.542, Q med 0.565), counters 4 (b=0.559, Q med 0.586), midrange 3 (b=0.542, Q med 0.579), recursion 1 (b=0.559, Q med 0.574), aristocrats 1 (b=0.559, Q med 0.588)
+S > 5 Q/R median: 0.578 / 0.758
+S > 5 by commander: Queza, Augur of Agonies 1, Marina Vendrell 1, Quandrix, the Proof 1, Szarel, Genesis Shepherd 1, Garland, Royal Kidnapper 1, Damia, Sage of Stone 1, Rat King, Verminister 1, Unctus, Grand Metatect 1, Spike, Tournament Grinder 1, Yargle, Glutton of Urborg 1, Jacob Frye 1, Erayo, Soratami Ascendant // Erayo's Essence 1, Desmond Miles 1

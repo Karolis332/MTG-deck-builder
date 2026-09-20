@@ -1,0 +1,104 @@
+commander sample: 2777 decks, 2777 resolved, 4 unresolved card rows
+
+## aggro (n=8) — deployable pressure with reach and reload
+| role | p10 | p25 | median | p75 | p90 | frozen min/max |
+|---|---:|---:|---:|---:|---:|---|
+| (nonland copies) | 60 | 60 | 64 | 64 | 65 | - |
+| pressure | 5 | 10 | 11 | 11 | 12 | 10/16 |
+| reach | 4 | 4 | 6 | 6 | 19 | 4/18 |
+| reload | 8 | 8 | 8 | 11 | 13 | 1/8 |
+| answers | 3 | 3 | 3 | 4 | 4 | 0/3 |
+| fixing | 2 | 4 | 4 | 4 | 7 | 0/4 |
+
+## midrange (n=752) — timely threats, relevant answers, sustained value
+| role | p10 | p25 | median | p75 | p90 | frozen min/max |
+|---|---:|---:|---:|---:|---:|---|
+| (nonland copies) | 61 | 62 | 64 | 65 | 68 | - |
+| threats | 5 | 7 | 9 | 13 | 16 | 4/10 |
+| answers | 3 | 5 | 7 | 9 | 12 | 4/15 |
+| value | 5 | 7 | 10 | 13 | 17 | 4/21 |
+| fixing | 3 | 5 | 8 | 10 | 13 | 0/8 |
+
+## control (n=510) — early stabilisation, advantage engine, accessible finisher
+| role | p10 | p25 | median | p75 | p90 | frozen min/max |
+|---|---:|---:|---:|---:|---:|---|
+| (nonland copies) | 61 | 62 | 63 | 65 | 67 | - |
+| stabilisation | 2 | 4 | 5 | 7 | 9 | 7/12 |
+| engine | 7 | 9 | 13 | 16 | 21 | 12/19 |
+| finisher | 4 | 6 | 10 | 13 | 17 | 3/8 |
+| answers | 0 | 0 | 1 | 2 | 3 | 0/2 |
+| fixing | 5 | 7 | 9 | 12 | 14 | 0/4 |
+
+## aristocrats (n=292) — sacrifice outlets converting expendable bodies into damage
+| role | p10 | p25 | median | p75 | p90 | frozen min/max |
+|---|---:|---:|---:|---:|---:|---|
+| (nonland copies) | 62 | 63 | 64 | 66 | 71 | - |
+| outlet | 0 | 0 | 3 | 6 | 9 | 3/9 |
+| payoff | 0 | 1 | 4 | 10 | 14 | 5/12 |
+| fodder | 13 | 18 | 21 | 26 | 30 | 6/18 |
+| value | 1 | 2 | 4 | 5 | 7 | 0/8 |
+| answers | 1 | 2 | 4 | 6 | 7 | 0/5 |
+| fixing | 2 | 4 | 6 | 8 | 11 | 0/8 |
+
+## lifegain (n=106) — life gained as a resource, converted by counters or drain
+| role | p10 | p25 | median | p75 | p90 | frozen min/max |
+|---|---:|---:|---:|---:|---:|---|
+| (nonland copies) | 61 | 62 | 63 | 65 | 67 | - |
+| payoff | 1 | 3 | 7 | 10 | 13 | 5/12 |
+| gain | 9 | 11 | 18 | 23 | 26 | 8/22 |
+| value | 4 | 5 | 8 | 10 | 15 | 2/10 |
+| answers | 2 | 3 | 4 | 6 | 7 | 0/5 |
+| fixing | 3 | 4 | 7 | 9 | 12 | 0/8 |
+
+## spells (n=514) — cast-trigger payoffs fed by cheap instants and sorceries
+| role | p10 | p25 | median | p75 | p90 | frozen min/max |
+|---|---:|---:|---:|---:|---:|---|
+| (nonland copies) | 61 | 63 | 65 | 68 | 73 | - |
+| payoff | 0 | 0 | 1 | 5 | 10 | 3/10 |
+| closer | 3 | 4 | 7 | 13 | 20 | 2/8 |
+| spells | 9 | 13 | 18 | 23 | 28 | 12/32 |
+| answers | 0 | 0 | 1 | 2 | 2 | 0/8 |
+| fixing | 4 | 6 | 9 | 12 | 16 | 0/10 |
+
+## recursion (n=242) — permanents recurred from the graveyard, and the fuel that fills it
+| role | p10 | p25 | median | p75 | p90 | frozen min/max |
+|---|---:|---:|---:|---:|---:|---|
+| (nonland copies) | 60 | 62 | 63 | 65 | 67 | - |
+| recursion | 0 | 1 | 2 | 4 | 6 | 4/10 |
+| fuel | 0 | 0 | 1 | 7 | 11 | 4/14 |
+| targets | 13 | 18 | 23 | 27 | 32 | 6/18 |
+| value | 1 | 2 | 4 | 6 | 7 | 0/8 |
+| answers | 1 | 2 | 3 | 5 | 6 | 0/5 |
+| fixing | 4 | 6 | 8 | 11 | 14 | 0/8 |
+
+## conversion (n=55) — Food/Treasure/Clue produced, then spent on bodies, life or cards
+| role | p10 | p25 | median | p75 | p90 | frozen min/max |
+|---|---:|---:|---:|---:|---:|---|
+| (nonland copies) | 62 | 63 | 64 | 66 | 68 | - |
+| converters | 3 | 4 | 7 | 13 | 17 | 4/11 |
+| producers | 3 | 9 | 14 | 18 | 25 | 4/11 |
+| output | 4 | 6 | 8 | 13 | 19 | 4/12 |
+| value | 1 | 2 | 3 | 5 | 6 | 0/8 |
+| answers | 0 | 2 | 3 | 5 | 6 | 0/5 |
+| fixing | 2 | 3 | 5 | 6 | 9 | 0/8 |
+
+## tokens (n=145) — a wide board of creature tokens, converted by anthems or an outlet
+| role | p10 | p25 | median | p75 | p90 | frozen min/max |
+|---|---:|---:|---:|---:|---:|---|
+| (nonland copies) | 61 | 63 | 64 | 65 | 67 | - |
+| payoff | 3 | 6 | 9 | 14 | 18 | 3/10 |
+| makers | 5 | 7 | 11 | 14 | 19 | 4/12 |
+| value | 6 | 8 | 10 | 13 | 17 | 2/9 |
+| answers | 1 | 2 | 3 | 4 | 5 | 0/5 |
+| fixing | 4 | 5 | 7 | 9 | 12 | 0/8 |
+
+## counters (n=153) — +1/+1 counters placed on bodies that read them
+| role | p10 | p25 | median | p75 | p90 | frozen min/max |
+|---|---:|---:|---:|---:|---:|---|
+| (nonland copies) | 61 | 62 | 64 | 65 | 67 | - |
+| payoff | 2 | 4 | 11 | 17 | 19 | 3/10 |
+| sources | 2 | 4 | 7 | 11 | 14 | 4/13 |
+| carriers | 3 | 5 | 9 | 16 | 21 | 4/12 |
+| value | 1 | 2 | 4 | 5 | 6 | 0/8 |
+| answers | 1 | 1 | 3 | 4 | 5 | 0/5 |
+| fixing | 3 | 5 | 7 | 9 | 11 | 0/8 |

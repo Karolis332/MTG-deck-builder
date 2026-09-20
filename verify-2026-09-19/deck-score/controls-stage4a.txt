@@ -1,0 +1,26 @@
+== controls --stride (fresh holdout, acceptance instrument) ==
+fresh matched controls: n=200, 90 distinct commanders
+total   min=19 median=20 p95=20 max=31  <25: 197/200
+S       min=0.0 median=0.0 p95=0.0 max=14.0  <=5: 197/200
+S > 5 by selected recipe: aggro 2 (b=0.574, Q med 0.639), aristocrats 1 (b=0.574, Q med 0.588)
+S > 5 Q/R median: 0.603 / 0.606
+closing (combo) reads: 1/200 [Katsumasa, the Animator S 2.2 total 22]
+S > 5 by commander: High Perfect Morcant 1, Zaxara, the Exemplary 1, Rat King, Verminister 1
+
+== controls --training --n 1000 (in-sample) ==
+fresh matched controls: n=1000, 172 distinct commanders
+total   min=19 median=20 p95=20 max=51  <25: 989/1000
+S       min=0.0 median=0.0 p95=0.0 max=38.8  <=5: 978/1000
+S > 5 by selected recipe: recursion 5 (b=0.574, Q med 0.590), spells 5 (b=0.574, Q med 0.591), tokens 3 (b=0.574, Q med 0.587), lifegain 3 (b=0.574, Q med 0.585), aristocrats 2 (b=0.574, Q med 0.607), aggro 2 (b=0.574, Q med 0.589), midrange 1 (b=0.574, Q med 0.586), counters 1 (b=0.574, Q med 0.592)
+S > 5 Q/R median: 0.590 / 0.667
+closing (combo) reads: 0/1000
+S > 5 by commander: Yargle, Glutton of Urborg 3, Skithiryx, the Blight Dragon 2, Viper, Cruel Conspirator 2, Quandrix, the Proof 1, Garland, Royal Kidnapper 1, Erayo, Soratami Ascendant // Erayo's Essence 1, Jin Sakai, Ghost of Tsushima 1, Jacob Frye 1, Korvold, Fae-Cursed King 1, Jon Irenicus, Shattered One 1, Syr Konrad, the Grim 1, Noctis, Heir Apparent 1, Unctus, Grand Metatect 1, Katara, Bending Prodigy 1, Ayara, First of Locthwain 1, Tasigur, the Golden Fang 1, Long Feng, Grand Secretariat 1, Felothar the Steadfast 1
+
+== controls (stage-3 contiguous slice, information only) ==
+fresh matched controls: n=200, 22 distinct commanders
+total   min=19 median=20 p95=20 max=20  <25: 200/200
+S       min=0.0 median=0.0 p95=0.0 max=5.3  <=5: 199/200
+S > 5 by selected recipe: control 1 (b=0.574, Q med 0.581)
+S > 5 Q/R median: 0.581 / 1.000
+closing (combo) reads: 0/200
+S > 5 by commander: Hydro-Man, Fluid Felon 1

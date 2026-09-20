@@ -25,7 +25,7 @@ import type { DeckEntry } from './deck-score-mana';
 import type { ClosingLine } from './deck-score-win';
 import { producerUtilisation, type Utilisation } from './deck-score-producers';
 import {
-  DEPLOYMENT_PROBABILITY_TARGET, Q_BASELINE, Q_BASELINE_ENGINE, Q_BASELINE_GENERIC_COMMANDER,
+  DEPLOYMENT_PROBABILITY_TARGET, Q_BASELINE, Q_BASELINE_JOINT_COMMANDER,
   Q_SATURATION, type ScoreProfile,
 } from './deck-score-norms';
 
@@ -366,6 +366,32 @@ export const PLAN_BAND_REFERENCE = 60;
  * Measured WITHOUT the typed-coverage gate, exactly as the 60-card bands
  * were, so both sets describe the predicates rather than the catalogue's
  * current size. Both must be re-measured when typed coverage stabilises.
+ * (With the gate ON the same run reads midrange threats p25 1 against 5 —
+ * the corpus lists sit far below the .93 coverage the controls are drawn to,
+ * so a gated band is a floor every control clears by construction.)
+ *
+ * v1.3 stage 4a RE-MEASUREMENT, the numbers now frozen above:
+ * `MTG_DB_DIR=... npx tsx scripts/deck-score-bands.ts commander --evaluated --raw`
+ * (`verify-2026-09-19/deck-score/bands-stride-training.txt`). Two changes from
+ * the v1.2 reading:
+ *  1. TRAINING COHORT ONLY. The sample stores ten lists per commander
+ *     contiguously; the 200 acceptance controls are now drawn from a disjoint
+ *     set of commanders (`strideOrder` in `scripts/deck-score-piles.ts`), and
+ *     no band may be fitted to a commander that grades it. 1,838 lists / 200
+ *     commanders here, 939 / 100 held out.
+ *  2. EVALUATED SUPPLY for every recipe, not just the stage-3 engine three.
+ *     The v1.2 generic bands counted bare `fills` matches, so a role with a
+ *     deadline was given a floor built from copies the scorer then refuses to
+ *     cast, and the cohort was every deck `shapeCohort` assigned rather than
+ *     the decks that hold all of the plan's essentials. Largest moves:
+ *     control finisher 7/18 -> 3/10, recursion fuel 6/20 -> 2/12, aristocrats
+ *     fodder 16/29 -> 10/21, midrange threats 7/16 -> 5/13.
+ * `typal` (payoff 2/7, enabler 11/29) and the §9.5 closing support bands
+ * re-measured IDENTICAL on their cohorts and are untouched. `aggro` still has
+ * no `cmd` band: its cohort is 7 lists.
+ *
+ * Lowering a band raises R, so the negative-control floors were re-measured
+ * AFTER this freeze, never before — see `Q_BASELINE_JOINT_COMMANDER`.
  */
 export const COMMANDER_BAND_REFERENCE = 99;
 
@@ -393,8 +419,8 @@ export const PLAN_RECIPES: readonly PlanRecipe[] = [
     key: 'midrange',
     label: 'timely threats, relevant answers, sustained value',
     roles: [
-      { key: 'threats', essential: true, min: 4, max: 10, cmd: { min: 7, max: 16 }, deadline: 5, fills: threat(3, 5, 0.75) },
-      { key: 'answers', essential: true, min: 4, max: 15, cmd: { min: 4, max: 11 }, deadline: 5, fills: answer(5) },
+      { key: 'threats', essential: true, min: 4, max: 10, cmd: { min: 5, max: 13 }, deadline: 5, fills: threat(3, 5, 0.75) },
+      { key: 'answers', essential: true, min: 4, max: 15, cmd: { min: 4, max: 10 }, deadline: 5, fills: answer(5) },
       { key: 'value', essential: true, min: 4, max: 21, cmd: { min: 7, max: 16 }, deadline: 5, fills: velocity(5) },
       { key: 'fixing', essential: false, infrastructure: true, min: 0, max: 8, fills: infrastructure },
     ],
@@ -403,9 +429,9 @@ export const PLAN_RECIPES: readonly PlanRecipe[] = [
     key: 'control',
     label: 'early stabilisation, advantage engine, accessible finisher',
     roles: [
-      { key: 'stabilisation', essential: true, min: 7, max: 12, cmd: { min: 3, max: 8 }, deadline: 3, fills: answer(3) },
-      { key: 'engine', essential: true, min: 12, max: 19, cmd: { min: 8, max: 19 }, deadline: 4, fills: (f) => f.isDrawEngine || velocity(4)(f) },
-      { key: 'finisher', essential: true, min: 3, max: 8, cmd: { min: 7, max: 18 }, deadline: 7, fills: threat(4, 7, 0.6) },
+      { key: 'stabilisation', essential: true, min: 7, max: 12, cmd: { min: 4, max: 9 }, deadline: 3, fills: answer(3) },
+      { key: 'engine', essential: true, min: 12, max: 19, cmd: { min: 6, max: 16 }, deadline: 4, fills: (f) => f.isDrawEngine || velocity(4)(f) },
+      { key: 'finisher', essential: true, min: 3, max: 8, cmd: { min: 3, max: 10 }, deadline: 7, fills: threat(4, 7, 0.6) },
       { key: 'answers', essential: false, min: 0, max: 2, fills: answer(6) },
       { key: 'fixing', essential: false, infrastructure: true, min: 0, max: 4, fills: infrastructure },
     ],
@@ -421,9 +447,9 @@ export const PLAN_RECIPES: readonly PlanRecipe[] = [
     key: 'aristocrats',
     label: 'sacrifice outlets converting expendable bodies into damage',
     roles: [
-      { key: 'outlet', essential: true, min: 3, max: 9, cmd: { min: 1, max: 10 }, fills: sacOutlet },
-      { key: 'payoff', essential: true, min: 5, max: 12, cmd: { min: 1, max: 13 }, fills: deathPayoff },
-      { key: 'fodder', essential: true, min: 6, max: 18, cmd: { min: 16, max: 29 }, deadline: 4, servedBy: { roles: ['outlet', 'payoff'], ratio: 3 }, fills: fodder(3) },
+      { key: 'outlet', essential: true, min: 3, max: 9, cmd: { min: 2, max: 11 }, fills: sacOutlet },
+      { key: 'payoff', essential: true, min: 5, max: 12, cmd: { min: 3, max: 16 }, fills: deathPayoff },
+      { key: 'fodder', essential: true, min: 6, max: 18, cmd: { min: 10, max: 21 }, deadline: 4, servedBy: { roles: ['outlet', 'payoff'], ratio: 3 }, fills: fodder(3) },
       { key: 'value', essential: false, min: 0, max: 8, fills: velocity(5) },
       { key: 'answers', essential: false, min: 0, max: 5, fills: answer(5) },
       { key: 'fixing', essential: false, infrastructure: true, min: 0, max: 8, fills: infrastructure },
@@ -433,9 +459,9 @@ export const PLAN_RECIPES: readonly PlanRecipe[] = [
     key: 'lifegain',
     label: 'life gained as a resource, converted by counters or drain',
     roles: [
-      { key: 'payoff', essential: true, min: 5, max: 12, cmd: { min: 4, max: 13 }, fills: lifePayoff },
-      { key: 'gain', essential: true, min: 8, max: 22, cmd: { min: 12, max: 26 }, fills: lifeSource },
-      { key: 'value', essential: true, min: 2, max: 10, cmd: { min: 5, max: 14 }, fills: velocity(6) },
+      { key: 'payoff', essential: true, min: 5, max: 12, cmd: { min: 3, max: 11 }, fills: lifePayoff },
+      { key: 'gain', essential: true, min: 8, max: 22, cmd: { min: 9, max: 24 }, fills: lifeSource },
+      { key: 'value', essential: true, min: 2, max: 10, cmd: { min: 6, max: 14 }, fills: velocity(6) },
       { key: 'answers', essential: false, min: 0, max: 5, fills: answer(6) },
       { key: 'fixing', essential: false, infrastructure: true, min: 0, max: 8, fills: infrastructure },
     ],
@@ -444,9 +470,9 @@ export const PLAN_RECIPES: readonly PlanRecipe[] = [
     key: 'spells',
     label: 'cast-trigger payoffs fed by cheap instants and sorceries',
     roles: [
-      { key: 'payoff', essential: true, min: 3, max: 10, cmd: { min: 1, max: 10 }, fills: spellPayoff },
-      { key: 'closer', essential: true, min: 2, max: 8, cmd: { min: 4, max: 19 }, fills: spellCloser },
-      { key: 'spells', essential: true, min: 12, max: 32, cmd: { min: 12, max: 27 }, deadline: 4, fills: cheapSpell(4) },
+      { key: 'payoff', essential: true, min: 3, max: 10, cmd: { min: 2, max: 12 }, fills: spellPayoff },
+      { key: 'closer', essential: true, min: 2, max: 8, cmd: { min: 4, max: 18 }, fills: spellCloser },
+      { key: 'spells', essential: true, min: 12, max: 32, cmd: { min: 12, max: 26 }, deadline: 4, fills: cheapSpell(4) },
       { key: 'answers', essential: false, min: 0, max: 8, fills: answer(5) },
       { key: 'fixing', essential: false, infrastructure: true, min: 0, max: 10, fills: infrastructure },
     ],
@@ -462,9 +488,9 @@ export const PLAN_RECIPES: readonly PlanRecipe[] = [
     key: 'recursion',
     label: 'permanents recurred from the graveyard, and the fuel that fills it',
     roles: [
-      { key: 'recursion', essential: true, min: 4, max: 10, cmd: { min: 5, max: 12 }, fills: graveyardRecursion },
-      { key: 'fuel', essential: true, min: 4, max: 14, cmd: { min: 6, max: 20 }, servedBy: { roles: ['recursion'], ratio: 4 }, fills: graveyardFuel },
-      { key: 'targets', essential: true, min: 6, max: 18, cmd: { min: 8, max: 24 }, deadline: 5, servedBy: { roles: ['recursion'], ratio: 5 }, fills: recursionTarget },
+      { key: 'recursion', essential: true, min: 4, max: 10, cmd: { min: 2, max: 7 }, fills: graveyardRecursion },
+      { key: 'fuel', essential: true, min: 4, max: 14, cmd: { min: 2, max: 12 }, servedBy: { roles: ['recursion'], ratio: 4 }, fills: graveyardFuel },
+      { key: 'targets', essential: true, min: 6, max: 18, cmd: { min: 5, max: 14 }, deadline: 5, servedBy: { roles: ['recursion'], ratio: 5 }, fills: recursionTarget },
       { key: 'value', essential: false, min: 0, max: 8, fills: velocity(5) },
       { key: 'answers', essential: false, min: 0, max: 5, fills: answer(5) },
       { key: 'fixing', essential: false, infrastructure: true, min: 0, max: 8, fills: infrastructure },
@@ -496,9 +522,9 @@ export const PLAN_RECIPES: readonly PlanRecipe[] = [
     commanderOnly: true,
     label: 'Food/Treasure/Clue produced, then spent on bodies, life or cards',
     roles: [
-      { key: 'converters', essential: true, min: 2, max: 10, cmd: { min: 4, max: 17 }, fills: storedResourceConverter },
-      { key: 'producers', essential: true, min: 5, max: 13, cmd: { min: 9, max: 21 }, servedBy: { roles: ['converters'], ratio: 3 }, fills: storedResourceProducer },
-      { key: 'output', essential: true, min: 2, max: 7, cmd: { min: 4, max: 12 }, deadline: 6, fills: engineOutput(6, 3, 0.75) },
+      { key: 'converters', essential: true, min: 2, max: 10, cmd: { min: 4, max: 19 }, fills: storedResourceConverter },
+      { key: 'producers', essential: true, min: 5, max: 13, cmd: { min: 9, max: 18 }, servedBy: { roles: ['converters'], ratio: 3 }, fills: storedResourceProducer },
+      { key: 'output', essential: true, min: 2, max: 7, cmd: { min: 4, max: 11 }, deadline: 6, fills: engineOutput(6, 3, 0.75) },
       { key: 'value', essential: false, min: 0, max: 8, fills: velocity(5) },
       { key: 'answers', essential: false, min: 0, max: 5, fills: answer(5) },
       { key: 'fixing', essential: false, infrastructure: true, min: 0, max: 8, fills: infrastructure },
@@ -509,9 +535,9 @@ export const PLAN_RECIPES: readonly PlanRecipe[] = [
     commanderOnly: true,
     label: 'a wide board of creature tokens, converted by anthems or an outlet',
     roles: [
-      { key: 'payoff', essential: true, min: 4, max: 11, cmd: { min: 6, max: 18 }, fills: widePayoff },
+      { key: 'payoff', essential: true, min: 4, max: 11, cmd: { min: 6, max: 19 }, fills: widePayoff },
       { key: 'makers', essential: true, min: 3, max: 8, cmd: { min: 5, max: 13 }, deadline: 5, servedBy: { roles: ['payoff'], ratio: 3 }, fills: (f) => f.isCreatureTokenProducer },
-      { key: 'value', essential: true, min: 5, max: 10, cmd: { min: 8, max: 17 }, fills: velocity(5) },
+      { key: 'value', essential: true, min: 5, max: 10, cmd: { min: 8, max: 18 }, fills: velocity(5) },
       { key: 'answers', essential: false, min: 0, max: 5, fills: answer(5) },
       { key: 'fixing', essential: false, infrastructure: true, min: 0, max: 8, fills: infrastructure },
     ],
@@ -521,9 +547,9 @@ export const PLAN_RECIPES: readonly PlanRecipe[] = [
     commanderOnly: true,
     label: '+1/+1 counters placed on bodies that read them',
     roles: [
-      { key: 'payoff', essential: true, min: 1, max: 5, cmd: { min: 2, max: 9 }, fills: counterPayoff },
+      { key: 'payoff', essential: true, min: 1, max: 5, cmd: { min: 3, max: 8 }, fills: counterPayoff },
       { key: 'sources', essential: true, min: 4, max: 10, cmd: { min: 6, max: 16 }, servedBy: { roles: ['payoff'], ratio: 3 }, fills: counterSource },
-      { key: 'carriers', essential: true, min: 2, max: 7, cmd: { min: 4, max: 12 }, deadline: 5, servedBy: { roles: ['sources'], ratio: 2 }, fills: threat(2, 5, 0.6) },
+      { key: 'carriers', essential: true, min: 2, max: 7, cmd: { min: 3, max: 11 }, deadline: 5, servedBy: { roles: ['sources'], ratio: 2 }, fills: threat(2, 5, 0.6) },
       { key: 'value', essential: false, min: 0, max: 8, fills: velocity(5) },
       { key: 'answers', essential: false, min: 0, max: 5, fills: answer(5) },
       { key: 'fixing', essential: false, infrastructure: true, min: 0, max: 8, fills: infrastructure },
@@ -1148,26 +1174,23 @@ export function evaluateClosing(
 }
 
 /**
- * §9.2 / §9.6 step 3: the Q floor a plan must clear before it explains
- * anything, measured on the same 1,000 matched negative controls. Two floors,
- * each the p95 of a per-pile MAXIMUM: the generic trio's (§9.2, .542) and the
- * engine families' (.559). Taking a maximum is what bounds the LEAK RATE
- * rather than one family's rate — per-family p95s were measured and rejected
- * for exactly that reason, see `Q_BASELINE_ENGINE`. `combo` keeps
- * `Q_BASELINE` and the Standard path is untouched (§9.1 owns it).
+ * §9.2 / §9.6 / stage 4a: the Q floor a plan must clear before it explains
+ * anything. ONE floor for every generic and engine recipe, the p95 of the
+ * per-pile MAXIMUM over all eleven of them on 1,000 matched negative controls
+ * — see `Q_BASELINE_JOINT_COMMANDER` for the table and for why the stage-3
+ * pair (.542 generic / .559 engine) was replaced: two p95s bound two groups at
+ * 5% each, not their union, and the union is what a pile leaks through.
  *
  * A 99-card pile has ~1.8x the nonland copies of the cohort the generic bands
  * were measured on and fills ordinary threat/answer/value roles by accident;
  * a typed sacrifice outlet beside its payoff and its fodder is not an accident
- * — but at .30 the accident still scored, which is what these floors price.
+ * — but at .30 the accident still scored, which is what this floor prices.
  */
 export function qBaselineFor(profile: ScoreProfile, key: PlanKey): number {
   if (profile === 'standard') return Q_BASELINE;
-  const generic = key === 'aggro' || key === 'midrange' || key === 'control';
-  if (generic) return Q_BASELINE_GENERIC_COMMANDER;
   // The closing plan proves itself by completing its line's essentials, and
   // its pile read must stay 0/200 rather than be priced (§9.5).
-  return key === 'combo' ? Q_BASELINE : Q_BASELINE_ENGINE;
+  return key === 'combo' ? Q_BASELINE : Q_BASELINE_JOINT_COMMANDER;
 }
 
 /** The plan-side of S: how much of the deck this recipe explains, discounted

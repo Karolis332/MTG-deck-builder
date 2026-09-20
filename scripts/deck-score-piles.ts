@@ -47,8 +47,20 @@ function splitCsvLine(line: string): string[] {
 
 export interface SampleDeck { id: string; commander: string; cards: Array<{ name: string; quantity: number }> }
 
+/**
+ * Process-lifetime memos over immutable on-disk inputs (the sample CSV and the
+ * `cards` table). Every caller rebuilt them per call: the vitest suite has ~20
+ * tests that draw controls, and at 3-8 s each under a loaded machine they cross
+ * the 15 s default `testTimeout` and fail as a group while passing one file at a
+ * time. Nothing here is mutated by callers, so one build per process is enough.
+ */
+let sampleCache: SampleDeck[] | null = null;
+let byNameCache: Map<string, DbCard> | null = null;
+let poolCache: PoolCard[] | null = null;
+
 /** The 2,777-list stratified pull from the VPS corpus, in stable file order. */
 export function readCommanderSample(): SampleDeck[] {
+  if (sampleCache) return sampleCache;
   const lines = fs.readFileSync(SAMPLE_CSV, 'utf-8').split(/\r?\n/);
   const header = splitCsvLine(lines[0]).map((h) => h.trim());
   const [iDeck, iCmd, iName, iBoard, iQty] = ['deck_id', 'commander', 'card_name', 'board', 'quantity']
@@ -62,11 +74,13 @@ export function readCommanderSample(): SampleDeck[] {
     if (!deck) { deck = { id: f[iDeck], commander: f[iCmd], cards: [] }; decks.set(f[iDeck], deck); }
     deck.cards.push({ name: f[iName], quantity: Number(f[iQty]) || 1 });
   }
-  return [...decks.values()];
+  sampleCache = [...decks.values()];
+  return sampleCache;
 }
 
 /** One pass over `cards` beats 229k parameterised lookups. */
 export function cardsByName(): Map<string, DbCard> {
+  if (byNameCache) return byNameCache;
   const rows = getDb().prepare(
     `SELECT id, name, mana_cost, cmc, type_line, oracle_text, colors, color_identity, keywords,
             legalities, power, toughness, loyalty, produced_mana, edhrec_rank, layout, subtypes, game_changer
@@ -79,6 +93,7 @@ export function cardsByName(): Map<string, DbCard> {
     const front = key.split(' // ')[0];
     if (!map.has(front)) map.set(front, row);
   }
+  byNameCache = map;
   return map;
 }
 
@@ -144,10 +159,11 @@ interface PoolCard { card: DbCard; identity: string[]; bucket: number; key: numb
  * the typed sub-pool and the rest from the untyped one, so the control's
  * coverage matches the reference cohort it is separated from.
  */
-export function loadMatchedPiles(
-  count: number, offset: number, seedBase: number, coverageTarget = 1,
-): MatchedPile[] {
-  const byName = cardsByName();
+/** The non-land, commander-legal draw pool with each card's coverage flag —
+ * one table scan plus ~25k `deriveCardFeature` calls, identical for every
+ * cohort, so it is built once per process. */
+function controlPool(): PoolCard[] {
+  if (poolCache) return poolCache;
   const rows = getDb().prepare(
     `SELECT id, name, mana_cost, cmc, type_line, oracle_text, colors, color_identity, keywords, set_code, set_name,
             collector_number, rarity, image_uri_small, image_uri_normal, image_uri_large, image_uri_art_crop,
@@ -159,12 +175,24 @@ export function loadMatchedPiles(
        AND type_line <> 'Card // Card'
        AND type_line NOT LIKE 'Basic Land%'`
   ).all() as DbCard[];
-  const pool: PoolCard[] = rows
+  poolCache = rows
     .filter((c) => !/\bLand\b/.test(c.type_line || ''))
     .map((c) => ({
       card: c, identity: parseIdentity(c.color_identity),
       bucket: mvBucket(c.cmc ?? 0), key: hash32(c.id), covered: deriveCardFeature(c).covered,
     }));
+  return poolCache;
+}
+
+export function loadMatchedPiles(
+  count: number, offset: number, seedBase: number, coverageTarget = 1,
+  /** stage 4a: an explicit sample-index sequence replaces the contiguous scan
+   * from `offset`, so a cohort can be drawn by COMMANDER rather than by file
+   * position. `offset` is ignored when this is given. */
+  order?: readonly number[],
+): MatchedPile[] {
+  const byName = cardsByName();
+  const pool = controlPool();
 
   const bucketCache = new Map<string, { typed: PoolCard[][]; untyped: PoolCard[][] }>();
   const bucketsFor = (identity: string[]): { typed: PoolCard[][]; untyped: PoolCard[][] } => {
@@ -186,8 +214,11 @@ export function loadMatchedPiles(
 
   const out: MatchedPile[] = [];
   const sample = readCommanderSample();
-  for (let i = offset; i < sample.length && out.length < count; i++) {
+  const sequence = order ?? Array.from({ length: Math.max(0, sample.length - offset) }, (_, k) => offset + k);
+  for (const i of sequence) {
+    if (out.length >= count) break;
     const deck = sample[i];
+    if (!deck) continue;
     const commander = byName.get(deck.commander.toLowerCase());
     if (!commander) continue;
     if (HELD_OUT_COMMANDERS.has(commander.name.toLowerCase())) continue;
@@ -259,4 +290,60 @@ export function loadMatchedPiles(
     });
   }
   return out;
+}
+
+// ── stage 4a: commander-disjoint stride cohorts ───────────────────────────
+//
+// `commander-sample.csv` stores TEN lists per commander CONTIGUOUSLY, so any
+// contiguous slice is a handful of commander clusters rather than a draw:
+// stage 3 measured a 200-pile slice at offset 2000 that held 22 commanders,
+// whose own max-generic Q p95 was .574 against the training cohort's .542.
+// A p95 frozen on one population cannot be graded on the other.
+//
+// The split is therefore by COMMANDER, not by index: every list of a commander
+// lands in exactly one cohort, so a floor or a band measured on `training` is
+// never graded on a pile or a list that shares its commander. Within a cohort
+// the order is ROUND-ROBIN over commanders — pass r takes each commander's
+// r-th list — so any prefix of the sequence is commander-balanced.
+
+/** Every `HOLDOUT_EVERY`-th commander, in sample file order, is held out. */
+export const HOLDOUT_EVERY = 3;
+export type SampleCohort = 'training' | 'holdout';
+
+/** Sample indices grouped by commander, commanders in first-appearance order. */
+export function commanderBlocks(sample: readonly SampleDeck[] = readCommanderSample()): Map<string, number[]> {
+  const blocks = new Map<string, number[]>();
+  sample.forEach((deck, i) => {
+    const key = deck.commander.toLowerCase();
+    const block = blocks.get(key);
+    if (block) block.push(i);
+    else blocks.set(key, [i]);
+  });
+  return blocks;
+}
+
+/** The cohort's sample indices in round-robin-over-commanders order. */
+export function strideOrder(cohort: SampleCohort, sample: readonly SampleDeck[] = readCommanderSample()): number[] {
+  const blocks = commanderBlocks(sample);
+  const mine = [...blocks.values()].filter((_, c) => (c % HOLDOUT_EVERY === 0) === (cohort === 'holdout'));
+  const order: number[] = [];
+  for (let r = 0; ; r++) {
+    let added = 0;
+    for (const block of mine) {
+      if (r < block.length) { order.push(block[r]); added++; }
+    }
+    if (added === 0) return order;
+  }
+}
+
+/** Seed bases, one per cohort, so no two cohorts can share a pile draw even
+ * if a future edit lets their index sets touch. */
+export const COHORT_SEED: Record<SampleCohort, number> = {
+  training: 0x5eed0000,
+  holdout: 0xc0ffee00,
+};
+
+/** `count` matched controls from one commander-disjoint cohort. */
+export function loadCohortPiles(cohort: SampleCohort, count: number, coverageTarget = 0.93): MatchedPile[] {
+  return loadMatchedPiles(count, 0, COHORT_SEED[cohort], coverageTarget, strideOrder(cohort));
 }

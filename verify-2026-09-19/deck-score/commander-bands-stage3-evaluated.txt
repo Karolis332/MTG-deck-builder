@@ -1,0 +1,104 @@
+commander sample: 2777 decks, 2777 resolved, 4 unresolved card rows
+
+## aggro (n=8) — deployable pressure with reach and reload
+## aggro (n=8 of 8 with every essential present) — deployable pressure with reach and reload
+|---|---:|---:|---:|---:|---:|---|
+| (nonland copies) | 60 | 60 | 64 | 64 | 65 | - |
+| pressure | 5.0 | 10.0 | 11.0 | 11.0 | 12.0 | 10/16 (60-card) |
+| reach | 4.0 | 4.0 | 5.0 | 6.0 | 13.0 | 4/18 (60-card) |
+| reload | 8.0 | 8.0 | 8.0 | 11.0 | 13.0 | 1/8 (60-card) |
+| answers | 3.0 | 3.0 | 4.0 | 4.0 | 4.0 | 0/3 (60-card) |
+| fixing | 2.0 | 4.0 | 4.0 | 4.0 | 7.0 | 0/4 (60-card) |
+
+## midrange (n=772) — timely threats, relevant answers, sustained value
+## midrange (n=764 of 772 with every essential present) — timely threats, relevant answers, sustained value
+|---|---:|---:|---:|---:|---:|---|
+| (nonland copies) | 61 | 62 | 64 | 65 | 68 | - |
+| threats | 3.0 | 5.0 | 7.0 | 10.0 | 13.0 | 7/16 |
+| answers | 3.0 | 4.0 | 6.0 | 8.0 | 10.0 | 4/11 |
+| value | 5.0 | 7.0 | 9.0 | 12.0 | 15.0 | 7/16 |
+| fixing | 3.0 | 5.0 | 8.0 | 11.0 | 13.0 | 0/8 (60-card) |
+
+## control (n=519) — early stabilisation, advantage engine, accessible finisher
+## control (n=495 of 519 with every essential present) — early stabilisation, advantage engine, accessible finisher
+|---|---:|---:|---:|---:|---:|---|
+| (nonland copies) | 61 | 62 | 63 | 65 | 67 | - |
+| stabilisation | 2.0 | 4.0 | 5.0 | 7.0 | 9.0 | 3/8 |
+| engine | 4.0 | 6.0 | 9.0 | 12.0 | 16.0 | 8/19 |
+| finisher | 2.0 | 3.0 | 5.0 | 7.0 | 10.0 | 7/18 |
+| answers | 0.0 | 1.0 | 1.0 | 2.0 | 4.0 | 0/2 (60-card) |
+| fixing | 5.0 | 7.0 | 10.0 | 13.0 | 16.0 | 0/4 (60-card) |
+
+## aristocrats (n=292) — sacrifice outlets converting expendable bodies into damage
+## aristocrats (n=192 of 292 with every essential present) — sacrifice outlets converting expendable bodies into damage
+|---|---:|---:|---:|---:|---:|---|
+| (nonland copies) | 62 | 63 | 64 | 66 | 71 | - |
+| outlet | 1.0 | 3.0 | 5.0 | 8.0 | 11.0 | 1/10 |
+| payoff | 2.0 | 4.0 | 8.0 | 12.0 | 15.0 | 1/13 |
+| fodder | 9.0 | 11.0 | 15.0 | 19.0 | 21.0 | 16/29 |
+| value | 1.0 | 2.0 | 4.0 | 5.0 | 6.0 | 0/8 (60-card) |
+| answers | 2.0 | 3.0 | 5.0 | 6.0 | 7.0 | 0/5 (60-card) |
+| fixing | 2.0 | 4.0 | 5.0 | 8.0 | 9.0 | 0/8 (60-card) |
+
+## lifegain (n=106) — life gained as a resource, converted by counters or drain
+## lifegain (n=96 of 106 with every essential present) — life gained as a resource, converted by counters or drain
+|---|---:|---:|---:|---:|---:|---|
+| (nonland copies) | 61 | 62 | 63 | 65 | 67 | - |
+| payoff | 3.0 | 5.0 | 7.0 | 10.0 | 14.0 | 4/13 |
+| gain | 7.0 | 12.0 | 18.0 | 23.0 | 26.0 | 12/26 |
+| value | 4.0 | 5.0 | 8.0 | 10.0 | 12.0 | 5/14 |
+| answers | 2.0 | 3.0 | 5.0 | 6.0 | 8.0 | 0/5 (60-card) |
+| fixing | 3.0 | 4.0 | 7.0 | 9.0 | 12.0 | 0/8 (60-card) |
+
+## spells (n=524) — cast-trigger payoffs fed by cheap instants and sorceries
+## spells (n=336 of 524 with every essential present) — cast-trigger payoffs fed by cheap instants and sorceries
+|---|---:|---:|---:|---:|---:|---|
+| (nonland copies) | 61 | 63 | 65 | 68 | 73 | - |
+| payoff | 1.0 | 2.0 | 4.0 | 8.0 | 11.0 | 1/10 |
+| closer | 3.0 | 4.0 | 7.0 | 12.0 | 18.0 | 4/19 |
+| spells | 9.0 | 12.0 | 17.0 | 22.0 | 26.0 | 12/27 |
+| answers | 0.0 | 0.0 | 1.0 | 2.0 | 3.0 | 0/8 (60-card) |
+| fixing | 4.0 | 7.0 | 10.0 | 13.0 | 17.0 | 0/10 (60-card) |
+
+## recursion (n=242) — permanents recurred from the graveyard, and the fuel that fills it
+## recursion (n=136 of 242 with every essential present) — permanents recurred from the graveyard, and the fuel that fills it
+|---|---:|---:|---:|---:|---:|---|
+| (nonland copies) | 60 | 62 | 63 | 65 | 67 | - |
+| recursion | 1.0 | 2.0 | 3.0 | 5.0 | 6.0 | 5/12 |
+| fuel | 1.0 | 2.0 | 4.0 | 8.0 | 12.0 | 6/20 |
+| targets | 3.0 | 5.0 | 6.0 | 10.0 | 13.0 | 8/24 |
+| value | 2.0 | 3.0 | 5.0 | 7.0 | 9.0 | 0/8 (60-card) |
+| answers | 1.0 | 2.0 | 4.0 | 6.0 | 7.0 | 0/5 (60-card) |
+| fixing | 4.0 | 5.0 | 8.0 | 11.0 | 15.0 | 0/8 (60-card) |
+
+## conversion (n=55) — Food/Treasure/Clue produced, then spent on bodies, life or cards
+## conversion (n=53 of 55 with every essential present) — Food/Treasure/Clue produced, then spent on bodies, life or cards
+|---|---:|---:|---:|---:|---:|---|
+| (nonland copies) | 62 | 63 | 64 | 66 | 68 | - |
+| converters | 3.0 | 4.0 | 7.0 | 13.0 | 17.0 | 4/17 |
+| producers | 5.0 | 9.0 | 12.0 | 18.0 | 21.0 | 9/21 |
+| output | 2.0 | 4.0 | 6.0 | 10.0 | 12.0 | 4/13 |
+| value | 1.0 | 2.0 | 3.0 | 5.0 | 7.0 | 0/8 (60-card) |
+| answers | 0.0 | 2.0 | 4.0 | 5.0 | 6.0 | 0/5 (60-card) |
+| fixing | 2.0 | 4.0 | 5.0 | 7.0 | 9.0 | 0/8 (60-card) |
+
+## tokens (n=146) — a wide board of creature tokens, converted by anthems or an outlet
+## tokens (n=143 of 146 with every essential present) — a wide board of creature tokens, converted by anthems or an outlet
+|---|---:|---:|---:|---:|---:|---|
+| (nonland copies) | 61 | 63 | 64 | 65 | 67 | - |
+| payoff | 4.0 | 6.0 | 9.0 | 15.0 | 18.0 | 6/18 |
+| makers | 3.0 | 5.0 | 8.0 | 10.0 | 13.0 | 5/13 |
+| value | 6.0 | 8.0 | 10.0 | 13.0 | 17.0 | 8/17 |
+| answers | 1.0 | 2.0 | 3.0 | 4.0 | 5.0 | 0/5 (60-card) |
+| fixing | 4.0 | 4.0 | 7.0 | 10.0 | 12.0 | 0/8 (60-card) |
+
+## counters (n=113) — +1/+1 counters placed on bodies that read them
+## counters (n=85 of 113 with every essential present) — +1/+1 counters placed on bodies that read them
+|---|---:|---:|---:|---:|---:|---|
+| (nonland copies) | 61 | 62 | 64 | 65 | 67 | - |
+| payoff | 1.0 | 2.0 | 4.0 | 6.0 | 9.0 | 1/8 |
+| sources | 3.0 | 6.0 | 9.0 | 15.0 | 16.0 | 1/16 |
+| carriers | 3.0 | 4.0 | 5.0 | 8.0 | 12.0 | 4/15 |
+| value | 2.0 | 3.0 | 4.0 | 6.0 | 7.0 | 0/8 (60-card) |
+| answers | 1.0 | 1.0 | 2.0 | 4.0 | 5.0 | 0/5 (60-card) |
+| fixing | 4.0 | 6.0 | 7.0 | 10.0 | 11.0 | 0/8 (60-card) |

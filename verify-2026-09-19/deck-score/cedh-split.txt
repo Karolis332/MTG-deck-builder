@@ -1,0 +1,5 @@
+| cohort | n | total median | S median | combo-plan reads | combo Q median |
+|---|---:|---:|---:|---:|---:|
+| training (first 20) | 20 | 88 | 90.4 | 18 | 0.662 |
+| holdout (last 10) | 10 | 90 | 94.1 | 10 | 0.676 |
+| all 30 | 30 | 89 | 90.5 | 28 | 0.667 |

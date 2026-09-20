@@ -1,0 +1,43 @@
+# Vivi diagnosis (stage 4a item 3)
+
+theme: none
+## vivi-battery-arena — N=99
+| recipe | Q | R | fit | essFrac | empty | weakest |
+|---|---:|---:|---:|---:|---|---|
+| spells | 0.643 | 1.000 | 0.546 | 1.00 | no | payoff 9/2.0 |
+| aggro | 0.483 | 0.424 | 0.000 | 0.33 | no | pressure 7/16.5 |
+| midrange | 0.571 | 1.000 | 0.000 | 1.00 | no | threats 5/5.0 |
+| control | 0.466 | 0.333 | 0.000 | 0.67 | no | finisher 1/3.0 |
+| aristocrats | 0.274 | 0.000 | 0.000 | 0.00 | yes | outlet 0/2.0 |
+| lifegain | 0.429 | 0.000 | 0.000 | 0.33 | yes | payoff 0/3.0 |
+| recursion | 0.303 | 0.000 | 0.000 | 0.00 | yes | recursion 0/2.0 |
+| conversion | 0.531 | 0.500 | 0.000 | 0.33 | no | converters 2/4.0 |
+| tokens | 0.457 | 0.000 | 0.000 | 0.33 | yes | payoff 0/6.0 |
+| counters | 0.274 | 0.000 | 0.000 | 0.00 | yes | payoff 0/3.0 |
+## vivi-battery-arena
+  N=99 F=70 recipe=spells essFrac=1.00
+  S=54.6  Q=0.643  R=1.000  B=1.000 (legacy)  U=0.000  W=69.5  total=64  weakest=payoff 9.0/2.0
+    ESS payoff         supply   9 / req   2.0 (4.50)  credited 9.0 (max 16.5)
+    ESS closer         supply   7 / req   4.0 (1.75)  credited 7.0 (max 13.2)
+    ESS spells         supply  38 / req  12.0 (3.17)  credited 26.0 (max 52.8)
+        answers        supply   0 / req   0.0 (n/a)  credited 0.0 (max 13.2)
+    inf fixing         supply   3 / req   0.0 (n/a)  credited 3.0 (max 16.5)
+  producer utilisation (2 charged, 2 stranded):
+    u=0.00 Fling                        produces creature death served 0.0/1.0 via 0 creature death consumer(s), 11 bodies
+    u=0.00 Underworld Breach            consumes graveyard cards served 0.0/1.0 via 0 graveyard cards producer(s)
+  assigned copies by role: spells=42 payoff=11 closer=7 fixing=1
+  top Q cards: Magic Damper[spells c1 p-], Octopus Form[spells c1 p-], Strike It Rich[spells c1 p-], Stormchaser's Talent[payoff c1 p-], Brainstorm[spells c1 p-], Ponder[spells c1 p-], Preordain[spells c1 p-], Consider[spells c1 p-], Opt[spells c1 p-], Faithless Looting[spells c1 p-]
+
+## gated / roleless copies
+| 1 | Sewer-veillance Cam | 1 |  | 1 | y | NONE | Artifact | draw engine |
+| 1 | Super Suit | 2 |  | 0.5 | N | gated | Artifact | eq |
+| 1 | Nanoform Sentinel | 3 | 3 | 1 | y | NONE | Artifact Creature | win |
+| 1 | North Pole Patrol | 3 | 2 | 0.5 | N | gated | Creature | rem |
+| 1 | Tezzeret, Cruel Captain | 3 |  | 1 | N | gated | Legendary Planeswalker | tutor pw |
+| 1 | Goblin Electromancer | 2 | 2 | 1 | y | NONE | Creature | win |
+| 1 | Uthros Psionicist | 3 | 2 | 0.5 | N | gated | Creature |  |
+| 1 | The Mechanist, Aerial Artisan | 3 | 1 | 1 | N | gated | Legendary Creature | draw engine tok |
+| 1 | Ral, Crackling Wit | 4 |  | 1 | N | gated | Legendary Planeswalker | draw engine tok ctok pw |
+| 1 | A-The One Ring | 4 |  | 1 | y | NONE | Legendary Artifact | draw engine prot |
+| 1 | Piece It Together | 1 |  | 1 | N | gated | Sorcery | draw |
+| 1 | Underworld Breach | 2 |  | 1 | y | NONE | Enchantment |  |

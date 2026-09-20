@@ -744,6 +744,22 @@ export function computeWin(
   // catalogue": a line is admitted only when it is COMPLETE — every pool has
   // its members — and reaches the same access target W already holds it to.
   // `evals` is capped at 8 recipes upstream, so the catalogue bound holds.
+  //
+  // MEASURED, stage 4a, NOT FIXED HERE. The ROOT line is deliberately NOT held
+  // to that bar, and holding it there was tried and reverted. One alternate-win
+  // card drawn into a 99-card negative control gives a single-member pool that
+  // is complete by construction and reads EXACTLY like a real one: Katsumasa
+  // control sample 372715497 alt_win access 14% u=0.94 against
+  // `cedhtop16-ballooncon6` alt_win access 14% u=0.95. `access >=
+  // winAccessTarget` on the root removes both — Ballooncon loses its closing
+  // plan (S 85 -> 50.5, total 88 -> 60) and an anchor with it.
+  // The closing PLAN already separates them correctly (Ballooncon S 85 vs the
+  // pile's S 2.2, weakest `tutors 1/2`); the residue is that `combo` alone
+  // still answers to `Q_BASELINE` = .30 while every other recipe moved to the
+  // measured .574, so a fit of .022 beats ten recipes pinned at 0. §9.5's
+  // reason for .30 was "the pile read stays 0/200"; at 1/200 that has expired,
+  // and the fix is a closing floor measured the same way (stage 4b), not a
+  // filter that costs the anchor.
   const closingLines = assembled
     .filter((e) => e.access >= norms.winAccessTarget && e.recipe.pools.every((pool) => pool.members.length >= poolR(pool)))
     .map(lineOf);
