@@ -19,6 +19,7 @@ import { typalTheme, typalRecipe } from '../src/lib/deck-score-plans';
 import { normsFor } from '../src/lib/deck-score-norms';
 import { computeInteraction, computeAdvantage } from '../src/lib/deck-score-interaction';
 import { winDiagnostic } from '../src/lib/deck-score-win';
+import { producerUtilisation } from '../src/lib/deck-score-producers';
 
 const TOP = Number(process.argv[2] ?? 20);
 
@@ -53,11 +54,25 @@ function diag(label: string, input: DeckScoreInput): string {
   for (const c of contrib) byRole.set(c.role, (byRole.get(c.role) ?? 0) + c.q);
   const top = contrib.slice().sort((a, b) => b.q - a.q || a.c - b.c).slice(0, 10);
 
+  // §9 decision 3 / §9.6 step 4: per-producer utilisation, the term that
+  // replaced B. `u` rows are only emitted for copies whose output is CHARGED
+  // — everything reaching a direct plan use is u = 1 and is left out.
+  const util = producerUtilisation(nonLand, cmd);
+  const scored = scoreDeck(input);
+  const W = scored.components.find((c) => c.key === 'win')?.score ?? 0;
+  const utilLines = util.rows.length === 0
+    ? ['    (no charged production: every producer reaches a direct plan use)']
+    : util.rows.slice(0, 12).map((r) =>
+      `    u=${r.u.toFixed(2)} ${r.name.slice(0, 28).padEnd(28)} ${r.side} ${r.resource}`
+      + ` served ${r.servedOutput.toFixed(1)}/${r.fixedUsefulOutput.toFixed(1)} via ${r.route}`);
+
   return [
     `## ${label}`,
     `  N=${N} F=${F} recipe=${plan.recipe.key} essFrac=${plan.essentialFraction.toFixed(2)}`,
-    `  S=${syn.score.toFixed(1)}  Q=${plan.Q.toFixed(3)}  R=${plan.R.toFixed(3)}  B=${syn.B.toFixed(3)}  weakest=${plan.weakest.key} ${plan.weakest.supply}/${plan.weakest.required.toFixed(1)}`,
+    `  S=${syn.score.toFixed(1)}  Q=${plan.Q.toFixed(3)}  R=${plan.R.toFixed(3)}  B=${syn.B.toFixed(3)} (legacy)  U=${syn.U.toFixed(3)}  W=${W.toFixed(1)}  total=${scored.score}  weakest=${plan.weakest.key} ${plan.weakest.supply.toFixed(1)}/${plan.weakest.required.toFixed(1)}`,
     ...roleLines,
+    `  producer utilisation (${util.rows.length} charged, ${util.rows.filter((r) => r.u === 0).length} stranded):`,
+    ...utilLines,
     `  assigned copies by role: ${[...byRole].map(([k, v]) => `${k}=${v}`).join(' ')}`,
     `  top Q cards: ${top.map((t) => `${t.name}[${t.role} c${t.c} p${t.pw ?? '-'}]`).join(', ')}`,
   ].join('\n');

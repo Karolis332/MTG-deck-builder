@@ -296,31 +296,34 @@ function coveredFeature(card: Parameters<typeof deriveCardFeature>[0]) {
 // ── Synergy quota-gaming ────────────────────────────────────────────────
 
 describe('computeSynergy - broken producer/consumer links', () => {
-  it('scores lower when a dependent payoff has no producer to support it', () => {
-    // v1.2: S is multiplicative, so the deck has to satisfy its essential
-    // roles first; only then does breaking the Food link move B and S. Both
-    // lists keep identical role quotas, costs and bodies - only the producer
-    // link differs (the section 4 quota-gaming invariant).
-    const payoff = mkCard({ name: 'Sac Payoff', type_line: 'Creature - Beast', oracle_text: 'Sacrifice a Food: draw a card.', mana_cost: '{2}{G}', cmc: 3, power: '2', toughness: '2' });
-    const producer = (i: number) => mkCard({ name: `Food Maker ${i}`, type_line: 'Creature - Chef', oracle_text: 'When this creature enters, create a Food token.', mana_cost: '{1}{G}', cmc: 2, power: '2', toughness: '2' });
-    const filler = (i: number) => mkCard({ name: `Plain Filler ${i}`, type_line: 'Creature - Bear', mana_cost: '{1}{G}', cmc: 2, power: '2', toughness: '2' });
+  it('scores lower when the producers lose the consumers that used them', () => {
+    // v1.3 (§9.3): B is retired and pinned at 1; the charge moved to the
+    // PRODUCER copy. Both lists are the SAME 30 cards — the second one has
+    // the §4 quota-gaming operation applied to the six payoffs, whose rules
+    // text is blanked while name, type, cost and colour stay. The ten life
+    // sources then reach nothing, earn u = 0, and S falls instead of rising.
+    const gain = (i: number) => mkCard({ name: `Healer ${i}`, type_line: 'Enchantment', oracle_text: 'At the beginning of your upkeep, you gain 2 life.', mana_cost: '{1}{W}', cmc: 2, power: null, toughness: null });
+    const payoff = (i: number) => mkCard({ name: `Sanguine ${i}`, type_line: 'Enchantment', oracle_text: 'Whenever you gain life, each opponent loses 1 life.', mana_cost: '{2}{B}', cmc: 3, power: null, toughness: null });
     const threat = (i: number) => mkCard({ name: `Threat ${i}`, type_line: 'Creature - Bear', mana_cost: '{2}{G}', cmc: 3, power: '4', toughness: '4' });
     const answer = (i: number) => mkCard({ name: `Answer ${i}`, type_line: 'Instant', oracle_text: 'Destroy target creature.', mana_cost: '{1}{G}', cmc: 2, power: null, toughness: null });
     const value = (i: number) => mkCard({ name: `Value ${i}`, type_line: 'Sorcery', oracle_text: 'Draw a card.', mana_cost: '{G}', cmc: 1, power: null, toughness: null });
 
-    const spine = [
-      ...Array.from({ length: 10 }, (_, i) => ({ feature: coveredFeature(threat(i)), quantity: 1 })),
+    const spine: DeckEntry[] = [
+      ...Array.from({ length: 4 }, (_, i) => ({ feature: coveredFeature(threat(i)), quantity: 1 })),
       ...Array.from({ length: 6 }, (_, i) => ({ feature: coveredFeature(answer(i)), quantity: 1 })),
       ...Array.from({ length: 4 }, (_, i) => ({ feature: coveredFeature(value(i)), quantity: 1 })),
-      { feature: coveredFeature(payoff), quantity: 4 },
+      ...Array.from({ length: 10 }, (_, i) => ({ feature: coveredFeature(gain(i)), quantity: 1 })),
     ];
-    const linked: DeckEntry[] = [...spine, ...Array.from({ length: 4 }, (_, i) => ({ feature: coveredFeature(producer(i)), quantity: 1 }))];
-    const broken: DeckEntry[] = [...spine, ...Array.from({ length: 4 }, (_, i) => ({ feature: coveredFeature(filler(i)), quantity: 1 }))];
+    const linked: DeckEntry[] = [...spine, ...Array.from({ length: 6 }, (_, i) => ({ feature: coveredFeature(payoff(i)), quantity: 1 }))];
+    const broken: DeckEntry[] = [...spine, ...Array.from({ length: 6 }, (_, i) => ({ feature: coveredFeature({ ...payoff(i), oracle_text: '' }), quantity: 1 }))];
 
     const linkedScore = computeSynergy(null, 60, linked);
     const brokenScore = computeSynergy(null, 60, broken);
     expect(linkedScore.score).toBeGreaterThan(0);
-    expect(brokenScore.B).toBeLessThan(linkedScore.B);
+    expect(linkedScore.B).toBe(1);
+    expect(brokenScore.B).toBe(1);
+    expect(linkedScore.U).toBe(1);
+    expect(brokenScore.U).toBe(0);
     expect(brokenScore.score).toBeLessThan(linkedScore.score);
   });
 });

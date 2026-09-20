@@ -16,6 +16,7 @@ import {
   HARD_CAP_INVALID, type ScoreFormat, type ComponentKey, type ScoreTuning,
 } from './deck-score-norms';
 import { selectPlan, evaluateClosing, betterPlan, type PlanKey } from './deck-score-plans';
+import { producerUtilisation } from './deck-score-producers';
 import { computeStructure, type ScoreGate } from './deck-score-gates';
 import { computeMana, computeCurve, type DeckEntry } from './deck-score-mana';
 import { computeInteraction, computeAdvantage } from './deck-score-interaction';
@@ -75,6 +76,9 @@ function archetypeOfPlan(key: PlanKey): Archetype {
   if (key === 'spells') return 'spellslinger';
   if (key === 'lifegain') return 'midrange';
   if (key === 'typal') return 'tribal';
+  // Graveyard recursion has no calibrated curve/E-star profile of its own;
+  // midrange is the neutral one, not an invented constant.
+  if (key === 'recursion') return 'midrange';
   return key;
 }
 
@@ -141,7 +145,11 @@ export function scoreDeck(input: Readonly<DeckScoreInput>, tuning?: Readonly<Sco
   const F = nonLandEntries.reduce((s, e) => s + e.quantity, 0);
   // §8: plans are inferred from the whole deck, including commanders as
   // available resources, and the SAME selection feeds S and the archetype.
-  const plan = selectPlan(Math.max(1, N), nonLandEntries, commanderFeatures.map((f) => ({ feature: f, quantity: 1 })));
+  const commanderEntries = commanderFeatures.map((f) => ({ feature: f, quantity: 1 }));
+  // §9.3: one utilisation table per deck, shared by every recipe, so all
+  // candidate plans are ranked against the SAME feasible assignment.
+  const utilisation = producerUtilisation(nonLandEntries, commanderEntries);
+  const plan = selectPlan(Math.max(1, N), nonLandEntries, commanderEntries, utilisation);
   const archetype = inferArchetype(commanderFeatures, archetypeOfPlan(plan.recipe.key));
   const commanderCmc = commanderFeatures.reduce((max, f) => Math.max(max, f.c), 0);
 
@@ -160,9 +168,8 @@ export function scoreDeck(input: Readonly<DeckScoreInput>, tuning?: Readonly<Sco
   // The archetype stays on the pre-W plan: the curve/interaction multipliers
   // were calibrated against it, and re-deriving it here would make W's input
   // depend on W's output.
-  const commanderEntries = commanderFeatures.map((f) => ({ feature: f, quantity: 1 }));
   const finalPlan = win.closing
-    ? betterPlan(plan, evaluateClosing(win.closing, nonLandEntries, commanderEntries))
+    ? betterPlan(plan, evaluateClosing(win.closing, nonLandEntries, commanderEntries, utilisation))
     : plan;
   const synergy = computeSynergy(finalPlan, N, mainEntries);
   const metaResult = computeMeta(format, archetype, mainEntries, input.corpus);

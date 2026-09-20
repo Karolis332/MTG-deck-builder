@@ -11,7 +11,7 @@
  * printing's oracle text still hashes to the reviewed text; otherwise the card
  * falls through to the regex path, which cannot claim coverage on its own.
  */
-import { entryHash, fnv1a, oracleHash, type AnswerAxis, type CatalogEntry, type EffectFamily, type MechanicKnowledge, type RequiredSupply } from './schema';
+import { entryHash, fnv1a, oracleHash, type AnswerAxis, type CatalogEntry, type EffectFamily, type MechanicKnowledge, type RequiredSupply, type TypedEffect } from './schema';
 import { CEDH_CORE } from './entries/cedh-core';
 import { STANDARD_CORE } from './entries/standard-core';
 import { CEDH_STAPLES_B1 } from './entries/cedh-staples-b1';
@@ -72,6 +72,30 @@ export function catalogEntry(name: string): CatalogEntry | undefined {
   return BY_NAME.get(name.toLowerCase());
 }
 
+/**
+ * ONE alternative mode of a card, evaluated on its own. §9.3/§9.6 step 1:
+ * "replace `catalogFacts`' union of alternative-mode requirements with
+ * mode-resolved evaluation … modal budgets remain exclusive". The union was
+ * wrong in both directions: a card with a cheap irrelevant mode and an
+ * expensive relevant one appeared to need BOTH modes' supply, and a modal
+ * card could satisfy two roles at once from two modes of the same copy.
+ */
+export interface CatalogMode {
+  effect: TypedEffect;
+  family: EffectFamily;
+  produces: ReadonlySet<string>;
+  consumes: ReadonlySet<string>;
+  requiredSupply: readonly RequiredSupply[];
+  /** `outputBounds.min` — the lower-bounded output this mode actually makes. */
+  output: number;
+  unit: string;
+  mana: number;
+  earliestTurn: number;
+  /** Modes sharing a key are alternatives: at most one may be counted per
+   * copy. Defaults to the effect's own index, i.e. its own budget. */
+  budget: string;
+}
+
 /** The flat mechanical facts the scorer reads off an entry. */
 export interface CatalogFacts {
   entry: CatalogEntry;
@@ -82,8 +106,8 @@ export interface CatalogFacts {
   answerAxes: readonly AnswerAxis[];
   produces: ReadonlySet<string>;
   consumes: ReadonlySet<string>;
-  /** Union of every mode's typed supply requirements. */
-  requiredSupply: readonly RequiredSupply[];
+  /** Every mode, kept separate. Callers pick ONE per copy (§9.3). */
+  modes: readonly CatalogMode[];
   /** Cheapest mode's total mana (the effective cost c_i floor). */
   cheapestMana: number;
   /** Earliest turn any mode is live. */
@@ -110,20 +134,31 @@ export function catalogFacts(name: string, liveOracleText: string | null | undef
   const axes = new Set<AnswerAxis>();
   const produces = new Set<string>();
   const consumes = new Set<string>();
-  const requiredSupply: RequiredSupply[] = [];
+  const modes: CatalogMode[] = [];
   let cheapestMana = Infinity;
   let earliestTurn = Infinity;
   let availability = 1;
 
-  for (const effect of entry.effects) {
+  for (const [i, effect] of entry.effects.entries()) {
     families.add(effect.family);
     for (const axis of effect.answerAxes ?? []) axes.add(axis);
     for (const p of effect.produces ?? []) produces.add(p);
     for (const c of effect.consumes ?? []) consumes.add(c);
-    for (const r of effect.requiredSupply ?? []) requiredSupply.push(r);
     cheapestMana = Math.min(cheapestMana, effect.cost.mana);
     earliestTurn = Math.min(earliestTurn, effect.timing.earliestTurn);
     availability = Math.min(availability, effect.availabilityPrior ?? 1);
+    modes.push({
+      effect,
+      family: effect.family,
+      produces: new Set(effect.produces ?? []),
+      consumes: new Set(effect.consumes ?? []),
+      requiredSupply: effect.requiredSupply ?? [],
+      output: effect.outputBounds?.min ?? 0,
+      unit: effect.outputBounds?.unit ?? 'unspecified',
+      mana: effect.cost.mana,
+      earliestTurn: effect.timing.earliestTurn,
+      budget: effect.sharedModeBudget ?? `#${i}`,
+    });
   }
 
   const facts: CatalogFacts = {
@@ -134,7 +169,7 @@ export function catalogFacts(name: string, liveOracleText: string | null | undef
     answerAxes: [...axes],
     produces,
     consumes,
-    requiredSupply,
+    modes,
     cheapestMana: Number.isFinite(cheapestMana) ? cheapestMana : 0,
     earliestTurn: Number.isFinite(earliestTurn) ? earliestTurn : 1,
     availability,

@@ -31,7 +31,10 @@ const CASES: Array<[GeneratableCard, 'known' | 'partial', EffectFamily[]]> = [
   [card('Greedy Freebooter', '{B}', 1, 'Creature — Human Pirate', 'When this creature dies, scry 1 and create a Treasure token. (To scry 1, look at the top card of your library. You may put that card on the bottom. A Treasure token is an artifact with "{T}, Sacrifice this token: Add one mana of any color.")', '1'), 'known', ['advantage', 'mana', 'closing']],
   [card('Gene Pollinator', '{G}', 1, 'Artifact Creature — Robot Insect', '{T}, Tap an untapped permanent you control: Add one mana of any color.', '1'), 'known', ['mana', 'closing']],
   [card('Traumatic Critique', '{X}{U}{R}', 2, 'Instant', 'Traumatic Critique deals X damage to any target. Draw two cards, then discard a card.'), 'known', ['closing', 'advantage']],
-  [card('Swords to Plowshares', '{W}', 1, 'Instant', 'Exile target creature. Its controller gains life equal to its power.'), 'partial', ['answer']],
+  // v1.3: both clauses ground now — the exile is an answer and "its
+  // controller gains life equal to its power" is a typed life amount (§9.6
+  // step 1 separates life AMOUNT from the life-gain EVENT that consumes it).
+  [card('Swords to Plowshares', '{W}', 1, 'Instant', 'Exile target creature. Its controller gains life equal to its power.'), 'known', ['answer', 'advantage']],
   [card('Demonic Tutor', '{1}{B}', 2, 'Sorcery', 'Search your library for a card, put that card into your hand, then shuffle.'), 'known', ['tutor']],
   [card('Vampiric Tutor', '{B}', 1, 'Instant', 'Search your library for a card, then shuffle and put that card on top. You lose 2 life.'), 'known', ['tutor']],
   [card('Sol Ring', '{1}', 1, 'Artifact', '{T}: Add {C}{C}.'), 'known', ['mana']],
@@ -79,7 +82,11 @@ const MUST_BE_PARTIAL: GeneratableCard[] = [
   // cost with no typed atom, so the entry must stay partial.
   card('Necropotence', '{B}{B}{B}', 3, 'Enchantment', 'Skip your draw step.\nWhenever you discard a card, exile that card.\nPay 1 life: Exile the top card of your library face down. Put that card into your hand at the beginning of your next end step.'),
   card('Mox Diamond', '{0}', 0, 'Artifact', "If this artifact would enter, you may discard a land card instead. If you do, put this artifact onto the battlefield. If you don't, put it into its owner's graveyard.\n{T}: Add one mana of any color."),
-  card('Case of the Uneaten Feast', '{W}', 1, 'Enchantment — Case', 'Whenever a creature you control enters, you gain 1 life.\nTo solve — You\'ve gained 5 or more life this turn.\nSolved — Sacrifice this Case: Creature cards in your graveyard gain "You may cast this card from your graveyard" until end of turn.'),
+  // Case of the Uneaten Feast moved out: v1.3 types its life amount, its
+  // `creature etb` consumption and its graveyard-exit grant, so it is
+  // genuinely `known` now. Replaced by a card whose central clause still has
+  // no atom — a global type-changing replacement effect on lands.
+  card('Blood Moon', '{2}{R}', 3, 'Enchantment', 'Nonbasic lands are Mountains.'),
   card('Underworld Breach', '{1}{R}', 2, 'Enchantment', "Each nonland card in your graveyard has escape. The escape cost is equal to the card's mana cost plus exile three other cards from your graveyard.\nAt the beginning of the end step, sacrifice this enchantment."),
 ];
 

@@ -18,6 +18,7 @@ import { computeWin } from '../deck-score-win';
 import { normsFor } from '../deck-score-norms';
 import { catalogFacts, CATALOG_SIZE, oracleHash } from '../deck-score-catalog';
 import { deriveCardFeature } from '../deck-score-features';
+import { producerUtilisation } from '../deck-score-producers';
 import type { DeckEntry } from '../deck-score-mana';
 
 let idCounter = 0;
@@ -912,10 +913,11 @@ describe('§4 quota gaming — S is non-increasing when a producer->consumer lin
     expect(after.score).toBeLessThanOrEqual(before.score);
   });
 
-  it('gives B < 1 when a dependent payoff has no producers to consume', () => {
-    // A life-triggered drain carries the same `creature deaths` requirement
-    // but is NOT itself a dies-trigger, so a deck with no sacrifice outlet
-    // supplies nothing for it and fulfilment falls below 1.
+  it('strands a dependent payoff that has no producers to consume (v1.3: u, not B)', () => {
+    // v1.2 asserted B < 1 here. §9.3 retired B — a bounded payoff mean cannot
+    // be non-increasing under deletion — so the charge moved to the copy: a
+    // life-triggered drain with no life SOURCE in the deck reaches nothing,
+    // earns u = 0, and contributes no Q or R credit. B stays 1 by definition.
     const lifeDrains = Array.from({ length: 6 }, (_, i) => ({
       card: mkCard({
         name: `Sanguine ${i}`, type_line: 'Enchantment',
@@ -924,9 +926,18 @@ describe('§4 quota gaming — S is non-increasing when a producer->consumer lin
       }),
       quantity: 1,
     }));
-    const starved = entriesOf([...lifeDrains, ...creatures(20, 3, 3, 'Beater'), ...removal(6, 2), ...cantrips(6)]);
+    // The beaters cost 4: a drain also reads creature DEATHS, and cheap
+    // bodies would serve that route instead (§9.3 "deaths require expendable
+    // bodies AND a death source"). With neither route present the copy is
+    // stranded, which is what this test is about.
+    const starved = entriesOf([...lifeDrains, ...creatures(20, 3, 4, 'Beater'), ...removal(6, 2), ...cantrips(6)]);
     const out = computeSynergy(null, 60, starved);
-    expect(out.B).toBeLessThan(1);
+    expect(out.B).toBe(1);
+    expect(out.U).toBeLessThan(1);
+    const util = producerUtilisation(starved);
+    const drain = util.rows.find((r) => r.name.startsWith('Sanguine'));
+    expect(drain?.u).toBe(0);
+    expect(drain?.resource).toBe('life');
   });
 
   it('cannot raise S by re-selecting a looser recipe after copies are removed', () => {

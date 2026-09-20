@@ -23,8 +23,9 @@ import { clip } from './deck-score-math';
 import type { CardFeature } from './deck-score-features';
 import type { DeckEntry } from './deck-score-mana';
 import type { ClosingLine } from './deck-score-win';
+import { producerUtilisation, type Utilisation } from './deck-score-producers';
 
-export type PlanKey = 'aggro' | 'midrange' | 'control' | 'aristocrats' | 'lifegain' | 'spells' | 'combo' | 'typal';
+export type PlanKey = 'aggro' | 'midrange' | 'control' | 'aristocrats' | 'lifegain' | 'spells' | 'combo' | 'typal' | 'recursion';
 
 export interface PlanRole {
   key: string;
@@ -173,6 +174,44 @@ function spellCloser(f: CardFeature): boolean {
   return f.isDirectDamage || f.isAltWin || f.isCreatureTokenProducer || f.isAnthemOrOverrun;
 }
 
+// §9.6 step 1 / cross-cutting: "add the engine-family recipe Imotekh actually
+// plays (artifact/graveyard recursion), not an artifact-count quota."
+//
+// The three roles are the actual loop, not a type tally: something that brings
+// permanents BACK, something that puts them there, and permanents worth the
+// trip. An artifact-count reward is neither — a deck with thirty artifacts and
+// no way to reuse them is not playing this plan, so no role reads a count.
+
+// MEASURED, then tightened. The first predicate set accepted any graveyard
+// keyword (flashback / escape / disturb) as recursion, any discard or
+// dies-trigger as fuel, and any body of power >= 1 as a target. It claimed 99
+// of 300 Standard positives and read the univerce AGGRO list as "95% supports
+// recursion", and piles under 25 fell 156 -> 138. This plan is about
+// PERMANENTS coming back, repeatedly; spell flashback is a different deck.
+const RE_GRAVEYARD_EXIT = /return(?:s)? [^.]*(?:creature|artifact|permanent)[^.]*from your graveyard to the battlefield|cast(?:s)? [^.]*(?:creature|artifact|permanent)[^.]*from your graveyard|puts? [^.]*(?:creature|artifact|permanent) cards? from [a-z' ]*graveyard onto the battlefield|\bunearth\b|\bembalm\b|\beternalize\b|\bencore\b/i;
+const RE_GRAVEYARD_ENTRY = /\bmills? (?:a|an|one|two|three|four|five|x|\d+)|puts? the top [a-z0-9 ]*cards? of your library into your graveyard/i;
+
+/** Brings a PERMANENT back out of YOUR graveyard, or casts it from there. */
+function graveyardRecursion(f: CardFeature): boolean {
+  return RE_GRAVEYARD_EXIT.test(f.card.oracle_text || '');
+}
+
+/** Puts our own permanents into the graveyard: self-mill, or a sacrifice
+ * outlet. A dies TRIGGER is a payoff, not fuel — it reads the event, it does
+ * not cause it. Without fuel the recursion has nothing to return. */
+function graveyardFuel(f: CardFeature): boolean {
+  return RE_GRAVEYARD_ENTRY.test(f.card.oracle_text || '') || f.isSacOutlet;
+}
+
+/** Worth recurring: a permanent that pays for the trip every time it arrives
+ * — a real body, or an artifact/creature carrying an ETB or death trigger. */
+function recursionTarget(f: CardFeature): boolean {
+  const permanent = isCreatureBody(f) || /\bArtifact\b/.test(f.card.type_line || '');
+  if (!permanent) return false;
+  return f.hasDiesTrigger || /when(?:ever)? this (?:creature|artifact|permanent) enters/i.test(f.card.oracle_text || '') ||
+    (f.power !== null && f.power >= 2 && f.c >= 3);
+}
+
 // ── The frozen recipes ────────────────────────────────────────────────────
 //
 // MEASURED, then frozen. Source: the dated positive cohort in
@@ -305,6 +344,25 @@ export const PLAN_RECIPES: readonly PlanRecipe[] = [
       { key: 'fixing', essential: false, infrastructure: true, min: 0, max: 10, fills: infrastructure },
     ],
   },
+  {
+    // Bands are a PRIOR, not a measurement: the 60-card positive cohort has no
+    // graveyard-recursion column and no Commander cohort of >= 30 reviewed
+    // lists exists for it either, so §1's replacement rule applies and these
+    // floors sit where the reference recursion decks (Imotekh, Meren) clear
+    // them and a colour-matched random pile does not. Both raw-material roles
+    // are bounded by the recursion count they serve, which is what stops a
+    // pile's loose creatures and dies-triggers from filling them.
+    key: 'recursion',
+    label: 'permanents recurred from the graveyard, and the fuel that fills it',
+    roles: [
+      { key: 'recursion', essential: true, min: 4, max: 10, cmd: { min: 5, max: 12 }, fills: graveyardRecursion },
+      { key: 'fuel', essential: true, min: 4, max: 14, cmd: { min: 6, max: 20 }, servedBy: { roles: ['recursion'], ratio: 4 }, fills: graveyardFuel },
+      { key: 'targets', essential: true, min: 6, max: 18, cmd: { min: 8, max: 24 }, deadline: 5, servedBy: { roles: ['recursion'], ratio: 5 }, fills: recursionTarget },
+      { key: 'value', essential: false, min: 0, max: 8, fills: velocity(5) },
+      { key: 'answers', essential: false, min: 0, max: 5, fills: answer(5) },
+      { key: 'fixing', essential: false, infrastructure: true, min: 0, max: 8, fills: infrastructure },
+    ],
+  },
 ];
 
 export function recipeFor(key: PlanKey): PlanRecipe {
@@ -396,6 +454,10 @@ export function evaluatePlan(
   nonLand: readonly DeckEntry[],
   /** Command-zone cards: available resources for R, never library Q mass. */
   guaranteed: readonly DeckEntry[] = [],
+  /** Shared across the recipes of one deck so u_p is computed once and every
+   * recipe is scored against the SAME assignment (§9.3 "maximise the same
+   * score over feasible assignments with the recipe fixed"). */
+  utilisation?: Utilisation,
 ): PlanEvaluation {
   const F = nonLand.reduce((s, e) => s + e.quantity, 0);
   const commanderShaped = usesCommanderBands(N);
@@ -413,14 +475,19 @@ export function evaluatePlan(
     totalSupply.set(role.key, 0);
   }
 
+  // §9.3: a producer's Q and R credit is multiplied by its utilisation, so
+  // production nothing consumes is charged where it originates instead of
+  // discounting the whole of S through a payoff mean.
+  const util = utilisation ?? producerUtilisation(nonLand, guaranteed);
   const assign = (entries: readonly DeckEntry[], intoLibrary: boolean): void => {
     for (const entry of entries) {
       if (entry.feature.s < 1 || !entry.feature.covered) continue; // §8 evidence policy
       const role = recipe.roles.find((r) => r.fills(entry.feature) &&
         (r.deadline === undefined || entry.feature.c <= castableBy(r.deadline)));
       if (!role) continue;
-      totalSupply.set(role.key, (totalSupply.get(role.key) ?? 0) + entry.quantity);
-      if (intoLibrary) librarySupply.set(role.key, (librarySupply.get(role.key) ?? 0) + entry.quantity);
+      const credit = entry.quantity * util.of(entry.feature);
+      totalSupply.set(role.key, (totalSupply.get(role.key) ?? 0) + credit);
+      if (intoLibrary) librarySupply.set(role.key, (librarySupply.get(role.key) ?? 0) + credit);
     }
   };
   assign(nonLand, true);
@@ -602,25 +669,28 @@ export function typalRecipe(theme: TypalTheme): PlanRecipe {
 /** Null when the deck names no countable theme at all. */
 export function evaluateTypal(
   N: number, nonLand: readonly DeckEntry[], guaranteed: readonly DeckEntry[] = [],
+  utilisation?: Utilisation,
 ): PlanEvaluation | null {
   const features = [...nonLand, ...guaranteed].map((e) => e.feature);
   const theme = typalTheme(features);
   if (theme.tribes.length === 0 && !theme.artifacts && !theme.party) return null;
-  return evaluatePlan(typalRecipe(theme), N, nonLand, guaranteed);
+  return evaluatePlan(typalRecipe(theme), N, nonLand, guaranteed, utilisation);
 }
 
 export function selectPlan(
   N: number,
   nonLand: readonly DeckEntry[],
   guaranteed: readonly DeckEntry[] = [],
+  shared?: Utilisation,
 ): PlanEvaluation {
+  const utilisation = shared ?? producerUtilisation(nonLand, guaranteed);
   // A recipe with an essential role the deck has NO copies of describes a plan
   // the deck is not attempting; `betterPlan` drops it before §1's
   // satisfied-fraction ordering applies. Without that, a Food deck with no
   // life-gain payoff outranked its own midrange reading on Q and scored S = 0.
   // Ties fall through to PLAN_RECIPES order, the frozen enum order.
-  const evaluations = PLAN_RECIPES.map((recipe) => evaluatePlan(recipe, N, nonLand, guaranteed));
-  const typal = evaluateTypal(N, nonLand, guaranteed);
+  const evaluations = PLAN_RECIPES.map((recipe) => evaluatePlan(recipe, N, nonLand, guaranteed, utilisation));
+  const typal = evaluateTypal(N, nonLand, guaranteed, utilisation);
   if (typal) evaluations.push(typal);
   return evaluations.reduce(betterPlan, evaluations[0]);
 }
@@ -691,12 +761,13 @@ export function evaluateClosing(
   line: ClosingLine,
   nonLand: readonly DeckEntry[],
   guaranteed: readonly DeckEntry[] = [],
+  utilisation?: Utilisation,
 ): PlanEvaluation {
   const names = new Set(line.pieces.map((n) => n.toLowerCase()));
   const pieces = [...nonLand, ...guaranteed]
     .map((e) => e.feature)
     .filter((f) => names.has(f.card.name.toLowerCase()));
-  return evaluatePlan(closingRecipe(line, pieces), PLAN_BAND_REFERENCE, nonLand, guaranteed);
+  return evaluatePlan(closingRecipe(line, pieces), PLAN_BAND_REFERENCE, nonLand, guaranteed, utilisation);
 }
 
 /** The §1 ordering, exposed so `deck-score.ts` can fold in the closing plan

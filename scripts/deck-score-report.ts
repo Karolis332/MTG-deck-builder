@@ -14,6 +14,8 @@
 import fs from 'fs';
 import path from 'path';
 import { scoreDeck } from '../src/lib/deck-score';
+import { deriveCardFeature } from '../src/lib/deck-score-features';
+import { producerUtilisation } from '../src/lib/deck-score-producers';
 import type { ScoreFormat } from '../src/lib/deck-score';
 import {
   OUT_DIR as SHARED_OUT_DIR, FIXTURES, inBand, loadDataset,
@@ -35,6 +37,9 @@ interface FixtureResult {
   inBand: boolean | 'n/a';
   ms: number;
   winReason: string;
+  /** §9.6 step 4: producer-utilisation summary — charged copies, how many are
+   * stranded (u = 0) and the copy-weighted mean u. */
+  utilisation: string;
 }
 
 // ── Scoring + reporting ─────────────────────────────────────────────────
@@ -54,9 +59,16 @@ function runFixture(spec: FixtureSpec): FixtureResult {
     capping.length ? capping.join(',') : '',
   ].filter(Boolean).join('; ') || 'none';
   const winReason = result.components.find((c) => c.key === 'win')?.reason ?? '';
+  const nonLand = input.main
+    .map((rc) => ({ feature: deriveCardFeature(rc.card), quantity: rc.quantity }))
+    .filter((e) => !e.feature.isLand);
+  const util = producerUtilisation(nonLand, input.commander.map((c) => ({ feature: deriveCardFeature(c), quantity: 1 })));
+  const charged = util.rows.reduce((a, r) => a + r.quantity, 0);
+  const meanU = charged > 0 ? util.rows.reduce((a, r) => a + r.quantity * r.u, 0) / charged : 1;
+  const utilisation = `${charged} charged, ${util.rows.filter((r) => r.u === 0).reduce((a, r) => a + r.quantity, 0)} stranded, mean u ${meanU.toFixed(2)}`;
   return {
     fixture: spec.name, format: spec.format, score: result.score, components, gates: gateSummary,
-    band: spec.band, purpose: spec.purpose, inBand: inBand(result.score, spec.band), ms, winReason,
+    band: spec.band, purpose: spec.purpose, inBand: inBand(result.score, spec.band), ms, winReason, utilisation,
   };
 }
 
@@ -137,6 +149,10 @@ function main() {
     .map((f) => `| ${f.fixture} | ${f.components.win} | ${f.winReason.replace(/\|/g, '/')} |`)
     .join('\n');
 
+  const utilRows = fixtures
+    .map((f) => `| ${f.fixture} | ${f.components.synergy} | ${f.utilisation} |`)
+    .join('\n');
+
   const md = `# Deck Score v1 calibration report
 
 Generated ${new Date().toISOString()}. Raw v1 numbers — weights are NOT tuned in this unit (docs/DECK_SCORE_SPEC.md §4 is a separate calibration pass).
@@ -154,6 +170,17 @@ Anchors in band: ${anchorsInBand}/${anchorsTotal} (fixtures with a hard-cap-only
 | Fixture | W | Reason |
 |---|---:|---|
 ${winRows}
+
+## Producer utilisation — the term that replaced B (section 9 decision 3)
+
+A copy is "charged" when its only output is life, Food, a token, creature deaths or
+graveyard fill: none of those reach a plan without a route. A copy whose output is
+pressure, mana, cards or answers is a direct plan use and never appears here.
+"stranded" copies have u = 0 and earn no Q or R credit at all.
+
+| Fixture | S | producers |
+|---|---:|---|
+${utilRows}
 
 ## Section 8 acceptance, measured
 

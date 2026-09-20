@@ -63,6 +63,10 @@ const OTHER_KW = [
   'start your engines', 'mobilize', 'warp', 'storied', 'bargain', 'disturb', 'corrupted', 'descend', 'craft', 'forage', 'squad',
   'for mirrodin!', 'melee', 'raid', 'delirium', 'domain', 'coven', 'eerie', 'flurry', 'survival', 'expend',
   'double strike', 'menace', 'lifelink', 'deathtouch', 'devotion', 'affinity', 'enlist', 'toxic', 'bloodthirst',
+  // v1.3: ability words / keywords whose whole content is the keyword itself.
+  'demonstrate', 'paradigm', 'gravestorm', 'forestwalk', 'islandwalk', 'swampwalk', 'mountainwalk',
+  'plainswalk', 'landwalk', 'flanking', 'horsemanship', 'rampage', 'shroud', 'intimidate', 'wither',
+  'persist', 'undying', 'conspire', 'entwine', 'epic', 'fateseal', 'exert', 'afterlife', 'ascend',
 ];
 const ALL_KW = new Set([...EVASION, ...COMBAT_KW, ...PROTECTION_KW, ...OTHER_KW]);
 
@@ -111,7 +115,24 @@ interface Ctx {
   instantSpeed: boolean;
   controller: 'self' | 'opponent' | 'any';
   prerequisites: string[];
+  /** §9.6 step 1: what the MODE's trigger or cost consumes. A trigger clause
+   * is the consumer side of a typed resource — "whenever you gain life" is a
+   * life-gain EVENT consumer, distinct from the life AMOUNT an effect
+   * produces and from life PAID as a cost. `finish` merges these in so
+   * `deck-score-producers.ts` can match producers to present consumers. */
+  consumes: string[];
 }
+
+/** Resources a trigger clause reads. Pure text -> resource, no card names. */
+const TRIGGER_CONSUMES: ReadonlyArray<readonly [RegExp, string]> = [
+  [/\byou gain(?:ed)?(?: or lose)? \d* ?(?:or more )?life|\bgains? life\b/i, 'life gain event'],
+  [/\byou cast (?:a|an|another|your|each|this)\b[^,]*\bspell/i, 'spell cast'],
+  [/\b(?:creature|permanent|artifact|another creature|this creature)[^,]*\bdies\b|\bdies\b/i, 'creature death'],
+  [/\b(?:creature|another creature|a creature you control|permanent)[^,]*\benters\b/i, 'creature etb'],
+  [/\+1\/\+1 counters? (?:is|are) put|\bcounters? (?:is|are) put on/i, 'counter placement'],
+  [/\bcards? (?:is|are) put into your graveyard|\bmills?\b|\bput into (?:a|your) graveyard from/i, 'graveyard cards'],
+  [/\byou sacrifice\b|\bsacrifices? (?:a|an|another)\b/i, 'creature death'],
+];
 
 function eff(
   family: EffectFamily,
@@ -126,7 +147,7 @@ const ATOMS: Atom[] = [
   // --- mana -------------------------------------------------------------
   {
     kind: 'effect',
-    re: /\badds? (?:an additional )?(?:\{[^}]+\})+|adds? (one|two|three|x) mana of any (?:colou?r that a land (?:you|an opponent) controls? could produce|colou?r among [^.]*|of the exiled card's colou?rs|(?:one )?colou?r(?: in your commander's colou?r identity)?)|adds? (\w+) mana in any combination of colou?rs/gi,
+    re: /\badds? (?:an additional )?(?:\{[^}]+\})+|adds? (one|two|three|x) mana of (?:any|the chosen) (?:colou?r that a land (?:you|an opponent) controls? could produce|colou?r among [^.]*|type that a land you control could produce|of the exiled card's colou?rs|(?:one )?colou?r(?: in your commander's colou?r identity)?)|adds? (\w+) mana in any combination of colou?rs|\badds? an amount of \{[WUBRGC]\} equal to [^.,]*/gi,
     make: (m, ctx) => {
       const pips = (m[0].match(/\{[^}]+\}/g) ?? []).length;
       const n = pips || num(m[1] ?? m[2]);
@@ -203,20 +224,28 @@ const ATOMS: Atom[] = [
     re: /\bcreates? (a|an|one|two|three|\d+) food tokens?/gi,
     make: (m, ctx) => eff('engine', ctx, { produces: ['food'], outputBounds: { min: num(m[1]), max: num(m[1]), unit: 'food' } }),
   },
+  // §9.6 step 1: life-gain AMOUNT. A life-gain EVENT (the trigger "whenever
+  // you gain life") is a CONSUMER and is typed from the trigger clause in
+  // `generateEntry`, not here; life PAID is a cost, typed in `activationCost`
+  // and the life-payment rider. Keeping the three apart is what lets
+  // `deck-score-producers.ts` charge unserved life production.
   {
     kind: 'effect',
-    re: /\byou gain (one|two|three|four|five|x|\d+) life/gi,
-    make: (m, ctx) => eff('advantage', ctx, { produces: ['life'], outputBounds: { min: num(m[1]), max: num(m[1]), unit: 'life' } }),
+    re: /\byou (?:may )?gain (one|two|three|four|five|six|seven|x|\d+) life|\b(?:you|its controller|that player) gains? (?:that much|x) life/gi,
+    make: (m, ctx) => {
+      const n = m[1] ? num(m[1]) : 1;
+      return eff('advantage', ctx, { produces: ['life'], outputBounds: { min: n, max: m[1] ? n : null, unit: 'life' } });
+    },
   },
   {
     kind: 'effect',
-    re: /\breturns? (?:target|up to (?:one|two|three)|all) ([a-z' -]*?)cards?(?: with [^,.]*?)? from your graveyard to (?:your hand|the battlefield)/gi,
-    make: (m, ctx) => eff('engine', ctx, { zones: ['graveyard'], targetFilters: [`${(m[1] || '').trim() || 'any'} card`], produces: ['recursion'], outputBounds: { min: 1, max: 1, unit: 'cards' } }),
+    re: /\breturns? (?:another target|target|up to (?:one|two|three|x)|all|each) ([a-z' -]*?)cards?(?: with [^,.]*?)? from your graveyard to (?:your hand|the battlefield)(?: tapped)?/gi,
+    make: (m, ctx) => eff('engine', ctx, { zones: ['graveyard'], targetFilters: [`${(m[1] || '').trim() || 'any'} card`], consumes: ['graveyard cards'], produces: ['recursion'], outputBounds: { min: 1, max: 1, unit: 'cards' } }),
   },
   // --- answers ----------------------------------------------------------
   {
     kind: 'effect',
-    re: /\b(destroys?|exiles?) all ([a-z' -]+)/gi,
+    re: /\b(destroys?|exiles?) (?:all|each) ([a-z' -]+?)(?: with mana value x or less)?(?=[,.]|$)/gi,
     make: (m, ctx) => {
       const axes: AnswerAxis[] = /creature/i.test(m[2]) ? ['creature'] : ['permanent'];
       return eff('answer', ctx, { answerAxes: axes, targetFilters: [`all ${m[2].trim()}`], outputBounds: { min: 2, max: null, unit: 'permanents answered' } });
@@ -224,7 +253,7 @@ const ATOMS: Atom[] = [
   },
   {
     kind: 'effect',
-    re: /\b(destroys?|exiles?) (?:up to (?:one|two|three) )?(?:other )?target ([a-z' ,-]*?)(creature|permanent|artifact|enchantment|planeswalker|land|battle|token)s?\b[a-z ,\/]*/gi,
+    re: /\b(destroys?|exiles?) (?:up to (?:one|two|three|four|x) )?(?:other |another )?target ([a-z' ,-]*?)(creature|permanent|artifact|enchantment|planeswalker|land|battle|token)s?\b(?: and\/or [a-z]+s?\b)?[a-z ,\/]*/gi,
     make: (m, ctx) => {
       const axes: AnswerAxis[] = m[3] === 'creature' ? ['creature'] : ['permanent'];
       if (m[3] !== 'creature' && /creature/i.test(m[0])) axes.push('creature');
@@ -295,7 +324,7 @@ const ATOMS: Atom[] = [
   },
   {
     kind: 'effect',
-    re: /\bexiles? (?:target|a) ([a-z' -]*?)cards? from (?:a|an opponent's|target player's) graveyard|\bexiles? (?:all cards from )?(?:target player's|each opponent's) graveyard/gi,
+    re: /\bexiles? (?:x target|target|a) ([a-z' -]*?)cards? from (?:a|an opponent's|target player's) graveyard|\bexiles? (?:all cards from )?(?:target player's|each opponent's) graveyard/gi,
     make: (m, ctx) => eff('answer', ctx, { answerAxes: ['graveyard_or_protection'], zones: ['graveyard'], targetFilters: ['card in a graveyard'], outputBounds: { min: 1, max: 1, unit: 'cards answered' } }),
   },
   {
@@ -418,12 +447,12 @@ const ATOMS: Atom[] = [
   // --- closing ----------------------------------------------------------
   {
     kind: 'effect',
-    re: /\b(?:each opponent|target opponent|target player|each player|its controller|that player)(?: [a-z]+){0,4}? loses (one|two|three|four|five|x|\d+|) ?life(?: equal to [^.,]*)?/gi,
+    re: /\b(?:each opponent|target opponent|target player|each player|its controller|that player)(?: [a-z]+){0,4}? loses (one|two|three|four|five|six|seven|x|\d+|that much|) ?life(?: equal to [^.,]*)?/gi,
     make: (m, ctx) => eff('closing', ctx, { controller: 'opponent', produces: ['opponent life loss'], outputBounds: { min: m[1] ? num(m[1]) : 1, max: m[1] ? num(m[1]) : null, unit: 'life lost' } }),
   },
   {
     kind: 'effect',
-    re: /\bcreates? (a|an|one|two|three|four|\d+|x) ([\dx*]+\/[\dx*]+) ([a-z' -]+?) (?:creature )?tokens?(?: with "[^"]*")?/gi,
+    re: /\bcreates? (a|an|one|two|three|four|five|six|\d+|x|twice x|that many) (?:tapped |tapped and attacking )?([\dx*]+\/[\dx*]+) ([a-z' -]+?) (?:creature )?tokens?(?: with "[^"]*")?(?: with [a-z, ]+(?:and [a-z]+)?)?/gi,
     make: (m, ctx) => {
       const n = num(m[1]);
       const power = Number(m[2].split('/')[0]) || 0;
@@ -434,15 +463,33 @@ const ATOMS: Atom[] = [
       const theirs = /its controller|that player|each opponent|target opponent|each other player/.test(before);
       return eff('closing', ctx, {
         ...(theirs ? { controller: 'opponent' as const } : {}),
-        produces: ['tokens', 'pressure'],
+        // §9.6 step 1 "Food / Treasure / creature-token distinctions": a
+        // CREATURE token is a body, which is direct pressure. Treasure is
+        // mana and Food is life — each has its own produces key above, so
+        // `deck-score-producers.ts` can tell a Kuja token (direct combat use)
+        // from a Food (needs a life route).
+        produces: ['tokens', 'creature token', 'pressure'],
         outputBounds: { min: theirs ? 0 : n * power, max: theirs ? 0 : n * power, unit: 'power' },
       });
     },
   },
   {
     kind: 'effect',
-    re: /\bputs? (a|an|one|two|three|four|x|\d+) \+1\/\+1 counters? on/gi,
+    re: /\bputs? (a|an|one|two|three|four|five|x|that many|\d+) \+1\/\+1 counters? on/gi,
     make: (m, ctx) => eff('closing', ctx, { produces: ['+1/+1 counters'], outputBounds: { min: num(m[1]), max: num(m[1]), unit: 'power' } }),
+  },
+  // §9.6 step 1 "graveyard entry / exit / recursion". Entry is the mill atom
+  // above (`produces: graveyard cards`); these two are EXIT: a card leaving a
+  // graveyard is only useful where something put it there, so they consume.
+  {
+    kind: 'effect',
+    re: /\byou may cast this card from your graveyard|\beach [a-z' ]*cards? in your graveyard gains? (?:unearth|flashback|escape)[^.]*|\byou may cast [a-z' ]*spells? from [a-z' ]*your graveyard[^.]*/gi,
+    make: (m, ctx) => eff('engine', ctx, { zones: ['graveyard'], consumes: ['graveyard cards'], produces: ['recursion'], outputBounds: { min: 1, max: null, unit: 'cards' } }),
+  },
+  {
+    kind: 'effect',
+    re: /\bfabricate [x\d]+/gi,
+    make: (m, ctx) => eff('closing', ctx, { produces: ['+1/+1 counters', 'tokens', 'creature token', 'pressure'], outputBounds: { min: num(m[0].split(' ')[1]), max: null, unit: 'power' } }),
   },
   {
     kind: 'effect',
@@ -544,7 +591,110 @@ const ATOMS: Atom[] = [
   { kind: 'rider', re: /\byou take the initiative|\bthis (?:creature|permanent) becomes prepared|\bthis creature enters prepared/gi },
   { kind: 'rider', re: /\bthis ability costs (?:\{[^}]+\})+ less to activate[^.]*|\bactivated abilities of [a-z' ]*cost (?:\{[^}]+\})+ less to activate/gi },
   { kind: 'rider', re: /\byou may play (?:those cards|that card|them|it) until (?:your next|the end of your next) (?:turn|end step)/gi },
+  // --- v1.3 riders (§9.6 step 1 residue) ---------------------------------
+  // Text that changes no score-relevant resource once its atom is consumed.
+  { kind: 'rider', re: /\btaps? (?:it|them|this permanent|this creature)\b/gi },
+  { kind: 'rider', re: /\byou have no maximum hand size\b/gi },
+  { kind: 'rider', re: /\bit'?s an? [a-z]+ (?:land|creature|artifact)\b/gi },
+  { kind: 'rider', re: /\b(?:they'?re|it'?s|that creature becomes|creatures you control are|this artifact becomes)[a-z' ]* (?:an? )?[a-z' ]*(?:artifacts?|creatures?) in addition to (?:its|their) other (?:types|card types)/gi },
+  { kind: 'rider', re: /\bputs? that many [a-z-]+ counters? on [a-z' ]*/gi },
+  { kind: 'rider', re: /\ban opponent gains control of this [a-z]+\b/gi },
+  { kind: 'rider', re: /\bas this (?:artifact|creature|permanent|enchantment|land) enters,? (?:choose|you may choose) (?:an?|one) [a-z ]*/gi },
+  { kind: 'rider', re: /\byou (?:may )?lose life equal to [^.,]*|\byou may pay life equal to [^.,]*|\brather than pay the mana cost of [^,.]*/gi },
+  { kind: 'rider', re: /\bthis (?:artifact|creature|permanent|enchantment|land) enters with [a-z0-9 +\/-]* counters? on it/gi },
+  { kind: 'rider', re: /\bthen search your library for (?:up to )?[a-z0-9 ']* cards?[^.]*/gi },
+  { kind: 'rider', re: /\bchoose another target [a-z' ]*|\bchoose target [a-z' ]* you control and target [a-z' ]* you don't control/gi },
+  { kind: 'rider', re: /\bwhen that [a-z' ]* dies this turn,?|\bat the beginning of the next end step,?/gi },
+  { kind: 'rider', re: /\bit'?s a [A-Za-z]+ in addition to its other types/gi },
+  { kind: 'rider', re: /\bharness this permanent\b|\btap x untapped [a-z' ]*you control/gi },
+  { kind: 'rider', re: /\bsacrifices? any number of [a-z' ]*you control\b/gi },
+  { kind: 'rider', re: /\bthe same is true for [^.]*/gi },
+  // --- v1.3 riders, second batch (party / dungeon / legendary residue) ----
+  { kind: 'rider', re: /\bthis permanent is also an? [A-Za-z]+(?:,? (?:and\/or |and |or )?[A-Za-z]+)*\b/gi },
+  { kind: 'rider', re: /\buntaps? (?:a|all|up to (?:one|two|three)) [a-z' ]*(?:creatures?|permanents?|lands?)[a-z' ]*/gi },
+  { kind: 'rider', re: /\blands you control enter untapped\b|\byou can spend mana of any type to cast [a-z' ]*spells?\b/gi },
+  { kind: 'rider', re: /\broom abilities of dungeons you own trigger an additional time\b|\bventure into the dungeon\b/gi },
+  { kind: 'rider', re: /\b(?:that|this) (?:spell|ability|creature|permanent) (?:has|gains) [a-z]+\b|\bthat ability triggers an additional time\b/gi },
+  { kind: 'rider', re: /\bchoose (?:hexproof or indestructible|one or both|a creature type|a color)\b/gi },
+  { kind: 'rider', re: /\b(?:creatures you control|this creature|it) can'?t be blocked(?: except by [a-z' ]*)?(?: if [^.,]*)?/gi },
+  { kind: 'rider', re: /\b(?:equipped|enchanted|this) creature has [a-z]+ if you control [^.]*/gi },
+  { kind: 'rider', re: /\b[a-z]+(?:,? (?:and |or |and\/or )?[a-z]+)* spells you cast cost (?:\{[^}]+\})+ less to cast\b|\bspells you cast from [a-z' ]* cost (?:\{[^}]+\})+ less to cast\b/gi },
+  { kind: 'rider', re: /\bdiscards? up to (?:one|two|three|x|\d+) cards?\b/gi },
+  { kind: 'rider', re: /\bcreate (?:three|two|x) of those tokens instead[^.]*|\bsacrifices? those tokens\b/gi },
+  { kind: 'rider', re: /\bit can'?t attack or block(?:,? and its activated abilities can'?t be activated)?/gi },
+  { kind: 'rider', re: /\bif (?:it was kicked|you'?ve completed [a-z' ]*|you have a full party|you haven'?t completed [a-z' ]*),?/gi },
+  { kind: 'rider', re: /\buntil your next turn,?|\bduring your end step,?|\bfor each opponent,?/gi },
+  { kind: 'rider', re: /\bspecialize (?:\{[^}]+\})+|\bit gains suspend\b|\bit has all activated abilities of [^.]*/gi },
+  // --- v1.3 atoms, second batch -----------------------------------------
 ];
+
+/** Atoms appended after the rider table; kept separate only so the v1.3
+ * additions read as one block. Order inside `ATOMS` is irrelevant — overlap
+ * is resolved effect-first then longest-first in `scanSentence`. */
+const V13_ATOMS: Atom[] = [
+  {
+    kind: 'effect',
+    re: /\byou may cast [a-z', ]*spells? from the top of your library|\byou may cast (?:a|an) [a-z' ]*spell[^.]*without paying its mana cost|\byou may cast [a-z', ]*spells? (?:from your graveyard|as though they had flash)[^.]*/gi,
+    make: (m, ctx) => eff('advantage', ctx, { zones: ['library', 'graveyard'], produces: ['free cast'], outputBounds: { min: 1, max: null, unit: 'cards' } }),
+  },
+  {
+    kind: 'effect',
+    // A NAMED token with no printed P/T. The noncreature token names are
+    // excluded by hand: Treasure is mana, Food is life, a Clue is a card —
+    // §9.6 step 1's "Food / Treasure / creature-token distinctions" is
+    // exactly what a bare `[A-Za-z]+ token` match would destroy.
+    re: /\bcreates? (?:a|an|one|two|three|x) (?:tapped )?(?!treasure|food|clue|blood|map|powerstone|incubator|junk|shard|gold|lander|role|wicked|cursed|young|monster|royal|sorcerer|mutavault)[A-Za-z][A-Za-z' -]* token\b|\bcreates? a [a-z, ]*creature token with those characteristics\b/gi,
+    make: (m, ctx) => eff('closing', ctx, { produces: ['tokens', 'creature token', 'pressure'], outputBounds: { min: 1, max: null, unit: 'power' } }),
+  },
+  // A modal bullet that IS a token spec: `3/1 Human Warrior with trample`.
+  {
+    kind: 'effect',
+    re: /^[\dx*]+\/[\dx*]+ [A-Za-z][A-Za-z' -]*(?: with [^.]*)?$/gi,
+    make: (m, ctx) => {
+      const power = Number(m[0].split('/')[0]) || 0;
+      return eff('closing', ctx, { produces: ['tokens', 'creature token', 'pressure'], outputBounds: { min: power, max: power, unit: 'power' } });
+    },
+  },
+  {
+    kind: 'effect',
+    re: /\b(?:its controller|you|that player) gains? life equal to [^.,]*/gi,
+    make: (m, ctx) => eff('advantage', ctx, { produces: ['life'], outputBounds: { min: 1, max: null, unit: 'life' } }),
+  },
+  {
+    kind: 'effect',
+    re: /\bcounters? that spell(?: or ability)?(?: unless its controller pays (?:\{[^}]+\})+)?/gi,
+    make: (m, ctx) => eff('answer', ctx, { answerAxes: ['stack'], targetFilters: ['that spell'], outputBounds: { min: 1, max: 1, unit: 'spells answered' } }),
+  },
+  {
+    kind: 'effect',
+    re: /\b(?:destroys?|exiles?) that (?:creature|planeswalker|permanent|artifact|enchantment|token)\b/gi,
+    make: (m, ctx) => eff('answer', ctx, { answerAxes: /creature/i.test(m[0]) ? ['creature'] : ['permanent'], targetFilters: ['that permanent'], outputBounds: { min: 1, max: 1, unit: 'permanents answered' } }),
+  },
+  // §9.6 step 1 graveyard EXIT, granted form: `Each creature card in your
+  // graveyard that's a Cleric ... has unearth {1}{B}`.
+  {
+    kind: 'effect',
+    re: /\beach [a-z' ]*cards? in your graveyard[a-z' ,]*(?:has|have|gains?) (?:unearth|flashback|escape|embalm|eternalize)[^.]*/gi,
+    make: (m, ctx) => eff('engine', ctx, { zones: ['graveyard'], consumes: ['graveyard cards'], produces: ['recursion'], outputBounds: { min: 1, max: null, unit: 'cards' } }),
+  },
+  {
+    kind: 'effect',
+    re: /\breturns? target [a-z' ]*cards? and up to (?:one|two) target [a-z', ]*cards? from your graveyard to (?:the battlefield|your hand)/gi,
+    make: (m, ctx) => eff('engine', ctx, { zones: ['graveyard'], consumes: ['graveyard cards'], produces: ['recursion'], outputBounds: { min: 2, max: 2, unit: 'cards' } }),
+  },
+  {
+    kind: 'effect',
+    re: /\byou may reveal (?:a|an|up to (?:one|two|three)) [a-z', ]*cards?[a-z', \/]*(?:from among them )?and put (?:it|them|those cards) into your hand/gi,
+    make: (m, ctx) => eff('advantage', ctx, { zones: ['library', 'hand'], produces: ['cards'], outputBounds: { min: 0, max: null, unit: 'cards' } }),
+  },
+  {
+    kind: 'effect',
+    re: /\bexiles? cards? from the top of your library until you exile [^.]*/gi,
+    make: (m, ctx) => eff('advantage', ctx, { zones: ['library'], produces: ['selection'], outputBounds: { min: 0, max: null, unit: 'cards' } }),
+  },
+];
+ATOMS.push(...V13_ATOMS);
+
 
 interface ScanResult {
   effects: Partial<TypedEffect>[];
@@ -559,7 +709,11 @@ export function stripReminders(text: string): string {
 /** Oracle text names the card; the residual check must not see it as a noun. */
 function selfName(text: string, card: GeneratableCard): string {
   let out = text;
-  for (const face of [card.name, ...card.name.split(' // ')]) {
+  // An Arena rebalanced printing is named `A-Vivi Ornitier` but its oracle
+  // text still says `Vivi Ornitier`, so the unprefixed face has to be tried
+  // too or the card's own name is left as an untyped noun.
+  const faces = [card.name, ...card.name.split(' // ')];
+  for (const face of [...faces, ...faces.map((f) => f.replace(/^A-/, ''))]) {
     const short = face.split(',')[0].trim();
     for (const variant of [face, short]) {
       if (variant.length < 3) continue;
@@ -647,7 +801,9 @@ export function scanSentence(sentence: string, ctx: Ctx, depth = 0): ScanResult 
 
 const TRIGGER_RE = /^(when|whenever|at the beginning of|at end of)\b[^,]*,\s*/i;
 const LOYALTY_RE = /^\[?[+\u2212-]?\d+\]?:\s*/;
-const ACTIVATED_RE = /^((?:\{[^}]+\}|[A-Z][a-z]+ [a-z][^:{]*|,|\s)+):\s*/;
+/** `Tap X untapped artifacts you control:` — the second word may be a
+ * variable (`X`), so the cost token cannot demand a lower-case continuation. */
+const ACTIVATED_RE = /^((?:\{[^}]+\}|[A-Z][a-z]+ [A-Za-z][^:{]*|,|\s)+):\s*/;
 const ABILITY_WORD_RE = /^(?:[IVX]+(?:, [IVX]+)*|[A-Z][A-Za-z'’]*(?: [A-Za-z][A-Za-z'’]*){0,3})\s+[—–-]\s+/;
 
 function castCost(card: GeneratableCard): EffectCost {
@@ -723,6 +879,7 @@ function landManaEffect(card: GeneratableCard): TypedEffect | null {
 
 function finish(partial: Partial<TypedEffect>, ctx: Ctx): TypedEffect {
   const prerequisites = [...ctx.prerequisites, ...(partial.prerequisites ?? [])];
+  const consumes = [...new Set([...ctx.consumes, ...(partial.consumes ?? [])])];
   return {
     family: partial.family ?? 'advantage',
     mode: partial.mode ?? ctx.mode,
@@ -739,7 +896,7 @@ function finish(partial: Partial<TypedEffect>, ctx: Ctx): TypedEffect {
       ...(ctx.mode === 'activated' || ctx.mode === 'triggered' || ctx.mode === 'static' ? { interval: 1 } : {}),
     },
     ...(partial.produces ? { produces: partial.produces } : {}),
-    ...(partial.consumes ? { consumes: partial.consumes } : {}),
+    ...(consumes.length > 0 ? { consumes } : {}),
     outputBounds: partial.outputBounds ?? { min: 0, max: null, unit: 'unspecified' },
     ...(ctx.controller === 'opponent' ? { availabilityPrior: 0.5 } : {}),
   };
@@ -791,6 +948,7 @@ export function generateEntry(card: GeneratableCard): CatalogEntry {
       instantSpeed: /\bInstant\b/.test(card.type_line),
       controller: 'self',
       prerequisites: [],
+      consumes: [],
     };
 
     const trigger = line.match(TRIGGER_RE);
@@ -799,7 +957,11 @@ export function generateEntry(card: GeneratableCard): CatalogEntry {
       line = line.slice(trigger[0].length);
       ctx.mode = /\benters?\b/i.test(clause) && /\bthis\b|^when /i.test(clause) ? 'etb' : 'triggered';
       ctx.prerequisites.push(clause);
+      // §9.6 step 1: the trigger clause IS the consumer side. Our own trigger
+      // never reads an opponent's resource, so an opponent-controlled trigger
+      // consumes nothing of ours.
       if (/\bopponent|\ban opponent|each opponent\b/i.test(clause)) ctx.controller = 'opponent';
+      else for (const [re, resource] of TRIGGER_CONSUMES) if (re.test(clause)) ctx.consumes.push(resource);
     } else {
       const loyalty = line.match(LOYALTY_RE);
       if (loyalty) {
@@ -809,12 +971,19 @@ export function generateEntry(card: GeneratableCard): CatalogEntry {
         ctx.earliestTurn = Math.max(1, card.cmc);
       }
       const activated = loyalty ? null : line.match(ACTIVATED_RE);
-      if (activated && /\{|sacrifice|discard|pay|counter on this|tap (?:an|two|three) untapped|return a land/i.test(activated[1])) {
+      if (activated && /\{|sacrifice|discard|pay|counter on this|tap (?:an|x|two|three) untapped|return a land/i.test(activated[1])) {
         const { cost, needsTap } = activationCost(activated[1], card);
         line = line.slice(activated[0].length);
         ctx.mode = 'activated';
         ctx.cost = cost;
         ctx.instantSpeed = true;
+        // A repeatable "Sacrifice a creature:" outlet is a DEATH SOURCE: it
+        // consumes bodies and produces creature deaths (§9.6 step 1
+        // "sacrifice throughput ... expendable bodies AND a death source").
+        if (/sacrifice (?:a|an|another|two|three|x) [a-z' ]*creature/i.test(activated[1])) {
+          ctx.consumes.push('creature');
+        }
+        if (/pay \d+ life|pay life/i.test(activated[1])) ctx.consumes.push('life payment');
         if (needsTap && /\bCreature\b/.test(card.type_line)) {
           ctx.summoningSickness = true;
           ctx.earliestTurn = Math.max(1, card.cmc) + 1;
