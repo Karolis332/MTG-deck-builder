@@ -12,9 +12,10 @@ import { analyzeCommander, mergeProfiles } from './commander-synergy';
 import type { Archetype } from './deck-templates';
 import {
   weightsFor, normsFor, qualityCap, SCORE_VERSION,
-  QUALITY_CAP_INTERCEPT, QUALITY_CAP_SLOPE,
+  QUALITY_CAP_INTERCEPT, QUALITY_CAP_SLOPE, COVERAGE_EVIDENCE_THRESHOLD,
   HARD_CAP_INVALID, type ScoreFormat, type ComponentKey, type ScoreTuning,
 } from './deck-score-norms';
+import { selectPlan } from './deck-score-plans';
 import { computeStructure, type ScoreGate } from './deck-score-gates';
 import { computeMana, computeCurve, type DeckEntry } from './deck-score-mana';
 import { computeInteraction, computeAdvantage } from './deck-score-interaction';
@@ -28,9 +29,6 @@ export type { ScoreFormat, ComponentKey, ScoreTuning } from './deck-score-norms'
 export type { ScoreCorpusSnapshot, CorpusCard } from './deck-score-meta';
 export { SCORE_VERSION };
 
-/** §1 W "> 20% of nonland copies have unsupported relevant mechanics" cap. */
-const HARD_CAP_COVERAGE = 69;
-const COVERAGE_UNSUPPORTED_THRESHOLD = 0.20;
 
 export interface DeckScoreInput {
   format: ScoreFormat;
@@ -50,6 +48,10 @@ export interface DeckScoreResult {
   score: number;
   components: { key: ComponentKey; score: number; weight: number; reason: string }[];
   gates: ScoreGate[];
+  /** v1.2 (§8): the point estimate is shown, but "calibrated" status is
+   * withheld — typed coverage is at or below 80%, or a selected recipe's
+   * critical prerequisite is unknown. Additive field; components unchanged. */
+  provisional: boolean;
 }
 
 const COMPONENT_ORDER: ComponentKey[] = ['mana', 'curve', 'interaction', 'advantage', 'win', 'synergy', 'meta', 'structure'];
@@ -59,11 +61,24 @@ function invalidResult(gates: ScoreGate[], weights: Record<ComponentKey, number>
     score: 0,
     components: COMPONENT_ORDER.map((key) => ({ key, score: 0, weight: weights[key], reason: 'invalid or empty deck input.' })),
     gates,
+    provisional: true,
   };
 }
 
-function inferArchetype(commanders: CardFeature[]): Archetype {
-  if (commanders.length === 0) return 'midrange'; // §1: "generic midrange is the fallback" (Standard has no commander)
+/**
+ * §8: "`inferArchetype([])='midrange'` must cease choosing every Standard
+ * profile. Infer plans from the whole deck, including commanders as available
+ * resources."
+ *
+ * The commander's own typed profile still wins when it exists — that IS a
+ * read of the whole deck's available resources, and it drives the engine
+ * templates the curve and E-star/D-star multipliers were calibrated on. When there is no
+ * commander (Standard) or the commander parses to nothing, the archetype now
+ * comes from the deck's own plan evaluation (§1's essential-support ordering)
+ * instead of the midrange constant.
+ */
+function inferArchetype(commanders: CardFeature[], deckPlan: Archetype): Archetype {
+  if (commanders.length === 0) return deckPlan;
   const profiles = commanders
     .map((f) => {
       let identity: string[] = [];
@@ -71,9 +86,9 @@ function inferArchetype(commanders: CardFeature[]): Archetype {
       return analyzeCommander(f.card.oracle_text || '', f.card.type_line || '', identity);
     })
     .filter((p): p is NonNullable<typeof p> => p !== null);
-  if (profiles.length === 0) return 'midrange';
+  if (profiles.length === 0) return deckPlan;
   const merged = profiles.length === 2 ? mergeProfiles(profiles[0], profiles[1]) : profiles[0];
-  return (merged.detectedArchetype ?? 'midrange') as Archetype;
+  return (merged.detectedArchetype ?? deckPlan) as Archetype;
 }
 
 /** Pure, deterministic, input-order invariant. No HTTP/DB/LLM/clock access. */
@@ -108,9 +123,13 @@ export function scoreDeck(input: Readonly<DeckScoreInput>, tuning?: Readonly<Sco
 
   const mainEntries: DeckEntry[] = input.main.map((rc) => ({ feature: getFeature(rc.card), quantity: rc.quantity }));
   const commanderFeatures: CardFeature[] = input.commander.map((c) => getFeature(c));
+  const nonLandEntries = mainEntries.filter((e) => !e.feature.isLand);
   const N = mainEntries.reduce((s, e) => s + e.quantity, 0);
-  const F = mainEntries.filter((e) => !e.feature.isLand).reduce((s, e) => s + e.quantity, 0);
-  const archetype = inferArchetype(commanderFeatures);
+  const F = nonLandEntries.reduce((s, e) => s + e.quantity, 0);
+  // §8: plans are inferred from the whole deck, including commanders as
+  // available resources, and the SAME selection feeds S and the archetype.
+  const plan = selectPlan(Math.max(1, N), nonLandEntries, commanderFeatures.map((f) => ({ feature: f, quantity: 1 })));
+  const archetype = inferArchetype(commanderFeatures, plan.recipe.key);
   const commanderCmc = commanderFeatures.reduce((max, f) => Math.max(max, f.c), 0);
 
   const mana = computeMana(format, norms, N, mainEntries, commanderFeatures);
@@ -121,7 +140,7 @@ export function scoreDeck(input: Readonly<DeckScoreInput>, tuning?: Readonly<Sco
     E: interaction.E, Estar: interaction.Estar,
     D: advantage.D, Dstar: advantage.Dstar, hasDrawEngine: advantage.hasDrawEngine,
   });
-  const synergy = computeSynergy(format, norms, archetype, N, mainEntries);
+  const synergy = computeSynergy(plan, N, mainEntries);
   const metaResult = computeMeta(format, archetype, mainEntries, input.corpus);
 
   const scores: Record<ComponentKey, number> = {
@@ -137,12 +156,15 @@ export function scoreDeck(input: Readonly<DeckScoreInput>, tuning?: Readonly<Sco
   const base = COMPONENT_ORDER.reduce((sum, key) => sum + (weights[key] / 100) * scores[key], 0);
   const qCap = qualityCap(scores.mana, scores.win, scores.synergy, capIntercept, capSlope);
 
-  const unsupportedShare = F > 0
-    ? mainEntries.filter((e) => !e.feature.isLand && e.feature.s < 1).reduce((s, e) => s + e.quantity, 0) / F
-    : 0;
-  const coverageTriggered = unsupportedShare > COVERAGE_UNSUPPORTED_THRESHOLD;
+  // §8 "Evidence, not popularity-based support": coverage is TYPED coverage
+  // (`feature.covered`), never derived from `s < 1` as v1 did — a known
+  // impossible predicate or a modelled opponent trigger is fully covered.
+  const typedCoverage = F > 0
+    ? nonLandEntries.filter((e) => e.feature.covered).reduce((s, e) => s + e.quantity, 0) / F
+    : 1;
+  const coverageTriggered = typedCoverage <= COVERAGE_EVIDENCE_THRESHOLD || synergy.unknownPrerequisite !== null;
 
-  const hardCaps = [...structure.hardCaps, ...(coverageTriggered ? [HARD_CAP_COVERAGE] : [])];
+  const hardCaps = structure.hardCaps;
   const rawScore = Math.min(base, qCap, ...(hardCaps.length ? hardCaps : [Infinity]));
   const score = Number.isFinite(rawScore) ? Math.round(Math.max(0, Math.min(100, rawScore))) : 0;
 
@@ -155,10 +177,12 @@ export function scoreDeck(input: Readonly<DeckScoreInput>, tuning?: Readonly<Sco
       reason: `quality cap ${capIntercept}+${capSlope}*min(M,W,S)=${qCap.toFixed(1)} from mana=${scores.mana}, win=${scores.win}, synergy=${scores.synergy}.`,
     },
     {
-      key: 'coverage', kind: 'quality',
+      key: 'coverage', kind: 'evidence',
       status: coverageTriggered ? 'warn' : 'pass',
-      cap: coverageTriggered ? HARD_CAP_COVERAGE : null,
-      reason: `${Math.round(unsupportedShare * 100)}% of nonland copies have unsupported relevant mechanics${coverageTriggered ? ' — provisional: effect coverage' : ''}.`,
+      cap: null,
+      reason: `${Math.round(typedCoverage * 100)}% of nonland copies are typed in the effect catalogue` +
+        `${synergy.unknownPrerequisite ? `; unknown prerequisite "${synergy.unknownPrerequisite}"` : ''}` +
+        `${coverageTriggered ? ' — provisional: effect coverage, not calibrated' : ''}.`,
     },
     ...(metaResult.evidenceWarn
       ? [{ key: 'meta_evidence', kind: 'evidence' as const, status: 'warn' as const, cap: null, reason: 'no corpus snapshot supplied — meta fit defaulted to 50.' }]
@@ -169,5 +193,6 @@ export function scoreDeck(input: Readonly<DeckScoreInput>, tuning?: Readonly<Sco
     score,
     components: COMPONENT_ORDER.map((key) => ({ key, score: scores[key], weight: weights[key], reason: reasons[key] })),
     gates,
+    provisional: coverageTriggered,
   };
 }

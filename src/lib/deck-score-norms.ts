@@ -62,8 +62,32 @@ export const WEIGHTS: Record<ScoreProfile, Record<ComponentKey, number>> = {
   standard: { mana: 20, curve: 16, interaction: 20, advantage: 10, win: 14, synergy: 12, meta: 8, structure: 0 },
 };
 
+/**
+ * v1.2 (§8 "Missing meta"): Fmeta carries ZERO weight, and the core weights
+ * are renormalised ONCE per profile by `w'_i = w_i / (1 - w_meta)` — divide by
+ * .97 for Commander/Brawl and .92 for Standard.
+ *
+ * This is an explicit VERSION-LEVEL exception to §1 "Never redistribute
+ * weight", not a per-deck missing-data switch: supplying or removing a corpus
+ * snapshot cannot select a different weight vector. Scored meta returns only
+ * with a real validated snapshot builder and a fresh calibration.
+ */
+const WEIGHTS_V12: Record<ScoreProfile, Record<ComponentKey, number>> = Object.fromEntries(
+  (Object.keys(WEIGHTS) as ScoreProfile[]).map((profile) => {
+    const raw = WEIGHTS[profile];
+    const divisor = 1 - raw.meta / 100;
+    const renormalised = Object.fromEntries(
+      (Object.keys(raw) as ComponentKey[]).map((key) => [
+        key,
+        key === 'meta' || key === 'structure' ? 0 : raw[key] / divisor,
+      ]),
+    ) as Record<ComponentKey, number>;
+    return [profile, renormalised];
+  }),
+) as Record<ScoreProfile, Record<ComponentKey, number>>;
+
 export function weightsFor(format: ScoreFormat): Record<ComponentKey, number> {
-  return WEIGHTS[profileOf(format)];
+  return WEIGHTS_V12[profileOf(format)];
 }
 
 export type AnswerAxis = 'creature' | 'permanent' | 'stack' | 'graveyard_or_protection';
@@ -188,7 +212,25 @@ export const HARD_CAP_INVALID = 0;
 export const HARD_CAP_STRUCTURE = 19;
 export const HARD_CAP_UNRESOLVED = 39;
 
-export const SCORE_VERSION = '1.1.0';
+export const SCORE_VERSION = '1.2.0';
+
+/**
+ * §8 "Pile separation belongs to S": `S = 100*clip((Q-.30)/(.70-.30))*R*B`.
+ * .30 is the unstructured baseline and .70 the saturation target, for all
+ * three profiles. Frozen starting priors for v1.2 validation, not measured
+ * estimates — `planFractionTarget` (Q*) stays in FormatNorms as the v1.1
+ * historical constant and no longer divides Q.
+ */
+export const Q_BASELINE = 0.30;
+export const Q_SATURATION = 0.70;
+
+/**
+ * §8 "Evidence, not popularity-based support": below this TYPED coverage of
+ * nonland copies the total is provisional — shown with all components, but
+ * without "calibrated" status. It is a gate with `cap: null`, not the v1
+ * mechanical 69 cap.
+ */
+export const COVERAGE_EVIDENCE_THRESHOLD = 0.80;
 
 /**
  * Calibration surface. `scoreDeck(input, tuning)` overlays these on the frozen

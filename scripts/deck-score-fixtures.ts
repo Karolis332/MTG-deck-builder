@@ -171,6 +171,9 @@ export interface StandardCohortDeck extends LoadedDeck {
   id: number;
   eventDate: string;
   winRate: number;
+  /** Placement 1 at a real event, as opposed to a 5-0 league run or a high
+   * game-win rate — they carry different §8 bands. */
+  winner: boolean;
 }
 
 /**
@@ -196,7 +199,7 @@ export function loadStandardCohorts(cap = 300): { positive: StandardCohortDeck[]
       const isNegative = winRate <= 0.4;
       const bucket = isPositive ? positive : isNegative ? negative : null;
       if (!bucket || bucket.length >= cap) continue;
-      bucket.push({ ...toInput(standardLines(db, r.id), 'standard'), id: r.id, eventDate: r.event_date, winRate });
+      bucket.push({ ...toInput(standardLines(db, r.id), 'standard'), id: r.id, eventDate: r.event_date, winRate, winner: r.placement === 1 });
     }
     return { positive, negative };
   } finally {
@@ -218,10 +221,22 @@ function buildRandomPile(seed: number, commander: DbCard, eligible: DbCard[], la
 
   const identity = parseIdentity(commander.color_identity);
   const colors = identity.length ? identity : ['C'];
+  // §8: the synthetic basics used to reuse the COMMANDER's card id, and
+  // `scoreDeck` caches derived features by `card.id` — so every pile's lands
+  // were scored as copies of the commander (a nonland with its full oracle
+  // text). Each basic needs its own stable synthetic identity.
   const basics: ResolvedCard[] = colors
     .filter((c) => BASIC_BY_COLOR[c])
     .map((c, i, arr) => ({
-      card: { ...commander, name: BASIC_BY_COLOR[c], type_line: `Basic Land — ${BASIC_BY_COLOR[c]}`, mana_cost: null, cmc: 0, oracle_text: null, power: null, toughness: null, color_identity: '[]', colors: null },
+      card: {
+        ...commander,
+        id: `synthetic-basic-${BASIC_BY_COLOR[c].toLowerCase()}`,
+        oracle_id: `synthetic-basic-${BASIC_BY_COLOR[c].toLowerCase()}`,
+        name: BASIC_BY_COLOR[c], type_line: `Basic Land — ${BASIC_BY_COLOR[c]}`,
+        mana_cost: null, cmc: 0, oracle_text: null, power: null, toughness: null,
+        color_identity: '[]', colors: null, keywords: '[]', produced_mana: JSON.stringify([c]),
+        edhrec_rank: null, game_changer: 0,
+      },
       quantity: Math.floor(landCount / arr.length) + (i === 0 ? landCount % arr.length : 0),
     }));
 
@@ -288,9 +303,9 @@ export const FIXTURES: FixtureSpec[] = [
   { name: 'kuja-genome-sorcerer-arena', format: 'brawl', band: '60-80', purpose: 'Spell-trigger pressure', load: () => loadTextFixture('decks/brawl/kuja-genome-sorcerer-arena.txt', 'brawl', null) },
   { name: 'vivi-battery-arena', format: 'brawl', band: '70-85', purpose: 'Activation timing/untap prerequisites', load: () => loadTextFixture('decks/brawl/vivi-battery-arena.txt', 'brawl', null) },
   { name: 'fire-lord-azula-competitive', format: 'competitivebrawl', band: '75-90', purpose: 'Commander ban check, real line support', load: () => loadTextFixture('decks/brawl/fire-lord-azula-competitive.txt', 'competitivebrawl', null) },
-  { name: 'cedhtop16-ballooncon6', format: 'commander', band: '85-100', purpose: 'Ballon Con 6, placement 1, 4-1', load: loadCedhJsonFixture },
-  { name: 'standard-1445893-univerce', format: 'standard', band: '85-100', purpose: 'Standard Challenge 32, placement 1, 8-1', load: () => loadStandardDbFixture(1445893) },
-  { name: 'standard-1445867-aljce', format: 'standard', band: '85-100', purpose: '5-0 league, distinct evidence source', load: () => loadStandardDbFixture(1445867) },
+  { name: 'cedhtop16-ballooncon6', format: 'commander', band: '80-95', purpose: 'Ballon Con 6, placement 1, 4-1', load: loadCedhJsonFixture },
+  { name: 'standard-1445893-univerce', format: 'standard', band: '70-90', purpose: 'Standard Challenge 32, placement 1, 8-1', load: () => loadStandardDbFixture(1445893) },
+  { name: 'standard-1445867-aljce', format: 'standard', band: '65-90', purpose: '5-0 league, distinct evidence source', load: () => loadStandardDbFixture(1445867) },
 ];
 
 export function bandOf(band: string): { lo: number; hi: number } | null {
@@ -309,8 +324,8 @@ export function inBand(score: number, band: string): boolean | 'n/a' {
 export interface Dataset {
   fixtures: Array<{ name: string; format: ScoreFormat; band: string; purpose: string; input: DeckScoreInput; unresolvedNames: string[] }>;
   cedh: DeckScoreInput[];
-  standardPositive: Array<{ id: number; eventDate: string; input: DeckScoreInput }>;
-  standardNegative: Array<{ id: number; eventDate: string; input: DeckScoreInput }>;
+  standardPositive: Array<{ id: number; eventDate: string; winner: boolean; input: DeckScoreInput }>;
+  standardNegative: Array<{ id: number; eventDate: string; winner: boolean; input: DeckScoreInput }>;
   piles: DeckScoreInput[];
 }
 
@@ -331,8 +346,8 @@ export function loadDataset(pileCount: number, opts: { refresh?: boolean } = {})
       return { name: f.name, format: f.format, band: f.band, purpose: f.purpose, input: d.input, unresolvedNames: d.unresolvedNames };
     }),
     cedh: loadCedhCohort().map((d) => d.input),
-    standardPositive: std.positive.map((d) => ({ id: d.id, eventDate: d.eventDate, input: d.input })),
-    standardNegative: std.negative.map((d) => ({ id: d.id, eventDate: d.eventDate, input: d.input })),
+    standardPositive: std.positive.map((d) => ({ id: d.id, eventDate: d.eventDate, winner: d.winner, input: d.input })),
+    standardNegative: std.negative.map((d) => ({ id: d.id, eventDate: d.eventDate, winner: d.winner, input: d.input })),
     piles: loadRandomPiles(pileCount),
   };
   fs.mkdirSync(OUT_DIR, { recursive: true });

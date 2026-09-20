@@ -16,12 +16,13 @@ import path from 'path';
 import { scoreDeck } from '../src/lib/deck-score';
 import type { ScoreFormat } from '../src/lib/deck-score';
 import {
-  OUT_DIR as SHARED_OUT_DIR, FIXTURES, inBand, loadRandomPiles,
+  OUT_DIR as SHARED_OUT_DIR, FIXTURES, inBand, loadDataset,
   type FixtureSpec, type LoadedDeck,
 } from './deck-score-fixtures';
 
 const OUT_DIR = SHARED_OUT_DIR;
 const OUT_FILE = path.join(OUT_DIR, 'report.md');
+const PILE_COUNT = 200;
 
 interface FixtureResult {
   fixture: string;
@@ -59,17 +60,57 @@ function runFixture(spec: FixtureSpec): FixtureResult {
   };
 }
 
-// -- Random constrained legal piles (shared loader) ----------------------
+// -- Random constrained legal piles + the section-8 acceptance block -------
 
-function runRandomControls(): { min: number; median: number; max: number; n: number; over25: number } {
-  const scores = loadRandomPiles(50).map((input) => scoreDeck(input).score).sort((a, b) => a - b);
-  if (scores.length === 0) return { min: NaN, median: NaN, max: NaN, n: 0, over25: 0 };
-  const mid = Math.floor(scores.length / 2);
-  const median = scores.length % 2 ? scores[mid] : (scores[mid - 1] + scores[mid]) / 2;
-  return {
-    min: scores[0], median, max: scores[scores.length - 1], n: scores.length,
-    over25: scores.filter((v) => v >= 25).length,
-  };
+function stats(values: number[]): { min: number; median: number; max: number; n: number } {
+  const v = [...values].sort((a, b) => a - b);
+  if (v.length === 0) return { min: NaN, median: NaN, max: NaN, n: 0 };
+  const mid = Math.floor(v.length / 2);
+  return { min: v[0], median: v.length % 2 ? v[mid] : (v[mid - 1] + v[mid]) / 2, max: v[v.length - 1], n: v.length };
+}
+
+function componentOf(result: ReturnType<typeof scoreDeck>, key: string): number {
+  return result.components.find((c) => c.key === key)?.score ?? 0;
+}
+
+/**
+ * Section 8's acceptance list, reported as MEASURED numbers. This unit does
+ * not retune any W constant (section 8: "recalibrate only after catalogue/S
+ * repairs"), so a row that misses is evidence, not a failure to fix here.
+ */
+function acceptanceBlock(fixtures: FixtureResult[]): string {
+  const data = loadDataset(PILE_COUNT);
+  const piles = data.piles.map((input) => scoreDeck(input));
+  const pileTotals = stats(piles.map((r) => r.score));
+  const pileS = stats(piles.map((r) => componentOf(r, 'synergy')));
+  const cedh = stats(data.cedh.map((input) => scoreDeck(input).score));
+
+  // Held-out Standard positives: the newest 40% by event date, matching the
+  // chronological split scripts/deck-score-calibrate.ts validates on.
+  const sorted = [...data.standardPositive].sort((a, b) => a.eventDate.localeCompare(b.eventDate));
+  const heldOut = sorted.slice(Math.floor(sorted.length * 0.6));
+  const positives = stats(heldOut.map((r) => scoreDeck(r.input).score));
+
+  const fixtureS = (name: string): number => fixtures.find((f) => f.fixture === name)?.components.synergy ?? NaN;
+  const row = (target: string, measured: string, ok: boolean) => `| ${target} | ${measured} | ${ok ? 'PASS' : 'FAIL'} |`;
+
+  return [
+    `n=${pileTotals.n} piles, ${cedh.n} cEDH lists, ${positives.n} held-out Standard positives.`,
+    '',
+    '| section-8 target | measured | |',
+    '|---|---|---|',
+    row('held-out Standard positive median >= 75', String(positives.median), positives.median >= 75),
+    row('cEDH median >= 85', String(cedh.median), cedh.median >= 85),
+    row('>= 95% of piles < 25', `${piles.filter((r) => r.score < 25).length}/${pileTotals.n}`, piles.filter((r) => r.score < 25).length >= 0.95 * pileTotals.n),
+    row('S <= 5 on >= 95% of piles', `${piles.filter((r) => componentOf(r, 'synergy') <= 5).length}/${pileTotals.n}`, piles.filter((r) => componentOf(r, 'synergy') <= 5).length >= 0.95 * pileTotals.n),
+    row('Meren S >= 85.5', String(fixtureS('meren-powerhouse')), fixtureS('meren-powerhouse') >= 85.5),
+    row('precon S >= 70', String(fixtureS('precon-witherbloom')), fixtureS('precon-witherbloom') >= 70),
+    '',
+    '| pile distribution | min | median | max |',
+    '|---|---:|---:|---:|',
+    `| total | ${pileTotals.min} | ${pileTotals.median} | ${pileTotals.max} |`,
+    `| S | ${pileS.min} | ${pileS.median} | ${pileS.max} |`,
+  ].join('\n');
 }
 
 // ── Main ──────────────────────────────────────────────────────────────────
@@ -80,9 +121,7 @@ function main() {
   const anchorsInBand = fixtures.filter((f) => f.inBand === true).length;
   const anchorsTotal = fixtures.filter((f) => f.inBand !== 'n/a').length;
 
-  const controlsT0 = process.hrtime.bigint();
-  const controls = runRandomControls();
-  const controlsMs = Number(process.hrtime.bigint() - controlsT0) / 1e6;
+  const acceptance = acceptanceBlock(fixtures);
 
   const componentKeys = ['mana', 'curve', 'interaction', 'advantage', 'win', 'synergy', 'meta'];
   const componentAbbrev: Record<string, string> = { mana: 'M', curve: 'C', interaction: 'I', advantage: 'A', win: 'W', synergy: 'S', meta: 'Fmeta' };
@@ -116,13 +155,11 @@ Anchors in band: ${anchorsInBand}/${anchorsTotal} (fixtures with a hard-cap-only
 |---|---:|---|
 ${winRows}
 
-## Random constrained-legal piles — The Cabbage Merchant, Commander, seeds 0-49
+## Section 8 acceptance, measured
 
-Per §5: eligible legal singleton cards ordered by SHA-256(seed + canonical id), first N take the nonbasic slots, remaining slots filled with basics split across the commander's color identity. n=${controls.n}, generated+scored in ${controlsMs.toFixed(0)}ms.
+${acceptance}
 
-| min | median | max | >=25 | target |
-|---:|---:|---:|---:|---|
-| ${controls.min} | ${controls.median} | ${controls.max} | ${controls.over25}/${controls.n} | §4 wants >=95% under 25 |
+Per section 5: eligible legal singleton cards ordered by SHA-256(seed + canonical id), first N take the nonbasic slots, remaining slots filled with basics split across the commander's color identity. The synthetic basics no longer reuse the commander's card id (section 8), so pile lands are finally scored as lands.
 `;
 
   fs.mkdirSync(OUT_DIR, { recursive: true });

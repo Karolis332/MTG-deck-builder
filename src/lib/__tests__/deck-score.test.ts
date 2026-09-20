@@ -262,10 +262,11 @@ describe('WEIGHTS', () => {
   const formats: Array<[ScoreFormat, keyof typeof WEIGHTS]> = [
     ['commander', 'commander'], ['brawl', 'brawl'], ['standard', 'standard'],
   ];
-  it.each(formats)('%s weights sum to 100', (_format, profile) => {
+  it.each(formats)('%s raw section-1 weights sum to 100', (_format, profile) => {
     const total = Object.values(WEIGHTS[profile]).reduce((a, b) => a + b, 0);
     expect(total).toBe(100);
   });
+
 });
 
 // ── Reasons ──────────────────────────────────────────────────────────────
@@ -287,24 +288,32 @@ describe('scoreDeck — component reasons', () => {
 
 // ── Synergy quota-gaming ────────────────────────────────────────────────
 
-describe('computeSynergy — broken producer/consumer links', () => {
+describe('computeSynergy - broken producer/consumer links', () => {
   it('scores lower when a dependent payoff has no producer to support it', () => {
-    const norms = normsFor('commander');
-    const payoff = mkCard({ name: 'Sac Payoff', type_line: 'Creature — Beast', oracle_text: 'Sacrifice a Food: draw a card.', mana_cost: '{2}{G}', cmc: 3, power: '3', toughness: '3' });
-    const producer = mkCard({ name: 'Food Maker', type_line: 'Creature — Chef', oracle_text: 'When this creature enters, create a Food token.', mana_cost: '{1}{G}', cmc: 2, power: '2', toughness: '2' });
-    const filler = mkCard({ name: 'Plain Filler', type_line: 'Creature — Bear', mana_cost: '{1}{G}', cmc: 2, power: '2', toughness: '2' });
+    // v1.2: S is multiplicative, so the deck has to satisfy its essential
+    // roles first; only then does breaking the Food link move B and S. Both
+    // lists keep identical role quotas, costs and bodies - only the producer
+    // link differs (the section 4 quota-gaming invariant).
+    const payoff = mkCard({ name: 'Sac Payoff', type_line: 'Creature - Beast', oracle_text: 'Sacrifice a Food: draw a card.', mana_cost: '{2}{G}', cmc: 3, power: '2', toughness: '2' });
+    const producer = (i: number) => mkCard({ name: `Food Maker ${i}`, type_line: 'Creature - Chef', oracle_text: 'When this creature enters, create a Food token.', mana_cost: '{1}{G}', cmc: 2, power: '2', toughness: '2' });
+    const filler = (i: number) => mkCard({ name: `Plain Filler ${i}`, type_line: 'Creature - Bear', mana_cost: '{1}{G}', cmc: 2, power: '2', toughness: '2' });
+    const threat = (i: number) => mkCard({ name: `Threat ${i}`, type_line: 'Creature - Bear', mana_cost: '{2}{G}', cmc: 3, power: '4', toughness: '4' });
+    const answer = (i: number) => mkCard({ name: `Answer ${i}`, type_line: 'Instant', oracle_text: 'Destroy target creature.', mana_cost: '{1}{G}', cmc: 2, power: null, toughness: null });
+    const value = (i: number) => mkCard({ name: `Value ${i}`, type_line: 'Sorcery', oracle_text: 'Draw a card.', mana_cost: '{G}', cmc: 1, power: null, toughness: null });
 
-    const linked: DeckEntry[] = [
-      { feature: deriveCardFeature(payoff), quantity: 1 },
-      { feature: deriveCardFeature(producer), quantity: 1 },
+    const spine = [
+      ...Array.from({ length: 10 }, (_, i) => ({ feature: deriveCardFeature(threat(i)), quantity: 1 })),
+      ...Array.from({ length: 6 }, (_, i) => ({ feature: deriveCardFeature(answer(i)), quantity: 1 })),
+      ...Array.from({ length: 4 }, (_, i) => ({ feature: deriveCardFeature(value(i)), quantity: 1 })),
+      { feature: deriveCardFeature(payoff), quantity: 4 },
     ];
-    const broken: DeckEntry[] = [
-      { feature: deriveCardFeature(payoff), quantity: 1 },
-      { feature: deriveCardFeature(filler), quantity: 1 }, // same quota/curve, no Food producer
-    ];
+    const linked: DeckEntry[] = [...spine, ...Array.from({ length: 4 }, (_, i) => ({ feature: deriveCardFeature(producer(i)), quantity: 1 }))];
+    const broken: DeckEntry[] = [...spine, ...Array.from({ length: 4 }, (_, i) => ({ feature: deriveCardFeature(filler(i)), quantity: 1 }))];
 
-    const linkedScore = computeSynergy('commander', norms, 'midrange', 99, linked);
-    const brokenScore = computeSynergy('commander', norms, 'midrange', 99, broken);
+    const linkedScore = computeSynergy(null, 60, linked);
+    const brokenScore = computeSynergy(null, 60, broken);
+    expect(linkedScore.score).toBeGreaterThan(0);
+    expect(brokenScore.B).toBeLessThan(linkedScore.B);
     expect(brokenScore.score).toBeLessThan(linkedScore.score);
   });
 });
@@ -553,7 +562,10 @@ describe('deriveCardFeature - a creature with no printed power is UNCERTAIN', ()
     });
     const coverage = result.gates.find((g) => g.key === 'coverage');
     expect(coverage?.status).toBe('warn');
-    expect(coverage?.cap).toBe(69);
+    // v1.2: an EVIDENCE gate with no cap replaced the mechanical 69.
+    expect(coverage?.kind).toBe('evidence');
+    expect(coverage?.cap).toBeNull();
+    expect(result.provisional).toBe(true);
   });
 });
 

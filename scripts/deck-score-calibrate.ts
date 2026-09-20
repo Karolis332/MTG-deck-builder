@@ -109,6 +109,13 @@ interface ProfileSet {
 }
 
 const PILE_BAND: [number, number] = [0, 24];
+/** §8 "Revised §5 bands" — v1.2 replaces §7's 85-100 / forced 25-point gap. */
+const CEDH_BAND: [number, number] = [80, 95];
+const STD_WINNER_BAND: [number, number] = [70, 90];
+const STD_FIVE_OH_BAND: [number, number] = [65, 90];
+/** "Verified competitive Standard field, including losing-event lists"; the
+ * negative-median <= 60 objective is retired. */
+const STD_FIELD_BAND: [number, number] = [60, 85];
 
 function sampleOf(label: string, input: DeckScoreInput, band: [number, number]): Sample {
   return { label, input, lo: band[0], hi: band[1] };
@@ -128,7 +135,7 @@ function buildDataset(pileCount: number): ProfileSet[] {
   log(`loading dataset (piles=${pileCount}) ...`);
   const data = loadDataset(pileCount);
   const piles = data.piles.map((input, i) => sampleOf(`pile-${i}`, input, PILE_BAND));
-  const cedh = data.cedh.map((input, i) => sampleOf(`cedh-${i}`, input, [85, 100]));
+  const cedh = data.cedh.map((input, i) => sampleOf(`cedh-${i}`, input, CEDH_BAND));
   log(`  piles=${piles.length} cedh=${cedh.length} std+=${data.standardPositive.length} std-=${data.standardNegative.length}`);
 
   // Chronological split for Standard: older events train, newer validate.
@@ -139,13 +146,15 @@ function buildDataset(pileCount: number): ProfileSet[] {
   };
   const pos = byDate(data.standardPositive);
   const neg = byDate(data.standardNegative);
-  const toStd = (rows: Dataset['standardPositive'], band: [number, number]) =>
-    rows.map((r) => sampleOf(`std-${r.id}`, r.input, band));
+  // Per §8 each positive carries the band its EVIDENCE earns: a placement-1
+  // event winner 70-90, a 5-0 league run 65-90.
+  const toStd = (rows: Dataset['standardPositive'], band: [number, number] | null) =>
+    rows.map((r) => sampleOf(`std-${r.id}`, r.input, band ?? (r.winner ? STD_WINNER_BAND : STD_FIVE_OH_BAND)));
 
-  const stdPosTrain = toStd(pos.train, [85, 100]);
-  const stdPosVal = toStd(pos.val, [85, 100]);
-  const stdNegTrain = toStd(neg.train, [0, 60]);
-  const stdNegVal = toStd(neg.val, [0, 60]);
+  const stdPosTrain = toStd(pos.train, null);
+  const stdPosVal = toStd(pos.val, null);
+  const stdNegTrain = toStd(neg.train, STD_FIELD_BAND);
+  const stdNegVal = toStd(neg.val, STD_FIELD_BAND);
 
   const pairUp = (strong: Sample[], weak: Sample[], limit: number): Array<[Sample, Sample]> => {
     if (weak.length === 0) return [];
@@ -155,7 +164,10 @@ function buildDataset(pileCount: number): ProfileSet[] {
   };
 
   const cmdFixtures = fixtureSamples(data, 'commander');
+  // §8: "its first 60 piles also appear in validation" — training and
+  // validation pile sets must be DISJOINT.
   const pileTrain = piles.slice(0, Math.min(60, piles.length));
+  const pileVal = piles.slice(Math.min(60, piles.length));
   const cedhTrain = cedh.slice(0, 20);
   const cedhVal = cedh.slice(20);
 
@@ -170,10 +182,10 @@ function buildDataset(pileCount: number): ProfileSet[] {
       validationGroups: [
         { name: 'cedh', samples: cedhVal },
         { name: 'curated+precon', samples: cmdFixtures },
-        { name: 'piles', samples: piles },
+        { name: 'piles', samples: pileVal },
       ],
       trainPairs: pairUp(cedhTrain, pileTrain, 20),
-      validationPairs: pairUp(cedhVal, piles, 10),
+      validationPairs: pairUp(cedhVal, pileVal, 10),
     },
     {
       profile: 'brawl',
@@ -192,8 +204,10 @@ function buildDataset(pileCount: number): ProfileSet[] {
         { name: 'std positives', samples: stdPosVal },
         { name: 'std negatives', samples: stdNegVal },
       ],
-      trainPairs: pairUp(stdPosTrain, stdNegTrain, 100),
-      validationPairs: pairUp(stdPosVal, stdNegVal, 100),
+      // §8: "No mandatory gap between unrelated winning/losing lists" — the
+      // §7 positive-vs-negative pair objective is retired for Standard.
+      trainPairs: [],
+      validationPairs: [],
     },
   ];
 }

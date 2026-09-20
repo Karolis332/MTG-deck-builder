@@ -14,6 +14,7 @@
 import type { DbCard } from './types';
 import { classifyCard, ownAbilities, isBoardWipe, isDrawEngine, type CardCategory } from './card-classifier';
 import { ALT_WIN_NAMES } from './win-conditions';
+import { catalogFacts } from './deck-score-catalog';
 
 export type AnswerAxis = 'creature' | 'permanent' | 'stack' | 'graveyard_or_protection';
 
@@ -25,8 +26,13 @@ export interface CardFeature {
    * 0; unsupported predicates give 0.5 plus an uncertainty warning." v1 has
    * no impossible-predicate detection, so this module only emits 0.5 or 1. */
   s: number;
-  /** Whether this card matched a catalogued mechanic (for the >20% coverage gate). */
+  /** Whether this card matched a regex-identified mechanic (feeds `s`). */
   supported: boolean;
+  /** v1.2 (§8): TYPED coverage — a `known` catalogue entry whose reviewed
+   * oracle text still hashes to this printing's. "Matching one regex/category
+   * is insufficient", and coverage is NOT derived from `s < 1`. Only this
+   * flag feeds the evidence gate and `scripts/deck-score-coverage.ts`. */
+  covered: boolean;
   /** Effective cast cost c_i — v1 uses printed cmc (no activation-cost or
    * X-mode refinement; see module doc). */
   c: number;
@@ -56,6 +62,9 @@ export interface CardFeature {
   isAnthemOrOverrun: boolean;
   isAltWin: boolean;
   isComboPiece: boolean;
+  /** v1.2 plan roles (deck-score-plans.ts): threat and reach bins. */
+  isPlaneswalker: boolean;
+  isDirectDamage: boolean;
 }
 
 const RE_DRAW_N = /draw (?:a|two|three|four|x|that many) cards?/i;
@@ -74,6 +83,7 @@ const RE_ANTHEM = /creatures you control get \+\d\/\+\d|other creatures you cont
 const RE_EVASION = /flying|menace|trample|unblockable|can't be blocked/i;
 const RE_DESTROY_PERMANENT = /destroy target (?:artifact|enchantment|permanent)|exile target (?:artifact|enchantment|permanent)/i;
 const RE_DESTROY_CREATURE = /destroy target creature|exile target creature|-\d\/-\d[^.]*target creature/i;
+const RE_DIRECT_DAMAGE = /deals? \d+ damage to (?:target player|target opponent|any target|each opponent)/i;
 
 function hasNonTrivialText(oracleText: string | null): boolean {
   const stripped = (oracleText || '').replace(/\([^)]*\)/g, '').trim();
@@ -110,11 +120,20 @@ export function deriveCardFeature(card: DbCard): CardFeature {
   // effect-coverage gate and makes the data hole visible.
   const powerUnknown = /\bCreature\b/.test(typeLine) && power === null;
 
+  // Resolution order (§8): catalogue entry -> oracle-regex fallback -> unknown.
+  // A catalogue hit whose reviewed text still matches this printing is both
+  // TYPED coverage and verified support; a stale/partial entry falls through.
+  const facts = catalogFacts(card.name, oracle);
+  const typed = facts !== null && facts.textMatches && facts.knowledge === 'known';
+
   // Otherwise a card with no meaningful text (vanilla creature/land/mana
   // rock) makes no claim scoring needs to verify — §1 "no requirements means 1."
-  const supported = !powerUnknown && (isLand || matchedCatalogue || !hasNonTrivialText(oracle));
+  const supported = typed || (!powerUnknown && (isLand || matchedCatalogue || !hasNonTrivialText(oracle)));
   const s = supported ? 1 : 0.5;
   const e = s * Math.min(1, 2 / Math.max(1, c));
+  // Lands and textless vanillas make no mechanical claim at all, so they are
+  // covered by definition; everything else needs a typed entry (§8).
+  const covered = typed || isLand || (!powerUnknown && !hasNonTrivialText(oracle));
 
   const answerAxes: AnswerAxis[] = [];
   const isWipe = !isLand && isBoardWipe(card.name, oracle);
@@ -127,31 +146,39 @@ export function deriveCardFeature(card: DbCard): CardFeature {
   if (isCounterspell) answerAxes.push('stack');
   if (isProtectionAxis) answerAxes.push('graveyard_or_protection');
 
+  const cat = typed ? facts : null;
+  const produces = (what: string): boolean => cat?.produces.has(what) ?? false;
+
   return {
-    card, isLand, categories, s, supported: !powerUnknown && (isLand || matchedCatalogue), c, e, power,
-    isRamp: categories.includes('ramp'),
-    isDraw: categories.includes('draw'),
-    isDrawEngine: !isLand && isDrawEngine(card.name, oracle, typeLine),
-    isTutor: categories.includes('tutor'),
+    card, isLand, categories, s,
+    supported: typed || (!powerUnknown && (isLand || matchedCatalogue)),
+    covered, c, e, power,
+    isRamp: categories.includes('ramp') || (cat?.families.has('mana') ?? false),
+    isDraw: categories.includes('draw') || produces('cards'),
+    isDrawEngine: (!isLand && isDrawEngine(card.name, oracle, typeLine)) ||
+      (cat?.families.has('advantage') === true && cat.entry.effects.some((x) => (x.timing.interval ?? 0) >= 1)),
+    isTutor: categories.includes('tutor') || (cat?.families.has('tutor') ?? false),
     isRemoval: categories.includes('removal') || isRemovalCreature || isRemovalPermanent,
     isWipe,
     isCounterspell,
     isProtection: categories.includes('protection'),
-    isWinConditionRole: categories.includes('win_condition'),
-    answerAxes,
-    isFoodProducer: RE_FOOD.test(oracle) && /create[^.]*food/i.test(oracle),
+    isWinConditionRole: categories.includes('win_condition') || (cat?.families.has('closing') ?? false),
+    answerAxes: [...new Set([...answerAxes, ...(cat?.answerAxes ?? [])])],
+    isFoodProducer: (RE_FOOD.test(oracle) && /create[^.]*food/i.test(oracle)) || produces('food'),
     isFoodPayoff: RE_FOOD_SAC.test(own),
-    isTreasureProducer: RE_TREASURE.test(oracle),
-    isTokenProducer: RE_TOKEN_PRODUCER.test(oracle),
+    isTreasureProducer: RE_TREASURE.test(oracle) || produces('treasure'),
+    isTokenProducer: RE_TOKEN_PRODUCER.test(oracle) || produces('treasure') || produces('food'),
     isTokenPayoff: RE_TOKEN_PAYOFF.test(own),
-    isSacOutlet: RE_SAC_CREATURE.test(own),
-    isDrainPayoff: RE_EACH_OPP_LOSES.test(own),
-    hasDiesTrigger: RE_DIES_TRIGGER.test(oracle),
+    isSacOutlet: RE_SAC_CREATURE.test(own) || produces('sacrifice outlet'),
+    isDrainPayoff: RE_EACH_OPP_LOSES.test(own) || produces('all-opponent drain') || produces('single-target drain'),
+    hasDiesTrigger: RE_DIES_TRIGGER.test(oracle) || (cat?.consumes.has('creature deaths') ?? false),
     isEquipmentOrAura: /\bEquipment\b|\bAura\b/.test(typeLine),
     hasEvasion: RE_EVASION.test(oracle),
     isAnthemOrOverrun: RE_ANTHEM.test(own),
-    isAltWin: ALT_WIN_NAMES.has(card.name.toLowerCase()),
+    isAltWin: ALT_WIN_NAMES.has(card.name.toLowerCase()) || produces('alternate win'),
     isComboPiece: false, // set by deck-score-win.ts once the deck's card set is known
+    isPlaneswalker: /\bPlaneswalker\b/.test(typeLine),
+    isDirectDamage: !isLand && RE_DIRECT_DAMAGE.test(own),
   };
 }
 

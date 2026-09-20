@@ -1,102 +1,134 @@
 /**
- * Deck Score v1 — Synergy / plan coverage (S). docs/DECK_SCORE_SPEC.md §1.
+ * Deck Score v1.2 — Synergy / plan coverage (S).
+ * docs/DECK_SCORE_SPEC.md §1 S + §8 "60-card plans and S" (§8 supersedes).
+ *
+ * v1.1 was `S = 100*(.40*clip(Q/Q*) + .35*R + .25*B)`: three additive terms,
+ * so a deck with a saturated Q and B but NO essential role still scored 65.
+ * v1.2 is multiplicative —
+ *
+ *     S = 100 * clip((Q - .30) / (.70 - .30)) * R * B
+ *
+ * — where .30 is the unstructured baseline and .70 the saturation target for
+ * all three profiles. A missing essential role now zeroes S rather than
+ * costing it 35 points.
+ *
+ * Q counts each supported nonland copy at most ONCE toward one compatible
+ * plan role; R is the min over that recipe's essential roles of verified
+ * useful supply over required supply; B is the copy-weighted fulfilment of
+ * ALL typed requirements of real dependent payoffs, and 1 when the selected
+ * plan has none.
  */
 import { clip } from './deck-score-math';
-import { referenceLibrarySize, type FormatNorms, type ScoreFormat } from './deck-score-norms';
-import { getTemplate, type Archetype } from './deck-templates';
+import { Q_BASELINE, Q_SATURATION } from './deck-score-norms';
 import type { DeckEntry, ComponentOutput } from './deck-score-mana';
 import type { CardFeature } from './deck-score-features';
+import { catalogFacts } from './deck-score-catalog';
+import { selectPlan, PLAN_BAND_REFERENCE, type PlanEvaluation } from './deck-score-plans';
 
-const TARGETED_CATEGORIES = new Set(['removal', 'board_wipe', 'protection', 'win_condition', 'synergy', 'tutor']);
+/**
+ * Minimum verified enabler copies a regex-derived dependent requirement needs
+ * for full credit. §1's enabler norm of 8 is R's band for an ESSENTIAL role;
+ * applying it to B would put every fair deck below .5 on a single Food payoff.
+ * One enabler is not a supply, so the frozen floor is two.
+ */
+const REGEX_ENABLER_SUPPLY = 2;
 
-/** Generic infrastructure (ramp/draw) counts toward the plan only up to the
- * template's upper band — extra copies beyond that are redundant, not on-plan. */
-function onPlanShare(feature: CardFeature, rampQty: number, drawQty: number, rampMax: number, drawMax: number): number {
-  if (feature.categories.some((c) => TARGETED_CATEGORIES.has(c))) return 1;
-  if (feature.isRamp) return clip(rampMax / Math.max(1, rampQty));
-  if (feature.isDraw) return clip(drawMax / Math.max(1, drawQty));
-  const mechanicFlag = feature.isFoodProducer || feature.isFoodPayoff || feature.isTreasureProducer ||
-    feature.isTokenProducer || feature.isTokenPayoff || feature.isSacOutlet || feature.isDrainPayoff ||
-    feature.isAnthemOrOverrun || feature.isAltWin || feature.isEquipmentOrAura || feature.isComboPiece;
-  return mechanicFlag ? 1 : 0;
+export interface SynergyOutput extends ComponentOutput {
+  Q: number;
+  R: number;
+  B: number;
+  plan: PlanEvaluation;
+  /** A typed requirement of a selected payoff whose supply we cannot count —
+   * §8's evidence policy: no fabricated credit, raise the evidence gate. */
+  unknownPrerequisite: string | null;
 }
 
-/** Whether a dependent payoff's producer requirement is actually met — this
- * is the mechanism the spec's "quota-gaming" invariant (§4) checks: a
- * quota-perfect pile with the payoff but no producer must score lower here. */
-function linkedSupport(feature: CardFeature, counts: { food: number; token: number; sac: number }): number {
-  if (feature.isFoodPayoff) return counts.food > 0 ? feature.s : 0;
-  if (feature.isTokenPayoff) return counts.token > 0 ? feature.s : 0;
-  if (feature.isDrainPayoff) return counts.sac > 0 ? feature.s : 0;
-  return feature.s;
+/** Typed requirement of one dependent payoff. */
+interface PayoffRequirement {
+  resource: string;
+  copies: number;
 }
 
-/** `Q`, `R`, `B` -> Synergy / plan coverage (S), §1. */
+function requirementsOf(feature: CardFeature): PayoffRequirement[] {
+  const facts = catalogFacts(feature.card.name, feature.card.oracle_text);
+  if (facts && facts.textMatches && facts.knowledge === 'known' && facts.requiredSupply.length > 0) {
+    return facts.requiredSupply.map((r) => ({ resource: r.resource, copies: r.copies }));
+  }
+  const out: PayoffRequirement[] = [];
+  if (feature.isFoodPayoff) out.push({ resource: 'food', copies: REGEX_ENABLER_SUPPLY });
+  if (feature.isTokenPayoff) out.push({ resource: 'token', copies: REGEX_ENABLER_SUPPLY });
+  if (feature.isDrainPayoff) out.push({ resource: 'creature deaths', copies: REGEX_ENABLER_SUPPLY });
+  return out;
+}
+
+/** Copies of each supply kind this deck actually has. An unmapped resource is
+ * left out on purpose: it becomes an unknown prerequisite, never a 0 or a 1. */
+function supplyByResource(nonLand: readonly DeckEntry[]): Map<string, number> {
+  const sum = (pred: (f: CardFeature) => boolean): number =>
+    nonLand.filter((e) => e.feature.s >= 1 && pred(e.feature)).reduce((s, e) => s + e.quantity, 0);
+  const creatures = sum((f) => /\bCreature\b/.test(f.card.type_line || ''));
+  return new Map<string, number>([
+    ['food', sum((f) => f.isFoodProducer)],
+    ['token', sum((f) => f.isTokenProducer)],
+    ['treasure', sum((f) => f.isTreasureProducer)],
+    ['creature', creatures],
+    ['creature in graveyard', creatures],
+    ['creature deaths', sum((f) => f.isSacOutlet || f.hasDiesTrigger)],
+    ['graveyard fuel', nonLand.reduce((s, e) => s + e.quantity, 0)],
+    ['nonland mana producer', sum((f) => f.isRamp || f.isTreasureProducer)],
+  ]);
+}
+
+/** `Q`, `R`, `B` -> Synergy / plan coverage (S). §8. */
 export function computeSynergy(
-  format: ScoreFormat,
-  norms: FormatNorms,
-  archetype: Archetype,
+  archetypePlan: PlanEvaluation | null,
   N: number,
-  mainEntries: DeckEntry[],
-): ComponentOutput {
+  mainEntries: readonly DeckEntry[],
+): SynergyOutput {
   const nonLand = mainEntries.filter((e) => !e.feature.isLand);
   const F = nonLand.reduce((s, e) => s + e.quantity, 0);
-  if (F === 0) return { score: 0, reason: '0% supports no plan; weakest dependency none 0/0; 0 unsupported payoffs.' };
-
-  const template = getTemplate(archetype);
-  const scale = N / referenceLibrarySize(format);
-
-  const rampQty = nonLand.filter((e) => e.feature.isRamp).reduce((s, e) => s + e.quantity, 0);
-  const drawQty = nonLand.filter((e) => e.feature.isDraw).reduce((s, e) => s + e.quantity, 0);
-  const removalQty = nonLand.filter((e) => e.feature.isRemoval || e.feature.isWipe).reduce((s, e) => s + e.quantity, 0);
-  const creatureQty = nonLand.filter((e) => /\bCreature\b/.test(e.feature.card.type_line || '')).reduce((s, e) => s + e.quantity, 0);
-  const winConditionQty = nonLand.filter((e) => e.feature.isWinConditionRole).reduce((s, e) => s + e.quantity, 0);
-
-  let Q = 0;
-  for (const e of nonLand) {
-    const onPlan = onPlanShare(e.feature, rampQty, drawQty, template.ramp.totalMax, template.draw.totalMax);
-    Q += e.quantity * e.feature.s * onPlan;
-  }
-  Q /= F;
-
-  const requirements: Array<{ key: string; actual: number; target: number }> = [
-    { key: 'ramp', actual: rampQty, target: template.ramp.totalMin * scale },
-    { key: 'draw', actual: drawQty, target: template.draw.totalMin * scale },
-    { key: 'removal', actual: removalQty, target: template.removal.totalMin * scale },
-  ];
-  if (template.creatures[0] > 0) requirements.push({ key: 'creatures', actual: creatureQty, target: template.creatures[0] * scale });
-  if (template.winConditionSlots[0] > 0) requirements.push({ key: 'win conditions', actual: winConditionQty, target: template.winConditionSlots[0] * scale });
-
-  let R = 1;
-  let weakest = { key: 'none', actual: 0, target: 0, ratio: 1 };
-  for (const req of requirements) {
-    if (req.target <= 0) continue;
-    const ratio = clip(req.actual / req.target);
-    if (ratio < R) R = ratio;
-    if (ratio < weakest.ratio) weakest = { ...req, ratio };
+  const emptyPlan = archetypePlan ?? selectPlan(Math.max(1, N), nonLand);
+  if (F === 0) {
+    return {
+      score: 0, Q: 0, R: 0, B: 0, plan: emptyPlan, unknownPrerequisite: null,
+      reason: '0% supports no plan; weakest dependency none 0/0; 0 unsupported payoffs.',
+    };
   }
 
-  const foodCount = nonLand.filter((e) => e.feature.isFoodProducer).reduce((s, e) => s + e.quantity, 0);
-  const tokenCount = nonLand.filter((e) => e.feature.isTokenProducer).reduce((s, e) => s + e.quantity, 0);
-  const sacCount = nonLand.filter((e) => e.feature.isSacOutlet).reduce((s, e) => s + e.quantity, 0);
-  const dependentPayoffs = nonLand.filter((e) => e.feature.isFoodPayoff || e.feature.isTokenPayoff || e.feature.isDrainPayoff);
-  let B = 1;
+  const plan = emptyPlan;
+  const Q = plan.Q;
+  const R = plan.R;
+
+  // B — dependent payoffs the SELECTED plan actually carries.
+  const supply = supplyByResource(nonLand);
+  const scale = N / PLAN_BAND_REFERENCE;
+  let unknownPrerequisite: string | null = null;
+  let num = 0;
+  let den = 0;
   let deadPayoffs = 0;
-  if (dependentPayoffs.length > 0) {
-    let num = 0;
-    let den = 0;
-    for (const e of dependentPayoffs) {
-      const linked = linkedSupport(e.feature, { food: foodCount, token: tokenCount, sac: sacCount });
-      num += e.quantity * linked;
-      den += e.quantity;
-      if (linked === 0) deadPayoffs += e.quantity;
+  for (const entry of nonLand) {
+    const requirements = requirementsOf(entry.feature);
+    if (requirements.length === 0) continue;
+    let fulfilment = entry.feature.s;
+    for (const req of requirements) {
+      const have = supply.get(req.resource);
+      if (have === undefined) {
+        if (unknownPrerequisite === null) unknownPrerequisite = req.resource;
+        continue; // unknown mechanics earn no credit and fabricate no penalty
+      }
+      fulfilment = Math.min(fulfilment, clip(have / Math.max(1, req.copies * scale)));
     }
-    B = den > 0 ? num / den : 1;
+    num += entry.quantity * fulfilment;
+    den += entry.quantity;
+    if (fulfilment === 0) deadPayoffs += entry.quantity;
   }
+  const B = den > 0 ? num / den : 1;
 
-  const score = 100 * (0.40 * clip(Q / norms.planFractionTarget) + 0.35 * R + 0.25 * B);
+  const coherence = clip((Q - Q_BASELINE) / (Q_SATURATION - Q_BASELINE));
+  const score = 100 * coherence * R * B;
+
   return {
-    score,
-    reason: `${Math.round(Q * 100)}% supports ${archetype}; weakest dependency ${weakest.key} ${weakest.actual}/${Math.round(weakest.target)}; ${deadPayoffs} unsupported payoffs.`,
+    score, Q, R, B, plan, unknownPrerequisite,
+    reason: `${Math.round(Q * 100)}% supports ${plan.recipe.key}; weakest dependency ${plan.weakest.key} ${plan.weakest.supply}/${Math.round(plan.weakest.required)}; ${deadPayoffs} unsupported payoffs.`,
   };
 }
