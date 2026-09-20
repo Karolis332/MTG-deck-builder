@@ -1,17 +1,17 @@
 {
   "commander": {
     "weights": {
-      "mana": 20,
-      "curve": 10,
-      "interaction": 16,
-      "advantage": 14,
-      "win": 20,
-      "synergy": 17,
-      "meta": 3,
+      "mana": 20.61855670103093,
+      "curve": 10.309278350515465,
+      "interaction": 16.494845360824744,
+      "advantage": 14.43298969072165,
+      "win": 20.61855670103093,
+      "synergy": 17.52577319587629,
+      "meta": 0,
       "structure": 0
     },
     "countMultiplier": 1,
-    "pWin": 0.15000000000000002,
+    "pWin": 0.15,
     "h": 5,
     "tFast": 7,
     "poolSizeCap": 10,
@@ -19,37 +19,37 @@
   },
   "brawl": {
     "weights": {
-      "mana": 20,
-      "curve": 15,
-      "interaction": 20,
-      "advantage": 12,
-      "win": 16,
-      "synergy": 14,
-      "meta": 3,
+      "mana": 20.61855670103093,
+      "curve": 15.463917525773196,
+      "interaction": 20.61855670103093,
+      "advantage": 12.371134020618557,
+      "win": 16.494845360824744,
+      "synergy": 14.43298969072165,
+      "meta": 0,
       "structure": 0
     },
-    "countMultiplier": 0.85,
+    "countMultiplier": 1,
     "pWin": 0.25,
     "h": 4,
     "tFast": 6,
     "poolSizeCap": 4,
-    "capIntercept": 15
+    "capIntercept": 20
   },
   "standard": {
     "weights": {
-      "mana": 20,
-      "curve": 16,
-      "interaction": 20,
-      "advantage": 10,
-      "win": 14,
-      "synergy": 12,
-      "meta": 8,
+      "mana": 21.73913043478261,
+      "curve": 17.391304347826086,
+      "interaction": 21.73913043478261,
+      "advantage": 10.869565217391305,
+      "win": 15.217391304347826,
+      "synergy": 13.043478260869565,
+      "meta": 0,
       "structure": 0
     },
-    "countMultiplier": 1,
-    "pWin": 0.6,
-    "h": 2,
-    "tFast": 6,
+    "countMultiplier": 1.15,
+    "pWin": 0.5499999999999999,
+    "h": 3,
+    "tFast": 7,
     "poolSizeCap": 4,
     "capIntercept": 20
   }
