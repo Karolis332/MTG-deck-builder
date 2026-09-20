@@ -23,19 +23,24 @@ import { clip } from './deck-score-math';
 import type { CardFeature } from './deck-score-features';
 import type { DeckEntry } from './deck-score-mana';
 
-export type PlanKey = 'aggro' | 'midrange' | 'control';
+export type PlanKey = 'aggro' | 'midrange' | 'control' | 'aristocrats' | 'lifegain' | 'spells';
 
 export interface PlanRole {
   key: string;
   /** R is the min over ESSENTIAL roles only (§8). */
   essential: boolean;
-  /** Bounded infrastructure: Q mass is capped at `max` AND at the direct
+  /** Bounded infrastructure: Q mass is capped at `max` AND at the ESSENTIAL
    * plan mass it serves (§8 "earns no more Q mass than the directly
    * supported plan cards it serves"). */
   infrastructure?: boolean;
   /** Required / upper supply band in copies at the reference library size. */
   min: number;
   max: number;
+  /** §8 deployment deadline, in turns: a copy only fills this role when the
+   * DECK'S OWN mana can cast it by that turn. Enforced in `evaluatePlan`,
+   * where the land count is known — not inside `fills`, which stays a pure
+   * per-card predicate so the band script can measure raw supply. */
+  deadline?: number;
   /** Verified useful supply test — timing and actual targets, never a raw
    * category total. Callers only pass features with `s === 1`. */
   fills: (f: CardFeature) => boolean;
@@ -53,14 +58,27 @@ function isCreatureBody(f: CardFeature): boolean {
   return /\bCreature\b/.test(f.card.type_line || '');
 }
 
-/** Output bin: a threat must actually be able to put damage on the board —
- * a printed body of at least `power`, a token maker, a planeswalker or an
- * anthem that converts other bodies. A keyword or a tag alone is not a threat. */
-function threat(minPower: number, maxCost: number): (f: CardFeature) => boolean {
+/**
+ * §8 OUTPUT BIN: "threats meeting its output/deployment bins … a body,
+ * keyword, tutor or removal tag alone is insufficient."
+ *
+ * A threat must put repeating damage on the board AND pay for itself against
+ * the plan's clock:
+ *   - a printed creature body of at least `minPower` that also clears the
+ *     plan's power-for-cost floor (`ratio` power per mana);
+ *   - a maker of CREATURE tokens — a Treasure/Food/Clue maker produces mana
+ *     or cards, never damage, and was the single largest source of fake
+ *     pressure on random piles;
+ *   - a planeswalker, or an anthem/overrun that converts other bodies.
+ */
+function threat(minPower: number, maxCost: number, ratio: number): (f: CardFeature) => boolean {
   return (f) => {
     if (f.c > maxCost) return false;
-    if (isCreatureBody(f)) return f.power !== null && f.power >= minPower;
-    return f.isTokenProducer || f.isPlaneswalker || f.isAnthemOrOverrun;
+    if (isCreatureBody(f)) {
+      if (f.power === null || f.power < minPower) return false;
+      return f.power >= f.c * ratio;
+    }
+    return f.isCreatureTokenProducer || f.isPlaneswalker || f.isAnthemOrOverrun;
   };
 }
 
@@ -74,14 +92,73 @@ function velocity(maxCost: number): (f: CardFeature) => boolean {
   return (f) => f.c <= maxCost && (f.isDraw || f.isDrawEngine);
 }
 
-/** Aggro reach: damage that does not need to get through a blocker. */
-function reach(f: CardFeature): boolean {
-  return f.isDirectDamage || f.isDrainPayoff || f.isAltWin || f.isAnthemOrOverrun ||
-    (isCreatureBody(f) && f.hasEvasion && f.power !== null && f.power >= 2);
+/**
+ * Aggro reach: damage that does not need to get through a blocker, inside the
+ * plan's clock. Evasion is the card's OWN printed keyword — `hasEvasion`
+ * regexes the whole oracle text, so "destroy target creature with flying"
+ * used to buy reach credit. An alternate-win card is explicitly NOT reach
+ * (§8 "an alternate-win card alone is not a completed line").
+ */
+function reach(maxCost: number): (f: CardFeature) => boolean {
+  return (f) => f.c <= maxCost && (
+    f.isDirectDamage || f.isDrainPayoff || f.isAnthemOrOverrun ||
+    (isCreatureBody(f) && f.hasKeywordEvasion && f.power !== null && f.power >= 2)
+  );
 }
 
 function infrastructure(f: CardFeature): boolean {
   return f.isRamp || f.isTreasureProducer;
+}
+
+// ── §8 engine-family predicates ───────────────────────────────────────────
+//
+// "Engine family: sacrifice/fodder, recursion/reanimation/graveyard casting,
+// ETB/death triggers, lifegain/life-payment/counters, creature versus
+// noncreature tokens, artifact/tribal/spell conditions and conversions."
+//
+// Each of these is a CONSUMER/PRODUCER pair test, never a tribe or a name: a
+// deck earns an engine recipe only when it carries the outlet AND the payoff
+// AND the resource the payoff consumes.
+
+/** A repeatable sacrifice outlet — the engine's throughput. */
+function sacOutlet(f: CardFeature): boolean {
+  return f.isSacOutlet;
+}
+
+/** Something that converts a creature dying into damage or cards. */
+function deathPayoff(f: CardFeature): boolean {
+  return f.isDrainPayoff || f.hasDiesTrigger;
+}
+
+/** Expendable bodies: creature tokens, or a creature cheap enough that
+ * feeding it to the outlet is a profitable line rather than a loss. */
+function fodder(maxCost: number): (f: CardFeature) => boolean {
+  return (f) => f.isCreatureTokenProducer || (isCreatureBody(f) && f.c <= maxCost && f.power !== null);
+}
+
+/** Life gained is a resource only where something consumes it (§8
+ * "lifegain/life-payment/counters"); drain does both at once. */
+function lifePayoff(f: CardFeature): boolean {
+  return f.isLifegainPayoff || f.isCounterPayoff || f.isDrainPayoff;
+}
+
+function lifeSource(f: CardFeature): boolean {
+  return f.isLifegainSource;
+}
+
+/** A trigger that reads casting, not a card that happens to be an instant. */
+function spellPayoff(f: CardFeature): boolean {
+  return f.isSpellPayoff;
+}
+
+function cheapSpell(maxCost: number): (f: CardFeature) => boolean {
+  return (f) => f.c <= maxCost && /\b(?:Instant|Sorcery)\b/.test(f.card.type_line || '');
+}
+
+/** The conversion step: damage the spell engine can point at a player, or a
+ * repeatable body maker it can convert into one. */
+function spellCloser(f: CardFeature): boolean {
+  return f.isDirectDamage || f.isAltWin || f.isCreatureTokenProducer || f.isAnthemOrOverrun;
 }
 
 // ── The frozen recipes ────────────────────────────────────────────────────
@@ -89,10 +166,21 @@ function infrastructure(f: CardFeature): boolean {
 // MEASURED, then frozen. Source: the dated positive cohort in
 // `data/export-standard.db` `community_decks` — placement 1 or a 5-0 league
 // run, 2,747 lists resolved, assigned to a cohort by which recipe claims the
-// most verified essential-role copies (aggro 1,280 / midrange 837 / control
-// 630). `scripts/deck-score-bands.ts` prints the percentile table; the rule
-// is min = p25, max = p90, with an essential role's min floored at 1 (a plan
-// cannot require zero copies of its own essential role).
+// most verified essential-role copies. `scripts/deck-score-bands.ts` prints
+// the percentile table; the rule is min = p25, max = p90, with an essential
+// role's min floored at 1 (a plan cannot require zero copies of its own
+// essential role).
+//
+// RE-SEEDED for v1.2 (2026-09-20) after the output/deployment bins landed.
+// The old numbers were measured with predicates that accepted any body and
+// any token maker, so their p25s (aggro pressure 3, midrange value 1) were
+// met by a constrained random pile and R was 1 on 19 of the 20 highest-S
+// piles. With the bins in place the same corpus gives aggro pressure p25 10
+// and midrange value p25 4 — real lists concentrate, piles do not.
+// Second pass after the §8 answer-family repair (burn/bounce/edict now
+// carry a target axis): `verify-2026-09-19/deck-score/bands-2026-09-20.txt`,
+// n=2,747, aggro 86 / midrange 859 / control 680 after the engine recipes
+// claim their own cohorts.
 //
 // Bands are copies per PLAN_BAND_REFERENCE nonland-bearing cards; callers
 // scale by N/60. §1's "scale by N/reference N" would leave a 99-card
@@ -111,40 +199,102 @@ export const PLAN_RECIPES: readonly PlanRecipe[] = [
     key: 'aggro',
     label: 'deployable pressure with reach and reload',
     roles: [
-      { key: 'pressure', essential: true, min: 3, max: 11, fills: threat(2, 3) },
-      { key: 'reach', essential: true, min: 1, max: 12, fills: reach },
-      { key: 'reload', essential: true, min: 1, max: 16, fills: velocity(3) },
+      { key: 'pressure', essential: true, min: 10, max: 16, deadline: 3, fills: threat(2, 3, 1) },
+      { key: 'reach', essential: true, min: 4, max: 18, deadline: 4, fills: reach(4) },
+      { key: 'reload', essential: true, min: 1, max: 8, deadline: 3, fills: velocity(3) },
       // Removal is not an aggro REQUIREMENT (§8 lists pressure/reach/reload),
       // but it serves the clock by clearing blockers, so it earns Q mass.
-      { key: 'answers', essential: false, min: 0, max: 2, fills: answer(4) },
-      { key: 'fixing', essential: false, infrastructure: true, min: 0, max: 13, fills: infrastructure },
+      { key: 'answers', essential: false, min: 0, max: 3, fills: answer(4) },
+      { key: 'fixing', essential: false, infrastructure: true, min: 0, max: 4, fills: infrastructure },
     ],
   },
   {
     key: 'midrange',
     label: 'timely threats, relevant answers, sustained value',
     roles: [
-      { key: 'threats', essential: true, min: 3, max: 10, fills: threat(3, 5) },
-      { key: 'answers', essential: true, min: 2, max: 9, fills: answer(5) },
-      { key: 'value', essential: true, min: 1, max: 17, fills: velocity(5) },
-      { key: 'fixing', essential: false, infrastructure: true, min: 0, max: 13, fills: infrastructure },
+      { key: 'threats', essential: true, min: 4, max: 10, deadline: 5, fills: threat(3, 5, 0.75) },
+      { key: 'answers', essential: true, min: 4, max: 15, deadline: 5, fills: answer(5) },
+      { key: 'value', essential: true, min: 4, max: 21, deadline: 5, fills: velocity(5) },
+      { key: 'fixing', essential: false, infrastructure: true, min: 0, max: 8, fills: infrastructure },
     ],
   },
   {
     key: 'control',
     label: 'early stabilisation, advantage engine, accessible finisher',
     roles: [
-      { key: 'stabilisation', essential: true, min: 2, max: 8, fills: answer(3) },
-      { key: 'engine', essential: true, min: 9, max: 19, fills: (f) => f.isDrawEngine || velocity(4)(f) },
-      { key: 'finisher', essential: true, min: 6, max: 10, fills: threat(4, 7) },
+      { key: 'stabilisation', essential: true, min: 7, max: 12, deadline: 3, fills: answer(3) },
+      { key: 'engine', essential: true, min: 12, max: 19, deadline: 4, fills: (f) => f.isDrawEngine || velocity(4)(f) },
+      { key: 'finisher', essential: true, min: 3, max: 8, deadline: 7, fills: threat(4, 7, 0.6) },
       { key: 'answers', essential: false, min: 0, max: 2, fills: answer(6) },
       { key: 'fixing', essential: false, infrastructure: true, min: 0, max: 4, fills: infrastructure },
+    ],
+  },
+  // ── §8 engine families ──────────────────────────────────────────────────
+  // Bands are Commander-shaped: these three plans do not exist in the
+  // 60-card positive cohort the generic bands were measured on, so their
+  // floors are set at the point where the reference engine decks
+  // (Meren / Witherbloom precon / Vivi) clear them and a constrained random
+  // pile of the same colours does not. They are frozen with score 1.2.0 on
+  // the same terms as the generic bands.
+  {
+    key: 'aristocrats',
+    label: 'sacrifice outlets converting expendable bodies into damage',
+    roles: [
+      { key: 'outlet', essential: true, min: 3, max: 9, fills: sacOutlet },
+      { key: 'payoff', essential: true, min: 5, max: 12, fills: deathPayoff },
+      { key: 'fodder', essential: true, min: 6, max: 18, deadline: 4, fills: fodder(3) },
+      { key: 'value', essential: false, min: 0, max: 8, fills: velocity(5) },
+      { key: 'answers', essential: false, min: 0, max: 5, fills: answer(5) },
+      { key: 'fixing', essential: false, infrastructure: true, min: 0, max: 8, fills: infrastructure },
+    ],
+  },
+  {
+    key: 'lifegain',
+    label: 'life gained as a resource, converted by counters or drain',
+    roles: [
+      { key: 'payoff', essential: true, min: 5, max: 12, fills: lifePayoff },
+      { key: 'gain', essential: true, min: 8, max: 22, fills: lifeSource },
+      { key: 'value', essential: true, min: 2, max: 10, fills: velocity(6) },
+      { key: 'answers', essential: false, min: 0, max: 5, fills: answer(6) },
+      { key: 'fixing', essential: false, infrastructure: true, min: 0, max: 8, fills: infrastructure },
+    ],
+  },
+  {
+    key: 'spells',
+    label: 'cast-trigger payoffs fed by cheap instants and sorceries',
+    roles: [
+      { key: 'payoff', essential: true, min: 3, max: 10, fills: spellPayoff },
+      { key: 'closer', essential: true, min: 2, max: 8, fills: spellCloser },
+      { key: 'spells', essential: true, min: 12, max: 32, deadline: 4, fills: cheapSpell(4) },
+      { key: 'answers', essential: false, min: 0, max: 8, fills: answer(5) },
+      { key: 'fixing', essential: false, infrastructure: true, min: 0, max: 10, fills: infrastructure },
     ],
   },
 ];
 
 export function recipeFor(key: PlanKey): PlanRecipe {
   return PLAN_RECIPES.find((r) => r.key === key) ?? PLAN_RECIPES[1];
+}
+
+// ── Deployment ────────────────────────────────────────────────────────────
+
+/**
+ * §8: "Deployment is a useful-play/access requirement, not a ramp quota."
+ *
+ * Returns the mana a deck with this land density can reasonably have spent by
+ * turn `t`, using §1's own draw model (`n(t)=7+t` cards seen) rather than a
+ * new one: expected lands seen = landShare * (7 + t), capped by the turn
+ * count because only one land may be played per turn. A role with a deadline
+ * credits no copy it could not cast by then, so a 20-land pile stops earning
+ * pressure credit for its three-drops.
+ *
+ * // ponytail: lands only. Rocks/dorks would raise the budget by a fraction
+ * // of a mana and need their own availability turn; add them when the
+ * // catalogue types production timing (§8 mana family).
+ */
+export function deploymentBudget(N: number, lands: number): (turn: number) => number {
+  const landShare = N > 0 ? clip(lands / N) : 0;
+  return (turn) => Math.min(turn, landShare * (7 + turn));
 }
 
 // ── Assignment ────────────────────────────────────────────────────────────
@@ -168,6 +318,11 @@ export interface PlanEvaluation {
   R: number;
   /** Fraction of essential roles fully satisfied — the §1 selection key. */
   essentialFraction: number;
+  /** An essential role with NO verified supply at all. §8: "known absence of
+   * any plan gives R=B=0" — a recipe the deck holds zero pieces for is a
+   * misread of the deck, not a finding about it, so selection avoids one
+   * whenever another recipe is at least partially executed. */
+  hasEmptyEssential: boolean;
   weakest: { key: string; supply: number; required: number };
 }
 
@@ -190,6 +345,7 @@ export function evaluatePlan(
 ): PlanEvaluation {
   const F = nonLand.reduce((s, e) => s + e.quantity, 0);
   const scale = N / PLAN_BAND_REFERENCE;
+  const castableBy = deploymentBudget(N, N - F);
   const librarySupply = new Map<string, number>();
   const totalSupply = new Map<string, number>();
   for (const role of recipe.roles) {
@@ -200,7 +356,8 @@ export function evaluatePlan(
   const assign = (entries: readonly DeckEntry[], intoLibrary: boolean): void => {
     for (const entry of entries) {
       if (entry.feature.s < 1) continue; // unknown mechanics earn no on-plan credit
-      const role = recipe.roles.find((r) => r.fills(entry.feature));
+      const role = recipe.roles.find((r) => r.fills(entry.feature) &&
+        (r.deadline === undefined || entry.feature.c <= castableBy(r.deadline)));
       if (!role) continue;
       totalSupply.set(role.key, (totalSupply.get(role.key) ?? 0) + entry.quantity);
       if (intoLibrary) librarySupply.set(role.key, (librarySupply.get(role.key) ?? 0) + entry.quantity);
@@ -209,13 +366,15 @@ export function evaluatePlan(
   assign(nonLand, true);
   assign(guaranteed, false);
 
-  // Direct (non-infrastructure) plan mass bounds how much infrastructure may
-  // count toward Q.
-  let directCredited = 0;
+  // §8: infrastructure "earns no more Q mass than the directly supported plan
+  // cards it serves". The cards it serves are the plan's ESSENTIAL roles —
+  // counting the optional answers slot too let a pile's ramp ride on removal
+  // it does not accelerate.
+  let essentialCredited = 0;
   const preliminary = recipe.roles.map((role) => {
     const have = totalSupply.get(role.key) ?? 0;
     const credited = Math.min(librarySupply.get(role.key) ?? 0, role.max * scale);
-    if (!role.infrastructure) directCredited += credited;
+    if (role.essential) essentialCredited += credited;
     return { role, have, credited };
   });
 
@@ -223,7 +382,7 @@ export function evaluatePlan(
     role,
     required: role.min * scale,
     supply: have,
-    credited: role.infrastructure ? Math.min(credited, directCredited) : credited,
+    credited: role.infrastructure ? Math.min(credited, essentialCredited) : credited,
   }));
 
   const essentials = roles.filter((r) => r.role.essential);
@@ -248,6 +407,7 @@ export function evaluatePlan(
     Q: F > 0 ? creditedTotal / F : 0,
     R,
     essentialFraction: essentials.length > 0 ? satisfied / essentials.length : 0,
+    hasEmptyEssential: essentials.some((r) => r.supply === 0),
     weakest,
   };
 }
@@ -264,6 +424,14 @@ export function selectPlan(
 ): PlanEvaluation {
   const evaluations = PLAN_RECIPES.map((recipe) => evaluatePlan(recipe, N, nonLand, guaranteed));
   return evaluations.reduce((best, candidate) => {
+    // A recipe with an essential role the deck has NO copies of describes a
+    // plan the deck is not attempting; it loses to any partially executed
+    // one before §1's satisfied-fraction ordering applies. Without this, a
+    // Food deck with no life-gain payoff outranked its own midrange reading
+    // on Q and scored S = 0 instead of its real partial coverage.
+    if (candidate.hasEmptyEssential !== best.hasEmptyEssential) {
+      return best.hasEmptyEssential ? candidate : best;
+    }
     if (candidate.essentialFraction !== best.essentialFraction) {
       return candidate.essentialFraction > best.essentialFraction ? candidate : best;
     }

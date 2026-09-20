@@ -1,6 +1,6 @@
 # Deck Score v1 calibration report
 
-Generated 2026-09-20T07:15:51.220Z. Raw v1 numbers — weights are NOT tuned in this unit (docs/DECK_SCORE_SPEC.md §4 is a separate calibration pass).
+Generated 2026-09-20T07:48:05.579Z. Raw v1 numbers — weights are NOT tuned in this unit (docs/DECK_SCORE_SPEC.md §4 is a separate calibration pass).
 Component columns: M=mana C=curve I=interaction A=advantage W=win S=synergy Fmeta=meta.
 "ms" times only the `scoreDeck()` call (feature classification runs inside it); the spec's <20ms budget is stated as "after classification", so this number is a conservative upper bound, not an apples-to-apples comparison.
 
@@ -8,44 +8,44 @@ Component columns: M=mana C=curve I=interaction A=advantage W=win S=synergy Fmet
 
 | Fixture | Format | Score | M | C | I | A | W | S | Fmeta | Gates | Band | IN/OUT | ms |
 |---|---|---:|---:|---:|---:|---:|---:|---:|---:|---|---|---|---:|
-| meren-powerhouse | commander | 54 | 97.8 | 94.4 | 67.5 | 82 | 42.7 | 81.5 | 50 | quality_cap<=54.2 | 65-80 | OUT | 27.86 |
-| cabbage-cedh-input | commander | 20 | 88.1 | 85.1 | 91.2 | 89.9 | 0 | 100 | 50 | quality_cap<=20 | 35-50 | OUT | 10.79 |
-| precon-witherbloom | commander | 35 | 96.9 | 83 | 19.4 | 60.5 | 24.9 | 19.1 | 50 | quality_cap<=35.3 | 40-55 | OUT | 3.93 |
-| the-cabbage-merchant | commander | 20 | 92.3 | 94.6 | 26 | 82 | 0 | 67.3 | 50 | quality_cap<=20 | 55-70 | OUT | 4.67 |
-| imotekh-the-stormlord | commander | 30 | 88.1 | 93.4 | 38.8 | 74.6 | 12 | 61.7 | 50 | quality_cap<=29.6 | 45-65 | OUT | 7.02 |
-| tazri-beacon-of-unity | commander | 48 | 90.4 | 96.7 | 59.4 | 54.9 | 52.1 | 35.1 | 50 | quality_cap<=48.1 | 40-60 | IN | 5.72 |
-| meren-of-clan-nel-toth | commander | 19 | 97.5 | 95.6 | 67.5 | 81.8 | 47.6 | 82.8 | 50 | fail:structure,size; size<=19,quality_cap<=58.1 | 0-19 | IN | 5.84 |
-| ramos-dragon-engine | commander | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 50 | quality_cap<=20 | 0-19 | IN | 1.26 |
-| cabbage-merchant-current-brawl | brawl | 19 | 95.6 | 94.6 | 28.1 | 80.2 | 0 | 67.3 | 50 | fail:structure,size,legality; size<=19,legality<=19,quality_cap<=20 | 0-19 | IN | 6.54 |
-| tazri-upgraded-arena | brawl | 62 | 60.4 | 87.9 | 93.6 | 77.1 | 92.2 | 52.2 | 50 | quality_cap<=61.8 | 45-65 | IN | 5.30 |
-| kuja-genome-sorcerer-arena | brawl | 71 | 90 | 84.7 | 93 | 93.3 | 63.7 | 90.2 | 50 | quality_cap<=71 | 60-80 | IN | 5.67 |
-| vivi-battery-arena | brawl | 76 | 87.8 | 82 | 98 | 100 | 69.5 | 100 | 50 | quality_cap<=75.6 | 70-85 | IN | 5.09 |
-| fire-lord-azula-competitive | competitivebrawl | 86 | 83.5 | 82 | 85.5 | 95.8 | 83.6 | 87.9 | 50 | quality_cap<=86.8 | 75-90 | IN | 6.64 |
-| cedhtop16-ballooncon6 | commander | 55 | 93.8 | 76 | 92.5 | 78.6 | 90.5 | 44.3 | 50 | quality_cap<=55.4 | 80-95 | OUT | 17.38 |
-| standard-1445893-univerce | standard | 73 | 65.8 | 60.5 | 76.3 | 77.5 | 85 | 100 | 50 | quality_cap<=72.6 | 70-90 | IN | 1.55 |
-| standard-1445867-aljce | standard | 20 | 75.1 | 78.6 | 58.8 | 92.3 | 0 | 77.8 | 50 | quality_cap<=20 | 65-90 | OUT | 2.23 |
+| meren-powerhouse | commander | 62 | 97.8 | 94.4 | 82.9 | 82 | 52.1 | 100 | 50 | quality_cap<=61.7 | 65-80 | OUT | 33.65 |
+| cabbage-cedh-input | commander | 79 | 82.5 | 85.1 | 95 | 85 | 74.3 | 88.3 | 50 | quality_cap<=79.4 | 35-50 | OUT | 12.99 |
+| precon-witherbloom | commander | 53 | 96.9 | 83 | 29.7 | 65 | 40.9 | 97 | 50 | quality_cap<=52.7 | 40-55 | IN | 6.18 |
+| the-cabbage-merchant | commander | 20 | 92.3 | 94.6 | 36.7 | 74.6 | 0 | 28.8 | 50 | quality_cap<=20 | 55-70 | OUT | 9.69 |
+| imotekh-the-stormlord | commander | 55 | 88.1 | 93.4 | 44.2 | 74.6 | 44 | 43.8 | 50 | quality_cap<=55 | 45-65 | IN | 20.85 |
+| tazri-beacon-of-unity | commander | 40 | 90.4 | 96.7 | 74.8 | 61.4 | 52.1 | 25.4 | 50 | quality_cap<=40.3 | 40-60 | IN | 6.22 |
+| meren-of-clan-nel-toth | commander | 19 | 97.5 | 95.6 | 82.9 | 81.8 | 52 | 100 | 50 | fail:structure,size; size<=19,quality_cap<=61.6 | 0-19 | IN | 8.42 |
+| ramos-dragon-engine | commander | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 50 | quality_cap<=20 | 0-19 | IN | 1.45 |
+| cabbage-merchant-current-brawl | brawl | 19 | 95.6 | 94.6 | 41.7 | 73.5 | 0 | 28.6 | 50 | fail:structure,size,legality; size<=19,legality<=19,quality_cap<=20 | 0-19 | IN | 7.10 |
+| tazri-upgraded-arena | brawl | 44 | 60.4 | 84.3 | 77.2 | 77.1 | 92.2 | 29.5 | 50 | quality_cap<=43.6 | 45-65 | OUT | 6.83 |
+| kuja-genome-sorcerer-arena | brawl | 71 | 90 | 84.7 | 92 | 91.7 | 63.7 | 100 | 50 | quality_cap<=71 | 60-80 | IN | 6.04 |
+| vivi-battery-arena | brawl | 76 | 87.8 | 82 | 98 | 100 | 69.5 | 100 | 50 | quality_cap<=75.6 | 70-85 | IN | 6.52 |
+| fire-lord-azula-competitive | competitivebrawl | 87 | 83.5 | 82 | 96 | 94.6 | 83.6 | 100 | 50 | quality_cap<=86.8 | 75-90 | IN | 7.03 |
+| cedhtop16-ballooncon6 | commander | 34 | 93.8 | 75 | 99 | 78.6 | 90.5 | 17.3 | 50 | quality_cap<=33.8 | 80-95 | OUT | 9.07 |
+| standard-1445893-univerce | standard | 73 | 65.8 | 60.5 | 94 | 77.5 | 85 | 100 | 50 | quality_cap<=72.6 | 70-90 | IN | 2.10 |
+| standard-1445867-aljce | standard | 20 | 75.1 | 78.6 | 77.1 | 86.3 | 0 | 100 | 50 | quality_cap<=20 | 65-90 | OUT | 2.70 |
 
-Anchors in band: 9/16 (fixtures with a hard-cap-only band like "0-19" always count as anchors here; "if rule-valid" bands are graded the same way — this report does not re-derive Arena rule-validity separately).
+Anchors in band: 10/16 (fixtures with a hard-cap-only band like "0-19" always count as anchors here; "if rule-valid" bands are graded the same way — this report does not re-derive Arena rule-validity separately).
 
 ## Win lines — which closing family the deck's best line came from
 
 | Fixture | W | Reason |
 |---|---:|---|
-| meren-powerhouse | 42.7 | Creature pressure (10 threats): closes T11, access 12% (u=0.47); shared bottleneck, protection access 38%; none. |
-| cabbage-cedh-input | 0 | no supported closing line: no catalogued win recipe present; t* never reached within 12 turns. |
-| precon-witherbloom | 24.9 | Token/Food conversion (6 bodies): closes T12, access 9% (u=0.29); shared bottleneck, protection access 0%; none. |
+| meren-powerhouse | 52.1 | Creature pressure (10 threats): closes T11, access 22% (u=0.57); shared bottleneck, protection access 38%; none. |
+| cabbage-cedh-input | 74.3 | Control inevitability (6 finishers): closes T8, access 64% (u=0.76); shared bottleneck, protection access 87%; none. |
+| precon-witherbloom | 40.9 | Token/Food conversion (6 bodies): closes T12, access 14% (u=0.48); shared bottleneck, protection access 0%; none. |
 | the-cabbage-merchant | 0 | no supported closing line: no catalogued win recipe present; t* never reached within 12 turns. |
-| imotekh-the-stormlord | 12 | Token/Food conversion (7 bodies): closes T12, access 4% (u=0.14); shared bottleneck, protection access 20%; none. |
-| tazri-beacon-of-unity | 52.1 | Token/Food conversion (7 bodies): closes T11, access 16% (u=0.57); shared bottleneck, protection access 38%; none. |
-| meren-of-clan-nel-toth | 47.6 | Creature pressure (10 threats): closes T11, access 14% (u=0.53); shared bottleneck, protection access 37%; none. |
+| imotekh-the-stormlord | 44 | Creature pressure (6 threats): closes T12, access 51% (u=0.50); shared bottleneck, protection access 20%; none. |
+| tazri-beacon-of-unity | 52.1 | Creature pressure (6 threats): closes T11, access 77% (u=0.57); shared bottleneck, protection access 38%; none. |
+| meren-of-clan-nel-toth | 52 | Creature pressure (10 threats): closes T11, access 24% (u=0.57); shared bottleneck, protection access 37%; none. |
 | ramos-dragon-engine | 0 | no supported closing line: no catalogued win recipe present; t* never reached within 12 turns. |
 | cabbage-merchant-current-brawl | 0 | no supported closing line: no catalogued win recipe present; t* never reached within 12 turns. |
-| tazri-upgraded-arena | 92.2 | Creature pressure (3 threats): closes T6, access 84% (u=1.00); shared bottleneck, protection access 48%; none. |
+| tazri-upgraded-arena | 92.2 | Creature pressure (3 threats): closes T6, access 94% (u=1.00); shared bottleneck, protection access 48%; none. |
 | kuja-genome-sorcerer-arena | 63.7 | Control inevitability (5 finishers): closes T8, access 55% (u=0.71); shared bottleneck, protection access 34%; none. |
 | vivi-battery-arena | 69.5 | Control inevitability (3 finishers): closes T8, access 38% (u=0.71); shared bottleneck, protection access 89%; none. |
-| fire-lord-azula-competitive | 83.6 | Creature pressure (3 threats): closes T7, access 30% (u=0.84); shared bottleneck, protection access 96%; none. |
+| fire-lord-azula-competitive | 83.6 | Creature pressure (3 threats): closes T7, access 46% (u=0.84); shared bottleneck, protection access 96%; none. |
 | cedhtop16-ballooncon6 | 90.5 | Alternate win condition: closes T7, access 14% (u=0.95); independent backup Dramatic Reversal + Isochron Scepter u=0.13; none. |
-| standard-1445893-univerce | 85 | Creature pressure (4 threats): closes T6, access 76% (u=1.00); shared bottleneck, protection access 0%; none. |
+| standard-1445893-univerce | 85 | Creature pressure (4 threats): closes T6, access 83% (u=1.00); shared bottleneck, protection access 0%; none. |
 | standard-1445867-aljce | 0 | no supported closing line: no catalogued win recipe present; t* never reached within 12 turns. |
 
 ## Section 8 acceptance, measured
@@ -54,16 +54,16 @@ n=200 piles, 30 cEDH lists, 120 held-out Standard positives.
 
 | section-8 target | measured | |
 |---|---|---|
-| held-out Standard positive median >= 75 | 36 | FAIL |
-| cEDH median >= 85 | 50 | FAIL |
-| >= 95% of piles < 25 | 135/200 | FAIL |
-| S <= 5 on >= 95% of piles | 66/200 | FAIL |
-| Meren S >= 85.5 | 81.5 | FAIL |
-| precon S >= 70 | 19.1 | FAIL |
+| held-out Standard positive median >= 75 | 32.5 | FAIL |
+| cEDH median >= 85 | 29.5 | FAIL |
+| >= 95% of piles < 25 | 184/200 | FAIL |
+| S <= 5 on >= 95% of piles | 169/200 | FAIL |
+| Meren S >= 85.5 | 100 | PASS |
+| precon S >= 70 | 97 | PASS |
 
 | pile distribution | min | median | max |
 |---|---:|---:|---:|
-| total | 20 | 20 | 55 |
-| S | 0 | 10.2 | 60.2 |
+| total | 20 | 20 | 39 |
+| S | 0 | 1.1 | 27.2 |
 
 Per section 5: eligible legal singleton cards ordered by SHA-256(seed + canonical id), first N take the nonbasic slots, remaining slots filled with basics split across the commander's color identity. The synthetic basics no longer reuse the commander's card id (section 8), so pile lands are finally scored as lands.

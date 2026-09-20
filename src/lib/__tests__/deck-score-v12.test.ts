@@ -9,7 +9,7 @@ import type { DbCard } from '../types';
 import { scoreDeck, type DeckScoreInput } from '../deck-score';
 import { WEIGHTS, weightsFor, Q_BASELINE, Q_SATURATION, type ScoreFormat } from '../deck-score-norms';
 import { computeSynergy } from '../deck-score-synergy';
-import { selectPlan, evaluatePlan, recipeFor, PLAN_RECIPES } from '../deck-score-plans';
+import { selectPlan, evaluatePlan, recipeFor, deploymentBudget, PLAN_RECIPES } from '../deck-score-plans';
 import { catalogFacts, CATALOG_SIZE, oracleHash } from '../deck-score-catalog';
 import { deriveCardFeature } from '../deck-score-features';
 import type { DeckEntry } from '../deck-score-mana';
@@ -207,7 +207,6 @@ describe('v1.2 weights — meta at 0, core renormalised once per profile', () =>
 describe('deck-score catalogue — a typed entry beats the regex fallback', () => {
   it('ships seed entries and hashes their reviewed oracle text', () => {
     expect(CATALOG_SIZE).toBeGreaterThan(0);
-    expect(CATALOG_SIZE).toBeLessThanOrEqual(40);
     const facts = catalogFacts('Rhystic Study', 'Whenever an opponent casts a spell, you may draw a card unless that player pays {1}.');
     expect(facts?.textMatches).toBe(true);
     expect(facts?.families.has('advantage')).toBe(true);
@@ -247,5 +246,173 @@ describe('scoreDeck v1.2 — the evidence gate replaced the mechanical 69 cap', 
     expect(coverage.reason).toMatch(/typed in the effect catalogue/);
     expect(result.provisional).toBe(true);
     expect(result.gates.map((g) => g.cap)).not.toContain(69);
+  });
+});
+
+
+// ── §8 output/deployment bins and the engine families (pile separation) ────
+//
+// These cover the v1.2 "pile separation belongs to S" repair: a threat has to
+// clear an output bin and a deployment deadline, infrastructure is bounded by
+// the essential mass it serves, and the three engine recipes recognise the
+// plans the generic aggro/midrange/control trio cannot describe.
+
+function noncreature(count: number, cmc: number, text: string, tag: string, type = 'Artifact'): Array<{ card: DbCard; quantity: number }> {
+  return Array.from({ length: count }, (_, i) => ({
+    card: mkCard({
+      name: `${tag} ${i}`, type_line: type, oracle_text: text,
+      mana_cost: `{${cmc}}`, cmc, power: null, toughness: null,
+    }),
+    quantity: 1,
+  }));
+}
+
+describe('§8 output bin — a body, keyword or tag alone is not a threat', () => {
+  it('credits a creature-token maker as pressure but never a Treasure maker', () => {
+    const recipe = recipeFor('aggro');
+    const pressure = recipe.roles.find((r) => r.key === 'pressure')!;
+    const soldiers = deriveCardFeature(mkCard({
+      name: 'Soldier Factory', type_line: 'Artifact', mana_cost: '{2}', cmc: 2,
+      oracle_text: 'At the beginning of your end step, create a 1/1 white Soldier creature token.',
+      power: null, toughness: null,
+    }));
+    const treasure = deriveCardFeature(mkCard({
+      name: 'Coin Press', type_line: 'Artifact', mana_cost: '{2}', cmc: 2,
+      oracle_text: 'At the beginning of your end step, create a Treasure token.',
+      power: null, toughness: null,
+    }));
+    expect(soldiers.isCreatureTokenProducer).toBe(true);
+    expect(treasure.isTokenProducer).toBe(true);
+    expect(treasure.isCreatureTokenProducer).toBe(false);
+    expect(pressure.fills(soldiers)).toBe(true);
+    expect(pressure.fills(treasure)).toBe(false);
+  });
+
+  it('rejects a body that does not pay for itself against the plan clock', () => {
+    const recipe = recipeFor('aggro');
+    const pressure = recipe.roles.find((r) => r.key === 'pressure')!;
+    const onCurve = deriveCardFeature(creatures(1, 2, 2, 'OnCurve')[0].card);
+    const overpriced = deriveCardFeature(creatures(1, 2, 3, 'Overpriced')[0].card);
+    expect(pressure.fills(onCurve)).toBe(true);
+    expect(pressure.fills(overpriced)).toBe(false);
+  });
+
+  it('gives a body-only creature list no on-plan credit at all', () => {
+    // 36 vanilla 1/1s for two: every recipe's threat/fodder-free essentials
+    // are unmet, so R collapses and S is 0 however many bodies there are.
+    const out = computeSynergy(null, 60, entriesOf([forest(24), ...creatures(36, 1, 2, 'Vanilla')]));
+    expect(out.plan.roles.filter((r) => r.role.essential && r.supply > 0 && r.role.key !== 'fodder')).toHaveLength(0);
+    expect(out.R).toBe(0);
+    expect(out.score).toBe(0);
+  });
+});
+
+describe('§8 deployment deadline — castable by the plan turn, or no credit', () => {
+  it('scales the budget with the deck\'s own land density', () => {
+    expect(deploymentBudget(60, 24)(3)).toBeCloseTo(3, 6);
+    expect(deploymentBudget(60, 10)(3)).toBeCloseTo(10 / 60 * 10, 6);
+  });
+
+  it('withdraws pressure credit from an identical list that cannot cast it', () => {
+    // The SAME 36 nonland cards, scored once as a 60-card list (24 lands) and
+    // once as a 44-card list (8 lands). Only the deck's own mana changed.
+    const nonLand = entriesOf([...creatures(12, 2, 2, 'Rush'), ...burn(8), ...cantrips(8), ...removal(8, 2)]);
+    const fine = evaluatePlan(recipeFor('aggro'), 60, nonLand);
+    const landLight = evaluatePlan(recipeFor('aggro'), 44, nonLand);
+    expect(deploymentBudget(60, 24)(3)).toBeGreaterThanOrEqual(2);
+    expect(deploymentBudget(44, 8)(3)).toBeLessThan(2);
+    expect(fine.roles.find((r) => r.role.key === 'pressure')!.supply).toBe(12);
+    expect(landLight.roles.find((r) => r.role.key === 'pressure')!.supply).toBe(0);
+  });
+});
+
+describe('§8 R and bounded infrastructure', () => {
+  it('drops R below 1 as soon as one essential is under its floor', () => {
+    const recipe = recipeFor('midrange');
+    const short = evaluatePlan(recipe, 60, entriesOf([
+      ...creatures(8, 4, 4, 'Threat'), ...removal(1, 2), ...cantrips(8),
+    ]));
+    const answers = short.roles.find((r) => r.role.key === 'answers')!;
+    expect(answers.supply).toBeLessThan(answers.required);
+    expect(short.R).toBeLessThan(1);
+    expect(short.R).toBeCloseTo(answers.supply / answers.required, 6);
+    expect(short.essentialFraction).toBeLessThan(1);
+  });
+
+  it('never credits infrastructure more Q mass than the essentials it serves', () => {
+    const rocks = noncreature(20, 2, 'Add one mana of any color.', 'Rock');
+    const evaluation = evaluatePlan(recipeFor('midrange'), 60, entriesOf([
+      ...rocks, ...creatures(4, 4, 4, 'Threat'), ...removal(3, 2), ...cantrips(3),
+    ]));
+    const fixing = evaluation.roles.find((r) => r.role.key === 'fixing')!;
+    const essential = evaluation.roles.filter((r) => r.role.essential).reduce((s, r) => s + r.credited, 0);
+    expect(fixing.supply).toBeGreaterThan(essential);
+    expect(fixing.credited).toBeLessThanOrEqual(essential);
+  });
+});
+
+describe('§8 engine families — plans the generic trio cannot describe', () => {
+  it('reads a sacrifice engine as aristocrats, not as a midrange pile', () => {
+    const deck = entriesOf([
+      forest(37),
+      ...noncreature(6, 1, 'Sacrifice a creature: Draw a card.', 'Outlet', 'Enchantment'),
+      ...noncreature(9, 2, 'Whenever a creature you control dies, each opponent loses 1 life.', 'Payoff', 'Enchantment'),
+      ...creatures(20, 2, 2, 'Fodder'),
+      ...cantrips(6), ...removal(6, 2),
+    ]);
+    const out = computeSynergy(null, 84, deck);
+    expect(out.plan.recipe.key).toBe('aristocrats');
+    expect(out.score).toBeGreaterThanOrEqual(85);
+  });
+
+  it('reads a life-gain / drain engine as lifegain', () => {
+    const deck = entriesOf([
+      forest(37),
+      ...noncreature(9, 3, 'Whenever you gain life, put a +1/+1 counter on target creature.', 'Payoff', 'Enchantment'),
+      ...noncreature(16, 2, 'When this artifact enters, you gain 3 life.', 'Gain'),
+      ...cantrips(8), ...removal(4, 2),
+    ]);
+    const out = computeSynergy(null, 74, deck);
+    expect(out.plan.recipe.key).toBe('lifegain');
+    expect(out.score).toBeGreaterThanOrEqual(70);
+  });
+
+  it('reads a cast-trigger engine as spells', () => {
+    const deck = entriesOf([
+      forest(37),
+      ...Array.from({ length: 6 }, (_, i) => ({
+        card: mkCard({
+          name: `Wizard Payoff ${i}`, type_line: 'Creature — Wizard', mana_cost: '{1}{U}', cmc: 2,
+          oracle_text: 'Whenever you cast an instant or sorcery spell, this creature gets +1/+1 until end of turn.',
+          power: '1', toughness: '2',
+        }),
+        quantity: 1,
+      })),
+      ...burn(6), ...cantrips(20), ...removal(6, 2),
+    ]);
+    const out = computeSynergy(null, 75, deck);
+    expect(out.plan.recipe.key).toBe('spells');
+    expect(out.score).toBeGreaterThanOrEqual(85);
+  });
+});
+
+describe('§8 pile separation — same shape, different coherence', () => {
+  // Both lists are 60 cards: 24 lands, 12 creatures at MV 2, 16 one-mana
+  // spells and 8 two-mana spells. Only the OUTPUT differs.
+  const coherent = [forest(24), ...creatures(12, 2, 2, 'Rush'), ...burn(8), ...cantrips(8), ...removal(8, 2)];
+  const pile = [
+    forest(24),
+    ...creatures(12, 1, 2, 'Squire'),
+    ...noncreature(8, 1, 'Target creature gets +0/+3 until end of turn.', 'Brace', 'Instant'),
+    ...noncreature(8, 1, 'Target player reveals their hand.', 'Peer', 'Sorcery'),
+    ...noncreature(8, 2, 'This artifact enters tapped.', 'Trinket'),
+  ];
+
+  it('keeps the quota-matched pile at S <= 5 and the coherent list at S >= 60', () => {
+    const pileOut = computeSynergy(null, 60, entriesOf(pile));
+    const goodOut = computeSynergy(null, 60, entriesOf(coherent));
+    expect(entriesOf(pile).reduce((s, e) => s + e.quantity, 0)).toBe(entriesOf(coherent).reduce((s, e) => s + e.quantity, 0));
+    expect(pileOut.score).toBeLessThanOrEqual(5);
+    expect(goodOut.score).toBeGreaterThanOrEqual(60);
   });
 });

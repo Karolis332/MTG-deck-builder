@@ -53,18 +53,33 @@ export interface CardFeature {
   isFoodPayoff: boolean;
   isTreasureProducer: boolean;
   isTokenProducer: boolean;
+  /** v1.2 (§8 output bins): produces a token that can attack — a printed
+   * P/T or an explicit creature token. `isTokenProducer` is deliberately
+   * left alone: Treasure/Food/Clue makers are token producers for W and the
+   * meta component, but they are NOT threats for a plan's output bin. */
+  isCreatureTokenProducer: boolean;
   isTokenPayoff: boolean;
   isSacOutlet: boolean;
   isDrainPayoff: boolean;
   hasDiesTrigger: boolean;
   isEquipmentOrAura: boolean;
   hasEvasion: boolean;
+  /** v1.2 (§8): evasion as a PRINTED keyword of this card, from the oracle
+   * `keywords` column. `hasEvasion` regexes the whole oracle text, so
+   * "destroy target creature with flying" counts as evasion there. */
+  hasKeywordEvasion: boolean;
   isAnthemOrOverrun: boolean;
   isAltWin: boolean;
   isComboPiece: boolean;
   /** v1.2 plan roles (deck-score-plans.ts): threat and reach bins. */
   isPlaneswalker: boolean;
   isDirectDamage: boolean;
+  /** v1.2 §8 engine families. `spell` = "artifact/tribal/spell conditions and
+   * conversions"; `lifegain`/`counter` = "lifegain/life-payment/counters". */
+  isSpellPayoff: boolean;
+  isLifegainSource: boolean;
+  isLifegainPayoff: boolean;
+  isCounterPayoff: boolean;
 }
 
 const RE_DRAW_N = /draw (?:a|two|three|four|x|that many) cards?/i;
@@ -78,12 +93,39 @@ const RE_FOOD = /\bfood\b/i;
 const RE_FOOD_SAC = /sacrifice (?:a|another|that) food/i;
 const RE_TREASURE = /create[^.]*treasure/i;
 const RE_TOKEN_PRODUCER = /create[^.]*token/i;
+/** A token with a printed body: "create a 1/1 ... creature token", "create a
+ * token that's a copy of ...". Treasure/Food/Clue/Blood/Map/Powerstone token
+ * lines carry neither a P/T nor the word "creature" after `create`. */
+const RE_CREATURE_TOKEN = /\bcreates?\b[^.]*?(?:\d+\/\d+|creature)[^.]*?token|\bcreates?\b[^.]*?token[^.]*?copy of/i;
 const RE_TOKEN_PAYOFF = /for each[^.]*token|whenever[^.]*token[^.]*enters|sacrifice[^.]*token/i;
 const RE_ANTHEM = /creatures you control get \+\d\/\+\d|other creatures you control get \+/i;
 const RE_EVASION = /flying|menace|trample|unblockable|can't be blocked/i;
-const RE_DESTROY_PERMANENT = /destroy target (?:artifact|enchantment|permanent)|exile target (?:artifact|enchantment|permanent)/i;
-const RE_DESTROY_CREATURE = /destroy target creature|exile target creature|-\d\/-\d[^.]*target creature/i;
+const RE_DESTROY_PERMANENT = /destroy target (?:artifact|enchantment|permanent|nonland permanent)|exile target (?:artifact|enchantment|permanent|nonland permanent)/i;
+// §8 answer family: 'damage, exile, edicts, bounce, counters/taxes, discard,
+// graveyard hate, protection, wipes'. v1 only typed destroy/exile/-X/-X, so a
+// Standard list whose removal is burn or bounce had NO answer axis at all and
+// failed its own plan's answers requirement with a full removal suite.
+const RE_DESTROY_CREATURE = /destroy target creature|exile target creature|deals? \d+ damage to target creature|target creature gets [-−]\d+\/[-−]\d+|-\d\/-\d[^.]*target creature|return target creature[^.]*(?:owner|hand)|(?:each opponent|target opponent|each player) sacrifices? a creature|fight(?:s)? target creature|target creature an opponent controls/i;
 const RE_DIRECT_DAMAGE = /deals? \d+ damage to (?:target player|target opponent|any target|each opponent)/i;
+// §8 engine families — a TRIGGER on the resource, never the resource's name.
+const RE_SPELL_PAYOFF = /whenever you cast (?:an?|your first|another) (?:instant|sorcery|noncreature|spell)|\bmagecraft\b|\bprowess\b|for each (?:instant|sorcery) (?:card|spell)/i;
+const RE_LIFEGAIN_SOURCE = /you gain \d+ life|gain (?:that much|X) life|\blifelink\b|gains? life equal to/i;
+const RE_LIFEGAIN_PAYOFF = /whenever you gain(?: or lose)? life|if you gained life|for each \d+ life you gained/i;
+const RE_COUNTER_PAYOFF = /whenever (?:one or more )?\+1\/\+1 counters? (?:is|are) put|for each \+1\/\+1 counter/i;
+
+const EVASION_KEYWORDS = new Set(['flying', 'menace', 'trample', 'shadow', 'horsemanship', 'fear', 'intimidate', 'skulk']);
+
+function keywordSet(card: DbCard): Set<string> {
+  let kws: unknown;
+  try { kws = card.keywords ? JSON.parse(card.keywords) : []; } catch { kws = []; }
+  return new Set(Array.isArray(kws) ? kws.map((k) => String(k).toLowerCase()) : []);
+}
+
+function printedEvasion(card: DbCard): boolean {
+  const list = keywordSet(card);
+  for (const k of EVASION_KEYWORDS) if (list.has(k)) return true;
+  return /can't be blocked/i.test(ownAbilities(card.oracle_text || ''));
+}
 
 function hasNonTrivialText(oracleText: string | null): boolean {
   const stripped = (oracleText || '').replace(/\([^)]*\)/g, '').trim();
@@ -104,6 +146,8 @@ export function deriveCardFeature(card: DbCard): CardFeature {
     RE_COUNTER_TARGET.test(own) || RE_PROTECTION_KW.test(oracle) || RE_SAC_CREATURE.test(own) ||
     RE_DIES_TRIGGER.test(oracle) || RE_FOOD.test(oracle) || RE_TREASURE.test(oracle) ||
     RE_TOKEN_PRODUCER.test(oracle) || isBoardWipe(card.name, oracle) ||
+    RE_SPELL_PAYOFF.test(own) || RE_LIFEGAIN_SOURCE.test(oracle) ||
+    RE_LIFEGAIN_PAYOFF.test(own) || RE_COUNTER_PAYOFF.test(own) ||
     categories.some((cat) => cat !== 'utility' && cat !== 'land');
 
   const power = card.power != null && card.power !== '' && !Number.isNaN(Number(card.power))
@@ -168,17 +212,23 @@ export function deriveCardFeature(card: DbCard): CardFeature {
     isFoodPayoff: RE_FOOD_SAC.test(own),
     isTreasureProducer: RE_TREASURE.test(oracle) || produces('treasure'),
     isTokenProducer: RE_TOKEN_PRODUCER.test(oracle) || produces('treasure') || produces('food'),
+    isCreatureTokenProducer: (RE_TOKEN_PRODUCER.test(oracle) && RE_CREATURE_TOKEN.test(oracle)) || produces('creature token'),
     isTokenPayoff: RE_TOKEN_PAYOFF.test(own),
     isSacOutlet: RE_SAC_CREATURE.test(own) || produces('sacrifice outlet'),
     isDrainPayoff: RE_EACH_OPP_LOSES.test(own) || produces('all-opponent drain') || produces('single-target drain'),
     hasDiesTrigger: RE_DIES_TRIGGER.test(oracle) || (cat?.consumes.has('creature deaths') ?? false),
     isEquipmentOrAura: /\bEquipment\b|\bAura\b/.test(typeLine),
     hasEvasion: RE_EVASION.test(oracle),
+    hasKeywordEvasion: printedEvasion(card),
     isAnthemOrOverrun: RE_ANTHEM.test(own),
     isAltWin: ALT_WIN_NAMES.has(card.name.toLowerCase()) || produces('alternate win'),
     isComboPiece: false, // set by deck-score-win.ts once the deck's card set is known
     isPlaneswalker: /\bPlaneswalker\b/.test(typeLine),
     isDirectDamage: !isLand && RE_DIRECT_DAMAGE.test(own),
+    isSpellPayoff: !isLand && (RE_SPELL_PAYOFF.test(own) || keywordSet(card).has('prowess') || keywordSet(card).has('magecraft')),
+    isLifegainSource: !isLand && (RE_LIFEGAIN_SOURCE.test(oracle) || keywordSet(card).has('lifelink')),
+    isLifegainPayoff: !isLand && RE_LIFEGAIN_PAYOFF.test(own),
+    isCounterPayoff: !isLand && RE_COUNTER_PAYOFF.test(own),
   };
 }
 

@@ -69,7 +69,7 @@ function main(): void {
     return;
   }
   const { positive } = loadStandardCohorts(3000);
-  const buckets: Record<PlanKey, DeckEntry[][]> = { aggro: [], midrange: [], control: [] };
+  const buckets = Object.fromEntries(PLAN_RECIPES.map((r) => [r.key, [] as DeckEntry[][]])) as Record<PlanKey, DeckEntry[][]>;
 
   for (const deck of positive) {
     const nonLand: DeckEntry[] = deck.input.main

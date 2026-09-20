@@ -15,7 +15,7 @@ import {
   QUALITY_CAP_INTERCEPT, QUALITY_CAP_SLOPE, COVERAGE_EVIDENCE_THRESHOLD,
   HARD_CAP_INVALID, type ScoreFormat, type ComponentKey, type ScoreTuning,
 } from './deck-score-norms';
-import { selectPlan } from './deck-score-plans';
+import { selectPlan, type PlanKey } from './deck-score-plans';
 import { computeStructure, type ScoreGate } from './deck-score-gates';
 import { computeMana, computeCurve, type DeckEntry } from './deck-score-mana';
 import { computeInteraction, computeAdvantage } from './deck-score-interaction';
@@ -63,6 +63,18 @@ function invalidResult(gates: ScoreGate[], weights: Record<ComponentKey, number>
     gates,
     provisional: true,
   };
+}
+
+/**
+ * The §8 engine recipes carry their own keys; the curve/interaction/advantage
+ * norms are indexed by the existing `Archetype` union. Map, do not widen —
+ * those multipliers were calibrated on the template archetypes, and inventing
+ * a `lifegain` entry for them would be an unmeasured constant.
+ */
+function archetypeOfPlan(key: PlanKey): Archetype {
+  if (key === 'spells') return 'spellslinger';
+  if (key === 'lifegain') return 'midrange';
+  return key;
 }
 
 /**
@@ -129,7 +141,7 @@ export function scoreDeck(input: Readonly<DeckScoreInput>, tuning?: Readonly<Sco
   // §8: plans are inferred from the whole deck, including commanders as
   // available resources, and the SAME selection feeds S and the archetype.
   const plan = selectPlan(Math.max(1, N), nonLandEntries, commanderFeatures.map((f) => ({ feature: f, quantity: 1 })));
-  const archetype = inferArchetype(commanderFeatures, plan.recipe.key);
+  const archetype = inferArchetype(commanderFeatures, archetypeOfPlan(plan.recipe.key));
   const commanderCmc = commanderFeatures.reduce((max, f) => Math.max(max, f.c), 0);
 
   const mana = computeMana(format, norms, N, mainEntries, commanderFeatures);
