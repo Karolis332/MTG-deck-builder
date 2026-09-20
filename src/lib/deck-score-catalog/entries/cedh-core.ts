@@ -113,7 +113,7 @@ export const CEDH_CORE: readonly CatalogEntry[] = [
   },
   {
     canonicalName: "Thassa's Oracle",
-    oracleText: 'When this creature enters, look at the top X cards of your library, where X is your devotion to blue. Put up to one of them on top of your library and the rest on the bottom of your library in a random order. If X is greater than or equal to the number of cards in your library, you win the game.',
+    oracleText: 'When this creature enters, look at the top X cards of your library, where X is your devotion to blue. Put up to one of them on top of your library and the rest on the bottom of your library in a random order. If X is greater than or equal to the number of cards in your library, you win the game. (Each {U} in the mana costs of permanents you control counts toward your devotion to blue.)',
     provenance: P, knowledge: 'known',
     effects: [{
       family: 'closing', mode: 'etb', controller: 'self', zones: ['library'],
@@ -188,7 +188,7 @@ export const CEDH_CORE: readonly CatalogEntry[] = [
   },
   {
     canonicalName: 'Viscera Seer',
-    oracleText: 'Sacrifice a creature: Scry 1.',
+    oracleText: 'Sacrifice a creature: Scry 1. (Look at the top card of your library. You may put that card on the bottom.)',
     provenance: P, knowledge: 'known',
     effects: [{
       family: 'engine', mode: 'activated', controller: 'self', zones: ['battlefield'],

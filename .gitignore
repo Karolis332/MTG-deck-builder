@@ -121,3 +121,4 @@ decks/standard/orzhov-repartee-data.json
 /dist-electron-next/
 /dist-electron-release/
 verify-*/deck-score/dataset-*.json
+verify-*/commander-sample.csv

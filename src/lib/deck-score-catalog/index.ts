@@ -11,25 +11,57 @@
  * printing's oracle text still hashes to the reviewed text; otherwise the card
  * falls through to the regex path, which cannot claim coverage on its own.
  */
-import { fnv1a, oracleHash, type AnswerAxis, type CatalogEntry, type EffectFamily, type MechanicKnowledge, type RequiredSupply } from './schema';
+import { entryHash, fnv1a, oracleHash, type AnswerAxis, type CatalogEntry, type EffectFamily, type MechanicKnowledge, type RequiredSupply } from './schema';
 import { CEDH_CORE } from './entries/cedh-core';
 import { STANDARD_CORE } from './entries/standard-core';
+import { CEDH_STAPLES_B1 } from './entries/cedh-staples-b1';
+import { CEDH_STAPLES_B2 } from './entries/cedh-staples-b2';
+import { FIXTURES_B3 } from './entries/fixtures-b3';
+import { STANDARD_B4 } from './entries/standard-b4';
+// Generated shard: data only, so it is JSON rather than a 5 MB TypeScript
+// literal tsc would have to type-check. `generated-partial.json` is NOT loaded
+// here — a partial entry can never count as coverage, so only the coverage
+// tool needs it (`scripts/deck-score-coverage.ts`).
+import GENERATED_JSON from './entries/generated.json';
+
+const GENERATED = GENERATED_JSON as unknown as readonly CatalogEntry[];
 
 export * from './schema';
 
-const ENTRIES: readonly CatalogEntry[] = [...CEDH_CORE, ...STANDARD_CORE];
+/** Curated entries are listed last so they overwrite the generated shard for
+ * the same name (§1 "curate the exceptional ones by canonical identity"). */
+export const CURATED: readonly CatalogEntry[] = [
+  ...CEDH_CORE, ...STANDARD_CORE, ...CEDH_STAPLES_B1, ...CEDH_STAPLES_B2, ...FIXTURES_B3, ...STANDARD_B4,
+];
+const ENTRIES: readonly CatalogEntry[] = [...GENERATED, ...CURATED];
 
 const BY_NAME = new Map<string, CatalogEntry>();
+// Canonical names first. A face alias must never shadow a real card: the
+// split card `Emeritus of Woe // Demonic Tutor` registers the face `Demonic
+// Tutor`, which used to overwrite the actual Demonic Tutor entry and make
+// every copy of it fail the hash check.
+for (const entry of ENTRIES) BY_NAME.set(entry.canonicalName.toLowerCase(), entry);
 for (const entry of ENTRIES) {
-  BY_NAME.set(entry.canonicalName.toLowerCase(), entry);
-  for (const face of entry.faces ?? []) BY_NAME.set(face.toLowerCase(), entry);
-  if (entry.arenaVariant) BY_NAME.set(entry.arenaVariant.toLowerCase(), entry);
+  for (const alias of [...(entry.faces ?? []), ...(entry.arenaVariant ? [entry.arenaVariant] : [])]) {
+    const key = alias.toLowerCase();
+    if (!BY_NAME.has(key)) BY_NAME.set(key, entry);
+  }
+}
+
+/** Every entry, generated shard first then curated overrides. */
+export function catalogEntries(): readonly CatalogEntry[] {
+  return ENTRIES;
+}
+
+/** True when the entry was emitted by `generate.ts` rather than hand-typed. */
+export function isGenerated(entry: CatalogEntry): boolean {
+  return entry.provenance.source === 'generated from oracle text';
 }
 
 /** Content hash of the compiled catalogue; part of the score version id. */
 export const CATALOG_VERSION = fnv1a(
   [...ENTRIES]
-    .map((e) => `${e.canonicalName}|${e.knowledge}|${oracleHash(e.oracleText)}|${e.effects.length}`)
+    .map((e) => `${e.canonicalName}|${e.knowledge}|${entryHash(e)}|${e.effects.length}`)
     .sort()
     .join('\n'),
 );
@@ -97,7 +129,7 @@ export function catalogFacts(name: string, liveOracleText: string | null | undef
   const facts: CatalogFacts = {
     entry,
     knowledge: entry.knowledge,
-    textMatches: oracleHash(liveOracleText) === oracleHash(entry.oracleText),
+    textMatches: oracleHash(liveOracleText) === entryHash(entry),
     families,
     answerAxes: [...axes],
     produces,

@@ -1,100 +1,106 @@
 # Deck Score v1.2 — typed-effect catalogue coverage
 
-Generated 2026-09-20T07:13:15.111Z. Catalogue 28 entries, version `4c783ec3`.
+Generated 2026-09-20T08:07:34.370Z. Catalogue 4158 entries (4079 generated, 79 curated), version `e47a2f76`.
 Copy-weighted share of NONLAND main-deck copies carrying a `known` catalogue entry whose reviewed oracle text still hashes to the printing being scored.
-Lands and textless vanillas are covered by definition — they make no mechanical claim (§1 "no requirements means 1").
+Lands and textless vanillas are covered by definition — they make no mechanical claim (§1 "no requirements means 1"); they are the `trivial` column.
+`partial` = a catalogue entry exists but at least one clause is untyped; `unknown` = no entry, or the entry is stale.
 
-| reference set | lists | worst | median | >80% |
-|---|---:|---:|---:|---:|
-| cEDH Top-16 | 30 | 5.7% | 8.5% | 0/30 |
-| Standard positive cohort (first 200) | 200 | 0.0% | 11.4% | 0/200 |
-| §5 fixtures | 16 | 0.0% | 4.9% | 1/16 |
-| constrained random piles | 200 | 0.0% | 6.3% | 0/200 |
+| reference set | lists | worst | median | >80% | generated | curated | trivial | partial | unknown |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| cEDH Top-16 | 30 | 85.7% | 93.0% | 30/30 | 58.4% | 34.3% | 0.0% | 7.3% | 0.0% |
+| Standard positive cohort (first 200) | 200 | 37.5% | 91.9% | 156/200 | 63.0% | 24.3% | 0.0% | 12.7% | 0.0% |
+| §5 fixtures | 16 | 52.4% | 83.3% | 12/16 | 69.3% | 9.7% | 0.0% | 20.9% | 0.0% |
+| constrained random piles | 200 | 37.9% | 56.1% | 0/200 | 55.6% | 0.3% | 0.0% | 44.1% | 0.0% |
+
+## Stale entries (reviewed text no longer matches the live printing)
+
+No stale entries: every catalogue hit still hashes to the printing being scored.
 
 ## Per fixture
 
 | fixture | nonland copies | typed | coverage |
 |---|---:|---:|---:|
-| meren-powerhouse | 63 | 6 | 9.5% |
-| cabbage-cedh-input | 61 | 3 | 4.9% |
-| precon-witherbloom | 59 | 1 | 1.7% |
-| the-cabbage-merchant | 65 | 1 | 1.5% |
-| imotekh-the-stormlord | 64 | 2 | 3.1% |
-| tazri-beacon-of-unity | 63 | 1 | 1.6% |
-| meren-of-clan-nel-toth | 64 | 6 | 9.4% |
+| meren-powerhouse | 63 | 56 | 88.9% |
+| cabbage-cedh-input | 61 | 51 | 83.6% |
+| precon-witherbloom | 59 | 39 | 66.1% |
+| the-cabbage-merchant | 65 | 54 | 83.1% |
+| imotekh-the-stormlord | 64 | 39 | 60.9% |
+| tazri-beacon-of-unity | 63 | 33 | 52.4% |
+| meren-of-clan-nel-toth | 64 | 57 | 89.1% |
 | ramos-dragon-engine | 0 | 0 | 100.0% |
-| cabbage-merchant-current-brawl | 65 | 1 | 1.5% |
-| tazri-upgraded-arena | 58 | 0 | 0.0% |
-| kuja-genome-sorcerer-arena | 64 | 2 | 3.1% |
-| vivi-battery-arena | 70 | 4 | 5.7% |
-| fire-lord-azula-competitive | 66 | 5 | 7.6% |
-| cedhtop16-ballooncon6 | 70 | 10 | 14.3% |
-| standard-1445893-univerce | 39 | 3 | 7.7% |
-| standard-1445867-aljce | 36 | 0 | 0.0% |
+| cabbage-merchant-current-brawl | 65 | 54 | 83.1% |
+| tazri-upgraded-arena | 58 | 34 | 58.6% |
+| kuja-genome-sorcerer-arena | 64 | 53 | 82.8% |
+| vivi-battery-arena | 70 | 61 | 87.1% |
+| fire-lord-azula-competitive | 66 | 53 | 80.3% |
+| cedhtop16-ballooncon6 | 70 | 64 | 91.4% |
+| standard-1445893-univerce | 39 | 39 | 100.0% |
+| standard-1445867-aljce | 36 | 30 | 83.3% |
 
 ## Work queue — uncovered cards by copy-weighted frequency (top 60)
 
-Slice B adds entries from the top of this list, stratified by archetype, until every reference list is above 80%.
+Curation adds entries from the top of this list until every reference list is above 80%.
+`npx tsx scripts/deck-score-coverage.ts --queue 30` prints the next batch with oracle text.
 
 | # | card | copies | lists | type |
 |---:|---|---:|---:|---|
-| 1 | Esper Origins // Summon: Esper Maduin | 132 | 36 | Sorcery // Enchantment Creature — Saga Elemental |
-| 2 | Prismari Charm | 89 | 23 | Instant |
-| 3 | Sunderflock | 89 | 23 | Creature — Elemental |
-| 4 | Eddymurk Crab | 88 | 22 | Creature — Elemental Crab |
-| 5 | Hearth Elemental // Stoke Genius | 88 | 22 | Creature — Elemental // Sorcery — Adventure |
-| 6 | Traumatic Critique | 80 | 24 | Instant |
-| 7 | Biotech Specialist | 76 | 19 | Creature — Insect Scientist |
-| 8 | The Sackville-Bagginses | 76 | 19 | Legendary Creature — Halfling Citizen |
-| 9 | Greedy Freebooter | 75 | 19 | Creature — Human Pirate |
-| 10 | Shoot the Sheriff | 75 | 30 | Instant |
-| 11 | Gene Pollinator | 74 | 19 | Artifact Creature — Robot Insect |
-| 12 | Obsessive Pursuit | 72 | 18 | Enchantment |
-| 13 | Shared Roots | 65 | 28 | Sorcery — Lesson |
-| 14 | Dáin's Company | 56 | 14 | Creature — Dwarf Warrior |
-| 15 | Dwarven Mauler | 56 | 14 | Creature — Dwarf Warrior |
-| 16 | Kíli the Resourceful | 56 | 14 | Legendary Creature — Dwarf Scout |
-| 17 | Leyline Axe | 56 | 14 | Artifact — Equipment |
-| 18 | Spell Pierce | 56 | 35 | Instant |
-| 19 | Umbral Collar Zealot | 53 | 20 | Creature — Human Cleric |
-| 20 | Hinterland Sanctifier | 52 | 13 | Creature — Rabbit Cleric |
-| 21 | Bitter Triumph | 51 | 26 | Instant |
-| 22 | Floodpits Drowner | 51 | 13 | Creature — Merfolk |
-| 23 | Amalia Benavides Aguirre | 50 | 13 | Legendary Creature — Vampire Scout |
-| 24 | Dragonfire Blade | 49 | 14 | Artifact — Equipment |
-| 25 | Thorin, Mountain-king | 49 | 14 | Legendary Creature — Dwarf Noble |
-| 26 | Case of the Uneaten Feast | 48 | 12 | Enchantment — Case |
-| 27 | Enduring Curiosity | 48 | 14 | Enchantment Creature — Cat Glimmer |
-| 28 | Jeskai Revelation | 48 | 13 | Instant |
-| 29 | Lively Dirge | 48 | 16 | Sorcery |
-| 30 | Tablet of Discovery | 48 | 13 | Artifact |
-| 31 | Get Out | 47 | 22 | Instant |
-| 32 | Kaito, Bane of Nightmares | 47 | 12 | Legendary Planeswalker — Kaito |
-| 33 | Spell Snare | 46 | 31 | Instant |
-| 34 | Dream Beavers | 45 | 12 | Creature — Beaver Nightmare |
-| 35 | Practiced Offense | 45 | 13 | Sorcery |
-| 36 | Deep-Cavern Bat | 44 | 15 | Creature — Bat |
-| 37 | Stadium Headliner | 44 | 11 | Creature — Goblin Warrior |
-| 38 | United Battlefront | 44 | 11 | Sorcery |
-| 39 | Winternight Stories | 44 | 19 | Sorcery |
-| 40 | Haliya, Guided by Light | 43 | 14 | Legendary Creature — Human Soldier |
-| 41 | Spyglass Siren | 43 | 12 | Creature — Siren Pirate |
-| 42 | Lavaspur Boots | 42 | 13 | Artifact — Equipment |
-| 43 | Meltstrider's Resolve | 42 | 28 | Enchantment — Aura |
-| 44 | Callous Inspector | 41 | 12 | Creature — Human Soldier |
-| 45 | Cryogen Relic | 41 | 11 | Artifact |
-| 46 | Impractical Joke | 40 | 22 | Sorcery |
-| 47 | Lunar Convocation | 40 | 12 | Enchantment |
-| 48 | Simulacrum Synthesizer | 40 | 10 | Artifact |
-| 49 | Consult the Star Charts | 38 | 13 | Instant |
-| 50 | Deadly Precision | 38 | 17 | Sorcery |
-| 51 | Mossborn Hydra | 38 | 13 | Creature — Elemental Hydra |
-| 52 | Perilous Snare | 37 | 10 | Artifact |
-| 53 | Momo, Friendly Flier | 36 | 9 | Legendary Creature — Lemur Bat Ally |
-| 54 | Inevitable Defeat | 35 | 10 | Instant |
-| 55 | No More Lies | 35 | 13 | Instant |
-| 56 | Deceit | 33 | 9 | Creature — Elemental Incarnation |
-| 57 | Moseo, Vein's New Dean | 33 | 11 | Legendary Creature — Bird Skeleton Warlock |
-| 58 | The Mind Stone | 33 | 11 | Legendary Artifact — Infinity Stone |
-| 59 | Wan Shi Tong, Librarian | 33 | 24 | Legendary Creature — Bird Spirit |
-| 60 | Belladonna Took | 32 | 8 | Legendary Creature — Halfling Citizen |
+| 1 | Dáin's Company | 56 | 14 | Creature — Dwarf Warrior |
+| 2 | Cool but Rude | 28 | 7 | Enchantment — Class |
+| 3 | Iron-Shield Elf | 28 | 7 | Creature — Elf Warrior |
+| 4 | Marauding Mako | 28 | 7 | Creature — Shark Pirate |
+| 5 | Moonshadow | 28 | 7 | Creature — Elemental |
+| 6 | Seam Rip | 26 | 9 | Enchantment |
+| 7 | The Last Ronin's Technique | 26 | 8 | Instant |
+| 8 | The Wondrous Wasp | 25 | 13 | Legendary Creature — Human Hero |
+| 9 | Clarion Conqueror | 22 | 8 | Creature — Dragon |
+| 10 | Flashback | 21 | 12 | Instant |
+| 11 | Sarkhan, Dragon Ascendant | 20 | 5 | Legendary Creature — Human Druid |
+| 12 | Smaug the Magnificent | 20 | 5 | Legendary Creature — Dragon |
+| 13 | Braided Net // Braided Quipu | 18 | 10 | Artifact // Artifact |
+| 14 | Magmatic Hellkite | 18 | 5 | Creature — Dragon |
+| 15 | Gollum, Riddle Master | 17 | 6 | Legendary Creature — Halfling Horror |
+| 16 | Bringer of the Last Gift | 16 | 4 | Creature — Vampire Demon |
+| 17 | Oblivious Bookworm | 16 | 4 | Creature — Human Wizard |
+| 18 | Tishana's Tidebinder | 16 | 9 | Creature — Merfolk Wizard |
+| 19 | Leonardo, Cutting Edge | 15 | 9 | Legendary Creature — Mutant Ninja Turtle |
+| 20 | Cecil, Dark Knight // Cecil, Redeemed Paladin | 14 | 8 | Legendary Creature — Human Knight // Legendary Creature — Human Knight |
+| 21 | Overlord of the Balemurk | 14 | 4 | Enchantment Creature — Avatar Horror |
+| 22 | Professor Dellian Fel | 14 | 6 | Legendary Planeswalker — Dellian |
+| 23 | Callous Sell-Sword // Burn Together | 13 | 4 | Creature — Human Soldier // Sorcery — Adventure |
+| 24 | Spring-Loaded Sawblades // Bladewheel Chariot | 13 | 10 | Artifact // Artifact — Vehicle |
+| 25 | Elusive Otter // Grove's Bounty | 12 | 3 | Creature — Otter // Sorcery — Adventure |
+| 26 | Nowhere to Run | 12 | 7 | Enchantment |
+| 27 | Ardyn, the Usurper | 10 | 4 | Legendary Creature — Elder Human Noble |
+| 28 | Elspeth, Storm Slayer | 10 | 5 | Legendary Planeswalker — Elspeth |
+| 29 | The Fire Crystal | 10 | 10 | Legendary Artifact |
+| 30 | Turn Inside Out | 10 | 3 | Instant |
+| 31 | Day of Black Sun | 9 | 5 | Sorcery |
+| 32 | Emeritus of Truce // Swords to Plowshares | 9 | 3 | Creature — Cat Cleric // Instant |
+| 33 | Strategic Betrayal | 9 | 8 | Sorcery |
+| 34 | Aang, Swift Savior // Aang and La, Ocean's Fury | 8 | 2 | Legendary Creature — Human Avatar Ally // Legendary Creature — Avatar Spirit Ally |
+| 35 | Accumulate Wisdom | 8 | 2 | Instant — Lesson |
+| 36 | Bender's Waterskin | 8 | 2 | Artifact |
+| 37 | Beseech the Mirror | 8 | 8 | Sorcery |
+| 38 | Break Out | 8 | 2 | Sorcery |
+| 39 | Combustion Technique | 8 | 2 | Instant — Lesson |
+| 40 | Drake Hatcher | 8 | 3 | Creature — Human Wizard |
+| 41 | Pinnacle Emissary | 8 | 2 | Artifact Creature — Robot |
+| 42 | Tezzeret, Cruel Captain | 8 | 5 | Legendary Planeswalker — Tezzeret |
+| 43 | Wishclaw Talisman | 8 | 8 | Artifact |
+| 44 | Flash Photography | 7 | 7 | Sorcery |
+| 45 | Torpor Orb | 7 | 7 | Artifact |
+| 46 | Unidentified Hovership | 7 | 7 | Artifact — Vehicle |
+| 47 | Ancient Cornucopia | 6 | 2 | Artifact |
+| 48 | Aven Interrupter | 6 | 3 | Creature — Bird Rogue |
+| 49 | Dyadrine, Synthesis Amalgam | 6 | 3 | Legendary Artifact Creature — Construct |
+| 50 | Iron Hills Blacksmith | 6 | 2 | Creature — Dwarf Artificer |
+| 51 | Jadzi, Steward of Fate // Oracle's Gift | 6 | 2 | Legendary Creature — Human Wizard // Sorcery |
+| 52 | Mutable Explorer | 6 | 3 | Creature — Shapeshifter |
+| 53 | Opposition Agent | 6 | 6 | Creature — Human Rogue |
+| 54 | Pym Particles | 6 | 2 | Sorcery |
+| 55 | Terror of the Peaks | 6 | 2 | Creature — Dragon |
+| 56 | Ugin, Eye of the Storms | 6 | 3 | Legendary Planeswalker — Ugin |
+| 57 | Aang's Iceberg | 5 | 2 | Enchantment |
+| 58 | Abhorrent Oculus | 5 | 5 | Creature — Eye |
+| 59 | Analyze the Pollen | 5 | 3 | Sorcery |
+| 60 | Ashling, Rekindled // Ashling, Rimebound | 5 | 2 | Legendary Creature — Elemental Sorcerer // Legendary Creature — Elemental Wizard |

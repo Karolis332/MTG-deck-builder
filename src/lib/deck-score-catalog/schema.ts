@@ -87,12 +87,25 @@ export interface CatalogEntry {
   faces?: readonly string[];
   /** Arena rebalanced identity, e.g. 'A-Vivi Ornitier'; null = same card. */
   arenaVariant?: string | null;
-  /** Oracle text as reviewed. `oracleHash()` over this is the drift check. */
+  /** Oracle text as reviewed. `oracleHash()` over this is the drift check.
+   * Generated entries store `oracleHash` instead and leave this empty — the
+   * shard holds ~1.2k cards and the texts would be ~20x its size. */
   oracleText: string;
+  /** Reviewed-text hash, when the text itself is not stored. Exactly one of
+   * `oracleText` / `oracleHash` is authoritative; `entryHash()` picks it. */
+  oracleHash?: string;
   provenance: { source: string; reviewedBy: string; reviewedAt: string };
   knowledge: MechanicKnowledge;
   /** Every score-relevant effect. A partially typed card is `partial`. */
   effects: readonly TypedEffect[];
+  /** Verbatim sentences the parser could not type. Non-empty => `partial`
+   * (§8 "never type a card you cannot ground in its oracle text"). */
+  untyped?: readonly string[];
+}
+
+/** The reviewed-text hash of an entry, whichever way it stores it. */
+export function entryHash(entry: Pick<CatalogEntry, 'oracleText' | 'oracleHash'>): string {
+  return entry.oracleHash ?? oracleHash(entry.oracleText);
 }
 
 /** FNV-1a, 32-bit, hex. Pure and dependency-free: this module is imported by
