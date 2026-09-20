@@ -153,6 +153,13 @@ describe('POST /build — deckScore', () => {
     await handleBuild(JSON.stringify({ commanderName: commander.name, format: 'commander' }), res);
     const { status, body: out } = result();
     expect(status).toBe(200);
-    expect(out.deckScore === null || typeof (out.deckScore as { score: number }).score === 'number').toBe(true);
+    // 40 copies of one card is a scorable (if illegal) deck: the payload must be present,
+    // not null — null is reserved for unsupported formats / empty input / scorer throws.
+    const ds = out.deckScore as { version: string; score: number; components: unknown[]; gates: unknown[] } | null;
+    expect(ds).not.toBeNull();
+    expect(typeof ds!.version).toBe('string');
+    expect(typeof ds!.score).toBe('number');
+    expect(Array.isArray(ds!.components)).toBe(true);
+    expect(Array.isArray(ds!.gates)).toBe(true);
   });
 });
