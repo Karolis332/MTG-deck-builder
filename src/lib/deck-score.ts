@@ -74,6 +74,7 @@ function invalidResult(gates: ScoreGate[], weights: Record<ComponentKey, number>
 function archetypeOfPlan(key: PlanKey): Archetype {
   if (key === 'spells') return 'spellslinger';
   if (key === 'lifegain') return 'midrange';
+  if (key === 'typal') return 'tribal';
   return key;
 }
 

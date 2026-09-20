@@ -42,6 +42,8 @@ export interface CardFeature {
   isRamp: boolean;
   isDraw: boolean;
   isDrawEngine: boolean;
+  /** Mass removal: the typed stabilisation section 8 asks a control line to prove. */
+  isSweeper: boolean;
   isTutor: boolean;
   isRemoval: boolean;
   isWipe: boolean;
@@ -146,7 +148,7 @@ export function deriveCardFeature(card: DbCard): CardFeature {
     RE_COUNTER_TARGET.test(own) || RE_PROTECTION_KW.test(oracle) || RE_SAC_CREATURE.test(own) ||
     RE_DIES_TRIGGER.test(oracle) || RE_FOOD.test(oracle) || RE_TREASURE.test(oracle) ||
     RE_TOKEN_PRODUCER.test(oracle) || isBoardWipe(card.name, oracle) ||
-    RE_SPELL_PAYOFF.test(own) || RE_LIFEGAIN_SOURCE.test(oracle) ||
+    RE_SPELL_PAYOFF.test(own) || RE_ANTHEM.test(own) || RE_LIFEGAIN_SOURCE.test(oracle) ||
     RE_LIFEGAIN_PAYOFF.test(own) || RE_COUNTER_PAYOFF.test(own) ||
     categories.some((cat) => cat !== 'utility' && cat !== 'land');
 
@@ -199,6 +201,7 @@ export function deriveCardFeature(card: DbCard): CardFeature {
     covered, c, e, power,
     isRamp: categories.includes('ramp') || (cat?.families.has('mana') ?? false),
     isDraw: categories.includes('draw') || produces('cards'),
+    isSweeper: isWipe,
     isDrawEngine: (!isLand && isDrawEngine(card.name, oracle, typeLine)) ||
       (cat?.families.has('advantage') === true && cat.entry.effects.some((x) => (x.timing.interval ?? 0) >= 1)),
     isTutor: categories.includes('tutor') || (cat?.families.has('tutor') ?? false),

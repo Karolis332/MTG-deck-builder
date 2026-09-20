@@ -1,0 +1,61 @@
+commander sample: 2777 decks, 2777 resolved, 4 unresolved card rows
+
+## aggro (n=12) — deployable pressure with reach and reload
+| role | p10 | p25 | median | p75 | p90 | frozen min/max |
+|---|---:|---:|---:|---:|---:|---|
+| (nonland copies) | 60 | 62 | 64 | 65 | 68 | - |
+| pressure | 5 | 7 | 11 | 11 | 16 | 10/16 |
+| reach | 3 | 3 | 6 | 13 | 19 | 4/18 |
+| reload | 3 | 8 | 8 | 12 | 13 | 1/8 |
+| answers | 2 | 3 | 3 | 4 | 6 | 0/3 |
+| fixing | 2 | 4 | 5 | 7 | 9 | 0/4 |
+
+## midrange (n=972) — timely threats, relevant answers, sustained value
+| role | p10 | p25 | median | p75 | p90 | frozen min/max |
+|---|---:|---:|---:|---:|---:|---|
+| (nonland copies) | 61 | 62 | 64 | 65 | 67 | - |
+| threats | 5 | 7 | 9 | 13 | 16 | 4/10 |
+| answers | 3 | 4 | 6 | 8 | 11 | 4/15 |
+| value | 5 | 7 | 10 | 12 | 16 | 4/21 |
+| fixing | 3 | 5 | 8 | 11 | 13 | 0/8 |
+
+## control (n=670) — early stabilisation, advantage engine, accessible finisher
+| role | p10 | p25 | median | p75 | p90 | frozen min/max |
+|---|---:|---:|---:|---:|---:|---|
+| (nonland copies) | 61 | 62 | 63 | 65 | 67 | - |
+| stabilisation | 2 | 3 | 5 | 6 | 8 | 7/12 |
+| engine | 6 | 8 | 11 | 15 | 19 | 12/19 |
+| finisher | 5 | 7 | 10 | 14 | 18 | 3/8 |
+| answers | 0 | 0 | 1 | 2 | 3 | 0/2 |
+| fixing | 5 | 7 | 10 | 12 | 14 | 0/4 |
+
+## aristocrats (n=410) — sacrifice outlets converting expendable bodies into damage
+| role | p10 | p25 | median | p75 | p90 | frozen min/max |
+|---|---:|---:|---:|---:|---:|---|
+| (nonland copies) | 61 | 63 | 64 | 66 | 69 | - |
+| outlet | 0 | 0 | 3 | 6 | 10 | 3/9 |
+| payoff | 0 | 1 | 5 | 9 | 13 | 5/12 |
+| fodder | 12 | 16 | 21 | 25 | 29 | 6/18 |
+| value | 1 | 2 | 4 | 5 | 7 | 0/8 |
+| answers | 1 | 2 | 4 | 5 | 6 | 0/5 |
+| fixing | 2 | 4 | 6 | 8 | 11 | 0/8 |
+
+## lifegain (n=124) — life gained as a resource, converted by counters or drain
+| role | p10 | p25 | median | p75 | p90 | frozen min/max |
+|---|---:|---:|---:|---:|---:|---|
+| (nonland copies) | 61 | 62 | 64 | 65 | 67 | - |
+| payoff | 1 | 4 | 6 | 10 | 13 | 5/12 |
+| gain | 9 | 12 | 17 | 23 | 26 | 8/22 |
+| value | 3 | 5 | 8 | 10 | 14 | 2/10 |
+| answers | 2 | 3 | 4 | 6 | 7 | 0/5 |
+| fixing | 3 | 4 | 7 | 9 | 12 | 0/8 |
+
+## spells (n=589) — cast-trigger payoffs fed by cheap instants and sorceries
+| role | p10 | p25 | median | p75 | p90 | frozen min/max |
+|---|---:|---:|---:|---:|---:|---|
+| (nonland copies) | 61 | 63 | 64 | 67 | 72 | - |
+| payoff | 0 | 0 | 1 | 4 | 10 | 3/10 |
+| closer | 3 | 4 | 7 | 13 | 19 | 2/8 |
+| spells | 9 | 12 | 17 | 22 | 27 | 12/32 |
+| answers | 0 | 0 | 1 | 2 | 2 | 0/8 |
+| fixing | 4 | 6 | 9 | 13 | 17 | 0/10 |

@@ -15,6 +15,10 @@ import { computeSynergy } from '../src/lib/deck-score-synergy';
 import { deriveCardFeature } from '../src/lib/deck-score-features';
 import type { DeckEntry } from '../src/lib/deck-score-mana';
 import { loadDataset } from './deck-score-fixtures';
+import { typalTheme, typalRecipe } from '../src/lib/deck-score-plans';
+import { normsFor } from '../src/lib/deck-score-norms';
+import { computeInteraction, computeAdvantage } from '../src/lib/deck-score-interaction';
+import { winDiagnostic } from '../src/lib/deck-score-win';
 
 const TOP = Number(process.argv[2] ?? 20);
 
@@ -67,12 +71,37 @@ function plans(name: string): void {
   if (!hit) { console.log(`no fixture ${name}`); return; }
   const { N, nonLand, cmd } = entriesOf(hit.input);
   const rows = PLAN_RECIPES.map((r) => evaluatePlan(r, Math.max(1, N), nonLand, cmd));
+  const theme = typalTheme([...nonLand, ...cmd].map((e) => e.feature));
+  if (theme.tribes.length > 0 || theme.artifacts || theme.party) {
+    console.log(`theme: tribes=[${theme.tribes.join(',')}] artifacts=${theme.artifacts} party=${theme.party}`);
+    rows.push(evaluatePlan(typalRecipe(theme), Math.max(1, N), nonLand, cmd));
+  } else console.log('theme: none');
   console.log(`## ${name} — N=${N}`);
   console.log('| recipe | Q | R | fit | essFrac | empty | weakest |');
   console.log('|---|---:|---:|---:|---:|---|---|');
   for (const e of rows.sort((a, b) => planFit(b) - planFit(a))) {
     console.log(`| ${e.recipe.key} | ${e.Q.toFixed(3)} | ${e.R.toFixed(3)} | ${planFit(e).toFixed(3)} | ${e.essentialFraction.toFixed(2)} | ${e.hasEmptyEssential ? 'yes' : 'no'} | ${e.weakest.key} ${e.weakest.supply}/${e.weakest.required.toFixed(1)} |`);
   }
+  console.log(diag(name, hit.input));
+}
+
+/** `--win <fixture>`: every W recipe with its pools, t* and u. */
+function win(name: string): void {
+  const ds = loadDataset(200);
+  const hit = ds.fixtures.find((f) => f.name === name);
+  if (!hit) { console.log(`no fixture ${name}`); return; }
+  const { N, all, cmd } = entriesOf(hit.input);
+  const fmt = hit.input.format;
+  const norms = normsFor(fmt);
+  const inter = computeInteraction(fmt, norms, 'midrange', N, all);
+  const adv = computeAdvantage(fmt, norms, 'midrange', N, all);
+  const cmdFeatures = cmd.map((e) => e.feature);
+  console.log(winDiagnostic(fmt, norms, 'midrange', N, all, cmdFeatures, {
+    E: inter.E, Estar: inter.Estar, D: adv.D, Dstar: adv.Dstar, hasDrawEngine: adv.hasDrawEngine,
+  }));
+  const q = (pred: (f: typeof all[number]['feature']) => boolean) =>
+    all.filter((e) => pred(e.feature)).reduce((a, e) => a + e.quantity, 0);
+  console.log(`sweepers ${q((f) => f.isSweeper)} cheapAnswers ${q((f) => f.answerAxes.length > 0 && f.c <= 3 && f.s >= 1)} drawEngines ${q((f) => f.isDrawEngine)} pw ${q((f) => /Planeswalker/.test(f.card.type_line || ''))} big ${q((f) => (f.power ?? 0) >= 4)}`);
 }
 
 const ANCHORS = [
@@ -175,6 +204,8 @@ function worst(): void {
 }
 
 function main(): void {
+  const wi = process.argv.indexOf('--win');
+  if (wi > 0) { win(process.argv[wi + 1]); return; }
   const pi = process.argv.indexOf('--plans');
   if (pi > 0) { plans(process.argv[pi + 1]); return; }
   if (process.argv.includes('--worst')) { worst(); return; }

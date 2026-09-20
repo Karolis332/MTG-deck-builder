@@ -142,6 +142,23 @@ function closingTurn(
   return null;
 }
 
+/** Total expected damage the same schedule reaches by `MAX_TURN` — the number
+ * that explains a null `closingTurn`. Diagnostics only. */
+export function combatCeiling(
+  format: ScoreFormat, N: number, sources: readonly Source[], rampBonus: number,
+): number {
+  let cumulative = 0;
+  for (let t = 2; t <= MAX_TURN; t++) {
+    const mana = availableManaAtTurn(t - 1, rampBonus);
+    const seen = Math.min(1, Hf(format, N, 1, t - 1, 1));
+    for (const s of sources) {
+      if (s.guaranteed) { if (Math.ceil(s.cmc) <= t) cumulative += s.output; }
+      else if (s.cmc <= mana) cumulative += s.quantity * seen * s.output;
+    }
+  }
+  return cumulative;
+}
+
 /** Attack steps available by `t*` — combat starts on turn 2. */
 function combatsBy(tStar: number): number {
   return Math.max(1, tStar - 1);
@@ -169,7 +186,11 @@ function combatsBy(tStar: number): number {
 function requiredCopies(
   members: readonly Source[], target: number, combats: number, poolSizeCap: number,
 ): number | null {
-  const byCost = [...members].sort((a, b) => a.cmc - b.cmc || b.output - a.output);
+  // Zero-output members are not threats and must not SIZE the line either: one
+  // 0/0 Walking Ballista sorted first made `mean` 0 and returned null, deleting
+  // every combat recipe the deck had (`the-cabbage-merchant`, W = 0 with a
+  // 205-damage schedule behind it).
+  const byCost = [...members].filter((m) => m.output > 0).sort((a, b) => a.cmc - b.cmc || b.output - a.output);
   const units: Source[] = [];
   for (const m of byCost) for (let i = 0; i < m.quantity; i++) units.push(m);
   if (units.length === 0) return null;
@@ -191,7 +212,16 @@ function requiredCopies(
 
 // ── Recipe families ───────────────────────────────────────────────────────
 
+/** Becomes a creature under the controller's own control - a manland or a
+ * crewed Vehicle is a finisher that dodges sorcery-speed removal. */
+const RE_MANLAND = /becomes? an? [^.]*creature|crew \d/i;
 const RE_REPEATABLE_DAMAGE = /deals? (\d+) damage to (?:each opponent|any target|target player|target opponent)/i;
+/** A trigger the controller cannot fire alone (§1's 0.5 opponent prior). */
+/** A token whose power is a running count of the controller's own board. */
+/** The token's printed power, when the card prints one. */
+const RE_PRINTED_TOKEN = /creates? [^.]*?(\d+)\/\d+[^.]*?token/i;
+const RE_SCALING_TOKEN = /(?:gets? \+1\/\+1 for each|\+1\/\+1 counters? on it for each|X\/X[^.]*where X is the number of) [^.]*?(artifact|creature|permanent)/i;
+const RE_OPPONENT_TRIGGER = /whenever [^.]*(?:an opponent|opponents|a creature an opponent controls)|opponent (?:attacks|casts|draws)/i;
 const RE_CONVERTER = /sacrifice[^.]*(?:food|artifact|treasure|token|creature)[^.]*(?:deals? \d+ damage|\+\d+\/\+\d+|becomes? an?\b)/i;
 
 /**
@@ -261,10 +291,12 @@ function scheduleRecipe(
   };
 }
 
+export interface PressureOutput { recipes: Recipe[]; bodies: Source[]; converted: Source[] }
+
 function pressureRecipes(
   format: ScoreFormat, N: number, nonLand: DeckEntry[], commanders: CardFeature[],
   rampBonus: number, target: number, poolSizeCap: number,
-): Recipe[] {
+): PressureOutput {
   const bodies: Source[] = [
     ...commanders.filter(isBody).map((f) => sourceOf(f, 1, (f.power || 0) * f.s, true)),
     ...nonLand.filter((e) => isBody(e.feature)).map((e) => sourceOf(e.feature, e.quantity, (e.feature.power || 0) * e.feature.s)),
@@ -283,24 +315,77 @@ function pressureRecipes(
   // faster, and the converter pool it adds only costs the conversion line
   // access. Producers become damage only when something converts them (S1 W:
   // "Food is not a creature without a conversion effect").
-  const isProducer = (f: CardFeature) => f.isTokenProducer || f.isFoodProducer || f.isTreasureProducer;
+  // A CREATURE token attacks on its own; only Food/Treasure/Clue needs a
+  // conversion effect (§1 W's rule is about Food, not about tokens). Splitting
+  // them is what makes the family fire: `standard-1445867-aljce` closes with
+  // Simulacrum Synthesizer Constructs and has no anthem to "convert" them, and
+  // `the-cabbage-merchant` makes its Food on the COMMANDER, which the old
+  // nonland-only producer list could not see at all.
+  const isFoodLike = (f: CardFeature) => f.isFoodProducer || f.isTreasureProducer;
   const isConverter = (f: CardFeature) =>
     f.isAnthemOrOverrun || f.isFoodPayoff || RE_CONVERTER.test(f.card.oracle_text || '');
   const converters = pickMembers(nonLand, commanders, isConverter);
-  const producers = nonLand.filter((e) => isProducer(e.feature) && !isBody(e.feature));
-  if (converters.length > 0 && producers.length > 0) {
-    // ponytail: a flat 2 power per converted producer, the v1 assumption kept.
+  // A producer whose trigger needs an OPPONENT to act is half a producer: the
+  // §1 opponent-trigger prior, applied to output rather than to access.
+  // A token whose size is a COUNT ("0/0 with a +1/+1 counter for each artifact
+  // you control", "X/X where X is...") is worth what the deck actually holds,
+  // not the flat 2: `standard-1445867-aljce` closes with Simulacrum
+  // Synthesizer Constructs in a 30-artifact shell and read them as 2/2s.
+  const boardCount = (pred: (f: CardFeature) => boolean): number => nonLand
+    .filter((e) => pred(e.feature))
+    .reduce((sum, e) => sum + e.quantity * Hf(format, N, 1, 6, 1), 0);
+  const scale = {
+    artifact: boardCount((f) => /\bArtifact\b/.test(f.card.type_line || '')),
+    creature: boardCount((f) => /\bCreature\b/.test(f.card.type_line || '')),
+  };
+  const tokenSize = (f: CardFeature): number => {
+    const text = f.card.oracle_text || '';
+    const m = RE_SCALING_TOKEN.exec(text);
+    if (m) {
+      const counted = /artifact/i.test(m[0]) ? scale.artifact : scale.creature;
+      return Math.max(2, Math.min(6, counted));
+    }
+    // The PRINTED size, when the card says it: a 1/1 Elf is one power, not the
+    // flat 2 v1 assumed. Sixteen 1/1 makers closed a Standard aristocrats shell
+    // at 32 power/turn and out-ranked its own drain line.
+    // ponytail: first match only, and "create two 1/1" counts as one body.
+    // Upgrade path is a curated per-card token table, as above.
+    const printed = RE_PRINTED_TOKEN.exec(text);
+    return printed ? Math.max(1, Number(printed[1])) : 2;
+  };
+  const producerOutput = (f: CardFeature): number =>
+    tokenSize(f) * f.s * (RE_OPPONENT_TRIGGER.test(f.card.oracle_text || '') ? 0.5 : 1);
+  const producerEntries = (pred: (f: CardFeature) => boolean): DeckEntry[] => [
+    ...commanders.filter(pred).map((f) => ({ feature: f, quantity: 1 })),
+    ...nonLand.filter((e) => pred(e.feature)),
+  ];
+  // Creature-token makers ride the plain pressure schedule; Food-likes only
+  // join once something converts them.
+  const tokenMakers = producerEntries((f) => f.isCreatureTokenProducer);
+  const foodMakers = converters.length > 0
+    ? producerEntries((f) => isFoodLike(f) && !f.isCreatureTokenProducer)
+    : [];
+  const producers = [...tokenMakers, ...foodMakers];
+  if (producers.length > 0) {
+    // ponytail: a flat 2 power per producer per turn, the v1 assumption kept.
     // Upgrade path is a curated per-card token table.
-    const converted = [...bodies, ...producers.map((e) => sourceOf(e.feature, e.quantity, 2 * e.feature.s))];
+    const isCommanderProducer = (e: DeckEntry) => commanders.includes(e.feature);
+    const converted: Source[] = [
+      ...bodies,
+      ...producers.map((e) => sourceOf(e.feature, e.quantity, producerOutput(e.feature), isCommanderProducer(e))),
+    ];
     const verifiedConverted = [
       ...verifiedBodies,
-      ...producers.filter((e) => e.feature.s >= 1).map((e) => toMember(e.feature, e.quantity)),
+      ...producers.filter((e) => e.feature.s >= 1)
+        .map((e) => toMember(e.feature, e.quantity, isCommanderProducer(e))),
     ];
+    const extra: RecipePool[] = foodMakers.length > 0 ? [{ members: converters, r: 1 }] : [];
     const tokens = scheduleRecipe('tokens', (r) => `Token/Food conversion (${r} bodies)`,
-      format, N, converted, verifiedConverted, [{ members: converters, r: 1 }], rampBonus, target, poolSizeCap);
+      format, N, converted, verifiedConverted, extra, rampBonus, target, poolSizeCap);
     if (tokens) out.push(tokens);
+    return { recipes: out, bodies, converted };
   }
-  return out;
+  return { recipes: out, bodies, converted: bodies };
 }
 
 /**
@@ -410,14 +495,30 @@ function controlRecipe(
   // claimed inevitability, random piles included (measured: piles took control
   // as their best line at u=0.16).
   if (totals.E < totals.Estar) return null;
-  if (totals.D < totals.Dstar && !totals.hasDrawEngine) return null;
+  // §8: the exemption needs a DURABLE advantage engine - something that keeps
+  // producing - not a stack of one-shot draw spells. Counting `D >= D*` as an
+  // alternative let a Food midrange list with six fat creatures read as
+  // "Control inevitability" (cabbage-cedh-input, score 73 in a 35-50 band).
+  if (!totals.hasDrawEngine) return null;
+  // …and stabilisation means answers that are actually up early: §8's "E >= E*
+  // with >= 2 cheap answers by T3".
+  const cheapAnswers = nonLand
+    .filter((e) => e.feature.answerAxes.length > 0 && e.feature.c <= 3 && e.feature.s >= 1)
+    .reduce((sum, e) => sum + e.quantity, 0);
+  if (cheapAnswers < 2) return null;
   const durable = Math.min(clip(totals.E / totals.Estar), clip(totals.D / totals.Dstar));
   if (durable <= 0) return null;
 
+  // §8: a control deck closes with planeswalkers, repeatable damage/draw
+  // engines, manlands and typed "you win" permanents as readily as with a fat
+  // body - a creatureless list had NO finisher pool at all and returned W = 0.
   const isFinisher = (f: CardFeature) =>
     (f.power != null && f.power >= 4) ||
     /\bPlaneswalker\b/.test(f.card.type_line || '') ||
     f.isAltWin ||
+    f.isCreatureTokenProducer ||
+    RE_MANLAND.test(f.card.oracle_text || '') ||
+    (f.isDrawEngine && f.isDrainPayoff) ||
     Number(RE_REPEATABLE_DAMAGE.exec(f.card.oracle_text || '')?.[1] ?? 0) >= 3;
   const finishers = pickMembers(nonLand, commanders, isFinisher);
   const K = finishers.reduce((s, m) => s + (m.guaranteed ? 0 : m.quantity), 0);
@@ -522,6 +623,46 @@ export interface WinOutput extends ComponentOutput {
   closing: ClosingLine | null;
 }
 
+/** Diagnostic twin of `computeWin`: every recipe it built, with pool sizes,
+ * t* and u. Scripts only — the scorer never calls it. */
+export function winDiagnostic(
+  format: ScoreFormat, norms: FormatNorms, archetype: Archetype, N: number,
+  mainEntries: DeckEntry[], commanders: CardFeature[], totals: WinTotals,
+): string {
+  const nonLand = mainEntries.filter((e) => !e.feature.isLand);
+  const shape = gameShape(format);
+  const opponents = Math.max(1, shape.players - 1);
+  const combatTarget = shape.lifePerOpponent * opponents;
+  const rampBonus = rampBonusFor(nonLand);
+  const all = [...nonLand, ...commanders.map((f) => ({ feature: f, quantity: 1, guaranteed: true }))];
+  const recipes: Recipe[] = [...findComboRecipes(all)];
+  const pressure = pressureRecipes(format, N, nonLand, commanders, rampBonus, combatTarget, norms.poolSizeCap);
+  recipes.push(...pressure.recipes);
+  const drain = drainRecipe(format, N, nonLand, commanders, rampBonus, shape.lifePerOpponent, norms.poolSizeCap);
+  if (drain) recipes.push(drain);
+  const voltron = voltronRecipe(format, N, nonLand, commanders, rampBonus, opponents);
+  if (voltron) recipes.push(voltron);
+  const altWin = altWinRecipe(nonLand, commanders);
+  if (altWin) recipes.push(altWin);
+  const control = controlRecipe(format, norms, N, nonLand, commanders, totals);
+  if (control) recipes.push(control.recipe);
+  const lines = [
+    `combat ceiling by T12: bodies ${combatCeiling(format, N, pressure.bodies, rampBonus).toFixed(1)}, with conversion ${combatCeiling(format, N, pressure.converted, rampBonus).toFixed(1)} (target ${combatTarget})`,
+    `N=${N} target=${combatTarget} ramp=${rampBonus.toFixed(2)} E=${totals.E.toFixed(1)}/${totals.Estar.toFixed(1)} D=${totals.D.toFixed(1)}/${totals.Dstar.toFixed(1)} engine=${totals.hasDrawEngine}`,
+    `recipes built: ${recipes.length}`,
+    '| recipe | pools (members x r) | t* | u |',
+    '|---|---|---:|---:|',
+  ];
+  for (const r of recipes) {
+    const e = control && r.id === 'control'
+      ? { recipe: r, u: control.u, atTurn: 8, access: control.access }
+      : evaluateRecipe(format, norms, N, r, rampBonus);
+    const pools = r.pools.map((pl) => `${pl.members.length}x r${pl.r}`).join(' + ');
+    lines.push(`| ${r.label} | ${pools} | ${e.atTurn || r.tStar || '-'} | ${e.u.toFixed(3)} |`);
+  }
+  return lines.join(String.fromCharCode(10));
+}
+
 export function computeWin(
   format: ScoreFormat,
   norms: FormatNorms,
@@ -543,7 +684,7 @@ export function computeWin(
   const all = [...nonLand, ...commanders.map((f) => ({ feature: f, quantity: 1, guaranteed: true }))];
   const recipes: Recipe[] = [...findComboRecipes(all)];
 
-  recipes.push(...pressureRecipes(format, N, nonLand, commanders, rampBonus, combatTarget, norms.poolSizeCap));
+  recipes.push(...pressureRecipes(format, N, nonLand, commanders, rampBonus, combatTarget, norms.poolSizeCap).recipes);
   const drain = drainRecipe(format, N, nonLand, commanders, rampBonus, shape.lifePerOpponent, norms.poolSizeCap);
   if (drain) recipes.push(drain);
   const voltron = voltronRecipe(format, N, nonLand, commanders, rampBonus, opponents);

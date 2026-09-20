@@ -22,6 +22,7 @@ import { loadStandardCohorts, loadStandardDbFixture, ROOT } from './deck-score-f
 import { getDb } from '../src/lib/db';
 import type { DbCard } from '../src/lib/types';
 import { deriveCardFeature } from '../src/lib/deck-score-features';
+import { typalTheme, typalRecipe } from '../src/lib/deck-score-plans';
 import { PLAN_RECIPES, recipeFor, type PlanKey } from '../src/lib/deck-score-plans';
 import type { DeckEntry } from '../src/lib/deck-score-mana';
 
@@ -177,7 +178,43 @@ function commanderBands(raw: boolean): void {
   console.log(lines.join('\n'));
 }
 
+/** p25/p90 of the dynamic typal recipe's roles, over the sample decks that
+ * actually name a countable theme. */
+function typalBands(): void {
+  const byName = cardsByName();
+  const rows: Record<string, number[]> = { payoff: [], enabler: [] };
+  let decks = 0;
+  for (const deck of readCommanderSample()) {
+    const entries: DeckEntry[] = [];
+    let missing = 0;
+    for (const line of deck.cards) {
+      const card = byName.get(line.name.toLowerCase());
+      if (!card) { missing++; continue; }
+      entries.push({ feature: deriveCardFeature(card), quantity: line.quantity });
+    }
+    const nonLand = entries.filter((e) => !e.feature.isLand);
+    if (nonLand.length === 0 || missing > deck.cards.length * 0.1) continue;
+    const theme = typalTheme(nonLand.map((e) => e.feature));
+    if (theme.tribes.length === 0 && !theme.artifacts && !theme.party) continue;
+    decks++;
+    const recipe = typalRecipe(theme);
+    for (const role of recipe.roles) {
+      if (!(role.key in rows)) continue;
+      rows[role.key].push(nonLand
+        .filter((e) => e.feature.s >= 1 && recipe.roles.find((r) => r.fills(e.feature))?.key === role.key)
+        .reduce((a, e) => a + e.quantity, 0));
+    }
+  }
+  console.log(`typal cohort: ${decks} decks`);
+  console.log('| role | p10 | p25 | median | p75 | p90 |');
+  for (const [k, v] of Object.entries(rows)) {
+    v.sort((a, b) => a - b);
+    console.log(`| ${k} | ${pct(v, 10)} | ${pct(v, 25)} | ${pct(v, 50)} | ${pct(v, 75)} | ${pct(v, 90)} |`);
+  }
+}
+
 function main(): void {
+  if (process.argv.includes('typal')) { typalBands(); return; }
   if (process.argv.includes('commander')) { commanderBands(process.argv.includes('--raw')); return; }
   const probeArg = process.argv.indexOf('--probe');
   if (probeArg > 0) {
