@@ -4,19 +4,20 @@ W-ZERO AUDIT — brawl training, 1146 rows, catalogue 14924
 |---|---:|---:|
 | bad_input | 4/1146 (0.3%) | 0/797 (0.0%) |
 | unsupported_family | 0/1146 (0.0%) | 0/797 (0.0%) |
-| known_absent | 9/1146 (0.8%) | 9/797 (1.1%) |
+| predicate_short | 5/1146 (0.4%) | 5/797 (0.6%) |
+| known_absent | 0/1146 (0.0%) | 0/797 (0.0%) |
 | missing_prerequisite | 0/1146 (0.0%) | 0/797 (0.0%) |
-| **W = 0 or unavailable** | 13/1146 (1.1%) | 9/797 (1.1%) |
+| **W = 0 or unavailable** | 9/1146 (0.8%) | 5/797 (0.6%) |
 
-of those, 9 stabilise, hold a repeatable engine and a typed finisher, and fail ONLY on the finish predicate — the measured cost of replacing the hard-coded T8 control clock (section 10.6.3).
+of those, 5 stabilise, hold a repeatable engine and a typed finisher, and fail ONLY on the finish predicate — the measured cost of replacing the hard-coded T8 control clock (section 10.6.3).
 
-every family rejection across the 13 W-zero rows (a row can carry several):
-combo.pieces_missing 6, tokens.no_converter 5, drain.no_outlet 4, combat_wide.schedule_short@7/10 3, tokens.schedule_short@7/10 3, control.schedule_short@1/10 3, tokens.schedule_short@8/10 2, control.schedule_short@6/10 2, combat_wide.schedule_short@6/10 2, tokens.schedule_short@9/10 2, control.schedule_short@2/10 2, control.schedule_short@5/10 1, combat_wide.schedule_short@5/10 1, control.schedule_short@4/10 1, combat_wide.schedule_short@8/10 1, combat_wide.schedule_short@3/10 1, tokens.schedule_short@5/10 1, combat_wide.schedule_short@4/10 1
+every family rejection across the 9 W-zero rows (a row can carry several):
+combo.pieces_missing 4, tokens.schedule_short@9/10 3, tokens.no_converter 3, control.schedule_short@5/10 2, drain.no_outlet 2, combat_wide.schedule_short@8/10 2, spells.burst_short 2, combat_wide.schedule_short@6/10 1, spells.no_cast_trigger 1, combat_wide.schedule_short@7/10 1, spells.schedule_short@1/10 1, control.schedule_short@6/10 1, spells.schedule_short@0/10 1, control.schedule_short@1/10 1, combat_wide.schedule_short@4/10 1, tokens.schedule_short@6/10 1, spells.unverified 1, control.schedule_short@3/10 1, spells.schedule_short@3/10 1
 
 ### bad_input (4)
 gate: rule cap < 25 4
 cards: Gamble 3 (x17.5), Mind Stone 3 (x3.8), Gemstone Caverns 3 (x3.1), Mountain 3 (x2.4), Prismatic Vista 3 (x2.3), Polluted Delta 3 (x2.2), Arcane Signet 4 (x1.8), Command Tower 3 (x1.2)
 
-### known_absent (9)
-gate: combat_wide.schedule_short 9
-cards: Pirate's Landing 3 (x76.4), Electrostatic Field 3 (x47.7), Grab the Prize 4 (x42.4), Lindblum, Industrial Regency // Mage Siege 3 (x42.4), Boltwave 3 (x38.2), Breathe Your Last 3 (x34.7), Tragic Trajectory 3 (x34.7), Witch's Mark 3 (x27.3), Davriel, Soul Broker 3 (x25.5), Flashback 5 (x24.5)
+### predicate_short (5)
+gate: tokens.schedule_short 4, combat_wide.schedule_short 1
+cards: Flashback 3 (x26.4), Lightning Bolt 3 (x3.2), Marsh Flats 3 (x2.2), Prismatic Vista 3 (x1.8), Polluted Delta 3 (x1.7), Arcane Signet 3 (x1.1), Command Tower 3 (x1.0)

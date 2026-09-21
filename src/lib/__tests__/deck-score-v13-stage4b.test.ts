@@ -304,16 +304,22 @@ describe('stage 4b — Brawl fixture readings', () => {
     // Token/Food conversion line at T9 instead, W 68.4 -> 58.5, total 76 -> 67.
     // §10.6 forbids undoing a control correction to save an anchor, so the
     // regression is pinned here rather than patched.
+    // v1.4 stage 1c: 67 -> 90, OUT on the HIGH side. Vivi's own printed cast
+    // trigger is typed output now and the deck's spell schedule closes the
+    // 25-life Brawl predicate on T6, so W saturates (58.5 -> 98.4). Reported,
+    // not tuned: §10.6 forbids moving the band or the schedule to catch it.
     expect(vivi.S).toBe(96.6);
-    expect(vivi.total).toBe(67);
-    expect(vivi.total).toBeLessThan(70);
+    expect(vivi.total).toBe(90);
+    expect(vivi.total).toBeGreaterThan(85);
   });
 
   it('keeps Kuja and Azula in band and the 101-card Cabbage list capped', () => {
     const kuja = read('kuja-genome-sorcerer-arena');
     expect(kuja.reason).toContain('supports spells');
-    // 71 -> 63 on the same §9.4 control correction; still inside its 60-80 band.
-    expect(kuja.total).toBe(63);
+    // 71 -> 63 on the §9.4 control correction, then 63 -> 71 in stage 1c: the
+    // Wizard token Kuja makes carries a printed cast trigger, which the
+    // spellslinger schedule now prices. Back where it started, inside 60-80.
+    expect(kuja.total).toBe(71);
     expect(kuja.total).toBeGreaterThanOrEqual(60);
     const azula = read('fire-lord-azula-competitive');
     expect(azula.reason).toContain('supports spells');

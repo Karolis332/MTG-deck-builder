@@ -63,7 +63,7 @@ beforeAll(() => {
       id TEXT PRIMARY KEY, name TEXT, mana_cost TEXT, cmc REAL, type_line TEXT,
       oracle_text TEXT, colors TEXT, color_identity TEXT, legalities TEXT, layout TEXT,
       set_code TEXT, collector_number TEXT, rarity TEXT, image_uri_small TEXT,
-      image_uri_normal TEXT, produced_mana TEXT, edhrec_rank INTEGER, game_changer INTEGER, power TEXT, toughness TEXT
+      image_uri_normal TEXT, produced_mana TEXT, edhrec_rank INTEGER, game_changer INTEGER, power TEXT, toughness TEXT, loyalty TEXT
     );
     CREATE TABLE app_state (key TEXT PRIMARY KEY, value TEXT);
     CREATE TABLE collection (

@@ -21,7 +21,7 @@ import { loadMatchedPiles, loadCohortPiles, loadStudyControls, strideOrder, read
 import { readManifest, verifyCohortHashes, sha256 } from './deck-score-cohorts';
 import { scoreDeck } from '../src/lib/deck-score';
 import type { DbCard } from '../src/lib/types';
-import { deriveCardFeature } from '../src/lib/deck-score-features';
+import { deriveCardFeature, type CardFeature } from '../src/lib/deck-score-features';
 import { typalTheme, typalRecipe, evaluatePlan, evaluateTypal, evaluateClosing, isManlandFinisher, recipesFor, selectPlan, planFit, CLOSING_SUPPORT_BAND } from '../src/lib/deck-score-plans';
 import { PLAN_RECIPES, recipeFor, qBaselineFor, betterPlan, COMMANDER_BAND_REFERENCE, type PlanKey, type PlanRecipe } from '../src/lib/deck-score-plans';
 import { producerUtilisation } from '../src/lib/deck-score-producers';
@@ -40,7 +40,7 @@ import { WIN_FAMILIES } from '../src/lib/deck-score-win';
 import { SCORE_VERSION } from '../src/lib/deck-score';
 import { clip } from '../src/lib/deck-score-math';
 import { computeInteraction, computeAdvantage } from '../src/lib/deck-score-interaction';
-import { computeWin, winAudit, type WinAuditNote } from '../src/lib/deck-score-win';
+import { computeWin, winAudit, winDiagnostic, type WinAuditNote } from '../src/lib/deck-score-win';
 import type { DeckEntry } from '../src/lib/deck-score-mana';
 
 function pct(sorted: number[], p: number): number {
@@ -1126,6 +1126,12 @@ interface WzeroRow {
   codes: string[];
 }
 
+/** "62.3 of 120 expected damage by T12" -> the fraction of target reached. */
+function shortfallRank(detail: string): number {
+  const m = /^([\d.]+) of (\d+)/.exec(detail);
+  return m ? Number(m[1]) / Math.max(1, Number(m[2])) : 0;
+}
+
 /** "62.3 of 120 expected damage by T12" -> the tenth of target it reached. */
 function shortfallBin(detail: string): string {
   const m = /^([\d.]+) of (\d+)/.exec(detail);
@@ -1178,15 +1184,51 @@ function classifyWzero(
     if (copies >= fam.min) return { id: deck.id, klass: 'unsupported_family', cause: fam.key, names, codes };
   }
 
-  const shortest = notes.find((n: WinAuditNote) => n.code.endsWith('.schedule_short'));
-  if (shortest) return { id: deck.id, klass: 'known_absent', cause: shortest.code, names, codes };
+  // Stage 1c (§10.6.2): a family that BUILT a schedule and fell short of the
+  // finish predicate is not "known absent" — the deck holds a typed route and
+  // the model priced it. Only a deck with no typed route at all is absent.
+  // Stage 1b reported all 350 of these as absent, which read as a missing
+  // mechanic when it is a missing 40-120 damage.
+  const shortest = notes
+    .filter((n: WinAuditNote) => n.code.endsWith('.schedule_short') || n.code === 'spells.burst_short')
+    .sort((a: WinAuditNote, b: WinAuditNote) => shortfallRank(b.detail) - shortfallRank(a.detail))[0];
+  if (shortest) return { id: deck.id, klass: 'predicate_short', cause: shortest.code, names, codes };
 
   const prereq = notes.find((n: WinAuditNote) => PREREQ_CODES.has(n.code));
   if (prereq) return { id: deck.id, klass: 'missing_prerequisite', cause: prereq.code, names, codes };
   return { id: deck.id, klass: 'known_absent', cause: notes[0]?.code ?? 'no family present', names, codes };
 }
 
-function wzeroAudit(n: number, profile: SampleProfile, cohort: SampleCohort): void {
+/** `--dump <card>`: the full W diagnostic of the first W-zero row holding that
+ * card. Stage 1c used it to check the spellslinger schedule on real lists
+ * rather than on fixtures. */
+function wzeroDump(profile: SampleProfile, rows: WzeroRow[], byName: Map<string, DbCard>,
+  sample: ReturnType<typeof cohortSample>, card: string): void {
+  const hit = rows.find((r) => r.names.some((x) => x.toLowerCase() === card.toLowerCase()));
+  if (!hit) { console.log(`no W-zero row holds ${card}`); return; }
+  const deck = sample.find(({ deck: d }) => d.id === hit.id)?.deck;
+  if (!deck) return;
+  const main: DeckEntry[] = [];
+  const cmd: CardFeature[] = [];
+  let took = false;
+  for (const line of deck.cards) {
+    const c = byName.get(line.name.toLowerCase());
+    if (!c) continue;
+    if (!took && line.name.toLowerCase() === deck.commander.toLowerCase()) { cmd.push(deriveCardFeature(c)); took = true; continue; }
+    main.push({ feature: deriveCardFeature(c), quantity: line.quantity });
+  }
+  const N = main.reduce((a, e) => a + e.quantity, 0);
+  const norms = normsFor(profile);
+  const inter = computeInteraction(profile, norms, 'midrange', N, main);
+  const adv = computeAdvantage(profile, norms, 'midrange', N, main);
+  console.log('');
+  console.log(`### dump ${hit.id} (${deck.commander}) — class ${hit.klass}`);
+  console.log(winDiagnostic(profile, norms, 'midrange', N, main, cmd, {
+    E: inter.E, Estar: inter.Estar, D: adv.D, Dstar: adv.Dstar, hasDrawEngine: adv.hasDrawEngine,
+  }));
+}
+
+function wzeroAudit(n: number, profile: SampleProfile, cohort: SampleCohort, dump?: string): void {
   const byName = cardsByName();
   const manifest = readManifest();
   const eligible = new Set(
@@ -1209,7 +1251,7 @@ function wzeroAudit(n: number, profile: SampleProfile, cohort: SampleCohort): vo
   console.log('');
   console.log('| class | full stride | eligible subset |');
   console.log('|---|---:|---:|');
-  const classes = ['bad_input', 'unsupported_family', 'known_absent', 'missing_prerequisite'];
+  const classes = ['bad_input', 'unsupported_family', 'predicate_short', 'known_absent', 'missing_prerequisite'];
   const cell = (set: WzeroRow[], of: number, k: string): string => {
     const c = set.filter((r) => r.klass === k).length;
     return `${c}/${of} (${((100 * c) / Math.max(1, of)).toFixed(1)}%)`;
@@ -1254,6 +1296,7 @@ function wzeroAudit(n: number, profile: SampleProfile, cohort: SampleCohort): vo
     console.log(`gate: ${[...byCause.entries()].sort((a, b) => b[1] - a[1]).map(([c, v]) => `${c} ${v}`).join(', ')}`);
     console.log(`cards: ${top.map((t) => `${t.nm} ${t.c} (x${t.lift.toFixed(1)})`).join(', ') || 'none above threshold'}`);
   }
+  if (dump) wzeroDump(profile, rows, byName, sample, dump);
 }
 
 // ── §10.7 stage 1b: freeze the recipe/catalogue domain ────────────────────
@@ -1449,69 +1492,84 @@ function verifyFrozen(): void {
   process.exitCode = 1;
 }
 
+/**
+ * `--profile commander` used to satisfy `argv.includes('commander')` in `main`
+ * and silently run `commanderBands` instead of the named subcommand, so
+ * `controls --stride --profile commander` measured the wrong thing. The flag
+ * and its value are dropped before any subcommand or flag name is matched.
+ */
+export function subcommandArgs(argv: readonly string[]): string[] {
+  return argv.filter((a, i) => a !== '--profile' && argv[i - 1] !== '--profile');
+}
+
 function main(): void {
   // `--profile brawl` swaps the corpus, the draw legality and the scored
   // format everywhere below; the default is the Commander corpus, so every
   // stage-1..4a command line keeps its meaning.
   const pArg = process.argv.indexOf('--profile');
   const profile: SampleProfile = pArg > 0 && process.argv[pArg + 1] === 'brawl' ? 'brawl' : 'commander';
-  if (process.argv.includes('saturation')) {
-    saturationTable(profile, process.argv.includes('--holdout') ? 'holdout' : 'training',
-      process.argv.includes('--raw'));
+  const argv = subcommandArgs(process.argv);
+  if (argv.includes('saturation')) {
+    saturationTable(profile, argv.includes('--holdout') ? 'holdout' : 'training',
+      argv.includes('--raw'));
     return;
   }
-  if (process.argv.includes('domain')) { domainCommand(process.argv.includes('--write')); return; }
-  if (process.argv.includes('verify')) { verifyFrozen(); return; }
-  if (process.argv.includes('real')) {
-    const rArg = process.argv.indexOf('--n');
-    const pArgPiles = process.argv.indexOf('--piles');
-    if (process.argv.includes('--wzero')) {
-      wzeroAudit(rArg > 0 ? Number(process.argv[rArg + 1]) : 100000, profile,
-        process.argv.includes('--holdout') ? 'holdout' : 'training');
+  if (argv.includes('domain')) { domainCommand(argv.includes('--write')); return; }
+  if (argv.includes('verify')) { verifyFrozen(); return; }
+  if (argv.includes('real')) {
+    const rArg = argv.indexOf('--n');
+    const pArgPiles = argv.indexOf('--piles');
+    if (argv.includes('--wzero')) {
+      const dArg = argv.indexOf('--dump');
+      wzeroAudit(rArg > 0 ? Number(argv[rArg + 1]) : 100000, profile,
+        argv.includes('--holdout') ? 'holdout' : 'training',
+        dArg > 0 ? argv[dArg + 1] : undefined);
       return;
     }
-    realLists(rArg > 0 ? Number(process.argv[rArg + 1]) : 100000, profile,
-      process.argv.includes('--holdout') ? 'holdout' : 'training',
-      pArgPiles > 0 ? Number(process.argv[pArgPiles + 1]) : 1000);
+    realLists(rArg > 0 ? Number(argv[rArg + 1]) : 100000, profile,
+      argv.includes('--holdout') ? 'holdout' : 'training',
+      pArgPiles > 0 ? Number(argv[pArgPiles + 1]) : 1000);
     return;
   }
-  if (process.argv.includes('typal')) { typalBands(profile); return; }
-  if (process.argv.includes('closingfloor')) {
-    const fArg = process.argv.indexOf('--n');
-    closingFloor(fArg > 0 ? Number(process.argv[fArg + 1]) : 1000, profile,
-      process.argv.includes('--stride') ? 'holdout' : 'training');
+  if (argv.includes('typal')) { typalBands(profile); return; }
+  if (argv.includes('closingfloor')) {
+    const fArg = argv.indexOf('--n');
+    closingFloor(fArg > 0 ? Number(argv[fArg + 1]) : 1000, profile,
+      argv.includes('--stride') ? 'holdout' : 'training');
     return;
   }
-  if (process.argv.includes('closing')) { closingBands(); return; }
-  if (process.argv.includes('cedh')) { cedhSplit(); return; }
-  if (process.argv.includes('commander')) {
-    const cohort: SampleCohort | 'all' = process.argv.includes('--all')
-      ? 'all' : process.argv.includes('--holdout') ? 'holdout' : 'training';
-    commanderBands(process.argv.includes('--raw'), process.argv.includes('--evaluated'), cohort, profile);
+  if (argv.includes('closing')) { closingBands(); return; }
+  if (argv.includes('cedh')) { cedhSplit(); return; }
+  if (argv.includes('commander')) {
+    const cohort: SampleCohort | 'all' = argv.includes('--all')
+      ? 'all' : argv.includes('--holdout') ? 'holdout' : 'training';
+    commanderBands(argv.includes('--raw'), argv.includes('--evaluated'), cohort, profile);
     return;
   }
-  if (process.argv.includes('controls')) {
-    const cArg = process.argv.indexOf('--n');
-    freshControls(cArg > 0 ? Number(process.argv[cArg + 1]) : 200,
-      process.argv.includes('--stride'), process.argv.includes('--training'), profile);
+  if (argv.includes('controls')) {
+    const cArg = argv.indexOf('--n');
+    freshControls(cArg > 0 ? Number(argv[cArg + 1]) : 200,
+      argv.includes('--stride'), argv.includes('--training'), profile);
     return;
   }
-  if (process.argv.includes('negative')) {
-    const nArg = process.argv.indexOf('--n');
-    const n = nArg > 0 ? Number(process.argv[nArg + 1]) : 1000;
-    if (process.argv.includes('--engine') || process.argv.includes('--joint')) {
+  if (argv.includes('negative')) {
+    const nArg = argv.indexOf('--n');
+    const n = nArg > 0 ? Number(argv[nArg + 1]) : 1000;
+    if (argv.includes('--engine') || argv.includes('--joint')) {
       engineFloors(n, profile);
       return;
     }
     negativePrior(n, profile);
     return;
   }
-  const probeArg = process.argv.indexOf('--probe');
+  const probeArg = argv.indexOf('--probe');
   if (probeArg > 0) {
-    probe(Number(process.argv[probeArg + 1]));
+    probe(Number(argv[probeArg + 1]));
     return;
   }
   standardBands();
 }
 
-main();
+// Only when this file IS the entry point: `subcommandArgs` is imported by the
+// stage-1c tests, and an import must not run a 2,000-deck sweep.
+if (/deck-score-bands/.test(process.argv[1] ?? '')) main();

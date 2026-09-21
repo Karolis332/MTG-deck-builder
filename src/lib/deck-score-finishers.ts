@@ -31,7 +31,10 @@
  */
 import type { CardFeature } from './deck-score-features';
 
-export type FinisherKind = 'walker' | 'manland' | 'burn' | 'draw_damage' | 'anthem';
+export type FinisherKind = 'walker' | 'manland' | 'burn' | 'draw_damage' | 'anthem' | 'cast_trigger';
+
+/** Last turn any W schedule runs to (§1 W "within 12 turns"). */
+export const MAX_TURN = 12;
 
 /** One typed, non-creature damage source and everything the schedule must
  * debit for it. */
@@ -53,6 +56,19 @@ export interface FinisherOutput {
   turns: number;
   /** First own turn it can produce, counted from the turn it resolves. */
   deployDelay: number;
+  /**
+   * Output on turn `t` when it is not constant — a cast trigger produces what
+   * the deck casts that turn (deck-score-spells.ts). `perTurn` stays the mean
+   * over the scheduled turns, which is what sizes the access pool.
+   */
+  outputAt?: (t: number) => number;
+  /** A cast trigger whose accumulating output is CREATURE TOKENS: the token
+   * family must not also credit the card as a flat per-turn producer. */
+  makesTokens?: boolean;
+  /** Sources sharing this key pay `upkeepAt` ONCE per turn between them. */
+  shareKey?: string;
+  /** Turn-varying shared expenditure, charged once per `shareKey` per turn. */
+  upkeepAt?: (t: number) => number;
   trace: string;
 }
 
@@ -111,8 +127,9 @@ function walkerOutput(f: CardFeature, opponents: number): FinisherOutput | null 
   const start = Number(f.card.loyalty);
   // §10.2 "Unsupported effects add no invented useful mass"; an unreadable
   // starting loyalty is unknown output, and unknown output cannot prove a
-  // finish. (KNOWN GAP: `deck-gate-parse.ts` does not select the column, so
-  // every list resolved through it reaches here with loyalty undefined.)
+  // finish. (Stage 1c added `loyalty` to `deck-gate-parse.ts`'s `CARD_COLS`, so
+  // fixtures and Standard lists now reach here with the printed value, as the
+  // stride lists already did.)
   if (!Number.isFinite(start) || start <= 0) return null;
 
   const text = f.card.oracle_text || '';

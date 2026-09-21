@@ -30,7 +30,7 @@ beforeAll(() => {
     CREATE TABLE cards (
       id TEXT PRIMARY KEY, name TEXT, mana_cost TEXT, cmc REAL, type_line TEXT,
       oracle_text TEXT, colors TEXT, color_identity TEXT, legalities TEXT,
-      layout TEXT, set_code TEXT, produced_mana TEXT, rarity TEXT, edhrec_rank INTEGER, power TEXT, toughness TEXT
+      layout TEXT, set_code TEXT, produced_mana TEXT, rarity TEXT, edhrec_rank INTEGER, power TEXT, toughness TEXT, loyalty TEXT
     );
     CREATE TABLE collection (
       id INTEGER PRIMARY KEY AUTOINCREMENT, card_id TEXT, quantity INTEGER,

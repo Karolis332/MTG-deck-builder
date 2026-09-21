@@ -378,7 +378,7 @@ describe('v1.4 stage 1b — fixtures and frozen domain (§10.7)', () => {
   it('pins the frozen recipe/catalogue domain (§10.7 stage 1b)', () => {
     // A family added or dropped here invalidates every S norm stage 2 measures.
     expect(WIN_FAMILIES.slice().sort()).toEqual(
-      ['alt_win', 'combat_tall', 'combat_wide', 'combo', 'control', 'drain', 'tokens']);
+      ['alt_win', 'combat_tall', 'combat_wide', 'combo', 'control', 'drain', 'spells', 'tokens']);
     expect(TYPED_COMBOS.map((c) => c.id)).toContain('hulk-package');
     expect(TYPED_COMBOS.map((c) => c.id)).toContain('entomb-reanimate');
     expect(TYPED_COMBOS.map((c) => c.id)).toContain('blink-etb');

@@ -243,7 +243,13 @@ describe('stage 4a acceptance, fixture-backed', () => {
     // v1.4 stage 1b: 76 -> 67. The §9.4 control schedule replaced the flat T8
     // clock this list was closing on; it now closes on Token/Food conversion
     // at T9 (W 58.5). Out of band again, by the correction, not by a constant.
-    expect(r.score).toBe(67);
+    // v1.4 stage 1c: 67 -> 90, OUT HIGH. Vivi Ornitier's printed cast trigger
+    // (1 damage to each opponent AND a +1/+1 counter per noncreature spell) is
+    // typed now, so the deck's own spell schedule closes the 25-life Brawl
+    // predicate on turn 6 and W saturates at 98.4. Nothing was tuned to this
+    // list; the measured schedule simply overshoots a band that was reviewed
+    // against a flat T8 clock. Pinned with its cause, not patched (§10.6).
+    expect(r.score).toBe(90);
     expect(recipeFor('spells').roles.find((x) => x.key === 'spells')?.cmd?.max).toBe(26);
     expect(recipeFor('spells').roles.find((x) => x.key === 'spells')?.brawl?.max).toBe(34);
   });

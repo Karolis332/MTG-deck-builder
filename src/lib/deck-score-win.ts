@@ -26,7 +26,11 @@ import {
   tutorReachesSlot, unboundedDrawSink, libraryDrawSink, libraryWinCard,
   type ComboSlot, type TypedCombo,
 } from './deck-score-catalog/combos';
-import { finisherOutputOf, drawEventsPerTurn, type FinisherKind } from './deck-score-finishers';
+import { finisherOutputOf, drawEventsPerTurn, MAX_TURN, type FinisherKind } from './deck-score-finishers';
+import {
+  buildSpellSchedule, castTriggerFinisher, burstPayoffOf, burstFinish, isPrintedRitual,
+  type SpellSchedule, type BurstPayoff,
+} from './deck-score-spells';
 import { clip, H, Hf, buildDisjointAccessPolynomial, readAccessAt, drawSampleSizes, type Pool } from './deck-score-math';
 import { gameShape, type FormatNorms, type ScoreFormat } from './deck-score-norms';
 import type { DeckEntry, ComponentOutput } from './deck-score-mana';
@@ -48,15 +52,13 @@ interface Recipe {
   trace?: { resource: string; tutor: string; finish: string };
 }
 
-const MAX_TURN = 12;
-
 /**
  * §1 W's seven families, by the recipe id each publishes. Part of the frozen
  * domain (§10.7 stage 1b): stage 2 measures S norms against this recipe set,
  * so adding or removing a family is a score-version change, not an edit.
  */
 export const WIN_FAMILIES: readonly string[] = [
-  'combo', 'combat_wide', 'tokens', 'drain', 'combat_tall', 'alt_win', 'control',
+  'combo', 'combat_wide', 'tokens', 'drain', 'combat_tall', 'alt_win', 'control', 'spells',
 ];
 
 // ── W-zero audit (§10.6.2) ────────────────────────────────────────────────
@@ -127,6 +129,17 @@ function commanderMembers(commanders: CardFeature[], pred: (f: CardFeature) => b
   return commanders.filter(pred).map((f) => toMember(f, 1, true));
 }
 
+/**
+ * One entry per card name. Pools are built by concatenating family lists, and
+ * a card that is both (say) a creature body and a typed cast-trigger source
+ * would otherwise be counted twice in `poolK` and inflate `J_l`.
+ */
+function dedupeMembers(members: readonly Member[]): Member[] {
+  const byName = new Map<string, Member>();
+  for (const m of members) if (!byName.has(m.name)) byName.set(m.name, m);
+  return [...byName.values()];
+}
+
 function rampBonusFor(nonLand: DeckEntry[]): number {
   return Math.min(3, nonLand.filter((e) => e.feature.isRamp && e.feature.c <= 3).reduce((s, e) => s + e.quantity, 0));
 }
@@ -158,6 +171,12 @@ interface Source {
   trace?: string;
   /** Attacking bodies this copy puts on the board — what a pump multiplies. */
   bodies?: number;
+  /** Output on turn `t` when it varies (a cast trigger follows the deck's own
+   * spell schedule). `output` stays the mean, which is what sizes the pool. */
+  outputAt?: (t: number) => number;
+  /** Sources sharing this key split ONE `upkeepAt` expenditure per turn. */
+  shareKey?: string;
+  upkeepAt?: (t: number) => number;
 }
 
 function sourceOf(feature: CardFeature, quantity: number, output: number, guaranteed = false): Source {
@@ -240,6 +259,22 @@ function scheduleDamage(
       // P(one specific copy is among the cards seen by turn te−1) = n(te−1)/N.
       return s.quantity * seenBy(format, N, te - 1, extraDraws);
     };
+    // §9.4 "debit shared mana, fodder and life once". Every cast trigger on the
+    // board fires off the SAME spells, so the turn's spell mana is charged once
+    // for the whole family rather than once per copy, and only in proportion to
+    // how much of the family is actually online: a deck holding one Guttersnipe
+    // it has not drawn yet is not spending its whole turn casting for it. If
+    // the budget cannot cover the charge, every member scales down together.
+    const sharedScale = new Map<string, number>();
+    for (const s of priced) {
+      if (!s.shareKey || sharedScale.has(s.shareKey)) continue;
+      const online = onlineCopies(s);
+      if (online === null || online <= 0) continue;
+      const spend = (s.upkeepAt ? s.upkeepAt(t) : 0) * Math.min(1, online);
+      const scale = spend > 0 ? Math.min(1, budget / spend) : 1;
+      sharedScale.set(s.shareKey, scale);
+      budget = Math.max(0, budget - spend);
+    }
     for (const s of priced) {
       const online = onlineCopies(s);
       if (online === null) continue;
@@ -250,13 +285,14 @@ function scheduleDamage(
         if (copies <= 0) continue;
         budget -= copies * spend;
       }
+      const unit = (s.outputAt ? s.outputAt(t) : s.output) * (s.shareKey ? sharedScale.get(s.shareKey) ?? 1 : 1);
       if (s.kind === 'anthem') {
         // A pump has no output of its own; it is applied to the board below.
-        pumpPerBody += Math.min(copies, MAX_STACKED_PUMP) * s.output;
+        pumpPerBody += Math.min(copies, MAX_STACKED_PUMP) * unit;
         continue;
       }
       bodiesOnBoard += copies * (s.bodies ?? 0);
-      const dealt = copies * s.output;
+      const dealt = copies * unit;
       turnOutput += dealt;
       if (s.kind && dealt > 0) detail.push(`T${t} ${s.name} (${s.kind}) ${dealt.toFixed(2)}`);
     }
@@ -370,22 +406,38 @@ function isBody(f: CardFeature): boolean {
  * zone. Each carries its own activation cost, mana forgone and turn budget, so
  * the schedule can debit them; a card with no typed output is simply absent.
  */
-interface TypedFinishers { sources: Source[]; verified: Member[]; traces: string[]; extraDraws: number }
+interface TypedFinishers {
+  sources: Source[]; verified: Member[]; traces: string[]; extraDraws: number;
+  /** Names whose output is a cast trigger — the spellslinger line's own pool. */
+  castNames: Set<string>;
+  /** Cast triggers whose accumulating output IS creature tokens. The token
+   * family credits those names through this schedule, not a second flat time. */
+  castTokenNames: Set<string>;
+}
 
 function typedFinisherSources(
-  mainEntries: DeckEntry[], commanders: CardFeature[], opponents: number,
+  mainEntries: DeckEntry[], commanders: CardFeature[], opponents: number, sched: SpellSchedule,
 ): TypedFinishers {
   const draws = drawEventsPerTurn(mainEntries);
   const sources: Source[] = [];
   const verified: Member[] = [];
   const traces: string[] = [];
+  const castNames = new Set<string>();
+  const castTokenNames = new Set<string>();
   const add = (f: CardFeature, quantity: number, guaranteed: boolean): void => {
-    const o = finisherOutputOf(f, opponents, draws);
+    // A printed cast trigger is read first: it is the only typed output whose
+    // size depends on the deck around it rather than on the card alone.
+    const o = castTriggerFinisher(f, opponents, sched) ?? finisherOutputOf(f, opponents, draws);
     if (!o || o.perTurn <= 0) return;
+    if (o.kind === 'cast_trigger') {
+      castNames.add(f.card.name);
+      if (o.makesTokens) castTokenNames.add(f.card.name);
+    }
     sources.push({
       name: f.card.name, cmc: f.isLand ? 0 : f.c, quantity, guaranteed, output: o.perTurn,
       upkeepMana: o.upkeepMana, manaForgone: o.manaForgone, turns: o.turns,
       deployDelay: o.deployDelay, kind: o.kind, trace: o.trace,
+      outputAt: o.outputAt, shareKey: o.shareKey, upkeepAt: o.upkeepAt,
       // Only an animated land actually attacks; a walker, a pinger and a draw
       // trigger put no body on the board for a pump to raise.
       bodies: o.kind === 'manland' ? 1 : 0,
@@ -396,7 +448,7 @@ function typedFinisherSources(
   };
   for (const e of mainEntries) add(e.feature, e.quantity, false);
   for (const f of commanders) add(f, 1, true);
-  return { sources, verified, traces, extraDraws: draws - 1 };
+  return { sources, verified, traces, extraDraws: draws - 1, castNames, castTokenNames };
 }
 
 function pickMembers(
@@ -721,7 +773,10 @@ function pressureRecipes(
   // of the 298 W-zero Commander lists reach 50-90 % of the 120-damage predicate
   // on creatures alone, so this output is what the zero was made of.
   const pressureSources = [...bodies, ...typed.sources];
-  const pressureVerified = [...verifiedBodies, ...typed.verified];
+  // A cast trigger is the first typed output that can ALSO be a creature body
+  // (Vivi Ornitier, Guttersnipe), so the two verified lists overlap and the
+  // pool would count the card twice.
+  const pressureVerified = dedupeMembers([...verifiedBodies, ...typed.verified]);
   const pressure = scheduleRecipe('combat_wide', (r) => `Creature pressure (${r} threats)`,
     format, N, pressureSources, pressureVerified, [], rampBonus, target, poolSizeCap, typed.extraDraws, audit);
   if (pressure) out.push(pressure);
@@ -777,9 +832,13 @@ function pressureRecipes(
   ];
   // Creature-token makers ride the plain pressure schedule; Food-likes only
   // join once something converts them.
-  const tokenMakers = producerEntries((f) => f.isCreatureTokenProducer);
+  // A `create a 1/1 ... token` printed on a CAST TRIGGER is already scheduled
+  // per cast, accumulating, by `typed.sources`; crediting it a second time as a
+  // flat per-turn producer would count the same tokens twice.
+  const isCastTokenMaker = (f: CardFeature) => typed.castTokenNames.has(f.card.name);
+  const tokenMakers = producerEntries((f) => f.isCreatureTokenProducer && !isCastTokenMaker(f));
   const foodMakers = converters.length > 0
-    ? producerEntries((f) => isFoodLike(f) && !f.isCreatureTokenProducer)
+    ? producerEntries((f) => isFoodLike(f) && !f.isCreatureTokenProducer && !isCastTokenMaker(f))
     : [];
   if (converters.length === 0) {
     const stranded = producerEntries((f) => isFoodLike(f) && !f.isCreatureTokenProducer)
@@ -803,11 +862,11 @@ function pressureRecipes(
       ...bodies,
       ...producers.map((e) => sourceOf(e.feature, e.quantity, producerOutput(e.feature), isCommanderProducer(e))),
     ];
-    const verifiedConverted = [
+    const verifiedConverted = dedupeMembers([
       ...verifiedBodies,
       ...producers.filter((e) => e.feature.s >= 1)
         .map((e) => toMember(e.feature, e.quantity, isCommanderProducer(e))),
-    ];
+    ]);
     const extra: RecipePool[] = foodMakers.length > 0 ? [{ members: converters, r: 1 }] : [];
     const tokens = scheduleRecipe('tokens', (r) => `Token/Food conversion (${r} bodies)`,
       format, N, [...converted, ...typed.sources], [...verifiedConverted, ...typed.verified],
@@ -988,12 +1047,12 @@ function controlRecipe(
       .map((e) => sourceOf(e.feature, e.quantity, (e.feature.power || 0) * e.feature.s)),
   ];
   const finisherSources = [...bigBodies, ...pressure.tokenSources, ...typed.sources];
-  const finishers: Member[] = [
+  const finishers: Member[] = dedupeMembers([
     ...commanderMembers(commanders, (f) => isBigBody(f) && f.s >= 1),
     ...nonLand.filter((e) => isBigBody(e.feature) && e.feature.s >= 1).map((e) => toMember(e.feature, e.quantity)),
     ...pressure.tokenVerified,
     ...typed.verified,
-  ];
+  ]);
   if (finisherSources.length === 0 || finishers.length === 0) {
     return note(audit, 'control', 'control.no_finisher', 'stabilises and draws but holds no typed finisher output');
   }
@@ -1047,6 +1106,86 @@ function controlRecipe(
       },
     },
   };
+}
+
+/**
+ * (8) Spellslinger / storm. Two readings of the same deck, both scheduled:
+ *
+ *   cast triggers  the pingers ALONE, on the deck's own spell schedule, so a
+ *                  Guttersnipe shell that cannot win on creature power is not
+ *                  scored as though its only damage were 2/2 bodies.
+ *   burst          one-shot storm copies and {X} finishers, priced against the
+ *                  turn's mana plus typed rituals (§10.6.3's shape: a computed
+ *                  turn, never a default one).
+ *
+ * Both publish the family id `spells`; `computeWin` keeps whichever the delay
+ * decay and access term rate higher.
+ */
+function spellsRecipes(
+  format: ScoreFormat, N: number, nonLand: DeckEntry[], commanders: CardFeature[],
+  typed: TypedFinishers, sched: SpellSchedule, rampBonus: number, target: number,
+  poolSizeCap: number, opponents: number, audit?: Audit,
+): Recipe[] {
+  const out: Recipe[] = [];
+  const castSources = typed.sources.filter((s) => s.kind === 'cast_trigger');
+  if (castSources.length > 0) {
+    const verified = typed.verified.filter((m) => typed.castNames.has(m.name));
+    const line = scheduleRecipe('spells', (r, t) => `Spellslinger cast triggers (${r} sources, closes T${t})`,
+      format, N, castSources, verified, [], rampBonus, target, poolSizeCap, typed.extraDraws, audit);
+    if (line) {
+      line.trace = {
+        resource: sched.trace,
+        tutor: `${verified.length} verified trigger source(s) in the access pool`,
+        finish: castSources.map((c) => c.trace).filter(Boolean).slice(0, 3).join(' | ') || 'typed cast-trigger output',
+      };
+      out.push(line);
+    }
+  } else if (sched.noncreatureCopies > 0) {
+    note(audit, 'spells', 'spells.no_cast_trigger',
+      `${sched.noncreatureCopies} noncreature spells and no typed cast trigger on any permanent`);
+  }
+
+  const payoffs: BurstPayoff[] = [];
+  for (const e of nonLand) {
+    const p = burstPayoffOf(e.feature, e.quantity, false, opponents);
+    if (p) payoffs.push(p);
+  }
+  for (const f of commanders) {
+    const p = burstPayoffOf(f, 1, true, opponents);
+    if (p) payoffs.push(p);
+  }
+  if (payoffs.length === 0) return out;
+  const burst = burstFinish(sched, payoffs, (t) => availableManaAtTurn(t, rampBonus), target);
+  if (burst.tStar === null || !burst.best) {
+    note(audit, 'spells', 'spells.burst_short',
+      `${burst.ceiling.toFixed(1)} of ${target} storm/{X} burst damage by T${MAX_TURN}`);
+    return out;
+  }
+  const payoffPool: RecipePool = {
+    members: payoffs.map((p) => ({ name: p.name, cmc: p.cmc, quantity: p.quantity, guaranteed: p.guaranteed })),
+    r: 1,
+  };
+  const pools: RecipePool[] = [payoffPool];
+  const ritualMembers = burst.usesBurstMana
+    ? nonLand.filter((e) => isPrintedRitual(e.feature))
+      .map((e) => toMember(e.feature, e.quantity))
+    : [];
+  if (ritualMembers.length > 0) pools.push({ members: ritualMembers, r: 1 });
+  out.push({
+    id: 'spells',
+    label: `${burst.best.kind === 'storm' ? 'Storm' : '{X} finisher'} burst (${burst.best.name}, closes T${burst.tStar})`,
+    pools,
+    extraCost: 0,
+    criticalNames: new Set([burst.best.name, ...ritualMembers.map((m) => m.name)]),
+    tStar: burst.tStar,
+    trace: {
+      resource: sched.trace,
+      tutor: `${payoffPool.members.length} typed burst payoff(s)`
+        + `${ritualMembers.length > 0 ? ` + ${ritualMembers.length} typed ritual(s)` : ''}`,
+      finish: burst.trace,
+    },
+  });
+  return out;
 }
 
 function altWinRecipe(nonLand: DeckEntry[], commanders: CardFeature[]): Recipe | null {
@@ -1170,6 +1309,7 @@ interface BuiltRecipes {
   pressure: PressureOutput;
   rampBonus: number;
   combatTarget: number;
+  spells: SpellSchedule;
 }
 
 function buildRecipes(
@@ -1186,7 +1326,8 @@ function buildRecipes(
   const rampBonus = rampBonusFor(nonLand);
   const all = [...nonLand, ...commanders.map((f) => ({ feature: f, quantity: 1, guaranteed: true }))];
 
-  const typed = typedFinisherSources(mainEntries, commanders, opponents);
+  const spells = buildSpellSchedule(format, N, nonLand, (t) => availableManaAtTurn(t, rampBonus));
+  const typed = typedFinisherSources(mainEntries, commanders, opponents, spells);
   const recipes: Recipe[] = [...typedComboRecipes(all, opponents, audit)];
   const pressure = pressureRecipes(format, N, nonLand, commanders, rampBonus, combatTarget, norms.poolSizeCap, typed, audit);
   recipes.push(...pressure.recipes);
@@ -1196,9 +1337,11 @@ function buildRecipes(
   if (voltron) recipes.push(voltron);
   const altWin = altWinRecipe(nonLand, commanders);
   if (altWin) recipes.push(altWin);
+  recipes.push(...spellsRecipes(format, N, nonLand, commanders, typed, spells, rampBonus, combatTarget,
+    norms.poolSizeCap, opponents, audit));
   const control = controlRecipe(format, norms, N, nonLand, commanders, totals, typed, pressure, rampBonus, combatTarget, audit);
   if (control) recipes.push(control.recipe);
-  return { recipes, control, pressure, rampBonus, combatTarget };
+  return { recipes, control, pressure, rampBonus, combatTarget, spells };
 }
 
 /** Diagnostic twin of `computeWin`: every recipe it built, with pool sizes,
@@ -1207,11 +1350,15 @@ export function winDiagnostic(
   format: ScoreFormat, norms: FormatNorms, archetype: Archetype, N: number,
   mainEntries: DeckEntry[], commanders: CardFeature[], totals: WinTotals,
 ): string {
-  const { recipes, control, pressure, rampBonus, combatTarget } =
+  const { recipes, control, pressure, rampBonus, combatTarget, spells } =
     buildRecipes(format, norms, N, mainEntries, commanders, totals);
   const lines = [
     `combat ceiling by T12: bodies ${combatCeiling(format, N, pressure.bodies, rampBonus).toFixed(1)}, with conversion ${combatCeiling(format, N, pressure.converted, rampBonus).toFixed(1)} (target ${combatTarget})`,
     `N=${N} target=${combatTarget} ramp=${rampBonus.toFixed(2)} E=${totals.E.toFixed(1)}/${totals.Estar.toFixed(1)} D=${totals.D.toFixed(1)}/${totals.Dstar.toFixed(1)} engine=${totals.hasDrawEngine}`,
+    `spell schedule: ${spells.trace}`,
+    `  casts/turn T2..T12: ${spells.noncreature.slice(2).map((x) => x.toFixed(2)).join(' ')}`
+      + `; spell mana debited ${spells.manaSpent.slice(2).map((x) => x.toFixed(1)).join(' ')}`
+      + `; burst mana ${spells.burstMana.slice(2).map((x) => x.toFixed(1)).join(' ')}`,
     `recipes built: ${recipes.length}`,
     '| recipe | pools (members x r) | t* | u |',
     '|---|---|---:|---:|',
@@ -1220,6 +1367,15 @@ export function winDiagnostic(
     const e = evalOf(format, norms, N, r, rampBonus, control);
     const pools = r.pools.map((pl) => `${pl.members.length}x r${pl.r}`).join(' + ');
     lines.push(`| ${r.label} | ${pools} | ${e.atTurn || r.tStar || '-'} | ${e.u.toFixed(3)} |`);
+  }
+  // Any recipe that carries an audited trace prints it, not just control:
+  // §10.6.1 asks every admitted line to expose resource / tutor / finish.
+  for (const r of recipes) {
+    if (!r.trace || r.id === 'control') continue;
+    lines.push(`trace ${r.id} — ${r.label}`);
+    lines.push(`  resource: ${r.trace.resource}`);
+    lines.push(`  tutor:    ${r.trace.tutor}`);
+    lines.push(`  finish:   ${r.trace.finish}`);
   }
   if (control) {
     lines.push('');
