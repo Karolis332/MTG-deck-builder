@@ -489,7 +489,11 @@ describe('v1.4 stage 2 — `bands freeze` rewrites the norms it measures', () =>
     expect(moved).not.toBe(NORMS);
     expect(moved).toContain('brawl: 0.50000000,');
     // Only the one value changed: the doc comment above it is untouched.
-    expect(moved).toContain('PROVISIONAL — re-freeze after the §10.8 W domain');
+    // Re-pinned stage 2b (2026-09-21): the norms.ts comment moved from
+    // "PROVISIONAL — re-freeze after the §10.8 W domain" to "FROZEN on the
+    // stage-1d W domain" once `bands verify` showed the domain hash MATCH —
+    // the string this test greps for is the doc text, not a scored value.
+    expect(moved).toContain('FROZEN on the stage-1d W domain');
     expect(moved).toContain(`commander: ${Q_SLOT_SATURATION.commander.toFixed(8)},`);
   });
 

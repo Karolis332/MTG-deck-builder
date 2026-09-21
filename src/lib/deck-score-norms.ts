@@ -332,14 +332,14 @@ export function qSaturationFor(profile: ScoreProfile): number {
  * (`event_name|event_date`); its date grouping (27 families, below §10.2's 30)
  * and the unweighted quantile both give the same .4667, so the grouping choice
  * moves nothing there. Commander and Brawl weight by commander family.
- * PROVISIONAL — re-freeze after the §10.8 W domain. §10.8 changes what a
- * deck can prove (ritual mana paid once, creature and commander deployment
- * paid from the spell ledger, Commander horizon T12 -> T20, finish = three
- * opponents at 40 each), which moves closing-package ADMISSION and so the
- * `U` of every list whose selected recipe is a closing/tutor line. Re-run
- * `npx tsx scripts/deck-score-bands.ts freeze --write` — it re-measures
- * these three p80s AND the 45 band cells and rewrites both files, so the
- * next stage never hand-edits a norm.
+ * FROZEN on the stage-1d W domain (`scheduler: v14-stage1d`, domain hash
+ * `21fa0be02940c884620b08cfd3cbf9558fb42abf1f7d31428c38fda167da2c6b`,
+ * `verify-2026-09-19/deck-score/domain-v14.json`) 2026-09-21 stage 2b:
+ * `bands freeze` re-measured all three p80s and all 45 band cells on this
+ * domain and moved nothing (they were already measured here — see the
+ * MEASURED block above). `bands verify` reproduces this domain and these
+ * three statistics exactly; a future catalogue/scheduler change needs
+ * `bands freeze --write` again and a fresh domain hash in this comment.
  */
 export const Q_SLOT_SATURATION: Record<ScoreProfile, number> = {
   commander: 0.43434343,
