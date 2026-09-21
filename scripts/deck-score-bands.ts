@@ -458,6 +458,7 @@ function freshControls(n: number, stride: boolean, training = false, profile: Sa
     const reason = r.components.find((c) => c.key === 'synergy')?.reason ?? '';
     return {
       total: r.score, S: r.components.find((c) => c.key === 'synergy')?.score ?? 0,
+      W: r.components.find((c) => c.key === 'win')?.score ?? 0,
       commander: p.commander, key: plan.recipe.key, Q: plan.Q, R: plan.R,
       scored: /supports ([\w-]+);/.exec(reason)?.[1] ?? '?',
     };
@@ -479,6 +480,8 @@ function freshControls(n: number, stride: boolean, training = false, profile: Sa
     `fresh matched ${profile} controls: n=${scored.length}, ${new Set(scored.map((r) => r.commander)).size} distinct commanders`,
     `total   min=${totals[0]} median=${pct(totals, 50)} p95=${pct(totals, 95)} max=${totals[totals.length - 1]}  <25: ${totals.filter((v) => v < 25).length}/${totals.length}`,
     `S       min=${syn[0].toFixed(1)} median=${pct(syn, 50).toFixed(1)} p95=${pct(syn, 95).toFixed(1)} max=${syn[syn.length - 1].toFixed(1)}  <=5: ${syn.filter((v) => v <= 5).length}/${syn.length}`,
+    // §10.8 item 4: pile W quantiles, for the ordering gate against eligible real W.
+    `W       p10/p50/p90 = ${[10, 50, 90].map((p) => pct(scored.map((r) => r.W).sort((a, b) => a - b), p).toFixed(1)).join(' / ')}`,
     `S > 5 by selected recipe: ${byKey.join(', ') || 'none'}`,
     `S > 5 Q/R median: ${pct(leaking.map((r) => r.Q).sort((a, b) => a - b), 50).toFixed(3)} / ${pct(leaking.map((r) => r.R).sort((a, b) => a - b), 50).toFixed(3)}`,
     `closing (combo) reads: ${scored.filter((r) => r.scored === 'combo').length}/${scored.length}` +
@@ -985,19 +988,36 @@ function scoreStride(profile: SampleProfile, cohort: SampleCohort, n: number): R
   return rows;
 }
 
-function pileUnder25(profile: SampleProfile, kind: 'ctrl93' | 'ctrlmatch', n: number, realCoverage: number[]): string {
+/**
+ * §10.8 item 4 "Pile W ordering": the control row now carries the pile W
+ * quantiles beside the total count, because the registered gate compares
+ * pile W p10/p50/p90 against the eligible-real W quantiles of the same run.
+ * An unavailable pile counts as W = 0 in the quantile column, as §10.8 item 4
+ * words it ("count unavailable W … as 0 in a separate acceptance column").
+ */
+function pileUnder25(
+  profile: SampleProfile, kind: 'ctrl93' | 'ctrlmatch', n: number, realCoverage: number[],
+): { under: string; w: string; wq: [number, number, number] } {
   const piles = loadStudyControls(profile, kind, n, realCoverage);
   let under = 0;
   let nulls = 0;
+  const W: number[] = [];
   for (const pile of piles) {
     const payload = scoreDeckSafely({
       format: pile.input.format, main: [...pile.input.main], commander: [...pile.input.commander],
     });
-    if (!payload) { nulls++; continue; }
+    if (!payload) { nulls++; W.push(0); continue; }
     if (payload.score < 25) under++;
+    W.push(payload.components.find((c) => c.key === 'win')?.score ?? 0);
   }
-  return `${under}/${piles.length} (${((100 * under) / Math.max(1, piles.length)).toFixed(1)}%)` +
-    `${nulls ? `, ${nulls} unavailable` : ''}`;
+  W.sort((a, b) => a - b);
+  const wq: [number, number, number] = [pct(W, 10), pct(W, 50), pct(W, 90)];
+  return {
+    under: `${under}/${piles.length} (${((100 * under) / Math.max(1, piles.length)).toFixed(1)}%)` +
+      `${nulls ? `, ${nulls} unavailable` : ''}`,
+    w: `${wq[0].toFixed(1)} / ${wq[1].toFixed(1)} / ${wq[2].toFixed(1)}`,
+    wq,
+  };
 }
 
 function realLists(n: number, profile: SampleProfile, cohort: SampleCohort = 'training', piles = 1000): void {
@@ -1061,11 +1081,19 @@ function realLists(n: number, profile: SampleProfile, cohort: SampleCohort = 'tr
 
   if (piles > 0) {
     const realCoverage = rows.map((r) => r.coverage);
+    const eligibleW = rows.filter((r) => isEligible(r) && r.total !== null)
+      .map((r) => r.W as number).sort((a, b) => a - b);
+    const realW: [number, number, number] = [pct(eligibleW, 10), pct(eligibleW, 50), pct(eligibleW, 90)];
     console.log('');
-    console.log('| control construction | total < 25 |');
-    console.log('|---|---:|');
+    console.log(`| control construction | total < 25 | pile W p10/p50/p90 | gap vs eligible real W `
+      + `(${realW.map((x) => x.toFixed(1)).join(' / ')}) |`);
+    console.log('|---|---:|---:|---:|');
     for (const kind of ['ctrl93', 'ctrlmatch'] as const) {
-      console.log(`| ${kind} (n=${piles}, study seeds) | ${pileUnder25(profile, kind, piles, realCoverage)} |`);
+      const r = pileUnder25(profile, kind, piles, realCoverage);
+      const gaps = r.wq.map((x, i) => x - realW[i]);
+      console.log(`| ${kind} (n=${piles}, study seeds) | ${r.under} | ${r.w} | `
+        + `${gaps.map((g) => (g > 0 ? `+${g.toFixed(1)}` : g.toFixed(1))).join(' / ')}`
+        + `${gaps.some((g) => g > 0) ? ' POSITIVE' : ' ok'} |`);
     }
   }
 }
@@ -1600,7 +1628,7 @@ export function rewriteBandCell(
   for (let i = at + 1; i < lines.length; i++) {
     if (lines[i].includes('key: \'') && !lines[i].includes('{ key:')) break;   // next recipe
     if (!lines[i].includes(`{ key: '${role}',`)) continue;
-    const re = new RegExp(`${field}: \{ min: \d+, max: \d+ \}`);
+    const re = new RegExp(field + ': \\{ min: \\d+, max: \\d+ \\}');
     if (!re.test(lines[i])) throw new Error(`${plan}/${role} has no ${field} band to rewrite`);
     lines[i] = lines[i].replace(re, `${field}: { min: ${band.min}, max: ${band.max} }`);
     return lines.join(eol);

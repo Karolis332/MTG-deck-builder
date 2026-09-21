@@ -17,14 +17,17 @@
  * Nothing here writes the repo card DB or the catalogue shards.
  */
 import { describe, it, expect, vi } from 'vitest';
+import { readFileSync } from 'fs';
+import { join } from 'path';
 import type { DbCard } from '../types';
 import { scoreDeck } from '../deck-score';
 import { scoreDeckSafely, explainScoreUnavailable } from '../deck-score-input';
 import { computeSynergy } from '../deck-score-synergy';
 import {
   evaluatePlan, selectPlan, candidatePlans, planFit, recipeFor, defaultN0,
-  COMMANDER_BAND_REFERENCE, type PlanKey,
+  COMMANDER_BAND_REFERENCE, PLAN_RECIPES, type PlanKey,
 } from '../deck-score-plans';
+import { rewriteSaturations, rewriteBandCell } from '../../../scripts/deck-score-bands';
 import {
   Q_SLOT_SATURATION, qSlotSaturationFor, Q_BASELINE_JOINT_COMMANDER, type ScoreProfile,
 } from '../deck-score-norms';
@@ -460,5 +463,47 @@ describe('v1.4 stage 2 — access predicates read D', () => {
     // 99 with a reserved slot: the draw denominator is D either way, so the
     // access model cannot pay a deck for being short.
     expect(W(short)).toBe(W(short, [{ name: 'Unreadable Card', quantity: 1, board: 'main' }]));
+  });
+});
+
+// ── 9. §10.8: the freeze is a COMMAND, not a hand edit ────────────────────
+
+describe('v1.4 stage 2 — `bands freeze` rewrites the norms it measures', () => {
+  // §10.8 orders a W stage after this one and says stage 2's S norms must be
+  // re-frozen against the corrected W domain. These two helpers are the write
+  // half of `bands freeze --write`; they are pure so the round trip can be
+  // proved here without touching either source file.
+  const NORMS = readFileSync(join(process.cwd(), 'src', 'lib', 'deck-score-norms.ts'), 'utf-8');
+  const PLANS = readFileSync(join(process.cwd(), 'src', 'lib', 'deck-score-plans.ts'), 'utf-8');
+
+  it('round-trips the real norms file when nothing moved', () => {
+    expect(rewriteSaturations(NORMS, Q_SLOT_SATURATION)).toBe(NORMS);
+    const moved = rewriteSaturations(NORMS, { ...Q_SLOT_SATURATION, brawl: 0.5 });
+    expect(moved).not.toBe(NORMS);
+    expect(moved).toContain('brawl: 0.50000000,');
+    // Only the one value changed: the doc comment above it is untouched.
+    expect(moved).toContain('PROVISIONAL — re-freeze after the §10.8 W domain');
+    expect(moved).toContain(`commander: ${Q_SLOT_SATURATION.commander.toFixed(8)},`);
+  });
+
+  it('round-trips every frozen band cell in the real recipe file', () => {
+    let seen = 0;
+    for (const recipe of PLAN_RECIPES) {
+      for (const role of recipe.roles) {
+        if (role.cmd) { expect(rewriteBandCell(PLANS, recipe.key, role.key, 'commander', role.cmd)).toBe(PLANS); seen += 1; }
+        if (role.brawl) { expect(rewriteBandCell(PLANS, recipe.key, role.key, 'brawl', role.brawl)).toBe(PLANS); seen += 1; }
+      }
+    }
+    expect(seen).toBeGreaterThan(40);
+  });
+
+  it('moves ONE cell and refuses a cell it cannot locate', () => {
+    const target = PLAN_RECIPES.flatMap((r) => r.roles.filter((x) => x.cmd).map((x) => ({ r, x })))[0];
+    const out = rewriteBandCell(PLANS, target.r.key, target.x.key, 'commander', { min: 1, max: 2 });
+    const diff = out.split('\n').filter((l, i) => l !== PLANS.split('\n')[i]);
+    expect(diff).toHaveLength(1);
+    expect(diff[0]).toContain('cmd: { min: 1, max: 2 }');
+    expect(() => rewriteBandCell(PLANS, 'no-such-plan', 'threats', 'commander', { min: 1, max: 2 })).toThrow();
+    expect(() => rewriteBandCell(PLANS, target.r.key, 'no-such-role', 'commander', { min: 1, max: 2 })).toThrow();
   });
 });
