@@ -652,7 +652,12 @@ const V13_ATOMS: Atom[] = [
     // excluded by hand: Treasure is mana, Food is life, a Clue is a card —
     // §9.6 step 1's "Food / Treasure / creature-token distinctions" is
     // exactly what a bare `[A-Za-z]+ token` match would destroy.
-    re: /\bcreates? (?:a|an|one|two|three|x) (?:tapped )?(?!treasure|food|clue|blood|map|powerstone|incubator|junk|shard|gold|lander|role|wicked|cursed|young|monster|royal|sorcerer|mutavault)[A-Za-z][A-Za-z' -]* token\b|\bcreates? a [a-z, ]*creature token with those characteristics\b/gi,
+    // The `those characteristics` branch is FIRST: alternation is ORDERED, so
+    // with the generic branch first `exec` returned the shorter
+    // "Create a red and white creature token" and left " with those
+    // characteristics" as non-glue residue — `Outlaws' Merriment` stayed
+    // partial while its own atom matched.
+    re: /\bcreates? a [a-z, ]*creature token with those characteristics\b|\bcreates? (?:a|an|one|two|three|x) (?:tapped )?(?!treasure|food|clue|blood|map|powerstone|incubator|junk|shard|gold|lander|role|wicked|cursed|young|monster|royal|sorcerer|mutavault)[A-Za-z][A-Za-z' -]* token\b/gi,
     make: (m, ctx) => eff('closing', ctx, { produces: ['tokens', 'creature token', 'pressure'], outputBounds: { min: 1, max: null, unit: 'power' } }),
   },
   // A modal bullet that IS a token spec: `3/1 Human Warrior with trample`.
@@ -707,6 +712,42 @@ const V13_ATOMS: Atom[] = [
     re: /\bexiles? cards? from the top of your library until you exile [^.]*/gi,
     make: (m, ctx) => eff('advantage', ctx, { zones: ['library'], produces: ['selection'], outputBounds: { min: 0, max: null, unit: 'cards' } }),
   },
+  // ── stage 4c: four shapes from the `tazri-upgraded-arena` queue ─────────
+  // Each fires on >= 3 corpus cards (distinct names in `cards`); the queue's
+  // one- and two-card shapes are listed in the stage-4c report and
+  // deliberately NOT typed — a one-card rule is a hand-written exception
+  // wearing a generator's clothes.
+  {
+    kind: 'effect',
+    // 10 cards: the Wilds of Eldraine Role cycle. Every Role "attached to
+    // target creature YOU CONTROL" grants at least +1/+1, so one point of
+    // power is the bound the text guarantees; the rest is not claimed.
+    re: /\bcreates? (?:a|an) (?:cursed|monster|royal|sorcerer|wicked|young hero) role token attached to target creature you control/gi,
+    make: (m, ctx) => eff('closing', ctx, { produces: ['pressure'], outputBounds: { min: 1, max: 1, unit: 'power' } }),
+  },
+  {
+    kind: 'effect',
+    // 22 cards: the Panharmonicon family. It consumes triggers the deck
+    // already produces and yields one more — a doubler, not a source.
+    re: /\bif (?:a|an|one or more)[^.]*causes? a triggered ability of [^.]*to trigger, that ability triggers an additional time/gi,
+    make: (m, ctx) => eff('engine', ctx, { consumes: ['triggers'], produces: ['triggers'], outputBounds: { min: 1, max: 1, unit: 'triggers' } }),
+  },
+  {
+    kind: 'effect',
+    // 13 cards: `Add X mana in any combination of {U} and/or {R}`. The mana
+    // atom above only admits the "in any combination of colors" wording, so
+    // every card that spells its colours out stayed partial. X is bounded by
+    // the `where X is ...` rider, not here.
+    re: /\badds? (\w+) mana in any combination of (?:\{[WUBRGC]\}(?:,? (?:and\/or|and|or) )?)+/gi,
+    make: (m, ctx) => {
+      const n = num(m[1]) || 1;
+      return eff('mana', ctx, { produces: ['mana'], outputBounds: { min: n, max: n, unit: 'mana' } });
+    },
+  },
+  // 7 cards: a pure replacement RIDER on a cast-from-elsewhere effect. It
+  // makes no mechanical claim of its own — it only says where the card goes
+  // afterwards — so it consumes its span and produces nothing.
+  { kind: 'rider', re: /\bif (?:a|an) [a-z' \/]*spells? cast this way would be put into your graveyard, exiles? it instead/gi },
 ];
 ATOMS.push(...V13_ATOMS);
 

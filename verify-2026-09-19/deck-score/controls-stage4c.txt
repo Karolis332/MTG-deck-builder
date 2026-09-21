@@ -1,0 +1,42 @@
+### commander fresh stride
+fresh matched commander controls: n=200, 86 distinct commanders
+total   min=20 median=20 p95=20 max=31  <25: 197/200
+S       min=0.0 median=0.0 p95=0.0 max=14.0  <=5: 197/200
+S > 5 by selected recipe: aggro 2 (b=0.574, Q med 0.639), aristocrats 1 (b=0.574, Q med 0.588)
+S > 5 Q/R median: 0.603 / 0.606
+closing (combo) reads: 0/200
+S > 5 by commander: High Perfect Morcant 1, Zaxara, the Exemplary 1, Rat King, Verminister 1
+
+### brawl fresh stride
+fresh matched brawl controls: n=200, 86 distinct commanders
+total   min=19 median=20 p95=20 max=21  <25: 200/200
+S       min=0.0 median=0.0 p95=0.0 max=1.5  <=5: 200/200
+S > 5 by selected recipe: none
+S > 5 Q/R median: NaN / NaN
+closing (combo) reads: 13/200 [Raffine, Scheming Seer S 0.0 total 20] [Yuriko, the Tiger's Shadow S 0.0 total 20] [Orvar, the All-Form S 1.5 total 21] [Loki, Lord of Misrule S 0.0 total 20] [Ertai Resurrected S 0.0 total 20] [Kang the Conqueror S 0.0 total 20] [Raffine, Scheming Seer S 0.0 total 20] [Yuriko, the Tiger's Shadow S 0.0 total 20] [Orvar, the All-Form S 0.0 total 20] [Loki, Lord of Misrule S 0.0 total 20] [Yuriko, the Tiger's Shadow S 0.1 total 20] [Orvar, the All-Form S 0.0 total 20] [Gyruda, Doom of Depths S 0.0 total 20]
+S > 5 by commander: none
+
+### validation piles + anchors
+piles S  min 0 p50 0 p90 0 max 0  <=5: 200/200
+piles T  min 20 p50 20 max 20  <25: 200/200
+meren-powerhouse               score  75  S 100.0  78% supports aristocrats; weakest dependency outlet 10.0/2; 0 unsupported payoffs.
+precon-witherbloom             score  54  S  83.3  80% supports lifegain; weakest dependency value 5.0/6; 0 unsupported payoffs.
+standard-1445893-univerce      score  73  S 100.0  87% supports midrange; weakest dependency threats 6.0/4; 0 unsupported payoffs.
+vivi-battery-arena             score  76  S 100.0  73% supports spells; weakest dependency payoff 10.0/2; 2 unsupported payoffs.
+kuja-genome-sorcerer-arena     score  71  S 100.0  75% supports spells; weakest dependency payoff 14.0/2; 0 unsupported payoffs.
+fire-lord-azula-competitive    score  84  S  79.9  70% supports spells; weakest dependency payoff 4.0/2; 0 unsupported payoffs.
+cedhtop16-ballooncon6          score  91  S 100.0  73% supports combo; weakest dependency pieces 1.0/1; 0 unsupported payoffs.
+the-cabbage-merchant           score  56  S  44.8  65% supports conversion; weakest dependency output 3.0/4; 0 unsupported payoffs.
+tazri-upgraded-arena           score  20  S   0.0  66% supports typal; weakest dependency payoff 2.0/2; 0 unsupported payoffs.
+standard-1445867-aljce         score  68  S  84.7  64% supports aggro; weakest dependency pressure 6.0/4; 0 unsupported payoffs.
+cEDH   n=30 S p10 76.4 p50 90 p90 100 | total p50 88 | plans midrange=2 combo=28
+stdPos n=300 S p10 9.6 p50 69.7 p90 100 | total p50 54 | plans typal=3 midrange=111 aggro=100 spells=12 control=64 aristocrats=3 recursion=1 lifegain=6
+piles  n=200 S p10 0 p50 0 p90 0 | total p50 20 | plans control=70 counters=30 aggro=10 midrange=51 conversion=22 recursion=4 tokens=6 spells=6 lifegain=1
+cEDH median 88 (n=30); held-out Standard positive median 55 (n=120)
+
+### cedh
+| cohort | n | total median | S median | combo-plan reads | combo Q median |
+|---|---:|---:|---:|---:|---:|
+| training (first 20) | 20 | 88 | 89.9 | 18 | 0.662 |
+| holdout (last 10) | 10 | 90 | 93.8 | 10 | 0.676 |
+| all 30 | 30 | 88 | 90.0 | 28 | 0.667 |

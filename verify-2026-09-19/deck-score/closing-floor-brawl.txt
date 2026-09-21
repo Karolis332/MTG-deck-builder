@@ -1,0 +1,47 @@
+closing reads over matched brawl training controls: 0/1037 assemble a line, 0 would WIN §1 ordering; reviewed cEDH positives 28/30
+
+| population | n | Q p50 | Q p90 | Q p95 | Q p99 | Q max |
+|---|---:|---:|---:|---:|---:|---:|
+| controls that assemble a line | 0 | - | - | - | - | - |
+| controls whose closing plan WINS | 0 | - | - | - | - | - |
+| reviewed cEDH positives | 28 | 0.667 | 0.710 | 0.729 | 0.732 | 0.732 |
+
+| candidate rule | controls still winning | cEDH positives still reading combo | note |
+|---|---:|---:|---|
+| frozen today (b = 0.300) | 0 | 28 | the stage-4a 1/200 |
+| A: b = control p95 = NaN | 0 | 0 | positives below the floor lose their closing plan |
+| B: refuse a one-CARD pool (pieces <= 1) | 0 | 0 | 28 positive(s) have a one-card pool |
+
+| winning control | line | pieces | r | Q | R | fit | total |
+|---|---|---:|---:|---:|---:|---:|---:|
+
+| cEDH positive | line | pieces | r | Q | R | fit | wins | total |
+|---|---|---:|---:|---:|---:|---:|---|---:|
+| cedh-17 | alt_win | 1 | 1 | 0.600 | 1.000 | 0.735 | yes | 79 |
+| cedh-20 | alt_win | 1 | 1 | 0.611 | 1.000 | 0.764 | yes | 75 |
+| cedh-6 | alt_win | 1 | 1 | 0.620 | 1.000 | 0.787 | yes | 83 |
+| cedh-9 | alt_win | 1 | 1 | 0.620 | 1.000 | 0.787 | yes | 83 |
+| cedh-15 | alt_win | 1 | 1 | 0.620 | 1.000 | 0.787 | yes | 81 |
+| cedh-7 | alt_win | 1 | 1 | 0.629 | 1.000 | 0.811 | yes | 85 |
+| cedh-10 | alt_win | 1 | 1 | 0.629 | 1.000 | 0.811 | yes | 85 |
+| cedh-26 | alt_win | 1 | 1 | 0.629 | 1.000 | 0.811 | yes | 85 |
+| cedh-29 | alt_win | 1 | 1 | 0.639 | 1.000 | 0.838 | yes | 81 |
+| cedh-19 | alt_win | 1 | 1 | 0.643 | 1.000 | 0.848 | yes | 88 |
+| cedh-5 | alt_win | 1 | 1 | 0.658 | 1.000 | 0.887 | yes | 88 |
+| cedh-13 | alt_win | 1 | 1 | 0.662 | 1.000 | 0.899 | yes | 89 |
+| cedh-28 | alt_win | 1 | 1 | 0.662 | 1.000 | 0.899 | yes | 87 |
+| cedh-4 | alt_win | 1 | 1 | 0.662 | 1.000 | 0.900 | yes | 86 |
+| cedh-18 | alt_win | 1 | 1 | 0.667 | 1.000 | 0.912 | yes | 90 |
+| cedh-27 | alt_win | 1 | 1 | 0.676 | 1.000 | 0.936 | yes | 91 |
+| cedh-24 | alt_win | 1 | 1 | 0.676 | 1.000 | 0.938 | yes | 90 |
+| cedh-16 | alt_win | 1 | 1 | 0.681 | 1.000 | 0.948 | yes | 80 |
+| cedh-21 | alt_win | 1 | 1 | 0.690 | 1.000 | 0.974 | yes | 90 |
+| cedh-22 | alt_win | 1 | 1 | 0.690 | 1.000 | 0.974 | yes | 89 |
+| cedh-3 | alt_win | 1 | 1 | 0.704 | 1.000 | 1.000 | yes | 90 |
+| cedh-14 | alt_win | 1 | 1 | 0.704 | 1.000 | 1.000 | yes | 90 |
+| cedh-25 | alt_win | 1 | 1 | 0.704 | 1.000 | 1.000 | yes | 90 |
+| cedh-8 | alt_win | 1 | 1 | 0.710 | 1.000 | 1.000 | yes | 90 |
+| cedh-11 | alt_win | 1 | 1 | 0.710 | 1.000 | 1.000 | yes | 90 |
+| cedh-23 | alt_win | 1 | 1 | 0.714 | 1.000 | 1.000 | yes | 91 |
+| cedh-2 | alt_win | 1 | 1 | 0.729 | 1.000 | 1.000 | yes | 91 |
+| cedh-12 | alt_win | 1 | 1 | 0.732 | 1.000 | 1.000 | yes | 92 |

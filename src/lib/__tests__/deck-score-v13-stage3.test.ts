@@ -12,7 +12,7 @@ import {
   qBaselineFor, tutorReaches, tutorReachesInTwo, timelyStax,
   PLAN_RECIPES, CLOSING_SUPPORT_BAND, type PlanKey,
 } from '../deck-score-plans';
-import { Q_BASELINE, Q_BASELINE_CLOSING, Q_BASELINE_JOINT_COMMANDER, Q_BASELINE_JOINT_BRAWL } from '../deck-score-norms';
+import { Q_BASELINE, Q_BASELINE_CLOSING, Q_BASELINE_CLOSING_BRAWL, Q_BASELINE_JOINT_COMMANDER, Q_BASELINE_JOINT_BRAWL } from '../deck-score-norms';
 import { deriveCardFeature } from '../deck-score-features';
 import type { ClosingLine } from '../deck-score-win';
 import { loadMatchedPiles } from '../../../scripts/deck-score-piles';
@@ -93,7 +93,8 @@ describe('§9.6 step 3 — every recipe family answers to exactly one floor', ()
       // Stage 4b: Brawl has its own corpus, bands and floor, so a FAMILY floor
       // is per-profile; only the closing floor is shared. Standard keeps the
       // untouched .30 (§9.1 owns that path).
-      expect(qBaselineFor('brawl', key)).toBe(key === 'combo' ? floor : Q_BASELINE_JOINT_BRAWL);
+      // Stage 4c: the closing floor is per-profile too.
+      expect(qBaselineFor('brawl', key)).toBe(key === 'combo' ? Q_BASELINE_CLOSING_BRAWL : Q_BASELINE_JOINT_BRAWL);
       expect(qBaselineFor('standard', key)).toBe(Q_BASELINE);
     }
   });

@@ -26,7 +26,7 @@
  * useful supply over required supply.
  */
 import { clip } from './deck-score-math';
-import { Q_SATURATION, type ScoreProfile } from './deck-score-norms';
+import { qSaturationFor, type ScoreProfile } from './deck-score-norms';
 import type { DeckEntry, ComponentOutput } from './deck-score-mana';
 import { selectPlan, qBaselineFor, type PlanEvaluation } from './deck-score-plans';
 import { producerUtilisation } from './deck-score-producers';
@@ -82,7 +82,7 @@ export function computeSynergy(
   // §9.2: `S = 100*clip((Q-b)/(.70-b))*R`, the SAME objective `planFit`
   // maximised when it picked this recipe.
   const b = qBaselineFor(profile, plan.recipe.key);
-  const coherence = clip((Q - b) / (Q_SATURATION - b));
+  const coherence = clip((Q - b) / (qSaturationFor(profile) - b));
   const score = 100 * coherence * R;
 
   return {

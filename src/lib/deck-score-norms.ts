@@ -212,7 +212,7 @@ export const HARD_CAP_INVALID = 0;
 export const HARD_CAP_STRUCTURE = 19;
 export const HARD_CAP_UNRESOLVED = 39;
 
-export const SCORE_VERSION = '1.3.0-rc1';
+export const SCORE_VERSION = '1.3.0-rc2';
 
 /**
  * §8 "Pile separation belongs to S": `S = 100*clip((Q-.30)/(.70-.30))*R*B`.
@@ -223,6 +223,54 @@ export const SCORE_VERSION = '1.3.0-rc1';
  */
 export const Q_BASELINE = 0.30;
 export const Q_SATURATION = 0.70;
+
+/**
+ * v1.3 stage 4c: the Brawl saturation, MEASURED at the same percentile of the
+ * Brawl population that `.70` occupies in the Commander one.
+ *
+ * Stage 4b froze `Q_BASELINE_JOINT_BRAWL` at .675, which left a .025-wide
+ * window under a shared .70 saturation: kuja, vivi and azula all pinned at
+ * S = 100, so S separated a deck from a pile but no longer a deck from a deck.
+ * The floor is a property of the Brawl PILE population and was measured there;
+ * the saturation is a property of the Brawl DECK population, so it is measured
+ * there too rather than inherited.
+ *
+ * Statistic: the per-list MAXIMUM Q over all eleven recipes (selectable reads
+ * only — the same quantity `Q_BASELINE_JOINT_*` takes the p95 of), over the
+ * profile's TRAINING stride of REAL corpus lists. Re-print with
+ * `npx tsx scripts/deck-score-bands.ts saturation --profile <p> --raw`
+ * (`verify-2026-09-19/deck-score/saturation-{commander,brawl}.txt`).
+ *
+ * | max-recipe Q, training stride | n | p25 | p50 | p75 | p80 | p90 | p95 | max |
+ * |---|---:|---:|---:|---:|---:|---:|---:|---:|
+ * | commander | 1,838 | .523 | .603 | .683 | **.698** | .749 | .790 | .920 |
+ * | brawl | 1,165 | .548 | .626 | .695 | **.712** | .754 | .787 | .893 |
+ *
+ * `.70` sits at the 80.7th percentile of the Commander distribution, and
+ * Commander p80 is .698 — .002 from the frozen constant, inside the .002 step
+ * between adjacent percentiles there. So the shared constant IS p80 of the
+ * deck population it was chosen for, and p80 is what Brawl is frozen at.
+ *
+ * MEASURED WITH THE TYPED-COVERAGE GATE LIFTED, for the reason `evaluatedSupply`
+ * lifts it for the bands: corpus typed coverage is a property of the
+ * CATALOGUE's size, not of the decks (these lists sit at a median of .333
+ * Commander / .371 Brawl, against the .930 the floors' controls are drawn to).
+ * Gated, the Commander max-recipe Q p95 is .500 — BELOW the .574 floor — so the
+ * gated statistic cannot produce a saturation above the floor at all, and the
+ * number it would produce would move with every catalogue batch. See the
+ * stage-4c report: under the live gate the median corpus list scores S = 0,
+ * which is a catalogue-coverage defect, not a saturation one.
+ */
+export const Q_SATURATION_BRAWL = 0.712;
+
+/**
+ * Profile dispatch for the S saturation (§9.2 `S = 100*clip((Q-b)/(Qsat-b))*R`).
+ * Commander and Standard keep the spec's shared `.70`: moving the Commander
+ * constant is a spec change for §8/§9, not a stage decision.
+ */
+export function qSaturationFor(profile: ScoreProfile): number {
+  return profile === 'brawl' ? Q_SATURATION_BRAWL : Q_SATURATION;
+}
 
 /**
  * v1.3 §9.2 / §9.6 + stage 4a: ONE Q floor a plan must clear in a
@@ -339,6 +387,31 @@ export const Q_BASELINE_JOINT_BRAWL = 0.675;
  * for the same reason; this is the measurement that settles it.
  */
 export const Q_BASELINE_CLOSING = 0.323;
+
+/**
+ * v1.3 stage 4c: the Brawl closing floor, the SAME statistic on the Brawl
+ * corpus — the p95 of the closing plan's Q over matched Brawl controls that
+ * assemble a line at all. Re-print with
+ * `npx tsx scripts/deck-score-bands.ts closingfloor --profile brawl --n 1200 --stride`
+ * (`verify-2026-09-19/deck-score/closing-floor-brawl-holdout.txt`).
+ *
+ * | population | n | Q p50 | Q p90 | Q p95 | Q max |
+ * |---|---:|---:|---:|---:|---:|
+ * | Brawl controls that assemble a line | 106 | .279 | .328 | **.338** | .355 |
+ * | of those, the ones whose closing plan WINS | 26 | .303 | .338 | .349 | .355 |
+ * | reviewed cEDH positives (reference) | 28 | .667 | .710 | .729 | .732 |
+ *
+ * MEASURED ON THE HOLDOUT for the same structural reason the Commander one
+ * was: the 1,037-pile Brawl TRAINING cohort assembles ZERO closing lines
+ * (`closing-floor-brawl.txt`), so it cannot supply the statistic. The event is
+ * far commoner in Brawl than in Commander (106/501 = 21% against 46/853 =
+ * 5.4%) because a 100-card Arena pool is half the size and denser in
+ * alternate-win cards, which is exactly why Brawl needs its own number: the
+ * Commander .323 leaves 6 of 501 Brawl controls with a positive closing fit,
+ * .338 leaves 2. It costs no positive — the weakest reviewed cEDH line sits at
+ * .600, .245 above this floor.
+ */
+export const Q_BASELINE_CLOSING_BRAWL = 0.338;
 
 /**
  * §9.1 Standard deployment: a copy credited for a role with deadline `d`

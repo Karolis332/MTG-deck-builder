@@ -25,8 +25,9 @@ import type { DeckEntry } from './deck-score-mana';
 import type { ClosingLine } from './deck-score-win';
 import { producerUtilisation, type Utilisation } from './deck-score-producers';
 import {
-  DEPLOYMENT_PROBABILITY_TARGET, Q_BASELINE, Q_BASELINE_CLOSING, Q_BASELINE_JOINT_COMMANDER, Q_BASELINE_JOINT_BRAWL,
-  Q_SATURATION, type ScoreProfile,
+  DEPLOYMENT_PROBABILITY_TARGET, Q_BASELINE, Q_BASELINE_CLOSING, Q_BASELINE_CLOSING_BRAWL,
+  Q_BASELINE_JOINT_COMMANDER, Q_BASELINE_JOINT_BRAWL,
+  qSaturationFor, type ScoreProfile,
 } from './deck-score-norms';
 
 export type PlanKey = 'aggro' | 'midrange' | 'control' | 'aristocrats' | 'lifegain' | 'spells' | 'combo' | 'typal' | 'recursion' | 'conversion' | 'tokens' | 'counters';
@@ -1230,7 +1231,9 @@ export function qBaselineFor(profile: ScoreProfile, key: PlanKey): number {
   // complete by construction — so `combo` answers to its own measured
   // negative-control p95 (`Q_BASELINE_CLOSING`), which no reviewed cEDH
   // positive is anywhere near.
-  if (key === 'combo') return Q_BASELINE_CLOSING;
+  // Stage 4c: Brawl's closing population is its own — a 100-card Arena pool
+  // assembles a line on 21% of matched controls against Commander's 5.4%.
+  if (key === 'combo') return profile === 'brawl' ? Q_BASELINE_CLOSING_BRAWL : Q_BASELINE_CLOSING;
   // Stage 4b: Brawl has its own corpus, its own bands and therefore its own
   // measured floor — the Commander number grades a different population.
   return profile === 'brawl' ? Q_BASELINE_JOINT_BRAWL : Q_BASELINE_JOINT_COMMANDER;
@@ -1243,7 +1246,10 @@ export function qBaselineFor(profile: ScoreProfile, key: PlanKey): number {
  * another. */
 export function planFit(p: PlanEvaluation, profile: ScoreProfile = 'commander'): number {
   const b = qBaselineFor(profile, p.recipe.key);
-  return clip((p.Q - b) / (Q_SATURATION - b)) * p.R;
+  // Stage 4c: the saturation is per PROFILE. Brawl's floor sits .101 above
+  // Commander's, so a shared .70 left a .025-wide window in which every real
+  // Brawl deck pinned at S = 100 — see `Q_SATURATION_BRAWL`.
+  return clip((p.Q - b) / (qSaturationFor(profile) - b)) * p.R;
 }
 
 /** The §1 ordering, exposed so `deck-score.ts` can fold in the closing plan

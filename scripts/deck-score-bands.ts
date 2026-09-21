@@ -24,7 +24,7 @@ import { deriveCardFeature } from '../src/lib/deck-score-features';
 import { typalTheme, typalRecipe, evaluatePlan, evaluateTypal, evaluateClosing, isManlandFinisher, recipesFor, selectPlan, planFit, CLOSING_SUPPORT_BAND } from '../src/lib/deck-score-plans';
 import { PLAN_RECIPES, recipeFor, qBaselineFor, betterPlan, COMMANDER_BAND_REFERENCE, type PlanKey, type PlanRecipe } from '../src/lib/deck-score-plans';
 import { producerUtilisation } from '../src/lib/deck-score-producers';
-import { Q_BASELINE, Q_BASELINE_JOINT_COMMANDER, Q_BASELINE_JOINT_BRAWL, Q_SATURATION, normsFor, type ScoreProfile } from '../src/lib/deck-score-norms';
+import { Q_BASELINE, Q_BASELINE_JOINT_COMMANDER, Q_BASELINE_JOINT_BRAWL, qSaturationFor, normsFor, type ScoreProfile } from '../src/lib/deck-score-norms';
 import { clip } from '../src/lib/deck-score-math';
 import { computeInteraction, computeAdvantage } from '../src/lib/deck-score-interaction';
 import { computeWin } from '../src/lib/deck-score-win';
@@ -337,7 +337,7 @@ function engineFloors(n: number, profile: SampleProfile = 'commander'): void {
   const sUnder = (bGeneric: number, bEngine: number): number[] => perPile.map((reads) => {
     const fit = (r: Read): number => {
       const b = r.group === 'generic' ? bGeneric : bEngine;
-      return clip((r.Q - b) / (Q_SATURATION - b)) * r.R;
+      return clip((r.Q - b) / (qSaturationFor(profile) - b)) * r.R;
     };
     const pool = reads.some((r) => r.selectable) ? reads.filter((r) => r.selectable) : reads;
     return 100 * pool.reduce((m, r) => Math.max(m, fit(r)), 0);
@@ -384,8 +384,8 @@ function negativePrior(n: number, profile: SampleProfile = 'commander'): void {
     `| control typed coverage p25/median/p90 | ${pct(pileCoverage, 25).toFixed(3)}/${pct(pileCoverage, 50).toFixed(3)}/${pct(pileCoverage, 90).toFixed(3)} |`,
     '',
     `frozen ${profile === 'brawl' ? 'Q_BASELINE_JOINT_BRAWL' : 'Q_BASELINE_JOINT_COMMANDER'} = ${profile === 'brawl' ? Q_BASELINE_JOINT_BRAWL : Q_BASELINE_JOINT_COMMANDER}` +
-      ` (measured ${b.toFixed(3)}; ${b >= Q_SATURATION ? 'REJECTED: b >= .70' : 'accepted'})`,
-    `S <= 5 needs Q <= b + .05*(.70-b) = ${(b + 0.05 * (Q_SATURATION - b)).toFixed(3)} at R = 1.`,
+      ` (measured ${b.toFixed(3)}; ${b >= qSaturationFor(profile) ? 'REJECTED: b >= saturation' : 'accepted'})`,
+    `S <= 5 needs Q <= b + .05*(Qsat-b) = ${(b + 0.05 * (qSaturationFor(profile) - b)).toFixed(3)} at R = 1 (Qsat ${qSaturationFor(profile).toFixed(3)}).`,
   ].join('\n'));
 }
 
@@ -713,11 +713,11 @@ function closingFloor(n: number, profile: SampleProfile = 'commander', cohort: S
   const floorA = pct(qs, 95);
   lines.push('', '| candidate rule | controls still winning | cEDH positives still reading combo | note |', '|---|---:|---:|---|');
   const underFloor = (b: number): ClosingRead[] =>
-    controls.filter((r) => r.wins && clip((r.Q - b) / (Q_SATURATION - b)) * r.R > 0);
+    controls.filter((r) => r.wins && clip((r.Q - b) / (qSaturationFor(profile) - b)) * r.R > 0);
   lines.push(`| frozen today (b = ${Q_BASELINE.toFixed(3)}) | ${winners.length} | ` +
     `${positives.filter((r) => r.wins).length} | the stage-4a 1/200 |`);
   lines.push(`| A: b = control p95 = ${floorA.toFixed(3)} | ${underFloor(floorA).length} | ` +
-    `${positives.filter((r) => r.wins && clip((r.Q - floorA) / (Q_SATURATION - floorA)) * r.R > 0).length} | ` +
+    `${positives.filter((r) => r.wins && clip((r.Q - floorA) / (qSaturationFor('commander') - floorA)) * r.R > 0).length} | ` +
     `positives below the floor lose their closing plan |`);
   const oneCard = controls.filter((r) => r.wins && r.pieces <= 1);
   lines.push(`| B: refuse a one-CARD pool (pieces <= 1) | ${winners.length - oneCard.length} | ` +
@@ -737,12 +737,136 @@ function closingFloor(n: number, profile: SampleProfile = 'commander', cohort: S
   console.log(lines.join('\n'));
 }
 
+
+// ── stage 4c: per-profile S saturation ────────────────────────────────────
+//
+//   MTG_DB_DIR=... npx tsx scripts/deck-score-bands.ts saturation [--profile brawl]
+//
+// `S = 100*clip((Q-b)/(Q_sat-b))*R` was frozen with ONE saturation, .70, for
+// every profile (§8/§9.2). Stage 4b then measured the Brawl floor at .675, so
+// the Brawl window is .025 wide and every real Brawl list pins at S = 100:
+// S still separates a deck from a pile, but no longer a deck from a deck.
+//
+// This prints the statistic that decides it — the same one the floors are cut
+// from (the per-list MAXIMUM Q over all eleven recipes, selectable reads only,
+// `engineFloors`' JOINT row) — except over the profile's TRAINING stride of
+// REAL lists rather than over matched controls. The closing plan is excluded
+// for the same reason it is excluded there: it answers to its own floor and is
+// folded in after W names a line.
+function saturationTable(profile: SampleProfile, cohort: SampleCohort = 'training', raw = false): void {
+  const byName = cardsByName();
+  const decks = cohortSample(cohort, profile).map((r) => r.deck);
+  const generic = new Set<PlanKey>(GENERIC);
+  const families = PLAN_RECIPES.filter((r) => !generic.has(r.key));
+  type Read = { key: string; Q: number; R: number; b: number; selectable: boolean };
+  const perList: Read[][] = [];
+  const coverages: number[] = [];
+  let unresolved = 0;
+
+  for (const deck of decks) {
+    const entries: DeckEntry[] = [];
+    const commanders: DeckEntry[] = [];
+    const commanderName = deck.commander.toLowerCase();
+    let missing = 0;
+    let tookCommander = false;
+    for (const line of deck.cards) {
+      const card = byName.get(line.name.toLowerCase());
+      if (!card) { missing++; continue; }
+      const entry = { feature: deriveCardFeature(card), quantity: line.quantity };
+      // The commander is `guaranteed` supply to the scorer, never a library
+      // copy — the same split `loadMatchedPiles` gives a control.
+      if (!tookCommander && line.name.toLowerCase() === commanderName) { commanders.push(entry); tookCommander = true; continue; }
+      entries.push(entry);
+    }
+    unresolved += missing;
+    let nonLand = entries.filter((e) => !e.feature.isLand);
+    if (nonLand.length === 0 || missing > deck.cards.length * 0.1) continue;
+    const F = nonLand.reduce((a, e) => a + e.quantity, 0);
+    coverages.push(nonLand.filter((e) => e.feature.covered).reduce((a, e) => a + e.quantity, 0) / F);
+    // `--raw` lifts ONLY the typed-coverage gate, the way `evaluatedSupply`
+    // does for the bands: it separates "this list has no plan" from "the
+    // catalogue cannot read this list", which are different defects.
+    if (raw) nonLand = nonLand.map((e) => ({ ...e, feature: { ...e.feature, covered: true } }));
+    const N = entries.reduce((a, e) => a + e.quantity, 0) + commanders.length;
+    const util = producerUtilisation(nonLand, commanders);
+    const reads: Read[] = [];
+    const record = (key: string, e: ReturnType<typeof evaluatePlan>): void => {
+      reads.push({ key, Q: e.Q, R: e.R, b: qBaselineFor(profile, key as PlanKey), selectable: !e.hasEmptyEssential });
+    };
+    for (const recipe of families) record(recipe.key, evaluatePlan(recipe, N, nonLand, commanders, util, profile));
+    const typal = evaluateTypal(N, nonLand, commanders, util, profile);
+    if (typal) record('typal', typal);
+    for (const key of GENERIC) record(key, evaluatePlan(recipeFor(key), N, nonLand, commanders, util, profile));
+    perList.push(reads);
+  }
+
+  const selectableOf = (reads: Read[]): Read[] => (reads.some((r) => r.selectable) ? reads.filter((r) => r.selectable) : reads);
+  const maxQ = perList.map((reads) => reads.filter((r) => r.selectable).reduce((m, r) => Math.max(m, r.Q), 0)).sort((a, b) => a - b);
+  // `betterPlan` ranks on planFit and reports the same quantity, so S under a
+  // candidate saturation is reconstructed from the Q/R/b already measured.
+  const sUnder = (sat: number): number[] => perList
+    .map((reads) => 100 * selectableOf(reads).reduce((m, r) => Math.max(m, clip((r.Q - r.b) / (sat - r.b)) * r.R), 0))
+    .sort((a, b) => a - b);
+
+  const share = (v: number[], predicate: (x: number) => boolean): string =>
+    `${v.filter(predicate).length}/${v.length} (${((100 * v.filter(predicate).length) / v.length).toFixed(1)}%)`;
+  const frozen = qSaturationFor(profile as ScoreProfile);
+  // Where .70 sits in THIS profile's distribution: the share of real lists at
+  // or below it IS the percentile it occupies.
+  const percentileOf = (v: number[], x: number): number => (100 * v.filter((q) => q <= x).length) / v.length;
+
+  const lines = [
+    `${profile} ${cohort} stride: ${decks.length} lists, ${perList.length} resolved, ${unresolved} unresolved card rows, ` +
+      `${new Set(decks.map((d) => d.commander.toLowerCase())).size} distinct commanders`,
+    `floor b = ${qBaselineFor(profile as ScoreProfile, 'midrange').toFixed(3)}, frozen saturation = ${frozen.toFixed(3)}, ` +
+      `window width = ${(frozen - qBaselineFor(profile as ScoreProfile, 'midrange')).toFixed(3)}` +
+      `${raw ? ' — TYPED-COVERAGE GATE LIFTED (--raw)' : ''}`,
+    `typed coverage of these lists: p10 ${pct(coverages.slice().sort((a, b) => a - b), 10).toFixed(3)}, ` +
+      `p50 ${pct(coverages.slice().sort((a, b) => a - b), 50).toFixed(3)}, ` +
+      `p90 ${pct(coverages.slice().sort((a, b) => a - b), 90).toFixed(3)} ` +
+      `(the floors were measured on controls drawn to .930)`,
+    '',
+    '| statistic (max-recipe Q over real lists) | n | p25 | p50 | p75 | p80 | p90 | p95 | max |',
+    '|---|---:|---:|---:|---:|---:|---:|---:|---:|',
+    `| ${profile} ${cohort} | ${maxQ.length} | ${pct(maxQ, 25).toFixed(3)} | ${pct(maxQ, 50).toFixed(3)} | ` +
+      `${pct(maxQ, 75).toFixed(3)} | ${pct(maxQ, 80).toFixed(3)} | ${pct(maxQ, 90).toFixed(3)} | ` +
+      `${pct(maxQ, 95).toFixed(3)} | ${maxQ[maxQ.length - 1].toFixed(3)} |`,
+    '',
+    `Q_SATURATION .700 sits at the ${percentileOf(maxQ, 0.70).toFixed(1)}th percentile of this distribution ` +
+      `(p50 ${pct(maxQ, 50).toFixed(3)}, p75 ${pct(maxQ, 75).toFixed(3)}, p90 ${pct(maxQ, 90).toFixed(3)}, p95 ${pct(maxQ, 95).toFixed(3)}).`,
+    '',
+    '| candidate saturation | value | S = 100 share | S p10 | S p50 | S p90 | p10-p90 spread |',
+    '|---|---:|---:|---:|---:|---:|---:|',
+  ];
+  const candidates: Array<[string, number]> = [
+    ['frozen today', frozen],
+    ['spec .70', 0.70],
+    ['p50', pct(maxQ, 50)], ['p75', pct(maxQ, 75)], ['p80', pct(maxQ, 80)],
+    ['p90', pct(maxQ, 90)], ['p95', pct(maxQ, 95)],
+  ];
+  for (const [label, sat] of candidates) {
+    if (!Number.isFinite(sat) || sat <= qBaselineFor(profile as ScoreProfile, 'midrange')) {
+      lines.push(`| ${label} | ${sat.toFixed(3)} | REJECTED: <= b | - | - | - | - |`);
+      continue;
+    }
+    const S = sUnder(sat);
+    lines.push(`| ${label} | ${sat.toFixed(3)} | ${share(S, (x) => x >= 99.95)} | ${pct(S, 10).toFixed(1)} | ` +
+      `${pct(S, 50).toFixed(1)} | ${pct(S, 90).toFixed(1)} | ${(pct(S, 90) - pct(S, 10)).toFixed(1)} |`);
+  }
+  console.log(lines.join('\n'));
+}
+
 function main(): void {
   // `--profile brawl` swaps the corpus, the draw legality and the scored
   // format everywhere below; the default is the Commander corpus, so every
   // stage-1..4a command line keeps its meaning.
   const pArg = process.argv.indexOf('--profile');
   const profile: SampleProfile = pArg > 0 && process.argv[pArg + 1] === 'brawl' ? 'brawl' : 'commander';
+  if (process.argv.includes('saturation')) {
+    saturationTable(profile, process.argv.includes('--holdout') ? 'holdout' : 'training',
+      process.argv.includes('--raw'));
+    return;
+  }
   if (process.argv.includes('typal')) { typalBands(profile); return; }
   if (process.argv.includes('closingfloor')) {
     const fArg = process.argv.indexOf('--n');

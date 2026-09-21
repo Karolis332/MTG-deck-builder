@@ -1,0 +1,19 @@
+commander training stride: 1838 lists, 1838 resolved, 4 unresolved card rows, 200 distinct commanders
+floor b = 0.574, frozen saturation = 0.700, window width = 0.126 — TYPED-COVERAGE GATE LIFTED (--raw)
+typed coverage of these lists: p10 0.172, p50 0.338, p90 0.571 (the floors were measured on controls drawn to .930)
+
+| statistic (max-recipe Q over real lists) | n | p25 | p50 | p75 | p80 | p90 | p95 | max |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| commander training | 1838 | 0.523 | 0.603 | 0.683 | 0.698 | 0.749 | 0.790 | 0.920 |
+
+Q_SATURATION .700 sits at the 80.7th percentile of this distribution (p50 0.603, p75 0.683, p90 0.749, p95 0.790).
+
+| candidate saturation | value | S = 100 share | S p10 | S p50 | S p90 | p10-p90 spread |
+|---|---:|---:|---:|---:|---:|---:|
+| frozen today | 0.700 | 262/1838 (14.3%) | 0.0 | 15.7 | 100.0 | 100.0 |
+| spec .70 | 0.700 | 262/1838 (14.3%) | 0.0 | 15.7 | 100.0 | 100.0 |
+| p50 | 0.603 | 534/1838 (29.1%) | 0.0 | 49.5 | 100.0 | 100.0 |
+| p75 | 0.683 | 322/1838 (17.5%) | 0.0 | 18.2 | 100.0 | 100.0 |
+| p80 | 0.698 | 272/1838 (14.8%) | 0.0 | 15.9 | 100.0 | 100.0 |
+| p90 | 0.749 | 151/1838 (8.2%) | 0.0 | 11.3 | 93.5 | 93.5 |
+| p95 | 0.790 | 82/1838 (4.5%) | 0.0 | 9.1 | 76.0 | 76.0 |

@@ -23,7 +23,7 @@ import {
   COMMANDER_BAND_REFERENCE, type PlanKey, type PlanRole,
 } from '../deck-score-plans';
 import {
-  Q_BASELINE, Q_BASELINE_CLOSING, Q_BASELINE_JOINT_BRAWL, Q_BASELINE_JOINT_COMMANDER,
+  Q_BASELINE, Q_BASELINE_CLOSING, Q_BASELINE_CLOSING_BRAWL, Q_BASELINE_JOINT_BRAWL, Q_BASELINE_JOINT_COMMANDER,
   Q_SATURATION, profileOf,
 } from '../deck-score-norms';
 import { deriveCardFeature } from '../deck-score-features';
@@ -185,7 +185,8 @@ describe('stage 4b — band and floor dispatch by profile', () => {
       expect(qBaselineFor('standard', key)).toBe(Q_BASELINE);
     }
     expect(qBaselineFor('commander', 'combo')).toBe(Q_BASELINE_CLOSING);
-    expect(qBaselineFor('brawl', 'combo')).toBe(Q_BASELINE_CLOSING);
+    // Stage 4c: Brawl's closing population is its own measurement.
+    expect(qBaselineFor('brawl', 'combo')).toBe(Q_BASELINE_CLOSING_BRAWL);
     expect(qBaselineFor('standard', 'combo')).toBe(Q_BASELINE);
   });
 
@@ -287,7 +288,9 @@ describe('stage 4b — Brawl fixture readings', () => {
     expect(kuja.total).toBe(71);
     const azula = read('fire-lord-azula-competitive');
     expect(azula.reason).toContain('supports spells');
-    expect(azula.total).toBe(87);
+    // Stage 4c: 87 -> 84. Azula's spells Q is .705, under the measured Brawl
+    // saturation .712, so it no longer pins at S 100 (79.9). Still in 75-90.
+    expect(azula.total).toBe(84);
     const cabbage = read('cabbage-merchant-current-brawl');
     expect(cabbage.total).toBe(19);
     expect(cabbage.S).toBe(0);

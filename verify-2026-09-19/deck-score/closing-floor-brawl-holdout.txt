@@ -1,0 +1,67 @@
+closing reads over matched brawl holdout controls: 106/501 assemble a line, 26 would WIN §1 ordering; reviewed cEDH positives 28/30
+
+| population | n | Q p50 | Q p90 | Q p95 | Q p99 | Q max |
+|---|---:|---:|---:|---:|---:|---:|
+| controls that assemble a line | 106 | 0.279 | 0.328 | 0.338 | 0.349 | 0.355 |
+| controls whose closing plan WINS | 26 | 0.303 | 0.338 | 0.349 | 0.355 | 0.355 |
+| reviewed cEDH positives | 28 | 0.667 | 0.710 | 0.729 | 0.732 | 0.732 |
+
+| candidate rule | controls still winning | cEDH positives still reading combo | note |
+|---|---:|---:|---|
+| frozen today (b = 0.300) | 26 | 28 | the stage-4a 1/200 |
+| A: b = control p95 = 0.338 | 2 | 28 | positives below the floor lose their closing plan |
+| B: refuse a one-CARD pool (pieces <= 1) | 0 | 0 | 28 positive(s) have a one-card pool |
+
+| winning control | line | pieces | r | Q | R | fit | total |
+|---|---|---:|---:|---:|---:|---:|---:|
+| Yuriko, the Tiger's Shadow (351214490) | alt_win | 1 | 1 | 0.355 | 1.000 | 0.082 | 27 |
+| Orvar, the All-Form (358096219) | alt_win | 1 | 1 | 0.349 | 0.500 | 0.034 | 23 |
+| Yuriko, the Tiger's Shadow (363658990) | alt_win | 1 | 1 | 0.338 | 1.000 | 0.040 | 23 |
+| Gyruda, Doom of Depths (348690472) | alt_win | 1 | 1 | 0.338 | 1.000 | 0.040 | 23 |
+| Gyruda, Doom of Depths (348662927) | alt_win | 1 | 1 | 0.333 | 1.000 | 0.027 | 22 |
+| Raffine, Scheming Seer (348703848) | alt_win | 1 | 1 | 0.328 | 1.000 | 0.012 | 21 |
+| Gyruda, Doom of Depths (348673353) | alt_win | 1 | 1 | 0.322 | 1.000 | 0.000 | 20 |
+| Orvar, the All-Form (355638199) | alt_win | 1 | 1 | 0.319 | 0.500 | 0.000 | 20 |
+| Yuriko, the Tiger's Shadow (377673970) | alt_win | 1 | 1 | 0.317 | 1.000 | 0.000 | 20 |
+| Loki, Lord of Misrule (276328863) | alt_win | 1 | 1 | 0.311 | 0.500 | 0.000 | 20 |
+| Yuriko, the Tiger's Shadow (364454802) | alt_win | 1 | 1 | 0.308 | 0.500 | 0.000 | 20 |
+| Splinter, Radical Rat (348700205) | alt_win | 1 | 1 | 0.305 | 1.000 | 0.000 | 20 |
+| Yuriko, the Tiger's Shadow (348694624) | alt_win | 1 | 1 | 0.303 | 1.000 | 0.000 | 20 |
+| Orvar, the All-Form (348665745) | alt_win | 1 | 1 | 0.297 | 0.500 | 0.000 | 20 |
+| Ertai Resurrected (348670121) | alt_win | 1 | 1 | 0.293 | 0.500 | 0.000 | 20 |
+| Gyruda, Doom of Depths (348699149) | alt_win | 1 | 1 | 0.293 | 1.000 | 0.000 | 20 |
+| Kang the Conqueror (348648044) | alt_win | 1 | 1 | 0.290 | 0.500 | 0.000 | 20 |
+| Orvar, the All-Form (348691818) | alt_win | 1 | 1 | 0.290 | 0.500 | 0.000 | 20 |
+| Raffine, Scheming Seer (348702871) | alt_win | 1 | 1 | 0.288 | 1.000 | 0.000 | 20 |
+| Yuriko, the Tiger's Shadow (348704795) | alt_win | 1 | 1 | 0.286 | 1.000 | 0.000 | 20 |
+
+| cEDH positive | line | pieces | r | Q | R | fit | wins | total |
+|---|---|---:|---:|---:|---:|---:|---|---:|
+| cedh-17 | alt_win | 1 | 1 | 0.600 | 1.000 | 0.735 | yes | 79 |
+| cedh-20 | alt_win | 1 | 1 | 0.611 | 1.000 | 0.764 | yes | 75 |
+| cedh-6 | alt_win | 1 | 1 | 0.620 | 1.000 | 0.787 | yes | 83 |
+| cedh-9 | alt_win | 1 | 1 | 0.620 | 1.000 | 0.787 | yes | 83 |
+| cedh-15 | alt_win | 1 | 1 | 0.620 | 1.000 | 0.787 | yes | 81 |
+| cedh-7 | alt_win | 1 | 1 | 0.629 | 1.000 | 0.811 | yes | 85 |
+| cedh-10 | alt_win | 1 | 1 | 0.629 | 1.000 | 0.811 | yes | 85 |
+| cedh-26 | alt_win | 1 | 1 | 0.629 | 1.000 | 0.811 | yes | 85 |
+| cedh-29 | alt_win | 1 | 1 | 0.639 | 1.000 | 0.838 | yes | 81 |
+| cedh-19 | alt_win | 1 | 1 | 0.643 | 1.000 | 0.848 | yes | 88 |
+| cedh-5 | alt_win | 1 | 1 | 0.658 | 1.000 | 0.887 | yes | 88 |
+| cedh-13 | alt_win | 1 | 1 | 0.662 | 1.000 | 0.899 | yes | 89 |
+| cedh-28 | alt_win | 1 | 1 | 0.662 | 1.000 | 0.899 | yes | 87 |
+| cedh-4 | alt_win | 1 | 1 | 0.662 | 1.000 | 0.900 | yes | 86 |
+| cedh-18 | alt_win | 1 | 1 | 0.667 | 1.000 | 0.912 | yes | 90 |
+| cedh-27 | alt_win | 1 | 1 | 0.676 | 1.000 | 0.936 | yes | 91 |
+| cedh-24 | alt_win | 1 | 1 | 0.676 | 1.000 | 0.938 | yes | 90 |
+| cedh-16 | alt_win | 1 | 1 | 0.681 | 1.000 | 0.948 | yes | 80 |
+| cedh-21 | alt_win | 1 | 1 | 0.690 | 1.000 | 0.974 | yes | 90 |
+| cedh-22 | alt_win | 1 | 1 | 0.690 | 1.000 | 0.974 | yes | 89 |
+| cedh-3 | alt_win | 1 | 1 | 0.704 | 1.000 | 1.000 | yes | 90 |
+| cedh-14 | alt_win | 1 | 1 | 0.704 | 1.000 | 1.000 | yes | 90 |
+| cedh-25 | alt_win | 1 | 1 | 0.704 | 1.000 | 1.000 | yes | 90 |
+| cedh-8 | alt_win | 1 | 1 | 0.710 | 1.000 | 1.000 | yes | 90 |
+| cedh-11 | alt_win | 1 | 1 | 0.710 | 1.000 | 1.000 | yes | 90 |
+| cedh-23 | alt_win | 1 | 1 | 0.714 | 1.000 | 1.000 | yes | 91 |
+| cedh-2 | alt_win | 1 | 1 | 0.729 | 1.000 | 1.000 | yes | 91 |
+| cedh-12 | alt_win | 1 | 1 | 0.732 | 1.000 | 1.000 | yes | 92 |

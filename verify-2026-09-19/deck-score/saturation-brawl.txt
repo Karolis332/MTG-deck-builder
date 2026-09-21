@@ -1,0 +1,19 @@
+brawl training stride: 1166 lists, 1165 resolved, 7 unresolved card rows, 200 distinct commanders
+floor b = 0.675, frozen saturation = 0.712, window width = 0.037 — TYPED-COVERAGE GATE LIFTED (--raw)
+typed coverage of these lists: p10 0.200, p50 0.373, p90 0.579 (the floors were measured on controls drawn to .930)
+
+| statistic (max-recipe Q over real lists) | n | p25 | p50 | p75 | p80 | p90 | p95 | max |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| brawl training | 1165 | 0.550 | 0.627 | 0.695 | 0.712 | 0.754 | 0.787 | 0.893 |
+
+Q_SATURATION .700 sits at the 76.4th percentile of this distribution (p50 0.627, p75 0.695, p90 0.754, p95 0.787).
+
+| candidate saturation | value | S = 100 share | S p10 | S p50 | S p90 | p10-p90 spread |
+|---|---:|---:|---:|---:|---:|---:|
+| frozen today | 0.712 | 143/1165 (12.3%) | 0.0 | 0.0 | 100.0 | 100.0 |
+| spec .70 | 0.700 | 168/1165 (14.4%) | 0.0 | 0.0 | 100.0 | 100.0 |
+| p50 | 0.627 | REJECTED: <= b | - | - | - | - |
+| p75 | 0.695 | 179/1165 (15.4%) | 0.0 | 0.0 | 100.0 | 100.0 |
+| p80 | 0.712 | 150/1165 (12.9%) | 0.0 | 0.0 | 100.0 | 100.0 |
+| p90 | 0.754 | 85/1165 (7.3%) | 0.0 | 0.0 | 89.5 | 89.5 |
+| p95 | 0.787 | 39/1165 (3.3%) | 0.0 | 0.0 | 63.8 | 63.8 |

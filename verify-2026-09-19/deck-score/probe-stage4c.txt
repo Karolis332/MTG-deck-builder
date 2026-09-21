@@ -1,0 +1,31 @@
+| Fixture | Format | Score | M | C | I | A | W | S | cap | band | in |
+|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---|---|
+| meren-powerhouse | commander | 75 | 97.8 | 94.4 | 95 | 82 | 68.7 | 100 | 75 | 65-80 | IN |
+| cabbage-cedh-input | commander | 41 | 82.5 | 85.1 | 97.5 | 85 | 74.3 | 25.8 | 40.6 | 35-50 | IN |
+| precon-witherbloom | commander | 54 | 96.9 | 83 | 60.7 | 65 | 42.5 | 83.3 | 54 | 40-55 | IN |
+| the-cabbage-merchant | commander | 56 | 92.3 | 94.6 | 62.5 | 74.6 | 48.8 | 44.8 | 55.8 | 55-70 | IN |
+| imotekh-the-stormlord | commander | 60 | 88.1 | 93.4 | 51.9 | 74.6 | 50.6 | 77.7 | 60.5 | 45-65 | IN |
+| tazri-beacon-of-unity | commander | 49 | 90.4 | 94.4 | 96 | 70.1 | 59.8 | 35.8 | 48.6 | 40-60 | IN |
+| meren-of-clan-nel-toth | commander | 19 | 97.5 | 95.6 | 95 | 81.8 | 68.7 | 100 | 75 | 0-19 | IN |
+| ramos-dragon-engine | commander | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 20 | 0-19 | IN |
+| cabbage-merchant-current-brawl | brawl | 19 | 95.6 | 94.6 | 71 | 73.5 | 85 | 0 | 20 | 0-19 | IN |
+| tazri-upgraded-arena | brawl | 20 | 60.4 | 87.9 | 84 | 73.5 | 92.2 | 0 | 20 | 45-65 | OUT |
+| kuja-genome-sorcerer-arena | brawl | 71 | 90 | 84.7 | 92 | 91.7 | 63.7 | 100 | 71 | 60-80 | IN |
+| vivi-battery-arena | brawl | 76 | 87.8 | 82 | 100 | 100 | 69.5 | 100 | 75.6 | 70-85 | IN |
+| fire-lord-azula-competitive | competitivebrawl | 84 | 83.5 | 82 | 96 | 94.6 | 83.6 | 79.9 | 83.9 | 75-90 | IN |
+| cedhtop16-ballooncon6 | commander | 91 | 93.8 | 75 | 100 | 78.6 | 90.5 | 100 | 92.4 | 80-95 | IN |
+| standard-1445893-univerce | standard | 73 | 65.8 | 60.5 | 94 | 77.5 | 85 | 100 | 72.6 | 70-90 | IN |
+| standard-1445867-aljce | standard | 68 | 75.1 | 86.4 | 89 | 86.3 | 60.1 | 84.7 | 68.1 | 65-90 | IN |
+
+piles n=200 min=20 median=20 max=20 over25=0 S<=5=200/200
+
+Standard held-out cohorts (newest 40% by event_date):
+| cohort | n | total median | S median | S zeros | W median | W zeros |
+|---|---:|---:|---:|---:|---:|---:|
+| positives | 120 | 55 | 84.7 | 3 | 85 | 1 |
+| losing field | 120 | 56 | 98.1 | 13 | 85 | 0 |
+
+Quota gaming (lands, size and MV histogram preserved; only producer->consumer links broken):
+- the-cabbage-merchant: broke 5 payoff/converter copies -> W 48.8->48.8, S 44.8->17.3, total 56->34 PASS
+- precon-witherbloom: broke 3 payoff/converter copies -> W 42.5->32.3, S 83.3->83.3, total 54->46 PASS
+- meren-powerhouse: broke 6 payoff/converter copies -> W 68.7->68.7, S 100.0->98.7, total 75->75 PASS

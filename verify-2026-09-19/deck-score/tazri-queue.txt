@@ -1,0 +1,59 @@
+### A-Ellywick Tumblestrum | {2}{G}{G} | cmc 4 | Legendary Planeswalker — Ellywick | P/T -/- | 1 copies in 1 lists
++1: Venture into the dungeon. (Enter the first room or advance to the next room.)
+−2: Look at the top six cards of your library. You may reveal a creature card from among them and put it into your hand. If it's legendary, you gain 3 life. Put the rest on the bottom of your library in a random order.
+−6: You get an emblem with "Creatures you control have trample and haste and get +2/+2 for each differently named dungeon you've completed."
+UNTYPED: You get an emblem with "Creatures you control have trample and haste and get +2/+2 for each differently named dungeon you've completed."
+
+### A-Vivi Ornitier | {1}{U}{R} | cmc 3 | Legendary Creature — Wizard | P/T 0/3 | 1 copies in 1 lists
+{T}: Add X mana in any combination of {U} and/or {R}, where X is Vivi Ornitier's power.
+Whenever you cast a noncreature spell, put a +1/+1 counter on Vivi Ornitier and it deals 1 damage to each opponent.
+UNTYPED: Add X mana in any combination of {U} and/or {R}, where X is this permanent's power.
+
+### Ashling, Rekindled // Ashling, Rimebound | {1}{R} | cmc 2 | Legendary Creature — Elemental Sorcerer // Legendary Creature — Elemental Wizard | P/T -/- | 1 copies in 1 lists
+Whenever this creature enters or transforms into Ashling, Rekindled, you may discard a card. If you do, draw a card.
+At the beginning of your first main phase, you may pay {U}. If you do, transform Ashling.
+//
+Whenever this creature transforms into Ashling, Rimebound and at the beginning of your first main phase, add two mana of any one color. Spend this mana only to cast spells with mana value 4 or greater.
+At the beginning of your first main phase, you may pay {R}. If you do, transform Ashling.
+UNTYPED: Rekindled, you may discard a card. | Rimebound and at the beginning of your first main phase, add two mana of any one color.
+
+### Bilbo, Thief in the Night | {1}{U} | cmc 2 | Legendary Creature — Halfling Rogue | P/T 2/2 | 1 copies in 1 lists
+Spells you cast from anywhere other than your hand cost {1} less to cast.
+Whenever Bilbo attacks, you may cast an artifact, instant, or sorcery spell from your graveyard. If an instant or sorcery spell cast this way would be put into your graveyard, exile it instead.
+UNTYPED: If an instant or sorcery spell cast this way would be put into your graveyard, exile it instead.
+
+### Bloom Tender | {1}{G} | cmc 2 | Creature — Elf Druid | P/T 1/1 | 1 copies in 1 lists
+Vivid — {T}: For each color among permanents you control, add one mana of that color.
+UNTYPED: For each color among permanents you control, add one mana of that color.
+
+### Charming Scoundrel | {1}{R} | cmc 2 | Creature — Human Rogue | P/T 1/1 | 1 copies in 1 lists
+Haste
+When this creature enters, choose one —
+• Discard a card, then draw a card.
+• Create a Treasure token.
+• Create a Wicked Role token attached to target creature you control.
+UNTYPED: Create a Wicked Role token attached to target creature you control.
+
+### Gandalf the White | {3}{W}{W} | cmc 5 | Legendary Creature — Avatar Wizard | P/T 4/5 | 1 copies in 1 lists
+Flash
+You may cast legendary spells and artifact spells as though they had flash.
+If a legendary permanent or an artifact entering or leaving the battlefield causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.
+UNTYPED: If a legendary permanent or an artifact entering or leaving the battlefield causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.
+
+### Outlaws' Merriment | {1}{R}{W}{W} | cmc 4 | Enchantment | P/T -/- | 1 copies in 1 lists
+At the beginning of your upkeep, choose one at random. Create a red and white creature token with those characteristics.
+• 3/1 Human Warrior with trample and haste.
+• 2/1 Human Cleric with lifelink and haste.
+• 1/2 Human Rogue with haste and "When this token enters, it deals 1 damage to any target."
+UNTYPED: Create a red and white creature token with those characteristics. | 3/1 Human Warrior with trample and haste. | 2/1 Human Cleric with lifelink and haste. | 1/2 Human Rogue with haste and "When this token enters, it deals 1 damage to any target."
+
+### Twilight Diviner | {2}{B} | cmc 3 | Creature — Elf Cleric | P/T 3/3 | 1 copies in 1 lists
+When this creature enters, surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)
+Whenever one or more other creatures you control enter, if they entered or were cast from a graveyard, create a token that's a copy of one of them. This ability triggers only once each turn.
+UNTYPED: if they entered or were cast from a graveyard, create a token that's a copy of one of them.
+
+### Zurgo, Thunder's Decree | {R}{W}{B} | cmc 3 | Legendary Creature — Orc Warrior | P/T 2/4 | 1 copies in 1 lists
+Mobilize 2 (Whenever this creature attacks, create two tapped and attacking 1/1 red Warrior creature tokens. Sacrifice them at the beginning of the next end step.)
+During your end step, Warrior tokens you control have "This token can't be sacrificed."
+UNTYPED: During your end step, Warrior tokens you control have "This token can't be sacrificed."
+

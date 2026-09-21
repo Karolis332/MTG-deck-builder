@@ -13,7 +13,7 @@ import {
   PLAN_RECIPES, STANDARD_RECIPES, type PlanEvaluation,
 } from '../deck-score-plans';
 import {
-  Q_BASELINE, Q_BASELINE_CLOSING, Q_BASELINE_JOINT_COMMANDER, Q_BASELINE_JOINT_BRAWL, Q_SATURATION,
+  Q_BASELINE, Q_BASELINE_CLOSING, Q_BASELINE_CLOSING_BRAWL, Q_BASELINE_JOINT_COMMANDER, Q_BASELINE_JOINT_BRAWL, Q_SATURATION,
   DEPLOYMENT_PROBABILITY_TARGET,
 } from '../deck-score-norms';
 import { deriveCardFeature } from '../deck-score-features';
@@ -226,7 +226,8 @@ describe('§9.2 Commander Q floor b, measured over 1,000 matched controls', () =
       expect(qBaselineFor('standard', key)).toBe(Q_BASELINE);
     }
     expect(qBaselineFor('commander', 'combo')).toBe(Q_BASELINE_CLOSING);
-    expect(qBaselineFor('brawl', 'combo')).toBe(Q_BASELINE_CLOSING);
+    // Stage 4c: Brawl's closing population is its own measurement.
+    expect(qBaselineFor('brawl', 'combo')).toBe(Q_BASELINE_CLOSING_BRAWL);
   });
 
   it('scores a generic plan 0 at Q <= b and at most 5 just above it', () => {

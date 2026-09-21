@@ -1,6 +1,6 @@
 # Deck Score v1.2 — typed-effect catalogue coverage
 
-Generated 2026-09-20T13:42:24.384Z. Catalogue 4532 entries (4453 generated, 79 curated), version `fcf0365e`.
+Generated 2026-09-21T06:00:56.339Z. Catalogue 4546 entries (4467 generated, 79 curated), version `2c438df8`.
 Copy-weighted share of NONLAND main-deck copies carrying a `known` catalogue entry whose reviewed oracle text still hashes to the printing being scored.
 Lands and textless vanillas are covered by definition — they make no mechanical claim (§1 "no requirements means 1"); they are the `trivial` column.
 `partial` = a catalogue entry exists but at least one clause is untyped; `unknown` = no entry, or the entry is stale.
@@ -9,8 +9,8 @@ Lands and textless vanillas are covered by definition — they make no mechanica
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
 | cEDH Top-16 | 30 | 87.5% | 93.0% | 30/30 | 58.8% | 34.3% | 0.0% | 6.9% | 0.0% |
 | Standard positive cohort (first 200) | 200 | 37.5% | 92.1% | 156/200 | 64.3% | 24.3% | 0.0% | 11.5% | 0.0% |
-| §5 fixtures | 16 | 80.3% | 87.1% | 16/16 | 78.1% | 9.7% | 0.0% | 12.2% | 0.0% |
-| constrained random piles | 200 | 45.0% | 61.3% | 0/200 | 60.4% | 0.3% | 0.0% | 39.2% | 0.0% |
+| §5 fixtures | 16 | 81.8% | 90.0% | 16/16 | 78.8% | 9.7% | 0.0% | 11.5% | 0.0% |
+| constrained random piles | 200 | 45.0% | 61.3% | 0/200 | 60.6% | 0.3% | 0.0% | 39.1% | 0.0% |
 
 ## Stale entries (reviewed text no longer matches the live printing)
 
@@ -29,10 +29,10 @@ No stale entries: every catalogue hit still hashes to the printing being scored.
 | meren-of-clan-nel-toth | 64 | 59 | 92.2% |
 | ramos-dragon-engine | 0 | 0 | 100.0% |
 | cabbage-merchant-current-brawl | 65 | 55 | 84.6% |
-| tazri-upgraded-arena | 58 | 48 | 82.8% |
+| tazri-upgraded-arena | 58 | 52 | 89.7% |
 | kuja-genome-sorcerer-arena | 64 | 55 | 85.9% |
-| vivi-battery-arena | 70 | 61 | 87.1% |
-| fire-lord-azula-competitive | 66 | 53 | 80.3% |
+| vivi-battery-arena | 70 | 63 | 90.0% |
+| fire-lord-azula-competitive | 66 | 54 | 81.8% |
 | cedhtop16-ballooncon6 | 70 | 65 | 92.9% |
 | standard-1445893-univerce | 39 | 39 | 100.0% |
 | standard-1445867-aljce | 36 | 30 | 83.3% |

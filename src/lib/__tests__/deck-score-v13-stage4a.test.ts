@@ -17,7 +17,7 @@ import { scoreDeck } from '../deck-score';
 import {
   PLAN_RECIPES, recipeFor, qBaselineFor, COMMANDER_BAND_REFERENCE, type PlanKey,
 } from '../deck-score-plans';
-import { Q_BASELINE, Q_BASELINE_CLOSING, Q_BASELINE_JOINT_COMMANDER, Q_BASELINE_JOINT_BRAWL, Q_SATURATION } from '../deck-score-norms';
+import { Q_BASELINE, Q_BASELINE_CLOSING, Q_BASELINE_CLOSING_BRAWL, Q_BASELINE_JOINT_COMMANDER, Q_BASELINE_JOINT_BRAWL, Q_SATURATION } from '../deck-score-norms';
 import {
   strideOrder, commanderBlocks, loadCohortPiles, readCommanderSample,
   HELD_OUT_COMMANDERS, HOLDOUT_EVERY, COHORT_SEED,
@@ -145,7 +145,8 @@ describe('stage 4a — one joint Q floor, measured over all eleven recipes', () 
       // them now, and the generic trio must not keep a private floor. Stage 4b
       // moved `combo` off `Q_BASELINE` and gave Brawl its own measured floor.
       expect(qBaselineFor('commander', key), key).toBe(expected);
-      expect(qBaselineFor('brawl', key), key).toBe(key === 'combo' ? expected : Q_BASELINE_JOINT_BRAWL);
+      // Stage 4c: `combo` carries a measured Brawl floor of its own.
+      expect(qBaselineFor('brawl', key), key).toBe(key === 'combo' ? Q_BASELINE_CLOSING_BRAWL : Q_BASELINE_JOINT_BRAWL);
       // §9.1 owns the Standard path and this stage does not touch it.
       expect(qBaselineFor('standard', key), key).toBe(Q_BASELINE);
     }
