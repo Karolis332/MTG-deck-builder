@@ -1,0 +1,158 @@
+## 1. commander linkage — commander
+typed-commander lists: real 845/1824, ctrl93 471/1000, ctrlmatch 472/1000
+| statistic | cohort pair | AUC, typed commanders only | AUC, zero-filled (all lists) |
+|---|---|---:|---:|
+| cmd_link | vs ctrl93 | 0.541 | 0.518 |
+| cmd_link | vs ctrlmatch | 0.547 | 0.521 |
+| cmd_econ | vs ctrl93 | 0.479 | 0.491 |
+| cmd_econ | vs ctrlmatch | 0.461 | 0.487 |
+| cmd_member | vs ctrl93 | 0.555 | 0.519 |
+| cmd_member | vs ctrlmatch | 0.539 | 0.515 |
+
+untyped commanders, top 25 of 149 (of 300 distinct in the sample):
+| commander | lists | state |
+|---|---:|---|
+| Witherbloom, the Balancer | 10 | no catalogue entry |
+| Edgar Markov | 10 | no catalogue entry |
+| Cloud, Ex-SOLDIER | 10 | no catalogue entry |
+| Ashling, the Limitless | 10 | no catalogue entry |
+| Kaalia of the Vast | 10 | no catalogue entry |
+| Toph, the First Metalbender | 10 | no catalogue entry |
+| The Wise Mothman | 10 | no catalogue entry |
+| Giada, Font of Hope | 10 | no catalogue entry |
+| Blech, Loafing Pest | 10 | no catalogue entry |
+| Sephiroth, Fabled SOLDIER // Sephiroth, One-Winged Angel | 10 | no catalogue entry |
+| Zimone, Infinite Analyst | 10 | no catalogue entry |
+| Nekusar, the Mindrazer | 10 | no catalogue entry |
+| Quintorius, History Chaser | 10 | no catalogue entry |
+| Auntie Ool, Cursewretch | 10 | no catalogue entry |
+| Silverquill, the Disputant | 10 | no catalogue entry |
+| Chatterfang, Squirrel General | 10 | no catalogue entry |
+| Maralen, Fae Ascendant | 10 | no catalogue entry |
+| Prismari, the Inspiration | 10 | no catalogue entry |
+| Tidus, Yuna's Guardian | 10 | no catalogue entry |
+| Leonardo, the Balance | 10 | no catalogue entry |
+| Yuriko, the Tiger's Shadow | 10 | no catalogue entry |
+| Bello, Bard of the Brambles | 10 | no catalogue entry |
+| Ulalek, Fused Atrocity | 10 | no catalogue entry |
+| Frodo, Adventurous Hobbit | 10 | no catalogue entry |
+| Hakbal of the Surging Soul | 10 | no catalogue entry |
+
+## 1. commander linkage — brawl
+typed-commander lists: real 434/1146, ctrl93 393/1000, ctrlmatch 394/1000
+| statistic | cohort pair | AUC, typed commanders only | AUC, zero-filled (all lists) |
+|---|---|---:|---:|
+| cmd_link | vs ctrl93 | 0.537 | 0.513 |
+| cmd_link | vs ctrlmatch | 0.543 | 0.515 |
+| cmd_econ | vs ctrl93 | 0.427 | 0.482 |
+| cmd_econ | vs ctrlmatch | 0.444 | 0.485 |
+| cmd_member | vs ctrl93 | 0.523 | 0.508 |
+| cmd_member | vs ctrlmatch | 0.519 | 0.515 |
+
+untyped commanders, top 25 of 171 (of 300 distinct in the sample):
+| commander | lists | state |
+|---|---:|---|
+| Witherbloom, the Balancer | 10 | no catalogue entry |
+| Quintorius, History Chaser | 10 | no catalogue entry |
+| Prismari, the Inspiration | 10 | no catalogue entry |
+| Sephiroth, Fabled SOLDIER // Sephiroth, One-Winged Angel | 10 | no catalogue entry |
+| Terra, Magical Adept // Esper Terra | 10 | no catalogue entry |
+| Nashi, Illusion Gadgeteer | 10 | no catalogue entry |
+| Silverquill, the Disputant | 10 | no catalogue entry |
+| Yuriko, the Tiger's Shadow | 10 | no catalogue entry |
+| Spider-Man 2099 | 10 | no catalogue entry |
+| Emry, Lurker of the Loch | 10 | no catalogue entry |
+| Blech, Loafing Pest | 10 | no catalogue entry |
+| Quandrix, the Proof | 10 | no catalogue entry |
+| Tifa Lockhart | 10 | no catalogue entry |
+| Toph, the First Metalbender | 10 | no catalogue entry |
+| Rusko, Clockmaker | 10 | no catalogue entry |
+| Giada, Font of Hope | 10 | no catalogue entry |
+| Thranduil, the Elvenking | 10 | no catalogue entry |
+| Etali, Primal Conqueror // Etali, Primal Sickness | 10 | no catalogue entry |
+| The Unbeatable Squirrel Girl | 10 | no catalogue entry |
+| The Necrobloom | 10 | no catalogue entry |
+| Slimefoot and Squee | 10 | no catalogue entry |
+| Leonardo, the Balance | 10 | no catalogue entry |
+| Kaalia of the Vast | 10 | no catalogue entry |
+| Ureni of the Unwritten | 10 | no catalogue entry |
+| Doran, Besieged by Time | 10 | no catalogue entry |
+
+## 2. gates on the real commander training stride
+1824 lists; 346 (19.0 %) carry a hard cap < 25; 20 (1.1 %) reach the scorer with a card count != 100
+| gate (kind/status) | lists | binding cap |
+|---|---:|---:|
+| meta_evidence (evidence/warn) | 1824 | 0 |
+| quality_cap (quality/warn) | 1818 | 0 |
+| coverage (evidence/warn) | 1305 | 0 |
+| structure (rules/fail) | 346 | 0 |
+| legality (rules/fail) | 272 | 272 |
+| identity (rules/fail) | 96 | 96 |
+| size (rules/warn) | 20 | 0 |
+| singleton (rules/fail) | 19 | 19 |
+
+cards not legal in `commander` at this card-DB snapshot: 192 distinct. Top 15 by list count:
+| card [status] | lists |
+|---|---:|
+| Pick Your Poison [not_legal] | 18 |
+| Avacyn, Angel of Horror [not_legal] | 16 |
+| Flickering Hound [not_legal] | 11 |
+| The Legend of Arena [not_legal] | 10 |
+| Spike, Tournament Grinder [not_legal] | 10 |
+| Fluros of Myra's Marvels [not_legal] | 10 |
+| Kharis & The Beholder [not_legal] | 10 |
+| Flitwing, Lyev Detective [not_legal] | 10 |
+| Jhoira, Weatherlight Corsair [not_legal] | 10 |
+| Earth Rumble [not_legal] | 10 |
+| Winter, Team Player [not_legal] | 10 |
+| Pym Particles [not_legal] | 8 |
+| Emrakul, the Exigent Doom [not_legal] | 8 |
+| Samut, Tyrant of Naktamun [not_legal] | 8 |
+| Pia, Aether Ascetic [not_legal] | 7 |
+
+unresolved card names: 4 distinct, 4 line occurrences. Top 30:
+| name | lists | shape |
+|---|---:|---|
+| Bird | 1 | plain ASCII, no row in `cards` |
+| Orc Army | 1 | plain ASCII, no row in `cards` |
+| Zombie | 1 | plain ASCII, no row in `cards` |
+| Zombie Army | 1 | plain ASCII, no row in `cards` |
+
+## 2. gates on the real brawl training stride
+1146 lists; 345 (30.1 %) carry a hard cap < 25; 7 (0.6 %) reach the scorer with a card count != 100
+| gate (kind/status) | lists | binding cap |
+|---|---:|---:|
+| meta_evidence (evidence/warn) | 1146 | 0 |
+| quality_cap (quality/warn) | 1139 | 0 |
+| coverage (evidence/warn) | 854 | 0 |
+| structure (rules/fail) | 345 | 0 |
+| legality (rules/fail) | 336 | 336 |
+| identity (rules/fail) | 34 | 34 |
+| singleton (rules/fail) | 10 | 10 |
+| size (rules/warn) | 7 | 0 |
+
+cards not legal in `brawl` at this card-DB snapshot: 399 distinct. Top 15 by list count:
+| card [status] | lists |
+|---|---:|
+| Wash Away [banned] | 197 |
+| Subtlety [banned] | 85 |
+| Time Warp [banned] | 64 |
+| Force of Will [banned] | 53 |
+| Temporal Manipulation [banned] | 53 |
+| Chrome Mox [banned] | 35 |
+| Mana Drain [banned] | 35 |
+| Strip Mine [banned] | 30 |
+| Ancient Tomb [banned] | 30 |
+| Demonic Tutor [banned] | 21 |
+| Pick Your Poison [not_legal] | 21 |
+| Fierce Guardianship [banned] | 18 |
+| Deadly Rollick [banned] | 17 |
+| Sol Ring [not_legal] | 16 |
+| Tainted Pact [banned] | 13 |
+
+unresolved card names: 2 distinct, 5 line occurrences. Top 30:
+| name | lists | shape |
+|---|---:|---|
+| A-The Meathook Massacre | 4 | Alchemy A- prefix |
+| A-Hullbreaker Horror | 1 | Alchemy A- prefix |
+

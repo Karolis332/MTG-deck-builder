@@ -34,7 +34,7 @@ import {
   type PlanEvaluation, type PlanRole,
 } from '../src/lib/deck-score-plans';
 import { producerUtilisation } from '../src/lib/deck-score-producers';
-import { catalogFacts } from '../src/lib/deck-score-catalog';
+import { catalogFacts, catalogEntry } from '../src/lib/deck-score-catalog';
 import { profileOf, qualityCap, type ScoreProfile, type ScoreFormat } from '../src/lib/deck-score-norms';
 import type { DeckEntry } from '../src/lib/deck-score-mana';
 import type { DbCard } from '../src/lib/types';
@@ -396,10 +396,10 @@ function fillShape(rows: StatRow[], profile: ScoreProfile): void {
 // ── cohorts ───────────────────────────────────────────────────────────────
 
 /** A real TRAINING-stride corpus list, resolved exactly as `bands real` does. */
-function realDecks(profile: SampleProfile): { shape: DeckShape; id: string }[] {
+function realDecks(profile: SampleProfile): { shape: DeckShape; id: string; missingNames: string[] }[] {
   const byName = cardsByName();
   const sample = readSample(profile);
-  const out: { shape: DeckShape; id: string }[] = [];
+  const out: { shape: DeckShape; id: string; missingNames: string[] }[] = [];
   for (const i of strideOrder('training', sample)) {
     const deck = sample[i];
     if (!deck) continue;
@@ -408,14 +408,15 @@ function realDecks(profile: SampleProfile): { shape: DeckShape; id: string }[] {
     const commanderName = deck.commander.toLowerCase();
     let missing = 0;
     let took = false;
+    const missingNames: string[] = [];
     for (const line of deck.cards) {
       const card = byName.get(line.name.toLowerCase());
-      if (!card) { missing += line.quantity; continue; }
+      if (!card) { missing += line.quantity; missingNames.push(line.name); continue; }
       if (!took && line.name.toLowerCase() === commanderName) { commander.push(card); took = true; continue; }
       main.push({ card, quantity: line.quantity });
     }
     if (main.length === 0 || missing > deck.cards.length * 0.1) continue;
-    out.push({ shape: { main, commander, format: profile as ScoreFormat }, id: deck.id });
+    out.push({ shape: { main, commander, format: profile as ScoreFormat }, id: deck.id, missingNames });
   }
   return out;
 }
@@ -858,6 +859,129 @@ function summary(): void {
   process.stdout.write(`${out.join('\n')}\n`);
 }
 
+/**
+ * Follow-up (team lead, 2026-09-21). Two splits the cohort CSVs cannot answer
+ * on their own:
+ *   1. commander linkage restricted to lists whose commander IS typed, plus the
+ *      untyped commanders ranked by how many lists they carry — does typing the
+ *      top commanders unlock a signal, or is there none to unlock?
+ *   2. which gate actually fires on the hard-capped ~30 % of the real strides,
+ *      and the unresolved names behind it — is that a parser fix or real data?
+ */
+function followup(): void {
+  const out: string[] = [];
+  const byName = cardsByName();
+
+  for (const profile of ['commander', 'brawl'] as const) {
+    const file = path.join(OUT_DIR, `stats-${profile}.csv`);
+    if (!fs.existsSync(file)) continue;
+    const rows = readCsv(file);
+    const cohortOf = (c: string) => rows.filter((r) => r.cohort === c);
+    const typed = (rs: Record<string, string>[]) => rs.filter((r) => Number(r.cmd_typed) === 1);
+    const real = cohortOf('real');
+    const c93 = cohortOf('ctrl93');
+    const cm = cohortOf('ctrlmatch');
+    out.push(`## 1. commander linkage — ${profile}`);
+    out.push(`typed-commander lists: real ${typed(real).length}/${real.length}, ctrl93 ${typed(c93).length}/${c93.length}, ctrlmatch ${typed(cm).length}/${cm.length}`);
+    out.push('| statistic | cohort pair | AUC, typed commanders only | AUC, zero-filled (all lists) |');
+    out.push('|---|---|---:|---:|');
+    for (const stat of ['cmd_link', 'cmd_econ', 'cmd_member'] as const) {
+      for (const [label, ctrl] of [['vs ctrl93', c93], ['vs ctrlmatch', cm]] as const) {
+        const v = (rs: Record<string, string>[]) => rs.map((r) => Number(r[stat])).filter(Number.isFinite).sort((a, b) => a - b);
+        out.push(`| ${stat} | ${label} | ${auc(v(typed(real)), v(typed(ctrl as Record<string, string>[]))).toFixed(3)} | ` +
+          `${auc(v(real), v(ctrl as Record<string, string>[])).toFixed(3)} |`);
+      }
+    }
+
+    // Untyped commanders by list count, over the WHOLE sample (not the stride).
+    const perCommander = new Map<string, number>();
+    for (const deck of readSample(profile)) {
+      perCommander.set(deck.commander, (perCommander.get(deck.commander) ?? 0) + 1);
+    }
+    const untyped: Array<{ name: string; lists: number; state: string }> = [];
+    for (const [name, lists] of perCommander) {
+      const card = byName.get(name.toLowerCase());
+      const facts = card ? catalogFacts(card.name, card.oracle_text) : null;
+      // `analyse` calls a commander typed when an entry exists AND its reviewed
+      // oracle text still matches the printing, whatever its knowledge level.
+      if (facts && facts.textMatches) continue;
+      const entry = card ? catalogEntry(card.name) : undefined;
+      untyped.push({
+        name,
+        lists,
+        state: !card ? 'card row missing' : !entry ? 'no catalogue entry' : facts ? `${facts.knowledge}, oracle-hash stale` : 'entry, no facts',
+      });
+    }
+    untyped.sort((a, b) => b.lists - a.lists);
+    out.push('', `untyped commanders, top 25 of ${untyped.length} (of ${perCommander.size} distinct in the sample):`);
+    out.push('| commander | lists | state |', '|---|---:|---|');
+    for (const u of untyped.slice(0, 25)) out.push(`| ${u.name} | ${u.lists} | ${u.state} |`);
+    out.push('');
+  }
+
+  for (const profile of ['commander', 'brawl'] as const) {
+    out.push(`## 2. gates on the real ${profile} training stride`);
+    const decks = realDecks(profile);
+    const gateCount = new Map<string, number>();
+    const bindingCount = new Map<string, number>();
+    const unresolved = new Map<string, number>();
+    const illegal = new Map<string, number>();
+    let capped = 0;
+    let sizes = 0;
+    for (const d of decks) {
+      for (const n of d.missingNames) unresolved.set(n, (unresolved.get(n) ?? 0) + 1);
+      const payload = scoreDeckSafely({ format: d.shape.format, main: d.shape.main, commander: d.shape.commander });
+      if (!payload) continue;
+      const size = d.shape.main.reduce((a, e) => a + e.quantity, 0) + d.shape.commander.length;
+      if (size !== 100) sizes++;
+      // Which CARDS trip the legality gate — re-derived from the legality JSON
+      // rather than parsed out of the gate's prose, so it is exact.
+      for (const e of [...d.shape.main, ...d.shape.commander.map((c) => ({ card: c, quantity: 1 }))]) {
+        let legal = 'legal';
+        try { legal = (JSON.parse(e.card.legalities || '{}') as Record<string, string>)[profile] ?? 'missing'; } catch { legal = 'unparseable'; }
+        if (legal !== 'legal') illegal.set(`${e.card.name} [${legal}]`, (illegal.get(`${e.card.name} [${legal}]`) ?? 0) + 1);
+      }
+      const caps = payload.gates.filter((g) => g.kind !== 'quality' && g.cap !== null);
+      const binding = caps.length ? Math.min(...caps.map((g) => g.cap as number)) : Infinity;
+      if (binding < 25) capped++;
+      for (const g of payload.gates) {
+        if (g.status === 'pass') continue;
+        const key = `${g.key} (${g.kind}/${g.status})`;
+        gateCount.set(key, (gateCount.get(key) ?? 0) + 1);
+        if (g.cap !== null && g.cap === binding && binding < 25) bindingCount.set(key, (bindingCount.get(key) ?? 0) + 1);
+      }
+    }
+    out.push(`${decks.length} lists; ${capped} (${((100 * capped) / decks.length).toFixed(1)} %) carry a hard cap < 25; ` +
+      `${sizes} (${((100 * sizes) / decks.length).toFixed(1)} %) reach the scorer with a card count != 100`);
+    out.push('| gate (kind/status) | lists | binding cap |', '|---|---:|---:|');
+    for (const [k, v] of [...gateCount.entries()].sort((a, b) => b[1] - a[1])) {
+      out.push(`| ${k} | ${v} | ${bindingCount.get(k) ?? 0} |`);
+    }
+    const topIllegal = [...illegal.entries()].sort((a, b) => b[1] - a[1]).slice(0, 15);
+    out.push('', `cards not legal in \`${profile}\` at this card-DB snapshot: ${illegal.size} distinct. Top 15 by list count:`);
+    out.push('| card [status] | lists |', '|---|---:|');
+    for (const [name, n] of topIllegal) out.push(`| ${name} | ${n} |`);
+    const top = [...unresolved.entries()].sort((a, b) => b[1] - a[1]).slice(0, 30);
+    const totalMissing = [...unresolved.values()].reduce((a, b) => a + b, 0);
+    out.push('', `unresolved card names: ${unresolved.size} distinct, ${totalMissing} line occurrences. Top 30:`);
+    out.push('| name | lists | shape |', '|---|---:|---|');
+    for (const [name, n] of top) {
+      const shape = / \/\/ /.test(name) ? 'DFC, full "A // B" form'
+        : /^A-/.test(name) ? 'Alchemy A- prefix'
+          : /[^\x20-\x7E]/.test(name) ? 'non-ASCII (diacritic / typographic punctuation)'
+            : /\(|\)/.test(name) ? 'set/collector suffix'
+              : byName.has(name.toLowerCase().split(' // ')[0]) ? 'front face resolves — full-name lookup only'
+                : 'plain ASCII, no row in `cards`';
+      out.push(`| ${name} | ${n} | ${shape} |`);
+    }
+    out.push('');
+  }
+
+  fs.mkdirSync(OUT_DIR, { recursive: true });
+  fs.writeFileSync(path.join(OUT_DIR, 'followup.txt'), `${out.join('\n')}\n`);
+  process.stdout.write(`${out.join('\n')}\n`);
+}
+
 function main(): void {
   const argv = process.argv.slice(2);
   const cmd = argv[0] ?? 'summary';
@@ -867,6 +991,8 @@ function main(): void {
   };
   if (cmd === 'cohorts') {
     cohorts(arg('--profile', 'commander') as SampleProfile, Number(arg('--n', '1000')));
+  } else if (cmd === 'followup') {
+    followup();
   } else if (cmd === 'fixtures') {
     fixtureRows();
   } else if (cmd === 'anchors') {

@@ -405,3 +405,146 @@ The current 0/200 closing-plan pile reads should stay zero on those seeds; final
 Coverage is cross-cutting: type >80% in EACH named legal fixture and >=95% of fresh positives, and 100% of selected critical mechanics. Prioritise the precon and Tazri x2/Imotekh (currently 52–68%); add party/type rewards and artifact graveyard-leave/recursion routes. Imotekh needs that engine recipe, not an artifact-count quota; keep typal payoff 2/7 and enabler 11/29 unless its predicates change.
 Final gates: retain all 12 existing in-band anchors and bring Tazri paper/Brawl to 40–60/45–65, Imotekh to 45–65 and Cabbage cEDH to 35–50; Meren S>=85.5, precon S>=70, quota gaming 3/3, and no regression of Univerce/Kuja/Vivi/Azula's established S readings. Require >=90% of reviewed legal positives in their §8 bands. Existing inspected cohorts are regression sets; release also needs fresh grouped holdouts.
 Publish resolved-input provenance, coverage, selected plan, Q/R/producer utilisation, output/access schedules and cap changes; freeze catalogue/recipes/norms as 1.3 only when the combined acceptance run passes. Implementation is a separate task; this appendix makes no claim of calibration.
+
+## 10. v1.4 — S at full coverage
+
+Design review, 2026-09-21, branch `auto-improve`, HEAD `10fc8b2594011e1e9cd71adfe13abc756151d6eb`. This section supersedes §8's assignment of pile separation to S, §9's scored floors and R multiplier, and the unresolved-name policy identified below. Keep the core weights, meta weight 0, whole-table finish predicates, structural limits and quality cap `20+.8*min(M,W,S)`. This is a design decision, not an implementation or a successful calibration.
+
+Read in order: §§1/4/5/8/9; harness `s-discriminant-study.md` and [discriminant summary](../verify-2026-09-19/deck-score/discriminant/summary.txt); harness `coverage-round1-report.md`, `v13-refute-report.md`, and `v13-stage4c-report.md` §1. The harness directory is `~/.claude/harness/runs/deck-score-2026-09-19/`. The later [gate audit](../verify-2026-09-19/deck-score/discriminant/followup.txt) distinguishes identity/legality failures from unresolved names.
+
+**Evidence boundary.** The following baseline is a read-only aggregation of the stored `scoreDeckSafely` training-stride CSVs, with all their rule caps retained. No scorer, calibration, generation, build or test command was run for this review. Candidate results below come from the study's offline substitution of S into stored composition inputs; they are not executions of a new production scorer. Every new acceptance threshold is a requirement, not an observed result.
+
+| Stored live baseline | Commander | Brawl |
+|---|---:|---:|
+| Real stride size | 1,824 | 1,146 |
+| S=0 share | 83.2% | 92.1% |
+| S p10 / p50 / p90 | 0 / 0 / 62 | 0 / 0 / 0 |
+| Total p10 / p50 / p90 | 19 / 20 / 47 | 19 / 20 / 20 |
+| W=0 share; W p50 | 16.2%; 59.8 | 0%; 85.0 |
+| Hard cap <25, all real rows | 346/1,824 = 19.0% | 345/1,146 = 30.1% |
+| `ctrl93` / `ctrlmatch` total <25, n=1,000 each | 99.6% / 100% | 99.0% / 100% |
+
+Round 1's 85.5%/94.0% S-zero readings describe its own run; do not substitute them for this stride. Nor does “full coverage” mean all mechanics are now known: real median coverage is about .75, despite 14,830 typed cards.
+
+### 10.1 Decision: coherence in S; no invented pile detector
+
+Choose **(b)**. S measures mechanically supported plan coherence. Remove the demand that its zero point classify a list's origin. There is currently **no validated card-level signal for a replacement multiplicative pile guard**. Moving the existing margin into another component would reproduce its false negatives.
+
+The numbers reject the alternatives as release designs:
+
+- The old Commander floor moved .574 -> .683, leaving only .017 to .70; Brawl's .733 already violates §9's rejection rule. Changing saturation cannot change which lists lie below the floor.
+- Candidate A preserves cEDH p50 88 and about 96% of both pile constructions, but retains **45.6% real Commander S zeros at every tested saturation**. At p75, S p50=13.8 bounds unrounded total p50 by 31.04 from the quality cap alone; even the anchor-favouring p60 gives an unrounded ceiling of 41.68 (rounded at most 42), before W/rule caps. The observed median is 20. Choosing p60 because it gives 14/16 anchors is prohibited.
+- Candidate B at p75 gives cEDH p50 **53**, and only **92.6%** of matched piles <25. Coverage-normalised pre-closing Q has AUC .884, but it reverses the competitive cohort; use the final supported package when evaluating coherence.
+- Option (c), a real-list percentile rank, changes the scale without adding discrimination within a coverage stratum. A gate using the same statistic restores the same rejection problem, and a coverage-conditioned rank retains the edit exploit. Do not adopt it.
+- Commander linkage is available on only 46.3% of real commanders; even restricting to typed commanders gives AUC at most .555 in the follow-up. Producer linkage is about .5, shipped S .582, and W .588/.455 against `ctrl93` in Commander/Brawl. Brawl piles have W p50 87.7 versus real 85.0. These are not adequate replacement detectors.
+
+The approximately .88 ceiling is an empirical result for the tested supply-statistic family, **not a theorem that every possible card-level model must fail**. A legal draw of mutually useful staples can also be a playable casual deck; identical card lists must score identically regardless of their origin. Better resource/schedule modelling may supply new evidence, but it has not yet demonstrated pile separation.
+
+Outside the pure scorer, list provenance can establish an event result, an untouched precon, a synthetic control, or an unreviewed submission. Edit history can explain missing information. Neither ownership nor accumulated history establishes strength; their absence is not evidence of a pile. These facts may govern evidence labels and cohort admission, never add/subtract score points, exempt an anchor, or become a hidden strength multiplier.
+
+**The requested pile acceptance number remains >=95% with numeric total <25 on EACH construction, separately for Commander and Brawl. It is an OPEN, RELEASE-BLOCKING requirement for this design.** No current measured candidate satisfies it together with the population and gaming requirements below. A provisional label, missing total, known generator label, or source-based rejection does not count as a pile below 25. This review does not silently replace numeric separation with a provenance test.
+
+A future structural detector needs a new, mechanically justified statistic, registered before evaluation, then >=95% pile rejection on both constructions with <=5% false rejection of resolved, rule-valid real lists on grouped holdouts. Its final numeric totals must still pass the original pile gate. Until then, there is no extra multiplier: the existing quality and rule gates are the numeric composition. v1.4 cannot be called calibrated while that gate fails.
+
+### 10.2 Replacement S and frozen percentile policy
+
+Reject both `Q/F_typed` and a score floor that decreases when the submitted list becomes less readable. Use **useful copy mass per library slot**, with no per-query coverage correction:
+
+```text
+N0 = legal reference library size: 99 (98 with a verified partner pair),
+     59 for Standard Brawl, 60 for Standard
+N  = submitted library copies, including reserved unresolved slots
+D  = max(N0, N)
+U_r = maximum feasible sum of useful nonland-copy credits for recipe r
+U   = max_r U_r
+Q_slot = U / D
+b_S = 0
+Q_sat,p = percentile_80(Q_slot on the frozen eligible real training cohort for profile p)
+S = 100 * clip((Q_slot - b_S) / (Q_sat,p - b_S))
+T = round(clamp(min(weightedBase, 20 + .8*min(M,W,S), applicableRuleCaps), 0, 100))
+```
+
+Each physical nonland copy supplies at most one U unit, across compatible modes/resources; use the producer utilisation and closing-package proofs from §9. Commanders and lands may supply actual resources/requirements but do not create extra nonland units. Unsupported effects add no invented useful mass. Known opponent-trigger priors remain their typed fractional availability, distinct from unknown mechanics.
+
+A recipe needs its actual essential resources and compatible uses. A closing package still needs an executable present line and the §9.5 access condition; generic interaction density cannot establish one. Maximise the **same U objective** over the fixed, bounded recipe/assignment domain for selection and reporting. Selection/pruning must preserve that maximum; deleting a zero-use copy must not expose an artificially better omitted recipe. Retain deterministic ties. R ratios may diagnose shortages but do not choose a different numerical objective.
+
+Freeze S's useful-role caps and resource budgets at the profile's N0 reference, rather than expanding them when an unknown card increases actual N. This is an S-specific exception to §1's count-target scaling; other components retain their physically appropriate denominators. Added unknown slots cannot unlock extra U merely by enlarging a quota. The D denominator also prevents the nonland-to-land replacement exploit inherent in division by F. For undersized inputs, every access/feasibility predicate used in S, including closing-package admission, also uses D slots with uncredited blank padding; otherwise improved draw odds could admit extra U after deletion. Structure validation still uses actual submitted N. Fixed-slot probes preserve that slot count throughout, not just in the final division.
+
+The floor is **mechanical zero**, not a fitted percentile: no verified useful mass means no demonstrated coherence. If the relevant family is unknown, say “unknown”, not “incoherent”. Retire the automatic W/S=50 substitution from scored composition: an entirely unevaluable essential component yields provisional component diagnostics and no numeric total, rather than invented credit. Such results count as unavailable/failures in release coverage, never as successful low-zero or pile observations.
+
+**Percentiles are policy, frozen before anchors are opened.** Use p80 for saturation in every independently calibrated format profile; this preserves the named percentile adopted in stage 4c, where Commander p80=.698 explained the old .70. Neither .70 nor the legacy nonland-Q floors carry over to Q_slot's different units. Use all identity-resolved, snapshot-rule-valid real training lists, including mechanically incomplete lists; do not select them by score, S>0, winning recipe, or anchor membership. Mechanical coverage remains a reported stratum and an evidence limitation, not a reason to discard hard-to-score real lists.
+
+Use the inverse weighted empirical CDF, `q_p=inf{x: cumulativeWeight(x)>=p*totalWeight}`, with equal total weight per deduplicated list/event family, full-precision inputs and deterministic identities. Require >=30 independent eligible families per profile. There is no within-commander ranking, anchor-specific saturation, automatic borrowing of Commander norms for Brawl, or p60/p75/p90 search. If p80 is zero, samples are insufficient, or targets fail, report failure; do not manufacture an epsilon window or choose another percentile.
+
+Continue measuring a **diagnostic** coverage-conditioned null: in fixed .05-wide coverage bins, report pile p95 of max-recipe Q_slot separately for both constructions, and real p80 in the same bins. Require >=100 controls per construction and >=30 real families for a reported cell; unsupported cells remain unknown, without extrapolation. The conservative null summary is the larger of the two pile p95 values. These conditional values do not enter S. The old `.098+.560*c` (Commander, r²=.9991) and `.033+.690*c` (Brawl, r²=.9922) describe legacy Q_final, not constants for the new statistic.
+
+A coverage-conditional floor is acceptable **as a versioned calibration diagnostic**; its dependence on the catalogue is not inherently anchor fitting. It is rejected as a scored term here because a user can lower c without losing useful mass. All scored norms already depend on what the catalogue can read; hiding that dependence would not remove it.
+
+On any oracle/effect/recipe/assignment change: keep paired input lists and their IDs fixed; bump catalogue/score versions; rerun the actual feature evaluator; remeasure role bands, p80 saturation and diagnostic null cells from training only; then extend/run `bands verify` to require **zero mismatches for every active constant and cell**. Record hashes, cohort membership/exclusions, quantile method, seeds and evaluator version. Do not recover an unmeasurable floor from a holdout, as earlier closing-floor work did. Evaluate untouched grouped holdouts only after the freeze. Holdout failure rejects the version; it does not authorise another percentile. A catalogue refresh may legitimately change scores across versions; edits within one frozen version must pass §10.4.
+
+### 10.3 R: retire the multiplier, retain the diagnosis
+
+Remove `*R` from S and from scored plan ranking; retain the actual legacy R field and its weakest-requirement explanation. Do not replace its diagnostic value with a fabricated 1. Known missing essentials still invalidate the corresponding recipe; resource, timing, compatibility and completion proofs remain mandatory. Partial useful supply earns its actual bounded U credit. Empirical role lower-band targets describe adequacy, not physical validity: do not reintroduce the retired penalty as an R<1 recipe-admission gate.
+
+Reason: 100% of the 1,517 Commander S zeros are below the floor and **0% have R=0**. Multiplying coverage-normalised supply by R drops AUC **.884 -> .538**, while real R p50=.79 and typed piles' p50=1.00. This rejects R as an additional generic scalar penalty, not the need for real prerequisites. Retirement is unmeasured under the new formula and must pass the same cohort/anchor checks; it is not a claim that removing R repairs the zero mass.
+
+### 10.4 Gaming invariance is a release requirement
+
+Run each applicable probe at **k=1, 5 and 10 copies** on the real training strides and fresh grouped holdouts, with the catalogue/norms frozen. Include both direct size-changing edits and legal, fixed-slot counterparts so a size cap cannot conceal an S exploit. Match known nuisance features for the no-benefit counterparts and verify that they do not remove a tax/obstruction or otherwise change recipe feasibility. Report unmatched edits separately with the actual mechanical changes; a demonstrably useful removal must not be relabelled a gaming failure. Use resolved-but-untyped cards as well as unresolved-name cases.
+
+For no-benefit edits below, the maximum positive movement is **0 S points** (unrounded tolerance 1e-6) and **+1 displayed total point**, over the entire k-copy edit, not per copy. The total allowance is an empirical gate for the whole scorer, not a mathematical consequence of the S formula. Report the maximum and every violating list, not just a mean or the original 3/3 quota fixtures. Fully equivalent substitutions require absolute movement within these bounds.
+
+| Probe | Required construction and additional acceptance |
+|---|---|
+| Delete off-plan typed | Remove copies proved zero-use under every feasible recipe; also replace them with zero-credit unknown slots at fixed N. S must not rise. An under-sized singleton list retains D=N0 for diagnostics and total <=19; passing that cap alone is insufficient. No unknown replacement may lower a coverage floor or shrink a scored denominator. |
+| Add untyped | Add k zero-credit slots, and separately replace k zero-credit typed copies at legal size. U cannot rise. When D grows, Q_slot_after <= Q_slot_before*D_before/D_after, with equality when U is unchanged; unsaturated S obeys the same bound. A saturated display may stay unchanged, but the Q_slot decrease must be visible. Unknown critical identity/mechanics cannot improve evidence status. |
+| Add typed staples | Add/substitute legal, identity-compatible, zero-use staples, including already-saturated infrastructure roles, with no newly executable plan/support path. No positive S movement; total <=+1 on matched no-benefit cases. Staple membership itself supplies zero credit. A genuinely useful tutor, answer or enabler belongs in a separately traced improvement test; it cannot be used to claim all staple additions are invariant. |
+| Swap lands | Equal count, colour availability, tapped timing, costs and relevant effects: S and total invariant within the stated tolerances. For mechanically dominated sources with no added route, S cannot rise and M/W/total cannot improve beyond display tolerance. Removing nonlands in favour of excess basics also must not improve S solely by shrinking F. A real mana upgrade may improve the measured casting/scheduling probabilities and is reported separately. |
+
+An actual legal Standard trim of k off-plan excess cards is a different operation: drawing useful cards becomes more likely. If U is unchanged and both sizes are >=60, permit `0<=DeltaS<=100*k/N_before` and require the exact fixed-saturation formula, plus separately explained M/W changes. The fixed-slot counterpart still has the zero-gain bound. Do not apply a singleton deletion rule to a legal 70 -> 60 trim.
+
+The new U/D definition supplies the local S monotonicity when useful assignments/budgets are unchanged. **The measured A/B candidates fail it; a coverage-conditioned rank has no such guarantee either**: on the reported F=63, c=.75, Q=.510 example, the reported local sensitivities before clipping are about 9.5/10.2 S points per typed-off-plan -> untyped swap under A/B; actual gains depend on clipping, and ten deletions saturate both. Information loss may lower confidence; an evidence label cannot excuse inflated numeric S/total. The new formula still needs whole-scorer execution of every probe before any invariance claim.
+
+Keep §4's incompatibility probes: breaking a required producer/consumer, tutor target or mana/outlet path must remove that proof and reduce W/S or bind a quality/rule limit. Preserve order/printing/quantity invariance exactly, and require **DeltaS=DeltaT=0** under provenance, ownership, price, popularity and edit-history permutations.
+
+### 10.5 Calibration cohorts and scraped-list handling
+
+Exclude unresolved identities and confirmed structure/legality failures from **positive norm estimation and strength-band denominators**, using explicit input reasons decided before scoring. Repair a scrape only against its source; retain the original and the repair mapping. Evaluate unresolved, rule-invalid and mechanical-coverage cases as separate audit strata. Do not discard a legal list merely because W=0, S=0, coverage is low, or the recipe family is missing.
+
+Preserve the original **1,824/1,146-row strides** as paired product regressions. Publish all-row results, eligible-subset results and every excluded/unavailable count. Exclusion must not manufacture a median gain: demonstrate changes on the same IDs, and report repaired inputs separately. Track no-score rows in the original denominator; for release S-zero coverage count S=0 **or unavailable**, and for total quantiles conservatively include unavailable totals as 0 in a separate acceptance column. This is a reporting rule, not a product score for an unknown deck.
+
+The study's “30% hard-capped” is **30.1% of candidate A's below-25 Commander subset**, about 19% of the full stride. The gate audit found 346/1,824 Commander hard failures, including legality on 272 and identity on 96 (overlapping), with only **four unresolved-name occurrences**. Brawl has 345/1,146 hard failures, legality on 336, and five unresolved occurrences. These snapshot facts do not prove every flagged card is actually illegal: audit format/date/Arena variants. They do prove that changing the unresolved-name cap alone cannot recover 19% of Commander lists.
+
+Product policy: unresolved identity alone becomes `kind='evidence', status='warn', cap=null`, with product state `provisional`, with explicit missing copies and reserved slots; supersede the unresolved-name cap of 39 in §2/§8. Do not silently drop those copies and then impose a fabricated size failure. Unknown commander identity similarly needs resolution rather than a fabricated legality verdict. A computable partial estimate is provisional; an entirely unevaluable essential component has no numeric total. Confirmed wrong size, identity, copy limits or illegality still applies its existing 19/0 rule cap. Keep dataset/version compatibility checks. Neither verified provenance nor ownership overrides a real rule failure.
+
+### 10.6 W repairs precede the final S freeze
+
+Input hygiene comes first; then repair W's mechanical model **before** freezing S, because Q_final/closing support depends on which executable package exists. Prototype S independently if useful, but do not measure its final norms against knowingly missing or fictitious lines.
+
+1. **Tutor-assembled creature combos first.** The two cEDH Top-16 failures are **92.9% typed**, yet only 28/30 lists assemble a recognised closing line. Model the missing family with exact tutor predicates/destinations, distinct targets, sacrifice/untap/zone requirements, mana, delays and an actual outlet/finish predicate. A generic tutor or combo tag is insufficient. Require both lists to acquire audited executable lines, all 30 to have evaluated W>0, neither affected total <80 after the complete change, and cEDH median >=85 on both regression and independent event/commander holdouts.
+2. **Audit and close the broader W-zero families.** Commander W=0 on **16.2%** of the real stride, and candidate A's low-score subset is 19.6% W-limited. With W=0, even S=100 cannot take total above 20. Classify every zero as known absent, unsupported recipe, missing prerequisite or bad input; extend mechanics from the real failures, without an arbitrary W floor. Target W=0 or unavailable <=5% of both the eligible and full Commander strides after the complete repair. Known absent plans remain zero and can block that target.
+3. **Replace the fixed control T8 schedule before accepting the W stage.** Apply §9.4's actual first whole-table finish t*<=12, using the same resource/cost bins in output and joint access, printed loyalty, paid manland attacks, actual draw events and debited shared resources. Retain continuous `u_control=durable*J(t*)*2^(-max(0,t*-6)/h)`; no generic walker damage or assumed T8. A computed T8 is allowed; a default T8 is not. Require 100% of selected control routes to expose an executable trace or no line, with zero incomplete/missing-outlet paths admitted. Retain the reviewed Cabbage 35–50/55–70, Meren 65–80 and precon 40–55 bands.
+
+Control corrections may lower W; do not undo them to save a median or an anchor. Report W-zero share and W/S/total p10/p50/p90 at each step. Brawl's current W-zero share is 0%, yet its pile W exceeds real W: W coverage repair is necessary for fair scores and is not evidence that W has become a pile detector.
+
+### 10.7 Build order and acceptance contract
+
+Set **X=10%** for real Commander S=0 or unavailable, and **Y=50** for total p50 on the fixed full stride as well as the eligible subset. These are registered product requirements, not forecasts. A median of 50 lies within the retained precon 40–55 tier; a median of 20 labels ordinary lists as piles. The cap requires S/W/M >=37.5 to permit an unrounded individual total of 50, and >=81.25 to permit 85. Saturation cannot repair an excessive zero mass.
+
+Each implementation stage must publish `scoreDeckSafely` results on the actual training strides, both full and eligible, plus both pile constructions, cEDH and anchors. No `--raw`, lifted coverage gate, component-only formula substitution, fixture median or null filtering is acceptance evidence. Publish hashes, counts, evidence/rule gates, selected recipe, U/D, coverage, R, S and W zero shares, S/W/total p10/p50/p90, saturation share and every gaming maximum. Use source/event/commander-family bootstrap intervals, without replacing a failed point target by a favourable interval.
+
+| Stage | Work and numeric exit requirements |
+|---|---|
+| 0 — inputs and measurement contract | Freeze IDs, split/exclusion reasons and percentile/probe policy before editing formulas. Account for 100% of source rows; 0 train/holdout commander/event-family overlaps, including fixture commanders; 0 unexplained reproduction differences on unchanged inputs. Unknown-only identity cases are 100% provisional, with all slots retained; 100% confirmed rule failures obey their existing limits. Reproduce the baseline table before attributing any uplift. |
+| 1a — creature-combo W | Repair 2/2 missing cEDH routes; W>0 for 30/30 regression lists; cEDH p50 >=85 and no affected list <80 after composition. Every admitted line has a resource/tutor/finish trace; 0 broken essential paths admitted. Publish full-stride distributions even while the old S still fails. |
+| 1b — remaining W and control clock | Audit 100% of W-zero/unavailable rows; final Commander zero/unavailable share <=5% in full and eligible strides. 100% of selected control routes have actual schedules; 0 default-T8 finishes. Keep cEDH p50 >=85 and report unchanged-band anchor deltas. Freeze the resulting catalogue/recipe domain before S norms. |
+| 2 — U/D S, R retirement and p80 | `bands verify`: 0 active-constant/cell mismatches. Full and eligible Commander S-zero/unavailable <=10%; S p10 >=10, p50 >=60, p90 >=90; total p50 >=50. Brawl meets the same population targets on its own stride/profile. S=100 share <=25% in each eligible profile. Report total p10/p90 without a universal floor for rule-invalid rows. No percentile or band changes if a target fails. |
+| 3 — adversarial composition | All applicable k=1/5/10 cases meet §10.4's per-list maxima; 0 excess-gain cases. Original quota probes remain 3/3, but do not replace the expanded probes. Metadata changes move numeric outputs by exactly 0. Re-run both pile constructions; a failing pile gate stays explicitly OPEN. |
+| 4 — independent release evaluation | All stage-2 population gates on fresh grouped holdouts as well as regressions; cEDH median >=85 in both sets, regression p10 >=80 and neither formerly missing-line list below 80; >=14/16 anchors in unchanged §8 bands, including required Meren, precon and both reviewed Cabbages. >=90% of independently reviewed legal positives in their existing bands. Every prior stage's gaming and mechanics gates passes. |
+| **Release blocker — numeric pile separation** | **>=950/1,000 numeric totals <25 in EACH of ctrl93 and ctrlmatch, in EACH profile, on fresh disjoint seeds/commanders, with <=5% false rejection of eligible real lists by any added detector.** Also retain >=190/200 on each existing 200-list regression construction. Invalid controls, source labels and unavailable totals cannot pad a pass; publish generator failures and regenerate only against predeclared legality rules. No passing measurement exists for the proposed coherence formula; provenance cannot satisfy this numeric gate. |
+
+For the final total distribution, require eligible-real p10 >=25, p50 >=50 and p90 >=70, reporting these separately from the full stride's rule-capped p10. These tail guards prevent a good median from concealing widespread pile-level readings; they are design thresholds, not asserted measurements. Standard retains §9's independent target: S-zero/unavailable <=5%, S median 75–85 and total median >=75 on its real holdout, with no format dispatch by deck size alone.
+
+Keep both control definitions visible: `ctrl93` is the heavily typed draw construction (achieved coverage p50 .952/.949 in this study), and `ctrlmatch` samples the real coverage distribution (achieved .730/.733). Preserve paired frozen lists across catalogue changes and add fresh held-out controls; do not redraw only the difficult controls away. Existing study seeds are regression evidence, not a new holdout.
+
+The unchanged-band 14/16 requirement is deliberately separate from parameter estimation. The two Tazri out-high readings do not authorise changing their bands or choosing p60 to bring the Cabbages in. Correct mechanical failures, evaluate, and record any remaining failure. A stage may produce a reviewable experimental implementation while later gates remain open; it may not label the combined v1.4 score calibrated or deploy it as accepted. **The current evidence supports the build order and the rejection of the old S rule; it does not establish a solution to the retained numeric pile requirement.**
