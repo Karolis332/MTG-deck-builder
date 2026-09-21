@@ -1,0 +1,11 @@
+| constant | frozen | measured | n | verdict |
+|---|---:|---:|---:|---|
+| Q_BASELINE_JOINT_COMMANDER | 0.683 | 0.683 | 1000 | MATCH |
+| Q_BASELINE_JOINT_BRAWL | 0.733 | 0.733 | 1000 | MATCH |
+| Q_BASELINE_CLOSING | 0.323 | - | 0 | UNMEASURABLE (event never occurs in the cohort) |
+| Q_BASELINE_CLOSING_BRAWL | 0.373 | 0.373 | 8 | MATCH |
+| Q_SATURATION_BRAWL (= brawl p80) | 0.758 | 0.758 | 1146 | MATCH |
+| (Q_SATURATION commander p80) | 0.700 | 0.762 | 1824 | informational (spec-frozen) |
+| (Q_SATURATION .700 percentile) | 80.0 | 63.4 | 1824 | informational (spec-frozen) |
+
+bands verify: OK — every frozen constant reproduces at this catalogue (CATALOG_SIZE 14909; 45 band cells re-measured, 0 mismatches).

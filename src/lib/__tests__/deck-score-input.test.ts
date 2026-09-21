@@ -15,6 +15,12 @@ vi.mock('../db', async (importOriginal) => {
 
 import { toScoreFormat, buildDeckScoreInput, runDeckScore, scoreDeckSafely } from '../deck-score-input';
 
+// Coverage round 1 tripled the catalogue shard (4,467 -> 14,909 entries), so
+// every pile-building and catalogue-walking test in this file got ~3x slower
+// and several landed within noise of vitest's 15 s default. Raised per file
+// rather than per test: the work is corpus-sized, not hung.
+vi.setConfig({ testTimeout: 120_000 });
+
 beforeAll(() => {
   testDb = new Database(':memory:');
   testDb.exec(`

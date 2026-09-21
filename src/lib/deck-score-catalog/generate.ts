@@ -67,6 +67,14 @@ const OTHER_KW = [
   'demonstrate', 'paradigm', 'gravestorm', 'forestwalk', 'islandwalk', 'swampwalk', 'mountainwalk',
   'plainswalk', 'landwalk', 'flanking', 'horsemanship', 'rampage', 'shroud', 'intimidate', 'wither',
   'persist', 'undying', 'conspire', 'entwine', 'epic', 'fateseal', 'exert', 'afterlife', 'ascend',
+  // round 1: keyword lines the corpus plays that the table did not admit.
+  'cleave', 'escalate', 'embalm', 'bargain', 'toxic', 'training', 'affinity for artifacts',
+  'affinity for creatures', 'affinity for enchantments', 'affinity for planeswalkers',
+  'affinity for lands', 'affinity for artifact creatures', 'devoid', 'seek', 'blitz',
+  "doctor's companion", 'villainous choice', 'escalate', 'surveil', 'living metal',
+  'firebending', 'earthbending', 'waterbending', 'airbending', 'sneak', 'mayhem', 'encore',
+  'empower', 'gift', 'flurry', 'renew', 'disguise', 'solved', 'valiant', 'behold',
+  'umbra armor', 'shadowborn', 'fading', 'sunburst', 'devour', 'exalted',
 ];
 const ALL_KW = new Set([...EVASION, ...COMBAT_KW, ...PROTECTION_KW, ...OTHER_KW]);
 
@@ -100,7 +108,7 @@ const GLUE = new Set([
   'choice', 'choices', 'becomes', 'become', 'addition', 'otherwise', 'energy', 'devotion', 'historic',
 ]);
 
-interface Atom {
+export interface Atom {
   kind: 'effect' | 'rider';
   re: RegExp;
   make?: (m: RegExpExecArray, ctx: Ctx) => Partial<TypedEffect> | null;
@@ -147,7 +155,7 @@ const ATOMS: Atom[] = [
   // --- mana -------------------------------------------------------------
   {
     kind: 'effect',
-    re: /\badds? (?:an additional )?(?:\{[^}]+\})+|adds? (one|two|three|x) mana of (?:any|the chosen) (?:colou?r that a land (?:you|an opponent) controls? could produce|colou?r among [^.]*|type that a land you control could produce|of the exiled card's colou?rs|(?:one )?colou?r(?: in your commander's colou?r identity)?)|adds? (\w+) mana in any combination of colou?rs|\badds? an amount of \{[WUBRGC]\} equal to [^.,]*/gi,
+    re: /\badds? (?:an additional )?(?:\{[^}]+\})+|adds? (?:an additional )?(one|two|three|x) mana of (?:any|the chosen) (?:colou?r that a land (?:you|an opponent) controls? could produce|colou?r among [^.]*|type that a land you control could produce|of the exiled card's colou?rs|(?:one )?colou?r(?: in your commander's colou?r identity)?)|adds? (\w+) mana in any combination of colou?rs|\badds? an amount of \{[WUBRGC]\} equal to [^.,]*/gi,
     make: (m, ctx) => {
       const pips = (m[0].match(/\{[^}]+\}/g) ?? []).length;
       const n = pips || num(m[1] ?? m[2]);
@@ -483,7 +491,7 @@ const ATOMS: Atom[] = [
   // graveyard is only useful where something put it there, so they consume.
   {
     kind: 'effect',
-    re: /\byou may cast this card from your graveyard|\beach [a-z' ]*cards? in your graveyard gains? (?:unearth|flashback|escape)[^.]*|\byou may cast [a-z' ]*spells? from [a-z' ]*your graveyard[^.]*/gi,
+    re: /\byou may cast this card from your graveyard[^.]*|\beach [a-z' ]*cards? in your graveyard gains? (?:unearth|flashback|escape)[^.]*|\byou may cast [a-z' ]*spells? from [a-z' ]*your graveyard[^.]*/gi,
     make: (m, ctx) => eff('engine', ctx, { zones: ['graveyard'], consumes: ['graveyard cards'], produces: ['recursion'], outputBounds: { min: 1, max: null, unit: 'cards' } }),
   },
   {
@@ -502,7 +510,7 @@ const ATOMS: Atom[] = [
     make: (m, ctx) => eff('closing', ctx, { targetFilters: ['target creature'], produces: ['pump'], outputBounds: { min: num(m[1]), max: num(m[1]), unit: 'power' } }),
   },
   // --- riders: text with no independent score-relevant output -----------
-  { kind: 'rider', re: /\bthis (spell|ability) costs (?:\{[^}]+\}|\{x\}) less to cast(?:,? where x is [^.]*| for each [^.,]*)?/gi },
+  { kind: 'rider', re: /\bthis (spell|ability) costs (?:\{[^}]+\}|\{x\}) less to cast(?:[^.]*)?/gi },
   { kind: 'rider', re: /\bas an additional cost to cast this spell,? [^.]*/gi },
   { kind: 'rider', re: /\bthis (creature|artifact|enchantment|permanent|land) enters tapped(?: if [^.]*| unless [^.]*)?/gi },
   { kind: 'rider', re: /\bthen shuffles?(?: your library)?/gi },
@@ -751,6 +759,620 @@ const V13_ATOMS: Atom[] = [
 ];
 ATOMS.push(...V13_ATOMS);
 
+/**
+ * Coverage round 1. The generator had never been run over the real corpus, so
+ * the first pass simply added 8,400 cards it already parses. What was left is
+ * the tail measured in `coverage-queue-corpus.csv`: sentences that are common
+ * ACROSS cards but rare per card. Every atom below fires on >= 3 distinct
+ * corpus cards (counts in the round-1 report); one- and two-card shapes are
+ * listed there and deliberately left untyped — a one-card rule is a curated
+ * entry wearing a generator's clothes.
+ */
+const ROUND1_ATOMS: Atom[] = [
+  // ── riders: text with no independent score-relevant output ─────────────
+  // A deck-construction permission, not a board effect.
+  { kind: 'rider', re: /\ba deck can have any number of cards named [^.]*/gi },
+  // The drawback half of a temporary-copy / temporary-token effect.
+  { kind: 'rider', re: /\bsacrifices? (?:it|them|that token|those tokens) at the beginning of the next end step/gi },
+  // Saga / Case final chapter: the transform itself makes no new claim; the
+  // back face is a separate printing with its own entry.
+  { kind: 'rider', re: /\bexiles? this (?:saga|case|permanent), then returns? it to the battlefield transformed under your control/gi },
+  // Mode selection at ETB: "As this Aura enters, choose a color."
+  { kind: 'rider', re: /\bas this [a-z]*\s?enters,? (?:you may )?choose [^.]*/gi },
+  // The visible half of a targeted-discard spell; the discard is typed.
+  { kind: 'rider', re: /\btarget player reveals their hand\b/gi },
+  // The Ring mechanic's trigger text; the Ring's own abilities are not on the card.
+  { kind: 'rider', re: /\bthe ring tempts you\b/gi },
+  // Type-granting on a chosen-type permanent — read by the typal recipe from
+  // the subtype line, not from this sentence.
+  { kind: 'rider', re: /\bthis (?:creature|permanent|artifact) is the chosen type in addition to its other types\b/gi },
+  // `You get an emblem with "…"` — the quoted ability is typed on its own by
+  // the depth-1 quote pass; this only consumes the wrapper.
+  { kind: 'rider', re: /\byou get an emblem with\b/gi },
+  // The cost half of a cast-from-elsewhere permission that is itself typed.
+  { kind: 'rider', re: /\bif you cast a spell this way, pay life equal to its mana value rather than pay its mana cost/gi },
+  // Flashback granted by another effect: the cost is not an output.
+  { kind: 'rider', re: /\bthe flashback cost is equal to its mana cost\b/gi },
+
+  // ── effects ────────────────────────────────────────────────────────────
+  {
+    kind: 'effect',
+    // Counter multipliers (Hardened Scales, Branching Evolution, Ozolith …):
+    // a replacement that CONSUMES counter placement the deck already produces
+    // and yields more of it — a doubler, never a source.
+    re: /\bif one or more (?:\+1\/\+1 |\+1\/\+1 or [a-z0-9\/+ -]+)?counters? would be put on [^,]*,? (?:that many plus (?:one|two)|twice that many|\w+ times that many)[^.]*/gi,
+    make: (m, ctx) => eff('engine', ctx, {
+      consumes: ['counter placement'], produces: ['+1/+1 counters'],
+      outputBounds: { min: 1, max: null, unit: 'counters' },
+    }),
+  },
+  {
+    kind: 'effect',
+    // Token multipliers (Doubling Season, Parallel Lives, Mondrak …). Same
+    // shape as the counter one: consumes the deck's own token production.
+    re: /\bif (?:an effect would create one or more tokens|one or more tokens would be created)[^,]*,? (?:it creates )?twice that many[^.]*/gi,
+    make: (m, ctx) => eff('engine', ctx, {
+      consumes: ['tokens'], produces: ['tokens', 'creature token'],
+      outputBounds: { min: 1, max: null, unit: 'tokens' },
+    }),
+  },
+  {
+    kind: 'effect',
+    // Damage multipliers (Fiery Emancipation, City on Fire, Solphim …).
+    re: /\bif a source you control would deal (?:noncombat )?damage to [^,]*,? it deals (?:double|triple|twice) that damage[^.]*/gi,
+    make: (m, ctx) => eff('closing', ctx, {
+      consumes: ['damage'], produces: ['damage multiplier'],
+      outputBounds: { min: 1, max: null, unit: 'extra damage' },
+    }),
+  },
+  {
+    kind: 'effect',
+    // Equipment / Aura pump with ANY sign. The existing atom only admits
+    // `+N/+N`, so Skullclamp (`+1/-1`) and every X-pump stayed partial.
+    re: /\b(?:equipped|enchanted) creature gets? [+-][\dx*]+\/[+-][\dx*]+/gi,
+    make: (m, ctx) => {
+      const power = Number((m[0].match(/([+-][\dx*]+)\//i) ?? [])[1]?.replace('+', '')) || 0;
+      return eff('closing', ctx, {
+        targetFilters: ['equipped creature'], produces: ['pump'],
+        outputBounds: { min: Math.max(0, power), max: Math.max(0, power), unit: 'power' },
+      });
+    },
+  },
+  {
+    kind: 'effect',
+    // Typal anthems that name the CHOSEN type rather than a printed tribe.
+    re: /\b(?:creatures|permanents) you control of the chosen type get \+(\d+)\/\+(\d+)/gi,
+    make: (m, ctx) => eff('closing', ctx, { produces: ['anthem'], outputBounds: { min: num(m[1]), max: null, unit: 'power' } }),
+  },
+  {
+    kind: 'effect',
+    // Attack taxes (Ghostly Prison, Propaganda, Windborn Muse …): an answer on
+    // the creature axis that prices attackers instead of removing them.
+    re: /\bcreatures can'?t attack you[^.]*unless [^.]*/gi,
+    make: (m, ctx) => eff('answer', ctx, {
+      answerAxes: ['creature'], targetFilters: ['attacking creatures'],
+      outputBounds: { min: 1, max: null, unit: 'attacks answered' },
+    }),
+  },
+  {
+    kind: 'effect',
+    // Clone tokens (Helm of the Host, Kiki-Jiki's reflection, Vile
+    // Duplication …). The copy's power is whatever it copies, so only the
+    // lower bound is claimed.
+    re: /\bcreates? (?:a|an|x|one|two|\d+) tokens? that'?s? (?:a|an) copy of [^.]*/gi,
+    make: (m, ctx) => eff('closing', ctx, {
+      produces: ['tokens', 'creature token', 'pressure'],
+      outputBounds: { min: 1, max: null, unit: 'power' },
+    }),
+  },
+  {
+    kind: 'effect',
+    // Characteristic-defining bodies (Lumra, Psychosis Crawler, Ashaya …).
+    // The printed P/T is `*`, so `bodyEffect` reads nothing and the card had
+    // no pressure at all.
+    re: /\bthis permanent'?s power and toughness are each equal to [^.]*/gi,
+    make: (m, ctx) => eff('closing', ctx, { produces: ['pressure'], outputBounds: { min: 1, max: null, unit: 'power' } }),
+  },
+  {
+    kind: 'effect',
+    // "Draw cards equal to …" — the existing draw atom needs a literal count.
+    re: /\bdraws? cards? equal to [^.]*/gi,
+    make: (m, ctx) => eff('advantage', ctx, { produces: ['cards'], outputBounds: { min: 1, max: null, unit: 'cards' } }),
+  },
+  {
+    kind: 'effect',
+    // Bounded exile removal (Skyclave Apparition, Lord Skitter …).
+    re: /\bexiles? up to (?:one|two|x|\d+) target [a-z', -]*permanents? [^.]*/gi,
+    make: (m, ctx) => eff('answer', ctx, {
+      answerAxes: ['permanent'], targetFilters: ['target permanent'],
+      outputBounds: { min: 0, max: null, unit: 'permanents answered' },
+    }),
+  },
+  {
+    kind: 'effect',
+    // Mass counter placement on a tribe / on each of a board of creatures.
+    re: /\bputs? a (?:\+1\/\+1|-1\/-1) counter on each [a-z' ]*(?:you control|creature)[^.]*/gi,
+    make: (m, ctx) => eff('closing', ctx, { produces: ['+1/+1 counters'], outputBounds: { min: 1, max: null, unit: 'power' } }),
+  },
+  {
+    kind: 'effect',
+    // Granted flashback on a graveyard card (Snapcaster Mage, Flashback …).
+    re: /\btarget instant or sorcery card in your graveyard gains flashback until end of turn/gi,
+    make: (m, ctx) => eff('engine', ctx, {
+      zones: ['graveyard'], consumes: ['graveyard cards'], produces: ['recursion'],
+      outputBounds: { min: 1, max: 1, unit: 'cards' },
+    }),
+  },
+  {
+    kind: 'effect',
+    // Bounce a spell on the stack (Reprieve, Bilbo's Gambit …) — a stack
+    // answer that is not a counter.
+    re: /\breturns? target spell to its owner'?s hand/gi,
+    make: (m, ctx) => eff('answer', ctx, {
+      answerAxes: ['stack'], targetFilters: ['target spell'],
+      outputBounds: { min: 1, max: 1, unit: 'spells answered' },
+    }),
+  },
+];
+ATOMS.push(...ROUND1_ATOMS);
+
+/**
+ * Coverage round 1, batch 2. Batch 1 worked the top of the copy-weighted
+ * queue, which is a long tail of 1-2 card shapes. These were found the other
+ * way round — the untyped sentences that recur across the MOST distinct corpus
+ * cards — so each one fires on 20-70 of them (counts in the round-1 report).
+ */
+const ROUND1_ATOMS_B2: Atom[] = [
+  // ── riders ─────────────────────────────────────────────────────────────
+  // Regeneration is a protection shield, not an output.
+  { kind: 'rider', re: /\bregenerates? (?:this creature|this permanent|it|them|target [a-z' ]*creature|that creature)\b/gi },
+  // Living weapon / reconfigure attach clause: the Equipment's pump is typed.
+  { kind: 'rider', re: /\battach (?:it|them|this permanent|that equipment) to target [a-z' ]*(?:creature|permanent)(?: you control)?\b/gi },
+  // Dice mechanic: the OUTCOME rows carry the effects and are typed on their
+  // own lines; the roll itself claims nothing.
+  { kind: 'rider', re: /\brolls? (?:a|an|two|three|x|\d+) d\d+\b/gi },
+  // Per-turn limiter, the `activate only once each turn` shape in prose form.
+  { kind: 'rider', re: /\bdo this only once each turn\b/gi },
+  // Replacement on where a countered / cast card goes afterwards.
+  { kind: 'rider', re: /\bif that (?:spell|card|creature|permanent) would be put into (?:their|its owner'?s|a|your) graveyard[^,]*, exiles? it instead/gi },
+  // Deck-construction permission (the Companion / background / commander rules).
+  { kind: 'rider', re: /\bthis permanent can be your commander\b/gi },
+  // Alchemy: a spellbook draft resolves to another card's text, not this one's.
+  { kind: 'rider', re: /\byou may choose not to untap this (?:permanent|artifact|creature|land) during your untap step/gi },
+  // Kicked / escaped alternate-mode riders.
+  { kind: 'rider', re: /\bif this spell was kicked,? [^.]*/gi },
+  { kind: 'rider', re: /\bsacrifices? it unless it escaped\b/gi },
+  // The wrapper around a granted ability that the quote pass types on its own.
+  { kind: 'rider', re: /\bcommander creatures you own have\b/gi },
+  // `Equipped creature gets +2/+2 and has "<quoted ability>"` — the pump and
+  // the quote are both typed; only the conjunction is left.
+  { kind: 'rider', re: /\b(?:and )?(?:gains?|has|have) protection from [^.]*/gi },
+
+  // ── effects ────────────────────────────────────────────────────────────
+  {
+    kind: 'effect',
+    // Variable-damage sources: the existing damage atom needs a literal
+    // number, so every `equal to …` burn spell and X-fireball stayed partial.
+    re: /\bthis permanent deals damage to ([^.]*?) equal to [^.]*/gi,
+    make: (m, ctx) => eff(/opponent|player|any target/i.test(m[1]) ? 'closing' : 'answer', ctx, {
+      targetFilters: [m[1].trim()],
+      ...(/opponent|player|any target/i.test(m[1]) ? {} : { answerAxes: ['creature' as const] }),
+      outputBounds: { min: 1, max: null, unit: 'damage' },
+    }),
+  },
+  {
+    kind: 'effect',
+    // Redirected / repeated damage: `it deals that much damage to each other
+    // opponent`.
+    re: /\bit deals that much damage to (?:each other opponent|each opponent|any target|that player|each player)\b/gi,
+    make: (m, ctx) => eff('closing', ctx, { outputBounds: { min: 1, max: null, unit: 'damage' } }),
+  },
+  {
+    kind: 'effect',
+    // The monarch is a repeating draw engine, which is the whole reason a
+    // deck plays these.
+    re: /\byou become the monarch\b/gi,
+    make: (m, ctx) => eff('advantage', ctx, { produces: ['cards'], outputBounds: { min: 1, max: null, unit: 'cards' } }),
+  },
+  {
+    kind: 'effect',
+    // Extra turns.
+    re: /\btakes? an extra turn after this one\b/gi,
+    make: (m, ctx) => eff('closing', ctx, { produces: ['extra turn'], outputBounds: { min: 1, max: 1, unit: 'turns' } }),
+  },
+  {
+    kind: 'effect',
+    // Counters on a TARGET, any kind. The existing atom only admits the
+    // `+1/+1 counter on this creature` form.
+    re: /\bputs? (?:a|an|one|two|three|four|x|\d+) (?:\+1\/\+1|-1\/-1|\+1\/\+0|charge|loyalty|oil|lore|level) counters? on target [^.]*/gi,
+    make: (m, ctx) => eff('closing', ctx, { produces: ['+1/+1 counters'], outputBounds: { min: 1, max: null, unit: 'power' } }),
+  },
+  {
+    kind: 'effect',
+    // Pacifism-shaped removal: the creature survives but stops working.
+    re: /\benchanted creature can'?t attack(?: or block)?[^.]*/gi,
+    make: (m, ctx) => eff('answer', ctx, {
+      answerAxes: ['creature'], targetFilters: ['enchanted creature'],
+      outputBounds: { min: 1, max: 1, unit: 'creatures answered' },
+    }),
+  },
+  {
+    kind: 'effect',
+    // Ramp / tutor wordings the two existing land-search atoms miss: the
+    // `and/or <type> cards` joint search and the `basic <Type>` name list.
+    re: /\bsearch(?:es)? your library for up to (?:one|two|three|x|\d+) basic land cards?(?: and\/or [a-z' ]*cards?)?[^.]*/gi,
+    make: (m, ctx) => eff('mana', ctx, {
+      zones: ['library', 'battlefield'], targetFilters: ['basic land card'], produces: ['land'],
+      outputBounds: { min: 1, max: null, unit: 'lands' },
+    }),
+  },
+  {
+    kind: 'effect',
+    re: /\bsearch(?:es)? your library for an? basic (?:plains|island|swamp|mountain|forest)(?:,? (?:or |and\/or )?(?:plains|island|swamp|mountain|forest))* cards?[^.]*/gi,
+    make: (m, ctx) => eff('mana', ctx, {
+      zones: ['library', 'battlefield'], targetFilters: ['basic land card'], produces: ['land'],
+      outputBounds: { min: 1, max: 1, unit: 'lands' },
+    }),
+  },
+  {
+    kind: 'effect',
+    // Named-card tutors (`search your library for a card named …`).
+    re: /\byou may search your library for a card named [^.]*/gi,
+    make: (m, ctx) => eff('tutor', ctx, {
+      zones: ['library'], targetFilters: ['named card'], produces: ['card'],
+      outputBounds: { min: 0, max: 1, unit: 'cards' },
+    }),
+  },
+  {
+    kind: 'effect',
+    // Dig-until-you-hit selection.
+    re: /\breveals? cards? from the top of your library until you reveal [^.]*/gi,
+    make: (m, ctx) => eff('advantage', ctx, {
+      zones: ['library'], produces: ['selection'], outputBounds: { min: 0, max: null, unit: 'cards' },
+    }),
+  },
+  {
+    kind: 'effect',
+    // `Put that card onto the battlefield …` — the payoff half of a dig.
+    re: /\bputs? that card onto the battlefield[^.]*/gi,
+    make: (m, ctx) => eff('advantage', ctx, {
+      zones: ['library', 'battlefield'], produces: ['cards'], outputBounds: { min: 1, max: 1, unit: 'cards' },
+    }),
+  },
+  {
+    kind: 'effect',
+    // Graveyard hate on a single card.
+    re: /\bexiles? up to (?:one|two|three|x|\d+) target cards? from (?:a|each|target player'?s) graveyard/gi,
+    make: (m, ctx) => eff('answer', ctx, {
+      answerAxes: ['graveyard_or_protection'], targetFilters: ['graveyard card'],
+      outputBounds: { min: 0, max: null, unit: 'cards answered' },
+    }),
+  },
+  {
+    kind: 'effect',
+    // Casting an opponent's card: the existing free-cast atom needs the word
+    // `spell`, and these say `instant or sorcery card`.
+    re: /\byou may cast target [a-z' ]*cards? from (?:an opponent'?s|a|your|target player'?s) graveyard(?: without paying its mana cost)?/gi,
+    make: (m, ctx) => eff('advantage', ctx, {
+      zones: ['graveyard'], produces: ['free cast'], outputBounds: { min: 1, max: 1, unit: 'cards' },
+    }),
+  },
+  {
+    kind: 'effect',
+    // Untap effects are the mana/engine half of every untapper.
+    re: /\buntaps? (?:target|another target|up to (?:one|two|three)) [a-z' ]*(?:creature|permanent|artifact|land)s?(?: you control)?\b/gi,
+    make: (m, ctx) => eff('engine', ctx, { produces: ['untap'], outputBounds: { min: 1, max: null, unit: 'permanents' } }),
+  },
+  {
+    kind: 'effect',
+    // Anaphoric bounce: `… return it to its owner's hand.`
+    re: /\breturns? it to its owner'?s hand\b/gi,
+    make: (m, ctx) => eff('answer', ctx, {
+      answerAxes: ['permanent'], targetFilters: ['that permanent'],
+      outputBounds: { min: 1, max: 1, unit: 'permanents answered' },
+    }),
+  },
+  {
+    kind: 'effect',
+    // Alchemy spellbook draft — a real card-advantage engine on Arena.
+    re: /\bdrafts? a card from this permanent'?s spellbook[^.]*/gi,
+    make: (m, ctx) => eff('advantage', ctx, { produces: ['cards'], outputBounds: { min: 1, max: 1, unit: 'cards' } }),
+  },
+  {
+    kind: 'effect',
+    // The counter multipliers again, in the two `would put` wordings
+    // (Doubling Season's second sentence, Vorinclex, Innkeeper's Talent).
+    re: /\bif (?:an effect|you|a source) would put one or more counters on [^,]*,? (?:it puts |put )?twice that many[^.]*/gi,
+    make: (m, ctx) => eff('engine', ctx, {
+      consumes: ['counter placement'], produces: ['+1/+1 counters'],
+      outputBounds: { min: 1, max: null, unit: 'counters' },
+    }),
+  },
+];
+ATOMS.push(...ROUND1_ATOMS_B2);
+
+/**
+ * Coverage round 1, batch 3 — the shapes still recurring across >= 10 distinct
+ * CORPUS-PLAYED cards after batches 1-2. Everything past this batch is 1-2
+ * card shapes (see the round-1 report's stopping table).
+ */
+const ROUND1_ATOMS_B3: Atom[] = [
+  // ── riders ─────────────────────────────────────────────────────────────
+  // Frequency limiter in prose form; the ability itself is typed.
+  { kind: 'rider', re: /\bonce (?:during )?each (?:of your turns|turn),?/gi },
+  // Modal permission, not an effect.
+  { kind: 'rider', re: /\byou may choose the same mode more than once\b/gi },
+  // Exile-replacement on a creature that is already being answered.
+  { kind: 'rider', re: /\bif that (?:creature|permanent) would die this turn, exiles? it instead\b/gi },
+  { kind: 'rider', re: /\bif this permanent would be put into a graveyard from anywhere, exiles? it instead\b/gi },
+  // Additional-cost clauses on an otherwise typed cast permission.
+  { kind: 'rider', re: /\bby discarding (?:a|an|one|two|three|x|\d+) [a-z' ]*cards?[^.]*/gi },
+  { kind: 'rider', re: /\byou may cast this spell as though it had flash[^.]*/gi },
+  // Self life payment: a cost, never an output. Restricted to `and lose` /
+  // `you lose` so an OPPONENT's life loss (`each opponent loses N life`,
+  // `your opponents lose N life`) can never be swallowed by it.
+  { kind: 'rider', re: /\b(?:and|you) lose \d+ life\b/gi },
+
+  // ── effects ────────────────────────────────────────────────────────────
+  {
+    kind: 'effect',
+    // Target pump with ANY sign or variable, the shape `+2/+0` and `+X/+X`
+    // that the `\+(\d+)\/\+(\d+)` atom cannot see.
+    re: /\b(?:target|another target|up to (?:one|two|three) target|this permanent|this creature) [a-z' ]*creatures? (?:you control )?gets? ([+-][\dx*]+)\/[+-][\dx*]+/gi,
+    make: (m, ctx) => {
+      const power = Number(m[1].replace('+', '')) || 0;
+      // `-3/-3` is REMOVAL, not a pump: same shape, opposite family. Typing it
+      // as a 0-power pump would give a creature-kill spell no answer credit.
+      if (power < 0) {
+        return eff('answer', ctx, {
+          answerAxes: ['creature'], targetFilters: ['target creature'],
+          outputBounds: { min: 1, max: 1, unit: 'creatures answered' },
+        });
+      }
+      return eff('closing', ctx, {
+        targetFilters: ['target creature'], produces: ['pump'],
+        outputBounds: { min: power, max: power, unit: 'power' },
+      });
+    },
+  },
+  {
+    kind: 'effect',
+    // Tapping down a blocker / attacker is an answer on the creature axis.
+    re: /\btaps? (?:enchanted|target|another target|up to (?:one|two|three) target) [a-z' ]*(?:creature|permanent)s?[^.]*/gi,
+    make: (m, ctx) => eff('answer', ctx, {
+      answerAxes: ['creature'], targetFilters: ['target creature'],
+      outputBounds: { min: 1, max: 1, unit: 'creatures answered' },
+    }),
+  },
+  {
+    kind: 'effect',
+    re: /\byou may taps? or untaps? target [a-z' ]*permanent\b/gi,
+    make: (m, ctx) => eff('engine', ctx, { produces: ['untap'], outputBounds: { min: 1, max: 1, unit: 'permanents' } }),
+  },
+  {
+    kind: 'effect',
+    // Mass free casting (`any number of spells`), which the existing free-cast
+    // atom cannot see because it requires a singular `a|an … spell`.
+    re: /\byou may cast any number of [a-z' ]*spells?[^.]*without paying (?:their|its) mana costs?/gi,
+    make: (m, ctx) => eff('advantage', ctx, {
+      produces: ['free cast'], outputBounds: { min: 1, max: null, unit: 'cards' },
+    }),
+  },
+  {
+    kind: 'effect',
+    // `Reveal the top N cards of your library` — the look/exile atom only
+    // admits `look at` and `exile`.
+    re: /\breveals? the top (?:(a|an|one|two|three|four|five|six|seven|x|\d+) )?cards? of (?:your|target player'?s|each player'?s) library/gi,
+    make: (m, ctx) => eff('advantage', ctx, {
+      zones: ['library'], produces: ['selection'], outputBounds: { min: 0, max: num(m[1]), unit: 'cards' },
+    }),
+  },
+  {
+    kind: 'effect',
+    // Experience counters are a permanent, growing engine resource.
+    re: /\byou get an experience counter\b/gi,
+    make: (m, ctx) => eff('engine', ctx, {
+      produces: ['+1/+1 counters'], outputBounds: { min: 1, max: 1, unit: 'counters' },
+    }),
+  },
+];
+ATOMS.push(...ROUND1_ATOMS_B3);
+
+/**
+ * Coverage round 1, batch 4 — keyword words used as VERBS mid-sentence
+ * (`… , populate.`, `… , amass Orcs 1.`), which `keywordTokens` never sees
+ * because it only classifies whole LINES, plus the last shapes on >= 10
+ * corpus-played cards. After this batch the residue is 1-2 card shapes:
+ * 3,479 of 4,372 remaining shapes are on exactly one card.
+ */
+const ROUND1_ATOMS_B4: Atom[] = [
+  {
+    kind: 'effect',
+    // Keyword verbs that make BODIES.
+    re: /\b(?:populates?|amass(?:es)? [A-Za-z]+ \d+|incubates? \d+|creates? a lander token)\b/gi,
+    make: (m, ctx) => eff('closing', ctx, {
+      produces: ['tokens', 'creature token', 'pressure'], outputBounds: { min: 1, max: null, unit: 'power' },
+    }),
+  },
+  {
+    kind: 'effect',
+    // Keyword verbs that place COUNTERS.
+    re: /\b(?:proliferates?|bolsters? \d+|supports? \d+|monstrosity \d+|adapts? \d+|trains?\b)/gi,
+    make: (m, ctx) => eff('closing', ctx, {
+      produces: ['+1/+1 counters'], outputBounds: { min: 1, max: null, unit: 'power' },
+    }),
+  },
+  {
+    kind: 'effect',
+    // Keyword verbs that see CARDS.
+    re: /\b(?:explores?|investigates?|connives?(?: \d+)?|manifests? dread|ventures? into (?:the dungeon|undercity)|learns?|surveils? \d+|seeks? [^.]*)\b/gi,
+    make: (m, ctx) => eff('advantage', ctx, {
+      zones: ['library'], produces: ['selection'], outputBounds: { min: 0, max: null, unit: 'cards' },
+    }),
+  },
+  {
+    kind: 'effect',
+    // Anaphoric reanimation: `… return it/that card to the battlefield under
+    // your control.` — the payoff half of every recursion trigger.
+    re: /\breturns? (?:it|them|that card|those cards|that creature card) to the battlefield(?: under your control)?[^.]*/gi,
+    make: (m, ctx) => eff('engine', ctx, {
+      zones: ['graveyard', 'battlefield'], consumes: ['graveyard cards'], produces: ['recursion'],
+      outputBounds: { min: 1, max: null, unit: 'cards' },
+    }),
+  },
+  {
+    kind: 'effect',
+    // Non-basic land search (`up to four land cards with different names`).
+    re: /\bsearch(?:es)? your library for up to (?:one|two|three|four|five|x|\d+) land cards?[^.]*/gi,
+    make: (m, ctx) => eff('mana', ctx, {
+      zones: ['library', 'battlefield'], targetFilters: ['land card'], produces: ['land'],
+      outputBounds: { min: 1, max: null, unit: 'lands' },
+    }),
+  },
+  {
+    kind: 'effect',
+    // `Until end of turn, you may cast spells from among them.`
+    re: /\byou may cast (?:spells|those cards|them|that card)\b[^.]*/gi,
+    make: (m, ctx) => eff('advantage', ctx, {
+      produces: ['free cast'], outputBounds: { min: 1, max: null, unit: 'cards' },
+    }),
+  },
+  {
+    kind: 'effect',
+    // Untapping a group the previous clause named.
+    re: /\buntaps? (?:those|them|all|each) [a-z' ]*(?:creatures?|permanents?|lands?|artifacts?)?\b/gi,
+    make: (m, ctx) => eff('engine', ctx, { produces: ['untap'], outputBounds: { min: 1, max: null, unit: 'permanents' } }),
+  },
+  {
+    kind: 'effect',
+    // Split damage (`deals 3 damage divided as you choose among …`).
+    re: /\bthis permanent deals \d+ damage divided as you choose among [^.]*/gi,
+    make: (m, ctx) => eff('answer', ctx, {
+      answerAxes: ['creature'], targetFilters: ['divided targets'],
+      outputBounds: { min: 1, max: null, unit: 'damage' },
+    }),
+  },
+  {
+    kind: 'effect',
+    // Lockdown auras (`Enchanted creature doesn't untap during its
+    // controller's untap step.`).
+    re: /\benchanted (?:creature|permanent|artifact|land) doesn'?t untap during [^.]*/gi,
+    make: (m, ctx) => eff('answer', ctx, {
+      answerAxes: ['creature'], targetFilters: ['enchanted permanent'],
+      outputBounds: { min: 1, max: 1, unit: 'permanents answered' },
+    }),
+  },
+  // ── riders ─────────────────────────────────────────────────────────────
+  // A bare targeting sentence; the effect that uses the target is its own one.
+  { kind: 'rider', re: /\bchoose target (?:creature|opponent|player|permanent)(?: you control| you don'?t control)?\b/gi },
+  // Coin flips and damage prevention carry no output of their own.
+  { kind: 'rider', re: /\bflips? a coin\b/gi },
+  // `… from your graveyard using its mutate ability` / `… by paying its
+  // <keyword> cost` — the cast permission itself is already typed.
+  { kind: 'rider', re: /\busing its [a-z' ]*ability\b/gi },
+];
+ATOMS.push(...ROUND1_ATOMS_B4);
+
+/**
+ * Coverage round 1, batch 5 — the last shapes on >= 9 corpus-played cards.
+ * The stop rule fires here: below this the shapes are 1-2 cards each (3,468 of
+ * 4,355 remaining shapes are on exactly one card), so the next 100 cards would
+ * cost far more than 10 atoms.
+ */
+const ROUND1_ATOMS_B5: Atom[] = [
+  {
+    kind: 'effect',
+    // Turn-to-a-Frog removal: the creature survives with nothing left.
+    re: /\b(?:target|enchanted|this) [a-z' ]*creatures? loses? all abilities and becomes? [^.]*/gi,
+    make: (m, ctx) => eff('answer', ctx, {
+      answerAxes: ['creature'], targetFilters: ['target creature'],
+      outputBounds: { min: 1, max: 1, unit: 'creatures answered' },
+    }),
+  },
+  {
+    kind: 'effect',
+    // `Target player gains N life.`
+    re: /\b(?:target player|target opponent|its controller|that player|you) gains? \d+ life\b/gi,
+    make: (m, ctx) => eff('advantage', ctx, { produces: ['life'], outputBounds: { min: 1, max: null, unit: 'life' } }),
+  },
+  {
+    kind: 'effect',
+    // Alchemy's `empower <planeswalker> N`.
+    re: /\bempowers? [A-Za-z]+ \d+/gi,
+    make: (m, ctx) => eff('engine', ctx, { produces: ['+1/+1 counters'], outputBounds: { min: 1, max: null, unit: 'counters' } }),
+  },
+  {
+    kind: 'effect',
+    // Exile-tutors that take a SET of cards (`up to three monocolored cards
+    // with different names`), which the singular tutor atom cannot see.
+    re: /\bsearch(?:es)? your library for up to (?:one|two|three|four|five|x|\d+) [a-z', -]*cards?[^.]*/gi,
+    make: (m, ctx) => eff('tutor', ctx, {
+      zones: ['library'], targetFilters: ['any card'], produces: ['card'],
+      outputBounds: { min: 1, max: null, unit: 'cards' },
+    }),
+  },
+  {
+    kind: 'effect',
+    // `it deals that much damage to each creature that player controls` — the
+    // batch-2 atom only listed the player-facing targets.
+    re: /\bit deals that much damage to [^.]*/gi,
+    make: (m, ctx) => eff(/opponent|player|any target/i.test(m[0]) ? 'closing' : 'answer', ctx, {
+      outputBounds: { min: 1, max: null, unit: 'damage' },
+    }),
+  },
+  {
+    kind: 'effect',
+    re: /\bthis permanent deals that much damage to [^.]*/gi,
+    make: (m, ctx) => eff(/opponent|player|any target/i.test(m[0]) ? 'closing' : 'answer', ctx, {
+      outputBounds: { min: 1, max: null, unit: 'damage' },
+    }),
+  },
+  {
+    kind: 'effect',
+    re: /\byou may taps? or untaps? target [a-z' ]*(?:creature|permanent|artifact|land)\b/gi,
+    make: (m, ctx) => eff('engine', ctx, { produces: ['untap'], outputBounds: { min: 1, max: 1, unit: 'permanents' } }),
+  },
+  {
+    kind: 'effect',
+    // Lifegain denial is a real answer against lifegain plans.
+    re: /\byour opponents can'?t gain life\b|\bplayers can'?t gain life\b/gi,
+    make: (m, ctx) => eff('answer', ctx, {
+      answerAxes: ['permanent'], targetFilters: ['opponent lifegain'],
+      outputBounds: { min: 1, max: 1, unit: 'effects answered' },
+    }),
+  },
+  // ── riders ─────────────────────────────────────────────────────────────
+  // A bare keyword line left behind by a Class / Saga / level bracket.
+  { kind: 'rider', re: /^(?:flying|trample|haste|vigilance|lifelink|deathtouch|menace|reach|hexproof|indestructible|flash|first strike|double strike)(?:,? (?:and )?(?:flying|trample|haste|vigilance|lifelink|deathtouch|menace|reach|hexproof|indestructible|flash|first strike|double strike))*\.?$/gi },
+  // The anaphoric forms of riders that already exist for explicit nouns.
+  { kind: 'rider', re: /\bsacrifices? (?:it|them)\b/gi },
+  { kind: 'rider', re: /\bcop(?:y|ies) it\b/gi },
+  { kind: 'rider', re: /\bdestroys? it\b/gi },
+  // `The owner of target permanent shuffles it into their library, then
+  // reveals the top card of their library.` — 11 and 18 corpus cards. Both
+  // are text consumption only: for Legacy Weapon or Audacious Swap the removal
+  // verb is in another clause, and for the Colossus cycle the shuffle is a
+  // self-recursion replacement. Chaos Warp therefore becomes `known` WITHOUT
+  // answer credit, which UNDERSTATES it; typing that removal needs a shape
+  // that fires on more than one card (round 2).
+  { kind: 'rider', re: /\bshuffles? (?:it|that card|them) into (?:their|its owner'?s) library\b/gi },
+  { kind: 'rider', re: /\breveals? the top card of (?:their|his or her) library\b/gi },
+  { kind: 'rider', re: /\bexiles? the top card of each opponent'?s library\b/gi },
+];
+ATOMS.push(...ROUND1_ATOMS_B5);
+
+/** The round-1 batches, exported so `scripts/deck-score-atoms.ts` can audit
+ * each atom's fires-on count and false-positive samples over the card
+ * universe, and so the suite can pin a positive and a negative sentence per
+ * atom without re-typing the regex. */
+export const ROUND1_ATOM_BATCHES: ReadonlyArray<{ label: string; atoms: readonly Atom[] }> = [
+  { label: 'b1', atoms: ROUND1_ATOMS },
+  { label: 'b2', atoms: ROUND1_ATOMS_B2 },
+  { label: 'b3', atoms: ROUND1_ATOMS_B3 },
+  { label: 'b4', atoms: ROUND1_ATOMS_B4 },
+  { label: 'b5', atoms: ROUND1_ATOMS_B5 },
+];
+
 
 interface ScanResult {
   effects: Partial<TypedEffect>[];
@@ -759,11 +1381,18 @@ interface ScanResult {
 
 /** Strip reminder text; keep the mechanical sentence intact. */
 export function stripReminders(text: string): string {
-  return text.replace(/\([^)]*\)/g, ' ').replace(/[ \t]{2,}/g, ' ');
+  return text
+    .replace(/\([^)]*\)/g, ' ')
+    // `Counter target spell [that wasn't cast from its owner's hand].` — the
+    // bracketed span is the cleave/alternate-mode-only text, so the printed
+    // spell is what is left. The negative lookahead keeps `[+1]:`-style
+    // loyalty costs, which `LOYALTY_RE` still needs.
+    .replace(/\[(?![+\u2212-]?\d+\])[^\]]{4,}\]/g, ' ')
+    .replace(/[ \t]{2,}/g, ' ');
 }
 
 /** Oracle text names the card; the residual check must not see it as a noun. */
-function selfName(text: string, card: GeneratableCard): string {
+export function selfName(text: string, card: GeneratableCard): string {
   let out = text;
   // An Arena rebalanced printing is named `A-Vivi Ornitier` but its oracle
   // text still says `Vivi Ornitier`, so the unprefixed face has to be tried
@@ -886,7 +1515,7 @@ function isPermanent(typeLine: string): boolean {
 
 /** Keyword with its cost/measure stripped: `Ward—Pay 3 life` -> `ward`. */
 function keywordBase(token: string): string {
-  return token
+  const base = token
     .replace(/\s*\{[^}]*\}.*$/, '')
     .replace(/\s*[\u2014\u2013-]\s*(?:pay|discard|sacrifice|reveal).*$/i, '')
     .replace(/\s+\d+$/, '')
@@ -894,6 +1523,16 @@ function keywordBase(token: string): string {
     .replace(/[.!]$/, '')
     .toLowerCase()
     .trim();
+  if (ALL_KW.has(base)) return base;
+  // Round 1: a keyword with a PARAMETER is still that keyword — `Amass Orcs 1`,
+  // `Equip Equipment {2}`, `Manifest dread`, `Gift a card`, `Ward {2}`. The
+  // head word carries the mechanic; the tail names what it applies to and has
+  // no clause of its own. 110+ corpus cards were `partial` on nothing but such
+  // a line. A token containing a colon is an ACTIVATED ABILITY, never a bare
+  // keyword line, so it is excluded; so is anything long enough to be prose.
+  const headWord = base.split(' ')[0];
+  if (!token.includes(':') && base.split(' ').length <= 4 && ALL_KW.has(headWord)) return headWord;
+  return base;
 }
 
 function keywordTokens(line: string): string[] | null {
@@ -991,7 +1630,9 @@ export function generateEntry(card: GeneratableCard): CatalogEntry {
 
     // Modal bullets and saga chapters keep their own line; drop the marker.
     if (/^(choose one|choose two|choose one or more)\b/i.test(line)) continue;
-    line = line.replace(/^[•+]\s*/, '').replace(/^\{[^}]+\}\s*[—–-]\s*/, '');
+    line = line.replace(/^[•+]\s*/, '').replace(/^\{[^}]+\}\s*[—–-]\s*/, '')
+      // `8+ | Flying` — a Class/level BRACKET label, not a clause.
+      .replace(/^\d+\+?\s*\|\s*/, '');
     const abilityWord = line.match(ABILITY_WORD_RE);
     if (abilityWord) line = line.slice(abilityWord[0].length);
 
@@ -1027,7 +1668,7 @@ export function generateEntry(card: GeneratableCard): CatalogEntry {
         ctx.earliestTurn = Math.max(1, card.cmc);
       }
       const activated = loyalty ? null : line.match(ACTIVATED_RE);
-      if (activated && /\{|sacrifice|discard|pay|counter on this|tap (?:an|x|two|three) untapped|return a land/i.test(activated[1])) {
+      if (activated && /\{|sacrifice|discard|pay|counter on this|remove a[^:]*counter|tap (?:an|x|two|three) untapped|return a land/i.test(activated[1])) {
         const { cost, needsTap } = activationCost(activated[1], card);
         line = line.slice(activated[0].length);
         ctx.mode = 'activated';
@@ -1048,6 +1689,15 @@ export function generateEntry(card: GeneratableCard): CatalogEntry {
     }
 
     for (const sentence of sentences(selfName(line, card))) {
+      // A keyword can be glued to the end of a prose line (`… . Equip {2}`,
+      // `… . Flying`), in which case the line-level `keywordTokens` check
+      // above rejected the whole line. A sentence that is nothing but
+      // keywords is the same keyword line, one sentence later.
+      const sentenceKw = keywordTokens(sentence.replace(/\.$/, ''));
+      if (sentenceKw) {
+        for (const k of sentenceKw) keywords.push(keywordBase(k));
+        continue;
+      }
       const scan = scanSentence(sentence, ctx);
       for (const partial of scan.effects) effects.push(finish(partial, ctx));
       if (!scan.matched) untyped.push(sentence);

@@ -20,6 +20,7 @@ import path from 'path';
 import { generateEntry, type GeneratableCard } from '../src/lib/deck-score-catalog/generate';
 import type { CatalogEntry } from '../src/lib/deck-score-catalog/schema';
 import { ROOT, loadDataset } from './deck-score-fixtures';
+import { readSample, cardsByName } from './deck-score-piles';
 
 const ENTRY_DIR = path.join(ROOT, 'src', 'lib', 'deck-score-catalog', 'entries');
 const KNOWN_FILE = path.join(ENTRY_DIR, 'generated.json');
@@ -47,7 +48,35 @@ function universe(): GeneratableCard[] {
     for (const e of input.main) add(e.card);
     for (const c of input.commander) add(c);
   }
+  for (const card of corpusCards()) add(card);
   return [...byName.values()].sort((a, b) => a.name.localeCompare(b.name));
+}
+
+/**
+ * Round 1 (coverage): every distinct NON-LAND card the two real corpus samples
+ * play, on top of the reference sets above.
+ *
+ * The generator had only ever been pointed at the fixtures, the cEDH/Standard
+ * reference sets and the pile pool, so a plain staple it parses perfectly well
+ * — Chaos Warp, Skullclamp, Fatal Push, Talisman of Dominance — was `unknown`
+ * simply because nobody had asked it about that card. That, not parser
+ * capability, is why real lists sat at a typed-coverage median of ~.33 while
+ * the fixtures sat above .80. Lands are excluded because they are not in the
+ * S denominator (`deriveCardFeature(card).isLand`).
+ */
+function corpusCards(): GeneratableCard[] {
+  const byName = cardsByName();
+  const out = new Map<string, GeneratableCard>();
+  for (const profile of ['commander', 'brawl'] as const) {
+    for (const deck of readSample(profile)) {
+      for (const line of deck.cards) {
+        const card = byName.get(line.name.toLowerCase());
+        if (!card || /\bLand\b/.test(card.type_line || '')) continue;
+        if (!out.has(card.name)) out.set(card.name, card);
+      }
+    }
+  }
+  return [...out.values()];
 }
 
 /**

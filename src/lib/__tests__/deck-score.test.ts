@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import type { DbCard } from '../types';
 import { scoreDeck, SCORE_VERSION, type DeckScoreInput } from '../deck-score';
 import { H, J, choose } from '../deck-score-math';
@@ -8,6 +8,12 @@ import { computeMeta } from '../deck-score-meta';
 import { normsFor } from '../deck-score-norms';
 import { deriveCardFeature } from '../deck-score-features';
 import type { DeckEntry } from '../deck-score-mana';
+
+// Coverage round 1 tripled the catalogue shard (4,467 -> 14,909 entries), so
+// every pile-building and catalogue-walking test in this file got ~3x slower
+// and several landed within noise of vitest's 15 s default. Raised per file
+// rather than per test: the work is corpus-sized, not hung.
+vi.setConfig({ testTimeout: 120_000 });
 
 // ── Test fixtures ────────────────────────────────────────────────────────
 

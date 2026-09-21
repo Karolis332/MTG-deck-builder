@@ -1,0 +1,293 @@
+# Deck Score coverage round 1 — floors and saturations re-measured 2026-09-21T08:12Z
+
+## bands.ts negative --joint --n 1000
+matched commander negative controls: n=1000, cohort training (commander-disjoint stride, 169 distinct commanders), seed base 0x5eed0000, coverage target 0.944
+
+| family | selectable n | Q p50 | Q p90 | Q p95 (= floor) | Q p99 | Q max | frozen |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| aristocrats | 545 | 0.594 | 0.678 | 0.703 | 0.734 | 0.759 | 0.683 |
+| lifegain | 464 | 0.492 | 0.534 | 0.548 | 0.571 | 0.587 | 0.683 |
+| spells | 997 | 0.484 | 0.556 | 0.571 | 0.594 | 0.623 | 0.683 |
+| recursion | 485 | 0.438 | 0.500 | 0.516 | 0.548 | 0.578 | 0.683 |
+| conversion | 694 | 0.492 | 0.561 | 0.575 | 0.596 | 0.640 | 0.683 |
+| tokens | 993 | 0.516 | 0.603 | 0.621 | 0.650 | 0.689 | 0.683 |
+| counters | 473 | 0.508 | 0.581 | 0.600 | 0.626 | 0.665 | 0.683 |
+| typal | 207 | 0.571 | 0.633 | 0.656 | 0.672 | 0.683 | 0.683 |
+| ALL ENGINE (max per pile) | 1000 | 0.578 | 0.665 | 0.683 | 0.717 | 0.759 | - |
+| GENERIC (max per pile) | 1000 | 0.484 | 0.573 | 0.596 | 0.656 | 0.700 | - |
+| JOINT (max over all recipes) | 1000 | 0.578 | 0.667 | 0.683 | 0.717 | 0.759 | 0.683 |
+
+| floor choice | generic b | engine b | in-sample S <= 5 | S median | S p95 |
+|---|---:|---:|---:|---:|---:|
+| frozen | 0.683 | 0.683 | 950/1000 | 0.0 | 2.0 |
+| two floors (per-group p95) | 0.596 | 0.683 | 920/1000 | 0.0 | 44.7 |
+| one shared floor (joint p95) | 0.683 | 0.683 | 950/1000 | 0.0 | 0.0 |
+(exit 0)
+
+## bands.ts negative --joint --n 1000 --profile brawl
+matched brawl negative controls: n=1000, cohort training (commander-disjoint stride, 177 distinct commanders), seed base 0x5ee62a71, coverage target 0.944
+
+| family | selectable n | Q p50 | Q p90 | Q p95 (= floor) | Q p99 | Q max | frozen |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| aristocrats | 497 | 0.644 | 0.729 | 0.750 | 0.770 | 0.810 | 0.733 |
+| lifegain | 463 | 0.533 | 0.579 | 0.590 | 0.613 | 0.636 | 0.733 |
+| spells | 898 | 0.548 | 0.644 | 0.667 | 0.700 | 0.762 | 0.733 |
+| recursion | 414 | 0.444 | 0.512 | 0.525 | 0.559 | 0.571 | 0.733 |
+| conversion | 884 | 0.541 | 0.613 | 0.631 | 0.664 | 0.677 | 0.733 |
+| tokens | 999 | 0.552 | 0.633 | 0.650 | 0.689 | 0.729 | 0.733 |
+| counters | 357 | 0.500 | 0.571 | 0.594 | 0.629 | 0.661 | 0.733 |
+| typal | 330 | 0.617 | 0.688 | 0.695 | 0.721 | 0.762 | 0.733 |
+| ALL ENGINE (max per pile) | 1000 | 0.629 | 0.707 | 0.733 | 0.762 | 0.810 | - |
+| GENERIC (max per pile) | 1000 | 0.549 | 0.623 | 0.639 | 0.667 | 0.729 | - |
+| JOINT (max over all recipes) | 1000 | 0.631 | 0.707 | 0.733 | 0.762 | 0.810 | 0.733 |
+
+| floor choice | generic b | engine b | in-sample S <= 5 | S median | S p95 |
+|---|---:|---:|---:|---:|---:|
+| frozen | 0.733 | 0.733 | 955/1000 | 0.0 | 1.3 |
+| two floors (per-group p95) | 0.639 | 0.733 | 928/1000 | 0.0 | 16.6 |
+| one shared floor (joint p95) | 0.733 | 0.733 | 957/1000 | 0.0 | 0.0 |
+(exit 0)
+
+## bands.ts closingfloor
+closing reads over matched commander training controls: 0/1000 assemble a line, 0 would WIN §1 ordering; reviewed cEDH positives 28/30
+
+| population | n | Q p50 | Q p90 | Q p95 | Q p99 | Q max |
+|---|---:|---:|---:|---:|---:|---:|
+| controls that assemble a line | 0 | - | - | - | - | - |
+| controls whose closing plan WINS | 0 | - | - | - | - | - |
+| reviewed cEDH positives | 28 | 0.667 | 0.710 | 0.729 | 0.732 | 0.732 |
+
+| candidate rule | controls still winning | cEDH positives still reading combo | note |
+|---|---:|---:|---|
+| frozen today (b = 0.300) | 0 | 28 | the stage-4a 1/200 |
+| A: b = control p95 = NaN | 0 | 0 | positives below the floor lose their closing plan |
+| B: refuse a one-CARD pool (pieces <= 1) | 0 | 0 | 28 positive(s) have a one-card pool |
+
+| winning control | line | pieces | r | Q | R | fit | total |
+|---|---|---:|---:|---:|---:|---:|---:|
+
+| cEDH positive | line | pieces | r | Q | R | fit | wins | total |
+|---|---|---:|---:|---:|---:|---:|---|---:|
+| cedh-17 | alt_win | 1 | 1 | 0.600 | 1.000 | 0.735 | yes | 79 |
+| cedh-20 | alt_win | 1 | 1 | 0.611 | 1.000 | 0.764 | yes | 75 |
+| cedh-6 | alt_win | 1 | 1 | 0.620 | 1.000 | 0.787 | yes | 83 |
+| cedh-9 | alt_win | 1 | 1 | 0.620 | 1.000 | 0.787 | yes | 83 |
+| cedh-15 | alt_win | 1 | 1 | 0.620 | 1.000 | 0.787 | yes | 81 |
+| cedh-7 | alt_win | 1 | 1 | 0.629 | 1.000 | 0.811 | yes | 85 |
+| cedh-10 | alt_win | 1 | 1 | 0.629 | 1.000 | 0.811 | yes | 85 |
+| cedh-26 | alt_win | 1 | 1 | 0.629 | 1.000 | 0.811 | yes | 85 |
+| cedh-29 | alt_win | 1 | 1 | 0.639 | 1.000 | 0.838 | yes | 81 |
+| cedh-19 | alt_win | 1 | 1 | 0.643 | 1.000 | 0.848 | yes | 88 |
+| cedh-5 | alt_win | 1 | 1 | 0.658 | 1.000 | 0.887 | yes | 88 |
+| cedh-13 | alt_win | 1 | 1 | 0.662 | 1.000 | 0.899 | yes | 89 |
+| cedh-28 | alt_win | 1 | 1 | 0.662 | 1.000 | 0.899 | yes | 87 |
+| cedh-4 | alt_win | 1 | 1 | 0.662 | 1.000 | 0.900 | yes | 86 |
+| cedh-18 | alt_win | 1 | 1 | 0.667 | 1.000 | 0.912 | yes | 90 |
+| cedh-27 | alt_win | 1 | 1 | 0.676 | 1.000 | 0.936 | yes | 90 |
+| cedh-24 | alt_win | 1 | 1 | 0.676 | 1.000 | 0.938 | yes | 90 |
+| cedh-16 | alt_win | 1 | 1 | 0.681 | 1.000 | 0.948 | yes | 80 |
+| cedh-21 | alt_win | 1 | 1 | 0.690 | 1.000 | 0.974 | yes | 90 |
+| cedh-22 | alt_win | 1 | 1 | 0.690 | 1.000 | 0.974 | yes | 89 |
+| cedh-3 | alt_win | 1 | 1 | 0.704 | 1.000 | 1.000 | yes | 89 |
+| cedh-14 | alt_win | 1 | 1 | 0.704 | 1.000 | 1.000 | yes | 89 |
+| cedh-25 | alt_win | 1 | 1 | 0.704 | 1.000 | 1.000 | yes | 90 |
+| cedh-8 | alt_win | 1 | 1 | 0.710 | 1.000 | 1.000 | yes | 90 |
+| cedh-11 | alt_win | 1 | 1 | 0.710 | 1.000 | 1.000 | yes | 90 |
+| cedh-23 | alt_win | 1 | 1 | 0.714 | 1.000 | 1.000 | yes | 91 |
+| cedh-2 | alt_win | 1 | 1 | 0.729 | 1.000 | 1.000 | yes | 91 |
+| cedh-12 | alt_win | 1 | 1 | 0.732 | 1.000 | 1.000 | yes | 92 |
+(exit 0)
+
+## bands.ts closingfloor --profile brawl
+closing reads over matched brawl training controls: 0/1000 assemble a line, 0 would WIN §1 ordering; reviewed cEDH positives 28/30
+
+| population | n | Q p50 | Q p90 | Q p95 | Q p99 | Q max |
+|---|---:|---:|---:|---:|---:|---:|
+| controls that assemble a line | 0 | - | - | - | - | - |
+| controls whose closing plan WINS | 0 | - | - | - | - | - |
+| reviewed cEDH positives | 28 | 0.667 | 0.710 | 0.729 | 0.732 | 0.732 |
+
+| candidate rule | controls still winning | cEDH positives still reading combo | note |
+|---|---:|---:|---|
+| frozen today (b = 0.300) | 0 | 28 | the stage-4a 1/200 |
+| A: b = control p95 = NaN | 0 | 0 | positives below the floor lose their closing plan |
+| B: refuse a one-CARD pool (pieces <= 1) | 0 | 0 | 28 positive(s) have a one-card pool |
+
+| winning control | line | pieces | r | Q | R | fit | total |
+|---|---|---:|---:|---:|---:|---:|---:|
+
+| cEDH positive | line | pieces | r | Q | R | fit | wins | total |
+|---|---|---:|---:|---:|---:|---:|---|---:|
+| cedh-17 | alt_win | 1 | 1 | 0.600 | 1.000 | 0.735 | yes | 79 |
+| cedh-20 | alt_win | 1 | 1 | 0.611 | 1.000 | 0.764 | yes | 75 |
+| cedh-6 | alt_win | 1 | 1 | 0.620 | 1.000 | 0.787 | yes | 83 |
+| cedh-9 | alt_win | 1 | 1 | 0.620 | 1.000 | 0.787 | yes | 83 |
+| cedh-15 | alt_win | 1 | 1 | 0.620 | 1.000 | 0.787 | yes | 81 |
+| cedh-7 | alt_win | 1 | 1 | 0.629 | 1.000 | 0.811 | yes | 85 |
+| cedh-10 | alt_win | 1 | 1 | 0.629 | 1.000 | 0.811 | yes | 85 |
+| cedh-26 | alt_win | 1 | 1 | 0.629 | 1.000 | 0.811 | yes | 85 |
+| cedh-29 | alt_win | 1 | 1 | 0.639 | 1.000 | 0.838 | yes | 81 |
+| cedh-19 | alt_win | 1 | 1 | 0.643 | 1.000 | 0.848 | yes | 88 |
+| cedh-5 | alt_win | 1 | 1 | 0.658 | 1.000 | 0.887 | yes | 88 |
+| cedh-13 | alt_win | 1 | 1 | 0.662 | 1.000 | 0.899 | yes | 89 |
+| cedh-28 | alt_win | 1 | 1 | 0.662 | 1.000 | 0.899 | yes | 87 |
+| cedh-4 | alt_win | 1 | 1 | 0.662 | 1.000 | 0.900 | yes | 86 |
+| cedh-18 | alt_win | 1 | 1 | 0.667 | 1.000 | 0.912 | yes | 90 |
+| cedh-27 | alt_win | 1 | 1 | 0.676 | 1.000 | 0.936 | yes | 90 |
+| cedh-24 | alt_win | 1 | 1 | 0.676 | 1.000 | 0.938 | yes | 90 |
+| cedh-16 | alt_win | 1 | 1 | 0.681 | 1.000 | 0.948 | yes | 80 |
+| cedh-21 | alt_win | 1 | 1 | 0.690 | 1.000 | 0.974 | yes | 90 |
+| cedh-22 | alt_win | 1 | 1 | 0.690 | 1.000 | 0.974 | yes | 89 |
+| cedh-3 | alt_win | 1 | 1 | 0.704 | 1.000 | 1.000 | yes | 89 |
+| cedh-14 | alt_win | 1 | 1 | 0.704 | 1.000 | 1.000 | yes | 89 |
+| cedh-25 | alt_win | 1 | 1 | 0.704 | 1.000 | 1.000 | yes | 90 |
+| cedh-8 | alt_win | 1 | 1 | 0.710 | 1.000 | 1.000 | yes | 90 |
+| cedh-11 | alt_win | 1 | 1 | 0.710 | 1.000 | 1.000 | yes | 90 |
+| cedh-23 | alt_win | 1 | 1 | 0.714 | 1.000 | 1.000 | yes | 91 |
+| cedh-2 | alt_win | 1 | 1 | 0.729 | 1.000 | 1.000 | yes | 91 |
+| cedh-12 | alt_win | 1 | 1 | 0.732 | 1.000 | 1.000 | yes | 92 |
+(exit 0)
+
+## bands.ts saturation --raw
+commander training stride: 1824 lists, 1824 resolved, 4 unresolved card rows, 196 distinct commanders
+floor b = 0.683, frozen saturation = 0.700, window width = 0.017 — TYPED-COVERAGE GATE LIFTED (--raw)
+typed coverage of these lists: p10 0.619, p50 0.750, p90 0.857 (the floors were measured on controls drawn to .930)
+
+| statistic (max-recipe Q over real lists) | n | p25 | p50 | p75 | p80 | p90 | p95 | max |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| commander training | 1824 | 0.571 | 0.659 | 0.742 | 0.762 | 0.805 | 0.841 | 0.954 |
+
+Q_SATURATION .700 sits at the 63.4th percentile of this distribution (p50 0.659, p75 0.742, p90 0.805, p95 0.841).
+
+| candidate saturation | value | S = 100 share | S p10 | S p50 | S p90 | p10-p90 spread |
+|---|---:|---:|---:|---:|---:|---:|
+| frozen today | 0.700 | 475/1824 (26.0%) | 0.0 | 0.0 | 100.0 | 100.0 |
+| spec .70 | 0.700 | 475/1824 (26.0%) | 0.0 | 0.0 | 100.0 | 100.0 |
+| p50 | 0.659 | REJECTED: <= b | - | - | - | - |
+| p75 | 0.742 | 335/1824 (18.4%) | 0.0 | 0.0 | 100.0 | 100.0 |
+| p80 | 0.762 | 282/1824 (15.5%) | 0.0 | 0.0 | 100.0 | 100.0 |
+| p90 | 0.805 | 150/1824 (8.2%) | 0.0 | 0.0 | 93.3 | 93.3 |
+| p95 | 0.841 | 79/1824 (4.3%) | 0.0 | 0.0 | 74.2 | 74.2 |
+(exit 0)
+
+## bands.ts saturation --profile brawl --raw
+brawl training stride: 1146 lists, 1146 resolved, 5 unresolved card rows, 198 distinct commanders
+floor b = 0.733, frozen saturation = 0.758, window width = 0.025 — TYPED-COVERAGE GATE LIFTED (--raw)
+typed coverage of these lists: p10 0.629, p50 0.746, p90 0.847 (the floors were measured on controls drawn to .930)
+
+| statistic (max-recipe Q over real lists) | n | p25 | p50 | p75 | p80 | p90 | p95 | max |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| brawl training | 1146 | 0.597 | 0.672 | 0.746 | 0.758 | 0.806 | 0.845 | 0.924 |
+
+Q_SATURATION .700 sits at the 59.2th percentile of this distribution (p50 0.672, p75 0.746, p90 0.806, p95 0.845).
+
+| candidate saturation | value | S = 100 share | S p10 | S p50 | S p90 | p10-p90 spread |
+|---|---:|---:|---:|---:|---:|---:|
+| frozen today | 0.758 | 171/1146 (14.9%) | 0.0 | 0.0 | 100.0 | 100.0 |
+| spec .70 | 0.700 | REJECTED: <= b | - | - | - | - |
+| p50 | 0.672 | REJECTED: <= b | - | - | - | - |
+| p75 | 0.746 | 206/1146 (18.0%) | 0.0 | 0.0 | 100.0 | 100.0 |
+| p80 | 0.758 | 171/1146 (14.9%) | 0.0 | 0.0 | 100.0 | 100.0 |
+| p90 | 0.806 | 95/1146 (8.3%) | 0.0 | 0.0 | 88.7 | 88.7 |
+| p95 | 0.845 | 53/1146 (4.6%) | 0.0 | 0.0 | 62.8 | 62.8 |
+(exit 0)
+
+## bands.ts closingfloor --stride --n 1200
+closing reads over matched commander holdout controls: 0/823 assemble a line, 0 would WIN §1 ordering; reviewed cEDH positives 28/30
+
+| population | n | Q p50 | Q p90 | Q p95 | Q p99 | Q max |
+|---|---:|---:|---:|---:|---:|---:|
+| controls that assemble a line | 0 | - | - | - | - | - |
+| controls whose closing plan WINS | 0 | - | - | - | - | - |
+| reviewed cEDH positives | 28 | 0.667 | 0.710 | 0.729 | 0.732 | 0.732 |
+
+| candidate rule | controls still winning | cEDH positives still reading combo | note |
+|---|---:|---:|---|
+| frozen today (b = 0.300) | 0 | 28 | the stage-4a 1/200 |
+| A: b = control p95 = NaN | 0 | 0 | positives below the floor lose their closing plan |
+| B: refuse a one-CARD pool (pieces <= 1) | 0 | 0 | 28 positive(s) have a one-card pool |
+
+| winning control | line | pieces | r | Q | R | fit | total |
+|---|---|---:|---:|---:|---:|---:|---:|
+
+| cEDH positive | line | pieces | r | Q | R | fit | wins | total |
+|---|---|---:|---:|---:|---:|---:|---|---:|
+| cedh-17 | alt_win | 1 | 1 | 0.600 | 1.000 | 0.735 | yes | 79 |
+| cedh-20 | alt_win | 1 | 1 | 0.611 | 1.000 | 0.764 | yes | 75 |
+| cedh-6 | alt_win | 1 | 1 | 0.620 | 1.000 | 0.787 | yes | 83 |
+| cedh-9 | alt_win | 1 | 1 | 0.620 | 1.000 | 0.787 | yes | 83 |
+| cedh-15 | alt_win | 1 | 1 | 0.620 | 1.000 | 0.787 | yes | 81 |
+| cedh-7 | alt_win | 1 | 1 | 0.629 | 1.000 | 0.811 | yes | 85 |
+| cedh-10 | alt_win | 1 | 1 | 0.629 | 1.000 | 0.811 | yes | 85 |
+| cedh-26 | alt_win | 1 | 1 | 0.629 | 1.000 | 0.811 | yes | 85 |
+| cedh-29 | alt_win | 1 | 1 | 0.639 | 1.000 | 0.838 | yes | 81 |
+| cedh-19 | alt_win | 1 | 1 | 0.643 | 1.000 | 0.848 | yes | 88 |
+| cedh-5 | alt_win | 1 | 1 | 0.658 | 1.000 | 0.887 | yes | 88 |
+| cedh-13 | alt_win | 1 | 1 | 0.662 | 1.000 | 0.899 | yes | 89 |
+| cedh-28 | alt_win | 1 | 1 | 0.662 | 1.000 | 0.899 | yes | 87 |
+| cedh-4 | alt_win | 1 | 1 | 0.662 | 1.000 | 0.900 | yes | 86 |
+| cedh-18 | alt_win | 1 | 1 | 0.667 | 1.000 | 0.912 | yes | 90 |
+| cedh-27 | alt_win | 1 | 1 | 0.676 | 1.000 | 0.936 | yes | 90 |
+| cedh-24 | alt_win | 1 | 1 | 0.676 | 1.000 | 0.938 | yes | 90 |
+| cedh-16 | alt_win | 1 | 1 | 0.681 | 1.000 | 0.948 | yes | 80 |
+| cedh-21 | alt_win | 1 | 1 | 0.690 | 1.000 | 0.974 | yes | 90 |
+| cedh-22 | alt_win | 1 | 1 | 0.690 | 1.000 | 0.974 | yes | 89 |
+| cedh-3 | alt_win | 1 | 1 | 0.704 | 1.000 | 1.000 | yes | 89 |
+| cedh-14 | alt_win | 1 | 1 | 0.704 | 1.000 | 1.000 | yes | 89 |
+| cedh-25 | alt_win | 1 | 1 | 0.704 | 1.000 | 1.000 | yes | 90 |
+| cedh-8 | alt_win | 1 | 1 | 0.710 | 1.000 | 1.000 | yes | 90 |
+| cedh-11 | alt_win | 1 | 1 | 0.710 | 1.000 | 1.000 | yes | 90 |
+| cedh-23 | alt_win | 1 | 1 | 0.714 | 1.000 | 1.000 | yes | 91 |
+| cedh-2 | alt_win | 1 | 1 | 0.729 | 1.000 | 1.000 | yes | 91 |
+| cedh-12 | alt_win | 1 | 1 | 0.732 | 1.000 | 1.000 | yes | 92 |
+(exit 0)
+
+## bands.ts closingfloor --stride --n 1200 --profile brawl
+closing reads over matched brawl holdout controls: 8/516 assemble a line, 0 would WIN §1 ordering; reviewed cEDH positives 28/30
+
+| population | n | Q p50 | Q p90 | Q p95 | Q p99 | Q max |
+|---|---:|---:|---:|---:|---:|---:|
+| controls that assemble a line | 8 | 0.333 | 0.356 | 0.373 | 0.373 | 0.373 |
+| controls whose closing plan WINS | 0 | - | - | - | - | - |
+| reviewed cEDH positives | 28 | 0.667 | 0.710 | 0.729 | 0.732 | 0.732 |
+
+| candidate rule | controls still winning | cEDH positives still reading combo | note |
+|---|---:|---:|---|
+| frozen today (b = 0.300) | 0 | 28 | the stage-4a 1/200 |
+| A: b = control p95 = 0.373 | 0 | 28 | positives below the floor lose their closing plan |
+| B: refuse a one-CARD pool (pieces <= 1) | 0 | 0 | 28 positive(s) have a one-card pool |
+
+| winning control | line | pieces | r | Q | R | fit | total |
+|---|---|---:|---:|---:|---:|---:|---:|
+
+| cEDH positive | line | pieces | r | Q | R | fit | wins | total |
+|---|---|---:|---:|---:|---:|---:|---|---:|
+| cedh-17 | alt_win | 1 | 1 | 0.600 | 1.000 | 0.735 | yes | 79 |
+| cedh-20 | alt_win | 1 | 1 | 0.611 | 1.000 | 0.764 | yes | 75 |
+| cedh-6 | alt_win | 1 | 1 | 0.620 | 1.000 | 0.787 | yes | 83 |
+| cedh-9 | alt_win | 1 | 1 | 0.620 | 1.000 | 0.787 | yes | 83 |
+| cedh-15 | alt_win | 1 | 1 | 0.620 | 1.000 | 0.787 | yes | 81 |
+| cedh-7 | alt_win | 1 | 1 | 0.629 | 1.000 | 0.811 | yes | 85 |
+| cedh-10 | alt_win | 1 | 1 | 0.629 | 1.000 | 0.811 | yes | 85 |
+| cedh-26 | alt_win | 1 | 1 | 0.629 | 1.000 | 0.811 | yes | 85 |
+| cedh-29 | alt_win | 1 | 1 | 0.639 | 1.000 | 0.838 | yes | 81 |
+| cedh-19 | alt_win | 1 | 1 | 0.643 | 1.000 | 0.848 | yes | 88 |
+| cedh-5 | alt_win | 1 | 1 | 0.658 | 1.000 | 0.887 | yes | 88 |
+| cedh-13 | alt_win | 1 | 1 | 0.662 | 1.000 | 0.899 | yes | 89 |
+| cedh-28 | alt_win | 1 | 1 | 0.662 | 1.000 | 0.899 | yes | 87 |
+| cedh-4 | alt_win | 1 | 1 | 0.662 | 1.000 | 0.900 | yes | 86 |
+| cedh-18 | alt_win | 1 | 1 | 0.667 | 1.000 | 0.912 | yes | 90 |
+| cedh-27 | alt_win | 1 | 1 | 0.676 | 1.000 | 0.936 | yes | 90 |
+| cedh-24 | alt_win | 1 | 1 | 0.676 | 1.000 | 0.938 | yes | 90 |
+| cedh-16 | alt_win | 1 | 1 | 0.681 | 1.000 | 0.948 | yes | 80 |
+| cedh-21 | alt_win | 1 | 1 | 0.690 | 1.000 | 0.974 | yes | 90 |
+| cedh-22 | alt_win | 1 | 1 | 0.690 | 1.000 | 0.974 | yes | 89 |
+| cedh-3 | alt_win | 1 | 1 | 0.704 | 1.000 | 1.000 | yes | 89 |
+| cedh-14 | alt_win | 1 | 1 | 0.704 | 1.000 | 1.000 | yes | 89 |
+| cedh-25 | alt_win | 1 | 1 | 0.704 | 1.000 | 1.000 | yes | 90 |
+| cedh-8 | alt_win | 1 | 1 | 0.710 | 1.000 | 1.000 | yes | 90 |
+| cedh-11 | alt_win | 1 | 1 | 0.710 | 1.000 | 1.000 | yes | 90 |
+| cedh-23 | alt_win | 1 | 1 | 0.714 | 1.000 | 1.000 | yes | 91 |
+| cedh-2 | alt_win | 1 | 1 | 0.729 | 1.000 | 1.000 | yes | 91 |
+| cedh-12 | alt_win | 1 | 1 | 0.732 | 1.000 | 1.000 | yes | 92 |
+(exit 0)

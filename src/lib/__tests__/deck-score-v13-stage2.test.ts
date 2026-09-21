@@ -3,7 +3,7 @@
  * probability-weighted Standard deployment, and the Commander generic-Q floor
  * learned from separate matched negative controls.
  */
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import type { DbCard } from '../types';
 import { scoreDeck } from '../deck-score';
 import { computeSynergy } from '../deck-score-synergy';
@@ -20,6 +20,12 @@ import { deriveCardFeature } from '../deck-score-features';
 import { loadRandomPiles } from '../../../scripts/deck-score-fixtures';
 import { loadMatchedPiles } from '../../../scripts/deck-score-piles';
 import type { DeckEntry } from '../deck-score-mana';
+
+// Coverage round 1 tripled the catalogue shard (4,467 -> 14,909 entries), so
+// every pile-building and catalogue-walking test in this file got ~3x slower
+// and several landed within noise of vitest's 15 s default. Raised per file
+// rather than per test: the work is corpus-sized, not hung.
+vi.setConfig({ testTimeout: 120_000 });
 
 let idCounter = 0;
 function mkCard(overrides: Partial<DbCard> & { name: string }): DbCard {
@@ -210,7 +216,10 @@ describe('§9.2 Commander Q floor b, measured over 1,000 matched controls', () =
     // p95 of the max over the GENERIC TRIO only; the floor now answers to the
     // p95 of the max over ALL ELEVEN recipes. See the stage-4a suite for the
     // measurement and the in-sample comparison.
-    expect(Q_BASELINE_JOINT_COMMANDER).toBe(0.574);
+    // COVERAGE ROUND 1 re-measured the same statistic on the corpus-wide
+    // catalogue: .574 -> .683, still under the .70 rejection line but only by
+    // .017. See the stage-4a suite for the distribution and the consequence.
+    expect(Q_BASELINE_JOINT_COMMANDER).toBe(0.683);
     expect(Q_BASELINE_JOINT_COMMANDER).toBeLessThan(Q_SATURATION);
   });
 
@@ -236,9 +245,11 @@ describe('§9.2 Commander Q floor b, measured over 1,000 matched controls', () =
     expect(S(b, 1)).toBe(0);
     expect(S(b - 0.05, 1)).toBe(0);
     // Exact bound: at R = 1, S <= 5 iff Q <= b + .05*(.70-b). At stage 2's
-    // b = .542 that was .5499; at stage 4a's joint b = .574 it is .5803.
+    // b = .542 that was .5499; at stage 4a's joint b = .574 it was .5803; at
+    // round 1's re-measured b = .683 it is .6839 — the whole S window is now
+    // .017 wide, which is the round-2 item, not a licence to move b.
     const bound = b + 0.05 * (Q_SATURATION - b);
-    expect(bound).toBeCloseTo(0.5803, 4);
+    expect(bound).toBeCloseTo(0.6839, 4);
     expect(S(bound, 1)).toBeCloseTo(5, 6);
     expect(S(bound + 0.005, 1)).toBeGreaterThan(5);
   });

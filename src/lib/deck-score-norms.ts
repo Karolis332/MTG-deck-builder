@@ -221,6 +221,16 @@ export const SCORE_VERSION = '1.3.0-rc2';
  * estimates — `planFractionTarget` (Q*) stays in FormatNorms as the v1.1
  * historical constant and no longer divides Q.
  */
+/*
+ *
+ * COVERAGE ROUND 1 (2026-09-21) — RE-MEASURED, not re-fitted. The catalogue
+ * grew from 4,467 to 14,898 entries (the generator had never been run over the
+ * real corpus), so typed coverage of the matched controls' DRAW POOL went from
+ * a hand-picked staple list to 66%% of the card universe. Every Q in this file
+ * therefore moved, and every constant below is re-frozen at the statistic
+ * `npx tsx scripts/deck-score-bands.ts verify` re-measures. Old -> new is in
+ * `~/.claude/harness/runs/deck-score-2026-09-19/coverage-round1-report.md`.
+ */
 export const Q_BASELINE = 0.30;
 export const Q_SATURATION = 0.70;
 
@@ -261,7 +271,9 @@ export const Q_SATURATION = 0.70;
  * stage-4c report: under the live gate the median corpus list scores S = 0,
  * which is a catalogue-coverage defect, not a saturation one.
  */
-export const Q_SATURATION_BRAWL = 0.712;
+/* Round 1: re-measured at .758 (was .712) — p80 of the Brawl training
+ * stride's max-recipe Q, the same statistic stage 4c cut it from. */
+export const Q_SATURATION_BRAWL = 0.758;
 
 /**
  * Profile dispatch for the S saturation (§9.2 `S = 100*clip((Q-b)/(Qsat-b))*R`).
@@ -316,7 +328,14 @@ export function qSaturationFor(profile: ScoreProfile): number {
  * curve and colours are not a real deck's; a curve-matched control fills the
  * generic roles better and leaks more.
  */
-export const Q_BASELINE_JOINT_COMMANDER = 0.574;
+/* Round 1: re-measured at .683 (was .574) over the same 1,000 matched
+ * Commander controls. It now sits .017 BELOW `Q_SATURATION` (.70), so the S
+ * window is 17 thousandths wide and S can no longer resolve a good deck from a
+ * fair one — it reads ~0 or ~100. §9.2's rejection rule (`b >= .70` rejects the
+ * statistic) is not tripped, but this is the same defect stage 4c found in
+ * Brawl. It is a RECIPE/SATURATION problem, not a prior one: fitting b down to
+ * keep the window open would be exactly the fit §4 forbids. Round 2 owns it. */
+export const Q_BASELINE_JOINT_COMMANDER = 0.683;
 
 /**
  * v1.3 stage 4b: the SAME joint statistic, measured on the Brawl corpus under
@@ -348,7 +367,9 @@ export const Q_BASELINE_JOINT_COMMANDER = 0.574;
  * the Commander 10, spells 32 vs 26). Both effects raise credited Q on a pile,
  * and the floor is what prices them.
  */
-export const Q_BASELINE_JOINT_BRAWL = 0.675;
+/* Round 1: re-measured at .733 (was .675); the Brawl saturation moved with it
+ * to .758, so this window is .025 wide — unchanged in width, higher in level. */
+export const Q_BASELINE_JOINT_BRAWL = 0.733;
 
 /**
  * v1.3 stage 4b: the Q floor the CLOSING (`combo`) plan answers to in a
@@ -411,7 +432,15 @@ export const Q_BASELINE_CLOSING = 0.323;
  * .338 leaves 2. It costs no positive — the weakest reviewed cEDH line sits at
  * .600, .245 above this floor.
  */
-export const Q_BASELINE_CLOSING_BRAWL = 0.338;
+/* Round 1: re-measured at .373 (was .338). WEAK EVIDENCE: only 8 of 516
+ * Brawl holdout controls still assemble a closing line at all (was 106), so
+ * this p95 is effectively the max of 8 samples. The direction is conservative
+ * (a higher floor removes more control wins and the weakest reviewed cEDH line
+ * sits at .600), but the statistic needs a bigger event rate to be worth the
+ * name. The Commander twin could not be measured at all this round: 0 of 1,000
+ * training and 0 of 823 holdout controls assembled a line, so
+ * `Q_BASELINE_CLOSING` stays at .323. Evidence: `floors-round1.txt`. */
+export const Q_BASELINE_CLOSING_BRAWL = 0.373;
 
 /**
  * §9.1 Standard deployment: a copy credited for a role with deadline `d`

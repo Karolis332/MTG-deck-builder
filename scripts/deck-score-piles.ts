@@ -359,11 +359,19 @@ export function loadMatchedPiles(
 export const HOLDOUT_EVERY = 3;
 export type SampleCohort = 'training' | 'holdout';
 
-/** Sample indices grouped by commander, commanders in first-appearance order. */
+/** Sample indices grouped by commander, commanders in first-appearance order.
+ *
+ * Round 1 (refuter R3): `HELD_OUT_COMMANDERS` is dropped HERE rather than at
+ * the pile draw, so the anchors' own commanders leave BOTH strides at once —
+ * every band, floor and saturation statistic reads the stride, not the draw,
+ * and 50/1,838 Commander and 30/1,166 Brawl training lists were anchor lists.
+ * Filtering here and not in `readSample` keeps every remaining list's sample
+ * INDEX, and therefore its draw seed `seedBase + i`, unchanged. */
 export function commanderBlocks(sample: readonly SampleDeck[] = readSample()): Map<string, number[]> {
   const blocks = new Map<string, number[]>();
   sample.forEach((deck, i) => {
     const key = deck.commander.toLowerCase();
+    if (HELD_OUT_COMMANDERS.has(key)) return;
     const block = blocks.get(key);
     if (block) block.push(i);
     else blocks.set(key, [i]);

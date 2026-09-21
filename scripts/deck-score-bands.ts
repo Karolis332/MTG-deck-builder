@@ -24,7 +24,11 @@ import { deriveCardFeature } from '../src/lib/deck-score-features';
 import { typalTheme, typalRecipe, evaluatePlan, evaluateTypal, evaluateClosing, isManlandFinisher, recipesFor, selectPlan, planFit, CLOSING_SUPPORT_BAND } from '../src/lib/deck-score-plans';
 import { PLAN_RECIPES, recipeFor, qBaselineFor, betterPlan, COMMANDER_BAND_REFERENCE, type PlanKey, type PlanRecipe } from '../src/lib/deck-score-plans';
 import { producerUtilisation } from '../src/lib/deck-score-producers';
-import { Q_BASELINE, Q_BASELINE_JOINT_COMMANDER, Q_BASELINE_JOINT_BRAWL, qSaturationFor, normsFor, type ScoreProfile } from '../src/lib/deck-score-norms';
+import { Q_BASELINE, Q_BASELINE_JOINT_COMMANDER, Q_BASELINE_JOINT_BRAWL, Q_BASELINE_CLOSING,
+  Q_BASELINE_CLOSING_BRAWL, Q_SATURATION, Q_SATURATION_BRAWL, qSaturationFor, normsFor,
+  type ScoreProfile } from '../src/lib/deck-score-norms';
+import { scoreDeckSafely } from '../src/lib/deck-score-input';
+import { CATALOG_SIZE } from '../src/lib/deck-score-catalog';
 import { clip } from '../src/lib/deck-score-math';
 import { computeInteraction, computeAdvantage } from '../src/lib/deck-score-interaction';
 import { computeWin } from '../src/lib/deck-score-win';
@@ -118,10 +122,20 @@ function cohortSample(cohort: SampleCohort | 'all', profile: SampleProfile = 'co
 }
 type SampleDeckWithIndex = { deck: ReturnType<typeof readSample>[number]; i: number };
 
+/** One measured band cell: the statistic `bands verify` re-derives and grades
+ * the frozen `role.cmd` / `role.brawl` against. `inherited` marks the ten
+ * stage-4b roles deliberately left on the Commander band, which `verify`
+ * reports but does not fail on. */
+export interface BandRow {
+  plan: PlanKey; role: string; n: number; p25: number; p90: number;
+  frozen: { min: number; max: number } | null; inherited: boolean;
+}
+
 function commanderBands(
   raw: boolean, evaluated = false, cohort: SampleCohort | 'all' = 'training',
-  profile: SampleProfile = 'commander',
-): void {
+  profile: SampleProfile = 'commander', quiet = false,
+): BandRow[] {
+  const measured: BandRow[] = [];
   const byName = cardsByName();
   const decks = cohortSample(cohort, profile).map((r) => r.deck);
   const buckets = Object.fromEntries(PLAN_RECIPES.map((r) => [r.key, [] as DeckEntry[][]])) as Record<PlanKey, DeckEntry[][]>;
@@ -178,10 +192,17 @@ function commanderBands(
       const f = (x: number) => (Number.isFinite(x) ? (evaluated ? x.toFixed(1) : String(x)) : '-');
       const frozen = profile === 'brawl' ? role.brawl ?? role.cmd : role.cmd;
       const label = profile === 'brawl' && !role.brawl ? ' (cmd)' : '';
+      measured.push({
+        plan: recipe.key, role: role.key, n: supplies.length,
+        p25: pct(supplies, 25), p90: pct(supplies, 90),
+        frozen: frozen ? { min: frozen.min, max: frozen.max } : null,
+        inherited: profile === 'brawl' && !role.brawl,
+      });
       lines.push(`| ${role.key} | ${f(pct(supplies, 10))} | ${f(pct(supplies, 25))} | ${f(pct(supplies, 50))} | ${f(pct(supplies, 75))} | ${f(pct(supplies, 90))} | ${frozen ? `${frozen.min}/${frozen.max}${label}` : `${role.min}/${role.max} (60-card)`} |`);
     }
   }
-  console.log(lines.join('\n'));
+  if (!quiet) console.log(lines.join('\n'));
+  return measured;
 }
 
 /** p25/p90 of the dynamic typal recipe's roles, over the sample decks that
@@ -261,7 +282,7 @@ function genericQ(
  * `typal` is derived per deck and `combo` from the assembled closing line, so
  * both are evaluated through their own constructors rather than PLAN_RECIPES.
  */
-function engineFloors(n: number, profile: SampleProfile = 'commander'): void {
+function engineFloors(n: number, profile: SampleProfile = 'commander', quiet = false): { joint95: number; n: number } {
   // The coverage target is the Commander reference cohort's median in BOTH
   // profiles: it is a property of the catalogue, not of the format, and no
   // reviewed Brawl cohort exists to measure a separate one from.
@@ -350,7 +371,8 @@ function engineFloors(n: number, profile: SampleProfile = 'commander'): void {
   choice('frozen', frozenJoint, frozenJoint);
   choice('two floors (per-group p95)', pct(maxGeneric, 95), pct(maxEngine, 95));
   choice('one shared floor (joint p95)', pct(maxJoint, 95), pct(maxJoint, 95));
-  console.log(lines.join('\n'));
+  if (!quiet) console.log(lines.join('\n'));
+  return { joint95: pct(maxJoint, 95), n: piles.length };
 }
 
 function negativePrior(n: number, profile: SampleProfile = 'commander'): void {
@@ -678,7 +700,9 @@ function closingReadOf(
   };
 }
 
-function closingFloor(n: number, profile: SampleProfile = 'commander', cohort: SampleCohort = 'training'): void {
+function closingFloor(
+  n: number, profile: SampleProfile = 'commander', cohort: SampleCohort = 'training', quiet = false,
+): { p95: number; n: number; assembled: number } {
   const piles = loadCohortPiles(cohort, n, 0.93, profile);
   const controls = piles
     .map((p) => closingReadOf(p.input, `${p.commander} (${p.sampleId})`, profile))
@@ -734,7 +758,8 @@ function closingFloor(n: number, profile: SampleProfile = 'commander', cohort: S
     lines.push(`| ${r.label} | ${r.lineId} | ${r.pieces} | ${r.required} | ${r.Q.toFixed(3)} | ` +
       `${r.R.toFixed(3)} | ${r.fit.toFixed(3)} | ${r.wins ? 'yes' : 'no'} | ${r.total} |`);
   }
-  console.log(lines.join('\n'));
+  if (!quiet) console.log(lines.join('\n'));
+  return { p95: floorA, n: piles.length, assembled: controls.length };
 }
 
 
@@ -753,7 +778,9 @@ function closingFloor(n: number, profile: SampleProfile = 'commander', cohort: S
 // REAL lists rather than over matched controls. The closing plan is excluded
 // for the same reason it is excluded there: it answers to its own floor and is
 // folded in after W names a line.
-function saturationTable(profile: SampleProfile, cohort: SampleCohort = 'training', raw = false): void {
+function saturationTable(
+  profile: SampleProfile, cohort: SampleCohort = 'training', raw = false, quiet = false,
+): { p80: number; percentileOfSeventy: number; n: number } {
   const byName = cardsByName();
   const decks = cohortSample(cohort, profile).map((r) => r.deck);
   const generic = new Set<PlanKey>(GENERIC);
@@ -853,7 +880,145 @@ function saturationTable(profile: SampleProfile, cohort: SampleCohort = 'trainin
     lines.push(`| ${label} | ${sat.toFixed(3)} | ${share(S, (x) => x >= 99.95)} | ${pct(S, 10).toFixed(1)} | ` +
       `${pct(S, 50).toFixed(1)} | ${pct(S, 90).toFixed(1)} | ${(pct(S, 90) - pct(S, 10)).toFixed(1)} |`);
   }
-  console.log(lines.join('\n'));
+  if (!quiet) console.log(lines.join('\n'));
+  return { p80: pct(maxQ, 80), percentileOfSeventy: percentileOf(maxQ, 0.70), n: maxQ.length };
+}
+
+// ── round 1: the PRODUCT metric ───────────────────────────────────────────
+//
+//   MTG_DB_DIR=... npx tsx scripts/deck-score-bands.ts real [--profile brawl] [--n 600]
+//
+// Refuter R1: every acceptance number so far was taken either on piles or with
+// the typed-coverage gate lifted (`--raw`), so a scorer that reads 20 for the
+// median REAL deck passed all of them. This measures what the shipped entry
+// point returns — `scoreDeckSafely`, the same call build-api and the desktop
+// make — over the profile's training stride of real corpus lists. Never --raw.
+function realLists(n: number, profile: SampleProfile, cohort: SampleCohort = 'training'): void {
+  const byName = cardsByName();
+  const decks = cohortSample(cohort, profile).map((r) => r.deck).slice(0, n);
+  const totals: number[] = [];
+  const sValues: number[] = [];
+  const coverages: number[] = [];
+  let provisional = 0;
+  let nulls = 0;
+  let skipped = 0;
+
+  for (const deck of decks) {
+    const main: { card: DbCard; quantity: number }[] = [];
+    const commanders: DbCard[] = [];
+    const commanderName = deck.commander.toLowerCase();
+    let missing = 0;
+    let tookCommander = false;
+    for (const line of deck.cards) {
+      const card = byName.get(line.name.toLowerCase());
+      if (!card) { missing++; continue; }
+      if (!tookCommander && line.name.toLowerCase() === commanderName) { commanders.push(card); tookCommander = true; continue; }
+      main.push({ card, quantity: line.quantity });
+    }
+    if (main.length === 0 || missing > deck.cards.length * 0.1) { skipped++; continue; }
+    const payload = scoreDeckSafely({ format: profile, main, commander: commanders });
+    if (!payload) { nulls++; continue; }
+    const nonLand = main
+      .map((e) => ({ feature: deriveCardFeature(e.card), quantity: e.quantity }))
+      .filter((e) => !e.feature.isLand);
+    const F = nonLand.reduce((a, e) => a + e.quantity, 0);
+    coverages.push(F > 0 ? nonLand.filter((e) => e.feature.covered).reduce((a, e) => a + e.quantity, 0) / F : 1);
+    totals.push(payload.score);
+    sValues.push(payload.components.find((c) => c.key === 'synergy')?.score ?? 0);
+    if (payload.provisional) provisional += 1;
+  }
+
+  totals.sort((a, b) => a - b);
+  sValues.sort((a, b) => a - b);
+  coverages.sort((a, b) => a - b);
+  const share = (v: number[], f: (x: number) => boolean): string =>
+    `${v.filter(f).length}/${v.length} (${((100 * v.filter(f).length) / Math.max(1, v.length)).toFixed(1)}%)`;
+  console.log([
+    `PRODUCT METRIC — ${profile} ${cohort} stride through scoreDeckSafely (no --raw): ` +
+      `${decks.length} lists requested, ${totals.length} scored, ${skipped} skipped (>10% unresolved), ${nulls} null payloads`,
+    '',
+    '| statistic | value |',
+    '|---|---:|',
+    `| typed coverage p10/p50/p90 | ${pct(coverages, 10).toFixed(3)} / ${pct(coverages, 50).toFixed(3)} / ${pct(coverages, 90).toFixed(3)} |`,
+    `| share with S = 0 | ${share(sValues, (x) => x < 0.05)} |`,
+    `| S p10 / p50 / p90 | ${pct(sValues, 10).toFixed(1)} / ${pct(sValues, 50).toFixed(1)} / ${pct(sValues, 90).toFixed(1)} |`,
+    `| total p10 / p50 / p90 | ${pct(totals, 10)} / ${pct(totals, 50)} / ${pct(totals, 90)} |`,
+    `| share total <= 20 | ${share(totals, (x) => x <= 20)} |`,
+    `| provisional share | ${provisional}/${totals.length} (${((100 * provisional) / Math.max(1, totals.length)).toFixed(1)}%) |`,
+  ].join('\n'));
+}
+
+// ── round 1 (refuter R2): re-measure every frozen constant ────────────────
+//
+//   MTG_DB_DIR=... npx tsx scripts/deck-score-bands.ts verify
+//
+// Pins in the test suite are literal copies of the artefacts, so they stay
+// green when a catalogue change moves the statistic underneath them — which is
+// exactly how two stale Brawl constants survived stage 4c. This re-runs the
+// SAME statistic each constant was cut from and exits non-zero on a mismatch.
+const VERIFY_EPS = 0.0005;
+
+function verifyFrozen(): void {
+  const fail: string[] = [];
+  const rows: string[] = ['| constant | frozen | measured | n | verdict |', '|---|---:|---:|---:|---|'];
+  const grade = (name: string, frozen: number, measured: number, n: number, eps = VERIFY_EPS): void => {
+    // An event that never happens in the cohort cannot supply a percentile.
+    // Round 1: ZERO of 1,200 Commander controls assemble a closing line, so
+    // `Q_BASELINE_CLOSING` has no statistic this round. That is reported, not
+    // graded — failing on it would force a number to be invented.
+    if (n === 0 || !Number.isFinite(measured)) {
+      rows.push(`| ${name} | ${frozen.toFixed(3)} | - | 0 | UNMEASURABLE (event never occurs in the cohort) |`);
+      return;
+    }
+    const ok = Math.abs(frozen - measured) <= eps;
+    if (!ok) fail.push(`${name}: frozen ${frozen.toFixed(3)} vs measured ${measured.toFixed(3)}`);
+    rows.push(`| ${name} | ${frozen.toFixed(3)} | ${measured.toFixed(3)} | ${n} | ${ok ? 'MATCH' : 'MISMATCH'} |`);
+  };
+
+  const jointC = engineFloors(1000, 'commander', true);
+  grade('Q_BASELINE_JOINT_COMMANDER', Q_BASELINE_JOINT_COMMANDER, jointC.joint95, jointC.n);
+  const jointB = engineFloors(1000, 'brawl', true);
+  grade('Q_BASELINE_JOINT_BRAWL', Q_BASELINE_JOINT_BRAWL, jointB.joint95, jointB.n);
+  const closeC = closingFloor(1200, 'commander', 'holdout', true);
+  grade('Q_BASELINE_CLOSING', Q_BASELINE_CLOSING, closeC.p95, closeC.assembled);
+  const closeB = closingFloor(1200, 'brawl', 'holdout', true);
+  grade('Q_BASELINE_CLOSING_BRAWL', Q_BASELINE_CLOSING_BRAWL, closeB.p95, closeB.assembled);
+  const satB = saturationTable('brawl', 'training', true, true);
+  grade('Q_SATURATION_BRAWL (= brawl p80)', Q_SATURATION_BRAWL, satB.p80, satB.n);
+  const satC = saturationTable('commander', 'training', true, true);
+  // Commander keeps the spec's .70. Moving it is a §8/§9 SPEC change, not a
+  // stage decision, so both rows below are informational: they record where
+  // the constant sits in today's Commander deck population rather than
+  // grading it. Round 1 moved it — the catalogue now types 66% of the card
+  // universe, so every real list's max-recipe Q rose.
+  rows.push(`| (Q_SATURATION commander p80) | ${Q_SATURATION.toFixed(3)} | ${satC.p80.toFixed(3)} | ${satC.n} | informational (spec-frozen) |`);
+  rows.push(`| (Q_SATURATION .700 percentile) | 80.0 | ${satC.percentileOfSeventy.toFixed(1)} | ${satC.n} | informational (spec-frozen) |`);
+
+  let bandCells = 0;
+  for (const profile of ['commander', 'brawl'] as const) {
+    const bands = commanderBands(true, true, 'training', profile, true);
+    for (const row of bands) {
+      if (!row.frozen || row.inherited || row.n === 0) continue;
+      bandCells += 1;
+      const min = Math.round(row.p25);
+      const max = Math.round(row.p90);
+      if (min === row.frozen.min && max === row.frozen.max) continue;
+      fail.push(`band ${profile}/${row.plan}/${row.role}: frozen ${row.frozen.min}/${row.frozen.max} vs measured `
+        + `${row.p25.toFixed(1)}/${row.p90.toFixed(1)} -> ${min}/${max} (n=${row.n})`);
+      rows.push(`| band ${profile}/${row.plan}/${row.role} | ${row.frozen.min}/${row.frozen.max} | ${min}/${max} | ${row.n} | MISMATCH |`);
+    }
+  }
+
+  console.log(rows.join('\n'));
+  console.log('');
+  if (fail.length === 0) {
+    console.log(`bands verify: OK — every frozen constant reproduces at this catalogue `
+      + `(CATALOG_SIZE ${CATALOG_SIZE}; ${bandCells} band cells re-measured, 0 mismatches).`);
+    return;
+  }
+  console.log(`bands verify: ${fail.length} MISMATCH(es) at this catalogue (CATALOG_SIZE ${CATALOG_SIZE}):`);
+  for (const f of fail) console.log(`  - ${f}`);
+  process.exitCode = 1;
 }
 
 function main(): void {
@@ -865,6 +1030,13 @@ function main(): void {
   if (process.argv.includes('saturation')) {
     saturationTable(profile, process.argv.includes('--holdout') ? 'holdout' : 'training',
       process.argv.includes('--raw'));
+    return;
+  }
+  if (process.argv.includes('verify')) { verifyFrozen(); return; }
+  if (process.argv.includes('real')) {
+    const rArg = process.argv.indexOf('--n');
+    realLists(rArg > 0 ? Number(process.argv[rArg + 1]) : 100000, profile,
+      process.argv.includes('--holdout') ? 'holdout' : 'training');
     return;
   }
   if (process.argv.includes('typal')) { typalBands(profile); return; }

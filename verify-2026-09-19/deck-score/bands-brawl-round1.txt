@@ -1,0 +1,104 @@
+brawl sample (training cohort): 1146 decks, 1146 resolved, 5 unresolved card rows, 198 distinct commanders
+
+## aggro (n=7 of 10 with every essential present) — deployable pressure with reach and reload
+| role | p10 | p25 | median | p75 | p90 | frozen min/max |
+|---|---:|---:|---:|---:|---:|---|
+| (nonland copies) | 60 | 60 | 63 | 65 | 65 | - |
+| pressure | 19.0 | 29.0 | 29.0 | 42.0 | 42.0 | 10/16 (60-card) |
+| reach | 1.0 | 1.0 | 1.0 | 2.0 | 2.0 | 4/18 (60-card) |
+| reload | 4.0 | 4.0 | 5.0 | 5.0 | 5.0 | 1/8 (60-card) |
+| answers | 1.0 | 3.0 | 5.0 | 9.0 | 9.0 | 0/3 (60-card) |
+| fixing | 1.0 | 2.0 | 2.0 | 4.0 | 4.0 | 0/4 (60-card) |
+
+## midrange (n=391 of 392 with every essential present) — timely threats, relevant answers, sustained value
+| role | p10 | p25 | median | p75 | p90 | frozen min/max |
+|---|---:|---:|---:|---:|---:|---|
+| (nonland copies) | 58 | 59 | 61 | 63 | 65 | - |
+| threats | 3.0 | 5.0 | 7.0 | 10.0 | 12.0 | 5/11 |
+| answers | 6.0 | 8.0 | 11.0 | 15.0 | 20.0 | 7/20 |
+| value | 6.0 | 8.0 | 11.0 | 13.0 | 16.0 | 7/15 |
+| fixing | 1.0 | 3.0 | 5.0 | 9.0 | 12.0 | 0/8 (60-card) |
+
+## control (n=214 of 225 with every essential present) — early stabilisation, advantage engine, accessible finisher
+| role | p10 | p25 | median | p75 | p90 | frozen min/max |
+|---|---:|---:|---:|---:|---:|---|
+| (nonland copies) | 58 | 60 | 61 | 62 | 64 | - |
+| stabilisation | 2.0 | 4.0 | 7.0 | 11.0 | 13.0 | 5/12 |
+| engine | 5.0 | 8.0 | 11.0 | 15.0 | 17.0 | 6/17 |
+| finisher | 2.0 | 3.0 | 5.0 | 7.0 | 9.0 | 3/11 |
+| answers | 0.0 | 1.0 | 2.0 | 3.0 | 5.0 | 0/2 (60-card) |
+| fixing | 4.0 | 6.0 | 9.0 | 12.0 | 17.0 | 0/4 (60-card) |
+
+## aristocrats (n=64 of 167 with every essential present) — sacrifice outlets converting expendable bodies into damage
+| role | p10 | p25 | median | p75 | p90 | frozen min/max |
+|---|---:|---:|---:|---:|---:|---|
+| (nonland copies) | 56 | 59 | 60 | 62 | 65 | - |
+| outlet | 1.0 | 2.0 | 3.0 | 6.0 | 8.0 | 2/9 |
+| payoff | 1.0 | 2.0 | 5.0 | 7.0 | 11.0 | 2/11 |
+| fodder | 9.0 | 13.0 | 19.0 | 24.0 | 26.0 | 12/24 |
+| value | 2.0 | 3.0 | 4.0 | 5.0 | 7.0 | 0/8 (60-card) |
+| answers | 2.0 | 4.0 | 6.0 | 8.0 | 10.0 | 0/5 (60-card) |
+| fixing | 1.0 | 1.0 | 2.0 | 3.0 | 5.0 | 0/8 (60-card) |
+
+## lifegain (n=18 of 19 with every essential present) — life gained as a resource, converted by counters or drain
+| role | p10 | p25 | median | p75 | p90 | frozen min/max |
+|---|---:|---:|---:|---:|---:|---|
+| (nonland copies) | 59 | 60 | 60 | 63 | 63 | - |
+| payoff | 6.0 | 10.0 | 13.0 | 17.0 | 18.0 | 3/11 (cmd) |
+| gain | 11.0 | 15.0 | 21.0 | 27.0 | 28.0 | 9/24 (cmd) |
+| value | 3.0 | 4.0 | 5.0 | 8.0 | 9.0 | 6/14 (cmd) |
+| answers | 1.0 | 1.0 | 4.0 | 7.0 | 8.0 | 0/5 (60-card) |
+| fixing | 2.0 | 2.0 | 5.0 | 7.0 | 11.0 | 0/8 (60-card) |
+
+## spells (n=167 of 219 with every essential present) — cast-trigger payoffs fed by cheap instants and sorceries
+| role | p10 | p25 | median | p75 | p90 | frozen min/max |
+|---|---:|---:|---:|---:|---:|---|
+| (nonland copies) | 59 | 60 | 61 | 63 | 65 | - |
+| payoff | 1.0 | 1.0 | 3.0 | 7.0 | 11.0 | 2/10 |
+| closer | 3.0 | 4.0 | 7.0 | 12.0 | 18.0 | 4/19 |
+| spells | 14.0 | 19.5 | 23.0 | 30.0 | 34.0 | 15/32 |
+| answers | 0.0 | 0.0 | 1.0 | 2.0 | 2.0 | 0/8 (60-card) |
+| fixing | 1.0 | 3.0 | 5.0 | 9.0 | 12.0 | 0/10 (60-card) |
+
+## recursion (n=28 of 39 with every essential present) — permanents recurred from the graveyard, and the fuel that fills it
+| role | p10 | p25 | median | p75 | p90 | frozen min/max |
+|---|---:|---:|---:|---:|---:|---|
+| (nonland copies) | 58 | 60 | 60 | 63 | 64 | - |
+| recursion | 1.0 | 2.0 | 4.0 | 9.0 | 11.0 | 2/6 |
+| fuel | 1.0 | 2.0 | 4.0 | 6.0 | 10.0 | 1/7 |
+| targets | 5.0 | 5.0 | 7.0 | 13.0 | 17.0 | 5/13 |
+| value | 3.0 | 4.0 | 6.0 | 7.0 | 8.0 | 0/8 (60-card) |
+| answers | 0.0 | 1.0 | 3.0 | 7.0 | 8.0 | 0/5 (60-card) |
+| fixing | 1.0 | 2.0 | 5.0 | 10.0 | 18.0 | 0/8 (60-card) |
+
+## conversion (n=8 of 9 with every essential present) — Food/Treasure/Clue produced, then spent on bodies, life or cards
+| role | p10 | p25 | median | p75 | p90 | frozen min/max |
+|---|---:|---:|---:|---:|---:|---|
+| (nonland copies) | 59 | 60 | 61 | 62 | 62 | - |
+| converters | 8.0 | 9.0 | 14.0 | 17.0 | 17.0 | 4/19 (cmd) |
+| producers | 9.0 | 10.0 | 20.0 | 20.0 | 21.0 | 9/18 (cmd) |
+| output | 7.0 | 7.0 | 10.0 | 11.0 | 11.0 | 4/11 (cmd) |
+| value | 2.0 | 2.0 | 3.0 | 4.0 | 5.0 | 0/8 (60-card) |
+| answers | 1.0 | 1.0 | 3.0 | 4.0 | 5.0 | 0/5 (60-card) |
+| fixing | 2.0 | 3.0 | 6.0 | 7.0 | 9.0 | 0/8 (60-card) |
+
+## tokens (n=17 of 18 with every essential present) — a wide board of creature tokens, converted by anthems or an outlet
+| role | p10 | p25 | median | p75 | p90 | frozen min/max |
+|---|---:|---:|---:|---:|---:|---|
+| (nonland copies) | 58 | 60 | 61 | 65 | 67 | - |
+| payoff | 5.0 | 6.0 | 9.0 | 13.0 | 15.0 | 6/19 (cmd) |
+| makers | 6.0 | 6.0 | 8.0 | 13.0 | 18.0 | 5/13 (cmd) |
+| value | 7.0 | 12.0 | 13.0 | 14.0 | 15.0 | 8/18 (cmd) |
+| answers | 0.0 | 1.0 | 3.0 | 5.0 | 8.0 | 0/5 (60-card) |
+| fixing | 2.0 | 3.0 | 7.0 | 10.0 | 12.0 | 0/8 (60-card) |
+
+## counters (n=39 of 48 with every essential present) — +1/+1 counters placed on bodies that read them
+| role | p10 | p25 | median | p75 | p90 | frozen min/max |
+|---|---:|---:|---:|---:|---:|---|
+| (nonland copies) | 60 | 60 | 61 | 63 | 66 | - |
+| payoff | 2.0 | 3.0 | 4.0 | 9.0 | 11.0 | 2/10 |
+| sources | 6.0 | 9.0 | 12.0 | 17.0 | 19.0 | 6/17 |
+| carriers | 4.0 | 6.0 | 7.0 | 10.0 | 12.0 | 5/14 |
+| value | 3.0 | 3.0 | 5.0 | 6.0 | 6.0 | 0/8 (60-card) |
+| answers | 1.0 | 2.0 | 3.0 | 4.0 | 5.0 | 0/5 (60-card) |
+| fixing | 3.0 | 5.0 | 7.0 | 9.0 | 11.0 | 0/8 (60-card) |

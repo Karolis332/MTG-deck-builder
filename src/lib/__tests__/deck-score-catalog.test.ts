@@ -9,12 +9,18 @@
  *     ground. The texts below are live oracle texts (card data 2026-09-19)
  *     pasted verbatim, so the parser is exercised without a database.
  */
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import {
   CATALOG_SIZE, CATALOG_VERSION, CURATED, catalogEntries, catalogEntry, catalogFacts,
   entryHash, isGenerated, oracleHash, type CatalogEntry, type EffectFamily,
 } from '../deck-score-catalog';
 import { generateEntry, type GeneratableCard } from '../deck-score-catalog/generate';
+
+// Coverage round 1 tripled the catalogue shard (4,467 -> 14,909 entries), so
+// every pile-building and catalogue-walking test in this file got ~3x slower
+// and several landed within noise of vitest's 15 s default. Raised per file
+// rather than per test: the work is corpus-sized, not hung.
+vi.setConfig({ testTimeout: 120_000 });
 
 function card(
   name: string, mana_cost: string | null, cmc: number, type_line: string, oracle_text: string,
@@ -117,7 +123,9 @@ describe('deck-score catalogue — compiled shape', () => {
         expect(typeof effect.outputBounds?.unit).toBe('string');
       }
     }
-  });
+    // Coverage round 1 tripled the shard (4,467 -> 14,909 entries), so this
+    // whole-catalogue walk runs ~16 s and flaked against the 15 s default.
+  }, 120_000);
 
   it('has no duplicate canonical identity inside a shard', () => {
     const seen = new Set<string>();

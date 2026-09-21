@@ -124,7 +124,7 @@ function frequency(p: Profile): Map<string, FreqRow> {
   for (const l of p.lists) {
     const seen = new Set<string>();
     for (const line of l.lines) {
-      const card = p.cards.get(line.name);
+      const card = p.cards.get(line.name) ?? null;
       if (card && deriveCardFeature(card).isLand) continue;
       const key = card ? card.name : line.name;
       let row = freq.get(key);
