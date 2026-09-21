@@ -210,6 +210,10 @@ export function qualityCap(
 /** §2 hard caps, most restrictive wins (smallest number). */
 export const HARD_CAP_INVALID = 0;
 export const HARD_CAP_STRUCTURE = 19;
+/** RETIRED by §10.5 (v1.4 stage 0): an unresolved name is missing evidence,
+ * not a rule failure, so `deck-score-gates.ts` emits an evidence warn with
+ * `cap: null` and keeps the copies as reserved slots. The constant stays
+ * exported as the documented history of the superseded cap. */
 export const HARD_CAP_UNRESOLVED = 39;
 
 export const SCORE_VERSION = '1.3.0-rc2';

@@ -17,7 +17,8 @@
  * score-version bump.
  */
 import { loadStandardCohorts, loadStandardDbFixture, loadCedhCohort } from './deck-score-fixtures';
-import { loadMatchedPiles, loadCohortPiles, strideOrder, readSample, cardsByName, cohortSeed, HOLDOUT_EVERY, type SampleCohort, type SampleProfile } from './deck-score-piles';
+import { loadMatchedPiles, loadCohortPiles, loadStudyControls, strideOrder, readSample, cardsByName, cohortSeed, HOLDOUT_EVERY, type SampleCohort, type SampleProfile } from './deck-score-piles';
+import { readManifest, verifyCohortHashes } from './deck-score-cohorts';
 import { scoreDeck } from '../src/lib/deck-score';
 import type { DbCard } from '../src/lib/types';
 import { deriveCardFeature } from '../src/lib/deck-score-features';
@@ -27,7 +28,7 @@ import { producerUtilisation } from '../src/lib/deck-score-producers';
 import { Q_BASELINE, Q_BASELINE_JOINT_COMMANDER, Q_BASELINE_JOINT_BRAWL, Q_BASELINE_CLOSING,
   Q_BASELINE_CLOSING_BRAWL, Q_SATURATION, Q_SATURATION_BRAWL, qSaturationFor, normsFor,
   type ScoreProfile } from '../src/lib/deck-score-norms';
-import { scoreDeckSafely } from '../src/lib/deck-score-input';
+import { scoreDeckSafely, explainScoreUnavailable } from '../src/lib/deck-score-input';
 import { CATALOG_SIZE } from '../src/lib/deck-score-catalog';
 import { clip } from '../src/lib/deck-score-math';
 import { computeInteraction, computeAdvantage } from '../src/lib/deck-score-interaction';
@@ -893,59 +894,150 @@ function saturationTable(
 // median REAL deck passed all of them. This measures what the shipped entry
 // point returns — `scoreDeckSafely`, the same call build-api and the desktop
 // make — over the profile's training stride of real corpus lists. Never --raw.
-function realLists(n: number, profile: SampleProfile, cohort: SampleCohort = 'training'): void {
-  const byName = cardsByName();
-  const decks = cohortSample(cohort, profile).map((r) => r.deck).slice(0, n);
-  const totals: number[] = [];
-  const sValues: number[] = [];
-  const coverages: number[] = [];
-  let provisional = 0;
-  let nulls = 0;
-  let skipped = 0;
+/**
+ * v1.4 stage 0 (§10 baseline table, §10.5 reporting rule) — the ONE product
+ * measurement every later stage is graded against.
+ *
+ *   MTG_DB_DIR=... npx tsx scripts/deck-score-bands.ts real --profile commander
+ *
+ * Publishes, side by side: the FULL stride (all 1,824 / 1,146 rows, rule caps
+ * retained) and the ELIGIBLE subset (`cohorts-v14.json` exclusion = none),
+ * with every excluded and unavailable count, plus both pile constructions.
+ * "Exclusion must not manufacture a median gain: demonstrate changes on the
+ * same IDs, and report every excluded/unavailable count."
+ */
+interface RealRow {
+  id: string;
+  S: number | null;
+  W: number | null;
+  total: number | null;
+  coverage: number;
+  hardCapUnder25: boolean;
+  provisional: boolean;
+  unavailable: string | null;
+}
 
-  for (const deck of decks) {
+function scoreStride(profile: SampleProfile, cohort: SampleCohort, n: number): RealRow[] {
+  const byName = cardsByName();
+  const rows: RealRow[] = [];
+  for (const { deck } of cohortSample(cohort, profile).slice(0, n)) {
     const main: { card: DbCard; quantity: number }[] = [];
     const commanders: DbCard[] = [];
+    const unresolved: { name: string; quantity: number; board: string }[] = [];
     const commanderName = deck.commander.toLowerCase();
-    let missing = 0;
     let tookCommander = false;
     for (const line of deck.cards) {
       const card = byName.get(line.name.toLowerCase());
-      if (!card) { missing++; continue; }
+      // §10.5: an unresolved name is a RESERVED SLOT, not a deleted card.
+      if (!card) { unresolved.push({ name: line.name, quantity: line.quantity, board: 'main' }); continue; }
       if (!tookCommander && line.name.toLowerCase() === commanderName) { commanders.push(card); tookCommander = true; continue; }
       main.push({ card, quantity: line.quantity });
     }
-    if (main.length === 0 || missing > deck.cards.length * 0.1) { skipped++; continue; }
-    const payload = scoreDeckSafely({ format: profile, main, commander: commanders });
-    if (!payload) { nulls++; continue; }
+    const args = { format: profile, main, commander: commanders, unresolved };
+    const unavailable = explainScoreUnavailable(args);
+    const payload = unavailable ? null : scoreDeckSafely(args);
     const nonLand = main
       .map((e) => ({ feature: deriveCardFeature(e.card), quantity: e.quantity }))
       .filter((e) => !e.feature.isLand);
     const F = nonLand.reduce((a, e) => a + e.quantity, 0);
-    coverages.push(F > 0 ? nonLand.filter((e) => e.feature.covered).reduce((a, e) => a + e.quantity, 0) / F : 1);
-    totals.push(payload.score);
-    sValues.push(payload.components.find((c) => c.key === 'synergy')?.score ?? 0);
-    if (payload.provisional) provisional += 1;
+    const caps = (payload?.gates ?? []).filter((g) => g.kind !== 'quality' && g.cap !== null);
+    rows.push({
+      id: deck.id,
+      S: payload ? payload.components.find((c) => c.key === 'synergy')?.score ?? 0 : null,
+      W: payload ? payload.components.find((c) => c.key === 'win')?.score ?? 0 : null,
+      total: payload ? payload.score : null,
+      coverage: F > 0 ? nonLand.filter((e) => e.feature.covered).reduce((a, e) => a + e.quantity, 0) / F : 1,
+      hardCapUnder25: caps.some((g) => (g.cap as number) < 25),
+      provisional: payload?.provisional ?? false,
+      unavailable: unavailable ?? (payload ? null : 'scorer returned null'),
+    });
   }
+  return rows;
+}
 
-  totals.sort((a, b) => a - b);
-  sValues.sort((a, b) => a - b);
-  coverages.sort((a, b) => a - b);
-  const share = (v: number[], f: (x: number) => boolean): string =>
-    `${v.filter(f).length}/${v.length} (${((100 * v.filter(f).length) / Math.max(1, v.length)).toFixed(1)}%)`;
+function pileUnder25(profile: SampleProfile, kind: 'ctrl93' | 'ctrlmatch', n: number, realCoverage: number[]): string {
+  const piles = loadStudyControls(profile, kind, n, realCoverage);
+  let under = 0;
+  let nulls = 0;
+  for (const pile of piles) {
+    const payload = scoreDeckSafely({
+      format: pile.input.format, main: [...pile.input.main], commander: [...pile.input.commander],
+    });
+    if (!payload) { nulls++; continue; }
+    if (payload.score < 25) under++;
+  }
+  return `${under}/${piles.length} (${((100 * under) / Math.max(1, piles.length)).toFixed(1)}%)` +
+    `${nulls ? `, ${nulls} unavailable` : ''}`;
+}
+
+function realLists(n: number, profile: SampleProfile, cohort: SampleCohort = 'training', piles = 1000): void {
+  const rows = scoreStride(profile, cohort, n);
+  const manifest = readManifest();
+  const eligible = new Set(
+    (manifest?.rows ?? [])
+      .filter((r) => r.profile === profile && r.split === cohort && r.exclusion === 'none')
+      .map((r) => r.id.slice(`${profile}-sample:`.length)),
+  );
+  if (!manifest) console.log('WARNING: cohorts-v14.json missing — eligible subset falls back to "no hard cap".');
+  const isEligible = (r: RealRow): boolean => (manifest ? eligible.has(r.id) : !r.hardCapUnder25);
+
+  const column = (set: RealRow[]): string[] => {
+    const scored = set.filter((r) => r.total !== null);
+    const S = scored.map((r) => r.S as number).sort((a, b) => a - b);
+    const W = scored.map((r) => r.W as number).sort((a, b) => a - b);
+    const T = scored.map((r) => r.total as number).sort((a, b) => a - b);
+    // §10.5: "for release S-zero coverage count S=0 OR unavailable".
+    const zeroS = set.filter((r) => r.total === null || (r.S as number) < 0.05).length;
+    const share = (k: number, of: number) => `${k}/${of} (${((100 * k) / Math.max(1, of)).toFixed(1)}%)`;
+    return [
+      String(set.length),
+      String(set.length - scored.length),
+      share(zeroS, set.length),
+      `${pct(S, 10).toFixed(1)} / ${pct(S, 50).toFixed(1)} / ${pct(S, 90).toFixed(1)}`,
+      `${pct(W, 10).toFixed(1)} / ${pct(W, 50).toFixed(1)} / ${pct(W, 90).toFixed(1)}`,
+      `${pct(T, 10)} / ${pct(T, 50)} / ${pct(T, 90)}`,
+      share(W.filter((x) => x < 0.05).length, scored.length),
+      share(set.filter((r) => r.hardCapUnder25).length, set.length),
+      share(set.filter((r) => r.provisional).length, set.length),
+    ];
+  };
+
+  const full = column(rows);
+  const sub = column(rows.filter(isEligible));
+  const labels = [
+    'rows', 'unavailable (no numeric total)', 'S = 0 or unavailable', 'S p10 / p50 / p90',
+    'W p10 / p50 / p90', 'total p10 / p50 / p90', 'W = 0 share (scored)',
+    'hard cap < 25', 'provisional share',
+  ];
+  const coverage = rows.map((r) => r.coverage).sort((a, b) => a - b);
   console.log([
-    `PRODUCT METRIC — ${profile} ${cohort} stride through scoreDeckSafely (no --raw): ` +
-      `${decks.length} lists requested, ${totals.length} scored, ${skipped} skipped (>10% unresolved), ${nulls} null payloads`,
+    `PRODUCT METRIC — ${profile} ${cohort} stride through scoreDeckSafely (no --raw), ` +
+      `card data ${CATALOG_SIZE} catalogue entries`,
+    `typed coverage p10/p50/p90 ${pct(coverage, 10).toFixed(3)} / ${pct(coverage, 50).toFixed(3)} / ${pct(coverage, 90).toFixed(3)}`,
     '',
-    '| statistic | value |',
-    '|---|---:|',
-    `| typed coverage p10/p50/p90 | ${pct(coverages, 10).toFixed(3)} / ${pct(coverages, 50).toFixed(3)} / ${pct(coverages, 90).toFixed(3)} |`,
-    `| share with S = 0 | ${share(sValues, (x) => x < 0.05)} |`,
-    `| S p10 / p50 / p90 | ${pct(sValues, 10).toFixed(1)} / ${pct(sValues, 50).toFixed(1)} / ${pct(sValues, 90).toFixed(1)} |`,
-    `| total p10 / p50 / p90 | ${pct(totals, 10)} / ${pct(totals, 50)} / ${pct(totals, 90)} |`,
-    `| share total <= 20 | ${share(totals, (x) => x <= 20)} |`,
-    `| provisional share | ${provisional}/${totals.length} (${((100 * provisional) / Math.max(1, totals.length)).toFixed(1)}%) |`,
+    '| statistic | full stride | eligible subset |',
+    '|---|---:|---:|',
+    ...labels.map((l, i) => `| ${l} | ${full[i]} | ${sub[i]} |`),
   ].join('\n'));
+
+  const exclusions = new Map<string, number>();
+  for (const r of manifest?.rows ?? []) {
+    if (r.profile !== profile || r.split !== cohort) continue;
+    exclusions.set(r.exclusion, (exclusions.get(r.exclusion) ?? 0) + 1);
+  }
+  console.log('');
+  console.log(`excluded by input gate (cohorts-v14.json): ${[...exclusions.entries()]
+    .filter(([k]) => k !== 'none').sort((a, b) => b[1] - a[1]).map(([k, v]) => `${k} ${v}`).join(', ') || 'none'}`);
+
+  if (piles > 0) {
+    const realCoverage = rows.map((r) => r.coverage);
+    console.log('');
+    console.log('| control construction | total < 25 |');
+    console.log('|---|---:|');
+    for (const kind of ['ctrl93', 'ctrlmatch'] as const) {
+      console.log(`| ${kind} (n=${piles}, study seeds) | ${pileUnder25(profile, kind, piles, realCoverage)} |`);
+    }
+  }
 }
 
 // ── round 1 (refuter R2): re-measure every frozen constant ────────────────
@@ -1009,6 +1101,14 @@ function verifyFrozen(): void {
     }
   }
 
+  // v1.4 stage 0 (§10.2 "record hashes, cohort membership/exclusions"): the
+  // frozen manifest must still describe the CSVs on disk, or every band above
+  // was measured on a different population than the one it claims.
+  const hashes = verifyCohortHashes();
+  rows.push(`| cohort list hashes | ${hashes.checked} | ${hashes.checked - hashes.mismatches.length} | ${hashes.checked} | `
+    + `${hashes.mismatches.length === 0 ? 'MATCH' : 'MISMATCH'} |`);
+  for (const m of hashes.mismatches.slice(0, 5)) fail.push(`cohort hash ${m}`);
+
   console.log(rows.join('\n'));
   console.log('');
   if (fail.length === 0) {
@@ -1035,8 +1135,10 @@ function main(): void {
   if (process.argv.includes('verify')) { verifyFrozen(); return; }
   if (process.argv.includes('real')) {
     const rArg = process.argv.indexOf('--n');
+    const pArgPiles = process.argv.indexOf('--piles');
     realLists(rArg > 0 ? Number(process.argv[rArg + 1]) : 100000, profile,
-      process.argv.includes('--holdout') ? 'holdout' : 'training');
+      process.argv.includes('--holdout') ? 'holdout' : 'training',
+      pArgPiles > 0 ? Number(process.argv[pArgPiles + 1]) : 1000);
     return;
   }
   if (process.argv.includes('typal')) { typalBands(profile); return; }

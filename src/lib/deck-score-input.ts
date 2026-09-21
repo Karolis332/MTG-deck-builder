@@ -56,11 +56,34 @@ function cardDataVersion(): string {
   return cachedCardDataVersion;
 }
 
+/**
+ * §10.2/§10.5: why this input has NO numeric total, or null when it is
+ * scorable. "An entirely unevaluable essential component yields provisional
+ * component diagnostics and no numeric total, rather than invented credit."
+ *
+ * This is the one predicate `scoreDeckSafely`'s null return follows, so a
+ * calibration script can report the reason instead of an anonymous null.
+ * Partial evidence is NOT unavailable: an unresolved copy, or an unresolved
+ * commander line with a readable library, still yields a provisional score.
+ */
+export function explainScoreUnavailable(args: BuildDeckScoreInputArgs): string | null {
+  const format = toScoreFormat(args.format);
+  if (!format) return `unsupported format "${args.format ?? 'null'}" — the scorer has no norms for it.`;
+  const copies = args.main.reduce((s, e) => s + e.quantity, 0);
+  if (args.main.length === 0 || copies <= 0) {
+    const reserved = (args.unresolved ?? []).filter((u) => u.board === 'main').length;
+    return reserved > 0
+      ? `no resolved main-board card: all ${reserved} library slot(s) are unresolved names.`
+      : 'no main-board cards to evaluate.';
+  }
+  return null;
+}
+
 /** Empty main deck (e.g. a brand-new commander deck) has nothing to score —
  * null so the caller falls back to the old number, not a misleading {score: 0}. */
 export function buildDeckScoreInput(args: BuildDeckScoreInputArgs): DeckScoreInput | null {
   const format = toScoreFormat(args.format);
-  if (!format || args.main.length === 0) return null;
+  if (!format || explainScoreUnavailable(args) !== null) return null;
   return {
     format,
     main: args.main,

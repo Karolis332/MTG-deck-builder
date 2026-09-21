@@ -18,6 +18,7 @@ import { CEDH_STAPLES_B1 } from './entries/cedh-staples-b1';
 import { CEDH_STAPLES_B2 } from './entries/cedh-staples-b2';
 import { FIXTURES_B3 } from './entries/fixtures-b3';
 import { STANDARD_B4 } from './entries/standard-b4';
+import { CEDH_COMBOS_B6 } from './entries/cedh-combos-b6';
 // Generated shard: data only, so it is JSON rather than a 5 MB TypeScript
 // literal tsc would have to type-check. `generated-partial.json` is NOT loaded
 // here — a partial entry can never count as coverage, so only the coverage
@@ -32,6 +33,7 @@ export * from './schema';
  * the same name (§1 "curate the exceptional ones by canonical identity"). */
 export const CURATED: readonly CatalogEntry[] = [
   ...CEDH_CORE, ...STANDARD_CORE, ...CEDH_STAPLES_B1, ...CEDH_STAPLES_B2, ...FIXTURES_B3, ...STANDARD_B4,
+  ...CEDH_COMBOS_B6,
 ];
 const ENTRIES: readonly CatalogEntry[] = [...GENERATED, ...CURATED];
 

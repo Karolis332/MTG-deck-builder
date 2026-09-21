@@ -1,6 +1,6 @@
 # Deck Score v1 calibration report
 
-Generated 2026-09-21T08:09:47.955Z. Raw v1 numbers — weights are NOT tuned in this unit (docs/DECK_SCORE_SPEC.md §4 is a separate calibration pass).
+Generated 2026-09-21T10:03:07.832Z. Raw v1 numbers — weights are NOT tuned in this unit (docs/DECK_SCORE_SPEC.md §4 is a separate calibration pass).
 Component columns: M=mana C=curve I=interaction A=advantage W=win S=synergy Fmeta=meta.
 "ms" times only the `scoreDeck()` call (feature classification runs inside it); the spec's <20ms budget is stated as "after classification", so this number is a conservative upper bound, not an apples-to-apples comparison.
 
@@ -8,22 +8,22 @@ Component columns: M=mana C=curve I=interaction A=advantage W=win S=synergy Fmet
 
 | Fixture | Format | Score | M | C | I | A | W | S | Fmeta | plan | Q | R | b | Gates | Band | IN/OUT | ms |
 |---|---|---:|---:|---:|---:|---:|---:|---:|---:|---|---:|---:|---:|---|---|---|---:|
-| meren-powerhouse | commander | 75 | 97.8 | 94.4 | 95 | 82 | 68.7 | 100 | 50 | aristocrats | 0.778 | 1.000 | 0.683 | quality_cap<=75 | 65-80 | IN | 47.58 |
-| cabbage-cedh-input | commander | 20 | 82.5 | 85.1 | 97.5 | 85 | 74.3 | 0 | 50 | control | 0.600 | 1.000 | 0.683 | quality_cap<=20 | 35-50 | OUT | 13.25 |
-| precon-witherbloom | commander | 54 | 96.9 | 83 | 60.7 | 65 | 42.5 | 83.3 | 50 | lifegain | 0.814 | 0.833 | 0.683 | quality_cap<=54 | 40-55 | IN | 8.73 |
-| the-cabbage-merchant | commander | 20 | 92.3 | 94.6 | 70.6 | 74.6 | 48.8 | 0 | 50 | midrange | 0.615 | 1.000 | 0.683 | quality_cap<=20 | 55-70 | OUT | 12.23 |
-| imotekh-the-stormlord | commander | 60 | 88.1 | 93.4 | 51.9 | 74.6 | 50.6 | 100 | 50 | recursion | 0.703 | 1.000 | 0.683 | quality_cap<=60.5 | 45-65 | IN | 11.25 |
-| tazri-beacon-of-unity | commander | 20 | 90.4 | 94.4 | 96 | 65 | 59.8 | 0 | 50 | typal | 0.667 | 1.000 | 0.683 | quality_cap<=20 | 40-60 | OUT | 20.06 |
-| meren-of-clan-nel-toth | commander | 19 | 97.5 | 95.6 | 95 | 81.8 | 68.7 | 100 | 50 | aristocrats | 0.766 | 1.000 | 0.683 | fail:structure,size; size<=19,quality_cap<=75 | 0-19 | IN | 7.01 |
-| ramos-dragon-engine | commander | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 50 | aggro | 0.000 | 0.000 | 0.683 | quality_cap<=20 | 0-19 | IN | 1.17 |
-| cabbage-merchant-current-brawl | brawl | 19 | 95.6 | 94.6 | 80.6 | 73.5 | 85 | 0 | 50 | tokens | 0.634 | 0.330 | 0.733 | fail:structure,size,legality; size<=19,legality<=19,quality_cap<=20 | 0-19 | IN | 9.63 |
-| tazri-upgraded-arena | brawl | 68 | 60.4 | 90.3 | 84 | 73.5 | 92.2 | 66.7 | 50 | tokens | 0.759 | 0.667 | 0.733 | quality_cap<=68.3 | 45-65 | OUT | 10.49 |
-| kuja-genome-sorcerer-arena | brawl | 71 | 90 | 84.7 | 92 | 91.7 | 63.7 | 100 | 50 | spells | 0.781 | 1.000 | 0.733 | quality_cap<=71 | 60-80 | IN | 8.36 |
-| vivi-battery-arena | brawl | 76 | 87.8 | 82 | 100 | 100 | 69.5 | 96.6 | 50 | spells | 0.757 | 1.000 | 0.733 | quality_cap<=75.6 | 70-85 | IN | 9.54 |
-| fire-lord-azula-competitive | competitivebrawl | 20 | 83.5 | 82 | 98 | 94.6 | 83.6 | 0 | 50 | spells | 0.705 | 1.000 | 0.733 | quality_cap<=20 | 75-90 | OUT | 8.80 |
-| cedhtop16-ballooncon6 | commander | 91 | 93.8 | 75 | 100 | 78.6 | 90.5 | 100 | 50 | spells | 0.701 | 0.505 | 0.683 | quality_cap<=92.4 | 80-95 | IN | 14.64 |
-| standard-1445893-univerce | standard | 73 | 65.8 | 60.5 | 94 | 77.5 | 85 | 100 | 50 | midrange | 0.872 | 1.000 | 0.300 | quality_cap<=72.6 | 70-90 | IN | 3.92 |
-| standard-1445867-aljce | standard | 68 | 75.1 | 78.6 | 81.7 | 86.3 | 60.1 | 100 | 50 | midrange | 0.778 | 1.000 | 0.300 | quality_cap<=68.1 | 65-90 | IN | 3.58 |
+| meren-powerhouse | commander | 75 | 97.8 | 94.4 | 95 | 82 | 68.7 | 100 | 50 | aristocrats | 0.778 | 1.000 | 0.683 | quality_cap<=75 | 65-80 | IN | 68.20 |
+| cabbage-cedh-input | commander | 20 | 82.5 | 85.1 | 97.5 | 85 | 74.3 | 0 | 50 | control | 0.600 | 1.000 | 0.683 | quality_cap<=20 | 35-50 | OUT | 17.99 |
+| precon-witherbloom | commander | 54 | 96.9 | 83 | 60.7 | 65 | 42.5 | 83.3 | 50 | lifegain | 0.814 | 0.833 | 0.683 | quality_cap<=54 | 40-55 | IN | 15.41 |
+| the-cabbage-merchant | commander | 20 | 92.3 | 94.6 | 70.6 | 74.6 | 48.8 | 0 | 50 | midrange | 0.615 | 1.000 | 0.683 | quality_cap<=20 | 55-70 | OUT | 17.68 |
+| imotekh-the-stormlord | commander | 60 | 88.1 | 93.4 | 51.9 | 74.6 | 50.6 | 100 | 50 | recursion | 0.703 | 1.000 | 0.683 | quality_cap<=60.5 | 45-65 | IN | 20.01 |
+| tazri-beacon-of-unity | commander | 20 | 90.4 | 94.4 | 96 | 65 | 59.8 | 0 | 50 | typal | 0.667 | 1.000 | 0.683 | quality_cap<=20 | 40-60 | OUT | 30.03 |
+| meren-of-clan-nel-toth | commander | 19 | 97.5 | 95.6 | 95 | 81.8 | 68.7 | 100 | 50 | aristocrats | 0.766 | 1.000 | 0.683 | fail:structure,size; size<=19,quality_cap<=75 | 0-19 | IN | 10.82 |
+| ramos-dragon-engine | commander | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 50 | aggro | 0.000 | 0.000 | 0.683 | quality_cap<=20 | 0-19 | IN | 2.22 |
+| cabbage-merchant-current-brawl | brawl | 19 | 95.6 | 94.6 | 80.6 | 73.5 | 85 | 0 | 50 | tokens | 0.634 | 0.330 | 0.733 | fail:structure,size,legality; size<=19,legality<=19,quality_cap<=20 | 0-19 | IN | 12.15 |
+| tazri-upgraded-arena | brawl | 68 | 60.4 | 90.3 | 84 | 73.5 | 92.2 | 66.7 | 50 | tokens | 0.759 | 0.667 | 0.733 | quality_cap<=68.3 | 45-65 | OUT | 15.36 |
+| kuja-genome-sorcerer-arena | brawl | 71 | 90 | 84.7 | 92 | 91.7 | 63.7 | 100 | 50 | spells | 0.781 | 1.000 | 0.733 | quality_cap<=71 | 60-80 | IN | 11.98 |
+| vivi-battery-arena | brawl | 76 | 87.8 | 82 | 100 | 100 | 69.5 | 96.6 | 50 | spells | 0.757 | 1.000 | 0.733 | quality_cap<=75.6 | 70-85 | IN | 13.26 |
+| fire-lord-azula-competitive | competitivebrawl | 20 | 83.5 | 82 | 98 | 94.6 | 83.6 | 0 | 50 | spells | 0.705 | 1.000 | 0.733 | quality_cap<=20 | 75-90 | OUT | 15.96 |
+| cedhtop16-ballooncon6 | commander | 92 | 93.8 | 75 | 100 | 78.6 | 95 | 100 | 50 | spells | 0.701 | 0.505 | 0.683 | quality_cap<=95 | 80-95 | IN | 21.30 |
+| standard-1445893-univerce | standard | 73 | 65.8 | 60.5 | 94 | 77.5 | 85 | 100 | 50 | midrange | 0.872 | 1.000 | 0.300 | quality_cap<=72.6 | 70-90 | IN | 4.60 |
+| standard-1445867-aljce | standard | 68 | 75.1 | 78.6 | 81.7 | 86.3 | 60.1 | 100 | 50 | midrange | 0.778 | 1.000 | 0.300 | quality_cap<=68.1 | 65-90 | IN | 5.44 |
 
 Anchors in band: 11/16 (fixtures with a hard-cap-only band like "0-19" always count as anchors here; "if rule-valid" bands are graded the same way — this report does not re-derive Arena rule-validity separately).
 
@@ -44,7 +44,7 @@ Anchors in band: 11/16 (fixtures with a hard-cap-only band like "0-19" always co
 | kuja-genome-sorcerer-arena | 63.7 | Control inevitability (13 finishers): closes T8, access 100% (u=0.71); shared bottleneck, protection access 34%; none. |
 | vivi-battery-arena | 69.5 | Control inevitability (11 finishers): closes T8, access 84% (u=0.71); shared bottleneck, protection access 89%; none. |
 | fire-lord-azula-competitive | 83.6 | Creature pressure (3 threats): closes T7, access 51% (u=0.84); shared bottleneck, protection access 96%; none. |
-| cedhtop16-ballooncon6 | 90.5 | Alternate win condition: closes T7, access 14% (u=0.95); independent backup Dramatic Reversal + Isochron Scepter u=0.13; none. |
+| cedhtop16-ballooncon6 | 95 | Thassa's Oracle + Demonic Consultation: closes T7, access 17% (u=1.00); shared bottleneck, protection access 67%; none. |
 | standard-1445893-univerce | 85 | Creature pressure (4 threats): closes T6, access 83% (u=1.00); shared bottleneck, protection access 0%; none. |
 | standard-1445867-aljce | 60.1 | Token/Food conversion (1 bodies): closes T7, access 85% (u=0.71); shared bottleneck, protection access 0%; none. |
 
@@ -80,8 +80,8 @@ n=200 piles, 30 cEDH lists, 120 held-out Standard positives.
 
 | section-8 target | measured | |
 |---|---|---|
-| held-out Standard positive median >= 75 | 55 | FAIL |
-| cEDH median >= 85 | 88 | PASS |
+| held-out Standard positive median >= 75 | 58 | FAIL |
+| cEDH median >= 85 | 90 | PASS |
 | >= 95% of piles < 25 | 200/200 | PASS |
 | S <= 5 on >= 95% of piles | 200/200 | PASS |
 | Meren S >= 85.5 | 100 | PASS |
@@ -92,8 +92,8 @@ n=200 piles, 30 cEDH lists, 120 held-out Standard positives.
 
 | Standard held-out cohort | n | total median | S median | S zeros | W median | W zeros |
 |---|---:|---:|---:|---:|---:|---:|
-| positives (newest 40%) | 120 | 55 | 87.5 | 3 | 85 | 0 |
-| losing field (newest 40%) | 120 | 56 | 98.1 | 12 | 85 | 0 |
+| positives (newest 40%) | 120 | 58 | 87.5 | 3 | 85 | 0 |
+| losing field (newest 40%) | 120 | 57 | 98.1 | 12 | 85 | 0 |
 
 | pile distribution | min | median | max |
 |---|---:|---:|---:|

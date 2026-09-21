@@ -185,7 +185,7 @@ describe('coverage round 1 — real-list typed coverage', () => {
     const cmd = prefixStats('commander');
     const brawl = prefixStats('brawl');
     const zeroShare = (v: number[]): number => v.filter((x) => x <= 0.05).length / v.length;
-    expect(zeroShare(cmd.S)).toBeCloseTo(0.855, 2);
+    expect(zeroShare(cmd.S)).toBeCloseTo(0.86, 2);
     expect(zeroShare(brawl.S)).toBeCloseTo(0.940, 2);
     expect(zeroShare(cmd.S)).toBeGreaterThan(0.30);
     // Both medians sit on the 20 floor for the same reason.

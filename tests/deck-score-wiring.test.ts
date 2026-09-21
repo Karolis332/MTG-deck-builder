@@ -18,6 +18,7 @@ vi.mock('@/lib/db', async (importOriginal) => {
 });
 
 import type { ServerResponse } from 'http';
+import type { DbCard } from '../src/lib/types';
 import { optimizeDeck } from '../services/build-api/optimize';
 
 vi.mock('@/lib/deck-builder-ai', async (importOriginal) => {
@@ -26,6 +27,7 @@ vi.mock('@/lib/deck-builder-ai', async (importOriginal) => {
 });
 import { autoBuildDeck } from '@/lib/deck-builder-ai';
 import { handleAnalyze, handleBuild } from '../services/build-api/server';
+import { scoreDeckSafely, explainScoreUnavailable } from '../src/lib/deck-score-input';
 
 /** Minimal fake http.ServerResponse — captures status + parsed JSON body. */
 function fakeRes(): { res: ServerResponse; result: () => { status: number; body: Record<string, unknown> } } {
@@ -133,6 +135,37 @@ describe('POST /analyze — deckScore', () => {
     const { res, result } = fakeRes();
     handleAnalyze(body('modern'), res);
     expect(result().status).toBe(400);
+  });
+});
+
+// v1.4 §10.5: the seam every call site shares. An unresolved name is missing
+// EVIDENCE — the payload stays present, turns provisional, keeps the copies
+// as reserved slots and carries NO cap. (`optimize.ts` resolves `unresolved`
+// for its own response but does not hand it to the scorer yet; that seam gap
+// is a services-side fix, not a scorer one.)
+describe('scoreDeckSafely — unresolved names', () => {
+  const deck = (): Parameters<typeof scoreDeckSafely>[0] => {
+    const cards = JSON.parse(fs.readFileSync(path.join(FIX, 'cards.json'), 'utf8')) as DbCard[];
+    const commander = cards.find((c) => c.name === 'Adeliz, the Cinder Wind')!;
+    const main = MAIN_NAMES.map((name) => ({ card: cards.find((c) => c.name === name)!, quantity: 1 }));
+    return { format: 'brawl', main, commander: [commander] };
+  };
+
+  it('stays scored, turns provisional and caps nothing', () => {
+    const clean = scoreDeckSafely(deck());
+    const withUnknown = scoreDeckSafely({ ...deck(), unresolved: [{ name: 'Not A Card', quantity: 2, board: 'main' }] });
+    expect(clean).not.toBeNull();
+    expect(withUnknown).not.toBeNull();
+    expect(withUnknown!.provisional).toBe(true);
+    const gate = withUnknown!.gates.find((g) => g.key === 'unresolved');
+    expect(gate).toMatchObject({ kind: 'evidence', status: 'warn', cap: null });
+    expect(withUnknown!.gates.every((g) => g.cap !== 39)).toBe(true);
+  });
+
+  it('explains an unavailable input instead of returning an anonymous null', () => {
+    expect(scoreDeckSafely({ ...deck(), main: [] })).toBeNull();
+    expect(explainScoreUnavailable({ ...deck(), main: [] })).toMatch(/no main-board cards/);
+    expect(explainScoreUnavailable(deck())).toBeNull();
   });
 });
 

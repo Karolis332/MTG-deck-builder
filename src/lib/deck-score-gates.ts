@@ -13,7 +13,7 @@
  */
 import { formatChecks, identityCheck } from './deck-gate-checks';
 import { frontName, parseIdentity, type Resolved, type DeckLine, type GateCheck } from './deck-gate-parse';
-import { isCommanderFamily, HARD_CAP_INVALID, HARD_CAP_STRUCTURE, HARD_CAP_UNRESOLVED, type ScoreFormat } from './deck-score-norms';
+import { isCommanderFamily, HARD_CAP_INVALID, HARD_CAP_STRUCTURE, type ScoreFormat } from './deck-score-norms';
 import type { DbCard } from './types';
 
 export interface ScoreGate {
@@ -47,26 +47,52 @@ function allSafePositiveIntegers(input: StructureInput): boolean {
   return quantities.every((q) => Number.isSafeInteger(q) && q > 0);
 }
 
+export interface StructureResult {
+  structureScore: number;
+  gates: ScoreGate[];
+  hardCaps: number[];
+  /** §10.5: unresolved copies are KEPT as reserved library slots instead of
+   * being silently dropped. MAIN-board only — the slots that belong to the
+   * library `N` (and stage 2's `D`); an unresolved commander is counted by
+   * `unknownCommander`, exactly as a resolved commander is outside `N`. */
+  reservedSlots: number;
+  /** A commander-family list whose commander line(s) did not resolve: its
+   * identity/plan supply is unknown, not illegal (§10.5). */
+  unknownCommander: boolean;
+}
+
 /** Structure (G) + the hard-cap set. Weight is always 0 (§1 G) — this feeds
  * `gates`/hard-cap composition in deck-score.ts, never the weighted sum. */
-export function computeStructure(input: StructureInput): { structureScore: number; gates: ScoreGate[]; hardCaps: number[] } {
+export function computeStructure(input: StructureInput): StructureResult {
   const gates: ScoreGate[] = [];
   const hardCaps: number[] = [];
+  const reservedSlots = input.unresolved
+    .filter((u) => u.board === 'main')
+    .reduce((s, u) => s + u.quantity, 0);
+  const unresolvedCommanders = input.unresolved
+    .filter((u) => u.board === 'commander')
+    .reduce((s, u) => s + u.quantity, 0);
+  const fail = (reason: string): StructureResult => {
+    gates.push({ key: 'structure', kind: 'rules', status: 'fail', cap: HARD_CAP_INVALID, reason });
+    return { structureScore: 0, gates, hardCaps: [HARD_CAP_INVALID], reservedSlots, unknownCommander: false };
+  };
 
   if (!allSafePositiveIntegers(input)) {
-    gates.push({ key: 'structure', kind: 'rules', status: 'fail', cap: HARD_CAP_INVALID, reason: 'invalid (nonpositive/non-integer) card quantity in input.' });
-    return { structureScore: 0, gates, hardCaps: [HARD_CAP_INVALID] };
+    return fail('invalid (nonpositive/non-integer) card quantity in input.');
   }
   const totalMain = input.main.reduce((s, e) => s + e.quantity, 0);
   if (totalMain === 0 && input.commander.length === 0) {
-    gates.push({ key: 'structure', kind: 'rules', status: 'fail', cap: HARD_CAP_INVALID, reason: 'empty deck: no main or commander cards.' });
-    return { structureScore: 0, gates, hardCaps: [HARD_CAP_INVALID] };
+    return fail('empty deck: no main or commander cards.');
   }
   const commanderFamily = isCommanderFamily(input.format);
-  const validCommanderCount = commanderFamily ? input.commander.length === 1 || input.commander.length === 2 : input.commander.length === 0;
+  // §10.5: "Unknown commander identity needs resolution rather than a
+  // fabricated legality verdict." An unresolved commander LINE fills the
+  // command zone slot as evidence, so the count below is not a rule failure.
+  const unknownCommander = commanderFamily && input.commander.length === 0 && unresolvedCommanders > 0;
+  const commanderSlots = input.commander.length + (unknownCommander ? unresolvedCommanders : 0);
+  const validCommanderCount = commanderFamily ? commanderSlots === 1 || commanderSlots === 2 : input.commander.length === 0;
   if (!validCommanderCount) {
-    gates.push({ key: 'structure', kind: 'rules', status: 'fail', cap: HARD_CAP_INVALID, reason: `missing/invalid commander configuration (${input.commander.length} commander card(s) for ${input.format}).` });
-    return { structureScore: 0, gates, hardCaps: [HARD_CAP_INVALID] };
+    return fail(`missing/invalid commander configuration (${input.commander.length} commander card(s) for ${input.format}).`);
   }
 
   const resolved: Resolved[] = [
@@ -76,6 +102,12 @@ export function computeStructure(input: StructureInput): { structureScore: numbe
     ...input.commander.map((c) => toResolved(c, 1, 'commander' as const)),
   ];
 
+  // §10.5: "Do not silently drop those copies and then impose a fabricated
+  // size failure." No downgrade is needed here: `deck-validation` reports an
+  // UNDER-sized library as a warning and only an OVER-sized one as an error,
+  // and dropping unreadable copies can only shrink the count — so missing
+  // evidence can never manufacture a size cap. The reserved slots still enter
+  // the library `N` the scorer divides by (deck-score.ts).
   const checks: GateCheck[] = [...formatChecks(resolved, input.format)];
 
   let identityGate: GateCheck | null = null;
@@ -101,26 +133,38 @@ export function computeStructure(input: StructureInput): { structureScore: numbe
     if (check.status === 'fail') hardCaps.push(HARD_CAP_STRUCTURE);
   }
 
+  // §10.5 supersedes the §2/§8 unresolved cap of 39: an unresolved name alone
+  // is MISSING EVIDENCE, not a rule failure, so it warns and caps nothing.
+  // The copies stay as reserved slots (`reservedSlots`).
   if (hasUnresolved) {
     gates.push({
       key: 'unresolved',
       kind: 'evidence',
       status: 'warn',
-      cap: HARD_CAP_UNRESOLVED,
-      reason: `${input.unresolved.length} card name(s) unresolved against the card database.`,
+      cap: null,
+      reason: `${input.unresolved.length} card name(s) unresolved against the card database` +
+        `; ${reservedSlots} library slot(s) reserved — provisional, not capped.`,
     });
-    hardCaps.push(HARD_CAP_UNRESOLVED);
+  }
+  if (unknownCommander) {
+    gates.push({
+      key: 'unknown_commander',
+      kind: 'evidence',
+      status: 'warn',
+      cap: null,
+      reason: `${unresolvedCommanders} commander line(s) unresolved: colour identity and command-zone supply are unknown, not illegal.`,
+    });
   }
 
-  const structureScore = hasFail ? 0 : hasUnresolved ? 50 : 100;
+  const structureScore = hasFail ? 0 : hasUnresolved || unknownCommander ? 50 : 100;
   const passedCount = checks.filter((c) => c.status === 'pass').length;
   gates.unshift({
     key: 'structure',
     kind: 'rules',
-    status: hasFail ? 'fail' : hasUnresolved ? 'warn' : 'pass',
+    status: hasFail ? 'fail' : hasUnresolved || unknownCommander ? 'warn' : 'pass',
     cap: null,
-    reason: `${passedCount}/${checks.length} rule checks verified; ${hasFail ? checks.find((c) => c.status === 'fail')?.id : hasUnresolved ? 'unresolved cards' : 'none'}; cap ${hardCaps.length ? Math.min(...hardCaps) : 'none'}.`,
+    reason: `${passedCount}/${checks.length} rule checks verified; ${hasFail ? checks.find((c) => c.status === 'fail')?.id : hasUnresolved ? 'unresolved cards' : unknownCommander ? 'unresolved commander' : 'none'}; cap ${hardCaps.length ? Math.min(...hardCaps) : 'none'}.`,
   });
 
-  return { structureScore, gates, hardCaps };
+  return { structureScore, gates, hardCaps, reservedSlots, unknownCommander };
 }

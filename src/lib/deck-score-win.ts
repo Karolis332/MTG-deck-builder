@@ -21,7 +21,10 @@
  * // scheduling proxy, not a game simulator"). Upgrade path is a sampled
  * // schedule, not more terms in this one.
  */
-import { COMBO_PAIRS } from './win-conditions';
+import {
+  TYPED_COMBOS, COMBO_TUTORS, GRAVEYARD_ROUTES, comboTutor, manaOutlet, needsOutlet,
+  tutorReachesSlot, unboundedDrawSink, type ComboSlot, type TypedCombo,
+} from './deck-score-catalog/combos';
 import { clip, H, Hf, buildDisjointAccessPolynomial, readAccessAt, drawSampleSizes, type Pool } from './deck-score-math';
 import { gameShape, type FormatNorms, type ScoreFormat } from './deck-score-norms';
 import type { DeckEntry, ComponentOutput } from './deck-score-mana';
@@ -39,6 +42,8 @@ interface Recipe {
   criticalNames: Set<string>;
   /** Closing turn from an output schedule. Set = skip the mana-readiness scan. */
   tStar?: number;
+  /** §10.6.1 audited execution trace; copied onto the emitted `ClosingLine`. */
+  trace?: { resource: string; tutor: string; finish: string };
 }
 
 const MAX_TURN = 12;
@@ -244,28 +249,179 @@ function pickMembers(
   ];
 }
 
-function findComboRecipes(all: Array<{ feature: CardFeature; quantity: number; guaranteed?: boolean }>): Recipe[] {
-  const byName = new Map<string, { feature: CardFeature; quantity: number; guaranteed?: boolean }>();
+// ── Typed creature combos (§10.6.1) ───────────────────────────────────────
+
+interface Candidate { feature: CardFeature; quantity: number; guaranteed?: boolean }
+
+/** Total mana the whole recipe asks for — the sort key and the readiness cost. */
+function recipeCost(recipe: Recipe): number {
+  return recipe.pools.reduce((sum, p) => sum + poolCost(p), 0) + recipe.extraCost;
+}
+
+/**
+ * §10.6.1's tutor predicate: a tutor earns ACCESS to a slot, priced at what it
+ * actually costs to land that exact piece (its own cost plus the piece's, or
+ * nothing extra when the destination is the battlefield). One tutor reaches at
+ * most one slot — `buildDisjointAccessPolynomial` requires disjoint pools — so
+ * a tutor that could name either piece is assigned to whichever slot has the
+ * fewest members, which is the slot a real pilot would point it at.
+ *
+ * // ponytail: round-robin instead of a wildcard term. A tutor that finds
+ * // EITHER piece is worth more than half a copy of each, and the disjoint
+ * // polynomial has no way to say so. Upgrade path is a joint access term,
+ * // not a different assignment order.
+ */
+function assignTutors(
+  slots: readonly ComboSlot[], byName: Map<string, Candidate>, taken: Set<string>,
+): Member[][] {
+  const perSlot: Member[][] = slots.map(() => []);
+  const present = COMBO_TUTORS
+    .map((t) => ({ tutor: t, entry: byName.get(t.name.toLowerCase()) }))
+    .filter((x): x is { tutor: typeof COMBO_TUTORS[number]; entry: Candidate } => !!x.entry)
+    .filter((x) => !taken.has(x.tutor.name.toLowerCase()));
+  for (const { tutor, entry } of present) {
+    const reachable = slots
+      .map((slot, i) => ({ slot, i }))
+      .filter(({ slot }) => tutorReachesSlot(tutor, slot));
+    if (reachable.length === 0) continue;
+    const target = reachable.reduce((best, cur) =>
+      (perSlot[cur.i].length < perSlot[best.i].length ? cur : best));
+    const piece = byName.get(slots[target.i].any.find((n) => byName.has(n.toLowerCase())) ?? '');
+    const mv = piece?.feature.c ?? 0;
+    perSlot[target.i].push({
+      name: tutor.name, cmc: tutor.cost(mv), quantity: entry.quantity, guaranteed: entry.guaranteed,
+    });
+    taken.add(tutor.name.toLowerCase());
+  }
+  return perSlot;
+}
+
+/** Mana from a nonland permanent — what `nonland_mana` counts. */
+function isNonlandManaSource(f: CardFeature): boolean {
+  if (f.isLand) return false;
+  const produced = f.card.produced_mana;
+  return !!produced && produced !== '[]' && produced !== 'null';
+}
+
+/** The zone/board requirement a combo carries beyond its own slots. */
+function routeSatisfied(combo: TypedCombo, byName: Map<string, Candidate>, opponents: number): string | null {
+  if (!combo.route) return null;
+  if (combo.route.kind === 'opponent_permanents') {
+    return opponents >= 2 ? `${opponents} opponents' boards satisfy it` : null;
+  }
+  if (combo.route.kind === 'nonland_mana') {
+    const sources = [...byName.values()]
+      .filter((e) => isNonlandManaSource(e.feature))
+      .reduce((sum, e) => sum + e.quantity, 0);
+    return sources >= 3 ? `${sources} nonland mana sources` : null;
+  }
+  const routes = [...GRAVEYARD_ROUTES, ...COMBO_TUTORS.filter((t) => t.destination === 'graveyard').map((t) => t.name)];
+  const hit = routes.filter((n) => byName.has(n.toLowerCase()));
+  return hit.length > 0 ? `${hit.length} routes (${hit.slice(0, 3).join(', ')})` : null;
+}
+
+function buildTypedCombo(
+  combo: TypedCombo, byName: Map<string, Candidate>, opponents: number,
+): Recipe | null {
+  const pieces = combo.slots.map((slot) => {
+    const name = slot.any.find((n) => byName.has(n.toLowerCase()));
+    return name ? { slot, entry: byName.get(name.toLowerCase()) as Candidate } : null;
+  });
+  if (pieces.some((p) => p === null)) return null;
+  const filled = pieces as Array<{ slot: ComboSlot; entry: Candidate }>;
+
+  const route = routeSatisfied(combo, byName, opponents);
+  if (combo.route && route === null) return null;
+
+  // The outlet is claimed FIRST: a card that both finds a piece and finishes
+  // the game can only be spent once, and a line without a finish is not a line.
+  const taken = new Set(filled.map((p) => p.entry.feature.card.name.toLowerCase()));
+  let outletPool: RecipePool | null = null;
+  let outletCost = 0;
+  let finish: string;
+  if (needsOutlet(combo.resource)) {
+    const outlets = [...byName.values()]
+      .map((entry) => ({ entry, outlet: manaOutlet(entry.feature.card.name) }))
+      .filter((x) => x.outlet && (combo.resource !== 'creature_mana' || x.outlet.creatureCastable));
+    if (outlets.length === 0) return null;
+    for (const o of outlets) taken.add(o.entry.feature.card.name.toLowerCase());
+    // A command-zone draw sink behind the loop draws the whole library, so the
+    // outlet costs its mana but needs no access term; otherwise it is a pool
+    // like any other piece.
+    const sink = [...byName.values()]
+      .filter((e) => e.guaranteed)
+      .map((e) => unboundedDrawSink(e.feature.card.name))
+      .find((d) => !!d);
+    const cheapest = Math.min(...outlets.map((o) => o.entry.feature.c));
+    if (sink) outletCost = cheapest;
+    else {
+      outletPool = {
+        members: outlets.map((o) => toMember(o.entry.feature, o.entry.quantity, o.entry.guaranteed)),
+        r: 1,
+      };
+    }
+    finish = outlets.map((o) => `${o.entry.feature.card.name} — ${o.outlet?.mechanism}`).join('; ')
+      + (sink ? ` (found, not drawn: ${sink.name} — ${sink.mechanism} — empties the library once the loop is online)` : '');
+  } else if (combo.resource === 'tokens') {
+    finish = combo.hasteIncluded
+      ? 'the copies arrive with haste and attack the turn the loop starts'
+      : 'unbounded bodies, lethal one turn cycle after the loop starts';
+  } else {
+    finish = `unbounded ${combo.resource}: the loop is the finish predicate`;
+  }
+
+  const tutorsBySlot = assignTutors(filled.map((p) => p.slot), byName, taken);
+  const pools: RecipePool[] = filled.map((p, i) => ({
+    members: [toMember(p.entry.feature, p.entry.quantity, p.entry.guaranteed), ...tutorsBySlot[i]],
+    r: 1,
+  }));
+  if (outletPool) pools.push(outletPool);
+
+  const tutorNames = tutorsBySlot.flat().map((m) => m.name);
+  const tutorTrace = tutorNames.length === 0
+    ? 'no catalogued tutor reaches these pieces; access is the printed copies only'
+    : tutorNames.map((n) => {
+      const t = comboTutor(n);
+      return `${n} → ${t?.destination} (${t?.note})`;
+    }).join('; ');
+
+  return {
+    id: `combo:${combo.id}`,
+    label: combo.label,
+    pools,
+    // Tokens without haste need the turn cycle the finish trace names; one
+    // more mana of readiness is the schedule's way of spending a turn.
+    extraCost: combo.extraCost + outletCost
+      + (combo.resource === 'tokens' && !combo.hasteIncluded ? 1 : 0),
+    criticalNames: new Set([
+      ...filled.map((p) => p.entry.feature.card.name),
+      ...(outletPool?.members.map((m) => m.name) ?? []),
+    ]),
+    trace: {
+      resource: `${filled.map((p) => `${p.entry.feature.card.name} (${p.slot.role})`).join(' + ')}`
+        + ` → unbounded ${combo.resource}. ${combo.prerequisite}`
+        + (combo.route ? ` Zone requirement: ${combo.route.why} — ${route}.` : ''),
+      tutor: tutorTrace,
+      finish,
+    },
+  };
+}
+
+/**
+ * §10.6.1: the tutor-assembled creature combos, each with exact pieces, an
+ * audited prerequisite and a real outlet. Capped at 3 — the budget the
+ * untyped `COMBO_PAIRS` scan it replaces used — so the total `computeWin`
+ * slices at 8 is unchanged, and the sort puts the cheapest line first.
+ */
+function typedComboRecipes(all: readonly Candidate[], opponents: number): Recipe[] {
+  const byName = new Map<string, Candidate>();
   for (const e of all) byName.set(e.feature.card.name.toLowerCase(), e);
   const out: Recipe[] = [];
-  for (const [a, b] of COMBO_PAIRS) {
-    const ea = byName.get(a.toLowerCase());
-    const eb = byName.get(b.toLowerCase());
-    if (!ea || !eb) continue;
-    out.push({
-      id: `combo:${a}+${b}`,
-      label: `${a} + ${b}`,
-      pools: [
-        { members: [toMember(ea.feature, ea.quantity, ea.guaranteed)], r: 1 },
-        { members: [toMember(eb.feature, eb.quantity, eb.guaranteed)], r: 1 },
-      ],
-      extraCost: 1,
-      criticalNames: new Set([a, b]),
-    });
+  for (const combo of TYPED_COMBOS) {
+    const built = buildTypedCombo(combo, byName, opponents);
+    if (built) out.push(built);
   }
-  return out
-    .sort((x, y) => (poolCost(x.pools[0]) + poolCost(x.pools[1])) - (poolCost(y.pools[0]) + poolCost(y.pools[1])))
-    .slice(0, 3);
+  return out.sort((x, y) => recipeCost(x) - recipeCost(y)).slice(0, 3);
 }
 
 /**
@@ -551,6 +707,11 @@ function altWinRecipe(nonLand: DeckEntry[], commanders: CardFeature[]): Recipe |
     pools: [{ members: altWin, r: 1 }],
     extraCost: 2,
     criticalNames: new Set(altWin.map((m) => m.name)),
+    trace: {
+      resource: `${altWin.map((m) => m.name).join(', ')} — the card's own rules text states the win`,
+      tutor: 'none modelled: the alternate-win pool is the access term',
+      finish: 'the printed "you win the game" clause, once its condition is met',
+    },
   };
 }
 
@@ -609,6 +770,14 @@ export interface ClosingLine {
   cost: number;
   /** Turn the line goes off, from W's own evaluation. */
   tStar: number;
+  /**
+   * §10.6.1: no line is admitted without an audited execution trace. `resource`
+   * names the loop and what makes it repeat, `tutor` the access to the pieces,
+   * `finish` the outlet that converts the loop into a finish predicate. Only
+   * the modelled creature-combo family sets it today; the generic families
+   * carry their schedule in `label` instead.
+   */
+  trace?: { resource: string; tutor: string; finish: string };
 }
 
 /** Raw component totals the control family needs (see deck-score-interaction). */
@@ -639,7 +808,7 @@ export function winDiagnostic(
   const combatTarget = shape.lifePerOpponent * opponents;
   const rampBonus = rampBonusFor(nonLand);
   const all = [...nonLand, ...commanders.map((f) => ({ feature: f, quantity: 1, guaranteed: true }))];
-  const recipes: Recipe[] = [...findComboRecipes(all)];
+  const recipes: Recipe[] = [...typedComboRecipes(all, opponents)];
   const pressure = pressureRecipes(format, N, nonLand, commanders, rampBonus, combatTarget, norms.poolSizeCap);
   recipes.push(...pressure.recipes);
   const drain = drainRecipe(format, N, nonLand, commanders, rampBonus, shape.lifePerOpponent, norms.poolSizeCap);
@@ -686,7 +855,7 @@ export function computeWin(
   const rampBonus = rampBonusFor(nonLand);
 
   const all = [...nonLand, ...commanders.map((f) => ({ feature: f, quantity: 1, guaranteed: true }))];
-  const recipes: Recipe[] = [...findComboRecipes(all)];
+  const recipes: Recipe[] = [...typedComboRecipes(all, opponents)];
 
   recipes.push(...pressureRecipes(format, N, nonLand, commanders, rampBonus, combatTarget, norms.poolSizeCap).recipes);
   const drain = drainRecipe(format, N, nonLand, commanders, rampBonus, shape.lifePerOpponent, norms.poolSizeCap);
@@ -732,10 +901,15 @@ export function computeWin(
   const lineOf = (e: typeof evals[number]): ClosingLine => ({
     id: e.recipe.id,
     label: e.recipe.label,
-    pieces: e.recipe.pools.flatMap((pool) => pool.members.map((m) => m.name)),
+    // The pieces are the line's critical cards, not every pool member: a
+    // tutor bought into a piece pool for ACCESS is support, and the closing
+    // plan has a `tutors` role that prices it. Folding tutors into `pieces`
+    // both overfills that role and starves the one they belong to.
+    pieces: [...e.recipe.criticalNames],
     required: e.recipe.pools.reduce((sum, pool) => sum + poolR(pool), 0),
     cost: e.recipe.pools.reduce((sum, pool) => sum + poolCost(pool), 0) + e.recipe.extraCost,
     tStar: e.atTurn || MAX_TURN,
+    trace: e.recipe.trace,
   });
   const assembled = evals.filter((e) => e.recipe.id.startsWith('combo:') || e.recipe.id === 'alt_win');
   const assembling = assembled[0];

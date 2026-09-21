@@ -1,0 +1,34 @@
+## cedh-0 (commander, N=98)
+total 90  W 96.4  S 92.4
+W reason: Devoted Druid + Hazel's Brewmaster: closes T3, access 22% (u=1.00); independent backup Control inevitability (6 finishers) u=0.76; none.
+S reason: 67% supports combo; weakest dependency pieces 2.0/2; 0 unsupported payoffs.
+closing: combo:druid-brewmaster [Devoted Druid + Hazel's Brewmaster] pieces=Devoted Druid + Hazel's Brewmaster r=2 cost=5 T3
+  line combo:druid-brewmaster: Devoted Druid + Hazel's Brewmaster | pieces Devoted Druid + Hazel's Brewmaster | r=2 cost=5 T3
+    resource: Devoted Druid ({T}: Add {G}; put a -1/-1 counter on it: untap it) + Hazel's Brewmaster (exiles a creature card from a graveyard and grants its activated abilities to Foods) → unbounded mana. Brewmaster's enter/attack trigger exiles the Druid from a graveyard and makes a Food; the Food holds the Druid's abilities but is a noncreature artifact, so the -1/-1 counter the untap costs is inert. Zone requirement: the Druid has to be in a graveyard for the Brewmaster trigger to exile it — 3 routes (Survival of the Fittest, Neoform, Eldritch Evolution).
+    tutor:    Chord of Calling → battlefield (convoke, instant speed); Nature's Rhythm → battlefield (library only); Eldritch Evolution → battlefield (sacrifice a creature of the target mana value minus two); Demonic Tutor → hand (any card); Imperial Seal → top (top of library, lose 2 life); Green Sun's Zenith → battlefield (green creatures only); Neoform → battlefield (sacrifice a creature of the target mana value minus one); Survival of the Fittest → hand (discard a creature card); Vampiric Tutor → top (top of library, lose 2 life); Beseech the Mirror → hand (bargain casts it free at mana value 4 or less)
+    finish:   Finale of Devastation — X of 10 or more gives every creature you control +X/+X and haste: lethal combat the same turn (found, not drawn: Thrasios, Triton Hero — {4}: scry 1, then draw a card or put a land onto the battlefield — empties the library once the loop is online)
+combat ceiling by T12: bodies 83.8, with conversion 102.9 (target 120)
+N=98 target=120 ramp=3.00 E=18.8/12.0 D=27.3/10.0 engine=true
+recipes built: 2
+| recipe | pools (members x r) | t* | u |
+|---|---|---:|---:|
+| Devoted Druid + Hazel's Brewmaster | 6x r1 + 6x r1 | 3 | 1.000 |
+| Control inevitability (6 finishers) | 6x r1 | 8 | 0.758 |
+
+## cedh-1 (commander, N=98)
+total 90  W 96.4  S 92.4
+W reason: Devoted Druid + Hazel's Brewmaster: closes T3, access 22% (u=1.00); independent backup Control inevitability (6 finishers) u=0.76; none.
+S reason: 67% supports combo; weakest dependency pieces 2.0/2; 0 unsupported payoffs.
+closing: combo:druid-brewmaster [Devoted Druid + Hazel's Brewmaster] pieces=Devoted Druid + Hazel's Brewmaster r=2 cost=5 T3
+  line combo:druid-brewmaster: Devoted Druid + Hazel's Brewmaster | pieces Devoted Druid + Hazel's Brewmaster | r=2 cost=5 T3
+    resource: Devoted Druid ({T}: Add {G}; put a -1/-1 counter on it: untap it) + Hazel's Brewmaster (exiles a creature card from a graveyard and grants its activated abilities to Foods) → unbounded mana. Brewmaster's enter/attack trigger exiles the Druid from a graveyard and makes a Food; the Food holds the Druid's abilities but is a noncreature artifact, so the -1/-1 counter the untap costs is inert. Zone requirement: the Druid has to be in a graveyard for the Brewmaster trigger to exile it — 3 routes (Survival of the Fittest, Neoform, Eldritch Evolution).
+    tutor:    Chord of Calling → battlefield (convoke, instant speed); Nature's Rhythm → battlefield (library only); Eldritch Evolution → battlefield (sacrifice a creature of the target mana value minus two); Demonic Tutor → hand (any card); Imperial Seal → top (top of library, lose 2 life); Green Sun's Zenith → battlefield (green creatures only); Neoform → battlefield (sacrifice a creature of the target mana value minus one); Survival of the Fittest → hand (discard a creature card); Vampiric Tutor → top (top of library, lose 2 life); Beseech the Mirror → hand (bargain casts it free at mana value 4 or less)
+    finish:   Finale of Devastation — X of 10 or more gives every creature you control +X/+X and haste: lethal combat the same turn (found, not drawn: Thrasios, Triton Hero — {4}: scry 1, then draw a card or put a land onto the battlefield — empties the library once the loop is online)
+combat ceiling by T12: bodies 83.8, with conversion 102.9 (target 120)
+N=98 target=120 ramp=3.00 E=18.8/12.0 D=27.3/10.0 engine=true
+recipes built: 2
+| recipe | pools (members x r) | t* | u |
+|---|---|---:|---:|
+| Devoted Druid + Hazel's Brewmaster | 6x r1 + 6x r1 | 3 | 1.000 |
+| Control inevitability (6 finishers) | 6x r1 | 8 | 0.758 |
+

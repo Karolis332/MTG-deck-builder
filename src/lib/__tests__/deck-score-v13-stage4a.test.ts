@@ -261,7 +261,7 @@ describe('stage 4a acceptance, fixture-backed', () => {
     const byName = (n: string) => FIXTURES.find((f) => f.name === n)!;
     expect(scoreDeck(byName('tazri-upgraded-arena').load().input).score).toBe(68);
     expect(byName('tazri-upgraded-arena').band).toBe('45-65');
-    expect(scoreDeck(byName('cedhtop16-ballooncon6').load().input).score).toBe(91);
+    expect(scoreDeck(byName('cedhtop16-ballooncon6').load().input).score).toBe(92);
     expect(scoreDeck(byName('meren-powerhouse').load().input).score).toBe(75);
     expect(scoreDeck(byName('the-cabbage-merchant').load().input).score).toBe(20);
   });

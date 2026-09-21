@@ -146,7 +146,10 @@ export function scoreDeck(input: Readonly<DeckScoreInput>, tuning?: Readonly<Sco
   const mainEntries: DeckEntry[] = input.main.map((rc) => ({ feature: getFeature(rc.card), quantity: rc.quantity }));
   const commanderFeatures: CardFeature[] = input.commander.map((c) => getFeature(c));
   const nonLandEntries = mainEntries.filter((e) => !e.feature.isLand);
-  const N = mainEntries.reduce((s, e) => s + e.quantity, 0);
+  // §10.5/§10.2: unresolved copies are RESERVED SLOTS, not deleted cards — the
+  // library really holds them, so every density that divides by N divides by
+  // the submitted size. Their type is unknown, so they add nothing to F.
+  const N = mainEntries.reduce((s, e) => s + e.quantity, 0) + structure.reservedSlots;
   const F = nonLandEntries.reduce((s, e) => s + e.quantity, 0);
   // §8: plans are inferred from the whole deck, including commanders as
   // available resources, and the SAME selection feeds S and the archetype.
@@ -215,6 +218,9 @@ export function scoreDeck(input: Readonly<DeckScoreInput>, tuning?: Readonly<Sco
     ? nonLandEntries.filter((e) => e.feature.covered).reduce((s, e) => s + e.quantity, 0) / F
     : 1;
   const coverageTriggered = typedCoverage <= COVERAGE_EVIDENCE_THRESHOLD || synergy.unknownPrerequisite !== null;
+  // §10.5: an unresolved name/commander is missing evidence, so the estimate
+  // it produces is provisional — the cap it used to impose is gone.
+  const evidenceTriggered = coverageTriggered || structure.reservedSlots > 0 || structure.unknownCommander;
 
   const hardCaps = structure.hardCaps;
   const rawScore = Math.min(base, qCap, ...(hardCaps.length ? hardCaps : [Infinity]));
@@ -245,6 +251,6 @@ export function scoreDeck(input: Readonly<DeckScoreInput>, tuning?: Readonly<Sco
     score,
     components: COMPONENT_ORDER.map((key) => ({ key, score: scores[key], weight: weights[key], reason: reasons[key] })),
     gates,
-    provisional: coverageTriggered,
+    provisional: evidenceTriggered,
   };
 }

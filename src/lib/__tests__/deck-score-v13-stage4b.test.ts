@@ -245,7 +245,7 @@ describe('stage 4b — the closing/combo floor', () => {
     const r = scoreDeck(ballooncon.input);
     const syn = r.components.find((c) => c.key === 'synergy')!;
     expect(syn.reason).toContain('supports combo');
-    expect(syn.reason).toContain('pieces 1.0/1');
+    expect(syn.reason).toContain('pieces 2.0/2');
     expect(syn.score).toBe(100);
     expect(r.score).toBeGreaterThanOrEqual(80);
     expect(r.score).toBeLessThanOrEqual(95);

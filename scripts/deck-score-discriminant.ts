@@ -23,7 +23,7 @@ import fs from 'fs';
 import path from 'path';
 import { ROOT, FIXTURES, loadCedhCohort, type LoadedDeck } from './deck-score-fixtures';
 import {
-  loadMatchedPiles, strideOrder, readSample, cardsByName,
+  loadStudyControls, cedhCoverageMedian, strideOrder, readSample, cardsByName,
   type SampleProfile, type MatchedPile,
 } from './deck-score-piles';
 import { scoreDeck, type DeckScoreInput } from '../src/lib/deck-score';
@@ -49,25 +49,14 @@ const CARD_DATA_VERSION = 'deck-score-report-2026-09-19';
  * validation piles use `loadMatchedPiles`' own callers' bases. Nothing below
  * collides with any of them.
  */
-const SEED_HIGH: Record<SampleProfile, number> = { commander: 0xd15c0000, brawl: 0xd15c2a71 };
-const SEED_MATCH: Record<SampleProfile, number> = { commander: 0xd15c8000, brawl: 0xd15caa71 };
+// (`SEED_HIGH`/`SEED_MATCH` and both constructions now live in
+// `deck-score-piles.ts` so `bands real` draws the IDENTICAL control sets.)
 
 
 function pct(sorted: readonly number[], p: number): number {
   if (sorted.length === 0) return NaN;
   const i = Math.min(sorted.length - 1, Math.max(0, Math.round((p / 100) * (sorted.length - 1))));
   return sorted[i];
-}
-
-/** FNV-1a — the same hash `deck-score-piles.ts` uses, for deterministic
- * per-list coverage targets. */
-function hash32(text: string): number {
-  let h = 0x811c9dc5;
-  for (let i = 0; i < text.length; i++) {
-    h ^= text.charCodeAt(i);
-    h = Math.imul(h, 0x01000193) >>> 0;
-  }
-  return h >>> 0;
 }
 
 /** Mann-Whitney AUC: P(positive > negative) + .5 P(tie). .5 = no separation. */
@@ -435,34 +424,10 @@ function pileShape(pile: MatchedPile): DeckShape {
  * rewards the piles' extra typed copies, so some of the missing window may be
  * an artefact of the draw rather than of the deck.
  *
- * This second control set samples each pile's coverage target from the real
- * lists' own p10-p90, deterministically per source list. `loadMatchedPiles`
- * takes ONE target per call, so the stride is binned to 1 % and one call is
- * issued per bin: same generator, same seeds, no duplicated draw logic.
+ * Both constructions moved to `deck-score-piles.ts` (v1.4 stage 0) so
+ * `bands real` reproduces the §10 baseline from the IDENTICAL piles; the
+ * seeds and the binning are unchanged.
  */
-function matchedCoverageControls(
-  profile: SampleProfile, n: number, realCoverage: readonly number[],
-): MatchedPile[] {
-  const sorted = [...realCoverage].sort((a, b) => a - b);
-  const lo = pct(sorted, 10);
-  const hi = pct(sorted, 90);
-  const order = strideOrder('training', readSample(profile));
-  const bins = new Map<number, number[]>();
-  for (const i of order) {
-    const u = (hash32(`cov:${profile}:${i}`) % 10_000) / 10_000;
-    const bin = Math.round((lo + u * (hi - lo)) * 100) / 100;
-    const list = bins.get(bin);
-    if (list) list.push(i); else bins.set(bin, [i]);
-  }
-  const out: MatchedPile[] = [];
-  const share = (count: number) => Math.ceil((n * count) / order.length) + 2;
-  for (const [target, indices] of [...bins.entries()].sort((a, b) => a[0] - b[0])) {
-    out.push(...loadMatchedPiles(
-      share(indices.length), 0, SEED_MATCH[profile], target, indices, profile,
-    ));
-  }
-  return out.slice(0, n);
-}
 
 function writeCsv(file: string, rows: readonly StatRow[]): void {
   const head = CSV_COLUMNS.join(',');
@@ -489,17 +454,8 @@ function cohorts(profile: SampleProfile, n: number): void {
 
   // Control set A: the CURRENT construction — one fixed .930 target — on fresh
   // seeds. The cEDH median is re-measured rather than hardcoded.
-  const cedhCoverage = loadCedhCohort()
-    .map((d) => {
-      const nl = d.input.main
-        .map((rc) => ({ feature: deriveCardFeature(rc.card), quantity: rc.quantity }))
-        .filter((e) => !e.feature.isLand);
-      const f = nl.reduce((s, e) => s + e.quantity, 0);
-      return f > 0 ? nl.filter((e) => e.feature.covered).reduce((s, e) => s + e.quantity, 0) / f : 1;
-    })
-    .sort((a, b) => a - b);
-  const highTarget = pct(cedhCoverage, 50);
-  const high = loadMatchedPiles(n, 0, SEED_HIGH[profile], highTarget, strideOrder('training', readSample(profile)), profile);
+  const highTarget = cedhCoverageMedian();
+  const high = loadStudyControls(profile, 'ctrl93', n);
   for (const p of high) {
     const row = analyse(pileShape(p), 'ctrl93', p.sampleId);
     if (row) rows.push(row);
@@ -507,7 +463,7 @@ function cohorts(profile: SampleProfile, n: number): void {
   process.stderr.write(`${profile}: ${high.length} ctrl93 piles (target ${highTarget.toFixed(3)})\n`);
 
   // Control set B: coverage-matched to the real lists.
-  const matched = matchedCoverageControls(profile, n, realCoverage);
+  const matched = loadStudyControls(profile, 'ctrlmatch', n, realCoverage);
   for (const p of matched) {
     const row = analyse(pileShape(p), 'ctrlmatch', p.sampleId);
     if (row) rows.push(row);

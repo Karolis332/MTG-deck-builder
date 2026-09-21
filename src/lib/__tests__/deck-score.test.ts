@@ -190,12 +190,19 @@ describe('scoreDeck — hard caps and invalid input', () => {
     expect(result.score).toBeLessThanOrEqual(19);
   });
 
-  it('an unresolved card caps at 39', () => {
+  // v1.4 §10.5 supersedes the §2/§8 cap of 39: an unresolved name is missing
+  // EVIDENCE, so it warns and caps nothing. See deck-score-v14-stage0.test.ts
+  // for the full unresolved contract.
+  it('an unresolved card warns as evidence and caps nothing', () => {
     const deck = noWinDeck();
     const withUnresolved: DeckScoreInput = { ...deck, unresolved: [{ name: 'Nonexistent Card', quantity: 1, board: 'main' }] };
     const result = scoreDeck(withUnresolved);
-    expect(result.score).toBeLessThanOrEqual(39);
-    expect(result.gates.some((g) => g.key === 'unresolved')).toBe(true);
+    const gate = result.gates.find((g) => g.key === 'unresolved');
+    expect(gate).toBeDefined();
+    expect(gate!.kind).toBe('evidence');
+    expect(gate!.status).toBe('warn');
+    expect(gate!.cap).toBeNull();
+    expect(result.provisional).toBe(true);
   });
 
   it('an invalid commander count (3 commanders) caps at 0', () => {

@@ -26,7 +26,7 @@ import type { DeckScoreInput } from '../src/lib/deck-score';
 import type { ScoreFormat } from '../src/lib/deck-score-norms';
 import type { DbCard } from '../src/lib/types';
 import type { ResolvedCard } from '../services/build-api/analysis-core';
-import { ROOT } from './deck-score-fixtures';
+import { ROOT, loadCedhCohort } from './deck-score-fixtures';
 
 /**
  * Stage 4b: the two corpus cohorts this file can draw from. Arena Brawl is a
@@ -186,7 +186,7 @@ export interface MatchedPile {
   lands: number;
 }
 
-interface PoolCard { card: DbCard; identity: string[]; bucket: number; key: number; covered: boolean }
+export interface PoolCard { card: DbCard; identity: string[]; bucket: number; key: number; covered: boolean }
 
 /**
  * `count` piles, one per usable sample list starting at `offset`; the draw seed
@@ -204,7 +204,7 @@ interface PoolCard { card: DbCard; identity: string[]; bucket: number; key: numb
 /** The non-land, commander-legal draw pool with each card's coverage flag —
  * one table scan plus ~25k `deriveCardFeature` calls, identical for every
  * cohort, so it is built once per process. */
-function controlPool(profile: SampleProfile = 'commander'): PoolCard[] {
+export function controlPool(profile: SampleProfile = 'commander'): PoolCard[] {
   const hit = poolCache.get(profile);
   if (hit) return hit;
   const rows = getDb().prepare(
@@ -404,6 +404,79 @@ export const COHORT_SEED: Record<SampleCohort, number> = {
 export const PROFILE_SEED: Record<SampleProfile, number> = { commander: 0, brawl: 0x000b2a71 };
 export function cohortSeed(cohort: SampleCohort, profile: SampleProfile = 'commander'): number {
   return (COHORT_SEED[cohort] ^ PROFILE_SEED[profile]) >>> 0;
+}
+
+// ── the two study control constructions (§10.7 "keep both definitions") ───
+//
+// `ctrl93` is the heavily typed draw (one fixed target = the cEDH reference
+// median); `ctrlmatch` samples the real coverage distribution. Both were cut
+// in `deck-score-discriminant.ts` and their seeds are regression evidence, so
+// they live here ONCE and every consumer draws the identical piles.
+
+export const SEED_HIGH: Record<SampleProfile, number> = { commander: 0xd15c0000, brawl: 0xd15c2a71 };
+export const SEED_MATCH: Record<SampleProfile, number> = { commander: 0xd15c8000, brawl: 0xd15caa71 };
+
+function percentileOf(sorted: readonly number[], p: number): number {
+  if (sorted.length === 0) return NaN;
+  const i = Math.min(sorted.length - 1, Math.max(0, Math.round((p / 100) * (sorted.length - 1))));
+  return sorted[i];
+}
+
+let cedhMedianCache: number | null = null;
+/** The `ctrl93` coverage target: the cEDH Top-16 reference median, measured
+ * rather than hardcoded, so a catalogue change moves the control with it. */
+export function cedhCoverageMedian(): number {
+  if (cedhMedianCache !== null) return cedhMedianCache;
+  const coverage = loadCedhCohort()
+    .map((d) => {
+      const nl = d.input.main
+        .map((rc) => ({ feature: deriveCardFeature(rc.card), quantity: rc.quantity }))
+        .filter((e) => !e.feature.isLand);
+      const f = nl.reduce((s, e) => s + e.quantity, 0);
+      return f > 0 ? nl.filter((e) => e.feature.covered).reduce((s, e) => s + e.quantity, 0) / f : 1;
+    })
+    .sort((a, b) => a - b);
+  cedhMedianCache = percentileOf(coverage, 50);
+  return cedhMedianCache;
+}
+
+/**
+ * `ctrlmatch`: each pile's coverage target is drawn deterministically from
+ * the real lists' own p10-p90, so unknown cards cannot be the discriminator.
+ * `loadMatchedPiles` takes ONE target per call, so the stride is binned to
+ * 1 % and one call is issued per bin: same generator, same seeds.
+ */
+export function loadCoverageMatchedControls(
+  profile: SampleProfile, n: number, realCoverage: readonly number[],
+): MatchedPile[] {
+  const sorted = [...realCoverage].sort((a, b) => a - b);
+  const lo = percentileOf(sorted, 10);
+  const hi = percentileOf(sorted, 90);
+  const order = strideOrder('training', readSample(profile));
+  const bins = new Map<number, number[]>();
+  for (const i of order) {
+    const u = (hash32(`cov:${profile}:${i}`) % 10_000) / 10_000;
+    const bin = Math.round((lo + u * (hi - lo)) * 100) / 100;
+    const list = bins.get(bin);
+    if (list) list.push(i); else bins.set(bin, [i]);
+  }
+  const out: MatchedPile[] = [];
+  const share = (count: number) => Math.ceil((n * count) / order.length) + 2;
+  for (const [target, indices] of [...bins.entries()].sort((a, b) => a[0] - b[0])) {
+    out.push(...loadMatchedPiles(share(indices.length), 0, SEED_MATCH[profile], target, indices, profile));
+  }
+  return out.slice(0, n);
+}
+
+/** One entry point for both study constructions. `ctrlmatch` needs the real
+ * stride's coverage distribution; `ctrl93` ignores it. */
+export function loadStudyControls(
+  profile: SampleProfile, kind: 'ctrl93' | 'ctrlmatch', n: number, realCoverage: readonly number[] = [],
+): MatchedPile[] {
+  if (kind === 'ctrlmatch') return loadCoverageMatchedControls(profile, n, realCoverage);
+  return loadMatchedPiles(
+    n, 0, SEED_HIGH[profile], cedhCoverageMedian(), strideOrder('training', readSample(profile)), profile,
+  );
 }
 
 /** `count` matched controls from one commander-disjoint cohort of one corpus. */
