@@ -1,0 +1,21 @@
+matched brawl negative controls: n=1000, cohort training (commander-disjoint stride, 179 distinct commanders), seed base 0x5ee62a71, coverage target 0.930
+
+| family | selectable n | Q p50 | Q p90 | Q p95 (= floor) | Q p99 | Q max | frozen |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| aristocrats | 313 | 0.525 | 0.576 | 0.589 | 0.626 | 0.658 | 0.675 |
+| lifegain | 561 | 0.517 | 0.593 | 0.611 | 0.654 | 0.683 | 0.675 |
+| spells | 919 | 0.517 | 0.617 | 0.655 | 0.707 | 0.723 | 0.675 |
+| recursion | 241 | 0.475 | 0.601 | 0.626 | 0.658 | 0.712 | 0.675 |
+| conversion | 853 | 0.531 | 0.590 | 0.603 | 0.627 | 0.644 | 0.675 |
+| tokens | 974 | 0.545 | 0.619 | 0.644 | 0.673 | 0.703 | 0.675 |
+| counters | 153 | 0.525 | 0.576 | 0.586 | 0.603 | 0.613 | 0.675 |
+| typal | 1 | 0.492 | 0.492 | 0.492 | 0.492 | 0.492 | 0.675 |
+| ALL ENGINE (max per pile) | 1000 | 0.574 | 0.645 | 0.667 | 0.707 | 0.723 | - |
+| GENERIC (max per pile) | 1000 | 0.558 | 0.630 | 0.646 | 0.679 | 0.780 | - |
+| JOINT (max over all recipes) | 1000 | 0.583 | 0.656 | 0.675 | 0.712 | 0.780 | 0.675 |
+
+| floor choice | generic b | engine b | in-sample S <= 5 | S median | S p95 |
+|---|---:|---:|---:|---:|---:|
+| frozen | 0.675 | 0.675 | 953/1000 | 0.0 | 0.0 |
+| two floors (per-group p95) | 0.646 | 0.667 | 926/1000 | 0.0 | 22.6 |
+| one shared floor (joint p95) | 0.675 | 0.675 | 953/1000 | 0.0 | 0.0 |

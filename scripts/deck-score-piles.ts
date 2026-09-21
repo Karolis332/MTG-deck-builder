@@ -11,6 +11,11 @@
  * Each control copies ONE real list's commander, land count and nonland MV
  * histogram, then fills those slots with cards drawn deterministically from
  * the legal pool. Same shape, no plan.
+ *
+ * Stage 4b: the same generator serves Historic Brawl. Arena Brawl is a
+ * 100-card 1v1 singleton deck, so a Brawl control differs from a Commander one
+ * only in the corpus it is shaped from, the legality its pool is drawn under
+ * and the format it is scored as — see `SampleProfile`.
  */
 import fs from 'fs';
 import path from 'path';
@@ -18,11 +23,28 @@ import { getDb } from '../src/lib/db';
 import { parseIdentity } from '../src/lib/deck-gate-parse';
 import { deriveCardFeature } from '../src/lib/deck-score-features';
 import type { DeckScoreInput } from '../src/lib/deck-score';
+import type { ScoreFormat } from '../src/lib/deck-score-norms';
 import type { DbCard } from '../src/lib/types';
 import type { ResolvedCard } from '../services/build-api/analysis-core';
 import { ROOT } from './deck-score-fixtures';
 
-const SAMPLE_CSV = path.join(ROOT, 'verify-2026-09-20', 'commander-sample.csv');
+/**
+ * Stage 4b: the two corpus cohorts this file can draw from. Arena Brawl is a
+ * 100-card 1v1 deck, so its controls have the same SHAPE as Commander ones and
+ * differ only in legality, life total and player count — everything below is
+ * therefore one generator parameterised by profile, never a second copy.
+ */
+export type SampleProfile = 'commander' | 'brawl';
+
+const SAMPLE_CSV: Record<SampleProfile, string> = {
+  commander: path.join(ROOT, 'verify-2026-09-20', 'commander-sample.csv'),
+  brawl: path.join(ROOT, 'verify-2026-09-20', 'brawl-sample.csv'),
+};
+/** Scryfall renamed the keys: `brawl` IS Historic Brawl (Arena, 100 cards);
+ * `standardbrawl` is the 60-card rotation format, which this file never draws. */
+const LEGALITY_KEY: Record<SampleProfile, string> = { commander: 'commander', brawl: 'brawl' };
+const PILE_FORMAT: Record<SampleProfile, ScoreFormat> = { commander: 'commander', brawl: 'brawl' };
+
 const CARD_DATA_VERSION = 'deck-score-report-2026-09-19';
 const BASIC_BY_COLOR: Record<string, string> = { W: 'Plains', U: 'Island', B: 'Swamp', R: 'Mountain', G: 'Forest' };
 
@@ -54,14 +76,17 @@ export interface SampleDeck { id: string; commander: string; cards: Array<{ name
  * the 15 s default `testTimeout` and fail as a group while passing one file at a
  * time. Nothing here is mutated by callers, so one build per process is enough.
  */
-let sampleCache: SampleDeck[] | null = null;
+const sampleCache = new Map<SampleProfile, SampleDeck[]>();
 let byNameCache: Map<string, DbCard> | null = null;
-let poolCache: PoolCard[] | null = null;
+const poolCache = new Map<SampleProfile, PoolCard[]>();
 
-/** The 2,777-list stratified pull from the VPS corpus, in stable file order. */
-export function readCommanderSample(): SampleDeck[] {
-  if (sampleCache) return sampleCache;
-  const lines = fs.readFileSync(SAMPLE_CSV, 'utf-8').split(/\r?\n/);
+/** The stratified pull from the VPS corpus, in stable file order: 2,777
+ * Commander lists over 300 commanders, or 1,746 Historic Brawl lists over 287,
+ * ten per commander and CONTIGUOUS in both files. */
+export function readSample(profile: SampleProfile = 'commander'): SampleDeck[] {
+  const hit = sampleCache.get(profile);
+  if (hit) return hit;
+  const lines = fs.readFileSync(SAMPLE_CSV[profile], 'utf-8').split(/\r?\n/);
   const header = splitCsvLine(lines[0]).map((h) => h.trim());
   const [iDeck, iCmd, iName, iBoard, iQty] = ['deck_id', 'commander', 'card_name', 'board', 'quantity']
     .map((n) => header.indexOf(n));
@@ -74,8 +99,14 @@ export function readCommanderSample(): SampleDeck[] {
     if (!deck) { deck = { id: f[iDeck], commander: f[iCmd], cards: [] }; decks.set(f[iDeck], deck); }
     deck.cards.push({ name: f[iName], quantity: Number(f[iQty]) || 1 });
   }
-  sampleCache = [...decks.values()];
-  return sampleCache;
+  const out = [...decks.values()];
+  sampleCache.set(profile, out);
+  return out;
+}
+
+/** Back-compatible alias: every stage-1..4a caller means the Commander pull. */
+export function readCommanderSample(): SampleDeck[] {
+  return readSample('commander');
 }
 
 /** One pass over `cards` beats 229k parameterised lookups. */
@@ -121,6 +152,17 @@ function mvBucket(cmc: number): number {
   return Math.max(0, Math.min(9, Math.round(cmc)));
 }
 
+/** A corpus list's commander may be illegal in the profile it is drawn for —
+ * the Historic Brawl pull is by `commander_name`, and a handful of those names
+ * have since been banned or were never Arena-legal at all. */
+function isLegalIn(card: DbCard, profile: SampleProfile): boolean {
+  try {
+    return (JSON.parse(card.legalities || '{}') as Record<string, string>)[LEGALITY_KEY[profile]] === 'legal';
+  } catch {
+    return false;
+  }
+}
+
 function syntheticBasic(color: string, template: DbCard, quantity: number): ResolvedCard {
   const name = BASIC_BY_COLOR[color];
   return {
@@ -162,26 +204,28 @@ interface PoolCard { card: DbCard; identity: string[]; bucket: number; key: numb
 /** The non-land, commander-legal draw pool with each card's coverage flag —
  * one table scan plus ~25k `deriveCardFeature` calls, identical for every
  * cohort, so it is built once per process. */
-function controlPool(): PoolCard[] {
-  if (poolCache) return poolCache;
+function controlPool(profile: SampleProfile = 'commander'): PoolCard[] {
+  const hit = poolCache.get(profile);
+  if (hit) return hit;
   const rows = getDb().prepare(
     `SELECT id, name, mana_cost, cmc, type_line, oracle_text, colors, color_identity, keywords, set_code, set_name,
             collector_number, rarity, image_uri_small, image_uri_normal, image_uri_large, image_uri_art_crop,
             price_usd, price_usd_foil, legalities, power, toughness, loyalty, produced_mana, edhrec_rank, layout,
             updated_at, subtypes, arena_id, game_changer
      FROM cards
-     WHERE json_extract(legalities,'$.commander')='legal'
+     WHERE json_extract(legalities,'$.${LEGALITY_KEY[profile]}')='legal'
        AND layout NOT IN ('art_series','token','double_faced_token','emblem')
        AND type_line <> 'Card // Card'
        AND type_line NOT LIKE 'Basic Land%'`
   ).all() as DbCard[];
-  poolCache = rows
+  const built = rows
     .filter((c) => !/\bLand\b/.test(c.type_line || ''))
     .map((c) => ({
       card: c, identity: parseIdentity(c.color_identity),
       bucket: mvBucket(c.cmc ?? 0), key: hash32(c.id), covered: deriveCardFeature(c).covered,
     }));
-  return poolCache;
+  poolCache.set(profile, built);
+  return built;
 }
 
 export function loadMatchedPiles(
@@ -190,9 +234,13 @@ export function loadMatchedPiles(
    * from `offset`, so a cohort can be drawn by COMMANDER rather than by file
    * position. `offset` is ignored when this is given. */
   order?: readonly number[],
+  /** stage 4b: which corpus and which legality the controls are drawn under.
+   * Commander and Historic Brawl are both 100-card singleton decks, so only
+   * the pool, the source lists and the scored format change. */
+  profile: SampleProfile = 'commander',
 ): MatchedPile[] {
   const byName = cardsByName();
-  const pool = controlPool();
+  const pool = controlPool(profile);
 
   const bucketCache = new Map<string, { typed: PoolCard[][]; untyped: PoolCard[][] }>();
   const bucketsFor = (identity: string[]): { typed: PoolCard[][]; untyped: PoolCard[][] } => {
@@ -213,7 +261,7 @@ export function loadMatchedPiles(
   };
 
   const out: MatchedPile[] = [];
-  const sample = readCommanderSample();
+  const sample = readSample(profile);
   const sequence = order ?? Array.from({ length: Math.max(0, sample.length - offset) }, (_, k) => offset + k);
   for (const i of sequence) {
     if (out.length >= count) break;
@@ -222,6 +270,7 @@ export function loadMatchedPiles(
     const commander = byName.get(deck.commander.toLowerCase());
     if (!commander) continue;
     if (HELD_OUT_COMMANDERS.has(commander.name.toLowerCase())) continue;
+    if (!isLegalIn(commander, profile)) continue;
     const typeLine = commander.type_line || '';
     if (!/Legendary/.test(typeLine) || !/Creature/.test(typeLine)) continue;
     const identity = parseIdentity(commander.color_identity);
@@ -284,7 +333,7 @@ export function loadMatchedPiles(
       sampleId: deck.id,
       lands,
       input: {
-        format: 'commander', main, commander: [commander], sideboard: [],
+        format: PILE_FORMAT[profile], main, commander: [commander], sideboard: [],
         unresolved: [], cardDataVersion: CARD_DATA_VERSION, corpus: null,
       },
     });
@@ -311,7 +360,7 @@ export const HOLDOUT_EVERY = 3;
 export type SampleCohort = 'training' | 'holdout';
 
 /** Sample indices grouped by commander, commanders in first-appearance order. */
-export function commanderBlocks(sample: readonly SampleDeck[] = readCommanderSample()): Map<string, number[]> {
+export function commanderBlocks(sample: readonly SampleDeck[] = readSample()): Map<string, number[]> {
   const blocks = new Map<string, number[]>();
   sample.forEach((deck, i) => {
     const key = deck.commander.toLowerCase();
@@ -323,7 +372,7 @@ export function commanderBlocks(sample: readonly SampleDeck[] = readCommanderSam
 }
 
 /** The cohort's sample indices in round-robin-over-commanders order. */
-export function strideOrder(cohort: SampleCohort, sample: readonly SampleDeck[] = readCommanderSample()): number[] {
+export function strideOrder(cohort: SampleCohort, sample: readonly SampleDeck[] = readSample()): number[] {
   const blocks = commanderBlocks(sample);
   const mine = [...blocks.values()].filter((_, c) => (c % HOLDOUT_EVERY === 0) === (cohort === 'holdout'));
   const order: number[] = [];
@@ -336,14 +385,25 @@ export function strideOrder(cohort: SampleCohort, sample: readonly SampleDeck[] 
   }
 }
 
-/** Seed bases, one per cohort, so no two cohorts can share a pile draw even
- * if a future edit lets their index sets touch. */
+/** Seed bases, one per cohort AND per profile, so no two cohorts can share a
+ * pile draw even if a future edit lets their index sets touch. */
 export const COHORT_SEED: Record<SampleCohort, number> = {
   training: 0x5eed0000,
   holdout: 0xc0ffee00,
 };
+/** Brawl draws the same two cohorts from a different corpus; xor keeps the
+ * four seed bases pairwise distinct. */
+export const PROFILE_SEED: Record<SampleProfile, number> = { commander: 0, brawl: 0x000b2a71 };
+export function cohortSeed(cohort: SampleCohort, profile: SampleProfile = 'commander'): number {
+  return (COHORT_SEED[cohort] ^ PROFILE_SEED[profile]) >>> 0;
+}
 
-/** `count` matched controls from one commander-disjoint cohort. */
-export function loadCohortPiles(cohort: SampleCohort, count: number, coverageTarget = 0.93): MatchedPile[] {
-  return loadMatchedPiles(count, 0, COHORT_SEED[cohort], coverageTarget, strideOrder(cohort));
+/** `count` matched controls from one commander-disjoint cohort of one corpus. */
+export function loadCohortPiles(
+  cohort: SampleCohort, count: number, coverageTarget = 0.93, profile: SampleProfile = 'commander',
+): MatchedPile[] {
+  return loadMatchedPiles(
+    count, 0, cohortSeed(cohort, profile), coverageTarget,
+    strideOrder(cohort, readSample(profile)), profile,
+  );
 }

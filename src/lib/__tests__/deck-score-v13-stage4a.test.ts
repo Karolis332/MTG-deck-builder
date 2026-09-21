@@ -17,7 +17,7 @@ import { scoreDeck } from '../deck-score';
 import {
   PLAN_RECIPES, recipeFor, qBaselineFor, COMMANDER_BAND_REFERENCE, type PlanKey,
 } from '../deck-score-plans';
-import { Q_BASELINE, Q_BASELINE_JOINT_COMMANDER, Q_SATURATION } from '../deck-score-norms';
+import { Q_BASELINE, Q_BASELINE_CLOSING, Q_BASELINE_JOINT_COMMANDER, Q_BASELINE_JOINT_BRAWL, Q_SATURATION } from '../deck-score-norms';
 import {
   strideOrder, commanderBlocks, loadCohortPiles, readCommanderSample,
   HELD_OUT_COMMANDERS, HOLDOUT_EVERY, COHORT_SEED,
@@ -140,11 +140,12 @@ describe('stage 4a — one joint Q floor, measured over all eleven recipes', () 
     expect(new Set(keys).size).toBe(keys.length);
     expect(keys).toHaveLength(12);
     for (const key of keys) {
-      const expected = key === 'combo' ? Q_BASELINE : Q_BASELINE_JOINT_COMMANDER;
+      const expected = key === 'combo' ? Q_BASELINE_CLOSING : Q_BASELINE_JOINT_COMMANDER;
       // Stage 3 split these into generic .542 and engine .559; nothing splits
-      // them now, and the generic trio must not keep a private floor.
+      // them now, and the generic trio must not keep a private floor. Stage 4b
+      // moved `combo` off `Q_BASELINE` and gave Brawl its own measured floor.
       expect(qBaselineFor('commander', key), key).toBe(expected);
-      expect(qBaselineFor('brawl', key), key).toBe(expected);
+      expect(qBaselineFor('brawl', key), key).toBe(key === 'combo' ? expected : Q_BASELINE_JOINT_BRAWL);
       // §9.1 owns the Standard path and this stage does not touch it.
       expect(qBaselineFor('standard', key), key).toBe(Q_BASELINE);
     }
@@ -188,29 +189,33 @@ describe('stage 4a acceptance, fixture-backed', () => {
     // effects over the rider "You may choose new targets for the copies.";
     // `Ponder` over "...then put them back in any order."), worth Q .629 ->
     // .643 and total 55 -> 64.
-    // The residue is NOT the floor and NOT a route: the `spells` role credits
+    // The residue was NOT the floor and NOT a route: the `spells` role credited
     // 26 of 38 supplied copies because its `cmd.max` is the p90 of 231
     // COMMANDER spells lists, applied unchanged to a 1v1 Brawl deck that is
-    // legitimately more focused. No Brawl band cohort exists to measure one
-    // from, and inventing one would be an unmeasured constant (§1).
+    // legitimately more focused. Stage 4b MEASURED that cohort — 201 Historic
+    // Brawl spells lists read p90 32 — and the anchor came back in band at 76,
+    // so this now pins the diagnosis rather than the miss. The Commander band
+    // is unchanged; only the Brawl one is new.
     const fixture = FIXTURES.find((f) => f.name === 'vivi-battery-arena');
     expect(fixture?.band).toBe('70-85');
     const r = scoreDeck(fixture!.load().input);
     const syn = r.components.find((c) => c.key === 'synergy');
     expect(syn?.reason).toMatch(/supports spells;/);
-    expect(r.score).toBe(64);
+    expect(r.score).toBe(76);
     expect(recipeFor('spells').roles.find((x) => x.key === 'spells')?.cmd?.max).toBe(26);
+    expect(recipeFor('spells').roles.find((x) => x.key === 'spells')?.brawl?.max).toBe(32);
   });
 
-  it('pins the two anchors this stage moved out of band, with their cause', () => {
-    // Anchors 14/16 (target 15). Both misses are measurement consequences,
-    // not tuning: `tazri-upgraded-arena` read midrange Q .621 R .750 at the
-    // stage-3 generic floor .542 for S 37.4 / total 50; the joint floor alone
-    // takes it to ~42, and the re-measured midrange maxima (threats 16 -> 13,
-    // answers 11 -> 10) drop its Q to .586 so `tokens` (fit .156) wins the
-    // selection over midrange (fit .073).
+  it('pins the one anchor still out of band, with its cause', () => {
+    // Stage 4a left TWO out at 14/16; stage 4b's Brawl bands returned Vivi and
+    // `tazri-upgraded-arena` is the survivor at 15/16. Its cause changed with
+    // the measurement: it read `tokens` at the Commander bands, and once the
+    // Brawl bands and a typed commander restore the party `typal` read it sits
+    // at Q .655 against the measured Brawl floor .675 — under the density a
+    // coverage-matched random Brawl pile reaches 5% of the time. §4 forbids
+    // moving the floor to close that gap.
     const byName = (n: string) => FIXTURES.find((f) => f.name === n)!;
-    expect(scoreDeck(byName('tazri-upgraded-arena').load().input).score).toBe(32);
+    expect(scoreDeck(byName('tazri-upgraded-arena').load().input).score).toBe(20);
     expect(byName('tazri-upgraded-arena').band).toBe('45-65');
     // Everything else the brief names stays in band; these two are the ones
     // the joint floor paid for.

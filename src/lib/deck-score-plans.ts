@@ -25,7 +25,7 @@ import type { DeckEntry } from './deck-score-mana';
 import type { ClosingLine } from './deck-score-win';
 import { producerUtilisation, type Utilisation } from './deck-score-producers';
 import {
-  DEPLOYMENT_PROBABILITY_TARGET, Q_BASELINE, Q_BASELINE_JOINT_COMMANDER,
+  DEPLOYMENT_PROBABILITY_TARGET, Q_BASELINE, Q_BASELINE_CLOSING, Q_BASELINE_JOINT_COMMANDER, Q_BASELINE_JOINT_BRAWL,
   Q_SATURATION, type ScoreProfile,
 } from './deck-score-norms';
 
@@ -46,6 +46,10 @@ export interface PlanRole {
    * Commander lists. Absent = no cohort of >= 30 lists, so §1's replacement
    * rule keeps the 60-card band scaled by N/60. */
   cmd?: { min: number; max: number };
+  /** Stage 4b: the same band re-measured on real Historic Brawl lists (1v1,
+   * 25 life, 100 cards). Absent = that recipe's Brawl cohort held fewer than
+   * §1's 30 lists, so the Commander band stands in — never a scaled guess. */
+  brawl?: { min: number; max: number };
   /** §8 deployment deadline, in turns: a copy only fills this role when the
    * DECK'S OWN mana can cast it by that turn. Enforced in `evaluatePlan`,
    * where the land count is known — not inside `fills`, which stays a pure
@@ -392,6 +396,30 @@ export const PLAN_BAND_REFERENCE = 60;
  *
  * Lowering a band raises R, so the negative-control floors were re-measured
  * AFTER this freeze, never before — see `Q_BASELINE_JOINT_COMMANDER`.
+ *
+ * v1.3 stage 4b — the `brawl` bands beside them:
+ * `... commander --evaluated --raw --profile brawl`
+ * (`verify-2026-09-19/deck-score/bands-brawl-training.txt`), over the TRAINING
+ * stride of `verify-2026-09-20/brawl-sample.csv` — 1,166 Historic Brawl lists
+ * from 200 commanders, drawn by `scripts/brawl-sample.sql` from the CF
+ * corpus's 11,281 historicBrawl decks, with the same commander-disjoint split
+ * and the same fixture commanders excluded. Arena Brawl is a 100-card
+ * singleton deck, so the reference size is COMMANDER_BAND_REFERENCE again and
+ * only the cohort changes.
+ *
+ * §1's replacement rule is applied per ROLE, by its own cohort size: a band is
+ * frozen only where the recipe held >= 30 Brawl lists with every essential
+ * present, and the rest keep the Commander band (never the 60-card one).
+ * Frozen (cohort n): midrange 345, control 186, spells 201, aristocrats 67,
+ * recursion 37, counters 36, typal 285. NOT frozen, Commander band stands:
+ * lifegain 28, conversion 23, tokens 18, aggro 4 (which has no `cmd` band
+ * either, so it keeps the 60-card prior).
+ *
+ * The moves are what 1v1 at 25 life does to a 100-card list: midrange answers
+ * 4/10 -> 7/20 and control stabilisation 4/9 -> 5/12 (a duel rewards
+ * interaction density), spells 12/26 -> 15/32 and aristocrats fodder 10/21 ->
+ * 12/24 (a focused Brawl list runs more of its one thing), against modest
+ * trims to midrange threats 13 -> 11 and recursion fuel 2/12 -> 1/7.
  */
 export const COMMANDER_BAND_REFERENCE = 99;
 
@@ -419,9 +447,9 @@ export const PLAN_RECIPES: readonly PlanRecipe[] = [
     key: 'midrange',
     label: 'timely threats, relevant answers, sustained value',
     roles: [
-      { key: 'threats', essential: true, min: 4, max: 10, cmd: { min: 5, max: 13 }, deadline: 5, fills: threat(3, 5, 0.75) },
-      { key: 'answers', essential: true, min: 4, max: 15, cmd: { min: 4, max: 10 }, deadline: 5, fills: answer(5) },
-      { key: 'value', essential: true, min: 4, max: 21, cmd: { min: 7, max: 16 }, deadline: 5, fills: velocity(5) },
+      { key: 'threats', essential: true, min: 4, max: 10, cmd: { min: 5, max: 13 }, brawl: { min: 5, max: 11 }, deadline: 5, fills: threat(3, 5, 0.75) },
+      { key: 'answers', essential: true, min: 4, max: 15, cmd: { min: 4, max: 10 }, brawl: { min: 7, max: 20 }, deadline: 5, fills: answer(5) },
+      { key: 'value', essential: true, min: 4, max: 21, cmd: { min: 7, max: 16 }, brawl: { min: 7, max: 15 }, deadline: 5, fills: velocity(5) },
       { key: 'fixing', essential: false, infrastructure: true, min: 0, max: 8, fills: infrastructure },
     ],
   },
@@ -429,9 +457,9 @@ export const PLAN_RECIPES: readonly PlanRecipe[] = [
     key: 'control',
     label: 'early stabilisation, advantage engine, accessible finisher',
     roles: [
-      { key: 'stabilisation', essential: true, min: 7, max: 12, cmd: { min: 4, max: 9 }, deadline: 3, fills: answer(3) },
-      { key: 'engine', essential: true, min: 12, max: 19, cmd: { min: 6, max: 16 }, deadline: 4, fills: (f) => f.isDrawEngine || velocity(4)(f) },
-      { key: 'finisher', essential: true, min: 3, max: 8, cmd: { min: 3, max: 10 }, deadline: 7, fills: threat(4, 7, 0.6) },
+      { key: 'stabilisation', essential: true, min: 7, max: 12, cmd: { min: 4, max: 9 }, brawl: { min: 5, max: 12 }, deadline: 3, fills: answer(3) },
+      { key: 'engine', essential: true, min: 12, max: 19, cmd: { min: 6, max: 16 }, brawl: { min: 6, max: 17 }, deadline: 4, fills: (f) => f.isDrawEngine || velocity(4)(f) },
+      { key: 'finisher', essential: true, min: 3, max: 8, cmd: { min: 3, max: 10 }, brawl: { min: 3, max: 11 }, deadline: 7, fills: threat(4, 7, 0.6) },
       { key: 'answers', essential: false, min: 0, max: 2, fills: answer(6) },
       { key: 'fixing', essential: false, infrastructure: true, min: 0, max: 4, fills: infrastructure },
     ],
@@ -447,9 +475,9 @@ export const PLAN_RECIPES: readonly PlanRecipe[] = [
     key: 'aristocrats',
     label: 'sacrifice outlets converting expendable bodies into damage',
     roles: [
-      { key: 'outlet', essential: true, min: 3, max: 9, cmd: { min: 2, max: 11 }, fills: sacOutlet },
-      { key: 'payoff', essential: true, min: 5, max: 12, cmd: { min: 3, max: 16 }, fills: deathPayoff },
-      { key: 'fodder', essential: true, min: 6, max: 18, cmd: { min: 10, max: 21 }, deadline: 4, servedBy: { roles: ['outlet', 'payoff'], ratio: 3 }, fills: fodder(3) },
+      { key: 'outlet', essential: true, min: 3, max: 9, cmd: { min: 2, max: 11 }, brawl: { min: 2, max: 9 }, fills: sacOutlet },
+      { key: 'payoff', essential: true, min: 5, max: 12, cmd: { min: 3, max: 16 }, brawl: { min: 2, max: 11 }, fills: deathPayoff },
+      { key: 'fodder', essential: true, min: 6, max: 18, cmd: { min: 10, max: 21 }, brawl: { min: 12, max: 24 }, deadline: 4, servedBy: { roles: ['outlet', 'payoff'], ratio: 3 }, fills: fodder(3) },
       { key: 'value', essential: false, min: 0, max: 8, fills: velocity(5) },
       { key: 'answers', essential: false, min: 0, max: 5, fills: answer(5) },
       { key: 'fixing', essential: false, infrastructure: true, min: 0, max: 8, fills: infrastructure },
@@ -470,9 +498,9 @@ export const PLAN_RECIPES: readonly PlanRecipe[] = [
     key: 'spells',
     label: 'cast-trigger payoffs fed by cheap instants and sorceries',
     roles: [
-      { key: 'payoff', essential: true, min: 3, max: 10, cmd: { min: 2, max: 12 }, fills: spellPayoff },
-      { key: 'closer', essential: true, min: 2, max: 8, cmd: { min: 4, max: 18 }, fills: spellCloser },
-      { key: 'spells', essential: true, min: 12, max: 32, cmd: { min: 12, max: 26 }, deadline: 4, fills: cheapSpell(4) },
+      { key: 'payoff', essential: true, min: 3, max: 10, cmd: { min: 2, max: 12 }, brawl: { min: 2, max: 10 }, fills: spellPayoff },
+      { key: 'closer', essential: true, min: 2, max: 8, cmd: { min: 4, max: 18 }, brawl: { min: 4, max: 19 }, fills: spellCloser },
+      { key: 'spells', essential: true, min: 12, max: 32, cmd: { min: 12, max: 26 }, brawl: { min: 15, max: 32 }, deadline: 4, fills: cheapSpell(4) },
       { key: 'answers', essential: false, min: 0, max: 8, fills: answer(5) },
       { key: 'fixing', essential: false, infrastructure: true, min: 0, max: 10, fills: infrastructure },
     ],
@@ -488,9 +516,9 @@ export const PLAN_RECIPES: readonly PlanRecipe[] = [
     key: 'recursion',
     label: 'permanents recurred from the graveyard, and the fuel that fills it',
     roles: [
-      { key: 'recursion', essential: true, min: 4, max: 10, cmd: { min: 2, max: 7 }, fills: graveyardRecursion },
-      { key: 'fuel', essential: true, min: 4, max: 14, cmd: { min: 2, max: 12 }, servedBy: { roles: ['recursion'], ratio: 4 }, fills: graveyardFuel },
-      { key: 'targets', essential: true, min: 6, max: 18, cmd: { min: 5, max: 14 }, deadline: 5, servedBy: { roles: ['recursion'], ratio: 5 }, fills: recursionTarget },
+      { key: 'recursion', essential: true, min: 4, max: 10, cmd: { min: 2, max: 7 }, brawl: { min: 2, max: 6 }, fills: graveyardRecursion },
+      { key: 'fuel', essential: true, min: 4, max: 14, cmd: { min: 2, max: 12 }, brawl: { min: 1, max: 7 }, servedBy: { roles: ['recursion'], ratio: 4 }, fills: graveyardFuel },
+      { key: 'targets', essential: true, min: 6, max: 18, cmd: { min: 5, max: 14 }, brawl: { min: 5, max: 13 }, deadline: 5, servedBy: { roles: ['recursion'], ratio: 5 }, fills: recursionTarget },
       { key: 'value', essential: false, min: 0, max: 8, fills: velocity(5) },
       { key: 'answers', essential: false, min: 0, max: 5, fills: answer(5) },
       { key: 'fixing', essential: false, infrastructure: true, min: 0, max: 8, fills: infrastructure },
@@ -547,9 +575,9 @@ export const PLAN_RECIPES: readonly PlanRecipe[] = [
     commanderOnly: true,
     label: '+1/+1 counters placed on bodies that read them',
     roles: [
-      { key: 'payoff', essential: true, min: 1, max: 5, cmd: { min: 3, max: 8 }, fills: counterPayoff },
-      { key: 'sources', essential: true, min: 4, max: 10, cmd: { min: 6, max: 16 }, servedBy: { roles: ['payoff'], ratio: 3 }, fills: counterSource },
-      { key: 'carriers', essential: true, min: 2, max: 7, cmd: { min: 3, max: 11 }, deadline: 5, servedBy: { roles: ['sources'], ratio: 2 }, fills: threat(2, 5, 0.6) },
+      { key: 'payoff', essential: true, min: 1, max: 5, cmd: { min: 3, max: 8 }, brawl: { min: 2, max: 10 }, fills: counterPayoff },
+      { key: 'sources', essential: true, min: 4, max: 10, cmd: { min: 6, max: 16 }, brawl: { min: 6, max: 17 }, servedBy: { roles: ['payoff'], ratio: 3 }, fills: counterSource },
+      { key: 'carriers', essential: true, min: 2, max: 7, cmd: { min: 3, max: 11 }, brawl: { min: 5, max: 14 }, deadline: 5, servedBy: { roles: ['sources'], ratio: 2 }, fills: threat(2, 5, 0.6) },
       { key: 'value', essential: false, min: 0, max: 8, fills: velocity(5) },
       { key: 'answers', essential: false, min: 0, max: 5, fills: answer(5) },
       { key: 'fixing', essential: false, infrastructure: true, min: 0, max: 8, fills: infrastructure },
@@ -753,7 +781,11 @@ export function evaluatePlan(
   const F = nonLand.reduce((s, e) => s + e.quantity, 0);
   const commanderShaped = usesCommanderBands(N);
   const bandOf = (role: PlanRole): { min: number; max: number; scale: number } => {
-    const cmd = commanderShaped ? role.cmd : undefined;
+    // Stage 4b: a 100-card Brawl deck is Commander-SHAPED but not a Commander
+    // deck — 1v1 and 25 life make its real lists more focused, so it reads its
+    // own measured band where one exists and falls back to the Commander band
+    // (never to the 60-card one) where the Brawl cohort was under 30 lists.
+    const cmd = commanderShaped ? (profile === 'brawl' ? role.brawl ?? role.cmd : role.cmd) : undefined;
     return cmd
       ? { min: cmd.min, max: cmd.max, scale: N / COMMANDER_BAND_REFERENCE }
       : { min: role.min, max: role.max, scale: N / PLAN_BAND_REFERENCE };
@@ -948,10 +980,15 @@ function typalRoles(theme: TypalTheme): { payoff: (f: CardFeature) => boolean; e
  * The earlier reading of the same cohort — payoff p25 4 / p90 19, enabler p25
  * 6 / p90 26 — was measured before the role predicates were tightened, when
  * every party creature's reminder text counted as a payoff. Re-measure with
- * the script whenever `typalRoles` changes; the two must agree. */
+ * the script whenever `typalRoles` changes; the two must agree.
+ *
+ * Stage 4b: `... typal --profile brawl` over 285 themed Historic Brawl
+ * training lists reads payoff p25 2 / p90 7 (identical) and enabler p25 9 /
+ * p90 29 — one copy of slack on the enabler floor, frozen because the cohort
+ * clears §1's 30 lists. */
 const TYPAL_BAND = {
-  payoff: { min: 1, max: 4, cmd: { min: 2, max: 7 } },
-  enabler: { min: 7, max: 18, cmd: { min: 11, max: 29 } },
+  payoff: { min: 1, max: 4, cmd: { min: 2, max: 7 }, brawl: { min: 2, max: 7 } },
+  enabler: { min: 7, max: 18, cmd: { min: 11, max: 29 }, brawl: { min: 9, max: 29 } },
 };
 
 export function typalRecipe(theme: TypalTheme): PlanRecipe {
@@ -1188,9 +1225,15 @@ export function evaluateClosing(
  */
 export function qBaselineFor(profile: ScoreProfile, key: PlanKey): number {
   if (profile === 'standard') return Q_BASELINE;
-  // The closing plan proves itself by completing its line's essentials, and
-  // its pile read must stay 0/200 rather than be priced (§9.5).
-  return key === 'combo' ? Q_BASELINE : Q_BASELINE_JOINT_COMMANDER;
+  // Stage 4b: the closing plan is priced too. Completing its line's essentials
+  // is NOT a floor — a one-card alternate-win pool in a 99-card pile is
+  // complete by construction — so `combo` answers to its own measured
+  // negative-control p95 (`Q_BASELINE_CLOSING`), which no reviewed cEDH
+  // positive is anywhere near.
+  if (key === 'combo') return Q_BASELINE_CLOSING;
+  // Stage 4b: Brawl has its own corpus, its own bands and therefore its own
+  // measured floor — the Commander number grades a different population.
+  return profile === 'brawl' ? Q_BASELINE_JOINT_BRAWL : Q_BASELINE_JOINT_COMMANDER;
 }
 
 /** The plan-side of S: how much of the deck this recipe explains, discounted

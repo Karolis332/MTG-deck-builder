@@ -1,0 +1,4 @@
+typal cohort (brawl): 285 decks
+| role | p10 | p25 | median | p75 | p90 |
+| payoff | 1 | 2 | 3 | 5 | 7 |
+| enabler | 4 | 9 | 16 | 24 | 29 |

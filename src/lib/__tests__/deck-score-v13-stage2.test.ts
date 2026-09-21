@@ -13,7 +13,7 @@ import {
   PLAN_RECIPES, STANDARD_RECIPES, type PlanEvaluation,
 } from '../deck-score-plans';
 import {
-  Q_BASELINE, Q_BASELINE_JOINT_COMMANDER, Q_SATURATION,
+  Q_BASELINE, Q_BASELINE_CLOSING, Q_BASELINE_JOINT_COMMANDER, Q_BASELINE_JOINT_BRAWL, Q_SATURATION,
   DEPLOYMENT_PROBABILITY_TARGET,
 } from '../deck-score-norms';
 import { deriveCardFeature } from '../deck-score-features';
@@ -215,16 +215,18 @@ describe('§9.2 Commander Q floor b, measured over 1,000 matched controls', () =
   });
 
   it('applies b outside Standard only, to every recipe but combo', () => {
-    // SUPERSEDED TWICE: stage 2 gave the engine families `Q_BASELINE` (no
-    // measurement existed), stage 3 gave them a second floor of their own, and
-    // stage 4a collapsed both into one joint statistic.
+    // SUPERSEDED THREE TIMES: stage 2 gave the engine families `Q_BASELINE`
+    // (no measurement existed), stage 3 gave them a second floor of their own,
+    // stage 4a collapsed both into one joint statistic, and stage 4b measured
+    // Brawl on its own corpus and priced the closing plan. The enumeration
+    // lives in `deck-score-v13-stage4b.test.ts` now; this keeps the shape.
     for (const key of ['aggro', 'midrange', 'control', 'aristocrats', 'lifegain', 'spells', 'typal', 'recursion'] as const) {
       expect(qBaselineFor('commander', key)).toBe(Q_BASELINE_JOINT_COMMANDER);
-      expect(qBaselineFor('brawl', key)).toBe(Q_BASELINE_JOINT_COMMANDER);
+      expect(qBaselineFor('brawl', key)).toBe(Q_BASELINE_JOINT_BRAWL);
       expect(qBaselineFor('standard', key)).toBe(Q_BASELINE);
     }
-    expect(qBaselineFor('commander', 'combo')).toBe(Q_BASELINE);
-    expect(qBaselineFor('brawl', 'combo')).toBe(Q_BASELINE);
+    expect(qBaselineFor('commander', 'combo')).toBe(Q_BASELINE_CLOSING);
+    expect(qBaselineFor('brawl', 'combo')).toBe(Q_BASELINE_CLOSING);
   });
 
   it('scores a generic plan 0 at Q <= b and at most 5 just above it', () => {

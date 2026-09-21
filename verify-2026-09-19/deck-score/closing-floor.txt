@@ -1,0 +1,52 @@
+closing reads over matched commander holdout controls: 46/853 assemble a line, 5 would WIN §1 ordering; reviewed cEDH positives 28/30
+
+| population | n | Q p50 | Q p90 | Q p95 | Q p99 | Q max |
+|---|---:|---:|---:|---:|---:|---:|
+| controls that assemble a line | 46 | 0.290 | 0.317 | 0.323 | 0.355 | 0.355 |
+| controls whose closing plan WINS | 5 | 0.317 | 0.323 | 0.323 | 0.323 | 0.323 |
+| reviewed cEDH positives | 28 | 0.667 | 0.710 | 0.729 | 0.732 | 0.732 |
+
+| candidate rule | controls still winning | cEDH positives still reading combo | note |
+|---|---:|---:|---|
+| frozen today (b = 0.300) | 5 | 28 | the stage-4a 1/200 |
+| A: b = control p95 = 0.323 | 0 | 28 | positives below the floor lose their closing plan |
+| B: refuse a one-CARD pool (pieces <= 1) | 0 | 0 | 28 positive(s) have a one-card pool |
+
+| winning control | line | pieces | r | Q | R | fit | total |
+|---|---|---:|---:|---:|---:|---:|---:|
+| Katsumasa, the Animator (370774933) | alt_win | 1 | 1 | 0.323 | 0.500 | 0.028 | 22 |
+| Katsumasa, the Animator (372715497) | alt_win | 1 | 1 | 0.317 | 0.500 | 0.022 | 22 |
+| Volo, Itinerant Scholar (376085816) | alt_win | 1 | 1 | 0.317 | 0.500 | 0.022 | 22 |
+| Volo, Itinerant Scholar (374685156) | alt_win | 1 | 1 | 0.308 | 0.500 | 0.010 | 21 |
+| Volo, Itinerant Scholar (376049752) | alt_win | 1 | 1 | 0.303 | 0.500 | 0.004 | 20 |
+
+| cEDH positive | line | pieces | r | Q | R | fit | wins | total |
+|---|---|---:|---:|---:|---:|---:|---|---:|
+| cedh-17 | alt_win | 1 | 1 | 0.600 | 1.000 | 0.750 | yes | 80 |
+| cedh-20 | alt_win | 1 | 1 | 0.611 | 1.000 | 0.778 | yes | 75 |
+| cedh-6 | alt_win | 1 | 1 | 0.620 | 1.000 | 0.799 | yes | 84 |
+| cedh-9 | alt_win | 1 | 1 | 0.620 | 1.000 | 0.799 | yes | 84 |
+| cedh-15 | alt_win | 1 | 1 | 0.620 | 1.000 | 0.799 | yes | 81 |
+| cedh-7 | alt_win | 1 | 1 | 0.629 | 1.000 | 0.821 | yes | 86 |
+| cedh-10 | alt_win | 1 | 1 | 0.629 | 1.000 | 0.821 | yes | 86 |
+| cedh-26 | alt_win | 1 | 1 | 0.629 | 1.000 | 0.821 | yes | 86 |
+| cedh-29 | alt_win | 1 | 1 | 0.639 | 1.000 | 0.847 | yes | 81 |
+| cedh-19 | alt_win | 1 | 1 | 0.643 | 1.000 | 0.857 | yes | 89 |
+| cedh-5 | alt_win | 1 | 1 | 0.658 | 1.000 | 0.894 | yes | 88 |
+| cedh-13 | alt_win | 1 | 1 | 0.662 | 1.000 | 0.904 | yes | 89 |
+| cedh-28 | alt_win | 1 | 1 | 0.662 | 1.000 | 0.905 | yes | 87 |
+| cedh-4 | alt_win | 1 | 1 | 0.662 | 1.000 | 0.905 | yes | 86 |
+| cedh-18 | alt_win | 1 | 1 | 0.667 | 1.000 | 0.917 | yes | 90 |
+| cedh-27 | alt_win | 1 | 1 | 0.676 | 1.000 | 0.940 | yes | 91 |
+| cedh-24 | alt_win | 1 | 1 | 0.676 | 1.000 | 0.941 | yes | 90 |
+| cedh-16 | alt_win | 1 | 1 | 0.681 | 1.000 | 0.951 | yes | 80 |
+| cedh-21 | alt_win | 1 | 1 | 0.690 | 1.000 | 0.975 | yes | 90 |
+| cedh-22 | alt_win | 1 | 1 | 0.690 | 1.000 | 0.975 | yes | 89 |
+| cedh-3 | alt_win | 1 | 1 | 0.704 | 1.000 | 1.000 | yes | 90 |
+| cedh-14 | alt_win | 1 | 1 | 0.704 | 1.000 | 1.000 | yes | 90 |
+| cedh-25 | alt_win | 1 | 1 | 0.704 | 1.000 | 1.000 | yes | 90 |
+| cedh-8 | alt_win | 1 | 1 | 0.710 | 1.000 | 1.000 | yes | 90 |
+| cedh-11 | alt_win | 1 | 1 | 0.710 | 1.000 | 1.000 | yes | 90 |
+| cedh-23 | alt_win | 1 | 1 | 0.714 | 1.000 | 1.000 | yes | 91 |
+| cedh-2 | alt_win | 1 | 1 | 0.729 | 1.000 | 1.000 | yes | 91 |
+| cedh-12 | alt_win | 1 | 1 | 0.732 | 1.000 | 1.000 | yes | 92 |

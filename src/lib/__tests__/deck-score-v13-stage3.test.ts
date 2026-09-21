@@ -12,7 +12,7 @@ import {
   qBaselineFor, tutorReaches, tutorReachesInTwo, timelyStax,
   PLAN_RECIPES, CLOSING_SUPPORT_BAND, type PlanKey,
 } from '../deck-score-plans';
-import { Q_BASELINE, Q_BASELINE_JOINT_COMMANDER } from '../deck-score-norms';
+import { Q_BASELINE, Q_BASELINE_CLOSING, Q_BASELINE_JOINT_COMMANDER, Q_BASELINE_JOINT_BRAWL } from '../deck-score-norms';
 import { deriveCardFeature } from '../deck-score-features';
 import type { ClosingLine } from '../deck-score-win';
 import { loadMatchedPiles } from '../../../scripts/deck-score-piles';
@@ -86,12 +86,14 @@ describe('§9.6 step 3 — every recipe family answers to exactly one floor', ()
     for (const key of keys) {
       const floor = qBaselineFor('commander', key);
       // Stage 4a: the generic trio no longer selects a different floor — the
-      // two stage-3 floors were replaced by one joint measurement.
-      if (key === 'combo') expect(floor).toBe(Q_BASELINE);
+      // two stage-3 floors were replaced by one joint measurement. Stage 4b:
+      // `combo` is priced too, at its own measured control p95.
+      if (key === 'combo') expect(floor).toBe(Q_BASELINE_CLOSING);
       else expect(floor).toBe(Q_BASELINE_JOINT_COMMANDER);
-      // A family carries the SAME floor in every Commander-family profile and
-      // the untouched .30 in Standard (§9.1 owns that path).
-      expect(qBaselineFor('brawl', key)).toBe(floor);
+      // Stage 4b: Brawl has its own corpus, bands and floor, so a FAMILY floor
+      // is per-profile; only the closing floor is shared. Standard keeps the
+      // untouched .30 (§9.1 owns that path).
+      expect(qBaselineFor('brawl', key)).toBe(key === 'combo' ? floor : Q_BASELINE_JOINT_BRAWL);
       expect(qBaselineFor('standard', key)).toBe(Q_BASELINE);
     }
   });

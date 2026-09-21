@@ -271,6 +271,76 @@ export const Q_SATURATION = 0.70;
 export const Q_BASELINE_JOINT_COMMANDER = 0.574;
 
 /**
+ * v1.3 stage 4b: the SAME joint statistic, measured on the Brawl corpus under
+ * the Brawl bands. `scripts/brawl-sample.sql` pulled 1,746 Historic Brawl
+ * lists over 287 commanders from the CF corpus (11,281 decks / 1,635
+ * commanders); 1,000 land/curve/colour-matched controls were drawn from the
+ * 179 TRAINING commanders of that file's commander-disjoint stride, under
+ * Arena Brawl legality (`legalities.brawl`, 15,762 cards) and at the same
+ * .930 typed-coverage target. Re-print with
+ * `npx tsx scripts/deck-score-bands.ts negative --joint --n 1000 --profile brawl`
+ * (`verify-2026-09-19/deck-score/joint-floor-brawl.txt`).
+ *
+ * | statistic (n = 1,000) | p50 | p90 | p95 | p99 | max |
+ * |---|---:|---:|---:|---:|---:|
+ * | GENERIC (max per pile) | .558 | .630 | .646 | .679 | .780 |
+ * | ALL ENGINE (max per pile) | .574 | .645 | .667 | .707 | .723 |
+ * | JOINT (max over all recipes) | .583 | .656 | **.675** | .712 | .780 |
+ *
+ * In-sample S <= 5 on the cohort it was frozen from: Commander's .574
+ * 509/1000, per-group p95s (.646/.667) 926/1000, the shared joint p95
+ * 953/1000 — the same ordering stage 4a measured for Commander, so Brawl gets
+ * one floor for the same reason.
+ *
+ * It sits .101 above the Commander floor because a 100-card ARENA singleton
+ * pile fills roles better than a 100-card paper one: the Brawl-legal pool is
+ * half the size (15,762 vs 31,863) and modern-era, so a random draw lands more
+ * typed removal and more cheap interaction, and the measured Brawl bands are
+ * themselves wider where real 1v1 lists are wider (midrange answers p90 20 vs
+ * the Commander 10, spells 32 vs 26). Both effects raise credited Q on a pile,
+ * and the floor is what prices them.
+ */
+export const Q_BASELINE_JOINT_BRAWL = 0.675;
+
+/**
+ * v1.3 stage 4b: the Q floor the CLOSING (`combo`) plan answers to in a
+ * Commander-family profile. Stage 4a left it at `Q_BASELINE` (.30) on the
+ * argument that §9.5's essential-completion check is its own floor; the
+ * acceptance run then read `combo` on 1 of 200 fresh controls, because one
+ * alternate-win card in a 99-card pile gives a single-member pool that is
+ * complete BY CONSTRUCTION and fits at ~.02 while every other recipe sits
+ * pinned at 0 by the .574 floor.
+ *
+ * MEASURED with the SAME statistic as every other floor — the 95th percentile
+ * of the closing plan's Q over matched negative controls that assemble a line
+ * at all (`npx tsx scripts/deck-score-bands.ts closingfloor --n 1200 --stride`,
+ * `verify-2026-09-19/deck-score/closing-floor.txt`):
+ *
+ * | population | n | Q p50 | Q p90 | Q p95 | Q max |
+ * |---|---:|---:|---:|---:|---:|
+ * | controls that assemble a line | 46 | .290 | .317 | **.323** | .355 |
+ * | of those, the ones whose closing plan WINS §1 ordering | 5 | .317 | .323 | .323 | .323 |
+ * | reviewed cEDH Top-16 positives | 28 | .667 | .710 | .729 | .732 |
+ *
+ * The two populations do not overlap: the controls top out at .355 and the
+ * weakest reviewed positive sits at .600, so the floor costs 0 of 28
+ * positives and removes 5 of 5 control wins (0/200 on the acceptance prefix
+ * and 0/853 over the whole cohort).
+ *
+ * MEASURED ON THE HOLDOUT, and that is not a choice: the 1,648-pile TRAINING
+ * cohort assembles ZERO closing lines, so it cannot supply this statistic at
+ * all. The event is rare by construction (46 of 853 = 5.4%).
+ *
+ * The alternative stage 4a named — refusing a one-CARD pool as an assembled
+ * line — is REFUTED by the same table: all 28 reviewed cEDH positives close on
+ * a single alternate-win card (`alt_win`, pieces 1, r 1), Ballooncon included,
+ * so that rule costs every positive its closing plan and keeps nothing the
+ * floor does not already remove. It was implemented and reverted in stage 4a
+ * for the same reason; this is the measurement that settles it.
+ */
+export const Q_BASELINE_CLOSING = 0.323;
+
+/**
  * §9.1 Standard deployment: a copy credited for a role with deadline `d`
  * earns `a = clip(P(cast by d) / DEPLOYMENT_PROBABILITY_TARGET)`, where P is
  * the lands-only hypergeometric probability of holding `ceil(c)` lands by that

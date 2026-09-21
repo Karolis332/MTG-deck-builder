@@ -693,7 +693,13 @@ const V13_ATOMS: Atom[] = [
   },
   {
     kind: 'effect',
-    re: /\byou may reveal (?:a|an|up to (?:one|two|three)) [a-z', ]*cards?[a-z', \/]*(?:from among them )?and put (?:it|them|those cards) into your hand/gi,
+    // The card filter may itself be a type LIST — "up to two Cleric, Rogue,
+    // Warrior, Wizard, and/or Ally cards" — so the class before `cards` has to
+    // admit the slash `and/or` prints, exactly as the class after it already
+    // does. Without it `Tazri, Beacon of Unity` finished with this sentence
+    // unclaimed and stayed `partial`, so the commander of a party deck earned
+    // no typed coverage and no party-payoff role.
+    re: /\byou may reveal (?:a|an|up to (?:one|two|three)) [a-z', \/]*cards?[a-z', \/]*(?:from among them )?and put (?:it|them|those cards) into your hand/gi,
     make: (m, ctx) => eff('advantage', ctx, { zones: ['library', 'hand'], produces: ['cards'], outputBounds: { min: 0, max: null, unit: 'cards' } }),
   },
   {

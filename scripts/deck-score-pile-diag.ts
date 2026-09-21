@@ -16,7 +16,7 @@ import { computeSynergy } from '../src/lib/deck-score-synergy';
 import { deriveCardFeature } from '../src/lib/deck-score-features';
 import type { DeckEntry } from '../src/lib/deck-score-mana';
 import { loadDataset, loadRandomPiles } from './deck-score-fixtures';
-import { loadMatchedPiles, loadCohortPiles, type SampleCohort } from './deck-score-piles';
+import { loadMatchedPiles, loadCohortPiles, type SampleCohort, type SampleProfile } from './deck-score-piles';
 import { typalTheme, typalRecipe } from '../src/lib/deck-score-plans';
 import { normsFor } from '../src/lib/deck-score-norms';
 import { computeInteraction, computeAdvantage } from '../src/lib/deck-score-interaction';
@@ -87,17 +87,21 @@ function plans(name: string): void {
   const hit = ds.fixtures.find((f) => f.name === name);
   if (!hit) { console.log(`no fixture ${name}`); return; }
   const { N, nonLand, cmd } = entriesOf(hit.input);
-  const rows = PLAN_RECIPES.map((r) => evaluatePlan(r, Math.max(1, N), nonLand, cmd));
+  // Stage 4b: a Brawl fixture must be evaluated under the BRAWL bands and the
+  // Brawl floor, or the table shows a plan the scorer never selected — this
+  // read `tokens` for `tazri-upgraded-arena` while `scoreDeck` read `control`.
+  const profile = profileOf(hit.format);
+  const rows = recipesFor(profile).map((r) => evaluatePlan(r, Math.max(1, N), nonLand, cmd, undefined, profile));
   const theme = typalTheme([...nonLand, ...cmd].map((e) => e.feature));
   if (theme.tribes.length > 0 || theme.artifacts || theme.party) {
     console.log(`theme: tribes=[${theme.tribes.join(',')}] artifacts=${theme.artifacts} party=${theme.party}`);
-    rows.push(evaluatePlan(typalRecipe(theme), Math.max(1, N), nonLand, cmd));
+    rows.push(evaluatePlan(typalRecipe(theme), Math.max(1, N), nonLand, cmd, undefined, profile));
   } else console.log('theme: none');
-  console.log(`## ${name} — N=${N}`);
-  console.log('| recipe | Q | R | fit | essFrac | empty | weakest |');
-  console.log('|---|---:|---:|---:|---:|---|---|');
-  for (const e of rows.sort((a, b) => planFit(b) - planFit(a))) {
-    console.log(`| ${e.recipe.key} | ${e.Q.toFixed(3)} | ${e.R.toFixed(3)} | ${planFit(e).toFixed(3)} | ${e.essentialFraction.toFixed(2)} | ${e.hasEmptyEssential ? 'yes' : 'no'} | ${e.weakest.key} ${e.weakest.supply}/${e.weakest.required.toFixed(1)} |`);
+  console.log(`## ${name} — N=${N}, profile ${profile}`);
+  console.log('| recipe | Q | R | b | fit | essFrac | empty | weakest |');
+  console.log('|---|---:|---:|---:|---:|---:|---|---|');
+  for (const e of rows.sort((a, b) => planFit(b, profile) - planFit(a, profile))) {
+    console.log(`| ${e.recipe.key} | ${e.Q.toFixed(3)} | ${e.R.toFixed(3)} | ${qBaselineFor(profile, e.recipe.key).toFixed(3)} | ${planFit(e, profile).toFixed(3)} | ${e.essentialFraction.toFixed(2)} | ${e.hasEmptyEssential ? 'yes' : 'no'} | ${e.weakest.key} ${e.weakest.supply.toFixed(1)}/${e.weakest.required.toFixed(1)} |`);
   }
   console.log(diag(name, hit.input));
 }
@@ -109,8 +113,8 @@ function plans(name: string): void {
  * acceptance failure, and this is the only way to see whether the cause is the
  * line W assembled or the floor the other recipes answer to.
  */
-function control(needle: string, cohort: SampleCohort): void {
-  const piles = loadCohortPiles(cohort, 1000, 0.93);
+function control(needle: string, cohort: SampleCohort, profile: SampleProfile = 'commander'): void {
+  const piles = loadCohortPiles(cohort, 1000, 0.93, profile);
   const matches = piles.filter((p) => p.commander.toLowerCase().includes(needle.toLowerCase()) || p.sampleId === needle);
   if (matches.length === 0) { console.log(`no ${cohort} control matching "${needle}"`); return; }
   // The round-robin order gives one pile per commander per pass, so a
@@ -136,9 +140,9 @@ function control(needle: string, cohort: SampleCohort): void {
   const win = computeWin(fmt, norms, 'midrange', N, all, cmd.map((e) => e.feature), {
     E: inter.E, Estar: inter.Estar, D: adv.D, Dstar: adv.Dstar, hasDrawEngine: adv.hasDrawEngine,
   });
-  const rows = recipesFor('commander').map((r) => evaluatePlan(r, Math.max(1, N), nonLand, cmd, util, 'commander'));
+  const rows = recipesFor(profile).map((r) => evaluatePlan(r, Math.max(1, N), nonLand, cmd, util, profile));
   if (win.closing) {
-    rows.push(evaluateClosing(win.closing, nonLand, [], util, 'commander',
+    rows.push(evaluateClosing(win.closing, nonLand, [], util, profile,
       win.closingLines.filter((l) => l.id !== win.closing?.id)));
   }
   const r = scoreDeck(hit.input);
@@ -149,9 +153,9 @@ function control(needle: string, cohort: SampleCohort): void {
   console.log(`closingLines: ${win.closingLines.map((l) => `${l.id} (${l.pieces.length} pieces, r=${l.required}, T${l.tStar})`).join(' | ') || 'none'}`);
   console.log('| recipe | Q | R | b | fit | essFrac | empty | weakest |');
   console.log('|---|---:|---:|---:|---:|---:|---|---|');
-  for (const e of rows.sort((a, b) => planFit(b, 'commander') - planFit(a, 'commander'))) {
-    console.log(`| ${e.recipe.key} | ${e.Q.toFixed(3)} | ${e.R.toFixed(3)} | ${qBaselineFor('commander', e.recipe.key).toFixed(3)} | ` +
-      `${planFit(e, 'commander').toFixed(3)} | ${e.essentialFraction.toFixed(2)} | ${e.hasEmptyEssential ? 'yes' : 'no'} | ` +
+  for (const e of rows.sort((a, b) => planFit(b, profile) - planFit(a, profile))) {
+    console.log(`| ${e.recipe.key} | ${e.Q.toFixed(3)} | ${e.R.toFixed(3)} | ${qBaselineFor(profile, e.recipe.key).toFixed(3)} | ` +
+      `${planFit(e, profile).toFixed(3)} | ${e.essentialFraction.toFixed(2)} | ${e.hasEmptyEssential ? 'yes' : 'no'} | ` +
       `${e.weakest.key} ${e.weakest.supply.toFixed(1)}/${e.weakest.required.toFixed(1)} |`);
   }
 }
@@ -335,7 +339,9 @@ function main(): void {
   const coi = process.argv.indexOf('--control');
   if (coi > 0) {
     const chi = process.argv.indexOf('--cohort');
-    control(process.argv[coi + 1], chi > 0 ? (process.argv[chi + 1] as SampleCohort) : 'holdout');
+    const pri = process.argv.indexOf('--profile');
+    control(process.argv[coi + 1], chi > 0 ? (process.argv[chi + 1] as SampleCohort) : 'holdout',
+      pri > 0 && process.argv[pri + 1] === 'brawl' ? 'brawl' : 'commander');
     return;
   }
   const wi = process.argv.indexOf('--win');

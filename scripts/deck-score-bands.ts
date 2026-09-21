@@ -17,14 +17,14 @@
  * score-version bump.
  */
 import { loadStandardCohorts, loadStandardDbFixture, loadCedhCohort } from './deck-score-fixtures';
-import { loadMatchedPiles, loadCohortPiles, strideOrder, readCommanderSample, cardsByName, COHORT_SEED, HOLDOUT_EVERY, type SampleCohort } from './deck-score-piles';
+import { loadMatchedPiles, loadCohortPiles, strideOrder, readSample, cardsByName, cohortSeed, HOLDOUT_EVERY, type SampleCohort, type SampleProfile } from './deck-score-piles';
 import { scoreDeck } from '../src/lib/deck-score';
 import type { DbCard } from '../src/lib/types';
 import { deriveCardFeature } from '../src/lib/deck-score-features';
-import { typalTheme, typalRecipe, evaluatePlan, evaluateTypal, evaluateClosing, isManlandFinisher, recipesFor, selectPlan, CLOSING_SUPPORT_BAND } from '../src/lib/deck-score-plans';
+import { typalTheme, typalRecipe, evaluatePlan, evaluateTypal, evaluateClosing, isManlandFinisher, recipesFor, selectPlan, planFit, CLOSING_SUPPORT_BAND } from '../src/lib/deck-score-plans';
 import { PLAN_RECIPES, recipeFor, qBaselineFor, betterPlan, COMMANDER_BAND_REFERENCE, type PlanKey, type PlanRecipe } from '../src/lib/deck-score-plans';
 import { producerUtilisation } from '../src/lib/deck-score-producers';
-import { Q_BASELINE_JOINT_COMMANDER, Q_SATURATION, normsFor, type ScoreProfile } from '../src/lib/deck-score-norms';
+import { Q_BASELINE, Q_BASELINE_JOINT_COMMANDER, Q_BASELINE_JOINT_BRAWL, Q_SATURATION, normsFor, type ScoreProfile } from '../src/lib/deck-score-norms';
 import { clip } from '../src/lib/deck-score-math';
 import { computeInteraction, computeAdvantage } from '../src/lib/deck-score-interaction';
 import { computeWin } from '../src/lib/deck-score-win';
@@ -91,7 +91,9 @@ function probe(deckId: number): void {
  * measurement, because a role with a deadline is otherwise given a floor that
  * counts copies the scorer then refuses to cast.
  */
-function evaluatedSupply(nonLand: DeckEntry[], N: number, recipe: PlanRecipe, raw: boolean): Map<string, number> {
+function evaluatedSupply(
+  nonLand: DeckEntry[], N: number, recipe: PlanRecipe, raw: boolean, profile: SampleProfile = 'commander',
+): Map<string, number> {
   // `raw` lifts ONLY the typed-coverage gate, so the evaluated bands describe
   // the same card population the v1.2 raw bands did. Corpus coverage is a
   // property of the catalogue's size, not of the decks: gating here would
@@ -99,7 +101,7 @@ function evaluatedSupply(nonLand: DeckEntry[], N: number, recipe: PlanRecipe, ra
   const entries = raw
     ? nonLand.map((e) => ({ ...e, feature: { ...e.feature, covered: true } }))
     : nonLand;
-  const evaluation = evaluatePlan(recipe, N, entries, [], undefined, 'commander');
+  const evaluation = evaluatePlan(recipe, N, entries, [], undefined, profile);
   return new Map(evaluation.roles.map((r) => [r.role.key, r.supply]));
 }
 
@@ -109,16 +111,19 @@ function evaluatedSupply(nonLand: DeckEntry[], N: number, recipe: PlanRecipe, ra
  * acceptance controls are drawn from. The order is `strideOrder`'s round-robin
  * over commanders, so a truncated run is still commander-balanced.
  */
-function cohortSample(cohort: SampleCohort | 'all'): SampleDeckWithIndex[] {
-  const sample = readCommanderSample();
+function cohortSample(cohort: SampleCohort | 'all', profile: SampleProfile = 'commander'): SampleDeckWithIndex[] {
+  const sample = readSample(profile);
   if (cohort === 'all') return sample.map((deck, i) => ({ deck, i }));
   return strideOrder(cohort, sample).map((i) => ({ deck: sample[i], i }));
 }
-type SampleDeckWithIndex = { deck: ReturnType<typeof readCommanderSample>[number]; i: number };
+type SampleDeckWithIndex = { deck: ReturnType<typeof readSample>[number]; i: number };
 
-function commanderBands(raw: boolean, evaluated = false, cohort: SampleCohort | 'all' = 'training'): void {
+function commanderBands(
+  raw: boolean, evaluated = false, cohort: SampleCohort | 'all' = 'training',
+  profile: SampleProfile = 'commander',
+): void {
   const byName = cardsByName();
-  const decks = cohortSample(cohort).map((r) => r.deck);
+  const decks = cohortSample(cohort, profile).map((r) => r.deck);
   const buckets = Object.fromEntries(PLAN_RECIPES.map((r) => [r.key, [] as DeckEntry[][]])) as Record<PlanKey, DeckEntry[][]>;
   const deckSize = new Map<DeckEntry[], number>();
   let unresolved = 0;
@@ -141,7 +146,7 @@ function commanderBands(raw: boolean, evaluated = false, cohort: SampleCohort | 
     deckSize.set(nonLand, entries.reduce((a, e) => a + e.quantity, 0));
   }
 
-  const lines = [`commander sample (${cohort} cohort): ${decks.length} decks, ${resolvedDecks} resolved, ${unresolved} unresolved card rows, ${new Set(decks.map((d) => d.commander.toLowerCase())).size} distinct commanders`];
+  const lines = [`${profile} sample (${cohort} cohort): ${decks.length} decks, ${resolvedDecks} resolved, ${unresolved} unresolved card rows, ${new Set(decks.map((d) => d.commander.toLowerCase())).size} distinct commanders`];
   for (const recipe of PLAN_RECIPES) {
     const cohort = buckets[recipe.key];
     lines.push('', `## ${recipe.key} (n=${cohort.length}) — ${recipe.label}`);
@@ -158,7 +163,7 @@ function commanderBands(raw: boolean, evaluated = false, cohort: SampleCohort | 
     // that recipe.
     const evaluatedRows = evaluated
       ? cohort
-        .map((nonLand) => ({ nonLand, supply: evaluatedSupply(nonLand, deckSize.get(nonLand) ?? COMMANDER_BAND_REFERENCE, recipe, raw) }))
+        .map((nonLand) => ({ nonLand, supply: evaluatedSupply(nonLand, deckSize.get(nonLand) ?? COMMANDER_BAND_REFERENCE, recipe, raw, profile) }))
         .filter(({ supply }) => recipe.roles.every((r) => !r.essential || (supply.get(r.key) ?? 0) > 0))
         .map(({ supply }) => supply)
       : [];
@@ -171,7 +176,9 @@ function commanderBands(raw: boolean, evaluated = false, cohort: SampleCohort | 
           .reduce((a, e) => a + e.quantity, 0))
       ).sort((a, b) => a - b);
       const f = (x: number) => (Number.isFinite(x) ? (evaluated ? x.toFixed(1) : String(x)) : '-');
-      lines.push(`| ${role.key} | ${f(pct(supplies, 10))} | ${f(pct(supplies, 25))} | ${f(pct(supplies, 50))} | ${f(pct(supplies, 75))} | ${f(pct(supplies, 90))} | ${role.cmd ? `${role.cmd.min}/${role.cmd.max}` : `${role.min}/${role.max} (60-card)`} |`);
+      const frozen = profile === 'brawl' ? role.brawl ?? role.cmd : role.cmd;
+      const label = profile === 'brawl' && !role.brawl ? ' (cmd)' : '';
+      lines.push(`| ${role.key} | ${f(pct(supplies, 10))} | ${f(pct(supplies, 25))} | ${f(pct(supplies, 50))} | ${f(pct(supplies, 75))} | ${f(pct(supplies, 90))} | ${frozen ? `${frozen.min}/${frozen.max}${label}` : `${role.min}/${role.max} (60-card)`} |`);
     }
   }
   console.log(lines.join('\n'));
@@ -179,11 +186,11 @@ function commanderBands(raw: boolean, evaluated = false, cohort: SampleCohort | 
 
 /** p25/p90 of the dynamic typal recipe's roles, over the sample decks that
  * actually name a countable theme. */
-function typalBands(): void {
+function typalBands(profile: SampleProfile = 'commander'): void {
   const byName = cardsByName();
   const rows: Record<string, number[]> = { payoff: [], enabler: [] };
   let decks = 0;
-  for (const { deck } of cohortSample('training')) {
+  for (const { deck } of cohortSample('training', profile)) {
     const entries: DeckEntry[] = [];
     let missing = 0;
     for (const line of deck.cards) {
@@ -204,7 +211,7 @@ function typalBands(): void {
         .reduce((a, e) => a + e.quantity, 0));
     }
   }
-  console.log(`typal cohort: ${decks} decks`);
+  console.log(`typal cohort (${profile}): ${decks} decks`);
   console.log('| role | p10 | p25 | median | p75 | p90 |');
   for (const [k, v] of Object.entries(rows)) {
     v.sort((a, b) => a - b);
@@ -225,7 +232,9 @@ function typalBands(): void {
 
 const GENERIC: PlanKey[] = ['aggro', 'midrange', 'control'];
 
-function genericQ(input: Parameters<typeof scoreDeck>[0]): { q: number; key: PlanKey; coverage: number } {
+function genericQ(
+  input: Parameters<typeof scoreDeck>[0], profile: SampleProfile = 'commander',
+): { q: number; key: PlanKey; coverage: number } {
   const entries: DeckEntry[] = input.main.map((rc) => ({ feature: deriveCardFeature(rc.card), quantity: rc.quantity }));
   const nonLand = entries.filter((e) => !e.feature.isLand);
   const commanders: DeckEntry[] = input.commander.map((c) => ({ feature: deriveCardFeature(c), quantity: 1 }));
@@ -233,7 +242,7 @@ function genericQ(input: Parameters<typeof scoreDeck>[0]): { q: number; key: Pla
   const util = producerUtilisation(nonLand, commanders);
   let best = { q: 0, key: GENERIC[0] };
   for (const key of GENERIC) {
-    const evaluation = evaluatePlan(recipeFor(key), N, nonLand, commanders, util, 'commander');
+    const evaluation = evaluatePlan(recipeFor(key), N, nonLand, commanders, util, profile);
     if (evaluation.Q > best.q) best = { q: evaluation.Q, key };
   }
   const F = nonLand.reduce((a, e) => a + e.quantity, 0);
@@ -252,10 +261,13 @@ function genericQ(input: Parameters<typeof scoreDeck>[0]): { q: number; key: Pla
  * `typal` is derived per deck and `combo` from the assembled closing line, so
  * both are evaluated through their own constructors rather than PLAN_RECIPES.
  */
-function engineFloors(n: number): void {
+function engineFloors(n: number, profile: SampleProfile = 'commander'): void {
+  // The coverage target is the Commander reference cohort's median in BOTH
+  // profiles: it is a property of the catalogue, not of the format, and no
+  // reviewed Brawl cohort exists to measure a separate one from.
   const positives = loadCedhCohort().map((d) => genericQ(d.input).coverage).sort((a, b) => a - b);
   const target = pct(positives, 50);
-  const piles = loadCohortPiles('training', n, target);
+  const piles = loadCohortPiles('training', n, target, profile);
   const generic = new Set<PlanKey>(['aggro', 'midrange', 'control']);
   const families = PLAN_RECIPES.filter((r) => !generic.has(r.key));
   const perFamily = new Map<string, number[]>(families.map((r) => [r.key, []]));
@@ -278,10 +290,10 @@ function engineFloors(n: number): void {
       reads.push({ key, Q: e.Q, R: e.R, selectable: !e.hasEmptyEssential, group });
       if (group === 'engine' && !e.hasEmptyEssential) perFamily.get(key)?.push(e.Q);
     };
-    for (const recipe of families) record(recipe.key, evaluatePlan(recipe, N, nonLand, cmd, util, 'commander'), 'engine');
-    const typal = evaluateTypal(N, nonLand, cmd, util, 'commander');
+    for (const recipe of families) record(recipe.key, evaluatePlan(recipe, N, nonLand, cmd, util, profile), 'engine');
+    const typal = evaluateTypal(N, nonLand, cmd, util, profile);
     if (typal) record('typal', typal, 'engine');
-    for (const key of GENERIC) record(key, evaluatePlan(recipeFor(key), N, nonLand, cmd, util, 'commander'), 'generic');
+    for (const key of GENERIC) record(key, evaluatePlan(recipeFor(key), N, nonLand, cmd, util, profile), 'generic');
     perPile.push(reads);
   }
 
@@ -297,8 +309,8 @@ function engineFloors(n: number): void {
   const maxJoint = maxOf('all');
 
   const lines = [
-    `matched Commander negative controls: n=${piles.length}, cohort training (commander-disjoint stride, ` +
-      `${new Set(piles.map((p) => p.commander)).size} distinct commanders), seed base 0x${COHORT_SEED.training.toString(16)}, ` +
+    `matched ${profile} negative controls: n=${piles.length}, cohort training (commander-disjoint stride, ` +
+      `${new Set(piles.map((p) => p.commander)).size} distinct commanders), seed base 0x${cohortSeed('training', profile).toString(16)}, ` +
       `coverage target ${target.toFixed(3)}`,
     '',
     '| family | selectable n | Q p50 | Q p90 | Q p95 (= floor) | Q p99 | Q max | frozen |',
@@ -307,7 +319,7 @@ function engineFloors(n: number): void {
   for (const [key, values] of perFamily) {
     const v = [...values].sort((a, b) => a - b);
     const fmt = (x: number) => (Number.isFinite(x) ? x.toFixed(3) : '-');
-    lines.push(`| ${key} | ${v.length} | ${fmt(pct(v, 50))} | ${fmt(pct(v, 90))} | ${fmt(pct(v, 95))} | ${fmt(pct(v, 99))} | ${fmt(v[v.length - 1])} | ${qBaselineFor('commander', key as PlanKey).toFixed(3)} |`);
+    lines.push(`| ${key} | ${v.length} | ${fmt(pct(v, 50))} | ${fmt(pct(v, 90))} | ${fmt(pct(v, 95))} | ${fmt(pct(v, 99))} | ${fmt(v[v.length - 1])} | ${qBaselineFor(profile, key as PlanKey).toFixed(3)} |`);
   }
   const row = (label: string, v: number[], frozen: string): void => {
     lines.push(`| ${label} | ${v.length} | ${pct(v, 50).toFixed(3)} | ${pct(v, 90).toFixed(3)} | ${pct(v, 95).toFixed(3)} | ${pct(v, 99).toFixed(3)} | ${v[v.length - 1].toFixed(3)} | ${frozen} |`);
@@ -317,7 +329,8 @@ function engineFloors(n: number): void {
   // it. The JOINT row is the only one that bounds the union.
   row('ALL ENGINE (max per pile)', maxEngine, '-');
   row('GENERIC (max per pile)', maxGeneric, '-');
-  row('JOINT (max over all recipes)', maxJoint, Q_BASELINE_JOINT_COMMANDER.toFixed(3));
+  const frozenJoint = profile === 'brawl' ? Q_BASELINE_JOINT_BRAWL : Q_BASELINE_JOINT_COMMANDER;
+  row('JOINT (max over all recipes)', maxJoint, frozenJoint.toFixed(3));
 
   // In-sample leak rate under each candidate, reproducing `planFit` + the
   // selectable-first rule of `betterPlan` from the Q/R already measured.
@@ -334,21 +347,21 @@ function engineFloors(n: number): void {
     const S = sUnder(bg, be).sort((a, b) => a - b);
     lines.push(`| ${label} | ${bg.toFixed(3)} | ${be.toFixed(3)} | ${S.filter((v) => v <= 5).length}/${S.length} | ${pct(S, 50).toFixed(1)} | ${pct(S, 95).toFixed(1)} |`);
   };
-  choice('frozen', Q_BASELINE_JOINT_COMMANDER, Q_BASELINE_JOINT_COMMANDER);
+  choice('frozen', frozenJoint, frozenJoint);
   choice('two floors (per-group p95)', pct(maxGeneric, 95), pct(maxEngine, 95));
   choice('one shared floor (joint p95)', pct(maxJoint, 95), pct(maxJoint, 95));
   console.log(lines.join('\n'));
 }
 
-function negativePrior(n: number): void {
+function negativePrior(n: number, profile: SampleProfile = 'commander'): void {
   // §9.2 "match typed coverage to positives so unknown cards are not the
   // discriminator": the Commander reference cohort is the 30 cEDH Top-16
   // lists, and its MEDIAN typed coverage is what the controls are drawn to.
   const positives = loadCedhCohort().map((d) => genericQ(d.input).coverage).sort((a, b2) => a - b2);
   const target = pct(positives, 50);
 
-  const piles = loadCohortPiles('training', n, target);
-  const rows = piles.map((p) => ({ ...genericQ(p.input), commander: p.commander, lands: p.lands }));
+  const piles = loadCohortPiles('training', n, target, profile);
+  const rows = piles.map((p) => ({ ...genericQ(p.input, profile), commander: p.commander, lands: p.lands }));
   const qs = rows.map((r) => r.q).sort((a, b2) => a - b2);
   const b = pct(qs, 95);
   const pileCoverage = rows.map((r) => r.coverage).sort((a, b2) => a - b2);
@@ -356,7 +369,7 @@ function negativePrior(n: number): void {
   const byKey = GENERIC.map((k) => `${k} ${rows.filter((r) => r.key === k).length}`).join(', ');
 
   console.log([
-    `matched Commander negative controls: n=${rows.length}, ${new Set(rows.map((r) => r.commander)).size} distinct commanders`,
+    `matched ${profile} negative controls: n=${rows.length}, ${new Set(rows.map((r) => r.commander)).size} distinct commanders`,
     `land count p25/median/p90: ${pct(landsSorted, 25)}/${pct(landsSorted, 50)}/${pct(landsSorted, 90)}`,
     `winning generic recipe: ${byKey}`,
     '',
@@ -370,7 +383,7 @@ function negativePrior(n: number): void {
     `| cEDH positive typed coverage median (draw target) | ${target.toFixed(3)} |`,
     `| control typed coverage p25/median/p90 | ${pct(pileCoverage, 25).toFixed(3)}/${pct(pileCoverage, 50).toFixed(3)}/${pct(pileCoverage, 90).toFixed(3)} |`,
     '',
-    `frozen Q_BASELINE_JOINT_COMMANDER = ${Q_BASELINE_JOINT_COMMANDER}` +
+    `frozen ${profile === 'brawl' ? 'Q_BASELINE_JOINT_BRAWL' : 'Q_BASELINE_JOINT_COMMANDER'} = ${profile === 'brawl' ? Q_BASELINE_JOINT_BRAWL : Q_BASELINE_JOINT_COMMANDER}` +
       ` (measured ${b.toFixed(3)}; ${b >= Q_SATURATION ? 'REJECTED: b >= .70' : 'accepted'})`,
     `S <= 5 needs Q <= b + .05*(.70-b) = ${(b + 0.05 * (Q_SATURATION - b)).toFixed(3)} at R = 1.`,
   ].join('\n'));
@@ -381,7 +394,7 @@ function negativePrior(n: number): void {
  * sample lists and seeds disjoint from both the b-training set (offset 0) and
  * the 200 §5 validation piles. Prints the same two counts acceptance asks for.
  */
-function freshControls(n: number, stride: boolean, training = false): void {
+function freshControls(n: number, stride: boolean, training = false, profile: SampleProfile = 'commander'): void {
   // MEASURED CONFOUND. `commander-sample.csv` holds TEN lists per commander in
   // file order, so the contiguous slice at offset 2000 is 200 piles drawn from
   // 22 commanders — 22 clusters, not 200 draws. A floor frozen at the p95 of a
@@ -397,17 +410,17 @@ function freshControls(n: number, stride: boolean, training = false): void {
   // "the floor is a p95 of a different population". The contiguous default is
   // KEPT and reported for information only: it is the stage-3 instrument.
   const piles = training
-    ? loadCohortPiles('training', n, 0.93)
+    ? loadCohortPiles('training', n, 0.93, profile)
     : stride
-      ? loadCohortPiles('holdout', n, 0.93)
-      : loadMatchedPiles(n, 2000, 0xf00d0000, 0.93);
+      ? loadCohortPiles('holdout', n, 0.93, profile)
+      : loadMatchedPiles(n, 2000, 0xf00d0000, 0.93, undefined, profile);
   const scored = piles.map((p) => {
     const r = scoreDeck(p.input);
     const entries: DeckEntry[] = p.input.main.map((rc) => ({ feature: deriveCardFeature(rc.card), quantity: rc.quantity }));
     const nonLand = entries.filter((e) => !e.feature.isLand);
     const cmd: DeckEntry[] = p.input.commander.map((c) => ({ feature: deriveCardFeature(c), quantity: 1 }));
     const N = entries.reduce((a, e) => a + e.quantity, 0);
-    const plan = selectPlan(Math.max(1, N), nonLand, cmd, undefined, 'commander');
+    const plan = selectPlan(Math.max(1, N), nonLand, cmd, undefined, profile);
     // The closing plan is folded in INSIDE `scoreDeck` (after W names a line),
     // so the only place its selection shows is the synergy reason line. A pile
     // must never read as `combo` — §9.5 prices it by completing its own line.
@@ -429,10 +442,10 @@ function freshControls(n: number, stride: boolean, training = false): void {
   const byKey = [...tally].sort((a, b) => b[1] - a[1]).map(([k, v]) => {
     const rows = leaking.filter((r) => r.key === k);
     const qs = rows.map((r) => r.Q).sort((a, b) => a - b);
-    return `${k} ${v} (b=${qBaselineFor('commander', k as PlanKey).toFixed(3)}, Q med ${pct(qs, 50).toFixed(3)})`;
+    return `${k} ${v} (b=${qBaselineFor(profile, k as PlanKey).toFixed(3)}, Q med ${pct(qs, 50).toFixed(3)})`;
   });
   console.log([
-    `fresh matched controls: n=${scored.length}, ${new Set(scored.map((r) => r.commander)).size} distinct commanders`,
+    `fresh matched ${profile} controls: n=${scored.length}, ${new Set(scored.map((r) => r.commander)).size} distinct commanders`,
     `total   min=${totals[0]} median=${pct(totals, 50)} p95=${pct(totals, 95)} max=${totals[totals.length - 1]}  <25: ${totals.filter((v) => v < 25).length}/${totals.length}`,
     `S       min=${syn[0].toFixed(1)} median=${pct(syn, 50).toFixed(1)} p95=${pct(syn, 95).toFixed(1)} max=${syn[syn.length - 1].toFixed(1)}  <=5: ${syn.filter((v) => v <= 5).length}/${syn.length}`,
     `S > 5 by selected recipe: ${byKey.join(', ') || 'none'}`,
@@ -605,30 +618,160 @@ function standardBands(): void {
   console.log(lines.join('\n'));
 }
 
+
+// ── stage 4b: the closing/`combo` floor ───────────────────────────────────
+//
+//   MTG_DB_DIR=... npx tsx scripts/deck-score-bands.ts closingfloor [--n 1000]
+//
+// Every other recipe moved to a measured negative-control floor in stage 4a;
+// `combo` kept `Q_BASELINE` (.30) because §9.5's essential-completion check
+// was taken to be its own floor. It is not: one alternate-win card in a
+// 99-card control gives a single-member pool that is complete BY
+// CONSTRUCTION, so the closing plan reads at a fit of ~.02 while ten priced
+// recipes sit pinned at 0 — and wins. That is the stage-4a 1/200.
+//
+// This prints the SAME joint statistic for `combo` that stage 4a printed for
+// the rest: the distribution of the closing plan's Q over matched controls
+// that assemble any line at all, the resulting p95, and what each candidate
+// rule costs the reviewed cEDH positives (Ballooncon above all, which must
+// stay 80-95 on its real line).
+
+interface ClosingRead {
+  label: string;
+  lineId: string;
+  pieces: number;
+  required: number;
+  Q: number;
+  R: number;
+  fit: number;
+  /** Would the closing plan WIN §1's ordering against the deck's own best
+   * generic/engine reading? That is the acceptance-relevant event. */
+  wins: boolean;
+  total: number;
+}
+
+function closingReadOf(
+  input: Parameters<typeof scoreDeck>[0], label: string, profile: ScoreProfile,
+): ClosingRead | null {
+  const entries: DeckEntry[] = input.main.map((rc) => ({ feature: deriveCardFeature(rc.card), quantity: rc.quantity }));
+  const nonLand = entries.filter((e) => !e.feature.isLand);
+  const cmd: DeckEntry[] = input.commander.map((c) => ({ feature: deriveCardFeature(c), quantity: 1 }));
+  const N = entries.reduce((a, e) => a + e.quantity, 0);
+  const norms = normsFor(input.format);
+  const util = producerUtilisation(nonLand, cmd);
+  const interaction = computeInteraction(input.format, norms, 'midrange', N, entries);
+  const advantage = computeAdvantage(input.format, norms, 'midrange', N, entries);
+  const win = computeWin(input.format, norms, 'midrange', N, entries, cmd.map((e) => e.feature), {
+    E: interaction.E, Estar: interaction.Estar,
+    D: advantage.D, Dstar: advantage.Dstar, hasDrawEngine: advantage.hasDrawEngine,
+  });
+  if (!win.closing) return null;
+  const closing = evaluateClosing(win.closing, nonLand, cmd, util, profile,
+    win.closingLines.filter((l) => l.id !== win.closing?.id));
+  const base = selectPlan(Math.max(1, N), nonLand, cmd, util, profile);
+  const scored = scoreDeck(input);
+  return {
+    label, lineId: win.closing.id, pieces: win.closing.pieces.length, required: win.closing.required,
+    Q: closing.Q, R: closing.R, fit: planFit(closing, profile),
+    wins: betterPlan(base, closing, profile) === closing,
+    total: scored.score,
+  };
+}
+
+function closingFloor(n: number, profile: SampleProfile = 'commander', cohort: SampleCohort = 'training'): void {
+  const piles = loadCohortPiles(cohort, n, 0.93, profile);
+  const controls = piles
+    .map((p) => closingReadOf(p.input, `${p.commander} (${p.sampleId})`, profile))
+    .filter((r): r is ClosingRead => r !== null);
+  const positives = loadCedhCohort()
+    .map((d, i) => closingReadOf(d.input, `cedh-${i}`, 'commander'))
+    .filter((r): r is ClosingRead => r !== null);
+
+  const qs = controls.map((r) => r.Q).sort((a, b) => a - b);
+  const winners = controls.filter((r) => r.wins);
+  const winnerQs = winners.map((r) => r.Q).sort((a, b) => a - b);
+  const posQs = positives.map((r) => r.Q).sort((a, b) => a - b);
+  const lines = [
+    `closing reads over matched ${profile} ${cohort} controls: ${controls.length}/${piles.length} assemble a line, ` +
+      `${winners.length} would WIN §1 ordering; reviewed cEDH positives ${positives.length}/30`,
+    '',
+    '| population | n | Q p50 | Q p90 | Q p95 | Q p99 | Q max |',
+    '|---|---:|---:|---:|---:|---:|---:|',
+  ];
+  const row = (label: string, v: number[]): void => {
+    if (v.length === 0) { lines.push(`| ${label} | 0 | - | - | - | - | - |`); return; }
+    lines.push(`| ${label} | ${v.length} | ${pct(v, 50).toFixed(3)} | ${pct(v, 90).toFixed(3)} | ` +
+      `${pct(v, 95).toFixed(3)} | ${pct(v, 99).toFixed(3)} | ${v[v.length - 1].toFixed(3)} |`);
+  };
+  row('controls that assemble a line', qs);
+  row('controls whose closing plan WINS', winnerQs);
+  row('reviewed cEDH positives', posQs);
+
+  // Candidate A: a floor at the control p95, the stage-4a statistic.
+  // Candidate B: refuse a single-card pool as an assembled line (r = 1 with a
+  // one-member pool is complete by construction, never by deck-building).
+  const floorA = pct(qs, 95);
+  lines.push('', '| candidate rule | controls still winning | cEDH positives still reading combo | note |', '|---|---:|---:|---|');
+  const underFloor = (b: number): ClosingRead[] =>
+    controls.filter((r) => r.wins && clip((r.Q - b) / (Q_SATURATION - b)) * r.R > 0);
+  lines.push(`| frozen today (b = ${Q_BASELINE.toFixed(3)}) | ${winners.length} | ` +
+    `${positives.filter((r) => r.wins).length} | the stage-4a 1/200 |`);
+  lines.push(`| A: b = control p95 = ${floorA.toFixed(3)} | ${underFloor(floorA).length} | ` +
+    `${positives.filter((r) => r.wins && clip((r.Q - floorA) / (Q_SATURATION - floorA)) * r.R > 0).length} | ` +
+    `positives below the floor lose their closing plan |`);
+  const oneCard = controls.filter((r) => r.wins && r.pieces <= 1);
+  lines.push(`| B: refuse a one-CARD pool (pieces <= 1) | ${winners.length - oneCard.length} | ` +
+    `${positives.filter((r) => r.wins && r.pieces > 1).length} | ` +
+    `${positives.filter((r) => r.wins && r.pieces <= 1).length} positive(s) have a one-card pool |`);
+
+  lines.push('', '| winning control | line | pieces | r | Q | R | fit | total |', '|---|---|---:|---:|---:|---:|---:|---:|');
+  for (const r of winners.sort((a, b) => b.Q - a.Q).slice(0, 20)) {
+    lines.push(`| ${r.label} | ${r.lineId} | ${r.pieces} | ${r.required} | ${r.Q.toFixed(3)} | ` +
+      `${r.R.toFixed(3)} | ${r.fit.toFixed(3)} | ${r.total} |`);
+  }
+  lines.push('', '| cEDH positive | line | pieces | r | Q | R | fit | wins | total |', '|---|---|---:|---:|---:|---:|---:|---|---:|');
+  for (const r of positives.sort((a, b) => a.Q - b.Q)) {
+    lines.push(`| ${r.label} | ${r.lineId} | ${r.pieces} | ${r.required} | ${r.Q.toFixed(3)} | ` +
+      `${r.R.toFixed(3)} | ${r.fit.toFixed(3)} | ${r.wins ? 'yes' : 'no'} | ${r.total} |`);
+  }
+  console.log(lines.join('\n'));
+}
+
 function main(): void {
-  if (process.argv.includes('typal')) { typalBands(); return; }
+  // `--profile brawl` swaps the corpus, the draw legality and the scored
+  // format everywhere below; the default is the Commander corpus, so every
+  // stage-1..4a command line keeps its meaning.
+  const pArg = process.argv.indexOf('--profile');
+  const profile: SampleProfile = pArg > 0 && process.argv[pArg + 1] === 'brawl' ? 'brawl' : 'commander';
+  if (process.argv.includes('typal')) { typalBands(profile); return; }
+  if (process.argv.includes('closingfloor')) {
+    const fArg = process.argv.indexOf('--n');
+    closingFloor(fArg > 0 ? Number(process.argv[fArg + 1]) : 1000, profile,
+      process.argv.includes('--stride') ? 'holdout' : 'training');
+    return;
+  }
   if (process.argv.includes('closing')) { closingBands(); return; }
   if (process.argv.includes('cedh')) { cedhSplit(); return; }
   if (process.argv.includes('commander')) {
     const cohort: SampleCohort | 'all' = process.argv.includes('--all')
       ? 'all' : process.argv.includes('--holdout') ? 'holdout' : 'training';
-    commanderBands(process.argv.includes('--raw'), process.argv.includes('--evaluated'), cohort);
+    commanderBands(process.argv.includes('--raw'), process.argv.includes('--evaluated'), cohort, profile);
     return;
   }
   if (process.argv.includes('controls')) {
     const cArg = process.argv.indexOf('--n');
     freshControls(cArg > 0 ? Number(process.argv[cArg + 1]) : 200,
-      process.argv.includes('--stride'), process.argv.includes('--training'));
+      process.argv.includes('--stride'), process.argv.includes('--training'), profile);
     return;
   }
   if (process.argv.includes('negative')) {
     const nArg = process.argv.indexOf('--n');
     const n = nArg > 0 ? Number(process.argv[nArg + 1]) : 1000;
     if (process.argv.includes('--engine') || process.argv.includes('--joint')) {
-      engineFloors(n);
+      engineFloors(n, profile);
       return;
     }
-    negativePrior(n);
+    negativePrior(n, profile);
     return;
   }
   const probeArg = process.argv.indexOf('--probe');
