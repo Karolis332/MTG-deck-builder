@@ -1,0 +1,29 @@
+{
+  "frozenAt": "2026-09-21",
+  "scoreVersion": "1.3.0-rc2",
+  "catalogVersion": "fdcecb38",
+  "catalogSize": 14924,
+  "catalogSha256": "21fa0be02940c884620b08cfd3cbf9558fb42abf1f7d31428c38fda167da2c6b",
+  "combosSha256": "19acb60cf6b088f831c4e8a671e8ac7e7a63da6441ca34d56c15afb8bb5d8a82",
+  "planRecipes": [
+    "aggro",
+    "aristocrats",
+    "control",
+    "conversion",
+    "counters",
+    "lifegain",
+    "midrange",
+    "recursion",
+    "spells",
+    "tokens"
+  ],
+  "winFamilies": [
+    "alt_win",
+    "combat_tall",
+    "combat_wide",
+    "combo",
+    "control",
+    "drain",
+    "tokens"
+  ]
+}

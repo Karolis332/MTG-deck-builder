@@ -13,6 +13,45 @@ const P = { source: 'oracle text, card data 2026-09-19', reviewedBy: 'deck-score
 
 export const CEDH_COMBOS_B6: readonly CatalogEntry[] = [
   {
+    canonicalName: 'Protean Hulk',
+    oracleText: 'When this creature dies, search your library for any number of creature cards with total mana value 6 or less, put them onto the battlefield, then shuffle.',
+    provenance: P, knowledge: 'known',
+    effects: [{
+      family: 'tutor', mode: 'triggered', controller: 'self', zones: ['battlefield', 'graveyard', 'library'],
+      prerequisites: ['a way to make this creature die'],
+      cost: { mana: 7, colored: ['G', 'G'] },
+      timing: { earliestTurn: 7 },
+      produces: ['creature package onto the battlefield'],
+      outputBounds: { min: 1, max: 6, unit: 'mana value of creatures fetched' },
+    }],
+  },
+  {
+    canonicalName: 'Animate Dead',
+    oracleText: 'Enchant creature card in a graveyard\nWhen this Aura enters, if it\'s on the battlefield, it loses "enchant creature card in a graveyard" and gains "enchant creature put onto the battlefield with this Aura." Return enchanted creature card to the battlefield under your control and attach this Aura to it. When this Aura leaves the battlefield, that creature\'s controller sacrifices it.\nEnchanted creature gets -1/-0.',
+    provenance: P, knowledge: 'known',
+    effects: [{
+      family: 'engine', mode: 'etb', controller: 'self', zones: ['graveyard', 'battlefield'],
+      prerequisites: ['a creature card in a graveyard'],
+      cost: { mana: 2, colored: ['B'] },
+      timing: { earliestTurn: 2 },
+      produces: ['creature reanimation'],
+      outputBounds: { min: 1, max: 1, unit: 'creatures returned' },
+    }],
+  },
+  {
+    canonicalName: 'Necromancy',
+    oracleText: 'You may cast this spell as though it had flash. If you cast it any time a sorcery couldn\'t have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.\nWhen this enchantment enters, if it\'s on the battlefield, it becomes an Aura with "enchant creature put onto the battlefield with Necromancy." Put target creature card from a graveyard onto the battlefield under your control and attach this enchantment to it. When this enchantment leaves the battlefield, that creature\'s controller sacrifices it.',
+    provenance: P, knowledge: 'known',
+    effects: [{
+      family: 'engine', mode: 'etb', controller: 'self', zones: ['graveyard', 'battlefield'],
+      prerequisites: ['a creature card in a graveyard'],
+      cost: { mana: 3, colored: ['B'] },
+      timing: { earliestTurn: 3 },
+      produces: ['creature reanimation'],
+      outputBounds: { min: 1, max: 1, unit: 'creatures returned' },
+    }],
+  },
+  {
     canonicalName: 'Vizier of Remedies',
     oracleText: 'If one or more -1/-1 counters would be put on a creature you control, that many -1/-1 counters minus one are put on it instead.',
     provenance: P, knowledge: 'known',

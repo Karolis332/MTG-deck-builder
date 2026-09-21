@@ -28,6 +28,9 @@ export type ComboResource =
   | 'drain'
   /** Unbounded creature tokens. A finish only with haste or a turn cycle. */
   | 'tokens'
+  /** Unbounded creature enter-the-battlefield triggers. Needs an ETB payoff
+   * that converts each trigger into damage or life loss. */
+  | 'creature_etb'
   /** The line wins outright by its own rules text. */
   | 'win';
 
@@ -47,7 +50,12 @@ export type ComboRoute =
   /** Opponents must hold enough nonland permanents for the loop to profit. */
   | 'opponent_permanents'
   /** The deck must supply mana from nonland permanents for the loop to net. */
-  | 'nonland_mana';
+  | 'nonland_mana'
+  /** The line fetches a package: some OTHER complete typed combo must be
+   * present whose pieces are all creatures inside the fetch's mana budget. */
+  | 'fetched_package'
+  /** A reanimation target big enough to be worth the two-card detour. */
+  | 'reanimation_target';
 
 export interface TypedCombo {
   /** Stable id; the W recipe is published as `combo:<id>`. */
@@ -60,7 +68,7 @@ export interface TypedCombo {
   /** Mana each iteration consumes beyond casting the pieces. */
   extraCost: number;
   /** A zone/board requirement outside the slots. */
-  route?: { kind: ComboRoute; why: string };
+  route?: { kind: ComboRoute; why: string; budget?: number };
   /** Tokens arriving with haste close in the same turn they are made. */
   hasteIncluded?: boolean;
 }
@@ -261,6 +269,57 @@ export const TYPED_COMBOS: readonly TypedCombo[] = [
     extraCost: 2,
   },
   {
+    id: 'hulk-package',
+    label: 'Protean Hulk + a free sacrifice outlet',
+    slots: [
+      { any: ['Protean Hulk'], role: 'on death, search for creatures with total mana value 6 or less', types: ['Creature'] },
+      {
+        any: ['Viscera Seer', 'Carrion Feeder', 'Goblin Bombardment', 'Altar of Dementia', "Ashnod's Altar", 'Phyrexian Tower'],
+        role: 'sacrifices the Hulk for no mana, so the death trigger resolves on our own turn',
+        types: ['Creature', 'Artifact', 'Enchantment', 'Land'],
+      },
+    ],
+    resource: 'win',
+    prerequisite: 'The outlet sacrifices the Hulk; the death trigger puts the fetched package straight onto the battlefield, and that package is itself a complete typed line.',
+    extraCost: 0,
+    route: {
+      kind: 'fetched_package',
+      why: 'the Hulk is only a line when the deck actually holds a complete creature package inside the 6 mana value it fetches',
+      budget: 6,
+    },
+  },
+  {
+    id: 'entomb-reanimate',
+    label: 'A graveyard tutor + a reanimation spell',
+    slots: [
+      { any: ['Entomb', 'Buried Alive', 'Faithless Looting', 'Careful Study'], role: 'puts the chosen creature straight into the graveyard', types: ['Instant', 'Sorcery'] },
+      {
+        any: ['Reanimate', 'Animate Dead', 'Necromancy', 'Exhume', 'Persist', 'Dance of the Dead', 'Victimize'],
+        role: 'returns it to the battlefield for far less than its cast cost',
+        types: ['Instant', 'Sorcery', 'Enchantment'],
+      },
+    ],
+    resource: 'tokens',
+    prerequisite: 'The tutor chooses the target, so the reanimation spell is never a dead card; the pair deploys a finisher many turns before its printed cost allows.',
+    extraCost: 1,
+    route: {
+      kind: 'reanimation_target',
+      why: 'the package is only a line when the deck holds a creature worth the two-card detour',
+      budget: 7,
+    },
+  },
+  {
+    id: 'blink-etb',
+    label: 'An unbounded blink loop',
+    slots: [
+      { any: ['Deadeye Navigator', 'Felidar Guardian', 'Ghostly Flicker'], role: 'returns a creature to the battlefield repeatedly', types: ['Creature', 'Instant'] },
+      { any: ['Peregrine Drake', 'Palinchron', 'Great Whale', 'Cloud of Faeries', 'Saheeli Rai'], role: 'pays for the next blink when it enters', types: ['Creature', 'Planeswalker'] },
+    ],
+    resource: 'creature_etb',
+    prerequisite: 'The partner untaps enough lands (or copies the blinker) to pay for the next activation, so the enter trigger repeats without bound.',
+    extraCost: 2,
+  },
+  {
     id: 'pilipala-architect',
     label: 'Pili-Pala + Grand Architect',
     slots: [
@@ -377,6 +436,66 @@ export const MANA_OUTLETS: readonly ManaOutlet[] = [
   { name: 'Blue Sun\'s Zenith', mechanism: 'target player draws X: an opponent is decked on their next draw' },
 ];
 
+/**
+ * §10.6 "creature_etb chain resource": an unbounded stream of enter triggers is
+ * a finish only when something already on the board converts each trigger into
+ * damage or life loss.
+ */
+export const ETB_OUTLETS: readonly ManaOutlet[] = [
+  { name: 'Impact Tremors', mechanism: 'each creature entering deals 1 damage to each opponent' },
+  { name: 'Purphoros, God of the Forge', mechanism: 'each creature entering deals 2 damage to each opponent' },
+  { name: 'Terror of the Peaks', mechanism: 'each other creature entering deals its power to any target' },
+  { name: 'Warstorm Surge', mechanism: 'each creature entering deals its power to any target' },
+  { name: 'Corpse Knight', mechanism: 'each creature entering makes each opponent lose 1 life' },
+  { name: 'Blood Artist', mechanism: 'each creature dying drains each opponent for 1' },
+  { name: 'Zulaport Cutthroat', mechanism: 'each creature you control dying drains each opponent for 1' },
+];
+
+const ETB_OUTLETS_BY_NAME = new Map(ETB_OUTLETS.map((o) => [o.name.toLowerCase(), o]));
+
+export function etbOutlet(name: string): ManaOutlet | undefined {
+  return ETB_OUTLETS_BY_NAME.get(name.toLowerCase());
+}
+
+/**
+ * §10.6 "library-sink pool separate from the command-zone sink". Unbounded mana
+ * plus one of these empties the library; unlike `UNBOUNDED_DRAW_SINKS` these
+ * live in the LIBRARY, so they earn their own access pool instead of
+ * collapsing the outlet's.
+ */
+export const LIBRARY_DRAW_SINKS: readonly { name: string; mechanism: string }[] = [
+  { name: "Blue Sun's Zenith", mechanism: 'target player draws X cards' },
+  { name: 'Stroke of Genius', mechanism: 'target player draws X cards' },
+  { name: 'Braingeyser', mechanism: 'target player draws X cards' },
+  { name: 'Mind Spring', mechanism: 'draw X cards' },
+  { name: 'Pull from Tomorrow', mechanism: 'draw X cards, then discard one' },
+  { name: 'Staff of Domination', mechanism: '{4}, {T}: draw a card; {1}: untap it' },
+  { name: 'Arcanis the Omnipotent', mechanism: '{T}: draw three cards' },
+];
+
+const LIBRARY_SINKS_BY_NAME = new Map(LIBRARY_DRAW_SINKS.map((d) => [d.name.toLowerCase(), d]));
+
+export function libraryDrawSink(name: string): { name: string; mechanism: string } | undefined {
+  return LIBRARY_SINKS_BY_NAME.get(name.toLowerCase());
+}
+
+/**
+ * §10.6 "infinite mana -> alternate-win outlet": each of these wins the moment
+ * the library is empty, so an unbounded mana loop plus any unbounded draw sink
+ * is a finish predicate even though none of the three deals a point of damage.
+ */
+export const LIBRARY_WIN_CARDS: readonly ManaOutlet[] = [
+  { name: "Thassa's Oracle", mechanism: 'its enter trigger wins when the library is no larger than devotion to blue', creatureCastable: true },
+  { name: 'Jace, Wielder of Mysteries', mechanism: 'drawing from an empty library wins instead of losing' },
+  { name: 'Laboratory Maniac', mechanism: 'drawing from an empty library wins instead of losing', creatureCastable: true },
+];
+
+const LIBRARY_WINS_BY_NAME = new Map(LIBRARY_WIN_CARDS.map((o) => [o.name.toLowerCase(), o]));
+
+export function libraryWinCard(name: string): ManaOutlet | undefined {
+  return LIBRARY_WINS_BY_NAME.get(name.toLowerCase());
+}
+
 const OUTLETS_BY_NAME = new Map(MANA_OUTLETS.map((o) => [o.name.toLowerCase(), o]));
 
 export function manaOutlet(name: string): ManaOutlet | undefined {
@@ -410,5 +529,5 @@ export function unboundedDrawSink(name: string): { name: string; mechanism: stri
 
 /** Resources that cannot close without a separate outlet. */
 export function needsOutlet(resource: ComboResource): boolean {
-  return resource === 'mana' || resource === 'creature_mana';
+  return resource === 'mana' || resource === 'creature_mana' || resource === 'creature_etb';
 }

@@ -100,8 +100,11 @@ const CORPUS_COVERAGE = {
 /** The same statistic over the 200-list prefix the tests can afford to run
  * (the full pass is 4 minutes). A prefix of a round-robin stride is
  * commander-balanced, so it tracks the full corpus within ~3 points. */
+// v1.4 stage 1b added three curated entries (`Protean Hulk`, `Animate Dead`,
+// `Necromancy`) for the reanimation and fetched-package combo routes. All three
+// are common Commander cards, so the Commander >= 80% share moved .295 -> .31.
 const PREFIX_COVERAGE: Record<SampleProfile, { p50: number; over80: number }> = {
-  commander: { p50: 0.754, over80: 0.295 },
+  commander: { p50: 0.754, over80: 0.31 },
   brawl: { p50: 0.741, over80: 0.250 },
 };
 
@@ -185,8 +188,12 @@ describe('coverage round 1 — real-list typed coverage', () => {
     const cmd = prefixStats('commander');
     const brawl = prefixStats('brawl');
     const zeroShare = (v: number[]): number => v.filter((x) => x <= 0.05).length / v.length;
-    expect(zeroShare(cmd.S)).toBeCloseTo(0.86, 2);
-    expect(zeroShare(brawl.S)).toBeCloseTo(0.940, 2);
+    // v1.4 stage 1b: .86 -> .83. S's plan can be the closing/tutor recipe the
+    // assembled win line publishes, so the three new W families (Protean Hulk
+    // packages, Buried Alive reanimation, creature-ETB loops) give ~3% of real
+    // Commander lists a supported plan they did not have. The MISS stands.
+    expect(zeroShare(cmd.S)).toBeCloseTo(0.83, 2);
+    expect(zeroShare(brawl.S)).toBeCloseTo(0.925, 2);   // .940 -> .925, same cause
     expect(zeroShare(cmd.S)).toBeGreaterThan(0.30);
     // Both medians sit on the 20 floor for the same reason.
     expect(pct(cmd.totals, 50)).toBe(20);

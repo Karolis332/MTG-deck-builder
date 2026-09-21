@@ -16,7 +16,7 @@ import { normsFor } from '../src/lib/deck-score-norms';
 import { deriveCardFeature } from '../src/lib/deck-score-features';
 import type { DeckEntry } from '../src/lib/deck-score-mana';
 import { computeInteraction, computeAdvantage } from '../src/lib/deck-score-interaction';
-import { winDiagnostic, computeWin } from '../src/lib/deck-score-win';
+import { winDiagnostic, computeWin, winAudit } from '../src/lib/deck-score-win';
 import { loadDataset, loadCedhCohort, FIXTURES } from './deck-score-fixtures';
 
 function entriesOf(input: DeckScoreInput): { N: number; all: DeckEntry[]; cmd: DeckEntry[] } {
@@ -54,6 +54,10 @@ function trace(label: string, input: DeckScoreInput, verbose: boolean): void {
     }
   }
   if (verbose) console.log(winDiagnostic(fmt, norms, 'midrange', N, all, cmdFeatures, totals));
+  if (verbose) {
+    const { notes } = winAudit(fmt, norms, 'midrange', N, all, cmdFeatures, totals);
+    for (const n of notes) console.log(`  rejected ${n.family}: ${n.code} — ${n.detail}`);
+  }
   console.log('');
 }
 

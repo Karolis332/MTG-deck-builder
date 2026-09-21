@@ -14,7 +14,7 @@ import {
   typalTheme, typalRecipe, subtypesOf,
   COMMANDER_BAND_REFERENCE, PLAN_RECIPES,
 } from '../deck-score-plans';
-import { computeWin } from '../deck-score-win';
+import { computeWin, winAudit } from '../deck-score-win';
 import { normsFor } from '../deck-score-norms';
 import { catalogFacts, CATALOG_SIZE, oracleHash } from '../deck-score-catalog';
 import { deriveCardFeature } from '../deck-score-features';
@@ -608,24 +608,40 @@ describe('section 8 W: token producers, zero-power bodies and the opponent prior
 });
 
 describe('section 8 W: control inevitability needs a durable engine and early answers', () => {
-  const finishers = creatures(6, 6, 5, 'Titan');
+  // v1.4 §9.4: the control line no longer receives a flat T8 clock. Its typed
+  // finisher output has to reach the whole table on the same schedule access
+  // uses, so the six single-copy five-drops this suite used to rely on no
+  // longer prove a finish — they were carried by the removed default.
+  const finishers = creatures(20, 8, 4, 'Titan');
   const cheap = removal(6, 2);
   const deck = entriesOf([...finishers, ...cheap, ...cantrips(20)]);
   const met = { E: 14, Estar: 12, D: 38, Dstar: 10, hasDrawEngine: true };
 
+  // The control family competes with creature pressure on the same schedule
+  // now, so `reason` names whichever line scored higher. Admission is read
+  // from the v1.4 audit surface instead.
+  const builtOn = (d: typeof deck, t = met): readonly string[] =>
+    winAudit('commander', WIN_NORMS, 'control', 99, d, [], t).built;
+
   it('fires when the engine, the early answers and the finishers are all there', () => {
-    const out = computeWin('commander', WIN_NORMS, 'control', 99, deck, [], met);
-    expect(out.reason).toContain('Control inevitability');
+    expect(builtOn(deck)).toContain('control');
   });
 
   it('refuses a deck whose card advantage is all one-shot', () => {
+    expect(builtOn(deck, { ...met, hasDrawEngine: false })).not.toContain('control');
     const out = computeWin('commander', WIN_NORMS, 'control', 99, deck, [], { ...met, hasDrawEngine: false });
     expect(out.reason).not.toContain('Control inevitability');
   });
 
   it('refuses a deck with fewer than two cheap answers', () => {
     const noEarly = entriesOf([...finishers, ...removal(6, 6, 'Slow'), ...cantrips(20)]);
-    const out = computeWin('commander', WIN_NORMS, 'control', 99, noEarly, [], met);
+    expect(builtOn(noEarly)).not.toContain('control');
+  });
+
+  it('refuses the same shell when its finisher output cannot reach the table', () => {
+    const thin = entriesOf([...creatures(6, 6, 5, 'Titan'), ...cheap, ...cantrips(20)]);
+    expect(builtOn(thin)).not.toContain('control');
+    const out = computeWin('commander', WIN_NORMS, 'control', 99, thin, [], met);
     expect(out.reason).not.toContain('Control inevitability');
   });
 });

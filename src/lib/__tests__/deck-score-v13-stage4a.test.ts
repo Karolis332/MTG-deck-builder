@@ -240,7 +240,10 @@ describe('stage 4a acceptance, fixture-backed', () => {
     const r = scoreDeck(fixture!.load().input);
     const syn = r.components.find((c) => c.key === 'synergy');
     expect(syn?.reason).toMatch(/supports spells;/);
-    expect(r.score).toBe(76);
+    // v1.4 stage 1b: 76 -> 67. The §9.4 control schedule replaced the flat T8
+    // clock this list was closing on; it now closes on Token/Food conversion
+    // at T9 (W 58.5). Out of band again, by the correction, not by a constant.
+    expect(r.score).toBe(67);
     expect(recipeFor('spells').roles.find((x) => x.key === 'spells')?.cmd?.max).toBe(26);
     expect(recipeFor('spells').roles.find((x) => x.key === 'spells')?.brawl?.max).toBe(34);
   });
@@ -262,7 +265,7 @@ describe('stage 4a acceptance, fixture-backed', () => {
     expect(scoreDeck(byName('tazri-upgraded-arena').load().input).score).toBe(68);
     expect(byName('tazri-upgraded-arena').band).toBe('45-65');
     expect(scoreDeck(byName('cedhtop16-ballooncon6').load().input).score).toBe(92);
-    expect(scoreDeck(byName('meren-powerhouse').load().input).score).toBe(75);
+    expect(scoreDeck(byName('meren-powerhouse').load().input).score).toBe(68);
     expect(scoreDeck(byName('the-cabbage-merchant').load().input).score).toBe(20);
   });
 });

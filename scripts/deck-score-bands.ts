@@ -18,7 +18,7 @@
  */
 import { loadStandardCohorts, loadStandardDbFixture, loadCedhCohort } from './deck-score-fixtures';
 import { loadMatchedPiles, loadCohortPiles, loadStudyControls, strideOrder, readSample, cardsByName, cohortSeed, HOLDOUT_EVERY, type SampleCohort, type SampleProfile } from './deck-score-piles';
-import { readManifest, verifyCohortHashes } from './deck-score-cohorts';
+import { readManifest, verifyCohortHashes, sha256 } from './deck-score-cohorts';
 import { scoreDeck } from '../src/lib/deck-score';
 import type { DbCard } from '../src/lib/types';
 import { deriveCardFeature } from '../src/lib/deck-score-features';
@@ -29,10 +29,18 @@ import { Q_BASELINE, Q_BASELINE_JOINT_COMMANDER, Q_BASELINE_JOINT_BRAWL, Q_BASEL
   Q_BASELINE_CLOSING_BRAWL, Q_SATURATION, Q_SATURATION_BRAWL, qSaturationFor, normsFor,
   type ScoreProfile } from '../src/lib/deck-score-norms';
 import { scoreDeckSafely, explainScoreUnavailable } from '../src/lib/deck-score-input';
-import { CATALOG_SIZE } from '../src/lib/deck-score-catalog';
+import fs from 'fs';
+import path from 'path';
+import { CATALOG_SIZE, CATALOG_VERSION, catalogEntries } from '../src/lib/deck-score-catalog';
+import {
+  TYPED_COMBOS, COMBO_TUTORS, MANA_OUTLETS, ETB_OUTLETS, LIBRARY_WIN_CARDS,
+  LIBRARY_DRAW_SINKS, UNBOUNDED_DRAW_SINKS, GRAVEYARD_ROUTES,
+} from '../src/lib/deck-score-catalog/combos';
+import { WIN_FAMILIES } from '../src/lib/deck-score-win';
+import { SCORE_VERSION } from '../src/lib/deck-score';
 import { clip } from '../src/lib/deck-score-math';
 import { computeInteraction, computeAdvantage } from '../src/lib/deck-score-interaction';
-import { computeWin } from '../src/lib/deck-score-win';
+import { computeWin, winAudit, type WinAuditNote } from '../src/lib/deck-score-win';
 import type { DeckEntry } from '../src/lib/deck-score-mana';
 
 function pct(sorted: number[], p: number): number {
@@ -1040,6 +1048,311 @@ function realLists(n: number, profile: SampleProfile, cohort: SampleCohort = 'tr
   }
 }
 
+// ── §10.6.2 W-zero audit ──────────────────────────────────────────────────
+//
+//   MTG_DB_DIR=... npx tsx scripts/deck-score-bands.ts real --profile commander --wzero
+//
+// Every row with W = 0 or no numeric total is classified into EXACTLY ONE of
+// four classes, in this fixed precedence (first match wins, so the table sums
+// to the W-zero count):
+//
+//   bad_input             the list never reaches a fair evaluation — unresolved
+//                         identity, or a confirmed rule failure that hard-caps
+//                         it below 25. Repairing W cannot help these.
+//   unsupported_family    the list runs a recognisable plan W models no family
+//                         for (mill, infect, extra turns, superfriends, stax).
+//   known_absent          at least one family IS fully assembled and its own
+//                         output schedule still falls short of the finish
+//                         predicate by T12. That shortfall is the binding cause
+//                         whatever else is also missing, so it is classified
+//                         here and not as a repairable prerequisite.
+//   missing_prerequisite  no family reached its schedule at all, and a family is
+//                         PARTIALLY assembled one named typed gate short
+//                         (outlet, route/zone, converter, fodder, finisher).
+//
+// The class is the BINDING cause. The full rejection histogram below the table
+// lists every gate each row failed, which is where the repairable mass shows.
+
+/** Note codes that mean "one named prerequisite away", in report order. */
+const PREREQ_CODES = new Set([
+  'combo.outlet_missing', 'combo.route_unsatisfied', 'combo.pieces_missing',
+  'tokens.no_converter',
+  'drain.no_outlet', 'drain.no_payoff', 'drain.no_fodder',
+  'control.no_finisher', 'control.no_draw_engine', 'control.stabilisation_short',
+]);
+
+/**
+ * Plans W has no recipe family for. Each is a DECK-LEVEL count of cards whose
+ * printed text carries the mechanic, with the threshold a real list of that
+ * archetype clears and an incidental copy does not.
+ */
+const UNSUPPORTED_FAMILIES: readonly { key: string; min: number; test: (f: ReturnType<typeof deriveCardFeature>) => boolean }[] = [
+  {
+    key: 'mill',
+    min: 6,
+    test: (f) => /\bmills? (?:\w+|\d+) cards?|target player mills|each opponent mills/i.test(f.card.oracle_text || ''),
+  },
+  {
+    key: 'infect_toxic',
+    min: 4,
+    test: (f) => /\binfect\b|\btoxic \d|poison counter/i.test(
+      `${f.card.oracle_text || ''} ${f.card.keywords || ''}`),
+  },
+  {
+    key: 'extra_turns',
+    min: 3,
+    test: (f) => /take an extra turn|takes? an extra turn/i.test(f.card.oracle_text || ''),
+  },
+  {
+    key: 'superfriends',
+    min: 6,
+    test: (f) => /\bPlaneswalker\b/.test(f.card.type_line || ''),
+  },
+  {
+    key: 'stax_prison',
+    min: 8,
+    test: (f) => /(?:spells|creatures|abilities) (?:your opponents|opponents) (?:cast|control|activate) cost \{\d|players? can't|can't attack you|skip (?:their|your) (?:draw|untap)|doesn't untap|don't untap/i
+      .test(f.card.oracle_text || ''),
+  },
+];
+
+interface WzeroRow {
+  id: string;
+  klass: string;
+  cause: string;
+  names: string[];
+  /** EVERY family rejection, not just the classifying one: the first-match
+   * class names the repairable cause, this names what actually binds. */
+  codes: string[];
+}
+
+/** "62.3 of 120 expected damage by T12" -> the tenth of target it reached. */
+function shortfallBin(detail: string): string {
+  const m = /^([\d.]+) of (\d+)/.exec(detail);
+  if (!m) return '?';
+  const ratio = Number(m[1]) / Number(m[2]);
+  return `${Math.min(9, Math.floor(ratio * 10))}/10`;
+}
+
+function classifyWzero(
+  profile: SampleProfile, byName: Map<string, DbCard>, deck: ReturnType<typeof readSample>[number],
+): WzeroRow | null {
+  const main: { card: DbCard; quantity: number }[] = [];
+  const commanders: DbCard[] = [];
+  const unresolved: { name: string; quantity: number; board: string }[] = [];
+  const commanderName = deck.commander.toLowerCase();
+  let tookCommander = false;
+  for (const line of deck.cards) {
+    const card = byName.get(line.name.toLowerCase());
+    if (!card) { unresolved.push({ name: line.name, quantity: line.quantity, board: 'main' }); continue; }
+    if (!tookCommander && line.name.toLowerCase() === commanderName) { commanders.push(card); tookCommander = true; continue; }
+    main.push({ card, quantity: line.quantity });
+  }
+  const args = { format: profile, main, commander: commanders, unresolved };
+  const unavailable = explainScoreUnavailable(args);
+  const payload = unavailable ? null : scoreDeckSafely(args);
+  const W = payload ? payload.components.find((c) => c.key === 'win')?.score ?? 0 : null;
+  if (W !== null && W >= 0.05) return null;
+
+  const hardCap = (payload?.gates ?? []).some((g) => g.kind !== 'quality' && g.cap !== null && (g.cap as number) < 25);
+  const names = main.map((e) => e.card.name);
+  if (unavailable || hardCap) {
+    return { id: deck.id, klass: 'bad_input', cause: unavailable ?? 'rule cap < 25', names, codes: [] };
+  }
+
+  const all: DeckEntry[] = main.map((e) => ({ feature: deriveCardFeature(e.card), quantity: e.quantity }));
+  const cmd = commanders.map((c) => deriveCardFeature(c));
+  const N = all.reduce((s, e) => s + e.quantity, 0);
+  const norms = normsFor(profile);
+  const inter = computeInteraction(profile, norms, 'midrange', N, all);
+  const adv = computeAdvantage(profile, norms, 'midrange', N, all);
+  const totals = { E: inter.E, Estar: inter.Estar, D: adv.D, Dstar: adv.Dstar, hasDrawEngine: adv.hasDrawEngine };
+  const { notes } = winAudit(profile, norms, 'midrange', N, all, cmd, totals);
+
+  const codes = notes.map((x: WinAuditNote) => (x.code.endsWith('.schedule_short')
+    ? `${x.code}@${shortfallBin(x.detail)}`
+    : x.code));
+
+  for (const fam of UNSUPPORTED_FAMILIES) {
+    const copies = all.filter((e) => !e.feature.isLand && fam.test(e.feature)).reduce((s, e) => s + e.quantity, 0);
+    if (copies >= fam.min) return { id: deck.id, klass: 'unsupported_family', cause: fam.key, names, codes };
+  }
+
+  const shortest = notes.find((n: WinAuditNote) => n.code.endsWith('.schedule_short'));
+  if (shortest) return { id: deck.id, klass: 'known_absent', cause: shortest.code, names, codes };
+
+  const prereq = notes.find((n: WinAuditNote) => PREREQ_CODES.has(n.code));
+  if (prereq) return { id: deck.id, klass: 'missing_prerequisite', cause: prereq.code, names, codes };
+  return { id: deck.id, klass: 'known_absent', cause: notes[0]?.code ?? 'no family present', names, codes };
+}
+
+function wzeroAudit(n: number, profile: SampleProfile, cohort: SampleCohort): void {
+  const byName = cardsByName();
+  const manifest = readManifest();
+  const eligible = new Set(
+    (manifest?.rows ?? [])
+      .filter((r) => r.profile === profile && r.split === cohort && r.exclusion === 'none')
+      .map((r) => r.id.slice(`${profile}-sample:`.length)),
+  );
+  const sample = cohortSample(cohort, profile).slice(0, n);
+  const rows: WzeroRow[] = [];
+  for (const { deck } of sample) {
+    const row = classifyWzero(profile, byName, deck);
+    if (row) rows.push(row);
+  }
+  const strides: [string, WzeroRow[], number][] = [
+    ['full', rows, sample.length],
+    ['eligible', rows.filter((r) => eligible.has(r.id)), sample.filter(({ deck }) => eligible.has(deck.id)).length],
+  ];
+
+  console.log(`W-ZERO AUDIT — ${profile} ${cohort}, ${sample.length} rows, catalogue ${CATALOG_SIZE}`);
+  console.log('');
+  console.log('| class | full stride | eligible subset |');
+  console.log('|---|---:|---:|');
+  const classes = ['bad_input', 'unsupported_family', 'known_absent', 'missing_prerequisite'];
+  const cell = (set: WzeroRow[], of: number, k: string): string => {
+    const c = set.filter((r) => r.klass === k).length;
+    return `${c}/${of} (${((100 * c) / Math.max(1, of)).toFixed(1)}%)`;
+  };
+  for (const k of classes) {
+    console.log(`| ${k} | ${cell(strides[0][1], strides[0][2], k)} | ${cell(strides[1][1], strides[1][2], k)} |`);
+  }
+  console.log(`| **W = 0 or unavailable** | ${strides[0][1].length}/${strides[0][2]} `
+    + `(${((100 * strides[0][1].length) / Math.max(1, strides[0][2])).toFixed(1)}%) | ${strides[1][1].length}/${strides[1][2]} `
+    + `(${((100 * strides[1][1].length) / Math.max(1, strides[1][2])).toFixed(1)}%) |`);
+
+  const codeHist = new Map<string, number>();
+  for (const r of rows) for (const c of new Set(r.codes)) codeHist.set(c, (codeHist.get(c) ?? 0) + 1);
+  const controlCost = rows.filter((r) => r.codes.some((c) => c.startsWith('control.schedule_short'))).length;
+  console.log('');
+  console.log(`of those, ${controlCost} stabilise, hold a repeatable engine and a typed finisher, and fail ONLY `
+    + `on the finish predicate — the measured cost of replacing the hard-coded T8 control clock (section 10.6.3).`);
+  console.log('');
+  console.log(`every family rejection across the ${rows.length} W-zero rows (a row can carry several):`);
+  console.log([...codeHist.entries()].sort((a, b) => b[1] - a[1]).map(([c, v]) => `${c} ${v}`).join(', '));
+
+  for (const k of classes) {
+    const set = rows.filter((r) => r.klass === k);
+    if (set.length === 0) continue;
+    const byCause = new Map<string, number>();
+    for (const r of set) byCause.set(r.cause, (byCause.get(r.cause) ?? 0) + 1);
+    // Card-level cause = the cards that appear most often in this class, by
+    // LIFT over the whole stride: a Sol Ring in every deck explains nothing.
+    const inClass = new Map<string, number>();
+    for (const r of set) for (const nm of new Set(r.names)) inClass.set(nm, (inClass.get(nm) ?? 0) + 1);
+    const overall = new Map<string, number>();
+    for (const { deck } of sample) for (const nm of new Set(deck.cards.map((c) => c.name))) {
+      overall.set(nm, (overall.get(nm) ?? 0) + 1);
+    }
+    const top = [...inClass.entries()]
+      .filter(([, c]) => c >= Math.max(3, set.length * 0.05))
+      .map(([nm, c]) => ({ nm, c, lift: (c / set.length) / ((overall.get(nm) ?? 1) / sample.length) }))
+      .sort((a, b) => b.lift - a.lift || b.c - a.c)
+      .slice(0, 10);
+    console.log('');
+    console.log(`### ${k} (${set.length})`);
+    console.log(`gate: ${[...byCause.entries()].sort((a, b) => b[1] - a[1]).map(([c, v]) => `${c} ${v}`).join(', ')}`);
+    console.log(`cards: ${top.map((t) => `${t.nm} ${t.c} (x${t.lift.toFixed(1)})`).join(', ') || 'none above threshold'}`);
+  }
+}
+
+// ── §10.7 stage 1b: freeze the recipe/catalogue domain ────────────────────
+//
+//   MTG_DB_DIR=... npx tsx scripts/deck-score-bands.ts domain [--write]
+//
+// Stage 2 measures the S norms on THIS domain. If the catalogue, the plan
+// recipe set or the typed combo/tutor/outlet tables move underneath it, every
+// p80 saturation and band cell it freezes was cut from a different evaluator.
+// `bands verify` re-computes these three hashes and fails on any mismatch.
+
+const DOMAIN_FILE = path.join(process.cwd(), 'verify-2026-09-19', 'deck-score', 'domain-v14.json');
+
+interface DomainFreeze {
+  frozenAt: string;
+  scoreVersion: string;
+  catalogVersion: string;
+  catalogSize: number;
+  catalogSha256: string;
+  combosSha256: string;
+  planRecipes: string[];
+  winFamilies: string[];
+}
+
+/** Name + knowledge + every effect's family/mode/cost/timing/output, sorted. */
+function catalogDigest(): string {
+  const rows = catalogEntries()
+    .map((e) => `${e.canonicalName}|${e.knowledge}|` + e.effects
+      .map((x) => `${x.family}:${x.mode}:${x.cost.mana}:${x.timing.earliestTurn}`
+        + `:${x.outputBounds ? `${x.outputBounds.min}/${x.outputBounds.max ?? '-'}/${x.outputBounds.unit}` : '-'}`)
+      .join(','))
+    .sort();
+  return sha256(rows.join('\n'));
+}
+
+/** Every typed combo, tutor, outlet, sink and graveyard route, deterministically. */
+function combosDigest(): string {
+  const combos = TYPED_COMBOS.map((c) =>
+    `${c.id}|${c.resource}|${c.extraCost}|${c.hasteIncluded ? 'haste' : '-'}`
+    + `|${c.route ? `${c.route.kind}:${c.route.budget ?? '-'}` : '-'}`
+    + `|${c.slots.map((sl) => `${sl.any.join('/')}~${sl.types.join('+')}`).join(';')}`).sort();
+  // A tutor's cost is a function; two sample points pin its shape.
+  const tutors = COMBO_TUTORS.map((t) =>
+    `${t.name}|${t.destination}|${t.finds.join('+')}|${t.cost(0)}/${t.cost(3)}`).sort();
+  const outlets = [
+    ...MANA_OUTLETS.map((o) => `mana:${o.name}:${o.creatureCastable ? 1 : 0}`),
+    ...ETB_OUTLETS.map((o) => `etb:${o.name}`),
+    ...LIBRARY_WIN_CARDS.map((o) => `altwin:${o.name}:${o.creatureCastable ? 1 : 0}`),
+    ...LIBRARY_DRAW_SINKS.map((o) => `libsink:${o.name}`),
+    ...UNBOUNDED_DRAW_SINKS.map((o) => `cmdsink:${o.name}`),
+    ...GRAVEYARD_ROUTES.map((n) => `gy:${n}`),
+  ].sort();
+  return sha256([...combos, ...tutors, ...outlets].join('\n'));
+}
+
+function domainFreeze(): DomainFreeze {
+  return {
+    frozenAt: new Date().toISOString().slice(0, 10),
+    scoreVersion: SCORE_VERSION,
+    catalogVersion: CATALOG_VERSION,
+    catalogSize: CATALOG_SIZE,
+    catalogSha256: catalogDigest(),
+    combosSha256: combosDigest(),
+    planRecipes: PLAN_RECIPES.map((r) => r.key).sort(),
+    winFamilies: WIN_FAMILIES.slice().sort(),
+  };
+}
+
+function readDomain(): DomainFreeze | null {
+  if (!fs.existsSync(DOMAIN_FILE)) return null;
+  return JSON.parse(fs.readFileSync(DOMAIN_FILE, 'utf-8')) as DomainFreeze;
+}
+
+function domainCommand(write: boolean): void {
+  const now = domainFreeze();
+  const stored = readDomain();
+  console.log(JSON.stringify(now, null, 2));
+  if (write) {
+    fs.writeFileSync(DOMAIN_FILE, `${JSON.stringify(now, null, 2)}\n`);
+    console.log(`written ${DOMAIN_FILE}`);
+    return;
+  }
+  if (!stored) { console.log('no stored domain freeze'); return; }
+  const diffs = domainMismatches(stored, now);
+  console.log(diffs.length === 0 ? 'domain: MATCH' : `domain: ${diffs.length} MISMATCH — ${diffs.join('; ')}`);
+}
+
+function domainMismatches(stored: DomainFreeze, now: DomainFreeze): string[] {
+  const out: string[] = [];
+  const cmp = (k: keyof DomainFreeze): void => {
+    const a = JSON.stringify(stored[k]);
+    const b = JSON.stringify(now[k]);
+    if (a !== b) out.push(`${k} ${a.slice(0, 24)} vs ${b.slice(0, 24)}`);
+  };
+  for (const k of ['scoreVersion', 'catalogVersion', 'catalogSize', 'catalogSha256',
+    'combosSha256', 'planRecipes', 'winFamilies'] as const) cmp(k);
+  return out;
+}
+
 // ── round 1 (refuter R2): re-measure every frozen constant ────────────────
 //
 //   MTG_DB_DIR=... npx tsx scripts/deck-score-bands.ts verify
@@ -1109,6 +1422,21 @@ function verifyFrozen(): void {
     + `${hashes.mismatches.length === 0 ? 'MATCH' : 'MISMATCH'} |`);
   for (const m of hashes.mismatches.slice(0, 5)) fail.push(`cohort hash ${m}`);
 
+  // v1.4 stage 1b (section 10.7): the recipe/catalogue DOMAIN stage 2 measures
+  // its S norms on. A silent catalogue or combo-table move invalidates every
+  // band cell above, so it is graded here rather than reported.
+  const storedDomain = readDomain();
+  if (!storedDomain) {
+    rows.push('| recipe/catalogue domain | - | - | 0 | UNFROZEN (run `bands domain --write`) |');
+    fail.push('domain: verify-2026-09-19/deck-score/domain-v14.json missing');
+  } else {
+    const diffs = domainMismatches(storedDomain, domainFreeze());
+    rows.push(`| recipe/catalogue domain | ${storedDomain.catalogSha256.slice(0, 12)} | `
+      + `${domainFreeze().catalogSha256.slice(0, 12)} | ${storedDomain.catalogSize} | `
+      + `${diffs.length === 0 ? 'MATCH' : 'MISMATCH'} |`);
+    for (const d of diffs) fail.push(`domain ${d}`);
+  }
+
   console.log(rows.join('\n'));
   console.log('');
   if (fail.length === 0) {
@@ -1132,10 +1460,16 @@ function main(): void {
       process.argv.includes('--raw'));
     return;
   }
+  if (process.argv.includes('domain')) { domainCommand(process.argv.includes('--write')); return; }
   if (process.argv.includes('verify')) { verifyFrozen(); return; }
   if (process.argv.includes('real')) {
     const rArg = process.argv.indexOf('--n');
     const pArgPiles = process.argv.indexOf('--piles');
+    if (process.argv.includes('--wzero')) {
+      wzeroAudit(rArg > 0 ? Number(process.argv[rArg + 1]) : 100000, profile,
+        process.argv.includes('--holdout') ? 'holdout' : 'training');
+      return;
+    }
     realLists(rArg > 0 ? Number(process.argv[rArg + 1]) : 100000, profile,
       process.argv.includes('--holdout') ? 'holdout' : 'training',
       pArgPiles > 0 ? Number(process.argv[pArgPiles + 1]) : 1000);

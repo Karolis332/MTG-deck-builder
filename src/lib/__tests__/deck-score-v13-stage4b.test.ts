@@ -298,16 +298,23 @@ describe('stage 4b — Brawl fixture readings', () => {
     expect(vivi.reason).toContain('supports spells');
     // Round 1: 100 -> 96.6. The list no longer pins, because the Brawl window
     // (.733 -> .758) moved with the catalogue; the total is unchanged.
+    // v1.4 stage 1b TOOK IT BACK OUT, and the cause is the mandated §9.4
+    // control correction, not the Brawl band: this list used to close on the
+    // flat T8 control clock at u .758. With that clock gone it closes on its
+    // Token/Food conversion line at T9 instead, W 68.4 -> 58.5, total 76 -> 67.
+    // §10.6 forbids undoing a control correction to save an anchor, so the
+    // regression is pinned here rather than patched.
     expect(vivi.S).toBe(96.6);
-    expect(vivi.total).toBe(76);
-    expect(vivi.total).toBeGreaterThanOrEqual(70);
-    expect(vivi.total).toBeLessThanOrEqual(85);
+    expect(vivi.total).toBe(67);
+    expect(vivi.total).toBeLessThan(70);
   });
 
   it('keeps Kuja and Azula in band and the 101-card Cabbage list capped', () => {
     const kuja = read('kuja-genome-sorcerer-arena');
     expect(kuja.reason).toContain('supports spells');
-    expect(kuja.total).toBe(71);
+    // 71 -> 63 on the same §9.4 control correction; still inside its 60-80 band.
+    expect(kuja.total).toBe(63);
+    expect(kuja.total).toBeGreaterThanOrEqual(60);
     const azula = read('fire-lord-azula-competitive');
     expect(azula.reason).toContain('supports spells');
     // ROUND 1, REPORTED OUT OF BAND: stage 4c had it at 84 on spells Q .705

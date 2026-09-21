@@ -456,10 +456,15 @@ describe('computeWin v1.1 — aristocrats drain', () => {
 
 describe('computeWin v1.1 — control inevitability is conditional, not graded', () => {
   const finisher = mkCard({ name: 'Big Finisher', type_line: 'Creature — Dragon', mana_cost: '{4}{B}{B}', cmc: 6, power: '6', toughness: '6' });
+  // v1.4 §9.4: the control line closes on a real schedule, so the finisher
+  // suite has to be castable often enough to reach the table by T12. Two
+  // singleton six-drops only ever closed under the removed flat T8 clock.
+  const fast = mkCard({ name: 'Fast Finisher', type_line: 'Creature — Dragon', mana_cost: '{3}{B}', cmc: 4, power: '5', toughness: '5' });
   const engine = mkCard({ name: 'Draw Engine', type_line: 'Enchantment', oracle_text: 'At the beginning of your upkeep, draw a card.', mana_cost: '{2}{B}', cmc: 3, power: null, toughness: null });
   const build = (answerCount: number): DeckScoreInput => ({
     format: 'standard',
-    main: [forest(24), ...answers(answerCount).map((a) => ({ ...a, quantity: 2 })), { card: engine, quantity: 4 }, { card: finisher, quantity: 2 }],
+    main: [forest(24), ...answers(answerCount).map((a) => ({ ...a, quantity: 2 })), { card: engine, quantity: 4 },
+      { card: finisher, quantity: 4 }, { card: fast, quantity: 4 }],
     commander: [], sideboard: [], unresolved: [], cardDataVersion: 'test-v1', corpus: null,
   });
 

@@ -1,0 +1,26 @@
+W-ZERO AUDIT — commander training, 1824 rows, catalogue 14924
+
+| class | full stride | eligible subset |
+|---|---:|---:|
+| bad_input | 107/1824 (5.9%) | 0/1478 (0.0%) |
+| unsupported_family | 24/1824 (1.3%) | 24/1478 (1.6%) |
+| known_absent | 350/1824 (19.2%) | 350/1478 (23.7%) |
+| missing_prerequisite | 0/1824 (0.0%) | 0/1478 (0.0%) |
+| **W = 0 or unavailable** | 481/1824 (26.4%) | 374/1478 (25.3%) |
+
+of those, 190 stabilise, hold a repeatable engine and a typed finisher, and fail ONLY on the finish predicate — the measured cost of replacing the hard-coded T8 control clock (section 10.6.3).
+
+every family rejection across the 481 W-zero rows (a row can carry several):
+control.answers_short 183, combo.pieces_missing 154, tokens.no_converter 126, tokens.schedule_short@9/10 88, combat_wide.schedule_short@6/10 82, combat_wide.schedule_short@7/10 75, combat_wide.schedule_short@5/10 74, tokens.schedule_short@8/10 73, drain.no_outlet 72, tokens.schedule_short@7/10 70, tokens.schedule_short@6/10 58, combat_tall.schedule_short@5/10 57, combat_wide.schedule_short@8/10 52, drain.no_payoff 46, control.schedule_short@2/10 44, tokens.schedule_short@5/10 43, combat_tall.schedule_short@4/10 42, control.schedule_short@3/10 41, combat_tall.schedule_short@7/10 40, combat_wide.schedule_short@4/10 37, control.schedule_short@4/10 34, combat_tall.schedule_short@6/10 33, combat_tall.schedule_short@3/10 28, combat_tall.schedule_short@1/10 28, combat_wide.schedule_short@3/10 28, drain.schedule_short@0/10 28, control.schedule_short@1/10 27, drain.schedule_short@1/10 26, combat_tall.schedule_short@2/10 24, combat_tall.schedule_short@8/10 23, control.schedule_short@5/10 21, combo.outlet_missing 20, tokens.schedule_short@4/10 20, combat_tall.schedule_short@0/10 17, combat_wide.schedule_short@9/10 13, control.schedule_short@0/10 12, combat_tall.schedule_short@9/10 12, combo.route_unsatisfied 8, drain.schedule_short@2/10 7, combat_wide.schedule_short@2/10 7, control.schedule_short@6/10 7, drain.schedule_short@3/10 7, combat_wide.schedule_short@1/10 6, tokens.schedule_short@3/10 5, tokens.schedule_short@2/10 5, control.schedule_short@7/10 4, drain.schedule_short@4/10 4, drain.schedule_short@5/10 3, drain.schedule_short@6/10 3, control.no_draw_engine 1, tokens.schedule_short@1/10 1
+
+### bad_input (107)
+gate: rule cap < 25 107
+cards: Hookblade Veteran 8 (x17.0), Leori, Sparktouched Hunter 7 (x17.0), Adéwalé, Breaker of Chains 7 (x17.0), Commodore Guff 9 (x15.3), Eagle Vision 9 (x15.3), Evie Frye 9 (x15.3), Lydia Frye 9 (x15.3), Achilles Davenport 8 (x15.2), Brotherhood Spy 8 (x15.2), Escape Detection 8 (x15.2)
+
+### unsupported_family (24)
+gate: mill 8, extra_turns 7, superfriends 5, stax_prison 3, infect_toxic 1
+cards: Capture of Jingzhou 3 (x45.6), Nexus of Fate 3 (x45.6), Time Warp 5 (x42.2), Temporal Manipulation 4 (x33.8), Oath of Gideon 3 (x32.6), Temporal Mastery 4 (x25.3), Omniscience 3 (x15.2), Contagion Clasp 3 (x15.2), Horizon of Progress 3 (x15.2), Inexorable Tide 4 (x12.2)
+
+### known_absent (350)
+gate: combat_wide.schedule_short 350
+cards: Coruscation Mage 23 (x3.7), Grapeshot 18 (x3.1), Guttersnipe 30 (x2.9), Mana Geyser 38 (x2.9), Torment of Hailfire 22 (x2.6), Dualcaster Mage 18 (x2.6), Flashback 20 (x2.5), Seething Song 34 (x2.5), Preordain 25 (x2.5), Opt 18 (x2.5)

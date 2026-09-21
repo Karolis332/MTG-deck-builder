@@ -16,7 +16,10 @@ import { computeWin, type WinTotals } from '../deck-score-win';
 import { normsFor } from '../deck-score-norms';
 import { deriveCardFeature, type CardFeature } from '../deck-score-features';
 import { catalogFacts } from '../deck-score-catalog';
-import { TYPED_COMBOS, MANA_OUTLETS, COMBO_TUTORS, UNBOUNDED_DRAW_SINKS } from '../deck-score-catalog/combos';
+import {
+  TYPED_COMBOS, MANA_OUTLETS, COMBO_TUTORS, UNBOUNDED_DRAW_SINKS,
+  ETB_OUTLETS, LIBRARY_DRAW_SINKS, LIBRARY_WIN_CARDS,
+} from '../deck-score-catalog/combos';
 import type { DeckEntry } from '../deck-score-mana';
 import { loadDataset } from '../../../scripts/deck-score-fixtures';
 
@@ -330,6 +333,11 @@ describe('v1.4 stage 1a — corpus regression', () => {
       ...MANA_OUTLETS.map((o) => o.name),
       ...COMBO_TUTORS.map((t) => t.name),
       ...UNBOUNDED_DRAW_SINKS.map((d) => d.name),
+      // v1.4 stage 1b tables: the creature-ETB outlets and the library-sink /
+      // alternate-win pair that give an unbounded loop a finish predicate.
+      ...ETB_OUTLETS.map((o) => o.name),
+      ...LIBRARY_DRAW_SINKS.map((d) => d.name),
+      ...LIBRARY_WIN_CARDS.map((w) => w.name),
     ];
     const byName = new Map<string, DbCard>();
     for (const input of [...ds.cedh, ...ds.fixtures.map((f) => f.input)]) {
