@@ -1,0 +1,15 @@
+{
+  "profile": "standard",
+  "referenceVersion": "unfrozen",
+  "scoreVersion": "unfrozen",
+  "catalogueHash": "",
+  "domainHash": "",
+  "cohortHash": "",
+  "families": 0,
+  "rows": 0,
+  "excluded": {},
+  "frozenAt": "",
+  "largestAtom": 0,
+  "tiedIntervals": 0,
+  "knots": []
+}

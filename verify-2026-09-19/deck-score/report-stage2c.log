@@ -1,3 +1,4 @@
+wrote C:\Users\QuLeR\MTG-deck-builder\verify-2026-09-19\deck-score\report.md
 # Deck Score v1 calibration report
 
 Generated 2026-09-21T16:46:49.170Z. Raw v1 numbers — weights are NOT tuned in this unit (docs/DECK_SCORE_SPEC.md §4 is a separate calibration pass).
@@ -144,3 +145,4 @@ n=200 piles, 30 cEDH lists, 120 held-out Standard positives.
 | S | 30.2 | 55.8 | 81.4 |
 
 Per section 5: eligible legal singleton cards ordered by SHA-256(seed + canonical id), first N take the nonbasic slots, remaining slots filled with basics split across the commander's color identity. The synthetic basics no longer reuse the commander's card id (section 8), so pile lands are finally scored as lands.
+

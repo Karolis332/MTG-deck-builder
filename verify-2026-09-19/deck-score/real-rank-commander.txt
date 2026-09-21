@@ -1,0 +1,24 @@
+PRODUCT METRIC — commander training stride through scoreDeckSafely (no --raw), card data 14924 catalogue entries
+reference commander 1.4.0-ref1 frozen 2026-09-21: 1440 rows, 182 families, 391 knots, 187 tied intervals, largest atom 5.87% of weight at T_abs 20
+typed coverage p10/p50/p90 0.616 / 0.754 / 0.862
+
+| statistic | full stride | eligible subset |
+|---|---:|---:|
+| rows | 1798 | 1460 |
+| unavailable (no numeric total) | 0 | 0 |
+| S = 0 or unavailable | 0/1798 (0.0%) | 0/1460 (0.0%) |
+| S p10 / p50 / p90 | 58.1 / 83.7 / 100.0 | 58.1 / 82.0 / 100.0 |
+| W p10 / p50 / p90 | 0.3 / 22.3 / 59.8 | 0.4 / 23.1 / 60.2 |
+| total p10 / p50 / p90 | 19 / 29 / 59 | 20 / 38 / 62 |
+| rank p10 / p50 / p90 | 10.9 / 51.7 / 89.9 | 10.9 / 51.7 / 89.9 |
+| no rank (scored) | 338/1798 (18.8%) | 0/1460 (0.0%) |
+| W = 0 share (scored) | 114/1798 (6.3%) | 74/1460 (5.1%) |
+| hard cap < 25 | 338/1798 (18.8%) | 0/1460 (0.0%) |
+| provisional share | 1242/1798 (69.1%) | 1003/1460 (68.7%) |
+
+excluded by input gate (cohorts-v14.json): legality 241, identity 78, singleton 18, unresolved 1
+
+| control construction | total < 25 | pile W p10/p50/p90 | gap vs eligible real W (0.4 / 23.1 / 60.2) | rank p10/p50/p90/p95 | rank >= 95 (limit 20/200) |
+|---|---:|---:|---:|---:|---:|
+| ctrl93 (n=200, study seeds) | 41/200 (20.5%) | 2.4 / 22.1 / 42.5 | +2.0 / -1.0 / -17.7 POSITIVE | 21.1 / 51.4 / 64.5 / 76.2 | 0/200 |
+| ctrlmatch (n=200, study seeds) | 68/200 (34.0%) | 0.8 / 12.7 / 42.5 | +0.4 / -10.4 / -17.7 POSITIVE | 15.1 / 43.4 / 66.0 / 74.5 | 0/200 |

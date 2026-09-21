@@ -38,7 +38,14 @@ interface Deck {
 
 /** `U` is read from the frozen §10.7 reason template (`U 37.0/99`) so the
  * probe grades the same useful mass the score published. */
-interface Reading { S: number; total: number; U: number; failing: number }
+interface Reading {
+  S: number; total: number; U: number; failing: number;
+  /** §10.9 item 5: the headline. Null when the list left the rank domain, so
+   * a delta is only graded when BOTH endpoints carry a numeric rank. */
+  rank: number | null; rankDisplay: number | null;
+  /** The unrounded composed total the rank is taken of. */
+  absolute: number;
+}
 
 function read(deck: Deck, main: ScoreCardInput[], unresolved: { name: string; quantity: number; board: string }[] = []): Reading | null {
   const payload = scoreDeckSafely({ format: deck.format, main, commander: deck.commander, unresolved });
@@ -48,6 +55,7 @@ function read(deck: Deck, main: ScoreCardInput[], unresolved: { name: string; qu
   return {
     S: synergy?.score ?? 0, total: payload.score, U: mass ? Number(mass[1]) : 0,
     failing: payload.gates.filter((g) => g.status === 'fail').length,
+    rank: payload.rank, rankDisplay: payload.rankDisplay, absolute: payload.absoluteTotal,
   };
 }
 
@@ -220,13 +228,23 @@ export function permuteMetadata(main: readonly ScoreCardInput[]): ScoreCardInput
 
 // ── probes ────────────────────────────────────────────────────────────────
 
-interface Delta { S: number; total: number; U: number; repaired: boolean }
+interface Delta {
+  S: number; total: number; absolute: number; U: number; repaired: boolean;
+  /** null when either endpoint has no rank — reported, never graded as 0. */
+  rank: number | null; rankDisplay: number | null;
+}
 interface ProbeResult { delta: Delta | null; skipped: boolean }
+
+const bothRanked = (a: number | null, b: number | null): number | null =>
+  (a === null || b === null ? null : b - a);
 
 const diff = (before: Reading, after: Reading): Delta => ({
   S: after.S - before.S,
   total: after.total - before.total,
+  absolute: after.absolute - before.absolute,
   U: after.U - before.U,
+  rank: bothRanked(before.rank, after.rank),
+  rankDisplay: bothRanked(before.rankDisplay, after.rankDisplay),
   // An edit that removes a card the deck was ILLEGAL for repairs a rule
   // failure. That is a benefit, so the displayed total is allowed to move.
   repaired: after.failing < before.failing,
@@ -319,6 +337,10 @@ const PROBES: Record<string, Probe> = {
 interface Row {
   probe: string; k: number; lists: number; skipped: number;
   maxS: number; maxTotal: number; violatorsS: string[]; violatorsTotal: string[];
+  /** §10.9 item 5 maxima. `rankGone` counts edits where the rank appeared or
+   * disappeared (a rule repair or a new rule failure): not a numeric delta. */
+  maxAbs: number; maxRank: number; maxRankDisplay: number; rankGone: number;
+  violatorsRank: string[];
   /** §10.2: an addition whose max-U assignment gains real useful mass is not
    * a no-benefit edit. Counted and reported, never graded. */
   mass: number; maxSMass: number; maxU: number;
@@ -348,6 +370,7 @@ function run(profile: SampleProfile, n: number, ks: number[]): string {
       const row: Row = {
         probe: name, k, lists: 0, skipped: 0, maxS: 0, maxTotal: 0,
         violatorsS: [], violatorsTotal: [], mass: 0, maxSMass: 0, maxU: 0, repaired: 0,
+        maxAbs: 0, maxRank: 0, maxRankDisplay: 0, rankGone: 0, violatorsRank: [],
       };
       for (const deck of decks) {
         const b = base.get(deck.id);
@@ -369,12 +392,27 @@ function run(profile: SampleProfile, n: number, ks: number[]): string {
           continue;
         }
         row.maxS = Math.max(row.maxS, delta.S);
+        if (delta.rank === null) row.rankGone++;
         if (delta.repaired) row.repaired++;
-        else row.maxTotal = Math.max(row.maxTotal, delta.total);
+        else {
+          row.maxTotal = Math.max(row.maxTotal, delta.total);
+          row.maxAbs = Math.max(row.maxAbs, delta.absolute);
+          if (delta.rank !== null) row.maxRank = Math.max(row.maxRank, delta.rank);
+          if (delta.rankDisplay !== null) row.maxRankDisplay = Math.max(row.maxRankDisplay, delta.rankDisplay);
+        }
         if (UNGRADED.has(name)) continue;
         const sBad = exact ? Math.abs(delta.S) > S_TOLERANCE : delta.S > S_TOLERANCE;
         const tBad = !delta.repaired
           && (exact ? Math.abs(delta.total) > 0 : delta.total > TOTAL_ALLOWANCE);
+        // §10.9 item 5: "Deltaunrounded rank <=1 and Deltadisplayed rank <=1",
+        // and exactly 0 for the metadata/equivalence probes.
+        const rBad = !delta.repaired && delta.rank !== null
+          && (exact
+            ? Math.abs(delta.rank) > 0 || Math.abs(delta.rankDisplay ?? 0) > 0
+            : delta.rank > 1 || (delta.rankDisplay ?? 0) > 1);
+        if (rBad && delta.rank !== null && row.violatorsRank.length < 8) {
+          row.violatorsRank.push(`${deck.id}(rank+${delta.rank.toFixed(2)}/disp+${delta.rankDisplay ?? 0})`);
+        }
         if (sBad && row.violatorsS.length < 8) row.violatorsS.push(`${deck.id}(+${delta.S.toFixed(1)})`);
         if (tBad && row.violatorsTotal.length < 8) row.violatorsTotal.push(`${deck.id}(+${delta.total})`);
       }
@@ -385,7 +423,10 @@ function run(profile: SampleProfile, n: number, ks: number[]): string {
   const out = [
     `## §10.4 gaming probes — ${profile} training stride (${decks.length} fully resolved lists)`,
     '',
-    'Allowance for the WHOLE k-copy edit: max +0 S (1e-6) and +1 displayed total.',
+    'Allowance for the WHOLE k-copy edit: max +0 S (1e-6), +1 displayed total,',
+    '+1 unrounded rank and +1 displayed rank (§10.9 item 5).',
+    '`rank absent` counts edits where one endpoint left the rank domain: no',
+    'numeric rank delta exists there, so it is counted, never graded as 0.',
     '`swap-lands` and `metadata` are equivalences: |ΔS| and |Δtotal| must be 0.',
     '`add-ramp-unmatched` is an UNMATCHED edit: extra ramp can be a real mana',
     'upgrade, so its movement is reported, not graded.',
@@ -394,14 +435,17 @@ function run(profile: SampleProfile, n: number, ks: number[]): string {
     '`repaired` counts edits that removed a card the deck was ILLEGAL for:',
     'lifting a rule failure is a benefit, so those totals are not graded.',
     '',
-    '| probe | k | lists | skipped | max ΔS | max Δtotal | S violations | total violations | repaired | ΔU>0 | max ΔU | max ΔS there | worst lists |',
-    '|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|',
+    '| probe | k | lists | skipped | max ΔS | max ΔT_abs | max Δtotal | max Δrank | max Δrank shown '
+      + '| S viol | total viol | rank viol | rank absent | repaired | ΔU>0 | max ΔU | max ΔS there | worst lists |',
+    '|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|',
   ];
   for (const r of rows) {
-    out.push(`| ${r.probe} | ${r.k || '-'} | ${r.lists} | ${r.skipped} | ${r.maxS.toFixed(2)} | ${r.maxTotal} | ` +
+    out.push(`| ${r.probe} | ${r.k || '-'} | ${r.lists} | ${r.skipped} | ${r.maxS.toFixed(2)} | ` +
+      `${r.maxAbs.toFixed(2)} | ${r.maxTotal} | ${r.maxRank.toFixed(2)} | ${r.maxRankDisplay} | ` +
       `${r.violatorsS.length >= 8 ? '8+' : r.violatorsS.length} | ${r.violatorsTotal.length >= 8 ? '8+' : r.violatorsTotal.length} | ` +
+      `${r.violatorsRank.length >= 8 ? '8+' : r.violatorsRank.length} | ${r.rankGone} | ` +
       `${r.repaired} | ${r.mass} | ${r.maxU.toFixed(1)} | ${r.maxSMass.toFixed(1)} | ` +
-      `${r.violatorsS.slice(0, 3).join(' ') || r.violatorsTotal.slice(0, 3).join(' ') || '—'} |`);
+      `${r.violatorsS.slice(0, 3).join(' ') || r.violatorsRank.slice(0, 3).join(' ') || r.violatorsTotal.slice(0, 3).join(' ') || '—'} |`);
   }
   return out.join('\n');
 }

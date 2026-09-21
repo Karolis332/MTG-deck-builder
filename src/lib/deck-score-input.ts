@@ -7,6 +7,7 @@
  * returns null so callers can splice `deckScore: null` in without a 500.
  */
 import { scoreDeck, SCORE_VERSION, type DeckScoreInput, type DeckScoreResult, type ComponentKey } from './deck-score';
+import { referenceFor, rankOf, type DeckScoreReference } from './deck-score-reference';
 import type { ScoreFormat } from './deck-score-norms';
 import type { ScoreGate } from './deck-score-gates';
 import type { DbCard } from './types';
@@ -96,21 +97,62 @@ export function buildDeckScoreInput(args: BuildDeckScoreInputArgs): DeckScoreInp
   };
 }
 
+/** §10.9 item 4. `headline.kind` tells the caller which number to show:
+ *   rank          a calibrated percentile in this format's frozen reference
+ *   absolute      the absolute total is the headline (no rank layer applies)
+ *   none          a confirmed rule failure — no percentile exists
+ *   uncalibrated  this format has no admitted reference; show diagnostics
+ */
+export type HeadlineKind = 'rank' | 'absolute' | 'none' | 'uncalibrated';
+export type ScoreEvidence = 'calibrated' | 'provisional' | 'invalid' | 'uncalibrated';
+
 export interface DeckScorePayload {
   version: string;
   score: number;
   provisional: boolean;
   components: { key: ComponentKey; score: number; weight: number; reason: string }[];
   gates: ScoreGate[];
+  /** The composed absolute total, unrounded (§10.9 item 1). */
+  absoluteTotal: number;
+  absoluteTotalDisplay: number;
+  /** Unrounded percentile in the frozen reference, or null (§10.9 item 2). */
+  rank: number | null;
+  rankDisplay: number | null;
+  headline: { kind: HeadlineKind; value: number | null };
+  reference: { profile: string; referenceVersion: string; families: number; rows: number; frozenAt: string } | null;
+  evidence: ScoreEvidence;
 }
 
-function toPayload(result: DeckScoreResult): DeckScorePayload {
+/** A confirmed structural/legality failure — the one state that leaves the
+ * rank domain entirely (§10.9 item 2: "keep confirmed structural/legality
+ * failures outside the rank domain"). Missing evidence is NOT this. */
+function ruleFailed(result: DeckScoreResult): boolean {
+  return result.gates.some((g) => g.kind === 'rules' && g.status === 'fail');
+}
+
+function toPayload(result: DeckScoreResult, format: ScoreFormat): DeckScorePayload {
+  const ref: DeckScoreReference | null = referenceFor(format);
+  const invalid = ruleFailed(result);
+  // Evidence labels never select a different CDF or move points: the rank is
+  // computed from the same reference whatever the label says.
+  const rank = ref && !invalid ? rankOf(ref, result.absoluteTotal) : null;
+  const evidence: ScoreEvidence = invalid ? 'invalid' : !ref ? 'uncalibrated' : result.provisional ? 'provisional' : 'calibrated';
+  const kind: HeadlineKind = invalid ? 'none' : !ref ? 'uncalibrated' : 'rank';
   return {
     version: SCORE_VERSION,
     score: result.score,
     provisional: result.provisional,
     components: result.components,
     gates: result.gates,
+    absoluteTotal: result.absoluteTotal,
+    absoluteTotalDisplay: result.score,
+    rank,
+    rankDisplay: rank === null ? null : Math.round(rank),
+    headline: { kind, value: kind === 'rank' ? (rank as number) : null },
+    reference: ref
+      ? { profile: ref.profile, referenceVersion: ref.referenceVersion, families: ref.families, rows: ref.rows, frozenAt: ref.frozenAt }
+      : null,
+    evidence,
   };
 }
 
@@ -118,7 +160,7 @@ function toPayload(result: DeckScoreResult): DeckScorePayload {
 export function runDeckScore(input: DeckScoreInput | null): DeckScorePayload | null {
   if (!input) return null;
   try {
-    return toPayload(scoreDeck(input));
+    return toPayload(scoreDeck(input), input.format);
   } catch {
     return null;
   }

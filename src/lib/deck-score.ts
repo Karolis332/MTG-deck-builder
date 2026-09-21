@@ -47,6 +47,11 @@ export interface DeckScoreInput {
 
 export interface DeckScoreResult {
   score: number;
+  /** §10.9 item 1: the composed absolute total BEFORE display rounding —
+   * clamped to 0..100, caps and quality cap already applied. `score` stays
+   * the rounded absolute (the deployed surfaces read it); the rank layer
+   * ranks this one, because ranking a rounded value is forbidden. */
+  absoluteTotal: number;
   components: { key: ComponentKey; score: number; weight: number; reason: string }[];
   gates: ScoreGate[];
   /** §10.7 "publish ... selected recipe, U/D": the S diagnostics the
@@ -73,6 +78,7 @@ const COMPONENT_ORDER: ComponentKey[] = ['mana', 'curve', 'interaction', 'advant
 function invalidResult(gates: ScoreGate[], weights: Record<ComponentKey, number>): DeckScoreResult {
   return {
     score: 0,
+    absoluteTotal: 0,
     components: COMPONENT_ORDER.map((key) => ({ key, score: 0, weight: weights[key], reason: 'invalid or empty deck input.' })),
     gates,
     detail: { plan: 'midrange', U: 0, D: 0, Qslot: 0, R: 0, typedCoverage: 0 },
@@ -261,7 +267,8 @@ export function scoreDeck(input: Readonly<DeckScoreInput>, tuning?: Readonly<Sco
 
   const hardCaps = structure.hardCaps;
   const rawScore = Math.min(base, qCap, ...(hardCaps.length ? hardCaps : [Infinity]));
-  const score = Number.isFinite(rawScore) ? Math.round(Math.max(0, Math.min(100, rawScore))) : 0;
+  const absoluteTotal = Number.isFinite(rawScore) ? Math.max(0, Math.min(100, rawScore)) : 0;
+  const score = Math.round(absoluteTotal);
 
   const gates: ScoreGate[] = [
     ...structure.gates,
@@ -286,6 +293,7 @@ export function scoreDeck(input: Readonly<DeckScoreInput>, tuning?: Readonly<Sco
 
   return {
     score,
+    absoluteTotal,
     components: COMPONENT_ORDER.map((key) => ({ key, score: scores[key], weight: weights[key], reason: reasons[key] })),
     gates,
     detail: {

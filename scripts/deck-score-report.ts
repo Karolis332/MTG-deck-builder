@@ -18,6 +18,7 @@ import { deriveCardFeature } from '../src/lib/deck-score-features';
 import { producerUtilisation } from '../src/lib/deck-score-producers';
 import { selectPlan, qBaselineFor } from '../src/lib/deck-score-plans';
 import { profileOf } from '../src/lib/deck-score-norms';
+import { scoreDeckSafely, type DeckScorePayload } from '../src/lib/deck-score-input';
 import type { ScoreFormat } from '../src/lib/deck-score';
 import {
   OUT_DIR as SHARED_OUT_DIR, FIXTURES, inBand, loadDataset,
@@ -27,6 +28,42 @@ import {
 const OUT_DIR = SHARED_OUT_DIR;
 const OUT_FILE = path.join(OUT_DIR, 'report.md');
 const PILE_COUNT = 200;
+
+/**
+ * §10.9 item 7 — the SIXTEEN registered rank hypotheses, in the spec's own
+ * order, keyed by the §5 fixture the selector resolves to. `null` means "no
+ * rank": a confirmed structural failure, graded on the absent rank and the
+ * 0-19 absolute band instead of a percentile.
+ *
+ * These REPLACE the absolute bands in `FIXTURES` for grading. Nothing here
+ * re-derives a band from measured ranks — that is exactly what §10.9 forbids.
+ */
+const RANK_BANDS: Record<string, { lo: number; hi: number } | null> = {
+  'meren-powerhouse': { lo: 65, hi: 90 },
+  'cabbage-cedh-input': { lo: 50, hi: 90 },
+  'precon-witherbloom': { lo: 15, hi: 40 },
+  'the-cabbage-merchant': { lo: 50, hi: 90 },
+  'imotekh-the-stormlord': { lo: 40, hi: 80 },
+  'tazri-beacon-of-unity': { lo: 35, hi: 75 },
+  'meren-of-clan-nel-toth': null,
+  'ramos-dragon-engine': null,
+  'cabbage-merchant-current-brawl': null,
+  'tazri-upgraded-arena': { lo: 35, hi: 65 },
+  'kuja-genome-sorcerer-arena': { lo: 25, hi: 60 },
+  'vivi-battery-arena': { lo: 80, hi: 100 },
+  'fire-lord-azula-competitive': { lo: 80, hi: 100 },
+  'cedhtop16-ballooncon6': { lo: 95, hi: 100 },
+  'standard-1445893-univerce': { lo: 65, hi: 95 },
+  'standard-1445867-aljce': { lo: 55, hi: 90 },
+};
+
+/** §10.9 item 7: "including all three structural outcomes and the mandatory
+ * Meren, precon, both Cabbages and Balloon Con entries". */
+const MANDATORY = new Set([
+  'meren-powerhouse', 'cabbage-cedh-input', 'precon-witherbloom', 'the-cabbage-merchant',
+  'cedhtop16-ballooncon6', 'meren-of-clan-nel-toth', 'ramos-dragon-engine',
+  'cabbage-merchant-current-brawl',
+]);
 
 interface FixtureResult {
   fixture: string;
@@ -47,6 +84,10 @@ interface FixtureResult {
   b: number;
   Q: number;
   R: number;
+  /** Through `scoreDeckSafely` — the shipped entry point (§10.9 item 5). */
+  payload: DeckScorePayload | null;
+  rankBand: string;
+  rankVerdict: 'PASS' | 'FAIL' | 'n/a';
 }
 
 // ── Scoring + reporting ─────────────────────────────────────────────────
@@ -73,6 +114,23 @@ function runFixture(spec: FixtureSpec): FixtureResult {
   const charged = util.rows.reduce((a, r) => a + r.quantity, 0);
   const meanU = charged > 0 ? util.rows.reduce((a, r) => a + r.quantity * r.u, 0) / charged : 1;
   const utilisation = `${charged} charged, ${util.rows.filter((r) => r.u === 0).reduce((a, r) => a + r.quantity, 0)} stranded, mean u ${meanU.toFixed(2)}`;
+  // §10.9 item 5: the graded numbers come from `scoreDeckSafely`, not from a
+  // component formula. The fixture's own `scoreDeck` result stays as the
+  // diagnostic source; a divergence would be a wiring defect and is reported.
+  const payload = scoreDeckSafely({
+    format: spec.format, main: [...input.main], commander: [...input.commander],
+    sideboard: [...input.sideboard], companion: input.companion, unresolved: [...input.unresolved],
+  });
+  const expected = RANK_BANDS[spec.name];
+  const rank = payload?.rank ?? null;
+  let rankVerdict: 'PASS' | 'FAIL' | 'n/a' = 'n/a';
+  if (expected === null) {
+    // No-rank anchors: the rank must be absent AND the absolute total capped.
+    rankVerdict = rank === null && result.score <= 19 ? 'PASS' : 'FAIL';
+  } else if (expected) {
+    // An uncalibrated or absent rank is never a calibrated anchor pass.
+    rankVerdict = rank !== null && rank >= expected.lo && rank <= expected.hi ? 'PASS' : 'FAIL';
+  }
   const profile = profileOf(spec.format);
   const cmdEntries = input.commander.map((c) => ({ feature: deriveCardFeature(c), quantity: 1 }));
   const N = input.main.reduce((a, rc) => a + rc.quantity, 0);
@@ -84,6 +142,9 @@ function runFixture(spec: FixtureSpec): FixtureResult {
     b: plan ? qBaselineFor(profile, plan.recipe.key) : 0,
     Q: plan?.Q ?? 0,
     R: plan?.R ?? 0,
+    payload,
+    rankBand: expected === null ? 'no rank + total 0-19' : expected ? `p${expected.lo}-p${expected.hi}` : '-',
+    rankVerdict,
   };
 }
 
@@ -165,6 +226,75 @@ function acceptanceBlock(fixtures: FixtureResult[]): string {
   ].join('\n');
 }
 
+/** §10.9 item 7, graded against THAT table — not against the builder bands. */
+function rankAnchorBlock(fixtures: FixtureResult[]): string {
+  const order = Object.keys(RANK_BANDS);
+  const rows = order.map((name, i) => {
+    const f = fixtures.find((x) => x.fixture === name);
+    if (!f) return `| ${i + 1} | ${name} | - | - | - | - | MISSING |`;
+    const p = f.payload;
+    const rank = p?.rank;
+    return `| ${i + 1} | ${name} | ${f.format} | ${f.score} (${p ? String(p.absoluteTotal) : '-'}) | `
+      + `${rank === null || rank === undefined ? 'none' : rank.toFixed(2)} | ${f.rankBand} | `
+      + `${p?.headline.kind ?? 'unavailable'}/${p?.evidence ?? '-'} | ${f.rankVerdict}`
+      + `${MANDATORY.has(name) ? ' (mandatory)' : ''} |`;
+  });
+  const pass = order.filter((n) => fixtures.find((x) => x.fixture === n)?.rankVerdict === 'PASS');
+  const mandatoryFail = [...MANDATORY].filter((n) => !pass.includes(n));
+  const legal = order.filter((n) => RANK_BANDS[n] !== null);
+  const legalPass = legal.filter((n) => pass.includes(n));
+  return [
+    '| # | anchor | format | total (unrounded) | rank | required | headline/evidence | verdict |',
+    '|---:|---|---|---:|---:|---|---|---|',
+    ...rows,
+    '',
+    `**${pass.length}/16** in band (gate >= 14/16); legal subset **${legalPass.length}/${legal.length}** `
+      + `(gate >= 11/13); mandatory failures: ${mandatoryFail.length === 0 ? 'none' : mandatoryFail.join(', ')}.`,
+    `Overall: ${pass.length >= 14 && mandatoryFail.length === 0 && legalPass.length >= 11 ? 'PASS' : 'FAIL'}.`,
+  ].join('\n');
+}
+
+/** §10.9 item 3 cEDH row: rank p10 >= 95, p50 >= 98, both formerly
+ * missing-line lists (`cedh-0`/`cedh-1`, the same 98-card list under two
+ * entry ids) and Balloon Con (`decks[2]`) >= 95, W > 0 for 30/30. */
+function cedhRankBlock(): string {
+  const data = loadDataset(PILE_COUNT);
+  const rows = data.cedh.map((input, i) => {
+    const payload = scoreDeckSafely({
+      format: input.format, main: [...input.main], commander: [...input.commander],
+      sideboard: [...input.sideboard], unresolved: [...input.unresolved],
+    });
+    return {
+      i,
+      rank: payload?.rank ?? null,
+      total: payload?.absoluteTotal ?? null,
+      W: payload?.components.find((c) => c.key === 'win')?.score ?? 0,
+    };
+  });
+  const ranks = rows.filter((r) => r.rank !== null).map((r) => r.rank as number).sort((a, b) => a - b);
+  const q = (pp: number): number => (ranks.length ? ranks[Math.min(ranks.length - 1, Math.round((pp / 100) * (ranks.length - 1)))] : NaN);
+  const named = (i: number): string => {
+    const r = rows[i];
+    return `${r.rank === null ? 'none' : r.rank.toFixed(2)} (T_abs ${r.total === null ? '-' : String(r.total)}, W ${r.W})`;
+  };
+  const wPositive = rows.filter((r) => r.W > 0).length;
+  const line = (label: string, measured: string, ok: boolean): string => `| ${label} | ${measured} | ${ok ? 'PASS' : 'FAIL'} |`;
+  return [
+    `${rows.length} cEDH regression lists, ${ranks.length} with a numeric rank.`,
+    '',
+    '| §10.9 cEDH requirement | measured | |',
+    '|---|---|---|',
+    line('rank p10 >= 95', q(10).toFixed(2), q(10) >= 95),
+    line('rank p50 >= 98', q(50).toFixed(2), q(50) >= 98),
+    line('cedh-0 (formerly missing line) rank >= 95', named(0), (rows[0].rank ?? -1) >= 95),
+    line('cedh-1 (formerly missing line) rank >= 95', named(1), (rows[1].rank ?? -1) >= 95),
+    line('cedh-2 Balloon Con rank >= 95', named(2), (rows[2].rank ?? -1) >= 95),
+    line('W > 0 on 30/30', `${wPositive}/${rows.length}`, wPositive === rows.length),
+    '',
+    `rank p10/p50/p90: ${q(10).toFixed(2)} / ${q(50).toFixed(2)} / ${q(90).toFixed(2)}`,
+  ].join('\n');
+}
+
 // ── Main ──────────────────────────────────────────────────────────────────
 
 function main() {
@@ -174,6 +304,10 @@ function main() {
   const anchorsTotal = fixtures.filter((f) => f.inBand !== 'n/a').length;
 
   const acceptance = acceptanceBlock(fixtures);
+  const rankAnchors = rankAnchorBlock(fixtures);
+  const cedhRanks = cedhRankBlock();
+  const drift = fixtures.filter((f) => f.payload && f.payload.score !== f.score)
+    .map((f) => `${f.fixture} ${f.score} vs ${f.payload?.score}`);
 
   const componentKeys = ['mana', 'curve', 'interaction', 'advantage', 'win', 'synergy', 'meta'];
   const componentAbbrev: Record<string, string> = { mana: 'M', curve: 'C', interaction: 'I', advantage: 'A', win: 'W', synergy: 'S', meta: 'Fmeta' };
@@ -203,7 +337,19 @@ Component columns: M=mana C=curve I=interaction A=advantage W=win S=synergy Fmet
 
 ${header}${rows}
 
-Anchors in band: ${anchorsInBand}/${anchorsTotal} (fixtures with a hard-cap-only band like "0-19" always count as anchors here; "if rule-valid" bands are graded the same way — this report does not re-derive Arena rule-validity separately).
+## §10.9 item 7 — the 16 rank anchors (v1.4 stage 2c)
+
+Graded against §10.9's rank table, through \`scoreDeckSafely\`. Absolute bands
+below are the superseded §5/§8 ones, kept as diagnostics.
+\`scoreDeck\` vs \`scoreDeckSafely\` total drift: ${drift.length === 0 ? 'none' : drift.join('; ')}.
+
+${rankAnchors}
+
+## §10.9 cEDH regression ranks
+
+${cedhRanks}
+
+Anchors in band (superseded absolute bands): ${anchorsInBand}/${anchorsTotal} (fixtures with a hard-cap-only band like "0-19" always count as anchors here; "if rule-valid" bands are graded the same way — this report does not re-derive Arena rule-validity separately).
 
 ## Win lines — which closing family the deck's best line came from
 

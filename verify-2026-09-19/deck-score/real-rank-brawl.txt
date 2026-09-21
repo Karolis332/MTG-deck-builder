@@ -1,0 +1,24 @@
+PRODUCT METRIC — brawl training stride through scoreDeckSafely (no --raw), card data 14924 catalogue entries
+reference brawl 1.4.0-ref1 frozen 2026-09-21: 785 rows, 179 families, 159 knots, 67 tied intervals, largest atom 8.69% of weight at T_abs 70.96000000000001
+typed coverage p10/p50/p90 0.632 / 0.750 / 0.850
+
+| statistic | full stride | eligible subset |
+|---|---:|---:|
+| rows | 1146 | 797 |
+| unavailable (no numeric total) | 0 | 0 |
+| S = 0 or unavailable | 0/1146 (0.0%) | 0/797 (0.0%) |
+| S p10 / p50 / p90 | 62.2 / 87.1 / 100.0 | 63.7 / 87.1 / 100.0 |
+| W p10 / p50 / p90 | 47.8 / 62.0 / 70.7 | 49.3 / 62.0 / 71.5 |
+| total p10 / p50 / p90 | 19 / 63 / 75 | 58 / 68 / 76 |
+| rank p10 / p50 / p90 | 9.3 / 47.6 / 90.1 | 9.3 / 47.6 / 90.1 |
+| no rank (scored) | 345/1146 (30.1%) | 0/797 (0.0%) |
+| W = 0 share (scored) | 16/1146 (1.4%) | 11/797 (1.4%) |
+| hard cap < 25 | 345/1146 (30.1%) | 0/797 (0.0%) |
+| provisional share | 849/1146 (74.1%) | 571/797 (71.6%) |
+
+excluded by input gate (cohorts-v14.json): legality 335, singleton 6, unresolved 5, identity 3
+
+| control construction | total < 25 | pile W p10/p50/p90 | gap vs eligible real W (49.3 / 62.0 / 71.5) | rank p10/p50/p90/p95 | rank >= 95 (limit 20/200) |
+|---|---:|---:|---:|---:|---:|
+| ctrl93 (n=200, study seeds) | 2/200 (1.0%) | 52.2 / 62.0 / 65.2 | +2.9 / 0.0 / -6.3 POSITIVE | 20.8 / 55.3 / 70.0 / 72.8 | 5/200 |
+| ctrlmatch (n=200, study seeds) | 2/200 (1.0%) | 52.2 / 62.0 / 63.7 | +2.9 / 0.0 / -7.8 POSITIVE | 20.8 / 47.6 / 64.7 / 64.7 | 1/200 |

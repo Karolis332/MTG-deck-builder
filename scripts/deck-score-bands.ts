@@ -19,6 +19,10 @@
 import { loadStandardCohorts, loadStandardDbFixture, loadCedhCohort, loadDataset, standardEventFamilies, OUT_DIR } from './deck-score-fixtures';
 import { loadMatchedPiles, loadCohortPiles, loadStudyControls, strideOrder, readSample, cardsByName, cohortSeed, HOLDOUT_EVERY, type SampleCohort, type SampleProfile } from './deck-score-piles';
 import { readManifest, verifyCohortHashes, sha256 } from './deck-score-cohorts';
+import {
+  REFERENCE_VERSION, buildReferenceKnots, meanReferenceRank, referenceFor,
+  type DeckScoreReference,
+} from '../src/lib/deck-score-reference';
 import { scoreDeck } from '../src/lib/deck-score';
 import type { DbCard } from '../src/lib/types';
 import { deriveCardFeature, type CardFeature } from '../src/lib/deck-score-features';
@@ -945,6 +949,9 @@ interface RealRow {
   S: number | null;
   W: number | null;
   total: number | null;
+  /** §10.9 unrounded rank in the profile's frozen reference, null when the
+   * profile is uncalibrated or the list left the rank domain. */
+  rank: number | null;
   coverage: number;
   hardCapUnder25: boolean;
   provisional: boolean;
@@ -980,6 +987,7 @@ function scoreStride(profile: SampleProfile, cohort: SampleCohort, n: number): R
       S: payload ? payload.components.find((c) => c.key === 'synergy')?.score ?? 0 : null,
       W: payload ? payload.components.find((c) => c.key === 'win')?.score ?? 0 : null,
       total: payload ? payload.score : null,
+      rank: payload ? payload.rank : null,
       coverage: F > 0 ? nonLand.filter((e) => e.feature.covered).reduce((a, e) => a + e.quantity, 0) / F : 1,
       hardCapUnder25: caps.some((g) => (g.cap as number) < 25),
       provisional: payload?.provisional ?? false,
@@ -998,11 +1006,12 @@ function scoreStride(profile: SampleProfile, cohort: SampleCohort, n: number): R
  */
 function pileUnder25(
   profile: SampleProfile, kind: 'ctrl93' | 'ctrlmatch', n: number, realCoverage: number[],
-): { under: string; w: string; wq: [number, number, number] } {
+): { under: string; w: string; wq: [number, number, number]; rank: string; top: string } {
   const piles = loadStudyControls(profile, kind, n, realCoverage);
   let under = 0;
   let nulls = 0;
   const W: number[] = [];
+  const ranks: number[] = [];
   for (const pile of piles) {
     const payload = scoreDeckSafely({
       format: pile.input.format, main: [...pile.input.main], commander: [...pile.input.commander],
@@ -1010,7 +1019,9 @@ function pileUnder25(
     if (!payload) { nulls++; W.push(0); continue; }
     if (payload.score < 25) under++;
     W.push(payload.components.find((c) => c.key === 'win')?.score ?? 0);
+    if (payload.rank !== null) ranks.push(payload.rank);
   }
+  ranks.sort((a, b) => a - b);
   W.sort((a, b) => a - b);
   const wq: [number, number, number] = [pct(W, 10), pct(W, 50), pct(W, 90)];
   return {
@@ -1018,6 +1029,10 @@ function pileUnder25(
       `${nulls ? `, ${nulls} unavailable` : ''}`,
     w: `${wq[0].toFixed(1)} / ${wq[1].toFixed(1)} / ${wq[2].toFixed(1)}`,
     wq,
+    // §10.9 item 4: the registered guard is the TOP TAIL, not an origin test.
+    rank: ranks.length === 0 ? 'uncalibrated' : `${pct(ranks, 10).toFixed(1)} / ${pct(ranks, 50).toFixed(1)} `
+      + `/ ${pct(ranks, 90).toFixed(1)} / ${pct(ranks, 95).toFixed(1)}`,
+    top: ranks.length === 0 ? '-' : `${ranks.filter((x) => x >= 95).length}/${piles.length}`,
   };
 }
 
@@ -1037,6 +1052,7 @@ function realLists(n: number, profile: SampleProfile, cohort: SampleCohort = 'tr
     const S = scored.map((r) => r.S as number).sort((a, b) => a - b);
     const W = scored.map((r) => r.W as number).sort((a, b) => a - b);
     const T = scored.map((r) => r.total as number).sort((a, b) => a - b);
+    const R = scored.filter((r) => r.rank !== null).map((r) => r.rank as number).sort((a, b) => a - b);
     // §10.5: "for release S-zero coverage count S=0 OR unavailable".
     const zeroS = set.filter((r) => r.total === null || (r.S as number) < 0.05).length;
     const share = (k: number, of: number) => `${k}/${of} (${((100 * k) / Math.max(1, of)).toFixed(1)}%)`;
@@ -1047,6 +1063,8 @@ function realLists(n: number, profile: SampleProfile, cohort: SampleCohort = 'tr
       `${pct(S, 10).toFixed(1)} / ${pct(S, 50).toFixed(1)} / ${pct(S, 90).toFixed(1)}`,
       `${pct(W, 10).toFixed(1)} / ${pct(W, 50).toFixed(1)} / ${pct(W, 90).toFixed(1)}`,
       `${pct(T, 10)} / ${pct(T, 50)} / ${pct(T, 90)}`,
+      R.length === 0 ? 'uncalibrated' : `${pct(R, 10).toFixed(1)} / ${pct(R, 50).toFixed(1)} / ${pct(R, 90).toFixed(1)}`,
+      share(scored.length - R.length, scored.length),
       share(W.filter((x) => x < 0.05).length, scored.length),
       share(set.filter((r) => r.hardCapUnder25).length, set.length),
       share(set.filter((r) => r.provisional).length, set.length),
@@ -1057,13 +1075,21 @@ function realLists(n: number, profile: SampleProfile, cohort: SampleCohort = 'tr
   const sub = column(rows.filter(isEligible));
   const labels = [
     'rows', 'unavailable (no numeric total)', 'S = 0 or unavailable', 'S p10 / p50 / p90',
-    'W p10 / p50 / p90', 'total p10 / p50 / p90', 'W = 0 share (scored)',
+    'W p10 / p50 / p90', 'total p10 / p50 / p90', 'rank p10 / p50 / p90', 'no rank (scored)',
+    'W = 0 share (scored)',
     'hard cap < 25', 'provisional share',
   ];
   const coverage = rows.map((r) => r.coverage).sort((a, b) => a - b);
+  const ref = referenceFor(profile as ScoreFormat);
   console.log([
     `PRODUCT METRIC — ${profile} ${cohort} stride through scoreDeckSafely (no --raw), ` +
       `card data ${CATALOG_SIZE} catalogue entries`,
+    ref
+      ? `reference ${ref.profile} ${ref.referenceVersion} frozen ${ref.frozenAt}: ${ref.rows} rows, `
+        + `${ref.families} families, ${ref.knots.length} knots, ${ref.tiedIntervals} tied intervals, `
+        + `largest atom ${(100 * ref.largestAtom).toFixed(2)}% of weight at T_abs `
+        + `${ref.knots.reduce((a, b) => (b.mass > a.mass ? b : a)).t}`
+      : `reference ${profile}: NONE — this profile is uncalibrated, every rank is null`,
     `typed coverage p10/p50/p90 ${pct(coverage, 10).toFixed(3)} / ${pct(coverage, 50).toFixed(3)} / ${pct(coverage, 90).toFixed(3)}`,
     '',
     '| statistic | full stride | eligible subset |',
@@ -1087,14 +1113,14 @@ function realLists(n: number, profile: SampleProfile, cohort: SampleCohort = 'tr
     const realW: [number, number, number] = [pct(eligibleW, 10), pct(eligibleW, 50), pct(eligibleW, 90)];
     console.log('');
     console.log(`| control construction | total < 25 | pile W p10/p50/p90 | gap vs eligible real W `
-      + `(${realW.map((x) => x.toFixed(1)).join(' / ')}) |`);
-    console.log('|---|---:|---:|---:|');
+      + `(${realW.map((x) => x.toFixed(1)).join(' / ')}) | rank p10/p50/p90/p95 | rank >= 95 (limit 20/200) |`);
+    console.log('|---|---:|---:|---:|---:|---:|');
     for (const kind of ['ctrl93', 'ctrlmatch'] as const) {
       const r = pileUnder25(profile, kind, piles, realCoverage);
       const gaps = r.wq.map((x, i) => x - realW[i]);
       console.log(`| ${kind} (n=${piles}, study seeds) | ${r.under} | ${r.w} | `
         + `${gaps.map((g) => (g > 0 ? `+${g.toFixed(1)}` : g.toFixed(1))).join(' / ')}`
-        + `${gaps.some((g) => g > 0) ? ' POSITIVE' : ' ok'} |`);
+        + `${gaps.some((g) => g > 0) ? ' POSITIVE' : ' ok'} | ${r.rank} | ${r.top} |`);
     }
   }
 }
@@ -1451,6 +1477,222 @@ function domainMismatches(stored: DomainFreeze, now: DomainFreeze): string[] {
   return out;
 }
 
+
+// ── v1.4 stage 2c: the frozen rank reference (§10.9 item 2) ───────────────
+//
+//   MTG_DB_DIR=... npx tsx scripts/deck-score-bands.ts reference freeze [--write]
+//   MTG_DB_DIR=... npx tsx scripts/deck-score-bands.ts reference verify
+//
+// One weighted empirical CDF per admitted profile, measured on its ELIGIBLE
+// real TRAINING lists through `scoreDeckSafely` — the shipped entry point, so
+// the knots are the same absolute totals the product publishes. Freezing is
+// refused when a profile has fewer than 30 independent families or when any
+// eligible row has no finite absolute total ("an entirely unevaluable
+// essential component blocks this freeze").
+
+const REFERENCE_DIR = path.join(OUT_DIR, '..', '..', 'src', 'lib', 'deck-score-reference');
+const REFERENCE_PROFILES: readonly ScoreProfile[] = ['commander', 'brawl', 'standard'];
+const MIN_REFERENCE_FAMILIES = 30;
+
+interface ReferenceRow {
+  id: string; family: string; altFamily: string; total: number | null; unavailable: string | null;
+}
+
+/** The domain a reference answers to: the recipe/catalogue/scheduler freeze
+ * WITHOUT its `frozenAt` date, so re-freezing on another day does not claim a
+ * different domain. */
+function domainHash(): string {
+  const d = domainFreeze();
+  return sha256(JSON.stringify([d.scoreVersion, d.catalogVersion, d.catalogSize, d.catalogSha256,
+    d.combosSha256, d.planRecipes, d.winFamilies, d.scheduler]));
+}
+
+/**
+ * Every eligible training row of one profile, scored through the product
+ * entry point. Exact duplicates (equal normalised-list sha256 in the frozen
+ * manifest) collapse to their first id in manifest order.
+ */
+function referenceRows(profile: ScoreProfile): {
+  rows: ReferenceRow[]; excluded: Record<string, number>; duplicates: number; altFamilies: number;
+} {
+  const manifest = readManifest();
+  if (!manifest) throw new Error('cohorts-v14.json missing — cannot freeze a reference');
+  const excluded: Record<string, number> = {};
+  const eligible = new Map<string, { family: string; sha: string }>();
+  const seen = new Set<string>();
+  let duplicates = 0;
+  for (const r of manifest.rows) {
+    if (r.profile !== profile || r.split !== 'training') continue;
+    if (r.exclusion !== 'none') { excluded[r.exclusion] = (excluded[r.exclusion] ?? 0) + 1; continue; }
+    if (seen.has(r.sha256)) { duplicates += 1; excluded.duplicate = (excluded.duplicate ?? 0) + 1; continue; }
+    seen.add(r.sha256);
+    eligible.set(r.id, { family: r.commanderFamily, sha: r.sha256 });
+  }
+
+  const rows: ReferenceRow[] = [];
+  const push = (id: string, altFamily: string, args: Parameters<typeof scoreDeckSafely>[0]): void => {
+    const hit = eligible.get(id);
+    if (!hit) return;
+    const unavailable = explainScoreUnavailable(args);
+    const payload = unavailable ? null : scoreDeckSafely(args);
+    rows.push({
+      id, family: hit.family, altFamily,
+      total: payload && Number.isFinite(payload.absoluteTotal) ? payload.absoluteTotal : null,
+      unavailable: unavailable ?? (payload ? null : 'scorer returned null'),
+    });
+  };
+
+  if (profile === 'standard') {
+    const data = loadDataset(0);
+    const events = standardEventFamilies();
+    for (const row of [...data.standardPositive, ...data.standardNegative]) {
+      push(`standard:${row.id}`, events.get(row.id) ?? `event-date:${row.eventDate}`, {
+        format: 'standard', main: [...row.input.main], commander: [...row.input.commander],
+        sideboard: [...row.input.sideboard], unresolved: [...row.input.unresolved],
+      });
+    }
+  } else {
+    const byName = cardsByName();
+    for (const { deck } of cohortSample('training', profile as SampleProfile)) {
+      const main: { card: DbCard; quantity: number }[] = [];
+      const commanders: DbCard[] = [];
+      const unresolved: { name: string; quantity: number; board: string }[] = [];
+      const commanderName = deck.commander.toLowerCase();
+      let took = false;
+      for (const line of deck.cards) {
+        const card = byName.get(line.name.toLowerCase());
+        if (!card) { unresolved.push({ name: line.name, quantity: line.quantity, board: 'main' }); continue; }
+        if (!took && line.name.toLowerCase() === commanderName) { commanders.push(card); took = true; continue; }
+        main.push({ card, quantity: line.quantity });
+      }
+      push(`${profile}-sample:${deck.id}`, commanderName, {
+        format: profile as ScoreFormat, main, commander: commanders, unresolved,
+      });
+    }
+  }
+  return { rows, excluded, duplicates, altFamilies: new Set(rows.map((r) => r.altFamily)).size };
+}
+
+function referenceFile(profile: ScoreProfile): string {
+  return path.join(REFERENCE_DIR, `${profile}.json`);
+}
+
+function readStoredReference(profile: ScoreProfile): DeckScoreReference | null {
+  const file = referenceFile(profile);
+  if (!fs.existsSync(file)) return null;
+  return JSON.parse(fs.readFileSync(file, 'utf-8')) as DeckScoreReference;
+}
+
+/** Deterministic text: metadata pretty-printed, one knot per line. */
+function referenceText(ref: DeckScoreReference): string {
+  const knots = ref.knots;
+  const body = JSON.stringify({ ...ref, knots: '@@KNOTS@@' }, null, 2);
+  return `${body.replace('"@@KNOTS@@"',
+    `[\n${knots.map((k) => `    ${JSON.stringify(k)}`).join(',\n')}\n  ]`)}\n`;
+}
+
+function buildReference(profile: ScoreProfile): {
+  ref: DeckScoreReference | null; blockers: string[]; lines: string[];
+} {
+  const { rows, excluded, duplicates, altFamilies } = referenceRows(profile);
+  const unavailable = rows.filter((r) => r.total === null);
+  const samples = rows.filter((r) => r.total !== null).map((r) => ({ value: r.total as number, family: r.family }));
+  const built = buildReferenceKnots(samples);
+  const blockers: string[] = [];
+  if (unavailable.length > 0) {
+    blockers.push(`${unavailable.length} eligible row(s) have no finite absolute total `
+      + `(first: ${unavailable.slice(0, 3).map((r) => `${r.id} — ${r.unavailable}`).join('; ')})`);
+  }
+  if (built.families < MIN_REFERENCE_FAMILIES) {
+    blockers.push(`only ${built.families} independent families (<${MIN_REFERENCE_FAMILIES}); `
+      + `alternative grouping would give ${altFamilies}`);
+  }
+  const ref: DeckScoreReference = {
+    profile: profile as ScoreFormat,
+    referenceVersion: REFERENCE_VERSION,
+    scoreVersion: SCORE_VERSION,
+    catalogueHash: CATALOG_VERSION,
+    domainHash: domainHash(),
+    cohortHash: sha256(rows.map((r) => `${r.id}|${r.family}`).sort().join('\n')),
+    families: built.families,
+    rows: built.rows,
+    excluded,
+    frozenAt: new Date().toISOString().slice(0, 10),
+    largestAtom: built.largestAtom,
+    tiedIntervals: built.tiedIntervals,
+    knots: built.knots,
+  };
+  const weightSum = ref.knots.reduce((s, k) => s + k.mass, 0);
+  const mean = ref.knots.length ? meanReferenceRank(ref) : NaN;
+  const q = (p: number): number => weightedQuantile(samples, p);
+  const lines = [
+    `| ${profile} | ${built.rows} | ${built.families} | ${altFamilies} | ${duplicates} | ${unavailable.length} | `
+      + `${ref.knots.length} | ${built.tiedIntervals} | ${built.largestAtom.toExponential(3)} | `
+      + `${weightSum.toFixed(12)} | ${Number.isFinite(mean) ? mean.toFixed(9) : '-'} | `
+      + `${q(0.10).toFixed(2)} / ${q(0.50).toFixed(2)} / ${q(0.90).toFixed(2)} | `
+      + `${blockers.length === 0 ? 'OK' : 'BLOCKED'} |`,
+  ];
+  return { ref: blockers.length === 0 ? ref : null, blockers, lines };
+}
+
+function referenceCommand(write: boolean): void {
+  const header = ['| profile | rows | families | alt families | dups | unavailable | knots | ties | largest atom '
+    + '| weight sum | mean rank | T_abs p10/p50/p90 | verdict |',
+  '|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|'];
+  const notes: string[] = [];
+  for (const profile of REFERENCE_PROFILES) {
+    const { ref, blockers, lines } = buildReference(profile);
+    header.push(...lines);
+    for (const b of blockers) notes.push(`${profile}: ${b}`);
+    if (!write) continue;
+    if (!ref) { notes.push(`${profile}: NOT written — blocked`); continue; }
+    fs.writeFileSync(referenceFile(profile), referenceText(ref));
+    notes.push(`${profile}: written ${referenceFile(profile)} (${ref.knots.length} knots)`);
+  }
+  console.log(header.join('\n'));
+  if (notes.length) console.log(`\n${notes.join('\n')}`);
+  if (!write) console.log('\ndry run — pass --write to freeze');
+}
+
+/** Re-scores every training stride and reproduces the stored knots, weights,
+ * hashes and the mean. Returns one failure line per drift. */
+function referenceMismatches(rows: string[]): string[] {
+  const fail: string[] = [];
+  for (const profile of REFERENCE_PROFILES) {
+    const stored = readStoredReference(profile);
+    if (!stored || stored.referenceVersion !== REFERENCE_VERSION) {
+      rows.push(`| reference ${profile} | ${stored?.referenceVersion ?? 'absent'} | ${REFERENCE_VERSION} | 0 | `
+        + 'UNFROZEN (no calibrated rank for this profile) |');
+      continue;
+    }
+    const { ref } = buildReference(profile);
+    if (!ref) { fail.push(`reference ${profile}: re-measure is BLOCKED but a frozen file exists`); continue; }
+    const diffs: string[] = [];
+    for (const k of ['scoreVersion', 'catalogueHash', 'domainHash', 'cohortHash', 'families', 'rows', 'tiedIntervals'] as const) {
+      if (String(stored[k]) !== String(ref[k])) diffs.push(`${k} ${String(stored[k]).slice(0, 16)} vs ${String(ref[k]).slice(0, 16)}`);
+    }
+    if (stored.knots.length !== ref.knots.length) diffs.push(`knots ${stored.knots.length} vs ${ref.knots.length}`);
+    else {
+      for (let i = 0; i < ref.knots.length; i++) {
+        const a = stored.knots[i];
+        const b = ref.knots[i];
+        if (a.t !== b.t || a.n !== b.n || Math.abs(a.below - b.below) > 1e-12 || Math.abs(a.mass - b.mass) > 1e-12) {
+          diffs.push(`knot ${i} ${a.t}/${a.n} vs ${b.t}/${b.n}`);
+          break;
+        }
+      }
+    }
+    const mean = meanReferenceRank(stored);
+    const weight = stored.knots.reduce((s, k) => s + k.mass, 0);
+    if (Math.abs(mean - 50) > 1e-9) diffs.push(`mean rank ${mean.toFixed(12)}`);
+    if (Math.abs(weight - 1) > 1e-12) diffs.push(`weight sum ${weight.toFixed(15)}`);
+    rows.push(`| reference ${profile} | ${stored.cohortHash.slice(0, 12)} | ${ref.cohortHash.slice(0, 12)} | `
+      + `${stored.rows} | ${diffs.length === 0 ? 'MATCH' : 'MISMATCH'} |`);
+    for (const d of diffs) fail.push(`reference ${profile}: ${d}`);
+  }
+  return fail;
+}
+
 // ── round 1 (refuter R2): re-measure every frozen constant ────────────────
 //
 //   MTG_DB_DIR=... npx tsx scripts/deck-score-bands.ts verify
@@ -1529,6 +1771,10 @@ function verifyFrozen(): void {
       + `${diffs.length === 0 ? 'MATCH' : 'MISMATCH'} |`);
     for (const d of diffs) fail.push(`domain ${d}`);
   }
+
+  // v1.4 stage 2c (§10.9 item 3): one command checks norms + domain +
+  // reference. A drifted CDF is as invalidating as a drifted band cell.
+  for (const f of referenceMismatches(rows)) fail.push(f);
 
   console.log(rows.join('\n'));
   console.log('');
@@ -1722,6 +1968,11 @@ function main(): void {
     return;
   }
   if (argv.includes('domain')) { domainCommand(argv.includes('--write')); return; }
+  if (argv.includes('reference')) {
+    if (argv.includes('verify')) { verifyFrozen(); return; }
+    referenceCommand(argv.includes('--write'));
+    return;
+  }
   if (argv.includes('verify')) { verifyFrozen(); return; }
   if (argv.includes('freeze')) { freezeCommand(argv.includes('--write')); return; }
   if (argv.includes('real')) {
