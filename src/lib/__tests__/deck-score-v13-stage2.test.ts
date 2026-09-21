@@ -304,7 +304,10 @@ describe('§9.1 dispatch is by FORMAT: the Standard change moves no Commander de
     // mass it holds and these twenty run 32-72. §10.1's pile gate is OPEN and
     // release-blocking — pinned as the measurement stage 3 inherits.
     const scores = loadRandomPiles(20).map((input) => scoreDeck(input).score);
-    expect(scores).toEqual([65, 54, 60, 55, 65, 72, 62, 60, 59, 63, 35, 55, 69, 62, 66, 54, 66, 63, 55, 32]);
+    // RE-PINNED by v1.4 stage 1d (section 10.8 resource corrections plus the
+    // T20 Commander horizon). Piles fall: p50 60 -> 50, and four of the
+    // twenty now land under 25. Measured, not fitted.
+    expect(scores).toEqual([50, 25, 51, 23, 54, 54, 49, 33, 50, 50, 28, 25, 52, 30, 51, 24, 55, 51, 26, 27]);
   });
 });
 
@@ -315,7 +318,11 @@ describe('§9.2 fresh matched negative controls', () => {
     // section-5 piles. Full run, n = 200: 189/200 total < 25, 145/200 S <= 5.
     const controls = loadMatchedPiles(10, 2000, 0xf00d0000, 0.93);
     expect(controls).toHaveLength(10);
-    expect(controls.map((c) => scoreDeck(c.input).score)).toEqual([20, 20, 20, 20, 20, 20, 20, 20, 20, 20]);
+    // RE-PINNED by v1.4 stage 1d: eight of these ten used to sit exactly on
+    // the rule floor of 20; the T20 horizon lets a matched control assemble
+    // just enough output to clear it by one or two points. Against the
+    // measured direction and reported as such.
+    expect(controls.map((c) => scoreDeck(c.input).score)).toEqual([22, 21, 21, 22, 21, 22, 21, 20, 20, 22]);
     for (const c of controls) {
       expect(c.input.main.reduce((a, rc) => a + rc.quantity, 0)).toBe(99);
       expect(c.lands).toBeGreaterThanOrEqual(20);

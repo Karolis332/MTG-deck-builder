@@ -256,13 +256,20 @@ describe('§10.2 burst mana — typed, bounded, and never counted twice', () => 
     expect(sched.trace).toContain('unbounded ritual');
   });
 
-  it('a ritual already paid into the ramp bonus is not also paid as burst', () => {
-    // `deck-score-win.ts` pays cheap typed ramp into `manaAt`; the same card
-    // must not appear in `burstMana` as well.
+  // REVISED by stage 1d (section 10.8 item 2). This test used to accept the
+  // OPPOSITE rule: a cheap printed ritual counted as typed ramp in `manaAt`,
+  // so it was barred from `burstMana` to avoid double payment. That made
+  // `Pyretic Ritual` pay +1 mana on every turn for ever, having resolved
+  // once. The ritual now leaves the persistent ramp bonus entirely and is
+  // credited exactly once, here, in the burst budget - so the "never counted
+  // twice" invariant now points the other way.
+  it('a ritual is paid once, in the burst budget, and never in the ramp bonus', () => {
     const ramp = feature({ name: 'Pyretic Ritual', cmc: 2, type: 'Instant', text: 'Add {R}{R}{R}.' });
+    expect(isPrintedRitual(ramp)).toBe(true);
     const sched = scheduleOf([{ feature: ramp, quantity: 4 }, ...spellSuite(40)]);
-    if (ramp.isRamp && ramp.c <= 3) expect(sched.burstMana.every((x) => x === 0)).toBe(true);
-    else expect(sched.burstMana[8]).toBeGreaterThan(0);
+    expect(sched.ritualCopies).toBe(4);
+    expect(sched.burstMana[8]).toBeGreaterThan(0);
+    expect(sched.ritualNetBurst).toBeGreaterThan(0);
   });
 });
 
@@ -325,7 +332,7 @@ describe('§9.4 burst finishers — storm copies and {X} spells', () => {
 
   it('burstFinish returns no turn when no payoff reaches the predicate', () => {
     const sched = scheduleOf([...spellSuite(40), { feature: tendrils, quantity: 1 }]);
-    const out = burstFinish(sched, [burstPayoffOf(tendrils, 1, false, 3)!], (t) => t, 120);
+    const out = burstFinish('commander', sched, [burstPayoffOf(tendrils, 1, false, 3)!], (t: number) => t, 40, 3);
     expect(out.tStar).toBeNull();
     expect(out.ceiling).toBeLessThan(120);
     expect(out.trace).toContain('of 120');
@@ -333,7 +340,7 @@ describe('§9.4 burst finishers — storm copies and {X} spells', () => {
 
   it('burstFinish returns the first turn a payoff DOES reach it', () => {
     const sched = scheduleOf([...spellSuite(40), { feature: exsanguinate, quantity: 1 }]);
-    const out = burstFinish(sched, [burstPayoffOf(exsanguinate, 1, false, 3)!], (t) => t * 8, 120);
+    const out = burstFinish('commander', sched, [burstPayoffOf(exsanguinate, 1, false, 3)!], (t: number) => t * 8, 40, 3);
     expect(out.tStar).not.toBeNull();
     expect(out.tStar!).toBeLessThanOrEqual(12);
   });
@@ -377,8 +384,11 @@ describe('deck-gate-parse CARD_COLS includes loyalty', () => {
 
 describe('§10.6.2 audit surface and the bands dispatch', () => {
   it('a family that scheduled and fell short reports a schedule_short, not an absence', () => {
-    // Four 1-power bears cannot deal 120; the family IS present and priced.
-    const { notes } = auditOf(creatureFiller(40));
+    // A handful of 1-power bears cannot put 40 damage on EACH of three
+    // opponents; the family IS present and priced. Stage 1d cut the count
+    // from 40 to 8: at the section 10.8 horizon of T20 forty bears reach the
+    // predicate and the family stops falling short at all.
+    const { notes } = auditOf(creatureFiller(8));
     expect(notes.some((n) => n.code === 'combat_wide.schedule_short')).toBe(true);
     expect(notes.every((n) => n.code !== 'combat_wide.no_output_source')).toBe(true);
   });

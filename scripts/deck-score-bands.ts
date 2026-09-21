@@ -36,7 +36,8 @@ import {
   TYPED_COMBOS, COMBO_TUTORS, MANA_OUTLETS, ETB_OUTLETS, LIBRARY_WIN_CARDS,
   LIBRARY_DRAW_SINKS, UNBOUNDED_DRAW_SINKS, GRAVEYARD_ROUTES,
 } from '../src/lib/deck-score-catalog/combos';
-import { WIN_FAMILIES } from '../src/lib/deck-score-win';
+import { WIN_FAMILIES, W_SCHEDULER_VERSION } from '../src/lib/deck-score-win';
+import { setHorizonOverride } from '../src/lib/deck-score-finishers';
 import { SCORE_VERSION } from '../src/lib/deck-score';
 import { clip } from '../src/lib/deck-score-math';
 import { computeInteraction, computeAdvantage } from '../src/lib/deck-score-interaction';
@@ -1369,6 +1370,8 @@ interface DomainFreeze {
   combosSha256: string;
   planRecipes: string[];
   winFamilies: string[];
+  /** Section 10.8 item 6: the mana ledger / predicate / horizon version. */
+  scheduler: string;
 }
 
 /** Name + knowledge + every effect's family/mode/cost/timing/output, sorted. */
@@ -1412,6 +1415,7 @@ function domainFreeze(): DomainFreeze {
     combosSha256: combosDigest(),
     planRecipes: PLAN_RECIPES.map((r) => r.key).sort(),
     winFamilies: WIN_FAMILIES.slice().sort(),
+    scheduler: W_SCHEDULER_VERSION,
   };
 }
 
@@ -1437,12 +1441,13 @@ function domainCommand(write: boolean): void {
 function domainMismatches(stored: DomainFreeze, now: DomainFreeze): string[] {
   const out: string[] = [];
   const cmp = (k: keyof DomainFreeze): void => {
-    const a = JSON.stringify(stored[k]);
-    const b = JSON.stringify(now[k]);
+    // A key the stored freeze predates reads as `absent`, not as a crash.
+    const a = JSON.stringify(stored[k]) ?? 'absent';
+    const b = JSON.stringify(now[k]) ?? 'absent';
     if (a !== b) out.push(`${k} ${a.slice(0, 24)} vs ${b.slice(0, 24)}`);
   };
   for (const k of ['scoreVersion', 'catalogVersion', 'catalogSize', 'catalogSha256',
-    'combosSha256', 'planRecipes', 'winFamilies'] as const) cmp(k);
+    'combosSha256', 'planRecipes', 'winFamilies', 'scheduler'] as const) cmp(k);
   return out;
 }
 
@@ -1544,7 +1549,8 @@ function verifyFrozen(): void {
  * and its value are dropped before any subcommand or flag name is matched.
  */
 export function subcommandArgs(argv: readonly string[]): string[] {
-  return argv.filter((a, i) => a !== '--profile' && argv[i - 1] !== '--profile');
+  return argv.filter((a, i) => a !== '--profile' && argv[i - 1] !== '--profile'
+    && a !== '--horizon' && argv[i - 1] !== '--horizon');
 }
 
 /**
@@ -1696,6 +1702,11 @@ function main(): void {
   // stage-1..4a command line keeps its meaning.
   const pArg = process.argv.indexOf('--profile');
   const profile: SampleProfile = pArg > 0 && process.argv[pArg + 1] === 'brawl' ? 'brawl' : 'commander';
+  // Section 10.8 item 6: `--horizon 12` runs the SAME corrected evaluator at
+  // the old bound, which is how the resource corrections are attributed apart
+  // from the horizon extension.
+  const hArg = process.argv.indexOf('--horizon');
+  if (hArg > 0) setHorizonOverride(Number(process.argv[hArg + 1]));
   const argv = subcommandArgs(process.argv);
   if (argv.includes('saturation')) {
     // §10.2's statistic exists for all three calibrated profiles, so this is

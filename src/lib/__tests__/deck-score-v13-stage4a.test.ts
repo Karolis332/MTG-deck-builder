@@ -218,7 +218,10 @@ describe('stage 4a acceptance, fixture-backed', () => {
     const scored = controls.map((r) => scoreDeck(r.input));
     expect(new Set(controls.map((c) => c.commander)).size).toBe(20);
     expect(scored.map((r) => r.score)).toEqual(
-      [45, 48, 46, 46, 45, 43, 58, 60, 20, 66, 60, 56, 66, 61, 68, 20, 68, 63, 55, 48]);
+      // RE-PINNED by v1.4 stage 1d: the section 10.8 resource corrections
+      // cost a pile more than they cost a real list, so these fall from
+      // 20-68 (p50 60) to 20-56 (p50 45) and five now sit under 25.
+      [22, 48, 37, 46, 45, 21, 30, 51, 20, 55, 55, 23, 55, 54, 35, 24, 56, 54, 26, 45]);
     const syn = scored.map((r) => Number((r.components.find((c) => c.key === 'synergy')?.score ?? 0).toFixed(1)));
     expect(syn.filter((v) => v <= 5).length).toBe(0);
     expect(Math.min(...syn)).toBeCloseTo(76.7, 1);
@@ -269,7 +272,11 @@ describe('stage 4a acceptance, fixture-backed', () => {
     // predicate on turn 6 and W saturates at 98.4. Nothing was tuned to this
     // list; the measured schedule simply overshoots a band that was reviewed
     // against a flat T8 clock. Pinned with its cause, not patched (§10.6).
-    expect(r.score).toBe(90);
+    // v1.4 stage 1d: 90 -> 86. Section 10.8's paid deployment means Vivi's
+    // body and the spells that trigger it now compete for the same per-turn
+    // mana, so the line moves from Token/Food at T6 to Creature pressure at
+    // T7 and W falls 98.4 -> 82.7. Still OUT HIGH, by one point now.
+    expect(r.score).toBe(86);
     // Stage 2 re-measured both cells on the corrected strides: 26 -> 27, 34
     // unchanged.
     expect(recipeFor('spells').roles.find((x) => x.key === 'spells')?.cmd?.max).toBe(27);
@@ -297,7 +304,12 @@ describe('stage 4a acceptance, fixture-backed', () => {
     expect(scoreDeck(byName('tazri-upgraded-arena').load().input).score).toBe(68);
     expect(byName('tazri-upgraded-arena').band).toBe('45-65');
     expect(scoreDeck(byName('cedhtop16-ballooncon6').load().input).score).toBe(92);
-    expect(scoreDeck(byName('meren-powerhouse').load().input).score).toBe(68);
-    expect(scoreDeck(byName('the-cabbage-merchant').load().input).score).toBe(59);
+    // v1.4 stage 1d: Meren 68 -> 56 (OUT LOW, band 65-80) and the Cabbage
+    // list 59 -> 54 (OUT LOW by one, band 55-70). Both are W moves: paying
+    // deployment out of the same per-turn ledger delays each list's own
+    // engine, and the quality cap `20 + .8*min(M,W,S)` binds on W. Measured
+    // and reported, not tuned back.
+    expect(scoreDeck(byName('meren-powerhouse').load().input).score).toBe(56);
+    expect(scoreDeck(byName('the-cabbage-merchant').load().input).score).toBe(54);
   });
 });

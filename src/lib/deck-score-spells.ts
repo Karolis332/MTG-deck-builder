@@ -34,7 +34,7 @@
  * // path is moving the per-cast readings into the catalogue's `outputBounds`,
  * // not more regexes here.
  */
-import { MAX_TURN, type FinisherOutput } from './deck-score-finishers';
+import { MAX_TURN, MAX_HORIZON, horizonFor, allocateDamage, type DamageUnit, type FinisherOutput } from './deck-score-finishers';
 import { drawSampleSizes } from './deck-score-math';
 import type { ScoreFormat } from './deck-score-norms';
 import type { DeckEntry } from './deck-score-mana';
@@ -58,6 +58,12 @@ export interface SpellSchedule {
   manaSpent: readonly number[];
   /** Extra one-turn mana from typed rituals, expected, by turn t. */
   burstMana: readonly number[];
+  /** Section 10.8 item 3: the same series with cantrip replacement switched
+   * off. Reported beside `noncreature`, never scored. */
+  noncreatureNoReplacement: readonly number[];
+  /** Printed ritual copies credited to `burstMana`, and their net yield. */
+  ritualCopies: number;
+  ritualNetBurst: number;
   /** Library copies of each suite — the access pools are sized from these. */
   instantSorceryCopies: number;
   noncreatureCopies: number;
@@ -107,27 +113,65 @@ function seenCopies(format: ScoreFormat, N: number, K: number, t: number): numbe
   return Math.min(K, (K * Math.min(n, N)) / N);
 }
 
+/** Cards the base draw alone has seen by turn `t`. */
+function seenCards(format: ScoreFormat, N: number, t: number): number {
+  if (N <= 0) return 0;
+  const ns = drawSampleSizes(format, t);
+  return Math.min(N, ns.reduce((s, x) => s + x, 0) / ns.length);
+}
+
+/** Expected copies of a `K`-copy suite among `seen` cards of an `N`-card deck. */
+function copiesAmong(K: number, N: number, seen: number): number {
+  if (N <= 0 || K <= 0) return 0;
+  return Math.min(K, (K * Math.min(seen, N)) / N);
+}
+
 /**
- * `casts(t) = min(mana(t)/meanCmc, drawn(t) − cast(<t))` — the deck can only
- * cast what it has drawn AND what the turn's mana pays for. Cantrips replace
- * themselves, so a cantrip-heavy suite sees more of itself: the replacement
- * multiplier is the geometric sum `1/(1 − cantripShare·density)`, bounded at 2.
+ * Section 10.8 item 3 -- the CANTRIP LEDGER, replacing the old
+ * `1/(1 - cantripShare*density)` multiplier.
+ *
+ * That multiplier was a closed-form branching expectation applied straight to
+ * the suite's seen copies and capped at 2. It carried no card ledger: it never
+ * spent the cantrip, never bounded the chain by the library, and, being a plain
+ * per-turn factor, it let a replacement a turn-12 cast would draw raise the
+ * copies a turn-4 cast could choose from. The ledger below is the same effect
+ * made finite and causal:
+ *
+ *   cards seen(t) = base draw(t) + replacements drawn by cantrips ALREADY cast,
+ *                   bounded by N -- a cantrip spends its own copy and draws ONE
+ *                   card, so seeing one card deeper is all it buys.
+ *   casts(t)      = min(mana(t)/meanCmc, copies among the cards seen - cast so
+ *                   far) -- a physical copy is cast once, never before it is seen.
+ *   replacements  = casts(t) * cantripShare: a replacement is a card drawn at
+ *                   the deck's own cantrip density, NOT automatically another
+ *                   cantrip. Three passes let this turn's own chain resolve
+ *                   inside this turn; nothing is borrowed from a later turn.
+ *
+ * `withReplacement = false` is the no-replacement diagnostic section 10.8
+ * item 3 asks to be published beside the corrected number.
  */
 function castSeries(
   format: ScoreFormat, N: number, K: number, meanCmc: number, cantripShare: number,
-  manaAt: (t: number) => number,
+  manaAt: (t: number) => number, withReplacement = true,
 ): number[] {
-  const out = new Array(MAX_TURN + 1).fill(0);
+  const out = new Array(MAX_HORIZON + 1).fill(0);
   if (K <= 0 || meanCmc <= 0 || N <= 0) return out;
-  const density = K / N;
-  const replacement = Math.min(2, 1 / Math.max(0.5, 1 - cantripShare * density));
+  const share = withReplacement ? Math.max(0, Math.min(1, cantripShare)) : 0;
   let cast = 0;
-  for (let t = 1; t <= MAX_TURN; t++) {
-    const drawn = Math.min(K, seenCopies(format, N, K, t) * replacement);
+  let replacements = 0;
+  for (let t = 1; t <= horizonFor(format); t++) {
+    const base = seenCards(format, N, t);
     const affordable = manaAt(t) / meanCmc;
-    const now = Math.max(0, Math.min(affordable, drawn - cast));
+    let now = 0;
+    let fresh = 0;
+    for (let pass = 0; pass < 3; pass++) {
+      const seen = Math.min(N, base + replacements + fresh);
+      now = Math.max(0, Math.min(affordable, copiesAmong(K, N, seen) - cast));
+      fresh = now * share;
+    }
     out[t] = now;
     cast += now;
+    replacements += fresh;
   }
   return out;
 }
@@ -156,12 +200,13 @@ export function buildSpellSchedule(
 
   const instantSorcery = castSeries(format, N, is.copies, meanIs,
     is.copies > 0 ? is.cantrips / is.copies : 0, manaAt);
-  const noncreature = castSeries(format, N, nc.copies, meanNc,
-    nc.copies > 0 ? nc.cantrips / nc.copies : 0, manaAt);
+  const ncCantripShare = nc.copies > 0 ? nc.cantrips / nc.copies : 0;
+  const noncreature = castSeries(format, N, nc.copies, meanNc, ncCantripShare, manaAt);
+  const noncreatureNoReplacement = castSeries(format, N, nc.copies, meanNc, ncCantripShare, manaAt, false);
 
-  const cumNoncreature = new Array(MAX_TURN + 1).fill(0);
-  const manaSpent = new Array(MAX_TURN + 1).fill(0);
-  for (let t = 1; t <= MAX_TURN; t++) {
+  const cumNoncreature = new Array(MAX_HORIZON + 1).fill(0);
+  const manaSpent = new Array(MAX_HORIZON + 1).fill(0);
+  for (let t = 1; t <= horizonFor(format); t++) {
     cumNoncreature[t] = cumNoncreature[t - 1] + noncreature[t];
     // The noncreature series is the superset; charging it once charges the
     // instant/sorcery casts inside it too.
@@ -173,23 +218,25 @@ export function buildSpellSchedule(
   // adds nothing (§10.2). The turn's burst is capped by the mana available to
   // start the chain.
   let netBurst = 0;
+  let ritualCopies = 0;
   const ritualNames: string[] = [];
   const unbounded: string[] = [];
   for (const e of nonLand) {
     const text = e.feature.card.oracle_text || '';
     if (RE_UNBOUNDED_RITUAL.test(text)) { unbounded.push(e.feature.card.name); continue; }
     if (!isPrintedRitual(e.feature)) continue;
-    // W's `rampBonusFor` already pays cheap typed ramp into `manaAt`, and
-    // `manaAt` is what the burst is priced against. Counting a ritual in both
-    // places would spend the same mana twice.
-    if (e.feature.isRamp && e.feature.c <= 3) continue;
+    // §10.8 item 2: EVERY printed ritual is credited here, once, and W's
+    // `rampBonusFor` now excludes all of them, so the two budgets are disjoint
+    // by construction rather than by this exclusion. `net` is the printed gross
+    // burst minus the copy's own casting cost, i.e. the ritual is paid for.
     const net = pipsOf((RE_RITUAL.exec(text) as RegExpExecArray)[1]) - e.feature.c;
     netBurst += e.quantity * net * e.feature.s;
+    ritualCopies += e.quantity;
     ritualNames.push(e.feature.card.name);
   }
-  const burstMana = new Array(MAX_TURN + 1).fill(0);
+  const burstMana = new Array(MAX_HORIZON + 1).fill(0);
   if (netBurst > 0 && N > 0) {
-    for (let t = 1; t <= MAX_TURN; t++) {
+    for (let t = 1; t <= horizonFor(format); t++) {
       const drawnShare = seenCopies(format, N, N, t) / N;
       burstMana[t] = Math.min(manaAt(t), netBurst * drawnShare);
     }
@@ -197,12 +244,16 @@ export function buildSpellSchedule(
 
   return {
     instantSorcery, noncreature, cumNoncreature, manaSpent, burstMana,
+    noncreatureNoReplacement, ritualCopies, ritualNetBurst: netBurst,
     instantSorceryCopies: is.copies, noncreatureCopies: nc.copies,
     meanCmc: meanNc,
     trace: `${is.copies} instants/sorceries (mean MV ${meanIs.toFixed(1)}), ${nc.copies} noncreature spells`
       + ` (mean MV ${meanNc.toFixed(1)}), casts T4/T8/T12 `
       + `${noncreature[4].toFixed(2)}/${noncreature[8].toFixed(2)}/${noncreature[12].toFixed(2)}`
-      + (ritualNames.length > 0 ? `; rituals +${netBurst.toFixed(1)} net (${ritualNames.slice(0, 3).join(', ')})` : '')
+      + `; no-replacement casts T4/T8/T12 `
+      + `${noncreatureNoReplacement[4].toFixed(2)}/${noncreatureNoReplacement[8].toFixed(2)}/${noncreatureNoReplacement[12].toFixed(2)}`
+      + `, cantrip share ${ncCantripShare.toFixed(2)}`
+      + (ritualNames.length > 0 ? `; ${ritualCopies} ritual copies +${netBurst.toFixed(1)} net (${ritualNames.slice(0, 3).join(', ')})` : '')
       + (unbounded.length > 0 ? `; ${unbounded.length} unbounded ritual(s) counted as 0 (${unbounded.slice(0, 2).join(', ')})` : ''),
   };
 }
@@ -222,6 +273,8 @@ const RE_ONCE = /once each turn|your first (?:spell|instant|noncreature)|only on
 export interface CastTrigger {
   /** Damage dealt to the table by ONE cast. */
   perCastDamage: number;
+  /** The part of `perCastDamage` that hits EVERY opponent, per opponent. */
+  perCastEachOpponent: number;
   /** Power this body gains for the turn from ONE cast (prowess-style). */
   perCastTempPower: number;
   /**
@@ -254,7 +307,7 @@ function canAttack(f: CardFeature): boolean {
 export function castTriggerOf(f: CardFeature, opponents: number): CastTrigger | null {
   const text = f.card.oracle_text || '';
   if (!/whenever you cast/i.test(text)) return null;
-  let damage = 0; let temp = 0; let perm = 0; let makesTokens = false;
+  let damage = 0; let eachOpp = 0; let temp = 0; let perm = 0; let makesTokens = false;
   let suite: 'instant_sorcery' | 'noncreature' = 'instant_sorcery';
   let once = false;
   const why: string[] = [];
@@ -271,12 +324,18 @@ export function castTriggerOf(f: CardFeature, opponents: number): CastTrigger | 
     if (RE_ONCE.test(line)) once = true;
     const dmg = RE_TRIGGER_DAMAGE.exec(body);
     if (dmg) {
-      const hits = /each opponent|each player/i.test(dmg[2]) ? opponents : 1;
+      const table = /each opponent|each player/i.test(dmg[2]);
+      const hits = table ? opponents : 1;
       damage += Number(dmg[1]) * hits;
+      if (table) eachOpp += Number(dmg[1]);
       why.push(`${dmg[1]} damage to ${dmg[2]}`);
     }
     const drain = RE_TRIGGER_DRAIN.exec(body);
-    if (drain) { damage += Number(drain[1]) * opponents; why.push(`${drain[1]} life from each opponent`); }
+    if (drain) {
+      damage += Number(drain[1]) * opponents;
+      eachOpp += Number(drain[1]);
+      why.push(`${drain[1]} life from each opponent`);
+    }
     if (attacks && RE_TRIGGER_COUNTER.test(body)) { perm += 1; why.push('+1/+1 counter'); }
     const pump = attacks ? RE_TRIGGER_PUMP.exec(body) : null;
     if (pump) { temp += Number(pump[1]); why.push(`+${pump[1]}/+0 this turn`); }
@@ -295,6 +354,7 @@ export function castTriggerOf(f: CardFeature, opponents: number): CastTrigger | 
   if (damage <= 0 && temp <= 0 && perm <= 0) return null;
   return {
     perCastDamage: damage * f.s,
+    perCastEachOpponent: eachOpp * f.s,
     perCastTempPower: temp * f.s,
     perCastPermPower: perm * f.s,
     makesTokens,
@@ -328,6 +388,15 @@ export function castTriggerFinisher(
     const stacked = trig.oncePerTurn ? Math.min(Math.max(0, t - 1 - onlineTurn), since) : since;
     return (trig.perCastDamage + trig.perCastTempPower) * casts + trig.perCastPermPower * stacked;
   };
+  // The per-opponent part of `outputAt`: the ping every opponent takes. What is
+  // left (counters, tokens, prowess) is single-target combat power.
+  const eachOpponentAt = (t: number): number => {
+    const casts = trig.oncePerTurn ? Math.min(1, series[t] ?? 0) : (series[t] ?? 0);
+    return trig.perCastEachOpponent * casts;
+  };
+  // FIXED 2..MAX_TURN window, never the horizon: `perTurn` sizes the access
+  // pool, and a horizon-dependent mean would change a Commander list's T1-T12
+  // access between H12 and H20 (section 10.8 item 4).
   let sum = 0;
   for (let t = 2; t <= MAX_TURN; t++) sum += outputAt(t);
   const perTurn = sum / (MAX_TURN - 1);
@@ -342,6 +411,7 @@ export function castTriggerFinisher(
     // cast, so nothing fires on the turn it resolves.
     deployDelay: 1,
     outputAt,
+    eachOpponentAt,
     makesTokens: trig.makesTokens,
     shareKey: SPELL_SHARE_KEY,
     upkeepAt: (t: number) => sched.manaSpent[t] ?? 0,
@@ -365,6 +435,10 @@ export interface BurstPayoff {
   kind: 'storm' | 'x_spell';
   /** Table damage this copy deals with `mana` available on turn `t`. */
   damageWith: (mana: number, casts: number) => number;
+  /** Section 10.8 item 1: the same damage as an ALLOCATION - what every
+   * opponent takes at once, plus the single-target instances that have to be
+   * aimed one opponent at a time. */
+  allocationWith: (mana: number, casts: number) => { eachOpponent: number; units: DamageUnit[] };
   trace: string;
 }
 
@@ -399,6 +473,11 @@ export function burstPayoffOf(
       // Storm counts the spells cast BEFORE it this turn, so the copy total is
       // `casts + 1` — the original plus one copy per earlier spell.
       damageWith: (_mana, casts) => per * hits * (casts + 1) * f.s,
+      allocationWith: (_mana, casts) => (hits > 1
+        // "each opponent loses N" on every copy: N to all of them, per copy.
+        ? { eachOpponent: per * (casts + 1) * f.s, units: [] }
+        // A re-aimable copy is one instance of `per` damage, aimed separately.
+        : { eachOpponent: 0, units: [{ power: per * f.s, count: casts + 1 }] }),
       trace: `${f.card.name}: storm, ${per}${hits > 1 ? ` x ${hits} opponents` : ''} per copy`,
     };
   }
@@ -411,15 +490,27 @@ export function burstPayoffOf(
   const multiplier = dmg && /five times X/i.test(dmg[1] ?? '') ? 5 : 1;
   const targetWord = dmg?.[2] ?? '';
   const upTo = dmg?.[3];
+  const xAt = (mana: number): number => Math.floor((mana - b) / a);
+  const xHits = (X: number): { table: boolean; instances: number } => {
+    if (drain || /each opponent|each player/i.test(targetWord)) return { table: true, instances: opponents };
+    if (upTo != null) return { table: false, instances: Math.min(opponents, upTo === 'X' ? X : Number(upTo)) };
+    return { table: false, instances: 1 };
+  };
   return {
     ...base, kind: 'x_spell',
     damageWith: (mana) => {
-      const X = Math.floor((mana - b) / a);
+      const X = xAt(mana);
       if (X <= 0) return 0;
-      let hits = 1;
-      if (drain || /each opponent|each player/i.test(targetWord)) hits = opponents;
-      else if (upTo != null) hits = Math.min(opponents, upTo === 'X' ? X : Number(upTo));
-      return multiplier * X * hits * f.s;
+      return multiplier * X * xHits(X).instances * f.s;
+    },
+    allocationWith: (mana) => {
+      const X = xAt(mana);
+      if (X <= 0) return { eachOpponent: 0, units: [] };
+      const each = multiplier * X * f.s;
+      const hit = xHits(X);
+      return hit.table
+        ? { eachOpponent: each, units: [] }
+        : { eachOpponent: 0, units: [{ power: each, count: hit.instances }] };
     },
     trace: `${f.card.name}: {X} finisher, cost ${a}X+${b}`
       + `, ${multiplier > 1 ? `${multiplier}x ` : ''}X ${drain ? 'life from each opponent' : `damage to ${targetWord || 'the table'}`}`,
@@ -444,13 +535,16 @@ export interface BurstFinish {
  * shortfall and supplies no line.
  */
 export function burstFinish(
-  sched: SpellSchedule, payoffs: BurstPayoff[], manaAt: (t: number) => number, target: number,
+  format: ScoreFormat, sched: SpellSchedule, payoffs: BurstPayoff[], manaAt: (t: number) => number,
+  perOpponent: number, opponents: number,
 ): BurstFinish {
   let tStar: number | null = null;
   let ceiling = 0;
   let best: BurstPayoff | null = null;
   let usesBurstMana = false;
-  for (let t = 1; t <= MAX_TURN; t++) {
+  const target = perOpponent * opponents;
+  const horizon = horizonFor(format);
+  for (let t = 1; t <= horizon; t++) {
     const lands = manaAt(t);
     const mana = lands + (sched.burstMana[t] ?? 0);
     const casts = sched.noncreature[t] ?? 0;
@@ -458,7 +552,19 @@ export function burstFinish(
       if (p.cmc > mana) continue;
       const dealt = p.damageWith(mana, casts);
       if (dealt > ceiling) { ceiling = dealt; best = p; usesBurstMana = dealt > p.damageWith(lands, casts); }
-      if (tStar === null && dealt >= target) { tStar = t; best = p; usesBurstMana = p.damageWith(lands, casts) < target; }
+      // Section 10.8 item 1: the aggregate is not the predicate. Every opponent
+      // has to reach 0 under a feasible allocation of the same instances.
+      const remaining = new Array(opponents).fill(perOpponent);
+      const alloc = p.allocationWith(mana, casts);
+      allocateDamage(remaining, alloc.eachOpponent, alloc.units);
+      if (tStar === null && remaining.every((r) => r <= 1e-9)) {
+        tStar = t;
+        best = p;
+        const landOnly = new Array(opponents).fill(perOpponent);
+        const landAlloc = p.allocationWith(lands, casts);
+        allocateDamage(landOnly, landAlloc.eachOpponent, landAlloc.units);
+        usesBurstMana = !landOnly.every((r) => r <= 1e-9);
+      }
     }
     if (tStar !== null) break;
   }
@@ -466,7 +572,7 @@ export function burstFinish(
     tStar, payoffs, ceiling, best, usesBurstMana,
     trace: best
       ? `${best.trace}; ${ceiling.toFixed(1)} of ${target} table damage`
-        + `${tStar !== null ? ` reached T${tStar}` : ` by T${MAX_TURN}`}`
+        + `${tStar !== null ? ` reached T${tStar}` : ` by T${horizon}`}`
         + `${usesBurstMana ? ' (typed rituals included)' : ''}`
       : 'no typed storm or {X} payoff',
   };

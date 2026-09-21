@@ -26,5 +26,6 @@
     "drain",
     "spells",
     "tokens"
-  ]
+  ],
+  "scheduler": "v14-stage1d"
 }

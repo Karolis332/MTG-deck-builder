@@ -205,13 +205,18 @@ describe('v1.4 stage 1b — executable control schedule (§10.6.3)', () => {
   });
 
   it('rejects the control line when its typed finisher output cannot reach the table', () => {
-    const main = [...Array.from({ length: 10 }, (_, i) => entry({ ...BOMB, name: `Bomb ${i}`, qty: 1 })),
+    // Stage 1d: ten 6-mana 9-power bombs DO reach 40-per-opponent once the
+    // horizon is section 10.8's T20, so the short list is now three 8-mana
+    // 4-power ones. The mechanism under test is unchanged - a priced finisher
+    // pool that the schedule cannot get there in time.
+    const slowBomb: Spec = { name: 'Slow Bomb', cmc: 8, type: 'Creature — Dragon', power: '4' };
+    const main = [...Array.from({ length: 3 }, (_, i) => entry({ ...slowBomb, name: `Bomb ${i}`, qty: 1 })),
       ...cheapAnswers(), ...filler(50)];
     const N = main.reduce((sum, e) => sum + e.quantity, 0) + 37;
     const { notes, built } = winAudit('commander', normsFor('commander'), 'midrange', N, main, [], CONTROL_READY);
     expect(built).not.toContain('control');
     expect(notes.find((n) => n.code === 'control.schedule_short')?.detail)
-      .toMatch(/of 120 finisher output by T12$/);
+      .toMatch(/of 120 finisher output by T20, shortfall \d/);
   });
 
   it('computes a real t* when the output DOES reach the table', () => {
@@ -224,14 +229,14 @@ describe('v1.4 stage 1b — executable control schedule (§10.6.3)', () => {
     expect(notes.some((n) => n.family === 'control')).toBe(false);
   });
 
-  it('never reports a finish past turn 12 — the t* search stops there', () => {
+  it('never reports a finish past the section 10.8 horizon — the t* search stops at T20', () => {
     const slow: Spec = { name: 'Slow Bomb', cmc: 9, type: 'Creature — Dragon', power: '5', qty: 4 };
     const main = [...Array.from({ length: 4 }, (_, i) => entry({ ...slow, name: `Slow ${i}`, qty: 1 })), ...cheapAnswers(), ...filler(60)];
     const N = main.reduce((s, e) => s + e.quantity, 0) + 33;
     const { notes, built } = winAudit('commander', normsFor('commander'), 'midrange', N, main, [], CONTROL_READY);
     expect(built).not.toContain('control');
     const short = notes.find((n) => n.code === 'control.schedule_short');
-    expect(short?.detail).toMatch(/of 120 finisher output by T12$/);
+    expect(short?.detail).toMatch(/of 120 finisher output by T20, shortfall \d/);
   });
 
   it('applies joint access once: J stays below certainty and the control line is never an assembled closing line', () => {
@@ -272,9 +277,12 @@ describe('v1.4 stage 1b — W-zero audit (§10.6.2)', () => {
   });
 
   it('exposes the finish shortfall with the number it fell short by', () => {
-    const { notes } = audit([{ name: 'Tiny', cmc: 1, type: 'Creature — Bird', power: '1' }], NO_CONTROL);
+    // Stage 1d: the default 60 one-power fillers DO put 40 on each opponent
+    // once the horizon is T20, so the short list is the lone bird.
+    const { notes } = audit([{ name: 'Tiny', cmc: 1, type: 'Creature — Bird', power: '1' }], NO_CONTROL, 0);
     const n = notes.find((x) => x.code === 'combat_wide.schedule_short');
-    expect(n?.detail).toMatch(/^\d+(\.\d+)? of 120 expected damage by T12$/);
+    expect(n?.detail)
+      .toMatch(/^\d+(\.\d+)? of 120 expected damage by T20, shortfall \d+(\.\d+)? on the most-alive opponent$/);
   });
 });
 
@@ -349,7 +357,12 @@ describe('v1.4 stage 1b — new closing families (§10.6 item 2)', () => {
 // ── fixtures and the frozen domain ────────────────────────────────────────
 
 describe('v1.4 stage 1b — fixtures and frozen domain (§10.7)', () => {
-  it('cabbage-cedh-input has NO control line and closes on its Food schedule', () => {
+  // REVISED by stage 1d: at section 10.8's T20 Commander horizon the list's
+  // finisher output DOES reach the table, so the control family is now built
+  // rather than reported as `control.schedule_short`. What the test is really
+  // about is unchanged and still holds: the line W SELECTS is the Food
+  // conversion schedule, and it still closes on turn 12.
+  it('cabbage-cedh-input builds a control line at T20 but still closes on its Food schedule', () => {
     const ds = loadDataset(200);
     const hit = ds.fixtures.find((f) => f.name === 'cabbage-cedh-input');
     expect(hit).toBeDefined();
@@ -357,10 +370,11 @@ describe('v1.4 stage 1b — fixtures and frozen domain (§10.7)', () => {
     const cmd = hit!.input.commander.map((c) => deriveCardFeature(c));
     const N = main.reduce((s, e) => s + e.quantity, 0);
     const inter = { E: 15.5, Estar: 12.0, D: 39.7, Dstar: 10.0, hasDrawEngine: true };
-    const { notes, built } = winAudit('commander', normsFor('commander'), 'midrange', N, main, cmd, inter);
-    expect(built).not.toContain('control');
-    expect(notes.find((n) => n.code === 'control.schedule_short')?.detail)
-      .toMatch(/of 120 finisher output by T12$/);
+    const { built } = winAudit('commander', normsFor('commander'), 'midrange', N, main, cmd, inter);
+    expect(built).toContain('control');
+    const w = computeWin('commander', normsFor('commander'), 'midrange', N, main, cmd, inter);
+    expect(w.reason).toMatch(/^Token\/Food conversion \(\d+ bodies\): closes T12/);
+    expect(w.score).toBeCloseTo(49.0, 0);
   });
 
   it('standard-1445867-aljce keeps a closing schedule after the control correction', () => {

@@ -194,8 +194,11 @@ describe('coverage round 1 — real-list typed coverage', () => {
     expect(zeroShare(brawl.S)).toBe(0);
     expect(pct(cmd.S, 50)).toBeCloseTo(83.7, 1);
     expect(pct(brawl.S, 50)).toBeCloseTo(87.1, 1);
-    expect(pct(cmd.totals, 50)).toBe(54);
-    expect(pct(brawl.totals, 50)).toBe(76);
+    // RE-PINNED by v1.4 stage 1d. S is unchanged (83.7 / 87.1) — stage 2's
+    // norms were held fixed for attribution — and the totals move purely
+    // through W under the quality cap: Commander 54 -> 28, Brawl 76 -> 67.
+    expect(pct(cmd.totals, 50)).toBe(28);
+    expect(pct(brawl.totals, 50)).toBe(67);
   }, 120_000);
 });
 

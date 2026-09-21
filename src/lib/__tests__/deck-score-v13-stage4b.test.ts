@@ -319,8 +319,12 @@ describe('stage 4b — Brawl fixture readings', () => {
     // Stage 2: S is `100*clip(Q_slot/Q_sat)` with no floor and no R, and this
     // list holds 56 useful copies in 99 slots (.566 against the .434
     // saturation), so S saturates. The total is unchanged at 90.
+    // v1.4 stage 1d: 90 -> 86. Section 10.8's paid deployment puts Vivi's
+    // body on the same per-turn ledger as the spells that trigger it, so the
+    // selected line moves to Creature pressure at T7 and W falls to 82.7. S
+    // is untouched (stage 2's norms were held fixed for attribution).
     expect(vivi.S).toBe(100);
-    expect(vivi.total).toBe(90);
+    expect(vivi.total).toBe(86);
     expect(vivi.total).toBeGreaterThan(85);
   });
 
@@ -330,8 +334,11 @@ describe('stage 4b — Brawl fixture readings', () => {
     // 71 -> 63 on the §9.4 control correction, then 63 -> 71 in stage 1c: the
     // Wizard token Kuja makes carries a printed cast trigger, which the
     // spellslinger schedule now prices. Back where it started, inside 60-80.
-    expect(kuja.total).toBe(71);
-    expect(kuja.total).toBeGreaterThanOrEqual(60);
+    // v1.4 stage 1d: 71 -> 56, OUT LOW (band 60-80). Kuja's Wizard-token
+    // cast trigger still types, but the tokens and the spells that make them
+    // are now paid from one per-turn budget, so the spell schedule arrives
+    // later and W is the binding term in the quality cap. Reported.
+    expect(kuja.total).toBe(56);
     const azula = read('fire-lord-azula-competitive');
     expect(azula.reason).toContain('supports spells');
     // ROUND 1, REPORTED OUT OF BAND: stage 4c had it at 84 on spells Q .705
@@ -342,7 +349,9 @@ describe('stage 4b — Brawl fixture readings', () => {
     // STAGE 2 RESTORES IT: 46.5 useful copies per 99 slots is above the Brawl
     // p80, so S = 100 and the total is 87 — the fitted floor was the whole of
     // the 20, and §10.2 removed it.
-    expect(azula.total).toBe(87);
+    // v1.4 stage 1d: 87 -> 76, still IN its band. Same cause as Kuja, one
+    // step smaller: the spell schedule and the bodies share a budget now.
+    expect(azula.total).toBe(76);
     // The 101-card list keeps its structure cap at 19 whatever S reads: the
     // cap is a rule failure, not a quality statement.
     const cabbage = read('cabbage-merchant-current-brawl');

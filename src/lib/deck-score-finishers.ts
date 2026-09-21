@@ -30,11 +30,118 @@
  * // more regexes here.
  */
 import type { CardFeature } from './deck-score-features';
+import type { ScoreFormat } from './deck-score-norms';
 
 export type FinisherKind = 'walker' | 'manland' | 'burn' | 'draw_damage' | 'anthem' | 'cast_trigger';
 
-/** Last turn any W schedule runs to (§1 W "within 12 turns"). */
+/**
+ * The FIXED reference window: every array in the W schedule is sized to the
+ * longest horizon, but any mean taken over turns (a cast trigger's `perTurn`,
+ * which sizes access pools) is taken over 2..MAX_TURN whatever the horizon, so
+ * that a Commander list's T1-T12 prefix is bit-identical under H12 and H20
+ * (section 10.8 item 4, horizon invariance).
+ */
 export const MAX_TURN = 12;
+
+/** Section 10.8: Commander's search runs to T20; Brawl and Standard stay at 12. */
+export const COMMANDER_HORIZON = 20;
+
+/** Longest horizon any profile uses - the array bound. */
+export const MAX_HORIZON = COMMANDER_HORIZON;
+
+/**
+ * DIAGNOSTIC ONLY. Section 10.8 item 4 requires the horizon comparison to run
+ * the SAME corrected evaluator at H12 and H20, so the horizon has to be
+ * forceable from a script. Nothing in `scoreDeck` ever sets it; the scorer's
+ * own answer is always the profile horizon below.
+ */
+let horizonOverride: number | null = null;
+
+export function setHorizonOverride(h: number | null): void {
+  horizonOverride = h;
+}
+
+/** Section 10.8 `H_commander = 20; H_brawl = H_standard = 12`. */
+export function horizonFor(format: ScoreFormat): number {
+  if (horizonOverride !== null) return horizonOverride;
+  return format === 'commander' ? COMMANDER_HORIZON : MAX_TURN;
+}
+
+/** One damage unit the per-opponent allocator can aim: `count` copies of a
+ * single instance dealing `power` to ONE opponent. */
+export interface DamageUnit { power: number; count: number }
+
+/** Above this many enumerated instances in one turn the board is finely
+ * divisible: the remainder is spread evenly over the living opponents, which
+ * is what a wide board of small attackers can actually do.
+ * // ponytail: enumeration guard, not a model choice - at 120 instances the
+ * // largest unit is small against 40 life and overkill is negligible.
+ */
+const UNIT_ENUM_CAP = 120;
+
+function spreadEvenly(remaining: number[], total: number): void {
+  let pool = total;
+  for (let pass = 0; pass < remaining.length && pool > 1e-9; pass++) {
+    const alive = remaining.filter((r) => r > 1e-9).length;
+    if (alive === 0) return;
+    const each = pool / alive;
+    pool = 0;
+    for (let o = 0; o < remaining.length; o++) {
+      if (remaining[o] <= 1e-9) continue;
+      const dealt = Math.min(each, remaining[o]);
+      remaining[o] -= dealt;
+      pool += each - dealt;
+    }
+  }
+}
+
+/**
+ * Section 10.8 item 1: "maintain a feasible damage allocation to each opponent
+ * and require D >= 40 for all three; 120 aggregate is sufficient only with that
+ * allocation. Overkill on one opponent cannot pay another opponent's life, and
+ * an each-opponent trigger hits three opponents."
+ *
+ * `eachOpponent` is damage every opponent takes simultaneously. `units` are
+ * single-target instances - an attacking body, a burn copy - and each is aimed
+ * at the opponent with the most life left, which is the allocation that wastes
+ * the least. `remaining` is mutated in place.
+ */
+export function allocateDamage(
+  remaining: number[], eachOpponent: number, units: readonly DamageUnit[],
+): void {
+  if (eachOpponent > 1e-9) {
+    for (let o = 0; o < remaining.length; o++) remaining[o] = Math.max(0, remaining[o] - eachOpponent);
+  }
+  const live = units.filter((u) => u.power > 1e-9 && u.count > 1e-9);
+  if (live.length === 0) return;
+  if (remaining.length === 1) {
+    let total = 0;
+    for (const u of live) total += u.power * u.count;
+    remaining[0] = Math.max(0, remaining[0] - total);
+    return;
+  }
+  const sorted = [...live].sort((a, b) => b.power - a.power || a.count - b.count);
+  let issued = 0;
+  for (let k = 0; k < sorted.length; k++) {
+    let left = sorted[k].count;
+    const power = sorted[k].power;
+    while (left > 1e-9) {
+      if (issued >= UNIT_ENUM_CAP) {
+        let rest = power * left;
+        for (let j = k + 1; j < sorted.length; j++) rest += sorted[j].power * sorted[j].count;
+        spreadEvenly(remaining, rest);
+        return;
+      }
+      const take = Math.min(1, left);
+      left -= take;
+      issued += 1;
+      let best = 0;
+      for (let o = 1; o < remaining.length; o++) if (remaining[o] > remaining[best]) best = o;
+      if (remaining[best] <= 1e-9) return;
+      remaining[best] = Math.max(0, remaining[best] - power * take);
+    }
+  }
+}
 
 /** One typed, non-creature damage source and everything the schedule must
  * debit for it. */
@@ -65,6 +172,16 @@ export interface FinisherOutput {
   /** A cast trigger whose accumulating output is CREATURE TOKENS: the token
    * family must not also credit the card as a flat per-turn producer. */
   makesTokens?: boolean;
+  /** Section 10.8 item 1: this output hits EVERY opponent at once, so it is
+   * per-opponent damage rather than a single-target instance. `perTurn` still
+   * carries the table total. */
+  eachOpponent?: boolean;
+  /** Per-opponent damage on turn `t` when the split varies: a cast trigger
+   * that both pings every opponent AND leaves a +1/+1 counter behind has an
+   * each-opponent part and a single-target combat part, in a ratio that
+   * follows the spell schedule. Whatever `perTurn`/`outputAt` carries beyond
+   * `eachOpponentAt(t) * opponents` is single-target. */
+  eachOpponentAt?: (t: number) => number;
   /** Sources sharing this key pay `upkeepAt` ONCE per turn between them. */
   shareKey?: string;
   /** Turn-varying shared expenditure, charged once per `shareKey` per turn. */
@@ -133,7 +250,7 @@ function walkerOutput(f: CardFeature, opponents: number): FinisherOutput | null 
   if (!Number.isFinite(start) || start <= 0) return null;
 
   const text = f.card.oracle_text || '';
-  let best: { perTurn: number; turns: number; why: string } | null = null;
+  let best: { perTurn: number; turns: number; eachOpponent: boolean; why: string } | null = null;
   RE_LOYALTY_ABILITY.lastIndex = 0;
   for (const m of text.matchAll(RE_LOYALTY_ABILITY)) {
     const cost = loyaltyCost(m[1]);
@@ -143,8 +260,9 @@ function walkerOutput(f: CardFeature, opponents: number): FinisherOutput | null 
     const token = RE_ATTACKING_TOKEN.exec(body);
     // A token made this turn attacks on the NEXT one, so it is worth its power
     // every turn after it arrives; the walker keeps making them.
+    const table = dmg != null && /each opponent|each player/i.test(dmg[2]);
     const raw = dmg
-      ? Number(dmg[1]) * (/each opponent|each player/i.test(dmg[2]) ? opponents : 1)
+      ? Number(dmg[1]) * (table ? opponents : 1)
       : token ? Number(token[1]) : 0;
     if (raw <= 0) continue;
     // A minus ability is a finite budget: one activation per own turn until the
@@ -153,7 +271,7 @@ function walkerOutput(f: CardFeature, opponents: number): FinisherOutput | null 
     if (turns < 1) continue;
     const perTurn = raw * f.s;
     if (!best || perTurn * Math.min(turns, 6) > best.perTurn * Math.min(best.turns, 6)) {
-      best = { perTurn, turns, why: `[${m[1]}] ${dmg ? `${raw} damage` : `${raw}-power token`}` };
+      best = { perTurn, turns, eachOpponent: table, why: `[${m[1]}] ${dmg ? `${raw} damage` : `${raw}-power token`}` };
     }
   }
   if (!best) return null;
@@ -163,6 +281,7 @@ function walkerOutput(f: CardFeature, opponents: number): FinisherOutput | null 
     upkeepMana: 0,
     manaForgone: 0,
     turns: best.turns,
+    eachOpponent: best.eachOpponent,
     // It resolves on our turn and activates immediately, but the damage lands
     // on the turn it resolves, so there is no extra delay.
     deployDelay: 0,
@@ -202,13 +321,14 @@ function manlandOutput(f: CardFeature): FinisherOutput | null {
 function burnOutput(f: CardFeature, opponents: number): FinisherOutput | null {
   const text = f.card.oracle_text || '';
   RE_ACTIVATED_DAMAGE.lastIndex = 0;
-  let best: { perTurn: number; cost: number; why: string } | null = null;
+  let best: { perTurn: number; cost: number; eachOpponent: boolean; why: string } | null = null;
   for (const m of text.matchAll(RE_ACTIVATED_DAMAGE)) {
     const cost = manaCostOf(m[1] ?? '');
-    const raw = Number(m[2]) * (/each opponent|each player/i.test(m[3]) ? opponents : 1);
+    const table = /each opponent|each player/i.test(m[3]);
+    const raw = Number(m[2]) * (table ? opponents : 1);
     if (!(raw > 0)) continue;
     if (!best || raw / Math.max(1, cost) > best.perTurn / Math.max(1, best.cost)) {
-      best = { perTurn: raw * f.s, cost, why: `{${cost}}: ${raw} damage` };
+      best = { perTurn: raw * f.s, cost, eachOpponent: table, why: `{${cost}}: ${raw} damage` };
     }
   }
   if (!best) return null;
@@ -218,6 +338,7 @@ function burnOutput(f: CardFeature, opponents: number): FinisherOutput | null {
     upkeepMana: best.cost,
     manaForgone: 0,
     turns: Infinity,
+    eachOpponent: best.eachOpponent,
     // An activated ability on a permanent that just resolved still needs the
     // permanent to be untapped/unsick only if the cost includes {T}; charging
     // one turn for every source is the conservative reading.
@@ -245,6 +366,7 @@ function drawDamageOutput(f: CardFeature, opponents: number, drawEventsPerTurn: 
     upkeepMana: 0,
     manaForgone: 0,
     turns: Infinity,
+    eachOpponent: table > 1 || opponents === 1,
     deployDelay: 1,
     trace: `${f.card.name}: ${per} per draw x ${table} opponents x ${events} draw events/turn`,
   };

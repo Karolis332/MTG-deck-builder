@@ -415,24 +415,31 @@ describe('v1.4 stage 2 — real-list distribution', () => {
     return { n: S.length, zero: S.filter((x) => x <= 0.05).length, sp50: pct(S, 50), tp50: pct(totals, 50) };
   };
 
-  it('pins the Commander prefix: no S zeros, S p50 83.7, total p50 54', () => {
+  it('pins the Commander prefix: no S zeros, S p50 83.7, total p50 28', () => {
     // `bands real` over the whole 1,798-list stride reads the same shape:
-    // S = 0 share 0.0%, S p10/p50/p90 58.1 / 83.7 / 100, total p50 54.
+    // S = 0 share 0.0%, S p10/p50/p90 58.1 / 83.7 / 100, total p50 30
+    // (eligible subset 40).
+    // S is UNCHANGED by stage 1d - stage 2's norms were held fixed for
+    // attribution, and 83.7 is the same number this test pinned before. The
+    // total moved 54 -> 28 entirely through W: the section 10.8 resource
+    // corrections took the stride's W p50 from 45.3 to 25.2, and the quality
+    // cap `20 + .8*min(M,W,S)` is binding on W for most of the cohort.
     const cmd = stats('commander', 200);
     expect(cmd.n).toBe(200);
     expect(cmd.zero).toBe(0);
     expect(cmd.sp50).toBeCloseTo(83.7, 1);
-    expect(cmd.tp50).toBe(54);
+    expect(cmd.tp50).toBe(28);
   });
 
-  it('pins the Brawl prefix: no S zeros, S p50 87.1, total p50 76', () => {
+  it('pins the Brawl prefix: no S zeros, S p50 87.1, total p50 67', () => {
     // `bands real --profile brawl` over 1,146: S = 0 share 0.0%,
-    // S p10/p50/p90 62.2 / 87.1 / 100, total p50 72.
+    // S p10/p50/p90 62.2 / 87.1 / 100. Brawl keeps the T12 horizon, so its
+    // 76 -> 67 is the resource corrections alone.
     const brawl = stats('brawl', 200);
     expect(brawl.n).toBe(200);
     expect(brawl.zero).toBe(0);
     expect(brawl.sp50).toBeCloseTo(87.1, 1);
-    expect(brawl.tp50).toBe(76);
+    expect(brawl.tp50).toBe(67);
   });
 });
 
