@@ -167,6 +167,24 @@ export function loadStandardDbFixture(deckId: number): LoadedDeck {
   }
 }
 
+/**
+ * v1.4 stage 2 (§10.2): `community_decks.id` -> the TOURNAMENT that list was
+ * played at, `event_name|event_date`. A date is not an event — the corpus
+ * holds 1,211 distinct (name, date) pairs on 248 dates — and the saturation
+ * quantile weights by event family. Read straight from the corpus so the
+ * cached `dataset-*.json` inputs do not have to be rebuilt.
+ */
+export function standardEventFamilies(): Map<number, string> {
+  const db = standardDb();
+  try {
+    const rows = db.prepare('SELECT id, event_name, event_date FROM community_decks').all() as
+      Array<{ id: number; event_name: string | null; event_date: string | null }>;
+    return new Map(rows.map((r) => [r.id, `${r.event_name ?? 'unknown'}|${r.event_date ?? 'undated'}`]));
+  } finally {
+    db.close();
+  }
+}
+
 export interface StandardCohortDeck extends LoadedDeck {
   id: number;
   eventDate: string;

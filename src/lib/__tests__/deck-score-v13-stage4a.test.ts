@@ -48,17 +48,22 @@ describe('stage 4a — commander-disjoint stride cohorts', () => {
     // Round 1 (refuter finding R3): the 5 fixture commanders are dropped from
     // `commanderBlocks`, so a fixture list can no longer enter EITHER stride.
     // 300 -> 295 blocks, 200 -> 196 training names, 100 -> 99 holdout names.
-    expect(commanderBlocks(sample).size).toBe(295);
+    // Stage 2: `isHeldOutCommander` also matches the front face, so the
+    // `Kuja, Genome Sorcerer // Trance Kuja` block leaves as well — 294
+    // blocks, 98 holdout names, and the parity of every later block flips,
+    // which is why the strides move by more than Kuja's ten lists
+    // (1,824 -> 1,798 training, 903 -> 919 holdout, 1,075 ids in common).
+    expect(commanderBlocks(sample).size).toBe(294);
     expect(tNames.size).toBe(196);
-    expect(hNames.size).toBe(99);
+    expect(hNames.size).toBe(98);
     expect([...tNames].filter((n) => hNames.has(n))).toEqual([]);
     // Index-disjoint too, which is what makes the draw seeds disjoint: the
     // seed is `seedBase + sampleIndex`.
     expect(training.filter((i) => new Set(holdout).has(i))).toEqual([]);
     // The held-out commanders' lists are in neither stride, so the two
     // cohorts no longer partition the sample — that is the point of R3.
-    expect(training.length).toBe(1824);
-    expect(holdout.length).toBe(903);
+    expect(training.length).toBe(1798);
+    expect(holdout.length).toBe(919);
     expect(training.length + holdout.length).toBeLessThan(sample.length);
     for (const i of [...training, ...holdout]) {
       expect(HELD_OUT_COMMANDERS.has(sample[i].commander.toLowerCase())).toBe(false);
@@ -82,8 +87,9 @@ describe('stage 4a — commander-disjoint stride cohorts', () => {
     // most ceil(n / commanders) repeats in the first n.
     const holdout = strideOrder('holdout', sample);
     const first100 = holdout.slice(0, 100).map((i) => sample[i].commander.toLowerCase());
-    // 99 holdout commanders after R3, so the 100th draw is the first repeat.
-    expect(new Set(first100).size).toBe(99);
+    // 98 holdout commanders after the stage-2 front-face fix, so the 99th
+    // draw is the first repeat.
+    expect(new Set(first100).size).toBe(98);
   });
 });
 
@@ -97,27 +103,29 @@ describe('stage 4a — Commander bands re-measured through evaluatePlan', () => 
    * p90 -> `cmd.max`, rounded.
    *
    * ROUND 1 re-ran the same command on the corpus-wide catalogue and on the
-   * R3-corrected training stride (1,824 lists, 196 commanders): left column is
-   * the stage-4a measurement, right column is the round-1 one. Both were
-   * produced by `bands verify`, which re-measures every cell and exits non-zero
-   * on a mismatch, so the frozen number and the statistic cannot drift apart.
+   * R3-corrected training stride (1,824 lists, 196 commanders). STAGE 2
+   * (v1.4 §10.2) re-ran it once more on the Kuja-corrected stride (1,798
+   * lists, 196 commanders) with the maximum-credit assignment in place: the
+   * third column is the live freeze. Every column was produced by
+   * `bands verify`, which re-measures each cell and exits non-zero on a
+   * mismatch, so the frozen number and the statistic cannot drift apart.
    */
-  const REMEASURED: Record<string, Record<string, [stage4a: [number, number], round1: [number, number]]>> = {
-    midrange: { threats: [[5, 13], [5, 13]], answers: [[4, 10], [4, 11]], value: [[7, 16], [8, 16]] },
-    control: { stabilisation: [[4, 9], [4, 9]], engine: [[6, 16], [7, 17]], finisher: [[3, 10], [3, 9]] },
-    aristocrats: { outlet: [[2, 11], [3, 12]], payoff: [[3, 16], [4, 15]], fodder: [[10, 21], [13, 25]] },
-    lifegain: { payoff: [[3, 11], [6, 12]], gain: [[9, 24], [16, 28]], value: [[6, 14], [6, 13]] },
-    spells: { payoff: [[2, 12], [2, 12]], closer: [[4, 18], [5, 18]], spells: [[12, 26], [13, 26]] },
-    recursion: { recursion: [[2, 7], [2, 8]], fuel: [[2, 12], [2, 13]], targets: [[5, 14], [5, 14]] },
-    conversion: { converters: [[4, 19], [8, 20]], producers: [[9, 18], [9, 26]], output: [[4, 11], [5, 10]] },
-    tokens: { payoff: [[6, 19], [6, 20]], makers: [[5, 13], [6, 15]], value: [[8, 18], [10, 18]] },
-    counters: { payoff: [[3, 8], [2, 10]], sources: [[6, 16], [6, 18]], carriers: [[3, 11], [5, 15]] },
+  const REMEASURED: Record<string, Record<string, [stage4a: [number, number], round1: [number, number], stage2: [number, number]]>> = {
+    midrange: { threats: [[5, 13], [5, 13], [5, 14]], answers: [[4, 10], [4, 11], [5, 12]], value: [[7, 16], [8, 16], [8, 17]] },
+    control: { stabilisation: [[4, 9], [4, 9], [4, 9]], engine: [[6, 16], [7, 17], [7, 17]], finisher: [[3, 10], [3, 9], [3, 9]] },
+    aristocrats: { outlet: [[2, 11], [3, 12], [3, 12]], payoff: [[3, 16], [4, 15], [4, 16]], fodder: [[10, 21], [13, 25], [13, 23]] },
+    lifegain: { payoff: [[3, 11], [6, 12], [6, 19]], gain: [[9, 24], [16, 28], [15, 25]], value: [[6, 14], [6, 13], [6, 13]] },
+    spells: { payoff: [[2, 12], [2, 12], [2, 12]], closer: [[4, 18], [5, 18], [5, 19]], spells: [[12, 26], [13, 26], [13, 27]] },
+    recursion: { recursion: [[2, 7], [2, 8], [2, 8]], fuel: [[2, 12], [2, 13], [1, 12]], targets: [[5, 14], [5, 14], [5, 15]] },
+    conversion: { converters: [[4, 19], [8, 20], [5, 20]], producers: [[9, 18], [9, 26], [9, 19]], output: [[4, 11], [5, 10], [5, 11]] },
+    tokens: { payoff: [[6, 19], [6, 20], [6, 20]], makers: [[5, 13], [6, 15], [6, 13]], value: [[8, 18], [10, 18], [9, 19]] },
+    counters: { payoff: [[3, 8], [2, 10], [3, 10]], sources: [[6, 16], [6, 18], [7, 21]], carriers: [[3, 11], [5, 15], [4, 15]] },
   };
 
   it('freezes every re-measured band at the measurement', () => {
     for (const [key, roles] of Object.entries(REMEASURED)) {
       const recipe = recipeFor(key as PlanKey);
-      for (const [roleKey, [, now]] of Object.entries(roles)) {
+      for (const [roleKey, [, , now]] of Object.entries(roles)) {
         const role = recipe.roles.find((r) => r.key === roleKey);
         expect(role, `${key}.${roleKey}`).toBeDefined();
         expect([role!.cmd?.min, role!.cmd?.max], `${key}.${roleKey}`).toEqual(now);
@@ -200,13 +208,20 @@ describe('stage 4a acceptance, fixture-backed', () => {
     // Round-robin order means these twenty are twenty different commanders.
     // ROUND 1: the R3 stride change re-draws these twenty, and the higher floor
     // closes both stage-4a leaks — 20/20 at the 20 floor, S = 0 on every one.
+    // STAGE 2 (§10.2) RETIRES THE FLOOR: `b_S = 0`, so a coverage-matched
+    // random pile made of real, typed, identity-legal cards reads the useful
+    // mass it actually holds. These twenty now score S 76.7-100 and totals
+    // 43-68. §10.1's numeric pile gate is OPEN and release-blocking; this
+    // pins the measurement so the next stage sees any movement, and nothing
+    // here is fitted to it.
     const controls = loadCohortPiles('holdout', 20, 0.93);
-    const scored = controls.map((c) => scoreDeck(c.input));
+    const scored = controls.map((r) => scoreDeck(r.input));
     expect(new Set(controls.map((c) => c.commander)).size).toBe(20);
-    expect(scored.map((r) => r.score)).toEqual(new Array(20).fill(20));
+    expect(scored.map((r) => r.score)).toEqual(
+      [45, 48, 46, 46, 45, 43, 58, 60, 20, 66, 60, 56, 66, 61, 68, 20, 68, 63, 55, 48]);
     const syn = scored.map((r) => Number((r.components.find((c) => c.key === 'synergy')?.score ?? 0).toFixed(1)));
-    expect(syn).toEqual(new Array(20).fill(0));
-    expect(syn.filter((v) => v <= 5).length).toBe(20);
+    expect(syn.filter((v) => v <= 5).length).toBe(0);
+    expect(Math.min(...syn)).toBeCloseTo(76.7, 1);
   });
 
   it('keeps 1,000 training controls in-sample at the rate the floor promises', () => {
@@ -215,9 +230,14 @@ describe('stage 4a acceptance, fixture-backed', () => {
     // 931/1000 for the stage-3 pair on the same cohort.
     // ROUND 1: 23/25 in-sample on the re-measured floor (the full-cohort rate
     // is in `controls --training`); the two leaks are engine-family reads.
+    // STAGE 2: with `b_S = 0` there is no floor left to be in-sample of —
+    // every one of the 25 reads its own useful mass, S 67.4-100, none <= 5.
+    // The product-level statement lives in `bands real` (ctrl93 19.7% under
+    // 25 for Commander), and §10.1's gate stays OPEN.
     const controls = loadCohortPiles('training', 25, 0.93);
     const syn = controls.map((c) => scoreDeck(c.input).components.find((x) => x.key === 'synergy')?.score ?? 0);
-    expect(syn.filter((v) => v <= 5).length).toBe(22);
+    expect(syn.filter((v) => v <= 5).length).toBe(0);
+    expect(Math.min(...syn)).toBeCloseTo(67.4, 1);
   });
 
   it('reads vivi-battery-arena as `spells` at R = 1 and still misses its band', () => {
@@ -250,7 +270,9 @@ describe('stage 4a acceptance, fixture-backed', () => {
     // list; the measured schedule simply overshoots a band that was reviewed
     // against a flat T8 clock. Pinned with its cause, not patched (§10.6).
     expect(r.score).toBe(90);
-    expect(recipeFor('spells').roles.find((x) => x.key === 'spells')?.cmd?.max).toBe(26);
+    // Stage 2 re-measured both cells on the corrected strides: 26 -> 27, 34
+    // unchanged.
+    expect(recipeFor('spells').roles.find((x) => x.key === 'spells')?.cmd?.max).toBe(27);
     expect(recipeFor('spells').roles.find((x) => x.key === 'spells')?.brawl?.max).toBe(34);
   });
 
@@ -267,11 +289,15 @@ describe('stage 4a acceptance, fixture-backed', () => {
     // anchors went out on the re-measured floor. Anchors 15/16 -> 11/16; the
     // four are pinned in the round-1 suite with their best-plan Q, so the
     // regression is a measurement on record rather than a moved constant.
+    // STAGE 2: the U/D form moves all four. Tazri 68 (unchanged, still OUT
+    // high by 3), Ballooncon 92 (IN), Meren 68 (IN), and the Cabbage list
+    // 20 -> 59 (IN) — its Food conversion reads 45 useful copies per 99 slots
+    // now that a copy parked in a capped role is re-spent where it is useful.
     const byName = (n: string) => FIXTURES.find((f) => f.name === n)!;
     expect(scoreDeck(byName('tazri-upgraded-arena').load().input).score).toBe(68);
     expect(byName('tazri-upgraded-arena').band).toBe('45-65');
     expect(scoreDeck(byName('cedhtop16-ballooncon6').load().input).score).toBe(92);
     expect(scoreDeck(byName('meren-powerhouse').load().input).score).toBe(68);
-    expect(scoreDeck(byName('the-cabbage-merchant').load().input).score).toBe(20);
+    expect(scoreDeck(byName('the-cabbage-merchant').load().input).score).toBe(59);
   });
 });

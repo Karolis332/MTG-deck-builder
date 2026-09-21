@@ -18,7 +18,7 @@ import fs from 'fs';
 import path from 'path';
 import { parseIdentity } from '../src/lib/deck-gate-parse';
 import { deriveCardFeature, type CardFeature } from '../src/lib/deck-score-features';
-import { recipesFor, selectPlan, type PlanRole } from '../src/lib/deck-score-plans';
+import { candidatePlans, recipesFor, type PlanRole } from '../src/lib/deck-score-plans';
 import { producerUtilisation } from '../src/lib/deck-score-producers';
 import { profileOf } from '../src/lib/deck-score-norms';
 import { scoreDeckSafely, type ScoreCardInput } from '../src/lib/deck-score-input';
@@ -36,12 +36,19 @@ interface Deck {
   identity: string[];
 }
 
-interface Reading { S: number; total: number }
+/** `U` is read from the frozen §10.7 reason template (`U 37.0/99`) so the
+ * probe grades the same useful mass the score published. */
+interface Reading { S: number; total: number; U: number; failing: number }
 
 function read(deck: Deck, main: ScoreCardInput[], unresolved: { name: string; quantity: number; board: string }[] = []): Reading | null {
   const payload = scoreDeckSafely({ format: deck.format, main, commander: deck.commander, unresolved });
   if (!payload) return null;
-  return { S: payload.components.find((c) => c.key === 'synergy')?.score ?? 0, total: payload.score };
+  const synergy = payload.components.find((c) => c.key === 'synergy');
+  const mass = /U ([\d.]+)\/(\d+)/.exec(synergy?.reason ?? '');
+  return {
+    S: synergy?.score ?? 0, total: payload.score, U: mass ? Number(mass[1]) : 0,
+    failing: payload.gates.filter((g) => g.status === 'fail').length,
+  };
 }
 
 /** The stride, resolved once. Unresolved names become reserved slots (§10.5),
@@ -106,15 +113,15 @@ export function without(main: readonly ScoreCardInput[], remove: readonly ScoreC
   return left === 0 ? out : null;
 }
 
-const saturatedCache = new Map<string, PlanRole[]>();
+const saturatedCache = new Map<string, { saturated: PlanRole[]; slack: PlanRole[] }>();
 /**
- * Roles of the SELECTED plan whose credited Q mass is already below the
- * copies assigned to them — the "already-saturated infrastructure role" of
- * §10.4. Another copy of such a role is mechanically zero-use: it can add
- * supply but no credit. Adding to an UNSATURATED role is a real improvement
- * and must not be graded as a gaming failure, so it is reported separately.
+ * Roles this deck has ALREADY filled to their §10.2 bound, over EVERY recipe
+ * of the profile — not just the selected one. A copy is mechanically zero-use
+ * only when every role it could fill, under every recipe, is saturated:
+ * otherwise the addition feeds a slack role of some recipe, which is a real
+ * improvement and belongs in §10.4's separately traced bucket.
  */
-function saturatedRoles(deck: Deck, profile: SampleProfile): PlanRole[] {
+function roleSplit(deck: Deck, profile: SampleProfile): { saturated: PlanRole[]; slack: PlanRole[] } {
   const hit = saturatedCache.get(deck.id);
   if (hit) return hit;
   const entries = deck.main.map((e) => ({ feature: deriveCardFeature(e.card), quantity: e.quantity }));
@@ -122,10 +129,25 @@ function saturatedRoles(deck: Deck, profile: SampleProfile): PlanRole[] {
   const commanderEntries = deck.commander.map((c) => ({ feature: deriveCardFeature(c), quantity: 1 }));
   const N = entries.reduce((s, e) => s + e.quantity, 0);
   const utilisation = producerUtilisation(nonLand, commanderEntries);
-  const plan = selectPlan(Math.max(1, N), nonLand, commanderEntries, utilisation, profileOf(profile));
-  const roles = plan.roles.filter((r) => r.supply > r.credited + 1e-9).map((r) => r.role);
-  saturatedCache.set(deck.id, roles);
-  return roles;
+  // EVERY candidate the scorer could select, the deck-shaped typal recipe
+  // included — reading `recipesFor` alone missed the recipe that was actually
+  // selected on 5 of the first 8 violators.
+  const full: PlanRole[] = [];
+  const open: PlanRole[] = [];
+  const openKeys = new Set<string>();
+  for (const evaluation of candidatePlans(Math.max(1, N), nonLand, commanderEntries, utilisation, profileOf(profile))) {
+    for (const r of evaluation.roles) {
+      // Every open role object is kept, NOT one per key: two recipes can
+      // share a role key and test different cards for it, so deduplicating by
+      // key let a copy the aristocrats `value` role accepts pass the aggro
+      // `value` predicate instead and enter the graded pool.
+      if (r.credited + 1e-9 >= r.bound) full.push(r.role);
+      else { openKeys.add(r.role.key); open.push(r.role); }
+    }
+  }
+  const split = { saturated: full.filter((r) => !openKeys.has(r.key)), slack: open };
+  saturatedCache.set(deck.id, split);
+  return split;
 }
 
 const poolCache = new Map<string, DbCard[]>();
@@ -133,10 +155,15 @@ const poolCache = new Map<string, DbCard[]>();
 function additions(
   deck: Deck, profile: SampleProfile, kind: 'untyped' | 'ramp' | 'saturated', k: number,
 ): DbCard[] {
-  const roles = kind === 'saturated' ? saturatedRoles(deck, profile) : [];
+  const split = kind === 'saturated' ? roleSplit(deck, profile) : { saturated: [], slack: [] };
+  const roles = split.saturated;
   if (kind === 'saturated' && roles.length === 0) return [];
+  // The saturated pool depends on this deck's OWN open roles — including the
+  // deck-shaped typal predicates — so it is keyed by the list, not by the
+  // role names: a pool cached under a matching saturated signature admitted
+  // cards another deck's slack `value` role would have accepted.
   const key = `${profile}|${kind}|${[...deck.identity].sort().join('')}` +
-    (kind === 'saturated' ? `|${roles.map((r) => r.key).sort().join(',')}` : '');
+    (kind === 'saturated' ? `|${deck.id}` : '');
   let pool = poolCache.get(key);
   if (!pool) {
     pool = controlPool(profile)
@@ -145,7 +172,11 @@ function additions(
         if (kind === 'untyped') return !p.covered;
         if (!p.covered) return false;
         const feature = deriveCardFeature(p.card);
-        return kind === 'ramp' ? feature.isRamp : roles.some((r) => r.fills(feature));
+        // A candidate that ALSO fills a role with headroom is a real
+        // upgrade, not a zero-use staple: it must not enter the graded pool.
+        return kind === 'ramp'
+          ? feature.isRamp
+          : roles.some((r) => r.fills(feature)) && !split.slack.some((r) => r.fills(feature));
       })
       .map((p) => p.card)
       .sort((a, b) => (a.name < b.name ? -1 : 1));
@@ -189,7 +220,17 @@ export function permuteMetadata(main: readonly ScoreCardInput[]): ScoreCardInput
 
 // ── probes ────────────────────────────────────────────────────────────────
 
-interface ProbeResult { delta: { S: number; total: number } | null; skipped: boolean }
+interface Delta { S: number; total: number; U: number; repaired: boolean }
+interface ProbeResult { delta: Delta | null; skipped: boolean }
+
+const diff = (before: Reading, after: Reading): Delta => ({
+  S: after.S - before.S,
+  total: after.total - before.total,
+  U: after.U - before.U,
+  // An edit that removes a card the deck was ILLEGAL for repairs a rule
+  // failure. That is a benefit, so the displayed total is allowed to move.
+  repaired: after.failing < before.failing,
+});
 
 type Probe = (deck: Deck, base: Reading, k: number, profile: SampleProfile) => ProbeResult;
 
@@ -203,7 +244,7 @@ const PROBES: Record<string, Probe> = {
     const main = without(deck.main, offPlanTyped(deck, profile), k);
     if (!main) return SKIP;
     const after = read(deck, main);
-    return after ? { delta: { S: after.S - base.S, total: after.total - base.total }, skipped: false } : SKIP;
+    return after ? { delta: diff(base, after), skipped: false } : SKIP;
   },
 
   /** The fixed-size counterpart: the same k copies become zero-credit unknown
@@ -212,7 +253,7 @@ const PROBES: Record<string, Probe> = {
     const main = without(deck.main, offPlanTyped(deck, profile), k);
     if (!main) return SKIP;
     const after = read(deck, main, [{ name: 'Unreadable Card', quantity: k, board: 'main' }]);
-    return after ? { delta: { S: after.S - base.S, total: after.total - base.total }, skipped: false } : SKIP;
+    return after ? { delta: diff(base, after), skipped: false } : SKIP;
   },
 
   /** Add k resolved-but-UNTYPED copies: U cannot rise, and Q_slot's
@@ -221,7 +262,7 @@ const PROBES: Record<string, Probe> = {
     const add = additions(deck, profile, 'untyped', k);
     if (add.length < k) return SKIP;
     const after = read(deck, [...deck.main, ...add.map((card) => ({ card, quantity: 1 }))]);
-    return after ? { delta: { S: after.S - base.S, total: after.total - base.total }, skipped: false } : SKIP;
+    return after ? { delta: diff(base, after), skipped: false } : SKIP;
   },
 
   /** Add k typed, identity-legal staples that fill a role this deck ALREADY
@@ -231,7 +272,7 @@ const PROBES: Record<string, Probe> = {
     const add = additions(deck, profile, 'saturated', k);
     if (add.length < k) return SKIP;
     const after = read(deck, [...deck.main, ...add.map((card) => ({ card, quantity: 1 }))]);
-    return after ? { delta: { S: after.S - base.S, total: after.total - base.total }, skipped: false } : SKIP;
+    return after ? { delta: diff(base, after), skipped: false } : SKIP;
   },
 
   /** UNMATCHED (§10.4 "report unmatched edits separately"): k typed ramp
@@ -241,7 +282,7 @@ const PROBES: Record<string, Probe> = {
     const add = additions(deck, profile, 'ramp', k);
     if (add.length < k) return SKIP;
     const after = read(deck, [...deck.main, ...add.map((card) => ({ card, quantity: 1 }))]);
-    return after ? { delta: { S: after.S - base.S, total: after.total - base.total }, skipped: false } : SKIP;
+    return after ? { delta: diff(base, after), skipped: false } : SKIP;
   },
 
   /** Swap k basics for a different printing of the SAME basic: identical
@@ -262,14 +303,14 @@ const PROBES: Record<string, Probe> = {
       main.push(e);
     }
     const after = read(deck, main);
-    return after ? { delta: { S: after.S - base.S, total: after.total - base.total }, skipped: false } : SKIP;
+    return after ? { delta: diff(base, after), skipped: false } : SKIP;
   },
 
   /** Price, popularity, rarity, set, printing, art and input order (§10.4
    * "DeltaS = DeltaT = 0 under provenance/ownership/price/popularity"). */
   metadata: (deck, base) => {
     const after = read(deck, permuteMetadata(deck.main));
-    return after ? { delta: { S: after.S - base.S, total: after.total - base.total }, skipped: false } : SKIP;
+    return after ? { delta: diff(base, after), skipped: false } : SKIP;
   },
 };
 
@@ -278,7 +319,16 @@ const PROBES: Record<string, Probe> = {
 interface Row {
   probe: string; k: number; lists: number; skipped: number;
   maxS: number; maxTotal: number; violatorsS: string[]; violatorsTotal: string[];
+  /** §10.2: an addition whose max-U assignment gains real useful mass is not
+   * a no-benefit edit. Counted and reported, never graded. */
+  mass: number; maxSMass: number; maxU: number;
+  /** Edits that lifted a rule failure — graded on S, not on the total. */
+  repaired: number;
 }
+
+/** Extra ramp can be a real mana upgrade (§10.4 "report unmatched edits
+ * separately"), so its movement is measured and printed, never graded. */
+const UNGRADED = new Set(['add-ramp-unmatched']);
 
 const S_TOLERANCE = 1e-6;
 const TOTAL_ALLOWANCE = 1;
@@ -295,22 +345,38 @@ function run(profile: SampleProfile, n: number, ks: number[]): string {
   for (const [name, probe] of Object.entries(PROBES)) {
     // The metadata permutation is not a k-copy edit; it runs once.
     for (const k of name === 'metadata' ? [0] : ks) {
-      const row: Row = { probe: name, k, lists: 0, skipped: 0, maxS: 0, maxTotal: 0, violatorsS: [], violatorsTotal: [] };
+      const row: Row = {
+        probe: name, k, lists: 0, skipped: 0, maxS: 0, maxTotal: 0,
+        violatorsS: [], violatorsTotal: [], mass: 0, maxSMass: 0, maxU: 0, repaired: 0,
+      };
       for (const deck of decks) {
         const b = base.get(deck.id);
         if (!b) { row.skipped++; continue; }
         const { delta, skipped } = probe(deck, b, k, profile);
         if (skipped || !delta) { row.skipped++; continue; }
         row.lists++;
+        // §10.2 makes U the MAXIMUM over feasible assignments, and that
+        // maximum is monotone: a copy filling only saturated roles can still
+        // displace a dual-role occupant into a slack one, so the deck really
+        // does hold one more useful copy. Such an edit is not the zero-use
+        // membership §10.4 grades — it is measured and reported instead.
+        const exact = name === 'metadata' || name === 'swap-lands';
+        const gainedMass = !exact && delta.U > S_TOLERANCE;
+        if (gainedMass) {
+          row.mass++;
+          row.maxSMass = Math.max(row.maxSMass, delta.S);
+          row.maxU = Math.max(row.maxU, delta.U);
+          continue;
+        }
         row.maxS = Math.max(row.maxS, delta.S);
-        row.maxTotal = Math.max(row.maxTotal, delta.total);
-        const sBad = name === 'metadata' || name === 'swap-lands' ? Math.abs(delta.S) > S_TOLERANCE : delta.S > S_TOLERANCE;
-        const tBad = name === 'metadata' || name === 'swap-lands'
-          ? Math.abs(delta.total) > 0
-          : delta.total > TOTAL_ALLOWANCE;
+        if (delta.repaired) row.repaired++;
+        else row.maxTotal = Math.max(row.maxTotal, delta.total);
+        if (UNGRADED.has(name)) continue;
+        const sBad = exact ? Math.abs(delta.S) > S_TOLERANCE : delta.S > S_TOLERANCE;
+        const tBad = !delta.repaired
+          && (exact ? Math.abs(delta.total) > 0 : delta.total > TOTAL_ALLOWANCE);
         if (sBad && row.violatorsS.length < 8) row.violatorsS.push(`${deck.id}(+${delta.S.toFixed(1)})`);
         if (tBad && row.violatorsTotal.length < 8) row.violatorsTotal.push(`${deck.id}(+${delta.total})`);
-        if (sBad) row.maxS = Math.max(row.maxS, delta.S);
       }
       rows.push(row);
     }
@@ -323,13 +389,18 @@ function run(profile: SampleProfile, n: number, ks: number[]): string {
     '`swap-lands` and `metadata` are equivalences: |ΔS| and |Δtotal| must be 0.',
     '`add-ramp-unmatched` is an UNMATCHED edit: extra ramp can be a real mana',
     'upgrade, so its movement is reported, not graded.',
+    'The `ΔU>0` columns hold the lists where the edit raised the §10.2 useful',
+    'mass itself — a real assignment gain, reported and excluded from grading.',
+    '`repaired` counts edits that removed a card the deck was ILLEGAL for:',
+    'lifting a rule failure is a benefit, so those totals are not graded.',
     '',
-    '| probe | k | lists | skipped | max ΔS | max Δtotal | S violations | total violations | worst lists |',
-    '|---|---:|---:|---:|---:|---:|---:|---:|---|',
+    '| probe | k | lists | skipped | max ΔS | max Δtotal | S violations | total violations | repaired | ΔU>0 | max ΔU | max ΔS there | worst lists |',
+    '|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|',
   ];
   for (const r of rows) {
     out.push(`| ${r.probe} | ${r.k || '-'} | ${r.lists} | ${r.skipped} | ${r.maxS.toFixed(2)} | ${r.maxTotal} | ` +
       `${r.violatorsS.length >= 8 ? '8+' : r.violatorsS.length} | ${r.violatorsTotal.length >= 8 ? '8+' : r.violatorsTotal.length} | ` +
+      `${r.repaired} | ${r.mass} | ${r.maxU.toFixed(1)} | ${r.maxSMass.toFixed(1)} | ` +
       `${r.violatorsS.slice(0, 3).join(' ') || r.violatorsTotal.slice(0, 3).join(' ') || '—'} |`);
   }
   return out.join('\n');

@@ -137,6 +137,18 @@ export const HELD_OUT_COMMANDERS: ReadonlySet<string> = new Set([
   'vivi ornitier', 'a-vivi ornitier', 'fire lord azula',
 ]);
 
+/**
+ * v1.4 stage 2 (stage 0 finding): the sample CSVs and the card table spell a
+ * double-faced commander in FULL ("Kuja, Genome Sorcerer // Trance Kuja"),
+ * while `HELD_OUT_COMMANDERS` stores the front face. `has(fullName)` was
+ * therefore false and 10 Commander stride lists carried a fixture commander.
+ * Compare on the front face everywhere a held-out commander is dropped.
+ */
+export function isHeldOutCommander(name: string): boolean {
+  const key = name.trim().toLowerCase();
+  return HELD_OUT_COMMANDERS.has(key) || HELD_OUT_COMMANDERS.has(key.split(' // ')[0]);
+}
+
 /** FNV-1a over the canonical id — the job SHA-256 does in §5's generator, at a
  * cost that survives 1,000 piles against a 10k-card pool. */
 function hash32(text: string): number {
@@ -269,7 +281,7 @@ export function loadMatchedPiles(
     if (!deck) continue;
     const commander = byName.get(deck.commander.toLowerCase());
     if (!commander) continue;
-    if (HELD_OUT_COMMANDERS.has(commander.name.toLowerCase())) continue;
+    if (isHeldOutCommander(commander.name)) continue;
     if (!isLegalIn(commander, profile)) continue;
     const typeLine = commander.type_line || '';
     if (!/Legendary/.test(typeLine) || !/Creature/.test(typeLine)) continue;
@@ -366,12 +378,21 @@ export type SampleCohort = 'training' | 'holdout';
  * every band, floor and saturation statistic reads the stride, not the draw,
  * and 50/1,838 Commander and 30/1,166 Brawl training lists were anchor lists.
  * Filtering here and not in `readSample` keeps every remaining list's sample
- * INDEX, and therefore its draw seed `seedBase + i`, unchanged. */
+ * INDEX, and therefore its draw seed `seedBase + i`, unchanged.
+ *
+ * v1.4 stage 2 fixes the membership test: it now matches on the FRONT FACE
+ * (`isHeldOutCommander`), so the ten `Kuja, Genome Sorcerer // Trance Kuja`
+ * lists stage 0 found leave both Commander strides. Dropping a block
+ * renumbers the ones after it, so the Commander cohort parity moves with it
+ * (training 1,824 -> 1,798, holdout 903 -> 919, 1,075 training ids in common);
+ * the Brawl sample holds none of these commanders and is bit-identical. Both
+ * strides stay commander-disjoint, and every norm below is re-measured on the
+ * corrected cohort. */
 export function commanderBlocks(sample: readonly SampleDeck[] = readSample()): Map<string, number[]> {
   const blocks = new Map<string, number[]>();
   sample.forEach((deck, i) => {
     const key = deck.commander.toLowerCase();
-    if (HELD_OUT_COMMANDERS.has(key)) return;
+    if (isHeldOutCommander(key)) return;
     const block = blocks.get(key);
     if (block) block.push(i);
     else blocks.set(key, [i]);

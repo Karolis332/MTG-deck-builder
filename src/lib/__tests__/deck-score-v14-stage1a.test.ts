@@ -307,11 +307,22 @@ describe('v1.4 stage 1a — corpus regression', () => {
     expect(q(totals, 0.1)).toBeGreaterThanOrEqual(80);
   });
 
-  it('the 200 constrained-random piles gain no closing line and stay under 25', () => {
+  it('gives the 200 constrained-random piles no closing line — but §10.1 now keeps none of them under 25', () => {
+    // The closing half of this test is unchanged and still holds: a pile
+    // assembles no win line, so S never reads `combo` on one.
+    // The UNDER-25 half broke by design in v1.4 stage 2: §10.2 retires the
+    // fitted floor (`b_S = 0`) that was flattening every pile to the 20, and
+    // these piles are built from real, typed, identity-legal cards, so they
+    // read the mass they hold — 8/200 under 25, p50 59, max 72.
+    // §10.1's numeric pile gate is OPEN and release-blocking; the operator
+    // owns the construction question. Pinned, not fitted.
     const rows = ds.piles.map((p) => scoreDeck(p));
     const combos = rows.filter((r) => /supports combo/.test(r.components.find((c) => c.key === 'synergy')?.reason ?? ''));
     expect(combos).toHaveLength(0);
-    expect(rows.filter((r) => r.score < 25)).toHaveLength(200);
+    expect(rows.filter((r) => r.score < 25)).toHaveLength(8);
+    const totals = rows.map((r) => r.score).sort((a, b) => a - b);
+    expect(totals[Math.round(0.5 * (totals.length - 1))]).toBe(59);
+    expect(totals[totals.length - 1]).toBe(72);
   });
 
   it('typed coverage does not drop on any fixture or cEDH list', () => {

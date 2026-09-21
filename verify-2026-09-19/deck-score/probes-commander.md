@@ -1,28 +1,32 @@
-## §10.4 gaming probes — commander training stride (1823 fully resolved lists)
+## §10.4 gaming probes — commander training stride (1797 fully resolved lists)
 
 Allowance for the WHOLE k-copy edit: max +0 S (1e-6) and +1 displayed total.
 `swap-lands` and `metadata` are equivalences: |ΔS| and |Δtotal| must be 0.
 `add-ramp-unmatched` is an UNMATCHED edit: extra ramp can be a real mana
 upgrade, so its movement is reported, not graded.
+The `ΔU>0` columns hold the lists where the edit raised the §10.2 useful
+mass itself — a real assignment gain, reported and excluded from grading.
+`repaired` counts edits that removed a card the deck was ILLEGAL for:
+lifting a rule failure is a benefit, so those totals are not graded.
 
-| probe | k | lists | skipped | max ΔS | max Δtotal | S violations | total violations | worst lists |
-|---|---:|---:|---:|---:|---:|---:|---:|---|
-| delete-offplan-typed | 1 | 1681 | 142 | 80.80 | 55 | 8+ | 8+ | 381392112(+0.9) 381393467(+2.1) 381392156(+38.0) |
-| delete-offplan-typed | 5 | 516 | 1307 | 100.00 | 53 | 8+ | 8+ | 381393467(+7.6) 381395482(+100.0) 381392867(+79.0) |
-| delete-offplan-typed | 10 | 62 | 1761 | 67.40 | 8 | 2 | 2 | 381369951(+67.4) 377631957(+50.6) |
-| replace-offplan-unknown | 1 | 1681 | 142 | 100.00 | 55 | 8+ | 8+ | 381392112(+0.9) 381393467(+2.1) 381392156(+38.0) |
-| replace-offplan-unknown | 5 | 516 | 1307 | 100.00 | 55 | 8+ | 8+ | 381393467(+7.6) 381395482(+100.0) 381392867(+79.0) |
-| replace-offplan-unknown | 10 | 62 | 1761 | 80.00 | 4 | 3 | 3 | 381369951(+80.0) 377631957(+50.0) 377771749(+4.3) |
-| add-untyped | 1 | 1823 | 0 | 59.40 | 0 | 2 | 0 | 381385596(+59.4) 381125524(+9.3) |
-| add-untyped | 5 | 1823 | 0 | 0.00 | 0 | 0 | 0 | — |
-| add-untyped | 10 | 1823 | 0 | 7.70 | 0 | 1 | 0 | 380756679(+7.7) |
-| add-saturated-staples | 1 | 932 | 891 | 59.40 | 0 | 8+ | 0 | 381392156(+27.8) 381396111(+2.0) 381390284(+28.7) |
-| add-saturated-staples | 5 | 932 | 891 | 100.00 | 0 | 8+ | 0 | 381392112(+1.8) 381392156(+8.6) 381396111(+26.5) |
-| add-saturated-staples | 10 | 926 | 897 | 100.00 | 0 | 8+ | 0 | 381409987(+100.0) 381396111(+74.4) 381415227(+11.4) |
-| add-ramp-unmatched | 1 | 1823 | 0 | 59.40 | 0 | 8+ | 0 | 381392156(+27.8) 381393113(+27.8) 381384818(+28.7) |
-| add-ramp-unmatched | 5 | 1823 | 0 | 100.00 | 17 | 8+ | 1 | 381392112(+1.8) 381409987(+20.0) 381392156(+33.2) |
-| add-ramp-unmatched | 10 | 1823 | 0 | 100.00 | 24 | 8+ | 1 | 381409987(+90.8) 381392156(+28.8) 381393113(+28.8) |
-| swap-lands | 1 | 1731 | 92 | 0.00 | 0 | 0 | 0 | — |
-| swap-lands | 5 | 1662 | 161 | 0.00 | 0 | 0 | 0 | — |
-| swap-lands | 10 | 1484 | 339 | 0.00 | 0 | 0 | 0 | — |
-| metadata | - | 1823 | 0 | 0.00 | 0 | 0 | 0 | — |
+| probe | k | lists | skipped | max ΔS | max Δtotal | S violations | total violations | repaired | ΔU>0 | max ΔU | max ΔS there | worst lists |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|
+| delete-offplan-typed | 1 | 1662 | 135 | 0.00 | 7 | 0 | 8+ | 6 | 0 | 0.0 | 0.0 | 381395465(+2) 380159170(+3) 381384809(+2) |
+| delete-offplan-typed | 5 | 545 | 1252 | 0.00 | 10 | 0 | 8+ | 4 | 0 | 0.0 | 0.0 | 381389049(+2) 381390158(+9) 381143780(+10) |
+| delete-offplan-typed | 10 | 79 | 1718 | 0.00 | 14 | 0 | 3 | 0 | 0 | 0.0 | 0.0 | 381372190(+14) 381150778(+3) 381367882(+4) |
+| replace-offplan-unknown | 1 | 1662 | 135 | 0.00 | 7 | 0 | 4 | 6 | 0 | 0.0 | 0.0 | 357780625(+2) 380155290(+5) 373948507(+3) |
+| replace-offplan-unknown | 5 | 545 | 1252 | 0.00 | 6 | 0 | 1 | 4 | 0 | 0.0 | 0.0 | 379037754(+6) |
+| replace-offplan-unknown | 10 | 79 | 1718 | 0.00 | 0 | 0 | 0 | 0 | 0 | 0.0 | 0.0 | — |
+| add-untyped | 1 | 1797 | 0 | 0.00 | 3 | 0 | 1 | 0 | 0 | 0.0 | 0.0 | 381412744(+3) |
+| add-untyped | 5 | 1797 | 0 | 0.00 | 0 | 0 | 0 | 0 | 2 | 2.0 | 0.4 | — |
+| add-untyped | 10 | 1797 | 0 | 0.00 | 0 | 0 | 0 | 0 | 5 | 3.0 | 0.0 | — |
+| add-saturated-staples | 1 | 1778 | 19 | 0.00 | 0 | 0 | 0 | 0 | 108 | 1.0 | 1.8 | — |
+| add-saturated-staples | 5 | 1778 | 19 | 0.00 | 0 | 0 | 0 | 0 | 250 | 6.0 | 11.2 | — |
+| add-saturated-staples | 10 | 1777 | 20 | 0.00 | 0 | 0 | 0 | 0 | 288 | 10.0 | 13.8 | — |
+| add-ramp-unmatched | 1 | 1797 | 0 | 0.00 | 0 | 0 | 0 | 0 | 1571 | 4.0 | 8.9 | — |
+| add-ramp-unmatched | 5 | 1797 | 0 | 0.00 | 0 | 0 | 0 | 0 | 1775 | 8.0 | 15.4 | — |
+| add-ramp-unmatched | 10 | 1797 | 0 | 0.00 | 0 | 0 | 0 | 0 | 1781 | 22.9 | 45.0 | — |
+| swap-lands | 1 | 1708 | 89 | 0.00 | 0 | 0 | 0 | 0 | 0 | 0.0 | 0.0 | — |
+| swap-lands | 5 | 1647 | 150 | 0.00 | 0 | 0 | 0 | 0 | 0 | 0.0 | 0.0 | — |
+| swap-lands | 10 | 1467 | 330 | 0.00 | 0 | 0 | 0 | 0 | 0 | 0.0 | 0.0 | — |
+| metadata | - | 1797 | 0 | 0.00 | 0 | 0 | 0 | 0 | 0 | 0.0 | 0.0 | — |

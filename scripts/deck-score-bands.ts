@@ -16,7 +16,7 @@
  * rounded. Re-running this cannot change the frozen constants — that needs a
  * score-version bump.
  */
-import { loadStandardCohorts, loadStandardDbFixture, loadCedhCohort } from './deck-score-fixtures';
+import { loadStandardCohorts, loadStandardDbFixture, loadCedhCohort, loadDataset, standardEventFamilies, OUT_DIR } from './deck-score-fixtures';
 import { loadMatchedPiles, loadCohortPiles, loadStudyControls, strideOrder, readSample, cardsByName, cohortSeed, HOLDOUT_EVERY, type SampleCohort, type SampleProfile } from './deck-score-piles';
 import { readManifest, verifyCohortHashes, sha256 } from './deck-score-cohorts';
 import { scoreDeck } from '../src/lib/deck-score';
@@ -26,8 +26,8 @@ import { typalTheme, typalRecipe, evaluatePlan, evaluateTypal, evaluateClosing, 
 import { PLAN_RECIPES, recipeFor, qBaselineFor, betterPlan, COMMANDER_BAND_REFERENCE, type PlanKey, type PlanRecipe } from '../src/lib/deck-score-plans';
 import { producerUtilisation } from '../src/lib/deck-score-producers';
 import { Q_BASELINE, Q_BASELINE_JOINT_COMMANDER, Q_BASELINE_JOINT_BRAWL, Q_BASELINE_CLOSING,
-  Q_BASELINE_CLOSING_BRAWL, Q_SATURATION, Q_SATURATION_BRAWL, qSaturationFor, normsFor,
-  type ScoreProfile } from '../src/lib/deck-score-norms';
+  Q_BASELINE_CLOSING_BRAWL, qSaturationFor, qSlotSaturationFor, Q_SLOT_SATURATION, normsFor,
+  type ScoreProfile, type ScoreFormat } from '../src/lib/deck-score-norms';
 import { scoreDeckSafely, explainScoreUnavailable } from '../src/lib/deck-score-input';
 import fs from 'fs';
 import path from 'path';
@@ -521,7 +521,7 @@ function closingBands(): void {
       });
       if (!win.closing) continue;
       n++;
-      const evaluation = evaluateClosing(win.closing, nonLand, cmd, util, 'commander',
+      const evaluation = evaluateClosing(win.closing, Math.max(1, N), nonLand, cmd, util, 'commander',
         win.closingLines.filter((l) => l.id !== win.closing?.id));
       if (!into) continue;
       for (const role of evaluation.roles) {
@@ -577,7 +577,7 @@ function cedhSplit(): void {
     });
     const base = selectPlan(Math.max(1, N), nonLand, cmd, util, 'commander');
     const plan = win.closing
-      ? betterPlan(base, evaluateClosing(win.closing, nonLand, cmd, util, 'commander',
+      ? betterPlan(base, evaluateClosing(win.closing, Math.max(1, N), nonLand, cmd, util, 'commander',
         win.closingLines.filter((l) => l.id !== win.closing?.id)), 'commander')
       : base;
     return {
@@ -697,7 +697,7 @@ function closingReadOf(
     D: advantage.D, Dstar: advantage.Dstar, hasDrawEngine: advantage.hasDrawEngine,
   });
   if (!win.closing) return null;
-  const closing = evaluateClosing(win.closing, nonLand, cmd, util, profile,
+  const closing = evaluateClosing(win.closing, Math.max(1, N), nonLand, cmd, util, profile,
     win.closingLines.filter((l) => l.id !== win.closing?.id));
   const base = selectPlan(Math.max(1, N), nonLand, cmd, util, profile);
   const scored = scoreDeck(input);
@@ -772,125 +772,147 @@ function closingFloor(
 }
 
 
-// ── stage 4c: per-profile S saturation ────────────────────────────────────
+// ── v1.4 stage 2: the S saturation, on Q_slot ─────────────────────────────
 //
-//   MTG_DB_DIR=... npx tsx scripts/deck-score-bands.ts saturation [--profile brawl]
+//   MTG_DB_DIR=... npx tsx scripts/deck-score-bands.ts saturation [--profile brawl|standard]
 //
-// `S = 100*clip((Q-b)/(Q_sat-b))*R` was frozen with ONE saturation, .70, for
-// every profile (§8/§9.2). Stage 4b then measured the Brawl floor at .675, so
-// the Brawl window is .025 wide and every real Brawl list pins at S = 100:
-// S still separates a deck from a pile, but no longer a deck from a deck.
+// §10.2 freezes ONE percentile policy — p80 of `Q_slot = U/D` over the
+// profile's ELIGIBLE REAL TRAINING cohort — for every independently calibrated
+// profile. There is no p60/p75/p90 search, no anchor-specific value and no
+// borrowing of the Commander number for Brawl or Standard.
 //
-// This prints the statistic that decides it — the same one the floors are cut
-// from (the per-list MAXIMUM Q over all eleven recipes, selectable reads only,
-// `engineFloors`' JOINT row) — except over the profile's TRAINING stride of
-// REAL lists rather than over matched controls. The closing plan is excluded
-// for the same reason it is excluded there: it answers to its own floor and is
-// folded in after W names a line.
-function saturationTable(
-  profile: SampleProfile, cohort: SampleCohort = 'training', raw = false, quiet = false,
-): { p80: number; percentileOfSeventy: number; n: number } {
-  const byName = cardsByName();
-  const decks = cohortSample(cohort, profile).map((r) => r.deck);
-  const generic = new Set<PlanKey>(GENERIC);
-  const families = PLAN_RECIPES.filter((r) => !generic.has(r.key));
-  type Read = { key: string; Q: number; R: number; b: number; selectable: boolean };
-  const perList: Read[][] = [];
-  const coverages: number[] = [];
-  let unresolved = 0;
+// Differences from the stage-4c statistic this replaces, all of them required:
+//  * it is `Q_slot`, not `U/F`, so a nonland-to-land replacement cannot raise it;
+//  * it is the number `scoreDeck` ITSELF selects (the closing plan included,
+//    the typed-coverage gate DOWN, never `--raw`), so the norm and the score
+//    are the same quantity;
+//  * the cohort is the manifest's `exclusion: 'none'` rows, so a confirmed
+//    rule failure cannot set the norm, while mechanically incomplete lists do;
+//  * the quantile is the inverse weighted empirical CDF at equal total weight
+//    per commander/event family, and it refuses to report below 30 families.
 
-  for (const deck of decks) {
-    const entries: DeckEntry[] = [];
-    const commanders: DeckEntry[] = [];
+/** `q_p = inf{x : cumulativeWeight(x) >= p*totalWeight}` (§10.2), with equal
+ * TOTAL weight per family — a commander with ten lists counts once, each of
+ * its lists at a tenth. Full-precision inputs, deterministic order. */
+export function weightedQuantile(
+  samples: readonly { value: number; family: string }[], p: number,
+): number {
+  if (samples.length === 0) return NaN;
+  const size = new Map<string, number>();
+  for (const s of samples) size.set(s.family, (size.get(s.family) ?? 0) + 1);
+  const sorted = [...samples].sort((a, b) => (a.value - b.value) || (a.family < b.family ? -1 : 1));
+  const total = size.size;
+  let cum = 0;
+  for (const s of sorted) {
+    cum += 1 / (size.get(s.family) as number);
+    if (cum >= p * total - 1e-12) return s.value;
+  }
+  return sorted[sorted.length - 1].value;
+}
+
+interface SlotRow {
+  id: string; family: string; value: number; S: number; total: number | null; plan: string;
+  /** Typed nonland-copy share, the axis §10.2's diagnostic null bins on. */
+  coverage: number;
+  /** The alternative grouping reported beside the frozen one (Standard: the
+   * event DATE, which is the manifest's split key). */
+  altFamily: string;
+}
+
+/** Eligible training rows of one profile, scored through `scoreDeckSafely`'s
+ * own path, with `Q_slot` read from the scorer's diagnostics. */
+function slotRows(profile: ScoreProfile, cohort: SampleCohort = 'training'): SlotRow[] {
+  const manifest = readManifest();
+  const eligible = new Set(
+    (manifest?.rows ?? [])
+      .filter((r) => r.profile === profile && r.split === cohort && r.exclusion === 'none')
+      .map((r) => r.id),
+  );
+  const rows: SlotRow[] = [];
+  const push = (id: string, family: string, input: Parameters<typeof scoreDeck>[0], altFamily?: string): void => {
+    if (!eligible.has(id)) return;
+    const r = scoreDeck(input);
+    rows.push({
+      id, family, altFamily: altFamily ?? family, value: r.detail.Qslot, plan: r.detail.plan,
+      coverage: r.detail.typedCoverage,
+      S: r.components.find((c) => c.key === 'synergy')?.score ?? 0,
+      total: r.score,
+    });
+  };
+  if (profile === 'standard') {
+    const data = loadDataset(0);
+    // §10.2 weights by EVENT family. The manifest groups Standard rows by DATE
+    // for the chronological split (a coarser, safer grouping for disjointness);
+    // the quantile uses the tournament itself, which is what an event family
+    // is. Both counts are reported — on the training cohort the date grouping
+    // gives 27 families (below §10.2's 30) and the event grouping gives more.
+    const events = standardEventFamilies();
+    for (const row of [...data.standardPositive, ...data.standardNegative]) {
+      push(`standard:${row.id}`, events.get(row.id) ?? `event-date:${row.eventDate}`, row.input,
+        `event-date:${row.eventDate}`);
+    }
+    return rows;
+  }
+  const byName = cardsByName();
+  for (const { deck } of cohortSample(cohort, profile as SampleProfile)) {
+    const main: { card: DbCard; quantity: number }[] = [];
+    const commanders: DbCard[] = [];
+    const unresolved: { name: string; quantity: number; board: string }[] = [];
     const commanderName = deck.commander.toLowerCase();
-    let missing = 0;
-    let tookCommander = false;
+    let took = false;
     for (const line of deck.cards) {
       const card = byName.get(line.name.toLowerCase());
-      if (!card) { missing++; continue; }
-      const entry = { feature: deriveCardFeature(card), quantity: line.quantity };
-      // The commander is `guaranteed` supply to the scorer, never a library
-      // copy — the same split `loadMatchedPiles` gives a control.
-      if (!tookCommander && line.name.toLowerCase() === commanderName) { commanders.push(entry); tookCommander = true; continue; }
-      entries.push(entry);
+      if (!card) { unresolved.push({ name: line.name, quantity: line.quantity, board: 'main' }); continue; }
+      if (!took && line.name.toLowerCase() === commanderName) { commanders.push(card); took = true; continue; }
+      main.push({ card, quantity: line.quantity });
     }
-    unresolved += missing;
-    let nonLand = entries.filter((e) => !e.feature.isLand);
-    if (nonLand.length === 0 || missing > deck.cards.length * 0.1) continue;
-    const F = nonLand.reduce((a, e) => a + e.quantity, 0);
-    coverages.push(nonLand.filter((e) => e.feature.covered).reduce((a, e) => a + e.quantity, 0) / F);
-    // `--raw` lifts ONLY the typed-coverage gate, the way `evaluatedSupply`
-    // does for the bands: it separates "this list has no plan" from "the
-    // catalogue cannot read this list", which are different defects.
-    if (raw) nonLand = nonLand.map((e) => ({ ...e, feature: { ...e.feature, covered: true } }));
-    const N = entries.reduce((a, e) => a + e.quantity, 0) + commanders.length;
-    const util = producerUtilisation(nonLand, commanders);
-    const reads: Read[] = [];
-    const record = (key: string, e: ReturnType<typeof evaluatePlan>): void => {
-      reads.push({ key, Q: e.Q, R: e.R, b: qBaselineFor(profile, key as PlanKey), selectable: !e.hasEmptyEssential });
-    };
-    for (const recipe of families) record(recipe.key, evaluatePlan(recipe, N, nonLand, commanders, util, profile));
-    const typal = evaluateTypal(N, nonLand, commanders, util, profile);
-    if (typal) record('typal', typal);
-    for (const key of GENERIC) record(key, evaluatePlan(recipeFor(key), N, nonLand, commanders, util, profile));
-    perList.push(reads);
+    push(`${profile}-sample:${deck.id}`, commanderName, {
+      format: profile as ScoreFormat, main, commander: commanders, sideboard: [],
+      unresolved, cardDataVersion: `cards-${CATALOG_SIZE}`, corpus: null,
+    });
   }
+  return rows;
+}
 
-  const selectableOf = (reads: Read[]): Read[] => (reads.some((r) => r.selectable) ? reads.filter((r) => r.selectable) : reads);
-  const maxQ = perList.map((reads) => reads.filter((r) => r.selectable).reduce((m, r) => Math.max(m, r.Q), 0)).sort((a, b) => a - b);
-  // `betterPlan` ranks on planFit and reports the same quantity, so S under a
-  // candidate saturation is reconstructed from the Q/R/b already measured.
-  const sUnder = (sat: number): number[] => perList
-    .map((reads) => 100 * selectableOf(reads).reduce((m, r) => Math.max(m, clip((r.Q - r.b) / (sat - r.b)) * r.R), 0))
-    .sort((a, b) => a - b);
+const SATURATION_PERCENTILE = 0.80;
 
-  const share = (v: number[], predicate: (x: number) => boolean): string =>
-    `${v.filter(predicate).length}/${v.length} (${((100 * v.filter(predicate).length) / v.length).toFixed(1)}%)`;
-  const frozen = qSaturationFor(profile as ScoreProfile);
-  // Where .70 sits in THIS profile's distribution: the share of real lists at
-  // or below it IS the percentile it occupies.
-  const percentileOf = (v: number[], x: number): number => (100 * v.filter((q) => q <= x).length) / v.length;
+function saturationTable(
+  profile: ScoreProfile, cohort: SampleCohort = 'training', quiet = false,
+): { p80: number; n: number; families: number } {
+  const rows = slotRows(profile, cohort);
+  const families = new Set(rows.map((r) => r.family)).size;
+  const q = (p: number): number => weightedQuantile(rows, p);
+  const p80 = q(SATURATION_PERCENTILE);
+  const frozen = qSlotSaturationFor(profile);
+  const sUnder = (sat: number): number[] => rows.map((r) => 100 * clip(r.value / sat)).sort((a, b) => a - b);
 
   const lines = [
-    `${profile} ${cohort} stride: ${decks.length} lists, ${perList.length} resolved, ${unresolved} unresolved card rows, ` +
-      `${new Set(decks.map((d) => d.commander.toLowerCase())).size} distinct commanders`,
-    `floor b = ${qBaselineFor(profile as ScoreProfile, 'midrange').toFixed(3)}, frozen saturation = ${frozen.toFixed(3)}, ` +
-      `window width = ${(frozen - qBaselineFor(profile as ScoreProfile, 'midrange')).toFixed(3)}` +
-      `${raw ? ' — TYPED-COVERAGE GATE LIFTED (--raw)' : ''}`,
-    `typed coverage of these lists: p10 ${pct(coverages.slice().sort((a, b) => a - b), 10).toFixed(3)}, ` +
-      `p50 ${pct(coverages.slice().sort((a, b) => a - b), 50).toFixed(3)}, ` +
-      `p90 ${pct(coverages.slice().sort((a, b) => a - b), 90).toFixed(3)} ` +
-      `(the floors were measured on controls drawn to .930)`,
+    `${profile} ${cohort} cohort, ELIGIBLE rows only (cohorts-v14.json exclusion=none): ` +
+      `${rows.length} lists, ${families} families, scored through scoreDeck (no --raw)`,
+    `frozen Q_sat = ${frozen.toFixed(4)}; measured p80 = ${Number.isFinite(p80) ? p80.toFixed(4) : '-'}` +
+      `${families < 30 ? ' — REFUSED: fewer than 30 independent families (§10.2)' : ''}`,
+    `sensitivity, alternative family grouping: ${new Set(rows.map((r) => r.altFamily)).size} families, ` +
+      `p80 = ${weightedQuantile(rows.map((r) => ({ value: r.value, family: r.altFamily })), SATURATION_PERCENTILE).toFixed(4)}` +
+      `; unweighted p80 = ${pct(rows.map((r) => r.value).sort((a, b) => a - b), 80).toFixed(4)}`,
     '',
-    '| statistic (max-recipe Q over real lists) | n | p25 | p50 | p75 | p80 | p90 | p95 | max |',
+    '| statistic (Q_slot = U/D, family-weighted) | n | p10 | p25 | p50 | p75 | p80 | p90 | p95 |',
     '|---|---:|---:|---:|---:|---:|---:|---:|---:|',
-    `| ${profile} ${cohort} | ${maxQ.length} | ${pct(maxQ, 25).toFixed(3)} | ${pct(maxQ, 50).toFixed(3)} | ` +
-      `${pct(maxQ, 75).toFixed(3)} | ${pct(maxQ, 80).toFixed(3)} | ${pct(maxQ, 90).toFixed(3)} | ` +
-      `${pct(maxQ, 95).toFixed(3)} | ${maxQ[maxQ.length - 1].toFixed(3)} |`,
+    `| ${profile} ${cohort} | ${rows.length} | ${q(0.10).toFixed(4)} | ${q(0.25).toFixed(4)} | ` +
+      `${q(0.50).toFixed(4)} | ${q(0.75).toFixed(4)} | **${q(0.80).toFixed(4)}** | ` +
+      `${q(0.90).toFixed(4)} | ${q(0.95).toFixed(4)} |`,
     '',
-    `Q_SATURATION .700 sits at the ${percentileOf(maxQ, 0.70).toFixed(1)}th percentile of this distribution ` +
-      `(p50 ${pct(maxQ, 50).toFixed(3)}, p75 ${pct(maxQ, 75).toFixed(3)}, p90 ${pct(maxQ, 90).toFixed(3)}, p95 ${pct(maxQ, 95).toFixed(3)}).`,
-    '',
-    '| candidate saturation | value | S = 100 share | S p10 | S p50 | S p90 | p10-p90 spread |',
-    '|---|---:|---:|---:|---:|---:|---:|',
+    '| saturation | value | S = 100 share | S p10 | S p50 | S p90 |',
+    '|---|---:|---:|---:|---:|---:|',
   ];
-  const candidates: Array<[string, number]> = [
-    ['frozen today', frozen],
-    ['spec .70', 0.70],
-    ['p50', pct(maxQ, 50)], ['p75', pct(maxQ, 75)], ['p80', pct(maxQ, 80)],
-    ['p90', pct(maxQ, 90)], ['p95', pct(maxQ, 95)],
-  ];
-  for (const [label, sat] of candidates) {
-    if (!Number.isFinite(sat) || sat <= qBaselineFor(profile as ScoreProfile, 'midrange')) {
-      lines.push(`| ${label} | ${sat.toFixed(3)} | REJECTED: <= b | - | - | - | - |`);
-      continue;
-    }
+  for (const [label, sat] of [['frozen', frozen], ['measured p80', p80]] as Array<[string, number]>) {
+    if (!(sat > 0)) { lines.push(`| ${label} | ${sat.toFixed(4)} | - | - | - | - |`); continue; }
     const S = sUnder(sat);
-    lines.push(`| ${label} | ${sat.toFixed(3)} | ${share(S, (x) => x >= 99.95)} | ${pct(S, 10).toFixed(1)} | ` +
-      `${pct(S, 50).toFixed(1)} | ${pct(S, 90).toFixed(1)} | ${(pct(S, 90) - pct(S, 10)).toFixed(1)} |`);
+    const hundred = S.filter((x) => x >= 99.95).length;
+    lines.push(`| ${label} | ${sat.toFixed(4)} | ${hundred}/${S.length} (${((100 * hundred) / S.length).toFixed(1)}%) | ` +
+      `${pct(S, 10).toFixed(1)} | ${pct(S, 50).toFixed(1)} | ${pct(S, 90).toFixed(1)} |`);
   }
   if (!quiet) console.log(lines.join('\n'));
-  return { p80: pct(maxQ, 80), percentileOfSeventy: percentileOf(maxQ, 0.70), n: maxQ.length };
+  return { p80, n: rows.length, families };
 }
 
 // ── round 1: the PRODUCT metric ───────────────────────────────────────────
@@ -1423,24 +1445,19 @@ function verifyFrozen(): void {
     rows.push(`| ${name} | ${frozen.toFixed(3)} | ${measured.toFixed(3)} | ${n} | ${ok ? 'MATCH' : 'MISMATCH'} |`);
   };
 
-  const jointC = engineFloors(1000, 'commander', true);
-  grade('Q_BASELINE_JOINT_COMMANDER', Q_BASELINE_JOINT_COMMANDER, jointC.joint95, jointC.n);
-  const jointB = engineFloors(1000, 'brawl', true);
-  grade('Q_BASELINE_JOINT_BRAWL', Q_BASELINE_JOINT_BRAWL, jointB.joint95, jointB.n);
-  const closeC = closingFloor(1200, 'commander', 'holdout', true);
-  grade('Q_BASELINE_CLOSING', Q_BASELINE_CLOSING, closeC.p95, closeC.assembled);
-  const closeB = closingFloor(1200, 'brawl', 'holdout', true);
-  grade('Q_BASELINE_CLOSING_BRAWL', Q_BASELINE_CLOSING_BRAWL, closeB.p95, closeB.assembled);
-  const satB = saturationTable('brawl', 'training', true, true);
-  grade('Q_SATURATION_BRAWL (= brawl p80)', Q_SATURATION_BRAWL, satB.p80, satB.n);
-  const satC = saturationTable('commander', 'training', true, true);
-  // Commander keeps the spec's .70. Moving it is a §8/§9 SPEC change, not a
-  // stage decision, so both rows below are informational: they record where
-  // the constant sits in today's Commander deck population rather than
-  // grading it. Round 1 moved it — the catalogue now types 66% of the card
-  // universe, so every real list's max-recipe Q rose.
-  rows.push(`| (Q_SATURATION commander p80) | ${Q_SATURATION.toFixed(3)} | ${satC.p80.toFixed(3)} | ${satC.n} | informational (spec-frozen) |`);
-  rows.push(`| (Q_SATURATION .700 percentile) | 80.0 | ${satC.percentileOfSeventy.toFixed(1)} | ${satC.n} | informational (spec-frozen) |`);
+  // v1.4 stage 2: the ACTIVE S constants are the three `Q_slot` saturations.
+  // `Q_BASELINE_JOINT_*`, `Q_BASELINE_CLOSING*`, `Q_BASELINE` and
+  // `Q_SATURATION*` are retired from scoring (§10.2 b_S = 0, §10.3 no R
+  // multiplier and no floor), so they are no longer graded here — they are
+  // diagnostics with their own subcommands (`negative --joint`,
+  // `closingfloor`). Grading a retired constant would fail this gate on a
+  // number nothing reads.
+  for (const profile of ['commander', 'brawl', 'standard'] as const) {
+    const sat = saturationTable(profile, 'training', true);
+    grade(`Q_SLOT_SATURATION.${profile} (p80, ${sat.families} families)`,
+      qSlotSaturationFor(profile), sat.p80, sat.families >= 30 ? sat.n : 0, 1e-6);
+  }
+  rows.push('| (retired, diagnostics only) | Q_BASELINE_JOINT_*, Q_BASELINE_CLOSING*, Q_SATURATION* | - | - | not graded |');
 
   let bandCells = 0;
   for (const profile of ['commander', 'brawl'] as const) {
@@ -1502,6 +1519,149 @@ export function subcommandArgs(argv: readonly string[]): string[] {
   return argv.filter((a, i) => a !== '--profile' && argv[i - 1] !== '--profile');
 }
 
+/**
+ * §10.2's COVERAGE-CONDITIONED DIAGNOSTIC NULL — computed and REPORTED, never
+ * scored. In .05-wide typed-coverage bins: the p95 of `Q_slot` over each pile
+ * construction (a null for "how much useful mass does a random legal list of
+ * this coverage carry") beside the family-weighted p80 of `Q_slot` over the
+ * real eligible lists in the same bin. A cell prints a number only when it has
+ * >= 100 controls / >= 30 real families, per §10.2.
+ *
+ * Nothing reads this table: it exists so a later stage can see whether S
+ * separates decks from piles at FIXED coverage or merely reads coverage.
+ */
+function diagnosticNull(profile: SampleProfile, perCell: number): void {
+  const real = slotRows(profile as ScoreProfile);
+  const bins: { lo: number; hi: number }[] = [];
+  for (let lo = 0.5; lo < 0.95; lo += 0.05) bins.push({ lo, hi: lo + 0.05 });
+  const out: string[] = [
+    `## §10.2 coverage-conditioned diagnostic null — ${profile} (REPORTED, never scored)`,
+    '',
+    `Piles: ${perCell} per construction per bin, drawn at the bin centre.`,
+    'Real: eligible training rows, family-weighted p80 (both through `scoreDeck`).',
+    '',
+    '| coverage bin | ctrl93 p95 | n | ctrlalt p95 | n | real p80 | n | families |',
+    '|---|---:|---:|---:|---:|---:|---:|---:|',
+  ];
+  for (const { lo, hi } of bins) {
+    const centre = (lo + hi) / 2;
+    const q = (piles: { input: Parameters<typeof scoreDeck>[0] }[]): { p95: number; n: number } => {
+      const values = piles.map((pile) => scoreDeck(pile.input).detail.Qslot).sort((a, b) => a - b);
+      return { p95: values.length > 0 ? pct(values, 95) : NaN, n: values.length };
+    };
+    const ctrl93 = q(loadCohortPiles('training', perCell, centre, profile));
+    // Second construction: the contiguous file order with an independent
+    // seed, not the stride cohort. (`ctrlmatch` proper matches the REAL
+    // coverage distribution, which is meaningless inside a fixed bin.)
+    const ctrlmatch = q(loadMatchedPiles(perCell, 0, 0xf00d0000, centre, undefined, profile));
+    const cell = real.filter((r) => r.coverage >= lo && r.coverage < hi);
+    const families = new Set(cell.map((r) => r.family)).size;
+    const realP80 = families >= 30
+      ? weightedQuantile(cell.map((r) => ({ value: r.value, family: r.family })), 0.80).toFixed(4)
+      : `n/a (${families}f)`;
+    const show = (v: { p95: number; n: number }): string => (v.n >= 100 ? v.p95.toFixed(4) : `n/a (${v.n})`);
+    out.push(`| ${lo.toFixed(2)}-${hi.toFixed(2)} | ${show(ctrl93)} | ${ctrl93.n} | ${show(ctrlmatch)} | ${ctrlmatch.n} | `
+      + `${realP80} | ${cell.length} | ${families} |`);
+  }
+  const text = out.join(String.fromCharCode(10));
+  const line = String.fromCharCode(10);
+  fs.mkdirSync(OUT_DIR, { recursive: true });
+  fs.writeFileSync(path.join(OUT_DIR, `null-diagnostic-${profile}.md`), text + line);
+  process.stdout.write(text + line);
+}
+
+// ── `bands freeze` — one command that re-measures and REWRITES the norms ──
+
+/** Replace the `Q_SLOT_SATURATION` literal in `deck-score-norms.ts`. Pure so
+ * the rewrite is testable without writing the file. */
+export function rewriteSaturations(src: string, values: Record<ScoreProfile, number>): string {
+  const head = 'export const Q_SLOT_SATURATION: Record<ScoreProfile, number> = {';
+  const start = src.indexOf(head);
+  if (start < 0) throw new Error('Q_SLOT_SATURATION literal not found');
+  const end = src.indexOf('};', start);
+  if (end < 0) throw new Error('Q_SLOT_SATURATION literal is unterminated');
+  const eol = src.includes('\r\n') ? '\r\n' : '\n';
+  const body = (['commander', 'brawl', 'standard'] as const)
+    .map((k) => `  ${k}: ${values[k].toFixed(8)},`).join(eol);
+  return `${src.slice(0, start)}${head}${eol}${body}${eol}${src.slice(end)}`;
+}
+
+/** Replace one role's `cmd:`/`brawl:` band literal in `deck-score-plans.ts`.
+ * Every role is one line inside its recipe's `roles: [...]`, so the edit is
+ * located by recipe key then role key and never by a bare number. */
+export function rewriteBandCell(
+  src: string, plan: string, role: string, profile: 'commander' | 'brawl', band: { min: number; max: number },
+): string {
+  const eol = src.includes('\r\n') ? '\r\n' : '\n';
+  const lines = src.split(eol);
+  const at = lines.findIndex((l) => l.includes(`key: '${plan}',`) && !l.includes('{ key:'));
+  if (at < 0) throw new Error(`recipe ${plan} not found`);
+  const field = profile === 'brawl' ? 'brawl' : 'cmd';
+  for (let i = at + 1; i < lines.length; i++) {
+    if (lines[i].includes('key: \'') && !lines[i].includes('{ key:')) break;   // next recipe
+    if (!lines[i].includes(`{ key: '${role}',`)) continue;
+    const re = new RegExp(`${field}: \{ min: \d+, max: \d+ \}`);
+    if (!re.test(lines[i])) throw new Error(`${plan}/${role} has no ${field} band to rewrite`);
+    lines[i] = lines[i].replace(re, `${field}: { min: ${band.min}, max: ${band.max} }`);
+    return lines.join(eol);
+  }
+  throw new Error(`role ${plan}/${role} not found`);
+}
+
+/**
+ * §10.8: stage 2's S norms are PROVISIONAL until the corrected W domain
+ * lands, so the freeze has to be a command rather than a hand edit. `freeze`
+ * re-measures the three `Q_slot` saturations and all 45 band cells on the
+ * frozen domain and prints what moved; `freeze --write` applies it to
+ * `deck-score-norms.ts` and `deck-score-plans.ts`. Run `bands verify`
+ * afterwards — it grades the same statistics and must come back clean.
+ */
+function freezeCommand(write: boolean): void {
+  const lib = path.join(OUT_DIR, '..', '..', 'src', 'lib');
+  const normsFile = path.join(lib, 'deck-score-norms.ts');
+  const plansFile = path.join(lib, 'deck-score-plans.ts');
+  const rows: string[] = ['| constant | frozen | measured | n | action |', '|---|---:|---:|---:|---|'];
+  let moved = 0;
+
+  const sat = {} as Record<ScoreProfile, number>;
+  for (const profile of ['commander', 'brawl', 'standard'] as const) {
+    const m = saturationTable(profile, 'training', true);
+    const measured = m.families >= 30 ? Number(m.p80.toFixed(8)) : qSlotSaturationFor(profile);
+    sat[profile] = measured;
+    const same = Math.abs(measured - qSlotSaturationFor(profile)) <= VERIFY_EPS;
+    if (!same) moved += 1;
+    rows.push(`| Q_SLOT_SATURATION.${profile} | ${qSlotSaturationFor(profile).toFixed(8)} | ${measured.toFixed(8)} `
+      + `| ${m.families >= 30 ? m.n : 0} | ${same ? 'unchanged' : 'REFREEZE'} |`);
+  }
+
+  const cells: { plan: string; role: string; profile: 'commander' | 'brawl'; min: number; max: number }[] = [];
+  for (const profile of ['commander', 'brawl'] as const) {
+    for (const row of commanderBands(true, true, 'training', profile, true)) {
+      if (!row.frozen || row.inherited || row.n === 0) continue;
+      const min = Math.round(row.p25);
+      const max = Math.round(row.p90);
+      if (min === row.frozen.min && max === row.frozen.max) continue;
+      moved += 1;
+      cells.push({ plan: row.plan, role: row.role, profile, min, max });
+      rows.push(`| band ${profile}/${row.plan}/${row.role} | ${row.frozen.min}/${row.frozen.max} | ${min}/${max} `
+        + `| ${row.n} | REFREEZE |`);
+    }
+  }
+
+  if (write) {
+    fs.writeFileSync(normsFile, rewriteSaturations(fs.readFileSync(normsFile, 'utf-8'), sat));
+    let plans = fs.readFileSync(plansFile, 'utf-8');
+    for (const c of cells) plans = rewriteBandCell(plans, c.plan, c.role, c.profile, c);
+    fs.writeFileSync(plansFile, plans);
+  }
+
+  console.log(rows.join('\n'));
+  console.log(`\nbands freeze: ${moved} constant(s) moved; `
+    + `${write ? 'WRITTEN to deck-score-norms.ts / deck-score-plans.ts — re-run `bands verify` and the suite'
+      : 'dry run, pass --write to apply'}.`);
+  console.log('§10.8: every S norm here is PROVISIONAL until the corrected W domain lands.');
+}
+
 function main(): void {
   // `--profile brawl` swaps the corpus, the draw legality and the scored
   // format everywhere below; the default is the Commander corpus, so every
@@ -1510,12 +1670,21 @@ function main(): void {
   const profile: SampleProfile = pArg > 0 && process.argv[pArg + 1] === 'brawl' ? 'brawl' : 'commander';
   const argv = subcommandArgs(process.argv);
   if (argv.includes('saturation')) {
-    saturationTable(profile, argv.includes('--holdout') ? 'holdout' : 'training',
-      argv.includes('--raw'));
+    // §10.2's statistic exists for all three calibrated profiles, so this is
+    // the one subcommand that also accepts `--profile standard`. There is no
+    // `--raw`: the norm must be the number the scorer itself computes.
+    const wide = pArg > 0 && process.argv[pArg + 1] === 'standard' ? 'standard' : profile;
+    saturationTable(wide as ScoreProfile, argv.includes('--holdout') ? 'holdout' : 'training');
+    return;
+  }
+  if (argv.includes('null')) {
+    const nArg = argv.indexOf('--n');
+    diagnosticNull(profile, nArg > 0 ? Number(argv[nArg + 1]) : 120);
     return;
   }
   if (argv.includes('domain')) { domainCommand(argv.includes('--write')); return; }
   if (argv.includes('verify')) { verifyFrozen(); return; }
+  if (argv.includes('freeze')) { freezeCommand(argv.includes('--write')); return; }
   if (argv.includes('real')) {
     const rArg = argv.indexOf('--n');
     const pArgPiles = argv.indexOf('--piles');

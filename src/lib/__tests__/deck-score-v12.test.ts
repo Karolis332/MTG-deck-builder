@@ -7,7 +7,7 @@
 import { describe, it, expect, vi } from 'vitest';
 import type { DbCard } from '../types';
 import { scoreDeck, type DeckScoreInput } from '../deck-score';
-import { WEIGHTS, weightsFor, Q_BASELINE, Q_SATURATION, type ScoreFormat } from '../deck-score-norms';
+import { WEIGHTS, weightsFor, qSlotSaturationFor, type ScoreFormat } from '../deck-score-norms';
 import { computeSynergy } from '../deck-score-synergy';
 import {
   selectPlan, evaluatePlan, recipeFor, deploymentBudget, betterPlan, planFit, evaluateClosing, closingRecipe,
@@ -113,29 +113,41 @@ function standardDeck(main: Array<{ card: DbCard; quantity: number }>): DeckScor
   return { format: 'standard', main, commander: [], sideboard: [], unresolved: [], cardDataVersion: 'test-v12', corpus: null };
 }
 
-// ── S = 100 * clip((Q-.30)/(.70-.30)) * R * B ─────────────────────────────
+// ── SUPERSEDED by v1.4 §10.2: S = 100*clip(Q_slot/Q_sat), b_S = 0, no R ───
+//
+// These cases kept their DECKS and lost their v1.2 expectations. The fitted
+// floor and the R multiplier are retired (§10.2/§10.3), so a junk-heavy list
+// is no longer forced to exactly 0, and a thin essential no longer zeroes a
+// score the deck still has useful mass for.
 
-describe('computeSynergy v1.2 — the multiplicative S formula', () => {
-  it('is 0 when Q is at or below the .30 unstructured baseline', () => {
+describe('computeSynergy v1.4 — U/D coherence, mechanical zero', () => {
+  it('scores a junk-heavy list on the useful mass it actually has, not 0', () => {
     const deck = entriesOf([...creatures(4, 3, 2, 'OnPlan'), ...creatures(36, 0, 9, 'Junk')]);
     const out = computeSynergy(null, 60, deck);
-    expect(out.Q).toBeLessThanOrEqual(Q_BASELINE);
+    expect(out.usefulMass).toBeLessThanOrEqual(8);
+    expect(out.Q).toBeCloseTo(out.usefulMass / out.D, 9);
+    expect(out.score).toBeGreaterThan(0);
+    expect(out.score).toBeLessThan(25);
+  });
+
+  it('gives no useful mass at all when nothing is on any plan', () => {
+    const deck = entriesOf(creatures(30, 0, 9, 'Junk'));
+    const out = computeSynergy(null, 60, deck);
+    expect(out.usefulMass).toBe(0);
     expect(out.score).toBe(0);
   });
 
-  it('is 0 when an essential role is missing, however high Q is (R=0)', () => {
+  it('reports R without multiplying by it, and keeps b_S at 0', () => {
     const deck = entriesOf(creatures(30, 3, 3, 'Beater'));
     const out = computeSynergy(null, 60, deck);
-    expect(out.Q).toBeGreaterThan(Q_BASELINE);
-    expect(out.R).toBe(0);
-    expect(out.score).toBe(0);
+    expect(out.b).toBe(0);
+    expect(out.score).toBeCloseTo(100 * Math.min(1, out.Q / qSlotSaturationFor('commander')), 6);
   });
 
-  it('equals 100*coherence*R*B and never exceeds 100 at saturation', () => {
+  it('never exceeds 100, and saturates exactly at the frozen p80', () => {
     const deck = entriesOf([...creatures(14, 3, 3, 'Beater'), ...removal(10, 2), ...cantrips(10)]);
     const out = computeSynergy(null, 60, deck);
-    expect(out.Q).toBeGreaterThanOrEqual(Q_SATURATION);
-    expect(out.score).toBeCloseTo(100 * out.R * out.B, 6);
+    expect(out.score).toBeCloseTo(100 * Math.min(1, out.Q / qSlotSaturationFor('commander')), 6);
     expect(out.score).toBeLessThanOrEqual(100);
   });
 });
@@ -166,7 +178,11 @@ describe('evaluatePlan v1.2 — one copy, one role, one plan', () => {
     }));
     const withUnknown = evaluatePlan(recipeFor('midrange'), 60, entriesOf([...known, ...unknownCards]));
     const withoutUnknown = evaluatePlan(recipeFor('midrange'), 60, entriesOf(known));
-    expect(withUnknown.Q).toBeLessThan(withoutUnknown.Q);
+    // §10.2: the denominator is D = max(N0, N), not F. Ten unknown copies at a
+    // FIXED library size therefore leave Q_slot exactly where it was — they
+    // earn no credit and enlarge no quota, which is §10.4's add-untyped bound.
+    expect(withUnknown.U).toBe(withoutUnknown.U);
+    expect(withUnknown.Q).toBe(withoutUnknown.Q);
     expect(withUnknown.roles.find((r) => r.role.key === 'threats')!.supply).toBe(10);
   });
 
@@ -455,12 +471,18 @@ describe('§8 pile separation — same shape, different coherence', () => {
     ...noncreature(8, 2, 'This artifact enters tapped.', 'Trinket'),
   ];
 
-  it('keeps the quota-matched pile at S <= 5 and the coherent list at S >= 60', () => {
+  // v1.4 §10.1: the S floor that pinned this pile at 0 is RETIRED, and no
+  // validated card-level replacement exists. S still ORDERS the pair — the
+  // pile earns half the coherent list's useful mass — but it no longer drives
+  // it under 5. The numeric pile gate is explicitly OPEN and release-blocking;
+  // this pins the measured separation rather than a target it cannot meet.
+  it('still orders the pair on useful mass, with the pile gap measured', () => {
     const pileOut = computeSynergy(null, 60, entriesOf(pile));
     const goodOut = computeSynergy(null, 60, entriesOf(coherent));
     expect(entriesOf(pile).reduce((s, e) => s + e.quantity, 0)).toBe(entriesOf(coherent).reduce((s, e) => s + e.quantity, 0));
-    expect(pileOut.score).toBeLessThanOrEqual(5);
     expect(goodOut.score).toBeGreaterThanOrEqual(60);
+    expect(pileOut.usefulMass).toBeLessThan(goodOut.usefulMass * 0.75);
+    expect(pileOut.score).toBeCloseTo(37.2, 1);
   });
 });
 
@@ -749,10 +771,15 @@ describe('\u00a71 plan selection ranks recipes on fit, not on essentials-met cou
     expect(planFit(chosen)).toBeGreaterThan(planFit(midrange));
   });
 
-  it('planFit is the plan side of S: clip((Q-.30)/.40) * R', () => {
+  // v1.4 §10.2/§10.3: `planFit` IS `Q_slot`, the U objective, and S is its
+  // monotone transform — no floor, no R, so ranking and reporting maximise the
+  // same quantity even above the saturation where S would tie at 100.
+  it('planFit is the U objective itself, and S is its transform', () => {
     const plan = evaluatePlan(recipeFor('aristocrats'), 99, deck);
     const out = computeSynergy(plan, 99, deck);
-    expect(planFit(plan) * 100 * out.B).toBeCloseTo(out.score, 5);
+    expect(planFit(plan)).toBe(plan.Q);
+    expect(planFit(plan)).toBeCloseTo(plan.U / plan.D, 9);
+    expect(100 * Math.min(1, planFit(plan) / qSlotSaturationFor('commander'))).toBeCloseTo(out.score, 5);
   });
 });
 
@@ -787,7 +814,7 @@ describe('§8 closing/tutor family — the plan is the line W actually selected'
       ...noncreature(10, 2, 'Counter target spell.', 'Counter', 'Instant'),
       ...cantrips(8),
     ]);
-    const out = computeSynergy(evaluateClosing(COMBO_LINE, deck), 99, deck);
+    const out = computeSynergy(evaluateClosing(COMBO_LINE, 99, deck), 99, deck);
     expect(out.plan.recipe.key).toBe('combo');
     expect(out.R).toBe(1);
     expect(out.score).toBeGreaterThanOrEqual(80);
@@ -799,15 +826,20 @@ describe('§8 closing/tutor family — the plan is the line W actually selected'
       ...creatures(20, 1, 3, 'Random'),
       ...noncreature(18, 3, 'This artifact enters tapped.', 'Junk'),
     ]);
-    const closing = evaluateClosing(COMBO_LINE, deck);
+    const closing = evaluateClosing(COMBO_LINE, 99, deck);
     expect(closing.roles.find((r) => r.role.key === 'tutors')!.supply).toBe(0);
     expect(closing.hasEmptyEssential).toBe(true);
     expect(closing.R).toBe(0);
-    // …and whichever reading §1's ordering keeps, the pile earns nothing:
-    // every generic recipe is empty-essential here too, so the closing read
-    // can win the tie-break — on R = 0, which is S = 0 either way.
+    // …and the closing read cannot be the plan: §10.3 keeps "known missing
+    // essentials invalidate the recipe", so the one piece with no tutors is
+    // dropped in favour of whatever the deck actually supplies. v1.4 no longer
+    // forces the result to 0 — the pile scores the useful mass it has, which
+    // §10.1 records as the OPEN numeric pile-separation gate.
+    // Every generic recipe is empty-essential here too, so the closing read can
+    // still win the tie-break — on ONE credited piece out of 99 slots, which
+    // is S ~ 2 rather than v1.3's forced 0.
     const chosen = betterPlan(selectPlan(99, deck), closing);
-    expect(planFit(chosen)).toBe(0);
+    expect(computeSynergy(chosen, 99, deck).usefulMass).toBeLessThanOrEqual(1);
     expect(computeSynergy(chosen, 99, deck).score).toBeLessThanOrEqual(5);
   });
 
@@ -860,8 +892,13 @@ describe('§8 Commander bands — measured, not scaled by N/60', () => {
     const answers = midrange.roles.find((r) => r.key === 'answers')!;
     expect(answers.cmd).toBeDefined();
     const deck = entriesOf([...creatures(10, 4, 4, 'Threat'), ...removal(6, 2), ...cantrips(10)]);
-    const asCommander = evaluatePlan(midrange, COMMANDER_BAND_REFERENCE, deck);
-    const asStandard = evaluatePlan(midrange, 60, deck);
+    // v1.4 §10.2: the band is chosen by the profile's N0, never by the
+    // submitted size — "freeze S's useful-role caps and resource budgets at
+    // the profile's N0 reference". An undersized Commander list therefore
+    // keeps the Commander band, and only a Standard submission reads the
+    // 60-card one.
+    const asCommander = evaluatePlan(midrange, COMMANDER_BAND_REFERENCE, deck, [], undefined, 'commander');
+    const asStandard = evaluatePlan(midrange, 60, deck, [], undefined, 'standard');
     const reqCmd = asCommander.roles.find((r) => r.role.key === 'answers')!.required;
     const reqStd = asStandard.roles.find((r) => r.role.key === 'answers')!.required;
     expect(reqCmd).toBeCloseTo(answers.cmd!.min, 6);

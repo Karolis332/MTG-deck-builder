@@ -11,11 +11,11 @@ import type { ResolvedCard } from '../../services/build-api/analysis-core';
 import { analyzeCommander, mergeProfiles } from './commander-synergy';
 import type { Archetype } from './deck-templates';
 import {
-  weightsFor, normsFor, qualityCap, profileOf, SCORE_VERSION,
+  weightsFor, normsFor, qualityCap, profileOf, SCORE_VERSION, referenceLibrarySize,
   QUALITY_CAP_INTERCEPT, QUALITY_CAP_SLOPE, COVERAGE_EVIDENCE_THRESHOLD,
   HARD_CAP_INVALID, type ScoreFormat, type ComponentKey, type ScoreTuning,
 } from './deck-score-norms';
-import { selectPlan, evaluateClosing, betterPlan, isManlandFinisher, type PlanKey } from './deck-score-plans';
+import { selectPlan, evaluateClosing, betterPlan, isManlandFinisher, type PlanKey, type PlanSlots } from './deck-score-plans';
 import { producerUtilisation } from './deck-score-producers';
 import { computeStructure, type ScoreGate } from './deck-score-gates';
 import { computeMana, computeCurve, type DeckEntry } from './deck-score-mana';
@@ -49,6 +49,19 @@ export interface DeckScoreResult {
   score: number;
   components: { key: ComponentKey; score: number; weight: number; reason: string }[];
   gates: ScoreGate[];
+  /** §10.7 "publish ... selected recipe, U/D": the S diagnostics the
+   * calibration scripts read. NOT part of `DeckScorePayload` — the wire shape
+   * is unchanged — and never an input to any other component. */
+  detail: {
+    plan: PlanKey;
+    /** §10.2 useful nonland-copy credit, library slots and their ratio. */
+    U: number;
+    D: number;
+    Qslot: number;
+    /** Legacy diagnostic (§10.3), not a factor of S. */
+    R: number;
+    typedCoverage: number;
+  };
   /** v1.2 (§8): the point estimate is shown, but "calibrated" status is
    * withheld — typed coverage is at or below 80%, or a selected recipe's
    * critical prerequisite is unknown. Additive field; components unchanged. */
@@ -62,6 +75,7 @@ function invalidResult(gates: ScoreGate[], weights: Record<ComponentKey, number>
     score: 0,
     components: COMPONENT_ORDER.map((key) => ({ key, score: 0, weight: weights[key], reason: 'invalid or empty deck input.' })),
     gates,
+    detail: { plan: 'midrange', U: 0, D: 0, Qslot: 0, R: 0, typedCoverage: 0 },
     provisional: true,
   };
 }
@@ -162,10 +176,32 @@ export function scoreDeck(input: Readonly<DeckScoreInput>, tuning?: Readonly<Sco
   const planSupply = profile === 'standard'
     ? [...commanderEntries, ...mainEntries.filter((e) => isManlandFinisher(e.feature))]
     : commanderEntries;
+  // §10.2 slot accounting, computed ONCE and handed to every recipe:
+  //   N0 = the legal reference library (99 / 98 with a verified partner pair /
+  //        59 Standard Brawl / 60 Standard) — the frozen reference S's useful
+  //        role caps and resource budgets answer to, so added unknown slots
+  //        cannot enlarge a quota;
+  //   lands = the ACTUAL land copies. Reserved unresolved slots are blank
+  //        padding: they enter D and no access predicate treats them as mana.
+  // The structure gate has already refused any other commander count, so two
+  // resolved commanders here ARE the verified partner pair.
+  const slots: PlanSlots = {
+    n0: referenceLibrarySize(format) - (input.commander.length === 2 ? 1 : 0),
+    lands: mainEntries.filter((e) => e.feature.isLand).reduce((s, e) => s + e.quantity, 0),
+  };
+  // §10.2: "for undersized inputs every access/feasibility predicate uses D
+  // slots with uncredited padding". Every `N` inside `deck-score-win.ts` is an
+  // access computation — hypergeometric draws and the disjoint-pool
+  // polynomial — so W reads D too. Without it, deleting one off-plan copy from
+  // a 99-card list drew the same pieces out of 98 cards and paid +9.4 W
+  // (sample `381392623`, §10.4 delete-offplan-typed). Densities (M, curve, I,
+  // A) still read the submitted N: they measure what the deck IS, not what it
+  // draws.
+  const accessSlots = Math.max(slots.n0 ?? N, N);
   // §9.3: one utilisation table per deck, shared by every recipe, so all
   // candidate plans are ranked against the SAME feasible assignment.
   const utilisation = producerUtilisation(nonLandEntries, commanderEntries);
-  const plan = selectPlan(Math.max(1, N), nonLandEntries, planSupply, utilisation, profile);
+  const plan = selectPlan(Math.max(1, N), nonLandEntries, planSupply, utilisation, profile, slots);
   const archetype = inferArchetype(commanderFeatures, archetypeOfPlan(plan.recipe.key));
   const commanderCmc = commanderFeatures.reduce((max, f) => Math.max(max, f.c), 0);
 
@@ -173,7 +209,7 @@ export function scoreDeck(input: Readonly<DeckScoreInput>, tuning?: Readonly<Sco
   const curve = computeCurve(format, norms, archetype, N, mainEntries, commanderCmc);
   const interaction = computeInteraction(format, norms, archetype, N, mainEntries);
   const advantage = computeAdvantage(format, norms, archetype, N, mainEntries);
-  const win = computeWin(format, norms, archetype, N, mainEntries, commanderFeatures, {
+  const win = computeWin(format, norms, archetype, accessSlots, mainEntries, commanderFeatures, {
     E: interaction.E, Estar: interaction.Estar,
     D: advantage.D, Dstar: advantage.Dstar, hasDrawEngine: advantage.hasDrawEngine,
   });
@@ -188,9 +224,10 @@ export function scoreDeck(input: Readonly<DeckScoreInput>, tuning?: Readonly<Sco
     ? betterPlan(
       plan,
       evaluateClosing(
-        win.closing, nonLandEntries, planSupply, utilisation, profile,
+        win.closing, Math.max(1, N), nonLandEntries, planSupply, utilisation, profile,
         // §9.5: complete compatible backups joining the root line's package.
         win.closingLines.filter((l) => l.id !== win.closing?.id),
+        slots,
       ),
       profile,
     )
@@ -251,6 +288,10 @@ export function scoreDeck(input: Readonly<DeckScoreInput>, tuning?: Readonly<Sco
     score,
     components: COMPONENT_ORDER.map((key) => ({ key, score: scores[key], weight: weights[key], reason: reasons[key] })),
     gates,
+    detail: {
+      plan: finalPlan.recipe.key, U: synergy.usefulMass, D: synergy.D,
+      Qslot: synergy.Q, R: synergy.R, typedCoverage,
+    },
     provisional: evidenceTriggered,
   };
 }

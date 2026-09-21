@@ -144,7 +144,10 @@ describe('conversion — Food/Treasure/Clue produced, then spent', () => {
     const r = fires('conversion', nonLand);
     expect(r.empty).toBe(false);
     expect(r.R).toBe(1);
-    expect(r.Q).toBeGreaterThan(Q_BASELINE_JOINT_COMMANDER);
+    // §10.2 units: `Q = U/D`, useful copies per library SLOT. The v1.3 floor
+    // it used to clear was in `U/F` (per nonland copy) and is retired.
+    expect(r.Q).toBeCloseTo(0.3434, 3);
+    expect(r.Q * 99).toBeCloseTo(34, 6);
     expect(selectPlan(99, nonLand, [], undefined, 'commander').recipe.key).toBe('conversion');
   });
 
@@ -266,7 +269,7 @@ describe('§9.5 proved support paths', () => {
       { card: presentPieces[0], quantity: 1 }, { card: presentPieces[1], quantity: 1 },
       { card: tutor.card, quantity: 1 },
     ]);
-    const evaluation = evaluateClosing(LINE, deck, [], undefined, 'commander');
+    const evaluation = evaluateClosing(LINE, 99, deck, [], undefined, 'commander');
     expect(evaluation.roles.find((r) => r.role.key === 'tutors')?.supply).toBe(1);
   });
 
@@ -379,8 +382,8 @@ describe('§9.5 proved support paths', () => {
       { card: presentPieces[0], quantity: 1 }, { card: presentPieces[1], quantity: 1 },
       { card: piece('Backup A'), quantity: 1 }, { card: piece('Backup B'), quantity: 1 },
     ]);
-    const rooted = evaluateClosing(LINE, deck, [], undefined, 'commander');
-    const withBackup = evaluateClosing(LINE, deck, [], undefined, 'commander', [backup]);
+    const rooted = evaluateClosing(LINE, 99, deck, [], undefined, 'commander');
+    const withBackup = evaluateClosing(LINE, 99, deck, [], undefined, 'commander', [backup]);
     expect(rooted.roles.find((r) => r.role.key === 'pieces')?.supply).toBe(2);
     expect(withBackup.roles.find((r) => r.role.key === 'pieces')?.supply).toBe(4);
     // Each copy still earns at most ONE Q unit: four pieces, four credits.
@@ -400,17 +403,18 @@ describe('stage 3 acceptance, fixture-backed', () => {
     const cmd = input.commander.map((c) => ({ feature: deriveCardFeature(c), quantity: 1 }));
     const N = all.reduce((a, e) => a + e.quantity, 0);
     const plan = selectPlan(Math.max(1, N), nonLand, cmd, undefined, 'commander');
-    // ROUND 1, REPORTED OUT OF BAND, NOT FITTED. Stage 2 read it as generic
-    // midrange at Q .600 (49); stage 3's Food recipe read `conversion` at .649
-    // (59). With the corpus-wide catalogue the list types 30 more cards, the
-    // `midrange` read overtakes `conversion` on planFit at Q .615, and the
-    // re-measured floor .683 is above both — so S = 0 and the total is the
-    // 20 floor. The cause is the floor/saturation collapse (a .017 window),
-    // the same one `Q_BASELINE_JOINT_COMMANDER` documents; §4 forbids moving
-    // b to bring this anchor back.
-    expect(plan.recipe.key).toBe('midrange');
-    expect(plan.Q).toBeCloseTo(0.615, 3);
-    expect(result.score).toBe(20);
+    // ROUND 1, REPORTED OUT OF BAND, NOT FITTED. Stage 2 (v1.3) read it as
+    // generic midrange at Q .600 (49); stage 3's Food recipe read
+    // `conversion` at .649 (59); round 1's catalogue made `midrange` win on
+    // planFit at .615 and the re-measured floor .683 put S at 0 (total 20).
+    // v1.4 STAGE 2 RESTORES THE TITLE'S READING: with `Q_slot = U/D` and the
+    // maximum-credit assignment the Food engine carries the most useful mass
+    // (45 copies / 99 slots), `conversion` wins, S = 100 and the total is 59
+    // — inside the 55-70 band this test is named for. No constant moved to
+    // get there; the floor that produced the 20 was retired by §10.2.
+    expect(plan.recipe.key).toBe('conversion');
+    expect(plan.Q).toBeCloseTo(0.4545, 3);
+    expect(result.score).toBe(59);
   });
 
   it('keeps the 101-card Brawl Cabbage list on its legality cap', () => {
@@ -436,12 +440,16 @@ describe('stage 3 acceptance, fixture-backed', () => {
     // `npx tsx scripts/deck-score-bands.ts controls`: 200/200 total < 25 and
     // 199/200 S <= 5 on the contiguous slice (22 commanders, kept for
     // information only); the acceptance instrument is `--stride`.
+    // v1.4 STAGE 2: `b_S = 0`, so S reads the useful mass these piles really
+    // hold — 68.6 to 100 — while the displayed totals stay pinned at 20 by
+    // the rest of the score. §10.1's numeric pile gate is OPEN; this pins the
+    // measurement rather than a target.
     const controls = loadMatchedPiles(10, 2000, 0xf00d0000, 0.93);
     const scored = controls.map((c) => scoreDeck(c.input));
     const syn = scored.map((r) => Number((r.components.find((c) => c.key === 'synergy')?.score ?? 0).toFixed(1)));
     expect(scored.map((r) => r.score)).toEqual([20, 20, 20, 20, 20, 20, 20, 20, 20, 20]);
-    expect(syn).toEqual([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-    expect(syn.filter((v) => v <= 5).length).toBe(10);
+    expect(syn).toEqual([77.2, 100, 68.6, 74.4, 72.1, 69.8, 79.5, 84.2, 77.2, 79.5]);
+    expect(syn.filter((v) => v <= 5).length).toBe(0);
   });
 
   it('never reads a closing plan on a matched control', () => {

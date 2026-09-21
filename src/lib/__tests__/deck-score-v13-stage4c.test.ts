@@ -20,7 +20,7 @@ import {
 import {
   Q_BASELINE, Q_BASELINE_CLOSING, Q_BASELINE_CLOSING_BRAWL,
   Q_BASELINE_JOINT_BRAWL, Q_BASELINE_JOINT_COMMANDER,
-  Q_SATURATION, Q_SATURATION_BRAWL, qSaturationFor, profileOf, SCORE_VERSION,
+  Q_SATURATION, Q_SATURATION_BRAWL, Q_SLOT_SATURATION, qSaturationFor, profileOf, SCORE_VERSION,
   type ScoreFormat, type ScoreProfile,
 } from '../deck-score-norms';
 import { deriveCardFeature } from '../deck-score-features';
@@ -106,6 +106,19 @@ function readStride(profile: SampleProfile, limit = PREFIX): { maxQ: number[]; r
   return { maxQ, reads: out };
 }
 
+/** §10.2's S, over the same reads: no floor, no R, `100*clip(Q_slot/Q_sat)`. */
+function sSlot(reads: Read[][], profile: ScoreProfile): number[] {
+  return reads
+    .map((row) => {
+      const pool = row.some((r) => r.selectable) ? row.filter((r) => r.selectable) : row;
+      const q = pool.reduce((m, r) => Math.max(m, r.Q), 0);
+      return 100 * Math.max(0, Math.min(1, q / Q_SLOT_SATURATION[profile]));
+    })
+    .sort((a, b) => a - b);
+}
+
+/** LEGACY, v1.3's floor-and-R form. Kept for the two comparison tests that
+ * record what §10.2 replaced; never the live formula. */
 function sUnder(reads: Read[][], sat: number): number[] {
   return reads
     .map((row) => {
@@ -166,33 +179,43 @@ describe('stage 4c — per-profile S saturation', () => {
     expect(new Set(profiles.map((p) => qSaturationFor(p))).size).toBe(2);
   });
 
-  it('measures p80 of a prefix of each training stride within noise of the frozen table', () => {
+  it('measures a prefix p80 ABOVE the v1.4 norm, because this prefix lifts the coverage gate', () => {
+    // v1.4 §10.2 re-cut the statistic: `Q_slot = U/D` over the ELIGIBLE real
+    // training cohort scored through `scoreDeck` itself, coverage gate ON.
+    // `readStride` above forces `covered: true` on every card, so its p80 is
+    // an UPPER BOUND on the frozen norm rather than a reproduction of it —
+    // .500 vs .434 (commander), .470 vs .404 (brawl). The reproduction lives
+    // in `bands verify`, which re-measures all three constants the way they
+    // were cut and exits non-zero on a mismatch.
     for (const profile of ['commander', 'brawl'] as const) {
       const { maxQ } = readStride(profile);
       expect(maxQ.length, profile).toBeGreaterThan(200);
-      expect(pct(maxQ, 80), profile).toBeCloseTo(SATURATION_TABLE[profile].p80, 1);
+      expect(pct(maxQ, 80), profile).toBeGreaterThan(Q_SLOT_SATURATION[profile]);
     }
+    expect(pct(readStride('commander').maxQ, 80)).toBeCloseTo(0.500, 2);
+    expect(pct(readStride('brawl').maxQ, 80)).toBeCloseTo(0.470, 2);
   }, 120_000);
 });
 
 // ── 2. what the saturation buys: S separates deck from deck ───────────────
 
 describe('stage 4c — Brawl S spread', () => {
-  it('unpins the Brawl deck population: under 25% at S = 100, spread >= 40', () => {
-    const { reads } = readStride('brawl');
-    const S = sUnder(reads, Q_SATURATION_BRAWL);
-    const pinned = S.filter((x) => x >= 99.95).length;
-    expect(pinned / S.length).toBeLessThan(0.25);
-    // ROUND 1: the spread is nominally wider than ever and MEANS LESS. A .025
-    // window turns S into a step: p10 is 0 and p90 is 100, with the population
-    // piled at the two ends rather than spread between them. The assertion is
-    // kept (it still catches a collapse to one value) and the bimodality is
-    // pinned beside it so the next round cannot mistake 100 for resolution.
-    expect(pct(S, 90) - pct(S, 10)).toBeGreaterThanOrEqual(40);
-    expect(pct(S, 10)).toBe(0);
+  it('replaces the bimodal v1.3 population with a top-compressed one', () => {
+    // v1.4 §10.2: `S = 100*clip(Q_slot/Q_sat)`, no floor and no R. The v1.3
+    // reading of this same prefix was bimodal — p10 0, p90 100, half the
+    // population at one end or the other, because a .025-wide window is a
+    // step. The mechanical zero removes the bottom mode: nothing here reads
+    // 0, p10 is 81.3 and the mass sits at the top instead. (Stage 2's
+    // per-COPY assignment pass raised the Brawl p80 saturation .4040 ->
+    // .4061, which divides every Brawl S by 1.005: 81.7 -> 81.27.)
+    // This prefix LIFTS the coverage gate, so 55.4% pin at 100 here; the
+    // product number is `bands real --profile brawl` through `scoreDeck`.
+    const S = sSlot(readStride('brawl').reads, 'brawl');
+    expect(pct(S, 10)).toBeCloseTo(81.27, 1);
+    expect(pct(S, 50)).toBe(100);
     expect(pct(S, 90)).toBe(100);
-    const ends = S.filter((x) => x <= 0.05 || x >= 99.95).length;
-    expect(ends / S.length).toBeGreaterThan(0.5);
+    expect(S.filter((x) => x <= 0.05).length).toBe(0);
+    expect(S.filter((x) => x >= 99.95).length / S.length).toBeCloseTo(0.554, 2);
   }, 120_000);
 
   it('is strictly harsher than the shared .70 it replaces', () => {
@@ -297,10 +320,13 @@ describe('stage 4c — tazri-upgraded-arena', () => {
     // prefers it), S = 66.7 and the total 68 is INSIDE 45-65's neighbourhood
     // at the top edge. The stage-4c claim that the payoffs bound Q no longer
     // holds; the servedBy arithmetic it demonstrated is still checked below.
+    // STAGE 2: the list reads `typal` again (the maximum-credit assignment
+    // gives the party read the most useful mass) and S saturates at 100; the
+    // total is unchanged at 68, still 3 over the top of its 45-65 band.
     const result = scoreDeck(fixture.input);
     const S = result.components.find((c) => c.key === 'synergy');
     expect(result.score).toBe(68);
-    expect(S?.score).toBe(66.7);
+    expect(S?.score).toBe(100);
 
     const entries: DeckEntry[] = fixture.input.main.map((rc) => ({ feature: deriveCardFeature(rc.card), quantity: rc.quantity }));
     const nonLand = entries.filter((e) => !e.feature.isLand);
@@ -308,20 +334,21 @@ describe('stage 4c — tazri-upgraded-arena', () => {
     const N = entries.reduce((a, e) => a + e.quantity, 0);
     const util = producerUtilisation(nonLand, cmd);
     const plan = selectPlan(Math.max(1, N), nonLand, cmd, util, 'brawl');
-    expect(plan.recipe.key).toBe('tokens');
-    // The `typal` read is still available and still bounded the way stage 4c
-    // measured — `enabler` is servedBy payoff at 8:1, so covering four more
-    // party BODIES cannot raise its Q. What changed is that a BETTER read now
-    // exists, not that this arithmetic stopped holding.
+    expect(plan.recipe.key).toBe('typal');
+    // The `enabler` bound stage 4c measured is intact — servedBy payoff at
+    // 8:1, so covering more party BODIES cannot raise its credit past
+    // 8 x payoff. What moved is the OTHER side: the maximum-credit assignment
+    // (§10.2) re-spends the copies this bound rejects into the roles that can
+    // still use them, which is why `typal` now carries the most useful mass
+    // of any candidate and wins planFit.
     const typal = evaluateTypal(Math.max(1, N), nonLand, cmd, util, 'brawl');
     const payoff = typal!.roles.find((r) => r.role.key === 'payoff');
     const enabler = typal!.roles.find((r) => r.role.key === 'enabler');
     expect(enabler?.role.servedBy).toEqual({ roles: ['payoff'], ratio: 8 });
-    expect(enabler?.credited).toBe(8 * (payoff?.supply ?? 0));
-    expect(typal!.Q).toBeLessThan(Q_BASELINE_JOINT_BRAWL);
-    // The SELECTED plan clears the floor, which is why S is no longer 0.
-    expect(plan.Q).toBeGreaterThan(Q_BASELINE_JOINT_BRAWL);
-    expect(planFit(plan, 'brawl')).toBeGreaterThan(0);
+    expect(enabler?.credited).toBeLessThanOrEqual(8 * (payoff?.supply ?? 0));
+    expect(plan.U).toBe(52);
+    expect(plan.D).toBe(99);
+    expect(planFit(plan, 'brawl')).toBe(plan.Q);
   });
 });
 

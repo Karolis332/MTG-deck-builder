@@ -142,7 +142,7 @@ function control(needle: string, cohort: SampleCohort, profile: SampleProfile = 
   });
   const rows = recipesFor(profile).map((r) => evaluatePlan(r, Math.max(1, N), nonLand, cmd, util, profile));
   if (win.closing) {
-    rows.push(evaluateClosing(win.closing, nonLand, [], util, profile,
+    rows.push(evaluateClosing(win.closing, Math.max(1, N), nonLand, [], util, profile,
       win.closingLines.filter((l) => l.id !== win.closing?.id)));
   }
   const r = scoreDeck(hit.input);

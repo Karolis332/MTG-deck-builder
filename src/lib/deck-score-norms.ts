@@ -289,6 +289,61 @@ export function qSaturationFor(profile: ScoreProfile): number {
 }
 
 /**
+ * v1.4 stage 2 (§10.2) — `Q_sat,p`, the saturation of the REPLACEMENT S.
+ *
+ *     N0 = 99 (98 with a verified partner pair) / 59 Standard Brawl / 60 Standard
+ *     D  = max(N0, submitted library copies incl. reserved unresolved slots)
+ *     U  = max over feasible recipes of the useful nonland-copy credit
+ *     S  = 100 * clip(Q_slot / Q_sat,p),  Q_slot = U / D,  b_S = 0
+ *
+ * MEASURED, not chosen: p80 of `Q_slot` over the profile's ELIGIBLE REAL
+ * TRAINING cohort — `cohorts-v14.json` rows with `exclusion: 'none'`, scored
+ * through `scoreDeck` itself (no `--raw`, no lifted coverage gate, mechanically
+ * incomplete lists included), with the inverse weighted empirical CDF
+ * `q_p = inf{x: cumulativeWeight(x) >= p*totalWeight}` at EQUAL TOTAL WEIGHT
+ * PER COMMANDER FAMILY. p80 is the percentile policy §10.2 freezes for every
+ * independently calibrated profile; there is no p60/p75/p90 search, no
+ * borrowing of the Commander number for Brawl and no anchor-specific value.
+ *
+ * Re-print with `npx tsx scripts/deck-score-bands.ts saturation --profile <p>`;
+ * `bands verify` re-derives all three and fails on any mismatch. The legacy
+ * `Q_SATURATION*`/`Q_BASELINE*` constants above are in the units of v1.3's
+ * `U/F`, which this statistic replaces — §10.2 "Neither .70 nor the legacy
+ * nonland-Q floors carry over to Q_slot's different units."
+ *
+ * MEASURED 2026-09-21 on the corrected stage-2 cohorts (the ten `Kuja` lists
+ * left both Commander strides), catalogue 14,924 entries, domain `21fa0be02940`:
+ *
+ * | Q_slot, eligible real training cohort | families | n | p10 | p50 | p80 |
+ * |---|---:|---:|---:|---:|---:|
+ * | commander | 182 | 1,460 | .2525 | .3535 | **.4343 = 43/99** |
+ * | brawl | 179 | 797 | .2525 | .3535 | **.4061 = 40.2/99** |
+ * | standard | 42 | 360 | .2833 | .4000 | **.4833 = 29/60** |
+ *
+ * Commander and Standard moved one slot up from the first stage-2 measurement
+ * when the assignment became the §10.2 MAXIMUM (a copy parked in a role that
+ * is already at its bound is now re-spent where it is useful); Brawl did not
+ * move. The sensitivity row is unchanged in kind: alternative family grouping
+ * gives the same p80 on both, unweighted .4268 / .4833.
+ *
+ * Every value is an achieved `U/D`, so each constant is an exact rational in
+ * the profile's slot count — with a fractional numerator where §9.3 producer
+ * utilisation credits part of a copy (Brawl's 40.2). Standard's family key is the TOURNAMENT
+ * (`event_name|event_date`); its date grouping (27 families, below §10.2's 30)
+ * and the unweighted quantile both give the same .4667, so the grouping choice
+ * moves nothing there. Commander and Brawl weight by commander family.
+ */
+export const Q_SLOT_SATURATION: Record<ScoreProfile, number> = {
+  commander: 0.43434343,
+  brawl: 0.40606061,
+  standard: 0.48333333,
+};
+
+export function qSlotSaturationFor(profile: ScoreProfile): number {
+  return Q_SLOT_SATURATION[profile];
+}
+
+/**
  * v1.3 §9.2 / §9.6 + stage 4a: ONE Q floor a plan must clear in a
  * Commander-family profile before it explains anything. `S = 100 *
  * clip((Q - b) / (.70 - b)) * R` for every generic and engine recipe; `combo`

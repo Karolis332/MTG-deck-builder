@@ -104,7 +104,9 @@ const CORPUS_COVERAGE = {
 // `Necromancy`) for the reanimation and fetched-package combo routes. All three
 // are common Commander cards, so the Commander >= 80% share moved .295 -> .31.
 const PREFIX_COVERAGE: Record<SampleProfile, { p50: number; over80: number }> = {
-  commander: { p50: 0.754, over80: 0.31 },
+  // v1.4 stage 2 re-cut the Commander stride (the Kuja block left it), so
+  // the 200-list prefix is a different 200 lists: p50 unchanged, share .315.
+  commander: { p50: 0.754, over80: 0.315 },
   brawl: { p50: 0.741, over80: 0.250 },
 };
 
@@ -178,26 +180,22 @@ describe('coverage round 1 — real-list typed coverage', () => {
       .toBeCloseTo(PREFIX_COVERAGE.brawl.over80, 2);
   }, 120_000);
 
-  it('pins the S = 0 share on real lists — the round-1 acceptance MISS', () => {
-    // THE HEADLINE FAILURE, PINNED SO IT CANNOT BE FORGOTTEN. Target: at most
-    // 30% of real lists at S = 0. Typing the corpus raised every list's role
-    // supply, but re-measuring the floor on the SAME catalogue raised the bar
-    // by more, so the share got worse, not better. The cause is the floor /
-    // saturation collapse (a .017 Commander window, .025 in Brawl), which is a
-    // recipe problem, not a constant that can be lowered.
+  it('closes the round-1 S = 0 MISS: the floor that caused it is retired', () => {
+    // THE HEADLINE ROUND-1 FAILURE WAS .83 of Commander and .925 of Brawl
+    // real lists at S = 0, against a 30% target. The cause was the fitted
+    // floor `b` and its .017-wide window, not the recipes: v1.4 §10.2 sets
+    // `b_S = 0` and divides by library SLOTS, so a real list now reads the
+    // useful mass it holds. Zero share 0/200 on both profiles, medians off
+    // the 20 floor. The whole-cohort numbers are in `bands real`.
     const cmd = prefixStats('commander');
     const brawl = prefixStats('brawl');
     const zeroShare = (v: number[]): number => v.filter((x) => x <= 0.05).length / v.length;
-    // v1.4 stage 1b: .86 -> .83. S's plan can be the closing/tutor recipe the
-    // assembled win line publishes, so the three new W families (Protean Hulk
-    // packages, Buried Alive reanimation, creature-ETB loops) give ~3% of real
-    // Commander lists a supported plan they did not have. The MISS stands.
-    expect(zeroShare(cmd.S)).toBeCloseTo(0.83, 2);
-    expect(zeroShare(brawl.S)).toBeCloseTo(0.925, 2);   // .940 -> .925, same cause
-    expect(zeroShare(cmd.S)).toBeGreaterThan(0.30);
-    // Both medians sit on the 20 floor for the same reason.
-    expect(pct(cmd.totals, 50)).toBe(20);
-    expect(pct(brawl.totals, 50)).toBe(20);
+    expect(zeroShare(cmd.S)).toBe(0);
+    expect(zeroShare(brawl.S)).toBe(0);
+    expect(pct(cmd.S, 50)).toBeCloseTo(83.7, 1);
+    expect(pct(brawl.S, 50)).toBeCloseTo(87.1, 1);
+    expect(pct(cmd.totals, 50)).toBe(54);
+    expect(pct(brawl.totals, 50)).toBe(76);
   }, 120_000);
 });
 

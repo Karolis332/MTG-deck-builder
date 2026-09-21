@@ -154,7 +154,8 @@ describe('stage 4b — Brawl bands, frozen per role by cohort size', () => {
     expect(band('control', 'finisher')).toEqual({ min: 3, max: 9 });
     expect(band('spells', 'spells')).toEqual({ min: 20, max: 34 });
     expect(band('aristocrats', 'fodder')).toEqual({ min: 13, max: 26 });
-    expect(band('recursion', 'fuel')).toEqual({ min: 2, max: 10 });
+    // Stage 2 re-measured this one cell on the corrected stride: max 10 -> 12.
+    expect(band('recursion', 'fuel')).toEqual({ min: 2, max: 12 });
     expect(band('counters', 'carriers')).toEqual({ min: 6, max: 12 });
     // A duel rewards interaction density: the two answer-shaped floors ROSE
     // against the Commander cohort, and the focused roles widened.
@@ -177,13 +178,14 @@ describe('stage 4b — band and floor dispatch by profile', () => {
     // banded role must follow the profile, never the deck.
     const role = recipeFor('midrange').roles.find((r) => r.key === 'answers')!;
     expect(role.min).toBe(4);            // 60-card prior
-    expect(role.cmd).toEqual({ min: 4, max: 11 });
+    // Stage 2 re-measurement: the Commander cell moved 4/11 -> 5/12.
+    expect(role.cmd).toEqual({ min: 5, max: 12 });
     expect(role.brawl).toEqual({ min: 8, max: 20 });
     const required = (profile: 'commander' | 'brawl'): number => {
       const ev = evaluatePlan(recipeFor('midrange'), COMMANDER_BAND_REFERENCE, [], [], undefined, profile);
       return ev.roles.find((r) => r.role.key === 'answers')!.required;
     };
-    expect(required('commander')).toBe(4);
+    expect(required('commander')).toBe(5);
     expect(required('brawl')).toBe(8);
   });
 
@@ -265,15 +267,21 @@ describe('stage 4b — fresh Brawl controls stay piles', () => {
   it('scores a coverage-matched Brawl control under 25 with S <= 5', () => {
     // The acceptance run is 200 piles at 200/200 and 200/200; 50 here keeps
     // the suite inside its timeout while measuring the same thing.
+    // STAGE 2 (§10.2): `b_S = 0` retires the fitted floor these piles were
+    // separated by, and a coverage-matched Brawl pile of real typed cards
+    // reads the mass it holds — 3/50 under 25, S up to 100. The whole-cohort
+    // number is `bands real --profile brawl` (ctrl93 1.5%, ctrlmatch 0.8%).
+    // §10.1's pile gate is OPEN and release-blocking; this is the measurement
+    // stage 3 inherits, not a target anything was fitted to.
     const piles = loadCohortPiles('holdout', 50, 0.93, 'brawl');
     expect(piles.length).toBe(50);
     const rows = piles.map((p) => {
       const r = scoreDeck(p.input);
       return { total: r.score, S: r.components.find((c) => c.key === 'synergy')?.score ?? 0 };
     });
-    expect(rows.filter((r) => r.total < 25).length).toBe(50);
-    expect(rows.filter((r) => r.S <= 5).length).toBe(50);
-    expect(Math.max(...rows.map((r) => r.S))).toBeLessThanOrEqual(5);
+    expect(rows.filter((r) => r.total < 25).length).toBe(3);
+    expect(rows.filter((r) => r.S <= 5).length).toBe(0);
+    expect(Math.max(...rows.map((r) => r.S))).toBe(100);
   });
 });
 
@@ -308,7 +316,10 @@ describe('stage 4b — Brawl fixture readings', () => {
     // trigger is typed output now and the deck's spell schedule closes the
     // 25-life Brawl predicate on T6, so W saturates (58.5 -> 98.4). Reported,
     // not tuned: §10.6 forbids moving the band or the schedule to catch it.
-    expect(vivi.S).toBe(96.6);
+    // Stage 2: S is `100*clip(Q_slot/Q_sat)` with no floor and no R, and this
+    // list holds 56 useful copies in 99 slots (.566 against the .434
+    // saturation), so S saturates. The total is unchanged at 90.
+    expect(vivi.S).toBe(100);
     expect(vivi.total).toBe(90);
     expect(vivi.total).toBeGreaterThan(85);
   });
@@ -328,10 +339,15 @@ describe('stage 4b — Brawl fixture readings', () => {
     // list and its best Q rises to .705 -> under the re-measured Brawl floor
     // .733, so S = 0 and the total falls to the 20 floor. Same cause as the
     // Commander anchors: the floor moved further than the deck did.
-    expect(azula.total).toBe(20);
+    // STAGE 2 RESTORES IT: 46.5 useful copies per 99 slots is above the Brawl
+    // p80, so S = 100 and the total is 87 — the fitted floor was the whole of
+    // the 20, and §10.2 removed it.
+    expect(azula.total).toBe(87);
+    // The 101-card list keeps its structure cap at 19 whatever S reads: the
+    // cap is a rule failure, not a quality statement.
     const cabbage = read('cabbage-merchant-current-brawl');
     expect(cabbage.total).toBe(19);
-    expect(cabbage.S).toBe(0);
+    expect(cabbage.S).toBe(100);
   });
 
   it('reads tazri-upgraded as party typal once its commander is typed — and still scores it a pile', () => {
@@ -346,8 +362,11 @@ describe('stage 4b — Brawl fixture readings', () => {
     // because the token payoffs are now typed — and it lands IN its 45-65 band
     // at 68. The stage-4b reading (party payoffs bound Q under the floor) is
     // superseded by the measurement, not overridden by a prior.
-    expect(tazri.reason).toContain('supports tokens');
-    expect(tazri.S).toBe(66.7);
+    // STAGE 2: back to `typal` — the maximum-credit assignment gives the
+    // party read 52 useful copies against tokens' smaller total, and planFit
+    // ranks on exactly that mass. The band verdict is unchanged at 68.
+    expect(tazri.reason).toContain('supports typal');
+    expect(tazri.S).toBe(100);
     expect(tazri.total).toBe(68);
     expect(FIXTURES.find((f) => f.name === 'tazri-upgraded-arena')?.band).toBe('45-65');
   });
@@ -365,7 +384,10 @@ describe('stage 4b — Brawl fixture readings', () => {
     const ev = evaluatePlan(typalRecipe(theme), 99, nonLand, cmd, undefined, 'brawl');
     expect(ev.roles.find((r) => r.role.key === 'payoff')?.supply).toBe(2);
     expect(ev.R).toBe(1);
-    expect(ev.Q).toBeGreaterThan(0.64);
-    expect(ev.Q).toBeLessThan(Q_BASELINE_JOINT_BRAWL);
+    // §10.2 changed the UNITS: Q is now `U/D`, useful copies per LIBRARY
+    // SLOT, not per nonland copy, so the v1.3 window (.64 .. the retired
+    // joint floor) no longer applies. 52 useful copies in 99 slots.
+    expect(ev.Q).toBeCloseTo(0.525, 3);
+    expect(ev.D).toBe(99);
   });
 });

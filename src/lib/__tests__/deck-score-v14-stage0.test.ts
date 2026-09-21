@@ -201,12 +201,16 @@ describe('§10.7 stage 0 — cohorts-v14.json', () => {
   it('pins the two training strides and their eligible subsets', () => {
     const count = (profile: string, split: string, exclusion?: string) =>
       manifest!.rows.filter((r) => r.profile === profile && r.split === split && (!exclusion || r.exclusion === exclusion)).length;
-    // The §10 baseline strides, unchanged by stage 0.
-    expect(count('commander', 'training')).toBe(1824);
+    // Stage 2 moved the Commander stride: `HELD_OUT_COMMANDERS` now matches
+    // the front face, so the ten `Kuja, Genome Sorcerer // Trance Kuja` lists
+    // left the training side for the fixture split (1,824 -> 1,798; eligible
+    // 1,478 -> 1,460). Brawl is bit-identical — no fixture commander was in
+    // its stride to start with.
+    expect(count('commander', 'training')).toBe(1798);
     expect(count('brawl', 'training')).toBe(1146);
     // Eligible = exclusion 'none'. Moving either number needs a re-measured
     // baseline table, not a quiet edit.
-    expect(count('commander', 'training', 'none')).toBe(1478);
+    expect(count('commander', 'training', 'none')).toBe(1460);
     expect(count('brawl', 'training', 'none')).toBe(797);
   });
 
@@ -220,10 +224,12 @@ describe('§10.7 stage 0 — cohorts-v14.json', () => {
     expect(overlaps.map(([k]) => k)).toEqual([]);
   });
 
-  it('pins the one known fixture-commander leak so a later stage notices the fix', () => {
-    // HELD_OUT_COMMANDERS stores the front face, the sample the full
-    // "A // B" name, so ten Kuja lists are still inside the Commander stride.
-    expect([...fixtureLeaks(manifest!).entries()]).toEqual([['commander/kuja, genome sorcerer', 10]]);
+  it('holds no fixture commander in any stride — the stage 0 Kuja leak is closed', () => {
+    // `HELD_OUT_COMMANDERS` stores the front face and the sample the full
+    // "A // B" name, so ten `Kuja, Genome Sorcerer` lists sat inside the
+    // Commander training stride. `isHeldOutCommander` now tests the front
+    // face too (scripts/deck-score-piles.ts).
+    expect([...fixtureLeaks(manifest!).entries()]).toEqual([]);
   });
 
   it('hashes still describe the sample CSVs on disk', () => {

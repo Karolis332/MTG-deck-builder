@@ -14,7 +14,7 @@ import {
 } from '../deck-score-plans';
 import {
   Q_BASELINE, Q_BASELINE_CLOSING, Q_BASELINE_CLOSING_BRAWL, Q_BASELINE_JOINT_COMMANDER, Q_BASELINE_JOINT_BRAWL, Q_SATURATION,
-  DEPLOYMENT_PROBABILITY_TARGET,
+  DEPLOYMENT_PROBABILITY_TARGET, qSlotSaturationFor,
 } from '../deck-score-norms';
 import { deriveCardFeature } from '../deck-score-features';
 import { loadRandomPiles } from '../../../scripts/deck-score-fixtures';
@@ -261,8 +261,11 @@ describe('§9.2 Commander Q floor b, measured over 1,000 matched controls', () =
     for (const profile of ['commander', 'standard'] as const) {
       const plan = selectPlan(99, deck, [], undefined, profile);
       const out = computeSynergy(plan, 99, deck, profile);
-      expect(out.b).toBe(qBaselineFor(profile, plan.recipe.key));
-      expect(out.score).toBeCloseTo(100 * planFit(plan, profile), 6);
+      // §10.2: `b_S = 0` — the fitted floor is retired, and S is a monotone
+      // transform of the SAME `Q_slot` planFit maximised.
+      expect(out.b).toBe(0);
+      expect(planFit(plan, profile)).toBe(plan.Q);
+      expect(out.score).toBeCloseTo(100 * Math.min(1, plan.Q / qSlotSaturationFor(profile)), 6);
     }
   });
 });
@@ -296,8 +299,12 @@ describe('§9.1 dispatch is by FORMAT: the Standard change moves no Commander de
     // RE-PINNED at stage 3: the three piles that used to reach 21-24 read an
     // engine recipe at the old .30 floor. With the measured engine floor the
     // whole validation set is flat at 20 (200/200 under 25, 200/200 S <= 5).
+    // RE-PINNED at v1.4 stage 2: the floor that flattened them is retired
+    // (§10.2 `b_S = 0`), so a constructed pile of real typed cards reads the
+    // mass it holds and these twenty run 32-72. §10.1's pile gate is OPEN and
+    // release-blocking — pinned as the measurement stage 3 inherits.
     const scores = loadRandomPiles(20).map((input) => scoreDeck(input).score);
-    expect(scores).toEqual(new Array(20).fill(20));
+    expect(scores).toEqual([65, 54, 60, 55, 65, 72, 62, 60, 59, 63, 35, 55, 69, 62, 66, 54, 66, 63, 55, 32]);
   });
 });
 

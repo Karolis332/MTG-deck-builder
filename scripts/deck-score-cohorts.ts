@@ -24,7 +24,7 @@ import { profileOf, type ScoreFormat } from '../src/lib/deck-score-norms';
 import type { DbCard } from '../src/lib/types';
 import { OUT_DIR, ROOT, FIXTURES } from './deck-score-fixtures';
 import {
-  readSample, cardsByName, strideOrder, HELD_OUT_COMMANDERS,
+  readSample, cardsByName, strideOrder, isHeldOutCommander,
   type SampleProfile, type SampleDeck,
 } from './deck-score-piles';
 import { loadDataset } from './deck-score-fixtures';
@@ -56,7 +56,7 @@ export interface CohortManifest {
   rows: CohortRow[];
 }
 
-export const MANIFEST_VERSION = 'v14-stage0';
+export const MANIFEST_VERSION = 'v14-stage2';
 
 // ── hashing ───────────────────────────────────────────────────────────────
 
@@ -139,7 +139,7 @@ function sampleRows(profile: SampleProfile): CohortRow[] {
     // A fixture commander's lists belong to no stride: `commanderBlocks`
     // drops them so no band, floor or control is measured on an anchor's own
     // commander (§10.7 "including fixture commanders").
-    const split: CohortSplit = HELD_OUT_COMMANDERS.has(family) ? 'fixture' : (splitOf.get(i) ?? 'fresh');
+    const split: CohortSplit = isHeldOutCommander(family) ? 'fixture' : (splitOf.get(i) ?? 'fresh');
     const main: { card: DbCard; quantity: number }[] = [];
     const commander: DbCard[] = [];
     const unresolvedNames: string[] = [];

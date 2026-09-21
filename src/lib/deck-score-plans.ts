@@ -27,7 +27,7 @@ import { producerUtilisation, type Utilisation } from './deck-score-producers';
 import {
   DEPLOYMENT_PROBABILITY_TARGET, Q_BASELINE, Q_BASELINE_CLOSING, Q_BASELINE_CLOSING_BRAWL,
   Q_BASELINE_JOINT_COMMANDER, Q_BASELINE_JOINT_BRAWL,
-  qSaturationFor, type ScoreProfile,
+  type ScoreProfile,
 } from './deck-score-norms';
 
 export type PlanKey = 'aggro' | 'midrange' | 'control' | 'aristocrats' | 'lifegain' | 'spells' | 'combo' | 'typal' | 'recursion' | 'conversion' | 'tokens' | 'counters';
@@ -72,6 +72,10 @@ export interface PlanRecipe {
   key: PlanKey;
   label: string;
   roles: readonly PlanRole[];
+  /** §9.5 / §10.2: the closing plan's bands are ABSOLUTE — a combo needs its
+   * two pieces, its tutors and its protection whether the library is 60 or 99
+   * cards — so they are never scaled to a reference library size. */
+  absoluteBands?: boolean;
   /** Bands measured ONLY on the 2,777-list Commander sample. §1's replacement
    * rule needs a cohort of >= 30 reviewed same-format lists before a band may
    * be claimed, and no 60-card cohort was measured for these, so they are not
@@ -448,9 +452,9 @@ export const PLAN_RECIPES: readonly PlanRecipe[] = [
     key: 'midrange',
     label: 'timely threats, relevant answers, sustained value',
     roles: [
-      { key: 'threats', essential: true, min: 4, max: 10, cmd: { min: 5, max: 13 }, brawl: { min: 5, max: 12 }, deadline: 5, fills: threat(3, 5, 0.75) },
-      { key: 'answers', essential: true, min: 4, max: 15, cmd: { min: 4, max: 11 }, brawl: { min: 8, max: 20 }, deadline: 5, fills: answer(5) },
-      { key: 'value', essential: true, min: 4, max: 21, cmd: { min: 8, max: 16 }, brawl: { min: 8, max: 16 }, deadline: 5, fills: velocity(5) },
+      { key: 'threats', essential: true, min: 4, max: 10, cmd: { min: 5, max: 14 }, brawl: { min: 5, max: 12 }, deadline: 5, fills: threat(3, 5, 0.75) },
+      { key: 'answers', essential: true, min: 4, max: 15, cmd: { min: 5, max: 12 }, brawl: { min: 8, max: 20 }, deadline: 5, fills: answer(5) },
+      { key: 'value', essential: true, min: 4, max: 21, cmd: { min: 8, max: 17 }, brawl: { min: 8, max: 16 }, deadline: 5, fills: velocity(5) },
       { key: 'fixing', essential: false, infrastructure: true, min: 0, max: 8, fills: infrastructure },
     ],
   },
@@ -477,8 +481,8 @@ export const PLAN_RECIPES: readonly PlanRecipe[] = [
     label: 'sacrifice outlets converting expendable bodies into damage',
     roles: [
       { key: 'outlet', essential: true, min: 3, max: 9, cmd: { min: 3, max: 12 }, brawl: { min: 2, max: 8 }, fills: sacOutlet },
-      { key: 'payoff', essential: true, min: 5, max: 12, cmd: { min: 4, max: 15 }, brawl: { min: 2, max: 11 }, fills: deathPayoff },
-      { key: 'fodder', essential: true, min: 6, max: 18, cmd: { min: 13, max: 25 }, brawl: { min: 13, max: 26 }, deadline: 4, servedBy: { roles: ['outlet', 'payoff'], ratio: 3 }, fills: fodder(3) },
+      { key: 'payoff', essential: true, min: 5, max: 12, cmd: { min: 4, max: 16 }, brawl: { min: 2, max: 11 }, fills: deathPayoff },
+      { key: 'fodder', essential: true, min: 6, max: 18, cmd: { min: 13, max: 23 }, brawl: { min: 13, max: 26 }, deadline: 4, servedBy: { roles: ['outlet', 'payoff'], ratio: 3 }, fills: fodder(3) },
       { key: 'value', essential: false, min: 0, max: 8, fills: velocity(5) },
       { key: 'answers', essential: false, min: 0, max: 5, fills: answer(5) },
       { key: 'fixing', essential: false, infrastructure: true, min: 0, max: 8, fills: infrastructure },
@@ -488,8 +492,8 @@ export const PLAN_RECIPES: readonly PlanRecipe[] = [
     key: 'lifegain',
     label: 'life gained as a resource, converted by counters or drain',
     roles: [
-      { key: 'payoff', essential: true, min: 5, max: 12, cmd: { min: 6, max: 12 }, fills: lifePayoff },
-      { key: 'gain', essential: true, min: 8, max: 22, cmd: { min: 16, max: 28 }, fills: lifeSource },
+      { key: 'payoff', essential: true, min: 5, max: 12, cmd: { min: 6, max: 19 }, fills: lifePayoff },
+      { key: 'gain', essential: true, min: 8, max: 22, cmd: { min: 15, max: 25 }, fills: lifeSource },
       { key: 'value', essential: true, min: 2, max: 10, cmd: { min: 6, max: 13 }, fills: velocity(6) },
       { key: 'answers', essential: false, min: 0, max: 5, fills: answer(6) },
       { key: 'fixing', essential: false, infrastructure: true, min: 0, max: 8, fills: infrastructure },
@@ -500,8 +504,8 @@ export const PLAN_RECIPES: readonly PlanRecipe[] = [
     label: 'cast-trigger payoffs fed by cheap instants and sorceries',
     roles: [
       { key: 'payoff', essential: true, min: 3, max: 10, cmd: { min: 2, max: 12 }, brawl: { min: 1, max: 11 }, fills: spellPayoff },
-      { key: 'closer', essential: true, min: 2, max: 8, cmd: { min: 5, max: 18 }, brawl: { min: 4, max: 18 }, fills: spellCloser },
-      { key: 'spells', essential: true, min: 12, max: 32, cmd: { min: 13, max: 26 }, brawl: { min: 20, max: 34 }, deadline: 4, fills: cheapSpell(4) },
+      { key: 'closer', essential: true, min: 2, max: 8, cmd: { min: 5, max: 19 }, brawl: { min: 4, max: 18 }, fills: spellCloser },
+      { key: 'spells', essential: true, min: 12, max: 32, cmd: { min: 13, max: 27 }, brawl: { min: 20, max: 34 }, deadline: 4, fills: cheapSpell(4) },
       { key: 'answers', essential: false, min: 0, max: 8, fills: answer(5) },
       { key: 'fixing', essential: false, infrastructure: true, min: 0, max: 10, fills: infrastructure },
     ],
@@ -518,8 +522,8 @@ export const PLAN_RECIPES: readonly PlanRecipe[] = [
     label: 'permanents recurred from the graveyard, and the fuel that fills it',
     roles: [
       { key: 'recursion', essential: true, min: 4, max: 10, cmd: { min: 2, max: 8 }, brawl: { min: 2, max: 11 }, fills: graveyardRecursion },
-      { key: 'fuel', essential: true, min: 4, max: 14, cmd: { min: 2, max: 13 }, brawl: { min: 2, max: 10 }, servedBy: { roles: ['recursion'], ratio: 4 }, fills: graveyardFuel },
-      { key: 'targets', essential: true, min: 6, max: 18, cmd: { min: 5, max: 14 }, brawl: { min: 5, max: 17 }, deadline: 5, servedBy: { roles: ['recursion'], ratio: 5 }, fills: recursionTarget },
+      { key: 'fuel', essential: true, min: 4, max: 14, cmd: { min: 1, max: 12 }, brawl: { min: 2, max: 12 }, servedBy: { roles: ['recursion'], ratio: 4 }, fills: graveyardFuel },
+      { key: 'targets', essential: true, min: 6, max: 18, cmd: { min: 5, max: 15 }, brawl: { min: 5, max: 17 }, deadline: 5, servedBy: { roles: ['recursion'], ratio: 5 }, fills: recursionTarget },
       { key: 'value', essential: false, min: 0, max: 8, fills: velocity(5) },
       { key: 'answers', essential: false, min: 0, max: 5, fills: answer(5) },
       { key: 'fixing', essential: false, infrastructure: true, min: 0, max: 8, fills: infrastructure },
@@ -551,9 +555,9 @@ export const PLAN_RECIPES: readonly PlanRecipe[] = [
     commanderOnly: true,
     label: 'Food/Treasure/Clue produced, then spent on bodies, life or cards',
     roles: [
-      { key: 'converters', essential: true, min: 2, max: 10, cmd: { min: 8, max: 20 }, fills: storedResourceConverter },
-      { key: 'producers', essential: true, min: 5, max: 13, cmd: { min: 9, max: 26 }, servedBy: { roles: ['converters'], ratio: 3 }, fills: storedResourceProducer },
-      { key: 'output', essential: true, min: 2, max: 7, cmd: { min: 5, max: 10 }, deadline: 6, fills: engineOutput(6, 3, 0.75) },
+      { key: 'converters', essential: true, min: 2, max: 10, cmd: { min: 5, max: 20 }, fills: storedResourceConverter },
+      { key: 'producers', essential: true, min: 5, max: 13, cmd: { min: 9, max: 19 }, servedBy: { roles: ['converters'], ratio: 3 }, fills: storedResourceProducer },
+      { key: 'output', essential: true, min: 2, max: 7, cmd: { min: 5, max: 11 }, deadline: 6, fills: engineOutput(6, 3, 0.75) },
       { key: 'value', essential: false, min: 0, max: 8, fills: velocity(5) },
       { key: 'answers', essential: false, min: 0, max: 5, fills: answer(5) },
       { key: 'fixing', essential: false, infrastructure: true, min: 0, max: 8, fills: infrastructure },
@@ -565,8 +569,8 @@ export const PLAN_RECIPES: readonly PlanRecipe[] = [
     label: 'a wide board of creature tokens, converted by anthems or an outlet',
     roles: [
       { key: 'payoff', essential: true, min: 4, max: 11, cmd: { min: 6, max: 20 }, fills: widePayoff },
-      { key: 'makers', essential: true, min: 3, max: 8, cmd: { min: 6, max: 15 }, deadline: 5, servedBy: { roles: ['payoff'], ratio: 3 }, fills: (f) => f.isCreatureTokenProducer },
-      { key: 'value', essential: true, min: 5, max: 10, cmd: { min: 10, max: 18 }, fills: velocity(5) },
+      { key: 'makers', essential: true, min: 3, max: 8, cmd: { min: 6, max: 13 }, deadline: 5, servedBy: { roles: ['payoff'], ratio: 3 }, fills: (f) => f.isCreatureTokenProducer },
+      { key: 'value', essential: true, min: 5, max: 10, cmd: { min: 9, max: 19 }, fills: velocity(5) },
       { key: 'answers', essential: false, min: 0, max: 5, fills: answer(5) },
       { key: 'fixing', essential: false, infrastructure: true, min: 0, max: 8, fills: infrastructure },
     ],
@@ -576,9 +580,9 @@ export const PLAN_RECIPES: readonly PlanRecipe[] = [
     commanderOnly: true,
     label: '+1/+1 counters placed on bodies that read them',
     roles: [
-      { key: 'payoff', essential: true, min: 1, max: 5, cmd: { min: 2, max: 10 }, brawl: { min: 3, max: 11 }, fills: counterPayoff },
-      { key: 'sources', essential: true, min: 4, max: 10, cmd: { min: 6, max: 18 }, brawl: { min: 9, max: 19 }, servedBy: { roles: ['payoff'], ratio: 3 }, fills: counterSource },
-      { key: 'carriers', essential: true, min: 2, max: 7, cmd: { min: 5, max: 15 }, brawl: { min: 6, max: 12 }, deadline: 5, servedBy: { roles: ['sources'], ratio: 2 }, fills: threat(2, 5, 0.6) },
+      { key: 'payoff', essential: true, min: 1, max: 5, cmd: { min: 3, max: 10 }, brawl: { min: 3, max: 11 }, fills: counterPayoff },
+      { key: 'sources', essential: true, min: 4, max: 10, cmd: { min: 7, max: 21 }, brawl: { min: 9, max: 19 }, servedBy: { roles: ['payoff'], ratio: 3 }, fills: counterSource },
+      { key: 'carriers', essential: true, min: 2, max: 7, cmd: { min: 4, max: 15 }, brawl: { min: 6, max: 12 }, deadline: 5, servedBy: { roles: ['sources'], ratio: 2 }, fills: threat(2, 5, 0.6) },
       { key: 'value', essential: false, min: 0, max: 8, fills: velocity(5) },
       { key: 'answers', essential: false, min: 0, max: 5, fills: answer(5) },
       { key: 'fixing', essential: false, infrastructure: true, min: 0, max: 8, fills: infrastructure },
@@ -726,18 +730,58 @@ export function deploymentCredit(N: number, lands: number, c: number, deadline: 
 
 export interface RoleAssignment {
   role: PlanRole;
-  /** Required supply after scaling to the actual library size. */
+  /** Required supply after scaling to the reference library size. */
   required: number;
-  /** Verified useful copies assigned to this role. */
+  /** Verified useful copies assigned to this role by the DIAGNOSTIC
+   * first-match pass — the quantity `deck-score-bands.ts` measures the bands
+   * from, and the one R and `hasEmptyEssential` read. It can sit below
+   * `credited`, which is the §10.2 MAXIMUM over feasible assignments: a copy
+   * first-match parks in a role that is already at its bound is re-spent
+   * wherever it is actually useful. */
   supply: number;
   /** Q mass credited after the upper band / infrastructure caps. */
   credited: number;
+  /** §10.2 headroom ceiling for this role: `min(band max, servedBy bound)`.
+   * A role with `credited >= bound` is SATURATED — another copy of it is
+   * mechanically zero-use, which is what §10.4's staple probe needs. */
+  bound: number;
+}
+
+/**
+ * §10.2 slot accounting. `N` stays the positional argument (submitted library
+ * copies, reserved unresolved slots included); these two describe the rest of
+ * the denominator and are supplied by `deck-score.ts`, which is the only
+ * caller that knows the format and the land split.
+ */
+export interface PlanSlots {
+  /** `N0`: legal reference library size — 99 (98 with a verified partner
+   * pair), 59 Standard Brawl, 60 Standard. Useful-role caps and resource
+   * budgets are frozen HERE, so an added unknown slot cannot enlarge a quota
+   * (§10.2's S-specific exception to §1's count-target scaling). */
+  n0?: number;
+  /** Actual land copies in the submitted library. Reserved unresolved slots
+   * are blank padding: never lands, never useful, only denominator. */
+  lands?: number;
+}
+
+/** Profile default for `N0` when the caller has no format (band/diagnostic
+ * scripts and tests). Standard Brawl's 59 needs the format and is passed in. */
+export function defaultN0(profile: ScoreProfile): number {
+  return profile === 'standard' ? PLAN_BAND_REFERENCE : COMMANDER_BAND_REFERENCE;
 }
 
 export interface PlanEvaluation {
   recipe: PlanRecipe;
   roles: RoleAssignment[];
-  /** Q: supported nonland copies on plan, each counted at most once, over F. */
+  /** §10.2 `U_r`: the maximum feasible sum of useful nonland-copy credits for
+   * this recipe. Each physical copy supplies at most one unit, across
+   * compatible modes; commanders and lands supply resources but no units;
+   * unsupported effects add no mass. */
+  U: number;
+  /** §10.2 `D = max(N0, N)`: the library slots `U` is spread over. */
+  D: number;
+  /** §10.2 `Q_slot = U / D` — useful copy mass per library slot. v1.3 divided
+   * by F (nonland copies), which let a nonland-to-land replacement raise Q. */
   Q: number;
   /** R: min over essential roles of verified useful supply / required supply. */
   R: number;
@@ -778,40 +822,48 @@ export function evaluatePlan(
   /** §9.1 dispatches the deployment rule BY FORMAT, never by library size:
    * a 59-card Standard Brawl deck keeps the Commander-family clocks. */
   profile: ScoreProfile = 'commander',
+  /** §10.2 slot accounting; defaults reproduce the profile's legal library. */
+  slots?: Readonly<PlanSlots>,
 ): PlanEvaluation {
   const F = nonLand.reduce((s, e) => s + e.quantity, 0);
-  const commanderShaped = usesCommanderBands(N);
+  const n0 = slots?.n0 ?? defaultN0(profile);
+  // §10.2: `D = max(N0, N)`. An undersized list keeps the legal denominator,
+  // so deleting copies can never raise `Q_slot`; an oversized one divides by
+  // what it actually submitted.
+  const D = Math.max(n0, N);
+  const commanderShaped = usesCommanderBands(n0);
   const bandOf = (role: PlanRole): { min: number; max: number; scale: number } => {
     // Stage 4b: a 100-card Brawl deck is Commander-SHAPED but not a Commander
     // deck — 1v1 and 25 life make its real lists more focused, so it reads its
     // own measured band where one exists and falls back to the Commander band
     // (never to the 60-card one) where the Brawl cohort was under 30 lists.
     const cmd = commanderShaped ? (profile === 'brawl' ? role.brawl ?? role.cmd : role.cmd) : undefined;
+    // §10.2: the caps are frozen at N0, not at the submitted N. Adding unknown
+    // slots cannot unlock extra U merely by enlarging a quota.
+    if (recipe.absoluteBands) return { min: role.min, max: role.max, scale: 1 };
     return cmd
-      ? { min: cmd.min, max: cmd.max, scale: N / COMMANDER_BAND_REFERENCE }
-      : { min: role.min, max: role.max, scale: N / PLAN_BAND_REFERENCE };
+      ? { min: cmd.min, max: cmd.max, scale: n0 / COMMANDER_BAND_REFERENCE }
+      : { min: role.min, max: role.max, scale: n0 / PLAN_BAND_REFERENCE };
   };
   // §9.1: Standard weights a copy by the probability its OWN mana casts it by
   // the deadline; every other profile keeps the v1.2 binary land-mean cutoff.
-  const lands = Math.max(0, N - F);
-  const castableBy = deploymentBudget(N, lands);
+  // §10.2: both read D slots — an undersized list draws against blank padding,
+  // so improved draw odds cannot admit extra U after a deletion.
+  const lands = slots?.lands ?? Math.max(0, N - F);
+  const castableBy = deploymentBudget(D, lands);
   const deployWeight = (c: number, deadline: number | undefined): number => {
     if (deadline === undefined) return 1;
-    if (profile === 'standard') return deploymentCredit(N, lands, c, deadline);
+    if (profile === 'standard') return deploymentCredit(D, lands, c, deadline);
     return c <= castableBy(deadline) ? 1 : 0;
   };
-  const librarySupply = new Map<string, number>();
   const totalSupply = new Map<string, number>();
-  for (const role of recipe.roles) {
-    librarySupply.set(role.key, 0);
-    totalSupply.set(role.key, 0);
-  }
+  for (const role of recipe.roles) totalSupply.set(role.key, 0);
 
   // §9.3: a producer's Q and R credit is multiplied by its utilisation, so
   // production nothing consumes is charged where it originates instead of
   // discounting the whole of S through a payoff mean.
   const util = utilisation ?? producerUtilisation(nonLand, guaranteed);
-  const assign = (entries: readonly DeckEntry[], intoLibrary: boolean): void => {
+  const assign = (entries: readonly DeckEntry[]): void => {
     for (const entry of entries) {
       if (entry.feature.s < 1 || !entry.feature.covered) continue; // §8 evidence policy
       let weight = 0;
@@ -825,11 +877,64 @@ export function evaluatePlan(
       // pool": the weight multiplies the copy's credit here and nowhere else.
       const credit = entry.quantity * util.of(entry.feature) * weight;
       totalSupply.set(role.key, (totalSupply.get(role.key) ?? 0) + credit);
-      if (intoLibrary) librarySupply.set(role.key, (librarySupply.get(role.key) ?? 0) + credit);
     }
   };
-  assign(nonLand, true);
-  assign(guaranteed, false);
+  assign(nonLand);
+  assign(guaranteed);
+
+  // §10.2: `U_r` is the MAXIMUM feasible useful credit, so a copy may not be
+  // consumed by a role that is already at its bound while another role of the
+  // same recipe still has headroom for it. Pass 1 above fixes the DIAGNOSTIC
+  // supply (and with it R, `hasEmptyEssential` and the servedBy bounds); this
+  // pass re-spends the library copies against the remaining headroom.
+  //
+  // First-match was not even monotone: on sample `378278607` two MV-4 carriers
+  // sat in a `carriers` role bounded at 6 by its servedBy ratio, earning
+  // nothing, and adding ONE unreadable card tightened the turn-5 deployment
+  // budget below 4, spilled them into the uncapped `value` role and raised U
+  // from 32 to 34 — 3.9 S points for a blank slot (§10.4 add-untyped).
+  //
+  // Copies are spent most-constrained-first, then by name and id — never in
+  // input order, so §10.4's metadata permutation cannot move the result.
+  const boundOf = (role: PlanRole): number => {
+    const band = bandOf(role);
+    const served = role.servedBy
+      ? role.servedBy.ratio * role.servedBy.roles.reduce((s, k) => s + (totalSupply.get(k) ?? 0), 0)
+      : Infinity;
+    return Math.min(band.max * band.scale, served);
+  };
+  const bounds = new Map(recipe.roles.map((r) => [r.key, boundOf(r)]));
+  const spendable = nonLand
+    .filter((e) => e.feature.s >= 1 && e.feature.covered)
+    .map((entry) => ({
+      entry,
+      options: recipe.roles.flatMap((role) => {
+        if (!role.fills(entry.feature)) return [];
+        const weight = deployWeight(entry.feature.c, role.deadline);
+        return weight > 0 ? [{ role, weight }] : [];
+      }),
+    }))
+    .filter((c) => c.options.length > 0)
+    .sort((a, b) => a.options.length - b.options.length
+      || (a.entry.feature.card.name < b.entry.feature.card.name ? -1 : a.entry.feature.card.name > b.entry.feature.card.name ? 1 : 0)
+      || (a.entry.feature.card.id < b.entry.feature.card.id ? -1 : 1));
+  const spent = new Map<string, number>(recipe.roles.map((r) => [r.key, 0]));
+  for (const { entry, options } of spendable) {
+    // PER COPY, not per entry (§10.2 "each physical copy at most one unit"):
+    // a 4-of whose role is full after two copies spends the other two
+    // elsewhere. Singleton lists are unaffected.
+    const credit = util.of(entry.feature);
+    for (let copy = 0; copy < entry.quantity; copy++) {
+      let best = options[0];
+      let bestGain = -1;
+      for (const option of options) {
+        const room = Math.max(0, (bounds.get(option.role.key) ?? 0) - (spent.get(option.role.key) ?? 0));
+        const gain = Math.min(credit * option.weight, room);
+        if (gain > bestGain + 1e-9) { bestGain = gain; best = option; }
+      }
+      spent.set(best.role.key, (spent.get(best.role.key) ?? 0) + credit * best.weight);
+    }
+  }
 
   // §8: infrastructure "earns no more Q mass than the directly supported plan
   // cards it serves". The cards it serves are the plan's ESSENTIAL roles —
@@ -843,18 +948,23 @@ export function evaluatePlan(
       ? role.servedBy.ratio * role.servedBy.roles.reduce((s, k) => s + (totalSupply.get(k) ?? 0), 0)
       : Infinity;
     const have = Math.min(raw, served);
-    const inLibrary = Math.min(librarySupply.get(role.key) ?? 0, served);
+    const inLibrary = Math.min(spent.get(role.key) ?? 0, served);
     const credited = Math.min(inLibrary, band.max * band.scale);
     if (role.essential) essentialCredited += credited;
-    return { role, have, credited, required: band.min * band.scale };
+    return { role, have, credited, required: band.min * band.scale, bound: bounds.get(role.key) ?? 0 };
   });
 
-  const roles: RoleAssignment[] = preliminary.map(({ role, have, credited, required }) => ({
+  const roles: RoleAssignment[] = preliminary.map(({ role, have, credited, required, bound }) => ({
     role,
     required,
     supply: have,
     credited: role.infrastructure ? Math.min(credited, essentialCredited) : credited,
+    bound: role.infrastructure ? Math.min(bound, essentialCredited) : bound,
   }));
+
+  const holdsPiece = (role: PlanRole): boolean =>
+    nonLand.some((e) => e.feature.s >= 1 && e.feature.covered && role.fills(e.feature))
+    || guaranteed.some((e) => e.feature.s >= 1 && e.feature.covered && role.fills(e.feature));
 
   const essentials = roles.filter((r) => r.role.essential);
   let R = essentials.length > 0 ? 1 : 0;
@@ -875,10 +985,18 @@ export function evaluatePlan(
   return {
     recipe,
     roles,
-    Q: F > 0 ? creditedTotal / F : 0,
+    U: creditedTotal,
+    D,
+    Q: D > 0 ? creditedTotal / D : 0,
     R,
     essentialFraction: essentials.length > 0 ? satisfied / essentials.length : 0,
-    hasEmptyEssential: essentials.some((r) => r.supply === 0),
+    // §8's invalidation test is "known absence of ANY plan piece" — absence,
+    // not speed. Reading it off `supply` made it library-size dependent: ten
+    // unreadable slots added to sample `381157499` tightened the turn-6
+    // deployment budget, zeroed the single control finisher, invalidated the
+    // deck's real plan and handed selection to `spells`, a recipe the deck
+    // has no payoff for at all — +20.8 S for ten blanks (§10.4 add-untyped).
+    hasEmptyEssential: essentials.some((r) => r.supply === 0 && !holdsPiece(r.role)),
     weakest,
   };
 }
@@ -1013,20 +1131,22 @@ export function typalRecipe(theme: TypalTheme): PlanRecipe {
 export function evaluateTypal(
   N: number, nonLand: readonly DeckEntry[], guaranteed: readonly DeckEntry[] = [],
   utilisation?: Utilisation, profile: ScoreProfile = 'commander',
+  slots?: Readonly<PlanSlots>,
 ): PlanEvaluation | null {
   const features = [...nonLand, ...guaranteed].map((e) => e.feature);
   const theme = typalTheme(features);
   if (theme.tribes.length === 0 && !theme.artifacts && !theme.party) return null;
-  return evaluatePlan(typalRecipe(theme), N, nonLand, guaranteed, utilisation, profile);
+  return evaluatePlan(typalRecipe(theme), N, nonLand, guaranteed, utilisation, profile, slots);
 }
 
-export function selectPlan(
+export function candidatePlans(
   N: number,
   nonLand: readonly DeckEntry[],
   guaranteed: readonly DeckEntry[] = [],
   shared?: Utilisation,
   profile: ScoreProfile = 'commander',
-): PlanEvaluation {
+  slots?: Readonly<PlanSlots>,
+): PlanEvaluation[] {
   const utilisation = shared ?? producerUtilisation(nonLand, guaranteed);
   // A recipe with an essential role the deck has NO copies of describes a plan
   // the deck is not attempting; `betterPlan` drops it before §1's
@@ -1034,9 +1154,22 @@ export function selectPlan(
   // life-gain payoff outranked its own midrange reading on Q and scored S = 0.
   // Ties fall through to PLAN_RECIPES order, the frozen enum order.
   const evaluations = recipesFor(profile)
-    .map((recipe) => evaluatePlan(recipe, N, nonLand, guaranteed, utilisation, profile));
-  const typal = evaluateTypal(N, nonLand, guaranteed, utilisation, profile);
+    .map((recipe) => evaluatePlan(recipe, N, nonLand, guaranteed, utilisation, profile, slots));
+  const typal = evaluateTypal(N, nonLand, guaranteed, utilisation, profile, slots);
   if (typal) evaluations.push(typal);
+  return evaluations;
+}
+
+/** The best candidate. Ties fall through to `PLAN_RECIPES` order. */
+export function selectPlan(
+  N: number,
+  nonLand: readonly DeckEntry[],
+  guaranteed: readonly DeckEntry[] = [],
+  shared?: Utilisation,
+  profile: ScoreProfile = 'commander',
+  slots?: Readonly<PlanSlots>,
+): PlanEvaluation {
+  const evaluations = candidatePlans(N, nonLand, guaranteed, shared, profile, slots);
   return evaluations.reduce((best, c) => betterPlan(best, c, profile), evaluations[0]);
 }
 
@@ -1170,6 +1303,7 @@ export function closingRecipe(
   const tutorFills = (f: CardFeature): boolean => tutorReachesInTwo(f, pieces, hopOne, byTurn);
   return {
     key: 'combo',
+    absoluteBands: true,
     label: `${line.label} — pieces, tutors that reach them, acceleration, protection and stax`,
     roles: [
       { key: 'pieces', essential: true, min: line.required, max: line.required + 2 + backups.length * 2, fills: (f) => names.has(f.card.name.toLowerCase()) },
@@ -1194,6 +1328,11 @@ export function closingRecipe(
  */
 export function evaluateClosing(
   line: ClosingLine,
+  /** §10.2: the deck's OWN submitted library size. v1.3 passed the 60-card
+   * band reference here to keep the closing bands unscaled; `absoluteBands`
+   * does that job now, and `N` must be real or `Q_slot`'s denominator would
+   * differ from the recipe this plan competes with. */
+  N: number,
   nonLand: readonly DeckEntry[],
   guaranteed: readonly DeckEntry[] = [],
   utilisation?: Utilisation,
@@ -1201,6 +1340,7 @@ export function evaluateClosing(
   /** §9.5 "admit complete compatible backup lines": their pieces join the same
    * `pieces` role, so a copy still earns at most one Q unit. */
   backups: readonly ClosingLine[] = [],
+  slots?: Readonly<PlanSlots>,
 ): PlanEvaluation {
   const names = new Set([line, ...backups].flatMap((l) => l.pieces).map((n) => n.toLowerCase()));
   const pool = [...nonLand, ...guaranteed].map((e) => e.feature);
@@ -1208,10 +1348,16 @@ export function evaluateClosing(
   // No role here carries a deadline, so the deployment rule cannot reach it;
   // the profile is threaded only so the closing plan is ranked by the SAME S
   // objective as the recipe it competes with (§9.2).
-  return evaluatePlan(closingRecipe(line, pieces, pool, backups), PLAN_BAND_REFERENCE, nonLand, guaranteed, utilisation, profile);
+  return evaluatePlan(closingRecipe(line, pieces, pool, backups), N, nonLand, guaranteed, utilisation, profile, slots);
 }
 
 /**
+ * RETIRED FROM SCORING by §10.2/§10.3 (v1.4 stage 2): S has no fitted floor —
+ * `b_S = 0`, and `Q_slot`'s units are not the ones these floors were cut in.
+ * The function stays as the DIAGNOSTIC the floor-measuring scripts print
+ * (`bands negative`, `bands closingfloor`); nothing in `computeSynergy` or
+ * `planFit` calls it, and `bands verify` no longer grades its constants.
+ *
  * §9.2 / §9.6 / stage 4a: the Q floor a plan must clear before it explains
  * anything. ONE floor for every generic and engine recipe, the p95 of the
  * per-pile MAXIMUM over all eleven of them on 1,000 matched negative controls
@@ -1239,17 +1385,21 @@ export function qBaselineFor(profile: ScoreProfile, key: PlanKey): number {
   return profile === 'brawl' ? Q_BASELINE_JOINT_BRAWL : Q_BASELINE_JOINT_COMMANDER;
 }
 
-/** The plan-side of S: how much of the deck this recipe explains, discounted
- * by how far its weakest essential falls short. Selection maximises it, and it
- * is the SAME quantity `computeSynergy` reports (§9.2 "use the same final S
- * objective in planFit and scoring") — never select on one floor and report
- * another. */
-export function planFit(p: PlanEvaluation, profile: ScoreProfile = 'commander'): number {
-  const b = qBaselineFor(profile, p.recipe.key);
-  // Stage 4c: the saturation is per PROFILE. Brawl's floor sits .101 above
-  // Commander's, so a shared .70 left a .025-wide window in which every real
-  // Brawl deck pinned at S = 100 — see `Q_SATURATION_BRAWL`.
-  return clip((p.Q - b) / (qSaturationFor(profile) - b)) * p.R;
+/**
+ * §10.2: the objective selection maximises — `U_r`, expressed per slot so
+ * recipes of one deck compare directly (D is the same for all of them).
+ *
+ * RAW, not the clipped/saturated S: above the saturation every recipe would
+ * report 1 and the maximum would be decided by the tie-breaks instead of by
+ * useful mass. S is a monotone transform of this, so "selection and reporting
+ * maximise the SAME U objective" holds exactly.
+ *
+ * `R` is GONE from the ranking (§10.3). It stays a diagnosis: a recipe whose
+ * essential is entirely absent is still invalidated (`hasEmptyEssential`), and
+ * partial supply still earns only its bounded U credit.
+ */
+export function planFit(p: PlanEvaluation, _profile: ScoreProfile = 'commander'): number {
+  return p.Q;
 }
 
 /** The §1 ordering, exposed so `deck-score.ts` can fold in the closing plan
