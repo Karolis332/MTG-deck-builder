@@ -216,7 +216,7 @@ export const HARD_CAP_STRUCTURE = 19;
  * exported as the documented history of the superseded cap. */
 export const HARD_CAP_UNRESOLVED = 39;
 
-export const SCORE_VERSION = '1.3.0-rc2';
+export const SCORE_VERSION = '1.4.0-rc1';
 
 /**
  * §8 "Pile separation belongs to S": `S = 100*clip((Q-.30)/(.70-.30))*R*B`.

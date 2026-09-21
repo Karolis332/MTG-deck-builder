@@ -71,6 +71,21 @@ function baseDeck(overrides: Partial<DeckScoreInput> = {}): DeckScoreInput {
 
 const unresolvedMain = (quantity: number, board = 'main') => [{ name: 'Totally Unreadable Card', quantity, board }];
 
+/**
+ * v1.4 stage 3: the SCORER now owns the library-size rule (§10.9 item 7 #8),
+ * so a list that has to be RULE-VALID in a test is padded to the profile's 99
+ * library slots. `baseDeck`'s 20-card sketch is still used wherever only the
+ * evidence/structure plumbing is under test.
+ */
+function padTo99(main: DeckScoreInput['main'], reserved = 0): DeckScoreInput['main'] {
+  const held = main.reduce((s, e) => s + e.quantity, 0) + reserved;
+  const filler = Array.from({ length: Math.max(0, 99 - held) }, (_, i) => ({
+    card: mkCard({ name: `Pad Sorcery ${i}`, type_line: 'Sorcery', mana_cost: '{2}', cmc: 2, power: null, toughness: null }),
+    quantity: 1,
+  }));
+  return [...main, ...filler];
+}
+
 // ── §10.5 unresolved identity is evidence, not a cap ──────────────────────
 
 describe('§10.5 — unresolved identity yields evidence, never the 39 cap', () => {
@@ -89,21 +104,27 @@ describe('§10.5 — unresolved identity yields evidence, never the 39 cap', () 
     });
     // Main-board slots only: the sideboard copy is not a library slot.
     expect(structure.reservedSlots).toBe(2);
-    expect(structure.hardCaps).toEqual([]);
+    // v1.4 stage 3: 20 cards + 2 reserved slots is UNDERSIZED, so the scorer's
+    // own size rule caps it (was `[]` while deck-validation's warning stood).
+    expect(structure.hardCaps).toEqual([19]);
   });
 
   it('counts the reserved slots in N, so densities are not inflated by dropped copies', () => {
-    const plain = scoreDeck(baseDeck());
-    const withSlots = scoreDeck(baseDeck({ unresolved: unresolvedMain(20) }));
+    // v1.4 stage 3: every density divides by D = max(N0, N), so the move is
+    // visible once the reserved slots take the library PAST its 99 slots —
+    // below that the denominator is 99 either way, which is the repair.
+    const full = padTo99(baseDeck().main);
+    const plain = scoreDeck(baseDeck({ main: full }));
+    const withSlots = scoreDeck(baseDeck({ main: full, unresolved: unresolvedMain(20) }));
     const mana = (r: typeof plain) => r.components.find((c) => c.key === 'mana')!.score;
-    // 12 lands of 20 cards vs 12 of 40: the land ratio must visibly move.
     expect(mana(withSlots)).not.toBe(mana(plain));
   });
 
   it('never manufactures a size cap out of dropped copies', () => {
-    // 40 lands + 58 spells + 1 commander = 99 of 100. deck-validation reports
-    // an UNDER-sized library as a warning, so neither the list nor the same
-    // list with its 100th card unreadable may carry any rule cap.
+    // 40 lands + 58 spells = 98 library slots. v1.4 stage 3: 98 alone is
+    // UNDERSIZED and the scorer's own rule caps it; the SAME list whose 99th
+    // card is merely unreadable keeps its slot and carries no rule cap — which
+    // is the §10.5 requirement this test was written for.
     const main = [
       forest(40),
       ...Array.from({ length: 58 }, (_, i) => ({
@@ -111,15 +132,21 @@ describe('§10.5 — unresolved identity yields evidence, never the 39 cap', () 
         quantity: 1,
       })),
     ];
-    for (const unresolved of [[], unresolvedMain(1)]) {
-      const result = scoreDeck(baseDeck({ main, unresolved }));
-      expect(result.gates.find((g) => g.key === 'size')?.status).toBe('warn');
-      expect(result.gates.filter((g) => g.cap !== null && g.kind === 'rules')).toEqual([]);
-    }
+    const short = scoreDeck(baseDeck({ main, unresolved: [] }));
+    expect(short.gates.find((g) => g.key === 'size')?.status).toBe('fail');
+
+    const reserved = scoreDeck(baseDeck({ main, unresolved: unresolvedMain(1) }));
+    // still `warn`: deck-validation cannot see the reserved slot, and §10.5
+    // forbids turning that missing evidence into a cap. The scorer's own rule
+    // counts the slot, so it does not escalate to `fail`.
+    expect(reserved.gates.find((g) => g.key === 'size')?.status).toBe('warn');
+    expect(reserved.gates.filter((g) => g.cap !== null && g.kind === 'rules')).toEqual([]);
   });
 
   it('an unresolved COMMANDER is unknown identity, not an invalid configuration', () => {
-    const result = scoreDeck(baseDeck({ commander: [], unresolved: unresolvedMain(1, 'commander') }));
+    const result = scoreDeck(baseDeck({
+      main: padTo99(baseDeck().main), commander: [], unresolved: unresolvedMain(1, 'commander'),
+    }));
     expect(result.gates.find((g) => g.key === 'unknown_commander')).toMatchObject({ kind: 'evidence', status: 'warn', cap: null });
     expect(result.gates.find((g) => g.key === 'structure')?.status).not.toBe('fail');
     expect(result.provisional).toBe(true);

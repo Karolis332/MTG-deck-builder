@@ -17,7 +17,7 @@
  * score-version bump.
  */
 import { loadStandardCohorts, loadStandardDbFixture, loadCedhCohort, loadDataset, standardEventFamilies, OUT_DIR } from './deck-score-fixtures';
-import { loadMatchedPiles, loadCohortPiles, loadStudyControls, strideOrder, readSample, cardsByName, cohortSeed, HOLDOUT_EVERY, type SampleCohort, type SampleProfile } from './deck-score-piles';
+import { loadMatchedPiles, loadCohortPiles, loadStudyControls, loadFreshControls, strideOrder, readSample, cardsByName, cohortSeed, HOLDOUT_EVERY, type SampleCohort, type SampleProfile } from './deck-score-piles';
 import { readManifest, verifyCohortHashes, sha256 } from './deck-score-cohorts';
 import {
   REFERENCE_VERSION, buildReferenceKnots, meanReferenceRank, referenceFor,
@@ -1006,8 +1006,11 @@ function scoreStride(profile: SampleProfile, cohort: SampleCohort, n: number): R
  */
 function pileUnder25(
   profile: SampleProfile, kind: 'ctrl93' | 'ctrlmatch', n: number, realCoverage: number[],
-): { under: string; w: string; wq: [number, number, number]; rank: string; top: string } {
-  const piles = loadStudyControls(profile, kind, n, realCoverage);
+  draw: 'retained' | 'fresh' = 'retained',
+): { under: string; w: string; wq: [number, number, number]; rank: string; top: string; n: number } {
+  const piles = draw === 'fresh'
+    ? loadFreshControls(profile, kind, n, realCoverage)
+    : loadStudyControls(profile, kind, n, realCoverage);
   let under = 0;
   let nulls = 0;
   const W: number[] = [];
@@ -1033,6 +1036,7 @@ function pileUnder25(
     rank: ranks.length === 0 ? 'uncalibrated' : `${pct(ranks, 10).toFixed(1)} / ${pct(ranks, 50).toFixed(1)} `
       + `/ ${pct(ranks, 90).toFixed(1)} / ${pct(ranks, 95).toFixed(1)}`,
     top: ranks.length === 0 ? '-' : `${ranks.filter((x) => x >= 95).length}/${piles.length}`,
+    n: piles.length,
   };
 }
 
@@ -1113,14 +1117,22 @@ function realLists(n: number, profile: SampleProfile, cohort: SampleCohort = 'tr
     const realW: [number, number, number] = [pct(eligibleW, 10), pct(eligibleW, 50), pct(eligibleW, 90)];
     console.log('');
     console.log(`| control construction | total < 25 | pile W p10/p50/p90 | gap vs eligible real W `
-      + `(${realW.map((x) => x.toFixed(1)).join(' / ')}) | rank p10/p50/p90/p95 | rank >= 95 (limit 20/200) |`);
+      + `(${realW.map((x) => x.toFixed(1)).join(' / ')}) | rank p10/p50/p90/p95 | rank >= 95 |`);
     console.log('|---|---:|---:|---:|---:|---:|');
-    for (const kind of ['ctrl93', 'ctrlmatch'] as const) {
-      const r = pileUnder25(profile, kind, piles, realCoverage);
-      const gaps = r.wq.map((x, i) => x - realW[i]);
-      console.log(`| ${kind} (n=${piles}, study seeds) | ${r.under} | ${r.w} | `
-        + `${gaps.map((g) => (g > 0 ? `+${g.toFixed(1)}` : g.toFixed(1))).join(' / ')}`
-        + `${gaps.some((g) => g > 0) ? ' POSITIVE' : ' ok'} | ${r.rank} | ${r.top} |`);
+    for (const draw of ['retained', 'fresh'] as const) {
+      for (const kind of ['ctrl93', 'ctrlmatch'] as const) {
+        // §10.9 stage 3: the retained constructions keep their 200-list limit
+        // (<=20/200); the fresh disjoint-seed draw carries the 1,000-list one
+        // (<=100/1,000). Neither is averaged with the other.
+        const size = draw === 'retained' ? Math.min(200, piles) : piles;
+        const r = pileUnder25(profile, kind, size, realCoverage, draw);
+        const gaps = r.wq.map((x, i) => x - realW[i]);
+        const limit = draw === 'retained' ? Math.round(0.1 * r.n) : Math.round(0.1 * r.n);
+        console.log(`| ${kind} (n=${r.n}, ${draw === 'fresh' ? 'FRESH seeds, holdout commanders' : 'study seeds'}) `
+          + `| ${r.under} | ${r.w} | `
+          + `${gaps.map((g) => (g > 0 ? `+${g.toFixed(1)}` : g.toFixed(1))).join(' / ')}`
+          + `${gaps.some((g) => g > 0) ? ' POSITIVE' : ' ok'} | ${r.rank} | ${r.top} (limit ${limit}) |`);
+      }
     }
   }
 }
@@ -1514,6 +1526,11 @@ function domainHash(): string {
  */
 function referenceRows(profile: ScoreProfile): {
   rows: ReferenceRow[]; excluded: Record<string, number>; duplicates: number; altFamilies: number;
+  /** §10.5: rows the SCORER itself confirms as structure/legality failures.
+   * The manifest decided its exclusions before scoring, so a rule the scorer
+   * owns (stage 3's undersized-library gate) can still find one inside the
+   * eligible set. They leave positive norm estimation and carry no rank. */
+  structureFailed: string[];
 } {
   const manifest = readManifest();
   if (!manifest) throw new Error('cohorts-v14.json missing — cannot freeze a reference');
@@ -1530,13 +1547,24 @@ function referenceRows(profile: ScoreProfile): {
   }
 
   const rows: ReferenceRow[] = [];
+  const structureFailed: string[] = [];
   const push = (id: string, altFamily: string, args: Parameters<typeof scoreDeckSafely>[0]): void => {
     const hit = eligible.get(id);
     if (!hit) return;
     const unavailable = explainScoreUnavailable(args);
     const payload = unavailable ? null : scoreDeckSafely(args);
+    // Stage 3 declared frame: Standard families are TOURNAMENTS/EVENTS (42),
+    // the same grouping the frozen Standard S saturation uses. The manifest's
+    // `commanderFamily` for Standard is the event DATE (27 < 30), which is a
+    // narrower frame than the sampling unit; it is kept as the alternative.
+    const useAlt = profile === 'standard';
+    if (payload && payload.gates.some((g) => g.kind === 'rules' && g.status === 'fail')) {
+      structureFailed.push(id);
+      excluded.structure = (excluded.structure ?? 0) + 1;
+      return;
+    }
     rows.push({
-      id, family: hit.family, altFamily,
+      id, family: useAlt ? altFamily : hit.family, altFamily: useAlt ? hit.family : altFamily,
       total: payload && Number.isFinite(payload.absoluteTotal) ? payload.absoluteTotal : null,
       unavailable: unavailable ?? (payload ? null : 'scorer returned null'),
     });
@@ -1570,7 +1598,7 @@ function referenceRows(profile: ScoreProfile): {
       });
     }
   }
-  return { rows, excluded, duplicates, altFamilies: new Set(rows.map((r) => r.altFamily)).size };
+  return { rows, excluded, duplicates, altFamilies: new Set(rows.map((r) => r.altFamily)).size, structureFailed };
 }
 
 function referenceFile(profile: ScoreProfile): string {
@@ -1592,9 +1620,9 @@ function referenceText(ref: DeckScoreReference): string {
 }
 
 function buildReference(profile: ScoreProfile): {
-  ref: DeckScoreReference | null; blockers: string[]; lines: string[];
+  ref: DeckScoreReference | null; blockers: string[]; lines: string[]; structureFailed: string[];
 } {
-  const { rows, excluded, duplicates, altFamilies } = referenceRows(profile);
+  const { rows, excluded, duplicates, altFamilies, structureFailed } = referenceRows(profile);
   const unavailable = rows.filter((r) => r.total === null);
   const samples = rows.filter((r) => r.total !== null).map((r) => ({ value: r.total as number, family: r.family }));
   const built = buildReferenceKnots(samples);
@@ -1615,6 +1643,7 @@ function buildReference(profile: ScoreProfile): {
     domainHash: domainHash(),
     cohortHash: sha256(rows.map((r) => `${r.id}|${r.family}`).sort().join('\n')),
     families: built.families,
+    familyFrame: profile === 'standard' ? 'tournament-event' : 'commander-name',
     rows: built.rows,
     excluded,
     frozenAt: new Date().toISOString().slice(0, 10),
@@ -1632,7 +1661,7 @@ function buildReference(profile: ScoreProfile): {
       + `${q(0.10).toFixed(2)} / ${q(0.50).toFixed(2)} / ${q(0.90).toFixed(2)} | `
       + `${blockers.length === 0 ? 'OK' : 'BLOCKED'} |`,
   ];
-  return { ref: blockers.length === 0 ? ref : null, blockers, lines };
+  return { ref: blockers.length === 0 ? ref : null, blockers, lines, structureFailed };
 }
 
 function referenceCommand(write: boolean): void {
@@ -1641,9 +1670,13 @@ function referenceCommand(write: boolean): void {
   '|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|'];
   const notes: string[] = [];
   for (const profile of REFERENCE_PROFILES) {
-    const { ref, blockers, lines } = buildReference(profile);
+    const { ref, blockers, lines, structureFailed } = buildReference(profile);
     header.push(...lines);
     for (const b of blockers) notes.push(`${profile}: ${b}`);
+    if (structureFailed.length) {
+      notes.push(`${profile}: ${structureFailed.length} eligible row(s) excluded by a SCORER rule failure: `
+        + structureFailed.join(', '));
+    }
     if (!write) continue;
     if (!ref) { notes.push(`${profile}: NOT written — blocked`); continue; }
     fs.writeFileSync(referenceFile(profile), referenceText(ref));
@@ -1668,7 +1701,7 @@ function referenceMismatches(rows: string[]): string[] {
     const { ref } = buildReference(profile);
     if (!ref) { fail.push(`reference ${profile}: re-measure is BLOCKED but a frozen file exists`); continue; }
     const diffs: string[] = [];
-    for (const k of ['scoreVersion', 'catalogueHash', 'domainHash', 'cohortHash', 'families', 'rows', 'tiedIntervals'] as const) {
+    for (const k of ['scoreVersion', 'catalogueHash', 'domainHash', 'cohortHash', 'families', 'familyFrame', 'rows', 'tiedIntervals'] as const) {
       if (String(stored[k]) !== String(ref[k])) diffs.push(`${k} ${String(stored[k]).slice(0, 16)} vs ${String(ref[k]).slice(0, 16)}`);
     }
     if (stored.knots.length !== ref.knots.length) diffs.push(`knots ${stored.knots.length} vs ${ref.knots.length}`);

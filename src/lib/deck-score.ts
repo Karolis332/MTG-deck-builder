@@ -200,9 +200,15 @@ export function scoreDeck(input: Readonly<DeckScoreInput>, tuning?: Readonly<Sco
   // access computation — hypergeometric draws and the disjoint-pool
   // polynomial — so W reads D too. Without it, deleting one off-plan copy from
   // a 99-card list drew the same pieces out of 98 cards and paid +9.4 W
-  // (sample `381392623`, §10.4 delete-offplan-typed). Densities (M, curve, I,
-  // A) still read the submitted N: they measure what the deck IS, not what it
-  // draws.
+  // (sample `381392623`, §10.4 delete-offplan-typed).
+  //
+  // v1.4 stage 3 (§10.4/§10.9 item 5, brief item 2(c)): the SAME denominator
+  // now feeds the density components (M, curve, A). They divide by the library
+  // the deck draws from, and deleting a proved-zero-use copy was raising the
+  // land ratio, the turn-2 play density and the velocity access of every other
+  // card — a denominator defect, not a mechanical improvement. `D = max(N0, N)`
+  // is S's rule (§10.2) and is now the scorer's single slot denominator.
+  // Interaction never divided by N (E/E* are absolute counts).
   const accessSlots = Math.max(slots.n0 ?? N, N);
   // §9.3: one utilisation table per deck, shared by every recipe, so all
   // candidate plans are ranked against the SAME feasible assignment.
@@ -211,10 +217,10 @@ export function scoreDeck(input: Readonly<DeckScoreInput>, tuning?: Readonly<Sco
   const archetype = inferArchetype(commanderFeatures, archetypeOfPlan(plan.recipe.key));
   const commanderCmc = commanderFeatures.reduce((max, f) => Math.max(max, f.c), 0);
 
-  const mana = computeMana(format, norms, N, mainEntries, commanderFeatures);
-  const curve = computeCurve(format, norms, archetype, N, mainEntries, commanderCmc);
+  const mana = computeMana(format, norms, accessSlots, mainEntries, commanderFeatures);
+  const curve = computeCurve(format, norms, archetype, accessSlots, mainEntries, commanderCmc);
   const interaction = computeInteraction(format, norms, archetype, N, mainEntries);
-  const advantage = computeAdvantage(format, norms, archetype, N, mainEntries);
+  const advantage = computeAdvantage(format, norms, archetype, accessSlots, mainEntries);
   const win = computeWin(format, norms, archetype, accessSlots, mainEntries, commanderFeatures, {
     E: interaction.E, Estar: interaction.Estar,
     D: advantage.D, Dstar: advantage.Dstar, hasDrawEngine: advantage.hasDrawEngine,

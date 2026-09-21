@@ -44,6 +44,11 @@ export interface DeckScoreReference {
   domainHash: string;
   cohortHash: string;
   families: number;
+  /** §10.9 item 2 / stage 3: the DECLARED grouping the families were counted
+   * on. Commander/Brawl group by commander name; Standard groups by
+   * tournament/event (the same frame its frozen S saturation uses), which the
+   * 27 date-families blocker made an explicit sampling-frame decision. */
+  familyFrame: string;
   rows: number;
   excluded: Record<string, number>;
   frozenAt: string;

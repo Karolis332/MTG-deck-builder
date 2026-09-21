@@ -436,6 +436,12 @@ export function cohortSeed(cohort: SampleCohort, profile: SampleProfile = 'comma
 
 export const SEED_HIGH: Record<SampleProfile, number> = { commander: 0xd15c0000, brawl: 0xd15c2a71 };
 export const SEED_MATCH: Record<SampleProfile, number> = { commander: 0xd15c8000, brawl: 0xd15caa71 };
+/** v1.4 stage 3 (§10.9 item 8, stage 3 row): the FRESH top-tail guard draws
+ * with seeds disjoint from every study/cohort seed above, over the HOLDOUT
+ * commander order — commanders and families that appear in no band, no floor
+ * and in neither frozen reference. Declared here so a re-run reproduces them. */
+export const SEED_FRESH_HIGH: Record<SampleProfile, number> = { commander: 0x5732c093, brawl: 0x5732b193 };
+export const SEED_FRESH_MATCH: Record<SampleProfile, number> = { commander: 0x5732c0a5, brawl: 0x5732b1a5 };
 
 function percentileOf(sorted: readonly number[], p: number): number {
   if (sorted.length === 0) return NaN;
@@ -469,11 +475,12 @@ export function cedhCoverageMedian(): number {
  */
 export function loadCoverageMatchedControls(
   profile: SampleProfile, n: number, realCoverage: readonly number[],
+  seed: number = SEED_MATCH[profile], cohort: SampleCohort = 'training',
 ): MatchedPile[] {
   const sorted = [...realCoverage].sort((a, b) => a - b);
   const lo = percentileOf(sorted, 10);
   const hi = percentileOf(sorted, 90);
-  const order = strideOrder('training', readSample(profile));
+  const order = strideOrder(cohort, readSample(profile));
   const bins = new Map<number, number[]>();
   for (const i of order) {
     const u = (hash32(`cov:${profile}:${i}`) % 10_000) / 10_000;
@@ -484,7 +491,7 @@ export function loadCoverageMatchedControls(
   const out: MatchedPile[] = [];
   const share = (count: number) => Math.ceil((n * count) / order.length) + 2;
   for (const [target, indices] of [...bins.entries()].sort((a, b) => a[0] - b[0])) {
-    out.push(...loadMatchedPiles(share(indices.length), 0, SEED_MATCH[profile], target, indices, profile));
+    out.push(...loadMatchedPiles(share(indices.length), 0, seed, target, indices, profile));
   }
   return out.slice(0, n);
 }
@@ -497,6 +504,20 @@ export function loadStudyControls(
   if (kind === 'ctrlmatch') return loadCoverageMatchedControls(profile, n, realCoverage);
   return loadMatchedPiles(
     n, 0, SEED_HIGH[profile], cedhCoverageMedian(), strideOrder('training', readSample(profile)), profile,
+  );
+}
+
+/** The stage-3 FRESH draw: disjoint seeds, holdout commanders/families, same
+ * two constructions and the same legality/copy/size rules as the retained
+ * ones (`loadMatchedPiles` owns those per profile). */
+export function loadFreshControls(
+  profile: SampleProfile, kind: 'ctrl93' | 'ctrlmatch', n: number, realCoverage: readonly number[] = [],
+): MatchedPile[] {
+  if (kind === 'ctrlmatch') {
+    return loadCoverageMatchedControls(profile, n, realCoverage, SEED_FRESH_MATCH[profile], 'holdout');
+  }
+  return loadMatchedPiles(
+    n, 0, SEED_FRESH_HIGH[profile], cedhCoverageMedian(), strideOrder('holdout', readSample(profile)), profile,
   );
 }
 

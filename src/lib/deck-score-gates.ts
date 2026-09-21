@@ -13,7 +13,7 @@
  */
 import { formatChecks, identityCheck } from './deck-gate-checks';
 import { frontName, parseIdentity, type Resolved, type DeckLine, type GateCheck } from './deck-gate-parse';
-import { isCommanderFamily, HARD_CAP_INVALID, HARD_CAP_STRUCTURE, type ScoreFormat } from './deck-score-norms';
+import { isCommanderFamily, referenceLibrarySize, HARD_CAP_INVALID, HARD_CAP_STRUCTURE, type ScoreFormat } from './deck-score-norms';
 import type { DbCard } from './types';
 
 export interface ScoreGate {
@@ -109,6 +109,25 @@ export function computeStructure(input: StructureInput): StructureResult {
   // evidence can never manufacture a size cap. The reserved slots still enter
   // the library `N` the scorer divides by (deck-score.ts).
   const checks: GateCheck[] = [...formatChecks(resolved, input.format)];
+
+  // §10.9 item 7 #8 (stage 3): the SCORER owns its size rule. `deck-validation`
+  // calls an UNDERSIZED commander deck a warning because the deck editor shows
+  // in-progress lists; a list submitted for scoring that is short of its
+  // profile's library is a structural failure exactly like an oversized one.
+  // Reserved unresolved slots count: they are real library cards whose name did
+  // not resolve, never deleted copies.
+  if (commanderFamily) {
+    const requiredMain = referenceLibrarySize(input.format) - (commanderSlots === 2 ? 1 : 0);
+    const submittedMain = totalMain + reservedSlots;
+    if (submittedMain < requiredMain) {
+      const size = checks.find((c) => c.id === 'size');
+      if (size) {
+        size.status = 'fail';
+        size.detail = `${submittedMain} library card(s) submitted; ${input.format} requires ${requiredMain}`
+          + `${size.detail ? `; ${size.detail}` : ''}`;
+      }
+    }
+  }
 
   let identityGate: GateCheck | null = null;
   if (commanderFamily && input.commander.length > 0) {

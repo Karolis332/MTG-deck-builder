@@ -356,6 +356,8 @@ describe('stage 4c — tazri-upgraded-arena', () => {
 
 describe('stage 4c — score version', () => {
   it('bumps to the deployable candidate', () => {
-    expect(SCORE_VERSION).toBe('1.3.0-rc2');
+    // v1.4 stage 3 repair (density denominator + scorer-owned size rule):
+    // 1.3.0-rc2 -> 1.4.0-rc1, with both frozen references re-cut on it.
+    expect(SCORE_VERSION).toBe('1.4.0-rc1');
   });
 });
