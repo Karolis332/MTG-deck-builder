@@ -23,14 +23,20 @@ import { producerUtilisation } from '../src/lib/deck-score-producers';
 import { profileOf } from '../src/lib/deck-score-norms';
 import { scoreDeckSafely, type ScoreCardInput } from '../src/lib/deck-score-input';
 import type { DbCard } from '../src/lib/types';
-import { OUT_DIR } from './deck-score-fixtures';
+import { loadDataset, OUT_DIR } from './deck-score-fixtures';
 import { cardsByName, controlPool, readSample, strideOrder, type SampleProfile } from './deck-score-piles';
+
+/** v1.4 stage 3b: Standard now carries a frozen reference (stage 3 R4), so it
+ * needs the same gaming gate. Its stride is the dated W/L cohort `bands`
+ * freezes the reference on, and its fixed-slot counterpart is the 60-card
+ * minimum rather than the singleton library. */
+export type ProbeProfile = SampleProfile | 'standard';
 
 const BASICS = new Set(['plains', 'island', 'swamp', 'mountain', 'forest', 'wastes']);
 
-interface Deck {
+export interface Deck {
   id: string;
-  format: SampleProfile;
+  format: ProbeProfile;
   main: ScoreCardInput[];
   commander: DbCard[];
   identity: string[];
@@ -61,7 +67,8 @@ function read(deck: Deck, main: ScoreCardInput[], unresolved: { name: string; qu
 
 /** The stride, resolved once. Unresolved names become reserved slots (§10.5),
  * so a probe that adds unknown copies starts from an honest library size. */
-function stride(profile: SampleProfile, n: number): Deck[] {
+function stride(profile: ProbeProfile, n: number): Deck[] {
+  if (profile === 'standard') return standardStride(n);
   const byName = cardsByName();
   const sample = readSample(profile);
   const out: Deck[] = [];
@@ -89,16 +96,55 @@ function stride(profile: SampleProfile, n: number): Deck[] {
   return out;
 }
 
+/** The Standard training stride: the same dated event cohort `bands` freezes
+ * the Standard reference on, in the same order, so a probe grades the lists
+ * the CDF was cut from. Colour identity is the union of the list's own cards —
+ * a 60-card deck has no command zone to read it from. */
+export function standardStride(n: number): Deck[] {
+  const data = loadDataset(0);
+  const out: Deck[] = [];
+  for (const row of [...data.standardPositive, ...data.standardNegative]) {
+    if (out.length >= n) break;
+    if (row.input.unresolved.length > 0 || row.input.main.length === 0) continue;
+    const identity = [...new Set(row.input.main.flatMap((e) => parseIdentity(e.card.color_identity)))];
+    out.push({
+      id: `standard:${row.id}`, format: 'standard',
+      main: row.input.main.map((e) => ({ card: e.card, quantity: e.quantity })),
+      commander: [], identity,
+    });
+  }
+  return out;
+}
+
+/** Standard's addition pool: the cards the stride itself runs, which are
+ * snapshot-legal in the format by construction. `controlPool` only knows the
+ * two 100-card profiles. */
+let standardPoolCache: { card: DbCard; covered: boolean; identity: string[] }[] | null = null;
+function standardPool(): { card: DbCard; covered: boolean; identity: string[] }[] {
+  if (standardPoolCache) return standardPoolCache;
+  const seen = new Map<string, { card: DbCard; covered: boolean; identity: string[] }>();
+  for (const deck of standardStride(100000)) {
+    for (const e of deck.main) {
+      if (seen.has(e.card.id)) continue;
+      const feature = deriveCardFeature(e.card);
+      if (feature.isLand) continue;
+      seen.set(e.card.id, { card: e.card, covered: feature.covered, identity: parseIdentity(e.card.color_identity) });
+    }
+  }
+  standardPoolCache = [...seen.values()];
+  return standardPoolCache;
+}
+
 // ── edit construction ─────────────────────────────────────────────────────
 
 /** A typed copy no recipe of this profile can use: it fills NO role of ANY
  * recipe, so it is proved zero-use for Q under every feasible plan. */
-export function isOffPlanTyped(feature: CardFeature, profile: SampleProfile): boolean {
+export function isOffPlanTyped(feature: CardFeature, profile: ProbeProfile): boolean {
   if (feature.isLand || !feature.covered) return false;
   return !recipesFor(profileOf(profile)).some((r) => r.roles.some((role) => role.fills(feature)));
 }
 
-function offPlanTyped(deck: Deck, profile: SampleProfile): ScoreCardInput[] {
+function offPlanTyped(deck: Deck, profile: ProbeProfile): ScoreCardInput[] {
   return deck.main
     .filter((e) => isOffPlanTyped(deriveCardFeature(e.card), profile))
     .sort((a, b) => (a.card.name < b.card.name ? -1 : 1));
@@ -129,7 +175,7 @@ const saturatedCache = new Map<string, { saturated: PlanRole[]; slack: PlanRole[
  * otherwise the addition feeds a slack role of some recipe, which is a real
  * improvement and belongs in §10.4's separately traced bucket.
  */
-function roleSplit(deck: Deck, profile: SampleProfile): { saturated: PlanRole[]; slack: PlanRole[] } {
+function roleSplit(deck: Deck, profile: ProbeProfile): { saturated: PlanRole[]; slack: PlanRole[] } {
   const hit = saturatedCache.get(deck.id);
   if (hit) return hit;
   const entries = deck.main.map((e) => ({ feature: deriveCardFeature(e.card), quantity: e.quantity }));
@@ -161,7 +207,7 @@ function roleSplit(deck: Deck, profile: SampleProfile): { saturated: PlanRole[];
 const poolCache = new Map<string, DbCard[]>();
 /** `k` identity-legal additions the deck does not already run, by category. */
 function additions(
-  deck: Deck, profile: SampleProfile, kind: 'untyped' | 'ramp' | 'saturated', k: number,
+  deck: Deck, profile: ProbeProfile, kind: 'untyped' | 'ramp' | 'saturated', k: number,
 ): DbCard[] {
   const split = kind === 'saturated' ? roleSplit(deck, profile) : { saturated: [], slack: [] };
   const roles = split.saturated;
@@ -174,7 +220,7 @@ function additions(
     (kind === 'saturated' ? `|${deck.id}` : '');
   let pool = poolCache.get(key);
   if (!pool) {
-    pool = controlPool(profile)
+    pool = (profile === 'standard' ? standardPool() : controlPool(profile))
       .filter((p) => p.identity.every((c) => deck.identity.includes(c)))
       .filter((p) => {
         if (kind === 'untyped') return !p.covered;
@@ -250,7 +296,7 @@ const diff = (before: Reading, after: Reading): Delta => ({
   repaired: after.failing < before.failing,
 });
 
-type Probe = (deck: Deck, base: Reading, k: number, profile: SampleProfile) => ProbeResult;
+type Probe = (deck: Deck, base: Reading, k: number, profile: ProbeProfile) => ProbeResult;
 
 const SKIP: ProbeResult = { delta: null, skipped: true };
 
@@ -355,7 +401,7 @@ const UNGRADED = new Set(['add-ramp-unmatched']);
 const S_TOLERANCE = 1e-6;
 const TOTAL_ALLOWANCE = 1;
 
-function run(profile: SampleProfile, n: number, ks: number[]): string {
+function run(profile: ProbeProfile, n: number, ks: number[]): string {
   const decks = stride(profile, n);
   const rows: Row[] = [];
   const base = new Map<string, Reading>();
@@ -455,7 +501,8 @@ function main(): void {
     const i = process.argv.indexOf(flag);
     return i > 0 && process.argv[i + 1] ? process.argv[i + 1] : fallback;
   };
-  const profile = (arg('--profile', 'commander') === 'brawl' ? 'brawl' : 'commander') as SampleProfile;
+  const requested = arg('--profile', 'commander');
+  const profile = (requested === 'brawl' || requested === 'standard' ? requested : 'commander') as ProbeProfile;
   const n = Number(arg('--n', '100000'));
   const ks = arg('--k', '1,5,10').split(',').map(Number).filter((x) => x > 0);
   const text = run(profile, n, ks);

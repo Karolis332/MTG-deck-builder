@@ -1,6 +1,6 @@
 # Deck Score v1 calibration report
 
-Generated 2026-09-21T17:10:28.107Z. Raw v1 numbers — weights are NOT tuned in this unit (docs/DECK_SCORE_SPEC.md §4 is a separate calibration pass).
+Generated 2026-09-22T04:45:08.849Z. Raw v1 numbers — weights are NOT tuned in this unit (docs/DECK_SCORE_SPEC.md §4 is a separate calibration pass).
 Component columns: M=mana C=curve I=interaction A=advantage W=win S=synergy Fmeta=meta.
 "ms" times only the `scoreDeck()` call (feature classification runs inside it); the spec's <20ms budget is stated as "after classification", so this number is a conservative upper bound, not an apples-to-apples comparison.
 
@@ -8,22 +8,22 @@ Component columns: M=mana C=curve I=interaction A=advantage W=win S=synergy Fmet
 
 | Fixture | Format | Score | M | C | I | A | W | S | Fmeta | plan | Q | R | b | Gates | Band | IN/OUT | ms |
 |---|---|---:|---:|---:|---:|---:|---:|---:|---:|---|---:|---:|---:|---|---|---|---:|
-| meren-powerhouse | commander | 56 | 97.8 | 94.4 | 95 | 82 | 45.3 | 100 | 50 | aristocrats | 0.495 | 1.000 | 0.683 | quality_cap<=56.2 | 65-80 | OUT | 66.31 |
-| cabbage-cedh-input | commander | 59 | 82.5 | 85.1 | 97.5 | 85 | 49 | 97.7 | 50 | conversion | 0.424 | 0.667 | 0.683 | quality_cap<=59.2 | 35-50 | OUT | 14.90 |
-| precon-witherbloom | commander | 23 | 96.9 | 83 | 60.7 | 65 | 3.2 | 100 | 50 | lifegain | 0.485 | 0.833 | 0.683 | quality_cap<=22.6 | 40-55 | OUT | 10.42 |
-| the-cabbage-merchant | commander | 54 | 92.3 | 94.6 | 70.6 | 74.6 | 42.5 | 100 | 50 | conversion | 0.455 | 0.778 | 0.683 | quality_cap<=54 | 55-70 | OUT | 11.54 |
-| imotekh-the-stormlord | commander | 51 | 88.1 | 93.4 | 51.9 | 74.6 | 38.9 | 100 | 50 | recursion | 0.495 | 1.000 | 0.683 | quality_cap<=51.1 | 45-65 | IN | 18.50 |
-| tazri-beacon-of-unity | commander | 56 | 90.4 | 94.4 | 96 | 65 | 45.3 | 100 | 50 | typal | 0.475 | 1.000 | 0.683 | quality_cap<=56.2 | 40-60 | IN | 14.13 |
-| meren-of-clan-nel-toth | commander | 19 | 97.5 | 95.6 | 95 | 81.8 | 45.3 | 100 | 50 | recursion | 0.500 | 1.000 | 0.683 | fail:structure,size; size<=19,quality_cap<=56.2 | 0-19 | IN | 11.75 |
-| ramos-dragon-engine | commander | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 50 | aggro | 0.000 | 0.000 | 0.683 | fail:structure,size; size<=19,quality_cap<=20 | 0-19 | IN | 0.92 |
-| cabbage-merchant-current-brawl | brawl | 19 | 95.6 | 94.6 | 80.6 | 73.5 | 60.1 | 100 | 50 | conversion | 0.450 | 0.778 | 0.733 | fail:structure,size,legality; size<=19,legality<=19,quality_cap<=68.1 | 0-19 | IN | 14.16 |
-| tazri-upgraded-arena | brawl | 68 | 60.4 | 87.9 | 84 | 73.5 | 65.2 | 100 | 50 | typal | 0.525 | 1.000 | 0.733 | quality_cap<=68.3 | 45-65 | OUT | 12.01 |
-| kuja-genome-sorcerer-arena | brawl | 56 | 90 | 84.7 | 92 | 91.7 | 45 | 100 | 50 | spells | 0.545 | 1.000 | 0.733 | quality_cap<=56 | 60-80 | OUT | 11.79 |
-| vivi-battery-arena | brawl | 86 | 87.8 | 82 | 100 | 100 | 82.7 | 100 | 50 | spells | 0.566 | 1.000 | 0.733 | quality_cap<=86.2 | 70-85 | OUT | 13.23 |
-| fire-lord-azula-competitive | competitivebrawl | 76 | 83.5 | 82 | 98 | 94.6 | 70.3 | 100 | 50 | spells | 0.470 | 1.000 | 0.733 | quality_cap<=76.2 | 75-90 | IN | 9.39 |
-| cedhtop16-ballooncon6 | commander | 92 | 93.8 | 75 | 100 | 78.6 | 95 | 100 | 50 | spells | 0.500 | 0.500 | 0.683 | quality_cap<=95 | 80-95 | IN | 15.57 |
-| standard-1445893-univerce | standard | 73 | 65.8 | 60.5 | 94 | 77.5 | 85 | 100 | 50 | midrange | 0.567 | 1.000 | 0.300 | quality_cap<=72.6 | 70-90 | IN | 5.70 |
-| standard-1445867-aljce | standard | 68 | 75.1 | 78.6 | 81.7 | 86.3 | 60.1 | 96.6 | 50 | midrange | 0.467 | 1.000 | 0.300 | quality_cap<=68.1 | 65-90 | IN | 3.43 |
+| meren-powerhouse | commander | 56 | 97.8 | 94.4 | 95 | 82 | 45.3 | 100 | 50 | aristocrats | 0.495 | 1.000 | 0.683 | quality_cap<=56.2 | 65-80 | OUT | 63.06 |
+| cabbage-cedh-input | commander | 59 | 82.5 | 85.1 | 97.5 | 85 | 49 | 97.7 | 50 | conversion | 0.424 | 0.667 | 0.683 | quality_cap<=59.2 | 35-50 | OUT | 13.39 |
+| precon-witherbloom | commander | 23 | 96.9 | 83 | 60.7 | 65 | 3.2 | 100 | 50 | lifegain | 0.485 | 0.833 | 0.683 | quality_cap<=22.6 | 40-55 | OUT | 9.63 |
+| the-cabbage-merchant | commander | 54 | 92.3 | 94.6 | 70.6 | 74.6 | 42.5 | 100 | 50 | conversion | 0.455 | 0.778 | 0.683 | quality_cap<=54 | 55-70 | OUT | 11.04 |
+| imotekh-the-stormlord | commander | 51 | 88.1 | 93.4 | 51.9 | 74.6 | 38.9 | 100 | 50 | recursion | 0.495 | 1.000 | 0.683 | quality_cap<=51.1 | 45-65 | IN | 14.70 |
+| tazri-beacon-of-unity | commander | 56 | 90.4 | 94.4 | 96 | 65 | 45.3 | 100 | 50 | typal | 0.475 | 1.000 | 0.683 | quality_cap<=56.2 | 40-60 | IN | 12.58 |
+| meren-of-clan-nel-toth | commander | 19 | 97.5 | 95.6 | 95 | 81.8 | 45.3 | 100 | 50 | recursion | 0.500 | 1.000 | 0.683 | fail:structure,size; size<=19,quality_cap<=56.2 | 0-19 | IN | 11.57 |
+| ramos-dragon-engine | commander | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 50 | aggro | 0.000 | 0.000 | 0.683 | fail:structure,size; size<=19,quality_cap<=20 | 0-19 | IN | 0.59 |
+| cabbage-merchant-current-brawl | brawl | 19 | 95.6 | 94.6 | 80.6 | 73.5 | 60.1 | 100 | 50 | conversion | 0.450 | 0.778 | 0.733 | fail:structure,size,legality; size<=19,legality<=19,quality_cap<=68.1 | 0-19 | IN | 9.80 |
+| tazri-upgraded-arena | brawl | 68 | 60.4 | 87.9 | 84 | 73.5 | 65.2 | 100 | 50 | typal | 0.525 | 1.000 | 0.733 | quality_cap<=68.3 | 45-65 | OUT | 10.94 |
+| kuja-genome-sorcerer-arena | brawl | 56 | 90 | 84.7 | 92 | 91.7 | 45 | 100 | 50 | spells | 0.545 | 1.000 | 0.733 | quality_cap<=56 | 60-80 | OUT | 10.86 |
+| vivi-battery-arena | brawl | 86 | 87.8 | 82 | 100 | 100 | 82.7 | 100 | 50 | spells | 0.566 | 1.000 | 0.733 | quality_cap<=86.2 | 70-85 | OUT | 8.82 |
+| fire-lord-azula-competitive | competitivebrawl | 76 | 83.5 | 82 | 98 | 94.6 | 70.3 | 100 | 50 | spells | 0.470 | 1.000 | 0.733 | quality_cap<=76.2 | 75-90 | IN | 9.26 |
+| cedhtop16-ballooncon6 | commander | 92 | 93.8 | 75 | 100 | 78.6 | 95 | 100 | 50 | spells | 0.500 | 0.500 | 0.683 | quality_cap<=95 | 80-95 | IN | 12.16 |
+| standard-1445893-univerce | standard | 73 | 65.8 | 60.5 | 94 | 77.5 | 85 | 100 | 50 | midrange | 0.567 | 1.000 | 0.300 | quality_cap<=72.6 | 70-90 | IN | 4.07 |
+| standard-1445867-aljce | standard | 68 | 75.1 | 78.6 | 81.7 | 86.3 | 60.1 | 96.6 | 50 | midrange | 0.467 | 1.000 | 0.300 | quality_cap<=68.1 | 65-90 | IN | 4.53 |
 
 ## §10.9 item 7 — the 16 rank anchors (v1.4 stage 2c)
 
@@ -35,7 +35,7 @@ below are the superseded §5/§8 ones, kept as diagnostics.
 |---:|---|---|---:|---:|---|---|---|
 | 1 | meren-powerhouse | commander | 56 (56.24) | 79.84 | p65-p90 | rank/calibrated | PASS (mandatory) |
 | 2 | cabbage-cedh-input | commander | 59 (59.2) | 87.40 | p50-p90 | rank/calibrated | PASS (mandatory) |
-| 3 | precon-witherbloom | commander | 23 (22.560000000000002) | 24.45 | p15-p40 | rank/calibrated | PASS (mandatory) |
+| 3 | precon-witherbloom | commander | 23 (22.560000000000002) | 24.47 | p15-p40 | rank/calibrated | PASS (mandatory) |
 | 4 | the-cabbage-merchant | commander | 54 (54) | 71.43 | p50-p90 | rank/calibrated | PASS (mandatory) |
 | 5 | imotekh-the-stormlord | commander | 51 (51.120000000000005) | 61.64 | p40-p80 | rank/calibrated | PASS |
 | 6 | tazri-beacon-of-unity | commander | 56 (56.24) | 79.84 | p35-p75 | rank/calibrated | FAIL |

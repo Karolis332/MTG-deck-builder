@@ -94,8 +94,8 @@ export function computeMana(
     return result;
   };
 
-  const spellSet: Array<{ card: DbCard; c: number; q: number }> = [
-    ...nonLand.map((e) => ({ card: e.feature.card, c: e.feature.c, q: e.quantity })),
+  const spellSet: Array<{ card: DbCard; c: number; q: number; blank?: boolean }> = [
+    ...nonLand.map((e) => ({ card: e.feature.card, c: e.feature.c, q: e.quantity, blank: e.feature.blank })),
     ...commanderFeatures.map((f) => ({ card: f.card, c: f.c, q: 1 })), // "include commanders once"
   ];
 
@@ -103,6 +103,9 @@ export function computeMana(
   let weightTotal = 0;
   let weakest: { color: string; K: number; R: number; adequacy: number } | null = null;
   for (const spell of spellSet) {
+    // §10.9 item 5: an unresolved slot's colour requirements are unknown, so
+    // they are unverified — 0 adequacy, never the free 1 a costless card gets.
+    if (spell.blank) { weightTotal += spell.q; continue; }
     const pips = pipDemandByColor(spell.card);
     const colors = Object.keys(pips);
     if (colors.length === 0) { weightedSum += spell.q * 1; weightTotal += spell.q; continue; }
@@ -175,27 +178,46 @@ export function computeCurve(
   const targetTotal = Object.values(target).reduce((a, b) => a + b, 0) || 1;
 
   const actualBuckets: Record<number, number> = {};
-  for (const e of nonLand) actualBuckets[bucketOf(e.feature.c)] = (actualBuckets[bucketOf(e.feature.c)] || 0) + e.quantity;
-
-  let tv = 0;
-  let largestGapBucket = 0;
-  let largestGap = -1;
-  for (let b = 0; b <= 7; b++) {
-    const actualFrac = (actualBuckets[b] || 0) / F;
-    const targetFrac = (target[b] || 0) / targetTotal;
-    const gap = Math.abs(actualFrac - targetFrac);
-    tv += gap;
-    if (gap > largestGap) { largestGap = gap; largestGapBucket = b; }
+  let blanks = 0;
+  for (const e of nonLand) {
+    // §10.9 item 5: an unresolved slot has no known cost, so it is imputed
+    // into the bin that maximises the histogram distance (below) — it still
+    // occupies a nonland slot, so it is already inside `F`.
+    if (e.feature.blank) { blanks += e.quantity; continue; }
+    actualBuckets[bucketOf(e.feature.c)] = (actualBuckets[bucketOf(e.feature.c)] || 0) + e.quantity;
   }
-  tv *= 0.5;
 
-  const Kplay = nonLand.filter((e) => e.feature.c <= 2).reduce((s, e) => s + e.quantity, 0);
+  const distance = (extraBucket: number | null): { tv: number; bucket: number; count: number } => {
+    let total = 0;
+    let largestGapBucket = 0;
+    let largestGap = -1;
+    for (let b = 0; b <= 7; b++) {
+      const count = (actualBuckets[b] || 0) + (b === extraBucket ? blanks : 0);
+      const gap = Math.abs(count / F - (target[b] || 0) / targetTotal);
+      total += gap;
+      if (gap > largestGap) { largestGap = gap; largestGapBucket = b; }
+    }
+    return { tv: total * 0.5, bucket: largestGapBucket, count: (actualBuckets[largestGapBucket] || 0) + (largestGapBucket === extraBucket ? blanks : 0) };
+  };
+  // The worst bin, by construction: TV under it is >= TV under the bin the
+  // blanked card actually occupied, so losing a name never flattens the curve.
+  let worst = distance(null);
+  if (blanks > 0) {
+    for (let b = 0; b <= 7; b++) {
+      const candidate = distance(b);
+      if (candidate.tv > worst.tv) worst = candidate;
+    }
+  }
+  const { tv, bucket: largestGapBucket, count: largestGapCount } = worst;
+
+  // A slot of unknown cost is never a proved turn-2 play.
+  const Kplay = nonLand.filter((e) => !e.feature.blank && e.feature.c <= 2).reduce((s, e) => s + e.quantity, 0);
   const early = clip(Hf(format, N, Kplay, 2, 1) / norms.pEarly);
 
   const score = 100 * (0.70 * (1 - tv) + 0.30 * early);
   const bucketLabel = largestGapBucket >= 7 ? '7+' : String(largestGapBucket);
   return {
     score,
-    reason: `${bucketLabel}-drops ${actualBuckets[largestGapBucket] || 0}/${Math.round(target[largestGapBucket] || 0)}; ${Math.round(early * 100)}% chance of a useful play by turn 2.`,
+    reason: `${bucketLabel}-drops ${largestGapCount}/${Math.round(target[largestGapBucket] || 0)}; ${Math.round(early * 100)}% chance of a useful play by turn 2.`,
   };
 }

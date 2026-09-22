@@ -1,9 +1,9 @@
 {
   "profile": "brawl",
   "referenceVersion": "1.4.0-ref1",
-  "scoreVersion": "1.4.0-rc1",
+  "scoreVersion": "1.4.0-rc2",
   "catalogueHash": "fdcecb38",
-  "domainHash": "de34bdc73d47e9425d28900931abfd6a542b8c897880ff489d2b4d86d8b4575c",
+  "domainHash": "ef0558f0e56e868990184cc1af26a09820c2aaea3bc28d419cb69d74a715ccdb",
   "cohortHash": "982547fe13cfac9fbe4d2f90278f2a871dfbda250ba4d41a0a44c4768e18d222",
   "families": 179,
   "familyFrame": "commander-name",
@@ -16,7 +16,7 @@
     "identity": 3,
     "structure": 2
   },
-  "frozenAt": "2026-09-21",
+  "frozenAt": "2026-09-22",
   "largestAtom": 0.08693579852797725,
   "tiedIntervals": 66,
   "knots": [

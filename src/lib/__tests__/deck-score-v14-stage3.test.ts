@@ -153,9 +153,19 @@ describe('§10.2 / §10.4 item 2(c) — M, C and A divide by max(N0, N)', () => 
   const padded = run(4);
   const at = (r: typeof undersized, key: string) => r.components.find((c) => c.key === key)!.score;
 
-  for (const key of ['mana', 'curve', 'advantage'] as const) {
-    it(`${key} is identical at 95 submitted copies and at 95 + 4 blank slots`, () => {
-      expect(at(undersized, key)).toBe(at(padded, key));
+  // A stays identical: it reads absolute counts over the same D.
+  it('advantage is identical at 95 submitted copies and at 95 + 4 blank slots', () => {
+    expect(at(undersized, 'advantage')).toBe(at(padded, 'advantage'));
+  });
+
+  // RE-PINNED by v1.4 stage 3b (§10.9 item 5). M and C also read MEAN/SHAPE
+  // estimators (Karsten's avgMv, the colour-adequacy mean, the curve
+  // histogram), and those now impute each blank slot pessimistically instead of
+  // ignoring it, so padding with unknowns LOWERS them: mana 87.5 -> 79.2,
+  // curve 81.6 -> 79.3. The denominator equality itself is unchanged.
+  for (const key of ['mana', 'curve'] as const) {
+    it(`${key} is never raised by padding 95 submitted copies with 4 blank slots`, () => {
+      expect(at(padded, key)).toBeLessThan(at(undersized, key));
     });
   }
 
@@ -302,7 +312,7 @@ describe('§10.4 — no-benefit edits never raise S, and never move the rank by 
 
 describe('stage 3 — version, references and the retained top tail', () => {
   it('bumps SCORE_VERSION for the evaluator change', () => {
-    expect(SCORE_VERSION).toBe('1.4.0-rc1');
+    expect(SCORE_VERSION).toBe('1.4.0-rc2');
   });
 
   it('pins the re-frozen commander/brawl references (13 scorer-rule rows left)', () => {

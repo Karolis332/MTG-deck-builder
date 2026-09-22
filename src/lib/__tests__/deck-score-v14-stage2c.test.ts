@@ -148,6 +148,10 @@ describe('§10.9 item 2 — reference admission', () => {
 describe('§10.9 item 2 — the frozen references', () => {
   const commander = referenceFor('commander') as DeckScoreReference;
   const brawl = referenceFor('brawl') as DeckScoreReference;
+  // v1.4 stage 3 froze a Standard reference (42 declared event families), so
+  // #15/#16 are calibrated now and #13 (competitivebrawl) is the only
+  // uncalibrated anchor left.
+  const standardRef = referenceFor('standard') as DeckScoreReference;
 
   it('pins the commander reference population and hash', () => {
     expect(commander.rows).toBe(1429);
@@ -188,6 +192,10 @@ describe('§10.9 item 2 — the frozen references', () => {
 describe('§10.9 item 7 — the 16 anchors, graded on unrounded rank', () => {
   const commander = referenceFor('commander') as DeckScoreReference;
   const brawl = referenceFor('brawl') as DeckScoreReference;
+  // v1.4 stage 3 froze a Standard reference (42 declared event families), so
+  // #15/#16 are calibrated now and #13 (competitivebrawl) is the only
+  // uncalibrated anchor left.
+  const standardRef = referenceFor('standard') as DeckScoreReference;
   // T_abs measured by `scripts/deck-score-report.ts` at this domain.
   const cases: Array<[string, DeckScoreReference | null, number | null, number, number, boolean]> = [
     ['1 meren-powerhouse', commander, 56.24, 65, 90, true],
@@ -200,10 +208,11 @@ describe('§10.9 item 7 — the 16 anchors, graded on unrounded rank', () => {
     ['11 kuja-genome-sorcerer-arena', brawl, 56.00, 25, 60, false],
     ['12 vivi-battery-arena', brawl, 86.16000000000001, 80, 100, true],
     ['14 cedhtop16-ballooncon6', commander, 92.02474226804125, 95, 100, true],
-    // Uncalibrated profiles: no CDF, so no pass is possible.
+    // RE-PINNED at v1.4 stage 3b: Standard carries its own reference.
+    ['15 standard-1445893-univerce', standardRef, 72.64, 65, 95, true],
+    ['16 standard-1445867-aljce', standardRef, 68.08000000000001, 55, 90, true],
+    // competitivebrawl still has no cohort, so no pass is possible.
     ['13 fire-lord-azula-competitive', null, null, 80, 100, false],
-    ['15 standard-1445893-univerce', null, null, 65, 95, false],
-    ['16 standard-1445867-aljce', null, null, 55, 90, false],
   ];
   for (const [name, ref, tAbs, lo, hi, expected] of cases) {
     it(`${name} verdict is ${expected ? 'PASS' : 'FAIL'}`, () => {
@@ -213,16 +222,20 @@ describe('§10.9 item 7 — the 16 anchors, graded on unrounded rank', () => {
   }
 
   it('pins the measured anchor ranks', () => {
-    // Re-measured on the v1.4.0-rc1 reference (13 scorer-rule rows left the
-    // population): 79.91 -> 79.84, 24.40 -> 24.45, 99.77, 99.86, 8.30 -> 8.34.
+    // Re-measured on the v1.4.0-rc2 reference (stage 3b re-cut it: the three
+    // unclamped recipe demands moved the Commander and Standard knots; Brawl's
+    // are byte-identical): 79.84, 24.45 -> 24.47, 99.77, 99.86, 8.34.
     expect(rankOf(commander, 56.24)).toBeCloseTo(79.84, 2);
-    expect(rankOf(commander, 22.560000000000002)).toBeCloseTo(24.45, 2);
+    expect(rankOf(commander, 22.560000000000002)).toBeCloseTo(24.47, 2);
     expect(rankOf(commander, 92.02474226804125)).toBeCloseTo(99.77, 2);
     expect(rankOf(brawl, 86.16000000000001)).toBeCloseTo(99.86, 2);
     // The atom sensitivity is real: one ULP below the precon's knot is a
-    // different (lower) midrank — 24.25 -> 24.30 on this reference.
-    expect(rankOf(commander, 22.56)).toBeCloseTo(24.30, 2);
+    // different (lower) midrank — 24.30 -> 24.35 on this reference.
+    expect(rankOf(commander, 22.56)).toBeCloseTo(24.35, 2);
     expect(rankOf(brawl, 56.00)).toBeCloseTo(8.34, 2);
+    // Standard, newly calibrated (stage 3 R4).
+    expect(rankOf(standardRef, 72.64)).toBeCloseTo(77.64, 2);
+    expect(rankOf(standardRef, 68.08000000000001)).toBeCloseTo(66.10, 2);
   });
 });
 

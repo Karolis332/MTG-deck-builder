@@ -23,7 +23,7 @@ import { computeInteraction, computeAdvantage } from './deck-score-interaction';
 import { computeWin } from './deck-score-win';
 import { computeSynergy } from './deck-score-synergy';
 import { computeMeta, type ScoreCorpusSnapshot, type CorpusCard } from './deck-score-meta';
-import { deriveCardFeature, type CardFeature } from './deck-score-features';
+import { blankFeature, deriveCardFeature, type CardFeature } from './deck-score-features';
 import { round1 } from './deck-score-math';
 
 export type { ScoreFormat, ComponentKey, ScoreTuning } from './deck-score-norms';
@@ -72,6 +72,10 @@ export interface DeckScoreResult {
    * critical prerequisite is unknown. Additive field; components unchanged. */
   provisional: boolean;
 }
+
+/** §10.9 item 5's pessimistic MV floor for an unresolved slot: the top curve
+ * bin, and the value used outright when the deck has no identified nonland. */
+const BLANK_SLOT_FALLBACK_MV = 7;
 
 const COMPONENT_ORDER: ComponentKey[] = ['mana', 'curve', 'interaction', 'advantage', 'win', 'synergy', 'meta', 'structure'];
 
@@ -217,14 +221,43 @@ export function scoreDeck(input: Readonly<DeckScoreInput>, tuning?: Readonly<Sco
   const archetype = inferArchetype(commanderFeatures, archetypeOfPlan(plan.recipe.key));
   const commanderCmc = commanderFeatures.reduce((max, f) => Math.max(max, f.c), 0);
 
-  const mana = computeMana(format, norms, accessSlots, mainEntries, commanderFeatures);
-  const curve = computeCurve(format, norms, archetype, accessSlots, mainEntries, commanderCmc);
+  // v1.4 stage 3b (§10.4 / §10.9 item 5): "Unknown slots never improve evidence
+  // status." A reserved unresolved slot already sat in every DENOMINATOR, but
+  // the mean/shape estimators — Karsten's avgMv, the colour-adequacy mean, the
+  // curve histogram, the casting schedule's mean MV — ran over the IDENTIFIED
+  // set only, so blanking a card's name deleted its cost from those means and
+  // paid W +5.7 / curve +.9 on sample 381371853. The slot is now imputed
+  // PESSIMISTICALLY once, here: a nonland spell at the deck's own maximum
+  // identified MV (7 when it has no identified nonland), zero colour adequacy,
+  // and, for the curve, the bin that maximises the histogram distance. It earns
+  // nothing anywhere, so the imputation can lower a component and never raise
+  // one. Interaction, advantage and synergy read absolute counts over D and are
+  // already monotone under deletion, so they keep the identified entries.
+  // The deck's own maximum identified MV, floored at the top curve bin (7):
+  // without the floor, blanking the single most expensive card lowered the mean
+  // it is imputed at, and a flooded list gained +1.8 M on its own MDFC
+  // (`351214491`, Turntimber Symbiosis).
+  const pessimisticMv = Math.max(
+    BLANK_SLOT_FALLBACK_MV,
+    ...nonLandEntries.map((e) => e.feature.c),
+  );
+  // Every hypothesis for what the unreadable line was — a spell, a land, or an
+  // MDFC's half land — scored, and the WORST kept (§10.9 item 5).
+  const estimatorSets: DeckEntry[][] = structure.reservedSlots > 0
+    ? (['spell', 'land', 'mdfc'] as const).map((kind) =>
+      [...mainEntries, { feature: blankFeature(pessimisticMv, kind), quantity: structure.reservedSlots }])
+    : [mainEntries];
+  const worst = <T extends { score: number }>(f: (entries: DeckEntry[]) => T): T =>
+    estimatorSets.map(f).reduce((a, b) => (b.score < a.score ? b : a));
+
+  const mana = worst((entries) => computeMana(format, norms, accessSlots, entries, commanderFeatures));
+  const curve = worst((entries) => computeCurve(format, norms, archetype, accessSlots, entries, commanderCmc));
   const interaction = computeInteraction(format, norms, archetype, N, mainEntries);
   const advantage = computeAdvantage(format, norms, archetype, accessSlots, mainEntries);
-  const win = computeWin(format, norms, archetype, accessSlots, mainEntries, commanderFeatures, {
+  const win = worst((entries) => computeWin(format, norms, archetype, accessSlots, entries, commanderFeatures, {
     E: interaction.E, Estar: interaction.Estar,
     D: advantage.D, Dstar: advantage.Dstar, hasDrawEngine: advantage.hasDrawEngine,
-  });
+  }));
   // §8 closing/tutor family: when W's best line is one the deck ASSEMBLES
   // (compact combo or alternate win), that line is the deck's plan and S must
   // be able to read it. It joins §1's ordering rather than replacing the

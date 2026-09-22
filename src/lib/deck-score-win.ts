@@ -1135,14 +1135,16 @@ function drainRecipe(
   const rPayoff = requiredCopies(sources, drainTarget, combatsBy(tStar), poolSizeCap);
   if (rPayoff === null) return note(audit, 'drain', 'drain.no_positive_output', 'no payoff with positive output');
 
-  const fodderQty = fodder.reduce((s, m) => s + m.quantity, 0);
   return {
     id: 'drain',
     label: `Aristocrats drain (${triggersPerTurn}/turn, ${rPayoff} payoffs)`,
     pools: [
       { members: outlets, r: 1 },
       { members: payoffs, r: rPayoff },
-      { members: fodder, r: Math.min(3, fodderQty) },
+      // v1.4 stage 3b (§10.4): the DEMAND is frozen at three bodies. Clamping
+      // it to the copies this deck happens to hold made the requirement fall
+      // when fodder was deleted or blanked, which RAISED joint access.
+      { members: fodder, r: 3 },
     ],
     extraCost: 1,
     criticalNames: new Set([...outlets, ...payoffs, ...fodder].map((m) => m.name)),
@@ -1179,7 +1181,11 @@ function voltronRecipe(
 
   const pumpMembers = pump.map((e) => toMember(e.feature, e.quantity));
   const r = Math.max(1, Math.ceil((21 - (commander.power || 0)) / 3));
-  const pools: RecipePool[] = [{ members: pumpMembers, r: Math.min(r, pumpMembers.length) }];
+  // v1.4 stage 3b (§10.4): `r` is the frozen requirement (21 damage at +3 a
+  // piece). It is NOT clamped to the identified pool — deleting one equipment
+  // lowered the requirement and paid +1.8 W on sample 381364921. A deck holding
+  // fewer pieces than the line needs simply has access 0 for it.
+  const pools: RecipePool[] = [{ members: pumpMembers, r }];
   const criticalNames = new Set([commander.card.name, ...pumpMembers.map((m) => m.name)]);
   if (!commander.hasEvasion) {
     const evasion = nonLand.filter((e) => e.feature.hasEvasion && (e.feature.isEquipmentOrAura || e.feature.categories.includes('protection')));
@@ -1287,7 +1293,9 @@ function controlRecipe(
   const engines: Member[] = pickMembers(nonLand, commanders, (f) => f.isDrawEngine && f.s >= 1);
   const finisherNames = new Set(finishers.map((m) => m.name));
   const enginePool: RecipePool = { members: engines.filter((m) => !finisherNames.has(m.name)), r: 1 };
-  const finisherPool: RecipePool = { members: finishers, r: Math.min(rFinisher, Math.max(1, finishers.length)) };
+  // Same rule: the finisher demand comes from the output schedule, never from
+  // the number of finishers that happen to be identified.
+  const finisherPool: RecipePool = { members: finishers, r: rFinisher };
   const pools = enginePool.members.length > 0 ? [enginePool, finisherPool] : [finisherPool];
   const poly = buildDisjointAccessPolynomial(N, pools.map((pl) => ({ K: poolK(pl), r: poolR(pl) })));
   const ns = drawSampleSizes(format, tStar);

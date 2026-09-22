@@ -82,6 +82,11 @@ export interface CardFeature {
   isLifegainSource: boolean;
   isLifegainPayoff: boolean;
   isCounterPayoff: boolean;
+  /** §10.4/§10.9 item 5: a RESERVED unresolved library slot, not a card. It
+   * holds a place in every denominator and is imputed PESSIMISTICALLY in every
+   * mean/shape estimator, so losing a card's identity can never raise a score
+   * ("remove the invalid proof, never invent replacement credit"). */
+  blank?: boolean;
 }
 
 const RE_DRAW_N = /draw (?:a|two|three|four|x|that many) cards?/i;
@@ -256,4 +261,39 @@ export function pipDemandByColor(card: DbCard): Record<string, number> {
     out[m[1]] = (out[m[1]] || 0) + 1;
   }
   return out;
+}
+
+/** The id every reserved unresolved slot carries; one per deck, so caches key on it. */
+export const BLANK_CARD_ID = 'blank:unresolved-slot';
+
+/** §10.4/§10.9 item 5 — the pessimistic imputation of ONE unresolved library
+ * slot: a nonland spell at `mv` (the deck's own maximum identified MV, or 7
+ * when it has no identified nonland), typed by nothing, supporting nothing.
+ * It enters `F`, the casting schedule and the curve, and contributes 0 to
+ * every numerator, so blanking a card can lower a component but never raise it.
+ *
+ * The slot's TYPE is unknown too, so `scoreDeck` evaluates both hypotheses
+ * (`spell`, `land` and the half-credit `mdfc` back) and keeps the lowest
+ * component score: blanking a land in
+ * a flooded deck used to improve its land fit, and blanking one in a
+ * spellslinger deck used to add a cast to the storm schedule.
+ */
+export function blankFeature(mv: number, kind: 'spell' | 'land' | 'mdfc' = 'spell'): CardFeature {
+  const typeLine = kind === 'land' ? 'Land' : kind === 'mdfc' ? ' // Land' : '';
+  const card: DbCard = {
+    id: `${BLANK_CARD_ID}:${kind}`, oracle_id: BLANK_CARD_ID, name: 'Unresolved slot', mana_cost: null,
+    cmc: kind === 'land' ? 0 : mv, type_line: typeLine, oracle_text: null, colors: null, color_identity: null, keywords: null,
+    set_code: '', set_name: '', collector_number: '', rarity: '', image_uri_small: null,
+    image_uri_normal: null, image_uri_large: null, image_uri_art_crop: null, price_usd: null,
+    price_usd_foil: null, legalities: null, power: null, toughness: null, loyalty: null,
+    produced_mana: null, edhrec_rank: null, layout: kind === 'mdfc' ? 'modal_dfc' : 'normal',
+    updated_at: '', subtypes: null,
+    arena_id: null,
+  };
+  return {
+    ...deriveCardFeature(card),
+    // No claim is verified, so no credit: `s`/`e` 0 and `covered` false keep the
+    // slot out of utilisation, plan roles, typed coverage and every pool.
+    s: 0, e: 0, supported: false, covered: false, c: kind === 'land' ? 0 : mv, power: null, blank: true,
+  };
 }
