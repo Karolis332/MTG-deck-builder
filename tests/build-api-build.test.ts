@@ -1,8 +1,16 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import http from 'http';
 import fs from 'fs';
 import path from 'path';
 import { handleBuild } from '../services/build-api/server';
+import { getDb } from '../src/lib/db';
+import type { DbCard } from '../src/lib/types';
+import type { BuildResult } from '../src/lib/deck-builder-ai';
+
+vi.mock('../src/lib/deck-builder-ai', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('../src/lib/deck-builder-ai')>();
+  return { ...actual, autoBuildDeck: vi.fn() };
+});
 
 function fakeRes(): { res: http.ServerResponse; done: Promise<{ status: number; body: unknown }> } {
   let statusCode = 0;
@@ -65,8 +73,20 @@ describe('POST /build — price cap / deck budget / bracket request validation',
 // Round 2 (web refuter H2): a real collection build must report `owned` per
 // card so the web can reconcile its totals against price.total; a build with
 // no collection must not carry the key at all (not just false everywhere).
+// Round 3: the previous version of this suite called the real engine (a live
+// EDHREC network fetch, ~35s/build) and timed out under contention in the
+// full run. `autoBuildDeck` is mocked so these are deterministic, offline,
+// and only exercise the response mapper in server.ts.
 describe('POST /build — owned flag on cards[]', () => {
-  const ownedNames = fs.readFileSync(
+  function cardRow(name: string): DbCard {
+    const row = getDb().prepare('SELECT * FROM cards WHERE name = ? COLLATE NOCASE LIMIT 1').get(name) as DbCard | undefined;
+    if (!row) throw new Error(`fixture card not found in repo DB: ${name}`);
+    return row;
+  }
+
+  // >= 60 real, DB-recognized names so handleBuild's collectionMatched gate
+  // passes — this list has always been a fast local lookup, never the slow part.
+  const bulkOwnedNames = fs.readFileSync(
     path.join(__dirname, '../decks/test-builds/meren-nel-toth--winning-reference.txt'), 'utf8'
   )
     .split('\n')
@@ -74,27 +94,39 @@ describe('POST /build — owned flag on cards[]', () => {
     .map((l) => l.replace(/^\d+\s+/, '').replace(' *CMDR*', '').trim())
     .filter((n) => n !== 'Journey to Eternity'); // not in the repo DB
 
+  const mockResult: BuildResult = {
+    cards: [
+      { card: cardRow('Sol Ring'), quantity: 1, board: 'main' }, // in bulkOwnedNames
+      { card: cardRow('Birds of Paradise'), quantity: 1, board: 'main' }, // in bulkOwnedNames
+      { card: cardRow('Lightning Bolt'), quantity: 1, board: 'main' }, // not owned
+      { card: cardRow('Counterspell'), quantity: 1, board: 'main' }, // not owned
+    ],
+    themes: [],
+    strategy: 'midrange',
+  };
   it('marks owned:true only for cards the caller declared owned', async () => {
+    const { autoBuildDeck } = await import('../src/lib/deck-builder-ai');
+    vi.mocked(autoBuildDeck).mockResolvedValue(mockResult);
     const { status, body } = await build({
       commanderName: 'Krenko, Mob Boss',
-      ownedCards: ownedNames.map((name) => ({ name, quantity: 1 })),
+      ownedCards: bulkOwnedNames.map((name) => ({ name, quantity: 1 })),
     });
     expect(status).toBe(200);
     const cards = (body as { cards: Array<{ name: string; owned?: boolean }> }).cards;
-    expect(cards.length).toBeGreaterThan(0);
-    const ownedSet = new Set(ownedNames.map((n) => n.toLowerCase()));
-    const picked = cards.filter((c) => ownedSet.has(c.name.toLowerCase()));
-    const notPicked = cards.filter((c) => !ownedSet.has(c.name.toLowerCase()));
-    expect(picked.length + notPicked.length).toBe(cards.length);
-    for (const c of picked) expect(c.owned).toBe(true);
-    for (const c of notPicked) expect(c.owned).toBe(false);
-  }, 60000);
+    expect(cards).toHaveLength(4);
+    expect(cards.find((c) => c.name === 'Sol Ring')?.owned).toBe(true);
+    expect(cards.find((c) => c.name === 'Birds of Paradise')?.owned).toBe(true);
+    expect(cards.find((c) => c.name === 'Lightning Bolt')?.owned).toBe(false);
+    expect(cards.find((c) => c.name === 'Counterspell')?.owned).toBe(false);
+  });
 
   it('omits the owned key entirely for a non-collection build', async () => {
+    const { autoBuildDeck } = await import('../src/lib/deck-builder-ai');
+    vi.mocked(autoBuildDeck).mockResolvedValue(mockResult);
     const { status, body } = await build({ commanderName: 'Krenko, Mob Boss' });
     expect(status).toBe(200);
     const cards = (body as { cards: Array<Record<string, unknown>> }).cards;
-    expect(cards.length).toBeGreaterThan(0);
+    expect(cards).toHaveLength(4);
     for (const c of cards) expect('owned' in c).toBe(false);
-  }, 60000);
+  });
 });
