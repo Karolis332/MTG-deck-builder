@@ -65,7 +65,22 @@ def detect_land_types(type_line: str) -> list[str]:
 
 
 def classify_land(name: str, type_line: str, oracle: str, produced_mana_json: str | None) -> dict:
-    """Classify a single land card. Returns classification dict."""
+    """Classify a single land card. Returns classification dict.
+
+    Note on `produces_colors` and costed/X-scaled any-color activations
+    (2026-09-22): Conduit Pylons ("{1}, {T}: Add one mana of any color") and
+    Baldur's Gate ("{2}, {T}: Add X mana of any one color...") still write
+    the full WUBRG `produces_colors` list here, same as a free {T}-only
+    rainbow land (City of Brass). There is no `land_classifications` column
+    to carry a "conditional" discount, and this table is not the scoring
+    source of truth for that distinction: `land-intelligence.ts` re-derives
+    it from live `oracle_text` via `isConditionalColoredProducer()`
+    (`mana-sources.ts`), which discounts any-color activations that cost
+    extra mana or scale with X to 0.4x their color-match bonus, same as the
+    existing restricted/conditional discounts for Cavern of Souls / Mirrex.
+    Do not add a migration for this — extend `isConditionalColoredProducer`
+    instead if the discount needs to change.
+    """
     tl = type_line.lower()
     ot = (oracle or "").lower()
     name_lower = name.lower()

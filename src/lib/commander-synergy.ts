@@ -31,7 +31,8 @@ export type SynergyCategory =
   | 'tribal_lands'
   | 'x_spells'
   | 'five_colors'
-  | 'dungeon_venture';
+  | 'dungeon_venture'
+  | 'alt_zone_cast';
 
 export interface CommanderSynergyProfile {
   /** Override generic CMC-based archetype detection */
@@ -87,6 +88,18 @@ export const TRIGGER_PATTERNS: Record<SynergyCategory, RegExp[]> = {
     /play (?:cards?|spells?) from exile/i,
     /you may (?:play|cast) (?:cards?|spells?) (?:from exile|exiled)/i,
     /whenever you play a (?:card|land) from exile/i,
+  ],
+  // Spider-Man 2099: "cast a spell this turn from anywhere other than your
+  // hand" isn't literally "from exile", so exile_cast's patterns miss it,
+  // and it isn't "from your graveyard" either — it's a generic
+  // alternate-zone-casting payoff (impulse draw, flashback, foretell,
+  // graveyard cast) that reads as a spells/tempo shell, not the commander's
+  // own attack trigger. Without a category match here it fell through to
+  // zero triggers and a keyword scan called it aggro off "double strike,
+  // vigilance" alone.
+  alt_zone_cast: [
+    /cast (?:a |an )?spell (?:this turn )?from anywhere other than your hand/i,
+    /(?:play|cast) (?:cards?|spells?) from anywhere other than your hand/i,
   ],
   exile_enter: [
     /enters (?:the battlefield )?from exile/i,
@@ -275,6 +288,17 @@ const SYNERGY_REQUIREMENTS: Record<SynergyCategory, {
     ],
     scoreBonus: 25,
   },
+  alt_zone_cast: {
+    min: 10,
+    searchPatterns: [
+      '%you may cast%from exile%',
+      '%you may play%until%',
+      '%flashback%',
+      '%foretell%',
+      '%cast%from your graveyard%',
+    ],
+    scoreBonus: 20,
+  },
   exile_enter: {
     min: 5,
     searchPatterns: [
@@ -425,6 +449,11 @@ function inferArchetype(triggers: SynergyCategory[], hasAttackTrigger: boolean):
   if (has('spell_cast')) return 'spellslinger';
   if (has('creature_dies')) return 'aristocrats';
   if (has('graveyard') && !has('creature_dies')) return 'reanimator';
+
+  // Alternate-zone casting (impulse draw, flashback, foretell, cast-from-
+  // graveyard) is a spells/tempo shell — never aggro, even if the commander
+  // also carries an unrelated combat keyword like double strike.
+  if (has('alt_zone_cast')) return 'spellslinger';
 
   if (has('exile_cast') || has('exile_enter')) {
     if (hasAttackTrigger) return 'aggro';
@@ -716,6 +745,7 @@ function buildStrategyDescription(
     x_spells: 'X-cost spells, X-cost payoffs, and "spend on X" mana sources',
     five_colors: 'Multicolor payoffs, converge/sunburst, and rainbow mana fixing',
     dungeon_venture: 'Venture/dungeon enablers and initiative payoffs',
+    alt_zone_cast: 'Impulse draw, flashback, foretell, and cast-from-graveyard effects',
   };
 
   for (const trigger of triggers) {

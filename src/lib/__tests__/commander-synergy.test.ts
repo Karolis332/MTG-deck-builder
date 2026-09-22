@@ -63,3 +63,27 @@ describe('analyzeCommander — attack_trigger exclusion, each phrase in isolatio
     expect(profile?.triggerCategories ?? []).not.toContain('attack_trigger');
   });
 });
+
+// 2026-09-22: Spider-Man 2099's end-step damage trigger fires off "cast a
+// spell this turn from anywhere other than your hand" — not literally
+// "from exile" — so it fell through every existing category and a
+// keyword scan called the deck aggro off "double strike, vigilance" alone.
+describe('analyzeCommander — alt_zone_cast (cast from anywhere other than hand)', () => {
+  it('Spider-Man 2099: alt_zone_cast trigger detected, archetype is spellslinger (not aggro)', () => {
+    const oracle =
+      "From the Future — You can't cast Spider-Man 2099 during your first, second, or third turns of the game.\n" +
+      'Double strike, vigilance\n' +
+      "At the beginning of your end step, if you've played a land or cast a spell this turn from anywhere other than your hand, Spider-Man 2099 deals damage equal to his power to any target.";
+    const profile = analyzeCommander(oracle, 'Legendary Creature — Human', ['R'], '{3}{R}');
+    expect(profile?.triggerCategories ?? []).toContain('alt_zone_cast');
+    expect(profile?.detectedArchetype).toBe('spellslinger');
+    expect(profile?.detectedArchetype).not.toBe('aggro');
+  });
+
+  it('a plain double-strike commander with an attack + counters trigger stays aggro (control: no alt-zone category, existing aggro path untouched)', () => {
+    const oracle = 'Double strike, vigilance\nWhenever this creature attacks, put a +1/+1 counter on target creature.';
+    const profile = analyzeCommander(oracle, 'Legendary Creature — Human', ['R'], '{3}{R}');
+    expect(profile?.triggerCategories ?? []).not.toContain('alt_zone_cast');
+    expect(profile?.detectedArchetype).toBe('aggro');
+  });
+});
