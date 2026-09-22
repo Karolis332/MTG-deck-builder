@@ -108,6 +108,8 @@ interface ScoreOptions {
   manaDemand?: ManaDemand;
   collectionOnly?: boolean;
   rarityFilter?: 'pauper' | 'peasant';
+  /** USD price ceiling per land; ignored when collectionOnly (owned = free) */
+  maxCardPrice?: number;
 }
 
 /**
@@ -154,6 +156,15 @@ export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
     tier: number | null;
   }>;
 
+  // Per-card price cap (rule 2 — "lands included"). Not applied when
+  // collectionOnly, since that pool is already owned-only (free to the user).
+  const cappedLands = options.maxCardPrice != null && options.maxCardPrice > 0 && !collectionOnly
+    ? lands.filter((l) => {
+        const price = l.price_usd != null ? parseFloat(l.price_usd) : NaN;
+        return Number.isNaN(price) || price <= options.maxCardPrice!;
+      })
+    : lands;
+
   // Get EDHREC land recommendations for this commander
   const edhrecLands = new Set<string>();
   if (commanderName) {
@@ -177,7 +188,7 @@ export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
   const scored: LandScore[] = [];
   const allowedColorSet = new Set(colors);
 
-  for (const land of lands) {
+  for (const land of cappedLands) {
     // ── Hard color-identity filter ───────────────────────────────
     // MDFCs (e.g. Shatterskull Smashing, Sundering Eruption) carry the
     // colored spell face's CI even though the land face is colorless.
@@ -255,10 +266,20 @@ export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
     // their colored production at a steep discount so at most a couple make
     // the cut, instead of 8 of them masquerading as a rainbow mana base.
     const restricted = isRestrictedProducer(land.oracle_text);
-    const conditional = !isFetch && isConditionalColoredProducer(land);
+    // A TYPED fetch (Verdant Catacombs: Swamp/Forest) that only matches ONE
+    // color of a 2+ color deck is only worth its thinning — it can't fix the
+    // other color(s), unlike a dual or an on-colour fetch. Generic fetches
+    // (Evolving Wilds, Prismatic Vista: "a basic land") return all 5 WUBRG
+    // colors from fetchLandColors, so they always match every deck color and
+    // never hit this branch; a mono-colour deck's single-color match isn't
+    // penalized either (colors.length < 2).
+    const matchCountBeforeScale = producesColors.filter(c => colors.includes(c)).length;
+    const fetchOffColor = isFetch && !!fetched && fetched.length < 5 && colors.length >= 2 && matchCountBeforeScale === 1;
+    const conditional = (!isFetch && isConditionalColoredProducer(land)) || fetchOffColor;
     const colorBonusScale = restricted ? 0.25 : conditional ? 0.4 : 1;
     if (restricted) reasons.push('restricted producer');
-    if (conditional) reasons.push('conditional colored mana');
+    if (fetchOffColor) reasons.push('off-color fetch (thinning only)');
+    else if (conditional) reasons.push('conditional colored mana');
 
     const matchingColors = producesColors.filter(c => colors.includes(c));
     if (matchingColors.length > 0) {
@@ -268,7 +289,7 @@ export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
       // Bonus for matching heaviest color
       if (manaDemand && matchingColors.includes(manaDemand.heaviestColor)) {
         const intensity = manaDemand.colorIntensity[manaDemand.heaviestColor] || 0;
-        score += Math.round(20 * intensity);
+        score += Math.round(20 * intensity * colorBonusScale);
         reasons.push(`matches heavy color (${manaDemand.heaviestColor})`);
       }
     } else if (producesColors.length === 0 || producesColors.every(c => c === 'C')) {
@@ -375,6 +396,8 @@ interface BuildOptions {
   collectionOnly?: boolean;
   rarityFilter?: 'pauper' | 'peasant';
   isCommander?: boolean;
+  /** USD price ceiling per land; ignored when collectionOnly (owned = free) */
+  maxCardPrice?: number;
 }
 
 /**
@@ -396,7 +419,7 @@ export function buildOptimalLandBase(options: BuildOptions): LandBaseResult {
   // Score all available lands
   const scored = scoreLandsForDeck({
     colors, format, strategy, tribalTypes, commanderName, userId, manaDemand, collectionOnly,
-    rarityFilter: options.rarityFilter,
+    rarityFilter: options.rarityFilter, maxCardPrice: options.maxCardPrice,
   });
 
   // Determine non-basic target based on color count
