@@ -37,7 +37,7 @@ export interface BracketResult {
 }
 
 // Source: WotC Commander Brackets rules doc, "Mass Land Denial" examples list.
-const MASS_LAND_DENIAL = new Set([
+export const MASS_LAND_DENIAL = new Set([
   'armageddon', 'ravages of war', 'jokulhaups', 'obliterate', 'decree of annihilation',
   'cataclysm', 'fall of the thran', 'sunder', 'winter orb', 'static orb', 'stasis',
   'blood moon', 'magus of the moon', 'back to basics', 'ruination', 'impending disaster',
@@ -48,7 +48,7 @@ const MASS_LAND_DENIAL = new Set([
 
 // Source: well-known extra-turn spells (Time Warp effects) commonly cited in
 // bracket guidance. Not exhaustive.
-const EXTRA_TURN = new Set([
+export const EXTRA_TURN = new Set([
   'time warp', 'temporal manipulation', 'capture of jingzhou', 'time stretch',
   'temporal mastery', 'nexus of fate', 'expropriate', "alrund's epiphany",
   "karn's temporal sundering", 'part the waterveil', 'walk the aeons',
@@ -57,7 +57,7 @@ const EXTRA_TURN = new Set([
 ]);
 
 // Source: commonly-cited "fast mana" cards in bracket/cEDH guidance.
-const FAST_MANA = new Set([
+export const FAST_MANA = new Set([
   'mana crypt', 'mana vault', 'sol ring', 'chrome mox', 'mox diamond', 'mox opal',
   'mox amber', 'lotus petal', 'jeweled lotus', 'grim monolith', 'dark ritual',
   'cabal ritual', 'simian spirit guide', 'elvish spirit guide', 'ancient tomb',
@@ -129,4 +129,34 @@ export function classifyBracket(cards: BracketCard[], opts?: { commanderNames?: 
   }
 
   return { bracket, gameChangers, twoCardCombos, massLandDenial, extraTurnCards, chainedExtraTurns, tutors, fastMana, reasons };
+}
+
+// ── Build-time bracket targeting (additive) ─────────────────────────────────
+// Used by deck-builder-ai.ts to exclude offending cards from the candidate
+// pool BEFORE picking, and to name the category of an already-picked card
+// for the post-build swap pass. Pure — no DB access.
+
+export type BracketOffenseCategory = 'game_changer' | 'mass_land_denial' | 'extra_turn' | 'fast_mana';
+
+/** Which category (if any) makes this card ineligible for a target bracket. */
+export function bracketOffenseCategory(card: BracketCard): BracketOffenseCategory | null {
+  if (card.game_changer) return 'game_changer';
+  const n = lname(card.name);
+  if (MASS_LAND_DENIAL.has(n)) return 'mass_land_denial';
+  if (EXTRA_TURN.has(n)) return 'extra_turn';
+  if (FAST_MANA.has(n)) return 'fast_mana';
+  return null;
+}
+
+/**
+ * Categories to strike from the candidate pool for a given bracket target.
+ * 1-2: no game changers, MLD, extra turns, or fast mana.
+ * 3: MLD only (game-changer count is capped post-build instead, since the
+ *    top-3-by-score rule needs the whole built list, not the raw pool).
+ * 4-5: no pool-level exclusions.
+ */
+export function bracketPoolExclusions(target: 1 | 2 | 3 | 4 | 5): Set<BracketOffenseCategory> {
+  if (target <= 2) return new Set(['game_changer', 'mass_land_denial', 'extra_turn', 'fast_mana']);
+  if (target === 3) return new Set(['mass_land_denial']);
+  return new Set();
 }

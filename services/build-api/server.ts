@@ -116,6 +116,33 @@ export async function handleBuild(body: string, res: http.ServerResponse): Promi
   if (!VALID_FORMATS.includes(format as (typeof VALID_FORMATS)[number])) {
     return json(res, 400, { error: `format must be one of: ${VALID_FORMATS.join(', ')}` });
   }
+
+  // Price cap / deck budget / bracket target — additive, all optional.
+  let maxCardPrice: number | undefined;
+  if (parsed.maxCardPrice !== undefined) {
+    if (typeof parsed.maxCardPrice !== 'number' || !Number.isFinite(parsed.maxCardPrice) || parsed.maxCardPrice <= 0) {
+      return json(res, 400, { error: 'maxCardPrice must be a number > 0' });
+    }
+    maxCardPrice = parsed.maxCardPrice;
+  }
+  let maxDeckPrice: number | undefined;
+  if (parsed.maxDeckPrice !== undefined) {
+    if (typeof parsed.maxDeckPrice !== 'number' || !Number.isFinite(parsed.maxDeckPrice) || parsed.maxDeckPrice <= 0) {
+      return json(res, 400, { error: 'maxDeckPrice must be a number > 0' });
+    }
+    maxDeckPrice = parsed.maxDeckPrice;
+  }
+  let bracket: 1 | 2 | 3 | 4 | 5 | undefined;
+  if (parsed.bracket !== undefined) {
+    if (typeof parsed.bracket !== 'number' || !Number.isInteger(parsed.bracket) || parsed.bracket < 1 || parsed.bracket > 5) {
+      return json(res, 400, { error: 'bracket must be an integer 1-5' });
+    }
+    bracket = parsed.bracket as 1 | 2 | 3 | 4 | 5;
+  }
+  // Bracket is a Commander Brackets concept — ignored for 60-card formats,
+  // but VALID_FORMATS above already restricts /build to commander/brawl/
+  // standardbrawl, so this is always a no-op guard, not live behaviour.
+  const effectiveBracket = format !== 'standard' ? bracket : undefined;
   if (activeBuilds >= MAX_CONCURRENT) {
     return json(res, 429, { error: 'build queue full, retry in a minute' });
   }
@@ -162,6 +189,9 @@ export async function handleBuild(body: string, res: http.ServerResponse): Promi
       // is empty for non-collection builds, so no substitutes leak in)
       useCollection: Boolean(ownedCards),
       userId: TEMP_USER_ID,
+      maxCardPrice,
+      maxDeckPrice,
+      bracket: effectiveBracket,
     });
 
     if (!result.cards.length) {
@@ -213,6 +243,8 @@ export async function handleBuild(body: string, res: http.ServerResponse): Promi
       hints: result.hints,
       craftList,
       craftSummary,
+      price: result.price,
+      bracket: result.bracket,
       elapsedMs: Date.now() - started,
       cards: result.cards.map((entry) => {
         const card = entry.card as DbCard;

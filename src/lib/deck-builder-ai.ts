@@ -26,6 +26,8 @@ import { parseBuildHints } from './build-hints';
 import type { ParsedBuildHints } from './build-hints';
 import { auditDeck } from './deck-auditor';
 import type { DeckHealth } from './deck-auditor';
+import { classifyBracket, bracketOffenseCategory, bracketPoolExclusions } from './bracket';
+import type { BracketCard } from './bracket';
 
 // ── Mana-sink payoffs for multicolor-matters commanders (Ramos et al.) ───────
 // Cards that convert a big mana burst (from Ramos's counter-dump) into a win or
@@ -424,6 +426,31 @@ export interface BuildOptions {
   buildHints?: string;
   /** Capture per-card score-component breakdown (training/diagnostics only) */
   captureComponents?: boolean;
+  /** USD price ceiling per card; commander/owned/hinted-exempt cards over this leave the pool */
+  maxCardPrice?: number;
+  /** USD price ceiling for the whole built main deck; triggers post-build swaps */
+  maxDeckPrice?: number;
+  /** Target WotC Commander bracket (1-5); ignored for 60-card formats */
+  bracket?: 1 | 2 | 3 | 4 | 5;
+}
+
+/** `BuildResult.price` — always present, no-op values when no cap was requested. */
+export interface BuildPriceReport {
+  currency: 'USD';
+  total: number;
+  unpricedCount: number;
+  maxCardPrice: number | null;
+  maxDeckPrice: number | null;
+  excludedByCardCap: number;
+  replacedForBudget: Array<{ out: string; in: string; saved: number }>;
+}
+
+/** `BuildResult.bracket` — always present for Commander-family formats; `target: null` for others. */
+export interface BuildBracketReport {
+  target: 1 | 2 | 3 | 4 | 5 | null;
+  result: 1 | 2 | 3 | 4 | 5;
+  reasons: string[];
+  swapped: Array<{ out: string; in: string; category: string }>;
 }
 
 export interface BuildResult {
@@ -448,6 +475,14 @@ export interface BuildResult {
    * useCollection is true. Capped at 15, ordered by score descending.
    */
   craftList?: CraftListEntry[];
+  /**
+   * Price cap / deck-budget accounting. Always populated by autoBuildDeck
+   * (optional in the type only so existing partial BuildResult literals in
+   * other test files don't need updating for this additive field).
+   */
+  price?: BuildPriceReport;
+  /** Bracket target accounting. Always populated by autoBuildDeck — see `price`. */
+  bracket?: BuildBracketReport;
 }
 
 /** One `BuildResult.craftList` entry — see `computeCraftList` below. */
@@ -491,6 +526,8 @@ export interface ScoredCandidatePoolResult {
   commanderStatsMap: Map<string, { inclusionRate: number; synergyScore: number }>;
   /** Per-card additive score breakdown; populated only when options.captureComponents */
   componentsByName?: Map<string, Record<string, number>>;
+  /** Count of candidates removed from the pool by options.maxCardPrice (rule 2) */
+  priceCapExcluded: number;
 }
 
 /**
@@ -515,7 +552,12 @@ export function ownedPoolPrefix<T>(
  */
 export async function buildScoredCandidatePool(options: BuildOptions): Promise<ScoredCandidatePoolResult> {
   const db = getDb();
-  const { format, strategy, commanderName, powerLevel } = options;
+  const { format, strategy, commanderName } = options;
+  // Bracket target overrides powerLevel when both are given: 1-2 -> casual,
+  // 3-4 -> optimized, 5 -> cedh (cEDH staples on). powerLevel alone is unchanged.
+  const powerLevel: BuildOptions['powerLevel'] = options.bracket == null
+    ? options.powerLevel
+    : options.bracket <= 2 ? 'casual' : options.bracket === 5 ? 'cedh' : 'optimized';
   let useCollection = options.useCollection ?? false;
 
   // If commander format, derive colors from commander's color identity
@@ -968,6 +1010,35 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
       if (stapleCard && validForPool(stapleCard)) {
         seenNames.add(stapleCard.name);
         pool.push(stapleCard);
+      }
+    }
+  }
+
+  // ── Price cap: candidates over maxCardPrice leave the pool up front ──────
+  // Exempt: the commander (never in this nonland pool anyway), and cards the
+  // user already owns (free to them). Unknown price (null) is allowed and
+  // counted separately in BuildResult.price.unpricedCount at build time.
+  let priceCapExcluded = 0;
+  if (options.maxCardPrice != null && options.maxCardPrice > 0) {
+    const cap = options.maxCardPrice;
+    for (let i = pool.length - 1; i >= 0; i--) {
+      const card = pool[i];
+      if (useCollection && (ownedQty.get(card.name) || 0) > 0) continue;
+      const price = card.price_usd != null ? parseFloat(card.price_usd) : NaN;
+      if (Number.isNaN(price) || price <= cap) continue;
+      pool.splice(i, 1);
+      priceCapExcluded++;
+    }
+  }
+
+  // ── Bracket target: strike offending categories from the pool up front ──
+  // (Commander-family formats only — bracket is a Commander Brackets concept.)
+  if (isCommander && options.bracket != null) {
+    const excluded = bracketPoolExclusions(options.bracket);
+    if (excluded.size > 0) {
+      for (let i = pool.length - 1; i >= 0; i--) {
+        const cat = bracketOffenseCategory(pool[i] as BracketCard);
+        if (cat && excluded.has(cat)) pool.splice(i, 1);
       }
     }
   }
@@ -1547,6 +1618,7 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
     pool: colorFilteredScored,
     hints,
     boostedCards,
+    priceCapExcluded,
     componentsByName: options.captureComponents ? componentsByName : undefined,
     themes,
     resolvedStrategy,
@@ -2083,6 +2155,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
       collectionOnly: useCollection,
       rarityFilter: options.rarityFilter,
       isCommander,
+      maxCardPrice: options.maxCardPrice,
     });
 
     // Add non-basic lands
@@ -2353,12 +2426,62 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
     }
   }
 
+  // ── Price cap / deck budget / bracket target: post-build accounting ────
+  // (See BuildPriceReport / BuildBracketReport — always present, no-op
+  // values when the corresponding option wasn't requested.)
+  const commanderNames = [commanderCard?.name, options.partnerName].filter((n): n is string => !!n);
+
+  let finalCards = picked;
+  let replacedForBudget: Array<{ out: string; in: string; saved: number }> = [];
+  if (options.maxDeckPrice != null && options.maxDeckPrice > 0) {
+    const budget = applyDeckBudget(
+      finalCards, poolResult.pool, options.maxDeckPrice, ownedQty, useCollection, commanderCard?.oracle_text || undefined
+    );
+    finalCards = budget.cards;
+    replacedForBudget = budget.replacedForBudget;
+  }
+
+  let bracketReport: BuildBracketReport;
+  if (isCommander && options.bracket != null) {
+    const bt = applyBracketTarget(
+      finalCards, poolResult.pool, options.bracket, commanderCard?.oracle_text || undefined, commanderNames
+    );
+    finalCards = bt.cards;
+    bracketReport = bt.result;
+  } else {
+    const classified = classifyBracket(
+      finalCards.filter((c) => c.board === 'main').map((c) => c.card),
+      { commanderNames }
+    );
+    bracketReport = { target: null, result: classified.bracket, reasons: classified.reasons, swapped: [] };
+  }
+
+  let priceTotal = 0;
+  let unpricedCount = 0;
+  for (const c of finalCards) {
+    if (c.board !== 'main') continue;
+    if (useCollection && (ownedQty.get(c.card.name) || 0) > 0) continue; // owned = free to the user
+    const p = c.card.price_usd != null ? parseFloat(c.card.price_usd) : NaN;
+    if (Number.isNaN(p)) { unpricedCount += 1; continue; }
+    priceTotal += p * c.quantity;
+  }
+  const priceReport: BuildPriceReport = {
+    currency: 'USD',
+    total: Math.round(priceTotal * 100) / 100,
+    unpricedCount,
+    maxCardPrice: options.maxCardPrice ?? null,
+    maxDeckPrice: options.maxDeckPrice ?? null,
+    excludedByCardCap: poolResult.priceCapExcluded,
+    replacedForBudget,
+  };
+
+  const finalPickedNames = new Set(finalCards.map((c) => c.card.name));
   const craftList = computeCraftList(
-    poolResult.pool, picked, pickedNames, ownedQty, reasoning, commanderCard?.oracle_text || undefined, useCollection
+    poolResult.pool, finalCards, finalPickedNames, ownedQty, reasoning, commanderCard?.oracle_text || undefined, useCollection
   );
 
   return {
-    cards: picked,
+    cards: finalCards,
     themes,
     strategy: resolvedStrategy,
     tribalType: tribalType || undefined,
@@ -2375,7 +2498,141 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
       : undefined,
     hints: { parsed: hints, boostedCards },
     craftList,
+    price: priceReport,
+    bracket: bracketReport,
   };
+}
+
+/**
+ * Rule 3 (deck budget): while the built main deck's total exceeds the cap,
+ * replace the most expensive unowned non-commander card with the
+ * best-scoring same-role pool candidate whose price keeps the deck under
+ * the cap (falling back to the cheapest same-role candidate), recording
+ * every swap. Bounded by deck size so it always terminates. Lands (outside
+ * `pool`, which is nonland-only) fall back to an existing basic already in
+ * the deck — basics are the floor.
+ */
+export function applyDeckBudget(
+  picked: Array<{ card: DbCard; quantity: number; board: 'main' | 'sideboard' }>,
+  pool: Array<{ card: DbCard; score: number }>,
+  maxDeckPrice: number,
+  ownedQty: Map<string, number>,
+  useCollection: boolean,
+  commanderOracle: string | undefined,
+): { cards: Array<{ card: DbCard; quantity: number; board: 'main' | 'sideboard' }>; replacedForBudget: Array<{ out: string; in: string; saved: number }> } {
+  const cards = picked.map((p) => ({ ...p }));
+  const replacedForBudget: Array<{ out: string; in: string; saved: number }> = [];
+  const isOwned = (name: string) => useCollection && (ownedQty.get(name) || 0) > 0;
+  const priceOf = (card: DbCard): number => (card.price_usd != null ? parseFloat(card.price_usd) || 0 : 0);
+  const effPrice = (card: DbCard): number => (isOwned(card.name) ? 0 : priceOf(card));
+  const primaryRole = (card: DbCard): string =>
+    getPrimaryCategory(classifyCard(card.name, card.oracle_text || '', card.type_line || '', card.cmc || 0, commanderOracle));
+  const isLand = (card: DbCard): boolean => (card.type_line || '').includes('Land');
+  const total = (): number =>
+    cards.filter((c) => c.board === 'main').reduce((s, c) => s + effPrice(c.card) * c.quantity, 0);
+
+  // A card that already has no cheaper same-role candidate is skipped, not a
+  // reason to stop entirely — other, less expensive cards further down the
+  // list can still individually add up to real savings (e.g. every card is
+  // already under a per-card cap but the deck total is still over budget).
+  const stuck = new Set<string>();
+  let guard = cards.length + 5;
+  while (total() > maxDeckPrice && guard-- > 0) {
+    const inDeck = new Set(cards.filter((c) => c.board === 'main').map((c) => c.card.name));
+    const swappable = cards.filter((c) =>
+      c.board === 'main' && !isOwned(c.card.name) && effPrice(c.card) > 0 && !stuck.has(c.card.name)
+    );
+    if (swappable.length === 0) break;
+    const target = swappable.slice().sort((a, b) => effPrice(b.card) - effPrice(a.card))[0];
+    const targetPrice = effPrice(target.card);
+
+    if (isLand(target.card)) {
+      const basic = cards.find((c) => c !== target && c.board === 'main' && (c.card.type_line || '') === 'Basic Land');
+      if (!basic) { stuck.add(target.card.name); continue; } // no basic to absorb the cut — try the next card
+      basic.quantity += target.quantity;
+      const idx = cards.indexOf(target);
+      cards.splice(idx, 1);
+      replacedForBudget.push({ out: target.card.name, in: basic.card.name, saved: Math.round(targetPrice * 100) / 100 });
+      continue;
+    }
+
+    const role = primaryRole(target.card);
+    const budgetLeft = maxDeckPrice - (total() - targetPrice);
+    const candidates = pool.filter((p) => !inDeck.has(p.card.name) && !isLand(p.card) && primaryRole(p.card) === role);
+    const fitting = candidates.filter((p) => effPrice(p.card) <= budgetLeft).sort((a, b) => b.score - a.score)[0];
+    const cheapest = candidates.slice().sort((a, b) => effPrice(a.card) - effPrice(b.card))[0];
+    const replacement = fitting || cheapest;
+    if (!replacement || effPrice(replacement.card) >= targetPrice) { stuck.add(target.card.name); continue; }
+
+    const idx = cards.indexOf(target);
+    cards[idx] = { card: replacement.card, quantity: target.quantity, board: 'main' };
+    replacedForBudget.push({
+      out: target.card.name,
+      in: replacement.card.name,
+      saved: Math.round((targetPrice - effPrice(replacement.card)) * 100) / 100,
+    });
+  }
+  return { cards, replacedForBudget };
+}
+
+/**
+ * Rule 4 (bracket target): if `classifyBracket` puts the built list above
+ * the target, swap each offending card for the next best same-role
+ * candidate that doesn't offend, re-classify once, and report the result
+ * honestly if it still exceeds the target. At target 3, the game-changer
+ * count is capped at 3 (highest-scoring kept) rather than excluded outright.
+ */
+export function applyBracketTarget(
+  picked: Array<{ card: DbCard; quantity: number; board: 'main' | 'sideboard' }>,
+  pool: Array<{ card: DbCard; score: number }>,
+  target: 1 | 2 | 3 | 4 | 5,
+  commanderOracle: string | undefined,
+  commanderNames: string[],
+): { cards: Array<{ card: DbCard; quantity: number; board: 'main' | 'sideboard' }>; result: BuildBracketReport } {
+  const cards = picked.map((p) => ({ ...p }));
+  const swapped: Array<{ out: string; in: string; category: string }> = [];
+  const primaryRole = (card: DbCard): string =>
+    getPrimaryCategory(classifyCard(card.name, card.oracle_text || '', card.type_line || '', card.cmc || 0, commanderOracle));
+  const isLand = (card: DbCard): boolean => (card.type_line || '').includes('Land');
+  const mainDeck = (): DbCard[] => cards.filter((c) => c.board === 'main').map((c) => c.card);
+  const scoreOf = new Map(pool.map((p) => [p.card.name, p.score]));
+
+  let classified = classifyBracket(mainDeck(), { commanderNames });
+  if (classified.bracket > target) {
+    const inDeck = new Set(cards.filter((c) => c.board === 'main').map((c) => c.card.name));
+    const offenders = cards.filter((c) => c.board === 'main' && bracketOffenseCategory(c.card));
+
+    let toSwap = offenders;
+    if (target === 3) {
+      // Only cards beyond the top-3 game changers by score need to go; MLD
+      // (and anything else offending) is always excluded at this target.
+      const gameChangers = offenders.filter((o) => bracketOffenseCategory(o.card) === 'game_changer');
+      const keepNames = new Set(
+        gameChangers.slice().sort((a, b) => (scoreOf.get(b.card.name) || 0) - (scoreOf.get(a.card.name) || 0))
+          .slice(0, 3).map((o) => o.card.name)
+      );
+      toSwap = offenders.filter((o) => {
+        const cat = bracketOffenseCategory(o.card);
+        return cat === 'game_changer' ? !keepNames.has(o.card.name) : true;
+      });
+    }
+
+    for (const off of toSwap) {
+      const role = primaryRole(off.card);
+      const replacement = pool
+        .filter((p) => !inDeck.has(p.card.name) && !isLand(p.card) && !bracketOffenseCategory(p.card) && primaryRole(p.card) === role)
+        .sort((a, b) => b.score - a.score)[0];
+      if (!replacement) continue; // no safe candidate — result reported honestly below
+      const idx = cards.indexOf(off);
+      cards[idx] = { card: replacement.card, quantity: off.quantity, board: 'main' };
+      inDeck.delete(off.card.name);
+      inDeck.add(replacement.card.name);
+      swapped.push({ out: off.card.name, in: replacement.card.name, category: bracketOffenseCategory(off.card) || 'unknown' });
+    }
+    classified = classifyBracket(mainDeck(), { commanderNames });
+  }
+
+  return { cards, result: { target, result: classified.bracket, reasons: classified.reasons, swapped } };
 }
 
 const CRAFT_LIST_CAP = 15;
