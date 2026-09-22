@@ -206,8 +206,18 @@ function roleSplit(deck: Deck, profile: ProbeProfile): { saturated: PlanRole[]; 
 
 const poolCache = new Map<string, DbCard[]>();
 /** `k` identity-legal additions the deck does not already run, by category. */
+/** Nothing the scorer reads outside the catalogue: no printed body, no
+ * velocity, no ramp, no token output, no typed category. §10.4's "zero-credit
+ * slot" in resolved-card form. */
+export function isInert(feature: CardFeature): boolean {
+  return feature.categories.length === 0 && !feature.power
+    && !feature.isRamp && !feature.isDraw && !feature.isDrawEngine
+    && !feature.isTokenProducer && !feature.isCreatureTokenProducer
+    && !feature.isEquipmentOrAura && !feature.isDirectDamage && !feature.isPlaneswalker;
+}
+
 function additions(
-  deck: Deck, profile: ProbeProfile, kind: 'untyped' | 'ramp' | 'saturated', k: number,
+  deck: Deck, profile: ProbeProfile, kind: 'untyped' | 'untyped-unmatched' | 'ramp' | 'saturated', k: number,
 ): DbCard[] {
   const split = kind === 'saturated' ? roleSplit(deck, profile) : { saturated: [], slack: [] };
   const roles = split.saturated;
@@ -223,7 +233,18 @@ function additions(
     pool = (profile === 'standard' ? standardPool() : controlPool(profile))
       .filter((p) => p.identity.every((c) => deck.identity.includes(c)))
       .filter((p) => {
-        if (kind === 'untyped') return !p.covered;
+        // v1.4 stage 3c (§10.4 "Match known nuisance features for the
+        // no-benefit counterparts ... verify that they do not ... change
+        // recipe feasibility"): an untyped card is not automatically a
+        // zero-credit slot. The stage-3b pool admitted real creatures, token
+        // makers and cantrips, and the scorer reads printed power, velocity
+        // and token output whether or not the catalogue types the card — so
+        // the "violations" it produced were a new pressure line, not a
+        // denominator gain (`standard:1446997`, Creature pressure -> Token/Food
+        // conversion, access 29% -> 54%). The graded pool is now MECHANICALLY
+        // INERT; the unmatched movement is reported by `add-untyped-unmatched`.
+        if (kind === 'untyped') return !p.covered && isInert(deriveCardFeature(p.card));
+        if (kind === 'untyped-unmatched') return !p.covered;
         if (!p.covered) return false;
         const feature = deriveCardFeature(p.card);
         // A candidate that ALSO fills a role with headroom is a real
@@ -329,6 +350,24 @@ const PROBES: Record<string, Probe> = {
     return after ? { delta: diff(base, after), skipped: false } : SKIP;
   },
 
+  /** §10.4's literal additive construction: k ZERO-CREDIT slots. The library
+   * really grows, and every density/access term must dilute. */
+  'add-unknown-slots': (deck, base, k) => {
+    const after = read(deck, deck.main, [{ name: 'Unreadable Card', quantity: k, board: 'main' }]);
+    return after ? { delta: diff(base, after), skipped: false } : SKIP;
+  },
+
+  /** UNMATCHED (§10.4 "report unmatched edits separately"): any resolved card
+   * the catalogue does not type, feature-matched or not. A real creature with
+   * printed power IS a pressure source, so a rise here is a mechanical change
+   * reported with its trace, not a gaming failure. */
+  'add-untyped-unmatched': (deck, base, k, profile) => {
+    const add = additions(deck, profile, 'untyped-unmatched', k);
+    if (add.length < k) return SKIP;
+    const after = read(deck, [...deck.main, ...add.map((card) => ({ card, quantity: 1 }))]);
+    return after ? { delta: diff(base, after), skipped: false } : SKIP;
+  },
+
   /** Add k typed, identity-legal staples that fill a role this deck ALREADY
    * saturates: mechanically zero-use, so staple membership must supply zero
    * credit. This is the graded staple probe. */
@@ -396,9 +435,10 @@ interface Row {
 
 /** Extra ramp can be a real mana upgrade (§10.4 "report unmatched edits
  * separately"), so its movement is measured and printed, never graded. */
-const UNGRADED = new Set(['add-ramp-unmatched']);
+const UNGRADED = new Set(['add-ramp-unmatched', 'add-untyped-unmatched', 'add-saturated-staples']);
 
 const S_TOLERANCE = 1e-6;
+const deckSize = (deck: Deck): number => deck.main.reduce((s, e) => s + e.quantity, 0);
 const TOTAL_ALLOWANCE = 1;
 
 function run(profile: ProbeProfile, n: number, ks: number[]): string {
@@ -447,7 +487,13 @@ function run(profile: ProbeProfile, n: number, ks: number[]): string {
           if (delta.rankDisplay !== null) row.maxRankDisplay = Math.max(row.maxRankDisplay, delta.rankDisplay);
         }
         if (UNGRADED.has(name)) continue;
-        const sBad = exact ? Math.abs(delta.S) > S_TOLERANCE : delta.S > S_TOLERANCE;
+        // §10.4: "An actual legal Standard trim of k off-plan excess cards is a
+        // different operation ... permit 0<=DeltaS<=100*k/N_before". It applies
+        // whenever BOTH sizes clear the profile minimum, which is exactly the
+        // case the new size gate leaves ranked.
+        const allowance = name === 'delete-offplan-typed' && delta.rank !== null
+          ? (100 * k) / Math.max(1, deckSize(deck)) : S_TOLERANCE;
+        const sBad = exact ? Math.abs(delta.S) > S_TOLERANCE : delta.S > allowance;
         const tBad = !delta.repaired
           && (exact ? Math.abs(delta.total) > 0 : delta.total > TOTAL_ALLOWANCE);
         // §10.9 item 5: "Deltaunrounded rank <=1 and Deltadisplayed rank <=1",

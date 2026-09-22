@@ -68,7 +68,7 @@ interface Recipe {
  * deployment rule, the cantrip ledger, the finish predicate or the horizon
  * changes - every S norm measured against an older value is superseded.
  */
-export const W_SCHEDULER_VERSION = 'v14-stage1d';
+export const W_SCHEDULER_VERSION = 'v14-stage3d';
 
 export const WIN_FAMILIES: readonly string[] = [
   'combo', 'combat_wide', 'tokens', 'drain', 'combat_tall', 'alt_win', 'control', 'spells',
@@ -297,6 +297,25 @@ function outputPerMana(s: Source): number {
 }
 
 /**
+ * Expected copies of a `cost` spell an expected `budget` of leftover mana pays
+ * for. At `budget >= cost` this is the plain `budget / cost` the ledger always
+ * used, and below `(1 - AFFORD_BAND) * cost` it is still exactly ZERO, so
+ * section 10.8 item 2's rule survives untouched: no turn part-finances a spell
+ * it could not cast. All that changed is the last `AFFORD_BAND` of the cost,
+ * where the old `cost > budget -> skip` test STEPPED from zero to a whole
+ * copy. The leftover is an expectation over hands, not mana in hand, so the
+ * copies it buys ramp across that band instead of switching. Exported for the
+ * stage-3d unit test.
+ */
+export const AFFORD_BAND = 0.25;
+export function affordable(budget: number, cost: number): number {
+  if (cost <= 0) return Infinity;
+  const ratio = Math.max(0, budget) / cost;
+  if (ratio >= 1) return ratio;
+  return Math.max(0, (ratio - (1 - AFFORD_BAND)) / AFFORD_BAND);
+}
+
+/**
  * Copies of one card seen by turn `t` - the base draw only.
  *
  * MEASURED AND REJECTED (stage 1b): widening this by the deck's typed
@@ -475,8 +494,16 @@ export function scheduleDamage(
       // A spell is cast in ONE turn: the turn has to cover a whole copy's cost.
       // Without this the ledger financed a 4-drop over turns 1-3 a quarter of a
       // copy at a time, which is not a legal deployment at any of those turns.
-      if (cost > budget + 1e-9) continue;
-      const take = cost <= 0 ? want : Math.min(want, budget / cost);
+      // v1.4 stage 3d: that rule was a hard `cost > budget -> skip`, i.e. a STEP
+      // in the residual budget, and the residual is a continuous decreasing
+      // function of N and of the other sources present. One 61st card shrank
+      // every earlier `want` by a hair, the residual crossed a later source's
+      // cost, and a whole extra copy was deployed - `standard:1474218` closed
+      // T8 -> T7 on dilution, `381364921` T13 -> T12 on a deletion. `affordable`
+      // keeps the same tightness (a quarter-budget turn still buys ~0.4 % of a
+      // copy) without the discontinuity: it is the chance the turn's actual
+      // leftover covers one whole copy, not a truncation of the expectation.
+      const take = cost <= 0 ? want : Math.min(want, affordable(budget, cost));
       if (take <= 1e-9) { if (budget <= 1e-9) break; continue; }
       paid[i] += take;
       budget -= take * cost;
@@ -539,31 +566,45 @@ function combatsBy(tStar: number): number {
  * worse, while at 6 it clears only the two weakest anchors. 6 ships; the
  * constant is here so the calibration pass can move it in one line.
  */
-function requiredCopies(
+export function bestLine(
+  format: ScoreFormat, N: number, tStar: number,
   members: readonly Source[], target: number, combats: number, poolSizeCap: number,
-): number | null {
+): { r: number; names: Set<string>; access: number } | null {
   // Zero-output members are not threats and must not SIZE the line either: one
   // 0/0 Walking Ballista sorted first made `mean` 0 and returned null, deleting
   // every combat recipe the deck had (`the-cabbage-merchant`, W = 0 with a
   // 205-damage schedule behind it).
-  const byCost = [...members].filter((m) => m.output > 0).sort((a, b) => a.cmc - b.cmc || b.output - a.output);
-  const units: Source[] = [];
-  for (const m of byCost) for (let i = 0; i < m.quantity; i++) units.push(m);
-  if (units.length === 0) return null;
-  const cap = Math.min(poolSizeCap, units.length);
-  // `r` appears on both sides ("the r cheapest"), so iterate to a fixed point,
-  // then CLAMP at 6. Clamping is the point: beyond six copies the pool stops
-  // being an access proxy. Failing instead of clamping killed every Commander
-  // pressure line, since 120 damage over 11 combats wants 8+ small bodies.
-  let r = 1;
-  for (let iter = 0; iter < cap; iter++) {
-    const mean = units.slice(0, r).reduce((sum, m) => sum + m.output, 0) / r;
-    if (mean <= 0) return null;
-    const next = Math.min(cap, Math.max(1, Math.ceil(target / (combats * mean))));
-    if (next === r) break;
-    r = next;
+  const positive = members.filter((m) => m.output > 0);
+  if (positive.length === 0) return null;
+  // v1.4 stage 3c (§10.4, stage 3b OPEN): a MAXIMUM OVER SUBSETS of the
+  // identified sources. The old sizing took the MEAN output of the `r`
+  // CHEAPEST copies, so deleting a weak member promoted a better one, the mean
+  // rose, `r` fell and joint access ROSE (`381364921` +1.44 W). Here each
+  // distinct output level θ defines its own line: the subset of copies that
+  // each deal at least θ, needing `r(θ)=ceil(target/(combats·θ))` of them —
+  // `r` depends on θ alone, never on which copies survive. Deleting a copy can
+  // only remove units from each θ-subset (and can only delete a whole θ), so
+  // every candidate's access falls or stays and so does the maximum. `r` is
+  // still clamped at `poolSizeCap`: beyond that many copies the pool stops
+  // being an access proxy, and failing instead killed every Commander pressure
+  // line (120 damage over 11 combats wants 8+ small bodies).
+  const thresholds = [...new Set(positive.map((m) => m.output))].sort((a, b) => b - a);
+  const ns = drawSampleSizes(format, tStar);
+  let best: { r: number; names: Set<string>; access: number } | null = null;
+  for (const theta of thresholds) {
+    const subset = positive.filter((m) => m.output >= theta);
+    const r = Math.min(poolSizeCap, Math.max(1, Math.ceil(target / (combats * theta))));
+    const guaranteed = subset.reduce((sum, m) => sum + (m.guaranteed ? m.quantity : 0), 0);
+    const K = subset.reduce((sum, m) => sum + (m.guaranteed ? 0 : m.quantity), 0);
+    const rEff = Math.max(0, r - guaranteed);
+    const access = ns.reduce((sum, n) => sum + H(N, K, n, rEff), 0) / ns.length;
+    // Ties break on the SMALLER line, then on the higher output floor, so the
+    // choice is a deterministic function of the identified set.
+    if (!best || access > best.access + 1e-12 || (access > best.access - 1e-12 && r < best.r)) {
+      best = { r, names: new Set(subset.map((m) => m.name)), access };
+    }
   }
-  return r;
+  return best;
 }
 
 // ── Recipe families ───────────────────────────────────────────────────────
@@ -928,8 +969,9 @@ function scheduleRecipe(
       `${schedule.ceiling.toFixed(1)} of ${target} expected damage by T${horizonFor(format)}`
       + `, shortfall ${schedule.shortfall[horizonFor(format)].toFixed(1)} on the most-alive opponent`);
   }
-  const r = requiredCopies(sources, target, combatsBy(tStar), poolSizeCap);
-  if (r === null) return note(audit, id, `${id}.no_positive_output`, 'every scheduled source has zero output');
+  const line = bestLine(format, N, tStar, sources, target, combatsBy(tStar), poolSizeCap);
+  if (line === null) return note(audit, id, `${id}.no_positive_output`, 'every scheduled source has zero output');
+  const r = line.r;
   // Section 10.8, unmasked at H20: `requiredCopies` sizes `r` from the
   // POSITIVE-output sources only, so the access pool behind it must hold the
   // same cards. Counting zero-output bodies in `K` let twelve free 0/0
@@ -938,8 +980,7 @@ function scheduleRecipe(
   // asked to deal damage. At T12 both sides were W = 0 and the mismatch was
   // invisible. Falls back to the whole verified list when no positive source
   // is verified, which is the pre-existing behaviour for that case.
-  const positive = new Set(sources.filter((s) => s.output > 0).map((s) => s.name));
-  const poolMembers = verified.filter((m) => positive.has(m.name));
+  const poolMembers = verified.filter((m) => line.names.has(m.name));
   const pools: RecipePool[] = [{ members: poolMembers.length > 0 ? poolMembers : verified, r }, ...extraPools];
   return {
     id, label: label(r, tStar), pools, extraCost: 0, tStar, schedule,
@@ -1132,15 +1173,16 @@ function drainRecipe(
     return note(audit, 'drain', 'drain.schedule_short',
       `${combatCeiling(format, N, sources, manaCurve, extraDraws).toFixed(1)} of ${drainTarget} drain by T${horizonFor(format)}`);
   }
-  const rPayoff = requiredCopies(sources, drainTarget, combatsBy(tStar), poolSizeCap);
-  if (rPayoff === null) return note(audit, 'drain', 'drain.no_positive_output', 'no payoff with positive output');
+  const payoffLine = bestLine(format, N, tStar, sources, drainTarget, combatsBy(tStar), poolSizeCap);
+  if (payoffLine === null) return note(audit, 'drain', 'drain.no_positive_output', 'no payoff with positive output');
+  const rPayoff = payoffLine.r;
 
   return {
     id: 'drain',
     label: `Aristocrats drain (${triggersPerTurn}/turn, ${rPayoff} payoffs)`,
     pools: [
       { members: outlets, r: 1 },
-      { members: payoffs, r: rPayoff },
+      { members: payoffs.filter((m) => payoffLine.names.has(m.name)), r: rPayoff },
       // v1.4 stage 3b (§10.4): the DEMAND is frozen at three bodies. Clamping
       // it to the copies this deck happens to hold made the requirement fall
       // when fodder was deleted or blanked, which RAISED joint access.
@@ -1285,7 +1327,8 @@ function controlRecipe(
       + `, shortfall ${schedule.shortfall[horizonFor(format)].toFixed(1)}`);
   }
   const tStar = schedule.tStar;
-  const rFinisher = requiredCopies(finisherSources, combatTarget, combatsBy(tStar), norms.poolSizeCap) ?? 1;
+  const finisherLine = bestLine(format, N, tStar, finisherSources, combatTarget, combatsBy(tStar), norms.poolSizeCap);
+  const rFinisher = finisherLine?.r ?? 1;
 
   // §9.4 JOINT access: the engine that sustains the plan and the finisher that
   // ends it are BOTH required by t*, so they enter one disjoint polynomial and
@@ -1295,7 +1338,10 @@ function controlRecipe(
   const enginePool: RecipePool = { members: engines.filter((m) => !finisherNames.has(m.name)), r: 1 };
   // Same rule: the finisher demand comes from the output schedule, never from
   // the number of finishers that happen to be identified.
-  const finisherPool: RecipePool = { members: finishers, r: rFinisher };
+  const finisherPool: RecipePool = {
+    members: finisherLine ? finishers.filter((m) => finisherLine.names.has(m.name)) : finishers,
+    r: rFinisher,
+  };
   const pools = enginePool.members.length > 0 ? [enginePool, finisherPool] : [finisherPool];
   const poly = buildDisjointAccessPolynomial(N, pools.map((pl) => ({ K: poolK(pl), r: poolR(pl) })));
   const ns = drawSampleSizes(format, tStar);

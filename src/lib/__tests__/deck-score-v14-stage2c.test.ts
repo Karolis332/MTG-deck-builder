@@ -156,8 +156,8 @@ describe('§10.9 item 2 — the frozen references', () => {
   it('pins the commander reference population and hash', () => {
     expect(commander.rows).toBe(1429);
     expect(commander.families).toBe(182);
-    expect(commander.knots.length).toBe(389);
-    expect(commander.tiedIntervals).toBe(185);
+    expect(commander.knots.length).toBe(399) // stage 3d re-freeze;
+    expect(commander.tiedIntervals).toBe(162);
     expect(commander.cohortHash).toBe('39d02d7d10c297e5e97dfdf90372b1d317762fdb30c8001635ba6df6bcf4f32c');
     expect(commander.excluded).toEqual({ legality:  241,  singleton:  18,  identity:  78,  duplicate:  20,  unresolved:  1,  structure:  11 });
   });
@@ -165,8 +165,8 @@ describe('§10.9 item 2 — the frozen references', () => {
   it('pins the brawl reference population and hash', () => {
     expect(brawl.rows).toBe(783);
     expect(brawl.families).toBe(179);
-    expect(brawl.knots.length).toBe(159);
-    expect(brawl.tiedIntervals).toBe(66);
+    expect(brawl.knots.length).toBe(208) // stage 3d re-freeze;
+    expect(brawl.tiedIntervals).toBe(70);
     expect(brawl.cohortHash).toBe('982547fe13cfac9fbe4d2f90278f2a871dfbda250ba4d41a0a44c4768e18d222');
     expect(brawl.excluded).toEqual({ legality:  335,  duplicate:  12,  singleton:  6,  unresolved:  5,  identity:  3,  structure:  2 });
   });
@@ -203,7 +203,7 @@ describe('§10.9 item 7 — the 16 anchors, graded on unrounded rank', () => {
     ['3 precon-witherbloom', commander, 22.560000000000002, 15, 40, true],
     ['4 the-cabbage-merchant', commander, 54.00, 50, 90, true],
     ['5 imotekh-the-stormlord', commander, 51.120000000000005, 40, 80, true],
-    ['6 tazri-beacon-of-unity', commander, 56.24, 35, 75, false],
+    ['6 tazri-beacon-of-unity', commander, 56.24, 35, 75, true],
     ['10 tazri-upgraded-arena', brawl, 68.32, 35, 65, true],
     ['11 kuja-genome-sorcerer-arena', brawl, 56.00, 25, 60, false],
     ['12 vivi-battery-arena', brawl, 86.16000000000001, 80, 100, true],
@@ -225,17 +225,17 @@ describe('§10.9 item 7 — the 16 anchors, graded on unrounded rank', () => {
     // Re-measured on the v1.4.0-rc2 reference (stage 3b re-cut it: the three
     // unclamped recipe demands moved the Commander and Standard knots; Brawl's
     // are byte-identical): 79.84, 24.45 -> 24.47, 99.77, 99.86, 8.34.
-    expect(rankOf(commander, 56.24)).toBeCloseTo(79.84, 2);
-    expect(rankOf(commander, 22.560000000000002)).toBeCloseTo(24.47, 2);
+    expect(rankOf(commander, 56.24)).toBeCloseTo(73.13, 2);
+    expect(rankOf(commander, 22.560000000000002)).toBeCloseTo(23.88, 2);
     expect(rankOf(commander, 92.02474226804125)).toBeCloseTo(99.77, 2);
-    expect(rankOf(brawl, 86.16000000000001)).toBeCloseTo(99.86, 2);
+    expect(rankOf(brawl, 86.16000000000001)).toBeCloseTo(99.34, 2);
     // The atom sensitivity is real: one ULP below the precon's knot is a
     // different (lower) midrank — 24.30 -> 24.35 on this reference.
-    expect(rankOf(commander, 22.56)).toBeCloseTo(24.35, 2);
-    expect(rankOf(brawl, 56.00)).toBeCloseTo(8.34, 2);
+    expect(rankOf(commander, 22.56)).toBeCloseTo(23.73, 2);
+    expect(rankOf(brawl, 56.00)).toBeCloseTo(6.22, 2);
     // Standard, newly calibrated (stage 3 R4).
-    expect(rankOf(standardRef, 72.64)).toBeCloseTo(77.64, 2);
-    expect(rankOf(standardRef, 68.08000000000001)).toBeCloseTo(66.10, 2);
+    expect(rankOf(standardRef, 72.64)).toBeCloseTo(73.02, 2);
+    expect(rankOf(standardRef, 68.08000000000001)).toBeCloseTo(55.42, 2);
   });
 });
 

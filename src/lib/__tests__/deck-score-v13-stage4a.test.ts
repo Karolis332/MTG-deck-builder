@@ -221,7 +221,7 @@ describe('stage 4a acceptance, fixture-backed', () => {
       // RE-PINNED by v1.4 stage 1d: the section 10.8 resource corrections
       // cost a pile more than they cost a real list, so these fall from
       // 20-68 (p50 60) to 20-56 (p50 45) and five now sit under 25.
-      [22, 48, 37, 46, 45, 21, 30, 51, 20, 55, 55, 23, 55, 54, 35, 24, 56, 54, 26, 45]);
+      [22, 48, 55, 46, 45, 29, 28, 55, 20, 55, 55, 31, 55, 54, 57, 22, 56, 54, 38, 51]);
     const syn = scored.map((r) => Number((r.components.find((c) => c.key === 'synergy')?.score ?? 0).toFixed(1)));
     expect(syn.filter((v) => v <= 5).length).toBe(0);
     expect(Math.min(...syn)).toBeCloseTo(76.7, 1);

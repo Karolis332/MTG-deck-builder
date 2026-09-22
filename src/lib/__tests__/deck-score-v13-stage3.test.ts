@@ -453,7 +453,7 @@ describe('stage 3 acceptance, fixture-backed', () => {
     // RE-PINNED by v1.4 stage 1d: at the T20 Commander horizon seven of the
     // ten assemble just enough output to clear the rule floor by a point or
     // two. Against the measured direction; reported, not tuned.
-    expect(scored.map((r) => r.score)).toEqual([22, 21, 21, 22, 21, 22, 21, 20, 20, 22]);
+    expect(scored.map((r) => r.score)).toEqual([22, 22, 22, 27, 22, 26, 22, 20, 20, 22]);
     expect(syn).toEqual([77.2, 100, 68.6, 74.4, 72.1, 69.8, 79.5, 84.2, 77.2, 79.5]);
     expect(syn.filter((v) => v <= 5).length).toBe(0);
   });

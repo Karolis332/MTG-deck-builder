@@ -116,8 +116,11 @@ export function computeStructure(input: StructureInput): StructureResult {
   // profile's library is a structural failure exactly like an oversized one.
   // Reserved unresolved slots count: they are real library cards whose name did
   // not resolve, never deleted copies.
-  if (commanderFamily) {
-    const requiredMain = referenceLibrarySize(input.format) - (commanderSlots === 2 ? 1 : 0);
+  // v1.4 stage 3c (§10.4): the rule is NOT commander-family only. A 60-card
+  // profile has a MINIMUM library too, and trimming a Standard list to 59 was
+  // paying +1.60 S with no size failure (stage 3b, `delete-offplan-typed`).
+  {
+    const requiredMain = referenceLibrarySize(input.format) - (commanderFamily && commanderSlots === 2 ? 1 : 0);
     const submittedMain = totalMain + reservedSlots;
     if (submittedMain < requiredMain) {
       const size = checks.find((c) => c.id === 'size');

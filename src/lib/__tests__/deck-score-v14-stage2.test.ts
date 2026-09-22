@@ -428,7 +428,7 @@ describe('v1.4 stage 2 — real-list distribution', () => {
     expect(cmd.n).toBe(200);
     expect(cmd.zero).toBe(0);
     expect(cmd.sp50).toBeCloseTo(83.7, 1);
-    expect(cmd.tp50).toBe(28);
+    expect(cmd.tp50).toBe(29) // stage 3d;
   });
 
   it('pins the Brawl prefix: no S zeros, S p50 87.1, total p50 67', () => {
@@ -439,7 +439,7 @@ describe('v1.4 stage 2 — real-list distribution', () => {
     expect(brawl.n).toBe(200);
     expect(brawl.zero).toBe(0);
     expect(brawl.sp50).toBeCloseTo(87.1, 1);
-    expect(brawl.tp50).toBe(67);
+    expect(brawl.tp50).toBe(68) // stage 3d;
   });
 });
 

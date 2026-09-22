@@ -307,7 +307,7 @@ describe('§9.1 dispatch is by FORMAT: the Standard change moves no Commander de
     // RE-PINNED by v1.4 stage 1d (section 10.8 resource corrections plus the
     // T20 Commander horizon). Piles fall: p50 60 -> 50, and four of the
     // twenty now land under 25. Measured, not fitted.
-    expect(scores).toEqual([50, 25, 51, 23, 54, 54, 49, 33, 50, 50, 28, 25, 52, 30, 51, 24, 55, 51, 26, 27]);
+    expect(scores).toEqual([50, 26, 55, 26, 54, 54, 50, 51, 54, 50, 55, 48, 57, 52, 55, 46, 55, 55, 27, 41]);
   });
 });
 
@@ -322,7 +322,7 @@ describe('§9.2 fresh matched negative controls', () => {
     // the rule floor of 20; the T20 horizon lets a matched control assemble
     // just enough output to clear it by one or two points. Against the
     // measured direction and reported as such.
-    expect(controls.map((c) => scoreDeck(c.input).score)).toEqual([22, 21, 21, 22, 21, 22, 21, 20, 20, 22]);
+    expect(controls.map((c) => scoreDeck(c.input).score)).toEqual([22, 22, 22, 27, 22, 26, 22, 20, 20, 22]);
     for (const c of controls) {
       expect(c.input.main.reduce((a, rc) => a + rc.quantity, 0)).toBe(99);
       expect(c.lands).toBeGreaterThanOrEqual(20);

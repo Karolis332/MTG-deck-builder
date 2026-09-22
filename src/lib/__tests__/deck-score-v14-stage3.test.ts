@@ -312,7 +312,7 @@ describe('§10.4 — no-benefit edits never raise S, and never move the rank by 
 
 describe('stage 3 — version, references and the retained top tail', () => {
   it('bumps SCORE_VERSION for the evaluator change', () => {
-    expect(SCORE_VERSION).toBe('1.4.0-rc2');
+    expect(SCORE_VERSION).toBe('1.4.0-rc4');
   });
 
   it('pins the re-frozen commander/brawl references (13 scorer-rule rows left)', () => {
@@ -330,8 +330,8 @@ describe('stage 3 — version, references and the retained top tail', () => {
   it('admits Standard on the DECLARED tournament-event frame (42 families >= 30)', () => {
     const standard = referenceFor('standard')!;
     expect(standard.familyFrame).toBe('tournament-event');
-    expect(standard.families).toBe(42);
-    expect(standard.rows).toBe(270);
+    expect(standard.families).toBe(40);
+    expect(standard.rows).toBe(244);
     expect(standard.knots.reduce((s, k) => s + k.mass, 0)).toBeCloseTo(1, 12);
   });
 
@@ -354,6 +354,6 @@ describe('stage 3 — version, references and the retained top tail', () => {
     }
     // measured by `bands real --piles 1000` at this version
     expect(counts.commander).toBe(0);
-    expect(counts.brawl).toBe(5);
+    expect(counts.brawl).toBe(1);
   });
 });

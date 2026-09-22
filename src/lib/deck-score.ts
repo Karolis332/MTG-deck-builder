@@ -250,7 +250,7 @@ export function scoreDeck(input: Readonly<DeckScoreInput>, tuning?: Readonly<Sco
   const worst = <T extends { score: number }>(f: (entries: DeckEntry[]) => T): T =>
     estimatorSets.map(f).reduce((a, b) => (b.score < a.score ? b : a));
 
-  const mana = worst((entries) => computeMana(format, norms, accessSlots, entries, commanderFeatures));
+  const mana = worst((entries) => computeMana(format, norms, accessSlots, entries, commanderFeatures, slots.n0 ?? accessSlots));
   const curve = worst((entries) => computeCurve(format, norms, archetype, accessSlots, entries, commanderCmc));
   const interaction = computeInteraction(format, norms, archetype, N, mainEntries);
   const advantage = computeAdvantage(format, norms, archetype, accessSlots, mainEntries);

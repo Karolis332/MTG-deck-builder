@@ -53,6 +53,9 @@ export function computeMana(
   N: number,
   mainEntries: DeckEntry[],
   commanderFeatures: CardFeature[],
+  /** The profile's reference library (§10.2 `N0`). The land REQUIREMENT scales
+   * with the submitted size; the land SURPLUS is measured against this. */
+  n0: number = N,
 ): ComponentOutput {
   const nonLand = mainEntries.filter((e) => !e.feature.isLand);
   const landEntries = mainEntries.filter((e) => e.feature.isLand);
@@ -66,14 +69,24 @@ export function computeMana(
     .reduce((s, e) => s + e.quantity, 0);
 
   const B = b60or99(format);
-  const scaledCheap = (cheapCount * B) / N;
-  const kB = karstenLands(B, avgMv, scaledCheap);
-  const Lstar = (N / B) * kB;
+  const karstenAt = (size: number): number =>
+    (size / B) * karstenLands(B, avgMv, (cheapCount * B) / size);
+  const Lstar = karstenAt(N);
+  // v1.4 stage 3c (§10.4 "add untyped"): a SHORTFALL is measured against the
+  // submitted library — a bigger deck needs more lands to hit its drops — but
+  // a SURPLUS is measured against the profile's reference library. The surplus
+  // is wasted slots, and stacking more slots beside them removes no land: a
+  // flooded 60-card Standard list (22 lands vs 16) was buying +42 landFit by
+  // padding to 70 cards, because the requirement, not the deck, had moved
+  // (`standard:1482755`, stage 3b probes). Below the reference size the two
+  // targets coincide, and the size gate has already failed the list anyway.
+  const Lsurplus = karstenAt(Math.min(n0, N));
 
   const lands = landEntries.reduce((s, e) => s + e.quantity, 0);
   const mdfcBacks = countMdfcLandBacks(toMdfcLike(mainEntries));
   const Leff = effectiveLandCount(lands, mdfcBacks);
-  const landFit = 1 - clip((Math.max(0, Math.abs(Leff - Lstar) - norms.landDeadband)) / norms.landFalloffWidth);
+  const deviation = Math.max(0, Lstar - Leff) + Math.max(0, Leff - Lsurplus);
+  const landFit = 1 - clip((Math.max(0, deviation - norms.landDeadband)) / norms.landFalloffWidth);
 
   // colorFit — memoize R(t,r) since most spells share a handful of (t,r) pairs.
   const sourcesByTurn = new Map<number, Record<string, number>>();

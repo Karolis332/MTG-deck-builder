@@ -401,6 +401,6 @@ describe('§10.8 item 6 — the W domain is frozen on this scheduler', () => {
     expect(frozen.winFamilies).toEqual([...WIN_FAMILIES].sort());
     expect(frozen.catalogSha256).toBe('21fa0be02940c884620b08cfd3cbf9558fb42abf1f7d31428c38fda167da2c6b');
     expect(frozen.combosSha256).toBe('19acb60cf6b088f831c4e8a671e8ac7e7a63da6441ca34d56c15afb8bb5d8a82');
-    expect(frozen.scheduler).toBe('v14-stage1d');
+    expect(frozen.scheduler).toBe('v14-stage3d');
   });
 });

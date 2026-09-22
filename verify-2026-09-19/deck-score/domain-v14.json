@@ -1,6 +1,6 @@
 {
   "frozenAt": "2026-09-22",
-  "scoreVersion": "1.4.0-rc2",
+  "scoreVersion": "1.4.0-rc4",
   "catalogVersion": "fdcecb38",
   "catalogSize": 14924,
   "catalogSha256": "21fa0be02940c884620b08cfd3cbf9558fb42abf1f7d31428c38fda167da2c6b",
@@ -27,5 +27,5 @@
     "spells",
     "tokens"
   ],
-  "scheduler": "v14-stage1d"
+  "scheduler": "v14-stage3d"
 }
