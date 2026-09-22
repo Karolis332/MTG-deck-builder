@@ -496,6 +496,8 @@ export interface CraftListEntry {
   /** The lowest-scored owned pick in the same role, if any exists. */
   wouldReplace?: string;
   reason: string;
+  /** Always false — craftList is by construction the unowned candidates (see the ownedQty filter below). Present for shape parity with /build's cards[]. */
+  owned: boolean;
 }
 
 export interface ScoredCandidatePoolResult {
@@ -2702,6 +2704,7 @@ export function computeCraftList(
       score,
       wouldReplace,
       reason: reasonByName.get(card.name) ?? `Highest-scored unowned ${role.replace(/_/g, ' ')} candidate`,
+      owned: false,
     });
   }
   return entries;

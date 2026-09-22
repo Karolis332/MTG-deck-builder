@@ -84,3 +84,44 @@ describe('POST /alternatives', () => {
     }
   });
 });
+
+// Round 2 (web refuter H3): `commander` must accept a bare string (one name)
+// as well as an array — both forms must exclude the commander from
+// candidates and drive the role read the same way.
+describe('POST /alternatives — commander as string or array', () => {
+  it('accepts a single commander name as a bare string', async () => {
+    const { status, body } = await alternatives({
+      format: 'commander',
+      commander: 'Krenko, Mob Boss',
+      card: 'Lightning Bolt',
+      deck: ['Lightning Bolt', 'Shock'],
+      limit: 10,
+    });
+    expect(status).toBe(200);
+    const parsed = body as { alternatives: Array<{ name: string }>; unresolved: string[] };
+    expect(parsed.alternatives.some((a) => a.name === 'Krenko, Mob Boss')).toBe(false);
+    expect(Array.isArray(parsed.unresolved)).toBe(true);
+    expect(parsed.unresolved.every((u) => typeof u === 'string')).toBe(true);
+  });
+
+  it('accepts commander as an array (partner pairs) with the same result shape', async () => {
+    const { status, body } = await alternatives({
+      format: 'commander',
+      commander: ['Krenko, Mob Boss'],
+      card: 'Lightning Bolt',
+      deck: ['Lightning Bolt', 'Shock'],
+      limit: 10,
+    });
+    expect(status).toBe(200);
+    const parsed = body as { alternatives: Array<{ name: string }> };
+    expect(parsed.alternatives.some((a) => a.name === 'Krenko, Mob Boss')).toBe(false);
+  });
+
+  it('string and array forms of the same commander produce the same candidate set', async () => {
+    const req = { format: 'commander', card: 'Lightning Bolt', deck: ['Lightning Bolt', 'Shock'], limit: 10 };
+    const asString = await alternatives({ ...req, commander: 'Krenko, Mob Boss' });
+    const asArray = await alternatives({ ...req, commander: ['Krenko, Mob Boss'] });
+    const namesOf = (r: { body: unknown }) => (r.body as { alternatives: Array<{ name: string }> }).alternatives.map((a) => a.name);
+    expect(namesOf(asString)).toEqual(namesOf(asArray));
+  });
+});
