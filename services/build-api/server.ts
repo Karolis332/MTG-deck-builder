@@ -224,6 +224,17 @@ export async function handleBuild(body: string, res: http.ServerResponse): Promi
     const commanderRows = [findCard(commanderName), partnerName ? findCard(partnerName) : undefined].filter(
       (c): c is DbCard => Boolean(c)
     );
+    // Same ownedQty source the builder used (the temp collection table this
+    // request seeded) — read before `finally` clears it. Omitted from the
+    // response entirely for non-collection builds, not just false.
+    const ownedNamesSet = ownedCards
+      ? new Set(
+          (getDb().prepare(
+            `SELECT c.name FROM collection col JOIN cards c ON col.card_id = c.id
+             WHERE col.user_id = ? AND col.quantity > 0`
+          ).all(TEMP_USER_ID) as Array<{ name: string }>).map((r) => r.name)
+        )
+      : null;
     const deckScore = scoreDeckSafely({
       format,
       main: result.cards.filter((e) => e.board === 'main'),
@@ -262,6 +273,7 @@ export async function handleBuild(body: string, res: http.ServerResponse): Promi
           image_uri_normal: card.image_uri_normal,
           image_uri_small: card.image_uri_small,
           priceUsd: card.price_usd != null ? parseFloat(card.price_usd) : null,
+          ...(ownedNamesSet ? { owned: ownedNamesSet.has(card.name) } : {}),
           category: getPrimaryCategory(
             classifyCard(card.name, card.oracle_text || '', card.type_line || '', card.cmc ?? 0)
           ),
@@ -364,9 +376,14 @@ export function handleAlternatives(body: string, res: http.ServerResponse): void
   const deckNames = Array.isArray(parsed.deck) ? (parsed.deck as unknown[]).filter((n) => typeof n === 'string').slice(0, 200) as string[] : [];
   if (!deckNames.length) return json(res, 400, { error: 'deck must be a non-empty array of card names' });
 
-  const commanderNames = Array.isArray(parsed.commander)
-    ? (parsed.commander as unknown[]).filter((n) => typeof n === 'string').slice(0, 2) as string[]
-    : [];
+  // Accepts a single commander name as a bare string, or an array (partner pairs).
+  const commanderNames = (
+    Array.isArray(parsed.commander)
+      ? (parsed.commander as unknown[]).filter((n) => typeof n === 'string')
+      : typeof parsed.commander === 'string' && parsed.commander.trim()
+        ? [parsed.commander.trim()]
+        : []
+  ).slice(0, 2) as string[];
 
   let maxPrice: number | undefined;
   if (parsed.maxPrice !== undefined) {
