@@ -19,6 +19,7 @@ import { handleIngestRoute, startIngestSchedule } from './ingest-routes';
 import { makeCardResolver, resolveDeckLines } from './resolve';
 import { deckText, gateDeck, readLocks, readOwnedCardNames } from './gate-wiring';
 import { scoreDeckSafely } from '../../src/lib/deck-score-input';
+import { findAlternatives } from '../../src/lib/card-alternatives';
 
 const PORT = Number(process.env.PORT || 8100);
 const API_KEY = process.env.BUILD_API_KEY || '';
@@ -260,6 +261,7 @@ export async function handleBuild(body: string, res: http.ServerResponse): Promi
           collector_number: card.collector_number,
           image_uri_normal: card.image_uri_normal,
           image_uri_small: card.image_uri_small,
+          priceUsd: card.price_usd != null ? parseFloat(card.price_usd) : null,
           category: getPrimaryCategory(
             classifyCard(card.name, card.oracle_text || '', card.type_line || '', card.cmc ?? 0)
           ),
@@ -334,6 +336,102 @@ export function handleAnalyze(body: string, res: http.ServerResponse): void {
     // Engine/DB exceptions carry SQL text and filesystem paths — log, never return them.
     console.error(`[build-api] analyze error for "${commanderName}":`, error instanceof Error ? error.stack || error.message : error);
     json(res, 500, { error: 'Analysis hit an internal error. Try again shortly.' });
+  }
+}
+
+const MAX_ALTERNATIVES_LIMIT = 20;
+const DEFAULT_ALTERNATIVES_LIMIT = 8;
+
+/**
+ * POST /alternatives — cheaper same-role candidates for one card in a deck
+ * context. Local scoring only (src/lib/card-alternatives.ts); no CF/EDHREC
+ * network calls, so this stays well under a second even on the VPS.
+ */
+export function handleAlternatives(body: string, res: http.ServerResponse): void {
+  let parsed: Record<string, unknown>;
+  try {
+    parsed = JSON.parse(body || '{}');
+  } catch {
+    return json(res, 400, { error: 'invalid JSON body' });
+  }
+
+  const format = typeof parsed.format === 'string' && parsed.format.trim() ? parsed.format.trim() : '';
+  if (!format) return json(res, 400, { error: 'format is required' });
+
+  const cardName = typeof parsed.card === 'string' ? parsed.card.trim() : '';
+  if (!cardName || cardName.length > 200) return json(res, 400, { error: 'card is required' });
+
+  const deckNames = Array.isArray(parsed.deck) ? (parsed.deck as unknown[]).filter((n) => typeof n === 'string').slice(0, 200) as string[] : [];
+  if (!deckNames.length) return json(res, 400, { error: 'deck must be a non-empty array of card names' });
+
+  const commanderNames = Array.isArray(parsed.commander)
+    ? (parsed.commander as unknown[]).filter((n) => typeof n === 'string').slice(0, 2) as string[]
+    : [];
+
+  let maxPrice: number | undefined;
+  if (parsed.maxPrice !== undefined) {
+    if (typeof parsed.maxPrice !== 'number' || !Number.isFinite(parsed.maxPrice) || parsed.maxPrice <= 0) {
+      return json(res, 400, { error: 'maxPrice must be a number > 0' });
+    }
+    maxPrice = parsed.maxPrice;
+  }
+
+  let limit = DEFAULT_ALTERNATIVES_LIMIT;
+  if (parsed.limit !== undefined) {
+    if (typeof parsed.limit !== 'number' || !Number.isInteger(parsed.limit) || parsed.limit < 1) {
+      return json(res, 400, { error: 'limit must be a positive integer' });
+    }
+    limit = Math.min(MAX_ALTERNATIVES_LIMIT, parsed.limit);
+  }
+
+  const ownedNames = new Set(
+    Array.isArray(parsed.ownedCards)
+      ? (parsed.ownedCards as unknown[]).filter((n) => typeof n === 'string') as string[]
+      : []
+  );
+
+  try {
+    const findCard = makeCardResolver();
+    const unresolved: string[] = [];
+
+    const commanders = commanderNames
+      .map((n) => findCard(n))
+      .filter((c): c is DbCard => {
+        if (!c) return false;
+        return true;
+      });
+    for (let i = 0; i < commanderNames.length; i++) {
+      if (!findCard(commanderNames[i])) unresolved.push(commanderNames[i]);
+    }
+
+    const deckCards: DbCard[] = [];
+    for (const name of deckNames) {
+      const row = findCard(name);
+      if (row) deckCards.push(row);
+      else unresolved.push(name);
+    }
+
+    const cardRow = findCard(cardName);
+    if (!cardRow) return json(res, 404, { error: `card not found: ${cardName}` });
+
+    const inDeck = deckNames.some((n) => n.trim().toLowerCase() === cardName.toLowerCase());
+    if (!inDeck) return json(res, 404, { error: 'card not in deck' });
+
+    const result = findAlternatives({
+      format,
+      commanders,
+      deckCards,
+      card: cardRow,
+      maxPrice,
+      limit,
+      ownedNames,
+    });
+
+    json(res, 200, { ...result, unresolved });
+  } catch (error) {
+    const message = error instanceof Error ? error.message : 'alternatives lookup failed';
+    console.error(`[build-api] alternatives error for "${cardName}":`, message);
+    json(res, 500, { error: message });
   }
 }
 
@@ -470,6 +568,19 @@ const server = http.createServer((req, res) => {
     });
     req.on('close', () => { activeOptimizes = Math.max(0, activeOptimizes - 1); });
     req.on('end', () => handleOptimize(body, res));
+    return;
+  }
+
+  if (req.method === 'POST' && url === '/alternatives') {
+    if (API_KEY && req.headers['x-api-key'] !== API_KEY) {
+      return json(res, 401, { error: 'unauthorized' });
+    }
+    let body = '';
+    req.on('data', (chunk) => {
+      body += chunk;
+      if (body.length > 1_500_000) req.destroy();
+    });
+    req.on('end', () => handleAlternatives(body, res));
     return;
   }
 
