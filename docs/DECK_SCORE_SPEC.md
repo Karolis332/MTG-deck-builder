@@ -749,3 +749,130 @@ Require **>=14/16** table results, including all three structural outcomes and t
 Web and desktop show **“Deck rank” / percentile as the headline**, the reference format/date and provisional status beside it, and the absolute M/C/I/A/W/S diagnostics plus an expandable absolute total and selected closing trace. Explain, for example, that a T14 finish with low joint access limits the absolute closing measure; do not translate percentile into a chance to win. Return explicit headline kind, absolute total, rank, score/reference versions and evidence state so callers cannot confuse an old absolute 80 with a new p80. Compare edits only within the same profile/version/reference. Never badge a high-ranked synthetic or unreviewed list as cEDH, and never call a low-ranked casual list a pile merely from the number.
 
 The rank reference, new pile-tail counts, rank anchor results, complete gaming maxima and fresh holdout/Standard comparisons are **unmeasured at this review**. The reports justify changing the contract and keeping honest mechanics; they do not establish that the resulting release gates pass.
+
+### 10.10 W schedule — the ledger as a choice
+
+Design review, 2026-09-22, branch `auto-improve`. Review began at HEAD `53bc39f`; the concurrent log advanced to `1f8c7c9` during reading. Evidence, in order: §10.8, §10.9 (especially items 5–7), then harness `~/.claude/harness/runs/deck-score-2026-09-19/v14-stage3d-report.md` and `v14-stage3e-report.md`. Stages 3c/3d are committed at `eb9e575`; the reported rc5/stage-3e evaluator is an **uncommitted, unaccepted measurement**, not this decision's implementation. This review runs no scorer or tests and does not inspect or change the concurrent evaluator.
+
+**Decision: optimise the choices of the entire closing ledger; retain actual-N dilution, retain the .25 affordability band at a budget independent of competing wants, and retain the anchor gates unchanged (option a).** Implement and measure this as stage 3g. A deployment-only optimum cannot repair mandatory spending elsewhere in the same ledger. The acceptance numbers below are requirements, not measured results.
+
+**1. Optional actions; compulsory consequences.** Every discretionary debit inside a closing line is a choice: ritual casting, pump/burst spells, engine deployment and use, equip/animate/sacrifice activations, body deployment, and commander re-casting. Availability is an upper bound on use; `quantity * seenBy(N,t)` is never an instruction to spend that many copies. A zero-use option spends nothing, produces nothing, and imposes no upkeep. In particular, remove the policy `deployBudget = produced - expectedSpellSpend - expectedUpkeepSpend` when those expectations describe unchosen actions.
+
+An action is chosen only as part of a feasible continuation with non-negative marginal value toward `Phi`, accounting for the damage displaced by its mana/card/tap/sacrifice costs and its later liabilities. Compare with omitting it; an extra optional spell must not force a later finish. Positive printed output alone is not positive marginal value. A zero-direct-output prerequisite may be useful as part of a complete paid package; an isolated zero-value expenditure loses the tie to doing nothing.
+
+The only compulsory debits are consequences imposed by the rules on the line's own choices. A chosen commander re-cast pays its actual tax; a permanent the line deployed incurs its actual upkeep obligations. An optional upkeep payment remains a choice with the printed non-payment consequence. Include unavoidable future liabilities when valuing deployment; a line cannot retain the permanent/output while quietly skipping its cost. Do not levy upkeep on the expected number of copies merely seen. If a chosen state cannot meet a compulsory consequence, apply its actual rules outcome or reject that continuation.
+
+**2. Exact turn problem, with fractional knapsack where it applies.** Freeze the profile planning horizon at Commander 20 and Brawl/Standard 12. A Commander H12 diagnostic truncates the same H20-planned trace; it does not change its priorities. Thus §10.8's identical T1–T12 prefixes remain required. Freeze the recipe/source choice set and typed cost/output bins before allocation. Keep the existing bounded line/source enumeration (at most `poolSizeCap <= 10` sources per candidate and at most 20 turns); do not change a source's coefficient or eject an existing alternative just because another option's want shrank.
+
+At entry to turn t, snapshot completed deployments/uses, live permanents, consumed cards, legal targets, and the current resources. For a newly drawn physical copy:
+
+```text
+available_i(N,t) = quantity_i * seenBy(N,t)
+want_i(N,t | state) = max(0, available_i(N,t) - paid_i(state))
+B_entry = mana actually produced by this state's paid sources
+          - compulsory costs due from this state's previous choices
+```
+
+Command-zone availability remains guaranteed when that card is actually there; a re-cast has its own event and taxed cost. Repeat activations use bounds from live paid sources, remaining legal uses, victims and targets, not the once-only draw formula. Copies consumed by spells/rituals cannot reappear without a separately paid typed path. No optional spell, engine or activation is subtracted in advance.
+
+An item is one typed action or a complete compatible package, with a full casting/activation cost, its physical-copy/resource use, and a causal damage-output vector by turn and opponent. Use the same lower output bounds and upper cost bounds as access/recipe admission. Include lost attacks and sacrificed output, not only gains. For a fixed prerequisite/interaction branch, define:
+
+```text
+deltaD_i,o(s) = incremental damage on turn s from one selected unit
+               relative to omitting it, with all required payments accounted for
+v_i(t) = sum_{s=t..H} (d_p(s)/d_p(t)) * sum_o deltaD_i,o(s)
+```
+
+This is the common currency: damage contribution through the fixed horizon, discounted by the existing decay. A body contributes its legal future attacks; an engine contributes only typed future output after deployment, sickness and required upkeep/activation payments; a pump contributes damage on its actual eligible hosts/attacks. Projected draws cannot become free spells or an unlimited cantrip chain. Unknown output supplies no coefficient. Keep damage allocation explicit; the allocation must still satisfy every opponent's target, and overkill cannot be reassigned.
+
+A ritual's resource value is its **net mana this turn**, `gross - castingCost`, converted to damage by what that mana can buy in the same turn problem. It is not assigned one damage per mana, and it is not automatically cast first to its maximum want. Its cast-trigger damage, if any, is counted once. Pay its casting cost before crediting its gross output; unspent mana expires. A ritual with no useful feasible spender can be omitted. The implementation may use the downstream knapsack's marginal damage-per-mana to price a ritual, but must compare the resulting complete allocation with the no-ritual allocation.
+
+For fixed chosen ritual amounts r and their legal resolution order, freeze the competing actions' budget **before** their optional debits:
+
+```text
+B_prefix_j = B_entry + sum_{k<j} (gross_k - cost_k) * r_k
+0 <= r_j <= min(want_j, affordable(B_prefix_j, cost_j))
+// Pay each selected cast at this prefix before crediting its own gross output.
+B_branch(r) = B_entry + sum_j (gross_j - cost_j) * r_j
+V_ritual(r) = sum_j v_ritual,j * r_j  // discounted typed cast-trigger damage only
+u_i = min(want_i, affordable(B_branch(r), cost_i))
+
+V_branch(r) = V_ritual(r) + max_x sum_i v_i * x_i
+           subject to 0 <= x_i <= u_i,
+                      sum_i cost_i * x_i <= B_branch(r)
+```
+
+For independent additive items without binding finish constraints this is exactly fractional knapsack: omit items with `v_i<=0`, process the others by descending `v_i/cost_i`, with a stable canonical action-ID tie-break, and take `min(u_i, remainingMana/cost_i)`. Resolve positive-value zero-cost items under their finite resource bounds first. The affordability cap is never recomputed against that changing residual. Body deployment, engines, pumps and activations compete in this **one value order**, not mandatory category prepasses. Update their shared ledger exactly once.
+
+Ritual amounts are optimisation variables, not `r=want`. Retain the empty ritual branch. When costs/outputs interact, use explicit resource/prerequisite constraints or mutually exclusive typed branches: pump use cannot exceed eligible host/attack capacity; equipment damage requires paid attachment; sacrifice consumes a paid victim; tap/colour/card resources cannot be spent twice; incompatible modes share their physical-copy bound. These constraints and output coefficients are fixed by mechanics and the entry state, not recomputed from how many unwanted spells happen to be present.
+
+Future output also carries an explicit reserved-payment ledger. For every projected turn s, enforce `existingDue(s) + sum_a futureCost_a(s)*use_a <= existingProduction(s) + sum_a futureCredit_a(s)*use_a`, with causal colour/tap/card constraints and physical-copy availability at that deadline. Include upkeep and the future activations that produce the claimed output. These reservations belong only to selected actions; setting their use to zero removes their future costs and output together. Record and recheck them when s arrives. A damage coefficient alone cannot fund its future payments.
+
+The implementation choice is a bounded **piecewise-linear turn allocation** with the exact knapsack above as its separable fast path. Jointly optimise r and x under those constraints and causal mana prefixes. Split `affordable(B_branch(r), cost)` at its two stated breakpoints when the ritual choice changes B; each fixed mode/segment is a linear subproblem. Maximise over the feasible branches, including omission. A fixed ritual prepass or a density sort with unresolved host/shared-copy constraints is not that optimum. This specifies the feasible problem without claiming that a cross-turn subset DP has only `20 * 2^10` states: quantities, paid history and resources also matter. Performance remains a measured gate.
+
+**Finish has priority over terminal output.** A scalar damage-by-H objective alone can prefer a slow engine and delay a close. Within each turn's declared paid projection, test candidate completion turns tau=t..H in ascending order, across all feasible branches:
+
+```text
+D_state,o(tau) + D_ritual,o(tau; r)
+               + sum_i projectedD_i,o(tau) * x_i >= lifeTarget_o
+                                                     for EVERY opponent o
+```
+
+`D_ritual` is the branch's typed cast-trigger damage through tau; its cost has already been paid in the ritual ledger and is not debited again. Use the corresponding exact predicate for same-commander damage or verified alternative wins. `projectedD` includes only causal output with feasible payments; an unchosen future spell cannot appear in it. Choose the first feasible projected finish, then maximise the discounted contribution subject to that finish, then minimise spending, then break ties by canonical action ID. If none finishes, maximise the non-negative feasible contribution, including the omit-all optional allocation. Finish constraints can require the coupled solve even when the unconstrained problem was a knapsack. Recheck `Phi` on the realised ledger; projection alone earns no W. Keep §10.8's ordinary utility maximum and control first-actual-finish rule when valuing the resulting trace.
+
+Carry `paid` across turns exactly as completed-copy/consumed-copy expectation, and carry live permanents with their chosen liabilities. For each newly selected fraction x, debit `cost*x` entirely in that turn and record the complete cast/deployment represented by x. Never carry an unpaid cost balance or give output before payment. This is an optimum of the stated **turn projection**, not a proof of globally earliest play over every possible future hand.
+
+**3. What is proved, and what must be measured.** At identical entry state, write the feasible choices as `F(w,B)`, with w including the current and projected physical-availability bounds. Constraints, coefficients, branches and resource accounting are independent of wants except for their upper bounds. An added option leaves every old solution feasible by setting its new use to zero; no mandatory debit is introduced. The optimum cannot get worse. Pointwise-smaller wants and no larger external mana budget give:
+
+```text
+w' <= w and B' <= B  =>  F(w',B') is a subset of F(w,B)
+                       => max feasible contribution cannot increase
+                       => a previously infeasible projected finish cannot become feasible
+```
+
+A selected ritual's credit or a selected permanent's upkeep is inside the choice constraints, not a hidden want-dependent external budget. The same ritual/deployment choice remains available in the larger feasible set. This is why shrinking a spell's availability can no longer manufacture deployment mana.
+
+These statements concern optimal objective values and finish feasibility, not coordinatewise changes in the selected allocation; the finish-first objective is compared lexicographically. This proof is conditional on the same state and choice set. Cross-turn `paid` carry changes states and later marginal output; recipe/pool selection, finite draws, compulsory upkeep of previously chosen permanents, and access/composition add further conditions. **Full-schedule W, first finish and whole-score monotonicity remain measured properties**, not consequences of the one-turn knapsack proof. An observed violation fails acceptance; do not suppress it with rounding, a cached minimum, a score clamp, or a changed rank reference.
+
+**4. Dilution and affordability decisions.** Keep actual library size N in both the expected schedule and `J(n(t))`; do not normalise wants at N0. At the same causal draw deadline, adding unknown slots preserves physical quantities and weakly decreases every library-copy `quantity * seenBy(N,t)`; command-zone availability is unchanged. Unknown slots provide no resource, action or evidence improvement. This tightens choice bounds and weakly lowers access. The goldfish clock models the output available by a turn, while J models access to the complete required pool combination; these remain separate proxies, not independent probabilities to multiply a second time. Fixing wants at N0 would let a larger library retain an undiluted expected deployment/trigger clock. That is not the intended model.
+
+The local dilution argument assumes produced resources do not grow under the same dilution and entry state; audit that premise too. Direct deletion changes N in the other direction and may improve access to surviving cards. It is not automatically a no-benefit edit: retain §10.9's predeclared rule-repair/obstruction/legitimate Standard-trim distinctions and fixed-slot counterparts. Do not claim the local option-removal theorem proves that every arbitrary smaller deck must score lower.
+
+Retain `AFFORD_BAND = .25`, frozen rather than swept to recover anchors:
+
+```text
+affordable(B,c), c > 0:
+    0                         if B <= .75*c
+    (B - .75*c) / (.25*c)      if .75*c < B < c
+    B/c                       if B >= c
+```
+
+For the first copy this is the existing proxy for the turn's available mana covering one whole cast; above c it also bounds multiple-copy throughput. B means the turn/branch-entry mana left after actual compulsory obligations and chosen causal ritual resolution, **before competing optional items**, not a residual after earlier items. Zero-cost actions use finite availability/resource bounds instead of division.
+
+The band is a declared modelling assumption, not a calibrated mana-distribution estimate. Keep it because removing it would allow unrestricted fractional purchases when the turn cannot plausibly fund a whole cast and would be a separate evaluator change. The steep ramp no longer buys extra bodies with mana freed by a previous optional want: all competing boxes are fixed together and the shared cost constraint still applies. A fraction denotes expected completed whole casts in that turn, never a fraction of a card paid over several turns. Preserve §10.8's atomic-payment, one-shot-ritual and summoning-sickness invariants. The scalar proxy alone is not a proof of a jointly realisable hand distribution; no trace may present fractional prepayment as an executable cast.
+
+**5. Anchor decision (a): the bands stand; release remains blocked.** Keep every §10.9 item-7 band and selector, **>=14/16**, the legal **>=11/13** subset, and all eight mandatory results: Meren powerhouse, both Cabbages, untouched Witherbloom, Balloon Con, and all three structural fixtures. No anchor table changes.
+
+The reported rc5 outcome is **11/16 FAIL, 8/13 legal FAIL**, with all eight mandatory results passing. #6 Tazri Beacon p79.88 is OUT HIGH of p35–75; #10 upgraded Tazri p27.57 is OUT LOW of p35–65; #15 Standard p61.08 misses p65–95; #16 p50.13 misses p55–90; #13 remains uncalibrated and cannot count as a pass. Kuja now passes. These are the report's measurements, not a new evaluation.
+
+Optimising previously stranded mana is a declared evaluator change and therefore invalidates old S-domain/reference artefacts under §10.9 item 2. That requirement does **not** supply independent evidence for new expected ranks. There is no independent reviewed cohort here to justify centring bands on rc5, widening them, or dropping non-mandatory fixtures from the gate. Re-freeze the affected artefacts mechanically, keep the bands, and report stage 3g against them. If honest corrected mechanics still miss them, release stays blocked pending a separately supported decision; never restore a defect to recover a fixture.
+
+The reported 9→6/200 piles below absolute 25 is a distribution change, not the current pile-release test: §10.9 item 4 already retired that threshold. Its construction-specific top-tail gates remain binding and unverified by this count.
+
+**6. Stage-3g acceptance and re-freeze.** Pin the actual implementation revision and inputs before measuring; the concurrently edited rc5 file cannot serve as an immutable baseline. Preserve the rc4/rc5 reports and logs for attribution. Do not choose norms, affordability width, source order, horizon or bands after inspecting stage-3g outcomes.
+
+| Check | Required stage-3g evidence |
+|---|---|
+| Shared-ledger mechanics | Audit every debit/credit category in item 1. Publish chosen and skipped actions, availability/paid bounds, branch-entry budgets, affordability boxes, actual costs/gross credits, compulsory liabilities, damage by opponent, first finish and selected utility turn. Zero double spends, ritual reuse, unpaid output, future borrowing or fabricated/missing-outlet finishes. Reproduce the named dilution/blank traces and unchanged H12/H20 prefixes. |
+| Full gaming matrix | Commander, Brawl and Standard, all applicable direct and fixed-slot probes at **k=1/5/10**, including **add-unknown-slots**: **0 violating lists on every graded row**, on retained real strides and fresh grouped holdouts. Use §10.9 item 5: no-benefit ΔS/ΔT_abs <=1e-6; applicable ΔW<=1e-6; unrounded/displayed rank gains <=1. Metadata/representation exact invariants and original quota **3/3** remain binding. Publish complete counts/IDs and full-precision maxima; an empty or unavailable row is unverified, not a pass. |
+| Delete-one / blank-one property | **200 predeclared lists per profile**, the original seeded delete-one-random-nonland and blank-one-random-nonland arms (**400 edits/profile**): **0 upward W/S/T_abs/rank violations** under the same no-benefit bounds. Freeze seed, IDs and edit classification before opening results; publish every result, including direct-size and legal fixed-slot counterparts, rule failures and predeclared legitimate trims graded separately under §10.9. The fixed-N blank arm tests option removal. Do not narrow the sample to inert deletions, substitute the earlier 25-list run, silently discard a gain, or let an invalid-size cap hide it. |
+| cEDH | Existing **30**: rank **p10>=95 / p50>=98**, **W>0 on 30/30**, with paid executable traces; both formerly missing-line decks and Balloon Con remain >=p95. Report resource-correction deltas separately from **0/30 horizon-only W/T_abs changes**. Keep the independent >=30-list/>=10-family cEDH holdout gate. |
+| Anchors | Unchanged table: **>=14/16**, legal **>=11/13**, **all eight mandatory**. Report every row including #13's uncalibrated state. The rc5 11/16 is FAIL, not an accepted baseline for re-pinning a pass. |
+| Remaining release evidence | Retain §10.9's independent precon, Standard W/L **X=10**, >=90% reviewed-positive, representative holdout, W-evaluability and S gates. Retained/fresh ctrl93 and ctrlmatch each require **<=20/200 and <=100/1,000 ranks >=95**, separately per profile. Missing cohorts or unmeasured gates remain OPEN. |
+| Runtime and implementation checks | Isolated scoring **p50<20 ms** on the reference desktop over real eligible strides/holdouts; report p90/p99 and cold calls with no concurrent debugger/scorer contention. One 13.9 ms cEDH fixture is not a population median. Existing type/lint/test and ledger-invariant checks must pass; distinguish stale numeric expectations from invariant/gate failures before any re-pin. |
+
+Regrade using the written unrounded bounds, not the old probe printer's labels: rc5's Standard k=5/10 ΔT_abs .88/.96 violate the no-benefit 1e-6 bound even where the report printed zero total violators; its seven rank violators at each k also remain failures. Commander/Brawl had no rc4 probe baseline, so do not claim every rc5 residual was newly caused by stage 3e.
+
+Freeze in this order after the ledger mechanics are implemented: (1) score/scheduler/recipe/catalogue versions and W domain, including candidate selection, horizon/valuation policy, .25 affordability and tie rules; (2) re-evaluate affected S useful mass, closing-package admission, role bands, training-only p80 and null diagnostics, even if constants do not move; (3) recompute every eligible training total through `scoreDeckSafely` and rebuild each affected profile's full-precision family-weighted CDF. Preserve paired IDs, family splits, exclusions and all row denominators; freeze input, evaluator, domain, S and reference hashes. Require `bands verify` and reference reproduction to have **0 mismatches**.
+
+Then run the complete acceptance matrix against that same frozen evaluator/S/reference pair, followed by untouched grouped/chronological cohorts and independent refutation. Keep before/after W/S/T_abs/rank distributions and traces; do not mix versions in edit comparisons. Any further evaluator correction restarts the affected freeze and requires replacement untouched validation where results were already inspected. No stage-3g acceptance, calibration or release pass is asserted by this design.
