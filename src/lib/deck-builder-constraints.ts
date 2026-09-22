@@ -281,6 +281,15 @@ export const ARCHETYPE_PAYOFFS: Record<SynergyCategory, Set<string>> = {
     'kari zev\'s expertise', 'bloodsworn steward',
   ]),
 
+  // 2026-09-22: cast-from-anywhere-other-than-hand payoffs (impulse draw,
+  // flashback, foretell, graveyard casting) — see commander-synergy.ts's
+  // alt_zone_cast category (Spider-Man 2099).
+  alt_zone_cast: new Set([
+    'light up the stage', 'experimental frenzy', 'outpost siege',
+    'valakut exploration', 'through the breach', 'behold the multiverse',
+    'silumgar\'s scorn', 'radha\'s firebrand', 'commit // memory',
+  ]),
+
   exile_enter: new Set([
     'flickerwisp', 'restoration angel', 'eldrazi displacer',
     'conjurer\'s closet', 'ghostway', 'teferi\'s protection',

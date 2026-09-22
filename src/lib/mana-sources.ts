@@ -102,17 +102,33 @@ export function isRestrictedProducer(oracleText: string | null | undefined): boo
  * True when a land's COLORED/any-color production is gated so it isn't a
  * turn-after-turn fixing source: Mirrex ("activate only if this land entered
  * this turn"), Nykthos (devotion), Baxter Building / Spire of Industry
- * ("activate only if you control ..."). Its colorless {C} may still be free,
- * but it should not count as reliable rainbow fixing.
+ * ("activate only if you control ..."). Also gated: a costed activation
+ * (Conduit Pylons "{1}, {T}: Add one mana of any color", Cascading Cataracts
+ * "{5}, {T}: ...") or an X-scaled amount (Baldur's Gate "Add X mana of any
+ * one color") — paying extra mana (or a variable amount) for one land's worth
+ * of fixing isn't the same free, reliable source as a {T}-only rainbow land
+ * (City of Brass, Mana Confluence, Command Tower, Exotic Orchard). Its
+ * colorless {C} may still be free, but it should not count as reliable
+ * rainbow fixing.
  */
 export function isConditionalColoredProducer(card: ManaSourceCard): boolean {
   const t = (card.oracle_text || '').toLowerCase();
   if (!t) return false;
-  const makesColor = /add one mana of any color|add an amount of .* mana|add .*\{[wubrg]\}/.test(t);
+  const makesColor = /add (?:one|x|five|\d+) mana of any (?:one )?color|add an amount of .* mana|add .*\{[wubrg]\}|any combination of colors/.test(t);
   if (!makesColor) return false;
   if (/activated? only if/.test(t)) return true;
   if (/entered (?:the battlefield )?this turn/.test(t)) return true;
   if (/devotion/.test(t)) return true;
+  // Costed or X-scaled any-color activation: look at each ability line's
+  // cost (before the ':') for a mana symbol other than a bare {T}, or an
+  // "X mana" amount, on a line that produces any color.
+  for (const line of t.split('\n')) {
+    if (!/add .*(?:any (?:one )?color|any combination of colors)/.test(line)) continue;
+    const costPart = line.split(':')[0];
+    const costedActivation = /\{(?!t\})[^}]*\}/.test(costPart);
+    const xScaled = /add x mana/.test(line);
+    if (costedActivation || xScaled) return true;
+  }
   return false;
 }
 
