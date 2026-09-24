@@ -2027,6 +2027,9 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
       ).length;
       const synergyCandidates = scored.filter(({ card }) => {
         if (pickedNames.has(card.name)) return false;
+        // The pool holds unowned cards in collection mode (craft list); an
+        // unpickable candidate would still displace a pick below.
+        if (getMaxQty(card) <= 0) return false;
         // Plain lands never belong in spell slots; modal land-backs are budgeted.
         if ((card.type_line || '').split('//')[0].includes('Land')) return false;
         if (isLandBackDfc(card) && mdfcLandBacksPicked >= MAX_MDFC_IN_SPELLS) return false;
