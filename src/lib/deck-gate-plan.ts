@@ -54,7 +54,8 @@ const CATEGORY_NOUNS: Record<string, string[]> = {
   spell_cast: ['whenever you cast', 'copy that spell', 'copy target', 'spells you cast cost'],
   storm: ['whenever you cast', 'copy that spell'],
   counters: ['+1/+1 counter'],
-  creature_dies: ['creature you control dies', 'sacrifice a creature'],
+  // ' dies' (leading space) catches death triggers — fodder is what a sacrifice commander eats.
+  creature_dies: ['creature you control dies', 'sacrifice a creature', 'sacrifice another creature', ' dies'],
   creature_etb: ['enters the battlefield'],
   attack_trigger: ['additional combat phase', 'extra combat', 'untap all creatures you control'],
   artifact_synergy: ['artifacts you control', 'artifact you control'],

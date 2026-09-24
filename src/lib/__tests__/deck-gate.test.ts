@@ -13,6 +13,7 @@ vi.mock('@/lib/db', () => ({ getDb: () => testDb }));
 vi.mock('../db', () => ({ getDb: () => testDb }));
 
 import { gateDeck, parseDecklist, type GateVerdict } from '../deck-gate';
+import { deriveCondition, interacts, type PlanCard } from '../deck-gate-plan';
 
 const list = (f: string) => fs.readFileSync(path.join(FIX, `${f}.txt`), 'utf8');
 const check = (v: GateVerdict, id: string) => {
@@ -227,5 +228,27 @@ describe('gateDeck — Alchemy names', () => {
     const v = gateDeck(list('emperor-v5'), { format: 'brawl' });
     expect(check(v, 'legality').status).toBe('pass');
     expect(v.unresolved).toEqual([]);
+  });
+});
+
+describe('plan nouns — sacrifice commanders (Dina, Essence Brewer 2026-09-24)', () => {
+  const dina = deriveCondition(
+    'Whenever you sacrifice a creature, draw a card. This ability triggers only once each turn.\n{2}, {T}, Sacrifice another creature: You gain X life and put X +1/+1 counters on target creature you control, where X is the sacrificed creature\'s power.',
+    'Legendary Creature — Dryad Druid',
+    ['B', 'G'],
+    '{1}{B}{G}',
+  );
+  const card = (oracleText: string): PlanCard => ({ name: 'x', cmc: 2, typeLine: 'Creature', oracleText, quantity: 1 });
+
+  it('counts an outlet worded "sacrifice another creature"', () => {
+    expect(interacts(card('Sacrifice another creature: Scry 1.'), dina)).toBe(true);
+  });
+
+  it('counts fodder with a death trigger', () => {
+    expect(interacts(card('When this creature dies, draw a card.'), dina)).toBe(true);
+  });
+
+  it('still ignores a card that never touches the plan', () => {
+    expect(interacts(card('Destroy target artifact.'), dina)).toBe(false);
   });
 });
