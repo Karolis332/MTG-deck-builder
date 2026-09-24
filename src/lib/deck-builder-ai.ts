@@ -2449,7 +2449,8 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
   let bracketReport: BuildBracketReport;
   if (isCommander && options.bracket != null) {
     const bt = applyBracketTarget(
-      finalCards, poolResult.pool, options.bracket, commanderCard?.oracle_text || undefined, commanderNames
+      finalCards, poolResult.pool, options.bracket, commanderCard?.oracle_text || undefined, commanderNames,
+      (card) => getMaxQty(card) > 0,
     );
     finalCards = bt.cards;
     bracketReport = bt.result;
@@ -2593,6 +2594,8 @@ export function applyBracketTarget(
   target: 1 | 2 | 3 | 4 | 5,
   commanderOracle: string | undefined,
   commanderNames: string[],
+  // Collection builds: the pool holds unowned (craft-list) cards too.
+  canPick: (card: DbCard) => boolean = () => true,
 ): { cards: Array<{ card: DbCard; quantity: number; board: 'main' | 'sideboard' }>; result: BuildBracketReport } {
   const cards = picked.map((p) => ({ ...p }));
   const swapped: Array<{ out: string; in: string; category: string }> = [];
@@ -2625,7 +2628,7 @@ export function applyBracketTarget(
     for (const off of toSwap) {
       const role = primaryRole(off.card);
       const replacement = pool
-        .filter((p) => !inDeck.has(p.card.name) && !isLand(p.card) && !bracketOffenseCategory(p.card) && primaryRole(p.card) === role)
+        .filter((p) => !inDeck.has(p.card.name) && !isLand(p.card) && !bracketOffenseCategory(p.card) && primaryRole(p.card) === role && canPick(p.card))
         .sort((a, b) => b.score - a.score)[0];
       if (!replacement) continue; // no safe candidate — result reported honestly below
       const idx = cards.indexOf(off);

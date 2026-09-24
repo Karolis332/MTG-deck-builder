@@ -43,12 +43,12 @@ describe('autoBuildDeck collection mode — synergy minimums never swap in unown
     const legal = JSON.stringify({ commander: 'legal' });
     const insert = d.prepare(`
       INSERT INTO cards (id, oracle_id, name, cmc, mana_cost, type_line, oracle_text, color_identity, colors, legalities,
-                         set_code, set_name, collector_number, rarity, edhrec_rank)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'tst', 'Test Set', '1', 'common', ?)
+                         set_code, set_name, collector_number, rarity, edhrec_rank, game_changer)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'tst', 'Test Set', '1', 'common', ?, ?)
     `);
-    const add = (name: string, cmc: number, cost: string, type: string, text: string, ci: string[], isOwned: boolean) => {
+    const add = (name: string, cmc: number, cost: string, type: string, text: string, ci: string[], isOwned: boolean, gameChanger = 0) => {
       const id = name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-      insert.run(id, `o-${id}`, name, cmc, cost, type, text, JSON.stringify(ci), JSON.stringify(ci), legal, 1000);
+      insert.run(id, `o-${id}`, name, cmc, cost, type, text, JSON.stringify(ci), JSON.stringify(ci), legal, 1000, gameChanger);
       if (isOwned) owned.add(name);
     };
 
@@ -59,6 +59,10 @@ describe('autoBuildDeck collection mode — synergy minimums never swap in unown
     for (let i = 1; i <= 18; i++) add(`Test Insight ${i}`, 3, '{2}{B}', 'Sorcery', 'Draw two cards.', ['B'], true);
     for (let i = 1; i <= 18; i++) add(`Test Doom ${i}`, 2, '{1}{B}', 'Instant', 'Destroy target creature.', ['B'], true);
     for (let i = 1; i <= 4; i++) add(`Test Wrath ${i}`, 4, '{2}{W}{W}', 'Sorcery', 'Destroy all creatures.', ['W'], true);
+    // Owned game changers (5 > the bracket-3 cap of 3) and their only same-role
+    // replacements, all unowned.
+    for (let i = 1; i <= 5; i++) add(`Test Changer ${i}`, 2, '{1}{B}', 'Sorcery', 'Draw two cards.', ['B'], true, 1);
+    for (let i = 1; i <= 5; i++) add(`Test Library ${i}`, 3, '{2}{B}', 'Sorcery', 'Draw two cards.', ['B'], false);
     // Unowned: every one matches the commander's lifegain/graveyard minimums.
     for (let i = 1; i <= 40; i++) {
       add(`Test Lifebinder ${i}`, 2, '{1}{W}', 'Creature — Human Cleric', 'Lifelink\nWhen this creature enters, you gain 3 life and return target creature card from your graveyard to your hand.', ['W'], false);
@@ -85,5 +89,15 @@ describe('autoBuildDeck collection mode — synergy minimums never swap in unown
     expect(main.filter((e) => !owned.has(e.card.name) && !/^Basic Land/.test(e.card.type_line || ''))).toEqual([]);
     // 46 owned spells in the fixture; before the fix the swap drained them all.
     expect(nonland.length).toBeGreaterThanOrEqual(40);
+  }, 60_000);
+
+  it('bracket 3 never swaps an unowned card in for a surplus game changer', async () => {
+    const r = await builder.autoBuildDeck({
+      format: 'commander', colors: [], commanderName: 'Rodolf Duskbringer', useCollection: true, userId: UID, bracket: 3,
+    });
+    const main = r.cards.filter((e) => e.board === 'main');
+    expect(main.filter((e) => !owned.has(e.card.name) && !/^Basic Land/.test(e.card.type_line || ''))).toEqual([]);
+    // The scenario is real: > 3 game changers reached the target step.
+    expect(main.filter((e) => e.card.name.startsWith('Test Changer')).length).toBeGreaterThan(3);
   }, 60_000);
 });
