@@ -22,7 +22,8 @@ import {
 import { analyzeCommanderForBuild } from './commander-analysis';
 import type { ArsenalCard } from './commander-analysis';
 import { classifyCard, getPrimaryCategory, isDrawEngine, isBoardWipe } from './card-classifier';
-import { isTribeCreature } from './card-relevance';
+import { isTribeCreature, narrowTutorTarget, countTargets, colorlessPipCount, isColorlessSource, isMonoColourDeadFixer } from './card-relevance';
+import type { RelevanceCard } from './card-relevance';
 import { parseBuildHints } from './build-hints';
 import type { ParsedBuildHints } from './build-hints';
 import { auditDeck } from './deck-auditor';
@@ -482,6 +483,8 @@ export interface BuildResult {
   price?: BuildPriceReport;
   /** Bracket target accounting. Always populated by autoBuildDeck — see `price`. */
   bracket?: BuildBracketReport;
+  /** Dead-card pass: narrow tutors, uncastable {C} costs, mono dead fixers swapped out. Always populated. */
+  deadCardsReplaced?: Array<{ out: string; in: string; reason: string }>;
 }
 
 /** One `BuildResult.craftList` entry — see `computeCraftList` below. */
@@ -687,13 +690,22 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
   // ── Collection quantity map (name-based to handle different printings) ────
   // Ownership no longer gates pool MEMBERSHIP (see poolQuery note below) — it's
   // enforced later at pick time via getMaxQty(), so only quantities are needed.
+  // ROOT-CAUSE FIX (2026-09-26): this query had no `WHERE user_id = ?` clause
+  // — it summed every user's collection rows together, so a collection build
+  // for user 1 treated cards owned only by a DIFFERENT user (e.g. a friend's
+  // imported ManaBox collection) as owned. Without a userId, no user-specific
+  // collection can be identified, so treat it as empty rather than leaking
+  // every user's cards into the pool.
   const ownedQty = new Map<string, number>();
   if (useCollection) {
-    const rows = db.prepare(
-      `SELECT c.name, SUM(col.quantity) as total
-       FROM collection col JOIN cards c ON col.card_id = c.id
-       GROUP BY c.name`
-    ).all() as Array<{ name: string; total: number }>;
+    const rows = options.userId !== undefined
+      ? db.prepare(
+          `SELECT c.name, SUM(col.quantity) as total
+           FROM collection col JOIN cards c ON col.card_id = c.id
+           WHERE col.user_id = ?
+           GROUP BY c.name`
+        ).all(options.userId) as Array<{ name: string; total: number }>
+      : [];
     if (rows.length === 0) {
       // No collection imported yet: the UI defaults "prefer my collection" on, and
       // honoring it here yields commander + 99 basics. Fall back to the full pool.
@@ -1989,7 +2001,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
   // third of the nonland slots) without starving other roles; below it the
   // scoring bonus alone (see the 'tribal' snap above) wasn't enough to save
   // owned/obscure tribe members from being outscored by staples.
-  const TRIBAL_MIN_PERMANENTS = 12;
+  const TRIBAL_MIN_PERMANENTS = 34;
   if (tribalType && tribalNames.size > 0) {
     let tribalCount = 0;
     for (const p of picked) {
@@ -2090,7 +2102,11 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
         const matchesCat = catPatterns.some((pat) => cardText.includes(pat.toLowerCase()));
         const isSpellType = category === 'spell_cast' && (cardType.includes('instant') || cardType.includes('sorcery'));
         return matchesCat || isSpellType;
-      });
+      })
+        // Rank by the build's own synergy score (tribal/theme bonuses baked
+        // in) so a tribal commander's cheap slots go to cheap tribe/counter
+        // pieces before generic 1-drops that merely match the category text.
+        .sort((a, b) => b.score - a.score);
 
       // Find the lowest-scored current picks that aren't protected
       const protectedSet = new Set(merged.protectedPatterns.map((p) => p.toLowerCase()));
@@ -2514,6 +2530,17 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
     bracketReport = { target: null, result: classified.bracket, reasons: classified.reasons, swapped: [] };
   }
 
+  // Dead-card pass: after budget/bracket swaps have settled, cut anything
+  // that can't do its job in THIS deck — a narrow tutor with too few targets,
+  // a {C}-pip card the manabase can't feed, a mono-colour fixer with nothing
+  // to fix. Runs last so it sees the final colourless-source/target counts.
+  const deadPass = applyDeadCardPass(
+    finalCards, poolResult.pool, colors, commanderCard?.oracle_text || undefined,
+    (card) => getMaxQty(card) > 0,
+  );
+  finalCards = deadPass.cards;
+  const deadCardsReplaced = deadPass.replacedAsDead;
+
   let priceTotal = 0;
   let unpricedCount = 0;
   for (const c of finalCards) {
@@ -2558,6 +2585,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
     craftList,
     price: priceReport,
     bracket: bracketReport,
+    deadCardsReplaced,
   };
 }
 
@@ -2693,6 +2721,84 @@ export function applyBracketTarget(
   }
 
   return { cards, result: { target, result: classified.bracket, reasons: classified.reasons, swapped } };
+}
+
+/** A narrow tutor needs at least this many actual targets in the deck to be worth its slot. */
+const NARROW_TUTOR_MIN_TARGETS = 3;
+// A {C}-pip cost needs real colourless production, not "any color" fixing —
+// the more {C} symbols, the more sources it needs to be reliably castable.
+// Thresholds target ~70% odds of holding the pips by turn 8 having seen ~15
+// cards of a 99-card deck: 1 - (1 - sources/99)^8 — 8 sources -> .73 for one
+// {C}, 12 sources -> .71 for two. 4/6 (the original guess) left cards like
+// Kozilek's Command castable in well under half of games.
+const COLORLESS_SOURCES_FOR_ONE_PIP = 8;
+const COLORLESS_SOURCES_FOR_TWO_PIPS = 12;
+
+/**
+ * Rule 5 (dead-card pass): cut anything that can't do its job in THIS
+ * built deck — a narrow tutor with too few targets, a {C}-pip card the
+ * manabase can't feed, a mono-colour fixer with nothing to fix — and swap in
+ * the best same-role, non-dead candidate the pool has. Same shape as
+ * applyDeckBudget/applyBracketTarget: same-role replacement, owned-only via
+ * `canPick`, every swap recorded, deck size unchanged.
+ */
+export function applyDeadCardPass(
+  picked: Array<{ card: DbCard; quantity: number; board: 'main' | 'sideboard' }>,
+  pool: Array<{ card: DbCard; score: number }>,
+  colors: string[],
+  commanderOracle: string | undefined,
+  canPick: (card: DbCard) => boolean = () => true,
+): { cards: Array<{ card: DbCard; quantity: number; board: 'main' | 'sideboard' }>; replacedAsDead: Array<{ out: string; in: string; reason: string }> } {
+  const cards = picked.map((p) => ({ ...p }));
+  const replacedAsDead: Array<{ out: string; in: string; reason: string }> = [];
+  const primaryRole = (card: DbCard): string =>
+    getPrimaryCategory(classifyCard(card.name, card.oracle_text || '', card.type_line || '', card.cmc || 0, commanderOracle));
+  const isLand = (card: DbCard): boolean => (card.type_line || '').includes('Land');
+
+  const mainCards = (): RelevanceCard[] =>
+    cards.filter((c) => c.board === 'main')
+      .map((c) => ({ name: c.card.name, type_line: c.card.type_line, oracle_text: c.card.oracle_text, quantity: c.quantity }));
+
+  const colourlessSourceCount = (): number =>
+    cards.filter((c) => c.board === 'main' && isColorlessSource(c.card)).reduce((s, c) => s + c.quantity, 0);
+
+  const deadReason = (card: DbCard): string | null => {
+    const target = narrowTutorTarget(card);
+    if (target) {
+      const count = countTargets(target, mainCards());
+      if (count < NARROW_TUTOR_MIN_TARGETS) return `narrow tutor: only ${count} ${target.value} in deck`;
+    }
+    const pips = colorlessPipCount(card.mana_cost);
+    if (pips > 0) {
+      const needed = pips >= 2 ? COLORLESS_SOURCES_FOR_TWO_PIPS : COLORLESS_SOURCES_FOR_ONE_PIP;
+      const have = colourlessSourceCount();
+      if (have < needed) return `{C} cost, only ${have} colourless sources`;
+    }
+    if (isMonoColourDeadFixer(card, colors)) return 'mono-colour dead fixer';
+    return null;
+  };
+
+  const stuck = new Set<string>();
+  let guard = cards.length + 5;
+  while (guard-- > 0) {
+    const dead = cards.find((c) => c.board === 'main' && !stuck.has(c.card.name) && deadReason(c.card));
+    if (!dead) break;
+    const reason = deadReason(dead.card)!;
+    const inDeck = new Set(cards.filter((c) => c.board === 'main').map((c) => c.card.name));
+    const role = primaryRole(dead.card);
+    const replacement = pool
+      .filter((p) => !inDeck.has(p.card.name)
+        && isLand(p.card) === isLand(dead.card)
+        && primaryRole(p.card) === role
+        && canPick(p.card)
+        && !deadReason(p.card))
+      .sort((a, b) => b.score - a.score)[0];
+    if (!replacement) { stuck.add(dead.card.name); continue; }
+    const idx = cards.indexOf(dead);
+    cards[idx] = { card: replacement.card, quantity: dead.quantity, board: 'main' };
+    replacedAsDead.push({ out: dead.card.name, in: replacement.card.name, reason });
+  }
+  return { cards, replacedAsDead };
 }
 
 const CRAFT_LIST_CAP = 15;

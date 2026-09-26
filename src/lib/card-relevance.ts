@@ -39,6 +39,14 @@ const BROAD_WORDS = new Set([
 
 const MTG_SUPERTYPES = new Set(['legendary', 'snow', 'world', 'host']);
 
+// Colour words in front of a broad card type don't narrow the *type* being
+// searched, only which copies match ("a green creature card" is exactly as
+// broad as "a creature card") — Green Sun's Zenith reads this way and was
+// wrongly flagged as a narrow tutor.
+const COLOR_WORDS = new Set([
+  'white', 'blue', 'black', 'red', 'green', 'colorless', 'multicolored', 'monocolored', 'mono-colored',
+]);
+
 /**
  * "Search your library for a(n) <X> card" → narrow target if <X> isn't one
  * of the broad types/supertypes above (or an "X or Y" combination of them).
@@ -61,7 +69,19 @@ export function narrowTutorTarget(card: { oracle_text: string | null }): TutorTa
   // narrow the *type* of the search, only its cost.
   const stripped = descriptor.replace(/\s+with (mana value|cmc)[^,]*$/i, '').trim().toLowerCase();
 
-  const words = stripped.split(/\s+or\s+|\s+and\s+/);
+  // Drop a leading run of colour words ("green", "white or blue") before
+  // checking broadness — they restrict which copies match, not the type.
+  const strippedWords = stripped.split(/\s+/);
+  let colorRunEnd = 0;
+  while (
+    colorRunEnd < strippedWords.length - 1
+    && (COLOR_WORDS.has(strippedWords[colorRunEnd]) || strippedWords[colorRunEnd] === 'or' || strippedWords[colorRunEnd] === 'and')
+  ) {
+    colorRunEnd++;
+  }
+  const withoutColor = strippedWords.slice(colorRunEnd).join(' ');
+
+  const words = withoutColor.split(/\s+or\s+|\s+and\s+/);
   if (words.every((w) => BROAD_WORDS.has(w.trim()))) return null;
 
   const single = stripped.trim();

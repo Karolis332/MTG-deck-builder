@@ -73,6 +73,16 @@ describe('autoBuildDeck collection mode — synergy minimums never swap in unown
     for (const name of owned) {
       col.run(UID, (d.prepare('SELECT id FROM cards WHERE name = ?').get(name) as { id: string }).id);
     }
+
+    // A second user's collection — none of these cards are owned by UID. If
+    // ownedQty ever sums across all users again, UID's build would treat them
+    // as owned too (2026-09-26 regression: ownedQty query had no
+    // `WHERE user_id = ?`, leaking a friend's ManaBox import into the build).
+    const OTHER_UID = 999902;
+    d.prepare(`INSERT OR IGNORE INTO users (id, username, email, password_hash) VALUES (?, 'coll-test-2', 'coll2@test.local', 'x')`).run(OTHER_UID);
+    for (let i = 1; i <= 40; i++) {
+      col.run(OTHER_UID, (d.prepare('SELECT id FROM cards WHERE name = ?').get(`Test Lifebinder ${i}`) as { id: string }).id);
+    }
   }, 60_000);
 
   afterAll(() => {
@@ -99,5 +109,13 @@ describe('autoBuildDeck collection mode — synergy minimums never swap in unown
     expect(main.filter((e) => !owned.has(e.card.name) && !/^Basic Land/.test(e.card.type_line || ''))).toEqual([]);
     // The scenario is real: > 3 game changers reached the target step.
     expect(main.filter((e) => e.card.name.startsWith('Test Changer')).length).toBeGreaterThan(3);
+  }, 60_000);
+
+  it('never ships a card owned only by a different user', async () => {
+    const r = await builder.autoBuildDeck({
+      format: 'commander', colors: [], commanderName: 'Rodolf Duskbringer', useCollection: true, userId: UID,
+    });
+    const main = r.cards.filter((e) => e.board === 'main');
+    expect(main.filter((e) => e.card.name.startsWith('Test Lifebinder'))).toEqual([]);
   }, 60_000);
 });

@@ -67,6 +67,26 @@ interface BuildRecord {
   monoColourDeadFixers?: string[];
   gateVerdict?: GateVerdict['verdict'];
   gateChecks?: Array<{ id: string; status: string }>;
+  /** Full main-board list (name + qty), for auditing what actually shipped. */
+  deckList?: Array<{ name: string; quantity: number }>;
+  /** Collection builds only: cards in the deck the userId does NOT own (basics exempt). */
+  unownedCount?: number;
+  unowned?: string[];
+}
+
+const BASIC_LAND_NAMES = new Set(['Plains', 'Island', 'Swamp', 'Mountain', 'Forest', 'Wastes']);
+
+/** Card names the userId owns, any source, matched both plain and Arena "A-" rebalanced. */
+function getOwnedNameSet(userId: number): Set<string> {
+  const rows = getDb().prepare(
+    `SELECT DISTINCT c.name FROM collection col JOIN cards c ON col.card_id = c.id WHERE col.user_id = ?`
+  ).all(userId) as Array<{ name: string }>;
+  const owned = new Set<string>();
+  for (const { name } of rows) {
+    owned.add(name);
+    owned.add(name.startsWith('A-') ? name.slice(2) : `A-${name}`);
+  }
+  return owned;
 }
 
 function toRelevanceCard(c: DbCard, quantity: number): RelevanceCard {
@@ -105,6 +125,16 @@ async function buildOne(entry: PanelEntry): Promise<BuildRecord> {
     const main = result.cards.filter((e) => e.board === 'main');
     const relevancePool = main.map((e) => toRelevanceCard(e.card as DbCard, e.quantity));
     rec.totalCards = main.reduce((s, e) => s + e.quantity, 0);
+    rec.deckList = main.map((e) => ({ name: (e.card as DbCard).name, quantity: e.quantity })).sort((a, b) => a.name.localeCompare(b.name));
+
+    if (entry.useCollection && entry.userId !== undefined) {
+      const owned = getOwnedNameSet(entry.userId);
+      const unowned = main
+        .filter((e) => !BASIC_LAND_NAMES.has((e.card as DbCard).name) && !owned.has((e.card as DbCard).name))
+        .map((e) => (e.card as DbCard).name);
+      rec.unownedCount = unowned.length;
+      rec.unowned = unowned;
+    }
 
     // Commander colour identity — deckColours for the mono-fixer check.
     const commanderRow = getDb()
@@ -200,7 +230,10 @@ function mdRow(r: BuildRecord): string {
     ...(r.colorlessMismatch || []).map((d) => `pip:${d.name}`),
     ...(r.monoColourDeadFixers || []).map((d) => `fixer:${d}`),
   ];
-  return `| ${r.slug} | ${r.commander} | ${r.format} | ${r.useCollection} | ${r.ok ? 'ok' : `ERROR: ${r.error}`} | ${r.strategy ?? ''} | ${r.tribalType ?? ''} | ${r.tribeCreatureCount ?? ''}/${r.changelingCount ?? ''} | ${(r.nonbasicLands || []).length} | ${dead.length ? dead.join(', ') : '-'} | ${r.gateVerdict ?? ''} |`;
+  const unowned = r.useCollection
+    ? (r.unownedCount ? `${r.unownedCount}: ${(r.unowned || []).join(', ')}` : '0')
+    : 'n/a';
+  return `| ${r.slug} | ${r.commander} | ${r.format} | ${r.useCollection} | ${r.ok ? 'ok' : `ERROR: ${r.error}`} | ${r.strategy ?? ''} | ${r.tribalType ?? ''} | ${r.tribeCreatureCount ?? ''}/${r.changelingCount ?? ''} | ${(r.nonbasicLands || []).length} | ${dead.length ? dead.join(', ') : '-'} | ${unowned} | ${r.gateVerdict ?? ''} |`;
 }
 
 async function main() {
@@ -226,7 +259,7 @@ async function main() {
   fs.mkdirSync(path.dirname(outFile), { recursive: true });
   fs.writeFileSync(outFile, JSON.stringify(records, null, 2));
   const mdFile = outFile.replace(/\.json$/, '.md');
-  const header = '| slug | commander | format | collection | build | strategy | tribalType | tribe/changeling | nonbasicLands | dead cards | gate |\n|---|---|---|---|---|---|---|---|---|---|---|';
+  const header = '| slug | commander | format | collection | build | strategy | tribalType | tribe/changeling | nonbasicLands | dead cards | unowned | gate |\n|---|---|---|---|---|---|---|---|---|---|---|---|';
   fs.writeFileSync(mdFile, [header, ...records.map(mdRow)].join('\n') + '\n');
   console.log(`Wrote ${outFile} and ${mdFile}`);
 
@@ -242,8 +275,9 @@ async function main() {
       const baseDead = (base.narrowDeadTutors?.length || 0) + (base.colorlessMismatch?.length || 0) + (base.monoColourDeadFixers?.length || 0);
       const curDead = (cur.narrowDeadTutors?.length || 0) + (cur.colorlessMismatch?.length || 0) + (cur.monoColourDeadFixers?.length || 0);
       const strategyChanged = base.strategy !== cur.strategy;
+      const unownedPart = cur.useCollection ? `, unowned ${base.unownedCount ?? '?'} -> ${cur.unownedCount ?? '?'}` : '';
       console.log(
-        `${cur.slug}: strategy ${base.strategy ?? '?'} -> ${cur.strategy ?? '?'}${strategyChanged ? ' [CHANGED]' : ''}, dead-cards ${baseDead} -> ${curDead}, gate ${base.gateVerdict ?? '?'} -> ${cur.gateVerdict ?? '?'}`
+        `${cur.slug}: strategy ${base.strategy ?? '?'} -> ${cur.strategy ?? '?'}${strategyChanged ? ' [CHANGED]' : ''}, dead-cards ${baseDead} -> ${curDead}${unownedPart}, gate ${base.gateVerdict ?? '?'} -> ${cur.gateVerdict ?? '?'}`
       );
     }
   }

@@ -74,6 +74,13 @@ const CARDS = {
     oracle_text: "{T}: Add one mana of any color in your commander's color identity.",
     mana_cost: '{2}',
   },
+  greenSunsZenith: {
+    name: "Green Sun's Zenith",
+    type_line: 'Instant',
+    oracle_text:
+      "Search your library for a green creature card with mana value X or less, put it onto the battlefield, then shuffle. Shuffle Green Sun's Zenith into its owner's library.",
+    mana_cost: '{X}{G}',
+  },
 };
 
 describe('narrowTutorTarget', () => {
@@ -101,6 +108,10 @@ describe('narrowTutorTarget', () => {
   it('returns null for cards with no tutor effect', () => {
     expect(narrowTutorTarget(CARDS.mindStone)).toBeNull();
     expect(narrowTutorTarget(CARDS.chromaticLantern)).toBeNull();
+  });
+
+  it('treats "a green creature card" as broad — colour in front of a broad type isn\'t narrow', () => {
+    expect(narrowTutorTarget(CARDS.greenSunsZenith)).toBeNull();
   });
 });
 
