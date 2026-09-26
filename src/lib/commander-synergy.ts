@@ -57,6 +57,70 @@ export interface CommanderSynergyProfile {
   removalReduction: number;
 }
 
+// ── Tribal Payoff Detection ──────────────────────────────────────────────────
+// Shared with deck-builder-ai.ts's detectTribalTheme (single source of truth
+// for tribe regexes — a commander that pays off/scales with a creature type
+// it shares reads as tribal, whether that payoff is an anthem, a counter
+// scaling with the tribe count, or a token-count ability).
+
+export const MAJOR_TRIBES: string[] = [
+  'goblin', 'elf', 'zombie', 'vampire', 'merfolk', 'human', 'angel', 'dragon',
+  'sliver', 'soldier', 'wizard', 'elemental', 'spirit', 'beast', 'warrior',
+  'knight', 'dinosaur', 'cat', 'rat', 'bird', 'demon', 'faerie', 'pirate',
+  'cleric', 'rogue', 'shaman', 'druid', 'sphinx', 'werewolf', 'wolf',
+  'insect', 'fungus', 'saproling', 'treefolk', 'minotaur', 'giant', 'dwarf',
+  'artifact creature', 'construct', 'golem', 'horror', 'nightmare', 'phyrexian',
+  'eldrazi', 'ally', 'snake', 'fish', 'kraken', 'leviathan', 'octopus',
+  'squirrel', 'bear', 'ape', 'hydra', 'wurm', 'drake', 'changeling',
+  'ooze',
+];
+const MAJOR_TRIBES_SET = new Set(MAJOR_TRIBES);
+
+/**
+ * Finds the creature type a commander's own oracle text pays off/scales with
+ * (Aeve: "for each other Ooze you control"; Krenko: "number of Goblins you
+ * control"; Edgar Markov: "each Vampire you control"). `oracleText` should
+ * already be lowercased; `subtypes` are the commander's own creature types,
+ * lowercased, used only to break ties and as a last-resort fallback.
+ */
+export function detectTribalPayoff(oracleText: string, subtypes: string[]): string | null {
+  const tribeScores = new Map<string, number>();
+  for (const tribe of MAJOR_TRIBES) {
+    const tribalPatterns = [
+      `other ${tribe}`,
+      `${tribe}s you control`,
+      `${tribe} you control`,
+      `whenever a ${tribe}`,
+      `whenever another ${tribe}`,
+      `each ${tribe}`,
+      `all ${tribe}s`,
+      `${tribe} creature tokens`,
+      `number of ${tribe}`,
+      `create a .* ${tribe}`,
+    ];
+    const patternHits = tribalPatterns.filter((p) => oracleText.includes(p)).length;
+    if (patternHits === 0) continue;
+    const wordCount = (oracleText.match(new RegExp(`\\b${tribe}s?\\b`, 'g')) || []).length;
+    // Pattern hits dominate; raw mentions break ties. Bonus if the commander
+    // itself is that type (a Goblin lord beats incidental token-tribe text).
+    let score = patternHits * 3 + wordCount;
+    if (subtypes.includes(tribe)) score += 2;
+    tribeScores.set(tribe, score);
+  }
+  if (tribeScores.size > 0) {
+    return [...tribeScores.entries()].sort((a, b) => b[1] - a[1])[0][0];
+  }
+
+  // Fallback: the commander IS a notable tribal type and references it.
+  for (const subtype of subtypes) {
+    if (MAJOR_TRIBES_SET.has(subtype) && oracleText.includes(subtype)) {
+      return subtype;
+    }
+  }
+
+  return null;
+}
+
 // ── Trigger Pattern Library ──────────────────────────────────────────────────
 
 export const TRIGGER_PATTERNS: Record<SynergyCategory, RegExp[]> = {
@@ -438,14 +502,29 @@ const SYNERGY_REQUIREMENTS: Record<SynergyCategory, {
 
 // ── Archetype Inference Rules ────────────────────────────────────────────────
 
-function inferArchetype(triggers: SynergyCategory[], hasAttackTrigger: boolean): Archetype | null {
+function inferArchetype(
+  triggers: SynergyCategory[],
+  hasAttackTrigger: boolean,
+  tribalPayoff?: string | null,
+  isCreature?: boolean,
+): Archetype | null {
   const has = (cat: SynergyCategory) => triggers.includes(cat);
+
+  // A commander whose own text scales with / pays off a creature type it
+  // shares (Aeve: "for each other Ooze you control"; Krenko: "number of
+  // Goblins you control") builds around that tribe — checked before storm/
+  // spell_cast so a creature commander with Storm (its copies are creature
+  // tokens, not a spells shell) doesn't get mislabeled spellslinger.
+  if (tribalPayoff) return 'tribal';
 
   // Five-color "colors matter" commanders (Ramos, Jodah) are goodstuff/counters
   // shells, not spellslinger — even though their triggers mention casting spells.
   if (has('five_colors')) return 'midrange';
   if (has('x_spells')) return 'spellslinger';
-  if (has('storm')) return 'spellslinger';
+  // Storm on a creature commander copies the CREATURE (tokens), not a
+  // spells-matter payoff — only count it toward spellslinger on a noncreature
+  // commander (or alongside an actual spell_cast trigger, handled below).
+  if (has('storm') && !isCreature) return 'spellslinger';
   if (has('spell_cast')) return 'spellslinger';
   if (has('creature_dies')) return 'aristocrats';
   if (has('graveyard') && !has('creature_dies')) return 'reanimator';
@@ -497,6 +576,16 @@ export function analyzeCommander(
   if (!oracleText || oracleText.trim().length === 0) return null;
 
   const text = oracleText.toLowerCase();
+  const typeLineLower = typeLine.toLowerCase();
+  const isCreature = typeLineLower.includes('creature');
+
+  // Own creature type(s), parsed from the type line after the em dash —
+  // used only to break ties in detectTribalPayoff, same as deck-builder-ai's
+  // detectTribalTheme (which shares this function; see below).
+  const ownSubtypes = typeLineLower.includes('—')
+    ? typeLineLower.slice(typeLineLower.indexOf('—') + 1).trim().split(/\s+/)
+    : [];
+  const tribalPayoff = detectTribalPayoff(text, ownSubtypes);
 
   // ── Detect trigger categories ──────────────────────────────────────
   const triggerCategories: SynergyCategory[] = [];
@@ -534,7 +623,11 @@ export function analyzeCommander(
       || /counters? you control|counters? placed|with counters? on (?:it|them)/i.test(text)
       // Counters-as-resource commanders (Ramos: "Remove five +1/+1 counters
       // from Ramos") genuinely want the counters package to refuel.
-      || /remove .{0,40}counters? from/i.test(text);
+      || /remove .{0,40}counters? from/i.test(text)
+      // A counter that scales with a shared creature type (Aeve: "+1/+1
+      // counter on it for each other Ooze you control") is a tribal payoff,
+      // not a Vivi-style self-buff — it wants the counters package.
+      || tribalPayoff !== null;
     if (!broadCounters) {
       triggerCategories.splice(triggerCategories.indexOf('counters'), 1);
     }
@@ -570,7 +663,7 @@ export function analyzeCommander(
 
   // ── Infer archetype ────────────────────────────────────────────────
   const hasAttack = triggerCategories.includes('attack_trigger');
-  const detectedArchetype = inferArchetype(triggerCategories, hasAttack);
+  const detectedArchetype = inferArchetype(triggerCategories, hasAttack, tribalPayoff, isCreature);
 
   // ── Build synergy minimums + card pool patterns + score bonuses ────
   const synergyMinimums: Record<string, number> = {};

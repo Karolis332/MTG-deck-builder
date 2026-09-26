@@ -8,7 +8,7 @@ import { getEdhrecRecommendations, getEdhrecThemeCards } from './edhrec';
 import type { EdhrecRecommendation } from './edhrec';
 import { getTemplate, getScaledCurve, mergeWithCommanderProfile } from './deck-templates';
 import type { Archetype, ArchetypeTemplate } from './deck-templates';
-import { analyzeCommander, mergeProfiles } from './commander-synergy';
+import { analyzeCommander, mergeProfiles, detectTribalPayoff } from './commander-synergy';
 import type { CommanderSynergyProfile } from './commander-synergy';
 import { buildOptimalLandBase, isFetchLandRelevant } from './land-intelligence';
 import { getCFRecommendations, resolveCFToDbCards } from './cf-api-client';
@@ -223,20 +223,9 @@ function buildSynergyQuery(themes: string[]): string {
 }
 
 // ── Tribal detection ────────────────────────────────────────────────────────
-// Detects if a commander is tribal and returns the creature type to build around
-
-const MAJOR_TRIBES: string[] = [
-  'goblin', 'elf', 'zombie', 'vampire', 'merfolk', 'human', 'angel', 'dragon',
-  'sliver', 'soldier', 'wizard', 'elemental', 'spirit', 'beast', 'warrior',
-  'knight', 'dinosaur', 'cat', 'rat', 'bird', 'demon', 'faerie', 'pirate',
-  'cleric', 'rogue', 'shaman', 'druid', 'sphinx', 'werewolf', 'wolf',
-  'insect', 'fungus', 'saproling', 'treefolk', 'minotaur', 'giant', 'dwarf',
-  'artifact creature', 'construct', 'golem', 'horror', 'nightmare', 'phyrexian',
-  'eldrazi', 'ally', 'snake', 'fish', 'kraken', 'leviathan', 'octopus',
-  'squirrel', 'bear', 'ape', 'hydra', 'wurm', 'drake', 'changeling',
-  'ooze',
-];
-const MAJOR_TRIBES_SET = new Set(MAJOR_TRIBES);
+// Detects if a commander is tribal and returns the creature type to build
+// around. Scoring lives in commander-synergy's detectTribalPayoff (shared
+// with archetype inference — a single tribe regex library, not two).
 
 function detectTribalTheme(
   db: ReturnType<typeof getDb>,
@@ -266,44 +255,7 @@ function detectTribalTheme(
     }
   }
 
-  // Score every tribe the oracle references in a payoff context, then return
-  // the DOMINANT one. Array-order early-return used to mislabel multi-type
-  // commanders (Tovolar = Human Werewolf returned "human" over "wolf").
-  const tribeScores = new Map<string, number>();
-  for (const tribe of MAJOR_TRIBES) {
-    const tribalPatterns = [
-      `other ${tribe}`,
-      `${tribe}s you control`,
-      `${tribe} you control`,
-      `whenever a ${tribe}`,
-      `whenever another ${tribe}`,
-      `each ${tribe}`,
-      `all ${tribe}s`,
-      `${tribe} creature tokens`,
-      `number of ${tribe}`,
-      `create a .* ${tribe}`,
-    ];
-    const patternHits = tribalPatterns.filter((p) => oracleText.includes(p)).length;
-    if (patternHits === 0) continue;
-    const wordCount = (oracleText.match(new RegExp(`\\b${tribe}s?\\b`, 'g')) || []).length;
-    // Pattern hits dominate; raw mentions break ties. Bonus if the commander
-    // itself is that type (a Goblin lord beats incidental token-tribe text).
-    let score = patternHits * 3 + wordCount;
-    if (subtypes.includes(tribe)) score += 2;
-    tribeScores.set(tribe, score);
-  }
-  if (tribeScores.size > 0) {
-    return [...tribeScores.entries()].sort((a, b) => b[1] - a[1])[0][0];
-  }
-
-  // Fallback: the commander IS a notable tribal type and references it.
-  for (const subtype of subtypes) {
-    if (MAJOR_TRIBES_SET.has(subtype) && oracleText.includes(subtype)) {
-      return subtype;
-    }
-  }
-
-  return null;
+  return detectTribalPayoff(oracleText, subtypes);
 }
 
 function fetchTribalCards(
