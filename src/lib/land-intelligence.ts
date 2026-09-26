@@ -10,7 +10,7 @@
 
 import { getDb } from '@/lib/db';
 import { getLegalityKey } from '@/lib/constants';
-import { isRestrictedProducer, isConditionalColoredProducer, fetchLandColors, implicitLandColors } from '@/lib/mana-sources';
+import { isRestrictedProducer, isConditionalColoredProducer, fetchLandColors, implicitLandColors, chosenTypeLandColors } from '@/lib/mana-sources';
 import type { DbCard } from '@/lib/types';
 
 // ── Fetch land relevance check ──────────────────────────────────────────────
@@ -214,6 +214,53 @@ export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
     const isModalDfc = land.layout === 'modal_dfc';
     if (!frontIsLand && !isModalDfc) continue;
 
+    // ── Mono-colour "beats a basic" filter ─────────────────────────
+    // A basic taps for the deck's one colour, untapped, no downside. A
+    // nonbasic only earns a slot in a mono-colour base if it clears that
+    // bar. These shapes never do, no matter what else they're stapled to:
+    if (colors.length <= 1) {
+      const lower = (land.oracle_text || '').toLowerCase();
+      const deckColor = colors[0];
+
+      // Any-colour (Command Tower) or chosen-type (Thran Portal, Multiversal
+      // Passage: chosen basic land type; Temple of the Dragon Queen: chosen
+      // COLOR, not tied to a basic type) lands are flexible fixing in
+      // multicolour, but in mono they just become "your one colour" — no
+      // upside over a basic, sometimes with a tapped/life-cost downside.
+      const anyColor = /add (?:one|two|three|four|five|x|\d+|an amount of) mana of any(?: one)? color/.test(lower)
+        || /any combination of colors/.test(lower)
+        // Guild-Gate typal fixing (Plaza of Harmony: "any type that a Gate
+        // you control could produce") — flexible, not deck-colour-specific.
+        || /any type (?:of mana )?that a .*? could produce/.test(lower);
+      const chosenColor = /choose a color/.test(lower) && /chosen color/.test(lower);
+      if (anyColor || chosenColor || chosenTypeLandColors(land) !== null) continue;
+
+      // Any fetch that deposits its target TAPPED — the ETB-sacrifice "gate"
+      // family (Cabaretti Courtyard, Brokers Hideout) and the activated
+      // basic-fetchers (Evolving Wilds, Terramorphic Expanse, Fabled
+      // Passage, Escape Tunnel) alike — just becomes a tapped basic.
+      // Strictly worse than running the basic untapped. Untapped fetches
+      // (Misty Rainforest, Prismatic Vista, Polluted Delta...) are real
+      // thinning and stay eligible.
+      if (fetchLandColors(land) !== null && /onto the battlefield tapped/.test(lower)) continue;
+
+      // Pain lands that charge life for the SAME colour a basic gives free.
+      if (deckColor && new RegExp(`pay \\d+ life:\\s*add \\{${deckColor}\\}`, 'i').test(lower)) continue;
+
+      // Conditional duals whose untap condition names basic types this deck
+      // doesn't run (Kishla Village: "unless you control an Island or a
+      // Swamp" in mono-green never triggers) — always-tapped for nothing.
+      // A generic condition ("a basic land") is always satisfiable and
+      // falls through untouched (Ba Sing Se).
+      const untapCond = lower.match(/enters tapped unless you control ([^.]+)/);
+      if (untapCond) {
+        const namedTypes = untapCond[1].split(/,| or /).map((s) => s.replace(/^\s*(a|an)\s+/, '').trim());
+        const namesBasicType = namedTypes.some((t) => BASIC_TYPE_TO_COLOR[t]);
+        const satisfiable = namedTypes.some((t) => BASIC_TYPE_TO_COLOR[t] === deckColor);
+        if (namesBasicType && !satisfiable) continue;
+      }
+    }
+
     let producesColors: string[] = [];
     try { producesColors = JSON.parse(land.produces_colors || '[]'); } catch { /* empty */ }
     // land_classifications may be unpopulated — fall back to Scryfall's
@@ -222,6 +269,26 @@ export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
       try {
         producesColors = (JSON.parse(land.produced_mana) as string[]).filter((c) => 'WUBRG'.includes(c));
       } catch { /* empty */ }
+    }
+    // Choose-a-colour abilities gated on a creature-type/tribal count (Three
+    // Tree City: "choose a color, add mana of that color per creature of
+    // the chosen type") aren't reliable fixing — value is entirely tribal
+    // payoff, not colour production. In mono-colour, strip the classified
+    // colour credit so the "beats a basic" gate below judges it colourless
+    // (a tribal deck still gets it back via the tribal-match exemption).
+    if (colors.length <= 1 && /choose a color\.[^.]*add[^.]*of (?:that|the chosen) color/.test((land.oracle_text || '').toLowerCase())) {
+      producesColors = producesColors.filter((c) => c === 'C');
+    }
+    // Restricted production ("spend this mana only to cast planeswalker
+    // spells" — Interplanar Beacon) isn't real colour fixing in mono
+    // either: that {G} is unusable outside the narrow cast window, so the
+    // land is effectively colourless. Only strip credit when there's no
+    // OTHER, unrestricted plain "{T}: Add {X}" line — Castle Garenbrig's
+    // six-mana ability is restricted too, but its base {T}: Add {G} isn't.
+    if (colors.length <= 1 && isRestrictedProducer(land.oracle_text)) {
+      const hasUnrestrictedColorTap = (land.oracle_text || '').split('\n')
+        .some((line) => /^\{t\}:\s*add \{[wubrg]\}\.?$/i.test(line.trim()));
+      if (!hasUnrestrictedColorTap) producesColors = producesColors.filter((c) => c === 'C');
     }
     // Fetch / chosen-type lands have no produced_mana but ARE fixing for the
     // colors they retrieve/become. Credit them; fetches don't enter tapped.
@@ -320,8 +387,9 @@ export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
     if (!isFetchLandRelevant(land.oracle_text || '', colors)) continue;
 
     // ── Tribal match bonus ───────────────────────────────────────
+    let tribalMatch = false;
     if (tribalTypes && tribalTypes.length > 0 && tribalTypesArr.length > 0) {
-      const tribalMatch = tribalTypesArr.some(t =>
+      tribalMatch = tribalTypesArr.some(t =>
         tribalTypes.some(dt => dt.toLowerCase() === t.toLowerCase())
       );
       if (tribalMatch) {
@@ -330,10 +398,37 @@ export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
       }
     }
 
-    // Special tribal lands by category
-    if (category === 'tribal' && tribalTypes && tribalTypes.length > 0) {
+    // Special tribal lands by category (Three Tree City: works for ANY
+    // chosen creature type, so it has no fixed tribal_types to match — the
+    // deck running a tribal plan at all is the relevance signal).
+    const genericTribalLand = category === 'tribal' && !!tribalTypes && tribalTypes.length > 0;
+    if (genericTribalLand) {
       score += 30;
       reasons.push('tribal land');
+    }
+
+    // ── Mono-colour: colourless-only lands need a premium ability ────
+    // A basic already gives the deck's one colour for free, untapped. A
+    // {C}-only land (no colour match at all) only clears that bar with a
+    // genuinely strong, deck-relevant payoff — hard evasion (Rogue's
+    // Passage), hard removal/exile, or an extra turn. "No maximum hand
+    // size" (Reliquary Tower), Gate-count lifegain (Plaza of Harmony), a
+    // {4}-activated 3/3 (Soulstone Sanctuary), or a one-shot disguise mana
+    // burst (Branch of Vitu-Ghazi) don't. Tribal-relevant colourless lands
+    // are exempt — their value isn't in the mana they make. A land that
+    // ALWAYS enters tapped (Evendo, Waking Haven — unconditional, not the
+    // Kishla/Castle "unless" duals already handled above) needs the same
+    // bar even when it does match the deck colour: a permanently-tapped
+    // land is a worse basic unless something else redeems it.
+    const alwaysTapped = !isFetch && ownEntersTapped && !/tapped unless/.test(tapText);
+    if (colors.length <= 1 && (matchingColors.length === 0 || alwaysTapped) && !tribalMatch && !genericTribalLand) {
+      const PREMIUM_COLORLESS_UTILITY = [
+        /can't be blocked/,
+        /destroy target/,
+        /exile target/,
+        /extra turn/,
+      ];
+      if (!PREMIUM_COLORLESS_UTILITY.some((re) => re.test(tapText))) continue;
     }
 
     // ── EDHREC recommendation bonus ──────────────────────────────
@@ -384,6 +479,9 @@ const BASIC_LAND_MAP: Record<string, string> = {
   W: 'Plains', U: 'Island', B: 'Swamp', R: 'Mountain', G: 'Forest',
 };
 
+/** A nonbasic below this score isn't worth a slot over a basic. */
+const SELECT_MIN_SCORE = 20;
+
 interface BuildOptions {
   colors: string[];
   format: string;
@@ -422,10 +520,13 @@ export function buildOptimalLandBase(options: BuildOptions): LandBaseResult {
     rarityFilter: options.rarityFilter, maxCardPrice: options.maxCardPrice,
   });
 
-  // Determine non-basic target based on color count
+  // Determine non-basic target based on color count. Mono-colour has no
+  // flat floor: the target is however many candidates actually cleared the
+  // "beats a basic" bar in scoreLandsForDeck (SELECT_MIN_SCORE below), up
+  // to the usual ceiling — never a forced count of weaker fillers.
   const numColors = colors.length;
   const nonBasicTarget = numColors <= 1
-    ? Math.min(10, targetLandCount - 25)
+    ? Math.min(10, targetLandCount - 25, scored.filter((s) => s.score >= SELECT_MIN_SCORE).length)
     : numColors === 2
       ? Math.min(18, targetLandCount - 8)
       : numColors === 3
@@ -444,7 +545,7 @@ export function buildOptimalLandBase(options: BuildOptions): LandBaseResult {
   for (const scored_land of scored) {
     if (nonBasicCount >= nonBasicTarget) break;
     if (selectedNames.has(scored_land.card.name)) continue;
-    if (scored_land.score < 20) continue; // Skip very low scoring lands
+    if (scored_land.score < SELECT_MIN_SCORE) continue; // Skip very low scoring lands
 
     const isMdfcSpellLand = !(scored_land.card.type_line || '').split('//')[0].includes('Land');
     if (isMdfcSpellLand) {
