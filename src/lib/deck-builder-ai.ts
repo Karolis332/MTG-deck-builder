@@ -22,6 +22,7 @@ import {
 import { analyzeCommanderForBuild } from './commander-analysis';
 import type { ArsenalCard } from './commander-analysis';
 import { classifyCard, getPrimaryCategory, isDrawEngine, isBoardWipe } from './card-classifier';
+import { isTribeCreature } from './card-relevance';
 import { parseBuildHints } from './build-hints';
 import type { ParsedBuildHints } from './build-hints';
 import { auditDeck } from './deck-auditor';
@@ -227,7 +228,7 @@ function buildSynergyQuery(themes: string[]): string {
 // around. Scoring lives in commander-synergy's detectTribalPayoff (shared
 // with archetype inference — a single tribe regex library, not two).
 
-function detectTribalTheme(
+export function detectTribalTheme(
   db: ReturnType<typeof getDb>,
   commanderName: string
 ): string | null {
@@ -258,31 +259,77 @@ function detectTribalTheme(
   return detectTribalPayoff(oracleText, subtypes);
 }
 
-function fetchTribalCards(
+export function fetchTribalCards(
   db: ReturnType<typeof getDb>,
   tribe: string,
   colorExcludeFilter: string,
   legalityFilter: string,
   commanderExclude: string,
-  limit: number = 80
+  ownedNames: Set<string> = new Set(),
+  limit: number = 80,
+  changelingLimit: number = 0
 ): DbCard[] {
-  // Search for creatures of the tribe type AND cards that reference the tribe
   const tribeLike = `%${tribe}%`;
-  const query = `
-    SELECT DISTINCT c.* FROM cards c
-    WHERE (
-      c.type_line LIKE ? COLLATE NOCASE
-      OR c.subtypes LIKE ? COLLATE NOCASE
-      OR c.oracle_text LIKE ? COLLATE NOCASE
-    )
+  // Cards that name the tribe directly (type, subtype or oracle text).
+  const tribeMatch = `(
+    c.type_line LIKE ? COLLATE NOCASE
+    OR c.subtypes LIKE ? COLLATE NOCASE
+    OR c.oracle_text LIKE ? COLLATE NOCASE
+  )`;
+  // Changelings (every creature type — tribal for every tribe by definition,
+  // incl. Kindred artifact changelings) and "choose a creature type" support.
+  // Kept as a SEPARATE query with its own limit: sharing one LIMIT with the
+  // tribe-name match let a flood of changelings (which rank well but aren't
+  // Goblins/Vampires) crowd real tribe members out of a narrow tribe's pool.
+  const changelingMatch = `(
+    c.oracle_text LIKE '%changeling%' COLLATE NOCASE
+    OR c.oracle_text LIKE '%is every creature type%' COLLATE NOCASE
+    OR c.oracle_text LIKE '%are every creature type%' COLLATE NOCASE
+    OR c.oracle_text LIKE '%choose a creature type%' COLLATE NOCASE
+  )`;
+  const filters = `
     ${colorExcludeFilter ? `AND ${colorExcludeFilter}` : ''}
     ${legalityFilter}
     ${commanderExclude}
-    ORDER BY c.edhrec_rank ASC NULLS LAST
-    LIMIT ?
   `;
 
-  return db.prepare(query).all(tribeLike, tribeLike, tribeLike, limit) as DbCard[];
+  const primary = db.prepare(`
+    SELECT DISTINCT c.* FROM cards c
+    WHERE ${tribeMatch}
+    ${filters}
+    ORDER BY c.edhrec_rank ASC NULLS LAST
+    LIMIT ?
+  `).all(tribeLike, tribeLike, tribeLike, limit) as DbCard[];
+
+  const seen = new Set(primary.map((c) => c.name));
+  const changelings = (db.prepare(`
+    SELECT DISTINCT c.* FROM cards c
+    WHERE ${changelingMatch}
+    ${filters}
+    ORDER BY c.edhrec_rank ASC NULLS LAST
+    LIMIT ?
+  `).all(changelingLimit) as DbCard[]).filter((c) => !seen.has(c.name));
+  for (const c of changelings) seen.add(c.name);
+
+  const ranked = [...primary, ...changelings];
+
+  if (ownedNames.size === 0) return ranked;
+
+  // Owned tribe-relevant cards must not be dropped for having no EDHREC rank
+  // (new/Alchemy cards) or falling outside either ranked LIMIT — fetch them
+  // unbounded and prepend so they always reach the pool.
+  const missingOwned = [...ownedNames].filter((n) => !seen.has(n));
+  if (missingOwned.length === 0) return ranked;
+
+  const placeholders = missingOwned.map(() => '?').join(',');
+  const ownedExtra = db.prepare(`
+    SELECT DISTINCT c.* FROM cards c
+    WHERE c.name IN (${placeholders})
+    AND (${tribeMatch} OR ${changelingMatch})
+    ${filters}
+  `).all(...missingOwned, tribeLike, tribeLike, tribeLike) as DbCard[];
+
+  return [...ownedExtra, ...ranked];
 }
 
 // ── Resolve EDHREC card names to DbCard rows ────────────────────────────────
@@ -771,7 +818,8 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
   if (isCommander && commanderName) {
     tribalType = detectTribalTheme(db, commanderName);
     if (tribalType) {
-      tribalCards = fetchTribalCards(db, tribalType, colorExcludeFilter, legalityFilter, commanderExclude);
+      const ownedNames = useCollection ? new Set(ownedQty.keys()) : new Set<string>();
+      tribalCards = fetchTribalCards(db, tribalType, colorExcludeFilter, legalityFilter, commanderExclude, ownedNames);
       for (const c of tribalCards) tribalNames.add(c.name);
 
       // Ensure 'tribal' is in the themes
@@ -1930,6 +1978,58 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
           pickedNames.delete(r.card.name);
           totalPicked -= r.quantity;
           removed += r.quantity;
+        }
+      }
+    }
+  }
+
+  // ── Tribal minimum backfill ──────────────────────────────────────────────
+  // A tribal commander should ship a solid tribe presence — 12 permanents is
+  // the smallest floor that reads as "tribal" in a 99-card deck (roughly a
+  // third of the nonland slots) without starving other roles; below it the
+  // scoring bonus alone (see the 'tribal' snap above) wasn't enough to save
+  // owned/obscure tribe members from being outscored by staples.
+  const TRIBAL_MIN_PERMANENTS = 12;
+  if (tribalType && tribalNames.size > 0) {
+    let tribalCount = 0;
+    for (const p of picked) {
+      if (p.board === 'main' && isTribeCreature(p.card, tribalType)) tribalCount += p.quantity;
+    }
+    const tribalDeficit = TRIBAL_MIN_PERMANENTS - tribalCount;
+    if (tribalDeficit > 0) {
+      // Tribal candidates already live in the scored pool (fetchTribalCards
+      // feeds it) — reuse their scores rather than re-fetching from the DB.
+      // Only actual tribe/changeling creatures count toward the floor, so
+      // only they get pulled in here; non-creature tribal support (choosers,
+      // payoff spells) still gets its normal scoring bonus in the main pick.
+      const candidates = scored
+        .filter((s) => tribalNames.has(s.card.name) && isTribeCreature(s.card, tribalType) && !pickedNames.has(s.card.name) && getMaxQty(s.card) > 0)
+        .sort((a, b) => b.score - a.score)
+        .map((s) => s.card);
+      const displaceable = [...picked]
+        .filter((p) => p.board === 'main' && !tribalNames.has(p.card.name))
+        .sort((a, b) => {
+          const aScore = scored.find((s) => s.card.name === a.card.name)?.score || 0;
+          const bScore = scored.find((s) => s.card.name === b.card.name)?.score || 0;
+          return aScore - bScore; // lowest score first
+        });
+
+      let filled = 0;
+      for (const candidate of candidates) {
+        if (filled >= tribalDeficit || displaceable.length === 0) break;
+        const displaced = displaceable.shift()!;
+        const idx = picked.indexOf(displaced);
+        if (idx !== -1) {
+          picked.splice(idx, 1);
+          pickedNames.delete(displaced.card.name);
+          totalPicked -= displaced.quantity;
+        }
+        const qty = Math.min(getMaxQty(candidate), tribalDeficit - filled);
+        if (qty > 0) {
+          picked.push({ card: candidate, quantity: qty, board: 'main' });
+          pickedNames.add(candidate.name);
+          totalPicked += qty;
+          filled += qty;
         }
       }
     }

@@ -142,3 +142,22 @@ export function isMonoColourDeadFixer(
   // when every land you'd tap already makes the one colour you need.
   return /(lands|permanents) (you control )?have\s+"[^"]*any color[^"]*"/i.test(text);
 }
+
+/**
+ * A creature that counts toward a tribe's presence in the deck: literally of
+ * that creature type, or a changeling (every creature type — matches every
+ * tribe by definition). Mirrors the measure scripts/build-regress.ts uses to
+ * report tribe/changeling counts, so the builder's own tribal-minimum
+ * backfill (U1b) targets the same thing the harness checks.
+ */
+export function isTribeCreature(
+  card: { type_line: string | null; oracle_text: string | null; keywords?: string | null },
+  tribe: string
+): boolean {
+  const typeLine = (card.type_line || '').toLowerCase();
+  if (!typeLine.includes('creature')) return false;
+  if (typeLine.includes(tribe.toLowerCase())) return true;
+  const keywords = (card.keywords || '').toLowerCase();
+  const oracle = (card.oracle_text || '').toLowerCase();
+  return keywords.includes('changeling') || oracle.includes('all creature types') || oracle.includes('every creature type');
+}
