@@ -116,10 +116,14 @@ export function gateDeck(text: string, opts: GateOptions): GateVerdict {
 
     // Two numbers, because they differ: naming the commander's trigger is not
     // the same as being able to meet it, and that gap is the 2026-09-18 bug.
+    // A tribal-count condition has no such gap (a card either is/makes the
+    // type or it doesn't — that's the whole "enabler" check already), so the
+    // stricter enabler floor only applies to cost/type conditions.
+    const enablerGates = condition.threshold !== null || condition.requires;
     const status: GateStatus =
-      plan.ratio < PLAN_FAIL_RATIO || plan.enablerRatio < ENABLER_FAIL_RATIO
+      plan.ratio < PLAN_FAIL_RATIO || (enablerGates && plan.enablerRatio < ENABLER_FAIL_RATIO)
         ? 'fail'
-        : plan.ratio < PLAN_WARN_RATIO || plan.enablerRatio < ENABLER_WARN_RATIO
+        : plan.ratio < PLAN_WARN_RATIO || (enablerGates && plan.enablerRatio < ENABLER_WARN_RATIO)
           ? 'warn'
           : 'pass';
     const enablerNote =

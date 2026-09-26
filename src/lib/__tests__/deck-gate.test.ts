@@ -13,6 +13,7 @@ vi.mock('@/lib/db', () => ({ getDb: () => testDb }));
 vi.mock('../db', () => ({ getDb: () => testDb }));
 
 import { gateDeck, parseDecklist, type GateVerdict } from '../deck-gate';
+import { resolveLines } from '../deck-gate-parse';
 
 const list = (f: string) => fs.readFileSync(path.join(FIX, `${f}.txt`), 'utf8');
 const check = (v: GateVerdict, id: string) => {
@@ -227,5 +228,32 @@ describe('gateDeck — Alchemy names', () => {
     const v = gateDeck(list('emperor-v5'), { format: 'brawl' });
     expect(check(v, 'legality').status).toBe('pass');
     expect(v.unresolved).toEqual([]);
+  });
+
+  it('resolves the plain paper name to the A- printing when only that is legal', () => {
+    const { resolved, unresolved } = resolveLines([{ quantity: 1, name: 'Thran Portal', board: 'main' }], 'brawl');
+    expect(unresolved).toEqual([]);
+    expect(resolved[0].card.name).toBe('A-Thran Portal');
+  });
+
+  it('falls back to the plain row (not silently legal) when nothing resolvable is legal', () => {
+    const { resolved } = resolveLines([{ quantity: 1, name: 'Thran Portal', board: 'main' }], 'standard');
+    expect(resolved[0].card.name).toBe('Thran Portal');
+  });
+});
+
+describe('gateDeck — ownership, Arena rebalance reciprocity', () => {
+  it('a caller-owned plain name covers an A- line in the deck', () => {
+    const short = parseDecklist(list('emperor-v5')).map((l) => l.name).filter((n) => n !== 'A-Thran Portal');
+    const owned = [...short, 'Thran Portal'];
+    const v = gateDeck(list('emperor-v5'), { format: 'brawl', ownedCards: owned });
+    expect(check(v, 'ownership').status).toBe('pass');
+  });
+
+  it('a caller-owned A- name covers a plain line in the deck', () => {
+    const short = parseDecklist(list('emperor-v5')).map((l) => l.name).filter((n) => n !== 'A-Thran Portal');
+    const owned = [...short, 'A-Thran Portal'];
+    const v = gateDeck(list('emperor-v5'), { format: 'brawl', ownedCards: owned });
+    expect(check(v, 'ownership').status).toBe('pass');
   });
 });

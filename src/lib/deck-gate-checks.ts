@@ -20,6 +20,7 @@ import {
   isBasic,
   isLand,
   lockMatcher,
+  ownedAliases,
   parseIdentity,
   worst,
   type GateCheck,
@@ -102,9 +103,7 @@ export function identityCheck(
 export function ownershipCheck(resolved: Resolved[], opts: GateOptions): GateCheck {
   // Caller-supplied pool (build-api): never touch the desktop `collection` table.
   if (opts.ownedCards) {
-    const owned = new Set(
-      opts.ownedCards.map((n) => n.toLowerCase()).flatMap((n) => [n, frontName(n)])
-    );
+    const owned = new Set(opts.ownedCards.flatMap((n) => [...ownedAliases(n), ...ownedAliases(frontName(n))]));
     const missing = [
       ...new Set(
         resolved
@@ -141,8 +140,8 @@ export function ownershipCheck(resolved: Resolved[], opts: GateOptions): GateChe
   const owned = new Set<string>();
   let newest = '';
   for (const r of rows) {
-    owned.add(r.name.toLowerCase());
-    owned.add(frontName(r.name).toLowerCase());
+    for (const a of ownedAliases(r.name)) owned.add(a);
+    for (const a of ownedAliases(frontName(r.name))) owned.add(a);
     if (r.newest && r.newest > newest) newest = r.newest;
   }
 

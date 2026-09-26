@@ -191,13 +191,17 @@ export function resolveLines(
     if (cached !== undefined) return cached;
     const plain = name.replace(/^A-/, '');
     const front = plain.split(' // ')[0];
-    // Alchemy: the A- row and the paper row are both candidates; a printing that
-    // is legal in this format wins, so a rebalanced card Arena accepts is not
-    // rejected because the other row's legality JSON disagrees (A-Thran Portal
-    // is brawl-legal, plain Thran Portal is not).
+    const arenaName = `A-${plain}`;
+    // Alchemy: the A- row and the paper row are both candidates in EITHER
+    // direction — a plain-name input (paper collection export) must also try
+    // the rebalanced row, not just an A-prefixed input trying the plain one.
+    // A printing that is legal in this format wins; if neither is, the plain
+    // row is candidates[0] so the caller fails honestly instead of silently
+    // resolving to a not-legal printing.
     const candidates = [
-      name !== plain ? (exact.get(name) as DbCard | undefined) : undefined,
       exact.get(plain) as DbCard | undefined,
+      exact.get(arenaName) as DbCard | undefined,
+      name !== plain && name !== arenaName ? (exact.get(name) as DbCard | undefined) : undefined,
       byFront.get(front, front) as DbCard | undefined,
     ].filter(Boolean) as DbCard[];
     const card = candidates.find((c) => legalityOf(c, key) === 'legal') ?? candidates[0] ?? null;
@@ -222,6 +226,16 @@ export const isLand = (typeLine: string): boolean =>
 
 export const isBasic = (card: DbCard): boolean =>
   BASICS.has(frontName(card.name).toLowerCase()) || /Basic Land/.test(card.type_line || '');
+
+/**
+ * Both directions of an Arena rebalance name, lowercased: Arena grants the `A-`
+ * printing to owners of the original, but a paper/ManaBox collection export
+ * only ever lists the plain name (and vice versa for an Arena export).
+ */
+export function ownedAliases(name: string): string[] {
+  const lower = name.toLowerCase();
+  return lower.startsWith('a-') ? [lower, lower.slice(2)] : [lower, `a-${lower}`];
+}
 
 export function parseIdentity(raw: string | null): string[] {
   if (!raw) return [];

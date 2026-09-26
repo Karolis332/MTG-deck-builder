@@ -29,11 +29,19 @@ export interface PlanCondition {
   threshold: number | null;
   /** Spell type the trigger demands, if any. */
   requires: SpellRequirement | null;
+  /** Creature type the commander counts/pays off ("for each other Ooze you control"), if any. */
+  tribalType: string | null;
   /** Distinctive phrases from the commander's text; a card naming one interacts. */
   nouns: string[];
   /** Human-readable summary for the verdict table. */
   description: string;
 }
+
+/** Collective nouns a "for each X you control" clause can name without X being a creature type. */
+const TRIBAL_STOPWORDS = new Set([
+  'creature', 'permanent', 'land', 'basic', 'opponent', 'player', 'artifact',
+  'enchantment', 'planeswalker', 'card', 'token', 'color', 'other',
+]);
 
 const COST_RULES: Array<[RegExp, 'threshold']> = [
   [/if at least (\w+) mana was spent/i, 'threshold'],
@@ -102,6 +110,12 @@ export function deriveCondition(
     }
   }
 
+  let tribalType: string | null = null;
+  const tribalMatch = front.match(/for each (?:other )?(\w+?)s? you control/i);
+  if (tribalMatch && !TRIBAL_STOPWORDS.has(tribalMatch[1].toLowerCase())) {
+    tribalType = tribalMatch[1];
+  }
+
   const profile = analyzeCommander(text, typeLine, colorIdentity, manaCost ?? undefined);
   const nouns = new Set<string>();
   for (const cat of profile?.triggerCategories ?? []) {
@@ -109,17 +123,19 @@ export function deriveCondition(
   }
   if (requires === 'noncreature') nouns.add('noncreature');
   if (/transform/i.test(text)) nouns.add('transform');
+  if (tribalType) nouns.add(tribalType.toLowerCase());
 
   const parts: string[] = [];
   if (requires) parts.push(requires.replace('_', '/') + ' spell');
   if (threshold !== null) parts.push(`mana value ${threshold}+`);
+  if (tribalType) parts.push(`${tribalType} creatures`);
   const description = parts.length
     ? `commander wants: ${parts.join(', ')}`
     : profile?.payoffType
       ? `commander wants: ${profile.payoffType}`
       : 'commander sets no measurable condition';
 
-  return { threshold, requires, nouns: [...nouns], description };
+  return { threshold, requires, tribalType, nouns: [...nouns], description };
 }
 
 export interface PlanCard {
@@ -163,9 +179,24 @@ function matchesType(typeLine: string, requires: SpellRequirement): boolean {
   }
 }
 
+/**
+ * True when the card is (or makes, or is every) the commander's counted creature
+ * type: the type itself, a changeling / "every creature type" card, or a card
+ * that creates tokens of that type.
+ */
+function matchesTribal(card: PlanCard, type: string): boolean {
+  const front = card.typeLine.split(' // ')[0];
+  const typeRe = new RegExp(`\\b${type}\\b`, 'i');
+  if (typeRe.test(front)) return true;
+  const text = card.oracleText || '';
+  if (/changeling/i.test(text) || /is every creature type/i.test(text)) return true;
+  return new RegExp(`create[^.]*\\b${type}s?\\b[^.]*token`, 'i').test(text);
+}
+
 /** True when casting this card can satisfy the commander's trigger condition. */
 export function satisfiesCondition(card: PlanCard, condition: PlanCondition): boolean {
-  const { threshold, requires } = condition;
+  const { threshold, requires, tribalType } = condition;
+  if (tribalType) return matchesTribal(card, tribalType);
   if (!requires && threshold === null) return false;
   const typeOk = requires ? matchesType(card.typeLine, requires) : true;
   const costOk = threshold === null ? true : card.cmc >= threshold;
