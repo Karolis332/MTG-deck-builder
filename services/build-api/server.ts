@@ -60,7 +60,7 @@ function seedTempCollection(cards: OwnedCard[]): number {
   );
   let matched = 0;
   const tx = db.transaction(() => {
-    db.prepare('DELETE FROM collection').run();
+    db.prepare('DELETE FROM collection WHERE user_id = ?').run(TEMP_USER_ID);
     for (const c of cards) {
       const name = String(c.name || '').trim();
       if (!name || name.length > 200) continue;
@@ -78,7 +78,7 @@ function seedTempCollection(cards: OwnedCard[]): number {
 
 function clearTempCollection(): void {
   try {
-    getDb().prepare('DELETE FROM collection').run();
+    getDb().prepare('DELETE FROM collection WHERE user_id = ?').run(TEMP_USER_ID);
   } catch { /* next seed also deletes */ }
 }
 
