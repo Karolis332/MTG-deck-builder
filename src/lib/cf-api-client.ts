@@ -163,13 +163,19 @@ export async function getCFRecommendations(
   deckCards: string[],
   commander: string,
   limit: number = 30,
+  // false for internal callers (builder, diagnostics) whose recs no user sees, so
+  // they never enter rec_impressions and dilute the accept rate.
+  opts: { logImpressions?: boolean } = {},
 ): Promise<CFRecommendation[]> {
   if (!isCFEnabled()) return [];
 
   const deckHash = hashDeck(deckCards, commander);
+  // Internal calls neither read nor warm the local cache: a displayed call for the
+  // same deck must still reach the API, or its impression is never logged.
+  const useCache = opts.logImpressions !== false;
 
   // Check local cache first
-  const cached = getCachedRecommendations(deckHash);
+  const cached = useCache ? getCachedRecommendations(deckHash) : null;
   if (cached) return cached;
 
   // Call CF API
@@ -181,7 +187,10 @@ export async function getCFRecommendations(
     const resp = await fetch(`${url}/recommend`, {
       method: 'POST',
       headers: buildCFHeaders(),
-      body: JSON.stringify({ cards: deckCards, commander, limit }),
+      body: JSON.stringify({
+        cards: deckCards, commander, limit,
+        ...(opts.logImpressions === false && { log_impressions: false }),
+      }),
       signal: controller.signal,
     });
     clearTimeout(timeout);
@@ -189,7 +198,7 @@ export async function getCFRecommendations(
     if (!resp.ok) return [];
 
     const data: CFRecommendResponse = await resp.json();
-    if (data.recommendations.length > 0) {
+    if (useCache && data.recommendations.length > 0) {
       cacheRecommendations(deckHash, data.recommendations);
     }
     return data.recommendations;
