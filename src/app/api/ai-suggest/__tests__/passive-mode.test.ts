@@ -34,7 +34,10 @@ vi.mock('@/lib/openai-suggest', () => ({
 const getCFRecommendations = vi.fn();
 const resolveCFToDbCards = vi.fn((): SuggestionFixture[] => []);
 const trackCFEvent = vi.fn(async () => {});
-vi.mock('@/lib/cf-api-client', () => ({ getCFRecommendations, resolveCFToDbCards, trackCFEvent }));
+const getCFDeckContext = vi.fn(() => ({
+  commander: 'Krenko, Mob Boss', colorIdentity: 'R', deckCards: ['Krenko, Mob Boss', 'Lightning Bolt'],
+}));
+vi.mock('@/lib/cf-api-client', () => ({ getCFRecommendations, resolveCFToDbCards, trackCFEvent, getCFDeckContext }));
 
 vi.mock('@/lib/deck-templates', () => ({
   validateAgainstTemplate: vi.fn(() => ({ warnings: [], score: 100 })),
@@ -138,27 +141,28 @@ describe('POST /api/ai-suggest passive mode', () => {
 });
 
 describe('POST /api/ai-suggest/dismiss', () => {
-  it('posts a suggestion_dismissed event with the right payload', async () => {
+  it('posts a card_ignored event with the deck context read from deck_id', async () => {
     trackCFEvent.mockClear();
     const { POST } = await import('@/app/api/ai-suggest/dismiss/route');
     const req = new NextRequest('http://localhost/api/ai-suggest/dismiss', {
       method: 'POST',
       body: JSON.stringify({
+        deck_id: 7,
         impression_id: 'imp-1',
         card_name: 'Goblin Bombardment',
-        commander: 'Krenko, Mob Boss',
-        deck_cards: ['Lightning Bolt'],
         candidates_shown: ['Goblin Bombardment'],
       }),
     });
     const res = await POST(req);
     expect(res.status).toBe(200);
+    expect(getCFDeckContext).toHaveBeenCalledWith(7);
     expect(trackCFEvent).toHaveBeenCalledWith(
       expect.objectContaining({
-        event_type: 'suggestion_dismissed',
+        event_type: 'card_ignored',
         impression_id: 'imp-1',
         card_name: 'Goblin Bombardment',
         commander: 'Krenko, Mob Boss',
+        deck_cards: ['Krenko, Mob Boss', 'Lightning Bolt'],
       })
     );
   });

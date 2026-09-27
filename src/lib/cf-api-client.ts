@@ -426,6 +426,38 @@ export async function trackCFEvent(payload: Record<string, unknown>): Promise<vo
   } catch { /* never block on telemetry */ }
 }
 
+/**
+ * The deck state a CF impression is keyed on. The server joins an outcome to its
+ * impression on (hash(deck_cards, commander), card_name), and /api/ai-suggest
+ * sends main + commander names to /recommend — so outcome events must send the
+ * same set, read BEFORE the change is applied. Null when the deck has no
+ * commander (bandit events are commander-scoped) or on any DB error.
+ */
+export function getCFDeckContext(
+  deckId: number
+): { commander: string; colorIdentity: string; deckCards: string[] } | null {
+  try {
+    const db = getDb();
+    // Same ordering as getDeckWithCards, so partner decks pick the same commander.
+    const cmd = db.prepare(
+      `SELECT c.name, c.color_identity FROM deck_cards dc JOIN cards c ON dc.card_id = c.id
+       WHERE dc.deck_id = ? AND dc.board = 'commander' ORDER BY dc.sort_order, c.cmc, c.name LIMIT 1`
+    ).get(deckId) as { name: string; color_identity: string | null } | undefined;
+    if (!cmd) return null;
+
+    const deckCards = (db.prepare(
+      `SELECT c.name FROM deck_cards dc JOIN cards c ON dc.card_id = c.id
+       WHERE dc.deck_id = ? AND dc.board IN ('main', 'commander')`
+    ).all(deckId) as Array<{ name: string }>).map((r) => r.name);
+
+    let colorIdentity = '';
+    try { colorIdentity = (JSON.parse(cmd.color_identity || '[]') as string[]).join(''); } catch { /* leave empty */ }
+    return { commander: cmd.name, colorIdentity, deckCards };
+  } catch {
+    return null;
+  }
+}
+
 // ── Commander top decks (benchmark reference decks) ─────────────────────────
 
 export interface CFTopDeckCard {

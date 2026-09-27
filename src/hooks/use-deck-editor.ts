@@ -21,6 +21,12 @@ export interface DeckData {
 
 type DeckEntry = DeckData['cards'][number];
 
+// The set /api/ai-suggest sends to CF /recommend (main + commander). Events must
+// carry the same pre-change set or they never join their impression.
+export function cfDeckCardNames(deck: DeckData): string[] {
+  return deck.cards.filter((c) => c.board === 'main' || c.board === 'commander').map((c) => c.name);
+}
+
 // VW event tracking (fire-and-forget to server proxy)
 export function trackVWEvent(
   eventType: string,
@@ -269,7 +275,7 @@ export function useDeckEditor(deckId: number): UseDeckEditorResult {
       const cmdr = prevDeck.cards.find((c) => c.board === 'commander');
       if (cmdr) {
         const ci = cmdr.color_identity ? JSON.parse(cmdr.color_identity).sort().join('') : 'C';
-        const deckCardNames = prevDeck.cards.filter((c) => c.board === 'main').map((c) => c.name);
+        const deckCardNames = cfDeckCardNames(prevDeck);
         trackVWEvent('card_added', cmdr.name, ci, deckCardNames, card.name);
       }
     },
@@ -288,7 +294,7 @@ export function useDeckEditor(deckId: number): UseDeckEditorResult {
       const cmdr = prevDeck.cards.find((c) => c.board === 'commander');
       if (cmdr) {
         const ci = cmdr.color_identity ? JSON.parse(cmdr.color_identity).sort().join('') : 'C';
-        const deckCardNames = prevDeck.cards.filter((c) => c.board === 'main').map((c) => c.name);
+        const deckCardNames = cfDeckCardNames(prevDeck);
         trackVWEvent('card_removed', cmdr.name, ci, deckCardNames, entry.name);
       }
     },

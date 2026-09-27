@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getDb } from '@/lib/db';
 import { DEFAULT_DECK_SIZE, COMMANDER_FORMATS } from '@/lib/constants';
 import { createVersionSnapshot } from '@/lib/deck-versioning';
-import { getCFApiUrl, buildCFHeaders } from '@/lib/cf-api-client';
+import { getCFDeckContext, trackCFEvent } from '@/lib/cf-api-client';
 
 interface ChangeRequest {
   action: 'cut' | 'add';
@@ -13,53 +13,33 @@ interface ChangeRequest {
 
 // Report applied suggestion outcomes to the CF API bandit (POST /events/track).
 // This is the learning signal: card_added = +1.0, card_removed = -0.5 reward.
+// `ctx` is the deck BEFORE the apply (getCFDeckContext), so each outcome joins its impression.
 // Fire-and-forget with a short timeout — telemetry must never block or fail an apply.
 async function reportOutcomesToCF(
   db: ReturnType<typeof getDb>,
-  deckId: number,
+  ctx: ReturnType<typeof getCFDeckContext>,
   applied: ChangeRequest[],
   candidatesShown?: string[],
   impressionId?: string,
   source?: string
 ): Promise<void> {
+  if (!ctx) return; // bandit events are commander-scoped
   try {
-    const cmd = db.prepare(
-      `SELECT c.name, c.color_identity FROM deck_cards dc JOIN cards c ON dc.card_id = c.id
-       WHERE dc.deck_id = ? AND dc.board = 'commander' LIMIT 1`
-    ).get(deckId) as { name: string; color_identity: string | null } | undefined;
-    if (!cmd) return; // bandit events are commander-scoped
-
-    const deckCards = (db.prepare(
-      `SELECT c.name FROM deck_cards dc JOIN cards c ON dc.card_id = c.id
-       WHERE dc.deck_id = ? AND dc.board = 'main'`
-    ).all(deckId) as Array<{ name: string }>).map((r) => r.name);
-
-    let colorIdentity = '';
-    try { colorIdentity = (JSON.parse(cmd.color_identity || '[]') as string[]).join(''); } catch { /* leave empty */ }
-
-    const url = getCFApiUrl();
     await Promise.allSettled(
       applied.map((ch) => {
         const card = (db.prepare('SELECT cmc, type_line FROM cards WHERE id = ?').get(ch.cardId) || {}) as { cmc?: number; type_line?: string };
-        const controller = new AbortController();
-        const t = setTimeout(() => controller.abort(), 3000);
-        return fetch(`${url}/events/track`, {
-          method: 'POST',
-          headers: buildCFHeaders(),
-          body: JSON.stringify({
-            event_type: ch.action === 'add' ? 'card_added' : 'card_removed',
-            impression_id: impressionId,
-            source,
-            commander: cmd.name,
-            color_identity: colorIdentity,
-            deck_cards: deckCards,
-            card_name: ch.cardName,
-            card_cmc: card.cmc ?? 0,
-            card_type: card.type_line ?? '',
-            candidates_shown: candidatesShown,
-          }),
-          signal: controller.signal,
-        }).finally(() => clearTimeout(t));
+        return trackCFEvent({
+          event_type: ch.action === 'add' ? 'card_added' : 'card_removed',
+          impression_id: impressionId,
+          source,
+          commander: ctx.commander,
+          color_identity: ctx.colorIdentity,
+          deck_cards: ctx.deckCards,
+          card_name: ch.cardName,
+          card_cmc: card.cmc ?? 0,
+          card_type: card.type_line ?? '',
+          candidates_shown: candidatesShown,
+        });
       })
     );
   } catch { /* never block apply on telemetry */ }
@@ -82,6 +62,8 @@ export async function POST(request: NextRequest) {
     }
 
     const db = getDb();
+    // Snapshot before any change: the CF impression was keyed on this deck state.
+    const cfContext = getCFDeckContext(deck_id);
 
     // ── Get deck info including user_id for collection validation ─────
     const deckRow = db.prepare('SELECT format, user_id FROM decks WHERE id = ?').get(deck_id) as { format: string | null; user_id: number | null } | undefined;
@@ -238,7 +220,7 @@ export async function POST(request: NextRequest) {
 
     // Feed the bandit — the outcomes side of rec_impressions (was never wired; see
     // docs/RECOMMENDER_METHODS_AUDIT.md #8).
-    await reportOutcomesToCF(db, deck_id, filteredChanges, candidatesShown, impression_id, source);
+    await reportOutcomesToCF(db, cfContext, filteredChanges, candidatesShown, impression_id, source);
 
     return NextResponse.json({
       ok: true,
