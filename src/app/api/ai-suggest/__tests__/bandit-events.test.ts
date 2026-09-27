@@ -216,4 +216,22 @@ describe('getCFRecommendations log_impressions', () => {
     expect(internal).toEqual({ cards: ['Lightning Bolt'], commander: 'Krenko, Mob Boss', limit: 50, log_impressions: false });
     expect(displayed).toEqual({ cards: ['Mountain'], commander: 'Krenko, Mob Boss', limit: 30 });
   });
+
+  it('internal calls neither read nor warm the local cache a displayed call would hit', async () => {
+    memDb.exec(`CREATE TABLE cf_cache (deck_hash TEXT, card_name TEXT, cf_score REAL, similar_deck_count INTEGER,
+      reason TEXT, fetched_at TEXT, PRIMARY KEY (deck_hash, card_name))`);
+    const recs = { recommendations: [{ card_name: 'Goblin Bombardment', cf_score: 0.9, similar_deck_count: 40 }] };
+    fetchMock.mockImplementation(async () => new Response(JSON.stringify(recs), { status: 200 }));
+    const { getCFRecommendations } = await import('@/lib/cf-api-client');
+    const internal = () => getCFRecommendations(['Lightning Bolt'], 'Krenko, Mob Boss', 50, { logImpressions: false });
+    const displayed = () => getCFRecommendations(['Lightning Bolt'], 'Krenko, Mob Boss', 30);
+
+    await internal();
+    expect(memDb.prepare('SELECT COUNT(*) AS n FROM cf_cache').get()).toEqual({ n: 0 }); // no write
+    await displayed(); // reaches the API (impression logged), warms the cache
+    await internal(); // no read: still reaches the API
+    expect(fetchMock).toHaveBeenCalledTimes(3);
+    expect(await displayed()).toHaveLength(1); // displayed calls keep the cache
+    expect(fetchMock).toHaveBeenCalledTimes(3);
+  });
 });

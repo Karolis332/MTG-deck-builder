@@ -170,9 +170,12 @@ export async function getCFRecommendations(
   if (!isCFEnabled()) return [];
 
   const deckHash = hashDeck(deckCards, commander);
+  // Internal calls neither read nor warm the local cache: a displayed call for the
+  // same deck must still reach the API, or its impression is never logged.
+  const useCache = opts.logImpressions !== false;
 
   // Check local cache first
-  const cached = getCachedRecommendations(deckHash);
+  const cached = useCache ? getCachedRecommendations(deckHash) : null;
   if (cached) return cached;
 
   // Call CF API
@@ -195,7 +198,7 @@ export async function getCFRecommendations(
     if (!resp.ok) return [];
 
     const data: CFRecommendResponse = await resp.json();
-    if (data.recommendations.length > 0) {
+    if (useCache && data.recommendations.length > 0) {
       cacheRecommendations(deckHash, data.recommendations);
     }
     return data.recommendations;
