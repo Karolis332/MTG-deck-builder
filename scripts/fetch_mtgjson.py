@@ -4,13 +4,15 @@ Fetch MTGJSON AtomicCards data and enrich the local SQLite database
 with creature subtypes and Arena IDs.
 
 Reads from: https://mtgjson.com/api/v5/AtomicCards.json.gz
-Writes to:  data/mtg-deck-builder.db (cards.subtypes, cards.arena_id)
+Writes to:  the live app DB (%APPDATA%/the-black-grimoire/data) when present,
+            else data/mtg-deck-builder.db (cards.subtypes, cards.arena_id)
 
 Usage:
   pip install -r requirements.txt
-  python scripts/fetch_mtgjson.py
+  py scripts/fetch_mtgjson.py [--db PATH]
 """
 
+import argparse
 import gzip
 import json
 import os
@@ -30,7 +32,19 @@ except ImportError:
 SCRIPT_DIR = Path(__file__).parent
 PROJECT_ROOT = SCRIPT_DIR.parent
 DATA_DIR = PROJECT_ROOT / "data"
-DB_PATH = DATA_DIR / "mtg-deck-builder.db"
+
+
+def _default_db() -> Path:
+    """Prefer the production Electron DB (APPDATA) over the repo-local copy, like classify_lands.py."""
+    appdata = os.environ.get("APPDATA")
+    if appdata:
+        electron_db = Path(appdata) / "the-black-grimoire" / "data" / "mtg-deck-builder.db"
+        if electron_db.exists():
+            return electron_db
+    return DATA_DIR / "mtg-deck-builder.db"
+
+
+DB_PATH = _default_db()
 CACHE_PATH = DATA_DIR / "AtomicCards.json.gz"
 
 ATOMIC_URL = "https://mtgjson.com/api/v5/AtomicCards.json.gz"
@@ -168,7 +182,7 @@ def update_database(card_data: dict):
 
         if len(updates) >= batch_size:
             conn.executemany(
-                "UPDATE cards SET subtypes = ?, arena_id = ? WHERE name = ?",
+                "UPDATE cards SET subtypes = ?, arena_id = COALESCE(arena_id, ?) WHERE name = ?",
                 updates
             )
             conn.commit()
@@ -178,7 +192,7 @@ def update_database(card_data: dict):
     # Flush remaining
     if updates:
         conn.executemany(
-            "UPDATE cards SET subtypes = ?, arena_id = ? WHERE name = ?",
+            "UPDATE cards SET subtypes = ?, arena_id = COALESCE(arena_id, ?) WHERE name = ?",
             updates
         )
         conn.commit()
@@ -210,7 +224,11 @@ def update_database(card_data: dict):
 # ── Main ──────────────────────────────────────────────────────────────────────
 
 def main():
-    print("=== MTGJSON Card Data Enrichment ===\n")
+    global DB_PATH
+    parser = argparse.ArgumentParser(description="Enrich cards with MTGJSON subtypes and Arena IDs")
+    parser.add_argument("--db", type=Path, default=DB_PATH, help="SQLite database path")
+    DB_PATH = parser.parse_args().db
+    print(f"=== MTGJSON Card Data Enrichment === DB: {DB_PATH}\n")
 
     if should_download():
         download_atomic_cards()
