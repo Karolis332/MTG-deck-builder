@@ -5,6 +5,7 @@ import { fitsColorIdentity, isLegalInFormat, extractRejectedCards, buildRejectio
 import { validateSwapClaims } from '@/lib/card-claim-validator';
 import { queryKnowledge, formatKnowledgeForPrompt } from '@/lib/knowledge-retrieval';
 import { getCFRecommendations, getEDHRECConsensus, optimizeDeck, type MatchRecord } from '@/lib/cf-api-client';
+import { cfDeckCardNames } from '@/lib/cf-impressions';
 import { getEdhrecRecommendations } from '@/lib/edhrec';
 import type { DbCard } from '@/lib/types';
 
@@ -470,7 +471,8 @@ export async function POST(request: NextRequest) {
       const cmdName = commanderCards[0].name;
       try {
         const [cfRecs, consensus] = await Promise.all([
-          getCFRecommendations(deckCardNames, cmdName, 20).catch(() => []),
+          // Same set as the feed and the apply events (main + commander), so accepts join.
+          getCFRecommendations(cfDeckCardNames(deck.cards), cmdName, 20).catch(() => []),
           getEDHRECConsensus(deckCardNames, cmdName).catch(() => null),
         ]);
 

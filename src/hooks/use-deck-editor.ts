@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useReducer, useRef, useState } from 'react';
 import type { DbCard, DeckPatchOp } from '@/lib/types';
+import { cfDeckCardNames } from '@/lib/cf-impressions';
 
 export interface DeckData {
   id: number;
@@ -20,12 +21,6 @@ export interface DeckData {
 }
 
 type DeckEntry = DeckData['cards'][number];
-
-// The set /api/ai-suggest sends to CF /recommend (main + commander). Events must
-// carry the same pre-change set or they never join their impression.
-export function cfDeckCardNames(deck: DeckData): string[] {
-  return deck.cards.filter((c) => c.board === 'main' || c.board === 'commander').map((c) => c.name);
-}
 
 // VW event tracking (fire-and-forget to server proxy)
 export function trackVWEvent(
@@ -275,7 +270,7 @@ export function useDeckEditor(deckId: number): UseDeckEditorResult {
       const cmdr = prevDeck.cards.find((c) => c.board === 'commander');
       if (cmdr) {
         const ci = cmdr.color_identity ? JSON.parse(cmdr.color_identity).sort().join('') : 'C';
-        const deckCardNames = cfDeckCardNames(prevDeck);
+        const deckCardNames = cfDeckCardNames(prevDeck.cards);
         trackVWEvent('card_added', cmdr.name, ci, deckCardNames, card.name);
       }
     },
@@ -294,7 +289,7 @@ export function useDeckEditor(deckId: number): UseDeckEditorResult {
       const cmdr = prevDeck.cards.find((c) => c.board === 'commander');
       if (cmdr) {
         const ci = cmdr.color_identity ? JSON.parse(cmdr.color_identity).sort().join('') : 'C';
-        const deckCardNames = cfDeckCardNames(prevDeck);
+        const deckCardNames = cfDeckCardNames(prevDeck.cards);
         trackVWEvent('card_removed', cmdr.name, ci, deckCardNames, entry.name);
       }
     },

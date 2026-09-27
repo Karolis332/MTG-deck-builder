@@ -3,6 +3,8 @@ import { getDb } from '@/lib/db';
 import { DEFAULT_DECK_SIZE, COMMANDER_FORMATS } from '@/lib/constants';
 import { createVersionSnapshot } from '@/lib/deck-versioning';
 import { getCFDeckContext, trackCFEvent } from '@/lib/cf-api-client';
+import { recallCFImpression } from '@/lib/cf-impressions';
+import { getAuthUser, unauthorizedResponse } from '@/lib/auth-middleware';
 
 interface ChangeRequest {
   action: 'cut' | 'add';
@@ -13,7 +15,7 @@ interface ChangeRequest {
 
 // Report applied suggestion outcomes to the CF API bandit (POST /events/track).
 // This is the learning signal: card_added = +1.0, card_removed = -0.5 reward.
-// `ctx` is the deck BEFORE the apply (getCFDeckContext), so each outcome joins its impression.
+// `ctx` is the deck the impression was logged against, so each outcome joins it.
 // Fire-and-forget with a short timeout — telemetry must never block or fail an apply.
 async function reportOutcomesToCF(
   db: ReturnType<typeof getDb>,
@@ -48,6 +50,8 @@ async function reportOutcomesToCF(
 // POST /api/ai-suggest/apply — apply selected changes to a deck
 // Also creates a new deck version snapshot before applying
 export async function POST(request: NextRequest) {
+  const user = await getAuthUser(request);
+  if (!user) return unauthorizedResponse();
   try {
     const body = await request.json();
     const { deck_id, changes, candidatesShown, impression_id, source } = body as {
@@ -62,11 +66,15 @@ export async function POST(request: NextRequest) {
     }
 
     const db = getDb();
-    // Snapshot before any change: the CF impression was keyed on this deck state.
-    const cfContext = getCFDeckContext(deck_id);
 
     // ── Get deck info including user_id for collection validation ─────
-    const deckRow = db.prepare('SELECT format, user_id FROM decks WHERE id = ?').get(deck_id) as { format: string | null; user_id: number | null } | undefined;
+    const deckRow = db.prepare('SELECT format, user_id FROM decks WHERE id = ? AND user_id = ?').get(deck_id, user.userId) as { format: string | null; user_id: number | null } | undefined;
+    if (!deckRow) return NextResponse.json({ error: 'Deck not found' }, { status: 404 });
+
+    // CF context for the outcome events, read before any change: the deck the feed's
+    // impression was logged against (so "Apply all" joins), else this deck as it is now.
+    const cfContext = recallCFImpression(impression_id, deck_id, user.userId)
+      ?? getCFDeckContext(deck_id, user.userId);
     const format = deckRow?.format || '';
     const userId = deckRow?.user_id;
 

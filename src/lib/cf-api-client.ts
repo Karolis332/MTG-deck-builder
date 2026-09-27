@@ -431,18 +431,20 @@ export async function trackCFEvent(payload: Record<string, unknown>): Promise<vo
  * impression on (hash(deck_cards, commander), card_name), and /api/ai-suggest
  * sends main + commander names to /recommend — so outcome events must send the
  * same set, read BEFORE the change is applied. Null when the deck has no
- * commander (bandit events are commander-scoped) or on any DB error.
+ * commander (bandit events are commander-scoped), isn't the user's, or on any DB error.
  */
 export function getCFDeckContext(
-  deckId: number
+  deckId: number,
+  userId: number
 ): { commander: string; colorIdentity: string; deckCards: string[] } | null {
   try {
     const db = getDb();
     // Same ordering as getDeckWithCards, so partner decks pick the same commander.
     const cmd = db.prepare(
       `SELECT c.name, c.color_identity FROM deck_cards dc JOIN cards c ON dc.card_id = c.id
-       WHERE dc.deck_id = ? AND dc.board = 'commander' ORDER BY dc.sort_order, c.cmc, c.name LIMIT 1`
-    ).get(deckId) as { name: string; color_identity: string | null } | undefined;
+       JOIN decks d ON d.id = dc.deck_id
+       WHERE dc.deck_id = ? AND d.user_id = ? AND dc.board = 'commander' ORDER BY dc.sort_order, c.cmc, c.name LIMIT 1`
+    ).get(deckId, userId) as { name: string; color_identity: string | null } | undefined;
     if (!cmd) return null;
 
     const deckCards = (db.prepare(

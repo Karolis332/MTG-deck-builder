@@ -1,5 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { NextRequest } from 'next/server';
+import { cfDeckCardNames, recallCFImpression } from '@/lib/cf-impressions';
 
 const getDeckWithCards = vi.fn();
 const getFormatStaples = vi.fn(() => []);
@@ -34,10 +35,8 @@ vi.mock('@/lib/openai-suggest', () => ({
 const getCFRecommendations = vi.fn();
 const resolveCFToDbCards = vi.fn((): SuggestionFixture[] => []);
 const trackCFEvent = vi.fn(async () => {});
-const getCFDeckContext = vi.fn(() => ({
-  commander: 'Krenko, Mob Boss', colorIdentity: 'R', deckCards: ['Krenko, Mob Boss', 'Lightning Bolt'],
-}));
-vi.mock('@/lib/cf-api-client', () => ({ getCFRecommendations, resolveCFToDbCards, trackCFEvent, getCFDeckContext }));
+vi.mock('@/lib/cf-api-client', () => ({ getCFRecommendations, resolveCFToDbCards, trackCFEvent }));
+vi.mock('@/lib/auth-middleware', () => ({ getAuthUser: vi.fn(async () => ({ userId: 1, username: 'u' })) }));
 
 vi.mock('@/lib/deck-templates', () => ({
   validateAgainstTemplate: vi.fn(() => ({ warnings: [], score: 100 })),
@@ -117,6 +116,14 @@ describe('POST /api/ai-suggest passive mode', () => {
     expect(trackCFEvent).toHaveBeenCalledWith(
       expect.objectContaining({ event_type: 'suggestions_shown', mode: 'passive', source: 'collaborative-filtering' })
     );
+
+    // The registered impression (what apply/dismiss events carry) is exactly the
+    // card set /recommend hashed — the feed side of the chat/editor/apply parity.
+    const [sentCards, sentCommander] = getCFRecommendations.mock.calls[0];
+    const registered = recallCFImpression(json.impression_id, 1, 1);
+    expect(registered?.deckCards).toEqual(sentCards);
+    expect(registered?.commander).toBe(sentCommander);
+    expect(sentCards).toEqual(cfDeckCardNames(getDeckWithCards.mock.results[0].value.cards));
   });
 
   it('falls back to synergy/rules when CF is empty, and lists both sources_tried, never calling an LLM', async () => {
@@ -139,31 +146,4 @@ describe('POST /api/ai-suggest passive mode', () => {
     expect(getOpenAISuggestions).not.toHaveBeenCalled();
   });
 });
-
-describe('POST /api/ai-suggest/dismiss', () => {
-  it('posts a card_ignored event with the deck context read from deck_id', async () => {
-    trackCFEvent.mockClear();
-    const { POST } = await import('@/app/api/ai-suggest/dismiss/route');
-    const req = new NextRequest('http://localhost/api/ai-suggest/dismiss', {
-      method: 'POST',
-      body: JSON.stringify({
-        deck_id: 7,
-        impression_id: 'imp-1',
-        card_name: 'Goblin Bombardment',
-        candidates_shown: ['Goblin Bombardment'],
-      }),
-    });
-    const res = await POST(req);
-    expect(res.status).toBe(200);
-    expect(getCFDeckContext).toHaveBeenCalledWith(7);
-    expect(trackCFEvent).toHaveBeenCalledWith(
-      expect.objectContaining({
-        event_type: 'card_ignored',
-        impression_id: 'imp-1',
-        card_name: 'Goblin Bombardment',
-        commander: 'Krenko, Mob Boss',
-        deck_cards: ['Krenko, Mob Boss', 'Lightning Bolt'],
-      })
-    );
-  });
-});
+// Dismiss is covered in bandit-events.test.ts (auth, impression registry, source filter).

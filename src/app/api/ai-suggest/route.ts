@@ -7,6 +7,8 @@ import { getSynergySuggestions, detectDeckThemes, SYNERGY_GROUPS } from '@/lib/d
 import { getCardGlobalScore } from '@/lib/global-learner';
 import { getOpenAISuggestions, resolveOpenAISuggestions } from '@/lib/openai-suggest';
 import { getCFRecommendations, resolveCFToDbCards, trackCFEvent } from '@/lib/cf-api-client';
+import { cfDeckCardNames, rememberCFImpression } from '@/lib/cf-impressions';
+import { getAuthUser } from '@/lib/auth-middleware';
 import { DEFAULT_LAND_COUNT, DEFAULT_DECK_SIZE, COMMANDER_FORMATS, getLegalityKey } from '@/lib/constants';
 import { validateAgainstTemplate } from '@/lib/deck-templates';
 import { analyzeCommander } from '@/lib/commander-synergy';
@@ -159,9 +161,7 @@ export async function POST(request: NextRequest) {
         const commanderCard = deck.cards.find((c) => c.board === 'commander');
         const commanderName = commanderCard?.name || '';
         if (commanderName) {
-          const mainCards = deck.cards
-            .filter((c) => c.board === 'main' || c.board === 'commander')
-            .map((c) => c.name);
+          const mainCards = cfDeckCardNames(deck.cards);
           const cfRecs = await getCFRecommendations(mainCards, commanderName);
           if (cfRecs.length > 0) {
             const existingCardIds = new Set(deck.cards.map((c) => c.card_id || c.id));
@@ -200,6 +200,15 @@ export async function POST(request: NextRequest) {
                 suggestionCount: cfSuggestions.length,
                 cardsSuggested: cfSuggestions.map((s) => s.card.name),
                 latencyMs: Date.now() - t0,
+              });
+              // Apply/dismiss recall this by impression_id, so every event in a batch
+              // carries the deck state the CF impression was logged against.
+              rememberCFImpression(impressionId, {
+                deckId: deck_id,
+                userId: (await getAuthUser(request))?.userId ?? null,
+                commander: commanderName,
+                colorIdentity: Array.from(deckColors).join(''),
+                deckCards: mainCards,
               });
               return finalizeSuggestResponse({
                 suggestions: cfSuggestions,
