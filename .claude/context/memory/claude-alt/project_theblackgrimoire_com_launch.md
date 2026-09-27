@@ -1,0 +1,49 @@
+---
+name: project-theblackgrimoire-com-launch
+description: "theblackgrimoire.com went public on 2026-09-06 (black-grimoire-web on the VPS, TLS, feedback relay, GEO files, commander pages, Umami, Search Console); how to deploy and what the operator still owes"
+metadata: 
+  node_type: memory
+  type: project
+  originSessionId: a6cf997f-c648-4ed8-9cce-6aa53cc1c250
+  modified: 2026-09-08T11:10:00.000Z
+---
+
+`https://theblackgrimoire.com` is the public, free, accounts-off deployment of `C:/Users/QuLeR/black-grimoire-web`
+(live 2026-09-06). Same pm2 process as the friends deploy (`black-grimoire-web`, `next start -p 3100`, `/opt/black-grimoire-web`).
+Hostinger DNS (A @ → 187.77.110.100, CNAME www, TXT google-site-verification), nginx vhost `/etc/nginx/sites-available/theblackgrimoire.com`
+(TLS via certbot, canonical redirects, HSTS, `/umami/` proxy), Let's Encrypt auto-renew. Deploy = `git archive HEAD | ssh tar -x` +
+`npm run build` + `pm2 restart` (repo DEPLOY.md "Production"). Shipped that day: answer-first landing redesigned by Codex `-m gpt-6-astra`,
+EDHREC-style `/commanders` + `/commanders/[slug]` (top-500 in sitemap), feedback widget + contact → Neon `feedback` → Telegram,
+supporters section (`src/lib/supporters.ts`), llms.txt/ai.json/robots for AI crawlers, self-hosted Umami (`/opt/umami`, creds only on the VPS),
+Google Search Console verified + sitemap, IndexNow (key gitignored in `.indexnow-key`), `docs/DISTRIBUTION_PLAN.md`.
+Strategy stated by the operator: free for players, ads later, donations now; feedback loops before Magic-group posting.
+
+**Why:** operator bought the exact-match domain and pivoted from the paused desktop engine round to a public launch the same day.
+**How to apply:** never put basic auth back on the domain vhost (crawlers must reach it). `NEXT_PUBLIC_DONATE_URL` stays unset until the
+operator supplies a payment link. Accounts are ON since 2026-09-07 (Clerk production instance, keys only on the VPS, Google login
+disabled, email+password only); the Clerk middleware must protect ONLY /dashboard — a public-route allowlist silently locked the SEO pages once. Gate launch quality with the GEO
+scanner (`geo-scraper-file-generator`, `node dist/cli.js scan <url> --audit-only`): 68 → 73/100 (B) on launch day, 72 with accounts on
+and `/optimizer` (2026-09-07). The web builder has NO Competitive Brawl option even though the engine that supports it is on the VPS since
+2026-09-07 — it is a web-only change; never claim the option until it exists in `builder/page.tsx`.
+`/optimizer` (2026-09-07) is the deck-optimizer section: it proxies to the build-api `POST /optimize` (MTG-deck-builder
+`services/build-api/optimize.ts`). Deploying the build-api = git-archive `src services package*.json tsconfig.json` into
+`/opt/grimoire-build-api/app`, then **`npm install --ignore-scripts && npm rebuild better-sqlite3`** — plain `npm install` runs the repo's
+`electron-builder install-app-deps` postinstall and rebuilds better-sqlite3 for Electron's ABI, which took every endpoint down for ~10 min.
+Rate limiting on this site must key on `clientIp()` (`src/lib/client-ip.ts`, LAST X-Forwarded-For hop / X-Real-IP): the vhost uses
+`$proxy_add_x_forwarded_for`, so the first hop is whatever the client sends — five routes used it until the 2026-09-07 review.
+GTM status 2026-09-08: technical SEO is done (Lighthouse 95/100/100/100, GEO 78/100 after sprint 0 — remaining GEO points are
+content depth/answer-first paragraphs/author bios/social links, not infrastructure); distribution has NOT started (Umami 45
+visitors/week, 0 referrers, Bing/DDG not indexed because Bing Webmaster import is still the operator's). The plan is
+`docs/GO_TO_MARKET.md` in black-grimoire-web (sprints, KPIs, owner split) on top of `docs/DISTRIBUTION_PLAN.md`. PageSpeed
+Insights API is quota-blocked without a key — measure with `CHROME_PATH=<playwright chromium> npx lighthouse@12`.
+Ship review: implement, then spawn fresh-context reviewer agents (typescript-reviewer, security-reviewer on Opus) with the commit range;
+their findings do not arrive as notifications — pull the final report from `.claude-alt/projects/<proj>/<session>/subagents/agent-*.jsonl`.
+Live QA (2026-09-08): the server can be 200 while the page is broken — `/commanders` threw "module is not defined" in every
+browser for two days because a `require.main === module` self-check inside `src/lib/commander-slug.ts` was bundled into the
+client chunk; pm2/nginx logs showed nothing. Never put node-only self-checks in `src/lib` files that a client component imports —
+keep them in `scripts/`. Verify with a real browser: `node verify-2026-09-08/sweep.mjs` (21 pages × desktop/mobile + 15 API checks,
+Playwright loaded from `geo-scraper-file-generator/node_modules`) and `verify-2026-09-08/flows.mjs` (builder/optimizer/commander
+search/catalogue flows, ~1 min). Favicon "missing" = the dark book art vanishing on a dark tab strip; icons are generated by
+`scripts/make-icon.py` (gold pentagram, ICO 16/32/48). `/api/catalog` requires `commander=`. While Codex edits the main checkout,
+hotfixes go through a separate worktree on `master` (`git worktree add ../black-grimoire-web-hotfix master`) and deploy from there.
+Related: [[feedback-codex-gpt6-astra-design]], [[project-session-state-2026-08-23]].
