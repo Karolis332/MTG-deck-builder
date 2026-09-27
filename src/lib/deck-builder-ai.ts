@@ -1129,7 +1129,7 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
   if (isCommander && commanderName) {
     try {
       const deckCardNames = poolPrefix(30).map(c => c.name);
-      const cfRecs = await getCFRecommendations(deckCardNames, commanderName, 50);
+      const cfRecs = await getCFRecommendations(deckCardNames, commanderName, 50, { logImpressions: false });
       for (const rec of cfRecs) {
         cfScoreMap.set(rec.card_name, rec.cf_score);
       }

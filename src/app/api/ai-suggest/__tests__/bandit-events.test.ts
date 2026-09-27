@@ -204,3 +204,16 @@ describe('cfDeckCardNames (feed, chat and editor all use it for /recommend and e
     ])).toEqual(['Krenko, Mob Boss', 'Lightning Bolt']);
   });
 });
+
+describe('getCFRecommendations log_impressions', () => {
+  it('sends log_impressions:false only when an internal caller asks for it', async () => {
+    const { getCFRecommendations } = await import('@/lib/cf-api-client');
+    fetchMock.mockImplementation(async () => new Response('{"recommendations":[]}', { status: 200 }));
+    await getCFRecommendations(['Lightning Bolt'], 'Krenko, Mob Boss', 50, { logImpressions: false });
+    await getCFRecommendations(['Mountain'], 'Krenko, Mob Boss', 30);
+    const [internal, displayed] = sentBodies();
+    expect(fetchMock.mock.calls[0][0]).toBe(`${CF_URL}/recommend`);
+    expect(internal).toEqual({ cards: ['Lightning Bolt'], commander: 'Krenko, Mob Boss', limit: 50, log_impressions: false });
+    expect(displayed).toEqual({ cards: ['Mountain'], commander: 'Krenko, Mob Boss', limit: 30 });
+  });
+});

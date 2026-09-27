@@ -79,7 +79,7 @@ function info(name: string, commander: string, cf: Map<string, number>): CardInf
 async function cfRanks(deck: Line[], commander: string): Promise<Map<string, number>> {
   const m = new Map<string, number>();
   try {
-    const res = await fetch(`${cfBase}/recommend`, { method: 'POST', headers: { 'content-type': 'application/json', 'x-api-key': cfKey }, body: JSON.stringify({ cards: deck.slice(1).map((c) => c.name), commander, limit: 80 }), signal: AbortSignal.timeout(20_000) });
+    const res = await fetch(`${cfBase}/recommend`, { method: 'POST', headers: { 'content-type': 'application/json', 'x-api-key': cfKey }, body: JSON.stringify({ cards: deck.slice(1).map((c) => c.name), commander, limit: 80, log_impressions: false }), signal: AbortSignal.timeout(20_000) });
     const data = await res.json() as { recommendations?: Array<{ card_name?: string; name?: string }> };
     (data.recommendations || []).forEach((r, i) => m.set(r.card_name || r.name || '', i + 1));
   } catch { /* CF offline: ranks stay empty and the page says so */ }

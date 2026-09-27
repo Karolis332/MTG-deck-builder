@@ -163,6 +163,9 @@ export async function getCFRecommendations(
   deckCards: string[],
   commander: string,
   limit: number = 30,
+  // false for internal callers (builder, diagnostics) whose recs no user sees, so
+  // they never enter rec_impressions and dilute the accept rate.
+  opts: { logImpressions?: boolean } = {},
 ): Promise<CFRecommendation[]> {
   if (!isCFEnabled()) return [];
 
@@ -181,7 +184,10 @@ export async function getCFRecommendations(
     const resp = await fetch(`${url}/recommend`, {
       method: 'POST',
       headers: buildCFHeaders(),
-      body: JSON.stringify({ cards: deckCards, commander, limit }),
+      body: JSON.stringify({
+        cards: deckCards, commander, limit,
+        ...(opts.logImpressions === false && { log_impressions: false }),
+      }),
       signal: controller.signal,
     });
     clearTimeout(timeout);

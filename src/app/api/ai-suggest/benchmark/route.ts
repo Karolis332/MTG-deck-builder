@@ -96,7 +96,7 @@ export async function POST(request: NextRequest) {
     // ── 2. CF API (collaborative filtering model) ──────────────────────
     const t0cf = Date.now();
     try {
-      const cfRecs = await getCFRecommendations(cardNames, commander, 30);
+      const cfRecs = await getCFRecommendations(cardNames, commander, 30, { logImpressions: false });
       const cfMs = Date.now() - t0cf;
       const cfNames = cfRecs.map(r => r.card_name);
       const cfHits = cfNames
