@@ -33,8 +33,8 @@ const GROUPS: [string, string, string[]][] = [
   ['Walkers', 'Tam makes all of these but Jared cost {1} less.', ['Chandra, Torch of Defiance', 'Chandra, Fire Artisan', 'Oko, Thief of Crowns', 'Elspeth, Sun\'s Champion', 'Ajani Unrelenting', 'Ajani Resolute', 'Professor Dellian Fel', 'Vraska, Betrayal\'s Sting', 'Jared Carthalion', 'Sarkhan the Masterless', 'Ob Nixilis Reignited', 'Jace, Reality Sculptor', 'Sorin, Vengeful Bloodlord', 'The Wanderer', 'Jace, Memory Adept', 'Saheeli, Sublime Artificer', 'Kaya, Intangible Slayer', 'Kaito, Dancing Shadow', 'Quintorius Kand']],
   ['Ways', 'Each one creates the Jace token or adds 2–7 loyalty to it, and gives every walker a new ability.', ['Way of the Mentor', 'Way of the Paradox', 'Way of the Pyromancer', 'Way of the Mind Sculptor', 'Way of the Warlord', 'Way of the Wildspeaker', 'Way of the Healer']],
   ['Jace token package', 'Adds loyalty to the Jace token and finds the pieces.', ['Protege\'s Awakening', 'Avatar of Burgeoning Echoes', 'Arcane Amphisbaena', 'Rewrite Regrets', 'Entrust the Spark', 'Pia, Aether Ascetic']],
-  ['Protection', 'Keeps attackers, removal and wipes off the walkers.', ['Tomik, Orzhov Lawmage', 'Archangel of Tithes', 'Liliana the Faultless', 'Counterspell', 'Dovin\'s Veto', 'Boros Charm', 'Vigorbloom Charm', 'Fatehold Charm']],
-  ['Engine', "Flux Channeler proliferates on every noncreature spell.", ['Flux Channeler', 'Geist of Saint Thalia', 'Evolution Sage']],
+  ['Protection', 'Keeps attackers, removal and wipes off the walkers.', ['Tomik, Orzhov Lawmage', 'Archangel of Tithes', 'Liliana the Faultless', 'Counterspell', 'Dovin\'s Veto', 'Boros Charm', 'Vigorbloom Charm']],
+  ['Engine', "Flux Channeler proliferates on every noncreature spell, Thrummingbird on every hit.", ['Flux Channeler', 'Thrummingbird', 'Geist of Saint Thalia', 'Evolution Sage']],
   ['Ramp', 'Timeless Lotus taps for {W}{U}{B}{R}{G}, which pays for Tam\'s proliferate every turn by itself. Great Hall of the Citadel (in Lands) makes two colours for any legendary spell. Great Divide Guide lets every land tap for any colour.', ['Timeless Lotus', 'Sol Ring', 'Arcane Signet', 'Talisman of Progress', 'Talisman of Dominance', 'Talisman of Conviction', 'Bloom Tender', 'Faeburrow Elder', 'Farseek', 'Great Divide Guide', 'Omenpath Journey']],
   ['Removal', 'Toxic Deluge, Settle the Wreckage, Fumigate and Final Act kill creatures and leave your walkers standing. Fumigate\'s life gain also triggers Way of the Mentor.', ['Path to Exile', 'Erode', 'Assassin\'s Trophy', 'Atomize', 'Vraska\'s Final Mercy', 'Toxic Deluge','Settle the Wreckage', 'Fumigate', 'Final Act']],
 ];
@@ -71,14 +71,14 @@ const ENGINE = [
 
 const WINS: [string, string, string[]][] = [
   ['Jace wipes out their libraries', 'Jace, Reality Sculptor\'s 0 ability works once your Jaces have 25+ loyalty combined. It exiles all but the bottom card of each opponent\'s library, so they lose on their second draw. The Ways add 2–7 to the Jace token each, Protege\'s Awakening and Vraska\'s Final Mercy add 6, Avatar adds 2 per land, and Tam plus Mentor keep pumping it. Jace, Memory Adept is a second Jace, so its loyalty counts too, and its 0 mills 10 to speed the finish. Entrust the Spark puts Jace straight onto the battlefield, and Pia finds a Way.', ['Jace, Reality Sculptor', 'Jace, Memory Adept', 'Entrust the Spark', 'Protege\'s Awakening']],
-  ['Poison kill', 'Vraska, Betrayal\'s Sting −9 puts one player at 9 poison. Any proliferate finishes them: Vraska\'s own 0, Tam\'s ability or an Evolution Sage landfall.', ['Vraska, Betrayal\'s Sting', 'Evolution Sage']],
+  ['Poison kill', 'Vraska, Betrayal\'s Sting −9 puts one player at 9 poison. Any proliferate finishes them: Vraska\'s own 0, Tam\'s ability, an Evolution Sage landfall or a Thrummingbird hit.', ['Vraska, Betrayal\'s Sting', 'Evolution Sage', 'Thrummingbird']],
   ['Dragon attack', 'Sarkhan the Masterless +1 turns every walker into a 4/4 flying Dragon. Then Ajani Unrelenting +1 gives them haste and +1/+0, and each activation also makes a Cadet. Five walkers means 25 flying damage.', ['Sarkhan the Masterless', 'Ajani Unrelenting']],
   ['Ultimates', 'With the engine running, every walker climbs 2–3 loyalty a turn. Main targets: Elspeth −7 (+2/+2 and flying for your tokens), Chandra −7, Ajani Resolute −10, and Kaya +2 draining each opponent for 3 every turn.', ['Elspeth, Sun\'s Champion', 'Kaya, Intangible Slayer', 'Chandra, Torch of Defiance']],
   ['Drain', 'Quintorius drains 2 per opponent whenever you cast from exile, which Chandra\'s +1 does every turn.', ['Quintorius Kand', 'Chandra, Fire Artisan']],
 ];
 
 const ORDER: [number, string[], string, string, string][] = [
-  [1, ['The Chain Veil', 'Teferi, Temporal Archmage'], '7.40 + 1.50', '<b>Infinite combo with the cards you have.</b> Teferi\'s −1 untaps the Veil plus Timeless Lotus, Faeburrow Elder or Bloom Tender for more mana than the Veil costs. Paradox + Mentor give Teferi back the loyalty he spent, so the loop never ends: infinite activations on every walker, and Kaya\'s +2 kills the table. It needs 4 specific cards, so it stays bracket 3.', 'Fatehold Charm, Kaito'],
+  [1, ['The Chain Veil', 'Teferi, Temporal Archmage'], '7.40 + 1.50', '<b>Infinite combo with the cards you have.</b> Teferi\'s −1 untaps the Veil plus Timeless Lotus, Faeburrow Elder or Bloom Tender for more mana than the Veil costs. Paradox + Mentor give Teferi back the loyalty he spent, so the loop never ends: infinite activations on every walker, and Kaya\'s +2 kills the table. It needs 4 specific cards, so it stays bracket 3.', 'Kaito, Tomik'],
   [1, ['Oath of Teferi'], '1.07', 'Use every walker\'s loyalty ability twice a turn. With the engine, each walker gains roughly 2 loyalty per turn.', 'Way of the Warlord'],
   [1, ['Carth the Lion'], '0.27', 'Plus abilities add 1 extra and minus abilities cost 1 less. When a walker dies, it looks at your top 7 cards for another.', 'Arcane Amphisbaena'],
   [1, ['Deepglow Skate'], '0.32', 'Doubles every counter when it enters, which can take the Jace token straight toward 25.', 'Saheeli'],
@@ -98,6 +98,7 @@ const HELD: [string, string, string][] = [
 ];
 
 const BENCH: [string, string][] = [
+  ['Fatehold Charm', 'Thrummingbird took the slot: a 2-mana flier that proliferates on every hit (loyalty on every walker, Jace counters, Vraska poison).'],
   ['Shatter the Sky', 'Fumigate took the slot: its life gain triggers Way of the Mentor, and it gives opponents no cards.'],
   ['Cultivate', 'Great Divide Guide took the slot: 2 mana, and every land taps for any colour. Cultivate needs basics; the deck has four.'],
   ['Cinder Glade', 'Shivan Reef took the slot: enters untapped; U/R was the thinnest colour pair.'],
