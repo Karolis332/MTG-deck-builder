@@ -371,6 +371,7 @@
 1 Grave Titan
 1 Grave Venerations
 1 Gray Merchant of Asphodel
+1 Great Hall of the Citadel
 1 Greed
 1 Greenhouse Propagator
 1 Grim Backwoods
@@ -955,6 +956,7 @@
 1 Through the Forest Gate
 1 Thrummingbird
 1 Thwart the Grave
+1 Timeless Lotus
 1 Tip the Scales
 1 Tireless Provisioner
 1 Titan's Grave

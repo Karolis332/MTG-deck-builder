@@ -33,7 +33,7 @@
 1 Innkeeper's Talent
 1 Way of the Warlord
 1 Way of the Wildspeaker
-1 Identity Echo
+1 Timeless Lotus
 1 Dovin's Veto
 1 Evolution Sage
 1 Archangel of Tithes
@@ -64,7 +64,7 @@
 1 Final Act
 1 Command Tower
 1 Exotic Orchard
-1 Path of Ancestry
+1 Great Hall of the Citadel
 1 Interplanar Beacon
 1 Evolving Wilds
 1 Clifftop Retreat

@@ -34,8 +34,8 @@ const GROUPS: [string, string, string[]][] = [
   ['Ways', 'Each one creates the Jace token or adds 2–7 loyalty to it, and gives every walker a new ability.', ['Way of the Mentor', 'Way of the Paradox', 'Way of the Pyromancer', 'Way of the Mind Sculptor', 'Way of the Warlord', 'Way of the Wildspeaker']],
   ['Jace token package', 'Adds loyalty to the Jace token and finds the pieces.', ['Protege\'s Awakening', 'Avatar of Burgeoning Echoes', 'Arcane Amphisbaena', 'Rewrite Regrets', 'Entrust the Spark', 'Pia, Aether Ascetic']],
   ['Protection', 'Keeps attackers, removal and wipes off the walkers.', ['Tomik, Orzhov Lawmage', 'Archangel of Tithes', 'Liliana the Faultless', 'Counterspell', 'Dovin\'s Veto', 'Boros Charm', 'Vigorbloom Charm', 'Fatehold Charm']],
-  ['Engine', "Innkeeper's Talent at level 3 doubles every counter you put: walker loyalty, plus abilities, Jace empowers (still to be found in your binder). Flux Channeler proliferates on every noncreature spell.", ["Innkeeper's Talent", 'Flux Channeler', 'Geist of Saint Thalia', 'Evolution Sage', 'Identity Echo']],
-  ['Ramp', '', ['Sol Ring', 'Arcane Signet', 'Talisman of Progress', 'Talisman of Dominance', 'Talisman of Conviction', 'Bloom Tender', 'Faeburrow Elder', 'Farseek', 'Cultivate', 'Omenpath Journey']],
+  ['Engine', "Innkeeper's Talent at level 3 doubles every counter you put: walker loyalty, plus abilities, Jace empowers (still to be found in your binder). Flux Channeler proliferates on every noncreature spell.", ["Innkeeper's Talent", 'Flux Channeler', 'Geist of Saint Thalia', 'Evolution Sage']],
+  ['Ramp', 'Timeless Lotus taps for {W}{U}{B}{R}{G}, which pays for Tam\'s proliferate every turn by itself. Great Hall of the Citadel (in Lands) makes two colours for any legendary spell.', ['Timeless Lotus', 'Sol Ring', 'Arcane Signet', 'Talisman of Progress', 'Talisman of Dominance', 'Talisman of Conviction', 'Bloom Tender', 'Faeburrow Elder', 'Farseek', 'Cultivate', 'Omenpath Journey']],
   ['Removal', 'Settle the Wreckage, Shatter the Sky and Final Act kill creatures and leave your walkers standing.', ['Path to Exile', 'Erode', 'Assassin\'s Trophy', 'Atomize', 'Vraska\'s Final Mercy', 'Fire Covenant', 'Settle the Wreckage', 'Shatter the Sky', 'Final Act']],
 ];
 const grouped = new Set(GROUPS.flatMap((g) => g[2]));
@@ -78,14 +78,14 @@ const WINS: [string, string, string[]][] = [
 ];
 
 const ORDER: [number, string[], string, string, string][] = [
-  [1, ['The Chain Veil', 'Teferi, Temporal Archmage'], '7.40 + 1.50', '<b>Infinite combo with the cards you have.</b> Teferi\'s −1 untaps the Veil plus Faeburrow Elder, Bloom Tender or Sol Ring for more mana than the Veil costs. Paradox + Mentor give Teferi back the loyalty he spent, so the loop never ends: infinite activations on every walker, and Kaya\'s +2 kills the table. It needs 4 specific cards, so it stays bracket 3.', 'Identity Echo, Kasmina'],
+  [1, ['The Chain Veil', 'Teferi, Temporal Archmage'], '7.40 + 1.50', '<b>Infinite combo with the cards you have.</b> Teferi\'s −1 untaps the Veil plus Timeless Lotus, Faeburrow Elder or Bloom Tender for more mana than the Veil costs. Paradox + Mentor give Teferi back the loyalty he spent, so the loop never ends: infinite activations on every walker, and Kaya\'s +2 kills the table. It needs 4 specific cards, so it stays bracket 3.', 'Kasmina, Fatehold Charm'],
   [1, ['Oath of Teferi'], '1.07', 'Use every walker\'s loyalty ability twice a turn. With the engine, each walker gains roughly 2 loyalty per turn.', 'Way of the Warlord'],
   [1, ['Carth the Lion'], '0.27', 'Plus abilities add 1 extra and minus abilities cost 1 less. When a walker dies, it looks at your top 7 cards for another.', 'Arcane Amphisbaena'],
   [1, ['Deepglow Skate'], '0.32', 'Doubles every counter when it enters, which can take the Jace token straight toward 25.', 'Saheeli'],
   [2, ['Karn\'s Bastion'], '2.75', 'A land that proliferates.', 'Exotic Orchard'],
   [2, ['Ghostly Prison', 'Norn\'s Annex', 'Propaganda'], '5.81 / 5.64 / 2.03', 'Opponents pay to attack you or your walkers.', 'Boros Charm, Vigorbloom Charm'],
   [2, ['Toxic Deluge'], '4.48', 'Three-mana wipe that kills creatures, not walkers.', 'Fire Covenant'],
-  [3, ['Ichormoon Gauntlet'], '21.84', 'Every walker gets "0: proliferate" and "−12: take an extra turn".', 'Fatehold Charm'],
+  [3, ['Ichormoon Gauntlet'], '21.84', 'Every walker gets "0: proliferate" and "−12: take an extra turn".', 'Rewrite Regrets'],
   [3, ['Raffine\'s Tower', 'Spara\'s Headquarters', 'Jetmir\'s Garden', 'Xander\'s Lounge', 'Zagoth Triome'], '13–21 each', 'Replace the 5 tri-lands, which enter tapped with no upside.', 'tri-lands'],
 ];
 
@@ -99,6 +99,8 @@ const HELD: [string, string, string][] = [
 ];
 
 const BENCH: [string, string][] = [
+  ['Identity Echo', 'Fun roulette, but {3}{R} per use at sorcery speed; Timeless Lotus took the slot.'],
+  ['Path of Ancestry', 'Enters tapped; Great Hall of the Citadel took the slot.'],
   ['Way of the Healer', "Innkeeper's Talent took the slot; the Cadet −2 is the weakest Way ability."],
   ['Teyo, the Shieldmage', 'Flux Channeler took the slot; Teyo protects you, not your walkers.'],
   ['Generous Gift', 'Atomize does the same job and proliferates.'],

@@ -282,6 +282,7 @@
 1 Grand Abolisher
 1 Grave Titan
 1 Grave Venerations
+1 Great Hall of the Citadel
 1 Greed
 1 Grim Poppet
 1 Grist, Voracious Larva
@@ -708,6 +709,7 @@
 1 Three Steps Ahead
 1 Through the Forest Gate
 1 Thrummingbird
+1 Timeless Lotus
 1 Tip the Scales
 1 Titan's Grave
 1 Tivash, Gloom Summoner
