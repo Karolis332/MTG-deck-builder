@@ -23,6 +23,7 @@
 1 Force of Vigor
 27 Forest
 1 Garruk's Uprising
+1 Ghalta the Unstoppable
 1 Giant Opportunity
 1 Gilded Goose
 1 Ginger, Queen of Sweets
@@ -66,6 +67,7 @@
 1 Transmutation Font
 1 Trudge Garden
 1 Unlucky Cabbage Merchant
+1 Verdant Kraken
 1 Walking Ballista
 1 Wicked Wolf
 1 Wild Growth

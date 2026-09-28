@@ -187,7 +187,6 @@
 1 Gene Pollinator
 2 Geralf, the Fleshwright
 1 Getaway Glamer
-1 Ghalta the Unstoppable
 1 Ghalta, Primal Hunger
 1 Ghired, Mirror of the Wilds
 1 Giant Growth
@@ -544,7 +543,6 @@
 1 Venser's Journal
 1 Venus, Torn Between Worlds
 1 Verdant Confluence
-1 Verdant Kraken
 1 Verdant Sun's Avatar
 1 Verdurous Gearhulk
 1 Veteran Adventurer

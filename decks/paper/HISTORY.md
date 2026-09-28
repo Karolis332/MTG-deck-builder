@@ -209,3 +209,7 @@ Appended by `npx tsx scripts/paper-sync.ts`. Full diffs: `git log -p decks/paper
 ## 2026-09-28
 - **The Cabbage Merchant** v3, 97 cards: +Autumn's Veil, +Brawn, +Emil, Vastlands Roamer, +Endurance, +Eternal Witness, +Feasting Hobbit, +Feasting Troll King, +Forest, +Gilded Goose, +Ginger, Queen of Sweets, +Gingerbread Cabin, +Greenhouse Propagator, +Hornet Queen, +Hungering Puppetbeast, +Invasion of Ikoria, +Jiang Yanggu, Never Alone, +Llanowar Elves, +Pest Infestation, +Ribtruss Roaster, +Snakeskin Veil, +Spider-Ham, Peter Porker, +The Ooze, +Titanbones, Towering Heart, +Trail of Crumbs, +Transmutation Font, +Trudge Garden, +Wild Growth, −Avatar Kyoshi, Earthbender, −Bloodspore Thrinax, −Bosco, Just a Bear, −Cankerbloom, −Cream of the Crop, −Crystalline Armor, −Cycle of Renewal, −Explore, −Flare of Cultivation, −Fog, −Forgotten Ancient, −Ghalta, Primal Hunger, −Guac & Marshmallow Pizza, −Lifeblood Hydra, −Loot, Exuberant Explorer, −Mishra's Bauble, −Monstrous Vortex, −Nissa, Who Shakes the World, −Overrun, −Oviya, Automech Artisan, −Party Dude, −Rampant Growth, −Rumble Arena, −Sandman, Shifting Scoundrel, −Selvala, Heart of the Wilds, −Shamanic Revelation, −Shared Roots, −Tangle, −The Legend of Kyoshi, −Vivien's Arkbow
 - **Collection** 1026 owned, 622 open
+
+## 2026-09-28
+- **The Cabbage Merchant** v4, 99 cards: +Ghalta the Unstoppable, +Verdant Kraken
+- **Collection** 1026 owned, 620 open
