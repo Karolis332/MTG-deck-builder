@@ -792,6 +792,7 @@
 1 Saw in Half
 1 Scourge of the Skyclaves
 1 Sea Gate Colossus
+1 Seachrome Coast
 1 Seaside Citadel
 1 Seasoned Dungeoneer
 1 Second Harvest

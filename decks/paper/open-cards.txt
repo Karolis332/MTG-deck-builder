@@ -594,6 +594,7 @@
 2 Savage Smash
 1 Scourge of the Skyclaves
 1 Sea Gate Colossus
+1 Seachrome Coast
 1 Seaside Citadel
 1 Seize the Secrets
 1 Seize the Spoils

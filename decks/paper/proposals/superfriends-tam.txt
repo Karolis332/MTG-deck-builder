@@ -84,13 +84,13 @@
 1 Savage Lands
 1 Opulent Palace
 1 Breeding Pool
-1 Umbral Expanse
+1 Seachrome Coast
 1 Isolated Chapel
 1 Shipwreck Marsh
 1 Deserted Beach
 1 Overgrown Farmland
 1 Woodland Cemetery
-1 Dragonskull Summit
+1 Kaito, Dancing Shadow
 1 Rootbound Crag
 1 Shivan Reef
 1 Bleachbone Verge

@@ -30,7 +30,7 @@ const deck = fs.readFileSync(LIST, 'utf8').trim().split(/\r?\n/).map((l) => /^(\
 const [commander, ...main] = deck;
 
 const GROUPS: [string, string, string[]][] = [
-  ['Walkers', 'Tam makes all of these but Jared cost {1} less.', ['Chandra, Torch of Defiance', 'Chandra, Fire Artisan', 'Oko, Thief of Crowns', 'Elspeth, Sun\'s Champion', 'Ajani Unrelenting', 'Ajani Resolute', 'Professor Dellian Fel', 'Vraska, Betrayal\'s Sting', 'Jared Carthalion', 'Sarkhan the Masterless', 'Ob Nixilis, the Hate-Twisted', 'Jace, Reality Sculptor', 'Sorin, Vengeful Bloodlord', 'The Wanderer', 'Jace, Memory Adept', 'Saheeli, Sublime Artificer', 'Kaya, Intangible Slayer', 'Ob Nixilis of the Black Oath', 'Quintorius Kand']],
+  ['Walkers', 'Tam makes all of these but Jared cost {1} less.', ['Chandra, Torch of Defiance', 'Chandra, Fire Artisan', 'Oko, Thief of Crowns', 'Elspeth, Sun\'s Champion', 'Ajani Unrelenting', 'Ajani Resolute', 'Professor Dellian Fel', 'Vraska, Betrayal\'s Sting', 'Jared Carthalion', 'Sarkhan the Masterless', 'Ob Nixilis, the Hate-Twisted', 'Jace, Reality Sculptor', 'Sorin, Vengeful Bloodlord', 'The Wanderer', 'Jace, Memory Adept', 'Saheeli, Sublime Artificer', 'Kaya, Intangible Slayer', 'Ob Nixilis of the Black Oath', 'Kaito, Dancing Shadow', 'Quintorius Kand']],
   ['Ways', 'Each one creates the Jace token or adds 2–7 loyalty to it, and gives every walker a new ability.', ['Way of the Mentor', 'Way of the Paradox', 'Way of the Pyromancer', 'Way of the Mind Sculptor', 'Way of the Warlord', 'Way of the Wildspeaker', 'Way of the Healer']],
   ['Jace token package', 'Adds loyalty to the Jace token and finds the pieces.', ['Protege\'s Awakening', 'Avatar of Burgeoning Echoes', 'Arcane Amphisbaena', 'Rewrite Regrets', 'Entrust the Spark', 'Pia, Aether Ascetic']],
   ['Protection', 'Keeps attackers, removal and wipes off the walkers.', ['Tomik, Orzhov Lawmage', 'Archangel of Tithes', 'Liliana the Faultless', 'Counterspell', 'Dovin\'s Veto', 'Boros Charm', 'Vigorbloom Charm']],
@@ -99,7 +99,8 @@ const HELD: [string, string, string][] = [
 ];
 
 const BENCH: [string, string][] = [
-  ['Kaito, Dancing Shadow', 'Ob Nixilis of the Black Oath took the slot: his +2 drains every opponent and the life gain triggers Way of the Mentor.'],
+  ['Dragonskull Summit', 'Cut to 35 lands to keep Kaito (the only Kaito type, one more proliferate from Tam). With one Mountain and no Swamps it nearly always entered tapped.'],
+  ['Umbral Expanse', 'Seachrome Coast took the slot: untapped early instead of always tapped.'],
   ['Omenpath Journey', 'Esika // The Prismatic Bridge took the slot: a 3-mana dork on the front, a free walker or creature every upkeep on the back.'],
   ['Fatehold Charm', 'Thrummingbird took the slot: a 2-mana flier that proliferates on every hit (loyalty on every walker, Jace counters, Vraska poison).'],
   ['Shatter the Sky', 'Fumigate took the slot: its life gain triggers Way of the Mentor, and it gives opponents no cards.'],
