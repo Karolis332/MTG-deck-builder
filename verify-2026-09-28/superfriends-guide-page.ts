@@ -31,10 +31,10 @@ const [commander, ...main] = deck;
 
 const GROUPS: [string, string, string[]][] = [
   ['Walkers', 'Tam makes all of these but Jared cost {1} less.', ['Chandra, Torch of Defiance', 'Chandra, Fire Artisan', 'Oko, Thief of Crowns', 'Elspeth, Sun\'s Champion', 'Ajani Unrelenting', 'Ajani Resolute', 'Professor Dellian Fel', 'Vraska, Betrayal\'s Sting', 'Jared Carthalion', 'Sarkhan the Masterless', 'Ob Nixilis Reignited', 'Jace, Reality Sculptor', 'Sorin, Vengeful Bloodlord', 'The Wanderer', 'Jace, Memory Adept', 'Saheeli, Sublime Artificer', 'Kaya, Intangible Slayer', 'Kaito, Dancing Shadow', 'Quintorius Kand']],
-  ['Ways', 'Each one creates the Jace token or adds 2–7 loyalty to it, and gives every walker a new ability.', ['Way of the Mentor', 'Way of the Paradox', 'Way of the Pyromancer', 'Way of the Mind Sculptor', 'Way of the Warlord', 'Way of the Wildspeaker']],
+  ['Ways', 'Each one creates the Jace token or adds 2–7 loyalty to it, and gives every walker a new ability.', ['Way of the Mentor', 'Way of the Paradox', 'Way of the Pyromancer', 'Way of the Mind Sculptor', 'Way of the Warlord', 'Way of the Wildspeaker', 'Way of the Healer']],
   ['Jace token package', 'Adds loyalty to the Jace token and finds the pieces.', ['Protege\'s Awakening', 'Avatar of Burgeoning Echoes', 'Arcane Amphisbaena', 'Rewrite Regrets', 'Entrust the Spark', 'Pia, Aether Ascetic']],
   ['Protection', 'Keeps attackers, removal and wipes off the walkers.', ['Tomik, Orzhov Lawmage', 'Archangel of Tithes', 'Liliana the Faultless', 'Counterspell', 'Dovin\'s Veto', 'Boros Charm', 'Vigorbloom Charm', 'Fatehold Charm']],
-  ['Engine', "Innkeeper's Talent at level 3 doubles every counter you put: walker loyalty, plus abilities, Jace empowers (still to be found in your binder). Flux Channeler proliferates on every noncreature spell.", ["Innkeeper's Talent", 'Flux Channeler', 'Geist of Saint Thalia', 'Evolution Sage']],
+  ['Engine', "Flux Channeler proliferates on every noncreature spell.", ['Flux Channeler', 'Geist of Saint Thalia', 'Evolution Sage']],
   ['Ramp', 'Timeless Lotus taps for {W}{U}{B}{R}{G}, which pays for Tam\'s proliferate every turn by itself. Great Hall of the Citadel (in Lands) makes two colours for any legendary spell. Great Divide Guide lets every land tap for any colour.', ['Timeless Lotus', 'Sol Ring', 'Arcane Signet', 'Talisman of Progress', 'Talisman of Dominance', 'Talisman of Conviction', 'Bloom Tender', 'Faeburrow Elder', 'Farseek', 'Great Divide Guide', 'Omenpath Journey']],
   ['Removal', 'Toxic Deluge, Settle the Wreckage, Fumigate and Final Act kill creatures and leave your walkers standing. Fumigate\'s life gain also triggers Way of the Mentor.', ['Path to Exile', 'Erode', 'Assassin\'s Trophy', 'Atomize', 'Vraska\'s Final Mercy', 'Toxic Deluge','Settle the Wreckage', 'Fumigate', 'Final Act']],
 ];
@@ -108,7 +108,7 @@ const BENCH: [string, string][] = [
   ['Fire Covenant', 'Toxic Deluge took the slot: a full wipe for 3 mana instead of paying life per creature.'],
   ['Identity Echo', 'Fun roulette, but {3}{R} per use at sorcery speed; Timeless Lotus took the slot.'],
   ['Path of Ancestry', 'Enters tapped; Great Hall of the Citadel took the slot.'],
-  ['Way of the Healer', "Innkeeper's Talent took the slot; the Cadet −2 is the weakest Way ability."],
+  ["Innkeeper's Talent", 'Owned but not found yet; Way of the Healer holds the slot. Put it back in when found: at level 3 it doubles every counter you put.'],
   ['Teyo, the Shieldmage', 'Flux Channeler took the slot; Teyo protects you, not your walkers.'],
   ['Generous Gift', 'Atomize does the same job and proliferates.'],
   ['Moment of Reckoning', 'Destroys up to four things or returns up to four walkers, but costs 7. First card to add if games run long.'],
@@ -170,7 +170,7 @@ ${GROUPS.map(([g, note, ns]) => `<h2>${esc(g)} <small>${ns.reduce((s, n) => s + 
 <h2 id="order">Cards to order <small>cheapest printing in USD from Scryfall (09-26 snapshot); Cardmarket in the EU is usually lower</small></h2>
 <table><tr><th>Tier</th><th>Card</th><th>$</th><th>Why</th><th>Replaces</th></tr>
 ${ORDER.map(([t, ns, p, why, rep]) => `<tr><td><span class="tier t${t}">${t}</span></td><td>${thumbs(ns)}<br>${ns.map(esc).join(' + ')}</td><td class="n">${esc(p)}</td><td>${why}</td><td>${esc(rep)}</td></tr>`).join('')}
-</table><p class="box" style="margin-top:10px"><b>Skipped:</b> Doubling Season ($32) — Innkeeper's Talent already does it. <b>Best value:</b> the tier-1 rows cost about <b>$10.50</b> and turn the deck from value-grind into one that can kill from nowhere.</p>
+</table><p class="box" style="margin-top:10px"><b>Skipped:</b> Doubling Season ($32) — Innkeeper's Talent does the same once you find it. <b>Best value:</b> the tier-1 rows cost about <b>$10.50</b> and turn the deck from value-grind into one that can kill from nowhere.</p>
 
 <h2 id="held">Held back: sleeved in another deck <small>one copy registered; with a second copy these go in</small></h2>
 <table><tr><th>Card</th><th>Sleeved in</th><th>Would replace</th></tr>${HELD.map(([n, d, r]) => `<tr><td>${thumbs([n])} ${esc(n)}</td><td>${esc(d)}</td><td>${esc(r)}</td></tr>`).join('')}</table>
