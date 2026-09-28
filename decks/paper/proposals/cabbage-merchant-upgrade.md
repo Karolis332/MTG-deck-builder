@@ -24,6 +24,13 @@ Well of Lost Dreams, Sarinth Steelseeker, Syr Ginger) and bodies (Halsin, Trudge
 Dinosaurs), then kill one opponent per combat. The deck has **no infinite loop and no single-turn table
 kill**; a win is three attack steps across three of your turns, ordered by who can stop you.
 
+**Correction (2026-09-28): that is wrong.** Trudge Garden + Teething Wurmlet + Peregrin Took + Academy
+Manufactor + Jaheira is an infinite. Pay {2} for Trudge → Fungus + Took's Food → Manufactor makes that
+Food, Clue and Treasure → three Wurmlet life triggers → three more Trudge triggers, and Jaheira taps the
+three new artifacts for {G}{G}{G}. Net +{G} per loop: unbounded mana, 4/4 tramplers and life, then
+Walking Ballista (or Pest Infestation) kills the table. With Night of the Sweets' Revenge instead of
+Jaheira the loop is mana-neutral (Food {G} + Treasure): unbounded 4/4s and life, no free mana.
+
 ## 2. Roles
 
 | Role | Cards |
