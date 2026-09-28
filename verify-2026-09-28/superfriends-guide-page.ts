@@ -33,7 +33,7 @@ const GROUPS: [string, string, string[]][] = [
   ['Walkers', 'Tam makes all of these but Jared cost {1} less.', ['Chandra, Torch of Defiance', 'Chandra, Fire Artisan', 'Oko, Thief of Crowns', 'Elspeth, Sun\'s Champion', 'Ajani Unrelenting', 'Ajani Resolute', 'Professor Dellian Fel', 'Vraska, Betrayal\'s Sting', 'Jared Carthalion', 'Sarkhan the Masterless', 'Ob Nixilis, the Hate-Twisted', 'Jace, Reality Sculptor', 'Sorin, Vengeful Bloodlord', 'The Wanderer', 'Jace, Memory Adept', 'Saheeli, Sublime Artificer', 'Kaya, Intangible Slayer', 'Ob Nixilis of the Black Oath', 'Kaito, Dancing Shadow', 'Quintorius Kand']],
   ['Ways', 'Each one creates the Jace token or adds 2–7 loyalty to it, and gives every walker a new ability.', ['Way of the Mentor', 'Way of the Paradox', 'Way of the Pyromancer', 'Way of the Mind Sculptor', 'Way of the Warlord', 'Way of the Wildspeaker', 'Way of the Healer']],
   ['Jace token package', 'Adds loyalty to the Jace token and finds the pieces.', ['Protege\'s Awakening', 'Avatar of Burgeoning Echoes', 'Arcane Amphisbaena', 'Rewrite Regrets', 'Entrust the Spark', 'Pia, Aether Ascetic']],
-  ['Protection', 'Keeps attackers, removal and wipes off the walkers.', ['Archangel of Tithes', 'Liliana the Faultless', 'Counterspell', 'Dovin\'s Veto', 'Boros Charm', 'Vigorbloom Charm']],
+  ['Protection', 'Keeps attackers, removal and wipes off the walkers.', ['Archangel of Tithes', 'Liliana the Faultless', 'Counterspell', 'Dovin\'s Veto', 'Simic Charm', 'Vigorbloom Charm']],
   ['Engine', "Flux Channeler proliferates on every noncreature spell, Thrummingbird on every hit. Chimil discovers 5 at every end step: a free card from 59 of the 64 nonlands (16 walkers), and your spells can't be countered.", ['Chimil, the Inner Sun', 'Flux Channeler', 'Thrummingbird', 'Geist of Saint Thalia', 'Evolution Sage']],
   ['Ramp', 'Timeless Lotus taps for {W}{U}{B}{R}{G}, which pays for Tam\'s proliferate every turn by itself. Great Hall of the Citadel (in Lands) makes two colours for any legendary spell. Great Divide Guide lets every land tap for any colour. Esika is a 3-mana dork, or cast her back face, The Prismatic Bridge (WUBRG): every upkeep it puts the first creature or walker from your library onto the battlefield for free, and 32 of the other 98 cards are hits (19 walkers, 13 creatures).', ['Timeless Lotus', 'Sol Ring', 'Arcane Signet', 'Talisman of Progress', 'Talisman of Dominance', 'Talisman of Conviction', 'Bloom Tender', 'Faeburrow Elder', 'Farseek', 'Great Divide Guide', 'Esika, God of the Tree']],
   ['Removal', 'Toxic Deluge, Settle the Wreckage, Fumigate and Final Act kill creatures and leave your walkers standing. Fumigate\'s life gain also triggers Way of the Mentor.', ['Path to Exile', 'Erode', 'Assassin\'s Trophy', 'Atomize', 'Vraska\'s Final Mercy', 'Toxic Deluge','Settle the Wreckage', 'Fumigate', 'Final Act']],
@@ -84,7 +84,7 @@ const ORDER: [number, string[], string, string, string][] = [
   [1, ['Carth the Lion'], '0.27', 'Plus abilities add 1 extra and minus abilities cost 1 less. When a walker dies, it looks at your top 7 cards for another.', 'Arcane Amphisbaena'],
   [1, ['Deepglow Skate'], '0.32', 'Doubles every counter when it enters, which can take the Jace token straight toward 25.', 'Saheeli'],
   [2, ['Karn\'s Bastion'], '2.75', 'A land that proliferates.', 'Exotic Orchard'],
-  [2, ['Ghostly Prison', 'Norn\'s Annex', 'Propaganda'], '5.81 / 5.64 / 2.03', 'Opponents pay to attack you or your walkers.', 'Boros Charm, Vigorbloom Charm'],
+  [2, ['Ghostly Prison', 'Norn\'s Annex', 'Propaganda'], '5.81 / 5.64 / 2.03', 'Opponents pay to attack you or your walkers.', 'Simic Charm, Vigorbloom Charm'],
   [3, ['Ichormoon Gauntlet'], '21.84', 'Every walker gets "0: proliferate" and "−12: take an extra turn".', 'Rewrite Regrets'],
   [3, ['Raffine\'s Tower', 'Spara\'s Headquarters', 'Jetmir\'s Garden', 'Xander\'s Lounge', 'Zagoth Triome'], '13–21 each', 'Replace the 5 tri-lands, which enter tapped with no upside.', 'tri-lands'],
 ];
@@ -99,6 +99,7 @@ const HELD: [string, string, string][] = [
 ];
 
 const BENCH: [string, string][] = [
+  ['Boros Charm', 'Owned but not found yet; Simic Charm holds the slot (hexproof for all your permanents). Put it back in when found: indestructible also stops destroy-all effects.'],
   ['Tomik, Orzhov Lawmage', 'Chimil, the Inner Sun took the slot: a free card every turn beats limiting attackers to one per walker.'],
   ['Dragonskull Summit', 'Cut to 35 lands to keep Kaito (the only Kaito type, one more proliferate from Tam). With one Mountain and no Swamps it nearly always entered tapped.'],
   ['Umbral Expanse', 'Seachrome Coast took the slot: untapped early instead of always tapped.'],
@@ -132,7 +133,7 @@ const BENCH: [string, string][] = [
   ['Alms Collector', 'Flash 3/3 flier, but no slot left.'],
   ['Baeloth Barrityl, Entertainer', 'Goads enemy creatures toward other players, but costs 5.'],
 ];
-const BENCH_MORE = 'Domri, Mu Yanling, Ral Zarek, Oko, Lorwyn Liege, Dovin, Nahiri, Davriel, Tezzeret, Arlinn, Vivien, Chandra, Spark Hunter, Samut, Angrath, Jaya, Ashiok, Jiang Yanggu, Nissa, Steward of Elements, Vraska, Swarm\'s Eminence · Sheoldred\'s Edict, Black Sun\'s Zenith, Chain Reaction, Bedevil, Terminate, Putrefy, Infernal Grasp, Violent Echoes, No Admittance, Binding the Old Gods, Final Showdown, The Echoverse Fulcrum, Strix Serenade, Theorix / Stingerquill / Konstrari / Sultai / Simic Charm, Hindering Light, Spell Pierce · Glissa, Uro, Contagion Clasp, Inspired Tethermage, Mindseeker Oculus, Kaya\'s Ghostform, Teyo, Lightshield Expert · Painful Truths, Night\'s Whisper, Harmonize, Syphon Mind, Growth Spiral, Rampant Growth, Kodama\'s Reach, Commander\'s Sphere, Talisman of Hierarchy / Unity, Lockets, Bender\'s Waterskin, Tome of the Guildpact, Nyx Lotus, mana dorks.';
+const BENCH_MORE = 'Domri, Mu Yanling, Ral Zarek, Oko, Lorwyn Liege, Dovin, Nahiri, Davriel, Tezzeret, Arlinn, Vivien, Chandra, Spark Hunter, Samut, Angrath, Jaya, Ashiok, Jiang Yanggu, Nissa, Steward of Elements, Vraska, Swarm\'s Eminence · Sheoldred\'s Edict, Black Sun\'s Zenith, Chain Reaction, Bedevil, Terminate, Putrefy, Infernal Grasp, Violent Echoes, No Admittance, Binding the Old Gods, Final Showdown, The Echoverse Fulcrum, Strix Serenade, Theorix / Stingerquill / Konstrari / Sultai Charm, Hindering Light, Spell Pierce · Glissa, Uro, Contagion Clasp, Inspired Tethermage, Mindseeker Oculus, Kaya\'s Ghostform, Teyo, Lightshield Expert · Painful Truths, Night\'s Whisper, Harmonize, Syphon Mind, Growth Spiral, Rampant Growth, Kodama\'s Reach, Commander\'s Sphere, Talisman of Hierarchy / Unity, Lockets, Bender\'s Waterskin, Tome of the Guildpact, Nyx Lotus, mana dorks.';
 
 const cmd = card(commander.name);
 const html = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Tam, the Possibility — Superfriends</title><style>
