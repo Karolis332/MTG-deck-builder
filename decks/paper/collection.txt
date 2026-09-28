@@ -15,6 +15,7 @@
 1 Alhammarret's Archive
 1 Altar of Bhaal
 1 Ancient Craving
+1 Angrath, Captain of Chaos
 1 Animal Attendant
 1 Ankle Biter
 1 Annie Joins Up
@@ -29,9 +30,11 @@
 1 Archfiend of Ifnir
 1 Archpriest of Iona
 1 Arid Archway
+1 Arlinn, Voice of the Pack
 1 Armaggon, Future Shark
 1 Arnyn, Deathbloom Botanist
 2 Ash Barrens
+1 Ashiok, Dream Render
 1 Ashnod's Altar
 2 Assassin's Trophy
 1 Astarion, the Decadent
@@ -96,6 +99,7 @@
 1 Bre of Clan Stoutarm
 1 Breaker of Creation
 1 Breeches, the Blastmaker
+1 Breeding Pool
 1 Bridgeworks Battle
 1 Brimstone Roundup
 1 Bristlebane Battler
@@ -132,6 +136,7 @@
 1 Chain Reaction
 1 Chainer, Dementia Master
 1 Chandra, Fire Artisan
+1 Chandra, Spark Hunter
 1 Chandra, Torch of Defiance
 1 Changeling Outcast
 1 Channeler Initiate
@@ -206,6 +211,7 @@
 1 Displaced Dinosaurs
 1 District Guide
 2 Doc Aurlock, Grizzled Genius
+1 Domri, Anarch of Bolas
 1 Doomsday Excruciator
 1 Double Down
 1 Dovin, Hand of Control
@@ -404,6 +410,7 @@
 1 Insidious Roots
 1 Inspired Tethermage
 1 Inspiring Vantage
+1 Interplanar Beacon
 1 Intimidation Campaign
 1 Invasion of Ikoria
 1 Ionize
@@ -416,21 +423,28 @@
 1 Jailbreak Scheme
 1 Jarad, Golgari Lich Lord
 1 Jared Carthalion
+1 Jaya, Venerated Firemage
 1 Jazal Goldmane
 1 Jem Lightfoote, Sky Explorer
 1 Jenova, Ancient Calamity
 1 Jerren, Corrupted Bishop
 1 Jetmir's Garden
 1 Jiang Yanggu, Never Alone
+1 Jiang Yanggu, Wildcrafter
 1 Jolene, Plundering Pugilist
 1 Joo Dee, One of Many
 1 Journey to Nowhere
 1 Jungle Hollow
 1 Junji, the Midnight Sky
 1 Kagha, Shadow Archdruid
+1 Kaito, Dancing Shadow
 1 Kamiz, Obscura Oculus
 1 Karlach, Fury of Avernus
 1 Karplusan Forest
+1 Kasmina, Enigmatic Mentor
+1 Kaya, Bane of the Dead
+1 Kaya, Intangible Slayer
+1 Kaya's Ghostform
 1 Kenrith's Transformation
 1 Kiora's Follower
 1 Knockout Maneuver
@@ -557,6 +571,7 @@
 1 Nightshade Dryad
 1 Nimble Brigand
 1 Nimble Trapfinder
+1 Nissa, Steward of Elements
 1 Nissa, Who Shakes the World
 1 Nissa's Renewal
 1 No Admittance
@@ -652,6 +667,7 @@
 1 Puppeteer Clique
 1 Putrefy
 1 Qarsi Revenant
+1 Quintorius Kand
 1 Radiant Fountain
 1 Raise Dead
 1 Rakdos Carnarium
@@ -702,8 +718,10 @@
 1 Saber-Tooth Moose-Lion
 1 Sacred Foundry
 1 Safana, Calimport Cutthroat
+1 Saheeli, Sublime Artificer
 1 Sakura-Tribe Elder
 1 Samut, the Driving Force
+1 Samut, Tyrant Smasher
 1 Samut, Voice of Dissent
 1 Sandman, Shifting Scoundrel
 1 Sandsteppe Citadel
@@ -713,6 +731,7 @@
 1 Sapling of Colfenor
 1 Sapseep Forest
 1 Sarinth Steelseeker
+1 Sarkhan the Masterless
 1 Sarkhan, the Dragonspeaker
 1 Sautekh Immortal
 1 Savage Lands
@@ -769,6 +788,7 @@
 4 Sol Ring
 1 Solemn Doomguide
 2 Solemn Simulacrum
+1 Sorin, Vengeful Bloodlord
 1 Soul Snuffers
 1 Soured Springs
 1 Spara's Headquarters
@@ -821,6 +841,7 @@
 1 Talisman of Resilience
 1 Tam, Mindful First-Year
 1 Tam, the Possibility
+1 Tamiyo, Inquisitive Student
 1 Tangle
 1 Tangled Florahedron
 1 Tarmogoyf
@@ -841,6 +862,8 @@
 2 Terramorphic Expanse
 1 Territory Forge
 1 Terror of the Peaks
+1 Teyo, the Shieldmage
+1 Tezzeret, Master of the Bridge
 1 The Cabbage Merchant
 1 The Darkness Crystal
 1 The Destined Thief
@@ -855,6 +878,7 @@
 1 The Scorpion God
 1 The Soul Stone
 1 The Swarmweaver
+1 The Wanderer
 1 The War in Heaven
 1 Their Name Is Death
 1 Their Number Is Legion
@@ -933,11 +957,13 @@
 2 Visage Bandit
 1 Viscera Seer
 1 Vito, Thorn of the Dusk Rose
+1 Vivien, Champion of the Wilds
 1 Vivien's Arkbow
 1 Vizier of the Menagerie
 1 Vraan, Executioner Thane
 1 Vraska Joins Up
 1 Vraska, Betrayal's Sting
+1 Vraska, Swarm's Eminence
 1 Vraska, the Silencer
 1 Walking Ballista
 1 Wardens of the Cycle
