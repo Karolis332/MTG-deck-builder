@@ -213,3 +213,6 @@ Appended by `npx tsx scripts/paper-sync.ts`. Full diffs: `git log -p decks/paper
 ## 2026-09-28
 - **The Cabbage Merchant** v4, 99 cards: +Ghalta the Unstoppable, +Verdant Kraken
 - **Collection** 1026 owned, 620 open
+
+## 2026-09-28
+- **Collection** 1108 owned, 702 open
