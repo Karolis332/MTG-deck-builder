@@ -38,7 +38,7 @@
 1 Evolution Sage
 1 Archangel of Tithes
 1 Rewrite Regrets
-1 Simic Charm
+1 Kaya's Ghostform
 1 Entrust the Spark
 1 Counterspell
 1 Vigorbloom Charm
