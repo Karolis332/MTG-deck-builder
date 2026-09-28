@@ -450,6 +450,7 @@
 3 Island
 1 Isolated Chapel
 1 Izoni, Thousand-Eyed
+1 Jace, Memory Adept
 1 Jace, Reality Sculptor
 1 Jadar, Ghoulcaller of Nephalia
 1 Jagged Barrens
@@ -529,6 +530,7 @@
 1 Magebane Lizard
 1 Magus of the Candelabra
 1 Malevolent Rumble
+1 Mana Confluence
 1 Manor Gate
 1 Many Partings
 2 Map the Frontier
