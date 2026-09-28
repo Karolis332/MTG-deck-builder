@@ -127,6 +127,7 @@
 1 Earthbender Ascension
 1 Earthshaker Dreadmaw
 1 Eccentric Pestfinder
+1 Edgar, Moonlit Sovereign
 1 Egon, God of Death
 1 Eldrazi Ravager
 1 Elegy Acolyte
@@ -504,6 +505,7 @@
 1 Through the Forest Gate
 1 Tip the Scales
 1 Titan's Grave
+1 Titanbones, Towering Heart
 1 Tivash, Gloom Summoner
 1 Tomb of Horrors Adventurer
 1 Topiary Panther
