@@ -20,7 +20,7 @@
 1 Arnyn, Deathbloom Botanist
 1 Astarion, the Decadent
 1 At Knifepoint
-1 Autumn's Veil
+1 Avatar Kyoshi, Earthbender
 1 Aven Interrupter
 1 Azula, Ruthless Firebender
 1 Baba Lysaga, Night Witch
@@ -46,6 +46,7 @@
 1 Blood Celebrant
 1 Blood Hustler
 3 Blood Pet
+1 Bloodspore Thrinax
 1 Bloodthirsty Aerialist
 1 Bloodtracker
 1 Blossoming Bogbeast
@@ -53,8 +54,8 @@
 1 Bond of Revival
 1 Bonny Pall, Clearcutter
 1 Boros Charm
+1 Bosco, Just a Bear
 1 Bovine Intervention
-1 Brawn
 1 Bre of Clan Stoutarm
 1 Breaker of Creation
 1 Breeches, the Blastmaker
@@ -69,6 +70,7 @@
 1 Bygone Colossus
 2 Calamity, Galloping Inferno
 1 Callous Inspector
+1 Cankerbloom
 1 Carnivorous Cultivator
 1 Carpet of Flowers
 1 Case of the Trampled Garden
@@ -90,8 +92,11 @@
 1 Corpse Augur
 1 Corpse Churn
 3 Corrupted Conviction
+1 Cream of the Crop
 1 Creosote Heath
+1 Crystalline Armor
 1 Cultivate
+1 Cycle of Renewal
 1 Damnable Pact
 3 Dance of the Tumbleweeds
 1 Darigaaz's Charm
@@ -138,9 +143,7 @@
 1 Emergency Weld
 1 Emeritus of Ideation
 1 Emeritus of Truce
-1 Emil, Vastlands Roamer
 1 Emperor of Bones
-1 Endurance
 1 Epicure of Blood
 1 Eriette, the Beguiler
 1 Erinis, Gloom Stalker
@@ -151,12 +154,11 @@
 1 Everflowing Chalice
 1 Everything Comes to Dust
 1 Eviscerator's Insight
+1 Explore
 2 Explosive Derailment
 1 Ezzaroot Channeler
 1 Farseek
 1 Fblthp, Knows the Way
-1 Feasting Hobbit
-1 Feasting Troll King
 1 Fell the Mighty
 1 Feral Appetite
 1 Ferocification
@@ -169,8 +171,11 @@
 1 Fire
 1 Firemind Vessel
 1 Flame of Anor
+1 Flare of Cultivation
 1 Fling
+1 Fog
 1 Font of Agonies
+1 Forgotten Ancient
 1 Forlorn Flats
 2 Forsaken Miner
 1 Fortune, Loyal Steed
@@ -183,14 +188,12 @@
 2 Geralf, the Fleshwright
 1 Getaway Glamer
 1 Ghalta the Unstoppable
+1 Ghalta, Primal Hunger
 1 Ghired, Mirror of the Wilds
 1 Giant Growth
 1 Gift of Paradise
 1 Gigantic Big Bear
 1 Gigantosaurus
-1 Gilded Goose
-1 Ginger, Queen of Sweets
-1 Gingerbread Cabin
 1 Gleaming Barrier
 1 Gluttonous Troll
 1 Goldvein Hydra
@@ -200,10 +203,10 @@
 1 Gorma, the Gullet
 1 Grand Abolisher
 1 Greed
-1 Greenhouse Propagator
 1 Grist, Voracious Larva
 1 Growth Spiral
 1 Gruul Charm
+1 Guac & Marshmallow Pizza
 1 Gutterbones
 1 Gyome, Master Chef
 2 Hardbristle Bandit
@@ -224,11 +227,9 @@
 1 Honest Rutstein
 1 Honor Troll
 1 Hornet Nest
-1 Hornet Queen
 2 Hostile Investigator
 1 Huatli, Poet of Unity
 1 Humiliate
-1 Hungering Puppetbeast
 1 Hungry Ghoul
 1 Hunter's Insight
 1 Hypothesizzle
@@ -238,7 +239,6 @@
 1 Innkeeper's Talent
 1 Insidious Roots
 1 Intimidation Campaign
-1 Invasion of Ikoria
 1 Ionize
 1 Izoni, Thousand-Eyed
 1 Jagged Barrens
@@ -247,7 +247,6 @@
 1 Jem Lightfoote, Sky Explorer
 1 Jenova, Ancient Calamity
 1 Jerren, Corrupted Bishop
-1 Jiang Yanggu, Never Alone
 1 Jolene, Plundering Pugilist
 1 Joo Dee, One of Many
 1 Journey to Nowhere
@@ -265,10 +264,12 @@
 1 Lavaspur Boots
 1 Lembas
 1 Leyline Prowler
+1 Lifeblood Hydra
 1 Lilah, Undefeated Slickshot
 1 Lion Umbra
 1 Lluwen, Imperfect Naturalist
 1 Lonely Arroyo
+1 Loot, Exuberant Explorer
 1 Loot, the Nexus
 1 Lost Jitte
 1 Lotus Ring
@@ -300,8 +301,10 @@
 1 Mirage Mesa
 1 Mirkwood Bats
 1 Mirri, Weatherlight Duelist
+1 Mishra's Bauble
 1 Moldgraf Millipede
 1 Molimo, Maro-Sorcerer
+1 Monstrous Vortex
 1 Moraug, Fury of Akoum
 1 Morlun, Devourer of Spiders
 1 Mortality Spear
@@ -321,6 +324,7 @@
 1 Night's Whisper
 1 Nightshade Dryad
 1 Nimble Brigand
+1 Nissa, Who Shakes the World
 1 Nissa's Renewal
 1 No One Left Behind
 1 Noxious Gearhulk
@@ -345,18 +349,20 @@
 1 Oubliette
 1 Outcaster Trailblazer
 1 Outrageous Robbery
+1 Overrun
 1 Overwhelming Forces
 1 Overzealous Muscle
+1 Oviya, Automech Artisan
 1 Pact Weapon
 1 Palladium Myr
 1 Paradise Druid
 1 Paradise Plume
+1 Party Dude
 1 Patchwork Automaton
 1 Path to Exile
 1 Peer into the Abyss
 1 Perennial Behemoth
 1 Pest Control
-1 Pest Infestation
 1 Pest Rescuer
 1 Pestilence Demon
 1 Peter Parker's Camera
@@ -386,6 +392,7 @@
 1 Radiant Fountain
 1 Raise Dead
 1 Rakish Crew
+1 Rampant Growth
 1 Rankle, Master of Pranks
 1 Rattleback Apothecary
 1 Raven of Fell Omens
@@ -400,7 +407,6 @@
 1 Requisition Raid
 3 Return the Favor
 1 Revival Experiment
-1 Ribtruss Roaster
 1 Ride Down
 1 Rise of the Dark Realms
 1 Rith's Charm
@@ -410,12 +416,14 @@
 1 Rogue's Passage
 1 Roiling Regrowth
 2 Roxanne, Starfall Savant
+1 Rumble Arena
 1 Rush of Dread
 2 Rustler Rampage
 1 Ruthless Lawbringer
 1 Saber-Tooth Moose-Lion
 1 Samut, the Driving Force
 1 Samut, Voice of Dissent
+1 Sandman, Shifting Scoundrel
 1 Sandstorm Verge
 1 Sangromancer
 1 Sanguine Bond
@@ -427,11 +435,14 @@
 1 Sea Gate Colossus
 1 Seize the Secrets
 1 Selesnya Charm
+1 Selvala, Heart of the Wilds
 1 Seraphic Steed
 1 Servant of the Stinger
 1 Shadow, Mysterious Assassin
+1 Shamanic Revelation
 1 Shard of the Nightbringer
 1 Shard of the Void Dragon
+1 Shared Roots
 1 Sheoldred's Edict
 2 Shifting Grift
 3 Shoot the Sheriff
@@ -454,9 +465,7 @@
 1 Slickshot Vault-Buster
 1 Slimefoot, the Stowaway
 1 Smothering Abomination
-1 Snakeskin Veil
 1 Soured Springs
-1 Spider-Ham, Peter Porker
 1 Spider-Man, Brooklyn Visionary
 1 Spinewoods Armadillo
 1 Split the Spoils
@@ -483,6 +492,7 @@
 1 Take the Fall
 1 Take Up the Shield
 1 Tam, Mindful First-Year
+1 Tangle
 1 Tangled Florahedron
 1 Tarmogoyf
 1 Taste of Death
@@ -498,28 +508,24 @@
 1 Terror of the Peaks
 1 The Destined Thief
 1 The Key to the Vault
-1 The Ooze
+1 The Legend of Kyoshi
 1 The Swarmweaver
 1 Thieves' Tools
 1 Three Steps Ahead
 1 Through the Forest Gate
 1 Tip the Scales
 1 Titan's Grave
-1 Titanbones, Towering Heart
 1 Tivash, Gloom Summoner
 1 Tomb of Horrors Adventurer
 1 Topiary Panther
 1 Torens, Fist of the Angels
 1 Torpor Orb
 1 Tragedy Feaster
-1 Trail of Crumbs
-1 Transmutation Font
 3 Trash the Town
 1 Traxos, Scourge of Kroog
 1 Treasure Nabber
 1 Treva's Charm
 1 Triarch Stalker
-1 Trudge Garden
 1 Twilight Prophet
 1 Tyrant's Scorn
 1 Umbral Collar Zealot
@@ -547,6 +553,7 @@
 1 Victim of Night
 2 Visage Bandit
 1 Vito, Thorn of the Dusk Rose
+1 Vivien's Arkbow
 1 Vraan, Executioner Thane
 1 Vraska Joins Up
 1 Vraska, the Silencer
@@ -557,7 +564,6 @@
 1 Weathered Wayfarer
 1 Well of Lost Dreams
 1 Whisper, Blood Liturgist
-1 Wild Growth
 1 Wildborn Preserver
 1 Wilderland Scrounger
 1 Wildwood Scourge

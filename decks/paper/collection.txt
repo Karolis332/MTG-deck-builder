@@ -218,7 +218,7 @@
 1 Escape Tunnel
 2 Essence Capture
 1 Essence Pulse
-1 Eternal Witness
+2 Eternal Witness
 1 Eusocial Engineering
 1 Everflowing Chalice
 1 Everything Comes to Dust
@@ -255,7 +255,7 @@
 1 Fog
 1 Font of Agonies
 1 Force of Vigor
-34 Forest
+35 Forest
 1 Forgotten Ancient
 1 Forlorn Flats
 2 Forsaken Miner
@@ -397,7 +397,7 @@
 1 Linvala, Shield of Sea Gate
 1 Lion Umbra
 1 Lively Dirge
-1 Llanowar Elves
+2 Llanowar Elves
 1 Llanowar Wastes
 1 Lluwen, Imperfect Naturalist
 1 Lokhust Heavy Destroyer
