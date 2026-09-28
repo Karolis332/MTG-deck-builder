@@ -255,3 +255,7 @@ Appended by `npx tsx scripts/paper-sync.ts`. Full diffs: `git log -p decks/paper
 
 ## 2026-09-28
 - **Collection** 1265 owned, 859 open
+
+## 2026-09-28
+- **Tam, the Possibility** v1, 100 cards
+- **Collection** 1267 owned, 763 open

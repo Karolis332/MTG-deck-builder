@@ -450,7 +450,7 @@
 1 Intimidation Campaign
 1 Invasion of Ikoria
 1 Ionize
-3 Island
+4 Island
 1 Isolated Chapel
 1 Izoni, Thousand-Eyed
 1 Jace, Memory Adept
@@ -688,7 +688,7 @@
 1 Pitiless Carnage
 1 Pizza Face, Gastromancer
 1 Plaguecrafter
-4 Plains
+5 Plains
 1 Plan for All Outcomes
 1 Planar Engineering
 1 Planetarium of Wan Shi Tong

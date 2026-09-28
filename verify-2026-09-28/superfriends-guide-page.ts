@@ -9,7 +9,7 @@ import path from 'path';
 import Database from 'better-sqlite3';
 
 const ROOT = path.resolve(__dirname, '..');
-const LIST = path.join(ROOT, 'decks/paper/proposals/superfriends-tam.txt');
+const LIST = path.join(ROOT, 'decks/paper/decks/tam-the-possibility.txt');
 const OUT = [path.join(ROOT, 'decks/paper/superfriends-tam.html'), 'C:/Users/QuLeR/Desktop/MTG collection/MTG decks/superfriends-tam.html'];
 
 const dbDir = process.env.MTG_DB_DIR || path.join(process.env.APPDATA!, 'the-black-grimoire', 'data');
@@ -186,7 +186,7 @@ ${ORDER.map(([t, ns, p, why, rep]) => `<tr><td><span class="tier t${t}">${t}</sp
 <table>${BENCH.map(([n, r]) => `<tr><td>${thumbs([n])} ${esc(n)}</td><td>${esc(r)}</td></tr>`).join('')}</table>
 <p class="box" style="margin-top:10px"><b>Also owned and left out:</b> <span class="muted">${esc(BENCH_MORE)}</span></p>
 
-<footer>List: decks/paper/proposals/superfriends-tam.txt · generated ${new Date().toISOString().slice(0, 10)} by verify-2026-09-28/superfriends-guide-page.ts · card images © Wizards of the Coast via Scryfall.</footer>
+<footer>List: decks/paper/decks/tam-the-possibility.txt · generated ${new Date().toISOString().slice(0, 10)} by verify-2026-09-28/superfriends-guide-page.ts · card images © Wizards of the Coast via Scryfall.</footer>
 <script>
 const KEY='sleeved:superfriends-tam';const boxes=[...document.querySelectorAll('input[data-n]')];
 let s={};try{s=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){s={}}
