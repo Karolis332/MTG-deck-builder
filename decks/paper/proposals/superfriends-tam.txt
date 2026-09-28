@@ -51,7 +51,7 @@
 1 Farseek
 1 Faeburrow Elder
 1 Omenpath Journey
-1 Cultivate
+1 Great Divide Guide
 1 Bloom Tender
 1 Assassin's Trophy
 1 Path to Exile
@@ -59,7 +59,7 @@
 1 Atomize
 1 Vraska's Final Mercy
 1 Settle the Wreckage
-1 Shatter the Sky
+1 Fumigate
 1 Toxic Deluge
 1 Final Act
 1 Command Tower
@@ -92,7 +92,7 @@
 1 Woodland Cemetery
 1 Dragonskull Summit
 1 Rootbound Crag
-1 Cinder Glade
+1 Shivan Reef
 1 Bleachbone Verge
 2 Island
 1 Plains

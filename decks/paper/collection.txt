@@ -335,6 +335,7 @@
 1 Frantic Search
 1 Freestrider Lookout
 1 Frog Butler
+1 Fumigate
 1 Garruk's Uprising
 1 Gatecreeper Vine
 1 Gaze of Granite
@@ -371,6 +372,7 @@
 1 Grave Titan
 1 Grave Venerations
 1 Gray Merchant of Asphodel
+1 Great Divide Guide
 1 Great Hall of the Citadel
 1 Greed
 1 Greenhouse Propagator
@@ -813,6 +815,7 @@
 1 Sheoldred's Edict
 2 Shifting Grift
 1 Shipwreck Marsh
+1 Shivan Reef
 3 Shoot the Sheriff
 1 Shortcut to Mushrooms
 1 Sigil of Myrkul
@@ -879,6 +882,7 @@
 1 Suffer the Past
 1 Sultai Charm
 1 Sun Droplet
+1 Sunken Hollow
 1 Supernatural Stamina
 1 Surrak, the Hunt Caller
 46 Swamp

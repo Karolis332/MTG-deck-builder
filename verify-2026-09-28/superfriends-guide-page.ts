@@ -35,8 +35,8 @@ const GROUPS: [string, string, string[]][] = [
   ['Jace token package', 'Adds loyalty to the Jace token and finds the pieces.', ['Protege\'s Awakening', 'Avatar of Burgeoning Echoes', 'Arcane Amphisbaena', 'Rewrite Regrets', 'Entrust the Spark', 'Pia, Aether Ascetic']],
   ['Protection', 'Keeps attackers, removal and wipes off the walkers.', ['Tomik, Orzhov Lawmage', 'Archangel of Tithes', 'Liliana the Faultless', 'Counterspell', 'Dovin\'s Veto', 'Boros Charm', 'Vigorbloom Charm', 'Fatehold Charm']],
   ['Engine', "Innkeeper's Talent at level 3 doubles every counter you put: walker loyalty, plus abilities, Jace empowers (still to be found in your binder). Flux Channeler proliferates on every noncreature spell.", ["Innkeeper's Talent", 'Flux Channeler', 'Geist of Saint Thalia', 'Evolution Sage']],
-  ['Ramp', 'Timeless Lotus taps for {W}{U}{B}{R}{G}, which pays for Tam\'s proliferate every turn by itself. Great Hall of the Citadel (in Lands) makes two colours for any legendary spell.', ['Timeless Lotus', 'Sol Ring', 'Arcane Signet', 'Talisman of Progress', 'Talisman of Dominance', 'Talisman of Conviction', 'Bloom Tender', 'Faeburrow Elder', 'Farseek', 'Cultivate', 'Omenpath Journey']],
-  ['Removal', 'Toxic Deluge, Settle the Wreckage, Shatter the Sky and Final Act kill creatures and leave your walkers standing.', ['Path to Exile', 'Erode', 'Assassin\'s Trophy', 'Atomize', 'Vraska\'s Final Mercy', 'Toxic Deluge','Settle the Wreckage', 'Shatter the Sky', 'Final Act']],
+  ['Ramp', 'Timeless Lotus taps for {W}{U}{B}{R}{G}, which pays for Tam\'s proliferate every turn by itself. Great Hall of the Citadel (in Lands) makes two colours for any legendary spell. Great Divide Guide lets every land tap for any colour.', ['Timeless Lotus', 'Sol Ring', 'Arcane Signet', 'Talisman of Progress', 'Talisman of Dominance', 'Talisman of Conviction', 'Bloom Tender', 'Faeburrow Elder', 'Farseek', 'Great Divide Guide', 'Omenpath Journey']],
+  ['Removal', 'Toxic Deluge, Settle the Wreckage, Fumigate and Final Act kill creatures and leave your walkers standing. Fumigate\'s life gain also triggers Way of the Mentor.', ['Path to Exile', 'Erode', 'Assassin\'s Trophy', 'Atomize', 'Vraska\'s Final Mercy', 'Toxic Deluge','Settle the Wreckage', 'Fumigate', 'Final Act']],
 ];
 const grouped = new Set(GROUPS.flatMap((g) => g[2]));
 const lands = main.filter((l) => !grouped.has(l.name));
@@ -98,6 +98,11 @@ const HELD: [string, string, string][] = [
 ];
 
 const BENCH: [string, string][] = [
+  ['Shatter the Sky', 'Fumigate took the slot: its life gain triggers Way of the Mentor, and it gives opponents no cards.'],
+  ['Cultivate', 'Great Divide Guide took the slot: 2 mana, and every land taps for any colour. Cultivate needs basics; the deck has four.'],
+  ['Cinder Glade', 'Shivan Reef took the slot: enters untapped; U/R was the thinnest colour pair.'],
+  ['Sunken Hollow', 'Enters tapped with only four basics; Shipwreck Marsh and Theorix Annex already cover U/B.'],
+  ['Overwhelming Forces', 'Eight mana to wipe one opponent; the cheaper wipes cover it.'],
   ['Kasmina, Enigmatic Mentor', 'Jace, Memory Adept took the slot: a second Jace for the 25-loyalty win, plus card draw.'],
   ['Evolving Wilds', 'Mana Confluence took the slot: untapped, any colour, 1 life per tap.'],
   ['Fire Covenant', 'Toxic Deluge took the slot: a full wipe for 3 mana instead of paying life per creature.'],
