@@ -23,7 +23,7 @@
 1 Flux Channeler
 1 Saheeli, Sublime Artificer
 1 Kaya, Intangible Slayer
-1 Kaito, Dancing Shadow
+1 Ob Nixilis of the Black Oath
 1 Quintorius Kand
 1 Tomik, Orzhov Lawmage
 1 Way of the Mentor

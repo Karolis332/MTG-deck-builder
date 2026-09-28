@@ -30,7 +30,7 @@ const deck = fs.readFileSync(LIST, 'utf8').trim().split(/\r?\n/).map((l) => /^(\
 const [commander, ...main] = deck;
 
 const GROUPS: [string, string, string[]][] = [
-  ['Walkers', 'Tam makes all of these but Jared cost {1} less.', ['Chandra, Torch of Defiance', 'Chandra, Fire Artisan', 'Oko, Thief of Crowns', 'Elspeth, Sun\'s Champion', 'Ajani Unrelenting', 'Ajani Resolute', 'Professor Dellian Fel', 'Vraska, Betrayal\'s Sting', 'Jared Carthalion', 'Sarkhan the Masterless', 'Ob Nixilis, the Hate-Twisted', 'Jace, Reality Sculptor', 'Sorin, Vengeful Bloodlord', 'The Wanderer', 'Jace, Memory Adept', 'Saheeli, Sublime Artificer', 'Kaya, Intangible Slayer', 'Kaito, Dancing Shadow', 'Quintorius Kand']],
+  ['Walkers', 'Tam makes all of these but Jared cost {1} less.', ['Chandra, Torch of Defiance', 'Chandra, Fire Artisan', 'Oko, Thief of Crowns', 'Elspeth, Sun\'s Champion', 'Ajani Unrelenting', 'Ajani Resolute', 'Professor Dellian Fel', 'Vraska, Betrayal\'s Sting', 'Jared Carthalion', 'Sarkhan the Masterless', 'Ob Nixilis, the Hate-Twisted', 'Jace, Reality Sculptor', 'Sorin, Vengeful Bloodlord', 'The Wanderer', 'Jace, Memory Adept', 'Saheeli, Sublime Artificer', 'Kaya, Intangible Slayer', 'Ob Nixilis of the Black Oath', 'Quintorius Kand']],
   ['Ways', 'Each one creates the Jace token or adds 2–7 loyalty to it, and gives every walker a new ability.', ['Way of the Mentor', 'Way of the Paradox', 'Way of the Pyromancer', 'Way of the Mind Sculptor', 'Way of the Warlord', 'Way of the Wildspeaker', 'Way of the Healer']],
   ['Jace token package', 'Adds loyalty to the Jace token and finds the pieces.', ['Protege\'s Awakening', 'Avatar of Burgeoning Echoes', 'Arcane Amphisbaena', 'Rewrite Regrets', 'Entrust the Spark', 'Pia, Aether Ascetic']],
   ['Protection', 'Keeps attackers, removal and wipes off the walkers.', ['Tomik, Orzhov Lawmage', 'Archangel of Tithes', 'Liliana the Faultless', 'Counterspell', 'Dovin\'s Veto', 'Boros Charm', 'Vigorbloom Charm']],
@@ -67,6 +67,7 @@ const ENGINE = [
   ['Interplanar Beacon', '1 life per walker you cast.'],
   ['Sorin, Vengeful Bloodlord', 'Your walkers have lifelink on your turn.'],
   ['Kaya, Intangible Slayer', 'Her +2 drains each opponent for 3 and gains you life.'],
+  ['Ob Nixilis of the Black Oath', 'His +2 drains each opponent for 1 and gains you that much.'],
 ];
 
 const WINS: [string, string, string[]][] = [
@@ -78,7 +79,7 @@ const WINS: [string, string, string[]][] = [
 ];
 
 const ORDER: [number, string[], string, string, string][] = [
-  [1, ['The Chain Veil', 'Teferi, Temporal Archmage'], '7.40 + 1.50', '<b>Infinite combo with the cards you have.</b> Teferi\'s −1 untaps the Veil plus Timeless Lotus, Faeburrow Elder or Bloom Tender for more mana than the Veil costs. Paradox + Mentor give Teferi back the loyalty he spent, so the loop never ends: infinite activations on every walker, and Kaya\'s +2 kills the table. It needs 4 specific cards, so it stays bracket 3.', 'Kaito, Tomik'],
+  [1, ['The Chain Veil', 'Teferi, Temporal Archmage'], '7.40 + 1.50', '<b>Infinite combo with the cards you have.</b> Teferi\'s −1 untaps the Veil plus Timeless Lotus, Faeburrow Elder or Bloom Tender for more mana than the Veil costs. Paradox + Mentor give Teferi back the loyalty he spent, so the loop never ends: infinite activations on every walker, and Kaya\'s +2 kills the table. It needs 4 specific cards, so it stays bracket 3.', 'Tomik, Talisman of Conviction'],
   [1, ['Oath of Teferi'], '1.07', 'Use every walker\'s loyalty ability twice a turn. With the engine, each walker gains roughly 2 loyalty per turn.', 'Way of the Warlord'],
   [1, ['Carth the Lion'], '0.27', 'Plus abilities add 1 extra and minus abilities cost 1 less. When a walker dies, it looks at your top 7 cards for another.', 'Arcane Amphisbaena'],
   [1, ['Deepglow Skate'], '0.32', 'Doubles every counter when it enters, which can take the Jace token straight toward 25.', 'Saheeli'],
@@ -98,6 +99,7 @@ const HELD: [string, string, string][] = [
 ];
 
 const BENCH: [string, string][] = [
+  ['Kaito, Dancing Shadow', 'Ob Nixilis of the Black Oath took the slot: his +2 drains every opponent and the life gain triggers Way of the Mentor.'],
   ['Omenpath Journey', 'Esika // The Prismatic Bridge took the slot: a 3-mana dork on the front, a free walker or creature every upkeep on the back.'],
   ['Fatehold Charm', 'Thrummingbird took the slot: a 2-mana flier that proliferates on every hit (loyalty on every walker, Jace counters, Vraska poison).'],
   ['Shatter the Sky', 'Fumigate took the slot: its life gain triggers Way of the Mentor, and it gives opponents no cards.'],

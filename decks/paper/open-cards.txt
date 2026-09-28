@@ -207,6 +207,7 @@
 1 Erinis, Gloom Stalker
 1 Erode
 2 Eroded Canyon
+1 Esika, God of the Tree
 2 Essence Capture
 1 Essence Pulse
 1 Eusocial Engineering
@@ -258,6 +259,7 @@
 1 Frantic Search
 1 Freestrider Lookout
 1 Frog Butler
+1 Fumigate
 1 Gatecreeper Vine
 1 Gaze of Granite
 1 Geist of Saint Thalia
@@ -282,6 +284,7 @@
 1 Grand Abolisher
 1 Grave Titan
 1 Grave Venerations
+1 Great Divide Guide
 1 Great Hall of the Citadel
 1 Greed
 1 Grim Poppet
@@ -339,6 +342,7 @@
 1 Ionize
 1 Isolated Chapel
 1 Izoni, Thousand-Eyed
+1 Jace, Memory Adept
 1 Jace, Reality Sculptor
 1 Jagged Barrens
 1 Jailbreak Scheme
@@ -398,6 +402,7 @@
 1 Magebane Lizard
 1 Magus of the Candelabra
 1 Malevolent Rumble
+1 Mana Confluence
 2 Map the Frontier
 1 Marauding Sphinx
 1 Marchesa, Dealer of Death
@@ -461,7 +466,7 @@
 1 Nulldrifter
 1 Nullpriest of Oblivion
 1 Nyx Lotus
-1 Ob Nixilis Reignited
+1 Ob Nixilis of the Black Oath
 1 Ob Nixilis, the Hate-Twisted
 1 Obeka, Splitter of Seconds
 1 Oft-Nabbed Goat
@@ -607,6 +612,7 @@
 1 Sheoldred's Edict
 2 Shifting Grift
 1 Shipwreck Marsh
+1 Shivan Reef
 3 Shoot the Sheriff
 1 Shortcut to Mushrooms
 1 Sigil of Myrkul
@@ -655,6 +661,7 @@
 1 Suffer the Past
 1 Sultai Charm
 1 Sun Droplet
+1 Sunken Hollow
 1 Supernatural Stamina
 1 Surrak, the Hunt Caller
 1 Sweet-Gum Recluse

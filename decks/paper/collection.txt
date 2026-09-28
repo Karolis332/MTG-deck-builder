@@ -629,7 +629,7 @@
 1 Nulldrifter
 1 Nullpriest of Oblivion
 1 Nyx Lotus
-1 Ob Nixilis Reignited
+1 Ob Nixilis of the Black Oath
 1 Ob Nixilis, the Hate-Twisted
 1 Obeka, Splitter of Seconds
 1 Oft-Nabbed Goat
