@@ -1,5 +1,6 @@
 1 Aatchik, Emerald Radian
 1 Aberrant Return
+1 Abrade
 1 Abraded Bluffs
 1 Abundant Growth
 1 Adaptive Automaton
@@ -32,6 +33,7 @@
 1 Auntie Ool, Cursewretch
 1 Avatar Kyoshi, Earthbender
 1 Aven Interrupter
+1 Azorius Locket
 1 Azula, Ruthless Firebender
 1 Baba Lysaga, Night Witch
 1 Back for More
@@ -46,6 +48,7 @@
 1 Bedevil
 1 Beifong's Bounty Hunters
 1 Beledros Witherbloom
+1 Bender's Waterskin
 1 Binding the Old Gods
 1 Bioengineered Future
 1 Bismuth Mindrender
@@ -67,6 +70,7 @@
 1 Bond of Revival
 1 Bonny Pall, Clearcutter
 1 Boros Charm
+1 Boros Locket
 1 Bosco, Just a Bear
 1 Bovine Intervention
 1 Bre of Clan Stoutarm
@@ -120,6 +124,7 @@
 1 Corpse Augur
 1 Corpse Churn
 3 Corrupted Conviction
+1 Counterspell
 1 Cream of the Crop
 1 Creosote Heath
 1 Crystalline Armor
@@ -185,6 +190,7 @@
 1 Epicure of Blood
 1 Eriette, the Beguiler
 1 Erinis, Gloom Stalker
+1 Erode
 2 Eroded Canyon
 2 Essence Capture
 1 Essence Pulse
@@ -229,11 +235,13 @@
 2 Forsaken Miner
 1 Fortune, Loyal Steed
 1 Fountainport Bell
+1 Frantic Search
 1 Freestrider Lookout
 1 Frog Butler
 1 Gatecreeper Vine
 1 Gaze of Granite
 1 Gene Pollinator
+1 Generous Gift
 2 Geralf, the Fleshwright
 1 Getaway Glamer
 1 Ghalta, Primal Hunger
@@ -258,6 +266,7 @@
 1 Grist, Voracious Larva
 1 Growth Spiral
 1 Gruul Charm
+1 Gruul Locket
 1 Gruul Turf
 1 Guac & Marshmallow Pizza
 1 Gutterbones
@@ -293,6 +302,7 @@
 1 Idol of False Gods
 1 Ifnir Deadlands
 1 Ignoble Hierarch
+1 Ilysian Caryatid
 1 Immoral Bargain
 1 Incremental Blight
 1 Infernal Grasp
@@ -384,6 +394,7 @@
 1 Mishra's Bauble
 1 Moldgraf Millipede
 1 Molimo, Maro-Sorcerer
+1 Moment of Reckoning
 1 Monstrous Vortex
 1 Moraug, Fury of Akoum
 1 Morlun, Devourer of Spiders
@@ -543,10 +554,12 @@
 1 Sea Gate Colossus
 1 Seaside Citadel
 1 Seize the Secrets
+1 Seize the Spoils
 1 Selesnya Charm
 1 Selvala, Heart of the Wilds
 1 Seraphic Steed
 1 Servant of the Stinger
+1 Settle the Wreckage
 1 Shadow, Mysterious Assassin
 1 Shamanic Revelation
 1 Shard of the Nightbringer
@@ -562,6 +575,7 @@
 1 Sign in Blood
 1 Silversmote Ghoul
 1 Simic Charm
+1 Simic Locket
 1 Simulacrum Shaper
 1 Sinister Gnarlbark
 1 Sivriss, Nightmare Speaker
@@ -571,6 +585,7 @@
 1 Skorpekh Destroyer
 1 Skullcrack
 1 Skycoach Waypoint
+1 Skyshroud Claim
 1 Slavering Branchsnapper
 1 Slick Sequence
 1 Slickshot Lockpicker
@@ -583,6 +598,7 @@
 1 Sorin, Vengeful Bloodlord
 1 Soul Snuffers
 1 Soured Springs
+1 Spell Pierce
 1 Spider-Man, Brooklyn Visionary
 1 Spinewoods Armadillo
 1 Split the Spoils
@@ -597,6 +613,7 @@
 1 Studious First-Year
 1 Study Hall
 1 Suffer the Past
+1 Sultai Charm
 1 Sun Droplet
 1 Supernatural Stamina
 1 Surrak, the Hunt Caller
@@ -609,6 +626,10 @@
 1 Take for a Ride
 1 Take the Fall
 1 Take Up the Shield
+1 Talisman of Dominance
+1 Talisman of Hierarchy
+1 Talisman of Progress
+1 Talisman of Unity
 1 Tam, Mindful First-Year
 1 Tam, the Possibility
 1 Tamiyo, Inquisitive Student
@@ -645,6 +666,7 @@
 1 Titan's Grave
 1 Tivash, Gloom Summoner
 1 Tomb of Horrors Adventurer
+1 Tome of the Guildpact
 1 Topiary Panther
 1 Torens, Fist of the Angels
 1 Torpor Orb
@@ -664,6 +686,7 @@
 2 Undying Malice
 2 Unfortunate Accident
 1 Unseal the Necropolis
+1 Urban Evolution
 1 Uro, Titan of Nature's Wrath
 1 Vampire Nighthawk
 1 Vampiric Link
