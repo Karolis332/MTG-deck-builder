@@ -302,3 +302,43 @@ VERDICT   : FAIL (only on the two accepted items below)
 
 Everything gates PASS except the pre-existing land WARN (unchanged count, not caused by these swaps) and the
 `plan` FAIL the brief calls out as acceptable for commanders the gate has no plan for.
+
+## 6. Reality Fracture pass
+
+Baseline: REFUTE.md §3 final — 6 KEEP swaps stand (Generous Gift, Putrefy, Infernal Grasp, Grand Abolisher, Syphon Mind, Growth Spiral); Selvala is OUT, Feywild Caretaker stays in the deck.
+
+- **Academic Ascent** ({1}{W}) — REJECT — "+2/+2 and flying" combat trick, Empower Jace payoff is dead without a Jace package; not a party creature type
+- **Campus Crier** ({1}{W}, Human Advisor) — REJECT — Advisor isn't a party class; text is graveyard Empower Jace only, off-plan
+- **Countersculpt** ({U}{U}) — REJECT — "Counter target spell", Empower Jace upside needs Jace tokens the deck doesn't build toward
+- **Edgar, Moonlit Sovereign** ({3}{G}{G}, Werewolf Noble) — REJECT — not a party type; "if you didn't cast a spell this turn" fights the deck's proactive plan
+- **Eye of Jace** ({1}) — REJECT — minor surveil/graveyard payoff, no party synergy, weaker than kept ramp/draw
+- **Fatehold Charm** ({W}{U}) — REJECT — flexible bounce/draw instant but no party tie, doesn't beat a kept card
+- **Fblthp, Knows the Way** ({X}{G}{G}, Homunculus Scout) — REJECT — not party; "search your library for up to X basic land cards" is redundant ramp/fixing (9 pieces already)
+- **Hexhaven Battalion** ({4}{W}{W}) — REJECT — makes 3 Wizard Soldier tokens (party-relevant) but WW is color-intensive in 5c and Empower Jace text is dead; not clearly better than a kept slot
+- **Inspired Tethermage** ({2}{G}, Elf **Warrior**) — REJECT — is a party type, but the ability needs planeswalker loyalty counters the deck doesn't generate; a vanilla 2/2 otherwise
+- **Keeper of the Quiet Hour** ({3}, Chimera) — REJECT — not party type; Empower Jace only, off-plan
+- **Kiora of Salt and Sand** ({1}{G}{U}, Merfolk Noble) — REJECT — not party type; needs a planeswalker package the deck lacks
+- **Konstrari Charm** ({R}{G}) — REJECT — "deals 6 damage to target creature with flying" is too narrow a removal mode vs the kept unconditional removal
+- **Loot, the Nexus** ({2}{G}, Beast Noble) — REJECT — not party type; extra ramp is redundant with 9 existing pieces
+- **Mindseeker Oculus** ({2}{U}, Homunculus) — REJECT — not party; Empower Jace 4 only, off-plan
+- **Murmuring Volume** ({3}) — REJECT — mana rock + loot, redundant with Signet/Lantern/Fellwar/Sol Ring/Packbeast already in
+- **No Admittance** ({1}{R}) — REJECT — "deals 3 damage to any target" is weaker burn than the kept unconditional removal
+- **Plan for All Outcomes** ({3}{U}) — REJECT — weak tempo enchantment, Empower Jace payoff dead, off-plan
+- **Repurposed Enforcer** ({1}{W}, Human Soldier) — REJECT — Soldier isn't a party class; Empower Jace only
+- **Solve for Disappointment** ({1}{B}) — REJECT — discard effect, deck isn't a discard/control shell; Empower Jace dead
+- **Stingerquill Charm** ({B}{R}) — REJECT — flexible (burn/combat trick/makes a Wizard Soldier token) but doesn't clearly outclass a kept card; second-tier option if another slot opens
+- **Tam's Resistance** ({1}{G/U}) — REJECT — minor +1/+1 counter trick, Empower Jace dead, no party tie
+- **Teyo, Diamondblade Mage** ({3}{B}, Human Warlock) — REJECT — Warlock isn't a party class
+- **Teyo, Lightshield Expert** ({1}{W}, Human **Cleric**) — REJECT (second-tier ADD candidate) — is a party type with Flash "target permanent you control gains hexproof... +1/+1 counter if creature"; stronger than Archpriest of Iona's narrow full-party bonus, but not actioned this pass (see recommendation below)
+- **Theorix Charm** ({U}{B}) — REJECT — narrow soft-counter/-2/-2 instant, same reasoning Concerted Defense/Bar the Gate were cut for
+- **Tomik, Orzhov Lawmage** ({1}{W}, Human Advisor) — REJECT — Advisor isn't a party class; needs a planeswalker package
+- **Vindictive Triumph** ({W}{B}{B}) — REJECT (second-tier ADD candidate) — "Exile target creature or planeswalker" is strong unconditional removal but WBB is color-intensive in 5c; not actioned this pass (see recommendation below)
+- **Violent Echoes** ({2}{R}{R}) — REJECT — "deals 6 damage to target creature or planeswalker" is solid but RR is color-intensive and conditional on toughness vs the kept unconditional destroy effects; Empower Jace dead
+- **Way of the Cryomancer** ({2}{U}) — REJECT — Empower Jace 5 payoff needs a Jace package the deck doesn't run
+- **Yuriko, Blade of the Mighty** ({3}{W}, Human Samurai) — REJECT — not party type; double-strike-alone synergy is real (Changeling Outcast, Yuan-Ti Malison attack alone) but speculative, not a clear beat of a kept card
+
+### Refuter's misses (Springleaf Parade, Realmwalker, Chomping Changeling) — all ADD
+
+- **Springleaf Parade** ({X}{G}{G}) — ADD — "create X 1/1 colorless Shapeshifter creature tokens with changeling... Creature tokens you control have '{T}: Add one mana of any color'" — scalable changeling army, each token independently fills any party slot AND ramps; beats **Solemn Doomguide** (narrow unearth-for-party-creatures payoff that needs specific creatures already dead)
+- **Realmwalker** ({2}{G}) — ADD — Changeling body (fills any party slot) plus "You may cast creature spells of the chosen type from the top of your library" — card advantage engine; beats **Archpriest of Iona** (1/1 whose only upside is a full-party combat bonus)
+- **Chomping Changeling** ({2}{G}) — ADD — Changeling body plus "destroy up to one target artifact or enchantment" — a body AND the same effect **You Find a Cursed Idol** provides less efficiently (sorcery, no body); beats **You Find a Cursed Idol**

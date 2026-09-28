@@ -3,7 +3,7 @@ named in that deck's report. Also: proposed list = 100 cards, every ADD is in th
 the deck, no card added to two decks.
 Run: PYTHONIOENCODING=utf-8 py verify-2026-09-28/deck-audit/check-coverage.py
 """
-import collections, glob, os, re
+import collections, glob, json, os, re
 
 D = os.path.dirname(os.path.abspath(__file__))
 ROW = re.compile(r'^- (\d+)x \*\*(.+?)\*\* .*?EDHREC #(\d+|unranked) — \$([\d.]+|\?)( GAME-CHANGER)?')
@@ -33,6 +33,10 @@ def norm(s):
     return re.sub(r'[^a-z0-9]', '', s.lower())
 
 
+# lost by the operator: never recommended, so no verdict needed
+LOST = {"Innkeeper's Talent", 'Konstrari Annex', 'Boros Charm'}
+FRA = os.path.join(D, 'fra-todo.json')
+fra_todo = json.load(open(FRA, encoding='utf-8')) if os.path.exists(FRA) else {}
 adds = collections.defaultdict(list)
 for report in sorted(glob.glob(os.path.join(D, '*-report.md'))):
     slug = os.path.basename(report)[:-len('-report.md')]
@@ -40,10 +44,23 @@ for report in sorted(glob.glob(os.path.join(D, '*-report.md'))):
     deck = entries(os.path.join(D, f'{slug}-deck.md'))
     text = norm(open(report, encoding='utf-8').read())
     need = [n for n, (q, r, p, gc) in pool.items() if (r is not None and r <= 3000) or (p is not None and p >= 4) or gc]
+    # new-set cards have no rank/price yet: fra-todo.json lists the open Reality Fracture cards per deck
+    need += [n for n in fra_todo.get(slug, []) if n not in need]
+    need = [n for n in need if n not in LOST]
     missing = [n for n in need if norm(n.split(' // ')[0]) not in text]
     print(f'== {slug}: {len(need)} criterion cards, {len(missing)} missing from the report')
     for n in missing:
-        print('   MISSING', n, pool[n][1:])
+        print('   MISSING', n, pool[n][1:] if n in pool else 'fra-todo')
+    # unregistered Reality Fracture cards: every one needs a line in <slug>-fra-verdicts.md
+    assumed_path = os.path.join(D, f'{slug}-fra-assumed.md')
+    if os.path.exists(assumed_path):
+        assumed = re.findall(r'^- \[[A-Z-]+\] \*\*(.+?)\*\*', open(assumed_path, encoding='utf-8').read(), re.M)
+        verdicts_path = os.path.join(D, f'{slug}-fra-verdicts.md')
+        vtext = norm(open(verdicts_path, encoding='utf-8').read()) if os.path.exists(verdicts_path) else ''
+        vmiss = [n for n in assumed if norm(n) not in vtext]
+        print(f'   unregistered FRA: {len(assumed)} cards, {len(vmiss)} without a verdict')
+        for n in vmiss:
+            print('   NO VERDICT', n)
     prop_path = os.path.join(D, f'{slug}-proposed.txt')
     if not os.path.exists(prop_path):
         print('   no proposed list'); continue

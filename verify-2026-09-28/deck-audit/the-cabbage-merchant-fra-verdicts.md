@@ -1,0 +1,51 @@
+# The Cabbage Merchant — Reality Fracture assumed-owned pass (2026-09-28)
+
+Baseline: the deck after REFUTE.md §5's KEEP swaps (+Elvish Spirit Guide −Hungering Puppetbeast,
++Alhammarret's Archive −Ginger Queen of Sweets, +Tendershoot Dryad −Emil Vastlands Roamer,
++Hunter's Insight −Spry and Mighty, +Elvish Archdruid as the 100th card; The Ooze, Greenhouse
+Propagator, Nesting Grounds, Ash Barrens and Escape Tunnel all stay).
+
+## Swaps
+
+| IN | tier | OUT | why IN | why OUT is weaker |
+|---|---|---|---|---|
+| Traxos, Scourge Eternal | ASSUMED | Jiang Yanggu, Never Alone | "Trample \| Traxos doesn't untap during your untap step. \| Whenever you cast an artifact or creature spell, untap Traxos." This deck casts an artifact or creature spell most turns (Food/Clue/Treasure makers are all artifacts, plus the creature suite), so Traxos attacks almost every turn once cast; it's itself an artifact, so as a historic permanent it's a 7/7 with Displaced Dinosaurs out | Jiang Yanggu's payoff is "At the beginning of your end step, untap all tokens you control" — Seedborn Muse ("Untap all permanents you control during each other player's untap step") already untaps every tapped Food/token on every opponent's turn; Jiang Yanggu only adds a second untap on your own end step, which the Trudge Garden/Teething Wurmlet/Took/Manufactor/Jaheira infinite loop (already assembled) doesn't need to go off in a single turn |
+| Restore with Empathy | ASSUMED | Titanbones, Towering Heart | "Return target permanent card from your graveyard to your hand. You gain 4 life." — instant-speed 2-for-1: rebuys any permanent (Manufactor, a key land, Peregrin Took after a wrath) AND the 4 life is one lifegain event, so it re-triggers Trudge Garden ("Whenever you gain life, you may pay {2}. If you do, create a 4/4...") for a free trampler on top of the card it returns | Titanbones only says "Whenever you gain life, put two +1/+1 counters on Titanbones" — it does nothing itself the turn it lands beyond a 2-power reach blocker, and its growth is entirely passive on one body versus Empathy's immediate two-for-one plus a Trudge Garden trigger |
+| Puppet Crafting | IF-OWNED (rare — confirm before sleeving) | Ribtruss Roaster | "Enchanted permanent is a Construct creature with base power and toughness 5/5 in addition to its other types. \| {4}{G}: Return this card from your graveyard to your hand." Put it on Academy Manufactor, Transmutation Font, or Idol of Oblivion — any of them keeps its ability text and becomes a 5/5 attacker/blocker, and the aura rebuys itself from the graveyard | Ribtruss Roaster's payoff is gated behind "Devour 1 (...you may sacrifice any number of **creatures**...)" — this deck's board is mostly noncreature Food/Clue/Treasure artifacts, not creatures, so it usually enters with 0 counters and makes 0 Pests at end step; it needs creature fodder the deck's own plan doesn't generate in quantity |
+
+Game changers: 1 → 1 (Seedborn Muse only; none of these three are game changers).
+
+## Verdicts
+
+- Karn, Argent Defender — REJECT: "Artifacts and creatures entering the battlefield don't cause abilities to trigger" turns off the deck's own engine — Gilded Goose, Tough Cookie, Spider-Ham, Trail of Crumbs, Feasting Troll King's Food-on-ETB triggers, Teething Wurmlet's per-artifact lifegain — it's a hatebears piece pointed at this exact deck.
+- Hexhaven Dueling Arena — REJECT: the "prepared" mechanic it keys off ("Target creature that attacked this turn becomes prepared") has zero payoff in this deck — no card here has a prepare ability — so it's just a slow colorless land.
+- Flourishing Grapple — REJECT: "Target creature or planeswalker an opponent controls that's red or white" is color-restricted removal; Archdruid's Charm and Bridgeworks Battle already give unrestricted fight-based removal.
+- Hunter's Axe — REJECT: "+2/+0 and has... trample or deathtouch" on attack is a marginal equipment with no Food/token text; the deck isn't an equipment shell and already has Loxodon Warhammer-class effects rejected for the same reason.
+- Marwyn, the Preserver — REJECT: "Lands you control have hexproof... {2}: Return target land card from your graveyard to your hand" is generic land protection/recursion with no Food/artifact synergy; the protection suite (Autumn's Veil, Snakeskin Veil, Endurance) already covers the engine, not the manabase.
+- Yoshimaru, Scrappy Stray — REJECT: "another target creature you control fights up to one target creature an opponent controls" needs a second creature already out and is redundant with Wicked Wolf, Bridgeworks Battle and Archdruid's Charm's fight modes already in the 100.
+- Restore with Empathy — ADD (swap #2, in for Titanbones, Towering Heart).
+- Traxos, Scourge Eternal — ADD (swap #1, in for Jiang Yanggu, Never Alone).
+- Archive Arbiter — REJECT (close): "Flying | ...Destroy target noncreature, nonland permanent... or gain 4 life" is flexible artifact removal (itself historic, a 7/7 with Dinosaurs) and would rank fourth if a fourth slot opened, but the deck already runs 7 removal pieces (Archdruid's Charm, Bridgeworks Battle, Force of Vigor, Wicked Wolf, Kenrith's Transformation, Pest Infestation, Walking Ballista) and no clean OUT slot remains once the three swaps above are taken.
+- Ruric Thar, Magecrusher — REJECT: this printing is a vanilla-with-keywords 7-drop (reach, vigilance, trample, combat-damage-gated hexproof) with no Food, artifact or token text; Ghalta the Unstoppable and Hornet Queen already fill the top end with real payoffs.
+- Room of Refuge — REJECT: "This land enters tapped. As it enters, choose a color" is fixing for a 27-Forest mono-color deck that needs none.
+- Tethermage's Advantage — REJECT: "+2/+2 and gains reach... untap it" is a one-shot combat trick; the deck doesn't run combat tricks and this doesn't advance the Food/token plan.
+- Afterthought Sentry — REJECT: "exile up to one target card from a graveyard" on attack is minor graveyard hate that duplicates Endurance's ETB graveyard exile for a worse rate.
+- Compel Brutality — REJECT: another fight-based removal spell, redundant with Wicked Wolf/Bridgeworks Battle/Archdruid's Charm already covering that mode.
+- Living Library — REJECT: "{6}, Sacrifice this creature: ...shuffles it into their library" is expensive tuck removal on a colorless body with no other text.
+- Medic's Kitesail — REJECT: "+1/+0 and has flying and... gain 1 life" on attack is a 1-life-per-swing trickle, trivial next to the Food-sac (3 life) and Trudge Garden lifegain already in the deck.
+- Something Worth Saving — REJECT: "Mill four cards... gain 1 life" is minor card selection; the draw suite (Idol of Oblivion, Toski, Ohran Frostfang, Sarinth Steelseeker, Garruk's Uprising, Syr Ginger, Return of the Wildspeaker, and now Alhammarret's Archive doubling all of it) is already at 8 pieces.
+- Sureshot Sower — REJECT: "{3}{G}, Discard this card: Destroy target creature with flying" only hits flyers and costs a card from hand; too narrow.
+- Budding Insurgent — REJECT: "Sacrifice this creature: Destroy target artifact or enchantment" is redundant with Force of Vigor, Archdruid's Charm and Pest Infestation already covering artifact/enchantment removal, and costs a body to use.
+- Bestial Incursion — REJECT: "Create a 4/4 green Beast creature token with trample. Flashback {5}{G}" is a fine generic body-maker, but the token isn't a Food/Clue/Treasure and doesn't feed Manufactor, Took, Trudge Garden or Jaheira — non-synergistic filler with no clean OUT slot once the three swaps above are taken.
+- Wrecking Gecko — REJECT: "Ward {2}... {6}{G}{G}: +4/+4 and trample" is an expensive activated pump with no Food/artifact text beyond being historic filler.
+- Vinelasher Adept — REJECT: "put three +1/+1 counters on target creature" is a counters-matter payoff the deck has almost no other counters theme to support.
+- Hexhaven Invigorator — REJECT: "Whenever this creature is dealt damage, you may search... land cards" needs to take combat damage to do anything and costs {G}{G}{G}{G}; no Food synergy.
+- Emrakul, the Exigent Doom — REJECT: a 10-mana finisher with no Food/artifact text; the deck's actual finishers (Bumi's Feast Lecture, Halsin, the Trudge Garden/Wurmlet/Took/Manufactor/Jaheira infinite) already close games well before 10 mana is live.
+- Hall of Echoes — REJECT: "{5}: This land becomes a copy of target creature you control until end of turn" is a narrow, one-turn effect on a colorless land; not worth the manabase slot over the lands the operator already locked in.
+- Roiling Canopy — REJECT: "if you control at least five other Forests, target creature gets +3/+3" triggers only when a Forest enters with 5+ Forests already down — rare after the early game — on a land that enters tapped.
+- Carnivorous Cultivator // Enroot — REJECT: already rejected in the main report's coverage table ("land recursion on combat damage, marginal value, no Food text") — same card, same reasoning holds.
+- Puppet Crafting — ADD (swap #3, IF-OWNED, in for Ribtruss Roaster).
+- Gardenize — REJECT: "Whenever a creature you control dies, put a charge counter... add {G} for each charge counter" needs repeated creature deaths (not Food/Clue/Treasure sacs, which aren't creatures) to ramp; the deck's actual sac fodder is mostly noncreature.
+- Omnath, Locus of the Void — REJECT: "Omnath gets +1/+1 for each unspent mana you have" is a 0/0 by default that dies to any removal or a stray ping unless mana is floated specifically to protect it; no Food synergy, fragile.
+- Darksteel Angel — REJECT: "You can't lose the game and your opponents can't win the game" is a strong lock in a vacuum, but 9 mana with no board impact of its own doesn't advance the Food/token plan, and the deck already wins through combat/combo well before 9 mana is reliably live.
+- Memnarch, the Warden — REJECT (close): "create two 1/1 colorless Myr artifact creature tokens... draw a card for each artifact you control" is genuinely on-plan (two more historic artifacts for Displaced Dinosaurs, a big draw off an artifact-heavy board), but at {10} unreduced it's slower and less consistent than the deck's existing sub-7-mana engine, and no clean OUT slot remains once the three swaps above are taken.

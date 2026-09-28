@@ -1,0 +1,826 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Paper deck upgrades — 2026-09-28</title><style>
+body{margin:0;background:#15110d;color:#e8dcc4;font:15px/1.45 Georgia,serif}
+header{position:sticky;top:0;background:#1d1711;border-bottom:1px solid #6b5220;padding:10px 18px;display:flex;gap:18px;align-items:center;z-index:3;flex-wrap:wrap}
+h1{font-size:19px;margin:0;color:#d4af37;letter-spacing:.04em}
+h2{scroll-margin-top:60px;font-size:17px;color:#d4af37;margin:26px 18px 8px;border-bottom:1px solid #3a2d17;padding-bottom:4px}
+h3{color:#d4af37;margin:16px 0 6px}.heldh{margin:14px 18px 0;font-size:14px}.held .swaprow{border-style:dashed}
+nav a{color:#b5a27b;font-size:13px;margin-right:12px;text-decoration:none}nav a:hover{color:#d4af37}
+table{border-collapse:collapse;margin:0 18px;width:calc(100% - 36px)}td,th{border-bottom:1px solid #3a2d17;padding:8px 8px;vertical-align:top;text-align:left;font-size:14px}th{color:#d4af37;font-weight:normal;font-size:13px}
+.deckhead{padding:0 18px}.cmdimg{width:200px;border-radius:10px}
+.keeps,.rejects{display:flex;flex-direction:column;gap:10px;padding:0 18px;margin:10px 0}
+.swaprow{display:flex;align-items:flex-start;gap:14px;background:#1d1711;border:1px solid #3a2d17;border-radius:8px;padding:12px}
+.swaprow.small{padding:8px}.swaprow.small p{font-size:12px}
+.cardbox{position:relative;text-align:center;flex-shrink:0}.cardbox img{border-radius:6px;display:block}
+.cardbox .lbl{position:absolute;top:4px;left:4px;font:11px monospace;padding:1px 6px;border-radius:4px}
+.cardbox.out img{opacity:.5;filter:grayscale(.6)}.lbl-out{background:#7a2020;color:#fff}
+.cardbox.in img{border:2px solid #d4af37}.lbl-in{background:#8b6914;color:#fff}
+.cardbox small{display:block;color:#b5a27b;font-size:11px;max-width:160px}
+.placeholder{border:1px dashed #3a2d17;border-radius:6px;color:#7d6c4d;font-size:12px;padding:20px 8px;text-align:center;align-self:center}
+.noimg{border:1px solid #3a2d17;border-radius:6px;color:#e8dcc4;font-size:12px;padding:20px 8px;text-align:center}
+.arrow{align-self:center;color:#d4af37;font-size:20px}
+.swapinfo{flex:1}.swapinfo p{margin:3px 0}.swapinfo b{color:#d4af37}
+.badges{display:flex;gap:8px;margin-bottom:4px;flex-wrap:wrap}
+.tier{border-radius:10px;padding:1px 9px;font:11px monospace}
+.t-registered{background:#3a2d17;color:#b5a27b}.t-ASSUMED{background:#6b5220;color:#fff}.t-IF-OWNED{background:#7a2020;color:#fff}
+.round,.rank{font:11px monospace;color:#7d6c4d}
+.muted{color:#b5a27b;font-size:13px}
+details{margin:0 18px 10px}summary{cursor:pointer;color:#d4af37;padding:6px 0}
+.pulldeck{margin:0 18px 20px;background:#1d1711;border:1px solid #3a2d17;border-radius:8px;padding:12px 16px}
+.pullcols{display:grid;grid-template-columns:1fr 1fr;gap:20px}.pullcols label{display:block;padding:2px 0;font-size:13px}
+.pullcols label:has(input:checked){opacity:.4;text-decoration:line-through}
+footer{margin:30px 18px;color:#7d6c4d;font-size:12px}
+</style></head><body>
+<header><h1>Paper deck upgrades — 2026-09-28</h1>
+<nav style="margin-left:auto"><a href="#tam-the-possibility">Tam, the Possibility</a><a href="#meren-of-clan-nel-toth">Meren of Clan Nel Toth</a><a href="#tazri-beacon-of-unity">Tazri, Beacon of Unity</a><a href="#imotekh-the-stormlord">Imotekh the Stormlord</a><a href="#the-cabbage-merchant">The Cabbage Merchant</a><a href="#pull">Pull list</a></nav></header>
+
+<h2 id="summary">Summary</h2>
+<table><tr><th>Deck</th><th>KEEP swaps</th><th>ASSUMED / IF-OWNED ins</th><th>Held for your yes</th><th>Card count after</th></tr>
+<tr><td><a href="#tam-the-possibility">Tam, the Possibility</a></td><td>2</td><td>0</td><td>0</td><td>100</td></tr><tr><td><a href="#meren-of-clan-nel-toth">Meren of Clan Nel Toth</a></td><td>5</td><td>1</td><td>0</td><td>100</td></tr><tr><td><a href="#tazri-beacon-of-unity">Tazri, Beacon of Unity</a></td><td>9</td><td>2</td><td>2</td><td>100</td></tr><tr><td><a href="#imotekh-the-stormlord">Imotekh the Stormlord</a></td><td>6</td><td>1</td><td>0</td><td>100</td></tr><tr><td><a href="#the-cabbage-merchant">The Cabbage Merchant</a></td><td>5</td><td>0</td><td>0</td><td>100</td></tr></table>
+
+
+<h2 id="tam-the-possibility">Tam, the Possibility</h2>
+<div class="deckhead"><img class="cmdimg" src="https://cards.scryfall.io/normal/front/6/5/6529d399-677e-45a6-ac3e-12a0b10f6c37.jpg?1789644886" alt="Tam, the Possibility"></div>
+<div class="keeps">
+<div class="swaprow ">
+  <div class="cardbox out"><img loading="lazy" src="https://cards.scryfall.io/normal/front/d/2/d21a7b23-8827-49f2-ade4-75a602d17743.jpg?1783933433" alt="Chandra, Fire Artisan" style="width:160px"><span class="lbl lbl-out">OUT</span><small>Chandra, Fire Artisan</small></div>
+  <span class="arrow">&rarr;</span>
+  <div class="cardbox in"><img loading="lazy" src="https://cards.scryfall.io/normal/front/a/8/a8c10535-c77e-4a40-b19f-23f7cb691230.jpg?1783927500" alt="Well of Lost Dreams" style="width:160px"><span class="lbl lbl-in">IN</span><small>Well of Lost Dreams</small></div>
+  <div class="swapinfo">
+    <div class="badges"><span class="tier t-registered">registered</span><span class="round">round 1</span><span class="rank">rank 1</span></div>
+    <p><b>Why in:</b> &quot;Whenever you gain life, you may pay {X}, where X is less than or equal to the amount of life you gained. If you do, draw X cards.&quot;: every Paradox lifegain event from a loyalty activation becomes a card.</p>
+    <p><b>Why out:</b> Chandra, Fire Artisan shares her type with Chandra, Torch of Defiance, so cutting her leaves Tam X unchanged.</p>
+    <p><b>Verdict:</b> KEEP: a per-event draw engine for a duplicate-type walker.</p>
+    
+  </div>
+</div>
+<div class="swaprow ">
+  <div class="cardbox out"><img loading="lazy" src="https://cards.scryfall.io/normal/front/4/5/453cfde7-c460-4b55-9472-b714e16f24bb.jpg?1788952087" alt="Rewrite Regrets" style="width:160px"><span class="lbl lbl-out">OUT</span><small>Rewrite Regrets</small></div>
+  <span class="arrow">&rarr;</span>
+  <div class="cardbox in"><img loading="lazy" src="https://cards.scryfall.io/normal/front/c/1/c1af9881-e35b-4be2-8716-ea7c6664e22c.jpg?1783933398" alt="Domri, Anarch of Bolas" style="width:160px"><span class="lbl lbl-in">IN</span><small>Domri, Anarch of Bolas</small></div>
+  <div class="swapinfo">
+    <div class="badges"><span class="tier t-registered">registered</span><span class="round">round 1</span><span class="rank">rank 2</span></div>
+    <p><b>Why in:</b> &quot;+1: Add {R} or {G}.&quot;: a new walker type (Tam X+1) whose +1 is ramp and triggers Paradox and Mentor on every activation.</p>
+    <p><b>Why out:</b> Rewrite Regrets needs a creature or planeswalker card in the graveyard, so it is dead early.</p>
+    <p><b>Verdict:</b> KEEP: refuter round-1 coverage miss #1, adopted in the Tam section-6 baseline in place of the Dina fallback.</p>
+    <p class="muted">Rewrite Regrets also empowers Jace 2 (Jace-empower package); operator may want to confirm.</p>
+  </div>
+</div></div>
+
+<details><summary>Considered and rejected (8)</summary>
+<div class="rejects">
+<div class="swaprow small">
+  <div class="cardbox out"><img loading="lazy" src="https://cards.scryfall.io/normal/front/c/8/c853d04c-864b-491c-8c6f-72d2d4874d2f.jpg?1783911861" alt="Archangel of Tithes" style="width:110px"><span class="lbl lbl-out">OUT</span><small>Archangel of Tithes</small></div>
+  <span class="arrow">&rarr;</span>
+  <div class="cardbox in"><img loading="lazy" src="https://cards.scryfall.io/normal/front/a/d/ad4de9f1-7a39-45af-828e-c59234d9e9b9.jpg?1783927550" alt="Sanguine Bond" style="width:110px"><span class="lbl lbl-in">IN</span><small>Sanguine Bond</small></div>
+  <div class="swapinfo">
+    <div class="badges"><span class="tier t-registered">registered</span><span class="round">round 1</span><span class="rank">rank 99</span></div>
+    <p><b>Why in:</b> &quot;Whenever you gain life, target opponent loses that much life.&quot;: drains once per lifegain event (Paradox, Liliana the Faultless, Ajani).</p>
+    <p><b>Why out:</b> Not the weakest: Archangel's 'creatures can't attack you or planeswalkers you control unless their controller pays {1}' is the only static walker protection.</p>
+    <p><b>Verdict:</b> REJECT: the auditor's 'zero line to the plan' is false; the round-1 fallback OUT (Final Act) is now a Tam lock.</p>
+    <p class="muted">Final Act became a Tam lock after round 1.</p>
+  </div>
+</div>
+<div class="swaprow small">
+  <div class="cardbox out"><img loading="lazy" src="https://cards.scryfall.io/normal/front/5/a/5acffa48-9e3f-4ba3-a55f-d459307f46df.jpg?1783921476" alt="Jared Carthalion" style="width:110px"><span class="lbl lbl-out">OUT</span><small>Jared Carthalion</small></div>
+  <span class="arrow">&rarr;</span>
+  <div class="cardbox in"><img loading="lazy" src="https://cards.scryfall.io/normal/front/9/c/9cd2b567-0cf7-4441-b3ce-e31141dd91c8.jpg?1627428607" alt="Dina, Soul Steeper" style="width:110px"><span class="lbl lbl-in">IN</span><small>Dina, Soul Steeper</small></div>
+  <div class="swapinfo">
+    <div class="badges"><span class="tier t-registered">registered</span><span class="round">round 1</span><span class="rank">rank 99</span></div>
+    <p><b>Why in:</b> &quot;Whenever you gain life, each opponent loses 1 life.&quot;: pings each opponent on every lifegain event.</p>
+    <p><b>Why out:</b> Not cuttable: Jared is the only Jared-type walker (Tam X-1 if cut) and a Tam lock.</p>
+    <p><b>Verdict:</b> REJECT: cuts a unique walker type; the round-1 fallback slot (Rewrite Regrets) went to Domri.</p>
+    <p class="muted">Jared is a Tam lock.</p>
+  </div>
+</div>
+<div class="swaprow small">
+  <div class="cardbox out"><img loading="lazy" src="https://cards.scryfall.io/normal/front/f/6/f6c8e0b5-218e-41dd-8b09-2d4aaec2c979.jpg?1706241098" alt="Talisman of Dominance" style="width:110px"><span class="lbl lbl-out">OUT</span><small>Talisman of Dominance</small></div>
+  <span class="arrow">&rarr;</span>
+  <div class="cardbox in"><img loading="lazy" src="https://cards.scryfall.io/normal/front/7/d/7dea7997-546d-474a-b362-31714abe2bb5.jpg?1726284470" alt="Bedevil" style="width:110px"><span class="lbl lbl-in">IN</span><small>Bedevil</small></div>
+  <div class="swapinfo">
+    <div class="badges"><span class="tier t-registered">registered</span><span class="round">round 1</span><span class="rank">rank 99</span></div>
+    <p><b>Why in:</b> &quot;Destroy target artifact, creature, or planeswalker.&quot;: flexible instant removal.</p>
+    <p><b>Why out:</b> Not cuttable: a Talisman is ramp at 35 locked lands; the cut moved the gate's land target from 38 to 39.</p>
+    <p><b>Verdict:</b> REJECT: the deck already runs 7 spot removal and {B}{B}{R} is the hardest pip cost in a five-colour base.</p>
+    <p class="muted">Both Talismans are Tam locks.</p>
+  </div>
+</div>
+<div class="swaprow small">
+  <div class="cardbox out"><img loading="lazy" src="https://cards.scryfall.io/normal/front/2/b/2b198e10-b507-4314-a29c-a219f06e48b7.jpg?1789127656" alt="Vigorbloom Charm" style="width:110px"><span class="lbl lbl-out">OUT</span><small>Vigorbloom Charm</small></div>
+  <span class="arrow">&rarr;</span>
+  <div class="cardbox in"><img loading="lazy" src="https://cards.scryfall.io/normal/front/b/8/b89d9372-8682-4a61-a003-8bccfbb6cbb4.jpg?1783909613" alt="Sign in Blood" style="width:110px"><span class="lbl lbl-in">IN</span><small>Sign in Blood</small></div>
+  <div class="swapinfo">
+    <div class="badges"><span class="tier t-registered">registered</span><span class="round">round 1</span><span class="rank">rank 99</span></div>
+    <p><b>Why in:</b> &quot;Target player draws two cards and loses 2 life.&quot;: two cards for 2 mana.</p>
+    <p><b>Why out:</b> Not the weakest: Vigorbloom's 'You draw a card and gain 3 life' is a card plus a Mentor lifegain event, and its other mode gives a walker hexproof and indestructible.</p>
+    <p><b>Verdict:</b> REJECT: the auditor's claim that Kaya's Ghostform covers hexproof is false; Ghostform returns a card, it grants no hexproof.</p>
+    
+  </div>
+</div>
+<div class="swaprow small">
+  <div class="cardbox out"><img loading="lazy" src="https://cards.scryfall.io/normal/front/9/d/9d6a5ed4-54b3-4660-8d41-953336f2fe74.jpg?1743207397" alt="Talisman of Progress" style="width:110px"><span class="lbl lbl-out">OUT</span><small>Talisman of Progress</small></div>
+  <span class="arrow">&rarr;</span>
+  <div class="cardbox in"><img loading="lazy" src="https://cards.scryfall.io/normal/front/7/5/754c9a93-bbd6-4b2c-9158-70341be6b912.jpg?1767731204" alt="Harmonize" style="width:110px"><span class="lbl lbl-in">IN</span><small>Harmonize</small></div>
+  <div class="swapinfo">
+    <div class="badges"><span class="tier t-registered">registered</span><span class="round">round 1</span><span class="rank">rank 99</span></div>
+    <p><b>Why in:</b> &quot;Draw three cards.&quot;: three cards for 4 mana.</p>
+    <p><b>Why out:</b> Not cuttable: the second Talisman is ramp at 35 locked lands; cutting both leaves 9 ramp pieces.</p>
+    <p><b>Verdict:</b> REJECT: same ramp objection as Bedevil.</p>
+    <p class="muted">Both Talismans are Tam locks.</p>
+  </div>
+</div>
+<div class="swaprow small">
+  <div class="cardbox out"><img loading="lazy" src="https://cards.scryfall.io/normal/front/c/e/ce35a39a-6dcd-4bbc-b43b-bd1a5425cb05.jpg?1783915410" alt="Saheeli, Sublime Artificer" style="width:110px"><span class="lbl lbl-out">OUT</span><small>Saheeli, Sublime Artificer</small></div>
+  <span class="arrow">&rarr;</span>
+  <div class="cardbox in"><img loading="lazy" src="https://cards.scryfall.io/normal/front/f/a/faa82f09-0693-4cc6-8770-8c6a35aa627b.jpg?1783904558" alt="Painful Truths" style="width:110px"><span class="lbl lbl-in">IN</span><small>Painful Truths</small></div>
+  <div class="swapinfo">
+    <div class="badges"><span class="tier t-registered">registered</span><span class="round">round 1</span><span class="rank">rank 99</span></div>
+    <p><b>Why in:</b> &quot;You draw X cards and lose X life, where X is the number of colors of mana spent to cast this spell.&quot;: it costs {2}{B}, so X is at most 3, not the auditor's 'likely 5'.</p>
+    <p><b>Why out:</b> Not cuttable: Saheeli is the only Saheeli-type walker (Tam X-1) and makes a Servo on 'Whenever you cast a noncreature spell'.</p>
+    <p><b>Verdict:</b> REJECT: cuts a unique walker type, and the IN math is wrong.</p>
+    <p class="muted">Saheeli is a Tam lock.</p>
+  </div>
+</div>
+<div class="swaprow small">
+  <div class="cardbox out"><img loading="lazy" src="https://cards.scryfall.io/normal/front/f/f/ff0bc30f-9d20-458e-808f-bdc2825905a5.jpg?1789387120" alt="Pia, Aether Ascetic" style="width:110px"><span class="lbl lbl-out">OUT</span><small>Pia, Aether Ascetic</small></div>
+  <span class="arrow">&rarr;</span>
+  <div class="cardbox in"><img loading="lazy" src="https://cards.scryfall.io/normal/front/8/1/8151f5f5-e9f6-4fbe-b543-f456ebf22aa5.jpg?1789127745" alt="Kiora of Salt and Sand" style="width:110px"><span class="lbl lbl-in">IN</span><small>Kiora of Salt and Sand</small></div>
+  <div class="swapinfo">
+    <div class="badges"><span class="tier t-registered">registered</span><span class="round">round 2</span><span class="rank">rank 99</span></div>
+    <p><b>Why in:</b> &quot;Create an 8/8 blue Leviathan creature token with hexproof&quot;: every walker gets a [-8] finisher once Mentor has built loyalty.</p>
+    <p><b>Why out:</b> Not the weakest: Pia's 'search your library for an enchantment card' is the only tutor for the Ways, including the Mentor + Paradox engine.</p>
+    <p><b>Verdict:</b> REJECT: the auditor's 'RNG-gated' is false (the search is a choice); Kiora is a payoff, Pia assembles the engine.</p>
+    
+  </div>
+</div>
+<div class="swaprow small">
+  <div class="cardbox out"><img loading="lazy" src="https://cards.scryfall.io/normal/front/4/3/4382fa49-9e34-45b3-8495-4916dcd995ec.jpg?1783913728" alt="Quintorius Kand" style="width:110px"><span class="lbl lbl-out">OUT</span><small>Quintorius Kand</small></div>
+  <span class="arrow">&rarr;</span>
+  <div class="cardbox in"><img loading="lazy" src="https://cards.scryfall.io/normal/front/0/a/0ad0e168-ac5c-4e1b-83f2-0488067a58d7.jpg?1789644348" alt="Niv-Mizzet, Ghost Counsel" style="width:110px"><span class="lbl lbl-in">IN</span><small>Niv-Mizzet, Ghost Counsel</small></div>
+  <div class="swapinfo">
+    <div class="badges"><span class="tier t-IF-OWNED">IF-OWNED — only if you own it</span><span class="round">round 2</span><span class="rank">rank 99</span></div>
+    <p><b>Why in:</b> &quot;Whenever you gain life, you may pay that much life. If you do, draw that many cards.&quot;: draws on each Paradox lifegain event.</p>
+    <p><b>Why out:</b> Not cuttable: Quintorius is the only Quintorius-type walker, so cutting him lowers Tam X by 1.</p>
+    <p><b>Verdict:</b> REJECT: unique walker type lost for a 6-MV {2}{W}{W}{B}{B} card the operator may not own.</p>
+    <p class="muted">IF-OWNED.</p>
+  </div>
+</div></div>
+</details>
+
+<h2 id="meren-of-clan-nel-toth">Meren of Clan Nel Toth</h2>
+<div class="deckhead"><img class="cmdimg" src="https://cards.scryfall.io/normal/front/5/0/508b1442-bf2c-4ad6-9bcf-bd894e081ab6.jpg?1783907026" alt="Meren of Clan Nel Toth"></div>
+<div class="keeps">
+<div class="swaprow ">
+  <div class="cardbox out"><img loading="lazy" src="https://cards.scryfall.io/normal/front/4/b/4b4e9ea4-5b86-4eb1-965c-ae67be24f4ea.jpg?1673148484" alt="Creakwood Liege" style="width:160px"><span class="lbl lbl-out">OUT</span><small>Creakwood Liege</small></div>
+  <span class="arrow">&rarr;</span>
+  <div class="placeholder" style="width:160px">(no card — fixes the count)</div>
+  <div class="swapinfo">
+    <div class="badges"><span class="tier t-registered">registered</span><span class="round">round 1</span><span class="rank">rank 1</span></div>
+    <p><b>Why in:</b> No card added: size fix, 101 to 100 cards.</p>
+    <p><b>Why out:</b> Creakwood Liege is the 101st card; it is absent from the operator's own 100-card proposals/meren-powerhouse.txt.</p>
+    <p><b>Verdict:</b> KEEP: mandatory size fix that keeps 35 lands and a lands PASS (replaces the rejected Swamp cut).</p>
+    
+  </div>
+</div>
+<div class="swaprow ">
+  <div class="cardbox out"><img loading="lazy" src="https://cards.scryfall.io/normal/front/8/b/8b59b12c-fde5-4f19-a357-e09f06f490cc.jpg?1743206077" alt="Lightning Greaves" style="width:160px"><span class="lbl lbl-out">OUT</span><small>Lightning Greaves</small></div>
+  <span class="arrow">&rarr;</span>
+  <div class="cardbox in"><img loading="lazy" src="https://cards.scryfall.io/normal/front/5/c/5c28b012-5efb-488f-a1c1-09e2dddfd6ee.jpg?1789127776" alt="Vraska, the Cutting Glare" style="width:160px"><span class="lbl lbl-in">IN</span><small>Vraska, the Cutting Glare</small></div>
+  <div class="swapinfo">
+    <div class="badges"><span class="tier t-ASSUMED">ASSUMED — confirm you own it</span><span class="round">round 2</span><span class="rank">rank 2</span></div>
+    <p><b>Why in:</b> &quot;When Vraska enters, if you control six or more lands, destroy target permanent an opponent controls.&quot;: at MV 3 Meren loops it, so it is repeatable any-permanent removal on a deathtouch body.</p>
+    <p><b>Why out:</b> Lightning Greaves only grants haste and shroud; Meren's value comes from end-step recursion, and Veil of Summer stays as protection.</p>
+    <p><b>Verdict:</b> KEEP: valid only because Veil of Summer stays (Silence the Echo swap rejected).</p>
+    <p class="muted">ASSUMED: confirm owned. Freed Greaves: astra-review proposed it for Imotekh (not evaluated).</p>
+  </div>
+</div>
+<div class="swaprow ">
+  <div class="cardbox out"><img loading="lazy" src="https://cards.scryfall.io/normal/front/d/f/df9c275d-e8cc-40c2-8baf-7a0d154aa7cf.jpg?1783911279" alt="Grim Servant" style="width:160px"><span class="lbl lbl-out">OUT</span><small>Grim Servant</small></div>
+  <span class="arrow">&rarr;</span>
+  <div class="cardbox in"><img loading="lazy" src="https://cards.scryfall.io/normal/front/0/f/0fe79ee4-c3f3-4a6b-a967-203ca3b70ee5.jpg?1783930698" alt="Vito, Thorn of the Dusk Rose" style="width:160px"><span class="lbl lbl-in">IN</span><small>Vito, Thorn of the Dusk Rose</small></div>
+  <div class="swapinfo">
+    <div class="badges"><span class="tier t-registered">registered</span><span class="round">round 1</span><span class="rank">rank 3</span></div>
+    <p><b>Why in:</b> &quot;Whenever you gain life, target opponent loses that much life.&quot;: doubles every 1-life gain from Blood Artist, Zulaport, Cauldron and Moldervine into a second loss.</p>
+    <p><b>Why out:</b> Grim Servant is a 4-MV tutor that costs 3 life; the weakest creature slot, though Meren can recur it.</p>
+    <p><b>Verdict:</b> KEEP: Vito is the stronger drain payoff.</p>
+    
+  </div>
+</div>
+<div class="swaprow ">
+  <div class="cardbox out"><img loading="lazy" src="https://cards.scryfall.io/normal/front/1/e/1eae3165-554d-4759-8f18-794e2a7d8464.jpg?1783909071" alt="Rune-Scarred Demon" style="width:160px"><span class="lbl lbl-out">OUT</span><small>Rune-Scarred Demon</small></div>
+  <span class="arrow">&rarr;</span>
+  <div class="cardbox in"><img loading="lazy" src="https://cards.scryfall.io/normal/front/3/b/3b4faa6e-5013-4c59-80f5-662a386672eb.jpg?1783904558" alt="Grave Titan" style="width:160px"><span class="lbl lbl-in">IN</span><small>Grave Titan</small></div>
+  <div class="swapinfo">
+    <div class="badges"><span class="tier t-registered">registered</span><span class="round">round 1</span><span class="rank">rank 4</span></div>
+    <p><b>Why in:</b> &quot;Whenever this creature enters or attacks, create two 2/2 black Zombie creature tokens.&quot;: sac fodder on every entry and attack, and an MV-6 reanimation target.</p>
+    <p><b>Why out:</b> Rune-Scarred Demon is a one-shot tutor body at the same MV with no fodder.</p>
+    <p><b>Verdict:</b> KEEP.</p>
+    
+  </div>
+</div>
+<div class="swaprow ">
+  <div class="cardbox out"><img loading="lazy" src="https://cards.scryfall.io/normal/front/9/d/9d56844f-ee3b-4161-85d2-18b872a9b465.jpg?1631589833" alt="High Market" style="width:160px"><span class="lbl lbl-out">OUT</span><small>High Market</small></div>
+  <span class="arrow">&rarr;</span>
+  <div class="cardbox in"><img loading="lazy" src="https://cards.scryfall.io/normal/front/e/a/ea13440b-3f7b-4182-9541-27c1fa3121e5.jpg?1783907280" alt="Jungle Hollow" style="width:160px"><span class="lbl lbl-in">IN</span><small>Jungle Hollow</small></div>
+  <div class="swapinfo">
+    <div class="badges"><span class="tier t-registered">registered</span><span class="round">round 1</span><span class="rank">rank 5</span></div>
+    <p><b>Why in:</b> &quot;{T}: Add {B} or {G}.&quot;: coloured mana for {B}{B}{B} and {B}{B}{G}{G} costs, plus 1 life on entry.</p>
+    <p><b>Why out:</b> High Market's free sac-for-1-life outlet is redundant with 4 other free outlets and makes only colourless.</p>
+    <p><b>Verdict:</b> KEEP (reason fixed: Grim Backwoods is not an 'identical template'; it costs {2}{B}{G}).</p>
+    
+  </div>
+</div></div>
+
+<details><summary>Considered and rejected (6)</summary>
+<div class="rejects">
+<div class="swaprow small">
+  <div class="cardbox out"><img loading="lazy" src="https://cards.scryfall.io/normal/front/9/d/9d805499-0739-403e-8447-ed2707dc9eb2.jpg?1783913878" alt="Butcher of Malakir" style="width:110px"><span class="lbl lbl-out">OUT</span><small>Butcher of Malakir</small></div>
+  <span class="arrow">&rarr;</span>
+  <div class="cardbox in"><img loading="lazy" src="https://cards.scryfall.io/normal/front/c/6/c6627166-bf0e-49f2-9077-252cfb0fab4d.jpg?1767730979" alt="Night's Whisper" style="width:110px"><span class="lbl lbl-in">IN</span><small>Night's Whisper</small></div>
+  <div class="swapinfo">
+    <div class="badges"><span class="tier t-registered">registered</span><span class="round">round 1</span><span class="rank">rank 99</span></div>
+    <p><b>Why in:</b> &quot;You draw two cards and lose 2 life.&quot;: two cards for 2 mana.</p>
+    <p><b>Why out:</b> Not the weakest: Butcher's 'Whenever this creature or another creature you control dies, each opponent sacrifices a creature' is a one-sided repeatable edict.</p>
+    <p><b>Verdict:</b> REJECT: Butcher is an engine piece, and the operator cut Night's Whisper from Meren in v6.</p>
+    <p class="muted">Operator declined Night's Whisper for Meren.</p>
+  </div>
+</div>
+<div class="swaprow small">
+  <div class="cardbox out"><img loading="lazy" src="https://cards.scryfall.io/normal/front/1/d/1dd4d605-02a2-4183-b191-0bca8dfbf962.jpg?1767773902" alt="Swamp" style="width:110px"><span class="lbl lbl-out">OUT</span><small>Swamp</small></div>
+  <span class="arrow">&rarr;</span>
+  <div class="placeholder" style="width:110px">(no card — fixes the count)</div>
+  <div class="swapinfo">
+    <div class="badges"><span class="tier t-registered">registered</span><span class="round">round 1</span><span class="rank">rank 99</span></div>
+    <p><b>Why in:</b> No card added: proposed size fix, 101 to 100 cards.</p>
+    <p><b>Why out:</b> Cutting a Swamp drops Meren to 34 lands and adds a new gate WARN (current deck: lands PASS at 35).</p>
+    <p><b>Verdict:</b> REJECT: cut Creakwood Liege instead.</p>
+    
+  </div>
+</div>
+<div class="swaprow small">
+  <div class="cardbox out"><img loading="lazy" src="https://cards.scryfall.io/normal/front/8/2/82512813-8618-483b-a7f0-e6a611d9d487.jpg?1783911793" alt="The Gitrog, Ravenous Ride" style="width:110px"><span class="lbl lbl-out">OUT</span><small>The Gitrog, Ravenous Ride</small></div>
+  <span class="arrow">&rarr;</span>
+  <div class="cardbox in"><img loading="lazy" src="https://cards.scryfall.io/normal/front/f/f/ff65f46b-0f82-49b8-93b9-7ac0243ce941.jpg?1789644252" alt="Avacyn, Angel of Horror" style="width:110px"><span class="lbl lbl-in">IN</span><small>Avacyn, Angel of Horror</small></div>
+  <div class="swapinfo">
+    <div class="badges"><span class="tier t-IF-OWNED">IF-OWNED — only if you own it</span><span class="round">round 2</span><span class="rank">rank 99</span></div>
+    <p><b>Why in:</b> &quot;Whenever Avacyn or another nontoken creature you control dies, return that card to the battlefield under your control at the beginning of the next end step.&quot;: team-wide free reanimation off every sacrifice.</p>
+    <p><b>Why out:</b> Not cuttable: operator keep (HISTORY: 'The Gitrog, Ravenous Ride stays').</p>
+    <p><b>Verdict:</b> REJECT: the OUT is an operator keep; at MV 8 Meren mostly returns Avacyn to hand; IF-OWNED.</p>
+    <p class="muted">Operator keep.</p>
+  </div>
+</div>
+<div class="swaprow small">
+  <div class="cardbox out"><img loading="lazy" src="https://cards.scryfall.io/normal/front/9/d/9d467e61-bbec-4cea-bd5d-f10555910c9d.jpg?1783933777" alt="Golgari Charm" style="width:110px"><span class="lbl lbl-out">OUT</span><small>Golgari Charm</small></div>
+  <span class="arrow">&rarr;</span>
+  <div class="cardbox in"><img loading="lazy" src="https://cards.scryfall.io/normal/front/9/0/9028d31f-9c41-47e3-885b-6a869bca8178.jpg?1789644882" alt="Massacre Girl, Most Wanted" style="width:110px"><span class="lbl lbl-in">IN</span><small>Massacre Girl, Most Wanted</small></div>
+  <div class="swapinfo">
+    <div class="badges"><span class="tier t-ASSUMED">ASSUMED — confirm you own it</span><span class="round">round 2</span><span class="rank">rank 99</span></div>
+    <p><b>Why in:</b> &quot;Whenever another creature or planeswalker you control dies, Massacre Girl deals 1 damage to target opponent and you gain 1 life.&quot;: a single-opponent drain on each death.</p>
+    <p><b>Why out:</b> Not the weakest: Golgari Charm's regenerate mode makes Culling Ritual a one-sided wipe (HISTORY line 169).</p>
+    <p><b>Verdict:</b> REJECT: Blood Artist, Zulaport, Cauldron, Konrad and Vito already drain.</p>
+    <p class="muted">Two-deck conflict with Imotekh: neither deck gets it.</p>
+  </div>
+</div>
+<div class="swaprow small">
+  <div class="cardbox out"><img loading="lazy" src="https://cards.scryfall.io/normal/front/a/a/aa686c34-1c11-469f-93c2-f9891aea521f.jpg?1783932955" alt="Veil of Summer" style="width:110px"><span class="lbl lbl-out">OUT</span><small>Veil of Summer</small></div>
+  <span class="arrow">&rarr;</span>
+  <div class="cardbox in"><img loading="lazy" src="https://cards.scryfall.io/normal/front/f/1/f1d274db-751b-4414-a38d-762198168e91.jpg?1789385640" alt="Silence the Echo" style="width:110px"><span class="lbl lbl-in">IN</span><small>Silence the Echo</small></div>
+  <div class="swapinfo">
+    <div class="badges"><span class="tier t-ASSUMED">ASSUMED — confirm you own it</span><span class="round">round 2</span><span class="rank">rank 99</span></div>
+    <p><b>Why in:</b> &quot;Destroy target creature or planeswalker.&quot;: two-mana removal whose optional sacrifice cost feeds Meren.</p>
+    <p><b>Why out:</b> Not the weakest: Veil's 'Spells you control can't be countered' and hexproof from blue and black are unconditional; with Greaves out it is Meren's last protection.</p>
+    <p><b>Verdict:</b> REJECT: the auditor misquoted Veil (only the draw is conditional), and removal is already dense.</p>
+    <p class="muted">Conflicted with the Vraska swap, whose rationale relies on Veil staying.</p>
+  </div>
+</div>
+<div class="swaprow small">
+  <div class="cardbox out"><img loading="lazy" src="https://cards.scryfall.io/normal/front/5/d/5da14d86-0780-4821-a799-96f64b377df4.jpg?1783911284" alt="Accursed Marauder" style="width:110px"><span class="lbl lbl-out">OUT</span><small>Accursed Marauder</small></div>
+  <span class="arrow">&rarr;</span>
+  <div class="cardbox in"><img loading="lazy" src="https://cards.scryfall.io/normal/front/3/5/3546b93b-a7d1-451d-a369-22cc8ddcd00d.jpg?1788865848" alt="Restore with Empathy" style="width:110px"><span class="lbl lbl-in">IN</span><small>Restore with Empathy</small></div>
+  <div class="swapinfo">
+    <div class="badges"><span class="tier t-ASSUMED">ASSUMED — confirm you own it</span><span class="round">round 2</span><span class="rank">rank 99</span></div>
+    <p><b>Why in:</b> &quot;Return target permanent card from your graveyard to your hand. You gain 4 life.&quot;: any-permanent rebuy plus a Vito trigger.</p>
+    <p><b>Why out:</b> Not the weakest: Marauder's 'each player sacrifices a nontoken creature' repeats every end step through Meren at MV 2.</p>
+    <p><b>Verdict:</b> REJECT: Restore duplicates Meren's own recursion.</p>
+    <p class="muted">Two-deck conflict with Cabbage: neither deck gets it.</p>
+  </div>
+</div></div>
+</details>
+
+<h2 id="tazri-beacon-of-unity">Tazri, Beacon of Unity</h2>
+<div class="deckhead"><img class="cmdimg" src="https://cards.scryfall.io/normal/front/d/4/d4b79138-5728-4541-9ea5-dce1a5ae7e6a.jpg?1783929405" alt="Tazri, Beacon of Unity"></div>
+<div class="keeps">
+<div class="swaprow ">
+  <div class="cardbox out"><img loading="lazy" src="https://cards.scryfall.io/normal/front/b/4/b467929d-5fc3-4104-8a29-a8157835f274.jpg?1783922505" alt="Solemn Doomguide" style="width:160px"><span class="lbl lbl-out">OUT</span><small>Solemn Doomguide</small></div>
+  <span class="arrow">&rarr;</span>
+  <div class="cardbox in"><img loading="lazy" src="https://cards.scryfall.io/normal/front/4/4/44265489-645a-43b0-bc1f-726905b06876.jpg?1783904601" alt="Springleaf Parade" style="width:160px"><span class="lbl lbl-in">IN</span><small>Springleaf Parade</small></div>
+  <div class="swapinfo">
+    <div class="badges"><span class="tier t-registered">registered</span><span class="round">round 2</span><span class="rank">rank 1</span></div>
+    <p><b>Why in:</b> &quot;Add one mana of any color.&quot;: every creature token taps for mana, so Najeela's attacking Warrior tokens pay for her WUBRG untap-and-extra-combat: infinite combats.</p>
+    <p><b>Why out:</b> Solemn Doomguide only grants 'unearth {1}{B}' to party cards in the graveyard: grind value on a 5-drop.</p>
+    <p><b>Verdict:</b> KEEP: wins the Doomguide slot over Traxos.</p>
+    <p class="muted">Doomguide was proposed as an OUT twice.</p>
+  </div>
+</div>
+<div class="swaprow ">
+  <div class="cardbox out"><img loading="lazy" src="https://cards.scryfall.io/normal/front/2/3/235c108d-3902-4c2e-919c-a5449cd2dc3c.jpg?1783929399" alt="Concerted Defense" style="width:160px"><span class="lbl lbl-out">OUT</span><small>Concerted Defense</small></div>
+  <span class="arrow">&rarr;</span>
+  <div class="cardbox in"><img loading="lazy" src="https://cards.scryfall.io/normal/front/f/c/fc70e127-ffc8-45ed-9ca3-7f9f926ac4d5.jpg?1700321873" alt="Generous Gift" style="width:160px"><span class="lbl lbl-in">IN</span><small>Generous Gift</small></div>
+  <div class="swapinfo">
+    <div class="badges"><span class="tier t-registered">registered</span><span class="round">round 1</span><span class="rank">rank 2</span></div>
+    <p><b>Why in:</b> &quot;Destroy target permanent.&quot;: answers any permanent at instant speed.</p>
+    <p><b>Why out:</b> Concerted Defense is a soft counter for noncreature spells only.</p>
+    <p><b>Verdict:</b> KEEP.</p>
+    
+  </div>
+</div>
+<div class="swaprow ">
+  <div class="cardbox out"><img loading="lazy" src="https://cards.scryfall.io/normal/front/0/b/0b0b1acd-68e5-4922-8b51-06fa7eda984c.jpg?1783922493" alt="Archpriest of Iona" style="width:160px"><span class="lbl lbl-out">OUT</span><small>Archpriest of Iona</small></div>
+  <span class="arrow">&rarr;</span>
+  <div class="cardbox in"><img loading="lazy" src="https://cards.scryfall.io/normal/front/5/2/52733829-27b7-40ec-a897-cabab35b3729.jpg?1783904541" alt="Realmwalker" style="width:160px"><span class="lbl lbl-in">IN</span><small>Realmwalker</small></div>
+  <div class="swapinfo">
+    <div class="badges"><span class="tier t-registered">registered</span><span class="round">round 2</span><span class="rank">rank 3</span></div>
+    <p><b>Why in:</b> &quot;You may cast creature spells of the chosen type from the top of your library.&quot;: card advantage on a changeling that fills all four party roles.</p>
+    <p><b>Why out:</b> Archpriest of Iona is a 1-drop whose power equals your party size.</p>
+    <p><b>Verdict:</b> KEEP: wins the Archpriest slot over Rescue Girl.</p>
+    <p class="muted">Archpriest was proposed as an OUT twice.</p>
+  </div>
+</div>
+<div class="swaprow ">
+  <div class="cardbox out"><img loading="lazy" src="https://cards.scryfall.io/normal/front/b/9/b9b1e53f-1384-4860-9944-e68922afc65c.jpg?1783926518" alt="Bar the Gate" style="width:160px"><span class="lbl lbl-out">OUT</span><small>Bar the Gate</small></div>
+  <span class="arrow">&rarr;</span>
+  <div class="cardbox in"><img loading="lazy" src="https://cards.scryfall.io/normal/front/a/d/ad6ed9f1-2014-49e2-91c6-2b55c8d60cdc.jpg?1783904538" alt="Putrefy" style="width:160px"><span class="lbl lbl-in">IN</span><small>Putrefy</small></div>
+  <div class="swapinfo">
+    <div class="badges"><span class="tier t-registered">registered</span><span class="round">round 1</span><span class="rank">rank 4</span></div>
+    <p><b>Why in:</b> &quot;Destroy target artifact or creature.&quot;: instant removal for two permanent types.</p>
+    <p><b>Why out:</b> Bar the Gate only counters a creature or planeswalker spell.</p>
+    <p><b>Verdict:</b> KEEP.</p>
+    
+  </div>
+</div>
+<div class="swaprow ">
+  <div class="cardbox out"><img loading="lazy" src="https://cards.scryfall.io/normal/front/d/b/dbb7927d-c3c4-4464-8ada-bcd8466b2012.jpg?1783922495" alt="Multiclass Baldric" style="width:160px"><span class="lbl lbl-out">OUT</span><small>Multiclass Baldric</small></div>
+  <span class="arrow">&rarr;</span>
+  <div class="cardbox in"><img loading="lazy" src="https://cards.scryfall.io/normal/front/2/4/2430acb7-b371-4a03-88e7-0660a51836dd.jpg?1767730597" alt="Infernal Grasp" style="width:160px"><span class="lbl lbl-in">IN</span><small>Infernal Grasp</small></div>
+  <div class="swapinfo">
+    <div class="badges"><span class="tier t-registered">registered</span><span class="round">round 1</span><span class="rank">rank 5</span></div>
+    <p><b>Why in:</b> &quot;Destroy target creature. You lose 2 life.&quot;: unconditional 2-mana instant removal.</p>
+    <p><b>Why out:</b> Multiclass Baldric is an equipment granting one keyword per party role; the weakest slot.</p>
+    <p><b>Verdict:</b> KEEP (reason fixed: Baldric does not need a full party).</p>
+    
+  </div>
+</div>
+<div class="swaprow ">
+  <div class="cardbox out"><img loading="lazy" src="https://cards.scryfall.io/normal/front/c/c/cc339d3b-9c89-4679-bc83-8399d9a864c7.jpg?1783922439" alt="Thwart the Grave" style="width:160px"><span class="lbl lbl-out">OUT</span><small>Thwart the Grave</small></div>
+  <span class="arrow">&rarr;</span>
+  <div class="cardbox in"><img loading="lazy" src="https://cards.scryfall.io/normal/front/1/8/187502d9-c751-4967-adff-09d7a300d935.jpg?1674141804" alt="Syphon Mind" style="width:160px"><span class="lbl lbl-in">IN</span><small>Syphon Mind</small></div>
+  <div class="swapinfo">
+    <div class="badges"><span class="tier t-registered">registered</span><span class="round">round 1</span><span class="rank">rank 6</span></div>
+    <p><b>Why in:</b> &quot;Each other player discards a card. You draw a card for each card discarded this way.&quot;: about 3 cards for 4 mana in a 4-player pod.</p>
+    <p><b>Why out:</b> Thwart the Grave is situational graveyard recursion.</p>
+    <p><b>Verdict:</b> KEEP (reason fixed: Thwart costs 1 less per party member, it does not need a full party).</p>
+    
+  </div>
+</div>
+<div class="swaprow ">
+  <div class="cardbox out"><img loading="lazy" src="https://cards.scryfall.io/normal/front/e/f/efb5671a-942a-4730-9756-32fe600e0528.jpg?1783926452" alt="You Find a Cursed Idol" style="width:160px"><span class="lbl lbl-out">OUT</span><small>You Find a Cursed Idol</small></div>
+  <span class="arrow">&rarr;</span>
+  <div class="cardbox in"><img loading="lazy" src="https://cards.scryfall.io/normal/front/e/1/e187dcc6-19ad-4cf6-94b4-daf07f5144e5.jpg?1783904431" alt="Chomping Changeling" style="width:160px"><span class="lbl lbl-in">IN</span><small>Chomping Changeling</small></div>
+  <div class="swapinfo">
+    <div class="badges"><span class="tier t-registered">registered</span><span class="round">round 2</span><span class="rank">rank 7</span></div>
+    <p><b>Why in:</b> &quot;When this creature enters, destroy up to one target artifact or enchantment.&quot;: the Idol's removal modes on a changeling body that fills any party role.</p>
+    <p><b>Why out:</b> The Idol's only unique mode is a Treasure plus venture.</p>
+    <p><b>Verdict:</b> KEEP: wins the Idol slot over Enlightened Confidant.</p>
+    <p class="muted">Cursed Idol was proposed as an OUT twice.</p>
+  </div>
+</div>
+<div class="swaprow ">
+  <div class="cardbox out"><img loading="lazy" src="https://cards.scryfall.io/normal/front/c/9/c959ab97-0727-4589-bfd9-d78dd8ebd86b.jpg?1783922789" alt="Feywild Caretaker" style="width:160px"><span class="lbl lbl-out">OUT</span><small>Feywild Caretaker</small></div>
+  <span class="arrow">&rarr;</span>
+  <div class="cardbox in"><img loading="lazy" src="https://cards.scryfall.io/normal/front/b/a/ba920f23-f05c-410e-8516-c93abedf1d4d.jpg?1789729662" alt="Samut, Hazoret's Champion" style="width:160px"><span class="lbl lbl-in">IN</span><small>Samut, Hazoret's Champion</small></div>
+  <div class="swapinfo">
+    <div class="badges"><span class="tier t-ASSUMED">ASSUMED — confirm you own it</span><span class="round">round 2</span><span class="rank">rank 8</span></div>
+    <p><b>Why in:</b> &quot;Creatures you control have haste.&quot;: a 2-mana Human Warrior Cleric (two party roles) that hastes the team.</p>
+    <p><b>Why out:</b> Feywild Caretaker is 5 mana for one Wizard plus the initiative; Wizards stay at 6 plus the changelings.</p>
+    <p><b>Verdict:</b> KEEP: the auditor omitted Caretaker's initiative, but Samut still wins on rate.</p>
+    <p class="muted">ASSUMED: confirm owned.</p>
+  </div>
+</div>
+<div class="swaprow ">
+  <div class="cardbox out"><img loading="lazy" src="https://cards.scryfall.io/normal/front/0/f/0f51afd9-7093-4aa3-ad5b-7383684d6285.jpg?1783926503" alt="Yuan-Ti Malison" style="width:160px"><span class="lbl lbl-out">OUT</span><small>Yuan-Ti Malison</small></div>
+  <span class="arrow">&rarr;</span>
+  <div class="cardbox in"><img loading="lazy" src="https://cards.scryfall.io/normal/front/6/9/699874e3-1ccf-4a6c-8371-61040de82d08.jpg?1789645598" alt="Rescue Girl, First Responder" style="width:160px"><span class="lbl lbl-in">IN</span><small>Rescue Girl, First Responder</small></div>
+  <div class="swapinfo">
+    <div class="badges"><span class="tier t-ASSUMED">ASSUMED — confirm you own it</span><span class="round">round 2</span><span class="rank">rank 9</span></div>
+    <p><b>Why in:</b> &quot;{T}: Return another target permanent you control to its owner's hand. Activate only during your turn.&quot;: a flying Cleric that re-buys the initiative/venture entries of Seasoned Dungeoneer, White Plume Adventurer and Ravenloft Adventurer.</p>
+    <p><b>Why out:</b> Yuan-Ti Malison is unblockable only when attacking alone and ventures only on combat damage; Rogues stay at 9.</p>
+    <p><b>Verdict:</b> KEEP, moved: the proposed OUT was Archpriest of Iona, whose slot went to Realmwalker.</p>
+    <p class="muted">Moved to the next-weakest slot. ASSUMED: confirm owned.</p>
+  </div>
+</div></div>
+<h3 class="heldh">Needs your yes (2) — reverses an earlier decision, not counted below</h3><div class="keeps held">
+<div class="swaprow ">
+  <div class="cardbox out"><img loading="lazy" src="https://cards.scryfall.io/normal/front/8/d/8d77a57a-e30b-46d7-acb8-1d164c7dff78.jpg?1783922510" alt="Stick Together" style="width:160px"><span class="lbl lbl-out">OUT</span><small>Stick Together</small></div>
+  <span class="arrow">&rarr;</span>
+  <div class="cardbox in"><img loading="lazy" src="https://cards.scryfall.io/normal/front/e/e/ee793ed2-7d59-4640-8868-ad486600df2c.jpg?1783912003" alt="Grand Abolisher" style="width:160px"><span class="lbl lbl-in">IN</span><small>Grand Abolisher</small></div>
+  <div class="swapinfo">
+    <div class="badges"><span class="tier t-registered">registered</span><span class="round">round 1</span><span class="rank">rank 10</span></div>
+    <p><b>Why in:</b> &quot;During your turn, your opponents can't cast spells or activate abilities of artifacts, creatures, or enchantments.&quot;: protects combat and combo turns and fills the Cleric role.</p>
+    <p><b>Why out:</b> Stick Together makes every player sacrifice all but a party, hitting Tazri's own Najeela, Squad Commander and Merriment tokens.</p>
+    <p><b>Verdict:</b> KEEP on card quality, but HELD: it reverses the operator's v4 cut.</p>
+    <p class="muted">HELD: reverses operator v4 decision — needs a yes. Not in the 100-card count.</p>
+  </div>
+</div>
+<div class="swaprow ">
+  <div class="cardbox out"><img loading="lazy" src="https://cards.scryfall.io/normal/front/0/c/0cbf06f5-d1c7-474c-8f09-72f5ad0c8120.jpg?1783922714" alt="Explore the Underdark" style="width:160px"><span class="lbl lbl-out">OUT</span><small>Explore the Underdark</small></div>
+  <span class="arrow">&rarr;</span>
+  <div class="cardbox in"><img loading="lazy" src="https://cards.scryfall.io/normal/front/1/e/1e10e2b4-9639-41ae-8b8e-253224d3d513.jpg?1783909637" alt="Growth Spiral" style="width:160px"><span class="lbl lbl-in">IN</span><small>Growth Spiral</small></div>
+  <div class="swapinfo">
+    <div class="badges"><span class="tier t-registered">registered</span><span class="round">round 1</span><span class="rank">rank 11</span></div>
+    <p><b>Why in:</b> &quot;Draw a card. You may put a land card from your hand onto the battlefield.&quot;: 2-MV instant ramp that replaces itself.</p>
+    <p><b>Why out:</b> Explore the Underdark is a 5-MV sorcery, though it also fetches two lands and takes the initiative.</p>
+    <p><b>Verdict:</b> KEEP on rate, but HELD: it reverses the operator's v6 add.</p>
+    <p class="muted">HELD: reverses operator v6 decision — needs a yes. Not in the 100-card count.</p>
+  </div>
+</div></div>
+<details><summary>Considered and rejected (3)</summary>
+<div class="rejects">
+<div class="swaprow small">
+  <div class="cardbox out"><img loading="lazy" src="https://cards.scryfall.io/normal/front/c/9/c959ab97-0727-4589-bfd9-d78dd8ebd86b.jpg?1783922789" alt="Feywild Caretaker" style="width:110px"><span class="lbl lbl-out">OUT</span><small>Feywild Caretaker</small></div>
+  <span class="arrow">&rarr;</span>
+  <div class="cardbox in"><img loading="lazy" src="https://cards.scryfall.io/normal/front/8/1/812856be-cf51-42de-96d2-4ac91e71d442.jpg?1783904541" alt="Selvala, Heart of the Wilds" style="width:110px"><span class="lbl lbl-in">IN</span><small>Selvala, Heart of the Wilds</small></div>
+  <div class="swapinfo">
+    <div class="badges"><span class="tier t-registered">registered</span><span class="round">round 1</span><span class="rank">rank 99</span></div>
+    <p><b>Why in:</b> &quot;{G}, {T}: Add X mana in any combination of colors, where X is the greatest power among creatures you control.&quot;: big ramp off the largest creature.</p>
+    <p><b>Why out:</b> Not the weakest (in round 1): Caretaker is an Orc Wizard that Tazri can find, and 'you take the initiative' on entry.</p>
+    <p><b>Verdict:</b> REJECT: Selvala is no party type and her draw is symmetric (operator cut her from Cabbage on 09-18).</p>
+    <p class="muted">Caretaker's slot went to Samut in round 2.</p>
+  </div>
+</div>
+<div class="swaprow small">
+  <div class="cardbox out"><img loading="lazy" src="https://cards.scryfall.io/normal/front/b/4/b467929d-5fc3-4104-8a29-a8157835f274.jpg?1783922505" alt="Solemn Doomguide" style="width:110px"><span class="lbl lbl-out">OUT</span><small>Solemn Doomguide</small></div>
+  <span class="arrow">&rarr;</span>
+  <div class="cardbox in"><img loading="lazy" src="https://cards.scryfall.io/normal/front/0/5/05102c46-96f8-44a0-a1e6-e388fa5e0841.jpg?1789557046" alt="Traxos, Scourge Eternal" style="width:110px"><span class="lbl lbl-in">IN</span><small>Traxos, Scourge Eternal</small></div>
+  <div class="swapinfo">
+    <div class="badges"><span class="tier t-ASSUMED">ASSUMED — confirm you own it</span><span class="round">round 2</span><span class="rank">rank 99</span></div>
+    <p><b>Why in:</b> &quot;Whenever you cast an artifact or creature spell, untap Traxos.&quot;: a trampler that untaps on creature casts.</p>
+    <p><b>Why out:</b> Doomguide's slot went to Springleaf Parade.</p>
+    <p><b>Verdict:</b> REJECT: a Dragon Construct fills no party role and has no Tazri text.</p>
+    <p class="muted">Two-deck conflict with Cabbage: neither deck gets it.</p>
+  </div>
+</div>
+<div class="swaprow small">
+  <div class="cardbox out"><img loading="lazy" src="https://cards.scryfall.io/normal/front/e/f/efb5671a-942a-4730-9756-32fe600e0528.jpg?1783926452" alt="You Find a Cursed Idol" style="width:110px"><span class="lbl lbl-out">OUT</span><small>You Find a Cursed Idol</small></div>
+  <span class="arrow">&rarr;</span>
+  <div class="cardbox in"><img loading="lazy" src="https://cards.scryfall.io/normal/front/4/8/483fcc58-cc6e-4452-a696-7b38e117c837.jpg?1788329184" alt="Enlightened Confidant" style="width:110px"><span class="lbl lbl-in">IN</span><small>Enlightened Confidant</small></div>
+  <div class="swapinfo">
+    <div class="badges"><span class="tier t-IF-OWNED">IF-OWNED — only if you own it</span><span class="round">round 2</span><span class="rank">rank 99</span></div>
+    <p><b>Why in:</b> &quot;At the beginning of your end step, if you gained life this turn, surveil 1.&quot;: conditional card selection on lifelink turns.</p>
+    <p><b>Why out:</b> The Idol's slot went to Chomping Changeling.</p>
+    <p><b>Verdict:</b> REJECT: Tazri has no steady lifegain, and the card is IF-OWNED.</p>
+    <p class="muted">IF-OWNED.</p>
+  </div>
+</div></div>
+</details>
+
+<h2 id="imotekh-the-stormlord">Imotekh the Stormlord</h2>
+<div class="deckhead"><img class="cmdimg" src="https://cards.scryfall.io/normal/front/2/8/286ff901-1faf-4a02-a37a-fa165989112f.jpg?1783920952" alt="Imotekh the Stormlord"></div>
+<div class="keeps">
+<div class="swaprow ">
+  <div class="cardbox out"><img loading="lazy" src="https://cards.scryfall.io/normal/front/0/6/06199f88-720f-484a-953e-9189bafbe173.jpg?1783920823" alt="Canoptek Wraith" style="width:160px"><span class="lbl lbl-out">OUT</span><small>Canoptek Wraith</small></div>
+  <span class="arrow">&rarr;</span>
+  <div class="cardbox in"><img loading="lazy" src="https://cards.scryfall.io/normal/front/2/8/289c11b7-a460-4a2f-b11a-e1ba54bd1f34.jpg?1783907084" alt="Noxious Gearhulk" style="width:160px"><span class="lbl lbl-in">IN</span><small>Noxious Gearhulk</small></div>
+  <div class="swapinfo">
+    <div class="badges"><span class="tier t-registered">registered</span><span class="round">round 1</span><span class="rank">rank 1</span></div>
+    <p><b>Why in:</b> &quot;When this creature enters, you may destroy another target creature.&quot;: removal on an artifact body the recursion engine can reuse.</p>
+    <p><b>Why out:</b> Canoptek Wraith is a land-fetch creature that must connect and pay {3} first.</p>
+    <p><b>Verdict:</b> KEEP.</p>
+    
+  </div>
+</div>
+<div class="swaprow ">
+  <div class="cardbox out"><img loading="lazy" src="https://cards.scryfall.io/normal/front/8/d/8deb5d3a-0762-4c4f-afef-fd86728914b4.jpg?1783920916" alt="Plasmancer" style="width:160px"><span class="lbl lbl-out">OUT</span><small>Plasmancer</small></div>
+  <span class="arrow">&rarr;</span>
+  <div class="cardbox in"><img loading="lazy" src="https://cards.scryfall.io/normal/front/9/6/9670f754-f41f-45ac-8e8b-025ad2c0f66b.jpg?1789127724" alt="Winter, Tormented Loner" style="width:160px"><span class="lbl lbl-in">IN</span><small>Winter, Tormented Loner</small></div>
+  <div class="swapinfo">
+    <div class="badges"><span class="tier t-ASSUMED">ASSUMED — confirm you own it</span><span class="round">round 2</span><span class="rank">rank 2</span></div>
+    <p><b>Why in:</b> &quot;When Winter enters, you may sacrifice a creature or planeswalker. When you do, each opponent sacrifices a creature of their choice.&quot;: an edict per opponent paid with a Necron token, plus +1/+0 per creature card in the graveyard.</p>
+    <p><b>Why out:</b> Plasmancer is a 4-MV flier whose only text fetches a basic Swamp to hand in a 35-land deck.</p>
+    <p><b>Verdict:</b> KEEP: minor cost, Winter is not an artifact card unless Biotransference is out.</p>
+    <p class="muted">ASSUMED: confirm owned.</p>
+  </div>
+</div>
+<div class="swaprow ">
+  <div class="cardbox out"><img loading="lazy" src="https://cards.scryfall.io/normal/front/e/a/ea8483a2-9135-48d1-994d-9525d5ffcabb.jpg?1783920928" alt="Cryptek" style="width:160px"><span class="lbl lbl-out">OUT</span><small>Cryptek</small></div>
+  <span class="arrow">&rarr;</span>
+  <div class="cardbox in"><img loading="lazy" src="https://cards.scryfall.io/normal/front/0/4/0430db1a-5cad-4444-ba93-57fb32e65606.jpg?1783932995" alt="Dread Presence" style="width:160px"><span class="lbl lbl-in">IN</span><small>Dread Presence</small></div>
+  <div class="swapinfo">
+    <div class="badges"><span class="tier t-registered">registered</span><span class="round">round 1</span><span class="rank">rank 3</span></div>
+    <p><b>Why in:</b> &quot;Whenever a Swamp you control enters, choose one&quot;: a card or a 2-damage drain off each of 32 Swamps.</p>
+    <p><b>Why out:</b> Cryptek's {1}{B}, {T} return-on-death protects one artifact creature for one turn.</p>
+    <p><b>Verdict:</b> KEEP (note: Cryptek's own graveyard return is an Imotekh trigger, but Dread Presence is stronger).</p>
+    
+  </div>
+</div>
+<div class="swaprow ">
+  <div class="cardbox out"><img loading="lazy" src="https://cards.scryfall.io/normal/front/b/0/b0ab96a5-0bcc-4732-8936-9522f3de3962.jpg?1783920927" alt="Flayed One" style="width:160px"><span class="lbl lbl-out">OUT</span><small>Flayed One</small></div>
+  <span class="arrow">&rarr;</span>
+  <div class="cardbox in"><img loading="lazy" src="https://cards.scryfall.io/normal/front/a/c/acc3557d-49c6-49cd-a540-1b24897f4e86.jpg?1783921901" alt="Necrotic Ooze" style="width:160px"><span class="lbl lbl-in">IN</span><small>Necrotic Ooze</small></div>
+  <div class="swapinfo">
+    <div class="badges"><span class="tier t-registered">registered</span><span class="round">round 1</span><span class="rank">rank 4</span></div>
+    <p><b>Why in:</b> &quot;it has all activated abilities of all creature cards in all graveyards.&quot;: copies Szeras's sacrifice-for-mana, Syr Konrad's mill and Chronomancer's draw from the graveyard.</p>
+    <p><b>Why out:</b> Flayed One is a lifelink body with a one-time mill three.</p>
+    <p><b>Verdict:</b> KEEP (reason fixed: Marionette Master's drain is triggered, so the Ooze does not get it).</p>
+    
+  </div>
+</div>
+<div class="swaprow ">
+  <div class="cardbox out"><img loading="lazy" src="https://cards.scryfall.io/normal/front/6/7/6737a276-b5e9-4c55-b995-ada96eca4e6e.jpg?1783920922" alt="Lychguard" style="width:160px"><span class="lbl lbl-out">OUT</span><small>Lychguard</small></div>
+  <span class="arrow">&rarr;</span>
+  <div class="cardbox in"><img loading="lazy" src="https://cards.scryfall.io/normal/front/f/f/ffb08d08-9936-4525-bd72-3c2b77783d7d.jpg?1783904556" alt="Puppeteer Clique" style="width:160px"><span class="lbl lbl-in">IN</span><small>Puppeteer Clique</small></div>
+  <div class="swapinfo">
+    <div class="badges"><span class="tier t-registered">registered</span><span class="round">round 1</span><span class="rank">rank 5</span></div>
+    <p><b>Why in:</b> &quot;put target creature card from an opponent's graveyard onto the battlefield under your control. It gains haste.&quot;: steals the best creature in any graveyard, and persist does it twice.</p>
+    <p><b>Why out:</b> Lychguard's only text returns legendary creature cards to hand for {3}{B} and itself.</p>
+    <p><b>Verdict:</b> KEEP.</p>
+    
+  </div>
+</div>
+<div class="swaprow ">
+  <div class="cardbox out"><img loading="lazy" src="https://cards.scryfall.io/normal/front/2/2/2271184b-08eb-4d2a-8ebf-a1807d51dd2a.jpg?1783903860" alt="Ominous Harvest" style="width:160px"><span class="lbl lbl-out">OUT</span><small>Ominous Harvest</small></div>
+  <span class="arrow">&rarr;</span>
+  <div class="cardbox in"><img loading="lazy" src="https://cards.scryfall.io/normal/front/c/6/c6627166-bf0e-49f2-9077-252cfb0fab4d.jpg?1767730979" alt="Night's Whisper" style="width:160px"><span class="lbl lbl-in">IN</span><small>Night's Whisper</small></div>
+  <div class="swapinfo">
+    <div class="badges"><span class="tier t-registered">registered</span><span class="round">round 1</span><span class="rank">rank 6</span></div>
+    <p><b>Why in:</b> &quot;You draw two cards and lose 2 life.&quot;: two cards for 2 mana.</p>
+    <p><b>Why out:</b> Ominous Harvest usually copies 0-1 times off Gravestorm: about one card for 1 life.</p>
+    <p><b>Verdict:</b> KEEP: Insatiable Avarice (the operator's 09-09 pick) stays, so nothing is reversed.</p>
+    <p class="muted">Operator owns 2 copies; singleton, so 1 goes here and the 2nd stays in the binder.</p>
+  </div>
+</div></div>
+
+<details><summary>Considered and rejected (7)</summary>
+<div class="rejects">
+<div class="swaprow small">
+  <div class="cardbox out"><img loading="lazy" src="https://cards.scryfall.io/normal/front/0/e/0eb0e8e7-266f-441e-b1cd-12b8ec3f7d71.jpg?1783915672" alt="Imp's Mischief" style="width:110px"><span class="lbl lbl-out">OUT</span><small>Imp's Mischief</small></div>
+  <span class="arrow">&rarr;</span>
+  <div class="cardbox in"><img loading="lazy" src="https://cards.scryfall.io/normal/front/a/9/a9225cc3-90f0-448f-a8d9-7c6c2796d077.jpg?1783918041" alt="Sheoldred's Edict" style="width:110px"><span class="lbl lbl-in">IN</span><small>Sheoldred's Edict</small></div>
+  <div class="swapinfo">
+    <div class="badges"><span class="tier t-registered">registered</span><span class="round">round 1</span><span class="rank">rank 99</span></div>
+    <p><b>Why in:</b> &quot;Each opponent sacrifices a nontoken creature of their choice.&quot;: a modal edict.</p>
+    <p><b>Why out:</b> Not the weakest: Imp's Mischief ('Change the target of target spell with a single target') is Imotekh's only protection.</p>
+    <p><b>Verdict:</b> REJECT: the report itself calls protection a real gap.</p>
+    
+  </div>
+</div>
+<div class="swaprow small">
+  <div class="cardbox out"><img loading="lazy" src="https://cards.scryfall.io/normal/front/e/d/edfaf8cc-7819-4ec2-8d79-e3b0c1814590.jpg?1783920075" alt="Razorlash Transmogrant" style="width:110px"><span class="lbl lbl-out">OUT</span><small>Razorlash Transmogrant</small></div>
+  <span class="arrow">&rarr;</span>
+  <div class="cardbox in"><img loading="lazy" src="https://cards.scryfall.io/normal/front/b/8/b8c69031-588d-44a2-89b3-972a335541e5.jpg?1783920908" alt="Skorpekh Destroyer" style="width:110px"><span class="lbl lbl-in">IN</span><small>Skorpekh Destroyer</small></div>
+  <div class="swapinfo">
+    <div class="badges"><span class="tier t-registered">registered</span><span class="round">round 1</span><span class="rank">rank 99</span></div>
+    <p><b>Why in:</b> &quot;Deathtouch&quot;: a deathtouch artifact body.</p>
+    <p><b>Why out:</b> Not the weakest: Razorlash returns itself from the graveyard, usually for {B}{B}, a repeatable Imotekh trigger.</p>
+    <p><b>Verdict:</b> REJECT: the auditor misread Razorlash as unearth; Skorpekh has no engine text.</p>
+    
+  </div>
+</div>
+<div class="swaprow small">
+  <div class="cardbox out"><img loading="lazy" src="https://cards.scryfall.io/normal/front/a/9/a960acea-3404-4834-9296-d6715add49af.jpg?1783920929" alt="Chronomancer" style="width:110px"><span class="lbl lbl-out">OUT</span><small>Chronomancer</small></div>
+  <span class="arrow">&rarr;</span>
+  <div class="cardbox in"><img loading="lazy" src="https://cards.scryfall.io/normal/front/c/5/c57778d7-fbd7-482f-b895-c033592f7af6.jpg?1783920910" alt="Sautekh Immortal" style="width:110px"><span class="lbl lbl-in">IN</span><small>Sautekh Immortal</small></div>
+  <div class="swapinfo">
+    <div class="badges"><span class="tier t-registered">registered</span><span class="round">round 1</span><span class="rank">rank 99</span></div>
+    <p><b>Why in:</b> &quot;This creature enters with a +1/+1 counter on it for each creature that died this turn.&quot;: a flash body sized by the turn's deaths.</p>
+    <p><b>Why out:</b> Not the weakest: Chronomancer's '{1}, {T}, Sacrifice another artifact: Draw a card' and its unearth are repeatable Imotekh triggers.</p>
+    <p><b>Verdict:</b> REJECT: Sautekh has no unearth, so the auditor's 'unearth cost' comparison compares against nothing.</p>
+    
+  </div>
+</div>
+<div class="swaprow small">
+  <div class="cardbox out"><img loading="lazy" src="https://cards.scryfall.io/normal/front/d/1/d16f8670-f038-400a-83e7-a53a7f8c47ac.jpg?1783911278" alt="Marionette Apprentice" style="width:110px"><span class="lbl lbl-out">OUT</span><small>Marionette Apprentice</small></div>
+  <span class="arrow">&rarr;</span>
+  <div class="cardbox in"><img loading="lazy" src="https://cards.scryfall.io/normal/front/1/e/1eb25a6c-d6b4-465d-990e-f1ab86b26b69.jpg?1788329273" alt="Liliana the Repentant" style="width:110px"><span class="lbl lbl-in">IN</span><small>Liliana the Repentant</small></div>
+  <div class="swapinfo">
+    <div class="badges"><span class="tier t-ASSUMED">ASSUMED — confirm you own it</span><span class="round">round 2</span><span class="rank">rank 99</span></div>
+    <p><b>Why in:</b> &quot;Whenever another creature or planeswalker you control enters, mill two cards.&quot;: mills 4 per Imotekh trigger, fuelling recursion.</p>
+    <p><b>Why out:</b> Not the weakest: Apprentice's 'each opponent loses 1 life' on every creature or artifact death is 3 per death in a 4-player pod.</p>
+    <p><b>Verdict:</b> REJECT: the auditor's 'one-point trickle' misreads 'each opponent'; Apprentice is one of three each-opponent drain payoffs.</p>
+    
+  </div>
+</div>
+<div class="swaprow small">
+  <div class="cardbox out"><img loading="lazy" src="https://cards.scryfall.io/normal/front/b/b/bbcc1d84-9772-475d-924a-75bb54c9bc20.jpg?1752947051" alt="Umbral Collar Zealot" style="width:110px"><span class="lbl lbl-out">OUT</span><small>Umbral Collar Zealot</small></div>
+  <span class="arrow">&rarr;</span>
+  <div class="cardbox in"><img loading="lazy" src="https://cards.scryfall.io/normal/front/9/0/9028d31f-9c41-47e3-885b-6a869bca8178.jpg?1789644882" alt="Massacre Girl, Most Wanted" style="width:110px"><span class="lbl lbl-in">IN</span><small>Massacre Girl, Most Wanted</small></div>
+  <div class="swapinfo">
+    <div class="badges"><span class="tier t-ASSUMED">ASSUMED — confirm you own it</span><span class="round">round 2</span><span class="rank">rank 99</span></div>
+    <p><b>Why in:</b> &quot;Massacre Girl deals 1 damage to target opponent and you gain 1 life.&quot;: a single-opponent drain on each death.</p>
+    <p><b>Why out:</b> Not the weakest: Zealot's 'Sacrifice another creature or artifact: Surveil 1' is a free sac outlet, defended in the auditor's own section 6.</p>
+    <p><b>Verdict:</b> REJECT: a 5-MV single-target drain that needs an outlet.</p>
+    <p class="muted">Two-deck conflict with Meren: neither deck gets it.</p>
+  </div>
+</div>
+<div class="swaprow small">
+  <div class="cardbox out"><img loading="lazy" src="https://cards.scryfall.io/normal/front/a/c/ac1960a1-9141-468c-b96c-6c8e6905084d.jpg?1743207408" alt="Wayfarer's Bauble" style="width:110px"><span class="lbl lbl-out">OUT</span><small>Wayfarer's Bauble</small></div>
+  <span class="arrow">&rarr;</span>
+  <div class="cardbox in"><img loading="lazy" src="https://cards.scryfall.io/normal/front/e/3/e36a7908-1e22-494b-adb4-e72ac0974d62.jpg?1789556734" alt="Theoretical Necromancer" style="width:110px"><span class="lbl lbl-in">IN</span><small>Theoretical Necromancer</small></div>
+  <div class="swapinfo">
+    <div class="badges"><span class="tier t-ASSUMED">ASSUMED — confirm you own it</span><span class="round">round 2</span><span class="rank">rank 99</span></div>
+    <p><b>Why in:</b> &quot;{3}{B}, Exile this card from your graveyard: Return another target creature card from your graveyard to your hand.&quot;: one graveyard-to-hand rebuy.</p>
+    <p><b>Why out:</b> Not the weakest: Bauble is ramp, and the auditor's own report says ramp is thin.</p>
+    <p><b>Verdict:</b> REJECT: 'repeatable' is false; the cost exiles the Necromancer, so it works once.</p>
+    
+  </div>
+</div>
+<div class="swaprow small">
+  <div class="cardbox out"><img loading="lazy" src="https://cards.scryfall.io/normal/front/6/9/69d0f5bd-ccea-49b2-bd79-ad5e4d850cf5.jpg?1783908926" alt="Wishclaw Talisman" style="width:110px"><span class="lbl lbl-out">OUT</span><small>Wishclaw Talisman</small></div>
+  <span class="arrow">&rarr;</span>
+  <div class="cardbox in"><img loading="lazy" src="https://cards.scryfall.io/normal/front/4/6/46974d94-e900-43e4-92b5-4fb9b9f7cf46.jpg?1789385622" alt="Break Under Pressure" style="width:110px"><span class="lbl lbl-in">IN</span><small>Break Under Pressure</small></div>
+  <div class="swapinfo">
+    <div class="badges"><span class="tier t-ASSUMED">ASSUMED — confirm you own it</span><span class="round">round 2</span><span class="rank">rank 99</span></div>
+    <p><b>Why in:</b> &quot;Target opponent sacrifices a creature or planeswalker with the greatest mana value among creatures and planeswalkers they control.&quot;: instant edict on the biggest threat.</p>
+    <p><b>Why out:</b> Not the weakest: Wishclaw is one of two library tutors (Insatiable Avarice puts on top; Buried Alive is graveyard-only).</p>
+    <p><b>Verdict:</b> REJECT: a role swap, not an upgrade; spot removal is already 5 pieces plus Noxious Gearhulk.</p>
+    
+  </div>
+</div></div>
+</details>
+
+<h2 id="the-cabbage-merchant">The Cabbage Merchant</h2>
+<div class="deckhead"><img class="cmdimg" src="https://cards.scryfall.io/normal/front/2/f/2fea0356-6684-4730-9eb4-0262856bc1f9.jpg?1783904816" alt="The Cabbage Merchant"></div>
+<div class="keeps">
+<div class="swaprow ">
+  <div class="placeholder" style="width:160px">(no card — fixes the count)</div>
+  <span class="arrow">&rarr;</span>
+  <div class="cardbox in"><img loading="lazy" src="https://cards.scryfall.io/normal/front/3/4/341da856-7414-403b-b2e3-4bebd58a5aa4.jpg?1730489413" alt="Elvish Archdruid" style="width:160px"><span class="lbl lbl-in">IN</span><small>Elvish Archdruid</small></div>
+  <div class="swapinfo">
+    <div class="badges"><span class="tier t-registered">registered</span><span class="round">round 1</span><span class="rank">rank 1</span></div>
+    <p><b>Why in:</b> &quot;{T}: Add {G} for each Elf you control.&quot;: ramp off 7 Elves that reach the battlefield (Mystic, Llanowar, Jaheira, Halsin, Tireless Provisioner, Disciple, itself).</p>
+    <p><b>Why out:</b> No card cut: size fix, 99 to 100 cards.</p>
+    <p><b>Verdict:</b> KEEP: mandatory size fix; Nesting Grounds stays.</p>
+    
+  </div>
+</div>
+<div class="swaprow ">
+  <div class="cardbox out"><img loading="lazy" src="https://cards.scryfall.io/normal/front/3/6/3654416d-8558-4af2-9e10-18dbc8f2b376.jpg?1783903658" alt="Emil, Vastlands Roamer" style="width:160px"><span class="lbl lbl-out">OUT</span><small>Emil, Vastlands Roamer</small></div>
+  <span class="arrow">&rarr;</span>
+  <div class="cardbox in"><img loading="lazy" src="https://cards.scryfall.io/normal/front/a/1/a159830a-698f-423c-9da0-a734b210ecab.jpg?1555040748" alt="Tendershoot Dryad" style="width:160px"><span class="lbl lbl-in">IN</span><small>Tendershoot Dryad</small></div>
+  <div class="swapinfo">
+    <div class="badges"><span class="tier t-registered">registered</span><span class="round">round 1</span><span class="rank">rank 2</span></div>
+    <p><b>Why in:</b> &quot;At the beginning of each upkeep, create a 1/1 green Saproling creature token.&quot;: four tokens a round, each also making a Took Food.</p>
+    <p><b>Why out:</b> Emil's Fractal costs {4}{G} and a tap per token.</p>
+    <p><b>Verdict:</b> KEEP.</p>
+    <p class="muted">Emil was an operator add in v3 on 09-28.</p>
+  </div>
+</div>
+<div class="swaprow ">
+  <div class="cardbox out"><img loading="lazy" src="https://cards.scryfall.io/normal/front/f/4/f4ff6bf9-89a9-4c2a-84a2-d4ceb7168adf.jpg?1790343341" alt="Ginger, Queen of Sweets" style="width:160px"><span class="lbl lbl-out">OUT</span><small>Ginger, Queen of Sweets</small></div>
+  <span class="arrow">&rarr;</span>
+  <div class="cardbox in"><img loading="lazy" src="https://cards.scryfall.io/normal/front/4/f/4f4187f1-05bd-4db6-a2e7-d677eff588ee.jpg?1783927520" alt="Alhammarret's Archive" style="width:160px"><span class="lbl lbl-in">IN</span><small>Alhammarret's Archive</small></div>
+  <div class="swapinfo">
+    <div class="badges"><span class="tier t-registered">registered</span><span class="round">round 1</span><span class="rank">rank 3</span></div>
+    <p><b>Why in:</b> &quot;If you would draw a card except the first one you draw in each of your draw steps, draw two cards instead.&quot;: doubles the draws from Toski, Ohran, Idol, Took, Uprising and Kenrith's.</p>
+    <p><b>Why out:</b> Ginger was the auditor's weakest-slot pick; the refuter did not contest the OUT.</p>
+    <p><b>Verdict:</b> KEEP (reason fixed: doubling the life amount adds no Trudge Garden triggers; the value is doubled draws).</p>
+    <p class="muted">Ginger was an operator add in v3 on 09-28; confirm.</p>
+  </div>
+</div>
+<div class="swaprow ">
+  <div class="cardbox out"><img loading="lazy" src="https://cards.scryfall.io/normal/front/3/d/3db2da7a-8088-4117-916b-f9c905d1b45b.jpg?1789127646" alt="Hungering Puppetbeast" style="width:160px"><span class="lbl lbl-out">OUT</span><small>Hungering Puppetbeast</small></div>
+  <span class="arrow">&rarr;</span>
+  <div class="cardbox in"><img loading="lazy" src="https://cards.scryfall.io/normal/front/5/0/50aded92-f934-441f-8e48-d68d471e70d8.jpg?1783918445" alt="Elvish Spirit Guide" style="width:160px"><span class="lbl lbl-in">IN</span><small>Elvish Spirit Guide</small></div>
+  <div class="swapinfo">
+    <div class="badges"><span class="tier t-registered">registered</span><span class="round">round 1</span><span class="rank">rank 4</span></div>
+    <p><b>Why in:</b> &quot;Exile this card from your hand: Add {G}.&quot;: free acceleration.</p>
+    <p><b>Why out:</b> Hungering Puppetbeast is an EDHREC #27440 5-drop whose sacrifice ability grows only itself.</p>
+    <p><b>Verdict:</b> KEEP (reason overstated: its Food sacrifices still feed Trail of Crumbs).</p>
+    <p class="muted">Puppetbeast was an operator add in v4 on 09-28; confirm.</p>
+  </div>
+</div>
+<div class="swaprow ">
+  <div class="cardbox out"><img loading="lazy" src="https://cards.scryfall.io/normal/front/1/5/152b7374-e991-443f-b6ca-914415635c4a.jpg?1783904420" alt="Spry and Mighty" style="width:160px"><span class="lbl lbl-out">OUT</span><small>Spry and Mighty</small></div>
+  <span class="arrow">&rarr;</span>
+  <div class="cardbox in"><img loading="lazy" src="https://cards.scryfall.io/normal/front/d/e/de399acd-e792-4f4a-8025-434f1080c0fc.jpg?1783915628" alt="Hunter's Insight" style="width:160px"><span class="lbl lbl-in">IN</span><small>Hunter's Insight</small></div>
+  <div class="swapinfo">
+    <div class="badges"><span class="tier t-registered">registered</span><span class="round">round 1</span><span class="rank">rank 5</span></div>
+    <p><b>Why in:</b> &quot;Whenever that creature deals combat damage to a player or planeswalker this turn, draw that many cards.&quot;: a big draw off a Trudge Garden 4/4 or a pumped token.</p>
+    <p><b>Why out:</b> Spry and Mighty's X is the difference between two creatures' powers, which is small in a token deck.</p>
+    <p><b>Verdict:</b> KEEP.</p>
+    <p class="muted">Spry and Mighty was an operator sleeved pick on 09-18; confirm.</p>
+  </div>
+</div></div>
+
+<details><summary>Considered and rejected (8)</summary>
+<div class="rejects">
+<div class="swaprow small">
+  <div class="cardbox out"><img loading="lazy" src="https://cards.scryfall.io/normal/front/1/f/1f9bd4da-4626-40ba-95f4-14e3de36f989.jpg?1783904067" alt="The Ooze" style="width:110px"><span class="lbl lbl-out">OUT</span><small>The Ooze</small></div>
+  <span class="arrow">&rarr;</span>
+  <div class="cardbox in"><img loading="lazy" src="https://cards.scryfall.io/normal/front/9/c/9c1121df-b03e-4ad9-8c45-c3b4066e4a39.jpg?1783942680" alt="Helix Pinnacle" style="width:110px"><span class="lbl lbl-in">IN</span><small>Helix Pinnacle</small></div>
+  <div class="swapinfo">
+    <div class="badges"><span class="tier t-registered">registered</span><span class="round">round 1</span><span class="rank">rank 99</span></div>
+    <p><b>Why in:</b> &quot;At the beginning of your upkeep, if there are 100 or more tower counters on this enchantment, you win the game.&quot;: an alternate-win mana sink.</p>
+    <p><b>Why out:</b> Not the weakest: The Ooze makes a Mutagen token every turn, which Took and Manufactor multiply into Wurmlet and Trudge Garden triggers.</p>
+    <p><b>Verdict:</b> REJECT: the auditor quoted only The Ooze's first ability; Pinnacle duplicates the Walking Ballista kill.</p>
+    
+  </div>
+</div>
+<div class="swaprow small">
+  <div class="cardbox out"><img loading="lazy" src="https://cards.scryfall.io/normal/front/a/5/a56e0f91-b128-4693-a949-53cb403f4fbf.jpg?1789127136" alt="Greenhouse Propagator" style="width:110px"><span class="lbl lbl-out">OUT</span><small>Greenhouse Propagator</small></div>
+  <span class="arrow">&rarr;</span>
+  <div class="cardbox in"><img loading="lazy" src="https://cards.scryfall.io/normal/front/1/3/13eeff85-9e4a-46c9-841f-f3b1c556ef18.jpg?1783927510" alt="Loxodon Warhammer" style="width:110px"><span class="lbl lbl-in">IN</span><small>Loxodon Warhammer</small></div>
+  <div class="swapinfo">
+    <div class="badges"><span class="tier t-registered">registered</span><span class="round">round 1</span><span class="rank">rank 99</span></div>
+    <p><b>Why in:</b> &quot;Equipped creature gets +3/+0 and has trample and lifelink.&quot;: lifelink on one attacker.</p>
+    <p><b>Why out:</b> Not the weakest: Propagator's 'Whenever another creature you control enters, you gain 1 life' makes it a second Trudge Garden loop piece.</p>
+    <p><b>Verdict:</b> REJECT: lifelink is one lifegain event per damage step.</p>
+    
+  </div>
+</div>
+<div class="swaprow small">
+  <div class="cardbox out"><img loading="lazy" src="https://cards.scryfall.io/normal/front/e/9/e99933e3-9237-45e8-b067-44367fc21430.jpg?1748705634" alt="Nesting Grounds" style="width:110px"><span class="lbl lbl-out">OUT</span><small>Nesting Grounds</small></div>
+  <span class="arrow">&rarr;</span>
+  <div class="cardbox in"><img loading="lazy" src="https://cards.scryfall.io/normal/front/3/4/341da856-7414-403b-b2e3-4bebd58a5aa4.jpg?1730489413" alt="Elvish Archdruid" style="width:110px"><span class="lbl lbl-in">IN</span><small>Elvish Archdruid</small></div>
+  <div class="swapinfo">
+    <div class="badges"><span class="tier t-registered">registered</span><span class="round">round 1</span><span class="rank">rank 99</span></div>
+    <p><b>Why in:</b> &quot;{T}: Add {G} for each Elf you control.&quot;: Elf ramp.</p>
+    <p><b>Why out:</b> Not cuttable: operator keep (HISTORY 09-18), and the cut takes the deck from 33 to 32 lands.</p>
+    <p><b>Verdict:</b> REJECT the OUT only: the Archdruid enters as the 100th card instead (separate KEEP).</p>
+    <p class="muted">Operator keep.</p>
+  </div>
+</div>
+<div class="swaprow small">
+  <div class="placeholder" style="width:110px">(no card — fixes the count)</div>
+  <span class="arrow">&rarr;</span>
+  <div class="cardbox in"><img loading="lazy" src="https://cards.scryfall.io/normal/front/b/b/bbc3152e-7b3b-4ac6-8b33-abfebde216aa.jpg?1783937566" alt="Fog" style="width:110px"><span class="lbl lbl-in">IN</span><small>Fog</small></div>
+  <div class="swapinfo">
+    <div class="badges"><span class="tier t-registered">registered</span><span class="round">round 1</span><span class="rank">rank 99</span></div>
+    <p><b>Why in:</b> &quot;Prevent all combat damage that would be dealt this turn.&quot;: one turn of combat protection.</p>
+    <p><b>Why out:</b> No card cut: the auditor proposed it as the 100th card.</p>
+    <p><b>Verdict:</b> REJECT: the operator removed Fog in v3 on 09-28; the 100th slot goes to Elvish Archdruid.</p>
+    <p class="muted">Operator removal.</p>
+  </div>
+</div>
+<div class="swaprow small">
+  <div class="cardbox out"><img loading="lazy" src="https://cards.scryfall.io/normal/front/a/5/a56e0f91-b128-4693-a949-53cb403f4fbf.jpg?1789127136" alt="Greenhouse Propagator" style="width:110px"><span class="lbl lbl-out">OUT</span><small>Greenhouse Propagator</small></div>
+  <span class="arrow">&rarr;</span>
+  <div class="cardbox in"><img loading="lazy" src="https://cards.scryfall.io/normal/front/b/6/b6331218-dbb8-44a9-8ba5-5fb1ab41c5c0.jpg?1788878239" alt="Keeper of the Quiet Hour" style="width:110px"><span class="lbl lbl-in">IN</span><small>Keeper of the Quiet Hour</small></div>
+  <div class="swapinfo">
+    <div class="badges"><span class="tier t-registered">registered</span><span class="round">round 2</span><span class="rank">rank 99</span></div>
+    <p><b>Why in:</b> &quot;When this creature enters, empower Jace 2.&quot;: a 2-loyalty Jace token on a 3-MV artifact body.</p>
+    <p><b>Why out:</b> Not the weakest: Propagator is a round-1-protected Trudge Garden loop piece.</p>
+    <p><b>Verdict:</b> REJECT: judged without the false '[-3] right away' claim; empower 2 gives only 2 loyalty.</p>
+    
+  </div>
+</div>
+<div class="swaprow small">
+  <div class="cardbox out"><img loading="lazy" src="https://cards.scryfall.io/normal/front/f/5/f5a0bb3e-8119-4739-8684-e61d1d607dcb.jpg?1789014406" alt="Jiang Yanggu, Never Alone" style="width:110px"><span class="lbl lbl-out">OUT</span><small>Jiang Yanggu, Never Alone</small></div>
+  <span class="arrow">&rarr;</span>
+  <div class="cardbox in"><img loading="lazy" src="https://cards.scryfall.io/normal/front/0/5/05102c46-96f8-44a0-a1e6-e388fa5e0841.jpg?1789557046" alt="Traxos, Scourge Eternal" style="width:110px"><span class="lbl lbl-in">IN</span><small>Traxos, Scourge Eternal</small></div>
+  <div class="swapinfo">
+    <div class="badges"><span class="tier t-ASSUMED">ASSUMED — confirm you own it</span><span class="round">round 2</span><span class="rank">rank 99</span></div>
+    <p><b>Why in:</b> &quot;Whenever you cast an artifact or creature spell, untap Traxos.&quot;: a trampler that untaps on casts.</p>
+    <p><b>Why out:</b> Not the weakest: Jiang's end-step untap of all tokens doubles Jaheira token mana; Seedborn Muse covers only opponents' turns.</p>
+    <p><b>Verdict:</b> REJECT: no Food, token or lifegain text.</p>
+    <p class="muted">Two-deck conflict with Tazri: neither deck gets it.</p>
+  </div>
+</div>
+<div class="swaprow small">
+  <div class="cardbox out"><img loading="lazy" src="https://cards.scryfall.io/normal/front/e/d/edea6f70-a5a7-475d-b7f2-97933d0f32cf.jpg?1788329375" alt="Titanbones, Towering Heart" style="width:110px"><span class="lbl lbl-out">OUT</span><small>Titanbones, Towering Heart</small></div>
+  <span class="arrow">&rarr;</span>
+  <div class="cardbox in"><img loading="lazy" src="https://cards.scryfall.io/normal/front/3/5/3546b93b-a7d1-451d-a369-22cc8ddcd00d.jpg?1788865848" alt="Restore with Empathy" style="width:110px"><span class="lbl lbl-in">IN</span><small>Restore with Empathy</small></div>
+  <div class="swapinfo">
+    <div class="badges"><span class="tier t-ASSUMED">ASSUMED — confirm you own it</span><span class="round">round 2</span><span class="rank">rank 99</span></div>
+    <p><b>Why in:</b> &quot;Return target permanent card from your graveyard to your hand. You gain 4 life.&quot;: one rebuy plus one Trudge Garden trigger.</p>
+    <p><b>Why out:</b> Not the weakest: Titanbones' 'Whenever you gain life, put two +1/+1 counters' scales with every Food sac and grows without bound off the loop.</p>
+    <p><b>Verdict:</b> REJECT: not a clear upgrade.</p>
+    <p class="muted">Two-deck conflict with Meren: neither deck gets it.</p>
+  </div>
+</div>
+<div class="swaprow small">
+  <div class="cardbox out"><img loading="lazy" src="https://cards.scryfall.io/normal/front/8/2/8217100d-8244-4565-97bd-6c0f38c3e2f0.jpg?1783903852" alt="Ribtruss Roaster" style="width:110px"><span class="lbl lbl-out">OUT</span><small>Ribtruss Roaster</small></div>
+  <span class="arrow">&rarr;</span>
+  <div class="cardbox in"><img loading="lazy" src="https://cards.scryfall.io/normal/front/6/b/6b8789a6-3b63-4198-af5f-c2f2f49fafd9.jpg?1789470736" alt="Puppet Crafting" style="width:110px"><span class="lbl lbl-in">IN</span><small>Puppet Crafting</small></div>
+  <div class="swapinfo">
+    <div class="badges"><span class="tier t-IF-OWNED">IF-OWNED — only if you own it</span><span class="round">round 2</span><span class="rank">rank 99</span></div>
+    <p><b>Why in:</b> &quot;Enchanted permanent is a Construct creature with base power and toughness 5/5 in addition to its other types.&quot;: turns a Manufactor or Idol into a 5/5 and rebuys itself.</p>
+    <p><b>Why out:</b> Not cuttable: Ribtruss is an operator-sleeved pick, and Trudge Garden and Halsin tokens feed its devour.</p>
+    <p><b>Verdict:</b> REJECT: a two-card threat that dies to one removal spell; IF-OWNED.</p>
+    <p class="muted">IF-OWNED.</p>
+  </div>
+</div></div>
+</details>
+
+<h2 id="pull">Pull list</h2>
+<div class="pulldeck"><h3>Tam, the Possibility</h3>
+<div class="pullcols"><div><b>Take out</b><label><input type="checkbox" data-n="pull:tam-the-possibility:out:Chandra, Fire Artisan"> Chandra, Fire Artisan</label><label><input type="checkbox" data-n="pull:tam-the-possibility:out:Rewrite Regrets"> Rewrite Regrets</label></div><div><b>Put in</b><label><input type="checkbox" data-n="pull:tam-the-possibility:in:Well of Lost Dreams"> Well of Lost Dreams </label><label><input type="checkbox" data-n="pull:tam-the-possibility:in:Domri, Anarch of Bolas"> Domri, Anarch of Bolas </label></div></div></div><div class="pulldeck"><h3>Meren of Clan Nel Toth</h3>
+<div class="pullcols"><div><b>Take out</b><label><input type="checkbox" data-n="pull:meren-of-clan-nel-toth:out:Creakwood Liege"> Creakwood Liege</label><label><input type="checkbox" data-n="pull:meren-of-clan-nel-toth:out:Lightning Greaves"> Lightning Greaves</label><label><input type="checkbox" data-n="pull:meren-of-clan-nel-toth:out:Grim Servant"> Grim Servant</label><label><input type="checkbox" data-n="pull:meren-of-clan-nel-toth:out:Rune-Scarred Demon"> Rune-Scarred Demon</label><label><input type="checkbox" data-n="pull:meren-of-clan-nel-toth:out:High Market"> High Market</label></div><div><b>Put in</b><label><input type="checkbox" data-n="pull:meren-of-clan-nel-toth:in:Vraska, the Cutting Glare"> Vraska, the Cutting Glare <span class="tier t-ASSUMED">ASSUMED — confirm you own it</span></label><label><input type="checkbox" data-n="pull:meren-of-clan-nel-toth:in:Vito, Thorn of the Dusk Rose"> Vito, Thorn of the Dusk Rose </label><label><input type="checkbox" data-n="pull:meren-of-clan-nel-toth:in:Grave Titan"> Grave Titan </label><label><input type="checkbox" data-n="pull:meren-of-clan-nel-toth:in:Jungle Hollow"> Jungle Hollow </label></div></div></div><div class="pulldeck"><h3>Tazri, Beacon of Unity</h3>
+<div class="pullcols"><div><b>Take out</b><label><input type="checkbox" data-n="pull:tazri-beacon-of-unity:out:Solemn Doomguide"> Solemn Doomguide</label><label><input type="checkbox" data-n="pull:tazri-beacon-of-unity:out:Concerted Defense"> Concerted Defense</label><label><input type="checkbox" data-n="pull:tazri-beacon-of-unity:out:Archpriest of Iona"> Archpriest of Iona</label><label><input type="checkbox" data-n="pull:tazri-beacon-of-unity:out:Bar the Gate"> Bar the Gate</label><label><input type="checkbox" data-n="pull:tazri-beacon-of-unity:out:Multiclass Baldric"> Multiclass Baldric</label><label><input type="checkbox" data-n="pull:tazri-beacon-of-unity:out:Thwart the Grave"> Thwart the Grave</label><label><input type="checkbox" data-n="pull:tazri-beacon-of-unity:out:You Find a Cursed Idol"> You Find a Cursed Idol</label><label><input type="checkbox" data-n="pull:tazri-beacon-of-unity:out:Feywild Caretaker"> Feywild Caretaker</label><label><input type="checkbox" data-n="pull:tazri-beacon-of-unity:out:Yuan-Ti Malison"> Yuan-Ti Malison</label></div><div><b>Put in</b><label><input type="checkbox" data-n="pull:tazri-beacon-of-unity:in:Springleaf Parade"> Springleaf Parade </label><label><input type="checkbox" data-n="pull:tazri-beacon-of-unity:in:Generous Gift"> Generous Gift </label><label><input type="checkbox" data-n="pull:tazri-beacon-of-unity:in:Realmwalker"> Realmwalker </label><label><input type="checkbox" data-n="pull:tazri-beacon-of-unity:in:Putrefy"> Putrefy </label><label><input type="checkbox" data-n="pull:tazri-beacon-of-unity:in:Infernal Grasp"> Infernal Grasp </label><label><input type="checkbox" data-n="pull:tazri-beacon-of-unity:in:Syphon Mind"> Syphon Mind </label><label><input type="checkbox" data-n="pull:tazri-beacon-of-unity:in:Chomping Changeling"> Chomping Changeling </label><label><input type="checkbox" data-n="pull:tazri-beacon-of-unity:in:Samut, Hazoret's Champion"> Samut, Hazoret's Champion <span class="tier t-ASSUMED">ASSUMED — confirm you own it</span></label><label><input type="checkbox" data-n="pull:tazri-beacon-of-unity:in:Rescue Girl, First Responder"> Rescue Girl, First Responder <span class="tier t-ASSUMED">ASSUMED — confirm you own it</span></label></div></div></div><div class="pulldeck"><h3>Imotekh the Stormlord</h3>
+<div class="pullcols"><div><b>Take out</b><label><input type="checkbox" data-n="pull:imotekh-the-stormlord:out:Canoptek Wraith"> Canoptek Wraith</label><label><input type="checkbox" data-n="pull:imotekh-the-stormlord:out:Plasmancer"> Plasmancer</label><label><input type="checkbox" data-n="pull:imotekh-the-stormlord:out:Cryptek"> Cryptek</label><label><input type="checkbox" data-n="pull:imotekh-the-stormlord:out:Flayed One"> Flayed One</label><label><input type="checkbox" data-n="pull:imotekh-the-stormlord:out:Lychguard"> Lychguard</label><label><input type="checkbox" data-n="pull:imotekh-the-stormlord:out:Ominous Harvest"> Ominous Harvest</label></div><div><b>Put in</b><label><input type="checkbox" data-n="pull:imotekh-the-stormlord:in:Noxious Gearhulk"> Noxious Gearhulk </label><label><input type="checkbox" data-n="pull:imotekh-the-stormlord:in:Winter, Tormented Loner"> Winter, Tormented Loner <span class="tier t-ASSUMED">ASSUMED — confirm you own it</span></label><label><input type="checkbox" data-n="pull:imotekh-the-stormlord:in:Dread Presence"> Dread Presence </label><label><input type="checkbox" data-n="pull:imotekh-the-stormlord:in:Necrotic Ooze"> Necrotic Ooze </label><label><input type="checkbox" data-n="pull:imotekh-the-stormlord:in:Puppeteer Clique"> Puppeteer Clique </label><label><input type="checkbox" data-n="pull:imotekh-the-stormlord:in:Night's Whisper"> Night's Whisper </label></div></div></div><div class="pulldeck"><h3>The Cabbage Merchant</h3>
+<div class="pullcols"><div><b>Take out</b><label><input type="checkbox" data-n="pull:the-cabbage-merchant:out:Emil, Vastlands Roamer"> Emil, Vastlands Roamer</label><label><input type="checkbox" data-n="pull:the-cabbage-merchant:out:Ginger, Queen of Sweets"> Ginger, Queen of Sweets</label><label><input type="checkbox" data-n="pull:the-cabbage-merchant:out:Hungering Puppetbeast"> Hungering Puppetbeast</label><label><input type="checkbox" data-n="pull:the-cabbage-merchant:out:Spry and Mighty"> Spry and Mighty</label></div><div><b>Put in</b><label><input type="checkbox" data-n="pull:the-cabbage-merchant:in:Elvish Archdruid"> Elvish Archdruid </label><label><input type="checkbox" data-n="pull:the-cabbage-merchant:in:Tendershoot Dryad"> Tendershoot Dryad </label><label><input type="checkbox" data-n="pull:the-cabbage-merchant:in:Alhammarret's Archive"> Alhammarret's Archive </label><label><input type="checkbox" data-n="pull:the-cabbage-merchant:in:Elvish Spirit Guide"> Elvish Spirit Guide </label><label><input type="checkbox" data-n="pull:the-cabbage-merchant:in:Hunter's Insight"> Hunter's Insight </label></div></div></div>
+
+<footer>Source: verify-2026-09-28/deck-audit/final-swaps.json (generated 2026-09-28) · generated 2026-09-28 by verify-2026-09-28/deck-audit/upgrade-page.ts · card images (c) Wizards of the Coast via Scryfall.</footer>
+<script>
+const KEY='pull:deck-upgrades';const boxes=[...document.querySelectorAll('input[data-n]')];
+let s={};try{s=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){s={}}
+boxes.forEach(b=>{b.checked=!!s[b.dataset.n];b.addEventListener('change',()=>{s[b.dataset.n]=b.checked;localStorage.setItem(KEY,JSON.stringify(s))})});
+</script></body></html>

@@ -175,3 +175,35 @@ PASS  curve       avg MV 3.13
 PASS  wincons     11 win condition(s)/closer(s)
 PASS  locks       0 locked card(s)
 ```
+
+## 6. Reality Fracture pass
+
+- **Keeper of the Quiet Hour** — "When this creature enters, empower Jace 2" (creates a Jace
+  planeswalker token at 2 loyalty, or adds 2 to one you have). It's an artifact creature — a historic
+  permanent — so it's a free 7/7 off Displaced Dinosaurs, plus the Jace token can `[-3]: Draw a card`
+  immediately (net: 3 mana for a 7/7 + a card) or bank `[-1]: Surveil 1` for slow ongoing value.
+  **ADD → OUT Greenhouse Propagator** (Greenhouse's "gain 1 life whenever another creature enters" is
+  the weakest lifegain trickle left in the 100 next to three real Food-sac/Trudge Garden/Titanbones
+  engines already doing that job at a much larger scale; Keeper does something none of them do).
+- **Loot, the Nexus** — "{T}: choose a color, add one mana per different power among creatures you
+  control." Another unconditional ramp dork on top of the 12 the deck already runs (Gilded Goose,
+  Llanowar Elves, Elvish Mystic, Elvish Spirit Guide, Elvish Archdruid, Tireless Provisioner, Emerald
+  Medallion, Wild Growth, Cultivate, Kodama's Reach, Many Partings, The Earth King); ceiling is high
+  late (many distinct token sizes: 1/1s, 4/4 Trudge tokens, 7/7 Dinosaurs) but it's a fifth-plus copy
+  of "more mana," no Food/token-conversion text. REJECT.
+- **Edgar, Moonlit Sovereign** — self-counters "if you didn't cast a spell this turn"; this deck casts
+  spells every turn it can (ramp into engine pieces), so the ability rarely fires. No Food synergy.
+  REJECT.
+- **Eye of Jace** — one-time "sacrifice... deal 2 to each opponent, gain 2 life" at 7+ cards in
+  graveyard; the deck has near-zero self-mill, so the trigger condition is slow to reach, and the
+  single 2-life payoff is trivial next to a Food sac (3 life, repeatable, feeds Titanbones and Trudge
+  Garden). REJECT.
+- **Fblthp, Knows the Way** — Domain power = basic land TYPES controlled; a 27-Forest, mono-G deck
+  controls exactly one basic land type, so Fblthp is a 1/1 that searches at most one basic to hand.
+  Dead text in this manabase. REJECT.
+- **Inspired Tethermage** — counters "whenever you put one or more loyalty counters on a
+  planeswalker"; the deck runs zero planeswalkers in the proposed 100, so this never triggers off
+  anything already present. REJECT.
+- **Murmuring Volume** — colorless-fixing mana rock + loot; mono-G needs no color fixing, and the
+  loot ability competes with Idol of Oblivion/Sarinth Steelseeker/Toski/Ohran Frostfang already
+  covering card flow. REJECT.

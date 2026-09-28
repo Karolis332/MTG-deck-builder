@@ -171,3 +171,37 @@ VERDICT   : FAIL (only on `plan`, expected)
   PASS  wincons     11 win condition(s)/closer(s)
   PASS  locks       1 locked card(s) present and intact
 ```
+
+## 6. Reality Fracture pass
+
+Baseline (REFUTE.md §2, final): deck − Creakwood Liege + Vito, Thorn of the Dusk Rose (− Grim Servant) +
+Grave Titan (− Rune-Scarred Demon) + Jungle Hollow (− High Market). Butcher of Malakir stays; no Night's
+Whisper. All nine cards below REJECT — none beat a slot in that 100.
+
+- **Edgar, Moonlit Sovereign** — REJECT: "At the beginning of your end step, if you didn't cast a spell
+  this turn, put two +1/+1 counters on Edgar" is anti-synergy with a deck that casts sac/removal spells
+  most turns, and there is no +1/+1-counters payoff to catch what it does grow.
+- **Eye of Jace** — REJECT: "sacrifice this artifact, it deals 2 damage to each opponent, and you gain 2
+  life" fires once, ever, and only after 7+ graveyard cards; Blood Artist/Zulaport/Syr Konrad already
+  drain on a repeating trigger for less setup.
+- **Fblthp, Knows the Way** — REJECT: "Fblthp's power is equal to the number of basic land types among
+  lands you control" caps at 2 (Forest, Swamp are the only basics run), so it's a small body that tutors
+  basics — same bucket as the 8 ramp cards already rejected; the ramp suite is full.
+- **Inspired Tethermage** — REJECT: "Whenever you put one or more loyalty counters on a planeswalker" only
+  fires off Liliana's own +1 (once a turn at best) — no other planeswalker or proliferate effect is in the
+  100 to feed it, and "{6}: Empower Jace 2" is a dead Jace-token subtheme.
+- **Keeper of the Quiet Hour** — REJECT: "empower Jace 2" creates/feeds a Jace planeswalker token with zero
+  other support anywhere in the deck (no proliferate, no second Jace card); a vanilla 3-mana body otherwise.
+- **Loot, the Nexus** — REJECT: "Add one mana of that color for each different power among creatures you
+  control" needs a stable, power-diverse board; this deck's own sac outlets (Viscera Seer, Carrion Feeder,
+  Woe Strider, Yahenni) actively thin the board every turn, undercutting its own ramp.
+- **Murmuring Volume** — REJECT: "{T}: Add one mana of any color" is another mana rock in the already-full
+  ramp bucket; "{2}, {T}, Discard a card: Draw a card" is card-neutral, weaker than any draw already
+  considered.
+- **Solve for Disappointment** — REJECT (closest call): "choose a nonland permanent card from [their hand],
+  that player discards that card" is real hand disruption the 100 doesn't otherwise run, but there's no
+  open slot for it — Butcher of Malakir was confirmed KEEP in REFUTE.md §2 (a repeatable edict off free sac
+  outlets, not redundant), and every remaining card is either operator-locked or a confirmed KEEP.
+- **Teyo, Diamondblade Mage** — REJECT: "target permanent you control gains deathtouch... a +1/+1 counter
+  on it if it's a creature" is a one-shot combat trick on a 4-mana flash body; no counters payoff exists to
+  make it repeat, and it never touches the graveyard/sac plan.

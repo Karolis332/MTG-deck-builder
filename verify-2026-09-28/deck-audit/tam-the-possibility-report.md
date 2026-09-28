@@ -338,3 +338,77 @@ VERDICT   : FAIL
 ("commander wants: general value" is the generic fallback), same as the original registered v1. `lands`
 WARN at 35 matches the locked/accepted count for this exact deck. `arenaNames` WARN is expected and
 matches how the physical decklist already exports Esika (front-face only). Everything else PASSes.
+
+## 6. Reality Fracture pass
+
+Baseline for this pass is `REFUTE.md` §1's fixed list, not my earlier proposal: current deck + Well of
+Lost Dreams (−Chandra, Fire Artisan) + Domri, Anarch of Bolas (−Rewrite Regrets). Locks now also include
+Jared, Saheeli, both Talismans, Archangel of Tithes, Vigorbloom Charm, Final Act (on top of the original
+lock list and every Way/engine piece). Most Reality Fracture cards key off a new "empower Jace N" verb —
+mechanically identical to the Ways' ETB text — so they build directly toward Jace, Reality Sculptor's
+25-loyalty win and stack loyalty for Way of the Mentor/proliferate.
+
+- **Academic Ascent** — REJECT — {1}{W} combat trick (+2/+2 flying) + empower Jace 2; deck runs few
+  creatures worth pumping, narrow
+- **Campus Crier** — REJECT — needs to die and be exiled from the graveyard before it does anything;
+  slow, no board presence
+- **Countersculpt** — REJECT — operator cut today; no new text-based reason beyond what already applied
+- **Edgar, Moonlit Sovereign** — REJECT — Werewolf upkeep/+1+1-counter creature, no Jace/proliferate/
+  loyalty line at all
+- **Eye of Jace** — REJECT — the name is flavor only; its ability (surveil, self-sac at 7 graveyard
+  cards) has no loyalty-counter or Jace-token text
+- **Fatehold Charm** — REJECT — operator cut today; no new text-based reason
+- **Fblthp, Knows the Way** — REJECT — ramp/fixing (fetches basics to hand), no Jace synergy, ramp quota
+  already met by locked pieces
+- **Hexhaven Battalion** — REJECT — 6-mana 3 tokens + empower Jace 2 is fine value but Elspeth, Sun's
+  Champion ("Create three 1/1... Destroy all creatures power 4+... emblem") already fills this exact
+  slot better and isn't a legal cut (win-con)
+- **Inspired Tethermage** — REJECT — real payoff ("put a +1/+1 counter on this creature" per loyalty
+  counter placed) but no clean weak slot to cut it in for without touching a locked/engine card
+- **Keeper of the Quiet Hour** — REJECT — vanilla 3-mana body, empower Jace 2 ETB with no other text;
+  weaker than the ADD below
+- **Kiora of Salt and Sand** — **ADD, OUT Pia, Aether Ascetic** — "Planeswalkers you control have
+  '[−8]: Create an 8/8 blue Leviathan creature token with hexproof'" grants every walker in the 100
+  (14+ types) a second win-line, on a cheap {1}{G}{U} body. Pia's ETB is "you may discard a card... search
+  your library for an enchantment card": the only legal targets left in the library are whichever of the
+  7 Ways/Kaya's Ghostform hasn't been drawn yet (Esika's back face doesn't count — a DFC's library
+  characteristics are its front face, a Creature), so it's a conditional, RNG-gated tutor for a card the
+  deck already draws into naturally. Kiora's blanket ability is the stronger long-run investment
+- **Konstrari Charm** — REJECT — 6 dmg only hits flyers, or a +1/+1-counter/trample mode, or a ritual;
+  no Jace/loyalty line
+- **Loot, the Nexus** — REJECT — mana ability scales off "different power among creatures you control";
+  deck runs too few creatures for reliable output, ramp quota met
+- **Mindseeker Oculus** — REJECT — strong ETB (empower Jace 4) but no clean weak slot to cut it in for
+  without touching a locked/engine/win-con card
+- **Murmuring Volume** — REJECT — any-color rock + loot ability; ramp quota already met by locked pieces
+- **No Admittance** — REJECT — 3 dmg to any target + empower Jace 1 is solid but doesn't clearly beat
+  Erode (1-mana unconditional creature/PW removal) or Atomize (destroy+proliferate) already in the 100
+- **Plan for All Outcomes** — REJECT — operator cut today; no new text-based reason
+- **Repurposed Enforcer** — REJECT — "empower Jace X, where X is the number of creatures you control";
+  this deck runs very few creatures, so X is usually 1-2
+- **Solve for Disappointment** — REJECT — strong one-sided Thoughtseize + empower Jace 1, but Quintorius
+  Kand ("Whenever you cast a spell from exile...") has genuine if narrow synergy with Chandra, Torch of
+  Defiance's +1 and Chimil's discover, so it isn't a clean enough OUT target to claim this beats it
+- **Stingerquill Charm** — REJECT — flexible modal removal/trick, no Jace/loyalty line, doesn't clearly
+  beat the removal already locked in
+- **Tam's Resistance** — REJECT — operator cut today; no new text-based reason
+- **Teyo, Diamondblade Mage** — REJECT — Flash ETB puts a loyalty counter on a target planeswalker
+  (real synergy: can push Jace, Reality Sculptor toward 25), but no clean weak slot to cut it in for
+- **Teyo, Lightshield Expert** — REJECT — operator cut today ("Teyo the Shieldmage"); no new text-based
+  reason
+- **Theorix Charm** — REJECT — modal soft-counter/debuff/loot; no synergy edge over Dovin's Veto/
+  Counterspell already locked in
+- **Tomik, Orzhov Lawmage** — REJECT — operator cut today; no new text-based reason
+- **Vindictive Triumph** — REJECT — strong flexible removal/steal (exile creature or PW, MV≤3 comes back
+  under your control) but no clean weak slot to cut it in for without touching locked removal
+- **Violent Echoes** — REJECT — 6 dmg to creature/PW + conditional empower on excess damage, but Vraska's
+  Final Mercy already covers "destroy creature/PW or empower Jace 6" cheaper and more flexibly at {B}{B}
+- **Way of the Cryomancer** — REJECT — operator cut today; would otherwise be an 8th Way (empower Jace 5
+  + walker copy ability), no new text-based reason
+- **Yuriko, Blade of the Mighty** — REJECT — combat stax + solo-attacker double strike, no Jace/
+  proliferate/loyalty line at all
+
+**Net: 1 ADD.** Kiora of Salt and Sand IN, Pia, Aether Ascetic OUT. All locks (including the new ones:
+Jared, Saheeli, both Talismans, Archangel of Tithes, Vigorbloom Charm, Final Act) and the fixed baseline
+(Well of Lost Dreams −Chandra FA, Domri −Rewrite Regrets) are untouched. Not written to the proposed
+file per instruction.

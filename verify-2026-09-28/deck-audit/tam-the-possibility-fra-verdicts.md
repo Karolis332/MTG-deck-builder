@@ -1,0 +1,223 @@
+# Tam, the Possibility - Reality Fracture assumed-owned verdicts (2026-09-28)
+
+## Swaps
+
+| # | IN | tier | OUT | why IN | why OUT is weaker |
+|---|---|---|---|---|---|
+| 1 | Niv-Mizzet, Ghost Counsel {2}{W}{W}{B}{B} | IF-OWNED (rare) | Quintorius Kand | "Flying | Whenever you gain life, you may pay that much life. If you do, draw that many cards. | {T}: Each opponent loses 1 life and you gain 1 life." - Well of Lost Dreams's effect on an evasive body, paid in life the deck has in excess, plus a self-feeding drain | "Whenever you cast a spell from exile, Quintorius Kand deals 2 damage to each opponent and you gain 2 life" - the deck's only exile-cast enablers are Chandra, Torch of Defiance's +1 and Chimil's discover, so it whiffs most turns neither is out |
+
+No other Reality Fracture card cleared both bars (clearly better AND a legal OUT slot not already spent) - see Verdicts for the strong near-misses (Sanctum Lurker, Germinate Recruits, Loyal Tutor, Jace's Machinations, The Theorist Jace Beleren) that had no second clean OUT slot once Quintorius Kand was committed to the one swap above.
+
+## Verdicts
+
+- Jace, Multiverse Architect - REJECT — real card advantage ("+1: Draw two cards, then put a card... on the bottom") and can be a commander, but doesn't add a new walker TYPE (Jace already covered) and no clean OUT slot
+- Karn, Argent Defender - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Liliana the Repentant - REJECT — walker-adjacent text but no line strong enough to beat a locked/kept card in its slot
+- Samut, Hazoret's Champion - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Samut, Tyrant of Naktamun - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Lyra, Archangel of Dawn - REJECT — another gain-life payoff, but Well of Lost Dreams (KEEP) and this pass's Niv-Mizzet, Ghost Counsel ADD already cover the slot
+- Lyra, Tolarian Archangel - REJECT — card-draw slot already covered by Well of Lost Dreams (KEEP) and the Jace package; no clean OUT slot
+- Vraska, Soul of Stone - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Vraska, the Cutting Glare - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Karn, Gilded Guardian - REJECT — card-draw slot already covered by Well of Lost Dreams (KEEP) and the Jace package; no clean OUT slot
+- Hexhaven Dueling Arena - REJECT — land; 35 lands locked, no room regardless of text
+- Flourishing Grapple - REJECT — walker-adjacent text but no line strong enough to beat a locked/kept card in its slot
+- Heartwood Crafter // Soul Tether - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Hunter's Axe - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Mabel, Bitter Recluse - REJECT — walker-adjacent text but no line strong enough to beat a locked/kept card in its slot
+- Marwyn, the Clearcutter - REJECT — card-draw slot already covered by Well of Lost Dreams (KEEP) and the Jace package; no clean OUT slot
+- Perfected Theory - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Stingerquill Voxmancer // Vicious Verse - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Yuriko, Hope from the Shadows - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Edgar, Ancient Bloodlord - REJECT — walker-adjacent text but no line strong enough to beat a locked/kept card in its slot
+- Essence Burn - REJECT — walker-adjacent text but no line strong enough to beat a locked/kept card in its slot
+- Fblthp, Impossibly Lost - REJECT — card-draw slot already covered by Well of Lost Dreams (KEEP) and the Jace package; no clean OUT slot
+- Gallia, Tragic Host - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Gallia, the Merrymaker - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Grim Repriser - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Marwyn, the Preserver - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Multiply by Zero - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Paradox Shaper // Omit Variables - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Precise Redaction - REJECT — protection quota already met (Counterspell, Dovin's Veto locked in); no edge
+- Proft, Consulting Detective - REJECT — card-draw slot already covered by Well of Lost Dreams (KEEP) and the Jace package; no clean OUT slot
+- Prophesied End - REJECT — matches the removal already run (Assassin's Trophy/Path/Erode/Atomize/Vraska's Final Mercy) with no synergy edge; no clean OUT slot
+- Refute Destiny - REJECT — matches the removal already run (Assassin's Trophy/Path/Erode/Atomize/Vraska's Final Mercy) with no synergy edge; no clean OUT slot
+- Terminal Criticism - REJECT — matches the removal already run (Assassin's Trophy/Path/Erode/Atomize/Vraska's Final Mercy) with no synergy edge; no clean OUT slot
+- Tomik, Izzet Sparkmage - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Vigorbloom Vanguard // Seed Suture - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Way of the Necromancer - REJECT — an 8th Way (empower Jace 2 ETB) but its ongoing trigger is "Whenever a creature you control dies," and this deck runs very few creatures and no sac outlets, so it rarely fires past the ETB
+- Yoshimaru, Scrappy Stray - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Arni, Humble Scribe - REJECT — card-draw slot already covered by Well of Lost Dreams (KEEP) and the Jace package; no clean OUT slot
+- Break Under Pressure - REJECT — walker-adjacent text but no line strong enough to beat a locked/kept card in its slot
+- Clash of Elements - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Command the Stage - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Danitha, Spear of Agony - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Danitha, Sword of Hope - REJECT — card-draw slot already covered by Well of Lost Dreams (KEEP) and the Jace package; no clean OUT slot
+- Fulminous Forte - REJECT — matches the removal already run (Assassin's Trophy/Path/Erode/Atomize/Vraska's Final Mercy) with no synergy edge; no clean OUT slot
+- Generous Revival - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Koth of the Homestead - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Koth, the Geomancer - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Loot, the Anomaly - REJECT — walker-adjacent text but no line strong enough to beat a locked/kept card in its slot
+- Mabel, Valley Hero - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Pia, Determined Rebuilder - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Primal Witchstalker - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Proft, Sinister Mastermind - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Prudent Fateseer // Peer Review - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Rescue Girl, First Responder - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Restore with Empathy - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Tinybones, Pocket Nuisance - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Way of the Deathbringer - REJECT — a 9th-Way-tier empower Jace 5 with a sac-a-creature walker ability, but this deck runs too few creatures to reliably fuel "you may sacrifice a creature"; no clean OUT slot regardless
+- Winter, Tormented Loner - REJECT — walker-adjacent text but no line strong enough to beat a locked/kept card in its slot
+- Woodwork Prodigy // Soul Tether - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Yoshimaru, Beloved Companion - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Your Fate Ends Here - REJECT — matches the removal already run (Assassin's Trophy/Path/Erode/Atomize/Vraska's Final Mercy) with no synergy edge; no clean OUT slot
+- Arni, Renowned Champion - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Bloombrute - REJECT — "Whenever you gain life, draw a card" (once per turn) is a real payoff but Well of Lost Dreams (KEEP) already fills this exact role at a lower opportunity cost
+- Desperate Futurescribe - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Hapatra, the Desert Frost - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Recursive Recruitment - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Saheeli, Jewel of Avishkar - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Tetsuko Umezawa, Pursuer - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Thalia, the Survivor - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Traxos, Academy Guardian - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Traxos, Scourge Eternal - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Warrior's Blades - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Hapatra, the Desert Fang - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Jiang Yanggu, Alone - REJECT — card-draw slot already covered by Well of Lost Dreams (KEEP) and the Jace package; no clean OUT slot
+- Massacre Girl, Most Wanted - REJECT — walker-adjacent text but no line strong enough to beat a locked/kept card in its slot
+- Saheeli, Consul of Oversight - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Twisted Fates - REJECT — "Destroy target nonland permanent" matches the removal already run (Assassin's Trophy/Path/Erode/Atomize); no edge, no clean OUT slot
+- Winter, Team Player - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Yargle, Goliath of Otaria - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Archive Arbiter - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Kiora of Fire and Ashes - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Mind Meanderer - REJECT — "vigilance as long as you control a Jace planeswalker" plus an ETB fight is fine value, but a generic body with no clean OUT slot
+- Ruric Thar, Biomagus - REJECT — card-draw slot already covered by Well of Lost Dreams (KEEP) and the Jace package; no clean OUT slot
+- Craftwork Crusher - REJECT — matches the removal already run (Assassin's Trophy/Path/Erode/Atomize/Vraska's Final Mercy) with no synergy edge; no clean OUT slot
+- Ruric Thar, Magecrusher - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Ghalta the Immovable - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Room of Refuge - REJECT — land; 35 lands locked, no room regardless of text
+- Artifist Acumen - REJECT — card-draw slot already covered by Well of Lost Dreams (KEEP) and the Jace package; no clean OUT slot
+- Blessed Ghoul - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Emergency Phytomedic // Seed Suture - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Tethermage's Advantage - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Afterthought Sentry - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Compel Brutality - REJECT — "Target planeswalker you control deals damage equal to its loyalty to target creature or planeswalker" is a real removal mode off a big Sarkhan/Elspeth/Ajani Unrelenting, but the deck already runs 8 removal pieces and no clean OUT slot
+- Cryotheory Adept - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Eardrum Rattler - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Fatehold Chronologist // Peer Review - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Ferocity of the Hunt - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Icy Reception - REJECT — protection quota already met (Counterspell, Dovin's Veto locked in); no edge
+- Konstrari Improviser // Soul Tether - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Living Library - REJECT — walker-adjacent text but no line strong enough to beat a locked/kept card in its slot
+- Medic's Kitesail - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Predictive Preparations - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Rank Rat - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Silence the Echo - REJECT — matches the removal already run (Assassin's Trophy/Path/Erode/Atomize/Vraska's Final Mercy) with no synergy edge; no clean OUT slot
+- Skilled Battlecarver - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Something Worth Saving - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Sureshot Sower - REJECT — matches the removal already run (Assassin's Trophy/Path/Erode/Atomize/Vraska's Final Mercy) with no synergy edge; no clean OUT slot
+- Surgical Precision - REJECT — matches the removal already run (Assassin's Trophy/Path/Erode/Atomize/Vraska's Final Mercy) with no synergy edge; no clean OUT slot
+- Surveillance Phantasm - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Twinned Vision - REJECT — card-draw slot already covered by Well of Lost Dreams (KEEP) and the Jace package; no clean OUT slot
+- Unflinching Hortimancer - REJECT — "Whenever you gain life, put a +1/+1 counter on this creature" scales with the lifegain loop but is a fragile, evasion-less 2-drop; no clean OUT slot
+- Void Extrapolator // Omit Variables - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Budding Insurgent - REJECT — card-draw slot already covered by Well of Lost Dreams (KEEP) and the Jace package; no clean OUT slot
+- Cast Away Doubt - REJECT — card-draw slot already covered by Well of Lost Dreams (KEEP) and the Jace package; no clean OUT slot
+- Chandra's Emberling - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Charge the Sanctum - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Divining Duelist - REJECT — card-draw slot already covered by Well of Lost Dreams (KEEP) and the Jace package; no clean OUT slot
+- Graft Surgeon - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Hallway Heckler // Vicious Verse - REJECT — card-draw slot already covered by Well of Lost Dreams (KEEP) and the Jace package; no clean OUT slot
+- Infinite Coursework - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Memory Trap - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Screeching Soulbreaker - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Shatterwing Pegasus - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Sphinx's Approach - REJECT — card-draw slot already covered by Well of Lost Dreams (KEEP) and the Jace package; no clean OUT slot
+- Theoretical Necromancer - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Theorix Metamage // Omit Variables - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Wrath of the Bloodmane - REJECT — matches the removal already run (Assassin's Trophy/Path/Erode/Atomize/Vraska's Final Mercy) with no synergy edge; no clean OUT slot
+- Bestial Incursion - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Blossom-Blessed Angel // Seed Suture - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Extended Absence - REJECT — matches the removal already run (Assassin's Trophy/Path/Erode/Atomize/Vraska's Final Mercy) with no synergy edge; no clean OUT slot
+- Heartstring Puller - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Rampart Hunter - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Semester Foreseer // Peer Review - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Whiplash Wordsmith // Vicious Verse - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Awaken the Inferno - REJECT — matches the removal already run (Assassin's Trophy/Path/Erode/Atomize/Vraska's Final Mercy) with no synergy edge; no clean OUT slot
+- Fateshaper Aspirant - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Tether Technician - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Undulating Witness - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Wrecking Gecko - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Apex Witchstalker - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Vinelasher Adept - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Bloodline Recollector // Ancestral Craving - REJECT — card-draw slot already covered by Well of Lost Dreams (KEEP) and the Jace package; no clean OUT slot
+- Enlightened Confidant - REJECT — another gain-life payoff, but Well of Lost Dreams (KEEP) and this pass's Niv-Mizzet, Ghost Counsel ADD already cover the slot
+- Stingcaster Mage - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Ingris Stingerquill - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Seasoned Cryomancer - REJECT — card-draw slot already covered by Well of Lost Dreams (KEEP) and the Jace package; no clean OUT slot
+- Aerid Konstrari - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Darklight Phoenix - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Denzilore Fatehold - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Hexhaven Invigorator - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- The Theorist, Jace Beleren - REJECT — a third Jace with real card advantage ("you draw a card" every opponent draw step) but doesn't add a new planeswalker TYPE for Tam's X (Jace is already covered by Jace, Memory Adept [locked] and Jace, Reality Sculptor), and no clean OUT slot
+- Kwia Vigorbloom - REJECT — another gain-life payoff, but Well of Lost Dreams (KEEP) and this pass's Niv-Mizzet, Ghost Counsel ADD already cover the slot
+- Overwrite the Multiverse - REJECT — empower Jace value, but no line beyond the Jace-token package already run (Protege's Awakening, Arcane Amphisbaena, Avatar of Burgeoning Echoes, every Way); no clean OUT slot this pass
+- Uldaros Theorix - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Craterclaw Colossus - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Nissa, Leyline Tamer - REJECT — card-draw slot already covered by Well of Lost Dreams (KEEP) and the Jace package; no clean OUT slot
+- Return to the Light Realms - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Emrakul, the Exigent Doom - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Hall of Echoes - REJECT — land; 35 lands locked, no room regardless of text
+- Roiling Canopy - REJECT — land; 35 lands locked, no room regardless of text
+- Theorist's Sanctum - REJECT — land; 35 lands locked, no room regardless of text
+- Turbulent Crater - REJECT — land; 35 lands locked, no room regardless of text
+- Turbulent Shore - REJECT — land; 35 lands locked, no room regardless of text
+- Turbulent Wetlands - REJECT — land; 35 lands locked, no room regardless of text
+- Ajani's Anguish - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Dark Matter Manipulator - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Diviner of Victory // Unwind History - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Guiding Hydra - REJECT — counter-doubling-adjacent ("remove a +1/+1 counter... put a +1/+1 counter on each other creature") but keys off +1/+1 counters, not loyalty counters — this deck barely has other creatures to spread it to
+- Lich's Relic - REJECT — walker-adjacent text but no line strong enough to beat a locked/kept card in its slot
+- Loyal Tutor - REJECT — "Search your library for a planeswalker card... put it on top" is efficient (1 mana, instant) but Entrust the Spark already fills the planeswalker-tutor role and this deck has no second clean OUT slot
+- Pompous Battlemage // Improvised Act - REJECT — card-draw slot already covered by Well of Lost Dreams (KEEP) and the Jace package; no clean OUT slot
+- Carnivorous Cultivator // Enroot - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Extrapolate the Impossible - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Gideon's Memorial - REJECT — walker-adjacent text but no line strong enough to beat a locked/kept card in its slot
+- Master of Barbs - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Proctor of Potential - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Puppet Crafting - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Solarium Sentry - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Solitary Cell - REJECT — card-draw slot already covered by Well of Lost Dreams (KEEP) and the Jace package; no clean OUT slot
+- Stinging Vitriol - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Theorist's Proxy - REJECT — empower Jace value, but no line beyond the Jace-token package already run (Protege's Awakening, Arcane Amphisbaena, Avatar of Burgeoning Echoes, every Way); no clean OUT slot this pass
+- Codie, Ravenous Codex - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Cruel Calculations - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Frostbite Pyromental - REJECT — card-draw slot already covered by Well of Lost Dreams (KEEP) and the Jace package; no clean OUT slot
+- Gardenize - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Germinate Recruits - REJECT — "Create X 2/2... where X is the amount of life you gained this turn" scales hard off Way of the Mentor's loop, but same problem: no second clean OUT slot this pass
+- Gideon the Oathless - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Jace's Machinations - REJECT — "Empower Jace 8" is huge, but {2}{U} in isolation with no other line to the plan, and no clean OUT slot left after Niv-Mizzet/Quintorius
+- Pyre Rhymer // Molten Tide - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Sanctum Lurker - REJECT — "Planeswalkers you control aren't put into their owners' graveyards for having 0 loyalty" plus a repeatable "[+2]: deal 1 to each opponent, gain 1 life" on every walker is genuinely strong, but no clean weak slot to cut it in for without touching a locked/kept card — Quintorius Kand is already spent on Niv-Mizzet
+- Teferi's Reproach - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Tenured Tethermage - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Variable Chaser // Arc of Fortune - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Curse-Marred Demon - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Null Summoner - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Sphinx of False Conclusions - REJECT — card-draw slot already covered by Well of Lost Dreams (KEEP) and the Jace package; no clean OUT slot
+- Draconic Visitor - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Rise of the Deathbringer - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Dack Fayden, Helping Hand - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Jhoira, Weatherlight Corsair - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Niv-Mizzet, Ghost Counsel - ADD, tier IF-OWNED (rare) — "Whenever you gain life, you may pay that much life. If you do, draw that many cards" is Well of Lost Dreams's effect on a 4/4 flying body, paid in life (which the deck has in excess from Way of the Mentor/Paradox), plus "{T}: Each opponent loses 1 life and you gain 1 life" is a repeatable drain that re-feeds its own draw trigger and every other lifegain payoff. OUT: Quintorius Kand
+- Tamiyo, Upriser Crowned - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Venser, Fervent Forger - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Face Yourself - REJECT — walker-adjacent text but no line strong enough to beat a locked/kept card in its slot
+- Kindred Judgment - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Ob Nixilis, the Ascended - REJECT — another gain-life payoff, but Well of Lost Dreams (KEEP) and this pass's Niv-Mizzet, Ghost Counsel ADD already cover the slot
+- Omnath, Locus of the Void - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Avacyn, Angel of Horror - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Darksteel Angel - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- The Ur-Sphinx - REJECT — no line to the proliferate/loyalty/lifegain plan; weaker than a locked or kept card in its slot
+- Memnarch, the Warden - REJECT — card-draw slot already covered by Well of Lost Dreams (KEEP) and the Jace package; no clean OUT slot

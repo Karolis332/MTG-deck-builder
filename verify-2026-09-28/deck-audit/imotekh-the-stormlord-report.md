@@ -177,3 +177,29 @@ oracle-text matcher doesn't catch. This audit's swaps hold that ratio exactly �
 value but weren't picked up by the same heuristic either.
 Per the brief, a `plan` FAIL that the gate has no accurate signal for is acceptable; every other
 line is PASS except the pre-existing lands WARN above.
+
+## 6. Reality Fracture pass
+Baseline per REFUTE.md §4: current plan is the 5 KEEP swaps (Necrotic Ooze, Noxious Gearhulk,
+Dread Presence, Puppeteer Clique, Night's Whisper in; Flayed One, Canoptek Wraith, Cryptek,
+Lychguard, Ominous Harvest out). Razorlash Transmogrant, Chronomancer, and Imp's Mischief stay.
+
+- **Eye of Jace** — REJECT: "sacrifice this artifact" puts the card *into* the graveyard, not out
+  of it — no Imotekh trigger, and the payoff (2 damage/2 life) is gated behind 7+ cards in the
+  graveyard. Umbral Collar Zealot's sac-for-surveil is still the better graveyard-feeding 1-drop
+  in that slot (its sacrificed artifact sets up an actual future leave-the-graveyard trigger via
+  Chronomancer/Razorlash/Technomancer).
+- **Keeper of the Quiet Hour** — REJECT: "empower Jace 2" builds a Jace planeswalker token — pure
+  superfriends value with zero artifact-recursion or Necron text; a vanilla 3-mana artifact-creature
+  body with no attached payoff doesn't beat anything currently in the 100.
+- **Murmuring Volume** — REJECT: "{T}: Add one mana of any color" is fixing this mono-B deck (32
+  Swamp, no other colors) doesn't need; the deck already runs 6 mana rocks plus Wayfarer's Bauble.
+  The loot mode is real but not enough alone to unseat a kept card.
+- **Solve for Disappointment** — REJECT: "reveal their hand… discards that card" is proactive
+  disruption, a category the deck doesn't run and doesn't need to start now — removal is already
+  at 8 spells and 2 wipes. "Empower Jace 1" is dead text with no other superfriends piece in the
+  100.
+- **Teyo, Diamondblade Mage** — REJECT: "target permanent you control gains deathtouch" is a
+  one-shot combat trick, not protection — it doesn't stop removal or targeting, and Teyo isn't an
+  artifact, so it doesn't feed the graveyard-leaves trigger either. No slot it clearly outclasses.
+
+No adds from this pass.
