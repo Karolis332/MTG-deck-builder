@@ -105,7 +105,7 @@ const BENCH: [string, string][] = [
   ['Fatehold Charm', 'Thrummingbird took the slot: a 2-mana flier that proliferates on every hit (loyalty on every walker, Jace counters, Vraska poison).'],
   ['Shatter the Sky', 'Fumigate took the slot: its life gain triggers Way of the Mentor, and it gives opponents no cards.'],
   ['Cultivate', 'Great Divide Guide took the slot: 2 mana, and every land taps for any colour. Cultivate needs basics; the deck has four.'],
-  ['Cinder Glade', 'Shivan Reef took the slot: enters untapped; U/R was the thinnest colour pair.'],
+  ['Konstrari Annex', 'Owned but not found yet; Cinder Glade holds the R/G slot. Put it back in when found (untapped once a walker is out).'],
   ['Sunken Hollow', 'Enters tapped with only four basics; Shipwreck Marsh and Theorix Annex already cover U/B.'],
   ['Overwhelming Forces', 'Eight mana to wipe one opponent; the cheaper wipes cover it.'],
   ['Kasmina, Enigmatic Mentor', 'Jace, Memory Adept took the slot: a second Jace for the 25-loyalty win, plus card draw.'],
