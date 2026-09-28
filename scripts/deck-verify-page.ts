@@ -3,18 +3,23 @@
  * proposed Commander list are physically sleeved, card by card, and exporting the confirmed list.
  *
  *   MTG_DB_DIR="$APPDATA/the-black-grimoire/data" npx tsx scripts/deck-verify-page.ts <list.txt> "<Deck Title>"
+ *     [--out <file.html>]   write only this file instead of the two default locations
+ *     [--no-commander]      first line is an ordinary card (pull lists, not decks)
  */
 import fs from 'fs';
 import path from 'path';
 import Database from 'better-sqlite3';
 
-const [, , inputFile, title] = process.argv;
+const args = process.argv.slice(2);
+const outArg = args.includes('--out') ? args[args.indexOf('--out') + 1] : undefined;
+const NO_COMMANDER = args.includes('--no-commander');
+const [inputFile, title] = args.filter((a, i) => !a.startsWith('--') && args[i - 1] !== '--out');
 if (!inputFile || !title) {
   console.error('usage: npx tsx scripts/deck-verify-page.ts <list.txt> "<Deck Title>"');
   process.exit(1);
 }
 
-const OUT = [
+const OUT = outArg ? [path.resolve(outArg)] : [
   path.resolve(__dirname, '..', 'decks', 'paper', 'deck-verify.html'),
   'C:/Users/QuLeR/Desktop/MTG collection/MTG decks/deck-verify.html',
 ];
@@ -66,7 +71,7 @@ const tiles: Tile[] = lines.map((line, i) => {
   const row = cardQ.get(line.name, `${line.name} // %`) as
     | { name: string; cmc: number; type_line: string | null; mana_cost: string | null; image_uri_normal: string | null }
     | undefined;
-  const group: Group = i === 0 ? 'Commander' : row ? classify(row.type_line) : 'Unresolved';
+  const group: Group = i === 0 && !NO_COMMANDER ? 'Commander' : row ? classify(row.type_line) : 'Unresolved';
   return {
     name: row?.name ?? line.name,
     quantity: line.quantity,
@@ -299,7 +304,6 @@ for (const out of OUT) {
   fs.writeFileSync(out, html, 'utf8');
 }
 
-console.log(`Wrote ${OUT[0]}`);
-console.log(`Wrote ${OUT[1]}`);
+for (const out of OUT) console.log(`Wrote ${out}`);
 console.log(`Tiles: ${tiles.length}`);
 if (unresolved.length) console.log(`Unresolved: ${unresolved.join(', ')}`);

@@ -1,0 +1,436 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Deck Verify — Superfriends — keep from Blight Curse</title>
+<style>
+  :root { color-scheme: dark; }
+  body { background: #141414; color: #ddd; font-family: system-ui, sans-serif; margin: 0; padding: 1.5rem; }
+  header { position: sticky; top: 0; background: #141414; padding-bottom: 1rem; border-bottom: 1px solid #333; margin-bottom: 1rem; z-index: 5; }
+  h1 { font-size: 1.3rem; margin: 0 0 0.5rem; }
+  .counters { font-size: 1rem; margin-bottom: 0.75rem; }
+  .counters span { margin-right: 1.2rem; }
+  .ok { color: #6bd66b; } .no { color: #e06b6b; } .unk { color: #d6c06b; } .land { color: #8bb8d6; }
+  button { background: #2a2a2a; color: #ddd; border: 1px solid #444; padding: 0.4rem 0.8rem; margin-right: 0.5rem; border-radius: 4px; cursor: pointer; font-size: 0.85rem; }
+  button:hover { background: #3a3a3a; }
+  textarea { width: 100%; max-width: 500px; background: #1e1e1e; color: #ddd; border: 1px solid #444; border-radius: 4px; padding: 0.5rem; font-family: inherit; margin-top: 0.5rem; }
+  .group h2 { font-size: 1.05rem; border-bottom: 1px solid #333; padding-bottom: 0.3rem; margin-top: 2rem; }
+  .tiles { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+  .tile { width: 150px; background: #1e1e1e; border: 2px solid #555; border-radius: 6px; padding: 0.4rem; cursor: pointer; user-select: none; }
+  .tile[data-state="checked"] { border-color: #4caf50; }
+  .tile[data-state="rejected"] { border-color: #d13c3c; }
+  .tile img { width: 100%; border-radius: 4px; display: block; }
+  .placeholder { width: 100%; height: 200px; background: #333; border-radius: 4px; display: flex; align-items: center; justify-content: center; text-align: center; font-size: 0.75rem; padding: 0.3rem; }
+  .tile-name { font-size: 0.8rem; margin-top: 0.3rem; }
+  .tile-meta { font-size: 0.7rem; color: #999; }
+  .qty { display: block; font-size: 0.7rem; margin-top: 0.2rem; }
+  .qty-input { width: 40px; background: #141414; color: #ddd; border: 1px solid #444; }
+  footer { margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #333; font-size: 0.75rem; color: #777; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Deck Verify — Superfriends — keep from Blight Curse</h1>
+  <div class="counters">
+    <span class="ok">✅ confirmed <span id="c-ok">0</span> / <span id="c-total">38</span></span>
+    <span class="no">❌ not in deck <span id="c-no">0</span></span>
+    <span class="unk">❓ unchecked <span id="c-unk">0</span></span>
+    <span class="land">lands <span id="c-lands">0</span></span>
+  </div>
+  <button id="btn-copy-confirmed">Copy confirmed list</button>
+  <button id="btn-copy-report">Copy missing/extra report</button>
+  <button id="btn-mark-all">Mark all unchecked as ✅</button>
+  <button id="btn-reset">Reset</button>
+  <div>
+    <label for="extras">Extra cards in the sleeves not on this list:</label><br>
+    <textarea id="extras" rows="4" placeholder="One name per line"></textarea>
+  </div>
+</header>
+<section class="group">
+    <h2>Creatures <span class="group-count" data-group="Creatures">(4)</span></h2>
+    <div class="tiles">
+      <div class="tile" data-idx="2" data-state="unchecked">
+    <img src="https://cards.scryfall.io/normal/front/b/4/b4042db8-6032-49a2-bc96-ad15f55db6c3.jpg?1557576899" loading="lazy" alt="Evolution Sage">
+    <div class="tile-name">Evolution Sage</div>
+    <div class="tile-meta">{2}{G} · MV 3</div>
+    
+  </div>
+      <div class="tile" data-idx="8" data-state="unchecked">
+    <img src="https://cards.scryfall.io/normal/front/e/8/e802cfe1-45e0-47cd-8745-363ccc0f2af8.jpg?1783911524" loading="lazy" alt="Ignoble Hierarch">
+    <div class="tile-name">Ignoble Hierarch</div>
+    <div class="tile-meta">{G} · MV 1</div>
+    
+  </div>
+      <div class="tile" data-idx="9" data-state="unchecked">
+    <img src="https://cards.scryfall.io/normal/front/9/0/9011936a-ec69-4c1b-ae8e-c2d212047ca4.jpg?1783904547" loading="lazy" alt="Channeler Initiate">
+    <div class="tile-name">Channeler Initiate</div>
+    <div class="tile-meta">{1}{G} · MV 2</div>
+    
+  </div>
+      <div class="tile" data-idx="21" data-state="unchecked">
+    <img src="https://cards.scryfall.io/normal/front/6/8/682b1b62-338a-49d1-9d4e-2d8ee2e6fc76.jpg?1783904544" loading="lazy" alt="Glissa Sunslayer">
+    <div class="tile-name">Glissa Sunslayer</div>
+    <div class="tile-meta">{1}{B}{G} · MV 3</div>
+    
+  </div>
+    </div>
+  </section>
+<section class="group">
+    <h2>Instants <span class="group-count" data-group="Instants">(5)</span></h2>
+    <div class="tiles">
+      <div class="tile" data-idx="10" data-state="unchecked">
+    <img src="https://cards.scryfall.io/normal/front/5/e/5e530961-1cb5-4208-ac49-f0963bac0134.jpg?1767731260" loading="lazy" alt="Assassin's Trophy">
+    <div class="tile-name">Assassin's Trophy</div>
+    <div class="tile-meta">{B}{G} · MV 2</div>
+    
+  </div>
+      <div class="tile" data-idx="11" data-state="unchecked">
+    <img src="https://cards.scryfall.io/normal/front/a/d/ad6ed9f1-2014-49e2-91c6-2b55c8d60cdc.jpg?1783904538" loading="lazy" alt="Putrefy">
+    <div class="tile-name">Putrefy</div>
+    <div class="tile-meta">{1}{B}{G} · MV 3</div>
+    
+  </div>
+      <div class="tile" data-idx="12" data-state="unchecked">
+    <img src="https://cards.scryfall.io/normal/front/2/1/21f579c9-4b74-4461-8812-dcfd68fd2b97.jpg?1767731390" loading="lazy" alt="Terminate">
+    <div class="tile-name">Terminate</div>
+    <div class="tile-meta">{B}{R} · MV 2</div>
+    
+  </div>
+      <div class="tile" data-idx="13" data-state="unchecked">
+    <img src="https://cards.scryfall.io/normal/front/2/4/2430acb7-b371-4a03-88e7-0660a51836dd.jpg?1767730597" loading="lazy" alt="Infernal Grasp">
+    <div class="tile-name">Infernal Grasp</div>
+    <div class="tile-meta">{1}{B} · MV 2</div>
+    
+  </div>
+      <div class="tile" data-idx="14" data-state="unchecked">
+    <img src="https://cards.scryfall.io/normal/front/1/a/1a13437b-e0c7-4ca9-a0e2-b8cb1b5813ec.jpg?1783911521" loading="lazy" alt="Fire Covenant">
+    <div class="tile-name">Fire Covenant</div>
+    <div class="tile-meta">{1}{B}{R} · MV 3</div>
+    
+  </div>
+    </div>
+  </section>
+<section class="group">
+    <h2>Sorceries <span class="group-count" data-group="Sorceries">(4)</span></h2>
+    <div class="tiles">
+      <div class="tile" data-idx="15" data-state="unchecked">
+    <img src="https://cards.scryfall.io/normal/front/b/6/b6c0d5df-1195-49c1-9b8f-befed9faa401.jpg?1767731076" loading="lazy" alt="Chain Reaction">
+    <div class="tile-name">Chain Reaction</div>
+    <div class="tile-meta">{2}{R}{R} · MV 4</div>
+    
+  </div>
+      <div class="tile" data-idx="16" data-state="unchecked">
+    <img src="https://cards.scryfall.io/normal/front/e/d/eda98f51-a918-4ef7-a123-7d4200c79620.jpg?1783904562" loading="lazy" alt="Black Sun's Zenith">
+    <div class="tile-name">Black Sun's Zenith</div>
+    <div class="tile-meta">{X}{B}{B} · MV 2</div>
+    
+  </div>
+      <div class="tile" data-idx="18" data-state="unchecked">
+    <img src="https://cards.scryfall.io/normal/front/f/a/faa82f09-0693-4cc6-8770-8c6a35aa627b.jpg?1783904558" loading="lazy" alt="Painful Truths">
+    <div class="tile-name">Painful Truths</div>
+    <div class="tile-meta">{2}{B} · MV 3</div>
+    
+  </div>
+      <div class="tile" data-idx="19" data-state="unchecked">
+    <img src="https://cards.scryfall.io/normal/front/c/6/c6627166-bf0e-49f2-9077-252cfb0fab4d.jpg?1767730979" loading="lazy" alt="Night's Whisper">
+    <div class="tile-name">Night's Whisper</div>
+    <div class="tile-meta">{1}{B} · MV 2</div>
+    
+  </div>
+    </div>
+  </section>
+<section class="group">
+    <h2>Artifacts <span class="group-count" data-group="Artifacts">(6)</span></h2>
+    <div class="tiles">
+      <div class="tile" data-idx="3" data-state="unchecked">
+    <img src="https://cards.scryfall.io/normal/front/e/d/edd7f08a-3baf-4fb0-921e-b0e7b4a1a545.jpg?1783904529" loading="lazy" alt="Contagion Clasp">
+    <div class="tile-name">Contagion Clasp</div>
+    <div class="tile-meta">{2} · MV 2</div>
+    
+  </div>
+      <div class="tile" data-idx="4" data-state="unchecked">
+    <img src="https://cards.scryfall.io/normal/front/0/4/04002706-2236-4b79-bdea-4f263e43cb9c.jpg?1767730264" loading="lazy" alt="Sol Ring">
+    <div class="tile-name">Sol Ring</div>
+    <div class="tile-meta">{1} · MV 1</div>
+    
+  </div>
+      <div class="tile" data-idx="5" data-state="unchecked">
+    <img src="https://cards.scryfall.io/normal/front/a/a/aa9e7f3c-e752-4cee-9e9d-fae38ba27dc9.jpg?1767730206" loading="lazy" alt="Arcane Signet">
+    <div class="tile-name">Arcane Signet</div>
+    <div class="tile-meta">{2} · MV 2</div>
+    
+  </div>
+      <div class="tile" data-idx="6" data-state="unchecked">
+    <img src="https://cards.scryfall.io/normal/front/a/0/a0d50603-e31f-4cd7-b4b6-49847d99eb2e.jpg?1783904531" loading="lazy" alt="Commander's Sphere">
+    <div class="tile-name">Commander's Sphere</div>
+    <div class="tile-meta">{3} · MV 3</div>
+    
+  </div>
+      <div class="tile" data-idx="7" data-state="unchecked">
+    <img src="https://cards.scryfall.io/normal/front/3/7/3758af07-68ed-42da-8a13-ec321e7cd06e.jpg?1783904601" loading="lazy" alt="Wickersmith's Tools">
+    <div class="tile-name">Wickersmith's Tools</div>
+    <div class="tile-meta">{3} · MV 3</div>
+    
+  </div>
+      <div class="tile" data-idx="20" data-state="unchecked">
+    <img src="https://cards.scryfall.io/normal/front/7/b/7b696878-bf6c-4323-baa5-93c44dde075e.jpg?1783904531" loading="lazy" alt="Chimil, the Inner Sun">
+    <div class="tile-name">Chimil, the Inner Sun</div>
+    <div class="tile-meta">{6} · MV 6</div>
+    
+  </div>
+    </div>
+  </section>
+<section class="group">
+    <h2>Enchantments <span class="group-count" data-group="Enchantments">(1)</span></h2>
+    <div class="tiles">
+      <div class="tile" data-idx="17" data-state="unchecked">
+    <img src="https://cards.scryfall.io/normal/front/4/1/41802f18-7d46-431a-acb3-dbcc82eb415a.jpg?1783904539" loading="lazy" alt="Binding the Old Gods">
+    <div class="tile-name">Binding the Old Gods</div>
+    <div class="tile-meta">{2}{B}{G} · MV 4</div>
+    
+  </div>
+    </div>
+  </section>
+<section class="group">
+    <h2>Planeswalkers & Battles <span class="group-count" data-group="Planeswalkers & Battles">(2)</span></h2>
+    <div class="tiles">
+      <div class="tile" data-idx="0" data-state="unchecked">
+    <img src="https://cards.scryfall.io/normal/front/6/f/6f874b0e-32e3-421f-8109-522638b3f38d.jpg?1783904559" loading="lazy" alt="Liliana, Death Wielder">
+    <div class="tile-name">Liliana, Death Wielder</div>
+    <div class="tile-meta">{5}{B}{B} · MV 7</div>
+    
+  </div>
+      <div class="tile" data-idx="1" data-state="unchecked">
+    <img src="https://cards.scryfall.io/normal/front/9/f/9f1fa1c5-ff87-4bbc-89aa-dbebc91eada0.jpg?1783904555" loading="lazy" alt="Vraska, Betrayal's Sting">
+    <div class="tile-name">Vraska, Betrayal's Sting</div>
+    <div class="tile-meta">{4}{B}{B/P} · MV 6</div>
+    
+  </div>
+    </div>
+  </section>
+<section class="group">
+    <h2>Lands <span class="group-count" data-group="Lands">(16)</span></h2>
+    <div class="tiles">
+      <div class="tile" data-idx="22" data-state="unchecked">
+    <img src="https://cards.scryfall.io/normal/front/d/a/da4d9f44-9079-4144-8dd9-076be04032d4.jpg?1767730254" loading="lazy" alt="Command Tower">
+    <div class="tile-name">Command Tower</div>
+    <div class="tile-meta"> · MV 0</div>
+    
+  </div>
+      <div class="tile" data-idx="23" data-state="unchecked">
+    <img src="https://cards.scryfall.io/normal/front/d/c/dc0a1bc1-ba94-4494-a196-5363fde85194.jpg?1767731565" loading="lazy" alt="Exotic Orchard">
+    <div class="tile-name">Exotic Orchard</div>
+    <div class="tile-meta"> · MV 0</div>
+    
+  </div>
+      <div class="tile" data-idx="24" data-state="unchecked">
+    <img src="https://cards.scryfall.io/normal/front/3/b/3b792a6a-beac-4d4a-91b6-f5a5e3539ecd.jpg?1767731634" loading="lazy" alt="Path of Ancestry">
+    <div class="tile-name">Path of Ancestry</div>
+    <div class="tile-meta"> · MV 0</div>
+    
+  </div>
+      <div class="tile" data-idx="25" data-state="unchecked">
+    <img src="https://cards.scryfall.io/normal/front/5/5/55187461-2ff3-424b-85d5-2ca09567d44e.jpg?1767731683" loading="lazy" alt="Savage Lands">
+    <div class="tile-name">Savage Lands</div>
+    <div class="tile-meta"> · MV 0</div>
+    
+  </div>
+      <div class="tile" data-idx="26" data-state="unchecked">
+    <img src="https://cards.scryfall.io/normal/front/0/c/0c20aa48-58a0-4dee-970f-ba1292affa28.jpg?1767732023" loading="lazy" alt="Woodland Cemetery">
+    <div class="tile-name">Woodland Cemetery</div>
+    <div class="tile-meta"> · MV 0</div>
+    
+  </div>
+      <div class="tile" data-idx="27" data-state="unchecked">
+    <img src="https://cards.scryfall.io/normal/front/9/2/92964d76-3a01-4ab6-abf9-66b754708f90.jpg?1767731551" loading="lazy" alt="Dragonskull Summit">
+    <div class="tile-name">Dragonskull Summit</div>
+    <div class="tile-meta"> · MV 0</div>
+    
+  </div>
+      <div class="tile" data-idx="28" data-state="unchecked">
+    <img src="https://cards.scryfall.io/normal/front/b/c/bc0f449a-01e2-4c22-8eb0-17ad1efb62e4.jpg?1767731677" loading="lazy" alt="Rootbound Crag">
+    <div class="tile-name">Rootbound Crag</div>
+    <div class="tile-meta"> · MV 0</div>
+    
+  </div>
+      <div class="tile" data-idx="29" data-state="unchecked">
+    <img src="https://cards.scryfall.io/normal/front/8/2/82253d45-587b-48a9-b6dc-e372f9adb2a6.jpg?1767730304" loading="lazy" alt="Vernal Fen">
+    <div class="tile-name">Vernal Fen</div>
+    <div class="tile-meta"> · MV 0</div>
+    
+  </div>
+      <div class="tile" data-idx="30" data-state="unchecked">
+    <img src="https://cards.scryfall.io/normal/front/3/0/306a7feb-f254-4ef1-a813-709601e87905.jpg?1767731529" loading="lazy" alt="Cinder Glade">
+    <div class="tile-name">Cinder Glade</div>
+    <div class="tile-meta"> · MV 0</div>
+    
+  </div>
+      <div class="tile" data-idx="31" data-state="unchecked">
+    <img src="https://cards.scryfall.io/normal/front/d/6/d6890462-aeb0-4356-93dc-b2eda0df0c0e.jpg?1767731689" loading="lazy" alt="Smoldering Marsh">
+    <div class="tile-name">Smoldering Marsh</div>
+    <div class="tile-meta"> · MV 0</div>
+    
+  </div>
+      <div class="tile" data-idx="32" data-state="unchecked">
+    <img src="https://cards.scryfall.io/normal/front/8/9/89891685-d4cf-4aaf-8179-210ed135f171.jpg?1767730315" loading="lazy" alt="Festering Thicket">
+    <div class="tile-name">Festering Thicket</div>
+    <div class="tile-meta"> · MV 0</div>
+    
+  </div>
+      <div class="tile" data-idx="33" data-state="unchecked">
+    <img src="https://cards.scryfall.io/normal/front/d/2/d2ba7cfa-36f2-410f-80c3-5a06f4b48372.jpg?1767731536" loading="lazy" alt="Canyon Slough">
+    <div class="tile-name">Canyon Slough</div>
+    <div class="tile-meta"> · MV 0</div>
+    
+  </div>
+      <div class="tile" data-idx="34" data-state="unchecked">
+    <img src="https://cards.scryfall.io/normal/front/a/d/ad7f87dd-1c43-4b6f-9d68-cc09ef76dbc2.jpg?1783904519" loading="lazy" alt="Sheltered Thicket">
+    <div class="tile-name">Sheltered Thicket</div>
+    <div class="tile-meta"> · MV 0</div>
+    
+  </div>
+      <div class="tile" data-idx="35" data-state="unchecked">
+    <img src="https://cards.scryfall.io/normal/front/8/c/8c632984-5176-4c37-91df-6577cc294b85.jpg?1767863461" loading="lazy" alt="Evolving Wilds">
+    <div class="tile-name">Evolving Wilds</div>
+    <div class="tile-meta"> · MV 0</div>
+    
+  </div>
+      <div class="tile" data-idx="36" data-state="unchecked">
+    <img src="https://cards.scryfall.io/normal/front/0/b/0bea079a-a972-4988-a561-9783b2515166.jpg?1767731713" loading="lazy" alt="Terramorphic Expanse">
+    <div class="tile-name">Terramorphic Expanse</div>
+    <div class="tile-meta"> · MV 0</div>
+    
+  </div>
+      <div class="tile" data-idx="37" data-state="unchecked">
+    <img src="https://cards.scryfall.io/normal/front/6/5/65ce9590-87c0-4057-bddb-fadc0de552f6.jpg?1783904521" loading="lazy" alt="Riveteers Overlook">
+    <div class="tile-name">Riveteers Overlook</div>
+    <div class="tile-meta"> · MV 0</div>
+    
+  </div>
+    </div>
+  </section>
+<footer>
+  Source: decks\paper\proposals\superfriends-keep-from-blight-curse.txt · generated 2026-09-28T07:51:46.212Z
+</footer>
+<script>
+const TILES = [{"name":"Liliana, Death Wielder","quantity":1,"cmc":7,"manaCost":"{5}{B}{B}","img":"https://cards.scryfall.io/normal/front/6/f/6f874b0e-32e3-421f-8109-522638b3f38d.jpg?1783904559","group":"Planeswalkers & Battles","resolved":true},{"name":"Vraska, Betrayal's Sting","quantity":1,"cmc":6,"manaCost":"{4}{B}{B/P}","img":"https://cards.scryfall.io/normal/front/9/f/9f1fa1c5-ff87-4bbc-89aa-dbebc91eada0.jpg?1783904555","group":"Planeswalkers & Battles","resolved":true},{"name":"Evolution Sage","quantity":1,"cmc":3,"manaCost":"{2}{G}","img":"https://cards.scryfall.io/normal/front/b/4/b4042db8-6032-49a2-bc96-ad15f55db6c3.jpg?1557576899","group":"Creatures","resolved":true},{"name":"Contagion Clasp","quantity":1,"cmc":2,"manaCost":"{2}","img":"https://cards.scryfall.io/normal/front/e/d/edd7f08a-3baf-4fb0-921e-b0e7b4a1a545.jpg?1783904529","group":"Artifacts","resolved":true},{"name":"Sol Ring","quantity":1,"cmc":1,"manaCost":"{1}","img":"https://cards.scryfall.io/normal/front/0/4/04002706-2236-4b79-bdea-4f263e43cb9c.jpg?1767730264","group":"Artifacts","resolved":true},{"name":"Arcane Signet","quantity":1,"cmc":2,"manaCost":"{2}","img":"https://cards.scryfall.io/normal/front/a/a/aa9e7f3c-e752-4cee-9e9d-fae38ba27dc9.jpg?1767730206","group":"Artifacts","resolved":true},{"name":"Commander's Sphere","quantity":1,"cmc":3,"manaCost":"{3}","img":"https://cards.scryfall.io/normal/front/a/0/a0d50603-e31f-4cd7-b4b6-49847d99eb2e.jpg?1783904531","group":"Artifacts","resolved":true},{"name":"Wickersmith's Tools","quantity":1,"cmc":3,"manaCost":"{3}","img":"https://cards.scryfall.io/normal/front/3/7/3758af07-68ed-42da-8a13-ec321e7cd06e.jpg?1783904601","group":"Artifacts","resolved":true},{"name":"Ignoble Hierarch","quantity":1,"cmc":1,"manaCost":"{G}","img":"https://cards.scryfall.io/normal/front/e/8/e802cfe1-45e0-47cd-8745-363ccc0f2af8.jpg?1783911524","group":"Creatures","resolved":true},{"name":"Channeler Initiate","quantity":1,"cmc":2,"manaCost":"{1}{G}","img":"https://cards.scryfall.io/normal/front/9/0/9011936a-ec69-4c1b-ae8e-c2d212047ca4.jpg?1783904547","group":"Creatures","resolved":true},{"name":"Assassin's Trophy","quantity":1,"cmc":2,"manaCost":"{B}{G}","img":"https://cards.scryfall.io/normal/front/5/e/5e530961-1cb5-4208-ac49-f0963bac0134.jpg?1767731260","group":"Instants","resolved":true},{"name":"Putrefy","quantity":1,"cmc":3,"manaCost":"{1}{B}{G}","img":"https://cards.scryfall.io/normal/front/a/d/ad6ed9f1-2014-49e2-91c6-2b55c8d60cdc.jpg?1783904538","group":"Instants","resolved":true},{"name":"Terminate","quantity":1,"cmc":2,"manaCost":"{B}{R}","img":"https://cards.scryfall.io/normal/front/2/1/21f579c9-4b74-4461-8812-dcfd68fd2b97.jpg?1767731390","group":"Instants","resolved":true},{"name":"Infernal Grasp","quantity":1,"cmc":2,"manaCost":"{1}{B}","img":"https://cards.scryfall.io/normal/front/2/4/2430acb7-b371-4a03-88e7-0660a51836dd.jpg?1767730597","group":"Instants","resolved":true},{"name":"Fire Covenant","quantity":1,"cmc":3,"manaCost":"{1}{B}{R}","img":"https://cards.scryfall.io/normal/front/1/a/1a13437b-e0c7-4ca9-a0e2-b8cb1b5813ec.jpg?1783911521","group":"Instants","resolved":true},{"name":"Chain Reaction","quantity":1,"cmc":4,"manaCost":"{2}{R}{R}","img":"https://cards.scryfall.io/normal/front/b/6/b6c0d5df-1195-49c1-9b8f-befed9faa401.jpg?1767731076","group":"Sorceries","resolved":true},{"name":"Black Sun's Zenith","quantity":1,"cmc":2,"manaCost":"{X}{B}{B}","img":"https://cards.scryfall.io/normal/front/e/d/eda98f51-a918-4ef7-a123-7d4200c79620.jpg?1783904562","group":"Sorceries","resolved":true},{"name":"Binding the Old Gods","quantity":1,"cmc":4,"manaCost":"{2}{B}{G}","img":"https://cards.scryfall.io/normal/front/4/1/41802f18-7d46-431a-acb3-dbcc82eb415a.jpg?1783904539","group":"Enchantments","resolved":true},{"name":"Painful Truths","quantity":1,"cmc":3,"manaCost":"{2}{B}","img":"https://cards.scryfall.io/normal/front/f/a/faa82f09-0693-4cc6-8770-8c6a35aa627b.jpg?1783904558","group":"Sorceries","resolved":true},{"name":"Night's Whisper","quantity":1,"cmc":2,"manaCost":"{1}{B}","img":"https://cards.scryfall.io/normal/front/c/6/c6627166-bf0e-49f2-9077-252cfb0fab4d.jpg?1767730979","group":"Sorceries","resolved":true},{"name":"Chimil, the Inner Sun","quantity":1,"cmc":6,"manaCost":"{6}","img":"https://cards.scryfall.io/normal/front/7/b/7b696878-bf6c-4323-baa5-93c44dde075e.jpg?1783904531","group":"Artifacts","resolved":true},{"name":"Glissa Sunslayer","quantity":1,"cmc":3,"manaCost":"{1}{B}{G}","img":"https://cards.scryfall.io/normal/front/6/8/682b1b62-338a-49d1-9d4e-2d8ee2e6fc76.jpg?1783904544","group":"Creatures","resolved":true},{"name":"Command Tower","quantity":1,"cmc":0,"manaCost":"","img":"https://cards.scryfall.io/normal/front/d/a/da4d9f44-9079-4144-8dd9-076be04032d4.jpg?1767730254","group":"Lands","resolved":true},{"name":"Exotic Orchard","quantity":1,"cmc":0,"manaCost":"","img":"https://cards.scryfall.io/normal/front/d/c/dc0a1bc1-ba94-4494-a196-5363fde85194.jpg?1767731565","group":"Lands","resolved":true},{"name":"Path of Ancestry","quantity":1,"cmc":0,"manaCost":"","img":"https://cards.scryfall.io/normal/front/3/b/3b792a6a-beac-4d4a-91b6-f5a5e3539ecd.jpg?1767731634","group":"Lands","resolved":true},{"name":"Savage Lands","quantity":1,"cmc":0,"manaCost":"","img":"https://cards.scryfall.io/normal/front/5/5/55187461-2ff3-424b-85d5-2ca09567d44e.jpg?1767731683","group":"Lands","resolved":true},{"name":"Woodland Cemetery","quantity":1,"cmc":0,"manaCost":"","img":"https://cards.scryfall.io/normal/front/0/c/0c20aa48-58a0-4dee-970f-ba1292affa28.jpg?1767732023","group":"Lands","resolved":true},{"name":"Dragonskull Summit","quantity":1,"cmc":0,"manaCost":"","img":"https://cards.scryfall.io/normal/front/9/2/92964d76-3a01-4ab6-abf9-66b754708f90.jpg?1767731551","group":"Lands","resolved":true},{"name":"Rootbound Crag","quantity":1,"cmc":0,"manaCost":"","img":"https://cards.scryfall.io/normal/front/b/c/bc0f449a-01e2-4c22-8eb0-17ad1efb62e4.jpg?1767731677","group":"Lands","resolved":true},{"name":"Vernal Fen","quantity":1,"cmc":0,"manaCost":"","img":"https://cards.scryfall.io/normal/front/8/2/82253d45-587b-48a9-b6dc-e372f9adb2a6.jpg?1767730304","group":"Lands","resolved":true},{"name":"Cinder Glade","quantity":1,"cmc":0,"manaCost":"","img":"https://cards.scryfall.io/normal/front/3/0/306a7feb-f254-4ef1-a813-709601e87905.jpg?1767731529","group":"Lands","resolved":true},{"name":"Smoldering Marsh","quantity":1,"cmc":0,"manaCost":"","img":"https://cards.scryfall.io/normal/front/d/6/d6890462-aeb0-4356-93dc-b2eda0df0c0e.jpg?1767731689","group":"Lands","resolved":true},{"name":"Festering Thicket","quantity":1,"cmc":0,"manaCost":"","img":"https://cards.scryfall.io/normal/front/8/9/89891685-d4cf-4aaf-8179-210ed135f171.jpg?1767730315","group":"Lands","resolved":true},{"name":"Canyon Slough","quantity":1,"cmc":0,"manaCost":"","img":"https://cards.scryfall.io/normal/front/d/2/d2ba7cfa-36f2-410f-80c3-5a06f4b48372.jpg?1767731536","group":"Lands","resolved":true},{"name":"Sheltered Thicket","quantity":1,"cmc":0,"manaCost":"","img":"https://cards.scryfall.io/normal/front/a/d/ad7f87dd-1c43-4b6f-9d68-cc09ef76dbc2.jpg?1783904519","group":"Lands","resolved":true},{"name":"Evolving Wilds","quantity":1,"cmc":0,"manaCost":"","img":"https://cards.scryfall.io/normal/front/8/c/8c632984-5176-4c37-91df-6577cc294b85.jpg?1767863461","group":"Lands","resolved":true},{"name":"Terramorphic Expanse","quantity":1,"cmc":0,"manaCost":"","img":"https://cards.scryfall.io/normal/front/0/b/0bea079a-a972-4988-a561-9783b2515166.jpg?1767731713","group":"Lands","resolved":true},{"name":"Riveteers Overlook","quantity":1,"cmc":0,"manaCost":"","img":"https://cards.scryfall.io/normal/front/6/5/65ce9590-87c0-4057-bddb-fadc0de552f6.jpg?1783904521","group":"Lands","resolved":true}];
+const KEY = 'deck-verify:superfriends-keep-from-blight-curse';
+
+function loadState() {
+  try { return JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) { return {}; }
+}
+function saveState(state) { localStorage.setItem(KEY, JSON.stringify(state)); }
+
+let state = loadState();
+if (!state.tiles) state.tiles = {};
+if (typeof state.extras !== 'string') state.extras = '';
+
+const extrasEl = document.getElementById('extras');
+extrasEl.value = state.extras;
+extrasEl.addEventListener('input', () => { state.extras = extrasEl.value; saveState(state); });
+
+const CYCLE = { unchecked: 'checked', checked: 'rejected', rejected: 'unchecked' };
+const GLYPH = { unchecked: '❓', checked: '✅', rejected: '❌' };
+
+function getTileState(idx) {
+  return (state.tiles[idx] && state.tiles[idx].state) || 'unchecked';
+}
+function getTileQty(idx, defaultQty) {
+  const s = state.tiles[idx];
+  return s && typeof s.qty === 'number' ? s.qty : defaultQty;
+}
+function setTileState(idx, st) {
+  state.tiles[idx] = Object.assign({}, state.tiles[idx], { state: st });
+  saveState(state);
+}
+function setTileQty(idx, qty) {
+  state.tiles[idx] = Object.assign({}, state.tiles[idx], { qty });
+  saveState(state);
+}
+
+function isLand(idx) {
+  return TILES[idx].group === 'Lands';
+}
+
+function recount() {
+  let ok = 0, no = 0, unk = 0, lands = 0;
+  document.querySelectorAll('.tile').forEach((el) => {
+    const idx = +el.dataset.idx;
+    const st = getTileState(idx);
+    el.dataset.state = st;
+    const qty = getTileQty(idx, TILES[idx].quantity);
+    const qtyInput = el.querySelector('.qty-input');
+    if (qtyInput) qtyInput.value = qty;
+    if (st === 'checked') { ok += qty; if (isLand(idx)) lands += qty; }
+    else if (st === 'rejected') no += 1;
+    else unk += 1;
+  });
+  document.getElementById('c-ok').textContent = ok;
+  document.getElementById('c-no').textContent = no;
+  document.getElementById('c-unk').textContent = unk;
+  document.getElementById('c-lands').textContent = lands;
+}
+
+document.querySelectorAll('.tile').forEach((el) => {
+  el.addEventListener('click', (e) => {
+    if (e.target.classList.contains('qty-input')) return;
+    const idx = +el.dataset.idx;
+    setTileState(idx, CYCLE[getTileState(idx)]);
+    recount();
+  });
+});
+document.querySelectorAll('.qty-input').forEach((el) => {
+  el.addEventListener('click', (e) => e.stopPropagation());
+  el.addEventListener('change', () => {
+    const idx = +el.dataset.idx;
+    setTileQty(idx, Math.max(0, parseInt(el.value, 10) || 0));
+    recount();
+  });
+});
+
+function confirmedLines() {
+  const lines = [];
+  TILES.forEach((t, idx) => {
+    if (getTileState(idx) === 'checked') {
+      const qty = getTileQty(idx, t.quantity);
+      if (qty > 0) lines.push(qty + ' ' + t.name);
+    }
+  });
+  const extras = state.extras.split(/\r?\n/).map((s) => s.trim()).filter(Boolean);
+  extras.forEach((name) => lines.push('1 ' + name));
+  return lines;
+}
+
+document.getElementById('btn-copy-confirmed').addEventListener('click', () => {
+  navigator.clipboard.writeText(confirmedLines().join('\n'));
+});
+document.getElementById('btn-copy-report').addEventListener('click', () => {
+  const missing = [], unchecked = [];
+  TILES.forEach((t, idx) => {
+    const st = getTileState(idx);
+    if (st === 'rejected') missing.push(t.name);
+    else if (st === 'unchecked') unchecked.push(t.name);
+  });
+  const extras = state.extras.split(/\r?\n/).map((s) => s.trim()).filter(Boolean);
+  const report = [
+    'Not in deck (' + missing.length + '):', ...missing.map((n) => '  ' + n),
+    '', 'Unchecked (' + unchecked.length + '):', ...unchecked.map((n) => '  ' + n),
+    '', 'Extras (' + extras.length + '):', ...extras.map((n) => '  ' + n),
+  ];
+  navigator.clipboard.writeText(report.join('\n'));
+});
+document.getElementById('btn-mark-all').addEventListener('click', () => {
+  TILES.forEach((t, idx) => { if (getTileState(idx) === 'unchecked') setTileState(idx, 'checked'); });
+  recount();
+});
+document.getElementById('btn-reset').addEventListener('click', () => {
+  state = { tiles: {}, extras: '' };
+  saveState(state);
+  extrasEl.value = '';
+  recount();
+});
+
+recount();
+</script>
+</body>
+</html>
