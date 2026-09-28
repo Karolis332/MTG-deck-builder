@@ -5,6 +5,8 @@
 1 Adaptive Automaton
 1 Adept Watershaper
 1 Ageless Entity
+1 Ajani Resolute
+1 Ajani Unrelenting
 1 Akul the Unrepentant
 1 Alesha, Who Laughs at Fate
 1 Alhammarret's Archive
@@ -92,6 +94,8 @@
 1 Caves of Chaos Adventurer
 1 Chain Reaction
 1 Chainer, Dementia Master
+1 Chandra, Fire Artisan
+1 Chandra, Torch of Defiance
 1 Channeler Initiate
 1 Charcoal Diamond
 1 Chief Warg's Company
@@ -119,12 +123,14 @@
 1 Damnable Pact
 3 Dance of the Tumbleweeds
 1 Darigaaz's Charm
+1 Davriel, Rogue Shadowmage
 1 Dawnbringer Cleric
 1 Day of Black Sun
 1 Deadeye Duelist
 1 Deadly Brew
 1 Deadly Tempest
 2 Decisive Denial
+1 Dedicated Commons
 1 Deepmuck Desperado
 1 Defiant Bloodlord
 1 Defiling Daemogoth
@@ -132,6 +138,7 @@
 1 Demon's Horn
 1 Demonic Ruckus
 1 Desecration Demon
+1 Deserted Beach
 1 Devoted Druid
 1 Devourer of Destiny
 1 Diabolic Tutor
@@ -144,6 +151,7 @@
 2 Doc Aurlock, Grizzled Genius
 1 Doomsday Excruciator
 1 Double Down
+1 Dovin, Hand of Control
 1 Drag to the Underworld
 1 Dragonskull Summit
 1 Dread Presence
@@ -161,6 +169,7 @@
 1 Elegy Acolyte
 1 Elemental Teachings
 1 Elixir of Immortality
+1 Elspeth, Sun's Champion
 1 Elvish Archdruid
 1 Elvish Spirit Guide
 1 Emergency Weld
@@ -186,6 +195,7 @@
 2 Explosive Derailment
 1 Ezzaroot Channeler
 1 Farseek
+1 Fatehold Annex
 1 Fblthp, Knows the Way
 1 Fell the Mighty
 1 Feral Appetite
@@ -209,6 +219,7 @@
 1 Font of Agonies
 1 Forgotten Ancient
 1 Forlorn Flats
+1 Formidable Commons
 2 Forsaken Miner
 1 Fortune, Loyal Steed
 1 Fountainport Bell
@@ -272,6 +283,7 @@
 1 Hungry Ghoul
 1 Hunter's Insight
 1 Hypothesizzle
+1 Identity Echo
 1 Idol of False Gods
 1 Ifnir Deadlands
 1 Ignoble Hierarch
@@ -280,12 +292,16 @@
 1 Infernal Grasp
 1 Infestation Sage
 1 Innkeeper's Talent
+1 Innovative Commons
 1 Insidious Roots
+1 Inspired Tethermage
 1 Intimidation Campaign
 1 Ionize
 1 Izoni, Thousand-Eyed
+1 Jace, Reality Sculptor
 1 Jagged Barrens
 1 Jailbreak Scheme
+1 Jared Carthalion
 1 Jazal Goldmane
 1 Jem Lightfoote, Sky Explorer
 1 Jenova, Ancient Calamity
@@ -300,6 +316,7 @@
 1 Knockout Maneuver
 1 Koh, the Face Stealer
 1 Kolaghan's Command
+1 Konstrari Annex
 1 Kozilek, the Great Distortion
 1 Kozilek's Predator
 1 Kraum, Violent Cacophony
@@ -343,6 +360,7 @@
 1 Merchant of Venom
 2 Metamorphic Blast
 1 Metamorphosis Fanatic
+1 Meticulous Commons
 1 Midnight Banshee
 1 Mindblade Render
 1 Minthara, Merciless Soul
@@ -359,12 +377,14 @@
 1 Moseo, Vein's New Dean
 1 Mosswood Dreadknight
 1 Mourner's Surprise
+1 Mu Yanling, Sky Dancer
 1 Mudflat Village
 1 Muraganda Raceway
 1 Murder
 1 Murderous Rider
 1 Mycoloth
 1 Myconid Spore Tender
+1 Nahiri, Storm of Stone
 1 Necron Monolith
 1 Necroskitter
 1 Necrotic Ooze
@@ -376,15 +396,19 @@
 1 Nimble Brigand
 1 Nissa, Who Shakes the World
 1 Nissa's Renewal
+1 No Admittance
 1 No One Left Behind
+1 Nomad Outpost
 1 Noxious Gearhulk
 1 Noxious Newt
 1 Nulldrifter
 1 Nullpriest of Oblivion
 1 Nyx Lotus
 1 Ob Nixilis Reignited
+1 Ob Nixilis, the Hate-Twisted
 1 Obeka, Splitter of Seconds
 1 Oft-Nabbed Goat
+1 Oko, Lorwyn Liege
 1 Oko, Thief of Crowns
 1 Old Stickfingers
 1 Omenpath Journey
@@ -392,6 +416,7 @@
 1 Omnipresence
 1 One Last Job
 1 Opal Palace
+1 Opulent Palace
 1 Orchard Strider
 1 Ordeal of Nylea
 1 Ornery Tumblewagg
@@ -400,6 +425,7 @@
 1 Oubliette
 1 Outcaster Trailblazer
 1 Outrageous Robbery
+1 Overgrown Farmland
 1 Overrun
 1 Overwhelming Forces
 1 Overzealous Muscle
@@ -450,6 +476,7 @@
 1 Raise Dead
 1 Rakdos Carnarium
 1 Rakish Crew
+1 Ral Zarek
 1 Rampant Growth
 1 Rankle, Master of Pranks
 1 Rattleback Apothecary
@@ -483,16 +510,19 @@
 1 Samut, the Driving Force
 1 Samut, Voice of Dissent
 1 Sandman, Shifting Scoundrel
+1 Sandsteppe Citadel
 1 Sandstorm Verge
 1 Sangromancer
 1 Sanguine Bond
 1 Sapling of Colfenor
 1 Sapseep Forest
+1 Sarkhan, the Dragonspeaker
 1 Sautekh Immortal
 1 Savage Lands
 2 Savage Smash
 1 Scourge of the Skyclaves
 1 Sea Gate Colossus
+1 Seaside Citadel
 1 Seize the Secrets
 1 Selesnya Charm
 1 Selvala, Heart of the Wilds
@@ -506,6 +536,7 @@
 1 Sheltered Thicket
 1 Sheoldred's Edict
 2 Shifting Grift
+1 Shipwreck Marsh
 3 Shoot the Sheriff
 1 Shortcut to Mushrooms
 1 Sigil of Myrkul
@@ -541,6 +572,7 @@
 1 Stensian Sanguinist
 1 Step Between Worlds
 1 Sterling Keykeeper
+1 Stingerquill Annex
 1 Strix Serenade
 1 Studious First-Year
 1 Study Hall
@@ -558,9 +590,11 @@
 1 Take the Fall
 1 Take Up the Shield
 1 Tam, Mindful First-Year
+1 Tam, the Possibility
 1 Tangle
 1 Tangled Florahedron
 1 Tarmogoyf
+1 Tarnation Vista
 1 Taste of Death
 1 Teacher's Pest
 1 Temple of the False God
@@ -579,6 +613,7 @@
 1 The Reaper, King No More
 1 The Scorpion God
 1 The Swarmweaver
+1 Theorix Annex
 1 Thieves' Tools
 1 Three Steps Ahead
 1 Through the Forest Gate
@@ -590,6 +625,7 @@
 1 Torens, Fist of the Angels
 1 Torpor Orb
 1 Tragedy Feaster
+1 Transformative Commons
 3 Trash the Town
 1 Traxos, Scourge of Kroog
 1 Treasure Nabber
@@ -599,6 +635,7 @@
 1 Twilight Prophet
 1 Tyrant's Scorn
 1 Umbral Collar Zealot
+1 Umbral Expanse
 1 Undergrowth Champion
 2 Undying Malice
 2 Unfortunate Accident
@@ -621,7 +658,9 @@
 1 Vial Smasher, Gleeful Grenadier
 1 Vicious Battlerager
 1 Victim of Night
+1 Vigorbloom Annex
 1 Village Pillagers
+1 Violent Echoes
 2 Visage Bandit
 1 Vito, Thorn of the Dusk Rose
 1 Vivien's Arkbow
@@ -631,6 +670,12 @@
 1 Vraska, the Silencer
 1 Wardens of the Cycle
 1 Warg Tactics
+1 Way of the Healer
+1 Way of the Mentor
+1 Way of the Mind Sculptor
+1 Way of the Paradox
+1 Way of the Pyromancer
+1 Way of the Warlord
 1 Way of the Wildspeaker
 1 Wayfarer's Bauble
 1 Weathered Wayfarer
