@@ -970,7 +970,7 @@
 1 Torpor Orb
 1 Toski, Bearer of Secrets
 1 Tough Cookie
-1 Toxic Deluge
+2 Toxic Deluge
 1 Tragedy Feaster
 1 Trail of Crumbs
 1 Transformative Commons

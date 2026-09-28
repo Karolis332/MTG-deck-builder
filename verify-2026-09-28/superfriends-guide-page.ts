@@ -36,7 +36,7 @@ const GROUPS: [string, string, string[]][] = [
   ['Protection', 'Keeps attackers, removal and wipes off the walkers.', ['Tomik, Orzhov Lawmage', 'Archangel of Tithes', 'Liliana the Faultless', 'Counterspell', 'Dovin\'s Veto', 'Boros Charm', 'Vigorbloom Charm', 'Fatehold Charm']],
   ['Engine', "Innkeeper's Talent at level 3 doubles every counter you put: walker loyalty, plus abilities, Jace empowers (still to be found in your binder). Flux Channeler proliferates on every noncreature spell.", ["Innkeeper's Talent", 'Flux Channeler', 'Geist of Saint Thalia', 'Evolution Sage']],
   ['Ramp', 'Timeless Lotus taps for {W}{U}{B}{R}{G}, which pays for Tam\'s proliferate every turn by itself. Great Hall of the Citadel (in Lands) makes two colours for any legendary spell.', ['Timeless Lotus', 'Sol Ring', 'Arcane Signet', 'Talisman of Progress', 'Talisman of Dominance', 'Talisman of Conviction', 'Bloom Tender', 'Faeburrow Elder', 'Farseek', 'Cultivate', 'Omenpath Journey']],
-  ['Removal', 'Settle the Wreckage, Shatter the Sky and Final Act kill creatures and leave your walkers standing.', ['Path to Exile', 'Erode', 'Assassin\'s Trophy', 'Atomize', 'Vraska\'s Final Mercy', 'Fire Covenant', 'Settle the Wreckage', 'Shatter the Sky', 'Final Act']],
+  ['Removal', 'Toxic Deluge, Settle the Wreckage, Shatter the Sky and Final Act kill creatures and leave your walkers standing.', ['Path to Exile', 'Erode', 'Assassin\'s Trophy', 'Atomize', 'Vraska\'s Final Mercy', 'Toxic Deluge','Settle the Wreckage', 'Shatter the Sky', 'Final Act']],
 ];
 const grouped = new Set(GROUPS.flatMap((g) => g[2]));
 const lands = main.filter((l) => !grouped.has(l.name));
@@ -84,7 +84,6 @@ const ORDER: [number, string[], string, string, string][] = [
   [1, ['Deepglow Skate'], '0.32', 'Doubles every counter when it enters, which can take the Jace token straight toward 25.', 'Saheeli'],
   [2, ['Karn\'s Bastion'], '2.75', 'A land that proliferates.', 'Exotic Orchard'],
   [2, ['Ghostly Prison', 'Norn\'s Annex', 'Propaganda'], '5.81 / 5.64 / 2.03', 'Opponents pay to attack you or your walkers.', 'Boros Charm, Vigorbloom Charm'],
-  [2, ['Toxic Deluge'], '4.48', 'Three-mana wipe that kills creatures, not walkers.', 'Fire Covenant'],
   [3, ['Ichormoon Gauntlet'], '21.84', 'Every walker gets "0: proliferate" and "−12: take an extra turn".', 'Rewrite Regrets'],
   [3, ['Raffine\'s Tower', 'Spara\'s Headquarters', 'Jetmir\'s Garden', 'Xander\'s Lounge', 'Zagoth Triome'], '13–21 each', 'Replace the 5 tri-lands, which enter tapped with no upside.', 'tri-lands'],
 ];
@@ -99,6 +98,7 @@ const HELD: [string, string, string][] = [
 ];
 
 const BENCH: [string, string][] = [
+  ['Fire Covenant', 'Toxic Deluge took the slot: a full wipe for 3 mana instead of paying life per creature.'],
   ['Identity Echo', 'Fun roulette, but {3}{R} per use at sorcery speed; Timeless Lotus took the slot.'],
   ['Path of Ancestry', 'Enters tapped; Great Hall of the Citadel took the slot.'],
   ['Way of the Healer', "Innkeeper's Talent took the slot; the Cadet −2 is the weakest Way ability."],
