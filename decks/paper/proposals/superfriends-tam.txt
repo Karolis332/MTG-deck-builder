@@ -20,7 +20,7 @@
 1 Sorin, Vengeful Bloodlord
 1 The Wanderer
 1 Kasmina, Enigmatic Mentor
-1 Teyo, the Shieldmage
+1 Flux Channeler
 1 Saheeli, Sublime Artificer
 1 Kaya, Intangible Slayer
 1 Kaito, Dancing Shadow
@@ -30,7 +30,7 @@
 1 Way of the Paradox
 1 Way of the Pyromancer
 1 Way of the Mind Sculptor
-1 Way of the Healer
+1 Innkeeper's Talent
 1 Way of the Warlord
 1 Way of the Wildspeaker
 1 Identity Echo
@@ -56,7 +56,7 @@
 1 Assassin's Trophy
 1 Path to Exile
 1 Erode
-1 Generous Gift
+1 Atomize
 1 Vraska's Final Mercy
 1 Settle the Wreckage
 1 Shatter the Sky

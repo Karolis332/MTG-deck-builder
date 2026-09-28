@@ -33,6 +33,7 @@
 1 Assassin's Trophy
 1 Astarion, the Decadent
 1 At Knifepoint
+1 Atomize
 1 Auntie Ool, Cursewretch
 1 Avacyn's Pilgrim
 1 Avatar Kyoshi, Earthbender
@@ -245,6 +246,7 @@
 1 Flickering Hound
 1 Fling
 1 Flourishing Defenses
+1 Flux Channeler
 1 Fog
 1 Font of Agonies
 1 Forgotten Ancient

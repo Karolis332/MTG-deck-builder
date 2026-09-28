@@ -30,13 +30,13 @@ const deck = fs.readFileSync(LIST, 'utf8').trim().split(/\r?\n/).map((l) => /^(\
 const [commander, ...main] = deck;
 
 const GROUPS: [string, string, string[]][] = [
-  ['Walkers', 'Tam makes all of these but Jared cost {1} less.', ['Chandra, Torch of Defiance', 'Chandra, Fire Artisan', 'Oko, Thief of Crowns', 'Elspeth, Sun\'s Champion', 'Ajani Unrelenting', 'Ajani Resolute', 'Professor Dellian Fel', 'Vraska, Betrayal\'s Sting', 'Jared Carthalion', 'Sarkhan the Masterless', 'Ob Nixilis Reignited', 'Jace, Reality Sculptor', 'Sorin, Vengeful Bloodlord', 'The Wanderer', 'Kasmina, Enigmatic Mentor', 'Teyo, the Shieldmage', 'Saheeli, Sublime Artificer', 'Kaya, Intangible Slayer', 'Kaito, Dancing Shadow', 'Quintorius Kand']],
-  ['Ways', 'Each one creates the Jace token or adds 2–7 loyalty to it, and gives every walker a new ability.', ['Way of the Mentor', 'Way of the Paradox', 'Way of the Pyromancer', 'Way of the Mind Sculptor', 'Way of the Healer', 'Way of the Warlord', 'Way of the Wildspeaker']],
+  ['Walkers', 'Tam makes all of these but Jared cost {1} less.', ['Chandra, Torch of Defiance', 'Chandra, Fire Artisan', 'Oko, Thief of Crowns', 'Elspeth, Sun\'s Champion', 'Ajani Unrelenting', 'Ajani Resolute', 'Professor Dellian Fel', 'Vraska, Betrayal\'s Sting', 'Jared Carthalion', 'Sarkhan the Masterless', 'Ob Nixilis Reignited', 'Jace, Reality Sculptor', 'Sorin, Vengeful Bloodlord', 'The Wanderer', 'Kasmina, Enigmatic Mentor', 'Saheeli, Sublime Artificer', 'Kaya, Intangible Slayer', 'Kaito, Dancing Shadow', 'Quintorius Kand']],
+  ['Ways', 'Each one creates the Jace token or adds 2–7 loyalty to it, and gives every walker a new ability.', ['Way of the Mentor', 'Way of the Paradox', 'Way of the Pyromancer', 'Way of the Mind Sculptor', 'Way of the Warlord', 'Way of the Wildspeaker']],
   ['Jace token package', 'Adds loyalty to the Jace token and finds the pieces.', ['Protege\'s Awakening', 'Avatar of Burgeoning Echoes', 'Arcane Amphisbaena', 'Rewrite Regrets', 'Entrust the Spark', 'Pia, Aether Ascetic']],
   ['Protection', 'Keeps attackers, removal and wipes off the walkers.', ['Tomik, Orzhov Lawmage', 'Archangel of Tithes', 'Liliana the Faultless', 'Counterspell', 'Dovin\'s Veto', 'Boros Charm', 'Vigorbloom Charm', 'Fatehold Charm']],
-  ['Engine', '', ['Geist of Saint Thalia', 'Evolution Sage', 'Identity Echo']],
+  ['Engine', "Innkeeper's Talent at level 3 doubles every counter you put: walker loyalty, plus abilities, Jace empowers (still to be found in your binder). Flux Channeler proliferates on every noncreature spell.", ["Innkeeper's Talent", 'Flux Channeler', 'Geist of Saint Thalia', 'Evolution Sage', 'Identity Echo']],
   ['Ramp', '', ['Sol Ring', 'Arcane Signet', 'Talisman of Progress', 'Talisman of Dominance', 'Talisman of Conviction', 'Bloom Tender', 'Faeburrow Elder', 'Farseek', 'Cultivate', 'Omenpath Journey']],
-  ['Removal', 'Settle the Wreckage, Shatter the Sky and Final Act kill creatures and leave your walkers standing.', ['Path to Exile', 'Erode', 'Assassin\'s Trophy', 'Generous Gift', 'Vraska\'s Final Mercy', 'Fire Covenant', 'Settle the Wreckage', 'Shatter the Sky', 'Final Act']],
+  ['Removal', 'Settle the Wreckage, Shatter the Sky and Final Act kill creatures and leave your walkers standing.', ['Path to Exile', 'Erode', 'Assassin\'s Trophy', 'Atomize', 'Vraska\'s Final Mercy', 'Fire Covenant', 'Settle the Wreckage', 'Shatter the Sky', 'Final Act']],
 ];
 const grouped = new Set(GROUPS.flatMap((g) => g[2]));
 const lands = main.filter((l) => !grouped.has(l.name));
@@ -78,16 +78,14 @@ const WINS: [string, string, string[]][] = [
 ];
 
 const ORDER: [number, string[], string, string, string][] = [
-  [1, ['The Chain Veil', 'Teferi, Temporal Archmage'], '7.40 + 1.50', '<b>Infinite combo with the cards you have.</b> Teferi\'s −1 untaps the Veil plus Faeburrow Elder, Bloom Tender or Sol Ring for more mana than the Veil costs. Paradox + Mentor give Teferi back the loyalty he spent, so the loop never ends: infinite activations on every walker, and Kaya\'s +2 kills the table. It needs 4 specific cards, so it stays bracket 3.', 'Identity Echo, Teyo'],
+  [1, ['The Chain Veil', 'Teferi, Temporal Archmage'], '7.40 + 1.50', '<b>Infinite combo with the cards you have.</b> Teferi\'s −1 untaps the Veil plus Faeburrow Elder, Bloom Tender or Sol Ring for more mana than the Veil costs. Paradox + Mentor give Teferi back the loyalty he spent, so the loop never ends: infinite activations on every walker, and Kaya\'s +2 kills the table. It needs 4 specific cards, so it stays bracket 3.', 'Identity Echo, Kasmina'],
   [1, ['Oath of Teferi'], '1.07', 'Use every walker\'s loyalty ability twice a turn. With the engine, each walker gains roughly 2 loyalty per turn.', 'Way of the Warlord'],
   [1, ['Carth the Lion'], '0.27', 'Plus abilities add 1 extra and minus abilities cost 1 less. When a walker dies, it looks at your top 7 cards for another.', 'Arcane Amphisbaena'],
   [1, ['Deepglow Skate'], '0.32', 'Doubles every counter when it enters, which can take the Jace token straight toward 25.', 'Saheeli'],
   [2, ['Karn\'s Bastion'], '2.75', 'A land that proliferates.', 'Exotic Orchard'],
-  [2, ['Flux Channeler'], '3.24', 'Proliferates on every noncreature spell you cast.', 'Pia'],
   [2, ['Ghostly Prison', 'Norn\'s Annex', 'Propaganda'], '5.81 / 5.64 / 2.03', 'Opponents pay to attack you or your walkers.', 'Boros Charm, Vigorbloom Charm'],
   [2, ['Toxic Deluge'], '4.48', 'Three-mana wipe that kills creatures, not walkers.', 'Fire Covenant'],
   [3, ['Ichormoon Gauntlet'], '21.84', 'Every walker gets "0: proliferate" and "−12: take an extra turn".', 'Fatehold Charm'],
-  [3, ['Doubling Season'], '32.35', 'Walkers enter with double loyalty and every Jace boost counts double.', 'Kasmina'],
   [3, ['Raffine\'s Tower', 'Spara\'s Headquarters', 'Jetmir\'s Garden', 'Xander\'s Lounge', 'Zagoth Triome'], '13–21 each', 'Replace the 5 tri-lands, which enter tapped with no upside.', 'tri-lands'],
 ];
 
@@ -101,6 +99,9 @@ const HELD: [string, string, string][] = [
 ];
 
 const BENCH: [string, string][] = [
+  ['Way of the Healer', "Innkeeper's Talent took the slot; the Cadet −2 is the weakest Way ability."],
+  ['Teyo, the Shieldmage', 'Flux Channeler took the slot; Teyo protects you, not your walkers.'],
+  ['Generous Gift', 'Atomize does the same job and proliferates.'],
   ['Moment of Reckoning', 'Destroys up to four things or returns up to four walkers, but costs 7. First card to add if games run long.'],
   ['Way of the Cryomancer', 'The 8th Way; copying one instant is weaker than the other seven.'],
   ['Liliana, Death Wielder', 'Costs 7 mana for a +2 that only shrinks one creature.'],
@@ -137,7 +138,7 @@ table{border-collapse:collapse;margin:0 18px;width:calc(100% - 36px)}td,th{borde
 #done{color:#b5a27b;font-size:13px}button{background:#2a2118;color:#e8dcc4;border:1px solid #6b5220;border-radius:6px;padding:4px 10px;cursor:pointer}
 footer{margin:30px 18px;color:#7d6c4d;font-size:12px}@media print{header button,.card input,nav{display:none}}
 </style></head><body>
-<header><h1>Tam, the Possibility — Superfriends</h1><span class="muted">${total} cards · ${landCount} lands · 20 walkers · 7 Ways · 0 game changers</span><span id="done"></span><button id="reset">Reset ticks</button>
+<header><h1>Tam, the Possibility — Superfriends</h1><span class="muted">${total} cards · ${landCount} lands · ${GROUPS[0][2].length} walkers · ${GROUPS[1][2].length} Ways · 0 game changers</span><span id="done"></span><button id="reset">Reset ticks</button>
 <nav style="margin-left:auto"><a href="#engine">Engine</a><a href="#wins">Win lines</a><a href="#deck">Deck</a><a href="#order">Order</a><a href="#held">Held back</a><a href="#bench">Bench</a></nav></header>
 <div class="cmd"><img src="${esc(cmd.img || '')}" alt="${esc(cmd.name)}"><div class="facts">
 <b>Commander:</b> Tam, the Possibility — walker spells cost {1} less; {W}{U}{B}{R}{G}, {T}: proliferate once per walker type you control.<br>
@@ -160,7 +161,7 @@ ${GROUPS.map(([g, note, ns]) => `<h2>${esc(g)} <small>${ns.reduce((s, n) => s + 
 <h2 id="order">Cards to order <small>cheapest printing in USD from Scryfall (09-26 snapshot); Cardmarket in the EU is usually lower</small></h2>
 <table><tr><th>Tier</th><th>Card</th><th>$</th><th>Why</th><th>Replaces</th></tr>
 ${ORDER.map(([t, ns, p, why, rep]) => `<tr><td><span class="tier t${t}">${t}</span></td><td>${thumbs(ns)}<br>${ns.map(esc).join(' + ')}</td><td class="n">${esc(p)}</td><td>${why}</td><td>${esc(rep)}</td></tr>`).join('')}
-</table><p class="box" style="margin-top:10px"><b>Best value:</b> the tier-1 rows cost about <b>$10.50</b> and turn the deck from value-grind into one that can kill from nowhere.</p>
+</table><p class="box" style="margin-top:10px"><b>Skipped:</b> Doubling Season ($32) — Innkeeper's Talent already does it. <b>Best value:</b> the tier-1 rows cost about <b>$10.50</b> and turn the deck from value-grind into one that can kill from nowhere.</p>
 
 <h2 id="held">Held back: sleeved in another deck <small>one copy registered; with a second copy these go in</small></h2>
 <table><tr><th>Card</th><th>Sleeved in</th><th>Would replace</th></tr>${HELD.map(([n, d, r]) => `<tr><td>${thumbs([n])} ${esc(n)}</td><td>${esc(d)}</td><td>${esc(r)}</td></tr>`).join('')}</table>

@@ -231,3 +231,6 @@ Appended by `npx tsx scripts/paper-sync.ts`. Full diffs: `git log -p decks/paper
 
 ## 2026-09-28
 - **Collection** 1252 owned, 846 open
+
+## 2026-09-28
+- **Collection** 1254 owned, 848 open
