@@ -11,6 +11,7 @@
 1 Akul the Unrepentant
 1 Alesha, Who Laughs at Fate
 1 Alhammarret's Archive
+1 Alms Collector
 1 Altar of Bhaal
 1 Ancient Craving
 1 Angrath, Captain of Chaos
@@ -31,6 +32,7 @@
 1 Astarion, the Decadent
 1 At Knifepoint
 1 Auntie Ool, Cursewretch
+1 Avacyn's Pilgrim
 1 Avatar Kyoshi, Earthbender
 1 Aven Interrupter
 1 Azorius Locket
@@ -55,15 +57,18 @@
 1 Bitterthorn, Nissa's Animus
 1 Black Sun's Zenith
 1 Blade Historian
+1 Bleachbone Verge
 1 Blight Mound
 1 Blighted Woodland
 1 Blisterpod
+1 Bloated Contaminator
 1 Blood Celebrant
 1 Blood Hustler
 3 Blood Pet
 1 Bloodspore Thrinax
 1 Bloodthirsty Aerialist
 1 Bloodtracker
+1 Bloom Tender
 1 Blossoming Bogbeast
 1 Blowfly Infestation
 1 Boggart Trawler
@@ -114,6 +119,7 @@
 1 Cityscape Leveler
 1 Cleanup Crew
 1 Clear Shot
+1 Clifftop Retreat
 1 Cloudkill
 1 Colossal Rattlewurm
 1 Command Tower
@@ -163,6 +169,7 @@
 1 Doomsday Excruciator
 1 Double Down
 1 Dovin, Hand of Control
+1 Dovin's Veto
 1 Drag to the Underworld
 1 Dragonskull Summit
 1 Dread Presence
@@ -206,6 +213,7 @@
 1 Explore
 2 Explosive Derailment
 1 Ezzaroot Channeler
+1 Faeburrow Elder
 1 Farseek
 1 Fatehold Annex
 1 Fblthp, Knows the Way
@@ -314,6 +322,7 @@
 1 Interplanar Beacon
 1 Intimidation Campaign
 1 Ionize
+1 Isolated Chapel
 1 Izoni, Thousand-Eyed
 1 Jace, Reality Sculptor
 1 Jagged Barrens
@@ -521,6 +530,7 @@
 1 Revival Experiment
 1 Ride Down
 1 Rise of the Dark Realms
+1 Rishkar, Peema Renegade
 1 Rith's Charm
 2 Riveteers Overlook
 1 Rocky Rebuke
@@ -565,6 +575,7 @@
 1 Shard of the Nightbringer
 1 Shard of the Void Dragon
 1 Shared Roots
+1 Shatter the Sky
 1 Sheltered Thicket
 1 Sheoldred's Edict
 2 Shifting Grift
@@ -626,6 +637,7 @@
 1 Take for a Ride
 1 Take the Fall
 1 Take Up the Shield
+1 Talisman of Conviction
 1 Talisman of Dominance
 1 Talisman of Hierarchy
 1 Talisman of Progress
