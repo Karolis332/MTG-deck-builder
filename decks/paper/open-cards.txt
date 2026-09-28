@@ -136,6 +136,7 @@
 1 Emergency Weld
 1 Emeritus of Ideation
 1 Emeritus of Truce
+1 Emil, Vastlands Roamer
 1 Emperor of Bones
 1 Endurance
 1 Epicure of Blood
@@ -151,6 +152,8 @@
 2 Explosive Derailment
 1 Ezzaroot Channeler
 1 Farseek
+1 Feasting Hobbit
+1 Feasting Troll King
 1 Fell the Mighty
 1 Feral Appetite
 1 Ferocification
@@ -482,6 +485,7 @@
 1 Terror of the Peaks
 1 The Destined Thief
 1 The Key to the Vault
+1 The Ooze
 1 The Swarmweaver
 1 Thieves' Tools
 1 Three Steps Ahead
@@ -494,6 +498,7 @@
 1 Torens, Fist of the Angels
 1 Torpor Orb
 1 Tragedy Feaster
+1 Trail of Crumbs
 1 Transmutation Font
 3 Trash the Town
 1 Traxos, Scourge of Kroog
@@ -536,6 +541,7 @@
 1 Weathered Wayfarer
 1 Well of Lost Dreams
 1 Whisper, Blood Liturgist
+1 Wild Growth
 1 Wildborn Preserver
 1 Wilderland Scrounger
 1 Wildwood Scourge

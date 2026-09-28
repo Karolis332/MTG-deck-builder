@@ -206,6 +206,7 @@
 1 Emeritus of Ideation
 1 Emeritus of Truce
 1 Emeritus of Woe
+1 Emil, Vastlands Roamer
 1 Emperor of Bones
 1 Endurance
 1 Epicure of Blood
@@ -227,6 +228,8 @@
 1 Ezzaroot Channeler
 1 Fabled Passage
 2 Farseek
+1 Feasting Hobbit
+1 Feasting Troll King
 1 Feed the Swarm
 1 Fell the Mighty
 1 Fellwar Stone
@@ -741,6 +744,7 @@
 1 The Gitrog, Ravenous Ride
 1 The Key to the Vault
 1 The Legend of Kyoshi
+1 The Ooze
 1 The Soul Stone
 1 The Swarmweaver
 1 The War in Heaven
@@ -763,6 +767,7 @@
 1 Tough Cookie
 1 Toxic Deluge
 1 Tragedy Feaster
+1 Trail of Crumbs
 1 Transmutation Font
 3 Trash the Town
 1 Traxos, Scourge of Kroog
@@ -826,6 +831,7 @@
 1 White Plume Adventurer
 1 Wicked Wolf
 1 Wight of the Reliquary
+1 Wild Growth
 1 Wildborn Preserver
 1 Wilderland Scrounger
 1 Wildwood Scourge

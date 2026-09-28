@@ -196,3 +196,6 @@ Appended by `npx tsx scripts/paper-sync.ts`. Full diffs: `git log -p decks/paper
 - **The Cabbage Merchant** proposal: operator's sleeved changes — −Lembas, −Hornet Nest, +Spry and Mighty, +Ribtruss Roaster.
 - **The Cabbage Merchant** proposal: −Well of Lost Dreams, −Blossoming Bogbeast (operator); placeholders +Explore, +Hornet Nest.
 - **The Cabbage Merchant** proposal: Ash Barrens, Escape Tunnel, Nesting Grounds kept for three Forests (27).
+
+## 2026-09-28
+- **Collection** 1007 owned, 600 open

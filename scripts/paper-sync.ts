@@ -29,7 +29,7 @@ const SKIP_LAYOUTS = new Set(['token', 'double_faced_token', 'emblem', 'art_seri
 
 const args = process.argv.slice(2);
 const DRY = args.includes('--dry');
-const USER = Number(args[args.indexOf('--user') + 1] || 1);
+const USER = args.includes('--user') ? Number(args[args.indexOf('--user') + 1]) : 1;
 
 interface CardRow { id: string; name: string; layout: string | null; type_line: string }
 interface Line { qty: number; raw: string }
