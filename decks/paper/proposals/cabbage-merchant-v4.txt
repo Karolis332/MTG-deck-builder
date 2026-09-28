@@ -47,7 +47,7 @@
 1 Forgotten Ancient
 1 The Earth King
 1 Toski, Bearer of Secrets
-1 Titanbones, Towering Heart
+1 Explore
 1 Chord of Calling
 1 Pest Infestation
 1 Invasion of Ikoria
@@ -61,11 +61,11 @@
 1 Ginger, Queen of Sweets
 1 Return of the Wildspeaker
 1 Disciple of Freyalise
-1 Verdant Kraken
+1 Displaced Dinosaurs
 1 Gingerbread Cabin
 1 Ba Sing Se
 1 Mosswort Bridge
-1 Tangled Florahedron
+1 Titanbones, Towering Heart
 1 Helix Pinnacle
 1 Hornet Queen
 1 Ash Barrens
