@@ -3,6 +3,7 @@
 1 Abrade
 1 Abraded Bluffs
 1 Abundant Growth
+1 Academic Ascent
 1 Academy Manufactor
 1 Accursed Marauder
 1 Acererak the Archlich
@@ -24,6 +25,7 @@
 1 Another Round
 1 Anrakyr the Traveller
 1 Arachnogenesis
+1 Arcane Amphisbaena
 4 Arcane Signet
 1 Archangel of Tithes
 1 Archdruid's Charm
@@ -45,6 +47,7 @@
 1 Autumn's Veil
 1 Avacyn's Pilgrim
 1 Avatar Kyoshi, Earthbender
+1 Avatar of Burgeoning Echoes
 1 Aven Interrupter
 1 Azorius Locket
 1 Azula, Ruthless Firebender
@@ -127,6 +130,7 @@
 1 Cabaretti Courtyard
 2 Calamity, Galloping Inferno
 1 Callous Inspector
+1 Campus Crier
 1 Cankerbloom
 1 Canoptek Wraith
 1 Canyon Slough
@@ -169,11 +173,13 @@
 1 Concealed Courtyard
 1 Concerted Defense
 2 Conduit Pylons
+1 Consign to Memory
 2 Consuming Corruption
 1 Contagion Clasp
 1 Corpse Augur
 1 Corpse Churn
 3 Corrupted Conviction
+1 Countersculpt
 1 Counterspell
 1 Coveted Prize
 1 Creakwood Liege
@@ -258,6 +264,7 @@
 1 Emil, Vastlands Roamer
 1 Emperor of Bones
 1 Endurance
+1 Entrust the Spark
 1 Epicure of Blood
 1 Eriette, the Beguiler
 1 Erinis, Gloom Stalker
@@ -279,11 +286,13 @@
 1 Explore
 1 Explore the Underdark
 2 Explosive Derailment
+1 Eye of Jace
 1 Ezzaroot Channeler
 1 Fabled Passage
 1 Faeburrow Elder
 2 Farseek
 1 Fatehold Annex
+1 Fatehold Charm
 1 Fblthp, Knows the Way
 1 Feasting Hobbit
 1 Feasting Troll King
@@ -307,6 +316,7 @@
 1 Flame of Anor
 1 Flare of Cultivation
 1 Flayed One
+1 Flickering Hound
 1 Fling
 1 Flourishing Defenses
 1 Fog
@@ -326,6 +336,7 @@
 1 Garruk's Uprising
 1 Gatecreeper Vine
 1 Gaze of Granite
+1 Geist of Saint Thalia
 1 Gene Pollinator
 1 Generous Gift
 2 Geralf, the Fleshwright
@@ -389,6 +400,7 @@
 1 Hellspur Posse Boss
 1 Heroes' Bane
 1 Heroic Intervention
+1 Hexhaven Battalion
 1 Hexmark Destroyer
 1 Hidden Grotto
 1 High Market
@@ -457,6 +469,7 @@
 1 Junji, the Midnight Sky
 1 Kagha, Shadow Archdruid
 1 Kaito, Dancing Shadow
+1 Kamahl's Druidic Vow
 1 Kamiz, Obscura Oculus
 1 Karlach, Fury of Avernus
 1 Karplusan Forest
@@ -464,13 +477,16 @@
 1 Kaya, Bane of the Dead
 1 Kaya, Intangible Slayer
 1 Kaya's Ghostform
+1 Keeper of the Quiet Hour
 1 Kenrith's Transformation
+1 Kiora of Salt and Sand
 1 Kiora's Follower
 1 Knockout Maneuver
 2 Kodama's Reach
 1 Koh, the Face Stealer
 1 Kolaghan's Command
 1 Konstrari Annex
+1 Konstrari Charm
 1 Kozilek, the Great Distortion
 1 Kozilek's Predator
 1 Kraum, Violent Cacophony
@@ -483,6 +499,7 @@
 1 Lifeblood Hydra
 1 Lightning Greaves
 1 Lilah, Undefeated Slickshot
+1 Liliana the Faultless
 1 Liliana, Death Wielder
 1 Liliana, Dreadhorde General
 1 Linvala, Shield of Sea Gate
@@ -540,6 +557,7 @@
 1 Midnight Reaper
 1 Mikaeus, the Unhallowed
 1 Mindblade Render
+1 Mindseeker Oculus
 1 Minthara, Merciless Soul
 1 Mirage Mesa
 2 Mirkwood Bats
@@ -567,6 +585,7 @@
 1 Muraganda Raceway
 1 Murder
 1 Murderous Rider
+1 Murmuring Volume
 1 Mutable Explorer
 1 Mycoloth
 1 Myconid Spore Tender
@@ -655,12 +674,14 @@
 1 Phoenix Fleet Airship
 1 Phyrexian Arena
 1 Phyrexian Scriptures
+1 Pia, Aether Ascetic
 1 Pillage the Bog
 1 Pillar Launch
 1 Pitiless Carnage
 1 Pizza Face, Gastromancer
 1 Plaguecrafter
 4 Plains
+1 Plan for All Outcomes
 1 Planar Engineering
 1 Planetarium of Wan Shi Tong
 1 Plasmancer
@@ -681,6 +702,7 @@
 1 Pristine Talisman
 1 Professor Dellian Fel
 1 Prophetic Prism
+1 Protege's Awakening
 1 Psychomancer
 1 Puca's Covenant
 1 Pulse of Murasa
@@ -711,11 +733,13 @@
 1 Regal Behemoth
 1 Regrowth
 1 Reiver Demon
+1 Repurposed Enforcer
 1 Requisition Raid
 1 Return of the Wildspeaker
 3 Return the Favor
 1 Revitalizing Repast
 1 Revival Experiment
+1 Rewrite Regrets
 1 Ribtruss Roaster
 1 Ride Down
 1 Rilsa Rael, Kingpin
@@ -814,6 +838,7 @@
 4 Sol Ring
 1 Solemn Doomguide
 2 Solemn Simulacrum
+1 Solve for Disappointment
 1 Sorin, Vengeful Bloodlord
 1 Soul Snuffers
 1 Soured Springs
@@ -839,6 +864,7 @@
 1 Sterling Keykeeper
 1 Stick Together
 1 Stingerquill Annex
+1 Stingerquill Charm
 1 Stomping Ground
 1 Stonework Packbeast
 1 Strix Serenade
@@ -874,6 +900,7 @@
 1 Talisman of Unity
 1 Tam, Mindful First-Year
 1 Tam, the Possibility
+1 Tam's Resistance
 1 Tamiyo, Inquisitive Student
 1 Tangle
 1 Tangled Florahedron
@@ -895,6 +922,8 @@
 2 Terramorphic Expanse
 1 Territory Forge
 1 Terror of the Peaks
+1 Teyo, Diamondblade Mage
+1 Teyo, Lightshield Expert
 1 Teyo, the Shieldmage
 1 Tezzeret, Master of the Bridge
 1 The Cabbage Merchant
@@ -903,6 +932,7 @@
 1 The Destined Warrior
 1 The Destined White Mage
 1 The Earth King
+1 The Echoverse Fulcrum
 1 The Gitrog, Ravenous Ride
 1 The Key to the Vault
 1 The Legend of Kyoshi
@@ -916,10 +946,12 @@
 1 Their Name Is Death
 1 Their Number Is Legion
 1 Theorix Annex
+1 Theorix Charm
 1 Thieves' Tools
 1 Thought Vessel
 1 Three Steps Ahead
 1 Through the Forest Gate
+1 Thrummingbird
 1 Thwart the Grave
 1 Tip the Scales
 1 Tireless Provisioner
@@ -928,6 +960,7 @@
 1 Tivash, Gloom Summoner
 1 Tomb of Horrors Adventurer
 1 Tome of the Guildpact
+1 Tomik, Orzhov Lawmage
 1 Topiary Panther
 1 Torens, Fist of the Angels
 1 Torpor Orb
@@ -985,8 +1018,10 @@
 1 Victim of Night
 1 Victimize
 1 Vigorbloom Annex
+1 Vigorbloom Charm
 1 Village Pillagers
 1 Village Rites
+1 Vindictive Triumph
 1 Violent Echoes
 1 Viridescent Bog
 2 Visage Bandit
@@ -1000,9 +1035,11 @@
 1 Vraska, Betrayal's Sting
 1 Vraska, Swarm's Eminence
 1 Vraska, the Silencer
+1 Vraska's Final Mercy
 1 Walking Ballista
 1 Wardens of the Cycle
 1 Warg Tactics
+1 Way of the Cryomancer
 1 Way of the Healer
 1 Way of the Mentor
 1 Way of the Mind Sculptor
@@ -1045,6 +1082,7 @@
 1 You Happen On a Glade
 1 You Meet in a Tavern
 1 Yuan-Ti Malison
+1 Yuriko, Blade of the Mighty
 1 Zagras, Thief of Heartbeats
 1 Zhentarim Bandit
 1 Ziatora's Proving Ground

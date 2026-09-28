@@ -2,21 +2,21 @@
 1 Chandra, Torch of Defiance
 1 Chandra, Fire Artisan
 1 Oko, Thief of Crowns
-1 Oko, Lorwyn Liege
+1 Pia, Aether Ascetic
 1 Elspeth, Sun's Champion
 1 Ajani Unrelenting
 1 Ajani Resolute
 1 Professor Dellian Fel
 1 Vraska, Betrayal's Sting
-1 Liliana, Death Wielder
+1 Protege's Awakening
 1 Jared Carthalion
-1 Sarkhan, the Dragonspeaker
+1 Fatehold Charm
 1 Sarkhan the Masterless
 1 Ob Nixilis Reignited
-1 Ral Zarek
-1 Mu Yanling, Sky Dancer
+1 Arcane Amphisbaena
+1 Geist of Saint Thalia
 1 Jace, Reality Sculptor
-1 Nissa, Who Shakes the World
+1 Liliana the Faultless
 1 Sorin, Vengeful Bloodlord
 1 The Wanderer
 1 Kasmina, Enigmatic Mentor
@@ -25,7 +25,7 @@
 1 Kaya, Intangible Slayer
 1 Kaito, Dancing Shadow
 1 Quintorius Kand
-1 Domri, Anarch of Bolas
+1 Tomik, Orzhov Lawmage
 1 Way of the Mentor
 1 Way of the Paradox
 1 Way of the Pyromancer
@@ -37,15 +37,15 @@
 1 Dovin's Veto
 1 Evolution Sage
 1 Archangel of Tithes
-1 Chimil, the Inner Sun
+1 Rewrite Regrets
 1 Boros Charm
-1 Painful Truths
+1 Entrust the Spark
 1 Counterspell
-1 Hindering Light
+1 Vigorbloom Charm
 1 Sol Ring
 1 Talisman of Progress
 1 Talisman of Dominance
-1 Talisman of Hierarchy
+1 Avatar of Burgeoning Echoes
 1 Talisman of Conviction
 1 Arcane Signet
 1 Farseek
@@ -57,11 +57,11 @@
 1 Path to Exile
 1 Erode
 1 Generous Gift
-1 Sheoldred's Edict
+1 Vraska's Final Mercy
 1 Settle the Wreckage
 1 Shatter the Sky
 1 Fire Covenant
-1 Black Sun's Zenith
+1 Final Act
 1 Command Tower
 1 Exotic Orchard
 1 Path of Ancestry
