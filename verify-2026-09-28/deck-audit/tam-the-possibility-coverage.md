@@ -1,0 +1,236 @@
+# Tam, the Possibility — full coverage list (234 candidates)
+
+- **Path of Ancestry** — REJECT — fixing land, 35 lands already at the accepted ceiling (locked count)
+- **Rogue's Passage** — REJECT — fixing land, 35 lands already at the accepted ceiling (locked count)
+- **Evolving Wilds** — REJECT — ramp quota already covered (9 mana rocks/dorks/fixers remain in the 100)
+- **Cultivate** — REJECT — ramp quota already covered (9 mana rocks/dorks/fixers remain in the 100)
+- **Rampant Growth** — REJECT — ramp quota already covered (9 mana rocks/dorks/fixers remain in the 100)
+- **Terramorphic Expanse** — REJECT — ramp quota already covered (9 mana rocks/dorks/fixers remain in the 100)
+- **Commander's Sphere** — REJECT — card-draw slot filled by Sign in Blood/Harmonize/Painful Truths/Well of Lost Dreams
+- **Negate** — REJECT — protection quota already met (Counterspell, Dovin's Veto in; Grand Abolisher unavailable, assigned to Tazri)
+- **Generous Gift** — REJECT — narrower than the removal already run (Assassin's Trophy/Path/Erode/Bedevil cover creature+artifact+PW)
+- **Temple of the False God** — REJECT — fixing land, 35 lands already at the accepted ceiling (locked count)
+- **Dragonskull Summit** — REJECT — fixing land, 35 lands already at the accepted ceiling (locked count)
+- **Sunken Hollow** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Smoldering Marsh** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Frantic Search** — REJECT — card-draw slot filled by Sign in Blood/Harmonize/Painful Truths/Well of Lost Dreams
+- **Wayfarer's Bauble** — REJECT — ramp quota already covered (9 mana rocks/dorks/fixers remain in the 100)
+- **Talisman of Hierarchy** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Abrade** — REJECT — narrower than the removal already run (Assassin's Trophy/Path/Erode/Bedevil cover creature+artifact+PW)
+- **Boros Charm** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Night's Whisper** — REJECT — assigned to Imotekh by the orchestrator, not available for this deck
+- **Ornithopter of Paradise** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Terminate** — REJECT — narrower than the removal already run (Assassin's Trophy/Path/Erode/Bedevil cover creature+artifact+PW)
+- **Mirkwood Bats** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Sign in Blood** — IN — cheap card advantage; deck's only draw outside the Ways/Jace package
+- **Explore** — REJECT — card-draw slot filled by Sign in Blood/Harmonize/Painful Truths/Well of Lost Dreams
+- **Sword of the Animist** — REJECT — ramp quota already covered (9 mana rocks/dorks/fixers remain in the 100)
+- **Growth Spiral** — REJECT — card-draw slot filled by Sign in Blood/Harmonize/Painful Truths/Well of Lost Dreams
+- **Grand Abolisher** — REJECT — assigned to Tazri by the orchestrator, not available for this deck
+- **Everflowing Chalice** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Infernal Grasp** — REJECT — narrower than the removal already run (Assassin's Trophy/Path/Erode/Bedevil cover creature+artifact+PW)
+- **Skyshroud Claim** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Harmonize** — IN — flat draw 3, no synergy tax, deck is draw-light
+- **Golgari Rot Farm** — REJECT — fixing land, 35 lands already at the accepted ceiling (locked count)
+- **Putrefy** — REJECT — narrower than the removal already run (Assassin's Trophy/Path/Erode/Bedevil cover creature+artifact+PW)
+- **Shamanic Revelation** — REJECT — card-draw slot filled by Sign in Blood/Harmonize/Painful Truths/Well of Lost Dreams
+- **Forgotten Ancient** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Selvala, Heart of the Wilds** — REJECT — her mana/draw scale off "greatest power among creatures you control"; deck runs almost no big creatures, ramp quota already met
+- **Gruul Turf** — REJECT — fixing land, 35 lands already at the accepted ceiling (locked count)
+- **Ghalta, Primal Hunger** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Vault of the Archangel** — REJECT — fixing land, 35 lands already at the accepted ceiling (locked count)
+- **Bedevil** — IN — versatile removal ("Destroy target artifact, creature, or planeswalker")
+- **Diabolic Tutor** — REJECT — operator has cut this exact card from Imotekh and Meren twice already for more specific/repeatable tutors; no better target here than what Entrust the Spark already finds
+- **Vito, Thorn of the Dusk Rose** — REJECT — assigned to Meren by the orchestrator, not available for this deck
+- **Rise of the Dark Realms** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Burnished Hart** — REJECT — ramp quota already covered (9 mana rocks/dorks/fixers remain in the 100)
+- **Sanguine Bond** — IN — drain payoff for Way of Mentor's lifegain loop ("Whenever you gain life, target opponent loses that much life")
+- **Avacyn's Pilgrim** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Rakdos Carnarium** — REJECT — fixing land, 35 lands already at the accepted ceiling (locked count)
+- **Terror of the Peaks** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Ignoble Hierarch** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Nesting Grounds** — REJECT — fixing land, 35 lands already at the accepted ceiling (locked count)
+- **Bender's Waterskin** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Worn Powerstone** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Return the Favor** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Corrupted Conviction** — REJECT — card-draw slot filled by Sign in Blood/Harmonize/Painful Truths/Well of Lost Dreams
+- **Realmwalker** — REJECT — tribal payoff, deck runs no creature-type synergy
+- **Boggart Trawler // Boggart Bog** — REJECT — fixing land, 35 lands already at the accepted ceiling (locked count)
+- **Sheltered Thicket** — REJECT — fixing land, 35 lands already at the accepted ceiling (locked count)
+- **Fog** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Opal Palace** — REJECT — fixing land, 35 lands already at the accepted ceiling (locked count)
+- **Canyon Slough** — REJECT — fixing land, 35 lands already at the accepted ceiling (locked count)
+- **Innkeeper's Talent** — REJECT — not physically available (owner note); would otherwise be strong but is off the table
+- **Vernal Fen** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Charcoal Diamond** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Chain Reaction** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Riveteers Overlook** — REJECT — ramp quota already covered (9 mana rocks/dorks/fixers remain in the 100)
+- **Palladium Myr** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Elvish Spirit Guide** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Seize the Spoils** — REJECT — card-draw slot filled by Sign in Blood/Harmonize/Painful Truths/Well of Lost Dreams
+- **Jungle Hollow** — REJECT — fixing land, 35 lands already at the accepted ceiling (locked count)
+- **Steel Overseer** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Cankerbloom** — REJECT — narrower than the removal already run (Assassin's Trophy/Path/Erode/Bedevil cover creature+artifact+PW)
+- **Murder** — REJECT — narrower than the removal already run (Assassin's Trophy/Path/Erode/Bedevil cover creature+artifact+PW)
+- **Rishkar, Peema Renegade** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Elvish Archdruid** — REJECT — tribal payoff, deck runs no creature-type synergy
+- **Loot, Exuberant Explorer** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Reconnaissance Mission** — REJECT — card-draw slot filled by Sign in Blood/Harmonize/Painful Truths/Well of Lost Dreams
+- **Spell Pierce** — REJECT — protection quota already met (Counterspell, Dovin's Veto in; Grand Abolisher unavailable, assigned to Tazri)
+- **Blighted Woodland** — REJECT — ramp quota already covered (9 mana rocks/dorks/fixers remain in the 100)
+- **Devoted Druid** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Alhammarret's Archive** — REJECT — assigned to The Cabbage Merchant by the orchestrator; also doubling the AMOUNT of life gained adds no extra Way of the Mentor triggers (Mentor fires once per lifegain EVENT, not scaled by amount), so its synergy upside here was already marginal
+- **Loxodon Warhammer** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Moraug, Fury of Akoum** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Noxious Gearhulk** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Annie Joins Up** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Talisman of Unity** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Syphon Mind** — REJECT — assigned to Tazri by the orchestrator, not available for this deck
+- **Roiling Regrowth** — REJECT — ramp quota already covered (9 mana rocks/dorks/fixers remain in the 100)
+- **Hunter's Insight** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Strix Serenade** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Shared Roots** — REJECT — ramp quota already covered (9 mana rocks/dorks/fixers remain in the 100)
+- **Witch's Clinic** — REJECT — fixing land, 35 lands already at the accepted ceiling (locked count)
+- **Three Steps Ahead** — REJECT — card-draw slot filled by Sign in Blood/Harmonize/Painful Truths/Well of Lost Dreams
+- **Fertile Ground** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Cathartic Reunion** — REJECT — card-draw slot filled by Sign in Blood/Harmonize/Painful Truths/Well of Lost Dreams
+- **Mishra's Bauble** — REJECT — card-draw slot filled by Sign in Blood/Harmonize/Painful Truths/Well of Lost Dreams
+- **Lumra, Bellow of the Woods** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Well of Lost Dreams** — IN — "Whenever you gain life, you may pay {X}... draw X cards" is its own per-event trigger (independent of Way of Mentor's once-per-event counter), converts the lifegain loop into cards
+- **Twilight Prophet** — REJECT — ascend-gated ("if you have the city's blessing"), unreliable trigger vs Sanguine Bond hooking directly off the deck's constant lifegain
+- **Sheoldred's Edict** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Plumb the Forbidden** — REJECT — card-draw slot filled by Sign in Blood/Harmonize/Painful Truths/Well of Lost Dreams
+- **Requisition Raid** — REJECT — narrower than the removal already run (Assassin's Trophy/Path/Erode/Bedevil cover creature+artifact+PW)
+- **Bushwhack** — REJECT — ramp quota already covered (9 mana rocks/dorks/fixers remain in the 100)
+- **Peer into the Abyss** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Maestros Theater** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Carpet of Flowers** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Archfiend of Ifnir** — REJECT — card-draw slot filled by Sign in Blood/Harmonize/Painful Truths/Well of Lost Dreams
+- **Haunted Mire** — REJECT — fixing land, 35 lands already at the accepted ceiling (locked count)
+- **Tendershoot Dryad** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Undying Malice** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Umbral Collar Zealot** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Persist** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Pristine Talisman** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Binding the Old Gods** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Butcher of Malakir** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Glissa Sunslayer** — REJECT — card-draw slot filled by Sign in Blood/Harmonize/Painful Truths/Well of Lost Dreams
+- **Regrowth** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Rankle, Master of Pranks** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Grave Titan** — REJECT — assigned to Meren by the orchestrator, not available for this deck
+- **Contagion Clasp** — REJECT — proliferate already covered (Evolution Sage, Flux Channeler, Thrummingbird, Atomize); marginal add
+- **Muraganda Raceway** — REJECT — fixing land, 35 lands already at the accepted ceiling (locked count)
+- **Weathered Wayfarer** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Goldvein Hydra** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Elixir of Immortality** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Dreadhorde Invasion** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Insidious Roots** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Beledros Witherbloom** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Fling** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Treasure Nabber** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Fell the Mighty** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Arid Archway** — REJECT — fixing land, 35 lands already at the accepted ceiling (locked count)
+- **Lavaspur Boots** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Uro, Titan of Nature's Wrath** — REJECT — card-draw slot filled by Sign in Blood/Harmonize/Painful Truths/Well of Lost Dreams
+- **Radiant Fountain** — REJECT — fixing land, 35 lands already at the accepted ceiling (locked count)
+- **Kozilek, the Great Distortion** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Kiora's Follower** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Nissa, Who Shakes the World** — REJECT — "Whenever you tap a Forest" is a mono-green ramp payoff the 5c manabase can't lean on
+- **Murderous Rider // Swift End** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Massacre Girl, Known Killer** — REJECT — card-draw slot filled by Sign in Blood/Harmonize/Painful Truths/Well of Lost Dreams
+- **Overrun** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Painful Truths** — IN — Converge draw X (X = colors spent, likely 5 in this manabase) lose X life, cheap card advantage
+- **Flame of Anor** — REJECT — narrower than the removal already run (Assassin's Trophy/Path/Erode/Bedevil cover creature+artifact+PW)
+- **Alesha, Who Laughs at Fate** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Vampire Nighthawk** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Nyx Lotus** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Vengeful Bloodwitch** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Adaptive Automaton** — REJECT — tribal payoff, deck runs no creature-type synergy
+- **Supernatural Stamina** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Ilysian Caryatid** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Honest Rutstein** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Casualties of War** — REJECT — {2}{B}{B}{G}{G} 5-mode wipe incl. planeswalkers is real, but Bedevil covers the same lane cheaper
+- **Springleaf Parade** — REJECT — tribal payoff, deck runs no creature-type synergy
+- **Festering Thicket** — REJECT — fixing land, 35 lands already at the accepted ceiling (locked count)
+- **Aven Interrupter** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Tree of Perdition** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Black Sun's Zenith** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Cycle of Renewal** — REJECT — ramp quota already covered (9 mana rocks/dorks/fixers remain in the 100)
+- **Varragoth, Bloodsky Sire** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Bitterthorn, Nissa's Animus** — REJECT — ramp quota already covered (9 mana rocks/dorks/fixers remain in the 100)
+- **Venser's Journal** — REJECT — passive 1 life/card in hand per upkeep, doesn't fire the "whenever you gain life" triggers Well of Lost Dreams/Sanguine Bond/Vito need
+- **Magda, the Hoardmaster** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Conduit Pylons** — REJECT — fixing land, 35 lands already at the accepted ceiling (locked count)
+- **Sangromancer** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Gonti, Lord of Luxury** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Paradise Druid** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Mycoloth** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Cityscape Leveler** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **The Key to the Vault** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Monstrous Vortex** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Verdant Sun's Avatar** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Primeval Bounty** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Flare of Cultivation** — REJECT — ramp quota already covered (9 mana rocks/dorks/fixers remain in the 100)
+- **Earthbender Ascension** — REJECT — ramp quota already covered (9 mana rocks/dorks/fixers remain in the 100)
+- **Greed** — REJECT — card-draw slot filled by Sign in Blood/Harmonize/Painful Truths/Well of Lost Dreams
+- **Final Showdown** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Hidden Grotto** — REJECT — fixing land, 35 lands already at the accepted ceiling (locked count)
+- **Qarsi Revenant** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Nether Traitor** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Earthshaker Dreadmaw** — REJECT — card-draw slot filled by Sign in Blood/Harmonize/Painful Truths/Well of Lost Dreams
+- **Urban Evolution** — REJECT — card-draw slot filled by Sign in Blood/Harmonize/Painful Truths/Well of Lost Dreams
+- **Regal Behemoth** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Abundant Growth** — REJECT — card-draw slot filled by Sign in Blood/Harmonize/Painful Truths/Well of Lost Dreams
+- **Primordial Hydra** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Forsaken Miner** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Consuming Corruption** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Harvest Season** — REJECT — ramp quota already covered (9 mana rocks/dorks/fixers remain in the 100)
+- **Nulldrifter** — REJECT — card-draw slot filled by Sign in Blood/Harmonize/Painful Truths/Well of Lost Dreams
+- **Doc Aurlock, Grizzled Genius** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Chomping Changeling** — REJECT — tribal payoff, deck runs no creature-type synergy
+- **Witch of the Moors** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Dread Presence** — REJECT — card-draw slot filled by Sign in Blood/Harmonize/Painful Truths/Well of Lost Dreams
+- **Puppeteer Clique** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Bloated Contaminator** — REJECT — proliferate already covered (Evolution Sage, Flux Channeler, Thrummingbird, Atomize); marginal add
+- **Vraska Joins Up** — REJECT — card-draw slot filled by Sign in Blood/Harmonize/Painful Truths/Well of Lost Dreams
+- **Blood Pet** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Ashiok, Dream Render** — REJECT — hates on opponents' tutoring/graveyards, no line to this deck's own proliferate/lifegain plan
+- **Mirri, Weatherlight Duelist** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Archfiend of Despair** — REJECT — {6}{B}{B} 8-drop; "opponents can't gain life" and the drain trigger don't touch proliferate/loyalty, too slow next to Jace/Vraska/Sarkhan win lines already in
+- **Fire Covenant** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Blade Historian** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Domri, Anarch of Bolas** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Dina, Soul Steeper** — IN — second copy of the Sanguine Bond drain effect ("Whenever you gain life, each opponent loses 1 life") on a cheap 2-drop body, insurance against removal of the enchantment
+- **Nightshade Dryad** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Hornet Nest** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Metamorphosis Fanatic** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Outcaster Trailblazer** — REJECT — card-draw slot filled by Sign in Blood/Harmonize/Painful Truths/Well of Lost Dreams
+- **Simic Charm** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Skirge Familiar** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Mudflat Village** — REJECT — fixing land, 35 lands already at the accepted ceiling (locked count)
+- **Necroskitter** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Abraded Bluffs** — REJECT — fixing land, 35 lands already at the accepted ceiling (locked count)
+- **The Legend of Kyoshi // Avatar Kyoshi** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Worldwalker Helm** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Torpor Orb** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Planetarium of Wan Shi Tong** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Avatar Kyoshi, Earthbender** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Lost Jitte** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Helix Pinnacle** — REJECT — X-tower-counter win-con proliferate could technically advance, but 100 counters is far slower than the Jace Reality Sculptor/Vraska/Sarkhan win lines already built in
+- **Everything Comes to Dust** — REJECT — tribal payoff, deck runs no creature-type synergy
+- **Necrotic Ooze** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Stensian Sanguinist // Exsanguinate** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Shard of the Nightbringer** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Pact Weapon** — REJECT — card-draw slot filled by Sign in Blood/Harmonize/Painful Truths/Well of Lost Dreams
+- **Emeritus of Ideation // Ancestral Recall** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Sapling of Colfenor** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Tamiyo, Inquisitive Student // Tamiyo, Seasoned Scholar** — REJECT — card-draw slot filled by Sign in Blood/Harmonize/Painful Truths/Well of Lost Dreams
+- **Slickshot Show-Off** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Tarmogoyf** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Pest Control** — REJECT — card-draw slot filled by Sign in Blood/Harmonize/Painful Truths/Well of Lost Dreams
+- **Flickering Hound** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Simulacrum Shaper** — REJECT — ramp quota already covered (9 mana rocks/dorks/fixers remain in the 100)
+- **Identity Echo** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Carnivorous Cultivator // Enroot** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **Omnipresence** — REJECT — no line to the loyalty/proliferate/lifegain plan; weaker than a kept card in its slot
+- **The Echoverse Fulcrum** — REJECT — card-draw slot filled by Sign in Blood/Harmonize/Painful Truths/Well of Lost Dreams
