@@ -35,7 +35,7 @@ const GROUPS: [string, string, string[]][] = [
   ['Jace token package', 'Adds loyalty to the Jace token and finds the pieces.', ['Protege\'s Awakening', 'Avatar of Burgeoning Echoes', 'Arcane Amphisbaena', 'Rewrite Regrets', 'Entrust the Spark', 'Pia, Aether Ascetic']],
   ['Protection', 'Keeps attackers, removal and wipes off the walkers.', ['Tomik, Orzhov Lawmage', 'Archangel of Tithes', 'Liliana the Faultless', 'Counterspell', 'Dovin\'s Veto', 'Boros Charm', 'Vigorbloom Charm']],
   ['Engine', "Flux Channeler proliferates on every noncreature spell, Thrummingbird on every hit.", ['Flux Channeler', 'Thrummingbird', 'Geist of Saint Thalia', 'Evolution Sage']],
-  ['Ramp', 'Timeless Lotus taps for {W}{U}{B}{R}{G}, which pays for Tam\'s proliferate every turn by itself. Great Hall of the Citadel (in Lands) makes two colours for any legendary spell. Great Divide Guide lets every land tap for any colour.', ['Timeless Lotus', 'Sol Ring', 'Arcane Signet', 'Talisman of Progress', 'Talisman of Dominance', 'Talisman of Conviction', 'Bloom Tender', 'Faeburrow Elder', 'Farseek', 'Great Divide Guide', 'Omenpath Journey']],
+  ['Ramp', 'Timeless Lotus taps for {W}{U}{B}{R}{G}, which pays for Tam\'s proliferate every turn by itself. Great Hall of the Citadel (in Lands) makes two colours for any legendary spell. Great Divide Guide lets every land tap for any colour. Esika is a 3-mana dork, or cast her back face, The Prismatic Bridge (WUBRG): every upkeep it puts the first creature or walker from your library onto the battlefield for free, and 32 of the other 98 cards are hits (19 walkers, 13 creatures).', ['Timeless Lotus', 'Sol Ring', 'Arcane Signet', 'Talisman of Progress', 'Talisman of Dominance', 'Talisman of Conviction', 'Bloom Tender', 'Faeburrow Elder', 'Farseek', 'Great Divide Guide', 'Esika, God of the Tree']],
   ['Removal', 'Toxic Deluge, Settle the Wreckage, Fumigate and Final Act kill creatures and leave your walkers standing. Fumigate\'s life gain also triggers Way of the Mentor.', ['Path to Exile', 'Erode', 'Assassin\'s Trophy', 'Atomize', 'Vraska\'s Final Mercy', 'Toxic Deluge','Settle the Wreckage', 'Fumigate', 'Final Act']],
 ];
 const grouped = new Set(GROUPS.flatMap((g) => g[2]));
@@ -98,6 +98,7 @@ const HELD: [string, string, string][] = [
 ];
 
 const BENCH: [string, string][] = [
+  ['Omenpath Journey', 'Esika // The Prismatic Bridge took the slot: a 3-mana dork on the front, a free walker or creature every upkeep on the back.'],
   ['Fatehold Charm', 'Thrummingbird took the slot: a 2-mana flier that proliferates on every hit (loyalty on every walker, Jace counters, Vraska poison).'],
   ['Shatter the Sky', 'Fumigate took the slot: its life gain triggers Way of the Mentor, and it gives opponents no cards.'],
   ['Cultivate', 'Great Divide Guide took the slot: 2 mana, and every land taps for any colour. Cultivate needs basics; the deck has four.'],

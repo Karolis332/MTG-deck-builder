@@ -272,6 +272,7 @@
 1 Erode
 2 Eroded Canyon
 1 Escape Tunnel
+1 Esika, God of the Tree
 2 Essence Capture
 1 Essence Pulse
 2 Eternal Witness
