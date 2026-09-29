@@ -37,7 +37,7 @@ const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replac
 interface Swap {
   in: string | null;
   out: string | null;
-  round: 1 | 2;
+  round: 1 | 2 | 3;
   verdict: 'KEEP' | 'REJECT';
   rank: number;
   tier: 'registered' | 'ASSUMED' | 'IF-OWNED';
@@ -45,6 +45,8 @@ interface Swap {
   why_out: string;
   verdict_reason: string;
   note?: string;
+  fable?: 'agree' | 'disagree' | 'not reviewed';
+  fable_reason?: string;
 }
 interface DeckSwaps {
   slug: string;
@@ -66,7 +68,16 @@ const listCount = (slug: string): number => {
 
 // KEEP swaps that reverse an earlier operator decision carry a note starting with HELD: shown, never counted or pulled
 const isHeld = (s: Swap) => /^HELD/.test(s.note ?? '');
-const applied = (d: DeckSwaps) => d.swaps.filter((s) => s.verdict === 'KEEP' && !isHeld(s));
+// KEEP swaps Fable or the audit marked optional carry a note starting with OPTIONAL: shown, never counted or pulled
+const isOptional = (s: Swap) => /^OPTIONAL/.test(s.note ?? '');
+const applied = (d: DeckSwaps) => d.swaps.filter((s) => s.verdict === 'KEEP' && !isHeld(s) && !isOptional(s));
+
+const fableBadge = (s: Swap): string | null => {
+  if (s.round === 3) return 'Fable new';
+  if (s.fable === 'agree') return 'Fable ✓';
+  if (s.fable === 'disagree') return 'Fable ✗';
+  return null;
+};
 
 const tierBadge = (t: Swap['tier']) => {
   const label = t === 'registered' ? 'registered' : t === 'ASSUMED' ? 'ASSUMED — confirm you own it' : 'IF-OWNED — only if you own it';
@@ -84,23 +95,28 @@ const cardBox = (n: string | null, kind: 'in' | 'out', big: boolean) => {
   return `<div class="cardbox ${kind}">${img}<span class="lbl lbl-${kind}">${kind.toUpperCase()}</span><small>${esc(n)}</small></div>`;
 };
 
-const swapRow = (s: Swap, big: boolean) => `
+const swapRow = (s: Swap, big: boolean) => {
+  const fBadge = fableBadge(s);
+  return `
 <div class="swaprow ${big ? '' : 'small'}">
   ${cardBox(s.out, 'out', big)}
   <span class="arrow">&rarr;</span>
   ${cardBox(s.in, 'in', big)}
   <div class="swapinfo">
-    <div class="badges">${tierBadge(s.tier)}<span class="round">round ${s.round}</span><span class="rank">rank ${s.rank}</span></div>
+    <div class="badges">${tierBadge(s.tier)}<span class="round">round ${s.round}</span><span class="rank">rank ${s.rank}</span>${fBadge ? `<span class="fable fable-${esc(fBadge.split(' ')[1] ?? fBadge)}">${esc(fBadge)}</span>` : ''}</div>
     ${s.why_in ? `<p><b>Why in:</b> ${esc(s.why_in)}</p>` : ''}
     ${s.why_out ? `<p><b>Why out:</b> ${esc(s.why_out)}</p>` : ''}
     <p><b>Verdict:</b> ${esc(s.verdict_reason)}</p>
+    ${s.fable_reason ? `<p><b>Fable:</b> ${esc(s.fable_reason)}</p>` : ''}
     ${s.note ? `<p class="muted">${esc(s.note)}</p>` : ''}
   </div>
 </div>`;
+};
 
 const deckSection = (d: DeckSwaps) => {
   const keep = applied(d).sort((a, b) => a.rank - b.rank);
   const held = d.swaps.filter(isHeld).sort((a, b) => a.rank - b.rank);
+  const optional = d.swaps.filter((s) => s.verdict === 'KEEP' && isOptional(s)).sort((a, b) => a.rank - b.rank);
   const reject = d.swaps.filter((s) => s.verdict === 'REJECT').sort((a, b) => a.rank - b.rank);
   const cmd = card(d.commander);
   return `
@@ -108,6 +124,7 @@ const deckSection = (d: DeckSwaps) => {
 <div class="deckhead">${cmd?.img ? `<img class="cmdimg" src="${esc(cmd.img)}" alt="${esc(d.commander)}">` : ''}</div>
 <div class="keeps">${keep.map((s) => swapRow(s, true)).join('')}</div>
 ${held.length ? `<h3 class="heldh">Needs your yes (${held.length}) — reverses an earlier decision, not counted below</h3><div class="keeps held">${held.map((s) => swapRow(s, true)).join('')}</div>` : ''}
+${optional.length ? `<h3 class="heldh">Optional extras (${optional.length}) — not counted or pulled</h3><div class="keeps held">${optional.map((s) => swapRow(s, true)).join('')}</div>` : ''}
 <details><summary>Considered and rejected (${reject.length})</summary>
 <div class="rejects">${reject.map((s) => swapRow(s, false)).join('')}</div>
 </details>`;
@@ -118,7 +135,8 @@ const summaryRow = (d: DeckSwaps) => {
   const flagged = keep.filter((s) => s.tier !== 'registered' && s.in).length;
   const delta = keep.reduce((n, s) => n + (s.in ? 1 : 0) - (s.out ? 1 : 0), 0);
   const count = listCount(d.slug) + delta;
-  return `<tr><td><a href="#${esc(d.slug)}">${esc(d.commander)}</a></td><td>${keep.length}</td><td>${flagged}</td><td>${d.swaps.filter(isHeld).length}</td><td>${count}</td></tr>`;
+  const fableChanges = d.swaps.filter((s) => s.fable === 'disagree' || s.round === 3).length;
+  return `<tr><td><a href="#${esc(d.slug)}">${esc(d.commander)}</a></td><td>${keep.length}</td><td>${flagged}</td><td>${d.swaps.filter(isHeld).length}</td><td>${count}</td><td>${fableChanges}</td></tr>`;
 };
 
 const pullList = (d: DeckSwaps) => {
@@ -131,7 +149,7 @@ const pullList = (d: DeckSwaps) => {
 <div class="pullcols"><div><b>Take out</b>${outs.join('') || '<p class="muted">none</p>'}</div><div><b>Put in</b>${ins.join('') || '<p class="muted">none</p>'}</div></div></div>`;
 };
 
-const html = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Paper deck upgrades — 2026-09-28</title><style>
+const html = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Paper deck upgrades — 2026-09-28 (Fable-reviewed)</title><style>
 body{margin:0;background:#15110d;color:#e8dcc4;font:15px/1.45 Georgia,serif}
 header{position:sticky;top:0;background:#1d1711;border-bottom:1px solid #6b5220;padding:10px 18px;display:flex;gap:18px;align-items:center;z-index:3;flex-wrap:wrap}
 h1{font-size:19px;margin:0;color:#d4af37;letter-spacing:.04em}
@@ -156,6 +174,8 @@ table{border-collapse:collapse;margin:0 18px;width:calc(100% - 36px)}td,th{borde
 .tier{border-radius:10px;padding:1px 9px;font:11px monospace}
 .t-registered{background:#3a2d17;color:#b5a27b}.t-ASSUMED{background:#6b5220;color:#fff}.t-IF-OWNED{background:#7a2020;color:#fff}
 .round,.rank{font:11px monospace;color:#7d6c4d}
+.fable{border-radius:10px;padding:1px 9px;font:11px monospace}
+.fable-✓{background:#2d5a2d;color:#fff}.fable-✗{background:#7a2020;color:#fff}.fable-new{background:#1d4d6b;color:#fff}
 .muted{color:#b5a27b;font-size:13px}
 details{margin:0 18px 10px}summary{cursor:pointer;color:#d4af37;padding:6px 0}
 .pulldeck{margin:0 18px 20px;background:#1d1711;border:1px solid #3a2d17;border-radius:8px;padding:12px 16px}
@@ -163,11 +183,11 @@ details{margin:0 18px 10px}summary{cursor:pointer;color:#d4af37;padding:6px 0}
 .pullcols label:has(input:checked){opacity:.4;text-decoration:line-through}
 footer{margin:30px 18px;color:#7d6c4d;font-size:12px}
 </style></head><body>
-<header><h1>Paper deck upgrades — 2026-09-28</h1>
+<header><h1>Paper deck upgrades — 2026-09-28 (Fable-reviewed)</h1>
 <nav style="margin-left:auto">${data.decks.map((d) => `<a href="#${esc(d.slug)}">${esc(d.commander)}</a>`).join('')}<a href="#pull">Pull list</a></nav></header>
 
 <h2 id="summary">Summary</h2>
-<table><tr><th>Deck</th><th>KEEP swaps</th><th>ASSUMED / IF-OWNED ins</th><th>Held for your yes</th><th>Card count after</th></tr>
+<table><tr><th>Deck</th><th>KEEP swaps</th><th>ASSUMED / IF-OWNED ins</th><th>Held for your yes</th><th>Card count after</th><th>Fable changes</th></tr>
 ${data.decks.map(summaryRow).join('')}</table>
 
 ${data.decks.map(deckSection).join('\n')}

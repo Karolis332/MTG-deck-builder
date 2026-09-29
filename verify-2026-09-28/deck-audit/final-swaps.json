@@ -9,24 +9,29 @@
      "in": "Well of Lost Dreams",
      "out": "Chandra, Fire Artisan",
      "round": 1,
-     "verdict": "KEEP",
-     "rank": 1,
+     "verdict": "REJECT",
+     "rank": 99,
      "tier": "registered",
      "why_in": "\"Whenever you gain life, you may pay {X}, where X is less than or equal to the amount of life you gained. If you do, draw X cards.\": every Paradox lifegain event from a loyalty activation becomes a card.",
      "why_out": "Chandra, Fire Artisan shares her type with Chandra, Torch of Defiance, so cutting her leaves Tam X unchanged.",
-     "verdict_reason": "KEEP: a per-event draw engine for a duplicate-type walker."
+     "verdict_reason": "Not owned: the operator does not have Well of Lost Dreams (2026-09-28). It was registered from the Witherbloom precon decklist, never counted by hand. Chandra, Fire Artisan stays.",
+     "fable": "agree",
+     "fable_reason": "Well of Lost Dreams turns every Paradox lifegain trigger into a card, and Chandra, Fire Artisan is still the right cut as the lowest-value duplicate-type walker.",
+     "note": "was KEEP rank 1: KEEP: a per-event draw engine for a duplicate-type walker."
     },
     {
      "in": "Domri, Anarch of Bolas",
      "out": "Rewrite Regrets",
      "round": 1,
-     "verdict": "KEEP",
-     "rank": 2,
+     "verdict": "REJECT",
+     "rank": 99,
      "tier": "registered",
      "why_in": "\"+1: Add {R} or {G}.\": a new walker type (Tam X+1) whose +1 is ramp and triggers Paradox and Mentor on every activation.",
      "why_out": "Rewrite Regrets needs a creature or planeswalker card in the graveyard, so it is dead early.",
-     "verdict_reason": "KEEP: refuter round-1 coverage miss #1, adopted in the Tam section-6 baseline in place of the Dina fallback.",
-     "note": "Rewrite Regrets also empowers Jace 2 (Jace-empower package); operator may want to confirm."
+     "verdict_reason": "Fable overturned: better IN/OUT is Ral Zarek → Rewrite Regrets.",
+     "note": "Was: KEEP rank 2, 'KEEP: refuter round-1 coverage miss #1, adopted in the Tam section-6 baseline in place of the Dina fallback.' Also: Rewrite Regrets also empowers Jace 2 (Jace-empower package); operator may want to confirm.",
+     "fable": "disagree",
+     "fable_reason": "Ral Zarek does more for the same cost — untaps Timeless Lotus or Tam itself and its −2 is removal — while Domri's fight mode is dead with 14 creatures."
     },
     {
      "in": "Sanguine Bond",
@@ -38,7 +43,9 @@
      "why_in": "\"Whenever you gain life, target opponent loses that much life.\": drains once per lifegain event (Paradox, Liliana the Faultless, Ajani).",
      "why_out": "Not the weakest: Archangel's 'creatures can't attack you or planeswalkers you control unless their controller pays {1}' is the only static walker protection.",
      "verdict_reason": "REJECT: the auditor's 'zero line to the plan' is false; the round-1 fallback OUT (Final Act) is now a Tam lock.",
-     "note": "Final Act became a Tam lock after round 1."
+     "note": "Final Act became a Tam lock after round 1.",
+     "fable": "agree",
+     "fable_reason": "Archangel's 'creatures can't attack you or planeswalkers you control unless their controller pays {1}' is real protection."
     },
     {
      "in": "Dina, Soul Steeper",
@@ -50,7 +57,9 @@
      "why_in": "\"Whenever you gain life, each opponent loses 1 life.\": pings each opponent on every lifegain event.",
      "why_out": "Not cuttable: Jared is the only Jared-type walker (Tam X-1 if cut) and a Tam lock.",
      "verdict_reason": "REJECT: cuts a unique walker type; the round-1 fallback slot (Rewrite Regrets) went to Domri.",
-     "note": "Jared is a Tam lock."
+     "note": "Jared is a Tam lock.",
+     "fable": "agree",
+     "fable_reason": "Jared is a Tam lock — the only Jared-type walker."
     },
     {
      "in": "Bedevil",
@@ -62,7 +71,9 @@
      "why_in": "\"Destroy target artifact, creature, or planeswalker.\": flexible instant removal.",
      "why_out": "Not cuttable: a Talisman is ramp at 35 locked lands; the cut moved the gate's land target from 38 to 39.",
      "verdict_reason": "REJECT: the deck already runs 7 spot removal and {B}{B}{R} is the hardest pip cost in a five-colour base.",
-     "note": "Both Talismans are Tam locks."
+     "note": "Both Talismans are Tam locks.",
+     "fable": "agree",
+     "fable_reason": "Both Talismans are ramp locks at 35 lands."
     },
     {
      "in": "Sign in Blood",
@@ -73,7 +84,9 @@
      "tier": "registered",
      "why_in": "\"Target player draws two cards and loses 2 life.\": two cards for 2 mana.",
      "why_out": "Not the weakest: Vigorbloom's 'You draw a card and gain 3 life' is a card plus a Mentor lifegain event, and its other mode gives a walker hexproof and indestructible.",
-     "verdict_reason": "REJECT: the auditor's claim that Kaya's Ghostform covers hexproof is false; Ghostform returns a card, it grants no hexproof."
+     "verdict_reason": "REJECT: the auditor's claim that Kaya's Ghostform covers hexproof is false; Ghostform returns a card, it grants no hexproof.",
+     "fable": "agree",
+     "fable_reason": "Vigorbloom's hexproof-and-indestructible mode protects a walker; Kaya's Ghostform does not grant hexproof."
     },
     {
      "in": "Harmonize",
@@ -85,7 +98,9 @@
      "why_in": "\"Draw three cards.\": three cards for 4 mana.",
      "why_out": "Not cuttable: the second Talisman is ramp at 35 locked lands; cutting both leaves 9 ramp pieces.",
      "verdict_reason": "REJECT: same ramp objection as Bedevil.",
-     "note": "Both Talismans are Tam locks."
+     "note": "Both Talismans are Tam locks.",
+     "fable": "agree",
+     "fable_reason": "Both Talismans are ramp locks at 35 lands; cutting them leaves 9 ramp pieces."
     },
     {
      "in": "Painful Truths",
@@ -97,7 +112,9 @@
      "why_in": "\"You draw X cards and lose X life, where X is the number of colors of mana spent to cast this spell.\": it costs {2}{B}, so X is at most 3, not the auditor's 'likely 5'.",
      "why_out": "Not cuttable: Saheeli is the only Saheeli-type walker (Tam X-1) and makes a Servo on 'Whenever you cast a noncreature spell'.",
      "verdict_reason": "REJECT: cuts a unique walker type, and the IN math is wrong.",
-     "note": "Saheeli is a Tam lock."
+     "note": "Saheeli is a Tam lock.",
+     "fable": "agree",
+     "fable_reason": "Saheeli is a unique walker type and a Tam lock."
     },
     {
      "in": "Kiora of Salt and Sand",
@@ -108,7 +125,9 @@
      "tier": "registered",
      "why_in": "\"Create an 8/8 blue Leviathan creature token with hexproof\": every walker gets a [-8] finisher once Mentor has built loyalty.",
      "why_out": "Not the weakest: Pia's 'search your library for an enchantment card' is the only tutor for the Ways, including the Mentor + Paradox engine.",
-     "verdict_reason": "REJECT: the auditor's 'RNG-gated' is false (the search is a choice); Kiora is a payoff, Pia assembles the engine."
+     "verdict_reason": "REJECT: the auditor's 'RNG-gated' is false (the search is a choice); Kiora is a payoff, Pia assembles the engine.",
+     "fable": "agree",
+     "fable_reason": "Fable found no reason to overturn this reject; Pia assembles the Ways engine that Kiora only pays off."
     },
     {
      "in": "Niv-Mizzet, Ghost Counsel",
@@ -120,7 +139,69 @@
      "why_in": "\"Whenever you gain life, you may pay that much life. If you do, draw that many cards.\": draws on each Paradox lifegain event.",
      "why_out": "Not cuttable: Quintorius is the only Quintorius-type walker, so cutting him lowers Tam X by 1.",
      "verdict_reason": "REJECT: unique walker type lost for a 6-MV {2}{W}{W}{B}{B} card the operator may not own.",
-     "note": "IF-OWNED."
+     "note": "IF-OWNED.",
+     "fable": "agree",
+     "fable_reason": "Fable found no reason to overturn this reject; Quintorius is a unique walker type the operator may not own the replacement for."
+    },
+    {
+     "in": "Ral Zarek",
+     "out": "Rewrite Regrets",
+     "round": 3,
+     "verdict": "KEEP",
+     "rank": 1,
+     "tier": "registered",
+     "why_in": "\"+1: Tap target permanent, then untap another target permanent\" untaps Timeless Lotus (\"{T}: Add {W}{U}{B}{R}{G}\") or Tam for a second proliferate off Bloom Tender/Faeburrow Elder; \"−2: Ral Zarek deals 3 damage to any target\" is removal.",
+     "why_out": "Rewrite Regrets (\"Return target creature or planeswalker card with mana value 6 or less from your graveyard to the battlefield\") has no target, no cast, and is a one-shot sorcery in a deck whose loop scales with walkers activating each turn.",
+     "verdict_reason": "KEEP: Fable review — same new walker type as the audited Domri swap but a stronger +1/−2 for the same cost."
+    },
+    {
+     "in": "Domri, Anarch of Bolas",
+     "out": "Arcane Amphisbaena",
+     "round": 3,
+     "verdict": "KEEP",
+     "rank": 2,
+     "tier": "registered",
+     "why_in": "\"+1: Add {R} or {G}\" ramp that triggers Paradox and Mentor on every activation.",
+     "why_out": "Arcane Amphisbaena's only text is 'empower Jace 2' on a 1/1 deathtouch body; the seven Ways alone put 34 counters on the token.",
+     "verdict_reason": "KEEP: optional 21st walker, weakest of the walkers if taken.",
+     "note": "OPTIONAL: pick ONE of Ashiok or Domri for the Amphisbaena slot — Ashiok if your pod has graveyard/tutor decks, Domri otherwise"
+    },
+    {
+     "in": "Sanctum Lurker",
+     "out": "Arcane Amphisbaena",
+     "round": 3,
+     "verdict": "KEEP",
+     "rank": 4,
+     "tier": "IF-OWNED",
+     "why_in": "\"Planeswalkers you control aren't put into their owners' graveyards for having 0 loyalty\" and \"Planeswalkers you control have '[+2]: This planeswalker deals 1 damage to each opponent and you gain 1 life'\" — every walker gets a plus that is a lifegain event, a Well of Lost Dreams card.",
+     "why_out": "Arcane Amphisbaena's only text is 'empower Jace 2' on a 1/1 deathtouch body.",
+     "verdict_reason": "KEEP: Fable miss — only after the operator registers it.",
+     "note": "OPTIONAL: only after you confirm you own it and it is registered (Fable: \"only after registration\"). IF-OWNED — register before sleeving."
+    },
+    {
+     "in": "Jace, Multiverse Architect",
+     "out": "The Wanderer",
+     "round": 3,
+     "verdict": "KEEP",
+     "rank": 5,
+     "tier": "ASSUMED",
+     "why_in": "\"+1: Draw two cards, then put a card from your hand on the bottom of your library\" every turn, and 'creatures they control can't attack Jaces you control this turn' unless they pay {2} — protects the Jace token that carries the 25-loyalty win.",
+     "why_out": "The Wanderer has no planeswalker type and no plus ability; only its static ('Prevent all noncombat damage...') remains.",
+     "verdict_reason": "KEEP: Fable miss — only after the operator registers it.",
+     "note": "OPTIONAL: only after you confirm you own it and it is registered (Fable: \"only after registration\"). ASSUMED — confirm owned before sleeving."
+    },
+    {
+     "in": "Ashiok, Dream Render",
+     "out": "Arcane Amphisbaena",
+     "round": 3,
+     "verdict": "KEEP",
+     "rank": 3,
+     "tier": "registered",
+     "fable": "new",
+     "why_in": "\"−1: Target player mills four cards. Then exile each opponent's graveyard.\" Way of the Paradox (\"Whenever you activate a loyalty ability, you gain 1 life\") and Way of the Mentor (\"Whenever you gain life, put a loyalty counter on each planeswalker you control\") sustain the −1 every turn — net 0 loyalty on Ashiok, +1 on every other walker — while stripping graveyard/tutor decks in the pod.",
+     "why_out": "Arcane Amphisbaena's only text is 'empower Jace 2' on a 1/1 deathtouch body; the seven Ways alone put 34 counters on the token.",
+     "verdict_reason": "KEEP: optional 21st walker, graveyard/tutor hate over Domri's ramp.",
+     "note": "OPTIONAL: pick ONE of Ashiok or Domri for the Amphisbaena slot — Ashiok if your pod has graveyard/tutor decks, Domri otherwise"
     }
    ]
   },
@@ -133,45 +214,53 @@
      "out": "Creakwood Liege",
      "round": 1,
      "verdict": "KEEP",
-     "rank": 1,
+     "rank": 3,
      "tier": "registered",
      "why_in": "No card added: size fix, 101 to 100 cards.",
      "why_out": "Creakwood Liege is the 101st card; it is absent from the operator's own 100-card proposals/meren-powerhouse.txt.",
-     "verdict_reason": "KEEP: mandatory size fix that keeps 35 lands and a lands PASS (replaces the rejected Swamp cut)."
+     "verdict_reason": "KEEP: mandatory size fix that keeps 35 lands and a lands PASS (replaces the rejected Swamp cut).",
+     "fable": "agree",
+     "fable_reason": "Mandatory size fix; the operator's own 100-card powerhouse proposal already dropped Creakwood Liege."
     },
     {
      "in": "Vraska, the Cutting Glare",
      "out": "Lightning Greaves",
      "round": 2,
      "verdict": "KEEP",
-     "rank": 2,
+     "rank": 6,
      "tier": "ASSUMED",
      "why_in": "\"When Vraska enters, if you control six or more lands, destroy target permanent an opponent controls.\": at MV 3 Meren loops it, so it is repeatable any-permanent removal on a deathtouch body.",
      "why_out": "Lightning Greaves only grants haste and shroud; Meren's value comes from end-step recursion, and Veil of Summer stays as protection.",
      "verdict_reason": "KEEP: valid only because Veil of Summer stays (Silence the Echo swap rejected).",
-     "note": "ASSUMED: confirm owned. Freed Greaves: astra-review proposed it for Imotekh (not evaluated)."
+     "note": "ASSUMED: confirm owned. Freed Greaves: astra-review proposed it for Imotekh (not evaluated).",
+     "fable": "agree",
+     "fable_reason": "MV-3 deathtouch removal that Meren loops every end step; Greaves only protected tempo since experience counters belong to the player."
     },
     {
      "in": "Vito, Thorn of the Dusk Rose",
      "out": "Grim Servant",
      "round": 1,
      "verdict": "KEEP",
-     "rank": 3,
+     "rank": 1,
      "tier": "registered",
      "why_in": "\"Whenever you gain life, target opponent loses that much life.\": doubles every 1-life gain from Blood Artist, Zulaport, Cauldron and Moldervine into a second loss.",
      "why_out": "Grim Servant is a 4-MV tutor that costs 3 life; the weakest creature slot, though Meren can recur it.",
-     "verdict_reason": "KEEP: Vito is the stronger drain payoff."
+     "verdict_reason": "KEEP: Vito is the stronger drain payoff.",
+     "fable": "agree",
+     "fable_reason": "Vito doubles every 1-life gain from Blood Artist, Zulaport, Cauldron and Moldervine into a second loss; Emeritus of Woe covers Grim Servant's tutor role without the life cost."
     },
     {
      "in": "Grave Titan",
      "out": "Rune-Scarred Demon",
      "round": 1,
      "verdict": "KEEP",
-     "rank": 4,
+     "rank": 2,
      "tier": "registered",
      "why_in": "\"Whenever this creature enters or attacks, create two 2/2 black Zombie creature tokens.\": sac fodder on every entry and attack, and an MV-6 reanimation target.",
      "why_out": "Rune-Scarred Demon is a one-shot tutor body at the same MV with no fodder.",
-     "verdict_reason": "KEEP."
+     "verdict_reason": "KEEP.",
+     "fable": "agree",
+     "fable_reason": "Grave Titan sits inside Meren's reach one counter earlier and makes two bodies per ETB; the Demon's tutor duplicates Emeritus."
     },
     {
      "in": "Jungle Hollow",
@@ -182,7 +271,9 @@
      "tier": "registered",
      "why_in": "\"{T}: Add {B} or {G}.\": coloured mana for {B}{B}{B} and {B}{B}{G}{G} costs, plus 1 life on entry.",
      "why_out": "High Market's free sac-for-1-life outlet is redundant with 4 other free outlets and makes only colourless.",
-     "verdict_reason": "KEEP (reason fixed: Grim Backwoods is not an 'identical template'; it costs {2}{B}{G})."
+     "verdict_reason": "KEEP (reason fixed: Grim Backwoods is not an 'identical template'; it costs {2}{B}{G}).",
+     "fable": "agree",
+     "fable_reason": "Jungle Hollow adds a Vito-triggering life gain on entry that High Market's colourless-only mana lacks."
     },
     {
      "in": "Night's Whisper",
@@ -194,7 +285,9 @@
      "why_in": "\"You draw two cards and lose 2 life.\": two cards for 2 mana.",
      "why_out": "Not the weakest: Butcher's 'Whenever this creature or another creature you control dies, each opponent sacrifices a creature' is a one-sided repeatable edict.",
      "verdict_reason": "REJECT: Butcher is an engine piece, and the operator cut Night's Whisper from Meren in v6.",
-     "note": "Operator declined Night's Whisper for Meren."
+     "note": "Operator declined Night's Whisper for Meren.",
+     "fable": "agree",
+     "fable_reason": "Butcher's 'each opponent sacrifices a creature' repeats off every free outlet and is a Reanimate/Victimize/Junji target; the operator cut Night's Whisper from Meren in v6."
     },
     {
      "in": null,
@@ -205,7 +298,9 @@
      "tier": "registered",
      "why_in": "No card added: proposed size fix, 101 to 100 cards.",
      "why_out": "Cutting a Swamp drops Meren to 34 lands and adds a new gate WARN (current deck: lands PASS at 35).",
-     "verdict_reason": "REJECT: cut Creakwood Liege instead."
+     "verdict_reason": "REJECT: cut Creakwood Liege instead.",
+     "fable": "agree",
+     "fable_reason": "Cutting a Swamp drops Meren to 34 lands, a new WARN; Creakwood Liege is the correct 101st-card cut instead."
     },
     {
      "in": "Avacyn, Angel of Horror",
@@ -216,8 +311,10 @@
      "tier": "IF-OWNED",
      "why_in": "\"Whenever Avacyn or another nontoken creature you control dies, return that card to the battlefield under your control at the beginning of the next end step.\": team-wide free reanimation off every sacrifice.",
      "why_out": "Not cuttable: operator keep (HISTORY: 'The Gitrog, Ravenous Ride stays').",
-     "verdict_reason": "REJECT: the OUT is an operator keep; at MV 8 Meren mostly returns Avacyn to hand; IF-OWNED.",
-     "note": "Operator keep."
+     "verdict_reason": "Fable: better IN/OUT is Avacyn, Angel of Horror → Moldervine Reclamation (Gitrog is an operator lock).",
+     "note": "Was: REJECT rank 99, 'REJECT: the OUT is an operator keep; at MV 8 Meren mostly returns Avacyn to hand; IF-OWNED.' Also: Operator keep.",
+     "fable": "disagree",
+     "fable_reason": "Gitrog is an operator keep, but with five direct-to-battlefield routes (Reanimate, Cauldron of Essence, Junji, Grave Researcher, Victimize+Buried Alive) Avacyn is playable without ever needing Meren's threshold."
     },
     {
      "in": "Massacre Girl, Most Wanted",
@@ -229,7 +326,9 @@
      "why_in": "\"Whenever another creature or planeswalker you control dies, Massacre Girl deals 1 damage to target opponent and you gain 1 life.\": a single-opponent drain on each death.",
      "why_out": "Not the weakest: Golgari Charm's regenerate mode makes Culling Ritual a one-sided wipe (HISTORY line 169).",
      "verdict_reason": "REJECT: Blood Artist, Zulaport, Cauldron, Konrad and Vito already drain.",
-     "note": "Two-deck conflict with Imotekh: neither deck gets it."
+     "note": "Two-deck conflict with Imotekh: neither deck gets it.",
+     "fable": "agree",
+     "fable_reason": "Golgari Charm is the Culling Ritual regenerate lock (HISTORY line 169); Blood Artist, Zulaport, Cauldron, Konrad and Vito already drain."
     },
     {
      "in": "Silence the Echo",
@@ -241,7 +340,9 @@
      "why_in": "\"Destroy target creature or planeswalker.\": two-mana removal whose optional sacrifice cost feeds Meren.",
      "why_out": "Not the weakest: Veil's 'Spells you control can't be countered' and hexproof from blue and black are unconditional; with Greaves out it is Meren's last protection.",
      "verdict_reason": "REJECT: the auditor misquoted Veil (only the draw is conditional), and removal is already dense.",
-     "note": "Conflicted with the Vraska swap, whose rationale relies on Veil staying."
+     "note": "Conflicted with the Vraska swap, whose rationale relies on Veil staying.",
+     "fable": "agree",
+     "fable_reason": "Veil's hexproof and 'can't be countered' are unconditional and, with Greaves cut, Meren's last protection."
     },
     {
      "in": "Restore with Empathy",
@@ -253,7 +354,32 @@
      "why_in": "\"Return target permanent card from your graveyard to your hand. You gain 4 life.\": any-permanent rebuy plus a Vito trigger.",
      "why_out": "Not the weakest: Marauder's 'each player sacrifices a nontoken creature' repeats every end step through Meren at MV 2.",
      "verdict_reason": "REJECT: Restore duplicates Meren's own recursion.",
-     "note": "Two-deck conflict with Cabbage: neither deck gets it."
+     "note": "Two-deck conflict with Cabbage: neither deck gets it.",
+     "fable": "agree",
+     "fable_reason": "Marauder's 'each player sacrifices a nontoken creature' repeats every end step through Meren at MV 2."
+    },
+    {
+     "in": "Dina, Soul Steeper",
+     "out": "Ramunap Excavator",
+     "round": 3,
+     "verdict": "KEEP",
+     "rank": 4,
+     "tier": "registered",
+     "why_in": "\"Whenever you gain life, each opponent loses 1 life\" converts each lifegain event into a loss for every opponent, stacking with Vito rather than duplicating him; also a paid instant-speed sac outlet ('{1}, Sacrifice another creature: Dina gets +X/+0') and a 2-exp Meren target.",
+     "why_out": "Ramunap Excavator's 'You may play lands from your graveyard' has only three feeders here (Fabled Passage, Myriad Landscape, Springbloom Druid's sacrificed land) and is a 3-mana 2/3 otherwise.",
+     "verdict_reason": "KEEP: Fable miss — registered and open."
+    },
+    {
+     "in": "Avacyn, Angel of Horror",
+     "out": "Moldervine Reclamation",
+     "round": 3,
+     "verdict": "KEEP",
+     "rank": 7,
+     "tier": "IF-OWNED",
+     "why_in": "\"Whenever Avacyn or another nontoken creature you control dies, return that card to the battlefield under your control at the beginning of the next end step\" turns every free sac into a re-buy of Chupacabra, Plaguecrafter, Marauder, Gray Merchant, Solemn, Eternal Witness and Grave Titan every turn.",
+     "why_out": "Moldervine Reclamation is a 5-mana enchantment whose 'you gain 1 life and draw a card' is the deck's 12th draw effect.",
+     "verdict_reason": "KEEP: Fable review — apply only if Avacyn is owned.",
+     "note": "IF-OWNED. Not a game changer, bracket-3 legal per Fable."
     }
    ]
   },
@@ -271,7 +397,9 @@
      "why_in": "\"Add one mana of any color.\": every creature token taps for mana, so Najeela's attacking Warrior tokens pay for her WUBRG untap-and-extra-combat: infinite combats.",
      "why_out": "Solemn Doomguide only grants 'unearth {1}{B}' to party cards in the graveyard: grind value on a 5-drop.",
      "verdict_reason": "KEEP: wins the Doomguide slot over Traxos.",
-     "note": "Doomguide was proposed as an OUT twice."
+     "note": "Doomguide was proposed as an OUT twice.",
+     "fable": "agree",
+     "fable_reason": "Springleaf tokens tap for any color, letting Najeela's attacking Warriors pay for her own untap-and-extra-combat ability — infinite combats."
     },
     {
      "in": "Generous Gift",
@@ -282,19 +410,23 @@
      "tier": "registered",
      "why_in": "\"Destroy target permanent.\": answers any permanent at instant speed.",
      "why_out": "Concerted Defense is a soft counter for noncreature spells only.",
-     "verdict_reason": "KEEP."
+     "verdict_reason": "KEEP.",
+     "fable": "agree",
+     "fable_reason": "'Destroy target permanent' at instant speed beats a soft counter that only stops noncreature spells."
     },
     {
      "in": "Realmwalker",
      "out": "Archpriest of Iona",
      "round": 2,
      "verdict": "KEEP",
-     "rank": 3,
+     "rank": 11,
      "tier": "registered",
      "why_in": "\"You may cast creature spells of the chosen type from the top of your library.\": card advantage on a changeling that fills all four party roles.",
      "why_out": "Archpriest of Iona is a 1-drop whose power equals your party size.",
      "verdict_reason": "KEEP: wins the Archpriest slot over Rescue Girl.",
-     "note": "Archpriest was proposed as an OUT twice."
+     "note": "Archpriest was proposed as an OUT twice.",
+     "fable": "agree",
+     "fable_reason": "Realmwalker is a changeling body with card advantage, though it reads the same top card as Vizier and Nalia, so it's the third copy of one effect, not additive."
     },
     {
      "in": "Putrefy",
@@ -305,89 +437,105 @@
      "tier": "registered",
      "why_in": "\"Destroy target artifact or creature.\": instant removal for two permanent types.",
      "why_out": "Bar the Gate only counters a creature or planeswalker spell.",
-     "verdict_reason": "KEEP."
+     "verdict_reason": "KEEP.",
+     "fable": "agree",
+     "fable_reason": "Instant removal for two permanent types beats holding up a counter that fights the curve."
     },
     {
      "in": "Infernal Grasp",
      "out": "Multiclass Baldric",
      "round": 1,
      "verdict": "KEEP",
-     "rank": 5,
+     "rank": 3,
      "tier": "registered",
      "why_in": "\"Destroy target creature. You lose 2 life.\": unconditional 2-mana instant removal.",
      "why_out": "Multiclass Baldric is an equipment granting one keyword per party role; the weakest slot.",
-     "verdict_reason": "KEEP (reason fixed: Baldric does not need a full party)."
+     "verdict_reason": "KEEP (reason fixed: Baldric does not need a full party).",
+     "fable": "agree",
+     "fable_reason": "Unconditional 2-mana removal beats keyword-granting equipment tied to controlling each party role."
     },
     {
      "in": "Syphon Mind",
      "out": "Thwart the Grave",
      "round": 1,
      "verdict": "KEEP",
-     "rank": 6,
+     "rank": 8,
      "tier": "registered",
      "why_in": "\"Each other player discards a card. You draw a card for each card discarded this way.\": about 3 cards for 4 mana in a 4-player pod.",
      "why_out": "Thwart the Grave is situational graveyard recursion.",
-     "verdict_reason": "KEEP (reason fixed: Thwart costs 1 less per party member, it does not need a full party)."
+     "verdict_reason": "KEEP (reason fixed: Thwart costs 1 less per party member, it does not need a full party).",
+     "fable": "agree",
+     "fable_reason": "About 3 cards for 4 mana in a pod beats situational graveyard recursion with no self-mill support."
     },
     {
      "in": "Chomping Changeling",
      "out": "You Find a Cursed Idol",
      "round": 2,
      "verdict": "KEEP",
-     "rank": 7,
+     "rank": 10,
      "tier": "registered",
      "why_in": "\"When this creature enters, destroy up to one target artifact or enchantment.\": the Idol's removal modes on a changeling body that fills any party role.",
      "why_out": "The Idol's only unique mode is a Treasure plus venture.",
      "verdict_reason": "KEEP: wins the Idol slot over Enlightened Confidant.",
-     "note": "Cursed Idol was proposed as an OUT twice."
+     "note": "Cursed Idol was proposed as an OUT twice.",
+     "fable": "agree",
+     "fable_reason": "A changeling body carrying the Idol's removal mode beats a bodyless sorcery."
     },
     {
      "in": "Samut, Hazoret's Champion",
      "out": "Feywild Caretaker",
      "round": 2,
      "verdict": "KEEP",
-     "rank": 8,
+     "rank": 9,
      "tier": "ASSUMED",
      "why_in": "\"Creatures you control have haste.\": a 2-mana Human Warrior Cleric (two party roles) that hastes the team.",
      "why_out": "Feywild Caretaker is 5 mana for one Wizard plus the initiative; Wizards stay at 6 plus the changelings.",
      "verdict_reason": "KEEP: the auditor omitted Caretaker's initiative, but Samut still wins on rate.",
-     "note": "ASSUMED: confirm owned."
+     "note": "ASSUMED: confirm owned.",
+     "fable": "agree",
+     "fable_reason": "Samut hastes Squad Commander, Springleaf and Mutavault tokens the turn they land; 6 initiative sources remain without Caretaker."
     },
     {
      "in": "Rescue Girl, First Responder",
      "out": "Yuan-Ti Malison",
      "round": 2,
      "verdict": "KEEP",
-     "rank": 9,
+     "rank": 12,
      "tier": "ASSUMED",
      "why_in": "\"{T}: Return another target permanent you control to its owner's hand. Activate only during your turn.\": a flying Cleric that re-buys the initiative/venture entries of Seasoned Dungeoneer, White Plume Adventurer and Ravenloft Adventurer.",
      "why_out": "Yuan-Ti Malison is unblockable only when attacking alone and ventures only on combat damage; Rogues stay at 9.",
      "verdict_reason": "KEEP, moved: the proposed OUT was Archpriest of Iona, whose slot went to Realmwalker.",
-     "note": "Moved to the next-weakest slot. ASSUMED: confirm owned."
+     "note": "Moved to the next-weakest slot. ASSUMED: confirm owned.",
+     "fable": "agree",
+     "fable_reason": "Rescue Girl re-buys the initiative ETBs of Dungeoneer, White Plume, Ravenloft and Undermountain; Malison only works unblocked alone in a go-wide deck."
     },
     {
      "in": "Grand Abolisher",
      "out": "Stick Together",
      "round": 1,
-     "verdict": "KEEP",
-     "rank": 10,
+     "verdict": "REJECT",
+     "rank": 99,
      "tier": "registered",
      "why_in": "\"During your turn, your opponents can't cast spells or activate abilities of artifacts, creatures, or enchantments.\": protects combat and combo turns and fills the Cleric role.",
      "why_out": "Stick Together makes every player sacrifice all but a party, hitting Tazri's own Najeela, Squad Commander and Merriment tokens.",
-     "verdict_reason": "KEEP on card quality, but HELD: it reverses the operator's v4 cut.",
-     "note": "HELD: reverses operator v4 decision — needs a yes. Not in the 100-card count."
+     "verdict_reason": "Fable overturned: better IN/OUT is Grand Abolisher → Acererak the Archlich.",
+     "note": "Was: KEEP rank 10, 'KEEP on card quality, but HELD: it reverses the operator's v4 cut.' Also: HELD: reverses operator v4 decision — needs a yes. Not in the 100-card count.",
+     "fable": "disagree",
+     "fable_reason": "Stick Together spares your own Clerics/Rogues/Warriors/Wizards while hitting the rest of the table; Acererak never becomes a body or party member."
     },
     {
      "in": "Growth Spiral",
      "out": "Explore the Underdark",
      "round": 1,
-     "verdict": "KEEP",
-     "rank": 11,
+     "verdict": "REJECT",
+     "rank": 99,
      "tier": "registered",
      "why_in": "\"Draw a card. You may put a land card from your hand onto the battlefield.\": 2-MV instant ramp that replaces itself.",
      "why_out": "Explore the Underdark is a 5-MV sorcery, though it also fetches two lands and takes the initiative.",
-     "verdict_reason": "KEEP on rate, but HELD: it reverses the operator's v6 add.",
-     "note": "HELD: reverses operator v6 decision — needs a yes. Not in the 100-card count."
+     "verdict_reason": "Fable overturned: Growth Spiral does not beat Explore the Underdark — the v6 add stands.",
+     "note": "Was: KEEP rank 11, 'KEEP on rate, but HELD: it reverses the operator's v6 add.' Also: HELD: reverses operator v6 decision — needs a yes. Not in the 100-card count.",
+     "fable": "disagree",
+     "fable_reason": "Explore the Underdark ramps two lands and grants the initiative that turns on Imoen, Safana and every dungeon-completion payoff; Growth Spiral only ramps when a land is already in hand."
     },
     {
      "in": "Selvala, Heart of the Wilds",
@@ -399,7 +547,9 @@
      "why_in": "\"{G}, {T}: Add X mana in any combination of colors, where X is the greatest power among creatures you control.\": big ramp off the largest creature.",
      "why_out": "Not the weakest (in round 1): Caretaker is an Orc Wizard that Tazri can find, and 'you take the initiative' on entry.",
      "verdict_reason": "REJECT: Selvala is no party type and her draw is symmetric (operator cut her from Cabbage on 09-18).",
-     "note": "Caretaker's slot went to Samut in round 2."
+     "note": "Caretaker's slot went to Samut in round 2.",
+     "fable": "agree",
+     "fable_reason": "Selvala has no party type and her draw is symmetric — it rarely fires off 1/1 party bodies."
     },
     {
      "in": "Traxos, Scourge Eternal",
@@ -411,7 +561,9 @@
      "why_in": "\"Whenever you cast an artifact or creature spell, untap Traxos.\": a trampler that untaps on creature casts.",
      "why_out": "Doomguide's slot went to Springleaf Parade.",
      "verdict_reason": "REJECT: a Dragon Construct fills no party role and has no Tazri text.",
-     "note": "Two-deck conflict with Cabbage: neither deck gets it."
+     "note": "Two-deck conflict with Cabbage: neither deck gets it.",
+     "fable": "agree",
+     "fable_reason": "Traxos is a Dragon Construct with no party text; Doomguide's slot went to Springleaf Parade."
     },
     {
      "in": "Enlightened Confidant",
@@ -423,7 +575,55 @@
      "why_in": "\"At the beginning of your end step, if you gained life this turn, surveil 1.\": conditional card selection on lifelink turns.",
      "why_out": "The Idol's slot went to Chomping Changeling.",
      "verdict_reason": "REJECT: Tazri has no steady lifegain, and the card is IF-OWNED.",
-     "note": "IF-OWNED."
+     "note": "IF-OWNED.",
+     "fable": "agree",
+     "fable_reason": "Tazri has no steady lifegain to trigger Confidant's surveil, and it is IF-OWNED."
+    },
+    {
+     "in": "Blade Historian",
+     "out": "Shadowheart, Dark Justiciar",
+     "round": 3,
+     "verdict": "KEEP",
+     "rank": 5,
+     "tier": "registered",
+     "why_in": "\"Attacking creatures you control have double strike\" doubles every Karlach and Najeela combat on top of Destined Warrior's +3/+0 and Nalia's counters; four hybrid pips are covered by ~20 W sources, and it is a party Cleric.",
+     "why_out": "Shadowheart's '{1}{B}, {T}, Sacrifice another creature: Draw X cards' draws 1 off the deck's 1/1 tokens.",
+     "verdict_reason": "KEEP: Fable miss — registered and open, in no other paper deck."
+    },
+    {
+     "in": "The Destined Thief",
+     "out": "Safana, Calimport Cutthroat",
+     "round": 3,
+     "verdict": "KEEP",
+     "rank": 6,
+     "tier": "registered",
+     "why_in": "\"{U}, {T}: Another target creature you control can't be blocked... Whenever one or more creatures you control deal combat damage to one or more players, draw a card, then discard a card. If you have a full party, instead draw three cards.\" Three cards per combat, per extra combat.",
+     "why_out": "Safana's only text is 'if you have the initiative, create a Treasure token' — one Treasure a turn on a 2/1.",
+     "verdict_reason": "KEEP: Fable miss — registered and open."
+    },
+    {
+     "in": "Grand Abolisher",
+     "out": "Acererak the Archlich",
+     "round": 3,
+     "verdict": "KEEP",
+     "rank": 7,
+     "tier": "registered",
+     "why_in": "\"During your turn, your opponents can't cast spells or activate abilities of artifacts, creatures, or enchantments\" protects the Najeela/Parade turn and every Karlach alpha, and fills the Cleric role.",
+     "why_out": "Acererak's 'return Acererak to its owner's hand and venture' every cast: 3 mana per venture, never a body, never a party member.",
+     "verdict_reason": "KEEP: Fable review — same card Fable agrees on, better OUT than Stick Together.",
+     "note": "HELD: reverses operator v4 cut — Fable says yes; needs your yes."
+    },
+    {
+     "in": "Vraska Joins Up",
+     "out": "Hama Pashar, Ruin Seeker",
+     "round": 3,
+     "verdict": "KEEP",
+     "rank": 13,
+     "tier": "registered",
+     "why_in": "\"put a deathtouch counter on each creature you control. Whenever a legendary creature you control deals combat damage to a player, draw a card.\" 22 legendary creatures in the final list.",
+     "why_out": "Hama Pashar's only text is 'Room abilities of dungeons you own trigger an additional time' on a vanilla 2/3 Wizard outside a dungeon room.",
+     "verdict_reason": "KEEP: optional third draw source, only if the operator wants a dungeon doubler traded away.",
+     "note": "OPTIONAL: take only if the operator wants a third draw source over a dungeon doubler."
     }
    ]
   },
@@ -440,64 +640,79 @@
      "tier": "registered",
      "why_in": "\"When this creature enters, you may destroy another target creature.\": removal on an artifact body the recursion engine can reuse.",
      "why_out": "Canoptek Wraith is a land-fetch creature that must connect and pay {3} first.",
-     "verdict_reason": "KEEP."
+     "verdict_reason": "KEEP.",
+     "fable": "agree",
+     "fable_reason": "A Technomancer target, a Ghost Ark unearth-for-{3}, a Cryptek loop piece on a 6-MV artifact body — clean upgrade over Canoptek Wraith, which must connect first."
     },
     {
      "in": "Winter, Tormented Loner",
      "out": "Plasmancer",
      "round": 2,
      "verdict": "KEEP",
-     "rank": 2,
+     "rank": 5,
      "tier": "ASSUMED",
      "why_in": "\"When Winter enters, you may sacrifice a creature or planeswalker. When you do, each opponent sacrifices a creature of their choice.\": an edict per opponent paid with a Necron token, plus +1/+0 per creature card in the graveyard.",
      "why_out": "Plasmancer is a 4-MV flier whose only text fetches a basic Swamp to hand in a 35-land deck.",
      "verdict_reason": "KEEP: minor cost, Winter is not an artifact card unless Biotransference is out.",
-     "note": "ASSUMED: confirm owned."
+     "note": "ASSUMED: confirm owned.",
+     "fable": "agree",
+     "fable_reason": "Winter's edict is paid with a disposable Warrior token, cheap either way; if not owned, Sheoldred's Edict is the fallback."
     },
     {
      "in": "Dread Presence",
      "out": "Cryptek",
      "round": 1,
-     "verdict": "KEEP",
-     "rank": 3,
+     "verdict": "REJECT",
+     "rank": 99,
      "tier": "registered",
      "why_in": "\"Whenever a Swamp you control enters, choose one\": a card or a 2-damage drain off each of 32 Swamps.",
      "why_out": "Cryptek's {1}{B}, {T} return-on-death protects one artifact creature for one turn.",
-     "verdict_reason": "KEEP (note: Cryptek's own graveyard return is an Imotekh trigger, but Dread Presence is stronger)."
+     "verdict_reason": "Fable overturned: better IN/OUT is Dread Presence → Wayfarer's Bauble — Cryptek is a repeatable once-per-turn Imotekh trigger, not a narrow saver.",
+     "fable": "disagree",
+     "fable_reason": "Cryptek's '{1}{B}, {T}' sacrifice-and-return loop is a repeatable artifact-leaves-graveyard trigger with any outlet, not the narrow one-turn saver the audit assumed.",
+     "note": "Was: KEEP rank 3, 'KEEP (note: Cryptek's own graveyard return is an Imotekh trigger, but Dread Presence is stronger).'"
     },
     {
      "in": "Necrotic Ooze",
      "out": "Flayed One",
      "round": 1,
-     "verdict": "KEEP",
-     "rank": 4,
+     "verdict": "REJECT",
+     "rank": 99,
      "tier": "registered",
      "why_in": "\"it has all activated abilities of all creature cards in all graveyards.\": copies Szeras's sacrifice-for-mana, Syr Konrad's mill and Chronomancer's draw from the graveyard.",
      "why_out": "Flayed One is a lifelink body with a one-time mill three.",
-     "verdict_reason": "KEEP (reason fixed: Marionette Master's drain is triggered, so the Ooze does not get it)."
+     "verdict_reason": "Fable overturned: better IN/OUT is Whisper, Blood Liturgist → Flayed One — the Ooze's payoff is thin (Szeras makes 0 mana off MV-0 Warriors; it is not an artifact card without Biotransference).",
+     "fable": "disagree",
+     "fable_reason": "Necrotic Ooze needs the right card dead first and copies nothing useful off MV-0 Warrior tokens; Whisper, Blood Liturgist is a Dread Return every turn.",
+     "note": "Was: KEEP rank 4, 'KEEP (reason fixed: Marionette Master's drain is triggered, so the Ooze does not get it).'"
     },
     {
      "in": "Puppeteer Clique",
      "out": "Lychguard",
      "round": 1,
-     "verdict": "KEEP",
-     "rank": 5,
+     "verdict": "REJECT",
+     "rank": 99,
      "tier": "registered",
      "why_in": "\"put target creature card from an opponent's graveyard onto the battlefield under your control. It gains haste.\": steals the best creature in any graveyard, and persist does it twice.",
      "why_out": "Lychguard's only text returns legendary creature cards to hand for {3}{B} and itself.",
-     "verdict_reason": "KEEP."
+     "verdict_reason": "Fable overturned: better IN/OUT is Smothering Abomination → Lychguard — Puppeteer Clique needs a graveyard target the deck's own Darkness Crystal and Phyrexian Scriptures exile.",
+     "fable": "disagree",
+     "fable_reason": "The Darkness Crystal exiles dying opponent creatures and Phyrexian Scriptures III exiles all opponents' graveyards, so Puppeteer Clique has nothing to steal; Smothering Abomination turns the Colossus loop into infinite draw.",
+     "note": "Was: KEEP rank 5, 'KEEP.'"
     },
     {
      "in": "Night's Whisper",
      "out": "Ominous Harvest",
      "round": 1,
      "verdict": "KEEP",
-     "rank": 6,
+     "rank": 2,
      "tier": "registered",
      "why_in": "\"You draw two cards and lose 2 life.\": two cards for 2 mana.",
      "why_out": "Ominous Harvest usually copies 0-1 times off Gravestorm: about one card for 1 life.",
      "verdict_reason": "KEEP: Insatiable Avarice (the operator's 09-09 pick) stays, so nothing is reversed.",
-     "note": "Operator owns 2 copies; singleton, so 1 goes here and the 2nd stays in the binder."
+     "note": "Operator owns 2 copies; singleton, so 1 goes here and the 2nd stays in the binder.",
+     "fable": "agree",
+     "fable_reason": "Two cards for {1}{B} at instant value, and Avarice (the operator's 09-09 pick) stays — no operator choice reversed; the second owned copy stays in the binder."
     },
     {
      "in": "Sheoldred's Edict",
@@ -508,7 +723,9 @@
      "tier": "registered",
      "why_in": "\"Each opponent sacrifices a nontoken creature of their choice.\": a modal edict.",
      "why_out": "Not the weakest: Imp's Mischief ('Change the target of target spell with a single target') is Imotekh's only protection.",
-     "verdict_reason": "REJECT: the report itself calls protection a real gap."
+     "verdict_reason": "REJECT: the report itself calls protection a real gap.",
+     "fable": "agree",
+     "fable_reason": "Imp's Mischief is the only protection the deck has."
     },
     {
      "in": "Skorpekh Destroyer",
@@ -519,7 +736,9 @@
      "tier": "registered",
      "why_in": "\"Deathtouch\": a deathtouch artifact body.",
      "why_out": "Not the weakest: Razorlash returns itself from the graveyard, usually for {B}{B}, a repeatable Imotekh trigger.",
-     "verdict_reason": "REJECT: the auditor misread Razorlash as unearth; Skorpekh has no engine text."
+     "verdict_reason": "REJECT: the auditor misread Razorlash as unearth; Skorpekh has no engine text.",
+     "fable": "agree",
+     "fable_reason": "Razorlash's '{4}{B}{B}: Return this card from your graveyard to the battlefield' is a repeatable trigger, not a one-shot."
     },
     {
      "in": "Sautekh Immortal",
@@ -530,7 +749,9 @@
      "tier": "registered",
      "why_in": "\"This creature enters with a +1/+1 counter on it for each creature that died this turn.\": a flash body sized by the turn's deaths.",
      "why_out": "Not the weakest: Chronomancer's '{1}, {T}, Sacrifice another artifact: Draw a card' and its unearth are repeatable Imotekh triggers.",
-     "verdict_reason": "REJECT: Sautekh has no unearth, so the auditor's 'unearth cost' comparison compares against nothing."
+     "verdict_reason": "REJECT: Sautekh has no unearth, so the auditor's 'unearth cost' comparison compares against nothing.",
+     "fable": "agree",
+     "fable_reason": "Chronomancer's '{1}, {T}, Sacrifice another artifact: Draw a card' plus unearth beats Sautekh, which has no unearth to compare against."
     },
     {
      "in": "Liliana the Repentant",
@@ -541,7 +762,9 @@
      "tier": "ASSUMED",
      "why_in": "\"Whenever another creature or planeswalker you control enters, mill two cards.\": mills 4 per Imotekh trigger, fuelling recursion.",
      "why_out": "Not the weakest: Apprentice's 'each opponent loses 1 life' on every creature or artifact death is 3 per death in a 4-player pod.",
-     "verdict_reason": "REJECT: the auditor's 'one-point trickle' misreads 'each opponent'; Apprentice is one of three each-opponent drain payoffs."
+     "verdict_reason": "REJECT: the auditor's 'one-point trickle' misreads 'each opponent'; Apprentice is one of three each-opponent drain payoffs.",
+     "fable": "agree",
+     "fable_reason": "Apprentice drains 'each opponent', one of three each-opponent drain payoffs."
     },
     {
      "in": "Massacre Girl, Most Wanted",
@@ -553,7 +776,9 @@
      "why_in": "\"Massacre Girl deals 1 damage to target opponent and you gain 1 life.\": a single-opponent drain on each death.",
      "why_out": "Not the weakest: Zealot's 'Sacrifice another creature or artifact: Surveil 1' is a free sac outlet, defended in the auditor's own section 6.",
      "verdict_reason": "REJECT: a 5-MV single-target drain that needs an outlet.",
-     "note": "Two-deck conflict with Meren: neither deck gets it."
+     "note": "Two-deck conflict with Meren: neither deck gets it.",
+     "fable": "agree",
+     "fable_reason": "Zealot's 'Sacrifice another creature or artifact: Surveil 1' is a free sac outlet the deck depends on; two-deck conflict with Meren stands as no swap."
     },
     {
      "in": "Theoretical Necromancer",
@@ -564,7 +789,9 @@
      "tier": "ASSUMED",
      "why_in": "\"{3}{B}, Exile this card from your graveyard: Return another target creature card from your graveyard to your hand.\": one graveyard-to-hand rebuy.",
      "why_out": "Not the weakest: Bauble is ramp, and the auditor's own report says ramp is thin.",
-     "verdict_reason": "REJECT: 'repeatable' is false; the cost exiles the Necromancer, so it works once."
+     "verdict_reason": "REJECT: 'repeatable' is false; the cost exiles the Necromancer, so it works once.",
+     "fable": "agree",
+     "fable_reason": "Theoretical Necromancer's cost exiles itself from the graveyard, so it works once, not repeatably; Bauble is ramp the deck needs."
     },
     {
      "in": "Break Under Pressure",
@@ -575,7 +802,55 @@
      "tier": "ASSUMED",
      "why_in": "\"Target opponent sacrifices a creature or planeswalker with the greatest mana value among creatures and planeswalkers they control.\": instant edict on the biggest threat.",
      "why_out": "Not the weakest: Wishclaw is one of two library tutors (Insatiable Avarice puts on top; Buried Alive is graveyard-only).",
-     "verdict_reason": "REJECT: a role swap, not an upgrade; spot removal is already 5 pieces plus Noxious Gearhulk."
+     "verdict_reason": "REJECT: a role swap, not an upgrade; spot removal is already 5 pieces plus Noxious Gearhulk.",
+     "fable": "agree",
+     "fable_reason": "A role swap, not an upgrade; spot removal is already 5 pieces plus Noxious Gearhulk, and Wishclaw is one of two library tutors."
+    },
+    {
+     "in": "Smothering Abomination",
+     "out": "Lychguard",
+     "round": 3,
+     "verdict": "KEEP",
+     "rank": 3,
+     "tier": "registered",
+     "why_in": "\"At the beginning of your upkeep, sacrifice a creature. Whenever you sacrifice a creature, draw a card.\" Every Altar/Szeras/Zealot/Colossus/Deadly Dispute/Culling/Carnage/Winter sacrifice draws; the upkeep cost is itself a Warrior that fires Bats, Apprentice and Konrad — turning the Metalwork Colossus loop into infinite draw.",
+     "why_out": "Lychguard's only text returns legendary creature cards to hand for {3}{B} and itself.",
+     "verdict_reason": "KEEP: Fable review — replaces the audited Puppeteer Clique, whose graveyard targets are exiled by this deck's own Darkness Crystal/Scriptures."
+    },
+    {
+     "in": "Whisper, Blood Liturgist",
+     "out": "Flayed One",
+     "round": 3,
+     "verdict": "KEEP",
+     "rank": 4,
+     "tier": "registered",
+     "why_in": "\"{T}, Sacrifice two creatures: Return target creature card from your graveyard to the battlefield.\" A Dread Return every turn: two Warriors in, the target's ETB plus two Warriors out (any creature card under Biotransference).",
+     "why_out": "Flayed One's \"Lifelink | When this creature enters, mill three cards\" is the weakest body.",
+     "verdict_reason": "KEEP: Fable review — replaces the audited Necrotic Ooze, a stronger IN for the same OUT."
+    },
+    {
+     "in": "Grave Venerations",
+     "out": "Razorlash Transmogrant",
+     "round": 3,
+     "verdict": "KEEP",
+     "rank": 6,
+     "tier": "registered",
+     "why_in": "\"you become the monarch | At the beginning of your end step, if you're the monarch, return up to one target creature card from your graveyard to your hand | Whenever a creature you control dies, each opponent loses 1 life and you gain 1 life.\" A card, an Imotekh trigger and a drain per turn.",
+     "why_out": "Razorlash is a 2/1 'can't block' whose {B}{B} rate needs an opponent with four nonbasic lands.",
+     "verdict_reason": "KEEP: optional upgrade over Razorlash Transmogrant.",
+     "note": "OPTIONAL."
+    },
+    {
+     "in": "Dread Presence",
+     "out": "Wayfarer's Bauble",
+     "round": 3,
+     "verdict": "KEEP",
+     "rank": 7,
+     "tier": "registered",
+     "why_in": "\"Whenever a Swamp you control enters, choose one\" — a card or 2 damage off each of 32 Swamps.",
+     "why_out": "Wayfarer's Bauble ('{1} then {2}, {T}, Sacrifice: search for a basic land, put it onto the battlefield tapped') is three mana for a tapped Swamp beside 5 rocks and Crypt Ghast.",
+     "verdict_reason": "KEEP: Fable review — Cryptek is a repeatable Imotekh-trigger loop piece, not a narrow saver, so it should not be cut.",
+     "note": "OPTIONAL: Cryptek stays either way; Emergency Weld here if the v3 Cryptek cut is reversed."
     }
    ]
   },
@@ -592,7 +867,9 @@
      "tier": "registered",
      "why_in": "\"{T}: Add {G} for each Elf you control.\": ramp off 7 Elves that reach the battlefield (Mystic, Llanowar, Jaheira, Halsin, Tireless Provisioner, Disciple, itself).",
      "why_out": "No card cut: size fix, 99 to 100 cards.",
-     "verdict_reason": "KEEP: mandatory size fix; Nesting Grounds stays."
+     "verdict_reason": "KEEP: mandatory size fix; Nesting Grounds stays.",
+     "fable": "agree",
+     "fable_reason": "Right 100th card: taps for 2-4 by turn 4 off 7 Elves (Mystic, Llanowar, Jaheira, Halsin, Provisioner, Disciple, itself); Nesting Grounds stays an operator keep."
     },
     {
      "in": "Tendershoot Dryad",
@@ -604,43 +881,51 @@
      "why_in": "\"At the beginning of each upkeep, create a 1/1 green Saproling creature token.\": four tokens a round, each also making a Took Food.",
      "why_out": "Emil's Fractal costs {4}{G} and a tap per token.",
      "verdict_reason": "KEEP.",
-     "note": "Emil was an operator add in v3 on 09-28."
+     "note": "Emil was an operator add in v3 on 09-28.",
+     "fable": "agree",
+     "fable_reason": "Four tokens a round, each a Took Food into Manufactor and Wurmlet/Trudge, beats Emil's per-token tap-and-{4}{G} rate."
     },
     {
      "in": "Alhammarret's Archive",
      "out": "Ginger, Queen of Sweets",
      "round": 1,
      "verdict": "KEEP",
-     "rank": 3,
+     "rank": 4,
      "tier": "registered",
      "why_in": "\"If you would draw a card except the first one you draw in each of your draw steps, draw two cards instead.\": doubles the draws from Toski, Ohran, Idol, Took, Uprising and Kenrith's.",
      "why_out": "Ginger was the auditor's weakest-slot pick; the refuter did not contest the OUT.",
      "verdict_reason": "KEEP (reason fixed: doubling the life amount adds no Trudge Garden triggers; the value is doubled draws).",
-     "note": "Ginger was an operator add in v3 on 09-28; confirm."
+     "note": "Ginger was an operator add in v3 on 09-28; confirm.",
+     "fable": "agree",
+     "fable_reason": "Doubles Idol/Toski/Ohran/Took/Return draws for one mana less than Ginger and independent of the monarch; the margin over Ginger is marginal but real."
     },
     {
      "in": "Elvish Spirit Guide",
      "out": "Hungering Puppetbeast",
      "round": 1,
-     "verdict": "KEEP",
-     "rank": 4,
+     "verdict": "REJECT",
+     "rank": 99,
      "tier": "registered",
      "why_in": "\"Exile this card from your hand: Add {G}.\": free acceleration.",
      "why_out": "Hungering Puppetbeast is an EDHREC #27440 5-drop whose sacrifice ability grows only itself.",
-     "verdict_reason": "KEEP (reason overstated: its Food sacrifices still feed Trail of Crumbs).",
-     "note": "Puppetbeast was an operator add in v4 on 09-28; confirm."
+     "verdict_reason": "Fable overturned: Elvish Spirit Guide is not worth the card — a card for one mana once, dead as a 3-mana 2/2 later — while Hungering Puppetbeast is the deck's only repeatable artifact-sac outlet, firing Trail of Crumbs, Unlucky Cabbage Merchant and Syr Ginger.",
+     "note": "Was: KEEP rank 4, 'KEEP (reason overstated: its Food sacrifices still feed Trail of Crumbs).' Also: Puppetbeast was an operator add in v4 on 09-28; confirm.",
+     "fable": "disagree",
+     "fable_reason": "The deck already runs three 1-drop dorks plus Wild Growth; Puppetbeast's Heartwood ETB and repeatable sac outlet are worth more."
     },
     {
      "in": "Hunter's Insight",
      "out": "Spry and Mighty",
      "round": 1,
-     "verdict": "KEEP",
-     "rank": 5,
+     "verdict": "REJECT",
+     "rank": 99,
      "tier": "registered",
      "why_in": "\"Whenever that creature deals combat damage to a player or planeswalker this turn, draw that many cards.\": a big draw off a Trudge Garden 4/4 or a pumped token.",
      "why_out": "Spry and Mighty's X is the difference between two creatures' powers, which is small in a token deck.",
-     "verdict_reason": "KEEP.",
-     "note": "Spry and Mighty was an operator sleeved pick on 09-18; confirm."
+     "verdict_reason": "Fable overturned: a wash — Spry and Mighty reliably hits X=3-6 against this deck's 1/1 tokens beside 4/4 and 7/7 bodies at sorcery speed with +X/+X trample on two bodies; keep the operator's 09-18 sleeved pick.",
+     "note": "Was: KEEP rank 5, 'KEEP.' Also: Spry and Mighty was an operator sleeved pick on 09-18; confirm.",
+     "fable": "disagree",
+     "fable_reason": "Insight needs a connect that Toski and Ohran already pay for; Return of the Wildspeaker covers instant-speed draw."
     },
     {
      "in": "Helix Pinnacle",
@@ -651,7 +936,9 @@
      "tier": "registered",
      "why_in": "\"At the beginning of your upkeep, if there are 100 or more tower counters on this enchantment, you win the game.\": an alternate-win mana sink.",
      "why_out": "Not the weakest: The Ooze makes a Mutagen token every turn, which Took and Manufactor multiply into Wurmlet and Trudge Garden triggers.",
-     "verdict_reason": "REJECT: the auditor quoted only The Ooze's first ability; Pinnacle duplicates the Walking Ballista kill."
+     "verdict_reason": "REJECT: the auditor quoted only The Ooze's first ability; Pinnacle duplicates the Walking Ballista kill.",
+     "fable": "agree",
+     "fable_reason": "The Ooze's 'Create a Mutagen token' is 4 artifact ETBs a turn with Took + Manufactor — correctly kept over the Ballista-duplicate Pinnacle."
     },
     {
      "in": "Loxodon Warhammer",
@@ -662,7 +949,9 @@
      "tier": "registered",
      "why_in": "\"Equipped creature gets +3/+0 and has trample and lifelink.\": lifelink on one attacker.",
      "why_out": "Not the weakest: Propagator's 'Whenever another creature you control enters, you gain 1 life' makes it a second Trudge Garden loop piece.",
-     "verdict_reason": "REJECT: lifelink is one lifegain event per damage step."
+     "verdict_reason": "REJECT: lifelink is one lifegain event per damage step.",
+     "fable": "agree",
+     "fable_reason": "Propagator is a second Trudge Garden loop piece; lifelink is only one lifegain event per damage step."
     },
     {
      "in": "Elvish Archdruid",
@@ -674,7 +963,9 @@
      "why_in": "\"{T}: Add {G} for each Elf you control.\": Elf ramp.",
      "why_out": "Not cuttable: operator keep (HISTORY 09-18), and the cut takes the deck from 33 to 32 lands.",
      "verdict_reason": "REJECT the OUT only: the Archdruid enters as the 100th card instead (separate KEEP).",
-     "note": "Operator keep."
+     "note": "Operator keep.",
+     "fable": "agree",
+     "fable_reason": "Operator keep (HISTORY 09-18); the cut would take the deck from 33 to 32 lands. The Archdruid enters as the 100th card instead."
     },
     {
      "in": "Fog",
@@ -686,7 +977,9 @@
      "why_in": "\"Prevent all combat damage that would be dealt this turn.\": one turn of combat protection.",
      "why_out": "No card cut: the auditor proposed it as the 100th card.",
      "verdict_reason": "REJECT: the operator removed Fog in v3 on 09-28; the 100th slot goes to Elvish Archdruid.",
-     "note": "Operator removal."
+     "note": "Operator removal.",
+     "fable": "agree",
+     "fable_reason": "The operator removed Fog in v3 on 09-28; the 100th slot goes to Elvish Archdruid instead."
     },
     {
      "in": "Keeper of the Quiet Hour",
@@ -697,7 +990,9 @@
      "tier": "registered",
      "why_in": "\"When this creature enters, empower Jace 2.\": a 2-loyalty Jace token on a 3-MV artifact body.",
      "why_out": "Not the weakest: Propagator is a round-1-protected Trudge Garden loop piece.",
-     "verdict_reason": "REJECT: judged without the false '[-3] right away' claim; empower 2 gives only 2 loyalty."
+     "verdict_reason": "REJECT: judged without the false '[-3] right away' claim; empower 2 gives only 2 loyalty.",
+     "fable": "agree",
+     "fable_reason": "Empower 2 gives only 2 loyalty, not a '[-3] right away'; Propagator is a round-1-protected Trudge Garden loop piece."
     },
     {
      "in": "Traxos, Scourge Eternal",
@@ -709,7 +1004,9 @@
      "why_in": "\"Whenever you cast an artifact or creature spell, untap Traxos.\": a trampler that untaps on casts.",
      "why_out": "Not the weakest: Jiang's end-step untap of all tokens doubles Jaheira token mana; Seedborn Muse covers only opponents' turns.",
      "verdict_reason": "REJECT: no Food, token or lifegain text.",
-     "note": "Two-deck conflict with Tazri: neither deck gets it."
+     "note": "Two-deck conflict with Tazri: neither deck gets it.",
+     "fable": "agree",
+     "fable_reason": "Jiang's end-step untap of all tokens gives instant-speed Jaheira mana for Chord/Second Harvest/Return; Traxos has no Food, token or lifegain text."
     },
     {
      "in": "Restore with Empathy",
@@ -721,7 +1018,9 @@
      "why_in": "\"Return target permanent card from your graveyard to your hand. You gain 4 life.\": one rebuy plus one Trudge Garden trigger.",
      "why_out": "Not the weakest: Titanbones' 'Whenever you gain life, put two +1/+1 counters' scales with every Food sac and grows without bound off the loop.",
      "verdict_reason": "REJECT: not a clear upgrade.",
-     "note": "Two-deck conflict with Meren: neither deck gets it."
+     "note": "Two-deck conflict with Meren: neither deck gets it.",
+     "fable": "agree",
+     "fable_reason": "Titanbones' counters scale with every Food sac and grow without bound off the loop; not a clear upgrade, and it is a two-deck conflict with Meren."
     },
     {
      "in": "Puppet Crafting",
@@ -733,7 +1032,32 @@
      "why_in": "\"Enchanted permanent is a Construct creature with base power and toughness 5/5 in addition to its other types.\": turns a Manufactor or Idol into a 5/5 and rebuys itself.",
      "why_out": "Not cuttable: Ribtruss is an operator-sleeved pick, and Trudge Garden and Halsin tokens feed its devour.",
      "verdict_reason": "REJECT: a two-card threat that dies to one removal spell; IF-OWNED.",
-     "note": "IF-OWNED."
+     "note": "IF-OWNED.",
+     "fable": "agree",
+     "fable_reason": "A two-card threat that dies to one removal spell; Ribtruss is an operator-sleeved pick and IF-OWNED."
+    },
+    {
+     "in": "Tangled Florahedron // Tangled Vale",
+     "out": "Brawn",
+     "round": 3,
+     "verdict": "KEEP",
+     "rank": 3,
+     "tier": "registered",
+     "why_in": "\"{T}: Add {G}\" as a 2-drop dork or a land (\"This land enters tapped. {T}: Add {G}\"): a dork early, the 34th land when flooded on spells. It was in the operator's own 09-18 proposal and never reached the physical build.",
+     "why_out": "Brawn's team trample only works 'As long as this card is in your graveyard', with no discard outlet in the list, and trample already comes from Uprising, Ghalta and the Fungus Beasts themselves.",
+     "verdict_reason": "KEEP: Fable miss — still open."
+    },
+    {
+     "in": "Ezzaroot Channeler",
+     "out": "Ghalta the Unstoppable",
+     "round": 3,
+     "verdict": "KEEP",
+     "rank": 5,
+     "tier": "registered",
+     "why_in": "\"{T}: You gain 2 life\" = a free Trudge Garden trigger every turn ({2} → 4/4 trample) and +2 Titanbones counters; under Seedborn Muse that is one per player turn. 'Creature spells you cast cost {X} less... X is the amount of life you gained this turn.'",
+     "why_out": "Ghalta is the fourth trample grant and a finisher only; it was an operator add in v4 today.",
+     "verdict_reason": "KEEP: optional — Ghalta already wins games the deck already wins.",
+     "note": "OPTIONAL: it was an operator add in v4 today, so treat as optional."
     }
    ]
   }
