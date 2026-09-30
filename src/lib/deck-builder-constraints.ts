@@ -28,6 +28,18 @@ import { classifyCard } from './card-classifier';
 import type { CardCategory } from './card-classifier';
 import type { CommanderSynergyProfile, SynergyCategory } from './commander-synergy';
 import { ARCHETYPE_TEMPLATES, getTemplate } from './deck-templates';
+import { stripArenaPrefix } from './collection-ownership';
+
+/**
+ * Picked-name set that treats an Arena-rebalanced "A-X" and its paper "X" as
+ * one card (A-D6: Tam's Arena build shipped both Minsc & Boo printings).
+ * Every pick loop keys on this, so no site can forget the A- strip.
+ */
+export class CardNameSet extends Set<string> {
+  add(name: string): this { return super.add(stripArenaPrefix(name)); }
+  has(name: string): boolean { return super.has(stripArenaPrefix(name)); }
+  delete(name: string): boolean { return super.delete(stripArenaPrefix(name)); }
+}
 import type { Archetype } from './deck-templates';
 
 // ── Curated archetype payoff lists ─────────────────────────────────────────
@@ -637,7 +649,7 @@ export function pickByRole(opts: PickByRoleOptions): PickByRoleResult {
   const classifyOpts = superfriends ? { superfriends: true } : undefined;
 
   const picks: PickedRoleCard[] = [];
-  const pickedNames = new Set<string>();
+  const pickedNames = new CardNameSet();
   const reasoning: string[] = [];
   let totalPicked = 0;
 

@@ -20,6 +20,7 @@ import {
   roleCapsFor,
   pickByRole,
   buildReasoningSummary,
+  CardNameSet,
 } from './deck-builder-constraints';
 import { analyzeCommanderForBuild } from './commander-analysis';
 import type { ArsenalCard } from './commander-analysis';
@@ -1882,7 +1883,8 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
   //   (d) Pass B of pickByRole fills any remaining slots by score.
 
   const picked: Array<{ card: DbCard; quantity: number; board: 'main' | 'sideboard' }> = [];
-  const pickedNames = new Set<string>();
+  // A-D6: keyed on the A--stripped name, so "X" and "A-X" can never both be picked.
+  const pickedNames = new CardNameSet();
   let totalPicked = 0;
   const reasoning: Array<{ cardName: string; role: string; reason: string }> = [];
 
