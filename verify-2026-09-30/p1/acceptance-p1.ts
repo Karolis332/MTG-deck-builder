@@ -35,7 +35,7 @@ async function main() {
   const { autoBuildDeck } = engine;
   // Plan-floor picks (superfriends walker engines / walkers, tribe creatures) are seated by design, not by score.
   const isPlanPick = (strategy: string, tribal: string | null, card: any): boolean =>
-    (strategy === 'superfriends' && (/\bPlaneswalker\b/.test(card.type_line || '') || engine.isWalkerEngineCard?.(card) === true))
+    (strategy === 'superfriends' && (/\bPlaneswalker\b/.test(card.type_line || '') || engine.isWalkerEngineCard?.(card) === true || engine.isWalkerSupportCard?.(card) === true))
     || (!!tribal && new RegExp('\\b' + tribal + '\\b', 'i').test(`${card.type_line || ''} ${card.oracle_text || ''}`));
   const { classifyCard, getPrimaryCategory } = await import(pathToFileURL(path.join(ENGINE_ROOT, 'src/lib/card-classifier.ts')).href);
   const { buildOwnedQtyMap } = await import(pathToFileURL(path.join(ENGINE_ROOT, 'src/lib/collection-ownership.ts')).href);
