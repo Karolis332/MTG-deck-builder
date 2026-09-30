@@ -3,7 +3,15 @@
 import { describe, it, expect } from 'vitest';
 import { isBoardWipe } from '../card-classifier';
 import { isBoardWipe as isBoardWipeBase } from './baseline/card-classifier-6791d3e';
-import { isWipeBackfillCandidate, isStep4bDisplaceable, applyDeckBudget } from '../deck-builder-ai';
+import { isWipeBackfillCandidate, isStep4bDisplaceable, applyDeckBudget, partnerPairNames } from '../deck-builder-ai';
+import { commanderToSlug } from '../edhrec';
+
+describe('B-D4 partner pair: EDHREC pair page names', () => {
+  it('slugs to the combined commander page, both orders', () => {
+    const names = partnerPairNames('Tymna the Weaver', 'Thrasios, Triton Hero');
+    expect(names.map(commanderToSlug)).toEqual(['tymna-the-weaver-thrasios-triton-hero', 'thrasios-triton-hero-tymna-the-weaver']);
+  });
+});
 import type { Step4bDisplaceableCtx } from '../deck-builder-ai';
 import type { DbCard } from '../types';
 

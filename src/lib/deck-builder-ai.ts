@@ -235,6 +235,14 @@ function buildSynergyQuery(themes: string[]): string {
   return conditions.length > 0 ? `AND (${conditions.join(' OR ')})` : '';
 }
 
+// EDHREC keeps a combined page per partner pair — its slug is both names
+// joined (`tymna-the-weaver-thrasios-triton-hero`), so commanderToSlug of the
+// joined name reaches it; the order EDHREC chose is unknown, so both are
+// offered (B-D4).
+export function partnerPairNames(commanderName: string, partnerName: string): string[] {
+  return [`${commanderName} ${partnerName}`, `${partnerName} ${commanderName}`];
+}
+
 // ── Tribal detection ────────────────────────────────────────────────────────
 // Detects if a commander is tribal and returns the creature type to build
 // around. Scoring lives in commander-synergy's detectTribalPayoff (shared
@@ -748,81 +756,69 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
   // Check local commander_synergies table first (populated by Python scripts),
   // then fall back to live EDHREC fetch
 
-  let edhrecSynergyMap = new Map<string, { synergy: number; inclusion: number }>();
+  const edhrecSynergyMap = new Map<string, { synergy: number; inclusion: number }>();
   let edhrecThemes: string[] = [];
-  let edhrecResolvedCards: DbCard[] = [];
+  const edhrecResolvedCards: DbCard[] = [];
+  // Union semantics for every commander-keyed signal (B-D4): a partner pair
+  // reads both halves, keeping the higher synergy per card, never overwriting.
+  const mergeSynergy = (rec: { name: string; synergy: number; inclusion: number }) => {
+    const prev = edhrecSynergyMap.get(rec.name);
+    if (!prev || rec.synergy > prev.synergy) edhrecSynergyMap.set(rec.name, { synergy: rec.synergy, inclusion: rec.inclusion });
+  };
+  const mergeResolved = (recs: EdhrecRecommendation[]) => {
+    for (const r of resolveEdhrecCards(db, recs, colorExcludeFilter, legalityFilter, commanderExclude)) {
+      if (!edhrecResolvedCards.some((c) => c.name === r.card.name)) edhrecResolvedCards.push(r.card);
+    }
+  };
+  // Partner blindness (B-D4): every commander-keyed lookup below iterates
+  // both halves of a pair. EDHREC is asked for the pair's own page first.
+  const commanderNames = [commanderName, partnerCard?.name].filter((n): n is string => !!n);
 
   if (isCommander && commanderName) {
     // Check if we have pre-enriched synergies from the Python pipeline
-    try {
-      const localSynergies = db.prepare(
-        `SELECT card_name, synergy_score, inclusion_rate FROM commander_synergies
-         WHERE commander_name = ? COLLATE NOCASE
-         ORDER BY synergy_score DESC`
-      ).all(commanderName) as Array<{ card_name: string; synergy_score: number; inclusion_rate: number }>;
-
-      if (localSynergies.length > 0) {
-        for (const row of localSynergies) {
-          edhrecSynergyMap.set(row.card_name, {
-            synergy: row.synergy_score,
-            inclusion: row.inclusion_rate,
-          });
-        }
-        // Resolve local synergy card names to DB rows
-        const localRecs = localSynergies.map((r) => ({
-          name: r.card_name,
-          synergy: r.synergy_score,
-          inclusion: r.inclusion_rate,
-        }));
-        const resolved = resolveEdhrecCards(
-          db, localRecs, colorExcludeFilter, legalityFilter, commanderExclude
-        );
-        edhrecResolvedCards = resolved.map((r) => r.card);
+    for (const name of commanderNames) {
+      try {
+        const localSynergies = db.prepare(
+          `SELECT card_name, synergy_score, inclusion_rate FROM commander_synergies
+           WHERE commander_name = ? COLLATE NOCASE
+           ORDER BY synergy_score DESC`
+        ).all(name) as Array<{ card_name: string; synergy_score: number; inclusion_rate: number }>;
+        const localRecs = localSynergies.map((r) => ({ name: r.card_name, synergy: r.synergy_score, inclusion: r.inclusion_rate }));
+        for (const rec of localRecs) mergeSynergy(rec);
+        if (localRecs.length > 0) mergeResolved(localRecs);
+      } catch {
+        // Table may not exist yet — that's fine, the live EDHREC fetch handles it
       }
-    } catch {
-      // Table may not exist yet — that's fine, the live EDHREC fetch handles it
     }
 
-    // Always try the live EDHREC fetch for themes + any cards not in local DB
-    const edhrecData = await getEdhrecRecommendations(commanderName);
-
-    if (edhrecData) {
-      edhrecThemes = edhrecData.themes;
-
-      // Build synergy lookup from EDHREC's commander-specific data
-      for (const rec of edhrecData.topCards) {
-        edhrecSynergyMap.set(rec.name, { synergy: rec.synergy, inclusion: rec.inclusion });
+    // Always try the live EDHREC fetch for themes + any cards not in local DB.
+    // Pair page (either order) first, then each half; themes and theme cards
+    // come from the first page that answers, top cards from every page.
+    const pageNames = partnerCard ? [...partnerPairNames(commanderName, partnerCard.name), ...commanderNames] : commanderNames;
+    let pairFound = false;
+    let themeSource: string | null = null;
+    for (const name of pageNames) {
+      const isPair = !commanderNames.includes(name);
+      if (isPair && pairFound) continue;
+      const edhrecData = await getEdhrecRecommendations(name);
+      if (!edhrecData) continue;
+      if (isPair) pairFound = true;
+      for (const rec of edhrecData.topCards) mergeSynergy(rec);
+      mergeResolved(edhrecData.topCards);
+      if (themeSource === null) {
+        themeSource = name;
+        edhrecThemes = edhrecData.themes;
       }
+    }
 
-      // Resolve EDHREC cards to DB rows
-      const resolved = resolveEdhrecCards(
-        db, edhrecData.topCards, colorExcludeFilter, legalityFilter, commanderExclude
-      );
-      edhrecResolvedCards = resolved.map((r) => r.card);
-
+    if (themeSource !== null) {
       // Fetch theme-specific cards for the top 2 EDHREC themes
-      const themePromises = edhrecData.themes.slice(0, 2).map((theme) =>
-        getEdhrecThemeCards(commanderName, theme)
-      );
-      const themeResults = await Promise.all(themePromises);
-
+      const themeResults = await Promise.all(edhrecThemes.slice(0, 2).map((theme) => getEdhrecThemeCards(themeSource!, theme)));
       for (const themeData of themeResults) {
         if (!themeData) continue;
-        for (const rec of themeData.cards) {
-          // Don't overwrite higher synergy scores from the main list
-          if (!edhrecSynergyMap.has(rec.name) || rec.synergy > (edhrecSynergyMap.get(rec.name)?.synergy || 0)) {
-            edhrecSynergyMap.set(rec.name, { synergy: rec.synergy, inclusion: rec.inclusion });
-          }
-        }
-        // Resolve theme cards too
-        const themeResolved = resolveEdhrecCards(
-          db, themeData.cards, colorExcludeFilter, legalityFilter, commanderExclude
-        );
-        for (const r of themeResolved) {
-          if (!edhrecResolvedCards.some((c) => c.name === r.card.name)) {
-            edhrecResolvedCards.push(r.card);
-          }
-        }
+        // Don't overwrite higher synergy scores from the main list
+        for (const rec of themeData.cards) mergeSynergy(rec);
+        mergeResolved(themeData.cards);
       }
     }
   }
@@ -835,7 +831,8 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
   const tribalNames = new Set<string>();
 
   if (isCommander && commanderName) {
-    tribalType = detectTribalTheme(db, commanderName);
+    // Either half of a partner pair may be the tribal lord (B-D4).
+    tribalType = commanderNames.reduce<string | null>((t, n) => t ?? detectTribalTheme(db, n), null);
     if (tribalType) {
       const ownedNames = useCollection ? new Set(ownedQty.keys()) : new Set<string>();
       tribalCards = fetchTribalCards(db, tribalType, colorExcludeFilter, legalityFilter, commanderExclude, ownedNames);
@@ -1192,21 +1189,23 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
   if (isCommander && commanderName) {
     try {
       const deckCardNames = poolPrefix(30).map(c => c.name);
-      const cfRecs = await getCFRecommendations(deckCardNames, commanderName, 50, { logImpressions: false });
-      for (const rec of cfRecs) {
-        cfScoreMap.set(rec.card_name, rec.cf_score);
-      }
-      // Inject CF-recommended cards into pool if not already present.
-      // Unowned recs stay in the pool (scored, craft-list candidates); the
-      // final deck still enforces ownership at pick time via getMaxQty().
-      if (cfRecs.length > 0) {
-        const existingIds = new Set(pool.map(c => c.id));
-        const cfCards = resolveCFToDbCards(cfRecs, existingIds);
-        for (const { card } of cfCards) {
-          if (!seenNames.has(card.name)) {
-            if (!validForPool(card)) continue;
-            seenNames.add(card.name);
-            pool.push(card);
+      for (const name of commanderNames) { // both halves of a pair (B-D4)
+        const cfRecs = await getCFRecommendations(deckCardNames, name, 50, { logImpressions: false });
+        for (const rec of cfRecs) {
+          if ((cfScoreMap.get(rec.card_name) ?? -Infinity) < rec.cf_score) cfScoreMap.set(rec.card_name, rec.cf_score);
+        }
+        // Inject CF-recommended cards into pool if not already present.
+        // Unowned recs stay in the pool (scored, craft-list candidates); the
+        // final deck still enforces ownership at pick time via getMaxQty().
+        if (cfRecs.length > 0) {
+          const existingIds = new Set(pool.map(c => c.id));
+          const cfCards = resolveCFToDbCards(cfRecs, existingIds);
+          for (const { card } of cfCards) {
+            if (!seenNames.has(card.name)) {
+              if (!validForPool(card)) continue;
+              seenNames.add(card.name);
+              pool.push(card);
+            }
           }
         }
       }
@@ -1218,9 +1217,11 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
   // ── Per-commander card stats (from 506K+ community decks) ──────────────
   // Provides per-commander inclusion rates: "72% of Ur-Dragon decks run Sol Ring"
   const commanderStatsMap = new Map<string, { inclusionRate: number; synergyScore: number }>();
-  if (isCommander && commanderName) {
-    const cmdrStats = getCommanderCardStats(commanderName, 300);
+  for (const name of isCommander && commanderName ? commanderNames : []) { // both halves of a pair (B-D4)
+    const cmdrStats = getCommanderCardStats(name, 300);
     for (const s of cmdrStats) {
+      const prev = commanderStatsMap.get(s.cardName);
+      if (prev && prev.inclusionRate >= s.inclusionRate) continue;
       commanderStatsMap.set(s.cardName, {
         inclusionRate: s.inclusionRate,
         synergyScore: s.synergyScore,
@@ -2819,6 +2820,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
       targetLandCount: targetLandsEffective,
       tribalTypes: tribalTypesForLands.length > 0 ? tribalTypesForLands : undefined,
       commanderName: commanderCard?.name,
+      partnerName: options.partnerName,
       existingNonLandCards: nonLandCards,
       collectionOnly: useCollection,
       rarityFilter: options.rarityFilter,
@@ -3203,7 +3205,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
     const landPool = scoreLandsForDeck({
       colors, format: options.format, strategy: resolvedStrategy,
       tribalTypes: tribalTypesForLands.length > 0 ? tribalTypesForLands : undefined,
-      commanderName: commanderCard?.name, userId: options.userId, collectionSource: options.collectionSource,
+      commanderName: commanderCard?.name, partnerName: options.partnerName, userId: options.userId, collectionSource: options.collectionSource,
       manaDemand: analyzeManaDemands(nonLandCards), collectionOnly: useCollection,
       rarityFilter: options.rarityFilter, maxCardPrice: options.maxCardPrice,
     });
