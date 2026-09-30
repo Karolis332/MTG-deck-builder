@@ -125,6 +125,14 @@ def classify_land(name: str, type_line: str, oracle: str, produced_mana_json: st
         synergy_tags.append("sacrifice")
         if "land" in ot and "graveyard" not in ot:
             synergy_tags.append("shuffle")
+        # A fetch that enters tapped itself (Bad River, Krosan Verge) or puts
+        # its basic onto the battlefield tapped (Landscapes, Riveteers
+        # Overlook) is a tapped land with extra steps: tier 3, below any
+        # untapped dual.
+        if re.search(r"enters(?: the battlefield)? tapped", ot):
+            enters_untapped = False
+        if not enters_untapped or "onto the battlefield tapped" in ot:
+            tier = 3
 
     # ── Shock lands ──────────────────────────────────────────────────
     elif re.search(r"as .* enters.*you may pay 2 life", ot) and len(land_types) >= 2:
@@ -176,8 +184,27 @@ def classify_land(name: str, type_line: str, oracle: str, produced_mana_json: st
         etb_condition = "pay 2 life"
         synergy_tags.append("lifepay")
 
-    # ── Pain lands ───────────────────────────────────────────────────
-    elif re.search(r"\{t\}.*pay 1 life.*add \{[wubrgc]\}", ot) or re.search(r"deals? 1 damage to you", ot):
+    # ── Bond lands (untapped with two or more opponents) ──────────────
+    elif re.search(r"unless you have two or more opponents", ot):
+        category = "bond"
+        tier = 2
+        etb_condition = "two or more opponents"
+
+    # ── Verges: one sure colour, one gated on a basic land type ───────
+    elif re.search(r"activate only if you control (?:a|an) (?:plains|island|swamp|mountain|forest)", ot):
+        category = "verge"
+        tier = 2
+
+    # ── Reveal-a-card lands (Snarls, Temple of the Dragon Queen,
+    # Murmuring Bosk, the Lorwyn tribal cycle) — before pain, so Bosk's
+    # damage clause doesn't hide its Treefolk condition ─────────────────
+    elif re.search(r"you may reveal .* from your hand", ot) and "tapped" in ot:
+        category = "filter"
+        tier = 2
+        etb_condition = "reveal card of type"
+
+    # ── Pain lands (incl. pay-1-life rainbow: Mana Confluence) ───────
+    elif re.search(r"\{t\}.*pay 1 life.*add \{[wubrgc]\}", ot) or re.search(r"deals? 1 damage to you", ot)             or re.search(r"pay 1 life: add one mana of any color", ot):
         category = "pain"
         tier = 2
         synergy_tags.append("lifepay")
@@ -200,12 +227,6 @@ def classify_land(name: str, type_line: str, oracle: str, produced_mana_json: st
         # Try to extract specific tribal references
         tribal_match = re.findall(r"(elf|goblin|merfolk|zombie|vampire|dragon|angel|human|wizard|warrior|knight|sliver|dinosaur|spirit|elemental)", ot)
         tribal_types = list(set(tribal_match))
-
-    # ── Filter lands ─────────────────────────────────────────────────
-    elif re.search(r"you may reveal .* from your hand", ot) and "tapped" in ot:
-        category = "filter"
-        tier = 2
-        etb_condition = "reveal card of type"
 
     # ── Bounce lands ─────────────────────────────────────────────────
     elif re.search(r"return (?:a|an) land.*to.*hand", ot):
@@ -239,9 +260,16 @@ def classify_land(name: str, type_line: str, oracle: str, produced_mana_json: st
             tier = 2
             synergy_tags.append("creature")
 
-    # ── Channel/activated ability lands ──────────────────────────────
+    # ── Channel lands (Boseiju cycle) and artifact lands: an untapped
+    # mono-colour land with a real second mode is tier 2, not generic utility.
     if "channel" in ot:
         synergy_tags.append("channel")
+        if category == "utility":
+            category = "channel"
+            tier = 2
+    if "artifact" in tl and category == "utility":
+        category = "artifact"
+        tier = 2
     if re.search(r"sacrifice.*:", ot):
         synergy_tags.append("sacrifice")
     if "landfall" in ot or "whenever a land enters" in ot:
@@ -252,6 +280,17 @@ def classify_land(name: str, type_line: str, oracle: str, produced_mana_json: st
         synergy_tags.append("card_draw")
     if re.search(r"(?:destroy|exile) target", ot):
         synergy_tags.append("removal")
+
+    # Untapped only when true: a branch may leave the default while the text
+    # says "This land enters tapped." outright (Grand Coliseum: pain; Path of
+    # Ancestry: tribal). A sentence with "enters tapped", no "unless", and not
+    # the "If you don't, …" tail of a choice is unconditional.
+    if enters_untapped and any(
+        re.search(r"enters(?: the battlefield)? tapped\b", sent)
+        and "unless" not in sent and not sent.startswith("if you don")
+        for sent in (x.strip() for x in re.split(r"[.\n]", ot))
+    ):
+        enters_untapped = False
 
     # If tier not yet set and enters tapped, bump down
     if not enters_untapped and tier < 3:

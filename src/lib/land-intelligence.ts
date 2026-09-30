@@ -9,7 +9,7 @@
  */
 
 import { getDb } from '@/lib/db';
-import { getLegalityKey } from '@/lib/constants';
+import { getLegalityKey, DEFAULT_DECK_SIZE } from '@/lib/constants';
 import { isRestrictedProducer, isConditionalColoredProducer, isNeverColoredProducer, fetchLandColors, implicitLandColors, chosenTypeLandColors, buildManaSourceContext, type ManaSourceContext } from '@/lib/mana-sources';
 import { ownedNamesSubqueryInline, normalizedNameExpr, stripArenaPrefix, type OwnershipFilter } from '@/lib/collection-ownership';
 import type { DbCard } from '@/lib/types';
@@ -51,7 +51,14 @@ export interface LandScore {
   tier: number;
   category: string;
   producesColors: string[];
+  /** untappedCredit >= 1 — untapped on the turns that matter for THIS deck */
   entersUntapped: boolean;
+  /** 1 untapped, 0.5 first-three-turns lands, 0 tapped (or an unsatisfiable condition) */
+  untappedCredit: number;
+  /** How much of one colour source a copy is worth in the deficit count: 1, 0.4 conditional, 0 restricted */
+  sourceCredit: number;
+  /** Worth a slot over a basic (untapped real fixing, a tri-land in 3+ colours, or a deck-relevant payoff) */
+  clearsBar: boolean;
   reasons: string[];
 }
 
@@ -64,6 +71,42 @@ export interface ManaDemand {
   colorIntensity: Record<string, number>;
   /** Total pips across all colors */
   totalPips: number;
+  /** Per colour, the single most demanding card (pips of that colour, mana value) — sets the Karsten source target */
+  heaviestCost: Record<string, { pips: number; mv: number }>;
+}
+
+// Karsten-style sources for a ≥90 % on-curve cast, indexed [pips][mana value]
+// (mv capped at 7). 99-card table from "How many sources … in Commander"
+// (2022); 60-card from the 2018 Frank Analysis. Approximate — the point is
+// the ORDER: CC two-drops need far more sources than one pip on a six-drop.
+const KARSTEN_99: number[][] = [[], [0, 19, 17, 15, 14, 13, 12, 11], [0, 0, 26, 24, 22, 21, 19, 18], [0, 0, 0, 33, 30, 28, 26, 24]];
+const KARSTEN_60: number[][] = [[], [0, 14, 13, 12, 11, 10, 9, 9], [0, 0, 20, 18, 16, 15, 14, 13], [0, 0, 0, 23, 21, 19, 18, 17]];
+
+function karstenSources(table: number[][], pips: number, mv: number): number {
+  const p = Math.min(3, pips);
+  return table[p][Math.min(7, Math.max(p, mv))];
+}
+
+/** Mana value of a cost string: generic digits + one per other symbol (hybrid, phyrexian, snow, C); X = 0. */
+function manaValueOf(cost: string): number {
+  let mv = 0;
+  for (const m of cost.matchAll(/\{([^}]+)\}/g)) {
+    const sym = m[1];
+    mv += /^\d+$/.test(sym) ? Number(sym) : sym === 'X' ? 0 : 1;
+  }
+  return mv;
+}
+
+/**
+ * Per-colour land-source targets: the Karsten count for the deck's most
+ * demanding card of that colour (99-card table for Commander-family formats;
+ * rocks are on top).
+ */
+export function colorSourceTargets(demand: ManaDemand, format: string): Record<string, number> {
+  const table = (DEFAULT_DECK_SIZE[format] ?? DEFAULT_DECK_SIZE.default) >= 99 ? KARSTEN_99 : KARSTEN_60;
+  const out: Record<string, number> = { W: 0, U: 0, B: 0, R: 0, G: 0 };
+  for (const [c, req] of Object.entries(demand.heaviestCost)) out[c] = karstenSources(table, req.pips, req.mv);
+  return out;
 }
 
 export interface LandBaseResult {
@@ -83,13 +126,21 @@ export function analyzeManaDemands(
   nonLandCards: Array<{ mana_cost: string | null; quantity: number }>
 ): ManaDemand {
   const colorDemand: Record<string, number> = { W: 0, U: 0, B: 0, R: 0, G: 0 };
+  const heaviestCost: ManaDemand['heaviestCost'] = {};
 
   for (const card of nonLandCards) {
-    if (!card.mana_cost) continue;
+    if (!card.mana_cost || card.quantity <= 0) continue;
     let match;
     const regex = new RegExp(PIP_REGEX.source, PIP_REGEX.flags);
+    const cardPips: Record<string, number> = {};
     while ((match = regex.exec(card.mana_cost)) !== null) {
       colorDemand[match[1]] += card.quantity;
+      cardPips[match[1]] = (cardPips[match[1]] || 0) + 1;
+    }
+    const mv = manaValueOf(card.mana_cost);
+    for (const [c, pips] of Object.entries(cardPips)) {
+      const prev = heaviestCost[c];
+      if (!prev || karstenSources(KARSTEN_99, pips, mv) > karstenSources(KARSTEN_99, prev.pips, prev.mv)) heaviestCost[c] = { pips, mv };
     }
   }
 
@@ -106,7 +157,59 @@ export function analyzeManaDemands(
     }
   }
 
-  return { colorDemand, heaviestColor, colorIntensity, totalPips };
+  return { colorDemand, heaviestColor, colorIntensity, totalPips, heaviestCost };
+}
+
+// ── "Untapped only when true" ────────────────────────────────────────────────
+// Formats where "unless you have two or more opponents" (bond lands) holds.
+const MULTIPLAYER_FORMATS = new Set(['commander']);
+
+type TappedCondition =
+  | { kind: 'untapped' } | { kind: 'tapped' } | { kind: 'payLife' } | { kind: 'firstTurns' } | { kind: 'opponents' }
+  | { kind: 'reveal'; types: string[] } | { kind: 'basicType'; types: string[] } | { kind: 'other'; text: string };
+
+/**
+ * Read the land's own ETB clause: the sentence with "enters tapped", its
+ * "unless …" tail, or (for "If you don't, it enters tapped.") the choice
+ * sentence before it. No such sentence = untapped; no condition = tapped.
+ */
+export function parseTappedCondition(oracle: string | null | undefined): TappedCondition {
+  const sentences = (oracle || '').toLowerCase().split(/[.\n]/).map((s) => s.trim());
+  const i = sentences.findIndex((s) => /enters(?: the battlefield)? tapped\b/.test(s));
+  if (i === -1) return { kind: 'untapped' };
+  const s = sentences[i];
+  let cond = s.match(/tapped unless (.+)$/)?.[1];
+  if (cond == null && /^if you don'?t/.test(s)) cond = [...sentences.slice(0, i)].reverse().find((p) => /you may/.test(p)) ?? '';
+  if (cond == null) return { kind: 'tapped' };
+  if (/pay \d+ life/.test(cond)) return { kind: 'payLife' };
+  if (/first, second, or third turn/.test(cond)) return { kind: 'firstTurns' };
+  if (/two or more opponents/.test(cond)) return { kind: 'opponents' };
+  const basics = Object.keys(BASIC_TYPE_TO_COLOR).filter((t) => cond!.includes(t));
+  if (basics.length) return { kind: 'basicType', types: basics };
+  const reveal = cond.match(/reveal(?:ed)? an? ([a-z]+)(?: or an? ([a-z]+))? card/);
+  if (reveal) return { kind: 'reveal', types: [reveal[1], reveal[2]].filter(Boolean) as string[] };
+  return { kind: 'other', text: cond };
+}
+
+/** 1 / 0.5 / 0 — how much of the flat untapped bonus the condition earns for THIS deck. */
+function untappedCreditFor(
+  cond: TappedCondition, colors: string[], tribalTypes: string[] | undefined, format: string, classified: number | null,
+): number {
+  const tribes = (tribalTypes || []).map((t) => t.toLowerCase());
+  switch (cond.kind) {
+    case 'untapped': case 'payLife': return 1;
+    case 'tapped': return 0;
+    case 'firstTurns': return 0.5;
+    case 'opponents': return MULTIPLAYER_FORMATS.has(format) ? 1 : 0;
+    case 'reveal': return cond.types.some((t) => tribes.includes(t)) ? 1 : 0;
+    case 'basicType': return cond.types.some((t) => colors.includes(BASIC_TYPE_TO_COLOR[t])) ? 1 : 0;
+    case 'other':
+      // Slow/fast lands and "a basic land" are always satisfiable; anything
+      // else (a planeswalker, 13 or less life, eight opponent lands…) keeps
+      // the classifier's verdict, which is "tapped" for the generic branch.
+      if (/two or (?:more|fewer) other lands|a basic land/.test(cond.text)) return 1;
+      return classified === 1 ? 1 : 0;
+  }
 }
 
 // ── Land Scoring ─────────────────────────────────────────────────────────────
@@ -316,10 +419,10 @@ export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
     // Choose-a-colour abilities gated on a creature-type/tribal count (Three
     // Tree City: "choose a color, add mana of that color per creature of
     // the chosen type") aren't reliable fixing — value is entirely tribal
-    // payoff, not colour production. In mono-colour, strip the classified
-    // colour credit so the "beats a basic" gate below judges it colourless
-    // (a tribal deck still gets it back via the tribal-match exemption).
-    if (colors.length <= 1 && /choose a color\.[^.]*add[^.]*of (?:that|the chosen) color/.test((land.oracle_text || '').toLowerCase())) {
+    // payoff, not colour production. Whenever the deck has no tribe (mono or
+    // multicolour), strip the classified colour credit so it's judged
+    // colourless (a tribal deck gets it back via the tribal-match exemption).
+    if (!tribalTypes?.length && /choose a color\.[^.]*add[^.]*of (?:that|the chosen) color[^.]*(?:creature|of the chosen type)/.test((land.oracle_text || '').toLowerCase())) {
       producesColors = producesColors.filter((c) => c === 'C');
     }
     // Restricted production ("spend this mana only to cast planeswalker
@@ -356,6 +459,8 @@ export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
     let tribalTypesArr: string[] = [];
     try { tribalTypesArr = JSON.parse(land.tribal_types || '[]'); } catch { /* empty */ }
 
+    const matchingColors = producesColors.filter(c => colors.includes(c));
+
     // A land that's colourless in practice (gated behind a counter, granted
     // to others, one-shot, Gate-any-type) is a trap regardless of what
     // classify_lands.py tiered it at — it doesn't deserve tier-1 treatment
@@ -363,15 +468,24 @@ export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
     let tier = land.tier || 3;
     if (isNeverColoredProducer(land, manaCtx) && tier < 4) tier = 4;
     const tapText = (land.oracle_text || '').toLowerCase();
-    // Some fetches DO enter tapped (Thawing Glaciers, Krosan Verge) or fetch a
-    // tapped basic (Evolving Wilds) — don't blanket-credit fetches as untapped.
+    // Untapped only when true. Fetches are judged on their own ETB plus what
+    // they deposit (Thawing Glaciers / Krosan Verge enter tapped, Evolving
+    // Wilds fetches tapped); every other land on its ETB clause read against
+    // THIS deck — reveal-a-type only with the tribe, check types only for
+    // deck colours, "two or more opponents" only in multiplayer, first-three-
+    // turns lands at half — never the classifier's flat enters_untapped.
     const ownEntersTapped = tapText.includes('enters the battlefield tapped') || tapText.includes('enters tapped');
     const depositsTapped = /onto the battlefield tapped/.test(tapText);
-    const entersUntapped = isFetch
-      ? !ownEntersTapped && !depositsTapped
-      : land.enters_untapped != null
-        ? land.enters_untapped === 1
-        : !ownEntersTapped;
+    const untappedCredit = isFetch
+      ? (!ownEntersTapped && !depositsTapped ? 1 : 0)
+      : untappedCreditFor(parseTappedCondition(land.oracle_text), colors, tribalTypes, format, land.enters_untapped);
+    const entersUntapped = untappedCredit >= 1;
+    // No land that isn't reliably untapped is tier 1-2 (the classifier's own
+    // rule, re-applied to the deck-specific verdict — Starting Town is a
+    // tapped land from turn 4); a tapped land producing 3+ deck colours in a
+    // 3+ colour deck (triomes) is real fixing, not gainland tier.
+    if (untappedCredit < 1 && tier < 3) tier = 3;
+    if (tier === 4 && matchingColors.length >= 3 && colors.length >= 3) tier = 3;
     const category = land.land_category || 'utility';
     const reasons: string[] = [];
 
@@ -380,9 +494,9 @@ export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
     let score = tierBase;
 
     // ── Untapped bonus ───────────────────────────────────────────
-    if (entersUntapped) {
-      score += 40;
-      reasons.push('enters untapped');
+    if (untappedCredit > 0) {
+      score += Math.round(40 * untappedCredit);
+      reasons.push(entersUntapped ? 'enters untapped' : 'untapped on turns 1-3 only');
     }
 
     // ── Color match bonus ────────────────────────────────────────
@@ -401,13 +515,12 @@ export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
     // penalized either (colors.length < 2).
     const matchCountBeforeScale = producesColors.filter(c => colors.includes(c)).length;
     const fetchOffColor = isFetch && !!fetched && fetched.length < 5 && colors.length >= 2 && matchCountBeforeScale === 1;
-    const conditional = (!isFetch && isConditionalColoredProducer(land, manaCtx)) || fetchOffColor;
+    const conditional = isConditionalColoredProducer(land, manaCtx) || fetchOffColor;
     const colorBonusScale = restricted ? 0.25 : conditional ? 0.4 : 1;
     if (restricted) reasons.push('restricted producer');
     if (fetchOffColor) reasons.push('off-color fetch (thinning only)');
     else if (conditional) reasons.push('conditional colored mana');
 
-    const matchingColors = producesColors.filter(c => colors.includes(c));
     if (matchingColors.length > 0) {
       // Cap breadth at 3: a 5-colour land is worth a triome, not 2.5 duals —
       // tier and untapped-ness decide the order among real fixers instead
@@ -543,15 +656,29 @@ export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
       score += Math.round(10 * (1 - land.edhrec_rank / 5000));
     }
 
-    scored.push({
-      card: land,
-      score,
-      tier,
-      category,
-      producesColors,
-      entersUntapped,
-      reasons,
-    });
+    // ── Quality bar: worth a slot over a basic? ───────────────────
+    // Mono-colour: the "beats a basic" gate above already IS the bar.
+    // Multicolour: untapped real fixing at full credit (2+ deck colours at
+    // any tier, or one colour at tier 1-2 — shock, Verge, channel, artifact
+    // land), an untapped fetch for any deck colour (thinning), a tapped land
+    // producing 3+ deck colours in a 3+ colour deck (triomes), or a payoff
+    // this deck uses (tribal, manland, Nykthos, Ancient Tomb, Urza's Saga,
+    // an MDFC spell face). Colourless utility with none of those (Three
+    // Tree City without a tribe, Reliquary Tower) and costed / conditional
+    // rainbows (Conduit Pylons, Opal Palace) do not — a basic is better.
+    const fixes = matchingColors.length;
+    const sourceCredit = restricted ? 0 : colorBonusScale;
+    const payoff = tribalMatch || genericTribalLand || exemptColorless;
+    // A one-colour land that charges life for that colour (Hashep Oasis) is
+    // a worse basic in any deck; the mono gate above already drops it there.
+    const paysLifeForColor = fixes === 1 && new RegExp(`pay \\d+ life:\\s*add \\{${matchingColors[0]}\\}`, 'i').test(tapText);
+    const clearsBar = colors.length <= 1
+      || (entersUntapped && sourceCredit >= 1 && (fixes >= 2 || (fixes >= 1 && tier <= 2 && !paysLifeForColor)))
+      || (isFetch && entersUntapped && fixes >= 1)
+      || (fixes >= 3 && colors.length >= 3 && sourceCredit >= 1)
+      || payoff;
+
+    scored.push({ card: land, score, tier, category, producesColors, entersUntapped, untappedCredit, sourceCredit, clearsBar, reasons });
   }
 
   // Sort by score descending
@@ -615,87 +742,95 @@ export function buildOptimalLandBase(options: BuildOptions): LandBaseResult {
     rarityFilter: options.rarityFilter, maxCardPrice: options.maxCardPrice,
   });
 
-  // Determine non-basic target based on color count. Mono-colour has no
-  // flat floor: the target is however many candidates actually cleared the
-  // "beats a basic" bar in scoreLandsForDeck (SELECT_MIN_SCORE below), up
-  // to the usual ceiling — never a forced count of weaker fillers.
-  const numColors = colors.length;
-  const nonBasicTarget = numColors <= 1
-    ? Math.min(10, targetLandCount - 25, scored.filter((s) => s.score >= SELECT_MIN_SCORE).length)
-    : numColors === 2
-      ? Math.min(18, targetLandCount - 8)
-      : numColors === 3
-        ? Math.min(24, targetLandCount - 5)
-        : Math.min(30, targetLandCount - 3);
+  // Candidates: lands that clear the quality bar (scoreLandsForDeck) and the
+  // minimum score. The nonbasic count is the smaller of the colour-count
+  // ceiling and how many candidates exist — never a quota that junk fills
+  // (a flat 30 in 4-5 colours used to guarantee Temple of the Dragon Queen,
+  // Starting Town and the tapped Landscapes a slot).
+  const candidates = scored.filter((s) => s.clearsBar && s.score >= SELECT_MIN_SCORE);
+  const basicColors = colors.filter((c) => BASIC_LAND_MAP[c]);
 
-  // Select non-basic lands. MDFC spell//land cards are capped — EDHREC
-  // consensus decks run 2-4 of them, not 15+, because they are functionally
-  // tapped lands stapled to mediocre spells.
+  // Colour-deficit selection: Karsten-style land-source targets from the
+  // deck's most demanding card per colour. A colour's need is its relative
+  // shortfall, weighted half by its pip share so that when both targets
+  // cannot fit (Tatyova: G 39 pips / U 22, Karsten 24 + 26 > 38 lands) the
+  // colour most of the deck is cast with gives up the least. Every slot goes
+  // to the candidate maximising score + a bonus for the need it closes — a
+  // G/R shock covering two half-short colours beats a B artifact land for
+  // the single shortest colour — where a basic of the neediest colour is a
+  // candidate too (BASIC_SCORE: below any untapped land with an upside,
+  // above a colourless manland while a colour is still short). So the
+  // nonbasic count is whatever beats a basic, not a flat quota junk fills,
+  // and the second-heaviest colour gets its sources (Tam's B sat at 19).
+  const targets: Record<string, number> = manaDemand && manaDemand.totalPips > 0
+    ? colorSourceTargets(manaDemand, format)
+    : Object.fromEntries(colors.map((c) => [c, targetLandCount]));
+  const sources: Record<string, number> = Object.fromEntries(colors.map((c) => [c, 0]));
+  const intensity = (c: string) => manaDemand?.colorIntensity[c] ?? 1 / colors.length;
+  const need = (c: string) => Math.max(0, (targets[c] ?? 0) - (sources[c] ?? 0)) / Math.max(1, targets[c] ?? 1)
+    * (0.5 + 0.5 * intensity(c) * colors.length);
+  const neediestBasic = () => [...basicColors].sort((a, b) => need(b) - need(a) || intensity(b) - intensity(a))[0];
+
+  // MDFC spell//land cards are capped — EDHREC consensus decks run 2-4 of
+  // them, not 15+, because they are functionally tapped lands stapled to
+  // mediocre spells.
   const MAX_MDFC_LANDS = 4;
   const selectedLands: Array<{ card: DbCard; quantity: number }> = [];
   const selectedNames = new Set<string>();
-  let nonBasicCount = 0;
-  let mdfcCount = 0;
-
-  for (const scored_land of scored) {
-    if (nonBasicCount >= nonBasicTarget) break;
-    // A--stripped: an Arena-rebalanced "A-X" and its paper name "X" are one card.
-    const landKey = stripArenaPrefix(scored_land.card.name);
-    if (selectedNames.has(landKey)) continue;
-    if (options.excludeNames?.has(landKey)) continue; // already picked elsewhere (e.g. MDFC spell)
-    if (scored_land.score < SELECT_MIN_SCORE) continue; // Skip very low scoring lands
-
-    const isMdfcSpellLand = !(scored_land.card.type_line || '').split('//')[0].includes('Land');
-    if (isMdfcSpellLand) {
-      if (mdfcCount >= MAX_MDFC_LANDS) continue;
-      mdfcCount++;
-    }
-
-    const qty = isCommander ? 1 : Math.min(4, nonBasicTarget - nonBasicCount);
-    selectedLands.push({ card: scored_land.card, quantity: qty });
-    selectedNames.add(landKey);
-    nonBasicCount += qty;
-  }
-
-  // Calculate basic land distribution based on color demands
   const basicDistribution: Record<string, number> = {};
-  const remainingSlots = targetLandCount - nonBasicCount;
+  let nonBasicCount = 0;
+  let basicCount = 0;
+  let mdfcCount = 0;
+  const isMdfcSpell = (s: LandScore) => !(s.card.type_line || '').split('//')[0].includes('Land');
+  const eligible = (s: LandScore): boolean => {
+    // A--stripped: an Arena-rebalanced "A-X" and its paper name "X" are one card.
+    const landKey = stripArenaPrefix(s.card.name);
+    if (selectedNames.has(landKey)) return false;
+    if (options.excludeNames?.has(landKey)) return false; // already picked elsewhere (e.g. MDFC spell)
+    if (isMdfcSpell(s) && mdfcCount >= MAX_MDFC_LANDS) return false;
+    return true;
+  };
+  const giveBasic = (c: string) => {
+    basicDistribution[BASIC_LAND_MAP[c]] = (basicDistribution[BASIC_LAND_MAP[c]] || 0) + 1;
+    sources[c] += 1;
+    basicCount += 1;
+  };
 
-  if (colors.length > 0 && remainingSlots > 0) {
-    if (manaDemand && manaDemand.totalPips > 0) {
-      // Distribute proportionally to color intensity
-      let distributed = 0;
-      const sortedColors = [...colors].sort((a, b) =>
-        (manaDemand.colorIntensity[b] || 0) - (manaDemand.colorIntensity[a] || 0)
-      );
+  // A fully-short colour is worth one untapped bonus and a half; scaled by
+  // untapped and source credit, so a tapped triome, a conditional rainbow
+  // or a tier-3 pain rainbow (Tarnished Citadel) never jumps an untapped
+  // tier-1 dual on breadth alone.
+  const DEFICIT_WEIGHT = 60;
+  const BASIC_SCORE = 100;
+  const gainOf = (s: LandScore): number => {
+    let covered = 0;
+    for (const c of s.producesColors) if (c in sources) covered += need(c);
+    return Math.min(3, covered) * s.untappedCredit * s.sourceCredit;
+  };
 
-      for (let i = 0; i < sortedColors.length; i++) {
-        const color = sortedColors[i];
-        const basicName = BASIC_LAND_MAP[color];
-        if (!basicName) continue;
+  // One basic per colour first (fetch targets, check-land types).
+  if (targetLandCount >= basicColors.length) for (const c of basicColors) giveBasic(c);
 
-        if (i === sortedColors.length - 1) {
-          // Last color gets remainder to avoid rounding issues
-          basicDistribution[basicName] = remainingSlots - distributed;
-        } else {
-          const share = Math.round(remainingSlots * (manaDemand.colorIntensity[color] || 0));
-          const qty = Math.max(1, Math.min(share, remainingSlots - distributed - (sortedColors.length - i - 1)));
-          basicDistribution[basicName] = qty;
-          distributed += qty;
-        }
-      }
-    } else {
-      // Even distribution
-      const perColor = Math.floor(remainingSlots / colors.length);
-      const extra = remainingSlots - perColor * colors.length;
-
-      for (let i = 0; i < colors.length; i++) {
-        const basicName = BASIC_LAND_MAP[colors[i]];
-        if (basicName) {
-          basicDistribution[basicName] = perColor + (i === 0 ? extra : 0);
-        }
-      }
-    }
+  const remaining = [...candidates]; // score-descending
+  while (nonBasicCount + basicCount < targetLandCount) {
+    let idx = -1;
+    let bestKey = -Infinity;
+    remaining.forEach((s, i) => {
+      if (!eligible(s)) return;
+      const key = s.score + DEFICIT_WEIGHT * gainOf(s);
+      if (key > bestKey) { bestKey = key; idx = i; }
+    });
+    const basicColor = neediestBasic();
+    const basicKey = basicColor ? BASIC_SCORE + DEFICIT_WEIGHT * need(basicColor) : -Infinity;
+    if (idx === -1 && !basicColor) break;
+    if (idx === -1 || basicKey >= bestKey) { giveBasic(basicColor); continue; }
+    const [pick] = remaining.splice(idx, 1);
+    const qty = isCommander ? 1 : Math.min(4, targetLandCount - nonBasicCount - basicCount);
+    selectedLands.push({ card: pick.card, quantity: qty });
+    selectedNames.add(stripArenaPrefix(pick.card.name));
+    if (isMdfcSpell(pick)) mdfcCount++;
+    nonBasicCount += qty;
+    for (const c of pick.producesColors) if (c in sources) sources[c] += pick.sourceCredit * qty;
   }
 
   return {
