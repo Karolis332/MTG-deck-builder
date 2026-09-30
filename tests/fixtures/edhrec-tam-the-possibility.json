@@ -1,0 +1,217 @@
+{
+  "header": "Tam, the Possibility (Commander)",
+  "panels": {
+    "taglinks": [
+      {
+        "count": 206,
+        "slug": "planeswalkers",
+        "value": "Planeswalkers"
+      },
+      {
+        "count": 37,
+        "slug": "proliferate",
+        "value": "Proliferate"
+      },
+      {
+        "count": 32,
+        "slug": "legends",
+        "value": "Legends"
+      },
+      {
+        "count": 30,
+        "slug": "tokens",
+        "value": "Tokens"
+      },
+      {
+        "count": 27,
+        "slug": "historic",
+        "value": "Historic"
+      },
+      {
+        "count": 19,
+        "slug": "control",
+        "value": "Control"
+      }
+    ]
+  },
+  "container": {
+    "title": "Tam, the Possibility (Commander)",
+    "json_dict": {
+      "card": {
+        "name": "Tam, the Possibility"
+      },
+      "cardlists": [
+        {
+          "header": "High Synergy Cards",
+          "tag": "highsynergycards",
+          "cardviews": [
+            {
+              "name": "Oath of Teferi",
+              "sanitized": "oath-of-teferi",
+              "synergy": 0.7966625245245795,
+              "num_decks": 2270,
+              "potential_decks": 2757
+            },
+            {
+              "name": "Ichormoon Gauntlet",
+              "sanitized": "ichormoon-gauntlet",
+              "synergy": 0.7008735059918315,
+              "num_decks": 1976,
+              "potential_decks": 2757
+            },
+            {
+              "name": "Commodore Guff",
+              "sanitized": "commodore-guff",
+              "synergy": 0.7007711533786116,
+              "num_decks": 1966,
+              "potential_decks": 2757
+            },
+            {
+              "name": "Vraska, Betrayal's Sting",
+              "sanitized": "vraska-betrayals-sting",
+              "synergy": 0.6783351779431217,
+              "num_decks": 1917,
+              "potential_decks": 2757
+            }
+          ]
+        },
+        {
+          "header": "Top Cards",
+          "tag": "topcards",
+          "cardviews": [
+            {
+              "name": "Wrenn and Realmbreaker",
+              "sanitized": "wrenn-and-realmbreaker",
+              "synergy": 0.5544319461223428,
+              "num_decks": 1588,
+              "potential_decks": 2757
+            },
+            {
+              "name": "Flux Channeler",
+              "sanitized": "flux-channeler",
+              "synergy": 0.5562325527836615,
+              "num_decks": 1572,
+              "potential_decks": 2757
+            },
+            {
+              "name": "Farseek",
+              "sanitized": "farseek",
+              "synergy": 0.11608752585726395,
+              "num_decks": 1494,
+              "potential_decks": 2757
+            },
+            {
+              "name": "Doubling Season",
+              "sanitized": "doubling-season",
+              "synergy": 0.47729573222046445,
+              "num_decks": 1490,
+              "potential_decks": 2757
+            }
+          ]
+        },
+        {
+          "header": "Creatures",
+          "tag": "creatures",
+          "cardviews": [
+            {
+              "name": "Birds of Paradise",
+              "sanitized": "birds-of-paradise",
+              "synergy": 0.2510467435317081,
+              "num_decks": 1396,
+              "potential_decks": 2757
+            },
+            {
+              "name": "Deepglow Skate",
+              "sanitized": "deepglow-skate",
+              "synergy": 0.47155505831087363,
+              "num_decks": 1340,
+              "potential_decks": 2757
+            },
+            {
+              "name": "Bloom Tender",
+              "sanitized": "bloom-tender",
+              "synergy": 0.2873899938116995,
+              "num_decks": 1327,
+              "potential_decks": 2757
+            },
+            {
+              "name": "Onakke Oathkeeper",
+              "sanitized": "onakke-oathkeeper",
+              "synergy": 0.45697033897307515,
+              "num_decks": 1275,
+              "potential_decks": 2757
+            }
+          ]
+        },
+        {
+          "header": "Planeswalkers",
+          "tag": "planeswalkers",
+          "cardviews": [
+            {
+              "name": "Chandra, Torch of Defiance",
+              "sanitized": "chandra-torch-of-defiance",
+              "synergy": 0.47963701492909583,
+              "num_decks": 1343,
+              "potential_decks": 2757
+            },
+            {
+              "name": "Chandra, Chill of Compliance",
+              "sanitized": "chandra-chill-of-compliance",
+              "synergy": 0.4685662963221502,
+              "num_decks": 1313,
+              "potential_decks": 2757
+            },
+            {
+              "name": "Teferi, Master of Time",
+              "sanitized": "teferi-master-of-time",
+              "synergy": 0.43828006302491485,
+              "num_decks": 1239,
+              "potential_decks": 2757
+            },
+            {
+              "name": "Jace, Multiverse Architect",
+              "sanitized": "jace-multiverse-architect",
+              "synergy": 0.40108992252984405,
+              "num_decks": 1228,
+              "potential_decks": 2757
+            }
+          ]
+        },
+        {
+          "header": "Lands",
+          "tag": "lands",
+          "cardviews": [
+            {
+              "name": "Command Tower",
+              "sanitized": "command-tower",
+              "synergy": 0.03002586869605106,
+              "num_decks": 2523,
+              "potential_decks": 2757
+            },
+            {
+              "name": "Island",
+              "sanitized": "island",
+              "synergy": 0.03256345364964719,
+              "num_decks": 2289,
+              "potential_decks": 2757
+            },
+            {
+              "name": "Forest",
+              "sanitized": "forest",
+              "synergy": 0.0017061984142747733,
+              "num_decks": 2261,
+              "potential_decks": 2757
+            },
+            {
+              "name": "Plains",
+              "sanitized": "plains",
+              "synergy": -0.0002982255048826765,
+              "num_decks": 2162,
+              "potential_decks": 2757
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
