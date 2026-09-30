@@ -73,6 +73,12 @@ export function getScoringWeights(): Record<string, number> | null {
 const QUALITY_FLOOR_RATIO = 0.6;
 /** B-D8: with one of these in the deck every basic name is capped at one copy (snow basics are other names). */
 const SINGLETON_NAME_COMBO = new Set(['Tainted Pact', 'Demonic Consultation']);
+/** L-open: landfall / "whenever a land enters" payoffs make a typed fetch worth a mono-colour slot (B-D9). */
+const LAND_PAYOFF_RE = /landfall|whenever a land (?:you control )?enters/i;
+export function hasLandPayoffs(commanderOracle: string | null | undefined, spells: Array<Pick<DbCard, 'oracle_text'>>): boolean {
+  if (LAND_PAYOFF_RE.test(commanderOracle || '')) return true;
+  return spells.filter((c) => LAND_PAYOFF_RE.test(c.oracle_text || '')).length >= 3;
+}
 export function isLandBackDfc(card: DbCard): boolean {
   // Only a modal DFC can be PLAYED as its land face. A transforming artifact
   // or creature with a land back (Dowsing Dagger, Treasure Map, Tarrian's
@@ -2819,6 +2825,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
       excludeNames,
       mdfcPicked: mdfcLandBackCount,
       singletonBasics: isCommander && picked.some((p) => p.board === 'main' && SINGLETON_NAME_COMBO.has(stripArenaPrefix(p.card.name))),
+      landPayoffs: hasLandPayoffs(commanderCard?.oracle_text, mainSpells().map((p) => p.card)),
     });
 
     // Add non-basic lands. A--stripped: a land already picked (e.g. as an
