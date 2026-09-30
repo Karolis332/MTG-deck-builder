@@ -663,7 +663,7 @@ function findCollectionSubstitutes(
   for (const row of ownedRows) {
     const cats = classifyCard(
       row.name, row.oracle_text || '', row.type_line || '', row.cmc || 0,
-      undefined, { superfriends: true },
+      undefined, { superfriends: true, strict: true },
     );
     for (const cat of cats) {
       if (byRole[cat]) byRole[cat].push(row);
@@ -679,7 +679,7 @@ function findCollectionSubstitutes(
       target.card.type_line || '',
       target.card.cmc || 0,
       undefined,
-      { superfriends: true },
+      { superfriends: true, strict: true },
     );
     for (const cat of targetCats) {
       const bucket = byRole[cat];

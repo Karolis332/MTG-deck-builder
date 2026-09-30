@@ -609,6 +609,8 @@ export interface PickByRoleOptions {
   /** Opt-in: a planeswalker is never classified as 'draw' (see card-classifier
    *  ClassifyOpts). Omitted reproduces legacy behaviour byte-for-byte. */
   superfriends?: boolean;
+  /** Opt-in: the builder's honest classification (ClassifyOpts.strict). */
+  strict?: boolean;
 }
 
 export interface PickByRoleResult {
@@ -632,9 +634,9 @@ export interface PickByRoleResult {
 export function pickByRole(opts: PickByRoleOptions): PickByRoleResult {
   const {
     pool, nonLandTarget, quotas, payoffNames, commanderOracle,
-    getMaxQty, isCommanderFormat, preFilled, passBAllowed, superfriends,
+    getMaxQty, isCommanderFormat, preFilled, passBAllowed, superfriends, strict,
   } = opts;
-  const classifyOpts = superfriends ? { superfriends: true } : undefined;
+  const classifyOpts = superfriends || strict ? { superfriends, strict } : undefined;
 
   const picks: PickedRoleCard[] = [];
   const pickedNames = new Set<string>();

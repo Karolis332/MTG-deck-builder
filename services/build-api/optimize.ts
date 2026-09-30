@@ -267,7 +267,7 @@ function classifyMain(shape: DeckShape): Classified {
   const oracle = commanderOracle(shape);
   const byCategory = {} as Record<CardCategory, ClassifiedCard[]>;
   const cards: OptimizerCard[] = shape.main.map(({ card, quantity, board }) => {
-    const categories = classifyCard(card.name, card.oracle_text || '', card.type_line || '', card.cmc ?? 0, oracle, { superfriends: true });
+    const categories = classifyCard(card.name, card.oracle_text || '', card.type_line || '', card.cmc ?? 0, oracle, { superfriends: true, strict: true });
     const primary = getPrimaryCategory(categories);
     const classified: ClassifiedCard = {
       name: card.name, cardId: card.id, categories, primaryCategory: primary,
@@ -384,7 +384,7 @@ function collectAdds(ctx: AddContext): AddOut[] {
     if (!isLegalInFormat(card.legalities, shape.format)) return;
     if (!isWithinColorIdentity(parseColors(card.color_identity), deckColors)) return;
     seen.add(key);
-    const category = getPrimaryCategory(classifyCard(card.name, card.oracle_text || '', card.type_line || '', card.cmc ?? 0, oracle, { superfriends: true }));
+    const category = getPrimaryCategory(classifyCard(card.name, card.oracle_text || '', card.type_line || '', card.cmc ?? 0, oracle, { superfriends: true, strict: true }));
     // Land reasons come from ai-suggest's fixed DEFAULT_LAND_COUNT table, which doesn't
     // know this deck's actual curve — quote the Karsten target computed for it instead.
     // Never ship a blank row either way: the web app renders `reason` verbatim.

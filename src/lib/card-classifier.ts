@@ -311,10 +311,28 @@ function isLand(typeLine: string): boolean {
   return /\bLand\b/.test(typeLine);
 }
 
-function isRamp(name: string, oracleText: string, typeLine: string): boolean {
+// strict ramp (Unit C 2026-09-30, B-D5): Treasure the card's OWN repeatable
+// trigger makes for you (Smothering Tithe, Storm-Kiln Artist) or an X-scaled
+// burst (Dockside) is ramp. A one-shot rider (Deadly Dispute) is not, and the
+// opponent's Treasures never are — "Its controller creates two Treasure
+// tokens" (An Offer You Can't Refuse) is third-person "creates", which the
+// imperative "create" below cannot match; the reminder text that used to
+// carry "Add one mana of any color" is gone via ownAbilities().
+const OWN_TREASURE_ENGINE = /(?:whenever|at the beginning of)[^\n]*\bcreate (?:a |an |one |two |three |x |that many |one or more )?treasure/i;
+const OWN_TREASURE_BURST = /\bcreate (?:x|that many) treasure/i;
+
+function isRamp(name: string, oracleText: string, typeLine: string, opts?: ClassifyOpts): boolean {
   if (isLand(typeLine)) return false;
   if (RAMP_NAMES.has(name.toLowerCase())) return true;
-  return matchesPatterns(oracleText, RAMP_PATTERNS);
+  if (!opts?.strict) return matchesPatterns(oracleText, RAMP_PATTERNS);
+  const own = ownAbilities(oracleText);
+  return matchesPatterns(own, RAMP_PATTERNS) || OWN_TREASURE_ENGINE.test(own) || OWN_TREASURE_BURST.test(own);
+}
+
+/** The honest ramp read (B-D5) — what a land-count formula (B-D1) should
+ *  count. Same as `classifyCard(..., { strict: true }).includes('ramp')`. */
+export function isHonestRamp(name: string, oracleText: string, typeLine: string): boolean {
+  return isRamp(name, oracleText, typeLine, { strict: true });
 }
 
 // Opt-in flag threaded through classifyCard for callers that want the
@@ -323,6 +341,11 @@ function isRamp(name: string, oracleText: string, typeLine: string): boolean {
 // the legacy classification byte-for-byte — Deck Score never passes this.
 export interface ClassifyOpts {
   superfriends?: boolean;
+  /** Builder-only honest read (Unit C 2026-09-30, B-D5 / A-D4). Only the
+   *  builder, arsenal, optimizer and gate pass it; Deck Score never does
+   *  (default path pinned by card-classifier-default-path-identity.test.ts).
+   *  ramp: own abilities only (no reminder-text / opponent Treasure). */
+  strict?: boolean;
 }
 
 function isPlaneswalker(typeLine: string): boolean {
@@ -474,7 +497,7 @@ export function classifyCard(
     return categories;
   }
 
-  if (isRamp(name, oracleText, typeLine)) categories.push('ramp');
+  if (isRamp(name, oracleText, typeLine, opts)) categories.push('ramp');
   if (isDraw(name, oracleText, typeLine, opts)) categories.push('draw');
   if (isTutor(name, oracleText, typeLine)) categories.push('tutor');
   if (isBoardWipe(name, oracleText)) categories.push('board_wipe');

@@ -1126,7 +1126,8 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
   // ClassifyOpts) — kept opt-in so every other archetype's classification is
   // byte-identical to before.
   const isSuperfriends = resolvedStrategy === 'superfriends';
-  const classifyOpts = isSuperfriends ? { superfriends: true } : undefined;
+  // strict = the builder's honest read (card-classifier ClassifyOpts, Unit C).
+  const classifyOpts: ClassifyOpts = { superfriends: isSuperfriends, strict: true };
 
   // ── ML personalization: load predictions from personalized_suggestions ──
   const mlScoreMap = new Map<string, number>();
@@ -1817,7 +1818,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
   // See buildScoredCandidatePool — same opt-in, recomputed in this function's
   // own scope since poolResult only carries the string, not the flag.
   const isSuperfriends = resolvedStrategy === 'superfriends';
-  const classifyOpts = isSuperfriends ? { superfriends: true } : undefined;
+  const classifyOpts: ClassifyOpts = { superfriends: isSuperfriends, strict: true };
 
   // Free-text hint: "consistent manabase" biases toward the generous end of
   // the archetype's land band (and shrinks the nonland budget to match, so
@@ -2047,6 +2048,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
     preFilled,
     passBAllowed,
     superfriends: isSuperfriends,
+    strict: true,
   });
 
   for (const p of pickResult.picks) {
