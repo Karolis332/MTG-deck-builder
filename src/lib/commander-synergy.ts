@@ -32,7 +32,8 @@ export type SynergyCategory =
   | 'x_spells'
   | 'five_colors'
   | 'dungeon_venture'
-  | 'alt_zone_cast';
+  | 'alt_zone_cast'
+  | 'planeswalker';
 
 export interface CommanderSynergyProfile {
   /** Override generic CMC-based archetype detection */
@@ -123,7 +124,21 @@ export function detectTribalPayoff(oracleText: string, subtypes: string[]): stri
 
 // ── Trigger Pattern Library ──────────────────────────────────────────────────
 
+// Superfriends is opt-in (see analyzeCommander's `opts.superfriends`) — its
+// trigger patterns and the 99-shape supplement only run when a non-Deck-Score
+// caller asks for them, so Deck Score (which never passes opts) stays
+// byte-identical.
 export const TRIGGER_PATTERNS: Record<SynergyCategory, RegExp[]> = {
+  planeswalker: [
+    /planeswalker spells? you cast/i,
+    /cast a planeswalker spell/i,
+    /planeswalker types/i,
+    /loyalty abilit/i,
+    /loyalty counter/i,
+    /proliferate/i,
+    /activate a loyalty ability/i,
+    /planeswalkers? you control/i,
+  ],
   x_spells: [
     /spells? with \{?x\}? in (?:its|their) mana costs?/i,
     /spend this mana only to cast .*\{x\}/i,
@@ -311,6 +326,18 @@ const SYNERGY_REQUIREMENTS: Record<SynergyCategory, {
   searchPatterns: string[];
   scoreBonus: number;
 }> = {
+  planeswalker: {
+    min: 8,
+    searchPatterns: [
+      '%proliferate%',
+      '%loyalty counter%',
+      '%loyalty abilit%',
+      '%planeswalkers you control%',
+      '%search your library for a planeswalker%',
+      '%planeswalker spells%',
+    ],
+    scoreBonus: 22,
+  },
   x_spells: {
     min: 10,
     searchPatterns: [
@@ -517,6 +544,11 @@ function inferArchetype(
   // tokens, not a spells shell) doesn't get mislabeled spellslinger.
   if (tribalPayoff) return 'tribal';
 
+  // Superfriends: a planeswalker commander, or a commander whose text is
+  // about planeswalkers/proliferate/loyalty (only ever present when the
+  // caller opted in — see analyzeCommander's `opts.superfriends`).
+  if (has('planeswalker')) return 'superfriends';
+
   // Five-color "colors matter" commanders (Ramos, Jodah) are goodstuff/counters
   // shells, not spellslinger — even though their triggers mention casting spells.
   if (has('five_colors')) return 'midrange';
@@ -571,7 +603,8 @@ export function analyzeCommander(
   oracleText: string,
   typeLine: string,
   colorIdentity: string[],
-  manaCost?: string
+  manaCost?: string,
+  opts?: { superfriends?: boolean; walkerCount?: number }
 ): CommanderSynergyProfile | null {
   if (!oracleText || oracleText.trim().length === 0) return null;
 
@@ -591,11 +624,21 @@ export function analyzeCommander(
   const triggerCategories: SynergyCategory[] = [];
 
   for (const [category, patterns] of Object.entries(TRIGGER_PATTERNS) as [SynergyCategory, RegExp[]][]) {
+    if (category === 'planeswalker' && !opts?.superfriends) continue;
     const matched =
       category === 'attack_trigger'
         ? matchesAttackTrigger(text, patterns)
         : patterns.some((pattern) => pattern.test(text));
     if (matched) triggerCategories.push(category);
+  }
+
+  // Superfriends 99-shape supplement (opt-in only, mirrors the {X} supplement
+  // below): the commander's own type line is Planeswalker, or the deck/pool
+  // is known to run a walker-heavy count.
+  if (opts?.superfriends && !triggerCategories.includes('planeswalker')) {
+    if (/\bplaneswalker\b/.test(typeLineLower) || (opts.walkerCount ?? 0) >= 12) {
+      triggerCategories.push('planeswalker');
+    }
   }
 
   // An {X} in the commander's own cost (Vivi Ornitier, Zaxara, Hydra lords)
@@ -731,6 +774,12 @@ export function analyzeCommander(
       'dryad of the ilysian grove', 'crucible of worlds', 'ramunap excavator',
     );
   }
+  if (triggerCategories.includes('planeswalker')) {
+    protectedPatterns.push(
+      'doubling season', 'the ozolith, the shattered spire', 'oath of teferi',
+      'the chain veil', 'deepglow skate',
+    );
+  }
   if (triggerCategories.includes('tribal_lands')) {
     protectedPatterns.push(
       'cavern of souls', 'unclaimed territory', 'secluded courtyard',
@@ -839,6 +888,7 @@ function buildStrategyDescription(
     five_colors: 'Multicolor payoffs, converge/sunburst, and rainbow mana fixing',
     dungeon_venture: 'Venture/dungeon enablers and initiative payoffs',
     alt_zone_cast: 'Impulse draw, flashback, foretell, and cast-from-graveyard effects',
+    planeswalker: 'Planeswalkers, proliferate, loyalty support, and walker protection/tutors',
   };
 
   for (const trigger of triggers) {

@@ -1,6 +1,7 @@
 import { getDb, getCommunityRecommendations, getMetaRankedCardNames } from './db';
 import type { DbCard, AISuggestion } from './types';
 import { DEFAULT_LAND_COUNT, DEFAULT_DECK_SIZE, getLegalityKey, COMMANDER_FORMATS } from './constants';
+import { analyzeCommander } from './commander-synergy';
 
 interface DeckAnalysis {
   format: string;
@@ -63,7 +64,11 @@ function analyzeDeck(
 export function getRuleBasedSuggestions(
   deckCards: Array<{ quantity: number; board: string } & DbCard>,
   format: string,
-  collectionOnly?: boolean
+  collectionOnly?: boolean,
+  /** Opt-in: pass the commander's oracle text to also get archetype-aware
+   * synergy adds (currently wires up superfriends/planeswalker). Omitted by
+   * every caller that doesn't ask for it. */
+  commander?: { oracleText: string; typeLine: string; colorIdentity: string[] }
 ): AISuggestion[] {
   const db = getDb();
   const analysis = analyzeDeck(deckCards, format);
@@ -266,6 +271,42 @@ export function getRuleBasedSuggestions(
         reason: 'Add removal spells for interaction',
         score: 65,
       });
+    }
+  }
+
+  // 5b. Commander synergy adds (opt-in — only when the caller passes
+  // commander context, e.g. build-api's optimizer for a commander with no
+  // CF stats rows). Currently wires up superfriends (planeswalker/
+  // proliferate/loyalty); other archetypes fall through unchanged.
+  if (commander) {
+    const profile = analyzeCommander(
+      commander.oracleText, commander.typeLine, commander.colorIdentity, undefined,
+      { superfriends: true },
+    );
+    if (profile?.triggerCategories.includes('planeswalker') && profile.cardPoolPatterns.length > 0) {
+      const patternConditions = profile.cardPoolPatterns.map(() => 'c.oracle_text LIKE ?').join(' OR ');
+      const synergyCards = db
+        .prepare(
+          `SELECT c.* FROM cards c
+           ${colJoin}
+           WHERE (${patternConditions})
+           AND c.type_line NOT LIKE '%Land%'
+           ${legalFilter}
+           AND c.id NOT IN (${Array.from(existingCardIds).map(() => '?').join(',') || "''"})
+           ORDER BY c.edhrec_rank ASC NULLS LAST
+           LIMIT 10`
+        )
+        .all(...profile.cardPoolPatterns, ...Array.from(existingCardIds)) as DbCard[];
+
+      for (const card of synergyCards) {
+        if (existingCardNames.has(card.name) || suggestedNames.has(card.name)) continue;
+        suggestedNames.add(card.name);
+        suggestions.push({
+          card,
+          reason: "Supports the commander's planeswalker/proliferate plan",
+          score: 68,
+        });
+      }
     }
   }
 

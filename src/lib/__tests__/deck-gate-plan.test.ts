@@ -74,3 +74,15 @@ describe('deriveCondition — creature-type-count commanders', () => {
     expect(planReport(genericList, condition).ratio).toBe(0);
   });
 });
+
+describe('deriveCondition — superfriends (U6 2026-09-30)', () => {
+  it('Tam, the Possibility: description names planeswalkers/proliferate, not "general value"', () => {
+    const oracle =
+      'Planeswalker spells you cast cost {1} less to cast.\n' +
+      '{W}{U}{B}{R}{G}, {T}: Proliferate X times, where X is the number of planeswalker types among planeswalkers you control.';
+    const condition = deriveCondition(oracle, 'Legendary Creature — Gorgon Wizard', ['G', 'U'], '{1}{G}{U}');
+    expect(condition.description).not.toBe('commander wants: general value');
+    expect(condition.description).toContain('planeswalkers');
+    expect(condition.nouns).toContain('proliferate');
+  });
+});

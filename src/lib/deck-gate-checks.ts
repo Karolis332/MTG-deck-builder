@@ -244,7 +244,9 @@ export function landsCheck(resolved: Resolved[], deckSize: number, avgMv: number
         r.card.name,
         r.card.oracle_text || '',
         r.card.type_line || '',
-        r.card.cmc ?? 0
+        r.card.cmc ?? 0,
+        undefined,
+        { superfriends: true }
       );
       return cats.includes('draw') || cats.includes('ramp');
     })
@@ -287,7 +289,8 @@ export function winconCheck(resolved: Resolved[], commanderOracle: string): Gate
       oracle,
       r.card.type_line || '',
       r.card.cmc ?? 0,
-      commanderOracle
+      commanderOracle,
+      { superfriends: true }
     );
     if (cats.includes('win_condition') || implied.has(r.card.name)) closers.add(r.front);
   }

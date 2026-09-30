@@ -19,7 +19,8 @@ export type Archetype =
   | 'spellslinger'
   | 'aristocrats'
   | 'stax'
-  | 'tokens';
+  | 'tokens'
+  | 'superfriends';
 
 export interface RampBreakdown {
   rocks: [number, number];        // min, max
@@ -282,6 +283,50 @@ export const ARCHETYPE_TEMPLATES: Record<Archetype, ArchetypeTemplate> = {
     synergyMinimums: {},
     protectedPatterns: [
       'sol ring', 'arcane signet', "commander's sphere",
+    ],
+    tutors: [1, 3],
+  },
+
+  superfriends: {
+    name: 'superfriends',
+    label: 'Superfriends',
+    description: 'Planeswalkers as threats/engines, backed by proliferate, loyalty support, and walker protection.',
+    lands: [37, 39],
+    ramp: {
+      rocks: [6, 9],
+      dorks: [1, 3],
+      landRamp: [2, 4],
+      totalMin: 10,
+      totalMax: 14,
+    },
+    // Walkers themselves generate card advantage — external draw target sits
+    // below midrange's.
+    draw: {
+      cantrips: [2, 3],
+      engines: [2, 3],
+      impulse: [0, 2],
+      wheels: [0, 1],
+      totalMin: 6,
+      totalMax: 9,
+    },
+    // Board wipes that spare planeswalkers (edict/damage-to-creatures-only
+    // effects) are valued over symmetric wraths; protection keeps walkers alive.
+    removal: {
+      spot: [5, 8],
+      wipes: [3, 6],
+      counterspells: [2, 4],
+      totalMin: 10,
+      totalMax: 16,
+    },
+    creatures: [8, 16],
+    manaCurve: { 1: 3, 2: 8, 3: 9, 4: 8, 5: 5, 6: 3, 7: 2 },
+    avgCmc: [3.0, 3.6],
+    winConditionSlots: [8, 16],
+    // Walker band: 12-22 of 99 nonland/noncommander slots.
+    synergyMinimums: { planeswalker: 12 },
+    protectedPatterns: [
+      'doubling season', 'the ozolith, the shattered spire', 'oath of teferi',
+      'the chain veil', 'deepglow skate',
     ],
     tutors: [1, 3],
   },
