@@ -1805,4 +1805,14 @@ export const MIGRATIONS = [
         ('Mnemonic Betrayal', '', 'wincon', 'cedh', 'commander');
     `,
   },
+  {
+    version: 47,
+    name: 'add_meta_card_stats_nocase_index',
+    sql: `
+      -- getMetaCardStatsMap (db.ts) looks up by card_name COLLATE NOCASE + format
+      -- for every card in every build; without this index it's a full table scan
+      -- (~9s per collection build).
+      CREATE INDEX IF NOT EXISTS idx_mcs_card_nocase ON meta_card_stats(card_name COLLATE NOCASE, format);
+    `,
+  },
 ];

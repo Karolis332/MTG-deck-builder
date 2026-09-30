@@ -39,7 +39,7 @@ import {
 import { isFetchLandRelevant } from './land-intelligence';
 import { getLegalityKey } from './constants';
 import { classifyCard } from './card-classifier';
-import { normalizedNameExpr, stripArenaPrefix } from './collection-ownership';
+import { buildOwnedQtyMap } from './collection-ownership';
 
 // ── Types ────────────────────────────────────────────────────────────────
 
@@ -287,20 +287,6 @@ function lookupCard(name: string, legalityFilter: string): DbCard | null {
   return row || null;
 }
 
-function ownedQty(userId: number, cardName: string, source?: string): number {
-  const db = getDb();
-  const strippedName = stripArenaPrefix(cardName);
-  const sourceFilter = source ? ' AND col.source = ?' : '';
-  const params: Array<number | string> = source ? [userId, strippedName, source] : [userId, strippedName];
-  const row = db.prepare(
-    `SELECT COALESCE(SUM(col.quantity), 0) as qty
-     FROM collection col
-     JOIN cards c ON col.card_id = c.id
-     WHERE col.user_id = ? AND LOWER(${normalizedNameExpr('c.name')}) = LOWER(?)${sourceFilter}`
-  ).get(...params) as { qty: number } | undefined;
-  return row?.qty ?? 0;
-}
-
 // ── Universal staple land lists ──────────────────────────────────────────
 // These are format-flexible. The resolver filters by legality downstream.
 
@@ -396,6 +382,7 @@ export function analyzeCommanderForBuild(
 
   const arsenal: ArsenalCard[] = [];
   const seen = new Set<string>();
+  const ownedMap = buildOwnedQtyMap(getDb(), { userId, source: collectionSource });
 
   const tryAdd = (
     cardName: string,
@@ -420,7 +407,7 @@ export function analyzeCommanderForBuild(
       reason,
       detail,
       inclusionRate: extra?.inclusionRate,
-      owned: ownedQty(userId, card.name, collectionSource),
+      owned: ownedMap.get(card.name) ?? 0,
     });
   };
 

@@ -126,6 +126,14 @@ describe('Database Schema & Migrations', () => {
     const columns = db.prepare("PRAGMA table_info(cf_cache)").all() as Array<{ name: string }>;
     expect(columns.map((c) => c.name)).toContain('reason');
   });
+
+  it('getMetaCardStatsMap lookup uses idx_mcs_card_nocase (migration 47)', () => {
+    const plan = db.prepare(
+      `EXPLAIN QUERY PLAN SELECT card_name, meta_inclusion_rate, placement_weighted_score, archetype_core_rate, archetype_win_rate
+       FROM meta_card_stats WHERE card_name = ? COLLATE NOCASE AND format = ?`
+    ).all('Sol Ring', 'commander') as Array<{ detail: string }>;
+    expect(plan.some((row) => row.detail.includes('idx_mcs_card_nocase'))).toBe(true);
+  });
 });
 
 describe('Card CRUD Operations', () => {

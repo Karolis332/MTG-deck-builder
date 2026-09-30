@@ -252,6 +252,18 @@ describe('autoBuildDeck collection mode — land base ownership is scoped to the
     expect(a?.commander.name).toBe('Test Prism Sovereign');
   });
 
+  // U10 perf fix: ownedQty() (one query per arsenal card) replaced by a single
+  // buildOwnedQtyMap() pass. Confirms the shared map preserves per-card
+  // ownership, source scoping, and A-X/X aliasing for the arsenal path.
+  it('the shared owned-qty map matches per-card ownership for the commander arsenal', async () => {
+    const { analyzeCommanderForBuild } = await import('@/lib/commander-analysis');
+    const a = analyzeCommanderForBuild('test PRISM sovereign', BUILDER_UID, 'commander', 150, 'arena');
+    const commandTower = a?.arsenal.find((c) => c.card.name === 'Command Tower');
+    expect(commandTower?.owned).toBe(1); // BUILDER_UID owns it, source 'arena'
+    const otherUnowned = a?.arsenal.find((c) => c.card.name === 'A-Thran Portal');
+    expect(otherUnowned?.owned ?? 0).toBe(0); // owned only by OTHER_UID
+  });
+
   it('without collectionSource, every picked card is owned by the builder in any source, never the other user\'s', async () => {
     const r = await builder.autoBuildDeck({
       format: 'commander', colors: [], commanderName: 'Test Prism Sovereign',

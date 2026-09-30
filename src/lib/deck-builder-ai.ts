@@ -2068,19 +2068,17 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
       // into the deck's mana base to make room for tribe creatures (Edgar
       // lost 2 Signets + 2 Talismans, ramp 10 -> 7).
       const rampFloor = getTemplate(resolvedStrategy).ramp.totalMin;
+      const isRampPick = (p: { card: DbCard }): boolean =>
+        getPrimaryCategory(classifyCard(p.card.name, p.card.oracle_text || '', p.card.type_line || '', p.card.cmc || 0, commanderCard?.oracle_text || undefined, classifyOpts)) === 'ramp';
       let rampCount = 0;
       for (const p of picked) {
-        if (p.board !== 'main') continue;
-        const primary = getPrimaryCategory(classifyCard(p.card.name, p.card.oracle_text || '', p.card.type_line || '', p.card.cmc || 0, commanderCard?.oracle_text || undefined, classifyOpts));
-        if (primary === 'ramp') rampCount += p.quantity;
+        if (p.board === 'main' && isRampPick(p)) rampCount += p.quantity;
       }
-      const rampAtFloor = rampCount <= rampFloor;
       const displaceable = [...picked]
         .filter((p) => {
           if (p.board !== 'main' || tribalNames.has(p.card.name)) return false;
           const primary = getPrimaryCategory(classifyCard(p.card.name, p.card.oracle_text || '', p.card.type_line || '', p.card.cmc || 0, commanderCard?.oracle_text || undefined, classifyOpts));
           if (primary === 'removal' || primary === 'board_wipe') return false;
-          if (primary === 'ramp' && rampAtFloor) return false;
           return true;
         })
         .sort((a, b) => {
@@ -2088,11 +2086,13 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
           const bScore = scored.find((s) => s.card.name === b.card.name)?.score || 0;
           return aScore - bScore; // lowest score first
         });
-
       let filled = 0;
       for (const candidate of candidates) {
         if (filled >= tribalDeficit || displaceable.length === 0) break;
-        const displaced = displaceable.shift()!;
+        const at = displaceable.findIndex((p) => !(isRampPick(p) && rampCount - p.quantity < rampFloor));
+        if (at === -1) break;
+        const [displaced] = displaceable.splice(at, 1);
+        if (isRampPick(displaced)) rampCount -= displaced.quantity;
         const idx = picked.indexOf(displaced);
         if (idx !== -1) {
           picked.splice(idx, 1);
@@ -2109,7 +2109,6 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
       }
     }
   }
-
   // ── Superfriends walker minimum backfill ────────────────────────────────
   // Mirrors the tribal minimum backfill above. Step 4b below fills the
   // template's `synergyMinimums.planeswalker` count too, but that reads
@@ -2278,6 +2277,8 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
         .filter((p) => {
           if (p.board !== 'main') return false;
           if (isProtected(p.card.name)) return false;
+          const primary = getPrimaryCategory(classifyCard(p.card.name, p.card.oracle_text || '', p.card.type_line || '', p.card.cmc || 0, commanderCard?.oracle_text || undefined, classifyOpts));
+          if (primary === 'removal' || primary === 'board_wipe') return false;
           // Never displace ramp if below baseline
           const text = (p.card.oracle_text || '').toLowerCase();
           const type = (p.card.type_line || '').toLowerCase();
