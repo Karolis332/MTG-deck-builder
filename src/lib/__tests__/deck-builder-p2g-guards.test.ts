@@ -3,7 +3,7 @@
 import { describe, it, expect } from 'vitest';
 import { isBoardWipe } from '../card-classifier';
 import { isBoardWipe as isBoardWipeBase } from './baseline/card-classifier-6791d3e';
-import { isWipeBackfillCandidate, isStep4bDisplaceable } from '../deck-builder-ai';
+import { isWipeBackfillCandidate, isStep4bDisplaceable, applyDeckBudget } from '../deck-builder-ai';
 import type { Step4bDisplaceableCtx } from '../deck-builder-ai';
 import type { DbCard } from '../types';
 
@@ -22,6 +22,42 @@ const ctx = (o: Partial<Step4bDisplaceableCtx> = {}): Step4bDisplaceableCtx => (
   category: 'tribal', protectedNames: new Set(), tribalNames: new Set(), rampCount: 10, rampFloor: 10, classifyOpts: STRICT, ...o,
 });
 const GARRUKS_WAKE = { name: "In Garruk's Wake", oracle_text: "Destroy all creatures you don't control and all planeswalkers you don't control." };
+
+describe('#11 budget swaps never seat bulk', () => {
+  const main = (card: DbCard, quantity = 1) => ({ card, quantity, board: 'main' as const });
+  const creature = (name: string, price: string | null, edhrec_rank: number | null = null) =>
+    makeCard({ name, price_usd: price, type_line: 'Creature — Bear', oracle_text: null, edhrec_rank });
+  it('nonland: a candidate needs edhrec_rank <= 5000 or a score at/above the deck 25th percentile, else the card stays', () => {
+    const bomb = creature('Bomb', '40.00');
+    const picked = [bomb, creature('Good1', '1.00'), creature('Good2', '1.00'), creature('Good3', '1.00')].map((c) => main(c));
+    const deckScores = [{ card: bomb, score: 100 }, { card: picked[1].card, score: 90 }, { card: picked[2].card, score: 80 }, { card: picked[3].card, score: 70 }];
+    const junk = { card: creature('Junk', '0.50', 20000), score: 10 };
+    const staple = { card: creature('Staple', '1.00', 3000), score: 20 };
+    const solid = { card: creature('Solid', '1.00', null), score: 75 };
+    // junk only → Bomb stays
+    expect(applyDeckBudget(picked, [...deckScores, junk], 10, new Map(), false, undefined).replacedForBudget).toEqual([]);
+    // popular staple qualifies by rank
+    expect(applyDeckBudget(picked, [...deckScores, junk, staple], 10, new Map(), false, undefined).replacedForBudget[0]?.in).toBe('Staple');
+    // a scored card at the deck's 25th percentile qualifies by score, and wins on score
+    expect(applyDeckBudget(picked, [...deckScores, junk, staple, solid], 10, new Map(), false, undefined).replacedForBudget[0]?.in).toBe('Solid');
+  });
+  it('land: the best unpicked scored land producing the deficit colour beats the basic fallback', () => {
+    const pricy = makeCard({ name: 'Pricy Dual', price_usd: '30.00', type_line: 'Land', oracle_text: '{T}: Add {R} or {G}.' });
+    const mountain = makeCard({ name: 'Mountain', price_usd: '0.10', type_line: 'Basic Land — Mountain', oracle_text: '({T}: Add {R}.)' });
+    const redSpell = makeCard({ name: 'Red Spell', mana_cost: '{R}{R}', colors: '["R"]', type_line: 'Creature' });
+    const picked = [main(pricy), main(mountain, 5), main(redSpell)];
+    const cheapRed = makeCard({ name: 'Cheap Red Dual', price_usd: '2.00', type_line: 'Land', oracle_text: '{T}: Add {R} or {G}.' });
+    const cheapBlue = makeCard({ name: 'Cheap Blue', price_usd: '1.00', type_line: 'Land', oracle_text: '{T}: Add {U}.' });
+    const landPool = [
+      { card: cheapBlue, score: 90, producesColors: ['U'], clearsBar: true },
+      { card: cheapRed, score: 80, producesColors: ['R', 'G'], clearsBar: true },
+    ];
+    const { cards, replacedForBudget } = applyDeckBudget(picked, [], 5, new Map(), false, undefined, { landPool });
+    expect(replacedForBudget).toEqual([{ out: 'Pricy Dual', in: 'Cheap Red Dual', saved: 28 }]);
+    expect(cards.find((c) => c.card.name === 'Mountain')?.quantity).toBe(5);
+    expect(cards.find((c) => c.card.name === 'Cheap Red Dual')?.quantity).toBe(1);
+  });
+});
 
 describe('#7 protection floor holds through every displacement', () => {
   const veto = pick(makeCard({ name: "Dovin's Veto", type_line: 'Instant', oracle_text: "This spell can't be countered.\nCounter target noncreature spell." }));

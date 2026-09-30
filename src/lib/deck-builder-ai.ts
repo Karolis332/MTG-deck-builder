@@ -10,7 +10,8 @@ import { getTemplate, getScaledCurve, mergeWithCommanderProfile } from './deck-t
 import type { Archetype, ArchetypeTemplate } from './deck-templates';
 import { analyzeCommander, mergeProfiles, detectTribalPayoff } from './commander-synergy';
 import type { CommanderSynergyProfile } from './commander-synergy';
-import { buildOptimalLandBase, isFetchLandRelevant, ownedNameJoin } from './land-intelligence';
+import { buildOptimalLandBase, isFetchLandRelevant, ownedNameJoin, scoreLandsForDeck, analyzeManaDemands } from './land-intelligence';
+import type { LandScore } from './land-intelligence';
 import { buildOwnedQtyMap, ownedNamesSubqueryInline, normalizedNameExpr, stripArenaPrefix } from './collection-ownership';
 import type { OwnershipFilter } from './collection-ownership';
 import { getCFRecommendations, resolveCFToDbCards } from './cf-api-client';
@@ -3197,8 +3198,18 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
 
   let replacedForBudget: Array<{ out: string; in: string; saved: number }> = [];
   if (options.maxDeckPrice != null && options.maxDeckPrice > 0) {
+    // Same land scoring as Step 5 (plus the per-card cap) so a cut land is
+    // replaced by a real land for the deficit colour, not a basic (P2-G #11).
+    const landPool = scoreLandsForDeck({
+      colors, format: options.format, strategy: resolvedStrategy,
+      tribalTypes: tribalTypesForLands.length > 0 ? tribalTypesForLands : undefined,
+      commanderName: commanderCard?.name, userId: options.userId, collectionSource: options.collectionSource,
+      manaDemand: analyzeManaDemands(nonLandCards), collectionOnly: useCollection,
+      rarityFilter: options.rarityFilter, maxCardPrice: options.maxCardPrice,
+    });
     const budget = applyDeckBudget(
-      finalCards, poolResult.pool, options.maxDeckPrice, ownedQty, useCollection, commanderCard?.oracle_text || undefined
+      finalCards, poolResult.pool, options.maxDeckPrice, ownedQty, useCollection, commanderCard?.oracle_text || undefined,
+      { classifyOpts, landPool },
     );
     finalCards = budget.cards;
     replacedForBudget = budget.replacedForBudget;
@@ -3301,6 +3312,17 @@ export function passesCardPriceCap(priceUsd: string | null, cap: number | null |
  * `pool`, which is nonland-only) fall back to an existing basic already in
  * the deck — basics are the floor.
  */
+export interface DeckBudgetOpts {
+  /** The builder's classify opts — same-role matching reads the builder's roles, not the default path. */
+  classifyOpts?: ClassifyOpts;
+  /** scoreLandsForDeck({ maxCardPrice }) output: a cut land is replaced by the best unpicked land that
+   *  produces the deficit colour and fits the budget, before falling back to a basic (P2-G #11). */
+  landPool?: Array<Pick<LandScore, 'card' | 'score' | 'producesColors' | 'clearsBar'>>;
+}
+
+/** A budget replacement is either popular (global EDHREC rank) or scored like the deck it joins (P2-G #11). */
+export const BUDGET_SWAP_MAX_RANK = 5000;
+
 export function applyDeckBudget(
   picked: Array<{ card: DbCard; quantity: number; board: 'main' | 'sideboard' }>,
   pool: Array<{ card: DbCard; score: number }>,
@@ -3308,6 +3330,7 @@ export function applyDeckBudget(
   ownedQty: Map<string, number>,
   useCollection: boolean,
   commanderOracle: string | undefined,
+  opts: DeckBudgetOpts = {},
 ): { cards: Array<{ card: DbCard; quantity: number; board: 'main' | 'sideboard' }>; replacedForBudget: Array<{ out: string; in: string; saved: number }> } {
   const cards = picked.map((p) => ({ ...p }));
   const replacedForBudget: Array<{ out: string; in: string; saved: number }> = [];
@@ -3315,10 +3338,23 @@ export function applyDeckBudget(
   const priceOf = (card: DbCard): number => (card.price_usd != null ? parseFloat(card.price_usd) || 0 : 0);
   const effPrice = (card: DbCard): number => (isOwned(card.name) ? 0 : priceOf(card));
   const primaryRole = (card: DbCard): string =>
-    getPrimaryCategory(classifyCard(card.name, card.oracle_text || '', card.type_line || '', card.cmc || 0, commanderOracle));
+    getPrimaryCategory(classifyCard(card.name, card.oracle_text || '', card.type_line || '', card.cmc || 0, commanderOracle, opts.classifyOpts));
   const isLand = (card: DbCard): boolean => (card.type_line || '').includes('Land');
   const total = (): number =>
     cards.filter((c) => c.board === 'main').reduce((s, c) => s + effPrice(c.card) * c.quantity, 0);
+  // The deck's own bar for a nonland replacement: its 25th-percentile pool
+  // score (nearest rank). Niv's $150 build seated Brilliant Spectrum s6 and
+  // Rancorous Archaic s13 as "same-role" swaps; a cheaper card that is
+  // neither popular nor scored like the deck leaves the pricey card in place.
+  const scoreOf = new Map(pool.map((p) => [p.card.name, p.score]));
+  const deckScores = cards
+    .filter((c) => c.board === 'main' && !isLand(c.card))
+    .map((c) => scoreOf.get(c.card.name))
+    .filter((s): s is number => s !== undefined)
+    .sort((a, b) => a - b);
+  const deckP25 = deckScores.length > 0 ? deckScores[Math.max(0, Math.ceil(0.25 * deckScores.length) - 1)] : -Infinity;
+  const clearsSwapBar = (p: { card: DbCard; score: number }): boolean =>
+    (p.card.edhrec_rank != null && p.card.edhrec_rank <= BUDGET_SWAP_MAX_RANK) || p.score >= deckP25;
 
   // A card that already has no cheaper same-role candidate is skipped, not a
   // reason to stop entirely — other, less expensive cards further down the
@@ -3334,6 +3370,7 @@ export function applyDeckBudget(
     if (swappable.length === 0) break;
     const target = swappable.slice().sort((a, b) => effPrice(b.card) - effPrice(a.card))[0];
     const targetPrice = effPrice(target.card);
+    const budgetLeft = maxDeckPrice - (total() - targetPrice);
 
     if (isLand(target.card)) {
       const isBasic = (c: DbCard): boolean => /^Basic\b/.test(c.type_line || '');
@@ -3344,6 +3381,17 @@ export function applyDeckBudget(
       const deficitColor = Object.keys(pips)
         .filter((c) => pips[c] > 0)
         .sort((a, b) => (pips[b] - sources[b]) - (pips[a] - sources[a]))[0];
+      // Best unpicked real land for the deficit colour that fits the budget
+      // (P2-G #11: 17 of Niv's lands became basics); the basic is the floor.
+      const landIn = (opts.landPool ?? [])
+        .filter((l) => !inDeck.has(l.card.name) && l.clearsBar && l.producesColors.includes(deficitColor)
+          && effPrice(l.card) <= budgetLeft && effPrice(l.card) < targetPrice)
+        .sort((a, b) => b.score - a.score)[0];
+      if (landIn) {
+        cards[cards.indexOf(target)] = { card: landIn.card, quantity: target.quantity, board: 'main' };
+        replacedForBudget.push({ out: target.card.name, in: landIn.card.name, saved: Math.round((targetPrice - effPrice(landIn.card)) * 100) / 100 });
+        continue;
+      }
       const basic = mainLands.find((c) => isBasic(c.card) && BASIC_LAND_COLOR[c.card.name] === deficitColor)
         ?? mainLands.find((c) => isBasic(c.card));
       if (!basic) { stuck.add(target.card.name); continue; } // no basic to absorb the cut — try the next card
@@ -3355,12 +3403,11 @@ export function applyDeckBudget(
     }
 
     const role = primaryRole(target.card);
-    const budgetLeft = maxDeckPrice - (total() - targetPrice);
     // Unpriced is not free: an unowned candidate with no known price is only
     // eligible when the user owns it (isOwned already makes it effPrice 0
     // honestly — an unknown price otherwise can't be judged "savings").
     const candidates = pool.filter((p) =>
-      !inDeck.has(p.card.name) && !isLand(p.card) && primaryRole(p.card) === role
+      !inDeck.has(p.card.name) && !isLand(p.card) && clearsSwapBar(p) && primaryRole(p.card) === role
       && (isOwned(p.card.name) || p.card.price_usd != null)
     );
     const fitting = candidates.filter((p) => effPrice(p.card) <= budgetLeft).sort((a, b) => b.score - a.score)[0];
