@@ -33,6 +33,13 @@ import { isTribeCreature, narrowTutorTarget, countTargets, colorlessPipCount, is
 // P2 #8: a template whose creature band tops out here cannot feed a
 // creature-gated engine (superfriends / control / spellslinger are [8, 16]).
 const CREATURE_LIGHT_MAX = 16;
+// P2 #3: cEDH-tier staples a combo shell seats before the role quotas —
+// ≈ 8 fast mana + 6 free/cheap interaction + 6 tutors + the win line — with
+// a per-category cap so one table category cannot fill the whole floor.
+const COMBO_STAPLE_FLOOR = 24;
+const COMBO_STAPLE_CATEGORY_CAP: Record<string, number> = {
+  fast_mana: 8, tutor: 6, wincon: 3, win_condition: 3, stax: 2, hatebear: 2, default: 6,
+};
 import type { RelevanceCard } from './card-relevance';
 import { parseBuildHints } from './build-hints';
 import type { ParsedBuildHints } from './build-hints';
@@ -1179,7 +1186,10 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
 
   // ── cEDH staples lookup ────────────────────────────────────────────────
   const cedhStapleMap = new Map<string, { category: string; power_tier: string }>();
-  if (powerLevel === 'cedh' || powerLevel === 'optimized') {
+  // P2 #3: a combo shell reads the staples list too (scored at the
+  // 'optimized' tier below) — the strategy IS the cEDH shell, whatever
+  // powerLevel the caller passed.
+  if (powerLevel === 'cedh' || powerLevel === 'optimized' || resolvedStrategy === 'combo') {
     const staples = getCedhStaples(colors, format);
     for (const s of staples) {
       cedhStapleMap.set(s.card_name, { category: s.category, power_tier: s.power_tier });
@@ -1556,6 +1566,15 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
       if (text.includes('counter target') || text.includes('destroy') || text.includes('exile target')) score += 10;
       if (text.includes('draw')) score += 5;
       if (card.type_line.includes('Creature') && card.cmc <= 2) score -= 5;
+    } else if (resolvedStrategy === 'combo') {
+      // P2 #3: a combo shell is a cEDH curve — cheap spells, and no top end
+      // outside the staples list (Tymna+Thrasios took Elspeth SC, Liliana DG
+      // and Summon: Bahamut as its wincons at 62ccf14).
+      if (card.cmc <= 1) score += 10;
+      if (!cedhStapleMap.has(card.name)) {
+        if (card.cmc >= 5) score -= 40;
+        else if (card.cmc >= 4) score -= 20;
+      }
     } else {
       // midrange — balanced
       if (card.cmc >= 2 && card.cmc <= 4) score += 5;
@@ -1582,7 +1601,7 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
           score += 15;
         }
       }
-    } else if (powerLevel === 'optimized') {
+    } else if (powerLevel === 'optimized' || resolvedStrategy === 'combo') {
       const staple = cedhStapleMap.get(card.name);
       if (staple) {
         const tierBonus = staple.power_tier === 'cedh' ? 40
@@ -2170,6 +2189,37 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
     }
   }
 
+  // ── (b3) Combo staple floor (P2 #3) ───────────────────────────────────
+  // A combo shell is fast mana, free interaction, tutors and the win line.
+  // At 62ccf14 the role quotas took 58 of 60 nonland slots before Pass B,
+  // so Solemn and 3–5 MV draw bodies were seated while Chrome Mox, Force of
+  // Will and Thassa's Oracle waited on a two-slot allow-list. Seat the
+  // cEDH-tier staples the pool holds BEFORE any quota, by score, capped per
+  // staple category so the 60-tutor table cannot take the whole floor.
+  // Remembered so Step 4c never trades them for a higher-scored midrange card.
+  const comboStapleNames = new Set<string>();
+  if (resolvedStrategy === 'combo') {
+    const stapleCategory = new Map<string, string>();
+    for (const s of getCedhStaples(colors, options.format)) {
+      if (s.power_tier === 'cedh') stapleCategory.set(s.card_name, s.category);
+    }
+    const perCategory = new Map<string, number>();
+    for (const s of scored) {
+      if (comboStapleNames.size >= COMBO_STAPLE_FLOOR || totalPicked >= nonLandTarget) break;
+      const category = stapleCategory.get(s.card.name);
+      if (!category || pickedNames.has(s.card.name) || getMaxQty(s.card) <= 0) continue;
+      if ((s.card.type_line || '').split('//')[0].includes('Land')) continue;
+      const cap = COMBO_STAPLE_CATEGORY_CAP[category] ?? COMBO_STAPLE_CATEGORY_CAP.default;
+      if ((perCategory.get(category) ?? 0) >= cap) continue;
+      picked.push({ card: s.card, quantity: 1, board: 'main' });
+      pickedNames.add(s.card.name);
+      comboStapleNames.add(s.card.name);
+      perCategory.set(category, (perCategory.get(category) ?? 0) + 1);
+      totalPicked += 1;
+      reasoning.push({ cardName: s.card.name, role: 'combo-staple', reason: `cEDH ${category} staple seated before the role quotas` });
+    }
+  }
+
   // ── (c) Role-based picker on remaining pool ────────────────────────────
   // (quotas were computed above, before the arsenal pre-fill — C1)
   const remainingPool = scored.filter(s => !pickedNames.has(s.card.name));
@@ -2253,6 +2303,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
     // Picks that may make way, weakest first (pool score, then EDHREC rank).
     const removable = picked
       .filter(p => p.board === 'main' && !['commander'].includes(p.board))
+      .filter(p => !comboStapleNames.has(p.card.name)) // P2 #3: the win line classifies 'utility'
       .filter(p => {
         const cats = classifyCard(p.card.name, p.card.oracle_text || '', p.card.type_line || '', p.card.cmc || 0, undefined, classifyOpts);
         const primary = cats[0] || 'utility';
@@ -2572,7 +2623,9 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
         .sort((a, b) => b.score - a.score);
 
       // Find the lowest-scored current picks that aren't protected
-      const protectedSet = new Set(merged.protectedPatterns.map((p) => p.toLowerCase()));
+      // P2 #3: the combo staple floor's picks are the lowest-scored cards in a
+      // combo build (no popularity data) — protected like the template's names.
+      const protectedSet = new Set([...merged.protectedPatterns, ...comboStapleNames].map((p) => p.toLowerCase()));
 
       // Ramp stays displaceable down to the template's floor (U11 fix 1) —
       // a21f2ff protected it unconditionally, which pushed Tam's Arena build
@@ -2655,6 +2708,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
     // they took all five of Tam's Signets.
     const isPlanPick = (card: DbCard): boolean =>
       payoffNames.has(card.name.toLowerCase()) || tribalNames.has(card.name) || fixingFloorNames.has(card.name)
+      || comboStapleNames.has(card.name)
       || (colors.length >= 3 && isFixingRock(card))
       || (isSuperfriends && (/\bPlaneswalker\b/.test(card.type_line || '') || isWalkerEngineCard(card) || isWalkerSupportCard(card)));
     const isSpellSlot = (card: DbCard): boolean =>
@@ -3116,6 +3170,9 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
             // tribal card — protect both regardless of commanderProfile presence.
             && !payoffNames.has(p.card.name.toLowerCase())
             && !tribalNames.has(p.card.name)
+            // P2 #3: a combo shell's win line (Demonic Consultation) and free
+            // interaction classify as 'utility' — never the engine fix's fodder.
+            && !comboStapleNames.has(p.card.name)
             // U11 fix 2: Step 4b's synergy-minimum backfill classifies a Way
             // of the ___ as 'utility' too (it's an enchantment, no ramp/draw/
             // removal text of its own), so without this guard the draw-engine

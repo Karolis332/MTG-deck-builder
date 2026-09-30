@@ -375,33 +375,38 @@ export const ARCHETYPE_TEMPLATES: Record<Archetype, ArchetypeTemplate> = {
     name: 'combo',
     label: 'Combo',
     description: 'Assemble specific card combinations to win the game, backed by tutors and protection.',
-    lands: [35, 37],
+    // P2 #3: a combo shell is a cEDH curve — fast mana instead of land
+    // slots, cheap draw engines, the win line in the wincon slots (not big
+    // flyers), almost nothing above 4. The 62ccf14 bands (draw 10–14,
+    // wincons 4–10, MV 2.5–3.0, 35–37 lands) built Tymna+Thrasios as a
+    // 39-land, 30-draw midrange pile with 6–7-drop finishers.
+    lands: [30, 34],
     ramp: {
-      rocks: [6, 9],
-      dorks: [2, 4],
-      landRamp: [1, 3],
+      rocks: [8, 11],
+      dorks: [1, 3],
+      landRamp: [0, 1],
       totalMin: 10,
       totalMax: 14,
     },
     draw: {
       cantrips: [4, 6],
       engines: [3, 5],
-      impulse: [0, 2],
+      impulse: [0, 1],
       wheels: [1, 2],
-      totalMin: 10,
-      totalMax: 14,
+      totalMin: 8,
+      totalMax: 12,
     },
     removal: {
       spot: [3, 5],
-      wipes: [1, 3],
+      wipes: [1, 2],
       counterspells: [4, 8],
       totalMin: 8,
       totalMax: 14,
     },
-    creatures: [14, 22],
-    manaCurve: { 1: 6, 2: 10, 3: 9, 4: 6, 5: 4, 6: 2, 7: 1 },
-    avgCmc: [2.5, 3.0],
-    winConditionSlots: [4, 10],
+    creatures: [8, 16],
+    manaCurve: { 1: 12, 2: 14, 3: 8, 4: 3, 5: 1, 6: 0, 7: 0 },
+    avgCmc: [1.8, 2.4],
+    winConditionSlots: [1, 3],
     // 'tutors' removed (review 2026-08-23 C4) — enforced via the dedicated
     // `tutors` field below / RoleQuotas.tutor instead of this dead-config path.
     synergyMinimums: { 'combo_pieces': 4, 'protection': 4 },
