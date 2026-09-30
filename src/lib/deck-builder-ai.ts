@@ -1423,7 +1423,10 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
     // ── Storm CMC bonus ──
     // Storm commanders need maximum cheap spells to build storm count.
     // This overrides normal CMC preferences — heavily reward CMC 0-2.
-    if (commanderProfile?.triggerCategories.includes('storm')) {
+    // Gated on the RESOLVED strategy, not the trigger: Aeve has Storm but
+    // builds as Ooze tribal, and the -20 on every MV >= 5 card made the
+    // tribe's finishers (Craterhoof, Overrun, Overlord) unreachable (A-D9).
+    if (commanderProfile?.triggerCategories.includes('storm') && resolvedStrategy === 'spellslinger') {
       if (card.cmc <= 1) score += 25;
       else if (card.cmc <= 2) score += 18;
       else if (card.cmc <= 3) score += 8;
