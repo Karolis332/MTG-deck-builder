@@ -221,6 +221,17 @@ describe('autoBuildDeck collection mode — land base ownership is scoped to the
     // fine to ship when no source is requested.
   }, 60_000);
 
+  // U2 — diagnosis §6 assertion 3. Fails today: scoreLandsForDeck ranks a
+  // "chosen type" or counter-gated trap as high as a real 2-colour fixer
+  // (root cause (d) in the diagnosis), so Starting Town / the checks / the
+  // triome do not consistently outrank the traps yet.
+  it.todo('U2: real fixers (Command Tower, shocks, checks, Starting Town, triome) are picked before any trap land');
+
+  // U2 — diagnosis §6 assertion 4. Fails today: sourcesByColor counts a
+  // chosen-type or counter-gated land as producing all 5 colours (the same
+  // ranking bug), so it overstates real colour coverage.
+  it.todo('U2: auditDeck sourcesByColor.B equals the count of lands that really make B');
+
   function shockNamesFlat(): string[] {
     return ['Sacred Foundry', 'Steam Vents', 'Watery Grave', 'Overgrown Tomb', 'Temple Garden'];
   }
