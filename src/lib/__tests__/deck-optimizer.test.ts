@@ -154,6 +154,47 @@ describe('pairSwaps', () => {
       { cut: 'Weak Removal', add: 'Any Spell', reason: expect.any(String) },
     ]);
   });
+
+  it('with only land adds and no landsNeeded flag, leaves cuts unpaired', () => {
+    const cuts = rankCuts(
+      [
+        card({ name: 'Weak Removal', primary: 'removal', categories: ['removal'] }),
+        card({ name: 'Weak Draw', primary: 'draw', categories: ['draw'] }),
+        card({ name: 'Weak Ramp', primary: 'ramp', categories: ['ramp'] }),
+      ],
+      {
+        format: 'commander',
+        health: [
+          health('removal', 13, 12, 'high'),
+          health('draw', 13, 12, 'high'),
+          health('ramp', 13, 12, 'high'),
+        ],
+      },
+    );
+    const adds = [{ name: 'Extra Land', category: 'land' as const }];
+    expect(pairSwaps(cuts, adds)).toEqual(
+      cuts.map((c) => ({ cut: c.name, add: null, reason: expect.any(String) })),
+    );
+  });
+
+  it('with landsNeeded, the fallback takes a land add once no non-land add remains', () => {
+    const cuts = rankCuts(
+      [
+        card({ name: 'Weak Removal', primary: 'removal', categories: ['removal'] }),
+        card({ name: 'Weak Draw', primary: 'draw', categories: ['draw'] }),
+      ],
+      { format: 'commander', health: [health('removal', 13, 12, 'high'), health('draw', 13, 12, 'high')] },
+    );
+    const adds = [
+      { name: 'Better Draw', category: 'draw' as const },
+      { name: 'Some Land', category: 'land' as const },
+    ];
+    const swaps = pairSwaps(cuts, adds, { landsNeeded: true });
+    expect(swaps.find((s) => s.cut === 'Weak Draw')?.add).toBe('Better Draw');
+    // no non-land add is left for the removal cut, so it falls back to the land
+    expect(swaps.find((s) => s.cut === 'Weak Removal')?.add).toBe('Some Land');
+    expect(swaps.every((s) => s.add !== null)).toBe(true);
+  });
 });
 
 describe('scoreDeck', () => {
