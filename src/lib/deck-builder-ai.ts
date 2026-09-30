@@ -11,6 +11,8 @@ import type { Archetype, ArchetypeTemplate } from './deck-templates';
 import { analyzeCommander, mergeProfiles, detectTribalPayoff } from './commander-synergy';
 import type { CommanderSynergyProfile } from './commander-synergy';
 import { buildOptimalLandBase, isFetchLandRelevant } from './land-intelligence';
+import { buildOwnedQtyMap, ownedNamesSubqueryInline, normalizedNameExpr, stripArenaPrefix } from './collection-ownership';
+import type { OwnershipFilter } from './collection-ownership';
 import { getCFRecommendations, resolveCFToDbCards } from './cf-api-client';
 import {
   getPayoffNamesForProfile,
@@ -432,6 +434,13 @@ export interface BuildOptions {
   maxDeckPrice?: number;
   /** Target WotC Commander bracket (1-5); ignored for 60-card formats */
   bracket?: 1 | 2 | 3 | 4 | 5;
+  /**
+   * Restrict ownership to one collection source (e.g. 'arena', 'paper').
+   * Undefined = every source the user owns. Never defaulted inside the
+   * engine — build-api seeds its temp collection under source 'web-build',
+   * so an engine-side default would empty every web collection build.
+   */
+  collectionSource?: string;
 }
 
 /** `BuildResult.price` — always present, no-op values when no cap was requested. */
@@ -696,23 +705,15 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
   // imported ManaBox collection) as owned. Without a userId, no user-specific
   // collection can be identified, so treat it as empty rather than leaking
   // every user's cards into the pool.
-  const ownedQty = new Map<string, number>();
+  const ownershipFilter: OwnershipFilter = { userId: options.userId, source: options.collectionSource };
+  let ownedQty = new Map<string, number>();
   if (useCollection) {
-    const rows = options.userId !== undefined
-      ? db.prepare(
-          `SELECT c.name, SUM(col.quantity) as total
-           FROM collection col JOIN cards c ON col.card_id = c.id
-           WHERE col.user_id = ?
-           GROUP BY c.name`
-        ).all(options.userId) as Array<{ name: string; total: number }>
-      : [];
-    if (rows.length === 0) {
-      // No collection imported yet: the UI defaults "prefer my collection" on, and
-      // honoring it here yields commander + 99 basics. Fall back to the full pool.
+    ownedQty = buildOwnedQtyMap(db, ownershipFilter);
+    if (ownedQty.size === 0) {
+      // No collection imported yet (for this user/source): the UI defaults
+      // "prefer my collection" on, and honoring it here yields commander +
+      // 99 basics. Fall back to the full pool.
       useCollection = false;
-    }
-    for (const row of rows) {
-      ownedQty.set(row.name, row.total);
     }
     // Basic lands are always available (Arena gives unlimited)
     for (const basic of ['Plains', 'Island', 'Swamp', 'Mountain', 'Forest', 'Wastes']) {
@@ -720,29 +721,16 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
     }
   }
 
-  // Name-based collection filter: use a subquery on card names the user owns
-  // UNION with basic lands which are always available (Arena gives unlimited)
-  // userId is a validated number (never user-controlled text), so it's safe
-  // to inline as a literal here — these fragments get spliced into several
-  // larger prepared statements with their own positional `?` params, and a
-  // bound param here would have to be threaded through every call site.
-  const collectionUserFilter = options.userId !== undefined ? `WHERE col2.user_id = ${options.userId}` : '';
-  const collectionUserFilter3 = options.userId !== undefined ? `WHERE col3.user_id = ${options.userId}` : '';
+  // Name-based collection filter: an "owned" subquery of A--stripped names
+  // (basics always included), scoped to the building user and, if given,
+  // one collection source. Joins compare both sides A--stripped so an
+  // Arena-rebalanced "A-X" and its paper name "X" count as one card.
+  const ownedNamesSql = ownedNamesSubqueryInline(ownershipFilter);
   const collectionJoin = useCollection
-    ? `INNER JOIN (
-        SELECT DISTINCT c2.name AS cname FROM collection col2 JOIN cards c2 ON col2.card_id = c2.id
-        ${collectionUserFilter}
-        UNION SELECT 'Plains' UNION SELECT 'Island' UNION SELECT 'Swamp'
-        UNION SELECT 'Mountain' UNION SELECT 'Forest' UNION SELECT 'Wastes'
-      ) owned ON c.name = owned.cname`
+    ? `INNER JOIN (${ownedNamesSql}) owned ON ${normalizedNameExpr('c.name')} = owned.cname`
     : '';
   const collectionOrder = useCollection
-    ? `CASE WHEN c.name IN (
-        SELECT c3.name FROM collection col3 JOIN cards c3 ON col3.card_id = c3.id
-        ${collectionUserFilter3}
-        UNION SELECT 'Plains' UNION SELECT 'Island' UNION SELECT 'Swamp'
-        UNION SELECT 'Mountain' UNION SELECT 'Forest' UNION SELECT 'Wastes'
-      ) THEN 0 ELSE 1 END,`
+    ? `CASE WHEN ${normalizedNameExpr('c.name')} IN (SELECT cname FROM (${ownedNamesSql})) THEN 0 ELSE 1 END,`
     : '';
 
   // ── EDHREC Integration: fetch commander-specific data ─────────────────────
@@ -1751,6 +1739,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
         options.userId,
         options.format,
         150,
+        options.collectionSource,
       );
       if (analysis) {
         arsenal = analysis.arsenal;
@@ -1763,6 +1752,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
           options.userId,
           options.format,
           150,
+          options.collectionSource,
         );
         if (partnerAnalysis) {
           const seen = new Set(arsenal.map((a) => a.card.name));
@@ -2259,11 +2249,15 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
       isCommander,
       maxCardPrice: options.maxCardPrice,
       userId: options.userId,
+      collectionSource: options.collectionSource,
     });
 
-    // Add non-basic lands
+    // Add non-basic lands. A--stripped: a land already picked (e.g. as an
+    // MDFC spell) under its paper name blocks its Arena "A-" name too, and
+    // vice versa — they're the same card.
     for (const { card, quantity } of landBase.lands) {
-      if (pickedNames.has(card.name)) continue;
+      const cardKey = stripArenaPrefix(card.name);
+      if (pickedNames.has(card.name) || pickedNames.has(cardKey) || pickedNames.has(`A-${cardKey}`)) continue;
       const maxQty = getMaxQty(card);
       const qty = isCommander ? Math.min(1, maxQty) : Math.min(maxQty, quantity);
       if (qty <= 0) continue;

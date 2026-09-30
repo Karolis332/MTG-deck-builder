@@ -115,6 +115,14 @@ export const DEFAULT_DECK_SIZE: Record<string, number> = {
 export const COMMANDER_FORMATS = ['commander', 'brawl', 'standardbrawl', 'competitivebrawl'] as const;
 
 /**
+ * Digital-only formats — an app build for one of these should default to the
+ * Arena collection, not paper. 'standard' and 'explorer' are left out: both
+ * are playable in paper too, and nothing here distinguishes an Arena-Standard
+ * build from a paper-Standard one, so the caller decides per request.
+ */
+export const ARENA_FORMATS = ['brawl', 'standardbrawl', 'competitivebrawl', 'historic', 'timeless', 'alchemy'] as const;
+
+/**
  * Map app format names to Scryfall legality JSON keys.
  * Scryfall uses "brawl" for Historic Brawl and "standardbrawl" for Standard Brawl,
  * which matches our internal format names — identity mapping, EXCEPT

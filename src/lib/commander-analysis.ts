@@ -39,6 +39,7 @@ import {
 import { isFetchLandRelevant } from './land-intelligence';
 import { getLegalityKey } from './constants';
 import { classifyCard } from './card-classifier';
+import { normalizedNameExpr, stripArenaPrefix } from './collection-ownership';
 
 // ── Types ────────────────────────────────────────────────────────────────
 
@@ -284,14 +285,17 @@ function lookupCard(name: string, legalityFilter: string): DbCard | null {
   return row || null;
 }
 
-function ownedQty(userId: number, cardName: string): number {
+function ownedQty(userId: number, cardName: string, source?: string): number {
   const db = getDb();
+  const strippedName = stripArenaPrefix(cardName);
+  const sourceFilter = source ? ' AND col.source = ?' : '';
+  const params: Array<number | string> = source ? [userId, strippedName, source] : [userId, strippedName];
   const row = db.prepare(
     `SELECT COALESCE(SUM(col.quantity), 0) as qty
      FROM collection col
      JOIN cards c ON col.card_id = c.id
-     WHERE col.user_id = ? AND LOWER(c.name) = LOWER(?)`
-  ).get(userId, cardName) as { qty: number } | undefined;
+     WHERE col.user_id = ? AND LOWER(${normalizedNameExpr('c.name')}) = LOWER(?)${sourceFilter}`
+  ).get(...params) as { qty: number } | undefined;
   return row?.qty ?? 0;
 }
 
@@ -353,6 +357,7 @@ export function analyzeCommanderForBuild(
   userId: number,
   format: string,
   arsenalLimit: number = 120,
+  collectionSource?: string,
 ): CommanderAnalysis | null {
   const legalityFilter = format && format !== '1v1'
     ? `AND c.legalities LIKE '%"${getLegalityKey(format)}":"legal"%'`
@@ -411,7 +416,7 @@ export function analyzeCommanderForBuild(
       reason,
       detail,
       inclusionRate: extra?.inclusionRate,
-      owned: ownedQty(userId, card.name),
+      owned: ownedQty(userId, card.name, collectionSource),
     });
   };
 
@@ -586,6 +591,7 @@ export function analyzeCommanderForBuild(
     colorIdentity,
     legalityFilter,
     seen,
+    collectionSource,
   );
   for (const s of subs) {
     arsenal.push(s);
@@ -631,6 +637,7 @@ function findCollectionSubstitutes(
   commanderColors: Set<string>,
   legalityFilter: string,
   alreadySeen: Set<string>,
+  collectionSource?: string,
 ): ArsenalCard[] {
   if (unownedTargets.length === 0) return [];
   const db = getDb();
@@ -643,17 +650,19 @@ function findCollectionSubstitutes(
     .join(' AND ');
 
   const whereColor = colorExcludeFilter ? `AND ${colorExcludeFilter}` : '';
+  const sourceFilter = collectionSource ? ' AND col.source = ?' : '';
+  const ownedParams: Array<number | string> = collectionSource ? [userId, collectionSource] : [userId];
 
   const ownedRows = db.prepare(
     `SELECT c.*, col.quantity as owned_qty
      FROM collection col
      JOIN cards c ON col.card_id = c.id
-     WHERE col.user_id = ?
+     WHERE col.user_id = ?${sourceFilter}
        AND c.set_code IS NOT NULL
        ${whereColor}
        ${legalityFilter}
      GROUP BY c.id`
-  ).all(userId) as Array<DbCard & { owned_qty: number }>;
+  ).all(...ownedParams) as Array<DbCard & { owned_qty: number }>;
 
   // Group owned cards by role so we can fill missing functions quickly
   // (reuse classifyCard to avoid duplicating patterns)

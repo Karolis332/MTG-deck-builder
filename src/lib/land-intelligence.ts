@@ -11,6 +11,7 @@
 import { getDb } from '@/lib/db';
 import { getLegalityKey } from '@/lib/constants';
 import { isRestrictedProducer, isConditionalColoredProducer, fetchLandColors, implicitLandColors, chosenTypeLandColors } from '@/lib/mana-sources';
+import { ownedNamesSubqueryInline, normalizedNameExpr, stripArenaPrefix } from '@/lib/collection-ownership';
 import type { DbCard } from '@/lib/types';
 
 // ── Fetch land relevance check ──────────────────────────────────────────────
@@ -105,6 +106,8 @@ interface ScoreOptions {
   tribalTypes?: string[];
   commanderName?: string;
   userId?: number;
+  /** Restrict ownership to one collection source (e.g. 'arena', 'paper'). Undefined = every source. */
+  collectionSource?: string;
   manaDemand?: ManaDemand;
   collectionOnly?: boolean;
   rarityFilter?: 'pauper' | 'peasant';
@@ -125,18 +128,14 @@ export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
   const rarityCondition = options.rarityFilter === 'pauper' ? " AND c.rarity = 'common'" : options.rarityFilter === 'peasant' ? " AND c.rarity IN ('common', 'uncommon')" : '';
   const legalityFilter = `AND json_extract(c.legalities, '$.${legalityKey}') IN ('legal', 'restricted')${rarityCondition}`;
 
-  // Collection filter: name-based join with basic land exemptions, scoped
-  // to the building user — unscoped, it let land planning see (and count
-  // as "owned") every other user's cards too.
-  const colUserFilter = collectionOnly && userId != null ? ' WHERE col2.user_id = ?' : '';
+  // Collection filter: name-based join (A--stripped, so "A-X" and "X" count
+  // as one card) with basic land exemptions, scoped to the building user
+  // and, if given, one collection source — unscoped, it let land planning
+  // see (and count as "owned") every other user's cards too, and it could
+  // disagree with the pool's own ownership check (getMaxQty).
   const colJoin = collectionOnly
-    ? `INNER JOIN (
-        SELECT DISTINCT c2.name AS cname FROM collection col2 JOIN cards c2 ON col2.card_id = c2.id${colUserFilter}
-        UNION SELECT 'Plains' UNION SELECT 'Island' UNION SELECT 'Swamp'
-        UNION SELECT 'Mountain' UNION SELECT 'Forest' UNION SELECT 'Wastes'
-      ) owned ON c.name = owned.cname`
+    ? `INNER JOIN (${ownedNamesSubqueryInline({ userId, source: options.collectionSource })}) owned ON ${normalizedNameExpr('c.name')} = owned.cname`
     : '';
-  const colJoinParams: number[] = collectionOnly && userId != null ? [userId] : [];
 
   // Fetch all non-basic lands with classifications
   const lands = db.prepare(`
@@ -150,7 +149,7 @@ export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
     ${legalityFilter}
     ORDER BY lc.tier ASC NULLS LAST, c.edhrec_rank ASC NULLS LAST
     LIMIT 1000
-  `).all(...colJoinParams) as Array<DbCard & {
+  `).all() as Array<DbCard & {
     land_category: string | null;
     produces_colors: string | null;
     enters_untapped: number | null;
@@ -535,6 +534,8 @@ interface BuildOptions {
   commanderName?: string;
   existingNonLandCards?: Array<{ mana_cost: string | null; quantity: number }>;
   userId?: number;
+  /** Restrict ownership to one collection source (e.g. 'arena', 'paper'). Undefined = every source. */
+  collectionSource?: string;
   collectionOnly?: boolean;
   rarityFilter?: 'pauper' | 'peasant';
   isCommander?: boolean;
@@ -561,6 +562,7 @@ export function buildOptimalLandBase(options: BuildOptions): LandBaseResult {
   // Score all available lands
   const scored = scoreLandsForDeck({
     colors, format, strategy, tribalTypes, commanderName, userId, manaDemand, collectionOnly,
+    collectionSource: options.collectionSource,
     rarityFilter: options.rarityFilter, maxCardPrice: options.maxCardPrice,
   });
 
@@ -588,7 +590,9 @@ export function buildOptimalLandBase(options: BuildOptions): LandBaseResult {
 
   for (const scored_land of scored) {
     if (nonBasicCount >= nonBasicTarget) break;
-    if (selectedNames.has(scored_land.card.name)) continue;
+    // A--stripped: an Arena-rebalanced "A-X" and its paper name "X" are one card.
+    const landKey = stripArenaPrefix(scored_land.card.name);
+    if (selectedNames.has(landKey)) continue;
     if (scored_land.score < SELECT_MIN_SCORE) continue; // Skip very low scoring lands
 
     const isMdfcSpellLand = !(scored_land.card.type_line || '').split('//')[0].includes('Land');
@@ -599,7 +603,7 @@ export function buildOptimalLandBase(options: BuildOptions): LandBaseResult {
 
     const qty = isCommander ? 1 : Math.min(4, nonBasicTarget - nonBasicCount);
     selectedLands.push({ card: scored_land.card, quantity: qty });
-    selectedNames.add(scored_land.card.name);
+    selectedNames.add(landKey);
     nonBasicCount += qty;
   }
 

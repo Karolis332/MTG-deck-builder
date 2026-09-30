@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createDeck, addCardToDeck, getCardByName } from '@/lib/db';
+import { createDeck, addCardToDeck, getCardByName, getDb } from '@/lib/db';
 import { autoBuildDeck } from '@/lib/deck-builder-ai';
-import { COMMANDER_FORMATS } from '@/lib/constants';
+import { COMMANDER_FORMATS, ARENA_FORMATS } from '@/lib/constants';
 import { getAuthUser, unauthorizedResponse } from '@/lib/auth-middleware';
 
 export async function POST(request: NextRequest) {
@@ -40,6 +40,20 @@ export async function POST(request: NextRequest) {
     }
 
     const validPowerLevels = ['casual', 'optimized', 'cedh'];
+
+    // Digital-only formats (Brawl family, Historic, Alchemy, ...) are built
+    // from the Arena collection when the user has one — a paper card can't
+    // be played there. 'standard'/'explorer' are left unscoped: they're
+    // playable in paper too and nothing here says which collection the
+    // request means.
+    let collectionSource: string | undefined;
+    if (useCollection && (ARENA_FORMATS as readonly string[]).includes(format)) {
+      const hasArenaRows = getDb().prepare(
+        'SELECT 1 FROM collection WHERE user_id = ? AND source = ? LIMIT 1'
+      ).get(authUser.userId, 'arena');
+      if (hasArenaRows) collectionSource = 'arena';
+    }
+
     const result = await autoBuildDeck({
       format,
       colors,
@@ -54,6 +68,7 @@ export async function POST(request: NextRequest) {
       powerLevel: validPowerLevels.includes(powerLevel) ? powerLevel : undefined,
       rarityFilter: rarityFilter === 'pauper' || rarityFilter === 'peasant' ? rarityFilter : undefined,
       buildHints: typeof buildHints === 'string' && buildHints.trim() ? buildHints.trim().slice(0, 500) : undefined,
+      collectionSource,
     });
 
     if (result.cards.length === 0) {
