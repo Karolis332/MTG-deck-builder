@@ -20,6 +20,20 @@ describe('deriveCondition — creature-type-count commanders', () => {
     expect(c.tribalType).toBeNull();
   });
 
+  it.each([
+    ['Equipment', 'Nahiri, Living Blade gets +1/+0 for each Equipment you control.'],
+    ['Equipment', 'Adelbert gets +1/+0 for each other Equipment you control.'],
+    ['Aura', 'Gets +1/+1 for each Aura you control.'],
+    ['Treasure', 'Gets +1/+1 for each Treasure you control.'],
+    ['Food', 'Gets +1/+1 for each Food you control.'],
+    ['Forest', 'Gets +1/+1 for each Forest you control.'],
+    ['Mountain', 'Gets +1/+1 for each Mountain you control.'],
+    ['Plain', 'Grizzlegom gets +1/+1 for each other Plain you control.'],
+  ])('does not read non-creature noun "%s" as a tribe', (_noun, text) => {
+    const c = deriveCondition(text, 'Legendary Creature — Human', ['W']);
+    expect(c.tribalType).toBeNull();
+  });
+
   const oozeCard: PlanCard = { name: 'Slime Molds', cmc: 2, typeLine: 'Creature — Ooze', oracleText: '', quantity: 1 };
   const changelingCard: PlanCard = {
     name: 'Mistform Ultimus',

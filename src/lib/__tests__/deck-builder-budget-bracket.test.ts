@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { applyDeckBudget, applyBracketTarget } from '../deck-builder-ai';
-import { bracketPoolExclusions, bracketOffenseCategory } from '../bracket';
+import { applyDeckBudget, applyBracketTarget, applyDeadCardPass } from '../deck-builder-ai';
+import { bracketPoolExclusions, bracketOffenseCategory, classifyBracket } from '../bracket';
 import type { DbCard } from '../types';
 
 function makeCard(overrides: Partial<DbCard> = {}): DbCard {
@@ -173,5 +173,36 @@ describe('applyBracketTarget', () => {
     expect(result.target).toBe(2);
     expect(result.result).toBeGreaterThan(2);
     expect(result.swapped).toEqual([]);
+  });
+
+  it('dead-card pass runs before bracket target, so the report matches the built deck (refuter defect: reported 3, actual 4)', () => {
+    // A narrow tutor with no targets in the deck — dead-card pass must cut it.
+    // Its only same-role (tutor) replacement happens to be a game changer, so
+    // the swap changes the deck's bracket. If bracket ran first (old order)
+    // it would classify the deck BEFORE this swap and report a stale result.
+    const deadTutor = makeCard({
+      name: 'Dead Food Tutor',
+      type_line: 'Sorcery',
+      oracle_text: 'Search your library for a Food card, reveal it, put it into your hand, then shuffle.',
+    });
+    const filler = makeCard({ name: 'Filler Sorcery', type_line: 'Sorcery', oracle_text: 'Deal 1 damage.' });
+    const gcReplacement = makeCard({
+      name: 'Tutor Game Changer',
+      type_line: 'Sorcery',
+      oracle_text: 'Search your library for a creature card, reveal it, put it into your hand, then shuffle.',
+      game_changer: 1,
+    });
+    const picked = [
+      { card: deadTutor, quantity: 1, board: 'main' as const },
+      { card: filler, quantity: 1, board: 'main' as const },
+    ];
+    const pool = [{ card: gcReplacement, score: 90 }];
+
+    const dead = applyDeadCardPass(picked, pool, ['G'], undefined);
+    expect(dead.replacedAsDead[0]?.in).toBe('Tutor Game Changer'); // pre-condition: the swap actually happens
+
+    const { cards, result } = applyBracketTarget(dead.cards, pool, 3, undefined, []);
+    const actual = classifyBracket(cards.filter((c) => c.board === 'main').map((c) => c.card), { commanderNames: [] });
+    expect(result.result).toBe(actual.bracket);
   });
 });

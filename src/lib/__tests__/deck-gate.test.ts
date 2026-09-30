@@ -204,6 +204,29 @@ describe('gateDeck — plan thresholds', () => {
     expect(v.plan!.enablerRatio).toBeCloseTo(25 / 65, 3);
     expect(check(v, 'plan').status).toBe('warn');
   });
+
+  /**
+   * 2026-09-26 regression: a commander with no cost/type/tribal condition
+   * (a plain "value" trigger — Ezuri, Teysa Karlov) has satisfiesCondition()
+   * return false for every card, so enablers is always 0. The old rule always
+   * gated on that (fail), matching the refuter's built-deck verdicts. A prior
+   * fix accidentally turned the enabler floor off for every non-tribal,
+   * non-threshold commander too, flipping these to pass/warn.
+   */
+  const generalValueOnly = [
+    'Commander',
+    '1 Test Value Commander',
+    'Deck',
+    '1 Test Sac Outlet',
+    '1 Test Aristocrat',
+  ].join('\n');
+
+  it('still fails the enabler floor for a non-tribal, no-threshold "general value" commander', () => {
+    const v = gateDeck(generalValueOnly, { format: 'brawl' });
+    expect(v.plan!.ratio).toBe(1);
+    expect(v.plan!.enablerRatio).toBe(0);
+    expect(check(v, 'plan').status).toBe('fail');
+  });
 });
 
 describe('gateDeck — ownership without a collection table', () => {

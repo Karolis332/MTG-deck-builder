@@ -64,11 +64,10 @@ describe('mono-colour fixing-only land exclusion', () => {
     expect(pool.has('Temple of the Dragon Queen')).toBe(false);
   });
 
-  it('excludes weak/conditional colourless utility in mono-green (Reliquary Tower, Plaza of Harmony, Soulstone Sanctuary, Branch of Vitu-Ghazi)', () => {
+  it('excludes weak/conditional colourless utility in mono-green (Reliquary Tower, Plaza of Harmony, Branch of Vitu-Ghazi)', () => {
     const pool = poolNames(['G']);
     expect(pool.has('Reliquary Tower')).toBe(false);
     expect(pool.has('Plaza of Harmony')).toBe(false);
-    expect(pool.has('Soulstone Sanctuary')).toBe(false);
     expect(pool.has('Branch of Vitu-Ghazi')).toBe(false);
   });
 
@@ -126,7 +125,67 @@ describe('mono-colour fixing-only land exclusion', () => {
       isCommander: true,
       maxCardPrice: 0.001, // below every real nonbasic land's price — starves the pool
     });
-    expect(result.totalNonBasic).toBeLessThan(3);
+    // Unpriced lands (price_usd null, e.g. Soulstone Sanctuary — now a
+    // legitimate oracle-text-detected manland) bypass the price cap, so
+    // this stays a loose ceiling, not an exact count.
+    expect(result.totalNonBasic).toBeLessThan(4);
     expect(result.basicDistribution.Forest).toBeGreaterThanOrEqual(34);
+  });
+
+  // Round 2 (2026-09-26): 55cebd0's filter over-excluded real utility and
+  // under-excluded a family of tapped sac-for-basic lands.
+  it('excludes tapped sacrifice-for-basic lands with no independent mana ability (Bad River, Flood Plain, Rocky Tar Pit, Mountain Valley, Grasslands) in mono', () => {
+    expect(poolNames(['U']).has('Bad River')).toBe(false);
+    expect(poolNames(['U']).has('Flood Plain')).toBe(false);
+    expect(poolNames(['R']).has('Rocky Tar Pit')).toBe(false);
+    expect(poolNames(['R']).has('Mountain Valley')).toBe(false);
+    expect(poolNames(['G']).has('Grasslands')).toBe(false);
+  });
+
+  it('multicolour: the same sac-for-basic family stays eligible (Rocky Tar Pit in a B/R deck) — the fetched basic matters there', () => {
+    const rows = scoreLandsForDeck({ colors: ['B', 'R'], format: 'commander' });
+    expect(rows.find((r) => r.card.name === 'Rocky Tar Pit')).toBeDefined();
+  });
+
+  it('keeps manlands in mono (Mutavault, Den of the Bugbear, Inkmoth Nexus, Blinkmoth Nexus) — the creature mode is the premium payoff', () => {
+    expect(poolNames(['R']).has('Mutavault')).toBe(true);
+    expect(poolNames(['R']).has('Den of the Bugbear')).toBe(true);
+    expect(poolNames(['R']).has('Inkmoth Nexus')).toBe(true);
+    expect(poolNames(['R']).has('Blinkmoth Nexus')).toBe(true);
+  });
+
+  it('keeps manlands detected by oracle text, not a hardcoded list (Lair of the Hydra, Hall of Storm Giants, Mishra\'s Factory, Soulstone Sanctuary)', () => {
+    expect(poolNames(['G']).has('Lair of the Hydra')).toBe(true);
+    expect(poolNames(['U']).has('Hall of Storm Giants')).toBe(true);
+    expect(poolNames(['R']).has("Mishra's Factory")).toBe(true);
+    expect(poolNames(['G']).has('Soulstone Sanctuary')).toBe(true);
+  });
+
+  it('does not treat a land that animates a DIFFERENT permanent as a manland (Mech Hangar: "Target Vehicle becomes an artifact creature")', () => {
+    expect(poolNames(['R']).has('Mech Hangar')).toBe(false);
+  });
+
+  it('keeps Nykthos, Shrine to Nyx in mono — devotion scales with a mono deck', () => {
+    expect(poolNames(['R']).has('Nykthos, Shrine to Nyx')).toBe(true);
+  });
+
+  it('keeps Ancient Tomb in mono — unconditional {C}{C} is real fast mana', () => {
+    expect(poolNames(['R']).has('Ancient Tomb')).toBe(true);
+  });
+
+  it('keeps Urza\'s Saga in mono — chapter III value isn\'t mana-dependent', () => {
+    expect(poolNames(['R']).has("Urza's Saga")).toBe(true);
+  });
+
+  it('keeps Cavern of Souls in mono only when the deck runs a tribe (Goblin) — excluded with no tribe', () => {
+    const rows = scoreLandsForDeck({ colors: ['R'], format: 'commander', tribalTypes: ['goblin'] });
+    expect(rows.find((r) => r.card.name === 'Cavern of Souls')).toBeDefined();
+    expect(poolNames(['R']).has('Cavern of Souls')).toBe(false);
+  });
+
+  it('keeps tapped MDFC spell-lands in mono (Valakut Awakening // Valakut Stoneforge, Khalni Ambush // Khalni Territory, Bala Ged Recovery // Bala Ged Sanctuary) — priced as tapped-land-equivalent, not excluded twice', () => {
+    expect(poolNames(['R']).has('Valakut Awakening // Valakut Stoneforge')).toBe(true);
+    expect(poolNames(['G']).has('Khalni Ambush // Khalni Territory')).toBe(true);
+    expect(poolNames(['G']).has('Bala Ged Recovery // Bala Ged Sanctuary')).toBe(true);
   });
 });

@@ -117,7 +117,7 @@ interface ScoreOptions {
  * Returns scored lands sorted by score descending.
  */
 export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
-  const { colors, format, tribalTypes, commanderName, manaDemand, collectionOnly } = options;
+  const { colors, format, tribalTypes, commanderName, manaDemand, collectionOnly, userId } = options;
   const db = getDb();
 
   // Build legality filter
@@ -125,14 +125,18 @@ export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
   const rarityCondition = options.rarityFilter === 'pauper' ? " AND c.rarity = 'common'" : options.rarityFilter === 'peasant' ? " AND c.rarity IN ('common', 'uncommon')" : '';
   const legalityFilter = `AND json_extract(c.legalities, '$.${legalityKey}') IN ('legal', 'restricted')${rarityCondition}`;
 
-  // Collection filter: name-based join with basic land exemptions
+  // Collection filter: name-based join with basic land exemptions, scoped
+  // to the building user — unscoped, it let land planning see (and count
+  // as "owned") every other user's cards too.
+  const colUserFilter = collectionOnly && userId != null ? ' WHERE col2.user_id = ?' : '';
   const colJoin = collectionOnly
     ? `INNER JOIN (
-        SELECT DISTINCT c2.name AS cname FROM collection col2 JOIN cards c2 ON col2.card_id = c2.id
+        SELECT DISTINCT c2.name AS cname FROM collection col2 JOIN cards c2 ON col2.card_id = c2.id${colUserFilter}
         UNION SELECT 'Plains' UNION SELECT 'Island' UNION SELECT 'Swamp'
         UNION SELECT 'Mountain' UNION SELECT 'Forest' UNION SELECT 'Wastes'
       ) owned ON c.name = owned.cname`
     : '';
+  const colJoinParams: number[] = collectionOnly && userId != null ? [userId] : [];
 
   // Fetch all non-basic lands with classifications
   const lands = db.prepare(`
@@ -146,7 +150,7 @@ export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
     ${legalityFilter}
     ORDER BY lc.tier ASC NULLS LAST, c.edhrec_rank ASC NULLS LAST
     LIMIT 1000
-  `).all() as Array<DbCard & {
+  `).all(...colJoinParams) as Array<DbCard & {
     land_category: string | null;
     produces_colors: string | null;
     enters_untapped: number | null;
@@ -233,7 +237,14 @@ export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
         // you control could produce") — flexible, not deck-colour-specific.
         || /any type (?:of mana )?that a .*? could produce/.test(lower);
       const chosenColor = /choose a color/.test(lower) && /chosen color/.test(lower);
-      if (anyColor || chosenColor || chosenTypeLandColors(land) !== null) continue;
+      // Cavern of Souls' "any color" is restricted to casting a creature of
+      // the chosen type — not general fixing like Command Tower — so it
+      // isn't the flexible-in-multicolour-only shape this filter targets.
+      // Only worth a mono slot when the deck actually runs the tribe;
+      // genericTribalLand (below) gives it credit once it survives here.
+      const cavernTribal = /spend this mana only to cast a creature spell of the chosen type/.test(lower)
+        && !!tribalTypes && tribalTypes.length > 0;
+      if ((anyColor && !cavernTribal) || chosenColor || chosenTypeLandColors(land) !== null) continue;
 
       // Any fetch that deposits its target TAPPED — the ETB-sacrifice "gate"
       // family (Cabaretti Courtyard, Brokers Hideout) and the activated
@@ -243,6 +254,15 @@ export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
       // (Misty Rainforest, Prismatic Vista, Polluted Delta...) are real
       // thinning and stay eligible.
       if (fetchLandColors(land) !== null && /onto the battlefield tapped/.test(lower)) continue;
+
+      // Fetches that enter tapped THEMSELVES and can only ever be
+      // sacrificed for a basic (the Fallen Empires cycle: Bad River, Flood
+      // Plain, Rocky Tar Pit, Mountain Valley, Grasslands — no independent
+      // mana ability at all) are a tapped land for a turn that then becomes
+      // the exact basic a mono deck already runs, for a point of life.
+      // Strictly worse than the basic itself.
+      const entersTappedItself = lower.includes('enters the battlefield tapped') || lower.includes('enters tapped');
+      if (fetchLandColors(land) !== null && entersTappedItself) continue;
 
       // Pain lands that charge life for the SAME colour a basic gives free.
       if (deckColor && new RegExp(`pay \\d+ life:\\s*add \\{${deckColor}\\}`, 'i').test(lower)) continue;
@@ -421,7 +441,31 @@ export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
     // bar even when it does match the deck colour: a permanently-tapped
     // land is a worse basic unless something else redeems it.
     const alwaysTapped = !isFetch && ownEntersTapped && !/tapped unless/.test(tapText);
-    if (colors.length <= 1 && (matchingColors.length === 0 || alwaysTapped) && !tribalMatch && !genericTribalLand) {
+    // Manlands (Mutavault, Den of the Bugbear, Inkmoth/Blinkmoth Nexus) are
+    // a genuine threat stapled to a land — that IS the premium payoff, even
+    // when (like Den of the Bugbear) the land also enters tapped sometimes.
+    // Detected from oracle text (a name list misses Lair of the Hydra, Hall
+    // of Storm Giants, the Restless cycle...): the subject animating into a
+    // creature must be the land ITSELF ("this land becomes ..."), not some
+    // other permanent it targets (Mech Hangar: "Target Vehicle becomes an
+    // artifact creature", Ba Sing Se: "Target land you control becomes...").
+    const isManland = /\bthis land becomes an? [\s\S]*?\bcreature\b/i.test(tapText);
+    // Modal DFC spell-lands (Valakut Awakening, Khalni Ambush, Bala Ged
+    // Recovery, Talrand's cycle) are a free spell stapled to a tapped land —
+    // already priced as "tapped-land equivalent at best" by the MDFC bonus
+    // below, not held to the always-tapped colourless bar again here.
+    const isMdfcSpellLand = isModalDfc && !frontIsLand;
+    // Nykthos: devotion scales with the deck, not a fixed weak rate.
+    const nykthosDevotion = /devotion/.test(tapText);
+    // Ancient Tomb: unconditional double colorless is real fast mana.
+    // Named, not pattern-matched: an unconditional {C}{C} land with a real
+    // downside (City of Traitors doesn't untap; Mishra's Workshop is
+    // artifacts-only) is still a worse basic — only Ancient Tomb's plain
+    // "{T}: Add {C}{C}, take 2" clears the bar on fast mana alone.
+    const ancientTombDoubleC = land.name === 'Ancient Tomb';
+    const isUrzasSaga = (land.type_line || '').includes('Saga');
+    const exemptColorless = isManland || isMdfcSpellLand || nykthosDevotion || ancientTombDoubleC || isUrzasSaga;
+    if (colors.length <= 1 && (matchingColors.length === 0 || alwaysTapped) && !tribalMatch && !genericTribalLand && !exemptColorless) {
       const PREMIUM_COLORLESS_UTILITY = [
         /can't be blocked/,
         /destroy target/,

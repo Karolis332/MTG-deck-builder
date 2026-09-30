@@ -40,6 +40,10 @@ const PANEL: PanelEntry[] = [
   { slug: 'vivi', commander: 'Vivi Ornitier', format: 'commander', useCollection: false, userId: undefined, note: 'SUBSTITUTED brawl->commander: Vivi is banned in Brawl' },
   { slug: 'ezuri', commander: 'Ezuri, Claw of Progress', format: 'commander', useCollection: false, userId: undefined, note: 'UG +1/+1 counters' },
   { slug: 'edgar-markov', commander: 'Edgar Markov', format: 'commander', useCollection: false, userId: undefined, note: 'tribal vampires, 3 colours' },
+  { slug: 'ayula', commander: 'Ayula, Queen Among Bears', format: 'commander', useCollection: false, userId: undefined, note: 'thin tribe (Bears) — floor must not pull in vanillas' },
+  { slug: 'jinnie-fay', commander: 'Jinnie Fay, Jetmir\'s Second', format: 'commander', useCollection: false, userId: undefined, note: 'token-type maker, NOT a tribal payoff — floor must stay inactive' },
+  { slug: 'darien', commander: 'Darien, King of Kjeldor', format: 'commander', useCollection: false, userId: undefined, note: 'token-type maker, NOT a tribal payoff — floor must stay inactive' },
+  { slug: 'teysa', commander: 'Teysa Karlov', format: 'commander', useCollection: false, userId: undefined, note: 'non-tribal, no collection' },
 ];
 
 interface DeadCardRecord {

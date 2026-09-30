@@ -722,9 +722,16 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
 
   // Name-based collection filter: use a subquery on card names the user owns
   // UNION with basic lands which are always available (Arena gives unlimited)
+  // userId is a validated number (never user-controlled text), so it's safe
+  // to inline as a literal here — these fragments get spliced into several
+  // larger prepared statements with their own positional `?` params, and a
+  // bound param here would have to be threaded through every call site.
+  const collectionUserFilter = options.userId !== undefined ? `WHERE col2.user_id = ${options.userId}` : '';
+  const collectionUserFilter3 = options.userId !== undefined ? `WHERE col3.user_id = ${options.userId}` : '';
   const collectionJoin = useCollection
     ? `INNER JOIN (
         SELECT DISTINCT c2.name AS cname FROM collection col2 JOIN cards c2 ON col2.card_id = c2.id
+        ${collectionUserFilter}
         UNION SELECT 'Plains' UNION SELECT 'Island' UNION SELECT 'Swamp'
         UNION SELECT 'Mountain' UNION SELECT 'Forest' UNION SELECT 'Wastes'
       ) owned ON c.name = owned.cname`
@@ -732,6 +739,7 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
   const collectionOrder = useCollection
     ? `CASE WHEN c.name IN (
         SELECT c3.name FROM collection col3 JOIN cards c3 ON col3.card_id = c3.id
+        ${collectionUserFilter3}
         UNION SELECT 'Plains' UNION SELECT 'Island' UNION SELECT 'Swamp'
         UNION SELECT 'Mountain' UNION SELECT 'Forest' UNION SELECT 'Wastes'
       ) THEN 0 ELSE 1 END,`
@@ -1996,13 +2004,30 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
   }
 
   // ── Tribal minimum backfill ──────────────────────────────────────────────
-  // A tribal commander should ship a solid tribe presence — 12 permanents is
-  // the smallest floor that reads as "tribal" in a 99-card deck (roughly a
-  // third of the nonland slots) without starving other roles; below it the
-  // scoring bonus alone (see the 'tribal' snap above) wasn't enough to save
-  // owned/obscure tribe members from being outscored by staples.
+  // A tribal commander should ship a solid tribe presence — 34 is the target
+  // where the pool supports it (roughly a third of the nonland slots), but
+  // ONLY when the commander's own text actually pays off the tribe by
+  // counting/scaling with it (count, lord, "whenever you cast a <Type>").
+  // "Makes N tokens of type X" alone (Jinnie Fay's Cats/Dogs, Darien's
+  // Soldiers) is not a tribal payoff — forcing a floor there just displaces
+  // real cards for token-type flavor matches. Candidates must also clear a
+  // quality bar (no vanilla creatures — Ayula's thin Bear tribe otherwise
+  // pulls in the entire vanilla-bear cycle), and removal/board wipes are
+  // never displaceable, so the floor can't cannibalize the deck's answers.
+  const commanderPaysOffTribe = (oracleText: string, tribe: string): boolean => {
+    const text = oracleText.toLowerCase();
+    return [
+      `other ${tribe}`, `${tribe}s you control`, `${tribe} you control`,
+      `whenever a ${tribe}`, `whenever another ${tribe}`, `each ${tribe}`,
+      `all ${tribe}s`, `number of ${tribe}`,
+      `whenever you cast a ${tribe}`, `whenever you cast another ${tribe}`,
+    ].some((p) => text.includes(p));
+  };
+  const isVanillaCreature = (card: DbCard): boolean =>
+    (card.oracle_text || '').replace(/\([^)]*\)/g, '').trim().length === 0;
+
   const TRIBAL_MIN_PERMANENTS = 34;
-  if (tribalType && tribalNames.size > 0) {
+  if (tribalType && tribalNames.size > 0 && commanderPaysOffTribe(commanderCard?.oracle_text || '', tribalType)) {
     let tribalCount = 0;
     for (const p of picked) {
       if (p.board === 'main' && isTribeCreature(p.card, tribalType)) tribalCount += p.quantity;
@@ -2015,11 +2040,15 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
       // only they get pulled in here; non-creature tribal support (choosers,
       // payoff spells) still gets its normal scoring bonus in the main pick.
       const candidates = scored
-        .filter((s) => tribalNames.has(s.card.name) && isTribeCreature(s.card, tribalType) && !pickedNames.has(s.card.name) && getMaxQty(s.card) > 0)
+        .filter((s) => tribalNames.has(s.card.name) && isTribeCreature(s.card, tribalType) && !pickedNames.has(s.card.name) && getMaxQty(s.card) > 0 && !isVanillaCreature(s.card))
         .sort((a, b) => b.score - a.score)
         .map((s) => s.card);
       const displaceable = [...picked]
-        .filter((p) => p.board === 'main' && !tribalNames.has(p.card.name))
+        .filter((p) => {
+          if (p.board !== 'main' || tribalNames.has(p.card.name)) return false;
+          const primary = getPrimaryCategory(classifyCard(p.card.name, p.card.oracle_text || '', p.card.type_line || '', p.card.cmc || 0, commanderCard?.oracle_text || undefined));
+          return primary !== 'removal' && primary !== 'board_wipe';
+        })
         .sort((a, b) => {
           const aScore = scored.find((s) => s.card.name === a.card.name)?.score || 0;
           const bScore = scored.find((s) => s.card.name === b.card.name)?.score || 0;
@@ -2229,6 +2258,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
       rarityFilter: options.rarityFilter,
       isCommander,
       maxCardPrice: options.maxCardPrice,
+      userId: options.userId,
     });
 
     // Add non-basic lands
@@ -2505,6 +2535,21 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
   const commanderNames = [commanderCard?.name, options.partnerName].filter((n): n is string => !!n);
 
   let finalCards = picked;
+
+  // Dead-card pass: cut anything that can't do its job in THIS deck — a
+  // narrow tutor with too few targets, a {C}-pip card the manabase can't
+  // feed, a mono-colour fixer with nothing to fix. Runs BEFORE budget/bracket
+  // so those two see the actual final list (previously ran last, so a swap
+  // here could change the deck's bracket/price without either report being
+  // re-checked — bracket target 3 could report 3 while the built deck was
+  // really 4).
+  const deadPass = applyDeadCardPass(
+    finalCards, poolResult.pool, colors, commanderCard?.oracle_text || undefined,
+    (card) => getMaxQty(card) > 0,
+  );
+  finalCards = deadPass.cards;
+  const deadCardsReplaced = deadPass.replacedAsDead;
+
   let replacedForBudget: Array<{ out: string; in: string; saved: number }> = [];
   if (options.maxDeckPrice != null && options.maxDeckPrice > 0) {
     const budget = applyDeckBudget(
@@ -2529,17 +2574,6 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
     );
     bracketReport = { target: null, result: classified.bracket, reasons: classified.reasons, swapped: [] };
   }
-
-  // Dead-card pass: after budget/bracket swaps have settled, cut anything
-  // that can't do its job in THIS deck — a narrow tutor with too few targets,
-  // a {C}-pip card the manabase can't feed, a mono-colour fixer with nothing
-  // to fix. Runs last so it sees the final colourless-source/target counts.
-  const deadPass = applyDeadCardPass(
-    finalCards, poolResult.pool, colors, commanderCard?.oracle_text || undefined,
-    (card) => getMaxQty(card) > 0,
-  );
-  finalCards = deadPass.cards;
-  const deadCardsReplaced = deadPass.replacedAsDead;
 
   let priceTotal = 0;
   let unpricedCount = 0;

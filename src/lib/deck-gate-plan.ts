@@ -8,7 +8,9 @@
  * This module turns the commander's oracle text into a machine-checkable
  * condition and scores every nonland card against it.
  */
-import { analyzeCommander } from './commander-synergy';
+import { analyzeCommander, MAJOR_TRIBES } from './commander-synergy';
+
+const MAJOR_TRIBES_SET = new Set(MAJOR_TRIBES);
 
 const NUMBER_WORDS: Record<string, number> = {
   one: 1, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8, nine: 9, ten: 10,
@@ -36,12 +38,6 @@ export interface PlanCondition {
   /** Human-readable summary for the verdict table. */
   description: string;
 }
-
-/** Collective nouns a "for each X you control" clause can name without X being a creature type. */
-const TRIBAL_STOPWORDS = new Set([
-  'creature', 'permanent', 'land', 'basic', 'opponent', 'player', 'artifact',
-  'enchantment', 'planeswalker', 'card', 'token', 'color', 'other',
-]);
 
 const COST_RULES: Array<[RegExp, 'threshold']> = [
   [/if at least (\w+) mana was spent/i, 'threshold'],
@@ -111,8 +107,11 @@ export function deriveCondition(
   }
 
   let tribalType: string | null = null;
+  // "for each X you control" names a creature type only if X actually is one
+  // (Equipment/Aura/Treasure/Food/Forest/Mountain/"Plain" are not) — match
+  // against the same tribe list detectTribalPayoff uses, not a stopword list.
   const tribalMatch = front.match(/for each (?:other )?(\w+?)s? you control/i);
-  if (tribalMatch && !TRIBAL_STOPWORDS.has(tribalMatch[1].toLowerCase())) {
+  if (tribalMatch && MAJOR_TRIBES_SET.has(tribalMatch[1].toLowerCase())) {
     tribalType = tribalMatch[1];
   }
 
