@@ -272,10 +272,12 @@ export function isInColorIdentity(card: DbCard, commanderColors: Set<string>): b
 
 function lookupCard(name: string, legalityFilter: string): DbCard | null {
   const db = getDb();
-  // Prefer a printing with set_code present (avoids Art Series / token dupes)
+  // Prefer a printing with set_code present (avoids Art Series / token dupes).
+  // NOCASE equality uses idx_cards_name_nocase; LOWER(c.name) = LOWER(?) was a
+  // full cards scan per lookup (~20 s over the 300+ arsenal lookups per build).
   const row = db.prepare(
     `SELECT c.* FROM cards c
-     WHERE LOWER(c.name) = LOWER(?)
+     WHERE c.name = ? COLLATE NOCASE
        AND c.set_code IS NOT NULL
        ${legalityFilter}
      ORDER BY (CASE WHEN c.type_line LIKE '%Token%' OR c.type_line LIKE '%Art Series%' THEN 1 ELSE 0 END) ASC,

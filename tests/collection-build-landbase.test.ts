@@ -234,6 +234,24 @@ describe('autoBuildDeck collection mode — land base ownership is scoped to the
     expect(portals.length).toBeLessThanOrEqual(1);
   }, 60_000);
 
+  // Perf 2026-09-30: ON strip(c.name) = cname planned as SCAN c × SCAN owned
+  // (36-66 s per collection land query on the live DB).
+  it('the owned-name join materializes the owned subquery once and matches both X and A-X', async () => {
+    const { ownedNameJoin } = await import('@/lib/land-intelligence');
+    const sql = `SELECT c.name FROM cards c ${ownedNameJoin({ userId: BUILDER_UID, source: 'arena' })} WHERE c.type_line LIKE '%Land%'`;
+    const plan = (db.getDb().prepare(`EXPLAIN QUERY PLAN ${sql}`).all() as Array<{ detail: string }>).map((r) => r.detail);
+    expect(plan.some((d) => /^LIST SUBQUERY/.test(d))).toBe(true);
+    expect(plan.slice(plan.indexOf('SCAN c') + 1)).not.toContain('SCAN owned'); // no per-card rescan
+    const names = (db.getDb().prepare(sql).all() as Array<{ name: string }>).map((r) => r.name);
+    expect(names).toEqual(expect.arrayContaining(['Thran Portal', 'A-Thran Portal', 'Command Tower']));
+  });
+
+  it('the commander arsenal still resolves names case-insensitively (NOCASE index lookup)', async () => {
+    const { analyzeCommanderForBuild } = await import('@/lib/commander-analysis');
+    const a = analyzeCommanderForBuild('test PRISM sovereign', BUILDER_UID, 'commander', 150, 'arena');
+    expect(a?.commander.name).toBe('Test Prism Sovereign');
+  });
+
   it('without collectionSource, every picked card is owned by the builder in any source, never the other user\'s', async () => {
     const r = await builder.autoBuildDeck({
       format: 'commander', colors: [], commanderName: 'Test Prism Sovereign',

@@ -11,8 +11,20 @@
 import { getDb } from '@/lib/db';
 import { getLegalityKey } from '@/lib/constants';
 import { isRestrictedProducer, isConditionalColoredProducer, isNeverColoredProducer, fetchLandColors, implicitLandColors, chosenTypeLandColors, buildManaSourceContext, type ManaSourceContext } from '@/lib/mana-sources';
-import { ownedNamesSubqueryInline, normalizedNameExpr, stripArenaPrefix } from '@/lib/collection-ownership';
+import { ownedNamesSubqueryInline, normalizedNameExpr, stripArenaPrefix, type OwnershipFilter } from '@/lib/collection-ownership';
 import type { DbCard } from '@/lib/types';
+
+/**
+ * Join clause restricting `cards c` to owned names (A--stripped, basics
+ * included). A semi-join on purpose: `INNER JOIN (owned) ON strip(c.name) =
+ * owned.cname` planned as SCAN c x SCAN owned, re-running the owned subquery
+ * for every card (36-66 s per collection land query on the live DB). An IN
+ * subquery is materialized once; same rows, same order, ~0.2 s.
+ */
+// ponytail: lives here because collection-ownership.ts was owned by another unit; move it next to ownedNamesSubqueryInline.
+export function ownedNameJoin(filter: OwnershipFilter): string {
+  return `INNER JOIN (SELECT 1) owned ON ${normalizedNameExpr('c.name')} IN (SELECT cname FROM (${ownedNamesSubqueryInline(filter)}))`;
+}
 
 // ── Fetch land relevance check ──────────────────────────────────────────────
 // Fetch lands have color_identity [] but can only search for specific basic types.
@@ -142,7 +154,7 @@ export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
   // see (and count as "owned") every other user's cards too, and it could
   // disagree with the pool's own ownership check (getMaxQty).
   const colJoin = collectionOnly
-    ? `INNER JOIN (${ownedNamesSubqueryInline({ userId, source: options.collectionSource })}) owned ON ${normalizedNameExpr('c.name')} = owned.cname`
+    ? ownedNameJoin({ userId, source: options.collectionSource })
     : '';
 
   // Fetch all non-basic lands with classifications
