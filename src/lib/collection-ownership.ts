@@ -18,6 +18,17 @@ function normalizedNameExpr(column: string): string {
   return `(CASE WHEN ${column} LIKE 'A-%' THEN substr(${column}, 3) ELSE ${column} END)`;
 }
 
+/**
+ * `'arena'` also has to match the legacy `'arena_csv'` import tag (same
+ * source, different label pre-migration) — same mapping `src/lib/db.ts`
+ * uses for collection queries. A caller asking for `source: 'arena'` who
+ * only gets exact-match rows silently drops every user whose import tagged
+ * rows `arena_csv` into an all-sources ownership check.
+ */
+function sourceFilterParamSql(column: string): string {
+  return `(${column} = ? OR (? = 'arena' AND ${column} = 'arena_csv'))`;
+}
+
 export interface OwnershipFilter {
   userId?: number;
   /** e.g. 'arena' | 'paper' | 'web-build'. Omitted = every source the user owns. */
@@ -37,8 +48,8 @@ export function buildOwnedQtyMap(db: Database.Database, filter: OwnershipFilter)
   const params: Array<number | string> = [filter.userId];
   let sourceFilter = '';
   if (filter.source) {
-    sourceFilter = ' AND col.source = ?';
-    params.push(filter.source);
+    sourceFilter = ` AND ${sourceFilterParamSql('col.source')}`;
+    params.push(filter.source, filter.source);
   }
   const rows = db.prepare(
     `SELECT ${normalizedNameExpr('c.name')} as norm, SUM(col.quantity) as total
@@ -75,8 +86,8 @@ export function ownedNamesSubquery(filter: OwnershipFilter): { sql: string; para
   const params: Array<number | string> = [filter.userId];
   let sourceFilter = '';
   if (filter.source) {
-    sourceFilter = ' AND col.source = ?';
-    params.push(filter.source);
+    sourceFilter = ` AND ${sourceFilterParamSql('col.source')}`;
+    params.push(filter.source, filter.source);
   }
   const sql = `SELECT DISTINCT ${normalizedNameExpr('c.name')} AS cname
     FROM collection col JOIN cards c ON col.card_id = c.id
@@ -98,7 +109,10 @@ export function ownedNamesSubqueryInline(filter: OwnershipFilter): string {
   if (filter.userId === undefined || !Number.isInteger(filter.userId)) {
     return `SELECT 'Plains' AS cname UNION SELECT 'Island' UNION SELECT 'Swamp' UNION SELECT 'Mountain' UNION SELECT 'Forest' UNION SELECT 'Wastes'`;
   }
-  const sourceFilter = filter.source ? ` AND col.source = '${filter.source.replace(/'/g, "''")}'` : '';
+  const escapedSource = filter.source ? filter.source.replace(/'/g, "''") : '';
+  const sourceFilter = filter.source
+    ? ` AND (col.source = '${escapedSource}'${filter.source === 'arena' ? " OR col.source = 'arena_csv'" : ''})`
+    : '';
   return `SELECT DISTINCT ${normalizedNameExpr('c.name')} AS cname
     FROM collection col JOIN cards c ON col.card_id = c.id
     WHERE col.user_id = ${filter.userId}${sourceFilter}

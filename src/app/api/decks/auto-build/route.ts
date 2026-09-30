@@ -48,9 +48,13 @@ export async function POST(request: NextRequest) {
     // request means.
     let collectionSource: string | undefined;
     if (useCollection && (ARENA_FORMATS as readonly string[]).includes(format)) {
+      // Legacy imports tagged rows 'arena_csv' before the source was
+      // renamed to 'arena' — same match src/lib/db.ts uses for collection
+      // queries. A user whose Arena rows are all 'arena_csv' otherwise
+      // never gets the Arena-scoped build (falls through to all-sources).
       const hasArenaRows = getDb().prepare(
-        'SELECT 1 FROM collection WHERE user_id = ? AND source = ? LIMIT 1'
-      ).get(authUser.userId, 'arena');
+        "SELECT 1 FROM collection WHERE user_id = ? AND (source = 'arena' OR source = 'arena_csv') LIMIT 1"
+      ).get(authUser.userId);
       if (hasArenaRows) collectionSource = 'arena';
     }
 

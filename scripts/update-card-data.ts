@@ -7,7 +7,7 @@
  * - Inserts cards from sets released since the last seed.
  * - Preserves arena_id and subtypes (maintained by mtgjson-enrich).
  *
- * Usage: npx tsx scripts/update-card-data.ts [--dry-run]
+ * Usage: npx tsx scripts/update-card-data.ts [--dry-run] [--prices-only] [--db <dir>]
  */
 import Database from 'better-sqlite3';
 import fs from 'fs';
@@ -16,12 +16,42 @@ import os from 'os';
 import { pathToFileURL } from 'url';
 import { iterateBulkCards } from '../src/lib/scryfall-bulk';
 
-const DRY_RUN = process.argv.includes('--dry-run');
-const PRICES_ONLY = process.argv.includes('--prices-only');
+const KNOWN_FLAGS = new Set(['--dry-run', '--prices-only', '--db']);
+
+/** Validates argv before any DB is touched. Exits non-zero with usage on an unknown flag. */
+export function parseArgs(argv: string[]): { dryRun: boolean; pricesOnly: boolean; dbDir?: string } {
+  let dbDir: string | undefined;
+  for (let i = 0; i < argv.length; i++) {
+    const arg = argv[i];
+    if (!arg.startsWith('--')) continue;
+    if (arg === '--db') {
+      dbDir = argv[++i];
+      if (!dbDir) {
+        throw new Error('--db requires a directory argument\n\nUsage: npx tsx scripts/update-card-data.ts [--dry-run] [--prices-only] [--db <dir>]');
+      }
+      continue;
+    }
+    if (!KNOWN_FLAGS.has(arg)) {
+      throw new Error(`Unknown flag: ${arg}\n\nUsage: npx tsx scripts/update-card-data.ts [--dry-run] [--prices-only] [--db <dir>]`);
+    }
+  }
+  return { dryRun: argv.includes('--dry-run'), pricesOnly: argv.includes('--prices-only'), dbDir };
+}
+
+let ARGS: { dryRun: boolean; pricesOnly: boolean; dbDir?: string };
+try {
+  ARGS = parseArgs(process.argv.slice(2));
+} catch (err) {
+  console.error((err as Error).message);
+  process.exit(1);
+}
+const DRY_RUN = ARGS.dryRun;
+const PRICES_ONLY = ARGS.pricesOnly;
 
 function resolveDbPath(): string {
-  if (process.env.MTG_DB_DIR) {
-    return path.join(process.env.MTG_DB_DIR, 'mtg-deck-builder.db');
+  const dbDir = ARGS.dbDir ?? process.env.MTG_DB_DIR;
+  if (dbDir) {
+    return path.join(dbDir, 'mtg-deck-builder.db');
   }
   const appData = process.env.APPDATA;
   if (appData) {
@@ -162,10 +192,49 @@ export function finalizeMinPrice(acc: MinPriceAcc): number | null {
   return acc.usd ?? acc.foil ?? acc.etched;
 }
 
+export interface PriceRow {
+  id: string;
+  oracle_id: string;
+  price_usd: string | null;
+}
+
+export interface PriceUpdate {
+  id: string;
+  price: string;
+}
+
+/**
+ * Decides the fresh price_usd for every row, every run:
+ * - the row's OWN printing has a USD price -> take that (always refreshed).
+ * - it doesn't -> take the current lowest price across all printings of the
+ *   same oracle_id (always refreshed — a previously backfilled value is not
+ *   frozen forever, unlike the old `WHERE price_usd IS NULL` guard).
+ * - neither source has a price -> a null never overwrites a known price,
+ *   the row is left untouched.
+ * Rows already at the computed value are skipped (no-op, no updated_at bump).
+ */
+export function computePriceRefresh(
+  rows: PriceRow[],
+  priceByPrintingId: Map<string, number>,
+  minByOracle: Map<string, MinPriceAcc>,
+): PriceUpdate[] {
+  const updates: PriceUpdate[] = [];
+  for (const row of rows) {
+    const ownPrice = priceByPrintingId.get(row.id);
+    const oracleAcc = minByOracle.get(row.oracle_id);
+    const fallback = oracleAcc ? finalizeMinPrice(oracleAcc) : null;
+    const next = ownPrice ?? fallback;
+    if (next == null) continue; // neither source has a price — leave it alone
+    const nextStr = next.toFixed(2);
+    if (row.price_usd === nextStr) continue; // already correct
+    updates.push({ id: row.id, price: nextStr });
+  }
+  return updates;
+}
+
 /**
  * Streams the Scryfall default-cards bulk (every printing, one row each) and
- * backfills price_usd only on rows whose oracle printing had no USD price —
- * COALESCE + `price_usd IS NULL` guard means a known price is never touched.
+ * refreshes every row's price_usd every run via computePriceRefresh().
  * Standalone mode via --prices-only: `npx tsx scripts/update-card-data.ts --prices-only`.
  */
 async function backfillPricesFromDefaultCards(db: Database.Database): Promise<number> {
@@ -186,32 +255,36 @@ async function backfillPricesFromDefaultCards(db: Database.Database): Promise<nu
   if (!bulkRes.ok) throw new Error(`default-cards bulk download failed: ${bulkRes.status}`);
 
   const minByOracle = new Map<string, MinPriceAcc>();
+  const priceByPrintingId = new Map<string, number>();
   let printingsSeen = 0;
   for await (const raw of iterateBulkCards(bulkRes, bulkUrl)) {
-    const card = raw as unknown as { oracle_id: string; prices?: { usd?: string | null; usd_foil?: string | null; usd_etched?: string | null } };
+    const card = raw as unknown as { id: string; oracle_id: string; prices?: { usd?: string | null; usd_foil?: string | null; usd_etched?: string | null } };
     if (!card.oracle_id || !card.prices) continue;
     printingsSeen++;
+    const printingAcc = foldMinPrice(EMPTY_MIN_PRICE_ACC, card.prices);
     minByOracle.set(card.oracle_id, foldMinPrice(minByOracle.get(card.oracle_id) ?? EMPTY_MIN_PRICE_ACC, card.prices));
+    const ownPrice = finalizeMinPrice(printingAcc);
+    if (card.id && ownPrice != null) priceByPrintingId.set(card.id, ownPrice);
   }
   console.log(`      ${printingsSeen} printings across ${minByOracle.size} oracle ids`);
 
-  const backfillStmt = db.prepare(`
-    UPDATE cards SET price_usd = COALESCE(price_usd, @price), updated_at = CURRENT_TIMESTAMP
-    WHERE oracle_id = @oracle_id AND price_usd IS NULL
+  const rows = db.prepare('SELECT id, oracle_id, price_usd FROM cards').all() as PriceRow[];
+  const updates = computePriceRefresh(rows, priceByPrintingId, minByOracle);
+
+  const updateStmt = db.prepare(`
+    UPDATE cards SET price_usd = @price, updated_at = CURRENT_TIMESTAMP WHERE id = @id
   `);
   let gained = 0;
   const runAll = db.transaction(() => {
-    for (const [oracleId, acc] of minByOracle) {
-      const lowest = finalizeMinPrice(acc);
-      if (lowest == null) continue;
+    for (const u of updates) {
       if (!DRY_RUN) {
-        const result = backfillStmt.run({ oracle_id: oracleId, price: lowest.toFixed(2) });
-        gained += result.changes;
+        updateStmt.run(u);
+        gained += 1;
       }
     }
   });
   runAll();
-  console.log(`Prices backfilled: ${gained} rows gained a price_usd from another printing`);
+  console.log(`Prices backfilled: ${gained} rows changed (new backfill or a refreshed lowest-printing price)`);
   return gained;
 }
 
