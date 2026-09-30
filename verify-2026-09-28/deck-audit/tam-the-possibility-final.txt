@@ -1,7 +1,6 @@
 1 Tam, the Possibility
 1 Ajani Resolute
 1 Ajani Unrelenting
-1 Arcane Amphisbaena
 1 Arcane Signet
 1 Archangel of Tithes
 1 Assassin's Trophy
@@ -10,7 +9,6 @@
 1 Bleachbone Verge
 1 Bloom Tender
 1 Breeding Pool
-1 Chandra, Fire Artisan
 1 Chandra, Torch of Defiance
 1 Chimil, the Inner Sun
 1 Cinder Glade
@@ -42,7 +40,6 @@
 1 Isolated Chapel
 1 Jace, Memory Adept
 1 Jace, Reality Sculptor
-1 Jared Carthalion
 1 Kaito, Dancing Shadow
 1 Kaya, Intangible Slayer
 1 Kaya's Ghostform
@@ -60,7 +57,6 @@
 1 Pia, Aether Ascetic
 1 Plains
 1 Professor Dellian Fel
-1 Protege's Awakening
 1 Quintorius Kand
 1 Rootbound Crag
 1 Saheeli, Sublime Artificer
@@ -97,3 +93,7 @@
 1 Way of the Wildspeaker
 1 Woodland Cemetery
 1 Ral Zarek
+1 Tezzeret, Master of the Bridge
+1 Chandra, Awakened Inferno
+1 Nissa, Steward of Elements
+1 Kiora of Salt and Sand
