@@ -254,13 +254,22 @@ export function rankCuts(cards: OptimizerCard[], ctx: OptimizerContext, limit = 
   return sorted.slice(0, limit).map(({ sortName: _drop, ...cut }) => cut);
 }
 
-/** Pair each cut with an unused add of the same category, else the next unused add. */
-export function pairSwaps(cuts: CutSuggestion[], adds: AddLike[]): SwapSuggestion[] {
+/**
+ * Pair each cut with an unused add of the same category, else the next unused
+ * non-land add. A land add only fills the fallback slot when `landsNeeded` is
+ * set (the deck is under its recommended land count) — otherwise a leftover
+ * land add would replace a cut nonland card with a land, distorting the ratios
+ * it was supposed to fix.
+ */
+export function pairSwaps(cuts: CutSuggestion[], adds: AddLike[], opts?: { landsNeeded?: boolean }): SwapSuggestion[] {
   const used = new Set<string>();
   const pick = (predicate: (a: AddLike) => boolean): AddLike | undefined =>
     adds.find((a) => !used.has(a.name) && predicate(a));
   return cuts.map((cut) => {
-    const add = pick((a) => a.category === cut.category) ?? pick((a) => a.category !== 'land');
+    const add =
+      pick((a) => a.category === cut.category) ??
+      pick((a) => a.category !== 'land') ??
+      (opts?.landsNeeded ? pick(() => true) : undefined);
     if (add) used.add(add.name);
     return { cut: cut.name, add: add?.name ?? null, reason: cut.reasons[0] ?? CATEGORY_LABELS[cut.category] };
   });

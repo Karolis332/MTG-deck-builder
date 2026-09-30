@@ -112,8 +112,9 @@ function parseColors(raw: string | null): string[] {
   }
 }
 
+/** Front-face only — an MDFC like `Sorcery // Land` is a land only once its back is turned up. */
 function isLandType(typeLine: string | null | undefined): boolean {
-  return /\bLand\b/.test(typeLine || '');
+  return /\bLand\b/.test((typeLine || '').split(' // ')[0]);
 }
 
 function toCardOut(card: DbCard, quantity: number, category: CardCategory): CardOut {
@@ -341,10 +342,11 @@ interface AddContext {
   owned: Set<string> | null;
   metaRanks: Map<string, number>;
   findCard: CardResolver;
+  lands: LandReport;
 }
 
 function collectAdds(ctx: AddContext): AddOut[] {
-  const { shape, deckColors, owned, metaRanks, findCard } = ctx;
+  const { shape, deckColors, owned, metaRanks, findCard, lands } = ctx;
   // Sideboard names count as "in deck" so a 60-card add never pushes a card past four copies.
   const inDeck = new Set([
     ...shape.main.map((r) => r.card.name.toLowerCase()),
@@ -363,12 +365,23 @@ function collectAdds(ctx: AddContext): AddOut[] {
     if (!isWithinColorIdentity(parseColors(card.color_identity), deckColors)) return;
     seen.add(key);
     const category = getPrimaryCategory(classifyCard(card.name, card.oracle_text || '', card.type_line || '', card.cmc ?? 0, oracle));
-    // Never ship a blank row: the web app renders `reason` verbatim.
-    const why = reason.trim() || `Fills the deck's ${category} slot at ${card.cmc ?? 0} mana`;
+    // Land reasons come from ai-suggest's fixed DEFAULT_LAND_COUNT table, which doesn't
+    // know this deck's actual curve — quote the Karsten target computed for it instead.
+    // Never ship a blank row either way: the web app renders `reason` verbatim.
+    const why =
+      category === 'land'
+        ? `Deck runs ${lands.current} lands; the curve wants ~${lands.recommended} (${lands.formula})`
+        : reason.trim() || `Fills the deck's ${category} slot at ${card.cmc ?? 0} mana`;
     out.push({ ...toCardOut(card, addQty, category), reason: why, score, owned: owned ? owned.has(key) : undefined });
   };
 
-  const deckCards = shape.main.map((r) => ({ ...r.card, quantity: r.quantity, board: r.board }));
+  // Include the commander(s) so the land-fill trigger (`totalMain < targetSize`
+  // in ai-suggest.ts) sees the deck's true size — otherwise it fires forever on
+  // a complete commander deck, since the commander itself isn't a main-deck row.
+  const deckCards = [
+    ...shape.commanders.map((c) => ({ ...c, quantity: 1, board: 'commander' })),
+    ...shape.main.map((r) => ({ ...r.card, quantity: r.quantity, board: r.board })),
+  ];
   for (const s of getRuleBasedSuggestions(deckCards, shape.format)) accept(s.card, s.reason, s.score);
 
   for (const commander of shape.commanders) {
@@ -551,12 +564,24 @@ export function optimizeDeck(parsed: Record<string, unknown>): Record<string, un
   const legality = findLegalityIssues(d.cards, ctx);
   const locks = readLocks(parsed);
   const { cuts, lockedFromCuts } = finishCuts(rankCuts(d.cards, ctx, MAX_CUTS), shape, locks);
-  const adds = collectAdds({ shape, deckColors: d.deckColors, owned: readOwnedNames(parsed), metaRanks: d.metaRanks, findCard });
-  const cutReasonByName = new Map(cuts.map((c) => [c.name, c.reason]));
-  const swaps = pairSwaps(cuts, adds).map((sw) => ({ ...sw, reason: cutReasonByName.get(sw.cut) || sw.reason }));
   const lands = landReport(shape, d.cards, d.avgCmc);
+  const adds = collectAdds({ shape, deckColors: d.deckColors, owned: readOwnedNames(parsed), metaRanks: d.metaRanks, findCard, lands });
+  const cutReasonByName = new Map(cuts.map((c) => [c.name, c.reason]));
+  const swaps = pairSwaps(cuts, adds, { landsNeeded: lands.effective < lands.recommended })
+    .map((sw) => ({ ...sw, reason: cutReasonByName.get(sw.cut) || sw.reason }));
+  // Only a paired swap (cut + add) may change the after-list: an unpaired cut with
+  // nothing to replace it would shrink a fixed-size format below its legal size
+  // (the 2026-09-30 Tam/Brawl incident — 8 land-less cuts shipped a 92-card list).
+  // It still shows up in `cuts` as advice, just never applied.
+  const appliedSwaps = swaps.filter((sw) => sw.add);
   const mana = manaReport(shape, d.deckColors);
   const byName = new Map(d.cards.map((c) => [c.name, c]));
+  const afterList = afterLines(shape, appliedSwaps, cuts);
+  const afterSize = afterList.reduce((s, l) => s + l.quantity, 0);
+  const beforeSize = shape.main.reduce((s, r) => s + r.quantity, 0) + shape.commanders.length;
+  if (afterSize !== beforeSize) {
+    throw new Error(`optimizer size invariant violated: before ${beforeSize} after ${afterSize}`);
+  }
 
   return {
     format,
@@ -581,12 +606,14 @@ export function optimizeDeck(parsed: Record<string, unknown>): Record<string, un
     adds,
     swaps,
     lockedFromCuts,
-    gate: gateDeck(deckText(afterLines(shape, swaps, cuts)), {
+    afterSize,
+    sizeChanged: afterSize !== beforeSize,
+    gate: gateDeck(deckText(afterList), {
       format,
       ownedCards: readOwnedCardNames(parsed),
       locks,
       before: [...shape.commanders.map((c) => c.name), ...shape.main.map((r) => r.card.name)],
-      after: afterLines(shape, swaps, cuts).map((l) => l.name),
+      after: afterList.map((l) => l.name),
     }),
     analysis: d.core?.payload ?? null,
     deckScore: scoreDeckSafely({ format: shape.format, main: shape.main, commander: shape.commanders, sideboard: shape.sideboard }),
