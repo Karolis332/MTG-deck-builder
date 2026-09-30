@@ -486,7 +486,9 @@ export function isBoardWipe(name: string, oracleText: string, opts?: ClassifyOpt
   }
   if (BOARD_WIPE_NAMES.has(lower)) return !NOT_WIPES_STRICT.has(lower);
   const own = ownAbilities(oracleText);
-  if (/choose one —/i.test(own)) return false;
+  // Any modal header ("Choose one —", "Choose two —", "Choose one or both —",
+  // "Choose any number —"): a sweeper MODE is not a sweeper card (P2-G #12).
+  if (/\bchoose (?:one|two|three|four|one or (?:more|both)|any number|up to \w+)\s*—/i.test(own)) return false;
   return matchesPatterns(withoutSlowActivations(own), STRICT_WIPE_PATTERNS);
 }
 
