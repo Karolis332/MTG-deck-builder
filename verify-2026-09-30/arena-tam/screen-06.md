@@ -1,0 +1,66 @@
+screened 903/903, passed 62, last card read: Kuldotha Rebirth
+
+- Codie, Vociferous Codex — ramp/fixing — "{4}, {T}: Add {W}{U}{B}{R}{G}." — beats: a basic land (taps all five of Tam's colors at once)
+- Foot Headquarters — ramp/fixing + lifegain trigger — "When this land enters, you gain 1 life. {T}: Add {W} or {B}." — beats: a basic Plains/Swamp
+- Dimension X — ramp/fixing + lifegain trigger — "When this land enters, you gain 1 life. {T}: Add {R} or {W}." — beats: a basic Mountain/Plains
+- Mutant Town — ramp/fixing + lifegain trigger — "When this land enters, you gain 1 life. {T}: Add {G} or {U}." — beats: a basic Forest/Island
+- Mirrodin's Core — ramp/fixing — "{T}: Add {C}. {T}: Put a charge counter... Remove a charge counter: Add one mana of any color." — beats: a basic land
+- Northampton Farm — ramp/fixing, colorless — "{T}: Add {C}." plus exile/return utility — beats: a basic land (marginal, situational upside)
+- Iron Hills — ramp/fixing — "{T}: Add {R} or {W}." plus late-game counter payoff — beats: a basic Mountain/Plains
+- Transdimensional Bovine — ramp — "{T}: Add two mana of any one color." — beats: a two-colour Signet (produces 2 mana of one color for 3 mana)
+- Supportive Parents — ramp/fixing — "Tap two untapped creatures you control: Add one mana of any color." — beats: a Signet (fixes any color, repeatable)
+- Animal Attendant — ramp/fixing (dork) — "{T}: Add one mana of any color." — beats: a Signet
+- The Lion-Turtle — ramp/fixing + lifegain trigger — "When enters, you gain 3 life... {T}: Add one mana of any color." — beats: a Signet
+- Potioner's Trove — ramp/fixing + conditional lifegain — "{T}: Add one mana of any color. | {T}: You gain 2 life. Activate only if you've cast an instant or sorcery spell this turn." — beats: a Signet
+- Angrath, Captain of Chaos — planeswalker — "Creatures you control have menace. −2: Amass Zombies 2." — beats: a filler creature; adds a new PW type to Tam's X
+- Arlinn, Voice of the Pack — planeswalker — "−2: Create a 2/2 green Wolf creature token." — beats: a filler creature; adds a new PW type
+- Davriel, Rogue Shadowmage — planeswalker — "At the beginning of each opponent's upkeep... Davriel deals 2 damage to them. −1: Target player discards a card." — beats: a filler creature; adds a new PW type
+- Oko, Lorwyn Liege // Oko, Shadowmoor Scion — planeswalker — "+2: Up to one target creature gains all creature types. // −6: Choose a creature type... +3/+3 and hexproof." — beats: a filler creature; another walker for the loyalty engine
+- Spectral Interference — counterspell — "Counter target artifact or creature spell unless its controller pays {4}." — beats: one of the 4 weak interaction cards
+- Wild Unraveling — counterspell — "Counter target spell." — beats: one of the 4 weak interaction cards
+- We Say Thee Nay! — counterspell — "Counter target spell unless its controller pays {2}. ... pays {4} instead if cast using teamwork." — beats: one of the 4 weak interaction cards
+- Brush Off — counterspell — "Counter target spell." (cheap vs instants/sorceries) — beats: one of the 4 weak interaction cards
+- Confusticate and Bebother — counterspell/draw — "Counter target spell unless its controller pays {4}. / Draw two cards, then discard a card." — beats: one of the 4 weak interaction cards
+- Concerted Defense — counterspell — "Counter target noncreature spell unless its controller pays {1} plus..." — beats: filler
+- School Daze — counterspell/draw — "Fight Crime — Counter target spell. Draw a card." — beats: one of the 4 weak interaction cards
+- Scorching Dragonfire — removal — "deals 3 damage to target creature or planeswalker. If it would die, exile it instead." — beats: one of the 4 weak interaction cards
+- Stasis Snare — removal — "Flash. When this enchantment enters, exile target creature an opponent controls..." — beats: one of the 4 weak interaction cards
+- Venom's Hunger — removal + lifegain trigger — "Destroy target creature. You gain 2 life." — beats: one of the 4 weak interaction cards
+- Anoint with Affliction — removal — "Exile target creature if it has mana value 3 or less." — beats: filler
+- Seized from Slumber — removal — "Destroy target creature." (cheap if tapped) — beats: filler
+- Deadly Alliance — removal — "Destroy target creature or planeswalker." — beats: filler removal card
+- Embrace Oblivion — removal — "Destroy target creature or Spacecraft." — beats: filler
+- Unforgiving Aim — removal (modal) — "Destroy target creature with flying. / Destroy target enchantment. / Create a token." — beats: filler
+- Coordinated Maneuver — removal (modal) — "deals damage equal to the number of creatures you control to target creature or planeswalker. / Destroy target enchantment." — beats: filler
+- Molten Exhale — removal — "deals 4 damage to target creature or planeswalker." — beats: filler
+- Fiery Annihilation — removal — "deals 5 damage to target creature... If it would die, exile it instead." — beats: filler
+- Stonesplitter Bolt — removal — "deals X damage to target creature or planeswalker." (scalable) — beats: filler
+- Twin Bolt — removal — "deals 2 damage divided as you choose among one or two targets." — beats: filler
+- Electro's Bolt — removal — "deals 4 damage to target creature." (with mayhem recursion) — beats: filler
+- Reckless Blaze — board wipe sparing walkers — "deals 5 damage to each creature." — beats: a weak finisher/filler (protects own walkers from a stalled board)
+- Desolation of Smaug — board wipe sparing walkers — "deals 3 damage to each non-Dragon creature." — beats: filler
+- Splatter Technique — flex draw/wipe — "Draw four cards. / deals 4 damage to each creature and planeswalker." — beats: filler (draw mode is the main pull; wipe mode hits own walkers, use draw)
+- Arcane Epiphany — card draw — "Draw three cards." (discounted with a Wizard) — beats: filler
+- Cruel Truths — card draw — "Surveil 2, then draw two cards. You lose 2 life." — beats: filler
+- Overflowing Insight — card draw — "Target player draws seven cards." — beats: filler
+- Teachings of the Archaics — card draw — "If an opponent has more cards in hand than you, draw two cards..." — beats: filler
+- Eject — card draw + bounce, can't be countered — "Return target nonland permanent to its owner's hand. Draw a card." — beats: filler
+- Whoosh! — bounce + draw — "Return target nonland permanent to its owner's hand. If kicked, draw a card." — beats: filler
+- Seize the Secrets — card draw — "Draw two cards." (discounted after a crime) — beats: filler
+- Cost of Brilliance — card draw — "Target player draws two cards and loses 2 life. Put a +1/+1 counter on up to one target creature." — beats: filler
+- Spoils of Adventure — card draw + lifegain trigger — "You gain 3 life and draw three cards." — beats: filler
+- Rakshasa's Bargain — card selection/draw — "Look at the top four cards of your library. Put two of them into your hand..." — beats: filler
+- Divergent Equation — instant/sorcery recursion — "Return up to X target instant and/or sorcery cards from your graveyard to your hand." — beats: filler (recurs the counterspells/removal above)
+- Compassionate Healer — repeatable lifegain trigger — "Whenever this creature becomes tapped, you gain 1 life and scry 1." — beats: a weak creature filler
+- Twinblade Paladin — lifegain payoff — "Whenever you gain life, put a +1/+1 counter on this creature." — beats: filler (direct Mentor-style payoff, doubles as evasive threat at 25 life)
+- Vanguard Seraph — lifegain trigger — "Whenever you gain life for the first time each turn, surveil 1." — beats: filler
+- Starlit Soothsayer — lifegain trigger — "At the beginning of your end step, if you gained or lost life this turn, surveil 1." — beats: filler
+- Moonrise Cleric — repeatable lifegain — "Whenever this creature attacks, you gain 1 life." — beats: filler
+- Leonin Vanguard — lifegain trigger — "if you control three or more creatures, this creature gets +1/+1... and you gain 1 life." — beats: filler
+- Katara, Heroic Healer — lifegain + counters payoff — "Lifelink. When Katara enters, put a +1/+1 counter on each other creature you control." — beats: filler
+- Felidar Savior — lifelink + counters — "Lifelink. When enters, put a +1/+1 counter on each of up to two other target creatures." — beats: filler
+- Seraphic Steed — lifelink threat — "First strike, lifelink. Whenever attacks while saddled, create a 3/3 flying Angel token." — beats: filler
+- Shopkeeper's Bane — repeatable lifegain — "Trample. Whenever this creature attacks, you gain 2 life." — beats: filler
+- Essence of Antiquity — protection — "When this creature is turned face up, creatures you control gain hexproof until end of turn. Untap them." — beats: filler (one-shot protection for the board, including walkers indirectly by tempo)
+- Chase Inspiration — protection (creature-only, cheap) — "Target creature you control gets +0/+3 and gains hexproof until end of turn." — beats: filler (protects Tam himself from removal at instant speed)
+</content>

@@ -1,0 +1,43 @@
+screened 155/155, passed 39, last card read: Wish Good Luck
+
+- Screeching Soulbreaker — life-gain trigger — "Whenever this creature attacks, it deals 1 damage to each opponent and you gain 1 life." — beats: a basic/filler creature
+- Extended Absence — removal + life-gain — "Exile target creature or planeswalker. Extended Absence deals 1 damage to each opponent and you gain 1 life." — beats: one of the 4 weak interaction cards
+- Medic's Kitesail — life-gain trigger (equipment) — "Equipped creature gets +1/+0 and has flying and 'Whenever this creature attacks, you gain 1 life.'" — beats: a two-colour Signet
+- Apex Witchstalker — life-gain trigger + fixing — "When this creature enters or dies, you gain 2 life. Basic landcycling {2}" — beats: a basic
+- Spiritual Guardian — life-gain burst — "When this creature enters, you gain 4 life." — beats: a basic/filler creature
+- Blessed Ghoul — repeatable life-gain — "Lifelink | {2}{W/B}: Return this card from your graveyard to your hand." — beats: a basic/filler creature
+- Warrior's Blades — life-gain burst (equipment) — "When this Equipment enters, it deals 3 damage to any target and you gain 3 life." — beats: a two-colour Signet
+- Terminal Criticism — removal + life-gain — "Destroy target creature or planeswalker that's blue or red. You gain 1 life." — beats: one of the 4 weak interaction cards
+- Sanguine Soothsayer — life-gain + draw engine — "Flying, lifelink | Whenever this creature attacks, conjure a card named Sanguine Bond ... 'When this permanent enters, draw a card.'" — beats: a basic/filler creature
+- Golden Sidekick — life-gain source (repeatable) — "Flying, lifelink | Whenever you gain life, a random creature card in your hand perpetually gets +X/+X" — beats: a basic/filler creature
+- Impose Hierarchy — removal + life-gain — "Destroy target creature with mana value 4 or less. You gain 1 life for each creature card in its controller's hand." — beats: one of the 4 weak interaction cards
+- Lonely End — flexible removal + conditional life-gain — "Target creature gets -3/-3... Remove three loyalty counters from target planeswalker... If you weren't the starting player, you gain 3 life." — beats: one of the 4 weak interaction cards
+- Speedbrood Stalker — life-gain + edict removal — "Flying, Lifelink | ... That player sacrifices a creature or planeswalker of their choice, then sacrifices the chosen permanent." — beats: a basic/filler creature
+- Teyo, Diamondblade Mage — direct walker support — "When Teyo enters, target permanent you control gains deathtouch... Put a loyalty counter on it if it's a planeswalker." — beats: a two-colour Signet
+- Room of Refuge — fixing land, beats a basic — "As it enters, choose a color. {T}: Add one mana of the chosen color." — beats: a basic
+- Gate of the Black Dragon — fixing land, beats a basic — "({T}: Add {B}.) ... {3}{B}, {T}: Seek a nonland card. Activate only once." — beats: a basic
+- Gate to Manorborn — fixing land, beats a basic — "({T}: Add {G}.) ... {3}{G}, {T}: Seek a nonland card. Activate only once." — beats: a basic
+- Gate to Seatower — fixing land, beats a basic — "({T}: Add {U}.) ... {3}{U}, {T}: Seek a nonland card. Activate only once." — beats: a basic
+- Gate to Tumbledown — fixing land, beats a basic — "({T}: Add {R}.) ... {3}{R}, {T}: Seek a nonland card. Activate only once." — beats: a basic
+- Gate to the Citadel — fixing land, beats a basic — "({T}: Add {W}.) ... {3}{W}, {T}: Seek a nonland card. Activate only once." — beats: a basic
+- Fuel Tank Feaster — 5-colour fixing dork — "{T}: Add one mana of any color." — beats: a two-colour Signet
+- Traverse Valley — fixing tutor — "Kicker—Forage. Seek a nonbasic land card. If this spell was kicked, put that card onto the battlefield tapped." — beats: a basic
+- Golos, Tireless Pilgrim — fixing/tutor + card advantage — "When Golos enters... search your library for a land card, put that card onto the battlefield tapped... {2}{W}{U}{B}{R}{G}: Exile the top three cards of your library. You may play them this turn." — beats: a two-colour Signet
+- Silence the Echo — removal — "Destroy target creature or planeswalker." (sac a creature/planeswalker or pay {3}) — beats: one of the 4 weak interaction cards
+- Wrath of the Bloodmane — removal — "Wrath of the Bloodmane deals 4 damage to target creature or planeswalker." — beats: one of the 4 weak interaction cards
+- Essence Burn — removal — "Essence Burn deals 5 damage to target black or green creature or planeswalker. If that permanent would die this turn, exile it instead." — beats: one of the 4 weak interaction cards
+- Awaken the Inferno — removal + fixing — "Awaken the Inferno deals 6 damage to target creature or planeswalker an opponent controls... Basic landcycling {2}" — beats: one of the 4 weak interaction cards
+- Icy Reception — flexible counterspell/removal — "Counter target creature or legendary spell unless its controller pays {3}. | Target creature gets -5/-0 until end of turn." — beats: one of the 4 weak interaction cards
+- Clash of Elements — removal/tempo — "Choose target nonland permanent. Its owner may put it on top of their library. If they do, Clash of Elements deals 2 damage to them." — beats: a basic/filler creature
+- Unforgiving Overtake — removal — "If you weren't the starting player, this spell costs {1} less to cast. Destroy target creature or Vehicle. Its controller loses 2 life." — beats: one of the 4 weak interaction cards
+- Cruel Cut — cheap removal — "Destroy target creature with power 2 or less." — beats: a basic/filler creature
+- Territorial Strike — removal (hits planeswalkers) — "Destroy target nonland permanent. If a Dragon creature was beheld, it perpetually gets +2/+2." — beats: one of the 4 weak interaction cards
+- Housemeld — removal + steal — "Exile target creature. The exiled card perpetually becomes an enchantment... put it onto the battlefield under your control." — beats: one of the 4 weak interaction cards
+- Sylvan Smite — fight removal — "Put a +1/+1 counter on target creature you control if you weren't the starting player. Then that creature deals damage equal to its power to target creature you don't control." — beats: a basic/filler creature
+- Song of Point Prime — edict removal — "Each opponent sacrifices a creature of their choice. Conjure a card named Cantor of the Refrain into your graveyard." — beats: a basic/filler creature
+- Mabel, Bitter Recluse — counter-strip removal — "When Mabel enters, remove up to three counters from another target creature or planeswalker." — beats: a basic/filler creature
+- Living Library — removal (bounce to library) — "{6}, Sacrifice this creature: Choose target creature or planeswalker an opponent controls. Its owner shuffles it into their library." — beats: a basic/filler creature
+- Machinist's Dismissal — counterspell — "This spell costs {1} less to cast for each artifact you control and each artifact card in your hand. Counter target noncreature spell." — beats: a basic/filler creature
+- Piece It Together — draw engine / alt win con — "Draw a card. If Piece It Together's intensity is 4, instead take an extra turn after this one." — beats: a basic/filler creature
+- Vhal, Eager Scholar — draw/loot engine — "{T}: Draw a card, then discard a card. Put a study counter on Vhal, Eager Scholar." — beats: a basic/filler creature
+- Swiftspear's Teachings — cheap draw — "You get a one-time boon... Draw a card." — beats: a basic/filler creature

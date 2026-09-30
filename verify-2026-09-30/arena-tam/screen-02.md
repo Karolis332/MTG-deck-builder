@@ -1,0 +1,149 @@
+screened 900/900, passed 132, last card read: Capital City
+
+- Nissa, Who Shakes the World — planeswalker — "Whenever you tap a Forest for mana, add an additional {G}. | +1: ... It becomes a 0/0 Elemental ... | −8: emblem" — beats: basic Forest
+- Kiora, Behemoth Beckoner — planeswalker — "Whenever a creature you control with power 4 or greater enters, draw a card. | −1: Untap target permanent." — beats: weakest walker slot
+- Ashiok, Dream Render — planeswalker — "Spells and abilities your opponents control can't cause their controller to search their library. | −1: ... mills four ... exile each opponent's graveyard." — beats: weakest walker slot
+- Ral, Monsoon Mage // Ral, Leyline Prodigy — planeswalker (transforms) — "Ral enters with an additional loyalty counter ... +1: ... cost {1} less. | −2: Ral deals 2 damage ... | −8: ..." — beats: weakest walker slot
+
+- Metastatic Evangel — proliferate — "Whenever another nontoken creature you control enters, proliferate." — beats: filler creature slot
+- Unnatural Restoration — proliferate — "Return target permanent card from your graveyard to your hand. Proliferate." — beats: filler
+- Grateful Apparition — proliferate — "Whenever this creature deals combat damage to a player or planeswalker, proliferate." — beats: filler
+- Contentious Plan — proliferate + draw — "Proliferate. ... | Draw a card." — beats: filler cantrip
+- Thirsting Roots — proliferate/ramp — "Search your library for a basic land card ... | • Proliferate." — beats: basic land tutor slot
+- Loading Zone — loyalty doubling — "If one or more counters would be put on a creature, Spacecraft, or Planet you control, twice that many ... are put on it instead." — beats: filler enchantment (note: only creature/Spacecraft/Planet, not planeswalkers directly — verify scope before inclusion)
+
+- Ajani's Pridemate — lifegain payoff — "Whenever you gain life, put a +1/+1 counter on this creature." — beats: filler creature (synergizes directly with Way of the Paradox/Mentor lifegain triggers)
+- Dina, Soul Steeper — lifegain payoff — "Whenever you gain life, each opponent loses 1 life." — beats: filler creature
+- Angel of Vitality — lifegain payoff — "If you would gain life, you gain that much life plus 1 instead." — beats: filler creature
+- Haliya, Guided by Light — lifegain + draw — "Whenever Haliya or another creature or artifact you control enters, you gain 1 life. | ... draw a card if you've gained 3 or more life this turn." — beats: filler creature
+- Inspiring Overseer — lifegain + draw — "When this creature enters, you gain 1 life and draw a card." — beats: filler creature
+- Cloudblazer — lifegain + draw — "When this creature enters, you gain 2 life and draw two cards." — beats: filler creature
+- Circuit Mender — lifegain + draw on death — "When this creature enters, you gain 2 life. | When this creature leaves the battlefield, draw a card." — beats: filler creature
+- Hinterland Sanctifier — minor lifegain — "Whenever another creature you control enters, you gain 1 life." — beats: filler creature (marginal)
+- Virulent Emissary — minor lifegain — "Whenever another creature you control enters, you gain 1 life." (deathtouch) — beats: filler creature (marginal)
+
+- Silkguard — protection — "Auras, Equipment, and modified creatures you control gain hexproof until end of turn." — beats: weak interaction slot
+- Overprotect — protection — "Target creature you control gets +3/+3 and gains trample, hexproof, and indestructible until end of turn." — beats: weak interaction slot
+- Blossoming Defense — protection — "Target creature you control gets +2/+2 and gains hexproof until end of turn." — beats: weak interaction slot
+- Privileged Position — protection (mass) — "Other permanents you control have hexproof." — beats: weak interaction slot (strong — protects every walker/Way at once)
+- Surge of Salvation — protection — "You and permanents you control gain hexproof until end of turn. Prevent all damage that black and/or red sources would deal to creatures you control this turn." — beats: weak interaction slot
+- Strength of Will — protection — "target creature you control gains indestructible and 'Whenever this creature is dealt damage, put that many +1/+1 counters on it.'" — beats: weak interaction slot
+- Royal Treatment — protection — "Target creature you control gains hexproof until end of turn. Create a Royal Role token..." — beats: weak interaction slot
+- Magic Damper — protection — "Target creature you control gets +1/+1 and gains hexproof until end of turn. Untap it." — beats: weak interaction slot
+- Take Up the Shield — protection — "Put a +1/+1 counter on target creature. It gains lifelink and indestructible until end of turn." — beats: weak interaction slot (also a lifegain source)
+- Defend the Rider — protection — "Target permanent you control gains hexproof and indestructible until end of turn." — beats: weak interaction slot
+- Octopus Form — protection — "Target creature you control gets +1/+1 and gains hexproof until end of turn. Untap it." — beats: weak interaction slot
+- Celestial Armor — protection — "attach it to target creature you control. That creature gains hexproof and indestructible until end of turn." — beats: weak interaction slot
+- Spectacular Spider-Man — protection — "Sacrifice Spectacular Spider-Man: Creatures you control gain hexproof and indestructible until end of turn." — beats: filler creature
+- Gold-Forged Thopteryx — protection — "Each legendary permanent you control has ward {2}." — beats: filler creature (deck is legendary-heavy)
+
+- Hero's Downfall — removal — "Destroy target creature or planeswalker." — beats: weak interaction slot (only 4 interaction cards currently)
+- Fell — removal — "Destroy target creature." — beats: weak interaction slot
+- Shock — removal — "Shock deals 2 damage to any target." — beats: weak interaction slot
+- Lightning Strike — removal — "Lightning Strike deals 3 damage to any target." — beats: weak interaction slot
+- Fire Covenant — removal — "Fire Covenant deals X damage divided as you choose among any number of target creatures." — beats: weak interaction slot
+- Bite Down — removal — "Target creature you control deals damage equal to its power to target creature or planeswalker you don't control." — beats: weak interaction slot
+- Banishing Light — removal — "exile target nonland permanent an opponent controls until this enchantment leaves the battlefield." — beats: weak interaction slot
+- Crib Swap — removal — "Exile target creature. Its controller creates a 1/1 colorless Shapeshifter creature token with changeling." — beats: weak interaction slot
+- Touch the Spirit Realm — removal — "exile up to one target artifact or creature until this enchantment leaves the battlefield." — beats: weak interaction slot
+- Nowhere to Run — removal — "target creature an opponent controls gets -3/-3 until end of turn. Creatures your opponents control can be the targets of spells and abilities as though they didn't have hexproof." — beats: weak interaction slot
+- Eaten Alive — removal — "Exile target creature or planeswalker." — beats: weak interaction slot
+- Cornered by Black Mages — removal — "Target opponent sacrifices a creature of their choice." — beats: weak interaction slot
+- Mortality Spear — removal — "This spell costs {2} less to cast if you gained life this turn. | Destroy target nonland permanent." — beats: weak interaction slot (cheap with the lifegain engine)
+- Overkill — removal — "Target creature gets -0/-9999 until end of turn." — beats: weak interaction slot
+- Planar Incision — removal/blink — "Exile target artifact or creature, then return it to the battlefield under its owner's control with a +1/+1 counter on it." — beats: weak interaction slot
+- Simic Charm — removal/protection — "• Return target creature to its owner's hand." (modal) — beats: weak interaction slot
+- Izzet Charm — removal/draw/counter (modal) — "• Izzet Charm deals 2 damage to target creature. | • Draw two cards, then discard two cards." — beats: weak interaction slot
+- Pick Your Poison — removal (modal edict) — "Each opponent sacrifices an artifact/enchantment/flyer of their choice." — beats: weak interaction slot
+- Acidic Slime — removal — "When this creature enters, destroy target artifact, enchantment, or land." — beats: filler creature
+- Fiery Confluence — removal (modal, up to board wipe) — "• deals 1 damage to each creature. | • deals 2 damage to each opponent. | • Destroy target artifact." — beats: weak interaction slot
+- Day of Judgment — board wipe — "Destroy all creatures." — beats: weak interaction slot (spares nothing but no creature theme to protect)
+- Black Sun's Zenith — board wipe — "Put X -1/-1 counters on each creature." — beats: weak interaction slot
+- Singularity Rupture — board wipe + mill — "Destroy all creatures, then ... mill half their library." — beats: weak interaction slot
+- Settle the Wreckage — removal (mass) — "Exile all attacking creatures target player controls." — beats: weak interaction slot
+- Broken Bond — removal — "Destroy target artifact or enchantment. You may put a land card from your hand onto the battlefield." — beats: weak interaction slot
+
+- Disdainful Stroke — counterspell — "Counter target spell with mana value 4 or greater." — beats: weak interaction slot
+- Essence Scatter — counterspell — "Counter target creature spell." — beats: weak interaction slot
+- Miscast — counterspell — "Counter target instant or sorcery spell unless its controller pays {3}." — beats: weak interaction slot
+- Daze — counterspell — "You may return an Island you control to its owner's hand rather than pay this spell's mana cost. | Counter target spell unless its controller pays {1}." — beats: weak interaction slot
+- Spider-Sense — counterspell — "Counter target instant spell, sorcery spell, or triggered ability." — beats: weak interaction slot
+- Repulsive Mutation — counter + pump — "counter up to one target spell unless its controller pays mana equal to the greatest power among creatures you control." — beats: weak interaction slot
+- Mana Sculpt — counterspell — "Counter target spell." — beats: weak interaction slot
+- Decisive Denial — modal counter/fight — "• Counter target noncreature spell unless its controller pays {3}." — beats: weak interaction slot
+
+- Final Parting — tutor — "Search your library for two cards. Put one into your hand and the other into your graveyard." — beats: weak tutor slot
+- Emeritus of Woe // Demonic Tutor — tutor — "Search your library for a card, put that card into your hand, then shuffle." — beats: weak tutor slot
+
+- Think Twice — draw — "Draw a card. | Flashback {2}{U}" — beats: filler cantrip
+- Quick Study — draw — "Draw two cards." — beats: filler cantrip
+- Coastal Piracy — draw engine — "Whenever a creature you control deals combat damage to an opponent, you may draw a card." — beats: filler enchantment
+- Proft's Eidetic Memory — draw — "When Proft's Eidetic Memory enters, draw a card. | You have no maximum hand size." — beats: filler enchantment
+- Kozilek's Command — modal draw/removal — "• Target player scries X, then draws a card. | • Exile target creature with mana value X or less." — beats: weak interaction slot
+- Marang River Regent // Coil and Catch — draw + bounce — "Draw three cards, then discard a card." — beats: filler creature
+- Winged Words — draw — "This spell costs {1} less to cast if you control a creature with flying. | Draw two cards." — beats: filler cantrip
+- Abandon Attachments — draw — "You may discard a card. If you do, draw two cards." — beats: filler cantrip
+- Spirit Water Revival — draw — "Draw two cards. If this spell's additional cost was paid, instead ... draw seven cards, and you have no maximum hand size..." — beats: filler cantrip
+- Eureka Moment — draw + ramp — "Draw two cards. You may put a land card from your hand onto the battlefield." — beats: filler cantrip
+- Overlord of the Floodpits — flexible draw creature — "draw two cards, then discard a card." — beats: filler creature
+- Hydroid Krasis — draw + lifegain + fixing (G/U) — "When you cast this spell, you gain half X life and draw half X cards." — beats: filler creature (also a lifegain source for the Mentor engine)
+
+- Kenrith, the Returned King — modal value (5c) — "{2}{W}: Target player gains 5 life. | {3}{U}: Target player draws a card. | {4}{B}: Put target creature card from a graveyard onto the battlefield..." — beats: filler 5c creature (repeatable lifegain feeds Way of the Mentor)
+- Ramos, Dragon Engine — 5c ramp — "Remove five +1/+1 counters from Ramos: Add {W}{W}{U}{U}{B}{B}{R}{R}{G}{G}." — beats: filler ramp (huge for Tam's WUBRG activation)
+
+Lands / fixing / ramp (deck runs 20 basics + only 7 two-color Signets; any land tapping 2+ of Tam's colors, or any fixing rock/dork, beats a basic):
+- Timeless Lotus — ritual (5c) — "{T}: Add {W}{U}{B}{R}{G}." — beats: basic land (feeds Tam's activation directly)
+- Replicating Ring — fixing rock (any color) — "{T}: Add one mana of any color." — beats: a Signet
+- Leyline of the Guildpact — 5c fixing — "Each nonland permanent you control is all colors. | Lands you control are every basic land type..." — beats: basic land
+- Great Hall of the Citadel — legendary-spell fixing — "{1}, {T}: Add two mana in any combination of colors. Spend this mana only to cast legendary spells." — beats: basic land (deck is legendary-dense)
+- Baldur's Gate — scaling fixing (unconditional) — "{2}, {T}: Add X mana of any one color, where X is the number of other Gates you control." — beats: basic land
+- Paradise Druid — fixing dork — "{T}: Add one mana of any color." (hexproof while untapped) — beats: a Signet
+- Coldsteel Heart — fixing rock — "As this artifact enters, choose a color. | {T}: Add one mana of the chosen color." — beats: basic land
+- Firdoch Core — fixing rock — "{T}: Add one mana of any color." — beats: a Signet
+- Nissa, Resurgent Animist — landfall fixing — "Whenever a land you control enters, add one mana of any color." — beats: a Signet
+- Great Divide Guide — mass fixing — "Each land and Ally you control has '{T}: Add one mana of any color.'" — beats: basic land (turns every basic into a 5c source)
+- Outcaster Trailblazer — fixing + draw — "When this creature enters, add one mana of any color. | Whenever another creature you control with power 4 or greater enters, draw a card." — beats: a Signet
+- Ilysian Caryatid — fixing dork — "{T}: Add one mana of any color." — beats: a Signet
+- Multiversal Passage — fixing land — "choose a basic land type. Then you may pay 2 life. If you don't, it enters tapped. | This land is the chosen type." — beats: basic land
+- Command Bridge — fixing land — "{T}: Add one mana of any color." — beats: basic land
+- Gateway Plaza — fixing land — "{T}: Add one mana of any color." — beats: basic land
+- Conduit Pylons — fixing land — "{1}, {T}: Add one mana of any color." — beats: basic land
+- Rumble Arena — fixing land — "{1}, {T}: Add one mana of any color." — beats: basic land
+- Dragonstorm Globe — fixing rock — "{T}: Add one mana of any color." — beats: a Signet
+- Capital City — fixing land — "{1}, {T}: Add one mana of any color." — beats: basic land
+- Vibrant Cityscape — basic fetch — "Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped." — beats: basic land
+- Studious First-Year // Rampant Growth — fixing — "Search your library for a basic land card, put that card onto the battlefield tapped." — beats: basic land
+- Grow from the Ashes — fixing — "Search your library for a basic land card, put it onto the battlefield ... If kicked, instead search for two." — beats: basic land
+- Circuitous Route — fixing (2 lands) — "Search your library for up to two basic land cards and/or Gate cards, put them onto the battlefield tapped." — beats: basic land
+- Map the Frontier — fixing (2 lands) — "Search your library for up to two basic land cards and/or Desert cards, put them onto the battlefield tapped." — beats: basic land
+- Planar Engineering — fixing (4 lands) — "Sacrifice two lands. Search your library for four basic land cards, put them onto the battlefield tapped." — beats: basic land
+- Encroaching Dragonstorm — fixing (2 lands) — "search your library for up to two basic land cards, put them onto the battlefield tapped." — beats: basic land
+- The Earth King — landfall fixing — "search your library for up to that many basic land cards, put them onto the battlefield tapped." — beats: filler creature
+- The Legend of Kyoshi // Avatar Kyoshi — huge fixing land — "{T}: Add X mana of any one color, where X is the greatest power among creatures you control." — beats: basic land
+- Heaped Harvest — fixing food — "you may search your library for a basic land card, put it onto the battlefield tapped." — beats: basic land
+- Invasion of Zendikar // Awakened Skyclave — fixing + land creature — "{T}: Add one mana of any color." — beats: basic land
+
+Two-color gate/dual lands filling colour pairs the deck's Signets and Commons cycle miss (Orzhov, Dimir, Selesnya not covered by the 7 owned Signets):
+- Orzhov Guildgate — fixing land (W/B) — "{T}: Add {W} or {B}." — beats: basic land
+- Dimir Guildgate — fixing land (U/B) — "{T}: Add {U} or {B}." — beats: basic land
+- Selesnya Guildgate — fixing land (G/W) — "{T}: Add {G} or {W}." — beats: basic land
+- Radiant Grove — fixing land (G/W) — "({T}: Add {G} or {W}.)" — beats: basic land
+- Simic Guildgate — fixing land (G/U) — "{T}: Add {G} or {U}." — beats: basic land
+- Golgari Guildgate — fixing land (B/G) — "{T}: Add {B} or {G}." — beats: basic land
+- Spirebluff Canal — fixing land (U/R) — "{T}: Add {U} or {R}." (enters untapped early) — beats: basic land
+- Izzet Guildgate — fixing land (U/R) — "{T}: Add {U} or {R}." — beats: basic land
+- Rakdos Guildgate — fixing land (B/R) — "{T}: Add {B} or {R}." — beats: basic land
+- Gruul Guildgate — fixing land (R/G) — "{T}: Add {R} or {G}." — beats: basic land
+- Boros Guildgate — fixing land (R/W) — "{T}: Add {R} or {W}." — beats: basic land
+- Tangled Islet — fixing land (G/U) — "({T}: Add {G} or {U}.)" — beats: basic land
+- Rugged Highlands — fixing land (R/G) + lifegain — "When this land enters, you gain 1 life. | {T}: Add {R} or {G}." — beats: basic land (also a lifegain trigger)
+- Twisted Landscape — fixing (B/R/G) — "Search your library for a basic Swamp, Mountain, or Forest card... | Cycling {B}{R}{G}" — beats: basic land
+- Shattered Landscape — fixing (R/W/B) — "Search your library for a basic Mountain, Plains, or Swamp card... | Cycling {R}{W}{B}" — beats: basic land
+- Sheltering Landscape — fixing (R/G/W) — "Search your library for a basic Mountain, Forest, or Plains card... | Cycling {R}{G}{W}" — beats: basic land
+- Bountiful Landscape — fixing (G/U/R) — "Search your library for a basic Forest, Island, or Mountain card... | Cycling {G}{U}{R}" — beats: basic land
+- Abraded Bluffs — fixing land (R/W) — "it deals 1 damage to target opponent. | {T}: Add {R} or {W}." — beats: basic land
+- Bristling Backwoods — fixing land (R/G) — "it deals 1 damage to target opponent. | {T}: Add {R} or {G}." — beats: basic land
+- Restless Cottage — fixing land (B/G) — "{T}: Add {B} or {G}." — beats: basic land
+- Waterlogged Teachings // Inundated Archive — fixing (U/B) + tutor — "{T}: Add {U} or {B}." — beats: basic land
+- Ojer Axonil, Deepest Might // Temple of Power — fixing land (R, transforms from a creature) — "{T}: Add {R}." — beats: basic land (marginal, single color but comes with a creature half)
+- Oscorp Industries — fixing land (U/B/R) — "{T}: Add {U}, {B}, or {R}." — beats: basic land

@@ -1,0 +1,45 @@
+screened 450/450, passed 43, last card read: Hunter's Axe
+
+- Essence Extraction — removal / lifegain trigger — "Essence Extraction deals 3 damage to target creature and you gain 3 life." — beats: Erode
+- Rime Chill — removal (tempo) + draw, colour-tax fits 5c — "Tap up to two target creatures. Put a stun counter on each of them. ... Draw a card." — beats: Erode
+- Quicksand Whirlpool — removal — "Exile target creature." — beats: Erode
+- Waterknot — removal — "Enchanted creature doesn't untap during its controller's untap step." — beats: Erode
+- Inescapable Blaze — removal, uncounterable reach — "This spell can't be countered. | ... deals 6 damage to any target." — beats: Shatterskull Smashing
+- Ray of Ruin — removal — "Exile target creature, Vehicle, or nonbasic land." — beats: Erode
+- Wilt in the Heat — removal — "Wilt in the Heat deals 5 damage to target creature. If that creature would die this turn, exile it instead." — beats: Erode
+- Fiery Intervention — modal removal — "• Fiery Intervention deals 5 damage to target creature. | • Destroy target artifact." — beats: Shatterskull Smashing
+- Mage Hunters' Onslaught — removal, hits planeswalkers too — "Destroy target creature or planeswalker." — beats: Erode
+- Push // Pull — removal + reanimation upside — "Destroy target tapped creature." — beats: Erode
+- Marvelous Melee — removal — "Marvelous Melee deals 6 damage to target creature." — beats: Shatterskull Smashing
+- Stingerquill Charm — modal removal/utility — "• Stingerquill Charm deals 3 damage to any target." — beats: Erode
+- Code of Constraint — tempo removal + draw — "Target creature gets -4/-0 until end of turn. | Draw a card." — beats: Erode
+- Rise of the Deathbringer — board wipe that spares planeswalkers, or draw — "• All creatures get -3/-3 until end of turn." — beats: Overwrite the Multiverse
+- Rise of Extus — removal + card selection — "Exile target creature. Exile up to one target instant or sorcery card from a graveyard. | Learn." — beats: Erode
+- Surgical Precision — modal removal/draw+lifegain — "• Destroy target creature with toughness 4 or greater. You gain 1 life. | • You draw a card and gain 2 life." — beats: Erode
+- Compel Brutality — planeswalker-loyalty-powered removal — "Target planeswalker you control deals damage equal to its loyalty to target creature or planeswalker an opponent controls." — beats: Erode
+- Truck Toss — removal/reach — "Truck Toss deals 4 damage to any target." — beats: Shatterskull Smashing
+- Sphinx's Approach — draw — "Draw two cards." — beats: fills a role the deck lacks (draw)
+- Didact Echo — draw on a body — "When this creature enters, draw a card." — beats: fills a role the deck lacks (draw)
+- Artifist Acumen — cheap draw — "Creatures you control gain first strike until end of turn. | Draw a card." — beats: fills a role the deck lacks (draw)
+- Primordial Pachyderm — lifegain trigger on a good body — "When this creature enters, you gain 2 life." — beats: fills a role the deck lacks (lifegain triggers)
+- Hill Giant Herdgorger — lifegain trigger — "When this creature enters, you gain 3 life." — beats: fills a role the deck lacks (lifegain triggers)
+- Koala-Sheep — cheap lifegain trigger — "When this creature enters, you gain 3 life." — beats: fills a role the deck lacks (lifegain triggers)
+- Cram Session — cheap lifegain trigger + card selection — "You gain 4 life. | Learn." — beats: fills a role the deck lacks (lifegain triggers)
+- Greenhouse Propagator — repeatable lifegain engine + mana dork — "Whenever another creature you control enters, you gain 1 life. | {T}: Add {G}." — beats: fills a role the deck lacks (lifegain triggers)
+- Springmane Cervin — cheap lifegain trigger — "When this creature enters, you gain 2 life." — beats: fills a role the deck lacks (lifegain triggers)
+- Emergency Phytomedic // Seed Suture — cheap lifegain + counter, 2-for-1 — "Put a +1/+1 counter on target creature. You gain 1 life." — beats: fills a role the deck lacks (lifegain triggers)
+- Blossom-Blessed Angel // Seed Suture — flyer body + lifegain adventure — "Put a +1/+1 counter on target creature. You gain 1 life." — beats: fills a role the deck lacks (lifegain triggers)
+- Rusko, Clockmaker — repeatable drain/lifegain engine — "Each opponent loses 1 life and you gain 1 life." — beats: fills a role the deck lacks (lifegain triggers)
+- Bloombrute — draw payoff fueled by the Mentor lifegain triggers — "Whenever you gain life, draw a card. This ability triggers only once each turn." — beats: fills a role the deck lacks (draw)
+- Titanbones, Towering Heart — lifegain payoff / threat — "Whenever you gain life, put two +1/+1 counters on Titanbones." — beats: fills a role the deck lacks (win conditions)
+- Teyo, Lightshield Expert — flash protection, explicitly protects a planeswalker — "target permanent you control gains hexproof until end of turn. ... Put a loyalty counter on it if it's a planeswalker." — beats: fills a role the deck lacks (protection)
+- Murmuring Volume — 5-color fixing rock + filtering — "{T}: Add one mana of any color. | {2}, {T}, Discard a card: Draw a card." — beats: Azorius Signet
+- Loot, the Nexus — any-color mana dork — "{T}: Choose a color. Add one mana of that color for each different power among creatures you control." — beats: Azorius Signet
+- Mindseeker Oculus — direct Jace/loyalty engine redundancy — "When this creature enters, empower Jace 4." — beats: fills a role the deck lacks (engine redundancy)
+- Academic Ascent — empower Jace 2 + combat trick — "Target creature gets +2/+2 and gains flying until end of turn. | Empower Jace 2." — beats: fills a role the deck lacks (engine redundancy)
+- Solve for Disappointment — empower Jace 1 + edict-style disruption — "That player discards that card. | Empower Jace 1." — beats: Erode
+- Inspired Tethermage — grows off loyalty counters, can empower Jace — "Whenever you put one or more loyalty counters on a planeswalker, put a +1/+1 counter on this creature." — beats: fills a role the deck lacks (engine payoff)
+- Sphinx of the Guildpact — evasive, hard-to-remove finisher — "Sphinx of the Guildpact is all colors. | Flying | Hexproof from monocolored." — beats: fills a role the deck lacks (win conditions)
+- Face Yourself — copies the board, safe in a deck that's rarely without a Jace token — "sacrifice this creature" (only if you don't control a planeswalker) — beats: fills a role the deck lacks (win conditions)
+- Lotus-Eye Mystics — enchantment recursion (Ways are enchantments) — "When this creature enters, return target enchantment card from your graveyard to your hand." — beats: fills a role the deck lacks (tutors/recursion for enchantments)
+- Case File Auditor — digs for an enchantment — "look at the top six cards of your library. You may reveal an enchantment card from among them and put it into your hand." — beats: fills a role the deck lacks (tutors for enchantments)

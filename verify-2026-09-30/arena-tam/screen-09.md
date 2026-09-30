@@ -1,0 +1,27 @@
+screened 450/450, passed 25, last card read: Borough Backup
+
+- Kaya, Bane of the Dead — planeswalker — "Your opponents and permanents your opponents control with hexproof can be the targets of spells and abilities you control as though they didn't have hexproof. | −3: Exile target creature." — beats: fills the planeswalker-type-density role (any new PW type raises Tam's proliferate X)
+- Sound the Trumpets — counterspell — "Counter target spell. If that spell's mana value was 2 or less, recruit." — beats: Countersculpt (the deck's only other counterspell)
+- Flashfreeze — counterspell — "Counter target red or green spell." — beats: fills the near-empty counterspell role
+- Grounded for Life — removal — "This spell costs {3} less to cast if it targets a tapped creature. | Destroy target creature." — beats: weakest of the 4 interaction cards
+- Hour of Defeat — removal — "Destroy target creature. Surveil 1." — beats: weakest interaction card
+- Vanquish the Weak — removal — "Destroy target creature with power 3 or less." — beats: weakest interaction card
+- Stand Up for Yourself — removal — "Destroy target creature with power 3 or greater." — beats: weakest interaction card
+- Take Vengeance — removal — "Destroy target tapped creature." — beats: weakest interaction card
+- Cruel Alliance — removal + life-gain trigger — "Exile target creature with mana value 3 or less. If this spell was cast using teamwork, instead exile target creature and you gain 3 life." — beats: weakest interaction card, also feeds Way of the Mentor
+- Mystical Tether — removal — "When this enchantment enters, exile target artifact or creature an opponent controls until this enchantment leaves the battlefield." — beats: weakest interaction card (hits artifacts too, flash option)
+- Powerstone Fracture — removal — "Destroy target creature or planeswalker." — beats: weakest interaction card
+- Syphon Fuel — removal + life-gain trigger — "Target creature gets -6/-6 until end of turn. You gain 2 life." — beats: weakest interaction card, also a Mentor trigger
+- Defibrillating Current — removal + life-gain trigger — "Defibrillating Current deals 4 damage to target creature or planeswalker and you gain 2 life." — beats: weakest interaction card, also a Mentor trigger
+- Magnificent End — removal — "This spell costs {3} less to cast if it targets a tapped creature. | Magnificent End deals 5 damage to target creature." — beats: weakest interaction card
+- Impossible Inferno — removal — "Impossible Inferno deals 6 damage to target creature." — beats: weakest interaction card
+- Heated Argument — removal — "Heated Argument deals 6 damage to target creature. You may exile a card from your graveyard. If you do, Heated Argument also deals 2 damage to that creature's controller." — beats: weakest interaction card
+- Bot Bashing Time — removal — "Bot Bashing Time deals 6 damage to target creature. If that creature would die this turn, exile it instead." — beats: weakest interaction card
+- Stomped by the Foot — removal — "Target creature gets -2/-2 until end of turn. If this spell was kicked, that creature gets -5/-5 until end of turn instead." — beats: weakest interaction card
+- Pinecone Strike — removal — "Pinecone Strike deals 3 damage to target creature. If that creature would die this turn, exile it instead. | Destroy target artifact token." — beats: weakest interaction card
+- Liminal Hold — removal + life-gain trigger — "When this enchantment enters, exile up to one target nonland permanent an opponent controls until this enchantment leaves the battlefield. You gain 2 life." — beats: weakest interaction card, also a Mentor trigger
+- Well-Worn Spatula — life-gain trigger — "When this Equipment enters, you gain 2 life." — beats: fills the thin life-gain-trigger role at minimal cost
+- Sauron, Dino Devotee — life-gain trigger — "Whenever Sauron enters or attacks, choose one — • Cure Cancer — You gain 3 life. • Turn People into Dinosaurs — Put a saurian counter on another target creature." — beats: fills the thin life-gain-trigger role, repeatable
+- Spinewoods Paladin — life-gain trigger — "When this creature enters, you gain 3 life." — beats: fills the thin life-gain-trigger role
+- Sneering Shadewriter — life-gain trigger — "When this creature enters, each opponent loses 2 life and you gain 2 life." — beats: fills the thin life-gain-trigger role, evasive
+- Overgrown Arch — repeatable life-gain trigger — "{T}: You gain 1 life." — beats: fills the thin life-gain-trigger role with a repeatable, cheap source

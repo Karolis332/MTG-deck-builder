@@ -1,0 +1,40 @@
+screened 903/903, passed 38, last card read: Silver Deputy
+
+- Jaya, Venerated Firemage — planeswalker — "If another red source you control would deal damage to a permanent or player, it deals that much damage plus 1 to that permanent or player instead. | −2: Jaya deals 2 damage to any target." — beats: Ral Zarek, Guest Lecturer
+- Ellywick Tumblestrum — planeswalker — "+1: Venture into the dungeon. | −2: Look at the top six cards of your library... if it's legendary, you gain 3 life. | −7: emblem..." — beats: Garruk, Veiled Butcher
+- Chandra, Novice Pyromancer — planeswalker — "+1: Elementals you control get +2/+0 until end of turn. | −1: Add {R}{R}. | −2: Chandra deals 2 damage to any target." — beats: Ral Zarek, Guest Lecturer
+- Feed the Serpent — removal — "Exile target creature or planeswalker." — beats: Erode
+- Gravkill — removal — "Exile target creature or Spacecraft." — beats: Erode
+- Wander Off — removal — "Exile target creature." — beats: Erode
+- Bilbo's Deadly Slice — removal — "Destroy target creature." — beats: Erode
+- Vanish into Eternity — removal — "This spell costs {3} more to cast if it targets a creature. | Exile target nonland permanent." — beats: Erode
+- Stormplain Detainment — removal — "When this enchantment enters, exile target nonland permanent an opponent controls until this enchantment leaves the battlefield." — beats: Erode
+- Strangle — removal — "Strangle deals 3 damage to target creature or planeswalker." — beats: Erode
+- Sear — removal — "Sear deals 4 damage to target creature or planeswalker." — beats: Erode
+- Bombard — removal — "Bombard deals 4 damage to target creature." — beats: Erode
+- Judgment Bolt — removal — "Judgment Bolt deals 5 damage to target creature and X damage to that creature's controller, where X is the number of Equipment you control." — beats: Erode
+- Tribute to Hunger — removal + life-gain trigger — "Target opponent sacrifices a creature of their choice. You gain life equal to that creature's toughness." — beats: Erode
+- Anchovy & Banana Pizza — removal + life-gain trigger — "When this artifact enters, destroy target creature. | {2}, {T}, Sacrifice this artifact: You gain 3 life." — beats: Erode
+- Joust Through — removal + life-gain trigger — "Joust Through deals 3 damage to target attacking or blocking creature. You gain 1 life." — beats: Erode
+- Razor Rings — removal + life-gain trigger — "Razor Rings deals 4 damage to target attacking or blocking creature. You gain life equal to the excess damage dealt this way." — beats: Erode
+- Keep Out — removal — "Keep Out deals 4 damage to target tapped creature. | Destroy target enchantment." — beats: Erode
+- Harsh Annotation — removal — "Destroy target creature. Its controller creates a 1/1 white and black Inkling creature token with flying." — beats: Erode
+- Sonic Shrieker — removal + life-gain trigger — "When this creature enters, it deals 2 damage to any target and you gain 2 life. If a player is dealt damage this way, they discard a card." — beats: Erode
+- Ooze Spill — counterspell — "Counter target spell. Create a Mutagen token." — beats: Countersculpt
+- Out of Air — counterspell — "This spell costs {2} less to cast if it targets a creature spell. | Counter target spell." — beats: Countersculpt
+- Make Disappear — counterspell — "Casualty 1... Counter target spell unless its controller pays {2}." — beats: Countersculpt
+- Shire Scarecrow — ramp/fixing — "{1}: Add one mana of any color. Activate only once each turn." — beats: a basic land
+- Haunted Screen — ramp/fixing — "{T}: Add {W} or {B}. | {T}, Pay 1 life: Add {G}, {U}, or {R}." — beats: a Signet
+- Stonework Packbeast — ramp/fixing — "{2}: Add one mana of any color." — beats: a Signet
+- Dependable Quinjet — ramp/fixing — "{T}: Add one mana of any color." — beats: a Signet
+- Everything Pizza — ramp/fixing — "When this artifact enters, search your library for a basic land card, reveal it, put it into your hand, then shuffle." — beats: a basic land
+- TCRI Building — land, fixing + life-gain trigger — "This land enters tapped. | When this land enters, you gain 1 life. | {T}: Add {U} or {R}." — beats: Island or Mountain
+- Asgardian Citadel — land, fixing + life-gain trigger — "This land enters tapped. | When this land enters, you gain 1 life. | {T}: Add {R} or {W}." — beats: Mountain or Plains
+- Avengers Hangar — land, fixing + life-gain trigger — "This land enters tapped. | When this land enters, you gain 1 life. | {T}: Add {W} or {U}." — beats: Plains or Island
+- Fisk Tower — land, fixing + life-gain trigger — "This land enters tapped. | When this land enters, you gain 1 life. | {T}: Add {W} or {B}." — beats: Plains or Swamp
+- Hell's Kitchen — land, fixing + life-gain trigger — "This land enters tapped. | When this land enters, you gain 1 life. | {T}: Add {B} or {R}." — beats: Swamp or Mountain
+- Pym Technologies — land, fixing + life-gain trigger — "This land enters tapped. | When this land enters, you gain 1 life. | {T}: Add {G} or {U}." — beats: Forest or Island
+- Plunder the Trollshaws — draw — "Draw a card. If this spell was cast from a graveyard, draw two cards instead. | Flashback {3}{U}" — beats: a basic land
+- Riddles in the Dark — draw — "Look at the top four cards of your library and separate them into a face-down pile and a face-up pile. An opponent chooses one of the piles. Put that pile into your hand and the other into your graveyard." — beats: a basic land
+- Rapier Wit — draw + tempo — "Tap target creature. If it's your turn, put a stun counter on it. | Draw a card." — beats: a basic land
+- Take the Fall — draw — "Target creature gets -1/-0 until end of turn... Draw a card." — beats: a basic land

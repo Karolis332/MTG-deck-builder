@@ -1,0 +1,140 @@
+screened 450/450, passed 139, last card read: Vastlands Scavenger // Bind to Life
+
+- Gene Pollinator — ramp/fixing — "{T}, Tap an untapped permanent you control: Add one mana of any color." — beats: a basic land
+- Mass Manipulation — removal/win-con — "Gain control of X target creatures and/or planeswalkers." — beats: the deck's thin 4-card interaction suite
+- Nutrient Block — life-gain trigger — "{2}, {T}, Sacrifice this artifact: You gain 3 life." — beats: no life-gain-trigger role exists yet
+- Balamb Garden, SeeD Academy — fixing land — "{T}: Add {G} or {U}." — beats: a basic land
+- Day of Black Sun — board wipe (spares walkers) — "Destroy those creatures." — beats: thin interaction
+- Jiang Yanggu, Wildcrafter — planeswalker — "−1: Put a +1/+1 counter on target creature." — beats: adds a walker type for Tam's X
+- Sinister Monolith — life-gain trigger/draw — "each opponent loses 1 life and you gain 1 life ... Draw two cards." — beats: no life-gain role
+- Bogwater Lumaret — life-gain trigger — "Whenever this creature or another creature you control enters, you gain 1 life." — beats: no life-gain role
+- Huatli, the Sun's Heart — planeswalker — "−3: You gain life equal to the greatest toughness among creatures you control." — beats: adds a walker type + life gain
+- Price of Freedom — removal/draw — "Destroy target artifact or land an opponent controls ... Draw a card." — beats: thin interaction
+- Aang's Iceberg — removal — "exile up to one other target nonland permanent until this enchantment leaves the battlefield." — beats: thin interaction
+- Spectacular Tactics — removal — "Destroy target creature with power 4 or greater." — beats: thin interaction
+- Susurian Voidborn — life-gain trigger — "target opponent loses 1 life and you gain 1 life." — beats: no life-gain role
+- Witherbloom Campus — fixing land — "{T}: Add {B} or {G}." — beats: a basic land
+- Planar Disruption — removal — "Enchanted permanent can't attack or block, and its activated abilities can't be activated." — beats: thin interaction
+- Teacher's Pest — life-gain trigger — "Whenever this creature attacks, you gain 1 life." — beats: no life-gain role
+- Sanguine Syphoner — life-gain trigger — "each opponent loses 1 life and you gain 1 life." — beats: no life-gain role
+- Cracked Earth Technique — life gain — "You gain 3 life." — beats: no life-gain role
+- Thunder Magic — removal — "Thundaga — {5}{R} — Thunder Magic deals 8 damage to target creature." — beats: thin interaction
+- Airship Engine Room — fixing land — "{T}: Add {U} or {R}." — beats: a basic land
+- Sephiroth's Intervention — removal + life gain — "Destroy target creature. You gain 2 life." — beats: thin interaction
+- Environmental Sciences — ramp + life gain — "You gain 2 life." — beats: no life-gain role
+- The Rise of Sozin — board wipe — "Destroy all creatures." — beats: thin interaction
+- Sagu Wildling — life gain — "you gain 3 life." — beats: no life-gain role
+- Night Market — fixing land — "{T}: Add one mana of the chosen color." — beats: a basic land
+- Introduction to Prophecy — draw — "Scry 2, then draw a card." — beats: shallow draw depth
+- Overgrown Zealot — ramp/fixing — "{T}: Add one mana of any color." — beats: a basic land
+- Greenhouse // Rickety Gazebo — ramp/fixing — "Lands you control have '{T}: Add one mana of any color.'" — beats: a basic land
+- Mutinous Massacre — removal/win-con — "Destroy each creature with mana value of the chosen quality. Then gain control of all creatures until end of turn." — beats: thin interaction
+- Eumidian Terrabotanist — life-gain trigger — "Landfall — Whenever a land you control enters, you gain 1 life." — beats: no life-gain role
+- The Arkenstone — draw — "At the beginning of your end step, draw a card." — beats: shallow draw depth
+- Spider-Man, Brooklyn Visionary — ramp — "search your library for a basic land card, put it onto the battlefield tapped." — beats: a basic land
+- Prismatic Undercurrents — ramp/fixing — "search your library for up to X basic land cards, where X is the number of colors among permanents you control." — beats: a basic land
+- Frog Butler — ramp/fixing — "{T}: Add one mana of any color." — beats: a basic land
+- Hermitic Herbalist — ramp/fixing — "{T}: Add one mana of any color." — beats: a basic land
+- Dawnbringer Cleric — life-gain trigger — "Cure Wounds — You gain 2 life." — beats: no life-gain role
+- Dance of the Tumbleweeds — ramp — "Search your library for a basic land card or a Desert card, put it onto the battlefield." — beats: a basic land
+- Breathe Your Last — removal — "Destroy target creature or planeswalker. You gain 1 life for each of its colors." — beats: thin interaction
+- Zimone, Quandrix Prodigy — ramp — "put a land card from your hand onto the battlefield tapped." — beats: a basic land
+- Coveted Prize — tutor — "Search your library for a card, put it into your hand, then shuffle." — beats: no generic tutor role (only Loyal Tutor exists)
+- Trelasarra, Moon Dancer — life-gain payoff — "Whenever you gain life, put a +1/+1 counter on Trelasarra and scry 1." — beats: no life-gain payoff role
+- Troop of Ponies — ramp — "Search your library for up to two basic land cards ... put one onto the battlefield tapped and the other into your hand." — beats: a basic land
+- Omashu City — fixing land — "{T}: Add {R} or {G}." — beats: a basic land
+- Buried in the Garden — removal — "exile target nonland permanent you don't control until this Aura leaves the battlefield." — beats: thin interaction
+- Kyoshi Village — fixing land — "{T}: Add {G} or {W}." — beats: a basic land
+- Hidden Lair — fixing land — "{T}: Add {U} or {B}. Activate only if this land entered this turn or if you control a basic land." — beats: a basic land
+- Gladiolus Amicitia — ramp — "search your library for a land card, put it onto the battlefield tapped." — beats: a basic land
+- Glen Elendra's Answer — counterspell — "Counter all spells your opponents control and all abilities your opponents control." — beats: Countersculpt, the deck's only counterspell
+- Roamer's Routine — ramp — "Search your library for a basic land card, put it onto the battlefield tapped." — beats: a basic land
+- Feast of the Victorious Dead — life-gain trigger — "you gain that much life and distribute that many +1/+1 counters." — beats: no life-gain role
+- Repel Calamity — removal — "Destroy target creature with power or toughness 4 or greater." — beats: thin interaction
+- Titan's Grave — fixing land — "{T}: Add {B} or {G}." — beats: a basic land
+- Time Stop — protection — "End the turn. (Exile all spells and abilities, including this spell.)" — beats: no full-stop protection effect exists
+- You Are Already Dead — removal + draw — "Destroy target creature that was dealt damage this turn. Draw a card." — beats: thin interaction
+- Topiary Lecturer — ramp — "{T}: Add an amount of {G} equal to this creature's power." — beats: a basic land
+- Combustion Technique — removal — "deals damage equal to 2 plus the number of Lesson cards in your graveyard to target creature." — beats: thin interaction
+- Slagstorm — board wipe — "Slagstorm deals 3 damage to each creature." — beats: thin interaction
+- Emeritus of Truce // Swords to Plowshares — removal — "Exile target creature. Its controller gains life equal to its power." — beats: thin interaction
+- Pearl of Wisdom — draw — "Draw two cards." — beats: shallow draw depth
+- Analyze the Pollen — ramp — "Search your library for a basic land card." — beats: a basic land
+- Botanical Plaza — fixing land — "{T}: Add {G} or {W}." — beats: a basic land
+- Three Tree Rootweaver — ramp/fixing — "{T}: Add one mana of any color." — beats: a basic land
+- Mind into Matter — draw — "Draw X cards." — beats: shallow draw depth
+- Riveteers Charm — removal — "Target opponent sacrifices a creature or planeswalker they control with the greatest mana value." — beats: thin interaction
+- Feed the Cycle — removal — "Destroy target creature or planeswalker." — beats: thin interaction
+- Temur Charm — removal/counterspell — "Counter target spell unless its controller pays {3}." — beats: Countersculpt
+- Boiling Rock Prison — fixing land — "{T}: Add {B} or {R}." — beats: a basic land
+- Divert Disaster — counterspell — "Counter target spell unless its controller pays {2}." — beats: Countersculpt
+- Cat Collector — life-gain trigger — "Whenever you gain life for the first time during each of your turns, create a 1/1 white Cat creature token." — beats: no life-gain payoff role
+- Door to Nothingness — win condition — "{W}{W}{U}{U}{B}{B}{R}{R}{G}{G}, {T}, Sacrifice this artifact: Target player loses the game." — beats: deck has no alt win-con
+- Meditation Pools — fixing land — "{T}: Add {G} or {U}." — beats: a basic land
+- Sinister Hideout — fixing land — "{T}: Add {U} or {B}." — beats: a basic land
+- Elvish Regrower — recursion — "When this creature enters, return target permanent card from your graveyard to your hand." — beats: no recursion role
+- Emeritus of Conflict // Lightning Bolt — removal — "Lightning Bolt deals 3 damage to any target." — beats: thin interaction
+- North Pole Gates — fixing land — "{T}: Add {W} or {U}." — beats: a basic land
+- Sun-Blessed Peak — fixing land — "{T}: Add {R} or {W}." — beats: a basic land
+- Northern Air Temple — life-gain trigger — "each opponent loses X life and you gain X life, where X is the number of Shrines you control." — beats: no life-gain role
+- Bituminous Blast — removal — "Bituminous Blast deals 4 damage to target creature." — beats: thin interaction
+- Quandrix Charm — removal/counterspell — "Counter target spell unless its controller pays {2}." — beats: Countersculpt
+- Larval Scoutlander — ramp — "search your library for up to two basic land cards, put them onto the battlefield tapped." — beats: a basic land
+- Epic Downfall — removal — "Exile target creature with mana value 3 or greater." — beats: thin interaction
+- Pyroclasm — board wipe — "Pyroclasm deals 2 damage to each creature." — beats: thin interaction
+- Dreams of Laguna — draw — "Surveil 1, then draw a card." — beats: shallow draw depth
+- Annihilating Glare — removal — "Destroy target creature or planeswalker." — beats: thin interaction
+- Cabaretti Charm — removal — "Cabaretti Charm deals damage equal to the number of creatures you control to target creature or planeswalker." — beats: thin interaction
+- Kyoshi Island Plaza — ramp — "search your library for up to X basic land cards, where X is the number of Shrines you control." — beats: a basic land
+- Rabid Bite — removal — "Target creature you control deals damage equal to its power to target creature you don't control." — beats: thin interaction
+- Rapturous Moment — draw/ramp — "Draw three cards, then discard two cards. Add {U}{U}{R}{R}{R}." — beats: shallow draw depth
+- Phyrexian Atlas — ramp/fixing — "{T}: Add one mana of any color." — beats: a basic land
+- Ominous Asylum — fixing land — "{T}: Add {B} or {R}." — beats: a basic land
+- Minimus Containment — removal — "Enchanted permanent is a Treasure artifact ... and it loses all other abilities." — beats: thin interaction
+- Shredder's Technique — removal — "Destroy target creature or enchantment." — beats: thin interaction
+- Wylie Duke, Atiin Hero — life-gain trigger + draw — "you gain 1 life and draw a card." — beats: no life-gain role
+- Spider-Man No More — removal — "Enchanted creature is a Citizen with base power and toughness 1/1. It has defender and loses all other abilities." — beats: thin interaction
+- Overwhelming Victory — removal — "Overwhelming Victory deals 5 damage to target creature." — beats: thin interaction
+- Razortrap Gorge — fixing land — "{T}: Add {B} or {R}." — beats: a basic land
+- Hobbit Hole — ramp — "Search your library for a basic land card, put it onto the battlefield tapped." — beats: a basic land
+- Rocky Rebuke — removal — "Target creature you control deals damage equal to its power to target creature an opponent controls." — beats: thin interaction
+- The Fire Nation Drill — removal — "destroy target creature with power 4 or less." — beats: thin interaction
+- Spectral Denial — counterspell — "Counter target spell unless its controller pays {X}." — beats: Countersculpt
+- Rowan's Grim Search — draw — "You draw two cards and you lose 2 life." — beats: shallow draw depth
+- You Come to a River — removal — "Fight the Current — Return target nonland permanent to its owner's hand." — beats: thin interaction
+- Risky Research — draw — "draw two cards. You lose 2 life." — beats: shallow draw depth
+- Through the Forest Gate — ramp + life gain — "You gain 8 life." — beats: a basic land + no life-gain role
+- Nameless Inversion — removal — "Target creature gets +3/-3 and loses all creature types until end of turn." — beats: thin interaction
+- Bard, King of Dale — draw engine — "draw two cards instead ... twice that many of those tokens are created instead." — beats: shallow draw depth
+- Derelict Attic // Widow's Walk — draw — "you draw two cards and you lose 2 life." — beats: shallow draw depth
+- Tranquil Expanse — fixing land — "{T}: Add {G} or {W}." — beats: a basic land
+- Neglected Manor — fixing land — "{T}: Add {W} or {B}." — beats: a basic land
+- Emergency Eject — removal — "Destroy target nonland permanent." — beats: thin interaction
+- Ill-Timed Explosion — draw + board wipe — "Draw two cards ... Ill-Timed Explosion deals X damage to each creature." — beats: thin interaction
+- Gandalf's Sanction — removal — "deals X damage to target creature, where X is the number of instant and sorcery cards in your graveyard." — beats: thin interaction
+- Spectacle Summit — fixing land — "{T}: Add {U} or {R}." — beats: a basic land
+- Slick Sequence — removal + draw — "deals 2 damage to any target. If you've cast another spell this turn, draw a card." — beats: thin interaction
+- Hardbristle Bandit — ramp/fixing — "{T}: Add one mana of any color." — beats: a basic land
+- Starting Column — ramp/fixing — "{T}: Add one mana of any color." — beats: a basic land
+- Meteor Sword — removal — "When this Equipment enters, destroy target permanent." — beats: thin interaction
+- Vibrance — ramp/removal (modal, cast cost) — "search your library for a land card ... You gain 2 life." / "this creature deals 3 damage to any target." — beats: a basic land / thin interaction
+- Eriette's Tempting Apple — life gain + removal — "You gain 3 life." / "Target opponent loses 3 life." — beats: no life-gain role + thin interaction
+- Vision of Love — draw — "draw two cards." — beats: shallow draw depth
+- Mephitic Draught — draw — "you draw a card and you lose 1 life." — beats: shallow draw depth
+- Maestros Charm — removal — "Maestros Charm deals 5 damage to target creature or planeswalker." — beats: thin interaction
+- Sokka's Haiku — counterspell + draw — "Counter target spell. Draw a card, then mill three cards." — beats: Countersculpt
+- Spell Snare — counterspell — "Counter target spell with mana value 2." — beats: Countersculpt
+- Rakdos Locket — ramp/fixing — "{T}: Add {B} or {R}." — beats: a basic land
+- Oasis Gardener — life gain + ramp/fixing — "When this creature enters, you gain 2 life. {T}: Add one mana of any color." — beats: a basic land + no life-gain role
+- Strangled Cemetery — fixing land — "{T}: Add {B} or {G}." — beats: a basic land
+- Repulse — removal + draw — "Return target creature to its owner's hand. Draw a card." — beats: thin interaction
+- Dovin, Hand of Control — planeswalker/protection — "−1: Until your next turn, prevent all damage that would be dealt to and dealt by target permanent an opponent controls." — beats: adds a walker type + protection
+- Murky Sewer — fixing land — "{T}: Add {U} or {B}." — beats: a basic land
+- Rune of Might — draw — "When this Aura enters, draw a card." — beats: shallow draw depth
+- Traumatic Critique — removal + draw — "Traumatic Critique deals X damage to any target. Draw two cards, then discard a card." — beats: thin interaction
+- Serpent's Pass — fixing land — "{T}: Add {U} or {B}." — beats: a basic land
+- Biotech Specialist — ramp — "create a Lander token ... Search your library for a basic land card." — beats: a basic land
+- Aether Syphon — draw engine — "{2}, {T}: Draw a card." — beats: shallow draw depth
+- Elven Passage — ramp — "Search your library for a basic land card, put it onto the battlefield tapped." — beats: a basic land
+- Obscura Charm — removal + counterspell — "Destroy target creature or planeswalker with mana value 3 or less." / "Counter target instant or sorcery spell." — beats: thin interaction / Countersculpt
+- Cloudkin Seer — draw — "When this creature enters, draw a card." — beats: shallow draw depth

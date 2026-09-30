@@ -1,0 +1,88 @@
+Commander
+1 Tam, the Possibility (FRA) 276
+
+Deck
+3 Forest (FIN) 306
+5 Mountain (FIN) 305
+1 Tam's Resistance (FRA) 153
+1 Nissa, Leyline Tamer (FRC) 2
+3 Swamp (FIN) 300
+4 Island (FIN) 298
+5 Plains (FIN) 294
+1 Way of the Mentor (FRA) 208
+1 Way of the Healer (FRA) 207
+1 Countersculpt (FRA) 25
+1 Tomik, Orzhov Lawmage (FRA) 206
+1 Way of the Cryomancer (FRA) 223
+1 The Theorist, Jace Beleren (FRA) 43
+1 Overwrite the Multiverse (FRA) 59
+1 Way of the Deathbringer (FRA) 238
+1 Way of the Warlord (FRA) 255
+1 Arcane Amphisbaena (FRA) 97
+1 Way of the Paradox (FRA) 267
+1 Way of the Pyromancer (FRA) 254
+1 Rewrite Regrets (FRA) 62
+1 Eye of Jace (FRA) 170
+1 Jace, Multiverse Architect (FRC) 1
+1 Way of the Wildspeaker (FRA) 268
+1 Way of the Mind Sculptor (FRA) 224
+1 Garruk, Veiled Butcher (FRA) 229
+1 Way of the Necromancer (FRA) 239
+1 Ajani Resolute (FRA) 195
+1 Loyal Tutor (FRA) 14
+1 Return to the Light Realms (FRA) 20
+1 Geist of Saint Thalia (FRA) 214
+1 Plan for All Outcomes (FRA) 35
+1 Protege's Awakening (FRA) 37
+1 Theorist's Sanctum (FRA) 191
+1 Identity Echo (FRA) 87
+1 Chandra, Torch of Defiance (FRA) 244
+1 Ajani Unrelenting (FRA) 242
+1 Pia, Aether Ascetic (FRA) 264
+1 Garruk, Curse Breaker (FRA) 259
+1 Fatehold Annex (FRA) 177
+1 Meticulous Commons (FRA) 184
+1 Theorix Annex (FRA) 192
+1 Innovative Commons (FRA) 182
+1 Stingerquill Annex (FRA) 190
+1 Formidable Commons (FRA) 178
+1 Rockfall Vale (FRA) 186
+1 Konstrari Annex (FRA) 183
+1 Dedicated Commons (FRA) 175
+1 Vigorbloom Charm (FRA) 160
+1 Vigorbloom Annex (FRA) 194
+1 Transformative Commons (FRA) 193
+1 Vraska, Soul of Stone (FRA) 277
+1 Hall of Echoes (FRA) 179
+1 Esika, God of the Tree (KHM) 168
+1 Erode (SOS) 15
+1 The Eternal Wanderer (ONE) 11
+1 Tekuthal, Inquiry Dominus (ONE) 71
+1 Narset, Parter of Veils (WAR) 61
+1 Otawara, Soaring City (NEO) 271
+1 Ral Zarek, Guest Lecturer (SOS) 97
+1 Takenuma, Abandoned Mire (NEO) 278
+1 Chandra, Acolyte of Flame (M20) 126
+1 Zariel, Archduke of Avernus (AFR) 172
+1 All Will Be One (PZA) 0
+1 Shatterskull Smashing (ZNR) 161
+1 Oath of Teferi (DAR) 200
+1 Kaito, Bane of Nightmares (DSK) 220
+1 Saheeli, Sublime Artificer (WAR) 234
+1 Ral, Crackling Wit (BLB) 230
+1 Professor Dellian Fel (SOS) 214
+1 Quintorius Kand (LCI) 238
+1 Minsc & Boo, Timeless Heroes (HBG) 243
+1 Boros Charm (FDN) 721
+1 Mox Amber (DAR) 224
+1 Tezzeret, Cruel Captain (EOE) 2
+1 Karn, the Great Creator (WAR) 1
+1 Interplanar Beacon (WAR) 247
+1 Arcane Signet (TLE) 315
+1 Azorius Signet (RVR) 250
+1 Izzet Signet (RVR) 261
+1 Rakdos Signet (RVR) 265
+1 Golgari Signet (RVR) 258
+1 Gruul Signet (RVR) 259
+1 Simic Signet (RVR) 269
+1 Boros Signet (RVR) 251

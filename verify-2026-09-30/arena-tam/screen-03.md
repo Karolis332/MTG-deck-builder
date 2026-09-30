@@ -1,0 +1,111 @@
+screened 450/450, passed 87, last card read: My Precious // Allure of Power
+
+- Reckoner Bankbuster — draw — "{2}, {T}, Remove a charge counter... Draw a card." — beats: Protege's Awakening (thin draw)
+- Claim the Precious — removal — "Destroy target creature. The Ring tempts you." — beats: Tam's Resistance
+- Divine Reckoning — board wipe (spares planeswalkers) — "Each player chooses a creature they control. Destroy the rest." — beats: no wipe in deck
+- Sunfall — board wipe (spares planeswalkers) — "Exile all creatures. Incubate X..." — beats: no wipe in deck
+- Remand — counterspell + draw — "Counter target spell... Draw a card." — beats: Countersculpt
+- Wizard's Retort — counterspell — "Counter target spell." — beats: Countersculpt
+- Amazing Acrobatics — counterspell (flex) — "Counter target spell. | Tap one or two target creatures." — beats: Countersculpt
+- It'll Quench Ya! — counterspell — "Counter target spell unless its controller pays {2}." — beats: thin counter suite (1 card)
+- Syncopate — counterspell — "Counter target spell unless its controller pays {X}... exile it." — beats: Countersculpt
+- Essence Capture — counterspell — "Counter target creature spell. Put a +1/+1 counter..." — beats: thin counter suite
+- Get Out — counterspell/bounce — "Counter target creature or enchantment spell. | Return one or two target creatures and/or enchantments..." — beats: thin counter suite
+- No More Lies — counterspell — "Counter target spell unless its controller pays {3}... exile it." — beats: Countersculpt
+- Don't Make a Sound — counterspell — "Counter target spell unless its controller pays {2}." — beats: thin counter suite
+- Glen Elendra Guardian — repeatable counterspell — "{1}{U}, Remove a counter... Counter target noncreature spell." — beats: thin counter suite
+- Louisoix's Sacrifice — counterspell — "Counter target activated ability, triggered ability, or noncreature spell." — beats: thin counter suite
+- Dreadbore — removal (creature or planeswalker) — "Destroy target creature or planeswalker." — beats: Tam's Resistance
+- Liliana's Triumph — edict removal — "Each opponent sacrifices a creature of their choice." — beats: Erode
+- Shoot the Sheriff — removal — "Destroy target non-outlaw creature." — beats: Erode
+- Unwanted Remake — removal — "Destroy target creature. Its controller manifests dread." — beats: Erode
+- Abzan Charm — removal/draw flex — "Exile target creature with power 3 or greater. | You draw two cards... | Distribute two +1/+1 counters..." — beats: Vigorbloom Charm
+- Quandrix Command — removal/counter/bounce flex — "Return target creature or planeswalker to its owner's hand. | Counter target artifact or enchantment spell. | Put two +1/+1 counters... | shuffle... graveyard into library." — beats: Vigorbloom Charm
+- Ossification — removal (exile) — "exile target creature or planeswalker an opponent controls until this Aura leaves the battlefield." — beats: Erode
+- White Auracite — removal + fixing — "exile target nonland permanent an opponent controls... | {T}: Add {W}." — beats: Erode
+- Eaten by Piranhas — removal (neutralize) — "Enchanted creature loses all abilities and is a black Skeleton creature with base power and toughness 1/1." — beats: Vigorbloom Charm
+- Broken Wings — removal (artifact/enchant/flyer) — "Destroy target artifact, enchantment, or creature with flying." — beats: thin removal suite
+- Heartless Act — removal — "Destroy target creature with no counters on it. | Remove up to three counters..." — beats: Erode
+- Cut Down — removal — "Destroy target creature with total power and toughness 5 or less." — beats: Erode
+- Sultai Charm — removal/draw flex — "Destroy target monocolored creature. | Destroy target artifact or enchantment. | Draw two cards, then discard a card." — beats: Vigorbloom Charm
+- Witherbloom Charm — removal/lifegain/draw flex — "You may sacrifice a permanent. If you do, draw two cards. | You gain 5 life. | Destroy target nonland permanent with mana value 2 or less." — beats: Vigorbloom Charm
+- Villainous Wrath — board wipe (spares planeswalkers) — "destroy all creatures." — beats: no second wipe in deck
+- Worthy Cost — removal (creature or planeswalker) — "sacrifice a creature... Exile target creature or planeswalker." — beats: Erode
+- Pacifism — removal (control) — "Enchanted creature can't attack or block." — beats: thin removal suite
+- Prismari Charm — removal/draw flex — "Surveil 2, then draw a card. | deals 1 damage... | Return target nonland permanent to its owner's hand." — beats: Vigorbloom Charm
+- Introduction to Annihilation — removal — "Exile target nonland permanent. Its controller draws a card." — beats: Erode
+- Make Your Move — removal — "Destroy target artifact, enchantment, or creature with power 4 or greater." — beats: thin removal suite
+- Bake into a Pie — removal + lifegain adjacent — "Destroy target creature. Create a Food token." — beats: Erode
+- Iroh's Demonstration — removal — "deals 1 damage to each creature your opponents control. | deals 4 damage to target creature." — beats: thin removal suite
+- Soothing of Sméagol — bounce removal — "Return target nontoken creature to its owner's hand. The Ring tempts you." — beats: Vigorbloom Charm
+- Getaway Glamer — removal (flicker/destroy) — "Exile target nontoken creature. Return it... | Destroy target creature if no other creature has greater power." — beats: thin removal suite
+- Brokers Charm — removal/draw flex — "deals damage equal to its power to target creature or planeswalker... | Destroy target enchantment. | Draw two cards." — beats: Vigorbloom Charm
+- Kaito, Cunning Infiltrator — planeswalker — "+1: ...can't be blocked... draw, discard. | −2: Create a 2/1 blue Ninja... | −9: emblem..." — beats: new walker type for Tam's X
+- Ob Nixilis, the Hate-Twisted — planeswalker — "Whenever an opponent draws a card, Ob Nixilis deals 1 damage to that player. | −2: Destroy target creature. Its controller draws two cards." — beats: new walker type for Tam's X
+- The Wanderer — planeswalker + protection — "Prevent all noncombat damage that would be dealt to you and other permanents you control. | −2: Exile target creature with power 4 or greater." — beats: new walker type + protection role
+- Absolute Virtue — protection — "You have protection from each of your opponents." — beats: no protection in deck
+- Gideon's Sacrifice — protection (damage redirect) — "All damage that would be dealt this turn to you and permanents you control is dealt to the chosen permanent instead." — beats: no protection in deck
+- Cayth, Famed Mechanist — proliferate — "{2}, {T}: Choose one — Populate. | Proliferate." — beats: no extra proliferate outlet besides Tam
+- Serum Snare — bounce + proliferate — "Return target nonland permanent... If that permanent had mana value 3 or less, proliferate." — beats: Vigorbloom Charm
+- Lightning Helix — removal + lifegain — "deals 3 damage to any target and you gain 3 life." — beats: Erode (dual role: removal + Mentor trigger)
+- Healer's Hawk — lifegain trigger — "Flying | Lifelink." — beats: thin lifegain suite
+- Impassioned Orator — lifegain trigger — "Whenever another creature you control enters, you gain 1 life." — beats: thin lifegain suite
+- Beza, the Bounding Spring — lifegain + value — "You gain 4 life if an opponent has more life than you..." — beats: thin lifegain suite
+- Vraan, Executioner Thane — lifegain trigger — "each opponent loses 2 life and you gain 2 life." — beats: thin lifegain suite
+- Moseo, Vein's New Dean — lifegain + recursion — "if you gained life this turn, return up to one target creature card with mana value X or less from your graveyard..." — beats: thin lifegain suite
+- Instant Ramen — draw + lifegain — "draw a card. | Sacrifice this artifact: You gain 3 life." — beats: thin draw + lifegain suite
+- South Pole Voyager — lifegain trigger + draw — "you gain 1 life. If this is the second time... draw a card." — beats: thin lifegain suite
+- Aunt May — lifegain trigger — "Whenever another creature you control enters, you gain 1 life." — beats: thin lifegain suite
+- South Wind Avatar — lifegain synergy — "you gain life equal to its toughness. | Whenever you gain life, each opponent loses 1 life." — beats: thin lifegain suite
+- Hope Estheim — lifegain trigger — "Lifelink | ...each opponent mills X cards, where X is the amount of life you gained this turn." — beats: thin lifegain suite
+- Bag of Holding — draw engine — "{2}, {T}: Draw a card, then discard a card." — beats: Protege's Awakening
+- Stargaze — draw — "Look at twice X cards... Put X cards from among them into your hand..." — beats: Protege's Awakening
+- Scheming Silvertongue // Sign in Blood — draw — "Target player draws two cards and loses 2 life." — beats: Protege's Awakening
+- Matoya, Archon Elder — draw engine — "Whenever you scry or surveil, draw a card." — beats: thin draw suite (deck has several surveil sources)
+- Flow State — draw — "Look at the top three cards... Put one of them into your hand..." — beats: Protege's Awakening
+- Waterbending Lesson — draw — "Draw three cards. Then discard a card unless you waterbend {2}." — beats: Protege's Awakening
+- Cryogen Relic — draw — "When this artifact enters or leaves the battlefield, draw a card." — beats: thin draw suite
+- Deduce — draw — "Draw a card. Investigate." — beats: Protege's Awakening
+- Combat Tutorial — draw — "Target player draws two cards. Put a +1/+1 counter..." — beats: Protege's Awakening
+- Elegy Acolyte — draw engine — "you draw a card and lose 1 life." — beats: thin draw suite
+- Gaea's Blessing — draw + recursion — "Draw a card. | ...shuffle your graveyard into your library." — beats: Protege's Awakening
+- Mirror of Galadriel — draw engine (cheap with many legendaries) — "{5}, {T}: Scry 1, then draw a card. This ability costs {1} less to activate for each legendary creature you control." — beats: Protege's Awakening
+- Omnath, Locus of All — card advantage + fixing, exact 5-color match — "add three mana in any combination of its colors and put it into your hand." — beats: a two-color Signet
+- Phial of Galadriel — fixing + draw/lifegain amplifier — "{T}: Add one mana of any color. | If you would gain life while you have 5 or less life, you gain twice..." — beats: a two-color Signet
+- Pentad Prism — fixing rock — "Remove a charge counter... Add one mana of any color." — beats: a two-color Signet
+- Alloy Myr — fixing dork — "{T}: Add one mana of any color." — beats: a two-color Signet
+- Three Tree Mascot — fixing dork — "{1}: Add one mana of any color." — beats: a two-color Signet
+- Firemind Vessel — fixing rock — "{T}: Add two mana of different colors." — beats: a two-color Signet
+- Jegantha, the Wellspring — 5-color fixing — "{T}: Add {W}{U}{B}{R}{G}." — beats: a two-color Signet
+- All-Fates Scroll — fixing rock — "{T}: Add one mana of any color." — beats: a two-color Signet
+- Great Forest Druid — fixing dork — "{T}: Add one mana of any color." — beats: a basic land
+- Torgal, A Fine Hound — fixing dork — "{T}: Add one mana of any color." — beats: a basic land
+- Hot Dog Cart — fixing rock + lifegain — "{T}: Add one mana of any color." (plus Food lifegain) — beats: a two-color Signet
+- Captivating Cave — fixing land — "{1}, {T}: Add one mana of any color." — beats: a basic land
+- White Lotus Hideout — fixing land — "{1}, {T}: Add one mana of any color." — beats: a basic land
+- Urban Retreat — tri-color fixing land (G/W/U) — "{T}: Add {G}, {W}, or {U}." — beats: any single basic
+- Jagged Barrens — 2-color fixing land — "{T}: Add {B} or {R}." — beats: a basic (Swamp/Mountain)
+- Arctic Treeline — 2-color fixing land — "({T}: Add {G} or {W}.)" — beats: a basic (Forest/Plains)
+- Mirage Mesa — flex fixing land — "{T}: Add one mana of the chosen color." — beats: a basic land
+- Baron, Airship Kingdom — 2-color fixing land — "{T}: Add {U} or {R}." — beats: a basic (Island/Mountain)
+- Treno, Dark City — 2-color fixing land — "{T}: Add {U} or {B}." — beats: a basic (Island/Swamp)
+- Thornglint Bridge — 2-color fixing land — "{T}: Add {G} or {W}." — beats: a basic (Forest/Plains)
+- Rabanastre, Royal City — 2-color fixing land — "{T}: Add {R} or {W}." — beats: a basic (Mountain/Plains)
+- Sharlayan, Nation of Scholars — 2-color fixing land — "{T}: Add {W} or {U}." — beats: a basic (Plains/Island)
+- Vector, Imperial Capital — 2-color fixing land — "{T}: Add {B} or {R}." — beats: a basic (Swamp/Mountain)
+- Windurst, Federation Center — 2-color fixing land — "{T}: Add {G} or {W}." — beats: a basic (Forest/Plains)
+- Guadosalam, Farplane Gateway — 2-color fixing land — "{T}: Add {G} or {U}." — beats: a basic (Forest/Island)
+- Insomnia, Crown City — 2-color fixing land — "{T}: Add {W} or {B}." — beats: a basic (Plains/Swamp)
+- Forlorn Flats — 2-color fixing land + reach — "{T}: Add {W} or {B}." — beats: a basic (Plains/Swamp)
+- Festering Gulch — 2-color fixing land + reach — "{T}: Add {B} or {G}." — beats: a basic (Swamp/Forest)
+- Quandrix Campus — 2-color fixing land + scry — "{T}: Add {G} or {U}." — beats: a basic (Forest/Island)
+- Restless Fortress — 2-color fixing manland — "{T}: Add {W} or {B}." — beats: a basic (Plains/Swamp)
+- Celestial Colonnade — 2-color fixing manland — "{T}: Add {W} or {U}." — beats: a basic (Plains/Island)
+- Sulfurous Mire — 2-color fixing land — "({T}: Add {B} or {R}.)" — beats: a basic (Swamp/Mountain)
+- Gongaga, Reactor Town — 2-color fixing land — "{T}: Add {R} or {G}." — beats: a basic (Mountain/Forest)
+- Dark Fortress — 2-color fixing land (conditional) — "{T}: Add {B} or {R}. Activate only if this land entered this turn or if you control a basic land." — beats: a basic (Swamp/Mountain)
+- Captain Sisay — tutor (legendary permanents; the deck is legendary-dense) — "{T}: Search your library for a legendary card, reveal that card, put it into your hand." — beats: Loyal Tutor (narrower)
+- Cruel Tutor — tutor (any card) — "Search your library for a card, then shuffle and put that card on top. You lose 2 life." — beats: Loyal Tutor
+- Bring to Light — tutor (5-color converge) — "Search your library for a creature, instant, or sorcery card with mana value less than or equal to the number of colors of mana spent... cast it without paying its mana cost." — beats: Loyal Tutor
+- True Ancestry — recursion + draw — "Return up to one target permanent card from your graveyard to your hand. | Create a Clue token." — beats: Protege's Awakening
+- Emeritus of Abundance // Regrowth — recursion — "Return target card from your graveyard to your hand." — beats: thin recursion suite

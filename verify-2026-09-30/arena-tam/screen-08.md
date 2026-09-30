@@ -1,0 +1,70 @@
+screened 450/450, passed 68, last card read: Kindled Fury
+
+- Roku's Mastery — removal — "Roku's Mastery deals X damage to target creature. If X is 4 or more, scry 2." — beats: Boros Signet (weak interaction count)
+- Collision Course — removal — "Collision Course deals X damage to target creature, where X is the number of permanents you control that are creatures and/or Vehicles. • Destroy target artifact." — beats: weakest interaction
+- Gallant Strike — removal — "Destroy target creature with toughness 4 or greater. | Cycling {2}" — beats: weakest interaction
+- Hurl into History — counterspell — "Counter target artifact or creature spell. Discover X, where X is that spell's mana value." — beats: Countersculpt (only counterspell)
+- Foolish Fate — removal + lifegain — "Destroy target creature. | Infusion — If you gained life this turn, that creature's controller loses 3 life." — beats: weakest interaction; synergizes with Way of the Paradox
+- Stone by Sunlight — removal — "• Destroy target creature with power 4 or greater. • Until end of turn, target creature becomes an artifact... and gains indestructible." — beats: weakest interaction
+- Static Snare — removal — "Flash | This spell costs {1} less to cast for each attacking creature. | When this enchantment enters, exile target artifact or creature an opponent controls until this enchantment leaves the battlefield." — beats: weakest interaction
+- Burn, Burn, Tree and Fern — removal — "I — This Saga deals 6 damage to target creature an opponent controls. | II — Destroy target artifact an opponent controls." — beats: weakest interaction
+- Elvenking's Halls — fixing land — "{T}: Add {G} or {U}." — beats: a basic Forest/Island
+- Sold Out — removal — "Exile target creature. If it was dealt damage this turn, create a Clue token." — beats: weakest interaction
+- Spin Out — removal — "Destroy target creature or Vehicle." — beats: weakest interaction
+- Steel Wrecking Ball — removal — "When this artifact enters, it deals 5 damage to target creature. | {1}{R}, Discard this card: Destroy target artifact." — beats: weakest interaction
+- Last Gasp — removal — "Target creature gets -3/-3 until end of turn." — beats: weakest interaction
+- Los Diablos Missile Base — fixing land + lifegain — "This land enters tapped. | When this land enters, you gain 1 life. | {T}: Add {R} or {G}." — beats: a basic Mountain/Forest; life-gain trigger feeds Way of the Mentor
+- Torch the Tower — removal — "Torch the Tower deals 2 damage to target creature or planeswalker. If this spell was bargained, instead it deals 3 damage to that permanent and you scry 1." — beats: weakest interaction; also hits enemy planeswalkers
+- Ride's End — removal — "This spell costs {3} less to cast if it targets a tapped permanent. | Exile target creature or Vehicle." — beats: weakest interaction
+- Reduce to Memory — removal — "Exile target nonland permanent." — beats: weakest interaction; hits planeswalkers too
+- Mentor's Guidance — draw — "When you cast this spell, copy it if you control a planeswalker, Cleric, Druid, Shaman, Warlock, or Wizard. | Scry 1, then draw a card." — beats: weakest draw filler; near-free copy given the walker plan
+- Moment of Craving — removal + lifegain — "Target creature gets -2/-2 until end of turn. You gain 2 life." — beats: weakest interaction; feeds Way of the Mentor
+- Threadbind Clique — removal — "Destroy target tapped creature." (adventure half) — beats: weakest interaction
+- Dimensional Exile — removal — "When this Aura enters, exile target creature an opponent controls until this Aura leaves the battlefield." — beats: weakest interaction
+- Wither and Bloom — removal — "Target creature gets -3/-3 until end of turn. | {1}{B}, Exile this card from your graveyard: Put a +1/+1 counter on target creature you control." — beats: weakest interaction
+- Protective Response — removal — "Convoke... Destroy target attacking or blocking creature." — beats: weakest interaction
+- Outpace Oblivion — removal — "When this enchantment enters, it deals 5 damage to up to one target creature or planeswalker." — beats: weakest interaction; hits planeswalkers
+- Deny Entry — counterspell — "Counter target creature spell. Draw a card, then discard a card." — beats: weakest counterspell slot
+- Wildfire Howl — board wipe — "Wildfire Howl deals 2 damage to each creature. If the gift was promised, instead 1 damage to any target and 2 damage to each creature." — beats: no current board wipe that spares planeswalkers
+- End of the Hunt — removal — "Target opponent exiles a creature or planeswalker they control with the greatest mana value among creatures and planeswalkers they control." — beats: weakest interaction; hits planeswalkers
+- Thranduil's Decree — counterspell — "Counter target spell. If a permanent spell is countered this way, exile it instead... You may cast that card without paying its mana cost for as long as it remains exiled." — beats: Countersculpt (hard counter, hits anything)
+- Fierce Retribution — removal — "Cleave {5}{W}... Destroy target [attacking] creature." — beats: weakest interaction
+- Nahiri's Binding — removal — "Enchant creature or planeswalker | Enchanted permanent can't attack or block, and its activated abilities can't be activated." — beats: weakest interaction; also locks down enemy planeswalkers
+- Radiant Strike — removal + lifegain — "Destroy target artifact or tapped creature. You gain 3 life." — beats: weakest interaction
+- Osseous Exhale — removal + lifegain — "Osseous Exhale deals 5 damage to target attacking or blocking creature. If a Dragon was beheld, you gain 2 life." — beats: weakest interaction
+- Futurist Forge — draw — "When this artifact enters, draw a card. | {3}{U}, Sacrifice this artifact: Draw two cards." — beats: weak draw filler
+- Swampsnare Trap — removal — "Enchant creature | Enchanted creature gets -5/-3." — beats: weakest interaction
+- Pyrrhic Strike — removal — "• Destroy target artifact or enchantment. • Destroy target creature with mana value 3 or greater." — beats: weakest interaction
+- Agonizing Remorse — hand disruption — "Target opponent reveals their hand. You choose a nonland card from it or a card from their graveyard. Exile that card." — beats: weakest interaction slot
+- Spiral into Solitude — removal — "Enchanted creature can't attack or block. | {1}{W}, Blight 1, Sacrifice this Aura: Exile enchanted creature." — beats: weakest interaction
+- The Last Ronin — board wipe — "I — Destroy all creatures." — beats: no current board wipe that spares planeswalkers
+- Mirkwood — fixing land — "{T}: Add {B} or {G}." — beats: a basic Swamp/Forest
+- Murdock's Crusade — removal — "• Street Justice — Exile target creature with toughness 4 or greater. • Legal Justice — Exile target enchantment with mana value 4 or greater." — beats: weakest interaction
+- Mardu Charm — removal — "• Mardu Charm deals 4 damage to target creature. • Create two 1/1 white Warrior tokens... • Target opponent reveals their hand... discards that card." — beats: weakest interaction
+- Debris Field Crusher — removal — "When this Spacecraft enters, it deals 3 damage to any target." — beats: weakest interaction
+- Torch the Witness — removal — "Torch the Witness deals twice X damage to target creature." — beats: weakest interaction
+- Giant's Boulder — 5c fixing rock — "{1}, {T}: Add one mana of any color. | {7}, {T}, Sacrifice this artifact: Destroy target permanent." — beats: a two-colour Signet (any-colour fixing, plus late removal)
+- Artistic Process — removal — "• deals 6 damage to target creature. • deals 2 damage to each creature you don't control. • Create a 3/3 flying token." — beats: weakest interaction
+- Tweeze — removal — "Tweeze deals 3 damage to any target. You may discard a card. If you do, draw a card." — beats: weakest interaction
+- Smaug, the Great Calamity // Spew Flame — removal + creature — "Spew Flame deals 5 damage to target creature." — beats: weakest interaction
+- Prison Sentence — removal — "Enchanted creature can't attack or block, and its activated abilities can't be activated." — beats: weakest interaction
+- Ajani's Response — removal — "This spell costs {3} less to cast if it targets a tapped creature. | Destroy target creature." — beats: weakest interaction
+- Nahiri, Storm of Stone — planeswalker — "−X: Nahiri deals X damage to target tapped creature." — beats: a new planeswalker type feeds Tam's proliferate X; also removal
+- Seismic Rupture — board wipe — "Seismic Rupture deals 2 damage to each creature without flying." — beats: no current board wipe that spares planeswalkers
+- Tigra, Feline Fury — lifegain payoff — "Whenever you gain life, put a +1/+1 counter on Tigra." — beats: weakest creature slot; direct Way of the Mentor synergy
+- Foraging Wickermaw — fixing — "{1}: Add one mana of any color. This creature becomes that color until end of turn. Activate only once each turn." — beats: a two-colour Signet
+- Devouring Tendrils — removal + lifegain — "Target creature you control deals damage equal to its power to target creature or planeswalker you don't control. When the permanent you don't control dies this turn, you gain 2 life." — beats: weakest interaction; also hits planeswalkers
+- Betrayer's Bargain — removal — "Betrayer's Bargain deals 5 damage to target creature. If that creature would die this turn, exile it instead." — beats: weakest interaction
+- Manhole Missile — removal — "Manhole Missile deals 3 damage to target creature. You may put a card from your hand on the bottom of your library. If you do, draw a card." — beats: weakest interaction
+- Wanderbrine Preacher — lifegain engine — "Whenever this creature becomes tapped, you gain 2 life." — beats: weakest creature slot; repeatable Way of the Mentor trigger
+- Swat Away — interaction — "The owner of target spell or creature puts it on their choice of the top or bottom of their library." — beats: weakest interaction
+- Bewildering Blizzard — draw — "Draw three cards. Creatures your opponents control get -3/-0 until end of turn." — beats: weak draw filler
+- Galvanize — removal — "Galvanize deals 3 damage to target creature. If you've drawn two or more cards this turn, Galvanize deals 5 damage to that creature instead." — beats: weakest interaction
+- Lake-town — fixing land — "{T}: Add {W} or {U}." — beats: a basic Plains/Island
+- Riverwalk Technique — counterspell/tempo — "• The owner of target nonland permanent puts it on their choice of the top or bottom of their library. • Counter target noncreature spell." — beats: weakest interaction
+- Reiterating Bolt — removal — "Reiterating Bolt deals 3 damage to target creature or planeswalker." — beats: weakest interaction; also hits planeswalkers
+- Death in the Family — removal — "Exile target creature with mana value 3 or less." — beats: weakest interaction
+- Glass Casket — removal — "When this artifact enters, exile target creature an opponent controls with mana value 3 or less until this artifact leaves the battlefield." — beats: weakest interaction
+- Turtles in Time — board wipe — "Return all creatures to their owners' hands." — beats: no current board wipe that spares planeswalkers
+- Feed the Flames — removal — "Feed the Flames deals 5 damage to target creature. If that creature would die this turn, exile it instead." — beats: weakest interaction
+- Vote Out — removal — "Convoke... Destroy target creature." — beats: weakest interaction
