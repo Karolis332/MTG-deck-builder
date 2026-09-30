@@ -80,6 +80,16 @@ describe('autoBuildDeck — superfriends walker minimum backfill', () => {
         '+1: Do a small thing.\n-2: Do a bigger thing.', ['W'], 5000 + i);
     });
 
+    // U8a defect 2: proliferate SUPPORT cards for Step 4b's synergyMinimums
+    // 'planeswalker' category (SYNERGY_REQUIREMENTS_MAP text match — distinct
+    // from the walker-permanent floor above). Without a guard, filling this
+    // deficit displaces the lowest-scored current picks, which after the
+    // floor backfill are disproportionately the walkers it just added —
+    // undoing the floor (2026-09-30 Tam collection build: floor 18, shipped 16).
+    for (let i = 1; i <= 12; i++) {
+      add(`Test Proliferate Support ${i}`, 2, '{1}{W}', 'Sorcery', 'Proliferate.', ['W'], 3000 + i);
+    }
+
     for (let i = 1; i <= 10; i++) add(`Test Removal ${i}`, 2, '{1}{W}', 'Instant', 'Destroy target creature.', ['W']);
     for (let i = 1; i <= 4; i++) add(`Test Wrath ${i}`, 4, '{2}{W}{W}', 'Sorcery', 'Destroy all creatures.', ['W']);
     for (let i = 1; i <= 10; i++) add(`Test Rock ${i}`, 2, '{2}', 'Artifact', '{T}: Add {W}.', []);
@@ -126,6 +136,24 @@ describe('autoBuildDeck — superfriends walker minimum backfill', () => {
     });
     expect(r.strategy).toBe('superfriends');
     const main = r.cards.filter((e) => e.board === 'main');
+    const walkerCount = main
+      .filter((e) => (e.card.type_line || '').includes('Planeswalker'))
+      .reduce((s, e) => s + e.quantity, 0);
+    expect(walkerCount).toBeGreaterThanOrEqual(18);
+  }, 60_000);
+
+  it('U8a defect 2: Step 4b filling the synergyMinimums planeswalker (support) deficit does not undo the walker-permanent floor', async () => {
+    const r = await builder.autoBuildDeck({
+      format: 'commander', colors: [], commanderName: 'Test Strong Payoff Commander',
+    });
+    const main = r.cards.filter((e) => e.board === 'main');
+    // The proliferate support cards must actually have been picked to
+    // satisfy the synergyMinimums deficit — otherwise this test isn't
+    // exercising the Step 4b interaction at all.
+    const supportCount = main
+      .filter((e) => e.card.name.startsWith('Test Proliferate Support'))
+      .reduce((s, e) => s + e.quantity, 0);
+    expect(supportCount).toBeGreaterThan(0);
     const walkerCount = main
       .filter((e) => (e.card.type_line || '').includes('Planeswalker'))
       .reduce((s, e) => s + e.quantity, 0);
