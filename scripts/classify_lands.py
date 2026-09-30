@@ -70,6 +70,15 @@ def detect_land_types(type_line: str) -> list[str]:
     return found
 
 
+def is_mana_base_land(type_line: str, layout: str | None) -> bool:
+    """A card belongs in the mana base only if it can be PLAYED as a land: its
+    front face is a Land, or it is a modal DFC with a land face. A transforming
+    artifact/creature with a land back (Dowsing Dagger, Treasure Map) is a spell
+    — classifying it read its back as a tier-2 WUBRG "pathway"."""
+    front = type_line.split("//")[0]
+    return "Land" in front or (layout == "modal_dfc" and "Land" in type_line)
+
+
 def classify_land(name: str, type_line: str, oracle: str, produced_mana_json: str | None) -> dict:
     """Classify a single land card. Returns classification dict.
 
@@ -344,13 +353,19 @@ def main():
 
     # Fetch all lands
     lands = conn.execute("""
-        SELECT id, name, type_line, oracle_text, produced_mana
+        SELECT id, name, type_line, oracle_text, produced_mana, layout
         FROM cards
         WHERE type_line LIKE '%Land%'
         ORDER BY name
     """).fetchall()
+    lands = [land for land in lands if is_mana_base_land(land["type_line"], land["layout"])]
 
     print(f"Found {len(lands)} lands to classify...")
+
+    # Rows for cards that no longer qualify (transform land backs) would
+    # otherwise survive the upsert below.
+    names = [land["name"] for land in lands]
+    conn.execute("DELETE FROM land_classifications WHERE card_name NOT IN (%s)" % ",".join("?" * len(names)), names)
 
     classified = 0
     for land in lands:

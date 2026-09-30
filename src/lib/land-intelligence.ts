@@ -280,6 +280,7 @@ export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
     LEFT JOIN land_classifications lc ON lc.card_id = c.id
     WHERE c.type_line LIKE '%Land%'
     AND c.type_line NOT LIKE '%Basic%'
+    AND (c.layout = 'modal_dfc' OR instr(c.type_line, '//') = 0 OR substr(c.type_line, 1, instr(c.type_line, '//') - 1) LIKE '%Land%')
     ${legalityFilter}
     ORDER BY lc.tier ASC NULLS LAST, c.edhrec_rank ASC NULLS LAST
     LIMIT 1000

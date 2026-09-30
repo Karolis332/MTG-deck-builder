@@ -74,7 +74,12 @@ export function getScoringWeights(): Record<string, number> | null {
 const MAX_MDFC_IN_SPELLS = 4;
 /** A-D1: quality floor = this share of the score of the pool's nonLandTarget-th best pickable nonland. */
 const QUALITY_FLOOR_RATIO = 0.6;
-function isLandBackDfc(card: DbCard): boolean {
+export function isLandBackDfc(card: DbCard): boolean {
+  // Only a modal DFC can be PLAYED as its land face. A transforming artifact
+  // or creature with a land back (Dowsing Dagger, Treasure Map, Tarrian's
+  // Journal) is a spell that stays a spell — counting it here shrank Ygra's
+  // real land count to 29 of 35.
+  if (card.layout !== 'modal_dfc') return false;
   const tl = card.type_line || '';
   return tl.includes('//') && !tl.split('//')[0].includes('Land') && tl.includes('Land');
 }

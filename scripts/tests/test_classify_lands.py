@@ -259,3 +259,14 @@ def test_costly_rainbows_are_tier4():
     assert vale["tier"] == 4
     rainbow = classify_land("Rainbow Vale", "Land", "{T}: Add one mana of any color. At the beginning of the end step, target opponent gains control of this land.", '["B","G","R","U","W"]')
     assert rainbow["tier"] == 4
+
+
+# ── Unit P2-L (2026-09-30): integrate-2 defects #1 and #2 ──────────────────
+
+def test_transform_land_back_is_not_a_mana_base_land():
+    from classify_lands import is_mana_base_land
+    assert is_mana_base_land("Artifact — Equipment // Land", "transform") is False
+    assert is_mana_base_land("Sorcery // Land", "modal_dfc") is True
+    assert is_mana_base_land("Land — Town // Sorcery — Adventure", "adventure") is True
+    assert is_mana_base_land("Land", "normal") is True
+
