@@ -797,6 +797,8 @@ interface BuildOptions {
   excludeNames?: Set<string>;
   /** MDFC spell//land cards already picked as spells — they spend the shared MAX_MDFC_LANDS budget (A-D12) */
   mdfcPicked?: number;
+  /** Tainted Pact / Demonic Consultation in the deck: one copy per basic name, snow basics are other names, then nonbasics (B-D8) */
+  singletonBasics?: boolean;
 }
 
 /**
@@ -829,6 +831,10 @@ export function buildOptimalLandBase(options: BuildOptions): LandBaseResult {
   // (a flat 30 in 4-5 colours used to guarantee Temple of the Dragon Queen,
   // Starting Town and the tapped Landscapes a slot).
   const candidates = scored.filter((s) => s.clearsBar && s.score >= SELECT_MIN_SCORE);
+  // Singleton basics (B-D8): once the one regular and one snow copy per
+  // colour are in and the real candidates are gone, any scored land beats a
+  // basic the deck cannot run.
+  const fallback = options.singletonBasics ? scored.filter((s) => !s.clearsBar && s.score >= SELECT_MIN_SCORE) : [];
   const basicColors = colors.filter((c) => BASIC_LAND_MAP[c]);
   const MAX_MONO_COLORLESS = 2;
 
@@ -855,7 +861,15 @@ export function buildOptimalLandBase(options: BuildOptions): LandBaseResult {
   const intensity = (c: string) => manaDemand?.colorIntensity[c] ?? 1 / colors.length;
   const need = (c: string) => Math.max(0, (targets[c] ?? 0) - (sources[c] ?? 0)) / Math.max(1, targets[c] ?? 1)
     * (0.5 + 0.5 * intensity(c) * colors.length);
-  const neediestBasic = () => [...basicColors].sort((a, b) => need(b) - need(a) || intensity(b) - intensity(a))[0];
+  // The basic name a colour's next basic would take: the regular basic, then
+  // (singleton basics) its snow-covered twin, then nothing — the colour is
+  // served by nonbasics from there.
+  const basicNameFor = (c: string): string | null => {
+    const name = BASIC_LAND_MAP[c];
+    if (!options.singletonBasics || !basicDistribution[name]) return name;
+    return basicDistribution[`Snow-Covered ${name}`] ? null : `Snow-Covered ${name}`;
+  };
+  const neediestBasic = () => basicColors.filter((c) => basicNameFor(c) !== null).sort((a, b) => need(b) - need(a) || intensity(b) - intensity(a))[0];
 
   const selectedLands: Array<{ card: DbCard; quantity: number }> = [];
   const selectedNames = new Set<string>();
@@ -881,7 +895,8 @@ export function buildOptimalLandBase(options: BuildOptions): LandBaseResult {
     return true;
   };
   const giveBasic = (c: string) => {
-    basicDistribution[BASIC_LAND_MAP[c]] = (basicDistribution[BASIC_LAND_MAP[c]] || 0) + 1;
+    const name = basicNameFor(c)!;
+    basicDistribution[name] = (basicDistribution[name] || 0) + 1;
     sources[c] += 1;
     basicCount += 1;
   };
@@ -912,7 +927,11 @@ export function buildOptimalLandBase(options: BuildOptions): LandBaseResult {
     });
     const basicColor = neediestBasic();
     const basicKey = basicColor ? BASIC_SCORE + DEFICIT_WEIGHT * need(basicColor) : -Infinity;
-    if (idx === -1 && !basicColor) break;
+    if (idx === -1 && !basicColor) {
+      if (!fallback.length) break;
+      remaining.push(...fallback.splice(0));
+      continue;
+    }
     if (idx === -1 || basicKey >= bestKey) { giveBasic(basicColor); continue; }
     const [pick] = remaining.splice(idx, 1);
     const qty = isCommander ? 1 : Math.min(4, targetLandCount - nonBasicCount - basicCount);

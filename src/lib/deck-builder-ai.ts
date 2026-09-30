@@ -71,6 +71,8 @@ export function getScoringWeights(): Record<string, number> | null {
 
 /** A-D1: quality floor = this share of the score of the pool's nonLandTarget-th best pickable nonland. */
 const QUALITY_FLOOR_RATIO = 0.6;
+/** B-D8: with one of these in the deck every basic name is capped at one copy (snow basics are other names). */
+const SINGLETON_NAME_COMBO = new Set(['Tainted Pact', 'Demonic Consultation']);
 export function isLandBackDfc(card: DbCard): boolean {
   // Only a modal DFC can be PLAYED as its land face. A transforming artifact
   // or creature with a land back (Dowsing Dagger, Treasure Map, Tarrian's
@@ -2816,6 +2818,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
       collectionSource: options.collectionSource,
       excludeNames,
       mdfcPicked: mdfcLandBackCount,
+      singletonBasics: isCommander && picked.some((p) => p.board === 'main' && SINGLETON_NAME_COMBO.has(stripArenaPrefix(p.card.name))),
     });
 
     // Add non-basic lands. A--stripped: a land already picked (e.g. as an
