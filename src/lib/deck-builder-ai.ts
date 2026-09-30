@@ -6,7 +6,7 @@ import { DEFAULT_LAND_COUNT, DEFAULT_DECK_SIZE, getLegalityKey, COMMANDER_FORMAT
 import { getCardGlobalScore, getMetaAdjustedScore } from './global-learner';
 import { getEdhrecRecommendations, getEdhrecThemeCards } from './edhrec';
 import type { EdhrecRecommendation } from './edhrec';
-import { getTemplate, getScaledCurve, mergeWithCommanderProfile } from './deck-templates';
+import { getTemplate, getScaledCurve, mergeWithCommanderProfile, getRecommendedLands, ARCHETYPE_TEMPLATES } from './deck-templates';
 import type { Archetype, ArchetypeTemplate } from './deck-templates';
 import { analyzeCommander, mergeProfiles, detectTribalPayoff } from './commander-synergy';
 import type { CommanderSynergyProfile } from './commander-synergy';
@@ -26,7 +26,7 @@ import {
 } from './deck-builder-constraints';
 import { analyzeCommanderForBuild } from './commander-analysis';
 import type { ArsenalCard } from './commander-analysis';
-import { classifyCard, getPrimaryCategory, isDrawEngine, isBoardWipe } from './card-classifier';
+import { classifyCard, getPrimaryCategory, isDrawEngine, isBoardWipe, isHonestRamp } from './card-classifier';
 import type { ClassifyOpts } from './card-classifier';
 import { isTribeCreature, narrowTutorTarget, countTargets, colorlessPipCount, isColorlessSource, isMonoColourDeadFixer } from './card-relevance';
 import type { RelevanceCard } from './card-relevance';
@@ -1756,6 +1756,19 @@ export function resolveConsistentManaLandTarget(
   return baseLandTarget;
 }
 
+/**
+ * B-D1: the land count follows the deck that was actually picked, not a flat
+ * format default (Tymna + Thrasios shipped 39 lands at MV 1.9 with 16 mana
+ * pieces). Archetype + colour recommendation, minus one land per three honest
+ * ramp pieces over eight, minus one under MV 3 and two under MV 2.5; never
+ * under 30 or over 38. Commander-scale only (the caller guards 60-card formats).
+ */
+export function resolveLandTarget(strategy: string, colorCount: number, honestRamp: number, avgMv: number): number {
+  const archetype = (strategy.toLowerCase() in ARCHETYPE_TEMPLATES ? strategy.toLowerCase() : 'midrange') as Archetype;
+  const curve = avgMv < 2.5 ? 2 : avgMv < 3 ? 1 : 0;
+  return Math.min(38, Math.max(30, getRecommendedLands(archetype, colorCount) - Math.floor(Math.max(0, honestRamp - 8) / 3) - curve));
+}
+
 const SUPERFRIENDS_DRAW_CAP_RE = /draw (?:a|two|three|four|x|that many|cards|\d) cards?|draws? (?:a|two|three|\d|x) cards?|whenever you draw/i;
 
 // A cycling land's reminder text ("{2}, {T}, Discard this card: Draw a card")
@@ -2669,13 +2682,37 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
   }
 
   // ── Step 5: Add lands (via land intelligence) ───────────────────────────
+  const isSpellFront = (card: DbCard) => !(card.type_line || '').split('//')[0].includes('Land');
+  const mainSpells = () => picked.filter((p) => p.board === 'main' && isSpellFront(p.card));
+  let freedSlots = 0;
   // MDFC spell//land cards already in the nonland picks are tapped-land
   // equivalents — every one of them reduces how many dedicated land slots
   // the deck needs, otherwise total land-capable cards balloon to 45-52.
   const mdfcLandBackCount = picked.filter((p) => isLandBackDfc(p.card)).length;
+  // B-D1: the land count follows the picked deck (ramp and curve), Commander-
+  // scale formats only; a "consistent mana" hint still only moves it up.
+  let landTarget = targetLands;
+  if (isCommander && targetLands >= 30) {
+    const spells = mainSpells();
+    const spellQty = spells.reduce((s, p) => s + p.quantity, 0);
+    const honestRamp = spells.reduce((s, p) => s + (isHonestRamp(p.card.name, p.card.oracle_text || '', p.card.type_line || '') ? p.quantity : 0), 0);
+    const avgMv = spellQty ? spells.reduce((s, p) => s + (p.card.cmc || 0) * p.quantity, 0) / spellQty : 0;
+    const formula = resolveLandTarget(resolvedStrategy, colors.length, honestRamp, avgMv);
+    landTarget = hints.consistentMana ? Math.max(targetLands, formula) : formula;
+    freedSlots += Math.max(0, targetLands - landTarget);
+  }
+  // Refill the freed nonland slots from the pool, best score first.
+  for (const s of scored) {
+    if (freedSlots <= 0) break;
+    if (pickedNames.has(s.card.name) || getMaxQty(s.card) <= 0 || !isSpellFront(s.card) || isLandBackDfc(s.card)) continue;
+    picked.push({ card: s.card, quantity: 1, board: 'main' });
+    pickedNames.add(s.card.name);
+    reasoning.push({ cardName: s.card.name, role: 'refill', reason: `land count ${targetLands} → ${landTarget}: next-best pool card` });
+    freedSlots -= 1;
+  }
   // Floor at 30 for 100-card formats, but never above the format's own target
   // (standardbrawl runs 24 lands in a 60-card deck — the flat 30 floor shipped 65-card decks).
-  const targetLandsEffective = Math.max(Math.min(30, targetLands), targetLands - Math.min(6, mdfcLandBackCount));
+  const targetLandsEffective = Math.max(Math.min(30, landTarget), landTarget - Math.min(6, mdfcLandBackCount));
 
   const basicLandMap: Record<string, string> = {
     W: 'Plains', U: 'Island', B: 'Swamp', R: 'Mountain', G: 'Forest',
@@ -3012,7 +3049,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
   // can't reach the user. Repairs are size-preserving swaps; bounded to avoid
   // thrash. This is the safety net that replaces hand-patching the builder.
   const DRAW_RE = /draw (?:a|two|three|four|x|that many|cards|\d) cards?|draws? (?:a|two|three|\d|x) cards?/i;
-  const auditOpts = { colors, format: options.format, targetLands, isCommander, strategy: resolvedStrategy };
+  const auditOpts = { colors, format: options.format, targetLands: landTarget, isCommander, strategy: resolvedStrategy };
   let health = auditDeck(picked, auditOpts);
 
   if (health.deficiencies.length > 0) {
