@@ -40,6 +40,8 @@ const COMBO_STAPLE_FLOOR = 24;
 const COMBO_STAPLE_CATEGORY_CAP: Record<string, number> = {
   fast_mana: 8, tutor: 6, wincon: 3, win_condition: 3, stax: 2, hatebear: 2, default: 6,
 };
+// P2 #13: the roles Step 4c may upgrade within — the plan's quota roles.
+const UPGRADE_ROLES = new Set(['ramp', 'draw', 'tutor', 'removal', 'board_wipe', 'protection', 'win_condition']);
 import type { RelevanceCard } from './card-relevance';
 import { parseBuildHints } from './build-hints';
 import type { ParsedBuildHints } from './build-hints';
@@ -2706,9 +2708,14 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
     // In 3+ colours every cheap fixing rock is plan, wherever it was seated:
     // the classifier files treasure-makers under 'ramp' too, and by score
     // they took all five of Tam's Signets.
+    // P2 #13: a card with a positive tribal / commander-profile component is
+    // a plan piece too (Ygra traded Ayara, First of Locthwain for Beast
+    // Whisperer), and an "upgrade" only exists inside the plan's quota roles —
+    // a utility/synergy primary is not a job another card does better
+    // (Tezzeret CC as 'tutor', Archmage Emeritus as 'draw' were off-plan).
     const isPlanPick = (card: DbCard): boolean =>
       payoffNames.has(card.name.toLowerCase()) || tribalNames.has(card.name) || fixingFloorNames.has(card.name)
-      || comboStapleNames.has(card.name)
+      || comboStapleNames.has(card.name) || synergyNames.has(card.name)
       || (colors.length >= 3 && isFixingRock(card))
       || (isSuperfriends && (/\bPlaneswalker\b/.test(card.type_line || '') || isWalkerEngineCard(card) || isWalkerSupportCard(card)));
     const isSpellSlot = (card: DbCard): boolean =>
@@ -2721,6 +2728,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
       for (const p of picked) {
         if (p.board !== 'main' || p.quantity !== 1 || !isSpellSlot(p.card) || isPlanPick(p.card)) continue;
         const role = primaryOf(p.card);
+        if (!UPGRADE_ROLES.has(role)) continue;
         const w = worstByRole.get(role);
         if (!w || scoreOfName(p.card.name) < scoreOfName(w.card.name)) worstByRole.set(role, p);
       }
