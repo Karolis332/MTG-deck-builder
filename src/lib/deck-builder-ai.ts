@@ -21,6 +21,8 @@ import {
   pickByRole,
   buildReasoningSummary,
   CardNameSet,
+  formatMaxCopies,
+  ANY_NUMBER_RE,
 } from './deck-builder-constraints';
 import { analyzeCommanderForBuild } from './commander-analysis';
 import type { ArsenalCard } from './commander-analysis';
@@ -1889,11 +1891,13 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
   const reasoning: Array<{ cardName: string; role: string; reason: string }> = [];
 
   function getMaxQty(card: DbCard): number {
-    const formatMax = isCommander ? 1 : maxCopies;
+    const formatMax = formatMaxCopies(card.oracle_text, isCommander, maxCopies);
     if (!useCollection) return formatMax;
     const owned = ownedQty.get(card.name) || 0;
-    // Block unowned cards entirely when building from collection
-    return owned > 0 ? Math.min(formatMax, owned) : 0;
+    // Block unowned cards entirely when building from collection. An
+    // any-number card ships at its owned quantity (A-D5: Slime x4).
+    if (owned <= 0) return 0;
+    return ANY_NUMBER_RE.test(card.oracle_text || '') ? owned : Math.min(formatMax, owned);
   }
 
   // ── (a) Build commander arsenal ────────────────────────────────────────
@@ -2002,7 +2006,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
     if (cardRoles.length > 0 && cardRoles.every((r) => (preFillRoleFills[r] ?? 0) >= roleCaps[r])) continue;
     const cardMax = getMaxQty(a.card);
     if (cardMax <= 0) continue;
-    const qty = isCommander ? 1 : Math.min(cardMax, nonLandTarget - totalPicked);
+    const qty = Math.min(cardMax, nonLandTarget - totalPicked);
     if (qty <= 0) continue;
     picked.push({ card: a.card, quantity: qty, board: 'main' });
     pickedNames.add(a.card.name);

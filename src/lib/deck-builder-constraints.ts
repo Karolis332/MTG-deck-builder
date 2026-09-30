@@ -40,6 +40,17 @@ export class CardNameSet extends Set<string> {
   has(name: string): boolean { return super.has(stripArenaPrefix(name)); }
   delete(name: string): boolean { return super.delete(stripArenaPrefix(name)); }
 }
+
+/** "A deck can have any number of cards named …" (Slime Against Humanity, Persistent Petitioners, Relentless Rats…). */
+export const ANY_NUMBER_RE = /a deck can have any number of cards named/i;
+/** Copies of an any-number card in a build that has no collection to bound it (a tribal template's core-slot count). */
+export const ANY_NUMBER_DEFAULT_COPIES = 8;
+
+/** Per-card copy cap the format allows: singleton, the 60-card maximum, or unbounded when the oracle says so (A-D5). */
+export function formatMaxCopies(oracleText: string | null | undefined, isCommanderFormat: boolean, maxCopies: number): number {
+  if (ANY_NUMBER_RE.test(oracleText || '')) return ANY_NUMBER_DEFAULT_COPIES;
+  return isCommanderFormat ? 1 : maxCopies;
+}
 import type { Archetype } from './deck-templates';
 
 // ── Curated archetype payoff lists ─────────────────────────────────────────
@@ -725,7 +736,8 @@ export function pickByRole(opts: PickByRoleOptions): PickByRoleResult {
     if (landBack && mdfcLandBacks >= MAX_MDFC_LAND_BACKS) return false;
     const cardMax = getMaxQty(c.card);
     if (cardMax <= 0) return false;
-    const qty = isCommanderFormat ? 1 : Math.min(cardMax, nonLandTarget - totalPicked);
+    // getMaxQty already caps singleton formats at 1 — except any-number cards (A-D5).
+    const qty = Math.min(cardMax, nonLandTarget - totalPicked);
     if (qty <= 0) return false;
     picks.push({ card: c.card, quantity: qty, board: 'main', role, reason });
     pickedNames.add(c.card.name);

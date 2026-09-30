@@ -66,8 +66,9 @@ describe('formatMaxCopies (A-D5): "any number of cards named" lifts the singleto
       { card: makeCard({ id: 'slime', name: 'Slime Against Humanity', type_line: 'Sorcery', oracle_text: SLIME }), score: 95 },
       ...rolePool(6),
     ];
+    // 18 role cards + 4 Slimes < 30 slots: everything is taken, so the quantity is the cap, not the remainder.
     const result = pickByRole({
-      pool, nonLandTarget: 20, quotas: getRoleQuotas('midrange', 20, null), payoffNames: new Set(),
+      pool, nonLandTarget: 30, quotas: getRoleQuotas('midrange', 30, null), payoffNames: new Set(),
       getMaxQty: (c) => (c.name === 'Slime Against Humanity' ? 4 : 1), isCommanderFormat: true,
       passBScoreFloor: 0,
     });
