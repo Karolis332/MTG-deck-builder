@@ -28,7 +28,7 @@ import { analyzeCommanderForBuild } from './commander-analysis';
 import type { ArsenalCard } from './commander-analysis';
 import { classifyCard, getPrimaryCategory, isDrawEngine, isBoardWipe } from './card-classifier';
 import type { ClassifyOpts } from './card-classifier';
-import { isTribeCreature, narrowTutorTarget, countTargets, colorlessPipCount, isColorlessSource, isMonoColourDeadFixer, TOKEN_MAKER_RE, CREATURE_GATED_RE } from './card-relevance';
+import { isTribeCreature, narrowTutorTarget, countTargets, colorlessPipCount, isColorlessSource, isMonoColourDeadFixer, enablerShortfall, TOKEN_MAKER_RE, CREATURE_GATED_RE } from './card-relevance';
 
 // P2 #8: a template whose creature band tops out here cannot feed a
 // creature-gated engine (superfriends / control / spellslinger are [8, 16]).
@@ -3505,7 +3505,7 @@ export function applyDeadCardPass(
 
   const mainCards = (): RelevanceCard[] =>
     cards.filter((c) => c.board === 'main')
-      .map((c) => ({ name: c.card.name, type_line: c.card.type_line, oracle_text: c.card.oracle_text, quantity: c.quantity }));
+      .map((c) => ({ name: c.card.name, type_line: c.card.type_line, oracle_text: c.card.oracle_text, cmc: c.card.cmc, power: c.card.power, quantity: c.quantity }));
 
   const colourlessSourceCount = (): number =>
     cards.filter((c) => c.board === 'main' && isColorlessSource(c.card)).reduce((s, c) => s + c.quantity, 0);
@@ -3514,8 +3514,12 @@ export function applyDeadCardPass(
     const target = narrowTutorTarget(card);
     if (target) {
       const count = countTargets(target, mainCards());
-      if (count < NARROW_TUTOR_MIN_TARGETS) return `narrow tutor: only ${count} ${target.value} in deck`;
+      const what = target.kind === 'mv_min' ? `${target.typeWord ?? 'card'}s at mana value ${target.value}+` : target.value;
+      if (count < NARROW_TUTOR_MIN_TARGETS) return `narrow tutor: only ${count} ${what} in deck`;
     }
+    // P2 B-D6: a payoff whose trigger names an enabler the deck lacks.
+    const shortfall = enablerShortfall(card, mainCards(), commanderOracle);
+    if (shortfall) return shortfall;
     const pips = colorlessPipCount(card.mana_cost);
     if (pips > 0) {
       const needed = pips >= 2 ? COLORLESS_SOURCES_FOR_TWO_PIPS : COLORLESS_SOURCES_FOR_ONE_PIP;
