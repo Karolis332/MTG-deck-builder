@@ -1894,6 +1894,27 @@ export function isStep4bDisplaceable(
   return true;
 }
 
+export interface WipeBackfillCtx {
+  classifyOpts?: ClassifyOpts;
+  /** Pool score of the candidate; undefined when the DB net found a card the pool never scored. */
+  score?: number;
+  /** The pool quality floor (A-D1) — a scored card below it is bench material, not a wipe slot. */
+  scoreFloor: number;
+}
+
+// The board-wipe backfill's acceptance test (P2-G #10): the SQL LIKE net is a
+// broad fetch, so a candidate must (a) be a wipe by the same strict classifier
+// the quota accountant uses and (b) clear the pool's own quality floor when
+// the pool scored it (Tatyova shipped Turtles in Time at 21 vs a ~60 floor).
+export function isWipeBackfillCandidate(
+  card: Pick<DbCard, 'name' | 'oracle_text'>,
+  ctx: WipeBackfillCtx
+): boolean {
+  if (!isBoardWipe(card.name, card.oracle_text || '', ctx.classifyOpts)) return false;
+  if (ctx.score !== undefined && ctx.score < ctx.scoreFloor) return false;
+  return true;
+}
+
 export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult> {
   const db = getDb();
   const poolResult = await buildScoredCandidatePool(options);
@@ -2239,8 +2260,9 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
       if (wipesAdded >= Math.min(wipeNeed, room)) break;
       if (pickedNames.has(wipe.name)) continue;
       // Validate against the same classifier the quota accountant uses (C2)
-      // — the SQL LIKE clauses above are a broad net, not the source of truth.
-      if (!isBoardWipe(wipe.name, wipe.oracle_text || '', classifyOpts)) continue;
+      // — the SQL LIKE clauses above are a broad net, not the source of truth
+      // — and against the pool's quality floor (P2-G #10).
+      if (!isWipeBackfillCandidate(wipe, { classifyOpts, score: poolByName.get(wipe.name)?.score, scoreFloor: qualityFloor })) continue;
       const qty = getMaxQty(wipe);
       if (qty <= 0) continue;
       picked.push({ card: wipe, quantity: 1, board: 'main' });
