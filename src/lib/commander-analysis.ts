@@ -361,7 +361,7 @@ export function analyzeCommanderForBuild(
     commander.type_line || '',
     colors,
     undefined,
-    { superfriends: true },
+    { superfriends: true, builderPatterns: true },
   );
   const directNeeds = extractDirectNeeds(commander);
 

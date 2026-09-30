@@ -871,7 +871,7 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
 
       commanderProfile = analyzeCommander(
         fullOracleText, cmdRow.type_line, ci, commanderCard?.mana_cost || undefined,
-        { superfriends: true, tribalPayoff: true },
+        { superfriends: true, tribalPayoff: true, builderPatterns: true },
       );
 
       // Partner pair: analyze the second commander and merge both profiles
@@ -883,10 +883,10 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
           partnerCard.type_line || '',
           colors,
           partnerCard.mana_cost || undefined,
-          { superfriends: true, tribalPayoff: true },
+          { superfriends: true, tribalPayoff: true, builderPatterns: true },
         );
         if (commanderProfile && partnerProfile) {
-          commanderProfile = mergeProfiles(commanderProfile, partnerProfile);
+          commanderProfile = mergeProfiles(commanderProfile, partnerProfile, { builderPatterns: true });
         } else if (partnerProfile) {
           commanderProfile = partnerProfile;
         }
@@ -1105,9 +1105,23 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
   // specific archetype like aristocrats/spellslinger/combo.
   const profileArch = commanderProfile?.detectedArchetype;
   const genericArch = !profileArch || profileArch === 'voltron' || profileArch === 'midrange';
+  // B-D3: with no profile, the strategy comes from what the EDHREC-recommended
+  // cards DO (detectDeckThemes), never from an EDHREC theme LABEL mapped to
+  // 'aggro' — and 'aggro' additionally needs a single creature commander whose
+  // own text attacks (a partner pair or a noncreature commander never is).
+  const fallbackStrategy = (): 'aggro' | 'control' | 'midrange' => {
+    const composition = isCommander && edhrecResolvedCards.length > 0
+      ? detectDeckThemes(edhrecResolvedCards) : themes;
+    const aggroCommander = !isCommander || (!partnerCard
+      && /\bCreature\b/.test(commanderCard?.type_line || '')
+      && /\b(?:attacks?|attacking|combat damage|haste|double strike|first strike|trample|menace)\b/i.test(commanderCard?.oracle_text || ''));
+    if (composition.includes('aggro') && aggroCommander) return 'aggro';
+    if (composition.includes('control')) return 'control';
+    return 'midrange';
+  };
   const resolvedStrategy = resolvedStrategyHint
     || (tribalType && genericArch ? 'tribal' : profileArch)
-    || (themes.includes('aggro') ? 'aggro' : themes.includes('control') ? 'control' : 'midrange');
+    || fallbackStrategy();
   // Opt-in: a planeswalker never counts as 'draw' on this path (card-classifier
   // ClassifyOpts) — kept opt-in so every other archetype's classification is
   // byte-identical to before.

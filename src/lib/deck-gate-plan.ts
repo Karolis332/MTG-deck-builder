@@ -116,7 +116,7 @@ export function deriveCondition(
     tribalType = tribalMatch[1];
   }
 
-  const profile = analyzeCommander(text, typeLine, colorIdentity, manaCost ?? undefined, { superfriends: true });
+  const profile = analyzeCommander(text, typeLine, colorIdentity, manaCost ?? undefined, { superfriends: true, builderPatterns: true });
   const nouns = new Set<string>();
   for (const cat of profile?.triggerCategories ?? []) {
     for (const n of CATEGORY_NOUNS[cat] ?? []) nouns.add(n);
