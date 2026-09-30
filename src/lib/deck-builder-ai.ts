@@ -28,7 +28,11 @@ import { analyzeCommanderForBuild } from './commander-analysis';
 import type { ArsenalCard } from './commander-analysis';
 import { classifyCard, getPrimaryCategory, isDrawEngine, isBoardWipe } from './card-classifier';
 import type { ClassifyOpts } from './card-classifier';
-import { isTribeCreature, narrowTutorTarget, countTargets, colorlessPipCount, isColorlessSource, isMonoColourDeadFixer, TOKEN_MAKER_RE } from './card-relevance';
+import { isTribeCreature, narrowTutorTarget, countTargets, colorlessPipCount, isColorlessSource, isMonoColourDeadFixer, TOKEN_MAKER_RE, CREATURE_GATED_RE } from './card-relevance';
+
+// P2 #8: a template whose creature band tops out here cannot feed a
+// creature-gated engine (superfriends / control / spellslinger are [8, 16]).
+const CREATURE_LIGHT_MAX = 16;
 import type { RelevanceCard } from './card-relevance';
 import { parseBuildHints } from './build-hints';
 import type { ParsedBuildHints } from './build-hints';
@@ -1455,13 +1459,25 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
     // Decks "go stale" when their card advantage is one-shot cantrips/charms.
     // Reward sticky engines (Phyrexian Arena, The Great Henge, Sylvan Library)
     // so they win draw slots over redundant one-shots. Aggro wants fewer.
-    if (isDrawEngine(card.name, card.oracle_text || '', card.type_line || '')) {
+    // P2 #8: an engine that only fires off creatures (The Great Henge,
+    // Guardian Project, Garruk's Uprising) has nothing to fire off in a
+    // creature-light template (superfriends / control / spellslinger, ≤ 16
+    // creatures): no engine bonus, and the creature-gated text is taxed like
+    // a discouraged type. The template band decides, not the deck's creature
+    // count — scoring runs before any pick exists. Walkers are exempt (their
+    // minus abilities read "creatures with power 4 or greater" too).
+    const template = getTemplate(resolvedStrategy);
+    const creatureGated = template.creatures[1] <= CREATURE_LIGHT_MAX
+      && !/\bPlaneswalker\b/.test(card.type_line || '')
+      && CREATURE_GATED_RE.test(text);
+    if (!creatureGated && isDrawEngine(card.name, card.oracle_text || '', card.type_line || '')) {
       score += resolvedStrategy === 'aggro' ? 12 : 28;
     }
     snap('drawEngine');
+    if (creatureGated) score -= 60;
+    snap('creatureGate');
 
     // ── Archetype discouraged types penalty ──
-    const template = getTemplate(resolvedStrategy);
     if (template.discouragedTypes?.length) {
       const tl = card.type_line?.toLowerCase() ?? '';
       if (template.discouragedTypes.some(d => tl.includes(d.toLowerCase()))) {
