@@ -66,8 +66,13 @@ describe('themeToSlug', () => {
     expect(themeToSlug('Sacrifice')).toBe('sacrifice');
   });
 
-  it('handles +1/+1 counters special case', () => {
-    expect(themeToSlug('+1/+1 Counters')).toBe('p1p1-counters');
+  it('matches EDHREC taglink slugs for +1/+1 and -1/-1 counters', () => {
+    expect(themeToSlug('+1/+1 Counters')).toBe('plus-1-plus-1-counters');
+    expect(themeToSlug('-1/-1 Counters')).toBe('minus-1-minus-1-counters');
+  });
+
+  it('matches every taglink slug EDHREC ships in the fixture', () => {
+    for (const t of fixture.panels.taglinks) expect(themeToSlug(t.value)).toBe(t.slug);
   });
 
   it('handles multi-word themes', () => {

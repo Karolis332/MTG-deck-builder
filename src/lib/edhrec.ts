@@ -137,11 +137,14 @@ export interface EdhrecThemeCards {
   cards: EdhrecRecommendation[];
 }
 
+// Mirrors EDHREC's own theme slugs (panels.taglinks[].slug): '+' reads "plus", a sign before a
+// digit reads "minus" — '+1/+1 Counters' → 'plus-1-plus-1-counters'. Checked against 265 live
+// taglinks on 2026-09-30 (0 mismatches); the old 'p1p1-counters' form was a 403.
 export function themeToSlug(theme: string): string {
   return theme
     .toLowerCase()
-    .replace(/\+1\/\+1 counters?/g, 'p1p1-counters')
-    .replace(/-1\/-1 counters?/g, 'm1m1-counters')
+    .replace(/\+/g, ' plus ')
+    .replace(/(^|[^a-z0-9])-(?=\d)/g, '$1 minus ')
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-|-$/g, '');
 }
