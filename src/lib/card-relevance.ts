@@ -39,6 +39,25 @@ const BROAD_WORDS = new Set([
 
 const MTG_SUPERTYPES = new Set(['legendary', 'snow', 'world', 'host']);
 
+/** Own text that CREATES tokens ("create a 1/1 …", "create X … tokens", amass reminder text). Lower-case input. */
+export const TOKEN_MAKER_RE = /\bcreates? (?:a|an|x|two|three|four|five|that many|\d+)\b[^.]*\btokens?\b/;
+
+/**
+ * A payoff that only fires off the creatures you control — an ETB/attack/death
+ * engine, a power-N-or-greater draw, a sacrifice-a-creature outlet, a "for each
+ * creature you control" finisher. Dead weight in a creature-light list.
+ * Lower-case input; Elspeth's "destroy all creatures with power 4 or greater"
+ * is deliberately NOT matched (that one wants few creatures).
+ */
+export const CREATURE_GATED_RE = new RegExp([
+  'whenever (?:a|an|another|one or more) (?:nontoken |non-token |other )?(?:\\w+ )?creatures? (?:you control )?(?:enters|attacks|dies|blocks)',
+  'greatest power among creatures you control',
+  'creatures? you control with power \\d or greater',
+  'you control a creature with power \\d or greater',
+  'for each creature you control',
+  'sacrifice (?:a|another) creature:',
+].join('|'));
+
 // Colour words in front of a broad card type don't narrow the *type* being
 // searched, only which copies match ("a green creature card" is exactly as
 // broad as "a creature card") — Green Sun's Zenith reads this way and was

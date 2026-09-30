@@ -28,7 +28,7 @@ import { analyzeCommanderForBuild } from './commander-analysis';
 import type { ArsenalCard } from './commander-analysis';
 import { classifyCard, getPrimaryCategory, isDrawEngine, isBoardWipe } from './card-classifier';
 import type { ClassifyOpts } from './card-classifier';
-import { isTribeCreature, narrowTutorTarget, countTargets, colorlessPipCount, isColorlessSource, isMonoColourDeadFixer } from './card-relevance';
+import { isTribeCreature, narrowTutorTarget, countTargets, colorlessPipCount, isColorlessSource, isMonoColourDeadFixer, TOKEN_MAKER_RE } from './card-relevance';
 import type { RelevanceCard } from './card-relevance';
 import { parseBuildHints } from './build-hints';
 import type { ParsedBuildHints } from './build-hints';
@@ -1382,7 +1382,15 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
     // ── Theme synergy bonus ──
     const text = (card.oracle_text || '').toLowerCase();
     const keywords = (card.keywords || '').toLowerCase();
+    // P2 #5: in a tribal build a token MAKER earns the tokens theme and the
+    // token_generation profile bonus only when it makes the tribe (or is a
+    // tribal card) — Edgar took Hangarback Walker, Dreadhorde Invasion and
+    // Lannery Storm for "create a … token". Token payoffs that create nothing
+    // themselves (Anointed Procession, Impact Tremors) keep both.
+    const offTribeTokenMaker = tribalType !== null && TOKEN_MAKER_RE.test(text)
+      && !text.includes(tribalType) && !tribalNames.has(card.name);
     for (const theme of themes) {
+      if (theme === 'tokens' && offTribeTokenMaker) continue;
       const patterns = SYNERGY_GROUPS[theme];
       if (!patterns) continue;
       for (const pattern of patterns) {
@@ -1398,6 +1406,7 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
     // Cards matching commander's trigger categories get bonus score
     if (commanderProfile) {
       for (const [category, bonus] of Object.entries(commanderProfile.scoreBonuses)) {
+        if (category === 'token_generation' && offTribeTokenMaker) continue;
         const catPatterns = SYNERGY_REQUIREMENTS_MAP[category as keyof typeof SYNERGY_REQUIREMENTS_MAP];
         if (!catPatterns) continue;
         for (const p of catPatterns) {
