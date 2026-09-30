@@ -301,3 +301,13 @@ def test_self_sacrifice_only_colour_is_not_produced():
     )
     assert dig["produces_colors"] == []
     assert "W" in outpost["produces_colors"]
+
+
+def test_forsaken_city_card_per_untap_is_tier4():
+    city = classify_land(
+        "Forsaken City", "Land",
+        "This land doesn't untap during your untap step.\nAt the beginning of your upkeep, you may exile a card "
+        "from your hand. If you do, untap this land.\n{T}: Add one mana of any color.",
+        '["B","G","R","U","W"]',
+    )
+    assert city["tier"] == 4

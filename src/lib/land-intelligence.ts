@@ -532,8 +532,8 @@ export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
     let tier = land.tier || 3;
     if (isNeverColoredProducer(land, manaCtx) && tier < 4) tier = 4;
     const tapText = (land.oracle_text || '').toLowerCase();
-    // Bounces itself every untap step (Undiscovered Paradise): a land drop a turn for a basic's mana.
-    if (/as you untap your permanents, return this land to its owner's hand/.test(tapText)) tier = 4;
+    // Bounces itself every untap step (Undiscovered Paradise) or costs a card per untap (Forsaken City): worse than a basic.
+    if (/as you untap your permanents, return this land to its owner's hand|doesn't untap during your untap step/.test(tapText)) tier = 4;
     // Untapped only when true. Fetches are judged on their own ETB plus what
     // they deposit (Thawing Glaciers / Krosan Verge enter tapped, Evolving
     // Wilds fetches tapped); every other land on its ETB clause read against

@@ -312,12 +312,13 @@ def classify_land(name: str, type_line: str, oracle: str, produced_mana_json: st
 
     # A rainbow that costs 3 life per activation (Tarnished Citadel) or two
     # lands to enter (Lotus Vale, Scorched Ruins) or is donated at end of turn
-    # (Rainbow Vale), that any player may switch off (Rhystic Cave) or that
-    # bounces itself every untap step (Undiscovered Paradise) is worse than a
-    # basic.
+    # (Rainbow Vale), that any player may switch off (Rhystic Cave), that
+    # bounces itself every untap step (Undiscovered Paradise) or costs a card
+    # per untap (Forsaken City) is worse than a basic.
     if re.search(
         r"deals 3 damage to you|sacrifice two untapped lands|opponent gains control of"
-        r"|unless any player pays|as you untap your permanents, return this land to its owner's hand",
+        r"|unless any player pays|as you untap your permanents, return this land to its owner's hand"
+        r"|doesn't untap during your untap step",
         ot,
     ):
         tier = 4

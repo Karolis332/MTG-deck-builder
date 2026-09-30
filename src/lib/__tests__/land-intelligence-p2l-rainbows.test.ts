@@ -9,7 +9,7 @@ function scoreMap(opts: Parameters<typeof scoreLandsForDeck>[0]): Map<string, La
 
 describe('#2 conditional rainbows do not clear the bar', () => {
   const wubg = { colors: ['W', 'U', 'B', 'G'], format: 'commander' };
-  it.each(['Glimmervoid', 'Thran Quarry', 'Rhystic Cave', 'Archaeological Dig', 'Undiscovered Paradise'])('%s is not worth a slot over a basic in 4 colours with no census', (name) => {
+  it.each(['Glimmervoid', 'Thran Quarry', 'Rhystic Cave', 'Archaeological Dig', 'Undiscovered Paradise', 'Forsaken City'])('%s is not worth a slot over a basic in 4 colours with no census', (name) => {
     const m = scoreMap(wubg);
     expect(m.has(name) && m.get(name)!.clearsBar).toBe(false);
   });
