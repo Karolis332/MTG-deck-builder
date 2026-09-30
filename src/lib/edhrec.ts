@@ -72,11 +72,6 @@ interface EdhrecPage {
   panels?: { taglinks?: Array<{ value: string }>; themes?: Array<{ value: string }> };
 }
 
-// Staples (Sol Ring, Arcane Signet, Command Tower…) sit in 50–85 % of a commander's decks with
-// synergy ≈ 0, so a synergy-only top-N never hands them over and the builder's inclusion bonus
-// never fires; keep every card above this inclusion rate as well.
-const STAPLE_INCLUSION = 0.5;
-
 /** Flatten every cardlist, dedupe by name keeping the highest synergy, sort by synergy desc. */
 function parseCards(json: EdhrecPage, limit: number): EdhrecRecommendation[] {
   const cardlists = json.container?.json_dict?.cardlists ?? json.cardlists ?? [];
@@ -92,8 +87,9 @@ function parseCards(json: EdhrecPage, limit: number): EdhrecRecommendation[] {
       }
     }
   }
-  const bySynergy = Array.from(cardMap.values()).sort((a, b) => b.synergy - a.synergy);
-  return bySynergy.filter((c, i) => i < limit || c.inclusion >= STAPLE_INCLUSION);
+  return Array.from(cardMap.values())
+    .sort((a, b) => b.synergy - a.synergy)
+    .slice(0, limit);
 }
 
 function parseThemes(json: EdhrecPage): string[] {
