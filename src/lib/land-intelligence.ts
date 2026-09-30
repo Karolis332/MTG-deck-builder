@@ -568,6 +568,12 @@ interface BuildOptions {
   isCommander?: boolean;
   /** USD price ceiling per land; ignored when collectionOnly (owned = free) */
   maxCardPrice?: number;
+  /**
+   * A--stripped card names already spoken for elsewhere in the deck (e.g. an
+   * MDFC taken as a spell). Skipped during selection so the slot goes to the
+   * next-best land instead of being silently lost to Step 7 basics.
+   */
+  excludeNames?: Set<string>;
 }
 
 /**
@@ -620,6 +626,7 @@ export function buildOptimalLandBase(options: BuildOptions): LandBaseResult {
     // A--stripped: an Arena-rebalanced "A-X" and its paper name "X" are one card.
     const landKey = stripArenaPrefix(scored_land.card.name);
     if (selectedNames.has(landKey)) continue;
+    if (options.excludeNames?.has(landKey)) continue; // already picked elsewhere (e.g. MDFC spell)
     if (scored_land.score < SELECT_MIN_SCORE) continue; // Skip very low scoring lands
 
     const isMdfcSpellLand = !(scored_land.card.type_line || '').split('//')[0].includes('Land');

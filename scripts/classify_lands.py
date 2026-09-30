@@ -139,6 +139,25 @@ def classify_land(name: str, type_line: str, oracle: str, produced_mana_json: st
         tier = 2
         etb_condition = "two or fewer other lands"
 
+    # ── Slow lands ───────────────────────────────────────────────────
+    elif re.search(r"unless you control two or more other lands", ot):
+        category = "slow"
+        tier = 2
+        etb_condition = "two or more other lands"
+
+    # ── Starting Town (untapped on turns 1-3) ─────────────────────────
+    elif re.search(r"unless it's your first, second, or third turn of the game", ot):
+        category = "conditional_untapped"
+        tier = 2
+        etb_condition = "first three turns"
+
+    # ── Chosen basic land type, untapped for life (Multiversal Passage) ─
+    elif re.search(r"choose a basic land type", ot) and re.search(r"pay 2 life.*if you don.t.*enters tapped", ot):
+        category = "shock"
+        tier = 1
+        etb_condition = "pay 2 life"
+        synergy_tags.append("lifepay")
+
     # ── Pain lands ───────────────────────────────────────────────────
     elif re.search(r"\{t\}.*pay 1 life.*add \{[wubrgc]\}", ot) or re.search(r"deals? 1 damage to you", ot):
         category = "pain"
@@ -147,8 +166,13 @@ def classify_land(name: str, type_line: str, oracle: str, produced_mana_json: st
 
     # ── Pathway / MDFC lands ─────────────────────────────────────────
     elif "//" in name and "land" in tl:
-        category = "pathway"
-        tier = 2
+        if re.search(r"enters.*tapped", ot):
+            category = "tapped"
+            tier = 4
+            enters_untapped = False
+        else:
+            category = "pathway"
+            tier = 2
 
     # ── Tribal lands ─────────────────────────────────────────────────
     elif re.search(r"choose a creature type|chosen type|as .* enters.*name a creature type", ot):

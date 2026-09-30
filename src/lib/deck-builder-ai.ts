@@ -2252,6 +2252,12 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
   // Try land intelligence system (requires land_classifications table)
   let landsAdded = 0;
   try {
+    // A--stripped: cards already picked as spells (e.g. an MDFC taken for its
+    // spell side) must not also eat a land-base slot — and, unlike a plain
+    // post-hoc skip, the land builder needs to know about them BEFORE it
+    // picks, so it can fill that slot from the next-best land instead of
+    // silently losing it to Step 7 basics.
+    const excludeNames = new Set(Array.from(pickedNames, (n) => stripArenaPrefix(n)));
     const landBase = buildOptimalLandBase({
       colors,
       format: options.format,
@@ -2266,6 +2272,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
       maxCardPrice: options.maxCardPrice,
       userId: options.userId,
       collectionSource: options.collectionSource,
+      excludeNames,
     });
 
     // Add non-basic lands. A--stripped: a land already picked (e.g. as an

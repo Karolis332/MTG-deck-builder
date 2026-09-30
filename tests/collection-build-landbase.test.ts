@@ -302,6 +302,54 @@ describe('autoBuildDeck collection mode — land base ownership is scoped to the
     expect(health.sourcesByColor.B).toBe(4);
   }, 60_000);
 
+  // U3 — diagnosis §4(c)/§5.3. Step 5 in deck-builder-ai.ts drops a land-base
+  // pick when the card was already taken as an MDFC spell (`pickedNames.has`),
+  // leaving the slot for Step 7 basics instead of the next-best land. Root
+  // cause: buildOptimalLandBase doesn't know which names are already spoken
+  // for, so it can't back-fill. `excludeNames` lets the caller pass
+  // `pickedNames` straight through and the quota stays honest.
+  it('U3: excludeNames removes picked-as-spell MDFCs and the land builder still fills its quota from the next-best lands', async () => {
+    const { buildOptimalLandBase } = await import('@/lib/land-intelligence');
+    const d = db.getDb();
+    const legal = JSON.stringify({ commander: 'legal' });
+    const insertCard = d.prepare(`
+      INSERT INTO cards (id, oracle_id, name, cmc, mana_cost, type_line, oracle_text, color_identity, colors, legalities,
+                         set_code, set_name, collector_number, rarity, edhrec_rank, layout, produced_mana)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'tst', 'Test Set', ?, 'common', ?, ?, ?)
+    `);
+    const insertClassification = d.prepare(`
+      INSERT INTO land_classifications (card_name, card_id, land_category, produces_colors, enters_untapped, tribal_types, synergy_tags, tier)
+      VALUES (?, ?, ?, ?, ?, NULL, NULL, ?)
+    `);
+    const own = (userId: number, source: string, cardId: string) => {
+      d.prepare("INSERT INTO collection (user_id, card_id, quantity, source) VALUES (?, ?, 1, ?)").run(userId, cardId, source);
+    };
+    // 22 near-identical W/U untapped duals — well above the 2-colour quota
+    // (min(18, targetLandCount - 8) = 18), so excluding any 3 still leaves 19.
+    for (let i = 1; i <= 22; i++) {
+      const id = `test-wu-land-${i}`;
+      insertCard.run(
+        id, `o-${id}`, `Test WU Land ${i}`, 0, '', 'Land', '{T}: Add {W} or {U}.',
+        JSON.stringify(['W', 'U']), JSON.stringify(['W', 'U']), legal, String(i), 900,
+        'normal', JSON.stringify(['W', 'U']),
+      );
+      insertClassification.run(`Test WU Land ${i}`, id, 'dual_original', JSON.stringify(['W', 'U']), 1, 1);
+      own(BUILDER_UID, 'arena', id);
+    }
+
+    const base = {
+      colors: ['W', 'U'], format: 'commander' as const, targetLandCount: 38,
+      collectionOnly: true, userId: BUILDER_UID, collectionSource: 'arena', isCommander: true,
+    };
+    const baseline = buildOptimalLandBase(base);
+    expect(baseline.totalNonBasic).toBe(18); // full quota, nothing excluded
+
+    const spentAsSpells = baseline.lands.slice(0, 3).map((l) => l.card.name);
+    const withExclusions = buildOptimalLandBase({ ...base, excludeNames: new Set(spentAsSpells) });
+    expect(withExclusions.lands.some((l) => spentAsSpells.includes(l.card.name))).toBe(false);
+    expect(withExclusions.totalNonBasic).toBe(18); // quota still met from the next-best lands
+  }, 60_000);
+
   function shockNamesFlat(): string[] {
     return ['Sacred Foundry', 'Steam Vents', 'Watery Grave', 'Overgrown Tomb', 'Temple Garden'];
   }
