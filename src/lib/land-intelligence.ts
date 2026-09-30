@@ -245,11 +245,15 @@ export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
         || /any type (?:of mana )?that a .*? could produce/.test(lower);
       const chosenColor = /choose a color/.test(lower) && /chosen color/.test(lower);
       // Cavern of Souls' "any color" is restricted to casting a creature of
-      // the chosen type — not general fixing like Command Tower — so it
-      // isn't the flexible-in-multicolour-only shape this filter targets.
-      // Only worth a mono slot when the deck actually runs the tribe;
-      // genericTribalLand (below) gives it credit once it survives here.
-      const cavernTribal = /spend this mana only to cast a creature spell of the chosen type/.test(lower)
+      // the chosen type AND that spell can't be countered — a real utility
+      // clause, not just fixing, so it isn't the flexible-in-multicolour-only
+      // shape this filter targets. Only worth a mono slot when the deck
+      // actually runs the tribe; genericTribalLand (below) gives it credit
+      // once it survives here. A creature-type-restricted "any colour" land
+      // with NO extra clause (Unclaimed Territory, Secluded Courtyard — the
+      // "or activate an ability of a creature source" tail is still just
+      // fixing) has no upside over a basic in mono and stays excluded.
+      const cavernTribal = /spend this mana only to cast a creature spell of the chosen type.*can't be countered/.test(lower)
         && !!tribalTypes && tribalTypes.length > 0;
       if ((anyColor && !cavernTribal) || chosenColor || chosenTypeLandColors(land) !== null) continue;
 

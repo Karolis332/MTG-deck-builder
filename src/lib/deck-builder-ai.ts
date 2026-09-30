@@ -1688,6 +1688,17 @@ export function resolveConsistentManaLandTarget(
   return baseLandTarget;
 }
 
+const SUPERFRIENDS_DRAW_CAP_RE = /draw (?:a|two|three|four|x|that many|cards|\d) cards?|draws? (?:a|two|three|\d|x) cards?|whenever you draw/i;
+
+// A cycling land's reminder text ("{2}, {T}, Discard this card: Draw a card")
+// matched the draw-cap regex, so the superfriends draw cap was cutting lands
+// out of their nonbasic quota (Tam's Landscapes). Lands are never draw spells.
+export function isSuperfriendsDrawCard(card: Pick<DbCard, 'type_line' | 'oracle_text'>): boolean {
+  if (/\bPlaneswalker\b/.test(card.type_line || '')) return false;
+  if (/\bLand\b/.test(card.type_line || '')) return false;
+  return SUPERFRIENDS_DRAW_CAP_RE.test(card.oracle_text || '');
+}
+
 export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult> {
   const db = getDb();
   const poolResult = await buildScoredCandidatePool(options);
@@ -2052,11 +2063,25 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
         .filter((s) => tribalNames.has(s.card.name) && isTribeCreature(s.card, tribalType) && !pickedNames.has(s.card.name) && getMaxQty(s.card) > 0 && !isVanillaCreature(s.card))
         .sort((a, b) => b.score - a.score)
         .map((s) => s.card);
+      // Ramp gets the same protection as removal/wipes once the deck is at
+      // or below its template's ramp floor — otherwise the tribal floor cuts
+      // into the deck's mana base to make room for tribe creatures (Edgar
+      // lost 2 Signets + 2 Talismans, ramp 10 -> 7).
+      const rampFloor = getTemplate(resolvedStrategy).ramp.totalMin;
+      let rampCount = 0;
+      for (const p of picked) {
+        if (p.board !== 'main') continue;
+        const primary = getPrimaryCategory(classifyCard(p.card.name, p.card.oracle_text || '', p.card.type_line || '', p.card.cmc || 0, commanderCard?.oracle_text || undefined, classifyOpts));
+        if (primary === 'ramp') rampCount += p.quantity;
+      }
+      const rampAtFloor = rampCount <= rampFloor;
       const displaceable = [...picked]
         .filter((p) => {
           if (p.board !== 'main' || tribalNames.has(p.card.name)) return false;
           const primary = getPrimaryCategory(classifyCard(p.card.name, p.card.oracle_text || '', p.card.type_line || '', p.card.cmc || 0, commanderCard?.oracle_text || undefined, classifyOpts));
-          return primary !== 'removal' && primary !== 'board_wipe';
+          if (primary === 'removal' || primary === 'board_wipe') return false;
+          if (primary === 'ramp' && rampAtFloor) return false;
+          return true;
         })
         .sort((a, b) => {
           const aScore = scored.find((s) => s.card.name === a.card.name)?.score || 0;
@@ -2572,14 +2597,12 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
   // displacement shape, in reverse: trim the weakest-scored draw picks down
   // to the band max, backfilled by the best unpicked non-draw candidate.
   if (isSuperfriends) {
-    const isWalkerCard = (card: DbCard) => /\bPlaneswalker\b/.test(card.type_line || '');
-    const DRAW_CAP_RE = /draw (?:a|two|three|four|x|that many|cards|\d) cards?|draws? (?:a|two|three|\d|x) cards?|whenever you draw/i;
     const drawTemplate = getTemplate('superfriends').draw;
     const drawCapMax = Math.max(
       drawTemplate?.totalMin ?? 6,
       Math.round((drawTemplate?.totalMax ?? 9) * nonLandTarget / WALKER_FLOOR_REFERENCE_NONLAND)
     );
-    const isDrawCard = (card: DbCard) => !isWalkerCard(card) && DRAW_CAP_RE.test(card.oracle_text || '');
+    const isDrawCard = isSuperfriendsDrawCard;
     const drawPicks = picked.filter((p) => p.board === 'main' && isDrawCard(p.card));
     const drawCount = drawPicks.reduce((s, p) => s + p.quantity, 0);
     const overflow = drawCount - drawCapMax;
@@ -2802,6 +2825,12 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
   const craftList = computeCraftList(
     poolResult.pool, finalCards, finalPickedNames, ownedQty, reasoning, commanderCard?.oracle_text || undefined, useCollection
   );
+
+  // `health` was last refreshed before the dead-card, budget and bracket
+  // passes (each of which can swap cards), so the reported color sources
+  // went stale relative to the deck actually returned. Re-audit the final
+  // list so the health report matches finalCards exactly.
+  health = auditDeck(finalCards, auditOpts);
 
   return {
     cards: finalCards,

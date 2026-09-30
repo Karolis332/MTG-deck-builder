@@ -183,6 +183,15 @@ describe('mono-colour fixing-only land exclusion', () => {
     expect(poolNames(['R']).has('Cavern of Souls')).toBe(false);
   });
 
+  // U9a finding 4 — Secluded Courtyard's "any colour" is restricted to
+  // creature spells of a chosen type, same shape as Cavern of Souls, but it
+  // has no uncounterable clause (or any other bonus) — just fixing. It never
+  // beats a Mountain in mono-red, tribal deck or not.
+  it('excludes Secluded Courtyard in mono-red even in a Goblin tribal deck — fixing only, no uncounterable clause', () => {
+    const rows = scoreLandsForDeck({ colors: ['R'], format: 'commander', tribalTypes: ['goblin'] });
+    expect(rows.find((r) => r.card.name === 'Secluded Courtyard')).toBeUndefined();
+  });
+
   it('keeps tapped MDFC spell-lands in mono (Valakut Awakening // Valakut Stoneforge, Khalni Ambush // Khalni Territory, Bala Ged Recovery // Bala Ged Sanctuary) — priced as tapped-land-equivalent, not excluded twice', () => {
     expect(poolNames(['R']).has('Valakut Awakening // Valakut Stoneforge')).toBe(true);
     expect(poolNames(['G']).has('Khalni Ambush // Khalni Territory')).toBe(true);

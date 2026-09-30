@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { applyDeckBudget, applyBracketTarget, applyDeadCardPass, passesCardPriceCap } from '../deck-builder-ai';
 import { bracketPoolExclusions, bracketOffenseCategory, classifyBracket } from '../bracket';
+import { auditDeck } from '../deck-auditor';
 import type { DbCard } from '../types';
 
 function makeCard(overrides: Partial<DbCard> = {}): DbCard {
@@ -264,5 +265,40 @@ describe('applyBracketTarget', () => {
     const { cards, result } = applyBracketTarget(dead.cards, pool, 3, undefined, []);
     const actual = classifyBracket(cards.filter((c) => c.board === 'main').map((c) => c.card), { commanderNames: [] });
     expect(result.result).toBe(actual.bracket);
+  });
+});
+
+// U9a finding 2 — the health audit ran before the dead-card/budget/bracket
+// passes, so a swap that changed the deck's color sources (a budget swap
+// pulling in an off-color-count card) left the reported health stale.
+describe('health audit reflects post-budget swaps', () => {
+  it('sourcesByColor after a budget swap matches a fresh auditDeck of the returned cards', () => {
+    // Expensive off-color land (produces only U, no R) gets swapped out by
+    // applyDeckBudget's land branch for an existing basic Mountain.
+    const pricyLand = makeCard({
+      name: 'Expensive Island', price_usd: '40.00', type_line: 'Land', oracle_text: '{T}: Add {U}.',
+      produced_mana: '["U"]', colors: '[]', color_identity: '["U"]',
+    });
+    const mountain = makeCard({
+      name: 'Mountain', price_usd: null, type_line: 'Basic Land — Mountain', oracle_text: '{T}: Add {R}.',
+      produced_mana: '["R"]', colors: '[]', color_identity: '["R"]',
+    });
+    const spell = makeCard({ name: 'Bolt Sink', type_line: 'Instant', mana_cost: '{R}', cmc: 1, colors: '["R"]', color_identity: '["R"]' });
+    const picked = [
+      { card: pricyLand, quantity: 1, board: 'main' as const },
+      { card: mountain, quantity: 1, board: 'main' as const },
+      { card: spell, quantity: 1, board: 'main' as const },
+    ];
+
+    const auditOpts = { colors: ['R'], format: 'commander', targetLands: 36, isCommander: true, strategy: 'midrange' };
+    const staleHealth = auditDeck(picked, auditOpts);
+
+    const { cards, replacedForBudget } = applyDeckBudget(picked, [], 10, new Map(), false, undefined);
+    expect(replacedForBudget.length).toBe(1); // sanity: the swap actually happened
+    const freshHealth = auditDeck(cards, auditOpts);
+
+    // The swap dropped the off-color land and grew the Mountain — the R
+    // source count only reflects that in a re-audit of the final cards.
+    expect(freshHealth.sourcesByColor.R).toBeGreaterThan(staleHealth.sourcesByColor.R ?? 0);
   });
 });

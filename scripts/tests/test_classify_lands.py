@@ -80,3 +80,37 @@ def test_true_tribal_land_unaffected():
     )
     assert result["land_category"] == "tribal"
     assert result["tier"] == 2
+
+
+# U9a finding 5 — "As this land enters, you may pay 3 life. If you don't, it
+# enters tapped." was misfiled as tier-4 always-tapped by the generic
+# "enters.*tapped" fallback / MDFC pathway branch. It's a shock-like choice.
+def test_shatterskull_smashing_pay_life_land_face_is_shock_not_tapped():
+    result = classify_land(
+        "Shatterskull Smashing // Shatterskull, the Hammer Pass",
+        "Sorcery // Land",
+        "Shatterskull Smashing deals X damage divided as you choose among up to "
+        "two target creatures and/or planeswalkers. If X is 6 or more, "
+        "Shatterskull Smashing deals twice X damage divided as you choose among "
+        "them instead.\n//\nAs this land enters, you may pay 3 life. If you "
+        "don't, it enters tapped.\n{T}: Add {R}.",
+        None,
+    )
+    assert result["land_category"] == "shock"
+    assert result["tier"] == 1
+    assert result["enters_untapped"] == 1
+
+
+def test_agadeems_awakening_pay_life_land_face_is_shock_not_tapped():
+    result = classify_land(
+        "Agadeem's Awakening // Agadeem, the Undercrypt",
+        "Sorcery // Land",
+        "Return from your graveyard to the battlefield any number of target "
+        "creature cards that each have a different mana value X or less.\n//\n"
+        "As this land enters, you may pay 3 life. If you don't, it enters "
+        "tapped.\n{T}: Add {B}.",
+        None,
+    )
+    assert result["land_category"] == "shock"
+    assert result["tier"] == 1
+    assert result["enters_untapped"] == 1

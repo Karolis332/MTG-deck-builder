@@ -127,6 +127,18 @@ def classify_land(name: str, type_line: str, oracle: str, produced_mana_json: st
         etb_condition = "pay 2 life"
         synergy_tags.append("lifepay")
 
+    # ── Pay-life-to-untap MDFC lands (Shatterskull Smashing, Agadeem's
+    # Awakening, Turntimber Symbiosis, Emeria's Call, Sea Gate Restoration,
+    # Valakut Awakening) ── "As this land enters, you may pay 3 life. If you
+    # don't, it enters tapped." is a shock-like choice, not a flat tapped
+    # land — without this check the generic "enters.*tapped" fallback (or
+    # the MDFC pathway branch) misfiled it as tier-4 always-tapped.
+    elif re.search(r"you may pay \d+ life\.\s*if you don.t,\s*it enters tapped", ot):
+        category = "shock"
+        tier = 1
+        etb_condition = "pay life"
+        synergy_tags.append("lifepay")
+
     # ── Check lands ──────────────────────────────────────────────────
     elif re.search(r"unless you control (?:a|an) (plains|island|swamp|mountain|forest)", ot):
         category = "check"
