@@ -1767,11 +1767,14 @@ export function resolveConsistentManaLandTarget(
  * pieces). Archetype + colour recommendation, minus one land per three honest
  * ramp pieces over eight, minus one under MV 3 and two under MV 2.5; never
  * under 30 or over 38. Commander-scale only (the caller guards 60-card formats).
+ * A landfall deck (hasLandPayoffs) keeps the recommendation: its ramp is
+ * land drops, and cutting lands starves the plan (Tatyova 34 → 27).
  */
-export function resolveLandTarget(strategy: string, colorCount: number, honestRamp: number, avgMv: number): number {
+export function resolveLandTarget(strategy: string, colorCount: number, honestRamp: number, avgMv: number, landPayoffs = false): number {
   const archetype = (strategy.toLowerCase() in ARCHETYPE_TEMPLATES ? strategy.toLowerCase() : 'midrange') as Archetype;
-  const curve = avgMv < 2.5 ? 2 : avgMv < 3 ? 1 : 0;
-  return Math.min(38, Math.max(30, getRecommendedLands(archetype, colorCount) - Math.floor(Math.max(0, honestRamp - 8) / 3) - curve));
+  const curve = landPayoffs ? 0 : avgMv < 2.5 ? 2 : avgMv < 3 ? 1 : 0;
+  const ramp = landPayoffs ? 0 : Math.floor(Math.max(0, honestRamp - 8) / 3);
+  return Math.min(38, Math.max(30, getRecommendedLands(archetype, colorCount) - ramp - curve));
 }
 
 const SUPERFRIENDS_DRAW_CAP_RE = /draw (?:a|two|three|four|x|that many|cards|\d) cards?|draws? (?:a|two|three|\d|x) cards?|whenever you draw/i;
@@ -2708,12 +2711,13 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
   // B-D1: the land count follows the picked deck (ramp and curve), Commander-
   // scale formats only; a "consistent mana" hint still only moves it up.
   let landTarget = targetLands;
+  const landPayoffs = hasLandPayoffs(commanderCard?.oracle_text, mainSpells().map((p) => p.card));
   if (isCommander && targetLands >= 30) {
     const spells = mainSpells();
     const spellQty = spells.reduce((s, p) => s + p.quantity, 0);
     const honestRamp = spells.reduce((s, p) => s + (isHonestRamp(p.card.name, p.card.oracle_text || '', p.card.type_line || '') ? p.quantity : 0), 0);
     const avgMv = spellQty ? spells.reduce((s, p) => s + (p.card.cmc || 0) * p.quantity, 0) / spellQty : 0;
-    const formula = resolveLandTarget(resolvedStrategy, colors.length, honestRamp, avgMv);
+    const formula = resolveLandTarget(resolvedStrategy, colors.length, honestRamp, avgMv, landPayoffs);
     landTarget = hints.consistentMana ? Math.max(targetLands, formula) : formula;
     freedSlots += Math.max(0, targetLands - landTarget);
   }
@@ -2829,7 +2833,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
       excludeNames,
       mdfcPicked: mdfcLandBackCount,
       singletonBasics: isCommander && picked.some((p) => p.board === 'main' && SINGLETON_NAME_COMBO.has(stripArenaPrefix(p.card.name))),
-      landPayoffs: hasLandPayoffs(commanderCard?.oracle_text, mainSpells().map((p) => p.card)),
+      landPayoffs,
     });
 
     // Add non-basic lands. A--stripped: a land already picked (e.g. as an
@@ -3486,14 +3490,14 @@ export function applyDeadCardPass(
     cards.filter((c) => c.board === 'main' && isColorlessSource(c.card)).reduce((s, c) => s + c.quantity, 0);
 
   const deadReason = (card: DbCard): string | null => {
-    const target = narrowTutorTarget(card);
-    if (target) {
-      const count = countTargets(target, mainCards());
-      if (count < NARROW_TUTOR_MIN_TARGETS) return `narrow tutor: only ${count} ${target.value} in deck`;
     // Lands are the land base's call: a typed fetch with a Forest and an
     // Overgrown Tomb to find is live, and the nonland pool has no real land
     // to replace one with (it swapped fetches for Westvale Abbey / Dowsing Dagger).
     if (isLand(card)) return null;
+    const target = narrowTutorTarget(card);
+    if (target) {
+      const count = countTargets(target, mainCards());
+      if (count < NARROW_TUTOR_MIN_TARGETS) return `narrow tutor: only ${count} ${target.value} in deck`;
     }
     const pips = colorlessPipCount(card.mana_cost);
     if (pips > 0) {

@@ -15,4 +15,7 @@ describe('B-D1 land target follows ramp and curve', () => {
     expect(resolveLandTarget('midrange', 2, 11, 2.7)).toBe(base - 2);
     expect(resolveLandTarget('midrange', 2, 14, 2.4)).toBe(base - 4);
   });
+  it('a landfall deck keeps the recommendation — its ramp is land drops', () => {
+    expect(resolveLandTarget('midrange', 2, 26, 3.07, true)).toBe(Math.min(38, Math.max(30, getRecommendedLands('midrange', 2))));
+  });
 });
