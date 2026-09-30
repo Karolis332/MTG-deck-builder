@@ -3490,6 +3490,10 @@ export function applyDeadCardPass(
     if (target) {
       const count = countTargets(target, mainCards());
       if (count < NARROW_TUTOR_MIN_TARGETS) return `narrow tutor: only ${count} ${target.value} in deck`;
+    // Lands are the land base's call: a typed fetch with a Forest and an
+    // Overgrown Tomb to find is live, and the nonland pool has no real land
+    // to replace one with (it swapped fetches for Westvale Abbey / Dowsing Dagger).
+    if (isLand(card)) return null;
     }
     const pips = colorlessPipCount(card.mana_cost);
     if (pips > 0) {
