@@ -29,6 +29,7 @@ import type { CardCategory } from './card-classifier';
 import type { CommanderSynergyProfile, SynergyCategory } from './commander-synergy';
 import { ARCHETYPE_TEMPLATES, getTemplate } from './deck-templates';
 import { stripArenaPrefix } from './collection-ownership';
+import { MAX_MDFC_LANDS } from './land-intelligence';
 
 /**
  * Picked-name set that treats an Arena-rebalanced "A-X" and its paper "X" as
@@ -743,7 +744,6 @@ export function pickByRole(opts: PickByRoleOptions): PickByRoleResult {
     const tl = card.type_line || '';
     return tl.includes('//') && !tl.split('//')[0].includes('Land') && tl.includes('Land');
   };
-  const MAX_MDFC_LAND_BACKS = 4;
   let mdfcLandBacks = preFilled ? preFilled.filter((c) => isLandBackDfc(c)).length : 0;
 
   // Helper to take a pick
@@ -751,7 +751,7 @@ export function pickByRole(opts: PickByRoleOptions): PickByRoleResult {
     if (pickedNames.has(c.card.name)) return false;
     if (totalPicked >= nonLandTarget) return false;
     const landBack = isLandBackDfc(c.card);
-    if (landBack && mdfcLandBacks >= MAX_MDFC_LAND_BACKS) return false;
+    if (landBack && mdfcLandBacks >= MAX_MDFC_LANDS) return false; // shared deck-wide budget (A-D12)
     const cardMax = getMaxQty(c.card);
     if (cardMax <= 0) return false;
     // getMaxQty already caps singleton formats at 1 — except any-number cards (A-D5).

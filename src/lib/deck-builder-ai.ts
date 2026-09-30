@@ -2720,15 +2720,19 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
   // Refill the freed nonland slots from the pool, best score first.
   for (const s of scored) {
     if (freedSlots <= 0) break;
-    if (pickedNames.has(s.card.name) || getMaxQty(s.card) <= 0 || !isSpellFront(s.card) || isLandBackDfc(s.card)) continue;
+    const key = stripArenaPrefix(s.card.name);
+    if (pickedNames.has(s.card.name) || pickedNames.has(key) || pickedNames.has(`A-${key}`)) continue;
+    if (getMaxQty(s.card) <= 0 || !isSpellFront(s.card) || isLandBackDfc(s.card)) continue;
     picked.push({ card: s.card, quantity: 1, board: 'main' });
     pickedNames.add(s.card.name);
     reasoning.push({ cardName: s.card.name, role: 'refill', reason: `land count ${targetLands} → ${landTarget}: next-best pool card` });
     freedSlots -= 1;
   }
-  // Floor at 30 for 100-card formats, but never above the format's own target
-  // (standardbrawl runs 24 lands in a 60-card deck — the flat 30 floor shipped 65-card decks).
-  const targetLandsEffective = Math.max(Math.min(30, landTarget), landTarget - mdfcLandBackCount);
+  // Real land slots = the land target minus the MDFC land backs Step 4 kept
+  // (they sit inside the nonland quota). MAX_MDFC_LANDS bounds it, so no
+  // separate 30 floor — that floor over-filled the deck once the B-D1 target
+  // itself reached 30, and the overflow was cut from the lands.
+  const targetLandsEffective = Math.max(0, landTarget - mdfcLandBackCount);
 
   const basicLandMap: Record<string, string> = {
     W: 'Plains', U: 'Island', B: 'Swamp', R: 'Mountain', G: 'Forest',
