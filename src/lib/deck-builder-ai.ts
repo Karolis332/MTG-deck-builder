@@ -1334,17 +1334,19 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
     snap('cmdrStats');
     // ── EDHREC commander-specific synergy (primary signal for commander) ──
     const edhrecEntry = edhrecSynergyMap.get(card.name);
+    let edhrecBonus = 0;
     if (edhrecEntry) {
       // Synergy score from EDHREC ranges roughly -1 to +1
       // Scale to 0-50 with a strong positive bias for high-synergy cards
-      score += Math.max(0, (edhrecEntry.synergy + 0.2) * 50);
+      edhrecBonus += Math.max(0, (edhrecEntry.synergy + 0.2) * 50);
 
       // Inclusion rate bonus: cards in >50% of decks are proven staples
       if (edhrecEntry.inclusion > 0.5) {
-        score += 15;
+        edhrecBonus += 15;
       } else if (edhrecEntry.inclusion > 0.3) {
-        score += 8;
+        edhrecBonus += 8;
       }
+      score += edhrecBonus;
     }
 
     snap('edhrec');
@@ -1355,11 +1357,13 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
       const winRateScore = globalRating.playedWinRate * 100;
       score += globalRating.confidence * (eloScore * 0.4 + winRateScore * 0.3);
       score += getMetaAdjustedScore(card.name, format);
-    } else if (!edhrecEntry) {
-      // Cold start AND no EDHREC data: fall back to global edhrec_rank
-      if (card.edhrec_rank !== null) {
-        score += Math.max(0, 50 - card.edhrec_rank / 400);
-      }
+    } else if (card.edhrec_rank !== null) {
+      // Cold start: fall back to global edhrec_rank. P2 #4: an EDHREC entry
+      // used to REPLACE this fallback — ≈24 for a synergy-0 staple against
+      // +50 for rank 1, so Arcane Signet, the Talismans and Path to Exile
+      // lost their slots to the entry itself. The fallback now tops the
+      // entry up to max(entry, fallback).
+      score += Math.max(0, Math.max(0, 50 - card.edhrec_rank / 400) - edhrecBonus);
     }
 
     snap('globalRank');
