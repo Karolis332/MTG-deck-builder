@@ -105,7 +105,10 @@ export function auditDeck(cards: AuditCard[], opts: AuditOptions): DeckHealth {
   const drawCards = opts.strategy === 'superfriends'
     ? nonLands.filter((c) => !isPlaneswalker(c.card.type_line || ''))
     : nonLands;
-  const drawCount = drawCards.filter((c) => DRAW_RE.test(c.card.oracle_text || '')).reduce((s, c) => s + c.quantity, 0);
+  // Reminder text is stripped first (as isSuperfriendsDrawCard does): a Way of
+  // the ___'s parenthesised Jace-token abilities ("[−3]: Draw a card.") are not
+  // a draw spell — Tam reported 15 draw for 7 real (U12 fix 2).
+  const drawCount = drawCards.filter((c) => DRAW_RE.test((c.card.oracle_text || '').replace(/\([^)]*\)/g, ''))).reduce((s, c) => s + c.quantity, 0);
   const drawEngineCount = nonLands.filter((c) => isDrawEngine(c.card.name, c.card.oracle_text || '', c.card.type_line || '')).reduce((s, c) => s + c.quantity, 0);
   const rampCount = nonLands.filter((c) => {
     const ot = c.card.oracle_text || '';
