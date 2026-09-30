@@ -1033,10 +1033,13 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
   // ── Price cap: candidates over maxCardPrice leave the pool up front ──────
   // Exempt: the commander (never in this nonland pool anyway), and cards the
   // user already owns (free to them). Unknown price (null) is excluded too —
-  // unpriced is not free — unless owned.
+  // unpriced is not free — unless owned. A deck budget alone (no per-card
+  // cap) still needs this: an unowned unpriced card must not enter a
+  // "$X deck" pool and get counted as $0 — cap at +Infinity so only the
+  // null-price check fires, not a per-card ceiling.
   let priceCapExcluded = 0;
-  if (options.maxCardPrice != null && options.maxCardPrice > 0) {
-    const cap = options.maxCardPrice;
+  if ((options.maxCardPrice != null && options.maxCardPrice > 0) || (options.maxDeckPrice != null && options.maxDeckPrice > 0)) {
+    const cap = options.maxCardPrice != null && options.maxCardPrice > 0 ? options.maxCardPrice : Infinity;
     for (let i = pool.length - 1; i >= 0; i--) {
       const card = pool[i];
       if (useCollection && (ownedQty.get(card.name) || 0) > 0) continue;
