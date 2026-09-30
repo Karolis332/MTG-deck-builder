@@ -33,6 +33,11 @@ const BASIC_TYPE_TO_COLOR: Record<string, string> = {
   plains: 'W', island: 'U', swamp: 'B', mountain: 'R', forest: 'G',
 };
 
+/** A land that charges life for one colour — "Pay 1 life: Add {R}" (Hashep Oasis) or "{T}: Add {R}. This land deals 1 damage to you" (Barbarian Ring, Karplusan Forest) — is a worse basic for that colour. */
+export function paysLifeForColor(oracleText: string, color: string): boolean {
+  return new RegExp(`pay \\d+ life:\\s*add \\{${color}\\}|add (?:\\{[WUBRG]\\} or )*\\{${color}\\}(?: or \\{[WUBRG]\\})*\\.[^\\n]*deals \\d+ damage to you`, 'i').test(oracleText);
+}
+
 export function isFetchLandRelevant(oracleText: string, deckColors: string[]): boolean {
   const lower = oracleText.toLowerCase();
   if (!lower.includes('search your library for a')) return true;
@@ -426,7 +431,7 @@ export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
       if (typedFetch !== null && typedFetch.length < 5 && !(options.landPayoffs || /landfall|lands/.test(strategy ?? ''))) continue;
 
       // Pain lands that charge life for the SAME colour a basic gives free.
-      if (deckColor && new RegExp(`pay \\d+ life:\\s*add \\{${deckColor}\\}`, 'i').test(lower)) continue;
+      if (deckColor && paysLifeForColor(lower, deckColor)) continue;
 
       // Conditional duals whose untap condition names basic types this deck
       // doesn't run (Kishla Village: "unless you control an Island or a
@@ -730,9 +735,9 @@ export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
     const payoff = tribalMatch || genericTribalLand || exemptColorless;
     // A one-colour land that charges life for that colour (Hashep Oasis) is
     // a worse basic in any deck; the mono gate above already drops it there.
-    const paysLifeForColor = fixes === 1 && new RegExp(`pay \\d+ life:\\s*add \\{${matchingColors[0]}\\}`, 'i').test(tapText);
+    const painForColor = fixes === 1 && paysLifeForColor(tapText, matchingColors[0]);
     const clearsBar = colors.length <= 1
-      || (entersUntapped && sourceCredit >= 1 && tier <= 3 && (fixes >= 2 || (fixes >= 1 && tier <= 2 && !paysLifeForColor)))
+      || (entersUntapped && sourceCredit >= 1 && tier <= 3 && (fixes >= 2 || (fixes >= 1 && tier <= 2 && !painForColor)))
       || (isFetch && entersUntapped && fixes >= 1)
       || (fixes >= 3 && colors.length >= 3 && sourceCredit >= 1 && tier <= 3)
       || payoff;
@@ -850,11 +855,12 @@ export function buildOptimalLandBase(options: BuildOptions): LandBaseResult {
   let basicCount = 0;
   let mdfcCount = 0;
   const isMdfcSpell = (s: LandScore) => !(s.card.type_line || '').split('//')[0].includes('Land');
-  // Mono-colour colourless cap (A-D8): a triple-pip card ({2}{G}{G}{G})
-  // needs every land to make the colour — at most two colourless lands
-  // then, manlands and Cavern included (they stay eligible, they just count).
+  // Mono-colour colourless cap (A-D8, #9): a basic makes the colour for free,
+  // so at most two lands that don't — manlands and Cavern included (they
+  // stay eligible, they just count). Gating this on a triple-pip card let
+  // Krenko seat five colourless manlands (R 43 → 38).
   const monoColor = colors.length === 1 ? colors[0] : undefined;
-  const capColorless = !!monoColor && (manaDemand?.maxPips[monoColor] ?? 0) >= 3;
+  const capColorless = !!monoColor;
   let colorlessCount = 0;
   const eligible = (s: LandScore): boolean => {
     // A--stripped: an Arena-rebalanced "A-X" and its paper name "X" are one card.
@@ -876,7 +882,7 @@ export function buildOptimalLandBase(options: BuildOptions): LandBaseResult {
   // or a tier-3 pain rainbow (Tarnished Citadel) never jumps an untapped
   // tier-1 dual on breadth alone.
   const DEFICIT_WEIGHT = 60;
-  const BASIC_SCORE = 110; // under any untapped land with an upside (~150), over a colourless manland (115) until the colour is nearly served
+  const BASIC_SCORE = 110; // under any untapped land with an upside (~150); a colourless manland (115) beats it only inside MAX_MONO_COLORLESS
   const gainOf = (s: LandScore): number => {
     let covered = 0;
     for (const c of s.producesColors) if (c in sources) covered += need(c);
