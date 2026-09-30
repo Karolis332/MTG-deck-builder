@@ -2092,7 +2092,24 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
   // score well generically (Tam: 3), not a real walker count. 12 of 99/100
   // scales down for smaller commander-format shells (e.g. standardbrawl's
   // 60-card, ~35-nonland deck).
-  const WALKER_FLOOR_BASE = 12;
+  // Floor scales with how hard the commander's own text pays off walkers.
+  // "planeswalker types among planeswalkers you control" / "planeswalker
+  // spells you cast cost" / "for each planeswalker you control" / "whenever
+  // you activate a loyalty ability" are commander-level payoffs (Tam) — a
+  // deck built around that wants more walkers than one detected only by
+  // proliferate mentions or the 99-shape supplement (walkerCount >= 12 in
+  // the pool, or a Planeswalker-typed commander with no textual payoff,
+  // e.g. Atraxa reached via the shape supplement, not her own text).
+  const STRONG_WALKER_PAYOFF_TEXTS = [
+    'planeswalker types among planeswalkers you control',
+    'planeswalker spells you cast cost',
+    'for each planeswalker you control',
+    'whenever you activate a loyalty ability',
+  ];
+  const hasStrongWalkerPayoff = STRONG_WALKER_PAYOFF_TEXTS.some((p) =>
+    (commanderCard?.oracle_text || '').toLowerCase().includes(p)
+  );
+  const WALKER_FLOOR_BASE = hasStrongWalkerPayoff ? 18 : 12;
   const WALKER_FLOOR_REFERENCE_NONLAND = 61; // 99/100-card commander baseline
   if (isSuperfriends) {
     const isWalker = (card: DbCard) => /\bPlaneswalker\b/.test(card.type_line || '');
@@ -2532,6 +2549,72 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
         if (basic) {
           picked.push({ card: basic, quantity: addQty, board: 'main' });
         }
+      }
+    }
+  }
+
+  // ── Superfriends draw cap ────────────────────────────────────────────────
+  // Walkers are card advantage in their own right (excluded from "draw" by
+  // the walker floor above and by the auditor's DRAW_RE below) — but nothing
+  // capped the GENUINE draw spells/engines, so a superfriends build stacked
+  // every high-value draw staple the pool scored well (Rhystic Study,
+  // Smothering Tithe, The One Ring, Mystic Remora, ...) well past the
+  // template's own draw band (6-9 of 99). Mirrors the walker floor's
+  // displacement shape, in reverse: trim the weakest-scored draw picks down
+  // to the band max, backfilled by the best unpicked non-draw candidate.
+  if (isSuperfriends) {
+    const isWalkerCard = (card: DbCard) => /\bPlaneswalker\b/.test(card.type_line || '');
+    const DRAW_CAP_RE = /draw (?:a|two|three|four|x|that many|cards|\d) cards?|draws? (?:a|two|three|\d|x) cards?|whenever you draw/i;
+    const drawTemplate = getTemplate('superfriends').draw;
+    const drawCapMax = Math.max(
+      drawTemplate?.totalMin ?? 6,
+      Math.round((drawTemplate?.totalMax ?? 9) * nonLandTarget / WALKER_FLOOR_REFERENCE_NONLAND)
+    );
+    const isDrawCard = (card: DbCard) => !isWalkerCard(card) && DRAW_CAP_RE.test(card.oracle_text || '');
+    const drawPicks = picked.filter((p) => p.board === 'main' && isDrawCard(p.card));
+    const drawCount = drawPicks.reduce((s, p) => s + p.quantity, 0);
+    const overflow = drawCount - drawCapMax;
+    if (overflow > 0) {
+      const protectedSet = new Set(
+        (getTemplate('superfriends').protectedPatterns || []).map((p) => p.toLowerCase())
+      );
+      const cuttable = drawPicks
+        .filter((p) => !protectedSet.has(p.card.name.toLowerCase()))
+        .sort((a, b) => {
+          const aScore = scored.find((s) => s.card.name === a.card.name)?.score || 0;
+          const bScore = scored.find((s) => s.card.name === b.card.name)?.score || 0;
+          return aScore - bScore; // lowest score first
+        });
+      const replacements = scored
+        .filter((s) => !pickedNames.has(s.card.name) && !isDrawCard(s.card) && getMaxQty(s.card) > 0)
+        .sort((a, b) => b.score - a.score)
+        .map((s) => s.card);
+      let cut = 0;
+      let replaceAt = 0;
+      for (const victim of cuttable) {
+        if (cut >= overflow) break;
+        const idx = picked.indexOf(victim);
+        if (idx === -1) continue;
+        picked.splice(idx, 1);
+        pickedNames.delete(victim.card.name);
+        totalPicked -= victim.quantity;
+        cut += victim.quantity;
+        const replacement = replacements[replaceAt++];
+        if (replacement) {
+          const qty = Math.min(getMaxQty(replacement), victim.quantity);
+          if (qty > 0) {
+            picked.push({ card: replacement, quantity: qty, board: 'main' });
+            pickedNames.add(replacement.name);
+            totalPicked += qty;
+          }
+        }
+        reasoning.push({
+          cardName: victim.card.name,
+          role: 'repair',
+          reason: replacement
+            ? `superfriends draw cap: -${victim.card.name} (draw ${drawCount} > band ${drawCapMax}) for ${replacement.name}`
+            : `superfriends draw cap: -${victim.card.name} (draw ${drawCount} > band ${drawCapMax})`,
+        });
       }
     }
   }

@@ -283,28 +283,46 @@ export function getRuleBasedSuggestions(
       commander.oracleText, commander.typeLine, commander.colorIdentity, undefined,
       { superfriends: true },
     );
-    if (profile?.triggerCategories.includes('planeswalker') && profile.cardPoolPatterns.length > 0) {
-      const patternConditions = profile.cardPoolPatterns.map(() => 'c.oracle_text LIKE ?').join(' OR ');
+    if (profile?.triggerCategories.includes('planeswalker')) {
+      // Actual planeswalkers (any loyalty text, not just cards that name
+      // "proliferate"/"loyalty ability" — most walkers don't) plus the
+      // proliferate/loyalty/tutor/protection text patterns. Deliberately NOT
+      // profile.cardPoolPatterns — that's the union of every trigger category
+      // the commander matched (Tam also matches five_colors from its WUBRG
+      // activation cost, whose patterns are "mana of any color" etc. — those
+      // would flood this block with generic fixing staples, not walker plan
+      // pieces). Mirrors commander-synergy.ts's SYNERGY_REQUIREMENTS.planeswalker.
+      const PLANESWALKER_SUPPORT_PATTERNS = [
+        '%proliferate%', '%loyalty counter%', '%loyalty abilit%',
+        '%planeswalkers you control%', '%search your library for a planeswalker%',
+        '%planeswalker spells%',
+      ];
+      const patternConditions = PLANESWALKER_SUPPORT_PATTERNS.map(() => 'c.oracle_text LIKE ?');
       const synergyCards = db
         .prepare(
           `SELECT c.* FROM cards c
            ${colJoin}
-           WHERE (${patternConditions})
+           WHERE (c.type_line LIKE '%Planeswalker%' OR ${patternConditions.join(' OR ')})
            AND c.type_line NOT LIKE '%Land%'
            ${legalFilter}
            AND c.id NOT IN (${Array.from(existingCardIds).map(() => '?').join(',') || "''"})
            ORDER BY c.edhrec_rank ASC NULLS LAST
-           LIMIT 10`
+           LIMIT 15`
         )
-        .all(...profile.cardPoolPatterns, ...Array.from(existingCardIds)) as DbCard[];
+        .all(...PLANESWALKER_SUPPORT_PATTERNS, ...Array.from(existingCardIds)) as DbCard[];
 
       for (const card of synergyCards) {
         if (existingCardNames.has(card.name) || suggestedNames.has(card.name)) continue;
         suggestedNames.add(card.name);
+        const isWalker = (card.type_line || '').includes('Planeswalker');
         suggestions.push({
           card,
-          reason: "Supports the commander's planeswalker/proliferate plan",
-          score: 68,
+          reason: isWalker
+            ? "Planeswalker — supports the commander's superfriends plan"
+            : "Supports the commander's planeswalker/proliferate plan",
+          // Above the community co-occurrence range (72-97) so the deck's own
+          // plan wins over generic staples, not just among ties.
+          score: 92,
         });
       }
     }

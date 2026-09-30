@@ -53,6 +53,13 @@ describe('autoBuildDeck — superfriends walker minimum backfill', () => {
     };
 
     add('Test Superfriends Commander', 4, '{2}{W}{U}', 'Legendary Creature — Human Wizard', SUPERFRIENDS_ORACLE, ['W', 'U']);
+    // U7 step 2.1: a commander whose own text scales with walkers (mirrors
+    // Tam, the Possibility: "planeswalker types among planeswalkers you
+    // control") wants a higher floor (18) than a proliferate/99-shape-only
+    // detection (12, the case above).
+    add('Test Strong Payoff Commander', 4, '{2}{W}{U}', 'Legendary Creature — Human Wizard',
+      'Planeswalker spells you cast cost {1} less to cast.\nProliferate X times, where X is the number of planeswalker types among planeswalkers you control.',
+      ['W', 'U']);
     // Mono-blue: none of the (white) test walkers are in its colour identity,
     // so it cannot reach the 12-walker floor regardless of the opt-in gate —
     // this isolates "does the backfill run" from "does the pool happen to
@@ -111,6 +118,18 @@ describe('autoBuildDeck — superfriends walker minimum backfill', () => {
     // Board wipes and spot removal must survive the walker backfill.
     expect(main.filter((e) => e.card.name.startsWith('Test Wrath')).length).toBeGreaterThan(0);
     expect(main.filter((e) => e.card.name.startsWith('Test Removal')).length).toBeGreaterThan(0);
+  }, 60_000);
+
+  it('a commander whose own text pays off walker types ships at least 18 walkers (Tam-shape)', async () => {
+    const r = await builder.autoBuildDeck({
+      format: 'commander', colors: [], commanderName: 'Test Strong Payoff Commander',
+    });
+    expect(r.strategy).toBe('superfriends');
+    const main = r.cards.filter((e) => e.board === 'main');
+    const walkerCount = main
+      .filter((e) => (e.card.type_line || '').includes('Planeswalker'))
+      .reduce((s, e) => s + e.quantity, 0);
+    expect(walkerCount).toBeGreaterThanOrEqual(18);
   }, 60_000);
 
   it('a non-superfriends commander does not trigger the walker floor even with walkers in the pool', async () => {

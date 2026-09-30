@@ -461,6 +461,7 @@ function optimizerContext(d: Diagnosis): OptimizerContext {
       : undefined,
     health: d.health,
     protectedNames: d.core ? [...d.core.winPlan.keyCards.enablers, ...d.core.winPlan.keyCards.payoffs] : undefined,
+    superfriends: d.core?.archetype === 'superfriends',
   };
 }
 

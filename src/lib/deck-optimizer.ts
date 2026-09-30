@@ -38,6 +38,8 @@ export interface OptimizerContext {
   health: RatioHealth[];
   /** Win-plan key cards that should survive soft cuts. */
   protectedNames?: string[];
+  /** Commander's detected archetype is 'superfriends' — walkers/loyalty support don't need a graph edge to earn their slot. */
+  superfriends?: boolean;
 }
 
 export type LegalityProblem = 'not_legal' | 'off_color' | 'too_many_copies';
@@ -74,6 +76,10 @@ const HARD_CUT_SCORE = 10;
 const MIN_SOFT_SCORE = 2;
 const MAX_COPIES_60 = 4;
 const ROLE_LESS_CATEGORIES = new Set<CardCategory>(['utility', 'synergy', 'win_condition', 'tutor']);
+// Mirrors commander-synergy.ts's planeswalker searchPatterns: proliferate,
+// loyalty counters/abilities, walker tutors and "planeswalkers you control"
+// support (Ways included — they're enchantments, caught by oracle text).
+const SUPERFRIENDS_SUPPORT_RE = /proliferate|loyalty counter|loyalty abilit|planeswalkers? you control|search your library for a planeswalker|planeswalker spells/i;
 
 export function isCommanderFormat(format: string): boolean {
   return (COMMANDER_FORMATS as readonly string[]).includes(format);
@@ -180,8 +186,14 @@ function scoreCard(
   }
 
   // Function cards (ramp, removal, draw, wipes, protection) earn their slot by
-  // role, not by synergy edges — judge them on quota only.
-  const iss = ROLE_LESS_CATEGORIES.has(card.primary) ? ctx.cardISS?.get(card.name) : undefined;
+  // role, not by synergy edges — judge them on quota only. Same for a
+  // superfriends deck's own walkers and loyalty/proliferate support: the
+  // synergy graph has no edge type for "is a planeswalker" or "proliferates",
+  // so ISS reads 0 there by construction, not because the card is dead weight.
+  const isWalkerOrSupport = ctx.superfriends
+    && (/\bPlaneswalker\b/.test(card.typeLine)
+      || SUPERFRIENDS_SUPPORT_RE.test(card.oracleText || ''));
+  const iss = ROLE_LESS_CATEGORIES.has(card.primary) && !isWalkerOrSupport ? ctx.cardISS?.get(card.name) : undefined;
   if (iss !== undefined) {
     if (iss <= 0) {
       score += 3;

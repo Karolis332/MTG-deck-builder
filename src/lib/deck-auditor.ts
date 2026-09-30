@@ -97,7 +97,15 @@ export function auditDeck(cards: AuditCard[], opts: AuditOptions): DeckHealth {
   const sourcesByColor = countColorSources(sourceCards, manaCtx);
   const pipsByColor = countPipDemand(nonLands);
 
-  const drawCount = nonLands.filter((c) => DRAW_RE.test(c.card.oracle_text || '')).reduce((s, c) => s + c.quantity, 0);
+  // A planeswalker's loyalty line ("+1: Draw a card") is a threat/engine, not
+  // a draw spell — same opt-in as classifyCard's superfriends read (never
+  // applied when strategy isn't superfriends, so every other caller's count
+  // stays byte-identical).
+  const isPlaneswalker = (typeLine: string) => /\bPlaneswalker\b/.test(typeLine || '');
+  const drawCards = opts.strategy === 'superfriends'
+    ? nonLands.filter((c) => !isPlaneswalker(c.card.type_line || ''))
+    : nonLands;
+  const drawCount = drawCards.filter((c) => DRAW_RE.test(c.card.oracle_text || '')).reduce((s, c) => s + c.quantity, 0);
   const drawEngineCount = nonLands.filter((c) => isDrawEngine(c.card.name, c.card.oracle_text || '', c.card.type_line || '')).reduce((s, c) => s + c.quantity, 0);
   const rampCount = nonLands.filter((c) => {
     const ot = c.card.oracle_text || '';
