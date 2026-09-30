@@ -67,6 +67,23 @@ describe('optimizeDeck — fixed-size after-list (U5)', { timeout: 60_000 }, () 
   });
 });
 
+describe('optimizeDeck — one land recommendation (U12 fix 5)', { timeout: 60_000 }, () => {
+  it('Tam (superfriends): landTarget.recommended sits inside the ratio-health land band and the formula says so', () => {
+    const result = optimizeDeck({ format: 'brawl', text: TAM_FIXTURE }) as {
+      landTarget: { current: number; recommended: number; formula: string };
+      health: Array<{ category: string; current: number; target: { min: number; max: number } }>;
+    };
+    const landRow = result.health.find((h) => h.category === 'land')!;
+    // Karsten's regression says 40 for this curve; the superfriends band is 37-39.
+    expect(landRow.target).toMatchObject({ min: 37, max: 39 });
+    expect(result.landTarget.recommended).toBe(39);
+    expect(result.landTarget.recommended).toBeGreaterThanOrEqual(landRow.target.min);
+    expect(result.landTarget.recommended).toBeLessThanOrEqual(landRow.target.max);
+    expect(result.landTarget.formula).toMatch(/= 40, clamped to the superfriends land band 37-39/);
+    expect(landRow.current).toBe(result.landTarget.current);
+  });
+});
+
 describe('optimizeDeck — role bands follow the detected archetype (U8a)', { timeout: 60_000 }, () => {
   it('Tam (superfriends): no walker is cut for a win-condition-over-quota reason, and the reported win_condition band is the superfriends band [8,16], not the generic brawl band', () => {
     const result = optimizeDeck({ format: 'brawl', text: TAM_FIXTURE }) as {

@@ -598,7 +598,22 @@ export function optimizeDeck(parsed: Record<string, unknown>): Record<string, un
   const legality = findLegalityIssues(d.cards, ctx);
   const locks = readLocks(parsed);
   const { cuts, lockedFromCuts } = finishCuts(rankCuts(d.cards, ctx, MAX_CUTS), shape, locks);
-  const lands = landReport(shape, d.cards, d.avgCmc);
+  // One land number (U12 fix 5): Karsten's regression is curve-aware but
+  // archetype-blind; the ratio-health land band (the archetype template when
+  // one is detected, else the format ratios) is archetype-aware but
+  // curve-blind. The regression clamped into the band is curve-aware inside
+  // archetype bounds — so `landTarget.recommended` always sits in the band
+  // the land row displays (Tam final.txt: Karsten 40 vs superfriends 37-39
+  // -> 39) and the two surfaces can never disagree.
+  const rawLands = landReport(shape, d.cards, d.avgCmc);
+  const landBand = d.health.find((h) => h.category === 'land')?.target;
+  const lands: LandReport = landBand && (rawLands.recommended < landBand.min || rawLands.recommended > landBand.max)
+    ? {
+        ...rawLands,
+        recommended: Math.min(landBand.max, Math.max(landBand.min, rawLands.recommended)),
+        formula: `${rawLands.formula} = ${rawLands.recommended}, clamped to the ${d.core?.archetype ?? format} land band ${landBand.min}-${landBand.max}`,
+      }
+    : rawLands;
   // computeRatioHealth's 'land' category comes from classifyCard's isLand,
   // which tests the WHOLE type_line ("Sorcery // Land" matches) — the
   // ratio-health land row counted MDFC land backs as lands (36) while
