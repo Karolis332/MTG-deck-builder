@@ -1478,9 +1478,13 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
     // a discouraged type. The template band decides, not the deck's creature
     // count — scoring runs before any pick exists. Walkers are exempt (their
     // minus abilities read "creatures with power 4 or greater" too).
+    // A superfriends loyalty engine / support card is exempt too (Way of the
+    // Necromancer pays "whenever a creature you control dies" into every
+    // walker — it is the plan).
     const template = getTemplate(resolvedStrategy);
     const creatureGated = template.creatures[1] <= CREATURE_LIGHT_MAX
       && !/\bPlaneswalker\b/.test(card.type_line || '')
+      && !(isSuperfriends && (isWalkerEngineCard(card) || isWalkerSupportCard(card)))
       && CREATURE_GATED_RE.test(text);
     if (!creatureGated && isDrawEngine(card.name, card.oracle_text || '', card.type_line || '')) {
       score += resolvedStrategy === 'aggro' ? 12 : 28;
@@ -1957,6 +1961,10 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
   // See buildScoredCandidatePool — same opt-in, recomputed in this function's
   // own scope since poolResult only carries the string, not the flag.
   const isSuperfriends = resolvedStrategy === 'superfriends';
+  // A superfriends plan piece: any walker, a loyalty engine or walker support.
+  // Shared by Step 4c (never an upgrade victim) and the dead-card pass.
+  const isWalkerPlanPiece = (card: DbCard): boolean =>
+    isSuperfriends && (/\bPlaneswalker\b/.test(card.type_line || '') || isWalkerEngineCard(card) || isWalkerSupportCard(card));
   const classifyOpts: ClassifyOpts = { superfriends: isSuperfriends, strict: true };
 
   // Free-text hint: "consistent manabase" biases toward the generous end of
@@ -2717,7 +2725,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
       payoffNames.has(card.name.toLowerCase()) || tribalNames.has(card.name) || fixingFloorNames.has(card.name)
       || comboStapleNames.has(card.name) || synergyNames.has(card.name)
       || (colors.length >= 3 && isFixingRock(card))
-      || (isSuperfriends && (/\bPlaneswalker\b/.test(card.type_line || '') || isWalkerEngineCard(card) || isWalkerSupportCard(card)));
+      || isWalkerPlanPiece(card);
     const isSpellSlot = (card: DbCard): boolean =>
       !(card.type_line || '').split('//')[0].includes('Land') && !isLandBackDfc(card);
     const scoreOfName = (name: string): number => poolByName.get(name)?.score ?? -Infinity;
@@ -3221,6 +3229,10 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
   const deadPass = applyDeadCardPass(
     finalCards, poolResult.pool, colors, commanderCard?.oracle_text || undefined,
     (card) => getMaxQty(card) > 0,
+    // P2 B-D6: a walker's abilities are modal and a loyalty engine is the
+    // plan — the enabler census must not cut Kiora (power 4+) or a Way
+    // (creature dies) out of a superfriends list.
+    isWalkerPlanPiece,
   );
   finalCards = deadPass.cards;
   const deadCardsReplaced = deadPass.replacedAsDead;
@@ -3496,6 +3508,7 @@ export function applyDeadCardPass(
   colors: string[],
   commanderOracle: string | undefined,
   canPick: (card: DbCard) => boolean = () => true,
+  keep: (card: DbCard) => boolean = () => false,
 ): { cards: Array<{ card: DbCard; quantity: number; board: 'main' | 'sideboard' }>; replacedAsDead: Array<{ out: string; in: string; reason: string }> } {
   const cards = picked.map((p) => ({ ...p }));
   const replacedAsDead: Array<{ out: string; in: string; reason: string }> = [];
@@ -3511,6 +3524,7 @@ export function applyDeadCardPass(
     cards.filter((c) => c.board === 'main' && isColorlessSource(c.card)).reduce((s, c) => s + c.quantity, 0);
 
   const deadReason = (card: DbCard): string | null => {
+    if (keep(card)) return null;
     const target = narrowTutorTarget(card);
     if (target) {
       const count = countTargets(target, mainCards());

@@ -82,6 +82,7 @@ describe('autoBuildDeck — P2-S scoring regressions (synthetic DB)', () => {
     add('Test Walker Cmdr', 4, '{2}{B}{G}', 'Legendary Creature — Elf Warlock', 'Flying', ['B', 'G'], { subtypes: ['Elf', 'Warlock'] });
     add('Test Henge', 9, '{7}{G}{G}', 'Legendary Artifact', HENGE, ['G'], { rank: 200 });
     add('Test Arena', 3, '{1}{B}{B}', 'Enchantment', ARENA, ['B'], { rank: 200 });
+    add('Test Way', 2, '{1}{B}', 'Legendary Enchantment', 'When this enchantment enters, empower Jace 2. (Put two loyalty counters on a Jace token you control.)\nWhenever a creature you control dies, put a loyalty counter on each planeswalker you control.', ['B'], { rank: 200 });
 
     // #3 — cEDH-tier staples (names seeded by migration 46 in cedh_staples) at a lower rank than the flood.
     add('Test Combo Cmdr', 3, '{1}{U}{B}', 'Legendary Creature — Human Wizard', 'Flying', ['U', 'B'], { subtypes: ['Human', 'Wizard'] });
@@ -130,6 +131,8 @@ describe('autoBuildDeck — P2-S scoring regressions (synthetic DB)', () => {
     expect(sf('Test Arena').drawEngine).toBe(28);
     expect(sf('Test Henge').drawEngine).toBeUndefined();
     expect(sf('Test Henge').creatureGate).toBeLessThan(0);
+    // A superfriends loyalty engine (a Way) reads 'whenever a creature you control dies' too — it is the plan, never gated.
+    expect(sf('Test Way').creatureGate).toBeUndefined();
     const mid = await compsOf('Test Walker Cmdr', 'midrange');
     expect(mid('Test Henge').drawEngine).toBe(28);
     expect(mid('Test Henge').creatureGate).toBeUndefined();

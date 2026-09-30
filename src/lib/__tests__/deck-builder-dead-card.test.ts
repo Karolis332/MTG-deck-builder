@@ -235,6 +235,15 @@ describe('applyDeadCardPass — enabler census (B-D6)', () => {
   const altar = makeCard({ name: "Ashnod's Altar", type_line: 'Artifact', cmc: 3, oracle_text: 'Sacrifice a creature: Add {C}{C}.' });
   const makers = (n: number) => Array.from({ length: n }, (_, i) => main(makeCard({ name: `Maker ${i + 1}`, type_line: 'Sorcery', oracle_text: 'Create a 1/1 white Soldier creature token.', cmc: 2 })));
 
+  it('keep(): a superfriends plan piece is never a dead card even when creature-gated', () => {
+    const way = makeCard({ name: 'Way of the Necromancer', type_line: 'Legendary Enchantment', cmc: 2, oracle_text: 'When this enchantment enters, empower Jace 2.\nWhenever a creature you control dies, put a loyalty counter on each planeswalker you control.' });
+    const kiora = makeCard({ name: 'Kiora, Behemoth Beckoner', type_line: 'Legendary Planeswalker — Kiora', cmc: 3, oracle_text: 'Whenever a creature you control with power 4 or greater enters, draw a card.\n−1: Untap target permanent.' });
+    const deck = [main(way), main(kiora), ...bears(4)];
+    expect(outOf(deck)).toEqual([expect.stringMatching(/^Way of the Necromancer: no enabler/), expect.stringMatching(/^Kiora, Behemoth Beckoner: no enabler/)]);
+    const keep = (c: DbCard) => /\bPlaneswalker\b/.test(c.type_line || '') || c.name.startsWith('Way of');
+    expect(applyDeadCardPass(deck, pool, colors, undefined, () => true, keep).replacedAsDead).toEqual([]);
+  });
+
   it('Idol of Oblivion dies without token makers; the commander counts as one', () => {
     expect(outOf([main(idol), ...bears(10)])).toEqual([expect.stringMatching(/^Idol of Oblivion: .*token/)]);
     const edgar = 'Whenever you cast another Vampire spell, create a 1/1 black Vampire creature token with lifelink.';
