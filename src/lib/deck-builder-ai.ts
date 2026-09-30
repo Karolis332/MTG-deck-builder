@@ -1939,6 +1939,48 @@ export function isWipeBackfillCandidate(
 // the template band, so collection builds that drift are read honestly.
 export const CREATURE_HEAVY_SHARE = 0.4;
 
+export interface PreferOneSidedWipesCtx {
+  /** Names seated FOR the board_wipe role (Pass A quota / backfill) — the only wipe slots this pass touches. */
+  wipeSlotNames: Set<string>;
+  /** Tribe members are plan picks whatever else they do (Amalia in Edgar). */
+  tribalNames: Set<string>;
+  classifyOpts?: ClassifyOpts;
+  scoreFloor: number;
+  getMaxQty: (card: DbCard) => number;
+}
+
+// P2-G #6, second half: a creature-heavy deck that Pass A seated symmetric
+// wipes into (Edgar: Sunfall, Genesis of the Daleks) trades each one, in
+// place, for the best benched one-sided wipe, else the best benched spot
+// removal, above the pool floor. Mutates `picked`; returns the swaps.
+export function preferOneSidedWipes(
+  picked: Array<{ card: DbCard; quantity: number; board: 'main' | 'sideboard' }>,
+  scored: Array<{ card: DbCard; score: number }>,
+  ctx: PreferOneSidedWipesCtx
+): Array<{ out: string; in: string }> {
+  const swaps: Array<{ out: string; in: string }> = [];
+  const taken = new Set(picked.map((p) => p.card.name));
+  const isSpellSlot = (c: DbCard) => !(c.type_line || '').split('//')[0].includes('Land');
+  const isOneSidedWipe = (c: DbCard) =>
+    isBoardWipe(c.name, c.oracle_text || '', ctx.classifyOpts) && !isSymmetricCreatureWipe(c.name, c.oracle_text || '');
+  const isSpotRemoval = (c: DbCard) =>
+    getPrimaryCategory(classifyCard(c.name, c.oracle_text || '', c.type_line || '', c.cmc || 0, undefined, ctx.classifyOpts)) === 'removal';
+  // `scored` is score-descending, so the first match is the best available.
+  const bench = scored.filter((s) => s.score >= ctx.scoreFloor && !taken.has(s.card.name) && isSpellSlot(s.card) && ctx.getMaxQty(s.card) > 0);
+  for (const p of [...picked]) {
+    if (p.board !== 'main' || !ctx.wipeSlotNames.has(p.card.name) || ctx.tribalNames.has(p.card.name)) continue;
+    if (!isSymmetricCreatureWipe(p.card.name, p.card.oracle_text || '')) continue;
+    const replacement = bench.find((s) => !taken.has(s.card.name) && isOneSidedWipe(s.card))
+      ?? bench.find((s) => !taken.has(s.card.name) && isSpotRemoval(s.card));
+    if (!replacement) break;
+    picked.splice(picked.indexOf(p), 1, { card: replacement.card, quantity: p.quantity, board: 'main' });
+    taken.delete(p.card.name);
+    taken.add(replacement.card.name);
+    swaps.push({ out: p.card.name, in: replacement.card.name });
+  }
+  return swaps;
+}
+
 // Every displacement pass keeps at least this much protection seated (the
 // template minimum — superfriends counterspells [2, 4]; P2-G #7).
 export const PROTECTION_FLOOR = 2;
@@ -2252,6 +2294,16 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
   const creatureCount = picked.reduce((s, p) =>
     s + (p.board === 'main' && /\bCreature\b/.test((p.card.type_line || '').split('//')[0]) ? p.quantity : 0), 0);
   const creatureHeavy = creatureCount >= nonLandTarget * CREATURE_HEAVY_SHARE;
+  // Go-wide: the wipe quota's symmetric picks become one-sided wipes or spot
+  // removal (P2-G #6). Runs before the backfill so it sees the final slots.
+  if (creatureHeavy) {
+    const wipeSlotNames = new Set(reasoning.filter((r) => r.role === 'board_wipe').map((r) => r.cardName));
+    for (const s of preferOneSidedWipes(picked, scored, { wipeSlotNames, tribalNames, classifyOpts, scoreFloor: qualityFloor, getMaxQty })) {
+      pickedNames.delete(s.out);
+      pickedNames.add(s.in);
+      reasoning.push({ cardName: s.in, role: 'removal', reason: `go-wide: +${s.in} for symmetric wipe ${s.out}` });
+    }
+  }
   // Live protection count for the displacement passes below (P2-G #7).
   const isProtectionPick = (p: { card: DbCard }): boolean =>
     classifyCard(p.card.name, p.card.oracle_text || '', p.card.type_line || '', p.card.cmc || 0, commanderCard?.oracle_text || undefined, classifyOpts).includes('protection');

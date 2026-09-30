@@ -3,7 +3,7 @@
 import { describe, it, expect } from 'vitest';
 import { isBoardWipe } from '../card-classifier';
 import { isBoardWipe as isBoardWipeBase } from './baseline/card-classifier-6791d3e';
-import { isWipeBackfillCandidate, isStep4bDisplaceable, applyDeckBudget, partnerPairNames } from '../deck-builder-ai';
+import { isWipeBackfillCandidate, isStep4bDisplaceable, applyDeckBudget, partnerPairNames, preferOneSidedWipes } from '../deck-builder-ai';
 import { commanderToSlug } from '../edhrec';
 
 describe('B-D4 partner pair: EDHREC pair page names', () => {
@@ -81,6 +81,23 @@ describe('#6 symmetric creature wipes in creature-heavy builds', () => {
     expect(isWipeBackfillCandidate(WRATH, { classifyOpts: STRICT, scoreFloor: 0, creatureHeavy: true })).toBe(false);
     expect(isWipeBackfillCandidate(GARRUKS_WAKE, { classifyOpts: STRICT, scoreFloor: 0, creatureHeavy: true })).toBe(true);
     expect(isWipeBackfillCandidate(WRATH, { classifyOpts: STRICT, scoreFloor: 0, creatureHeavy: false })).toBe(true);
+  });
+  it('a creature-heavy deck trades its quota-seated symmetric wipes for one-sided wipes, then spot removal, above the floor', () => {
+    const wrath = makeCard(WRATH);
+    const deluge = makeCard({ name: 'Toxic Deluge', oracle_text: 'As an additional cost to cast this spell, pay X life.\nAll creatures get -X/-X until end of turn.' });
+    const tribalWipe = makeCard({ name: 'Kindred Dominance', oracle_text: 'Choose a creature type. Destroy all creatures that aren\'t of the chosen type.' });
+    const bear = makeCard({ name: 'Bear', type_line: 'Creature — Bear' });
+    const picked = [wrath, deluge, tribalWipe, bear].map(pick);
+    const garruksWake = makeCard(GARRUKS_WAKE);
+    const doomBlade = makeCard({ name: 'Doom Blade', type_line: 'Instant', oracle_text: 'Destroy target nonblack creature.' });
+    const cheapWipe = makeCard({ name: 'Cheap One-Sided', oracle_text: "Destroy all creatures you don't control." });
+    const scored = [{ card: garruksWake, score: 100 }, { card: doomBlade, score: 90 }, { card: cheapWipe, score: 10 }];
+    const swaps = preferOneSidedWipes(picked, scored, {
+      wipeSlotNames: new Set(['Wrath of God', 'Toxic Deluge', 'Kindred Dominance']), tribalNames: new Set(['Kindred Dominance']),
+      classifyOpts: STRICT, scoreFloor: 50, getMaxQty: () => 1,
+    });
+    expect(swaps).toEqual([{ out: 'Wrath of God', in: "In Garruk's Wake" }, { out: 'Toxic Deluge', in: 'Doom Blade' }]);
+    expect(picked.map((p) => p.card.name).sort()).toEqual(['Bear', 'Doom Blade', "In Garruk's Wake", 'Kindred Dominance']);
   });
   it('Step 4b may displace a symmetric wipe only in a creature-heavy build; one-sided wipes stay', () => {
     const wrath = pick(makeCard(WRATH));
