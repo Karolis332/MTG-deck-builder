@@ -13,9 +13,11 @@ import Database from 'better-sqlite3';
 import fs from 'fs';
 import path from 'path';
 import os from 'os';
+import { pathToFileURL } from 'url';
 import { iterateBulkCards } from '../src/lib/scryfall-bulk';
 
 const DRY_RUN = process.argv.includes('--dry-run');
+const PRICES_ONLY = process.argv.includes('--prices-only');
 
 function resolveDbPath(): string {
   if (process.env.MTG_DB_DIR) {
@@ -120,9 +122,102 @@ function toRow(card: ScryfallBulkCard) {
   };
 }
 
+/** Per-oracle_id running minimum price across every printing seen so far. */
+export interface MinPriceAcc {
+  usd: number | null;
+  foil: number | null;
+  etched: number | null;
+}
+
+const EMPTY_MIN_PRICE_ACC: MinPriceAcc = { usd: null, foil: null, etched: null };
+
+function lowerOf(a: number | null, b: number | null): number | null {
+  if (a == null) return b;
+  if (b == null) return a;
+  return Math.min(a, b);
+}
+
+/**
+ * Folds one printing's prices into a running per-oracle_id minimum. Immutable
+ * (returns a new accumulator) so the caller can stream millions of printings
+ * without holding them all in memory — only one small accumulator per
+ * oracle_id lives in the Map.
+ */
+export function foldMinPrice(
+  acc: MinPriceAcc,
+  printing: { usd?: string | null; usd_foil?: string | null; usd_etched?: string | null }
+): MinPriceAcc {
+  const usd = printing.usd != null ? parseFloat(printing.usd) : null;
+  const foil = printing.usd_foil != null ? parseFloat(printing.usd_foil) : null;
+  const etched = printing.usd_etched != null ? parseFloat(printing.usd_etched) : null;
+  return {
+    usd: lowerOf(acc.usd, Number.isFinite(usd as number) ? usd : null),
+    foil: lowerOf(acc.foil, Number.isFinite(foil as number) ? foil : null),
+    etched: lowerOf(acc.etched, Number.isFinite(etched as number) ? etched : null),
+  };
+}
+
+/** Lowest nonfoil USD across printings; falls back to foil, then etched. */
+export function finalizeMinPrice(acc: MinPriceAcc): number | null {
+  return acc.usd ?? acc.foil ?? acc.etched;
+}
+
+/**
+ * Streams the Scryfall default-cards bulk (every printing, one row each) and
+ * backfills price_usd only on rows whose oracle printing had no USD price —
+ * COALESCE + `price_usd IS NULL` guard means a known price is never touched.
+ * Standalone mode via --prices-only: `npx tsx scripts/update-card-data.ts --prices-only`.
+ */
+async function backfillPricesFromDefaultCards(db: Database.Database): Promise<number> {
+  console.log('Fetching default-cards bulk-data manifest...');
+  const manifestRes = await fetch('https://api.scryfall.com/bulk-data/default-cards', {
+    headers: { 'User-Agent': 'BlackGrimoire/1.0' },
+  });
+  if (!manifestRes.ok) throw new Error(`default-cards manifest fetch failed: ${manifestRes.status}`);
+  const manifest = await manifestRes.json() as {
+    download_uri?: string; jsonl_download_uri?: string; updated_at: string; size?: number; compressed_size?: number;
+  };
+  const bulkUrl = manifest.jsonl_download_uri ?? manifest.download_uri;
+  if (!bulkUrl) throw new Error('Scryfall default-cards manifest has no download URI');
+  const mb = ((manifest.compressed_size ?? manifest.size ?? 0) / 1e6).toFixed(0);
+  console.log(`Downloading default-cards bulk (${mb}MB, streamed)...`);
+
+  const bulkRes = await fetch(bulkUrl, { headers: { 'User-Agent': 'BlackGrimoire/1.0' } });
+  if (!bulkRes.ok) throw new Error(`default-cards bulk download failed: ${bulkRes.status}`);
+
+  const minByOracle = new Map<string, MinPriceAcc>();
+  let printingsSeen = 0;
+  for await (const raw of iterateBulkCards(bulkRes, bulkUrl)) {
+    const card = raw as unknown as { oracle_id: string; prices?: { usd?: string | null; usd_foil?: string | null; usd_etched?: string | null } };
+    if (!card.oracle_id || !card.prices) continue;
+    printingsSeen++;
+    minByOracle.set(card.oracle_id, foldMinPrice(minByOracle.get(card.oracle_id) ?? EMPTY_MIN_PRICE_ACC, card.prices));
+  }
+  console.log(`      ${printingsSeen} printings across ${minByOracle.size} oracle ids`);
+
+  const backfillStmt = db.prepare(`
+    UPDATE cards SET price_usd = COALESCE(price_usd, @price), updated_at = CURRENT_TIMESTAMP
+    WHERE oracle_id = @oracle_id AND price_usd IS NULL
+  `);
+  let gained = 0;
+  const runAll = db.transaction(() => {
+    for (const [oracleId, acc] of minByOracle) {
+      const lowest = finalizeMinPrice(acc);
+      if (lowest == null) continue;
+      if (!DRY_RUN) {
+        const result = backfillStmt.run({ oracle_id: oracleId, price: lowest.toFixed(2) });
+        gained += result.changes;
+      }
+    }
+  });
+  runAll();
+  console.log(`Prices backfilled: ${gained} rows gained a price_usd from another printing`);
+  return gained;
+}
+
 async function main(): Promise<void> {
   const dbPath = resolveDbPath();
-  console.log(`DB: ${dbPath}${DRY_RUN ? ' (DRY RUN)' : ''}`);
+  console.log(`DB: ${dbPath}${DRY_RUN ? ' (DRY RUN)' : ''}${PRICES_ONLY ? ' (PRICES ONLY)' : ''}`);
   if (!fs.existsSync(dbPath)) throw new Error('Database not found');
 
   // Safety backup (checkpoint WAL first so the copy is consistent)
@@ -132,6 +227,13 @@ async function main(): Promise<void> {
     const backupPath = path.join(os.tmpdir(), `mtg-cards-backup-${Date.now()}.db`);
     fs.copyFileSync(dbPath, backupPath);
     console.log(`Backup: ${backupPath}`);
+  }
+
+  if (PRICES_ONLY) {
+    await backfillPricesFromDefaultCards(db);
+    db.pragma('wal_checkpoint(TRUNCATE)');
+    db.close();
+    return;
   }
 
   const cards = await downloadBulk();
@@ -206,13 +308,23 @@ async function main(): Promise<void> {
     newNames.forEach((n) => console.log('  + ' + n));
   }
 
+  // The oracle-cards pass leaves price_usd null wherever the one printing
+  // Scryfall picked for that oracle_id has no nonfoil USD (newest/digital/
+  // special printings) — fill those from the cheapest printing that has one.
+  await backfillPricesFromDefaultCards(db);
+
   const newest = db.prepare('SELECT set_code, set_name, COUNT(*) n FROM cards GROUP BY set_code ORDER BY MAX(updated_at) DESC, n DESC LIMIT 5').all();
   console.log('Top sets by recency:', JSON.stringify(newest));
   db.pragma('wal_checkpoint(TRUNCATE)');
   db.close();
 }
 
-main().catch((err) => {
-  console.error('FAILED:', err);
-  process.exit(1);
-});
+// Guard so tests can import the pure/exported helpers above without
+// triggering a live network fetch + DB write on import.
+const isMain = process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href;
+if (isMain) {
+  main().catch((err) => {
+    console.error('FAILED:', err);
+    process.exit(1);
+  });
+}
