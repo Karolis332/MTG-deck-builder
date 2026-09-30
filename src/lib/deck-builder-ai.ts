@@ -1847,6 +1847,9 @@ export interface Step4bDisplaceableCtx {
   isSuperfriends?: boolean;
   /** Creature-heavy deck (P2-G #6): a symmetric creature wipe is fair game for any backfill. */
   creatureHeavy?: boolean;
+  /** Current main-board protection count / floor (P2-G #7) — protection stops being displaceable at the floor. */
+  protectionCount?: number;
+  protectionFloor?: number;
 }
 
 // Step 4b (synergy-minimum backfill) never displaces removal/wipes, and only
@@ -1877,14 +1880,18 @@ export function isStep4bDisplaceable(
   // first thing every later category's backfill cut.
   if (ctx.isSuperfriends && isWalkerEngineCard(p.card)) return false;
 
-  const primary = getPrimaryCategory(classifyCard(
+  const cats = classifyCard(
     p.card.name, p.card.oracle_text || '', p.card.type_line || '', p.card.cmc || 0,
     ctx.commanderOracleText, ctx.classifyOpts
-  ));
+  );
+  const primary = getPrimaryCategory(cats);
   if (primary === 'removal') return false;
   // A symmetric creature wipe in a go-wide deck is the one wipe worth cutting
   // (P2-G #6); one-sided wipes and everything else stay.
   if (primary === 'board_wipe') return !!ctx.creatureHeavy && isSymmetricCreatureWipe(p.card.name, p.card.oracle_text || '');
+  // Protection keeps its floor the way ramp does (P2-G #7): Tam's walker-
+  // support fill cut Dovin's Veto and Mortify's counter mode down to 0.
+  if (ctx.protectionFloor !== undefined && cats.includes('protection')) return (ctx.protectionCount ?? 0) - p.quantity >= ctx.protectionFloor;
   if (primary === 'ramp') return ctx.rampCount - p.quantity >= ctx.rampFloor;
 
   // Pre-existing text heuristic (unrelated to a21f2ff): a mana rock/land
@@ -1929,6 +1936,10 @@ export function isWipeBackfillCandidate(
 // own picks are at least this share creatures — the deck's real count, not
 // the template band, so collection builds that drift are read honestly.
 export const CREATURE_HEAVY_SHARE = 0.4;
+
+// Every displacement pass keeps at least this much protection seated (the
+// template minimum — superfriends counterspells [2, 4]; P2-G #7).
+export const PROTECTION_FLOOR = 2;
 
 export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult> {
   const db = getDb();
@@ -2239,6 +2250,10 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
   const creatureCount = picked.reduce((s, p) =>
     s + (p.board === 'main' && /\bCreature\b/.test((p.card.type_line || '').split('//')[0]) ? p.quantity : 0), 0);
   const creatureHeavy = creatureCount >= nonLandTarget * CREATURE_HEAVY_SHARE;
+  // Live protection count for the displacement passes below (P2-G #7).
+  const isProtectionPick = (p: { card: DbCard }): boolean =>
+    classifyCard(p.card.name, p.card.oracle_text || '', p.card.type_line || '', p.card.cmc || 0, commanderCard?.oracle_text || undefined, classifyOpts).includes('protection');
+  const countProtection = (): number => picked.reduce((s, p) => s + (p.board === 'main' && isProtectionPick(p) ? p.quantity : 0), 0);
   // The deck is normally FULL here (A-D1 fills every slot by score, and Pass A
   // no longer seats a sub-floor "wipe" just to meet the quota), so the
   // backfill makes its own room: the lowest-scored utility/synergy picks
@@ -2443,6 +2458,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
       for (const p of picked) {
         if (p.board === 'main' && primaryOf(p) === 'ramp') rampCount += p.quantity;
       }
+      let protectionCount = countProtection();
       const displaceable = [...picked]
         .filter((p) => {
           if (p.board !== 'main' || isWalker(p.card) || isSupport(p.card)) return false;
@@ -2453,10 +2469,14 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
       let filled = 0;
       for (const candidate of candidates) {
         if (filled >= deficit) break;
-        const at = displaceable.findIndex((p) => primaryOf(p) !== 'ramp' || rampCount - p.quantity >= rampFloor);
+        // Ramp and protection each hold their floor (P2-G #7).
+        const at = displaceable.findIndex((p) =>
+          (primaryOf(p) !== 'ramp' || rampCount - p.quantity >= rampFloor)
+          && (!isProtectionPick(p) || protectionCount - p.quantity >= PROTECTION_FLOOR));
         if (at === -1) break;
         const [displaced] = displaceable.splice(at, 1);
         if (primaryOf(displaced) === 'ramp') rampCount -= displaced.quantity;
+        if (isProtectionPick(displaced)) protectionCount -= displaced.quantity;
         const idx = picked.indexOf(displaced);
         if (idx !== -1) {
           picked.splice(idx, 1);
@@ -2599,6 +2619,8 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
         const primary = getPrimaryCategory(classifyCard(p.card.name, p.card.oracle_text || '', p.card.type_line || '', p.card.cmc || 0, commanderCard?.oracle_text || undefined, classifyOpts));
         if (p.board === 'main' && primary === 'ramp') rampCount += p.quantity;
       }
+      // Protection mirrors ramp (P2-G #7): not pre-excluded here, live floor in the fill loop.
+      let protectionCount = countProtection();
 
       // Identify non-essential picks (lowest score, non-protected)
       const displaceable = [...picked]
@@ -2622,12 +2644,13 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
         const at = displaceable.findIndex((p) => isStep4bDisplaceable(p, {
           category, protectedNames: protectedSet, tribalNames,
           commanderOracleText: commanderCard?.oracle_text || undefined, classifyOpts, isSuperfriends, creatureHeavy,
-          rampCount, rampFloor,
+          rampCount, rampFloor, protectionCount, protectionFloor: PROTECTION_FLOOR,
         }));
         if (at === -1) break;
         const [displaced] = displaceable.splice(at, 1);
         const displacedPrimary = getPrimaryCategory(classifyCard(displaced.card.name, displaced.card.oracle_text || '', displaced.card.type_line || '', displaced.card.cmc || 0, commanderCard?.oracle_text || undefined, classifyOpts));
         if (displacedPrimary === 'ramp') rampCount -= displaced.quantity;
+        if (isProtectionPick(displaced)) protectionCount -= displaced.quantity;
         // Remove displaced card
         const idx = picked.indexOf(displaced);
         if (idx !== -1) {

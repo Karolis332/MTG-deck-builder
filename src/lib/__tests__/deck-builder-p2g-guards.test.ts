@@ -23,6 +23,15 @@ const ctx = (o: Partial<Step4bDisplaceableCtx> = {}): Step4bDisplaceableCtx => (
 });
 const GARRUKS_WAKE = { name: "In Garruk's Wake", oracle_text: "Destroy all creatures you don't control and all planeswalkers you don't control." };
 
+describe('#7 protection floor holds through every displacement', () => {
+  const veto = pick(makeCard({ name: "Dovin's Veto", type_line: 'Instant', oracle_text: "This spell can't be countered.\nCounter target noncreature spell." }));
+  it('a protection piece is not displaceable at the floor, is above it, and is unguarded when no floor is given', () => {
+    expect(isStep4bDisplaceable(veto, ctx({ category: 'planeswalker', protectionCount: 2, protectionFloor: 2 }))).toBe(false);
+    expect(isStep4bDisplaceable(veto, ctx({ category: 'planeswalker', protectionCount: 3, protectionFloor: 2 }))).toBe(true);
+    expect(isStep4bDisplaceable(veto, ctx({ category: 'planeswalker' }))).toBe(true);
+  });
+});
+
 describe('#6 symmetric creature wipes in creature-heavy builds', () => {
   it('backfill skips a symmetric wipe when the deck is creature-heavy, keeps one-sided wipes', () => {
     expect(isWipeBackfillCandidate(WRATH, { classifyOpts: STRICT, scoreFloor: 0, creatureHeavy: true })).toBe(false);
