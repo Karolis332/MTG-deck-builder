@@ -92,13 +92,14 @@ describe('pickByRole pick order (A-D1): score floors', () => {
   it('Pass B admits a roleless card at or above passBScoreFloor and one named in synergyNames; the rest stay filler', () => {
     const pool = [
       { card: makeCard({ id: 'value', name: 'Plain Value', type_line: 'Creature — Bear', oracle_text: 'Trample' }), score: 95 },
-      ...rolePool(10),
+      ...rolePool(3), // 9 role cards: quotas take 6, caps admit the rest, slots remain for the roleless cards
       { card: makeCard({ id: 'tribe', name: 'Tribe Buddy', type_line: 'Creature — Bear', oracle_text: 'Vigilance' }), score: 20 },
       { card: makeCard({ id: 'junk', name: 'Plain Junk', type_line: 'Creature — Bear', oracle_text: 'Haste' }), score: 5 },
     ];
-    const quotas = getRoleQuotas('midrange', 28, null);
+    // Small explicit quotas so Pass A leaves room and Pass B is what seats the roleless cards.
+    const quotas = { ...getRoleQuotas('midrange', 12, null), ramp: 2, draw: 2, removal: 2, tutor: 0, board_wipe: 0, protection: 0, synergy_payoff: 0, win_condition: 0 };
     const result = pickByRole({
-      pool, nonLandTarget: 28, quotas, payoffNames: new Set(), getMaxQty: () => 1, isCommanderFormat: true,
+      pool, nonLandTarget: 12, quotas, payoffNames: new Set(), getMaxQty: () => 1, isCommanderFormat: true,
       passBScoreFloor: 50, synergyNames: new Set(['Tribe Buddy']),
     });
     const value = result.picks.find((p) => p.card.name === 'Plain Value');

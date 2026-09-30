@@ -72,6 +72,8 @@ export function getScoringWeights(): Record<string, number> | null {
 // MDFC spell//land budget — shared intuition with land-intelligence's
 // MAX_MDFC_LANDS: a deck wants at most ~4 modal land-back cards total.
 const MAX_MDFC_IN_SPELLS = 4;
+/** A-D1: quality floor = this share of the score of the pool's nonLandTarget-th best pickable nonland. */
+const QUALITY_FLOOR_RATIO = 0.6;
 function isLandBackDfc(card: DbCard): boolean {
   const tl = card.type_line || '';
   return tl.includes('//') && !tl.split('//')[0].includes('Land') && tl.includes('Land');
@@ -520,7 +522,7 @@ export interface CraftListEntry {
 }
 
 export interface ScoredCandidatePoolResult {
-  pool: Array<{ card: DbCard; score: number }>;
+  pool: Array<{ card: DbCard; score: number; synergy?: boolean }>;
   hints: ParsedBuildHints;
   /** Candidates whose score included a non-zero emphasize-term bonus */
   boostedCards: number;
@@ -1629,7 +1631,10 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
       score = reweighted;
     }
 
-    return { card, score };
+    // A positive tribal / commander-profile component admits the card to
+    // Pass B regardless of its total (A-D1: the plan's pieces are never filler).
+    const synergy = (comp.tribal || 0) > 0 || (comp.profileSynergy || 0) > 0;
+    return { card, score, synergy };
   });
 
   scored.sort((a, b) => b.score - a.score);
@@ -1909,9 +1914,28 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
     return ANY_NUMBER_RE.test(card.oracle_text || '') ? owned : Math.min(formatMax, owned);
   }
 
+  // ── Pool quality floor (A-D1) ──────────────────────────────────────────
+  // The pool's own bar: 60 % of the score of the card that would be the LAST
+  // pick if the nonland slots were filled purely by score (pickable, nonland).
+  // Every arsenal pre-fill, collection substitute and role-quota pick must
+  // clear it, so a 13-point name-list card can't be seated while a 130-point
+  // owned staple sits on the bench. Score-ordered `scored` is what makes the
+  // anchor the nonLandTarget-th entry.
+  const poolByName = new Map<string, (typeof scored)[number]>();
+  for (const s of scored) poolByName.set(s.card.name, s);
+  const pickableScores = scored
+    .filter((s) => !(s.card.type_line || '').split('//')[0].includes('Land') && getMaxQty(s.card) > 0)
+    .map((s) => s.score);
+  const floorAnchor = pickableScores[Math.min(nonLandTarget, pickableScores.length) - 1];
+  const qualityFloor = floorAnchor === undefined ? -Infinity : floorAnchor > 0 ? floorAnchor * QUALITY_FLOOR_RATIO : floorAnchor;
+
   // ── (a) Build commander arsenal ────────────────────────────────────────
   let arsenal: ArsenalCard[] = [];
-  const analyzeOpts = { strategy: resolvedStrategy };
+  const analyzeOpts = {
+    strategy: resolvedStrategy,
+    scoreOf: (name: string) => poolByName.get(name)?.score ?? -Infinity,
+    scoreFloor: qualityFloor,
+  };
   if (isCommander && options.commanderName && options.userId !== undefined) {
     try {
       const analysis = analyzeCommanderForBuild(
@@ -1955,8 +1979,6 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
   // ── (b) Pre-fill from arsenal (highest-priority items first) ──────────
   // Only pick items that are in the scored pool (ensures legality, color,
   // and that the card exists with proper DB metadata).
-  const poolByName = new Map<string, (typeof scored)[number]>();
-  for (const s of scored) poolByName.set(s.card.name, s);
 
   // Role quotas are computed BEFORE the pre-fill so its caps exist while the
   // arsenal runs (review 2026-08-23 C1: uncapped pre-fill shipped ramp 22-29
@@ -1993,11 +2015,6 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
   const arsenalSlotBudget = Math.min(Math.floor(nonLandTarget * 0.75), quotaSum);
   let arsenalUsed = 0;
 
-  // Defence in depth (C3): sub-staple arsenal entries must clear the bottom
-  // scoring decile so anti-synergy penalties (five_colors -25 non-gold,
-  // self-buff -60) actually bite the pre-fill instead of being ignored.
-  const scoreFloor = scored.length >= 10 ? scored[Math.floor(scored.length * 0.9)].score : -Infinity;
-
   for (const a of arsenal) {
     if (arsenalUsed >= arsenalSlotBudget) break;
     if (pickedNames.has(a.card.name)) continue;
@@ -2006,8 +2023,11 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
     // Must exist in the scored pool (legal, in-color, properly loaded)
     const poolEntry = poolByName.get(a.card.name);
     if (!poolEntry) continue;
-    // Sub-staple entries must not be bottom-decile scored (C3)
-    if (a.priority < 85 && poolEntry.score < scoreFloor) continue;
+    // A name-list entry is seated only above the pool's quality floor (A-D1;
+    // replaces the C3 bottom-decile check, which let 13-80-point substitutes
+    // in while 100-170-point owned staples stayed benched). Below it the card
+    // still competes on score in Pass B like everything else.
+    if (poolEntry.score < qualityFloor) continue;
     // Lands are picked by the land pipeline — charging them to the nonland
     // budget burned 13-18 spell slots per build (C1 aggravator).
     if ((a.card.type_line || '').includes('Land')) continue;
@@ -2085,6 +2105,12 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
   // double-count role quotas (arsenal already contributed ramp/draw/etc.).
   const preFilled = picked.map(p => p.card);
 
+  // A-D1: Pass B admits by score — at least the weakest pre-filled pick (or
+  // the pool floor when nothing was pre-filled) — or by plan synergy.
+  const preFilledScores = preFilled.map((c) => poolByName.get(c.name)?.score).filter((s): s is number => s !== undefined);
+  const passBScoreFloor = preFilledScores.length > 0 ? Math.min(...preFilledScores) : qualityFloor;
+  const synergyNames = new Set(scored.filter((s) => s.synergy).map((s) => s.card.name));
+
   const pickResult = pickByRole({
     pool: remainingPool,
     nonLandTarget,
@@ -2096,6 +2122,9 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
     preFilled,
     passBAllowed,
     superfriends: isSuperfriends,
+    scoreFloor: qualityFloor,
+    passBScoreFloor,
+    synergyNames,
   });
 
   for (const p of pickResult.picks) {

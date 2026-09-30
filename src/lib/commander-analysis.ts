@@ -599,6 +599,8 @@ export function analyzeCommanderForBuild(
     legalityFilter,
     seen,
     collectionSource,
+    opts?.scoreOf,
+    opts?.scoreFloor,
   );
   for (const s of subs) {
     arsenal.push(s);
@@ -645,6 +647,8 @@ function findCollectionSubstitutes(
   legalityFilter: string,
   alreadySeen: Set<string>,
   collectionSource?: string,
+  scoreOf?: (name: string) => number,
+  scoreFloor: number = -Infinity,
 ): ArsenalCard[] {
   if (unownedTargets.length === 0) return [];
   const db = getDb();
@@ -685,6 +689,15 @@ function findCollectionSubstitutes(
       if (byRole[cat]) byRole[cat].push(row);
     }
   }
+  // Best owned card of the role wins, not the first row the query returned
+  // (A-D1: Jhoira took Heated Argument at 13 pts over Hedron Archive at 131).
+  // Without a score source the legacy first-row pick is kept.
+  const scoreOfRow = (r: DbCard): number => (scoreOf ? scoreOf(r.name) ?? -Infinity : 0);
+  if (scoreOf) {
+    for (const bucket of Object.values(byRole)) {
+      bucket.sort((a, b) => scoreOfRow(b) - scoreOfRow(a) || (a.edhrec_rank ?? 999999) - (b.edhrec_rank ?? 999999) || a.name.localeCompare(b.name));
+    }
+  }
 
   // For each missing target, classify it and take the best owned card from
   // the matching role bucket that isn't already in the arsenal.
@@ -700,7 +713,7 @@ function findCollectionSubstitutes(
     for (const cat of targetCats) {
       const bucket = byRole[cat];
       if (!bucket || bucket.length === 0) continue;
-      const sub = bucket.find(r => !alreadySeen.has(r.name.toLowerCase()));
+      const sub = bucket.find(r => !alreadySeen.has(r.name.toLowerCase()) && scoreOfRow(r) >= scoreFloor);
       if (!sub) continue;
       alreadySeen.add(sub.name.toLowerCase());
       out.push({

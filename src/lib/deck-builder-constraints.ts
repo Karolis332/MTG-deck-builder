@@ -637,6 +637,14 @@ export interface PickByRoleOptions {
   /** Opt-in: a planeswalker is never classified as 'draw' (see card-classifier
    *  ClassifyOpts). Omitted reproduces legacy behaviour byte-for-byte. */
   superfriends?: boolean;
+  /** A-D1: Pass A fills a role quota only with cards scoring at least this. */
+  scoreFloor?: number;
+  /** A-D1: Pass B admits a card only if it scores at least this (the lowest
+   *  pre-filled pick), is a payoff, is named in `synergyNames`, or is
+   *  allow-listed. Omitted reproduces the legacy allow-list-only Pass B. */
+  passBScoreFloor?: number;
+  /** Cards with a positive tribal / commander-profile synergy component. */
+  synergyNames?: Set<string>;
 }
 
 export interface PickByRoleResult {
@@ -661,7 +669,9 @@ export function pickByRole(opts: PickByRoleOptions): PickByRoleResult {
   const {
     pool, nonLandTarget, quotas, payoffNames, commanderOracle,
     getMaxQty, isCommanderFormat, preFilled, passBAllowed, superfriends,
+    scoreFloor, passBScoreFloor, synergyNames,
   } = opts;
+  void isCommanderFormat; // copy caps come from getMaxQty (any-number cards, A-D5)
   const classifyOpts = superfriends ? { superfriends: true } : undefined;
 
   const picks: PickedRoleCard[] = [];
@@ -818,6 +828,9 @@ export function pickByRole(opts: PickByRoleOptions): PickByRoleResult {
       if (totalPicked >= nonLandTarget) break;
       if (pickedNames.has(c.card.name)) continue;
       if (!pass.match(c)) continue;
+      // A-D1: a quota is not a licence to seat a 13-point card; below the
+      // floor the slot goes to the best remaining card by score instead.
+      if (scoreFloor !== undefined && c.score < scoreFloor) continue;
       if (takePick(c, pass.roleLabel, pass.describe(c))) {
         roleFills[pass.key] += 1;
       }
@@ -848,6 +861,16 @@ export function pickByRole(opts: PickByRoleOptions): PickByRoleResult {
     roleCaps[role] === undefined || (roleFills[role] ?? 0) < roleCaps[role];
 
   const passBFilter = (c: Classified): { accept: boolean; role: PickedRoleCard['role']; reason: string } => {
+    // A-D1: with a floor, admission is by score / synergy / allow-list — a
+    // role label alone no longer seats a card the pool ranks below every
+    // pre-filled pick. Undefined floor = legacy allow-list Pass B.
+    const isSynergy = synergyNames?.has(c.card.name) === true;
+    const admitted = passBScoreFloor === undefined
+      ? undefined
+      : c.isPayoff || isSynergy || c.score >= passBScoreFloor || passBAllowed?.has(c.card.name) === true;
+    if (admitted === false) {
+      return { accept: false, role: 'utility', reason: `below the pre-fill floor: ${c.card.name}` };
+    }
     if (c.isPayoff) {
       return { accept: true, role: 'payoff', reason: `extra payoff: ${c.card.name}` };
     }
@@ -859,6 +882,14 @@ export function pickByRole(opts: PickByRoleOptions): PickByRoleResult {
     if (c.categories.has('protection') && underCap('protection')) return { accept: true, role: 'protection', reason: `extra protection: ${c.card.name}` };
     if (c.categories.has('win_condition')) return { accept: true, role: 'win_condition', reason: `finisher: ${c.card.name}` };
     if (c.categories.has('synergy')) return { accept: true, role: 'synergy', reason: `commander synergy: ${c.card.name}` };
+    // Reaching here with a capped role means every such role is at cap —
+    // the score floor never bypasses a cap (28-ramp flooding).
+    const atCap = [...c.categories].some((r) => roleCaps[r] !== undefined);
+    if (admitted && !atCap) {
+      return isSynergy
+        ? { accept: true, role: 'synergy', reason: `tribal/commander synergy: ${c.card.name}` }
+        : { accept: true, role: 'utility', reason: `scores above the pre-fill floor: ${c.card.name}` };
+    }
     if (passBAllowed && passBAllowed.has(c.card.name)) {
       return { accept: true, role: 'utility', reason: `allowlisted (arsenal/commander stats): ${c.card.name}` };
     }
