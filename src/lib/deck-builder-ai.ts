@@ -2279,6 +2279,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
           if (isProtected(p.card.name)) return false;
           const primary = getPrimaryCategory(classifyCard(p.card.name, p.card.oracle_text || '', p.card.type_line || '', p.card.cmc || 0, commanderCard?.oracle_text || undefined, classifyOpts));
           if (primary === 'removal' || primary === 'board_wipe') return false;
+          if (primary === 'ramp') return false;
           // Never displace ramp if below baseline
           const text = (p.card.oracle_text || '').toLowerCase();
           const type = (p.card.type_line || '').toLowerCase();
