@@ -167,6 +167,12 @@ export function isNeverColoredProducer(card: ManaSourceCard, ctx?: ManaSourceCon
   // gated, not general fixing. Only the Gate wording: "a land you control
   // could produce" (Reflecting Pool) is a real source in any real mana base.
   if (/any (?:type|color) (?:of mana )?that a gate you control could produce/.test(t)) return true;
+  // Any player may switch it off (Rhystic Cave).
+  if (/unless any player pays/.test(t)) return true;
+  // Colour that only comes from sacrificing the land itself (Archaeological
+  // Dig) is one-shot; the Odyssey cycle keeps its plain "{T}: Add {W}" line.
+  const colourLines = t.split('\n').filter((line) => /add .*(?:any (?:one )?color|\{[wubrg]\})/.test(line.slice(line.indexOf(':') + 1)));
+  if (colourLines.length && colourLines.every((line) => /sacrifice this land/.test(line.split(':')[0]))) return true;
   return false;
 }
 

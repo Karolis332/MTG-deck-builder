@@ -2725,9 +2725,9 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
   // casting cost and activated-ability costs feed the land builder too —
   // Tam's {W}{U}{B}{R}{G} proliferate activation is real demand for a card
   // that's on the battlefield every game, not just what got "picked".
-  const commanderPipDemand: Array<{ mana_cost: string | null; quantity: number }> = [];
+  const commanderPipDemand: Array<{ mana_cost: string | null; quantity: number; type_line?: string | null }> = [];
   if (commanderCard) {
-    if (commanderCard.mana_cost) commanderPipDemand.push({ mana_cost: commanderCard.mana_cost, quantity: 1 });
+    if (commanderCard.mana_cost) commanderPipDemand.push({ mana_cost: commanderCard.mana_cost, quantity: 1, type_line: commanderCard.type_line });
     for (const line of (commanderCard.oracle_text || '').split('\n')) {
       const colonIdx = line.indexOf(':');
       if (colonIdx === -1) continue;
@@ -2735,10 +2735,13 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
       if (/\{[WUBRG]\}/.test(costPart)) commanderPipDemand.push({ mana_cost: costPart, quantity: 1 });
     }
   }
+  // type_line = the permanent census for "sacrifice unless you control an
+  // artifact / a creature" rainbows (Glimmervoid, Thran Quarry — #2).
   const nonLandCards = [
     ...picked.map(p => ({
       mana_cost: p.card.mana_cost,
       quantity: p.quantity,
+      type_line: p.card.type_line,
     })),
     ...commanderPipDemand,
   ];

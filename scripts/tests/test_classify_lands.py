@@ -270,3 +270,34 @@ def test_transform_land_back_is_not_a_mana_base_land():
     assert is_mana_base_land("Land — Town // Sorcery — Adventure", "adventure") is True
     assert is_mana_base_land("Land", "normal") is True
 
+
+
+def test_rhystic_cave_and_undiscovered_paradise_are_tier4():
+    cave = classify_land(
+        "Rhystic Cave", "Land",
+        "{T}: Choose a color. Add one mana of that color unless any player pays {1}. Activate only as an instant.",
+        '["B","G","R","U","W"]',
+    )
+    paradise = classify_land(
+        "Undiscovered Paradise", "Land",
+        "{T}: Add one mana of any color. During your next untap step, as you untap your permanents, "
+        "return this land to its owner's hand.",
+        '["B","G","R","U","W"]',
+    )
+    assert cave["tier"] == 4
+    assert paradise["tier"] == 4
+
+
+def test_self_sacrifice_only_colour_is_not_produced():
+    dig = classify_land(
+        "Archaeological Dig", "Land",
+        "{T}: Add {C}.\n{T}, Sacrifice this land: Add one mana of any color.",
+        '["B","C","G","R","U","W"]',
+    )
+    outpost = classify_land(
+        "Abandoned Outpost", "Land",
+        "This land enters tapped.\n{T}: Add {W}.\n{T}, Sacrifice this land: Add one mana of any color.",
+        '["B","G","R","U","W"]',
+    )
+    assert dig["produces_colors"] == []
+    assert "W" in outpost["produces_colors"]

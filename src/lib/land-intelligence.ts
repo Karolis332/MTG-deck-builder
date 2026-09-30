@@ -239,6 +239,22 @@ interface ScoreOptions {
   maxCardPrice?: number;
   /** Deck runs landfall / graveyard-land payoffs — a typed fetch earns a mono-colour slot (B-D9) */
   landPayoffs?: boolean;
+  /** Front-face permanent census of the picked spells — decides "sacrifice unless you control an artifact / a creature" rainbows (#2) */
+  permanentCounts?: PermanentCounts;
+}
+
+export interface PermanentCounts { artifact: number; creature: number; total: number }
+
+/** Count artifacts and creatures (front face) among the deck's spells. */
+export function countPermanents(cards: Array<{ type_line?: string | null; quantity: number }>): PermanentCounts {
+  const out: PermanentCounts = { artifact: 0, creature: 0, total: 0 };
+  for (const c of cards) {
+    const front = (c.type_line || '').split('//')[0];
+    out.total += c.quantity;
+    if (front.includes('Artifact')) out.artifact += c.quantity;
+    if (front.includes('Creature')) out.creature += c.quantity;
+  }
+  return out;
 }
 
 /**
@@ -426,6 +442,16 @@ export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
       }
     }
 
+    // "Sacrifice unless you control an artifact / a creature" rainbows
+    // (Glimmervoid, Thran Quarry) are real fixing only when the deck can
+    // keep the condition from turn one — a third of its spells being that
+    // permanent type. No census = no credit.
+    const sacUnless = (land.oracle_text || '').toLowerCase().match(/if you control no (artifact|creature)s, sacrifice/);
+    if (sacUnless) {
+      const counts = options.permanentCounts;
+      if (!counts || counts[sacUnless[1] as 'artifact' | 'creature'] < Math.ceil(counts.total / 3)) continue;
+    }
+
     let producesColors: string[] = [];
     try { producesColors = JSON.parse(land.produces_colors || '[]'); } catch { /* empty */ }
     // land_classifications may be unpopulated — fall back to Scryfall's
@@ -489,6 +515,8 @@ export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
     let tier = land.tier || 3;
     if (isNeverColoredProducer(land, manaCtx) && tier < 4) tier = 4;
     const tapText = (land.oracle_text || '').toLowerCase();
+    // Bounces itself every untap step (Undiscovered Paradise): a land drop a turn for a basic's mana.
+    if (/as you untap your permanents, return this land to its owner's hand/.test(tapText)) tier = 4;
     // Untapped only when true. Fetches are judged on their own ETB plus what
     // they deposit (Thawing Glaciers / Krosan Verge enter tapped, Evolving
     // Wilds fetches tapped); every other land on its ETB clause read against
@@ -733,7 +761,8 @@ interface BuildOptions {
   targetLandCount: number;
   tribalTypes?: string[];
   commanderName?: string;
-  existingNonLandCards?: Array<{ mana_cost: string | null; quantity: number }>;
+  /** The picked spells; `type_line` (front face) feeds the permanent census for Glimmervoid / Thran Quarry (#2) */
+  existingNonLandCards?: Array<{ mana_cost: string | null; quantity: number; type_line?: string | null }>;
   userId?: number;
   /** Restrict ownership to one collection source (e.g. 'arena', 'paper'). Undefined = every source. */
   collectionSource?: string;
@@ -773,6 +802,7 @@ export function buildOptimalLandBase(options: BuildOptions): LandBaseResult {
     colors, format, strategy, tribalTypes, commanderName, userId, manaDemand, collectionOnly,
     collectionSource: options.collectionSource,
     rarityFilter: options.rarityFilter, maxCardPrice: options.maxCardPrice, landPayoffs: options.landPayoffs,
+    permanentCounts: existingNonLandCards ? countPermanents(existingNonLandCards) : undefined,
   });
 
   // Candidates: lands that clear the quality bar (scoreLandsForDeck) and the

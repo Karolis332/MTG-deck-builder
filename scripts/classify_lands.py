@@ -312,9 +312,22 @@ def classify_land(name: str, type_line: str, oracle: str, produced_mana_json: st
 
     # A rainbow that costs 3 life per activation (Tarnished Citadel) or two
     # lands to enter (Lotus Vale, Scorched Ruins) or is donated at end of turn
-    # (Rainbow Vale) is worse than a basic.
-    if re.search(r"deals 3 damage to you|sacrifice two untapped lands|opponent gains control of", ot):
+    # (Rainbow Vale), that any player may switch off (Rhystic Cave) or that
+    # bounces itself every untap step (Undiscovered Paradise) is worse than a
+    # basic.
+    if re.search(
+        r"deals 3 damage to you|sacrifice two untapped lands|opponent gains control of"
+        r"|unless any player pays|as you untap your permanents, return this land to its owner's hand",
+        ot,
+    ):
         tier = 4
+
+    # Colour that only comes from sacrificing the land itself (Archaeological
+    # Dig) is one-shot, not a source. The Odyssey cycle (Abandoned Outpost)
+    # keeps its plain {T}: Add {W} line and its colour.
+    colour_lines = [line for line in ot.split("\n") if re.search(r"add .*(?:any (?:one )?color|\{[wubrg]\})", line.split(":")[-1])]
+    if colour_lines and all("sacrifice this land" in line.split(":")[0] for line in colour_lines):
+        produces = []
 
     # If tier not yet set and enters tapped, bump down
     if not enters_untapped and tier < 3:
