@@ -197,6 +197,62 @@ describe('pairSwaps', () => {
   });
 });
 
+// U9b HIGH #2: a superfriends deck's own walkers and Ways (loyalty/
+// proliferate support) must never be cut for a role-quota reason — the ISS
+// exemption alone left the quota branch above it live, so the Tam list got
+// four Ways cut as "Card Draw over quota (12/9)".
+describe('rankCuts — superfriends walker/support quota exemption (U9b #2)', () => {
+  it('does not cut a Way (loyalty support, classified as draw) for quota when superfriends is set', () => {
+    const cards = [
+      card({
+        name: 'Way of the Mentor',
+        primary: 'draw',
+        categories: ['draw'],
+        typeLine: 'Enchantment',
+        oracleText: 'Whenever you gain life, put a loyalty counter on target planeswalker you control.',
+      }),
+      card({ name: 'Ordinary Draw Spell', primary: 'draw', categories: ['draw'], typeLine: 'Sorcery' }),
+    ];
+    const ctx: OptimizerContext = {
+      format: 'commander',
+      superfriends: true,
+      health: [health('draw', 13, 9, 'high')],
+    };
+    const cuts = rankCuts(cards, ctx, 8);
+    expect(cuts.find((c) => c.name === 'Way of the Mentor')).toBeUndefined();
+    const ordinary = cuts.find((c) => c.name === 'Ordinary Draw Spell');
+    expect(ordinary?.reasons.some((r) => r.includes('over quota'))).toBe(true);
+  });
+
+  it('does not cut a Planeswalker card for quota when superfriends is set', () => {
+    const cards = [
+      card({ name: 'Some Walker', primary: 'win_condition', categories: ['win_condition'], typeLine: 'Legendary Planeswalker — Test' }),
+    ];
+    const ctx: OptimizerContext = {
+      format: 'commander',
+      superfriends: true,
+      health: [health('win_condition', 20, 16, 'high')],
+    };
+    const cuts = rankCuts(cards, ctx, 8);
+    expect(cuts.find((c) => c.name === 'Some Walker')).toBeUndefined();
+  });
+
+  it('without superfriends, the same Way still gets cut for quota (no unrequested behaviour change)', () => {
+    const cards = [
+      card({
+        name: 'Way of the Mentor',
+        primary: 'draw',
+        categories: ['draw'],
+        typeLine: 'Enchantment',
+        oracleText: 'Whenever you gain life, put a loyalty counter on target planeswalker you control.',
+      }),
+    ];
+    const ctx: OptimizerContext = { format: 'commander', health: [health('draw', 13, 9, 'high')] };
+    const cuts = rankCuts(cards, ctx, 8);
+    expect(cuts.find((c) => c.name === 'Way of the Mentor')).toBeDefined();
+  });
+});
+
 describe('scoreDeck', () => {
   it('subtracts 10 per legality issue (max 30) and 5 for a land miss of 3+', () => {
     const issue = { name: 'x', problem: 'not_legal' as const, detail: '' };

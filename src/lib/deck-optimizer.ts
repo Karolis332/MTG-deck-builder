@@ -179,8 +179,17 @@ function scoreCard(
     for (const issue of hardIssues.get(card.name) || []) reasons.push(issue.detail);
   }
 
+  // Superfriends walkers/loyalty-support never get cut for role quota either
+  // — a "Card Draw over quota" cut on Way of the Mentor because the deck runs
+  // 12 draw sources it can't tell from an enchantment role misreads the
+  // deck's own plan (see the ISS exemption below for why the synergy graph
+  // reads them as dead weight too).
+  const isWalkerOrSupport = ctx.superfriends
+    && (/\bPlaneswalker\b/.test(card.typeLine)
+      || SUPERFRIENDS_SUPPORT_RE.test(card.oracleText || ''));
+
   const quota = overQuota.get(card.primary);
-  if (quota) {
+  if (quota && !isWalkerOrSupport) {
     score += 3;
     reasons.push(`${quota.label} over quota (${quota.current}/${quota.target.max}) — weakest ${quota.label.toLowerCase()} slot`);
   }
@@ -190,9 +199,6 @@ function scoreCard(
   // superfriends deck's own walkers and loyalty/proliferate support: the
   // synergy graph has no edge type for "is a planeswalker" or "proliferates",
   // so ISS reads 0 there by construction, not because the card is dead weight.
-  const isWalkerOrSupport = ctx.superfriends
-    && (/\bPlaneswalker\b/.test(card.typeLine)
-      || SUPERFRIENDS_SUPPORT_RE.test(card.oracleText || ''));
   const iss = ROLE_LESS_CATEGORIES.has(card.primary) && !isWalkerOrSupport ? ctx.cardISS?.get(card.name) : undefined;
   if (iss !== undefined) {
     if (iss <= 0) {

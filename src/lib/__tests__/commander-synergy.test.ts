@@ -92,53 +92,61 @@ describe('analyzeCommander — alt_zone_cast (cast from anywhere other than hand
 // creature type it shares reads as tribal, even when it also has Storm
 // (Aeve's copies are creature tokens, not a spells-matter payoff). Real
 // oracle text pulled from data/mtg-deck-builder.db.
-describe('analyzeCommander — tribal payoff vs storm/spellslinger (U1a)', () => {
-  it('Aeve, Progenitor Ooze: tribal/ooze, counters kept, storm stays a secondary category', () => {
-    const oracle =
-      'Storm (When you cast this spell, copy it for each spell cast before it this turn. Copies become tokens.)\n' +
-      "Aeve isn't legendary if it's a token.\n" +
-      'Aeve enters with a +1/+1 counter on it for each other Ooze you control.';
-    const profile = analyzeCommander(oracle, 'Legendary Creature — Ooze', ['G'], '{2}{G}{G}{G}');
+describe('analyzeCommander — tribal payoff vs storm/spellslinger (U1a, opt-in U9b)', () => {
+  const AEVE_ORACLE =
+    'Storm (When you cast this spell, copy it for each spell cast before it this turn. Copies become tokens.)\n' +
+    "Aeve isn't legendary if it's a token.\n" +
+    'Aeve enters with a +1/+1 counter on it for each other Ooze you control.';
+  const EDGAR_ORACLE =
+    'Eminence — Whenever you cast another Vampire spell, if Edgar is in the command zone or on the battlefield, create a 1/1 black Vampire creature token.\n' +
+    'First strike, haste\n' +
+    'Whenever Edgar attacks, put a +1/+1 counter on each Vampire you control.';
+
+  it('is opt-in: byte-identical (tribalPayoff null, pre-tribal archetype) when opts is omitted — Aeve reads spellslinger via storm, Edgar reads aggro', () => {
+    const aeve = analyzeCommander(AEVE_ORACLE, 'Legendary Creature — Ooze', ['G'], '{2}{G}{G}{G}');
+    expect(aeve?.detectedArchetype).not.toBe('tribal');
+    const edgar = analyzeCommander(EDGAR_ORACLE, 'Legendary Creature — Vampire Knight', ['R', 'W', 'B'], '{3}{R}{W}{B}');
+    expect(edgar?.detectedArchetype).toBe('aggro');
+  });
+
+  it('Aeve, Progenitor Ooze: tribal/ooze, counters kept, storm stays a secondary category (opted in)', () => {
+    const profile = analyzeCommander(AEVE_ORACLE, 'Legendary Creature — Ooze', ['G'], '{2}{G}{G}{G}', { tribalPayoff: true });
     expect(profile?.detectedArchetype).toBe('tribal');
     expect(profile?.triggerCategories).toContain('storm');
     expect(profile?.triggerCategories).toContain('counters');
   });
 
-  it('Talrand, Sky Summoner: instant/sorcery payoff stays spellslinger (no tribe)', () => {
+  it('Talrand, Sky Summoner: instant/sorcery payoff stays spellslinger (no tribe, opted in)', () => {
     const oracle = 'Whenever you cast an instant or sorcery spell, create a 2/2 blue Drake creature token with flying.';
-    const profile = analyzeCommander(oracle, 'Legendary Creature — Merfolk Wizard', ['U'], '{2}{U}{U}');
+    const profile = analyzeCommander(oracle, 'Legendary Creature — Merfolk Wizard', ['U'], '{2}{U}{U}', { tribalPayoff: true });
     expect(profile?.detectedArchetype).toBe('spellslinger');
   });
 
-  it('Vivi Ornitier: X-mana + self-buff stays spellslinger, counters suppressed (self-buff, not broad)', () => {
+  it('Vivi Ornitier: X-mana + self-buff stays spellslinger, counters suppressed (self-buff, not broad; opted in)', () => {
     const oracle =
       "{0}: Add X mana in any combination of {U} and/or {R}, where X is Vivi Ornitier's power. Activate only during your turn and only once each turn.\n" +
       'Whenever you cast a noncreature spell, put a +1/+1 counter on Vivi Ornitier and it deals 1 damage to each opponent.';
-    const profile = analyzeCommander(oracle, 'Legendary Creature — Wizard', ['U', 'R'], '{1}{U}{R}');
+    const profile = analyzeCommander(oracle, 'Legendary Creature — Wizard', ['U', 'R'], '{1}{U}{R}', { tribalPayoff: true });
     expect(profile?.detectedArchetype).toBe('spellslinger');
     expect(profile?.triggerCategories).not.toContain('counters');
   });
 
   it('Krenko, Mob Boss: no synergy trigger matches this text (pre-existing gap — token_generation\'s regex misses "X 1/1 ... tokens"), so analyzeCommander returns null and the tribal read comes from deck-builder-ai\'s tribalType fallback, unaffected here', () => {
     const oracle = '{T}: Create X 1/1 red Goblin creature tokens, where X is the number of Goblins you control.';
-    const profile = analyzeCommander(oracle, 'Legendary Creature — Goblin Warrior', ['R'], '{2}{R}{R}');
+    const profile = analyzeCommander(oracle, 'Legendary Creature — Goblin Warrior', ['R'], '{2}{R}{R}', { tribalPayoff: true });
     expect(profile).toBeNull();
   });
 
-  it('Edgar Markov: eminence + attack-trigger counters on each Vampire → tribal/vampire', () => {
-    const oracle =
-      'Eminence — Whenever you cast another Vampire spell, if Edgar is in the command zone or on the battlefield, create a 1/1 black Vampire creature token.\n' +
-      'First strike, haste\n' +
-      'Whenever Edgar attacks, put a +1/+1 counter on each Vampire you control.';
-    const profile = analyzeCommander(oracle, 'Legendary Creature — Vampire Knight', ['R', 'W', 'B'], '{3}{R}{W}{B}');
+  it('Edgar Markov: eminence + attack-trigger counters on each Vampire → tribal/vampire (opted in)', () => {
+    const profile = analyzeCommander(EDGAR_ORACLE, 'Legendary Creature — Vampire Knight', ['R', 'W', 'B'], '{3}{R}{W}{B}', { tribalPayoff: true });
     expect(profile?.detectedArchetype).toBe('tribal');
   });
 
-  it('Ezuri, Claw of Progress: no shared tribe — counters category kept, not tribal', () => {
+  it('Ezuri, Claw of Progress: no shared tribe — counters category kept, not tribal (opted in)', () => {
     const oracle =
       'Whenever a creature you control with power 2 or less enters, you get an experience counter.\n' +
       'At the beginning of combat on your turn, put X +1/+1 counters on another target creature you control, where X is the number of experience counters you have.';
-    const profile = analyzeCommander(oracle, 'Legendary Creature — Phyrexian Elf Warrior', ['G', 'U'], '{2}{G}{U}');
+    const profile = analyzeCommander(oracle, 'Legendary Creature — Phyrexian Elf Warrior', ['G', 'U'], '{2}{G}{U}', { tribalPayoff: true });
     expect(profile?.triggerCategories).toContain('counters');
     expect(profile?.detectedArchetype).not.toBe('tribal');
   });

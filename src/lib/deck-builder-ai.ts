@@ -870,7 +870,7 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
 
       commanderProfile = analyzeCommander(
         fullOracleText, cmdRow.type_line, ci, commanderCard?.mana_cost || undefined,
-        { superfriends: true },
+        { superfriends: true, tribalPayoff: true },
       );
 
       // Partner pair: analyze the second commander and merge both profiles
@@ -882,7 +882,7 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
           partnerCard.type_line || '',
           colors,
           partnerCard.mana_cost || undefined,
-          { superfriends: true },
+          { superfriends: true, tribalPayoff: true },
         );
         if (commanderProfile && partnerProfile) {
           commanderProfile = mergeProfiles(commanderProfile, partnerProfile);

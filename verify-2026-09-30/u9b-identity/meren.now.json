@@ -1,0 +1,124 @@
+{
+  "file": "meren.txt",
+  "unresolved": [],
+  "payload": {
+    "version": "1.2.0",
+    "score": 19,
+    "provisional": true,
+    "components": [
+      {
+        "key": "mana",
+        "score": 97.5,
+        "weight": 20.61855670103093,
+        "reason": "36.4 effective lands vs 37.4; B has 29/41 timely sources."
+      },
+      {
+        "key": "curve",
+        "score": 95.6,
+        "weight": 10.309278350515465,
+        "reason": "3-drops 18/15; 100% chance of a useful play by turn 2."
+      },
+      {
+        "key": "interaction",
+        "score": 95,
+        "weight": 16.494845360824744,
+        "reason": "12.3/12.0 effective answers, 7/7.0 cheap; weakest coverage: stack."
+      },
+      {
+        "key": "advantage",
+        "score": 81.8,
+        "weight": 14.43298969072165,
+        "reason": "26.4/10.0 draw units by turn 6; 4 cheap velocity cards."
+      },
+      {
+        "key": "win",
+        "score": 68.7,
+        "weight": 20.61855670103093,
+        "reason": "Control inevitability (16 finishers): closes T8, access 94% (u=0.76); shared bottleneck, protection access 37%; none."
+      },
+      {
+        "key": "synergy",
+        "score": 92.8,
+        "weight": 17.52577319587629,
+        "reason": "73% supports aristocrats; weakest dependency fodder 15/16; 0 unsupported payoffs."
+      },
+      {
+        "key": "meta",
+        "score": 50,
+        "weight": 0,
+        "reason": "no context: 0 dated lists, 0% coverage; insufficient data; snapshot none."
+      },
+      {
+        "key": "structure",
+        "score": 0,
+        "weight": 0,
+        "reason": "4/5 rule checks verified; size; cap 19."
+      }
+    ],
+    "gates": [
+      {
+        "key": "structure",
+        "kind": "rules",
+        "status": "fail",
+        "cap": null,
+        "reason": "4/5 rule checks verified; size; cap 19."
+      },
+      {
+        "key": "size",
+        "kind": "rules",
+        "status": "fail",
+        "cap": 19,
+        "reason": "Commander decks require exactly 100 cards (currently 101)"
+      },
+      {
+        "key": "singleton",
+        "kind": "rules",
+        "status": "pass",
+        "cap": null,
+        "reason": "singleton respected (basics exempt)"
+      },
+      {
+        "key": "legality",
+        "kind": "rules",
+        "status": "pass",
+        "cap": null,
+        "reason": "every card legal in commander"
+      },
+      {
+        "key": "rules",
+        "kind": "rules",
+        "status": "pass",
+        "cap": null,
+        "reason": "no other format rule broken"
+      },
+      {
+        "key": "identity",
+        "kind": "rules",
+        "status": "pass",
+        "cap": null,
+        "reason": "all cards inside BG"
+      },
+      {
+        "key": "quality_cap",
+        "kind": "quality",
+        "status": "warn",
+        "cap": 75,
+        "reason": "quality cap 20+0.8*min(M,W,S)=75.0 from mana=97.5, win=68.7, synergy=92.8."
+      },
+      {
+        "key": "coverage",
+        "kind": "evidence",
+        "status": "warn",
+        "cap": null,
+        "reason": "89% of nonland copies are typed in the effect catalogue; unknown prerequisite \"creature death or mill\" — provisional: effect coverage, not calibrated."
+      },
+      {
+        "key": "meta_evidence",
+        "kind": "evidence",
+        "status": "warn",
+        "cap": null,
+        "reason": "no corpus snapshot supplied — meta fit defaulted to 50."
+      }
+    ]
+  }
+}

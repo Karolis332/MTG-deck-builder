@@ -97,8 +97,14 @@ export function detectTribalPayoff(oracleText: string, subtypes: string[]): stri
       `all ${tribe}s`,
       `${tribe} creature tokens`,
       `number of ${tribe}`,
-      `create a .* ${tribe}`,
     ];
+    // (The pre-U9b list also had `create a .* ${tribe}` here — a literal
+    // ".*" substring that can never occur in real oracle text, so it was
+    // dead weight, not a working pattern. Making it a real regex instead
+    // over-fires: a commander that creates one token of a type it doesn't
+    // otherwise care about — e.g. Talrand's "create a ... Drake" — isn't a
+    // tribal payoff the way "other Drakes you control" is, so it's dropped
+    // rather than "fixed".)
     const patternHits = tribalPatterns.filter((p) => oracleText.includes(p)).length;
     if (patternHits === 0) continue;
     const wordCount = (oracleText.match(new RegExp(`\\b${tribe}s?\\b`, 'g')) || []).length;
@@ -604,7 +610,7 @@ export function analyzeCommander(
   typeLine: string,
   colorIdentity: string[],
   manaCost?: string,
-  opts?: { superfriends?: boolean; walkerCount?: number }
+  opts?: { superfriends?: boolean; walkerCount?: number; tribalPayoff?: boolean }
 ): CommanderSynergyProfile | null {
   if (!oracleText || oracleText.trim().length === 0) return null;
 
@@ -612,13 +618,17 @@ export function analyzeCommander(
   const typeLineLower = typeLine.toLowerCase();
   const isCreature = typeLineLower.includes('creature');
 
+  // Opt-in (like superfriends above): reading a tribe-scaling commander as
+  // 'tribal' instead of 'spellslinger'/'aristocrats'/etc. is a real behaviour
+  // change over the pinned baseline, so Deck Score (which never passes opts)
+  // must keep seeing `tribalPayoff: null` and the pre-tribal archetype call.
   // Own creature type(s), parsed from the type line after the em dash —
   // used only to break ties in detectTribalPayoff, same as deck-builder-ai's
   // detectTribalTheme (which shares this function; see below).
   const ownSubtypes = typeLineLower.includes('—')
     ? typeLineLower.slice(typeLineLower.indexOf('—') + 1).trim().split(/\s+/)
     : [];
-  const tribalPayoff = detectTribalPayoff(text, ownSubtypes);
+  const tribalPayoff = opts?.tribalPayoff ? detectTribalPayoff(text, ownSubtypes) : null;
 
   // ── Detect trigger categories ──────────────────────────────────────
   const triggerCategories: SynergyCategory[] = [];
@@ -706,7 +716,13 @@ export function analyzeCommander(
 
   // ── Infer archetype ────────────────────────────────────────────────
   const hasAttack = triggerCategories.includes('attack_trigger');
-  const detectedArchetype = inferArchetype(triggerCategories, hasAttack, tribalPayoff, isCreature);
+  // isCreature only changes inferArchetype's output via the storm exception
+  // added alongside tribalPayoff (a creature commander's Storm copies the
+  // creature, not a spells payoff) — same opt-in as tribalPayoff itself, so
+  // the default path keeps b82d099's unconditional `storm → spellslinger`.
+  const detectedArchetype = inferArchetype(
+    triggerCategories, hasAttack, tribalPayoff, opts?.tribalPayoff ? isCreature : undefined,
+  );
 
   // ── Build synergy minimums + card pool patterns + score bonuses ────
   const synergyMinimums: Record<string, number> = {};

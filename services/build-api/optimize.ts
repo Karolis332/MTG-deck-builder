@@ -214,6 +214,26 @@ function pickCommanders(resolved: ResolvedLine[], commanderName: string, findCar
   return [row];
 }
 
+/**
+ * Two pasted lines can resolve to the same card row (an alt name/back face
+ * of a DFC, e.g. "Esika, God of the Tree" and "Esika, God of the Tree //
+ * The Prismatic Bridge") — merge by `card.name`, summing quantities, instead
+ * of letting the later line silently overwrite the earlier one downstream
+ * (afterLines keyed a Map by name; two rows in meant one row out, so the
+ * before/after size invariant threw a 500 on the collision, not a finding).
+ * The merge itself doesn't hide the duplicate: `findLegalityIssues` still
+ * flags the combined quantity as `too_many_copies` in singleton formats.
+ */
+function mergeDuplicateRows(rows: ResolvedLine[]): ResolvedLine[] {
+  const byName = new Map<string, ResolvedLine>();
+  for (const row of rows) {
+    const existing = byName.get(row.card.name);
+    if (existing) existing.quantity += row.quantity;
+    else byName.set(row.card.name, { ...row });
+  }
+  return [...byName.values()];
+}
+
 function splitBoards(resolved: ResolvedLine[], commanderName: string, format: string, findCard: CardResolver): DeckShape {
   const commanderFormat = isCommanderFormat(format);
   const commanders = commanderFormat ? pickCommanders(resolved, commanderName, findCard) : [];
@@ -223,8 +243,8 @@ function splitBoards(resolved: ResolvedLine[], commanderName: string, format: st
     deckSize: DEFAULT_DECK_SIZE[format] || DEFAULT_DECK_SIZE.default || 60,
     commanderFormat,
     commanders,
-    main: resolved.filter((r) => r.board === 'main' && !commanderNames.has(r.card.name.toLowerCase())),
-    sideboard: resolved.filter((r) => r.board === 'sideboard'),
+    main: mergeDuplicateRows(resolved.filter((r) => r.board === 'main' && !commanderNames.has(r.card.name.toLowerCase()))),
+    sideboard: mergeDuplicateRows(resolved.filter((r) => r.board === 'sideboard')),
   };
 }
 
