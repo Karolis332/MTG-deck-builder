@@ -92,6 +92,12 @@ describe('isStep4bDisplaceable', () => {
     expect(isStep4bDisplaceable(pick, baseCtx({ category: 'counters', isSuperfriends: false }))).toBe(true);
   });
 
+  it("outside a superfriends build, the 'planeswalker' category's own backfill still never cuts a planeswalker (pre-U11 guard, U12 fix 3)", () => {
+    const walker = makeCard({ name: 'Some Walker', type_line: 'Legendary Planeswalker — Tam', oracle_text: '+1: Draw a card.' });
+    const pick = { card: walker, quantity: 1, board: 'main' as const };
+    expect(isStep4bDisplaceable(pick, baseCtx({ category: 'planeswalker', isSuperfriends: false }))).toBe(false);
+  });
+
   it('protects a planeswalker whose own ability text classifies as ramp (Quintorius Kand: "Add {R}")', () => {
     // The walker-protection guard must run BEFORE the ramp-floor branch — a
     // planeswalker with an incidental mana ability (an ultimate that adds

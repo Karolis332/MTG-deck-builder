@@ -1808,7 +1808,9 @@ export function isStep4bDisplaceable(
   // classifies as primary 'ramp', so checking this after that branch let its
   // early `return` skip the walker guard entirely (24 -> 17 walkers on a real
   // Tam build — the ramp-floor return fired first and never reached here).
-  if (ctx.isSuperfriends && /\bPlaneswalker\b/.test(p.card.type_line || '')) return false;
+  // Outside superfriends the pre-U11 guard still holds: the 'planeswalker'
+  // category's own backfill never cuts a planeswalker (U12 fix 3).
+  if ((ctx.isSuperfriends || ctx.category === 'planeswalker') && /\bPlaneswalker\b/.test(p.card.type_line || '')) return false;
   // Same rule for the engine floor's picks (U12 fix 1): they are the
   // lowest-scored cards in the deck (no popularity data) and would be the
   // first thing every later category's backfill cut.
