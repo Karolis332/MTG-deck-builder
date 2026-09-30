@@ -2524,6 +2524,11 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
   const basicLandMap: Record<string, string> = {
     W: 'Plains', U: 'Island', B: 'Swamp', R: 'Mountain', G: 'Forest',
   };
+  // Basics that top the deck up to size. A colourless commander (Karn, Kozilek)
+  // has no colours to map, so every fill below skipped it and shipped 71 cards.
+  const fillBasicNames = colors.length > 0
+    ? colors.map((c) => basicLandMap[c]).filter((n): n is string => !!n)
+    : ['Wastes'];
 
   // Detect tribal types from picked creatures for tribal land matching
   const detectedTribalTypes: string[] = [];
@@ -2692,14 +2697,13 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
     }
 
     // Fill remaining with basics
-    if (colors.length > 0 && landsAdded < targetLandsEffective) {
+    if (landsAdded < targetLandsEffective) {
       const remaining = targetLandsEffective - landsAdded;
-      const perColor = Math.floor(remaining / colors.length);
-      const extraForFirst = remaining - perColor * colors.length;
+      const perColor = Math.floor(remaining / fillBasicNames.length);
+      const extraForFirst = remaining - perColor * fillBasicNames.length;
 
-      for (let i = 0; i < colors.length; i++) {
-        const basicName = basicLandMap[colors[i]];
-        if (!basicName) continue;
+      for (let i = 0; i < fillBasicNames.length; i++) {
+        const basicName = fillBasicNames[i];
 
         const basic = db.prepare(
           'SELECT * FROM cards WHERE name = ? AND set_code IS NOT NULL ORDER BY updated_at DESC LIMIT 1'
@@ -2746,14 +2750,13 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
   const currentTotal = picked.reduce((sum, p) => sum + p.quantity, 0)
     + (isCommander && options.commanderName ? 1 : 0); // Commander counts toward 100
 
-  if (currentTotal < targetSize && colors.length > 0) {
+  if (currentTotal < targetSize) {
     const deficit = targetSize - currentTotal;
-    const perColor = Math.floor(deficit / colors.length);
-    const extra = deficit - perColor * colors.length;
+    const perColor = Math.floor(deficit / fillBasicNames.length);
+    const extra = deficit - perColor * fillBasicNames.length;
 
-    for (let i = 0; i < colors.length; i++) {
-      const basicName = basicLandMap[colors[i]];
-      if (!basicName) continue;
+    for (let i = 0; i < fillBasicNames.length; i++) {
+      const basicName = fillBasicNames[i];
 
       const addQty = perColor + (i === 0 ? extra : 0);
       if (addQty <= 0) continue;
