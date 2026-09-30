@@ -3471,7 +3471,8 @@ export function applyDeadCardPass(
   const replacedAsDead: Array<{ out: string; in: string; reason: string }> = [];
   const primaryRole = (card: DbCard): string =>
     getPrimaryCategory(classifyCard(card.name, card.oracle_text || '', card.type_line || '', card.cmc || 0, commanderOracle));
-  const isLand = (card: DbCard): boolean => (card.type_line || '').includes('Land');
+  // Front face only: a dead land must not be replaced by a DFC spell with a land back (#1).
+  const isLand = (card: DbCard): boolean => (card.type_line || '').split('//')[0].includes('Land');
 
   const mainCards = (): RelevanceCard[] =>
     cards.filter((c) => c.board === 'main')

@@ -738,7 +738,8 @@ export function pickByRole(opts: PickByRoleOptions): PickByRoleResult {
   // MDFC spell//land budget: land-back modal cards are tapped-land
   // equivalents. Without a cap the picker fills draw/removal quotas with
   // Sea Gate Restoration-style cards and the deck balloons to ~50 land slots.
-  const isLandBackDfc = (card: { type_line?: string | null }): boolean => {
+  const isLandBackDfc = (card: { type_line?: string | null; layout?: string | null }): boolean => {
+    if (card.layout !== 'modal_dfc') return false; // a transform land back is never playable as a land (#1)
     const tl = card.type_line || '';
     return tl.includes('//') && !tl.split('//')[0].includes('Land') && tl.includes('Land');
   };
