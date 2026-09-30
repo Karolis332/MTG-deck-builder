@@ -10,7 +10,7 @@ import { getTemplate, getScaledCurve, mergeWithCommanderProfile } from './deck-t
 import type { Archetype, ArchetypeTemplate } from './deck-templates';
 import { analyzeCommander, mergeProfiles, detectTribalPayoff } from './commander-synergy';
 import type { CommanderSynergyProfile } from './commander-synergy';
-import { buildOptimalLandBase, isFetchLandRelevant } from './land-intelligence';
+import { buildOptimalLandBase, isFetchLandRelevant, ownedNameJoin } from './land-intelligence';
 import { buildOwnedQtyMap, ownedNamesSubqueryInline, normalizedNameExpr, stripArenaPrefix } from './collection-ownership';
 import type { OwnershipFilter } from './collection-ownership';
 import { getCFRecommendations, resolveCFToDbCards } from './cf-api-client';
@@ -727,11 +727,11 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
 
   // Name-based collection filter: an "owned" subquery of A--stripped names
   // (basics always included), scoped to the building user and, if given,
-  // one collection source. Joins compare both sides A--stripped so an
+  // one collection source, matched A--stripped (a semi-join, see ownedNameJoin) so an
   // Arena-rebalanced "A-X" and its paper name "X" count as one card.
   const ownedNamesSql = ownedNamesSubqueryInline(ownershipFilter);
   const collectionJoin = useCollection
-    ? `INNER JOIN (${ownedNamesSql}) owned ON ${normalizedNameExpr('c.name')} = owned.cname`
+    ? ownedNameJoin(ownershipFilter)
     : '';
   const collectionOrder = useCollection
     ? `CASE WHEN ${normalizedNameExpr('c.name')} IN (SELECT cname FROM (${ownedNamesSql})) THEN 0 ELSE 1 END,`
