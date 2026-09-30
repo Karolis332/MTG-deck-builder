@@ -26,7 +26,7 @@ import {
 } from './deck-builder-constraints';
 import { analyzeCommanderForBuild } from './commander-analysis';
 import type { ArsenalCard } from './commander-analysis';
-import { classifyCard, getPrimaryCategory, isDrawEngine, isBoardWipe } from './card-classifier';
+import { classifyCard, getPrimaryCategory, isDrawEngine, isBoardWipe, isSymmetricCreatureWipe } from './card-classifier';
 import type { ClassifyOpts } from './card-classifier';
 import { isTribeCreature, narrowTutorTarget, countTargets, colorlessPipCount, isColorlessSource, isMonoColourDeadFixer } from './card-relevance';
 import type { RelevanceCard } from './card-relevance';
@@ -1845,6 +1845,8 @@ export interface Step4bDisplaceableCtx {
    *  floor (above Step 4b) — they're never fair game for ANY synergy
    *  category's backfill, not just the 'planeswalker' category's own. */
   isSuperfriends?: boolean;
+  /** Creature-heavy deck (P2-G #6): a symmetric creature wipe is fair game for any backfill. */
+  creatureHeavy?: boolean;
 }
 
 // Step 4b (synergy-minimum backfill) never displaces removal/wipes, and only
@@ -1879,7 +1881,10 @@ export function isStep4bDisplaceable(
     p.card.name, p.card.oracle_text || '', p.card.type_line || '', p.card.cmc || 0,
     ctx.commanderOracleText, ctx.classifyOpts
   ));
-  if (primary === 'removal' || primary === 'board_wipe') return false;
+  if (primary === 'removal') return false;
+  // A symmetric creature wipe in a go-wide deck is the one wipe worth cutting
+  // (P2-G #6); one-sided wipes and everything else stay.
+  if (primary === 'board_wipe') return !!ctx.creatureHeavy && isSymmetricCreatureWipe(p.card.name, p.card.oracle_text || '');
   if (primary === 'ramp') return ctx.rampCount - p.quantity >= ctx.rampFloor;
 
   // Pre-existing text heuristic (unrelated to a21f2ff): a mana rock/land
@@ -1900,20 +1905,30 @@ export interface WipeBackfillCtx {
   score?: number;
   /** The pool quality floor (A-D1) — a scored card below it is bench material, not a wipe slot. */
   scoreFloor: number;
+  /** Go-wide build (see CREATURE_HEAVY_SHARE): a symmetric creature wipe hits us harder than the table. */
+  creatureHeavy?: boolean;
 }
 
 // The board-wipe backfill's acceptance test (P2-G #10): the SQL LIKE net is a
 // broad fetch, so a candidate must (a) be a wipe by the same strict classifier
 // the quota accountant uses and (b) clear the pool's own quality floor when
 // the pool scored it (Tatyova shipped Turtles in Time at 21 vs a ~60 floor).
+// (c) P2-G #6: a creature-heavy deck is never backfilled with a symmetric
+// creature wipe (Edgar + Sunfall) — one-sided wipes and spot removal only.
 export function isWipeBackfillCandidate(
   card: Pick<DbCard, 'name' | 'oracle_text'>,
   ctx: WipeBackfillCtx
 ): boolean {
   if (!isBoardWipe(card.name, card.oracle_text || '', ctx.classifyOpts)) return false;
   if (ctx.score !== undefined && ctx.score < ctx.scoreFloor) return false;
+  if (ctx.creatureHeavy && isSymmetricCreatureWipe(card.name, card.oracle_text || '')) return false;
   return true;
 }
+
+// A deck is "creature-heavy" (go-wide tribal, tokens, aristocrats) when its
+// own picks are at least this share creatures — the deck's real count, not
+// the template band, so collection builds that drift are read honestly.
+export const CREATURE_HEAVY_SHARE = 0.4;
 
 export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult> {
   const db = getDb();
@@ -2220,6 +2235,10 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
   // directly from the DB so every deck ships with at least 2 board wipes.
   const wipeFilled = pickResult.roleFills.board_wipe || 0;
   const wipeNeed = Math.max(0, (quotas.board_wipe || 2) - wipeFilled);
+  // Read once, after the role picker: the deck is full here (P2-G #6).
+  const creatureCount = picked.reduce((s, p) =>
+    s + (p.board === 'main' && /\bCreature\b/.test((p.card.type_line || '').split('//')[0]) ? p.quantity : 0), 0);
+  const creatureHeavy = creatureCount >= nonLandTarget * CREATURE_HEAVY_SHARE;
   // The deck is normally FULL here (A-D1 fills every slot by score, and Pass A
   // no longer seats a sub-floor "wipe" just to meet the quota), so the
   // backfill makes its own room: the lowest-scored utility/synergy picks
@@ -2262,7 +2281,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
       // Validate against the same classifier the quota accountant uses (C2)
       // — the SQL LIKE clauses above are a broad net, not the source of truth
       // — and against the pool's quality floor (P2-G #10).
-      if (!isWipeBackfillCandidate(wipe, { classifyOpts, score: poolByName.get(wipe.name)?.score, scoreFloor: qualityFloor })) continue;
+      if (!isWipeBackfillCandidate(wipe, { classifyOpts, score: poolByName.get(wipe.name)?.score, scoreFloor: qualityFloor, creatureHeavy })) continue;
       const qty = getMaxQty(wipe);
       if (qty <= 0) continue;
       picked.push({ card: wipe, quantity: 1, board: 'main' });
@@ -2585,7 +2604,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
       const displaceable = [...picked]
         .filter((p) => isStep4bDisplaceable(p, {
           category, protectedNames: protectedSet, tribalNames,
-          commanderOracleText: commanderCard?.oracle_text || undefined, classifyOpts, isSuperfriends,
+          commanderOracleText: commanderCard?.oracle_text || undefined, classifyOpts, isSuperfriends, creatureHeavy,
           rampCount, rampFloor: -Infinity,
         }))
         .sort((a, b) => {
@@ -2602,7 +2621,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
 
         const at = displaceable.findIndex((p) => isStep4bDisplaceable(p, {
           category, protectedNames: protectedSet, tribalNames,
-          commanderOracleText: commanderCard?.oracle_text || undefined, classifyOpts, isSuperfriends,
+          commanderOracleText: commanderCard?.oracle_text || undefined, classifyOpts, isSuperfriends, creatureHeavy,
           rampCount, rampFloor,
         }));
         if (at === -1) break;
