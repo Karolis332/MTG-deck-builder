@@ -237,6 +237,8 @@ interface ScoreOptions {
   rarityFilter?: 'pauper' | 'peasant';
   /** USD price ceiling per land; ignored when collectionOnly (owned = free) */
   maxCardPrice?: number;
+  /** Deck runs landfall / graveyard-land payoffs — a typed fetch earns a mono-colour slot (B-D9) */
+  landPayoffs?: boolean;
 }
 
 /**
@@ -398,6 +400,11 @@ export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
       // Strictly worse than the basic itself.
       const entersTappedItself = lower.includes('enters the battlefield tapped') || lower.includes('enters tapped');
       if (fetchLandColors(land) !== null && entersTappedItself) continue;
+
+      // A typed fetch (Wooded Foothills) in mono is the basic for a life and
+      // a shuffle — only landfall / graveyard-land payoffs make that a slot.
+      const typedFetch = fetchLandColors(land);
+      if (typedFetch !== null && typedFetch.length < 5 && !(options.landPayoffs || /landfall|lands/.test(strategy ?? ''))) continue;
 
       // Pain lands that charge life for the SAME colour a basic gives free.
       if (deckColor && new RegExp(`pay \\d+ life:\\s*add \\{${deckColor}\\}`, 'i').test(lower)) continue;
@@ -732,6 +739,8 @@ interface BuildOptions {
   isCommander?: boolean;
   /** USD price ceiling per land; ignored when collectionOnly (owned = free) */
   maxCardPrice?: number;
+  /** Deck runs landfall / graveyard-land payoffs — a typed fetch earns a mono-colour slot (B-D9) */
+  landPayoffs?: boolean;
   /**
    * A--stripped card names already spoken for elsewhere in the deck (e.g. an
    * MDFC taken as a spell). Skipped during selection so the slot goes to the
@@ -760,7 +769,7 @@ export function buildOptimalLandBase(options: BuildOptions): LandBaseResult {
   const scored = scoreLandsForDeck({
     colors, format, strategy, tribalTypes, commanderName, userId, manaDemand, collectionOnly,
     collectionSource: options.collectionSource,
-    rarityFilter: options.rarityFilter, maxCardPrice: options.maxCardPrice,
+    rarityFilter: options.rarityFilter, maxCardPrice: options.maxCardPrice, landPayoffs: options.landPayoffs,
   });
 
   // Candidates: lands that clear the quality bar (scoreLandsForDeck) and the

@@ -31,7 +31,7 @@ describe('fetch-land colour fit', () => {
   });
 
   it('mono-colour deck: a typed fetch matching the single colour scores as a normal mono land (no off-colour discount)', () => {
-    const rows = scoreLandsForDeck({ colors: ['B'], format: 'commander' });
+    const rows = scoreLandsForDeck({ colors: ['B'], format: 'commander', landPayoffs: true });
     const swampFetch = rows.find((r) => r.card.name === 'Bloodstained Mire' || r.card.name === 'Polluted Delta');
     expect(swampFetch).toBeDefined();
     expect(swampFetch!.reasons).not.toContain('off-color fetch (thinning only)');

@@ -5,8 +5,8 @@ import { scoreLandsForDeck, buildOptimalLandBase } from '../land-intelligence';
 // colour fixing (it is strictly worse than the basic it mimics), while real
 // utility lands and neutral untapped fetches still get in.
 describe('mono-colour fixing-only land exclusion', () => {
-  function poolNames(colors: string[]): Set<string> {
-    const rows = scoreLandsForDeck({ colors, format: 'commander' });
+  function poolNames(colors: string[], landPayoffs?: boolean): Set<string> {
+    const rows = scoreLandsForDeck({ colors, format: 'commander', landPayoffs });
     return new Set(rows.map((r) => r.card.name));
   }
 
@@ -84,16 +84,16 @@ describe('mono-colour fixing-only land exclusion', () => {
     expect(pool.has('Escape Tunnel')).toBe(false);
   });
 
-  it('keeps untapped fetches that can find the deck colour (Misty Rainforest, Wooded Foothills, Windswept Heath, Verdant Catacombs) in mono-green — real thinning, not forced', () => {
-    const pool = poolNames(['G']);
+  it('keeps untapped fetches that can find the deck colour (Misty Rainforest, Wooded Foothills, Windswept Heath, Verdant Catacombs) in mono-green with land payoffs — real thinning, not forced (B-D9)', () => {
+    const pool = poolNames(['G'], true);
     expect(pool.has('Misty Rainforest')).toBe(true);
     expect(pool.has('Wooded Foothills')).toBe(true);
     expect(pool.has('Windswept Heath')).toBe(true);
     expect(pool.has('Verdant Catacombs')).toBe(true);
   });
 
-  it('keeps an untapped fetch (Polluted Delta) in mono-blue — it can find the deck colour', () => {
-    const pool = poolNames(['U']);
+  it('keeps an untapped fetch (Polluted Delta) in mono-blue with land payoffs — it can find the deck colour (B-D9)', () => {
+    const pool = poolNames(['U'], true);
     expect(pool.has('Polluted Delta')).toBe(true);
   });
 
