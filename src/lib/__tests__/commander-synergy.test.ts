@@ -143,3 +143,82 @@ describe('analyzeCommander — tribal payoff vs storm/spellslinger (U1a)', () =>
     expect(profile?.detectedArchetype).not.toBe('tribal');
   });
 });
+
+describe('analyzeCommander — superfriends (opt-in, U6 2026-09-30)', () => {
+  const TAM_ORACLE =
+    'Planeswalker spells you cast cost {1} less to cast.\n' +
+    '{W}{U}{B}{R}{G}, {T}: Proliferate X times, where X is the number of planeswalker types among planeswalkers you control.';
+  const ATRAXA_ORACLE =
+    'Flying, vigilance, deathtouch, lifelink\n' +
+    'At the beginning of your end step, proliferate.';
+  const GUFF_ORACLE =
+    'At the beginning of your end step, put a loyalty counter on another target planeswalker you control.\n' +
+    '+1: Create a 1/1 red Wizard creature token with "{T}: Add {R}. Spend this mana only to cast a planeswalker spell."\n' +
+    '−3: You draw X cards and Commodore Guff deals X damage to each opponent, where X is the number of planeswalkers you control.';
+  const DIHADA_ORACLE =
+    '+2: Up to one target legendary creature gains vigilance, lifelink, and indestructible until your next turn.\n' +
+    '−3: Reveal the top four cards of your library. Put any number of legendary cards from among them into your hand and the rest into your graveyard. Create a Treasure token for each card put into your graveyard this way.\n' +
+    '−11: Gain control of all nonland permanents until end of turn. Untap them. They gain haste until end of turn.';
+
+  it('is opt-in: byte-identical (no planeswalker trigger) when opts is omitted', () => {
+    const withoutOpts = analyzeCommander(TAM_ORACLE, 'Legendary Creature — Gorgon Wizard', ['G', 'U'], '{1}{G}{U}');
+    expect(withoutOpts?.triggerCategories ?? []).not.toContain('planeswalker');
+    expect(withoutOpts?.detectedArchetype).not.toBe('superfriends');
+  });
+
+  it('Tam, the Possibility → planeswalker + superfriends (opted in)', () => {
+    const profile = analyzeCommander(
+      TAM_ORACLE, 'Legendary Creature — Gorgon Wizard', ['G', 'U'], '{1}{G}{U}',
+      { superfriends: true },
+    );
+    expect(profile?.triggerCategories).toContain('planeswalker');
+    expect(profile?.detectedArchetype).toBe('superfriends');
+  });
+
+  it('Atraxa, Praetors\' Voice (proliferate-only) → planeswalker + superfriends (opted in)', () => {
+    const profile = analyzeCommander(
+      ATRAXA_ORACLE, 'Legendary Creature — Phyrexian Angel Horror', ['W', 'U', 'B', 'G'], '{G}{W}{U}{B}',
+      { superfriends: true },
+    );
+    expect(profile?.triggerCategories).toContain('planeswalker');
+    expect(profile?.detectedArchetype).toBe('superfriends');
+  });
+
+  it('Commodore Guff (loyalty counter / planeswalker spell text) → planeswalker + superfriends', () => {
+    const profile = analyzeCommander(
+      GUFF_ORACLE, 'Legendary Planeswalker — Guff', ['R'], '{2}{R}{R}',
+      { superfriends: true },
+    );
+    expect(profile?.triggerCategories).toContain('planeswalker');
+    expect(profile?.detectedArchetype).toBe('superfriends');
+  });
+
+  it('Dihada, Binder of Wills (walker commander, no "planeswalker" in oracle text) → planeswalker via type-line fallback', () => {
+    const profile = analyzeCommander(
+      DIHADA_ORACLE, 'Legendary Planeswalker — Dihada', ['B', 'R'], '{2}{B}{R}',
+      { superfriends: true },
+    );
+    expect(profile?.triggerCategories).toContain('planeswalker');
+    expect(profile?.detectedArchetype).toBe('superfriends');
+  });
+
+  it('99-shape supplement: a non-walker commander with a walker-heavy pool still reads superfriends', () => {
+    const oracle = 'Whenever you gain life, draw a card.';
+    const profile = analyzeCommander(
+      oracle, 'Legendary Creature — Human Cleric', ['W'], '{2}{W}',
+      { superfriends: true, walkerCount: 14 },
+    );
+    expect(profile?.triggerCategories).toContain('planeswalker');
+    expect(profile?.detectedArchetype).toBe('superfriends');
+  });
+
+  it('a non-walker commander stays unchanged even with superfriends opted in', () => {
+    const oracle = 'Whenever you gain life, draw a card.';
+    const profile = analyzeCommander(
+      oracle, 'Legendary Creature — Human Cleric', ['W'], '{2}{W}',
+      { superfriends: true },
+    );
+    expect(profile?.triggerCategories ?? []).not.toContain('planeswalker');
+    expect(profile?.detectedArchetype).not.toBe('superfriends');
+  });
+});

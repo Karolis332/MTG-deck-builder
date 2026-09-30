@@ -246,7 +246,7 @@ function classifyMain(shape: DeckShape): Classified {
   const oracle = commanderOracle(shape);
   const byCategory = {} as Record<CardCategory, ClassifiedCard[]>;
   const cards: OptimizerCard[] = shape.main.map(({ card, quantity, board }) => {
-    const categories = classifyCard(card.name, card.oracle_text || '', card.type_line || '', card.cmc ?? 0, oracle);
+    const categories = classifyCard(card.name, card.oracle_text || '', card.type_line || '', card.cmc ?? 0, oracle, { superfriends: true });
     const primary = getPrimaryCategory(categories);
     const classified: ClassifiedCard = {
       name: card.name, cardId: card.id, categories, primaryCategory: primary,
@@ -362,17 +362,24 @@ function collectAdds(ctx: AddContext): AddOut[] {
     if (!isLegalInFormat(card.legalities, shape.format)) return;
     if (!isWithinColorIdentity(parseColors(card.color_identity), deckColors)) return;
     seen.add(key);
-    const category = getPrimaryCategory(classifyCard(card.name, card.oracle_text || '', card.type_line || '', card.cmc ?? 0, oracle));
+    const category = getPrimaryCategory(classifyCard(card.name, card.oracle_text || '', card.type_line || '', card.cmc ?? 0, oracle, { superfriends: true }));
     // Never ship a blank row: the web app renders `reason` verbatim.
     const why = reason.trim() || `Fills the deck's ${category} slot at ${card.cmc ?? 0} mana`;
     out.push({ ...toCardOut(card, addQty, category), reason: why, score, owned: owned ? owned.has(key) : undefined });
   };
 
   const deckCards = shape.main.map((r) => ({ ...r.card, quantity: r.quantity, board: r.board }));
-  for (const s of getRuleBasedSuggestions(deckCards, shape.format)) accept(s.card, s.reason, s.score);
 
+  // A commander with zero CF stats rows (no collaborative-filtering data,
+  // e.g. brand-new or off-meta) gets rule-based synergy adds instead —
+  // opt-in commander context so getRuleBasedSuggestions can propose
+  // superfriends (planeswalker/proliferate) support in addition to its
+  // generic land/curve/removal suggestions.
+  let statsRowCount = 0;
   for (const commander of shape.commanders) {
-    for (const row of getCommanderCardStats(commander.name, COMMANDER_STATS_ROWS)) {
+    const rows = getCommanderCardStats(commander.name, COMMANDER_STATS_ROWS);
+    statsRowCount += rows.length;
+    for (const row of rows) {
       if (inDeck.has(row.cardName.toLowerCase()) || row.inclusionRate < MIN_INCLUSION_FOR_ADD) continue;
       const card = findCard(row.cardName);
       if (!card) continue;
@@ -380,6 +387,11 @@ function collectAdds(ctx: AddContext): AddOut[] {
       accept(card, `In ${pct}% of ${commander.name} decks`, 60 + row.inclusionRate * 40 + Math.max(0, row.synergyScore) * 10);
     }
   }
+
+  const commanderInfo = statsRowCount === 0 && shape.commanders[0]
+    ? { oracleText: oracle || '', typeLine: shape.commanders[0].type_line || '', colorIdentity: deckColors }
+    : undefined;
+  for (const s of getRuleBasedSuggestions(deckCards, shape.format, undefined, commanderInfo)) accept(s.card, s.reason, s.score);
 
   if (!shape.commanderFormat && metaRanks.size >= META_MIN_ROWS) {
     const label = FORMAT_LABELS[shape.format] || shape.format;

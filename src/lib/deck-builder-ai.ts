@@ -96,6 +96,7 @@ export function isDeadLandFetch(oracleText: string | null | undefined, deckColor
 // Maps synergy categories from commander-synergy.ts to oracle text substrings
 
 export const SYNERGY_REQUIREMENTS_MAP = {
+  planeswalker: ['proliferate', 'loyalty counter', 'loyalty abilit', 'planeswalkers you control', 'search your library for a planeswalker'],
   exile_cast: ['exile the top', 'you may play', 'you may cast', 'from exile'],
   exile_enter: ['exile', 'return', 'to the battlefield', 'flicker', 'blink'],
   spell_cast: ['instant', 'sorcery', 'magecraft', 'prowess'],
@@ -866,6 +867,7 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
 
       commanderProfile = analyzeCommander(
         fullOracleText, cmdRow.type_line, ci, commanderCard?.mana_cost || undefined,
+        { superfriends: true },
       );
 
       // Partner pair: analyze the second commander and merge both profiles
@@ -877,6 +879,7 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
           partnerCard.type_line || '',
           colors,
           partnerCard.mana_cost || undefined,
+          { superfriends: true },
         );
         if (commanderProfile && partnerProfile) {
           commanderProfile = mergeProfiles(commanderProfile, partnerProfile);

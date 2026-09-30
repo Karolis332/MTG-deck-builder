@@ -40,6 +40,16 @@ import type { Archetype } from './deck-templates';
 // the rest get filtered by legality checks upstream).
 
 export const ARCHETYPE_PAYOFFS: Record<SynergyCategory, Set<string>> = {
+  planeswalker: new Set([
+    // Loyalty doublers / extra activations
+    'doubling season', 'the ozolith, the shattered spire', 'oath of teferi',
+    'the chain veil', 'deepglow skate', 'vorinclex, monstrous raider',
+    // Proliferate
+    'inexorable tide', 'contagion clasp', 'contagion engine', 'evolution sage',
+    'karn\'s bastion',
+    // Walker tutors / protection
+    'quest for renewal', 'blessed respite', 'norn\'s annex', 'lignify',
+  ]),
   x_spells: new Set([
     // X-matters engines
     'unbound flourishing', 'elementalist\'s palette', 'rosheen meanderer',

@@ -316,8 +316,21 @@ function isRamp(name: string, oracleText: string, typeLine: string): boolean {
   return matchesPatterns(oracleText, RAMP_PATTERNS);
 }
 
-function isDraw(name: string, oracleText: string, typeLine: string): boolean {
+// Opt-in flag threaded through classifyCard for callers that want the
+// superfriends read: a planeswalker with a "+1: Draw a card"-style loyalty
+// line is a threat/engine, not a draw spell. Omitted (or false) reproduces
+// the legacy classification byte-for-byte — Deck Score never passes this.
+interface ClassifyOpts {
+  superfriends?: boolean;
+}
+
+function isPlaneswalker(typeLine: string): boolean {
+  return /\bPlaneswalker\b/.test(typeLine);
+}
+
+function isDraw(name: string, oracleText: string, typeLine: string, opts?: ClassifyOpts): boolean {
   if (isLand(typeLine)) return false;
+  if (opts?.superfriends && isPlaneswalker(typeLine)) return false;
   if (DRAW_NAMES.has(name.toLowerCase())) return true;
   return matchesPatterns(oracleText, DRAW_PATTERNS);
 }
@@ -450,7 +463,8 @@ export function classifyCard(
   oracleText: string,
   typeLine: string,
   cmc: number,
-  commanderOracleText?: string
+  commanderOracleText?: string,
+  opts?: ClassifyOpts
 ): CardCategory[] {
   const categories: CardCategory[] = [];
 
@@ -460,7 +474,7 @@ export function classifyCard(
   }
 
   if (isRamp(name, oracleText, typeLine)) categories.push('ramp');
-  if (isDraw(name, oracleText, typeLine)) categories.push('draw');
+  if (isDraw(name, oracleText, typeLine, opts)) categories.push('draw');
   if (isTutor(name, oracleText, typeLine)) categories.push('tutor');
   if (isBoardWipe(name, oracleText)) categories.push('board_wipe');
   else if (isRemoval(name, oracleText, typeLine)) categories.push('removal');
@@ -469,6 +483,14 @@ export function classifyCard(
     categories.push('synergy');
   }
   if (isWinCondition(oracleText, typeLine, cmc)) categories.push('win_condition');
+
+  // Superfriends opt-in: a planeswalker is a threat/engine — route it to
+  // win_condition when nothing else already claimed it, instead of falling
+  // through to 'utility'.
+  if (opts?.superfriends && isPlaneswalker(typeLine)
+    && !categories.some((c) => c === 'win_condition' || c === 'synergy')) {
+    categories.push('win_condition');
+  }
 
   if (categories.length === 0) categories.push('utility');
 

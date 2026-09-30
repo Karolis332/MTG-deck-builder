@@ -73,6 +73,7 @@ const CATEGORY_NOUNS: Record<string, string[]> = {
   dungeon_venture: ['venture into the dungeon'],
   tribal_lands: ['basic land type'],
   five_colors: ['mana of any color'],
+  planeswalker: ['planeswalker spells', 'proliferate', 'loyalty abilit', 'planeswalker types', 'loyalty counter'],
 };
 
 /**
@@ -115,7 +116,7 @@ export function deriveCondition(
     tribalType = tribalMatch[1];
   }
 
-  const profile = analyzeCommander(text, typeLine, colorIdentity, manaCost ?? undefined);
+  const profile = analyzeCommander(text, typeLine, colorIdentity, manaCost ?? undefined, { superfriends: true });
   const nouns = new Set<string>();
   for (const cat of profile?.triggerCategories ?? []) {
     for (const n of CATEGORY_NOUNS[cat] ?? []) nouns.add(n);
@@ -128,6 +129,12 @@ export function deriveCondition(
   if (requires) parts.push(requires.replace('_', '/') + ' spell');
   if (threshold !== null) parts.push(`mana value ${threshold}+`);
   if (tribalType) parts.push(`${tribalType} creatures`);
+  // A "general value" payoff (no draw/damage/token/etc. wording matched)
+  // still names a real plan when the commander is a superfriends payoff —
+  // report that instead of the meaningless catch-all.
+  if (!parts.length && profile?.triggerCategories.includes('planeswalker')) {
+    parts.push('planeswalkers', 'proliferate');
+  }
   const description = parts.length
     ? `commander wants: ${parts.join(', ')}`
     : profile?.payoffType

@@ -59,3 +59,16 @@ describe('ARCHETYPE_TEMPLATES synergyMinimums coverage', () => {
     }
   });
 });
+
+describe('superfriends archetype template (U6 2026-09-30)', () => {
+  it('getTemplate("superfriends") returns the real superfriends template, not the midrange fallback', () => {
+    const template = getTemplate('superfriends');
+    expect(template.name).toBe('superfriends');
+    expect(template).not.toBe(ARCHETYPE_TEMPLATES.midrange);
+    expect(template.synergyMinimums.planeswalker).toBeGreaterThanOrEqual(12);
+  });
+
+  it('its planeswalker synergy minimum is enforced (not a dead key)', () => {
+    expect(Object.prototype.hasOwnProperty.call(SYNERGY_REQUIREMENTS_MAP, 'planeswalker')).toBe(true);
+  });
+});

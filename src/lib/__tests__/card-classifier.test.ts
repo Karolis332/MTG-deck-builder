@@ -576,3 +576,26 @@ describe('primary category and scoring: win_condition before synergy', () => {
     expect(computeOverallScore(health)).toBeLessThan(100);
   });
 });
+
+describe('classifyCard — superfriends opt-in (U6 2026-09-30)', () => {
+  const name = 'Fake Walker, Test Card';
+  const oracle = '+1: Draw a card.\n-3: Deal 3 damage to target creature.';
+  const typeLine = 'Legendary Planeswalker — Test';
+
+  it('legacy path (no opts): a planeswalker with a draw loyalty line IS draw', () => {
+    const cats = classifyCard(name, oracle, typeLine, 3);
+    expect(cats).toContain('draw');
+  });
+
+  it('opt-in path: the same planeswalker is NOT draw, and gets a threat/engine category', () => {
+    const cats = classifyCard(name, oracle, typeLine, 3, undefined, { superfriends: true });
+    expect(cats).not.toContain('draw');
+    expect(cats).toContain('win_condition');
+  });
+
+  it('opt-in path does not affect non-planeswalker cards', () => {
+    const catsLegacy = classifyCard('Rhystic Study', 'Whenever an opponent casts a spell, you may draw a card unless that player pays {1}.', 'Enchantment', 3);
+    const catsOptIn = classifyCard('Rhystic Study', 'Whenever an opponent casts a spell, you may draw a card unless that player pays {1}.', 'Enchantment', 3, undefined, { superfriends: true });
+    expect(catsOptIn).toEqual(catsLegacy);
+  });
+});
