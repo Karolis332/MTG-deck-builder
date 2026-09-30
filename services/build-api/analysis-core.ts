@@ -61,7 +61,7 @@ export function analyzeResolved(commanderRow: DbCard, resolved: ResolvedCard[]):
   // commander is diagnosed as superfriends — otherwise the optimizer never
   // learns the archetype, the synergy graph never gets planeswalker edges,
   // and every walker/loyalty-support card reads as "no synergy edges".
-  const synergyProfile = analyzeCommander(commanderOracle, commanderRow.type_line || '', colorIdentity, undefined, { superfriends: true, tribalPayoff: true });
+  const synergyProfile = analyzeCommander(commanderOracle, commanderRow.type_line || '', colorIdentity, undefined, { superfriends: true, tribalPayoff: true, builderPatterns: true });
   const archetype = (synergyProfile?.detectedArchetype ?? 'midrange') as Archetype;
 
   const nonLand = resolved.filter((r) => !isLandType(r.card.type_line));

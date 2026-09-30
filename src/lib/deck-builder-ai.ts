@@ -876,7 +876,7 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
 
       commanderProfile = analyzeCommander(
         fullOracleText, cmdRow.type_line, ci, commanderCard?.mana_cost || undefined,
-        { superfriends: true, tribalPayoff: true },
+        { superfriends: true, tribalPayoff: true, builderPatterns: true },
       );
 
       // Partner pair: analyze the second commander and merge both profiles
@@ -888,10 +888,10 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
           partnerCard.type_line || '',
           colors,
           partnerCard.mana_cost || undefined,
-          { superfriends: true, tribalPayoff: true },
+          { superfriends: true, tribalPayoff: true, builderPatterns: true },
         );
         if (commanderProfile && partnerProfile) {
-          commanderProfile = mergeProfiles(commanderProfile, partnerProfile);
+          commanderProfile = mergeProfiles(commanderProfile, partnerProfile, { builderPatterns: true });
         } else if (partnerProfile) {
           commanderProfile = partnerProfile;
         }
@@ -1110,14 +1110,49 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
   // specific archetype like aristocrats/spellslinger/combo.
   const profileArch = commanderProfile?.detectedArchetype;
   const genericArch = !profileArch || profileArch === 'voltron' || profileArch === 'midrange';
+  // B-D3: with no profile, the strategy comes from what the EDHREC-recommended
+  // cards DO (detectDeckThemes), never from an EDHREC theme LABEL mapped to
+  // 'aggro' — and 'aggro' additionally needs a single creature commander whose
+  // own text attacks (a partner pair or a noncreature commander never is).
+  // Only the DOMINANT composition theme decides: "3+ cards say destroy/counter
+  // target" is true of nearly every list, and reading it as 'control' turned
+  // the Tymna+Thrasios cEDH shell (MV 1.9) into a 6-wipe, MV 3.0 control pile.
+  // A commander whose community lists are mostly cEDH staples (Tymna +
+  // Thrasios: 44 of the top 60 commander_card_stats rows; Ygra 4, Atraxa 6,
+  // Edgar 10 of 60) is a combo shell — fast mana, tutors, cheap interaction —
+  // and its dominant theme is still "interaction", so it is checked before
+  // 'control' (which shipped 6 wipes and 7-drops at MV 3.0 for the pair).
+  const cedhStapleShare = (): number => {
+    const names = [commanderName, partnerCard?.name].filter((n): n is string => !!n);
+    try {
+      const staples = new Set((db.prepare("SELECT card_name FROM cedh_staples WHERE power_tier = 'cedh'").all() as Array<{ card_name: string }>).map((r) => r.card_name));
+      const top = db.prepare(
+        `SELECT card_name FROM commander_card_stats WHERE commander_name IN (${names.map(() => '?').join(',')}) COLLATE NOCASE
+         ORDER BY inclusion_rate DESC LIMIT 60`
+      ).all(...names) as Array<{ card_name: string }>;
+      return top.length >= 20 ? top.filter((r) => staples.has(r.card_name)).length / top.length : 0;
+    } catch { return 0; }
+  };
+  const fallbackStrategy = (): 'aggro' | 'combo' | 'control' | 'midrange' => {
+    const composition = isCommander && edhrecResolvedCards.length > 0
+      ? detectDeckThemes(edhrecResolvedCards) : themes;
+    const aggroCommander = !isCommander || (!partnerCard
+      && /\bCreature\b/.test(commanderCard?.type_line || '')
+      && /\b(?:attacks?|attacking|combat damage|haste|double strike|first strike|trample|menace)\b/i.test(commanderCard?.oracle_text || ''));
+    if (composition[0] === 'aggro' && aggroCommander) return 'aggro';
+    if (isCommander && cedhStapleShare() >= 0.5) return 'combo';
+    if (composition[0] === 'control') return 'control';
+    return 'midrange';
+  };
   const resolvedStrategy = resolvedStrategyHint
     || (tribalType && genericArch ? 'tribal' : profileArch)
-    || (themes.includes('aggro') ? 'aggro' : themes.includes('control') ? 'control' : 'midrange');
+    || fallbackStrategy();
   // Opt-in: a planeswalker never counts as 'draw' on this path (card-classifier
   // ClassifyOpts) — kept opt-in so every other archetype's classification is
   // byte-identical to before.
   const isSuperfriends = resolvedStrategy === 'superfriends';
-  const classifyOpts = isSuperfriends ? { superfriends: true } : undefined;
+  // strict = the builder's honest read (card-classifier ClassifyOpts, Unit C).
+  const classifyOpts: ClassifyOpts = { superfriends: isSuperfriends, strict: true };
 
   // ── ML personalization: load predictions from personalized_suggestions ──
   const mlScoreMap = new Map<string, number>();
@@ -1872,7 +1907,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
   // See buildScoredCandidatePool — same opt-in, recomputed in this function's
   // own scope since poolResult only carries the string, not the flag.
   const isSuperfriends = resolvedStrategy === 'superfriends';
-  const classifyOpts = isSuperfriends ? { superfriends: true } : undefined;
+  const classifyOpts: ClassifyOpts = { superfriends: isSuperfriends, strict: true };
 
   // Free-text hint: "consistent manabase" biases toward the generous end of
   // the archetype's land band (and shrinks the nonland budget to match, so
@@ -2144,6 +2179,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
     scoreFloor: qualityFloor,
     passBScoreFloor,
     synergyNames,
+    strict: true,
   });
 
   for (const p of pickResult.picks) {
@@ -2204,7 +2240,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
       if (pickedNames.has(wipe.name)) continue;
       // Validate against the same classifier the quota accountant uses (C2)
       // — the SQL LIKE clauses above are a broad net, not the source of truth.
-      if (!isBoardWipe(wipe.name, wipe.oracle_text || '')) continue;
+      if (!isBoardWipe(wipe.name, wipe.oracle_text || '', classifyOpts)) continue;
       const qty = getMaxQty(wipe);
       if (qty <= 0) continue;
       picked.push({ card: wipe, quantity: 1, board: 'main' });

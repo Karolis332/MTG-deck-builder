@@ -271,6 +271,52 @@ export const TRIGGER_PATTERNS: Record<SynergyCategory, RegExp[]> = {
   ],
 };
 
+// ── Builder-only trigger forms (Unit C 2026-09-30, B-D3 / A-D3) ─────────────
+// Opt-in via analyzeCommander's `opts.builderPatterns`, same contract as
+// superfriends/tribalPayoff: Deck Score passes no opts and keeps b82d099's read.
+
+// Kess: "you may cast an instant or sorcery spell from your graveyard" is
+// flashback-for-everything — a spells shell, not a reanimator. Instants and
+// sorceries only: Chainer's "cast a creature spell from your graveyard" is a
+// genuine graveyard read.
+const CAST_SPELL_FROM_GRAVEYARD = /cast (?:an? )?(?:instant|sorcery|instant or sorcery|noncreature) (?:spell|card)s? from your graveyard/i;
+// Jhoira: "historic" = artifacts, legendaries and Sagas — an artifacts read,
+// not `spell_cast`'s "whenever you cast a <word> spell".
+const HISTORIC = /historic (?:spell|permanent)s?/i;
+
+const BUILDER_TRIGGER_PATTERNS: Partial<Record<SynergyCategory, RegExp[]>> = {
+  alt_zone_cast: [CAST_SPELL_FROM_GRAVEYARD],
+  // Ygra: every other creature is a Food, so "Whenever a Food is put into a
+  // graveyard from the battlefield" is a death/sacrifice payoff.
+  creature_dies: [
+    /whenever (?:a |an |another |one or more )?(?:food|treasure|clue|token|artifact|permanent)s?(?: you control)? (?:is|are) put into (?:a |your )?graveyard from the battlefield/i,
+  ],
+  // Plural subject: "whenever one or more creatures you control deal combat damage".
+  attack_trigger: [/whenever .+ deal combat damage/i],
+  artifact_synergy: [HISTORIC],
+};
+
+// Tam's "{W}{U}{B}{R}{G}, {T}: Proliferate" is a mana ABILITY COST, not a
+// colours-matter payoff — drop every "<cost>:" prefix that carries a mana or
+// tap symbol before the five_colors WUBRG-run test. Jodah's "pay {W}{U}{B}{R}{G}
+// rather than" has no colon and still reads five_colors.
+function stripActivationCosts(text: string): string {
+  return text.replace(/^[^\n:]*\{[^}]+\}[^\n:]*:/gm, '');
+}
+
+// The text each category is tested against in builder mode. Beyond the extra
+// patterns above, two categories lose a clause that another category now owns:
+// graveyard no longer sees the Kess clause (else `graveyard: 8` still fills
+// Entomb/Reanimate with no targets), spell_cast no longer sees "historic spell".
+function builderTextFor(category: SynergyCategory, text: string): string {
+  switch (category) {
+    case 'five_colors': return stripActivationCosts(text);
+    case 'graveyard': return text.replace(CAST_SPELL_FROM_GRAVEYARD, ' ');
+    case 'spell_cast': return text.replace(HISTORIC, 'historic');
+    default: return text;
+  }
+}
+
 // Damage dealt TO the controller ("Whenever a creature deals combat damage
 // to you, sacrifice a Food token.") reads as an attack_trigger under the
 // generic patterns above but is a defensive/payoff trigger, not the
@@ -540,6 +586,7 @@ function inferArchetype(
   hasAttackTrigger: boolean,
   tribalPayoff?: string | null,
   isCreature?: boolean,
+  builderPatterns?: boolean,
 ): Archetype | null {
   const has = (cat: SynergyCategory) => triggers.includes(cat);
 
@@ -565,6 +612,10 @@ function inferArchetype(
   if (has('storm') && !isCreature) return 'spellslinger';
   if (has('spell_cast')) return 'spellslinger';
   if (has('creature_dies')) return 'aristocrats';
+  // Builder only (B-D3): a cast-from-elsewhere commander that also mentions
+  // the graveyard (Kess) is a spells shell — checked before the reanimator
+  // read. The default order below is Deck Score's frozen behaviour.
+  if (builderPatterns && has('alt_zone_cast')) return 'spellslinger';
   if (has('graveyard') && !has('creature_dies')) return 'reanimator';
 
   // Alternate-zone casting (impulse draw, flashback, foretell, cast-from-
@@ -610,7 +661,7 @@ export function analyzeCommander(
   typeLine: string,
   colorIdentity: string[],
   manaCost?: string,
-  opts?: { superfriends?: boolean; walkerCount?: number; tribalPayoff?: boolean }
+  opts?: { superfriends?: boolean; walkerCount?: number; tribalPayoff?: boolean; builderPatterns?: boolean }
 ): CommanderSynergyProfile | null {
   if (!oracleText || oracleText.trim().length === 0) return null;
 
@@ -633,12 +684,16 @@ export function analyzeCommander(
   // ── Detect trigger categories ──────────────────────────────────────
   const triggerCategories: SynergyCategory[] = [];
 
-  for (const [category, patterns] of Object.entries(TRIGGER_PATTERNS) as [SynergyCategory, RegExp[]][]) {
+  for (const [category, basePatterns] of Object.entries(TRIGGER_PATTERNS) as [SynergyCategory, RegExp[]][]) {
     if (category === 'planeswalker' && !opts?.superfriends) continue;
+    const patterns = opts?.builderPatterns
+      ? [...basePatterns, ...(BUILDER_TRIGGER_PATTERNS[category] ?? [])]
+      : basePatterns;
+    const categoryText = opts?.builderPatterns ? builderTextFor(category, text) : text;
     const matched =
       category === 'attack_trigger'
-        ? matchesAttackTrigger(text, patterns)
-        : patterns.some((pattern) => pattern.test(text));
+        ? matchesAttackTrigger(categoryText, patterns)
+        : patterns.some((pattern) => pattern.test(categoryText));
     if (matched) triggerCategories.push(category);
   }
 
@@ -722,6 +777,7 @@ export function analyzeCommander(
   // the default path keeps b82d099's unconditional `storm → spellslinger`.
   const detectedArchetype = inferArchetype(
     triggerCategories, hasAttack, tribalPayoff, opts?.tribalPayoff ? isCreature : undefined,
+    opts?.builderPatterns,
   );
 
   // ── Build synergy minimums + card pool patterns + score bonuses ────
@@ -837,11 +893,13 @@ export function analyzeCommander(
  */
 export function mergeProfiles(
   a: CommanderSynergyProfile,
-  b: CommanderSynergyProfile
+  b: CommanderSynergyProfile,
+  opts?: { builderPatterns?: boolean },
 ): CommanderSynergyProfile {
   const triggerCategories = Array.from(new Set([...a.triggerCategories, ...b.triggerCategories]));
   const hasAttack = triggerCategories.includes('attack_trigger');
-  const detectedArchetype = inferArchetype(triggerCategories, hasAttack) || a.detectedArchetype || b.detectedArchetype;
+  const detectedArchetype = inferArchetype(triggerCategories, hasAttack, undefined, undefined, opts?.builderPatterns)
+    || a.detectedArchetype || b.detectedArchetype;
 
   const synergyMinimums: Record<string, number> = { ...a.synergyMinimums };
   for (const [k, v] of Object.entries(b.synergyMinimums)) {

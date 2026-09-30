@@ -645,6 +645,8 @@ export interface PickByRoleOptions {
   passBScoreFloor?: number;
   /** Cards with a positive tribal / commander-profile synergy component. */
   synergyNames?: Set<string>;
+  /** Opt-in: the builder's honest classification (ClassifyOpts.strict). */
+  strict?: boolean;
 }
 
 export interface PickByRoleResult {
@@ -669,10 +671,10 @@ export function pickByRole(opts: PickByRoleOptions): PickByRoleResult {
   const {
     pool, nonLandTarget, quotas, payoffNames, commanderOracle,
     getMaxQty, isCommanderFormat, preFilled, passBAllowed, superfriends,
-    scoreFloor, passBScoreFloor, synergyNames,
+    scoreFloor, passBScoreFloor, synergyNames, strict,
   } = opts;
   void isCommanderFormat; // copy caps come from getMaxQty (any-number cards, A-D5)
-  const classifyOpts = superfriends ? { superfriends: true } : undefined;
+  const classifyOpts = superfriends || strict ? { superfriends, strict } : undefined;
 
   const picks: PickedRoleCard[] = [];
   const pickedNames = new CardNameSet();
