@@ -333,7 +333,7 @@ async function main(): Promise<void> {
       image_uri_large = COALESCE(image_uri_large, @image_uri_large),
       image_uri_art_crop = COALESCE(image_uri_art_crop, @image_uri_art_crop),
       updated_at = CURRENT_TIMESTAMP
-    WHERE id = @pk
+    WHERE oracle_id = @oracle_id
   `);
 
   const insertStmt = db.prepare(`
@@ -342,13 +342,13 @@ async function main(): Promise<void> {
       keywords, set_code, set_name, collector_number, rarity,
       image_uri_small, image_uri_normal, image_uri_large, image_uri_art_crop,
       price_usd, price_usd_foil, legalities, power, toughness, loyalty,
-      produced_mana, edhrec_rank, layout, updated_at
+      produced_mana, edhrec_rank, game_changer, layout, updated_at
     ) VALUES (
       @id, @oracle_id, @name, @mana_cost, @cmc, @type_line, @oracle_text, @colors, @color_identity,
       @keywords, @set_code, @set_name, @collector_number, @rarity,
       @image_uri_small, @image_uri_normal, @image_uri_large, @image_uri_art_crop,
       @price_usd, @price_usd_foil, @legalities, @power, @toughness, @loyalty,
-      @produced_mana, @edhrec_rank, @layout, CURRENT_TIMESTAMP
+      @produced_mana, @edhrec_rank, @game_changer, @layout, CURRENT_TIMESTAMP
     )
   `);
 
@@ -364,7 +364,7 @@ async function main(): Promise<void> {
       const row = toRow(card);
       const pk = existing.get(card.oracle_id);
       if (pk) {
-        if (!DRY_RUN) updateStmt.run({ ...row, pk });
+        if (!DRY_RUN) updateStmt.run(row); // every printing row of this oracle_id
         updated++;
       } else {
         if (!DRY_RUN) insertStmt.run(row);
