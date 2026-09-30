@@ -447,7 +447,7 @@ function diagnose(shape: DeckShape): Diagnosis {
     : Array.from(new Set(nonLand.flatMap((r) => parseColors(r.card.color_identity))));
   // Map is insertion-ordered by composite meta score (db.ts) — iteration order == rank.
   const metaRanks = !shape.commanderFormat ? getMetaRankedCardNames(shape.format, 500) : new Map<string, number>();
-  return { shape, cards, core, deckColors, health: computeRatioHealth(byCategory, shape.format), avgCmc, metaRanks };
+  return { shape, cards, core, deckColors, health: computeRatioHealth(byCategory, shape.format, core?.archetype), avgCmc, metaRanks };
 }
 
 function optimizerContext(d: Diagnosis): OptimizerContext {

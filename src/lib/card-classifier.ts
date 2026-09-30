@@ -3,6 +3,7 @@
  * Categorizes MTG cards by function: ramp, draw, removal, board wipe, protection, synergy.
  * Uses oracle text pattern matching with weighted confidence scores.
  */
+import { ARCHETYPE_TEMPLATES, type Archetype } from './deck-templates';
 
 export type CardCategory =
   | 'land'
@@ -557,11 +558,37 @@ export const CATEGORY_BAR_COLORS: Record<CardCategory, string> = {
 
 // ── Deck analysis computation ─────────────────────────────────────────────
 
+/**
+ * Archetype templates (deck-templates.ts) carry their own construction bands
+ * (e.g. superfriends' winConditionSlots [8,16] vs the generic format band
+ * [min,max] used for every other archetype). Cards, especially walkers
+ * counted as win_condition, must not be flagged "over quota" against a band
+ * that isn't the one the deck was built to. Only categories the template
+ * actually specifies are overridden — the rest fall back to the generic
+ * format ratio.
+ */
+function archetypeTargetOverrides(archetype?: string): Partial<Record<CardCategory, DeckRatioTarget>> {
+  if (!archetype) return {};
+  const template = ARCHETYPE_TEMPLATES[archetype as Archetype];
+  if (!template) return {};
+  const band = (min: number, max: number): DeckRatioTarget => ({ min, max, target: Math.round((min + max) / 2) });
+  return {
+    land: band(template.lands[0], template.lands[1]),
+    ramp: band(template.ramp.totalMin, template.ramp.totalMax),
+    draw: band(template.draw.totalMin, template.draw.totalMax),
+    removal: band(template.removal.totalMin, template.removal.totalMax),
+    board_wipe: band(template.removal.wipes[0], template.removal.wipes[1]),
+    win_condition: band(template.winConditionSlots[0], template.winConditionSlots[1]),
+  };
+}
+
 export function computeRatioHealth(
   categories: Record<CardCategory, ClassifiedCard[]>,
-  format: string
+  format: string,
+  archetype?: string
 ): RatioHealth[] {
   const ratios = getFormatRatios(format);
+  const overrides = archetypeTargetOverrides(archetype);
   const health: RatioHealth[] = [];
 
   const categoryOrder: CardCategory[] = [
@@ -569,7 +596,7 @@ export function computeRatioHealth(
   ];
 
   for (const cat of categoryOrder) {
-    const target = ratios.targets[cat];
+    const target = overrides[cat] ?? ratios.targets[cat];
     if (!target) continue;
     const current = categories[cat]?.length ?? 0;
     let status: 'low' | 'ok' | 'high' = 'ok';

@@ -54,3 +54,27 @@ describe('optimizeDeck — fixed-size after-list (U5)', () => {
     expect(result.gate.totals.cards).toBe(60);
   });
 });
+
+describe('optimizeDeck — role bands follow the detected archetype (U8a)', () => {
+  it('Tam (superfriends): no walker is cut for a win-condition-over-quota reason, and the reported win_condition band is the superfriends band [8,16], not the generic brawl band', () => {
+    const result = optimizeDeck({ format: 'brawl', text: TAM_FIXTURE }) as {
+      health: Array<{ category: string; target: { min: number; max: number } }>;
+      cuts: Array<{ name: string; reasons: string[] }>;
+    };
+    const winConditionHealth = result.health.find((h) => h.category === 'win_condition');
+    expect(winConditionHealth?.target).toMatchObject({ min: 8, max: 16 });
+    const walkerCutOnQuota = result.cuts.filter((c) =>
+      /win conditions over quota/i.test(c.reasons.join(' '))
+    );
+    expect(walkerCutOnQuota).toEqual([]);
+  });
+
+  it('a non-superfriends list (standard 60) reports the generic format band, unchanged', () => {
+    const result = optimizeDeck({ format: 'standard', text: standard60Text() }) as {
+      health: Array<{ category: string; target: { min: number; max: number } }>;
+    };
+    const winConditionHealth = result.health.find((h) => h.category === 'win_condition');
+    // GENERIC_60_RATIOS.win_condition band — unchanged by the archetype override.
+    expect(winConditionHealth?.target).toMatchObject({ min: 4, max: 8 });
+  });
+});

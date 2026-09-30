@@ -2256,6 +2256,12 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
           const isRamp = (type.includes('artifact') && text.includes('add') && text.includes('mana'))
             || text.includes('search your library for a') && text.includes('land');
           if (isRamp) return false;
+          // The 'planeswalker' category here fills proliferate/loyalty-doubler
+          // SUPPORT patterns, not walker permanents — a walker itself never
+          // matches that text, so without this guard the superfriends walker
+          // floor's own backfill (above) is the first thing displaced to make
+          // room for its support cards (U8a defect 2: floor 18, shipped 16).
+          if (category === 'planeswalker' && /\bPlaneswalker\b/.test(p.card.type_line || '')) return false;
           return true;
         })
         .sort((a, b) => {
