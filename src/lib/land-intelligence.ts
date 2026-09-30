@@ -73,6 +73,8 @@ export interface ManaDemand {
   totalPips: number;
   /** Per colour, the single most demanding card (pips of that colour, mana value) — sets the Karsten source target */
   heaviestCost: Record<string, { pips: number; mv: number }>;
+  /** Per colour, the most pips of that colour on one card */
+  maxPips: Record<string, number>;
 }
 
 // Karsten-style sources for a ≥90 % on-curve cast, indexed [pips][mana value]
@@ -127,6 +129,7 @@ export function analyzeManaDemands(
 ): ManaDemand {
   const colorDemand: Record<string, number> = { W: 0, U: 0, B: 0, R: 0, G: 0 };
   const heaviestCost: ManaDemand['heaviestCost'] = {};
+  const maxPipsByColor: Record<string, number> = {};
 
   for (const card of nonLandCards) {
     if (!card.mana_cost || card.quantity <= 0) continue;
@@ -139,6 +142,7 @@ export function analyzeManaDemands(
     }
     const mv = manaValueOf(card.mana_cost);
     for (const [c, pips] of Object.entries(cardPips)) {
+      maxPipsByColor[c] = Math.max(maxPipsByColor[c] || 0, pips);
       const prev = heaviestCost[c];
       if (!prev || karstenSources(KARSTEN_99, pips, mv) > karstenSources(KARSTEN_99, prev.pips, prev.mv)) heaviestCost[c] = { pips, mv };
     }
@@ -157,7 +161,7 @@ export function analyzeManaDemands(
     }
   }
 
-  return { colorDemand, heaviestColor, colorIntensity, totalPips, heaviestCost };
+  return { colorDemand, heaviestColor, colorIntensity, totalPips, heaviestCost, maxPips: maxPipsByColor };
 }
 
 // Strategy → the classify_lands.py synergy tag worth a slot in that deck.
@@ -633,8 +637,8 @@ export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
     if (colors.length <= 1 && (matchingColors.length === 0 || alwaysTapped) && !tribalMatch && !genericTribalLand && !exemptColorless) {
       const PREMIUM_COLORLESS_UTILITY = [
         /can't be blocked/,
-        /destroy target/,
-        /exile target/,
+        // real removal — not "exile target creature you own" (Northampton Farm's blink)
+        /(?:destroy|exile) target (?![^.]*you (?:own|control))/,
         /extra turn/,
       ];
       if (!PREMIUM_COLORLESS_UTILITY.some((re) => re.test(tapText))) continue;
@@ -799,12 +803,20 @@ export function buildOptimalLandBase(options: BuildOptions): LandBaseResult {
   let basicCount = 0;
   let mdfcCount = 0;
   const isMdfcSpell = (s: LandScore) => !(s.card.type_line || '').split('//')[0].includes('Land');
+  // Mono-colour colourless cap (A-D8): a triple-pip card ({2}{G}{G}{G})
+  // needs every land to make the colour — at most two colourless lands
+  // then, manlands and Cavern included (they stay eligible, they just count).
+  const MAX_MONO_COLORLESS = 2;
+  const monoColor = colors.length === 1 ? colors[0] : undefined;
+  const capColorless = !!monoColor && (manaDemand?.maxPips[monoColor] ?? 0) >= 3;
+  let colorlessCount = 0;
   const eligible = (s: LandScore): boolean => {
     // A--stripped: an Arena-rebalanced "A-X" and its paper name "X" are one card.
     const landKey = stripArenaPrefix(s.card.name);
     if (selectedNames.has(landKey)) return false;
     if (options.excludeNames?.has(landKey)) return false; // already picked elsewhere (e.g. MDFC spell)
     if (isMdfcSpell(s) && mdfcCount >= MAX_MDFC_LANDS) return false;
+    if (capColorless && colorlessCount >= MAX_MONO_COLORLESS && !s.producesColors.includes(monoColor!)) return false;
     return true;
   };
   const giveBasic = (c: string) => {
@@ -846,6 +858,7 @@ export function buildOptimalLandBase(options: BuildOptions): LandBaseResult {
     selectedLands.push({ card: pick.card, quantity: qty });
     selectedNames.add(stripArenaPrefix(pick.card.name));
     if (isMdfcSpell(pick)) mdfcCount++;
+    if (monoColor && !pick.producesColors.includes(monoColor)) colorlessCount++;
     nonBasicCount += qty;
     for (const c of pick.producesColors) if (c in sources) sources[c] += pick.sourceCredit * qty;
   }
