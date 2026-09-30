@@ -278,8 +278,17 @@ def classify_land(name: str, type_line: str, oracle: str, produced_mana_json: st
         synergy_tags.append("token_generation")
     if "draw" in ot and "card" in ot:
         synergy_tags.append("card_draw")
-    if re.search(r"(?:destroy|exile) target", ot):
+    # "exile target creature you own" (Northampton Farm) is a blink, not removal.
+    if re.search(r"(?:destroy|exile) target (?![^.]*you (?:own|control))", ot):
         synergy_tags.append("removal")
+    # Strategy hooks read by the scorer (A-D7): artifact lands / artifact
+    # tutors, creature sacrifice outlets, proliferate.
+    if "artifact" in tl or re.search(r"\bartifact\b(?! creature)|\bartifacts\b", ot):
+        synergy_tags.append("artifact")
+    if re.search(r"sacrifice (?:a|an|another|target) creature", ot):
+        synergy_tags.append("sac_outlet")
+    if "proliferate" in ot:
+        synergy_tags.append("proliferate")
 
     # Untapped only when true: a branch may leave the default while the text
     # says "This land enters tapped." outright (Grand Coliseum: pain; Path of

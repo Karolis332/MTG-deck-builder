@@ -160,6 +160,11 @@ export function analyzeManaDemands(
   return { colorDemand, heaviestColor, colorIntensity, totalPips, heaviestCost };
 }
 
+// Strategy → the classify_lands.py synergy tag worth a slot in that deck.
+const STRATEGY_LAND_TAGS: Record<string, string> = {
+  artifacts: 'artifact', aristocrats: 'sac_outlet', superfriends: 'proliferate',
+};
+
 // ── "Untapped only when true" ────────────────────────────────────────────────
 // Formats where "unless you have two or more opponents" (bond lands) holds.
 const MULTIPLAYER_FORMATS = new Set(['commander']);
@@ -235,7 +240,7 @@ interface ScoreOptions {
  * Returns scored lands sorted by score descending.
  */
 export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
-  const { colors, format, tribalTypes, commanderName, manaDemand, collectionOnly, userId } = options;
+  const { colors, format, strategy, tribalTypes, commanderName, manaDemand, collectionOnly, userId } = options;
   const db = getDb();
 
   // Honest colour count: chosen-type lands credit one colour (the deck's
@@ -458,6 +463,8 @@ export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
 
     let tribalTypesArr: string[] = [];
     try { tribalTypesArr = JSON.parse(land.tribal_types || '[]'); } catch { /* empty */ }
+    let synergyTags: string[] = [];
+    try { synergyTags = JSON.parse(land.synergy_tags || '[]'); } catch { /* empty */ }
 
     const matchingColors = producesColors.filter(c => colors.includes(c));
 
@@ -505,7 +512,10 @@ export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
     // but a spell-heavy deck can't pay for charms or draw with them. Treat
     // their colored production at a steep discount so at most a couple make
     // the cut, instead of 8 of them masquerading as a rainbow mana base.
-    const restricted = isRestrictedProducer(land.oracle_text);
+    // Superfriends: planeswalker- / legendary-only mana (Interplanar Beacon,
+    // Great Hall of the Citadel) pays for most of that deck — a real source.
+    const walkerMana = strategy === 'superfriends' && /only to cast (?:planeswalker|legendary) spells/i.test(land.oracle_text || '');
+    const restricted = isRestrictedProducer(land.oracle_text) && !walkerMana;
     // A TYPED fetch (Verdant Catacombs: Swamp/Forest) that only matches ONE
     // color of a 2+ color deck is only worth its thinning — it can't fix the
     // other color(s), unlike a dual or an on-colour fetch. Generic fetches
@@ -515,7 +525,7 @@ export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
     // penalized either (colors.length < 2).
     const matchCountBeforeScale = producesColors.filter(c => colors.includes(c)).length;
     const fetchOffColor = isFetch && !!fetched && fetched.length < 5 && colors.length >= 2 && matchCountBeforeScale === 1;
-    const conditional = isConditionalColoredProducer(land, manaCtx) || fetchOffColor;
+    const conditional = (isConditionalColoredProducer(land, manaCtx) && !walkerMana) || fetchOffColor;
     const colorBonusScale = restricted ? 0.25 : conditional ? 0.4 : 1;
     if (restricted) reasons.push('restricted producer');
     if (fetchOffColor) reasons.push('off-color fetch (thinning only)');
@@ -628,6 +638,13 @@ export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
         /extra turn/,
       ];
       if (!PREMIUM_COLORLESS_UTILITY.some((re) => re.test(tapText))) continue;
+    }
+
+    // ── Strategy → synergy_tags bonus (A-D7) ─────────────────────
+    const wantedTag = strategy ? STRATEGY_LAND_TAGS[strategy] : undefined;
+    if (wantedTag && synergyTags.includes(wantedTag)) {
+      score += 40;
+      reasons.push(`strategy ${strategy}: ${wantedTag}`);
     }
 
     // ── EDHREC recommendation bonus ──────────────────────────────

@@ -226,3 +226,27 @@ def test_bond_land_is_tier2_bond_with_condition():
     assert result["tier"] == 2
     assert result["enters_untapped"] == 1
     assert result["enters_untapped_condition"] == "two or more opponents"
+
+
+def test_inventors_fair_tagged_artifact_and_high_market_sac_outlet():
+    fair = classify_land(
+        "Inventors' Fair", "Legendary Land",
+        "At the beginning of your upkeep, if you control three or more artifacts, you gain 1 life.\n{T}: Add {C}.\n{4}, {T}, Sacrifice Inventors' Fair: Search your library for an artifact card, reveal it, put it into your hand, then shuffle. Activate only if you control three or more artifacts.",
+        '["C"]',
+    )
+    assert "artifact" in fair["synergy_tags"]
+    market = classify_land("High Market", "Land", "{T}: Add {C}.\n{T}, Sacrifice a creature: You gain 1 life.", '["C"]')
+    assert "sac_outlet" in market["synergy_tags"]
+    bastion = classify_land("Karn's Bastion", "Land", "{T}: Add {C}.\n{4}, {T}: Proliferate.", '["C"]')
+    assert "proliferate" in bastion["synergy_tags"]
+
+
+def test_removal_tag_ignores_exile_of_own_permanents():
+    farm = classify_land(
+        "Northampton Farm", "Land",
+        "{T}: Add {C}.\n{1}, {T}: Exile target creature you own.\n{2}, {T}, Sacrifice this land: Return a creature card exiled with this land to the battlefield under your control.",
+        '["C"]',
+    )
+    assert "removal" not in farm["synergy_tags"]
+    real = classify_land("Bojuka Bog", "Land", "This land enters tapped.\nWhen this land enters, exile target player's graveyard.\n{T}: Add {B}.", '["B"]')
+    assert "removal" in real["synergy_tags"]
