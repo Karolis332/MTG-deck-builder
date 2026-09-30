@@ -25,6 +25,8 @@ function standard60Text(): string {
 
 describe('optimizeDeck — fixed-size after-list (U5)', () => {
   it('never resizes a brawl deck when adds run out (Tam, no commander_card_stats rows)', () => {
+    // Full-deck optimize on the 100-card Tam fixture takes 11-18s locally
+    // (collectAdds does per-add SQL lookups); the 15s vitest default flaked.
     const result = optimizeDeck({ format: 'brawl', text: TAM_FIXTURE }) as {
       gate: { checks: Array<{ id: string; status: string }>; totals: { cards: number } };
       swaps: Array<{ add: string | null }>;
@@ -35,7 +37,7 @@ describe('optimizeDeck — fixed-size after-list (U5)', () => {
     expect(result.gate.totals.cards).toBe(100);
     // unpaired cuts must still be reported as advice
     expect(result.cuts.length).toBeGreaterThan(0);
-  });
+  }, 60_000);
 
   it('landReport counts an MDFC (Shatterskull Smashing) as one land, not two', () => {
     const result = optimizeDeck({ format: 'brawl', text: TAM_FIXTURE }) as {
@@ -43,6 +45,16 @@ describe('optimizeDeck — fixed-size after-list (U5)', () => {
     };
     expect(result.landTarget.current).toBe(35);
     expect(result.landTarget.effective).toBe(35.4);
+  });
+
+  it('U11 fix 3: the ratio-health land row matches landTarget.current (front-face count, not 36 via the MDFC land back)', () => {
+    const result = optimizeDeck({ format: 'brawl', text: TAM_FIXTURE }) as {
+      landTarget: { current: number };
+      health: Array<{ category: string; current: number }>;
+    };
+    const landRow = result.health.find((h) => h.category === 'land');
+    expect(landRow?.current).toBe(result.landTarget.current);
+    expect(landRow?.current).toBe(35);
   });
 
   it('a 60-card Standard list keeps the same after-list size', () => {

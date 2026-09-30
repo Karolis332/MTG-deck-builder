@@ -599,6 +599,18 @@ export function optimizeDeck(parsed: Record<string, unknown>): Record<string, un
   const locks = readLocks(parsed);
   const { cuts, lockedFromCuts } = finishCuts(rankCuts(d.cards, ctx, MAX_CUTS), shape, locks);
   const lands = landReport(shape, d.cards, d.avgCmc);
+  // computeRatioHealth's 'land' category comes from classifyCard's isLand,
+  // which tests the WHOLE type_line ("Sorcery // Land" matches) — the
+  // ratio-health land row counted MDFC land backs as lands (36) while
+  // landReport.current is front-face only (35, since 6d843af). Re-derive the
+  // land row from the same front-face count so both numbers agree.
+  const health: RatioHealth[] = d.health.map((h) => {
+    if (h.category !== 'land' || h.current === lands.current) return h;
+    const current = lands.current;
+    const status: RatioHealth['status'] = current < h.target.min ? 'low' : current > h.target.max ? 'high' : 'ok';
+    const color = status === 'low' ? 'text-red-400' : status === 'high' ? 'text-yellow-400' : 'text-green-400';
+    return { ...h, current, status, color };
+  });
   const adds = collectAdds({ shape, deckColors: d.deckColors, owned: readOwnedNames(parsed), metaRanks: d.metaRanks, findCard, lands });
   const cutReasonByName = new Map(cuts.map((c) => [c.name, c.reason]));
   const swaps = pairSwaps(cuts, adds, { landsNeeded: lands.effective < lands.recommended })
@@ -628,11 +640,11 @@ export function optimizeDeck(parsed: Record<string, unknown>): Record<string, un
       avgCmc: Math.round(d.avgCmc * 100) / 100,
       colors: d.deckColors,
     },
-    score: scoreDeck(computeOverallScore(d.health), legality, Math.round(lands.effective - lands.recommended)),
-    health: d.health,
+    score: scoreDeck(computeOverallScore(health), legality, Math.round(lands.effective - lands.recommended)),
+    health,
     curve: computeManaCurve(shape.main.flatMap((r) =>
       Array.from({ length: r.quantity }, () => ({ cmc: r.card.cmc ?? 0, typeLine: r.card.type_line || '' })))),
-    notes: generateSuggestions(d.health, d.avgCmc, format),
+    notes: generateSuggestions(health, d.avgCmc, format),
     mana,
     landTarget: lands,
     legality,
