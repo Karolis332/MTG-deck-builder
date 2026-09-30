@@ -50,6 +50,13 @@ export function isFetchLandRelevant(oracleText: string, deckColors: string[]): b
 
 // ── Types ────────────────────────────────────────────────────────────────────
 
+/**
+ * One MDFC spell//land budget for the whole deck (A-D12) — the builder's
+ * nonland picks and the land base share it. EDHREC consensus decks run 2–3;
+ * two independent caps of 4 shipped up to eight tapped-land equivalents.
+ */
+export const MAX_MDFC_LANDS = 3;
+
 export interface LandScore {
   card: DbCard;
   score: number;
@@ -372,6 +379,11 @@ export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
     const frontIsLand = frontType.includes('Land');
     const isModalDfc = land.layout === 'modal_dfc';
     if (!frontIsLand && !isModalDfc) continue;
+    // Modal DFC spell-lands (Valakut Awakening, Khalni Ambush, Bala Ged
+    // Recovery, Talrand's cycle) are a free spell stapled to a tapped land —
+    // priced as tapped-land equivalents at best (A-D12); only a land face
+    // that pays life to enter untapped (Agadeem's Awakening) is untapped.
+    const isMdfcSpellLand = isModalDfc && !frontIsLand;
 
     // ── Mono-colour "beats a basic" filter ─────────────────────────
     // A basic taps for the deck's one colour, untapped, no downside. A
@@ -532,7 +544,9 @@ export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
     const depositsTapped = /onto the battlefield tapped/.test(tapText);
     const untappedCredit = isFetch
       ? (!ownEntersTapped && !depositsTapped ? 1 : 0)
-      : untappedCreditFor(parseTappedCondition(land.oracle_text), colors, tribalTypes, format, land.enters_untapped);
+      : isMdfcSpellLand
+        ? (parseTappedCondition(land.oracle_text).kind === 'payLife' ? 1 : 0)
+        : untappedCreditFor(parseTappedCondition(land.oracle_text), colors, tribalTypes, format, land.enters_untapped);
     const entersUntapped = untappedCredit >= 1;
     // No land that isn't reliably untapped is tier 1-2 (the classifier's own
     // rule, re-applied to the deck-specific verdict — Starting Town is a
@@ -662,11 +676,8 @@ export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
     // other permanent it targets (Mech Hangar: "Target Vehicle becomes an
     // artifact creature", Ba Sing Se: "Target land you control becomes...").
     const isManland = /\bthis land becomes an? [\s\S]*?\bcreature\b/i.test(tapText);
-    // Modal DFC spell-lands (Valakut Awakening, Khalni Ambush, Bala Ged
-    // Recovery, Talrand's cycle) are a free spell stapled to a tapped land —
-    // already priced as "tapped-land equivalent at best" by the MDFC bonus
-    // below, not held to the always-tapped colourless bar again here.
-    const isMdfcSpellLand = isModalDfc && !frontIsLand;
+    // MDFC spell-lands are already priced as tapped-land equivalents (above),
+    // not held to the always-tapped colourless bar again here.
     // Nykthos: devotion scales with the deck, not a fixed weak rate.
     const nykthosDevotion = /devotion/.test(tapText);
     // Ancient Tomb: unconditional double colorless is real fast mana.
@@ -784,6 +795,8 @@ interface BuildOptions {
    * next-best land instead of being silently lost to Step 7 basics.
    */
   excludeNames?: Set<string>;
+  /** MDFC spell//land cards already picked as spells — they spend the shared MAX_MDFC_LANDS budget (A-D12) */
+  mdfcPicked?: number;
 }
 
 /**
@@ -844,16 +857,12 @@ export function buildOptimalLandBase(options: BuildOptions): LandBaseResult {
     * (0.5 + 0.5 * intensity(c) * colors.length);
   const neediestBasic = () => [...basicColors].sort((a, b) => need(b) - need(a) || intensity(b) - intensity(a))[0];
 
-  // MDFC spell//land cards are capped — EDHREC consensus decks run 2-4 of
-  // them, not 15+, because they are functionally tapped lands stapled to
-  // mediocre spells.
-  const MAX_MDFC_LANDS = 4;
   const selectedLands: Array<{ card: DbCard; quantity: number }> = [];
   const selectedNames = new Set<string>();
   const basicDistribution: Record<string, number> = {};
   let nonBasicCount = 0;
   let basicCount = 0;
-  let mdfcCount = 0;
+  let mdfcCount = options.mdfcPicked ?? 0; // shared deck-wide budget (A-D12)
   const isMdfcSpell = (s: LandScore) => !(s.card.type_line || '').split('//')[0].includes('Land');
   // Mono-colour colourless cap (A-D8, #9): a basic makes the colour for free,
   // so at most two lands that don't — manlands and Cavern included (they

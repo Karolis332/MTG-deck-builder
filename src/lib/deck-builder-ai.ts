@@ -10,7 +10,7 @@ import { getTemplate, getScaledCurve, mergeWithCommanderProfile, getRecommendedL
 import type { Archetype, ArchetypeTemplate } from './deck-templates';
 import { analyzeCommander, mergeProfiles, detectTribalPayoff } from './commander-synergy';
 import type { CommanderSynergyProfile } from './commander-synergy';
-import { buildOptimalLandBase, isFetchLandRelevant, ownedNameJoin } from './land-intelligence';
+import { buildOptimalLandBase, isFetchLandRelevant, ownedNameJoin, MAX_MDFC_LANDS } from './land-intelligence';
 import { buildOwnedQtyMap, ownedNamesSubqueryInline, normalizedNameExpr, stripArenaPrefix } from './collection-ownership';
 import type { OwnershipFilter } from './collection-ownership';
 import { getCFRecommendations, resolveCFToDbCards } from './cf-api-client';
@@ -69,9 +69,6 @@ export function getScoringWeights(): Record<string, number> | null {
   return cachedScoringWeights;
 }
 
-// MDFC spell//land budget — shared intuition with land-intelligence's
-// MAX_MDFC_LANDS: a deck wants at most ~4 modal land-back cards total.
-const MAX_MDFC_IN_SPELLS = 4;
 /** A-D1: quality floor = this share of the score of the pool's nonLandTarget-th best pickable nonland. */
 const QUALITY_FLOOR_RATIO = 0.6;
 export function isLandBackDfc(card: DbCard): boolean {
@@ -2550,7 +2547,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
         if (getMaxQty(card) <= 0) return false;
         // Plain lands never belong in spell slots; modal land-backs are budgeted.
         if ((card.type_line || '').split('//')[0].includes('Land')) return false;
-        if (isLandBackDfc(card) && mdfcLandBacksPicked >= MAX_MDFC_IN_SPELLS) return false;
+        if (isLandBackDfc(card) && mdfcLandBacksPicked >= MAX_MDFC_LANDS) return false;
         const cardType = (card.type_line || '').toLowerCase();
         const isSpellType = category === 'spell_cast' && (cardType.includes('instant') || cardType.includes('sorcery'));
         return matchesCat(card) || isSpellType;
@@ -2688,7 +2685,18 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
   // MDFC spell//land cards already in the nonland picks are tapped-land
   // equivalents — every one of them reduces how many dedicated land slots
   // the deck needs, otherwise total land-capable cards balloon to 45-52.
-  const mdfcLandBackCount = picked.filter((p) => isLandBackDfc(p.card)).length;
+  // A-D12: one MDFC budget for the whole deck. Step 4 has no cap of its
+  // own, so the excess land backs (lowest pool score first) leave here and
+  // their slots refill below; the land base gets what is left of the budget.
+  const mdfcPicks = mainSpells().filter((p) => isLandBackDfc(p.card))
+    .sort((a, b) => (poolByName.get(a.card.name)?.score ?? 0) - (poolByName.get(b.card.name)?.score ?? 0));
+  for (const p of mdfcPicks.slice(0, Math.max(0, mdfcPicks.length - MAX_MDFC_LANDS))) {
+    picked.splice(picked.indexOf(p), 1);
+    pickedNames.delete(p.card.name);
+    reasoning.push({ cardName: p.card.name, role: 'mdfc-cap', reason: `over the ${MAX_MDFC_LANDS} MDFC land-back budget` });
+    freedSlots += p.quantity;
+  }
+  const mdfcLandBackCount = Math.min(MAX_MDFC_LANDS, mdfcPicks.length);
   // B-D1: the land count follows the picked deck (ramp and curve), Commander-
   // scale formats only; a "consistent mana" hint still only moves it up.
   let landTarget = targetLands;
@@ -2712,7 +2720,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
   }
   // Floor at 30 for 100-card formats, but never above the format's own target
   // (standardbrawl runs 24 lands in a 60-card deck — the flat 30 floor shipped 65-card decks).
-  const targetLandsEffective = Math.max(Math.min(30, landTarget), landTarget - Math.min(6, mdfcLandBackCount));
+  const targetLandsEffective = Math.max(Math.min(30, landTarget), landTarget - mdfcLandBackCount);
 
   const basicLandMap: Record<string, string> = {
     W: 'Plains', U: 'Island', B: 'Swamp', R: 'Mountain', G: 'Forest',
@@ -2807,6 +2815,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
       userId: options.userId,
       collectionSource: options.collectionSource,
       excludeNames,
+      mdfcPicked: mdfcLandBackCount,
     });
 
     // Add non-basic lands. A--stripped: a land already picked (e.g. as an
@@ -2866,10 +2875,10 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
       if (pickedNames.has(land.name)) continue;
 
       // Front face must be a playable Land — transform/meld backs don't count.
-      // Modal DFC spell//land cards are allowed but capped at 4.
+      // Modal DFC spell//land cards share the deck-wide MAX_MDFC_LANDS budget.
       const frontIsLand = (land.type_line || '').split('//')[0].includes('Land');
       if (!frontIsLand) {
-        if (land.layout !== 'modal_dfc' || fallbackMdfcCount >= 4) continue;
+        if (land.layout !== 'modal_dfc' || mdfcLandBackCount + fallbackMdfcCount >= MAX_MDFC_LANDS) continue;
         fallbackMdfcCount++;
       }
 
