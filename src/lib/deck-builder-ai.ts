@@ -3435,11 +3435,15 @@ export function applyDeckBudget(
       const deficitColor = Object.keys(pips)
         .filter((c) => pips[c] > 0)
         .sort((a, b) => (pips[b] - sources[b]) - (pips[a] - sources[a]))[0];
-      // Best unpicked real land for the deficit colour that fits the budget
-      // (P2-G #11: 17 of Niv's lands became basics); the basic is the floor.
+      // Best unpicked real land (front face) for the deficit colour, priced
+      // within what is left OR the budget's per-slot average — the loop cuts
+      // the priciest card first, so `budgetLeft` is negative until the very
+      // end and every fetch/shock went to a basic (P2-G #11: 17 of Niv's).
+      const perSlot = maxDeckPrice / Math.max(1, cards.filter((c) => c.board === 'main').reduce((s, c) => s + c.quantity, 0));
       const landIn = (opts.landPool ?? [])
-        .filter((l) => !inDeck.has(l.card.name) && l.clearsBar && l.producesColors.includes(deficitColor)
-          && effPrice(l.card) <= budgetLeft && effPrice(l.card) < targetPrice)
+        .filter((l) => !inDeck.has(l.card.name) && l.clearsBar && /\bLand\b/.test((l.card.type_line || '').split('//')[0])
+          && l.producesColors.includes(deficitColor)
+          && effPrice(l.card) < targetPrice && effPrice(l.card) <= Math.max(budgetLeft, perSlot))
         .sort((a, b) => b.score - a.score)[0];
       if (landIn) {
         cards[cards.indexOf(target)] = { card: landIn.card, quantity: target.quantity, board: 'main' };

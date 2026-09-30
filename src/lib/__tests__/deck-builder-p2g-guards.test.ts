@@ -65,6 +65,22 @@ describe('#11 budget swaps never seat bulk', () => {
     expect(cards.find((c) => c.card.name === 'Mountain')?.quantity).toBe(5);
     expect(cards.find((c) => c.card.name === 'Cheap Red Dual')?.quantity).toBe(1);
   });
+  it('land: far over budget, a land at/under the per-slot average still beats the basic; an MDFC spell face never seats as a land', () => {
+    // Niv $150: 17 fetches/shocks became basics because budgetLeft was negative until the very end.
+    const pricy = (n: string) => makeCard({ name: n, price_usd: '300.00', type_line: 'Land', oracle_text: '{T}: Add {R} or {G}.' });
+    const mountain = makeCard({ name: 'Mountain', price_usd: '0.10', type_line: 'Basic Land — Mountain', oracle_text: '({T}: Add {R}.)' });
+    const redSpell = makeCard({ name: 'Red Spell', mana_cost: '{R}{R}', colors: '["R"]', type_line: 'Creature' });
+    const picked = [main(pricy('Dual A')), main(pricy('Dual B')), main(mountain, 5), main(redSpell)];
+    const painLand = makeCard({ name: 'Karplusan Forest', price_usd: '0.40', type_line: 'Land', oracle_text: '{T}: Add {C}. {T}: Add {R} or {G}. Deals 1 damage to you.' });
+    const mdfc = makeCard({ name: 'Spell // Land Face', price_usd: '0.30', type_line: 'Sorcery // Land', oracle_text: 'Do a thing. // {T}: Add {R}.' });
+    const landPool = [
+      { card: mdfc, score: 95, producesColors: ['R'], clearsBar: true },
+      { card: painLand, score: 80, producesColors: ['R', 'G'], clearsBar: true },
+    ];
+    // budget 8 over 8 cards → per-slot $1: the pain land fits, the MDFC is skipped, basics only after the pool runs dry
+    const { replacedForBudget } = applyDeckBudget(picked, [], 8, new Map(), false, undefined, { landPool });
+    expect(replacedForBudget.map((s) => s.in)).toEqual(['Karplusan Forest', 'Mountain']);
+  });
 });
 
 describe('#7 protection floor holds through every displacement', () => {
