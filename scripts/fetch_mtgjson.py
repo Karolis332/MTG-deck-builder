@@ -4,8 +4,9 @@ Fetch MTGJSON AtomicCards data and enrich the local SQLite database
 with creature subtypes and Arena IDs.
 
 Reads from: https://mtgjson.com/api/v5/AtomicCards.json.gz
-Writes to:  the live app DB (%APPDATA%/the-black-grimoire/data) when present,
-            else data/mtg-deck-builder.db (cards.subtypes, cards.arena_id)
+Writes to:  --db, else $MTG_DB_DIR/mtg-deck-builder.db, else the live app DB
+            (%APPDATA%/the-black-grimoire/data) when present, else
+            data/mtg-deck-builder.db (cards.subtypes, cards.arena_id)
 
 Usage:
   pip install -r requirements.txt
@@ -35,7 +36,10 @@ DATA_DIR = PROJECT_ROOT / "data"
 
 
 def _default_db() -> Path:
-    """Prefer the production Electron DB (APPDATA) over the repo-local copy, like classify_lands.py."""
+    """Same precedence as src/lib/db.ts: MTG_DB_DIR > APPDATA (Electron DB) > repo data/."""
+    db_dir = os.environ.get("MTG_DB_DIR")
+    if db_dir:
+        return Path(db_dir) / "mtg-deck-builder.db"
     appdata = os.environ.get("APPDATA")
     if appdata:
         electron_db = Path(appdata) / "the-black-grimoire" / "data" / "mtg-deck-builder.db"

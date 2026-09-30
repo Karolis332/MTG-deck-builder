@@ -164,8 +164,9 @@ export function isNeverColoredProducer(card: ManaSourceCard, ctx?: ManaSourceCon
   // not a repeatable {T} source.
   if (/when this (?:land|card) is turned face up[^.]*add/.test(t)) return true;
   // "Any type a Gate could produce" (Plaza of Harmony) is Gate-count
-  // gated, not general fixing.
-  if (/any type (?:of mana )?that a .*? could produce/.test(t)) return true;
+  // gated, not general fixing. Only the Gate wording: "a land you control
+  // could produce" (Reflecting Pool) is a real source in any real mana base.
+  if (/any (?:type|color) (?:of mana )?that a gate you control could produce/.test(t)) return true;
   return false;
 }
 
@@ -173,6 +174,27 @@ export function isConditionalColoredProducer(card: ManaSourceCard, ctx?: ManaSou
   const t = (card.oracle_text || '').toLowerCase();
   if (!t) return false;
   if (isNeverColoredProducer(card, ctx)) return true;
+
+  if (ctx) {
+    // Opt-in (ctx) like the rest: colour that costs a permanent (Lazotep
+    // Quarry "{T}, Sacrifice a creature: Add one mana of any color",
+    // Phyrexian Tower), a basic-land search that costs mana (Demolition
+    // Field, Myriad Landscape, Thawing Glaciers — not the free "{T},
+    // Sacrifice this land:" fetches), or colour read off the graveyard (The
+    // Grey Havens "any color among legendary creature cards in your
+    // graveyard") is not a turn-after-turn source.
+    if (/any color among/.test(t)) return true;
+    for (const line of t.split('\n')) {
+      const colon = line.indexOf(':');
+      if (colon === -1) continue;
+      const costPart = line.slice(0, colon);
+      const effect = line.slice(colon + 1);
+      const makesMana = /add .*(?:any (?:one )?color|\{[wubrg]\})/.test(effect);
+      const fetches = /search your library for .*onto the battlefield/.test(effect);
+      if (makesMana && /sacrifice (?:a|an|another|two|x) |tap an untapped/.test(costPart)) return true;
+      if (fetches && /\{(?!t\})[^}]*\}/.test(costPart)) return true;
+    }
+  }
 
   const makesColor = /add (?:one|x|five|\d+) mana of any (?:one )?color|add an amount of .* mana|add .*\{[wubrg]\}|any combination of colors/.test(t);
   if (!makesColor) return false;

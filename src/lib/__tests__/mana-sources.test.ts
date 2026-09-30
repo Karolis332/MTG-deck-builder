@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import {
-  isConditionalColoredProducer, chosenTypeLandColors, fetchLandColors, realManaSources,
+  isConditionalColoredProducer, chosenTypeLandColors, fetchLandColors, realManaSources, isNeverColoredProducer,
   countColorSources, type ManaSourceCard, type ManaSourceContext,
 } from '../mana-sources';
 
@@ -130,5 +130,59 @@ describe('honest colour count (ctx opt-in)', () => {
     expect(realManaSources(gemstone).reliable).toBe(true); // not caught without ctx — today's (overcounting) behaviour
     expect(countColorSources([{ card: passage, quantity: 1 }, { card: wilds, quantity: 1 }, { card: gemstone, quantity: 1 }]))
       .toEqual({ W: 3, U: 3, B: 3, R: 3, G: 3 });
+  });
+});
+
+// Unit L (2026-09-30, audit B-D2): "any type that a land you control could
+// produce" (Reflecting Pool) was read as never-coloured alongside the Gate-only
+// wording (Plaza of Harmony). Only the Gate-count gate is a trap.
+describe('isNeverColoredProducer — Reflecting Pool vs Plaza of Harmony', () => {
+  const ctx: ManaSourceContext = { deckColors: ['W', 'U'], basicColors: ['W', 'U'], typedLandColors: ['W', 'U'] };
+  it('Reflecting Pool is a real source with ctx', () => {
+    const pool = land('{T}: Add one mana of any type that a land you control could produce.');
+    expect(isNeverColoredProducer(pool, ctx)).toBe(false);
+    expect(isConditionalColoredProducer(pool, ctx)).toBe(false);
+  });
+  it('Plaza of Harmony (Gate-only) stays never-coloured with ctx', () => {
+    const plaza = land('When this land enters, if you control two or more Gates, you gain 3 life.\n{T}: Add {C}.\n{T}: Add one mana of any type that a Gate you control could produce.');
+    expect(isNeverColoredProducer(plaza, ctx)).toBe(true);
+  });
+});
+
+// Unit L: colour that costs a permanent, a costed basic-land search, or colour
+// read off the graveyard is conditional — with ctx only (Deck Score's default
+// path is pinned by the "without ctx" test above).
+describe('isConditionalColoredProducer — sacrifice-cost, costed fetch, graveyard-gated colour (ctx only)', () => {
+  const ctx: ManaSourceContext = { deckColors: ['W', 'U', 'B'], basicColors: ['W', 'U', 'B'], typedLandColors: ['W', 'U', 'B'] };
+  const quarry = land('{T}: Add {C}.\n{T}, Sacrifice a creature: Add one mana of any color.');
+  const field = land('{T}: Add {C}.\n{2}, {T}, Sacrifice this land: Destroy target nonbasic land an opponent controls. You may search your library for a basic land card, put it onto the battlefield, then shuffle.');
+  const havens = land('{T}: Add {C}.\n{T}: Add one mana of any color among legendary creature cards in your graveyard.');
+  const misty = land('{T}, Pay 1 life, Sacrifice this land: Search your library for a Forest or Island card, put it onto the battlefield, then shuffle.');
+  it('Lazotep Quarry, Demolition Field, The Grey Havens are conditional with ctx', () => {
+    expect(isConditionalColoredProducer(quarry, ctx)).toBe(true);
+    expect(isConditionalColoredProducer(field, ctx)).toBe(true);
+    expect(isConditionalColoredProducer(havens, ctx)).toBe(true);
+  });
+  it('a free "{T}, Sacrifice this land" fetch stays unconditional', () => {
+    expect(isConditionalColoredProducer(misty, ctx)).toBe(false);
+  });
+  it('without ctx nothing changes', () => {
+    expect(isConditionalColoredProducer(quarry)).toBe(false);
+    expect(isConditionalColoredProducer(field)).toBe(false);
+    expect(isConditionalColoredProducer(havens)).toBe(false);
+  });
+});
+
+describe('isConditionalColoredProducer / isNeverColoredProducer — creature-tap colour and Gond Gate (ctx only)', () => {
+  const ctx: ManaSourceContext = { deckColors: ['W', 'U', 'B'], basicColors: ['W', 'U', 'B'], typedLandColors: ['W', 'U', 'B'] };
+  it("Survivors' Encampment (tap an untapped creature) is conditional with ctx, unchanged without", () => {
+    const camp = land('{T}: Add {C}.\n{T}, Tap an untapped creature you control: Add one mana of any color.');
+    expect(isConditionalColoredProducer(camp, ctx)).toBe(true);
+    expect(isConditionalColoredProducer(camp)).toBe(false);
+  });
+  it('Gond Gate ("any color that a Gate you control could produce") is never-coloured with ctx', () => {
+    const gate = land('Gates you control enter untapped.\n{T}: Add {C}.\n{T}: Add one mana of any color that a Gate you control could produce.');
+    expect(isNeverColoredProducer(gate, ctx)).toBe(true);
+    expect(isNeverColoredProducer(gate)).toBe(false);
   });
 });

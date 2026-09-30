@@ -79,7 +79,9 @@ def test_true_tribal_land_unaffected():
         None,
     )
     assert result["land_category"] == "tribal"
-    assert result["tier"] == 2
+    # "It enters tapped." is unconditional — tapped, and no tapped land is tier 2.
+    assert result["enters_untapped"] == 0
+    assert result["tier"] == 3
 
 
 # U9a finding 5 — "As this land enters, you may pay 3 life. If you don't, it
@@ -114,3 +116,146 @@ def test_agadeems_awakening_pay_life_land_face_is_shock_not_tapped():
     assert result["land_category"] == "shock"
     assert result["tier"] == 1
     assert result["enters_untapped"] == 1
+
+
+# ── Unit L (2026-09-30, audit B-D2 / A-D2 / A-D7 / A-D8) ────────────────────
+# "Untapped only when true": the branch a land falls into must not leave the
+# default enters_untapped=True on a land whose oracle text says it enters
+# tapped unconditionally, and reveal-a-type lands must carry their condition.
+
+def test_grand_coliseum_unconditional_tapped_pain_is_tapped_tier3():
+    result = classify_land(
+        "Grand Coliseum", "Land",
+        "This land enters tapped.\n{T}: Add {C}.\n{T}: Add one mana of any color. This land deals 1 damage to you.",
+        '["B","C","G","R","U","W"]',
+    )
+    assert result["enters_untapped"] == 0
+    assert result["tier"] == 3
+
+
+def test_murmuring_bosk_reveal_treefolk_condition_recorded():
+    result = classify_land(
+        "Murmuring Bosk", "Land — Forest",
+        "({T}: Add {G}.)\nAs this land enters, you may reveal a Treefolk card from your hand. If you don't, this land enters tapped.\n{T}: Add {W} or {B}. This land deals 1 damage to you.",
+        '["B","G","W"]',
+    )
+    assert result["enters_untapped_condition"] == "reveal card of type"
+
+
+def test_temple_of_the_dragon_queen_reveal_condition_recorded():
+    result = classify_land(
+        "Temple of the Dragon Queen", "Land",
+        "As this land enters, you may reveal a Dragon card from your hand. This land enters tapped unless you revealed a Dragon card this way or you control a Dragon.\nAs this land enters, choose a color.\n{T}: Add one mana of the chosen color.",
+        '["B","G","R","U","W"]',
+    )
+    assert result["enters_untapped_condition"] == "reveal card of type"
+
+
+def test_mana_confluence_is_pain_tier2_not_utility():
+    result = classify_land("Mana Confluence", "Land", "{T}, Pay 1 life: Add one mana of any color.", '["B","G","R","U","W"]')
+    assert result["land_category"] == "pain"
+    assert result["tier"] == 2
+    assert result["enters_untapped"] == 1
+
+
+def test_tapped_tri_fetch_riveteers_overlook_tier3():
+    result = classify_land(
+        "Riveteers Overlook", "Land",
+        "When this land enters, sacrifice it. When you do, search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle and you gain 1 life.",
+        None,
+    )
+    assert result["land_category"] == "fetch"
+    assert result["tier"] == 3
+
+
+def test_landscape_deposits_tapped_tier3():
+    result = classify_land(
+        "Bountiful Landscape", "Land",
+        "{T}: Add {C}.\n{T}, Sacrifice this land: Search your library for a basic Forest, Island, or Mountain card, put it onto the battlefield tapped, then shuffle.\nCycling {G}{U}{R}",
+        '["C"]',
+    )
+    assert result["land_category"] == "fetch"
+    assert result["tier"] == 3
+
+
+def test_untapped_fetch_stays_tier1():
+    result = classify_land(
+        "Misty Rainforest", "Land",
+        "{T}, Pay 1 life, Sacrifice this land: Search your library for a Forest or Island card, put it onto the battlefield, then shuffle.",
+        None,
+    )
+    assert result["land_category"] == "fetch"
+    assert result["tier"] == 1
+
+
+def test_verge_is_tier2_verge_category():
+    result = classify_land(
+        "Bleachbone Verge", "Land",
+        "{T}: Add {B}.\n{T}: Add {W}. Activate only if you control a Plains or a Swamp.",
+        '["B","W"]',
+    )
+    assert result["land_category"] == "verge"
+    assert result["tier"] == 2
+    assert result["enters_untapped"] == 1
+
+
+def test_channel_land_is_tier2():
+    result = classify_land(
+        "Otawara, Soaring City", "Legendary Land",
+        "{T}: Add {U}.\nChannel — {3}{U}, Discard this card: Return target artifact, creature, enchantment, or planeswalker to its owner's hand. This ability costs {1} less to activate for each legendary creature you control.",
+        '["U"]',
+    )
+    assert result["land_category"] == "channel"
+    assert result["tier"] == 2
+    assert "channel" in result["synergy_tags"]
+
+
+def test_artifact_land_is_tier2():
+    result = classify_land("Seat of the Synod", "Artifact Land", "{T}: Add {U}.", '["U"]')
+    assert result["land_category"] == "artifact"
+    assert result["tier"] == 2
+
+
+def test_bond_land_is_tier2_bond_with_condition():
+    result = classify_land(
+        "Vault of Champions", "Land",
+        "This land enters tapped unless you have two or more opponents.\n{T}: Add {W} or {B}.",
+        '["B","W"]',
+    )
+    assert result["land_category"] == "bond"
+    assert result["tier"] == 2
+    assert result["enters_untapped"] == 1
+    assert result["enters_untapped_condition"] == "two or more opponents"
+
+
+def test_inventors_fair_tagged_artifact_and_high_market_sac_outlet():
+    fair = classify_land(
+        "Inventors' Fair", "Legendary Land",
+        "At the beginning of your upkeep, if you control three or more artifacts, you gain 1 life.\n{T}: Add {C}.\n{4}, {T}, Sacrifice Inventors' Fair: Search your library for an artifact card, reveal it, put it into your hand, then shuffle. Activate only if you control three or more artifacts.",
+        '["C"]',
+    )
+    assert "artifact" in fair["synergy_tags"]
+    market = classify_land("High Market", "Land", "{T}: Add {C}.\n{T}, Sacrifice a creature: You gain 1 life.", '["C"]')
+    assert "sac_outlet" in market["synergy_tags"]
+    bastion = classify_land("Karn's Bastion", "Land", "{T}: Add {C}.\n{4}, {T}: Proliferate.", '["C"]')
+    assert "proliferate" in bastion["synergy_tags"]
+
+
+def test_removal_tag_ignores_exile_of_own_permanents():
+    farm = classify_land(
+        "Northampton Farm", "Land",
+        "{T}: Add {C}.\n{1}, {T}: Exile target creature you own.\n{2}, {T}, Sacrifice this land: Return a creature card exiled with this land to the battlefield under your control.",
+        '["C"]',
+    )
+    assert "removal" not in farm["synergy_tags"]
+    real = classify_land("Bojuka Bog", "Land", "This land enters tapped.\nWhen this land enters, exile target player's graveyard.\n{T}: Add {B}.", '["B"]')
+    assert "removal" in real["synergy_tags"]
+
+
+def test_costly_rainbows_are_tier4():
+    citadel = classify_land("Tarnished Citadel", "Land", "{T}: Add {C}.\n{T}: Add one mana of any color. This land deals 3 damage to you.", '["B","C","G","R","U","W"]')
+    assert citadel["tier"] == 4
+    vale = classify_land("Lotus Vale", "Land", "If this land would enter, sacrifice two untapped lands instead. If you do, put this land onto the battlefield. If you don't, put it into its owner's graveyard instead.\n{T}: Add three mana of any one color.", '["B","G","R","U","W"]')
+    assert vale["tier"] == 4
+    rainbow = classify_land("Rainbow Vale", "Land", "{T}: Add one mana of any color. At the beginning of the end step, target opponent gains control of this land.", '["B","G","R","U","W"]')
+    assert rainbow["tier"] == 4
