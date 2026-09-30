@@ -101,6 +101,7 @@
 1 Caves of Chaos Adventurer
 1 Chain Reaction
 1 Chainer, Dementia Master
+1 Chandra, Awakened Inferno
 1 Chandra, Spark Hunter
 1 Channeler Initiate
 1 Charcoal Diamond

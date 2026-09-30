@@ -149,6 +149,7 @@
 1 Caves of Koilos
 1 Chain Reaction
 1 Chainer, Dementia Master
+1 Chandra, Awakened Inferno
 1 Chandra, Fire Artisan
 1 Chandra, Spark Hunter
 1 Chandra, Torch of Defiance

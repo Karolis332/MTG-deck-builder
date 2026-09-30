@@ -262,3 +262,6 @@ Appended by `npx tsx scripts/paper-sync.ts`. Full diffs: `git log -p decks/paper
 
 ## 2026-09-28
 - **Collection** −Well of Lost Dreams (operator does not have it; registered 09-09 from the Witherbloom precon decklist, never counted by hand) — 1266 owned, 762 open
+
+## 2026-09-30
+- **Collection** +Chandra, Awakened Inferno (operator-listed) — 1267 owned, 763 open
