@@ -10,7 +10,7 @@
 
 import { getDb } from '@/lib/db';
 import { getLegalityKey } from '@/lib/constants';
-import { isRestrictedProducer, isConditionalColoredProducer, fetchLandColors, implicitLandColors, chosenTypeLandColors } from '@/lib/mana-sources';
+import { isRestrictedProducer, isConditionalColoredProducer, isNeverColoredProducer, fetchLandColors, implicitLandColors, chosenTypeLandColors, buildManaSourceContext, type ManaSourceContext } from '@/lib/mana-sources';
 import { ownedNamesSubqueryInline, normalizedNameExpr, stripArenaPrefix } from '@/lib/collection-ownership';
 import type { DbCard } from '@/lib/types';
 
@@ -122,6 +122,14 @@ interface ScoreOptions {
 export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
   const { colors, format, tribalTypes, commanderName, manaDemand, collectionOnly, userId } = options;
   const db = getDb();
+
+  // Honest colour count: chosen-type lands credit one colour (the deck's
+  // heaviest, if pip demand is known) instead of five, and generic fetchers
+  // credit only the deck's own colours instead of unconditional WUBRG.
+  const colorPriority = manaDemand
+    ? [...colors].sort((a, b) => (manaDemand.colorIntensity[b] || 0) - (manaDemand.colorIntensity[a] || 0))
+    : undefined;
+  const manaCtx: ManaSourceContext = buildManaSourceContext(colors, undefined, colorPriority);
 
   // Build legality filter
   const legalityKey = getLegalityKey(format);
@@ -311,17 +319,33 @@ export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
     }
     // Fetch / chosen-type lands have no produced_mana but ARE fixing for the
     // colors they retrieve/become. Credit them; fetches don't enter tapped.
-    const fetched = fetchLandColors(land);
-    const implicit = implicitLandColors(land);
+    const fetched = fetchLandColors(land, manaCtx);
+    const implicit = implicitLandColors(land, manaCtx);
     const isFetch = fetched !== null;
-    if (implicit && producesColors.length === 0) {
+    // Fetch/chosen-type colours OVERRIDE land_classifications and Scryfall
+    // produced_mana, not just fill a gap — classify_lands.py still lists
+    // these as flat WUBRG (that's the honest-count bug itself), so a
+    // fallback-when-empty rule would never see the ctx-scoped colours.
+    if (implicit) {
       producesColors = implicit;
+    }
+    // Honest count: gated-behind-a-counter / granted-to-others / one-shot /
+    // Gate-any-type mana is NOT a discount case (that's the 0.4x
+    // `conditional` scale below, for a Verge or a costed activation that
+    // sometimes pays off) — it's never a source at all.
+    if (isNeverColoredProducer(land, manaCtx)) {
+      producesColors = producesColors.filter((c) => c === 'C');
     }
 
     let tribalTypesArr: string[] = [];
     try { tribalTypesArr = JSON.parse(land.tribal_types || '[]'); } catch { /* empty */ }
 
-    const tier = land.tier || 3;
+    // A land that's colourless in practice (gated behind a counter, granted
+    // to others, one-shot, Gate-any-type) is a trap regardless of what
+    // classify_lands.py tiered it at — it doesn't deserve tier-1 treatment
+    // just because Scryfall's produced_mana said WUBRG.
+    let tier = land.tier || 3;
+    if (isNeverColoredProducer(land, manaCtx) && tier < 4) tier = 4;
     const tapText = (land.oracle_text || '').toLowerCase();
     // Some fetches DO enter tapped (Thawing Glaciers, Krosan Verge) or fetch a
     // tapped basic (Evolving Wilds) — don't blanket-credit fetches as untapped.
@@ -361,7 +385,7 @@ export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
     // penalized either (colors.length < 2).
     const matchCountBeforeScale = producesColors.filter(c => colors.includes(c)).length;
     const fetchOffColor = isFetch && !!fetched && fetched.length < 5 && colors.length >= 2 && matchCountBeforeScale === 1;
-    const conditional = (!isFetch && isConditionalColoredProducer(land)) || fetchOffColor;
+    const conditional = (!isFetch && isConditionalColoredProducer(land, manaCtx)) || fetchOffColor;
     const colorBonusScale = restricted ? 0.25 : conditional ? 0.4 : 1;
     if (restricted) reasons.push('restricted producer');
     if (fetchOffColor) reasons.push('off-color fetch (thinning only)');
@@ -369,7 +393,10 @@ export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
 
     const matchingColors = producesColors.filter(c => colors.includes(c));
     if (matchingColors.length > 0) {
-      score += Math.round(30 * matchingColors.length * colorBonusScale);
+      // Cap breadth at 3: a 5-colour land is worth a triome, not 2.5 duals —
+      // tier and untapped-ness decide the order among real fixers instead
+      // of colour count alone dominating.
+      score += Math.round(30 * Math.min(matchingColors.length, 3) * colorBonusScale);
       reasons.push(`produces ${matchingColors.join('')}`);
 
       // Bonus for matching heaviest color

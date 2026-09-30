@@ -8,7 +8,7 @@
  * pass in autoBuildDeck) so these defects can never ship.
  */
 
-import { realManaSources, countColorSources, countPipDemand } from './mana-sources';
+import { realManaSources, countColorSources, countPipDemand, buildManaSourceContext } from './mana-sources';
 import type { ManaSourceCard } from './mana-sources';
 import { isDrawEngine } from './card-classifier';
 
@@ -89,9 +89,12 @@ export function auditDeck(cards: AuditCard[], opts: AuditOptions): DeckHealth {
   const totalLandSlots = realLands + landBackMdfc;
   const tappedRatio = totalLandSlots > 0 ? tappedLands / totalLandSlots : 0;
 
-  // Mana sources include lands + mana rocks/dorks (reliable producers only)
-  const sourceCards = main.filter((c) => realManaSources(c.card).reliable);
-  const sourcesByColor = countColorSources(sourceCards);
+  // Honest colour count from the real, finished decklist — chosen-type
+  // lands and generic fetchers only credit basics the deck actually runs,
+  // and gated/one-shot/granted-to-others mana isn't a source at all.
+  const manaCtx = buildManaSourceContext(opts.colors, lands);
+  const sourceCards = main.filter((c) => realManaSources(c.card, manaCtx).reliable);
+  const sourcesByColor = countColorSources(sourceCards, manaCtx);
   const pipsByColor = countPipDemand(nonLands);
 
   const drawCount = nonLands.filter((c) => DRAW_RE.test(c.card.oracle_text || '')).reduce((s, c) => s + c.quantity, 0);

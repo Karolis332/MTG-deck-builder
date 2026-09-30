@@ -44,17 +44,20 @@ describe('autoBuildDeck collection mode — land base ownership is scoped to the
     const legal = JSON.stringify({ commander: 'legal' });
     const insertCard = d.prepare(`
       INSERT INTO cards (id, oracle_id, name, cmc, mana_cost, type_line, oracle_text, color_identity, colors, legalities,
-                         set_code, set_name, collector_number, rarity, edhrec_rank, layout)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'tst', 'Test Set', ?, 'common', ?, ?)
+                         set_code, set_name, collector_number, rarity, edhrec_rank, layout, produced_mana)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'tst', 'Test Set', ?, 'common', ?, ?, ?)
     `);
     let cn = 0;
     const addCard = (
       name: string, cmc: number, cost: string, type: string, text: string, ci: string[],
-      opts: { layout?: string } = {},
+      opts: { layout?: string; producedMana?: string[] } = {},
     ) => {
       const id = name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
       cn += 1;
-      insertCard.run(id, `o-${id}`, name, cmc, cost, type, text, JSON.stringify(ci), JSON.stringify(ci), legal, String(cn), 1000, opts.layout || 'normal');
+      insertCard.run(
+        id, `o-${id}`, name, cmc, cost, type, text, JSON.stringify(ci), JSON.stringify(ci), legal, String(cn), 1000,
+        opts.layout || 'normal', opts.producedMana ? JSON.stringify(opts.producedMana) : null,
+      );
       return id;
     };
 
@@ -81,7 +84,7 @@ describe('autoBuildDeck collection mode — land base ownership is scoped to the
     }
 
     // ── Lands ─────────────────────────────────────────────────────────────
-    const cmdTowerId = addCard('Command Tower', 0, '', 'Land', COMMANDER_ORACLE.split('\n')[0], []);
+    const cmdTowerId = addCard('Command Tower', 0, '', 'Land', COMMANDER_ORACLE.split('\n')[0], [], { producedMana: ['W', 'U', 'B', 'R', 'G'] });
     classify(cmdTowerId, 'Command Tower', 'any-color', ['W', 'U', 'B', 'R', 'G'], true, 1);
 
     const shockNames: Array<[string, string[]]> = [
@@ -90,33 +93,57 @@ describe('autoBuildDeck collection mode — land base ownership is scoped to the
     ];
     for (const [name, colors] of shockNames) {
       const [a, b] = colors;
-      const id = addCard(name, 0, '', 'Land', `As ${name} enters, you may pay 2 life. If you don't, it enters tapped.\n{T}: Add {${a}} or {${b}}.`, colors);
+      const id = addCard(name, 0, '', 'Land', `As ${name} enters, you may pay 2 life. If you don't, it enters tapped.\n{T}: Add {${a}} or {${b}}.`, colors, { producedMana: colors });
       classify(id, name, 'shock', colors, true, 2);
     }
 
     const checkNames: Array<[string, string[]]> = [['Isolated Chapel', ['W', 'B']], ['Clifftop Retreat', ['R', 'W']]];
     for (const [name, colors] of checkNames) {
       const [a, b] = colors;
-      const id = addCard(name, 0, '', 'Land', `${name} enters tapped unless you control two or more other lands.\n{T}: Add {${a}} or {${b}}.`, colors);
+      const id = addCard(name, 0, '', 'Land', `${name} enters tapped unless you control two or more other lands.\n{T}: Add {${a}} or {${b}}.`, colors, { producedMana: colors });
       classify(id, name, 'check', colors, false, 2);
     }
 
-    const startingTownId = addCard('Starting Town', 0, '', 'Land', 'Starting Town enters tapped.\n{T}: Add one mana of any color.', []);
+    const startingTownId = addCard('Starting Town', 0, '', 'Land', 'Starting Town enters tapped.\n{T}: Add one mana of any color.', [], { producedMana: ['W', 'U', 'B', 'R', 'G'] });
     classify(startingTownId, 'Starting Town', 'tapped', ['W', 'U', 'B', 'R', 'G'], false, 4);
 
-    const savaiId = addCard('Savai Triome', 0, '', 'Land — Mountain Plains Swamp', 'Savai Triome enters tapped.\n({T}: Add {R}, {W}, or {B}.)\nCycling {2}', ['R', 'W', 'B']);
+    const savaiId = addCard('Savai Triome', 0, '', 'Land — Mountain Plains Swamp', 'Savai Triome enters tapped.\n({T}: Add {R}, {W}, or {B}.)\nCycling {2}', ['R', 'W', 'B'], { producedMana: ['R', 'W', 'B'] });
     classify(savaiId, 'Savai Triome', 'triome', ['R', 'W', 'B'], false, 4);
 
-    const gemstoneId = addCard('Gemstone Caverns', 0, '', 'Land', 'As long as Gemstone Caverns doesn\'t have a luck counter on it, it enters tapped.\n{T}: Add one mana of any color.', []);
+    // Real oracle text (2026-09-30 diagnosis §4(d)): the mana ability is
+    // gated behind a counter the land must first acquire, so it isn't a
+    // reliable turn-after-turn source — isConditionalColoredProducer(ctx)
+    // must catch it.
+    const gemstoneId = addCard(
+      'Gemstone Caverns', 0, '', 'Land',
+      "If this card is in your opening hand and you're not the starting player, you may begin the game with Gemstone Caverns on the battlefield with a luck counter on it. If you do, exile a card from your hand.\n{T}: Add {C}. If Gemstone Caverns has a luck counter on it, instead add one mana of any color.",
+      [], { producedMana: ['W', 'U', 'B', 'R', 'G'] },
+    );
     classify(gemstoneId, 'Gemstone Caverns', 'trap', ['W', 'U', 'B', 'R', 'G'], true, 1);
 
-    const plazaId = addCard('Plaza of Harmony', 0, '', 'Land', '{T}: Add {C}.\n{T}: Add one mana of any type that a Gate could produce.', []);
+    // "Any type a Gate could produce" is Gate-count gated, not general fixing.
+    const plazaId = addCard(
+      'Plaza of Harmony', 0, '', 'Land',
+      'When this land enters, if you control two or more Gates, you gain 3 life.\n{T}: Add {C}.\n{T}: Add one mana of any type that a Gate you control could produce.',
+      [], { producedMana: ['W', 'U', 'B', 'R', 'G'] },
+    );
     classify(plazaId, 'Plaza of Harmony', 'trap', ['W', 'U', 'B', 'R', 'G'], true, 1);
 
-    const mirrodinsCoreId = addCard('Mirrodin\'s Core', 0, '', 'Land', 'Mirrodin\'s Core enters tapped with two charge counters on it.\n{T}, Remove a charge counter: Add one mana of any color.\n{T}: Add {C}.', []);
+    // Cost includes removing a counter — gated, not a free {T} source.
+    const mirrodinsCoreId = addCard(
+      'Mirrodin\'s Core', 0, '', 'Land',
+      '{T}: Add {C}.\n{T}: Put a charge counter on this land.\n{T}, Remove a charge counter from this land: Add one mana of any color.',
+      [], { producedMana: ['W', 'U', 'B', 'R', 'G'] },
+    );
     classify(mirrodinsCoreId, 'Mirrodin\'s Core', 'trap', ['W', 'U', 'B', 'R', 'G'], true, 1);
 
-    const monumentId = addCard('Forgotten Monument', 0, '', 'Land', '{T}: Add {C}.\nOther Caves you control have "{T}, Pay 1 life: Add one mana of any color."', []);
+    // The rainbow ability is granted to OTHER permanents (Caves) — this card
+    // itself never taps for it.
+    const monumentId = addCard(
+      'Forgotten Monument', 0, '', 'Land',
+      '{T}: Add {C}.\nOther Caves you control have "{T}, Pay 1 life: Add one mana of any color."',
+      [], { producedMana: ['W', 'U', 'B', 'R', 'G'] },
+    );
     classify(monumentId, 'Forgotten Monument', 'trap', ['W', 'U', 'B', 'R', 'G'], true, 1);
 
     const passageId = addCard('Multiversal Passage', 0, '', 'Land', 'As Multiversal Passage enters, choose a basic land type.\n{T}: Add one mana of the chosen type.', []);
@@ -221,16 +248,59 @@ describe('autoBuildDeck collection mode — land base ownership is scoped to the
     // fine to ship when no source is requested.
   }, 60_000);
 
-  // U2 — diagnosis §6 assertion 3. Fails today: scoreLandsForDeck ranks a
-  // "chosen type" or counter-gated trap as high as a real 2-colour fixer
-  // (root cause (d) in the diagnosis), so Starting Town / the checks / the
-  // triome do not consistently outrank the traps yet.
-  it.todo('U2: real fixers (Command Tower, shocks, checks, Starting Town, triome) are picked before any trap land');
+  // U2 — diagnosis §6 assertion 3. Every real fixer in the owned-arena pool
+  // must outscore every trap: chosen-type lands credit one colour (not
+  // five), and the 4 gated lands (counter, "granted to others", "any type a
+  // Gate could produce") aren't colour sources at all.
+  it('U2: real fixers (Command Tower, shocks, checks, Starting Town, triome) are picked before any trap land', async () => {
+    const { scoreLandsForDeck } = await import('@/lib/land-intelligence');
+    const scored = scoreLandsForDeck({
+      colors: ['W', 'U', 'B', 'R', 'G'], format: 'commander',
+      userId: BUILDER_UID, collectionOnly: true, collectionSource: 'arena',
+    });
+    const byName = new Map(scored.map((s) => [s.card.name, s.score]));
+    const realFixers = ['Command Tower', ...shockNamesFlat(), ...checkNamesFlat(), 'Starting Town', 'Savai Triome'];
+    // Hard-gated traps (counter, granted-to-others, Gate-any-type): never a
+    // colour source at all — must rank below every real fixer, universal or
+    // 2-colour alike.
+    const deadTraps = ['Gemstone Caverns', 'Plaza of Harmony', "Mirrodin's Core", 'Forgotten Monument'];
+    // Chosen-type/fetch: real fixing again once honestly counted as 1
+    // colour (not 5), but the diagnosis's actual complaint is that they
+    // outranked the true rainbow source (Command Tower, #1/#2 in its repro)
+    // and any real 2+-colour dual — not that a single-colour, untapped land
+    // must rank below a tapped universal one.
+    const overvaluedTraps = ['Multiversal Passage', 'Thran Portal', 'Evolving Wilds'];
+    for (const n of [...realFixers, ...deadTraps, ...overvaluedTraps]) expect(byName.has(n)).toBe(true);
+    const minRealScore = Math.min(...realFixers.map((n) => byName.get(n)!));
+    const maxDeadTrapScore = Math.max(...deadTraps.map((n) => byName.get(n)!));
+    expect(minRealScore).toBeGreaterThan(maxDeadTrapScore);
+    const commanderTowerScore = byName.get('Command Tower')!;
+    for (const n of overvaluedTraps) expect(byName.get(n)!).toBeLessThan(commanderTowerScore);
+  }, 60_000);
 
-  // U2 — diagnosis §6 assertion 4. Fails today: sourcesByColor counts a
-  // chosen-type or counter-gated land as producing all 5 colours (the same
-  // ranking bug), so it overstates real colour coverage.
-  it.todo('U2: auditDeck sourcesByColor.B equals the count of lands that really make B');
+  // U2 — diagnosis §6 assertion 4. auditDeck's sourcesByColor.B must equal
+  // the count of lands that really make B, not the count that CLAIM B
+  // (a chosen-type land resolving to a colour other than B, or a
+  // counter-gated/granted-to-others land, must not inflate it).
+  it("U2: auditDeck sourcesByColor.B equals the count of lands that really make B", async () => {
+    const { auditDeck } = await import('@/lib/deck-auditor');
+    const d = db.getDb();
+    const names = [
+      'Command Tower', 'Watery Grave', 'Overgrown Tomb', 'Isolated Chapel', // real B sources
+      'Gemstone Caverns', 'Multiversal Passage', // not B (gated / resolves to deckColors[0]='W')
+    ];
+    const cards = names.map((name) => {
+      const card = d.prepare('SELECT * FROM cards WHERE name = ?').get(name) as Record<string, unknown>;
+      return { card: card as unknown as import('@/lib/mana-sources').ManaSourceCard, quantity: 1, board: 'main' as const };
+    });
+    const health = auditDeck(cards, { colors: ['W', 'U', 'B', 'R', 'G'], format: 'commander', targetLands: 38, isCommander: true });
+    // Ground truth: Command Tower (any-colour), Watery Grave (U/B) and
+    // Isolated Chapel (W/B) really make B. Overgrown Tomb (B/G) also does.
+    // Gemstone Caverns is counter-gated. Multiversal Passage is a
+    // chosen-type land — with no pip-weighted priority it resolves to the
+    // FIRST deck colour (W), not B.
+    expect(health.sourcesByColor.B).toBe(4);
+  }, 60_000);
 
   function shockNamesFlat(): string[] {
     return ['Sacred Foundry', 'Steam Vents', 'Watery Grave', 'Overgrown Tomb', 'Temple Garden'];

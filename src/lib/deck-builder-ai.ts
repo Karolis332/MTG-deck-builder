@@ -2227,11 +2227,27 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
   );
   const tribalTypesForLands = isTrulyTribal ? topTribalTypes : [];
 
-  // Build non-land card list for mana demand analysis
-  const nonLandCards = picked.map(p => ({
-    mana_cost: p.card.mana_cost,
-    quantity: p.quantity,
-  }));
+  // Build non-land card list for mana demand analysis. The commander's own
+  // casting cost and activated-ability costs feed the land builder too —
+  // Tam's {W}{U}{B}{R}{G} proliferate activation is real demand for a card
+  // that's on the battlefield every game, not just what got "picked".
+  const commanderPipDemand: Array<{ mana_cost: string | null; quantity: number }> = [];
+  if (commanderCard) {
+    if (commanderCard.mana_cost) commanderPipDemand.push({ mana_cost: commanderCard.mana_cost, quantity: 1 });
+    for (const line of (commanderCard.oracle_text || '').split('\n')) {
+      const colonIdx = line.indexOf(':');
+      if (colonIdx === -1) continue;
+      const costPart = line.slice(0, colonIdx);
+      if (/\{[WUBRG]\}/.test(costPart)) commanderPipDemand.push({ mana_cost: costPart, quantity: 1 });
+    }
+  }
+  const nonLandCards = [
+    ...picked.map(p => ({
+      mana_cost: p.card.mana_cost,
+      quantity: p.quantity,
+    })),
+    ...commanderPipDemand,
+  ];
 
   // Try land intelligence system (requires land_classifications table)
   let landsAdded = 0;
