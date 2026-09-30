@@ -1645,7 +1645,14 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
   // bulletproof JS check: parse each card's color_identity as JSON and
   // require every color to be present in the deck's allowed colors.
   const allowedColors = new Set(colors);
+  // A-D6: the pool never holds both "X" and its Arena "A-X" — every later
+  // candidate list (walker/tribal/synergy backfills) is filtered from it up
+  // front, so a pair here became two picks. Score order keeps the better one.
+  const seenPoolKeys = new Set<string>();
   const colorFilteredScored = scored.filter(({ card }) => {
+    const key = stripArenaPrefix(card.name);
+    if (seenPoolKeys.has(key)) return false;
+    seenPoolKeys.add(key);
     if (!card.color_identity) return true;
     try {
       const ci: string[] = JSON.parse(card.color_identity);
@@ -2015,7 +2022,15 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
   const arsenalSlotBudget = Math.min(Math.floor(nonLandTarget * 0.75), quotaSum);
   let arsenalUsed = 0;
 
-  for (const a of arsenal) {
+  // Seat the strongest first (A-D1): the arsenal is priority-ordered, and with
+  // role caps a 105-point Lightning Bolt at the same priority tier took the
+  // last removal slot ahead of a 209-point Terminate. The priority still
+  // decides which cards are in the arsenal at all; the pool score decides who
+  // gets a capped slot.
+  const arsenalByScore = [...arsenal].sort((a, b) =>
+    (poolByName.get(b.card.name)?.score ?? -Infinity) - (poolByName.get(a.card.name)?.score ?? -Infinity)
+    || b.priority - a.priority);
+  for (const a of arsenalByScore) {
     if (arsenalUsed >= arsenalSlotBudget) break;
     if (pickedNames.has(a.card.name)) continue;
     // Only pre-fill priority >= 55 (staples and above)
@@ -2056,20 +2071,23 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
   // Rainbow decks need cheap dual/any-color rocks (talisman cycle, signets) to
   // cast their gold spells on curve. These rarely win a ramp slot on raw score,
   // so force-include the best-scored available before the role picker runs.
+  // Remembered so the same-role upgrade pass (Step 4c) never trades them
+  // for a higher-scored treasure-maker — they were seated for fixing, not score.
+  const fixingFloorNames = new Set<string>();
+  // Repeatable DUAL/rainbow rocks only (talisman + signet cycles, plus the
+  // classic 2-mana fixers). Excludes one-shot fast mana (Moxen, Lotus Petal)
+  // and treasure-makers so the floor reproduces the talisman/signet backbone.
+  const FIXING_ROCK_ALLOW = /^(arcane signet|chromatic lantern|fellwar stone|coalition relic|prismatic lens|mind stone|fractured powerstone|cryptic spires)$/i;
+  const isFixingRock = (c: DbCard): boolean => {
+    const name = (c.name || '').toLowerCase();
+    const tl = (c.type_line || '').toLowerCase();
+    if (!tl.includes('artifact') || tl.includes('creature')) return false;
+    if ((c.cmc || 0) > 2) return false;
+    return /^talisman of /.test(name) || / signet$/.test(name) || FIXING_ROCK_ALLOW.test(name);
+  };
   if (colors.length >= 3) {
     const fixingFloor = Math.min(8, colors.length * 2);
     let fixingAdded = 0;
-    // Repeatable DUAL/rainbow rocks only (talisman + signet cycles, plus the
-    // classic 2-mana fixers). Excludes one-shot fast mana (Moxen, Lotus Petal)
-    // and treasure-makers so the floor reproduces the talisman/signet backbone.
-    const FIXING_ROCK_ALLOW = /^(arcane signet|chromatic lantern|fellwar stone|coalition relic|prismatic lens|mind stone|fractured powerstone|cryptic spires)$/i;
-    const isFixingRock = (c: DbCard): boolean => {
-      const name = (c.name || '').toLowerCase();
-      const tl = (c.type_line || '').toLowerCase();
-      if (!tl.includes('artifact') || tl.includes('creature')) return false;
-      if ((c.cmc || 0) > 2) return false;
-      return /^talisman of /.test(name) || / signet$/.test(name) || FIXING_ROCK_ALLOW.test(name);
-    };
     for (const s of scored) {
       if (fixingAdded >= fixingFloor || totalPicked >= nonLandTarget) break;
       // The floor shares the ramp counter with the arsenal pre-fill (C1):
@@ -2081,6 +2099,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
       picked.push({ card: s.card, quantity: 1, board: 'main' });
       pickedNames.add(s.card.name);
       reasoning.push({ cardName: s.card.name, role: 'fixing-floor', reason: 'cheap rainbow fixing for multicolor deck' });
+      fixingFloorNames.add(s.card.name);
       totalPicked += 1;
       fixingAdded += 1;
       preFillRoleFills.ramp = (preFillRoleFills.ramp ?? 0) + 1;
@@ -2144,7 +2163,11 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
   // directly from the DB so every deck ships with at least 2 board wipes.
   const wipeFilled = pickResult.roleFills.board_wipe || 0;
   const wipeNeed = Math.max(0, (quotas.board_wipe || 2) - wipeFilled);
-  if (wipeNeed > 0 && totalPicked < nonLandTarget) {
+  // The deck is normally FULL here (A-D1 fills every slot by score, and Pass A
+  // no longer seats a sub-floor "wipe" just to meet the quota), so the
+  // backfill makes its own room: the lowest-scored utility/synergy picks
+  // step aside for real wipes (Krenko 3 -> 1 wipes otherwise).
+  if (wipeNeed > 0) {
     const wipePool = db.prepare(`
       SELECT c.* FROM cards c
       ${collectionJoin}
@@ -2162,10 +2185,22 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
       LIMIT 20
     `).all() as DbCard[];
 
+    // Picks that may make way, weakest first (pool score, then EDHREC rank).
+    const removable = picked
+      .filter(p => p.board === 'main' && !['commander'].includes(p.board))
+      .filter(p => {
+        const cats = classifyCard(p.card.name, p.card.oracle_text || '', p.card.type_line || '', p.card.cmc || 0, undefined, classifyOpts);
+        const primary = cats[0] || 'utility';
+        return primary === 'utility' || primary === 'synergy';
+      })
+      .sort((a, b) =>
+        (poolByName.get(a.card.name)?.score ?? -Infinity) - (poolByName.get(b.card.name)?.score ?? -Infinity)
+        || (b.card.edhrec_rank || 99999) - (a.card.edhrec_rank || 99999));
+    const room = Math.max(0, nonLandTarget - totalPicked) + removable.length;
+
     let wipesAdded = 0;
     for (const wipe of wipePool) {
-      if (wipesAdded >= wipeNeed) break;
-      if (totalPicked >= nonLandTarget) break;
+      if (wipesAdded >= Math.min(wipeNeed, room)) break;
       if (pickedNames.has(wipe.name)) continue;
       // Validate against the same classifier the quota accountant uses (C2)
       // — the SQL LIKE clauses above are a broad net, not the source of truth.
@@ -2178,30 +2213,14 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
       totalPicked += 1;
       wipesAdded += 1;
     }
-    if (wipesAdded > 0) {
-      // Remove the same number of lowest-scored non-essential picks to stay at target
-      const removable = picked
-        .filter(p => p.board === 'main' && !['commander'].includes(p.board))
-        .filter(p => {
-          const cats = classifyCard(p.card.name, p.card.oracle_text || '', p.card.type_line || '', p.card.cmc || 0, undefined, classifyOpts);
-          const primary = cats[0] || 'utility';
-          return primary === 'utility' || primary === 'synergy';
-        })
-        .sort((a, b) => (a.card.edhrec_rank || 99999) - (b.card.edhrec_rank || 99999))
-        .reverse();
-
-      let removed = 0;
-      for (const r of removable) {
-        if (removed >= wipesAdded) break;
-        // Don't remove the wipes we just added
-        if (wipePool.some(w => w.name === r.card.name)) continue;
-        const idx = picked.indexOf(r);
-        if (idx !== -1) {
-          picked.splice(idx, 1);
-          pickedNames.delete(r.card.name);
-          totalPicked -= r.quantity;
-          removed += r.quantity;
-        }
+    // Trim only the overshoot back to target (the weakest removable picks).
+    for (const r of removable) {
+      if (totalPicked <= nonLandTarget) break;
+      const idx = picked.indexOf(r);
+      if (idx !== -1) {
+        picked.splice(idx, 1);
+        pickedNames.delete(r.card.name);
+        totalPicked -= r.quantity;
       }
     }
   }
@@ -2553,6 +2572,61 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
   }
 
 
+  // ── Step 4c: same-role upgrades until the deck converges (A-D1) ─────────
+  // Every pass above seats cards by priority, quota, cap or floor, so a
+  // capped role can end up holding the arsenal's best while a stronger pool
+  // card of the same role sits benched (Tam: Terminate 209 out, Abrade 126
+  // in). This pass asks the question a human asks last — "does a benched
+  // card do this card's job better?" — and swaps same role for same role
+  // until no such pair is left. Quotas and caps hold because the role count
+  // never changes; plan picks (payoffs, tribe, walkers, walker engines and
+  // support) are seated by design and never swapped out. Bounded so a
+  // pathological pool can't loop.
+  {
+    const primaryOf = (card: DbCard): string =>
+      getPrimaryCategory(classifyCard(card.name, card.oracle_text || '', card.type_line || '', card.cmc || 0, commanderCard?.oracle_text || undefined, classifyOpts));
+    // In 3+ colours every cheap fixing rock is plan, wherever it was seated:
+    // the classifier files treasure-makers under 'ramp' too, and by score
+    // they took all five of Tam's Signets.
+    const isPlanPick = (card: DbCard): boolean =>
+      payoffNames.has(card.name.toLowerCase()) || tribalNames.has(card.name) || fixingFloorNames.has(card.name)
+      || (colors.length >= 3 && isFixingRock(card))
+      || (isSuperfriends && (/\bPlaneswalker\b/.test(card.type_line || '') || isWalkerEngineCard(card) || isWalkerSupportCard(card)));
+    const isSpellSlot = (card: DbCard): boolean =>
+      !(card.type_line || '').split('//')[0].includes('Land') && !isLandBackDfc(card);
+    const scoreOfName = (name: string): number => poolByName.get(name)?.score ?? -Infinity;
+    const MAX_UPGRADES = 30;
+    const UPGRADE_MIN_GAIN = 2; // no churn on ties or sub-rounding gaps
+    for (let n = 0; n < MAX_UPGRADES; n++) {
+      const worstByRole = new Map<string, (typeof picked)[number]>();
+      for (const p of picked) {
+        if (p.board !== 'main' || p.quantity !== 1 || !isSpellSlot(p.card) || isPlanPick(p.card)) continue;
+        const role = primaryOf(p.card);
+        const w = worstByRole.get(role);
+        if (!w || scoreOfName(p.card.name) < scoreOfName(w.card.name)) worstByRole.set(role, p);
+      }
+      if (worstByRole.size === 0) break;
+      const floor = Math.min(...Array.from(worstByRole.values(), (p) => scoreOfName(p.card.name)));
+      let swapped = false;
+      for (const s of scored) { // score-descending: the first hit is the best available upgrade
+        if (s.score <= floor) break;
+        if (pickedNames.has(s.card.name) || !isSpellSlot(s.card) || getMaxQty(s.card) <= 0) continue;
+        const victim = worstByRole.get(primaryOf(s.card));
+        if (!victim || s.score < scoreOfName(victim.card.name) + UPGRADE_MIN_GAIN) continue;
+        const idx = picked.indexOf(victim);
+        if (idx === -1) continue;
+        picked.splice(idx, 1);
+        pickedNames.delete(victim.card.name);
+        picked.push({ card: s.card, quantity: 1, board: 'main' });
+        pickedNames.add(s.card.name);
+        reasoning.push({ cardName: s.card.name, role: 'upgrade', reason: `same-role upgrade: +${s.card.name} (${Math.round(s.score)}) for ${victim.card.name} (${Math.round(scoreOfName(victim.card.name))})` });
+        swapped = true;
+        break;
+      }
+      if (!swapped) break;
+    }
+  }
+
   // ── Step 5: Add lands (via land intelligence) ───────────────────────────
   // MDFC spell//land cards already in the nonland picks are tapped-land
   // equivalents — every one of them reduces how many dedicated land slots
@@ -2843,8 +2917,11 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
       const protectedSet = new Set(
         (getTemplate('superfriends').protectedPatterns || []).map((p) => p.toLowerCase())
       );
+      // A walker engine / support card that also reads as draw (Way of the
+      // Mind Sculptor) is the plan, not draw surplus — same guard as the
+      // draw-engine repair below (U11 fix 2), which this cap lacked.
       const cuttable = drawPicks
-        .filter((p) => !protectedSet.has(p.card.name.toLowerCase()))
+        .filter((p) => !protectedSet.has(p.card.name.toLowerCase()) && !isWalkerEngineCard(p.card) && !isWalkerSupportCard(p.card))
         .sort((a, b) => {
           const aScore = scored.find((s) => s.card.name === a.card.name)?.score || 0;
           const bScore = scored.find((s) => s.card.name === b.card.name)?.score || 0;

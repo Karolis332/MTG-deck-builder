@@ -61,6 +61,8 @@ describe('autoBuildDeck — P1 pick pipeline (synthetic DB)', () => {
     add('Aeve, Progenitor Ooze', 5, '{2}{G}{G}{G}', 'Legendary Creature — Ooze', AEVE, ['G'], { subtypes: ['Ooze'], keywords: ['Storm'], owned: 1 });
     add('Forest', 0, '', 'Basic Land — Forest', '({T}: Add {G}.)', ['G']);
     for (let i = 1; i <= 14; i++) add(`Test Ooze ${i}`, 3, '{2}{G}', 'Creature — Ooze', 'Trample', ['G'], { rank: 5000, subtypes: ['Ooze'], owned: 1 });
+    // Arena-rebalanced twin of an owned tribe member: the tribal floor backfill used to seat both.
+    add('A-Test Ooze 1', 3, '{2}{G}', 'Creature — Ooze', 'Trample', ['G'], { rank: 5000, subtypes: ['Ooze'], owned: 1 });
     add('Slime Against Humanity', 3, '{2}{G}', 'Sorcery', SLIME, ['G'], { rank: 3000, owned: 4 });
     add('Test Hoof', 8, '{5}{G}{G}{G}', 'Creature — Beast', HOOF, ['G'], { rank: 100, subtypes: ['Beast'], keywords: ['Haste'], owned: 1 });
     for (let i = 1; i <= 10; i++) add(`Test Grow ${i}`, 2, '{1}{G}', 'Sorcery', RAMP, ['G'], { owned: 1 });
@@ -96,6 +98,12 @@ describe('autoBuildDeck — P1 pick pipeline (synthetic DB)', () => {
     const r = await builder.autoBuildDeck({ format: 'commander', colors: [], commanderName: 'Aeve, Progenitor Ooze', useCollection: true, userId: UID, collectionSource: 'arena' });
     const slime = r.cards.find((e) => e.board === 'main' && e.card.name === 'Slime Against Humanity');
     expect(slime?.quantity).toBe(4);
+  }, 60_000);
+
+  it('A-D6: a rebalanced "A-X" and its paper "X" are one card — the deck never holds both', async () => {
+    const r = await builder.autoBuildDeck({ format: 'commander', colors: [], commanderName: 'Aeve, Progenitor Ooze', useCollection: true, userId: UID, collectionSource: 'arena' });
+    const twins = r.cards.filter((e) => e.board === 'main' && /^(A-)?Test Ooze 1$/.test(e.card.name));
+    expect(twins.length).toBe(1);
   }, 60_000);
 
   it('A-D9 / A-D10: no storm penalty on a tribal build; no quality-floor penalty on an owned card in a collection build', async () => {
