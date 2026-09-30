@@ -1911,6 +1911,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
 
   // ── (a) Build commander arsenal ────────────────────────────────────────
   let arsenal: ArsenalCard[] = [];
+  const analyzeOpts = { strategy: resolvedStrategy };
   if (isCommander && options.commanderName && options.userId !== undefined) {
     try {
       const analysis = analyzeCommanderForBuild(
@@ -1919,6 +1920,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
         options.format,
         150,
         options.collectionSource,
+        analyzeOpts,
       );
       if (analysis) {
         arsenal = analysis.arsenal;
@@ -1932,6 +1934,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
           options.format,
           150,
           options.collectionSource,
+          analyzeOpts,
         );
         if (partnerAnalysis) {
           const seen = new Set(arsenal.map((a) => a.card.name));

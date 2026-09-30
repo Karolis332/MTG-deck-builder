@@ -380,14 +380,19 @@ export const STAPLE_RAMP = new Set([
   'exploration', 'burgeoning',
 ]);
 
-export const STAPLE_DRAW = new Set([
-  // Cantrips
+/** One-shot cantrips: storm-count / spellslinger fuel, not card advantage in
+ *  any other shell — the arsenal pre-fills them only for spellslinger (A-D11). */
+export const STAPLE_CANTRIPS = new Set([
   'brainstorm', 'ponder', 'preordain', 'opt', 'consider', 'serum visions',
   'gitaxian probe',
   // 'crop rotation'/'worldly tutor'/'mystical tutor' removed (review
   // 2026-08-23 C4) — they're tutors, not draw; see TUTOR_NAMES/
   // TUTOR_SEARCH_CLAUSE in card-classifier.ts, which already catches them.
   'sleight of hand', 'peek',
+]);
+
+export const STAPLE_DRAW = new Set([
+  ...STAPLE_CANTRIPS,
   // Draw-2 / 3
   'night\'s whisper', 'sign in blood', 'read the bones', 'painful truths',
   'ancient craving', 'promise of power', 'harmonize', 'concentrate',

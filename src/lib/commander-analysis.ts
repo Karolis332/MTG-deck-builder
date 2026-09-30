@@ -32,6 +32,7 @@ import {
   ARCHETYPE_PAYOFFS,
   STAPLE_RAMP,
   STAPLE_DRAW,
+  STAPLE_CANTRIPS,
   STAPLE_REMOVAL,
   STAPLE_BOARD_WIPE,
   STAPLE_PROTECTION,
@@ -339,13 +340,24 @@ export const STAPLE_NONBASIC_LANDS: string[] = [
  * @param userId — for collection checks
  * @param format — 'brawl' | 'commander' | 'standardbrawl' etc.
  * @param arsenalLimit — cap on arsenal size (default 120)
+ * @param opts — builder opt-ins; omitted reproduces the legacy arsenal byte-for-byte
  */
+export interface AnalyzeBuildOpts {
+  /** The build's resolved strategy: one-shot cantrips are pre-filled only for 'spellslinger' (A-D11). */
+  strategy?: string;
+  /** Pool score by card name — collection substitutes are ranked by it (A-D1). */
+  scoreOf?: (name: string) => number;
+  /** Minimum pool score a collection substitute must reach (A-D1). */
+  scoreFloor?: number;
+}
+
 export function analyzeCommanderForBuild(
   commanderName: string,
   userId: number,
   format: string,
   arsenalLimit: number = 120,
   collectionSource?: string,
+  opts?: AnalyzeBuildOpts,
 ): CommanderAnalysis | null {
   const legalityFilter = format && format !== '1v1'
     ? `AND c.legalities LIKE '%"${getLegalityKey(format)}":"legal"%'`
@@ -555,7 +567,11 @@ export function analyzeCommanderForBuild(
   for (const name of STAPLE_RAMP) {
     tryAdd(name, 55, 'staple_ramp', 'universal ramp staple');
   }
+  // Cantrips are storm/spellslinger fuel; every other shell wants engines and
+  // draw-2s in those slots (Tatyova shipped six one-shot cantrips — A-D11).
+  const cantripsWanted = !opts?.strategy || opts.strategy === 'spellslinger';
   for (const name of STAPLE_DRAW) {
+    if (!cantripsWanted && STAPLE_CANTRIPS.has(name)) continue;
     tryAdd(name, 55, 'staple_draw', 'universal card draw staple');
   }
   for (const name of STAPLE_REMOVAL) {
