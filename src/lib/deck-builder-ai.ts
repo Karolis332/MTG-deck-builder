@@ -1102,6 +1102,11 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
   const resolvedStrategy = resolvedStrategyHint
     || (tribalType && genericArch ? 'tribal' : profileArch)
     || (themes.includes('aggro') ? 'aggro' : themes.includes('control') ? 'control' : 'midrange');
+  // Opt-in: a planeswalker never counts as 'draw' on this path (card-classifier
+  // ClassifyOpts) — kept opt-in so every other archetype's classification is
+  // byte-identical to before.
+  const isSuperfriends = resolvedStrategy === 'superfriends';
+  const classifyOpts = isSuperfriends ? { superfriends: true } : undefined;
 
   // ── ML personalization: load predictions from personalized_suggestions ──
   const mlScoreMap = new Map<string, number>();
@@ -1515,7 +1520,7 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
     // expensive to do their job (Craterhoof, Approach of the Second Sun).
     if (hints.lowCurve && !(card.type_line || '').split('//')[0].includes('Land')) {
       const exempt = cedhStapleMap.has(card.name)
-        || classifyCard(card.name, card.oracle_text || '', card.type_line || '', card.cmc || 0).includes('win_condition');
+        || classifyCard(card.name, card.oracle_text || '', card.type_line || '', card.cmc || 0, undefined, classifyOpts).includes('win_condition');
       if (!exempt) {
         if (card.cmc >= 6) score -= 60;
         else if (card.cmc >= 5) score -= 30;
@@ -1688,6 +1693,10 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
     colorExcludeFilter, legalityFilter, commanderExclude: _commanderExclude,
     collectionJoin, collectionOrder, metaStatsMap, commanderStatsMap,
   } = poolResult;
+  // See buildScoredCandidatePool — same opt-in, recomputed in this function's
+  // own scope since poolResult only carries the string, not the flag.
+  const isSuperfriends = resolvedStrategy === 'superfriends';
+  const classifyOpts = isSuperfriends ? { superfriends: true } : undefined;
 
   // Free-text hint: "consistent manabase" biases toward the generous end of
   // the archetype's land band (and shrinks the nonland budget to match, so
@@ -1805,6 +1814,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
       card.type_line || '',
       card.cmc || 0,
       commanderCard?.oracle_text || undefined,
+      classifyOpts,
     ).filter((cat) => roleCaps[cat] !== undefined);
 
   // Arsenal budget: bounded by both the old 75% share and the total quota
@@ -1915,6 +1925,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
     isCommanderFormat: isCommander,
     preFilled,
     passBAllowed,
+    superfriends: isSuperfriends,
   });
 
   for (const p of pickResult.picks) {
@@ -1973,7 +1984,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
       const removable = picked
         .filter(p => p.board === 'main' && !['commander'].includes(p.board))
         .filter(p => {
-          const cats = classifyCard(p.card.name, p.card.oracle_text || '', p.card.type_line || '', p.card.cmc || 0);
+          const cats = classifyCard(p.card.name, p.card.oracle_text || '', p.card.type_line || '', p.card.cmc || 0, undefined, classifyOpts);
           const primary = cats[0] || 'utility';
           return primary === 'utility' || primary === 'synergy';
         })
@@ -2039,7 +2050,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
       const displaceable = [...picked]
         .filter((p) => {
           if (p.board !== 'main' || tribalNames.has(p.card.name)) return false;
-          const primary = getPrimaryCategory(classifyCard(p.card.name, p.card.oracle_text || '', p.card.type_line || '', p.card.cmc || 0, commanderCard?.oracle_text || undefined));
+          const primary = getPrimaryCategory(classifyCard(p.card.name, p.card.oracle_text || '', p.card.type_line || '', p.card.cmc || 0, commanderCard?.oracle_text || undefined, classifyOpts));
           return primary !== 'removal' && primary !== 'board_wipe';
         })
         .sort((a, b) => {
@@ -2064,6 +2075,84 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
           pickedNames.add(candidate.name);
           totalPicked += qty;
           filled += qty;
+        }
+      }
+    }
+  }
+
+  // ── Superfriends walker minimum backfill ────────────────────────────────
+  // Mirrors the tribal minimum backfill above. Step 4b below fills the
+  // template's `synergyMinimums.planeswalker` count too, but that reads
+  // SYNERGY_REQUIREMENTS_MAP.planeswalker (proliferate/loyalty-doubler TEXT)
+  // — it never counts actual planeswalker permanents, whose ability costs
+  // print as "+1:" / "-2:", not the literal words "loyalty ability". Without
+  // this block a superfriends commander ships whatever walkers happened to
+  // score well generically (Tam: 3), not a real walker count. 12 of 99/100
+  // scales down for smaller commander-format shells (e.g. standardbrawl's
+  // 60-card, ~35-nonland deck).
+  const WALKER_FLOOR_BASE = 12;
+  const WALKER_FLOOR_REFERENCE_NONLAND = 61; // 99/100-card commander baseline
+  if (isSuperfriends) {
+    const isWalker = (card: DbCard) => /\bPlaneswalker\b/.test(card.type_line || '');
+    const walkerTypeOf = (card: DbCard): string => {
+      const m = (card.type_line || '').match(/Planeswalker\s*—\s*(.+?)(?:\s*\/\/|$)/);
+      return m ? m[1].trim() : '';
+    };
+    const walkerFloor = Math.max(1, Math.round(WALKER_FLOOR_BASE * nonLandTarget / WALKER_FLOOR_REFERENCE_NONLAND));
+    let walkerCount = 0;
+    for (const p of picked) {
+      if (p.board === 'main' && isWalker(p.card)) walkerCount += p.quantity;
+    }
+    const walkerDeficit = walkerFloor - walkerCount;
+    if (walkerDeficit > 0) {
+      const supportPatterns = SYNERGY_REQUIREMENTS_MAP.planeswalker;
+      const isSupport = (card: DbCard) => {
+        const text = (card.oracle_text || '').toLowerCase();
+        return supportPatterns.some((p) => text.includes(p.toLowerCase()));
+      };
+      const pickedWalkerTypes = new Set(
+        picked.filter((p) => p.board === 'main' && isWalker(p.card)).map((p) => walkerTypeOf(p.card))
+      );
+      // Prefer walkers with a planeswalker type not already in the deck as a
+      // tie-break (Tam's X counts distinct planeswalker types).
+      const candidates = scored
+        .filter((s) => isWalker(s.card) && !pickedNames.has(s.card.name) && getMaxQty(s.card) > 0)
+        .sort((a, b) => {
+          const aNew = pickedWalkerTypes.has(walkerTypeOf(a.card)) ? 0 : 1;
+          const bNew = pickedWalkerTypes.has(walkerTypeOf(b.card)) ? 0 : 1;
+          if (aNew !== bNew) return bNew - aNew;
+          return b.score - a.score;
+        })
+        .map((s) => s.card);
+      const displaceable = [...picked]
+        .filter((p) => {
+          if (p.board !== 'main' || isWalker(p.card) || isSupport(p.card)) return false;
+          const primary = getPrimaryCategory(classifyCard(p.card.name, p.card.oracle_text || '', p.card.type_line || '', p.card.cmc || 0, commanderCard?.oracle_text || undefined, classifyOpts));
+          return primary !== 'removal' && primary !== 'board_wipe' && primary !== 'ramp';
+        })
+        .sort((a, b) => {
+          const aScore = scored.find((s) => s.card.name === a.card.name)?.score || 0;
+          const bScore = scored.find((s) => s.card.name === b.card.name)?.score || 0;
+          return aScore - bScore;
+        });
+
+      let filled = 0;
+      for (const candidate of candidates) {
+        if (filled >= walkerDeficit || displaceable.length === 0) break;
+        const displaced = displaceable.shift()!;
+        const idx = picked.indexOf(displaced);
+        if (idx !== -1) {
+          picked.splice(idx, 1);
+          pickedNames.delete(displaced.card.name);
+          totalPicked -= displaced.quantity;
+        }
+        const qty = Math.min(getMaxQty(candidate), walkerDeficit - filled);
+        if (qty > 0) {
+          picked.push({ card: candidate, quantity: qty, board: 'main' });
+          pickedNames.add(candidate.name);
+          totalPicked += qty;
+          filled += qty;
+          pickedWalkerTypes.add(walkerTypeOf(candidate));
         }
       }
     }
@@ -2502,7 +2591,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
         .filter((p) => {
           // Pass the commander oracle so the 'synergy' category actually fires
           // (was a 4-arg call → 'synergy' never matched → dead branch).
-          const cats = classifyCard(p.card.name, p.card.oracle_text || '', p.card.type_line || '', p.card.cmc || 0, commanderCard?.oracle_text || undefined);
+          const cats = classifyCard(p.card.name, p.card.oracle_text || '', p.card.type_line || '', p.card.cmc || 0, commanderCard?.oracle_text || undefined, classifyOpts);
           const primary = cats[0] || 'utility';
           return primary === 'utility' // synergy cards are no longer displaceable
             && !DRAW_RE.test(p.card.oracle_text || '')

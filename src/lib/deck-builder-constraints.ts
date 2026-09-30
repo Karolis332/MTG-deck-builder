@@ -606,6 +606,9 @@ export interface PickByRoleOptions {
   /** Name set of cards to accept in Pass B. Cards outside this set AND
    *  without a recognized role category are rejected as filler. */
   passBAllowed?: Set<string>;
+  /** Opt-in: a planeswalker is never classified as 'draw' (see card-classifier
+   *  ClassifyOpts). Omitted reproduces legacy behaviour byte-for-byte. */
+  superfriends?: boolean;
 }
 
 export interface PickByRoleResult {
@@ -629,8 +632,9 @@ export interface PickByRoleResult {
 export function pickByRole(opts: PickByRoleOptions): PickByRoleResult {
   const {
     pool, nonLandTarget, quotas, payoffNames, commanderOracle,
-    getMaxQty, isCommanderFormat, preFilled, passBAllowed,
+    getMaxQty, isCommanderFormat, preFilled, passBAllowed, superfriends,
   } = opts;
+  const classifyOpts = superfriends ? { superfriends: true } : undefined;
 
   const picks: PickedRoleCard[] = [];
   const pickedNames = new Set<string>();
@@ -656,6 +660,7 @@ export function pickByRole(opts: PickByRoleOptions): PickByRoleResult {
         card.type_line || '',
         card.cmc || 0,
         commanderOracle,
+        classifyOpts,
       );
       const isPayoff = payoffNames.has(card.name.toLowerCase());
       if (isPayoff) roleFills.synergy_payoff += 1;
@@ -681,6 +686,7 @@ export function pickByRole(opts: PickByRoleOptions): PickByRoleResult {
       entry.card.type_line || '',
       entry.card.cmc || 0,
       commanderOracle,
+      classifyOpts,
     );
     return {
       ...entry,
