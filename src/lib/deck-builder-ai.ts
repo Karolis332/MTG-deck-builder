@@ -1607,7 +1607,13 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
     // A superfriends build's deck-wide loyalty engine IS the curated payoff
     // list — a new set's Ways (edhrec_rank ~20,000, no stats yet) are the
     // plan, not filler (U12 fix 1; opt-in path only).
-    if (!hasAnySignal && edhrecRank > 18000 && !(isSuperfriends && isWalkerEngineCard(card))) {
+    // A rank beyond 18,000 is "unknown" (a new set has no popularity yet),
+    // not "bad": an owned card in a collection build is never filler by
+    // that measure (A-D10 — Tam's FRA walkers/Ways scored -35 each). The
+    // card DB carries no set release date, so the < 90-day exemption for
+    // no-collection builds cannot be applied here.
+    const ownedInBuild = useCollection && (ownedQty.get(card.name) || 0) > 0;
+    if (!hasAnySignal && edhrecRank > 18000 && !ownedInBuild && !(isSuperfriends && isWalkerEngineCard(card))) {
       score -= 35;
     }
 
