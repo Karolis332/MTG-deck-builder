@@ -7,6 +7,9 @@ populate the land_classifications table. Run after Scryfall seed or update.
 
 Usage:
     py scripts/classify_lands.py [--db data/mtg-deck-builder.db]
+
+DB resolution (same as src/lib/db.ts): --db > $MTG_DB_DIR/mtg-deck-builder.db >
+%APPDATA%/the-black-grimoire/data > repo data/. The resolved path is printed first.
 """
 
 import argparse
@@ -17,7 +20,10 @@ import sqlite3
 import sys
 
 def _default_db() -> str:
-    """Prefer the production Electron DB (APPDATA) over the legacy repo-local copy."""
+    """Same precedence as src/lib/db.ts: MTG_DB_DIR > APPDATA (Electron DB) > repo data/."""
+    db_dir = os.environ.get("MTG_DB_DIR")
+    if db_dir:
+        return os.path.join(db_dir, "mtg-deck-builder.db")
     appdata = os.environ.get("APPDATA")
     if appdata:
         electron_db = os.path.join(appdata, "the-black-grimoire", "data", "mtg-deck-builder.db")
@@ -266,6 +272,7 @@ def main():
     parser = argparse.ArgumentParser(description="Classify lands in cards table")
     parser.add_argument("--db", default=DB_DEFAULT, help="SQLite database path")
     args = parser.parse_args()
+    print(f"DB: {args.db}")
 
     if not os.path.exists(args.db):
         print(f"Database not found: {args.db}", file=sys.stderr)
