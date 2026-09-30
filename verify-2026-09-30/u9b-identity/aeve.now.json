@@ -1,0 +1,124 @@
+{
+  "file": "aeve.txt",
+  "unresolved": [],
+  "payload": {
+    "version": "1.2.0",
+    "score": 19,
+    "provisional": true,
+    "components": [
+      {
+        "key": "mana",
+        "score": 99.5,
+        "weight": 20.61855670103093,
+        "reason": "37.1 effective lands vs 37.0; B has 7/18 timely sources."
+      },
+      {
+        "key": "curve",
+        "score": 85.6,
+        "weight": 10.309278350515465,
+        "reason": "3-drops 22/15; 100% chance of a useful play by turn 2."
+      },
+      {
+        "key": "interaction",
+        "score": 90.9,
+        "weight": 16.494845360824744,
+        "reason": "11.1/12.0 effective answers, 8/7.0 cheap; weakest coverage: stack."
+      },
+      {
+        "key": "advantage",
+        "score": 74.6,
+        "weight": 14.43298969072165,
+        "reason": "19.2/10.0 draw units by turn 6; 2 cheap velocity cards."
+      },
+      {
+        "key": "win",
+        "score": 0,
+        "weight": 20.61855670103093,
+        "reason": "no supported closing line: no catalogued win recipe present; t* never reached within 12 turns."
+      },
+      {
+        "key": "synergy",
+        "score": 8.7,
+        "weight": 17.52577319587629,
+        "reason": "38% supports midrange; weakest dependency threats 3/7; 0 unsupported payoffs."
+      },
+      {
+        "key": "meta",
+        "score": 50,
+        "weight": 0,
+        "reason": "no context: 0 dated lists, 0% coverage; insufficient data; snapshot none."
+      },
+      {
+        "key": "structure",
+        "score": 0,
+        "weight": 0,
+        "reason": "3/5 rule checks verified; legality; cap 19."
+      }
+    ],
+    "gates": [
+      {
+        "key": "structure",
+        "kind": "rules",
+        "status": "fail",
+        "cap": null,
+        "reason": "3/5 rule checks verified; legality; cap 19."
+      },
+      {
+        "key": "size",
+        "kind": "rules",
+        "status": "pass",
+        "cap": null,
+        "reason": "100 cards (commander wants 100)"
+      },
+      {
+        "key": "singleton",
+        "kind": "rules",
+        "status": "pass",
+        "cap": null,
+        "reason": "singleton respected (basics exempt)"
+      },
+      {
+        "key": "legality",
+        "kind": "rules",
+        "status": "fail",
+        "cap": 19,
+        "reason": "Not legal in commander: Fuel Tank Feaster, Pick Your Poison"
+      },
+      {
+        "key": "rules",
+        "kind": "rules",
+        "status": "pass",
+        "cap": null,
+        "reason": "no other format rule broken"
+      },
+      {
+        "key": "identity",
+        "kind": "rules",
+        "status": "fail",
+        "cap": 19,
+        "reason": "1 card(s) outside G"
+      },
+      {
+        "key": "quality_cap",
+        "kind": "quality",
+        "status": "warn",
+        "cap": 20,
+        "reason": "quality cap 20+0.8*min(M,W,S)=20.0 from mana=99.5, win=0, synergy=8.7."
+      },
+      {
+        "key": "coverage",
+        "kind": "evidence",
+        "status": "warn",
+        "cap": null,
+        "reason": "52% of nonland copies are typed in the effect catalogue; unknown prerequisite \"artifact token\" — provisional: effect coverage, not calibrated."
+      },
+      {
+        "key": "meta_evidence",
+        "kind": "evidence",
+        "status": "warn",
+        "cap": null,
+        "reason": "no corpus snapshot supplied — meta fit defaulted to 50."
+      }
+    ]
+  }
+}

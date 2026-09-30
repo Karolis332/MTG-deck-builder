@@ -69,6 +69,21 @@ describe('optimizeDeck — role bands follow the detected archetype (U8a)', () =
     expect(walkerCutOnQuota).toEqual([]);
   });
 
+  // U9b HIGH #2: the exemption above only reached win_condition cards through
+  // ISS — a Way (classified 'draw') got cut as "Card Draw over quota (12/9)"
+  // because the quota branch in scoreCard ran before the walker/support check
+  // even existed. Reality Fracture's Ways are stale-legality in the repo test
+  // DB (see the brief), so this asserts on quota reasons only.
+  it('Tam (superfriends): no "Way of" card is cut for any over-quota reason', () => {
+    const result = optimizeDeck({ format: 'brawl', text: TAM_FIXTURE }) as {
+      cuts: Array<{ name: string; reasons: string[] }>;
+    };
+    const wayQuotaCuts = result.cuts.filter(
+      (c) => /^Way of /.test(c.name) && c.reasons.some((r) => /over quota/i.test(r))
+    );
+    expect(wayQuotaCuts).toEqual([]);
+  });
+
   it('a non-superfriends list (standard 60) reports the generic format band, unchanged', () => {
     const result = optimizeDeck({ format: 'standard', text: standard60Text() }) as {
       health: Array<{ category: string; target: { min: number; max: number } }>;
@@ -76,5 +91,28 @@ describe('optimizeDeck — role bands follow the detected archetype (U8a)', () =
     const winConditionHealth = result.health.find((h) => h.category === 'win_condition');
     // GENERIC_60_RATIOS.win_condition band — unchanged by the archetype override.
     expect(winConditionHealth?.target).toMatchObject({ min: 4, max: 8 });
+  });
+});
+
+// U9b MEDIUM #3: two pasted lines that resolve to the same card (a DFC front
+// face and its full "Front // Back" name) must merge instead of the later
+// row silently overwriting the earlier one in afterLines' name-keyed Map —
+// that mismatch used to throw "optimizer size invariant violated".
+describe('optimizeDeck — duplicate resolved rows merge instead of throwing (U9b #3)', () => {
+  const DUPLICATE_ESIKA_TEXT =
+    'Commander\n1 Atraxa, Praetors\' Voice\n\nDeck\n' +
+    "1 Esika, God of the Tree\n" +
+    "1 Esika, God of the Tree // The Prismatic Bridge\n" +
+    '1 Sol Ring\n1 Arcane Signet\n1 Command Tower\n1 Swords to Plowshares\n';
+
+  it('returns 200 with a too_many_copies finding for the merged card, no throw', () => {
+    expect(() => optimizeDeck({ format: 'brawl', text: DUPLICATE_ESIKA_TEXT })).not.toThrow();
+    const result = optimizeDeck({ format: 'brawl', text: DUPLICATE_ESIKA_TEXT }) as {
+      legality: Array<{ name: string; problem: string }>;
+    };
+    const esikaIssue = result.legality.find(
+      (i) => i.problem === 'too_many_copies' && /Esika/i.test(i.name)
+    );
+    expect(esikaIssue).toBeDefined();
   });
 });

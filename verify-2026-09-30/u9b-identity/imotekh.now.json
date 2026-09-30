@@ -1,0 +1,124 @@
+{
+  "file": "imotekh.txt",
+  "unresolved": [],
+  "payload": {
+    "version": "1.2.0",
+    "score": 44,
+    "provisional": true,
+    "components": [
+      {
+        "key": "mana",
+        "score": 88.1,
+        "weight": 20.61855670103093,
+        "reason": "35 effective lands vs 39.0; B has 36/50 timely sources."
+      },
+      {
+        "key": "curve",
+        "score": 93.4,
+        "weight": 10.309278350515465,
+        "reason": "3-drops 12/16; 100% chance of a useful play by turn 2."
+      },
+      {
+        "key": "interaction",
+        "score": 49.7,
+        "weight": 16.494845360824744,
+        "reason": "6.7/12.0 effective answers, 3/7.0 cheap; weakest coverage: stack."
+      },
+      {
+        "key": "advantage",
+        "score": 74.6,
+        "weight": 14.43298969072165,
+        "reason": "23.8/10.0 draw units by turn 6; 2 cheap velocity cards."
+      },
+      {
+        "key": "win",
+        "score": 50.6,
+        "weight": 20.61855670103093,
+        "reason": "Token/Food conversion (6 bodies): closes T11, access 16% (u=0.57); shared bottleneck, protection access 20%; none."
+      },
+      {
+        "key": "synergy",
+        "score": 29.9,
+        "weight": 17.52577319587629,
+        "reason": "44% supports midrange; weakest dependency threats 9/7; 0 unsupported payoffs."
+      },
+      {
+        "key": "meta",
+        "score": 50,
+        "weight": 0,
+        "reason": "no context: 0 dated lists, 0% coverage; insufficient data; snapshot none."
+      },
+      {
+        "key": "structure",
+        "score": 100,
+        "weight": 0,
+        "reason": "5/5 rule checks verified; none; cap none."
+      }
+    ],
+    "gates": [
+      {
+        "key": "structure",
+        "kind": "rules",
+        "status": "pass",
+        "cap": null,
+        "reason": "5/5 rule checks verified; none; cap none."
+      },
+      {
+        "key": "size",
+        "kind": "rules",
+        "status": "pass",
+        "cap": null,
+        "reason": "100 cards (commander wants 100)"
+      },
+      {
+        "key": "singleton",
+        "kind": "rules",
+        "status": "pass",
+        "cap": null,
+        "reason": "singleton respected (basics exempt)"
+      },
+      {
+        "key": "legality",
+        "kind": "rules",
+        "status": "pass",
+        "cap": null,
+        "reason": "every card legal in commander"
+      },
+      {
+        "key": "rules",
+        "kind": "rules",
+        "status": "pass",
+        "cap": null,
+        "reason": "no other format rule broken"
+      },
+      {
+        "key": "identity",
+        "kind": "rules",
+        "status": "pass",
+        "cap": null,
+        "reason": "all cards inside B"
+      },
+      {
+        "key": "quality_cap",
+        "kind": "quality",
+        "status": "warn",
+        "cap": 43.9,
+        "reason": "quality cap 20+0.8*min(M,W,S)=43.9 from mana=88.1, win=50.6, synergy=29.9."
+      },
+      {
+        "key": "coverage",
+        "kind": "evidence",
+        "status": "warn",
+        "cap": null,
+        "reason": "61% of nonland copies are typed in the effect catalogue; unknown prerequisite \"creature death or mill\" — provisional: effect coverage, not calibrated."
+      },
+      {
+        "key": "meta_evidence",
+        "kind": "evidence",
+        "status": "warn",
+        "cap": null,
+        "reason": "no corpus snapshot supplied — meta fit defaulted to 50."
+      }
+    ]
+  }
+}
