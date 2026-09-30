@@ -1109,14 +1109,34 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
   // cards DO (detectDeckThemes), never from an EDHREC theme LABEL mapped to
   // 'aggro' — and 'aggro' additionally needs a single creature commander whose
   // own text attacks (a partner pair or a noncreature commander never is).
-  const fallbackStrategy = (): 'aggro' | 'control' | 'midrange' => {
+  // Only the DOMINANT composition theme decides: "3+ cards say destroy/counter
+  // target" is true of nearly every list, and reading it as 'control' turned
+  // the Tymna+Thrasios cEDH shell (MV 1.9) into a 6-wipe, MV 3.0 control pile.
+  // A commander whose community lists are mostly cEDH staples (Tymna +
+  // Thrasios: 44 of the top 60 commander_card_stats rows; Ygra 4, Atraxa 6,
+  // Edgar 10 of 60) is a combo shell — fast mana, tutors, cheap interaction —
+  // and its dominant theme is still "interaction", so it is checked before
+  // 'control' (which shipped 6 wipes and 7-drops at MV 3.0 for the pair).
+  const cedhStapleShare = (): number => {
+    const names = [commanderName, partnerCard?.name].filter((n): n is string => !!n);
+    try {
+      const staples = new Set((db.prepare("SELECT card_name FROM cedh_staples WHERE power_tier = 'cedh'").all() as Array<{ card_name: string }>).map((r) => r.card_name));
+      const top = db.prepare(
+        `SELECT card_name FROM commander_card_stats WHERE commander_name IN (${names.map(() => '?').join(',')}) COLLATE NOCASE
+         ORDER BY inclusion_rate DESC LIMIT 60`
+      ).all(...names) as Array<{ card_name: string }>;
+      return top.length >= 20 ? top.filter((r) => staples.has(r.card_name)).length / top.length : 0;
+    } catch { return 0; }
+  };
+  const fallbackStrategy = (): 'aggro' | 'combo' | 'control' | 'midrange' => {
     const composition = isCommander && edhrecResolvedCards.length > 0
       ? detectDeckThemes(edhrecResolvedCards) : themes;
     const aggroCommander = !isCommander || (!partnerCard
       && /\bCreature\b/.test(commanderCard?.type_line || '')
       && /\b(?:attacks?|attacking|combat damage|haste|double strike|first strike|trample|menace)\b/i.test(commanderCard?.oracle_text || ''));
-    if (composition.includes('aggro') && aggroCommander) return 'aggro';
-    if (composition.includes('control')) return 'control';
+    if (composition[0] === 'aggro' && aggroCommander) return 'aggro';
+    if (isCommander && cedhStapleShare() >= 0.5) return 'combo';
+    if (composition[0] === 'control') return 'control';
     return 'midrange';
   };
   const resolvedStrategy = resolvedStrategyHint
