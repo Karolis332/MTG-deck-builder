@@ -64,4 +64,21 @@ describe('isSuperfriendsDrawCard', () => {
     });
     expect(isSuperfriendsDrawCard(walker)).toBe(false);
   });
+
+  // U11 fix 2 — a "Way of the ___" empowers a Jace TOKEN whose printed
+  // abilities, including "[-3]: Draw a card.", are reminder text in parens
+  // describing the token, not a draw ability the Way itself grants. Without
+  // stripping reminder text, the draw cap cut Step 4b's walker-support
+  // backfill right back out.
+  it('never flags a "Way of the ___" for its Jace-token reminder text', () => {
+    const wayOfTheMentor = makeCard({
+      name: 'Way of the Mentor',
+      type_line: 'Legendary Enchantment',
+      oracle_text:
+        'When Way of the Mentor enters, empower Jace 5. (Put five loyalty counters on a Jace token you control. '
+        + "If you don't control one, first create a blue Jace planeswalker token with \"[-1]: Surveil 1\" and \"[-3]: Draw a card.\")\n"
+        + 'Whenever you gain life, put a loyalty counter on each planeswalker you control.',
+    });
+    expect(isSuperfriendsDrawCard(wayOfTheMentor)).toBe(false);
+  });
 });

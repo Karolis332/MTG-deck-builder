@@ -321,7 +321,7 @@ function isRamp(name: string, oracleText: string, typeLine: string): boolean {
 // superfriends read: a planeswalker with a "+1: Draw a card"-style loyalty
 // line is a threat/engine, not a draw spell. Omitted (or false) reproduces
 // the legacy classification byte-for-byte — Deck Score never passes this.
-interface ClassifyOpts {
+export interface ClassifyOpts {
   superfriends?: boolean;
 }
 

@@ -24,6 +24,7 @@ import {
 import { analyzeCommanderForBuild } from './commander-analysis';
 import type { ArsenalCard } from './commander-analysis';
 import { classifyCard, getPrimaryCategory, isDrawEngine, isBoardWipe } from './card-classifier';
+import type { ClassifyOpts } from './card-classifier';
 import { isTribeCreature, narrowTutorTarget, countTargets, colorlessPipCount, isColorlessSource, isMonoColourDeadFixer } from './card-relevance';
 import type { RelevanceCard } from './card-relevance';
 import { parseBuildHints } from './build-hints';
@@ -1693,10 +1694,100 @@ const SUPERFRIENDS_DRAW_CAP_RE = /draw (?:a|two|three|four|x|that many|cards|\d)
 // A cycling land's reminder text ("{2}, {T}, Discard this card: Draw a card")
 // matched the draw-cap regex, so the superfriends draw cap was cutting lands
 // out of their nonbasic quota (Tam's Landscapes). Lands are never draw spells.
+// U11 fix 2, second half: a "Way of the ___" (walker support enchantment)
+// empowers a Jace token whose printed abilities — including "[−3]: Draw a
+// card." — are reminder text in parens describing what the TOKEN does, not
+// a draw ability the Way itself grants. Without stripping reminder text
+// first, the draw cap counted every Way as a draw card and cut Step 4b's
+// walker-support backfill right back out to make room under the band.
 export function isSuperfriendsDrawCard(card: Pick<DbCard, 'type_line' | 'oracle_text'>): boolean {
   if (/\bPlaneswalker\b/.test(card.type_line || '')) return false;
   if (/\bLand\b/.test(card.type_line || '')) return false;
-  return SUPERFRIENDS_DRAW_CAP_RE.test(card.oracle_text || '');
+  const text = (card.oracle_text || '').replace(/\([^)]*\)/g, '');
+  return SUPERFRIENDS_DRAW_CAP_RE.test(text);
+}
+
+// A non-walker card whose text refers to planeswalkers, loyalty abilities or
+// loyalty counters — "search your library for a planeswalker" is legacy
+// shorthand kept for tutors. Deliberately narrower than
+// SYNERGY_REQUIREMENTS_MAP.planeswalker (which also matches bare
+// 'proliferate'): a +1/+1-counter card like Evolution Sage or Thrummingbird
+// proliferates but says nothing about planeswalkers, and matching on
+// 'proliferate' alone let generic counters cards satisfy Tam's walker-support
+// minimum before any Way of the ___ (whose own reminder text for the Jace
+// token — "Put five loyalty counters..." — is the only thing that matches
+// the broader list) was ever considered (U11 fix 2). A planeswalker
+// permanent itself is never its own support — it already counts toward the
+// walker floor above.
+const WALKER_SUPPORT_PATTERNS = [
+  'loyalty counter', 'loyalty abilit', 'planeswalkers you control',
+  'search your library for a planeswalker',
+];
+
+export function isWalkerSupportCard(card: Pick<DbCard, 'type_line' | 'oracle_text'>): boolean {
+  if (/\bPlaneswalker\b/.test(card.type_line || '')) return false;
+  const text = (card.oracle_text || '').toLowerCase();
+  return WALKER_SUPPORT_PATTERNS.some((p) => text.includes(p));
+}
+
+export interface Step4bDisplaceableCtx {
+  /** Synergy category currently being backfilled (e.g. 'planeswalker'). */
+  category: string;
+  /** Lowercased card names from the template's protectedPatterns. */
+  protectedNames: Set<string>;
+  /** Tribal payoff creatures (exact-case names) that never get displaced. */
+  tribalNames: Set<string>;
+  commanderOracleText?: string;
+  classifyOpts?: ClassifyOpts;
+  /** Current main-board ramp (primary category) quantity. */
+  rampCount: number;
+  /** Template's ramp.totalMin — ramp stops being displaceable at/below this. */
+  rampFloor: number;
+  /** Superfriends builds manage planeswalker permanents via a dedicated
+   *  floor (above Step 4b) — they're never fair game for ANY synergy
+   *  category's backfill, not just the 'planeswalker' category's own. */
+  isSuperfriends?: boolean;
+}
+
+// Step 4b (synergy-minimum backfill) never displaces removal/wipes, and only
+// displaces ramp while the deck stays at or above its template ramp floor —
+// a21f2ff protected ramp unconditionally, which starved superfriends decks
+// of ramp-adjacent slots but also silently dropped needed synergy cards
+// wherever ramp was the only displaceable pick left. Mirrors the tribal
+// minimum backfill's rampCount/rampFloor shape (~line 2070 below).
+export function isStep4bDisplaceable(
+  p: { card: DbCard; quantity: number; board: 'main' | 'sideboard' },
+  ctx: Step4bDisplaceableCtx
+): boolean {
+  if (p.board !== 'main') return false;
+  if (ctx.protectedNames.has(p.card.name.toLowerCase()) || ctx.tribalNames.has(p.card.name)) return false;
+
+  // A superfriends build's walker permanents are governed by their own
+  // dedicated floor (run before Step 4b) — protected from EVERY category's
+  // backfill, not just 'planeswalker's, and checked BEFORE the ramp-floor
+  // branch below: Quintorius Kand's ultimate ("Add {R} for each card exiled")
+  // classifies as primary 'ramp', so checking this after that branch let its
+  // early `return` skip the walker guard entirely (24 -> 17 walkers on a real
+  // Tam build — the ramp-floor return fired first and never reached here).
+  if (ctx.isSuperfriends && /\bPlaneswalker\b/.test(p.card.type_line || '')) return false;
+
+  const primary = getPrimaryCategory(classifyCard(
+    p.card.name, p.card.oracle_text || '', p.card.type_line || '', p.card.cmc || 0,
+    ctx.commanderOracleText, ctx.classifyOpts
+  ));
+  if (primary === 'removal' || primary === 'board_wipe') return false;
+  if (primary === 'ramp') return ctx.rampCount - p.quantity >= ctx.rampFloor;
+
+  // Pre-existing text heuristic (unrelated to a21f2ff): a mana rock/land
+  // tutor that classifyCard didn't already tag 'ramp' is still never
+  // displaceable — this predates the floor and stays untouched.
+  const text = (p.card.oracle_text || '').toLowerCase();
+  const type = (p.card.type_line || '').toLowerCase();
+  const isRampText = (type.includes('artifact') && text.includes('add') && text.includes('mana'))
+    || (text.includes('search your library for a') && text.includes('land'));
+  if (isRampText) return false;
+
+  return true;
 }
 
 export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult> {
@@ -2151,11 +2242,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
     }
     const walkerDeficit = walkerFloor - walkerCount;
     if (walkerDeficit > 0) {
-      const supportPatterns = SYNERGY_REQUIREMENTS_MAP.planeswalker;
-      const isSupport = (card: DbCard) => {
-        const text = (card.oracle_text || '').toLowerCase();
-        return supportPatterns.some((p) => text.includes(p.toLowerCase()));
-      };
+      const isSupport = isWalkerSupportCard;
       const pickedWalkerTypes = new Set(
         picked.filter((p) => p.board === 'main' && isWalker(p.card)).map((p) => walkerTypeOf(p.card))
       );
@@ -2204,6 +2291,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
     }
   }
 
+
   const buildReport = buildReasoningSummary(
     (resolvedStrategy as Archetype) || 'midrange',
     quotas,
@@ -2223,15 +2311,24 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
       const catPatterns = SYNERGY_REQUIREMENTS_MAP[category as keyof typeof SYNERGY_REQUIREMENTS_MAP];
       if (!catPatterns) continue;
 
+      // 'planeswalker' uses the narrower walker-support matcher (U11 fix 2)
+      // — SYNERGY_REQUIREMENTS_MAP.planeswalker's bare 'proliferate' pattern
+      // matches any +1/+1-counter card and walker permanents' own loyalty
+      // text, so the generic matcher closed this deficit with cards like
+      // Evolution Sage and the walkers already counted by the floor above,
+      // never leaving room to backfill actual walker support (Ways of ___).
+      const matchesCat = (card: DbCard): boolean =>
+        category === 'planeswalker'
+          ? isWalkerSupportCard(card)
+          : catPatterns.some((pat) => (card.oracle_text || '').toLowerCase().includes(pat.toLowerCase()));
+
       // Count how many picked cards satisfy this category
       let currentCount = 0;
       for (const p of picked) {
-        const cardText = (p.card.oracle_text || '').toLowerCase();
         const cardType = (p.card.type_line || '').toLowerCase();
-        const matchesCat = catPatterns.some((pat) => cardText.includes(pat.toLowerCase()));
         // For spell_cast, also count instants/sorceries by type
         const isSpellType = category === 'spell_cast' && (cardType.includes('instant') || cardType.includes('sorcery'));
-        if (matchesCat || isSpellType) {
+        if (matchesCat(p.card) || isSpellType) {
           currentCount += p.quantity;
         }
       }
@@ -2254,11 +2351,9 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
         // Plain lands never belong in spell slots; modal land-backs are budgeted.
         if ((card.type_line || '').split('//')[0].includes('Land')) return false;
         if (isLandBackDfc(card) && mdfcLandBacksPicked >= MAX_MDFC_IN_SPELLS) return false;
-        const cardText = (card.oracle_text || '').toLowerCase();
         const cardType = (card.type_line || '').toLowerCase();
-        const matchesCat = catPatterns.some((pat) => cardText.includes(pat.toLowerCase()));
         const isSpellType = category === 'spell_cast' && (cardType.includes('instant') || cardType.includes('sorcery'));
-        return matchesCat || isSpellType;
+        return matchesCat(card) || isSpellType;
       })
         // Rank by the build's own synergy score (tribal/theme bonuses baked
         // in) so a tribal commander's cheap slots go to cheap tribe/counter
@@ -2267,45 +2362,49 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
 
       // Find the lowest-scored current picks that aren't protected
       const protectedSet = new Set(merged.protectedPatterns.map((p) => p.toLowerCase()));
-      const isProtected = (cardName: string) => {
-        return protectedSet.has(cardName.toLowerCase())
-          || tribalNames.has(cardName);
-      };
+
+      // Ramp stays displaceable down to the template's floor (U11 fix 1) —
+      // a21f2ff protected it unconditionally, which pushed Tam's Arena build
+      // to 22 ramp (superfriends band 10-14) at the cost of Evolution Sage,
+      // Thrummingbird and The One Ring. rampFloor/rampCount mirror the
+      // tribal backfill above (~line 2070); the static filter build passes
+      // rampFloor -Infinity so ramp cards aren't pre-excluded, then the fill
+      // loop below re-checks with the live floor as picks get displaced.
+      const rampFloor = getTemplate(resolvedStrategy).ramp.totalMin;
+      let rampCount = 0;
+      for (const p of picked) {
+        const primary = getPrimaryCategory(classifyCard(p.card.name, p.card.oracle_text || '', p.card.type_line || '', p.card.cmc || 0, commanderCard?.oracle_text || undefined, classifyOpts));
+        if (p.board === 'main' && primary === 'ramp') rampCount += p.quantity;
+      }
 
       // Identify non-essential picks (lowest score, non-protected)
       const displaceable = [...picked]
-        .filter((p) => {
-          if (p.board !== 'main') return false;
-          if (isProtected(p.card.name)) return false;
-          const primary = getPrimaryCategory(classifyCard(p.card.name, p.card.oracle_text || '', p.card.type_line || '', p.card.cmc || 0, commanderCard?.oracle_text || undefined, classifyOpts));
-          if (primary === 'removal' || primary === 'board_wipe') return false;
-          if (primary === 'ramp') return false;
-          // Never displace ramp if below baseline
-          const text = (p.card.oracle_text || '').toLowerCase();
-          const type = (p.card.type_line || '').toLowerCase();
-          const isRamp = (type.includes('artifact') && text.includes('add') && text.includes('mana'))
-            || text.includes('search your library for a') && text.includes('land');
-          if (isRamp) return false;
-          // The 'planeswalker' category here fills proliferate/loyalty-doubler
-          // SUPPORT patterns, not walker permanents — a walker itself never
-          // matches that text, so without this guard the superfriends walker
-          // floor's own backfill (above) is the first thing displaced to make
-          // room for its support cards (U8a defect 2: floor 18, shipped 16).
-          if (category === 'planeswalker' && /\bPlaneswalker\b/.test(p.card.type_line || '')) return false;
-          return true;
-        })
+        .filter((p) => isStep4bDisplaceable(p, {
+          category, protectedNames: protectedSet, tribalNames,
+          commanderOracleText: commanderCard?.oracle_text || undefined, classifyOpts, isSuperfriends,
+          rampCount, rampFloor: -Infinity,
+        }))
         .sort((a, b) => {
           const aScore = scored.find((s) => s.card.name === a.card.name)?.score || 0;
           const bScore = scored.find((s) => s.card.name === b.card.name)?.score || 0;
           return aScore - bScore; // lowest score first
         });
 
+
       let filled = 0;
       for (const candidate of synergyCandidates) {
         if (filled >= deficit) break;
         if (displaceable.length === 0) break;
 
-        const displaced = displaceable.shift()!;
+        const at = displaceable.findIndex((p) => isStep4bDisplaceable(p, {
+          category, protectedNames: protectedSet, tribalNames,
+          commanderOracleText: commanderCard?.oracle_text || undefined, classifyOpts, isSuperfriends,
+          rampCount, rampFloor,
+        }));
+        if (at === -1) break;
+        const [displaced] = displaceable.splice(at, 1);
+        const displacedPrimary = getPrimaryCategory(classifyCard(displaced.card.name, displaced.card.oracle_text || '', displaced.card.type_line || '', displaced.card.cmc || 0, commanderCard?.oracle_text || undefined, classifyOpts));
+        if (displacedPrimary === 'ramp') rampCount -= displaced.quantity;
         // Remove displaced card
         const idx = picked.indexOf(displaced);
         if (idx !== -1) {
@@ -2325,6 +2424,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
       }
     }
   }
+
 
   // ── Step 5: Add lands (via land intelligence) ───────────────────────────
   // MDFC spell//land cards already in the nonland picks are tapped-land
@@ -2589,6 +2689,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
     }
   }
 
+
   // ── Superfriends draw cap ────────────────────────────────────────────────
   // Walkers are card advantage in their own right (excluded from "draw" by
   // the walker floor above and by the auditor's DRAW_RE below) — but nothing
@@ -2652,6 +2753,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
       }
     }
   }
+
 
   // ── Step 8: Self-audit + auto-repair ───────────────────────────────────
   // The engine grades its own output and fixes mana/draw deficiencies before
@@ -2741,7 +2843,14 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
             // Never cut a commander payoff (Blood Artist in a sac deck) or a
             // tribal card — protect both regardless of commanderProfile presence.
             && !payoffNames.has(p.card.name.toLowerCase())
-            && !tribalNames.has(p.card.name);
+            && !tribalNames.has(p.card.name)
+            // U11 fix 2: Step 4b's synergy-minimum backfill classifies a Way
+            // of the ___ as 'utility' too (it's an enchantment, no ramp/draw/
+            // removal text of its own), so without this guard the draw-engine
+            // repair pass immediately cut the walker support Step 4b just
+            // added back out to make room for its own draw fixes. Superfriends
+            // opt-in only — isSuperfriends is false everywhere else.
+            && !(isSuperfriends && isWalkerSupportCard(p.card));
         })
         .sort((a, b) => scoreOf(a.card.name) - scoreOf(b.card.name))[0];
       if (!out) break; // nothing safe to displace
@@ -2761,6 +2870,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
   // (See BuildPriceReport / BuildBracketReport — always present, no-op
   // values when the corresponding option wasn't requested.)
   const commanderNames = [commanderCard?.name, options.partnerName].filter((n): n is string => !!n);
+
 
   let finalCards = picked;
 
