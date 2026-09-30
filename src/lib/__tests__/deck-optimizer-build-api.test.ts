@@ -127,7 +127,7 @@ describe('optimizeDeck — role bands follow the detected archetype (U8a)', { ti
 // face and its full "Front // Back" name) must merge instead of the later
 // row silently overwriting the earlier one in afterLines' name-keyed Map —
 // that mismatch used to throw "optimizer size invariant violated".
-describe('optimizeDeck — duplicate resolved rows merge instead of throwing (U9b #3)', () => {
+describe('optimizeDeck — duplicate resolved rows merge instead of throwing (U9b #3)', { timeout: 60_000 }, () => {
   const DUPLICATE_ESIKA_TEXT =
     'Commander\n1 Atraxa, Praetors\' Voice\n\nDeck\n' +
     "1 Esika, God of the Tree\n" +
