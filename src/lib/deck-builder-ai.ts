@@ -32,6 +32,7 @@ import { auditDeck } from './deck-auditor';
 import type { DeckHealth } from './deck-auditor';
 import { classifyBracket, bracketOffenseCategory, bracketPoolExclusions } from './bracket';
 import type { BracketCard } from './bracket';
+import { countColorSources, countPipDemand } from './mana-sources';
 
 // ── Mana-sink payoffs for multicolor-matters commanders (Ramos et al.) ───────
 // Cards that convert a big mana burst (from Ramos's counter-dump) into a win or
@@ -452,6 +453,8 @@ export interface BuildPriceReport {
   maxDeckPrice: number | null;
   excludedByCardCap: number;
   replacedForBudget: Array<{ out: string; in: string; saved: number }>;
+  /** true when maxDeckPrice was requested and the built total still exceeds it. */
+  overBudget: boolean;
 }
 
 /** `BuildResult.bracket` — always present for Commander-family formats; `target: null` for others. */
@@ -1026,16 +1029,15 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
 
   // ── Price cap: candidates over maxCardPrice leave the pool up front ──────
   // Exempt: the commander (never in this nonland pool anyway), and cards the
-  // user already owns (free to them). Unknown price (null) is allowed and
-  // counted separately in BuildResult.price.unpricedCount at build time.
+  // user already owns (free to them). Unknown price (null) is excluded too —
+  // unpriced is not free — unless owned.
   let priceCapExcluded = 0;
   if (options.maxCardPrice != null && options.maxCardPrice > 0) {
     const cap = options.maxCardPrice;
     for (let i = pool.length - 1; i >= 0; i--) {
       const card = pool[i];
       if (useCollection && (ownedQty.get(card.name) || 0) > 0) continue;
-      const price = card.price_usd != null ? parseFloat(card.price_usd) : NaN;
-      if (Number.isNaN(price) || price <= cap) continue;
+      if (passesCardPriceCap(card.price_usd, cap)) continue;
       pool.splice(i, 1);
       priceCapExcluded++;
     }
@@ -2609,6 +2611,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
     maxDeckPrice: options.maxDeckPrice ?? null,
     excludedByCardCap: poolResult.priceCapExcluded,
     replacedForBudget,
+    overBudget: options.maxDeckPrice != null && priceTotal > options.maxDeckPrice,
   };
 
   const finalPickedNames = new Set(finalCards.map((c) => c.card.name));
@@ -2638,6 +2641,23 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
     bracket: bracketReport,
     deadCardsReplaced,
   };
+}
+
+/** Basic land name -> the one colour it produces. */
+const BASIC_LAND_COLOR: Record<string, string> = {
+  Plains: 'W', Island: 'U', Swamp: 'B', Mountain: 'R', Forest: 'G',
+};
+
+/**
+ * Whether a card's price clears a cap. Unpriced (null) fails any real cap —
+ * unknown price is never treated as free — matching card-alternatives.ts's
+ * `passesPriceCap`. No cap given: everything passes.
+ */
+export function passesCardPriceCap(priceUsd: string | null, cap: number | null | undefined): boolean {
+  if (cap == null) return true;
+  const price = priceUsd != null ? parseFloat(priceUsd) : NaN;
+  if (Number.isNaN(price)) return false;
+  return price <= cap;
 }
 
 /**
@@ -2684,7 +2704,16 @@ export function applyDeckBudget(
     const targetPrice = effPrice(target.card);
 
     if (isLand(target.card)) {
-      const basic = cards.find((c) => c !== target && c.board === 'main' && (c.card.type_line || '') === 'Basic Land');
+      const isBasic = (c: DbCard): boolean => /^Basic\b/.test(c.type_line || '');
+      const mainLands = cards.filter((c) => c.board === 'main' && c !== target && isLand(c.card));
+      const mainNonlands = cards.filter((c) => c.board === 'main' && !isLand(c.card));
+      const sources = countColorSources(mainLands.map((c) => ({ card: c.card, quantity: c.quantity })));
+      const pips = countPipDemand(mainNonlands.map((c) => ({ card: c.card, quantity: c.quantity })));
+      const deficitColor = Object.keys(pips)
+        .filter((c) => pips[c] > 0)
+        .sort((a, b) => (pips[b] - sources[b]) - (pips[a] - sources[a]))[0];
+      const basic = mainLands.find((c) => isBasic(c.card) && BASIC_LAND_COLOR[c.card.name] === deficitColor)
+        ?? mainLands.find((c) => isBasic(c.card));
       if (!basic) { stuck.add(target.card.name); continue; } // no basic to absorb the cut — try the next card
       basic.quantity += target.quantity;
       const idx = cards.indexOf(target);
@@ -2695,7 +2724,13 @@ export function applyDeckBudget(
 
     const role = primaryRole(target.card);
     const budgetLeft = maxDeckPrice - (total() - targetPrice);
-    const candidates = pool.filter((p) => !inDeck.has(p.card.name) && !isLand(p.card) && primaryRole(p.card) === role);
+    // Unpriced is not free: an unowned candidate with no known price is only
+    // eligible when the user owns it (isOwned already makes it effPrice 0
+    // honestly — an unknown price otherwise can't be judged "savings").
+    const candidates = pool.filter((p) =>
+      !inDeck.has(p.card.name) && !isLand(p.card) && primaryRole(p.card) === role
+      && (isOwned(p.card.name) || p.card.price_usd != null)
+    );
     const fitting = candidates.filter((p) => effPrice(p.card) <= budgetLeft).sort((a, b) => b.score - a.score)[0];
     const cheapest = candidates.slice().sort((a, b) => effPrice(a.card) - effPrice(b.card))[0];
     const replacement = fitting || cheapest;

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { applyDeckBudget, applyBracketTarget, applyDeadCardPass } from '../deck-builder-ai';
+import { applyDeckBudget, applyBracketTarget, applyDeadCardPass, passesCardPriceCap } from '../deck-builder-ai';
 import { bracketPoolExclusions, bracketOffenseCategory, classifyBracket } from '../bracket';
 import type { DbCard } from '../types';
 
@@ -122,7 +122,7 @@ describe('applyDeckBudget', () => {
 
   it('a land swap falls back to an existing basic in the deck (basics are the floor)', () => {
     const pricyLand = makeCard({ name: 'Pricy Dual', price_usd: '30.00', type_line: 'Land' });
-    const basic = makeCard({ name: 'Mountain', price_usd: '0.10', type_line: 'Basic Land' });
+    const basic = makeCard({ name: 'Mountain', price_usd: '0.10', type_line: 'Basic Land — Mountain' });
     const picked = [
       { card: pricyLand, quantity: 1, board: 'main' as const },
       { card: basic, quantity: 5, board: 'main' as const },
@@ -131,6 +131,66 @@ describe('applyDeckBudget', () => {
     expect(replacedForBudget.length).toBe(1);
     expect(cards.find((c) => c.card.name === 'Pricy Dual')).toBeUndefined();
     expect(cards.find((c) => c.card.name === 'Mountain')?.quantity).toBe(6);
+  });
+
+  it('a land swap prefers the basic of the colour with the biggest pip-to-source deficit', () => {
+    const pricyLand = makeCard({ name: 'Pricy Dual', price_usd: '30.00', type_line: 'Land' });
+    const mountain = makeCard({ name: 'Mountain', price_usd: '0.10', type_line: 'Basic Land — Mountain' });
+    const forest = makeCard({ name: 'Forest', price_usd: '0.10', type_line: 'Basic Land — Forest' });
+    // Two red pips demanded, zero red sources besides the swapped dual; one
+    // green pip, one green source already on the board — red is the deficit.
+    const redSpell = makeCard({ name: 'Red Spell', mana_cost: '{R}{R}', colors: '["R"]' });
+    const greenSpell = makeCard({ name: 'Green Spell', mana_cost: '{G}', colors: '["G"]' });
+    const picked = [
+      { card: pricyLand, quantity: 1, board: 'main' as const },
+      { card: mountain, quantity: 1, board: 'main' as const },
+      { card: forest, quantity: 1, board: 'main' as const },
+      { card: redSpell, quantity: 1, board: 'main' as const },
+      { card: greenSpell, quantity: 1, board: 'main' as const },
+    ];
+    const { cards, replacedForBudget } = applyDeckBudget(picked, [], 5, new Map(), false, undefined);
+    expect(replacedForBudget.length).toBe(1);
+    expect(cards.find((c) => c.card.name === 'Mountain')?.quantity).toBe(2);
+    expect(cards.find((c) => c.card.name === 'Forest')?.quantity).toBe(1);
+  });
+
+  it('an unpriced same-role candidate is not treated as free savings unless owned', () => {
+    const bomb = makeCard({ name: 'Bomb', price_usd: '40.00', type_line: 'Creature' });
+    const unpricedBest = makeCard({ name: 'Unpriced Best', price_usd: null, type_line: 'Creature' });
+    const pricedOk = makeCard({ name: 'Priced Ok', price_usd: '1.00', type_line: 'Creature' });
+    const picked = [{ card: bomb, quantity: 1, board: 'main' as const }];
+    const pool = [
+      { card: unpricedBest, score: 99 },
+      { card: pricedOk, score: 50 },
+    ];
+    const { cards, replacedForBudget } = applyDeckBudget(picked, pool, 5, new Map(), false, undefined);
+    expect(replacedForBudget[0].in).toBe('Priced Ok');
+    expect(cards[0].card.name).toBe('Priced Ok');
+  });
+
+  it('an unpriced candidate is eligible as a budget replacement when owned', () => {
+    const bomb = makeCard({ name: 'Bomb', price_usd: '40.00', type_line: 'Creature' });
+    const unpricedOwned = makeCard({ name: 'Unpriced Owned', price_usd: null, type_line: 'Creature' });
+    const picked = [{ card: bomb, quantity: 1, board: 'main' as const }];
+    const pool = [{ card: unpricedOwned, score: 99 }];
+    const ownedQty = new Map([['Unpriced Owned', 1]]);
+    const { cards, replacedForBudget } = applyDeckBudget(picked, pool, 5, ownedQty, true, undefined);
+    expect(replacedForBudget[0].in).toBe('Unpriced Owned');
+    expect(cards[0].card.name).toBe('Unpriced Owned');
+  });
+});
+
+describe('passesCardPriceCap', () => {
+  it('no cap: everything passes', () => {
+    expect(passesCardPriceCap(null, null)).toBe(true);
+    expect(passesCardPriceCap('99.00', null)).toBe(true);
+  });
+  it('unpriced fails a cap (unpriced is not free)', () => {
+    expect(passesCardPriceCap(null, 5)).toBe(false);
+  });
+  it('priced compares against the cap', () => {
+    expect(passesCardPriceCap('4.99', 5)).toBe(true);
+    expect(passesCardPriceCap('5.01', 5)).toBe(false);
   });
 });
 

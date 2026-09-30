@@ -148,7 +148,7 @@ async function main(): Promise<void> {
       name = @name, mana_cost = @mana_cost, cmc = @cmc, type_line = @type_line,
       oracle_text = @oracle_text, colors = @colors, color_identity = @color_identity,
       keywords = @keywords, rarity = @rarity,
-      price_usd = @price_usd, price_usd_foil = @price_usd_foil,
+      price_usd = COALESCE(@price_usd, price_usd), price_usd_foil = COALESCE(@price_usd_foil, price_usd_foil),
       legalities = @legalities, power = @power, toughness = @toughness,
       loyalty = @loyalty, produced_mana = @produced_mana, edhrec_rank = @edhrec_rank,
       game_changer = @game_changer,
