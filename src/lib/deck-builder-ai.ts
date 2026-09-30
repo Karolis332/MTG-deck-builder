@@ -1598,7 +1598,10 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
     const hasMlData = mlScoreMap.has(card.name);
     const edhrecRank = card.edhrec_rank ?? 999999;
     const hasAnySignal = hasCmdrData || hasMetaData || hasEdhrecData || hasCfData || hasMlData;
-    if (!hasAnySignal && edhrecRank > 18000) {
+    // A superfriends build's deck-wide loyalty engine IS the curated payoff
+    // list — a new set's Ways (edhrec_rank ~20,000, no stats yet) are the
+    // plan, not filler (U12 fix 1; opt-in path only).
+    if (!hasAnySignal && edhrecRank > 18000 && !(isSuperfriends && isWalkerEngineCard(card))) {
       score -= 35;
     }
 
@@ -1730,6 +1733,42 @@ export function isWalkerSupportCard(card: Pick<DbCard, 'type_line' | 'oracle_tex
   return WALKER_SUPPORT_PATTERNS.some((p) => text.includes(p));
 }
 
+// A deck-wide, repeatable loyalty engine — the subset of walker support a
+// superfriends build is actually built around (U12 fix 1). One pattern per
+// reason, tested on reminder-stripped text (a Way's Jace-token reminder
+// must not qualify on its own). Repeatable means a permanent: an instant
+// (Repeated Reverberation) or a Saga chapter (Urza Assembles the Titans)
+// fires once. A granted ability must be activatable off a fresh walker
+// (cost ≤ 5): "[−8]"/"[−10]" grants (Kiora of Salt and Sand, Avatar of
+// Burgeoning Echoes) are ultimates. A single-subtype trigger ("...of a
+// Chandra planeswalker") is not deck-wide; a one-shot loyalty add (Elspeth
+// Conquers Death) is support, not an engine — those stay in
+// isWalkerSupportCard only.
+const WALKER_ENGINE_PATTERNS: RegExp[] = [
+  /planeswalkers you control have "\[(?:\+\d+|0|[−-][1-5])\]/,   // grants a usable ability to every walker (Ways, Ichormoon Gauntlet)
+  /loyalty counter on each planeswalker/,                        // loyalty for the whole team per trigger (Mentor, Brokers Ascendancy)
+  /whenever you activate a loyalty ability(?! of an? \w+ planeswalker)/, // pays off every activation (Paradox, Mind Sculptor)
+  /whenever you put one or more loyalty counters/,               // pays off every loyalty gain (Inspired Tethermage)
+  /loyalty abilit(?:y|ies)[^.]*(?:twice|additional time)/,       // extra activations (Oath of Teferi)
+  /for each planeswalker you control/,                           // per-walker activation/scaling (The Chain Veil)
+];
+
+export function isWalkerEngineCard(card: Pick<DbCard, 'type_line' | 'oracle_text'>): boolean {
+  if (/\bPlaneswalker\b|\bInstant\b|\bSorcery\b|\bSaga\b/.test(card.type_line || '')) return false;
+  const text = (card.oracle_text || '').replace(/\([^)]*\)/g, '').toLowerCase();
+  return WALKER_ENGINE_PATTERNS.some((re) => re.test(text));
+}
+
+// Two engines per three walkers: the operator's Tam list runs 20 walkers
+// with 10 Ways plus Oath of Teferi / The Chain Veil on its order list. The
+// floor is scaled off the walker floor (already sized to the commander's
+// payoff and the deck's nonland count) and capped by what the pool holds.
+export const WALKER_ENGINE_RATIO = 2 / 3;
+
+export function walkerEngineFloor(walkerFloor: number): number {
+  return Math.round(walkerFloor * WALKER_ENGINE_RATIO);
+}
+
 export interface Step4bDisplaceableCtx {
   /** Synergy category currently being backfilled (e.g. 'planeswalker'). */
   category: string;
@@ -1770,6 +1809,10 @@ export function isStep4bDisplaceable(
   // early `return` skip the walker guard entirely (24 -> 17 walkers on a real
   // Tam build — the ramp-floor return fired first and never reached here).
   if (ctx.isSuperfriends && /\bPlaneswalker\b/.test(p.card.type_line || '')) return false;
+  // Same rule for the engine floor's picks (U12 fix 1): they are the
+  // lowest-scored cards in the deck (no popularity data) and would be the
+  // first thing every later category's backfill cut.
+  if (ctx.isSuperfriends && isWalkerEngineCard(p.card)) return false;
 
   const primary = getPrimaryCategory(classifyCard(
     p.card.name, p.card.oracle_text || '', p.card.type_line || '', p.card.cmc || 0,
@@ -2241,8 +2284,51 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
       if (p.board === 'main' && isWalker(p.card)) walkerCount += p.quantity;
     }
     const walkerDeficit = walkerFloor - walkerCount;
+    const isSupport = isWalkerSupportCard;
+    const primaryOf = (p: { card: DbCard }) => getPrimaryCategory(classifyCard(p.card.name, p.card.oracle_text || '', p.card.type_line || '', p.card.cmc || 0, commanderCard?.oracle_text || undefined, classifyOpts));
+    const scoreOfPick = (p: { card: DbCard }) => scored.find((s) => s.card.name === p.card.name)?.score || 0;
+    // Displaces the lowest-scored picks that are neither walkers, walker
+    // support, removal nor wipes; ramp only while the deck stays above
+    // `rampFloor` (Step 4b's rule, U11 fix 1). The walker fill passes
+    // Infinity (its pre-existing unconditional ramp guard); the engine fill
+    // passes the template floor — the arsenal pre-fill ships 16+ staple ramp
+    // and only a later backfill ever trimmed it back into the 10-14 band.
+    const backfill = (candidates: DbCard[], deficit: number, rampFloor: number, onAdd?: (card: DbCard) => void) => {
+      let rampCount = 0;
+      for (const p of picked) {
+        if (p.board === 'main' && primaryOf(p) === 'ramp') rampCount += p.quantity;
+      }
+      const displaceable = [...picked]
+        .filter((p) => {
+          if (p.board !== 'main' || isWalker(p.card) || isSupport(p.card)) return false;
+          const primary = primaryOf(p);
+          return primary !== 'removal' && primary !== 'board_wipe';
+        })
+        .sort((a, b) => scoreOfPick(a) - scoreOfPick(b));
+      let filled = 0;
+      for (const candidate of candidates) {
+        if (filled >= deficit) break;
+        const at = displaceable.findIndex((p) => primaryOf(p) !== 'ramp' || rampCount - p.quantity >= rampFloor);
+        if (at === -1) break;
+        const [displaced] = displaceable.splice(at, 1);
+        if (primaryOf(displaced) === 'ramp') rampCount -= displaced.quantity;
+        const idx = picked.indexOf(displaced);
+        if (idx !== -1) {
+          picked.splice(idx, 1);
+          pickedNames.delete(displaced.card.name);
+          totalPicked -= displaced.quantity;
+        }
+        const qty = Math.min(getMaxQty(candidate), deficit - filled);
+        if (qty > 0) {
+          picked.push({ card: candidate, quantity: qty, board: 'main' });
+          pickedNames.add(candidate.name);
+          totalPicked += qty;
+          filled += qty;
+          onAdd?.(candidate);
+        }
+      }
+    };
     if (walkerDeficit > 0) {
-      const isSupport = isWalkerSupportCard;
       const pickedWalkerTypes = new Set(
         picked.filter((p) => p.board === 'main' && isWalker(p.card)).map((p) => walkerTypeOf(p.card))
       );
@@ -2257,37 +2343,29 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
           return b.score - a.score;
         })
         .map((s) => s.card);
-      const displaceable = [...picked]
-        .filter((p) => {
-          if (p.board !== 'main' || isWalker(p.card) || isSupport(p.card)) return false;
-          const primary = getPrimaryCategory(classifyCard(p.card.name, p.card.oracle_text || '', p.card.type_line || '', p.card.cmc || 0, commanderCard?.oracle_text || undefined, classifyOpts));
-          return primary !== 'removal' && primary !== 'board_wipe' && primary !== 'ramp';
-        })
-        .sort((a, b) => {
-          const aScore = scored.find((s) => s.card.name === a.card.name)?.score || 0;
-          const bScore = scored.find((s) => s.card.name === b.card.name)?.score || 0;
-          return aScore - bScore;
-        });
+      backfill(candidates, walkerDeficit, Infinity, (card) => pickedWalkerTypes.add(walkerTypeOf(card)));
+    }
 
-      let filled = 0;
-      for (const candidate of candidates) {
-        if (filled >= walkerDeficit || displaceable.length === 0) break;
-        const displaced = displaceable.shift()!;
-        const idx = picked.indexOf(displaced);
-        if (idx !== -1) {
-          picked.splice(idx, 1);
-          pickedNames.delete(displaced.card.name);
-          totalPicked -= displaced.quantity;
-        }
-        const qty = Math.min(getMaxQty(candidate), walkerDeficit - filled);
-        if (qty > 0) {
-          picked.push({ card: candidate, quantity: qty, board: 'main' });
-          pickedNames.add(candidate.name);
-          totalPicked += qty;
-          filled += qty;
-          pickedWalkerTypes.add(walkerTypeOf(candidate));
-        }
-      }
+    // ── Engine floor (U12 fix 1) ──
+    // The deck-wide loyalty engines a superfriends build is built around
+    // (Ways of ___, Oath of Teferi, The Chain Veil) carry no popularity
+    // signal in a new set, so the score-ranked passes above never reach
+    // them: Tam's no-collection build shipped 0 of 10 Ways while the walker-
+    // support minimum was met by cards that merely mention planeswalkers
+    // (Mox Amber, pillow-fort). Filled by score among engines only, capped by
+    // what the pool holds; picks are protected from Step 4b (see
+    // isStep4bDisplaceable) and count toward the support minimum.
+    let engineCount = 0;
+    for (const p of picked) {
+      if (p.board === 'main' && isWalkerEngineCard(p.card)) engineCount += p.quantity;
+    }
+    const engineDeficit = walkerEngineFloor(walkerFloor) - engineCount;
+    if (engineDeficit > 0) {
+      const candidates = scored
+        .filter((s) => isWalkerEngineCard(s.card) && !pickedNames.has(s.card.name) && getMaxQty(s.card) > 0)
+        .sort((a, b) => b.score - a.score)
+        .map((s) => s.card);
+      backfill(candidates, engineDeficit, getTemplate(resolvedStrategy).ramp.totalMin);
     }
   }
 
