@@ -245,16 +245,19 @@ const REMOVAL_NAMES = new Set([
   'soul-guide lantern', 'scavenging ooze',
 ]);
 
+// Allows type qualifiers between "all" and the noun (Their Name Is Death's
+// "nonartifact", Reiver Demon's "nonartifact, nonblack") — was requiring
+// the noun to follow "all" directly.
+const WIPE_DESTROY_ALL = /(?:destroy|exile) all (?:(?:other|non-?\w+|attacking|blocking|tapped|untapped),? )*(?:creatures|permanents|nonland permanents|artifacts|enchantments)/i;
+const WIPE_DAMAGE_EACH_CREATURE = /deals? \d+ damage to each creature/i;
+
 const BOARD_WIPE_PATTERNS = [
-  // Allows type qualifiers between "all" and the noun (Their Name Is Death's
-  // "nonartifact", Reiver Demon's "nonartifact, nonblack") — was requiring
-  // the noun to follow "all" directly.
-  /(?:destroy|exile) all (?:(?:other|non-?\w+|attacking|blocking|tapped|untapped),? )*(?:creatures|permanents|nonland permanents|artifacts|enchantments)/i,
+  WIPE_DESTROY_ALL,
   // Bounded window + an explicit damage amount — the unbounded ".* .*" was
   // matching reminder text and unrelated triggers that happen to say "each
   // ... deals ... damage" without being a symmetric wipe (review 2026-08-23 C2).
   /each (?:creature|player|opponent)[^.]{0,40}deals? \d+ damage/i,
-  /deals? \d+ damage to each creature/i,
+  WIPE_DAMAGE_EACH_CREATURE,
   /all creatures get [+-]\d+\/[+-]\d+ until/i,
   // Requires an actual battlefield object class after "return all" — was
   // matching Bag of Holding's "Return all cards exiled with this artifact to
@@ -270,6 +273,40 @@ const BOARD_WIPE_NAMES = new Set([
   'hour of revelation', 'in garruk\'s wake', 'chain reaction',
   'night of the sweets\' revenge',
 ]);
+
+// strict wipes (Unit C 2026-09-30, A-D4): the wipe slot is a symmetric,
+// one-turn sweep. Not: a charm with one sweeper mode (Rakdos/Golgari Charm),
+// "each creature deals N damage to its controller", a -1/-1 sweep, bounce of
+// attackers only (Aetherize) or of one target player's board (River's
+// Rebuke), or an activation costing {5}+ generic (Perilous Vault: nine mana
+// over two turns). Night of the Sweets' Revenge is a Food anthem frozen in
+// BOARD_WIPE_NAMES for Deck Score; strict drops it (remove both together
+// when Deck Score re-freezes).
+const STRICT_WIPE_PATTERNS = [
+  WIPE_DESTROY_ALL,
+  /each (?:creature|player|opponent)[^.]{0,40}deals? \d+ damage(?! to (?:its|their) controller)/i,
+  WIPE_DAMAGE_EACH_CREATURE,
+  /all creatures get [+-](?:[2-9]|\d{2}|x)\/-(?:[2-9]|\d{2}|x) until/i,
+  /return all (?![^.]*\b(?:attacking|blocking)\b)(?![^.]*target player controls)(?:\w+ )*(?:creatures|permanents|artifacts|enchantments|nonland permanents)\b[^.]*to (?:their|its) (?:owner's|owners') hands?/i,
+];
+const NOT_WIPES_STRICT = new Set(['night of the sweets\' revenge']);
+
+// Drops "<cost>: <effect>" lines whose cost carries {5}+ generic mana.
+function withoutSlowActivations(own: string): string {
+  return own.split('\n').filter((line) => {
+    const colon = line.indexOf(':');
+    if (colon === -1) return true;
+    const generic = line.slice(0, colon).match(/\{(\d+)\}/);
+    return !(generic && Number(generic[1]) >= 5);
+  }).join('\n');
+}
+
+// Symmetric creature sweeper vs one-sided / non-creature: the flag the
+// builder's displacement guard (deck-builder-ai isStep4bDisplaceable) should
+// read to let a creature-heavy deck displace a Wrath — the rule belongs to
+// the guard, so only the flag lives here.
+const SYMMETRIC_CREATURE_WIPE = /(?:destroy|exile) all (?:(?:other|non-?\w+|tapped|untapped),? )*(?:creatures|permanents|nonland permanents)|damage to each creature|(?:all|each) creatures? gets? -/i;
+const ONE_SIDED_WIPE = /you don't control|your opponents control|opponents? controls?/i;
 
 const PROTECTION_PATTERNS = [
   /(?:target|a) (?:creature|permanent) .* (?:hexproof|indestructible|shroud)/i,
@@ -344,7 +381,10 @@ export interface ClassifyOpts {
   /** Builder-only honest read (Unit C 2026-09-30, B-D5 / A-D4). Only the
    *  builder, arsenal, optimizer and gate pass it; Deck Score never does
    *  (default path pinned by card-classifier-default-path-identity.test.ts).
-   *  ramp: own abilities only (no reminder-text / opponent Treasure). */
+   *  ramp: own abilities only (no reminder-text / opponent Treasure);
+   *  win_condition: evasion / mass pump / drain / alt-win, never MV alone;
+   *  board_wipe: symmetric one-turn sweeps only (STRICT_WIPE_PATTERNS);
+   *  protection: needs a target object; tutor: general tutors only. */
   strict?: boolean;
 }
 
@@ -359,10 +399,29 @@ function isDraw(name: string, oracleText: string, typeLine: string, opts?: Class
   return matchesPatterns(oracleText, DRAW_PATTERNS);
 }
 
-function isTutor(name: string, oracleText: string, typeLine: string): boolean {
+// strict tutor (A-D4): a GENERAL tutor resolves in one turn for <= 6 mana and
+// finds what it names — not a Class level gate (Cool but Rude), a {5}-card
+// + {3}-sac-three-tokens activation (Transmutation Font), or an X-bounded
+// search that only reaches the hand (Celestial Reunion: pay X+1, then pay
+// the card again). Lines that fail are dropped before the search-clause test.
+function generalTutorText(oracleText: string, cmc: number): string {
+  return (oracleText || '').split('\n').filter((line) => {
+    if (/^when this class becomes level/i.test(line)) return false;
+    const colon = line.indexOf(':');
+    if (colon !== -1) {
+      const cost = line.slice(0, colon);
+      const generic = Number((cost.match(/\{(\d+)\}/) || [])[1] || 0);
+      if (cmc + generic > 6 || /sacrifice (?:two|three|four|five|\d+|x)\b/i.test(cost)) return false;
+    }
+    return !/mana value x or less[^.]*into your hand/i.test(line);
+  }).join('\n');
+}
+
+function isTutor(name: string, oracleText: string, typeLine: string, cmc: number, opts?: ClassifyOpts): boolean {
   if (isLand(typeLine)) return false;
   if (TUTOR_NAMES.has(name.toLowerCase())) return true;
-  const m = (oracleText || '').match(TUTOR_SEARCH_CLAUSE);
+  const text = opts?.strict ? generalTutorText(oracleText, cmc) : (oracleText || '');
+  const m = text.match(TUTOR_SEARCH_CLAUSE);
   if (!m) return false;
   // Land-fetch is ramp, not a tutor — Cultivate/Farseek/Nature's Lore/Three
   // Visits already resolve via RAMP_NAMES/RAMP_PATTERNS above; this only
@@ -405,12 +464,13 @@ export function isDrawEngine(name: string, oracleText: string, typeLine: string)
   return true;
 }
 
-function isRemoval(name: string, oracleText: string, typeLine: string): boolean {
+function isRemoval(name: string, oracleText: string, typeLine: string, opts?: ClassifyOpts): boolean {
   if (isLand(typeLine)) return false;
   if (REMOVAL_NAMES.has(name.toLowerCase())) return true;
   const own = ownAbilities(oracleText);
-  // Check it's targeted, not board wipe
-  if (matchesPatterns(own, BOARD_WIPE_PATTERNS)) return false;
+  // Check it's targeted, not board wipe (strict: a charm whose sweeper mode
+  // is not a wipe still counts its "destroy target" mode as removal)
+  if (matchesPatterns(own, opts?.strict ? STRICT_WIPE_PATTERNS : BOARD_WIPE_PATTERNS)) return false;
   return matchesPatterns(own, REMOVAL_PATTERNS);
 }
 
@@ -418,15 +478,36 @@ function isRemoval(name: string, oracleText: string, typeLine: string): boolean 
  * fetched candidates against the same source of truth the quota accountant
  * uses, instead of trusting a second, independent LIKE-clause query
  * (review 2026-08-23 C2 — "two sources of truth, one wrong"). */
-export function isBoardWipe(name: string, oracleText: string): boolean {
-  if (BOARD_WIPE_NAMES.has(name.toLowerCase())) return true;
-  return matchesPatterns(ownAbilities(oracleText), BOARD_WIPE_PATTERNS);
+export function isBoardWipe(name: string, oracleText: string, opts?: ClassifyOpts): boolean {
+  const lower = name.toLowerCase();
+  if (!opts?.strict) {
+    if (BOARD_WIPE_NAMES.has(lower)) return true;
+    return matchesPatterns(ownAbilities(oracleText), BOARD_WIPE_PATTERNS);
+  }
+  if (BOARD_WIPE_NAMES.has(lower)) return !NOT_WIPES_STRICT.has(lower);
+  const own = ownAbilities(oracleText);
+  if (/choose one —/i.test(own)) return false;
+  return matchesPatterns(withoutSlowActivations(own), STRICT_WIPE_PATTERNS);
 }
 
-function isProtection(name: string, oracleText: string, typeLine: string): boolean {
+export function isSymmetricCreatureWipe(name: string, oracleText: string): boolean {
+  if (!isBoardWipe(name, oracleText, { strict: true })) return false;
+  const own = ownAbilities(oracleText);
+  return SYMMETRIC_CREATURE_WIPE.test(own) && !ONE_SIDED_WIPE.test(own);
+}
+
+// strict (A-D4): the protected thing must be an object other than the card
+// itself — Toski's own "This spell can't be countered" / Indestructible is
+// not protection; "target creature you control gains hexproof" is.
+const PROTECTION_OBJECT = /\b(?:target|you control|your (?:creatures|permanents|commander|planeswalkers|team)|another|other|each (?:creature|permanent)|equipped|enchanted|attached)\b/i;
+
+function isProtection(name: string, oracleText: string, typeLine: string, opts?: ClassifyOpts): boolean {
   if (isLand(typeLine)) return false;
   if (PROTECTION_NAMES.has(name.toLowerCase())) return true;
-  return matchesPatterns(oracleText, PROTECTION_PATTERNS);
+  if (!opts?.strict) return matchesPatterns(oracleText, PROTECTION_PATTERNS);
+  return (oracleText || '').split(/[\n.]+/).some(
+    (clause) => PROTECTION_OBJECT.test(clause) && matchesPatterns(clause, PROTECTION_PATTERNS)
+  );
 }
 
 /**
@@ -467,12 +548,24 @@ export function hasCommanderSynergy(
   return mechanics.some(m => cardLower.includes(m));
 }
 
-function isWinCondition(oracleText: string, typeLine: string, cmc: number): boolean {
+// strict (A-D4): a mass pump of +2/+2 or more, or +X/+X (Overrun, Craterhoof,
+// Beastmaster Ascension) — a +1/+1 lord/anthem is a synergy piece, not a closer.
+const MASS_PUMP_ANTHEM = /creatures you control[^.]* get \+(?:x|[2-9]|\d{2})\/\+/i;
+
+function isWinCondition(oracleText: string, typeLine: string, cmc: number, opts?: ClassifyOpts): boolean {
   if (isLand(typeLine)) return false;
   const text = oracleText.toLowerCase();
-  // High-impact creatures with evasion or big power
-  if (/\bCreature\b/.test(typeLine) && cmc >= 5) return true;
-  if (/trample|flying|double strike|menace/.test(text) && cmc >= 4) return true;
+  const isCreature = /\bCreature\b/.test(typeLine);
+  if (opts?.strict) {
+    // Never MV alone: evasion on the creature itself, a mass pump, a drain
+    // or an alternate win (Meren shipped 28 "wincons" against a quota of 5).
+    if (isCreature && cmc >= 4 && /trample|flying|double strike|menace|can't be blocked/.test(text)) return true;
+    if (MASS_PUMP_ANTHEM.test(text)) return true;
+  } else {
+    // High-impact creatures with evasion or big power
+    if (isCreature && cmc >= 5) return true;
+    if (/trample|flying|double strike|menace/.test(text) && cmc >= 4) return true;
+  }
   if (/each opponent loses/i.test(text)) return true;
   if (/you win the game/i.test(text)) return true;
   if (/deals? .*damage to each opponent/i.test(text)) return true;
@@ -499,14 +592,14 @@ export function classifyCard(
 
   if (isRamp(name, oracleText, typeLine, opts)) categories.push('ramp');
   if (isDraw(name, oracleText, typeLine, opts)) categories.push('draw');
-  if (isTutor(name, oracleText, typeLine)) categories.push('tutor');
-  if (isBoardWipe(name, oracleText)) categories.push('board_wipe');
-  else if (isRemoval(name, oracleText, typeLine)) categories.push('removal');
-  if (isProtection(name, oracleText, typeLine)) categories.push('protection');
+  if (isTutor(name, oracleText, typeLine, cmc, opts)) categories.push('tutor');
+  if (isBoardWipe(name, oracleText, opts)) categories.push('board_wipe');
+  else if (isRemoval(name, oracleText, typeLine, opts)) categories.push('removal');
+  if (isProtection(name, oracleText, typeLine, opts)) categories.push('protection');
   if (commanderOracleText && hasCommanderSynergy(oracleText, typeLine, commanderOracleText)) {
     categories.push('synergy');
   }
-  if (isWinCondition(oracleText, typeLine, cmc)) categories.push('win_condition');
+  if (isWinCondition(oracleText, typeLine, cmc, opts)) categories.push('win_condition');
 
   // Superfriends opt-in: a planeswalker is a threat/engine — route it to
   // win_condition when nothing else already claimed it, instead of falling

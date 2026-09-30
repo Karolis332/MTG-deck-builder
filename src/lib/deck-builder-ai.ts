@@ -2093,7 +2093,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
       if (pickedNames.has(wipe.name)) continue;
       // Validate against the same classifier the quota accountant uses (C2)
       // — the SQL LIKE clauses above are a broad net, not the source of truth.
-      if (!isBoardWipe(wipe.name, wipe.oracle_text || '')) continue;
+      if (!isBoardWipe(wipe.name, wipe.oracle_text || '', classifyOpts)) continue;
       const qty = getMaxQty(wipe);
       if (qty <= 0) continue;
       picked.push({ card: wipe, quantity: 1, board: 'main' });
