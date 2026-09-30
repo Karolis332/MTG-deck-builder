@@ -250,3 +250,12 @@ def test_removal_tag_ignores_exile_of_own_permanents():
     assert "removal" not in farm["synergy_tags"]
     real = classify_land("Bojuka Bog", "Land", "This land enters tapped.\nWhen this land enters, exile target player's graveyard.\n{T}: Add {B}.", '["B"]')
     assert "removal" in real["synergy_tags"]
+
+
+def test_costly_rainbows_are_tier4():
+    citadel = classify_land("Tarnished Citadel", "Land", "{T}: Add {C}.\n{T}: Add one mana of any color. This land deals 3 damage to you.", '["B","C","G","R","U","W"]')
+    assert citadel["tier"] == 4
+    vale = classify_land("Lotus Vale", "Land", "If this land would enter, sacrifice two untapped lands instead. If you do, put this land onto the battlefield. If you don't, put it into its owner's graveyard instead.\n{T}: Add three mana of any one color.", '["B","G","R","U","W"]')
+    assert vale["tier"] == 4
+    rainbow = classify_land("Rainbow Vale", "Land", "{T}: Add one mana of any color. At the beginning of the end step, target opponent gains control of this land.", '["B","G","R","U","W"]')
+    assert rainbow["tier"] == 4

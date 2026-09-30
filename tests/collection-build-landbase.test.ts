@@ -354,8 +354,8 @@ describe('autoBuildDeck collection mode — land base ownership is scoped to the
     const own = (userId: number, source: string, cardId: string) => {
       d.prepare("INSERT INTO collection (user_id, card_id, quantity, source) VALUES (?, ?, 1, ?)").run(userId, cardId, source);
     };
-    // 22 near-identical W/U untapped duals — well above the 2-colour quota
-    // (min(18, targetLandCount - 8) = 18), so excluding any 3 still leaves 19.
+    // 22 near-identical W/U untapped duals — every one beats a basic, so the
+    // count is whatever clears the bar; excluding any 3 must not shrink it.
     for (let i = 1; i <= 22; i++) {
       const id = `test-wu-land-${i}`;
       insertCard.run(
@@ -372,12 +372,12 @@ describe('autoBuildDeck collection mode — land base ownership is scoped to the
       collectionOnly: true, userId: BUILDER_UID, collectionSource: 'arena', isCommander: true,
     };
     const baseline = buildOptimalLandBase(base);
-    expect(baseline.totalNonBasic).toBe(18); // full quota, nothing excluded
+    expect(baseline.totalNonBasic).toBeGreaterThanOrEqual(22); // every test dual beats a basic
 
     const spentAsSpells = baseline.lands.slice(0, 3).map((l) => l.card.name);
     const withExclusions = buildOptimalLandBase({ ...base, excludeNames: new Set(spentAsSpells) });
     expect(withExclusions.lands.some((l) => spentAsSpells.includes(l.card.name))).toBe(false);
-    expect(withExclusions.totalNonBasic).toBe(18); // quota still met from the next-best lands
+    expect(withExclusions.totalNonBasic).toBeGreaterThanOrEqual(19); // the 19 remaining duals still fill from the next-best lands
   }, 60_000);
 
   function shockNamesFlat(): string[] {

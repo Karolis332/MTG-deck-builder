@@ -71,6 +71,8 @@ describe('tier fixes and specific cards', () => {
     expect(get(m, 'Zagoth Triome').clearsBar).toBe(true);
     expect(get(m, 'Dismal Backwater').tier).toBe(4);
     expect(get(m, 'Dismal Backwater').clearsBar).toBe(false);
+    expect(get(m, 'Tarnished Citadel').tier).toBe(4); // 3 life per activation — worse than a basic
+    expect(get(m, 'Tarnished Citadel').clearsBar).toBe(false);
   });
 
   it('Three Tree City is colourless whenever the deck has no tribe (not only in mono)', () => {

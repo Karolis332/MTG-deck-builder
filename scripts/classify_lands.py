@@ -301,6 +301,12 @@ def classify_land(name: str, type_line: str, oracle: str, produced_mana_json: st
     ):
         enters_untapped = False
 
+    # A rainbow that costs 3 life per activation (Tarnished Citadel) or two
+    # lands to enter (Lotus Vale, Scorched Ruins) or is donated at end of turn
+    # (Rainbow Vale) is worse than a basic.
+    if re.search(r"deals 3 damage to you|sacrifice two untapped lands|opponent gains control of", ot):
+        tier = 4
+
     # If tier not yet set and enters tapped, bump down
     if not enters_untapped and tier < 3:
         tier = 3

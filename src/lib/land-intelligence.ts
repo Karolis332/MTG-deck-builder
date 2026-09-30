@@ -370,6 +370,8 @@ export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
         // you control could produce") — flexible, not deck-colour-specific.
         || /any type (?:of mana )?that a .*? could produce/.test(lower);
       const chosenColor = /choose a color/.test(lower) && /chosen color/.test(lower);
+      // Meteor Crater: "a color of a permanent you control" — in mono, a basic that needs a permanent first.
+      const permanentColor = /choose a color of a permanent you control/.test(lower);
       // Cavern of Souls' "any color" is restricted to casting a creature of
       // the chosen type AND that spell can't be countered — a real utility
       // clause, not just fixing, so it isn't the flexible-in-multicolour-only
@@ -381,7 +383,7 @@ export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
       // fixing) has no upside over a basic in mono and stays excluded.
       const cavernTribal = /spend this mana only to cast a creature spell of the chosen type.*can't be countered/.test(lower)
         && !!tribalTypes && tribalTypes.length > 0;
-      if ((anyColor && !cavernTribal) || chosenColor || chosenTypeLandColors(land) !== null) continue;
+      if ((anyColor && !cavernTribal) || chosenColor || permanentColor || chosenTypeLandColors(land) !== null) continue;
 
       // Any fetch that deposits its target TAPPED — the ETB-sacrifice "gate"
       // family (Cabaretti Courtyard, Brokers Hideout) and the activated
@@ -503,7 +505,7 @@ export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
     // tapped land from turn 4); a tapped land producing 3+ deck colours in a
     // 3+ colour deck (triomes) is real fixing, not gainland tier.
     if (untappedCredit < 1 && tier < 3) tier = 3;
-    if (tier === 4 && matchingColors.length >= 3 && colors.length >= 3) tier = 3;
+    if (tier === 4 && untappedCredit < 1 && matchingColors.length >= 3 && colors.length >= 3) tier = 3; // tapped triome, not a costly untapped rainbow
     const category = land.land_category || 'utility';
     const reasons: string[] = [];
 
@@ -701,9 +703,9 @@ export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
     // a worse basic in any deck; the mono gate above already drops it there.
     const paysLifeForColor = fixes === 1 && new RegExp(`pay \\d+ life:\\s*add \\{${matchingColors[0]}\\}`, 'i').test(tapText);
     const clearsBar = colors.length <= 1
-      || (entersUntapped && sourceCredit >= 1 && (fixes >= 2 || (fixes >= 1 && tier <= 2 && !paysLifeForColor)))
+      || (entersUntapped && sourceCredit >= 1 && tier <= 3 && (fixes >= 2 || (fixes >= 1 && tier <= 2 && !paysLifeForColor)))
       || (isFetch && entersUntapped && fixes >= 1)
-      || (fixes >= 3 && colors.length >= 3 && sourceCredit >= 1)
+      || (fixes >= 3 && colors.length >= 3 && sourceCredit >= 1 && tier <= 3)
       || payoff;
 
     scored.push({ card: land, score, tier, category, producesColors, entersUntapped, untappedCredit, sourceCredit, clearsBar, reasons });
@@ -779,6 +781,7 @@ export function buildOptimalLandBase(options: BuildOptions): LandBaseResult {
   // Starting Town and the tapped Landscapes a slot).
   const candidates = scored.filter((s) => s.clearsBar && s.score >= SELECT_MIN_SCORE);
   const basicColors = colors.filter((c) => BASIC_LAND_MAP[c]);
+  const MAX_MONO_COLORLESS = 2;
 
   // Colour-deficit selection: Karsten-style land-source targets from the
   // deck's most demanding card per colour. A colour's need is its relative
@@ -795,6 +798,10 @@ export function buildOptimalLandBase(options: BuildOptions): LandBaseResult {
   const targets: Record<string, number> = manaDemand && manaDemand.totalPips > 0
     ? colorSourceTargets(manaDemand, format)
     : Object.fromEntries(colors.map((c) => [c, targetLandCount]));
+  // Mono-colour: the Karsten count is a floor, not the goal — every land but
+  // a couple of payoffs should make the colour, or colourless utility wins
+  // the last nine slots the moment 26 sources are in (Krenko: R 24 of 35).
+  if (colors.length === 1) targets[colors[0]] = Math.max(targets[colors[0]] ?? 0, targetLandCount - MAX_MONO_COLORLESS);
   const sources: Record<string, number> = Object.fromEntries(colors.map((c) => [c, 0]));
   const intensity = (c: string) => manaDemand?.colorIntensity[c] ?? 1 / colors.length;
   const need = (c: string) => Math.max(0, (targets[c] ?? 0) - (sources[c] ?? 0)) / Math.max(1, targets[c] ?? 1)
@@ -815,7 +822,6 @@ export function buildOptimalLandBase(options: BuildOptions): LandBaseResult {
   // Mono-colour colourless cap (A-D8): a triple-pip card ({2}{G}{G}{G})
   // needs every land to make the colour — at most two colourless lands
   // then, manlands and Cavern included (they stay eligible, they just count).
-  const MAX_MONO_COLORLESS = 2;
   const monoColor = colors.length === 1 ? colors[0] : undefined;
   const capColorless = !!monoColor && (manaDemand?.maxPips[monoColor] ?? 0) >= 3;
   let colorlessCount = 0;
@@ -839,7 +845,7 @@ export function buildOptimalLandBase(options: BuildOptions): LandBaseResult {
   // or a tier-3 pain rainbow (Tarnished Citadel) never jumps an untapped
   // tier-1 dual on breadth alone.
   const DEFICIT_WEIGHT = 60;
-  const BASIC_SCORE = 100;
+  const BASIC_SCORE = 110; // under any untapped land with an upside (~150), over a colourless manland (115) until the colour is nearly served
   const gainOf = (s: LandScore): number => {
     let covered = 0;
     for (const c of s.producesColors) if (c in sources) covered += need(c);
