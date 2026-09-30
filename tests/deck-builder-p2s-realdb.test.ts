@@ -25,7 +25,7 @@ describe('autoBuildDeck — Step 4c upgrades respect the plan (real card DB)', (
       const r = await autoBuildDeck({ format, colors: [], commanderName, captureComponents: true });
       const comp = new Map(r.scoredPool!.map((p) => [p.name, p.components]));
       const cmdr = getDb().prepare('SELECT oracle_text FROM cards WHERE name = ? LIMIT 1').get(commanderName) as { oracle_text: string | null };
-      const upgrades = r.reasoning.filter((x) => x.role === 'upgrade');
+      const upgrades = (r.reasoning ?? []).filter((x) => x.role === 'upgrade');
       for (const x of upgrades) {
         const m = x.reason.match(/^same-role upgrade: \+(.+?) \(-?\d+\) for (.+?) \(-?\d+\)$/);
         expect(m, x.reason).not.toBeNull();

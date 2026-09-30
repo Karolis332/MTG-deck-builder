@@ -142,7 +142,7 @@ describe('autoBuildDeck — P2-S scoring regressions (synthetic DB)', () => {
     for (const n of ["Thassa's Oracle", 'Demonic Consultation', 'Pact of Negation', 'Force of Will', 'Chrome Mox', 'Lotus Petal', 'Mana Crypt', 'Demonic Tutor']) {
       expect(names.has(n), n).toBe(true);
     }
-    expect(r.reasoning.filter((x) => x.role === 'combo-staple').length).toBeGreaterThanOrEqual(8);
+    expect((r.reasoning ?? []).filter((x) => x.role === 'combo-staple').length).toBeGreaterThanOrEqual(8);
     const comp = r.scoredPool!.find((p) => p.name === 'Test Flyer 1')!.components;
     expect(comp.strategyFit ?? 0).toBeLessThanOrEqual(-40);
     expect(r.cards.filter((e) => e.board === 'main' && e.card.name.startsWith('Test Flyer')).length).toBeLessThanOrEqual(1);
