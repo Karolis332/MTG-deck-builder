@@ -192,7 +192,6 @@
 1 Double Down
 1 Dovin, Hand of Control
 1 Drag to the Underworld
-1 Dragonskull Summit
 1 Dread Presence
 1 Dread Summons
 1 Dread Tiller
@@ -863,6 +862,7 @@
 1 Witherbloom Campus
 1 Witherbloom Charm
 1 Witherbloom Command
+1 Woodland Cemetery
 1 Worldwalker Helm
 1 Worn Powerstone
 1 Wreckage Wickerfolk
