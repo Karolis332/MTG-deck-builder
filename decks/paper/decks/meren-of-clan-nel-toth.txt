@@ -1,10 +1,8 @@
 1 Meren of Clan Nel Toth
 1 Accursed Marauder
-1 Animate Dead
 1 Arcane Signet
 1 Assassin's Trophy
 1 Basking Broodscale
-1 Beifong's Bounty Hunters
 1 Blood Artist
 1 Bloodghast
 1 Blooming Marsh
@@ -17,9 +15,9 @@
 1 Cauldron of Essence
 1 Chthonian Nightmare
 1 Command Tower
+1 Creakwood Liege
 1 Culling Ritual
 1 Deadly Dispute
-1 Dina, Soul Steeper
 1 Elvish Mystic
 1 Emeritus of Woe
 1 Eternal Witness
@@ -29,25 +27,26 @@
 6 Forest
 1 Golgari Charm
 1 Grave Researcher
-1 Grave Titan
 1 Gray Merchant of Asphodel
 1 Grim Backwoods
 1 Grim Haruspex
-1 Haunted Mire
+1 Grim Servant
 1 Haywire Mite
+1 High Market
 1 Infernal Grasp
 1 Jadar, Ghoulcaller of Nephalia
 1 Jarad, Golgari Lich Lord
-1 Jungle Hollow
 1 Junji, the Midnight Sky
 1 Lightning Greaves
 1 Liliana, Dreadhorde General
 1 Llanowar Elves
+1 Llanowar Wastes
 1 Long Feng, Grand Secretariat
 1 Massacre Wurm
 1 Mazirek, Kraul Death Priest
 1 Midnight Reaper
 1 Mikaeus, the Unhallowed
+1 Moldervine Reclamation
 1 Morbid Opportunist
 1 Myriad Landscape
 1 Necroblossom Snarl
@@ -55,9 +54,11 @@
 1 Path of Ancestry
 1 Plaguecrafter
 1 Priest of Forgotten Gods
+1 Ramunap Excavator
 1 Ravenous Chupacabra
 1 Reanimate
 1 Revitalizing Repast
+1 Rune-Scarred Demon
 1 Sakura-Tribe Elder
 1 Saw in Half
 1 Sol Ring
@@ -77,7 +78,6 @@
 1 Village Rites
 1 Viridescent Bog
 1 Viscera Seer
-1 Vito, Thorn of the Dusk Rose
 1 Wight of the Reliquary
 1 Woe Strider
 1 Woodland Cemetery

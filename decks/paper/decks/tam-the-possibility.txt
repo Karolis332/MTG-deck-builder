@@ -22,6 +22,7 @@
 1 Deserted Beach
 1 Dovin's Veto
 1 Elspeth, Sun's Champion
+1 Entrust the Spark
 1 Erode
 1 Esika, God of the Tree
 1 Evolution Sage
@@ -44,17 +45,16 @@
 1 Kaya's Ghostform
 1 Kiora of Salt and Sand
 1 Liliana the Faultless
-1 Llanowar Wastes
 1 Mana Confluence
 1 Mountain
 1 Nexus Mentality
 1 Nissa, Steward of Elements
+1 Nomad Outpost
 1 Ob Nixilis of the Black Oath
 1 Ob Nixilis, the Hate-Twisted
 1 Oko, Thief of Crowns
 1 Opulent Palace
 1 Overgrown Farmland
-1 Path of Ancestry
 1 Path to Exile
 1 Pia, Aether Ascetic
 1 Plains
@@ -84,6 +84,7 @@
 1 Timeless Lotus
 1 Toxic Deluge
 1 Turbulent Moor
+1 Turbulent Wilderness
 1 Uro, Titan of Nature's Wrath
 1 Vigorbloom Annex
 1 Vigorbloom Charm
