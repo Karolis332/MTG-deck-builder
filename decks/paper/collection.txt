@@ -184,6 +184,7 @@
 1 Channeler Initiate
 1 Chaos Warp
 1 Charcoal Diamond
+1 Charge the Sanctum
 1 Chief Warg's Company
 1 Chimil, the Inner Sun
 1 Chomping Changeling
@@ -903,6 +904,7 @@
 1 Reliquary Tower
 1 Repurposed Enforcer
 1 Requisition Raid
+1 Resonating Lute
 1 Resourceful Defense
 1 Return of the Wildspeaker
 3 Return the Favor
@@ -936,6 +938,7 @@
 2 Sacred Foundry
 1 Safana, Calimport Cutthroat
 1 Sage's Reverie
+1 Saheeli, Jewel of Avishkar
 1 Saheeli, Sublime Artificer
 1 Sakura-Tribe Elder
 1 Samut, the Driving Force
@@ -1209,6 +1212,8 @@
 1 Transformative Commons
 1 Transmutation Font
 3 Trash the Town
+1 Traxos, Academy Guardian
+1 Traxos, Scourge Eternal
 1 Traxos, Scourge of Kroog
 1 Trazyn the Infinite
 1 Treasure Keeper
@@ -1292,6 +1297,7 @@
 1 War Room
 1 Wardens of the Cycle
 1 Warg Tactics
+1 Warrior's Blades
 1 Way of the Cryomancer
 1 Way of the Healer
 1 Way of the Mentor
@@ -1315,6 +1321,7 @@
 1 Willowdusk, Essence Seer
 1 Winds of Rath
 1 Windswept Heath
+1 Winter, Team Player
 1 Winternight Stories
 1 Wishclaw Talisman
 1 Witch of the Moors
