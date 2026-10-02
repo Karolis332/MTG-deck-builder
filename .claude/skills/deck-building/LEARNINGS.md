@@ -32,5 +32,8 @@ Format: `YYYY-MM-DD — deck — what happened → rule`.
 - 2026-10-02 — all — the operator's messages sometimes land in another Claude session → one session owns `decks/paper/`; reconcile via the cross-session message, never double-apply.
 - 2026-10-02 — Inspirit — the builder's first pass gave no stop proof for planeswalkers, Ways or Reality Fracture pulls, and the operator asked about exactly those → briefs must list the operator's new pulls and named card classes explicitly, and the report must give each one a verdict.
 
+- 2026-10-02 — Inspirit — the operator listed cards "in my hand" in batches; the ones already sleeved in Tam/Tazri were all **second copies** → when the operator lists cards held for a deck, register the missing ones and treat any card that sits in another deck as a second copy (confirm once per session, not per card).
+
 ## Names the operator uses
 - "Ingris Silverquill" = Ingris Stingerquill; "Variable Chase" = Variable Chaser // Arc of Fortune (unconfirmed but registered).
+- 2026-10-02 — Inspirit — the operator cut Sheltered by Ghosts, which builder and refuter both kept as "{1}{W} exile any nonland permanent". It says "Enchant creature you control" and exiles only "until this Aura leaves": our creature dying on the alpha, a wipe or bounce gives their permanent back, and Inspirit is not a creature below 8 counters → read the Enchant line and the "until" clause before scoring an O-Ring-style aura; prefer unconditional instants (Abrade took the slot).
