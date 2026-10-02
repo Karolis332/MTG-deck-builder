@@ -81,6 +81,7 @@
 1 Baron Bertram Graywater
 1 Baron Helmut Zemo
 1 Base Camp
+1 Basilisk Collar
 1 Basking Broodscale
 1 Battlefield Forge
 1 Beast Within
@@ -336,6 +337,7 @@
 1 Essence Burn
 2 Essence Capture
 1 Essence Pulse
+1 Etali, Primal Storm
 1 Etched Oracle
 2 Eternal Witness
 1 Eureka Moment
@@ -1082,6 +1084,7 @@
 1 Sun Droplet
 1 Sunken Hollow
 1 Sunlit Marsh
+1 Super State
 1 Supernatural Stamina
 1 Surge Conductor
 1 Surrak, the Hunt Caller
