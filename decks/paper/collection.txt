@@ -48,6 +48,7 @@
 1 Archfiend of Ifnir
 1 Archon of Sun's Grace
 1 Archpriest of Iona
+1 Archway of Innovation
 1 Arid Archway
 1 Arlinn, Voice of the Pack
 1 Armaggon, Future Shark
@@ -92,6 +93,7 @@
 1 Beledros Witherbloom
 1 Bender's Waterskin
 1 Benevolent Hydra
+1 Bident of Thassa
 1 Binding the Old Gods
 1 Bioengineered Future
 1 Biomass Mutation
@@ -192,6 +194,7 @@
 1 Chomping Changeling
 1 Chord of Calling
 1 Chromatic Lantern
+1 Chrome Host Seedshark
 1 Chronomancer
 1 Chthonian Nightmare
 1 Cinder Glade
@@ -201,6 +204,7 @@
 2 Clifftop Retreat
 1 Cloud Key
 1 Cloudkill
+1 Coastal Piracy
 1 Coercive Impetus
 1 Colossal Rattlewurm
 1 Combat Calligrapher
@@ -218,7 +222,7 @@
 1 Corpse Churn
 3 Corrupted Conviction
 1 Countersculpt
-1 Counterspell
+2 Counterspell
 1 Coveted Prize
 1 Craterclaw Colossus
 1 Creakwood Liege
@@ -234,7 +238,9 @@
 1 Culling the Weak
 2 Cultivate
 1 Curse of the Swine
+1 Cyberdrive Awakener
 1 Cycle of Renewal
+1 Cyclonic Rift
 1 Damnable Pact
 3 Dance of the Tumbleweeds
 1 Daretti, Scrap Savant
@@ -244,6 +250,7 @@
 1 Darksteel Reactor
 1 Davriel, Rogue Shadowmage
 1 Dawnbringer Cleric
+1 Dawnsire, Sunstar Dreadnought
 1 Day of Black Sun
 1 Deadeye Duelist
 1 Deadly Brew
@@ -301,6 +308,7 @@
 1 Eccentric Pestfinder
 1 Eclipsed Steppe
 1 Edgar, Moonlit Sovereign
+1 Efficient Construction
 1 Egon, God of Death
 1 Eidolon of Countless Battles
 1 Eiganjo Dynastorian
@@ -344,6 +352,7 @@
 1 Etali, Primal Storm
 1 Etched Oracle
 2 Eternal Witness
+1 Etherium Sculptor
 1 Eureka Moment
 1 Eusocial Engineering
 1 Eventide's Shadow
@@ -362,6 +371,7 @@
 1 Eye of Jace
 1 Ezzaroot Channeler
 3 Fabled Passage
+1 Fact or Fiction
 1 Faeburrow Elder
 1 Fallen Ideal
 2 Farseek
@@ -391,6 +401,7 @@
 1 Firemind Vessel
 1 Flame of Anor
 1 Flare of Cultivation
+1 Flare of Denial
 1 Flare of Fortitude
 1 Flayed One
 1 Flesh Duplicate
@@ -433,6 +444,7 @@
 1 Ghalta, Primal Hunger
 1 Ghired, Mirror of the Wilds
 1 Ghost Ark
+1 Ghostly Flicker
 1 Ghostly Prison
 1 Ghoulish Impetus
 1 Giant Growth
@@ -549,8 +561,10 @@
 1 Innovative Commons
 1 Insatiable Avarice
 1 Insidious Roots
+1 Insight Engine
 1 Inspired Skypainter
 1 Inspired Tethermage
+1 Inspiring Statuary
 2 Inspiring Vantage
 1 Inspirit, Flagship Vessel
 1 Interdimensional Web Watch
@@ -558,6 +572,7 @@
 1 Interplanar Beacon
 1 Intimidation Campaign
 1 Invasion of Ikoria
+1 Inventors' Fair
 1 Ionize
 1 Iron Spider, Stark Upgrade
 1 Irrigated Farmland
@@ -594,6 +609,7 @@
 1 Kamiz, Obscura Oculus
 1 Kappa Cannoneer
 1 Karlach, Fury of Avernus
+1 Karn, the Great Creator
 1 Karn's Bastion
 1 Karplusan Forest
 1 Kasmina, Enigmatic Mentor
@@ -811,6 +827,7 @@
 1 Pact Weapon
 1 Painful Truths
 1 Palladium Myr
+1 Panharmonicon
 1 Paradise Druid
 1 Paradise Plume
 1 Paradox Gardens
@@ -827,6 +844,7 @@
 1 Perennial Behemoth
 1 Perplexing Test
 1 Persist
+1 Personal Tutor
 1 Pest Control
 1 Pest Infestation
 1 Pest Rescuer
@@ -915,6 +933,7 @@
 1 Reiver Demon
 1 Reliquary Tower
 1 Repurposed Enforcer
+1 Repurposing Bay
 1 Requisition Raid
 1 Resonating Lute
 1 Resourceful Defense
@@ -952,7 +971,9 @@
 1 Sage's Reverie
 1 Saheeli, Jewel of Avishkar
 1 Saheeli, Sublime Artificer
+1 Sai, Master Thopterist
 1 Sakura-Tribe Elder
+1 Sami, Wildcat Captain
 1 Samut, the Driving Force
 1 Samut, Tyrant Smasher
 1 Samut, Voice of Dissent
@@ -962,6 +983,7 @@
 1 Sangromancer
 1 Sanguine Bond
 1 Sapling of Colfenor
+1 Sapphire Medallion
 1 Sapseep Forest
 1 Sarinth Steelseeker
 1 Sarkhan the Masterless
@@ -970,6 +992,7 @@
 1 Savage Lands
 2 Savage Smash
 1 Saw in Half
+1 Scour for Scrap
 1 Scourge of the Skyclaves
 1 Screams from Within
 1 Scriv, the Obligator
@@ -1021,6 +1044,7 @@
 1 Simic Locket
 1 Simulacrum Shaper
 1 Sinister Gnarlbark
+1 Sink into Stupor
 1 Sivriss, Nightmare Speaker
 1 Skewer the Critics
 1 Skinrender
@@ -1028,6 +1052,7 @@
 1 Skorpekh Destroyer
 1 Skorpekh Lord
 1 Skullcrack
+1 Sky Diamond
 1 Skycloud Expanse
 1 Skycoach Waypoint
 1 Skyshroud Claim
@@ -1045,7 +1070,7 @@
 1 Solar Array
 1 Solarium Sentry
 1 Solemn Doomguide
-2 Solemn Simulacrum
+3 Solemn Simulacrum
 1 Solve for Disappointment
 1 Songbirds' Blessing
 1 Sorin, Vengeful Bloodlord
@@ -1084,6 +1109,7 @@
 1 Sting, Bilbo's Sword
 1 Stingerquill Annex
 1 Stingerquill Charm
+1 Stock Up
 1 Stomping Ground
 1 Stonecoil Serpent
 1 Stonework Packbeast
@@ -1182,6 +1208,7 @@
 1 The Ooze
 1 The Reaper, King No More
 1 The Scorpion God
+1 The Seriema
 1 The Soul Stone
 1 The Swarmweaver
 1 The Wanderer
@@ -1262,8 +1289,10 @@
 1 Unsummon
 1 Urban Evolution
 1 Uro, Titan of Nature's Wrath
+1 Urza, Lord High Artificer
 1 Uthros Psionicist
 1 Uthros Research Craft
+1 Uthros, Titanic Godcore
 1 Vampire Nighthawk
 1 Vampiric Link
 1 Vanishing Verse

@@ -102,3 +102,11 @@ Batch the DB queries, about 20 names per `name in (...)` call. Budget ≤ 50 too
 - **Second copies (now x2, one free for Inspirit):** Blade Historian, Way of the Mentor, Generous Gift.
 - **Already registered, open:** Boros Charm (round 1 refuter: "IN for Resourceful Defense if found" — it is now found), Lavaspur Boots, Fatehold Charm, Guiding Hydra, Teyo, Lightshield Expert, Murmuring Volume.
 - Lenses: Boros Charm / Flare of Fortitude / Teyo as protection for the Depthshaker/Craterclaw turn; Hour of Reckoning and Balefire Liege vs the plan; Unlicensed Hearse, Lavaspur Boots, Pia as cheap artifact/artifact-synergy pieces.
+
+## Batch 2d — the operator's Urza list (all now registered; free for Inspirit; one §8 row each)
+- **Win-turn / Depthshaker-family:** Cyberdrive Awakener, Karn, the Great Creator, Panharmonicon (doubles Depthshaker/Craterclaw ETB), Sai, Master Thopterist, Efficient Construction, Chrome Host Seedshark, Urza, Lord High Artificer, Dawnsire, Sunstar Dreadnought, Sami, Wildcat Captain.
+- **Artifacts / ramp / tutors:** Sword of the Animist, Etherium Sculptor, Solemn Simulacrum (3rd copy), Sapphire Medallion, Sky Diamond, Insight Engine, Inspiring Statuary, Repurposing Bay, Bident of Thassa, Personal Tutor, Scour for Scrap.
+- **Interaction:** Cyclonic Rift, Counterspell (2nd copy), Flare of Denial, Negate (already in your list), Sink into Stupor // Soporific Springs, Ghostly Flicker, Alms Collector, The Seriema.
+- **Draw:** Stock Up, Fact or Fiction, Coastal Piracy.
+- **Lands:** Inventors' Fair, Archway of Innovation, Uthros, Titanic Godcore (check its DB row: name, type, back face).
+- Ornithopter of Paradise is already in your list.
