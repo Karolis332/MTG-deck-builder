@@ -64,25 +64,30 @@ const groupOf = (t: string) => {
   return 'Enchantment';
 };
 const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-const tile = (c: Card, qty: number, key: string, cls = '') =>
+// badge: 'NEW' for a card not in the baseline, '+N' when a card already there gains copies (basics)
+const tile = (c: Card, qty: number, key: string, cls = '', badge = '') =>
   `<div class="card ${cls}" data-key="${esc(key)}" data-name="${esc((c.name + ' ' + c.type).toLowerCase())}">${c.img ? `<img loading="lazy" src="${esc(c.img)}" alt="${esc(c.name)}">` : `<div class="ph">${esc(c.name)}</div>`}` +
-  `${qty > 1 ? `<span class="qty">×${qty}</span>` : ''}${cls.includes('new') ? '<span class="badge">NEW</span>' : ''}<span class="tick">✓</span></div>`;
+  `${qty > 1 ? `<span class="qty">×${qty}</span>` : ''}${badge ? `<span class="badge">${badge}</span>` : ''}<span class="tick">✓</span></div>`;
 
 const sections = DECKS.map((d, i) => {
   const now = parse(fs.readFileSync(path.join(ROOT, d.file), 'utf8'));
-  const base = new Set(parse(d.base()).map((c) => c.name));
-  const cur = new Set(now.map((c) => c.name));
-  const outs = [...base].filter((n) => !cur.has(n));
+  const base = new Map<string, number>();
+  parse(d.base()).forEach((c) => base.set(c.name, (base.get(c.name) ?? 0) + c.qty));
+  const cur = new Map(now.map((c) => [c.name, c.qty]));
+  const outs = [...base].map(([n, q]) => ({ name: n, qty: q - (cur.get(n) ?? 0) })).filter((o) => o.qty > 0);
   const total = now.reduce((s, c) => s + c.qty, 0);
   const byGroup = new Map<string, string[]>(GROUPS.map((g) => [g, []]));
   now.forEach((c, idx) => {
     const k = card(c.name);
-    byGroup.get(idx === 0 ? 'Commander' : groupOf(k.type))!.push(tile(k, c.qty, `${d.slug}|${c.name}`, base.has(c.name) ? '' : 'new'));
+    const had = base.get(c.name) ?? 0;
+    const badge = had === 0 ? 'NEW' : c.qty > had ? `+${c.qty - had}` : '';
+    byGroup.get(idx === 0 ? 'Commander' : groupOf(k.type))!.push(tile(k, c.qty, `${d.slug}|${c.name}`, badge ? 'new' : '', badge));
   });
   const body = GROUPS.filter((g) => byGroup.get(g)!.length)
     .map((g) => `<h3>${g} <small>${byGroup.get(g)!.length}</small></h3><div class="grid">${byGroup.get(g)!.join('')}</div>`).join('');
+  const outQty = outs.reduce((s, o) => s + o.qty, 0);
   const outHtml = outs.length
-    ? `<h3 class="outh">Should be OUT <small>${outs.length}</small></h3><div class="grid">${outs.map((n) => tile(card(n), 1, `${d.slug}|OUT|${n}`, 'out')).join('')}</div>`
+    ? `<h3 class="outh">Should be OUT <small>${outQty}</small></h3><div class="grid">${outs.map((o) => tile(card(o.name), o.qty, `${d.slug}|OUT|${o.name}`, 'out')).join('')}</div>`
     : '';
   const extraHtml = d.extra
     ? `<h3 class="candh">${esc(d.extra.label)} <small>${d.extra.names.length}</small></h3><div class="grid">${d.extra.names.map((n) => tile(card(n), 1, `${d.slug}|CAND|${n}`, 'cand')).join('')}</div>`
@@ -106,7 +111,7 @@ section{padding:0 14px 40px}.hidden{display:none}h3{color:#c9a55a;margin:18px 0 
 </style></head><body><header>${tabs}<input id="q" type="search" placeholder="filter: name or type…" autofocus><span style="float:right;color:#8d7a5a">tap a card when you find it in the box · gold = new today · red = should be out (tap once removed)</span></header>${sections.join('')}
 <script>
 const S=JSON.parse(localStorage.getItem('deckcheck')||'{}');const save=()=>localStorage.setItem('deckcheck',JSON.stringify(S));
-const count=s=>{const all=s.querySelectorAll('.card:not(.out)');const d=[...all].filter(c=>c.classList.contains('done')).length;s.querySelector('.count').textContent=d+' / '+all.length};
+const count=s=>{const all=s.querySelectorAll('.card:not(.out):not(.cand)');const d=[...all].filter(c=>c.classList.contains('done')).length;s.querySelector('.count').textContent=d+' / '+all.length};
 document.querySelectorAll('.card').forEach(c=>{if(S[c.dataset.key])c.classList.add('done');c.onclick=()=>{c.classList.toggle('done');S[c.dataset.key]=c.classList.contains('done');save();count(c.closest('section'))}});
 document.querySelectorAll('section').forEach(count);
 const q=document.getElementById('q');q.oninput=()=>{const v=q.value.trim().toLowerCase();document.querySelectorAll('.card').forEach(c=>c.classList.toggle('f',!!v&&!c.dataset.name.includes(v)));document.querySelectorAll('.grid').forEach(g=>{const e=!g.querySelector('.card:not(.f)');g.classList.toggle('f',e);g.previousElementSibling.classList.toggle('f',e)})};
