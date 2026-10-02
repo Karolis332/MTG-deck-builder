@@ -21,7 +21,6 @@
 1 Dedicated Commons
 1 Deserted Beach
 1 Dovin's Veto
-1 Dragonskull Summit
 1 Elspeth, Sun's Champion
 1 Erode
 1 Esika, God of the Tree
@@ -96,4 +95,5 @@
 1 Way of the Pyromancer
 1 Way of the Warlord
 1 Way of the Wildspeaker
+1 Woodland Cemetery
 1 Yavimaya Coast
