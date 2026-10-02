@@ -301,3 +301,42 @@ Appended by `npx tsx scripts/paper-sync.ts`. Full diffs: `git log -p decks/paper
 ## 2026-10-02
 - **Inspirit, Flagship Vessel** v1, 101 cards
 - **Collection** 1568 owned, 938 open
+
+## 2026-10-02
+- **Collection** 1567 owned, 937 open
+
+## 2026-10-02
+- **Collection** 1571 owned, 941 open
+
+## 2026-10-02
+- **Collection** 1585 owned, 955 open
+
+## 2026-10-02
+- **Collection** 1588 owned, 958 open
+
+## 2026-10-02
+- **Collection** 1595 owned, 965 open
+
+## 2026-10-02
+- **Collection** 1600 owned, 970 open
+
+## 2026-10-02
+- **Collection** 1619 owned, 989 open
+
+## 2026-10-02
+- **Collection** 1650 owned, 1020 open
+
+## 2026-10-02
+- **Collection** 1654 owned, 1024 open
+
+## 2026-10-02
+- **Collection** 1659 owned, 1029 open
+
+## 2026-10-02
+- **Collection** 1666 owned, 1036 open
+
+## 2026-10-02
+- **Collection** 1672 owned, 1042 open
+
+## 2026-10-02
+- **Collection** 1671 owned, 1041 open

@@ -132,7 +132,6 @@
 1 Boros Charm
 1 Boros Locket
 1 Bosco, Just a Bear
-1 Bovine Intervention
 1 Braids, Arisen Nightmare
 1 Braids, Cabal Minion
 1 Brass Infiniscope
