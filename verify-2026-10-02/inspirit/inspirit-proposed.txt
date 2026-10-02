@@ -10,7 +10,7 @@
 1 Moxite Refinery
 1 Great Furnace
 5 Island
-1 Chain Reaction
+1 The Echoverse Fulcrum
 1 Solar Array
 1 Crystalline Crawler
 1 Universal Surveillance
@@ -39,7 +39,7 @@
 1 Karn's Bastion
 1 Dispatch
 1 Pull from Tomorrow
-2 Mountain
+1 Mountain
 1 Experimental Augury
 1 Sol Ring
 1 Irrigated Farmland
@@ -49,10 +49,10 @@
 1 Silverbluff Bridge
 1 Everflowing Chalice
 1 Darksteel Reactor
-1 Plains
+2 Plains
 1 Tezzeret's Gambit
 1 Deepglow Skate
-1 Fumigate
+1 Final Showdown
 1 Surge Conductor
 1 Phyrexian Metamorph
 1 Iron Spider, Stark Upgrade
@@ -60,7 +60,7 @@
 1 Exotic Orchard
 1 Seat of the Synod
 1 Enthusiastic Mechanaut
-1 Mindless Automaton
+1 Way of the Cryomancer
 1 Command Tower
 1 Organic Extinction
 1 The Mycosynth Gardens
@@ -86,7 +86,7 @@
 1 Ornithopter of Paradise
 1 Contagion Clasp
 1 Expansion Algorithm
-1 Walking Ballista
+1 Peter Parker's Camera
 1 Sheltered by Ghosts
 1 Rapid Hybridization
 1 Bovine Intervention

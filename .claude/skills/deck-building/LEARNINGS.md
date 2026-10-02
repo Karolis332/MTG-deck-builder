@@ -15,6 +15,10 @@ Format: `YYYY-MM-DD — deck — what happened → rule`.
 - 2026-10-02 — Tam — Loyal Tutor puts the walker **on top** → a top-of-library tutor costs a card in a deck that already draws walkers.
 - 2026-10-02 — Tam — Turbulent lands ("unless your opponents control eight or more lands") enter untapped around turn 3 in a 4-player pod. The operator prefers Turbulent Wilderness over Llanowar Wastes → value them as near-duals in pods, as tapped lands in 1v1.
 - 2026-10-02 — Tam — the operator keeps Quintorius Kand and Entrust the Spark, and plays 34 lands by choice → don't propose those cuts again without new information.
+- 2026-10-02 — Inspirit — the builder rejected Peter Parker's Camera because it "stops at three film counters". Proliferate adds film counters, so it refuels → in a proliferate deck, every "remove a counter" cost is renewable; re-score those cards.
+- 2026-10-02 — Inspirit — the builder kept symmetric wipes (Fumigate, Chain Reaction) in a deck whose commander becomes a creature → prefer one-sided wipes (Final Showdown's indestructible mode, artifact-sparing wipes) when the commander or the board is the plan.
+- 2026-10-02 — Inspirit — the builder moved Walking Ballista out of Cabbage, where it is the combo kill → before taking a card from another deck, check what it does there; a donor's win condition is a lock.
+- 2026-10-02 — Inspirit — the builder's synergy metric counted each pair twice (~2× inflated), and it claimed Gavel of the Righteous gets lethal with fewer counters than it needs (6 for 21 commander damage) → the refuter recomputes every number, not just the quotes.
 
 ## Physical-deck pitfalls
 - 2026-10-02 — Tam — the box differed from the registry by 3 cards (Dragonskull Summit in; Woodland Cemetery and a Plains out) → before recommending swaps on a deck changed recently, get a box check (check page).

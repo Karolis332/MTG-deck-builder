@@ -25,10 +25,8 @@ const SPECS: DeckSpec[] = [
     now: 'verify-2026-10-02/inspirit/inspirit-proposed.txt',
     base: read('verify-2026-10-02/inspirit/inspirit-current.txt'),
     extra: {
-      label: 'Under review (refuter pending)',
-      names: ['Tezzeret, Master of the Bridge', 'Saheeli, Sublime Artificer', 'Way of the Cryomancer', 'Chandra, Spark Hunter',
-        'Dovin, Hand of Control', 'Mu Yanling, Sky Dancer', 'Murmuring Volume', 'Keeper of the Quiet Hour', 'The Echoverse Fulcrum',
-        'Mindseeker Oculus', 'Protege\'s Awakening', 'Fatehold Charm', 'Teyo, Lightshield Expert', 'Walking Ballista', 'Stonecoil Serpent'],
+      label: 'Optional trade (needs your yes): Saheeli in for Pinnacle Emissary, Mu Yanling to Tam',
+      names: ['Saheeli, Sublime Artificer', 'Mu Yanling, Sky Dancer'],
     },
   },
   { slug: 'tam-the-possibility', base: read('verify-2026-09-28/deck-audit/tam-the-possibility-final.txt') },
