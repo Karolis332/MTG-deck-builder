@@ -114,3 +114,7 @@ Batch the DB queries, about 20 names per `name in (...)` call. Budget ≤ 50 too
 ## Batch 2e (one §8 row each)
 - Newly registered: Reverse Engineer, Windfall, Pompous Battlemage // Improvised Act, Argentum Masticore (operator wrote "Argentum Manticore").
 - Traxos, Academy Guardian: listed again; already covered in 2b.
+
+## Batch 2f (one §8 row each)
+- Registered and open, never verdicted: Hindering Light, Strix Serenade, Nyx Lotus (devotion: count the blue/white/red pips on permanents in this list before scoring it).
+- Already in your list (operator confirms they hold them): Swords to Plowshares, Fact or Fiction, Three Steps Ahead, Final Showdown.
