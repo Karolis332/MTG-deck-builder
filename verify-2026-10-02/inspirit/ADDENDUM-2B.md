@@ -110,3 +110,7 @@ Batch the DB queries, about 20 names per `name in (...)` call. Budget ≤ 50 too
 - **Draw:** Stock Up, Fact or Fiction, Coastal Piracy.
 - **Lands:** Inventors' Fair, Archway of Innovation, Uthros, Titanic Godcore (check its DB row: name, type, back face).
 - Ornithopter of Paradise is already in your list.
+
+## Batch 2e (one §8 row each)
+- Newly registered: Reverse Engineer, Windfall, Pompous Battlemage // Improvised Act, Argentum Masticore (operator wrote "Argentum Manticore").
+- Traxos, Academy Guardian: listed again; already covered in 2b.

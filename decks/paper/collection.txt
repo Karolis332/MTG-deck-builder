@@ -49,6 +49,7 @@
 1 Archon of Sun's Grace
 1 Archpriest of Iona
 1 Archway of Innovation
+1 Argentum Masticore
 1 Arid Archway
 1 Arlinn, Voice of the Pack
 1 Armaggon, Future Shark
@@ -869,6 +870,7 @@
 1 Plasmancer
 1 Plaza of Harmony
 1 Plumb the Forbidden
+1 Pompous Battlemage
 1 Pontiff of Blight
 1 Portal to Phyrexia
 1 Potioner's Trove
@@ -939,6 +941,7 @@
 1 Resourceful Defense
 1 Return of the Wildspeaker
 3 Return the Favor
+1 Reverse Engineer
 1 Revitalizing Repast
 1 Revival Experiment
 1 Rewrite Regrets
@@ -1363,6 +1366,7 @@
 1 Wilderland Scrounger
 1 Wildwood Scourge
 1 Willowdusk, Essence Seer
+1 Windfall
 1 Winds of Rath
 1 Windswept Heath
 1 Winter, Team Player
