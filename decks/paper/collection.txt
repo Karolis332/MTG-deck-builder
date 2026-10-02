@@ -11,6 +11,7 @@
 1 Adarkar Wastes
 1 Adept Watershaper
 1 Ageless Entity
+1 Airbender Ascension
 1 Ajani Resolute
 1 Ajani Unrelenting
 1 Ajani's Chosen
@@ -72,6 +73,7 @@
 1 Baba Lysaga, Night Witch
 1 Back for More
 1 Baeloth Barrityl, Entertainer
+1 Balefire Liege
 1 Baloth Woodcrasher
 1 Bandit's Haul
 1 Bandit's Talent
@@ -99,7 +101,7 @@
 1 Bitterthorn, Nissa's Animus
 1 Black Sun's Twilight
 1 Black Sun's Zenith
-1 Blade Historian
+2 Blade Historian
 1 Blasphemous Act
 1 Bleachbone Verge
 1 Blight Mound
@@ -314,6 +316,7 @@
 2 Elvish Mystic
 1 Elvish Spirit Guide
 1 Ember Island Production
+1 Embrace the Unknown
 1 Emerald Medallion
 1 Emergency Weld
 1 Emeritus of Ideation
@@ -388,6 +391,7 @@
 1 Firemind Vessel
 1 Flame of Anor
 1 Flare of Cultivation
+1 Flare of Fortitude
 1 Flayed One
 1 Flesh Duplicate
 1 Flickering Hound
@@ -421,7 +425,8 @@
 1 Gaze of Granite
 2 Geist of Saint Thalia
 1 Gene Pollinator
-1 Generous Gift
+2 Generous Gift
+1 Generous Revival
 2 Geralf, the Fleshwright
 1 Getaway Glamer
 1 Ghalta the Unstoppable
@@ -514,6 +519,7 @@
 1 Hornet Nest
 1 Hornet Queen
 2 Hostile Investigator
+1 Hour of Reckoning
 1 Huatli, Poet of Unity
 1 Humiliate
 1 Hungering Puppetbeast
@@ -543,6 +549,7 @@
 1 Innovative Commons
 1 Insatiable Avarice
 1 Insidious Roots
+1 Inspired Skypainter
 1 Inspired Tethermage
 2 Inspiring Vantage
 1 Inspirit, Flagship Vessel
@@ -640,6 +647,7 @@
 1 Long Feng, Grand Secretariat
 1 Loot, Exuberant Explorer
 1 Loot, the Nexus
+1 Lorehold Charm
 1 Lost Jitte
 1 Lotho, Corrupt Shirriff
 1 Lotus Ring
@@ -731,6 +739,7 @@
 1 Nadaar, Selfless Paladin
 1 Nahiri, Storm of Stone
 1 Najeela, the Blade-Blossom
+1 Naktamun Lorespinner
 1 Nalia de'Arnise
 2 Nature's Lore
 1 Necroblossom Snarl
@@ -828,6 +837,7 @@
 1 Phyrexian Metamorph
 1 Phyrexian Scriptures
 1 Pia, Aether Ascetic
+1 Pia, Determined Rebuilder
 1 Pillage the Bog
 1 Pillar Launch
 1 Pinnacle Emissary
@@ -866,6 +876,7 @@
 1 Pulse of Murasa
 1 Puppeteer Clique
 1 Putrefy
+1 Pyre Rhymer
 1 Qarsi Revenant
 1 Quandrix Apprentice
 1 Quandrix Campus
@@ -885,6 +896,7 @@
 1 Ramunap Excavator
 1 Rankle, Master of Pranks
 1 Rapid Hybridization
+1 Rapturous Moment
 1 Rattleback Apothecary
 1 Raven of Fell Omens
 1 Ravenloft Adventurer
@@ -1128,6 +1140,7 @@
 1 Taste of Death
 1 Tazri, Beacon of Unity
 1 Teacher's Pest
+1 Team Avatar
 1 Technomancer
 1 Teething Wurmlet
 1 Tekuthal, Inquiry Dominus
@@ -1230,6 +1243,7 @@
 1 Turbulent Wilderness
 1 Twilight Mire
 1 Twilight Prophet
+1 Twinned Vision
 1 Tyrant's Scorn
 1 Tyvar's Stand
 1 Uldaros Theorix
@@ -1241,6 +1255,7 @@
 2 Undying Malice
 2 Unfortunate Accident
 1 Universal Surveillance
+1 Unlicensed Hearse
 1 Unlucky Cabbage Merchant
 1 Unseal the Necropolis
 1 Unsettled Mariner
@@ -1300,7 +1315,7 @@
 1 Warrior's Blades
 1 Way of the Cryomancer
 1 Way of the Healer
-1 Way of the Mentor
+2 Way of the Mentor
 1 Way of the Mind Sculptor
 1 Way of the Paradox
 2 Way of the Pyromancer
@@ -1340,6 +1355,7 @@
 2 Yavimaya Bloomsage
 1 Yavimaya Coast
 1 Yedora, Grave Gardener
+1 Yoshimaru, Beloved Companion
 1 You Find a Cursed Idol
 1 You Find the Villains' Lair
 1 You Happen On a Glade
