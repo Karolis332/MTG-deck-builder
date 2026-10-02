@@ -19,6 +19,7 @@ Format: `YYYY-MM-DD — deck — what happened → rule`.
 - 2026-10-02 — Inspirit — the builder kept symmetric wipes (Fumigate, Chain Reaction) in a deck whose commander becomes a creature → prefer one-sided wipes (Final Showdown's indestructible mode, artifact-sparing wipes) when the commander or the board is the plan.
 - 2026-10-02 — Inspirit — the builder moved Walking Ballista out of Cabbage, where it is the combo kill → before taking a card from another deck, check what it does there; a donor's win condition is a lock.
 - 2026-10-02 — Inspirit — the builder's synergy metric counted each pair twice (~2× inflated), and it claimed Gavel of the Righteous gets lethal with fewer counters than it needs (6 for 21 commander damage) → the refuter recomputes every number, not just the quotes.
+- 2026-10-02 — Tam guide — I "corrected" Ob Nixilis, the Hate-Twisted to 2 damage per draw from memory; DB and live Scryfall say 1. The verifier then "corrected" CR 121.2 (drawing) to Counters, from an older numbering → never correct a card or a rule from recall; check the DB, Scryfall rulings, or the current CR text (magic.wizards.com/en/rules).
 
 ## Physical-deck pitfalls
 - 2026-10-02 — Tam — the box differed from the registry by 3 cards (Dragonskull Summit in; Woodland Cemetery and a Plains out) → before recommending swaps on a deck changed recently, get a box check (check page).
