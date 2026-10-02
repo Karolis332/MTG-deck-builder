@@ -21,6 +21,9 @@ Format: `YYYY-MM-DD — deck — what happened → rule`.
 - 2026-10-02 — Inspirit — the builder's synergy metric counted each pair twice (~2× inflated), and it claimed Gavel of the Righteous gets lethal with fewer counters than it needs (6 for 21 commander damage) → the refuter recomputes every number, not just the quotes.
 - 2026-10-02 — Tam guide — I "corrected" Ob Nixilis, the Hate-Twisted to 2 damage per draw from memory; DB and live Scryfall say 1. The verifier then "corrected" CR 121.2 (drawing) to Counters, from an older numbering → never correct a card or a rule from recall; check the DB, Scryfall rulings, or the current CR text (magic.wizards.com/en/rules).
 
+- 2026-10-02 — Inspirit — the builder cut Depthshaker Titan as "{5}{R}{R}, backup plan only", and the refuter kept the cut. It is the deck's Craterhoof: in a 40-artifact deck it animates every spare artifact and gives all artifact creatures melee, trample and haste. The operator caught it → before cutting an expensive card, ask "what does it do on the turn I win?". A mass-pump or mass-haste effect that fits the deck's permanent type is a finisher, never "backup".
+- 2026-10-02 — Inspirit — "Colossal Dreadmaw" is the operator's slang for a vanilla fatty, not a card name → read card-name-like jokes in context before searching the DB.
+
 ## Physical-deck pitfalls
 - 2026-10-02 — Tam — the box differed from the registry by 3 cards (Dragonskull Summit in; Woodland Cemetery and a Plains out) → before recommending swaps on a deck changed recently, get a box check (check page).
 - 2026-10-02 — Tam — "commence" applied the swaps in the app, but the operator sleeved a variant (kept Entrust and Nomad Outpost, added Turbulent Wilderness) → after applying, ask what was actually sleeved and reconcile. When adds ≠ cuts, find the missing card before writing the DB.
