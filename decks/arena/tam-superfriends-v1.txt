@@ -1,0 +1,106 @@
+About
+Name Tam Superfriends v1
+
+Commander
+1 Tam, the Possibility (FRA) 276
+
+Deck
+1 Jetmir's Garden (SNC) 250
+1 Mountain (FIN) 305
+1 Tam's Resistance (FRA) 153
+1 Savai Triome (IKO) 253
+1 Plains (FIN) 294
+1 Way of the Mentor (FRA) 208
+1 Tomik, Orzhov Lawmage (FRA) 206
+1 The Theorist, Jace Beleren (FRA) 43
+1 Way of the Warlord (FRA) 255
+1 Way of the Paradox (FRA) 267
+1 Way of the Pyromancer (FRA) 254
+1 Rewrite Regrets (FRA) 62
+1 Jace, Multiverse Architect (FRC) 1
+1 Way of the Mind Sculptor (FRA) 224
+1 Garruk, Veiled Butcher (FRA) 229
+1 Kaito, Cunning Infiltrator (FDN) 44
+1 Ajani Resolute (FRA) 195
+1 Loyal Tutor (FRA) 14
+1 Geist of Saint Thalia (FRA) 214
+1 Theorist's Sanctum (FRA) 191
+1 Chandra, Torch of Defiance (FRA) 244
+1 Ajani Unrelenting (FRA) 242
+1 Pia, Aether Ascetic (FRA) 264
+1 Garruk, Curse Breaker (FRA) 259
+1 Vigorbloom Charm (FRA) 160
+1 Hall of Echoes (FRA) 179
+1 Esika, God of the Tree (KHM) 168
+1 Erode (SOS) 15
+1 The Eternal Wanderer (ONE) 11
+1 Tekuthal, Inquiry Dominus (ONE) 71
+1 Narset, Parter of Veils (WAR) 61
+1 Otawara, Soaring City (NEO) 271
+1 Ral Zarek, Guest Lecturer (SOS) 97
+1 Takenuma, Abandoned Mire (NEO) 278
+1 Bloom Tender (ECL) 166
+1 Zariel, Archduke of Avernus (AFR) 172
+1 Great Hall of the Citadel (LTR) 254
+1 Shatterskull Smashing (ZNR) 161
+1 Oath of Teferi (DAR) 200
+1 Kaito, Bane of Nightmares (DSK) 220
+1 Saheeli, Sublime Artificer (WAR) 234
+1 Professor Dellian Fel (SOS) 214
+1 Quintorius Kand (LCI) 238
+1 Minsc & Boo, Timeless Heroes (HBG) 243
+1 Gleaming Splendor (HOB) 15
+1 Karn's Bastion (WAR) 248
+1 Interplanar Beacon (WAR) 247
+1 Arcane Signet (TLE) 315
+1 Izzet Signet (RVR) 261
+1 Ob Nixilis, the Hate-Twisted (WAR) 100
+1 Simic Signet (RVR) 269
+1 Dreamroot Cascade (SOS) 254
+1 Eiganjo, Seat of the Empire (NEO) 268
+1 Sink into Stupor (MH3) 241
+1 Sokenzan, Crucible of Defiance (NEO) 276
+1 Sundering Eruption (MH3) 248
+1 Hallowed Fountain (ECL) 265
+1 Godless Shrine (EOE) 254
+1 Shattered Sanctum (SOS) 260
+1 Steam Vents (ECL) 267
+1 Stormcarved Coast (SOS) 263
+1 Blood Crypt (ECL) 262
+1 Overgrown Tomb (ECL) 266
+1 Stomping Ground (RNA) 259
+1 Sacred Foundry (EOE) 256
+1 Sundown Pass (SOS) 264
+1 Command Tower (ANB) 118
+1 Flooded Strand (MH3) 220
+1 Gemstone Caverns (EOS) 16
+1 Misty Rainforest (SPG) 111
+1 Multiversal Passage (SPM) 180
+1 Scalding Tarn (SPG) 112
+1 Ashiok, Dream Render (WAR) 228
+1 Breeding Pool (EOE) 251
+1 Great Divide Guide (TLA) 181
+1 Farseek (FCA) 45
+1 Fierce Guardianship (TLE) 307
+1 Worldly Tutor (TLE) 314
+1 Deflecting Swat (TLE) 311
+1 Teferi's Protection (TLE) 7
+1 Flux Channeler (WAR) 52
+1 Evolution Sage (WAR) 159
+1 Enduring Vitality (DSK) 176
+1 Counterspell (STA) 15
+1 Experimental Augury (ONE) 49
+1 Talisman of Dominance (MRD) 253
+1 Frantic Search (ULG) 32
+1 Ajani, Outland Chaperone (ECL) 4
+1 Kasmina, Enigmatic Mentor (WAR) 56
+1 Disciple of Freyalise (MH3) 250
+1 Talisman of Unity (MRD) 257
+1 Liliana the Faultless (FRA) 200
+1 Displacer Kitten (HBG) 115
+1 Brainstorm (PZA) 0
+1 Sylvan Library (SPG) 0
+1 Way of the Deathbringer (FRA) 238
+1 Sanctum Lurker (FRA) 64
+1 Sarkhan the Masterless (WAR) 143
+1 Ugin, the Ineffable (WAR) 2
