@@ -1,6 +1,5 @@
 1 Aatchik, Emerald Radian
 1 Aberrant Return
-1 Abrade
 1 Abraded Bluffs
 1 Abundant Growth
 1 Academic Ascent
@@ -14,11 +13,12 @@
 1 Alchemist's Refuge
 1 Alesha, Who Laughs at Fate
 1 Alhammarret's Archive
-1 All That Glitters
+1 All-Fates Scroll
 1 Alms Collector
 1 Altar of Bhaal
 1 Altered Ego
 1 Ancient Craving
+1 Angel of the Ruins
 1 Angelic Destiny
 1 Angrath, Captain of Chaos
 1 Animal Attendant
@@ -34,7 +34,6 @@
 1 Archfiend of Ifnir
 1 Archon of Sun's Grace
 1 Archpriest of Iona
-1 Archway of Innovation
 1 Argentum Masticore
 1 Arid Archway
 1 Arlinn, Voice of the Pack
@@ -44,6 +43,7 @@
 1 Ash Barrens
 1 Ashiok, Dream Render
 1 Astarion, the Decadent
+1 Astral Cornucopia
 1 At Knifepoint
 1 Auntie Ool, Cursewretch
 1 Avacyn's Pilgrim
@@ -77,7 +77,6 @@
 1 Bismuth Mindrender
 1 Bitterthorn, Nissa's Animus
 1 Black Sun's Zenith
-1 Blade Historian
 1 Blight Mound
 1 Blighted Woodland
 1 Blisterpod
@@ -94,7 +93,6 @@
 2 Bojuka Bog
 1 Bond of Revival
 1 Bonny Pall, Clearcutter
-1 Boros Charm
 1 Boros Locket
 1 Bosco, Just a Bear
 1 Brass Infiniscope
@@ -108,11 +106,11 @@
 1 Bristling Backwoods
 1 Broodhatch Nantuko
 2 Buried in the Garden
+1 Buried Ruin
 1 Burning Curiosity
 1 Burnished Hart
 1 Bushwhack
 1 Butcher of Malakir
-1 Bygone Colossus
 2 Calamity, Galloping Inferno
 1 Callous Inspector
 1 Campus Crier
@@ -128,13 +126,12 @@
 1 Cathartic Reunion
 1 Caught in the Crossfire
 1 Caves of Chaos Adventurer
+1 Chain Reaction
 1 Chainer, Dementia Master
 1 Chains of Custody
 1 Chandra, Fire Artisan
-1 Chandra, Spark Hunter
 1 Changing Loyalty
 1 Channeler Initiate
-1 Chaos Warp
 1 Charcoal Diamond
 1 Charge the Sanctum
 1 Chief Warg's Company
@@ -142,6 +139,7 @@
 1 Cityscape Leveler
 1 Cleanup Crew
 1 Clear Shot
+1 Cloud Key
 1 Cloudkill
 1 Cloudshift
 1 Coastal Piracy
@@ -156,26 +154,25 @@
 1 Consign to Memory
 2 Consuming Corruption
 1 Contagion Clasp
+1 Coretapper
 1 Corpse Augur
 1 Corpse Churn
 3 Corrupted Conviction
 1 Countersculpt
-1 Counterspell
-1 Craterclaw Colossus
 1 Cream of the Crop
 1 Creosote Heath
 1 Cruel Calculations
 1 Crystalline Armor
+1 Crystalline Crawler
 1 Cultivate
 1 Curse of the Swine
-1 Cyberdrive Awakener
 1 Cycle of Renewal
-1 Cyclonic Rift
 1 Damnable Pact
 3 Dance of the Tumbleweeds
 1 Daretti, Scrap Savant
 1 Darigaaz's Charm
 1 Darksteel Mutation
+1 Darksteel Reactor
 1 Davriel, Rogue Shadowmage
 1 Dawnbringer Cleric
 1 Dawnsire, Sunstar Dreadnought
@@ -242,6 +239,7 @@
 1 Emeritus of Ideation
 1 Emeritus of Truce
 1 Emperor of Bones
+1 Emry, Lurker of the Loch
 1 Entrancing Melody
 1 Epicure of Blood
 1 Eriette of the Charmed Apple
@@ -252,28 +250,28 @@
 2 Essence Capture
 1 Essence Pulse
 1 Etali, Primal Storm
-1 Etherium Sculptor
+1 Etched Oracle
 1 Eureka Moment
 1 Eusocial Engineering
 1 Eventide's Shadow
 1 Everlasting Torment
 1 Everything Comes to Dust
 1 Eviscerator's Insight
+1 Evolving Wilds
 1 Exotic Orchard
 1 Expansion Algorithm
+1 Experimental Augury
 1 Explore
 2 Explosive Derailment
 1 Eye of Jace
 1 Ezzaroot Channeler
-2 Fabled Passage
-1 Fact or Fiction
+1 Fabled Passage
 1 Fallen Ideal
 1 Farseek
 1 Fatehold Charm
 1 Fblthp, Knows the Way
 1 Fblthp, Lost on the Range
 1 Fell the Mighty
-1 Fellwar Stone
 1 Feral Appetite
 1 Ferocification
 1 Ferrafor, Young Yew
@@ -283,7 +281,6 @@
 1 Fetid Heath
 1 Feywild Caretaker
 1 Fierce Retribution
-1 Final Showdown
 1 Firdoch Core
 1 Fire
 1 Fire Covenant
@@ -315,12 +312,12 @@
 1 Freestrider Lookout
 1 Frog Butler
 1 Full Bore
+1 Fumigate
 1 Gandalf the White
 1 Gatecreeper Vine
 1 Gaze of Granite
 1 Geist of Saint Thalia
 1 Gene Pollinator
-1 Generous Gift
 1 Generous Revival
 2 Geralf, the Fleshwright
 1 Getaway Glamer
@@ -337,8 +334,10 @@
 1 Glaring Fleshraker
 1 Gleaming Barrier
 1 Glissa Sunslayer
+1 Glittering Massif
 1 Gluttonous Troll
 2 Goldvein Hydra
+1 Golem Foundry
 2 Golgari Rot Farm
 1 Gonti, Lord of Luxury
 1 Gonti's Machinations
@@ -358,6 +357,7 @@
 1 Gutterbones
 1 Gyome, Master Chef
 1 Hama Pashar, Ruin Seeker
+1 Hangarback Walker
 1 Hapatra, Vizier of Poisons
 2 Hardbristle Bandit
 1 Hardened Scales
@@ -400,21 +400,17 @@
 1 Ignoble Hierarch
 1 Ilysian Caryatid
 1 Immoral Bargain
-1 Improvised Arsenal
 1 Incremental Blight
 1 Infestation Sage
 1 Inkshield
 1 Innkeeper's Talent
 1 Insidious Roots
-1 Insight Engine
 1 Inspired Skypainter
 1 Inspired Tethermage
 1 Inspiring Statuary
-1 Inspiring Vantage
 1 Interdimensional Web Watch
 1 Intermediate Chirography
 1 Intimidation Campaign
-1 Inventors' Fair
 1 Ionize
 2 Isolated Chapel
 1 Izoni, Thousand-Eyed
@@ -436,6 +432,7 @@
 1 Kagha, Shadow Archdruid
 1 Kamahl's Druidic Vow
 1 Kami of Whispered Hopes
+1 Kappa Cannoneer
 1 Karn, the Great Creator
 1 Kasmina, Enigmatic Mentor
 1 Kaya, Bane of the Dead
@@ -457,7 +454,6 @@
 1 Kraum, Violent Cacophony
 1 Krydle of Baldur's Gate
 1 Kulrath Knight
-1 Lasting Tarfire
 1 Lattice Library
 1 Lavaspur Boots
 1 Lembas
@@ -468,10 +464,10 @@
 1 Lion Umbra
 1 Lluwen, Imperfect Naturalist
 1 Lonely Arroyo
+1 Lonely Sandbar
 1 Loot, Exuberant Explorer
 1 Loot, the Nexus
 1 Lorehold Charm
-1 Lost Jitte
 1 Lotus Ring
 1 Loxodon Warhammer
 1 Loyal Tutor
@@ -504,6 +500,7 @@
 1 Meticulous Commons
 1 Midnight Banshee
 1 Mindblade Render
+1 Mindless Automaton
 1 Mindseeker Oculus
 1 Minthara, Merciless Soul
 1 Mirage Mesa
@@ -520,6 +517,7 @@
 1 Moseo, Vein's New Dean
 1 Mosswood Dreadknight
 1 Mourner's Surprise
+1 Moxite Refinery
 1 Mu Yanling, Sky Dancer
 1 Mudflat Village
 1 Multiclass Baldric
@@ -552,7 +550,6 @@
 1 Noxious Newt
 1 Nulldrifter
 1 Nullpriest of Oblivion
-1 Nyx Lotus
 1 Obeka, Splitter of Seconds
 1 Oft-Nabbed Goat
 1 Oko, Lorwyn Liege
@@ -560,14 +557,13 @@
 1 Omenpath Journey
 1 Omni-Changeling
 1 Omnipresence
-1 One Last Job
 2 Opal Palace
 1 Open the Way
 1 Oran-Rief, the Vastwood
 1 Orchard Strider
 1 Ordeal of Nylea
+1 Organic Extinction
 1 Ornery Tumblewagg
-1 Ornithopter of Paradise
 1 Orzhov Charm
 1 Oubliette
 1 Outcaster Trailblazer
@@ -583,14 +579,14 @@
 1 Pact Weapon
 1 Painful Truths
 1 Palladium Myr
-1 Panharmonicon
 1 Paradise Druid
 1 Paradise Plume
 1 Paradox Gardens
 1 Parasitic Impetus
 1 Party Dude
 1 Patchwork Automaton
-3 Path of Ancestry
+2 Path of Ancestry
+1 Patrolling Peacemaker
 1 Pearl Medallion
 1 Pearl-Ear, Imperial Advisor
 1 Peer into the Abyss
@@ -606,6 +602,7 @@
 1 Pia, Determined Rebuilder
 1 Pillage the Bog
 1 Pillar Launch
+1 Pinnacle Emissary
 1 Pizza Face, Gastromancer
 1 Plan for All Outcomes
 1 Planar Engineering
@@ -629,6 +626,7 @@
 1 Prophetic Prism
 1 Protege's Awakening
 1 Puca's Covenant
+1 Pull from Tomorrow
 1 Pulse of Murasa
 1 Puppeteer Clique
 1 Pyre Rhymer
@@ -645,7 +643,6 @@
 1 Rakish Crew
 1 Rampant Growth
 1 Rankle, Master of Pranks
-1 Rapid Hybridization
 1 Rapturous Moment
 1 Rattleback Apothecary
 1 Raven of Fell Omens
@@ -661,9 +658,9 @@
 1 Reiver Demon
 1 Reliquary Tower
 1 Repurposed Enforcer
-1 Repurposing Bay
 1 Requisition Raid
 1 Resonating Lute
+1 Resourceful Defense
 3 Return the Favor
 1 Reverse Engineer
 1 Revival Experiment
@@ -707,6 +704,7 @@
 1 Screams from Within
 1 Scriv, the Obligator
 1 Sea Gate Colossus
+1 Secluded Steppe
 1 Secret Rendezvous
 1 Sefris of the Hidden Ways
 1 Seize the Secrets
@@ -761,12 +759,14 @@
 1 Smoldering Marsh
 1 Smothering Abomination
 1 Sol Ring
+1 Solar Array
 1 Solarium Sentry
 1 Solemn Doomguide
 1 Solemn Simulacrum
 1 Solve for Disappointment
 1 Songbirds' Blessing
 1 Soul Snuffers
+1 Soul-Guide Lantern
 1 Soured Springs
 1 Spell Pierce
 1 Sphinx of False Conclusions
@@ -827,6 +827,7 @@
 1 Temple of Mystery
 1 Temple of Silence
 2 Temple of the False God
+1 Temple of Triumph
 1 Tendershoot Dryad
 1 Tendrils of Agony
 1 Tendrils of Corruption
@@ -839,10 +840,13 @@
 1 Teyo, Diamondblade Mage
 1 Teyo, Lightshield Expert
 1 Teyo, the Shieldmage
+1 Tezzeret's Gambit
 2 The Echoverse Fulcrum
+1 The Eternity Elevator
 1 The Goose Mother
 1 The Key to the Vault
 1 The Legend of Kyoshi
+1 The Mycosynth Gardens
 1 The Reaper, King No More
 1 The Scorpion God
 1 The Seriema
@@ -851,11 +855,12 @@
 1 Theorix Charm
 1 Thieves' Tools
 1 Thorin, Mountain-king
-1 Three Steps Ahead
 1 Three Visits
 1 Through the Forest Gate
+1 Thrummingbird
 1 Thwart the Grave
 1 Tip the Scales
+1 Titan Forge
 1 Titan's Grave
 1 Tivash, Gloom Summoner
 1 Tomb of Horrors Adventurer
@@ -864,13 +869,13 @@
 1 Tomik, Wielder of Law
 1 Topiary Panther
 1 Torpor Orb
+1 Tractor Beam
 1 Tragedy Feaster
 1 Transcendent Envoy
 1 Transformative Commons
 3 Trash the Town
 1 Traxos, Academy Guardian
 1 Traxos, Scourge Eternal
-1 Traxos, Scourge of Kroog
 1 Treasure Keeper
 1 Treasure Nabber
 1 Tree of Perdition
@@ -892,8 +897,7 @@
 1 Unseal the Necropolis
 1 Unsummon
 1 Urban Evolution
-1 Urza, Lord High Artificer
-1 Uthros, Titanic Godcore
+1 Uthros Psionicist
 1 Vampire Nighthawk
 1 Vampiric Link
 1 Vanishing Verse
@@ -922,12 +926,12 @@
 1 Vito, Thorn of the Dusk Rose
 1 Vivien, Champion of the Wilds
 1 Vivien's Arkbow
-1 Voyage Home
 1 Vraan, Executioner Thane
 1 Vraska Joins Up
 1 Vraska, Swarm's Eminence
 1 Vraska, the Silencer
 1 Vraska's Final Mercy
+1 Wake the Past
 1 War Room
 1 Wardens of the Cycle
 1 Warg Tactics
@@ -974,4 +978,3 @@
 1 Zimone, Infinite Analyst
 1 Zimone's Hypothesis
 1 Zombify
-1 Zookeeper Mechan

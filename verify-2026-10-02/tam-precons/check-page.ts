@@ -22,7 +22,6 @@ const read = (rel: string) => () => fs.readFileSync(path.join(ROOT, rel), 'utf8'
 const SPECS: DeckSpec[] = [
   {
     slug: 'inspirit-flagship-vessel',
-    now: 'verify-2026-10-02/inspirit/inspirit-proposed-2.txt',
     base: read('verify-2026-10-02/inspirit/inspirit-current.txt'),
     extra: {
       label: 'Untapped duals you own, sleeved in Tam/Tazri (second copies would replace Islands)',
