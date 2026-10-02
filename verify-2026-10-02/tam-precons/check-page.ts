@@ -89,10 +89,22 @@ const sections = DECKS.map((d, i) => {
   const outHtml = outs.length
     ? `<h3 class="outh">Should be OUT <small>${outQty}</small></h3><div class="grid">${outs.map((o) => tile(card(o.name), o.qty, `${d.slug}|OUT|${o.name}`, 'out')).join('')}</div>`
     : '';
+  // swaps grouped by card type: red OUT tiles then gold IN tiles (own tick keys, excluded from the found count)
+  const ins = now.map((c) => ({ name: c.name, qty: c.qty - (base.get(c.name) ?? 0) })).filter((c) => c.qty > 0);
+  const swapHtml = GROUPS.map((g) => {
+    const o = outs.map((x) => ({ ...x, k: card(x.name) })).filter((x) => groupOf(x.k.type) === g);
+    const n = ins.map((x) => ({ ...x, k: card(x.name) })).filter((x) => groupOf(x.k.type) === g);
+    if (!o.length && !n.length) return '';
+    const sum = (a: { qty: number }[]) => a.reduce((s, x) => s + x.qty, 0);
+    return `<h3 class="swh">${g} <small>−${sum(o)} / +${sum(n)}</small></h3><div class="grid">` +
+      o.map((x) => tile(x.k, x.qty, `${d.slug}|SW|OUT|${x.name}`, 'out swap', 'OUT')).join('') +
+      n.map((x) => tile(x.k, x.qty, `${d.slug}|SW|IN|${x.name}`, 'new swap', 'IN')).join('') + '</div>';
+  }).join('');
+  const swapsHtml = swapHtml ? `<h2 class="swt">Swaps by card type</h2>${swapHtml}<h2 class="swt">Full list</h2>` : '';
   const extraHtml = d.extra
     ? `<h3 class="candh">${esc(d.extra.label)} <small>${d.extra.names.length}</small></h3><div class="grid">${d.extra.names.map((n) => tile(card(n), 1, `${d.slug}|CAND|${n}`, 'cand')).join('')}</div>`
     : '';
-  return `<section id="${d.slug}" class="${i ? 'hidden' : ''}" data-total="${now.length}"><div class="bar"><b>${esc(now[0].name)}</b> · ${total} cards · <span class="count"></span> found <button class="reset">reset</button></div>${body}${outHtml}${extraHtml}</section>`;
+  return `<section id="${d.slug}" class="${i ? 'hidden' : ''}" data-total="${now.length}"><div class="bar"><b>${esc(now[0].name)}</b> · ${total} cards · <span class="count"></span> found <button class="reset">reset</button></div>${swapsHtml}${body}${outHtml}${extraHtml}</section>`;
 });
 const tabs = DECKS.map((d, i) => `<button class="tab${i ? '' : ' on'}" data-target="${d.slug}">${esc(parse(fs.readFileSync(path.join(ROOT, d.file), 'utf8'))[0].name.split(',')[0])}${d.now ? ' (draft)' : ''}</button>`).join('');
 
@@ -108,11 +120,12 @@ section{padding:0 14px 40px}.hidden{display:none}h3{color:#c9a55a;margin:18px 0 
 .badge,.qty{position:absolute;top:6px;background:#d4af37;color:#000;font:bold 12px sans-serif;padding:2px 6px;border-radius:3px}.badge{left:6px}.qty{right:6px}
 .tick{display:none;position:absolute;inset:0;background:rgba(20,90,40,.55);color:#fff;font:bold 64px sans-serif;align-items:center;justify-content:center}
 .card.done .tick{display:flex}.card.out.done .tick{background:rgba(140,30,30,.55)}
+.swt{color:#e8dcc4;margin:22px 0 4px;border-bottom:1px solid #6b5326;font-size:20px}.card.out.swap .badge{background:#d0605a}
 #zoom{position:fixed;z-index:9;display:none;pointer-events:none;width:min(440px,46vw);border-radius:18px;box-shadow:0 10px 50px #000}
 </style></head><body><header>${tabs}<input id="q" type="search" placeholder="filter: name or type…" autofocus><span style="float:right;color:#8d7a5a">tap a card when you find it in the box · gold = new today · red = should be out (tap once removed)</span></header>${sections.join('')}
 <script>
 const S=JSON.parse(localStorage.getItem('deckcheck')||'{}');const save=()=>localStorage.setItem('deckcheck',JSON.stringify(S));
-const count=s=>{const all=s.querySelectorAll('.card:not(.out):not(.cand)');const d=[...all].filter(c=>c.classList.contains('done')).length;s.querySelector('.count').textContent=d+' / '+all.length};
+const count=s=>{const all=s.querySelectorAll('.card:not(.out):not(.cand):not(.swap)');const d=[...all].filter(c=>c.classList.contains('done')).length;s.querySelector('.count').textContent=d+' / '+all.length};
 document.querySelectorAll('.card').forEach(c=>{if(S[c.dataset.key])c.classList.add('done');c.onclick=()=>{c.classList.toggle('done');S[c.dataset.key]=c.classList.contains('done');save();count(c.closest('section'))}});
 document.querySelectorAll('section').forEach(count);
 const q=document.getElementById('q');q.oninput=()=>{const v=q.value.trim().toLowerCase();document.querySelectorAll('.card').forEach(c=>c.classList.toggle('f',!!v&&!c.dataset.name.includes(v)));document.querySelectorAll('.grid').forEach(g=>{const e=!g.querySelector('.card:not(.f)');g.classList.toggle('f',e);g.previousElementSibling.classList.toggle('f',e)})};
