@@ -265,3 +265,10 @@ Appended by `npx tsx scripts/paper-sync.ts`. Full diffs: `git log -p decks/paper
 
 ## 2026-09-30
 - **Collection** +Chandra, Awakened Inferno (operator-listed) — 1267 owned, 763 open
+
+## 2026-10-02
+- **Imotekh the Stormlord** v4, 100 cards: +Liliana the Repentant, −Razorlash Transmogrant
+- **Meren of Clan Nel Toth** v9, 100 cards: +Animate Dead, +Beifong's Bounty Hunters, +Dina, Soul Steeper, +Grave Titan, +Haunted Mire, +Jungle Hollow, +Vito, Thorn of the Dusk Rose, −Creakwood Liege, −Grim Servant, −High Market, −Llanowar Wastes, −Moldervine Reclamation, −Ramunap Excavator, −Rune-Scarred Demon, −Sylvan Library
+- **Tam, the Possibility** v2, 100 cards: +Anguished Unmaking, +Caves of Koilos, +Chandra, Awakened Inferno, +Kiora of Salt and Sand, +Llanowar Wastes, +Nexus Mentality, +Nissa, Steward of Elements, +Path of Ancestry, +Ral Zarek, +Sylvan Library, +Tezzeret, Master of the Bridge, +Turbulent Moor, +Uro, Titan of Nature's Wrath, +Yavimaya Coast, −Arcane Amphisbaena, −Chandra, Fire Artisan, −Entrust the Spark, −Farseek, −Formidable Commons, −Isolated Chapel, −Jared Carthalion, −Meticulous Commons, −Nomad Outpost, −Protege's Awakening, −Rewrite Regrets, −The Wanderer, −Transformative Commons, −Vraska's Final Mercy
+- **Tazri, Beacon of Unity** v15, 100 cards: +Blade Historian, +Chomping Changeling, +Eclipsed Steppe, +Generous Gift, +Grand Abolisher, +Infernal Grasp, +Ingenious Prodigy, +Ingris Stingerquill, +Kamiz, Obscura Oculus, +Land Tax, +Mangara, the Diplomat, +Putrefy, +Sodden Verdure, +Springleaf Parade, +The Destined Thief, +Torens, Fist of the Angels, +Twilight Prophet, +Weathered Wayfarer, +Zimone, Quandrix Prodigy, −Acererak the Archlich, −Archpriest of Iona, −Ash Barrens, −Bar the Gate, −Bojuka Bog, −Concerted Defense, −Feywild Caretaker, −Hama Pashar, Ruin Seeker, −Multiclass Baldric, −Nadaar, Selfless Paladin, −Safana, Calimport Cutthroat, −Sefris of the Hidden Ways, −Shadowheart, Dark Justiciar, −Solemn Doomguide, −Thwart the Grave, −Triumphant Adventurer, −Varis, Silverymoon Ranger, −You Find a Cursed Idol, −Yuan-Ti Malison
+- **Collection** 1481 owned, 949 open

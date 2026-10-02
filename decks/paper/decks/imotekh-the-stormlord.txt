@@ -26,6 +26,7 @@
 1 Illuminor Szeras
 1 Imp's Mischief
 1 Insatiable Avarice
+1 Liliana the Repentant
 1 Lively Dirge
 1 Lokhust Heavy Destroyer
 1 Lychguard
@@ -45,7 +46,6 @@
 1 Plasmancer
 1 Portal to Phyrexia
 1 Psychomancer
-1 Razorlash Transmogrant
 1 Reanimate
 1 Ripples of Undeath
 1 Royal Warden
