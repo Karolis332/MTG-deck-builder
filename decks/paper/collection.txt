@@ -181,6 +181,7 @@
 1 Changeling Outcast
 1 Changing Loyalty
 1 Channeler Initiate
+1 Chaos Warp
 1 Charcoal Diamond
 1 Chief Warg's Company
 1 Chimil, the Inner Sun
@@ -232,6 +233,7 @@
 1 Cycle of Renewal
 1 Damnable Pact
 3 Dance of the Tumbleweeds
+1 Daretti, Scrap Savant
 1 Darigaaz's Charm
 1 Dark Ritual
 1 Darksteel Mutation
@@ -309,6 +311,7 @@
 1 Elvish Archdruid
 2 Elvish Mystic
 1 Elvish Spirit Guide
+1 Ember Island Production
 1 Emerald Medallion
 1 Emergency Weld
 1 Emeritus of Ideation
@@ -526,6 +529,7 @@
 1 Imoen, Mystic Trickster
 1 Imotekh the Stormlord
 1 Imp's Mischief
+1 Improvised Arsenal
 1 Incremental Blight
 2 Infernal Grasp
 1 Infestation Sage
@@ -539,6 +543,7 @@
 1 Inspired Tethermage
 1 Inspiring Vantage
 1 Inspirit, Flagship Vessel
+1 Interdimensional Web Watch
 1 Intermediate Chirography
 1 Interplanar Beacon
 1 Intimidation Campaign
@@ -967,6 +972,7 @@
 1 Selfless Spirit
 1 Selvala, Heart of the Wilds
 1 Sentinel's Eyes
+1 Sephiroth, Fallen Hero
 1 Seraphic Steed
 1 Servant of the Stinger
 1 Settle the Wreckage
@@ -1034,6 +1040,7 @@
 1 Spelunking
 1 Sphinx of False Conclusions
 1 Spider-Ham, Peter Porker
+1 Spider-Man 2099
 1 Spider-Man, Brooklyn Visionary
 1 Spinewoods Armadillo
 1 Spire of Industry
@@ -1057,6 +1064,7 @@
 1 Step Between Worlds
 1 Sterling Keykeeper
 1 Stick Together
+1 Sting, Bilbo's Sword
 1 Stingerquill Annex
 1 Stingerquill Charm
 1 Stomping Ground
@@ -1090,6 +1098,7 @@
 2 Syr Konrad, the Grim
 1 Szarekh, the Silent King
 1 Tablet of Compleation
+1 Tablet of Discovery
 1 Tajuru Paragon
 1 Take for a Ride
 1 Take the Fall
@@ -1164,6 +1173,7 @@
 1 Theorix Charm
 1 Thieves' Tools
 1 Thirst for Knowledge
+1 Thorin, Mountain-king
 1 Thought Monitor
 1 Thought Vessel
 1 Three Steps Ahead
@@ -1198,6 +1208,7 @@
 3 Trash the Town
 1 Traxos, Scourge of Kroog
 1 Trazyn the Infinite
+1 Treasure Keeper
 1 Treasure Nabber
 1 Tree of Perdition
 1 Treva's Charm
@@ -1225,6 +1236,7 @@
 1 Unlucky Cabbage Merchant
 1 Unseal the Necropolis
 1 Unsettled Mariner
+1 Unsummon
 1 Urban Evolution
 1 Uro, Titan of Nature's Wrath
 1 Uthros Psionicist
@@ -1300,6 +1312,7 @@
 1 Willowdusk, Essence Seer
 1 Winds of Rath
 1 Windswept Heath
+1 Winternight Stories
 1 Wishclaw Talisman
 1 Witch of the Moors
 1 Witch's Clinic
@@ -1312,6 +1325,7 @@
 1 Worldwalker Helm
 1 Worn Powerstone
 1 Wreckage Wickerfolk
+1 Wrecking Ball Arm
 1 Yahenni, Undying Partisan
 2 Yavimaya Bloomsage
 1 Yavimaya Coast
