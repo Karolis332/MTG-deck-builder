@@ -51,7 +51,7 @@ const groupOf = (t: string) => {
 };
 const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const tile = (c: Card, qty: number, key: string, cls = '') =>
-  `<div class="card ${cls}" data-key="${esc(key)}">${c.img ? `<img loading="lazy" src="${esc(c.img)}" alt="${esc(c.name)}">` : `<div class="ph">${esc(c.name)}</div>`}` +
+  `<div class="card ${cls}" data-key="${esc(key)}" data-name="${esc((c.name + ' ' + c.type).toLowerCase())}">${c.img ? `<img loading="lazy" src="${esc(c.img)}" alt="${esc(c.name)}">` : `<div class="ph">${esc(c.name)}</div>`}` +
   `${qty > 1 ? `<span class="qty">×${qty}</span>` : ''}${cls.includes('new') ? '<span class="badge">NEW</span>' : ''}<span class="tick">✓</span></div>`;
 
 const sections = DECKS.map((d, i) => {
@@ -77,6 +77,7 @@ const tabs = DECKS.map((d, i) => `<button class="tab${i ? '' : ' on'}" data-targ
 const html = `<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Deck check</title><style>
 body{margin:0;background:#15110d;color:#e8dcc4;font:15px Georgia,serif}header{position:sticky;top:0;z-index:2;background:#1f1912;padding:10px;border-bottom:1px solid #6b5326}
 .tab{background:#2b2218;color:#e8dcc4;border:1px solid #6b5326;padding:6px 12px;margin-right:6px;cursor:pointer;border-radius:4px}.tab.on{background:#8a6a2e;color:#000}
+#q{background:#2b2218;color:#e8dcc4;border:1px solid #6b5326;padding:6px 10px;border-radius:4px;width:220px}.card.f,.grid.f,h3.f{display:none}
 .bar{padding:10px 14px;font-size:17px}.reset{margin-left:10px;background:none;color:#c9a55a;border:1px solid #6b5326;cursor:pointer}
 section{padding:0 14px 40px}.hidden{display:none}h3{color:#c9a55a;margin:18px 0 8px}h3 small{color:#8d7a5a}.outh{color:#d0605a}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
@@ -85,12 +86,13 @@ section{padding:0 14px 40px}.hidden{display:none}h3{color:#c9a55a;margin:18px 0 
 .badge,.qty{position:absolute;top:6px;background:#d4af37;color:#000;font:bold 12px sans-serif;padding:2px 6px;border-radius:3px}.badge{left:6px}.qty{right:6px}
 .tick{display:none;position:absolute;inset:0;background:rgba(20,90,40,.55);color:#fff;font:bold 64px sans-serif;align-items:center;justify-content:center}
 .card.done .tick{display:flex}.card.out.done .tick{background:rgba(140,30,30,.55)}
-</style></head><body><header>${tabs}<span style="float:right;color:#8d7a5a">tap a card when you find it in the box · gold = new today · red = should be out (tap once removed)</span></header>${sections.join('')}
+</style></head><body><header>${tabs}<input id="q" type="search" placeholder="filter: name or type…" autofocus><span style="float:right;color:#8d7a5a">tap a card when you find it in the box · gold = new today · red = should be out (tap once removed)</span></header>${sections.join('')}
 <script>
 const S=JSON.parse(localStorage.getItem('deckcheck')||'{}');const save=()=>localStorage.setItem('deckcheck',JSON.stringify(S));
 const count=s=>{const all=s.querySelectorAll('.card:not(.out)');const d=[...all].filter(c=>c.classList.contains('done')).length;s.querySelector('.count').textContent=d+' / '+all.length};
 document.querySelectorAll('.card').forEach(c=>{if(S[c.dataset.key])c.classList.add('done');c.onclick=()=>{c.classList.toggle('done');S[c.dataset.key]=c.classList.contains('done');save();count(c.closest('section'))}});
 document.querySelectorAll('section').forEach(count);
+const q=document.getElementById('q');q.oninput=()=>{const v=q.value.trim().toLowerCase();document.querySelectorAll('.card').forEach(c=>c.classList.toggle('f',!!v&&!c.dataset.name.includes(v)));document.querySelectorAll('.grid').forEach(g=>{const e=!g.querySelector('.card:not(.f)');g.classList.toggle('f',e);g.previousElementSibling.classList.toggle('f',e)})};
 document.querySelectorAll('.reset').forEach(b=>b.onclick=()=>{const s=b.closest('section');s.querySelectorAll('.card').forEach(c=>{c.classList.remove('done');delete S[c.dataset.key]});save();count(s)});
 document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on',x===t));document.querySelectorAll('section').forEach(s=>s.classList.toggle('hidden',s.id!==t.dataset.target))});
 </script></body></html>`;

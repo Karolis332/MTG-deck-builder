@@ -289,3 +289,7 @@ Appended by `npx tsx scripts/paper-sync.ts`. Full diffs: `git log -p decks/paper
 ## 2026-10-02
 - **Tam, the Possibility** v7, 100 cards: +Woodland Cemetery, −Dragonskull Summit
 - **Collection** 1481 owned, 949 open
+
+## 2026-10-02
+- **Tam, the Possibility** v8, 100 cards: +Dragonskull Summit, −Woodland Cemetery
+- **Collection** 1481 owned, 949 open
