@@ -297,3 +297,7 @@ Appended by `npx tsx scripts/paper-sync.ts`. Full diffs: `git log -p decks/paper
 ## 2026-10-02
 - **Tam, the Possibility** v9, 100 cards: +Entrust the Spark, −Plains
 - **Collection** 1482 owned, 949 open
+
+## 2026-10-02
+- **Inspirit, Flagship Vessel** v1, 101 cards
+- **Collection** 1568 owned, 938 open
