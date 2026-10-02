@@ -419,7 +419,7 @@
 1 Gatecreeper Vine
 1 Gavel of the Righteous
 1 Gaze of Granite
-1 Geist of Saint Thalia
+2 Geist of Saint Thalia
 1 Gene Pollinator
 1 Generous Gift
 2 Geralf, the Fleshwright
@@ -544,7 +544,7 @@
 1 Insatiable Avarice
 1 Insidious Roots
 1 Inspired Tethermage
-1 Inspiring Vantage
+2 Inspiring Vantage
 1 Inspirit, Flagship Vessel
 1 Interdimensional Web Watch
 1 Intermediate Chirography
@@ -559,7 +559,7 @@
 1 Izoni, Thousand-Eyed
 1 Jace, Memory Adept
 1 Jace, Multiverse Architect
-1 Jace, Reality Sculptor
+2 Jace, Reality Sculptor
 1 Jadar, Ghoulcaller of Nephalia
 1 Jagged Barrens
 1 Jaheira, Friend of the Forest
@@ -1303,8 +1303,8 @@
 1 Way of the Mentor
 1 Way of the Mind Sculptor
 1 Way of the Paradox
-1 Way of the Pyromancer
-1 Way of the Warlord
+2 Way of the Pyromancer
+2 Way of the Warlord
 1 Way of the Wildspeaker
 2 Wayfarer's Bauble
 1 Weathered Wayfarer
