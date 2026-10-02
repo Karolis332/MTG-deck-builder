@@ -220,6 +220,7 @@
 1 Emeritus of Truce
 1 Emperor of Bones
 1 Entrancing Melody
+1 Entrust the Spark
 1 Epicure of Blood
 1 Eriette of the Charmed Apple
 1 Eriette, the Beguiler
@@ -368,7 +369,6 @@
 1 Infestation Sage
 1 Inkshield
 1 Innkeeper's Talent
-1 Innovative Commons
 1 Insidious Roots
 1 Inspired Tethermage
 1 Intermediate Chirography

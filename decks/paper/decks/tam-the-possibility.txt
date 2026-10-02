@@ -22,7 +22,6 @@
 1 Deserted Beach
 1 Dovin's Veto
 1 Elspeth, Sun's Champion
-1 Entrust the Spark
 1 Erode
 1 Esika, God of the Tree
 1 Evolution Sage
@@ -35,6 +34,7 @@
 1 Geist of Saint Thalia
 1 Great Divide Guide
 1 Great Hall of the Citadel
+1 Innovative Commons
 1 Interplanar Beacon
 2 Island
 1 Jace, Memory Adept
