@@ -11,6 +11,7 @@
 1 Adarkar Wastes
 1 Adept Watershaper
 1 Ageless Entity
+1 Agna Qel'a
 1 Airbender Ascension
 1 Ajani Resolute
 1 Ajani Unrelenting
@@ -42,11 +43,13 @@
 1 Arcane Amphisbaena
 1 Arcane Lighthouse
 6 Arcane Signet
+1 Archaeomancer
 1 Archangel of Tithes
 1 Archdruid's Charm
 1 Archenemy's Charm
 1 Archfiend of Despair
 1 Archfiend of Ifnir
+1 Archmage Emeritus
 1 Archon of Sun's Grace
 1 Archpriest of Iona
 1 Archway of Innovation
@@ -82,6 +85,7 @@
 1 Bandit's Talent
 1 Bane of Bala Ged
 1 Bar the Gate
+1 Baral, Chief of Compliance
 1 Barkform Harvester
 1 Baron Bertram Graywater
 1 Baron Helmut Zemo
@@ -179,6 +183,7 @@
 1 Cauldron of Essence
 1 Caves of Chaos Adventurer
 2 Caves of Koilos
+1 Cephalid Coliseum
 1 Chain Reaction
 1 Chainer, Dementia Master
 1 Chains of Custody
@@ -213,11 +218,13 @@
 1 Colossal Rattlewurm
 1 Combat Calligrapher
 5 Command Tower
+1 Commandeer
 1 Commander's Insight
 2 Commander's Sphere
 1 Concealed Courtyard
 1 Concerted Defense
 2 Conduit Pylons
+1 Consider
 1 Consign to Memory
 2 Consuming Corruption
 1 Contagion Clasp
@@ -226,7 +233,7 @@
 1 Corpse Churn
 3 Corrupted Conviction
 1 Countersculpt
-2 Counterspell
+3 Counterspell
 1 Coveted Prize
 1 Craterclaw Colossus
 1 Creakwood Liege
@@ -260,6 +267,7 @@
 1 Deadly Brew
 2 Deadly Dispute
 1 Deadly Tempest
+1 Decanter of Endless Water
 3 Decisive Denial
 1 Decorum Dissertation
 1 Dedicated Commons
@@ -293,6 +301,7 @@
 1 District Guide
 2 Doc Aurlock, Grizzled Genius
 1 Domri, Anarch of Bolas
+1 Donatello, Way with Machines
 1 Doomsday Excruciator
 1 Doomwake Giant
 1 Double Down
@@ -370,6 +379,7 @@
 1 Evolving Wilds
 5 Exotic Orchard
 1 Expansion Algorithm
+1 Expedition Map
 1 Experimental Augury
 1 Explore
 1 Explore the Underdark
@@ -507,6 +517,7 @@
 1 Hallowed Fountain
 1 Halsin, Emerald Archdruid
 1 Hama Pashar, Ruin Seeker
+1 Hammer of Nazahn
 1 Hangarback Walker
 1 Hapatra, Vizier of Poisons
 2 Hardbristle Bandit
@@ -521,6 +532,7 @@
 1 Haywire Mite
 1 Healing Technique
 1 Heartless Pillage
+1 Hedron Archive
 1 Helix Pinnacle
 1 Hellspur Posse Boss
 1 Herald of Amity
@@ -548,6 +560,8 @@
 1 Hungering Puppetbeast
 1 Hungry Ghoul
 1 Hunter's Insight
+1 Hydro-Man, Fluid Felon
+1 Hydroelectric Specimen
 1 Hydroid Krasis
 1 Hypothesizzle
 1 Identity Echo
@@ -721,6 +735,7 @@
 1 Metalwork Colossus
 2 Metamorphic Blast
 1 Metamorphosis Fanatic
+1 Meteor Golem
 1 Meticulous Commons
 1 Midnight Banshee
 1 Midnight Pathlighter
@@ -814,6 +829,7 @@
 2 Opal Palace
 1 Open the Way
 1 Ophiomancer
+1 Opt
 1 Opulent Palace
 1 Oran-Rief, the Vastwood
 1 Orchard Strider
@@ -883,6 +899,7 @@
 1 Plaza of Harmony
 1 Plumb the Forbidden
 1 Pompous Battlemage
+1 Ponder
 1 Pontiff of Blight
 1 Portal to Phyrexia
 1 Potioner's Trove
@@ -949,6 +966,7 @@
 1 Repurposed Enforcer
 1 Repurposing Bay
 1 Requisition Raid
+1 Resculpt
 1 Resonating Lute
 1 Resourceful Defense
 1 Return of the Wildspeaker
@@ -1016,7 +1034,7 @@
 1 Seachrome Coast
 1 Seaside Citadel
 1 Seasoned Dungeoneer
-1 Seat of the Synod
+2 Seat of the Synod
 1 Secluded Steppe
 1 Second Harvest
 1 Secret Rendezvous
@@ -1032,6 +1050,7 @@
 1 Seraphic Steed
 1 Servant of the Stinger
 1 Settle the Wreckage
+1 Sewer-veillance Cam
 1 Shadow, Mysterious Assassin
 1 Shadowheart, Dark Justiciar
 1 Shadrix Silverquill
@@ -1045,6 +1064,7 @@
 1 Sheoldred's Edict
 1 Shielded by Faith
 2 Shifting Grift
+1 Shimmer Myr
 1 Shineshadow Snarl
 1 Shipwreck Marsh
 2 Shivan Reef
@@ -1088,6 +1108,7 @@
 1 Solemn Doomguide
 3 Solemn Simulacrum
 1 Solve for Disappointment
+1 Solve the Equation
 1 Songbirds' Blessing
 1 Sorin, Vengeful Bloodlord
 1 Soul Snuffers
@@ -1116,6 +1137,7 @@
 1 Sram, Senior Edificer
 1 Starfield Mystic
 1 Steam Vents
+1 Steel Hellkite
 1 Steel Overseer
 1 Steelbane Hydra
 1 Steelswarm Operator
@@ -1170,6 +1192,7 @@
 1 Talisman of Progress
 1 Talisman of Resilience
 1 Talisman of Unity
+1 Talrand, Sky Summoner
 1 Tam, Mindful First-Year
 1 Tam, the Possibility
 1 Tam's Resistance
@@ -1187,6 +1210,7 @@
 1 Technomancer
 1 Teething Wurmlet
 1 Tekuthal, Inquiry Dominus
+1 Tempest Djinn
 1 Temple of Enlightenment
 1 Temple of Epiphany
 1 Temple of Malady
@@ -1220,6 +1244,7 @@
 1 The Gitrog, Ravenous Ride
 1 The Goose Mother
 1 The Key to the Vault
+1 The Legend of Kuruk
 1 The Legend of Kyoshi
 1 The Mycosynth Gardens
 1 The Ooze
@@ -1237,8 +1262,9 @@
 1 Thieves' Tools
 1 Thirst for Knowledge
 1 Thorin, Mountain-king
-1 Thought Monitor
+2 Thought Monitor
 1 Thought Vessel
+1 Thran Dynamo
 1 Three Steps Ahead
 1 Three Visits
 1 Threefold Thunderhulk
@@ -1303,6 +1329,7 @@
 1 Unlucky Cabbage Merchant
 1 Unseal the Necropolis
 1 Unsettled Mariner
+1 Unstoppable Plan
 1 Unsummon
 1 Urban Evolution
 1 Uro, Titan of Nature's Wrath
@@ -1329,6 +1356,7 @@
 1 Verdurous Gearhulk
 2 Vernal Fen
 1 Veteran Adventurer
+1 Vexing Bauble
 1 Vial Smasher, Gleeful Grenadier
 1 Vicious Battlerager
 1 Victim of Night
@@ -1347,6 +1375,7 @@
 1 Vivien, Champion of the Wilds
 1 Vivien's Arkbow
 1 Vizier of the Menagerie
+1 Volatile Stormdrake
 1 Voyage Home
 1 Vraan, Executioner Thane
 1 Vraska Joins Up
@@ -1356,10 +1385,12 @@
 1 Vraska's Final Mercy
 1 Wake the Past
 1 Walking Ballista
+1 Wan Shi Tong, Librarian
 1 War Room
 1 Wardens of the Cycle
 1 Warg Tactics
 1 Warrior's Blades
+1 Waterbending Scroll
 1 Way of the Cryomancer
 1 Way of the Healer
 2 Way of the Mentor
@@ -1370,6 +1401,7 @@
 1 Way of the Wildspeaker
 2 Wayfarer's Bauble
 1 Weathered Wayfarer
+1 Whirler Rogue
 1 Whisper, Blood Liturgist
 1 White Plume Adventurer
 1 Wicked Wolf
@@ -1391,6 +1423,7 @@
 1 Wishing Well
 1 Witch of the Moors
 1 Witch's Clinic
+1 Witching Well
 1 Witherbloom Campus
 1 Witherbloom Charm
 1 Witherbloom Command
