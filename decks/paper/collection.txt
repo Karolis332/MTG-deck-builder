@@ -215,6 +215,7 @@
 1 Countersculpt
 1 Counterspell
 1 Coveted Prize
+1 Craterclaw Colossus
 1 Creakwood Liege
 1 Cream of the Crop
 1 Creosote Heath
@@ -254,6 +255,7 @@
 1 Deliver Unto Evil
 1 Demon's Horn
 1 Demonic Ruckus
+1 Denzilore Fatehold
 1 Depthshaker Titan
 1 Desecration Demon
 1 Deserted Beach
@@ -466,6 +468,7 @@
 1 Gruul Turf
 1 Guac & Marshmallow Pizza
 1 Guardian Augmenter
+1 Guiding Hydra
 1 Gutterbones
 1 Gyome, Master Chef
 1 Hallowed Fountain
@@ -1327,4 +1330,5 @@
 1 Zimone, Quandrix Prodigy
 1 Zimone's Hypothesis
 1 Zombify
+1 Zookeeper Mechan
 1 Zulaport Cutthroat
