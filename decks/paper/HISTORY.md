@@ -277,3 +277,7 @@ Appended by `npx tsx scripts/paper-sync.ts`. Full diffs: `git log -p decks/paper
 - **Meren of Clan Nel Toth** v10, 100 cards: +Creakwood Liege, +Grim Servant, +High Market, +Llanowar Wastes, +Moldervine Reclamation, +Ramunap Excavator, +Rune-Scarred Demon, −Animate Dead, −Beifong's Bounty Hunters, −Dina, Soul Steeper, −Grave Titan, −Haunted Mire, −Jungle Hollow, −Vito, Thorn of the Dusk Rose
 - **Tam, the Possibility** v3, 101 cards: +Entrust the Spark, +Nomad Outpost, +Turbulent Wilderness, −Llanowar Wastes, −Path of Ancestry
 - **Collection** 1481 owned, 948 open
+
+## 2026-10-02
+- **Tam, the Possibility** v4, 100 cards: −Innovative Commons
+- **Collection** 1481 owned, 949 open

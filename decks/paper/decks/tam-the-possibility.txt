@@ -35,7 +35,6 @@
 1 Geist of Saint Thalia
 1 Great Divide Guide
 1 Great Hall of the Citadel
-1 Innovative Commons
 1 Interplanar Beacon
 2 Island
 1 Jace, Memory Adept
