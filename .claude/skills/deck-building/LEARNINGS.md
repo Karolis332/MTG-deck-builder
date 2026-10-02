@@ -22,6 +22,7 @@ Format: `YYYY-MM-DD — deck — what happened → rule`.
 - 2026-10-02 — Inspirit — the operator's list had 101 cards and 17 typos → always resolve names and count first.
 - 2026-10-02 — Inspirit — 6 cards appeared in two boxes (Thrummingbird, Shivan Reef, Fumigate, Clifftop Retreat with Tam; Swords, Sacred Foundry with Tazri) → treat them as second copies when both boxes are confirmed sleeved; never assume a card moved.
 - 2026-10-02 — all — the operator's messages sometimes land in another Claude session → one session owns `decks/paper/`; reconcile via the cross-session message, never double-apply.
+- 2026-10-02 — Inspirit — the builder's first pass gave no stop proof for planeswalkers, Ways or Reality Fracture pulls, and the operator asked about exactly those → briefs must list the operator's new pulls and named card classes explicitly, and the report must give each one a verdict.
 
 ## Names the operator uses
 - "Ingris Silverquill" = Ingris Stingerquill; "Variable Chase" = Variable Chaser // Arc of Fortune (unconfirmed but registered).
