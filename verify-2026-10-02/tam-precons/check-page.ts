@@ -15,15 +15,31 @@ const OUT = [
   path.join(ROOT, 'decks/paper/deck-check.html'),
   'C:/Users/QuLeR/Desktop/MTG collection/MTG decks/deck-check.html',
 ];
-// baseline = what was sleeved before today's changes
-const DECKS = [
-  { slug: 'tam-the-possibility', base: () => fs.readFileSync(path.join(ROOT, 'verify-2026-09-28/deck-audit/tam-the-possibility-final.txt'), 'utf8') },
+// baseline = what was sleeved before today's changes; `now` = a proposed list instead of the sleeved one;
+// `extra` = a labelled row of cards still under review
+type DeckSpec = { slug: string; base?: () => string; now?: string; extra?: { label: string; names: string[] } };
+const read = (rel: string) => () => fs.readFileSync(path.join(ROOT, rel), 'utf8');
+const SPECS: DeckSpec[] = [
+  {
+    slug: 'inspirit-flagship-vessel',
+    now: 'verify-2026-10-02/inspirit/inspirit-proposed.txt',
+    base: read('verify-2026-10-02/inspirit/inspirit-current.txt'),
+    extra: {
+      label: 'Under review (refuter pending)',
+      names: ['Tezzeret, Master of the Bridge', 'Saheeli, Sublime Artificer', 'Way of the Cryomancer', 'Chandra, Spark Hunter',
+        'Dovin, Hand of Control', 'Mu Yanling, Sky Dancer', 'Murmuring Volume', 'Keeper of the Quiet Hour', 'The Echoverse Fulcrum',
+        'Mindseeker Oculus', 'Protege\'s Awakening', 'Fatehold Charm', 'Teyo, Lightshield Expert', 'Walking Ballista', 'Stonecoil Serpent'],
+    },
+  },
+  { slug: 'tam-the-possibility', base: read('verify-2026-09-28/deck-audit/tam-the-possibility-final.txt') },
   { slug: 'tazri-beacon-of-unity' },
   { slug: 'meren-of-clan-nel-toth' },
   { slug: 'imotekh-the-stormlord' },
-].map((d) => ({
-  slug: d.slug,
+];
+const DECKS = SPECS.map((d) => ({
+  ...d,
   base: d.base ?? (() => execSync(`git show 16ebd62~1:decks/paper/decks/${d.slug}.txt`, { cwd: ROOT, encoding: 'utf8' })),
+  file: d.now ?? `decks/paper/decks/${d.slug}.txt`,
 }));
 
 const dbDir = process.env.MTG_DB_DIR || path.join(process.env.APPDATA!, 'the-black-grimoire', 'data');
@@ -55,7 +71,7 @@ const tile = (c: Card, qty: number, key: string, cls = '') =>
   `${qty > 1 ? `<span class="qty">×${qty}</span>` : ''}${cls.includes('new') ? '<span class="badge">NEW</span>' : ''}<span class="tick">✓</span></div>`;
 
 const sections = DECKS.map((d, i) => {
-  const now = parse(fs.readFileSync(path.join(ROOT, `decks/paper/decks/${d.slug}.txt`), 'utf8'));
+  const now = parse(fs.readFileSync(path.join(ROOT, d.file), 'utf8'));
   const base = new Set(parse(d.base()).map((c) => c.name));
   const cur = new Set(now.map((c) => c.name));
   const outs = [...base].filter((n) => !cur.has(n));
@@ -70,9 +86,12 @@ const sections = DECKS.map((d, i) => {
   const outHtml = outs.length
     ? `<h3 class="outh">Should be OUT <small>${outs.length}</small></h3><div class="grid">${outs.map((n) => tile(card(n), 1, `${d.slug}|OUT|${n}`, 'out')).join('')}</div>`
     : '';
-  return `<section id="${d.slug}" class="${i ? 'hidden' : ''}" data-total="${now.length}"><div class="bar"><b>${esc(now[0].name)}</b> · ${total} cards · <span class="count"></span> found <button class="reset">reset</button></div>${body}${outHtml}</section>`;
+  const extraHtml = d.extra
+    ? `<h3 class="candh">${esc(d.extra.label)} <small>${d.extra.names.length}</small></h3><div class="grid">${d.extra.names.map((n) => tile(card(n), 1, `${d.slug}|CAND|${n}`, 'cand')).join('')}</div>`
+    : '';
+  return `<section id="${d.slug}" class="${i ? 'hidden' : ''}" data-total="${now.length}"><div class="bar"><b>${esc(now[0].name)}</b> · ${total} cards · <span class="count"></span> found <button class="reset">reset</button></div>${body}${outHtml}${extraHtml}</section>`;
 });
-const tabs = DECKS.map((d, i) => `<button class="tab${i ? '' : ' on'}" data-target="${d.slug}">${esc(parse(fs.readFileSync(path.join(ROOT, `decks/paper/decks/${d.slug}.txt`), 'utf8'))[0].name.split(',')[0])}</button>`).join('');
+const tabs = DECKS.map((d, i) => `<button class="tab${i ? '' : ' on'}" data-target="${d.slug}">${esc(parse(fs.readFileSync(path.join(ROOT, d.file), 'utf8'))[0].name.split(',')[0])}${d.now ? ' (draft)' : ''}</button>`).join('');
 
 const html = `<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Deck check</title><style>
 body{margin:0;background:#15110d;color:#e8dcc4;font:15px Georgia,serif}header{position:sticky;top:0;z-index:2;background:#1f1912;padding:10px;border-bottom:1px solid #6b5326}
@@ -82,7 +101,7 @@ body{margin:0;background:#15110d;color:#e8dcc4;font:15px Georgia,serif}header{po
 section{padding:0 14px 40px}.hidden{display:none}h3{color:#c9a55a;margin:18px 0 8px}h3 small{color:#8d7a5a}.outh{color:#d0605a}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
 .card{position:relative;cursor:pointer;border-radius:8px;overflow:hidden;border:3px solid transparent}.card img{width:100%;display:block}
-.card.new{border-color:#d4af37}.card.out{border-color:#d0605a;opacity:.75}.ph{aspect-ratio:63/88;display:flex;align-items:center;justify-content:center;text-align:center;background:#2b2218;padding:8px}
+.card.new{border-color:#d4af37}.card.out{border-color:#d0605a;opacity:.75}.card.cand{border-color:#4a8fd0}.candh{color:#4a8fd0}.ph{aspect-ratio:63/88;display:flex;align-items:center;justify-content:center;text-align:center;background:#2b2218;padding:8px}
 .badge,.qty{position:absolute;top:6px;background:#d4af37;color:#000;font:bold 12px sans-serif;padding:2px 6px;border-radius:3px}.badge{left:6px}.qty{right:6px}
 .tick{display:none;position:absolute;inset:0;background:rgba(20,90,40,.55);color:#fff;font:bold 64px sans-serif;align-items:center;justify-content:center}
 .card.done .tick{display:flex}.card.out.done .tick{background:rgba(140,30,30,.55)}
@@ -101,5 +120,5 @@ for (const o of OUT) {
   fs.mkdirSync(path.dirname(o), { recursive: true });
   fs.writeFileSync(o, html);
 }
-const missing = DECKS.flatMap((d) => parse(fs.readFileSync(path.join(ROOT, `decks/paper/decks/${d.slug}.txt`), 'utf8')).filter((c) => !card(c.name).img).map((c) => `${d.slug}: ${c.name}`));
+const missing = DECKS.flatMap((d) => parse(fs.readFileSync(path.join(ROOT, d.file), 'utf8')).filter((c) => !card(c.name).img).map((c) => `${d.slug}: ${c.name}`));
 console.log(`wrote ${OUT.join(' + ')}; cards without image: ${missing.length ? missing.join(', ') : 'none'}`);
