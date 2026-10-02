@@ -1,0 +1,71 @@
+file      : C:/Users/QuLeR/AppData/Local/Temp/g.txt
+format    : commander   commander: Urza, Lord High Artificer
+totals    : 100 cards | 37 lands (37.4 eff.) | 62 nonland | avg MV 3.11
+curve     : 0:3 1:5 2:17 3:17 4:9 5:4 6:3 7:4
+VERDICT   : FAIL
+
+  PASS  size        100 cards (commander wants 100)
+  PASS  singleton   singleton respected (basics exempt)
+  PASS  legality    every card legal in commander
+  PASS  rules       no other format rule broken
+  PASS  identity    all cards inside U
+  PASS  ownership   all cards owned; paper collection imported 0 days ago
+  WARN  arenaNames  3 card(s) must be exported front-face only:
+        - 1 Emeritus of Ideation
+        - 1 The Legend of Kuruk
+        - 1 Sink into Stupor
+  PASS  lands       37 lands (+1 MDFC land backs = 37.4 effective); Karsten wants 38 ±2
+  FAIL  plan        12/62 nonland cards interact (19%) — commander wants: creates tokens
+        - Mishra's Bauble (MV 0)
+        - Stonecoil Serpent (MV 0)
+        - Sol Ring (MV 1)
+        - Soul-Guide Lantern (MV 1)
+        - Strix Serenade (MV 1)
+        - Wayfarer's Bauble (MV 1)
+        - Witching Well (MV 1)
+        - Arcane Signet (MV 2)
+        - Counterspell (MV 2)
+        - Curse of the Swine (MV 2)
+        - Entrancing Melody (MV 2)
+        - Geist of Saint Thalia (MV 2)
+        - Mazemind Tome (MV 2)
+        - Negate (MV 2)
+        - Patchwork Automaton (MV 2)
+        - Pull from Tomorrow (MV 2)
+        - Resculpt (MV 2)
+        - Sapphire Medallion (MV 2)
+        - Shifting Grift (MV 2)
+        - Sky Diamond (MV 2)
+        - Volatile Stormdrake (MV 2)
+        - Wan Shi Tong, Librarian (MV 2)
+        - Waterbending Scroll (MV 2)
+        - Bender's Waterskin (MV 3)
+        - Cloud Key (MV 3)
+        - Commander's Insight (MV 3)
+        - Commander's Sphere (MV 3)
+        - Flare of Denial (MV 3)
+        - Ghostly Flicker (MV 3)
+        - Palladium Myr (MV 3)
+        - Sink into Stupor (MV 3)
+        - Stock Up (MV 3)
+        - Unstoppable Plan (MV 3)
+        - Worn Powerstone (MV 3)
+        - You Find the Villains' Lair (MV 3)
+        - Bident of Thassa (MV 4)
+        - Karn, the Great Creator (MV 4)
+        - Scour for Scrap (MV 4)
+        - Solemn Simulacrum (MV 4)
+        - Thran Dynamo (MV 4)
+        - Tractor Beam (MV 4)
+        - Dawnsire, Sunstar Dreadnought (MV 5)
+        - Emeritus of Ideation (MV 5)
+        - Perplexing Test (MV 5)
+        - Reverse Engineer (MV 5)
+        - Planetarium of Wan Shi Tong (MV 6)
+        - Steel Hellkite (MV 6)
+        - Meteor Golem (MV 7)
+        - Super State (MV 7)
+        - Cityscape Leveler (MV 8)
+  PASS  curve       avg MV 3.11; commander sets no cost threshold
+  PASS  wincons     11 win condition(s)/closer(s)
+  PASS  locks       0 locked card(s) present and intact

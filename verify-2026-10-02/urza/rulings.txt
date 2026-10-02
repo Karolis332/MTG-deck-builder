@@ -1,0 +1,68 @@
+## Super State | commander: legal | gc: False
+## Urza, Lord High Artificer | commander: legal | gc: False
+ - 2022-12-08 The token created by Urza's first ability will count itself, so it'll be at least 1/1.
+ - 2022-12-08 You can tap any untapped artifact you control to pay the cost of the mana ability, including an artifact creature you haven't controlled continuously since the beginning of your most recent turn. Tapping an Equipment this way won't affect its abilities or the equipped creature.
+ - 2022-12-08 If you don't play the card exiled with Urza's last ability, it remains in exile.
+ - 2022-12-08 Urza's last ability doesn't change when you can play the exiled card. For example, if you exile a sorcery card, you can cast it only during your main phase when the stack is empty. If you exile a land card, you can play it only during your main phase and only if you have an available land play remaining.
+ - 2022-12-08 If a spell has {X} in its mana cost, you must choose 0 as the value of X when casting it without paying its mana cost.
+ - 2022-12-08 If you cast a card "without paying its mana cost," you can't choose to cast it for any alternative costs. You can, however, pay additional costs. If the card has any mandatory additional costs, you must pay those to cast the card.
+## Worldwalker Helm | commander: legal | gc: False
+ - 2024-04-12 Worldwaker Helm's first ability applies to all kinds of artifact tokens that its controller creates, not just Map tokens.
+ - 2024-04-12 The additional Map token won't have any abilities the other tokens were created with. Anything else specified in the effect creating the token (such as tapped or "Exile that token at end of combat") applies to both the original tokens and the Map.
+ - 2024-04-12 You don't need to control the spell or ability that creates the tokens, but you do have to be the one creating the tokens for Worldwaker Helm's first ability to apply.
+ - 2024-04-12 The new token created by Worldwaker Helm's last ability copies the original characteristics of the target token as stated by the effect that created the target token and nothing else (unless that token is copying something else; see below). It doesn't copy whether the target token is tapped or untapped, whether it has any counters on it or Auras and Equipment attached to it, or any non-copy effects that have changed its power, toughness, types, color, and so on.
+ - 2024-04-12 If the copied token has {X} in its mana cost, X is 0. (Most tokens don't have a mana cost unless they're copying something else.)
+ - 2024-04-12 If the copied token is copying something else, then the new token enters the battlefield as whatever that token copied.
+ - 2024-04-12 Any enters-the-battlefield abilities of the copied token will trigger when the token enters the battlefield. Any "as [this permanent] enters the battlefield" or "[this permanent] enters the battlefield with" abilities of the copied token will also work.
+## Chrome Host Seedshark | commander: legal | gc: False
+ - 2023-04-14 If the noncreature spell has {X} in its mana cost, use the value chosen for X when calculating that spell's mana value.
+## Unstoppable Plan | commander: legal | gc: False
+## Dawnsire, Sunstar Dreadnought | commander: legal | gc: False
+## Volatile Stormdrake | commander: legal | gc: False
+ - 2024-06-07 Volatile Stormdrake can't be the target of any activated or triggered abilities your opponents control.
+ - 2024-06-07 The effect of Volatile Stormdrake's last ability lasts indefinitely. It doesn't wear off during the cleanup step, and it doesn't expire if Volatile Stormdrake leaves the battlefield.
+ - 2024-06-07 As Volatile Stormdrake's last ability resolves, Volatile Stormdrake must be on the battlefield and the target creature must be a legal target. If either of these things isn't true, the ability does nothing.
+ - 2024-06-07 In a multiplayer game, if a player leaves the game, all cards that player owns leave as well. If you leave the game, the effect giving you control of the target creature ends.
+ - 2024-06-07 {E} is the energy symbol. It represents one energy counter.
+ - 2024-06-07 Energy counters are a kind of counter that a player may have. They're not associated with any specific permanents.
+ - 2024-06-07 Keep track of how many energy counters each player has. Potential ways to track this include writing theme down on paper or using dice, but any method that is clear and mutually agreeable is fine. (At higher levels of tournament play, dice may not be allowed for tracking counters that players have.)
+ - 2024-06-07 If an effect says you get one or more {E}, you get that many energy counters. To pay one or more {E}, you lose that many energy counters. You can't pay more energy counters than you have. Any effects that interact with counters a player gets, has, or loses can interact with energy counters.
+ - 2024-06-07 Energy counters aren't mana. They don't go away as steps, phases, and turns end, and effects that add mana "of any type" can't give you energy counters.
+ - 2024-06-07 Some triggered abilities state that you "may pay" a certain amount of {E}. You can't pay that amount multiple times to multiply the effect. You simply choose whether or not to pay that amount of {E} as the ability resolves.
+ - 2024-06-07 Some triggered abilities that state that you "may pay" a certain amount of {E} describe an effect that happens "If you do." In that case, no player may take actions to try to stop the ability's effect after you make your choice. If the payment is followed by the phrase "When you do," then you'll choose any targets for that reflexive triggered ability and put it on the stack before players can take actions.
+ - 2024-06-07 If a spell or ability with one or more targets states that you "may pay" some amount of {E}, and each permanent that it targets has become an illegal target, the spell or ability won't resolve. You can't pay any {E} even if you want to.
+ - 2024-06-07 Some spells and abilities that give you {E} may require targets. If each target chosen is an illegal target as that spell or ability tries to resolve, it won't resolve. You won't get any {E}.
+## Glaring Fleshraker | commander: legal | gc: False
+ - 2024-06-07 Glaring Fleshraker's first ability goes on the stack above the spell that caused it to trigger and resolves first. It resolves even if that spell is countered or otherwise leaves the stack.
+## Kappa Cannoneer | commander: legal | gc: False
+ - 2022-02-18 If a player casts a spell that targets multiple permanents their opponent controls with ward, each of those ward abilities will trigger. If that player doesn't pay for all of them, the spell will be countered.
+## Whirler Rogue | commander: legal | gc: False
+ - 2015-06-22 You may tap any two untapped artifacts you control, including artifact creatures that haven't been under your control continuously since the beginning of your most recent turn.
+ - 2015-06-22 Activating the second ability of Whirler Rogue after a creature has become blocked won't cause it to become unblocked.
+## Vexing Bauble | commander: legal | gc: False
+ - 2024-06-07 Players may cast spells that they know Vexing Bauble will counter. Any abilities that trigger when spells are cast will still trigger and resolve if appropriate, and any effects that count how many spells are cast will still count those spells if appropriate.
+ - 2024-06-07 If a spell is cast with an alternative cost that includes mana (such as flashback), Vexing Bauble's first ability won't trigger and won't counter that spell. Similarly, if a spell is cast without paying its mana cost, but the player did pay mana for additional costs such as from kicker or from Thorn of Amethyst, Vexing Bauble's first ability won't trigger and won't counter that spell.
+## Waterbending Scroll | commander: legal | gc: False
+## Steel Hellkite | commander: legal | gc: False
+ - 2024-11-08 Steel Hellkite's last ability destroys only nonland permanents whose mana value is exactly equal to X, and only those controlled by players who have been dealt combat damage by Steel Hellkite this turn.
+ - 2024-11-08 It doesn't matter who controlled those permanents at the time Steel Hellkite dealt combat damage, or if those permanents were even on the battlefield at that time.
+ - 2024-11-08 You may activate the last ability even if Steel Hellkite hasn't dealt combat damage to any players that turn. If you do, the ability won't do anything.
+ - 2024-11-08 If Steel Hellkite's third ability is activated with X equal to 0, it will destroy each nonland permanent with mana value 0 the appropriate players control.
+ - 2024-11-08 The mana value of a permanent is determined solely by the mana symbols printed in its upper right corner, unless it's copying something else (see below). The mana value is the total amount of mana in that cost, regardless of color. For example, a card with mana cost {3}{U}{U} has mana value 5.
+ - 2024-11-08 If a permanent is copying something else, its mana value is the mana value of whatever it's copying.
+ - 2024-11-08 In all cases, ignore any alternative costs or additional costs (such as kicker) paid when the permanent was cast.
+ - 2024-11-08 If the mana cost of a permanent includes {X}, X is 0 for the purpose of determining its mana value.
+ - 2024-11-08 If a nonland permanent has no mana symbols in its upper right corner (because it's a token that's not copying something else, for example), its mana value is 0.
+## Planetarium of Wan Shi Tong | commander: legal | gc: False
+ - 2025-10-02 Planetarium of Wan Shi Tong's triggered ability allows you to cast the top card of your library during the resolution of the ability. It doesn't allow you to wait and cast the card later.
+ - 2025-10-02 Once you choose to cast the top card of your library, Planetarium of Wan Shi Tong's ability won't trigger again that turn.
+ - 2025-10-02 You cannot choose to pay the mana cost or any alternate costs for the card if you choose to cast it, and if it has {X} in its mana cost, you must choose 0 as the value of {X}.
+ - 2025-10-02 You must pay any mandatory additional costs (such as sacrificing a creature) and you may pay any optional additional costs (such as kicker) for the card you cast.
+## Karn, the Great Creator | commander: legal | gc: False
+ - 2019-05-03 Activated abilities contain a colon. They're generally written "[Cost]: [Effect]." Some keyword abilities are activated abilities and will have colons in their reminder text, such as equip. Triggered abilities (starting with "when," "whenever," or "at") are unaffected by Karn.
+ - 2019-05-03 Karn's first ability affects only artifacts on the battlefield. Activated abilities that work in other zones can still be activated.
+ - 2019-05-03 A noncreature permanent that turns into a creature can attack, and its {T} abilities can be activated, only if its controller has continuously controlled that permanent since the beginning of their most recent turn. It doesn't matter how long the permanent has been a creature.
+ - 2019-05-03 If a permanent has {X} in its mana cost, X is considered to be 0.
+ - 2019-05-03 Karn's last ability can't get a face-down card in exile, even if you know it's an artifact card.
+ - 2019-05-03 In a casual game, a card you choose from outside the game comes from your personal collection. In a tournament event, a card you choose from outside the game must come from your sideboard. You may look at your sideboard at any time.
+## Thought Monitor | commander: legal | gc: False

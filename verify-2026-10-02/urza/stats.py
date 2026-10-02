@@ -8,8 +8,9 @@ POOL = re.findall(r'^### (.+?)(?: \[| \|)', (HERE / 'pool.md').read_text(encodin
 # MV <= 2 nonland cards that draw or ramp (Karsten regression "cheap"); X spells excluded.
 CHEAP = {'Sol Ring', 'Arcane Signet', 'Sky Diamond', 'Sapphire Medallion', "Mishra's Bauble", "Wayfarer's Bauble",
          'Prophetic Prism', 'Mazemind Tome', 'Experimental Augury', 'Sword of the Animist', 'Fountainport Bell',
-         'Soul-Guide Lantern', 'Lembas', 'The Echoverse Fulcrum', 'Tablet of Compleation', 'Gleaming Barrier'}
-MDFC = {'Sink into Stupor'}
+         'Soul-Guide Lantern', 'Lembas', 'The Echoverse Fulcrum', 'Tablet of Compleation', 'Gleaming Barrier',
+         'Geist of Saint Thalia', 'Witching Well', 'Waterbending Scroll', 'Expedition Map', 'Opt', 'Consider', 'Ponder', 'Vexing Bauble'}
+MDFC = {'Sink into Stupor', 'Hydroelectric Specimen'}
 
 lines = [l.strip() for l in open(sys.argv[1], encoding='utf-8') if l.strip()]
 cards = []

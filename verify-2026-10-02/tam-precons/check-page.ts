@@ -20,6 +20,14 @@ const OUT = [
 type DeckSpec = { slug: string; base?: () => string; now?: string; extra?: { label: string; names: string[] } };
 const read = (rel: string) => () => fs.readFileSync(path.join(ROOT, rel), 'utf8');
 const SPECS: DeckSpec[] = [
+  // Urza box (no commander yet) vs the converged draft; Urza himself hot-swaps from the Inspirit box
+  {
+    slug: 'urza-lord-high-artificer', now: 'verify-2026-10-02/urza/final.txt', base: read('verify-2026-10-02/urza/urza-box.txt'),
+    extra: {
+      label: 'Reality Fracture, only if you own them: The Theorist for Witching Well, Hall of Echoes for War Room, Chandra (near-tie with Mazemind Tome); Visage Bandit = near-tie with Golem Foundry',
+      names: ['The Theorist, Jace Beleren', 'Hall of Echoes', 'Chandra, Chill of Compliance', 'Visage Bandit'],
+    },
+  },
   {
     slug: 'inspirit-flagship-vessel',
     base: read('verify-2026-10-02/inspirit/inspirit-current.txt'),
