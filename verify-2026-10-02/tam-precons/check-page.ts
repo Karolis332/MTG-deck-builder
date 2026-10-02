@@ -25,8 +25,8 @@ const SPECS: DeckSpec[] = [
     now: 'verify-2026-10-02/inspirit/inspirit-proposed-2.txt',
     base: read('verify-2026-10-02/inspirit/inspirit-current.txt'),
     extra: {
-      label: 'Your call (near-ties): Jazal / Thunderhulk for Darksteel Reactor · War Room / Rogue\'s Passage for Temple of Epiphany · Voyage Home for Reverse Engineer · Chandra SH for Kappa',
-      names: ['Jazal Goldmane', 'Threefold Thunderhulk', 'War Room', "Rogue's Passage", 'Voyage Home', 'Chandra, Spark Hunter'],
+      label: 'Untapped duals you own, sleeved in Tam/Tazri (second copies would replace Islands)',
+      names: ['Hallowed Fountain', 'Steam Vents', 'Spirebluff Canal', 'Seachrome Coast', 'Deserted Beach'],
     },
   },
   { slug: 'tam-the-possibility', base: read('verify-2026-09-28/deck-audit/tam-the-possibility-final.txt') },
