@@ -142,6 +142,7 @@
 1 Breeches, the Blastmaker
 1 Breeding Pool
 1 Breena, the Demagogue
+1 Breya, Etherium Shaper
 1 Bridgeworks Battle
 1 Brimstone Roundup
 1 Bristlebane Battler
@@ -206,6 +207,7 @@
 2 Clifftop Retreat
 1 Cloud Key
 1 Cloudkill
+1 Cloudshift
 1 Coastal Piracy
 1 Coercive Impetus
 1 Colossal Rattlewurm
@@ -272,6 +274,7 @@
 1 Demonic Ruckus
 1 Denzilore Fatehold
 1 Depthshaker Titan
+1 Descendants' Fury
 1 Desecration Demon
 1 Deserted Beach
 1 Desolate Mire
@@ -431,6 +434,7 @@
 1 Frantic Search
 1 Freestrider Lookout
 1 Frog Butler
+1 Full Bore
 2 Fumigate
 1 Gandalf the White
 1 Garruk's Uprising
@@ -506,6 +510,7 @@
 2 Hardbristle Bandit
 1 Hardened Scales
 1 Harmonize
+1 Harmonized Crescendo
 1 Harper Recruiter
 1 Harvest Season
 1 Hateful Eidolon
@@ -1097,6 +1102,7 @@
 1 Spirebluff Canal
 1 Spirit Mantle
 1 Split the Spoils
+1 Split Up
 1 Spoils of Adventure
 1 Spore Frog
 1 Springbloom Druid
@@ -1377,6 +1383,7 @@
 1 Winter, Team Player
 1 Winternight Stories
 1 Wishclaw Talisman
+1 Wishing Well
 1 Witch of the Moors
 1 Witch's Clinic
 1 Witherbloom Campus
