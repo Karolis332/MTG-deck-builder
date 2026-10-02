@@ -68,6 +68,7 @@ marketing/screenshots/
 !.claude/skills/orchestrate/
 !.claude/skills/audit-work/
 !.claude/skills/arena-import/
+!.claude/skills/deck-building/
 .claude-flow/
 .mcp.json
 
