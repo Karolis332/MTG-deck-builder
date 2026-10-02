@@ -20,6 +20,7 @@
 1 Alesha, Who Laughs at Fate
 1 Alhammarret's Archive
 1 Alibou, Ancient Witness
+1 All That Glitters
 1 All-Fates Scroll
 1 Alms Collector
 1 Altar of Bhaal
@@ -431,6 +432,7 @@
 1 Freestrider Lookout
 1 Frog Butler
 2 Fumigate
+1 Gandalf the White
 1 Garruk's Uprising
 1 Gatecreeper Vine
 1 Gavel of the Righteous
@@ -459,6 +461,7 @@
 1 Ginger, Queen of Sweets
 1 Gingerbread Cabin
 1 Glacial Fortress
+1 Glaring Fleshraker
 1 Glasspool Mimic
 1 Gleaming Barrier
 1 Glissa Sunslayer
@@ -838,6 +841,7 @@
 5 Path of Ancestry
 1 Path to Exile
 1 Patrolling Peacemaker
+1 Pearl Medallion
 1 Pearl-Ear, Imperial Advisor
 1 Peer into the Abyss
 1 Pentad Prism
@@ -972,6 +976,7 @@
 2 Sacred Foundry
 1 Safana, Calimport Cutthroat
 1 Sage's Reverie
+1 Saheeli, Consul of Oversight
 1 Saheeli, Jewel of Avishkar
 1 Saheeli, Sublime Artificer
 1 Sai, Master Thopterist

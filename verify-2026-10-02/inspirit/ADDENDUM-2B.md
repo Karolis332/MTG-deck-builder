@@ -118,3 +118,8 @@ Batch the DB queries, about 20 names per `name in (...)` call. Budget ≤ 50 too
 ## Batch 2f (one §8 row each)
 - Registered and open, never verdicted: Hindering Light, Strix Serenade, Nyx Lotus (devotion: count the blue/white/red pips on permanents in this list before scoring it).
 - Already in your list (operator confirms they hold them): Swords to Plowshares, Fact or Fiction, Three Steps Ahead, Final Showdown.
+
+## Batch 2g (one §8 row each)
+- Newly registered: Pearl Medallion, All That Glitters, Gandalf the White, Glaring Fleshraker, Saheeli, Consul of Oversight.
+- Registered and open, never verdicted: Getaway Glamer, Essence Capture, Return the Favor, Breeches, the Blastmaker, Ionize, One Last Job.
+- Lenses: Pearl Medallion vs Sapphire Medallion / rocks (white is the heaviest pip colour?); All That Glitters on Inspirit = +1/+1 per artifact AND enchantment (commander-damage kill); Gandalf / Saheeli Consul / Breeches as artifact-synergy pieces; Return the Favor / Ionize / Essence Capture vs the counterspell slots.
