@@ -47,6 +47,8 @@ Theory and coaching live in `reference/`: principles, win conditions, lines and 
   - Top-priority decks (Tam, Tazri) give cards only in trades that leave them at least whole.
   - Locks are never cut.
 - **Ownership:** a precon counts as owned once it is physically in hand; register the full precon list. Card names from precon decklists are unconfirmed until hand-counted.
+- **Mana maths** comes from `reference/principles.md`: Karsten's 99-card land formula, coloured-source table, and how to value rocks, dorks and conditional lands in a pod vs 1v1. Closers come from the checklist in `reference/win-conditions.md`. A deviation (e.g. the operator's 34-land Tam) is the operator's call; state the number once, then respect it.
+- **Pilot guides:** `reference/decks/<slug>.md` covers plan, engine map, T1–T6 lines, keep/mulligan example hands, misplays and traps. Update a deck's guide whenever its list changes.
 
 ## 3. Output format
 - Lead with the verdict.
