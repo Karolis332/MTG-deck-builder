@@ -5,7 +5,7 @@
 **Inputs** (repo root C:/Users/QuLeR/MTG-deck-builder):
 - Sleeved list: `verify-2026-10-02/inspirit/inspirit-current.txt` (101 cards).
 - Proposal: `inspirit-proposed-2.txt`, with its reasoning in `build-report-2.md`.
-- The operator's in-hand cards: `ADDENDUM-2B.md`, including Batch 2c. All of them are free for Inspirit.
+- The operator's in-hand cards: `ADDENDUM-2B.md`, all batches 2b–2h. All of them are free for Inspirit. Batch 2h (the final 6) has no verdict anywhere yet: give each one a row in your missed-swaps check.
 - Round 1's refute: `REFUTE.md`. Its findings were folded into round 2.
 - Rules and past mistakes: `.claude/skills/deck-building/SKILL.md` §2 and `LEARNINGS.md`. Read both first.
 - Pool: `pool.md`, which is stale. Ownership truth is `decks/paper/collection.txt` minus the copies used in other `decks/paper/decks/*.txt`.
@@ -27,7 +27,7 @@
    - The land simulation's assumptions. Read `landsim.py` and judge whether its model is fair: rocks, fetches, Path of Ancestry, tapped lands.
    - Karsten's land count.
 3. **Rules claims.** For example: Chandra, Spark Hunter's 0 makes a "noncreature Vehicle artifact" (does it count for Depthshaker and Craterclaw?); station with summoning-sick creatures; commander damage from Improvised Arsenal / Super State; Lost Jitte's untap use.
-4. **Missed swaps.** For every role, take the best card the build left out and compare it with the weakest card kept. This covers the operator's in-hand cards in ADDENDUM-2B, including Batch 2c, and every open card in the pool. Pay special attention to:
+4. **Missed swaps.** For every role, take the best card the build left out and compare it with the weakest card kept. This covers the operator's in-hand cards in ADDENDUM-2B (batches 2b–2h) and every open card in the pool. The screens `screen-2-1.md` and `screen-2-2.md` each give every left-out free card a verdict; rule on every CANDIDATE they list and spot-check 10 of their OUT verdicts. Pay special attention to:
    - Super State.
    - The walkers, especially Teyo's "You have hexproof".
    - Boros Charm and Flare of Fortitude as protection on the win turn.

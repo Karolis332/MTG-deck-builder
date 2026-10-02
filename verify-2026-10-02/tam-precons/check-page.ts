@@ -22,11 +22,11 @@ const read = (rel: string) => () => fs.readFileSync(path.join(ROOT, rel), 'utf8'
 const SPECS: DeckSpec[] = [
   {
     slug: 'inspirit-flagship-vessel',
-    now: 'verify-2026-10-02/inspirit/inspirit-proposed.txt',
+    now: 'verify-2026-10-02/inspirit/inspirit-proposed-2.txt',
     base: read('verify-2026-10-02/inspirit/inspirit-current.txt'),
     extra: {
-      label: 'Optional trade (needs your yes): Saheeli in for Pinnacle Emissary, Mu Yanling to Tam',
-      names: ['Saheeli, Sublime Artificer', 'Mu Yanling, Sky Dancer'],
+      label: 'Your call (near-ties): Jazal / Thunderhulk for Darksteel Reactor · War Room / Rogue\'s Passage for Temple of Epiphany · Voyage Home for Reverse Engineer · Chandra SH for Kappa',
+      names: ['Jazal Goldmane', 'Threefold Thunderhulk', 'War Room', "Rogue's Passage", 'Voyage Home', 'Chandra, Spark Hunter'],
     },
   },
   { slug: 'tam-the-possibility', base: read('verify-2026-09-28/deck-audit/tam-the-possibility-final.txt') },
