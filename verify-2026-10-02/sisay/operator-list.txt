@@ -1,0 +1,199 @@
+Commander
+1 Captain Sisay (TLE) 47
+
+Deck
+1 Huatli, the Sun's Heart (WAR) 230
+9 Forest (FIN) 306
+1 Trelasarra, Moon Dancer (AFR) 236
+1 Avacyn's Pilgrim (SIS) 48
+1 Figure of Fable (ECL) 224
+1 Emergency Phytomedic (FRA) 130
+9 Plains (FIN) 294
+1 Blossom-Blessed Angel (FRA) 3
+1 Gallant Citizen (SPM) 129
+1 Mikey & Leo, Chaos & Order (TMT) 158
+1 Eclipsed Kithkin (ECL) 220
+1 Talisman of Unity (MRD) 257
+1 Vigorbloom Charm (FRA) 160
+1 Tyvar, the Pummeler (DSK) 202
+1 Seraphic Steed (OTJ) 232
+1 Thoughtweft Lieutenant (ECL) 246
+1 Brigid's Command (ECL) 208
+1 Kutzil, Malamet Exemplar (LCI) 232
+1 Brightglass Gearhulk (DFT) 191
+1 Sovereign Okinec Ahau (LCI) 240
+1 Brigid, Clachan's Heart (ECL) 7
+1 Rip, Spawn Hunter (DSK) 228
+1 Suki, Kyoshi Warrior (TLA) 243
+1 Spider-Man India (SPM) 151
+1 Haliya, Ascendant Cadet (EOE) 218
+1 Overgrown Farmland (MID) 265
+1 Lush Portico (MKM) 263
+1 Ghalta and Mavren (MOM) 225
+1 Dyadrine, Synthesis Amalgam (EOE) 216
+1 Fortified Village (SIR) 267
+1 Temple of Plenty (FDN) 703
+1 Temple Garden (ECL) 268
+1 Arctic Treeline (KHM) 249
+1 Bofur, Reliable Guardian (HOB) 6
+1 Aunt May (SPM) 3
+1 Authority of the Consuls (FDN) 137
+1 Cloudshift (TLE) 152
+1 Enlightened Tutor (TLE) 305
+1 Ephemerate (MAR) 44
+1 Erode (SOS) 15
+1 Ethereal Armor (RTR) 9
+1 Helping Hand (SOA) 5
+1 Loyal Tutor (FRA) 14
+1 Liliana the Faultless (FRA) 200
+1 Path to Exile (PZA) 0
+1 Optimistic Scavenger (DSK) 21
+1 Political Triumph (MSH) 31
+1 Requisition Raid (SOA) 10
+1 Shardmage's Rescue (DSK) 29
+1 Airbender Ascension (TLA) 6
+1 Ajani Resolute (FRA) 195
+1 Ajani's Pridemate (FDN) 135
+1 All That Glitters (ELD) 2
+1 Belladonna Took (HOB) 4
+1 Bilbo's Gambit (HOB) 5
+1 Duty Beyond Death (SOA) 4
+1 Gleaming Splendor (HOB) 15
+1 Intangible Virtue (WOT) 6
+1 Joined Researchers (SOS) 23
+1 Leader's Talent (TMT) 13
+1 Origin of Spider-Man (SPM) 9
+1 Reprieve (HOC) 17
+1 Spectacular Spider-Man (SPM) 14
+1 Teyo, Lightshield Expert (FRA) 204
+1 Voice of Victory (TDM) 33
+1 Tomik, Orzhov Lawmage (FRA) 206
+1 Ajani, Outland Chaperone (ECL) 4
+1 Flawless Maneuver (TLE) 306
+1 Germinate Recruits (FRA) 9
+1 Teferi's Protection (TLE) 7
+1 Team Avatar (TLA) 38
+1 Teyo, the Shieldmage (WAR) 32
+1 The Restoration of Eiganjo (NEO) 34
+1 Way of the Mentor (FRA) 208
+1 Armageddon (SOA) 3
+1 Beza, the Bounding Spring (BLB) 2
+1 Flickering Hound (FRA) 7
+1 Flare of Fortitude (MH3) 26
+1 Leonardo's Technique (TMT) 18
+1 Settle the Wreckage (HOB) 26
+1 The Wanderer (WAR) 37
+1 The Wind Crystal (FIN) 43
+1 Exalted Sunborn (EOE) 15
+1 The Wandering Rescuer (DSK) 41
+1 The Legend of Yangchen (TLA) 27
+1 Urza's Ruinous Blast (DAR) 39
+1 The Eternal Wanderer (ONE) 11
+1 Kindred Judgment (FRA) 13
+1 Return to the Light Realms (FRA) 20
+1 Moonshaker Cavalry (WOE) 21
+1 Restoration Seminar (SOS) 30
+1 Guiding Hydra (FRA) 11
+1 Elesh Norn, Grand Cenobite (MUL) 68
+1 Eiganjo, Seat of the Empire (NEO) 268
+1 Abandoned Air Temple (TLA) 263
+1 Crop Rotation (ULG) 98
+1 Elvish Mystic (M14) 169
+1 Llanowar Elves (FDN) 227
+1 Hardened Scales (KTK) 133
+1 Noxious Revival (SPG) 73
+1 Snakeskin Veil (TDM) 159
+1 Tamiyo's Safekeeping (NEO) 211
+1 Worldly Tutor (TLE) 314
+1 Veil of Summer (SOA) 60
+1 Utopia Sprawl (WOT) 63
+1 Badgermole Cub (TLA) 167
+1 Basking Broodscale (MH3) 145
+1 Bloom Tender (ECL) 166
+1 Bristlebane Battler (ECL) 168
+1 Bristly Bill, Spine Sower (OTJ) 157
+1 Explore (TLE) 259
+1 Farseek (FCA) 45
+1 Fuel Tank Feaster (Y25) 17
+1 Frenzied Baloth (EOE) 183
+1 Great Divide Guide (TLA) 181
+1 Heroic Intervention (TLE) 43
+1 Kenrith's Transformation (ELD) 164
+1 Michelangelo, Weirdness to 11 (TMT) 121
+1 Ozolith, the Shattered Spire (MOM) 198
+1 Ordeal of Nylea (FDN) 641
+1 Shared Roots (SOA) 58
+1 Shigeki, Jukai Visionary (NEO) 206
+1 Sylvan Library (SPG) 0
+1 Tarmogoyf (FRA) 116
+1 Beastmaster Ascension (TLE) 39
+1 Beast Within (MAR) 75
+1 Chomping Changeling (ECL) 172
+1 Cultivate (FIC) 300
+1 Cycle of Renewal (TLA) 170
+1 Earthbender Ascension (TLA) 175
+1 Elvish Archdruid (FDN) 219
+1 Evolution Sage (WAR) 159
+1 Enduring Vitality (DSK) 176
+1 Emil, Vastlands Roamer (SOS) 146
+1 Entish Restoration (LTR) 163
+1 Garruk's Uprising (FDN) 220
+1 Formidable Speaker (ECL) 176
+1 Greenhouse Propagator (FRA) 104
+1 Growing Rites of Itlimoc (LCI) 188
+1 Jiang Yanggu, Wildcrafter (J25) 677
+1 Loot, the Nexus (FRA) 262
+1 Obscuring Haze (TLE) 313
+1 Pia, Aether Ascetic (FRA) 264
+1 Outcaster Trailblazer (OTJ) 173
+1 Selvala, Heart of the Wilds (JMP) 429
+1 Terrasymbiosis (EOE) 210
+1 Transdimensional Bovine (TMT) 134
+1 Tireless Provisioner (MH2) 180
+1 Way of the Paradox (FRA) 267
+1 Drix Fatemaker (EOE) 178
+1 Circuitous Route (FDN) 635
+1 Ellywick Tumblestrum (AFR) 181
+1 Icetill Explorer (EOE) 192
+1 Harmonize (STA) 52
+1 Jiang Yanggu, Never Alone (FRA) 261
+1 Planar Engineering (SOS) 158
+1 Titanbones, Towering Heart (FRA) 266
+1 Vizier of the Menagerie (FDN) 649
+1 Toph, Earthbending Master (TLE) 145
+1 Wildgrowth Archaic (SOS) 168
+1 Dancing from Dark to Dawn (HOB) 123
+1 Doubling Season (FDN) 216
+1 Beorn the Fierce (HOB) 119
+1 Elemental Teachings (TLA) 178
+1 Garruk, Curse Breaker (FRA) 259
+1 Germination Practicum (SOS) 149
+1 Gigantosaurus (ANB) 96
+1 Hungering Puppetbeast (FRA) 107
+1 Nissa, Who Shakes the World (WAR) 169
+1 Overlord of the Hauntwoods (DSK) 194
+1 Overrun (FDN) 230
+1 Return of the Wildspeaker (TLE) 44
+1 Shamanic Revelation (SOA) 57
+1 Spry and Mighty (ECL) 195
+1 Arlinn, Voice of the Pack (WAR) 150
+1 Disciple of Freyalise (MH3) 250
+1 Primeval Bounty (FDN) 644
+1 Rampaging Baloths (FDN) 645
+1 The Legend of Kyoshi (TLA) 186
+1 Gigantic Big Bear (HOB) 126
+1 Craterhoof Behemoth (TDM) 138
+1 Famished Worldsire (EOE) 182
+1 Nyxbloom Ancient (FCA) 16
+1 Ghalta, Stampede Tyrant (LCI) 185
+1 The Great Henge (TLE) 41
+1 Ghalta, Primal Hunger (FDN) 222
+1 Ghalta the Unstoppable (FRA) 260
+1 Celestial Reunion (ECL) 170
+1 Through the Forest Gate (HOB) 137
+1 Diamond Weapon (FIN) 183
+1 Genesis Wave (FDN) 221
+1 Ba Sing Se (TLA) 266
+1 Evendo, Waking Haven (EOE) 253
+1 Oakhollow Village (BLB) 258
+1 Roiling Canopy (FRA) 187

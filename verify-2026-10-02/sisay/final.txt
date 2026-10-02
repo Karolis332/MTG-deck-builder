@@ -1,0 +1,87 @@
+Commander
+1 Captain Sisay
+
+Deck
+1 Ajani Resolute
+1 Ajani, Outland Chaperone
+1 Teyo, the Shieldmage
+1 Huatli, the Sun's Heart
+1 Jiang Yanggu, Wildcrafter
+1 Tezzeret, Cruel Captain
+1 The Wanderer
+1 Ellywick Tumblestrum
+1 Garruk, Curse Breaker
+1 Nissa, Who Shakes the World
+1 The Eternal Wanderer
+1 Karn, the Great Creator
+1 Way of the Mentor
+1 Way of the Paradox
+1 Way of the Healer
+1 Way of the Wildspeaker
+1 Doubling Season
+1 Evolution Sage
+1 Liliana the Faultless
+1 Aunt May
+1 Haliya, Guided by Light
+1 Greenhouse Propagator
+1 Dazzling Angel
+1 Hinterland Sanctifier
+1 Inspiring Commander
+1 Belladonna Took
+1 Virulent Emissary
+1 Exalted Sunborn
+1 Archon of Sun's Grace
+1 Bloombrute
+1 Caretaker's Talent
+1 Leonin Warleader
+1 Germinate Recruits
+1 Craterhoof Behemoth
+1 Elesh Norn, Grand Cenobite
+1 Llanowar Elves
+1 Elvish Mystic
+1 Avacyn's Pilgrim
+1 Utopia Sprawl
+1 Bloom Tender
+1 Fuel Tank Feaster
+1 Arcane Signet
+1 Talisman of Unity
+1 Mox Amber
+1 Enlightened Tutor
+1 Worldly Tutor
+1 Pia, Aether Ascetic
+1 Formidable Speaker
+1 Kutzil, Malamet Exemplar
+1 Teferi's Protection
+1 Heroic Intervention
+1 Flare of Fortitude
+1 Lightning Greaves
+1 Swiftfoot Boots
+1 The One Ring
+1 Sylvan Library
+1 Ossification
+1 Swords to Plowshares
+1 Path to Exile
+1 Erode
+1 Emergency Eject
+1 Kenrith's Transformation
+1 Urza's Ruinous Blast
+1 Sunfall
+1 Command Tower
+1 Temple Garden
+1 Overgrown Farmland
+1 Lush Portico
+1 Fortified Village
+1 Vigorbloom Annex
+1 Arctic Treeline
+1 Brokers Hideout
+1 Cabaretti Courtyard
+1 Fabled Passage
+1 Misty Rainforest
+1 Flooded Strand
+1 Starting Town
+1 Great Hall of the Citadel
+1 Eiganjo, Seat of the Empire
+1 Karn's Bastion
+1 Abandoned Air Temple
+11 Forest
+7 Plains
