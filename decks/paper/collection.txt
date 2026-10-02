@@ -166,6 +166,7 @@
 1 Cankerbloom
 1 Canoptek Wraith
 1 Canyon Slough
+1 Captain Howler, Sea Scourge
 1 Carnifex Demon
 1 Carnivorous Cultivator
 1 Carpet of Flowers
@@ -306,6 +307,7 @@
 1 Dread Tiller
 1 Dreadhorde Invasion
 1 Druidic Satchel
+1 Duke Ulder Ravengard
 1 Durnan of the Yawning Portal
 1 Dusk Urchins
 1 Earthbender Ascension
@@ -383,6 +385,7 @@
 1 Fatehold Annex
 1 Fatehold Charm
 1 Fblthp, Knows the Way
+1 Fblthp, Lost on the Range
 1 Feasting Hobbit
 1 Feasting Troll King
 1 Feed the Swarm
@@ -688,6 +691,7 @@
 1 Magda, the Hoardmaster
 1 Magebane Lizard
 1 Magus of the Candelabra
+1 Malcolm, the Eyes
 1 Malevolent Rumble
 1 Mana Bloom
 1 Mana Confluence
@@ -1344,6 +1348,7 @@
 1 Vivien, Champion of the Wilds
 1 Vivien's Arkbow
 1 Vizier of the Menagerie
+1 Voyage Home
 1 Vraan, Executioner Thane
 1 Vraska Joins Up
 1 Vraska, Betrayal's Sting
@@ -1373,6 +1378,7 @@
 1 Wickersmith's Tools
 1 Wight of the Reliquary
 1 Wild Growth
+1 Wild Ride
 1 Wildborn Preserver
 1 Wilderland Scrounger
 1 Wildwood Scourge
