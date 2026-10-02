@@ -88,7 +88,8 @@
 1 Great Furnace
 1 Ancient Den
 1 Karn's Bastion
-5 Island
+4 Island
+1 Uthros, Titanic Godcore
 1 Archway of Innovation
 2 Mountain
 1 Plains
