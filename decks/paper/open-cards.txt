@@ -219,7 +219,6 @@
 1 Emeritus of Truce
 1 Emperor of Bones
 1 Entrancing Melody
-1 Entrust the Spark
 1 Epicure of Blood
 1 Eriette of the Charmed Apple
 1 Eriette, the Beguiler
@@ -375,6 +374,7 @@
 1 Ionize
 2 Isolated Chapel
 1 Izoni, Thousand-Eyed
+1 Jace, Multiverse Architect
 1 Jagged Barrens
 1 Jailbreak Scheme
 1 Jared Carthalion

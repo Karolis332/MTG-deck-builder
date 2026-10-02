@@ -23,6 +23,7 @@
 1 Dovin's Veto
 1 Dragonskull Summit
 1 Elspeth, Sun's Champion
+1 Entrust the Spark
 1 Erode
 1 Esika, God of the Tree
 1 Evolution Sage
@@ -57,7 +58,6 @@
 1 Overgrown Farmland
 1 Path to Exile
 1 Pia, Aether Ascetic
-1 Plains
 1 Professor Dellian Fel
 1 Quintorius Kand
 1 Ral Zarek

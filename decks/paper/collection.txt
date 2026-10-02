@@ -519,6 +519,7 @@
 2 Isolated Chapel
 1 Izoni, Thousand-Eyed
 1 Jace, Memory Adept
+1 Jace, Multiverse Architect
 1 Jace, Reality Sculptor
 1 Jadar, Ghoulcaller of Nephalia
 1 Jagged Barrens
