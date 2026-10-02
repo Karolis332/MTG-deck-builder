@@ -102,9 +102,7 @@ Weakest kept per role after the swaps: threats Hangarback, engines Golem Foundry
 **Winners, ranked:**
 1. Flesh Duplicate: **swap** for Stonecoil Serpent.
 2. The Theorist, Jace Beleren: if owned, in for Witching Well.
-3. Hall of Echoes: if owned, in for War Room.
-
-Then the near-ties: Visage Bandit, Chandra, Archive Arbiter, Living Library.
+3. Hall of Echoes: if owned, in for War Room. Then the near-ties: Visage Bandit, Chandra, Archive Arbiter, Living Library.
 
 | Card | Tier | IN/OUT | vs (weakest kept) | DB-quoted reason |
 |---|---|---|---|---|
