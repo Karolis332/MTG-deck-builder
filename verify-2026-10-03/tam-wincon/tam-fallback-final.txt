@@ -1,0 +1,99 @@
+1 Tam, the Possibility
+1 Ajani Resolute
+1 Ajani Unrelenting
+1 Anguished Unmaking
+1 Arcane Signet
+1 Archangel of Tithes
+1 Assassin's Trophy
+1 Atomize
+1 Avatar of Burgeoning Echoes
+1 Bleachbone Verge
+1 Bloom Tender
+1 Breeding Pool
+1 Caves of Koilos
+1 Jace, Multiverse Architect
+1 Chandra, Torch of Defiance
+1 Chimil, the Inner Sun
+1 Cinder Glade
+1 Clifftop Retreat
+1 Command Tower
+1 Counterspell
+1 Dedicated Commons
+1 Deserted Beach
+1 Dovin's Veto
+1 Dragonskull Summit
+1 Elspeth, Sun's Champion
+1 Entrust the Spark
+1 Erode
+1 Esika, God of the Tree
+1 Evolution Sage
+1 Exotic Orchard
+1 Faeburrow Elder
+1 Fatehold Annex
+1 Ripples of Potential
+1 Flux Channeler
+1 Promise of Loyalty
+1 Great Divide Guide
+1 Great Hall of the Citadel
+1 Innovative Commons
+1 Interplanar Beacon
+2 Island
+1 Jace, Memory Adept
+1 Jace, Reality Sculptor
+1 Kaito, Dancing Shadow
+1 Tezzeret's Gambit
+1 Tekuthal, Inquiry Dominus
+1 Tomik, Orzhov Lawmage
+1 Liliana the Faultless
+1 Mana Confluence
+1 Mountain
+1 Nexus Mentality
+1 Jared Carthalion
+1 Nomad Outpost
+1 Loyal Tutor
+1 Dovin, Hand of Control
+1 Oko, Thief of Crowns
+1 Opulent Palace
+1 Overgrown Farmland
+1 Path to Exile
+1 Pia, Aether Ascetic
+1 Professor Dellian Fel
+1 Quintorius Kand
+1 Mastermind's Acquisition
+1 Rootbound Crag
+1 Saheeli, Sublime Artificer
+1 Sandsteppe Citadel
+1 Diabolic Tutor
+1 Savage Lands
+1 Seachrome Coast
+1 Seaside Citadel
+1 Settle the Wreckage
+1 Shipwreck Marsh
+1 Shivan Reef
+1 Sol Ring
+1 Rewrite Regrets
+1 Stingerquill Annex
+1 Sylvan Library
+1 Noble Hierarch
+1 Talisman of Dominance
+1 Ignoble Hierarch
+1 Expansion Algorithm
+1 Theorix Annex
+1 Windfall
+1 Timeless Lotus
+1 Toxic Deluge
+1 Turbulent Moor
+1 Turbulent Wilderness
+1 Uro, Titan of Nature's Wrath
+1 Vigorbloom Annex
+1 Vigorbloom Charm
+1 Vraska, Betrayal's Sting
+1 Way of the Healer
+1 Way of the Mentor
+1 Way of the Mind Sculptor
+1 Way of the Paradox
+1 Way of the Pyromancer
+1 Way of the Warlord
+1 Way of the Wildspeaker
+1 Yavimaya Coast
+1 Fatehold Charm

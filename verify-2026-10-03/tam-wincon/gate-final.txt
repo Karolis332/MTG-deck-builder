@@ -1,0 +1,13 @@
+format    : commander   commander: Tam, the Possibility
+  PASS  size        100 cards (commander wants 100)
+  PASS  singleton   singleton respected (basics exempt)
+  PASS  legality    every card legal in commander
+  PASS  rules       no other format rule broken
+  PASS  identity    all cards inside BGRUW
+  PASS  ownership   all cards owned; paper collection imported 0 days ago
+  WARN  arenaNames  1 card(s) must be exported front-face only:
+  WARN  lands       34 lands (+0 MDFC land backs = 34 effective); Karsten wants 38 ±2
+  FAIL  plan        4/65 nonland cards interact (6%) — commander wants: general value
+  PASS  curve       avg MV 3.25; commander sets no cost threshold
+  PASS  wincons     7 win condition(s)/closer(s)
+  PASS  locks       1 locked card(s) present and intact

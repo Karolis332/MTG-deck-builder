@@ -1,0 +1,82 @@
+file      : C:/Users/QuLeR/AppData/Local/Temp/g.txt
+format    : commander   commander: Sisay, Weatherlight Captain
+totals    : 100 cards | 34 lands (34 eff.) | 65 nonland | avg MV 3.23
+curve     : 1:7 2:15 3:16 4:14 5:9 6:4
+VERDICT   : FAIL
+
+  PASS  size        100 cards (commander wants 100)
+  PASS  singleton   singleton respected (basics exempt)
+  PASS  legality    every card legal in commander
+  PASS  rules       no other format rule broken
+  PASS  identity    all cards inside BGRUW
+  FAIL  ownership   2 card(s) not in the paper collection; paper collection imported 0 days ago
+        - Sisay, Weatherlight Captain
+        - Noble Hierarch
+  WARN  arenaNames  1 card(s) must be exported front-face only:
+        - 1 Esika, God of the Tree
+  WARN  lands       34 lands (+0 MDFC land backs = 34 effective); Karsten wants 38 ±2
+  FAIL  plan        4/65 nonland cards interact (6%) — commander wants: general value
+        - Erode (MV 1)
+        - Ignoble Hierarch (MV 1)
+        - Liliana the Faultless (MV 1)
+        - Loyal Tutor (MV 1)
+        - Noble Hierarch (MV 1)
+        - Path to Exile (MV 1)
+        - Sol Ring (MV 1)
+        - Ajani Resolute (MV 2)
+        - Assassin's Trophy (MV 2)
+        - Avatar of Burgeoning Echoes (MV 2)
+        - Bloom Tender (MV 2)
+        - Counterspell (MV 2)
+        - Dovin's Veto (MV 2)
+        - Expansion Algorithm (MV 2)
+        - Ripples of Potential (MV 2)
+        - Sylvan Library (MV 2)
+        - Talisman of Dominance (MV 2)
+        - Tomik, Orzhov Lawmage (MV 2)
+        - Vigorbloom Charm (MV 2)
+        - Way of the Pyromancer (MV 2)
+        - Anguished Unmaking (MV 3)
+        - Dovin, Hand of Control (MV 3)
+        - Evolution Sage (MV 3)
+        - Faeburrow Elder (MV 3)
+        - Flux Channeler (MV 3)
+        - Oko, Thief of Crowns (MV 3)
+        - Pia, Aether Ascetic (MV 3)
+        - Saheeli, Sublime Artificer (MV 3)
+        - Tam, the Possibility (MV 3)
+        - Toxic Deluge (MV 3)
+        - Uro, Titan of Nature's Wrath (MV 3)
+        - Way of the Mentor (MV 3)
+        - Way of the Paradox (MV 3)
+        - Way of the Warlord (MV 3)
+        - Windfall (MV 3)
+        - Archangel of Tithes (MV 4)
+        - Atomize (MV 4)
+        - Chandra, Torch of Defiance (MV 4)
+        - Diabolic Tutor (MV 4)
+        - Kaito, Dancing Shadow (MV 4)
+        - Kasmina, Enigmatic Mentor (MV 4)
+        - Mastermind's Acquisition (MV 4)
+        - Nexus Mentality (MV 4)
+        - Professor Dellian Fel (MV 4)
+        - Rewrite Regrets (MV 4)
+        - Settle the Wreckage (MV 4)
+        - Tekuthal, Inquiry Dominus (MV 4)
+        - Tezzeret's Gambit (MV 4)
+        - Way of the Healer (MV 4)
+        - Entrust the Spark (MV 5)
+        - Jace, Memory Adept (MV 5)
+        - Jace, Multiverse Architect (MV 5)
+        - Jace, Reality Sculptor (MV 5)
+        - Promise of Loyalty (MV 5)
+        - Quintorius Kand (MV 5)
+        - Timeless Lotus (MV 5)
+        - Way of the Mind Sculptor (MV 5)
+        - Way of the Wildspeaker (MV 5)
+        - Ajani Unrelenting (MV 6)
+        - Chimil, the Inner Sun (MV 6)
+        - Elspeth, Sun's Champion (MV 6)
+  PASS  curve       avg MV 3.23; commander sets no cost threshold
+  PASS  wincons     7 win condition(s)/closer(s)
+  PASS  locks       1 locked card(s) present and intact
