@@ -1,7 +1,7 @@
 file      : C:/Users/QuLeR/AppData/Local/Temp/g.txt
 format    : commander   commander: Urza, Lord High Artificer
-totals    : 100 cards | 37 lands (37.4 eff.) | 62 nonland | avg MV 3.32
-curve     : 0:1 1:2 2:17 3:18 4:14 5:3 6:4 7:3
+totals    : 100 cards | 36 lands (36.4 eff.) | 63 nonland | avg MV 3.37
+curve     : 0:1 1:2 2:17 3:18 4:14 5:3 6:5 7:3
 VERDICT   : FAIL
 
   PASS  size        100 cards (commander wants 100)
@@ -13,8 +13,8 @@ VERDICT   : FAIL
   WARN  arenaNames  2 card(s) must be exported front-face only:
         - 1 The Legend of Kuruk
         - 1 Sink into Stupor
-  PASS  lands       37 lands (+1 MDFC land backs = 37.4 effective); Karsten wants 39 ±2
-  FAIL  plan        18/62 nonland cards interact (29%) — commander wants: creates tokens
+  WARN  lands       36 lands (+1 MDFC land backs = 36.4 effective); Karsten wants 39 ±2
+  FAIL  plan        18/63 nonland cards interact (29%) — commander wants: creates tokens
         - Soul-Guide Lantern (MV 1)
         - Strix Serenade (MV 1)
         - Arcane Signet (MV 2)
@@ -55,10 +55,11 @@ VERDICT   : FAIL
         - Tractor Beam (MV 4)
         - Zuko's Exile (MV 5)
         - Planetarium of Wan Shi Tong (MV 6)
+        - River's Rebuke (MV 6)
         - Soul of New Phyrexia (MV 6)
         - Sun Quan, Lord of Wu (MV 6)
         - Meteor Golem (MV 7)
         - Super State (MV 7)
-  PASS  curve       avg MV 3.32; commander sets no cost threshold
+  PASS  curve       avg MV 3.37; commander sets no cost threshold
   PASS  wincons     10 win condition(s)/closer(s)
   PASS  locks       0 locked card(s) present and intact

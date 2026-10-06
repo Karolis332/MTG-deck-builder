@@ -1,4 +1,5 @@
 1 Urza, Lord High Artificer
+1 River's Rebuke
 1 Deduce
 1 Bane's Contingency
 1 Sai, Master Thopterist
@@ -66,4 +67,4 @@
 1 Buried Ruin
 1 The Mycosynth Gardens
 1 Secluded Starforge
-32 Island
+31 Island
