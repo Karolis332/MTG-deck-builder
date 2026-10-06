@@ -230,7 +230,6 @@
 1 Combat Calligrapher
 5 Command Tower
 1 Commandeer
-1 Commander's Insight
 2 Commander's Sphere
 1 Concealed Courtyard
 1 Concerted Defense

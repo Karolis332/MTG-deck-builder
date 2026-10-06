@@ -24,8 +24,8 @@ const SPECS: DeckSpec[] = [
   {
     slug: 'urza-lord-high-artificer', now: 'verify-2026-10-06/urza-found/final-3.txt', base: read('verify-2026-10-02/urza/urza-box.txt'),
     extra: {
-      label: 'Found-card alternatives (near-ties, the proven card stays): Finale for Pull, Bane’s for Countersculpt, Lord of the Eagles for Hangarback, Professor for Insight, Traxos for Golem Foundry; Steel Hellkite for Soul; Emeritus when found',
-      names: ['Finale of Revelation', "Bane's Contingency", 'The Lord of the Eagles', 'Pensive Professor', 'Traxos, Scourge of Kroog', 'Steel Hellkite', 'Emeritus of Ideation'],
+      label: 'Found-card alternatives (near-ties, the proven card stays): Finale for Pull, Bane’s for Countersculpt, Lord of the Eagles for Hangarback, Traxos for Golem Foundry; Steel Hellkite for Soul; Emeritus when found',
+      names: ['Finale of Revelation', "Bane's Contingency", 'The Lord of the Eagles', 'Traxos, Scourge of Kroog', 'Steel Hellkite', 'Emeritus of Ideation'],
     },
   },
   {
