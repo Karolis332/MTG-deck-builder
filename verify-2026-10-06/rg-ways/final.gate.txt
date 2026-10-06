@@ -1,0 +1,20 @@
+file      : verify-2026-10-06/rg-ways/final.txt
+format    : standard   commander: (none)
+totals    : 60 cards | 23 lands (23 eff.) | 37 nonland | avg MV 3.43
+curve     : 1:8 2:9 3:4 4:5 5:5 6:3 7:3
+VERDICT   : FAIL
+
+  PASS  size        60 cards (standard wants 60)
+  PASS  singleton   no card over 4 copies
+  PASS  legality    every card legal in standard
+  PASS  rules       no other format rule broken
+  PASS  identity    not a commander format
+  FAIL  ownership   2 card(s) not in the arena collection; arena collection imported 5 days ago
+        - Curse-Marred Demon
+        - Emrakul, the Exigent Doom
+  PASS  arenaNames  every line uses a name Arena accepts
+  PASS  lands       23 lands (+0 MDFC land backs = 23 effective); Karsten wants 23 ±2
+  PASS  plan        no commander — plan not checked
+  PASS  curve       avg MV 3.43
+  PASS  wincons     8 win condition(s)/closer(s)
+  PASS  locks       1 locked card(s) present and intact

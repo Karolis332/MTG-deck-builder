@@ -1,0 +1,25 @@
+# Build brief: Arena Standard R/G Ways + walkers, 2026-10-06 (Opus builder)
+
+**Goal.** Optimise the operator's 60-card Arena **Standard** list `verify-2026-10-06/rg-ways/input.txt` into the strongest list buildable from owned cards, converged (no improving swap left), delivered as a diff.
+
+**Known facts.**
+- Repo root `C:/Users/QuLeR/MTG-deck-builder`. Rules: `.claude/skills/deck-building/SKILL.md` §2 (oracle exactness, synergy density, one plan, converge with stop proof, never pre-filter), `LEARNINGS.md` (read all; 2026-10-05 entries are about this deck), `reference/principles.md`, `reference/win-conditions.md`.
+- Yesterday's run on the predecessor list: `verify-2026-10-05/ghalta/` (`input.txt`, `build-report.md`, `REFUTE.md`, `final.txt`). The refuted result = `final.txt` + Tezzeret, Cruel Captain −Improvisation Capstone + 2 Starting Town −2 Konstrari Annex; it scored Deck Score 78 (optimizer 80).
+- The operator did **not** adopt it. Today's list drops Ghalta ×3, Hexhaven, Konstrari Charm and adds Craterclaw Colossus ×3, Curse-Marred Demon ×2, Emrakul, the Exigent Doom ×2, Grab the Prize ×2. Read that as the operator's new direction (artifact count for Craterclaw, Emrakul top end, Demon tutor), not as a lock: judge each card from its text, and give every one of the operator's cards an explicit verdict. Any card from yesterday's final you bring back needs a line saying why it beats the operator's choice.
+- Baselines (`model.json`): your input = optimizer 60, Deck Score 1.4.0-rc10 **70**. Fable's quick list `quick-v1.txt` (−2 Grab, −1 Capstone, −1 Tethermage, −1 Craterclaw → +3 Burst Lightning, +1 Llanowar, +1 Stomping Ground) = optimizer 65, Deck Score **75**. It is a floor, not a target.
+- **Pool:** `verify-2026-10-05/ghalta/pool.md` = all 1,284 owned Standard-legal R/G/colourless Arena cards with DB text. Grep it; never read it whole. Not in it but owned: Curse-Marred Demon, Emrakul, the Exigent Doom (crafted after the 09-30 CSV). Also owned (yesterday's input): Hexhaven Invigorator, Ghalta the Unstoppable, Ghalta Stampede Tyrant, Konstrari Charm ×3. The pool's "xN owned" understates the newest cards: the operator's in-deck counts are ground truth (Ajani ×3, Garruk ×2, Pyromancer ×3, Paradox ×3, Craterclaw ×3).
+- Oracle text: pool.md or `PYTHONIOENCODING=utf-8 py .claude/skills/deck-building/q.py "select name, mana_cost, type_line, power, toughness, loyalty, oracle_text from cards where name = '…'"`. Rulings: Scryfall API or the current CR, never memory. Meta signal: DB `community_decks` / `community_deck_cards` (format 'standard'), and the optimizer adds in `model.json` (popularity picks; its ramp/draw/protection quotas are commander heuristics, see LEARNINGS 2026-10-05).
+
+**Scope / what may change.** Write only inside `verify-2026-10-06/rg-ways/`. Any owned Standard-legal R/G/colourless card may enter. Max 4 copies, owned copies only.
+
+**What to verify (run all, from the repo root).**
+1. Model: `MTG_DB_DIR="$(cygpath -m "$APPDATA")/the-black-grimoire/data" npx tsx verify-2026-10-06/rg-ways/run-model.ts verify-2026-10-06/rg-ways/final.txt > verify-2026-10-06/rg-ways/model-final.json` (needs a `Deck` header). Score the alternatives you are choosing between too, not only the final.
+2. Gate: `MTG_DB_DIR="$APPDATA/the-black-grimoire/data" npx tsx scripts/deck-gate.ts verify-2026-10-06/rg-ways/final.txt --format standard --owner 1 --source arena`. Expected ownership FAILs only on cards named above as owned-but-newer.
+3. Craterclaw's X: count the artifacts the final list actually has on the board by T6–T7 (Heartwood sources, artifact creatures), and the Emrakul mana line (exile mode "{3} … Add {C}{C}", the cast trigger "untap all lands you control", Garruk +2, Spider untap). Show the arithmetic.
+4. Curse-Marred Demon: "discard a card at random" after the tutor; state the chance of losing the tutored card at a typical T4 hand size.
+
+**What not to do.** No edits outside the folder; no DB writes; no `taskkill`; no git. No top-N cap: converge until a full pass finds no improving swap, with a stop proof per role (lands, dorks/ramp, Ways, walkers, threats/closers, interaction, card flow). Never correct card text or a rule from recall.
+
+**Output format.** `final.txt` (Arena import format, `Deck` header) and `build-report.md`: §1 plan (one primary plan, at most one backup; T1–3 / T4–6 / close); §2 verdict on every card of the operator's list (keep / cut / count change, DB quote); §3 swap table `Out → In (counts) → why (DB quote)`; §4 stop proof per role; §5 mana (Karsten 60-card from `src/lib/land-math.ts`, colour sources, T1 untapped G); §6 synergy density (min/median, 5 lowest); §7 optimizer + Deck Score: input → quick → final, and gate; §8 near-ties the operator might prefer.
+
+**Output limit.** `build-report.md` ≤ 170 lines. Final chat reply ≤ 15 lines: the final list's score, the net swaps, and anything unresolved. Budget: about 70 tool calls; if you run low, write the report with what is converged and say which roles lack a stop proof.

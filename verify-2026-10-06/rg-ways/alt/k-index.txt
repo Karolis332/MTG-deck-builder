@@ -1,0 +1,10 @@
+k1: -1 Overlord of the Hauntwoods +1 Aerid Konstrari
+k2: -1 Curse-Marred Demon +1 Aerid Konstrari
+k3: -1 Sear +1 Aerid Konstrari
+k4: -1 Overlord of the Hauntwoods +1 Leatherhead, Swamp Stalker
+k5: -1 Curse-Marred Demon +1 Leatherhead, Swamp Stalker
+k6: -1 Craterhoof Behemoth +1 Overrun
+k7: -1 Way of the Paradox +1 Emrakul, the Exigent Doom
+k8: -1 Tyvar, the Pummeler +1 Overrun
+k9: -1 Terror of the Peaks +1 Leatherhead, Swamp Stalker
+k10: -1 Craterhoof Behemoth +1 Craterclaw Colossus
