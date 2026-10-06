@@ -22,10 +22,10 @@ const read = (rel: string) => () => fs.readFileSync(path.join(ROOT, rel), 'utf8'
 const SPECS: DeckSpec[] = [
   // Urza box (no commander yet) vs the converged draft; Urza himself hot-swaps from the Inspirit box
   {
-    slug: 'urza-lord-high-artificer', now: 'verify-2026-10-06/urza-found/final.txt', base: read('verify-2026-10-02/urza/urza-box.txt'),
+    slug: 'urza-lord-high-artificer', now: 'verify-2026-10-06/urza-found/final-3.txt', base: read('verify-2026-10-02/urza/urza-box.txt'),
     extra: {
-      label: 'Near-ties (your call): Steel Hellkite or Torrential Gearhulk for The Lord of the Eagles; Emeritus of Ideation when found (only if it beats Padeem)',
-      names: ['Steel Hellkite', 'Torrential Gearhulk', 'Emeritus of Ideation'],
+      label: 'Found-card alternatives (near-ties, the proven card stays): Finale for Pull, Bane’s for Countersculpt, Lord of the Eagles for Hangarback, Professor for Insight, Traxos for Golem Foundry; Steel Hellkite for Soul; Emeritus when found',
+      names: ['Finale of Revelation', "Bane's Contingency", 'The Lord of the Eagles', 'Pensive Professor', 'Traxos, Scourge of Kroog', 'Steel Hellkite', 'Emeritus of Ideation'],
     },
   },
   {
