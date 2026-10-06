@@ -18,6 +18,7 @@
 1 Ajani's Chosen
 1 Akul the Unrepentant
 1 Alchemist's Refuge
+1 Alena, Kessig Trapper
 1 Alesha, Who Laughs at Fate
 1 Alhammarret's Archive
 1 Alibou, Ancient Witness
@@ -46,7 +47,7 @@
 1 Arachnogenesis
 1 Arcane Amphisbaena
 1 Arcane Lighthouse
-6 Arcane Signet
+7 Arcane Signet
 1 Archaeomancer
 1 Archangel of Tithes
 1 Archdruid's Charm
@@ -72,10 +73,12 @@
 1 At Knifepoint
 1 Atomize
 1 Auntie Ool, Cursewretch
+1 Aurora Phoenix
 1 Autumn's Veil
 1 Avacyn's Pilgrim
 1 Avatar Kyoshi, Earthbender
 1 Avatar of Burgeoning Echoes
+1 Avatar of Slaughter
 1 Aven Interrupter
 1 Awakened Awareness
 1 Azorius Locket
@@ -89,6 +92,7 @@
 1 Bandit's Haul
 1 Bandit's Talent
 1 Bane of Bala Ged
+1 Bane of Progress
 1 Bane's Contingency
 1 Bar the Gate
 1 Baral, Chief of Compliance
@@ -135,6 +139,7 @@
 1 Blooming Marsh
 1 Blossoming Bogbeast
 1 Blowfly Infestation
+1 Boarding Party
 1 Body Double
 1 Boggart Trawler
 3 Bojuka Bog
@@ -165,6 +170,7 @@
 2 Buried in the Garden
 1 Buried Ruin
 1 Burning Curiosity
+1 Burning Sun's Avatar
 1 Burnished Hart
 1 Bushwhack
 2 Butcher of Malakir
@@ -228,11 +234,13 @@
 1 Coercive Impetus
 1 Colossal Rattlewurm
 1 Combat Calligrapher
+1 Combustible Gearhulk
 5 Command Tower
 1 Commandeer
 2 Commander's Sphere
 1 Concealed Courtyard
 1 Concerted Defense
+1 Conclave Sledge-Captain
 2 Conduit Pylons
 1 Consider
 1 Consign to Memory
@@ -264,6 +272,7 @@
 1 Cyberdrive Awakener
 1 Cycle of Renewal
 1 Cyclonic Rift
+1 Cyclops of Eternal Fury
 1 Damnable Pact
 3 Dance of the Tumbleweeds
 1 Daretti, Scrap Savant
@@ -274,6 +283,7 @@
 1 Darksteel Reactor
 1 Davriel, Rogue Shadowmage
 1 Dawnbringer Cleric
+1 Dawnglade Regent
 1 Dawnsire, Sunstar Dreadnought
 1 Day of Black Sun
 1 Day's Undoing
@@ -305,6 +315,7 @@
 1 Devoted Druid
 1 Devourer of Destiny
 1 Diabolic Tutor
+1 Diamond City
 1 Dimir Charm
 1 Dimir House Guard
 1 Dina, Essence Brewer
@@ -327,6 +338,7 @@
 1 Dovin's Veto
 1 Drag to the Underworld
 1 Dragonskull Summit
+1 Drakuseth, Maw of Flames
 1 Dread Presence
 1 Dread Return
 1 Dread Summons
@@ -355,6 +367,7 @@
 1 Elixir of Immortality
 1 Elspeth, Sun's Champion
 1 Elusive Otter
+1 Elvish Aberration
 1 Elvish Archdruid
 2 Elvish Mystic
 1 Elvish Spirit Guide
@@ -362,11 +375,13 @@
 1 Embrace the Unknown
 1 Emerald Medallion
 1 Emergency Weld
+1 Emergent Woodwurm
 1 Emeritus of Ideation
 1 Emeritus of Truce
 1 Emeritus of Woe
 1 Emil, Vastlands Roamer
 1 Emissary Escort
+1 Emissary of Grudges
 1 Emperor of Bones
 1 Empowered Autogenerator
 1 Emry, Lurker of the Loch
@@ -458,10 +473,11 @@
 1 Flooded Grove
 1 Flourishing Defenses
 1 Flux Channeler
+1 Foe-Razer Regent
 1 Fog
 1 Font of Agonies
 1 Force of Vigor
-41 Forest
+53 Forest
 2 Forgotten Ancient
 1 Forlorn Flats
 1 Formidable Commons
@@ -479,6 +495,8 @@
 1 Full Bore
 2 Fumigate
 1 Gandalf the White
+1 Garruk, Caller of Beasts
+1 Garruk's Packleader
 1 Garruk's Uprising
 1 Gatecreeper Vine
 1 Gavel of the Righteous
@@ -504,6 +522,7 @@
 1 Gift of Paradise
 1 Gigantic Big Bear
 1 Gigantosaurus
+1 Gilanra, Caller of Wirewood
 1 Gilded Goose
 1 Gilded Lotus
 1 Ginger, Queen of Sweets
@@ -533,6 +552,7 @@
 1 Great Hall of the Citadel
 1 Greed
 1 Greenhouse Propagator
+1 Greenwarden of Murasa
 1 Grim Backwoods
 1 Grim Haruspex
 1 Grim Poppet
@@ -541,6 +561,7 @@
 1 Growth Spiral
 1 Gruul Charm
 1 Gruul Locket
+1 Gruul Ragebeast
 1 Gruul Turf
 1 Guac & Marshmallow Pizza
 1 Guardian Augmenter
@@ -563,6 +584,7 @@
 1 Hateful Eidolon
 1 Haunted Mire
 1 Haunting Voyage
+1 Havoc Eater
 1 Haywire Mite
 1 Healing Technique
 1 Heartless Pillage
@@ -576,11 +598,13 @@
 1 Hexhaven Invigorator
 1 Hexmark Destroyer
 1 Hidden Grotto
+1 Hideous Taskmaster
 1 High Market
 1 High-Society Hunter
 1 Highway Robbery
 2 Hindering Light
 1 Hinterland Harbor
+1 Hoard-Smelter Dragon
 1 Hoarder's Greed
 1 Hollow Marauder
 1 Honest Rutstein
@@ -718,7 +742,7 @@
 1 Linvala, Shield of Sea Gate
 1 Lion Umbra
 1 Lively Dirge
-2 Llanowar Elves
+3 Llanowar Elves
 1 Llanowar Wastes
 1 Lluwen, Imperfect Naturalist
 1 Lokhust Heavy Destroyer
@@ -806,7 +830,7 @@
 1 Moseo, Vein's New Dean
 1 Mosswood Dreadknight
 1 Mosswort Bridge
-4 Mountain
+18 Mountain
 1 Mourner's Surprise
 1 Moxite Refinery
 1 Mu Yanling, Sky Dancer
@@ -819,6 +843,7 @@
 1 Mutable Explorer
 1 Mycoloth
 1 Myconid Spore Tender
+1 Myojin of Roaring Blades
 1 Myr Enforcer
 1 Myr Retriever
 2 Myriad Landscape
@@ -836,6 +861,7 @@
 1 Necroskitter
 1 Necrotic Ooze
 1 Negate
+1 Nessian Wilds Ravager
 2 Nesting Grounds
 1 Nether Traitor
 1 Nev, the Practical Dean
@@ -862,6 +888,7 @@
 1 Ob Nixilis of the Black Oath
 1 Ob Nixilis, the Hate-Twisted
 1 Obeka, Splitter of Seconds
+1 Oblivion Sower
 1 Occult Epiphany
 1 Octavia, Living Thesis
 1 Oft-Nabbed Goat
@@ -903,6 +930,7 @@
 1 Pact Weapon
 1 Padeem, Consul of Innovation
 1 Painful Truths
+1 Paleoloth
 1 Palladium Myr
 1 Panharmonicon
 1 Paradise Druid
@@ -965,6 +993,7 @@
 1 Primeval Bounty
 1 Primo, the Unbounded
 2 Primordial Hydra
+1 Primordial Sage
 1 Pristine Talisman
 1 Proctor of Potential
 1 Professor Dellian Fel
@@ -979,6 +1008,7 @@
 1 Puppeteer Clique
 1 Putrefy
 1 Pyre Rhymer
+1 Pyrewood Gearhulk
 1 Qarsi Revenant
 1 Quandrix Apprentice
 1 Quandrix Campus
@@ -995,6 +1025,7 @@
 1 Rakish Crew
 1 Ral Zarek
 1 Ramos, Dragon Engine
+1 Rampaging Baloths
 1 Rampant Growth
 1 Ramunap Excavator
 1 Rankle, Master of Pranks
@@ -1046,11 +1077,14 @@
 1 Rodeo Pyromancers
 1 Roiling Regrowth
 1 Rootbound Crag
+1 Rorix Bladewing
 2 Roxanne, Starfall Savant
 1 Royal Warden
+1 Ruby, Daring Tracker
 1 Rugged Prairie
 1 Rumble Arena
 1 Rune-Scarred Demon
+1 Ruric Thar, the Unbowed
 1 Rush of Dread
 2 Rustler Rampage
 1 Rustvale Bridge
@@ -1063,6 +1097,7 @@
 1 Saheeli, Jewel of Avishkar
 1 Saheeli, Sublime Artificer
 1 Sai, Master Thopterist
+1 Sakiko, Mother of Summer
 1 Sakura-Tribe Elder
 1 Sami, Wildcat Captain
 1 Samut, the Driving Force
@@ -1083,6 +1118,7 @@
 1 Sautekh Immortal
 1 Savage Lands
 2 Savage Smash
+1 Savage Ventmaw
 1 Saw in Half
 1 Scour for Scrap
 1 Scourge of the Skyclaves
@@ -1130,6 +1166,7 @@
 2 Shivan Reef
 3 Shoot the Sheriff
 1 Shortcut to Mushrooms
+1 Shriekwood Devourer
 1 Sigil of Myrkul
 1 Sign in Blood
 1 Silkguard
@@ -1158,6 +1195,7 @@
 1 Slickshot Show-Off
 1 Slickshot Vault-Buster
 1 Slimefoot, the Stowaway
+1 Slinza, the Spiked Stampede
 1 Smoldering Marsh
 1 Smothering Abomination
 1 Snakeskin Veil
@@ -1173,17 +1211,20 @@
 1 Sorcerous Spyglass
 1 Sorin, Vengeful Bloodlord
 1 Soul of New Phyrexia
+1 Soul of the Harvest
 1 Soul Snuffers
 1 Soul-Guide Lantern
 1 Soulless Jailer
 1 Soured Springs
 1 Spara's Headquarters
+1 Spearbreaker Behemoth
 1 Spell Pierce
 1 Spelunking
 1 Sphinx of False Conclusions
 1 Spider-Ham, Peter Porker
 1 Spider-Man 2099
 1 Spider-Man, Brooklyn Visionary
+1 Spinerock Knoll
 1 Spinewoods Armadillo
 1 Spire of Industry
 1 Spirebluff Canal
@@ -1254,6 +1295,7 @@
 1 Talisman of Conviction
 1 Talisman of Dominance
 2 Talisman of Hierarchy
+1 Talisman of Impulse
 1 Talisman of Progress
 1 Talisman of Resilience
 1 Talisman of Unity
@@ -1337,6 +1379,7 @@
 1 Threefold Thunderhulk
 1 Through the Forest Gate
 2 Thrummingbird
+1 Thunderfoot Baloth
 1 Thwart the Grave
 1 Timeless Lotus
 1 Tip the Scales
@@ -1363,6 +1406,7 @@
 1 Transformative Commons
 1 Transmutation Font
 3 Trash the Town
+1 Traverse the Outlands
 1 Traxos, Academy Guardian
 1 Traxos, Scourge Eternal
 2 Traxos, Scourge of Kroog
@@ -1376,15 +1420,19 @@
 1 Triumphant Adventurer
 1 Troyan, Gutsy Explorer
 1 Trudge Garden
+1 Trumpeting Carnosaur
 1 Turbulent Fen
 1 Turbulent Moor
 1 Turbulent Wilderness
 1 Twilight Mire
 1 Twilight Prophet
 1 Twinned Vision
+1 Tyrant of Discord
 1 Tyrant's Scorn
 1 Tyvar's Stand
 1 Uldaros Theorix
+1 Ulvenwald Hydra
+1 Ulvenwald Observer
 2 Umbral Collar Zealot
 2 Umbral Expanse
 1 Unauthorized Exit
@@ -1458,6 +1506,7 @@
 1 Wardens of the Cycle
 1 Warg Tactics
 1 Warrior's Blades
+1 Warstorm Surge
 1 Waterbending Scroll
 1 Way of the Cryomancer
 1 Way of the Healer
