@@ -20,6 +20,12 @@ const OUT = [
 type DeckSpec = { slug: string; base?: () => string; now?: string; guide?: string; extra?: { label: string; names: string[] } };
 const read = (rel: string) => () => fs.readFileSync(path.join(ROOT, rel), 'utf8');
 const SPECS: DeckSpec[] = [
+  // partners: Gilanra is the first line, Alena the second (paper-sync keeps one commander)
+  {
+    // sleeved list vs the refuted suggestions (builder 11 swaps + refuter 2)
+    slug: 'gilanra-alena-partners', base: read('decks/paper/decks/gilanra-alena-partners.txt'), now: 'verify-2026-10-07/alena-gilanra/final.txt',
+    extra: { label: 'Near-tie (operator’s call): keep Ruric Thar and cut Boarding Party for Farseek instead', names: ['Ruric Thar, the Unbowed', 'Boarding Party'] },
+  },
   // Urza box (no commander yet) vs the converged draft; Urza himself hot-swaps from the Inspirit box
   {
     slug: 'urza-lord-high-artificer', now: 'verify-2026-10-06/urza-found/final-3.txt', base: read('verify-2026-10-02/urza/urza-box.txt'),
