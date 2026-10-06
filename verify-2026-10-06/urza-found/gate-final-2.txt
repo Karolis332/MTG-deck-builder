@@ -1,0 +1,68 @@
+file      : C:/Users/QuLeR/AppData/Local/Temp/g.txt
+format    : commander   commander: Urza, Lord High Artificer
+totals    : 100 cards | 38 lands (38.4 eff.) | 61 nonland | avg MV 3.52
+curve     : 1:2 2:17 3:15 4:16 5:2 6:5 7:4
+VERDICT   : FAIL
+
+  PASS  size        100 cards (commander wants 100)
+  PASS  singleton   singleton respected (basics exempt)
+  PASS  legality    every card legal in commander
+  PASS  rules       no other format rule broken
+  PASS  identity    all cards inside U
+  PASS  ownership   all cards owned; paper collection imported 0 days ago
+  WARN  arenaNames  2 card(s) must be exported front-face only:
+        - 1 The Legend of Kuruk
+        - 1 Sink into Stupor
+  PASS  lands       38 lands (+1 MDFC land backs = 38.4 effective); Karsten wants 40 ±2
+  FAIL  plan        13/61 nonland cards interact (21%) — commander wants: creates tokens
+        - Soul-Guide Lantern (MV 1)
+        - Strix Serenade (MV 1)
+        - Arcane Signet (MV 2)
+        - Counterspell (MV 2)
+        - Cryogen Relic (MV 2)
+        - Curse of the Swine (MV 2)
+        - Finale of Revelation (MV 2)
+        - Flesh Duplicate (MV 2)
+        - Geist of Saint Thalia (MV 2)
+        - Negate (MV 2)
+        - Resculpt (MV 2)
+        - Sapphire Medallion (MV 2)
+        - Shifting Grift (MV 2)
+        - Sky Diamond (MV 2)
+        - The Echoverse Fulcrum (MV 2)
+        - Volatile Stormdrake (MV 2)
+        - Wan Shi Tong, Librarian (MV 2)
+        - Waterbending Scroll (MV 2)
+        - Bane's Contingency (MV 3)
+        - Bender's Waterskin (MV 3)
+        - Cloud Key (MV 3)
+        - Commander's Sphere (MV 3)
+        - Flare of Denial (MV 3)
+        - Ghostly Flicker (MV 3)
+        - Palladium Myr (MV 3)
+        - Pensive Professor (MV 3)
+        - Sink into Stupor (MV 3)
+        - Unstoppable Plan (MV 3)
+        - Worn Powerstone (MV 3)
+        - April O'Neil, Hacktivist (MV 4)
+        - Bident of Thassa (MV 4)
+        - Distant Melody (MV 4)
+        - Karn, the Great Creator (MV 4)
+        - Katara's Reversal (MV 4)
+        - Reconnaissance Mission (MV 4)
+        - Scour for Scrap (MV 4)
+        - Solemn Simulacrum (MV 4)
+        - Thran Dynamo (MV 4)
+        - Tractor Beam (MV 4)
+        - Traxos, Scourge of Kroog (MV 4)
+        - Zuko's Exile (MV 5)
+        - Planetarium of Wan Shi Tong (MV 6)
+        - River's Rebuke (MV 6)
+        - Soul of New Phyrexia (MV 6)
+        - Sun Quan, Lord of Wu (MV 6)
+        - Meteor Golem (MV 7)
+        - Super State (MV 7)
+        - The Lord of the Eagles (MV 9)
+  PASS  curve       avg MV 3.52; commander sets no cost threshold
+  PASS  wincons     12 win condition(s)/closer(s)
+  PASS  locks       0 locked card(s) present and intact
