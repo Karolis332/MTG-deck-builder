@@ -16,21 +16,23 @@ const OUT = [
   'C:/Users/QuLeR/Desktop/MTG collection/MTG decks/deck-check.html',
 ];
 // baseline = what was sleeved before today's changes; `now` = a proposed list instead of the sleeved one;
-// `extra` = a labelled row of cards still under review
-type DeckSpec = { slug: string; base?: () => string; now?: string; extra?: { label: string; names: string[] } };
+// `extra` = a labelled row of cards still under review; `guide` = a pilot-guide markdown file shown above the list
+type DeckSpec = { slug: string; base?: () => string; now?: string; guide?: string; extra?: { label: string; names: string[] } };
 const read = (rel: string) => () => fs.readFileSync(path.join(ROOT, rel), 'utf8');
 const SPECS: DeckSpec[] = [
   // Urza box (no commander yet) vs the converged draft; Urza himself hot-swaps from the Inspirit box
   {
     slug: 'urza-lord-high-artificer', now: 'verify-2026-10-06/urza-found/final-3.txt', base: read('verify-2026-10-02/urza/urza-box.txt'),
+    guide: '.claude/skills/deck-building/reference/decks/urza-lord-high-artificer.md',
     extra: {
       label: 'Found-card alternatives (near-ties, the proven card stays): Finale for Pull, Countersculpt for Villains’ Lair, Lord of the Eagles for Hangarback; Steel Hellkite for Soul; Emeritus when found',
       names: ['Finale of Revelation', 'Countersculpt', 'The Lord of the Eagles', 'Steel Hellkite', 'Emeritus of Ideation'],
     },
   },
   {
-    slug: 'inspirit-flagship-vessel',
-    base: read('verify-2026-10-02/inspirit/inspirit-current.txt'),
+    // sleeved list vs the Urza hot-swap: Emry takes Urza's slot
+    slug: 'inspirit-flagship-vessel', now: 'verify-2026-10-06/urza-found/inspirit-hotswap.txt',
+    base: read('decks/paper/decks/inspirit-flagship-vessel.txt'),
     extra: {
       label: 'Untapped duals you own, sleeved in Tam/Tazri (second copies would replace Islands)',
       names: ['Hallowed Fountain', 'Steam Vents', 'Spirebluff Canal', 'Seachrome Coast', 'Deserted Beach'],
@@ -71,6 +73,31 @@ const groupOf = (t: string) => {
   return 'Enchantment';
 };
 const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+// ponytail: just the markdown the pilot guides use (headings, tables, bullets, bold, code); a real parser if guides grow
+const inline = (s: string) => esc(s).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>').replace(/`(.+?)`/g, '<code>$1</code>');
+const md = (src: string) => {
+  const out: string[] = [];
+  let list = false, table = false;
+  const close = () => { if (list) out.push('</ul>'); if (table) out.push('</table>'); list = table = false; };
+  for (const line of src.split(/\r?\n/)) {
+    const cells = line.startsWith('|') ? line.slice(1, -1).split('|').map((c) => c.trim()) : null;
+    if (cells && cells.every((c) => /^-+$/.test(c))) continue;
+    if (cells) {
+      if (!table) { close(); table = true; out.push(`<table><tr>${cells.map((c) => `<th>${inline(c)}</th>`).join('')}</tr>`); }
+      else out.push(`<tr>${cells.map((c) => `<td>${inline(c)}</td>`).join('')}</tr>`);
+    } else if (line.startsWith('- ')) {
+      if (!list) { close(); list = true; out.push('<ul>'); }
+      out.push(`<li>${inline(line.slice(2))}</li>`);
+    } else {
+      close();
+      const h = line.match(/^(#+)\s+(.*)$/);
+      if (h) out.push(`<h${h[1].length + 2}>${inline(h[2])}</h${h[1].length + 2}>`);
+      else if (line.trim()) out.push(`<p>${inline(line)}</p>`);
+    }
+  }
+  close();
+  return out.join('');
+};
 // badge: 'NEW' for a card not in the baseline, '+N' when a card already there gains copies (basics)
 const tile = (c: Card, qty: number, key: string, cls = '', badge = '') =>
   `<div class="card ${cls}" data-key="${esc(key)}" data-name="${esc((c.name + ' ' + c.type).toLowerCase())}">${c.img ? `<img loading="lazy" src="${esc(c.img)}" alt="${esc(c.name)}">` : `<div class="ph">${esc(c.name)}</div>`}` +
@@ -111,7 +138,10 @@ const sections = DECKS.map((d, i) => {
   const extraHtml = d.extra
     ? `<h3 class="candh">${esc(d.extra.label)} <small>${d.extra.names.length}</small></h3><div class="grid">${d.extra.names.map((n) => tile(card(n), 1, `${d.slug}|CAND|${n}`, 'cand')).join('')}</div>`
     : '';
-  return `<section id="${d.slug}" class="${i ? 'hidden' : ''}" data-total="${now.length}"><div class="bar"><b>${esc(now[0].name)}</b> · ${total} cards · <span class="count"></span> found <button class="reset">reset</button></div>${swapsHtml}${body}${outHtml}${extraHtml}</section>`;
+  const listText = now.map((c) => `${c.qty} ${c.name}`).join('\n');
+  const copyHtml = `<details class="copybox"><summary>Copy decklist (${total} cards, commander first)</summary><textarea readonly rows="12">${esc(listText)}</textarea><button class="copy">Copy</button></details>`;
+  const guideHtml = d.guide ? `<details class="guide" open><summary>Game plan, win lines, copy targets</summary>${md(fs.readFileSync(path.join(ROOT, d.guide), 'utf8'))}</details>` : '';
+  return `<section id="${d.slug}" class="${i ? 'hidden' : ''}" data-total="${now.length}"><div class="bar"><b>${esc(now[0].name)}</b> · ${total} cards · <span class="count"></span> found <button class="reset">reset</button></div>${copyHtml}${guideHtml}${swapsHtml}${body}${outHtml}${extraHtml}</section>`;
 });
 const tabs = DECKS.map((d, i) => `<button class="tab${i ? '' : ' on'}" data-target="${d.slug}">${esc(parse(fs.readFileSync(path.join(ROOT, d.file), 'utf8'))[0].name.split(',')[0])}${d.now ? ' (draft)' : ''}</button>`).join('');
 
@@ -128,6 +158,9 @@ section{padding:0 14px 40px}.hidden{display:none}h3{color:#c9a55a;margin:18px 0 
 .tick{display:none;position:absolute;inset:0;background:rgba(20,90,40,.55);color:#fff;font:bold 64px sans-serif;align-items:center;justify-content:center}
 .card.done .tick{display:flex}.card.out.done .tick{background:rgba(140,30,30,.55)}
 .swt{color:#e8dcc4;margin:22px 0 4px;border-bottom:1px solid #6b5326;font-size:20px}.card.out.swap .badge{background:#d0605a}
+details{margin:8px 0;background:#1f1912;border:1px solid #6b5326;border-radius:6px;padding:6px 12px}summary{cursor:pointer;color:#c9a55a;font-size:16px}
+.copybox textarea{width:100%;box-sizing:border-box;background:#15110d;color:#e8dcc4;border:1px solid #6b5326;font:13px monospace;margin:8px 0}.copy{background:#8a6a2e;color:#000;border:0;padding:6px 14px;border-radius:4px;cursor:pointer}
+.guide table{border-collapse:collapse;margin:6px 0 12px;width:100%}.guide th,.guide td{border:1px solid #6b5326;padding:5px 7px;vertical-align:top;text-align:left}.guide th{color:#c9a55a}.guide h3,.guide h4{color:#c9a55a;margin:14px 0 6px}.guide code{color:#c9a55a}.guide li{margin:3px 0}
 #zoom{position:fixed;z-index:9;display:none;pointer-events:none;width:min(440px,46vw);border-radius:18px;box-shadow:0 10px 50px #000}
 </style></head><body><header>${tabs}<input id="q" type="search" placeholder="filter: name or type…" autofocus><span style="float:right;color:#8d7a5a">tap a card when you find it in the box · gold = new today · red = should be out (tap once removed)</span></header>${sections.join('')}
 <script>
@@ -137,6 +170,7 @@ document.querySelectorAll('.card').forEach(c=>{if(S[c.dataset.key])c.classList.a
 document.querySelectorAll('section').forEach(count);
 const q=document.getElementById('q');q.oninput=()=>{const v=q.value.trim().toLowerCase();document.querySelectorAll('.card').forEach(c=>c.classList.toggle('f',!!v&&!c.dataset.name.includes(v)));document.querySelectorAll('.grid').forEach(g=>{const e=!g.querySelector('.card:not(.f)');g.classList.toggle('f',e);g.previousElementSibling.classList.toggle('f',e)})};
 document.querySelectorAll('.reset').forEach(b=>b.onclick=()=>{const s=b.closest('section');s.querySelectorAll('.card').forEach(c=>{c.classList.remove('done');delete S[c.dataset.key]});save();count(s)});
+document.querySelectorAll('.copy').forEach(b=>b.onclick=()=>{const t=b.previousElementSibling;t.select();(navigator.clipboard?navigator.clipboard.writeText(t.value):Promise.reject()).catch(()=>document.execCommand('copy'));b.textContent='Copied ✓'});
 const z=document.createElement('img');z.id='zoom';document.body.append(z);
 document.addEventListener('mouseover',e=>{const i=e.target.closest&&e.target.closest('.card')?.querySelector('img');if(!i){z.style.display='none';return}z.src=i.src.replace('/normal/','/large/');z.style.display='block'});
 document.addEventListener('mousemove',e=>{if(z.style.display!=='block')return;const w=z.offsetWidth,h=z.offsetHeight||w*1.4;let x=e.clientX+24;if(x+w>innerWidth)x=e.clientX-w-24;z.style.left=Math.max(8,x)+'px';z.style.top=Math.min(Math.max(8,e.clientY-h/2),innerHeight-h-8)+'px'});
