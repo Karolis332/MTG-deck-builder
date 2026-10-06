@@ -1044,7 +1044,6 @@
 2 Riveteers Overlook
 1 Rocky Rebuke
 1 Rodeo Pyromancers
-2 Rogue's Passage
 1 Roiling Regrowth
 1 Rootbound Crag
 2 Roxanne, Starfall Savant

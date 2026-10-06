@@ -1,4 +1,6 @@
 1 Urza, Lord High Artificer
+1 Deduce
+1 Bane's Contingency
 1 Sai, Master Thopterist
 1 Efficient Construction
 1 Chrome Host Seedshark
@@ -61,8 +63,7 @@
 1 Karn, the Great Creator
 1 Seat of the Synod
 1 Agna Qel'a
-1 Rogue's Passage
 1 Buried Ruin
 1 The Mycosynth Gardens
 1 Secluded Starforge
-33 Island
+32 Island
