@@ -63,7 +63,6 @@
 1 Agna Qel'a
 1 Rogue's Passage
 1 Buried Ruin
-1 War Room
 1 The Mycosynth Gardens
 1 Secluded Starforge
-32 Island
+33 Island

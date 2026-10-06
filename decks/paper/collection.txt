@@ -1457,7 +1457,6 @@
 1 Wake the Past
 1 Walking Ballista
 1 Wan Shi Tong, Librarian
-1 War Room
 1 Wardens of the Cycle
 1 Warg Tactics
 1 Warrior's Blades
