@@ -1,0 +1,100 @@
+Commander
+1 Krenko, Mob Boss
+
+Deck
+1 Arena of Glory
+1 Cavern of Souls
+1 Reliquary Tower
+1 Valakut, the Molten Pinnacle
+1 Rogue's Passage
+1 Buried Ruin
+1 Hidden Volcano
+1 Great Furnace
+1 Command Tower
+1 Gemstone Caverns
+1 Mines of Moria
+1 Sokenzan, Crucible of Defiance
+1 Evolving Wilds
+1 Terramorphic Expanse
+1 Flooded Strand
+1 Misty Rainforest
+1 Fabled Passage
+1 Scalding Tarn
+1 Urborg, Tomb of Yawgmoth
+1 Karn's Bastion
+1 Ash Barrens
+1 Secluded Courtyard
+1 Unclaimed Territory
+1 Inventors' Fair
+1 Darksteel Citadel
+1 Emergence Zone
+1 Bonders' Enclave
+1 Nesting Grounds
+1 Thespian's Stage
+1 Starting Town
+1 Escape Tunnel
+1 Cabaretti Courtyard
+4 Mountain
+1 Goblin Warchief
+1 Skirk Prospector
+1 Goblin Matron
+1 Springleaf Drum
+1 Goblin Bombardment
+1 Goblin Trashmaster
+1 Krenko's Command
+1 Swiftfoot Boots
+1 Dragon Fodder
+1 Howlsquad Heavy
+1 Arcane Signet
+1 The Eternity Elevator
+1 General Kreat, the Boltbringer
+1 Goblin Instigator
+1 Purphoros, God of the Forge
+1 Blasphemous Act
+1 Abrade
+1 Hexing Squelcher
+1 Faithless Looting
+1 Empty the Warrens
+1 Searslicer Goblin
+1 Guidelight Matrix
+1 Lightning Bolt
+1 Goblin Sharpshooter
+1 Jeska's Will
+1 Glassworks // Shattered Yard
+1 Raid Bombardment
+1 Goblin Motivator
+1 Thrill of Possibility
+1 Reckoner Bankbuster
+1 Way of the Pyromancer
+1 Ashnod's Altar
+1 Volley Veteran
+1 Torch Courier
+1 Goblin Surprise
+1 Seething Song
+1 Heraldic Banner
+1 Fervor
+1 Mind Stone
+1 You See a Pair of Goblins
+1 Ichor Wellspring
+1 Banner of Kinship
+1 Boneclub Berserker
+1 Goblin Engineer
+1 Untimely Malfunction
+1 Witty Roastmaster
+1 Roaming Throne
+1 Tibalt's Trickery
+1 Conqueror's Flail
+1 Dawn-Blessed Pennant
+1 Fanatical Firebrand
+1 Reckless Lackey
+1 Aggravated Assault
+1 Redirect Lightning
+1 Collective Inferno
+1 Ajani Unrelenting
+1 Guttersnipe
+1 Expedite
+1 The One Ring
+1 Tormenting Voice
+1 Ogre Battledriver
+1 Grapeshot
+1 Rocky Roads

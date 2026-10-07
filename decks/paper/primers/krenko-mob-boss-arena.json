@@ -1,0 +1,164 @@
+{
+  "version": 1,
+  "deck": {
+    "name": "Krenko, Mob Boss (Arena Historic Brawl)",
+    "commanders": ["Krenko, Mob Boss"],
+    "colours": "R",
+    "format": "brawl",
+    "list": "verify-2026-10-08/best-deck/krenko-arena.txt",
+    "status": "proposed"
+  },
+  "summary": "Mono-red Goblin tokens for Arena Historic Brawl (1v1, 25 life). Land [[Krenko, Mob Boss]] on turn 4 with haste already on the table and tap him at once: \"Create X 1/1 red Goblin creature tokens, where X is the number of Goblins you control\", so the Goblin count doubles every turn. Every token that enters is damage through [[Purphoros, God of the Forge]] (2), [[Impact Tremors]] (1), [[General Kreat, the Boltbringer]] (1) and [[Witty Roastmaster]] (1). Sacrifice outlets ([[Skirk Prospector]], [[Ashnod's Altar]], [[Goblin Bombardment]]) turn the swarm into mana and damage, and with [[Aggravated Assault]] into unbounded combats. The base list is the model's own version (2026-10-08 collection-wide search); its 11 role-window filler swaps are reverted and 17 colourless or off-colour lands became Mountains.",
+  "phases": [
+    {
+      "turns": "T1–3",
+      "goal": "A one-drop Goblin or a rock, then a haste source: [[Goblin Warchief]] (\"Goblins you control have haste\") or [[Lightning Greaves]] waiting with equip {0}. [[Goblin Matron]] fetches Warchief.",
+      "cards": ["Skirk Prospector", "Fanatical Firebrand", "Arcane Signet", "Lightning Greaves", "Goblin Warchief", "Goblin Matron", "Goblin Instigator", "Impact Tremors"]
+    },
+    {
+      "turns": "T4–6",
+      "goal": "Krenko with haste, tap every main phase before combat. Add the enter-damage payoffs and attack with the hasty tokens.",
+      "cards": ["Krenko, Mob Boss", "Purphoros, God of the Forge", "General Kreat, the Boltbringer", "Howlsquad Heavy", "Goblin Trashmaster", "Swiftfoot Boots", "Hexing Squelcher", "Lightning Bolt"]
+    },
+    {
+      "turns": "Close",
+      "goal": "One more Krenko tap through Purphoros and Tremors, an Assault loop, or the Sharpshooter machine gun. Hold a redirect for the removal aimed at Krenko.",
+      "cards": ["Aggravated Assault", "Goblin Bombardment", "Goblin Sharpshooter", "Goblin Grenade", "Great Train Heist", "Redirect Lightning", "Return the Favor", "Blasphemous Act"]
+    }
+  ],
+  "engine": [
+    {
+      "title": "Krenko doubles every turn",
+      "flow": ["[[Goblin Warchief]] on turn 3", "[[Krenko, Mob Boss]] turn 4, taps at once", "2 tokens, then 4, then 8", "[[Impact Tremors]] pings per token"],
+      "note": "Krenko is a Goblin, so Warchief's haste covers him. Tap before combat every main phase; the tokens attack with haste under Warchief, [[Howlsquad Heavy]] or [[Fervor]]."
+    },
+    {
+      "title": "Prospector + Assault loop",
+      "flow": ["[[Krenko, Mob Boss]] taps for X Goblins", "sacrifice 5 to [[Skirk Prospector]] for {R}{R}{R}{R}{R}", "[[Aggravated Assault]]: untap all creatures, extra combat and main phase", "Krenko taps again with a bigger army", "repeat"],
+      "note": "Needs 6 Goblins including Krenko: tap for 6, sacrifice 5, net +1 and an extra combat each loop. Howlsquad Heavy at max speed (\"{T}: Add {R} for each Goblin you control\") pays for Assault without sacrificing."
+    },
+    {
+      "title": "Sharpshooter machine gun",
+      "flow": ["sacrifice a Goblin to [[Goblin Bombardment]]: 1 damage", "[[Goblin Sharpshooter]] untaps (\"Whenever a creature dies, untap this creature\")", "tap Sharpshooter: 1 damage", "2 damage per Goblin"],
+      "note": "[[Collective Inferno]] on Goblin doubles Sharpshooter's damage. Bombardment is not a Goblin, so Inferno does not double it."
+    },
+    {
+      "title": "Protecting the one card that matters",
+      "flow": ["[[Hexing Squelcher]]: other creatures have \"Ward—Pay 2 life\"", "[[Cavern of Souls]] on Goblin: Krenko can't be countered", "[[Redirect Lightning]] / [[Return the Favor]] move the removal onto a token", "[[Lightning Greaves]]: shroud and haste"],
+      "note": "Greaves shroud also stops your own [[Expedite]], [[Torch Courier]] and [[Goblin Motivator]] from targeting Krenko: Greaves on Krenko, Boots on Warchief."
+    }
+  ],
+  "winConditions": [
+    {
+      "name": "Krenko doubling with enter damage",
+      "pieces": ["Krenko, Mob Boss", "Purphoros, God of the Forge", "Impact Tremors", "Goblin Warchief"],
+      "flow": ["[[Krenko, Mob Boss]] with 5 other Goblins", "tap: 6 tokens enter", "[[Purphoros, God of the Forge]] 12 + [[Impact Tremors]] 6", "swing with 12 hasty Goblins"],
+      "damage": "6 tokens × (2 + 1) = 18 on the tap; the next tap makes 12 tokens = 36. From 25 life two taps kill without attacking.",
+      "turn": "T6 (Krenko T4, goldfish commander turn 4.6; model-lab score of the list)"
+    },
+    {
+      "name": "Unbounded combats",
+      "pieces": ["Krenko, Mob Boss", "Skirk Prospector", "Aggravated Assault", "Goblin Warchief"],
+      "flow": ["[[Krenko, Mob Boss]] taps for 6", "[[Skirk Prospector]] eats 5: {R}{R}{R}{R}{R}", "[[Aggravated Assault]] untaps all, extra combat", "attack with hasty Goblins, Krenko taps again", "7, 9, 13, 21 attackers"],
+      "damage": "Each loop attacks with the whole untapped army and ends with more Goblins than it started: lethal in 3–4 loops from 6 Goblins.",
+      "turn": "T6–7 (Assault {2}{R} plus the first activation {3}{R}{R} = 8 mana over two turns, or Prospector mana)"
+    },
+    {
+      "name": "Machine gun",
+      "pieces": ["Goblin Sharpshooter", "Goblin Bombardment", "Krenko, Mob Boss"],
+      "flow": ["[[Goblin Bombardment]] sacrifice: 1", "[[Goblin Sharpshooter]] untaps, taps: 1", "13 Goblins = 26"],
+      "damage": "2 per Goblin; [[Goblin Grenade]] adds 5 for one Goblin; [[Collective Inferno]] doubles the Sharpshooter half.",
+      "turn": "Any turn after a Krenko tap; works at instant speed in response to a wipe"
+    },
+    {
+      "name": "Storm",
+      "pieces": ["Empty the Warrens", "Grapeshot", "Skirk Prospector"],
+      "flow": ["cheap spells and [[Skirk Prospector]] mana", "[[Empty the Warrens]] copies: 2 Goblins per spell", "[[Grapeshot]] copies: 1 per spell", "[[Guttersnipe]] 2 per spell"],
+      "damage": "Storm 5: Warrens makes 12 Goblins (24 with Purphoros), Grapeshot 6, Guttersnipe 12.",
+      "turn": "Backup when Krenko is exiled; needs 4+ cheap spells in hand"
+    }
+  ],
+  "metrics": {
+    "columns": ["Metric", "Model list", "This list"],
+    "rows": [
+      { "label": "Objective (model lab)", "values": ["107.9", "98.4"] },
+      { "label": "Red sources / lands", "values": ["16 / 37", "33 / 36"] },
+      { "label": "Keep 7 (300 goldfish games)", "values": ["97 %", "94 %"] },
+      { "label": "Krenko average turn", "values": ["5.2", "4.6"] }
+    ],
+    "note": "Model-lab /api/score, source arena, format brawl, 300 seeded games. The objective drops because the role windows reward the filler cards that were cut (draw 7 vs window 10–12)."
+  },
+  "swaps": [
+    { "out": "Ajani Unrelenting", "in": "Return the Favor", "role": "copy / redirect", "reason": "Return the Favor copies Krenko's activation (\"Copy target … activated ability\") for a second batch of X tokens, or moves removal onto a token. Ajani is a planeswalker with no Goblin link and no haste.", "quoteIn": "Copy target instant spell, sorcery spell, activated ability, or triggered ability", "evidence": "arena-2 swap 1 reverted" },
+    { "out": "The Eternity Elevator", "in": "Lightning Greaves", "role": "haste / protection", "reason": "Krenko must tap the turn he lands; Greaves gives \"haste and shroud\" for equip {0}. A 5-mana rock that needs station counters does nothing on turn 4.", "quoteIn": "Equipped creature has haste and shroud", "quoteOut": "{T}: Add {C}{C}{C}", "evidence": "arena-2 swaps 2 + 8 reverted (Greaves → Wildfire Howl → Elevator)" },
+    { "out": "Way of the Pyromancer", "in": "Goblin Negotiation", "role": "removal + tokens", "reason": "Way of the Pyromancer makes a Jace planeswalker token; the deck has no planeswalkers to carry its second ability. Negotiation kills a blocker and turns the excess damage into Goblins.", "quoteOut": "empower Jace 2", "quoteIn": "Create a number of 1/1 red Goblin creature tokens equal to the amount of excess damage", "evidence": "arena-2 swap 3 reverted" },
+    { "out": "Ichor Wellspring", "in": "Frenzied Goblin", "role": "Goblin count", "reason": "Wellspring is a cantrip with no Goblin and no body. Frenzied Goblin is a one-mana Goblin for Krenko's count that removes a blocker on the alpha turn (\"target creature can't block this turn\").", "quoteOut": "When this artifact enters or is put into a graveyard from the battlefield, draw a card", "quoteIn": "target creature can't block this turn", "evidence": "arena-2 swap 4 reverted" },
+    { "out": "Reckoner Bankbuster", "in": "Goblin Bushwhacker", "role": "haste / alpha", "reason": "Kicked Bushwhacker gives the whole token board \"+1/+0 and haste\" the turn Krenko doubles it. Bankbuster draws one card for {2} a turn in a deck that wants to spend every mana on Goblins.", "quoteIn": "creatures you control get +1/+0 and gain haste until end of turn", "quoteOut": "Remove a charge counter from this Vehicle: Draw a card", "evidence": "arena-2 swap 5 reverted" },
+    { "out": "Conqueror's Flail", "in": "Great Train Heist", "role": "extra combat", "reason": "Heist's {2}{R} mode untaps all creatures and adds a combat: a one-shot Assault that also untaps Krenko for a second activation. Flail's spell lock is real but a 2-mana equipment with +1/+1 in a one-colour deck is a weaker use of the slot.", "quoteIn": "Untap all creatures you control", "quoteOut": "your opponents can't cast spells during your turn", "evidence": "arena-2 swap 6 reverted", "verdict": "optional" },
+    { "out": "Glassworks // Shattered Yard", "in": "Gamble", "role": "tutor", "reason": "Gamble finds Warchief, Prospector, Assault or Purphoros for {R}; the random discard is cheap when the hand is tokens-to-be. Glassworks is 3 mana for 4 damage to one creature.", "quoteIn": "Search your library for a card", "quoteOut": "this Room deals 4 damage to target creature an opponent controls", "evidence": "arena-2 swap 7 reverted", "verdict": "optional" },
+    { "out": "Springleaf Drum", "in": "Impact Tremors", "role": "win condition", "reason": "Tremors is a kill condition: every Krenko token is 1 damage, 6 tokens = 6. Drum taps a Goblin for one mana, which Prospector already does better by sacrificing the token.", "quoteIn": "Whenever a creature you control enters, this enchantment deals 1 damage to each opponent", "quoteOut": "Tap an untapped creature you control: Add one mana of any color", "evidence": "arena-2 swap 9 reverted" },
+    { "out": "Rocky Roads", "in": "Stadium Headliner", "role": "Goblin count", "reason": "Rocky Roads enters tapped without a Mount or Vehicle and makes a Pilot, not a Goblin. Headliner is a one-mana Goblin that attacks with a free token and can kill a blocker for {1}{R}.", "quoteOut": "unless you control a Mount or Vehicle", "quoteIn": "Sacrifice this creature: It deals damage equal to the number of creatures you control", "evidence": "arena-2 swap 10 reverted" },
+    { "out": "Guidelight Matrix", "in": "Goblin Grenade", "role": "reach", "reason": "Matrix saddles Mounts and crews Vehicles; the deck has neither. Grenade is \"5 damage to any target\" for {R} and one token.", "quoteOut": "Target Mount you control becomes saddled", "quoteIn": "Goblin Grenade deals 5 damage to any target", "evidence": "arena-2 swap 11 reverted" },
+    { "out": "Flooded Strand", "in": "Mountain", "role": "land", "reason": "Cannot find a Mountain: it searches for \"a Plains or Island card\". A dead land in mono-red.", "quoteOut": "Search your library for a Plains or Island card" },
+    { "out": "Misty Rainforest", "in": "Mountain", "role": "land", "reason": "Searches for \"a Forest or Island card\"; it never finds a red source.", "quoteOut": "Search your library for a Forest or Island card" },
+    { "out": "Urborg, Tomb of Yawgmoth", "in": "Mountain", "role": "land", "reason": "Makes every land a Swamp, so it taps for black only; no mana of its own in a deck that needs {R}{R} on turn 4.", "quoteOut": "Each land is a Swamp in addition to its other land types" },
+    { "out": "Karn's Bastion", "in": "Mountain", "role": "land", "reason": "Colourless; proliferate has two targets in the deck (One Ring burden, Banner counters) and both are bad to grow.", "quoteOut": "{T}: Add {C}" },
+    { "out": "Nesting Grounds", "in": "Mountain", "role": "land", "reason": "Colourless; the deck has no counters worth moving.", "quoteOut": "{T}: Add {C}" },
+    { "out": "Thespian's Stage", "in": "Mountain", "role": "land", "reason": "Colourless until it copies a land for {2}; there is no land worth copying.", "quoteOut": "{T}: Add {C}" },
+    { "out": "Reliquary Tower", "in": "Mountain", "role": "land", "reason": "Colourless; the deck empties its hand into Goblins and never holds eight cards.", "quoteOut": "You have no maximum hand size" },
+    { "out": "Inventors' Fair", "in": "Mountain", "role": "land", "reason": "Colourless; the deck rarely controls three artifacts and the tutor costs {4} and the land.", "quoteOut": "if you control three or more artifacts" },
+    { "out": "Darksteel Citadel", "in": "Mountain", "role": "land", "reason": "Colourless indestructible land with no artifact synergy here.", "quoteOut": "Indestructible" },
+    { "out": "Bonders' Enclave", "in": "Mountain", "role": "land", "reason": "Colourless; its draw needs a creature with power 4 or greater, which 1/1 Goblins are not.", "quoteOut": "{T}: Add {C}" },
+    { "out": "Emergence Zone", "in": "Mountain", "role": "land", "reason": "Colourless; flashing in Krenko at end step still leaves him unable to tap before their removal resolves.", "quoteOut": "{T}: Add {C}" },
+    { "out": "Gemstone Caverns", "in": "Mountain", "role": "land", "reason": "Only matters in the opening hand on the draw; otherwise a colourless land.", "quoteOut": "If this card is in your opening hand and you're not the starting player" },
+    { "out": "Evolving Wilds", "in": "Mountain", "role": "land", "reason": "A tapped Mountain with extra steps; no landfall payoff in the deck.", "quoteOut": "Search your library for a basic land card" },
+    { "out": "Terramorphic Expanse", "in": "Mountain", "role": "land", "reason": "Same as Evolving Wilds: a Mountain that enters tapped.", "quoteOut": "Search your library for a basic land card" },
+    { "out": "Escape Tunnel", "in": "Mountain", "role": "land", "reason": "Same as Evolving Wilds: a Mountain that enters tapped.", "quoteOut": "Search your library for a basic land card" },
+    { "out": "Cabaretti Courtyard", "in": "Mountain", "role": "land", "reason": "Fetches a tapped basic; strictly slower than the Mountain it finds.", "quoteOut": "When this land enters, sacrifice it" },
+    { "out": "Secluded Courtyard", "in": "Mountain", "role": "land", "reason": "Red only for Goblin spells; Tremors, Bombardment, Seething Song, Blasphemous Act and Assault need a real Mountain. Cavern of Souls and Unclaimed Territory already cover the Goblin-only role.", "quoteOut": "As this land enters, choose a creature type" }
+  ],
+  "keepers": [
+    { "card": "Blasphemous Act", "why": "Costs {R} on a full board. Sacrifice your Goblins to [[Skirk Prospector]] or [[Goblin Bombardment]] in response and it is a one-sided reset." },
+    { "card": "Tibalt's Trickery", "why": "The only counterspell in red. Use it on their wipe or on the counter aimed at Krenko; the random free spell is the price." },
+    { "card": "Banner of Kinship", "why": "Five mana, but with 8 Goblins it enters with 8 fellowship counters: every token is a 9/9." },
+    { "card": "Roaming Throne", "why": "Doubles Kreat, Instigator, Matron, Volley Veteran and Searslicer triggers. It does not double Krenko (activated ability)." },
+    { "card": "The One Ring", "why": "Refills after a wipe; the protection turn covers recasting Krenko." },
+    { "card": "Collective Inferno", "why": "Convoke with tokens, then every Goblin's combat damage and Sharpshooter ping is doubled." },
+    { "card": "Valakut, the Molten Pinnacle", "why": "With 21 Mountains it is live from turn 6: 3 damage per land drop." },
+    { "card": "Howlsquad Heavy", "why": "Haste for the tokens, a free attacker every combat, and at max speed the mana for Assault without sacrificing." }
+  ],
+  "nearTies": [
+    { "kept": "Great Train Heist", "alt": "Conqueror's Flail", "note": "Flail's \"opponents can't cast spells during your turn\" protects the combo turn; Heist adds the combat. Operator's call." },
+    { "kept": "Gamble", "alt": "Glassworks", "note": "Gamble is a tutor with a random discard; Glassworks is clean removal. Keep Gamble while the hand is usually tokens-to-be." }
+  ],
+  "mulligan": {
+    "keep": [
+      "Mountain, Mountain, [[Great Furnace]], [[Skirk Prospector]], [[Goblin Warchief]], [[Lightning Greaves]], [[Impact Tremors]]: Krenko turn 4 with haste twice over and a payoff down",
+      "Mountain, [[Command Tower]], [[Arcane Signet]], [[Goblin Instigator]], [[Purphoros, God of the Forge]], [[Dragon Fodder]], [[Lightning Bolt]]: Krenko turn 3 off the Signet, Purphoros turn 4",
+      "Mountain, Mountain, Mountain, [[Goblin Matron]], [[Krenko's Command]], [[Swiftfoot Boots]], [[Expedite]]: Matron fetches Warchief; Boots and Expedite both give Krenko haste",
+      "Two lands + [[Arcane Signet]] or [[Mind Stone]] + any one-drop Goblin: Krenko on turn 3 is worth the risk in best-of-one"
+    ],
+    "mulligan": [
+      "Mountain, [[Blasphemous Act]], [[Aggravated Assault]], [[Banner of Kinship]], [[Roaming Throne]], [[Boneclub Berserker]], [[The One Ring]]: one land, nothing before turn 4",
+      "[[Rogue's Passage]], [[Buried Ruin]], [[Ash Barrens]], [[Hidden Volcano]], [[Scalding Tarn]], [[Tibalt's Trickery]], [[Seething Song]]: five lands, two colourless, no Goblin",
+      "Mountain, Mountain, [[Empty the Warrens]], [[Grapeshot]], [[Guttersnipe]], [[Thrill of Possibility]], [[Tormenting Voice]]: the storm half without the army; Krenko arrives with no haste",
+      "Any hand with no haste source and no Goblin under 3 mana: Krenko into open mana dies before he taps"
+    ]
+  },
+  "pilotRules": [
+    "Never cast Krenko without haste on the table or Greaves/Boots ready, unless the opponent is tapped out.",
+    "Tap Krenko every main phase before combat; the enter-damage triggers do not need haste.",
+    "Greaves on Krenko, Boots on Warchief: Greaves shroud blocks your own Expedite, Courier and Motivator.",
+    "Removal on Krenko: Redirect Lightning, Untimely Malfunction or Return the Favor onto a token; if it resolves, sacrifice to Prospector for mana first.",
+    "Wipe coming: keep half the fodder in hand, sacrifice the board to Bombardment or Altar in response.",
+    "Tap Krenko first, then activate Aggravated Assault: the untap is the point.",
+    "Choose Goblin on Cavern of Souls, Unclaimed Territory, Roaming Throne, Collective Inferno, Banner of Kinship and Dawn-Blessed Pennant.",
+    "Lethal maths: Purphoros 2 + Tremors 1 + Kreat 1 + Roastmaster 1 = 5 per token at full engine; divide their life by that before deciding whether to attack at all."
+  ],
+  "sources": [
+    ".claude/skills/deck-building/reference/decks/krenko-mob-boss-arena.md",
+    "verify-2026-10-08/best-deck/arena-2/results-*.jsonl (model Krenko list and its 11 swaps)",
+    "verify-2026-10-08/best-deck/krenko-model.txt (base) and krenko-arena.txt (list)",
+    "CLAUDE.md Session Log 2026-10-08 (Arena search, model saturation)"
+  ]
+}

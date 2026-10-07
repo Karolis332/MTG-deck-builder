@@ -21,6 +21,11 @@ const OUT = [
 type DeckSpec = { slug: string; base?: () => string; now?: string; guide?: string; extra?: { label: string; names: string[] } };
 const read = (rel: string) => () => fs.readFileSync(path.join(ROOT, rel), 'utf8');
 const SPECS: DeckSpec[] = [
+  // Arena Historic Brawl Krenko: baseline = the model's own list, so OUT = its filler swaps and the colourless lands
+  {
+    slug: 'krenko-mob-boss-arena', base: read('verify-2026-10-08/best-deck/krenko-model.txt'), now: 'verify-2026-10-08/best-deck/krenko-arena.txt',
+    guide: '.claude/skills/deck-building/reference/decks/krenko-mob-boss-arena.md',
+  },
   // Beledros replaces Meren: baseline = the sleeved Meren list, so OUT = Meren cards that stay in the box, NEW = everything else
   {
     slug: 'beledros-witherbloom', base: read('decks/paper/decks/meren-of-clan-nel-toth.txt'), now: 'verify-2026-10-08/best-deck/beledros-recommended.txt',
