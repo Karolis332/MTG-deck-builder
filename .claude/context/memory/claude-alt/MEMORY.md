@@ -23,6 +23,6 @@
 - [No git stash in shared/VPS repos](feedback_no_git_stash_shared_repos.md) — a stash reset run-pipeline.sh to 0644 (cron break); commit by pathspec, check exec bits after VPS git ops (2026-09-27)
 - [Deck review must converge](feedback_deck_review_fixed_point.md) — optimise until a full pass finds zero improving swaps (capped top-N = crucial error); precon-list registrations are unconfirmed (2026-09-28)
 - [Deck requests: quick list first](feedback_deck_requests_quick_first.md) — playable gated list in minutes, converged pipeline after as a diff; reuse pools/screens per colour identity (2026-10-01)
-- [Deck-check page is the visual standard](feedback_card_check_page_standard.md) — image grid by type, tap-to-tick, NEW/OUT rows, live text filter; reuse check-page.ts, Playwright via local http.server (2026-10-02)
+- [Deck-check page is the visual standard, vaporwave theme](feedback_card_check_page_standard.md) — image grid by type, tap-to-tick, NEW/OUT rows, text filter, copy block, guide + primer; since 2026-10-08 the cyberpunk/vaporwave palette from deck-view.html is the standard look; reuse check-page.ts, Playwright via local http.server
 - [Deck-building skill + learning loop](feedback_deck_building_skill.md) — .claude/skills/deck-building: rules, LEARNINGS.md (append on every correction), reference/ research + pilot guides (2026-10-02)
 - [Moxfield upload via Playwright](reference_moxfield_upload.md) — private decks via the create dialog; paste ignores *CMDR*, set commander in the combobox; cookie overlay needs DOM click (2026-10-07)
