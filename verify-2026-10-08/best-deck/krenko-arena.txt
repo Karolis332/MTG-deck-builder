@@ -4,37 +4,19 @@ Commander
 Deck
 1 Arena of Glory
 1 Cavern of Souls
-1 Reliquary Tower
 1 Valakut, the Molten Pinnacle
 1 Rogue's Passage
 1 Buried Ruin
 1 Hidden Volcano
 1 Great Furnace
 1 Command Tower
-1 Gemstone Caverns
 1 Mines of Moria
 1 Sokenzan, Crucible of Defiance
-1 Evolving Wilds
-1 Terramorphic Expanse
-1 Flooded Strand
-1 Misty Rainforest
 1 Fabled Passage
 1 Scalding Tarn
-1 Urborg, Tomb of Yawgmoth
-1 Karn's Bastion
 1 Ash Barrens
-1 Secluded Courtyard
 1 Unclaimed Territory
-1 Inventors' Fair
-1 Darksteel Citadel
-1 Emergence Zone
-1 Bonders' Enclave
-1 Nesting Grounds
-1 Thespian's Stage
 1 Starting Town
-1 Escape Tunnel
-1 Cabaretti Courtyard
-4 Mountain
 1 Goblin Warchief
 1 Skirk Prospector
 1 Goblin Matron
@@ -98,3 +80,4 @@ Deck
 1 Ogre Battledriver
 1 Grapeshot
 1 Stadium Headliner
+21 Mountain
