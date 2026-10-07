@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Model lab — Black Grimoire deck engine</title>
+<style>
+  :root { --bg:#15110d; --panel:#2b2218; --ink:#e8dcc4; --gold:#c9a55a; --dim:#9a8b6e; --ok:#7bc47f; --warn:#e0a33a; --bad:#d9644a; --line:#3d3225; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:14px/1.4 "Segoe UI", system-ui, sans-serif; }
+  header { padding:10px 18px; border-bottom:1px solid var(--line); display:flex; gap:16px; align-items:baseline; }
+  header h1 { margin:0; font-size:18px; color:var(--gold); letter-spacing:.04em; }
+  header small { color:var(--dim); }
+  main { display:grid; grid-template-columns:380px 1fr; gap:14px; padding:14px 18px; min-height:calc(100vh - 44px); }
+  section { background:var(--panel); border:1px solid var(--line); border-radius:6px; padding:12px; }
+  label { display:block; font-size:12px; color:var(--dim); margin:8px 0 2px; }
+  input, select, textarea, button { font:inherit; color:var(--ink); background:#1d1711; border:1px solid var(--line); border-radius:4px; padding:5px 7px; }
+  input[type=number] { width:72px; }
+  textarea { width:100%; resize:vertical; font:12px/1.35 Consolas, monospace; }
+  .row { display:flex; gap:8px; flex-wrap:wrap; align-items:flex-end; }
+  .row > div { display:flex; flex-direction:column; }
+  button { cursor:pointer; background:#3a2d1e; }
+  button.primary { background:var(--gold); color:#000; font-weight:600; }
+  button:disabled { opacity:.45; cursor:default; }
+  .actions { margin-top:12px; display:flex; gap:8px; flex-wrap:wrap; }
+  h2 { font-size:13px; text-transform:uppercase; letter-spacing:.08em; color:var(--gold); margin:14px 0 6px; }
+  h2:first-child { margin-top:0; }
+  table { border-collapse:collapse; width:100%; font-size:13px; }
+  th, td { text-align:left; padding:3px 8px 3px 0; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { color:var(--dim); font-weight:500; }
+  td.num, th.num { text-align:right; font-variant-numeric:tabular-nums; }
+  .objective { font-size:26px; color:var(--gold); }
+  .formula { color:var(--dim); font-size:12px; }
+  .ok { color:var(--ok); } .warn { color:var(--warn); } .bad { color:var(--bad); }
+  .chips span { display:inline-block; background:#1d1711; border:1px solid var(--line); border-radius:3px; padding:1px 6px; margin:2px 3px 2px 0; font-size:12px; }
+  details { margin:4px 0; } summary { cursor:pointer; color:var(--ink); }
+  #status { color:var(--dim); font-size:12px; margin-left:auto; }
+  .missing { color:var(--warn); font-size:12px; white-space:pre-wrap; }
+  .muted { color:var(--dim); }
+  .two { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  pre { white-space:pre-wrap; margin:0; font:12px/1.35 Consolas, monospace; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Model lab</h1>
+  <small>Deck Score + goldfish + role windows, same engine as <code>collection-best-deck.ts</code>. No AI in the loop.</small>
+  <span id="status">idle</span>
+</header>
+<main>
+  <section>
+    <div class="row">
+      <div><label>Source</label><select id="source"><option>paper</option><option>arena</option></select></div>
+      <div><label>Format</label><select id="format"><option>commander</option><option>brawl</option></select></div>
+    </div>
+    <label>Top decks from a search run (pick one to load commander + list)</label>
+    <div class="row"><select id="run" style="max-width:180px"></select><select id="topDeck" style="flex:1"></select></div>
+    <label>Commander</label>
+    <input id="commander" list="cmdrs" style="width:100%" placeholder="type to search owned commanders">
+    <datalist id="cmdrs"></datalist>
+    <div class="actions" style="margin-top:6px">
+      <button id="loadCf" title="CF-corpus seed from owned cards">Load CF seed</button>
+      <button id="loadSleeved" title="The registered paper deck for this commander">Load sleeved deck</button>
+      <button id="openView" title="Card-image deck view of the selected top deck">Open deck view</button>
+    </div>
+    <label>List (99 cards, "1 Name" per line; Commander/Deck headers allowed)</label>
+    <textarea id="list" rows="18" spellcheck="false"></textarea>
+    <div class="row" style="margin-top:8px">
+      <div><label>tempo ×</label><input id="tempo" type="number" step="1" value="10"></div>
+      <div><label>keep-7 ×</label><input id="keep" type="number" step="1" value="5"></div>
+      <div><label>role penalty ×</label><input id="role" type="number" step="0.5" value="2"></div>
+      <div><label>games</label><input id="games" type="number" step="50" value="300"></div>
+    </div>
+    <div class="row">
+      <div><label>passes</label><input id="passes" type="number" value="3" min="1" max="50"></div>
+      <div><label>top-K</label><input id="topK" type="number" value="12" min="2" max="40"></div>
+      <div><label>batch</label><input id="batch" type="number" value="6" min="1" max="20"></div>
+      <div><label>min gain</label><input id="epsilon" type="number" value="0.25" step="0.05" min="0" max="10" title="a swap must improve the objective by at least this much"></div>
+    </div>
+    <div class="two">
+      <div><label>Lock (never cut, one per line)</label><textarea id="lock" rows="4" spellcheck="false"></textarea></div>
+      <div><label>Ban (never added, one per line)</label><textarea id="ban" rows="4" spellcheck="false"></textarea></div>
+    </div>
+    <div class="actions">
+      <button id="score" class="primary">Score</button>
+      <button id="climb" class="primary">Climb</button>
+      <button id="stop" disabled>Stop</button>
+    </div>
+    <div id="missing" class="missing"></div>
+  </section>
+
+  <section id="out">
+    <div class="muted">Load a list and press Score.</div>
+  </section>
+</main>
+
+<script>
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const pct = (x) => `${Math.round(x * 100)}%`;
+const f2 = (x) => Number(x).toFixed(2);
+const ROLE_ORDER = ['land', 'ramp', 'draw', 'removal', 'board_wipe', 'protection', 'tutor', 'win_condition', 'synergy', 'utility'];
+const ROLE_LABEL = { land: 'Lands', ramp: 'Ramp', draw: 'Draw', removal: 'Removal', board_wipe: 'Board wipes', protection: 'Protection', tutor: 'Tutors', win_condition: 'Win conditions', synergy: 'Synergy', utility: 'No role' };
+let abort = null;
+let swapRows = [];
+
+const status = (t) => { $('status').textContent = t; };
+const body = (extra = {}) => ({
+  source: $('source').value, format: $('format').value, commander: $('commander').value.trim(), list: $('list').value,
+  lock: $('lock').value, ban: $('ban').value,
+  weights: { tempo: +$('tempo').value, keep: +$('keep').value, role: +$('role').value, games: +$('games').value },
+  ...extra,
+});
+
+let runs = [];
+async function loadRuns() {
+  runs = await (await fetch('/api/runs')).json();
+  $('run').innerHTML = runs.map((r, i) => `<option value="${i}">${esc(r.dir.replace(/^verify-/, '').replace('/best-deck/', ' · '))}</option>`).join('');
+  fillTopDecks();
+}
+function fillTopDecks() {
+  const r = runs[+$('run').value];
+  $('topDeck').innerHTML = `<option value="">— ${r ? r.decks.length : 0} decks —</option>` + (r ? r.decks.map((d, i) =>
+    `<option value="${i}">${i + 1}. ${esc(d.commander)} · ${f2(d.objective)}${d.converged ? ' ✅' : ` · ${d.passes} pass${d.passes === 1 ? '' : 'es'}`}</option>`).join('') : '');
+}
+function loadTopDeck() {
+  const r = runs[+$('run').value]; const d = r && r.decks[+$('topDeck').value];
+  if (!d) return;
+  $('commander').value = d.commander; $('list').value = d.list;
+  status(`loaded ${d.commander} from ${r.dir}`);
+}
+async function loadCommanders() {
+  const r = await fetch(`/api/commanders?source=${$('source').value}&format=${$('format').value}`);
+  const list = await r.json();
+  $('cmdrs').innerHTML = list.map((c) => `<option value="${esc(c.name)}">${esc(c.identity || 'C')}${c.sleeved ? ' · sleeved' : ''}</option>`).join('');
+  status(`${list.length} owned commanders`);
+}
+async function loadSeed(kind) {
+  status('loading seed…');
+  const r = await fetch(`/api/seed?source=${$('source').value}&format=${$('format').value}&commander=${encodeURIComponent($('commander').value.trim())}`);
+  const d = await r.json();
+  if (d.error) return status(d.error);
+  if (!d[kind]) return status(kind === 'sleeved' ? 'no registered deck for this commander' : 'no seed');
+  $('list').value = d[kind];
+  status(`${kind} seed loaded`);
+}
+
+function rolesTable(d) {
+  return `<table><tr><th>Role</th><th class="num">Count</th><th class="num">Window</th><th></th></tr>${
+    Object.entries(d.windows).map(([k, w]) => {
+      const n = d.roles[k] ?? 0;
+      const g = n < w.min ? `<span class="warn">⚠️ ${w.min - n} short</span>` : n > w.max ? `<span class="warn">⚠️ ${n - w.max} over</span>` : '<span class="ok">✅</span>';
+      return `<tr><td>${esc(ROLE_LABEL[k] || k)}</td><td class="num">${n}</td><td class="num">${w.min}–${w.max}</td><td>${g}</td></tr>`;
+    }).join('')}</table>`;
+}
+function componentsTable(m) {
+  if (!m) return '<div class="muted">model unavailable for this list</div>';
+  const gates = (m.gates || []).filter((g) => g.status && g.status !== 'pass');
+  return `<div class="muted">Deck Score ${m.score}${m.rank != null ? ` · rank ${Math.round(m.rank)}` : ''} · ${esc(m.version)} · ${esc(m.evidence)}${m.provisional ? ' · provisional' : ''}</div>
+  <table><tr><th>Component</th><th class="num">Score</th><th class="num">Weight</th><th>Reason</th></tr>${
+    m.components.map((c) => `<tr><td>${esc(c.key)}</td><td class="num">${Math.round(c.score)}</td><td class="num">${c.weight}</td><td>${esc(c.reason)}</td></tr>`).join('')}</table>${
+    gates.length ? `<div class="warn" style="margin-top:4px">Gates: ${gates.map((g) => esc(`${g.key || g.id || ''} ${g.status} ${g.reason || g.message || ''}`)).join(' · ')}</div>` : ''}`;
+}
+function goldfishTable(g) {
+  const rows = [['Keep 7', pct(g.keep7)], ['4+ lands on T4', pct(g.landsT4)], ['Screw T3 (<3 lands)', pct(g.screwT3)], ['Flood T6 (7+ lands)', pct(g.floodT6)],
+    ['Commander turn', f2(g.commanderTurn)], ['Commander on curve', pct(g.commanderOnCurve)], ['Tempo', f2(g.tempo)], ['Spells by T6', f2(g.spellsByT6)], ['Avg hand size', f2(g.avgHandSize)]];
+  return `<table>${rows.map(([k, v]) => `<tr><td>${k}</td><td class="num">${v}</td></tr>`).join('')}<tr><td class="muted">games</td><td class="num muted">${g.games}</td></tr></table>`;
+}
+function cardsByRole(cards) {
+  return ROLE_ORDER.map((role) => {
+    const hits = cards.filter((c) => (c.roles.length ? c.roles : ['utility']).includes(role));
+    if (!hits.length) return '';
+    return `<details><summary>${esc(ROLE_LABEL[role])} <span class="muted">(${hits.reduce((s, c) => s + c.qty, 0)})</span></summary><div class="chips">${
+      hits.sort((a, b) => a.cmc - b.cmc || a.name.localeCompare(b.name)).map((c) => `<span title="${esc(c.type)} · ${esc(c.mana || '')} · roles: ${esc(c.roles.join(', ') || 'none')}">${c.qty > 1 ? `${c.qty} ` : ''}${esc(c.name)}</span>`).join('')}</div></details>`;
+  }).join('');
+}
+function swapsTable() {
+  if (!swapRows.length) return '';
+  return `<h2>Swaps</h2><table><tr><th>Pass</th><th>Out</th><th>In</th><th class="num">Δ</th><th class="num">Objective</th></tr>${
+    swapRows.map((s) => `<tr><td>${s.pass}</td><td>${esc(s.out)}</td><td>${esc(s.in)}</td><td class="num ok">+${f2(s.after - s.before)}</td><td class="num">${f2(s.after)}</td></tr>`).join('')}</table>`;
+}
+function stopProofBlock(p, converged, stopped) {
+  if (!p) return `<h2>Stop proof</h2><div class="${stopped ? 'warn' : 'muted'}">${stopped ? 'stopped by you — not converged' : 'not converged: pass budget spent, more swaps may exist'}</div>`;
+  return `<h2>Stop proof ${converged ? '<span class="ok">✅ converged</span>' : ''}</h2>
+  <div class="muted">${p.candidatesTested} candidates tested in the weakest slot, ${p.pairsTested} pairs tested exactly</div>
+  <div class="two"><div><strong>Weakest kept</strong>${p.weakest.map((w) => `<div>${esc(w.name)} <span class="muted">loss ${f2(w.loss)}</span></div>`).join('')}</div>
+  <div><strong>Best adds (in that slot)</strong>${p.bestAdds.map((a) => `<div>${esc(a.name)} <span class="muted">${f2(a.scoreInWeakestSlot)}</span></div>`).join('')}</div></div>`;
+}
+
+function render(d, extra = '') {
+  const w = d.parts.weights;
+  const parts = `${f2(d.parts.absoluteTotal)} + ${w.tempo}×${f2(d.parts.tempo)} + ${w.keep}×${f2(d.parts.keep7)} − ${w.role}×${d.parts.penalty}`;
+  $('out').innerHTML = `
+    <div class="objective">${f2(d.objective)}</div>
+    <div class="formula">objective = score ${parts} · ${d.size} cards, ${d.lands} lands · power ${d.power.powerLevel} / bracket ${d.power.bracket}</div>
+    ${d.missing && d.missing.length ? `<div class="warn" style="margin-top:6px">${d.missing.length} not in the pool (unowned, off-colour, banned or unknown): ${esc(d.missing.join(', '))}</div>` : ''}
+    <div class="two" style="margin-top:10px">
+      <div><h2>Roles vs windows</h2>${rolesTable(d)}</div>
+      <div><h2>Goldfish</h2>${goldfishTable(d.goldfish)}</div>
+    </div>
+    <h2>Deck Score components</h2>${componentsTable(d.model)}
+    <h2>Cards by role</h2>${cardsByRole(d.cards)}
+    ${swapsTable()}
+    ${extra}`;
+}
+
+async function score() {
+  status('scoring…'); $('missing').textContent = '';
+  swapRows = [];
+  const r = await fetch('/api/score', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body()) });
+  const d = await r.json();
+  if (d.error) { status(d.error); return; }
+  render(d);
+  status(`scored · ${d.size} cards`);
+}
+
+async function climb() {
+  status('climbing…'); swapRows = [];
+  abort = new AbortController();
+  $('climb').disabled = true; $('score').disabled = true; $('stop').disabled = false;
+  try {
+    const r = await fetch('/api/climb', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' }, signal: abort.signal,
+      body: JSON.stringify(body({ passes: +$('passes').value, topK: +$('topK').value, batch: +$('batch').value, epsilon: +$('epsilon').value })),
+    });
+    if (!r.ok) { const e = await r.json(); status(e.error || `HTTP ${r.status}`); return; }
+    const reader = r.body.getReader();
+    const dec = new TextDecoder();
+    let buf = '';
+    for (;;) {
+      const { value, done } = await reader.read();
+      if (done) break;
+      buf += dec.decode(value, { stream: true });
+      let i;
+      while ((i = buf.indexOf('\n')) >= 0) {
+        const line = buf.slice(0, i); buf = buf.slice(i + 1);
+        if (!line.trim()) continue;
+        const m = JSON.parse(line);
+        if (m.type === 'start') { render(m); status(`pass 1 of ${m.passes}…`); }
+        else if (m.type === 'pass') { m.swaps.forEach((s) => swapRows.push({ pass: m.pass, ...s })); render(m); status(`pass ${m.pass} done · ${m.swaps.length} swaps · ${m.evaluations} evaluations · pass ${m.pass + 1}…`); }
+        else if (m.type === 'done') {
+          const extra = `${stopProofBlock(m.stopProof, m.converged, m.stopped)}
+            <h2>Result list</h2><textarea id="result" rows="12" readonly spellcheck="false">${esc(m.list)}</textarea>
+            <div class="actions"><button id="copy">Copy</button><button id="use">Use as input</button></div>`;
+          $('out').insertAdjacentHTML('beforeend', extra);
+          $('copy').onclick = () => navigator.clipboard.writeText(m.list);
+          $('use').onclick = () => { $('list').value = m.list; status('result copied into the input list'); };
+          status(`${m.converged ? 'converged' : m.stopped ? 'stopped' : 'pass budget spent'} · ${m.swaps.length} swaps · ${m.evaluations} evaluations`);
+        } else if (m.type === 'error') status(m.message);
+      }
+    }
+  } catch (e) {
+    status(e.name === 'AbortError' ? 'stopped' : String(e));
+  } finally {
+    $('climb').disabled = false; $('score').disabled = false; $('stop').disabled = true; abort = null;
+  }
+}
+
+$('score').onclick = score;
+$('climb').onclick = climb;
+$('stop').onclick = () => { if (abort) abort.abort(); };
+$('loadCf').onclick = () => loadSeed('cf');
+$('loadSleeved').onclick = () => loadSeed('sleeved');
+$('openView').onclick = () => window.open(`/deck?run=${$('run').value || 0}&deck=${$('topDeck').value || 0}`, '_blank');
+$('run').onchange = fillTopDecks;
+$('topDeck').onchange = loadTopDeck;
+loadRuns();
+$('source').onchange = loadCommanders;
+$('format').onchange = loadCommanders;
+loadCommanders();
+</script>
+</body>
+</html>

@@ -17,6 +17,7 @@ Theory and coaching live in `reference/`: principles, win conditions, lines and 
 | Oracle text | DB only: `py .claude/skills/deck-building/q.py "select name, mana_cost, type_line, oracle_text from cards where name = '…'"` (set `PYTHONIOENCODING=utf-8`) |
 | Owned pool for a commander | `npx tsx scripts/paper-pool.ts "<commander>" --mark K=list.txt,…` (truncates oracle at 110 chars: rebuild the full text from the DB for agents) |
 | What is sleeved | The operator's word, or the check page below. The registry can be stale. |
+| Strongest deck the collection can build / score + climb any list without AI | `scripts/collection-best-deck.ts` (CLI, sharded) and `scripts/model-lab.ts` (local page, `http://localhost:3210`): Deck Score + goldfish + role windows, swaps need `--epsilon` 0.25 gain. Model output is a candidate, never a verdict: refute dead cards, plan and closers by oracle text. |
 
 ## 1. Workflow
 1. **Resolve and count.** Fix typos, resolve names against the DB (state any guesses), and count to 100 (Commander) or the format size.
@@ -31,6 +32,7 @@ Theory and coaching live in `reference/`: principles, win conditions, lines and 
    - Run `MTG_DB_DIR=… npx tsx scripts/paper-sync.ts` (`--dry` first when registering many cards).
    - Gate again.
 6. **Check page:** `verify-2026-10-02/tam-precons/check-page.ts` → `decks/paper/deck-check.html` + Desktop copy. It shows image tiles by type, tap-to-tick, NEW/OUT rows and a text filter. To change which decks appear, edit only the deck slugs and baselines.
+   **Primer:** every deck on the page gets `decks/paper/primers/<slug>.json` (schema `src/lib/deck-primer.ts`; writer brief `verify-2026-10-07/primers/PRIMER-BRIEF.md`): plan, engine and win-line flows, one reason per swap with verbatim quotes, keepers, mulligan. Gate it with `npx tsx scripts/primer-check.ts <json> --base <list the page diffs against>`, then a fresh Opus refuter (`REFUTE-BRIEF.md` there).
 7. **Close out.**
    - Append a Session Log entry to `CLAUDE.md` and commit by pathspec.
    - Append learnings (§4).

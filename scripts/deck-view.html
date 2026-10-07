@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Deck view — Black Grimoire</title>
+<style>
+  :root { --cyan:#19f0ff; --mag:#ff2bd6; --vio:#8a5cff; --sun:#ffb347; --ink:#e9e4ff; --dim:#8f86b8; --panel:rgba(20,8,48,.72); }
+  * { box-sizing:border-box; }
+  html, body { margin:0; min-height:100%; }
+  body { color:var(--ink); font:14px/1.4 "Segoe UI", system-ui, sans-serif; background:#06031a; position:relative; overflow-x:hidden; }
+  body::before { content:""; position:fixed; inset:0; z-index:-3;
+    background: radial-gradient(ellipse 120% 70% at 50% -10%, #3a0b6e 0%, #15063a 45%, #06031a 75%); }
+  /* vaporwave sun */
+  .sun { position:fixed; left:50%; top:-120px; width:520px; height:520px; margin-left:-260px; border-radius:50%; z-index:-2;
+    background: linear-gradient(180deg, var(--sun) 0%, var(--mag) 55%, var(--vio) 100%);
+    -webkit-mask: repeating-linear-gradient(180deg, #000 0 26px, transparent 26px 34px); mask: repeating-linear-gradient(180deg, #000 0 26px, transparent 26px 34px);
+    opacity:.55; filter: blur(.4px); }
+  /* perspective grid floor */
+  .grid { position:fixed; left:-50%; right:-50%; bottom:-10vh; height:55vh; z-index:-1; pointer-events:none;
+    background-image: linear-gradient(rgba(255,43,214,.45) 1px, transparent 1px), linear-gradient(90deg, rgba(25,240,255,.45) 1px, transparent 1px);
+    background-size: 64px 64px; transform: perspective(520px) rotateX(62deg); transform-origin: 50% 0;
+    -webkit-mask: linear-gradient(180deg, transparent 0%, #000 25%, #000 100%); mask: linear-gradient(180deg, transparent 0%, #000 25%, #000 100%);
+    animation: scroll 9s linear infinite; }
+  @keyframes scroll { from { background-position: 0 0, 0 0; } to { background-position: 0 64px, 0 0; } }
+  /* scanlines */
+  .scan { position:fixed; inset:0; z-index:5; pointer-events:none; opacity:.35;
+    background: repeating-linear-gradient(180deg, rgba(0,0,0,.28) 0 2px, transparent 2px 4px); }
+  header { padding:22px 28px 10px; display:flex; flex-wrap:wrap; gap:18px 36px; align-items:flex-end; }
+  h1 { margin:0; font-size:34px; letter-spacing:.14em; text-transform:uppercase; font-weight:700;
+    color:#fff; text-shadow: 0 0 10px var(--cyan), 0 0 26px var(--cyan), 3px 0 0 rgba(255,43,214,.75), -3px 0 0 rgba(25,240,255,.75); }
+  h1 small { display:block; font-size:12px; letter-spacing:.32em; color:var(--cyan); text-shadow:0 0 8px var(--cyan); margin-bottom:6px; }
+  .hud { display:flex; gap:22px; flex-wrap:wrap; align-items:flex-end; }
+  .stat { min-width:92px; }
+  .stat b { display:block; font-size:28px; line-height:1; color:#fff; text-shadow:0 0 12px var(--mag), 0 0 28px var(--mag); font-variant-numeric:tabular-nums; }
+  .stat span { font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--dim); }
+  .pick { margin-left:auto; display:flex; gap:8px; flex-wrap:wrap; }
+  select { font:inherit; color:var(--ink); background:rgba(10,4,30,.85); border:1px solid rgba(25,240,255,.45); border-radius:4px; padding:6px 8px; box-shadow:0 0 10px rgba(25,240,255,.25); max-width:46vw; }
+  .roles { padding:4px 28px 14px; display:flex; gap:14px; flex-wrap:wrap; }
+  .gauge { width:150px; }
+  .gauge label { display:flex; justify-content:space-between; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--dim); }
+  .gauge .bar { height:7px; border-radius:4px; background:rgba(255,255,255,.08); position:relative; overflow:hidden; margin-top:3px; border:1px solid rgba(255,255,255,.12); }
+  .gauge .win { position:absolute; top:0; bottom:0; background:rgba(25,240,255,.18); }
+  .gauge .fill { position:absolute; top:0; bottom:0; left:0; background:linear-gradient(90deg, var(--cyan), var(--vio)); box-shadow:0 0 10px var(--cyan); }
+  .gauge.out .fill { background:linear-gradient(90deg, var(--mag), var(--sun)); box-shadow:0 0 10px var(--mag); }
+  main { padding:0 28px 60px; position:relative; z-index:1; }
+  h2 { font-size:13px; letter-spacing:.3em; text-transform:uppercase; color:var(--cyan); text-shadow:0 0 8px var(--cyan); margin:26px 0 10px; display:flex; align-items:center; gap:12px; }
+  h2::after { content:""; flex:1; height:1px; background:linear-gradient(90deg, var(--cyan), transparent); opacity:.6; }
+  h2 em { font-style:normal; color:var(--mag); text-shadow:0 0 8px var(--mag); }
+  .tiles { display:grid; grid-template-columns:repeat(auto-fill, minmax(150px, 1fr)); gap:14px; }
+  .tile { position:relative; border-radius:9px; background:var(--panel); border:1px solid rgba(25,240,255,.35); padding:6px; transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease; }
+  .tile:hover { transform:translateY(-6px) scale(1.03); border-color:var(--mag); box-shadow:0 0 16px rgba(255,43,214,.55), 0 0 36px rgba(25,240,255,.35); z-index:2; }
+  .tile img { width:100%; aspect-ratio:488/680; object-fit:cover; border-radius:6px; display:block; background:#120838; }
+  .tile .name { font-size:12px; margin-top:6px; line-height:1.25; min-height:2.5em; }
+  .tile .qty { position:absolute; top:10px; left:10px; background:var(--mag); color:#fff; font-weight:700; font-size:12px; padding:1px 7px; border-radius:10px; box-shadow:0 0 10px var(--mag); }
+  .chips { display:flex; flex-wrap:wrap; gap:3px; margin-top:4px; }
+  .chips span { font-size:9.5px; letter-spacing:.08em; text-transform:uppercase; padding:1px 5px; border-radius:3px; border:1px solid rgba(25,240,255,.45); color:var(--cyan); }
+  .chips span.k { border-color:rgba(255,43,214,.55); color:var(--mag); }
+  .basics { display:flex; gap:14px; flex-wrap:wrap; }
+  .basics .tile { width:150px; }
+  #zoom { position:fixed; z-index:9; pointer-events:none; display:none; width:300px; border-radius:12px; box-shadow:0 0 30px rgba(255,43,214,.7), 0 0 60px rgba(25,240,255,.4); }
+  .muted { color:var(--dim); }
+  .toast { padding:12px 28px; color:var(--mag); }
+</style>
+</head>
+<body>
+<div class="sun"></div><div class="grid"></div><div class="scan"></div>
+<img id="zoom" alt="">
+<header>
+  <h1><small>Black Grimoire · deck view</small><span id="title">—</span></h1>
+  <div class="hud" id="hud"></div>
+  <div class="pick">
+    <select id="run"></select>
+    <select id="deck"></select>
+  </div>
+</header>
+<div class="roles" id="roles"></div>
+<main id="main"><div class="toast">loading…</div></main>
+
+<script>
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const pct = (x) => `${Math.round(x * 100)}%`;
+const ROLE_LABEL = { land: 'Lands', ramp: 'Ramp', draw: 'Draw', removal: 'Removal', board_wipe: 'Wipes', protection: 'Protect' };
+const SECTIONS = [
+  ['Creatures', /\bCreature\b/], ['Planeswalkers', /\bPlaneswalker\b/], ['Instants', /\bInstant\b/], ['Sorceries', /\bSorcery\b/],
+  ['Artifacts', /\bArtifact\b/], ['Enchantments', /\bEnchantment\b/], ['Battles & other', /./],
+];
+const BASIC = /^(Snow-Covered )?(Plains|Island|Swamp|Mountain|Forest|Wastes)$/;
+let runs = [];
+const q = new URLSearchParams(location.search);
+
+function tile(c) {
+  const roles = (c.roles || []).filter((r) => r !== 'land' && r !== 'utility');
+  return `<div class="tile" data-large="${esc(c.imageLarge || c.image || '')}">
+    ${c.qty > 1 ? `<span class="qty">×${c.qty}</span>` : ''}
+    <img loading="lazy" src="${esc(c.image || '')}" alt="${esc(c.name)}" title="${esc(c.type)}">
+    <div class="name">${esc(c.name)}</div>
+    <div class="chips">${roles.map((r) => `<span class="${r === 'removal' || r === 'board_wipe' ? 'k' : ''}">${esc(r.replace('_', ' '))}</span>`).join('')}</div>
+  </div>`;
+}
+function section(title, cards) {
+  if (!cards.length) return '';
+  return `<h2>${esc(title)} <em>${cards.reduce((s, c) => s + c.qty, 0)}</em></h2><div class="tiles">${cards.map(tile).join('')}</div>`;
+}
+function render(d) {
+  $('title').textContent = d.commander.name;
+  const g = d.goldfish;
+  $('hud').innerHTML = [
+    [d.objective.toFixed(1), 'objective'], [d.model ? d.model.score : '—', 'deck score'], [`${d.power.powerLevel}`, `power · B${d.power.bracket}`],
+    [pct(g.keep7), 'keep 7'], [pct(g.landsT4), '4 lands T4'], [g.tempo.toFixed(2), 'tempo'], [`${d.lands}`, 'lands'],
+  ].map(([v, k]) => `<div class="stat"><b>${esc(v)}</b><span>${esc(k)}</span></div>`).join('');
+  $('roles').innerHTML = Object.entries(d.windows).map(([k, w]) => {
+    const n = d.roles[k] ?? 0, max = Math.max(w.max * 1.4, n + 1);
+    const out = n < w.min || n > w.max;
+    return `<div class="gauge ${out ? 'out' : ''}"><label><span>${esc(ROLE_LABEL[k] || k)}</span><span>${n} <span class="muted">/ ${w.min}–${w.max}</span></span></label>
+      <div class="bar"><div class="win" style="left:${(w.min / max) * 100}%;width:${((w.max - w.min) / max) * 100}%"></div><div class="fill" style="width:${Math.min(100, (n / max) * 100)}%"></div></div></div>`;
+  }).join('');
+  const nonland = d.cards.filter((c) => !/\bLand\b/.test(c.type.split(' // ')[0]));
+  const lands = d.cards.filter((c) => /\bLand\b/.test(c.type.split(' // ')[0]));
+  const used = new Set();
+  const groups = SECTIONS.map(([title, re]) => {
+    const hit = nonland.filter((c) => !used.has(c.name) && re.test(c.type.split(' // ')[0]));
+    hit.forEach((c) => used.add(c.name));
+    return [title, hit.sort((a, b) => a.cmc - b.cmc || a.name.localeCompare(b.name))];
+  });
+  const basics = lands.filter((c) => BASIC.test(c.name));
+  const nonbasics = lands.filter((c) => !BASIC.test(c.name)).sort((a, b) => a.name.localeCompare(b.name));
+  $('main').innerHTML = `
+    <h2>Commander</h2><div class="tiles" style="grid-template-columns:150px">${tile(d.commander)}</div>
+    ${groups.map(([t, cs]) => section(t, cs)).join('')}
+    ${section('Lands', nonbasics)}
+    ${basics.length ? `<h2>Basics <em>${basics.reduce((s, c) => s + c.qty, 0)}</em></h2><div class="basics">${basics.map(tile).join('')}</div>` : ''}
+    ${d.missing && d.missing.length ? `<div class="toast">${d.missing.length} cards not in the owned pool: ${esc(d.missing.join(', '))}</div>` : ''}`;
+}
+
+async function show() {
+  const r = runs[+$('run').value]; const d = r && r.decks[+$('deck').value];
+  if (!d) return;
+  history.replaceState(null, '', `?run=${$('run').value}&deck=${$('deck').value}`);
+  $('main').innerHTML = '<div class="toast">scoring…</div>';
+  const res = await fetch('/api/score', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ source: 'paper', format: 'commander', commander: d.commander, list: d.list, weights: { games: 200 } }) });
+  const data = await res.json();
+  if (data.error) { $('main').innerHTML = `<div class="toast">${esc(data.error)}</div>`; return; }
+  render(data);
+}
+function fillDecks() {
+  const r = runs[+$('run').value];
+  $('deck').innerHTML = r ? r.decks.map((d, i) => `<option value="${i}">${i + 1}. ${esc(d.commander)} · ${d.objective.toFixed(1)}${d.converged ? ' ✓' : ''}</option>`).join('') : '';
+}
+(async () => {
+  runs = await (await fetch('/api/runs')).json();
+  $('run').innerHTML = runs.map((r, i) => `<option value="${i}">${esc(r.dir.replace(/^verify-/, '').replace('/best-deck/', ' · '))}</option>`).join('');
+  $('run').value = Math.min(+(q.get('run') || 0), Math.max(0, runs.length - 1));
+  fillDecks();
+  $('deck').value = q.get('deck') || 0;
+  if (!$('deck').value) $('deck').value = 0;
+  $('run').onchange = () => { fillDecks(); show(); };
+  $('deck').onchange = show;
+  show();
+})();
+document.addEventListener('mouseover', (e) => {
+  const t = e.target.closest('.tile'); const z = $('zoom');
+  if (!t || !t.dataset.large) { z.style.display = 'none'; return; }
+  z.src = t.dataset.large; z.style.display = 'block';
+});
+document.addEventListener('mousemove', (e) => {
+  const z = $('zoom'); if (z.style.display === 'none') return;
+  const x = e.clientX + 24 + 300 > innerWidth ? e.clientX - 324 : e.clientX + 24;
+  const y = Math.min(innerHeight - 430, Math.max(8, e.clientY - 200));
+  z.style.left = `${x}px`; z.style.top = `${y}px`;
+});
+</script>
+</body>
+</html>
