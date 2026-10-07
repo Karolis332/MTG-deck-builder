@@ -372,3 +372,9 @@ Appended by `npx tsx scripts/paper-sync.ts`. Full diffs: `git log -p decks/paper
 ## 2026-10-06
 - **Gilanra, Caller of Wirewood** v1, 100 cards
 - **Collection** 1858 owned, 1136 open
+
+## 2026-10-07
+- **Collection** 1859 owned, 1137 open
+
+## 2026-10-07
+- **Collection** 1925 owned, 1203 open
