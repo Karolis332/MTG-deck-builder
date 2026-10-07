@@ -1,0 +1,67 @@
+file      : verify-2026-10-08/best-deck/beledros-recommended.txt
+format    : commander   commander: Beledros Witherbloom
+totals    : 100 cards | 35 lands (35.4 eff.) | 64 nonland | avg MV 3.16
+curve     : 1:7 2:17 3:20 4:5 5:9 6:6
+VERDICT   : FAIL
+
+  PASS  size        100 cards (commander wants 100)
+  PASS  singleton   singleton respected (basics exempt)
+  PASS  legality    every card legal in commander
+  PASS  rules       no other format rule broken
+  PASS  identity    all cards inside BG
+  PASS  ownership   all cards owned; paper collection imported 0 days ago
+  FAIL  arenaNames  2 line(s) use "Front // Back" — Arena answers "unknown card title". Use:
+        - 1 Eccentric Pestfinder
+        - 1 Revitalizing Repast
+  WARN  lands       35 lands (+1 MDFC land backs = 35.4 effective); Karsten wants 38 ±2
+  FAIL  plan        17/64 nonland cards interact (27%) — commander wants: creates tokens, gains life
+        - Elvish Mystic (MV 1)
+        - Pest Infestation (MV 1)
+        - Sol Ring (MV 1)
+        - Tyvar's Stand (MV 1)
+        - Veil of Summer (MV 1)
+        - Viscera Seer (MV 1)
+        - Arcane Signet (MV 2)
+        - Assassin's Trophy (MV 2)
+        - Blood Artist (MV 2)
+        - Imp's Mischief (MV 2)
+        - Infernal Grasp (MV 2)
+        - Lightning Greaves (MV 2)
+        - Paradise Druid (MV 2)
+        - Plumb the Forbidden (MV 2)
+        - Priest of Forgotten Gods (MV 2)
+        - Sakura-Tribe Elder (MV 2)
+        - Talisman of Resilience (MV 2)
+        - Three Visits (MV 2)
+        - Warg Tactics (MV 2)
+        - Zulaport Cutthroat (MV 2)
+        - Ashnod's Altar (MV 3)
+        - Beast Within (MV 3)
+        - Braids, Arisen Nightmare (MV 3)
+        - Cauldron of Essence (MV 3)
+        - Cultivate (MV 3)
+        - Eternal Witness (MV 3)
+        - Guardian Augmenter (MV 3)
+        - Kodama's Reach (MV 3)
+        - Midnight Reaper (MV 3)
+        - Morbid Opportunist (MV 3)
+        - Phyrexian Arena (MV 3)
+        - Skorpekh Lord (MV 3)
+        - Toxic Deluge (MV 3)
+        - Binding the Old Gods (MV 4)
+        - Mirkwood Bats (MV 4)
+        - Mortality Spear (MV 4)
+        - Alhammarret's Archive (MV 5)
+        - Argentum Masticore (MV 5)
+        - Blossoming Bogbeast (MV 5)
+        - Gray Merchant of Asphodel (MV 5)
+        - Moldervine Reclamation (MV 5)
+        - Witch of the Moors (MV 5)
+        - Casualties of War (MV 6)
+        - Deadly Tempest (MV 6)
+        - Massacre Wurm (MV 6)
+        - Mikaeus, the Unhallowed (MV 6)
+        - Thunderfoot Baloth (MV 6)
+  PASS  curve       avg MV 3.16; commander sets no cost threshold
+  PASS  wincons     14 win condition(s)/closer(s)
+  PASS  locks       1 locked card(s) present and intact
