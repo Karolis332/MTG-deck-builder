@@ -128,5 +128,95 @@
         "1 Theorix Annex"
       ]
     }
+  ],
+  "Esika Superfriends": [
+    {
+      "v": 1,
+      "date": "2026-10-02",
+      "file": "decks/arena/esika-superfriends-v1.txt",
+      "note": "quick list from Tam Superfriends v3: Esika commander, Tam in the 99, 5 Bridge-hit swaps",
+      "added": [],
+      "removed": []
+    },
+    {
+      "v": 2,
+      "date": "2026-10-02",
+      "file": "decks/arena/esika-superfriends-v2.txt",
+      "note": "fixed-point build (verify-2026-10-02/esika/build-report.md): 15 swaps, 36 lands + 2 MDFC",
+      "added": [
+        "1 The One Ring",
+        "1 Farseek",
+        "1 Mortality Spear",
+        "1 Archon of Sun's Grace",
+        "1 Beast Within",
+        "1 Overlord of the Hauntwoods",
+        "1 Fell the Profane",
+        "1 Savai Triome",
+        "1 Enduring Vitality",
+        "1 Garruk, Veiled Butcher",
+        "1 Craterhoof Behemoth",
+        "1 Ob Nixilis, the Hate-Twisted",
+        "1 Elesh Norn, Grand Cenobite",
+        "1 Terror of the Peaks",
+        "1 Forest"
+      ],
+      "removed": [
+        "1 Way of the Wildspeaker",
+        "1 Way of the Mind Sculptor",
+        "1 Way of the Necromancer",
+        "1 Tekuthal, Inquiry Dominus",
+        "1 Counterspell",
+        "1 Enlightened Tutor",
+        "1 Mox Amber",
+        "1 Bloom Tender",
+        "1 Timeless Lotus",
+        "1 Jegantha, the Wellspring",
+        "1 Saheeli, Sublime Artificer",
+        "1 Tezzeret, Cruel Captain",
+        "1 Teyo, the Shieldmage",
+        "1 Dovin, Hand of Control",
+        "1 Theorist's Sanctum"
+      ]
+    },
+    {
+      "v": 3,
+      "date": "2026-10-02",
+      "file": "decks/arena/esika-superfriends-v3.txt",
+      "note": "round 2 converged (24 swaps vs quick-v1, refuted 9/9 KEEP: verify-2026-10-02/esika/REFUTE-2.md); Bridge by T6 53.2/61.9% play/draw",
+      "added": [
+        "1 Twinflame Tyrant",
+        "1 Purphoros, God of the Forge",
+        "1 A-The One Ring",
+        "1 Aurora Awakener",
+        "1 Doc Samson, Super Psychiatrist",
+        "1 Starfield Vocalist",
+        "1 Bre of Clan Stoutarm",
+        "1 Enduring Tenacity",
+        "1 Great Divide Guide",
+        "1 Ajani, Outland Chaperone"
+      ],
+      "removed": [
+        "1 Way of the Healer",
+        "1 Way of the Warlord",
+        "1 The One Ring",
+        "1 Archon of Sun's Grace",
+        "1 Flux Channeler",
+        "1 Marauding Blight-Priest",
+        "1 Phyrexian Arena",
+        "1 Pia, Aether Ascetic",
+        "1 Vraska, Soul of Stone",
+        "1 Narset, Parter of Veils"
+      ]
+    }
+  ],
+  "Krenko Goblins": [
+    {
+      "v": 1,
+      "date": "2026-10-07",
+      "file": "decks/arena/krenko-goblins-v1.txt",
+      "note": "Model's 2026-10-08 Krenko list: 11 filler swaps reverted, 17 colourless/off-colour lands to Mountains",
+      "added": [],
+      "removed": []
+    }
   ]
 }
