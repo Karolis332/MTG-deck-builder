@@ -127,7 +127,6 @@
 1 Buried Ruin
 1 Burning Curiosity
 1 Burnished Hart
-1 Bushwhack
 1 Butcher of Malakir
 1 Calamity, Galloping Inferno
 1 Callous Inspector
@@ -171,9 +170,8 @@
 1 Coercive Impetus
 1 Colossal Rattlewurm
 1 Combat Calligrapher
-1 Command Tower
 1 Commandeer
-2 Commander's Sphere
+1 Commander's Sphere
 1 Concerted Defense
 2 Conduit Pylons
 1 Consider
@@ -192,7 +190,6 @@
 1 Creosote Heath
 1 Cruel Calculations
 1 Cryogen Relic
-1 Crystalline Armor
 1 Crystalline Crawler
 1 Cultivate
 2 Curse of the Swine
@@ -262,7 +259,6 @@
 1 Duelist of the Mind
 1 Duke Ulder Ravengard
 1 Dusk Urchins
-1 Earthbender Ascension
 1 Earthshaker Dreadmaw
 1 Eccentric Pestfinder
 1 Echoing Truth
@@ -314,7 +310,6 @@
 2 Expedition Map
 1 Experimental Augury
 1 Experimental Aviator
-1 Explore
 1 Explorer's Scope
 2 Explosive Derailment
 1 Extraordinary Journey
@@ -322,7 +317,6 @@
 1 Ezzaroot Channeler
 1 Fabled Passage
 1 Fallen Ideal
-1 Farseek
 1 Fatehold Charm
 1 Fblthp, Impossibly Lost
 1 Fblthp, Knows the Way
@@ -370,7 +364,6 @@
 1 Fracture
 1 Frantic Search
 1 Freestrider Lookout
-1 Frog Butler
 1 Full Bore
 1 Fumigate
 1 Gandalf the White
@@ -462,7 +455,6 @@
 1 Huatli, Poet of Unity
 1 Humiliate
 1 Hungry Ghoul
-1 Hunter's Insight
 1 Hydra Broodmaster
 1 Hydro-Man, Fluid Felon
 1 Hydroelectric Specimen
@@ -542,6 +534,7 @@
 1 Leyline Prowler
 1 Library of Leng
 2 Lifeblood Hydra
+1 Lifecrafter's Bestiary
 1 Lilah, Undefeated Slickshot
 1 Liliana, Death Wielder
 1 Lion Umbra
@@ -622,7 +615,6 @@
 1 Nadaar, Selfless Paladin
 1 Nahiri, Storm of Stone
 1 Naktamun Lorespinner
-1 Nature's Lore
 1 Necron Monolith
 1 Necroskitter
 1 Necrotic Ooze
@@ -787,9 +779,7 @@
 2 Riveteers Overlook
 1 Rocky Rebuke
 1 Rodeo Pyromancers
-1 Roiling Regrowth
 1 Roxanne, Starfall Savant
-1 Rumble Arena
 1 Rush of Dread
 2 Rustler Rampage
 1 Ruthless Lawbringer
@@ -815,7 +805,7 @@
 1 Sarkhan, the Dragonspeaker
 1 Satyr Wayfinder
 1 Sautekh Immortal
-2 Savage Smash
+1 Savage Smash
 1 Scour for Scrap
 1 Scourge of the Skyclaves
 1 Screams from Within
@@ -830,7 +820,6 @@
 1 Seer's Sundial
 1 Sefris of the Hidden Ways
 1 Seize the Secrets
-1 Seize the Spoils
 1 Selesnya Charm
 1 Selvala, Heart of the Wilds
 1 Sentinel's Eyes
@@ -843,7 +832,6 @@
 1 Shadrix Silverquill
 1 Shard of the Nightbringer
 1 Shard of the Void Dragon
-1 Shared Roots
 1 Shatter the Sky
 1 Sheltered by Ghosts
 1 Sheltered Thicket
@@ -884,7 +872,6 @@
 1 Slimefoot, the Stowaway
 1 Smoldering Marsh
 1 Smothering Abomination
-1 Sol Ring
 1 Solar Array
 1 Solarium Sentry
 1 Solemn Doomguide
@@ -940,7 +927,6 @@
 1 Syncopate
 1 Syphon Mind
 1 Tablet of Compleation
-1 Tablet of Discovery
 1 Take for a Ride
 1 Take the Fall
 1 Take Up the Shield
@@ -1132,7 +1118,6 @@
 2 Yavimaya Bloomsage
 1 Yavimaya Coast
 1 Yavimaya, Cradle of Growth
-1 Yedora, Grave Gardener
 1 Yoshimaru, Beloved Companion
 1 You Find a Cursed Idol
 1 You Find the Villains' Lair
