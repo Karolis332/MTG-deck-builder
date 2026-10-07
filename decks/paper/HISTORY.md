@@ -378,3 +378,7 @@ Appended by `npx tsx scripts/paper-sync.ts`. Full diffs: `git log -p decks/paper
 
 ## 2026-10-07
 - **Collection** 1925 owned, 1203 open
+
+## 2026-10-07
+- **Omo, Queen of Vesuva** v1, 99 cards
+- **Collection** 1954 owned, 1136 open

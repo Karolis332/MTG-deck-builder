@@ -51,7 +51,7 @@
 1 Arcane Amphisbaena
 1 Arcane Denial
 1 Arcane Lighthouse
-7 Arcane Signet
+8 Arcane Signet
 1 Archaeomancer
 1 Archangel of Tithes
 1 Archdruid's Charm
@@ -109,7 +109,7 @@
 1 Basilisk Gate
 1 Basking Broodscale
 1 Battlefield Forge
-1 Beast Within
+2 Beast Within
 1 Bedevil
 1 Beifong's Bounty Hunters
 1 Beledros Witherbloom
@@ -225,7 +225,7 @@
 1 Chimil, the Inner Sun
 1 Chomping Changeling
 1 Chord of Calling
-1 Chromatic Lantern
+2 Chromatic Lantern
 1 Chrome Host Seedshark
 1 Chronomancer
 1 Chthonian Nightmare
@@ -243,7 +243,7 @@
 1 Colossal Rattlewurm
 1 Combat Calligrapher
 1 Combustible Gearhulk
-5 Command Tower
+6 Command Tower
 1 Commandeer
 2 Commander's Sphere
 1 Concealed Courtyard
@@ -277,7 +277,7 @@
 1 Culling Ritual
 1 Culling the Weak
 2 Cultivate
-1 Curse of the Swine
+2 Curse of the Swine
 1 Cyberdrive Awakener
 1 Cycle of Renewal
 1 Cyclonic Rift
@@ -422,7 +422,7 @@
 1 Etched Oracle
 2 Eternal Witness
 1 Etherium Sculptor
-1 Eureka Moment
+2 Eureka Moment
 1 Eusocial Engineering
 1 Evacuation
 1 Eventide's Shadow
@@ -435,7 +435,7 @@
 1 Exclude
 5 Exotic Orchard
 1 Expansion Algorithm
-1 Expedition Map
+2 Expedition Map
 1 Experimental Augury
 1 Experimental Aviator
 1 Explore
@@ -472,7 +472,7 @@
 1 Filigree Attendant
 1 Final Act
 1 Final Showdown
-1 Finale of Revelation
+2 Finale of Revelation
 1 Firdoch Core
 1 Fire
 1 Fire Covenant
@@ -488,7 +488,7 @@
 1 Flickering Ward
 1 Flight
 1 Fling
-1 Flooded Grove
+2 Flooded Grove
 1 Floriferous Vinewall
 1 Flourishing Defenses
 1 Flux Channeler
@@ -497,7 +497,7 @@
 1 Fog Bank
 1 Font of Agonies
 1 Force of Vigor
-53 Forest
+56 Forest
 2 Forgotten Ancient
 1 Forlorn Flats
 1 Formidable Commons
@@ -579,7 +579,7 @@
 1 Grim Poppet
 1 Grim Servant
 1 Grist, Voracious Larva
-1 Growth Spiral
+2 Growth Spiral
 1 Gruul Charm
 1 Gruul Locket
 1 Gruul Ragebeast
@@ -597,7 +597,7 @@
 1 Hapatra, Vizier of Poisons
 2 Hardbristle Bandit
 1 Hardened Scales
-1 Harmonize
+2 Harmonize
 1 Harmonized Crescendo
 1 Harmonized Trio
 1 Harper Recruiter
@@ -647,7 +647,7 @@
 1 Hydra Broodmaster
 1 Hydro-Man, Fluid Felon
 1 Hydroelectric Specimen
-1 Hydroid Krasis
+2 Hydroid Krasis
 1 Hypothesizzle
 1 Identity Echo
 1 Idol of False Gods
@@ -688,7 +688,7 @@
 1 Ionize
 1 Iron Spider, Stark Upgrade
 1 Irrigated Farmland
-11 Island
+12 Island
 2 Isolated Chapel
 1 Izoni, Thousand-Eyed
 1 Jace, Memory Adept
@@ -790,7 +790,7 @@
 1 Loyal Tutor
 1 Lumbering Falls
 1 Lumra, Bellow of the Woods
-1 Lush Oasis
+2 Lush Oasis
 1 Lux Artillery
 1 Lux Cannon
 1 Luxurious Locomotive
@@ -798,7 +798,7 @@
 1 Maestros Theater
 1 Magda, the Hoardmaster
 1 Magebane Lizard
-1 Magus of the Candelabra
+2 Magus of the Candelabra
 1 Malcolm, the Eyes
 1 Malevolent Rumble
 1 Mana Bloom
@@ -953,7 +953,7 @@
 1 Outcaster Trailblazer
 1 Outlaws' Merriment
 1 Outrageous Robbery
-1 Overflowing Basin
+2 Overflowing Basin
 1 Overgrown Farmland
 1 Overgrown Tomb
 1 Overrun
@@ -1051,7 +1051,7 @@
 1 Pyrewood Gearhulk
 1 Qarsi Revenant
 1 Quandrix Apprentice
-1 Quandrix Campus
+2 Quandrix Campus
 1 Quandrix Charm
 1 Quandrix Command
 1 Quick Study
@@ -1065,10 +1065,10 @@
 1 Rakish Crew
 1 Ral Zarek
 1 Ramos, Dragon Engine
-1 Rampaging Baloths
+2 Rampaging Baloths
 1 Rampant Frogantua
 1 Rampant Growth
-1 Ramunap Excavator
+2 Ramunap Excavator
 1 Rankle, Master of Pranks
 1 Rapid Hybridization
 1 Rapturous Moment
@@ -1249,7 +1249,7 @@
 1 Smothering Abomination
 1 Snakeskin Veil
 1 Sodden Verdure
-6 Sol Ring
+7 Sol Ring
 1 Solar Array
 1 Solarium Sentry
 1 Solemn Doomguide
@@ -1375,7 +1375,7 @@
 1 Temple of Enlightenment
 1 Temple of Epiphany
 1 Temple of Malady
-1 Temple of Mystery
+2 Temple of Mystery
 1 Temple of Silence
 2 Temple of the False God
 1 Temple of Triumph
@@ -1490,7 +1490,7 @@
 1 Tyrant's Scorn
 1 Tyvar's Stand
 1 Uldaros Theorix
-1 Ulvenwald Hydra
+2 Ulvenwald Hydra
 1 Ulvenwald Observer
 2 Umbral Collar Zealot
 2 Umbral Expanse
@@ -1507,8 +1507,8 @@
 1 Unsettled Mariner
 1 Unstoppable Plan
 1 Unsummon
-1 Urban Evolution
-1 Uro, Titan of Nature's Wrath
+2 Urban Evolution
+2 Uro, Titan of Nature's Wrath
 1 Urza, Lord High Artificer
 1 Urza's Mine
 1 Urza's Power Plant
@@ -1546,7 +1546,7 @@
 1 Village Pillagers
 1 Village Rites
 1 Vindictive Triumph
-1 Vineglimmer Snarl
+2 Vineglimmer Snarl
 1 Violent Echoes
 1 Viridescent Bog
 2 Visage Bandit
@@ -1619,7 +1619,7 @@
 1 Wrecking Ball Arm
 1 Yahenni, Undying Partisan
 2 Yavimaya Bloomsage
-1 Yavimaya Coast
+2 Yavimaya Coast
 1 Yavimaya, Cradle of Growth
 1 Yedora, Grave Gardener
 1 Yoshimaru, Beloved Companion

@@ -4,11 +4,9 @@
 1 Abundant Growth
 1 Academic Ascent
 1 Acererak the Archlich
-1 Acidic Slime
 1 Adaptive Automaton
 1 Adept Watershaper
 1 Ageless Entity
-1 Aggressive Biomancy
 1 Agna Qel'a
 1 Airbender Ascension
 1 Ajani's Chosen
@@ -32,11 +30,9 @@
 1 Ankle Biter
 1 Annie Joins Up
 1 Another Round
-1 Apex Devastator
 1 April O'Neil, Hacktivist
 1 April, Reporter of the Weird
 1 Arcane Amphisbaena
-1 Arcane Denial
 1 Arcane Lighthouse
 1 Arcane Signet
 1 Archaeomancer
@@ -60,7 +56,6 @@
 1 Avacyn's Pilgrim
 1 Avatar Kyoshi, Earthbender
 1 Aven Interrupter
-1 Avenger of Zendikar
 1 Awakened Awareness
 1 Azorius Locket
 1 Azula, Ruthless Firebender
@@ -79,7 +74,6 @@
 1 Baron Bertram Graywater
 1 Baron Helmut Zemo
 1 Basilisk Collar
-1 Basilisk Gate
 1 Beast Within
 1 Bedevil
 1 Beifong's Bounty Hunters
@@ -93,7 +87,6 @@
 1 Bismuth Mindrender
 1 Bitterthorn, Nissa's Animus
 1 Black Sun's Zenith
-1 Blast Zone
 1 Blight Mound
 1 Blighted Woodland
 1 Blisterpod
@@ -164,7 +157,6 @@
 1 Clear Shot
 1 Cloud Key
 1 Cloudkill
-1 Cloudpost
 1 Cloudshift
 1 Coastal Piracy
 1 Coercive Impetus
@@ -179,7 +171,6 @@
 2 Consuming Corruption
 1 Contagion Clasp
 1 Contentious Plan
-1 Copy Land
 1 Coretapper
 1 Corpse Augur
 1 Corpse Churn
@@ -199,7 +190,6 @@
 3 Dance of the Tumbleweeds
 1 Daretti, Scrap Savant
 1 Darigaaz's Charm
-1 Dark Depths
 1 Darksteel Colossus
 1 Darksteel Mutation
 1 Darksteel Reactor
@@ -226,9 +216,6 @@
 1 Descendants' Fury
 1 Desculpting Blast
 1 Desecration Demon
-1 Desert of the Indomitable
-1 Desert of the Mindful
-1 Desert Warfare
 1 Desolate Mire
 1 Devoted Druid
 1 Devourer of Destiny
@@ -253,10 +240,7 @@
 1 Dread Summons
 1 Dread Tiller
 1 Dreadhorde Invasion
-1 Dreamroot Cascade
-1 Drown in Dreams
 1 Druidic Satchel
-1 Dryad of the Ilysian Grove
 1 Duelist of the Mind
 1 Duke Ulder Ravengard
 1 Dusk Urchins
@@ -277,7 +261,6 @@
 1 Elixir of Immortality
 1 Elusive Otter
 1 Elvish Archdruid
-1 Elvish Rejuvenator
 1 Elvish Spirit Guide
 1 Ember Island Production
 1 Embrace the Unknown
@@ -300,7 +283,6 @@
 1 Etched Oracle
 1 Eureka Moment
 1 Eusocial Engineering
-1 Evacuation
 1 Eventide's Shadow
 1 Everlasting Torment
 1 Everything Comes to Dust
@@ -351,10 +333,8 @@
 1 Flickering Ward
 1 Flight
 1 Flooded Grove
-1 Floriferous Vinewall
 1 Flourishing Defenses
 1 Fog
-1 Fog Bank
 1 Font of Agonies
 2 Forgotten Ancient
 1 Forlorn Flats
@@ -392,7 +372,6 @@
 1 Gigantosaurus
 1 Glaring Fleshraker
 1 Gleaming Barrier
-1 Glimmerpost
 1 Glissa Sunslayer
 1 Glittering Massif
 1 Gluttonous Troll
@@ -427,7 +406,6 @@
 1 Harmonized Crescendo
 1 Harmonized Trio
 1 Harvest Season
-1 Hashep Oasis
 1 Hateful Eidolon
 1 Haunted Mire
 1 Haunting Voyage
@@ -441,9 +419,7 @@
 1 Hexhaven Battalion
 1 Hexhaven Invigorator
 1 Hexmark Destroyer
-1 Hidden Cataract
 1 Hidden Grotto
-1 Hidden Nursery
 1 High-Society Hunter
 1 Highway Robbery
 2 Hindering Light
@@ -452,16 +428,13 @@
 1 Hollow Marauder
 1 Honest Rutstein
 1 Honor Troll
-1 Horizon of Progress
 1 Hornet Nest
 2 Hostile Investigator
-1 Hour of Promise
 1 Hour of Reckoning
 1 Huatli, Poet of Unity
 1 Humiliate
 1 Hungry Ghoul
 1 Hunter's Insight
-1 Hydra Broodmaster
 1 Hydro-Man, Fluid Felon
 1 Hydroelectric Specimen
 1 Hydroid Krasis
@@ -505,7 +478,6 @@
 1 Joo Dee, One of Many
 1 Journey to Nowhere
 1 Jungle Hollow
-1 Jyoti, Moag Ancient
 1 Kagha, Shadow Archdruid
 1 Kamahl's Druidic Vow
 1 Kami of Whispered Hopes
@@ -532,10 +504,8 @@
 1 Kraum, Violent Cacophony
 1 Krydle of Baldur's Gate
 1 Kulrath Knight
-1 Lair of the Hydra
 1 Lattice Library
 1 Lavaspur Boots
-1 Lazotep Quarry
 1 Lembas
 1 Leyline Prowler
 1 Library of Leng
@@ -553,7 +523,6 @@
 1 Lotus Ring
 1 Loxodon Warhammer
 1 Loyal Tutor
-1 Lumbering Falls
 1 Lumra, Bellow of the Woods
 1 Lush Oasis
 1 Luxurious Locomotive
@@ -564,10 +533,8 @@
 1 Malcolm, the Eyes
 1 Malevolent Rumble
 1 Mana Bloom
-1 Mana Reflection
 2 Map the Frontier
 1 Marauding Sphinx
-1 March from Velis Vel
 1 Marchesa, Dealer of Death
 1 Marchesa, the Black Rose
 1 Marshland Bloodcaster
@@ -591,7 +558,6 @@
 1 Mindseeker Oculus
 1 Minthara, Merciless Soul
 1 Mirage Mesa
-1 Mirage Mirror
 1 Mirkwood Bats
 1 Mirri, Weatherlight Duelist
 1 Mishra's Bauble
@@ -643,7 +609,6 @@
 1 Nulldrifter
 1 Nullpriest of Oblivion
 1 Obeka, Splitter of Seconds
-1 Oblivion Stone
 1 Occult Epiphany
 1 Octavia, Living Thesis
 1 Oft-Nabbed Goat
@@ -652,7 +617,6 @@
 1 Omenpath Journey
 1 Omni-Changeling
 1 Omnipresence
-1 Omo, Queen of Vesuva
 2 Opal Palace
 1 Open the Way
 1 Opt
@@ -703,13 +667,10 @@
 1 Pinnacle Emissary
 1 Pizza Face, Gastromancer
 1 Plan for All Outcomes
-1 Planar Nexus
 1 Plumb the Forbidden
-1 Poison Dart Frog
 1 Pol Jamaar, Illusionist
 1 Pompous Battlemage
 1 Ponder
-1 Pongify
 1 Pontiff of Blight
 1 Portent of Calamity
 1 Potioner's Trove
@@ -726,7 +687,6 @@
 1 Proctor of Potential
 1 Proft, Consulting Detective
 1 Promise of Loyalty
-1 Propaganda
 1 Prophetic Prism
 1 Protege's Awakening
 1 Puca's Covenant
@@ -746,7 +706,6 @@
 1 Raise Dead
 1 Rakdos Carnarium
 1 Rakish Crew
-1 Rampant Frogantua
 1 Rampant Growth
 1 Rankle, Master of Pranks
 1 Rapturous Moment
@@ -763,7 +722,6 @@
 1 Regrowth
 1 Reiver Demon
 1 Reliquary Tower
-1 Replication Technique
 1 Repurposed Enforcer
 1 Requisition Raid
 1 Resculpt
@@ -791,7 +749,6 @@
 1 Ruthless Lawbringer
 1 Saber-Tooth Moose-Lion
 1 Safana, Calimport Cutthroat
-1 Sage of the Maze
 1 Sage's Reverie
 1 Saheeli, Consul of Oversight
 1 Saheeli, Jewel of Avishkar
@@ -809,21 +766,18 @@
 1 Sapphire Medallion
 1 Sapseep Forest
 1 Sarkhan, the Dragonspeaker
-1 Satyr Wayfinder
 1 Sautekh Immortal
 2 Savage Smash
 1 Scour for Scrap
 1 Scourge of the Skyclaves
 1 Screams from Within
 1 Scriv, the Obligator
-1 Scute Swarm
 1 Sea Gate Colossus
 1 Seasoned Cryomancer
 1 Seat of the Synod
 1 Secluded Starforge
 1 Secluded Steppe
 1 Secret Rendezvous
-1 Seer's Sundial
 1 Sefris of the Hidden Ways
 1 Seize the Secrets
 1 Seize the Spoils
@@ -856,8 +810,6 @@
 1 Silverquill Campus
 1 Silversmote Ghoul
 1 Simic Charm
-1 Simic Growth Chamber
-1 Simic Guildgate
 1 Simic Locket
 1 Simulacrum Shaper
 1 Sinister Gnarlbark
@@ -868,7 +820,6 @@
 1 Skirge Familiar
 1 Skorpekh Destroyer
 1 Skullcrack
-1 Skullwinder
 1 Sky Diamond
 1 Skycoach Waypoint
 1 Skyshroud Claim
@@ -921,17 +872,14 @@
 1 Subterfuge
 1 Suffer the Past
 1 Sultai Charm
-1 Summary Dismissal
 1 Sun Droplet
 1 Sun Quan, Lord of Wu
 1 Sunken Hollow
-1 Sunken Palace
 1 Sunlit Marsh
 1 Super State
 1 Supernatural Stamina
 1 Sword of the Animist
 1 Sygg, Wanderwine Wisdom
-1 Sylvan Scrying
 1 Syncopate
 1 Syphon Mind
 1 Tablet of Compleation
@@ -941,7 +889,6 @@
 1 Take Up the Shield
 2 Talisman of Hierarchy
 1 Talisman of Unity
-1 Talon Gates of Madara
 1 Talrand, Sky Summoner
 1 Tam, Mindful First-Year
 1 Tam's Resistance
@@ -953,7 +900,6 @@
 1 Tarmogoyf
 1 Tarnation Vista
 1 Taste of Death
-1 Tatyova, Benthic Druid
 1 Teacher's Pest
 1 Team Avatar
 1 Tempest Djinn
@@ -964,7 +910,6 @@
 1 Tendershoot Dryad
 1 Tendrils of Agony
 1 Tendrils of Corruption
-1 Terastodon
 1 Terminal Agony
 1 Terminate
 1 Terra, Herald of Hope
@@ -989,10 +934,8 @@
 1 The Swarmweaver
 1 The Wanderer
 1 Theorix Charm
-1 Thespian's Stage
 1 Thieves' Tools
 1 Thorin, Mountain-king
-1 Thornwood Falls
 1 Thought Monitor
 1 Thran Dynamo
 1 Three Visits
@@ -1018,11 +961,9 @@
 1 Traxos, Academy Guardian
 1 Traxos, Scourge Eternal
 1 Traxos, Scourge of Kroog
-1 Treasure Cruise
 1 Treasure Keeper
 1 Treasure Nabber
 1 Tree of Perdition
-1 Trenchpost
 1 Treva's Charm
 1 Triarch Stalker
 1 Triumphant Adventurer
@@ -1043,9 +984,6 @@
 1 Unstoppable Plan
 1 Unsummon
 1 Urban Evolution
-1 Urza's Mine
-1 Urza's Power Plant
-1 Urza's Tower
 1 Uthros Psionicist
 1 Vampire Nighthawk
 1 Vampiric Link
@@ -1063,7 +1001,6 @@
 1 Verdant Sun's Avatar
 1 Verdurous Gearhulk
 1 Vernal Fen
-1 Vesuva
 1 Veteran Adventurer
 1 Vexing Bauble
 1 Vial Smasher, Gleeful Grenadier
@@ -1075,10 +1012,8 @@
 1 Violent Echoes
 2 Visage Bandit
 1 Vito, Thorn of the Dusk Rose
-1 Vivien Reid
 1 Vivien, Champion of the Wilds
 1 Vivien's Arkbow
-1 Volatile Fault
 1 Volatile Stormdrake
 1 Vraan, Executioner Thane
 1 Vraska Joins Up
@@ -1116,14 +1051,12 @@
 1 Witherbloom Campus
 1 Witherbloom Charm
 1 Witherbloom Command
-1 Wonderscape Sage
 1 Woodland Cemetery
 1 Worldwalker Helm
 1 Worn Powerstone
 1 Wreckage Wickerfolk
 1 Wrecking Ball Arm
 2 Yavimaya Bloomsage
-1 Yavimaya, Cradle of Growth
 1 Yedora, Grave Gardener
 1 Yoshimaru, Beloved Companion
 1 You Find a Cursed Idol
