@@ -13,3 +13,5 @@ On 2026-09-20 a Bash call that chained `git commit -m "…"` with three `cat > f
 **Why:** the whole `-c` string is parsed before anything runs, so one bad quote anywhere loses every command in the call, including the ones before it.
 
 **How to apply:** create brief files with the Write tool (one file per call), keep Bash to commands; when a heredoc is unavoidable, one per call and nothing else in the call. Related: [[commit-on-test-exit-status]], [[fable-orchestrator-only-routing]].
+
+**Update 2026-10-08:** the Bash tool also collapses doubled backslashes inside quoted heredocs: a Python patch that wrote a TypeScript `split('<backslash>n')` produced a literal newline inside the string (three times in one session, incl. one silent no-match). For any file content containing backslashes (regexes, escaped newlines, Windows paths) use the Write or Edit tool, or build the backslash in Python with chr(92).

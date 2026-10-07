@@ -25,3 +25,4 @@
 - [Deck requests: quick list first](feedback_deck_requests_quick_first.md) — playable gated list in minutes, converged pipeline after as a diff; reuse pools/screens per colour identity (2026-10-01)
 - [Deck-check page is the visual standard](feedback_card_check_page_standard.md) — image grid by type, tap-to-tick, NEW/OUT rows, live text filter; reuse check-page.ts, Playwright via local http.server (2026-10-02)
 - [Deck-building skill + learning loop](feedback_deck_building_skill.md) — .claude/skills/deck-building: rules, LEARNINGS.md (append on every correction), reference/ research + pilot guides (2026-10-02)
+- [Moxfield upload via Playwright](reference_moxfield_upload.md) — private decks via the create dialog; paste ignores *CMDR*, set commander in the combobox; cookie overlay needs DOM click (2026-10-07)
