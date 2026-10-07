@@ -382,3 +382,7 @@ Appended by `npx tsx scripts/paper-sync.ts`. Full diffs: `git log -p decks/paper
 ## 2026-10-07
 - **Omo, Queen of Vesuva** v1, 99 cards
 - **Collection** 1954 owned, 1136 open
+
+## 2026-10-07
+- **Collection** 1954 owned, 1228 open
+- **Omo, Queen of Vesuva** dismantled (precon, 99 cards → open; Nissa, Steward of Elements stays in Tam)
