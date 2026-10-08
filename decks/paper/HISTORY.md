@@ -415,3 +415,10 @@ Appended by `npx tsx scripts/paper-sync.ts`. Full diffs: `git log -p decks/paper
 - **Imotekh the Stormlord** v5, 100 cards: +Charcoal Diamond, +Grim Haruspex, +Ravenous Chupacabra, +Rune-Scarred Demon, +Woe Strider, −Ashnod's Altar, −Dark Ritual, −Imp's Mischief, −Phyrexian Arena, −Skorpekh Lord
 - **The Cabbage Merchant** v5, 99 cards: +Basking Broodscale, +Haywire Mite, +Ramunap Excavator, +Springbloom Druid, −Idol of Oblivion, −Kodama's Reach, −Pest Infestation, −Ribtruss Roaster
 - **Collection** 2037 owned, 1207 open
+
+## 2026-10-08
+- **Collection** 2038 owned, 1208 open
+
+## 2026-10-08
+- **Beledros Witherbloom** v2, 100 cards: +Starscape Cleric, −Midnight Reaper
+- **Collection** 2038 owned, 1208 open

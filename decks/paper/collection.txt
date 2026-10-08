@@ -1333,6 +1333,7 @@
 1 Squad Commander
 1 Sram, Senior Edificer
 1 Starfield Mystic
+1 Starscape Cleric
 1 Steam Vents
 1 Steel Hellkite
 1 Steel Overseer

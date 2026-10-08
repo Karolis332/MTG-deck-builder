@@ -39,7 +39,7 @@ const pool = buildPool(commander, legalPool(owned, 'commander'), banned);
 const listNames = parseList(fs.readFileSync(path.join(DIR, 'beledros-recommended.txt'), 'utf8')).filter((n) => n !== commander.name);
 const { cards, missing } = fromNames(listNames, pool, basics);
 if (missing.length || cards.length !== 99) throw new Error(`deck resolved to ${cards.length} cards; missing: ${missing.join(', ')}`);
-const meren = new Set(parseList(fs.readFileSync(path.join(ROOT, 'decks/paper/decks/meren-of-clan-nel-toth.txt'), 'utf8')));
+const meren = new Set(parseList(fs.readFileSync(path.join(ROOT, 'verify-2026-10-08/best-deck/meren-sleeved-2026-10-08.txt'), 'utf8')));
 const inDeck = new Set(cards.map((c) => c.name));
 const candidates = pool.filter((c) => !inDeck.has(c.name) && !BASIC_RE.test(c.name));
 const scorer = makeScorer('commander', commander, { ...DEFAULT_WEIGHTS, games: GAMES });

@@ -585,6 +585,7 @@
 1 Meteor Golem
 1 Meticulous Commons
 1 Midnight Banshee
+1 Midnight Reaper
 1 Mindblade Render
 1 Mindless Automaton
 1 Mindseeker Oculus

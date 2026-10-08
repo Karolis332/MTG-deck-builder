@@ -44,7 +44,6 @@
 1 Liliana, Dreadhorde General
 1 Llanowar Wastes
 1 Massacre Wurm
-1 Midnight Reaper
 1 Mikaeus, the Unhallowed
 1 Mirkwood Bats
 1 Moldervine Reclamation
@@ -67,6 +66,7 @@
 1 Scute Swarm
 1 Skorpekh Lord
 1 Sol Ring
+1 Starscape Cleric
 5 Swamp
 1 Talisman of Resilience
 1 Temple of Malady

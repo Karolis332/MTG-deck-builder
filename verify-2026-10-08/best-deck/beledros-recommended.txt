@@ -83,7 +83,7 @@ Deck
 1 Insidious Roots
 1 Elvish Mystic
 1 Scute Swarm
-1 Midnight Reaper
+1 Starscape Cleric
 1 Blooming Marsh
 1 Eccentric Pestfinder // Turn Stones
 1 Ophiomancer
