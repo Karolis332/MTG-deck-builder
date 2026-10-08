@@ -51,8 +51,8 @@ Meren is dismantled: 44 of its cards move over, the other 38 become open or back
 |---|---|---|
 | Meren of Clan Nel Toth (dismantled) | 37 shared cards + Revitalizing Repast, Festering Thicket, Infernal Grasp, Massacre Wurm, Sakura-Tribe Elder, Veil of Summer, Midnight Reaper | — |
 | Loose collection | 38, incl. Beledros, Dina, Vito, Sanguine Bond, Cultivate, Three Visits, Tyvar's Stand | — |
-| The Cabbage Merchant (G) | [[Pest Infestation]], [[Idol of Oblivion]], [[Ribtruss Roaster]], [[Kodama's Reach]] | Haywire Mite, Llanowar Elves, Basking Broodscale, Springbloom Druid |
-| Imotekh the Stormlord (B) | [[Ashnod's Altar]], [[Skorpekh Lord]], [[Phyrexian Arena]], [[Imp's Mischief]] | Woe Strider, Solemn Simulacrum, Rune-Scarred Demon, Ravenous Chupacabra |
+| The Cabbage Merchant (G) | [[Pest Infestation]], [[Idol of Oblivion]], [[Ribtruss Roaster]], [[Kodama's Reach]] | Haywire Mite, Ramunap Excavator (Cabbage already runs Llanowar Elves), Basking Broodscale, Springbloom Druid |
+| Imotekh the Stormlord (B) | [[Ashnod's Altar]], [[Skorpekh Lord]], [[Phyrexian Arena]], [[Imp's Mischief]] | Woe Strider, Grim Haruspex (Imotekh already runs Solemn Simulacrum and Syr Konrad), Rune-Scarred Demon, Ravenous Chupacabra |
 | Gilanra + Alena (GR) | [[Thunderfoot Baloth]] | Domri, Anarch of Bolas (loose; a 2026-10-07 near-tie for that deck) |
 | Tam, Tazri, Bumi, Inspirit, Urza | nothing | — |
 
