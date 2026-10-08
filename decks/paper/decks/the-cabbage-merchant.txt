@@ -5,6 +5,7 @@
 1 Ash Barrens
 1 Autumn's Veil
 1 Ba Sing Se
+1 Basking Broodscale
 1 Brawn
 1 Bridgeworks Battle
 1 Bumi's Feast Lecture
@@ -30,14 +31,13 @@
 1 Gingerbread Cabin
 1 Greenhouse Propagator
 1 Halsin, Emerald Archdruid
+1 Haywire Mite
 1 Hornet Queen
 1 Hungering Puppetbeast
-1 Idol of Oblivion
 1 Invasion of Ikoria
 1 Jaheira, Friend of the Forest
 1 Jiang Yanggu, Never Alone
 1 Kenrith's Transformation
-1 Kodama's Reach
 1 Llanowar Elves
 1 Many Partings
 1 Mosswort Bridge
@@ -45,15 +45,15 @@
 1 Night of the Sweets' Revenge
 1 Ohran Frostfang
 1 Peregrin Took
-1 Pest Infestation
+1 Ramunap Excavator
 1 Return of the Wildspeaker
-1 Ribtruss Roaster
 1 Sarinth Steelseeker
 1 Second Harvest
 1 Seedborn Muse
 1 Snakeskin Veil
 1 Spider-Ham, Peter Porker
 1 Spore Frog
+1 Springbloom Druid
 1 Spry and Mighty
 1 Syr Ginger, the Meal Ender
 1 Teething Wurmlet

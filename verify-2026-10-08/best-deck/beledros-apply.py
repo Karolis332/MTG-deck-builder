@@ -4,7 +4,7 @@
 
 Does, in order:
   1. decks/paper/decks/beledros-witherbloom.txt  <- verify-2026-10-08/best-deck/beledros-recommended.txt (paper format: commander first, no headers)
-  2. donor backfills: Cabbage 4, Imotekh 4, Gilanra 1 (guide §3 table), each donor stays at its card count
+  2. donor backfills: Cabbage 4, Imotekh 5, Gilanra 1 (guide §3 table), each donor stays at its card count
   3. Meren leftovers stay owned: any leftover missing from collection.txt is appended
   4. Meren's sleeved list is frozen to verify-2026-10-08/best-deck/meren-sleeved-2026-10-08.txt, check-page.ts points at the copy, the Meren deck file is removed
 Then (printed, not run): DB backup, paper-sync, gate.
@@ -35,6 +35,7 @@ BACKFILLS = {
         "Skorpekh Lord": "Grim Haruspex",  # Imotekh already runs Solemn Simulacrum and Syr Konrad (singleton)
         "Phyrexian Arena": "Rune-Scarred Demon",
         "Imp's Mischief": "Ravenous Chupacabra",
+        "Dark Ritual": "Charcoal Diamond",  # operator swap 2026-10-08 (<- Tyvar's Stand); the only free black rock
     },
     "gilanra-alena-partners.txt": {"Thunderfoot Baloth": "Domri, Anarch of Bolas"},
 }

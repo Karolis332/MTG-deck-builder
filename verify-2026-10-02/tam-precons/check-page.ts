@@ -38,7 +38,7 @@ const SPECS: DeckSpec[] = [
   },
   // Beledros replaces Meren: baseline = the sleeved Meren list, so OUT = Meren cards that stay in the box, NEW = everything else
   {
-    slug: 'beledros-witherbloom', base: read('decks/paper/decks/meren-of-clan-nel-toth.txt'), now: 'verify-2026-10-08/best-deck/beledros-recommended.txt',
+    slug: 'beledros-witherbloom', base: read('verify-2026-10-08/best-deck/meren-sleeved-2026-10-08.txt'), now: 'verify-2026-10-08/best-deck/beledros-recommended.txt',
     meta: 'verify-2026-10-08/best-deck/beledros-backups.json', // per card: source deck, donor backfill, 3 model-scored backups (beledros-backups.ts)
     guide: '.claude/skills/deck-building/reference/decks/beledros-witherbloom.md',
     extra: {
@@ -75,7 +75,6 @@ const SPECS: DeckSpec[] = [
   },
   { slug: 'tam-the-possibility', base: read('verify-2026-09-28/deck-audit/tam-the-possibility-final.txt') },
   { slug: 'tazri-beacon-of-unity' },
-  { slug: 'meren-of-clan-nel-toth' },
   { slug: 'imotekh-the-stormlord' },
 ];
 const DECKS = SPECS.map((d) => ({

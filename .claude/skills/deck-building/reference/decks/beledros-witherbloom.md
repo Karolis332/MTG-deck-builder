@@ -45,6 +45,8 @@ List: `verify-2026-10-08/best-deck/beledros-recommended.txt` — **FINAL, score-
 - ⚠️ Lifegain hate (Erebos, Tainted Remedy) switches off lines 1 and 2 through Dina, Vito and Bond. Zulaport, Cauldron, Bats and Merchant's own loss still work.
 
 ## 3. Where the cards come from
+
+✅ **Sleeved 2026-10-08** (operator: "deck confirmed"). The registry switch ran (`verify-2026-10-08/best-deck/beledros-apply.py --apply`): `decks/paper/decks/beledros-witherbloom.txt` is the deck, Meren is dismantled (27 leftovers back in the box; her last list is frozen at `verify-2026-10-08/best-deck/meren-sleeved-2026-10-08.txt`), donors backfilled — Cabbage 4, Imotekh 5 (Charcoal Diamond for Dark Ritual), Gilanra 1; paper-sync, DB backup `mtg-deck-builder.db.bak-2026-10-08-beledros`. The table below is the sourcing record, kept for the box.
 Meren is dismantled: 44 of its cards move over, the other 38 become open or backfill the donors below.
 
 | Donor deck | Cards Beledros takes | Backfill for the donor (from Meren's leftovers unless noted) |

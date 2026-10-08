@@ -13,6 +13,7 @@
 1 Cyclops of Eternal Fury
 1 Dawnglade Regent
 1 Diamond City
+1 Domri, Anarch of Bolas
 1 Drakuseth, Maw of Flames
 1 Elvish Aberration
 1 Emergent Woodwurm
@@ -60,7 +61,6 @@
 1 Sweet-Gum Recluse
 1 Talisman of Impulse
 1 Terror of the Peaks
-1 Thunderfoot Baloth
 1 Traverse the Outlands
 1 Trumpeting Carnosaur
 1 Tyrant of Discord
