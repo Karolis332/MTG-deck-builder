@@ -352,5 +352,15 @@
       "added": [],
       "removed": []
     }
+  ],
+  "Jet Boros": [
+    {
+      "v": 1,
+      "date": "2026-10-08",
+      "file": "decks/arena/jet-boros-v1.txt",
+      "note": "model #1 Arena list (objective 109.0), 27 filler swaps + 9 land swaps, 34 lands + 3 MDFC",
+      "added": [],
+      "removed": []
+    }
   ]
 }
