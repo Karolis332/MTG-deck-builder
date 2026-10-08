@@ -1,0 +1,9 @@
+# base = verify-2026-10-09/tazri/tazri-final.txt ; run 2: window-neutral set, Gearhulk kept
+Counterspell => Squad Commander
+Return of the Wildspeaker => Harper Recruiter
+Varis, Silverymoon Ranger => Tajuru Paragon
+Acererak the Archlich => Linvala, Shield of Sea Gate
+Caves of Chaos Adventurer => Undermountain Adventurer
+Triumphant Adventurer => Nimble Trapfinder
+Bident of Thassa => Mindblade Render
+Channeler Initiate => Samut, Voice of Dissent

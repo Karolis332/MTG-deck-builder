@@ -1,0 +1,142 @@
+{
+ "plan": {
+  "W": [
+   "Nadaar, Selfless Paladin",
+   "Pearl-Ear, Imperial Advisor",
+   "Fortune, Loyal Steed"
+  ],
+  "U": [
+   "Padeem, Consul of Innovation",
+   "Traxos, Academy Guardian",
+   "Sai, Master Thopterist"
+  ],
+  "B": [
+   "Anrakyr the Traveller",
+   "Imotekh the Stormlord"
+  ],
+  "R": [
+   "Alena, Kessig Trapper",
+   "Calamity, Galloping Inferno",
+   "Etali, Primal Storm",
+   "Magda, the Hoardmaster"
+  ],
+  "G": [
+   "Varis, Silverymoon Ranger",
+   "Peregrin Took",
+   "Sakiko, Mother of Summer"
+  ],
+  "WU": [
+   "Linvala, Shield of Sea Gate",
+   "Hama Pashar, Ruin Seeker"
+  ],
+  "WB": [
+   "Astarion, the Decadent",
+   "Killian, Ink Duelist"
+  ],
+  "WR": [
+   "Duke Ulder Ravengard",
+   "Alibou, Ancient Witness",
+   "Sami, Wildcat Captain"
+  ],
+  "WG": [
+   "Torens, Fist of the Angels",
+   "Mirri, Weatherlight Duelist"
+  ],
+  "UB": [
+   "Rilsa Rael, Kingpin",
+   "Krydle of Baldur's Gate",
+   "Uldaros Theorix"
+  ],
+  "UR": [
+   "Saheeli, Jewel of Avishkar",
+   "Jhoira, Weatherlight Captain",
+   "Kraum, Violent Cacophony"
+  ],
+  "UG": [
+   "The Goose Mother",
+   "Tanazir Quandrix",
+   "Omo, Queen of Vesuva"
+  ],
+  "BR": [
+   "The Scorpion God",
+   "Alesha, Who Laughs at Fate"
+  ],
+  "RG": [
+   "Ruby, Daring Tracker",
+   "Halana and Alena, Partners",
+   "Ruric Thar, the Unbowed"
+  ],
+  "WUB": [
+   "Sefris of the Hidden Ways",
+   "Eriette, the Beguiler"
+  ],
+  "WUR": [
+   "Inspirit, Flagship Vessel",
+   "Kilo, Apogee Mind"
+  ],
+  "WBR": [
+   "Terra, Herald of Hope"
+  ],
+  "WRG": [
+   "Samut, Voice of Dissent",
+   "Ghired, Mirror of the Wilds"
+  ],
+  "UBR": [
+   "Marchesa, the Black Rose",
+   "Obeka, Splitter of Seconds",
+   "Marchesa, Dealer of Death"
+  ],
+  "BRG": [
+   "The Reaper, King No More",
+   "Auntie Ool, Cursewretch"
+  ],
+  "WUBR": [
+   "Jace, Multiverse Architect"
+  ],
+  "WUBRG": [
+   "Tam, the Possibility",
+   "Jared Carthalion"
+  ]
+ },
+ "reuse": {
+  "W": [],
+  "B": [
+   "Mikaeus, the Unhallowed",
+   "Ob Nixilis of the Black Oath"
+  ],
+  "G": [
+   "The Cabbage Merchant"
+  ],
+  "WB": [
+   "Nalia de'Arnise",
+   "Minthara, Merciless Soul"
+  ],
+  "BR": [
+   "Akul the Unrepentant"
+  ],
+  "BG": [
+   "Gyome, Master Chef",
+   "Dina, Essence Brewer",
+   "Meren of Clan Nel Toth"
+  ],
+  "WUB": [
+   "The Destined Warrior"
+  ],
+  "WUBR": [
+   "Breya, Etherium Shaper"
+  ],
+  "WUBRG": [
+   "Tazri, Beacon of Unity"
+  ]
+ },
+ "noOwnedCommander": [
+  "WUG",
+  "WBG",
+  "UBG",
+  "URG",
+  "WUBG",
+  "WURG",
+  "WBRG",
+  "UBRG"
+ ]
+}

@@ -1,0 +1,931 @@
+{
+ "tam-the-possibility": {
+  "review": {
+   "slug": "tam-the-possibility",
+   "commander": "Tam, the Possibility",
+   "sleevedObjective": 43.17,
+   "sleevedDeckScore": 63.6,
+   "modelObjective": 71.91,
+   "modelPath": "verify-2026-10-09/color-best/eval/tam-the-possibility/climb/results-0.jsonl",
+   "swaps": [
+    {
+     "out": "Fumigate",
+     "in": "Windfall",
+     "why": "Finishes the lock on the same turn after JRS 0: \"draws cards equal to the greatest number of cards a player discarded\", so 1-card libraries lose. Fumigate's \"Destroy all creatures\" kills Tam and our own dorks.",
+     "source": "free",
+     "delta": 0.02
+    },
+    {
+     "out": "Thrummingbird",
+     "in": "Loyal Tutor",
+     "why": "{W} instant: \"Search your library for a planeswalker card … put that card on top\". Finds JRS or Jace MA. Thrummingbird only proliferates on combat damage.",
+     "source": "free",
+     "delta": -0.02
+    },
+    {
+     "out": "Ral Zarek",
+     "in": "Diabolic Tutor",
+     "why": "\"Search your library for a card, put that card into your hand\". Finds JRS, Windfall, Paradox or Mentor. The deck had one JRS and no tutor for it.",
+     "source": "free",
+     "delta": -0.03
+    },
+    {
+     "out": "Tezzeret, Master of the Bridge",
+     "in": "Way of the Cryomancer",
+     "why": "\"empower Jace 5\" (8th Way) and grants \"[−3]: … copy that spell\", which copies Windfall or Algorithm and triggers Mind Sculptor. Pia can fetch it. Tezzeret is weak with about 7 artifacts.",
+     "source": "free",
+     "delta": -2.01
+    },
+    {
+     "out": "Nissa, Steward of Elements",
+     "in": "Jace, Multiverse Architect",
+     "why": "A third Jace whose loyalty counts \"among Jaces you control\" for the 25. Opponents' creatures \"can't attack Jaces you control\" unless they pay {2}. \"+1: Draw two cards\".",
+     "source": "free",
+     "delta": -1.99
+    },
+    {
+     "out": "Chandra, Awakened Inferno",
+     "in": "Expansion Algorithm",
+     "why": "\"Proliferate X times\": adds X to every Jace (lock), every walker, and poison after Vraska −9. A cut the model also chose; Chandra's −3 kills our dorks and Tam.",
+     "source": "free",
+     "delta": 1.98
+    },
+    {
+     "out": "Settle the Wreckage",
+     "in": "Tomik, Orzhov Lawmage",
+     "why": "{1}{W}: \"Planeswalkers you control have 'No more than one creature can attack this planeswalker each combat.'\" A permanent fix for walkers being attacked down, replacing a 4-mana one-shot (model cut).",
+     "source": "free",
+     "delta": 1.98
+    }
+   ],
+   "allDelta": -0.09,
+   "verdict": "Judgment upgrade; the model can't measure it. 7 free swaps leave the score flat (−0.09, Deck Score 63.6). They add the 10-03 tutors and the Windfall finisher for the Jace-lock primary: 4 ways to find JRS instead of 2. The climb's +28.7 is only the window penalty plus 4 filler lands (34-land lock), and it cuts engine pieces (Paradox, Pyromancer, Vraska, Jace MA). Rejected.",
+   "risks": [
+    "Model blind: Deck Score delta 0.0 on every add; the ±2 values are role-window penalty only, so no swap clears the 0.25 bar on score",
+    "Walker count 21 -> 18 (fewer Tam discounts and Mentor targets)",
+    "Diabolic Tutor {2}{B}{B} in a 5-colour base; Great Hall mana cannot pay it",
+    "Windfall is symmetric: fire it only after JRS 0 or when your hand is empty",
+    "Loyal Tutor and Expansion Algorithm came in the 16ebd62 'Strixhaven precons' registration: confirm they are in hand before sleeving",
+    "Cutting Sarkhan/Ob Nixilis BO/Kaito instead costs -5.6 each (the win component counts their token bodies); kept to respect the score rule",
+    "Wipes 7 -> 5; no refuter pass yet"
+   ],
+   "guideErrors": [
+    "§5 Final Act: the guide says 'Each opponent loses all counters' strips opponents' walkers, +1/+1 counters and poison. It removes counters on the players only (poison/energy/experience), not on their permanents, and it erases the poison from our own Vraska −9 line",
+    "§5 Elspeth −3 is called 'your one-sided wipe'. Oracle: 'Destroy all creatures with power 4 or greater', which also kills our 4/4 Beasts, 8/8 Leviathans and Dragons",
+    "§1 ranks walker burn #1 and the Jace lock #2 across six lines. The 10-03 review set the Jace lock as the single primary with one backup; the guide was never updated",
+    "§2 #2: 'Ajani U + Liliana F = 2 Mentor triggers per activation' needs Way of the Paradox too (Cadet→Liliana is 1 gain)",
+    "§5 lists The Prismatic Bridge under Tutors; it reveals the first creature or planeswalker card and does not search",
+    "After the swaps, references to Fumigate, Settle, Ral (extra turns), Tezzeret/Chandra AI (burn line) and Thrummingbird go stale"
+   ]
+  },
+  "refute": {
+   "slug": "tam-the-possibility",
+   "verdicts": [
+    {
+     "out": "Fumigate",
+     "in": "Windfall",
+     "pass": true,
+     "reason": "Ends the game on the turn of JRS 0 instead of two draw steps later. Fumigate kills Tam, Tender and Guide. The 10-03 converged list made the same cut. Δ +0.02 reproduced."
+    },
+    {
+     "out": "Thrummingbird",
+     "in": "Loyal Tutor",
+     "pass": true,
+     "reason": "Finds JRS or JMA at instant speed. Thrummingbird is a 1/1 that needs combat damage. Matches 10-03. Δ −0.02 reproduced."
+    },
+    {
+     "out": "Ral Zarek",
+     "in": "Diabolic Tutor",
+     "pass": true,
+     "reason": "A second unrestricted tutor for the only JRS. Ral's coin-flip −7 does not serve the plan. BB is castable here. Matches 10-03. Δ −0.03 reproduced."
+    },
+    {
+     "out": "Tezzeret, Master of the Bridge",
+     "in": "Way of the Cryomancer",
+     "pass": true,
+     "reason": "Judgment pass: +5 empower helps the main Jace lock. The review's claim that Tezzeret is weak is wrong, since his +2 is the backup drain's best ability. 10-03 kept Tezzeret, so the operator should know."
+    },
+    {
+     "out": "Nissa, Steward of Elements",
+     "in": "Jace, Multiverse Architect",
+     "pass": true,
+     "reason": "A third Jace whose loyalty counts toward the 25, and opponents must pay {2} to attack Jaces. Nissa is filler. Matches 10-03. The −1.99 is only the window penalty."
+    },
+    {
+     "out": "Chandra, Awakened Inferno",
+     "in": "Expansion Algorithm",
+     "pass": true,
+     "reason": "Proliferate X adds X counters to every Jace and to poison. Matches 10-03. The review's reason is wrong: Tam is 2/4 and survives Chandra's −3."
+    },
+    {
+     "out": "Settle the Wreckage",
+     "in": "Tomik, Orzhov Lawmage",
+     "pass": false,
+     "reason": "The 10-03 list ran both Tomik and Settle. With Fumigate and Chandra already cut, losing Settle makes walkers easier to attack down. Tomik is a 2/1 our own wipes kill. Keep Settle and put Tomik in another slot."
+    }
+   ],
+   "allDelta": -0.09,
+   "overall": "PARTIAL",
+   "notes": "My 300-game swap-lab re-run (on 4 of 8 cores, below-normal priority) matches every reviewer Δ exactly; ALL is −0.09 and DS stays 63.6, so the model can't see any of the adds and judgment decides. All 7 adds are owned, free and singleton. Two of the review's reasons are wrong: Chandra's −3 doesn't kill Tam (2/4), and Tezzeret isn't weak. Guide errors 1–6 confirmed. Settle→Tomik fails, Tomik needs another slot. Report: verify-2026-10-09/color-best/eval/tam-the-possibility/REFUTE.md; lab output: refute-swap-lab.txt."
+  }
+ },
+ "tazri-beacon-of-unity": {
+  "review": {
+   "slug": "tazri-beacon-of-unity",
+   "commander": "Tazri, Beacon of Unity",
+   "sleevedObjective": 62.61,
+   "sleevedDeckScore": 75,
+   "modelObjective": 97.86,
+   "modelPath": "verify-2026-10-09/tazri/tazri-model.txt",
+   "swaps": [
+    {
+     "out": "Toski, Bearer of Secrets",
+     "in": "Squad Commander",
+     "why": "\"a 1/1 Kor Warrior token for each creature in your party\" plus full-party \"+1/+0 and indestructible\". Panharmonicon, Terror and Najeela use it. Toski repeats Recon Mission. Base: tazri-final.",
+     "source": "free (Toski goes back to Cabbage)",
+     "delta": -2.01
+    },
+    {
+     "out": "Return of the Wildspeaker",
+     "in": "Harper Recruiter",
+     "why": "Return counts only \"non-Human creatures\" and the party is mostly Human. Harper digs on attack: \"reveal a Cleric… Rogue… Warrior… Wizard card\".",
+     "source": "free (Return goes back to Cabbage)",
+     "delta": 0.01
+    },
+    {
+     "out": "Varis, Silverymoon Ranger",
+     "in": "Tajuru Paragon",
+     "why": "Varis is a Ranger and misses the dig. Paragon \"is also a Cleric, Rogue, Warrior, and Wizard\": a 2-drop for any slot, and it digs six when kicked.",
+     "source": "free",
+     "delta": 0.02
+    },
+    {
+     "out": "Acererak the Archlich",
+     "in": "Linvala, Shield of Sea Gate",
+     "why": "Acererak returns \"to its owner's hand\" and never holds a slot. Linvala is a Wizard: full-party lock on one permanent, \"Sacrifice Linvala: hexproof or indestructible\".",
+     "source": "free",
+     "delta": -0.01
+    },
+    {
+     "out": "Caves of Chaos Adventurer",
+     "in": "Undermountain Adventurer",
+     "why": "Same \"you take the initiative\", but a Warrior with \"{T}: Add {G}{G}\" (six {G} after a dungeon) instead of a non-party Barbarian.",
+     "source": "free",
+     "delta": 0.08
+    },
+    {
+     "out": "Triumphant Adventurer",
+     "in": "Nimble Trapfinder",
+     "why": "Knight → Rogue 2-drop. Full party: creatures gain \"Whenever this creature deals combat damage to a player, draw a card\".",
+     "source": "free",
+     "delta": 0.02
+    },
+    {
+     "out": "Bident of Thassa",
+     "in": "Mindblade Render",
+     "why": "Bident is a second UU Recon Mission. Render is a 2-mana Warrior that draws \"if any of that damage was dealt by a Warrior\".",
+     "source": "free",
+     "delta": -0.01
+    },
+    {
+     "out": "Channeler Initiate",
+     "in": "Samut, Voice of Dissent",
+     "why": "Warrior alpha enabler: \"Flash / Double strike, vigilance, haste / Other creatures you control have haste\". Ramp stays at 11 through Undermountain.",
+     "source": "free",
+     "delta": -0.12
+    }
+   ],
+   "allDelta": -0.02,
+   "verdict": "Base tazri-final (88.94/DS 77.5) fixed the sleeved list's windows (62.6), but cut Tazri's dig hits from 42 to 23. These 8 free swaps bring hits back to 30 and return both Cabbage raids. Score is flat (88.92/77.5): the model is blind to them, so judgment decides. Primary plan: full-party alpha. Backup: initiative value.",
+   "risks": [
+    "The score is flat (−0.02). The gains are judgment only (dig density 23→30); the model cannot see party density.",
+    "Tam (top priority) still gives up 11 cards (Path, Anguished Unmaking, Trophy, Bloom Tender, Faeburrow, Mana Confluence, shocks/tri-lands). Back those slots before sleeving.",
+    "Inspirit gives 5 (Rift, Boros Charm, Panharmonicon, 2 painlands). Gilanra gives 2 (Gearhulk, Terror), which its stompy redraft wants.",
+    "Gearhulk kept: Samut in its slot reads −7.43 (win step 72→63).",
+    "All 26 Mountains are registered in decks: one Mountain needs a backfill.",
+    "The model list's +9 is the win component's close-turn step plus filler, not stronger cards.",
+    "No refuter pass. 300-game noise is about ±0.1.",
+    "Extra runs: 3 swap-lab runs instead of 1, for slot tests (Gearhulk, Squad Commander)."
+   ],
+   "guideErrors": [
+    "§4 hand 1: Wayfarer and Torens are both Clerics, so party = 2 and Tazri costs {2}{W}, not {1}{W}.",
+    "§4 hand 3: three party bodies make Tazri {1}{W}, not {W}. It \"costs {1} less … for each creature in your party\".",
+    "§2 #6: Mirror Entity makes each creature X/X. That is X damage per creature, about X² total, not \"X² per token\".",
+    "§2 #10: Najeela is MV 3, so Coveted Prize can cast it free (\"mana value 4 or less\"); no need to hard-cast.",
+    "Stale against tazri-final: header 43 creatures / 41 party; §7 'no counterspells' (Counterspell is in); it still names cut cards (Grand Abolisher, Springleaf Parade, Ingris, Siegebreaker, Kamiz, Zagras, Stick Together, Wayfarer, Torens, Chromatic Lantern). Win line 3 needs Parade, which is cut."
+   ]
+  },
+  "refute": {
+   "slug": "tazri-beacon-of-unity",
+   "verdicts": [
+    {
+     "out": "Toski, Bearer of Secrets",
+     "in": "Squad Commander",
+     "pass": true,
+     "reason": "Squirrel out; party-count Warrior tokens plus indestructible in. −2.01 alone is the draw-window penalty; it holds only together with swaps 6 and 7 (draw 11 in ALL)."
+    },
+    {
+     "out": "Return of the Wildspeaker",
+     "in": "Harper Recruiter",
+     "pass": true,
+     "reason": "Return scales on non-Humans. Harper is a flying Warrior that digs party cards on attack. Δ +0.01 reproduced."
+    },
+    {
+     "out": "Varis, Silverymoon Ranger",
+     "in": "Tajuru Paragon",
+     "pass": true,
+     "reason": "Ranger is a dead dig hit. Paragon fills any party slot for 2 mana. Δ +0.02 reproduced."
+    },
+    {
+     "out": "Acererak the Archlich",
+     "in": "Linvala, Shield of Sea Gate",
+     "pass": true,
+     "reason": "Acererak bounces itself and never holds a slot. Linvala is a Wizard with a full-party lock and a sac-for-protection mode. Δ −0.01."
+    },
+    {
+     "out": "Caves of Chaos Adventurer",
+     "in": "Undermountain Adventurer",
+     "pass": true,
+     "reason": "Same initiative, Warrior instead of Barbarian, plus {G}{G} ramp; ramp stays 11. Δ +0.08 reproduced."
+    },
+    {
+     "out": "Triumphant Adventurer",
+     "in": "Nimble Trapfinder",
+     "pass": true,
+     "reason": "Knight to Rogue 2-drop; the full-party combat-damage draw suits the alpha plan. Δ +0.02 reproduced."
+    },
+    {
+     "out": "Bident of Thassa",
+     "in": "Mindblade Render",
+     "pass": true,
+     "reason": "Bident duplicates Recon Mission at UU. Render is a 2-mana Warrior with Warrior draw. Δ −0.01 reproduced."
+    },
+    {
+     "out": "Channeler Initiate",
+     "in": "Samut, Voice of Dissent",
+     "pass": true,
+     "reason": "−0.12 is curve noise. Haste plus double strike serves the alpha; ramp stays 11 through Undermountain. Δ reproduced."
+    }
+   ],
+   "allDelta": -0.01,
+   "overall": "PASS",
+   "notes": "The swaps.txt in the brief is a stale draft (different pairings, includes the rejected Gearhulk=>Samut, no Toski line), and its outs are not in the sleeved base. I ran swaps-final.txt on tazri-final: all Δs reproduce exactly, ALL −0.01, Deck Score 77.5 flat, so the model is blind and judgment decides. Oracle and ownership are clean; no locks are cut. Guide error 4 needs a full party. The dig count omits Allies. The real risk is the base raiding Tam for 11 cards."
+  }
+ },
+ "inspirit-flagship-vessel": {
+  "review": {
+   "slug": "inspirit-flagship-vessel",
+   "commander": "Inspirit, Flagship Vessel",
+   "sleevedObjective": 26.83,
+   "sleevedDeckScore": 25.4,
+   "modelObjective": 66.03,
+   "modelPath": "verify-2026-10-09/color-best/eval/inspirit-flagship-vessel/climb/results-0.jsonl",
+   "swaps": [
+    {
+     "out": "Temple of Epiphany",
+     "in": "Sink into Stupor // Soporific Springs",
+     "why": "The model also cuts this tapped non-artifact land. The MDFC keeps the land slot and adds \"Return target spell or nonland permanent an opponent controls to its owner's hand\".",
+     "source": "free",
+     "delta": 0.09
+    },
+    {
+     "out": "Mystic Monastery",
+     "in": "Filigree Attendant",
+     "why": "The model also cuts this land. Attendant's \"power is equal to the number of artifacts you control\", so one tap stations Inspirit to 8+ (or Research Craft/Godcore to 12+). It flies and is a Bay MV4 target.",
+     "source": "free",
+     "delta": -0.01
+    },
+    {
+     "out": "Radiant Summit",
+     "in": "Oblivion Stone",
+     "why": "\"Destroy each nonland permanent without a fate counter\" is one-sided at Inspirit 8+ (\"Other artifacts you control have hexproof and indestructible\"). Pay {4} for a fate counter on Inspirit first.",
+     "source": "free",
+     "delta": -0.07
+    },
+    {
+     "out": "Lux Artillery",
+     "in": "Unstoppable Plan",
+     "why": "\"At the beginning of your end step, untap all nonland permanents you control\": Traxos untaps every turn, and Insight Engine, Autogenerator, Lux Cannon, Nyx Lotus and Urza work twice a round. Drops the 30-counter drain line.",
+     "source": "free",
+     "delta": -0.02
+    },
+    {
+     "out": "Lasting Tarfire",
+     "in": "Resculpt",
+     "why": "\"Exile target artifact or creature\": 2-mana instant exile that also handles indestructible. Removal 7 → 8. The solo +22.65 is the win-horizon step (T14 → T13) and vanishes with all six swaps.",
+     "source": "free",
+     "delta": 22.65
+    },
+    {
+     "out": "Chandra, Spark Hunter",
+     "in": "Katara's Reversal",
+     "why": "\"Counter up to four target spells and/or abilities. Untap up to four target artifacts\": protects the alpha. Chandra animates only Vehicles (just her own token) and is a non-artifact outside the shield.",
+     "source": "free",
+     "delta": -0.65
+    }
+   ],
+   "allDelta": 1.99,
+   "verdict": "The model can't see this deck's kills: its win component reads the list as token conversion, closing T14 with 3% access. All six swaps are judgment calls. They cut the drain backup, Chandra and three tapped lands for removal, a one-sided wipe, alpha protection, a station enabler and an untap engine. Deck Score is unchanged; +1.99 is only the removal window. Plan: station to 8+ and animate (Depthshaker, or Cyberdrive into Bay into Craterclaw); backup is Arsenal + Boros Charm commander damage.",
+   "risks": [
+    "The model can't see any swap (Deck Score flat). Resculpt's solo +22.65 is the win-horizon step, not card quality.",
+    "5 of the 6 adds (Sink, Filigree, Unstoppable Plan, Resculpt, Katara's) are in the unsleeved Urza draft (verify-2026-10-06/urza-found/final-3.txt). They are taken if Urza is sleeved first. Substitutes: Pongify / Journey to Nowhere, Shatter the Sky, Pinnacle Emissary.",
+    "Rejected the model's Razortide Bridge → Nadaar (+33): its win heuristic counts the dungeon anthem as a token converter. A full dungeon takes 4 ventures from a non-artifact 3/3.",
+    "O-Stone also kills Inspirit unless it gets the {4} fate counter first; Inspirit is outside its own shield.",
+    "Lands go 38 → 35 + 1 MDFC; the deck relies on its 11 rocks and dorks, so keep the mulligan rule strict.",
+    "Urza ↔ Emry hot-swap still pending; the swaps touch neither card."
+   ],
+   "guideErrors": [
+    "Header says the list is the Emry-for-Urza hot-swap. The sleeved deck still runs Urza, Lord High Artificer and has no Emry.",
+    "The Traxos + Emry T4 station flow, the Emry recursion row, the 'Bay eats Cyberdrive → Emry recast' flow and the 'historic spell (Emry, Sol Ring, Jitte)' rule all use a card not in the deck.",
+    "Urza is missing everywhere: 'Tap an untapped artifact you control: Add {U}', his Construct token, and the unshielded non-artifact list (which names Emry instead).",
+    "'Tezzeret's 0 ... re-taps Nyx Lotus': the oracle says 'Untap target artifact or creature' (wording only).",
+    "Drain line D (Lux Artillery 30 counters, Lasting Tarfire) must be removed if swaps 4–5 are applied."
+   ]
+  },
+  "refute": {
+   "slug": "inspirit-flagship-vessel",
+   "verdicts": [
+    {
+     "out": "Temple of Epiphany",
+     "in": "Sink into Stupor // Soporific Springs",
+     "pass": true,
+     "reason": "Δ +0.09 matches. MDFC keeps the land slot (untapped for 3 life) and adds instant bounce. Costs one R source. The model cuts Temple too. Owned, free, U."
+    },
+    {
+     "out": "Mystic Monastery",
+     "in": "Filigree Attendant",
+     "pass": true,
+     "reason": "Δ −0.01 matches. Power equals our artifact count: a one-tap station to 8+, and a shielded flying attacker. Replaces a tapped tri-land the model also cuts."
+    },
+    {
+     "out": "Radiant Summit",
+     "in": "Oblivion Stone",
+     "pass": false,
+     "reason": "Δ −0.07, not counted as a wipe. 'One-sided' is overstated: it kills Historian, Jhoira, Skate, Urza, Tezzeret and Plan. 12 mana over two turns. Costs a dual land."
+    },
+    {
+     "out": "Lux Artillery",
+     "in": "Unstoppable Plan",
+     "pass": true,
+     "reason": "Δ −0.02 matches. End-step untap of all rocks and charge sinks gives mana on opponents' turns and double Insight Engine/Lux Cannon. Drops line D (not a lock) and one artifact."
+    },
+    {
+     "out": "Lasting Tarfire",
+     "in": "Resculpt",
+     "pass": true,
+     "reason": "Δ +22.65 matches (a win-step artefact). The real gain is removal 7→8. 2-mana instant exile. The review omits that the opponent gets a 4/4 token."
+    },
+    {
+     "out": "Chandra, Spark Hunter",
+     "in": "Katara's Reversal",
+     "pass": true,
+     "reason": "Δ −0.65 matches (win 7→6 step). A four-target counter protects the alpha. Chandra only animates her own token and sits outside the shield. Judgment, model blind."
+    }
+   ],
+   "allDelta": 1.99,
+   "overall": "PARTIAL",
+   "notes": "The lab reproduced every Δ exactly. ALL is +1.99; the five passing swaps give +2.05 (refute/lab-pass.txt). Deck Score is flat on every swap, so all verdicts are judgment. Ownership, freeness, identity and singleton all pass. There are no locks. O-Stone fails: the 'one-sided' claim is overstated (it kills our non-artifacts plus Inspirit without the {4} counter) and it costs a land. The Resculpt quote omits the opponent's 4/4. Guide errors confirmed. REFUTE.md: verify-2026-10-09/color-best/eval/inspirit-flagship-vessel/REFUTE.md"
+  }
+ },
+ "the-cabbage-merchant": {
+  "review": {
+   "slug": "the-cabbage-merchant",
+   "commander": "The Cabbage Merchant",
+   "sleevedObjective": 11.1,
+   "sleevedDeckScore": 19,
+   "modelObjective": 88.75,
+   "modelPath": "verify-2026-10-09/color-best/eval/the-cabbage-merchant/climb/results-0.jsonl",
+   "swaps": [
+    {
+     "out": "(none: 100th card, lab placeholder 28th Forest)",
+     "in": "Lembas",
+     "why": "\"When this artifact enters, scry 1, then draw a card.\" A Food artifact that works with the commander's Food mana, Trail, Unlucky Merchant, Wolf, Troll King, Took draw, Wurmlet, Sarinth and Dinosaurs. The model is flat on it.",
+     "source": "free",
+     "delta": -0.17
+    },
+    {
+     "out": "Wild Growth",
+     "in": "Rocky Rebuke",
+     "why": "\"Target creature you control deals damage equal to its power to target creature an opponent controls.\" A 2-mana instant that uses the 4/4 and 7/7 tokens; ramp was 16, over the window.",
+     "source": "free",
+     "delta": 4.03
+    },
+    {
+     "out": "Basking Broodscale",
+     "in": "Warg Tactics",
+     "why": "\"Destroy target creature with flying.\" or a hexproof+trample counter. Answers fliers, the guide's named weak spot, or protects Took/Manufactor.",
+     "source": "free",
+     "delta": 5.36
+    },
+    {
+     "out": "Cultivate",
+     "in": "Zuko's Exile",
+     "why": "\"Exile target artifact, creature, or enchantment.\" The only unconditional instant exile available to a mono-G deck. Ramp stays at 13.",
+     "source": "free",
+     "delta": 3.96
+    },
+    {
+     "out": "Autumn's Veil",
+     "in": "Tyvar's Stand",
+     "why": "\"hexproof and indestructible until end of turn\" covers every colour of removal and wipes; Autumn's Veil only stops \"blue or black spells\". The model is blind to it; judgment pick.",
+     "source": "free",
+     "delta": 0
+    },
+    {
+     "out": "Emil, Vastlands Roamer",
+     "in": "Vivien Reid",
+     "why": "\"-3: Destroy target artifact, enchantment, or creature with flying\" plus +1 creature/land card flow. Emil's X counts \"differently named lands\", only ~3 with 27 Forests.",
+     "source": "free",
+     "delta": 2.04
+    }
+   ],
+   "allDelta": 13.22,
+   "verdict": "Upgrade: add Lembas as the 100th card and make 5 swaps, all free. Removal goes 6→10, ramp 16→13, Autumn's Veil becomes Tyvar's Stand. Objective 67.04→80.26 (vs the 99+Forest lab base; 11.1 as played because 99 cards fail structure), Deck Score 75→76.3. The engine is untouched. Most of the +13 comes from the window penalty; the model is blind to the Trudge loop.",
+   "risks": [
+    "Lands drop 36→35 with ramp at 13; the mana component reads 93 (it was 98). Fallback: a 28th Forest as the 100th card instead of Lembas.",
+    "Still only 1 wipe-like effect; no free mono-G wipe suits a token deck (Echoverse Fulcrum kills our own board).",
+    "Tyvar's Stand and Lembas are judgment picks; the model scores them flat.",
+    "Emil → Primeval Bounty was rejected after the lab (−7.08, a win-step drop).",
+    "The climb ran 100 games and did not converge; its 88.75 includes filler (Helix Pinnacle, Silkguard, Echoverse Fulcrum, Desert)."
+   ],
+   "guideErrors": [
+    "The ramp list still names Kodama's Reach (left for Beledros 2026-10-08) and omits Springbloom Druid.",
+    "§2 row 6 Idol of Oblivion + Kraken and the §7 Artifact-hate row cite Idol of Oblivion, which left for Beledros.",
+    "Pest Infestation appears in a §4 mulligan hand and the §5 threat cues; it left for Beledros.",
+    "Ramunap Excavator ('You may play lands from your graveyard') is not mentioned; it loops Escape Tunnel and Springbloom's sacrificed land for Provisioner landfall.",
+    "Win line 2 says 'Every Food, Clue and Treasure becomes a 7/7'; Dinosaurs only affects permanents that enter after it ('As a historic permanent you control enters').",
+    "§2 row 9 Transmutation Font omits the cost '{3}, {T}, Sacrifice three artifact tokens with different names … Activate only as a sorcery'.",
+    "The 99-card note proposes Elvish Archdruid; the review proposes Lembas as the 100th card."
+   ]
+  },
+  "refute": {
+   "slug": "the-cabbage-merchant",
+   "verdicts": [
+    {
+     "out": "(none: 100th card, lab placeholder 28th Forest)",
+     "in": "Lembas",
+     "pass": true,
+     "reason": "Δ −0.17 reproduced, model blind. 2-mana cantrip Food feeds Wurmlet→Trudge, Trail, Took draw and commander mana. Judgment pick; a 28th Forest is the fallback."
+    },
+    {
+     "out": "Wild Growth",
+     "in": "Rocky Rebuke",
+     "pass": true,
+     "reason": "+4.03 reproduced, all from the role window (DS flat). Ramp 16 is surplus and removal 6 is the real hole; one-sided instant with 4/4 tramplers."
+    },
+    {
+     "out": "Basking Broodscale",
+     "in": "Warg Tactics",
+     "pass": true,
+     "reason": "+5.36 reproduced, DS +1.4 is real. Answers fliers (guide's weak spot) or shields Took. Broodscale has no repeat counter source here."
+    },
+    {
+     "out": "Cultivate",
+     "in": "Zuko's Exile",
+     "pass": true,
+     "reason": "+3.96 reproduced, window only. Instant exile of artifact/creature/enchantment; the review leaves out its {5} cost, but 13 ramp covers it."
+    },
+    {
+     "out": "Autumn's Veil",
+     "in": "Tyvar's Stand",
+     "pass": true,
+     "reason": "0.00, model blind. Veil only stops blue or black spells. Stand gives hexproof and indestructible against every colour and wipes. Judgment pick."
+    },
+    {
+     "out": "Emil, Vastlands Roamer",
+     "in": "Vivien Reid",
+     "pass": true,
+     "reason": "+2.04 reproduced, window only. Emil's X is about 2–4; the Beasts already have trample. Vivien answers fliers and artifacts and adds card flow; the deck loses a Chord body."
+    }
+   ],
+   "allDelta": 13.22,
+   "overall": "PASS",
+   "notes": "My lab rerun (300 games) matches every Δ and the ALL total exactly (67.04 → 80.26). Only Warg Tactics shows a real Deck Score gain. The other gains are role-window penalty or the model being blind, so judgment decides them. Oracle quotes and the Trudge loop are correct. All adds are owned, free and singleton, with identity G or colourless. No locks were cut. The review leaves out Zuko's Exile's {5} cost. All 7 guide errors are confirmed. Mana drops 98 → 93. Report: verify-2026-10-09/color-best/eval/the-cabbage-merchant/REFUTE.md. My lab run is in refute/."
+  }
+ },
+ "imotekh-the-stormlord": {
+  "review": {
+   "slug": "imotekh-the-stormlord",
+   "commander": "Imotekh the Stormlord",
+   "sleevedObjective": 62.81,
+   "sleevedDeckScore": 60.6,
+   "modelObjective": 73.18,
+   "modelPath": "verify-2026-10-09/color-best/eval/imotekh-the-stormlord/climb/results-0.jsonl",
+   "swaps": [
+    {
+     "out": "The Darkness Crystal",
+     "in": "Solemn Doomguide",
+     "why": "The Crystal's \"instead exile it\" stops Konrad, Reanimate and Portal (the model also cut it). Doomguide gives \"unearth {1}{B}\" to 5 Necron Wizards and Zealot, and each unearth is an Imotekh trigger.",
+     "source": "free",
+     "delta": 0.01
+    },
+    {
+     "out": "Wishclaw Talisman",
+     "in": "Supernatural Stamina",
+     "why": "\"When this creature dies, return it to the battlefield tapped\": 1-mana protection for Imotekh against destroy effects. On a Necron, the return triggers Imotekh, and Praetorian draws 2. Wishclaw hands a tutor to an opponent.",
+     "source": "free",
+     "delta": 0
+    },
+    {
+     "out": "Grim Haruspex",
+     "in": "Noxious Gearhulk",
+     "why": "Haruspex only sees \"nontoken\" deaths, so it misses every Warrior. Gearhulk: \"destroy another target creature\". It is a 6-MV artifact creature: Szeras makes 6 {B} from it, and Ark/Technomancer can recur it.",
+     "source": "free",
+     "delta": 2
+    },
+    {
+     "out": "Canoptek Wraith",
+     "in": "Soul of New Phyrexia",
+     "why": "\"{5}: Permanents you control gain indestructible\" protects against wipes. \"Exile this card from your graveyard\" also triggers Imotekh. Wraith is a 3-mana land fetch that needs combat damage.",
+     "source": "free",
+     "delta": 1.95
+    },
+    {
+     "out": "Liliana the Repentant",
+     "in": "Sheoldred's Edict",
+     "why": "Liliana's mandatory \"mill two cards\" fires for each token that enters: 4 cards per Imotekh trigger, which risks decking during loops. Edict is 2-mana instant removal.",
+     "source": "free",
+     "delta": 2
+    }
+   ],
+   "allDelta": 3.95,
+   "verdict": "Keep the deck and make 5 swaps: objective 62.81 → 66.76, Deck Score flat at 60.6, penalty 5 → 3. The model cannot see these cards, so the picks are judgment. I rejected the model's cuts of Colossus, Bats, Apprentice and Chronomancer: they are the combo and drain core, and each step was a +2 window gain. Ashnod's Altar is gone, so the Colossus loop now needs noncreature-artifact MV ≥ 11.",
+   "risks": [
+    "Model blind: Deck Score is flat for all 5 adds; the gain is window penalty plus judgment",
+    "Cutting the Crystal and Wishclaw removes 6 noncreature-artifact MV from the Colossus count; without Altar the loop needs MV ≥ 11 with Zealot or Woe Strider",
+    "Doomguide unearths are exiled on leaving, so no death drains except Psychomancer's",
+    "Protection is still at 1 of 3; Lightning Greaves is in Beledros and no other free mono-B card matches the classifier's protection patterns",
+    "Steel Hellkite and Hangarback Walker are free but the unsleeved Urza draft eyes them; neither is used here"
+   ],
+   "guideErrors": [
+    "Header ramp list names Dark Ritual and Ashnod's Altar (both gone) and leaves out Charcoal Diamond",
+    "§1 'Warriors feed Altar' and §2 row 8 'Ashnod's Altar in the yard makes Trazyn a free outlet': Altar is gone",
+    "§2 row 6 Colossus loop is built on Ashnod's Altar (mana-neutral at ≥ 9 MV); only the Zealot variant at ≥ 11 remains, and §5's MV count still lists 'Altar 3'",
+    "§1 win line 5 and §3 T6 rely on Skorpekh Lord's menace anthem; Lord is gone",
+    "§3 T3, the §4 keep hand and §5 life budget name Phyrexian Arena; the mulligan hands name Dark Ritual and Imp's Mischief: all gone",
+    "§5 and §7 say Imp's Mischief is 'the only protection'; the sleeved list has zero protection"
+   ]
+  },
+  "refute": {
+   "slug": "imotekh-the-stormlord",
+   "verdicts": [
+    {
+     "out": "The Darkness Crystal",
+     "in": "Solemn Doomguide",
+     "pass": true,
+     "reason": "Doomguide unearth {1}{B} for 5 Necron Wizards plus Zealot feeds Imotekh. The Crystal is anti-synergy per the guide. The review left out its cost reduction (ramp 11→10). Model blind (+0.01)."
+    },
+    {
+     "out": "Wishclaw Talisman",
+     "in": "Supernatural Stamina",
+     "pass": true,
+     "reason": "Deck had zero protection. Stamina on a Necron returns it from the yard, which triggers Imotekh (Praetorian draws 2). Wishclaw gives the table a tutor. Model blind (0.00)."
+    },
+    {
+     "out": "Grim Haruspex",
+     "in": "Noxious Gearhulk",
+     "pass": true,
+     "reason": "Haruspex misses token deaths. Gearhulk adds removal to the weakest component and is artifact fuel. +2.00 is only the removal window; draw stays in window."
+    },
+    {
+     "out": "Canoptek Wraith",
+     "in": "Soul of New Phyrexia",
+     "pass": true,
+     "reason": "Only wipe protection in the free pool, and its graveyard exile triggers Imotekh. Wraith ramps only on combat damage plus {3}. +1.95 is the protection window."
+    },
+    {
+     "out": "Liliana the Repentant",
+     "in": "Sheoldred's Edict",
+     "pass": true,
+     "reason": "Closest call. Liliana's mandatory mill (4 per Imotekh trigger) blocks the Colossus loop. Ripples, Technomancer and Buried Alive still fill the yard. Edict is cheap instant removal. +2.00 is the window."
+    }
+   ],
+   "allDelta": 3.95,
+   "overall": "PASS",
+   "notes": "Re-ran the lab and it matched exactly: singles +0.01/0.00/+2.00/+1.95/+2.00. The 6-swap run gave +4.02; score.ts on proposed.txt gave 62.81→66.76 (+3.95). Deck Score stayed flat at 60.6, so the model is blind and every pick is a judgment call. All 5 adds are owned, free, unbanned and mono-B/colourless, and the deck stays singleton at 100. No guide locks are cut. One misquote: the review drops \"an amount of\" from Szeras's text. It also leaves out the Crystal's cost reduction. Colossus loop still reaches 11 MV (max 28). Applied the operator's 50% CPU cap."
+  }
+ },
+ "bumi-unleashed": {
+  "review": {
+   "slug": "bumi-unleashed",
+   "commander": "Bumi, Unleashed",
+   "sleevedObjective": -14.69,
+   "sleevedDeckScore": 19,
+   "modelObjective": 78.41,
+   "modelPath": "verify-2026-10-09/color-best/eval/bumi-unleashed/climb/results-0.jsonl",
+   "swaps": [
+    {
+     "out": "Sheltering Landscape",
+     "in": "Riveteers Overlook",
+     "why": "The Landscape's \"Cycling {R}{G}{W}\" puts it outside R/G, so the deck is illegal. Overlook fetches a Mountain or Forest: two landfall triggers (Ascension, Harmonizer, Provisioner).",
+     "source": "free (2 owned, 0 used)",
+     "delta": 1.98
+    },
+    {
+     "out": "Tranquil Landscape",
+     "in": "Lair of the Hydra",
+     "why": "The Landscape's \"Cycling {G}{W}{U}\" is off-identity. Lair: \"{X}{G}: ... becomes an X/X green Hydra creature. It's still a land\". It sinks the mana Bumi untaps and attacks in the land-only combat.",
+     "source": "free",
+     "delta": 1.89
+    },
+    {
+     "out": "Twisted Landscape",
+     "in": "Gruul Turf",
+     "why": "The Landscape's \"Cycling {B}{R}{G}\" is off-identity. Turf: \"{T}: Add {R}{G}\", so Bumi's \"untap all lands\" pays 2 twice, and the bounced land is replayed for landfall.",
+     "source": "free (also in the pending Gilanra draft; fallback Konstrari Annex)",
+     "delta": 1.89
+    },
+    {
+     "out": "Tectonic Split",
+     "in": "Nissa, Who Shakes the World",
+     "why": "Split costs \"sacrifice half the lands\". Nissa's Forests add extra {G}, and her +1 makes an untapped haste/vigilance land creature with 3 counters every turn, feeding Toph GE, Solid Ground and Tutelage.",
+     "source": "free",
+     "delta": -0.01
+    },
+    {
+     "out": "Owlbear Cub",
+     "in": "Overrun",
+     "why": "Owlbear needs the defender to control \"eight or more lands\". Overrun: \"+3/+3 and gain trample until end of turn\", which also covers Bumi's land-only extra combat.",
+     "source": "free",
+     "delta": 0
+    },
+    {
+     "out": "Summon: G.F. Ifrit",
+     "in": "Lavaspur Boots",
+     "why": "Ifrit is two loots plus {R}{R} spread over four turns. Boots: \"haste and ward {1}\", equip {1}, so Bumi connects the turn he lands, repeatably.",
+     "source": "free",
+     "delta": 3.99
+    },
+    {
+     "out": "Circuitous Route",
+     "in": "Silkguard",
+     "why": "Route is a 4-MV duplicate of the deck's 2-MV ramp. Silkguard: \"modified creatures you control gain hexproof\". Every earthbended land is modified, and so is Bumi if X >= 1 targets him.",
+     "source": "free",
+     "delta": 3.96
+    },
+    {
+     "out": "Part in Friendship",
+     "in": "Guardian Augmenter",
+     "why": "A 5-MV death trigger with no setup in this deck. Augmenter: \"Flash / Commander creatures you control get +2/+2. / Commanders you control have hexproof.\" Bumi is the single point of failure.",
+     "source": "free (left Beledros 10-08)",
+     "delta": 7.86
+    }
+   ],
+   "allDelta": 52.06,
+   "verdict": "The sleeved deck is illegal: 3 Landscapes are outside R/G, and fixing them is mandatory. 8 free swaps take the objective from -14.69 to 37.37 and Deck Score from 19 to 57.2. About +44 of that is the 100-card restoration. Nissa and Overrun are judgment calls; the model cannot see earthbend. Plan holds: Bumi connects, untaps lands, land-only combat, Toph double strike.",
+   "risks": [
+    "Gruul Turf (1 copy) and Riveteers Overlook are also in the pending Gilanra stompy draft. A parallel Gilanra review may pick Overrun, Nissa, Silkguard or Boots.",
+    "The final list has 33 lands (gate WARN, Karsten 37+-2). Ramp at ~19 compensates.",
+    "Model blind spots: the Nissa and Overrun deltas are 0. Augmenter's +7.86 (measured against the Kami variant) is mostly the win component's close-turn step, not a precise value.",
+    "The climb's 78.41 comes from cutting ramp 21 -> 10 to fit the role window plus filler removal bodies. Rejected as anti-plan.",
+    "The gate SKIPPED ownership. All 8 adds were checked by hand: in collection.txt, in no deck file, not in the ban list.",
+    "Moraug and The Legend of Kyoshi were avoided: tazri-final and the Gilanra draft hold them."
+   ],
+   "guideErrors": [
+    "There is no .md pilot guide. The primer decks/paper/primers/bumi-unleashed.json describes the unapplied 10-07 draft, not the sleeved list: it cites Overrun, Nissa, Boots, Lair, Silkguard, Rampant Growth, Cultivate and Yavimaya.",
+    "The 'Nissa and Yavimaya' engine is not buildable: Yavimaya's only copy is now sleeved in Beledros.",
+    "Win line 1's 'P(kill <= T6) .655' is the draft's sim, not the sleeved deck's.",
+    "The Nissa flow omits that her +1 targets a 'noncreature land' only, so she cannot re-target an earthbended land.",
+    "nearTies and keepers treat Terramorphic Expanse and Cultivate as available. Cultivate is 2/2 used; Terramorphic is in Beledros and banned by name.",
+    "The primer does not flag that the sleeved list runs 3 off-identity Landscapes (illegal as sleeved)."
+   ]
+  },
+  "refute": {
+   "slug": "bumi-unleashed",
+   "verdicts": [
+    {
+     "out": "Sheltering Landscape",
+     "in": "Riveteers Overlook",
+     "pass": true,
+     "reason": "Mandatory identity fix (Cycling {R}{G}{W}). The Overlook gives 2 landfall triggers. Δ +1.98 reproduced. Owned x2, free."
+    },
+    {
+     "out": "Tranquil Landscape",
+     "in": "Lair of the Hydra",
+     "pass": true,
+     "reason": "Mandatory identity fix. Lair is a mana sink and is 'still a land', so it can attack in Bumi's land-only combat. Δ +1.89 reproduced. Free."
+    },
+    {
+     "out": "Twisted Landscape",
+     "in": "Gruul Turf",
+     "pass": true,
+     "reason": "Mandatory identity fix. Turf adds {R}{G}, paying 2 per Bumi untap. Δ +1.89 reproduced. Free, but collides with the unsleeved Gilanra draft (1 copy)."
+    },
+    {
+     "out": "Tectonic Split",
+     "in": "Nissa, Who Shakes the World",
+     "pass": true,
+     "reason": "Model blind (-0.01 reproduced), judgment call. The anti-plan claim is overstated (earthbended lands return), but Nissa's mana doubling and a haste land attacker each turn beat a 6-MV Split."
+    },
+    {
+     "out": "Owlbear Cub",
+     "in": "Overrun",
+     "pass": true,
+     "reason": "Model blind (0.00 reproduced), judgment call. A real finisher for the go-wide land army; Owlbear Cub needs the defender to control 8+ lands. Quotes verified."
+    },
+    {
+     "out": "Summon: G.F. Ifrit",
+     "in": "Lavaspur Boots",
+     "pass": true,
+     "reason": "Δ +3.99 reproduced, but it is window only. On merits, haste plus ward {1} lets Bumi connect on the cast turn, which is the plan's engine."
+    },
+    {
+     "out": "Circuitous Route",
+     "in": "Silkguard",
+     "pass": true,
+     "reason": "Marginal. Δ +3.96 reproduced, window only. Route is understated: it gives 2 landfall triggers. Protection was 2 (below window) and ramp stays 19, so the swap is acceptable."
+    },
+    {
+     "out": "Part in Friendship",
+     "in": "Guardian Augmenter",
+     "pass": true,
+     "reason": "Merits hold (flash, Bumi hexproof). Reported Δ +7.86 is wrong: the single-swap Δ is +0.01 (model blind). The 'no setup' claim is also false, since earthbended land deaths trigger Part in Friendship."
+    }
+   ],
+   "allDelta": 52.07,
+   "overall": "PASS",
+   "notes": "ALL reproduced: -14.69 -> 37.37, Deck Score 19 -> 57.2. Finding: swap 8's +7.86 is the gap between two ALL rows (final vs the Kami variant), not a single-swap delta. Measured alone it is +0.01, so REVIEW.md needs that number corrected. All oracle quotes check out. Two claims are overstated: Tectonic Split 'anti-plan' and Part in Friendship 'no setup'. All 8 adds are owned, in no deck file and not banned. final.txt has 100 cards, is singleton and stays inside R/G. There are no locks (no .md guide). CPU capped at 50%."
+  }
+ },
+ "beledros-witherbloom": {
+  "review": {
+   "slug": "beledros-witherbloom",
+   "commander": "Beledros Witherbloom",
+   "sleevedObjective": 90.5,
+   "sleevedDeckScore": 86.1,
+   "modelObjective": 99.91,
+   "modelPath": "verify-2026-10-09/color-best/eval/beledros-witherbloom/climb/results-0.jsonl",
+   "swaps": [],
+   "allDelta": 0,
+   "verdict": "No swaps; null result. All four climb swaps (+9.4 total) came from the role windows. They cut the Altar lock, Dark Ritual and Culling Ritual (both operator decisions) and Zulaport. Arnyn stays OUT: ≈0 for the model in every slot. The deck's anthems (Liege, Mikaeus, Baloth, Blech) switch off its P/T ≤1 clause, and it drains one opponent. Skorpekh→Arnyn scored −8.56 (win step). Fix the guide's 12 errors.",
+   "risks": [
+    "The list sits on the win component's T8/T9 close-turn edge. Cutting any 3-power attacker or draw piece reads −8 to −10, so slot deltas are bimodal.",
+    "The model is blind to drains, sacrifice outlets, Omnipresence free casting and Insidious Roots token mana. Most of the plan is judgment, not score.",
+    "Golgari Rot Farm is still an unconfirmed precon-list registration.",
+    "The climb ran 2 passes at 100 games and did not converge. Its +0.26 for Zulaport -> Conduit Pylons is within noise."
+   ],
+   "guideErrors": [
+    "§1 line 3, §2 rows 4 and 6: 'every token dies twice' with Mikaeus undying is wrong. Tokens cease to exist in the graveyard (CR 111.7/704.5d), so only nontoken non-Humans return. The Blech counter caveat is moot for tokens.",
+    "§10 'Never Saw on Beledros (command zone = did not die)' is wrong. The commander dies and only then moves to the command zone (CR 903.9a). Saw in Half on your own Beledros gives two 2/2 flying copies, each with its own upkeep Pest and once-per-turn pay-10 untap.",
+    "§2 Greaves caveat: Vesuva and Thespian's Stage only copy lands and never target Beledros. Shroud actually blocks your own Revitalizing Repast and Saw in Half on him.",
+    "§2 'nothing else in the list protects him' is false. Imp's Mischief, Veil of Summer, Revitalizing Repast (indestructible) and Saw in Half all protect him. The §6 protection count also misses Repast.",
+    "§2 'Token deaths draw through Moldervine, Liliana and Village Rites only' is wrong. Morbid Opportunist ('one or more other creatures die') counts tokens once each turn, including opponents' turns. Priest, Braids and Deadly Dispute also draw.",
+    "§1 table row 2 lists Veinwitch Coven as a rebuy piece, but it is no longer in the 99.",
+    "§7 'Mikaeus returns' is wrong. He grants undying only to 'Other non-Human creatures'.",
+    "§8 misplay 2: Thespian's Stage copying Rot Farm does not enter the battlefield, so nothing bounces and it taps for {B}{G}. The real trap is Vesuva copying Rot Farm.",
+    "§5 mulligan odds are one draw short with 34 lands instead of 35. Third land by T3 is about 62% on the play and 77% on the draw, not 37% and 60%.",
+    "§5 mulligan table and bottoming order still name Deadly Tempest and Alhammarret's Archive, which are not in the 99.",
+    "§2 row 9: Turn Stones is a {B}{G} sorcery copy, so 3 Pests per round, not per turn. §2 row 13: in a 4-pod only 3 of the round's 4 Pests can tap for mana on your turn (your own upkeep Pest is summoning-sick), and Victimize is not in the list.",
+    "§10 Arnyn row ignores the anthems (Creakwood Liege makes Pests 3/3, plus Mikaeus, Baloth and Blech), which switch off the P/T ≤1 clause."
+   ]
+  },
+  "refute": {
+   "slug": "beledros-witherbloom",
+   "verdicts": [
+    {
+     "out": "Skorpekh Lord",
+     "in": "Arnyn, Deathbloom Botanist",
+     "pass": false,
+     "reason": "Swap not proposed: the reviewer tested and rejected it. Rejection confirmed: −8.56 reproduced exactly (win-component step 83→72). Arnyn is owned and free. The model is blind to it, and the anthems switch off its P/T ≤1 clause."
+    }
+   ],
+   "allDelta": -8.56,
+   "overall": "PARTIAL",
+   "notes": "Null result confirmed. The lab reproduces exactly (BASE 90.50; Arnyn −8.56), and the climb deltas match (+4.09/+1.97/+3.21/+0.26; they cut a lock and operator decisions). allDelta is the rejected test swap; the proposed change set is empty. Two REVIEW errors: (1) guide error 2 is wrong as written. Saw in Half on own Beledros makes legendary copies, so the legend rule keeps ONE 2/2, not two. (2) Yahenni is also a free instant-speed sac outlet. The other 11 guide errors are verified. See REFUTE.md."
+  }
+ },
+ "gilanra-alena-partners": {
+  "review": {
+   "slug": "gilanra-alena-partners",
+   "commander": "Gilanra, Caller of Wirewood + Alena, Kessig Trapper",
+   "sleevedObjective": 0,
+   "sleevedDeckScore": 0,
+   "modelObjective": 0,
+   "modelPath": "verify-2026-10-08/gilanra-stompy/final.txt (the pending draft stands in for the model: the lab cannot score partners, 46 cards read as missing, so score.ts and the swap lab were not run)",
+   "swaps": [
+    {
+     "out": "Avatar of Slaughter",
+     "in": "Hexhaven Invigorator",
+     "why": "The operator asked for it. Avatar's \"All creatures have double strike\" helps opponents too. Hexhaven: \"Whenever this creature is dealt damage, you may search ... land cards\". Warstorm, Terror, Burning Sun's Avatar, Drakuseth and Myojin can target it; each fetched land makes a Baloths token.",
+     "source": "free"
+    },
+    {
+     "out": "Fling",
+     "in": "Poison Dart Frog",
+     "why": "Fling makes you \"sacrifice a creature\". Frog says \"{T}: Add one mana of any color\", so Gilanra comes down on T2. Sim: keep-7 goes up.",
+     "source": "free"
+    },
+    {
+     "out": "Roxanne, Starfall Savant",
+     "in": "Ilysian Caryatid",
+     "why": "Roxanne costs 5 and her Meteorite enters tapped. Caryatid costs 2 and says \"add two mana of any one color\" with power 4+. 31 creatures have power 5+.",
+     "source": "free"
+    },
+    {
+     "out": "Slinza, the Spiked Stampede",
+     "in": "Tangled Florahedron",
+     "why": "Slinza's \"Beast spells cost {2} less\" helps only a few cards. Florahedron is a 2-MV \"{T}: Add {G}\" dork or a Tangled Vale land when the hand needs one.",
+     "source": "free"
+    },
+    {
+     "out": "Planar Engineering",
+     "in": "Selvala, Heart of the Wilds",
+     "why": "Planar Engineering costs 4 and makes you \"Sacrifice two lands\". Selvala: \"{G},{T}: Add X mana ... greatest power\". Sim: +.47 more 6+ casts than Simulacrum Shaper in this slot.",
+     "source": "free"
+    },
+    {
+     "out": "Sweet-Gum Recluse",
+     "in": "Konstrari Annex",
+     "why": "Recluse is a 0/3 whose cascade mostly hits ramp. Annex is an FRA land: \"{T}: Add {R} or {G}\". It is land #37.",
+     "source": "free"
+    },
+    {
+     "out": "Bane of Progress",
+     "in": "Sheltered Thicket",
+     "why": "Bane says \"destroy all artifacts and enchantments\", which kills our own Sol Ring, Signet, Talisman, Vortex, Warstorm and Gearhulks. Thicket is a \"Mountain Forest\" with cycling and is land #38. Sim: this beats cutting Diamond City on every metric.",
+     "source": "free"
+    },
+    {
+     "out": "Ruric Thar, the Unbowed",
+     "in": "Violent Echoes",
+     "why": "Ruric deals 6 to whoever \"casts a noncreature spell\", including us, and we cast 11. Echoes is an FRA instant: \"6 damage to target creature or planeswalker\". It is the deck's only instant-speed removal.",
+     "source": "free"
+    }
+   ],
+   "allDelta": 0,
+   "verdict": "Make the 8 swaps: the lab is blind to partners, so they are justified by oracle text and the deck's goldfish sim (10k games). Against the sleeved list: keep-7 .60→.69, 4th land on T4 .84→.86, 6+ casts by T8 8.87→9.38, spells cast 14.8→16.4, screwed .028→.016. Adds Hexhaven and 3 FRA cards, all from the free pool. The full pending draft is still stronger on consistency; these 8 are stage 1.",
+   "risks": [
+    "Cutting Bane of Progress leaves the deck with no artifact/enchantment answer. Cleanup Crew (free) for Hoard-Smelter Dragon is the next swap.",
+    "Hexhaven costs GGGG, and the lands it fetches enter tapped. Selvala's draw is symmetric: \"its controller may draw\".",
+    "The sim's clock by T7 is flat (.471 to .468). It models Avatar's double strike against no blockers but not Hexhaven's lands or Violent Echoes, so treat it as a lower bound.",
+    "The pending draft (gilanra-stompy/final.txt) uses Beast Within and Fabled Passage. Both are banned by name (Beledros/Inspirit), though one spare copy of each exists by count. Rule on this before sleeving the draft.",
+    "Konstrari Annex enters tapped unless Domri or Garruk is on the battlefield.",
+    "No swap-lab or score.ts numbers exist (partners read as missing); every number is the deck's own goldfish sim, seed 7."
+   ],
+   "guideErrors": [
+    "The guide describes the unsleeved draft (gilanra-stompy/final.txt), not the sleeved list. The sleeved deck has no guide of its own.",
+    "§2 row 1 says \"41 spells of MV 6+ in the 98\". The draft has 37, because the 10-08 FRA patches replaced 6+ drops with cheaper cards.",
+    "§2 row 11 says \"36 of 39 creatures are 5+ power\". The draft has 48 creatures, 32 of them with power 5 or more.",
+    "§2 row 9 says \"Block with it; every Moraug landfall from it is another combat\". Moraug's trigger requires \"if it's your main phase\", so lands fetched while blocking add no combat.",
+    "§8 lists Earthshaker Dreadmaw as a maybeboard option, but it is already in the main deck.",
+    "§3/§7 still count Fabled Passage and Beast Within as free. Both are now in Beledros/Inspirit and in the ban file."
+   ]
+  },
+  "refute": {
+   "slug": "gilanra-alena-partners",
+   "verdicts": [
+    {
+     "out": "Avatar of Slaughter",
+     "in": "Hexhaven Invigorator",
+     "pass": true,
+     "reason": "Operator's request. Avatar's double strike and forced attacks hit both sides. All 7 Hexhaven enablers are confirmed in the oracle text. Lab -0.18 is blind noise."
+    },
+    {
+     "out": "Fling",
+     "in": "Poison Dart Frog",
+     "pass": true,
+     "reason": "Fling costs a card. A 2-drop any-colour dork helps keep-7. The review's 'Gilanra on T2' claim is false: Frog taps on T3. The real gain is Alena on T4."
+    },
+    {
+     "out": "Roxanne, Starfall Savant",
+     "in": "Ilysian Caryatid",
+     "pass": true,
+     "reason": "A 5-MV maker of tapped rocks becomes a 2-MV dork that taps for 2 with power 4+. Oracle quotes are correct. Lab +2.00 is the ramp window."
+    },
+    {
+     "out": "Slinza, the Spiked Stampede",
+     "in": "Tangled Florahedron",
+     "pass": false,
+     "reason": "The review misquotes Slinza: it leaves out her repeatable fight when a 4+ power creature enters. That cuts removal in a removal-thin batch. Put Florahedron in for Havoc Eater, Woodwurm or Sledge-Captain instead."
+    },
+    {
+     "out": "Planar Engineering",
+     "in": "Selvala, Heart of the Wilds",
+     "pass": true,
+     "reason": "X mana from 5-8 power bodies far beats Planar's net +2 lands. Risks: fragile, and her draw is symmetric. Lab +3.95 (window plus advantage)."
+    },
+    {
+     "out": "Sweet-Gum Recluse",
+     "in": "Konstrari Annex",
+     "pass": true,
+     "reason": "37th land in a 6-drop deck. Recluse's cascade is a coin-flip. Annex enters tapped unless we control a planeswalker (Domri/Garruk); quoted correctly."
+    },
+    {
+     "out": "Bane of Progress",
+     "in": "Sheltered Thicket",
+     "pass": false,
+     "reason": "Leaves zero enchantment answers; the review admits the gap. Cleanup Crew is owned, free, 6 MV and kills an artifact or enchantment: do Bane -> Cleanup Crew, Thicket for a filler."
+    },
+    {
+     "out": "Ruric Thar, the Unbowed",
+     "in": "Violent Echoes",
+     "pass": true,
+     "reason": "Ruric punishes our own noncreature spells (12 in the sleeved list, not 11) and must attack. Echoes is instant 6-damage removal, the only instant once Fling leaves."
+    }
+   ],
+   "allDelta": 8.7,
+   "overall": "PARTIAL",
+   "notes": "The swap lab is blind to this deck: every red card and all Mountains read as missing, and Deck Score is 0 for each swap. ALL +8.70 is mostly the window penalty (34->30). Judgment decided every swap. All 8 in-cards are owned, free, inside R/G identity and singleton; no locks were cut. Swap 4 fails because the review leaves Slinza's fight engine out of its quote. Swap 7 fails because it leaves no enchantment answer; Bane -> Cleanup Crew is the fix. CPU cap of 50% applied via cpu-cap. Report: verify-2026-10-09/color-best/eval/gilanra-alena-partners/REFUTE.md"
+  }
+ }
+}

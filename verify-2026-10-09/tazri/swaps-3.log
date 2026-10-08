@@ -1,0 +1,6 @@
+BASE obj 88.94 DS 77.5 pen 0 {"land":36,"ramp":11,"draw":10,"removal":11,"board_wipe":3,"protection":6} mana=89 curve=96 interaction=96 advantage=70 win=72 synergy=100 meta=50 structure=100
+   0.00  Night's Whisper => Garruk's Uprising   DS 0.0 pen 0 mana=89 curve=94 interaction=96 advantage=65 win=72 synergy=100 meta=50 structure=100
+   0.01  Nalia de'Arnise => Overrun   DS 0.0 pen 0 mana=89 curve=94 interaction=96 advantage=70 win=72 synergy=100 meta=50 structure=100
+  -1.99  Acererak the Archlich => Squad Commander   DS 0.0 pen 1 mana=89 curve=94 interaction=96 advantage=70 win=72 synergy=100 meta=50 structure=100
+   0.11  Return of the Wildspeaker => Commander's Sphere   DS 0.0 pen 0 mana=90 curve=96 interaction=96 advantage=70 win=72 synergy=100 meta=50 structure=100
+ALL  obj 87.06 (-1.88) DS 77.5 pen 1 {"land":36,"ramp":12,"draw":10,"removal":11,"board_wipe":3,"protection":7} mana=90 curve=94 interaction=96 advantage=65 win=72 synergy=100 meta=50 structure=100

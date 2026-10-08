@@ -1,0 +1,9 @@
+BASE obj 43.17 DS 63.6 pen 16 {"land":34,"ramp":16,"draw":20,"removal":12,"board_wipe":7,"protection":6} mana=72 curve=94 interaction=98 advantage=75 win=55 synergy=81 meta=50 structure=100
+  -5.60  Sarkhan the Masterless => Diabolic Tutor   DS -5.6 pen 16 mana=72 curve=95 interaction=98 advantage=75 win=48 synergy=81 meta=50 structure=100
+  -5.61  Ob Nixilis of the Black Oath => Way of the Cryomancer   DS -5.6 pen 16 mana=72 curve=95 interaction=98 advantage=75 win=48 synergy=79 meta=50 structure=100
+   0.02  Fumigate => Windfall   DS 0.0 pen 16 mana=72 curve=95 interaction=98 advantage=75 win=55 synergy=81 meta=50 structure=100
+  -0.02  Thrummingbird => Loyal Tutor   DS 0.0 pen 16 mana=72 curve=95 interaction=98 advantage=75 win=55 synergy=79 meta=50 structure=100
+  -5.62  Kaito, Dancing Shadow => Jace, Multiverse Architect   DS -5.6 pen 16 mana=72 curve=93 interaction=98 advantage=75 win=48 synergy=81 meta=50 structure=100
+   1.98  Chandra, Awakened Inferno => Expansion Algorithm   DS 0.0 pen 15 mana=72 curve=94 interaction=98 advantage=75 win=55 synergy=84 meta=50 structure=100
+   1.98  Settle the Wreckage => Tomik, Orzhov Lawmage   DS 0.0 pen 15 mana=72 curve=93 interaction=98 advantage=75 win=55 synergy=81 meta=50 structure=100
+ALL  obj 26.53 (-16.65) DS 43.0 pen 14 {"land":34,"ramp":16,"draw":21,"removal":12,"board_wipe":4,"protection":5} mana=72 curve=95 interaction=98 advantage=75 win=29 synergy=79 meta=50 structure=100

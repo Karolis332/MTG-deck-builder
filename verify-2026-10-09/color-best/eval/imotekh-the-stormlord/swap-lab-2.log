@@ -1,0 +1,8 @@
+BASE obj 62.81 DS 60.6 pen 5 {"land":35,"ramp":11,"draw":11,"removal":9,"board_wipe":2,"protection":0} mana=88 curve=91 interaction=44 advantage=75 win=51 synergy=100 meta=50 structure=100
+   0.01  The Darkness Crystal => Solemn Doomguide   DS 0.0 pen 5 mana=88 curve=92 interaction=44 advantage=75 win=51 synergy=100 meta=50 structure=100
+  -0.00  Wishclaw Talisman => Supernatural Stamina   DS 0.0 pen 5 mana=88 curve=91 interaction=44 advantage=75 win=51 synergy=100 meta=50 structure=100
+   2.00  Grim Haruspex => Noxious Gearhulk   DS 0.0 pen 4 mana=88 curve=90 interaction=45 advantage=75 win=51 synergy=100 meta=50 structure=100
+   1.95  Canoptek Wraith => Soul of New Phyrexia   DS 0.0 pen 4 mana=88 curve=90 interaction=46 advantage=75 win=51 synergy=100 meta=50 structure=100
+   2.00  Liliana the Repentant => Sheoldred's Edict   DS 0.0 pen 4 mana=88 curve=91 interaction=53 advantage=75 win=51 synergy=100 meta=50 structure=100
+   0.07  Foundry Inspector => Thran Dynamo   DS 0.0 pen 5 mana=88 curve=90 interaction=44 advantage=75 win=51 synergy=100 meta=50 structure=100
+ALL  obj 66.83 (4.02) DS 60.6 pen 3 {"land":35,"ramp":11,"draw":10,"removal":11,"board_wipe":2,"protection":1} mana=88 curve=89 interaction=57 advantage=75 win=51 synergy=100 meta=50 structure=100

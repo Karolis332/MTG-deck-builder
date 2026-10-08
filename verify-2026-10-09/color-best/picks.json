@@ -1,0 +1,347 @@
+{
+ "W": {
+  "commander": "Pearl-Ear, Imperial Advisor",
+  "objective": 77.86,
+  "deckScore": 68.4,
+  "list": "verify-2026-10-09/color-best/lists/W-pearl-ear-imperial-advisor.txt",
+  "roles": {
+   "land": 35,
+   "ramp": 11,
+   "draw": 10,
+   "removal": 9,
+   "board_wipe": 3,
+   "protection": 3
+  },
+  "cards": 99
+ },
+ "U": {
+  "commander": "Sai, Master Thopterist",
+  "objective": 75.42,
+  "deckScore": 63.6,
+  "list": "verify-2026-10-09/color-best/lists/U-sai-master-thopterist.txt",
+  "roles": {
+   "land": 37,
+   "ramp": 12,
+   "draw": 10,
+   "removal": 10,
+   "board_wipe": 3,
+   "protection": 5
+  },
+  "cards": 99
+ },
+ "B": {
+  "commander": "Ob Nixilis of the Black Oath",
+  "objective": 78.74,
+  "deckScore": 66.4,
+  "list": "verify-2026-10-09/color-best/lists/B-ob-nixilis-of-the-black-oath.txt",
+  "roles": {
+   "land": 38,
+   "ramp": 12,
+   "draw": 10,
+   "removal": 11,
+   "board_wipe": 3,
+   "protection": 3
+  },
+  "cards": 99
+ },
+ "R": {
+  "commander": "Magda, the Hoardmaster",
+  "objective": 79.03,
+  "deckScore": 66.5,
+  "list": "verify-2026-10-09/color-best/lists/R-magda-the-hoardmaster.txt",
+  "roles": {
+   "land": 38,
+   "ramp": 12,
+   "draw": 12,
+   "removal": 10,
+   "board_wipe": 4,
+   "protection": 4
+  },
+  "cards": 99
+ },
+ "G": {
+  "commander": "The Cabbage Merchant",
+  "objective": 89.23,
+  "deckScore": 77.5,
+  "list": "verify-2026-10-09/color-best/lists/G-the-cabbage-merchant.txt",
+  "roles": {
+   "land": 35,
+   "ramp": 11,
+   "draw": 11,
+   "removal": 11,
+   "board_wipe": 3,
+   "protection": 6
+  },
+  "cards": 99
+ },
+ "WU": {
+  "commander": "Linvala, Shield of Sea Gate",
+  "objective": 82.67,
+  "deckScore": 71.0,
+  "list": "verify-2026-10-09/color-best/lists/WU-linvala-shield-of-sea-gate.txt",
+  "roles": {
+   "land": 38,
+   "ramp": 12,
+   "draw": 12,
+   "removal": 10,
+   "board_wipe": 3,
+   "protection": 6
+  },
+  "cards": 99
+ },
+ "WB": {
+  "commander": "Minthara, Merciless Soul",
+  "objective": 89.9,
+  "deckScore": 77.5,
+  "list": "verify-2026-10-09/color-best/lists/WB-minthara-merciless-soul.txt",
+  "roles": {
+   "land": 36,
+   "ramp": 12,
+   "draw": 11,
+   "removal": 11,
+   "board_wipe": 3,
+   "protection": 6
+  },
+  "cards": 99
+ },
+ "WR": {
+  "commander": "Duke Ulder Ravengard",
+  "objective": 82.84,
+  "deckScore": 70.1,
+  "list": "verify-2026-10-09/color-best/lists/WR-duke-ulder-ravengard.txt",
+  "roles": {
+   "land": 36,
+   "ramp": 12,
+   "draw": 10,
+   "removal": 11,
+   "board_wipe": 4,
+   "protection": 6
+  },
+  "cards": 99
+ },
+ "WG": {
+  "commander": "Mirri, Weatherlight Duelist",
+  "objective": 71.17,
+  "deckScore": 71.4,
+  "list": "verify-2026-10-09/color-best/lists/WG-mirri-weatherlight-duelist.txt",
+  "roles": {
+   "land": 36,
+   "ramp": 16,
+   "draw": 11,
+   "removal": 10,
+   "board_wipe": 3,
+   "protection": 8
+  },
+  "cards": 99
+ },
+ "UB": {
+  "commander": "Uldaros Theorix",
+  "objective": 75.3,
+  "deckScore": 63.6,
+  "list": "verify-2026-10-09/color-best/lists/UB-uldaros-theorix.txt",
+  "roles": {
+   "land": 38,
+   "ramp": 11,
+   "draw": 11,
+   "removal": 11,
+   "board_wipe": 3,
+   "protection": 4
+  },
+  "cards": 99
+ },
+ "UR": {
+  "commander": "Saheeli, Jewel of Avishkar",
+  "objective": 81.58,
+  "deckScore": 71.8,
+  "list": "verify-2026-10-09/color-best/lists/UR-saheeli-jewel-of-avishkar.txt",
+  "roles": {
+   "land": 37,
+   "ramp": 10,
+   "draw": 12,
+   "removal": 12,
+   "board_wipe": 4,
+   "protection": 7
+  },
+  "cards": 99
+ },
+ "UG": {
+  "commander": "The Goose Mother",
+  "objective": 89.95,
+  "deckScore": 78.6,
+  "list": "verify-2026-10-09/color-best/lists/UG-the-goose-mother.txt",
+  "roles": {
+   "land": 36,
+   "ramp": 12,
+   "draw": 10,
+   "removal": 10,
+   "board_wipe": 3,
+   "protection": 6
+  },
+  "cards": 99
+ },
+ "BR": {
+  "commander": "Akul the Unrepentant",
+  "objective": 78.22,
+  "deckScore": 66.5,
+  "list": "verify-2026-10-09/color-best/lists/BR-akul-the-unrepentant.txt",
+  "roles": {
+   "land": 37,
+   "ramp": 12,
+   "draw": 12,
+   "removal": 10,
+   "board_wipe": 3,
+   "protection": 3
+  },
+  "cards": 99
+ },
+ "BG": {
+  "commander": "Gyome, Master Chef",
+  "objective": 89.29,
+  "deckScore": 77.5,
+  "list": "verify-2026-10-09/color-best/lists/BG-gyome-master-chef.txt",
+  "roles": {
+   "land": 38,
+   "ramp": 12,
+   "draw": 10,
+   "removal": 10,
+   "board_wipe": 3,
+   "protection": 6
+  },
+  "cards": 99
+ },
+ "RG": {
+  "commander": "Ruric Thar, the Unbowed",
+  "objective": 89.18,
+  "deckScore": 76.3,
+  "list": "verify-2026-10-09/color-best/lists/RG-ruric-thar-the-unbowed.txt",
+  "roles": {
+   "land": 38,
+   "ramp": 12,
+   "draw": 11,
+   "removal": 10,
+   "board_wipe": 4,
+   "protection": 5
+  },
+  "cards": 99
+ },
+ "WUB": {
+  "commander": "The Destined Warrior",
+  "objective": 91.5,
+  "deckScore": 79.4,
+  "list": "verify-2026-10-09/color-best/lists/WUB-the-destined-warrior.txt",
+  "roles": {
+   "land": 37,
+   "ramp": 11,
+   "draw": 11,
+   "removal": 10,
+   "board_wipe": 3,
+   "protection": 6
+  },
+  "cards": 99
+ },
+ "WUR": {
+  "commander": "Kilo, Apogee Mind",
+  "objective": 78.43,
+  "deckScore": 69.0,
+  "list": "verify-2026-10-09/color-best/lists/WUR-kilo-apogee-mind.txt",
+  "roles": {
+   "land": 35,
+   "ramp": 11,
+   "draw": 10,
+   "removal": 9,
+   "board_wipe": 3,
+   "protection": 4
+  },
+  "cards": 99
+ },
+ "WBR": {
+  "commander": "Terra, Herald of Hope",
+  "objective": 80.99,
+  "deckScore": 69.0,
+  "list": "verify-2026-10-09/color-best/lists/WBR-terra-herald-of-hope.txt",
+  "roles": {
+   "land": 37,
+   "ramp": 12,
+   "draw": 12,
+   "removal": 10,
+   "board_wipe": 4,
+   "protection": 6
+  },
+  "cards": 99
+ },
+ "WRG": {
+  "commander": "Ghired, Mirror of the Wilds",
+  "objective": 80.7,
+  "deckScore": 78.6,
+  "list": "verify-2026-10-09/color-best/lists/WRG-ghired-mirror-of-the-wilds.txt",
+  "roles": {
+   "land": 37,
+   "ramp": 17,
+   "draw": 11,
+   "removal": 12,
+   "board_wipe": 3,
+   "protection": 6
+  },
+  "cards": 99
+ },
+ "UBR": {
+  "commander": "Marchesa, the Black Rose",
+  "objective": 71.41,
+  "deckScore": 59.2,
+  "list": "verify-2026-10-09/color-best/lists/UBR-marchesa-the-black-rose.txt",
+  "roles": {
+   "land": 36,
+   "ramp": 12,
+   "draw": 12,
+   "removal": 10,
+   "board_wipe": 3,
+   "protection": 6
+  },
+  "cards": 99
+ },
+ "BRG": {
+  "commander": "Auntie Ool, Cursewretch",
+  "objective": 81.77,
+  "deckScore": 70.1,
+  "list": "verify-2026-10-09/color-best/lists/BRG-auntie-ool-cursewretch.txt",
+  "roles": {
+   "land": 37,
+   "ramp": 11,
+   "draw": 11,
+   "removal": 12,
+   "board_wipe": 3,
+   "protection": 6
+  },
+  "cards": 99
+ },
+ "WUBR": {
+  "commander": "Breya, Etherium Shaper",
+  "objective": 83.06,
+  "deckScore": 71.0,
+  "list": "verify-2026-10-09/color-best/lists/WUBR-breya-etherium-shaper.txt",
+  "roles": {
+   "land": 36,
+   "ramp": 12,
+   "draw": 12,
+   "removal": 10,
+   "board_wipe": 3,
+   "protection": 6
+  },
+  "cards": 99
+ },
+ "WUBRG": {
+  "commander": "Tazri, Beacon of Unity",
+  "objective": 97.93,
+  "deckScore": 86.1,
+  "list": "verify-2026-10-09/color-best/lists/WUBRG-tazri-beacon-of-unity.txt",
+  "roles": {
+   "land": 36,
+   "ramp": 12,
+   "draw": 10,
+   "removal": 10,
+   "board_wipe": 3,
+   "protection": 6
+  },
+  "cards": 99
+ }
+}

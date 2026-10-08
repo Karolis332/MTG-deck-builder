@@ -1,0 +1,9 @@
+# base = verify-2026-10-09/tazri/tazri-final.txt ; restore dig density (23 -> 31 party hits)
+Return of the Wildspeaker => Squad Commander
+Acererak the Archlich => Linvala, Shield of Sea Gate
+Varis, Silverymoon Ranger => Harper Recruiter
+Caves of Chaos Adventurer => Undermountain Adventurer
+Triumphant Adventurer => Nimble Trapfinder
+Pyrewood Gearhulk => Samut, Voice of Dissent
+Bident of Thassa => Mindblade Render
+Channeler Initiate => Tajuru Paragon

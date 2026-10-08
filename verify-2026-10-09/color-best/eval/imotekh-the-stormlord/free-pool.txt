@@ -1,0 +1,404 @@
+ 36.8 +0.3   3    129   1.5      Victimize | Sorc | Choose two target creature cards in your graveyard. Sacrifice a creature. If you do, return the chosen cards t
+ 36.0 +1.6   6   1002   0.4      Noxious Gearhulk | Art Cr — Construct | Menace When this creature enters, you may destroy another target creature. If a creature is destroyed this way
+ 35.4 +3.0   7   9865   2.5      Shard of the Void Dragon | Cr — C'tan | Flying Spear of the Void Dragon — Whenever this creature attacks, each opponent sacrifices a nonland permanent
+ 30.8 +3.2   6  14624   0.4      Hexmark Destroyer | Art Cr — Necron | Multi-threat Eliminator — This creature can't be blocked except by six or more creatures. Unearth {4}{B}{B} ({
+ 28.0 +3.1   5  14937   0.4      Triarch Stalker | Art Cr — Necron | Targeting Relay — At the beginning of combat on your turn, choose an opponent. Creatures attacking the last ch
+ 28.0 +3.1   7  11065   0.9      Necron Monolith | Art — Vehicle | Flying, indestructible Eternity Gate — Whenever this Vehicle attacks, mill three cards. For each creature card
+ 27.1 +3.2   3  16441   0.4      Sautekh Immortal | Art Cr — Necron | Flash Elite Troops — This creature enters with a +1/+1 counter on it for each creature that died this turn.
+ 26.7 +2.0   8   5626   4.5      Shard of the Nightbringer | Cr — C'tan | Flying Drain Life — When this creature enters, if you cast it, target opponent loses half their life, rounded 
+ 24.9 +3.3   2  12140   0.3      Razorlash Transmogrant | Art Cr — Zombie | This creature can't block. {4}{B}{B}: Return this card from your graveyard to the battlefield with a +1/+1 cou
+ 24.7 +3.1   4  17060   0.3      Skorpekh Destroyer | Art Cr — Necron | Deathtouch Hyperphase Threshers — Whenever an artifact you control enters, this creature gains first strike un
+ 11.5 -0.8   2    182   6.3      2x Night's Whisper | Sorc | You draw two cards and lose 2 life.
+ 11.4 -1.1   2    233   2.8      Sign in Blood | Sorc | Target player draws two cards and loses 2 life.
+ 10.8 +1.7   3    738   1.2      Palladium Myr | Art Cr — Myr | {T}: Add {C}{C}.
+  8.4 +2.0   3   8938   0.2      Unseal the Necropolis | Inst | Each player mills three cards. Then you return up to two creature cards from your graveyard to your hand. (To 
+  6.9 +1.9   2   7508   0.4      Altar of Bhaal // Bone Offering | Art | {2}{B}, {T}, Exile a creature you control: Return target creature card from your graveyard to the battlefield.
+  4.8 +0.3   2   2357   0.8      Chthonian Nightmare | Ench | When this enchantment enters, you get {E}{E}{E} (three energy counters). Pay X {E}, Sacrifice a creature, Retu
+  4.8 -0.8   1    599   0.3      3x Corrupted Conviction | Inst | As an additional cost to cast this spell, sacrifice a creature. Draw two cards.
+  4.4 -0.4   0     82   0.3      2x Temple of the False God | Land | {T}: Add {C}{C}. Activate only if you control five or more lands.
+  4.2 +2.1   4   9761   0.1      Sivriss, Nightmare Speaker | L.Cr — Snake Cleric Warlock | {T}, Sacrifice another creature or an artifact: For each opponent, you mill a card, then return that card from
+  4.2 -1.1   4    485   2.2      Diabolic Tutor | Sorc | Search your library for a card, put that card into your hand, then shuffle.
+  4.2 +2.1   3  11330   0.3      Egon, God of Death // Throne of Death | L.Cr — God | Deathtouch At the beginning of your upkeep, exile two cards from your graveyard. If you can't, sacrifice Egon 
+  4.1 -0.7   3    499   0.3      Burnished Hart | Art Cr — Elk | {3}, Sacrifice this creature: Search your library for up to two basic land cards, put them onto the battlefiel
+  4.0 +1.8   8   2108  13.4      Cityscape Leveler | Art Cr — Construct | Trample When you cast this spell and whenever this creature attacks, destroy up to one target nonland permanen
+  3.9 -1.2   2   2437   0.3      2x Consuming Corruption | Inst | Consuming Corruption deals X damage to target creature or planeswalker and you gain X life, where X is the num
+  3.4 +1.3   0   1106   3.0      Mishra's Bauble | Art | {T}, Sacrifice this artifact: Look at the top card of target player's library. Draw a card at the beginning of
+  3.3 -1.3   9    491   6.4      Rise of the Dark Realms | Sorc | Put all creature cards from all graveyards onto the battlefield under your control.
+  3.3 -0.4   3   2231   1.9      Grave Researcher // Reanimate | Cr — Troll Warlock | At the beginning of your upkeep, surveil 1. Then if there are three or more creature cards in your graveyard, 
+  2.9 -1.6   2   1148   1.3      Sheoldred's Edict | Inst | Choose one — • Each opponent sacrifices a nontoken creature of their choice. • Each opponent sacrifices a crea
+  2.8 -0.5   3    572   0.3      Worn Powerstone | Art | This artifact enters tapped. {T}: Add {C}{C}.
+  2.8 +1.3   2  11478   0.2      Emergency Weld | Sorc | Return target artifact or creature card from your graveyard to your hand. Create a 1/1 colorless Soldier artif
+  2.7 +1.0   1   1355   0.3      Soul-Guide Lantern | Art | When this artifact enters, exile target card from a graveyard. {T}, Sacrifice this artifact: Exile each oppone
+  2.6 -1.4   3    632   1.5      Boggart Trawler // Boggart Bog | Cr — Goblin | When this creature enters, exile target player's graveyard. // As this land enters, you may pay 3 life. If you
+  2.5 +0.8   2   7315   0.1      Corpse Churn | Inst | Mill three cards, then you may return a creature card from your graveyard to your hand. (To mill three cards, 
+  2.5 +0.2   2   3900   0.3      Eviscerator's Insight | Inst | As an additional cost to cast this spell, sacrifice an artifact or creature. Draw two cards. Flashback {4}{B} 
+  2.4 +0.2   1   1445   1.0      Elixir of Immortality | Art | {2}, {T}: You gain 5 life. Shuffle this artifact and your graveyard into their owner's library.
+  1.5 -1.2   5   2930   0.3      Skirge Familiar | Cr — Phyrexian Imp | Flying Discard a card: Add {B}.
+  1.5 -2.2   4   2587   3.5      Dread Presence | Cr — Nightmare | Whenever a Swamp you control enters, choose one — • You draw a card and you lose 1 life. • This creature deals
+  1.5 -1.1   2   1149   0.4      Plumb the Forbidden | Inst | As an additional cost to cast this spell, you may sacrifice one or more creatures. When you do, copy this spel
+  1.4 -2.0   1   1308   0.4      2x Undying Malice | Inst | Until end of turn, target creature gains "When this creature dies, return it to the battlefield tapped under i
+  1.4 -1.8   3    861   0.2      Murder | Inst | Destroy target creature.
+  1.4 -0.6   4   3370   0.3      Zombify | Sorc | Return target creature card from your graveyard to the battlefield.
+  1.3 -1.8   1   1767   0.2      Supernatural Stamina | Inst | Until end of turn, target creature gets +2/+0 and gains "When this creature dies, return it to the battlefield
+  1.2 -1.4   2    234   5.6      Sword of the Animist | L.Art — Equipment | Equipped creature gets +1/+1. Whenever equipped creature attacks, you may search your library for a basic land
+  1.1 +1.5   2   3415   1.2      Lembas | Art — Food | When this artifact enters, scry 1, then draw a card. {2}, {T}, Sacrifice this artifact: You gain 3 life. When 
+  1.0 -2.2   7   1289   3.3      Peer into the Abyss | Sorc | Target player draws cards equal to half the number of cards in their library and loses half their life. Round 
+  1.0 +1.5   2  14135   0.1      Wreckage Wickerfolk | Art Cr — Scarecrow | Flying When this creature enters, surveil 2. (Look at the top two cards of your library, then put any number o
+  1.0 +0.1   3   1769    -       Adaptive Automaton | Art Cr — Construct | As this creature enters, choose a creature type. This creature is the chosen type in addition to its other typ
+  1.0 +0.3   0   2009   0.3      2x Conduit Pylons | Land — Desert | When this land enters, surveil 1. (Look at the top card of your library. You may put it into your graveyard.) 
+  1.0 -2.5   4   1046   0.3      Syphon Mind | Sorc | Each other player discards a card. You draw a card for each card discarded this way.
+  0.9 +1.0   5  13834   0.1      No One Left Behind | Sorc | This spell costs {3} less to cast if it targets a creature card with mana value 3 or less. Return target creat
+  0.9 -0.1   1   9158   0.1      Raise Dead | Sorc | Return target creature card from your graveyard to your hand.
+  0.9 -2.2   3   1049   0.2      Midnight Reaper | Cr — Zombie Knight | Whenever a nontoken creature you control dies, this creature deals 1 damage to you and you draw a card.
+  0.9 -0.8   4   3865   0.4      Smothering Abomination | Cr — Eldrazi | Devoid (This card has no color.) Flying At the beginning of your upkeep, sacrifice a creature. Whenever you sa
+  0.8 +0.1   0   2255   0.3      Hidden Grotto | Land | When this land enters, surveil 1. (Look at the top card of your library. You may put it into your graveyard.) 
+  0.8 -1.5   3   4006   2.8      Oubliette | Ench | When this enchantment enters, target creature phases out until this enchantment leaves the battlefield. Tap th
+  0.7 -1.5   4   3079  11.3      Emeritus of Woe // Demonic Tutor | Cr — Vampire Warlock | This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.
+  0.7 +1.4   3   4376   0.2      Barkform Harvester | Art Cr — Shapeshifter | Changeling (This card is every creature type.) Reach {2}: Put target card from your graveyard on the bottom of
+  0.6 -0.8   4   6242   0.2      Whisper, Blood Liturgist | L.Cr — Human Cleric | {T}, Sacrifice two creatures: Return target creature card from your graveyard to the battlefield.
+  0.6 -2.0   4   4007   0.2      Grim Servant | Cr — Zombie Warlock | Menace When this creature enters, search your library for a card with mana value less than or equal to your de
+  0.6 -1.9   4   4580   4.5      Necrotic Ooze | Cr — Ooze | As long as this creature is on the battlefield, it has all activated abilities of all creature cards in all gr
+  0.6 -0.3   0    681   0.3      2x Opal Palace | Land | {T}: Add {C}. {1}, {T}: Add one mana of any color in your commander's color identity. If you spend this mana t
+  0.5 -0.4   4   9280   1.2      Phoenix Fleet Airship | Art — Vehicle | Flying At the beginning of your end step, if you sacrificed a permanent this turn, create a token that's a cop
+  0.5 +2.3   2   7139   0.3      Patchwork Automaton | Art Cr — Construct | Ward {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unl
+  0.5 -0.9   3   1940   5.7      Bitterthorn, Nissa's Animus | L.Art — Equipment | Living weapon (When this Equipment enters, create a 0/0 black Phyrexian Germ creature token, then attach this 
+  0.5 -1.7   4   5245   0.4      Elegy Acolyte | Cr — Human Cleric | Lifelink Whenever one or more creatures you control deal combat damage to a player, you draw a card and lose 1
+  0.5 -0.8   6   3709   0.3      Haunting Voyage | Sorc | Choose a creature type. Return up to two creature cards of that type from your graveyard to the battlefield. I
+  0.5 -1.0   0   1421   0.8      Muraganda Raceway | Land | Start your engines! (If you have no speed, it starts at 1. It increases once on each of your turns when an opp
+  0.4 -3.3   1    613   4.6      Carrion Feeder | Cr — Zombie | This creature can't block. Sacrifice a creature: Put a +1/+1 counter on this creature.
+  0.4 -1.7   4   5952   0.3      Ancient Craving | Sorc | You draw three cards and you lose 3 life.
+  0.3 -0.5   0   1497   1.5      Arid Archway | Land — Desert | This land enters tapped. When this land enters, return a land you control to its owner's hand. If another Dese
+  0.3 -0.4   2   5955   0.3      Mindblade Render | Cr — Azra Warrior | Whenever your opponents are dealt combat damage, if any of that damage was dealt by a Warrior, you draw a card
+  0.3 -4.2   2    477   0.3      Accursed Marauder | Cr — Zombie Warrior | When this creature enters, each player sacrifices a nontoken creature of their choice.
+  0.3 -2.3   4   5469   0.2      Dimir House Guard | Cr — Skeleton | Fear (This creature can't be blocked except by artifact creatures and/or black creatures.) Sacrifice a creatur
+  0.3 -3.1   4   2201   0.4      Greed | Ench | {B}, Pay 2 life: Draw a card.
+  0.3 -2.2   4   5619    -       Tendrils of Agony | Sorc | Target player loses 2 life and you gain 2 life. Storm (When you cast this spell, copy it for each spell cast b
+  0.3 -3.5   1   2612   0.7      3x Blood Pet | Cr — Thrull | Sacrifice this creature: Add {B}.
+  0.3 +0.1   1   5291   0.2      Fountainport Bell | Art | When this artifact enters, you may search your library for a basic land card, reveal it, then shuffle and put 
+  0.3 -1.5   2   5372   1.6      Emperor of Bones | Cr — Skeleton Noble | At the beginning of combat on your turn, exile up to one target card from a graveyard. {1}{B}: Adapt 2. Whenev
+  0.3 -3.5   2   2370   0.9      Nether Traitor | Cr — Spirit | Haste Shadow (This creature can block or be blocked by only creatures with shadow.) Whenever another creature 
+  0.3 -1.6   2   8361   0.2      Power Word Kill | Inst | Destroy target non-Angel, non-Demon, non-Devil, non-Dragon creature.
+  0.3 -3.0   2   1758   0.3      Vengeful Bloodwitch | Cr — Vampire Warlock | Whenever this creature or another creature you control dies, target opponent loses 1 life and you gain 1 life.
+  0.3 -2.6   4   4793   1.5      Braids, Cabal Minion | L.Cr — Human Minion | At the beginning of each player's upkeep, that player sacrifices an artifact, creature, or land of their choic
+  0.2 -2.3   2   3729   0.2      Dread Summons | Sorc | Each player mills X cards. For each creature card put into a graveyard this way, you create a tapped 2/2 black
+  0.2 -2.0   2   4175   0.8      3x Shoot the Sheriff | Inst | Destroy target non-outlaw creature. (Assassins, Mercenaries, Pirates, Rogues, and Warlocks are outlaws. Everyo
+  0.2 -1.7   2   3513   4.9      Torpor Orb | Art | Creatures entering don't cause abilities to trigger.
+  0.2 -3.3   5   1232   0.8      Junji, the Midnight Sky | L.Cr — Dragon Spirit | Flying, menace When Junji dies, choose one — • Each opponent discards two cards and loses 2 life. • Put target
+  0.2 -2.4   0   5813   0.4      Realm of Koh | Land | This land enters tapped unless you control a basic land. {T}: Add {B}. {3}{B}, {T}: Create a 1/1 colorless Spi
+  0.2 -2.5   1   1530   1.8      Lavaspur Boots | Art — Equipment | Equipped creature gets +1/+0 and has haste and ward {1}. (Whenever it becomes the target of a spell or ability
+  0.2 -3.0   2   6533   1.1      Demon's Horn | Art | Whenever a player casts a black spell, you may gain 1 life.
+  0.2 -3.6   3   1673   0.4      Murderous Rider // Swift End | Cr — Zombie Knight | Lifelink When this creature dies, put it on the bottom of its owner's library. // Destroy target creature or p
+  0.2 -3.3   3   1959   5.1      Varragoth, Bloodsky Sire | L.Cr — Demon Rogue | Deathtouch Boast — {1}{B}: Target player searches their library for a card, then shuffles and puts that card o
+  0.2 -2.9   5    966  10.4      Alhammarret's Archive | L.Art | If you would gain life, you gain twice that much life instead. If you would draw a card except the first one y
+  0.2 -2.4   6   2855   5.5      Metamorphosis Fanatic | Cr — Human Cleric | Lifelink When this creature enters, return up to one target creature card from your graveyard to the battlefie
+  0.1 -1.7   0    716   0.3      2x Riveteers Overlook | Land | When this land enters, sacrifice it. When you do, search your library for a basic Swamp, Mountain, or Forest c
+  0.1 -4.5   2   1010   0.9      Bloodghast | Cr — Vampire Spirit | This creature can't block. This creature has haste as long as an opponent has 10 or less life. Landfall — When
+  0.1 -3.2   2   3193   1.0      Damnable Pact | Sorc | Target player draws X cards and loses X life.
+  0.1 -2.0   2   6338   2.2      Day of Black Sun | Sorc | Each creature with mana value X or less loses all abilities until end of turn. Destroy those creatures.
+  0.1 -2.6   3    974   2.8      Loxodon Warhammer | Art — Equipment | Equipped creature gets +3/+0 and has trample and lifelink. Equip {3}
+  0.1 -4.9   3    639   0.4      Plaguecrafter | Cr — Human Shaman | When this creature enters, each player sacrifices a creature or planeswalker of their choice. Each player who 
+  0.1 -2.7   4   3479   1.4      Shadowheart, Dark Justiciar | L.Cr — Human Elf Cleric | {1}{B}, {T}, Sacrifice another creature: Draw X cards, where X is that creature's power. Choose a Background (
+  0.1 -3.2   4   9141   0.3      Tendrils of Corruption | Inst | Tendrils of Corruption deals X damage to target creature and you gain X life, where X is the number of Swamps 
+  0.1 -2.8   0   1548   3.1      Radiant Fountain | Land | When this land enters, you gain 2 life. {T}: Add {C}.
+  0.1 -4.2   2   1415   0.5      Dreadhorde Invasion | Ench | At the beginning of your upkeep, you lose 1 life and amass Zombies 1. (Put a +1/+1 counter on an Army you cont
+  0.1 -2.9   3   1349   0.4      Pristine Talisman | Art | {T}: Add {C}. You gain 1 life.
+  0.1 -2.7   4  13149   0.2      Drag to the Underworld | Inst | This spell costs {X} less to cast, where X is your devotion to black. (Each {B} in the mana costs of permanent
+  0.1 -2.5   4   8656   2.4      Mastermind's Acquisition | Sorc | Choose one — • Search your library for a card, put it into your hand, then shuffle. • Put a card you own from 
+  0.1 -0.8   5  15288   0.1      Bond of Revival | Sorc | Return target creature card from your graveyard to the battlefield. It gains haste until your next turn.
+  0.1 -3.7   5   5541   0.3      Chainer, Dementia Master | L.Cr — Human Minion | All Nightmares get +1/+1. {B}{B}{B}, Pay 3 life: Put target creature card from a graveyard onto the battlefiel
+  0.1 -3.3   6   5371   1.4      Doomsday Excruciator | Cr — Demon | Flying When this creature enters, if it was cast, each player exiles all but the bottom six cards of their lib
+  0.1 -4.1   7   1375   0.4      2x Butcher of Malakir | Cr — Vampire Warrior | Flying Whenever this creature or another creature you control dies, each opponent sacrifices a creature of the
+  0.1 -1.7   8  10064    -       Overwhelming Forces | Sorc | Destroy all creatures target opponent controls. Draw a card for each creature destroyed this way.
+  0.1 -4.6   1   2440   2.3      2x Forsaken Miner | Cr — Skeleton Rogue | This creature can't block. Whenever you commit a crime, you may pay {B}. If you do, return this card from your
+  0.1 -3.0   1   5402   3.1      Vampiric Link | Ench — Aura | Enchant creature Whenever enchanted creature deals damage, you gain that much life.
+  0.1 -2.4   2  11561   0.2      Joo Dee, One of Many | Cr — Human Advisor | {B}, {T}: Surveil 1. Create a token that's a copy of this creature, then sacrifice an artifact or creature. Ac
+  0.1 -1.1   2   6438   0.2      Mazemind Tome | Art — Book | {T}, Put a page counter on this artifact: Scry 1. (Look at the top card of your library. You may put that card
+  0.1 -3.2   2   4624   5.1      Stensian Sanguinist // Exsanguinate | Cr — Vampire Cleric | Whenever you attack, target creature gains deathtouch until end of turn. Whenever that creature deals combat d
+  0.1 -3.3   2   9941   0.3      Victim of Night | Inst | Destroy target non-Vampire, non-Werewolf, non-Zombie creature.
+  0.1 -3.5   2   4286   0.7      Vraan, Executioner Thane | L.Cr — Phyrexian Vampire | Whenever one or more other creatures you control die, each opponent loses 2 life and you gain 2 life. This abi
+  0.1 -1.1   3  17220   0.3      Sigil of Myrkul | Ench | At the beginning of combat on your turn, mill a card. When you do, if there are four or more creature cards in
+  0.1 -0.8   4   4254   0.3      Firemind Vessel | Art | This artifact enters tapped. {T}: Add two mana of different colors.
+  0.1 -3.5   4   5702   3.7      Pact Weapon | Art — Equipment | As long as this Equipment is attached to a creature, you don't lose the game for having 0 or less life. Whenev
+  0.1 -4.8   4   2028   1.0      Sangromancer | Cr — Vampire Shaman | Flying Whenever a creature an opponent controls dies, you may gain 3 life. Whenever an opponent discards a car
+  0.1 -3.3   5   4400   0.4      High-Society Hunter | Cr — Vampire Noble | Flying Whenever this creature attacks, you may sacrifice another creature. If you do, put a +1/+1 counter on t
+  0.1 +0.0   5   8262   0.3      Luxurious Locomotive | Art — Vehicle | Whenever this Vehicle attacks, create a Treasure token for each creature that crewed it this turn. (They're ar
+  0.1 -3.3   8  10821   1.1      Reiver Demon | Cr — Demon | Flying When this creature enters, if you cast it from your hand, destroy all nonartifact, nonblack creatures. 
+??   -     -    0   1036   1.9      Arcane Lighthouse | Land | {T}: Add {C}. {1}, {
+??   -     -    0   1316   0.3      Astral Cornucopia | Art | This artifact enters 
+??   -     -    0  11111   0.2      Base Camp | Land | This land enters tapped. {T}
+??   -     -    0   2886   0.3      Basilisk Gate | Land — Gate | {T}: Add {C}. {2}
+??   -     -    0   1662   0.4      Blast Zone | Land | This land enters with a cha
+??   -     -    0   1317   0.9      Brokers Hideout | Land | When this land enters,
+??   -     -    0    193   0.4      Buried Ruin | Land | {T}: Add {C}. {2}, {T}, Sa
+??   -     -    0    969   0.3      Cabaretti Courtyard | Land | When this land ent
+??   -     -    0   5815   0.3      Cloudpost | Land — Locus | This land enters tap
+??   -     -    0   6591   0.1      Crawling Barrens | Land | {T}: Add {C}. {4}: Pu
+??   -     -    0   4593   0.2      Cryptic Caves | Land | {T}: Add {C}. {1}, {T}, 
+??   -     -    0   1472   3.0      Dark Depths | L.Snow Land | Dark Depths enters 
+??   -     -    0   3142   3.3      Diamond City | Land | This land enters with a s
+??   -     -    0     19   0.3      Evolving Wilds | Land | {T}, Sacrifice this lan
+??   -     -    0   6597   0.3      Glimmerpost | Land — Locus | When this land ent
+??   -     -    0   1818   0.3      Great Hall of the Citadel | Land | {T}: Add {C}
+??   -     -    0   1522   0.3      Hangarback Walker | Art Cr — Construct | This c
+??   -     -    0   1527   7.0      Horizon of Progress | Land | {T}, Pay 1 life: A
+??   -     -    0   4445   0.3      Ifnir Deadlands | Land — Desert | {T}: Add {C}.
+??   -     -    0   4184   0.2      Interplanar Beacon | Land | Whenever you cast a
+??   -     -    0    267  16.2      Inventors' Fair | L.Land | At the beginning of 
+??   -     -    0    206   2.2      Karn's Bastion | Land | {T}: Add {C}. {4}, {T}:
+??   -     -    0   1871   2.8      Lazotep Quarry | Land — Desert | {T}: Add {C}. 
+??   -     -    0    869   2.5      Lotus Field | Land | Hexproof This land enters 
+??   -     -    0   1285   0.3      Maestros Theater | Land | When this land enters
+??   -     -    0    116  34.9      Mana Confluence | Land | {T}, Pay 1 life: Add o
+??   -     -    0   4339   0.2      Mirage Mesa | Land — Desert | This land enters 
+??   -     -    0   2963   0.4      Mudflat Village | Land | {T}: Add {C}. {T}: Add
+??   -     -    0   2630   9.3      Planar Nexus | Land | This land is every nonbas
+??   -     -    0   7627   0.4      Plaza of Harmony | Land | When this land enters
+??   -     -    0     10   4.5      Reliquary Tower | Land | You have no maximum ha
+??   -     -    0   3013   0.3      Rumble Arena | Land | Vigilance When this land 
+??   -     -    0   6427   0.3      Sandstorm Verge | Land — Desert | {T}: Add {C}.
+??   -     -    0   3770   0.4      Secluded Starforge | Land | {T}: Add {C}. {2}, 
+??   -     -    0   9992   0.3      Skycoach Waypoint | Land | {T}: Add {C}. {3}, {
+??   -     -    0    394   0.3      Spire of Industry | Land | {T}: Add {C}. {T}, P
+??   -     -    0   1514   0.4      Stonecoil Serpent | Art Cr — Snake | Reach, tra
+??   -     -    0    529    -       Strip Mine | Land | {T}: Add {C}. {T}, Sacrific
+??   -     -    0   3543   0.2      3x Study Hall | Land | {T}: Add {C}. {1}, {T}: 
+??   -     -    0    570  41.0      Talon Gates of Madara | Land — Gate | When this
+??   -     -    0   9199   0.9      Tarnation Vista | Land | This land enters tappe
+??   -     -    0    854   0.4      The Mycosynth Gardens | Land — Sphere | {T}: Ad
+??   -     -    0    580   0.5      Thespian's Stage | Land | {T}: Add {C}. {2}, {T
+??   -     -    0   8042   0.4      Trenchpost | Land — Locus | {T}: Add {C}. {3}, 
+??   -     -    0    842   1.2      Urza's Mine | Land — Urza's Mine | {T}: Add {C}
+??   -     -    0    843   2.4      Urza's Power Plant | Land — Urza's Power-Plant 
+??   -     -    0    835   1.1      Urza's Tower | Land — Urza's Tower | {T}: Add {
+??   -     -    0    923   3.6      Vesuva | Land | You may have this land enter ta
+??   -     -    0   2683   0.4      Volatile Fault | Land — Cave | {T}: Add {C}. {1
+??   -     -    0     45  12.3      Windswept Heath | Land | {T}, Pay 1 life, Sacri
+??   -     -    0     47  17.8      Wooded Foothills | Land | {T}, Pay 1 life, Sacr
+??   -     -    0     78  17.3      Yavimaya, Cradle of Growth | L.Land | Each land
+??   -     -    1    254   3.7      Basilisk Collar | Art — Equipment | Equipped cr
+??   -     -    1   5868   0.6      Blood Celebrant | Cr — Human Cleric | {B}, Pay 
+??   -     -    1  16401   0.2      Callous Inspector | Cr — Human Soldier | Menace
+??   -     -    1    682   2.4      Changeling Outcast | Cr — Shapeshifter | Change
+??   -     -    1    454    -       2x Expedition Map | Art | {2}, {T}, Sacrifice t
+??   -     -    1   2252   0.2      Explorer's Scope | Art — Equipment | Whenever e
+??   -     -    1  22251   0.3      Eye of Jace | Art | At the beginning of your up
+??   -     -    1   5684   0.7      Font of Agonies | Ench | Whenever you pay life,
+??   -     -    1  17186   0.3      Giant's Boulder | Art | When this artifact ente
+??   -     -    1  15826   0.3      Gonti's Machinations | Ench | Whenever you lose
+??   -     -    1  10351   0.4      Gutterbones | Cr — Skeleton Warrior | This crea
+??   -     -    1   4855   0.3      Hateful Eidolon | Ench Cr — Spirit | Lifelink W
+??   -     -    1   3887   0.2      Infestation Sage | Cr — Elf Warlock | When this
+??   -     -    1    765   2.1      Kaya's Ghostform | Ench — Aura | Enchant creatu
+??   -     -    1   3006    -       Library of Leng | Art | You have no maximum han
+??   -     -    1   4503   5.4      Lost Jitte | L.Art — Equipment | Whenever equip
+??   -     -    1   7151   0.7      Multiclass Baldric | Art — Equipment | Equipped
+??   -     -    1  13229   0.3      Suffer the Past | Inst | Exile X target cards f
+??   -     -    1  19148   0.3      2x Unfortunate Accident | Inst | Spree (Choose 
+??   -     -    1   1298   2.6      Vexing Bauble | Art | Whenever a player casts a
+??   -     -    2    223   7.1      Animate Dead | Ench — Aura | Enchant creature c
+??   -     -    2   4228   0.3      Bandit's Talent | Ench — Class | (Gain the next
+??   -     -    2   1933   0.4      Black Sun's Zenith | Sorc | Put X -1/-1 counter
+??   -     -    2  13083   0.2      Blood Hustler | Cr — Vampire Rogue | Whenever y
+??   -     -    2   6429   1.6      Changing Loyalty | Ench — Aura | Flash Replicat
+??   -     -    2   1419   0.3      Contagion Clasp | Art | When this artifact ente
+??   -     -    2   5614   0.3      Coretapper | Art Cr — Myr | {T}: Put a charge c
+??   -     -    2    584   5.5      Emerald Medallion | Art | Green spells you cast
+??   -     -    2   5203   0.3      Gavel of the Righteous | Art — Equipment | At t
+??   -     -    2   6786   0.3      Gleaming Barrier | Art Cr — Wall | Defender Whe
+??   -     -    2  14152   0.1      Hungry Ghoul | Cr — Zombie | {1}, Sacrifice ano
+??   -     -    2   5115   0.3      Idol of False Gods | Kindred Art — Eldrazi | {1
+??   -     -    2  18337   0.2      Intermediate Chirography | Ench — Class | (Gain
+??   -     -    2   1336   1.5      Jadar, Ghoulcaller of Nephalia | L.Cr — Human W
+??   -     -    2   3195   0.3      Keen Duelist | Cr — Human Wizard | At the begin
+??   -     -    2  16934   1.0      Liliana the Repentant | L.Cr — Human Warlock | 
+??   -     -    2   9389   0.3      Morlun, Devourer of Spiders | L.Cr — Vampire Vi
+??   -     -    2  13849   0.2      Mourner's Surprise | Sorc | Return up to one ta
+??   -     -    2   5139   0.3      Moxite Refinery | Art | {2}, {T}, Remove X coun
+??   -     -    2   6395   0.3      Noble's Purse | Art | This artifact enters tapp
+??   -     -    2   4808   0.2      Nullpriest of Oblivion | Cr — Vampire Cleric | 
+??   -     -    2   5717   0.3      Oft-Nabbed Goat | Cr — Goat | {1}: Draw a card.
+??   -     -    2   4767   0.4      Outrageous Robbery | Inst | Target opponent exi
+??   -     -    2    440   6.0      Pearl Medallion | Art | White spells you cast c
+??   -     -    2   4107   0.3      Pentad Prism | Art | Sunburst (This artifact en
+??   -     -    2   1356   0.7      Persist | Sorc | Return target nonlegendary cre
+??   -     -    2   4983   0.3      Prophetic Prism | Art | When this artifact ente
+??   -     -    2  11583   0.1      Raven of Fell Omens | Cr — Bird | Flying Whenev
+??   -     -    2    357   8.3      Sapphire Medallion | Art | Blue spells you cast
+??   -     -    2  11816   0.5      Scourge of the Skyclaves | Cr — Demon | Kicker 
+??   -     -    2  10424   0.2      Servant of the Stinger | Cr — Human Warlock | D
+??   -     -    2  27243   0.3      Solve for Disappointment | Sorc | Target oppone
+??   -     -    2  16403   0.1      Sorcerous Spyglass | Art | As this artifact ent
+??   -     -    2   3272   1.9      Soulless Jailer | Art Cr — Phyrexian Golem | Pe
+??   -     -    2   1985   1.1      Starscape Cleric | Cr — Bat Cleric | Offspring 
+??   -     -    2  10511   0.3      Sting, Bilbo's Sword | L.Art — Equipment | Flas
+??   -     -    2  14601   0.3      Stonework Packbeast | Art Cr — Beast | Stonewor
+??   -     -    2  10337   0.4      Sun Droplet | Art | Whenever you're dealt damag
+??   -     -    2  13291   0.2      Tablet of Compleation | Art | {T}: Put an oil c
+??   -     -    2  22908   3.2      2x The Echoverse Fulcrum | L.Art | When The Ech
+??   -     -    2   4234   4.0      The Ooze | L.Art | Whenever a creature you cont
+??   -     -    2   5958   0.2      Thieves' Tools | Art — Equipment | When this Eq
+??   -     -    2   3913   0.3      Unlicensed Hearse | Art — Vehicle | {T}: Exile 
+??   -     -    2  21279   0.4      Vraska's Final Mercy | Sorc | Choose one — • Yo
+??   -     -    2   2866   0.4      Wrecking Ball Arm | L.Art — Equipment | Equippe
+??   -     -    2  10801   0.3      Zhentarim Bandit | Cr — Halfling Rogue | Whenev
+??   -     -    3   5861   5.4      Acererak the Archlich | L.Cr — Zombie Wizard | 
+??   -     -    3   5485   0.3      All-Fates Scroll | Art | {T}: Add one mana of a
+??   -     -    3   7798   0.4      Arnyn, Deathbloom Botanist | L.Cr — Vampire Dru
+??   -     -    3  13460   1.1      Azula, Ruthless Firebender | L.Cr — Human Noble
+??   -     -    3   5440   0.2      Bandit's Haul | Art | Whenever you commit a cri
+??   -     -    3  12111   0.3      Baron Helmut Zemo | L.Cr — Human Noble Villain 
+??   -     -    3    556   0.9      Bender's Waterskin | Art | Untap this artifact 
+??   -     -    3   3822   0.7      Blight Mound | Ench | Attacking Pests you contr
+??   -     -    3   6783   0.4      Bloodthirsty Aerialist | Cr — Vampire Rogue | F
+??   -     -    3   3066   0.3      Blowfly Infestation | Ench | Whenever a creatur
+??   -     -    3    606   1.5      Cloud Key | Art | As this artifact enters, choo
+??   -     -    3   6910   0.3      Coercive Impetus | Ench — Aura | Enchant creatu
+??   -     -    3  11922   0.3      Davriel, Rogue Shadowmage | L.Planeswalker — Da
+??   -     -    3    319   5.2      Decanter of Endless Water | Art | You have no m
+??   -     -    3  13765   0.3      Deliver Unto Evil | Sorc | Choose up to four ta
+??   -     -    3  10496   0.4      Druidic Satchel | Art | {2}, {T}: Reveal the to
+??   -     -    3   6468   0.2      Dusk Urchins | Cr — Ouphe | Whenever this creat
+??   -     -    3   3974   0.3      Elementalist's Palette | Art | Whenever you cas
+??   -     -    3   8357   0.3      Fallen Ideal | Ench — Aura | Enchant creature E
+??   -     -    3   3197   0.3      Firdoch Core | Kindred Art — Shapeshifter | Cha
+??   -     -    3   2614   0.5      Ghoulish Impetus | Ench — Aura | Enchant creatu
+??   -     -    3   1207   1.2      Glaring Fleshraker | Cr — Eldrazi Drone | Whene
+??   -     -    3   5674   0.3      Golem Foundry | Art | Whenever you cast an arti
+??   -     -    3  14644   0.2      Heartless Pillage | Sorc | Target opponent disc
+??   -     -    3    980   0.4      Inspiring Statuary | Art | Nonartifact spells y
+??   -     -    3   3062   2.1      Iron Spider, Stark Upgrade | L.Art Cr — Spider 
+??   -     -    3  13748   0.5      Jerren, Corrupted Bishop // Ormendahl, the Corr
+??   -     -    3  26664   0.3      Keeper of the Quiet Hour | Art Cr — Chimera | W
+??   -     -    3  11887   1.3      Lotus Ring | Art — Equipment | Indestructible E
+??   -     -    3   1315   0.3      Mirage Mirror | Art | {2}: This artifact become
+??   -     -    3   4268   0.8      Moseo, Vein's New Dean | L.Cr — Bird Skeleton W
+??   -     -    3  23720   0.3      Murmuring Volume | Art — Book | {T}: Add one ma
+??   -     -    3   2936   0.4      Necroskitter | Cr — Elemental | Wither (This de
+??   -     -    3   5749   0.3      Oblivion Stone | Art | {4}, {T}: Put a fate cou
+??   -     -    3    634   1.2      Ophiomancer | Cr — Human Shaman | At the beginn
+??   -     -    3   1723   0.3      Painful Truths | Sorc | Converge — You draw X c
+??   -     -    3   2818   0.3      Parasitic Impetus | Ench — Aura | Enchant creat
+??   -     -    3  11083   0.1      Potioner's Trove | Art | {T}: Add one mana of a
+??   -     -    3   9824    -       Pox | Sorc | Each player loses a third of their
+??   -     -    3   2350   3.2      Qarsi Revenant | Cr — Vampire | Flying, deathto
+??   -     -    3  11704   0.3      Rakish Crew | Ench | When this enchantment ente
+??   -     -    3  11473   0.2      Rattleback Apothecary | Cr — Gorgon Warlock | D
+??   -     -    3  13560   0.3      Reckless Spite | Inst | Destroy two target nonb
+??   -     -    3   5273   0.4      Rush of Dread | Sorc | Spree (Choose one or mor
+??   -     -    3  10910   0.2      Safana, Calimport Cutthroat | L.Cr — Human Rogu
+??   -     -    3   8054   0.3      Screams from Within | Ench — Aura | Enchant cre
+??   -     -    3   5708   0.3      Shadow, Mysterious Assassin | L.Cr — Human Assa
+??   -     -    3   1345   0.4      Shimmer Myr | Art Cr — Myr | Flash You may cast
+??   -     -    3  10965   0.3      Silversmote Ghoul | Cr — Zombie Vampire | At th
+??   -     -    3   5032   0.3      Sinister Gnarlbark | Cr — Treefolk Warlock | At
+??   -     -    3   4572   0.3      Solar Array | Art | {T}: Add one mana of any co
+??   -     -    3   2642   0.3      Surge Conductor | Art Cr — Robot | Whenever ano
+??   -     -    3   1197  22.2      Tezzeret, Cruel Captain | L.Planeswalker — Tezz
+??   -     -    3   7942   0.3      Tip the Scales | Sorc | Sacrifice a creature. W
+??   -     -    3   8180   0.2      Titan Forge | Art | {3}, {T}: Put a charge coun
+??   -     -    3   1754   0.2      Vampire Nighthawk | Cr — Vampire Shaman | Flyin
+??   -     -    3   4189   0.3      Veinwitch Coven | Cr — Vampire Warlock | Menace
+??   -     -    3   8595   0.2      Wickersmith's Tools | Art | Whenever one or mor
+??   -     -    4   7419   0.4      Bismuth Mindrender | Cr — Eldrazi | Devoid (Thi
+??   -     -    4   6445   0.3      Bloodtracker | Cr — Vampire Wizard | Flying {B}
+??   -     -    4   8083   0.3      Brass Infiniscope | Art | {T}: Add {C}{C}. When
+??   -     -    4   6593    -       Burakos, Party Leader | L.Cr — Orc | Burakos is
+??   -     -    4   6073   0.2      Corpse Augur | Cr — Zombie Wizard | When this c
+??   -     -    4   2923   0.3      Crystalline Crawler | Art Cr — Construct | Conv
+??   -     -    4   3681   0.3      Darksteel Reactor | Art | Indestructible (Effec
+??   -     -    4   8700   0.2      Desecration Demon | Cr — Demon | Flying At the 
+??   -     -    4   4023   0.3      Empowered Autogenerator | Art | This artifact e
+??   -     -    4  14082   0.3      Essence Pulse | Sorc | You gain 2 life. Each cr
+??   -     -    4   8856   0.3      Etched Oracle | Art Cr — Wizard | Sunburst (Thi
+??   -     -    4   2082   0.4      Gonti, Lord of Luxury | L.Cr — Aetherborn Rogue
+??   -     -    4   4168   0.5      Grave Venerations | Ench | When this enchantmen
+??   -     -    4    727  14.6      Hammer of Nazahn | L.Art — Equipment | Whenever
+??   -     -    4    544    -       Hedron Archive | Art | {T}: Add {C}{C}. {2}, {T
+??   -     -    4  10020   0.2      Hoarder's Greed | Sorc | You lose 2 life and dr
+??   -     -    4  13273   0.4      2x Hostile Investigator | Cr — Ogre Rogue Detec
+??   -     -    4   4959    -       Imotekh the Stormlord | L.Art Cr — Necron | Pha
+??   -     -    4   6382   0.4      Interdimensional Web Watch | Art | When this ar
+??   -     -    4   2121   5.2      Karn, the Great Creator | L.Planeswalker — Karn
+??   -     -    4   3676   0.3      Lux Artillery | Art | Whenever you cast an arti
+??   -     -    4   4091   0.3      Lux Cannon | Art | {T}: Put a charge counter on
+??   -     -    4   1700   0.5      Massacre Girl, Known Killer | L.Cr — Human Assa
+??   -     -    4  11021   0.3      Merchant of Venom | Cr — Cat Warlock | Menace W
+??   -     -    4   4809   0.3      Mindless Automaton | Art Cr — Construct | This 
+??   -     -    4    269   6.3      Panharmonicon | Art | If an artifact or creatur
+??   -     -    4  11072   0.3      Paradise Plume | Art | As this artifact enters,
+??   -     -    4   1404   2.8      Rankle, Master of Pranks | L.Cr — Faerie Rogue 
+??   -     -    4   5881   0.4      Ravenloft Adventurer | Cr — Human Rogue Assassi
+??   -     -    4   1135   1.0      Ravenous Chupacabra | Cr — Beast Horror | When 
+??   -     -    4  21534   0.3      Rewrite Regrets | Sorc | Return target creature
+??   -     -    4   4425   0.2      Seer's Sundial | Art | Landfall — Whenever a la
+??   -     -    4   5704   0.3      Skinrender | Cr — Phyrexian Zombie | When this 
+??   -     -    4   4994   0.3      Soul Snuffers | Cr — Elemental Shaman | When th
+??   -     -    4  30353   0.2      Teyo, Diamondblade Mage | L.Cr — Human Warlock 
+??   -     -    4    196   4.3      Thran Dynamo | Art | {T}: Add {C}{C}{C}.
+??   -     -    4  14201   0.3      Tragedy Feaster | Cr — Demon | Trample Ward—Dis
+??   -     -    4  26911   0.3      Traxos, Scourge Eternal | L.Art Cr — Dragon Con
+??   -     -    4  10996   0.2      Treasure Keeper | Art Cr — Construct | When thi
+??   -     -    4   1905   2.6      Tree of Perdition | Cr — Plant | Defender {T}: 
+??   -     -    4   1138   3.6      Twilight Prophet | Cr — Vampire Cleric | Flying
+??   -     -    4  11612   0.2      Vicious Battlerager | Cr — Dwarf Barbarian | Wh
+??   -     -    5   1284   0.3      Archfiend of Ifnir | Cr — Demon | Flying Whenev
+??   -     -    5  10211   0.3      Argentum Masticore | Art Cr — Phyrexian Mastico
+??   -     -    5   6899   0.3      Coveted Prize | Sorc | This spell costs {1} les
+??   -     -    5   2599  12.2      Dawnsire, Sunstar Dreadnought | L.Art — Spacecr
+??   -     -    5   6817   0.6      Defiling Daemogoth | Cr — Demon | Menace Whenev
+??   -     -    5   6580   0.3      Dire Fleet Ravager | Cr — Orc Pirate Wizard | M
+??   -     -    5   1845   0.3      Doomwake Giant | Ench Cr — Giant | Constellatio
+??   -     -    5   6978   0.3      Epicure of Blood | Cr — Vampire | Whenever you 
+??   -     -    5   7662   0.2      Eventide's Shadow | Sorc | Remove any number of
+??   -     -    5   3208   0.4      Geode Golem | Art Cr — Golem | Trample Whenever
+??   -     -    5   6196   0.3      Incremental Blight | Sorc | Put a -1/-1 counter
+??   -     -    5  10843   0.3      Marshland Bloodcaster | Cr — Vampire Warlock | 
+??   -     -    5  24483   0.2      Massacre Girl, Most Wanted | L.Cr — Human Assas
+??   -     -    5   9661   0.7      Ob Nixilis of the Black Oath | L.Planeswalker —
+??   -     -    5   4171   0.5      Ob Nixilis, the Hate-Twisted | L.Planeswalker —
+??   -     -    5  21349   0.1      Overzealous Muscle | Cr — Ogre Mercenary | When
+??   -     -    5   2594   0.3      Puppeteer Clique | Cr — Faerie Wizard | Flying 
+??   -     -    5  11417   0.2      Solemn Doomguide | Cr — Tiefling Cleric | Flyin
+??   -     -    5   1596   3.0      The Eternity Elevator | L.Art — Spacecraft | {T
+??   -     -    5  10904   0.7      Tivash, Gloom Summoner | L.Cr — Human Warlock |
+??   -     -    5   6792   0.7      Tome of the Guildpact | Art — Book | Whenever y
+??   -     -    5   1990   9.1      Venser's Journal | Art — Book | You have no max
+??   -     -    5   2567   0.8      Witch of the Moors | Cr — Human Warlock | Death
+??   -     -    5   4379   0.3      Zuko's Exile | Inst — Lesson | Exile target art
+??   -     -    6   6082   0.3      Aberrant Return | Sorc | Put one, two, or three
+??   -     -    6   4997   0.2      Carnifex Demon | Cr — Phyrexian Demon | Flying 
+??   -     -    6    748   7.9      Chimil, the Inner Sun | L.Art | Spells you cont
+??   -     -    6  16377   0.2      Cloudkill | Sorc | All creatures get -X/-X unti
+??   -     -    6   3757   1.0      Deadly Tempest | Sorc | Destroy all creatures. 
+??   -     -    6   9952   0.3      Eldrazi Ravager | Cr — Eldrazi | Annihilator 1 
+??   -     -    6  18667   0.9      Ginger, Queen of Sweets | L.Art Cr — Food Noble
+??   -     -    6   2435   1.0      God-Pharaoh's Statue | L.Art | Spells your oppo
+??   -     -    6   1392   0.3      Grave Titan | Cr — Giant | Deathtouch Whenever 
+??   -     -    6   9522   0.4      Koh, the Face Stealer | L.Cr — Shapeshifter Spi
+??   -     -    6   4689   0.2      Midnight Banshee | Cr — Spirit | Wither (This d
+??   -     -    6   2328   0.7      Oblivion Sower | Cr — Eldrazi | When you cast t
+??   -     -    6   5985   0.4      Pontiff of Blight | Cr — Zombie Cleric | Extort
+??   -     -    6   3512   0.9      Soul of New Phyrexia | Art Cr — Phyrexian Avata
+??   -     -    6   1186   0.4      Steel Hellkite | Art Cr — Dragon | Flying {2}: 
+??   -     -    6  12502   0.4      Taste of Death | Sorc | Each player sacrifices 
+??   -     -    6   8905   0.3      Thwart the Grave | Sorc | This spell costs {1} 
+??   -     -    6   1307   1.8      Vraska, Betrayal's Sting | L.Planeswalker — Vra
+??   -     -    7   3360   2.3      Bane of Bala Ged | Cr — Eldrazi | Whenever this
+??   -     -    7   5960   0.3      Defiant Bloodlord | Cr — Vampire | Flying Whene
+??   -     -    7   8278   1.2      Devourer of Destiny | Cr — Eldrazi | You may re
+??   -     -    7   8574   0.3      Grim Poppet | Art Cr — Scarecrow | This creatur
+??   -     -    7  11749   0.1      Hollow Marauder | Cr — Specter Rogue | This spe
+??   -     -    7   7920   0.4      Liliana, Death Wielder | L.Planeswalker — Lilia
+??   -     -    7    799   0.3      Meteor Golem | Art Cr — Golem | When this creat
+??   -     -    7   5655   1.2      Myr Enforcer | Art Cr — Myr | Affinity for arti
+??   -     -    7  20307   0.1      Sea Gate Colossus | Art Cr — Golem Warrior | Th
+??   -     -    7   2288  21.2      Super State | L.Ench — Aura | Enchant creature 
+??   -     -    7   1857   0.3      Threefold Thunderhulk | Art Cr — Gnome | This c
+??   -     -    8   2568   2.8      Archfiend of Despair | Cr — Demon | Flying Your
+??   -     -    8   9863   0.4      Armaggon, Future Shark | L.Cr — Shark Horror Mu
+??   -     -    8   3954   0.3      Breaker of Creation | Cr — Eldrazi | When you c
+??   -     -    8   1593   1.7      Eldrazi Conscription | Kindred Ench — Eldrazi A
+??   -     -    8  10273   0.5      Pestilence Demon | Cr — Demon | Flying {B}: Thi
+??   -     -    8   1124   9.9      Vilis, Broker of Blood | L.Cr — Demon | Flying 
+??   -     -   10   1565   6.4      Kozilek, the Great Distortion | L.Cr — Eldrazi 
+??   -     -   11   2367   0.9      Darksteel Colossus | Art Cr — Golem | Trample (

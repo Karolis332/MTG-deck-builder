@@ -1,0 +1,8 @@
+BASE obj 26.83 DS 25.4 pen 5 {"land":38,"ramp":9,"draw":11,"removal":7,"board_wipe":2,"protection":5} mana=97 curve=86 interaction=99 advantage=70 win=7 synergy=100 meta=50 structure=100
+   0.09  Temple of Epiphany => Sink into Stupor // Soporific Springs   DS 0.0 pen 5 mana=97 curve=86 interaction=99 advantage=70 win=7 synergy=100 meta=50 structure=100
+  -0.01  Mystic Monastery => Filigree Attendant   DS 0.0 pen 5 mana=97 curve=85 interaction=99 advantage=70 win=7 synergy=100 meta=50 structure=100
+  -0.07  Radiant Summit => Oblivion Stone   DS 0.0 pen 5 mana=97 curve=87 interaction=99 advantage=70 win=7 synergy=100 meta=50 structure=100
+  -0.02  Lux Artillery => Unstoppable Plan   DS 0.0 pen 5 mana=97 curve=87 interaction=99 advantage=70 win=7 synergy=100 meta=50 structure=100
+  22.65  Lasting Tarfire => Resculpt   DS 20.6 pen 4 mana=97 curve=86 interaction=99 advantage=70 win=33 synergy=100 meta=50 structure=100
+  -0.65  Chandra, Spark Hunter => Katara's Reversal   DS -0.6 pen 5 mana=97 curve=86 interaction=99 advantage=70 win=6 synergy=100 meta=50 structure=100
+ALL  obj 28.82 (1.99) DS 25.4 pen 4 {"land":36,"ramp":9,"draw":10,"removal":8,"board_wipe":2,"protection":5} mana=96 curve=87 interaction=99 advantage=70 win=7 synergy=100 meta=50 structure=100

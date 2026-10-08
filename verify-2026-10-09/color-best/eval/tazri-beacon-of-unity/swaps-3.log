@@ -1,0 +1,4 @@
+BASE obj 88.94 DS 77.5 pen 0 {"land":36,"ramp":11,"draw":10,"removal":11,"board_wipe":3,"protection":6} mana=89 curve=96 interaction=96 advantage=70 win=72 synergy=100 meta=50 structure=100
+  -2.01  Toski, Bearer of Secrets => Squad Commander   DS 0.0 pen 1 mana=89 curve=96 interaction=96 advantage=70 win=72 synergy=100 meta=50 structure=100
+  -1.18  Boros Charm => Squad Commander   DS -1.2 pen 0 mana=89 curve=94 interaction=96 advantage=70 win=70 synergy=100 meta=50 structure=100
+  -3.98  Night's Whisper => Squad Commander   DS 0.0 pen 2 mana=89 curve=94 interaction=96 advantage=65 win=72 synergy=100 meta=50 structure=100

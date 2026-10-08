@@ -1,0 +1,97 @@
+Commander
+1 The Goose Mother
+
+Deck
+1 Academy Manufactor
+1 Acidic Slime
+1 Alchemist's Refuge
+1 Archway of Innovation
+1 Benevolent Hydra
+1 Breeding Pool
+1 Cleanup Crew
+1 Counterspell
+1 Curse of the Swine
+1 Cyberdrive Awakener
+1 Cyclonic Rift
+1 Devourer of Destiny
+1 Displaced Dinosaurs
+1 Dreamroot Cascade
+1 Earth Rumble
+1 Evacuation
+1 Farseek
+1 Feasting Hobbit
+1 Feasting Troll King
+1 Flooded Grove
+1 Foe-Razer Regent
+5 Forest
+1 Forgotten Ancient
+1 Garruk's Uprising
+1 Giant Opportunity
+1 Gilded Goose
+1 Gingerbread Cabin
+1 Goldvein Hydra
+1 Guardian Augmenter
+1 Hardened Scales
+1 Heroic Intervention
+1 Hinterland Harbor
+1 Hydroid Krasis
+1 Inspiring Statuary
+1 Inventors' Fair
+3 Island
+1 Kami of Whispered Hopes
+1 Kappa Cannoneer
+1 Karn's Bastion
+1 Lair of the Hydra
+1 Lembas
+1 Lifeblood Hydra
+1 Llanowar Elves
+1 Meteor Golem
+1 Mosswort Bridge
+1 Nature's Lore
+1 Negate
+1 Night of the Sweets' Revenge
+1 Oko, Thief of Crowns
+1 Opal Palace
+1 Oran-Rief, the Vastwood
+1 Overflowing Basin
+1 Ozolith, the Shattered Spire
+1 Path of Ancestry
+1 Peregrin Took
+1 Planar Engineering
+1 Pongify
+1 Primordial Hydra
+1 Rampant Growth
+1 Rapid Hybridization
+1 Reliquary Tower
+1 Return of the Wildspeaker
+1 Rogue's Passage
+1 Seat of the Synod
+1 Second Harvest
+1 Simic Charm
+1 Simic Growth Chamber
+1 Simic Guildgate
+1 Sodden Verdure
+1 Steelbane Hydra
+1 Swan Song
+1 Syr Ginger, the Meal Ender
+1 Tangled Islet
+1 Tatyova, Benthic Druid
+1 Teething Wurmlet
+1 Temple of Mystery
+1 Temple of the False God
+1 The Cabbage Merchant
+1 The Earth King
+1 Thornwood Falls
+1 Thought Monitor
+1 Thought Vessel
+1 Tireless Provisioner
+1 Tough Cookie
+1 Trail of Crumbs
+1 Unbound Flourishing
+1 Universal Surveillance
+1 Unlucky Cabbage Merchant
+1 Urza, Lord High Artificer
+1 Uthros, Titanic Godcore
+1 Vineglimmer Snarl
+1 Wicked Wolf
+1 Yavimaya Coast

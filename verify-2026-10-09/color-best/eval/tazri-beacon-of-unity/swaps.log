@@ -1,0 +1,10 @@
+BASE obj 88.94 DS 77.5 pen 0 {"land":36,"ramp":11,"draw":10,"removal":11,"board_wipe":3,"protection":6} mana=89 curve=96 interaction=96 advantage=70 win=72 synergy=100 meta=50 structure=100
+  -4.00  Return of the Wildspeaker => Squad Commander   DS 0.0 pen 2 mana=89 curve=96 interaction=96 advantage=70 win=72 synergy=100 meta=50 structure=100
+  -0.01  Acererak the Archlich => Linvala, Shield of Sea Gate   DS 0.0 pen 0 mana=89 curve=96 interaction=96 advantage=70 win=72 synergy=100 meta=50 structure=100
+   0.04  Varis, Silverymoon Ranger => Harper Recruiter   DS 0.0 pen 0 mana=89 curve=96 interaction=96 advantage=70 win=72 synergy=100 meta=50 structure=100
+   0.08  Caves of Chaos Adventurer => Undermountain Adventurer   DS 0.0 pen 0 mana=89 curve=96 interaction=96 advantage=70 win=72 synergy=100 meta=50 structure=100
+   0.02  Triumphant Adventurer => Nimble Trapfinder   DS 0.0 pen 0 mana=89 curve=96 interaction=96 advantage=70 win=72 synergy=100 meta=50 structure=100
+  -7.43  Pyrewood Gearhulk => Samut, Voice of Dissent   DS -7.4 pen 0 mana=89 curve=96 interaction=96 advantage=70 win=63 synergy=100 meta=50 structure=100
+  -0.01  Bident of Thassa => Mindblade Render   DS 0.0 pen 0 mana=89 curve=97 interaction=96 advantage=70 win=72 synergy=100 meta=50 structure=100
+  -0.11  Channeler Initiate => Tajuru Paragon   DS 0.0 pen 0 mana=89 curve=96 interaction=96 advantage=70 win=72 synergy=100 meta=50 structure=100
+ALL  obj 79.50 (-9.44) DS 70.1 pen 1 {"land":36,"ramp":11,"draw":12,"removal":10,"board_wipe":3,"protection":7} mana=95 curve=97 interaction=96 advantage=70 win=63 synergy=100 meta=50 structure=100

@@ -1,0 +1,439 @@
+Agna Qel'a
+Arcane Lighthouse
+Archway of Innovation
+Arid Archway
+Ash Barrens
+Astral Cornucopia
+Base Camp
+Basilisk Gate
+Blast Zone
+Bloodstained Mire
+Brokers Hideout
+Buried Ruin
+Cabaretti Courtyard
+Cephalid Coliseum
+Cloudpost
+Command Tower
+Conduit Pylons
+Crawling Barrens
+Cryptic Caves
+Dark Depths
+Desert of the Mindful
+Diamond City
+Escape Tunnel
+Everflowing Chalice
+Evolving Wilds
+Exotic Orchard
+Fabled Passage
+Glimmerpost
+Great Hall of the Citadel
+Hangarback Walker
+Hidden Cataract
+Hidden Grotto
+High Market
+Horizon of Progress
+Interplanar Beacon
+Inventors' Fair
+Karn's Bastion
+Lazotep Quarry
+Lonely Sandbar
+Lotus Field
+Maestros Theater
+Mana Confluence
+Mirage Mesa
+Mishra's Bauble
+Muraganda Raceway
+Myriad Landscape
+Nesting Grounds
+Opal Palace
+Path of Ancestry
+Planar Nexus
+Plaza of Harmony
+Radiant Fountain
+Reliquary Tower
+Riveteers Overlook
+Rogue's Passage
+Rumble Arena
+Sandstorm Verge
+Seat of the Synod
+Secluded Starforge
+Skycoach Waypoint
+Spire of Industry
+Stonecoil Serpent
+Strip Mine
+Study Hall
+Sunken Palace
+Talon Gates of Madara
+Tarnation Vista
+Temple of the False God
+Terramorphic Expanse
+Mycosynth Gardens
+Thespian's Stage
+Trenchpost
+Urza's Mine
+Urza's Power Plant
+Urza's Tower
+Uthros, Titanic Godcore
+Vesuva
+Volatile Fault
+Walking Ballista
+Windswept Heath
+Wooded Foothills
+Yavimaya, Cradle of Growth
+Basilisk Collar
+Candlestick
+Concerted Defense
+Consider
+Consign to Memory
+Elixir of Immortality
+Expedition Map
+Explorer's Scope
+of Jace
+Flight
+Fountainport Bell
+Giant's Boulder
+Harmonized Trio // Brainstorm
+Ingenious Prodigy
+Into the Flood Maw
+Jailbreak Scheme
+Lavaspur Boots
+Library of Leng
+Lost Jitte
+Metamorphic Blast
+Multiclass Baldric
+Occult Epiphany
+Opt
+Personal Tutor
+Phantom Interference
+Ponder
+Pongify
+Portent of Calamity
+Rapid Hybridization
+Sapphire Charm
+Sewer-veillance Cam
+Sol Ring
+Soul-Guide Lantern
+Spell Pierce
+Strix Serenade
+Swan Song
+Syncopate
+Take the Fall
+Three Steps Ahead
+Unsummon
+Vexing Bauble
+Wayfarer's Bauble
+Witching Well
+Yuriko, Hope from the Shadows
+Arcane Denial
+Arcane Signet
+Awakened Awareness
+Baral, Chief of Compliance
+Contagion Clasp
+Contentious Plan
+Coretapper
+Countersculpt
+Counterspell
+Cryogen Relic
+Curse of the Swine
+Cyclonic Rift
+Deduce
+Demon's Horn
+Desculpting Blast
+Dour Port-Mage
+Duelist of the Mind
+Echoing Truth
+Emerald Medallion
+Emissary Escort
+Entrancing Melody
+Essence Capture
+Etherium Sculptor
+Expansion Algorithm
+Experimental Augury
+Extraordinary Journey
+Fblthp, Impossibly Lost
+Fellwar Stone
+Finale of Revelation
+Flesh Duplicate
+Bank
+Gavel of the Righteous
+Geist of Saint Thalia
+Gleaming Barrier
+Hydro-Man, Fluid Felon
+Idol of False Gods
+Idol of Oblivion
+Lembas
+Lightning Greaves
+Lost in the Maze
+Mazemind Tome
+Moxite Refinery
+Retriever
+Negate
+Nimble Trapfinder
+Noble's Purse
+Ornithopter of Paradise
+Patchwork Automaton
+Pearl Medallion
+Pentad Prism
+Proft, Consulting Detective
+Prophetic Prism
+Pull from Tomorrow
+Resculpt
+Ripples of Potential
+Sapphire Medallion
+Shifting Grift
+Diamond
+Sorcerous Spyglass
+Soulless Jailer
+Steel Overseer
+Steelswarm Operator
+Sting, Bilbo's Sword
+Stonework Packbeast
+Droplet
+Sword of the Animist
+Ginger, the Meal Ender
+Tablet of Compleation
+Tetsuko Umezawa, Fugitive
+The Echoverse Fulcrum
+Key to the Vault
+Ooze
+Thought Vessel
+Thrummingbird
+Torpor Orb
+Unauthorized Exit
+Unlicensed Hearse
+Volatile Stormdrake
+Shi Tong, Librarian
+Waterbending Scroll
+Wonderscape Sage
+Wrecking Ball Arm
+Yuan-Ti Malison
+Academy Manufactor
+Adaptive Automaton
+All-Fates Scroll
+Amazing Acrobatics
+April, Reporter of the Weird
+Ashnod's Altar
+Bandit's Haul
+Bane's Contingency
+the Gate
+Barkform Harvester
+Bender's Waterskin
+Bitterthorn, Nissa's Animus
+Burnished Hart
+Candlekeep Sage
+Canoptek Wraith
+Chromatic Lantern
+Chrome Host Seedshark
+Cloud Key
+Commander's Sphere
+Copy Land
+Cruel Calculations
+Day's Undoing
+Decanter of Endless Water
+Deepmuck Desperado
+Donatello, Way with Machines
+Drown in Dreams
+Druidic Satchel
+Elementalist's Palette
+Emry, Lurker of the Loch
+Esoteric Duplicator
+Exclude
+Fblthp, Lost on the Range
+Firdoch Core
+Flare of Denial
+Flux Channeler
+Foundry Inspector
+Frantic Search
+Geralf, the Fleshwright
+Ghostly Flicker
+Glaring Fleshraker
+Glasspool Mimic // Glasspool Shore
+Golem Foundry
+Hydroelectric Specimen // Hydroelectric Laboratory
+Imoen, Mystic Trickster
+Insight Engine
+Inspiring Statuary
+Iron Spider, Stark Upgrade
+Jadzi, Steward of Fate // Oracle's Gift
+Keeper of the Quiet Hour
+Lotus Ring
+Loxodon Warhammer
+March from Velis Vel
+Mindseeker Oculus
+Mirage Mirror
+Mondo Gecko
+Yanling, Sky Dancer
+Murmuring Volume
+Nimble Brigand
+Oblivion Stone
+Palladium Myr
+Pensive Professor
+Potioner's Trove
+Pristine Talisman
+Propaganda
+Quick Study
+Repurposing Bay
+Sai, Master Thopterist
+Seasoned Cryomancer
+Seize the Secrets
+Shimmer Myr
+Sink into Stupor // Soporific Springs
+Slickshot Lockpicker
+Slickshot Vault-Buster
+Solar Array
+Solve the Equation
+Stock Up
+Stroke of Genius
+Surge Conductor
+Tempest Djinn
+Tezzeret, Cruel Captain
+Destined Thief
+Thirst for Knowledge
+Titan Forge
+Universal Surveillance
+Unstoppable Plan
+Uthros Psionicist
+Uthros Research Craft
+Variable Chaser // Arc of Fortune
+of the Cryomancer
+Wickersmith's Tools
+Windfall
+Winternight Stories
+Worldwalker Helm
+Worn Powerstone
+Find the Villains' Lair
+April O'Neil, Hacktivist
+Archaeomancer
+Archmage Emeritus
+Bident of Thassa
+Brass Infiniscope
+Careful Consideration
+Coastal Piracy
+Crystalline Crawler
+Darksteel Reactor
+Distant Melody
+Double Down
+Efficient Construction
+Empowered Autogenerator
+Etched Oracle
+Fact or Fiction
+Filigree Attendant
+Firemind Vessel
+Ghost Ark
+Hammer of Nazahn
+Hedron Archive
+Interdimensional Web Watch
+Karn, the Great Creator
+Kasmina, Enigmatic Mentor
+Katara's Reversal
+Artillery
+Cannon
+Mindless Automaton
+Mocking Doppelganger
+Nexus Mentality
+Nimble Thopterist
+Lotus
+Owlin Spiralmancer
+Padeem, Consul of Innovation
+Panharmonicon
+Paradise Plume
+Phyrexian Metamorph
+Plan for All Outcomes
+Protege's Awakening
+Reconnaissance Mission
+Reenact the Crime
+Rite of Replication
+Scour for Scrap
+Seer's Sundial
+Solemn Simulacrum
+Sphinx of False Conclusions
+Summary Dismissal
+Talrand, Sky Summoner
+Tekuthal, Inquiry Dominus
+Tezzeret's Gambit
+Legend of Kuruk // Avatar Kuruk
+Thran Dynamo
+Tractor Beam
+Traxos, Academy Guardian
+Traxos, Scourge Eternal
+Traxos, Scourge of Kroog
+Treasure Keeper
+Urza, Lord High Artificer
+Visage Bandit
+Whirler Rogue
+Wishing Well
+Yue, the Moon Spirit
+Alhammarret's Archive
+Argentum Masticore
+Body Double
+Cerebral Download
+Dawnsire, Sunstar Dreadnought
+Deekah, Fractal Theorist
+Deepglow Skate
+Ember Island Production
+Emeritus of Ideation // Ancestral Recall
+Evacuation
+Experimental Aviator
+Feywild Caretaker
+Geode Golem
+Gilded Lotus
+Jace, Memory Adept
+Jace, Reality Sculptor
+Luxurious Locomotive
+Marauding Sphinx
+Memory Guardian
+Omni-Changeling
+Perplexing Test
+Replication Technique
+Reverse Engineer
+Step Between Worlds
+Subterfuge
+Eternity Elevator
+Tome of the Guildpact
+Transmutation Font
+Venser's Journal
+of the Mind Sculptor
+Zimone's Hypothesis
+Zuko's Exile
+Chimil, the Inner Sun
+Cyberdrive Awakener
+Eldrazi Ravager
+Ginger, Queen of Sweets
+God-Pharaoh's Statue
+Harmonized Crescendo
+Kappa Cannoneer
+Oblivion Sower
+Planetarium of Wan Shi Tong
+Jamaar, Illusionist
+Rise from the Tides
+River's Rebuke
+Soul of New Phyrexia
+Steel Hellkite
+Quan, Lord of Wu
+Tomb of Horrors Adventurer
+Torrential Gearhulk
+Bane of Bala Ged
+Commandeer
+Devourer of Destiny
+Grim Poppet
+Meteor Golem
+Enforcer
+Necron Monolith
+Nulldrifter
+Gate Colossus
+Super State
+Thought Monitor
+Threefold Thunderhulk
+Aminatou's Augury
+Breaker of Creation
+Cityscape Leveler
+Eldrazi Conscription
+Interdisciplinary Mascot
+Treasure Cruise
+Bygone Colossus
+Portal to Phyrexia
+Lord of the Eagles
+Kozilek, the Great Distortion
+Octavia, Living Thesis
+Darksteel Colossus
+Metalwork Colossus

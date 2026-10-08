@@ -1,0 +1,8 @@
+BASE obj 67.04 DS 75.0 pen 10 {"land":36,"ramp":16,"draw":10,"removal":6,"board_wipe":1,"protection":4} mana=98 curve=91 interaction=92 advantage=70 win=69 synergy=100 meta=50 structure=100
+  -0.17  Forest => Lembas   DS 0.0 pen 10 mana=98 curve=91 interaction=92 advantage=70 win=69 synergy=100 meta=50 structure=100
+   4.03  Wild Growth => Rocky Rebuke   DS 0.0 pen 8 mana=98 curve=92 interaction=94 advantage=70 win=69 synergy=100 meta=50 structure=100
+   5.36  Basking Broodscale => Warg Tactics   DS 1.4 pen 8 mana=98 curve=91 interaction=94 advantage=70 win=70 synergy=100 meta=50 structure=100
+   3.96  Cultivate => Zuko's Exile   DS 0.0 pen 8 mana=98 curve=92 interaction=94 advantage=70 win=69 synergy=100 meta=50 structure=100
+   0.00  Autumn's Veil => Tyvar's Stand   DS 0.0 pen 10 mana=98 curve=91 interaction=92 advantage=70 win=69 synergy=100 meta=50 structure=100
+  -7.08  Emil, Vastlands Roamer => Primeval Bounty   DS -7.1 pen 10 mana=98 curve=92 interaction=92 advantage=70 win=60 synergy=100 meta=50 structure=100
+ALL  obj 72.98 (5.94) DS 69.0 pen 4 {"land":35,"ramp":13,"draw":12,"removal":9,"board_wipe":1,"protection":5} mana=93 curve=95 interaction=94 advantage=70 win=61 synergy=100 meta=50 structure=100

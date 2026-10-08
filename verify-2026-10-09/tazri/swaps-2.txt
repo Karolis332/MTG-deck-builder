@@ -1,0 +1,8 @@
+# window fixes (ramp 14→12, draw 8→10, wipes 2→3, prot 7→6) then body tests
+Skyshroud Claim => Lifecrafter's Bestiary
+Firdoch Core => Firemane Commando
+Dovin's Veto => Fumigate
+Realmwalker => Pyrewood Gearhulk
+Lotho, Corrupt Shirriff => Veteran Adventurer
+Grand Abolisher => Solemn Doomguide
+Mutable Explorer => Channeler Initiate

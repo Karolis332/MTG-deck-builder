@@ -1,0 +1,19 @@
+BASE obj 43.17 DS 63.6 pen 16 {"land":34,"ramp":16,"draw":20,"removal":12,"board_wipe":7,"protection":6} mana=72 curve=94 interaction=98 advantage=75 win=55 synergy=81 meta=50 structure=100
+  -0.03  Ral Zarek => Diabolic Tutor   DS 0.0 pen 16 mana=72 curve=94 interaction=98 advantage=75 win=55 synergy=81 meta=50 structure=100
+  -3.60  Quintorius Kand => Diabolic Tutor   DS -5.6 pen 15 mana=72 curve=95 interaction=98 advantage=75 win=48 synergy=81 meta=50 structure=100
+   0.01  Nissa, Steward of Elements => Diabolic Tutor   DS 0.0 pen 16 mana=72 curve=95 interaction=98 advantage=75 win=55 synergy=81 meta=50 structure=100
+  -0.01  Geist of Saint Thalia => Diabolic Tutor   DS 0.0 pen 16 mana=72 curve=95 interaction=98 advantage=75 win=55 synergy=81 meta=50 structure=100
+  -1.60  Uro, Titan of Nature's Wrath => Diabolic Tutor   DS -5.6 pen 14 mana=72 curve=94 interaction=98 advantage=75 win=48 synergy=81 meta=50 structure=100
+  -5.60  Saheeli, Sublime Artificer => Diabolic Tutor   DS -5.6 pen 16 mana=72 curve=94 interaction=98 advantage=75 win=48 synergy=81 meta=50 structure=100
+  -1.58  Ajani Unrelenting => Diabolic Tutor   DS -5.6 pen 14 mana=72 curve=95 interaction=98 advantage=75 win=48 synergy=81 meta=50 structure=100
+   2.00  Ob Nixilis, the Hate-Twisted => Diabolic Tutor   DS 0.0 pen 15 mana=72 curve=95 interaction=98 advantage=75 win=55 synergy=79 meta=50 structure=100
+   0.02  Kaya's Ghostform => Diabolic Tutor   DS 0.0 pen 16 mana=72 curve=94 interaction=98 advantage=75 win=55 synergy=81 meta=50 structure=100
+   1.99  Nexus Mentality => Diabolic Tutor   DS 0.0 pen 15 mana=72 curve=94 interaction=98 advantage=75 win=55 synergy=81 meta=50 structure=100
+  -5.61  Evolution Sage => Diabolic Tutor   DS -5.6 pen 16 mana=72 curve=94 interaction=98 advantage=75 win=48 synergy=79 meta=50 structure=100
+  -0.03  Chimil, the Inner Sun => Diabolic Tutor   DS 0.0 pen 16 mana=72 curve=95 interaction=98 advantage=75 win=55 synergy=81 meta=50 structure=100
+  -0.01  Sorin, Vengeful Bloodlord => Diabolic Tutor   DS 0.0 pen 16 mana=72 curve=94 interaction=98 advantage=75 win=55 synergy=79 meta=50 structure=100
+  -0.02  Tezzeret, Master of the Bridge => Diabolic Tutor   DS 0.0 pen 16 mana=72 curve=95 interaction=98 advantage=75 win=55 synergy=81 meta=50 structure=100
+  -6.39  Liliana the Faultless => Diabolic Tutor   DS -6.4 pen 16 mana=72 curve=94 interaction=94 advantage=75 win=47 synergy=79 meta=50 structure=100
+  -5.60  Archangel of Tithes => Diabolic Tutor   DS -5.6 pen 16 mana=72 curve=94 interaction=98 advantage=75 win=48 synergy=79 meta=50 structure=100
+   1.89  Timeless Lotus => Diabolic Tutor   DS 0.0 pen 15 mana=72 curve=95 interaction=98 advantage=75 win=55 synergy=79 meta=50 structure=100
+ALL  obj 12.28 (-30.90) DS 19.0 pen 9 {"land":34,"ramp":13,"draw":16,"removal":9,"board_wipe":6,"protection":4} mana=69 curve=88 interaction=93 advantage=75 win=7 synergy=67 meta=50 structure=0

@@ -1,0 +1,3 @@
+BASE obj 90.50 DS 86.1 pen 4 {"land":37,"ramp":15,"draw":10,"removal":11,"board_wipe":2,"protection":5} mana=98 curve=92 interaction=96 advantage=82 win=83 synergy=100 meta=50 structure=100
+  -8.56  Skorpekh Lord => Arnyn, Deathbloom Botanist   DS -8.6 pen 4 mana=98 curve=92 interaction=96 advantage=82 win=72 synergy=100 meta=50 structure=100
+ALL  obj 81.95 (-8.56) DS 77.5 pen 4 {"land":37,"ramp":15,"draw":10,"removal":11,"board_wipe":2,"protection":5} mana=98 curve=92 interaction=96 advantage=82 win=72 synergy=100 meta=50 structure=100

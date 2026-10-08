@@ -1,0 +1,9 @@
+BASE obj 43.17 DS 63.6 pen 16 {"land":34,"ramp":16,"draw":20,"removal":12,"board_wipe":7,"protection":6} mana=72 curve=94 interaction=98 advantage=75 win=55 synergy=81 meta=50 structure=100
+   0.02  Fumigate => Windfall   DS 0.0 pen 16 mana=72 curve=95 interaction=98 advantage=75 win=55 synergy=81 meta=50 structure=100
+  -0.02  Thrummingbird => Loyal Tutor   DS 0.0 pen 16 mana=72 curve=95 interaction=98 advantage=75 win=55 synergy=79 meta=50 structure=100
+  -0.03  Ral Zarek => Diabolic Tutor   DS 0.0 pen 16 mana=72 curve=94 interaction=98 advantage=75 win=55 synergy=81 meta=50 structure=100
+  -2.01  Tezzeret, Master of the Bridge => Way of the Cryomancer   DS 0.0 pen 17 mana=72 curve=95 interaction=98 advantage=75 win=55 synergy=81 meta=50 structure=100
+  -1.99  Nissa, Steward of Elements => Jace, Multiverse Architect   DS 0.0 pen 17 mana=72 curve=94 interaction=98 advantage=75 win=55 synergy=81 meta=50 structure=100
+   1.98  Chandra, Awakened Inferno => Expansion Algorithm   DS 0.0 pen 15 mana=72 curve=94 interaction=98 advantage=75 win=55 synergy=84 meta=50 structure=100
+   1.98  Settle the Wreckage => Tomik, Orzhov Lawmage   DS 0.0 pen 15 mana=72 curve=93 interaction=98 advantage=75 win=55 synergy=81 meta=50 structure=100
+ALL  obj 43.08 (-0.09) DS 63.6 pen 16 {"land":34,"ramp":16,"draw":23,"removal":11,"board_wipe":4,"protection":5} mana=72 curve=95 interaction=98 advantage=75 win=55 synergy=81 meta=50 structure=100

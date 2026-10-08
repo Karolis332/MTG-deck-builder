@@ -1,0 +1,19 @@
+  missing: Sheltering Landscape, Tranquil Landscape, Twisted Landscape
+BASE obj -14.69 DS 19.0 pen 23 {"land":30,"ramp":21,"draw":14,"removal":7,"board_wipe":0,"protection":2} mana=60 curve=94 interaction=53 advantage=88 win=38 synergy=72 meta=50 structure=0
+  missing: Tranquil Landscape, Twisted Landscape
+   1.98  Sheltering Landscape => Riveteers Overlook   DS 0.0 pen 22 mana=67 curve=94 interaction=53 advantage=88 win=38 synergy=72 meta=50 structure=0
+  missing: Sheltering Landscape, Twisted Landscape
+   1.89  Tranquil Landscape => Lair of the Hydra   DS 0.0 pen 22 mana=67 curve=94 interaction=53 advantage=88 win=38 synergy=72 meta=50 structure=0
+  missing: Sheltering Landscape, Tranquil Landscape
+   1.89  Twisted Landscape => Gruul Turf   DS 0.0 pen 22 mana=67 curve=94 interaction=53 advantage=88 win=38 synergy=72 meta=50 structure=0
+  missing: Sheltering Landscape, Tranquil Landscape, Twisted Landscape
+  -0.01  Tectonic Split => Nissa, Who Shakes the World   DS 0.0 pen 23 mana=60 curve=93 interaction=53 advantage=88 win=38 synergy=72 meta=50 structure=0
+  missing: Sheltering Landscape, Tranquil Landscape, Twisted Landscape
+  -0.00  Owlbear Cub => Overrun   DS 0.0 pen 23 mana=60 curve=93 interaction=53 advantage=88 win=38 synergy=77 meta=50 structure=0
+  missing: Sheltering Landscape, Tranquil Landscape, Twisted Landscape
+   3.99  Summon: G.F. Ifrit => Lavaspur Boots   DS 0.0 pen 21 mana=61 curve=93 interaction=53 advantage=88 win=38 synergy=67 meta=50 structure=0
+  missing: Sheltering Landscape, Tranquil Landscape, Twisted Landscape
+   3.96  Circuitous Route => Silkguard   DS 0.0 pen 21 mana=60 curve=94 interaction=61 advantage=88 win=39 synergy=72 meta=50 structure=0
+  missing: Sheltering Landscape, Tranquil Landscape, Twisted Landscape
+   0.01  Part in Friendship => Guardian Augmenter   DS 0.0 pen 23 mana=60 curve=95 interaction=53 advantage=88 win=45 synergy=67 meta=50 structure=0
+ALL  obj 37.37 (52.07) DS 57.2 pen 16 {"land":33,"ramp":19,"draw":13,"removal":7,"board_wipe":0,"protection":3} mana=85 curve=92 interaction=61 advantage=88 win=47 synergy=81 meta=50 structure=100

@@ -1,0 +1,574 @@
+The Cabbage Merchant — identity G — 572 candidates (collection 1700 names, reserved 0)
+inc%  lift  mv  rank   $     mk  name | type | oracle
+ 95.7 +3.1   3    791   1.4      Peregrin Took | L.Cr — Halfling Citizen | If one or more tokens would be created under your control, those tokens plus an additional Food token are crea
+ 93.8 +3.4   3    262   9.5      Academy Manufactor | Art Cr — Assembly-Worker | If you would create a Clue, Food, or Treasure token, instead create one of each.
+ 88.3 +3.1   1    805   0.4      Gilded Goose | Cr — Bird | Flying When this creature enters, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this token:
+ 83.7 +0.2   1      1   1.0      7x Sol Ring | Art | {T}: Add {C}{C}.
+ 83.3 +2.6   3    925  14.0      Jaheira, Friend of the Forest | L.Cr — Human Elf Druid | Tokens you control have "{T}: Add {G}." Choose a Background (You can have a Background as a second commander.)
+ 68.4 +3.8   2   4894   0.3      Sarinth Steelseeker | Cr — Human Artificer Scout | Whenever an artifact you control enters, look at the top card of your library. If it's a land card, you may re
+ 68.4 +2.2   4    559   5.3      Second Harvest | Inst | For each token you control, create a token that's a copy of that permanent.
+ 65.7 +3.5   4   2060   0.8      Night of the Sweets' Revenge | Ench | When this enchantment enters, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this token: You
+ 64.2 +0.3   2     30  17.6      Heroic Intervention | Inst | Permanents you control gain hexproof and indestructible until end of turn.
+ 61.3 +0.1   3     25   0.7      2x Beast Within | Inst | Destroy target permanent. Its controller creates a 3/3 green Beast creature token.
+ 57.1 +0.0   1     58   0.2      3x Llanowar Elves | Cr — Elf Druid | {T}: Add {G}.
+ 57.0 +1.3   3    185   3.9      2x Tireless Provisioner | Cr — Elf Scout | Landfall — Whenever a land you control enters, create a Food token or a Treasure token. (Food is an artifact w
+ 54.1 +3.6   2   4741   0.4      Trail of Crumbs | Ench | When this enchantment enters, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this token: You
+ 53.4 +0.1   1    102   5.2      3x Elvish Mystic | Cr — Elf Druid | {T}: Add {G}.
+ 52.5 +3.8   5   3421   2.2      Transmutation Font | Art | {T}: Create your choice of a Blood token, a Clue token, or a Food token. {3}, {T}, Sacrifice three artifact to
+ 51.9 +3.8   7   4714  11.9      Displaced Dinosaurs | Cr — Dinosaur | As a historic permanent you control enters, it becomes a 7/7 Dinosaur creature in addition to its other types.
+ 49.2 +2.5   2    191   3.1      Idol of Oblivion | Art | {T}: Draw a card. Activate only if you created a token this turn. {8}, {T}, Sacrifice this artifact: Create a 
+ 48.7 +3.7   2   8229   0.2      Unlucky Cabbage Merchant | Cr — Human Citizen | When this creature enters, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this token: You ga
+ 48.3 +0.7   3    622   7.4      Archdruid's Charm | Inst | Choose one — • Search your library for a creature or land card and reveal it. Put it onto the battlefield tapp
+ 47.5 +2.9   1   1971   0.2      Many Partings | Sorc | Search your library for a basic land card, reveal it, put it into your hand, then shuffle. Create a Food token
+ 47.2 +3.8   2   3995   0.5      Feasting Hobbit | Cr — Halfling Citizen | Devour Food 3 (As this creature enters, you may sacrifice any number of Foods. It enters with three times that
+ 46.2 +2.3   0   2867   0.4      Gingerbread Cabin | Land — Forest | ({T}: Add {G}.) This land enters tapped unless you control three or more other Forests. When this land enters 
+ 45.5 +3.6   6   8086   0.8      Feasting Troll King | Cr — Troll Noble | Vigilance, trample When this creature enters, if you cast it from your hand, create three Food tokens. (They'r
+ 42.2 +3.8   2   3021   1.7      Syr Ginger, the Meal Ender | L.Art Cr — Food Knight | Syr Ginger has trample, hexproof, and haste as long as an opponent controls a planeswalker. Whenever another a
+ 40.5 +1.1   3    521   8.3      Chord of Calling | Inst | Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} 
+ 39.0 +3.5   1   7729   0.3      Teething Wurmlet | Cr — Wurm | This creature has deathtouch as long as you control three or more artifacts. Whenever an artifact you control 
+ 38.0 +1.1   1    527   4.6      2x Veil of Summer | Inst | Draw a card if an opponent has cast a blue or black spell this turn. Spells you control can't be countered thi
+ 37.1 -0.1   2    584   5.5      Emerald Medallion | Art | Green spells you cast cost {1} less to cast.
+ 37.1 +1.0   3    671   1.4      Bridgeworks Battle // Tanglespan Bridgeworks | Sorc | Target creature you control gets +2/+2 until end of turn. It fights up to one target creature you don't contro
+ 35.1 +3.6   2   6782   0.3      Tough Cookie | Art Cr — Food Golem | When this creature enters, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this token: You ga
+ 34.9 +1.6   3    749   3.4      Elvish Spirit Guide | Cr — Elf Spirit | Exile this card from your hand: Add {G}.
+ 34.1 +0.6   6    459   4.5      Disciple of Freyalise // Garden of Freyalise | Cr — Elf Druid | When this creature enters, you may sacrifice another creature. If you do, you gain X life and draw X cards, wh
+ 34.1 +0.9   5    286  18.5      Seedborn Muse | Cr — Spirit | Untap all permanents you control during each other player's untap step.
+ 32.8 +3.7   2  11979   0.3      Bumi's Feast Lecture | Sorc — Lesson | Create a Food token. Then earthbend X, where X is twice the number of Foods you control. (A Food token is an a
+ 31.6 +2.0   0    425  11.0      Walking Ballista | Art Cr — Construct | This creature enters with X +1/+1 counters on it. {4}: Put a +1/+1 counter on this creature. Remove a +1/+1 co
+ 30.6 +1.5   2   1396  13.3      Invasion of Ikoria // Zilortha, Apex of Ikoria | Battle — Siege | (As a Siege enters, choose an opponent to protect it. You and others can attack it. When it's defeated, exile 
+ 30.3 +0.1   2      3   0.3      8x Arcane Signet | Art | {T}: Add one mana of any color in your commander's color identity.
+ 29.7 +0.1   3    120   2.1      2x Eternal Witness | Cr — Human Shaman | When this creature enters, you may return target card from your graveyard to your hand.
+ 29.3 +3.5   3   9182   0.3      Giant Opportunity | Sorc | You may sacrifice two Foods. If you do, create a 7/7 green Giant creature token. Otherwise, create three Food 
+ 27.2 +1.8   1   3133   0.6      Autumn's Veil | Inst | Spells you control can't be countered by blue or black spells this turn, and creatures you control can't be th
+ 26.9 +0.1   2     13   4.0      Lightning Greaves | Art — Equipment | Equipped creature has haste and shroud. (It can't be the target of spells or abilities.) Equip {0}
+ 26.9 +0.8   4   1019   8.3      Force of Vigor | Inst | If it's not your turn, you may exile a green card from your hand rather than pay this spell's mana cost. Destr
+ 26.7 +0.5   1    653   1.0      Fog | Inst | Prevent all combat damage that would be dealt this turn.
+ 26.4 +1.4   3   1346   2.9      Endurance | Cr — Elemental Incarnation | Flash Reach When this creature enters, up to one target player puts all the cards from their graveyard on the 
+ 25.1 +3.0   5  13302   0.3      Bosco, Just a Bear | L.Cr — Bear | When Bosco enters, create a Food token for each legendary creature you control. (It's an artifact with "{2}, {
+ 24.6 +0.2   2    258  29.0      Sylvan Library | Ench | At the beginning of your draw step, you may draw two additional cards. If you do, choose two cards in your han
+ 23.3 -0.7   3     20   0.4      2x Cultivate | Sorc | Search your library for up to two basic land cards, reveal those cards, put one onto the battlefield tapped an
+ 23.3 +0.7   0     45  12.3      Windswept Heath | Land | {T}, Pay 1 life, Sacrifice this land: Search your library for a Forest or Plains card, put it onto the battlef
+ 21.5 -0.6   2     27   1.1      Rampant Growth | Sorc | Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle.
+ 21.3 +3.6   4  13347   0.1      Halsin, Emerald Archdruid | L.Cr — Elf Druid | {1}: Until end of turn, target token you control becomes a green Bear creature with base power and toughness 4
+ 21.1 +1.6   1    683   0.6      Haywire Mite | Art Cr — Insect | When this creature dies, you gain 2 life. {G}, Sacrifice this creature: Exile target noncreature artifact or n
+ 20.0 +3.7   4  12975   0.4      Wicked Wolf | Cr — Wolf | When this creature enters, it fights up to one target creature you don't control. Sacrifice a Food: Put a +1/+
+ 19.7 -0.0   2    745   1.1      Kenrith's Transformation | Ench — Aura | Enchant creature When this Aura enters, draw a card. Enchanted creature loses all abilities and is a green Elk
+ 18.4 -0.7   2     26   2.1      2x Nature's Lore | Sorc | Search your library for a Forest card, put that card onto the battlefield, then shuffle.
+ 17.0 +1.7   3   1240   7.7      Arachnogenesis | Inst | Create X 1/2 green Spider creature tokens with reach, where X is the number of creatures attacking you. Preven
+ 16.8 +3.5   2   3415   1.2      Lembas | Art — Food | When this artifact enters, scry 1, then draw a card. {2}, {T}, Sacrifice this artifact: You gain 3 life. When 
+ 15.8 +3.3   1  10606   0.5      Party Dude | Ench — Class | (Gain the next level as a sorcery to add its ability.) When this Class enters, each player creates a Food toke
+ 15.0 +0.4   0     47  17.8      Wooded Foothills | Land | {T}, Pay 1 life, Sacrifice this land: Search your library for a Mountain or Forest card, put it onto the battl
+ 14.5 +1.7   1   1067   0.6      Pest Infestation | Sorc | Destroy up to X target artifacts and/or enchantments. Create twice X 1/1 black and green Pest creature tokens 
+ 12.2 +0.7   0   1656   5.4      2x Ba Sing Se | Land | This land enters tapped unless you control a basic land. {T}: Add {G}. {2}{G}, {T}: Earthbend 2. Activate only
+ 10.9 -1.2   5    179   2.7      Return of the Wildspeaker | Inst | Choose one — • Draw cards equal to the greatest power among non-Human creatures you control. • Non-Human creat
+ 10.6 -1.2   3     37   1.9      2x Kodama's Reach | Sorc — Arcane | Search your library for up to two basic land cards, reveal those cards, put one onto the battlefield tapped an
+ 10.4 -0.6   4    388   8.0      Toski, Bearer of Secrets | L.Cr — Squirrel | This spell can't be countered. Indestructible Toski attacks each combat if able. Whenever a creature you contr
+ 10.4 -0.7   0     31   0.3      2x Myriad Landscape | Land | This land enters tapped. {T}: Add {C}. {2}, {T}, Sacrifice this land: Search your library for up to two basic 
+ 10.3 -1.0   0    195   0.4      Mosswort Bridge | Land | Hideaway 4 (When this land enters, look at the top four cards of your library, exile one face down, then put t
+ 10.1 -1.2   0     18   0.7      Rogue's Passage | Land | {T}: Add {C}. {4}, {T}: Target creature can't be blocked this turn.
+  9.2 +1.7   2   6150    -       Tangle | Inst | Prevent all combat damage that would be dealt this turn. Each attacking creature doesn't untap during its cont
+  8.6 -0.8   2    235   0.2      Explore | Sorc | You may play an additional land this turn. Draw a card.
+  8.3 -0.8   1    429   0.3      2x Snakeskin Veil | Inst | Put a +1/+1 counter on target creature you control. It gains hexproof until end of turn. (It can't be the targ
+  8.2 -0.9   5    368   1.5      Shamanic Revelation | Sorc | Draw a card for each creature you control. Ferocious — You gain 4 life for each creature you control with powe
+  7.8 +0.2   4   2623   2.1      2x The Earth King | L.Cr — Human Noble Ally | When The Earth King enters, create a 4/4 green Bear creature token. Whenever one or more creatures you control
+  7.5 +1.0   1   4480   8.0      Helix Pinnacle | Ench | Shroud (This enchantment can't be the target of spells or abilities.) {X}: Put X tower counters on this enchan
+  7.1 -1.6   3     89   0.5      Garruk's Uprising | Ench | When this enchantment enters, if you control a creature with power 4 or greater, draw a card. Creatures you co
+  7.0 +0.1   0      2   0.3      6x Command Tower | Land | {T}: Add one mana of any color in your commander's color identity.
+  7.0 +0.6   1   1139   0.4      Spore Frog | Cr — Frog | Sacrifice this creature: Prevent all combat damage that would be dealt this turn.
+  6.8 +0.6   1   1304   5.1      Carpet of Flowers | Ench | At the beginning of each of your main phases, if you haven't added mana with this ability this turn, you may a
+  6.5 -0.6   0    933   0.4      Blighted Woodland | Land | {T}: Add {C}. {3}{G}, {T}, Sacrifice this land: Search your library for up to two basic land cards, put them o
+  6.5 +2.2   5   4019   0.4      Blossoming Bogbeast | Cr — Beast | Whenever this creature attacks, you gain 2 life. Then creatures you control gain trample and get +X/+X until e
+  5.0 +2.9   2    886   3.1      Myr Retriever | Art Cr — Myr | When this creature dies, return another target artifact card from your graveyard to your hand.
+  5.0 +0.8   3   2803   0.4      Hornet Nest | Cr — Insect | Defender (This creature can't attack.) Whenever this creature is dealt damage, create that many 1/1 green Inse
+  4.9 -0.2   2   1043   0.4      Shared Roots | Sorc — Lesson | Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
+  4.7 -1.6   2    113   0.4      Sakura-Tribe Elder | Cr — Snake Shaman | Sacrifice this creature: Search your library for a basic land card, put that card onto the battlefield tapped,
+  4.3 -0.6   2     21    -       Thought Vessel | Art | You have no maximum hand size. {T}: Add {C}.
+  4.0 +2.2   6  11696   0.2      Orchard Strider | Cr — Treefolk | When this creature enters, create two Food tokens. (They're artifacts with "{2}, {T}, Sacrifice this token: Yo
+  4.0 +0.1   5   1305   1.2      Tendershoot Dryad | Cr — Dryad | Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.) At the b
+  3.7 -1.3   0     44   0.5      3x Fabled Passage | Land | {T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then 
+  3.4 -1.6   5    446   7.7      2x Ohran Frostfang | Snow Cr — Snake | Attacking creatures you control have deathtouch. Whenever a creature you control deals combat damage to a play
+  3.1 +0.6   2   5595   0.6      Spider-Ham, Peter Porker | L.Cr — Spider Boar Hero | When Spider-Ham enters, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this token: You gain 
+  3.0 +1.8   1  14961   0.2      Guac & Marshmallow Pizza | Art — Food | Flash When this artifact enters, target creature gets +2/+2 until end of turn. Untap it. {2}, {T}, Sacrifice t
+  3.0 +0.7   2     17    -       2x Fellwar Stone | Art | {T}: Add one mana of any color that a land an opponent controls could produce.
+  2.9 -1.1   0     82   0.3      2x Temple of the False God | Land | {T}: Add {C}{C}. Activate only if you control five or more lands.
+  2.8 +2.3   3   8775   0.3      Trudge Garden | Ench | Whenever you gain life, you may pay {2}. If you do, create a 4/4 green Fungus Beast creature token with trampl
+  2.7 -1.1   2   1385   0.5      Regrowth | Sorc | Return target card from your graveyard to your hand.
+  2.5 -1.8   5   1664   3.5      Nissa, Who Shakes the World | L.Planeswalker — Nissa | Whenever you tap a Forest for mana, add an additional {G}. +1: Put three +1/+1 counters on up to one target no
+  2.4 -1.9  12    458   1.2      Ghalta, Primal Hunger | L.Cr — Elder Dinosaur | This spell costs {X} less to cast, where X is the total power of creatures you control. Trample (This creature
+  2.3 -0.3   6   3039   5.7      The Legend of Kyoshi // Avatar Kyoshi | Ench — Saga | (As this Saga enters and after your draw step, add a lore counter.) I — Draw cards equal to the greatest power
+  2.0 -1.1   2    689   9.7      Innkeeper's Talent | Ench — Class | (Gain the next level as a sorcery to add its ability.) At the beginning of combat on your turn, put a +1/+1 co
+  1.9 -0.3   2     23   0.5      2x Farseek | Sorc | Search your library for a Plains, Island, Swamp, or Mountain card, put it onto the battlefield tapped, then sh
+  1.9 +1.0   1   1355   0.3      Soul-Guide Lantern | Art | When this artifact enters, exile target card from a graveyard. {T}, Sacrifice this artifact: Exile each oppone
+  1.8 +1.2   0   2255   0.3      Hidden Grotto | Land | When this land enters, surveil 1. (Look at the top card of your library. You may put it into your graveyard.) 
+  1.8 -2.3   3    410   4.9      Selvala, Heart of the Wilds | L.Cr — Elf Scout | Whenever another creature enters, its controller may draw a card if its power is greater than each other creat
+  1.8 -1.7   4    390   0.4      2x Forgotten Ancient | Cr — Elemental | Whenever a player casts a spell, you may put a +1/+1 counter on this creature. At the beginning of your upkeep
+  1.6 +0.1   0   2009   0.3      2x Conduit Pylons | Land — Desert | When this land enters, surveil 1. (Look at the top card of your library. You may put it into your graveyard.) 
+  1.6 -2.0   0     28   0.3      4x Terramorphic Expanse | Land | {T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then 
+  1.5 -1.4   0     14    -       5x Path of Ancestry | Land | This land enters tapped. {T}: Add one mana of any color in your commander's color identity. When that mana is 
+  1.5 -1.0   1   1440   3.0      2x Goldvein Hydra | Cr — Hydra | Vigilance, trample, haste This creature enters with X +1/+1 counters on it. When this creature dies, create a 
+  1.5 -1.0   3   1924   0.3      Cycle of Renewal | Inst — Lesson | Sacrifice a land. Search your library for up to two basic land cards, put them onto the battlefield tapped, th
+  1.5 -0.9   3   2176   3.1      Earthbender Ascension | Ench | When this enchantment enters, earthbend 2. Then search your library for a basic land card, put it onto the bat
+  1.4 -1.2   7   1712   0.3      Hornet Queen | Cr — Insect | Flying, deathtouch When this creature enters, create four 1/1 green Insect creature tokens with flying and dea
+  1.4 -0.1   9   1066  50.1      Portal to Phyrexia | Art | When this artifact enters, each opponent sacrifices three creatures of their choice. At the beginning of your 
+  1.4 +0.0   0   3013   0.3      Rumble Arena | Land | Vigilance When this land enters, scry 1. (Look at the top card of your library. You may put it on the bottom.)
+  1.4 -1.4   1   2944   0.3      Studious First-Year // Rampant Growth | Cr — Bear Wizard | This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.
+  1.4 -1.3   3   2194   0.6      Flare of Cultivation | Sorc | You may sacrifice a nontoken green creature rather than pay this spell's mana cost. Search your library for up
+  1.3 -1.7   5   1702   0.3      Overrun | Sorc | Creatures you control get +3/+3 and gain trample until end of turn. (Each of those creatures can deal excess c
+  1.3 -0.2   3   4329   0.2      Master Chef | L.Ench — Background | Commander creatures you own have "This creature enters with an additional +1/+1 counter on it" and "Other crea
+  1.2 -0.2   2   7988   0.1      Rocky Rebuke | Inst | Target creature you control deals damage equal to its power to target creature an opponent controls.
+  1.2 -1.0   6   2185   0.3      Primeval Bounty | Ench | Whenever you cast a creature spell, create a 3/3 green Beast creature token. Whenever you cast a noncreature s
+  1.2 -0.4   8   4304  14.7      Avatar Kyoshi, Earthbender | L.Cr — Human Avatar | During your turn, Avatar Kyoshi has hexproof. At the beginning of combat on your turn, earthbend 8, then untap
+  1.1 -1.7   2    819   0.6      Cankerbloom | Cr — Phyrexian Fungus | {1}, Sacrifice this creature: Choose one — • Destroy target artifact. • Destroy target enchantment. • Prolifer
+  1.1 +0.9   5  14710   0.3      Ageless Entity | Cr — Elemental | Whenever you gain life, put that many +1/+1 counters on this creature.
+  1.0 -2.1   1   1257   0.3      Bushwhack | Sorc | Choose one — • Search your library for a basic land card, reveal it, put it into your hand, then shuffle. • Ta
+  1.0 -1.4   2   1840   7.8      Springleaf Parade | Ench | When this enchantment enters, create X 1/1 colorless Shapeshifter creature tokens with changeling. (They're ev
+  1.0 -2.0   3    882   3.3      Loot, Exuberant Explorer | L.Cr — Beast Noble | You may play an additional land on each of your turns. {4}{G}{G}, {T}: Look at the top six cards of your libra
+  1.0 -0.8   2   1085   0.3      Fertile Ground | Ench — Aura | Enchant land Whenever enchanted land is tapped for mana, its controller adds an additional one mana of any col
+  0.9 -0.5   1    125   5.6      2x Wayfarer's Bauble | Art | {2}, {T}, Sacrifice this artifact: Search your library for a basic land card, put that card onto the battlefie
+  0.9 -0.6   4   8956   0.3      Crystalline Armor | Ench — Aura | Enchant creature Enchanted creature gets +1/+1 for each land you control and has trample.
+  0.9 +0.7   3    251   0.4      Foundry Inspector | Art Cr — Construct | Artifact spells you cast cost {1} less to cast.
+  0.8 -0.0   1  10861   0.1      Pillar Launch | Inst | Target creature gets +2/+2 and gains reach until end of turn. Untap it.
+  0.8 -1.9   3    741   3.5      Spelunking | Ench | When this enchantment enters, draw a card, then you may put a land card from your hand onto the battlefield. I
+  0.8 -1.2   4     39   0.3      3x Solemn Simulacrum | Art Cr — Golem | When this creature enters, you may search your library for a basic land card, put that card onto the battlefie
+  0.8 -2.2   6   1127  29.6      Lumra, Bellow of the Woods | L.Cr — Elemental Bear | Reach, vigilance Lumra's power and toughness are each equal to the number of lands you control. When Lumra ent
+  0.7 -1.1   1   3679   0.8      2x Magus of the Candelabra | Cr — Human Wizard | {X}, {T}: Untap X target lands.
+  0.7 +0.1   5    966  10.4      Alhammarret's Archive | L.Art | If you would gain life, you gain twice that much life instead. If you would draw a card except the first one y
+  0.7 -1.6   0   1497   1.5      Arid Archway | Land — Desert | This land enters tapped. When this land enters, return a land you control to its owner's hand. If another Dese
+  0.7 -1.3   2   6349   0.3      Noxious Newt | Cr — Salamander | Deathtouch {T}: Add {G}.
+  0.7 +1.0   2   3513   4.9      Torpor Orb | Art | Creatures entering don't cause abilities to trigger.
+  0.7 -1.6   4   1948   0.5      Brawn | Cr — Incarnation | Trample As long as this card is in your graveyard and you control a Forest, creatures you control have trample
+  0.7 -0.4   5    412   0.5      Gilded Lotus | Art | {T}: Add three mana of any one color.
+  0.7 -1.3   6   2428   0.9      Regal Behemoth | Cr — Dinosaur | Trample When this creature enters, you become the monarch. Whenever you tap a land for mana while you're the m
+  0.7 +0.5   6  15192   0.1      Saber-Tooth Moose-Lion | Cr — Elk Cat | Reach Forestcycling {2} ({2}, Discard this card: Search your library for a Forest card, reveal it, put it into
+  0.7 -1.0  10   1565   6.4      Kozilek, the Great Distortion | L.Cr — Eldrazi | When you cast this spell, if you have fewer than seven cards in hand, draw cards equal to the difference. Mena
+  0.6 -0.1   0      9    -       5x Exotic Orchard | Land | {T}: Add one mana of any color that a land an opponent controls could produce.
+  0.6 -0.6   0   7181   0.6      Sapseep Forest | Land — Forest | ({T}: Add {G}.) This land enters tapped. {G}, {T}: You gain 1 life. Activate only if you control two or more g
+  0.6 -0.2   3   9283   0.3      Bioengineered Future | Ench | When this enchantment enters, create a Lander token. (It's an artifact with "{2}, {T}, Sacrifice this token: S
+  0.6 -1.6   3   2454   1.1      Harvest Season | Sorc | Search your library for up to X basic land cards, where X is the number of tapped creatures you control, put t
+  0.6 -2.9   3   1063   0.6      Hunter's Insight | Inst | Choose target creature you control. Whenever that creature deals combat damage to a player or planeswalker thi
+  0.6 -1.3   4   3200   1.8      Oviya, Automech Artisan | L.Cr — Human Artificer | Each creature that's attacking one of your opponents has trample. {G}, {T}: You may put a creature or Vehicle 
+  0.6 +1.4   6   3502   6.2      Planetarium of Wan Shi Tong | L.Art | {1}, {T}: Scry 2. Whenever you scry or surveil, look at the top card of your library. You may cast that card w
+  0.6 -0.6   1   2438   0.3      Abundant Growth | Ench — Aura | Enchant land When this Aura enters, draw a card. Enchanted land has "{T}: Add one mana of any color."
+  0.6 -1.6   1   3879    -       2x Primal Might | Sorc | Target creature you control gets +X/+X until end of turn. Then it fights up to one target creature you don't c
+  0.6 -1.3   1   3739   0.2      Wildwood Scourge | Cr — Hydra | This creature enters with X +1/+1 counters on it. Whenever one or more +1/+1 counters are put on another non-H
+  0.6 -1.7   2   3235   0.3      Tangled Florahedron // Tangled Vale | Cr — Elemental | {T}: Add {G}. // This land enters tapped. {T}: Add {G}.
+  0.6 -2.1   4   3262   1.2      Planar Engineering | Sorc | Sacrifice two lands. Search your library for four basic land cards, put them onto the battlefield tapped, then
+  0.5 -1.2   2   6753   0.3      Frog Butler | Cr — Frog Spirit | Deathtouch {T}: Add one mana of any color. {2}: This creature gains reach until end of turn.
+  0.5 -1.3   3    134  15.7      Ashnod's Altar | Art | Sacrifice a creature: Add {C}{C}.
+  0.5 -2.2   5   4409   3.5      Gigantosaurus | Cr — Dinosaur | 
+  0.5 +0.6   9  15686   0.3      Sproutback Trudge | Cr — Fungus Beast | This spell costs {X} less to cast, where X is the amount of life you gained this turn. Trample At the beginnin
+  0.5 -2.2   0    795   0.3      Escape Tunnel | Land | {T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then 
+  0.5 -0.6   1   6225   0.3      Gene Pollinator | Art Cr — Robot Insect | {T}, Tap an untapped permanent you control: Add one mana of any color.
+  0.5 -0.1   2  12161   1.3      Animal Attendant | Cr — Human Citizen | {T}: Add one mana of any color. If that mana is spent to cast a non-Human creature spell, that creature enters
+  0.5 -0.4   6  10107   1.3      Ezzaroot Channeler | Cr — Treefolk Druid | Reach Creature spells you cast cost {X} less to cast, where X is the amount of life you gained this turn. {T}:
+  0.5 +0.7  11   1670   0.3      Metalwork Colossus | Art Cr — Construct | This spell costs {X} less to cast, where X is the total mana value of noncreature artifacts you control. Sacri
+  0.4 -0.9   0    253   0.3      Everflowing Chalice | Art | Multikicker {2} (You may pay an additional {2} any number of times as you cast this spell.) This artifact ente
+  0.4 -1.2   0    561   0.3      2x Nesting Grounds | Land | {T}: Add {C}. {1}, {T}: Move a counter from target permanent you control onto a second target permanent. Activ
+  0.4 -0.5   2   2122   0.2      Basking Broodscale | Cr — Eldrazi Lizard | Devoid (This card has no color.) {1}{G}: Adapt 1. (If this creature has no +1/+1 counters on it, put a +1/+1 c
+  0.4 -1.5   3     53   0.4      2x Commander's Sphere | Art | {T}: Add one mana of any color in your commander's color identity. Sacrifice this artifact: Draw a card.
+  0.4 -1.9   3   3025   0.4      2x Lifeblood Hydra | Cr — Hydra | Trample This creature enters with X +1/+1 counters on it. When this creature dies, you gain life and draw card
+  0.4 -0.6   8   2108  13.4      Cityscape Leveler | Art Cr — Construct | Trample When you cast this spell and whenever this creature attacks, destroy up to one target nonland permanen
+  0.4 -1.4   0    210   0.3      2x Ash Barrens | Land | {T}: Add {C}. Basic landcycling {1} ({1}, Discard this card: Search your library for a basic land card, reveal
+  0.4 -2.7   0    969   0.3      Cabaretti Courtyard | Land | When this land enters, sacrifice it. When you do, search your library for a basic Mountain, Forest, or Plains 
+  0.4 -0.0   0   1548   3.1      Radiant Fountain | Land | When this land enters, you gain 2 life. {T}: Add {C}.
+  0.4 -1.6   2   3011   0.5      Malevolent Rumble | Sorc | Reveal the top four cards of your library. You may put a permanent card from among them into your hand. Put th
+  0.4 -3.1   3    880   7.4      Elvish Archdruid | Cr — Elf Druid | Other Elf creatures you control get +1/+1. {T}: Add {G} for each Elf you control.
+  0.4 -1.0   5   5559   0.3      Elemental Teachings | Inst — Lesson | Search your library for up to four land cards with different names and reveal them. An opponent chooses two of
+  0.4 -1.9   7   2179   0.4      Verdant Sun's Avatar | Cr — Dinosaur Avatar | Whenever this creature or another creature you control enters, you gain life equal to that creature's toughnes
+  0.3 -2.7   0   1317   0.9      Brokers Hideout | Land | When this land enters, sacrifice it. When you do, search your library for a basic Forest, Plains, or Island ca
+  0.3 -0.7   1   1445   1.0      Elixir of Immortality | Art | {2}, {T}: You gain 5 life. Shuffle this artifact and your graveyard into their owner's library.
+  0.3 -3.0   3    780   0.6      Springbloom Druid | Cr — Elf Druid | When this creature enters, you may sacrifice a land. If you do, search your library for up to two basic land c
+  0.3 -1.5   5   8889   0.3      2x Spry and Mighty | Sorc | Choose exactly two creatures you control. You draw X cards and the chosen creatures get +X/+X and gain trample
+  0.3 -1.7   1   6060   0.3      3x Trash the Town | Inst | Spree (Choose one or more additional costs.) + {2} — Put two +1/+1 counters on target creature. + {1} — Target
+  0.3 +1.6   2  12162   0.2      Shortcut to Mushrooms | Ench | When this enchantment enters, the Ring tempts you. At the beginning of your end step, if a permanent you contr
+  0.3 -3.0   2    234   5.6      Sword of the Animist | L.Art — Equipment | Equipped creature gets +1/+1. Whenever equipped creature attacks, you may search your library for a basic land
+  0.3 -0.6   2  16617   0.3      Vivien's Arkbow | L.Art | {X}, {T}, Discard a card: Look at the top X cards of your library. You may put a creature card with mana value
+  0.3 -0.5   3   5579   0.4      Freestrider Lookout | Cr — Human Rogue | Reach Whenever you commit a crime, look at the top five cards of your library. You may put a land card from am
+  0.3 -0.9   3  11287   0.3      Master's Guidance | Ench | Whenever you attack with two or more legendary creatures, put a +1/+1 counter on each of up to two target atta
+  0.3 +0.7   3  11994   0.2      Match the Odds | Sorc — Lesson | Create a 1/1 white Ally creature token. Put a +1/+1 counter on it for each creature your opponents control.
+  0.3 +1.1   3   6314   0.5      Pest Rescuer | Cr — Dryad Druid | At the beginning of each upkeep, if you don't control a Pest creature token, create a 1/1 black and green Pest
+  0.3 +0.1   3   1349   0.4      Pristine Talisman | Art | {T}: Add {C}. You gain 1 life.
+  0.3 -3.2   3   1053   0.2      Roiling Regrowth | Inst | Sacrifice a land. Search your library for up to two basic land cards, put them onto the battlefield tapped, th
+  0.3 -1.7   5   7939   0.1      Heroes' Bane | Cr — Hydra | This creature enters with four +1/+1 counters on it. {2}{G}{G}: Put X +1/+1 counters on this creature, where X
+  0.3 -0.2   8   3954   0.3      Breaker of Creation | Cr — Eldrazi | When you cast this spell, you gain 1 life for each colorless permanent you control. Hexproof from each color A
+  0.2 -2.7   2   2130   1.6      Masked Vandal | Cr — Shapeshifter | Changeling (This card is every creature type.) When this creature enters, you may exile a creature card from y
+  0.2 -1.8   2    221   2.3      Ornithopter of Paradise | Art Cr — Thopter | Flying {T}: Add one mana of any color.
+  0.2 -2.9   3   2887   1.6      Outcaster Trailblazer | Cr — Human Druid | When this creature enters, add one mana of any color. Whenever another creature you control with power 4 or gr
+  0.2 -3.5   3    488   4.8      2x Ramunap Excavator | Cr — Snake Cleric | You may play lands from your graveyard.
+  0.2 -0.9   3    572   0.3      Worn Powerstone | Art | This artifact enters tapped. {T}: Add {C}{C}.
+  0.2 -2.3   4   1768   4.9      Nyx Lotus | L.Art | Nyx Lotus enters tapped. {T}: Choose a color. Add an amount of mana of that color equal to your devotion to th
+  0.2 -1.9   4   4257   0.5      Vizier of the Menagerie | Cr — Snake Cleric | You may look at the top card of your library any time. You may cast creature spells from the top of your libra
+  0.2 -2.3   5   2097   0.4      Mycoloth | Cr — Fungus | Devour 2 (As this creature enters, you may sacrifice any number of creatures. It enters with twice that many +
+  0.2 -1.4   6   8712   0.3      Nissa's Renewal | Sorc | Search your library for up to three basic land cards, put them onto the battlefield tapped, then shuffle. You 
+  0.2 -1.1   7   3360   2.3      Bane of Bala Ged | Cr — Eldrazi | Whenever this creature attacks, defending player exiles two permanents they control.
+  0.2 -0.7   0   1421   0.8      Muraganda Raceway | Land | Start your engines! (If you have no speed, it starts at 1. It increases once on each of your turns when an opp
+  0.2 -3.3   0    716   0.3      2x Riveteers Overlook | Land | When this land enters, sacrifice it. When you do, search your library for a basic Swamp, Mountain, or Forest c
+  0.2 -2.5   1   6009   0.3      Ankle Biter | Cr — Snake | Deathtouch
+  0.2 -2.9   1   3299   0.2      Giant Growth | Inst | Target creature gets +3/+3 until end of turn.
+  0.2 +0.3   2   6438   0.2      Mazemind Tome | Art — Book | {T}, Put a page counter on this artifact: Scry 1. (Look at the top card of your library. You may put that card
+  0.2 -3.2   3   2504   1.2      Chomping Changeling | Cr — Shapeshifter | Changeling (This card is every creature type.) When this creature enters, destroy up to one target artifact or
+  0.2 +0.3   3     85    -       2x Chromatic Lantern | Art | Lands you control have "{T}: Add one mana of any color." {T}: Add one mana of any color.
+  0.2 +0.6   3  14919   0.2      Honor Troll | Cr — Troll Druid | Vigilance If you would gain life, you gain that much life plus 1 instead. This creature gets +2/+1 as long as 
+  0.2 -1.2   3  11223   0.1      Knockout Maneuver | Sorc | Put a +1/+1 counter on target creature you control, then it deals damage equal to its power to target creature
+  0.2 -2.6   3   3807   1.8      Mutable Explorer | Cr — Shapeshifter | Changeling (This card is every creature type.) When this creature enters, create a tapped Mutavault token. (It
+  0.2 -2.2   3   6284   0.2      Predator Ooze | Cr — Ooze | Indestructible (Damage and effects that say "destroy" don't destroy this creature.) Whenever this creature att
+  0.2 -1.5   5   6583   0.2      Eusocial Engineering | Ench | Landfall — Whenever a land you control enters, create a 2/2 colorless Robot artifact creature token. Warp {1}{
+  0.2 -1.1   5   6809   0.2      Spider-Man, Brooklyn Visionary | L.Cr — Spider Human Hero | Web-slinging {2}{G} (You may cast this spell for {2}{G} if you also return a tapped creature you control to it
+  0.2 +0.5   6   9952   0.3      Eldrazi Ravager | Cr — Eldrazi | Annihilator 1 (Whenever this creature attacks, defending player sacrifices a permanent of their choice.) Sacri
+  0.2 -1.0   6  11423   0.3      Verdant Confluence | Sorc | Choose three. You may choose the same mode more than once. • Put two +1/+1 counters on target creature. • Retu
+  0.1 +2.8   0     43  17.7      Bloodstained Mire | Land | {T}, Pay 1 life, Sacrifice this land: Search your library for a Swamp or Mountain card, put it onto the battle
+  0.1 -1.1   0   1106   3.0      Mishra's Bauble | Art | {T}, Sacrifice this artifact: Look at the top card of target player's library. Draw a card at the beginning of
+  0.1 -2.9   0    681   0.3      2x Opal Palace | Land | {T}: Add {C}. {1}, {T}: Add one mana of any color in your commander's color identity. If you spend this mana t
+  0.1 +0.1   0   3543   0.2      3x Study Hall | Land | {T}: Add {C}. {1}, {T}: Add one mana of any color. When you spend this mana to cast your commander, scry X, wh
+  0.1 -2.3   1   1530   1.8      Lavaspur Boots | Art — Equipment | Equipped creature gets +1/+0 and has haste and ward {1}. (Whenever it becomes the target of a spell or ability
+  0.1 -1.6   2   6872   0.2      3x Dance of the Tumbleweeds | Sorc | Spree (Choose one or more additional costs.) + {1} — Search your library for a basic land card or a Desert car
+  0.1 +1.0   2   6786   0.3      Gleaming Barrier | Art Cr — Wall | Defender When this creature dies, create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: 
+  0.1 -3.1   2   3336   0.3      Lion Umbra | Ench — Aura | Enchant modified creature (Equipment, Auras its controller controls, and counters are modifications.) Enchante
+  0.1 -2.2   3    499   0.3      Burnished Hart | Art Cr — Elk | {3}, Sacrifice this creature: Search your library for up to two basic land cards, put them onto the battlefiel
+  0.1 -1.4   3  10950   0.2      Case of the Trampled Garden | Ench — Case | When this Case enters, distribute two +1/+1 counters among one or two target creatures you control. To solve —
+  0.1 -1.6   3  12262   0.1      Clear Shot | Inst | Target creature you control gets +1/+1 until end of turn. It deals damage equal to its power to target creatur
+  0.1 -2.2   3   9188   0.3      Sandman, Shifting Scoundrel | L.Cr — Sand Elemental Villain | Sandman's power and toughness are each equal to the number of lands you control. Sandman can't be blocked by c
+  0.1 -2.0   3   8416   0.7      Undergrowth Champion | Cr — Elemental | If damage would be dealt to this creature while it has a +1/+1 counter on it, prevent that damage and remove a
+  0.1 -3.0   3   8514   0.5      Vastlands Scavenger // Bind to Life | Cr — Bear Druid | Deathtouch This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unp
+  0.1 -0.8   4  11404    -       Durnan of the Yawning Portal | L.Cr — Human Warrior | Whenever Durnan attacks, look at the top four cards of your library. You may exile a creature card from among 
+  0.1 -0.6   4  11251   0.4      Healing Technique | Sorc | Demonstrate (When you cast this spell, you may copy it. If you do, choose an opponent to also copy it. Players
+  0.1 -2.2   4   3668   0.3      2x Map the Frontier | Sorc | Search your library for up to two basic land cards and/or Desert cards, put them onto the battlefield tapped, 
+  0.1 -2.8   4   2180   0.5      Monstrous Vortex | Ench | Whenever you cast a creature spell with power 5 or greater, discover X, where X is that spell's mana value. (E
+  0.1 -0.8   4   5986   1.6      Omenpath Journey | Ench | When this enchantment enters, search your library for up to five land cards that have different names, exile t
+  0.1 -1.0   4  15169   0.2      You Meet in a Tavern | Sorc | Choose one — • Form a Party — Look at the top five cards of your library. You may reveal any number of creatur
+  0.1 -1.1   5   5777   0.2      Explore the Underdark | Sorc | Search your library for up to two basic land cards and/or Gate cards, put them onto the battlefield tapped, th
+  0.1 -3.1   0    424   0.5      High Market | Land | {T}: Add {C}. {T}, Sacrifice a creature: You gain 1 life.
+  0.1 -0.8   1   5291   0.2      Fountainport Bell | Art | When this artifact enters, you may search your library for a basic land card, reveal it, then shuffle and put 
+  0.1 -0.7   2  10856   0.3      Bristlebane Battler | Cr — Kithkin Soldier | Trample, ward {2} This creature enters with five -1/-1 counters on it. Whenever another creature you control e
+  0.1 -3.5   2   2791   0.3      Nightshade Dryad | Cr — Dryad | Deathtouch {T}: Add {C}. {T}: Add one mana of any color.
+  0.1 -3.0   2   2086   0.2      Paradise Druid | Cr — Elf Druid | This creature has hexproof as long as it's untapped. (It can't be the target of spells or abilities your oppon
+  0.1 -2.3   2   9428   0.2      Wildborn Preserver | Cr — Elf Archer | Flash (You may cast this spell any time you could cast an instant.) Reach (This creature can block creatures w
+  0.1 -3.3   3    974   2.8      Loxodon Warhammer | Art — Equipment | Equipped creature gets +3/+0 and has trample and lifelink. Equip {3}
+  0.1 -1.4   3    738   1.2      Palladium Myr | Art Cr — Myr | {T}: Add {C}{C}.
+  0.1 -1.8   3  10734   0.3      Pulse of Murasa | Inst | Return target creature or land card from a graveyard to its owner's hand. You gain 6 life.
+  0.1 -0.8   3  11510   0.3      2x Yavimaya Bloomsage // Channel | Cr — Dryad Druid | At the beginning of your end step, put a +1/+1 counter on target creature you control. Then if that creature h
+  0.1 -0.5   4  11072   0.3      Paradise Plume | Art | As this artifact enters, choose a color. Whenever a player casts a spell of the chosen color, you may gain 1 l
+  0.1 -3.6   4   7597   0.3      Surrak, the Hunt Caller | L.Cr — Human Warrior | Formidable — At the beginning of combat on your turn, if creatures you control have total power 8 or greater, 
+  0.1 -2.3   5   7890   0.4      Verdurous Gearhulk | Art Cr — Construct | Trample When this creature enters, distribute four +1/+1 counters among any number of target creatures you con
+  0.1 -3.1   5   3227   0.3      Yedora, Grave Gardener | L.Cr — Treefolk Druid | Whenever another nontoken creature you control dies, you may return it to the battlefield face down under its 
+  0.1 -0.8   6  14941   0.2      Spinewoods Armadillo | Cr — Armadillo | Reach Ward {3} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter 
+  0.1 -1.5   6   5031   0.4      Sweet-Gum Recluse | Cr — Spider | Flash Cascade Reach When this creature enters, put three +1/+1 counters on each of any number of target creatu
+  0.1 -2.4   8   7862   0.9      Through the Forest Gate | Sorc | Look at the top twenty cards of your library, put any number of land cards from among them onto the battlefiel
+  -     -    0   1036   1.9      Arcane Lighthouse | Land | {T}: Add {C}. {1}, {T}: Until end of turn, creatures your opponents control lose hexproof and shroud and can't
+  -     -    0   1316   0.3      Astral Cornucopia | Art | This artifact enters with X charge counters on it. {T}: Choose a color. Add one mana of that color for each ch
+  -     -    0  11111   0.2      Base Camp | Land | This land enters tapped. {T}: Add {C}. {T}: Add one mana of any color. Spend this mana only to cast a Cleric, 
+  -     -    0   2886   0.3      Basilisk Gate | Land — Gate | {T}: Add {C}. {2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you contr
+  -     -    0   1662   0.4      Blast Zone | Land | This land enters with a charge counter on it. {T}: Add {C}. {X}{X}, {T}: Put X charge counters on this land. {
+  -     -    0    193   0.4      Buried Ruin | Land | {T}: Add {C}. {2}, {T}, Sacrifice this land: Return target artifact card from your graveyard to your hand.
+  -     -    0   5815   0.3      Cloudpost | Land — Locus | This land enters tapped. {T}: Add {C} for each Locus on the battlefield.
+  -     -    0   6591   0.1      Crawling Barrens | Land | {T}: Add {C}. {4}: Put two +1/+1 counters on this land. Then you may have it become a 0/0 Elemental creature u
+  -     -    0   4593   0.2      Cryptic Caves | Land | {T}: Add {C}. {1}, {T}, Sacrifice this land: Draw a card. Activate only if you control five or more lands.
+  -     -    0   1472   3.0      Dark Depths | L.Snow Land | Dark Depths enters with ten ice counters on it. {3}: Remove an ice counter from Dark Depths. When Dark Depths 
+  -     -    0   3671   0.2      Desert of the Indomitable | Land — Desert | This land enters tapped. {T}: Add {G}. Cycling {1}{G} ({1}{G}, Discard this card: Draw a card.)
+  -     -    0   3142   3.3      Diamond City | Land | This land enters with a shield counter on it. (If it would be dealt damage or destroyed, remove a shield count
+  -     -    0     19   0.3      Evolving Wilds | Land | {T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then 
+  -     -    0   6597   0.3      Glimmerpost | Land — Locus | When this land enters, you gain 1 life for each Locus on the battlefield. {T}: Add {C}.
+  -     -    0   1818   0.3      Great Hall of the Citadel | Land | {T}: Add {C}. {1}, {T}: Add two mana in any combination of colors. Spend this mana only to cast legendary spel
+  -     -    0   1522   0.3      Hangarback Walker | Art Cr — Construct | This creature enters with X +1/+1 counters on it. When this creature dies, create a 1/1 colorless Thopter arti
+  -     -    0   4415   0.2      Hashep Oasis | Land — Desert | {T}: Add {C}. {T}, Pay 1 life: Add {G}. {1}{G}{G}, {T}, Sacrifice a Desert: Target creature gets +3/+3 until e
+  -     -    0   3688   0.2      Hidden Nursery | Land — Cave | This land enters tapped. {T}: Add {G}. {4}{G}, {T}, Sacrifice this land: Discover 4. Activate only as a sorcer
+  -     -    0   1527   7.0      Horizon of Progress | Land | {T}, Pay 1 life: Add one mana of any type that a land you control could produce. {3}, {T}: You may put a land 
+  -     -    0   4184   0.2      Interplanar Beacon | Land | Whenever you cast a planeswalker spell, you gain 1 life. {T}: Add {C}. {1}, {T}: Add two mana of different col
+  -     -    0    267  16.2      Inventors' Fair | L.Land | At the beginning of your upkeep, if you control three or more artifacts, you gain 1 life. {T}: Add {C}. {4}, {
+  -     -    0    206   2.2      Karn's Bastion | Land | {T}: Add {C}. {4}, {T}: Proliferate. (Choose any number of permanents and/or players, then give each another c
+  -     -    0   2518   0.4      Lair of the Hydra | Land | If you control two or more other lands, this land enters tapped. {T}: Add {G}. {X}{G}: Until end of turn, this
+  -     -    0   1871   2.8      Lazotep Quarry | Land — Desert | {T}: Add {C}. {T}, Sacrifice a creature: Add one mana of any color. {X}{2}, {T}, Sacrifice a Desert: Exile tar
+  -     -    0    869   2.5      Lotus Field | Land | Hexproof This land enters tapped. When this land enters, sacrifice two lands. {T}: Add three mana of any one c
+  -     -    0   1285   0.3      Maestros Theater | Land | When this land enters, sacrifice it. When you do, search your library for a basic Island, Swamp, or Mountain c
+  -     -    0    116  34.9      Mana Confluence | Land | {T}, Pay 1 life: Add one mana of any color.
+  -     -    0   2484   1.0      Manor Gate | Land — Gate | This land enters tapped. As this land enters, choose a color other than green. {T}: Add {G} or one mana of the
+  -     -    0   4339   0.2      Mirage Mesa | Land — Desert | This land enters tapped. As it enters, choose a color. {T}: Add one mana of the chosen color.
+  -     -    0    735   0.4      Oran-Rief, the Vastwood | Land | This land enters tapped. {T}: Add {G}. {T}: Put a +1/+1 counter on each green creature that entered this turn.
+  -     -    0   2630   9.3      Planar Nexus | Land | This land is every nonbasic land type. (Nonbasic land types include Cave, Desert, Gate, Lair, Locus, Mine, Pow
+  -     -    0   7627   0.4      Plaza of Harmony | Land | When this land enters, if you control two or more Gates, you gain 3 life. {T}: Add {C}. {T}: Add one mana of a
+  -     -    0     10   4.5      Reliquary Tower | Land | You have no maximum hand size. {T}: Add {C}.
+  -     -    0   6427   0.3      Sandstorm Verge | Land — Desert | {T}: Add {C}. {3}, {T}: Target creature can't block this turn. Activate only as a sorcery.
+  -     -    0   3770   0.4      Secluded Starforge | Land | {T}: Add {C}. {2}, {T}, Tap X untapped artifacts you control: Target creature gets +X/+0 until end of turn. Ac
+  -     -    0   9992   0.3      Skycoach Waypoint | Land | {T}: Add {C}. {3}, {T}: Target creature becomes prepared. (Only creatures with prepare spells can become prepa
+  -     -    0    394   0.3      Spire of Industry | Land | {T}: Add {C}. {T}, Pay 1 life: Add one mana of any color. Activate only if you control an artifact.
+  -     -    0   1514   0.4      Stonecoil Serpent | Art Cr — Snake | Reach, trample, protection from multicolored This creature enters with X +1/+1 counters on it.
+  -     -    0    529    -       Strip Mine | Land | {T}: Add {C}. {T}, Sacrifice this land: Destroy target land.
+  -     -    0    570  41.0      Talon Gates of Madara | Land — Gate | When this land enters, up to one target creature phases out. {T}: Add {C}. {1}, {T}: Add one mana of any color
+  -     -    0   9199   0.9      Tarnation Vista | Land | This land enters tapped. As it enters, choose a color. {T}: Add one mana of the chosen color. {1}, {T}: For ea
+  -     -    0    854   0.4      The Mycosynth Gardens | Land — Sphere | {T}: Add {C}. {1}, {T}: Add one mana of any color. {X}, {T}: This land becomes a copy of target nontoken artif
+  -     -    0    580   0.5      Thespian's Stage | Land | {T}: Add {C}. {2}, {T}: This land becomes a copy of target land, except it has this ability.
+  -     -    0   8042   0.4      Trenchpost | Land — Locus | {T}: Add {C}. {3}, {T}: Target player mills a card for each Locus you control.
+  -     -    0    842   1.2      Urza's Mine | Land — Urza's Mine | {T}: Add {C}. If you control an Urza's Power-Plant and an Urza's Tower, add {C}{C} instead.
+  -     -    0    843   2.4      Urza's Power Plant | Land — Urza's Power-Plant | {T}: Add {C}. If you control an Urza's Mine and an Urza's Tower, add {C}{C} instead.
+  -     -    0    835   1.1      Urza's Tower | Land — Urza's Tower | {T}: Add {C}. If you control an Urza's Mine and an Urza's Power-Plant, add {C}{C}{C} instead.
+  -     -    0    923   3.6      Vesuva | Land | You may have this land enter tapped as a copy of any land on the battlefield.
+  -     -    0   2683   0.4      Volatile Fault | Land — Cave | {T}: Add {C}. {1}, {T}, Sacrifice this land: Destroy target nonbasic land an opponent controls. That player ma
+  -     -    0     78  17.3      Yavimaya, Cradle of Growth | L.Land | Each land is a Forest in addition to its other land types.
+  -     -    1   2496   0.4      Animist's Awakening | Sorc | Reveal the top X cards of your library. Put all land cards from among them onto the battlefield tapped and the
+  -     -    1    254   3.7      Basilisk Collar | Art — Equipment | Equipped creature has deathtouch and lifelink. (Any amount of damage it deals to a creature is enough to destr
+  -     -    1  11027   0.1      Blisterpod | Cr — Eldrazi Drone | Devoid (This card has no color.) When this creature dies, create a 1/1 colorless Eldrazi Scion creature token.
+  -     -    1    454    -       2x Expedition Map | Art | {2}, {T}, Sacrifice this artifact: Search your library for a land card, reveal it, put it into your hand, then
+  -     -    1   2252   0.2      Explorer's Scope | Art — Equipment | Whenever equipped creature attacks, look at the top card of your library. If it's a land card, you may put it 
+  -     -    1  22251   0.3      Eye of Jace | Art | At the beginning of your upkeep, surveil 1. Then if there are seven or more cards in your graveyard, sacrifice
+  -     -    1  17186   0.3      Giant's Boulder | Art | When this artifact enters, scry 2. (Look at the top two cards of your library, then put any number of them on 
+  -     -    1    186   3.0      Hardened Scales | Ench | If one or more +1/+1 counters would be put on a creature you control, that many plus one +1/+1 counters are pu
+  -     -    1   7171   0.3      Kinetic Ooze | Cr — Ooze | This creature enters with X +1/+1 counters on it. When this creature enters, destroy up to one target artifact
+  -     -    1   3006    -       Library of Leng | Art | You have no maximum hand size. If an effect causes you to discard a card, discard it, but you may put it on to
+  -     -    1   9800   0.2      Longstalk Brawl | Sorc | Gift a tapped Fish (You may promise an opponent a gift as you cast this spell. If you do, they create a tapped
+  -     -    1   4503   5.4      Lost Jitte | L.Art — Equipment | Whenever equipped creature deals combat damage, put a charge counter on Lost Jitte. Remove a charge counter fr
+  -     -    1   9057   0.2      Mana Bloom | Ench | This enchantment enters with X charge counters on it. Remove a charge counter from this enchantment: Add one m
+  -     -    1  18370   0.2      Meltstrider's Gear | Art — Equipment | When this Equipment enters, attach it to target creature you control. Equipped creature gets +2/+1 and has rea
+  -     -    1   7151   0.7      Multiclass Baldric | Art — Equipment | Equipped creature has lifelink if you control a Cleric, deathtouch if you control a Rogue, haste if you contro
+  -     -    1   2346   0.4      Silkguard | Inst | Put a +1/+1 counter on each of up to X target creatures you control. Auras, Equipment, and modified creatures 
+  -     -    1    721   1.3      Tyvar's Stand | Inst | Target creature you control gets +X/+X and gains hexproof and indestructible until end of turn. (It can't be t
+  -     -    1   1298   2.6      Vexing Bauble | Art | Whenever a player casts a spell, if no mana was spent to cast it, counter that spell. {1}, {T}, Sacrifice this
+  -     -    1    212   0.6      Wild Growth | Ench — Aura | Enchant land Whenever enchanted land is tapped for mana, its controller adds an additional {G}.
+  -     -    2  28030   0.2      Arcane Amphisbaena | Cr — Snake | Deathtouch When this creature enters, empower Jace 2. (Put two loyalty counters on a Jace token you control. I
+  -     -    2   2942   0.8      Benevolent Hydra | Cr — Hydra | This creature enters with X +1/+1 counters on it. If one or more +1/+1 counters would be put on another creatu
+  -     -    2    256  12.8      Bloom Tender | Cr — Elf Druid | Vivid — {T}: For each color among permanents you control, add one mana of that color.
+  -     -    2   7499   0.3      Broodhatch Nantuko | Cr — Insect Druid | Whenever this creature is dealt damage, you may create that many 1/1 green Insect creature tokens. Morph {2}{G
+  -     -    2  20812   0.4      Carnivorous Cultivator // Enroot | Cr — Elf Warlock | Deathtouch This creature enters prepared. Whenever this creature deals combat damage to a player, return targe
+  -     -    2   5828   0.2      Channeler Initiate | Cr — Human Druid | When this creature enters, put three -1/-1 counters on target creature you control. {T}, Remove a -1/-1 counte
+  -     -    2   1419   0.3      Contagion Clasp | Art | When this artifact enters, put a -1/-1 counter on target creature. {4}, {T}: Proliferate. (Choose any number o
+  -     -    2   5614   0.3      Coretapper | Art Cr — Myr | {T}: Put a charge counter on target artifact. Sacrifice this creature: Put two charge counters on target artif
+  -     -    2   5409   0.4      Cream of the Crop | Ench | Whenever a creature you control enters, you may look at the top X cards of your library, where X is that creat
+  -     -    2   6533   1.1      Demon's Horn | Art | Whenever a player casts a black spell, you may gain 1 life.
+  -     -    2    967   1.2      Devoted Druid | Cr — Elf Druid | {T}: Add {G}. Put a -1/-1 counter on this creature: Untap this creature.
+  -     -    2  27686   0.2      Fblthp, Knows the Way | L.Cr — Homunculus Scout | Domain — Fblthp's power is equal to the number of basic land types among lands you control. When Fblthp enters
+  -     -    2  13936   0.1      Floriferous Vinewall | Cr — Plant Wall | Defender When this creature enters, look at the top six cards of your library. You may reveal a land card from
+  -     -    2   5970   0.3      Gatecreeper Vine | Cr — Plant | Defender When this creature enters, you may search your library for a basic land card or a Gate card, reveal i
+  -     -    2   5203   0.3      Gavel of the Righteous | Art — Equipment | At the beginning of combat on your turn, put a charge counter on this Equipment. Equipped creature gets +1/+1 
+  -     -    2   2754   1.5      Great Divide Guide | Cr — Human Scout Ally | Each land and Ally you control has "{T}: Add one mana of any color."
+  -     -    2   8232   0.1      2x Hardbristle Bandit | Cr — Plant Rogue | {T}: Add one mana of any color. Whenever you commit a crime, untap this creature. This ability triggers only o
+  -     -    2   5115   0.3      Idol of False Gods | Kindred Art — Eldrazi | {1}{C}, {T}: Create a 0/1 colorless Eldrazi Spawn creature token with "Sacrifice this token: Add {C}." Wheneve
+  -     -    2   1777   0.3      Ilysian Caryatid | Cr — Plant | {T}: Add one mana of any color. If you control a creature with power 4 or greater, add two mana of any one col
+  -     -    2   6099   1.1      Kamahl's Druidic Vow | L.Sorc | (You may cast a legendary sorcery only if you control a legendary creature or planeswalker.) Look at the top X
+  -     -    2   9755   0.2      Lattice Library | Ench | This enchantment enters with X study counters on it. When this enchantment enters and whenever you cast your f
+  -     -    2   5139   0.3      Moxite Refinery | Art | {2}, {T}, Remove X counters from an artifact or creature you control: Choose one. Activate only as a sorcery. 
+  -     -    2   6395   0.3      Noble's Purse | Art | This artifact enters tapped and with three coin counters on it. {T}, Remove a coin counter from this artifact:
+  -     -    2   1685   0.7      Open the Way | Sorc | X can't be greater than the number of players in the game. Reveal cards from the top of your library until you
+  -     -    2   4242   0.1      Ordeal of Nylea | Ench — Aura | Enchant creature Whenever enchanted creature attacks, put a +1/+1 counter on it. Then if it has three or more 
+  -     -    2    640   6.7      Ozolith, the Shattered Spire | L.Art | If one or more +1/+1 counters would be put on an artifact or creature you control, that many plus one +1/+1 co
+  -     -    2   7139   0.3      Patchwork Automaton | Art Cr — Construct | Ward {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unl
+  -     -    2    440   6.0      Pearl Medallion | Art | White spells you cast cost {1} less to cast.
+  -     -    2   4107   0.3      Pentad Prism | Art | Sunburst (This artifact enters with a charge counter on it for each color of mana spent to cast it.) Remove a 
+  -     -    2   2242   0.3      Poison Dart Frog | Cr — Frog | Reach {T}: Add one mana of any color. {2}: This creature gains deathtouch until end of turn.
+  -     -    2   2434   1.4      2x Primordial Hydra | Cr — Hydra | This creature enters with X +1/+1 counters on it. At the beginning of your upkeep, double the number of +1/+1 
+  -     -    2   4983   0.3      Prophetic Prism | Art | When this artifact enters, draw a card. {1}, {T}: Add one mana of any color.
+  -     -    2    357   8.3      Sapphire Medallion | Art | Blue spells you cast cost {1} less to cast.
+  -     -    2   1774   0.3      Satyr Wayfinder | Cr — Satyr | When this creature enters, reveal the top four cards of your library. You may put a land card from among them 
+  -     -    2  16403   0.1      Sorcerous Spyglass | Art | As this artifact enters, look at an opponent's hand, then choose any card name. Activated abilities of sources
+  -     -    2   3272   1.9      Soulless Jailer | Art Cr — Phyrexian Golem | Permanent cards in graveyards can't enter the battlefield. Players can't cast noncreature spells from graveyar
+  -     -    2    802   0.4      Steel Overseer | Art Cr — Construct | {T}: Put a +1/+1 counter on each artifact creature you control.
+  -     -    2   2373   0.3      Steelbane Hydra | Cr — Turtle Hydra | This creature enters with X +1/+1 counters on it. {2}{G}, Remove a +1/+1 counter from this creature: Destroy t
+  -     -    2  10511   0.3      Sting, Bilbo's Sword | L.Art — Equipment | Flash When Sting enters, put a hone counter on Sting for each creature target opponent controls. Attach Sting 
+  -     -    2  14601   0.3      Stonework Packbeast | Art Cr — Beast | Stonework Packbeast is also a Cleric, Rogue, Warrior, and Wizard. {2}: Add one mana of any color.
+  -     -    2  10337   0.4      Sun Droplet | Art | Whenever you're dealt damage, put that many charge counters on this artifact. At the beginning of each upkeep,
+  -     -    2   1293   0.3      Sylvan Scrying | Sorc | Search your library for a land card, reveal it, put it into your hand, then shuffle.
+  -     -    2  13291   0.2      Tablet of Compleation | Art | {T}: Put an oil counter on this artifact. {T}: Add {C}. Activate only if this artifact has two or more oil cou
+  -     -    2  19587   0.2      Tajuru Paragon | Cr — Elf | Tajuru Paragon is also a Cleric, Rogue, Warrior, and Wizard. Kicker {3} When this creature enters, if it was k
+  -     -    2   9479   2.0      Tarmogoyf | Cr — Lhurgoyf | Tarmogoyf's power is equal to the number of card types among cards in all graveyards and its toughness is equa
+  -     -    2  22908   3.2      2x The Echoverse Fulcrum | L.Art | When The Echoverse Fulcrum enters, draw a card, then discard a card. {5}, {T}, Exile The Echoverse Fulcrum: De
+  -     -    2   4234   4.0      The Ooze | L.Art | Whenever a creature you control with a +1/+1 counter on it leaves the battlefield, create a Mutagen token for 
+  -     -    2   3913   0.3      Unlicensed Hearse | Art — Vehicle | {T}: Exile up to two target cards from a single graveyard. Unlicensed Hearse's power and toughness are each eq
+  -     -    2  15809   0.2      Warg Tactics | Inst | Choose one — • Destroy target creature with flying. • Put a +1/+1 counter on target creature you control. It g
+  -     -    2   2866   0.4      Wrecking Ball Arm | L.Art — Equipment | Equipped creature has base power and toughness 7/7 and can't be blocked by creatures with power 2 or less. Equ
+  -     -    2  12563   0.2      You Find a Cursed Idol | Sorc | Choose one — • Smash It — Destroy target artifact. • Lift the Curse — Destroy target enchantment. • Steal Its 
+  -     -    3   1769    -       Adaptive Automaton | Art Cr — Construct | As this creature enters, choose a creature type. This creature is the chosen type in addition to its other typ
+  -     -    3   5485   0.3      All-Fates Scroll | Art | {T}: Add one mana of any color. {7}, {T}, Sacrifice this artifact: Draw X cards, where X is the number of diff
+  -     -    3   5440   0.2      Bandit's Haul | Art | Whenever you commit a crime, put a loot counter on this artifact. This ability triggers only once each turn. (
+  -     -    3   4376   0.2      Barkform Harvester | Art Cr — Shapeshifter | Changeling (This card is every creature type.) Reach {2}: Put target card from your graveyard on the bottom of
+  -     -    3    556   0.9      Bender's Waterskin | Art | Untap this artifact during each other player's untap step. {T}: Add one mana of any color.
+  -     -    3   1940   5.7      Bitterthorn, Nissa's Animus | L.Art — Equipment | Living weapon (When this Equipment enters, create a 0/0 black Phyrexian Germ creature token, then attach this 
+  -     -    3   2610   2.8      Bloated Contaminator | Cr — Phyrexian Beast | Trample Toxic 1 (Players dealt combat damage by this creature also get a poison counter.) Whenever this creatu
+  -     -    3   6842   3.3      Canoptek Wraith | Art Cr — Wraith | Wraith Form — This creature can't be blocked. Transdimensional Scout — When this creature deals combat damage 
+  -     -    3    606   1.5      Cloud Key | Art | As this artifact enters, choose artifact, creature, enchantment, instant, or sorcery. Spells you cast of the c
+  -     -    3    319   5.2      Decanter of Endless Water | Art | You have no maximum hand size. {T}: Add one mana of any color.
+  -     -    3   8686   0.3      District Guide | Cr — Elf Scout | When this creature enters, you may search your library for a basic land card or Gate card, reveal it, put it i
+  -     -    3  10496   0.4      Druidic Satchel | Art | {2}, {T}: Reveal the top card of your library. If it's a creature card, create a 1/1 green Saproling creature 
+  -     -    3    310   9.8      Dryad of the Ilysian Grove | Ench Cr — Nymph Dryad | You may play an additional land on each of your turns. Lands you control are every basic land type in addition
+  -     -    3   3974   0.3      Elementalist's Palette | Art | Whenever you cast a spell with {X} in its mana cost, put two charge counters on this artifact. {T}: Add one ma
+  -     -    3   5398   0.3      Elvish Rejuvenator | Cr — Elf Druid | When this creature enters, look at the top five cards of your library. You may put a land card from among them
+  -     -    3   9384   0.3      Emil, Vastlands Roamer | L.Cr — Elf Druid | Creatures you control with +1/+1 counters on them have trample. {4}{G}, {T}: Create a 0/0 green and blue Fract
+  -     -    3   7815   0.2      Erinis, Gloom Stalker | L.Cr — Halfling Ranger | Deathtouch Whenever Erinis attacks, return target land card from your graveyard to the battlefield. Choose a B
+  -     -    3    403   3.2      Evolution Sage | Cr — Elf Druid | Landfall — Whenever a land you control enters, proliferate. (Choose any number of permanents and/or players, t
+  -     -    3   8673   0.3      Feral Appetite | Ench | Attacking Pests you control get +1/+0 and have deathtouch. {1}{G}: Exile target card from a graveyard. If a cr
+  -     -    3   3197   0.3      Firdoch Core | Kindred Art — Shapeshifter | Changeling (This card is every creature type.) {T}: Add one mana of any color. {4}: This artifact becomes a 4/
+  -     -    3   6372   0.3      Fractal Harness | Art — Equipment | When this Equipment enters, create a 0/0 green and blue Fractal creature token. Put X +1/+1 counters on it and
+  -     -    3   6845   0.3      Gift of Paradise | Ench — Aura | Enchant land When this Aura enters, you gain 3 life. Enchanted land has "{T}: Add two mana of any one color."
+  -     -    3   8697   0.3      Gilanra, Caller of Wirewood | L.Cr — Elf Druid | {T}: Add {G}. When you spend this mana to cast a spell with mana value 6 or greater, draw a card. Partner (You
+  -     -    3   1207   1.2      Glaring Fleshraker | Cr — Eldrazi Drone | Whenever you cast a colorless spell, create a 0/1 colorless Eldrazi Spawn creature token with "Sacrifice this 
+  -     -    3   5674   0.3      Golem Foundry | Art | Whenever you cast an artifact spell, you may put a charge counter on this artifact. Remove three charge counte
+  -     -    3  21522   0.2      Greenhouse Propagator | Cr — Cat Druid | Whenever another creature you control enters, you gain 1 life. {T}: Add {G}.
+  -     -    3   2756   1.0      Guardian Augmenter | Cr — Troll Wizard | Flash Commander creatures you control get +2/+2. Commanders you control have hexproof.
+  -     -    3    249   0.3      Harrow | Inst | As an additional cost to cast this spell, sacrifice a land. Search your library for up to two basic land cards
+  -     -    3   4274   4.5      Heartbeat of Spring | Ench | Whenever a player taps a land for mana, that player adds one mana of any type that land produced.
+  -     -    3  28003   0.2      Inspired Tethermage | Cr — Elf Warrior | Whenever you put one or more loyalty counters on a planeswalker, put a +1/+1 counter on this creature. {6}: Em
+  -     -    3    980   0.4      Inspiring Statuary | Art | Nonartifact spells you cast have improvise. (Your artifacts can help cast those spells. Each artifact you tap 
+  -     -    3   3062   2.1      Iron Spider, Stark Upgrade | L.Art Cr — Spider Hero | Vigilance {T}: Put a +1/+1 counter on each artifact creature and/or Vehicle you control. {2}, Remove two +1/+1
+  -     -    3   6399   0.3      Jiang Yanggu, Wildcrafter | L.Planeswalker — Yanggu | Each creature you control with a +1/+1 counter on it has "{T}: Add one mana of any color." −1: Put a +1/+1 cou
+  -     -    3    402   4.0      Kami of Whispered Hopes | Cr — Spirit | If one or more +1/+1 counters would be put on a permanent you control, that many plus one +1/+1 counters are p
+  -     -    3  26664   0.3      Keeper of the Quiet Hour | Art Cr — Chimera | When this creature enters, empower Jace 2. (Put two loyalty counters on a Jace token you control. If you don't
+  -     -    3   1428   0.4      Lifecrafter's Bestiary | Art | At the beginning of your upkeep, scry 1. Whenever you cast a creature spell, you may pay {G}. If you do, draw 
+  -     -    3  22594   0.3      Loot, the Nexus | L.Cr — Beast Noble | {T}: Choose a color. Add one mana of that color for each different power among creatures you control.
+  -     -    3  11887   1.3      Lotus Ring | Art — Equipment | Indestructible Equipped creature gets +3/+3 and has vigilance and "{T}, Sacrifice this creature: Add three man
+  -     -    3   4143   0.6      Lumbering Worldwagon | Art — Vehicle | This Vehicle's power is equal to the number of lands you control. Whenever this Vehicle enters or attacks, you
+  -     -    3   1315   0.3      Mirage Mirror | Art | {2}: This artifact becomes a copy of target artifact, creature, enchantment, or land until end of turn.
+  -     -    3  23720   0.3      Murmuring Volume | Art — Book | {T}: Add one mana of any color. {2}, {T}, Discard a card: Draw a card.
+  -     -    3   8588   0.3      Nev, the Practical Dean | L.Cr — Merfolk Wizard | Creatures you control with counters on them have trample. Whenever you cast your first spell with {X} in its m
+  -     -    3   5749   0.3      Oblivion Stone | Art | {4}, {T}: Put a fate counter on target permanent. {5}, {T}, Sacrifice this artifact: Destroy each nonland perm
+  -     -    3   5101   0.3      Ornery Tumblewagg | Cr — Brushwagg Mount | At the beginning of combat on your turn, put a +1/+1 counter on target creature. Whenever this creature attack
+  -     -    3   6057   1.2      Owlbear Cub | Cr — Bird Bear | Mama's Coming — Whenever this creature attacks a player who controls eight or more lands, look at the top eigh
+  -     -    3  15044   1.2      Pia, Aether Ascetic | L.Cr — Human Druid | When Pia enters, you may discard a card. If you do, search your library for an enchantment card, reveal it, pu
+  -     -    3  11083   0.1      Potioner's Trove | Art | {T}: Add one mana of any color. {T}: You gain 2 life. Activate only if you've cast an instant or sorcery spell
+  -     -    3   8350   0.2      Puca's Covenant | Ench | Whenever a creature you control with a counter on it dies, you may return another target permanent card with m
+  -     -    3   5267   1.9      Rampant Frogantua | Cr — Frog | Trample This creature gets +10/+10 for each player who has lost the game. Whenever this creature deals combat 
+  -     -    3    607   2.3      Realmwalker | Cr — Shapeshifter | Changeling (This card is every creature type.) As this creature enters, choose a creature type. You may look a
+  -     -    3    875   0.2      Rishkar, Peema Renegade | L.Cr — Elf Druid | When Rishkar enters, put a +1/+1 counter on each of up to two target creatures. Each creature you control with
+  -     -    3   5279   0.2      Rockalanche | Sorc — Lesson | Earthbend X, where X is the number of Forests you control. (Target land you control becomes a 0/0 creature wit
+  -     -    3   5748   0.6      Sage of the Maze | Cr — Elf Wizard | {T}: Add two mana in any combination of colors. {T}: Until end of turn, target land you control becomes an X/X
+  -     -    3    240   9.1      Scute Swarm | Cr — Insect | Landfall — Whenever a land you control enters, create a 1/1 green Insect creature token. If you control six or
+  -     -    3   1345   0.4      Shimmer Myr | Art Cr — Myr | Flash You may cast artifact spells as though they had flash.
+  -     -    3  18517   1.7      Simulacrum Shaper | Cr — Elf Druid | When this creature enters, you may search your library for a basic land card, put that card onto the battlefie
+  -     -    3   3687   0.3      Skullwinder | Cr — Snake | Deathtouch When this creature enters, return target card from your graveyard to your hand, then choose an oppo
+  -     -    3   4572   0.3      Solar Array | Art | {T}: Add one mana of any color. When you next cast an artifact spell this turn, that spell gains sunburst. (If
+  -     -    3  22128   0.1      Split the Spoils | Sorc | Exile up to five target permanent cards from your graveyard and separate them into two piles. An opponent choo
+  -     -    3   2642   0.3      Surge Conductor | Art Cr — Robot | Whenever another nontoken artifact you control enters, proliferate. (Choose any number of permanents and/or pl
+  -     -    3   5941   1.8      Tale of Katara and Toph | Ench | Creatures you control have "Whenever this creature becomes tapped for the first time during each of your turns
+  -     -    3   1197  22.2      Tezzeret, Cruel Captain | L.Planeswalker — Tezzeret | Whenever an artifact you control enters, put a loyalty counter on Tezzeret. 0: Untap target artifact or creatu
+  -     -    3   2269  28.3      The Cabbage Merchant | L.Cr — Human Citizen | Whenever an opponent casts a noncreature spell, create a Food token. (It's an artifact with "{2}, {T}, Sacrifi
+  -     -    3   8180   0.2      Titan Forge | Art | {3}, {T}: Put a charge counter on this artifact. {T}, Remove three charge counters from this artifact: Create 
+  -     -    3   3106   0.2      Toph, the Blind Bandit | L.Cr — Human Warrior Ally | When Toph enters, earthbend 2. (Target land you control becomes a 0/0 creature with haste that's still a land.
+  -     -    3   2608   2.4      Unbound Flourishing | Ench | Whenever you cast a permanent spell with a mana cost that contains {X}, double the value of X. Whenever you ca
+  -     -    3  15082   0.3      Varis, Silverymoon Ranger | L.Cr — Human Elf Ranger | Reach, ward {1} Whenever you cast a creature or planeswalker spell, venture into the dungeon. This ability tri
+  -     -    3   3937   1.1      Vivien, Champion of the Wilds | L.Planeswalker — Vivien | You may cast creature spells as though they had flash. +1: Until your next turn, up to one target creature gai
+  -     -    3  18200   0.3      Way of the Paradox | L.Ench | When Way of the Paradox enters, empower Jace 5. (Put five loyalty counters on a Jace token you control. If you
+  -     -    3   8595   0.2      Wickersmith's Tools | Art | Whenever one or more -1/-1 counters are put on a creature, put a charge counter on this artifact. {T}: Add one
+  -     -    3   9475   0.3      You Happen On a Glade | Inst | Choose one — • Journey On — Search your library for up to two basic land cards, reveal them, put them into you
+  -     -    4   9287   0.4      Bloodspore Thrinax | Cr — Lizard | Devour 1 (As this creature enters, you may sacrifice any number of creatures. It enters with that many +1/+1 c
+  -     -    4   8083   0.3      Brass Infiniscope | Art | {T}: Add {C}{C}. When you next cast a spell with {X} in its mana cost this turn, you draw a card and gain half
+  -     -    4   1779   0.2      Circuitous Route | Sorc | Search your library for up to two basic land cards and/or Gate cards, put them onto the battlefield tapped, th
+  -     -    4  10254   0.3      Colossal Rattlewurm | Cr — Wurm | Colossal Rattlewurm has flash as long as you control a Desert. Trample {1}{G}, Exile this card from your grave
+  -     -    4   2923   0.3      Crystalline Crawler | Art Cr — Construct | Converge — This creature enters with a +1/+1 counter on it for each color of mana spent to cast it. Remove a +
+  -     -    4   3681   0.3      Darksteel Reactor | Art | Indestructible (Effects that say "destroy" don't destroy this artifact.) At the beginning of your upkeep, you 
+  -     -    4   7805   0.4      Desert Warfare | Ench | Whenever you sacrifice a Desert and whenever a Desert card is put into your graveyard from your hand or librar
+  -     -    4   8419   0.2      Drix Fatemaker | Cr — Drix Wizard | When this creature enters, put a +1/+1 counter on target creature. Each creature you control with a +1/+1 coun
+  -     -    4   5171   0.2      Earth Kingdom General | Cr — Human Soldier Ally | When this creature enters, earthbend 2. (Target land you control becomes a 0/0 creature with haste that's stil
+  -     -    4   6016   0.2      Earth Rumble | Sorc | Earthbend 2. When you do, up to one target creature you control fights target creature an opponent controls. (
+  -     -    4   4023   0.3      Empowered Autogenerator | Art | This artifact enters tapped. {T}: Put a charge counter on this artifact. Add X mana of any one color, where X 
+  -     -    4   8856   0.3      Etched Oracle | Art Cr — Wizard | Sunburst (This creature enters with a +1/+1 counter on it for each color of mana spent to cast it.) {1}, Remov
+  -     -    4   4254   0.3      Firemind Vessel | Art | This artifact enters tapped. {T}: Add two mana of different colors.
+  -     -    4  13717   0.4      Ghost Ark | Art — Vehicle | Flying Repair Barge — Whenever this Vehicle becomes crewed, each artifact creature card in your graveyard gain
+  -     -    4    727  14.6      Hammer of Nazahn | L.Art — Equipment | Whenever Hammer of Nazahn or another Equipment you control enters, you may attach that Equipment to target cre
+  -     -    4    326   0.2      2x Harmonize | Sorc | Draw three cards.
+  -     -    4    544    -       Hedron Archive | Art | {T}: Add {C}{C}. {2}, {T}, Sacrifice this artifact: Draw two cards.
+  -     -    4  14014  29.9      Hexhaven Invigorator | Cr — Chimera Horror | Vigilance Whenever this creature is dealt damage, you may search your library for up to that many land cards, 
+  -     -    4   6382   0.4      Interdimensional Web Watch | Art | When this artifact enters, exile the top two cards of your library. Until the end of your next turn, you may p
+  -     -    4  22384   0.2      Jiang Yanggu, Never Alone | L.Cr — Human Druid | When Jiang Yanggu enters, create Mowu, a legendary 3/3 green Dog creature token. At the beginning of your end 
+  -     -    4   2121   5.2      Karn, the Great Creator | L.Planeswalker — Karn | Activated abilities of artifacts your opponents control can't be activated. +1: Until your next turn, up to on
+  -     -    4  10700   0.3      Kozilek's Predator | Cr — Eldrazi Drone | When this creature enters, create two 0/1 colorless Eldrazi Spawn creature tokens. They have "Sacrifice this t
+  -     -    4   3676   0.3      Lux Artillery | Art | Whenever you cast an artifact creature spell, it gains sunburst. (It enters with a +1/+1 counter on it for eac
+  -     -    4   4091   0.3      Lux Cannon | Art | {T}: Put a charge counter on this artifact. {T}, Remove three charge counters from this artifact: Destroy targ
+  -     -    4   3116   3.6      Mightform Harmonizer | Cr — Insect Druid | Landfall — Whenever a land you control enters, double the power of target creature you control until end of tu
+  -     -    4   4809   0.3      Mindless Automaton | Art Cr — Construct | This creature enters with two +1/+1 counters on it. {1}, Discard a card: Put a +1/+1 counter on this creature.
+  -     -    4  15718   0.2      Myconid Spore Tender | Cr — Fungus | Infesting Spores — When this creature enters, destroy up to one target artifact or enchantment.
+  -     -    4    269   6.3      Panharmonicon | Art | If an artifact or creature entering causes a triggered ability of a permanent you control to trigger, that abi
+  -     -    4   4425   0.2      Seer's Sundial | Art | Landfall — Whenever a land you control enters, you may pay {2}. If you do, draw a card.
+  -     -    4  11210   0.8      Seismic Tutelage | Ench — Aura | Enchant creature When this Aura enters, put a +1/+1 counter on enchanted creature. Whenever enchanted creature
+  -     -    4    302   1.0      Skyshroud Claim | Sorc | Search your library for up to two Forest cards, put them onto the battlefield, then shuffle.
+  -     -    4   6221   1.8      Solid Ground | Ench | When this enchantment enters, earthbend 3. (Target land you control becomes a 0/0 creature with haste that's s
+  -     -    4   5003   0.3      The Boulder, Ready to Rumble | L.Cr — Human Warrior Performer | Whenever The Boulder attacks, earthbend X, where X is the number of creatures you control with power 4 or grea
+  -     -    4    196   4.3      Thran Dynamo | Art | {T}: Add {C}{C}{C}.
+  -     -    4  23972   0.3      Titanbones, Towering Heart | L.Cr — Skeleton Druid | Reach Whenever you gain life, put two +1/+1 counters on Titanbones. When you discard this card, you gain 3 lif
+  -     -    4  26911   0.3      Traxos, Scourge Eternal | L.Art Cr — Dragon Construct | Trample Traxos doesn't untap during your untap step. Whenever you cast an artifact or creature spell, untap Tr
+  -     -    4   3951   0.4      2x Traxos, Scourge of Kroog | L.Art Cr — Dragon Construct | Trample Traxos enters tapped and doesn't untap during your untap step. Whenever you cast a historic spell, unt
+  -     -    4  10996   0.2      Treasure Keeper | Art Cr — Construct | When this creature dies, reveal cards from the top of your library until you reveal a nonland card with mana v
+  -     -    4  10969   0.4      Undermountain Adventurer | Cr — Giant Warrior | Vigilance When this creature enters, you take the initiative. {T}: Add {G}{G}. If you've completed a dungeon, 
+  -     -    4   5130   0.3      Wickerbough Elder | Cr — Treefolk Shaman | This creature enters with a -1/-1 counter on it. {G}, Remove a -1/-1 counter from this creature: Destroy targe
+  -     -    5   1504   0.3      Acidic Slime | Cr — Ooze | Deathtouch (Any amount of damage this deals to a creature is enough to destroy it.) When this creature enters,
+  -     -    5  10211   0.3      Argentum Masticore | Art Cr — Phyrexian Masticore | First strike, protection from multicolored At the beginning of your upkeep, sacrifice this creature unless you
+  -     -    5  11853   0.3      Awakening of Vitu-Ghazi | Inst | Put nine +1/+1 counters on target land you control. It becomes a legendary 0/0 Elemental creature with haste n
+  -     -    5   4071   0.2      Badgermole | Cr — Badger Mole | When this creature enters, earthbend 2. (Target land you control becomes a 0/0 creature with haste that's stil
+  -     -    5   9847   0.3      Braulios of Pheres Band | L.Cr — Centaur Scout | Braulios's power and toughness are each equal to the number of lands you control. Whenever Braulios attacks, d
+  -     -    5   4801   9.6      Bumi, Eclectic Earthbender | L.Cr — Human Noble Ally | When Bumi enters, earthbend 1. (Target land you control becomes a 0/0 creature with haste that's still a land.
+  -     -    5   6532   0.4      Cracked Earth Technique | Sorc — Lesson | Earthbend 3, then earthbend 3. You gain 3 life. (To earthbend 3, target land you control becomes a 0/0 creatur
+  -     -    5   2599  12.2      Dawnsire, Sunstar Dreadnought | L.Art — Spacecraft | Station (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station 
+  -     -    5  27641   0.3      Edgar, Moonlit Sovereign | L.Cr — Werewolf Noble | Flash At the beginning of your end step, if you didn't cast a spell this turn, put two +1/+1 counters on Edgar
+  -     -    5   3873   0.6      Flourishing Defenses | Ench | Whenever a -1/-1 counter is put on a creature, you may create a 1/1 green Elf Warrior creature token.
+  -     -    5   2023   0.3      Garruk's Packleader | Cr — Beast | Whenever another creature you control with power 3 or greater enters, you may draw a card.
+  -     -    5   3208   0.4      Geode Golem | Art Cr — Golem | Trample Whenever this creature deals combat damage to a player, you may cast your commander from the command z
+  -     -    5   3263   8.1      Germination Practicum | Sorc — Lesson | Put two +1/+1 counters on each creature you control. Paradigm (Then exile this spell. After you first resolve 
+  -     -    5   3277   0.3      Hour of Promise | Sorc | Search your library for up to two land cards, put them onto the battlefield tapped, then shuffle. Then if you 
+  -     -    5  22989   0.3      Hungering Puppetbeast | Art Cr — Beast Construct | When this creature enters, create a Heartwood token. (It's a red and green artifact with "{T}: Add {R} or {G}.
+  -     -    5   8262   0.3      Luxurious Locomotive | Art — Vehicle | Whenever this Vehicle attacks, create a Treasure token for each creature that crewed it this turn. (They're ar
+  -     -    5   9604   0.2      Moldgraf Millipede | Cr — Insect Horror | When this creature enters, mill three cards, then put a +1/+1 counter on this creature for each creature card 
+  -     -    5  15477   0.2      Part in Friendship | Ench | Whenever a nontoken creature you control dies, reveal cards from the top of your library until you reveal a cr
+  -     -    5   4292   0.9      Perennial Behemoth | Art Cr — Beast | You may play lands from your graveyard. Unearth {G}{G} ({G}{G}: Return this card from your graveyard to the ba
+  -     -    5  13768   0.1      Predatory Impetus | Ench — Aura | Enchant creature Enchanted creature gets +3/+3, must be blocked if able, and is goaded. (It attacks each comba
+  -     -    5   7003   0.4      Ribtruss Roaster | Cr — Troll Druid | Devour 1 (As this creature enters, you may sacrifice any number of creatures. This creature enters with that m
+  -     -    5   1596   3.0      The Eternity Elevator | L.Art — Spacecraft | {T}: Add {C}{C}{C}. Station (Tap another creature you control: Put charge counters equal to its power on this 
+  -     -    5   6792   0.7      Tome of the Guildpact | Art — Book | Whenever you cast a multicolored spell, draw a card. {T}: Add one mana of any color.
+  -     -    5   1644   6.0      Traverse the Outlands | Sorc | Search your library for up to X basic land cards, where X is the greatest power among creatures you control. P
+  -     -    5   1990   9.1      Venser's Journal | Art — Book | You have no maximum hand size. At the beginning of your upkeep, you gain 1 life for each card in your hand.
+  -     -    5   4076   0.4      Vivien Reid | L.Planeswalker — Vivien | +1: Look at the top four cards of your library. You may reveal a creature or land card from among them and put
+  -     -    5  24387   0.3      Way of the Wildspeaker | L.Ench | When Way of the Wildspeaker enters, empower Jace 7. (Put seven loyalty counters on a Jace token you control. I
+  -     -    5  15238   0.2      Wilderland Scrounger | Cr — Wolf | Ferocious — Whenever this creature attacks while you control a creature with power 4 or greater, put a +1/+1 c
+  -     -    5   4379   0.3      Zuko's Exile | Inst — Lesson | Exile target artifact, creature, or enchantment. Its controller creates a Clue token. (It's an artifact with "
+  -     -    6  12383   0.5      Arlinn, Voice of the Pack | L.Planeswalker — Arlinn | Each creature you control that's a Wolf or a Werewolf enters with an additional +1/+1 counter on it. −2: Creat
+  -     -    6  12334   0.2      Baloth Woodcrasher | Cr — Beast | Landfall — Whenever a land you control enters, this creature gets +4/+4 and gains trample until end of turn. (
+  -     -    6   1238   0.4      Bane of Progress | Cr — Elemental | When this creature enters, destroy all artifacts and enchantments. Put a +1/+1 counter on this creature for ea
+  -     -    6    748   7.9      Chimil, the Inner Sun | L.Art | Spells you control can't be countered. At the beginning of your end step, discover 5. (Exile cards from the to
+  -     -    6  15926   0.2      Cleanup Crew | Cr — Human Citizen | When this creature enters, choose one — • Destroy target artifact. • Destroy target enchantment. • Exile targe
+  -     -    6   7641   1.4      Conclave Sledge-Captain | Cr — Elephant Soldier | Backup 1, backup 1, backup 1 (When this creature enters, put a +1/+1 counter on target creature. If that's ano
+  -     -    6   2390   0.3      Earthshaker Dreadmaw | Cr — Dinosaur | Trample When this creature enters, draw a card for each other Dinosaur you control.
+  -     -    6  10056   0.2      Elvish Aberration | Cr — Elf Mutant | {T}: Add {G}{G}{G}. Forestcycling {2} ({2}, Discard this card: Search your library for a Forest card, reveal i
+  -     -    6   6476   0.3      Flopsie, Bumi's Buddy | L.Cr — Ape Goat | When Flopsie enters, put a +1/+1 counter on each creature you control. Each creature you control with power 4 
+  -     -    6   9400   2.5      Garruk, Caller of Beasts | L.Planeswalker — Garruk | +1: Reveal the top five cards of your library. Put all creature cards revealed this way into your hand and the
+  -     -    6  18667   0.9      Ginger, Queen of Sweets | L.Art Cr — Food Noble | When Ginger enters, you become the monarch. {2}, {T}, Sacrifice Ginger: You gain 6 life. At the beginning of e
+  -     -    6   2435   1.0      God-Pharaoh's Statue | L.Art | Spells your opponents cast cost {2} more to cast. At the beginning of your end step, each opponent loses 1 lif
+  -     -    6   3741   0.3      Greenwarden of Murasa | Cr — Elemental | When this creature enters, you may return target card from your graveyard to your hand. When this creature die
+  -     -    6   4306   0.4      Hydra Broodmaster | Cr — Hydra | {X}{X}{G}: Monstrosity X. (If this creature isn't monstrous, put X +1/+1 counters on it and it becomes monstro
+  -     -    6   1826   2.9      Mana Reflection | Ench | If you tap a permanent for mana, it produces twice as much of that mana instead.
+  -     -    6  12968   0.4      Nessian Wilds Ravager | Cr — Hydra | Tribute 6 (As this creature enters, an opponent of your choice may put six +1/+1 counters on it.) When this cr
+  -     -    6   2328   0.7      Oblivion Sower | Cr — Eldrazi | When you cast this spell, target opponent exiles the top four cards of their library, then you may put any num
+  -     -    6  11758  15.2      Paleoloth | Cr — Beast | Whenever another creature you control with power 5 or greater enters, you may return target creature card from
+  -     -    6   4427   1.2      Primordial Sage | Cr — Spirit | Whenever you cast a creature spell, you may draw a card.
+  -     -    6   2264   2.8      Quilled Greatwurm | Cr — Wurm | Trample Whenever a creature you control deals combat damage during your turn, put that many +1/+1 counters on 
+  -     -    6    385   0.4      2x Rampaging Baloths | Cr — Beast | Trample Landfall — Whenever a land you control enters, create a 4/4 green Beast creature token.
+  -     -    6   9370   0.4      Realm Seekers | Cr — Elf Scout | This creature enters with X +1/+1 counters on it, where X is the total number of cards in all players' hands. 
+  -     -    6  10431   0.4      Sakiko, Mother of Summer | L.Cr — Snake Shaman | Whenever a creature you control deals combat damage to a player, add that much {G}. Until end of turn, you don
+  -     -    6  12373   0.2      Slavering Branchsnapper | Cr — Lizard | Trample Forestcycling {2} ({2}, Discard this card: Search your library for a Forest card, reveal it, put it in
+  -     -    6   3512   0.9      Soul of New Phyrexia | Art Cr — Phyrexian Avatar | Trample {5}: Permanents you control gain indestructible until end of turn. {5}, Exile this card from your grav
+  -     -    6   1642   1.5      Soul of the Harvest | Cr — Elemental | Trample Whenever another nontoken creature you control enters, you may draw a card.
+  -     -    6   1186   0.4      Steel Hellkite | Art Cr — Dragon | Flying {2}: This creature gets +1/+0 until end of turn. {X}: Destroy each nonland permanent with mana value X 
+  -     -    6   7856   2.1      Tectonic Split | Ench | As an additional cost to cast this spell, sacrifice half the lands you control, rounded up. Hexproof Lands you
+  -     -    6   2031   0.5      Thunderfoot Baloth | Cr — Beast | Trample Lieutenant — As long as you control your commander, this creature gets +2/+2 and other creatures you c
+  -     -    6  14442   0.2      Topiary Panther | Cr — Plant Cat | Trample Basic landcycling {1}{G} ({1}{G}, Discard this card: Search your library for a basic land card, reveal
+  -     -    6   2850   0.5      2x Ulvenwald Hydra | Cr — Hydra | Reach Ulvenwald Hydra's power and toughness are each equal to the number of lands you control. When this creat
+  -     -    6  11182   0.4      Ulvenwald Observer | Cr — Treefolk | Whenever a creature you control with toughness 4 or greater dies, draw a card.
+  -     -    6  23277   0.2      Veteran Adventurer | Cr — Human | Veteran Adventurer is also a Cleric, Rogue, Warrior, and Wizard. This spell costs {1} less to cast for each cr
+  -     -    7    295   0.5      Avenger of Zendikar | Cr — Elemental | When this creature enters, create a 0/1 green Plant creature token for each land you control. Landfall — Whene
+  -     -    7   5698   0.5      Dawnglade Regent | Cr — Elk | When this creature enters, you become the monarch. As long as you're the monarch, permanents you control have 
+  -     -    7   8278   1.2      Devourer of Destiny | Cr — Eldrazi | You may reveal this card from your opening hand. If you do, at the beginning of your first upkeep, look at the
+  -     -    7   6924   2.8      Emergent Woodwurm | Cr — Wurm | Backup 3 (When this creature enters, put three +1/+1 counters on target creature. If that's another creature, 
+  -     -    7   8531   0.3      Ferrafor, Young Yew | L.Cr — Treefolk Druid | When Ferrafor enters, create a number of 1/1 green Saproling creature tokens equal to the number of counters a
+  -     -    7  10106   0.3      Foe-Razer Regent | Cr — Dragon | Flying When this creature enters, you may have it fight target creature you don't control. Whenever a creature
+  -     -    7  11120   0.4      Gigantic Big Bear | Cr — Bear | This spell can't be countered. Hexproof, haste
+  -     -    7   8574   0.3      Grim Poppet | Art Cr — Scarecrow | This creature enters with three -1/-1 counters on it. Remove a -1/-1 counter from this creature: Put a -1/-1 c
+  -     -    7    799   0.3      Meteor Golem | Art Cr — Golem | When this creature enters, destroy target nonland permanent an opponent controls.
+  -     -    7  11973   0.3      Molimo, Maro-Sorcerer | L.Cr — Elemental Sorcerer | Trample (This creature can deal excess combat damage to the player or planeswalker it's attacking.) Molimo's p
+  -     -    7   5655   1.2      Myr Enforcer | Art Cr — Myr | Affinity for artifacts (This spell costs {1} less to cast for each artifact you control.)
+  -     -    7  11065   0.9      Necron Monolith | Art — Vehicle | Flying, indestructible Eternity Gate — Whenever this Vehicle attacks, mill three cards. For each creature card
+  -     -    7  20307   0.1      Sea Gate Colossus | Art Cr — Golem Warrior | This spell costs {1} less to cast for each creature in your party. (Your party consists of up to one each of C
+  -     -    7   5500   0.5      Shriekwood Devourer | Cr — Treefolk | Trample Whenever you attack with one or more creatures, untap up to X lands, where X is the greatest power amo
+  -     -    7   7351   0.7      Spearbreaker Behemoth | Cr — Beast | Indestructible {1}: Target creature with power 5 or greater gains indestructible until end of turn.
+  -     -    7   2288  21.2      Super State | L.Ench — Aura | Enchant creature you control Enchanted creature has base power and toughness 9/9 and has flying, first strike,
+  -     -    7   1857   0.3      Threefold Thunderhulk | Art Cr — Gnome | This creature enters with three +1/+1 counters on it. Whenever this creature enters or attacks, create a numbe
+  -     -    7  16898   2.5      Verdant Kraken | Cr — Plant Kraken | At the beginning of each player's upkeep, you create a 3/3 green Forest Tentacle land creature token. (It has 
+  -     -    8   1593   1.7      Eldrazi Conscription | Kindred Ench — Eldrazi Aura | Enchant creature Enchanted creature gets +10/+10 and has trample and annihilator 2. (Whenever it attacks, defe
+  -     -    8  22422   4.8      Omnipresence | Ench | You may cast spells with mana value less than or equal to the number of creatures you control from your hand w
+  -     -    8   1425   0.4      Terastodon | Cr — Elephant | When this creature enters, you may destroy up to three target noncreature permanents. For each permanent put i
+  -     -    9   4150   0.3      Bygone Colossus | Art Cr — Robot Giant | Warp {3} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the
+  -     -    9  16084   0.4      Ghalta the Unstoppable | L.Cr — Elder Dinosaur | This spell costs {X} less to cast, where X is the greatest power among creatures you control. Trample Other cr
+  -     -   10   1045   7.7      Apex Devastator | Cr — Chimera Hydra | Cascade, cascade, cascade, cascade (When you cast this spell, exile cards from the top of your library until y
+  -     -   11   2367   0.9      Darksteel Colossus | Art Cr — Golem | Trample (This creature can deal excess combat damage to the player or planeswalker it's attacking.) Indestruct

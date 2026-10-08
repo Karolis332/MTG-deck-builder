@@ -1,0 +1,4 @@
+# slot test for Squad Commander (ALL line invalid: duplicate add)
+Toski, Bearer of Secrets => Squad Commander
+Boros Charm => Squad Commander
+Night's Whisper => Squad Commander

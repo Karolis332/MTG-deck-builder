@@ -61,11 +61,18 @@ const SPECS: DeckSpec[] = [
     slug: 'minthara-merciless-soul', now: 'verify-2026-10-08/best-deck/second-best/minthara-v2.txt', base: read('verify-2026-10-08/killian/precon-base.txt'), // base = the Silverquill precon it guts: OUT = precon cards not used
     meta: 'verify-2026-10-08/best-deck/second-best/minthara-v2.meta.json', guide: '.claude/skills/deck-building/reference/decks/minthara-merciless-soul.md',
   },
-  { slug: 'bumi-unleashed', base: read('decks/paper/decks/bumi-unleashed.txt'), now: 'verify-2026-10-07/bumi-standalone/final.txt' },
+  // 2026-10-09 review: the sleeved list is illegal (3 Landscapes outside R/G); 8 free swaps, refuter PASS (verify-2026-10-09/color-best/eval/bumi-unleashed/)
+  { slug: 'bumi-unleashed', base: read('decks/paper/decks/bumi-unleashed.txt'), now: 'verify-2026-10-09/color-best/eval/bumi-unleashed/final.txt' },
+  // 2026-10-09 review: sleeved list (99 cards) + Lembas as the 100th + 5 free swaps, refuter PASS
+  {
+    slug: 'the-cabbage-merchant', base: read('decks/paper/decks/the-cabbage-merchant.txt'), now: 'verify-2026-10-09/color-best/eval/the-cabbage-merchant/final.txt',
+    guide: '.claude/skills/deck-building/reference/decks/the-cabbage-merchant.md',
+  },
   // partners: Gilanra is the first line, Alena the second (paper-sync keeps one commander)
   {
     // sleeved list vs the engine-first rebuild (41 spells at 6+, engine pieces locked; near-ties live in the primer)
-    slug: 'gilanra-alena-partners', base: read('decks/paper/decks/gilanra-alena-partners.txt'), now: 'verify-2026-10-08/gilanra-stompy/final.txt',
+    // 2026-10-09 review (stage 1 of the stompy redraft): 6 refuted swaps + the refuter's alternatives (Bane → Cleanup Crew, Florahedron and Thicket for Havoc Eater / Woodwurm)
+    slug: 'gilanra-alena-partners', base: read('decks/paper/decks/gilanra-alena-partners.txt'), now: 'verify-2026-10-09/color-best/eval/gilanra-alena-partners/proposed-refuted.txt',
     guide: '.claude/skills/deck-building/reference/decks/gilanra-alena-partners.md',
   },
   // Urza box (no commander yet) vs the converged draft; Urza himself hot-swaps from the Inspirit box
@@ -78,8 +85,8 @@ const SPECS: DeckSpec[] = [
     },
   },
   {
-    // sleeved list vs the Urza hot-swap: Emry takes Urza's slot
-    slug: 'inspirit-flagship-vessel', now: 'verify-2026-10-06/urza-found/inspirit-hotswap.txt',
+    // 2026-10-09 review: 5 free swaps on the sleeved list (refuter PASS; O-Stone rejected). The Urza/Emry hot-swap draft stays at verify-2026-10-06/urza-found/inspirit-hotswap.txt
+    slug: 'inspirit-flagship-vessel', now: 'verify-2026-10-09/color-best/eval/inspirit-flagship-vessel/proposed.txt',
     base: read('decks/paper/decks/inspirit-flagship-vessel.txt'),
     guide: '.claude/skills/deck-building/reference/decks/inspirit-flagship-vessel.md',
     extra: {
@@ -87,9 +94,11 @@ const SPECS: DeckSpec[] = [
       names: ['Hallowed Fountain', 'Steam Vents', 'Spirebluff Canal', 'Seachrome Coast', 'Deserted Beach'],
     },
   },
-  { slug: 'tam-the-possibility', base: read('verify-2026-09-28/deck-audit/tam-the-possibility-final.txt') },
-  { slug: 'tazri-beacon-of-unity' },
-  { slug: 'imotekh-the-stormlord' },
+  // 2026-10-09 reviews (verify-2026-10-09/color-best/eval/<slug>/REVIEW.md + REFUTE.md): sleeved list = base, refuted swaps = now
+  { slug: 'tam-the-possibility', base: read('decks/paper/decks/tam-the-possibility.txt'), now: 'verify-2026-10-09/color-best/eval/tam-the-possibility/proposed.txt', guide: '.claude/skills/deck-building/reference/decks/tam-the-possibility.md' },
+  // Tazri: "strongest after Beledros, all cards free game" — judgment list (tazri-final, 88.9) + 8 refuted party-density swaps; raids Tam 11 / Inspirit 5 / Gilanra 2
+  { slug: 'tazri-beacon-of-unity', base: read('decks/paper/decks/tazri-beacon-of-unity.txt'), now: 'verify-2026-10-09/color-best/eval/tazri-beacon-of-unity/tazri-proposed.txt', guide: '.claude/skills/deck-building/reference/decks/tazri-beacon-of-unity.md' },
+  { slug: 'imotekh-the-stormlord', base: read('decks/paper/decks/imotekh-the-stormlord.txt'), now: 'verify-2026-10-09/color-best/eval/imotekh-the-stormlord/proposed.txt', guide: '.claude/skills/deck-building/reference/decks/imotekh-the-stormlord.md' },
 ];
 const DECKS = SPECS.map((d) => ({
   ...d,
