@@ -25,7 +25,7 @@ const DONORS: Record<string, [string, string]> = {
   'Phyrexian Arena': ['Imotekh the Stormlord', 'Rune-Scarred Demon'], "Imp's Mischief": ['Imotekh the Stormlord', 'Ravenous Chupacabra'],
   'Thunderfoot Baloth': ['Gilanra + Alena', 'Domri, Anarch of Bolas'],
 };
-const REFUTER_BANS = ['Culling Ritual', 'Bane of Progress'];
+const REFUTER_BANS = ['Bane of Progress']; // Culling Ritual: refuter ban overridden by the operator 2026-10-08 (in the list)
 
 const commander = resolveCard('Beledros Witherbloom');
 if (!commander) throw new Error('commander not in DB');

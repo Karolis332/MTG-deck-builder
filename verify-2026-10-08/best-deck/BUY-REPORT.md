@@ -61,9 +61,41 @@ The commanders the shell actually wants (Korvold, Prossh, Teysa Karlov, Savra, C
 far below the top 15 (Korvold rank 410, Prossh 347, Teysa 194, Chatterfang 181, Savra 51, Ghave 652, Tayam 1134) because
 the CF seed for them has little inclusion data in the owned pool — a screen limitation, not a verdict on the cards.
 
+## 2b. "Really no better commander?" — the same 99 under every commander (`cmdr-pick-b99/`, `cmdr-screen-b99/`, `cmdr-climb-b99/`, `cmdr-climb-b99-judgment/`)
+
+The CF-seed climb in §2 compares seeds as much as commanders (Beledros's own CF-seed climb lands 10 points under his real
+list). The fair test: score the actual Beledros 99 under each of the 1,623 commanders (`--pick` with the list as the seed,
+100 games), then climb the top 11 and the seven engine-fit commanders for 3 passes. Summary: `cmdr-screen-b99-summary.csv`.
+
+| Result | |
+|---|---|
+| Same 99, no climb | 31 commanders at 101.0–101.2 (Beledros 101.20, Izoni, Shelob, Horrigan, Hogaak, Ishkanah, Zask, Ygra, Gitrog …): every BG legend scores the list the same — the model gives the commander card almost no weight |
+| Outliers | Pippin, Warden of Isengard 107.06 → 108.75 climbed; Ragnarok, Divine Deliverance 102.91 (0 swaps) |
+| Top-11 climb | every tied commander stays at 101.2 with 0 swaps: the list is a local optimum under all of them |
+| Engine-fit climb from the same 99 | Muldrotha 101.24 (1 swap) · Prossh 101.24 (1) · Ghave 100.96 (seed 94.4) · Korvold 100.94 (0) · Nethroi 100.94 (0) · Judith 96.77 (seed 75.9) · Savra 92.24 (0) |
+
+Reading the outliers against the oracle:
+
+- Pippin ({B}{G}): "{1}, {T}: Create a Food token. / {T}, Sacrifice four Foods: Other creatures you control get +3/+3 and
+  gain haste until end of turn. Activate only as a sorcery." The win component sees a 2-mana commander with an overrun; in
+  this deck Foods come only from Pippin (one a turn, 4 turns to one pump), Foods are not creature tokens, so Blood Artist,
+  Zulaport, the Pests and the Beledros untap get nothing. The +7.5 is the heuristic, not an upgrade.
+- Ragnarok: no mana cost, "Reach, vigilance, menace, trample, haste / When Ragnarok dies, destroy target permanent and
+  return target nonlegendary permanent card …" — a melded back face the screen should have excluded; it cannot be cast
+  from the command zone.
+- Savra, Queen of the Golgari (the sac-drain commander by oracle: "Whenever you sacrifice a black creature, you may pay 2
+  life. If you do, each other player sacrifices a creature") scores 9 under Beledros with the same 99: the model has no
+  edict value and counts Beledros's untap as ramp.
+
+### Verdict (final)
+
+No purchasable commander trumps the Beledros list in the model under either test; the only numeric winner (Pippin) is a
+win-heuristic artefact. The commander question is now an oracle judgment on the engine, where Beledros (Pest a turn, a
+10-life untap into Vito / Bond / Merchant) is the one the list was built around.
+
 ## 3. Files
 
 `buy-lab.ts/.json/.md`, `cmdr-candidates.txt`, `cmdr-candidates-2.txt`, `cmdr-candidates-all.txt`,
 `cmdr-constraints.json`, `cmdr-screen-summary.csv` (the two screens, one row per commander; the full jsonl stays
 untracked), `cmdr-climb/`, `cmdr-climb-ref/`, `cmdr-deep/`, `cmdr-deep-ref/`, `cmdr-deep40/`, `cmdr-deep40-ref/`,
-`cmdr-judith-seed/`, `cmdr-judith-from-beledros/`.
+`cmdr-judith-seed/`, `cmdr-judith-from-beledros/`, `cmdr-screen-b99-summary.csv` (the full `cmdr-pick-b99` + `cmdr-screen-b99` jsonl, 3 MB + 5 MB, stay untracked), `cmdr-climb-b99/`, `cmdr-climb-b99-judgment/`.

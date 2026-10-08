@@ -1,7 +1,7 @@
 {
- "base": 101.19857142857144,
+ "base": 96.105,
  "games": 100,
- "generated": "2026-10-08T12:03:52.313Z",
+ "generated": "2026-10-08T15:02:09.925Z",
  "cards": {
   "Command Tower": {
    "from": "Meren (dismantled)",
@@ -12,7 +12,7 @@
    "backups": [
     {
      "name": "Forest",
-     "delta": -0.025000000000005684,
+     "delta": -0.03214285714285836,
      "from": "Meren (dismantled)",
      "type": "Basic Land \u2014 Forest",
      "incl": 0.920056,
@@ -28,7 +28,7 @@
     },
     {
      "name": "Reliquary Tower",
-     "delta": -0.07500000000000284,
+     "delta": -0.07857142857142208,
      "from": "Quandrix Unlimited precon (SOC; in hand since 2026-10-02, registered from its list)",
      "type": "Land",
      "incl": 0.292193,
@@ -53,7 +53,7 @@
     },
     {
      "name": "Swamp",
-     "delta": -0.046428571428577925,
+     "delta": -0.046428571428563714,
      "from": "Meren (dismantled)",
      "type": "Basic Land \u2014 Swamp",
      "incl": 0.913511,
@@ -78,7 +78,7 @@
    "backups": [
     {
      "name": "Forest",
-     "delta": 0,
+     "delta": -0.003571428571419233,
      "from": "Meren (dismantled)",
      "type": "Basic Land \u2014 Forest",
      "incl": 0.920056,
@@ -86,7 +86,7 @@
     },
     {
      "name": "Swamp",
-     "delta": -0.028571428571424917,
+     "delta": -0.03214285714285836,
      "from": "Meren (dismantled)",
      "type": "Basic Land \u2014 Swamp",
      "incl": 0.913511,
@@ -94,7 +94,7 @@
     },
     {
      "name": "Reliquary Tower",
-     "delta": -0.0535714285714306,
+     "delta": -0.06428571428571672,
      "from": "Quandrix Unlimited precon (SOC; in hand since 2026-10-02, registered from its list)",
      "type": "Land",
      "incl": 0.292193,
@@ -111,7 +111,7 @@
    "backups": [
     {
      "name": "Forest",
-     "delta": -0.0035714285714334437,
+     "delta": -0.01071428571428612,
      "from": "Meren (dismantled)",
      "type": "Basic Land \u2014 Forest",
      "incl": 0.920056,
@@ -119,7 +119,7 @@
     },
     {
      "name": "Swamp",
-     "delta": -0.01071428571428612,
+     "delta": -0.017857142857138797,
      "from": "Meren (dismantled)",
      "type": "Basic Land \u2014 Swamp",
      "incl": 0.913511,
@@ -127,7 +127,7 @@
     },
     {
      "name": "Reliquary Tower",
-     "delta": -0.028571428571424917,
+     "delta": -0.04285714285714448,
      "from": "Quandrix Unlimited precon (SOC; in hand since 2026-10-02, registered from its list)",
      "type": "Land",
      "incl": 0.292193,
@@ -144,7 +144,7 @@
    "backups": [
     {
      "name": "Forest",
-     "delta": -0.007142857142852677,
+     "delta": 0,
      "from": "Meren (dismantled)",
      "type": "Basic Land \u2014 Forest",
      "incl": 0.920056,
@@ -152,7 +152,7 @@
     },
     {
      "name": "Swamp",
-     "delta": 0,
+     "delta": 0.007142857142852677,
      "from": "Meren (dismantled)",
      "type": "Basic Land \u2014 Swamp",
      "incl": 0.913511,
@@ -160,7 +160,7 @@
     },
     {
      "name": "Reliquary Tower",
-     "delta": -0.035714285714291805,
+     "delta": -0.03214285714285836,
      "from": "Quandrix Unlimited precon (SOC; in hand since 2026-10-02, registered from its list)",
      "type": "Land",
      "incl": 0.292193,
@@ -177,7 +177,7 @@
    "backups": [
     {
      "name": "Forest",
-     "delta": 0.035714285714291805,
+     "delta": 0.06428571428571672,
      "from": "Meren (dismantled)",
      "type": "Basic Land \u2014 Forest",
      "incl": 0.920056,
@@ -185,7 +185,7 @@
     },
     {
      "name": "Swamp",
-     "delta": 0.046428571428563714,
+     "delta": 0.06071428571428328,
      "from": "Meren (dismantled)",
      "type": "Basic Land \u2014 Swamp",
      "incl": 0.913511,
@@ -193,7 +193,7 @@
     },
     {
      "name": "Reliquary Tower",
-     "delta": 0.04285714285714448,
+     "delta": 0.06071428571428328,
      "from": "Quandrix Unlimited precon (SOC; in hand since 2026-10-02, registered from its list)",
      "type": "Land",
      "incl": 0.292193,
@@ -210,7 +210,7 @@
    "backups": [
     {
      "name": "Forest",
-     "delta": 0.03214285714285836,
+     "delta": 0.025000000000005684,
      "from": "Meren (dismantled)",
      "type": "Basic Land \u2014 Forest",
      "incl": 0.920056,
@@ -218,7 +218,7 @@
     },
     {
      "name": "Swamp",
-     "delta": 0.014285714285719564,
+     "delta": -0.014285714285705353,
      "from": "Meren (dismantled)",
      "type": "Basic Land \u2014 Swamp",
      "incl": 0.913511,
@@ -226,7 +226,7 @@
     },
     {
      "name": "Reliquary Tower",
-     "delta": -0.046428571428577925,
+     "delta": -0.04999999999999716,
      "from": "Quandrix Unlimited precon (SOC; in hand since 2026-10-02, registered from its list)",
      "type": "Land",
      "incl": 0.292193,
@@ -243,7 +243,7 @@
    "backups": [
     {
      "name": "Forest",
-     "delta": 0.025000000000005684,
+     "delta": 0.01071428571428612,
      "from": "Meren (dismantled)",
      "type": "Basic Land \u2014 Forest",
      "incl": 0.920056,
@@ -251,7 +251,7 @@
     },
     {
      "name": "Swamp",
-     "delta": 0.025000000000005684,
+     "delta": 0.01071428571428612,
      "from": "Meren (dismantled)",
      "type": "Basic Land \u2014 Swamp",
      "incl": 0.913511,
@@ -276,7 +276,7 @@
    "backups": [
     {
      "name": "Forest",
-     "delta": 0.06071428571428328,
+     "delta": 0.0535714285714306,
      "from": "Meren (dismantled)",
      "type": "Basic Land \u2014 Forest",
      "incl": 0.920056,
@@ -284,7 +284,7 @@
     },
     {
      "name": "Swamp",
-     "delta": 0.0892857142857082,
+     "delta": 0.057142857142864045,
      "from": "Meren (dismantled)",
      "type": "Basic Land \u2014 Swamp",
      "incl": 0.913511,
@@ -292,7 +292,7 @@
     },
     {
      "name": "Reliquary Tower",
-     "delta": 0.014285714285719564,
+     "delta": 0.007142857142852677,
      "from": "Quandrix Unlimited precon (SOC; in hand since 2026-10-02, registered from its list)",
      "type": "Land",
      "incl": 0.292193,
@@ -309,7 +309,7 @@
    "backups": [
     {
      "name": "Forest",
-     "delta": -0.06428571428571672,
+     "delta": -0.07857142857142208,
      "from": "Meren (dismantled)",
      "type": "Basic Land \u2014 Forest",
      "incl": 0.920056,
@@ -325,7 +325,7 @@
     },
     {
      "name": "Reliquary Tower",
-     "delta": -0.0892857142857082,
+     "delta": -0.09285714285714164,
      "from": "Quandrix Unlimited precon (SOC; in hand since 2026-10-02, registered from its list)",
      "type": "Land",
      "incl": 0.292193,
@@ -339,31 +339,23 @@
    "roles": [
     "win_condition"
    ],
-   "candidates": 130,
+   "candidates": 131,
    "backups": [
     {
-     "name": "Blossoming Bogbeast",
-     "delta": -8.872857142857157,
-     "from": "Witherbloom Witchcraft precon (C21; ManaBox scan 2026-09-08, confirmed)",
-     "type": "Creature \u2014 Beast",
-     "incl": 0.17064,
-     "rank": 4019
+     "name": "Pestilence Demon",
+     "delta": -6.7735714285714295,
+     "from": "loose collection (ManaBox scan or typed batch; printed in DDR Duel Decks: Nissa vs. Ob Nixilis)",
+     "type": "Creature \u2014 Demon",
+     "incl": 0,
+     "rank": 10273
     },
     {
-     "name": "Verdant Sun's Avatar",
-     "delta": -8.91928571428572,
-     "from": "Witherbloom Witchcraft precon \u2014 UNCONFIRMED (registered from the Archidekt C21 list 2026-09-09, never scanned; 4 of those 54 have proved missing \u2014 check the box)",
-     "type": "Creature \u2014 Dinosaur Avatar",
-     "incl": 0.123422,
-     "rank": 2179
-    },
-    {
-     "name": "Avenger of Zendikar",
-     "delta": -8.91928571428572,
-     "from": "Omo precon (Tricky Terrain box; sleeved deck dismantled 2026-10-07, confirmed)",
-     "type": "Creature \u2014 Elemental",
-     "incl": 0.114072,
-     "rank": 295
+     "name": "Reiver Demon",
+     "delta": -6.7735714285714295,
+     "from": "loose collection (ManaBox scan or typed batch; printed in CMA Commander Anthology)",
+     "type": "Creature \u2014 Demon",
+     "incl": 0,
+     "rank": 10821
     }
    ]
   },
@@ -376,7 +368,7 @@
    "backups": [
     {
      "name": "Forest",
-     "delta": -0.025000000000005684,
+     "delta": -0.03214285714285836,
      "from": "Meren (dismantled)",
      "type": "Basic Land \u2014 Forest",
      "incl": 0.920056,
@@ -384,7 +376,7 @@
     },
     {
      "name": "Swamp",
-     "delta": 0.007142857142852677,
+     "delta": 0.0035714285714334437,
      "from": "Meren (dismantled)",
      "type": "Basic Land \u2014 Swamp",
      "incl": 0.913511,
@@ -392,7 +384,7 @@
     },
     {
      "name": "Reliquary Tower",
-     "delta": -0.03928571428571104,
+     "delta": -0.046428571428563714,
      "from": "Quandrix Unlimited precon (SOC; in hand since 2026-10-02, registered from its list)",
      "type": "Land",
      "incl": 0.292193,
@@ -417,7 +409,7 @@
     },
     {
      "name": "Swamp",
-     "delta": -0.035714285714291805,
+     "delta": -0.035714285714277594,
      "from": "Meren (dismantled)",
      "type": "Basic Land \u2014 Swamp",
      "incl": 0.913511,
@@ -425,7 +417,7 @@
     },
     {
      "name": "Reliquary Tower",
-     "delta": -0.04999999999999716,
+     "delta": -0.057142857142849834,
      "from": "Quandrix Unlimited precon (SOC; in hand since 2026-10-02, registered from its list)",
      "type": "Land",
      "incl": 0.292193,
@@ -442,7 +434,7 @@
    "backups": [
     {
      "name": "Forest",
-     "delta": -0.025000000000005684,
+     "delta": -0.014285714285705353,
      "from": "Meren (dismantled)",
      "type": "Basic Land \u2014 Forest",
      "incl": 0.920056,
@@ -450,7 +442,7 @@
     },
     {
      "name": "Swamp",
-     "delta": -0.03928571428571104,
+     "delta": -0.014285714285705353,
      "from": "Meren (dismantled)",
      "type": "Basic Land \u2014 Swamp",
      "incl": 0.913511,
@@ -458,7 +450,7 @@
     },
     {
      "name": "Reliquary Tower",
-     "delta": -0.07500000000000284,
+     "delta": -0.04999999999999716,
      "from": "Quandrix Unlimited precon (SOC; in hand since 2026-10-02, registered from its list)",
      "type": "Land",
      "incl": 0.292193,
@@ -475,7 +467,7 @@
    "backups": [
     {
      "name": "Forest",
-     "delta": 0.014285714285719564,
+     "delta": 0.017857142857153008,
      "from": "Meren (dismantled)",
      "type": "Basic Land \u2014 Forest",
      "incl": 0.920056,
@@ -483,7 +475,7 @@
     },
     {
      "name": "Swamp",
-     "delta": 0.007142857142852677,
+     "delta": 0,
      "from": "Meren (dismantled)",
      "type": "Basic Land \u2014 Swamp",
      "incl": 0.913511,
@@ -508,7 +500,7 @@
    "backups": [
     {
      "name": "Forest",
-     "delta": -0.09642857142857508,
+     "delta": -0.10357142857142776,
      "from": "Meren (dismantled)",
      "type": "Basic Land \u2014 Forest",
      "incl": 0.920056,
@@ -524,7 +516,7 @@
     },
     {
      "name": "Reliquary Tower",
-     "delta": -0.14999999999999147,
+     "delta": -0.15714285714285836,
      "from": "Quandrix Unlimited precon (SOC; in hand since 2026-10-02, registered from its list)",
      "type": "Land",
      "incl": 0.292193,
@@ -607,7 +599,7 @@
    "backups": [
     {
      "name": "Forest",
-     "delta": -0.017857142857138797,
+     "delta": -0.007142857142852677,
      "from": "Meren (dismantled)",
      "type": "Basic Land \u2014 Forest",
      "incl": 0.920056,
@@ -640,7 +632,7 @@
    "backups": [
     {
      "name": "Forest",
-     "delta": 0.01071428571428612,
+     "delta": -0.007142857142852677,
      "from": "Meren (dismantled)",
      "type": "Basic Land \u2014 Forest",
      "incl": 0.920056,
@@ -681,7 +673,7 @@
     },
     {
      "name": "Swamp",
-     "delta": 0.017857142857138797,
+     "delta": 0.025000000000005684,
      "from": "Meren (dismantled)",
      "type": "Basic Land \u2014 Swamp",
      "incl": 0.913511,
@@ -714,7 +706,7 @@
     },
     {
      "name": "Swamp",
-     "delta": -0.014285714285719564,
+     "delta": -0.014285714285705353,
      "from": "Meren (dismantled)",
      "type": "Basic Land \u2014 Swamp",
      "incl": 0.913511,
@@ -722,7 +714,7 @@
     },
     {
      "name": "Reliquary Tower",
-     "delta": -0.014285714285719564,
+     "delta": -0.014285714285705353,
      "from": "Quandrix Unlimited precon (SOC; in hand since 2026-10-02, registered from its list)",
      "type": "Land",
      "incl": 0.292193,
@@ -739,7 +731,7 @@
    "backups": [
     {
      "name": "Forest",
-     "delta": 0.035714285714291805,
+     "delta": 0.03928571428572525,
      "from": "Meren (dismantled)",
      "type": "Basic Land \u2014 Forest",
      "incl": 0.920056,
@@ -747,7 +739,7 @@
     },
     {
      "name": "Swamp",
-     "delta": 0.028571428571424917,
+     "delta": 0.03214285714285836,
      "from": "Meren (dismantled)",
      "type": "Basic Land \u2014 Swamp",
      "incl": 0.913511,
@@ -772,7 +764,7 @@
    "backups": [
     {
      "name": "Forest",
-     "delta": 0.014285714285719564,
+     "delta": 0.007142857142852677,
      "from": "Meren (dismantled)",
      "type": "Basic Land \u2014 Forest",
      "incl": 0.920056,
@@ -780,7 +772,7 @@
     },
     {
      "name": "Swamp",
-     "delta": 0.028571428571424917,
+     "delta": 0.025000000000005684,
      "from": "Meren (dismantled)",
      "type": "Basic Land \u2014 Swamp",
      "incl": 0.913511,
@@ -788,7 +780,7 @@
     },
     {
      "name": "Reliquary Tower",
-     "delta": 0.014285714285719564,
+     "delta": 0.007142857142852677,
      "from": "Quandrix Unlimited precon (SOC; in hand since 2026-10-02, registered from its list)",
      "type": "Land",
      "incl": 0.292193,
@@ -805,7 +797,7 @@
    "backups": [
     {
      "name": "Forest",
-     "delta": 0,
+     "delta": -0.024999999999991473,
      "from": "Meren (dismantled)",
      "type": "Basic Land \u2014 Forest",
      "incl": 0.920056,
@@ -813,7 +805,7 @@
     },
     {
      "name": "Swamp",
-     "delta": 0.007142857142852677,
+     "delta": -0.017857142857138797,
      "from": "Meren (dismantled)",
      "type": "Basic Land \u2014 Swamp",
      "incl": 0.913511,
@@ -838,7 +830,7 @@
    "backups": [
     {
      "name": "Forest",
-     "delta": 0.025000000000005684,
+     "delta": 0,
      "from": "Meren (dismantled)",
      "type": "Basic Land \u2014 Forest",
      "incl": 0.920056,
@@ -846,7 +838,7 @@
     },
     {
      "name": "Swamp",
-     "delta": 0.0535714285714306,
+     "delta": 0.03214285714285836,
      "from": "Meren (dismantled)",
      "type": "Basic Land \u2014 Swamp",
      "incl": 0.913511,
@@ -871,7 +863,7 @@
    "backups": [
     {
      "name": "Forest",
-     "delta": -0.028571428571424917,
+     "delta": -0.024999999999991473,
      "from": "Meren (dismantled)",
      "type": "Basic Land \u2014 Forest",
      "incl": 0.920056,
@@ -879,7 +871,7 @@
     },
     {
      "name": "Swamp",
-     "delta": -0.125,
+     "delta": -0.12857142857141923,
      "from": "Meren (dismantled)",
      "type": "Basic Land \u2014 Swamp",
      "incl": 0.913511,
@@ -887,7 +879,7 @@
     },
     {
      "name": "Reliquary Tower",
-     "delta": -0.1785714285714306,
+     "delta": -0.19285714285713595,
      "from": "Quandrix Unlimited precon (SOC; in hand since 2026-10-02, registered from its list)",
      "type": "Land",
      "incl": 0.292193,
@@ -904,7 +896,7 @@
    "backups": [
     {
      "name": "Forest",
-     "delta": 0.046428571428577925,
+     "delta": 0.028571428571424917,
      "from": "Meren (dismantled)",
      "type": "Basic Land \u2014 Forest",
      "incl": 0.920056,
@@ -912,7 +904,7 @@
     },
     {
      "name": "Swamp",
-     "delta": 0.035714285714291805,
+     "delta": 0.02142857142857224,
      "from": "Meren (dismantled)",
      "type": "Basic Land \u2014 Swamp",
      "incl": 0.913511,
@@ -937,7 +929,7 @@
    "backups": [
     {
      "name": "Rampant Growth",
-     "delta": -0.07500000000000284,
+     "delta": -0.08571428571428896,
      "from": "Witherbloom Witchcraft precon \u2014 UNCONFIRMED (registered from the Archidekt C21 list 2026-09-09, never scanned; 4 of those 54 have proved missing \u2014 check the box)",
      "type": "Sorcery",
      "incl": 0.529219,
@@ -945,7 +937,7 @@
     },
     {
      "name": "Wight of the Reliquary",
-     "delta": -0.09642857142857508,
+     "delta": -0.12142857142856656,
      "from": "Meren (dismantled)",
      "type": "Creature \u2014 Zombie Knight",
      "incl": 0.267415,
@@ -953,7 +945,7 @@
     },
     {
      "name": "Skyshroud Claim",
-     "delta": -0.1071428571428612,
+     "delta": -0.12142857142856656,
      "from": "loose collection (ManaBox scan or typed batch; printed in EOC Edge of Eternities Commander)",
      "type": "Sorcery",
      "incl": 0.265545,
@@ -970,7 +962,7 @@
    "backups": [
     {
      "name": "Rampant Growth",
-     "delta": -0.035714285714291805,
+     "delta": -0.035714285714277594,
      "from": "Witherbloom Witchcraft precon \u2014 UNCONFIRMED (registered from the Archidekt C21 list 2026-09-09, never scanned; 4 of those 54 have proved missing \u2014 check the box)",
      "type": "Sorcery",
      "incl": 0.529219,
@@ -986,7 +978,7 @@
     },
     {
      "name": "Skyshroud Claim",
-     "delta": 0.017857142857138797,
+     "delta": 0.02142857142857224,
      "from": "loose collection (ManaBox scan or typed batch; printed in EOC Edge of Eternities Commander)",
      "type": "Sorcery",
      "incl": 0.265545,
@@ -1000,8 +992,16 @@
    "roles": [
     "removal"
    ],
-   "candidates": 58,
+   "candidates": 59,
    "backups": [
+    {
+     "name": "Vilis, Broker of Blood",
+     "delta": -0.01071428571428612,
+     "from": "loose collection (ManaBox scan or typed batch; printed in M20 Core Set 2020)",
+     "type": "Legendary Creature \u2014 Demon",
+     "incl": 0.301543,
+     "rank": 1124
+    },
     {
      "name": "Deadly Brew",
      "delta": 0.0035714285714334437,
@@ -1011,20 +1011,12 @@
      "rank": 4763
     },
     {
-     "name": "Immoral Bargain",
-     "delta": 0.02142857142857224,
-     "from": "loose collection (ManaBox scan or typed batch; printed in SOC Secrets of Strixhaven Commander)",
-     "type": "Sorcery",
-     "incl": 0.13698,
-     "rank": 6642
-    },
-    {
-     "name": "Witherbloom Command",
+     "name": "Witherbloom Charm",
      "delta": 0.0035714285714334437,
-     "from": "loose collection (ManaBox scan or typed batch; printed in STX Strixhaven: School of Mages)",
-     "type": "Sorcery",
-     "incl": 0.098177,
-     "rank": 8549
+     "from": "loose collection (ManaBox scan or typed batch; printed in SOS Secrets of Strixhaven)",
+     "type": "Instant",
+     "incl": 0.158485,
+     "rank": 4841
     }
    ]
   },
@@ -1033,31 +1025,23 @@
    "roles": [
     "draw"
    ],
-   "candidates": 98,
+   "candidates": 99,
    "backups": [
     {
-     "name": "Village Rites",
-     "delta": -0.06428571428571672,
-     "from": "Meren (dismantled)",
-     "type": "Instant",
-     "incl": 0.355774,
-     "rank": 202
-    },
-    {
-     "name": "Corrupted Conviction",
-     "delta": -0.06428571428571672,
+     "name": "Overwhelming Forces",
+     "delta": 1.9071428571428584,
      "from": "OTJ box (Outlaws of Thunder Junction, typed in 2026-09-08)",
-     "type": "Instant",
-     "incl": 0.120617,
-     "rank": 599
+     "type": "Sorcery",
+     "incl": 0,
+     "rank": 10064
     },
     {
-     "name": "Night's Whisper",
-     "delta": -0.0535714285714306,
-     "from": "loose collection (ManaBox scan or typed batch; printed in ECC Lorwyn Eclipsed Commander)",
-     "type": "Sorcery",
-     "incl": 0.113604,
-     "rank": 182
+     "name": "The Echoverse Fulcrum",
+     "delta": 1.9500000000000028,
+     "from": "loose collection (ManaBox scan or typed batch; printed in FRA Reality Fracture)",
+     "type": "Legendary Artifact",
+     "incl": 0,
+     "rank": 22908
     }
    ]
   },
@@ -1066,31 +1050,23 @@
    "roles": [
     "win_condition"
    ],
-   "candidates": 130,
+   "candidates": 131,
    "backups": [
     {
-     "name": "Blossoming Bogbeast",
-     "delta": 0.04285714285714448,
-     "from": "Witherbloom Witchcraft precon (C21; ManaBox scan 2026-09-08, confirmed)",
-     "type": "Creature \u2014 Beast",
-     "incl": 0.17064,
-     "rank": 4019
+     "name": "Pestilence Demon",
+     "delta": 1.9821428571428612,
+     "from": "loose collection (ManaBox scan or typed batch; printed in DDR Duel Decks: Nissa vs. Ob Nixilis)",
+     "type": "Creature \u2014 Demon",
+     "incl": 0,
+     "rank": 10273
     },
     {
-     "name": "Verdant Sun's Avatar",
-     "delta": 0.0035714285714334437,
-     "from": "Witherbloom Witchcraft precon \u2014 UNCONFIRMED (registered from the Archidekt C21 list 2026-09-09, never scanned; 4 of those 54 have proved missing \u2014 check the box)",
-     "type": "Creature \u2014 Dinosaur Avatar",
-     "incl": 0.123422,
-     "rank": 2179
-    },
-    {
-     "name": "Avenger of Zendikar",
-     "delta": 0.0035714285714334437,
-     "from": "Omo precon (Tricky Terrain box; sleeved deck dismantled 2026-10-07, confirmed)",
-     "type": "Creature \u2014 Elemental",
-     "incl": 0.114072,
-     "rank": 295
+     "name": "Reiver Demon",
+     "delta": 1.9821428571428612,
+     "from": "loose collection (ManaBox scan or typed batch; printed in CMA Commander Anthology)",
+     "type": "Creature \u2014 Demon",
+     "incl": 0,
+     "rank": 10821
     }
    ]
   },
@@ -1099,31 +1075,23 @@
    "roles": [
     "win_condition"
    ],
-   "candidates": 130,
+   "candidates": 131,
    "backups": [
     {
-     "name": "Blossoming Bogbeast",
-     "delta": -0.007142857142852677,
-     "from": "Witherbloom Witchcraft precon (C21; ManaBox scan 2026-09-08, confirmed)",
-     "type": "Creature \u2014 Beast",
-     "incl": 0.17064,
-     "rank": 4019
+     "name": "Pestilence Demon",
+     "delta": 1.960714285714289,
+     "from": "loose collection (ManaBox scan or typed batch; printed in DDR Duel Decks: Nissa vs. Ob Nixilis)",
+     "type": "Creature \u2014 Demon",
+     "incl": 0,
+     "rank": 10273
     },
     {
-     "name": "Verdant Sun's Avatar",
-     "delta": -0.03214285714285836,
-     "from": "Witherbloom Witchcraft precon \u2014 UNCONFIRMED (registered from the Archidekt C21 list 2026-09-09, never scanned; 4 of those 54 have proved missing \u2014 check the box)",
-     "type": "Creature \u2014 Dinosaur Avatar",
-     "incl": 0.123422,
-     "rank": 2179
-    },
-    {
-     "name": "Avenger of Zendikar",
-     "delta": -0.03214285714285836,
-     "from": "Omo precon (Tricky Terrain box; sleeved deck dismantled 2026-10-07, confirmed)",
-     "type": "Creature \u2014 Elemental",
-     "incl": 0.114072,
-     "rank": 295
+     "name": "Reiver Demon",
+     "delta": 1.960714285714289,
+     "from": "loose collection (ManaBox scan or typed batch; printed in CMA Commander Anthology)",
+     "type": "Creature \u2014 Demon",
+     "incl": 0,
+     "rank": 10821
     }
    ]
   },
@@ -1136,7 +1104,7 @@
    "backups": [
     {
      "name": "Rampant Growth",
-     "delta": -0.02142857142857224,
+     "delta": -0.017857142857138797,
      "from": "Witherbloom Witchcraft precon \u2014 UNCONFIRMED (registered from the Archidekt C21 list 2026-09-09, never scanned; 4 of those 54 have proved missing \u2014 check the box)",
      "type": "Sorcery",
      "incl": 0.529219,
@@ -1144,7 +1112,7 @@
     },
     {
      "name": "Wight of the Reliquary",
-     "delta": -0.09642857142857508,
+     "delta": -0.10357142857142776,
      "from": "Meren (dismantled)",
      "type": "Creature \u2014 Zombie Knight",
      "incl": 0.267415,
@@ -1152,7 +1120,7 @@
     },
     {
      "name": "Skyshroud Claim",
-     "delta": -0.057142857142864045,
+     "delta": -0.0714285714285694,
      "from": "loose collection (ManaBox scan or typed batch; printed in EOC Edge of Eternities Commander)",
      "type": "Sorcery",
      "incl": 0.265545,
@@ -1165,11 +1133,11 @@
    "roles": [
     "utility"
    ],
-   "candidates": 206,
+   "candidates": 205,
    "backups": [
     {
      "name": "Blech, Loafing Pest",
-     "delta": -0.003571428571419233,
+     "delta": -0.007142857142852677,
      "from": "loose collection (ManaBox scan or typed batch; printed in SOS Secrets of Strixhaven)",
      "type": "Legendary Creature \u2014 Pest",
      "incl": 0.16503,
@@ -1177,7 +1145,7 @@
     },
     {
      "name": "Victimize",
-     "delta": -0.003571428571419233,
+     "delta": -0.007142857142852677,
      "from": "Meren (dismantled)",
      "type": "Sorcery",
      "incl": 0.154278,
@@ -1185,7 +1153,7 @@
     },
     {
      "name": "Moseo, Vein's New Dean",
-     "delta": -0.003571428571419233,
+     "delta": -0.007142857142852677,
      "from": "loose collection (ManaBox scan or typed batch; printed in SOS Secrets of Strixhaven)",
      "type": "Legendary Creature \u2014 Bird Skeleton Warlock",
      "incl": 0.142122,
@@ -1199,115 +1167,114 @@
     "draw",
     "protection"
    ],
-   "candidates": 105,
+   "candidates": 106,
    "backups": [
     {
-     "name": "Silkguard",
-     "delta": 0,
-     "from": "Quandrix Unlimited precon (SOC; in hand since 2026-10-02, registered from its list)",
-     "type": "Instant",
+     "name": "Overwhelming Forces",
+     "delta": 0.7714285714285722,
+     "from": "OTJ box (Outlaws of Thunder Junction, typed in 2026-09-08)",
+     "type": "Sorcery",
      "incl": 0,
-     "rank": 2346
+     "rank": 10064
     },
     {
-     "name": "Helix Pinnacle",
-     "delta": 0,
-     "from": "loose collection (ManaBox scan or typed batch; printed in EVE Eventide)",
-     "type": "Enchantment",
+     "name": "The Echoverse Fulcrum",
+     "delta": 0.7999999999999972,
+     "from": "loose collection (ManaBox scan or typed batch; printed in FRA Reality Fracture)",
+     "type": "Legendary Artifact",
      "incl": 0,
-     "rank": 4480
+     "rank": 22908
     }
    ]
   },
-  "Deadly Tempest": {
-   "from": "Witherbloom Witchcraft precon \u2014 UNCONFIRMED (registered from the Archidekt C21 list 2026-09-09, never scanned; 4 of those 54 have proved missing \u2014 check the box)",
+  "Culling Ritual": {
+   "from": "Meren (dismantled)",
    "roles": [
-    "board_wipe"
+    "ramp"
    ],
-   "candidates": 5,
+   "candidates": 111,
    "backups": [
     {
-     "name": "Golgari Charm",
-     "delta": 0.035714285714291805,
+     "name": "Rampant Growth",
+     "delta": 0.04999999999999716,
+     "from": "Witherbloom Witchcraft precon \u2014 UNCONFIRMED (registered from the Archidekt C21 list 2026-09-09, never scanned; 4 of those 54 have proved missing \u2014 check the box)",
+     "type": "Sorcery",
+     "incl": 0.529219,
+     "rank": 27
+    },
+    {
+     "name": "Wight of the Reliquary",
+     "delta": 0.04999999999999716,
      "from": "Meren (dismantled)",
-     "type": "Instant",
-     "incl": 0.139785,
-     "rank": 1621
+     "type": "Creature \u2014 Zombie Knight",
+     "incl": 0.267415,
+     "rank": 1266
     },
     {
-     "name": "Pestilence Demon",
-     "delta": -0.0035714285714334437,
-     "from": "loose collection (ManaBox scan or typed batch; printed in DDR Duel Decks: Nissa vs. Ob Nixilis)",
-     "type": "Creature \u2014 Demon",
-     "incl": 0,
-     "rank": 10273
-    },
-    {
-     "name": "Reiver Demon",
-     "delta": -0.0035714285714334437,
-     "from": "loose collection (ManaBox scan or typed batch; printed in CMA Commander Anthology)",
-     "type": "Creature \u2014 Demon",
-     "incl": 0,
-     "rank": 10821
+     "name": "Skyshroud Claim",
+     "delta": 0.09642857142857508,
+     "from": "loose collection (ManaBox scan or typed batch; printed in EOC Edge of Eternities Commander)",
+     "type": "Sorcery",
+     "incl": 0.265545,
+     "rank": 302
     }
    ]
   },
-  "Plumb the Forbidden": {
-   "from": "loose collection (ManaBox scan or typed batch; printed in STX Strixhaven: School of Mages)",
+  "Village Rites": {
+   "from": "Meren (dismantled)",
    "roles": [
     "draw"
    ],
-   "candidates": 98,
+   "candidates": 99,
    "backups": [
     {
-     "name": "Village Rites",
-     "delta": -0.03214285714285836,
-     "from": "Meren (dismantled)",
-     "type": "Instant",
-     "incl": 0.355774,
-     "rank": 202
-    },
-    {
-     "name": "Corrupted Conviction",
-     "delta": -0.03214285714285836,
+     "name": "Overwhelming Forces",
+     "delta": 2,
      "from": "OTJ box (Outlaws of Thunder Junction, typed in 2026-09-08)",
-     "type": "Instant",
-     "incl": 0.120617,
-     "rank": 599
+     "type": "Sorcery",
+     "incl": 0,
+     "rank": 10064
     },
     {
-     "name": "Night's Whisper",
-     "delta": 0,
-     "from": "loose collection (ManaBox scan or typed batch; printed in ECC Lorwyn Eclipsed Commander)",
-     "type": "Sorcery",
-     "incl": 0.113604,
-     "rank": 182
+     "name": "The Echoverse Fulcrum",
+     "delta": 2.0250000000000057,
+     "from": "loose collection (ManaBox scan or typed batch; printed in FRA Reality Fracture)",
+     "type": "Legendary Artifact",
+     "incl": 0,
+     "rank": 22908
     }
    ]
   },
-  "Warg Tactics": {
-   "from": "loose collection (ManaBox scan or typed batch; printed in HOB The Hobbit)",
+  "Saw in Half": {
+   "from": "Meren (dismantled)",
    "roles": [
-    "removal",
-    "protection"
+    "removal"
    ],
-   "candidates": 66,
+   "candidates": 59,
    "backups": [
     {
-     "name": "Silkguard",
-     "delta": -0.025000000000005684,
-     "from": "Quandrix Unlimited precon (SOC; in hand since 2026-10-02, registered from its list)",
-     "type": "Instant",
-     "incl": 0,
-     "rank": 2346
+     "name": "Vilis, Broker of Blood",
+     "delta": -0.024999999999991473,
+     "from": "loose collection (ManaBox scan or typed batch; printed in M20 Core Set 2020)",
+     "type": "Legendary Creature \u2014 Demon",
+     "incl": 0.301543,
+     "rank": 1124
     },
     {
-     "name": "Helix Pinnacle",
-     "delta": -0.025000000000005684,
-     "from": "loose collection (ManaBox scan or typed batch; printed in EVE Eventide)",
-     "type": "Enchantment",
-     "incl": 0,
-     "rank": 4480
+     "name": "Deadly Brew",
+     "delta": 0.0035714285714334437,
+     "from": "loose collection (ManaBox scan or typed batch; printed in FDN Foundations)",
+     "type": "Sorcery",
+     "incl": 0.204769,
+     "rank": 4763
+    },
+    {
+     "name": "Witherbloom Charm",
+     "delta": 0.0035714285714334437,
+     "from": "loose collection (ManaBox scan or typed batch; printed in SOS Secrets of Strixhaven)",
+     "type": "Instant",
+     "incl": 0.158485,
+     "rank": 4841
     }
    ]
   },
@@ -1316,8 +1283,16 @@
    "roles": [
     "removal"
    ],
-   "candidates": 58,
+   "candidates": 59,
    "backups": [
+    {
+     "name": "Vilis, Broker of Blood",
+     "delta": 0.0035714285714334437,
+     "from": "loose collection (ManaBox scan or typed batch; printed in M20 Core Set 2020)",
+     "type": "Legendary Creature \u2014 Demon",
+     "incl": 0.301543,
+     "rank": 1124
+    },
     {
      "name": "Deadly Brew",
      "delta": 0,
@@ -1327,20 +1302,12 @@
      "rank": 4763
     },
     {
-     "name": "Immoral Bargain",
-     "delta": 0.01071428571428612,
-     "from": "loose collection (ManaBox scan or typed batch; printed in SOC Secrets of Strixhaven Commander)",
-     "type": "Sorcery",
-     "incl": 0.13698,
-     "rank": 6642
-    },
-    {
-     "name": "Witherbloom Command",
+     "name": "Witherbloom Charm",
      "delta": 0,
-     "from": "loose collection (ManaBox scan or typed batch; printed in STX Strixhaven: School of Mages)",
-     "type": "Sorcery",
-     "incl": 0.098177,
-     "rank": 8549
+     "from": "loose collection (ManaBox scan or typed batch; printed in SOS Secrets of Strixhaven)",
+     "type": "Instant",
+     "incl": 0.158485,
+     "rank": 4841
     }
    ]
   },
@@ -1349,31 +1316,31 @@
    "roles": [
     "removal"
    ],
-   "candidates": 58,
+   "candidates": 59,
    "backups": [
     {
+     "name": "Vilis, Broker of Blood",
+     "delta": -0.13571428571428612,
+     "from": "loose collection (ManaBox scan or typed batch; printed in M20 Core Set 2020)",
+     "type": "Legendary Creature \u2014 Demon",
+     "incl": 0.301543,
+     "rank": 1124
+    },
+    {
      "name": "Deadly Brew",
-     "delta": -0.025000000000005684,
+     "delta": -0.07500000000000284,
      "from": "loose collection (ManaBox scan or typed batch; printed in FDN Foundations)",
      "type": "Sorcery",
      "incl": 0.204769,
      "rank": 4763
     },
     {
-     "name": "Immoral Bargain",
-     "delta": -0.0035714285714334437,
-     "from": "loose collection (ManaBox scan or typed batch; printed in SOC Secrets of Strixhaven Commander)",
-     "type": "Sorcery",
-     "incl": 0.13698,
-     "rank": 6642
-    },
-    {
-     "name": "Witherbloom Command",
-     "delta": -0.025000000000005684,
-     "from": "loose collection (ManaBox scan or typed batch; printed in STX Strixhaven: School of Mages)",
-     "type": "Sorcery",
-     "incl": 0.098177,
-     "rank": 8549
+     "name": "Witherbloom Charm",
+     "delta": -0.07500000000000284,
+     "from": "loose collection (ManaBox scan or typed batch; printed in SOS Secrets of Strixhaven)",
+     "type": "Instant",
+     "incl": 0.158485,
+     "rank": 4841
     }
    ]
   },
@@ -1387,7 +1354,7 @@
    "backups": [
     {
      "name": "Rampant Growth",
-     "delta": 0.017857142857138797,
+     "delta": 0.0071428571428668874,
      "from": "Witherbloom Witchcraft precon \u2014 UNCONFIRMED (registered from the Archidekt C21 list 2026-09-09, never scanned; 4 of those 54 have proved missing \u2014 check the box)",
      "type": "Sorcery",
      "incl": 0.529219,
@@ -1395,7 +1362,7 @@
     },
     {
      "name": "Wight of the Reliquary",
-     "delta": -0.035714285714291805,
+     "delta": -0.03928571428571104,
      "from": "Meren (dismantled)",
      "type": "Creature \u2014 Zombie Knight",
      "incl": 0.267415,
@@ -1403,7 +1370,7 @@
     },
     {
      "name": "Skyshroud Claim",
-     "delta": 0.04285714285714448,
+     "delta": 0.025000000000005684,
      "from": "loose collection (ManaBox scan or typed batch; printed in EOC Edge of Eternities Commander)",
      "type": "Sorcery",
      "incl": 0.265545,
@@ -1416,11 +1383,11 @@
    "roles": [
     "utility"
    ],
-   "candidates": 206,
+   "candidates": 205,
    "backups": [
     {
      "name": "Blech, Loafing Pest",
-     "delta": 0.046428571428563714,
+     "delta": 0.0535714285714306,
      "from": "loose collection (ManaBox scan or typed batch; printed in SOS Secrets of Strixhaven)",
      "type": "Legendary Creature \u2014 Pest",
      "incl": 0.16503,
@@ -1428,7 +1395,7 @@
     },
     {
      "name": "Victimize",
-     "delta": 0.046428571428563714,
+     "delta": 0.0535714285714306,
      "from": "Meren (dismantled)",
      "type": "Sorcery",
      "incl": 0.154278,
@@ -1436,7 +1403,7 @@
     },
     {
      "name": "Moseo, Vein's New Dean",
-     "delta": 0.046428571428563714,
+     "delta": 0.0535714285714306,
      "from": "loose collection (ManaBox scan or typed batch; printed in SOS Secrets of Strixhaven)",
      "type": "Legendary Creature \u2014 Bird Skeleton Warlock",
      "incl": 0.142122,
@@ -1461,7 +1428,7 @@
     },
     {
      "name": "Wight of the Reliquary",
-     "delta": -0.125,
+     "delta": -0.13571428571428612,
      "from": "Meren (dismantled)",
      "type": "Creature \u2014 Zombie Knight",
      "incl": 0.267415,
@@ -1469,7 +1436,7 @@
     },
     {
      "name": "Skyshroud Claim",
-     "delta": -0.04999999999999716,
+     "delta": -0.024999999999991473,
      "from": "loose collection (ManaBox scan or typed batch; printed in EOC Edge of Eternities Commander)",
      "type": "Sorcery",
      "incl": 0.265545,
@@ -1482,31 +1449,31 @@
    "roles": [
     "removal"
    ],
-   "candidates": 58,
+   "candidates": 59,
    "backups": [
     {
+     "name": "Vilis, Broker of Blood",
+     "delta": -0.21785714285714164,
+     "from": "loose collection (ManaBox scan or typed batch; printed in M20 Core Set 2020)",
+     "type": "Legendary Creature \u2014 Demon",
+     "incl": 0.301543,
+     "rank": 1124
+    },
+    {
      "name": "Deadly Brew",
-     "delta": -0.16428571428571104,
+     "delta": -0.15714285714285836,
      "from": "loose collection (ManaBox scan or typed batch; printed in FDN Foundations)",
      "type": "Sorcery",
      "incl": 0.204769,
      "rank": 4763
     },
     {
-     "name": "Immoral Bargain",
+     "name": "Witherbloom Charm",
      "delta": -0.15714285714285836,
-     "from": "loose collection (ManaBox scan or typed batch; printed in SOC Secrets of Strixhaven Commander)",
-     "type": "Sorcery",
-     "incl": 0.13698,
-     "rank": 6642
-    },
-    {
-     "name": "Witherbloom Command",
-     "delta": -0.16428571428571104,
-     "from": "loose collection (ManaBox scan or typed batch; printed in STX Strixhaven: School of Mages)",
-     "type": "Sorcery",
-     "incl": 0.098177,
-     "rank": 8549
+     "from": "loose collection (ManaBox scan or typed batch; printed in SOS Secrets of Strixhaven)",
+     "type": "Instant",
+     "incl": 0.158485,
+     "rank": 4841
     }
    ]
   },
@@ -1515,7 +1482,7 @@
    "roles": [
     "utility"
    ],
-   "candidates": 206,
+   "candidates": 205,
    "backups": [
     {
      "name": "Blech, Loafing Pest",
@@ -1549,31 +1516,31 @@
     "board_wipe",
     "win_condition"
    ],
-   "candidates": 133,
+   "candidates": 135,
    "backups": [
     {
      "name": "Golgari Charm",
-     "delta": -0.03214285714285836,
+     "delta": -0.04285714285714448,
      "from": "Meren (dismantled)",
      "type": "Instant",
      "incl": 0.139785,
      "rank": 1621
     },
     {
-     "name": "Pestilence Demon",
-     "delta": -0.025000000000005684,
-     "from": "loose collection (ManaBox scan or typed batch; printed in DDR Duel Decks: Nissa vs. Ob Nixilis)",
-     "type": "Creature \u2014 Demon",
+     "name": "Deadly Tempest",
+     "delta": 0,
+     "from": "Witherbloom Witchcraft precon \u2014 UNCONFIRMED (registered from the Archidekt C21 list 2026-09-09, never scanned; 4 of those 54 have proved missing \u2014 check the box)",
+     "type": "Sorcery",
      "incl": 0,
-     "rank": 10273
+     "rank": 3757
     },
     {
-     "name": "Reiver Demon",
-     "delta": -0.025000000000005684,
-     "from": "loose collection (ManaBox scan or typed batch; printed in CMA Commander Anthology)",
-     "type": "Creature \u2014 Demon",
+     "name": "Overwhelming Forces",
+     "delta": -0.02142857142857224,
+     "from": "OTJ box (Outlaws of Thunder Junction, typed in 2026-09-08)",
+     "type": "Sorcery",
      "incl": 0,
-     "rank": 10821
+     "rank": 10064
     }
    ]
   },
@@ -1594,7 +1561,7 @@
     },
     {
      "name": "Wight of the Reliquary",
-     "delta": -0.04285714285714448,
+     "delta": -0.0535714285714306,
      "from": "Meren (dismantled)",
      "type": "Creature \u2014 Zombie Knight",
      "incl": 0.267415,
@@ -1602,7 +1569,7 @@
     },
     {
      "name": "Skyshroud Claim",
-     "delta": -0.06071428571428328,
+     "delta": -0.07500000000000284,
      "from": "loose collection (ManaBox scan or typed batch; printed in EOC Edge of Eternities Commander)",
      "type": "Sorcery",
      "incl": 0.265545,
@@ -1615,31 +1582,31 @@
    "roles": [
     "removal"
    ],
-   "candidates": 58,
+   "candidates": 59,
    "backups": [
     {
+     "name": "Vilis, Broker of Blood",
+     "delta": -0.028571428571424917,
+     "from": "loose collection (ManaBox scan or typed batch; printed in M20 Core Set 2020)",
+     "type": "Legendary Creature \u2014 Demon",
+     "incl": 0.301543,
+     "rank": 1124
+    },
+    {
      "name": "Deadly Brew",
-     "delta": -0.0535714285714306,
+     "delta": -0.028571428571424917,
      "from": "loose collection (ManaBox scan or typed batch; printed in FDN Foundations)",
      "type": "Sorcery",
      "incl": 0.204769,
      "rank": 4763
     },
     {
-     "name": "Immoral Bargain",
-     "delta": -0.01071428571428612,
-     "from": "loose collection (ManaBox scan or typed batch; printed in SOC Secrets of Strixhaven Commander)",
-     "type": "Sorcery",
-     "incl": 0.13698,
-     "rank": 6642
-    },
-    {
-     "name": "Witherbloom Command",
-     "delta": -0.0535714285714306,
-     "from": "loose collection (ManaBox scan or typed batch; printed in STX Strixhaven: School of Mages)",
-     "type": "Sorcery",
-     "incl": 0.098177,
-     "rank": 8549
+     "name": "Witherbloom Charm",
+     "delta": -0.028571428571424917,
+     "from": "loose collection (ManaBox scan or typed batch; printed in SOS Secrets of Strixhaven)",
+     "type": "Instant",
+     "incl": 0.158485,
+     "rank": 4841
     }
    ]
   },
@@ -1648,11 +1615,11 @@
    "roles": [
     "utility"
    ],
-   "candidates": 206,
+   "candidates": 205,
    "backups": [
     {
      "name": "Blech, Loafing Pest",
-     "delta": -0.0035714285714334437,
+     "delta": -0.003571428571419233,
      "from": "loose collection (ManaBox scan or typed batch; printed in SOS Secrets of Strixhaven)",
      "type": "Legendary Creature \u2014 Pest",
      "incl": 0.16503,
@@ -1681,31 +1648,23 @@
    "roles": [
     "win_condition"
    ],
-   "candidates": 130,
+   "candidates": 131,
    "backups": [
     {
-     "name": "Blossoming Bogbeast",
-     "delta": -0.017857142857138797,
-     "from": "Witherbloom Witchcraft precon (C21; ManaBox scan 2026-09-08, confirmed)",
-     "type": "Creature \u2014 Beast",
-     "incl": 0.17064,
-     "rank": 4019
+     "name": "Pestilence Demon",
+     "delta": 1.9964285714285808,
+     "from": "loose collection (ManaBox scan or typed batch; printed in DDR Duel Decks: Nissa vs. Ob Nixilis)",
+     "type": "Creature \u2014 Demon",
+     "incl": 0,
+     "rank": 10273
     },
     {
-     "name": "Verdant Sun's Avatar",
-     "delta": -0.03928571428571104,
-     "from": "Witherbloom Witchcraft precon \u2014 UNCONFIRMED (registered from the Archidekt C21 list 2026-09-09, never scanned; 4 of those 54 have proved missing \u2014 check the box)",
-     "type": "Creature \u2014 Dinosaur Avatar",
-     "incl": 0.123422,
-     "rank": 2179
-    },
-    {
-     "name": "Avenger of Zendikar",
-     "delta": -0.03928571428571104,
-     "from": "Omo precon (Tricky Terrain box; sleeved deck dismantled 2026-10-07, confirmed)",
-     "type": "Creature \u2014 Elemental",
-     "incl": 0.114072,
-     "rank": 295
+     "name": "Reiver Demon",
+     "delta": 1.9857142857142946,
+     "from": "loose collection (ManaBox scan or typed batch; printed in CMA Commander Anthology)",
+     "type": "Creature \u2014 Demon",
+     "incl": 0,
+     "rank": 10821
     }
    ]
   },
@@ -1714,31 +1673,23 @@
    "roles": [
     "win_condition"
    ],
-   "candidates": 130,
+   "candidates": 131,
    "backups": [
     {
-     "name": "Blossoming Bogbeast",
-     "delta": -8.86571428571429,
-     "from": "Witherbloom Witchcraft precon (C21; ManaBox scan 2026-09-08, confirmed)",
-     "type": "Creature \u2014 Beast",
-     "incl": 0.17064,
-     "rank": 4019
+     "name": "Pestilence Demon",
+     "delta": -6.7557142857142765,
+     "from": "loose collection (ManaBox scan or typed batch; printed in DDR Duel Decks: Nissa vs. Ob Nixilis)",
+     "type": "Creature \u2014 Demon",
+     "incl": 0,
+     "rank": 10273
     },
     {
-     "name": "Verdant Sun's Avatar",
-     "delta": -8.937142857142874,
-     "from": "Witherbloom Witchcraft precon \u2014 UNCONFIRMED (registered from the Archidekt C21 list 2026-09-09, never scanned; 4 of those 54 have proved missing \u2014 check the box)",
-     "type": "Creature \u2014 Dinosaur Avatar",
-     "incl": 0.123422,
-     "rank": 2179
-    },
-    {
-     "name": "Avenger of Zendikar",
-     "delta": -8.937142857142874,
-     "from": "Omo precon (Tricky Terrain box; sleeved deck dismantled 2026-10-07, confirmed)",
-     "type": "Creature \u2014 Elemental",
-     "incl": 0.114072,
-     "rank": 295
+     "name": "Reiver Demon",
+     "delta": -6.7557142857142765,
+     "from": "loose collection (ManaBox scan or typed batch; printed in CMA Commander Anthology)",
+     "type": "Creature \u2014 Demon",
+     "incl": 0,
+     "rank": 10821
     }
    ]
   },
@@ -1747,31 +1698,31 @@
    "roles": [
     "board_wipe"
    ],
-   "candidates": 5,
+   "candidates": 6,
    "backups": [
     {
      "name": "Golgari Charm",
-     "delta": -0.035714285714291805,
+     "delta": 0.0035714285714334437,
      "from": "Meren (dismantled)",
      "type": "Instant",
      "incl": 0.139785,
      "rank": 1621
     },
     {
-     "name": "Pestilence Demon",
-     "delta": -0.0035714285714334437,
-     "from": "loose collection (ManaBox scan or typed batch; printed in DDR Duel Decks: Nissa vs. Ob Nixilis)",
-     "type": "Creature \u2014 Demon",
+     "name": "Deadly Tempest",
+     "delta": 0.017857142857153008,
+     "from": "Witherbloom Witchcraft precon \u2014 UNCONFIRMED (registered from the Archidekt C21 list 2026-09-09, never scanned; 4 of those 54 have proved missing \u2014 check the box)",
+     "type": "Sorcery",
      "incl": 0,
-     "rank": 10273
+     "rank": 3757
     },
     {
-     "name": "Reiver Demon",
-     "delta": -0.0035714285714334437,
-     "from": "loose collection (ManaBox scan or typed batch; printed in CMA Commander Anthology)",
-     "type": "Creature \u2014 Demon",
+     "name": "Overwhelming Forces",
+     "delta": 0.01071428571428612,
+     "from": "OTJ box (Outlaws of Thunder Junction, typed in 2026-09-08)",
+     "type": "Sorcery",
      "incl": 0,
-     "rank": 10821
+     "rank": 10064
     }
    ]
   },
@@ -1780,11 +1731,11 @@
    "roles": [
     "utility"
    ],
-   "candidates": 206,
+   "candidates": 205,
    "backups": [
     {
      "name": "Blech, Loafing Pest",
-     "delta": -0.046428571428577925,
+     "delta": -0.06785714285713595,
      "from": "loose collection (ManaBox scan or typed batch; printed in SOS Secrets of Strixhaven)",
      "type": "Legendary Creature \u2014 Pest",
      "incl": 0.16503,
@@ -1792,7 +1743,7 @@
     },
     {
      "name": "Victimize",
-     "delta": -0.046428571428577925,
+     "delta": -0.06785714285713595,
      "from": "Meren (dismantled)",
      "type": "Sorcery",
      "incl": 0.154278,
@@ -1800,7 +1751,7 @@
     },
     {
      "name": "Moseo, Vein's New Dean",
-     "delta": -0.046428571428577925,
+     "delta": -0.06785714285713595,
      "from": "loose collection (ManaBox scan or typed batch; printed in SOS Secrets of Strixhaven)",
      "type": "Legendary Creature \u2014 Bird Skeleton Warlock",
      "incl": 0.142122,
@@ -1813,8 +1764,16 @@
    "roles": [
     "removal"
    ],
-   "candidates": 58,
+   "candidates": 59,
    "backups": [
+    {
+     "name": "Vilis, Broker of Blood",
+     "delta": -0.017857142857138797,
+     "from": "loose collection (ManaBox scan or typed batch; printed in M20 Core Set 2020)",
+     "type": "Legendary Creature \u2014 Demon",
+     "incl": 0.301543,
+     "rank": 1124
+    },
     {
      "name": "Deadly Brew",
      "delta": 0,
@@ -1824,20 +1783,12 @@
      "rank": 4763
     },
     {
-     "name": "Immoral Bargain",
-     "delta": 0.01071428571428612,
-     "from": "loose collection (ManaBox scan or typed batch; printed in SOC Secrets of Strixhaven Commander)",
-     "type": "Sorcery",
-     "incl": 0.13698,
-     "rank": 6642
-    },
-    {
-     "name": "Witherbloom Command",
+     "name": "Witherbloom Charm",
      "delta": 0,
-     "from": "loose collection (ManaBox scan or typed batch; printed in STX Strixhaven: School of Mages)",
-     "type": "Sorcery",
-     "incl": 0.098177,
-     "rank": 8549
+     "from": "loose collection (ManaBox scan or typed batch; printed in SOS Secrets of Strixhaven)",
+     "type": "Instant",
+     "incl": 0.158485,
+     "rank": 4841
     }
    ]
   },
@@ -1863,6 +1814,14 @@
      "type": "Enchantment",
      "incl": 0,
      "rank": 4480
+    },
+    {
+     "name": "Warg Tactics",
+     "delta": 0.02142857142857224,
+     "from": "loose collection (ManaBox scan or typed batch; printed in HOB The Hobbit)",
+     "type": "Instant",
+     "incl": 0,
+     "rank": 15809
     }
    ]
   },
@@ -1871,7 +1830,7 @@
    "roles": [
     "utility"
    ],
-   "candidates": 206,
+   "candidates": 205,
    "backups": [
     {
      "name": "Blech, Loafing Pest",
@@ -1899,36 +1858,36 @@
     }
    ]
   },
-  "Alhammarret's Archive": {
-   "from": "Witherbloom Witchcraft precon \u2014 UNCONFIRMED (registered from the Archidekt C21 list 2026-09-09, never scanned; 4 of those 54 have proved missing \u2014 check the box)",
+  "Omnipresence": {
+   "from": "loose collection (ManaBox scan or typed batch; printed in FRA Reality Fracture)",
    "roles": [
-    "draw"
+    "utility"
    ],
-   "candidates": 98,
+   "candidates": 205,
    "backups": [
     {
-     "name": "Village Rites",
-     "delta": -0.04285714285714448,
+     "name": "Blech, Loafing Pest",
+     "delta": 0.01071428571428612,
+     "from": "loose collection (ManaBox scan or typed batch; printed in SOS Secrets of Strixhaven)",
+     "type": "Legendary Creature \u2014 Pest",
+     "incl": 0.16503,
+     "rank": 7292
+    },
+    {
+     "name": "Victimize",
+     "delta": 0.01071428571428612,
      "from": "Meren (dismantled)",
-     "type": "Instant",
-     "incl": 0.355774,
-     "rank": 202
-    },
-    {
-     "name": "Corrupted Conviction",
-     "delta": -0.04285714285714448,
-     "from": "OTJ box (Outlaws of Thunder Junction, typed in 2026-09-08)",
-     "type": "Instant",
-     "incl": 0.120617,
-     "rank": 599
-    },
-    {
-     "name": "Night's Whisper",
-     "delta": 0.007142857142852677,
-     "from": "loose collection (ManaBox scan or typed batch; printed in ECC Lorwyn Eclipsed Commander)",
      "type": "Sorcery",
-     "incl": 0.113604,
-     "rank": 182
+     "incl": 0.154278,
+     "rank": 129
+    },
+    {
+     "name": "Moseo, Vein's New Dean",
+     "delta": 0.01071428571428612,
+     "from": "loose collection (ManaBox scan or typed batch; printed in SOS Secrets of Strixhaven)",
+     "type": "Legendary Creature \u2014 Bird Skeleton Warlock",
+     "incl": 0.142122,
+     "rank": 4268
     }
    ]
   },
@@ -1937,11 +1896,11 @@
    "roles": [
     "utility"
    ],
-   "candidates": 206,
+   "candidates": 205,
    "backups": [
     {
      "name": "Blech, Loafing Pest",
-     "delta": 0.014285714285719564,
+     "delta": -0.003571428571419233,
      "from": "loose collection (ManaBox scan or typed batch; printed in SOS Secrets of Strixhaven)",
      "type": "Legendary Creature \u2014 Pest",
      "incl": 0.16503,
@@ -1949,7 +1908,7 @@
     },
     {
      "name": "Moseo, Vein's New Dean",
-     "delta": 0.014285714285719564,
+     "delta": -0.007142857142852677,
      "from": "loose collection (ManaBox scan or typed batch; printed in SOS Secrets of Strixhaven)",
      "type": "Legendary Creature \u2014 Bird Skeleton Warlock",
      "incl": 0.142122,
@@ -1957,7 +1916,7 @@
     },
     {
      "name": "Woe Strider",
-     "delta": 0.014285714285719564,
+     "delta": -0.007142857142852677,
      "from": "Meren (dismantled)",
      "type": "Creature \u2014 Horror",
      "incl": 0.141655,
@@ -1965,37 +1924,36 @@
     }
    ]
   },
-  "Argentum Masticore": {
-   "from": "loose collection (ManaBox scan or typed batch; printed in ONE Phyrexia: All Will Be One)",
+  "Yahenni, Undying Partisan": {
+   "from": "Meren (dismantled)",
    "roles": [
-    "removal",
-    "win_condition"
+    "protection"
    ],
-   "candidates": 174,
+   "candidates": 8,
    "backups": [
     {
-     "name": "Deadly Brew",
-     "delta": -0.0535714285714306,
-     "from": "loose collection (ManaBox scan or typed batch; printed in FDN Foundations)",
-     "type": "Sorcery",
-     "incl": 0.204769,
-     "rank": 4763
+     "name": "Silkguard",
+     "delta": 1.007857142857148,
+     "from": "Quandrix Unlimited precon (SOC; in hand since 2026-10-02, registered from its list)",
+     "type": "Instant",
+     "incl": 0,
+     "rank": 2346
     },
     {
-     "name": "Blossoming Bogbeast",
-     "delta": 0,
-     "from": "Witherbloom Witchcraft precon (C21; ManaBox scan 2026-09-08, confirmed)",
-     "type": "Creature \u2014 Beast",
-     "incl": 0.17064,
-     "rank": 4019
+     "name": "Helix Pinnacle",
+     "delta": 1.007857142857148,
+     "from": "loose collection (ManaBox scan or typed batch; printed in EVE Eventide)",
+     "type": "Enchantment",
+     "incl": 0,
+     "rank": 4480
     },
     {
-     "name": "Immoral Bargain",
-     "delta": -0.017857142857138797,
-     "from": "loose collection (ManaBox scan or typed batch; printed in SOC Secrets of Strixhaven Commander)",
-     "type": "Sorcery",
-     "incl": 0.13698,
-     "rank": 6642
+     "name": "Warg Tactics",
+     "delta": 1.018571428571434,
+     "from": "loose collection (ManaBox scan or typed batch; printed in HOB The Hobbit)",
+     "type": "Instant",
+     "incl": 0,
+     "rank": 15809
     }
    ]
   },
@@ -2004,31 +1962,23 @@
    "roles": [
     "win_condition"
    ],
-   "candidates": 130,
+   "candidates": 131,
    "backups": [
     {
-     "name": "Blossoming Bogbeast",
-     "delta": 0,
-     "from": "Witherbloom Witchcraft precon (C21; ManaBox scan 2026-09-08, confirmed)",
-     "type": "Creature \u2014 Beast",
-     "incl": 0.17064,
-     "rank": 4019
+     "name": "Pestilence Demon",
+     "delta": 1.8928571428571388,
+     "from": "loose collection (ManaBox scan or typed batch; printed in DDR Duel Decks: Nissa vs. Ob Nixilis)",
+     "type": "Creature \u2014 Demon",
+     "incl": 0,
+     "rank": 10273
     },
     {
-     "name": "Verdant Sun's Avatar",
-     "delta": -0.06071428571428328,
-     "from": "Witherbloom Witchcraft precon \u2014 UNCONFIRMED (registered from the Archidekt C21 list 2026-09-09, never scanned; 4 of those 54 have proved missing \u2014 check the box)",
-     "type": "Creature \u2014 Dinosaur Avatar",
-     "incl": 0.123422,
-     "rank": 2179
-    },
-    {
-     "name": "Avenger of Zendikar",
-     "delta": -0.06071428571428328,
-     "from": "Omo precon (Tricky Terrain box; sleeved deck dismantled 2026-10-07, confirmed)",
-     "type": "Creature \u2014 Elemental",
-     "incl": 0.114072,
-     "rank": 295
+     "name": "Reiver Demon",
+     "delta": 1.8928571428571388,
+     "from": "loose collection (ManaBox scan or typed batch; printed in CMA Commander Anthology)",
+     "type": "Creature \u2014 Demon",
+     "incl": 0,
+     "rank": 10821
     }
    ]
   },
@@ -2038,16 +1988,8 @@
    "roles": [
     "utility"
    ],
-   "candidates": 206,
+   "candidates": 205,
    "backups": [
-    {
-     "name": "Blech, Loafing Pest",
-     "delta": 0,
-     "from": "loose collection (ManaBox scan or typed batch; printed in SOS Secrets of Strixhaven)",
-     "type": "Legendary Creature \u2014 Pest",
-     "incl": 0.16503,
-     "rank": 7292
-    },
     {
      "name": "Moseo, Vein's New Dean",
      "delta": 0,
@@ -2063,6 +2005,14 @@
      "type": "Creature \u2014 Horror",
      "incl": 0.141655,
      "rank": 1683
+    },
+    {
+     "name": "Jadar, Ghoulcaller of Nephalia",
+     "delta": 0.014285714285719564,
+     "from": "Meren (dismantled)",
+     "type": "Legendary Creature \u2014 Human Wizard",
+     "incl": 0,
+     "rank": 1336
     }
    ]
   },
@@ -2072,31 +2022,23 @@
     "ramp",
     "draw"
    ],
-   "candidates": 195,
+   "candidates": 196,
    "backups": [
     {
-     "name": "Rampant Growth",
-     "delta": 0,
-     "from": "Witherbloom Witchcraft precon \u2014 UNCONFIRMED (registered from the Archidekt C21 list 2026-09-09, never scanned; 4 of those 54 have proved missing \u2014 check the box)",
+     "name": "Overwhelming Forces",
+     "delta": 3.8321428571428555,
+     "from": "OTJ box (Outlaws of Thunder Junction, typed in 2026-09-08)",
      "type": "Sorcery",
-     "incl": 0.529219,
-     "rank": 27
+     "incl": 0,
+     "rank": 10064
     },
     {
-     "name": "Village Rites",
-     "delta": -0.1071428571428612,
-     "from": "Meren (dismantled)",
-     "type": "Instant",
-     "incl": 0.355774,
-     "rank": 202
-    },
-    {
-     "name": "Wight of the Reliquary",
-     "delta": -0.02142857142857224,
-     "from": "Meren (dismantled)",
-     "type": "Creature \u2014 Zombie Knight",
-     "incl": 0.267415,
-     "rank": 1266
+     "name": "The Echoverse Fulcrum",
+     "delta": 3.857142857142861,
+     "from": "loose collection (ManaBox scan or typed batch; printed in FRA Reality Fracture)",
+     "type": "Legendary Artifact",
+     "incl": 0,
+     "rank": 22908
     }
    ]
   },
@@ -2105,31 +2047,23 @@
    "roles": [
     "win_condition"
    ],
-   "candidates": 130,
+   "candidates": 131,
    "backups": [
     {
-     "name": "Blossoming Bogbeast",
-     "delta": 0,
-     "from": "Witherbloom Witchcraft precon (C21; ManaBox scan 2026-09-08, confirmed)",
-     "type": "Creature \u2014 Beast",
-     "incl": 0.17064,
-     "rank": 4019
+     "name": "Pestilence Demon",
+     "delta": 1.971428571428575,
+     "from": "loose collection (ManaBox scan or typed batch; printed in DDR Duel Decks: Nissa vs. Ob Nixilis)",
+     "type": "Creature \u2014 Demon",
+     "incl": 0,
+     "rank": 10273
     },
     {
-     "name": "Verdant Sun's Avatar",
-     "delta": 0.0035714285714334437,
-     "from": "Witherbloom Witchcraft precon \u2014 UNCONFIRMED (registered from the Archidekt C21 list 2026-09-09, never scanned; 4 of those 54 have proved missing \u2014 check the box)",
-     "type": "Creature \u2014 Dinosaur Avatar",
-     "incl": 0.123422,
-     "rank": 2179
-    },
-    {
-     "name": "Avenger of Zendikar",
-     "delta": 0.0035714285714334437,
-     "from": "Omo precon (Tricky Terrain box; sleeved deck dismantled 2026-10-07, confirmed)",
-     "type": "Creature \u2014 Elemental",
-     "incl": 0.114072,
-     "rank": 295
+     "name": "Reiver Demon",
+     "delta": 1.971428571428575,
+     "from": "loose collection (ManaBox scan or typed batch; printed in CMA Commander Anthology)",
+     "type": "Creature \u2014 Demon",
+     "incl": 0,
+     "rank": 10821
     }
    ]
   },
@@ -2138,7 +2072,7 @@
    "roles": [
     "utility"
    ],
-   "candidates": 206,
+   "candidates": 205,
    "backups": [
     {
      "name": "Blech, Loafing Pest",
@@ -2175,7 +2109,7 @@
    "backups": [
     {
      "name": "Silkguard",
-     "delta": -0.028571428571424917,
+     "delta": -0.024999999999991473,
      "from": "Quandrix Unlimited precon (SOC; in hand since 2026-10-02, registered from its list)",
      "type": "Instant",
      "incl": 0,
@@ -2183,11 +2117,19 @@
     },
     {
      "name": "Helix Pinnacle",
-     "delta": -0.028571428571424917,
+     "delta": -0.024999999999991473,
      "from": "loose collection (ManaBox scan or typed batch; printed in EVE Eventide)",
      "type": "Enchantment",
      "incl": 0,
      "rank": 4480
+    },
+    {
+     "name": "Warg Tactics",
+     "delta": -0.003571428571419233,
+     "from": "loose collection (ManaBox scan or typed batch; printed in HOB The Hobbit)",
+     "type": "Instant",
+     "incl": 0,
+     "rank": 15809
     }
    ]
   },
@@ -2197,31 +2139,23 @@
    "roles": [
     "draw"
    ],
-   "candidates": 98,
+   "candidates": 99,
    "backups": [
     {
-     "name": "Village Rites",
-     "delta": -0.04285714285714448,
-     "from": "Meren (dismantled)",
-     "type": "Instant",
-     "incl": 0.355774,
-     "rank": 202
-    },
-    {
-     "name": "Corrupted Conviction",
-     "delta": -0.04285714285714448,
+     "name": "Overwhelming Forces",
+     "delta": 1.9678571428571416,
      "from": "OTJ box (Outlaws of Thunder Junction, typed in 2026-09-08)",
-     "type": "Instant",
-     "incl": 0.120617,
-     "rank": 599
+     "type": "Sorcery",
+     "incl": 0,
+     "rank": 10064
     },
     {
-     "name": "Night's Whisper",
-     "delta": -0.007142857142852677,
-     "from": "loose collection (ManaBox scan or typed batch; printed in ECC Lorwyn Eclipsed Commander)",
-     "type": "Sorcery",
-     "incl": 0.113604,
-     "rank": 182
+     "name": "The Echoverse Fulcrum",
+     "delta": 2,
+     "from": "loose collection (ManaBox scan or typed batch; printed in FRA Reality Fracture)",
+     "type": "Legendary Artifact",
+     "incl": 0,
+     "rank": 22908
     }
    ]
   },
@@ -2250,7 +2184,7 @@
     },
     {
      "name": "Skyshroud Claim",
-     "delta": 0.035714285714291805,
+     "delta": 0.028571428571424917,
      "from": "loose collection (ManaBox scan or typed batch; printed in EOC Edge of Eternities Commander)",
      "type": "Sorcery",
      "incl": 0.265545,
@@ -2263,16 +2197,8 @@
    "roles": [
     "utility"
    ],
-   "candidates": 206,
+   "candidates": 205,
    "backups": [
-    {
-     "name": "Blech, Loafing Pest",
-     "delta": 0,
-     "from": "loose collection (ManaBox scan or typed batch; printed in SOS Secrets of Strixhaven)",
-     "type": "Legendary Creature \u2014 Pest",
-     "incl": 0.16503,
-     "rank": 7292
-    },
     {
      "name": "Moseo, Vein's New Dean",
      "delta": 0,
@@ -2288,6 +2214,14 @@
      "type": "Creature \u2014 Horror",
      "incl": 0.141655,
      "rank": 1683
+    },
+    {
+     "name": "Jadar, Ghoulcaller of Nephalia",
+     "delta": 0.01071428571428612,
+     "from": "Meren (dismantled)",
+     "type": "Legendary Creature \u2014 Human Wizard",
+     "incl": 0,
+     "rank": 1336
     }
    ]
   },
@@ -2296,31 +2230,23 @@
    "roles": [
     "draw"
    ],
-   "candidates": 98,
+   "candidates": 99,
    "backups": [
     {
-     "name": "Village Rites",
-     "delta": -0.0035714285714334437,
-     "from": "Meren (dismantled)",
-     "type": "Instant",
-     "incl": 0.355774,
-     "rank": 202
-    },
-    {
-     "name": "Corrupted Conviction",
-     "delta": -0.0035714285714334437,
+     "name": "Overwhelming Forces",
+     "delta": 1.9892857142857139,
      "from": "OTJ box (Outlaws of Thunder Junction, typed in 2026-09-08)",
-     "type": "Instant",
-     "incl": 0.120617,
-     "rank": 599
+     "type": "Sorcery",
+     "incl": 0,
+     "rank": 10064
     },
     {
-     "name": "Night's Whisper",
-     "delta": 0.0035714285714334437,
-     "from": "loose collection (ManaBox scan or typed batch; printed in ECC Lorwyn Eclipsed Commander)",
-     "type": "Sorcery",
-     "incl": 0.113604,
-     "rank": 182
+     "name": "The Echoverse Fulcrum",
+     "delta": 2.028571428571425,
+     "from": "loose collection (ManaBox scan or typed batch; printed in FRA Reality Fracture)",
+     "type": "Legendary Artifact",
+     "incl": 0,
+     "rank": 22908
     }
    ]
   },
@@ -2329,7 +2255,7 @@
    "roles": [
     "utility"
    ],
-   "candidates": 206,
+   "candidates": 205,
    "backups": [
     {
      "name": "Blech, Loafing Pest",
@@ -2363,31 +2289,23 @@
     "ramp",
     "draw"
    ],
-   "candidates": 195,
+   "candidates": 196,
    "backups": [
     {
-     "name": "Rampant Growth",
-     "delta": 0.06785714285713595,
-     "from": "Witherbloom Witchcraft precon \u2014 UNCONFIRMED (registered from the Archidekt C21 list 2026-09-09, never scanned; 4 of those 54 have proved missing \u2014 check the box)",
+     "name": "Overwhelming Forces",
+     "delta": 3.9750000000000085,
+     "from": "OTJ box (Outlaws of Thunder Junction, typed in 2026-09-08)",
      "type": "Sorcery",
-     "incl": 0.529219,
-     "rank": 27
+     "incl": 0,
+     "rank": 10064
     },
     {
-     "name": "Village Rites",
-     "delta": -0.014285714285719564,
-     "from": "Meren (dismantled)",
-     "type": "Instant",
-     "incl": 0.355774,
-     "rank": 202
-    },
-    {
-     "name": "Wight of the Reliquary",
-     "delta": 0.057142857142864045,
-     "from": "Meren (dismantled)",
-     "type": "Creature \u2014 Zombie Knight",
-     "incl": 0.267415,
-     "rank": 1266
+     "name": "The Echoverse Fulcrum",
+     "delta": 4,
+     "from": "loose collection (ManaBox scan or typed batch; printed in FRA Reality Fracture)",
+     "type": "Legendary Artifact",
+     "incl": 0,
+     "rank": 22908
     }
    ]
   },
@@ -2396,31 +2314,23 @@
    "roles": [
     "win_condition"
    ],
-   "candidates": 130,
+   "candidates": 131,
    "backups": [
     {
-     "name": "Blossoming Bogbeast",
-     "delta": 0.014285714285719564,
-     "from": "Witherbloom Witchcraft precon (C21; ManaBox scan 2026-09-08, confirmed)",
-     "type": "Creature \u2014 Beast",
-     "incl": 0.17064,
-     "rank": 4019
+     "name": "Pestilence Demon",
+     "delta": 1.960714285714289,
+     "from": "loose collection (ManaBox scan or typed batch; printed in DDR Duel Decks: Nissa vs. Ob Nixilis)",
+     "type": "Creature \u2014 Demon",
+     "incl": 0,
+     "rank": 10273
     },
     {
-     "name": "Verdant Sun's Avatar",
-     "delta": -0.03928571428571104,
-     "from": "Witherbloom Witchcraft precon \u2014 UNCONFIRMED (registered from the Archidekt C21 list 2026-09-09, never scanned; 4 of those 54 have proved missing \u2014 check the box)",
-     "type": "Creature \u2014 Dinosaur Avatar",
-     "incl": 0.123422,
-     "rank": 2179
-    },
-    {
-     "name": "Avenger of Zendikar",
-     "delta": -0.03928571428571104,
-     "from": "Omo precon (Tricky Terrain box; sleeved deck dismantled 2026-10-07, confirmed)",
-     "type": "Creature \u2014 Elemental",
-     "incl": 0.114072,
-     "rank": 295
+     "name": "Reiver Demon",
+     "delta": 1.960714285714289,
+     "from": "loose collection (ManaBox scan or typed batch; printed in CMA Commander Anthology)",
+     "type": "Creature \u2014 Demon",
+     "incl": 0,
+     "rank": 10821
     }
    ]
   },
@@ -2430,31 +2340,23 @@
    "roles": [
     "draw"
    ],
-   "candidates": 98,
+   "candidates": 99,
    "backups": [
     {
-     "name": "Village Rites",
-     "delta": -0.04285714285714448,
-     "from": "Meren (dismantled)",
-     "type": "Instant",
-     "incl": 0.355774,
-     "rank": 202
-    },
-    {
-     "name": "Corrupted Conviction",
-     "delta": -0.04285714285714448,
+     "name": "Overwhelming Forces",
+     "delta": 1.971428571428575,
      "from": "OTJ box (Outlaws of Thunder Junction, typed in 2026-09-08)",
-     "type": "Instant",
-     "incl": 0.120617,
-     "rank": 599
+     "type": "Sorcery",
+     "incl": 0,
+     "rank": 10064
     },
     {
-     "name": "Night's Whisper",
-     "delta": -0.0035714285714334437,
-     "from": "loose collection (ManaBox scan or typed batch; printed in ECC Lorwyn Eclipsed Commander)",
-     "type": "Sorcery",
-     "incl": 0.113604,
-     "rank": 182
+     "name": "The Echoverse Fulcrum",
+     "delta": 2,
+     "from": "loose collection (ManaBox scan or typed batch; printed in FRA Reality Fracture)",
+     "type": "Legendary Artifact",
+     "incl": 0,
+     "rank": 22908
     }
    ]
   },
@@ -2464,31 +2366,23 @@
     "removal",
     "win_condition"
    ],
-   "candidates": 174,
+   "candidates": 175,
    "backups": [
     {
-     "name": "Deadly Brew",
-     "delta": -0.08571428571428896,
-     "from": "loose collection (ManaBox scan or typed batch; printed in FDN Foundations)",
-     "type": "Sorcery",
-     "incl": 0.204769,
-     "rank": 4763
+     "name": "Pestilence Demon",
+     "delta": 1.9178571428571445,
+     "from": "loose collection (ManaBox scan or typed batch; printed in DDR Duel Decks: Nissa vs. Ob Nixilis)",
+     "type": "Creature \u2014 Demon",
+     "incl": 0,
+     "rank": 10273
     },
     {
-     "name": "Blossoming Bogbeast",
-     "delta": 0,
-     "from": "Witherbloom Witchcraft precon (C21; ManaBox scan 2026-09-08, confirmed)",
-     "type": "Creature \u2014 Beast",
-     "incl": 0.17064,
-     "rank": 4019
-    },
-    {
-     "name": "Immoral Bargain",
-     "delta": -0.07500000000000284,
-     "from": "loose collection (ManaBox scan or typed batch; printed in SOC Secrets of Strixhaven Commander)",
-     "type": "Sorcery",
-     "incl": 0.13698,
-     "rank": 6642
+     "name": "Reiver Demon",
+     "delta": 1.9178571428571445,
+     "from": "loose collection (ManaBox scan or typed batch; printed in CMA Commander Anthology)",
+     "type": "Creature \u2014 Demon",
+     "incl": 0,
+     "rank": 10821
     }
    ]
   },
@@ -2497,31 +2391,23 @@
    "roles": [
     "draw"
    ],
-   "candidates": 98,
+   "candidates": 99,
    "backups": [
     {
-     "name": "Village Rites",
-     "delta": -0.0714285714285694,
-     "from": "Meren (dismantled)",
-     "type": "Instant",
-     "incl": 0.355774,
-     "rank": 202
-    },
-    {
-     "name": "Corrupted Conviction",
-     "delta": -0.0714285714285694,
+     "name": "Overwhelming Forces",
+     "delta": 1.9535714285714363,
      "from": "OTJ box (Outlaws of Thunder Junction, typed in 2026-09-08)",
-     "type": "Instant",
-     "incl": 0.120617,
-     "rank": 599
+     "type": "Sorcery",
+     "incl": 0,
+     "rank": 10064
     },
     {
-     "name": "Night's Whisper",
-     "delta": -0.04285714285714448,
-     "from": "loose collection (ManaBox scan or typed batch; printed in ECC Lorwyn Eclipsed Commander)",
-     "type": "Sorcery",
-     "incl": 0.113604,
-     "rank": 182
+     "name": "The Echoverse Fulcrum",
+     "delta": 1.9535714285714363,
+     "from": "loose collection (ManaBox scan or typed batch; printed in FRA Reality Fracture)",
+     "type": "Legendary Artifact",
+     "incl": 0,
+     "rank": 22908
     }
    ]
   },
@@ -2531,31 +2417,23 @@
    "roles": [
     "win_condition"
    ],
-   "candidates": 130,
+   "candidates": 131,
    "backups": [
     {
-     "name": "Blossoming Bogbeast",
-     "delta": 0,
-     "from": "Witherbloom Witchcraft precon (C21; ManaBox scan 2026-09-08, confirmed)",
-     "type": "Creature \u2014 Beast",
-     "incl": 0.17064,
-     "rank": 4019
+     "name": "Pestilence Demon",
+     "delta": 1.9357142857142833,
+     "from": "loose collection (ManaBox scan or typed batch; printed in DDR Duel Decks: Nissa vs. Ob Nixilis)",
+     "type": "Creature \u2014 Demon",
+     "incl": 0,
+     "rank": 10273
     },
     {
-     "name": "Verdant Sun's Avatar",
-     "delta": -0.06428571428571672,
-     "from": "Witherbloom Witchcraft precon \u2014 UNCONFIRMED (registered from the Archidekt C21 list 2026-09-09, never scanned; 4 of those 54 have proved missing \u2014 check the box)",
-     "type": "Creature \u2014 Dinosaur Avatar",
-     "incl": 0.123422,
-     "rank": 2179
-    },
-    {
-     "name": "Avenger of Zendikar",
-     "delta": -0.06428571428571672,
-     "from": "Omo precon (Tricky Terrain box; sleeved deck dismantled 2026-10-07, confirmed)",
-     "type": "Creature \u2014 Elemental",
-     "incl": 0.114072,
-     "rank": 295
+     "name": "Reiver Demon",
+     "delta": 1.9357142857142833,
+     "from": "loose collection (ManaBox scan or typed batch; printed in CMA Commander Anthology)",
+     "type": "Creature \u2014 Demon",
+     "incl": 0,
+     "rank": 10821
     }
    ]
   },
@@ -2564,31 +2442,31 @@
    "roles": [
     "removal"
    ],
-   "candidates": 58,
+   "candidates": 59,
    "backups": [
     {
+     "name": "Vilis, Broker of Blood",
+     "delta": -0.02142857142857224,
+     "from": "loose collection (ManaBox scan or typed batch; printed in M20 Core Set 2020)",
+     "type": "Legendary Creature \u2014 Demon",
+     "incl": 0.301543,
+     "rank": 1124
+    },
+    {
      "name": "Deadly Brew",
-     "delta": -0.01071428571428612,
+     "delta": -0.003571428571419233,
      "from": "loose collection (ManaBox scan or typed batch; printed in FDN Foundations)",
      "type": "Sorcery",
      "incl": 0.204769,
      "rank": 4763
     },
     {
-     "name": "Immoral Bargain",
-     "delta": 0,
-     "from": "loose collection (ManaBox scan or typed batch; printed in SOC Secrets of Strixhaven Commander)",
-     "type": "Sorcery",
-     "incl": 0.13698,
-     "rank": 6642
-    },
-    {
-     "name": "Witherbloom Command",
-     "delta": -0.01071428571428612,
-     "from": "loose collection (ManaBox scan or typed batch; printed in STX Strixhaven: School of Mages)",
-     "type": "Sorcery",
-     "incl": 0.098177,
-     "rank": 8549
+     "name": "Witherbloom Charm",
+     "delta": -0.003571428571419233,
+     "from": "loose collection (ManaBox scan or typed batch; printed in SOS Secrets of Strixhaven)",
+     "type": "Instant",
+     "incl": 0.158485,
+     "rank": 4841
     }
    ]
   },
@@ -2630,7 +2508,7 @@
    "roles": [
     "utility"
    ],
-   "candidates": 206,
+   "candidates": 205,
    "backups": [
     {
      "name": "Blech, Loafing Pest",
@@ -2663,31 +2541,23 @@
    "roles": [
     "draw"
    ],
-   "candidates": 98,
+   "candidates": 99,
    "backups": [
     {
-     "name": "Village Rites",
-     "delta": -0.057142857142849834,
-     "from": "Meren (dismantled)",
-     "type": "Instant",
-     "incl": 0.355774,
-     "rank": 202
-    },
-    {
-     "name": "Corrupted Conviction",
-     "delta": -0.057142857142849834,
+     "name": "Overwhelming Forces",
+     "delta": 1.9892857142857139,
      "from": "OTJ box (Outlaws of Thunder Junction, typed in 2026-09-08)",
-     "type": "Instant",
-     "incl": 0.120617,
-     "rank": 599
+     "type": "Sorcery",
+     "incl": 0,
+     "rank": 10064
     },
     {
-     "name": "Night's Whisper",
-     "delta": -0.02142857142857224,
-     "from": "loose collection (ManaBox scan or typed batch; printed in ECC Lorwyn Eclipsed Commander)",
-     "type": "Sorcery",
-     "incl": 0.113604,
-     "rank": 182
+     "name": "The Echoverse Fulcrum",
+     "delta": 1.9750000000000085,
+     "from": "loose collection (ManaBox scan or typed batch; printed in FRA Reality Fracture)",
+     "type": "Legendary Artifact",
+     "incl": 0,
+     "rank": 22908
     }
    ]
   },
@@ -2700,7 +2570,7 @@
    "backups": [
     {
      "name": "Forest",
-     "delta": -0.0035714285714334437,
+     "delta": -0.003571428571419233,
      "from": "Meren (dismantled)",
      "type": "Basic Land \u2014 Forest",
      "incl": 0.920056,
@@ -2708,7 +2578,7 @@
     },
     {
      "name": "Swamp",
-     "delta": -0.0035714285714334437,
+     "delta": -0.003571428571419233,
      "from": "Meren (dismantled)",
      "type": "Basic Land \u2014 Swamp",
      "incl": 0.913511,
@@ -2729,31 +2599,23 @@
    "roles": [
     "win_condition"
    ],
-   "candidates": 130,
+   "candidates": 131,
    "backups": [
     {
-     "name": "Blossoming Bogbeast",
-     "delta": -0.01071428571428612,
-     "from": "Witherbloom Witchcraft precon (C21; ManaBox scan 2026-09-08, confirmed)",
-     "type": "Creature \u2014 Beast",
-     "incl": 0.17064,
-     "rank": 4019
+     "name": "Pestilence Demon",
+     "delta": 1.9535714285714363,
+     "from": "loose collection (ManaBox scan or typed batch; printed in DDR Duel Decks: Nissa vs. Ob Nixilis)",
+     "type": "Creature \u2014 Demon",
+     "incl": 0,
+     "rank": 10273
     },
     {
-     "name": "Verdant Sun's Avatar",
-     "delta": -0.02142857142857224,
-     "from": "Witherbloom Witchcraft precon \u2014 UNCONFIRMED (registered from the Archidekt C21 list 2026-09-09, never scanned; 4 of those 54 have proved missing \u2014 check the box)",
-     "type": "Creature \u2014 Dinosaur Avatar",
-     "incl": 0.123422,
-     "rank": 2179
-    },
-    {
-     "name": "Avenger of Zendikar",
-     "delta": -0.02142857142857224,
-     "from": "Omo precon (Tricky Terrain box; sleeved deck dismantled 2026-10-07, confirmed)",
-     "type": "Creature \u2014 Elemental",
-     "incl": 0.114072,
-     "rank": 295
+     "name": "Reiver Demon",
+     "delta": 1.9535714285714363,
+     "from": "loose collection (ManaBox scan or typed batch; printed in CMA Commander Anthology)",
+     "type": "Creature \u2014 Demon",
+     "incl": 0,
+     "rank": 10821
     }
    ]
   },
@@ -2762,11 +2624,11 @@
    "roles": [
     "utility"
    ],
-   "candidates": 206,
+   "candidates": 205,
    "backups": [
     {
      "name": "Blech, Loafing Pest",
-     "delta": 0.01071428571428612,
+     "delta": 0,
      "from": "loose collection (ManaBox scan or typed batch; printed in SOS Secrets of Strixhaven)",
      "type": "Legendary Creature \u2014 Pest",
      "incl": 0.16503,
@@ -2800,7 +2662,7 @@
    "backups": [
     {
      "name": "Silkguard",
-     "delta": -0.13928571428571956,
+     "delta": 1.8321428571428555,
      "from": "Quandrix Unlimited precon (SOC; in hand since 2026-10-02, registered from its list)",
      "type": "Instant",
      "incl": 0,
@@ -2808,11 +2670,19 @@
     },
     {
      "name": "Helix Pinnacle",
-     "delta": -0.13928571428571956,
+     "delta": 1.8321428571428555,
      "from": "loose collection (ManaBox scan or typed batch; printed in EVE Eventide)",
      "type": "Enchantment",
      "incl": 0,
      "rank": 4480
+    },
+    {
+     "name": "Warg Tactics",
+     "delta": 1.8250000000000028,
+     "from": "loose collection (ManaBox scan or typed batch; printed in HOB The Hobbit)",
+     "type": "Instant",
+     "incl": 0,
+     "rank": 15809
     }
    ]
   },
@@ -2826,7 +2696,7 @@
    "backups": [
     {
      "name": "Silkguard",
-     "delta": -0.01071428571428612,
+     "delta": -0.014285714285705353,
      "from": "Quandrix Unlimited precon (SOC; in hand since 2026-10-02, registered from its list)",
      "type": "Instant",
      "incl": 0,
@@ -2834,11 +2704,19 @@
     },
     {
      "name": "Helix Pinnacle",
-     "delta": -0.01071428571428612,
+     "delta": -0.014285714285705353,
      "from": "loose collection (ManaBox scan or typed batch; printed in EVE Eventide)",
      "type": "Enchantment",
      "incl": 0,
      "rank": 4480
+    },
+    {
+     "name": "Warg Tactics",
+     "delta": 0.007142857142852677,
+     "from": "loose collection (ManaBox scan or typed batch; printed in HOB The Hobbit)",
+     "type": "Instant",
+     "incl": 0,
+     "rank": 15809
     }
    ]
   },
@@ -2851,7 +2729,7 @@
    "backups": [
     {
      "name": "Reliquary Tower",
-     "delta": -0.0892857142857082,
+     "delta": -0.09642857142857508,
      "from": "Quandrix Unlimited precon (SOC; in hand since 2026-10-02, registered from its list)",
      "type": "Land",
      "incl": 0.292193,
@@ -2859,7 +2737,7 @@
     },
     {
      "name": "Radiant Fountain",
-     "delta": -0.0892857142857082,
+     "delta": -0.09642857142857508,
      "from": "Witherbloom Witchcraft precon \u2014 UNCONFIRMED (registered from the Archidekt C21 list 2026-09-09, never scanned; 4 of those 54 have proved missing \u2014 check the box)",
      "type": "Land",
      "incl": 0.103319,
@@ -2867,7 +2745,7 @@
     },
     {
      "name": "Sapseep Forest",
-     "delta": -0.06428571428571672,
+     "delta": -0.0714285714285694,
      "from": "Witherbloom Witchcraft precon \u2014 UNCONFIRMED (registered from the Archidekt C21 list 2026-09-09, never scanned; 4 of those 54 have proved missing \u2014 check the box)",
      "type": "Land \u2014 Forest",
      "incl": 0.068256,
@@ -2881,31 +2759,23 @@
     "draw",
     "removal"
    ],
-   "candidates": 146,
+   "candidates": 148,
    "backups": [
     {
-     "name": "Village Rites",
-     "delta": 0.0035714285714334437,
-     "from": "Meren (dismantled)",
-     "type": "Instant",
-     "incl": 0.355774,
-     "rank": 202
-    },
-    {
-     "name": "Vilis, Broker of Blood",
-     "delta": -0.01071428571428612,
-     "from": "loose collection (ManaBox scan or typed batch; printed in M20 Core Set 2020)",
-     "type": "Legendary Creature \u2014 Demon",
-     "incl": 0.301543,
-     "rank": 1124
-    },
-    {
-     "name": "Deadly Brew",
-     "delta": 0.014285714285719564,
-     "from": "loose collection (ManaBox scan or typed batch; printed in FDN Foundations)",
+     "name": "Overwhelming Forces",
+     "delta": 1.9857142857142946,
+     "from": "OTJ box (Outlaws of Thunder Junction, typed in 2026-09-08)",
      "type": "Sorcery",
-     "incl": 0.204769,
-     "rank": 4763
+     "incl": 0,
+     "rank": 10064
+    },
+    {
+     "name": "The Echoverse Fulcrum",
+     "delta": 1.9964285714285666,
+     "from": "loose collection (ManaBox scan or typed batch; printed in FRA Reality Fracture)",
+     "type": "Legendary Artifact",
+     "incl": 0,
+     "rank": 22908
     }
    ]
   },
@@ -2914,31 +2784,31 @@
    "roles": [
     "removal"
    ],
-   "candidates": 58,
+   "candidates": 59,
    "backups": [
     {
+     "name": "Vilis, Broker of Blood",
+     "delta": -0.046428571428563714,
+     "from": "loose collection (ManaBox scan or typed batch; printed in M20 Core Set 2020)",
+     "type": "Legendary Creature \u2014 Demon",
+     "incl": 0.301543,
+     "rank": 1124
+    },
+    {
      "name": "Deadly Brew",
-     "delta": -0.017857142857138797,
+     "delta": -0.014285714285705353,
      "from": "loose collection (ManaBox scan or typed batch; printed in FDN Foundations)",
      "type": "Sorcery",
      "incl": 0.204769,
      "rank": 4763
     },
     {
-     "name": "Immoral Bargain",
-     "delta": -0.007142857142852677,
-     "from": "loose collection (ManaBox scan or typed batch; printed in SOC Secrets of Strixhaven Commander)",
-     "type": "Sorcery",
-     "incl": 0.13698,
-     "rank": 6642
-    },
-    {
-     "name": "Witherbloom Command",
-     "delta": -0.017857142857138797,
-     "from": "loose collection (ManaBox scan or typed batch; printed in STX Strixhaven: School of Mages)",
-     "type": "Sorcery",
-     "incl": 0.098177,
-     "rank": 8549
+     "name": "Witherbloom Charm",
+     "delta": -0.014285714285705353,
+     "from": "loose collection (ManaBox scan or typed batch; printed in SOS Secrets of Strixhaven)",
+     "type": "Instant",
+     "incl": 0.158485,
+     "rank": 4841
     }
    ]
   },
@@ -2952,7 +2822,7 @@
    "backups": [
     {
      "name": "Rampant Growth",
-     "delta": 0.15714285714285836,
+     "delta": 0.17499999999999716,
      "from": "Witherbloom Witchcraft precon \u2014 UNCONFIRMED (registered from the Archidekt C21 list 2026-09-09, never scanned; 4 of those 54 have proved missing \u2014 check the box)",
      "type": "Sorcery",
      "incl": 0.529219,
@@ -2960,7 +2830,7 @@
     },
     {
      "name": "Wight of the Reliquary",
-     "delta": 0.11428571428571388,
+     "delta": 0.12857142857143344,
      "from": "Meren (dismantled)",
      "type": "Creature \u2014 Zombie Knight",
      "incl": 0.267415,
@@ -2968,7 +2838,7 @@
     },
     {
      "name": "Skyshroud Claim",
-     "delta": 0.18214285714286405,
+     "delta": 0.1964285714285694,
      "from": "loose collection (ManaBox scan or typed batch; printed in EOC Edge of Eternities Commander)",
      "type": "Sorcery",
      "incl": 0.265545,
