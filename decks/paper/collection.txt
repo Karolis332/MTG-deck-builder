@@ -624,6 +624,7 @@
 1 Harmonized Crescendo
 1 Harmonized Trio
 1 Harper Recruiter
+1 Harrow
 1 Harvest Season
 1 Hashep Oasis
 1 Haste Magic

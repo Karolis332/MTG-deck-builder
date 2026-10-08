@@ -1,0 +1,285 @@
+# EDHREC Beledros Witherbloom — Optimized · Lifegain theme, 33 decks (24 in the 2-colour sub-sample for some rows), read 2026-10-08. section | name | inclusion | decks | of | lift
+Creatures | Omnipresence | 14% | 1 decks | 7 decks | 5.5x
+Creatures | Massacre Girl, Most Wanted | 14% | 1 decks | 7 decks | 5.1x
+Creatures | Verdant Kraken | 14% | 1 decks | 7 decks | 5.1x
+Top Cards | Essence Warden | 82% | 27 decks | 33 decks | 1.8x
+Top Cards | Skullclamp | 82% | 27 decks | 33 decks | 2.2x
+Top Cards | Blood Artist | 73% | 24 decks | 33 decks | 1.4x
+Top Cards | Assassin's Trophy | 73% | 24 decks | 33 decks | 1.3x
+Top Cards | Vito, Thorn of the Dusk Rose | 70% | 23 decks | 33 decks | 1.9x
+Top Cards | Dina, Soul Steeper | 70% | 23 decks | 33 decks | 2.7x
+Top Cards | Heroic Intervention | 70% | 23 decks | 33 decks | 1.8x
+Top Cards | Exquisite Blood | 67% | 22 decks | 33 decks | 1.3x
+Top Cards | Toxic Deluge | 67% | 22 decks | 33 decks | 1.5x
+Top Cards | Nature's Lore | 67% | 22 decks | 33 decks | 2.5x
+High Lift Cards | Razaketh, the Foulblooded | 15% | 5 decks | 33 decks | 13x
+High Lift Cards | Profane Transfusion | 18% | 6 decks | 33 decks | 11x
+High Lift Cards | Vilis, Broker of Blood | 52% | 17 decks | 33 decks | 10x
+High Lift Cards | Krav, the Unredeemed | 12% | 4 decks | 33 decks | 10x
+High Lift Cards | Stinging Study | 33% | 11 decks | 33 decks | 7.9x
+High Lift Cards | Tempt with Discovery | 12% | 4 decks | 33 decks | 6.5x
+High Lift Cards | Skyshroud Claim | 30% | 10 decks | 33 decks | 6.2x
+High Lift Cards | Torment of Hailfire | 48% | 16 decks | 33 decks | 5.5x
+High Lift Cards | Harrow | 18% | 6 decks | 33 decks | 5.2x
+High Lift Cards | Fountainport | 18% | 6 decks | 33 decks | 4.9x
+Creatures | Zulaport Cutthroat | 64% | 21 decks | 33 decks | 1.4x
+Creatures | Prosperous Innkeeper | 64% | 21 decks | 33 decks | 2.1x
+Creatures | Ayara, First of Locthwain | 61% | 20 decks | 33 decks | 3.5x
+Creatures | Mirkwood Bats | 48% | 16 decks | 33 decks | 1.7x
+Creatures | Chatterfang, Squirrel General | 48% | 16 decks | 33 decks | 2.1x
+Creatures | Marauding Blight-Priest | 45% | 15 decks | 33 decks | 1.6x
+Creatures | Warren Soultrader | 45% | 15 decks | 33 decks | 2.3x
+Creatures | Sakura-Tribe Elder | 45% | 15 decks | 33 decks | 1.5x
+Creatures | Viscera Seer | 45% | 15 decks | 33 decks | 1.4x
+Creatures | Savra, Queen of the Golgari | 42% | 14 decks | 33 decks | 3.8x
+Creatures | Wight of the Reliquary | 36% | 12 decks | 33 decks | 2.4x
+Creatures | Yawgmoth, Thran Physician | 36% | 12 decks | 33 decks | 4.6x
+Creatures | Deathrite Shaman | 33% | 11 decks | 33 decks | 1.1x
+Creatures | Enduring Tenacity | 33% | 11 decks | 33 decks | 1.0x
+Creatures | Pitiless Plunderer | 33% | 11 decks | 33 decks | 1.3x
+Creatures | Gala Greeters | 33% | 11 decks | 33 decks | 3.0x
+Creatures | Birds of Paradise | 33% | 11 decks | 33 decks | 1.1x
+Creatures | Eternal Witness | 30% | 10 decks | 33 decks | 1.5x
+Creatures | Nadier's Nightblade | 27% | 9 decks | 33 decks | 2.4x
+Creatures | Braids, Arisen Nightmare | 27% | 9 decks | 33 decks | 2.4x
+Creatures | Bloodthirsty Conqueror | 27% | 9 decks | 33 decks | 0.9x
+Creatures | Bogwater Lumaret | 25% | 6 decks | 24 decks | 1.0x
+Creatures | Sedgemoor Witch | 24% | 8 decks | 33 decks | 1.4x
+Creatures | Scute Swarm | 24% | 8 decks | 33 decks | 1.6x
+Creatures | Sephiroth, Fabled SOLDIER | 23% | 7 decks | 30 decks | 2.2x
+Creatures | Creakwood Liege | 21% | 7 decks | 33 decks | 2.3x
+Creatures | Gray Merchant of Asphodel | 21% | 7 decks | 33 decks | 1.4x
+Creatures | Witherbloom Apprentice | 21% | 7 decks | 33 decks | 0.9x
+Creatures | Llanowar Elves | 18% | 6 decks | 33 decks | 0.6x
+Creatures | Valentin, Dean of the Vein | 18% | 6 decks | 33 decks | 0.8x
+Creatures | Starscape Cleric | 18% | 6 decks | 33 decks | 0.8x
+Creatures | Veinwitch Coven | 18% | 6 decks | 33 decks | 0.9x
+Creatures | Poison-Tip Archer | 18% | 6 decks | 33 decks | 1.1x
+Creatures | Virulent Emissary | 17% | 4 decks | 24 decks | 0.9x
+Creatures | Ribtruss Roaster | 17% | 4 decks | 24 decks | 1.1x
+Creatures | Disciple of Freyalise | 15% | 5 decks | 33 decks | 1.9x
+Creatures | Enduring Vitality | 15% | 5 decks | 33 decks | 2.0x
+Creatures | Woe Strider | 15% | 5 decks | 33 decks | 2.3x
+Creatures | Witch of the Moors | 15% | 5 decks | 33 decks | 0.7x
+Creatures | Tendershoot Dryad | 15% | 5 decks | 33 decks | 1.6x
+Creatures | Delighted Halfling | 15% | 5 decks | 33 decks | 1.5x
+Creatures | Dina, Essence Brewer | 13% | 3 decks | 24 decks | 1.0x
+Creatures | Pest Rescuer | 13% | 3 decks | 24 decks | 0.6x
+Creatures | Eccentric Pestfinder | 13% | 3 decks | 24 decks | 0.8x
+Creatures | Blech, Loafing Pest | 13% | 3 decks | 24 decks | 2.0x
+Creatures | Elvish Mystic | 12% | 4 decks | 33 decks | 0.4x
+Creatures | Ophiomancer | 12% | 4 decks | 33 decks | 0.8x
+Creatures | Craterhoof Behemoth | 12% | 4 decks | 33 decks | 1.6x
+Creatures | Crypt Ghast | 12% | 4 decks | 33 decks | 3.5x
+Creatures | Blex, Vexing Pest | 12% | 4 decks | 33 decks | 1.3x
+Instants | Dark Ritual | 55% | 18 decks | 33 decks | 1.3x
+Instants | Beast Within | 45% | 15 decks | 33 decks | 1.9x
+Instants | Plumb the Forbidden | 45% | 15 decks | 33 decks | 2.8x
+Instants | Mortality Spear | 42% | 14 decks | 33 decks | 1.3x
+Instants | Vampiric Tutor | 42% | 14 decks | 33 decks | 1.2x
+Instants | Crop Rotation | 39% | 13 decks | 33 decks | 2.4x
+Instants | Malakir Rebirth | 36% | 12 decks | 33 decks | 3.2x
+Instants | Fell the Profane | 27% | 9 decks | 33 decks | 3.2x
+Instants | Village Rites | 27% | 9 decks | 33 decks | 1.5x
+Instants | Putrefy | 27% | 9 decks | 33 decks | 1.3x
+Instants | Worldly Tutor | 27% | 9 decks | 33 decks | 0.9x
+Instants | Tend the Pests | 24% | 8 decks | 33 decks | 1.5x
+Instants | Veil of Summer | 15% | 5 decks | 33 decks | 0.8x
+Instants | Deadly Rollick | 15% | 5 decks | 33 decks | 0.8x
+Instants | Deadly Dispute | 15% | 5 decks | 33 decks | 0.9x
+Instants | Dina's Guidance | 13% | 3 decks | 24 decks | 0.5x
+Instants | Imp's Mischief | 12% | 4 decks | 33 decks | 1.4x
+Instants | Culling the Weak | 12% | 4 decks | 33 decks | 0.7x
+Instants | Chord of Calling | 12% | 4 decks | 33 decks | 1.8x
+Instants | Infernal Grasp | 12% | 4 decks | 33 decks | 1.1x
+Instants | Tamiyo's Safekeeping | 12% | 4 decks | 33 decks | 0.8x
+Instants | Tragic Slip | 12% | 4 decks | 33 decks | 4.0x
+Instants | Abrupt Decay | 9.1% | 3 decks | 33 decks | 0.5x
+Instants | Return of the Wildspeaker | 9.1% | 3 decks | 33 decks | 4.3x
+Instants | Nature's Claim | 9.1% | 3 decks | 33 decks | 0.8x
+Instants | Revitalizing Repast | 9.1% | 3 decks | 33 decks | 0.6x
+Instants | Arachnogenesis | 9.1% | 3 decks | 33 decks | 1.0x
+Instants | Windgrace's Judgment | 9.1% | 3 decks | 33 decks | 3.5x
+Instants | Golgari Charm | 9.1% | 3 decks | 33 decks | 1.1x
+Instants | Withering Torment | 9.1% | 3 decks | 33 decks | 2.2x
+Instants | Reckoner's Bargain | 6.1% | 2 decks | 33 decks | 3.7x
+Instants | Snuff Out | 6.1% | 2 decks | 33 decks | 2.0x
+Instants | Weather the Storm | 6.1% | 2 decks | 33 decks | 1.4x
+Instants | Krosan Grip | 6.1% | 2 decks | 33 decks | 1.2x
+Instants | Tyvar's Stand | 6.1% | 2 decks | 33 decks | 2.9x
+Instants | Legolas's Quick Reflexes | 6.1% | 2 decks | 33 decks | 2.2x
+Instants | Tear Asunder | 6.1% | 2 decks | 33 decks | 0.9x
+Instants | Second Harvest | 6.1% | 2 decks | 33 decks | 0.6x
+Instants | Deathsprout | 6.1% | 2 decks | 33 decks | 1.9x
+Instants | Baleful Mastery | 6.1% | 2 decks | 33 decks | 3.7x
+Instants | Corrupted Conviction | 6.1% | 2 decks | 33 decks | 1.4x
+Instants | Collective Resistance | 6.1% | 2 decks | 33 decks | 1.6x
+Instants | Szat's Will | 6.1% | 2 decks | 33 decks | 13x
+Sorceries | Rampant Growth | 61% | 20 decks | 33 decks | 2.3x
+Sorceries | Pest Infestation | 58% | 19 decks | 33 decks | 1.3x
+Sorceries | Demonic Tutor | 58% | 19 decks | 33 decks | 1.4x
+Sorceries | Three Visits | 55% | 18 decks | 33 decks | 2.9x
+Sorceries | Exsanguinate | 55% | 18 decks | 33 decks | 2.1x
+Sorceries | Cultivate | 55% | 18 decks | 33 decks | 1.3x
+Sorceries | Culling Ritual | 52% | 17 decks | 33 decks | 1.4x
+Sorceries | Farseek | 52% | 17 decks | 33 decks | 3.2x
+Sorceries | Kodama's Reach | 45% | 15 decks | 33 decks | 2.8x
+Sorceries | Diabolic Intent | 36% | 12 decks | 33 decks | 1.6x
+Sorceries | Bala Ged Recovery | 33% | 11 decks | 33 decks | 3.0x
+Sorceries | Reanimate | 30% | 10 decks | 33 decks | 1.2x
+Sorceries | Shamanic Revelation | 21% | 7 decks | 33 decks | 3.2x
+Sorceries | Immoral Bargain | 21% | 5 decks | 24 decks | 1.4x
+Sorceries | Diabolic Tutor | 18% | 6 decks | 33 decks | 1.6x
+Sorceries | Awaken the Woods | 18% | 6 decks | 33 decks | 2.7x
+Sorceries | Explore | 18% | 6 decks | 33 decks | 4.6x
+Sorceries | Chain of Smog | 18% | 6 decks | 33 decks | 1.0x
+Sorceries | Feed the Swarm | 15% | 5 decks | 33 decks | 1.0x
+Sorceries | Finale of Devastation | 15% | 5 decks | 33 decks | 1.6x
+Sorceries | Night's Whisper | 15% | 5 decks | 33 decks | 1.3x
+Sorceries | Sign in Blood | 15% | 5 decks | 33 decks | 1.7x
+Sorceries | Blasphemous Edict | 12% | 4 decks | 33 decks | 2.4x
+Sorceries | Damnation | 12% | 4 decks | 33 decks | 1.4x
+Sorceries | Nature's Rhythm | 9.1% | 3 decks | 33 decks | 1.6x
+Sorceries | Gaze of Granite | 9.1% | 3 decks | 33 decks | 3.5x
+Sorceries | Damnable Pact | 9.1% | 3 decks | 33 decks | 2.3x
+Sorceries | Dread Return | 9.1% | 3 decks | 33 decks | 3.2x
+Sorceries | Read the Bones | 9.1% | 3 decks | 33 decks | 2.2x
+Sorceries | Deadly Brew | 9.1% | 3 decks | 33 decks | 0.7x
+Sorceries | For the Common Good | 9.1% | 3 decks | 33 decks | 2.0x
+Sorceries | Genesis Wave | 9.1% | 3 decks | 33 decks | 5.6x
+Sorceries | Reshape the Earth | 9.1% | 3 decks | 33 decks | 7.8x
+Sorceries | Vicious Rivalry | 8.3% | 2 decks | 24 decks | 1.2x
+Sorceries | Germination Practicum | 8.3% | 2 decks | 24 decks | 1.6x
+Sorceries | Shared Roots | 7.7% | 2 decks | 26 decks | 1.7x
+Sorceries | Pir's Whim | 6.1% | 2 decks | 33 decks | 8.6x
+Sorceries | Green Sun's Zenith | 6.1% | 2 decks | 33 decks | 0.7x
+Sorceries | Imperial Seal | 6.1% | 2 decks | 33 decks | 1.2x
+Sorceries | Healing Technique | 6.1% | 2 decks | 33 decks | 1.7x
+Sorceries | Peer into the Abyss | 6.1% | 2 decks | 33 decks | 1.7x
+Sorceries | Victimize | 6.1% | 2 decks | 33 decks | 0.5x
+Sorceries | Primal Command | 6.1% | 2 decks | 33 decks | 2.6x
+Sorceries | Primal Growth | 6.1% | 2 decks | 33 decks | 6.5x
+Sorceries | Hour of Promise | 6.1% | 2 decks | 33 decks | 8.6x
+Sorceries | Crux of Fate | 6.1% | 2 decks | 33 decks | 8.6x
+Sorceries | Agadeem's Awakening | 6.1% | 2 decks | 33 decks | 1.1x
+Sorceries | Ancient Craving | 6.1% | 2 decks | 33 decks | 2.0x
+Sorceries | Vastwood Surge | 6.1% | 2 decks | 33 decks | 13x
+Sorceries | In Garruk's Wake | 6.1% | 2 decks | 33 decks | 1.5x
+Utility Artifacts | Ashnod's Altar | 64% | 21 decks | 33 decks | 1.9x
+Utility Artifacts | Bolas's Citadel | 61% | 20 decks | 33 decks | 1.6x
+Utility Artifacts | Alhammarret's Archive | 39% | 13 decks | 33 decks | 2.9x
+Utility Artifacts | Cauldron of Essence | 38% | 9 decks | 24 decks | 0.9x
+Utility Artifacts | Aetherflux Reservoir | 36% | 12 decks | 33 decks | 1.7x
+Utility Artifacts | Phyrexian Altar | 36% | 12 decks | 33 decks | 2.0x
+Utility Artifacts | Lightning Greaves | 36% | 12 decks | 33 decks | 2.0x
+Utility Artifacts | The One Ring | 18% | 6 decks | 33 decks | 2.0x
+Utility Artifacts | Swiftfoot Boots | 18% | 6 decks | 33 decks | 1.4x
+Utility Artifacts | Well of Lost Dreams | 12% | 4 decks | 33 decks | 0.9x
+Utility Artifacts | The Ten Rings | 7.1% | 1 decks | 14 decks | 16x
+Utility Artifacts | Ravenous Amulet | 6.1% | 2 decks | 33 decks | 8.6x
+Utility Artifacts | Expedition Map | 6.1% | 2 decks | 33 decks | 3.7x
+Utility Artifacts | Horizon Stone | 6.1% | 2 decks | 33 decks | 13x
+Utility Artifacts | Soul Conduit | 6.1% | 2 decks | 33 decks | 13x
+Utility Artifacts | Jet Medallion | 6.1% | 2 decks | 33 decks | 2.6x
+Enchantments | Moldervine Reclamation | 61% | 20 decks | 33 decks | 1.6x
+Enchantments | Sanguine Bond | 55% | 18 decks | 33 decks | 1.4x
+Enchantments | Parallel Lives | 52% | 17 decks | 33 decks | 3.3x
+Enchantments | Bastion of Remembrance | 52% | 17 decks | 33 decks | 1.6x
+Enchantments | The Meathook Massacre | 36% | 12 decks | 33 decks | 1.8x
+Enchantments | Sylvan Library | 33% | 11 decks | 33 decks | 1.4x
+Enchantments | Doubling Season | 30% | 10 decks | 33 decks | 1.3x
+Enchantments | Vampiric Rites | 30% | 10 decks | 33 decks | 2.5x
+Enchantments | Wild Growth | 30% | 10 decks | 33 decks | 4.3x
+Enchantments | Phyrexian Arena | 30% | 10 decks | 33 decks | 1.5x
+Enchantments | Necropotence | 24% | 8 decks | 33 decks | 1.4x
+Enchantments | Cryptolith Rite | 18% | 6 decks | 33 decks | 2.1x
+Enchantments | Black Market Connections | 18% | 6 decks | 33 decks | 1.2x
+Enchantments | Utopia Sprawl | 15% | 5 decks | 33 decks | 2.9x
+Enchantments | Blight Mound | 15% | 5 decks | 33 decks | 0.7x
+Enchantments | Feral Appetite | 13% | 3 decks | 24 decks | 0.9x
+Enchantments | Grave Pact | 12% | 4 decks | 33 decks | 1.0x
+Enchantments | Dictate of Erebos | 12% | 4 decks | 33 decks | 1.9x
+Enchantments | Trudge Garden | 12% | 4 decks | 33 decks | 1.0x
+Enchantments | Growing Rites of Itlimoc | 12% | 4 decks | 33 decks | 1.7x
+Enchantments | Bitterblossom | 12% | 4 decks | 33 decks | 1.3x
+Enchantments | Greed | 9.1% | 3 decks | 33 decks | 2.0x
+Enchantments | Mana Reflection | 9.1% | 3 decks | 33 decks | 4.3x
+Enchantments | Font of Agonies | 9.1% | 3 decks | 33 decks | 5.6x
+Enchantments | Awakening Zone | 9.1% | 3 decks | 33 decks | 0.9x
+Enchantments | Springleaf Parade | 8.3% | 2 decks | 24 decks | 1.9x
+Enchantments | Exploration | 6.1% | 2 decks | 33 decks | 1.6x
+Enchantments | Beastmaster Ascension | 6.1% | 2 decks | 33 decks | 2.9x
+Enchantments | Journey to Eternity | 6.1% | 2 decks | 33 decks | 2.0x
+Enchantments | Burgeoning | 6.1% | 2 decks | 33 decks | 2.6x
+Enchantments | March of the World Ooze | 6.1% | 2 decks | 33 decks | 8.6x
+Enchantments | Deathreap Ritual | 6.1% | 2 decks | 33 decks | 1.4x
+Enchantments | Animate Dead | 6.1% | 2 decks | 33 decks | 0.8x
+Enchantments | Primal Vigor | 6.1% | 2 decks | 33 decks | 2.9x
+Enchantments | Fertile Ground | 6.1% | 2 decks | 33 decks | 5.2x
+Enchantments | Insidious Roots | 6.1% | 2 decks | 33 decks | 1.4x
+Planeswalkers | Professor Dellian Fel | 21% | 5 decks | 24 decks | 0.7x
+Planeswalkers | Liliana, Dreadhorde General | 18% | 6 decks | 33 decks | 2.9x
+Planeswalkers | Vraska, Golgari Queen | 15% | 5 decks | 33 decks | 1.8x
+Planeswalkers | Professor Onyx | 9.1% | 3 decks | 33 decks | 1.4x
+Planeswalkers | Liliana of the Dark Realms | 6.1% | 2 decks | 33 decks | 5.2x
+Utility Lands | Urborg, Tomb of Yawgmoth | 76% | 25 decks | 33 decks | 2.4x
+Utility Lands | Cabal Coffers | 64% | 21 decks | 33 decks | 4.1x
+Utility Lands | Bojuka Bog | 58% | 19 decks | 33 decks | 1.1x
+Utility Lands | Phyrexian Tower | 55% | 18 decks | 33 decks | 1.9x
+Utility Lands | High Market | 48% | 16 decks | 33 decks | 1.1x
+Utility Lands | Yavimaya, Cradle of Growth | 45% | 15 decks | 33 decks | 1.4x
+Utility Lands | Ancient Tomb | 39% | 13 decks | 33 decks | 2.1x
+Utility Lands | Boseiju, Who Endures | 39% | 13 decks | 33 decks | 1.7x
+Utility Lands | Field of the Dead | 33% | 11 decks | 33 decks | 4.8x
+Utility Lands | Reliquary Tower | 30% | 10 decks | 33 decks | 1.4x
+Utility Lands | Takenuma, Abandoned Mire | 24% | 8 decks | 33 decks | 2.3x
+Utility Lands | Shifting Woodland | 18% | 6 decks | 33 decks | 1.9x
+Utility Lands | Gaea's Cradle | 18% | 6 decks | 33 decks | 1.7x
+Utility Lands | Emergence Zone | 15% | 5 decks | 33 decks | 3.8x
+Utility Lands | Midgar, City of Mako | 10% | 3 decks | 30 decks | 2.3x
+Utility Lands | Radiant Fountain | 9.1% | 3 decks | 33 decks | 0.6x
+Utility Lands | Castle Garenbrig | 9.1% | 3 decks | 33 decks | 4.3x
+Utility Lands | Stardew Valley | 8.3% | 1 decks | 12 decks | 4.7x
+Utility Lands | Evendo, Waking Haven | 6.9% | 2 decks | 29 decks | 1.2x
+Utility Lands | Westvale Abbey | 6.1% | 2 decks | 33 decks | 2.0x
+Utility Lands | Witch's Clinic | 6.1% | 2 decks | 33 decks | 0.7x
+Utility Lands | Grim Backwoods | 6.1% | 2 decks | 33 decks | 0.4x
+Utility Lands | Mosswort Bridge | 6.1% | 2 decks | 33 decks | 4.3x
+Utility Lands | Command Beacon | 6.1% | 2 decks | 33 decks | 1.9x
+Utility Lands | Leechridden Swamp | 6.1% | 2 decks | 33 decks | 4.3x
+Utility Lands | Dryad Arbor | 6.1% | 2 decks | 33 decks | 0.7x
+Mana Artifacts | Sol Ring | 88% | 29 decks | 33 decks | 1.0x
+Mana Artifacts | Arcane Signet | 52% | 17 decks | 33 decks | 0.8x
+Mana Artifacts | Golgari Signet | 21% | 7 decks | 33 decks | 1.4x
+Mana Artifacts | Talisman of Resilience | 18% | 6 decks | 33 decks | 0.7x
+Mana Artifacts | The Soul Stone | 7.1% | 2 decks | 28 decks | 2.1x
+Mana Artifacts | Pristine Talisman | 6.1% | 2 decks | 33 decks | 0.4x
+Mana Artifacts | Grim Monolith | 6.1% | 2 decks | 33 decks | 2.9x
+Mana Artifacts | Mana Vault | 6.1% | 2 decks | 33 decks | 0.8x
+Mana Artifacts | Thought Vessel | 6.1% | 2 decks | 33 decks | 1.3x
+Lands | Overgrown Tomb | 79% | 26 decks | 33 decks | 1.2x
+Lands | Undergrowth Stadium | 70% | 23 decks | 33 decks | 1.3x
+Lands | Verdant Catacombs | 67% | 22 decks | 33 decks | 1.6x
+Lands | Deathcap Glade | 55% | 18 decks | 33 decks | 1.1x
+Lands | Tainted Wood | 52% | 17 decks | 33 decks | 1.3x
+Lands | Malakir Rebirth | 36% | 12 decks | 33 decks | 3.2x
+Lands | Wastewood Verge | 33% | 11 decks | 33 decks | 1.2x
+Lands | Bala Ged Recovery | 33% | 11 decks | 33 decks | 3.0x
+Lands | Fell the Profane | 27% | 9 decks | 33 decks | 3.2x
+Lands | Underground Mortuary | 27% | 9 decks | 33 decks | 1.3x
+Lands | Bayou | 27% | 9 decks | 33 decks | 1.5x
+Lands | Snow-Covered Forest | 24% | 8 decks | 33 decks | 3.5x
+Lands | Snow-Covered Swamp | 21% | 7 decks | 33 decks | 3.1x
+Lands | Urza's Cave | 18% | 6 decks | 33 decks | 6.5x
+Lands | Nurturing Peatland | 18% | 6 decks | 33 decks | 1.3x
+Lands | Woodland Chasm | 15% | 5 decks | 33 decks | 4.1x
+Lands | Marsh Flats | 15% | 5 decks | 33 decks | 1.7x
+Lands | Misty Rainforest | 12% | 4 decks | 33 decks | 1.4x
+Lands | Wooded Foothills | 12% | 4 decks | 33 decks | 1.5x
+Lands | Darkbore Pathway | 12% | 4 decks | 33 decks | 0.6x
+Lands | Talon Gates of Madara | 12% | 4 decks | 33 decks | 4.7x
+Lands | Darkmoss Bridge | 9.1% | 3 decks | 33 decks | 2.3x
+Lands | Windswept Heath | 9.1% | 3 decks | 33 decks | 0.9x
+Lands | Bloodstained Mire | 9.1% | 3 decks | 33 decks | 1.0x
+Lands | Prismatic Vista | 6.1% | 2 decks | 33 decks | 0.9x
+Lands | Agadeem's Awakening | 6.1% | 2 decks | 33 decks | 1.1x

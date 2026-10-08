@@ -110,7 +110,7 @@ Keep 3–4 lands (or 2 + Sol Ring/dork) with both colours and one of: a drain, a
 | Fast combo | Interaction is mostly sorcery-speed | Hold Grasp, Trophy, Mischief and Veil; Priest edicts at instant speed |
 | Fliers over a Pest wall | Pests are 1/1 ground tokens | Warg Tactics mode 1, Feral Appetite deathtouch, Mikaeus +1/+1, Beledros blocks 4/4 in the air |
 
-## 8. Maybeboard (22 cards, kept in the box) and between-game swaps
+## 8. Maybeboard (26 cards, kept in the box) and between-game swaps
 
 All free after Meren is dismantled (Meren leftovers), except where noted. Swaps happen between games, never mid-game. The first three are upgrades the model cannot see; the rest answer a table. **Operator rule (2026-10-08): the model's score decides the final 99; proposed synergies live here until a climb accepts them.** The 2026-10-08 climb (`verify-2026-10-08/best-deck/beledros-climb-2.ndjson`, 1,646 evaluations, converged) rejected every card in the last block and put [[Blooming Marsh]] in the 99 instead.
 
@@ -138,6 +138,10 @@ All free after Meren is dismantled (Meren leftovers), except where noted. Swaps 
 | [[Vilis, Broker of Blood]] (loose, registered 2026-10-08; climb −4.2: a window overflow the model cannot value) | [[Blooming Marsh]] | Beledros "Pay 10 life: Untap all lands you control" + Vilis "Whenever you lose life, draw that many cards" = draw 10 and untap; "{B}, Pay 2 life: -1/-1" on your own Pest is a drain trigger and two cards; [[Alhammarret's Archive]] doubles to 20. Slow tables with a drain to refund the life. |
 | [[Meren of Clan Nel Toth]] (loose once her deck is dismantled; model-neutral, rejected) | [[Veinwitch Coven]] | "Whenever another creature you control dies, you get an experience counter" — four Pests a round = four counters; the end step returns Merchant (5) or Wurm (6) from the second end step on. Sacrifice Merchant to Altar in main 2, Meren returns him: a drain every turn. |
 | [[Blech, Loafing Pest]] (loose, registered 2026-10-08; model-neutral, rejected) | [[Pest Rescuer]] | "Whenever you gain life, put a +1/+1 counter on each Pest, Bat, Insect, Snake, and Spider you control" — every Pest death grows the swarm. ⚠️ Pests with counters lose Mikaeus undying (CR 702.93a). Alpha tables. |
+| [[Harrow]] (registered 2026-10-08; lab +0.11 for Priest, below 0.25) | [[Priest of Forgotten Gods]] | "Sacrifice a land. Search your library for up to two basic land cards, put them onto the battlefield" — both untapped, instant speed: the deck's best tempo ramp. Fast tables. |
+| [[Dina, Essence Brewer]] (registered; lab +0.00) | [[Plumb the Forbidden]] | "Whenever you sacrifice a creature, draw a card. This ability triggers only once each turn" + "{2}, {T}, Sacrifice another creature: You gain X life and put X +1/+1 counters" — a sac outlet that draws once a turn and gains. |
+| [[Font of Agonies]] (loose; lab +0.00, model-blind; EDHREC 47x lift) | [[Pest Infestation]] | "Whenever you pay life, put that many blood counters on this enchantment. {1}{B}, Remove four blood counters: Destroy target creature" — one Beledros activation = two removals for {B}. Removal-light tables. |
+| [[Arnyn, Deathbloom Botanist]] (loose; lab +0.04) | [[Viscera Seer]] | "Whenever a creature you control with power or toughness 1 or less dies, target opponent loses 2 life and you gain 2 life" — a double Blood Artist for Pests. Drain-race tables. |
 
 Not available as maybes: Ramunap Excavator (goes to Cabbage) and Grim Haruspex (goes to Imotekh) are the donor backfills.
 
@@ -151,3 +155,17 @@ Not available as maybes: Ramunap Excavator (goes to Cabbage) and Grim Haruspex (
 | Lifegain | Jarad, Saw in Half | Mirkwood Bats, Warg Tactics |
 | Graveyard hate (Rest in Peace, Bojuka Bog) | Golgari Charm, Jarad | Mikaeus, the Unhallowed (undying is exile under Rest in Peace), Cauldron of Essence |
 | Slow / durdle | Victimize, Reanimate, Mazirek | Revitalizing Repast, Moldervine Reclamation, Creakwood Liege |
+
+## 9. Buy list from the EDHREC pass (2026-10-08)
+
+Full oracle analysis: `verify-2026-10-08/best-deck/beledros-edhrec-analysis.md`. Prices Cardmarket, EDHREC lifegain page (33 decks).
+
+| Card | € | Why |
+|---|---|---|
+| [[Skullclamp]] | 4,30 | "Equipped creature gets +1/-1. Whenever equipped creature dies, draw two cards. Equip {1}" — a 1/1 Pest dies on equip: draw 2, gain 1, every death trigger, for {1}. |
+| [[Exquisite Blood]] | 27,75 | "Whenever an opponent loses life, you gain that much life" — infinite with [[Sanguine Bond]] or [[Vito, Thorn of the Dusk Rose]] (both in the 99). [[Bloodthirsty Conqueror]] (25,01) is the same loop on a body. |
+| [[Ayara, First of Locthwain]] | 3,62 | "Whenever Ayara or another black creature you control enters, each opponent loses 1 life and you gain 1 life. {T}, Sacrifice another black creature: Draw a card" — Pests are black. |
+| [[Marauding Blight-Priest]] | 0,11 | "Whenever you gain life, each opponent loses 1 life" — a second Dina, Soul Steeper. |
+| [[Bastion of Remembrance]] | — | "Whenever a creature you control dies, each opponent loses 1 life and you gain 1 life" — Zulaport as an enchantment. |
+| [[Prosperous Innkeeper]] | 0,23 | "Whenever another creature you control enters, you gain 1 life" + a Treasure — every Pest entering drains. |
+| [[Savra, Queen of the Golgari]] | 1,53 | Pests are black and green: each sacrifice is an edict ("pay 2 life… each other player sacrifices a creature") and "gain 2 life". |

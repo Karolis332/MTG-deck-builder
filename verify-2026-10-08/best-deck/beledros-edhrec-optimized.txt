@@ -1,0 +1,264 @@
+# EDHREC Beledros Witherbloom (Commander) — Optimized page, 188 decks, read 2026-10-08. name | inclusion | lift
+# Top Cards
+Skullclamp | 72% | 1.6x
+Assassin's Trophy | 62% | 1.0x
+Dina, Soul Steeper | 61% | 11x
+Zulaport Cutthroat | 59% | 1.7x
+Cultivate | 59% | 2.1x
+Exsanguinate | 57% | 4.3x
+Blood Artist | 57% | 1.7x
+Three Visits | 56% | 2.8x
+Nature's Lore | 56% | 2.2x
+Pest Infestation | 55% | 3.4x
+# High Lift Cards
+Profane Transfusion | 6.9% | 55x
+Font of Agonies | 6.9% | 47x
+Vilis, Broker of Blood | 37% | 28x
+Krav, the Unredeemed | 7.4% | 27x
+Alhammarret's Archive | 27% | 20x
+Crux of Fate | 5.3% | 17x
+Ayara, First of Locthwain | 53% | 15x
+Verdant Sun's Avatar | 5.3% | 15x
+Healing Technique | 6.9% | 14x
+Nyxbloom Ancient | 19% | 13x
+# Creatures
+Essence Warden | 53% | 5.0x
+Vito, Thorn of the Dusk Rose | 51% | 9.3x
+Chatterfang, Squirrel General | 48% | 2.6x
+Sakura-Tribe Elder | 45% | 2.0x
+Warren Soultrader | 42% | 1.6x
+Prosperous Innkeeper | 41% | 3.2x
+Viscera Seer | 41% | 1.7x
+Mirkwood Bats | 41% | 1.6x
+Savra, Queen of the Golgari | 39% | 11x
+Eternal Witness | 38% | 1.4x
+Pitiless Plunderer | 38% | 1.2x
+Gala Greeters | 37% | 5.1x
+Birds of Paradise | 36% | 0.9x
+Braids, Arisen Nightmare | 30% | 2.0x
+Marauding Blight-Priest | 29% | 8.3x
+Wight of the Reliquary | 29% | 2.8x
+Yawgmoth, Thran Physician | 29% | 1.9x
+Sedgemoor Witch | 26% | 4.3x
+Nadier's Nightblade | 26% | 1.8x
+Llanowar Elves | 26% | 0.5x
+Deathrite Shaman | 25% | 0.9x
+Bloodthirsty Conqueror | 24% | 4.6x
+Tendershoot Dryad | 22% | 2.9x
+Enduring Tenacity | 22% | 4.2x
+Elvish Mystic | 21% | 0.5x
+Sephiroth, Fabled SOLDIER | 20% | 2.6x
+Delighted Halfling | 20% | 1.0x
+Scute Swarm | 19% | 1.2x
+Witherbloom Apprentice | 18% | 1.4x
+Valentin, Dean of the Vein | 18% | 7.3x
+Ribtruss Roaster | 18% | 5.1x
+Blech, Loafing Pest | 18% | 11x
+Gray Merchant of Asphodel | 18% | 2.6x
+Poison-Tip Archer | 18% | 1.0x
+Creakwood Liege | 17% | 3.6x
+Pest Rescuer | 17% | 3.0x
+Ophiomancer | 16% | 2.2x
+Craterhoof Behemoth | 16% | 0.6x
+Bogwater Lumaret | 16% | 3.3x
+Eccentric Pestfinder | 15% | 4.9x
+Elves of Deep Shadow | 15% | 0.4x
+Razaketh, the Foulblooded | 14% | 4.0x
+Sheoldred, the Apocalypse | 14% | 3.4x
+Orcish Bowmasters | 13% | 0.9x
+Enduring Vitality | 12% | 1.1x
+Starscape Cleric | 11% | 4.2x
+Crypt Ghast | 11% | 10x
+Veinwitch Coven | 11% | 4.5x
+Arnyn, Deathbloom Botanist | 11% | 5.1x
+Seedborn Muse | 11% | 0.8x
+# Instants
+Heroic Intervention | 53% | 1.2x
+Dark Ritual | 45% | 1.2x
+Plumb the Forbidden | 45% | 4.2x
+Beast Within | 41% | 1.3x
+Vampiric Tutor | 39% | 1.0x
+Mortality Spear | 35% | 7.0x
+Crop Rotation | 30% | 1.2x
+Malakir Rebirth | 30% | 2.8x
+Village Rites | 26% | 1.9x
+Worldly Tutor | 25% | 0.7x
+Deadly Rollick | 24% | 0.9x
+Putrefy | 23% | 1.0x
+Stinging Study | 22% | 6.3x
+Tend the Pests | 21% | 6.2x
+Deadly Dispute | 20% | 0.9x
+Fell the Profane | 19% | 1.7x
+Veil of Summer | 18% | 0.9x
+Abrupt Decay | 18% | 0.6x
+Revitalizing Repast | 18% | 1.1x
+Nature's Claim | 15% | 1.2x
+Archdruid's Charm | 15% | 2.0x
+Chord of Calling | 14% | 0.8x
+Tear Asunder | 13% | 0.9x
+Culling the Weak | 13% | 0.9x
+Krosan Grip | 12% | 1.9x
+Harrow | 12% | 1.8x
+Tamiyo's Safekeeping | 11% | 1.3x
+Witherbloom Charm | 10% | 1.3x
+Corrupted Conviction | 9.0% | 2.0x
+Dina's Guidance | 8.1% | 0.7x
+Imp's Mischief | 6.9% | 1.1x
+Second Harvest | 6.9% | 0.4x
+Infuse with Vitality | 6.9% | 5.6x
+Golgari Charm | 6.9% | 0.6x
+Cabal Ritual | 6.4% | 0.9x
+Infernal Grasp | 6.4% | 1.0x
+Noxious Revival | 6.4% | 0.6x
+Deathsprout | 5.9% | 2.8x
+Baleful Mastery | 5.9% | 3.8x
+Windgrace's Judgment | 5.9% | 1.7x
+Force of Vigor | 5.3% | 0.4x
+Saw in Half | 5.3% | 0.4x
+# Sorceries
+Toxic Deluge | 52% | 1.7x
+Culling Ritual | 52% | 2.0x
+Demonic Tutor | 50% | 1.1x
+Rampant Growth | 49% | 2.6x
+Torment of Hailfire | 47% | 4.0x
+Kodama's Reach | 43% | 3.2x
+Farseek | 40% | 2.9x
+Diabolic Intent | 34% | 1.2x
+Bala Ged Recovery | 29% | 2.4x
+Skyshroud Claim | 26% | 6.9x
+Finale of Devastation | 22% | 1.0x
+Immoral Bargain | 21% | 3.9x
+Reanimate | 19% | 0.7x
+Awaken the Woods | 16% | 2.2x
+Chain of Smog | 14% | 1.3x
+Shamanic Revelation | 14% | 1.1x
+Damnation | 13% | 1.6x
+Green Sun's Zenith | 13% | 0.6x
+Sign in Blood | 12% | 2.7x
+Blasphemous Edict | 11% | 1.9x
+Night's Whisper | 11% | 1.6x
+Imperial Seal | 10% | 1.0x
+Deadly Brew | 10% | 2.9x
+Grim Tutor | 10% | 1.1x
+Diabolic Tutor | 9.0% | 1.3x
+Natural Order | 9.0% | 0.6x
+Tempt with Discovery | 8.5% | 5.6x
+Victimize | 8.0% | 0.5x
+Agadeem's Awakening | 8.0% | 1.2x
+Feed the Swarm | 8.0% | 1.3x
+Beseech the Mirror | 8.0% | 1.3x
+Genesis Wave | 8.0% | 1.6x
+Regrowth | 8.0% | 2.2x
+Nature's Rhythm | 7.4% | 0.7x
+Read the Bones | 6.9% | 2.9x
+Dig Up | 6.9% | 2.2x
+Reshape the Earth | 6.9% | 8.1x
+Decorum Dissertation | 6.8% | 2.7x
+Flare of Cultivation | 6.4% | 2.7x
+Explore | 6.4% | 2.3x
+Open the Way | 6.4% | 6.4x
+Shared Roots | 6.3% | 2.8x
+Casualties of War | 5.9% | 0.9x
+Animist's Awakening | 5.9% | 2.6x
+Migration Path | 5.9% | 10x
+Pest Summoning | 5.9% | 9.4x
+Eldritch Evolution | 5.3% | 0.4x
+Hour of Promise | 5.3% | 9.1x
+Ominous Harvest | 5.1% | 3.0x
+# Artifacts
+Ashnod's Altar | 55% | 1.9x
+Bolas's Citadel | 48% | 3.5x
+Phyrexian Altar | 32% | 1.5x
+Cauldron of Essence | 31% | 1.4x
+Lightning Greaves | 29% | 1.1x
+Aetherflux Reservoir | 28% | 7.6x
+The One Ring | 20% | 1.4x
+Swiftfoot Boots | 13% | 0.7x
+Well of Lost Dreams | 9.0% | 6.7x
+Sensei's Divining Top | 6.4% | 1.7x
+Whip of Erebos | 6.4% | 2.2x
+The Great Henge | 5.9% | 0.7x
+Expedition Map | 5.3% | 1.9x
+# Enchantments
+Moldervine Reclamation | 54% | 2.8x
+Exquisite Blood | 48% | 5.4x
+Parallel Lives | 45% | 2.3x
+Bastion of Remembrance | 43% | 2.3x
+Sanguine Bond | 40% | 6.5x
+The Meathook Massacre | 35% | 2.5x
+Doubling Season | 33% | 1.4x
+Sylvan Library | 29% | 1.1x
+Vampiric Rites | 25% | 8.5x
+Blight Mound | 24% | 6.5x
+Necropotence | 23% | 1.9x
+Phyrexian Arena | 20% | 1.6x
+Black Market Connections | 19% | 1.2x
+Wild Growth | 18% | 1.9x
+Grave Pact | 18% | 1.3x
+Cryptolith Rite | 15% | 1.5x
+Dictate of Erebos | 15% | 1.9x
+Bitterblossom | 15% | 1.7x
+Insidious Roots | 12% | 1.7x
+Utopia Sprawl | 12% | 1.9x
+Growing Rites of Itlimoc | 12% | 0.9x
+Feral Appetite | 12% | 4.7x
+Exploration | 11% | 1.7x
+Awakening Zone | 11% | 1.7x
+Springleaf Parade | 8.8% | 1.1x
+Journey to Eternity | 8.5% | 2.3x
+Mana Reflection | 8.0% | 8.1x
+Funeral Room // Awakening Hall | 7.4% | 3.5x
+Animate Dead | 7.4% | 0.6x
+Trudge Garden | 6.9% | 4.1x
+Deathreap Ritual | 6.4% | 1.6x
+Primal Vigor | 6.4% | 1.4x
+Carpet of Flowers | 5.3% | 1.0x
+Burgeoning | 5.3% | 1.9x
+# Planeswalkers
+Liliana, Dreadhorde General | 21% | 3.6x
+Professor Dellian Fel | 18% | 3.3x
+Vraska, Golgari Queen | 16% | 3.6x
+Professor Onyx | 6.4% | 2.2x
+# Utility lands
+Urborg, Tomb of Yawgmoth | 61% | 1.5x
+Phyrexian Tower | 52% | 1.8x
+Yavimaya, Cradle of Growth | 52% | 1.1x
+Bojuka Bog | 48% | 1.1x
+Cabal Coffers | 44% | 3.0x
+High Market | 44% | 3.2x
+Boseiju, Who Endures | 35% | 1.0x
+Reliquary Tower | 33% | 1.6x
+Ancient Tomb | 31% | 1.4x
+Field of the Dead | 24% | 2.3x
+Takenuma, Abandoned Mire | 22% | 1.4x
+Gaea's Cradle | 21% | 1.1x
+Temple of the False God | 14% | 4.1x
+Shifting Woodland | 13% | 0.8x
+Westvale Abbey | 13% | 3.5x
+Grim Backwoods | 12% | 1.2x
+Dryad Arbor | 12% | 0.8x
+Emergence Zone | 11% | 2.4x
+Fountainport | 10% | 2.2x
+Evendo, Waking Haven | 10% | 1.1x
+Radiant Fountain | 9.0% | 5.7x
+Command Beacon | 9.0% | 1.7x
+Midgar, City of Mako | 8.2% | 2.9x
+Witch's Clinic | 8.0% | 4.2x
+Castle Locthwain | 7.4% | 2.0x
+Boseiju, Who Shelters All | 6.9% | 4.6x
+Urza's Saga | 6.9% | 0.7x
+Castle Garenbrig | 6.9% | 2.1x
+Rogue's Passage | 6.9% | 0.4x
+War Room | 6.4% | 3.8x
+Spymaster's Vault | 5.3% | 1.3x
+Thespian's Stage | 5.3% | 1.8x
+# Mana artifacts
+Sol Ring | 90% | 1.0x
+Arcane Signet | 53% | 0.9x
+Talisman of Resilience | 20% | 0.8x
+Golgari Signet | 15% | 0.8x
+Mana Vault | 10% | 1.1x
+Lotus Petal | 6.9% | 0.5x
+Thought Vessel | 6.9% | 1.7x
+Chrome Mox | 6.4% | 0.6x
+The Soul Stone | 5.4% | 1.6x
