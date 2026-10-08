@@ -18,22 +18,22 @@ const OUT = [
 ];
 // baseline = what was sleeved before today's changes; `now` = a proposed list instead of the sleeved one;
 // `extra` = a labelled row of cards still under review; `guide` = a pilot-guide markdown file shown above the list
-type DeckSpec = { slug: string; base?: () => string; now?: string; guide?: string; extra?: { label: string; names: string[] } };
+type DeckSpec = { slug: string; base?: () => string; now?: string; guide?: string; arena?: string; extra?: { label: string; names: string[] } }; // arena = Arena deck name -> copy block emits the About/Name/Commander/Deck import format
 const read = (rel: string) => () => fs.readFileSync(path.join(ROOT, rel), 'utf8');
 const SPECS: DeckSpec[] = [
   // Arena Historic Brawl Jet (model's #1): baseline = the model's own list, so OUT = its filler swaps and the colourless/fetch lands
   {
-    slug: 'jet-freedom-fighter-arena', base: read('verify-2026-10-08/best-deck/arena-3/top-1-jet-freedom-fighter.txt'), now: 'verify-2026-10-08/best-deck/jet/jet-arena.txt',
+    slug: 'jet-freedom-fighter-arena', arena: 'Jet Boros v1', base: read('verify-2026-10-08/best-deck/arena-3/top-1-jet-freedom-fighter.txt'), now: 'verify-2026-10-08/best-deck/jet/jet-arena.txt',
     guide: '.claude/skills/deck-building/reference/decks/jet-freedom-fighter-arena.md',
   },
   // Arena Historic Brawl Neriv (model's #2): baseline = the model's own list, so OUT = its filler swaps and the tapped/colourless lands
   {
-    slug: 'neriv-heart-of-the-storm-arena', base: read('verify-2026-10-08/best-deck/arena-3/top-2-neriv-heart-of-the-storm.txt'), now: 'verify-2026-10-08/best-deck/neriv/neriv-arena.txt',
+    slug: 'neriv-heart-of-the-storm-arena', arena: 'Neriv Mardu v1', base: read('verify-2026-10-08/best-deck/arena-3/top-2-neriv-heart-of-the-storm.txt'), now: 'verify-2026-10-08/best-deck/neriv/neriv-arena.txt',
     guide: '.claude/skills/deck-building/reference/decks/neriv-heart-of-the-storm-arena.md',
   },
   // Arena Historic Brawl Krenko: baseline = the model's own list, so OUT = its filler swaps and the colourless lands
   {
-    slug: 'krenko-mob-boss-arena', base: read('verify-2026-10-08/best-deck/krenko-model.txt'), now: 'verify-2026-10-08/best-deck/krenko-arena.txt',
+    slug: 'krenko-mob-boss-arena', arena: 'Krenko Goblins v1', base: read('verify-2026-10-08/best-deck/krenko-model.txt'), now: 'verify-2026-10-08/best-deck/krenko-arena.txt',
     guide: '.claude/skills/deck-building/reference/decks/krenko-mob-boss-arena.md',
   },
   // Beledros replaces Meren: baseline = the sleeved Meren list, so OUT = Meren cards that stay in the box, NEW = everything else
@@ -116,10 +116,22 @@ const chip = (n: string) => {
 const inline = (s: string) =>
   esc(s).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>').replace(/`(.+?)`/g, '<code>$1</code>').replace(/\[\[(.+?)\]\]/g, (_, n: string) => chip(n.replace(/&amp;/g, '&')));
 const flow = (steps: string[]) => `<div class="flow">${steps.map((s) => `<div class="step">${inline(s)}</div>`).join('<div class="arr">→</div>')}</div>`;
+// 'Turn' tables become a timeline diagram, 'Piece' tables an engine card grid; anything else stays a table
+// diagram cells: drop the ' / ' and ', ' separators between adjacent chips (the chips are the separators)
+const cell = (c: string) => inline((c ?? '').replace(/\]\]\s*(\/|,|or)\s*\[\[/g, ']] [['));
+const renderTable = (rows: string[][]) => {
+  const [head, ...body] = rows;
+  if (head[0] === 'Turn')
+    return `<div class="timeline">${body.map((r) => `<div class="tnode"><div class="tnum">T${esc(r[0])}</div><small>${esc(head[1] ?? '')}</small><div class="tdo">${cell(r[1])}</div>${r[2] ? `<small>${esc(head[2] ?? '')}</small><div class="twhy">${cell(r[2])}</div>` : ''}</div>`).join('<div class="arr">→</div>')}</div>`;
+  if (head[0] === 'Piece')
+    return `<div class="pieces">${body.map((r) => `<div class="piece"><div class="pname">${cell(r[0])}</div><div class="pwhat">${cell(r[1])}</div>${r[2] ? `<div class="poracle">${inline(r[2])}</div>` : ''}</div>`).join('')}</div>`;
+  return `<table><tr>${head.map((c) => `<th>${inline(c)}</th>`).join('')}</tr>${body.map((r) => `<tr>${r.map((c) => `<td>${inline(c)}</td>`).join('')}</tr>`).join('')}</table>`;
+};
 const md = (src: string) => {
   const out: string[] = [];
-  let list = false, table = false;
-  const close = () => { if (list) out.push('</ul>'); if (table) out.push('</table>'); list = table = false; };
+  let list = false;
+  let tbl: string[][] | null = null;
+  const close = () => { if (list) out.push('</ul>'); if (tbl) out.push(renderTable(tbl)); list = false; tbl = null; };
   for (const line of src.split(/\r?\n/)) {
     if (line.startsWith('=> ')) {
       close();
@@ -129,8 +141,8 @@ const md = (src: string) => {
     const cells = line.startsWith('|') ? line.slice(1, -1).split('|').map((c) => c.trim()) : null;
     if (cells && cells.every((c) => /^-+$/.test(c))) continue;
     if (cells) {
-      if (!table) { close(); table = true; out.push(`<table><tr>${cells.map((c) => `<th>${inline(c)}</th>`).join('')}</tr>`); }
-      else out.push(`<tr>${cells.map((c) => `<td>${inline(c)}</td>`).join('')}</tr>`);
+      if (!tbl) { close(); tbl = []; }
+      tbl.push(cells);
     } else if (line.startsWith('- ')) {
       if (!list) { close(); list = true; out.push('<ul>'); }
       out.push(`<li>${inline(line.slice(2))}</li>`);
@@ -138,6 +150,7 @@ const md = (src: string) => {
       close();
       const h = line.match(/^(#+)\s+(.*)$/);
       if (h) out.push(`<h${h[1].length + 2}>${inline(h[2])}</h${h[1].length + 2}>`);
+      else if (/^\*\*[^*]+\*\*$/.test(line.trim())) out.push(`<h4 class="line">${inline(line.trim().slice(2, -2))}</h4>`);
       else if (line.trim()) out.push(`<p>${inline(line)}</p>`);
     }
   }
@@ -230,8 +243,12 @@ const sections = DECKS.map((d, i) => {
   const extraHtml = d.extra
     ? `<h3 class="candh">${esc(d.extra.label)} <small>${d.extra.names.length}</small></h3><div class="grid">${d.extra.names.map((n) => tile(card(n), 1, `${d.slug}|CAND|${n}`, 'cand')).join('')}</div>`
     : '';
-  const listText = now.map((c) => `${c.qty} ${c.name}`).join('\n');
-  const copyHtml = `<details class="copybox"><summary>Copy decklist (${total} cards, commander first)</summary><textarea readonly rows="12">${esc(listText)}</textarea><button class="copy">Copy</button></details>`;
+  const front = (n: string) => n.split(' // ')[0]; // Arena import takes front faces only
+  const listText = d.arena
+    ? `About\nName ${d.arena}\n\nCommander\n${now[0].qty} ${front(now[0].name)}\n\nDeck\n${now.slice(1).map((c) => `${c.qty} ${front(c.name)}`).join('\n')}`
+    : now.map((c) => `${c.qty} ${c.name}`).join('\n');
+  const copySummary = d.arena ? `Copy for Arena import (${total} cards · About / Name / Commander / Deck)` : `Copy decklist (${total} cards, commander first)`;
+  const copyHtml = `<details class="copybox"><summary>${copySummary}</summary><textarea readonly rows="12">${esc(listText)}</textarea><button class="copy">Copy</button></details>`;
   // a primer replaces the markdown pilot guide; a bad primer fails the build with the zod path
   const primer = fs.existsSync(primerFile(d.slug)) ? parsePrimer(JSON.parse(fs.readFileSync(primerFile(d.slug), 'utf8'))) : null;
   const lists = [{ label: d.now ? 'Sleeved' : 'Before', cards: parse(d.base()) }, { label: d.now ? 'Proposed' : 'Now', cards: now }];
@@ -268,6 +285,10 @@ details{margin:8px 0;background:var(--panel);border:1px solid var(--line);border
 .flow{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:10px 0;padding:10px;background:rgba(6,3,26,.7);border:1px dashed var(--line2);border-radius:6px}.flow .step{background:var(--panel);border:1px solid var(--line2);border-radius:6px;padding:6px 8px;max-width:230px;font-size:14px;text-align:center}
 .flow .chip{display:flex;flex-direction:column;white-space:normal;border:0;background:none;padding:0}.flow .chip .ci{height:auto;width:110px}.arr{color:var(--mag);font-size:26px;text-shadow:0 0 8px var(--mag)}
 .guide table{border-collapse:collapse;margin:6px 0 12px;width:100%}.guide th,.guide td{border:1px solid var(--line2);padding:5px 7px;vertical-align:top;text-align:left}.guide th{color:var(--cyan)}.guide h3,.guide h4{color:var(--cyan);margin:14px 0 6px}.guide h3{font-size:16px;letter-spacing:.1em;text-transform:none}.guide code{color:var(--sun)}.guide li{margin:3px 0}
+.guide{font-size:17px;line-height:1.55}.guide p{margin:8px 0}.guide p .chip .ci,.guide li .chip .ci,.guide td .chip .ci,.guide .tnode .chip .ci,.guide .pwhat .chip .ci{height:58px}.guide .chip b{font-size:15px}.guide table{font-size:15px}.guide th,.guide td{padding:8px 10px}.guide h3{font-size:22px}.guide h4.line{font-size:20px;color:var(--sun);margin:20px 0 4px;text-shadow:0 0 8px rgba(255,200,80,.5)}
+.guide .flow{gap:12px;padding:14px}.guide .flow .step{max-width:320px;font-size:16px;padding:10px 12px;line-height:1.35}.guide .flow .chip .ci{width:150px}.guide .flow .chip b{font-size:15px}.guide .arr{font-size:42px}
+.timeline{display:flex;flex-wrap:wrap;align-items:stretch;gap:8px;margin:10px 0}.tnode{flex:1 1 230px;max-width:360px;background:var(--panel);border:1px solid var(--line2);border-radius:8px;padding:10px 12px;font-size:15px}.tdo,.pname{line-height:1.5}.tnode .chip,.pname .chip{margin:3px 4px 3px 0;vertical-align:middle}.tnum{font-size:28px;font-weight:700;color:var(--cyan);text-shadow:0 0 10px var(--cyan)}.tnode small{display:block;color:var(--mag);letter-spacing:.1em;text-transform:uppercase;font-size:11px;margin-top:6px}.twhy{opacity:.85}.timeline .arr{align-self:center}
+.pieces{display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:10px;margin:10px 0}.piece{background:var(--panel);border:1px solid var(--line2);border-radius:8px;padding:10px 12px;font-size:15px}.pname{margin-bottom:6px}.pname .chip .ci{height:84px}.pwhat{color:#fff}.poracle{margin-top:6px;font-size:13px;opacity:.75;font-style:italic}
 #zoom{position:fixed;z-index:9;display:none;pointer-events:none;width:min(440px,46vw);border-radius:18px;box-shadow:0 0 30px rgba(255,43,214,.7),0 0 60px rgba(25,240,255,.4)}
 .primer{padding:10px 16px}.primer h2{margin:0 0 6px;font-size:28px;letter-spacing:.12em;text-transform:uppercase;color:#fff;text-shadow:0 0 10px var(--cyan),0 0 26px var(--cyan),3px 0 0 rgba(255,43,214,.75),-3px 0 0 rgba(25,240,255,.75)}.primer h4{color:var(--cyan);margin:12px 0 4px;letter-spacing:.08em}
 .psec{margin:18px 0 0;padding-top:10px;border-top:1px solid var(--line2)}.psec>h3{font-size:13px;letter-spacing:.3em;margin:0 0 10px;display:flex;align-items:center;gap:12px}.psec>h3::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--cyan),transparent);opacity:.6}

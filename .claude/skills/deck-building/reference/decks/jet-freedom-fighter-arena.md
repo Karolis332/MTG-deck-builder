@@ -61,10 +61,10 @@ Four turns of Chandra alone is 24; [[Belladonna Took]] draws off the second toke
 
 | Turn | Do | Why |
 |---|---|---|
-| 1 | untapped W source ([[Sacred Foundry]] pay 2 only with a 1-drop, [[Sunbillow Verge]], Plains), [[Earth Kingdom Protectors]] | a body for Jet's count later |
-| 2 | two-body 2-drop, or [[Impact Tremors]] / [[Intangible Virtue]] / [[Belladonna Took]]; rock ([[Arcane Signet]], [[Boros Signet]], [[Talisman of Conviction]], [[Mind Stone]]) if the hand is top-heavy | enters-triggers start with the pingers down first |
+| 1 | untapped W source: [[Sacred Foundry]] (pay 2 only with a 1-drop), [[Sunbillow Verge]], Plains. Play [[Earth Kingdom Protectors]] | a body for Jet's count later |
+| 2 | a two-body 2-drop, or [[Impact Tremors]], [[Intangible Virtue]], [[Belladonna Took]]. Top-heavy hand: a rock instead — [[Arcane Signet]], [[Boros Signet]], [[Talisman of Conviction]], [[Mind Stone]] | enters-triggers start with the pingers down first |
 | 3 | [[Warleader's Call]] / [[Suki, Courageous Rescuer]] / [[Witty Roastmaster]] / [[Caretaker's Talent]] / [[Chandra, Acolyte of Flame]] | engine pieces before bodies |
-| 4 | [[Purphoros, God of the Forge]] (best) / [[Hakoda, Selfless Commander]] / [[Teleportation Circle]] / [[Kyoshi Warriors]] / [[Leonin Warleader]] | Purphoros is the card the opponent cannot answer |
+| 4 | [[Purphoros, God of the Forge]] first; otherwise [[Hakoda, Selfless Commander]], [[Teleportation Circle]], [[Kyoshi Warriors]], [[Leonin Warleader]] | Purphoros is the card the opponent cannot answer |
 | 5 | Jet if the kill matters, else [[Gather the White Lotus]] / [[Slash, Reptile Rampager]] / [[Katara, Heroic Healer]] | Jet is removal, not a threat: cast him into a target |
 | 6+ | [[Appa, Loyal Sky Bison]], alpha with [[Heroic Reinforcements]]; hold [[Boros Charm]] for the wipe | close by T7 |
 
