@@ -1,0 +1,548 @@
+{
+ "cards": {
+  "Minthara, Merciless Soul": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Academy Manufactor": {
+   "from": "Cabbage (sleeved deck)",
+   "backfill": "needs a backfill for the donor deck",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Accursed Marauder": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Airbender Ascension": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Animate Dead": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Arcane Lighthouse": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Baron Bertram Graywater": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Basilisk Collar": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Boggart Trawler // Boggart Bog": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Buried Alive": {
+   "from": "Imotekh (sleeved deck)",
+   "backfill": "needs a backfill for the donor deck",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Buried Ruin": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Burnished Hart": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Carrion Feeder": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Charcoal Diamond": {
+   "from": "Imotekh (sleeved deck)",
+   "backfill": "needs a backfill for the donor deck",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Cloudshift": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Commander's Sphere": {
+   "from": "Bumi (sleeved deck)",
+   "backfill": "needs a backfill for the donor deck",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Contagion Clasp": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Corrupted Conviction": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Darksteel Mutation": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Deadly Tempest": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Decanter of Endless Water": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Desolate Mire": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Dreadhorde Invasion": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Elegy Acolyte": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Eviscerator's Insight": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Feed the Swarm": {
+   "from": "Imotekh (sleeved deck)",
+   "backfill": "needs a backfill for the donor deck",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Fetid Heath": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Final Showdown": {
+   "from": "Inspirit (sleeved deck)",
+   "backfill": "needs a backfill for the donor deck",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Flare of Fortitude": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Forlorn Flats": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Forum of Amity": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Foundry Inspector": {
+   "from": "Imotekh (sleeved deck)",
+   "backfill": "needs a backfill for the donor deck",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Fracture": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Generous Gift": {
+   "from": "Inspirit (sleeved deck)",
+   "backfill": "needs a backfill for the donor deck",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Ghostly Prison": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Gift of Immortality": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Grand Abolisher": {
+   "from": "Tazri (sleeved deck)",
+   "backfill": "needs a backfill for the donor deck",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Inkshield": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Isolated Chapel": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Jadar, Ghoulcaller of Nephalia": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Karn's Bastion": {
+   "from": "Inspirit (sleeved deck)",
+   "backfill": "needs a backfill for the donor deck",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Nadaar, Selfless Paladin": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Night's Whisper": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Noble's Purse": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Ornithopter of Paradise": {
+   "from": "Inspirit (sleeved deck)",
+   "backfill": "needs a backfill for the donor deck",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Panharmonicon": {
+   "from": "Inspirit (sleeved deck)",
+   "backfill": "needs a backfill for the donor deck",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Patrolling Peacemaker": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Plaguecrafter": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Plains": {
+   "from": "basic",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Plumb the Forbidden": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Promise of Loyalty": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Ravenous Chupacabra": {
+   "from": "Imotekh (sleeved deck)",
+   "backfill": "needs a backfill for the donor deck",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Reanimate": {
+   "from": "Imotekh (sleeved deck)",
+   "backfill": "needs a backfill for the donor deck",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Reliquary Tower": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Riveteers Overlook": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Ruthless Lawbringer": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Secluded Steppe": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Selfless Spirit": {
+   "from": "Tazri (sleeved deck)",
+   "backfill": "needs a backfill for the donor deck",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Shadowheart, Dark Justiciar": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Shadrix Silverquill": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Shineshadow Snarl": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Sign in Blood": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Silverquill Campus": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Solemn Simulacrum": {
+   "from": "Imotekh (sleeved deck)",
+   "backfill": "needs a backfill for the donor deck",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Squad Commander": {
+   "from": "Tazri (sleeved deck)",
+   "backfill": "needs a backfill for the donor deck",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Study Hall": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Sunlit Marsh": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Swamp": {
+   "from": "basic",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Sword of the Animist": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Swords to Plowshares": {
+   "from": "Inspirit (sleeved deck)",
+   "backfill": "needs a backfill for the donor deck",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Syr Konrad, the Grim": {
+   "from": "Imotekh (sleeved deck)",
+   "backfill": "needs a backfill for the donor deck",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Take Up the Shield": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Talisman of Hierarchy": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Talon Gates of Madara": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Temple of Silence": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Temple of the False God": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Teyo, Lightshield Expert": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Thran Dynamo": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Threefold Thunderhulk": {
+   "from": "Inspirit (sleeved deck)",
+   "backfill": "needs a backfill for the donor deck",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Umbral Collar Zealot": {
+   "from": "Imotekh (sleeved deck)",
+   "backfill": "needs a backfill for the donor deck",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Umbral Expanse": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Vanishing Verse": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Vault of the Archangel": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Victimize": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Vraan, Executioner Thane": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Woe Strider": {
+   "from": "Imotekh (sleeved deck)",
+   "backfill": "needs a backfill for the donor deck",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Zhentarim Bandit": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  }
+ }
+}

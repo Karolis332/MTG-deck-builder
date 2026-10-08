@@ -58,8 +58,8 @@ const SPECS: DeckSpec[] = [
     meta: 'verify-2026-10-08/killian/killian-final.meta.json', guide: '.claude/skills/deck-building/reference/decks/killian-decisive-mentor.md',
   },
   { // second-strongest paper commander 2026-10-08: the model's Minthara list with raids (objective 89.9; free pool alone 80.1 = Tron lands + filler). Badges = which sleeved deck holds the card
-    slug: 'minthara-merciless-soul', now: 'verify-2026-10-08/best-deck/second-best/minthara-raids.txt', base: () => fs.readFileSync(path.join(ROOT, 'verify-2026-10-08/best-deck/second-best/minthara-raids.txt'), 'utf8'),
-    meta: 'verify-2026-10-08/best-deck/second-best/minthara-raids.meta.json',
+    slug: 'minthara-merciless-soul', now: 'verify-2026-10-08/best-deck/second-best/minthara-v2.txt', base: read('verify-2026-10-08/killian/precon-base.txt'), // base = the Silverquill precon it guts: OUT = precon cards not used
+    meta: 'verify-2026-10-08/best-deck/second-best/minthara-v2.meta.json', guide: '.claude/skills/deck-building/reference/decks/minthara-merciless-soul.md',
   },
   { slug: 'bumi-unleashed', base: read('decks/paper/decks/bumi-unleashed.txt'), now: 'verify-2026-10-07/bumi-standalone/final.txt' },
   // partners: Gilanra is the first line, Alena the second (paper-sync keeps one commander)
