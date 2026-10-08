@@ -130,7 +130,7 @@ All free after Meren is dismantled (Meren leftovers), except where noted. Swaps 
 | [[Syr Konrad, the Grim]] (second copy; the first stays in Imotekh) | [[Witch of the Moors]] | Mill / reanimator tables; also turns [[Culling Ritual]] into a second drain. |
 | [[Mazirek, Kraul Death Priest]] | [[Creakwood Liege]] | Slow tables: every Pest sacrificed by anyone puts a counter on the team. |
 | [[Victimize]] | [[Revitalizing Repast // Old-Growth Grove]] | Slow tables: Gray Merchant + Massacre Wurm back for one Pest. |
-| [[Reanimate]] | [[Moldervine Reclamation]] | Slow tables: turn-2 Wurm after [[Eccentric Pestfinder // Turn Stones]] mills it. |
+| [[Reanimate]] (2 owned, one in Meren) | [[Feral Appetite]] | Any table once something has died: "Put target creature card from a graveyard onto the battlefield under your control. You lose life equal to that card's mana value" — any graveyard, so an opponent's dead fatty too. On [[Vilis, Broker of Blood]] the 8 life lost is 8 cards (Vilis is on the battlefield before the loss). The deck has no self-mill or discard, so the target must have died first: a wiped Wurm, Merchant or Vilis back for {B}. |
 | [[Village Rites]] | [[Feral Appetite]] | Counterspell / removal tables: sacrifice the targeted creature in response, draw two. |
 | [[Wight of the Reliquary]] | [[Scute Swarm]] | Any table short on outlets: a fifth sacrifice outlet that fetches [[High Market]] or [[Yavimaya, Cradle of Growth]]. |
 | [[Braids, Cabal Minion]] | [[Binding the Old Gods]] | Durdle control tables only; Pests feed her every upkeep, the table hates you for it. |
