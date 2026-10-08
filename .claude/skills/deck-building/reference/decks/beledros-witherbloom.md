@@ -5,21 +5,19 @@ List: `verify-2026-10-08/best-deck/beledros-recommended.txt` (100, draft until s
 ## 1. Plan in 3 lines
 - [[Beledros Witherbloom]] is a fodder faucet: "At the beginning of each upkeep, create a 1/1 black and green Pest creature token with 'When this token dies, you gain 1 life.'" In a 4-pod that is four Pests per round without spending a card.
 - Every Pest death is a drain ([[Zulaport Cutthroat]], [[Blood Artist]], [[Cauldron of Essence]], [[Mirkwood Bats]]) and a life-gain event ([[Dina, Soul Steeper]], [[Vito, Thorn of the Dusk Rose]], [[Sanguine Bond]] turn each gain into more loss).
-- Close by attrition, by one [[Gray Merchant of Asphodel]] burst through Vito or Sanguine Bond, or by a pumped alpha strike ([[Thunderfoot Baloth]]). [[Vilis, Broker of Blood]] turns Beledros' untap into a refill: pay 10 life = draw 10. No infinite combo: the deck wins by never running out of deaths.
+- Close by attrition, by one [[Gray Merchant of Asphodel]] burst through Vito or Sanguine Bond, or by a pumped alpha strike ([[Thunderfoot Baloth]]). No infinite combo: the deck wins by never running out of deaths.
 
 | # | Win line (most frequent first) | Closer text (DB) |
 |---|---|---|
 | 1 | Pest attrition | Zulaport: "Whenever this creature or another creature you control dies, each opponent loses 1 life and you gain 1 life." Dina: "Whenever you gain life, each opponent loses 1 life." One Pest death with both out = 3 life from each opponent (Zulaport 1, Dina 1 for the Pest's life, Dina 1 for Zulaport's life). |
 | 2 | Gray Merchant burst | "When this creature enters, each opponent loses X life, where X is your devotion to black. You gain life equal to the life lost this way." Vito: "Whenever you gain life, target opponent loses that much life." Rebuy Merchant with [[Cauldron of Essence]], [[Veinwitch Coven]], [[Witch of the Moors]], [[Eternal Witness]] or [[Mikaeus, the Unhallowed]] undying (Merchant is a Zombie). |
 | 3 | Pumped alpha | Baloth: "As long as you control your commander, this creature gets +2/+2 and other creatures you control get +2/+2 and have trample." Six Pests at 3/3 trample with Beledros out; [[Mikaeus, the Unhallowed]] adds +1/+1 and undying. |
-| 5 | Vilis refill | Vilis: "Whenever you lose life, draw that many cards." Beledros: "Pay 10 life: Untap all lands you control." Together: draw 10 and untap every land, then cast the hand. Vilis's "{B}, Pay 2 life: Target creature gets -1/-1" on your own Pest is a death trigger plus two cards. |
 | 4 | Edict and wipe grind | [[Priest of Forgotten Gods]] every turn, [[Massacre Wurm]] (one-sided: "Creatures your opponents control get -2/-2" and "that player loses 2 life" per death), [[Deadly Tempest]] with your drains out, [[Liliana, Dreadhorde General]] -4. |
 
 => [[Beledros Witherbloom]] makes a Pest on every upkeep → sacrifice it to [[Viscera Seer]] or [[Priest of Forgotten Gods]] → [[Zulaport Cutthroat]] drains 1, two life-gain events → [[Dina, Soul Steeper]] drains 2 more → **3 life from each opponent per Pest, 12 per round**
 
 => [[Gray Merchant of Asphodel]] enters with devotion X → each opponent loses X, you gain 3X → [[Vito, Thorn of the Dusk Rose]] makes one opponent lose 3X → with [[Alhammarret's Archive]] the gain is 6X → **X = 7 kills the Vito target from 40**
 
-=> [[Vilis, Broker of Blood]] in play → Beledros: pay 10 life, untap all lands → draw 10 → cast [[Gray Merchant of Asphodel]] and the drains with the untapped lands → Merchant refunds the 10 life → **a Necropotence turn, every turn**
 
 ## 2. Engine map
 | # | Interaction | Text (DB) | Why it works / caveat |
@@ -35,7 +33,6 @@ List: `verify-2026-10-08/best-deck/beledros-recommended.txt` (100, draft until s
 | 9 | [[Eccentric Pestfinder]] | "At the beginning of each end step, if you gained life this turn, this creature becomes prepared." | Turn Stones copy: "For each opponent, you create a 1/1 black and green Pest creature token." Three Pests a turn once life is flowing. |
 | 10 | [[Braids, Arisen Nightmare]] | "At the beginning of your end step, you may sacrifice an artifact, creature, enchantment, land, or planeswalker. If you do, each opponent may sacrifice a permanent of their choice that shares a card type with it. For each opponent who doesn't, that player loses 2 life and you draw a card." | Sacrifice the upkeep Pest: an opponent either loses a creature or loses 2 and gives you a card. |
 | 11 | [[Alhammarret's Archive]] | "If you would gain life, you gain twice that much life instead. / If you would draw a card except the first one you draw in each of your draw steps, draw two cards instead." | Doubles Vito and Sanguine Bond. Also doubles Idol, Moldervine and Liliana draws: count your library in long turns. |
-| 13 | [[Vilis, Broker of Blood]] | "Whenever you lose life, draw that many cards. (Damage causes loss of life.)" | Pay 10 to Beledros only with Vilis out and a drain to refund it; [[Alhammarret's Archive]] doubles it to 20 cards — count the library. Each Pest you shrink with "{B}, Pay 2 life" is a drain trigger and two cards. Combat damage and [[Phyrexian Arena]] draw too. |
 | 12 | [[Ashnod's Altar]] + [[Priest of Forgotten Gods]] | Altar: "Sacrifice a creature: Add {C}{C}." Priest: "{T}, Sacrifice two other creatures: Any number of target players each lose 2 life and sacrifice a creature of their choice. You add {B}{B} and draw a card." | Two Pests = {B}{B}, a card, a table edict and 2 life from each targeted player. Altar turns spare Pests into mana for Beledros' untap turn. |
 
 **Does NOT work the way it looks**
@@ -113,9 +110,9 @@ Keep 3–4 lands (or 2 + Sol Ring/dork) with both colours and one of: a drain, a
 | Fast combo | Interaction is mostly sorcery-speed | Hold Grasp, Trophy, Mischief and Veil; Priest edicts at instant speed |
 | Fliers over a Pest wall | Pests are 1/1 ground tokens | Warg Tactics mode 1, Feral Appetite deathtouch, Mikaeus +1/+1, Beledros blocks 4/4 in the air |
 
-## 8. Maybeboard (19 cards, kept in the box) and between-game swaps
+## 8. Maybeboard (22 cards, kept in the box) and between-game swaps
 
-All free after Meren is dismantled (Meren leftovers), except where noted. Swaps happen between games, never mid-game. The first three are upgrades the model cannot see; the rest answer a table.
+All free after Meren is dismantled (Meren leftovers), except where noted. Swaps happen between games, never mid-game. The first three are upgrades the model cannot see; the rest answer a table. **Operator rule (2026-10-08): the model's score decides the final 99; proposed synergies live here until a climb accepts them.** The 2026-10-08 climb (`verify-2026-10-08/best-deck/beledros-climb-2.ndjson`, 1,646 evaluations, converged) rejected every card in the last block and put [[Blooming Marsh]] in the 99 instead.
 
 | Card | In for | When |
 |---|---|---|
@@ -130,14 +127,17 @@ All free after Meren is dismantled (Meren leftovers), except where noted. Swaps 
 | [[Syr Konrad, the Grim]] (second copy; the first stays in Imotekh) | [[Witch of the Moors]] | Mill / reanimator tables; also turns [[Culling Ritual]] into a second drain. |
 | [[Mazirek, Kraul Death Priest]] | [[Creakwood Liege]] | Slow tables: every Pest sacrificed by anyone puts a counter on the team. |
 | [[Victimize]] | [[Revitalizing Repast // Old-Growth Grove]] | Slow tables: Gray Merchant + Massacre Wurm back for one Pest. |
-| [[Reanimate]] (2 owned, one in Meren) | [[Feral Appetite]] | Any table once something has died: "Put target creature card from a graveyard onto the battlefield under your control. You lose life equal to that card's mana value" — any graveyard, so an opponent's dead fatty too. On [[Vilis, Broker of Blood]] the 8 life lost is 8 cards (Vilis is on the battlefield before the loss). The deck has no self-mill or discard, so the target must have died first: a wiped Wurm, Merchant or Vilis back for {B}. |
+| [[Reanimate]] (2 owned, one in Meren; model-neutral, rejected by the climb) | [[Feral Appetite]] | Any table once something has died: "Put target creature card from a graveyard onto the battlefield under your control. You lose life equal to that card's mana value" — any graveyard, so an opponent's dead fatty too. The deck has no self-mill or discard, so the target must have died first: a wiped Wurm or Merchant back for {B}. |
 | [[Village Rites]] | [[Feral Appetite]] | Counterspell / removal tables: sacrifice the targeted creature in response, draw two. |
 | [[Wight of the Reliquary]] | [[Scute Swarm]] | Any table short on outlets: a fifth sacrifice outlet that fetches [[High Market]] or [[Yavimaya, Cradle of Growth]]. |
 | [[Braids, Cabal Minion]] | [[Binding the Old Gods]] | Durdle control tables only; Pests feed her every upkeep, the table hates you for it. |
 | [[Massacre Girl, Most Wanted]] (loose, registered 2026-10-08) | [[Pest Rescuer]] | 1v1 or two-player tables: "Whenever another creature or planeswalker you control dies, Massacre Girl deals 1 damage to target opponent and you gain 1 life" — one opponent, not each, so a 5-mana Blood Artist in a pod; every Artist/Dina ping grows her (+1/+1 counter per noncombat damage). Rescuer's upkeep Pest is dead once Beledros is out. |
 | [[Omnipresence]] (loose) | [[Alhammarret's Archive]] | Slow tables: 8 mana, "cast spells with mana value less than or equal to the number of creatures you control from your hand without paying their mana costs" — Beledros' untap pays for it the turn it lands; with 6+ Pests the Vilis draw-10 is cast for free. Win-more against interaction. |
 | [[Verdant Kraken]] (in Cabbage; needs a backfill there) | [[Ribtruss Roaster]] | Long games: a 3/3 Forest Tentacle land creature on every player's upkeep = fodder plus mana, [[Ashnod's Altar]] makes each one {C}{C}. Costs 7 and competes with Beledros for the turn; Cabbage's Tireless Provisioner and Gingerbread Cabin like it more. |
-| [[Blossoming Bogbeast]] (cut for Vilis) | [[Vilis, Broker of Blood]] | Tables with no removal where the alpha is the plan: attack, gain 2, X = life gained this turn, team +X/+X trample — six Pests at +8/+8 after sacrificing before combat. |
+| [[Blossoming Bogbeast]] (cut by the climb for a land) | [[Blooming Marsh]] | Tables with no removal where the alpha is the plan: attack, gain 2, X = life gained this turn, team +X/+X trample — six Pests at +8/+8 after sacrificing before combat. |
+| [[Vilis, Broker of Blood]] (loose, registered 2026-10-08; climb −4.2: a window overflow the model cannot value) | [[Blooming Marsh]] | Beledros "Pay 10 life: Untap all lands you control" + Vilis "Whenever you lose life, draw that many cards" = draw 10 and untap; "{B}, Pay 2 life: -1/-1" on your own Pest is a drain trigger and two cards; [[Alhammarret's Archive]] doubles to 20. Slow tables with a drain to refund the life. |
+| [[Meren of Clan Nel Toth]] (loose once her deck is dismantled; model-neutral, rejected) | [[Veinwitch Coven]] | "Whenever another creature you control dies, you get an experience counter" — four Pests a round = four counters; the end step returns Merchant (5) or Wurm (6) from the second end step on. Sacrifice Merchant to Altar in main 2, Meren returns him: a drain every turn. |
+| [[Blech, Loafing Pest]] (loose, registered 2026-10-08; model-neutral, rejected) | [[Pest Rescuer]] | "Whenever you gain life, put a +1/+1 counter on each Pest, Bat, Insect, Snake, and Spider you control" — every Pest death grows the swarm. ⚠️ Pests with counters lose Mikaeus undying (CR 702.93a). Alpha tables. |
 
 Not available as maybes: Ramunap Excavator (goes to Cabbage) and Grim Haruspex (goes to Imotekh) are the donor backfills.
 
