@@ -110,3 +110,38 @@ Keep 3–4 lands (or 2 + Sol Ring/dork) with both colours and one of: a drain, a
 | Commander removal / tax | He costs 7 and the untap stops | The deck makes fodder without him; Guardian Augmenter gives hexproof, Greaves gives shroud and haste |
 | Fast combo | Interaction is mostly sorcery-speed | Hold Grasp, Trophy, Mischief and Veil; Priest edicts at instant speed |
 | Fliers over a Pest wall | Pests are 1/1 ground tokens | Warg Tactics mode 1, Feral Appetite deathtouch, Mikaeus +1/+1, Beledros blocks 4/4 in the air |
+
+## 8. Maybeboard (15 cards, kept in the box) and between-game swaps
+
+All free after Meren is dismantled (Meren leftovers), except where noted. Swaps happen between games, never mid-game. The first three are upgrades the model cannot see; the rest answer a table.
+
+| Card | In for | When |
+|---|---|---|
+| [[Saw in Half]] | [[Warg Tactics]] | Any table. On your own [[Gray Merchant of Asphodel]] it is a death trigger plus two Merchants entering; on [[Massacre Wurm]] two sweeps; instant removal otherwise. Never on Beledros (command zone = did not die). |
+| [[Blooming Marsh]] | [[Radiant Fountain]] | Any table. Untapped B/G on turns 1–3; the model scores the swap at +0.05 and ignores it. |
+| [[Culling Ritual]] | [[Deadly Tempest]] | Token and dork tables. Cast it only with [[Blood Artist]] + [[Zulaport Cutthroat]] on board: every creature of ours that dies drains; the mana recasts Gray Merchant. Alone it is a self-wipe (13 of our permanents). |
+| [[Golgari Charm]] | [[Tyvar's Stand]] | Rest in Peace / Blind Obedience / Authority of the Consuls tables (mode 2), 1/1 swarms (mode 1 kills our Pests too), destroy-wraths (mode 3 regenerates). |
+| [[Yahenni, Undying Partisan]] | [[Argentum Masticore]] | Wrath-heavy control: an indestructible sacrifice outlet keeps the drain engine through the sweep. |
+| [[Butcher of Malakir]] | [[Casualties of War]] | Voltron / hexproof commanders: an edict on every Pest death. |
+| [[Plaguecrafter]] | [[Ophiomancer]] | Few-big-creature tables: edict on entry, and a Pest is our sacrifice. |
+| [[Jarad, Golgari Lich Lord]] | [[Mirkwood Bats]] | Lifegain tables: sacrifice Gray Merchant or Massacre Wurm for a 5–6 point drain to each opponent, uncounterable at instant speed. |
+| [[Syr Konrad, the Grim]] (second copy; the first stays in Imotekh) | [[Witch of the Moors]] | Mill / reanimator tables; also turns [[Culling Ritual]] into a second drain. |
+| [[Mazirek, Kraul Death Priest]] | [[Creakwood Liege]] | Slow tables: every Pest sacrificed by anyone puts a counter on the team. |
+| [[Victimize]] | [[Revitalizing Repast // Old-Growth Grove]] | Slow tables: Gray Merchant + Massacre Wurm back for one Pest. |
+| [[Reanimate]] | [[Moldervine Reclamation]] | Slow tables: turn-2 Wurm after [[Eccentric Pestfinder // Turn Stones]] mills it. |
+| [[Village Rites]] | [[Feral Appetite]] | Counterspell / removal tables: sacrifice the targeted creature in response, draw two. |
+| [[Wight of the Reliquary]] | [[Scute Swarm]] | Any table short on outlets: a fifth sacrifice outlet that fetches [[High Market]] or [[Yavimaya, Cradle of Growth]]. |
+| [[Braids, Cabal Minion]] | [[Binding the Old Gods]] | Durdle control tables only; Pests feed her every upkeep, the table hates you for it. |
+
+Not available as maybes: Ramunap Excavator (goes to Cabbage) and Grim Haruspex (goes to Imotekh) are the donor backfills.
+
+**Swap recipes (between games):**
+
+| Table | In | Out |
+|---|---|---|
+| Wrath-heavy control | Yahenni, Golgari Charm, Village Rites | Argentum Masticore, Tyvar's Stand, Feral Appetite |
+| Token / dork swarm | Culling Ritual, Golgari Charm | Deadly Tempest, Tyvar's Stand |
+| Voltron / hexproof commander | Butcher of Malakir, Plaguecrafter | Casualties of War, Ophiomancer |
+| Lifegain | Jarad, Saw in Half | Mirkwood Bats, Warg Tactics |
+| Graveyard hate (Rest in Peace, Bojuka Bog) | Golgari Charm, Jarad | Mikaeus, the Unhallowed (undying is exile under Rest in Peace), Cauldron of Essence |
+| Slow / durdle | Victimize, Reanimate, Mazirek | Revitalizing Repast, Moldervine Reclamation, Creakwood Liege |
