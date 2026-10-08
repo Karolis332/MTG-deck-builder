@@ -1,20 +1,20 @@
 {
  "base": 101.19857142857144,
  "games": 100,
- "generated": "2026-10-08T11:05:46.240Z",
+ "generated": "2026-10-08T12:03:52.313Z",
  "cards": {
   "Command Tower": {
    "from": "Meren (dismantled)",
    "roles": [
     "land"
    ],
-   "candidates": 51,
+   "candidates": 50,
    "backups": [
     {
      "name": "Forest",
      "delta": -0.025000000000005684,
      "from": "Meren (dismantled)",
-     "type": "Basic Land — Forest",
+     "type": "Basic Land \u2014 Forest",
      "incl": 0.920056,
      "rank": null
     },
@@ -22,14 +22,14 @@
      "name": "Swamp",
      "delta": -0.007142857142852677,
      "from": "Meren (dismantled)",
-     "type": "Basic Land — Swamp",
+     "type": "Basic Land \u2014 Swamp",
      "incl": 0.913511,
      "rank": null
     },
     {
      "name": "Reliquary Tower",
      "delta": -0.07500000000000284,
-     "from": "loose collection",
+     "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
      "type": "Land",
      "incl": 0.292193,
      "rank": 10
@@ -41,13 +41,13 @@
    "roles": [
     "land"
    ],
-   "candidates": 51,
+   "candidates": 50,
    "backups": [
     {
      "name": "Forest",
      "delta": -0.01071428571428612,
      "from": "Meren (dismantled)",
-     "type": "Basic Land — Forest",
+     "type": "Basic Land \u2014 Forest",
      "incl": 0.920056,
      "rank": null
     },
@@ -55,14 +55,14 @@
      "name": "Swamp",
      "delta": -0.046428571428577925,
      "from": "Meren (dismantled)",
-     "type": "Basic Land — Swamp",
+     "type": "Basic Land \u2014 Swamp",
      "incl": 0.913511,
      "rank": null
     },
     {
      "name": "Reliquary Tower",
      "delta": -0.09999999999999432,
-     "from": "loose collection",
+     "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
      "type": "Land",
      "incl": 0.292193,
      "rank": 10
@@ -74,13 +74,13 @@
    "roles": [
     "land"
    ],
-   "candidates": 51,
+   "candidates": 50,
    "backups": [
     {
      "name": "Forest",
      "delta": 0,
      "from": "Meren (dismantled)",
-     "type": "Basic Land — Forest",
+     "type": "Basic Land \u2014 Forest",
      "incl": 0.920056,
      "rank": null
     },
@@ -88,14 +88,14 @@
      "name": "Swamp",
      "delta": -0.028571428571424917,
      "from": "Meren (dismantled)",
-     "type": "Basic Land — Swamp",
+     "type": "Basic Land \u2014 Swamp",
      "incl": 0.913511,
      "rank": null
     },
     {
      "name": "Reliquary Tower",
      "delta": -0.0535714285714306,
-     "from": "loose collection",
+     "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
      "type": "Land",
      "incl": 0.292193,
      "rank": 10
@@ -107,13 +107,13 @@
    "roles": [
     "land"
    ],
-   "candidates": 51,
+   "candidates": 50,
    "backups": [
     {
      "name": "Forest",
      "delta": -0.0035714285714334437,
      "from": "Meren (dismantled)",
-     "type": "Basic Land — Forest",
+     "type": "Basic Land \u2014 Forest",
      "incl": 0.920056,
      "rank": null
     },
@@ -121,14 +121,14 @@
      "name": "Swamp",
      "delta": -0.01071428571428612,
      "from": "Meren (dismantled)",
-     "type": "Basic Land — Swamp",
+     "type": "Basic Land \u2014 Swamp",
      "incl": 0.913511,
      "rank": null
     },
     {
      "name": "Reliquary Tower",
      "delta": -0.028571428571424917,
-     "from": "loose collection",
+     "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
      "type": "Land",
      "incl": 0.292193,
      "rank": 10
@@ -140,13 +140,13 @@
    "roles": [
     "land"
    ],
-   "candidates": 51,
+   "candidates": 50,
    "backups": [
     {
      "name": "Forest",
      "delta": -0.007142857142852677,
      "from": "Meren (dismantled)",
-     "type": "Basic Land — Forest",
+     "type": "Basic Land \u2014 Forest",
      "incl": 0.920056,
      "rank": null
     },
@@ -154,14 +154,14 @@
      "name": "Swamp",
      "delta": 0,
      "from": "Meren (dismantled)",
-     "type": "Basic Land — Swamp",
+     "type": "Basic Land \u2014 Swamp",
      "incl": 0.913511,
      "rank": null
     },
     {
      "name": "Reliquary Tower",
      "delta": -0.035714285714291805,
-     "from": "loose collection",
+     "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
      "type": "Land",
      "incl": 0.292193,
      "rank": 10
@@ -169,17 +169,17 @@
    ]
   },
   "Golgari Rot Farm": {
-   "from": "loose collection",
+   "from": "Witherbloom Witchcraft precon leftovers (registered 2026-09-09)",
    "roles": [
     "land"
    ],
-   "candidates": 51,
+   "candidates": 50,
    "backups": [
     {
      "name": "Forest",
      "delta": 0.035714285714291805,
      "from": "Meren (dismantled)",
-     "type": "Basic Land — Forest",
+     "type": "Basic Land \u2014 Forest",
      "incl": 0.920056,
      "rank": null
     },
@@ -187,14 +187,14 @@
      "name": "Swamp",
      "delta": 0.046428571428563714,
      "from": "Meren (dismantled)",
-     "type": "Basic Land — Swamp",
+     "type": "Basic Land \u2014 Swamp",
      "incl": 0.913511,
      "rank": null
     },
     {
      "name": "Reliquary Tower",
      "delta": 0.04285714285714448,
-     "from": "loose collection",
+     "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
      "type": "Land",
      "incl": 0.292193,
      "rank": 10
@@ -206,13 +206,13 @@
    "roles": [
     "land"
    ],
-   "candidates": 51,
+   "candidates": 50,
    "backups": [
     {
      "name": "Forest",
      "delta": 0.03214285714285836,
      "from": "Meren (dismantled)",
-     "type": "Basic Land — Forest",
+     "type": "Basic Land \u2014 Forest",
      "incl": 0.920056,
      "rank": null
     },
@@ -220,14 +220,14 @@
      "name": "Swamp",
      "delta": 0.014285714285719564,
      "from": "Meren (dismantled)",
-     "type": "Basic Land — Swamp",
+     "type": "Basic Land \u2014 Swamp",
      "incl": 0.913511,
      "rank": null
     },
     {
      "name": "Reliquary Tower",
      "delta": -0.046428571428577925,
-     "from": "loose collection",
+     "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
      "type": "Land",
      "incl": 0.292193,
      "rank": 10
@@ -239,13 +239,13 @@
    "roles": [
     "land"
    ],
-   "candidates": 51,
+   "candidates": 50,
    "backups": [
     {
      "name": "Forest",
      "delta": 0.025000000000005684,
      "from": "Meren (dismantled)",
-     "type": "Basic Land — Forest",
+     "type": "Basic Land \u2014 Forest",
      "incl": 0.920056,
      "rank": null
     },
@@ -253,14 +253,14 @@
      "name": "Swamp",
      "delta": 0.025000000000005684,
      "from": "Meren (dismantled)",
-     "type": "Basic Land — Swamp",
+     "type": "Basic Land \u2014 Swamp",
      "incl": 0.913511,
      "rank": null
     },
     {
      "name": "Reliquary Tower",
      "delta": 0,
-     "from": "loose collection",
+     "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
      "type": "Land",
      "incl": 0.292193,
      "rank": 10
@@ -272,13 +272,13 @@
    "roles": [
     "land"
    ],
-   "candidates": 51,
+   "candidates": 50,
    "backups": [
     {
      "name": "Forest",
      "delta": 0.06071428571428328,
      "from": "Meren (dismantled)",
-     "type": "Basic Land — Forest",
+     "type": "Basic Land \u2014 Forest",
      "incl": 0.920056,
      "rank": null
     },
@@ -286,14 +286,14 @@
      "name": "Swamp",
      "delta": 0.0892857142857082,
      "from": "Meren (dismantled)",
-     "type": "Basic Land — Swamp",
+     "type": "Basic Land \u2014 Swamp",
      "incl": 0.913511,
      "rank": null
     },
     {
      "name": "Reliquary Tower",
      "delta": 0.014285714285719564,
-     "from": "loose collection",
+     "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
      "type": "Land",
      "incl": 0.292193,
      "rank": 10
@@ -305,13 +305,13 @@
    "roles": [
     "land"
    ],
-   "candidates": 51,
+   "candidates": 50,
    "backups": [
     {
      "name": "Forest",
      "delta": -0.06428571428571672,
      "from": "Meren (dismantled)",
-     "type": "Basic Land — Forest",
+     "type": "Basic Land \u2014 Forest",
      "incl": 0.920056,
      "rank": null
     },
@@ -319,14 +319,14 @@
      "name": "Swamp",
      "delta": 0,
      "from": "Meren (dismantled)",
-     "type": "Basic Land — Swamp",
+     "type": "Basic Land \u2014 Swamp",
      "incl": 0.913511,
      "rank": null
     },
     {
      "name": "Reliquary Tower",
      "delta": -0.0892857142857082,
-     "from": "loose collection",
+     "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
      "type": "Land",
      "incl": 0.292193,
      "rank": 10
@@ -344,24 +344,24 @@
     {
      "name": "Blossoming Bogbeast",
      "delta": -8.872857142857157,
-     "from": "loose collection",
-     "type": "Creature — Beast",
+     "from": "Witherbloom Witchcraft precon (C21 card registered before the leftover pass)",
+     "type": "Creature \u2014 Beast",
      "incl": 0.17064,
      "rank": 4019
     },
     {
      "name": "Verdant Sun's Avatar",
      "delta": -8.91928571428572,
-     "from": "loose collection",
-     "type": "Creature — Dinosaur Avatar",
+     "from": "Witherbloom Witchcraft precon leftovers (registered 2026-09-09)",
+     "type": "Creature \u2014 Dinosaur Avatar",
      "incl": 0.123422,
      "rank": 2179
     },
     {
      "name": "Avenger of Zendikar",
      "delta": -8.91928571428572,
-     "from": "loose collection",
-     "type": "Creature — Elemental",
+     "from": "Omo precon (Tricky Terrain box, dismantled 2026-10-07)",
+     "type": "Creature \u2014 Elemental",
      "incl": 0.114072,
      "rank": 295
     }
@@ -372,13 +372,13 @@
    "roles": [
     "land"
    ],
-   "candidates": 51,
+   "candidates": 50,
    "backups": [
     {
      "name": "Forest",
      "delta": -0.025000000000005684,
      "from": "Meren (dismantled)",
-     "type": "Basic Land — Forest",
+     "type": "Basic Land \u2014 Forest",
      "incl": 0.920056,
      "rank": null
     },
@@ -386,14 +386,14 @@
      "name": "Swamp",
      "delta": 0.007142857142852677,
      "from": "Meren (dismantled)",
-     "type": "Basic Land — Swamp",
+     "type": "Basic Land \u2014 Swamp",
      "incl": 0.913511,
      "rank": null
     },
     {
      "name": "Reliquary Tower",
      "delta": -0.03928571428571104,
-     "from": "loose collection",
+     "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
      "type": "Land",
      "incl": 0.292193,
      "rank": 10
@@ -401,17 +401,17 @@
    ]
   },
   "Yavimaya, Cradle of Growth": {
-   "from": "loose collection",
+   "from": "Omo precon (Tricky Terrain box, dismantled 2026-10-07)",
    "roles": [
     "land"
    ],
-   "candidates": 51,
+   "candidates": 50,
    "backups": [
     {
      "name": "Forest",
      "delta": 0,
      "from": "Meren (dismantled)",
-     "type": "Basic Land — Forest",
+     "type": "Basic Land \u2014 Forest",
      "incl": 0.920056,
      "rank": null
     },
@@ -419,14 +419,14 @@
      "name": "Swamp",
      "delta": -0.035714285714291805,
      "from": "Meren (dismantled)",
-     "type": "Basic Land — Swamp",
+     "type": "Basic Land \u2014 Swamp",
      "incl": 0.913511,
      "rank": null
     },
     {
      "name": "Reliquary Tower",
      "delta": -0.04999999999999716,
-     "from": "loose collection",
+     "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
      "type": "Land",
      "incl": 0.292193,
      "rank": 10
@@ -434,17 +434,17 @@
    ]
   },
   "Jungle Hollow": {
-   "from": "loose collection",
+   "from": "loose collection (printed in TDM Tarkir: Dragonstorm)",
    "roles": [
     "land"
    ],
-   "candidates": 51,
+   "candidates": 50,
    "backups": [
     {
      "name": "Forest",
      "delta": -0.025000000000005684,
      "from": "Meren (dismantled)",
-     "type": "Basic Land — Forest",
+     "type": "Basic Land \u2014 Forest",
      "incl": 0.920056,
      "rank": null
     },
@@ -452,14 +452,14 @@
      "name": "Swamp",
      "delta": -0.03928571428571104,
      "from": "Meren (dismantled)",
-     "type": "Basic Land — Swamp",
+     "type": "Basic Land \u2014 Swamp",
      "incl": 0.913511,
      "rank": null
     },
     {
      "name": "Reliquary Tower",
      "delta": -0.07500000000000284,
-     "from": "loose collection",
+     "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
      "type": "Land",
      "incl": 0.292193,
      "rank": 10
@@ -471,13 +471,13 @@
    "roles": [
     "land"
    ],
-   "candidates": 51,
+   "candidates": 50,
    "backups": [
     {
      "name": "Forest",
      "delta": 0.014285714285719564,
      "from": "Meren (dismantled)",
-     "type": "Basic Land — Forest",
+     "type": "Basic Land \u2014 Forest",
      "incl": 0.920056,
      "rank": null
     },
@@ -485,14 +485,14 @@
      "name": "Swamp",
      "delta": 0.007142857142852677,
      "from": "Meren (dismantled)",
-     "type": "Basic Land — Swamp",
+     "type": "Basic Land \u2014 Swamp",
      "incl": 0.913511,
      "rank": null
     },
     {
      "name": "Reliquary Tower",
      "delta": -0.007142857142852677,
-     "from": "loose collection",
+     "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
      "type": "Land",
      "incl": 0.292193,
      "rank": 10
@@ -504,13 +504,13 @@
    "roles": [
     "land"
    ],
-   "candidates": 51,
+   "candidates": 50,
    "backups": [
     {
      "name": "Forest",
      "delta": -0.09642857142857508,
      "from": "Meren (dismantled)",
-     "type": "Basic Land — Forest",
+     "type": "Basic Land \u2014 Forest",
      "incl": 0.920056,
      "rank": null
     },
@@ -518,14 +518,14 @@
      "name": "Swamp",
      "delta": -0.028571428571424917,
      "from": "Meren (dismantled)",
-     "type": "Basic Land — Swamp",
+     "type": "Basic Land \u2014 Swamp",
      "incl": 0.913511,
      "rank": null
     },
     {
      "name": "Reliquary Tower",
      "delta": -0.14999999999999147,
-     "from": "loose collection",
+     "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
      "type": "Land",
      "incl": 0.292193,
      "rank": 10
@@ -537,13 +537,13 @@
    "roles": [
     "land"
    ],
-   "candidates": 51,
+   "candidates": 50,
    "backups": [
     {
      "name": "Forest",
      "delta": 0.03214285714285836,
      "from": "Meren (dismantled)",
-     "type": "Basic Land — Forest",
+     "type": "Basic Land \u2014 Forest",
      "incl": 0.920056,
      "rank": null
     },
@@ -551,14 +551,14 @@
      "name": "Swamp",
      "delta": 0.014285714285719564,
      "from": "Meren (dismantled)",
-     "type": "Basic Land — Swamp",
+     "type": "Basic Land \u2014 Swamp",
      "incl": 0.913511,
      "rank": null
     },
     {
      "name": "Reliquary Tower",
      "delta": 0,
-     "from": "loose collection",
+     "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
      "type": "Land",
      "incl": 0.292193,
      "rank": 10
@@ -570,13 +570,13 @@
    "roles": [
     "land"
    ],
-   "candidates": 51,
+   "candidates": 50,
    "backups": [
     {
      "name": "Forest",
      "delta": 0,
      "from": "Meren (dismantled)",
-     "type": "Basic Land — Forest",
+     "type": "Basic Land \u2014 Forest",
      "incl": 0.920056,
      "rank": null
     },
@@ -584,14 +584,14 @@
      "name": "Swamp",
      "delta": 0.01071428571428612,
      "from": "Meren (dismantled)",
-     "type": "Basic Land — Swamp",
+     "type": "Basic Land \u2014 Swamp",
      "incl": 0.913511,
      "rank": null
     },
     {
      "name": "Reliquary Tower",
      "delta": 0,
-     "from": "loose collection",
+     "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
      "type": "Land",
      "incl": 0.292193,
      "rank": 10
@@ -599,17 +599,17 @@
    ]
   },
   "Temple of the False God": {
-   "from": "loose collection",
+   "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
    "roles": [
     "land"
    ],
-   "candidates": 51,
+   "candidates": 50,
    "backups": [
     {
      "name": "Forest",
      "delta": -0.017857142857138797,
      "from": "Meren (dismantled)",
-     "type": "Basic Land — Forest",
+     "type": "Basic Land \u2014 Forest",
      "incl": 0.920056,
      "rank": null
     },
@@ -617,14 +617,14 @@
      "name": "Swamp",
      "delta": 0.01071428571428612,
      "from": "Meren (dismantled)",
-     "type": "Basic Land — Swamp",
+     "type": "Basic Land \u2014 Swamp",
      "incl": 0.913511,
      "rank": null
     },
     {
      "name": "Reliquary Tower",
      "delta": 0,
-     "from": "loose collection",
+     "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
      "type": "Land",
      "incl": 0.292193,
      "rank": 10
@@ -632,17 +632,17 @@
    ]
   },
   "Haunted Mire": {
-   "from": "loose collection",
+   "from": "loose collection (printed in TDC Tarkir: Dragonstorm Commander)",
    "roles": [
     "land"
    ],
-   "candidates": 51,
+   "candidates": 50,
    "backups": [
     {
      "name": "Forest",
      "delta": 0.01071428571428612,
      "from": "Meren (dismantled)",
-     "type": "Basic Land — Forest",
+     "type": "Basic Land \u2014 Forest",
      "incl": 0.920056,
      "rank": null
     },
@@ -650,14 +650,14 @@
      "name": "Swamp",
      "delta": -0.12142857142856656,
      "from": "Meren (dismantled)",
-     "type": "Basic Land — Swamp",
+     "type": "Basic Land \u2014 Swamp",
      "incl": 0.913511,
      "rank": null
     },
     {
      "name": "Reliquary Tower",
      "delta": -0.14642857142857224,
-     "from": "loose collection",
+     "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
      "type": "Land",
      "incl": 0.292193,
      "rank": 10
@@ -665,17 +665,17 @@
    ]
   },
   "Evolving Wilds": {
-   "from": "loose collection",
+   "from": "loose collection (printed in ECL Lorwyn Eclipsed)",
    "roles": [
     "land"
    ],
-   "candidates": 51,
+   "candidates": 50,
    "backups": [
     {
      "name": "Forest",
      "delta": 0,
      "from": "Meren (dismantled)",
-     "type": "Basic Land — Forest",
+     "type": "Basic Land \u2014 Forest",
      "incl": 0.920056,
      "rank": null
     },
@@ -683,14 +683,14 @@
      "name": "Swamp",
      "delta": 0.017857142857138797,
      "from": "Meren (dismantled)",
-     "type": "Basic Land — Swamp",
+     "type": "Basic Land \u2014 Swamp",
      "incl": 0.913511,
      "rank": null
     },
     {
      "name": "Reliquary Tower",
      "delta": 0,
-     "from": "loose collection",
+     "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
      "type": "Land",
      "incl": 0.292193,
      "rank": 10
@@ -702,13 +702,13 @@
    "roles": [
     "land"
    ],
-   "candidates": 51,
+   "candidates": 50,
    "backups": [
     {
      "name": "Forest",
      "delta": 0.0035714285714334437,
      "from": "Meren (dismantled)",
-     "type": "Basic Land — Forest",
+     "type": "Basic Land \u2014 Forest",
      "incl": 0.920056,
      "rank": null
     },
@@ -716,14 +716,14 @@
      "name": "Swamp",
      "delta": -0.014285714285719564,
      "from": "Meren (dismantled)",
-     "type": "Basic Land — Swamp",
+     "type": "Basic Land \u2014 Swamp",
      "incl": 0.913511,
      "rank": null
     },
     {
      "name": "Reliquary Tower",
      "delta": -0.014285714285719564,
-     "from": "loose collection",
+     "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
      "type": "Land",
      "incl": 0.292193,
      "rank": 10
@@ -731,17 +731,17 @@
    ]
   },
   "Terramorphic Expanse": {
-   "from": "loose collection",
+   "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
    "roles": [
     "land"
    ],
-   "candidates": 51,
+   "candidates": 50,
    "backups": [
     {
      "name": "Forest",
      "delta": 0.035714285714291805,
      "from": "Meren (dismantled)",
-     "type": "Basic Land — Forest",
+     "type": "Basic Land \u2014 Forest",
      "incl": 0.920056,
      "rank": null
     },
@@ -749,14 +749,14 @@
      "name": "Swamp",
      "delta": 0.028571428571424917,
      "from": "Meren (dismantled)",
-     "type": "Basic Land — Swamp",
+     "type": "Basic Land \u2014 Swamp",
      "incl": 0.913511,
      "rank": null
     },
     {
      "name": "Reliquary Tower",
      "delta": 0,
-     "from": "loose collection",
+     "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
      "type": "Land",
      "incl": 0.292193,
      "rank": 10
@@ -764,17 +764,17 @@
    ]
   },
   "Witherbloom Campus": {
-   "from": "loose collection",
+   "from": "loose collection (printed in STX Strixhaven: School of Mages)",
    "roles": [
     "land"
    ],
-   "candidates": 51,
+   "candidates": 50,
    "backups": [
     {
      "name": "Forest",
      "delta": 0.014285714285719564,
      "from": "Meren (dismantled)",
-     "type": "Basic Land — Forest",
+     "type": "Basic Land \u2014 Forest",
      "incl": 0.920056,
      "rank": null
     },
@@ -782,14 +782,14 @@
      "name": "Swamp",
      "delta": 0.028571428571424917,
      "from": "Meren (dismantled)",
-     "type": "Basic Land — Swamp",
+     "type": "Basic Land \u2014 Swamp",
      "incl": 0.913511,
      "rank": null
     },
     {
      "name": "Reliquary Tower",
      "delta": 0.014285714285719564,
-     "from": "loose collection",
+     "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
      "type": "Land",
      "incl": 0.292193,
      "rank": 10
@@ -797,17 +797,17 @@
    ]
   },
   "Blighted Woodland": {
-   "from": "loose collection",
+   "from": "Witherbloom Witchcraft precon leftovers (registered 2026-09-09)",
    "roles": [
     "land"
    ],
-   "candidates": 51,
+   "candidates": 50,
    "backups": [
     {
      "name": "Forest",
      "delta": 0,
      "from": "Meren (dismantled)",
-     "type": "Basic Land — Forest",
+     "type": "Basic Land \u2014 Forest",
      "incl": 0.920056,
      "rank": null
     },
@@ -815,32 +815,32 @@
      "name": "Swamp",
      "delta": 0.007142857142852677,
      "from": "Meren (dismantled)",
-     "type": "Basic Land — Swamp",
+     "type": "Basic Land \u2014 Swamp",
      "incl": 0.913511,
      "rank": null
     },
     {
      "name": "Reliquary Tower",
      "delta": 0,
-     "from": "loose collection",
+     "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
      "type": "Land",
      "incl": 0.292193,
      "rank": 10
     }
    ]
   },
-  "Witch's Clinic": {
-   "from": "loose collection",
+  "Vesuva": {
+   "from": "Omo precon (Tricky Terrain box, dismantled 2026-10-07)",
    "roles": [
     "land"
    ],
-   "candidates": 51,
+   "candidates": 50,
    "backups": [
     {
      "name": "Forest",
      "delta": 0.025000000000005684,
      "from": "Meren (dismantled)",
-     "type": "Basic Land — Forest",
+     "type": "Basic Land \u2014 Forest",
      "incl": 0.920056,
      "rank": null
     },
@@ -848,14 +848,14 @@
      "name": "Swamp",
      "delta": 0.0535714285714306,
      "from": "Meren (dismantled)",
-     "type": "Basic Land — Swamp",
+     "type": "Basic Land \u2014 Swamp",
      "incl": 0.913511,
      "rank": null
     },
     {
      "name": "Reliquary Tower",
      "delta": 0,
-     "from": "loose collection",
+     "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
      "type": "Land",
      "incl": 0.292193,
      "rank": 10
@@ -867,13 +867,13 @@
    "roles": [
     "land"
    ],
-   "candidates": 51,
+   "candidates": 50,
    "backups": [
     {
      "name": "Forest",
      "delta": -0.028571428571424917,
      "from": "Meren (dismantled)",
-     "type": "Basic Land — Forest",
+     "type": "Basic Land \u2014 Forest",
      "incl": 0.920056,
      "rank": null
     },
@@ -881,32 +881,32 @@
      "name": "Swamp",
      "delta": -0.125,
      "from": "Meren (dismantled)",
-     "type": "Basic Land — Swamp",
+     "type": "Basic Land \u2014 Swamp",
      "incl": 0.913511,
      "rank": null
     },
     {
      "name": "Reliquary Tower",
      "delta": -0.1785714285714306,
-     "from": "loose collection",
+     "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
      "type": "Land",
      "incl": 0.292193,
      "rank": 10
     }
    ]
   },
-  "Radiant Fountain": {
-   "from": "loose collection",
+  "Thespian's Stage": {
+   "from": "Omo precon (Tricky Terrain box, dismantled 2026-10-07)",
    "roles": [
     "land"
    ],
-   "candidates": 51,
+   "candidates": 50,
    "backups": [
     {
      "name": "Forest",
      "delta": 0.046428571428577925,
      "from": "Meren (dismantled)",
-     "type": "Basic Land — Forest",
+     "type": "Basic Land \u2014 Forest",
      "incl": 0.920056,
      "rank": null
     },
@@ -914,14 +914,14 @@
      "name": "Swamp",
      "delta": 0.035714285714291805,
      "from": "Meren (dismantled)",
-     "type": "Basic Land — Swamp",
+     "type": "Basic Land \u2014 Swamp",
      "incl": 0.913511,
      "rank": null
     },
     {
      "name": "Reliquary Tower",
      "delta": 0,
-     "from": "loose collection",
+     "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
      "type": "Land",
      "incl": 0.292193,
      "rank": 10
@@ -938,7 +938,7 @@
     {
      "name": "Rampant Growth",
      "delta": -0.07500000000000284,
-     "from": "loose collection",
+     "from": "Witherbloom Witchcraft precon leftovers (registered 2026-09-09)",
      "type": "Sorcery",
      "incl": 0.529219,
      "rank": 27
@@ -947,14 +947,14 @@
      "name": "Wight of the Reliquary",
      "delta": -0.09642857142857508,
      "from": "Meren (dismantled)",
-     "type": "Creature — Zombie Knight",
+     "type": "Creature \u2014 Zombie Knight",
      "incl": 0.267415,
      "rank": 1266
     },
     {
      "name": "Skyshroud Claim",
      "delta": -0.1071428571428612,
-     "from": "loose collection",
+     "from": "loose collection (printed in EOC Edge of Eternities Commander)",
      "type": "Sorcery",
      "incl": 0.265545,
      "rank": 302
@@ -962,7 +962,7 @@
    ]
   },
   "Cultivate": {
-   "from": "loose collection",
+   "from": "loose collection (printed in ECC Lorwyn Eclipsed Commander)",
    "roles": [
     "ramp"
    ],
@@ -971,7 +971,7 @@
     {
      "name": "Rampant Growth",
      "delta": -0.035714285714291805,
-     "from": "loose collection",
+     "from": "Witherbloom Witchcraft precon leftovers (registered 2026-09-09)",
      "type": "Sorcery",
      "incl": 0.529219,
      "rank": 27
@@ -980,14 +980,14 @@
      "name": "Wight of the Reliquary",
      "delta": -0.0714285714285694,
      "from": "Meren (dismantled)",
-     "type": "Creature — Zombie Knight",
+     "type": "Creature \u2014 Zombie Knight",
      "incl": 0.267415,
      "rank": 1266
     },
     {
      "name": "Skyshroud Claim",
      "delta": 0.017857142857138797,
-     "from": "loose collection",
+     "from": "loose collection (printed in EOC Edge of Eternities Commander)",
      "type": "Sorcery",
      "incl": 0.265545,
      "rank": 302
@@ -1005,7 +1005,7 @@
     {
      "name": "Deadly Brew",
      "delta": 0.0035714285714334437,
-     "from": "loose collection",
+     "from": "loose collection (printed in FDN Foundations)",
      "type": "Sorcery",
      "incl": 0.204769,
      "rank": 4763
@@ -1013,7 +1013,7 @@
     {
      "name": "Immoral Bargain",
      "delta": 0.02142857142857224,
-     "from": "loose collection",
+     "from": "loose collection (printed in SOC Secrets of Strixhaven Commander)",
      "type": "Sorcery",
      "incl": 0.13698,
      "rank": 6642
@@ -1021,7 +1021,7 @@
     {
      "name": "Witherbloom Command",
      "delta": 0.0035714285714334437,
-     "from": "loose collection",
+     "from": "loose collection (printed in STX Strixhaven: School of Mages)",
      "type": "Sorcery",
      "incl": 0.098177,
      "rank": 8549
@@ -1046,7 +1046,7 @@
     {
      "name": "Corrupted Conviction",
      "delta": -0.06428571428571672,
-     "from": "loose collection",
+     "from": "OTJ box (Outlaws of Thunder Junction, 2026-09-08)",
      "type": "Instant",
      "incl": 0.120617,
      "rank": 599
@@ -1054,7 +1054,7 @@
     {
      "name": "Night's Whisper",
      "delta": -0.0535714285714306,
-     "from": "loose collection",
+     "from": "loose collection (printed in ECC Lorwyn Eclipsed Commander)",
      "type": "Sorcery",
      "incl": 0.113604,
      "rank": 182
@@ -1062,7 +1062,7 @@
    ]
   },
   "Dina, Soul Steeper": {
-   "from": "loose collection",
+   "from": "loose collection (printed in STX Strixhaven: School of Mages)",
    "roles": [
     "win_condition"
    ],
@@ -1071,24 +1071,24 @@
     {
      "name": "Blossoming Bogbeast",
      "delta": 0.04285714285714448,
-     "from": "loose collection",
-     "type": "Creature — Beast",
+     "from": "Witherbloom Witchcraft precon (C21 card registered before the leftover pass)",
+     "type": "Creature \u2014 Beast",
      "incl": 0.17064,
      "rank": 4019
     },
     {
      "name": "Verdant Sun's Avatar",
      "delta": 0.0035714285714334437,
-     "from": "loose collection",
-     "type": "Creature — Dinosaur Avatar",
+     "from": "Witherbloom Witchcraft precon leftovers (registered 2026-09-09)",
+     "type": "Creature \u2014 Dinosaur Avatar",
      "incl": 0.123422,
      "rank": 2179
     },
     {
      "name": "Avenger of Zendikar",
      "delta": 0.0035714285714334437,
-     "from": "loose collection",
-     "type": "Creature — Elemental",
+     "from": "Omo precon (Tricky Terrain box, dismantled 2026-10-07)",
+     "type": "Creature \u2014 Elemental",
      "incl": 0.114072,
      "rank": 295
     }
@@ -1104,24 +1104,24 @@
     {
      "name": "Blossoming Bogbeast",
      "delta": -0.007142857142852677,
-     "from": "loose collection",
-     "type": "Creature — Beast",
+     "from": "Witherbloom Witchcraft precon (C21 card registered before the leftover pass)",
+     "type": "Creature \u2014 Beast",
      "incl": 0.17064,
      "rank": 4019
     },
     {
      "name": "Verdant Sun's Avatar",
      "delta": -0.03214285714285836,
-     "from": "loose collection",
-     "type": "Creature — Dinosaur Avatar",
+     "from": "Witherbloom Witchcraft precon leftovers (registered 2026-09-09)",
+     "type": "Creature \u2014 Dinosaur Avatar",
      "incl": 0.123422,
      "rank": 2179
     },
     {
      "name": "Avenger of Zendikar",
      "delta": -0.03214285714285836,
-     "from": "loose collection",
-     "type": "Creature — Elemental",
+     "from": "Omo precon (Tricky Terrain box, dismantled 2026-10-07)",
+     "type": "Creature \u2014 Elemental",
      "incl": 0.114072,
      "rank": 295
     }
@@ -1137,7 +1137,7 @@
     {
      "name": "Rampant Growth",
      "delta": -0.02142857142857224,
-     "from": "loose collection",
+     "from": "Witherbloom Witchcraft precon leftovers (registered 2026-09-09)",
      "type": "Sorcery",
      "incl": 0.529219,
      "rank": 27
@@ -1146,14 +1146,14 @@
      "name": "Wight of the Reliquary",
      "delta": -0.09642857142857508,
      "from": "Meren (dismantled)",
-     "type": "Creature — Zombie Knight",
+     "type": "Creature \u2014 Zombie Knight",
      "incl": 0.267415,
      "rank": 1266
     },
     {
      "name": "Skyshroud Claim",
      "delta": -0.057142857142864045,
-     "from": "loose collection",
+     "from": "loose collection (printed in EOC Edge of Eternities Commander)",
      "type": "Sorcery",
      "incl": 0.265545,
      "rank": 302
@@ -1170,8 +1170,8 @@
     {
      "name": "Blech, Loafing Pest",
      "delta": -0.003571428571419233,
-     "from": "loose collection",
-     "type": "Legendary Creature — Pest",
+     "from": "loose collection (printed in SOS Secrets of Strixhaven)",
+     "type": "Legendary Creature \u2014 Pest",
      "incl": 0.16503,
      "rank": 7292
     },
@@ -1186,8 +1186,8 @@
     {
      "name": "Moseo, Vein's New Dean",
      "delta": -0.003571428571419233,
-     "from": "loose collection",
-     "type": "Legendary Creature — Bird Skeleton Warlock",
+     "from": "loose collection (printed in SOS Secrets of Strixhaven)",
+     "type": "Legendary Creature \u2014 Bird Skeleton Warlock",
      "incl": 0.142122,
      "rank": 4268
     }
@@ -1204,7 +1204,7 @@
     {
      "name": "Silkguard",
      "delta": 0,
-     "from": "loose collection",
+     "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
      "type": "Instant",
      "incl": 0,
      "rank": 2346
@@ -1212,7 +1212,7 @@
     {
      "name": "Helix Pinnacle",
      "delta": 0,
-     "from": "loose collection",
+     "from": "loose collection (printed in EVE Eventide)",
      "type": "Enchantment",
      "incl": 0,
      "rank": 4480
@@ -1220,7 +1220,7 @@
    ]
   },
   "Deadly Tempest": {
-   "from": "loose collection",
+   "from": "Witherbloom Witchcraft precon leftovers (registered 2026-09-09)",
    "roles": [
     "board_wipe"
    ],
@@ -1237,23 +1237,23 @@
     {
      "name": "Pestilence Demon",
      "delta": -0.0035714285714334437,
-     "from": "loose collection",
-     "type": "Creature — Demon",
+     "from": "loose collection (printed in DDR Duel Decks: Nissa vs. Ob Nixilis)",
+     "type": "Creature \u2014 Demon",
      "incl": 0,
      "rank": 10273
     },
     {
      "name": "Reiver Demon",
      "delta": -0.0035714285714334437,
-     "from": "loose collection",
-     "type": "Creature — Demon",
+     "from": "loose collection (printed in CMA Commander Anthology)",
+     "type": "Creature \u2014 Demon",
      "incl": 0,
      "rank": 10821
     }
    ]
   },
   "Plumb the Forbidden": {
-   "from": "loose collection",
+   "from": "loose collection (printed in STX Strixhaven: School of Mages)",
    "roles": [
     "draw"
    ],
@@ -1270,7 +1270,7 @@
     {
      "name": "Corrupted Conviction",
      "delta": -0.03214285714285836,
-     "from": "loose collection",
+     "from": "OTJ box (Outlaws of Thunder Junction, 2026-09-08)",
      "type": "Instant",
      "incl": 0.120617,
      "rank": 599
@@ -1278,7 +1278,7 @@
     {
      "name": "Night's Whisper",
      "delta": 0,
-     "from": "loose collection",
+     "from": "loose collection (printed in ECC Lorwyn Eclipsed Commander)",
      "type": "Sorcery",
      "incl": 0.113604,
      "rank": 182
@@ -1286,7 +1286,7 @@
    ]
   },
   "Warg Tactics": {
-   "from": "loose collection",
+   "from": "loose collection (printed in HOB The Hobbit)",
    "roles": [
     "removal",
     "protection"
@@ -1296,7 +1296,7 @@
     {
      "name": "Silkguard",
      "delta": -0.025000000000005684,
-     "from": "loose collection",
+     "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
      "type": "Instant",
      "incl": 0,
      "rank": 2346
@@ -1304,7 +1304,7 @@
     {
      "name": "Helix Pinnacle",
      "delta": -0.025000000000005684,
-     "from": "loose collection",
+     "from": "loose collection (printed in EVE Eventide)",
      "type": "Enchantment",
      "incl": 0,
      "rank": 4480
@@ -1321,7 +1321,7 @@
     {
      "name": "Deadly Brew",
      "delta": 0,
-     "from": "loose collection",
+     "from": "loose collection (printed in FDN Foundations)",
      "type": "Sorcery",
      "incl": 0.204769,
      "rank": 4763
@@ -1329,7 +1329,7 @@
     {
      "name": "Immoral Bargain",
      "delta": 0.01071428571428612,
-     "from": "loose collection",
+     "from": "loose collection (printed in SOC Secrets of Strixhaven Commander)",
      "type": "Sorcery",
      "incl": 0.13698,
      "rank": 6642
@@ -1337,7 +1337,7 @@
     {
      "name": "Witherbloom Command",
      "delta": 0,
-     "from": "loose collection",
+     "from": "loose collection (printed in STX Strixhaven: School of Mages)",
      "type": "Sorcery",
      "incl": 0.098177,
      "rank": 8549
@@ -1345,7 +1345,7 @@
    ]
   },
   "Mortality Spear": {
-   "from": "loose collection",
+   "from": "loose collection (printed in STX Strixhaven: School of Mages)",
    "roles": [
     "removal"
    ],
@@ -1354,7 +1354,7 @@
     {
      "name": "Deadly Brew",
      "delta": -0.025000000000005684,
-     "from": "loose collection",
+     "from": "loose collection (printed in FDN Foundations)",
      "type": "Sorcery",
      "incl": 0.204769,
      "rank": 4763
@@ -1362,7 +1362,7 @@
     {
      "name": "Immoral Bargain",
      "delta": -0.0035714285714334437,
-     "from": "loose collection",
+     "from": "loose collection (printed in SOC Secrets of Strixhaven Commander)",
      "type": "Sorcery",
      "incl": 0.13698,
      "rank": 6642
@@ -1370,7 +1370,7 @@
     {
      "name": "Witherbloom Command",
      "delta": -0.025000000000005684,
-     "from": "loose collection",
+     "from": "loose collection (printed in STX Strixhaven: School of Mages)",
      "type": "Sorcery",
      "incl": 0.098177,
      "rank": 8549
@@ -1388,7 +1388,7 @@
     {
      "name": "Rampant Growth",
      "delta": 0.017857142857138797,
-     "from": "loose collection",
+     "from": "Witherbloom Witchcraft precon leftovers (registered 2026-09-09)",
      "type": "Sorcery",
      "incl": 0.529219,
      "rank": 27
@@ -1397,14 +1397,14 @@
      "name": "Wight of the Reliquary",
      "delta": -0.035714285714291805,
      "from": "Meren (dismantled)",
-     "type": "Creature — Zombie Knight",
+     "type": "Creature \u2014 Zombie Knight",
      "incl": 0.267415,
      "rank": 1266
     },
     {
      "name": "Skyshroud Claim",
      "delta": 0.04285714285714448,
-     "from": "loose collection",
+     "from": "loose collection (printed in EOC Edge of Eternities Commander)",
      "type": "Sorcery",
      "incl": 0.265545,
      "rank": 302
@@ -1421,8 +1421,8 @@
     {
      "name": "Blech, Loafing Pest",
      "delta": 0.046428571428563714,
-     "from": "loose collection",
-     "type": "Legendary Creature — Pest",
+     "from": "loose collection (printed in SOS Secrets of Strixhaven)",
+     "type": "Legendary Creature \u2014 Pest",
      "incl": 0.16503,
      "rank": 7292
     },
@@ -1437,15 +1437,15 @@
     {
      "name": "Moseo, Vein's New Dean",
      "delta": 0.046428571428563714,
-     "from": "loose collection",
-     "type": "Legendary Creature — Bird Skeleton Warlock",
+     "from": "loose collection (printed in SOS Secrets of Strixhaven)",
+     "type": "Legendary Creature \u2014 Bird Skeleton Warlock",
      "incl": 0.142122,
      "rank": 4268
     }
    ]
   },
   "Three Visits": {
-   "from": "loose collection",
+   "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
    "roles": [
     "ramp"
    ],
@@ -1454,7 +1454,7 @@
     {
      "name": "Rampant Growth",
      "delta": 0,
-     "from": "loose collection",
+     "from": "Witherbloom Witchcraft precon leftovers (registered 2026-09-09)",
      "type": "Sorcery",
      "incl": 0.529219,
      "rank": 27
@@ -1463,14 +1463,14 @@
      "name": "Wight of the Reliquary",
      "delta": -0.125,
      "from": "Meren (dismantled)",
-     "type": "Creature — Zombie Knight",
+     "type": "Creature \u2014 Zombie Knight",
      "incl": 0.267415,
      "rank": 1266
     },
     {
      "name": "Skyshroud Claim",
      "delta": -0.04999999999999716,
-     "from": "loose collection",
+     "from": "loose collection (printed in EOC Edge of Eternities Commander)",
      "type": "Sorcery",
      "incl": 0.265545,
      "rank": 302
@@ -1478,7 +1478,7 @@
    ]
   },
   "Binding the Old Gods": {
-   "from": "loose collection",
+   "from": "loose collection (printed in ECC Lorwyn Eclipsed Commander)",
    "roles": [
     "removal"
    ],
@@ -1487,7 +1487,7 @@
     {
      "name": "Deadly Brew",
      "delta": -0.16428571428571104,
-     "from": "loose collection",
+     "from": "loose collection (printed in FDN Foundations)",
      "type": "Sorcery",
      "incl": 0.204769,
      "rank": 4763
@@ -1495,7 +1495,7 @@
     {
      "name": "Immoral Bargain",
      "delta": -0.15714285714285836,
-     "from": "loose collection",
+     "from": "loose collection (printed in SOC Secrets of Strixhaven Commander)",
      "type": "Sorcery",
      "incl": 0.13698,
      "rank": 6642
@@ -1503,7 +1503,7 @@
     {
      "name": "Witherbloom Command",
      "delta": -0.16428571428571104,
-     "from": "loose collection",
+     "from": "loose collection (printed in STX Strixhaven: School of Mages)",
      "type": "Sorcery",
      "incl": 0.098177,
      "rank": 8549
@@ -1511,7 +1511,7 @@
    ]
   },
   "Vito, Thorn of the Dusk Rose": {
-   "from": "loose collection",
+   "from": "loose collection (printed in M21 Core Set 2021)",
    "roles": [
     "utility"
    ],
@@ -1520,8 +1520,8 @@
     {
      "name": "Blech, Loafing Pest",
      "delta": -0.02142857142857224,
-     "from": "loose collection",
-     "type": "Legendary Creature — Pest",
+     "from": "loose collection (printed in SOS Secrets of Strixhaven)",
+     "type": "Legendary Creature \u2014 Pest",
      "incl": 0.16503,
      "rank": 7292
     },
@@ -1536,8 +1536,8 @@
     {
      "name": "Moseo, Vein's New Dean",
      "delta": 0,
-     "from": "loose collection",
-     "type": "Legendary Creature — Bird Skeleton Warlock",
+     "from": "loose collection (printed in SOS Secrets of Strixhaven)",
+     "type": "Legendary Creature \u2014 Bird Skeleton Warlock",
      "incl": 0.142122,
      "rank": 4268
     }
@@ -1562,16 +1562,16 @@
     {
      "name": "Pestilence Demon",
      "delta": -0.025000000000005684,
-     "from": "loose collection",
-     "type": "Creature — Demon",
+     "from": "loose collection (printed in DDR Duel Decks: Nissa vs. Ob Nixilis)",
+     "type": "Creature \u2014 Demon",
      "incl": 0,
      "rank": 10273
     },
     {
      "name": "Reiver Demon",
      "delta": -0.025000000000005684,
-     "from": "loose collection",
-     "type": "Creature — Demon",
+     "from": "loose collection (printed in CMA Commander Anthology)",
+     "type": "Creature \u2014 Demon",
      "incl": 0,
      "rank": 10821
     }
@@ -1587,7 +1587,7 @@
     {
      "name": "Rampant Growth",
      "delta": 0,
-     "from": "loose collection",
+     "from": "Witherbloom Witchcraft precon leftovers (registered 2026-09-09)",
      "type": "Sorcery",
      "incl": 0.529219,
      "rank": 27
@@ -1596,14 +1596,14 @@
      "name": "Wight of the Reliquary",
      "delta": -0.04285714285714448,
      "from": "Meren (dismantled)",
-     "type": "Creature — Zombie Knight",
+     "type": "Creature \u2014 Zombie Knight",
      "incl": 0.267415,
      "rank": 1266
     },
     {
      "name": "Skyshroud Claim",
      "delta": -0.06071428571428328,
-     "from": "loose collection",
+     "from": "loose collection (printed in EOC Edge of Eternities Commander)",
      "type": "Sorcery",
      "incl": 0.265545,
      "rank": 302
@@ -1611,7 +1611,7 @@
    ]
   },
   "Beast Within": {
-   "from": "loose collection",
+   "from": "Omo precon (Tricky Terrain box, dismantled 2026-10-07)",
    "roles": [
     "removal"
    ],
@@ -1620,7 +1620,7 @@
     {
      "name": "Deadly Brew",
      "delta": -0.0535714285714306,
-     "from": "loose collection",
+     "from": "loose collection (printed in FDN Foundations)",
      "type": "Sorcery",
      "incl": 0.204769,
      "rank": 4763
@@ -1628,7 +1628,7 @@
     {
      "name": "Immoral Bargain",
      "delta": -0.01071428571428612,
-     "from": "loose collection",
+     "from": "loose collection (printed in SOC Secrets of Strixhaven Commander)",
      "type": "Sorcery",
      "incl": 0.13698,
      "rank": 6642
@@ -1636,7 +1636,7 @@
     {
      "name": "Witherbloom Command",
      "delta": -0.0535714285714306,
-     "from": "loose collection",
+     "from": "loose collection (printed in STX Strixhaven: School of Mages)",
      "type": "Sorcery",
      "incl": 0.098177,
      "rank": 8549
@@ -1644,7 +1644,7 @@
    ]
   },
   "Blight Mound": {
-   "from": "loose collection",
+   "from": "Witherbloom Witchcraft precon (C21 card registered before the leftover pass)",
    "roles": [
     "utility"
    ],
@@ -1653,8 +1653,8 @@
     {
      "name": "Blech, Loafing Pest",
      "delta": -0.0035714285714334437,
-     "from": "loose collection",
-     "type": "Legendary Creature — Pest",
+     "from": "loose collection (printed in SOS Secrets of Strixhaven)",
+     "type": "Legendary Creature \u2014 Pest",
      "incl": 0.16503,
      "rank": 7292
     },
@@ -1669,15 +1669,15 @@
     {
      "name": "Moseo, Vein's New Dean",
      "delta": 0,
-     "from": "loose collection",
-     "type": "Legendary Creature — Bird Skeleton Warlock",
+     "from": "loose collection (printed in SOS Secrets of Strixhaven)",
+     "type": "Legendary Creature \u2014 Bird Skeleton Warlock",
      "incl": 0.142122,
      "rank": 4268
     }
    ]
   },
   "Mirkwood Bats": {
-   "from": "loose collection",
+   "from": "loose collection (printed in LTR The Lord of the Rings: Tales of Middle-earth)",
    "roles": [
     "win_condition"
    ],
@@ -1686,24 +1686,24 @@
     {
      "name": "Blossoming Bogbeast",
      "delta": -0.017857142857138797,
-     "from": "loose collection",
-     "type": "Creature — Beast",
+     "from": "Witherbloom Witchcraft precon (C21 card registered before the leftover pass)",
+     "type": "Creature \u2014 Beast",
      "incl": 0.17064,
      "rank": 4019
     },
     {
      "name": "Verdant Sun's Avatar",
      "delta": -0.03928571428571104,
-     "from": "loose collection",
-     "type": "Creature — Dinosaur Avatar",
+     "from": "Witherbloom Witchcraft precon leftovers (registered 2026-09-09)",
+     "type": "Creature \u2014 Dinosaur Avatar",
      "incl": 0.123422,
      "rank": 2179
     },
     {
      "name": "Avenger of Zendikar",
      "delta": -0.03928571428571104,
-     "from": "loose collection",
-     "type": "Creature — Elemental",
+     "from": "Omo precon (Tricky Terrain box, dismantled 2026-10-07)",
+     "type": "Creature \u2014 Elemental",
      "incl": 0.114072,
      "rank": 295
     }
@@ -1719,24 +1719,24 @@
     {
      "name": "Blossoming Bogbeast",
      "delta": -8.86571428571429,
-     "from": "loose collection",
-     "type": "Creature — Beast",
+     "from": "Witherbloom Witchcraft precon (C21 card registered before the leftover pass)",
+     "type": "Creature \u2014 Beast",
      "incl": 0.17064,
      "rank": 4019
     },
     {
      "name": "Verdant Sun's Avatar",
      "delta": -8.937142857142874,
-     "from": "loose collection",
-     "type": "Creature — Dinosaur Avatar",
+     "from": "Witherbloom Witchcraft precon leftovers (registered 2026-09-09)",
+     "type": "Creature \u2014 Dinosaur Avatar",
      "incl": 0.123422,
      "rank": 2179
     },
     {
      "name": "Avenger of Zendikar",
      "delta": -8.937142857142874,
-     "from": "loose collection",
-     "type": "Creature — Elemental",
+     "from": "Omo precon (Tricky Terrain box, dismantled 2026-10-07)",
+     "type": "Creature \u2014 Elemental",
      "incl": 0.114072,
      "rank": 295
     }
@@ -1760,23 +1760,23 @@
     {
      "name": "Pestilence Demon",
      "delta": -0.0035714285714334437,
-     "from": "loose collection",
-     "type": "Creature — Demon",
+     "from": "loose collection (printed in DDR Duel Decks: Nissa vs. Ob Nixilis)",
+     "type": "Creature \u2014 Demon",
      "incl": 0,
      "rank": 10273
     },
     {
      "name": "Reiver Demon",
      "delta": -0.0035714285714334437,
-     "from": "loose collection",
-     "type": "Creature — Demon",
+     "from": "loose collection (printed in CMA Commander Anthology)",
+     "type": "Creature \u2014 Demon",
      "incl": 0,
      "rank": 10821
     }
    ]
   },
   "Sanguine Bond": {
-   "from": "loose collection",
+   "from": "Witherbloom Witchcraft precon (C21 card registered before the leftover pass)",
    "roles": [
     "utility"
    ],
@@ -1785,8 +1785,8 @@
     {
      "name": "Blech, Loafing Pest",
      "delta": -0.046428571428577925,
-     "from": "loose collection",
-     "type": "Legendary Creature — Pest",
+     "from": "loose collection (printed in SOS Secrets of Strixhaven)",
+     "type": "Legendary Creature \u2014 Pest",
      "incl": 0.16503,
      "rank": 7292
     },
@@ -1801,8 +1801,8 @@
     {
      "name": "Moseo, Vein's New Dean",
      "delta": -0.046428571428577925,
-     "from": "loose collection",
-     "type": "Legendary Creature — Bird Skeleton Warlock",
+     "from": "loose collection (printed in SOS Secrets of Strixhaven)",
+     "type": "Legendary Creature \u2014 Bird Skeleton Warlock",
      "incl": 0.142122,
      "rank": 4268
     }
@@ -1818,7 +1818,7 @@
     {
      "name": "Deadly Brew",
      "delta": 0,
-     "from": "loose collection",
+     "from": "loose collection (printed in FDN Foundations)",
      "type": "Sorcery",
      "incl": 0.204769,
      "rank": 4763
@@ -1826,7 +1826,7 @@
     {
      "name": "Immoral Bargain",
      "delta": 0.01071428571428612,
-     "from": "loose collection",
+     "from": "loose collection (printed in SOC Secrets of Strixhaven Commander)",
      "type": "Sorcery",
      "incl": 0.13698,
      "rank": 6642
@@ -1834,7 +1834,7 @@
     {
      "name": "Witherbloom Command",
      "delta": 0,
-     "from": "loose collection",
+     "from": "loose collection (printed in STX Strixhaven: School of Mages)",
      "type": "Sorcery",
      "incl": 0.098177,
      "rank": 8549
@@ -1842,7 +1842,7 @@
    ]
   },
   "Tyvar's Stand": {
-   "from": "loose collection",
+   "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
    "roles": [
     "protection"
    ],
@@ -1851,7 +1851,7 @@
     {
      "name": "Silkguard",
      "delta": 0,
-     "from": "loose collection",
+     "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
      "type": "Instant",
      "incl": 0,
      "rank": 2346
@@ -1859,7 +1859,7 @@
     {
      "name": "Helix Pinnacle",
      "delta": 0,
-     "from": "loose collection",
+     "from": "loose collection (printed in EVE Eventide)",
      "type": "Enchantment",
      "incl": 0,
      "rank": 4480
@@ -1876,8 +1876,8 @@
     {
      "name": "Blech, Loafing Pest",
      "delta": 0,
-     "from": "loose collection",
-     "type": "Legendary Creature — Pest",
+     "from": "loose collection (printed in SOS Secrets of Strixhaven)",
+     "type": "Legendary Creature \u2014 Pest",
      "incl": 0.16503,
      "rank": 7292
     },
@@ -1892,15 +1892,15 @@
     {
      "name": "Moseo, Vein's New Dean",
      "delta": 0,
-     "from": "loose collection",
-     "type": "Legendary Creature — Bird Skeleton Warlock",
+     "from": "loose collection (printed in SOS Secrets of Strixhaven)",
+     "type": "Legendary Creature \u2014 Bird Skeleton Warlock",
      "incl": 0.142122,
      "rank": 4268
     }
    ]
   },
   "Alhammarret's Archive": {
-   "from": "loose collection",
+   "from": "Witherbloom Witchcraft precon leftovers (registered 2026-09-09)",
    "roles": [
     "draw"
    ],
@@ -1917,7 +1917,7 @@
     {
      "name": "Corrupted Conviction",
      "delta": -0.04285714285714448,
-     "from": "loose collection",
+     "from": "OTJ box (Outlaws of Thunder Junction, 2026-09-08)",
      "type": "Instant",
      "incl": 0.120617,
      "rank": 599
@@ -1925,7 +1925,7 @@
     {
      "name": "Night's Whisper",
      "delta": 0.007142857142852677,
-     "from": "loose collection",
+     "from": "loose collection (printed in ECC Lorwyn Eclipsed Commander)",
      "type": "Sorcery",
      "incl": 0.113604,
      "rank": 182
@@ -1942,16 +1942,16 @@
     {
      "name": "Blech, Loafing Pest",
      "delta": 0.014285714285719564,
-     "from": "loose collection",
-     "type": "Legendary Creature — Pest",
+     "from": "loose collection (printed in SOS Secrets of Strixhaven)",
+     "type": "Legendary Creature \u2014 Pest",
      "incl": 0.16503,
      "rank": 7292
     },
     {
      "name": "Moseo, Vein's New Dean",
      "delta": 0.014285714285719564,
-     "from": "loose collection",
-     "type": "Legendary Creature — Bird Skeleton Warlock",
+     "from": "loose collection (printed in SOS Secrets of Strixhaven)",
+     "type": "Legendary Creature \u2014 Bird Skeleton Warlock",
      "incl": 0.142122,
      "rank": 4268
     },
@@ -1959,14 +1959,14 @@
      "name": "Woe Strider",
      "delta": 0.014285714285719564,
      "from": "Meren (dismantled)",
-     "type": "Creature — Horror",
+     "type": "Creature \u2014 Horror",
      "incl": 0.141655,
      "rank": 1683
     }
    ]
   },
   "Argentum Masticore": {
-   "from": "loose collection",
+   "from": "loose collection (printed in ONE Phyrexia: All Will Be One)",
    "roles": [
     "removal",
     "win_condition"
@@ -1976,7 +1976,7 @@
     {
      "name": "Deadly Brew",
      "delta": -0.0535714285714306,
-     "from": "loose collection",
+     "from": "loose collection (printed in FDN Foundations)",
      "type": "Sorcery",
      "incl": 0.204769,
      "rank": 4763
@@ -1984,15 +1984,15 @@
     {
      "name": "Blossoming Bogbeast",
      "delta": 0,
-     "from": "loose collection",
-     "type": "Creature — Beast",
+     "from": "Witherbloom Witchcraft precon (C21 card registered before the leftover pass)",
+     "type": "Creature \u2014 Beast",
      "incl": 0.17064,
      "rank": 4019
     },
     {
      "name": "Immoral Bargain",
      "delta": -0.017857142857138797,
-     "from": "loose collection",
+     "from": "loose collection (printed in SOC Secrets of Strixhaven Commander)",
      "type": "Sorcery",
      "incl": 0.13698,
      "rank": 6642
@@ -2000,7 +2000,7 @@
    ]
   },
   "Tendershoot Dryad": {
-   "from": "loose collection",
+   "from": "loose collection (printed in RIX Rivals of Ixalan)",
    "roles": [
     "win_condition"
    ],
@@ -2009,24 +2009,24 @@
     {
      "name": "Blossoming Bogbeast",
      "delta": 0,
-     "from": "loose collection",
-     "type": "Creature — Beast",
+     "from": "Witherbloom Witchcraft precon (C21 card registered before the leftover pass)",
+     "type": "Creature \u2014 Beast",
      "incl": 0.17064,
      "rank": 4019
     },
     {
      "name": "Verdant Sun's Avatar",
      "delta": -0.06071428571428328,
-     "from": "loose collection",
-     "type": "Creature — Dinosaur Avatar",
+     "from": "Witherbloom Witchcraft precon leftovers (registered 2026-09-09)",
+     "type": "Creature \u2014 Dinosaur Avatar",
      "incl": 0.123422,
      "rank": 2179
     },
     {
      "name": "Avenger of Zendikar",
      "delta": -0.06071428571428328,
-     "from": "loose collection",
-     "type": "Creature — Elemental",
+     "from": "Omo precon (Tricky Terrain box, dismantled 2026-10-07)",
+     "type": "Creature \u2014 Elemental",
      "incl": 0.114072,
      "rank": 295
     }
@@ -2043,16 +2043,16 @@
     {
      "name": "Blech, Loafing Pest",
      "delta": 0,
-     "from": "loose collection",
-     "type": "Legendary Creature — Pest",
+     "from": "loose collection (printed in SOS Secrets of Strixhaven)",
+     "type": "Legendary Creature \u2014 Pest",
      "incl": 0.16503,
      "rank": 7292
     },
     {
      "name": "Moseo, Vein's New Dean",
      "delta": 0,
-     "from": "loose collection",
-     "type": "Legendary Creature — Bird Skeleton Warlock",
+     "from": "loose collection (printed in SOS Secrets of Strixhaven)",
+     "type": "Legendary Creature \u2014 Bird Skeleton Warlock",
      "incl": 0.142122,
      "rank": 4268
     },
@@ -2060,7 +2060,7 @@
      "name": "Woe Strider",
      "delta": 0,
      "from": "Meren (dismantled)",
-     "type": "Creature — Horror",
+     "type": "Creature \u2014 Horror",
      "incl": 0.141655,
      "rank": 1683
     }
@@ -2077,7 +2077,7 @@
     {
      "name": "Rampant Growth",
      "delta": 0,
-     "from": "loose collection",
+     "from": "Witherbloom Witchcraft precon leftovers (registered 2026-09-09)",
      "type": "Sorcery",
      "incl": 0.529219,
      "rank": 27
@@ -2094,7 +2094,7 @@
      "name": "Wight of the Reliquary",
      "delta": -0.02142857142857224,
      "from": "Meren (dismantled)",
-     "type": "Creature — Zombie Knight",
+     "type": "Creature \u2014 Zombie Knight",
      "incl": 0.267415,
      "rank": 1266
     }
@@ -2110,31 +2110,31 @@
     {
      "name": "Blossoming Bogbeast",
      "delta": 0,
-     "from": "loose collection",
-     "type": "Creature — Beast",
+     "from": "Witherbloom Witchcraft precon (C21 card registered before the leftover pass)",
+     "type": "Creature \u2014 Beast",
      "incl": 0.17064,
      "rank": 4019
     },
     {
      "name": "Verdant Sun's Avatar",
      "delta": 0.0035714285714334437,
-     "from": "loose collection",
-     "type": "Creature — Dinosaur Avatar",
+     "from": "Witherbloom Witchcraft precon leftovers (registered 2026-09-09)",
+     "type": "Creature \u2014 Dinosaur Avatar",
      "incl": 0.123422,
      "rank": 2179
     },
     {
      "name": "Avenger of Zendikar",
      "delta": 0.0035714285714334437,
-     "from": "loose collection",
-     "type": "Creature — Elemental",
+     "from": "Omo precon (Tricky Terrain box, dismantled 2026-10-07)",
+     "type": "Creature \u2014 Elemental",
      "incl": 0.114072,
      "rank": 295
     }
    ]
   },
   "Veinwitch Coven": {
-   "from": "loose collection",
+   "from": "loose collection (printed in OTC Outlaws of Thunder Junction Commander)",
    "roles": [
     "utility"
    ],
@@ -2143,8 +2143,8 @@
     {
      "name": "Blech, Loafing Pest",
      "delta": 0,
-     "from": "loose collection",
-     "type": "Legendary Creature — Pest",
+     "from": "loose collection (printed in SOS Secrets of Strixhaven)",
+     "type": "Legendary Creature \u2014 Pest",
      "incl": 0.16503,
      "rank": 7292
     },
@@ -2159,8 +2159,8 @@
     {
      "name": "Moseo, Vein's New Dean",
      "delta": 0,
-     "from": "loose collection",
-     "type": "Legendary Creature — Bird Skeleton Warlock",
+     "from": "loose collection (printed in SOS Secrets of Strixhaven)",
+     "type": "Legendary Creature \u2014 Bird Skeleton Warlock",
      "incl": 0.142122,
      "rank": 4268
     }
@@ -2176,7 +2176,7 @@
     {
      "name": "Silkguard",
      "delta": -0.028571428571424917,
-     "from": "loose collection",
+     "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
      "type": "Instant",
      "incl": 0,
      "rank": 2346
@@ -2184,7 +2184,7 @@
     {
      "name": "Helix Pinnacle",
      "delta": -0.028571428571424917,
-     "from": "loose collection",
+     "from": "loose collection (printed in EVE Eventide)",
      "type": "Enchantment",
      "incl": 0,
      "rank": 4480
@@ -2210,7 +2210,7 @@
     {
      "name": "Corrupted Conviction",
      "delta": -0.04285714285714448,
-     "from": "loose collection",
+     "from": "OTJ box (Outlaws of Thunder Junction, 2026-09-08)",
      "type": "Instant",
      "incl": 0.120617,
      "rank": 599
@@ -2218,7 +2218,7 @@
     {
      "name": "Night's Whisper",
      "delta": -0.007142857142852677,
-     "from": "loose collection",
+     "from": "loose collection (printed in ECC Lorwyn Eclipsed Commander)",
      "type": "Sorcery",
      "incl": 0.113604,
      "rank": 182
@@ -2235,7 +2235,7 @@
     {
      "name": "Rampant Growth",
      "delta": 0,
-     "from": "loose collection",
+     "from": "Witherbloom Witchcraft precon leftovers (registered 2026-09-09)",
      "type": "Sorcery",
      "incl": 0.529219,
      "rank": 27
@@ -2244,14 +2244,14 @@
      "name": "Wight of the Reliquary",
      "delta": -0.007142857142852677,
      "from": "Meren (dismantled)",
-     "type": "Creature — Zombie Knight",
+     "type": "Creature \u2014 Zombie Knight",
      "incl": 0.267415,
      "rank": 1266
     },
     {
      "name": "Skyshroud Claim",
      "delta": 0.035714285714291805,
-     "from": "loose collection",
+     "from": "loose collection (printed in EOC Edge of Eternities Commander)",
      "type": "Sorcery",
      "incl": 0.265545,
      "rank": 302
@@ -2259,7 +2259,7 @@
    ]
   },
   "Guardian Augmenter": {
-   "from": "loose collection",
+   "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
    "roles": [
     "utility"
    ],
@@ -2268,16 +2268,16 @@
     {
      "name": "Blech, Loafing Pest",
      "delta": 0,
-     "from": "loose collection",
-     "type": "Legendary Creature — Pest",
+     "from": "loose collection (printed in SOS Secrets of Strixhaven)",
+     "type": "Legendary Creature \u2014 Pest",
      "incl": 0.16503,
      "rank": 7292
     },
     {
      "name": "Moseo, Vein's New Dean",
      "delta": 0,
-     "from": "loose collection",
-     "type": "Legendary Creature — Bird Skeleton Warlock",
+     "from": "loose collection (printed in SOS Secrets of Strixhaven)",
+     "type": "Legendary Creature \u2014 Bird Skeleton Warlock",
      "incl": 0.142122,
      "rank": 4268
     },
@@ -2285,7 +2285,7 @@
      "name": "Woe Strider",
      "delta": 0,
      "from": "Meren (dismantled)",
-     "type": "Creature — Horror",
+     "type": "Creature \u2014 Horror",
      "incl": 0.141655,
      "rank": 1683
     }
@@ -2309,7 +2309,7 @@
     {
      "name": "Corrupted Conviction",
      "delta": -0.0035714285714334437,
-     "from": "loose collection",
+     "from": "OTJ box (Outlaws of Thunder Junction, 2026-09-08)",
      "type": "Instant",
      "incl": 0.120617,
      "rank": 599
@@ -2317,7 +2317,7 @@
     {
      "name": "Night's Whisper",
      "delta": 0.0035714285714334437,
-     "from": "loose collection",
+     "from": "loose collection (printed in ECC Lorwyn Eclipsed Commander)",
      "type": "Sorcery",
      "incl": 0.113604,
      "rank": 182
@@ -2325,7 +2325,7 @@
    ]
   },
   "Pest Rescuer": {
-   "from": "loose collection",
+   "from": "loose collection (printed in SOC Secrets of Strixhaven Commander)",
    "roles": [
     "utility"
    ],
@@ -2334,8 +2334,8 @@
     {
      "name": "Blech, Loafing Pest",
      "delta": 0.007142857142852677,
-     "from": "loose collection",
-     "type": "Legendary Creature — Pest",
+     "from": "loose collection (printed in SOS Secrets of Strixhaven)",
+     "type": "Legendary Creature \u2014 Pest",
      "incl": 0.16503,
      "rank": 7292
     },
@@ -2350,8 +2350,8 @@
     {
      "name": "Moseo, Vein's New Dean",
      "delta": 0.007142857142852677,
-     "from": "loose collection",
-     "type": "Legendary Creature — Bird Skeleton Warlock",
+     "from": "loose collection (printed in SOS Secrets of Strixhaven)",
+     "type": "Legendary Creature \u2014 Bird Skeleton Warlock",
      "incl": 0.142122,
      "rank": 4268
     }
@@ -2368,7 +2368,7 @@
     {
      "name": "Rampant Growth",
      "delta": 0.06785714285713595,
-     "from": "loose collection",
+     "from": "Witherbloom Witchcraft precon leftovers (registered 2026-09-09)",
      "type": "Sorcery",
      "incl": 0.529219,
      "rank": 27
@@ -2385,7 +2385,7 @@
      "name": "Wight of the Reliquary",
      "delta": 0.057142857142864045,
      "from": "Meren (dismantled)",
-     "type": "Creature — Zombie Knight",
+     "type": "Creature \u2014 Zombie Knight",
      "incl": 0.267415,
      "rank": 1266
     }
@@ -2401,24 +2401,24 @@
     {
      "name": "Blossoming Bogbeast",
      "delta": 0.014285714285719564,
-     "from": "loose collection",
-     "type": "Creature — Beast",
+     "from": "Witherbloom Witchcraft precon (C21 card registered before the leftover pass)",
+     "type": "Creature \u2014 Beast",
      "incl": 0.17064,
      "rank": 4019
     },
     {
      "name": "Verdant Sun's Avatar",
      "delta": -0.03928571428571104,
-     "from": "loose collection",
-     "type": "Creature — Dinosaur Avatar",
+     "from": "Witherbloom Witchcraft precon leftovers (registered 2026-09-09)",
+     "type": "Creature \u2014 Dinosaur Avatar",
      "incl": 0.123422,
      "rank": 2179
     },
     {
      "name": "Avenger of Zendikar",
      "delta": -0.03928571428571104,
-     "from": "loose collection",
-     "type": "Creature — Elemental",
+     "from": "Omo precon (Tricky Terrain box, dismantled 2026-10-07)",
+     "type": "Creature \u2014 Elemental",
      "incl": 0.114072,
      "rank": 295
     }
@@ -2443,7 +2443,7 @@
     {
      "name": "Corrupted Conviction",
      "delta": -0.04285714285714448,
-     "from": "loose collection",
+     "from": "OTJ box (Outlaws of Thunder Junction, 2026-09-08)",
      "type": "Instant",
      "incl": 0.120617,
      "rank": 599
@@ -2451,7 +2451,7 @@
     {
      "name": "Night's Whisper",
      "delta": -0.0035714285714334437,
-     "from": "loose collection",
+     "from": "loose collection (printed in ECC Lorwyn Eclipsed Commander)",
      "type": "Sorcery",
      "incl": 0.113604,
      "rank": 182
@@ -2459,7 +2459,7 @@
    ]
   },
   "Witch of the Moors": {
-   "from": "loose collection",
+   "from": "loose collection (printed in OTC Outlaws of Thunder Junction Commander)",
    "roles": [
     "removal",
     "win_condition"
@@ -2469,7 +2469,7 @@
     {
      "name": "Deadly Brew",
      "delta": -0.08571428571428896,
-     "from": "loose collection",
+     "from": "loose collection (printed in FDN Foundations)",
      "type": "Sorcery",
      "incl": 0.204769,
      "rank": 4763
@@ -2477,15 +2477,15 @@
     {
      "name": "Blossoming Bogbeast",
      "delta": 0,
-     "from": "loose collection",
-     "type": "Creature — Beast",
+     "from": "Witherbloom Witchcraft precon (C21 card registered before the leftover pass)",
+     "type": "Creature \u2014 Beast",
      "incl": 0.17064,
      "rank": 4019
     },
     {
      "name": "Immoral Bargain",
      "delta": -0.07500000000000284,
-     "from": "loose collection",
+     "from": "loose collection (printed in SOC Secrets of Strixhaven Commander)",
      "type": "Sorcery",
      "incl": 0.13698,
      "rank": 6642
@@ -2510,7 +2510,7 @@
     {
      "name": "Corrupted Conviction",
      "delta": -0.0714285714285694,
-     "from": "loose collection",
+     "from": "OTJ box (Outlaws of Thunder Junction, 2026-09-08)",
      "type": "Instant",
      "incl": 0.120617,
      "rank": 599
@@ -2518,7 +2518,7 @@
     {
      "name": "Night's Whisper",
      "delta": -0.04285714285714448,
-     "from": "loose collection",
+     "from": "loose collection (printed in ECC Lorwyn Eclipsed Commander)",
      "type": "Sorcery",
      "incl": 0.113604,
      "rank": 182
@@ -2536,31 +2536,31 @@
     {
      "name": "Blossoming Bogbeast",
      "delta": 0,
-     "from": "loose collection",
-     "type": "Creature — Beast",
+     "from": "Witherbloom Witchcraft precon (C21 card registered before the leftover pass)",
+     "type": "Creature \u2014 Beast",
      "incl": 0.17064,
      "rank": 4019
     },
     {
      "name": "Verdant Sun's Avatar",
      "delta": -0.06428571428571672,
-     "from": "loose collection",
-     "type": "Creature — Dinosaur Avatar",
+     "from": "Witherbloom Witchcraft precon leftovers (registered 2026-09-09)",
+     "type": "Creature \u2014 Dinosaur Avatar",
      "incl": 0.123422,
      "rank": 2179
     },
     {
      "name": "Avenger of Zendikar",
      "delta": -0.06428571428571672,
-     "from": "loose collection",
-     "type": "Creature — Elemental",
+     "from": "Omo precon (Tricky Terrain box, dismantled 2026-10-07)",
+     "type": "Creature \u2014 Elemental",
      "incl": 0.114072,
      "rank": 295
     }
    ]
   },
   "Feral Appetite": {
-   "from": "loose collection",
+   "from": "loose collection (printed in SOC Secrets of Strixhaven Commander)",
    "roles": [
     "removal"
    ],
@@ -2569,7 +2569,7 @@
     {
      "name": "Deadly Brew",
      "delta": -0.01071428571428612,
-     "from": "loose collection",
+     "from": "loose collection (printed in FDN Foundations)",
      "type": "Sorcery",
      "incl": 0.204769,
      "rank": 4763
@@ -2577,7 +2577,7 @@
     {
      "name": "Immoral Bargain",
      "delta": 0,
-     "from": "loose collection",
+     "from": "loose collection (printed in SOC Secrets of Strixhaven Commander)",
      "type": "Sorcery",
      "incl": 0.13698,
      "rank": 6642
@@ -2585,7 +2585,7 @@
     {
      "name": "Witherbloom Command",
      "delta": -0.01071428571428612,
-     "from": "loose collection",
+     "from": "loose collection (printed in STX Strixhaven: School of Mages)",
      "type": "Sorcery",
      "incl": 0.098177,
      "rank": 8549
@@ -2602,7 +2602,7 @@
     {
      "name": "Rampant Growth",
      "delta": 0.0035714285714334437,
-     "from": "loose collection",
+     "from": "Witherbloom Witchcraft precon leftovers (registered 2026-09-09)",
      "type": "Sorcery",
      "incl": 0.529219,
      "rank": 27
@@ -2611,14 +2611,14 @@
      "name": "Wight of the Reliquary",
      "delta": -0.02142857142857224,
      "from": "Meren (dismantled)",
-     "type": "Creature — Zombie Knight",
+     "type": "Creature \u2014 Zombie Knight",
      "incl": 0.267415,
      "rank": 1266
     },
     {
      "name": "Skyshroud Claim",
      "delta": -0.017857142857138797,
-     "from": "loose collection",
+     "from": "loose collection (printed in EOC Edge of Eternities Commander)",
      "type": "Sorcery",
      "incl": 0.265545,
      "rank": 302
@@ -2626,7 +2626,7 @@
    ]
   },
   "Scute Swarm": {
-   "from": "loose collection",
+   "from": "Omo precon (Tricky Terrain box, dismantled 2026-10-07)",
    "roles": [
     "utility"
    ],
@@ -2635,8 +2635,8 @@
     {
      "name": "Blech, Loafing Pest",
      "delta": -0.014285714285719564,
-     "from": "loose collection",
-     "type": "Legendary Creature — Pest",
+     "from": "loose collection (printed in SOS Secrets of Strixhaven)",
+     "type": "Legendary Creature \u2014 Pest",
      "incl": 0.16503,
      "rank": 7292
     },
@@ -2651,8 +2651,8 @@
     {
      "name": "Moseo, Vein's New Dean",
      "delta": -0.007142857142852677,
-     "from": "loose collection",
-     "type": "Legendary Creature — Bird Skeleton Warlock",
+     "from": "loose collection (printed in SOS Secrets of Strixhaven)",
+     "type": "Legendary Creature \u2014 Bird Skeleton Warlock",
      "incl": 0.142122,
      "rank": 4268
     }
@@ -2676,7 +2676,7 @@
     {
      "name": "Corrupted Conviction",
      "delta": -0.057142857142849834,
-     "from": "loose collection",
+     "from": "OTJ box (Outlaws of Thunder Junction, 2026-09-08)",
      "type": "Instant",
      "incl": 0.120617,
      "rank": 599
@@ -2684,7 +2684,7 @@
     {
      "name": "Night's Whisper",
      "delta": -0.02142857142857224,
-     "from": "loose collection",
+     "from": "loose collection (printed in ECC Lorwyn Eclipsed Commander)",
      "type": "Sorcery",
      "incl": 0.113604,
      "rank": 182
@@ -2696,13 +2696,13 @@
    "roles": [
     "land"
    ],
-   "candidates": 51,
+   "candidates": 50,
    "backups": [
     {
      "name": "Forest",
      "delta": -0.0035714285714334437,
      "from": "Meren (dismantled)",
-     "type": "Basic Land — Forest",
+     "type": "Basic Land \u2014 Forest",
      "incl": 0.920056,
      "rank": null
     },
@@ -2710,14 +2710,14 @@
      "name": "Swamp",
      "delta": -0.0035714285714334437,
      "from": "Meren (dismantled)",
-     "type": "Basic Land — Swamp",
+     "type": "Basic Land \u2014 Swamp",
      "incl": 0.913511,
      "rank": null
     },
     {
      "name": "Reliquary Tower",
      "delta": -0.03928571428571104,
-     "from": "loose collection",
+     "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
      "type": "Land",
      "incl": 0.292193,
      "rank": 10
@@ -2725,7 +2725,7 @@
    ]
   },
   "Eccentric Pestfinder // Turn Stones": {
-   "from": "loose collection",
+   "from": "loose collection (printed in SOC Secrets of Strixhaven Commander)",
    "roles": [
     "win_condition"
    ],
@@ -2734,24 +2734,24 @@
     {
      "name": "Blossoming Bogbeast",
      "delta": -0.01071428571428612,
-     "from": "loose collection",
-     "type": "Creature — Beast",
+     "from": "Witherbloom Witchcraft precon (C21 card registered before the leftover pass)",
+     "type": "Creature \u2014 Beast",
      "incl": 0.17064,
      "rank": 4019
     },
     {
      "name": "Verdant Sun's Avatar",
      "delta": -0.02142857142857224,
-     "from": "loose collection",
-     "type": "Creature — Dinosaur Avatar",
+     "from": "Witherbloom Witchcraft precon leftovers (registered 2026-09-09)",
+     "type": "Creature \u2014 Dinosaur Avatar",
      "incl": 0.123422,
      "rank": 2179
     },
     {
      "name": "Avenger of Zendikar",
      "delta": -0.02142857142857224,
-     "from": "loose collection",
-     "type": "Creature — Elemental",
+     "from": "Omo precon (Tricky Terrain box, dismantled 2026-10-07)",
+     "type": "Creature \u2014 Elemental",
      "incl": 0.114072,
      "rank": 295
     }
@@ -2767,8 +2767,8 @@
     {
      "name": "Blech, Loafing Pest",
      "delta": 0.01071428571428612,
-     "from": "loose collection",
-     "type": "Legendary Creature — Pest",
+     "from": "loose collection (printed in SOS Secrets of Strixhaven)",
+     "type": "Legendary Creature \u2014 Pest",
      "incl": 0.16503,
      "rank": 7292
     },
@@ -2783,15 +2783,15 @@
     {
      "name": "Moseo, Vein's New Dean",
      "delta": 0,
-     "from": "loose collection",
-     "type": "Legendary Creature — Bird Skeleton Warlock",
+     "from": "loose collection (printed in SOS Secrets of Strixhaven)",
+     "type": "Legendary Creature \u2014 Bird Skeleton Warlock",
      "incl": 0.142122,
      "rank": 4268
     }
    ]
   },
   "Paradise Druid": {
-   "from": "loose collection",
+   "from": "loose collection (printed in AFC Forgotten Realms Commander)",
    "roles": [
     "ramp",
     "protection"
@@ -2801,7 +2801,7 @@
     {
      "name": "Silkguard",
      "delta": -0.13928571428571956,
-     "from": "loose collection",
+     "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
      "type": "Instant",
      "incl": 0,
      "rank": 2346
@@ -2809,7 +2809,7 @@
     {
      "name": "Helix Pinnacle",
      "delta": -0.13928571428571956,
-     "from": "loose collection",
+     "from": "loose collection (printed in EVE Eventide)",
      "type": "Enchantment",
      "incl": 0,
      "rank": 4480
@@ -2827,7 +2827,7 @@
     {
      "name": "Silkguard",
      "delta": -0.01071428571428612,
-     "from": "loose collection",
+     "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
      "type": "Instant",
      "incl": 0,
      "rank": 2346
@@ -2835,7 +2835,7 @@
     {
      "name": "Helix Pinnacle",
      "delta": -0.01071428571428612,
-     "from": "loose collection",
+     "from": "loose collection (printed in EVE Eventide)",
      "type": "Enchantment",
      "incl": 0,
      "rank": 4480
@@ -2843,35 +2843,35 @@
    ]
   },
   "Revitalizing Repast // Old-Growth Grove": {
-   "from": "loose collection",
+   "from": "loose collection (printed in MH3 Modern Horizons 3)",
    "roles": [
     "land"
    ],
-   "candidates": 49,
+   "candidates": 48,
    "backups": [
     {
      "name": "Reliquary Tower",
      "delta": -0.0892857142857082,
-     "from": "loose collection",
+     "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
      "type": "Land",
      "incl": 0.292193,
      "rank": 10
     },
     {
-     "name": "Sapseep Forest",
-     "delta": -0.06428571428571672,
-     "from": "loose collection",
-     "type": "Land — Forest",
-     "incl": 0.068256,
-     "rank": 7181
+     "name": "Radiant Fountain",
+     "delta": -0.0892857142857082,
+     "from": "Witherbloom Witchcraft precon leftovers (registered 2026-09-09)",
+     "type": "Land",
+     "incl": 0.103319,
+     "rank": 1548
     },
     {
-     "name": "Titan's Grave",
-     "delta": -0.08571428571428896,
-     "from": "loose collection",
-     "type": "Land",
-     "incl": 0.061711,
-     "rank": 7144
+     "name": "Sapseep Forest",
+     "delta": -0.06428571428571672,
+     "from": "Witherbloom Witchcraft precon leftovers (registered 2026-09-09)",
+     "type": "Land \u2014 Forest",
+     "incl": 0.068256,
+     "rank": 7181
     }
    ]
   },
@@ -2894,15 +2894,15 @@
     {
      "name": "Vilis, Broker of Blood",
      "delta": -0.01071428571428612,
-     "from": "loose collection",
-     "type": "Legendary Creature — Demon",
+     "from": "loose collection (printed in M20 Core Set 2020)",
+     "type": "Legendary Creature \u2014 Demon",
      "incl": 0.301543,
      "rank": 1124
     },
     {
      "name": "Deadly Brew",
      "delta": 0.014285714285719564,
-     "from": "loose collection",
+     "from": "loose collection (printed in FDN Foundations)",
      "type": "Sorcery",
      "incl": 0.204769,
      "rank": 4763
@@ -2910,7 +2910,7 @@
    ]
   },
   "Casualties of War": {
-   "from": "loose collection",
+   "from": "loose collection (printed in TDC Tarkir: Dragonstorm Commander)",
    "roles": [
     "removal"
    ],
@@ -2919,7 +2919,7 @@
     {
      "name": "Deadly Brew",
      "delta": -0.017857142857138797,
-     "from": "loose collection",
+     "from": "loose collection (printed in FDN Foundations)",
      "type": "Sorcery",
      "incl": 0.204769,
      "rank": 4763
@@ -2927,7 +2927,7 @@
     {
      "name": "Immoral Bargain",
      "delta": -0.007142857142852677,
-     "from": "loose collection",
+     "from": "loose collection (printed in SOC Secrets of Strixhaven Commander)",
      "type": "Sorcery",
      "incl": 0.13698,
      "rank": 6642
@@ -2935,7 +2935,7 @@
     {
      "name": "Witherbloom Command",
      "delta": -0.017857142857138797,
-     "from": "loose collection",
+     "from": "loose collection (printed in STX Strixhaven: School of Mages)",
      "type": "Sorcery",
      "incl": 0.098177,
      "rank": 8549
@@ -2953,7 +2953,7 @@
     {
      "name": "Rampant Growth",
      "delta": 0.15714285714285836,
-     "from": "loose collection",
+     "from": "Witherbloom Witchcraft precon leftovers (registered 2026-09-09)",
      "type": "Sorcery",
      "incl": 0.529219,
      "rank": 27
@@ -2962,19 +2962,26 @@
      "name": "Wight of the Reliquary",
      "delta": 0.11428571428571388,
      "from": "Meren (dismantled)",
-     "type": "Creature — Zombie Knight",
+     "type": "Creature \u2014 Zombie Knight",
      "incl": 0.267415,
      "rank": 1266
     },
     {
      "name": "Skyshroud Claim",
      "delta": 0.18214285714286405,
-     "from": "loose collection",
+     "from": "loose collection (printed in EOC Edge of Eternities Commander)",
      "type": "Sorcery",
      "incl": 0.265545,
      "rank": 302
     }
    ]
   }
- }
+ },
+ "origins": [
+  "Omo precon (Tricky Terrain box, dismantled 2026-10-07)",
+  "Witherbloom Witchcraft precon leftovers (registered 2026-09-09)",
+  "Quandrix precon leftovers (Tam build, 2026-10-02)",
+  "Silverquill precon leftovers (Tam build, 2026-10-02)",
+  "OTJ box (Outlaws of Thunder Junction, 2026-09-08)"
+ ]
 }

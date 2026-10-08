@@ -37,7 +37,7 @@ List: `verify-2026-10-08/best-deck/beledros-recommended.txt` — **FINAL, score-
 
 **Does NOT work the way it looks**
 - ❌ [[Deadly Tempest]] hits you too: "Each player loses life equal to the number of creatures they controlled that were destroyed this way." Pests refund 1 each, nontoken creatures do not. Count before casting.
-- ❌ [[Lightning Greaves]] shroud stops [[Witch's Clinic]] ("{2}, {T}: Target commander you control gains lifelink") from targeting Beledros. [[Guardian Augmenter]] hexproof does not.
+- ⚠️ [[Lightning Greaves]] gives Beledros shroud: your own [[Tyvar's Stand]], [[Feral Appetite]] and [[Vesuva]]/[[Thespian's Stage]] copies cannot target him either; [[Guardian Augmenter]] hexproof lets your spells through.
 - ❌ [[Toxic Deluge]] life is paid, not gained: no Vito, Dina or Sanguine Bond triggers.
 - ⚠️ [[Blood Artist]] says "target player loses 1 life": one opponent, not each. Zulaport and Cauldron are the table drains.
 - ⚠️ [[Morbid Opportunist]] "triggers only once each turn"; [[Midnight Reaper]] is "nontoken". Token deaths draw through Moldervine, Liliana and Plumb only.
@@ -49,11 +49,16 @@ Meren is dismantled: 44 of its cards move over, the other 38 become open or back
 | Donor deck | Cards Beledros takes | Backfill for the donor (from Meren's leftovers unless noted) |
 |---|---|---|
 | Meren of Clan Nel Toth (dismantled) | 37 shared cards + Revitalizing Repast, Festering Thicket, Infernal Grasp, Massacre Wurm, Sakura-Tribe Elder, Veil of Summer, Midnight Reaper | — |
-| Loose collection | 38, incl. Beledros, Dina, Vito, Sanguine Bond, Cultivate, Three Visits, Tyvar's Stand | — |
+| Omo precon box (Tricky Terrain, dismantled 2026-10-07) | [[Yavimaya, Cradle of Growth]], [[Beast Within]], [[Scute Swarm]], [[Vesuva]], [[Thespian's Stage]] | — (the box stays open) |
+| Witherbloom Witchcraft precon box (Beledros's own precon) | Beledros, [[Golgari Rot Farm]], [[Blighted Woodland]], [[Deadly Tempest]], [[Alhammarret's Archive]], [[Blight Mound]], [[Sanguine Bond]] | — |
+| Quandrix precon leftovers (Tam build) | [[Temple of the False God]], [[Terramorphic Expanse]], [[Three Visits]], [[Tyvar's Stand]], [[Guardian Augmenter]] | — |
+| Loose collection (set printed on the check page) | 24, incl. Dina, Vito, Cultivate, Mortality Spear, Witch of the Moors, Veinwitch Coven, Casualties of War | — |
 | The Cabbage Merchant (G) | [[Pest Infestation]], [[Idol of Oblivion]], [[Ribtruss Roaster]], [[Kodama's Reach]] | Haywire Mite, Ramunap Excavator (Cabbage already runs Llanowar Elves), Basking Broodscale, Springbloom Druid |
 | Imotekh the Stormlord (B) | [[Ashnod's Altar]], [[Skorpekh Lord]], [[Phyrexian Arena]], [[Imp's Mischief]] | Woe Strider, Grim Haruspex (Imotekh already runs Solemn Simulacrum and Syr Konrad), Rune-Scarred Demon, Ravenous Chupacabra |
 | Gilanra + Alena (GR) | [[Thunderfoot Baloth]] | Domri, Anarch of Bolas (loose; a 2026-10-07 near-tie for that deck) |
 | Tam, Tazri, Bumi, Inspirit, Urza | nothing | — |
+
+Lands 2026-10-08: [[Witch's Clinic]] was a precon-list registration the operator does not have (removed from the collection, like Well of Lost Dreams on 09-26); [[Vesuva]] takes its slot and [[Thespian's Stage]] replaces [[Radiant Fountain]] — the lab scored every owned land within 0.05 in both slots (a tie under the 0.25 bar), so the operator's pick stands. Both copy a dual for colour or an opponent's Coffers/Cradle/Urborg for value.
 
 Substitutes already made so the top decks stay whole: Festering Thicket for Overgrown Tomb, Infernal Grasp for Putrefy, Tyvar's Stand for Heroic Intervention, Massacre Wurm for Final Act, Three Visits for Nature's Lore, Sakura-Tribe Elder for Farseek, Midnight Reaper for Shamanic Revelation, Veil of Summer for Autumn's Veil.
 
@@ -99,7 +104,7 @@ Beledros is a 7-drop that makes fodder from the command zone, so the hand only h
 | Mulligan | Why |
 |---|---|
 | Swamp, Forest, [[Gray Merchant of Asphodel]], [[Massacre Wurm]], [[Mikaeus, the Unhallowed]], [[Casualties of War]], [[Deadly Tempest]] | 2 lands, nothing under 5 mana |
-| [[Bojuka Bog]], [[High Market]], [[Radiant Fountain]], [[Temple of the False God]], Swamp, [[Toxic Deluge]], [[Beast Within]] | 5 lands, two make no colour, only reactive spells |
+| [[Bojuka Bog]], [[High Market]], [[Thespian's Stage]], [[Temple of the False God]], Swamp, [[Toxic Deluge]], [[Beast Within]] | 5 lands, three make no colour, only reactive spells |
 | [[Elvish Mystic]], [[Paradise Druid]], Forest, [[Sanguine Bond]], [[Alhammarret's Archive]], [[Vito, Thorn of the Dusk Rose]], [[Plumb the Forbidden]] | 1 land; Bond and Archive do nothing without a board |
 | Forest, Forest, [[Yavimaya, Cradle of Growth]], [[Dina, Soul Steeper]], [[Vito, Thorn of the Dusk Rose]], [[Zulaport Cutthroat]], [[Moldervine Reclamation]] | Three green sources, four black cards; keep only if the 6 has a Swamp or a fetch |
 
@@ -154,7 +159,7 @@ The deck is consistent because every role has 8+ copies and the commander suppli
 
 ## 8. Misplays to avoid
 1. Casting Deadly Tempest with eight nontoken creatures and 12 life.
-2. Equipping Greaves to Beledros and then trying to give him lifelink with Witch's Clinic.
+2. Activating [[Thespian's Stage]] on your own [[Golgari Rot Farm]] with the bounce trigger still on the stack (it returns a land) — copy a dual or an opponent's utility land instead.
 3. Expecting Humans (Zulaport, Priest, Witness, Opportunist, Ophiomancer, Witch) to return from Mikaeus undying.
 4. Paying 10 life for the untap with nothing to cast or no drain to refund it.
 5. Holding Idol untapped "for later": it untaps once per round, so tap it at the first Pest of the round (your upkeep, or an opponent's if you missed it).
@@ -178,7 +183,6 @@ All free after Meren is dismantled (Meren leftovers), except where noted. Swaps 
 | Card | In for | When |
 |---|---|---|
 | [[Saw in Half]] | [[Warg Tactics]] | Any table. On your own [[Gray Merchant of Asphodel]] it is a death trigger plus two Merchants entering; on [[Massacre Wurm]] two sweeps; instant removal otherwise. Never on Beledros (command zone = did not die). |
-| [[Blooming Marsh]] | [[Radiant Fountain]] | Any table. Untapped B/G on turns 1–3; the model scores the swap at +0.05 and ignores it. |
 | [[Culling Ritual]] | [[Deadly Tempest]] | Token and dork tables. Cast it only with [[Blood Artist]] + [[Zulaport Cutthroat]] on board: every creature of ours that dies drains; the mana recasts Gray Merchant. Alone it is a self-wipe (13 of our permanents). |
 | [[Golgari Charm]] | [[Tyvar's Stand]] | Rest in Peace / Blind Obedience / Authority of the Consuls tables (mode 2), 1/1 swarms (mode 1 kills our Pests too), destroy-wraths (mode 3 regenerates). |
 | [[Yahenni, Undying Partisan]] | [[Argentum Masticore]] | Wrath-heavy control: an indestructible sacrifice outlet keeps the drain engine through the sweep. |

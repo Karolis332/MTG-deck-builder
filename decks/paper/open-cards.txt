@@ -94,6 +94,7 @@
 1 Bitterthorn, Nissa's Animus
 1 Black Sun's Zenith
 1 Blast Zone
+1 Blech, Loafing Pest
 1 Blight Mound
 1 Blighted Woodland
 1 Blisterpod
@@ -421,6 +422,7 @@
 2 Harmonize
 1 Harmonized Crescendo
 1 Harmonized Trio
+1 Harrow
 1 Harvest Season
 1 Hashep Oasis
 1 Hateful Eidolon
@@ -568,6 +570,7 @@
 1 Marshland Bloodcaster
 1 Martial Impetus
 1 Massacre Girl, Known Killer
+1 Massacre Girl, Most Wanted
 1 Master Chef
 1 Master's Guidance
 1 Mastermind's Acquisition
@@ -1062,6 +1065,7 @@
 1 Vial Smasher, Gleeful Grenadier
 1 Vicious Battlerager
 1 Victim of Night
+1 Vilis, Broker of Blood
 1 Village Pillagers
 1 Vindictive Triumph
 2 Vineglimmer Snarl
@@ -1104,7 +1108,6 @@
 1 Winternight Stories
 1 Wishing Well
 1 Witch of the Moors
-1 Witch's Clinic
 1 Witching Well
 1 Witherbloom Campus
 1 Witherbloom Charm

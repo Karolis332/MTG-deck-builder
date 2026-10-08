@@ -1661,7 +1661,6 @@
 1 Wishclaw Talisman
 1 Wishing Well
 1 Witch of the Moors
-1 Witch's Clinic
 1 Witching Well
 1 Witherbloom Campus
 1 Witherbloom Charm

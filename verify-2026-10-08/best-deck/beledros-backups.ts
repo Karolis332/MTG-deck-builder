@@ -47,7 +47,18 @@ const group = (c: DbCard): string => {
   const f = c.type_line.split(' // ')[0];
   return /Planeswalker/.test(f) ? 'walker' : /Creature/.test(f) ? 'creature' : /Land/.test(f) ? 'land' : /Instant|Sorcery/.test(f) ? 'spell' : /Artifact/.test(f) ? 'artifact' : 'enchantment';
 };
-const from = (name: string): string => (DONORS[name] ? DONORS[name][0] : meren.has(name) ? 'Meren (dismantled)' : 'loose collection');
+// physical boxes for cards in no deck: precon lists recovered from git (origins/relabel.py applies the same order to an existing JSON)
+const BOXES: [string, string][] = [
+  ['Omo precon (Tricky Terrain box, dismantled 2026-10-07)', 'omo-precon.txt'], ['Witherbloom Witchcraft precon leftovers (registered 2026-09-09)', 'witherbloom-precon-leftovers.txt'],
+  ['Quandrix precon leftovers (Tam build, 2026-10-02)', 'quandrix-precon.txt'], ['Silverquill precon leftovers (Tam build, 2026-10-02)', 'silverquill-precon.txt'],
+  ['OTJ box (Outlaws of Thunder Junction, 2026-09-08)', 'otj-box.txt'],
+];
+const boxSets = BOXES.map(([label, f]) => [label, new Set(fs.readFileSync(path.join(DIR, 'origins', f), 'utf8').split(/\r?\n/).flatMap((l) => {
+  const m = l.trim().match(/^(\d+)x?\s+(.+?)\s*(\([A-Z0-9]{3,4}\)\s*\d*)?$/);
+  return m ? [m[2].trim(), m[2].trim().split(' // ')[0]] : [];
+}))] as const);
+const box = (name: string): string => boxSets.find(([, s]) => s.has(name) || s.has(name.split(' // ')[0]))?.[0] ?? 'loose collection';
+const from = (name: string): string => (DONORS[name] ? DONORS[name][0] : meren.has(name) ? 'Meren (dismantled)' : box(name));
 const sameRole = (x: DbCard, c: DbCard): boolean => {
   const rx = cardRoles(x);
   return rx.length ? cardRoles(c).some((r) => rx.includes(r)) : !cardRoles(c).length && group(c) === group(x);

@@ -27,9 +27,9 @@ Deck
 1 Terramorphic Expanse
 1 Witherbloom Campus
 1 Blighted Woodland
-1 Witch's Clinic
+1 Vesuva
 1 Turbulent Fen
-1 Radiant Fountain
+1 Thespian's Stage
 4 Swamp
 4 Forest
 1 Sol Ring
