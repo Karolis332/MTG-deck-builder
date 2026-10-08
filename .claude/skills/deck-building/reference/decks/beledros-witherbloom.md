@@ -226,12 +226,14 @@ Not available as maybes: Ramunap Excavator (goes to Cabbage) and Grim Haruspex (
 
 Full oracle analysis: `verify-2026-10-08/best-deck/beledros-edhrec-analysis.md`. Prices Cardmarket, EDHREC lifegain page (33 decks).
 
-| Card | € | Why |
-|---|---|---|
-| [[Skullclamp]] | 4,30 | "Equipped creature gets +1/-1. Whenever equipped creature dies, draw two cards. Equip {1}" — a 1/1 Pest dies on equip: draw 2, gain 1, every death trigger, for {1}. |
-| [[Exquisite Blood]] | 27,75 | "Whenever an opponent loses life, you gain that much life" — infinite with [[Sanguine Bond]] or [[Vito, Thorn of the Dusk Rose]] (both in the 99). [[Bloodthirsty Conqueror]] (25,01) is the same loop on a body. |
-| [[Ayara, First of Locthwain]] | 3,62 | "Whenever Ayara or another black creature you control enters, each opponent loses 1 life and you gain 1 life. {T}, Sacrifice another black creature: Draw a card" — Pests are black. |
-| [[Marauding Blight-Priest]] | 0,11 | "Whenever you gain life, each opponent loses 1 life" — a second Dina, Soul Steeper. |
-| [[Bastion of Remembrance]] | — | "Whenever a creature you control dies, each opponent loses 1 life and you gain 1 life" — Zulaport as an enchantment. |
-| [[Prosperous Innkeeper]] | 0,23 | "Whenever another creature you control enters, you gain 1 life" + a Treasure — every Pest entering drains. |
-| [[Savra, Queen of the Golgari]] | 1,53 | Pests are black and green: each sacrifice is an edict ("pay 2 life… each other player sacrifices a creature") and "gain 2 life". |
+Buy lab (`buy-lab.ts`, `buy-lab.md`): all 138 unowned cards from both EDHREC pages and the CF corpus stats, each tried in every slot of the 99, ownership bypassed. One card clears the 0.25 bar — [[Golgari Signet]] +0.30, and only by replacing the locked [[Ashnod's Altar]], which the model cannot value. Every card below is flat for the model (it does not see lifegain, drain or sacrifice roles); the ranking here is the oracle analysis, the Δ column is the model's view for the record.
+
+| Card | € | Model Δ, best slot (buy lab 2026-10-08, 100 games) | Why |
+|---|---|---|---|
+| [[Skullclamp]] | 4,30 | +0.01 (Liliana slot) | "Equipped creature gets +1/-1. Whenever equipped creature dies, draw two cards. Equip {1}" — a 1/1 Pest dies on equip: draw 2, gain 1, every death trigger, for {1}. |
+| [[Exquisite Blood]] | 27,75 | +0.08 (Viscera Seer slot) | "Whenever an opponent loses life, you gain that much life" — infinite with [[Sanguine Bond]] or [[Vito, Thorn of the Dusk Rose]] (both in the 99). [[Bloodthirsty Conqueror]] (25,01) is the same loop on a body. |
+| [[Ayara, First of Locthwain]] | 3,62 | +0.03 (Liliana slot) | "Whenever Ayara or another black creature you control enters, each opponent loses 1 life and you gain 1 life. {T}, Sacrifice another black creature: Draw a card" — Pests are black. |
+| [[Marauding Blight-Priest]] | 0,11 | +0.05 (Viscera Seer slot) | "Whenever you gain life, each opponent loses 1 life" — a second Dina, Soul Steeper. |
+| [[Bastion of Remembrance]] | — | +0.05 (Viscera Seer slot) | "Whenever a creature you control dies, each opponent loses 1 life and you gain 1 life" — Zulaport as an enchantment. |
+| [[Prosperous Innkeeper]] | 0,23 | +0.16 (Altar slot) | "Whenever another creature you control enters, you gain 1 life" + a Treasure — every Pest entering drains. |
+| [[Savra, Queen of the Golgari]] | 1,53 | +0.09 (Viscera Seer slot) | Pests are black and green: each sacrifice is an edict ("pay 2 life… each other player sacrifices a creature") and "gain 2 life". |

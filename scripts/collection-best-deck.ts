@@ -26,6 +26,8 @@ import {
   DECK_SIZE, DEFAULT_WEIGHTS, MIN_GAIN_DEFAULT, basicsFor, buildPool, fromNames, identityOf, isCommander, isLand,
   legalPool, loadOwned, makeScorer, powerOf, seedDeck,
 } from './best-deck-lib';
+import type { DbCard as UnownedCard } from '../src/lib/types';
+import { resolveCard as resolveUnowned } from './best-deck-lib';
 
 const argv = process.argv.slice(2);
 const arg = (k: string): string | undefined => { const i = argv.indexOf(k); return i >= 0 ? argv[i + 1] : undefined; };
@@ -47,8 +49,13 @@ function runCommanders(): void {
   const legal = legalPool(owned, format);
   let commanders = legal.filter((c) => isCommander(c, format));
   if (arg('--commanders')) {
-    const want = new Set(arg('--commanders')!.split('|'));
-    commanders = commanders.filter((c) => want.has(c.name));
+    // "A|B" or @file (one name per line); names not in the owned pool resolve from the DB — the buy screen
+    const v = arg('--commanders')!;
+    const names = v.startsWith('@') ? fs.readFileSync(v.slice(1), 'utf8').split('\n').map((l) => l.trim()).filter(Boolean) : v.split('|');
+    const want = new Set(names);
+    const ownedNames = new Set(legal.map((c) => c.name));
+    const unowned = names.filter((n) => !ownedNames.has(n)).map((n) => resolveUnowned(n)).filter((c): c is UnownedCard => !!c && isCommander(c, format));
+    commanders = [...legal.filter((c) => want.has(c.name)), ...unowned];
   }
   const picked = new Map<string, string[]>();
   if (arg('--pick')) {

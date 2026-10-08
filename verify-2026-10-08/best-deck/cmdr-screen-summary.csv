@@ -1,0 +1,1624 @@
+rank,commander,identity,seed_objective,deck_score
+1,"Sauron, the Necromancer",B,73.76,68
+2,"Kolaghan, the Storm's Fury",BR,71.24,69
+3,"Ygra, Eater of All",BG,70.84,63
+4,"Sauron, the Lidless Eye",BR,70.22,76
+5,"Maha, Its Feathers Night",B,69.14,62
+6,"Elektra, Daughter of the Hand",B,69.04,62
+7,Bontu the Glorified,B,68.77,68
+8,"Raphael, Fiendish Savior",BR,68.63,63
+9,"Avacyn, Angel of Horror",B,68.52,68
+10,"Judith, the Scourge Diva",BR,68.31,73
+11,"Razaketh, the Foulblooded",B,68.22,68
+12,"Vogar, Necropolis Tyrant",B,66.92,68
+13,Balthor the Defiled,B,66.82,68
+14,"Sheoldred, Whispering One",B,66.78,68
+15,"Ardyn, the Usurper",B,66.36,62
+16,Rakdos the Defiler,BR,66.21,63
+17,"Yawgmoth, Thran Physician",B,66.2,68
+18,"Grim Reaper, Lethal Legionnaire",B,66.14,60
+19,"K'rrik, Son of Yawgmoth",B,66.01,62
+20,"Sidisi, Regent of the Mire",B,65.89,68
+21,"Rakdos, Lord of Riots",BR,65.86,63
+22,"Zhao, Ruthless Admiral",BR,65.7,76
+23,"Songbird, Sonic Screamer",B,65.04,68
+24,"Rohgahh, Kher Keep Overlord",BR,64.82,63
+25,"Kalitas, Traitor of Ghet",B,64.68,68
+26,Gollum the Abandoned,B,64.51,68
+27,"Sek'Kuar, Deathkeeper",BGR,64.12,66
+28,"Ketramose, the New Dawn",BW,63.99,56
+29,"Venom, Eddie Brock",B,63.93,60
+30,"Rakdos, Patron of Chaos",BR,63.52,57
+31,God-Eternal Bontu,B,63.34,68
+32,"Drana, the Last Bloodchief",B,63.27,56
+33,"Endrek Sahr, Master Breeder",B,63.14,68
+34,Kinzu of the Bleak Coven,B,62.96,62
+35,"Geth, Thane of Contracts",B,62.92,62
+36,"Teneb, the Harvester",BGW,62.48,66
+37,Arvad the Cursed,BW,61.9,73
+38,Lobelia Sackville-Baggins,B,61.63,60
+39,Dragonlord Kolaghan,BR,61.58,57
+40,"Madame Hydra, Reanimated",B,61.52,60
+41,"Geth, Lord of the Vault",B,61.51,62
+42,"Drana, Kalastria Bloodchief",B,61.39,56
+43,"Bolg, Erebor's Reckoning",BR,61.26,57
+44,The Infamous Cruelclaw,BR,61.15,62
+45,Beledros Witherbloom,BG,60.92,60
+46,"The Ghoul, Gunslinger",B,60.86,62
+47,"Ob Nixilis, Unshackled",B,60.82,62
+48,"Lyzolda, the Blood Witch",BR,60.8,62
+49,"Sidisi, Undead Vizier",B,60.63,68
+50,"Drivnod, Carnage Dominus",B,60.62,68
+51,"Savra, Queen of the Golgari",BG,60.38,60
+52,"Valgavoth, Terror Eater",B,60.37,62
+53,"Esix, Fractal Bloom",GU,60.36,70
+54,Ultimate Green Goblin,BR,60.04,60
+55,Ratadrabik of Urborg,BW,59.96,68
+56,Visara the Dreadful,B,59.55,56
+57,"Olivia, Opulent Outlaw",BRW,59.37,62
+58,"Gothmog, Morgul Lieutenant",B,59.14,62
+59,"Ebondeath, Dracolich",B,59.05,68
+60,Madame Hydra,BR,59.03,57
+61,"Liliana, Heretical Healer // Liliana, Defiant Necromancer",B,58.94,62
+62,"Vish Kal, Blood Arbiter",BW,58.56,66
+63,"The Master, Gallifrey's End",BR,58.51,63
+64,"Joel, Resolute Survivor",BG,58.15,60
+65,"Nazar, the Velvet Fang",B,58.08,56
+66,"Rakdos, the Muscle",BR,57.94,63
+67,"Ayara, First of Locthwain",B,57.73,62
+68,Asmodeus the Archfiend,B,57.69,56
+69,Myojin of Grim Betrayal,B,57.46,60
+70,"Kothophed, Soul Hoarder",B,57.44,56
+71,"Grismold, the Dreadsower",BG,57.44,68
+72,"Muldrotha, the Gravetide",BGU,57.41,57
+73,"Mishra, Tamer of Mak Fawa",BR,57.34,57
+74,"Tymaret, the Murder King",BR,57.33,60
+75,Gorbag of Minas Morgul,B,57.32,62
+76,"Izoni, Center of the Web",BG,57.3,66
+77,"Fain, the Broker",B,57.27,68
+78,"Alpharael, Stonechosen",B,57.26,56
+79,"The Balrog, Flame of Udûn",BR,57.17,57
+80,"Bladewing, Deathless Tyrant",BR,57.08,63
+81,"Tetzimoc, Primal Death",B,57.06,62
+82,"Yukora, the Prisoner",B,57.02,62
+83,"Carnage, Crimson Chaos",BR,56.99,57
+84,Hazel of the Rootbloom,BG,56.98,60
+85,"Syr Vondam, the Lucent",BW,56.67,66
+86,"Vaevictis Asmadi, the Dire",BGR,56.56,60
+87,"Ozox, the Clattering King",B,56.53,68
+88,"Rakdos, the Showstopper",BR,56.5,56
+89,"Gollum, Riddle Master",B,56.26,68
+90,"Kethek, Crucible Goliath",BR,56.16,56
+91,"Sephiroth, Fabled SOLDIER // Sephiroth, One-Winged Angel",B,56.08,62
+92,"Zodiark, Umbral God",B,55.88,62
+93,Agent Venom,B,55.87,63
+94,"Seizan, Perverter of Truth",B,55.81,56
+95,The Speed Demon,B,55.67,56
+96,"Witch-king, Sky Scourge",BR,55.59,51
+97,Massacre Girl,B,55.53,56
+98,"Tormod, the Desecrator",B,55.44,62
+99,The Balrog of Moria,BR,55.44,51
+100,Demonlord Belzenlok,B,55.35,68
+101,"Legate Lanius, Caesar's Ace",BR,55.25,52
+102,The Lord of Pain,BR,55.2,51
+103,Hythonia the Cruel,B,55.11,47
+104,Yargle and Multani,BG,55.08,76
+105,Lim-Dûl the Necromancer,B,55.08,62
+106,"Chainer, Nightmare Adept",BR,55.04,55
+107,"Xiahou Dun, the One-Eyed",B,54.99,62
+108,"Lluwen, Exchange Student // Pest Friend",BG,54.93,65
+109,"Atlas, Sizable Stooge",BG,54.88,60
+110,"Setzer, Wandering Gambler",BR,54.85,57
+111,Sheoldred // The True Scriptures,B,54.82,62
+112,"Gyruda, Doom of Depths",BU,54.73,63
+113,"The Spot, Living Portal",BW,54.73,56
+114,"Kalitas, Bloodchief of Ghet",B,54.67,62
+115,"Storrev, Devkarin Lich",BG,54.67,60
+116,Gríma Wormtongue,B,54.64,62
+117,"Ashnod, Flesh Mechanist",B,54.61,62
+118,Kroxa and Kunoros,BRW,54.52,56
+119,Slimefoot and Squee,BGR,54.29,60
+120,"Lagomos, Hand of Hatred",BR,54.28,55
+121,"Shredder, Unrelenting",B,54.24,56
+122,Edgar Markov,BRW,54.24,56
+123,"Kozilek, the Broken Reality",C,54.2,72
+124,"Kuon, Ogre Ascendant // Kuon's Essence",B,54.17,62
+125,Morinfen,B,54.13,50
+126,"Minotaur, Roxxon CEO",B,54.12,56
+127,"Aryel, Knight of Windgrace",BW,54.06,56
+128,"Yargle, Glutton of Urborg",B,53.97,56
+129,"Anje, Maid of Dishonor",BR,53.88,56
+130,"Sengir, the Dark Baron",B,53.83,56
+131,"Shredder, Shadow Master",B,53.79,62
+132,"Azog, Moria's Ruin",B,53.68,56
+133,"Kalakscion, Hunger Tyrant",B,53.67,56
+134,Doctor Doom,B,53.48,62
+135,"Savanti Romero, Time's Exile",B,53.36,62
+136,"Moira, Urborg Haunt",B,53.23,56
+137,"Maga, Traitor to Mortals",B,53.18,56
+138,"Pippin, Warden of Isengard",BG,53.17,81
+139,Isareth the Awakener,B,52.96,56
+140,"Madame Null, Power Broker",B,52.94,62
+141,The Meep,B,52.91,62
+142,Maralen of the Mornsong,B,52.85,56
+143,"Thanos, Death's Consort",B,52.77,56
+144,Sol'kanar the Swamp King,BRU,52.73,57
+145,"Smaug, Wicked Worm",BR,52.71,47
+146,"Tom, Bert, and William",BG,52.68,68
+147,The Masters of Evil,B,52.55,56
+148,The Scarab God,BU,52.54,69
+149,Count Nefaria,B,52.52,56
+150,"Gisa, Glorious Resurrector",B,52.47,62
+151,"Henzie ""Toolbox"" Torre",BGR,52.46,66
+152,"Bebop, Warthog Warrior",B,52.39,56
+153,Madame Masque,B,52.39,56
+154,"Kels, Fight Fixer",BU,52.37,69
+155,"Eirdu, Carrier of Dawn // Isilu, Carrier of Twilight",BW,52.28,56
+156,"Vito, Fanatic of Aclazotz",BW,52.21,66
+157,"Ravos, Soultender",BW,52.16,62
+158,"Garna, Bloodfist of Keld",BR,52.14,55
+159,"Grimgrin, Corpse-Born",BU,52.11,69
+160,"Hancock, Ghoulish Mayor",B,52.1,56
+161,"Proft, Sinister Mastermind",B,51.99,56
+162,"Nefarox, Overlord of Grixis",B,51.87,56
+163,Bortuk Bonerattle,BG,51.79,59
+164,"Mortarion, Daemon Primarch",B,51.78,56
+165,Malfegor,BR,51.77,56
+166,Witch-king of Angmar,B,51.52,62
+167,Ghoulcaller Gisa,B,51.34,62
+168,Spirit of the Night,B,51.23,56
+169,"Gisa, the Hellraiser",B,51.12,62
+170,"Sidisi, Brood Tyrant",BGU,51.01,57
+171,"Xira, the Golden Sting",BGR,50.95,55
+172,"Naomi, Pillar of Order",BW,50.91,50
+173,Smaug the Impenetrable,BR,50.9,47
+174,"Xu-Ifit, Osteoharmonist",B,50.9,62
+175,"The Balrog, Durin's Bane",BR,50.9,57
+176,"Torgaar, Famine Incarnate",B,50.89,60
+177,"Orca, Siege Demon",BR,50.87,55
+178,"Ozai, the Phoenix King",BR,50.69,57
+179,The Master of Lake-town,B,50.4,56
+180,Marrow-Gnawer,B,50.19,56
+181,"Chatterfang, Squirrel General",BG,50.14,56
+182,"Clavileño, First of the Blessed",BW,50.01,60
+183,"Karador, Ghost Chieftain",BGW,49.93,60
+184,"Hogaak, Arisen Necropolis",BG,49.93,62
+185,Triad of Fates,BW,49.88,44
+186,"Sheoldred, the Apocalypse",B,49.76,51
+187,"Witch-king, Bringer of Ruin",B,49.68,56
+188,"Deadpool, Trading Card",BR,49.57,46
+189,"Olivia, Crimson Bride",BR,49.47,45
+190,"Evin, Waterdeep Opportunist",B,49.3,62
+191,"The Beast, Deathless Prince",BR,49.03,57
+192,"Bhaal, Lord of Murder",BGR,49.02,55
+193,"Black Widow, Daring Operative",B,48.74,55
+194,Teysa Karlov,BW,48.72,55
+195,"Sedris, the Traitor King",BRU,48.64,57
+196,"Venom, Evil Unleashed",B,48.64,60
+197,Gaius van Baelsar,B,48.44,55
+198,"Lorcan, Warlock Collector",B,48.43,50
+199,"Carmen, Cruel Skymarcher",BW,48.4,56
+200,"Gix, Yawgmoth Praetor",B,48.35,52
+201,"Greven, Predator Captain",BR,48.16,52
+202,Ascendant Evincar,B,48.12,56
+203,Grandmother Sengir,B,48.12,56
+204,"Kiku, Night's Flower",B,48.1,41
+205,"Obzedat, Ghost Council",BW,48.08,48
+206,"Kyoki, Sanity's Eclipse",B,47.88,56
+207,"Bebop, Skull & Crossbones",B,47.8,50
+208,"Zahur, Glory's Past",BW,47.78,60
+209,"Belbe, Corrupted Observer",BG,47.77,62
+210,"Nita, Forum Conciliator",BW,47.73,56
+211,Seymour Flux,B,47.68,56
+212,"Nemata, Primeval Warden",BG,47.68,55
+213,"Enkira, Hostile Scavenger",BG,47.67,55
+214,"Sethron, Hurloon General",BR,47.66,46
+215,Moira and Teshar,BW,47.62,55
+216,Lucius the Eternal,BR,47.62,46
+217,"Nethroi, Apex of Death",BGW,47.59,62
+218,"Siegfried, Famed Swordsman",B,47.31,50
+219,Phage the Untouchable,B,47.3,56
+220,"Kuro, Pitlord",B,47.23,56
+221,"Josu Vess, Lich Knight",B,47.21,62
+222,Super Shredder,B,47.18,47
+223,Reno and Rude,B,47.1,52
+224,"Fumulus, the Infestation",B,46.98,56
+225,"Sarevok, Deathbringer",B,46.96,55
+226,"Adrix and Nev, Twincasters",GU,46.84,63
+227,Volrath the Fallen,B,46.82,62
+228,Daxos the Returned,BW,46.7,55
+229,"Drana, Liberator of Malakir",B,46.7,52
+230,"Phabine, Boss's Confidant",GRW,46.55,78
+231,Ghost Council of Orzhova,BW,46.52,55
+232,"Henry Wu, InGen Geneticist",BGU,46.48,63
+233,Olivia Voldaren,BR,46.31,45
+234,"Witherbloom, the Balancer",BG,46.18,58
+235,Gallowbraid,B,46.11,50
+236,"Scorpion, Seething Striker",B,46.07,47
+237,Pavel Maliki,BR,46.01,46
+238,Veldrane of Sengir,B,46.0,50
+239,Thraximundar,BRU,45.81,63
+240,"Wilhelt, the Rotcleaver",BU,45.8,69
+241,Barktooth Warbeard,BR,45.74,46
+242,Lady Orca,BR,45.69,46
+243,"Wasitora, Nekoru Queen",BGR,45.61,55
+244,Commander Greven il-Vec,B,45.57,56
+245,"Zul Ashur, Lich Lord",B,45.56,56
+246,Cloud of Darkness,BG,45.44,49
+247,"Sauron, Lord of the Rings",BRU,45.11,58
+248,"Hidetsugu, Devouring Chaos",BR,45.1,45
+249,"Liesa, Forgotten Archangel",BW,45.09,55
+250,"Elenda, the Dusk Rose",BW,45.01,55
+251,"Jhoira, Weatherlight Corsair",B,44.91,47
+252,"Karai, Future of the Foot",BW,44.89,45
+253,"Taborax, Hope's Demise",B,44.66,62
+254,"Mai, Scornful Striker",B,44.64,56
+255,"Edgar, Charmed Groom // Edgar Markov's Coffin",BW,44.63,51
+256,"Ares, God of War",BR,44.59,57
+257,"Gollum, Patient Plotter",B,44.52,56
+258,"Shilgengar, Sire of Famine",BW,44.37,56
+259,"Vraska, the Cutting Glare",BG,44.31,51
+260,Estinien Varlineau,BW,44.26,56
+261,"Timothar, Baron of Bats",B,43.86,56
+262,"Maarika, Brutal Gladiator",BGR,43.85,62
+263,"Gollum, Obsessed Stalker",B,43.84,47
+264,"Azula, On the Hunt",B,43.72,56
+265,"Teysa, Orzhov Scion",BW,43.72,56
+266,"Kokusho, the Evening Star",B,43.69,60
+267,Lord of Tresserhorn,BRU,43.68,63
+268,"Horobi, Death's Wail",B,43.61,62
+269,Old Rutstein,BG,43.51,50
+270,Baron Sengir,B,43.42,56
+271,"Mazzy, Truesword Paladin",GRW,43.42,68
+272,"Green Goblin, Back for More",B,43.39,47
+273,"Silverquill, the Disputant",BW,43.38,52
+274,"Gollum, Silent Slinker // Meager Meal",B,43.37,47
+275,"Grendel, Spawn of Knull",B,43.37,47
+276,The Frightful Four,B,43.37,47
+277,"Eddie Brock // Venom, Lethal Protector",BGR,43.36,55
+278,Shadow the Hedgehog,BR,43.33,40
+279,"Brokkos, Apex of Forever",BGU,43.26,59
+280,Old Flitterfang,B,43.22,45
+281,"Klaw, Master of Sound",B,43.11,47
+282,"Kefka, Dancing Mad",BR,43.07,39
+283,"Kamber, the Plunderer",B,43.02,45
+284,"Viconia, Drow Apostate",B,42.98,55
+285,"Gyrus, Waker of Corpses",BGR,42.97,51
+286,Barrowin of Clan Undurr,BW,42.79,47
+287,"Licia, Sanguine Tribune",BRW,42.74,49
+288,"Ellie, Vengeful Hunter",BR,42.72,45
+289,"Gorex, the Tombshell",B,42.7,55
+290,Imskir Iron-Eater,BR,42.64,50
+291,"Shark Shredder, Killer Clone",B,42.52,37
+292,"Strefan, Maurer Progenitor",BR,42.48,45
+293,"Nyla, Shirshu Sleuth",B,42.34,56
+294,"Varina, Lich Queen",BUW,42.1,69
+295,"Toxrill, the Corrosive",BU,42.07,57
+296,"Ardbert, Warrior of Darkness",BW,41.98,60
+297,Gisa and Geralf,BU,41.96,63
+298,"Orcus, Prince of Undeath",BR,41.74,56
+299,"Be'lakor, the Dark Master",BRU,41.7,52
+300,"Loot, the Anomaly",B,41.54,56
+301,"Henrika Domnathi // Henrika, Infernal Seer",B,41.53,51
+302,"Mahadi, Emporium Master",BR,41.46,42
+303,Kaalia of the Vast,BRW,41.23,45
+304,"Ink-Eyes, Servant of Oni",B,41.06,45
+305,"Vona, Butcher of Magan",BW,40.94,51
+306,Boris Devilboon,BR,40.92,39
+307,"Anowon, the Ruin Sage",B,40.87,50
+308,Tolsimir Wolfblood,GW,40.76,76
+309,Bolg of the North,BR,40.75,39
+310,"Orah, Skyclave Hierophant",BW,40.64,60
+311,"Nashi, Moon Sage's Scion",B,40.49,40
+312,"Mishra, Claimed by Gix",BR,40.22,43
+313,Lord of the Nazgûl,BU,40.06,63
+314,"Titania, Rugged Rumbler",BG,39.98,62
+315,"Edgar, Ancient Bloodlord",BW,39.77,51
+316,"Nevinyrral, Urborg Tyrant",BUW,39.62,63
+317,"Shelob, Child of Ungoliant",BG,39.53,60
+318,"Greta, Sweettooth Scourge",BG,39.25,55
+319,Cabal Patriarch,B,39.2,62
+320,Colonel Autumn,BW,38.72,55
+321,Goro-Goro and Satoru,BRU,38.68,58
+322,"Celes, Rune Knight",BRW,38.64,45
+323,Hildibrand Manderville // Gentleman's Rise,BW,38.62,55
+324,"Lo and Li, Twin Tutors",B,38.58,55
+325,"Aron, Benalia's Ruin",BW,38.58,55
+326,Spider-Man Noir,B,38.55,45
+327,"Urza, Chief Artificer",BUW,38.49,57
+328,"Greel, Mind Raker",B,38.4,51
+329,"Volo, Guide to Monsters",GU,38.37,58
+330,Myojin of Life's Web,G,38.34,68
+331,"Kingpin, Wilson Fisk",B,38.09,52
+332,Agent Frank Horrigan,BG,37.93,55
+333,"Extus, Oriq Overlord // Awaken the Blood Avatar",BRW,37.87,50
+334,"Winter, Cursed Rider",BU,37.83,57
+335,"Glissa, the Traitor",BG,37.8,44
+336,"Green Goblin, Nemesis",BR,37.61,46
+337,Vhati il-Dal,BG,37.5,41
+338,The Ancient One,BU,37.46,63
+339,The Sackville-Bagginses,B,37.19,43
+340,"Kaalia, Zenith Seeker",BRW,37.17,42
+341,Crovax the Cursed,B,37.14,44
+342,"Rienne, Angel of Rebirth",GRW,36.92,70
+343,"Xavier Sal, Infested Captain",BGU,36.91,57
+344,"Kaervek, the Spiteful",B,36.87,40
+345,Sisters of Stone Death,BG,36.86,56
+346,"Interceptor, Shadow's Hound",B,36.62,49
+347,"Prossh, Skyraider of Kher",BGR,36.61,56
+348,"Caesar, Legion's Emperor",BRW,36.58,39
+349,"Jetmir, Nexus of Revels",GRW,36.56,74
+350,"Ashling, the Extinguisher",B,36.55,33
+351,"Meng Huo, Barbarian King",G,36.54,76
+352,Zimone and Dina,BGU,36.53,52
+353,"Black Widow, Deadly Hunter",B,36.27,45
+354,"Hashaton, Scarab's Fist",BUW,36.17,57
+355,"Krav, the Unredeemed",B,36.01,48
+356,"Aloy, Savior of Meridian",GU,36.01,57
+357,"Galactus, Devourer of Worlds",C,35.96,60
+358,"Iname, Death Aspect",B,35.85,42
+359,Rankle and Torbran,BR,35.79,30
+360,"Rin and Seri, Inseparable",GRW,35.79,64
+361,"Zhang He, Wei General",B,35.61,42
+362,Darigaaz Reincarnated,BGR,35.44,51
+363,"Koma, World-Eater",GU,35.35,71
+364,"Teval, the Balanced Scale",BGU,35.18,57
+365,The Destined Black Mage,B,35.18,52
+366,Laughing Jasper Flint,BR,35.17,30
+367,Vela the Night-Clad,BU,35.04,57
+368,The Capitoline Triad,C,34.99,55
+369,"Tocasia, Dig Site Mentor",GUW,34.99,57
+370,The Odd Acorn Gang,BG,34.92,44
+371,"Zhang Liao, Hero of Hefei",B,34.82,39
+372,"Rat King, Pale Piper",B,34.75,39
+373,"Syr Vondam, Sunstar Exemplar",BW,34.64,41
+374,"Tatsunari, Toad Rider",BGU,34.52,69
+375,Inquisitor Greyfax,BUW,34.47,57
+376,"Eloise, Nephalia Sleuth",BU,34.31,57
+377,Altaïr Ibn-La'Ahad,BRW,34.18,39
+378,Black Waltz No. 3,BR,34.14,32
+379,"Elenda, Saint of Dusk",BW,34.07,44
+380,Satoru Umezawa,BU,34.04,46
+381,"Emrakul, the Exigent Doom",C,33.88,60
+382,"Black Cat, Cunning Thief",B,33.77,50
+383,Inga and Esika,GU,33.57,69
+384,"Yarok, the Desecrated",BGU,33.51,45
+385,"Hei Bai, Spirit of Balance",BW,33.37,44
+386,"Urgoros, the Empty One",B,33.23,39
+387,"Ultima, Origin of Oblivion",C,33.03,55
+388,"Vren, the Relentless",BU,32.9,46
+389,"Neriv, Crackling Vanguard",BRW,32.67,39
+390,Zurgo Helmsmasher,BRW,32.63,39
+391,"Bugenhagen, Wise Elder",G,32.56,68
+392,"Kambal, Profiteering Mayor",BW,32.47,45
+393,"Tawnos, the Toymaker",GU,32.39,58
+394,"Yorvo, Lord of Garenbrig",G,32.27,63
+395,Old Gnawbone,G,32.17,64
+396,"Atris, Oracle of Half-Truths",BU,32.15,43
+397,"June, Bounty Hunter",B,32.06,52
+398,"Thalisse, Reverent Medium",BW,32.03,42
+399,"Malik, Grim Manipulator",BRW,32.0,30
+400,Nikya of the Old Ways,GR,32.0,69
+401,"Syr Armont, the Redeemer",GW,31.93,68
+402,"Bane, Lord of Darkness",BUW,31.86,63
+403,"Roshan, Hidden Magister",B,31.85,42
+404,"Tawnos, Solemn Survivor",BUW,31.83,51
+405,Old One Eye,G,31.8,69
+406,"Gwenom, Remorseless",B,31.76,37
+407,"Sauron, the Dark Lord",BRU,31.56,46
+408,Surrak and Goreclaw,G,31.55,69
+409,"Radagast, Wizard of Wilds",GU,31.54,69
+410,"Korvold, Fae-Cursed King",BGR,31.53,47
+411,The Ur-Sphinx,BUW,31.53,52
+412,"Baru, Fist of Krosa",G,31.46,75
+413,Kaervek the Merciless,BR,31.45,27
+414,Kodama of the North Tree,G,31.31,69
+415,"Taigam, Sidisi's Hand",BU,31.22,40
+416,"Terrian, World Tyrant",G,31.2,69
+417,"Garna, the Bloodflame",BR,31.2,35
+418,Rodolf Duskbringer,BW,31.1,47
+419,"Silvos, Rogue Elemental",G,31.0,63
+420,"The Master, Multiplied",BR,30.78,25
+421,Nath of the Gilt-Leaf,BG,30.76,56
+422,The Dawning Archaic,C,30.73,55
+423,Neyam Shai Murad,BW,30.51,44
+424,Molecule Man,C,30.46,60
+425,"Kamahl, Heart of Krosa",G,30.44,82
+426,"Far Fortune, End Boss",BR,30.27,25
+427,"Karrthus, Tyrant of Jund",BGR,30.12,50
+428,"Elas il-Kor, Sadistic Pilgrim",BW,30.06,51
+429,"Typhoid Mary, Fractured",BR,30.03,30
+430,Saruman of Many Colors,BUW,29.97,52
+431,"Ezuri, Claw of Progress",GU,29.96,58
+432,Uglúk of the White Hand,BR,29.88,24
+433,"Ghalta, Stampede Tyrant",G,29.87,69
+434,Elder Arthur Maxson,BW,29.83,42
+435,"Runadi, Behemoth Caller",G,29.76,64
+436,"Ulamog, the Defiler",C,29.69,60
+437,"Indominus Rex, Alpha",BGU,29.62,57
+438,"Ezuri, Renegade Leader",G,29.56,78
+439,Emissary Green,G,29.56,64
+440,"Gwenna, Eyes of Gaea",G,29.55,69
+441,"Black Panther, Vanguard",GW,29.55,78
+442,Aveline de Grandpré,BG,29.52,35
+443,The Tarrasque,G,29.48,69
+444,"Betor, Ancestor's Voice",BGW,29.38,45
+445,Jedit Ojanen of Efrava,G,29.38,69
+446,"Marvo, Deep Operative",BU,29.29,50
+447,"Kitt Kanto, Mayhem Diva",GRW,29.28,63
+448,Myojin of Night's Reach,B,29.21,26
+449,"Koma, Cosmos Serpent",GU,29.2,65
+450,"Valgavoth, Harrower of Souls",BR,29.0,23
+451,King Darien XLVIII,GW,28.93,69
+452,Bebop & Rocksteady,BG,28.88,37
+453,"Kagemaro, First to Suffer",B,28.86,41
+454,"Cao Ren, Wei Commander",B,28.74,37
+455,"Koya, Death from Above",BW,28.71,25
+456,Gideon the Oathless,B,28.71,23
+457,"Gandalf, Westward Voyager",GU,28.68,70
+458,"Gev, Scaled Scorch",BR,28.38,27
+459,"Kozilek, Butcher of Truth",C,28.34,60
+460,"Shirei, Shizo's Caretaker",B,28.21,45
+461,"Ulamog, the Ceaseless Hunger",C,28.11,60
+462,"Amareth, the Lustrous",GUW,28.07,57
+463,Iname as One,BG,28.04,51
+464,"Temmet, Naktamun's Will",BUW,27.94,63
+465,"Gor Muldrak, Amphinologist",GU,27.94,58
+466,"Locke, Treasure Hunter",BR,27.93,30
+467,Rufus Shinra,BW,27.92,42
+468,Mai and Zuko,BRU,27.8,43
+469,"Monoxa, Midway Manager",BR,27.76,24
+470,"Zilortha, Strength Incarnate",GR,27.74,64
+471,Krond the Dawn-Clad,GW,27.69,62
+472,Seshiro the Anointed,G,27.63,69
+473,"Kona, Rescue Beastie",G,27.58,69
+474,"Great Goblin, Foul-Hearted",BR,27.57,23
+475,"Kellan, Inquisitive Prodigy // Tail the Suspect",GU,27.56,57
+476,Shay Cormac,BW,27.49,20
+477,Disa the Restless,BGR,27.4,55
+478,"Doc Ock, Evil Inventor",BU,27.39,57
+479,Maelstrom Wanderer,GRU,27.35,64
+480,"Fandaniel, Telophoroi Ascian",B,27.28,24
+481,"Omnath, Locus of the Void",C,27.23,55
+482,"Volrath, the Shapestealer",BGU,27.17,37
+483,"Kamahl, Fist of Krosa",G,27.17,76
+484,"Strong, the Brutish Thespian",G,27.17,63
+485,The Raven Man,B,27.15,42
+486,The Haunt of Hightower,B,27.07,25
+487,"Michelangelo, Improviser",G,26.97,63
+488,Tor Wauki the Younger,BR,26.76,23
+489,Rhonas the Indomitable,G,26.74,63
+490,"Maja, Bretagard Protector",GW,26.65,64
+491,"Liesa, Shroud of Dusk",BW,26.54,44
+492,Tsabo Tavoc,BR,26.52,24
+493,"White Widow, Yelena Belova",B,26.43,23
+494,"Zhulodok, Void Gorger",C,26.39,60
+495,"Exava, Rakdos Blood Witch",BR,26.36,21
+496,"Tana, the Bloodsower",GR,26.33,70
+497,Rohgahh of Kher Keep,BR,26.26,24
+498,He Who Hungers,B,26.18,39
+499,Toshiro Umezawa,B,26.12,21
+500,Vial Smasher the Fierce,BR,26.1,22
+501,Infernal Kirin,B,26.07,39
+502,"Fang, Fearless l'Cie",B,26.01,32
+503,"Xun Yu, Wei Advisor",B,26.0,33
+504,"Colfenor, the Last Yew",BGW,25.97,44
+505,"Kellogg, Dangerous Mind",BR,25.94,30
+506,"Abigale, Poet Laureate // Heroic Stanza",BW,25.93,26
+507,"Obosh, the Preypiercer",BR,25.7,21
+508,"Winter, Cynical Opportunist",BG,25.6,39
+509,"Shelob, Dread Weaver",B,25.6,28
+510,Rivaz of the Claw,BR,25.59,24
+511,"Xantcha, Sleeper Agent",BR,25.4,26
+512,"Arixmethes, Slumbering Isle",GU,25.4,71
+513,"Intet, the Dreamer",GRU,25.36,59
+514,"Emrakul, the World Anew",C,25.28,60
+515,"Saheeli, Radiant Creator",GRU,25.25,57
+516,"Myrkul, Lord of Bones",BGW,25.24,60
+517,"Sméagol, Helpful Guide",BG,25.23,34
+518,"Hajar, Loyal Bodyguard",GR,25.02,65
+519,Axelrod Gunnarson,BR,24.96,27
+520,God-Eternal Rhonas,G,24.94,63
+521,"Emrakul, the Promised End",C,24.89,55
+522,Ur-Drago,BU,24.79,46
+523,"Ognis, the Dragon's Lash",BGR,24.67,44
+524,Ghalta and Mavren,GW,24.64,68
+525,"Syr Faren, the Hengehammer",G,24.59,57
+526,Dragonlord Atarka,GR,24.52,64
+527,Fire Lord Ozai,BR,24.38,22
+528,"Killmonger, Scourge of Wakanda",BG,24.37,24
+529,"Mauhúr, Uruk-hai Captain",BR,24.31,21
+530,"Black Widow, Super Spy",B,24.29,23
+531,"Niv-Mizzet, Ghost Counsel",BW,24.29,32
+532,"Arna Kennerüd, Skycaptain",BUW,24.19,43
+533,"Quandrix, the Proof",GU,24.14,54
+534,Mister Negative,BW,24.11,26
+535,"Gargos, Vicious Watcher",G,24.1,58
+536,"Sachi, Daughter of Seshiro",G,23.96,58
+537,"Ob Nixilis, Captive Kingpin",BR,23.94,24
+538,"Shagrat, Loot Bearer",BR,23.88,24
+539,"Inalla, Archmage Ritualist",BRU,23.84,39
+540,"Titania, Nature's Force",G,23.83,69
+541,"Scarlet Spider, Kaine",BR,23.81,22
+542,"Gahiji, Honored One",GRW,23.7,57
+543,"Y'shtola, Night's Blessed",BUW,23.69,52
+544,"Neheb, the Worthy",BR,23.68,20
+545,"Duskana, the Rage Mother",GRW,23.64,57
+546,"Denethor, Ruling Steward",BW,23.64,44
+547,"Nemata, Grove Guardian",G,23.58,63
+548,"Michelangelo, Mutant BFF",G,23.49,64
+549,Radagast of Rhosgobel,G,23.46,69
+550,"Wort, Boggart Auntie",BR,23.45,22
+551,Shroofus Sproutsire,G,23.33,64
+552,The Serpent Society,BG,23.33,22
+553,Kaysa,G,23.3,69
+554,"Gishath, Sun's Avatar",GRW,23.2,58
+555,"Garland, Knight of Cornelia // Chaos, the Endless",BR,23.08,26
+556,Trostani Discordant,GW,23.04,63
+557,"Goreclaw, Terror of Qal Sisma",G,22.93,63
+558,"Blex, Vexing Pest // Search for Blex",BG,22.84,23
+559,"Shriek, Treblemaker",BR,22.81,21
+560,Bartel Runeaxe,BGR,22.76,44
+561,"Yisan, the Wanderer Bard",G,22.73,63
+562,"Syr Gwyn, Hero of Ashvale",BRW,22.7,24
+563,Ellivere of the Wild Court,GW,22.66,51
+564,Kogla and Yidaro,GR,22.65,58
+565,"Jecht, Reluctant Guardian // Braska's Final Aeon",B,22.63,21
+566,"Hammerhead, Maggia Boss",B,22.53,27
+567,"Prosper, Tome-Bound",BR,22.48,21
+568,"Oros, the Avenger",BRW,22.47,24
+569,Radioactive Man,B,22.43,24
+570,"Tam, Observant Sequencer // Deep Sight",GU,22.38,59
+571,"Sauron, Dino Devotee",G,22.38,58
+572,Hans Eriksson,GR,22.36,58
+573,"Rith, Liberated Primeval",GRW,22.32,58
+574,"Karazikar, the Eye Tyrant",BR,22.31,24
+575,Kwia Vigorbloom,GW,22.26,58
+576,"Kardur, Doomscourge",BR,22.23,22
+577,Stangg,GR,22.2,64
+578,"Danitha, Spear of Agony",B,22.07,26
+579,"Klaw, Sonic Subjugator",B,22.07,26
+580,Valentina Allegra de Fontaine,B,22.07,26
+581,"Florian, Voldaren Scion",BR,22.06,25
+582,"Evereth, Viceroy of Plunder",BR,21.95,26
+583,"Grub, Storied Matriarch // Grub, Notorious Auntie",BR,21.93,20
+584,"Zenos yae Galvus // Shinryu, Transcendent Rival",B,21.91,20
+585,"Fixer, Techno Terror",B,21.89,26
+586,"Viper, Cruel Conspirator",B,21.89,26
+587,"Splinter, the Mentor",B,21.83,26
+588,Groundchuck & Dirtbag,G,21.83,64
+589,"Zuri, Warrior of Wakanda",G,21.82,58
+590,"Titania, Protector of Argoth",G,21.79,69
+591,Tuya Bearclaw,GR,21.74,58
+592,"Radha, Heir to Keld",GR,21.73,64
+593,"Felisa, Fang of Silverquill",BW,21.72,36
+594,"Zopandrel, Hunger Dominus",G,21.64,63
+595,"Green Goblin, Revenant",BR,21.63,24
+596,"Roalesk, Apex Hybrid",GU,21.61,43
+597,"Kalain, Reclusive Painter",BR,21.58,30
+598,"Kaervek, the Punisher",B,21.55,23
+599,"Shauku, Endbringer",B,21.53,26
+600,"Rassilon, the War President",BU,21.51,46
+601,"Silver Surfer, Galactus's Herald",C,21.5,55
+602,"Kuja, Genome Sorcerer // Trance Kuja, Fate Defied",BR,21.38,20
+603,"Alela, Artful Provocateur",BUW,21.36,52
+604,"Aesi, Tyrant of Gyre Strait",GU,21.33,59
+605,"Zuko, Conflicted",BR,21.32,20
+606,Grand Warlord Radha,GR,21.27,59
+607,"Tokka & Rahzar, Terrible Twos",BR,21.25,24
+608,"Jolrael, Mwonvuli Recluse",G,21.21,57
+609,Questing Beast,G,21.17,57
+610,"Tariel, Reckoner of Souls",BRW,21.13,23
+611,"T'Challa, the Black Panther",GW,21.1,57
+612,Patron of the Orochi,G,21.0,58
+613,Bladewing the Risen,BR,20.91,21
+614,"M'Baku, Jabari Chieftain",G,20.91,63
+615,"Blim, Comedic Genius",BR,20.8,21
+616,"She-Hulk, Attorney-at-Law",GW,20.7,57
+617,"Galadriel, Gift-Giver",G,20.7,58
+618,"W'Kabi, Shield of the Nation",G,20.64,63
+619,"White Tiger, Ava Ayala",G,20.64,63
+620,Jerrard of the Closed Fist,GR,20.62,58
+621,"Vorinclex, Voice of Hunger",G,20.47,58
+622,Neyith of the Dire Hunt,GR,20.44,58
+623,"Korvold, Gleeful Glutton",BGR,20.43,43
+624,"Sarulf, Realm Eater",BG,20.39,25
+625,"Gimbal, Gremlin Prodigy",GRU,20.35,58
+626,Verdeloth the Ancient,G,20.34,62
+627,Beorn the Fierce,G,20.25,64
+628,Asmoranomardicadaistinaculdacar,BR,20.22,23
+629,"Zuko, Seeking Honor",BR,20.22,21
+630,Soul of Windgrace,BGR,20.19,50
+631,"Lord Dregg, Insect Invader",BG,20.19,44
+632,Mayael the Anima,GRW,20.18,58
+633,Agatha of the Vile Cauldron,GR,20.18,64
+634,"Neriv, Heart of the Storm",BRW,20.16,22
+635,"Judith, Carnage Connoisseur",BR,20.16,24
+636,"Kathril, Aspect Warper",BGW,20.11,44
+637,"Grenzo, Dungeon Warden",BR,20.09,21
+638,"Ghen, Arcanum Weaver",BRW,20.06,21
+639,The Ruinous Wrecking Crew,BR,20.05,21
+640,Tor Wauki,BR,19.99,20
+641,"The Thing, Ben Grimm",G,19.99,64
+642,General Marhault Elsdragon,GR,19.82,64
+643,"Camellia, the Seedmiser",BG,19.8,30
+644,"Yarus, Roar of the Old Gods",GR,19.8,64
+645,"Spider-Rex, Daring Dino",G,19.76,63
+646,"Shuri, the Black Panther",GW,19.76,63
+647,"Kethis, the Hidden Hand",BGW,19.68,44
+648,"Valki, God of Lies // Tibalt, Cosmic Impostor",BR,19.62,20
+649,"Olivia, Mobilized for War",BR,19.49,24
+650,Sunastian Falconer,GR,19.47,63
+651,"Kazarov, Sengir Pureblood",BR,19.46,23
+652,"Ghave, Guru of Spores",BGW,19.37,43
+653,"Uchbenbak, the Great Mistake",BU,19.27,40
+654,King of the Oathbreakers,BW,19.19,23
+655,"Zask, Skittering Swarmlord",BG,19.17,39
+656,"Grothama, All-Devouring",G,19.16,63
+657,"Piru, the Volatile",BRW,19.13,26
+658,"Bullseye, Death Dealer",BR,19.13,21
+659,Drizzt Do'Urden,GW,19.11,63
+660,"Stangg, Echo Warrior",GR,19.05,59
+661,"Anara, Wolvid Familiar",G,19.04,63
+662,"Tinybones, the Pickpocket",B,19.03,20
+663,"Otrimi, the Ever-Playful",BGU,19.02,31
+664,"Boomerang, Blade Flinger",B,19.01,23
+665,"Gallia, Tragic Host",B,19.01,23
+666,"Splinter, Hamato Yoshi",B,19.01,23
+667,"Yellowjacket, Heartless Marauder",B,19.01,23
+668,"Raph & Mikey, Troublemakers",GR,18.99,58
+669,Dark Leo & Shredder,BW,18.93,25
+670,"Eivor, Wolf-Kissed",GRW,18.88,58
+671,"Rev, Tithe Extractor",B,18.86,25
+672,"Thranduil, the Elvenking",BGU,18.78,59
+673,"Seifer, Balamb Rival",BR,18.75,23
+674,Anje Falkenrath,BR,18.6,21
+675,"Vanille, Cheerful l'Cie",BG,18.59,22
+676,"Stonebrow, Krosan Hero",GR,18.59,58
+677,"Zurgo, Thunder's Decree",BRW,18.54,21
+678,Mirri the Cursed,B,18.52,21
+679,The Great Goblin,BR,18.52,21
+680,"Firja, Judge of Valor",BW,18.51,24
+681,"Ria Ivor, Bane of Bladehold",BW,18.51,21
+682,"Karvanista, Loyal Lupari // Lupari Shield",G,18.47,58
+683,"Shanid, Sleepers' Scourge",BRW,18.45,21
+684,"Vadmir, New Blood",B,18.41,21
+685,"Sosuke, Son of Seshiro",G,18.33,64
+686,"Ziatora, the Incinerator",BGR,18.23,42
+687,"Dromoka, the Eternal",GW,18.21,58
+688,"Jan Jansen, Chaos Crafter",BRW,18.21,21
+689,"Vrondiss, Rage of Ancients",GR,18.19,64
+690,"Abby, Merciless Soldier",GR,18.08,58
+691,"Omarthis, Ghostfire Initiate",C,18.0,51
+692,"Rocksteady, Crash Courser",G,17.95,57
+693,"Ayara, Widow of the Realm // Ayara, Furnace Queen",BR,17.91,24
+694,Elanor Gardner,G,17.88,62
+695,"Legolas, Master Archer",G,17.8,58
+696,"Greasefang, Okiba Boss",BW,17.79,24
+697,Vincent Valentine // Galian Beast,B,17.76,27
+698,Arno Dorian,BR,17.74,24
+699,"Black Widow, Double Agent",BW,17.73,20
+700,The Mycotyrant,BG,17.69,24
+701,"Sigarda, Heron's Grace",GW,17.68,57
+702,"Rashmi, Eternities Crafter",GU,17.65,51
+703,"Mabel, Bitter Recluse",B,17.64,22
+704,"Kogla, the Titan Ape",G,17.63,57
+705,"Tifa, Martial Artist",GRW,17.61,57
+706,"Verrak, Warped Sengir",BW,17.6,26
+707,"Kroxa, Titan of Death's Hunger",BR,17.56,21
+708,"Wernog, Rider's Chaplain",BW,17.47,20
+709,"Ich-Tekik, Salvage Splicer",G,17.44,57
+710,"Sigarda, Font of Blessings",GW,17.41,57
+711,Iwamori of the Open Fist,G,17.4,57
+712,The Ever-Changing 'Dane,BUW,17.38,43
+713,"Tyvar, the Pummeler",G,17.36,64
+714,"Saryth, the Viper's Fang",G,17.36,57
+715,The Lion-Turtle,GU,17.35,57
+716,"Ojer Kaslem, Deepest Growth // Temple of Cultivation",G,17.32,63
+717,"Haakon, Stromgald Scourge",B,17.31,26
+718,"Sephiroth, Planet's Heir",BU,17.29,26
+719,"Mishra, Eminent One",BRU,17.11,46
+720,"Selvala, Eager Trailblazer",GW,17.09,57
+721,"Kaheera, the Orphanguard",GW,17.09,57
+722,Carth the Lion,BG,17.06,25
+723,Jacob Frye,B,17.06,23
+724,"Kutzil, Malamet Exemplar",GW,17.06,57
+725,"Atarka, World Render",GR,17.0,58
+726,"Bob, Reluctant HYDRA Agent",B,16.97,26
+727,"Surrak, Elusive Hunter",G,16.94,57
+728,"Rayami, First of the Fallen",BGU,16.93,23
+729,"Ragnarok, Divine Deliverance",BG,16.92,45
+730,"Abomination, Irradiated Brute",G,16.9,57
+731,"Totentanz, Swarm Piper",BR,16.82,25
+732,"Swarm, Being of Bees",B,16.81,25
+733,"Karumonix, the Rat King",B,16.79,21
+734,"Winter, Tormented Loner",B,16.79,21
+735,"Snapdax, Apex of the Hunt",BRW,16.77,21
+736,Ashcoat of the Shadow Swarm,B,16.71,21
+737,Kraven the Hunter,BG,16.68,23
+738,Karlov of the Ghost Council,BW,16.61,21
+739,"Doctor Doom, Unrivaled",B,16.57,37
+740,The Fugitive Doctor,GR,16.54,58
+741,"Vorinclex, Monstrous Raider",G,16.51,46
+742,"Syrix, Carrier of the Flame",BR,16.46,21
+743,Inquisitor Eisenhorn,BU,16.44,39
+744,"Ulamog, the Infinite Gyre",C,16.44,55
+745,"Toph, Hardheaded Teacher",GR,16.43,52
+746,"Korlash, Heir to Blackblade",B,16.34,21
+747,"Dihada, Binder of Wills",BRW,16.33,21
+748,"Freyalise, Llanowar's Fury",G,16.3,58
+749,"Mari, the Killing Quill",B,16.3,21
+750,The Howling Abomination,GR,16.3,58
+751,"U.S.Agent, John Walker",BW,16.3,20
+752,"Abigale, Eloquent First-Year",BW,16.25,25
+753,"Gert and Old Lace, Runaways",GR,16.23,58
+754,"Ghired, Conclave Exile",GRW,16.21,52
+755,"Nikara, Lair Scavenger",B,16.19,22
+756,"Falthis, Shadowcat Familiar",B,16.16,22
+757,"Kraven, Proud Predator",GR,16.09,58
+758,Patron of the Nezumi,B,16.02,24
+759,"Ruric Thar, Magecrusher",G,16.02,57
+760,Fire Lord Zuko,BRW,16.0,20
+761,"Alesha, Who Smiles at Death",BRW,15.95,22
+762,"Rhino, Terrible Trampler",G,15.93,57
+763,Amalia Benavides Aguirre,BW,15.89,22
+764,"Silvar, Devourer of the Free",BR,15.86,24
+765,"Thantis, the Warweaver",BGR,15.83,26
+766,Skanos Dragonheart,G,15.8,57
+767,"Giant-Man, Gargantuan Genius",G,15.75,57
+768,"Dwynen, Gilt-Leaf Daen",G,15.74,64
+769,Borborygmos,GR,15.72,59
+770,"Torsten, Founder of Benalia",GW,15.7,57
+771,Ignis Scientia,GU,15.59,54
+772,"Shessra, Death's Whisper",BG,15.54,21
+773,"Grunn, the Lonely King",G,15.49,57
+774,Vislor Turlough,B,15.44,21
+775,"Rona, Sheoldred's Faithful",BU,15.42,32
+776,"Polukranos, World Eater",G,15.4,46
+777,"Ayumi, the Last Visitor",G,15.31,63
+778,Zurgo Stormrender,BRW,15.21,24
+779,"Tergrid, God of Fright // Tergrid's Lantern",B,15.2,21
+780,"Ayula, Queen Among Bears",G,15.18,57
+781,"Beorn, Reluctant Host // Till and Tend",G,15.12,58
+782,"Nadier, Agent of the Duskenel",B,15.12,24
+783,"Yenna, Redtooth Regent",GW,15.11,50
+784,"Gonti, Night Minister",B,15.05,24
+785,Legolas Greenleaf,G,15.05,57
+786,"Glorfindel, Dauntless Rescuer",G,15.04,57
+787,"Isshin, Two Heavens as One",BRW,14.97,23
+788,Surrak Dragonclaw,GRU,14.97,59
+789,Susan Foreman,G,14.92,63
+790,"Strax, Sontaran Nurse",GR,14.83,46
+791,"Yeva, Nature's Herald",G,14.81,63
+792,"Winter Soldier, Icy Assassin",BW,14.79,21
+793,"Klauth, Unrivaled Ancient",GR,14.78,58
+794,"Baru, Wurmspeaker",G,14.74,63
+795,"Rhino, Barreling Brute",GR,14.73,64
+796,"Zacama, Primal Calamity",GRW,14.73,52
+797,The Chief Warg,BG,14.73,24
+798,Borborygmos Enraged,GR,14.72,58
+799,"Evelyn, the Covetous",BRU,14.71,21
+800,"Aphelia, Viper Whisperer",BG,14.7,21
+801,Superior Spider-Man,BU,14.64,42
+802,"Ezuri, Stalker of Spheres",GU,14.61,49
+803,"Mowu, Loyal Companion",G,14.6,52
+804,"Emmara, Soul of the Accord",GW,14.54,57
+805,"Mathas, Fiend Seeker",BRW,14.54,25
+806,"Miara, Thorn of the Glade",B,14.43,21
+807,"Exdeath, Void Warlock // Neo Exdeath, Dimension's End",BG,14.42,20
+808,"Tasha, the Witch Queen",BU,14.39,39
+809,Queen Marchesa,BRW,14.35,24
+810,Devil Dinosaur,G,14.33,52
+811,"Crossbones, Malicious Mercenary",B,14.32,22
+812,"Neva, Stalked by Nightmares",BW,14.28,24
+813,Virtus the Veiled,B,14.27,21
+814,"Rulik Mons, Warren Chief",GR,14.27,58
+815,"Jolene, the Plunder Queen",GR,14.18,58
+816,Jirina Kudro,BRW,14.11,22
+817,"Brenard, Ginger Sculptor",GUW,13.99,40
+818,"Grakmaw, Skyclave Ravager",BG,13.92,20
+819,Emmara Tandris,GW,13.91,57
+820,"Sima Yi, Wei Field Marshal",B,13.9,20
+821,"Frodo, Sauron's Bane",BW,13.89,20
+822,Araumi of the Dead Tide,BU,13.88,23
+823,"Brimaz, Blight of Oreskos",BW,13.83,24
+824,Kresh the Bloodbraided,BGR,13.76,26
+825,"Cao Cao, Lord of Wei",B,13.69,22
+826,"Valentin, Dean of the Vein // Lisette, Dean of the Root",BG,13.58,20
+827,Magar of the Magic Strings,BR,13.52,20
+828,"Eshki, Temur's Roar",GRU,13.43,59
+829,Zoyowa Lava-Tongue,BR,13.36,20
+830,"Trystan, Callous Cultivator // Trystan, Penitent Culler",BG,13.28,35
+831,"Venom, Deadly Devourer",BG,13.18,37
+832,"Harold and Bob, First Numens",G,13.18,51
+833,"Silk, Web Weaver",GW,13.11,53
+834,"Azula, Cunning Usurper",BU,13.03,23
+835,"Kain, Traitorous Dragoon",B,13.01,24
+836,"Lathril, Blade of the Elves",BG,12.99,31
+837,Adun Oakenshield,BGR,12.98,23
+838,"Tinybones, Trinket Thief",B,12.93,21
+839,The Most Dangerous Gamer,BG,12.88,21
+840,"Rith, the Awakener",GRW,12.87,46
+841,"Aclazotz, Deepest Betrayal // Temple of the Dead",B,12.85,21
+842,The Notary Hobbits,G,12.83,58
+843,Irini Sengir,B,12.79,21
+844,"Barret, Avalanche Leader",GR,12.77,59
+845,"Animar, Soul of Elements",GRU,12.71,53
+846,The Prismatic Piper,C,12.69,55
+847,"Skithiryx, the Blight Dragon",B,12.56,21
+848,Tymna the Weaver,BW,12.48,20
+849,Livonya Silone,GR,12.44,58
+850,Borborygmos and Fblthp,GRU,12.41,58
+851,Ms. Bumbleflower,GUW,12.33,52
+852,"Amzu, Swarm's Hunger",BG,12.29,24
+853,"Nissa, Vastwood Seer // Nissa, Sage Animist",G,12.23,56
+854,"Chevill, Bane of Monsters",BG,12.21,20
+855,Commissar Severina Raine,BW,12.05,21
+856,"Thriss, Nantuko Primus",G,11.95,57
+857,Thelon of Havenwood,BG,11.95,20
+858,"Francisco, Fowl Marauder",B,11.93,20
+859,"Keruga, the Macrosage",GU,11.92,57
+860,"Rowan, Scion of War",BR,11.89,22
+861,"Frodo, Adventurous Hobbit",BW,11.89,20
+862,Ihsan's Shade,B,11.86,24
+863,"Hamza, Guardian of Arashin",GW,11.85,46
+864,"Juri, Master of the Revue",BR,11.8,21
+865,"Ob Nixilis, the Fallen",B,11.75,24
+866,"The Master, Formed Anew",BU,11.72,21
+867,"Glissa, Herald of Predation",BG,11.71,21
+868,"Jon Irenicus, Shattered One",BU,11.69,20
+869,"Keskit, the Flesh Sculptor",B,11.69,24
+870,"Vihaan, Goldwaker",BRW,11.64,20
+871,"Arwen, Weaver of Hope",G,11.59,58
+872,"Xolatoyac, the Smiling Flood",GU,11.56,40
+873,"Nissa, Worldsoul Speaker",G,11.51,51
+874,"Reptil, Dinomorpher",G,11.44,58
+875,"Tinybones, Bauble Burglar",B,11.39,20
+876,"Lizard, Connors's Curse",G,11.34,57
+877,Drana and Linvala,BW,11.25,21
+878,"Kambal, Consul of Allocation",BW,11.22,21
+879,"Crimson Cowl, Master of Evil",B,11.01,25
+880,"Betor, Kin to All",BGW,10.98,44
+881,Rhys the Exiled,BG,10.96,24
+882,"Yuma, Proud Protector",GRW,10.93,62
+883,The Lady of the Mountain,GR,10.76,52
+884,"Akawalli, the Seething Tower",BG,10.75,23
+885,"Teysa, Envoy of Ghosts",BW,10.73,24
+886,Purraj of Urborg,B,10.72,21
+887,"Zoraline, Cosmos Caller",BW,10.69,21
+888,"Harald, King of Skemfar",BG,10.66,31
+889,The Kingpin of Crime,BW,10.65,23
+890,"Zimone, Mystery Unraveler",GU,10.64,58
+891,"Tinybones, Pocket Nuisance",B,10.56,21
+892,"Kotis, Sibsig Champion",BGU,10.53,21
+893,"Lord Xander, the Collector",BRU,10.53,21
+894,"Rat King, Verminister",B,10.52,25
+895,"Whiplash, Vengeful Engineer",B,10.45,23
+896,Dr. Eggman,BRU,10.43,25
+897,"Altanak, the Thrice-Called",G,10.41,57
+898,"Tourach, Dread Cantor",B,10.39,21
+899,"Tombstone, Career Criminal",B,10.32,21
+900,"Baron Strucker, HYDRA Overlord",B,10.13,21
+901,"Teysa, Opulent Oligarch",BW,10.03,22
+902,Myojin of Towering Might,G,10.01,57
+903,"Oroku Saki, Shredder Rising",B,9.99,22
+904,"Kotis, the Fangkeeper",BGU,9.95,20
+905,"Zimone, Paradox Sculptor",GU,9.91,20
+906,Hidetsugu and Kairi,BU,9.88,24
+907,Desmond Miles,B,9.85,20
+908,"Lord Skitter, Sewer King",B,9.82,22
+909,"Ellie and Alan, Paleontologists",GUW,9.8,57
+910,"Tolsimir, Midnight's Light",GW,9.7,46
+911,"Crosis, the Purger",BRU,9.65,24
+912,"Kelsien, the Plague",BRW,9.61,24
+913,"Eladamri, Korvecdal",G,9.61,64
+914,"Hulk, Gamma Goliath",GR,9.58,59
+915,Torsten Von Ursus,GW,9.57,46
+916,"Spinnerette, Arachnobat",BG,9.55,21
+917,"Gollum, Scheming Guide",B,9.53,20
+918,Judge Magister Gabranth,BW,9.51,26
+919,"Victor, Valgavoth's Seneschal",BW,9.42,26
+920,Radagast the Brown,G,9.29,57
+921,"Tevesh Szat, Doom of Fools",B,9.25,21
+922,"King Macar, the Gold-Cursed",B,9.1,21
+923,Edward Kenway,BRU,8.91,26
+924,Riven Turnbull,BU,8.9,21
+925,"Squall, SeeD Mercenary",BW,8.87,21
+926,"Sorin of House Markov // Sorin, Ravenous Neonate",BW,8.87,21
+927,General Kudro of Drannith,BW,8.73,21
+928,"Omnath, Locus of Rage",GR,8.63,58
+929,Sol'Kanar the Tainted,BRU,8.6,21
+930,"Cloak and Dagger, Entwined",BW,8.59,21
+931,"Ronin, Shadow Stalker",B,8.56,23
+932,"Butch DeLoria, Tunnel Snake",B,8.45,21
+933,"Squall, Gunblade Duelist",BRW,8.36,21
+934,"Sekki, Seasons' Guide",G,8.09,57
+935,"Omnath, Locus of Mana",G,7.96,58
+936,"Skullbriar, the Walking Grave",BG,7.91,21
+937,"Shaile, Dean of Radiance // Embrose, Dean of Shadow",BW,7.88,21
+938,"Loki, the Deceiver",BRU,7.82,24
+939,Nebuchadnezzar,BU,7.76,20
+940,"Lobelia, Defender of Bag End",B,7.76,22
+941,Kodama of the East Tree,G,7.66,57
+942,Chief of the Wilds,BG,7.66,23
+943,"Ikra Shidiqi, the Usurper",BG,7.63,25
+944,"Zaxara, the Exemplary",BGU,7.55,20
+945,"G'raha Tia, Scion Reborn",BUW,7.45,32
+946,"Obeka, Brute Chronologist",BRU,7.43,20
+947,"Mairsil, the Pretender",BRU,7.39,24
+948,Gwendlyn Di Corci,BRU,7.23,20
+949,"Lynde, Cheerful Tormentor",BRU,7.14,20
+950,"Nekusar, the Mindrazer",BRU,7.14,20
+951,"Nathan Drake, Treasure Hunter",BRU,7.14,20
+952,Clara Oswald,C,7.1,50
+953,The Thirteenth Doctor,GU,7.04,53
+954,"Ulasht, the Hate Seed",GR,7.01,43
+955,"Sutina, Speaker of the Tajuru",G,6.99,60
+956,Merieke Ri Berit,BUW,6.99,20
+957,"Sin, Spira's Punishment",BGU,6.96,39
+958,"Berta, Wise Extrapolator",GU,6.89,27
+959,"Kunoros, Hound of Athreos",BW,6.78,21
+960,"Ayli, Eternal Pilgrim",BW,6.77,27
+961,"Momir Vig, Simic Visionary",GU,6.71,54
+962,"Parnesse, the Subtle Brush",BRU,6.68,23
+963,Thrakkus the Butcher,GR,6.57,46
+964,Missy,BRU,6.54,23
+965,"Katara, Seeking Revenge",BU,6.49,37
+966,Mastermind Plum,B,6.36,21
+967,Aerid Konstrari,GR,6.34,52
+968,"Sab-Sunen, Luxa Embodied",GU,6.31,32
+969,Roon of the Hidden Realm,GUW,6.22,40
+970,Symbiote Spider-Man,BU,6.16,23
+971,"Umori, the Collector",BG,6.13,20
+972,"Wrexial, the Risen Deep",BU,6.1,24
+973,"Oloro, Ageless Ascetic",BUW,6.08,25
+974,Flatman,G,6.0,58
+975,"Anzrag, the Quake-Mole",GR,5.99,50
+976,"Cleopatra, Exiled Pharaoh",BG,5.96,21
+977,"Hallar, the Firefletcher",GR,5.86,54
+978,"Pantlaza, Sun-Favored",GRW,5.86,39
+979,Nicol Bolas,BRU,5.85,21
+980,"MacCready, Lamplight Mayor",BW,5.84,20
+981,Ertai Resurrected,BU,5.82,21
+982,"Jirina, Dauntless General",BW,5.81,20
+983,"Citizen V, Helmut Zemo",B,5.78,20
+984,"Moon-Boy, Dino Rider",G,5.73,48
+985,Marneus Calgar,BUW,5.65,24
+986,"Mirko Vosk, Mind Drinker",BU,5.61,20
+987,"Cecil, Dark Knight // Cecil, Redeemed Paladin",BW,5.56,20
+988,"Tivit, Seller of Secrets",BUW,5.38,24
+989,Scientist Supreme of A.I.M.,BU,5.29,24
+990,Papalymo Totolymo,BW,5.28,20
+991,"Zegana, Utopian Speaker",GU,5.2,23
+992,Tuknir Deathlock,GR,5.09,43
+993,"Lazav, Dimir Mastermind",BU,5.07,20
+994,"Kura, the Boundless Sky",G,5.05,50
+995,"Kefka, Court Mage // Kefka, Ruler of Ruin",BRU,5.0,20
+996,"Jugan, the Rising Star",G,4.78,46
+997,The Gitrog Monster,BG,4.73,38
+998,Emiel the Blessed,GW,4.72,43
+999,High Perfect Morcant,BG,4.69,22
+1000,"Darigaaz, the Igniter",BGR,4.68,24
+1001,"Tahngarth, First Mate",GR,4.67,41
+1002,"Atla Palani, Nest Tender",GRW,4.46,40
+1003,The Mouth of Sauron,BU,4.29,21
+1004,"Swordsman, Sharp Scoundrel",B,4.27,21
+1005,"Spider-Man, Miles Morales",G,4.27,52
+1006,"Selenia, Dark Angel",BW,4.26,24
+1007,"Imoti, Celebrant of Bounty",GU,4.26,57
+1008,"Quickbeam, Upstart Ent",G,4.26,51
+1009,"Vazi, Keen Negotiator",BGR,4.19,30
+1010,Yurlok of Scorch Thrash,BGR,4.14,20
+1011,Sivitri Scarzam,BU,4.12,26
+1012,Kang Prime,BU,4.02,24
+1013,"Faldorn, Dread Wolf Herald",GR,4.0,52
+1014,"Nymris, Oona's Trickster",BU,4.0,20
+1015,"Stature, Young Avenger",GR,3.96,46
+1016,"Hugs, Grisly Guardian",GR,3.95,52
+1017,Vorel of the Hull Clade,GU,3.93,20
+1018,"Alpharael, Dreaming Acolyte",BU,3.93,21
+1019,"Danitha, New Benalia's Light",GW,3.93,32
+1020,Nihiloor,BUW,3.84,20
+1021,"Umbris, Fear Manifest",BU,3.84,21
+1022,"Raggadragga, Goreguts Boss",GR,3.76,59
+1023,"Zareth San, the Trickster",BU,3.76,20
+1024,The Valeyard,BRU,3.74,21
+1025,Bounteous Kirin,G,3.72,43
+1026,"Don Andres, the Renegade",BRU,3.64,20
+1027,"Zevlor, Elturel Exile",BRU,3.63,21
+1028,"Elmar, Ulvenwald Informant",GR,3.6,46
+1029,"Jackal, Genius Geneticist",GU,3.57,22
+1030,"Alela, Cunning Conqueror",BU,3.56,24
+1031,Tetsuo Umezawa,BRU,3.43,20
+1032,"Ludevic, Necrogenius // Olag, Ludevic's Hubris",BU,3.38,21
+1033,Admiral Beckett Brass,BRU,3.37,20
+1034,"Sigarda, Host of Herons",GW,3.3,42
+1035,"Migloz, Maze Crusher",GR,3.29,40
+1036,"Szarel, Genesis Shepherd",BGR,3.28,25
+1037,Bartolomé del Presidio,BW,3.26,26
+1038,Thalia and The Gitrog Monster,BGW,3.25,39
+1039,"Ghost, Spectral Saboteur",BU,3.13,20
+1040,"Alistair, the Brigadier",GUW,3.11,53
+1041,Chromium,BUW,3.08,24
+1042,"Oviya Pashiri, Sage Lifecrafter",G,3.07,40
+1043,"Iroh, Grand Lotus",GRU,3.06,52
+1044,"Vorosh, the Hunter",BGU,3.04,21
+1045,The Lady of Otaria,GR,2.96,46
+1046,"Aminatou, the Fateshifter",BUW,2.95,20
+1047,"Lazav, Wearer of Faces",BU,2.93,20
+1048,"Mona Lisa, Ever Adaptable",G,2.77,39
+1049,"Ertai, the Corrupted",BUW,2.61,25
+1050,"Xande, Dark Mage",BU,2.58,21
+1051,The Rani,BRU,2.49,21
+1052,"Taeko, the Patient Avalanche",BU,2.43,21
+1053,Abaddon the Despoiler,BRU,2.39,21
+1054,"Uril, the Miststalker",GRW,2.35,34
+1055,"Coram, the Undertaker",BGR,2.35,20
+1056,"Szadek, Lord of Secrets",BU,2.33,21
+1057,"Edea, Possessed Sorceress",BRU,2.31,21
+1058,"Trostani, Three Whispers",GW,2.3,39
+1059,Jasmine Boreal,GW,2.29,40
+1060,"Polukranos, Unchained",BG,2.27,20
+1061,"Vohar, Vodalian Desecrator",BU,2.21,26
+1062,"Uurg, Spawn of Turg",BG,2.19,20
+1063,The Mimeoplasm,BGU,2.18,20
+1064,"Bilbo, Birthday Celebrant",BGW,2.16,24
+1065,Krang & Shredder,BU,2.15,24
+1066,"Arahbo, Roar of the World",GW,2.12,40
+1067,Morbius the Living Vampire,BU,2.11,21
+1068,Sir Shandlar of Eberyn,GW,2.09,40
+1069,Fire Lord Azula,BRU,1.89,21
+1070,"Sydri, Galvanic Genius",BUW,1.84,21
+1071,Wulfgar of Icewind Dale,GR,1.83,43
+1072,Shattergang Brothers,BGR,1.83,26
+1073,Ka-Zar of the Savage Land,G,1.81,51
+1074,"Oona, Queen of the Fae",BU,1.76,24
+1075,"Halana, Kessig Ranger",G,1.7,46
+1076,"Runo Stromkirk // Krothuss, Lord of the Deep",BU,1.67,21
+1077,Madame Vastra,GU,1.64,47
+1078,Prime Speaker Zegana,GU,1.61,21
+1079,"Gríma, Saruman's Footman",BU,1.58,20
+1080,Skeleton Ship,BU,1.5,20
+1081,"Etrata, the Silencer",BU,1.47,20
+1082,Riku of Many Paths,GRU,1.45,24
+1083,"Kellan, the Kid",GUW,1.41,40
+1084,"Shalai, Voice of Plenty",GW,1.4,45
+1085,"Marcus, Mutant Mayor",GU,1.4,21
+1086,"Sivitri, Dragon Master",BU,1.38,20
+1087,"Anhelo, the Painter",BRU,1.37,21
+1088,"Masumaro, First to Live",G,1.35,39
+1089,"Sharkey, Tyrant of the Shire",BU,1.33,20
+1090,"Storm, Shaker of Skies",G,1.29,43
+1091,"Deathleaper, Terror Weapon",GR,1.28,43
+1092,"Damia, Sage of Stone",BGU,1.27,25
+1093,"Leatherhead, Iron Gator",G,1.25,59
+1094,Tyvar the Bellicose,BG,1.18,21
+1095,"Tetsuo, Imperial Champion",BRU,1.16,20
+1096,The Celestial Toymaker,BUW,1.15,20
+1097,"Chromium, the Mutable",BUW,1.15,26
+1098,"Colossus, Steel Stalwart",G,1.14,43
+1099,"Ezekiel Sims, Spider-Totem",G,1.14,43
+1100,"Shang-Chi, Martial Mentor",G,1.11,43
+1101,"Raul, Trouble Shooter",BU,1.08,20
+1102,"Jedit Ojanen, Mercenary",GUW,1.06,39
+1103,"Dee Kay, Finder of the Lost",BU,1.05,20
+1104,"Lazav, Familiar Stranger",BU,1.04,20
+1105,"Garza Zol, Plague Queen",BRU,0.98,22
+1106,"Tolsimir, Friend to Wolves",GW,0.95,39
+1107,Abomination of Llanowar,BG,0.93,21
+1108,"Noctis, Prince of Lucis",BUW,0.91,24
+1109,"Nashi, Searcher in the Dark",BU,0.91,20
+1110,"She-Hulk, Jade Defender",G,0.85,43
+1111,Rhys the Redeemed,GW,0.82,45
+1112,"Lazav, the Multifarious",BU,0.75,20
+1113,"Dromar, the Banisher",BUW,0.71,24
+1114,Graham O'Brien,G,0.71,43
+1115,"Hercules, Prince of Power",G,0.6,43
+1116,"Michelangelo, Game Master",G,0.6,43
+1117,"Nakia, Wakandan Operative",G,0.6,43
+1118,"Prowler, Misguided Mentor",G,0.6,43
+1119,Sovereign Okinec Ahau,GW,0.59,33
+1120,"Admiral Brass, Unsinkable",BRU,0.59,21
+1121,Emet-Selch of the Third Seat,BU,0.59,23
+1122,"Darwin, Adaptive Mutant",G,0.48,43
+1123,"Goliath, Mass Manipulator",G,0.48,43
+1124,"Marwyn, the Preserver",G,0.48,43
+1125,"White Tiger, Amulet Keeper",G,0.48,43
+1126,"Wolfsbane, Highland Hero",G,0.48,43
+1127,"Vulture, Scheming Scavenger",BU,0.48,21
+1128,"Adéwalé, Breaker of Chains",BU,0.44,23
+1129,"Helga, Skittish Seer",GUW,0.43,39
+1130,Lurrus of the Dream-Den,BW,0.35,21
+1131,"Akuta, Born of Ash",B,0.34,23
+1132,Círdan the Shipwright,GU,0.3,43
+1133,"Yennett, Cryptic Sovereign",BUW,0.27,21
+1134,"Tayam, Luminous Enigma",BGW,0.23,21
+1135,"Mishra, Artificer Prodigy",BRU,0.14,21
+1136,Ramirez DePietro,BU,0.06,20
+1137,"Hua Tuo, Honored Physician",G,-0.03,38
+1138,"Ultimecia, Time Sorceress // Ultimecia, Omnipotent",BU,-0.04,20
+1139,"Felothar, Dawn of the Abzan",BGW,-0.05,24
+1140,"Galadriel, Light of Valinor",GUW,-0.14,49
+1141,"Preston Garvey, Minuteman",GRW,-0.14,32
+1142,"Mirko, Obsessive Theorist",BU,-0.17,21
+1143,"Rona, Herald of Invasion // Rona, Tolarian Obliterator",BU,-0.21,21
+1144,Spider-Man India,GW,-0.23,52
+1145,"Spiders-Man, Heroic Horde",G,-0.3,40
+1146,"Aminatou, Veil Piercer",BUW,-0.32,20
+1147,"Wick, the Whorled Mind",BRU,-0.39,20
+1148,"Saruman, the White Hand",BRU,-0.42,20
+1149,"Miirym, Sentinel Wyrm",GRU,-0.45,47
+1150,"Satoru, the Infiltrator",BU,-0.49,21
+1151,"Tiger Shark, Abyssal Hunter",BU,-0.56,20
+1152,Ureni of the Unwritten,GRU,-0.56,47
+1153,Vaevictis Asmadi,BGR,-0.65,26
+1154,"Kaust, Eyes of the Glade",GRW,-0.72,37
+1155,"Jeleva, Nephalia's Scourge",BRU,-0.74,20
+1156,"Obyra, Dreaming Duelist",BU,-0.74,20
+1157,"Anowon, the Ruin Thief",BU,-0.79,20
+1158,"Winter, Misanthropic Guide",BGR,-0.8,21
+1159,"Tegwyll, Duke of Splendor",BU,-0.82,20
+1160,"Owen Grady, Raptor Trainer",GR,-0.82,39
+1161,Magus Lucea Kane,GRU,-0.9,20
+1162,"Narci, Fable Singer",BGW,-0.9,25
+1163,"Zur, Eternal Schemer",BUW,-0.99,20
+1164,"Galea, Kindler of Hope",GUW,-1.02,27
+1165,"Ureni, the Song Unending",GRU,-1.06,58
+1166,"Maralen, Fae Ascendant",BGU,-1.07,31
+1167,Norman Osborn // Green Goblin,BRU,-1.09,20
+1168,"Doctor Octopus, Master Planner",BU,-1.11,21
+1169,"Wildsear, Scouring Maw",GR,-1.13,46
+1170,Kodama of the South Tree,G,-1.24,43
+1171,"Scarlet Spider, Ben Reilly",GR,-1.26,47
+1172,Achilles Davenport,BU,-1.29,21
+1173,"Spider-Man, To the Rescue",GW,-1.29,43
+1174,"Xanathar, Guild Kingpin",BU,-1.31,21
+1175,Lord Windgrace,BGR,-1.34,20
+1176,"Cecily, Haunted Mage",BRU,-1.34,22
+1177,Alaundo the Seer,GU,-1.45,46
+1178,"Nazahn, Revered Bladesmith",GW,-1.47,40
+1179,"Moonstone, Harsh Mistress",B,-1.59,24
+1180,"Doctor Doom, King of Latveria",BRU,-1.69,21
+1181,Dragonlord Silumgar,BU,-1.76,20
+1182,The Beamtown Bullies,BGR,-1.84,20
+1183,"Mr. Orfeo, the Boulder",BGR,-1.9,20
+1184,"Kotose, the Silent Spider",BU,-1.97,20
+1185,"Taskmaster, Mercenary Mimic",BU,-2.02,20
+1186,"Indoraptor, the Perfect Hybrid",BGR,-2.06,20
+1187,Glissa Sunseeker,G,-2.09,46
+1188,"Talion, the Kindly Lord",BU,-2.11,21
+1189,Xira Arien,BGR,-2.21,20
+1190,"Prowler, Clawed Thief",BU,-2.27,20
+1191,"Illuna, Apex of Wishes",GRU,-2.3,47
+1192,Ramses Overdark,BU,-2.32,21
+1193,Captain N'ghathrod,BU,-2.34,20
+1194,Halfdane,BUW,-2.36,20
+1195,Lydia Frye,BU,-2.36,20
+1196,"Treva, the Renewer",GUW,-2.37,39
+1197,"Nashi, Moon's Legacy",BGU,-2.41,20
+1198,"Vishgraz, the Doomhive",BGW,-2.47,23
+1199,"Dogmeat, Ever Loyal",GRW,-2.54,31
+1200,"Silumgar, the Drifting Death",BU,-2.59,21
+1201,"Jolrael, Empress of Beasts",G,-2.7,39
+1202,"Emet-Selch, Unsundered // Hades, Sorcerer of Eld",BU,-2.7,20
+1203,"Pako, Arcane Retriever",GR,-2.71,43
+1204,"Teval, Arbiter of Virtue",BGU,-2.78,21
+1205,Locke Cole,BU,-2.82,20
+1206,"Bilbo, Fellow Conspirator",G,-2.82,39
+1207,Lady Evangela,BUW,-2.87,20
+1208,Rafiq of the Many,GUW,-2.89,23
+1209,"Leela, Sevateem Warrior",G,-2.91,43
+1210,Gladiolus Amicitia,GR,-2.93,46
+1211,"Yuriko, the Tiger's Shadow",BU,-2.99,20
+1212,"Circu, Dimir Lobotomist",BU,-3.1,20
+1213,Zur the Enchanter,BUW,-3.12,20
+1214,"Ishkanah, Grafwidow",BG,-3.21,22
+1215,"Venser, Corpse Puppet",BU,-3.27,20
+1216,"Jolrael, Voice of Zhalfir",GU,-3.28,43
+1217,Old Man Willow,BG,-3.33,20
+1218,The Fourth Doctor,GU,-3.34,36
+1219,Rosheen Meanderer,GR,-3.45,31
+1220,"Vannifar, Evolved Enigma",GU,-3.47,46
+1221,Ratonhnhaké꞉ton,BUW,-3.54,21
+1222,"Ramirez DePietro, Pillager",BU,-3.55,21
+1223,"Ezio, Blade of Vengeance",BU,-3.62,24
+1224,"Rona, Disciple of Gix",BU,-3.68,21
+1225,"Kess, Dissident Mage",BRU,-3.79,21
+1226,"Redshift, Rocketeer Chief",GR,-3.85,41
+1227,Galadriel of Lothlórien,GU,-3.91,46
+1228,"Kimahri, Valiant Guardian",GU,-3.93,20
+1229,Big Bertha,G,-4.04,39
+1230,Hurska Sweet-Tooth,GW,-4.04,30
+1231,"Gimli, Mournful Avenger",GR,-4.23,46
+1232,"Golbez, Crystal Collector",BU,-4.24,21
+1233,"Kang, Temporal Tyrant",BU,-4.33,20
+1234,"Wydwen, the Biting Gale",BU,-4.55,20
+1235,"Jin Sakai, Ghost of Tsushima",BUW,-4.7,20
+1236,"Garland, Royal Kidnapper",BU,-4.83,20
+1237,"Storm, Queen of Wakanda",GW,-4.95,35
+1238,"Kianne, Dean of Substance // Imbraham, Dean of Theory",GU,-4.98,21
+1239,"Ukkima, Stalking Shadow",BU,-5.03,20
+1240,"Cormela, Glamour Thief",BRU,-5.06,20
+1241,"Storvald, Frost Giant Jarl",GUW,-5.11,46
+1242,"Pia Nalaar, Chief Mechanic",GRU,-5.17,27
+1243,"Nicol Bolas, the Ravager // Nicol Bolas, the Arisen",BRU,-5.18,20
+1244,Princess Lucrezia,BU,-5.27,21
+1245,Basim Ibn Ishaq,BU,-5.27,20
+1246,"Kianne, Corrupted Memory",GU,-5.28,34
+1247,"Doc Samson, Super Psychiatrist",G,-5.3,21
+1248,"Hama, the Bloodbender",BU,-5.3,21
+1249,"Ixhel, Scion of Atraxa",BGW,-5.38,20
+1250,Absorbing Man and Titania,GR,-5.5,40
+1251,"Toluz, Clever Conductor",BUW,-5.54,21
+1252,"Kalamax, the Stormsire",GRU,-5.57,44
+1253,Felix Five-Boots,BGU,-5.72,24
+1254,"Gonti, Canny Acquisitor",BGU,-5.79,22
+1255,Tuvasa the Sunlit,GUW,-5.81,21
+1256,"Hansk, Slayer Zealot",GR,-5.89,46
+1257,"Leatherhead, Swamp Stalker",G,-6.03,26
+1258,Sidar Jabari of Zhalfir,BUW,-6.12,21
+1259,"The Master, Mesmerist",BU,-6.42,20
+1260,Dakkon Blackblade,BUW,-6.42,20
+1261,"Mina and Denn, Wildborn",GR,-6.45,39
+1262,"Oskar, Rubbish Reclaimer",BU,-6.47,21
+1263,"Kurbis, Harvest Celebrant",G,-6.48,20
+1264,"Averna, the Chaos Bloom",GRU,-6.61,40
+1265,Mr. Foxglove,GUW,-6.65,43
+1266,"Noctis, Heir Apparent",BUW,-6.66,20
+1267,"Etrata, Deadly Fugitive",BU,-6.71,20
+1268,"Thrun, Breaker of Silence",G,-6.79,39
+1269,Aang and Katara,GUW,-6.87,24
+1270,"Kadena, Slinking Sorcerer",BGU,-6.94,21
+1271,Gorm the Great,G,-6.98,39
+1272,The Wise Mothman,BGU,-7.0,21
+1273,Moon Girl and Devil Dinosaur,GU,-7.04,21
+1274,"Nicanzil, Current Conductor",GU,-7.04,21
+1275,"Kros, Defense Contractor",GUW,-7.14,21
+1276,"Sin, Unending Cataclysm",GU,-7.16,24
+1277,"Anthousa, Setessan Hero",G,-7.23,34
+1278,Uncle Iroh,GR,-7.35,22
+1279,Johan,GRW,-7.42,26
+1280,Rubinia Soulsinger,GUW,-7.43,20
+1281,"Tippy-Toe, Terrific Partner",G,-7.62,30
+1282,Felothar the Steadfast,BGW,-7.66,20
+1283,"Dralnu, Lich Lord",BU,-7.83,21
+1284,"Doran, the Siege Tower",BGW,-7.92,20
+1285,Maester Seymour,G,-7.93,31
+1286,Meriadoc Brandybuck,G,-7.94,32
+1287,"Reyhan, Last of the Abzan",BG,-7.96,20
+1288,"Mimeoplasm, Revered One",BGU,-8.46,20
+1289,"Hapatra, the Desert Fang",BG,-8.68,21
+1290,"Voja, Jaws of the Conclave",GRW,-8.73,41
+1291,Mister Immortal,G,-8.97,33
+1292,Prime Speaker Vannifar,GU,-9.02,25
+1293,Hakbal of the Surging Soul,GU,-9.08,21
+1294,"Iname, Life Aspect",G,-9.19,40
+1295,Rashmi and Ragavan,GRU,-9.32,27
+1296,"Butterbur, Bree Innkeeper",GW,-9.32,31
+1297,"Shaun & Rebecca, Agents",GUW,-9.53,40
+1298,"Edric, Spymaster of Trest",GU,-9.6,21
+1299,"Perrie, the Pulverizer",GUW,-9.67,20
+1300,"Varolz, the Scar-Striped",BG,-9.71,22
+1301,"Mona Lisa, Science Geek",G,-9.72,21
+1302,Thranduil the Strategist,GU,-9.81,40
+1303,"Storm, Windrider",GW,-9.84,21
+1304,"Ramses, Assassin Lord",BU,-9.88,21
+1305,"Palladia-Mors, the Ruiner",GRW,-10.03,25
+1306,"Kumena, Tyrant of Orazca",GU,-10.07,20
+1307,"Bushmaster, Coiled Henchman",G,-10.2,21
+1308,Gabriel Angelfire,GW,-10.28,24
+1309,"Glarb, Calamity's Augur",BGU,-10.33,24
+1310,"Splinter, Radical Rat",BUW,-10.5,20
+1311,"Michelangelo, the Heart",G,-10.64,32
+1312,Serah Farron // Crystallized Serah,GW,-10.66,32
+1313,"Lo and Li, Royal Advisors",BU,-10.93,20
+1314,Dragonlord Dromoka,GW,-10.95,24
+1315,"Siona, Captain of the Pyleas",GW,-11.27,23
+1316,"Sygg, River Cutthroat",BU,-11.43,20
+1317,"Samut, Vizier of Naktamun",GR,-11.49,31
+1318,"Gylwain, Casting Director",GW,-11.5,21
+1319,"Hazezon, Shaper of Sand",GRW,-11.56,40
+1320,Nine-Fingers Keene,BGU,-11.57,21
+1321,"Suki, Kyoshi Warrior",GW,-11.64,20
+1322,"Doran, Besieged by Time",BGW,-11.64,20
+1323,Lucky the Pizza Dog,G,-11.66,31
+1324,"Kinnan, Bonder Prodigy",GU,-11.7,25
+1325,"Kudo, King Among Bears",GW,-11.79,31
+1326,Daghatar the Adamant,BGW,-11.93,20
+1327,"Trostani, Selesnya's Voice",GW,-11.95,24
+1328,"Ivy, Gleeful Spellthief",GU,-12.02,20
+1329,"Korlessa, Scale Singer",GU,-12.05,20
+1330,Gretchen Titchwillow,GU,-12.12,20
+1331,"Lonis, Cryptozoologist",GU,-12.18,20
+1332,Ashnod the Uncaring,BRU,-12.21,21
+1333,"Tigra, Feline Fury",G,-12.21,24
+1334,"Aang, A Lot to Learn",GW,-12.42,24
+1335,Experiment Kraj,GU,-12.65,21
+1336,"Ant-Man, Colony Commander",GU,-12.65,25
+1337,"Sasaya, Orochi Ascendant // Sasaya's Essence",G,-12.65,26
+1338,"Azusa, Lost but Seeking",G,-12.69,27
+1339,"Ant-Man, Reformed Rogue",GU,-12.89,21
+1340,Lady Caleria,GW,-13.08,21
+1341,"Beast, Erudite Aerialist",GU,-13.09,21
+1342,"Cloud, Ex-SOLDIER",GRW,-13.09,22
+1343,"Clement, the Worrywort",GU,-13.13,21
+1344,The Swarmlord,GRU,-13.14,25
+1345,Tusk and Whiskers,GW,-13.26,24
+1346,"Marisi, Breaker of the Coil",GRW,-13.31,21
+1347,"Kyler, Sigardian Emissary",GW,-13.56,20
+1348,"Tasigur, the Golden Fang",BGU,-13.64,21
+1349,Kodama of the West Tree,G,-13.71,21
+1350,"Targ Nar, Demon-Fang Gnoll",GR,-13.79,22
+1351,"Melira, Sylvok Outcast",G,-13.79,31
+1352,The Pride of Hull Clade,GU,-13.96,20
+1353,"Rosheen, Roaring Prophet",GR,-14.09,22
+1354,"Tromell, Seymour's Butler",G,-14.16,22
+1355,Six,G,-14.2,30
+1356,Gallia of the Endless Dance,GR,-14.26,20
+1357,"Sigarda, Champion of Light",GW,-14.48,24
+1358,"Trelasarra, Moon Dancer",GW,-14.49,20
+1359,"Fangorn, Tree Shepherd",G,-14.59,31
+1360,"Annie Flash, the Veteran",GRW,-14.65,25
+1361,"Kibo, Uktabi Prince",GR,-14.65,25
+1362,"Havi, the All-Father",GRW,-14.71,24
+1363,"Miriam, Herd Whisperer",GW,-14.84,24
+1364,"Raffine, Scheming Seer",BUW,-14.89,20
+1365,"Caradora, Heart of Alacria",GW,-14.91,23
+1366,"Baylen, the Haymaker",GRW,-15.08,23
+1367,"Arashi, the Sky Asunder",G,-15.12,24
+1368,"Lily Bowen, Raging Grandma",G,-15.16,21
+1369,"Bast, Panther Goddess",GW,-15.44,25
+1370,Arcades Sabboth,GUW,-15.46,24
+1371,"Jared Carthalion, True Heir",GRW,-15.54,22
+1372,"Shizuko, Caller of Autumn",G,-15.65,26
+1373,Queen Allenal of Ruadach,GW,-15.68,22
+1374,"Lonis, Genetics Expert",GU,-15.69,21
+1375,"Aeve, Progenitor Ooze",G,-15.7,24
+1376,"Jinnie Fay, Jetmir's Second",GRW,-15.71,24
+1377,"Toph, the First Metalbender",GRW,-15.77,20
+1378,"Wayta, Trainer Prodigy",GRW,-15.78,20
+1379,"Itzquinth, Firstborn of Gishath",GR,-15.78,24
+1380,"Yasharn, Implacable Earth",GW,-15.87,20
+1381,"Kenessos, Priest of Thassa",GU,-15.99,20
+1382,"Yannik, Scavenging Sentinel",GW,-16.0,20
+1383,Jacques le Vert,GRW,-16.01,24
+1384,"Archelos, Lagoon Mystic",BGU,-16.08,20
+1385,"Brigid, Clachan's Heart // Brigid, Doun's Mind",GW,-16.09,20
+1386,"Gluntch, the Bestower",GW,-16.11,20
+1387,"Elrond, Master of Healing",GU,-16.13,43
+1388,Elenda and Azor,BUW,-16.14,21
+1389,"Estrid, the Masked",GUW,-16.19,20
+1390,"Bright-Palm, Soul Awakener",GRW,-16.2,20
+1391,"Muerra, Trash Tactician",GR,-16.31,25
+1392,Miles Morales // Ultimate Spider-Man,GRW,-16.33,20
+1393,"Kiora, Sovereign of the Deep",GU,-16.49,25
+1394,"Lagorin, Soul of Alacria",GW,-16.63,20
+1395,"Bumi, King of Three Trials",G,-16.64,22
+1396,Sidar Kondo of Jamuraa,GW,-16.66,25
+1397,"Zar Ojanen, Scion of Efrava",GW,-16.72,23
+1398,"Hulkling, Burgeoning Bruiser",G,-16.76,25
+1399,"Queza, Augur of Agonies",BUW,-16.85,20
+1400,"Wolverine, Best There Is",GR,-17.02,21
+1401,"Lathiel, the Bounteous Dawn",GW,-17.05,21
+1402,"Loot, the Key to Everything",GRU,-17.1,21
+1403,Erestor of the Council,GU,-17.12,31
+1404,"Ulrich of the Krallenhorde // Ulrich, Uncontested Alpha",GR,-17.16,20
+1405,"Sam, Loyal Attendant",GW,-17.18,21
+1406,"Blue, Loyal Raptor",GU,-17.19,24
+1407,Rinoa Heartilly,GW,-17.26,24
+1408,"Chishiro, the Shattered Blade",GR,-17.27,25
+1409,"Wort, the Raidmother",GR,-17.31,24
+1410,"Slurrk, All-Ingesting",G,-17.32,20
+1411,Sergeant John Benton,GW,-17.32,21
+1412,"Wolverine, Fierce Fighter",GR,-17.36,22
+1413,"Ace, Fearless Rebel",G,-17.39,24
+1414,"Kolvori, God of Kinship // The Ringhart Crest",G,-17.39,20
+1415,Jasmine Boreal of the Seven,GW,-17.41,21
+1416,"Galion, Elvenking's Butler",G,-17.42,24
+1417,"Cadira, Caller of the Small",GW,-17.49,21
+1418,"Ruxa, Patient Professor",G,-17.53,24
+1419,"Sita Varma, Masked Racer",GU,-17.54,20
+1420,"Treebeard, Gracious Host",GW,-17.6,20
+1421,"Mikey & Mona, Mutant Sitters",G,-17.64,24
+1422,Palladia-Mors,GRW,-17.67,24
+1423,Farmer Cotton,GW,-17.68,20
+1424,"Greensleeves, Maro-Sorcerer",G,-17.69,32
+1425,Riku of Two Reflections,GRU,-17.69,20
+1426,Samwise Gamgee,GW,-17.72,22
+1427,Black Tom Cassidy,G,-17.76,24
+1428,Doorman,G,-17.76,24
+1429,"Yoshimaru, Scrappy Stray",G,-17.76,24
+1430,"Lagrella, the Magpie",GUW,-17.78,20
+1431,"Selvala, Explorer Returned",GW,-17.83,24
+1432,"Kellan, Daring Traveler // Journey On",GW,-17.84,20
+1433,"Yuna, Hope of Spira",GW,-17.88,21
+1434,"Hellcat, Undying Vigilante",G,-17.88,24
+1435,Daughter of Autumn,GW,-17.93,20
+1436,Marhault Elsdragon,GR,-18.0,23
+1437,"Melira, the Living Cure",GW,-18.09,20
+1438,"Rigo, Streetwise Mentor",GUW,-18.1,20
+1439,"Xyris, the Writhing Storm",GRU,-18.13,21
+1440,Ohabi Caleria,GW,-18.25,20
+1441,Mary Jane Watson,GW,-18.27,20
+1442,The Necrobloom,BGW,-18.54,21
+1443,Jamie McCrimmon,G,-18.54,25
+1444,"Ms. Marvel, Elastic Ally",GW,-18.65,25
+1445,Dosan the Falling Leaf,G,-18.9,22
+1446,"T'Chaka, Venerable King",GW,-19.0,25
+1447,"Zuo Ci, the Mocking Sage",G,-19.04,23
+1448,"Polukranos Reborn // Polukranos, Engine of Ruin",GW,-19.07,21
+1449,"Sigurd, Jarl of Ravensthorpe",GRW,-19.08,21
+1450,The Third Doctor,GU,-19.15,31
+1451,"Spider-Girl, Legacy Hero",GW,-19.18,21
+1452,"Rocco, Street Chef",GRW,-19.27,25
+1453,"Thrun, the Last Troll",G,-19.3,24
+1454,"Aragorn, Company Leader",GW,-19.38,21
+1455,"Cait, Cage Brawler",GR,-19.38,21
+1456,"Katara, the Fearless",GUW,-19.42,21
+1457,"Medusa, Inhuman Queen",G,-19.52,21
+1458,"Tadeas, Juniper Ascendant",GW,-19.66,20
+1459,Vorinclex // The Grand Evolution,G,-19.71,26
+1460,"Kaima, the Fractured Calm",GR,-19.74,20
+1461,"Casal, Lurkwood Pathfinder // Casal, Pathbreaker Owlbear",G,-19.79,20
+1462,"Kaseto, Orochi Archmage",GU,-19.83,20
+1463,Kei Takahashi,GW,-19.83,20
+1464,"Anafenza, the Foremost",BGW,-19.92,20
+1465,"Derevi, Empyrial Tactician",GUW,-19.94,21
+1466,"Wilson, Refined Grizzly",G,-19.96,25
+1467,"Satsuki, the Living Lore",GW,-19.98,20
+1468,"Finneas, Ace Archer",GW,-19.98,20
+1469,"Garnet, Princess of Alexandria",GW,-19.98,20
+1470,"Aragorn, Hornburg Hero",GRW,-19.98,20
+1471,"Grumgully, the Generous",GR,-20.04,20
+1472,"Verazol, the Split Current",GU,-20.08,20
+1473,"Vrestin, Menoptra Leader",GW,-20.12,20
+1474,"Aragorn and Arwen, Wed",GW,-20.16,25
+1475,Jennifer Walters // The Sensational She-Hulk,GW,-20.25,20
+1476,"Mutagen Man, Living Ooze",G,-20.26,20
+1477,Angus Mackenzie,GUW,-20.28,20
+1478,"Arwen, Mortal Queen",GW,-20.29,20
+1479,"Fynn, the Fangbearer",G,-20.41,20
+1480,"Titania, Gaea Incarnate",G,-20.45,21
+1481,Hazezon Tamar,GRW,-20.53,21
+1482,Autumn Willow,G,-20.58,21
+1483,Gaddock Teeg,GW,-20.62,20
+1484,"Radha, Coalition Warlord",GR,-20.67,23
+1485,Bartz and Boko,G,-20.85,25
+1486,"Merry, Warden of Isengard",GW,-20.89,21
+1487,"Aerith, Last Ancient",GW,-20.92,21
+1488,"Wakka, Devoted Guardian",GW,-21.02,21
+1489,"Obuun, Mul Daya Ancestor",GRW,-21.12,21
+1490,"Rocco, Cabaretti Caterer",GRW,-21.17,21
+1491,"Cazur, Ruthless Stalker",G,-21.24,24
+1492,"Byrke, Long Ear of the Law",GW,-21.28,21
+1493,"Okoye, Mighty and Adored",GW,-21.33,21
+1494,"Tovolar, Dire Overlord // Tovolar, the Midnight Scourge",GR,-21.35,21
+1495,Shalai and Hallar,GRW,-21.4,21
+1496,Phelddagrif,GUW,-21.45,24
+1497,"Sophia, Dogged Detective",GUW,-21.47,24
+1498,Yasova Dragonclaw,GRU,-21.48,22
+1499,Hit-Monkey,G,-21.51,25
+1500,"Haru, Hidden Talent",G,-21.61,20
+1501,"Michelangelo, Weirdness to 11",G,-21.62,21
+1502,"Minsc, Beloved Ranger",GRW,-21.62,21
+1503,"Bess, Soul Nourisher",GW,-21.7,20
+1504,"Aang, at the Crossroads // Aang, Destined Savior",GUW,-21.73,20
+1505,"Radha, Heart of Keld",GR,-21.79,20
+1506,"Shanna, Sisay's Legacy",GW,-21.85,20
+1507,"Kosei, Penitent Warlord",G,-21.85,20
+1508,"Meria, Scholar of Antiquity",GR,-21.87,20
+1509,Lord Magnus,GW,-21.9,24
+1510,Professor Hojo,G,-21.94,25
+1511,Beluna Grandsquall // Seek Thrills,GRU,-21.97,20
+1512,The Astonishing Ant-Man,GU,-21.97,20
+1513,"Leinore, Autumn Sovereign",GW,-22.0,20
+1514,"Yuna, Grand Summoner",GUW,-22.01,20
+1515,"Rocksteady, Mutant Marauder",G,-22.02,20
+1516,"Reki, the History of Kamigawa",G,-22.13,20
+1517,Saffi Eriksdotter,GW,-22.18,20
+1518,Guru Pathik,GU,-22.37,21
+1519,"Bello, Bard of the Brambles",GR,-22.41,23
+1520,"Me, the Immortal",GRU,-22.43,21
+1521,"Lady Zhurong, Warrior Queen",G,-22.48,23
+1522,"X-23, Deadly Weapon",G,-22.54,25
+1523,"Torgal, A Fine Hound",G,-22.57,21
+1524,Balthier and Fran,GR,-22.6,23
+1525,"Katilda, Dawnhart Prime",GW,-22.64,20
+1526,"Gorion, Wise Mentor",GUW,-22.9,23
+1527,"Mikey & Leo, Chaos & Order",GW,-22.99,20
+1528,"Falco Spara, Pactweaver",GUW,-23.09,21
+1529,Sazh Katzroy,G,-23.29,23
+1530,"Black Panther, Wakandan King",GW,-23.36,21
+1531,"Loot, the Pathfinder",GRU,-23.37,20
+1532,"Minsc & Boo, Timeless Heroes",GR,-23.44,22
+1533,Absorbing Man,GU,-23.47,20
+1534,"Tidus, Yuna's Guardian",GUW,-23.5,21
+1535,"Multani, Yavimaya's Avatar",G,-23.57,20
+1536,"Quina, Qu Gourmet",G,-23.63,25
+1537,"Duggan, Private Detective",GU,-23.81,20
+1538,"Isao, Enlightened Bushi",G,-23.83,21
+1539,Chorus of the Conclave,GW,-23.95,25
+1540,Frodo Baggins,GW,-24.02,20
+1541,"Hulk, Brutal Brawler",G,-24.18,20
+1542,"Tishana, Voice of Thunder",GU,-24.27,21
+1543,"Etali, Primal Conqueror // Etali, Primal Sickness",GR,-24.35,21
+1544,Bruce Banner // The Incredible Hulk,GRU,-24.39,20
+1545,"Chulane, Teller of Tales",GUW,-24.39,21
+1546,"Flubs, the Fool",GRU,-24.52,20
+1547,"Shanna, Purifying Blade",GUW,-24.55,21
+1548,"Lara Croft, Tomb Raider",GRU,-24.58,21
+1549,"Thranduil, Sindarin Liege // Silvan Rally",GU,-24.64,25
+1550,Eshki Dragonclaw,GRU,-24.64,23
+1551,Catti-brie of Mithral Hall,GW,-24.67,20
+1552,The Space Family Goblinson,GR,-24.87,21
+1553,"Michelangelo, On the Scene",G,-24.89,20
+1554,"Strider, Ranger of the North",GR,-24.92,21
+1555,"Asmira, Holy Avenger",GW,-24.94,21
+1556,Captain Sisay,GW,-25.01,21
+1557,"Tatyova, Steward of Tides",GU,-25.05,23
+1558,"Thrasta, Tempest's Roar",G,-25.07,26
+1559,"Hulk, Strongest There Is",G,-25.08,21
+1560,The Sixth Doctor,GU,-25.18,20
+1561,"Shisato, Whispering Hunter",G,-25.34,21
+1562,"Mikey & Don, Party Planners",GU,-25.59,20
+1563,"Othelm, Sigardian Outcast",GW,-25.6,21
+1564,"Mister Hyde, Monster Within",G,-25.64,21
+1565,Ragnar,GUW,-25.73,20
+1566,"Red XIII, Proud Warrior",GR,-25.95,20
+1567,Katilda and Lier,GUW,-25.96,20
+1568,Elrond of the White Council,GU,-26.14,25
+1569,"Nael, Avizoa Aeronaut",GU,-26.22,21
+1570,"Thrasios, Triton Hero",GU,-26.34,20
+1571,"Shelinda, Yevon Acolyte",GW,-26.38,20
+1572,"Rick Jones, Destined Sidekick",G,-26.56,20
+1573,"Numa, Joraga Chieftain",G,-26.61,24
+1574,"Wylie Duke, Atiin Hero",GW,-26.68,23
+1575,"Legolas, Counter of Kills",GU,-26.73,21
+1576,"Jadzi, Oracle of Arcavios // Journey to the Oracle",GU,-26.81,21
+1577,"Arcades, the Strategist",GUW,-26.93,21
+1578,Kodama of the Center Tree,G,-27.06,20
+1579,"Morska, Undersea Sleuth",GUW,-27.1,21
+1580,"Abomination, Terrifying Titan",GR,-27.11,25
+1581,"Haliya, Ascendant Cadet",GW,-27.12,21
+1582,"Rip, Spawn Hunter",GW,-27.16,23
+1583,"Storm, Force of Nature",GRU,-27.16,25
+1584,The Fabulous Frog-Man,G,-27.16,21
+1585,"Phylath, World Sculptor",GR,-27.33,26
+1586,"Toph, Earthbending Master",G,-27.48,20
+1587,"Grolnok, the Omnivore",GU,-27.55,20
+1588,"Wolverine, Claws Out",G,-27.74,20
+1589,"Imaryll, Elfhame Elite",G,-28.21,24
+1590,"Haldir, Lórien Lieutenant",G,-28.61,20
+1591,Eutropia the Twice-Favored,GU,-28.65,21
+1592,Thromok the Insatiable,GR,-28.84,21
+1593,Ambassador Blorpityblorpboop,GU,-28.87,20
+1594,"Marwyn, the Nurturer",G,-29.03,21
+1595,"Choco, Seeker of Paradise",GUW,-29.21,21
+1596,"Kydele, Chosen of Kruphix",GU,-29.46,20
+1597,"Slogurk, the Overslime",GU,-29.54,21
+1598,The Unbeatable Squirrel Girl,G,-29.58,24
+1599,Peter Parker // Amazing Spider-Man,GUW,-29.65,21
+1600,"Mirri, Cat Warrior",G,-29.76,21
+1601,"Multani, Maro-Sorcerer",G,-29.86,21
+1602,"Jenara, Asura of War",GUW,-30.15,20
+1603,"Galadriel, Elven-Queen",GU,-30.26,25
+1604,"Dionus, Elvish Archdruid",G,-30.93,21
+1605,"Seton, Krosan Protector",G,-30.99,25
+1606,"Titania, Voice of Gaea",G,-31.15,21
+1607,Genghis Frog,GU,-31.3,21
+1608,"Marath, Will of the Wild",GRW,-31.49,20
+1609,"Omnath, Locus of the Roil",GRU,-31.52,24
+1610,"Nissa, Resurgent Animist",G,-31.59,21
+1611,"Mole Man, Moloid Master",G,-31.64,20
+1612,"Rydia, Summoner of Mist",GR,-31.99,20
+1613,"Eladamri, Lord of Leaves",G,-32.88,21
+1614,Celeborn the Wise,G,-32.91,21
+1615,"Kirri, Talented Sprout",GRW,-33.08,20
+1616,"Shang-Chi, Master of Kung Fu",G,-33.16,23
+1617,"Tannuk, Memorial Ensign",GR,-33.16,20
+1618,Arwen Undómiel,GU,-33.37,27
+1619,"Pir, Imaginative Rascal",G,-33.55,21
+1620,"Ashaya, Soul of the Wild",G,-33.64,20
+1621,"Brawn, Amadeus Cho",GU,-34.13,20
+1622,"Bristly Bill, Spine Sower",G,-35.91,20
+1623,Tifa Lockhart,G,-42.24,20

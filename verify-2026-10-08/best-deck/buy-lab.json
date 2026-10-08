@@ -1,0 +1,1674 @@
+{
+ "base": 101.19857142857144,
+ "games": 100,
+ "generated": "2026-10-08T13:05:56.289Z",
+ "rows": [
+  {
+   "name": "Golgari Signet",
+   "type": "Artifact",
+   "mv": 2,
+   "delta": 0.29999999999999716,
+   "slot": "Ashnod's Altar",
+   "incl": 0.175783,
+   "price": "0.34",
+   "roles": [
+    "ramp"
+   ]
+  },
+  {
+   "name": "Fell the Profane // Fell Mire",
+   "type": "Instant",
+   "mv": 4,
+   "delta": 0.21071428571428896,
+   "slot": "Ashnod's Altar",
+   "incl": 0.087424,
+   "price": "5.58",
+   "roles": [
+    "land"
+   ]
+  },
+  {
+   "name": "Journey to Eternity // Atzal, Cave of Eternity",
+   "type": "Legendary Enchantment — Aura",
+   "mv": 3,
+   "delta": 0.20357142857143629,
+   "slot": "Phyrexian Arena",
+   "incl": 0.115475,
+   "price": "5.20",
+   "roles": [
+    "land"
+   ]
+  },
+  {
+   "name": "Growing Rites of Itlimoc // Itlimoc, Cradle of the Sun",
+   "type": "Legendary Enchantment",
+   "mv": 3,
+   "delta": 0.1964285714285694,
+   "slot": "Blight Mound",
+   "incl": 0.124825,
+   "price": "9.71",
+   "roles": [
+    "land"
+   ]
+  },
+  {
+   "name": "Wood Elves",
+   "type": "Creature — Elf Scout",
+   "mv": 3,
+   "delta": 0.1964285714285694,
+   "slot": "Phyrexian Arena",
+   "incl": 0.116877,
+   "price": "0.28",
+   "roles": [
+    "utility"
+   ]
+  },
+  {
+   "name": "Pitiless Plunderer",
+   "type": "Creature — Human Pirate",
+   "mv": 4,
+   "delta": 0.18214285714286405,
+   "slot": "Ashnod's Altar",
+   "incl": 0.27022,
+   "price": "4.79",
+   "roles": [
+    "ramp"
+   ]
+  },
+  {
+   "name": "Accomplished Alchemist",
+   "type": "Creature — Elf Druid",
+   "mv": 4,
+   "delta": 0.18214285714286405,
+   "slot": "Ashnod's Altar",
+   "incl": 0.084151,
+   "price": "0.42",
+   "roles": [
+    "ramp"
+   ]
+  },
+  {
+   "name": "Explosive Vegetation",
+   "type": "Sorcery",
+   "mv": 4,
+   "delta": 0.18214285714286405,
+   "slot": "Ashnod's Altar",
+   "incl": 0.069659,
+   "price": "0.34",
+   "roles": [
+    "ramp"
+   ]
+  },
+  {
+   "name": "Bala Ged Recovery // Bala Ged Sanctuary",
+   "type": "Sorcery",
+   "mv": 3,
+   "delta": 0.17499999999999716,
+   "slot": "Blight Mound",
+   "incl": 0.194951,
+   "price": "6.22",
+   "roles": [
+    "land"
+   ]
+  },
+  {
+   "name": "Cryptolith Rite",
+   "type": "Enchantment",
+   "mv": 2,
+   "delta": 0.16785714285714448,
+   "slot": "Ashnod's Altar",
+   "incl": 0.111734,
+   "price": "14.76",
+   "roles": [
+    "ramp"
+   ]
+  },
+  {
+   "name": "Malakir Rebirth // Malakir Mire",
+   "type": "Instant",
+   "mv": 1,
+   "delta": 0.16428571428571104,
+   "slot": "Pest Infestation",
+   "incl": 0.239364,
+   "price": "14.20",
+   "roles": [
+    "land"
+   ]
+  },
+  {
+   "name": "Prosperous Innkeeper",
+   "type": "Creature — Halfling Citizen",
+   "mv": 2,
+   "delta": 0.15714285714285836,
+   "slot": "Ashnod's Altar",
+   "incl": 0.361851,
+   "price": "0.26",
+   "roles": [
+    "ramp"
+   ]
+  },
+  {
+   "name": "Birds of Paradise",
+   "type": "Creature — Bird",
+   "mv": 1,
+   "delta": 0.13571428571428612,
+   "slot": "Ashnod's Altar",
+   "incl": 0.194483,
+   "price": "9.85",
+   "roles": [
+    "ramp"
+   ]
+  },
+  {
+   "name": "Warren Soultrader",
+   "type": "Creature — Zombie Goblin Wizard",
+   "mv": 3,
+   "delta": 0.13571428571428612,
+   "slot": "Ashnod's Altar",
+   "incl": 0.187471,
+   "price": "19.52",
+   "roles": [
+    "ramp"
+   ]
+  },
+  {
+   "name": "Crop Rotation",
+   "type": "Instant",
+   "mv": 1,
+   "delta": 0.13571428571428612,
+   "slot": "Ashnod's Altar",
+   "incl": 0.131837,
+   "price": "3.86",
+   "roles": [
+    "ramp"
+   ]
+  },
+  {
+   "name": "Elves of Deep Shadow",
+   "type": "Creature — Elf Druid",
+   "mv": 1,
+   "delta": 0.13571428571428612,
+   "slot": "Ashnod's Altar",
+   "incl": 0.093502,
+   "price": "5.51",
+   "roles": [
+    "ramp"
+   ]
+  },
+  {
+   "name": "Fyndhorn Elves",
+   "type": "Creature — Elf Druid",
+   "mv": 1,
+   "delta": 0.13571428571428612,
+   "slot": "Ashnod's Altar",
+   "incl": 0.084619,
+   "price": "2.11",
+   "roles": [
+    "ramp"
+   ]
+  },
+  {
+   "name": "Agadeem's Awakening // Agadeem, the Undercrypt",
+   "type": "Sorcery",
+   "mv": 3,
+   "delta": 0.12142857142858077,
+   "slot": "Ashnod's Altar",
+   "incl": 0.077606,
+   "price": "28.63",
+   "roles": [
+    "land"
+   ]
+  },
+  {
+   "name": "Enduring Vitality",
+   "type": "Enchantment Creature — Elk Glimmer",
+   "mv": 3,
+   "delta": 0.10714285714284699,
+   "slot": "Priest of Forgotten Gods",
+   "incl": 0.107059,
+   "price": "16.24",
+   "roles": [
+    "ramp"
+   ]
+  },
+  {
+   "name": "Migration Path",
+   "type": "Sorcery",
+   "mv": 4,
+   "delta": 0.10357142857142776,
+   "slot": "Priest of Forgotten Gods",
+   "incl": 0.111734,
+   "price": "0.37",
+   "roles": [
+    "ramp",
+    "draw"
+   ]
+  },
+  {
+   "name": "Parallel Lives",
+   "type": "Enchantment",
+   "mv": 4,
+   "delta": 0.09285714285714164,
+   "slot": "Viscera Seer",
+   "incl": 0.286583,
+   "price": "39.60",
+   "roles": [
+    "utility"
+   ]
+  },
+  {
+   "name": "Undergrowth Stadium",
+   "type": "Land",
+   "mv": 0,
+   "delta": 0.0892857142857082,
+   "slot": "Temple of Malady",
+   "incl": 0.444133,
+   "price": "4.73",
+   "roles": [
+    "land"
+   ]
+  },
+  {
+   "name": "Tainted Wood",
+   "type": "Land",
+   "mv": 0,
+   "delta": 0.0892857142857082,
+   "slot": "Temple of Malady",
+   "incl": 0.420757,
+   "price": "0.38",
+   "roles": [
+    "land"
+   ]
+  },
+  {
+   "name": "Deathcap Glade",
+   "type": "Land",
+   "mv": 0,
+   "delta": 0.0892857142857082,
+   "slot": "Temple of Malady",
+   "incl": 0.352969,
+   "price": "2.54",
+   "roles": [
+    "land"
+   ]
+  },
+  {
+   "name": "Urborg, Tomb of Yawgmoth",
+   "type": "Legendary Land",
+   "mv": 0,
+   "delta": 0.0892857142857082,
+   "slot": "Temple of Malady",
+   "incl": 0.347359,
+   "price": "54.99",
+   "roles": [
+    "land"
+   ]
+  },
+  {
+   "name": "Cabal Coffers",
+   "type": "Land",
+   "mv": 0,
+   "delta": 0.0892857142857082,
+   "slot": "Temple of Malady",
+   "incl": 0.248247,
+   "price": "29.82",
+   "roles": [
+    "land"
+   ]
+  },
+  {
+   "name": "Darkbore Pathway // Slitherbore Pathway",
+   "type": "Land",
+   "mv": 0,
+   "delta": 0.0892857142857082,
+   "slot": "Temple of Malady",
+   "incl": 0.208041,
+   "price": "6.98",
+   "roles": [
+    "land"
+   ]
+  },
+  {
+   "name": "Wastewood Verge",
+   "type": "Land",
+   "mv": 0,
+   "delta": 0.0892857142857082,
+   "slot": "Temple of Malady",
+   "incl": 0.13137,
+   "price": "10.65",
+   "roles": [
+    "land"
+   ]
+  },
+  {
+   "name": "Nurturing Peatland",
+   "type": "Land",
+   "mv": 0,
+   "delta": 0.0892857142857082,
+   "slot": "Temple of Malady",
+   "incl": 0.12202,
+   "price": "6.32",
+   "roles": [
+    "land"
+   ]
+  },
+  {
+   "name": "Bayou",
+   "type": "Land — Swamp Forest",
+   "mv": 0,
+   "delta": 0.0892857142857082,
+   "slot": "Temple of Malady",
+   "incl": 0.119682,
+   "price": null,
+   "roles": [
+    "land"
+   ]
+  },
+  {
+   "name": "Takenuma, Abandoned Mire",
+   "type": "Legendary Land",
+   "mv": 0,
+   "delta": 0.0892857142857082,
+   "slot": "Temple of Malady",
+   "incl": 0.108462,
+   "price": "10.69",
+   "roles": [
+    "land"
+   ]
+  },
+  {
+   "name": "Castle Locthwain",
+   "type": "Land",
+   "mv": 0,
+   "delta": 0.0892857142857082,
+   "slot": "Temple of Malady",
+   "incl": 0.079009,
+   "price": "4.28",
+   "roles": [
+    "land"
+   ]
+  },
+  {
+   "name": "Savra, Queen of the Golgari",
+   "type": "Legendary Creature — Elf Shaman",
+   "mv": 4,
+   "delta": 0.08571428571428896,
+   "slot": "Viscera Seer",
+   "incl": 0.390837,
+   "price": "7.84",
+   "roles": [
+    "utility"
+   ]
+  },
+  {
+   "name": "Poison-Tip Archer",
+   "type": "Creature — Elf Archer",
+   "mv": 4,
+   "delta": 0.08571428571428896,
+   "slot": "Viscera Seer",
+   "incl": 0.248714,
+   "price": "2.31",
+   "roles": [
+    "win_condition"
+   ]
+  },
+  {
+   "name": "Lluwen, Exchange Student // Pest Friend",
+   "type": "Legendary Creature — Elf Druid",
+   "mv": 4,
+   "delta": 0.08571428571428896,
+   "slot": "Viscera Seer",
+   "incl": 0.083216,
+   "price": "0.32",
+   "roles": [
+    "utility"
+   ]
+  },
+  {
+   "name": "Doubling Season",
+   "type": "Enchantment",
+   "mv": 5,
+   "delta": 0.07857142857143629,
+   "slot": "Viscera Seer",
+   "incl": 0.229079,
+   "price": "34.21",
+   "roles": [
+    "utility"
+   ]
+  },
+  {
+   "name": "Exquisite Blood",
+   "type": "Enchantment",
+   "mv": 5,
+   "delta": 0.07857142857143629,
+   "slot": "Viscera Seer",
+   "incl": 0.225339,
+   "price": "39.34",
+   "roles": [
+    "utility"
+   ]
+  },
+  {
+   "name": "Dictate of Erebos",
+   "type": "Enchantment",
+   "mv": 5,
+   "delta": 0.06785714285715017,
+   "slot": "Pest Infestation",
+   "incl": 0.136045,
+   "price": "17.90",
+   "roles": [
+    "removal"
+   ]
+  },
+  {
+   "name": "Drivnod, Carnage Dominus",
+   "type": "Legendary Creature — Phyrexian Horror",
+   "mv": 5,
+   "delta": 0.06785714285715017,
+   "slot": "Pest Infestation",
+   "incl": 0.104722,
+   "price": "6.62",
+   "roles": [
+    "win_condition"
+   ]
+  },
+  {
+   "name": "Crux of Fate",
+   "type": "Sorcery",
+   "mv": 5,
+   "delta": 0.06785714285715017,
+   "slot": "Pest Infestation",
+   "incl": 0.087892,
+   "price": "3.27",
+   "roles": [
+    "board_wipe"
+   ]
+  },
+  {
+   "name": "Bloodthirsty Conqueror",
+   "type": "Creature — Vampire Knight",
+   "mv": 5,
+   "delta": 0.06785714285715017,
+   "slot": "Pest Infestation",
+   "incl": 0.073399,
+   "price": "35.09",
+   "roles": [
+    "win_condition"
+   ]
+  },
+  {
+   "name": "Windgrace's Judgment",
+   "type": "Instant",
+   "mv": 5,
+   "delta": 0.06785714285715017,
+   "slot": "Pest Infestation",
+   "incl": 0.071061,
+   "price": "0.24",
+   "roles": [
+    "removal"
+   ]
+  },
+  {
+   "name": "Blasphemous Edict",
+   "type": "Sorcery",
+   "mv": 5,
+   "delta": 0.06785714285715017,
+   "slot": "Pest Infestation",
+   "incl": 0.064049,
+   "price": "4.48",
+   "roles": [
+    "utility"
+   ]
+  },
+  {
+   "name": "Yawgmoth, Thran Physician",
+   "type": "Legendary Creature — Human Cleric",
+   "mv": 4,
+   "delta": 0.06428571428571672,
+   "slot": "Liliana, Dreadhorde General",
+   "incl": 0.195418,
+   "price": "28.89",
+   "roles": [
+    "draw",
+    "removal"
+   ]
+  },
+  {
+   "name": "Aetherflux Reservoir",
+   "type": "Artifact",
+   "mv": 4,
+   "delta": 0.06428571428571672,
+   "slot": "Liliana, Dreadhorde General",
+   "incl": 0.166433,
+   "price": "20.82",
+   "roles": [
+    "removal"
+   ]
+  },
+  {
+   "name": "Vraska, Golgari Queen",
+   "type": "Legendary Planeswalker — Vraska",
+   "mv": 4,
+   "delta": 0.06428571428571672,
+   "slot": "Liliana, Dreadhorde General",
+   "incl": 0.163628,
+   "price": "5.11",
+   "roles": [
+    "draw",
+    "removal"
+   ]
+  },
+  {
+   "name": "Well of Lost Dreams",
+   "type": "Artifact",
+   "mv": 4,
+   "delta": 0.06428571428571672,
+   "slot": "Liliana, Dreadhorde General",
+   "incl": 0.161758,
+   "price": "7.72",
+   "roles": [
+    "draw"
+   ]
+  },
+  {
+   "name": "Deathreap Ritual",
+   "type": "Enchantment",
+   "mv": 4,
+   "delta": 0.06428571428571672,
+   "slot": "Liliana, Dreadhorde General",
+   "incl": 0.15194,
+   "price": "0.36",
+   "roles": [
+    "draw"
+   ]
+  },
+  {
+   "name": "Enduring Tenacity",
+   "type": "Enchantment Creature — Snake Glimmer",
+   "mv": 4,
+   "delta": 0.06428571428571672,
+   "slot": "Viscera Seer",
+   "incl": 0.127162,
+   "price": "13.59",
+   "roles": [
+    "utility"
+   ]
+  },
+  {
+   "name": "Deadly Rollick",
+   "type": "Instant",
+   "mv": 4,
+   "delta": 0.06428571428571672,
+   "slot": "Liliana, Dreadhorde General",
+   "incl": 0.098644,
+   "price": "28.65",
+   "roles": [
+    "removal"
+   ]
+  },
+  {
+   "name": "Damnation",
+   "type": "Sorcery",
+   "mv": 4,
+   "delta": 0.06428571428571672,
+   "slot": "Viscera Seer",
+   "incl": 0.087892,
+   "price": "21.38",
+   "roles": [
+    "board_wipe"
+   ]
+  },
+  {
+   "name": "Whip of Erebos",
+   "type": "Legendary Enchantment Artifact",
+   "mv": 4,
+   "delta": 0.06428571428571672,
+   "slot": "Viscera Seer",
+   "incl": 0.079944,
+   "price": "9.25",
+   "roles": [
+    "utility"
+   ]
+  },
+  {
+   "name": "Daemogoth Titan",
+   "type": "Creature — Demon",
+   "mv": 4,
+   "delta": 0.06428571428571672,
+   "slot": "Viscera Seer",
+   "incl": 0.067321,
+   "price": "1.18",
+   "roles": [
+    "utility"
+   ]
+  },
+  {
+   "name": "Boseiju, Who Endures",
+   "type": "Legendary Land",
+   "mv": 0,
+   "delta": 0.06071428571428328,
+   "slot": "Temple of Malady",
+   "incl": 0.17064,
+   "price": "48.20",
+   "roles": [
+    "land"
+   ]
+  },
+  {
+   "name": "Grave Pact",
+   "type": "Enchantment",
+   "mv": 4,
+   "delta": 0.06071428571428328,
+   "slot": "Viscera Seer",
+   "incl": 0.102384,
+   "price": "30.32",
+   "roles": [
+    "utility"
+   ]
+  },
+  {
+   "name": "Gaea's Cradle",
+   "type": "Legendary Land",
+   "mv": 0,
+   "delta": 0.06071428571428328,
+   "slot": "Temple of Malady",
+   "incl": 0.071996,
+   "price": "1627.48",
+   "roles": [
+    "land"
+   ]
+  },
+  {
+   "name": "Castle Garenbrig",
+   "type": "Land",
+   "mv": 0,
+   "delta": 0.06071428571428328,
+   "slot": "Temple of Malady",
+   "incl": 0.069659,
+   "price": "9.85",
+   "roles": [
+    "land"
+   ]
+  },
+  {
+   "name": "Bolas's Citadel",
+   "type": "Legendary Artifact",
+   "mv": 6,
+   "delta": 0.057142857142864045,
+   "slot": "Pest Rescuer",
+   "incl": 0.29266,
+   "price": "16.87",
+   "roles": [
+    "win_condition"
+   ]
+  },
+  {
+   "name": "Stinging Study",
+   "type": "Instant",
+   "mv": 5,
+   "delta": 0.057142857142864045,
+   "slot": "Liliana, Dreadhorde General",
+   "incl": 0.176718,
+   "price": "10.69",
+   "roles": [
+    "draw"
+   ]
+  },
+  {
+   "name": "Phyrexian Tower",
+   "type": "Legendary Land",
+   "mv": 0,
+   "delta": 0.0535714285714306,
+   "slot": "Temple of Malady",
+   "incl": 0.312295,
+   "price": "30.32",
+   "roles": [
+    "land"
+   ]
+  },
+  {
+   "name": "Pest Summoning",
+   "type": "Sorcery — Lesson",
+   "mv": 3,
+   "delta": 0.0535714285714306,
+   "slot": "Viscera Seer",
+   "incl": 0.115007,
+   "price": "0.21",
+   "roles": [
+    "utility"
+   ]
+  },
+  {
+   "name": "Beastmaster Ascension",
+   "type": "Enchantment",
+   "mv": 3,
+   "delta": 0.0535714285714306,
+   "slot": "Viscera Seer",
+   "incl": 0.072464,
+   "price": "6.91",
+   "roles": [
+    "utility"
+   ]
+  },
+  {
+   "name": "Gala Greeters",
+   "type": "Creature — Elf Druid",
+   "mv": 2,
+   "delta": 0.04999999999999716,
+   "slot": "Pest Rescuer",
+   "incl": 0.320243,
+   "price": "1.82",
+   "roles": [
+    "utility"
+   ]
+  },
+  {
+   "name": "Underground Mortuary",
+   "type": "Land — Swamp Forest",
+   "mv": 0,
+   "delta": 0.04999999999999716,
+   "slot": "Vesuva",
+   "incl": 0.16877,
+   "price": "16.54",
+   "roles": [
+    "land"
+   ]
+  },
+  {
+   "name": "Woodland Chasm",
+   "type": "Snow Land — Swamp Forest",
+   "mv": 0,
+   "delta": 0.04999999999999716,
+   "slot": "Vesuva",
+   "incl": 0.12389,
+   "price": "0.45",
+   "roles": [
+    "land"
+   ]
+  },
+  {
+   "name": "Comforting Counsel",
+   "type": "Enchantment",
+   "mv": 2,
+   "delta": 0.04999999999999716,
+   "slot": "Pest Rescuer",
+   "incl": 0.064984,
+   "price": "0.38",
+   "roles": [
+    "utility"
+   ]
+  },
+  {
+   "name": "Golgari Guildgate",
+   "type": "Land — Gate",
+   "mv": 0,
+   "delta": 0.04999999999999716,
+   "slot": "Vesuva",
+   "incl": 0.063581,
+   "price": "0.14",
+   "roles": [
+    "land"
+   ]
+  },
+  {
+   "name": "Bastion of Remembrance",
+   "type": "Enchantment",
+   "mv": 3,
+   "delta": 0.046428571428563714,
+   "slot": "Viscera Seer",
+   "incl": 0.398317,
+   "price": "0.29",
+   "roles": [
+    "win_condition"
+   ]
+  },
+  {
+   "name": "Sedgemoor Witch",
+   "type": "Creature — Human Warlock",
+   "mv": 3,
+   "delta": 0.046428571428563714,
+   "slot": "Viscera Seer",
+   "incl": 0.358111,
+   "price": "4.00",
+   "roles": [
+    "utility"
+   ]
+  },
+  {
+   "name": "Marauding Blight-Priest",
+   "type": "Creature — Vampire Cleric",
+   "mv": 3,
+   "delta": 0.046428571428563714,
+   "slot": "Viscera Seer",
+   "incl": 0.316971,
+   "price": "0.27",
+   "roles": [
+    "win_condition"
+   ]
+  },
+  {
+   "name": "Nadier's Nightblade",
+   "type": "Creature — Elf Warrior",
+   "mv": 3,
+   "delta": 0.046428571428563714,
+   "slot": "Viscera Seer",
+   "incl": 0.269285,
+   "price": "0.34",
+   "roles": [
+    "win_condition"
+   ]
+  },
+  {
+   "name": "Pest Mascot",
+   "type": "Creature — Pest Ape",
+   "mv": 3,
+   "delta": 0.046428571428563714,
+   "slot": "Viscera Seer",
+   "incl": 0.078541,
+   "price": "0.21",
+   "roles": [
+    "utility"
+   ]
+  },
+  {
+   "name": "Blood Researcher",
+   "type": "Creature — Vampire Druid",
+   "mv": 3,
+   "delta": 0.046428571428563714,
+   "slot": "Viscera Seer",
+   "incl": 0.072464,
+   "price": "0.19",
+   "roles": [
+    "utility"
+   ]
+  },
+  {
+   "name": "Verdant Catacombs",
+   "type": "Land",
+   "mv": 0,
+   "delta": 0.04285714285714448,
+   "slot": "Golgari Rot Farm",
+   "incl": 0.293595,
+   "price": "29.63",
+   "roles": [
+    "land"
+   ]
+  },
+  {
+   "name": "Demonic Tutor",
+   "type": "Sorcery",
+   "mv": 2,
+   "delta": 0.04285714285714448,
+   "slot": "Pest Rescuer",
+   "incl": 0.208509,
+   "price": "66.51",
+   "roles": [
+    "tutor"
+   ]
+  },
+  {
+   "name": "Westvale Abbey // Ormendahl, Profane Prince",
+   "type": "Land",
+   "mv": 0,
+   "delta": 0.04285714285714448,
+   "slot": "Golgari Rot Farm",
+   "incl": 0.141655,
+   "price": "3.35",
+   "roles": [
+    "land"
+   ]
+  },
+  {
+   "name": "Diabolic Intent",
+   "type": "Sorcery",
+   "mv": 2,
+   "delta": 0.04285714285714448,
+   "slot": "Pest Rescuer",
+   "incl": 0.137447,
+   "price": "17.30",
+   "roles": [
+    "tutor"
+   ]
+  },
+  {
+   "name": "Starscape Cleric",
+   "type": "Creature — Bat Cleric",
+   "mv": 2,
+   "delta": 0.04285714285714448,
+   "slot": "Pest Rescuer",
+   "incl": 0.117345,
+   "price": "1.05",
+   "roles": [
+    "win_condition"
+   ]
+  },
+  {
+   "name": "Witch's Clinic",
+   "type": "Land",
+   "mv": 0,
+   "delta": 0.04285714285714448,
+   "slot": "Golgari Rot Farm",
+   "incl": 0.109864,
+   "price": "15.32",
+   "roles": [
+    "land"
+   ]
+  },
+  {
+   "name": "Ancient Tomb",
+   "type": "Land",
+   "mv": 0,
+   "delta": 0.04285714285714448,
+   "slot": "Golgari Rot Farm",
+   "incl": 0.105189,
+   "price": "121.56",
+   "roles": [
+    "land"
+   ]
+  },
+  {
+   "name": "Field of the Dead",
+   "type": "Land",
+   "mv": 0,
+   "delta": 0.04285714285714448,
+   "slot": "Golgari Rot Farm",
+   "incl": 0.098177,
+   "price": "27.75",
+   "roles": [
+    "land"
+   ]
+  },
+  {
+   "name": "Command Beacon",
+   "type": "Land",
+   "mv": 0,
+   "delta": 0.04285714285714448,
+   "slot": "Golgari Rot Farm",
+   "incl": 0.088359,
+   "price": "9.69",
+   "roles": [
+    "land"
+   ]
+  },
+  {
+   "name": "Bitterblossom",
+   "type": "Kindred Enchantment — Faerie",
+   "mv": 2,
+   "delta": 0.04285714285714448,
+   "slot": "Pest Rescuer",
+   "incl": 0.086022,
+   "price": "32.56",
+   "roles": [
+    "utility"
+   ]
+  },
+  {
+   "name": "Send in the Pest",
+   "type": "Sorcery",
+   "mv": 2,
+   "delta": 0.04285714285714448,
+   "slot": "Pest Rescuer",
+   "incl": 0.065451,
+   "price": "0.23",
+   "roles": [
+    "utility"
+   ]
+  },
+  {
+   "name": "Misty Rainforest",
+   "type": "Land",
+   "mv": 0,
+   "delta": 0.04285714285714448,
+   "slot": "Golgari Rot Farm",
+   "incl": 0.064984,
+   "price": "36.53",
+   "roles": [
+    "land"
+   ]
+  },
+  {
+   "name": "Chatterfang, Squirrel General",
+   "type": "Legendary Creature — Squirrel Warrior",
+   "mv": 3,
+   "delta": 0.03928571428571104,
+   "slot": "Liliana, Dreadhorde General",
+   "incl": 0.309023,
+   "price": "10.98",
+   "roles": [
+    "removal"
+   ]
+  },
+  {
+   "name": "Blex, Vexing Pest // Search for Blex",
+   "type": "Legendary Creature — Pest",
+   "mv": 3,
+   "delta": 0.03928571428571104,
+   "slot": "Liliana, Dreadhorde General",
+   "incl": 0.232352,
+   "price": "8.46",
+   "roles": [
+    "draw"
+   ]
+  },
+  {
+   "name": "Krosan Grip",
+   "type": "Instant",
+   "mv": 3,
+   "delta": 0.03928571428571104,
+   "slot": "Liliana, Dreadhorde General",
+   "incl": 0.113137,
+   "price": "1.78",
+   "roles": [
+    "removal"
+   ]
+  },
+  {
+   "name": "Pestilent Cauldron // Restorative Burst",
+   "type": "Artifact",
+   "mv": 3,
+   "delta": 0.03928571428571104,
+   "slot": "Liliana, Dreadhorde General",
+   "incl": 0.111267,
+   "price": "0.34",
+   "roles": [
+    "draw"
+   ]
+  },
+  {
+   "name": "Black Market Connections",
+   "type": "Enchantment",
+   "mv": 3,
+   "delta": 0.03928571428571104,
+   "slot": "Liliana, Dreadhorde General",
+   "incl": 0.108929,
+   "price": "10.10",
+   "roles": [
+    "draw"
+   ]
+  },
+  {
+   "name": "Nyxbloom Ancient",
+   "type": "Enchantment Creature — Elemental",
+   "mv": 7,
+   "delta": 0.03928571428571104,
+   "slot": "Pest Rescuer",
+   "incl": 0.096307,
+   "price": "27.80",
+   "roles": [
+    "win_condition"
+   ]
+  },
+  {
+   "name": "Callous Bloodmage",
+   "type": "Creature — Vampire Warlock",
+   "mv": 3,
+   "delta": 0.03928571428571104,
+   "slot": "Liliana, Dreadhorde General",
+   "incl": 0.077606,
+   "price": "0.34",
+   "roles": [
+    "draw",
+    "removal"
+   ]
+  },
+  {
+   "name": "Sephiroth, Fabled SOLDIER // Sephiroth, One-Winged Angel",
+   "type": "Legendary Creature — Human Avatar Soldier",
+   "mv": 3,
+   "delta": 0.03928571428571104,
+   "slot": "Liliana, Dreadhorde General",
+   "incl": 0.073399,
+   "price": "28.84",
+   "roles": [
+    "draw"
+   ]
+  },
+  {
+   "name": "Read the Bones",
+   "type": "Sorcery",
+   "mv": 3,
+   "delta": 0.03928571428571104,
+   "slot": "Liliana, Dreadhorde General",
+   "incl": 0.072931,
+   "price": "0.30",
+   "roles": [
+    "draw"
+   ]
+  },
+  {
+   "name": "Containment Breach",
+   "type": "Sorcery — Lesson",
+   "mv": 3,
+   "delta": 0.03928571428571104,
+   "slot": "Liliana, Dreadhorde General",
+   "incl": 0.071996,
+   "price": "0.17",
+   "roles": [
+    "removal"
+   ]
+  },
+  {
+   "name": "Finale of Devastation",
+   "type": "Sorcery",
+   "mv": 2,
+   "delta": 0.035714285714291805,
+   "slot": "Viscera Seer",
+   "incl": 0.111734,
+   "price": "35.33",
+   "roles": [
+    "utility"
+   ]
+  },
+  {
+   "name": "Awaken the Woods",
+   "type": "Sorcery",
+   "mv": 2,
+   "delta": 0.035714285714291805,
+   "slot": "Viscera Seer",
+   "incl": 0.102384,
+   "price": "12.76",
+   "roles": [
+    "utility"
+   ]
+  },
+  {
+   "name": "Craterhoof Behemoth",
+   "type": "Creature — Beast",
+   "mv": 8,
+   "delta": 0.035714285714291805,
+   "slot": "Pest Rescuer",
+   "incl": 0.098177,
+   "price": "24.85",
+   "roles": [
+    "win_condition"
+   ]
+  },
+  {
+   "name": "Razaketh, the Foulblooded",
+   "type": "Legendary Creature — Demon",
+   "mv": 8,
+   "delta": 0.035714285714291805,
+   "slot": "Pest Rescuer",
+   "incl": 0.079009,
+   "price": "15.46",
+   "roles": [
+    "tutor",
+    "win_condition"
+   ]
+  },
+  {
+   "name": "Witherbloom, the Balancer",
+   "type": "Legendary Creature — Elder Dragon",
+   "mv": 8,
+   "delta": 0.035714285714291805,
+   "slot": "Pest Rescuer",
+   "incl": 0.076671,
+   "price": "3.49",
+   "roles": [
+    "win_condition"
+   ]
+  },
+  {
+   "name": "Black Market",
+   "type": "Enchantment",
+   "mv": 5,
+   "delta": 0.035714285714291805,
+   "slot": "Ashnod's Altar",
+   "incl": 0.066386,
+   "price": "6.36",
+   "roles": [
+    "ramp"
+   ]
+  },
+  {
+   "name": "Essence Warden",
+   "type": "Creature — Elf Shaman",
+   "mv": 1,
+   "delta": 0.028571428571424917,
+   "slot": "Eternal Witness",
+   "incl": 0.510051,
+   "price": "7.77",
+   "roles": [
+    "utility"
+   ]
+  },
+  {
+   "name": "Valentin, Dean of the Vein // Lisette, Dean of the Root",
+   "type": "Legendary Creature — Vampire Warlock",
+   "mv": 1,
+   "delta": 0.028571428571424917,
+   "slot": "Pest Rescuer",
+   "incl": 0.337541,
+   "price": "0.99",
+   "roles": [
+    "utility"
+   ]
+  },
+  {
+   "name": "Tend the Pests",
+   "type": "Instant",
+   "mv": 2,
+   "delta": 0.028571428571424917,
+   "slot": "Viscera Seer",
+   "incl": 0.316503,
+   "price": "0.63",
+   "roles": [
+    "utility"
+   ]
+  },
+  {
+   "name": "Witherbloom Apprentice",
+   "type": "Creature — Human Druid",
+   "mv": 2,
+   "delta": 0.028571428571424917,
+   "slot": "Viscera Seer",
+   "incl": 0.164095,
+   "price": "0.39",
+   "roles": [
+    "win_condition"
+   ]
+  },
+  {
+   "name": "Bogwater Lumaret",
+   "type": "Creature — Spirit Frog",
+   "mv": 2,
+   "delta": 0.028571428571424917,
+   "slot": "Viscera Seer",
+   "incl": 0.140252,
+   "price": "0.29",
+   "roles": [
+    "utility"
+   ]
+  },
+  {
+   "name": "Infuse with Vitality",
+   "type": "Instant",
+   "mv": 2,
+   "delta": 0.028571428571424917,
+   "slot": "Viscera Seer",
+   "incl": 0.134175,
+   "price": "0.19",
+   "roles": [
+    "utility"
+   ]
+  },
+  {
+   "name": "Vampiric Tutor",
+   "type": "Instant",
+   "mv": 1,
+   "delta": 0.028571428571424917,
+   "slot": "Pest Rescuer",
+   "incl": 0.126227,
+   "price": "54.95",
+   "roles": [
+    "tutor"
+   ]
+  },
+  {
+   "name": "Tear Asunder",
+   "type": "Instant",
+   "mv": 2,
+   "delta": 0.028571428571424917,
+   "slot": "Assassin's Trophy",
+   "incl": 0.122487,
+   "price": "0.30",
+   "roles": [
+    "removal"
+   ]
+  },
+  {
+   "name": "Deathgreeter",
+   "type": "Creature — Human Shaman",
+   "mv": 1,
+   "delta": 0.028571428571424917,
+   "slot": "Pest Rescuer",
+   "incl": 0.119215,
+   "price": "2.99",
+   "roles": [
+    "utility"
+   ]
+  },
+  {
+   "name": "Virulent Emissary",
+   "type": "Creature — Elf Assassin",
+   "mv": 1,
+   "delta": 0.028571428571424917,
+   "slot": "Eternal Witness",
+   "incl": 0.097242,
+   "price": "0.58",
+   "roles": [
+    "utility"
+   ]
+  },
+  {
+   "name": "Dig Up",
+   "type": "Sorcery",
+   "mv": 1,
+   "delta": 0.028571428571424917,
+   "slot": "Eternal Witness",
+   "incl": 0.090697,
+   "price": "0.41",
+   "roles": [
+    "utility"
+   ]
+  },
+  {
+   "name": "Rushed Rebirth",
+   "type": "Instant",
+   "mv": 2,
+   "delta": 0.028571428571424917,
+   "slot": "Viscera Seer",
+   "incl": 0.081346,
+   "price": "0.40",
+   "roles": [
+    "tutor"
+   ]
+  },
+  {
+   "name": "Worldly Tutor",
+   "type": "Instant",
+   "mv": 1,
+   "delta": 0.028571428571424917,
+   "slot": "Eternal Witness",
+   "incl": 0.075269,
+   "price": "32.11",
+   "roles": [
+    "tutor"
+   ]
+  },
+  {
+   "name": "Ayara, First of Locthwain",
+   "type": "Legendary Creature — Elf Noble",
+   "mv": 3,
+   "delta": 0.025000000000005684,
+   "slot": "Liliana, Dreadhorde General",
+   "incl": 0.473118,
+   "price": "7.94",
+   "roles": [
+    "draw",
+    "win_condition"
+   ]
+  },
+  {
+   "name": "Essenceknit Scholar",
+   "type": "Creature — Dryad Warlock",
+   "mv": 3,
+   "delta": 0.025000000000005684,
+   "slot": "Liliana, Dreadhorde General",
+   "incl": 0.119682,
+   "price": "0.32",
+   "roles": [
+    "draw"
+   ]
+  },
+  {
+   "name": "Necropotence",
+   "type": "Enchantment",
+   "mv": 3,
+   "delta": 0.025000000000005684,
+   "slot": "Liliana, Dreadhorde General",
+   "incl": 0.073866,
+   "price": "37.96",
+   "roles": [
+    "draw"
+   ]
+  },
+  {
+   "name": "Exsanguinate",
+   "type": "Sorcery",
+   "mv": 2,
+   "delta": 0.02142857142857224,
+   "slot": "Viscera Seer",
+   "incl": 0.545582,
+   "price": "0.38",
+   "roles": [
+    "win_condition"
+   ]
+  },
+  {
+   "name": "Torment of Hailfire",
+   "type": "Sorcery",
+   "mv": 2,
+   "delta": 0.02142857142857224,
+   "slot": "Viscera Seer",
+   "incl": 0.346424,
+   "price": "35.60",
+   "roles": [
+    "win_condition"
+   ]
+  },
+  {
+   "name": "The Meathook Massacre",
+   "type": "Legendary Enchantment",
+   "mv": 2,
+   "delta": 0.02142857142857224,
+   "slot": "Viscera Seer",
+   "incl": 0.221599,
+   "price": "24.52",
+   "roles": [
+    "win_condition"
+   ]
+  },
+  {
+   "name": "Swiftfoot Boots",
+   "type": "Artifact — Equipment",
+   "mv": 2,
+   "delta": 0.02142857142857224,
+   "slot": "Tyvar's Stand",
+   "incl": 0.16129,
+   "price": null,
+   "roles": [
+    "protection"
+   ]
+  },
+  {
+   "name": "In Garruk's Wake",
+   "type": "Sorcery",
+   "mv": 9,
+   "delta": 0.017857142857138797,
+   "slot": "Pest Rescuer",
+   "incl": 0.091632,
+   "price": "3.15",
+   "roles": [
+    "board_wipe"
+   ]
+  },
+  {
+   "name": "Profane Transfusion",
+   "type": "Sorcery",
+   "mv": 9,
+   "delta": 0.017857142857138797,
+   "slot": "Pest Rescuer",
+   "incl": 0.088827,
+   "price": "1.47",
+   "roles": [
+    "utility"
+   ]
+  },
+  {
+   "name": "Nature's Claim",
+   "type": "Instant",
+   "mv": 1,
+   "delta": 0.01071428571428612,
+   "slot": "Assassin's Trophy",
+   "incl": 0.094904,
+   "price": "1.29",
+   "roles": [
+    "removal"
+   ]
+  },
+  {
+   "name": "Genesis Wave",
+   "type": "Sorcery",
+   "mv": 3,
+   "delta": 0.01071428571428612,
+   "slot": "Liliana, Dreadhorde General",
+   "incl": 0.078541,
+   "price": "0.37",
+   "roles": [
+    "draw"
+   ]
+  },
+  {
+   "name": "Skullclamp",
+   "type": "Artifact — Equipment",
+   "mv": 1,
+   "delta": 0.007142857142852677,
+   "slot": "Liliana, Dreadhorde General",
+   "incl": 0.604021,
+   "price": "5.41",
+   "roles": [
+    "draw"
+   ]
+  },
+  {
+   "name": "Zendikar Resurgent",
+   "type": "Enchantment",
+   "mv": 7,
+   "delta": 0.007142857142852677,
+   "slot": "Priest of Forgotten Gods",
+   "incl": 0.100514,
+   "price": "2.79",
+   "roles": [
+    "ramp",
+    "draw"
+   ]
+  },
+  {
+   "name": "Tragic Slip",
+   "type": "Instant",
+   "mv": 1,
+   "delta": 0.007142857142852677,
+   "slot": "Assassin's Trophy",
+   "incl": 0.070594,
+   "price": "0.28",
+   "roles": [
+    "removal"
+   ]
+  },
+  {
+   "name": "Vampiric Rites",
+   "type": "Enchantment",
+   "mv": 1,
+   "delta": 0.0035714285714334437,
+   "slot": "Liliana, Dreadhorde General",
+   "incl": 0.292193,
+   "price": "0.15",
+   "roles": [
+    "draw"
+   ]
+  },
+  {
+   "name": "Phyrexian Altar",
+   "type": "Artifact",
+   "mv": 3,
+   "delta": 0,
+   "slot": "Ashnod's Altar",
+   "incl": 0.190276,
+   "price": "55.88",
+   "roles": [
+    "ramp"
+   ]
+  },
+  {
+   "name": "Awakening Zone",
+   "type": "Enchantment",
+   "mv": 3,
+   "delta": 0,
+   "slot": "Ashnod's Altar",
+   "incl": 0.126695,
+   "price": "0.38",
+   "roles": [
+    "ramp"
+   ]
+  },
+  {
+   "name": "Tamiyo's Safekeeping",
+   "type": "Instant",
+   "mv": 1,
+   "delta": 0,
+   "slot": "Veil of Summer",
+   "incl": 0.086957,
+   "price": "5.38",
+   "roles": [
+    "protection"
+   ]
+  },
+  {
+   "name": "Abrupt Decay",
+   "type": "Instant",
+   "mv": 2,
+   "delta": -0.007142857142852677,
+   "slot": "Warg Tactics",
+   "incl": 0.137447,
+   "price": "2.52",
+   "roles": [
+    "removal",
+    "protection"
+   ]
+  },
+  {
+   "name": "Utopia Sprawl",
+   "type": "Enchantment — Aura",
+   "mv": 1,
+   "delta": -0.014285714285719564,
+   "slot": "Priest of Forgotten Gods",
+   "incl": 0.100047,
+   "price": "1.91",
+   "roles": [
+    "ramp"
+   ]
+  },
+  {
+   "name": "Exploration",
+   "type": "Enchantment",
+   "mv": 1,
+   "delta": -0.014285714285719564,
+   "slot": "Priest of Forgotten Gods",
+   "incl": 0.064049,
+   "price": "30.00",
+   "roles": [
+    "ramp"
+   ]
+  },
+  {
+   "name": "Reshape the Earth",
+   "type": "Sorcery",
+   "mv": 9,
+   "delta": -0.046428571428563714,
+   "slot": "Priest of Forgotten Gods",
+   "incl": 0.101449,
+   "price": "10.19",
+   "roles": [
+    "ramp"
+   ]
+  },
+  {
+   "name": "Deathsprout",
+   "type": "Instant",
+   "mv": 4,
+   "delta": -1.846428571428575,
+   "slot": "Ashnod's Altar",
+   "incl": 0.167835,
+   "price": "0.37",
+   "roles": [
+    "ramp",
+    "removal"
+   ]
+  },
+  {
+   "name": "Deathrite Shaman",
+   "type": "Creature — Elf Shaman",
+   "mv": 1,
+   "delta": -1.9892857142857139,
+   "slot": "Assassin's Trophy",
+   "incl": 0.12202,
+   "price": "8.69",
+   "roles": [
+    "ramp",
+    "removal",
+    "win_condition"
+   ]
+  }
+ ]
+}
