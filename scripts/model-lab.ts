@@ -35,11 +35,19 @@ interface LabRequest {
 
 class BadRequest extends Error {}
 
-const ownedCache = new Map<string, Owned>();
+// paper ownership is re-read when collection.txt or any deck file changes (registering a card mid-session must not need a restart)
+const PAPER_DIR = path.resolve('decks/paper');
+const ownedStamp = (source: string): string => {
+  if (source !== 'paper') return 'db';
+  const files = [path.join(PAPER_DIR, 'collection.txt'), ...fs.readdirSync(path.join(PAPER_DIR, 'decks')).map((f) => path.join(PAPER_DIR, 'decks', f))];
+  return files.map((f) => `${f}:${fs.statSync(f).mtimeMs}`).join('|');
+};
+const ownedCache = new Map<string, { stamp: string; o: Owned }>();
 function owned(source: string): Owned {
-  let o = ownedCache.get(source);
-  if (!o) { o = loadOwned(source); ownedCache.set(source, o); }
-  return o;
+  const stamp = ownedStamp(source);
+  let e = ownedCache.get(source);
+  if (!e || e.stamp !== stamp) { e = { stamp, o: loadOwned(source) }; ownedCache.set(source, e); }
+  return e.o;
 }
 
 const clamp = (v: unknown, d: number, lo: number, hi: number): number => {

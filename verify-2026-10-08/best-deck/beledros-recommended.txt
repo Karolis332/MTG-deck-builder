@@ -86,7 +86,7 @@ Deck
 1 Elvish Mystic
 1 Scute Swarm
 1 Midnight Reaper
-1 Blossoming Bogbeast
+1 Vilis, Broker of Blood
 1 Eccentric Pestfinder // Turn Stones
 1 Ophiomancer
 1 Paradise Druid

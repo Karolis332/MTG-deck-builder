@@ -847,6 +847,7 @@
 1 Martial Impetus
 1 Masked Vandal
 1 Massacre Girl, Known Killer
+1 Massacre Girl, Most Wanted
 1 Massacre Wurm
 1 Master Chef
 1 Master's Guidance
@@ -1596,6 +1597,7 @@
 1 Victimize
 1 Vigorbloom Annex
 1 Vigorbloom Charm
+1 Vilis, Broker of Blood
 1 Village Pillagers
 1 Village Rites
 1 Vindictive Triumph
