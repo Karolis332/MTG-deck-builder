@@ -1,0 +1,607 @@
+{
+ "cards": {
+  "Academy Manufactor": {
+   "from": "Cabbage (sleeved deck)",
+   "roles": [],
+   "candidates": 0,
+   "backups": [],
+   "backfill": "needs a backfill for the donor deck"
+  },
+  "Accursed Marauder": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Airbender Ascension": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Ajani Resolute": {
+   "from": "Tam (sleeved deck)",
+   "roles": [],
+   "candidates": 0,
+   "backups": [],
+   "backfill": "needs a backfill for the donor deck"
+  },
+  "Ancient Den": {
+   "from": "Inspirit (sleeved deck)",
+   "roles": [],
+   "candidates": 0,
+   "backups": [],
+   "backfill": "needs a backfill for the donor deck"
+  },
+  "Anguished Unmaking": {
+   "from": "Tam (sleeved deck)",
+   "roles": [],
+   "candidates": 0,
+   "backups": [],
+   "backfill": "needs a backfill for the donor deck"
+  },
+  "Animate Dead": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Ash Barrens": {
+   "from": "Cabbage (sleeved deck)",
+   "roles": [],
+   "candidates": 0,
+   "backups": [],
+   "backfill": "needs a backfill for the donor deck"
+  },
+  "Baron Bertram Graywater": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Basilisk Collar": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Bleachbone Verge": {
+   "from": "Tam (sleeved deck)",
+   "roles": [],
+   "candidates": 0,
+   "backups": [],
+   "backfill": "needs a backfill for the donor deck"
+  },
+  "Bloodstained Mire": {
+   "from": "Tazri (sleeved deck)",
+   "roles": [],
+   "candidates": 0,
+   "backups": [],
+   "backfill": "needs a backfill for the donor deck"
+  },
+  "Boggart Trawler // Boggart Bog": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Buried Alive": {
+   "from": "Imotekh (sleeved deck)",
+   "roles": [],
+   "candidates": 0,
+   "backups": [],
+   "backfill": "needs a backfill for the donor deck"
+  },
+  "Buried Ruin": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Burnished Hart": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Carrion Feeder": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Caves of Koilos": {
+   "from": "Tam (sleeved deck)",
+   "roles": [],
+   "candidates": 0,
+   "backups": [],
+   "backfill": "needs a backfill for the donor deck"
+  },
+  "Charcoal Diamond": {
+   "from": "Imotekh (sleeved deck)",
+   "roles": [],
+   "candidates": 0,
+   "backups": [],
+   "backfill": "needs a backfill for the donor deck"
+  },
+  "Cloudshift": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Commander's Sphere": {
+   "from": "Bumi (sleeved deck)",
+   "roles": [],
+   "candidates": 0,
+   "backups": [],
+   "backfill": "needs a backfill for the donor deck"
+  },
+  "Concealed Courtyard": {
+   "from": "Tazri (sleeved deck)",
+   "roles": [],
+   "candidates": 0,
+   "backups": [],
+   "backfill": "needs a backfill for the donor deck"
+  },
+  "Contagion Clasp": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Corrupted Conviction": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Deadly Tempest": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Decanter of Endless Water": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Desolate Mire": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Dreadhorde Invasion": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Eclipsed Steppe": {
+   "from": "Tazri (sleeved deck)",
+   "roles": [],
+   "candidates": 0,
+   "backups": [],
+   "backfill": "needs a backfill for the donor deck"
+  },
+  "Elegy Acolyte": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Elspeth, Sun's Champion": {
+   "from": "Tam (sleeved deck)",
+   "roles": [],
+   "candidates": 0,
+   "backups": [],
+   "backfill": "needs a backfill for the donor deck"
+  },
+  "Escape Tunnel": {
+   "from": "Cabbage (sleeved deck)",
+   "roles": [],
+   "candidates": 0,
+   "backups": [],
+   "backfill": "needs a backfill for the donor deck"
+  },
+  "Eviscerator's Insight": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Feed the Swarm": {
+   "from": "Imotekh (sleeved deck)",
+   "roles": [],
+   "candidates": 0,
+   "backups": [],
+   "backfill": "needs a backfill for the donor deck"
+  },
+  "Fetid Heath": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Final Showdown": {
+   "from": "Inspirit (sleeved deck)",
+   "roles": [],
+   "candidates": 0,
+   "backups": [],
+   "backfill": "needs a backfill for the donor deck"
+  },
+  "Flare of Fortitude": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Foundry Inspector": {
+   "from": "Imotekh (sleeved deck)",
+   "roles": [],
+   "candidates": 0,
+   "backups": [],
+   "backfill": "needs a backfill for the donor deck"
+  },
+  "Fracture": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Generous Gift": {
+   "from": "Inspirit (sleeved deck)",
+   "roles": [],
+   "candidates": 0,
+   "backups": [],
+   "backfill": "needs a backfill for the donor deck"
+  },
+  "Ghostly Prison": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Grand Abolisher": {
+   "from": "Tazri (sleeved deck)",
+   "roles": [],
+   "candidates": 0,
+   "backups": [],
+   "backfill": "needs a backfill for the donor deck"
+  },
+  "Inkshield": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Inventors' Fair": {
+   "from": "Inspirit (sleeved deck)",
+   "roles": [],
+   "candidates": 0,
+   "backups": [],
+   "backfill": "needs a backfill for the donor deck"
+  },
+  "Isolated Chapel": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Jadar, Ghoulcaller of Nephalia": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Karn's Bastion": {
+   "from": "Inspirit (sleeved deck)",
+   "roles": [],
+   "candidates": 0,
+   "backups": [],
+   "backfill": "needs a backfill for the donor deck"
+  },
+  "Kaya's Ghostform": {
+   "from": "Tam (sleeved deck)",
+   "roles": [],
+   "candidates": 0,
+   "backups": [],
+   "backfill": "needs a backfill for the donor deck"
+  },
+  "Mana Confluence": {
+   "from": "Tam (sleeved deck)",
+   "roles": [],
+   "candidates": 0,
+   "backups": [],
+   "backfill": "needs a backfill for the donor deck"
+  },
+  "Mortuary Mire": {
+   "from": "Imotekh (sleeved deck)",
+   "roles": [],
+   "candidates": 0,
+   "backups": [],
+   "backfill": "needs a backfill for the donor deck"
+  },
+  "Nadaar, Selfless Paladin": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Night's Whisper": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Noble's Purse": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Ornithopter of Paradise": {
+   "from": "Inspirit (sleeved deck)",
+   "roles": [],
+   "candidates": 0,
+   "backups": [],
+   "backfill": "needs a backfill for the donor deck"
+  },
+  "Panharmonicon": {
+   "from": "Inspirit (sleeved deck)",
+   "roles": [],
+   "candidates": 0,
+   "backups": [],
+   "backfill": "needs a backfill for the donor deck"
+  },
+  "Path of Ancestry": {
+   "from": "Inspirit (sleeved deck)",
+   "roles": [],
+   "candidates": 0,
+   "backups": [],
+   "backfill": "needs a backfill for the donor deck"
+  },
+  "Path to Exile": {
+   "from": "Tam (sleeved deck)",
+   "roles": [],
+   "candidates": 0,
+   "backups": [],
+   "backfill": "needs a backfill for the donor deck"
+  },
+  "Patrolling Peacemaker": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Plaguecrafter": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Plains": {
+   "from": "loose (basic)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Plumb the Forbidden": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Ravenous Chupacabra": {
+   "from": "Imotekh (sleeved deck)",
+   "roles": [],
+   "candidates": 0,
+   "backups": [],
+   "backfill": "needs a backfill for the donor deck"
+  },
+  "Reanimate": {
+   "from": "Imotekh (sleeved deck)",
+   "roles": [],
+   "candidates": 0,
+   "backups": [],
+   "backfill": "needs a backfill for the donor deck"
+  },
+  "Reliquary Tower": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Rogue's Passage": {
+   "from": "Bumi (sleeved deck)",
+   "roles": [],
+   "candidates": 0,
+   "backups": [],
+   "backfill": "needs a backfill for the donor deck"
+  },
+  "Ruthless Lawbringer": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Selfless Spirit": {
+   "from": "Tazri (sleeved deck)",
+   "roles": [],
+   "candidates": 0,
+   "backups": [],
+   "backfill": "needs a backfill for the donor deck"
+  },
+  "Shadowheart, Dark Justiciar": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Sign in Blood": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Solemn Simulacrum": {
+   "from": "Imotekh (sleeved deck)",
+   "roles": [],
+   "candidates": 0,
+   "backups": [],
+   "backfill": "needs a backfill for the donor deck"
+  },
+  "Spire of Industry": {
+   "from": "Inspirit (sleeved deck)",
+   "roles": [],
+   "candidates": 0,
+   "backups": [],
+   "backfill": "needs a backfill for the donor deck"
+  },
+  "Squad Commander": {
+   "from": "Tazri (sleeved deck)",
+   "roles": [],
+   "candidates": 0,
+   "backups": [],
+   "backfill": "needs a backfill for the donor deck"
+  },
+  "Sunlit Marsh": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Swamp": {
+   "from": "loose (basic)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Sword of the Animist": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Swords to Plowshares": {
+   "from": "Inspirit (sleeved deck)",
+   "roles": [],
+   "candidates": 0,
+   "backups": [],
+   "backfill": "needs a backfill for the donor deck"
+  },
+  "Syr Konrad, the Grim": {
+   "from": "Imotekh (sleeved deck)",
+   "roles": [],
+   "candidates": 0,
+   "backups": [],
+   "backfill": "needs a backfill for the donor deck"
+  },
+  "Take Up the Shield": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Talisman of Hierarchy": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Temple of Silence": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Temple of the False God": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Teyo, Lightshield Expert": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Thran Dynamo": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Threefold Thunderhulk": {
+   "from": "Inspirit (sleeved deck)",
+   "roles": [],
+   "candidates": 0,
+   "backups": [],
+   "backfill": "needs a backfill for the donor deck"
+  },
+  "Turbulent Moor": {
+   "from": "Tam (sleeved deck)",
+   "roles": [],
+   "candidates": 0,
+   "backups": [],
+   "backfill": "needs a backfill for the donor deck"
+  },
+  "Umbral Collar Zealot": {
+   "from": "Imotekh (sleeved deck)",
+   "roles": [],
+   "candidates": 0,
+   "backups": [],
+   "backfill": "needs a backfill for the donor deck"
+  },
+  "Vault of the Archangel": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Victimize": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Vraska, Betrayal's Sting": {
+   "from": "Tam (sleeved deck)",
+   "roles": [],
+   "candidates": 0,
+   "backups": [],
+   "backfill": "needs a backfill for the donor deck"
+  },
+  "Windswept Heath": {
+   "from": "Tazri (sleeved deck)",
+   "roles": [],
+   "candidates": 0,
+   "backups": [],
+   "backfill": "needs a backfill for the donor deck"
+  },
+  "Woe Strider": {
+   "from": "Imotekh (sleeved deck)",
+   "roles": [],
+   "candidates": 0,
+   "backups": [],
+   "backfill": "needs a backfill for the donor deck"
+  },
+  "Wooded Foothills": {
+   "from": "Tazri (sleeved deck)",
+   "roles": [],
+   "candidates": 0,
+   "backups": [],
+   "backfill": "needs a backfill for the donor deck"
+  },
+  "Zhentarim Bandit": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  }
+ }
+}

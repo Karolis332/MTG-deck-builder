@@ -53,6 +53,10 @@ const SPECS: DeckSpec[] = [
   },
   // the operator's paper Bumi deck (registered 2026-10-07; 3 landscapes are off-colour)
   // sleeved list vs the standalone fix: 3 off-colour landscapes replaced + optional upgrades from free cards only
+  { // second-strongest paper commander 2026-10-08: the model's Minthara list with raids (objective 89.9; free pool alone 80.1 = Tron lands + filler). Badges = which sleeved deck holds the card
+    slug: 'minthara-merciless-soul', now: 'verify-2026-10-08/best-deck/second-best/minthara-raids.txt', base: () => fs.readFileSync(path.join(ROOT, 'verify-2026-10-08/best-deck/second-best/minthara-raids.txt'), 'utf8'),
+    meta: 'verify-2026-10-08/best-deck/second-best/minthara-raids.meta.json',
+  },
   { slug: 'bumi-unleashed', base: read('decks/paper/decks/bumi-unleashed.txt'), now: 'verify-2026-10-07/bumi-standalone/final.txt' },
   // partners: Gilanra is the first line, Alena the second (paper-sync keeps one commander)
   {
