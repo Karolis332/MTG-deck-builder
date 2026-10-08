@@ -1,18 +1,24 @@
-"""Relabel 'loose collection' origins in beledros-backups.json with the physical box the card was registered from
-(precon lists recovered from git; first match wins in this order). Scores are untouched, so no re-run is needed.
+"""Physical origin of every card in beledros-backups.json (deck cards and their backups), with a confirmation flag.
+
+Confirmed  = scanned into ManaBox on 2026-09-08 (the register commit a564272), or sleeved in a registered deck
+             (the Omo box is the sleeved deck dismantled on 2026-10-07).
+UNCONFIRMED = registered from a decklist and never seen: the 54 Witherbloom Witchcraft "leftovers" of 2026-09-09
+             came from an Archidekt scrape of the C21 precon (verify-2026-09-09/precon-witherbloom.json), and four
+             of them have since proved missing (Witch's Clinic, Well of Lost Dreams, Tainted Wood, Ob Nixilis Reignited).
+Idempotent; scores untouched. Run after every beledros-backups.ts run, from the repo root:
   py verify-2026-10-08/best-deck/origins/relabel.py
 """
-import json, pathlib, re
+import glob
+import json
+import os
+import pathlib
+import re
+import sqlite3
+from collections import Counter
 
 HERE = pathlib.Path(__file__).resolve().parent
+ROOT = HERE.parents[2]
 JSON = HERE.parent / "beledros-backups.json"
-ORIGINS = [  # label (first word = the tile badge), list file
-    ("Omo precon (Tricky Terrain box, dismantled 2026-10-07)", "omo-precon.txt"),
-    ("Witherbloom Witchcraft precon leftovers (registered 2026-09-09)", "witherbloom-precon-leftovers.txt"),
-    ("Quandrix precon leftovers (Tam build, 2026-10-02)", "quandrix-precon.txt"),
-    ("Silverquill precon leftovers (Tam build, 2026-10-02)", "silverquill-precon.txt"),
-    ("OTJ box (Outlaws of Thunder Junction, 2026-09-08)", "otj-box.txt"),
-]
 
 
 def names(path: pathlib.Path) -> set[str]:
@@ -25,10 +31,19 @@ def names(path: pathlib.Path) -> set[str]:
     return out
 
 
-SETS = [(label, names(HERE / f)) for label, f in ORIGINS]
-
-
-import os, sqlite3
+WITHERBLOOM = names(ROOT / "verify-2026-09-09/precon-witherbloom-list.txt")  # the Archidekt C21 list, 80 names
+LIST_ONLY = names(HERE / "witherbloom-precon-leftovers.txt")  # the 54 of them registered on 2026-09-09 without a scan
+SLEEVED = set().union(*(names(pathlib.Path(f)) for f in glob.glob(str(ROOT / "decks/paper/decks/*.txt"))))
+WB_SCAN = "Witherbloom Witchcraft precon (C21; ManaBox scan 2026-09-08, confirmed)"
+WB_LIST = "Witherbloom Witchcraft precon — UNCONFIRMED (registered from the Archidekt C21 list 2026-09-09, never scanned; 4 of those 54 have proved missing — check the box)"
+BOXES: list[tuple[str, set[str]]] = [  # first match wins; the badge is the first word
+    ("Omo precon (Tricky Terrain box; sleeved deck dismantled 2026-10-07, confirmed)", names(HERE / "omo-precon.txt")),
+    ("Witherbloom", WITHERBLOOM),
+    ("Quandrix Unlimited precon (SOC; in hand since 2026-10-02, registered from its list)", names(HERE / "quandrix-precon.txt")),
+    ("Silverquill Influence precon (SOC; in hand since 2026-10-02, registered from its list)", names(HERE / "silverquill-precon.txt")),
+    ("OTJ box (Outlaws of Thunder Junction, typed in 2026-09-08)", names(HERE / "otj-box.txt")),
+]
+RECOMPUTE = re.compile(r"^(loose collection|Omo|Witherbloom|Quandrix|Silverquill|OTJ)")
 
 DB = os.path.join(os.environ["APPDATA"], "the-black-grimoire", "data", "mtg-deck-builder.db")
 con = sqlite3.connect(f"file:{DB}?mode=ro", uri=True)
@@ -40,16 +55,16 @@ def printing(name: str) -> tuple[str, str]:
 
 
 def origin(name: str, current: str) -> str:
-    if current != "loose collection":
+    if not RECOMPUTE.match(current):  # Meren (dismantled) / donor decks: the sleeved deck is the physical source
         return current
-    for label, s in SETS:
-        if name in s or name.split(" // ")[0] in s:
-            return label
+    front = name.split(" // ")[0]
+    for label, s in BOXES:
+        if name in s or front in s:
+            if label != "Witherbloom":
+                return label
+            return WB_LIST if (name in LIST_ONLY or front in LIST_ONLY) and name not in SLEEVED else WB_SCAN
     code, set_name = printing(name)
-    # C21 black/green cards are Witherbloom Witchcraft cards registered before the 09-09 leftover pass (Beledros's own precon)
-    if code == "C21":
-        return "Witherbloom Witchcraft precon (C21 card registered before the leftover pass)"
-    return f"loose collection (printed in {code} {set_name})"
+    return f"loose collection (ManaBox scan or typed batch; printed in {code} {set_name})"
 
 
 d = json.loads(JSON.read_text(encoding="utf-8"))
@@ -60,7 +75,9 @@ for name, v in d["cards"].items():
     v["from"] = new
     for b in v["backups"]:
         b["from"] = origin(b["name"], b["from"])
-d["origins"] = [label for label, _ in ORIGINS]
+d["origins"] = [label if label != "Witherbloom" else WB_SCAN for label, _ in BOXES] + [WB_LIST]
 JSON.write_text(json.dumps(d, indent=1), encoding="utf-8")
-from collections import Counter
-print(f"relabelled {changed} deck cards;", dict(Counter(v["from"].split(" (")[0] for v in d["cards"].values())))
+summary = Counter(v["from"].split(" (")[0] for v in d["cards"].values())
+unconfirmed = sorted(n for n, v in d["cards"].items() if "UNCONFIRMED" in v["from"])
+print(f"relabelled {changed} deck cards; {dict(summary)}")
+print(f"UNCONFIRMED in the 99: {unconfirmed}")

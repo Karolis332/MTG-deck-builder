@@ -29,7 +29,7 @@
     {
      "name": "Reliquary Tower",
      "delta": -0.07500000000000284,
-     "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
+     "from": "Quandrix Unlimited precon (SOC; in hand since 2026-10-02, registered from its list)",
      "type": "Land",
      "incl": 0.292193,
      "rank": 10
@@ -62,7 +62,7 @@
     {
      "name": "Reliquary Tower",
      "delta": -0.09999999999999432,
-     "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
+     "from": "Quandrix Unlimited precon (SOC; in hand since 2026-10-02, registered from its list)",
      "type": "Land",
      "incl": 0.292193,
      "rank": 10
@@ -95,7 +95,7 @@
     {
      "name": "Reliquary Tower",
      "delta": -0.0535714285714306,
-     "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
+     "from": "Quandrix Unlimited precon (SOC; in hand since 2026-10-02, registered from its list)",
      "type": "Land",
      "incl": 0.292193,
      "rank": 10
@@ -128,7 +128,7 @@
     {
      "name": "Reliquary Tower",
      "delta": -0.028571428571424917,
-     "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
+     "from": "Quandrix Unlimited precon (SOC; in hand since 2026-10-02, registered from its list)",
      "type": "Land",
      "incl": 0.292193,
      "rank": 10
@@ -161,7 +161,7 @@
     {
      "name": "Reliquary Tower",
      "delta": -0.035714285714291805,
-     "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
+     "from": "Quandrix Unlimited precon (SOC; in hand since 2026-10-02, registered from its list)",
      "type": "Land",
      "incl": 0.292193,
      "rank": 10
@@ -169,7 +169,7 @@
    ]
   },
   "Golgari Rot Farm": {
-   "from": "Witherbloom Witchcraft precon leftovers (registered 2026-09-09)",
+   "from": "Witherbloom Witchcraft precon \u2014 UNCONFIRMED (registered from the Archidekt C21 list 2026-09-09, never scanned; 4 of those 54 have proved missing \u2014 check the box)",
    "roles": [
     "land"
    ],
@@ -194,7 +194,7 @@
     {
      "name": "Reliquary Tower",
      "delta": 0.04285714285714448,
-     "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
+     "from": "Quandrix Unlimited precon (SOC; in hand since 2026-10-02, registered from its list)",
      "type": "Land",
      "incl": 0.292193,
      "rank": 10
@@ -227,7 +227,7 @@
     {
      "name": "Reliquary Tower",
      "delta": -0.046428571428577925,
-     "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
+     "from": "Quandrix Unlimited precon (SOC; in hand since 2026-10-02, registered from its list)",
      "type": "Land",
      "incl": 0.292193,
      "rank": 10
@@ -260,7 +260,7 @@
     {
      "name": "Reliquary Tower",
      "delta": 0,
-     "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
+     "from": "Quandrix Unlimited precon (SOC; in hand since 2026-10-02, registered from its list)",
      "type": "Land",
      "incl": 0.292193,
      "rank": 10
@@ -293,7 +293,7 @@
     {
      "name": "Reliquary Tower",
      "delta": 0.014285714285719564,
-     "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
+     "from": "Quandrix Unlimited precon (SOC; in hand since 2026-10-02, registered from its list)",
      "type": "Land",
      "incl": 0.292193,
      "rank": 10
@@ -326,7 +326,7 @@
     {
      "name": "Reliquary Tower",
      "delta": -0.0892857142857082,
-     "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
+     "from": "Quandrix Unlimited precon (SOC; in hand since 2026-10-02, registered from its list)",
      "type": "Land",
      "incl": 0.292193,
      "rank": 10
@@ -344,7 +344,7 @@
     {
      "name": "Blossoming Bogbeast",
      "delta": -8.872857142857157,
-     "from": "Witherbloom Witchcraft precon (C21 card registered before the leftover pass)",
+     "from": "Witherbloom Witchcraft precon (C21; ManaBox scan 2026-09-08, confirmed)",
      "type": "Creature \u2014 Beast",
      "incl": 0.17064,
      "rank": 4019
@@ -352,7 +352,7 @@
     {
      "name": "Verdant Sun's Avatar",
      "delta": -8.91928571428572,
-     "from": "Witherbloom Witchcraft precon leftovers (registered 2026-09-09)",
+     "from": "Witherbloom Witchcraft precon \u2014 UNCONFIRMED (registered from the Archidekt C21 list 2026-09-09, never scanned; 4 of those 54 have proved missing \u2014 check the box)",
      "type": "Creature \u2014 Dinosaur Avatar",
      "incl": 0.123422,
      "rank": 2179
@@ -360,7 +360,7 @@
     {
      "name": "Avenger of Zendikar",
      "delta": -8.91928571428572,
-     "from": "Omo precon (Tricky Terrain box, dismantled 2026-10-07)",
+     "from": "Omo precon (Tricky Terrain box; sleeved deck dismantled 2026-10-07, confirmed)",
      "type": "Creature \u2014 Elemental",
      "incl": 0.114072,
      "rank": 295
@@ -393,7 +393,7 @@
     {
      "name": "Reliquary Tower",
      "delta": -0.03928571428571104,
-     "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
+     "from": "Quandrix Unlimited precon (SOC; in hand since 2026-10-02, registered from its list)",
      "type": "Land",
      "incl": 0.292193,
      "rank": 10
@@ -401,7 +401,7 @@
    ]
   },
   "Yavimaya, Cradle of Growth": {
-   "from": "Omo precon (Tricky Terrain box, dismantled 2026-10-07)",
+   "from": "Omo precon (Tricky Terrain box; sleeved deck dismantled 2026-10-07, confirmed)",
    "roles": [
     "land"
    ],
@@ -426,7 +426,7 @@
     {
      "name": "Reliquary Tower",
      "delta": -0.04999999999999716,
-     "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
+     "from": "Quandrix Unlimited precon (SOC; in hand since 2026-10-02, registered from its list)",
      "type": "Land",
      "incl": 0.292193,
      "rank": 10
@@ -434,7 +434,7 @@
    ]
   },
   "Jungle Hollow": {
-   "from": "loose collection (printed in TDM Tarkir: Dragonstorm)",
+   "from": "Witherbloom Witchcraft precon (C21; ManaBox scan 2026-09-08, confirmed)",
    "roles": [
     "land"
    ],
@@ -459,7 +459,7 @@
     {
      "name": "Reliquary Tower",
      "delta": -0.07500000000000284,
-     "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
+     "from": "Quandrix Unlimited precon (SOC; in hand since 2026-10-02, registered from its list)",
      "type": "Land",
      "incl": 0.292193,
      "rank": 10
@@ -492,7 +492,7 @@
     {
      "name": "Reliquary Tower",
      "delta": -0.007142857142852677,
-     "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
+     "from": "Quandrix Unlimited precon (SOC; in hand since 2026-10-02, registered from its list)",
      "type": "Land",
      "incl": 0.292193,
      "rank": 10
@@ -525,7 +525,7 @@
     {
      "name": "Reliquary Tower",
      "delta": -0.14999999999999147,
-     "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
+     "from": "Quandrix Unlimited precon (SOC; in hand since 2026-10-02, registered from its list)",
      "type": "Land",
      "incl": 0.292193,
      "rank": 10
@@ -558,7 +558,7 @@
     {
      "name": "Reliquary Tower",
      "delta": 0,
-     "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
+     "from": "Quandrix Unlimited precon (SOC; in hand since 2026-10-02, registered from its list)",
      "type": "Land",
      "incl": 0.292193,
      "rank": 10
@@ -591,7 +591,7 @@
     {
      "name": "Reliquary Tower",
      "delta": 0,
-     "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
+     "from": "Quandrix Unlimited precon (SOC; in hand since 2026-10-02, registered from its list)",
      "type": "Land",
      "incl": 0.292193,
      "rank": 10
@@ -599,7 +599,7 @@
    ]
   },
   "Temple of the False God": {
-   "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
+   "from": "Witherbloom Witchcraft precon (C21; ManaBox scan 2026-09-08, confirmed)",
    "roles": [
     "land"
    ],
@@ -624,7 +624,7 @@
     {
      "name": "Reliquary Tower",
      "delta": 0,
-     "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
+     "from": "Quandrix Unlimited precon (SOC; in hand since 2026-10-02, registered from its list)",
      "type": "Land",
      "incl": 0.292193,
      "rank": 10
@@ -632,7 +632,7 @@
    ]
   },
   "Haunted Mire": {
-   "from": "loose collection (printed in TDC Tarkir: Dragonstorm Commander)",
+   "from": "loose collection (ManaBox scan or typed batch; printed in TDC Tarkir: Dragonstorm Commander)",
    "roles": [
     "land"
    ],
@@ -657,7 +657,7 @@
     {
      "name": "Reliquary Tower",
      "delta": -0.14642857142857224,
-     "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
+     "from": "Quandrix Unlimited precon (SOC; in hand since 2026-10-02, registered from its list)",
      "type": "Land",
      "incl": 0.292193,
      "rank": 10
@@ -665,7 +665,7 @@
    ]
   },
   "Evolving Wilds": {
-   "from": "loose collection (printed in ECL Lorwyn Eclipsed)",
+   "from": "loose collection (ManaBox scan or typed batch; printed in ECL Lorwyn Eclipsed)",
    "roles": [
     "land"
    ],
@@ -690,7 +690,7 @@
     {
      "name": "Reliquary Tower",
      "delta": 0,
-     "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
+     "from": "Quandrix Unlimited precon (SOC; in hand since 2026-10-02, registered from its list)",
      "type": "Land",
      "incl": 0.292193,
      "rank": 10
@@ -723,7 +723,7 @@
     {
      "name": "Reliquary Tower",
      "delta": -0.014285714285719564,
-     "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
+     "from": "Quandrix Unlimited precon (SOC; in hand since 2026-10-02, registered from its list)",
      "type": "Land",
      "incl": 0.292193,
      "rank": 10
@@ -731,7 +731,7 @@
    ]
   },
   "Terramorphic Expanse": {
-   "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
+   "from": "Quandrix Unlimited precon (SOC; in hand since 2026-10-02, registered from its list)",
    "roles": [
     "land"
    ],
@@ -756,7 +756,7 @@
     {
      "name": "Reliquary Tower",
      "delta": 0,
-     "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
+     "from": "Quandrix Unlimited precon (SOC; in hand since 2026-10-02, registered from its list)",
      "type": "Land",
      "incl": 0.292193,
      "rank": 10
@@ -764,7 +764,7 @@
    ]
   },
   "Witherbloom Campus": {
-   "from": "loose collection (printed in STX Strixhaven: School of Mages)",
+   "from": "Witherbloom Witchcraft precon (C21; ManaBox scan 2026-09-08, confirmed)",
    "roles": [
     "land"
    ],
@@ -789,7 +789,7 @@
     {
      "name": "Reliquary Tower",
      "delta": 0.014285714285719564,
-     "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
+     "from": "Quandrix Unlimited precon (SOC; in hand since 2026-10-02, registered from its list)",
      "type": "Land",
      "incl": 0.292193,
      "rank": 10
@@ -797,7 +797,7 @@
    ]
   },
   "Blighted Woodland": {
-   "from": "Witherbloom Witchcraft precon leftovers (registered 2026-09-09)",
+   "from": "Witherbloom Witchcraft precon \u2014 UNCONFIRMED (registered from the Archidekt C21 list 2026-09-09, never scanned; 4 of those 54 have proved missing \u2014 check the box)",
    "roles": [
     "land"
    ],
@@ -822,7 +822,7 @@
     {
      "name": "Reliquary Tower",
      "delta": 0,
-     "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
+     "from": "Quandrix Unlimited precon (SOC; in hand since 2026-10-02, registered from its list)",
      "type": "Land",
      "incl": 0.292193,
      "rank": 10
@@ -830,7 +830,7 @@
    ]
   },
   "Vesuva": {
-   "from": "Omo precon (Tricky Terrain box, dismantled 2026-10-07)",
+   "from": "Omo precon (Tricky Terrain box; sleeved deck dismantled 2026-10-07, confirmed)",
    "roles": [
     "land"
    ],
@@ -855,7 +855,7 @@
     {
      "name": "Reliquary Tower",
      "delta": 0,
-     "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
+     "from": "Quandrix Unlimited precon (SOC; in hand since 2026-10-02, registered from its list)",
      "type": "Land",
      "incl": 0.292193,
      "rank": 10
@@ -888,7 +888,7 @@
     {
      "name": "Reliquary Tower",
      "delta": -0.1785714285714306,
-     "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
+     "from": "Quandrix Unlimited precon (SOC; in hand since 2026-10-02, registered from its list)",
      "type": "Land",
      "incl": 0.292193,
      "rank": 10
@@ -896,7 +896,7 @@
    ]
   },
   "Thespian's Stage": {
-   "from": "Omo precon (Tricky Terrain box, dismantled 2026-10-07)",
+   "from": "Omo precon (Tricky Terrain box; sleeved deck dismantled 2026-10-07, confirmed)",
    "roles": [
     "land"
    ],
@@ -921,7 +921,7 @@
     {
      "name": "Reliquary Tower",
      "delta": 0,
-     "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
+     "from": "Quandrix Unlimited precon (SOC; in hand since 2026-10-02, registered from its list)",
      "type": "Land",
      "incl": 0.292193,
      "rank": 10
@@ -938,7 +938,7 @@
     {
      "name": "Rampant Growth",
      "delta": -0.07500000000000284,
-     "from": "Witherbloom Witchcraft precon leftovers (registered 2026-09-09)",
+     "from": "Witherbloom Witchcraft precon \u2014 UNCONFIRMED (registered from the Archidekt C21 list 2026-09-09, never scanned; 4 of those 54 have proved missing \u2014 check the box)",
      "type": "Sorcery",
      "incl": 0.529219,
      "rank": 27
@@ -954,7 +954,7 @@
     {
      "name": "Skyshroud Claim",
      "delta": -0.1071428571428612,
-     "from": "loose collection (printed in EOC Edge of Eternities Commander)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in EOC Edge of Eternities Commander)",
      "type": "Sorcery",
      "incl": 0.265545,
      "rank": 302
@@ -962,7 +962,7 @@
    ]
   },
   "Cultivate": {
-   "from": "loose collection (printed in ECC Lorwyn Eclipsed Commander)",
+   "from": "Witherbloom Witchcraft precon (C21; ManaBox scan 2026-09-08, confirmed)",
    "roles": [
     "ramp"
    ],
@@ -971,7 +971,7 @@
     {
      "name": "Rampant Growth",
      "delta": -0.035714285714291805,
-     "from": "Witherbloom Witchcraft precon leftovers (registered 2026-09-09)",
+     "from": "Witherbloom Witchcraft precon \u2014 UNCONFIRMED (registered from the Archidekt C21 list 2026-09-09, never scanned; 4 of those 54 have proved missing \u2014 check the box)",
      "type": "Sorcery",
      "incl": 0.529219,
      "rank": 27
@@ -987,7 +987,7 @@
     {
      "name": "Skyshroud Claim",
      "delta": 0.017857142857138797,
-     "from": "loose collection (printed in EOC Edge of Eternities Commander)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in EOC Edge of Eternities Commander)",
      "type": "Sorcery",
      "incl": 0.265545,
      "rank": 302
@@ -1005,7 +1005,7 @@
     {
      "name": "Deadly Brew",
      "delta": 0.0035714285714334437,
-     "from": "loose collection (printed in FDN Foundations)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in FDN Foundations)",
      "type": "Sorcery",
      "incl": 0.204769,
      "rank": 4763
@@ -1013,7 +1013,7 @@
     {
      "name": "Immoral Bargain",
      "delta": 0.02142857142857224,
-     "from": "loose collection (printed in SOC Secrets of Strixhaven Commander)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in SOC Secrets of Strixhaven Commander)",
      "type": "Sorcery",
      "incl": 0.13698,
      "rank": 6642
@@ -1021,7 +1021,7 @@
     {
      "name": "Witherbloom Command",
      "delta": 0.0035714285714334437,
-     "from": "loose collection (printed in STX Strixhaven: School of Mages)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in STX Strixhaven: School of Mages)",
      "type": "Sorcery",
      "incl": 0.098177,
      "rank": 8549
@@ -1046,7 +1046,7 @@
     {
      "name": "Corrupted Conviction",
      "delta": -0.06428571428571672,
-     "from": "OTJ box (Outlaws of Thunder Junction, 2026-09-08)",
+     "from": "OTJ box (Outlaws of Thunder Junction, typed in 2026-09-08)",
      "type": "Instant",
      "incl": 0.120617,
      "rank": 599
@@ -1054,7 +1054,7 @@
     {
      "name": "Night's Whisper",
      "delta": -0.0535714285714306,
-     "from": "loose collection (printed in ECC Lorwyn Eclipsed Commander)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in ECC Lorwyn Eclipsed Commander)",
      "type": "Sorcery",
      "incl": 0.113604,
      "rank": 182
@@ -1062,7 +1062,7 @@
    ]
   },
   "Dina, Soul Steeper": {
-   "from": "loose collection (printed in STX Strixhaven: School of Mages)",
+   "from": "Witherbloom Witchcraft precon (C21; ManaBox scan 2026-09-08, confirmed)",
    "roles": [
     "win_condition"
    ],
@@ -1071,7 +1071,7 @@
     {
      "name": "Blossoming Bogbeast",
      "delta": 0.04285714285714448,
-     "from": "Witherbloom Witchcraft precon (C21 card registered before the leftover pass)",
+     "from": "Witherbloom Witchcraft precon (C21; ManaBox scan 2026-09-08, confirmed)",
      "type": "Creature \u2014 Beast",
      "incl": 0.17064,
      "rank": 4019
@@ -1079,7 +1079,7 @@
     {
      "name": "Verdant Sun's Avatar",
      "delta": 0.0035714285714334437,
-     "from": "Witherbloom Witchcraft precon leftovers (registered 2026-09-09)",
+     "from": "Witherbloom Witchcraft precon \u2014 UNCONFIRMED (registered from the Archidekt C21 list 2026-09-09, never scanned; 4 of those 54 have proved missing \u2014 check the box)",
      "type": "Creature \u2014 Dinosaur Avatar",
      "incl": 0.123422,
      "rank": 2179
@@ -1087,7 +1087,7 @@
     {
      "name": "Avenger of Zendikar",
      "delta": 0.0035714285714334437,
-     "from": "Omo precon (Tricky Terrain box, dismantled 2026-10-07)",
+     "from": "Omo precon (Tricky Terrain box; sleeved deck dismantled 2026-10-07, confirmed)",
      "type": "Creature \u2014 Elemental",
      "incl": 0.114072,
      "rank": 295
@@ -1104,7 +1104,7 @@
     {
      "name": "Blossoming Bogbeast",
      "delta": -0.007142857142852677,
-     "from": "Witherbloom Witchcraft precon (C21 card registered before the leftover pass)",
+     "from": "Witherbloom Witchcraft precon (C21; ManaBox scan 2026-09-08, confirmed)",
      "type": "Creature \u2014 Beast",
      "incl": 0.17064,
      "rank": 4019
@@ -1112,7 +1112,7 @@
     {
      "name": "Verdant Sun's Avatar",
      "delta": -0.03214285714285836,
-     "from": "Witherbloom Witchcraft precon leftovers (registered 2026-09-09)",
+     "from": "Witherbloom Witchcraft precon \u2014 UNCONFIRMED (registered from the Archidekt C21 list 2026-09-09, never scanned; 4 of those 54 have proved missing \u2014 check the box)",
      "type": "Creature \u2014 Dinosaur Avatar",
      "incl": 0.123422,
      "rank": 2179
@@ -1120,7 +1120,7 @@
     {
      "name": "Avenger of Zendikar",
      "delta": -0.03214285714285836,
-     "from": "Omo precon (Tricky Terrain box, dismantled 2026-10-07)",
+     "from": "Omo precon (Tricky Terrain box; sleeved deck dismantled 2026-10-07, confirmed)",
      "type": "Creature \u2014 Elemental",
      "incl": 0.114072,
      "rank": 295
@@ -1137,7 +1137,7 @@
     {
      "name": "Rampant Growth",
      "delta": -0.02142857142857224,
-     "from": "Witherbloom Witchcraft precon leftovers (registered 2026-09-09)",
+     "from": "Witherbloom Witchcraft precon \u2014 UNCONFIRMED (registered from the Archidekt C21 list 2026-09-09, never scanned; 4 of those 54 have proved missing \u2014 check the box)",
      "type": "Sorcery",
      "incl": 0.529219,
      "rank": 27
@@ -1153,7 +1153,7 @@
     {
      "name": "Skyshroud Claim",
      "delta": -0.057142857142864045,
-     "from": "loose collection (printed in EOC Edge of Eternities Commander)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in EOC Edge of Eternities Commander)",
      "type": "Sorcery",
      "incl": 0.265545,
      "rank": 302
@@ -1170,7 +1170,7 @@
     {
      "name": "Blech, Loafing Pest",
      "delta": -0.003571428571419233,
-     "from": "loose collection (printed in SOS Secrets of Strixhaven)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in SOS Secrets of Strixhaven)",
      "type": "Legendary Creature \u2014 Pest",
      "incl": 0.16503,
      "rank": 7292
@@ -1186,7 +1186,7 @@
     {
      "name": "Moseo, Vein's New Dean",
      "delta": -0.003571428571419233,
-     "from": "loose collection (printed in SOS Secrets of Strixhaven)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in SOS Secrets of Strixhaven)",
      "type": "Legendary Creature \u2014 Bird Skeleton Warlock",
      "incl": 0.142122,
      "rank": 4268
@@ -1204,7 +1204,7 @@
     {
      "name": "Silkguard",
      "delta": 0,
-     "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
+     "from": "Quandrix Unlimited precon (SOC; in hand since 2026-10-02, registered from its list)",
      "type": "Instant",
      "incl": 0,
      "rank": 2346
@@ -1212,7 +1212,7 @@
     {
      "name": "Helix Pinnacle",
      "delta": 0,
-     "from": "loose collection (printed in EVE Eventide)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in EVE Eventide)",
      "type": "Enchantment",
      "incl": 0,
      "rank": 4480
@@ -1220,7 +1220,7 @@
    ]
   },
   "Deadly Tempest": {
-   "from": "Witherbloom Witchcraft precon leftovers (registered 2026-09-09)",
+   "from": "Witherbloom Witchcraft precon \u2014 UNCONFIRMED (registered from the Archidekt C21 list 2026-09-09, never scanned; 4 of those 54 have proved missing \u2014 check the box)",
    "roles": [
     "board_wipe"
    ],
@@ -1237,7 +1237,7 @@
     {
      "name": "Pestilence Demon",
      "delta": -0.0035714285714334437,
-     "from": "loose collection (printed in DDR Duel Decks: Nissa vs. Ob Nixilis)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in DDR Duel Decks: Nissa vs. Ob Nixilis)",
      "type": "Creature \u2014 Demon",
      "incl": 0,
      "rank": 10273
@@ -1245,7 +1245,7 @@
     {
      "name": "Reiver Demon",
      "delta": -0.0035714285714334437,
-     "from": "loose collection (printed in CMA Commander Anthology)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in CMA Commander Anthology)",
      "type": "Creature \u2014 Demon",
      "incl": 0,
      "rank": 10821
@@ -1253,7 +1253,7 @@
    ]
   },
   "Plumb the Forbidden": {
-   "from": "loose collection (printed in STX Strixhaven: School of Mages)",
+   "from": "loose collection (ManaBox scan or typed batch; printed in STX Strixhaven: School of Mages)",
    "roles": [
     "draw"
    ],
@@ -1270,7 +1270,7 @@
     {
      "name": "Corrupted Conviction",
      "delta": -0.03214285714285836,
-     "from": "OTJ box (Outlaws of Thunder Junction, 2026-09-08)",
+     "from": "OTJ box (Outlaws of Thunder Junction, typed in 2026-09-08)",
      "type": "Instant",
      "incl": 0.120617,
      "rank": 599
@@ -1278,7 +1278,7 @@
     {
      "name": "Night's Whisper",
      "delta": 0,
-     "from": "loose collection (printed in ECC Lorwyn Eclipsed Commander)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in ECC Lorwyn Eclipsed Commander)",
      "type": "Sorcery",
      "incl": 0.113604,
      "rank": 182
@@ -1286,7 +1286,7 @@
    ]
   },
   "Warg Tactics": {
-   "from": "loose collection (printed in HOB The Hobbit)",
+   "from": "loose collection (ManaBox scan or typed batch; printed in HOB The Hobbit)",
    "roles": [
     "removal",
     "protection"
@@ -1296,7 +1296,7 @@
     {
      "name": "Silkguard",
      "delta": -0.025000000000005684,
-     "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
+     "from": "Quandrix Unlimited precon (SOC; in hand since 2026-10-02, registered from its list)",
      "type": "Instant",
      "incl": 0,
      "rank": 2346
@@ -1304,7 +1304,7 @@
     {
      "name": "Helix Pinnacle",
      "delta": -0.025000000000005684,
-     "from": "loose collection (printed in EVE Eventide)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in EVE Eventide)",
      "type": "Enchantment",
      "incl": 0,
      "rank": 4480
@@ -1321,7 +1321,7 @@
     {
      "name": "Deadly Brew",
      "delta": 0,
-     "from": "loose collection (printed in FDN Foundations)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in FDN Foundations)",
      "type": "Sorcery",
      "incl": 0.204769,
      "rank": 4763
@@ -1329,7 +1329,7 @@
     {
      "name": "Immoral Bargain",
      "delta": 0.01071428571428612,
-     "from": "loose collection (printed in SOC Secrets of Strixhaven Commander)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in SOC Secrets of Strixhaven Commander)",
      "type": "Sorcery",
      "incl": 0.13698,
      "rank": 6642
@@ -1337,7 +1337,7 @@
     {
      "name": "Witherbloom Command",
      "delta": 0,
-     "from": "loose collection (printed in STX Strixhaven: School of Mages)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in STX Strixhaven: School of Mages)",
      "type": "Sorcery",
      "incl": 0.098177,
      "rank": 8549
@@ -1345,7 +1345,7 @@
    ]
   },
   "Mortality Spear": {
-   "from": "loose collection (printed in STX Strixhaven: School of Mages)",
+   "from": "Witherbloom Witchcraft precon (C21; ManaBox scan 2026-09-08, confirmed)",
    "roles": [
     "removal"
    ],
@@ -1354,7 +1354,7 @@
     {
      "name": "Deadly Brew",
      "delta": -0.025000000000005684,
-     "from": "loose collection (printed in FDN Foundations)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in FDN Foundations)",
      "type": "Sorcery",
      "incl": 0.204769,
      "rank": 4763
@@ -1362,7 +1362,7 @@
     {
      "name": "Immoral Bargain",
      "delta": -0.0035714285714334437,
-     "from": "loose collection (printed in SOC Secrets of Strixhaven Commander)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in SOC Secrets of Strixhaven Commander)",
      "type": "Sorcery",
      "incl": 0.13698,
      "rank": 6642
@@ -1370,7 +1370,7 @@
     {
      "name": "Witherbloom Command",
      "delta": -0.025000000000005684,
-     "from": "loose collection (printed in STX Strixhaven: School of Mages)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in STX Strixhaven: School of Mages)",
      "type": "Sorcery",
      "incl": 0.098177,
      "rank": 8549
@@ -1388,7 +1388,7 @@
     {
      "name": "Rampant Growth",
      "delta": 0.017857142857138797,
-     "from": "Witherbloom Witchcraft precon leftovers (registered 2026-09-09)",
+     "from": "Witherbloom Witchcraft precon \u2014 UNCONFIRMED (registered from the Archidekt C21 list 2026-09-09, never scanned; 4 of those 54 have proved missing \u2014 check the box)",
      "type": "Sorcery",
      "incl": 0.529219,
      "rank": 27
@@ -1404,7 +1404,7 @@
     {
      "name": "Skyshroud Claim",
      "delta": 0.04285714285714448,
-     "from": "loose collection (printed in EOC Edge of Eternities Commander)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in EOC Edge of Eternities Commander)",
      "type": "Sorcery",
      "incl": 0.265545,
      "rank": 302
@@ -1421,7 +1421,7 @@
     {
      "name": "Blech, Loafing Pest",
      "delta": 0.046428571428563714,
-     "from": "loose collection (printed in SOS Secrets of Strixhaven)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in SOS Secrets of Strixhaven)",
      "type": "Legendary Creature \u2014 Pest",
      "incl": 0.16503,
      "rank": 7292
@@ -1437,7 +1437,7 @@
     {
      "name": "Moseo, Vein's New Dean",
      "delta": 0.046428571428563714,
-     "from": "loose collection (printed in SOS Secrets of Strixhaven)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in SOS Secrets of Strixhaven)",
      "type": "Legendary Creature \u2014 Bird Skeleton Warlock",
      "incl": 0.142122,
      "rank": 4268
@@ -1445,7 +1445,7 @@
    ]
   },
   "Three Visits": {
-   "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
+   "from": "Quandrix Unlimited precon (SOC; in hand since 2026-10-02, registered from its list)",
    "roles": [
     "ramp"
    ],
@@ -1454,7 +1454,7 @@
     {
      "name": "Rampant Growth",
      "delta": 0,
-     "from": "Witherbloom Witchcraft precon leftovers (registered 2026-09-09)",
+     "from": "Witherbloom Witchcraft precon \u2014 UNCONFIRMED (registered from the Archidekt C21 list 2026-09-09, never scanned; 4 of those 54 have proved missing \u2014 check the box)",
      "type": "Sorcery",
      "incl": 0.529219,
      "rank": 27
@@ -1470,7 +1470,7 @@
     {
      "name": "Skyshroud Claim",
      "delta": -0.04999999999999716,
-     "from": "loose collection (printed in EOC Edge of Eternities Commander)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in EOC Edge of Eternities Commander)",
      "type": "Sorcery",
      "incl": 0.265545,
      "rank": 302
@@ -1478,7 +1478,7 @@
    ]
   },
   "Binding the Old Gods": {
-   "from": "loose collection (printed in ECC Lorwyn Eclipsed Commander)",
+   "from": "loose collection (ManaBox scan or typed batch; printed in ECC Lorwyn Eclipsed Commander)",
    "roles": [
     "removal"
    ],
@@ -1487,7 +1487,7 @@
     {
      "name": "Deadly Brew",
      "delta": -0.16428571428571104,
-     "from": "loose collection (printed in FDN Foundations)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in FDN Foundations)",
      "type": "Sorcery",
      "incl": 0.204769,
      "rank": 4763
@@ -1495,7 +1495,7 @@
     {
      "name": "Immoral Bargain",
      "delta": -0.15714285714285836,
-     "from": "loose collection (printed in SOC Secrets of Strixhaven Commander)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in SOC Secrets of Strixhaven Commander)",
      "type": "Sorcery",
      "incl": 0.13698,
      "rank": 6642
@@ -1503,7 +1503,7 @@
     {
      "name": "Witherbloom Command",
      "delta": -0.16428571428571104,
-     "from": "loose collection (printed in STX Strixhaven: School of Mages)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in STX Strixhaven: School of Mages)",
      "type": "Sorcery",
      "incl": 0.098177,
      "rank": 8549
@@ -1511,7 +1511,7 @@
    ]
   },
   "Vito, Thorn of the Dusk Rose": {
-   "from": "loose collection (printed in M21 Core Set 2021)",
+   "from": "loose collection (ManaBox scan or typed batch; printed in M21 Core Set 2021)",
    "roles": [
     "utility"
    ],
@@ -1520,7 +1520,7 @@
     {
      "name": "Blech, Loafing Pest",
      "delta": -0.02142857142857224,
-     "from": "loose collection (printed in SOS Secrets of Strixhaven)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in SOS Secrets of Strixhaven)",
      "type": "Legendary Creature \u2014 Pest",
      "incl": 0.16503,
      "rank": 7292
@@ -1536,7 +1536,7 @@
     {
      "name": "Moseo, Vein's New Dean",
      "delta": 0,
-     "from": "loose collection (printed in SOS Secrets of Strixhaven)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in SOS Secrets of Strixhaven)",
      "type": "Legendary Creature \u2014 Bird Skeleton Warlock",
      "incl": 0.142122,
      "rank": 4268
@@ -1562,7 +1562,7 @@
     {
      "name": "Pestilence Demon",
      "delta": -0.025000000000005684,
-     "from": "loose collection (printed in DDR Duel Decks: Nissa vs. Ob Nixilis)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in DDR Duel Decks: Nissa vs. Ob Nixilis)",
      "type": "Creature \u2014 Demon",
      "incl": 0,
      "rank": 10273
@@ -1570,7 +1570,7 @@
     {
      "name": "Reiver Demon",
      "delta": -0.025000000000005684,
-     "from": "loose collection (printed in CMA Commander Anthology)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in CMA Commander Anthology)",
      "type": "Creature \u2014 Demon",
      "incl": 0,
      "rank": 10821
@@ -1587,7 +1587,7 @@
     {
      "name": "Rampant Growth",
      "delta": 0,
-     "from": "Witherbloom Witchcraft precon leftovers (registered 2026-09-09)",
+     "from": "Witherbloom Witchcraft precon \u2014 UNCONFIRMED (registered from the Archidekt C21 list 2026-09-09, never scanned; 4 of those 54 have proved missing \u2014 check the box)",
      "type": "Sorcery",
      "incl": 0.529219,
      "rank": 27
@@ -1603,7 +1603,7 @@
     {
      "name": "Skyshroud Claim",
      "delta": -0.06071428571428328,
-     "from": "loose collection (printed in EOC Edge of Eternities Commander)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in EOC Edge of Eternities Commander)",
      "type": "Sorcery",
      "incl": 0.265545,
      "rank": 302
@@ -1611,7 +1611,7 @@
    ]
   },
   "Beast Within": {
-   "from": "Omo precon (Tricky Terrain box, dismantled 2026-10-07)",
+   "from": "Omo precon (Tricky Terrain box; sleeved deck dismantled 2026-10-07, confirmed)",
    "roles": [
     "removal"
    ],
@@ -1620,7 +1620,7 @@
     {
      "name": "Deadly Brew",
      "delta": -0.0535714285714306,
-     "from": "loose collection (printed in FDN Foundations)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in FDN Foundations)",
      "type": "Sorcery",
      "incl": 0.204769,
      "rank": 4763
@@ -1628,7 +1628,7 @@
     {
      "name": "Immoral Bargain",
      "delta": -0.01071428571428612,
-     "from": "loose collection (printed in SOC Secrets of Strixhaven Commander)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in SOC Secrets of Strixhaven Commander)",
      "type": "Sorcery",
      "incl": 0.13698,
      "rank": 6642
@@ -1636,7 +1636,7 @@
     {
      "name": "Witherbloom Command",
      "delta": -0.0535714285714306,
-     "from": "loose collection (printed in STX Strixhaven: School of Mages)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in STX Strixhaven: School of Mages)",
      "type": "Sorcery",
      "incl": 0.098177,
      "rank": 8549
@@ -1644,7 +1644,7 @@
    ]
   },
   "Blight Mound": {
-   "from": "Witherbloom Witchcraft precon (C21 card registered before the leftover pass)",
+   "from": "Witherbloom Witchcraft precon (C21; ManaBox scan 2026-09-08, confirmed)",
    "roles": [
     "utility"
    ],
@@ -1653,7 +1653,7 @@
     {
      "name": "Blech, Loafing Pest",
      "delta": -0.0035714285714334437,
-     "from": "loose collection (printed in SOS Secrets of Strixhaven)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in SOS Secrets of Strixhaven)",
      "type": "Legendary Creature \u2014 Pest",
      "incl": 0.16503,
      "rank": 7292
@@ -1669,7 +1669,7 @@
     {
      "name": "Moseo, Vein's New Dean",
      "delta": 0,
-     "from": "loose collection (printed in SOS Secrets of Strixhaven)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in SOS Secrets of Strixhaven)",
      "type": "Legendary Creature \u2014 Bird Skeleton Warlock",
      "incl": 0.142122,
      "rank": 4268
@@ -1677,7 +1677,7 @@
    ]
   },
   "Mirkwood Bats": {
-   "from": "loose collection (printed in LTR The Lord of the Rings: Tales of Middle-earth)",
+   "from": "loose collection (ManaBox scan or typed batch; printed in LTR The Lord of the Rings: Tales of Middle-earth)",
    "roles": [
     "win_condition"
    ],
@@ -1686,7 +1686,7 @@
     {
      "name": "Blossoming Bogbeast",
      "delta": -0.017857142857138797,
-     "from": "Witherbloom Witchcraft precon (C21 card registered before the leftover pass)",
+     "from": "Witherbloom Witchcraft precon (C21; ManaBox scan 2026-09-08, confirmed)",
      "type": "Creature \u2014 Beast",
      "incl": 0.17064,
      "rank": 4019
@@ -1694,7 +1694,7 @@
     {
      "name": "Verdant Sun's Avatar",
      "delta": -0.03928571428571104,
-     "from": "Witherbloom Witchcraft precon leftovers (registered 2026-09-09)",
+     "from": "Witherbloom Witchcraft precon \u2014 UNCONFIRMED (registered from the Archidekt C21 list 2026-09-09, never scanned; 4 of those 54 have proved missing \u2014 check the box)",
      "type": "Creature \u2014 Dinosaur Avatar",
      "incl": 0.123422,
      "rank": 2179
@@ -1702,7 +1702,7 @@
     {
      "name": "Avenger of Zendikar",
      "delta": -0.03928571428571104,
-     "from": "Omo precon (Tricky Terrain box, dismantled 2026-10-07)",
+     "from": "Omo precon (Tricky Terrain box; sleeved deck dismantled 2026-10-07, confirmed)",
      "type": "Creature \u2014 Elemental",
      "incl": 0.114072,
      "rank": 295
@@ -1719,7 +1719,7 @@
     {
      "name": "Blossoming Bogbeast",
      "delta": -8.86571428571429,
-     "from": "Witherbloom Witchcraft precon (C21 card registered before the leftover pass)",
+     "from": "Witherbloom Witchcraft precon (C21; ManaBox scan 2026-09-08, confirmed)",
      "type": "Creature \u2014 Beast",
      "incl": 0.17064,
      "rank": 4019
@@ -1727,7 +1727,7 @@
     {
      "name": "Verdant Sun's Avatar",
      "delta": -8.937142857142874,
-     "from": "Witherbloom Witchcraft precon leftovers (registered 2026-09-09)",
+     "from": "Witherbloom Witchcraft precon \u2014 UNCONFIRMED (registered from the Archidekt C21 list 2026-09-09, never scanned; 4 of those 54 have proved missing \u2014 check the box)",
      "type": "Creature \u2014 Dinosaur Avatar",
      "incl": 0.123422,
      "rank": 2179
@@ -1735,7 +1735,7 @@
     {
      "name": "Avenger of Zendikar",
      "delta": -8.937142857142874,
-     "from": "Omo precon (Tricky Terrain box, dismantled 2026-10-07)",
+     "from": "Omo precon (Tricky Terrain box; sleeved deck dismantled 2026-10-07, confirmed)",
      "type": "Creature \u2014 Elemental",
      "incl": 0.114072,
      "rank": 295
@@ -1760,7 +1760,7 @@
     {
      "name": "Pestilence Demon",
      "delta": -0.0035714285714334437,
-     "from": "loose collection (printed in DDR Duel Decks: Nissa vs. Ob Nixilis)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in DDR Duel Decks: Nissa vs. Ob Nixilis)",
      "type": "Creature \u2014 Demon",
      "incl": 0,
      "rank": 10273
@@ -1768,7 +1768,7 @@
     {
      "name": "Reiver Demon",
      "delta": -0.0035714285714334437,
-     "from": "loose collection (printed in CMA Commander Anthology)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in CMA Commander Anthology)",
      "type": "Creature \u2014 Demon",
      "incl": 0,
      "rank": 10821
@@ -1776,7 +1776,7 @@
    ]
   },
   "Sanguine Bond": {
-   "from": "Witherbloom Witchcraft precon (C21 card registered before the leftover pass)",
+   "from": "Witherbloom Witchcraft precon (C21; ManaBox scan 2026-09-08, confirmed)",
    "roles": [
     "utility"
    ],
@@ -1785,7 +1785,7 @@
     {
      "name": "Blech, Loafing Pest",
      "delta": -0.046428571428577925,
-     "from": "loose collection (printed in SOS Secrets of Strixhaven)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in SOS Secrets of Strixhaven)",
      "type": "Legendary Creature \u2014 Pest",
      "incl": 0.16503,
      "rank": 7292
@@ -1801,7 +1801,7 @@
     {
      "name": "Moseo, Vein's New Dean",
      "delta": -0.046428571428577925,
-     "from": "loose collection (printed in SOS Secrets of Strixhaven)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in SOS Secrets of Strixhaven)",
      "type": "Legendary Creature \u2014 Bird Skeleton Warlock",
      "incl": 0.142122,
      "rank": 4268
@@ -1818,7 +1818,7 @@
     {
      "name": "Deadly Brew",
      "delta": 0,
-     "from": "loose collection (printed in FDN Foundations)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in FDN Foundations)",
      "type": "Sorcery",
      "incl": 0.204769,
      "rank": 4763
@@ -1826,7 +1826,7 @@
     {
      "name": "Immoral Bargain",
      "delta": 0.01071428571428612,
-     "from": "loose collection (printed in SOC Secrets of Strixhaven Commander)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in SOC Secrets of Strixhaven Commander)",
      "type": "Sorcery",
      "incl": 0.13698,
      "rank": 6642
@@ -1834,7 +1834,7 @@
     {
      "name": "Witherbloom Command",
      "delta": 0,
-     "from": "loose collection (printed in STX Strixhaven: School of Mages)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in STX Strixhaven: School of Mages)",
      "type": "Sorcery",
      "incl": 0.098177,
      "rank": 8549
@@ -1842,7 +1842,7 @@
    ]
   },
   "Tyvar's Stand": {
-   "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
+   "from": "Quandrix Unlimited precon (SOC; in hand since 2026-10-02, registered from its list)",
    "roles": [
     "protection"
    ],
@@ -1851,7 +1851,7 @@
     {
      "name": "Silkguard",
      "delta": 0,
-     "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
+     "from": "Quandrix Unlimited precon (SOC; in hand since 2026-10-02, registered from its list)",
      "type": "Instant",
      "incl": 0,
      "rank": 2346
@@ -1859,7 +1859,7 @@
     {
      "name": "Helix Pinnacle",
      "delta": 0,
-     "from": "loose collection (printed in EVE Eventide)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in EVE Eventide)",
      "type": "Enchantment",
      "incl": 0,
      "rank": 4480
@@ -1876,7 +1876,7 @@
     {
      "name": "Blech, Loafing Pest",
      "delta": 0,
-     "from": "loose collection (printed in SOS Secrets of Strixhaven)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in SOS Secrets of Strixhaven)",
      "type": "Legendary Creature \u2014 Pest",
      "incl": 0.16503,
      "rank": 7292
@@ -1892,7 +1892,7 @@
     {
      "name": "Moseo, Vein's New Dean",
      "delta": 0,
-     "from": "loose collection (printed in SOS Secrets of Strixhaven)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in SOS Secrets of Strixhaven)",
      "type": "Legendary Creature \u2014 Bird Skeleton Warlock",
      "incl": 0.142122,
      "rank": 4268
@@ -1900,7 +1900,7 @@
    ]
   },
   "Alhammarret's Archive": {
-   "from": "Witherbloom Witchcraft precon leftovers (registered 2026-09-09)",
+   "from": "Witherbloom Witchcraft precon \u2014 UNCONFIRMED (registered from the Archidekt C21 list 2026-09-09, never scanned; 4 of those 54 have proved missing \u2014 check the box)",
    "roles": [
     "draw"
    ],
@@ -1917,7 +1917,7 @@
     {
      "name": "Corrupted Conviction",
      "delta": -0.04285714285714448,
-     "from": "OTJ box (Outlaws of Thunder Junction, 2026-09-08)",
+     "from": "OTJ box (Outlaws of Thunder Junction, typed in 2026-09-08)",
      "type": "Instant",
      "incl": 0.120617,
      "rank": 599
@@ -1925,7 +1925,7 @@
     {
      "name": "Night's Whisper",
      "delta": 0.007142857142852677,
-     "from": "loose collection (printed in ECC Lorwyn Eclipsed Commander)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in ECC Lorwyn Eclipsed Commander)",
      "type": "Sorcery",
      "incl": 0.113604,
      "rank": 182
@@ -1942,7 +1942,7 @@
     {
      "name": "Blech, Loafing Pest",
      "delta": 0.014285714285719564,
-     "from": "loose collection (printed in SOS Secrets of Strixhaven)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in SOS Secrets of Strixhaven)",
      "type": "Legendary Creature \u2014 Pest",
      "incl": 0.16503,
      "rank": 7292
@@ -1950,7 +1950,7 @@
     {
      "name": "Moseo, Vein's New Dean",
      "delta": 0.014285714285719564,
-     "from": "loose collection (printed in SOS Secrets of Strixhaven)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in SOS Secrets of Strixhaven)",
      "type": "Legendary Creature \u2014 Bird Skeleton Warlock",
      "incl": 0.142122,
      "rank": 4268
@@ -1966,7 +1966,7 @@
    ]
   },
   "Argentum Masticore": {
-   "from": "loose collection (printed in ONE Phyrexia: All Will Be One)",
+   "from": "loose collection (ManaBox scan or typed batch; printed in ONE Phyrexia: All Will Be One)",
    "roles": [
     "removal",
     "win_condition"
@@ -1976,7 +1976,7 @@
     {
      "name": "Deadly Brew",
      "delta": -0.0535714285714306,
-     "from": "loose collection (printed in FDN Foundations)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in FDN Foundations)",
      "type": "Sorcery",
      "incl": 0.204769,
      "rank": 4763
@@ -1984,7 +1984,7 @@
     {
      "name": "Blossoming Bogbeast",
      "delta": 0,
-     "from": "Witherbloom Witchcraft precon (C21 card registered before the leftover pass)",
+     "from": "Witherbloom Witchcraft precon (C21; ManaBox scan 2026-09-08, confirmed)",
      "type": "Creature \u2014 Beast",
      "incl": 0.17064,
      "rank": 4019
@@ -1992,7 +1992,7 @@
     {
      "name": "Immoral Bargain",
      "delta": -0.017857142857138797,
-     "from": "loose collection (printed in SOC Secrets of Strixhaven Commander)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in SOC Secrets of Strixhaven Commander)",
      "type": "Sorcery",
      "incl": 0.13698,
      "rank": 6642
@@ -2000,7 +2000,7 @@
    ]
   },
   "Tendershoot Dryad": {
-   "from": "loose collection (printed in RIX Rivals of Ixalan)",
+   "from": "loose collection (ManaBox scan or typed batch; printed in RIX Rivals of Ixalan)",
    "roles": [
     "win_condition"
    ],
@@ -2009,7 +2009,7 @@
     {
      "name": "Blossoming Bogbeast",
      "delta": 0,
-     "from": "Witherbloom Witchcraft precon (C21 card registered before the leftover pass)",
+     "from": "Witherbloom Witchcraft precon (C21; ManaBox scan 2026-09-08, confirmed)",
      "type": "Creature \u2014 Beast",
      "incl": 0.17064,
      "rank": 4019
@@ -2017,7 +2017,7 @@
     {
      "name": "Verdant Sun's Avatar",
      "delta": -0.06071428571428328,
-     "from": "Witherbloom Witchcraft precon leftovers (registered 2026-09-09)",
+     "from": "Witherbloom Witchcraft precon \u2014 UNCONFIRMED (registered from the Archidekt C21 list 2026-09-09, never scanned; 4 of those 54 have proved missing \u2014 check the box)",
      "type": "Creature \u2014 Dinosaur Avatar",
      "incl": 0.123422,
      "rank": 2179
@@ -2025,7 +2025,7 @@
     {
      "name": "Avenger of Zendikar",
      "delta": -0.06071428571428328,
-     "from": "Omo precon (Tricky Terrain box, dismantled 2026-10-07)",
+     "from": "Omo precon (Tricky Terrain box; sleeved deck dismantled 2026-10-07, confirmed)",
      "type": "Creature \u2014 Elemental",
      "incl": 0.114072,
      "rank": 295
@@ -2043,7 +2043,7 @@
     {
      "name": "Blech, Loafing Pest",
      "delta": 0,
-     "from": "loose collection (printed in SOS Secrets of Strixhaven)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in SOS Secrets of Strixhaven)",
      "type": "Legendary Creature \u2014 Pest",
      "incl": 0.16503,
      "rank": 7292
@@ -2051,7 +2051,7 @@
     {
      "name": "Moseo, Vein's New Dean",
      "delta": 0,
-     "from": "loose collection (printed in SOS Secrets of Strixhaven)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in SOS Secrets of Strixhaven)",
      "type": "Legendary Creature \u2014 Bird Skeleton Warlock",
      "incl": 0.142122,
      "rank": 4268
@@ -2077,7 +2077,7 @@
     {
      "name": "Rampant Growth",
      "delta": 0,
-     "from": "Witherbloom Witchcraft precon leftovers (registered 2026-09-09)",
+     "from": "Witherbloom Witchcraft precon \u2014 UNCONFIRMED (registered from the Archidekt C21 list 2026-09-09, never scanned; 4 of those 54 have proved missing \u2014 check the box)",
      "type": "Sorcery",
      "incl": 0.529219,
      "rank": 27
@@ -2110,7 +2110,7 @@
     {
      "name": "Blossoming Bogbeast",
      "delta": 0,
-     "from": "Witherbloom Witchcraft precon (C21 card registered before the leftover pass)",
+     "from": "Witherbloom Witchcraft precon (C21; ManaBox scan 2026-09-08, confirmed)",
      "type": "Creature \u2014 Beast",
      "incl": 0.17064,
      "rank": 4019
@@ -2118,7 +2118,7 @@
     {
      "name": "Verdant Sun's Avatar",
      "delta": 0.0035714285714334437,
-     "from": "Witherbloom Witchcraft precon leftovers (registered 2026-09-09)",
+     "from": "Witherbloom Witchcraft precon \u2014 UNCONFIRMED (registered from the Archidekt C21 list 2026-09-09, never scanned; 4 of those 54 have proved missing \u2014 check the box)",
      "type": "Creature \u2014 Dinosaur Avatar",
      "incl": 0.123422,
      "rank": 2179
@@ -2126,7 +2126,7 @@
     {
      "name": "Avenger of Zendikar",
      "delta": 0.0035714285714334437,
-     "from": "Omo precon (Tricky Terrain box, dismantled 2026-10-07)",
+     "from": "Omo precon (Tricky Terrain box; sleeved deck dismantled 2026-10-07, confirmed)",
      "type": "Creature \u2014 Elemental",
      "incl": 0.114072,
      "rank": 295
@@ -2134,7 +2134,7 @@
    ]
   },
   "Veinwitch Coven": {
-   "from": "loose collection (printed in OTC Outlaws of Thunder Junction Commander)",
+   "from": "Witherbloom Witchcraft precon (C21; ManaBox scan 2026-09-08, confirmed)",
    "roles": [
     "utility"
    ],
@@ -2143,7 +2143,7 @@
     {
      "name": "Blech, Loafing Pest",
      "delta": 0,
-     "from": "loose collection (printed in SOS Secrets of Strixhaven)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in SOS Secrets of Strixhaven)",
      "type": "Legendary Creature \u2014 Pest",
      "incl": 0.16503,
      "rank": 7292
@@ -2159,7 +2159,7 @@
     {
      "name": "Moseo, Vein's New Dean",
      "delta": 0,
-     "from": "loose collection (printed in SOS Secrets of Strixhaven)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in SOS Secrets of Strixhaven)",
      "type": "Legendary Creature \u2014 Bird Skeleton Warlock",
      "incl": 0.142122,
      "rank": 4268
@@ -2176,7 +2176,7 @@
     {
      "name": "Silkguard",
      "delta": -0.028571428571424917,
-     "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
+     "from": "Quandrix Unlimited precon (SOC; in hand since 2026-10-02, registered from its list)",
      "type": "Instant",
      "incl": 0,
      "rank": 2346
@@ -2184,7 +2184,7 @@
     {
      "name": "Helix Pinnacle",
      "delta": -0.028571428571424917,
-     "from": "loose collection (printed in EVE Eventide)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in EVE Eventide)",
      "type": "Enchantment",
      "incl": 0,
      "rank": 4480
@@ -2210,7 +2210,7 @@
     {
      "name": "Corrupted Conviction",
      "delta": -0.04285714285714448,
-     "from": "OTJ box (Outlaws of Thunder Junction, 2026-09-08)",
+     "from": "OTJ box (Outlaws of Thunder Junction, typed in 2026-09-08)",
      "type": "Instant",
      "incl": 0.120617,
      "rank": 599
@@ -2218,7 +2218,7 @@
     {
      "name": "Night's Whisper",
      "delta": -0.007142857142852677,
-     "from": "loose collection (printed in ECC Lorwyn Eclipsed Commander)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in ECC Lorwyn Eclipsed Commander)",
      "type": "Sorcery",
      "incl": 0.113604,
      "rank": 182
@@ -2235,7 +2235,7 @@
     {
      "name": "Rampant Growth",
      "delta": 0,
-     "from": "Witherbloom Witchcraft precon leftovers (registered 2026-09-09)",
+     "from": "Witherbloom Witchcraft precon \u2014 UNCONFIRMED (registered from the Archidekt C21 list 2026-09-09, never scanned; 4 of those 54 have proved missing \u2014 check the box)",
      "type": "Sorcery",
      "incl": 0.529219,
      "rank": 27
@@ -2251,7 +2251,7 @@
     {
      "name": "Skyshroud Claim",
      "delta": 0.035714285714291805,
-     "from": "loose collection (printed in EOC Edge of Eternities Commander)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in EOC Edge of Eternities Commander)",
      "type": "Sorcery",
      "incl": 0.265545,
      "rank": 302
@@ -2259,7 +2259,7 @@
    ]
   },
   "Guardian Augmenter": {
-   "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
+   "from": "Quandrix Unlimited precon (SOC; in hand since 2026-10-02, registered from its list)",
    "roles": [
     "utility"
    ],
@@ -2268,7 +2268,7 @@
     {
      "name": "Blech, Loafing Pest",
      "delta": 0,
-     "from": "loose collection (printed in SOS Secrets of Strixhaven)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in SOS Secrets of Strixhaven)",
      "type": "Legendary Creature \u2014 Pest",
      "incl": 0.16503,
      "rank": 7292
@@ -2276,7 +2276,7 @@
     {
      "name": "Moseo, Vein's New Dean",
      "delta": 0,
-     "from": "loose collection (printed in SOS Secrets of Strixhaven)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in SOS Secrets of Strixhaven)",
      "type": "Legendary Creature \u2014 Bird Skeleton Warlock",
      "incl": 0.142122,
      "rank": 4268
@@ -2309,7 +2309,7 @@
     {
      "name": "Corrupted Conviction",
      "delta": -0.0035714285714334437,
-     "from": "OTJ box (Outlaws of Thunder Junction, 2026-09-08)",
+     "from": "OTJ box (Outlaws of Thunder Junction, typed in 2026-09-08)",
      "type": "Instant",
      "incl": 0.120617,
      "rank": 599
@@ -2317,7 +2317,7 @@
     {
      "name": "Night's Whisper",
      "delta": 0.0035714285714334437,
-     "from": "loose collection (printed in ECC Lorwyn Eclipsed Commander)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in ECC Lorwyn Eclipsed Commander)",
      "type": "Sorcery",
      "incl": 0.113604,
      "rank": 182
@@ -2325,7 +2325,7 @@
    ]
   },
   "Pest Rescuer": {
-   "from": "loose collection (printed in SOC Secrets of Strixhaven Commander)",
+   "from": "loose collection (ManaBox scan or typed batch; printed in SOC Secrets of Strixhaven Commander)",
    "roles": [
     "utility"
    ],
@@ -2334,7 +2334,7 @@
     {
      "name": "Blech, Loafing Pest",
      "delta": 0.007142857142852677,
-     "from": "loose collection (printed in SOS Secrets of Strixhaven)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in SOS Secrets of Strixhaven)",
      "type": "Legendary Creature \u2014 Pest",
      "incl": 0.16503,
      "rank": 7292
@@ -2350,7 +2350,7 @@
     {
      "name": "Moseo, Vein's New Dean",
      "delta": 0.007142857142852677,
-     "from": "loose collection (printed in SOS Secrets of Strixhaven)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in SOS Secrets of Strixhaven)",
      "type": "Legendary Creature \u2014 Bird Skeleton Warlock",
      "incl": 0.142122,
      "rank": 4268
@@ -2368,7 +2368,7 @@
     {
      "name": "Rampant Growth",
      "delta": 0.06785714285713595,
-     "from": "Witherbloom Witchcraft precon leftovers (registered 2026-09-09)",
+     "from": "Witherbloom Witchcraft precon \u2014 UNCONFIRMED (registered from the Archidekt C21 list 2026-09-09, never scanned; 4 of those 54 have proved missing \u2014 check the box)",
      "type": "Sorcery",
      "incl": 0.529219,
      "rank": 27
@@ -2401,7 +2401,7 @@
     {
      "name": "Blossoming Bogbeast",
      "delta": 0.014285714285719564,
-     "from": "Witherbloom Witchcraft precon (C21 card registered before the leftover pass)",
+     "from": "Witherbloom Witchcraft precon (C21; ManaBox scan 2026-09-08, confirmed)",
      "type": "Creature \u2014 Beast",
      "incl": 0.17064,
      "rank": 4019
@@ -2409,7 +2409,7 @@
     {
      "name": "Verdant Sun's Avatar",
      "delta": -0.03928571428571104,
-     "from": "Witherbloom Witchcraft precon leftovers (registered 2026-09-09)",
+     "from": "Witherbloom Witchcraft precon \u2014 UNCONFIRMED (registered from the Archidekt C21 list 2026-09-09, never scanned; 4 of those 54 have proved missing \u2014 check the box)",
      "type": "Creature \u2014 Dinosaur Avatar",
      "incl": 0.123422,
      "rank": 2179
@@ -2417,7 +2417,7 @@
     {
      "name": "Avenger of Zendikar",
      "delta": -0.03928571428571104,
-     "from": "Omo precon (Tricky Terrain box, dismantled 2026-10-07)",
+     "from": "Omo precon (Tricky Terrain box; sleeved deck dismantled 2026-10-07, confirmed)",
      "type": "Creature \u2014 Elemental",
      "incl": 0.114072,
      "rank": 295
@@ -2443,7 +2443,7 @@
     {
      "name": "Corrupted Conviction",
      "delta": -0.04285714285714448,
-     "from": "OTJ box (Outlaws of Thunder Junction, 2026-09-08)",
+     "from": "OTJ box (Outlaws of Thunder Junction, typed in 2026-09-08)",
      "type": "Instant",
      "incl": 0.120617,
      "rank": 599
@@ -2451,7 +2451,7 @@
     {
      "name": "Night's Whisper",
      "delta": -0.0035714285714334437,
-     "from": "loose collection (printed in ECC Lorwyn Eclipsed Commander)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in ECC Lorwyn Eclipsed Commander)",
      "type": "Sorcery",
      "incl": 0.113604,
      "rank": 182
@@ -2459,7 +2459,7 @@
    ]
   },
   "Witch of the Moors": {
-   "from": "loose collection (printed in OTC Outlaws of Thunder Junction Commander)",
+   "from": "loose collection (ManaBox scan or typed batch; printed in OTC Outlaws of Thunder Junction Commander)",
    "roles": [
     "removal",
     "win_condition"
@@ -2469,7 +2469,7 @@
     {
      "name": "Deadly Brew",
      "delta": -0.08571428571428896,
-     "from": "loose collection (printed in FDN Foundations)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in FDN Foundations)",
      "type": "Sorcery",
      "incl": 0.204769,
      "rank": 4763
@@ -2477,7 +2477,7 @@
     {
      "name": "Blossoming Bogbeast",
      "delta": 0,
-     "from": "Witherbloom Witchcraft precon (C21 card registered before the leftover pass)",
+     "from": "Witherbloom Witchcraft precon (C21; ManaBox scan 2026-09-08, confirmed)",
      "type": "Creature \u2014 Beast",
      "incl": 0.17064,
      "rank": 4019
@@ -2485,7 +2485,7 @@
     {
      "name": "Immoral Bargain",
      "delta": -0.07500000000000284,
-     "from": "loose collection (printed in SOC Secrets of Strixhaven Commander)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in SOC Secrets of Strixhaven Commander)",
      "type": "Sorcery",
      "incl": 0.13698,
      "rank": 6642
@@ -2510,7 +2510,7 @@
     {
      "name": "Corrupted Conviction",
      "delta": -0.0714285714285694,
-     "from": "OTJ box (Outlaws of Thunder Junction, 2026-09-08)",
+     "from": "OTJ box (Outlaws of Thunder Junction, typed in 2026-09-08)",
      "type": "Instant",
      "incl": 0.120617,
      "rank": 599
@@ -2518,7 +2518,7 @@
     {
      "name": "Night's Whisper",
      "delta": -0.04285714285714448,
-     "from": "loose collection (printed in ECC Lorwyn Eclipsed Commander)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in ECC Lorwyn Eclipsed Commander)",
      "type": "Sorcery",
      "incl": 0.113604,
      "rank": 182
@@ -2536,7 +2536,7 @@
     {
      "name": "Blossoming Bogbeast",
      "delta": 0,
-     "from": "Witherbloom Witchcraft precon (C21 card registered before the leftover pass)",
+     "from": "Witherbloom Witchcraft precon (C21; ManaBox scan 2026-09-08, confirmed)",
      "type": "Creature \u2014 Beast",
      "incl": 0.17064,
      "rank": 4019
@@ -2544,7 +2544,7 @@
     {
      "name": "Verdant Sun's Avatar",
      "delta": -0.06428571428571672,
-     "from": "Witherbloom Witchcraft precon leftovers (registered 2026-09-09)",
+     "from": "Witherbloom Witchcraft precon \u2014 UNCONFIRMED (registered from the Archidekt C21 list 2026-09-09, never scanned; 4 of those 54 have proved missing \u2014 check the box)",
      "type": "Creature \u2014 Dinosaur Avatar",
      "incl": 0.123422,
      "rank": 2179
@@ -2552,7 +2552,7 @@
     {
      "name": "Avenger of Zendikar",
      "delta": -0.06428571428571672,
-     "from": "Omo precon (Tricky Terrain box, dismantled 2026-10-07)",
+     "from": "Omo precon (Tricky Terrain box; sleeved deck dismantled 2026-10-07, confirmed)",
      "type": "Creature \u2014 Elemental",
      "incl": 0.114072,
      "rank": 295
@@ -2560,7 +2560,7 @@
    ]
   },
   "Feral Appetite": {
-   "from": "loose collection (printed in SOC Secrets of Strixhaven Commander)",
+   "from": "loose collection (ManaBox scan or typed batch; printed in SOC Secrets of Strixhaven Commander)",
    "roles": [
     "removal"
    ],
@@ -2569,7 +2569,7 @@
     {
      "name": "Deadly Brew",
      "delta": -0.01071428571428612,
-     "from": "loose collection (printed in FDN Foundations)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in FDN Foundations)",
      "type": "Sorcery",
      "incl": 0.204769,
      "rank": 4763
@@ -2577,7 +2577,7 @@
     {
      "name": "Immoral Bargain",
      "delta": 0,
-     "from": "loose collection (printed in SOC Secrets of Strixhaven Commander)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in SOC Secrets of Strixhaven Commander)",
      "type": "Sorcery",
      "incl": 0.13698,
      "rank": 6642
@@ -2585,7 +2585,7 @@
     {
      "name": "Witherbloom Command",
      "delta": -0.01071428571428612,
-     "from": "loose collection (printed in STX Strixhaven: School of Mages)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in STX Strixhaven: School of Mages)",
      "type": "Sorcery",
      "incl": 0.098177,
      "rank": 8549
@@ -2602,7 +2602,7 @@
     {
      "name": "Rampant Growth",
      "delta": 0.0035714285714334437,
-     "from": "Witherbloom Witchcraft precon leftovers (registered 2026-09-09)",
+     "from": "Witherbloom Witchcraft precon \u2014 UNCONFIRMED (registered from the Archidekt C21 list 2026-09-09, never scanned; 4 of those 54 have proved missing \u2014 check the box)",
      "type": "Sorcery",
      "incl": 0.529219,
      "rank": 27
@@ -2618,7 +2618,7 @@
     {
      "name": "Skyshroud Claim",
      "delta": -0.017857142857138797,
-     "from": "loose collection (printed in EOC Edge of Eternities Commander)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in EOC Edge of Eternities Commander)",
      "type": "Sorcery",
      "incl": 0.265545,
      "rank": 302
@@ -2626,7 +2626,7 @@
    ]
   },
   "Scute Swarm": {
-   "from": "Omo precon (Tricky Terrain box, dismantled 2026-10-07)",
+   "from": "Omo precon (Tricky Terrain box; sleeved deck dismantled 2026-10-07, confirmed)",
    "roles": [
     "utility"
    ],
@@ -2635,7 +2635,7 @@
     {
      "name": "Blech, Loafing Pest",
      "delta": -0.014285714285719564,
-     "from": "loose collection (printed in SOS Secrets of Strixhaven)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in SOS Secrets of Strixhaven)",
      "type": "Legendary Creature \u2014 Pest",
      "incl": 0.16503,
      "rank": 7292
@@ -2651,7 +2651,7 @@
     {
      "name": "Moseo, Vein's New Dean",
      "delta": -0.007142857142852677,
-     "from": "loose collection (printed in SOS Secrets of Strixhaven)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in SOS Secrets of Strixhaven)",
      "type": "Legendary Creature \u2014 Bird Skeleton Warlock",
      "incl": 0.142122,
      "rank": 4268
@@ -2676,7 +2676,7 @@
     {
      "name": "Corrupted Conviction",
      "delta": -0.057142857142849834,
-     "from": "OTJ box (Outlaws of Thunder Junction, 2026-09-08)",
+     "from": "OTJ box (Outlaws of Thunder Junction, typed in 2026-09-08)",
      "type": "Instant",
      "incl": 0.120617,
      "rank": 599
@@ -2684,7 +2684,7 @@
     {
      "name": "Night's Whisper",
      "delta": -0.02142857142857224,
-     "from": "loose collection (printed in ECC Lorwyn Eclipsed Commander)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in ECC Lorwyn Eclipsed Commander)",
      "type": "Sorcery",
      "incl": 0.113604,
      "rank": 182
@@ -2717,7 +2717,7 @@
     {
      "name": "Reliquary Tower",
      "delta": -0.03928571428571104,
-     "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
+     "from": "Quandrix Unlimited precon (SOC; in hand since 2026-10-02, registered from its list)",
      "type": "Land",
      "incl": 0.292193,
      "rank": 10
@@ -2725,7 +2725,7 @@
    ]
   },
   "Eccentric Pestfinder // Turn Stones": {
-   "from": "loose collection (printed in SOC Secrets of Strixhaven Commander)",
+   "from": "loose collection (ManaBox scan or typed batch; printed in SOC Secrets of Strixhaven Commander)",
    "roles": [
     "win_condition"
    ],
@@ -2734,7 +2734,7 @@
     {
      "name": "Blossoming Bogbeast",
      "delta": -0.01071428571428612,
-     "from": "Witherbloom Witchcraft precon (C21 card registered before the leftover pass)",
+     "from": "Witherbloom Witchcraft precon (C21; ManaBox scan 2026-09-08, confirmed)",
      "type": "Creature \u2014 Beast",
      "incl": 0.17064,
      "rank": 4019
@@ -2742,7 +2742,7 @@
     {
      "name": "Verdant Sun's Avatar",
      "delta": -0.02142857142857224,
-     "from": "Witherbloom Witchcraft precon leftovers (registered 2026-09-09)",
+     "from": "Witherbloom Witchcraft precon \u2014 UNCONFIRMED (registered from the Archidekt C21 list 2026-09-09, never scanned; 4 of those 54 have proved missing \u2014 check the box)",
      "type": "Creature \u2014 Dinosaur Avatar",
      "incl": 0.123422,
      "rank": 2179
@@ -2750,7 +2750,7 @@
     {
      "name": "Avenger of Zendikar",
      "delta": -0.02142857142857224,
-     "from": "Omo precon (Tricky Terrain box, dismantled 2026-10-07)",
+     "from": "Omo precon (Tricky Terrain box; sleeved deck dismantled 2026-10-07, confirmed)",
      "type": "Creature \u2014 Elemental",
      "incl": 0.114072,
      "rank": 295
@@ -2767,7 +2767,7 @@
     {
      "name": "Blech, Loafing Pest",
      "delta": 0.01071428571428612,
-     "from": "loose collection (printed in SOS Secrets of Strixhaven)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in SOS Secrets of Strixhaven)",
      "type": "Legendary Creature \u2014 Pest",
      "incl": 0.16503,
      "rank": 7292
@@ -2783,7 +2783,7 @@
     {
      "name": "Moseo, Vein's New Dean",
      "delta": 0,
-     "from": "loose collection (printed in SOS Secrets of Strixhaven)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in SOS Secrets of Strixhaven)",
      "type": "Legendary Creature \u2014 Bird Skeleton Warlock",
      "incl": 0.142122,
      "rank": 4268
@@ -2791,7 +2791,7 @@
    ]
   },
   "Paradise Druid": {
-   "from": "loose collection (printed in AFC Forgotten Realms Commander)",
+   "from": "loose collection (ManaBox scan or typed batch; printed in AFC Forgotten Realms Commander)",
    "roles": [
     "ramp",
     "protection"
@@ -2801,7 +2801,7 @@
     {
      "name": "Silkguard",
      "delta": -0.13928571428571956,
-     "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
+     "from": "Quandrix Unlimited precon (SOC; in hand since 2026-10-02, registered from its list)",
      "type": "Instant",
      "incl": 0,
      "rank": 2346
@@ -2809,7 +2809,7 @@
     {
      "name": "Helix Pinnacle",
      "delta": -0.13928571428571956,
-     "from": "loose collection (printed in EVE Eventide)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in EVE Eventide)",
      "type": "Enchantment",
      "incl": 0,
      "rank": 4480
@@ -2827,7 +2827,7 @@
     {
      "name": "Silkguard",
      "delta": -0.01071428571428612,
-     "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
+     "from": "Quandrix Unlimited precon (SOC; in hand since 2026-10-02, registered from its list)",
      "type": "Instant",
      "incl": 0,
      "rank": 2346
@@ -2835,7 +2835,7 @@
     {
      "name": "Helix Pinnacle",
      "delta": -0.01071428571428612,
-     "from": "loose collection (printed in EVE Eventide)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in EVE Eventide)",
      "type": "Enchantment",
      "incl": 0,
      "rank": 4480
@@ -2843,7 +2843,7 @@
    ]
   },
   "Revitalizing Repast // Old-Growth Grove": {
-   "from": "loose collection (printed in MH3 Modern Horizons 3)",
+   "from": "loose collection (ManaBox scan or typed batch; printed in MH3 Modern Horizons 3)",
    "roles": [
     "land"
    ],
@@ -2852,7 +2852,7 @@
     {
      "name": "Reliquary Tower",
      "delta": -0.0892857142857082,
-     "from": "Quandrix precon leftovers (Tam build, 2026-10-02)",
+     "from": "Quandrix Unlimited precon (SOC; in hand since 2026-10-02, registered from its list)",
      "type": "Land",
      "incl": 0.292193,
      "rank": 10
@@ -2860,7 +2860,7 @@
     {
      "name": "Radiant Fountain",
      "delta": -0.0892857142857082,
-     "from": "Witherbloom Witchcraft precon leftovers (registered 2026-09-09)",
+     "from": "Witherbloom Witchcraft precon \u2014 UNCONFIRMED (registered from the Archidekt C21 list 2026-09-09, never scanned; 4 of those 54 have proved missing \u2014 check the box)",
      "type": "Land",
      "incl": 0.103319,
      "rank": 1548
@@ -2868,7 +2868,7 @@
     {
      "name": "Sapseep Forest",
      "delta": -0.06428571428571672,
-     "from": "Witherbloom Witchcraft precon leftovers (registered 2026-09-09)",
+     "from": "Witherbloom Witchcraft precon \u2014 UNCONFIRMED (registered from the Archidekt C21 list 2026-09-09, never scanned; 4 of those 54 have proved missing \u2014 check the box)",
      "type": "Land \u2014 Forest",
      "incl": 0.068256,
      "rank": 7181
@@ -2894,7 +2894,7 @@
     {
      "name": "Vilis, Broker of Blood",
      "delta": -0.01071428571428612,
-     "from": "loose collection (printed in M20 Core Set 2020)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in M20 Core Set 2020)",
      "type": "Legendary Creature \u2014 Demon",
      "incl": 0.301543,
      "rank": 1124
@@ -2902,7 +2902,7 @@
     {
      "name": "Deadly Brew",
      "delta": 0.014285714285719564,
-     "from": "loose collection (printed in FDN Foundations)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in FDN Foundations)",
      "type": "Sorcery",
      "incl": 0.204769,
      "rank": 4763
@@ -2910,7 +2910,7 @@
    ]
   },
   "Casualties of War": {
-   "from": "loose collection (printed in TDC Tarkir: Dragonstorm Commander)",
+   "from": "loose collection (ManaBox scan or typed batch; printed in TDC Tarkir: Dragonstorm Commander)",
    "roles": [
     "removal"
    ],
@@ -2919,7 +2919,7 @@
     {
      "name": "Deadly Brew",
      "delta": -0.017857142857138797,
-     "from": "loose collection (printed in FDN Foundations)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in FDN Foundations)",
      "type": "Sorcery",
      "incl": 0.204769,
      "rank": 4763
@@ -2927,7 +2927,7 @@
     {
      "name": "Immoral Bargain",
      "delta": -0.007142857142852677,
-     "from": "loose collection (printed in SOC Secrets of Strixhaven Commander)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in SOC Secrets of Strixhaven Commander)",
      "type": "Sorcery",
      "incl": 0.13698,
      "rank": 6642
@@ -2935,7 +2935,7 @@
     {
      "name": "Witherbloom Command",
      "delta": -0.017857142857138797,
-     "from": "loose collection (printed in STX Strixhaven: School of Mages)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in STX Strixhaven: School of Mages)",
      "type": "Sorcery",
      "incl": 0.098177,
      "rank": 8549
@@ -2953,7 +2953,7 @@
     {
      "name": "Rampant Growth",
      "delta": 0.15714285714285836,
-     "from": "Witherbloom Witchcraft precon leftovers (registered 2026-09-09)",
+     "from": "Witherbloom Witchcraft precon \u2014 UNCONFIRMED (registered from the Archidekt C21 list 2026-09-09, never scanned; 4 of those 54 have proved missing \u2014 check the box)",
      "type": "Sorcery",
      "incl": 0.529219,
      "rank": 27
@@ -2969,7 +2969,7 @@
     {
      "name": "Skyshroud Claim",
      "delta": 0.18214285714286405,
-     "from": "loose collection (printed in EOC Edge of Eternities Commander)",
+     "from": "loose collection (ManaBox scan or typed batch; printed in EOC Edge of Eternities Commander)",
      "type": "Sorcery",
      "incl": 0.265545,
      "rank": 302
@@ -2978,10 +2978,11 @@
   }
  },
  "origins": [
-  "Omo precon (Tricky Terrain box, dismantled 2026-10-07)",
-  "Witherbloom Witchcraft precon leftovers (registered 2026-09-09)",
-  "Quandrix precon leftovers (Tam build, 2026-10-02)",
-  "Silverquill precon leftovers (Tam build, 2026-10-02)",
-  "OTJ box (Outlaws of Thunder Junction, 2026-09-08)"
+  "Omo precon (Tricky Terrain box; sleeved deck dismantled 2026-10-07, confirmed)",
+  "Witherbloom Witchcraft precon (C21; ManaBox scan 2026-09-08, confirmed)",
+  "Quandrix Unlimited precon (SOC; in hand since 2026-10-02, registered from its list)",
+  "Silverquill Influence precon (SOC; in hand since 2026-10-02, registered from its list)",
+  "OTJ box (Outlaws of Thunder Junction, typed in 2026-09-08)",
+  "Witherbloom Witchcraft precon \u2014 UNCONFIRMED (registered from the Archidekt C21 list 2026-09-09, never scanned; 4 of those 54 have proved missing \u2014 check the box)"
  ]
 }

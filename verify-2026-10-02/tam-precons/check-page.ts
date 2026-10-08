@@ -161,7 +161,7 @@ const md = (src: string) => {
 // badge: 'NEW' for a card not in the baseline, '+N' when a card already there gains copies (basics)
 type Backup = { name: string; delta: number; from: string; type: string };
 type Info = { from: string; backfill?: string; roles: string[]; candidates: number; backups: Backup[] };
-const shortFrom = (f: string) => f.replace(/^The /, '').split(/[ (+]/)[0].toUpperCase();
+const shortFrom = (f: string) => f.replace(/^The /, '').split(/[ (+]/)[0].toUpperCase() + (/UNCONFIRMED/.test(f) ? ' ?' : ''); // ? = registered from a decklist, never seen
 const tile = (c: Card, qty: number, key: string, cls = '', badge = '', info?: Info) =>
   `<div class="card ${cls}${info ? ' meta' : ''}" data-key="${esc(key)}" data-name="${esc((c.name + ' ' + c.type).toLowerCase())}"${info ? ` data-info="${esc(JSON.stringify({ name: c.name, ...info }))}"` : ''}>${c.img ? `<img loading="lazy" src="${esc(c.img)}" alt="${esc(c.name)}">` : `<div class="ph">${esc(c.name)}</div>`}` +
   `${qty > 1 ? `<span class="qty">×${qty}</span>` : ''}${badge ? `<span class="badge">${badge}</span>` : ''}${info ? `<span class="from${info.backfill ? ' donor' : ''}">${esc(shortFrom(info.from))}</span>` : ''}<span class="tick">✓</span></div>`;
