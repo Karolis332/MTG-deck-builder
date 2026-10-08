@@ -18,7 +18,7 @@ const OUT = [
 ];
 // baseline = what was sleeved before today's changes; `now` = a proposed list instead of the sleeved one;
 // `extra` = a labelled row of cards still under review; `guide` = a pilot-guide markdown file shown above the list
-type DeckSpec = { slug: string; base?: () => string; now?: string; guide?: string; arena?: string; extra?: { label: string; names: string[] } }; // arena = Arena deck name -> copy block emits the About/Name/Commander/Deck import format
+type DeckSpec = { slug: string; base?: () => string; now?: string; guide?: string; arena?: string; meta?: string; extra?: { label: string; names: string[] } }; // arena = Arena deck name -> copy block emits the About/Name/Commander/Deck import format
 const read = (rel: string) => () => fs.readFileSync(path.join(ROOT, rel), 'utf8');
 const SPECS: DeckSpec[] = [
   // Arena Historic Brawl Jet (model's #1): baseline = the model's own list, so OUT = its filler swaps and the colourless/fetch lands
@@ -39,6 +39,7 @@ const SPECS: DeckSpec[] = [
   // Beledros replaces Meren: baseline = the sleeved Meren list, so OUT = Meren cards that stay in the box, NEW = everything else
   {
     slug: 'beledros-witherbloom', base: read('decks/paper/decks/meren-of-clan-nel-toth.txt'), now: 'verify-2026-10-08/best-deck/beledros-recommended.txt',
+    meta: 'verify-2026-10-08/best-deck/beledros-backups.json', // per card: source deck, donor backfill, 3 model-scored backups (beledros-backups.ts)
     guide: '.claude/skills/deck-building/reference/decks/beledros-witherbloom.md',
     extra: {
       label: 'Pulled from other decks: Cabbage (Pest Infestation, Idol, Ribtruss, Kodama’s Reach), Imotekh (Altar, Skorpekh, Arena, Mischief), Gilanra (Baloth). Backfills in guide §3',
@@ -158,9 +159,12 @@ const md = (src: string) => {
   return out.join('');
 };
 // badge: 'NEW' for a card not in the baseline, '+N' when a card already there gains copies (basics)
-const tile = (c: Card, qty: number, key: string, cls = '', badge = '') =>
-  `<div class="card ${cls}" data-key="${esc(key)}" data-name="${esc((c.name + ' ' + c.type).toLowerCase())}">${c.img ? `<img loading="lazy" src="${esc(c.img)}" alt="${esc(c.name)}">` : `<div class="ph">${esc(c.name)}</div>`}` +
-  `${qty > 1 ? `<span class="qty">×${qty}</span>` : ''}${badge ? `<span class="badge">${badge}</span>` : ''}<span class="tick">✓</span></div>`;
+type Backup = { name: string; delta: number; from: string; type: string };
+type Info = { from: string; backfill?: string; roles: string[]; candidates: number; backups: Backup[] };
+const shortFrom = (f: string) => f.replace(/^The /, '').split(/[ (+]/)[0].toUpperCase();
+const tile = (c: Card, qty: number, key: string, cls = '', badge = '', info?: Info) =>
+  `<div class="card ${cls}${info ? ' meta' : ''}" data-key="${esc(key)}" data-name="${esc((c.name + ' ' + c.type).toLowerCase())}"${info ? ` data-info="${esc(JSON.stringify({ name: c.name, ...info }))}"` : ''}>${c.img ? `<img loading="lazy" src="${esc(c.img)}" alt="${esc(c.name)}">` : `<div class="ph">${esc(c.name)}</div>`}` +
+  `${qty > 1 ? `<span class="qty">×${qty}</span>` : ''}${badge ? `<span class="badge">${badge}</span>` : ''}${info ? `<span class="from${info.backfill ? ' donor' : ''}">${esc(shortFrom(info.from))}</span>` : ''}<span class="tick">✓</span></div>`;
 
 // ---- primer (decks/paper/primers/<slug>.json, schema in src/lib/deck-primer.ts) ----
 const pimg = (n: string, cls = '') => {
@@ -208,8 +212,12 @@ const primerHtml = (p: Primer, curveHtml: string) => {
 };
 const primerFile = (slug: string) => path.join(ROOT, 'decks/paper/primers', `${slug}.json`);
 
+const IMG: Record<string, string> = {}; // backup card -> image, for the info panel
 const sections = DECKS.map((d, i) => {
   const now = parse(fs.readFileSync(path.join(ROOT, d.file), 'utf8'));
+  const meta: Record<string, Info> = d.meta && fs.existsSync(path.join(ROOT, d.meta)) ? JSON.parse(fs.readFileSync(path.join(ROOT, d.meta), 'utf8')).cards : {};
+  const infoOf = (n: string): Info | undefined => meta[n] ?? Object.entries(meta).find(([k]) => k.split(' // ')[0] === n)?.[1];
+  for (const m of Object.values(meta)) for (const b of m.backups) { const img = card(b.name).img; if (img) IMG[b.name] = img; }
   const base = new Map<string, number>();
   parse(d.base()).forEach((c) => base.set(c.name, (base.get(c.name) ?? 0) + c.qty));
   const cur = new Map(now.map((c) => [c.name, c.qty]));
@@ -220,7 +228,7 @@ const sections = DECKS.map((d, i) => {
     const k = card(c.name);
     const had = base.get(c.name) ?? 0;
     const badge = had === 0 ? 'NEW' : c.qty > had ? `+${c.qty - had}` : '';
-    byGroup.get(idx === 0 ? 'Commander' : groupOf(k.type))!.push(tile(k, c.qty, `${d.slug}|${c.name}`, badge ? 'new' : '', badge));
+    byGroup.get(idx === 0 ? 'Commander' : groupOf(k.type))!.push(tile(k, c.qty, `${d.slug}|${c.name}`, badge ? 'new' : '', badge, idx ? infoOf(c.name) : undefined));
   });
   const body = GROUPS.filter((g) => byGroup.get(g)!.length)
     .map((g) => `<h3>${g} <small>${byGroup.get(g)!.length}</small></h3><div class="grid">${byGroup.get(g)!.join('')}</div>`).join('');
@@ -289,6 +297,11 @@ details{margin:8px 0;background:var(--panel);border:1px solid var(--line);border
 .guide .flow{gap:12px;padding:14px}.guide .flow .step{max-width:320px;font-size:16px;padding:10px 12px;line-height:1.35}.guide .flow .chip .ci{width:150px}.guide .flow .chip b{font-size:15px}.guide .arr{font-size:42px}
 .timeline{display:flex;flex-wrap:wrap;align-items:stretch;gap:8px;margin:10px 0}.tnode{flex:1 1 230px;max-width:360px;background:var(--panel);border:1px solid var(--line2);border-radius:8px;padding:10px 12px;font-size:15px}.tdo,.pname{line-height:1.5}.tnode .chip,.pname .chip{margin:3px 4px 3px 0;vertical-align:middle}.tnum{font-size:28px;font-weight:700;color:var(--cyan);text-shadow:0 0 10px var(--cyan)}.tnode small{display:block;color:var(--mag);letter-spacing:.1em;text-transform:uppercase;font-size:11px;margin-top:6px}.twhy{opacity:.85}.timeline .arr{align-self:center}
 .pieces{display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:10px;margin:10px 0}.piece{background:var(--panel);border:1px solid var(--line2);border-radius:8px;padding:10px 12px;font-size:15px}.pname{margin-bottom:6px}.pname .chip .ci{height:84px}.pwhat{color:#fff}.poracle{margin-top:6px;font-size:13px;opacity:.75;font-style:italic}
+.from{position:absolute;bottom:6px;left:6px;font:bold 10px sans-serif;letter-spacing:.08em;padding:2px 7px;border-radius:10px;background:rgba(6,3,26,.88);color:var(--sun);border:1px solid var(--sun)}.from.donor{color:var(--mag);border-color:var(--mag)}.card.meta{cursor:help}
+#info{position:fixed;inset:0;z-index:20;display:none;background:rgba(6,3,26,.72);backdrop-filter:blur(4px)}#info.on{display:flex;align-items:center;justify-content:center}.ibox{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px 22px;max-width:960px;width:92vw;max-height:92vh;overflow:auto;box-shadow:0 0 30px rgba(25,240,255,.35)}
+.ibox h2{margin:0 0 4px;color:#fff;font-size:24px;text-shadow:0 0 10px var(--cyan)}.ibox .src{color:var(--sun);font-size:16px;margin:4px 0}.ibox .src b{color:#fff}.ibox .roles{color:var(--dim);font-size:13px;letter-spacing:.1em;text-transform:uppercase}.ibox h4{color:var(--cyan);margin:14px 0 6px;letter-spacing:.2em;text-transform:uppercase;font-size:13px}
+.bk{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.bk .b{text-align:center;background:rgba(6,3,26,.6);border:1px solid var(--line2);border-radius:8px;padding:8px}.bk img{width:100%;border-radius:7px}.bk b{display:block;margin-top:6px;color:#fff}.bk .d{font:bold 15px sans-serif;color:var(--cyan)}.bk .d.neg{color:var(--mag)}.bk small{display:block;color:var(--dim);margin-top:2px}
+.ibtn{margin:14px 8px 0 0;border:0;padding:8px 16px;border-radius:4px;font-weight:700;cursor:pointer}.ibtn.found{background:var(--cyan);color:#06031a;box-shadow:0 0 12px var(--cyan)}.ibtn.close{background:none;color:var(--dim);border:1px solid var(--line2)}
 #zoom{position:fixed;z-index:9;display:none;pointer-events:none;width:min(440px,46vw);border-radius:18px;box-shadow:0 0 30px rgba(255,43,214,.7),0 0 60px rgba(25,240,255,.4)}
 .primer{padding:10px 16px}.primer h2{margin:0 0 6px;font-size:28px;letter-spacing:.12em;text-transform:uppercase;color:#fff;text-shadow:0 0 10px var(--cyan),0 0 26px var(--cyan),3px 0 0 rgba(255,43,214,.75),-3px 0 0 rgba(25,240,255,.75)}.primer h4{color:var(--cyan);margin:12px 0 4px;letter-spacing:.08em}
 .psec{margin:18px 0 0;padding-top:10px;border-top:1px solid var(--line2)}.psec>h3{font-size:13px;letter-spacing:.3em;margin:0 0 10px;display:flex;align-items:center;gap:12px}.psec>h3::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--cyan),transparent);opacity:.6}
@@ -305,11 +318,18 @@ details{margin:8px 0;background:var(--panel);border:1px solid var(--line);border
 blockquote{margin:6px 0;padding:4px 10px;font-size:13px;font-style:italic;color:#cfc8f0;background:rgba(6,3,26,.7)}blockquote.qo{border-left:3px solid var(--mag)}blockquote.qi{border-left:3px solid var(--cyan)}.ev{font:12px sans-serif;color:var(--dim)}.note{font-size:13px;color:var(--dim)}
 .keep{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:10px}.kp,.tie{display:flex;gap:10px;align-items:flex-start}.kp p,.tie p{margin:2px 0;font-size:14px}.tie{margin-bottom:8px}.tie .arr{align-self:center}
 .mull{display:grid;grid-template-columns:1fr 1fr;gap:16px}.mull ul{margin:4px 0;padding-left:18px}.primer ol li{margin:4px 0;line-height:1.4}
-</style></head><body><div class="vsun"></div><div class="vfloor"></div><div class="vscan"></div><header>${tabs}<input id="q" type="search" placeholder="filter: name or type…" autofocus><span style="display:block;margin-top:4px;font-size:12px;color:#8f86b8;letter-spacing:.06em">tap a card when you find it in the box · cyan = new today · magenta = should be out (tap once removed)</span></header>${sections.join('')}
+</style></head><body><div class="vsun"></div><div class="vfloor"></div><div class="vscan"></div><header>${tabs}<input id="q" type="search" placeholder="filter: name or type…" autofocus><span style="display:block;margin-top:4px;font-size:12px;color:#8f86b8;letter-spacing:.06em">tap a card when you find it in the box · cyan = new today · magenta = should be out (tap once removed) · Beledros: click a card for its source deck and 3 scored backups (shift-click = found)</span></header>${sections.join('')}<div id="info"><div class="ibox"></div></div>
 <script>
 const S=JSON.parse(localStorage.getItem('deckcheck')||'{}');const save=()=>localStorage.setItem('deckcheck',JSON.stringify(S));
 const count=s=>{const all=s.querySelectorAll('.card:not(.out):not(.cand):not(.swap)');const d=[...all].filter(c=>c.classList.contains('done')).length;s.querySelector('.count').textContent=d+' / '+all.length};
-document.querySelectorAll('.card').forEach(c=>{if(S[c.dataset.key])c.classList.add('done');c.onclick=()=>{c.classList.toggle('done');S[c.dataset.key]=c.classList.contains('done');save();count(c.closest('section'))}});
+const IMG=${JSON.stringify(IMG)};const info=document.getElementById('info'),ibox=info.querySelector('.ibox');let icard=null;
+const toggle=c=>{c.classList.toggle('done');S[c.dataset.key]=c.classList.contains('done');save();count(c.closest('section'))};
+const esc=s=>String(s).replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
+const openInfo=c=>{const m=JSON.parse(c.dataset.info);icard=c;const bk=m.backups.map(b=>'<div class="b">'+(IMG[b.name]?'<img loading="lazy" src="'+esc(IMG[b.name])+'" alt="">':'')+'<b>'+esc(b.name)+'</b><span class="d'+(b.delta<0?' neg':'')+'">'+(b.delta>=0?'+':'')+b.delta.toFixed(2)+'</span><small>'+esc(b.from)+' · '+esc(b.type)+(b.incl!=null?' · '+Math.round(b.incl*100)+'% of Beledros decks':'')+'</small></div>').join('');
+ibox.innerHTML='<h2>'+esc(m.name)+'</h2><div class="src">Pull from: <b>'+esc(m.from)+'</b>'+(m.backfill?' · that deck gets <b>'+esc(m.backfill)+'</b> back':'')+'</div><div class="roles">'+(m.roles.length?'role: '+m.roles.join(', '):'no classifier role')+' · '+m.candidates+' owned candidates scored</div><h4>If it is missing: 3 backups (model Δ vs the 99; ties within 0.25 broken by Beledros inclusion)</h4><div class="bk">'+(bk||'<i>none</i>')+'</div><button class="ibtn found">'+(c.classList.contains('done')?'✓ Found (undo)':'✓ Found')+'</button><button class="ibtn close">Close</button>';
+ibox.querySelector('.found').onclick=()=>{toggle(c);info.classList.remove('on')};ibox.querySelector('.close').onclick=()=>info.classList.remove('on');info.classList.add('on')};
+info.onclick=e=>{if(e.target===info)info.classList.remove('on')};document.addEventListener('keydown',e=>{if(e.key==='Escape')info.classList.remove('on')});
+document.querySelectorAll('.card').forEach(c=>{if(S[c.dataset.key])c.classList.add('done');c.onclick=e=>{if(c.dataset.info&&!e.shiftKey)openInfo(c);else toggle(c)}});
 document.querySelectorAll('section').forEach(count);
 const q=document.getElementById('q');q.oninput=()=>{const v=q.value.trim().toLowerCase();document.querySelectorAll('.card').forEach(c=>c.classList.toggle('f',!!v&&!c.dataset.name.includes(v)));document.querySelectorAll('.grid').forEach(g=>{const e=!g.querySelector('.card:not(.f)');g.classList.toggle('f',e);g.previousElementSibling.classList.toggle('f',e)})};
 document.querySelectorAll('.reset').forEach(b=>b.onclick=()=>{const s=b.closest('section');s.querySelectorAll('.card').forEach(c=>{c.classList.remove('done');delete S[c.dataset.key]});save();count(s)});

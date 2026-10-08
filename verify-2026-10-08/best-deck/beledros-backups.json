@@ -1,0 +1,2980 @@
+{
+ "base": 101.19857142857144,
+ "games": 100,
+ "generated": "2026-10-08T11:05:46.240Z",
+ "cards": {
+  "Command Tower": {
+   "from": "Meren (dismantled)",
+   "roles": [
+    "land"
+   ],
+   "candidates": 51,
+   "backups": [
+    {
+     "name": "Forest",
+     "delta": -0.025000000000005684,
+     "from": "Meren (dismantled)",
+     "type": "Basic Land — Forest",
+     "incl": 0.920056,
+     "rank": null
+    },
+    {
+     "name": "Swamp",
+     "delta": -0.007142857142852677,
+     "from": "Meren (dismantled)",
+     "type": "Basic Land — Swamp",
+     "incl": 0.913511,
+     "rank": null
+    },
+    {
+     "name": "Reliquary Tower",
+     "delta": -0.07500000000000284,
+     "from": "loose collection",
+     "type": "Land",
+     "incl": 0.292193,
+     "rank": 10
+    }
+   ]
+  },
+  "Woodland Cemetery": {
+   "from": "Meren (dismantled)",
+   "roles": [
+    "land"
+   ],
+   "candidates": 51,
+   "backups": [
+    {
+     "name": "Forest",
+     "delta": -0.01071428571428612,
+     "from": "Meren (dismantled)",
+     "type": "Basic Land — Forest",
+     "incl": 0.920056,
+     "rank": null
+    },
+    {
+     "name": "Swamp",
+     "delta": -0.046428571428577925,
+     "from": "Meren (dismantled)",
+     "type": "Basic Land — Swamp",
+     "incl": 0.913511,
+     "rank": null
+    },
+    {
+     "name": "Reliquary Tower",
+     "delta": -0.09999999999999432,
+     "from": "loose collection",
+     "type": "Land",
+     "incl": 0.292193,
+     "rank": 10
+    }
+   ]
+  },
+  "Llanowar Wastes": {
+   "from": "Meren (dismantled)",
+   "roles": [
+    "land"
+   ],
+   "candidates": 51,
+   "backups": [
+    {
+     "name": "Forest",
+     "delta": 0,
+     "from": "Meren (dismantled)",
+     "type": "Basic Land — Forest",
+     "incl": 0.920056,
+     "rank": null
+    },
+    {
+     "name": "Swamp",
+     "delta": -0.028571428571424917,
+     "from": "Meren (dismantled)",
+     "type": "Basic Land — Swamp",
+     "incl": 0.913511,
+     "rank": null
+    },
+    {
+     "name": "Reliquary Tower",
+     "delta": -0.0535714285714306,
+     "from": "loose collection",
+     "type": "Land",
+     "incl": 0.292193,
+     "rank": 10
+    }
+   ]
+  },
+  "Festering Thicket": {
+   "from": "Meren (dismantled)",
+   "roles": [
+    "land"
+   ],
+   "candidates": 51,
+   "backups": [
+    {
+     "name": "Forest",
+     "delta": -0.0035714285714334437,
+     "from": "Meren (dismantled)",
+     "type": "Basic Land — Forest",
+     "incl": 0.920056,
+     "rank": null
+    },
+    {
+     "name": "Swamp",
+     "delta": -0.01071428571428612,
+     "from": "Meren (dismantled)",
+     "type": "Basic Land — Swamp",
+     "incl": 0.913511,
+     "rank": null
+    },
+    {
+     "name": "Reliquary Tower",
+     "delta": -0.028571428571424917,
+     "from": "loose collection",
+     "type": "Land",
+     "incl": 0.292193,
+     "rank": 10
+    }
+   ]
+  },
+  "Bojuka Bog": {
+   "from": "Meren (dismantled)",
+   "roles": [
+    "land"
+   ],
+   "candidates": 51,
+   "backups": [
+    {
+     "name": "Forest",
+     "delta": -0.007142857142852677,
+     "from": "Meren (dismantled)",
+     "type": "Basic Land — Forest",
+     "incl": 0.920056,
+     "rank": null
+    },
+    {
+     "name": "Swamp",
+     "delta": 0,
+     "from": "Meren (dismantled)",
+     "type": "Basic Land — Swamp",
+     "incl": 0.913511,
+     "rank": null
+    },
+    {
+     "name": "Reliquary Tower",
+     "delta": -0.035714285714291805,
+     "from": "loose collection",
+     "type": "Land",
+     "incl": 0.292193,
+     "rank": 10
+    }
+   ]
+  },
+  "Golgari Rot Farm": {
+   "from": "loose collection",
+   "roles": [
+    "land"
+   ],
+   "candidates": 51,
+   "backups": [
+    {
+     "name": "Forest",
+     "delta": 0.035714285714291805,
+     "from": "Meren (dismantled)",
+     "type": "Basic Land — Forest",
+     "incl": 0.920056,
+     "rank": null
+    },
+    {
+     "name": "Swamp",
+     "delta": 0.046428571428563714,
+     "from": "Meren (dismantled)",
+     "type": "Basic Land — Swamp",
+     "incl": 0.913511,
+     "rank": null
+    },
+    {
+     "name": "Reliquary Tower",
+     "delta": 0.04285714285714448,
+     "from": "loose collection",
+     "type": "Land",
+     "incl": 0.292193,
+     "rank": 10
+    }
+   ]
+  },
+  "Necroblossom Snarl": {
+   "from": "Meren (dismantled)",
+   "roles": [
+    "land"
+   ],
+   "candidates": 51,
+   "backups": [
+    {
+     "name": "Forest",
+     "delta": 0.03214285714285836,
+     "from": "Meren (dismantled)",
+     "type": "Basic Land — Forest",
+     "incl": 0.920056,
+     "rank": null
+    },
+    {
+     "name": "Swamp",
+     "delta": 0.014285714285719564,
+     "from": "Meren (dismantled)",
+     "type": "Basic Land — Swamp",
+     "incl": 0.913511,
+     "rank": null
+    },
+    {
+     "name": "Reliquary Tower",
+     "delta": -0.046428571428577925,
+     "from": "loose collection",
+     "type": "Land",
+     "incl": 0.292193,
+     "rank": 10
+    }
+   ]
+  },
+  "High Market": {
+   "from": "Meren (dismantled)",
+   "roles": [
+    "land"
+   ],
+   "candidates": 51,
+   "backups": [
+    {
+     "name": "Forest",
+     "delta": 0.025000000000005684,
+     "from": "Meren (dismantled)",
+     "type": "Basic Land — Forest",
+     "incl": 0.920056,
+     "rank": null
+    },
+    {
+     "name": "Swamp",
+     "delta": 0.025000000000005684,
+     "from": "Meren (dismantled)",
+     "type": "Basic Land — Swamp",
+     "incl": 0.913511,
+     "rank": null
+    },
+    {
+     "name": "Reliquary Tower",
+     "delta": 0,
+     "from": "loose collection",
+     "type": "Land",
+     "incl": 0.292193,
+     "rank": 10
+    }
+   ]
+  },
+  "Temple of Malady": {
+   "from": "Meren (dismantled)",
+   "roles": [
+    "land"
+   ],
+   "candidates": 51,
+   "backups": [
+    {
+     "name": "Forest",
+     "delta": 0.06071428571428328,
+     "from": "Meren (dismantled)",
+     "type": "Basic Land — Forest",
+     "incl": 0.920056,
+     "rank": null
+    },
+    {
+     "name": "Swamp",
+     "delta": 0.0892857142857082,
+     "from": "Meren (dismantled)",
+     "type": "Basic Land — Swamp",
+     "incl": 0.913511,
+     "rank": null
+    },
+    {
+     "name": "Reliquary Tower",
+     "delta": 0.014285714285719564,
+     "from": "loose collection",
+     "type": "Land",
+     "incl": 0.292193,
+     "rank": 10
+    }
+   ]
+  },
+  "Twilight Mire": {
+   "from": "Meren (dismantled)",
+   "roles": [
+    "land"
+   ],
+   "candidates": 51,
+   "backups": [
+    {
+     "name": "Forest",
+     "delta": -0.06428571428571672,
+     "from": "Meren (dismantled)",
+     "type": "Basic Land — Forest",
+     "incl": 0.920056,
+     "rank": null
+    },
+    {
+     "name": "Swamp",
+     "delta": 0,
+     "from": "Meren (dismantled)",
+     "type": "Basic Land — Swamp",
+     "incl": 0.913511,
+     "rank": null
+    },
+    {
+     "name": "Reliquary Tower",
+     "delta": -0.0892857142857082,
+     "from": "loose collection",
+     "type": "Land",
+     "incl": 0.292193,
+     "rank": 10
+    }
+   ]
+  },
+  "Thunderfoot Baloth": {
+   "from": "Gilanra + Alena",
+   "backfill": "Domri, Anarch of Bolas",
+   "roles": [
+    "win_condition"
+   ],
+   "candidates": 130,
+   "backups": [
+    {
+     "name": "Blossoming Bogbeast",
+     "delta": -8.872857142857157,
+     "from": "loose collection",
+     "type": "Creature — Beast",
+     "incl": 0.17064,
+     "rank": 4019
+    },
+    {
+     "name": "Verdant Sun's Avatar",
+     "delta": -8.91928571428572,
+     "from": "loose collection",
+     "type": "Creature — Dinosaur Avatar",
+     "incl": 0.123422,
+     "rank": 2179
+    },
+    {
+     "name": "Avenger of Zendikar",
+     "delta": -8.91928571428572,
+     "from": "loose collection",
+     "type": "Creature — Elemental",
+     "incl": 0.114072,
+     "rank": 295
+    }
+   ]
+  },
+  "Exotic Orchard": {
+   "from": "Meren (dismantled)",
+   "roles": [
+    "land"
+   ],
+   "candidates": 51,
+   "backups": [
+    {
+     "name": "Forest",
+     "delta": -0.025000000000005684,
+     "from": "Meren (dismantled)",
+     "type": "Basic Land — Forest",
+     "incl": 0.920056,
+     "rank": null
+    },
+    {
+     "name": "Swamp",
+     "delta": 0.007142857142852677,
+     "from": "Meren (dismantled)",
+     "type": "Basic Land — Swamp",
+     "incl": 0.913511,
+     "rank": null
+    },
+    {
+     "name": "Reliquary Tower",
+     "delta": -0.03928571428571104,
+     "from": "loose collection",
+     "type": "Land",
+     "incl": 0.292193,
+     "rank": 10
+    }
+   ]
+  },
+  "Yavimaya, Cradle of Growth": {
+   "from": "loose collection",
+   "roles": [
+    "land"
+   ],
+   "candidates": 51,
+   "backups": [
+    {
+     "name": "Forest",
+     "delta": 0,
+     "from": "Meren (dismantled)",
+     "type": "Basic Land — Forest",
+     "incl": 0.920056,
+     "rank": null
+    },
+    {
+     "name": "Swamp",
+     "delta": -0.035714285714291805,
+     "from": "Meren (dismantled)",
+     "type": "Basic Land — Swamp",
+     "incl": 0.913511,
+     "rank": null
+    },
+    {
+     "name": "Reliquary Tower",
+     "delta": -0.04999999999999716,
+     "from": "loose collection",
+     "type": "Land",
+     "incl": 0.292193,
+     "rank": 10
+    }
+   ]
+  },
+  "Jungle Hollow": {
+   "from": "loose collection",
+   "roles": [
+    "land"
+   ],
+   "candidates": 51,
+   "backups": [
+    {
+     "name": "Forest",
+     "delta": -0.025000000000005684,
+     "from": "Meren (dismantled)",
+     "type": "Basic Land — Forest",
+     "incl": 0.920056,
+     "rank": null
+    },
+    {
+     "name": "Swamp",
+     "delta": -0.03928571428571104,
+     "from": "Meren (dismantled)",
+     "type": "Basic Land — Swamp",
+     "incl": 0.913511,
+     "rank": null
+    },
+    {
+     "name": "Reliquary Tower",
+     "delta": -0.07500000000000284,
+     "from": "loose collection",
+     "type": "Land",
+     "incl": 0.292193,
+     "rank": 10
+    }
+   ]
+  },
+  "Myriad Landscape": {
+   "from": "Meren (dismantled)",
+   "roles": [
+    "land"
+   ],
+   "candidates": 51,
+   "backups": [
+    {
+     "name": "Forest",
+     "delta": 0.014285714285719564,
+     "from": "Meren (dismantled)",
+     "type": "Basic Land — Forest",
+     "incl": 0.920056,
+     "rank": null
+    },
+    {
+     "name": "Swamp",
+     "delta": 0.007142857142852677,
+     "from": "Meren (dismantled)",
+     "type": "Basic Land — Swamp",
+     "incl": 0.913511,
+     "rank": null
+    },
+    {
+     "name": "Reliquary Tower",
+     "delta": -0.007142857142852677,
+     "from": "loose collection",
+     "type": "Land",
+     "incl": 0.292193,
+     "rank": 10
+    }
+   ]
+  },
+  "Vernal Fen": {
+   "from": "Meren (dismantled)",
+   "roles": [
+    "land"
+   ],
+   "candidates": 51,
+   "backups": [
+    {
+     "name": "Forest",
+     "delta": -0.09642857142857508,
+     "from": "Meren (dismantled)",
+     "type": "Basic Land — Forest",
+     "incl": 0.920056,
+     "rank": null
+    },
+    {
+     "name": "Swamp",
+     "delta": -0.028571428571424917,
+     "from": "Meren (dismantled)",
+     "type": "Basic Land — Swamp",
+     "incl": 0.913511,
+     "rank": null
+    },
+    {
+     "name": "Reliquary Tower",
+     "delta": -0.14999999999999147,
+     "from": "loose collection",
+     "type": "Land",
+     "incl": 0.292193,
+     "rank": 10
+    }
+   ]
+  },
+  "Fabled Passage": {
+   "from": "Meren (dismantled)",
+   "roles": [
+    "land"
+   ],
+   "candidates": 51,
+   "backups": [
+    {
+     "name": "Forest",
+     "delta": 0.03214285714285836,
+     "from": "Meren (dismantled)",
+     "type": "Basic Land — Forest",
+     "incl": 0.920056,
+     "rank": null
+    },
+    {
+     "name": "Swamp",
+     "delta": 0.014285714285719564,
+     "from": "Meren (dismantled)",
+     "type": "Basic Land — Swamp",
+     "incl": 0.913511,
+     "rank": null
+    },
+    {
+     "name": "Reliquary Tower",
+     "delta": 0,
+     "from": "loose collection",
+     "type": "Land",
+     "incl": 0.292193,
+     "rank": 10
+    }
+   ]
+  },
+  "Grim Backwoods": {
+   "from": "Meren (dismantled)",
+   "roles": [
+    "land"
+   ],
+   "candidates": 51,
+   "backups": [
+    {
+     "name": "Forest",
+     "delta": 0,
+     "from": "Meren (dismantled)",
+     "type": "Basic Land — Forest",
+     "incl": 0.920056,
+     "rank": null
+    },
+    {
+     "name": "Swamp",
+     "delta": 0.01071428571428612,
+     "from": "Meren (dismantled)",
+     "type": "Basic Land — Swamp",
+     "incl": 0.913511,
+     "rank": null
+    },
+    {
+     "name": "Reliquary Tower",
+     "delta": 0,
+     "from": "loose collection",
+     "type": "Land",
+     "incl": 0.292193,
+     "rank": 10
+    }
+   ]
+  },
+  "Temple of the False God": {
+   "from": "loose collection",
+   "roles": [
+    "land"
+   ],
+   "candidates": 51,
+   "backups": [
+    {
+     "name": "Forest",
+     "delta": -0.017857142857138797,
+     "from": "Meren (dismantled)",
+     "type": "Basic Land — Forest",
+     "incl": 0.920056,
+     "rank": null
+    },
+    {
+     "name": "Swamp",
+     "delta": 0.01071428571428612,
+     "from": "Meren (dismantled)",
+     "type": "Basic Land — Swamp",
+     "incl": 0.913511,
+     "rank": null
+    },
+    {
+     "name": "Reliquary Tower",
+     "delta": 0,
+     "from": "loose collection",
+     "type": "Land",
+     "incl": 0.292193,
+     "rank": 10
+    }
+   ]
+  },
+  "Haunted Mire": {
+   "from": "loose collection",
+   "roles": [
+    "land"
+   ],
+   "candidates": 51,
+   "backups": [
+    {
+     "name": "Forest",
+     "delta": 0.01071428571428612,
+     "from": "Meren (dismantled)",
+     "type": "Basic Land — Forest",
+     "incl": 0.920056,
+     "rank": null
+    },
+    {
+     "name": "Swamp",
+     "delta": -0.12142857142856656,
+     "from": "Meren (dismantled)",
+     "type": "Basic Land — Swamp",
+     "incl": 0.913511,
+     "rank": null
+    },
+    {
+     "name": "Reliquary Tower",
+     "delta": -0.14642857142857224,
+     "from": "loose collection",
+     "type": "Land",
+     "incl": 0.292193,
+     "rank": 10
+    }
+   ]
+  },
+  "Evolving Wilds": {
+   "from": "loose collection",
+   "roles": [
+    "land"
+   ],
+   "candidates": 51,
+   "backups": [
+    {
+     "name": "Forest",
+     "delta": 0,
+     "from": "Meren (dismantled)",
+     "type": "Basic Land — Forest",
+     "incl": 0.920056,
+     "rank": null
+    },
+    {
+     "name": "Swamp",
+     "delta": 0.017857142857138797,
+     "from": "Meren (dismantled)",
+     "type": "Basic Land — Swamp",
+     "incl": 0.913511,
+     "rank": null
+    },
+    {
+     "name": "Reliquary Tower",
+     "delta": 0,
+     "from": "loose collection",
+     "type": "Land",
+     "incl": 0.292193,
+     "rank": 10
+    }
+   ]
+  },
+  "Viridescent Bog": {
+   "from": "Meren (dismantled)",
+   "roles": [
+    "land"
+   ],
+   "candidates": 51,
+   "backups": [
+    {
+     "name": "Forest",
+     "delta": 0.0035714285714334437,
+     "from": "Meren (dismantled)",
+     "type": "Basic Land — Forest",
+     "incl": 0.920056,
+     "rank": null
+    },
+    {
+     "name": "Swamp",
+     "delta": -0.014285714285719564,
+     "from": "Meren (dismantled)",
+     "type": "Basic Land — Swamp",
+     "incl": 0.913511,
+     "rank": null
+    },
+    {
+     "name": "Reliquary Tower",
+     "delta": -0.014285714285719564,
+     "from": "loose collection",
+     "type": "Land",
+     "incl": 0.292193,
+     "rank": 10
+    }
+   ]
+  },
+  "Terramorphic Expanse": {
+   "from": "loose collection",
+   "roles": [
+    "land"
+   ],
+   "candidates": 51,
+   "backups": [
+    {
+     "name": "Forest",
+     "delta": 0.035714285714291805,
+     "from": "Meren (dismantled)",
+     "type": "Basic Land — Forest",
+     "incl": 0.920056,
+     "rank": null
+    },
+    {
+     "name": "Swamp",
+     "delta": 0.028571428571424917,
+     "from": "Meren (dismantled)",
+     "type": "Basic Land — Swamp",
+     "incl": 0.913511,
+     "rank": null
+    },
+    {
+     "name": "Reliquary Tower",
+     "delta": 0,
+     "from": "loose collection",
+     "type": "Land",
+     "incl": 0.292193,
+     "rank": 10
+    }
+   ]
+  },
+  "Witherbloom Campus": {
+   "from": "loose collection",
+   "roles": [
+    "land"
+   ],
+   "candidates": 51,
+   "backups": [
+    {
+     "name": "Forest",
+     "delta": 0.014285714285719564,
+     "from": "Meren (dismantled)",
+     "type": "Basic Land — Forest",
+     "incl": 0.920056,
+     "rank": null
+    },
+    {
+     "name": "Swamp",
+     "delta": 0.028571428571424917,
+     "from": "Meren (dismantled)",
+     "type": "Basic Land — Swamp",
+     "incl": 0.913511,
+     "rank": null
+    },
+    {
+     "name": "Reliquary Tower",
+     "delta": 0.014285714285719564,
+     "from": "loose collection",
+     "type": "Land",
+     "incl": 0.292193,
+     "rank": 10
+    }
+   ]
+  },
+  "Blighted Woodland": {
+   "from": "loose collection",
+   "roles": [
+    "land"
+   ],
+   "candidates": 51,
+   "backups": [
+    {
+     "name": "Forest",
+     "delta": 0,
+     "from": "Meren (dismantled)",
+     "type": "Basic Land — Forest",
+     "incl": 0.920056,
+     "rank": null
+    },
+    {
+     "name": "Swamp",
+     "delta": 0.007142857142852677,
+     "from": "Meren (dismantled)",
+     "type": "Basic Land — Swamp",
+     "incl": 0.913511,
+     "rank": null
+    },
+    {
+     "name": "Reliquary Tower",
+     "delta": 0,
+     "from": "loose collection",
+     "type": "Land",
+     "incl": 0.292193,
+     "rank": 10
+    }
+   ]
+  },
+  "Witch's Clinic": {
+   "from": "loose collection",
+   "roles": [
+    "land"
+   ],
+   "candidates": 51,
+   "backups": [
+    {
+     "name": "Forest",
+     "delta": 0.025000000000005684,
+     "from": "Meren (dismantled)",
+     "type": "Basic Land — Forest",
+     "incl": 0.920056,
+     "rank": null
+    },
+    {
+     "name": "Swamp",
+     "delta": 0.0535714285714306,
+     "from": "Meren (dismantled)",
+     "type": "Basic Land — Swamp",
+     "incl": 0.913511,
+     "rank": null
+    },
+    {
+     "name": "Reliquary Tower",
+     "delta": 0,
+     "from": "loose collection",
+     "type": "Land",
+     "incl": 0.292193,
+     "rank": 10
+    }
+   ]
+  },
+  "Turbulent Fen": {
+   "from": "Meren (dismantled)",
+   "roles": [
+    "land"
+   ],
+   "candidates": 51,
+   "backups": [
+    {
+     "name": "Forest",
+     "delta": -0.028571428571424917,
+     "from": "Meren (dismantled)",
+     "type": "Basic Land — Forest",
+     "incl": 0.920056,
+     "rank": null
+    },
+    {
+     "name": "Swamp",
+     "delta": -0.125,
+     "from": "Meren (dismantled)",
+     "type": "Basic Land — Swamp",
+     "incl": 0.913511,
+     "rank": null
+    },
+    {
+     "name": "Reliquary Tower",
+     "delta": -0.1785714285714306,
+     "from": "loose collection",
+     "type": "Land",
+     "incl": 0.292193,
+     "rank": 10
+    }
+   ]
+  },
+  "Radiant Fountain": {
+   "from": "loose collection",
+   "roles": [
+    "land"
+   ],
+   "candidates": 51,
+   "backups": [
+    {
+     "name": "Forest",
+     "delta": 0.046428571428577925,
+     "from": "Meren (dismantled)",
+     "type": "Basic Land — Forest",
+     "incl": 0.920056,
+     "rank": null
+    },
+    {
+     "name": "Swamp",
+     "delta": 0.035714285714291805,
+     "from": "Meren (dismantled)",
+     "type": "Basic Land — Swamp",
+     "incl": 0.913511,
+     "rank": null
+    },
+    {
+     "name": "Reliquary Tower",
+     "delta": 0,
+     "from": "loose collection",
+     "type": "Land",
+     "incl": 0.292193,
+     "rank": 10
+    }
+   ]
+  },
+  "Sol Ring": {
+   "from": "Meren (dismantled)",
+   "roles": [
+    "ramp"
+   ],
+   "candidates": 111,
+   "backups": [
+    {
+     "name": "Rampant Growth",
+     "delta": -0.07500000000000284,
+     "from": "loose collection",
+     "type": "Sorcery",
+     "incl": 0.529219,
+     "rank": 27
+    },
+    {
+     "name": "Wight of the Reliquary",
+     "delta": -0.09642857142857508,
+     "from": "Meren (dismantled)",
+     "type": "Creature — Zombie Knight",
+     "incl": 0.267415,
+     "rank": 1266
+    },
+    {
+     "name": "Skyshroud Claim",
+     "delta": -0.1071428571428612,
+     "from": "loose collection",
+     "type": "Sorcery",
+     "incl": 0.265545,
+     "rank": 302
+    }
+   ]
+  },
+  "Cultivate": {
+   "from": "loose collection",
+   "roles": [
+    "ramp"
+   ],
+   "candidates": 111,
+   "backups": [
+    {
+     "name": "Rampant Growth",
+     "delta": -0.035714285714291805,
+     "from": "loose collection",
+     "type": "Sorcery",
+     "incl": 0.529219,
+     "rank": 27
+    },
+    {
+     "name": "Wight of the Reliquary",
+     "delta": -0.0714285714285694,
+     "from": "Meren (dismantled)",
+     "type": "Creature — Zombie Knight",
+     "incl": 0.267415,
+     "rank": 1266
+    },
+    {
+     "name": "Skyshroud Claim",
+     "delta": 0.017857142857138797,
+     "from": "loose collection",
+     "type": "Sorcery",
+     "incl": 0.265545,
+     "rank": 302
+    }
+   ]
+  },
+  "Pest Infestation": {
+   "from": "The Cabbage Merchant",
+   "backfill": "Haywire Mite",
+   "roles": [
+    "removal"
+   ],
+   "candidates": 58,
+   "backups": [
+    {
+     "name": "Deadly Brew",
+     "delta": 0.0035714285714334437,
+     "from": "loose collection",
+     "type": "Sorcery",
+     "incl": 0.204769,
+     "rank": 4763
+    },
+    {
+     "name": "Immoral Bargain",
+     "delta": 0.02142857142857224,
+     "from": "loose collection",
+     "type": "Sorcery",
+     "incl": 0.13698,
+     "rank": 6642
+    },
+    {
+     "name": "Witherbloom Command",
+     "delta": 0.0035714285714334437,
+     "from": "loose collection",
+     "type": "Sorcery",
+     "incl": 0.098177,
+     "rank": 8549
+    }
+   ]
+  },
+  "Moldervine Reclamation": {
+   "from": "Meren (dismantled)",
+   "roles": [
+    "draw"
+   ],
+   "candidates": 98,
+   "backups": [
+    {
+     "name": "Village Rites",
+     "delta": -0.06428571428571672,
+     "from": "Meren (dismantled)",
+     "type": "Instant",
+     "incl": 0.355774,
+     "rank": 202
+    },
+    {
+     "name": "Corrupted Conviction",
+     "delta": -0.06428571428571672,
+     "from": "loose collection",
+     "type": "Instant",
+     "incl": 0.120617,
+     "rank": 599
+    },
+    {
+     "name": "Night's Whisper",
+     "delta": -0.0535714285714306,
+     "from": "loose collection",
+     "type": "Sorcery",
+     "incl": 0.113604,
+     "rank": 182
+    }
+   ]
+  },
+  "Dina, Soul Steeper": {
+   "from": "loose collection",
+   "roles": [
+    "win_condition"
+   ],
+   "candidates": 130,
+   "backups": [
+    {
+     "name": "Blossoming Bogbeast",
+     "delta": 0.04285714285714448,
+     "from": "loose collection",
+     "type": "Creature — Beast",
+     "incl": 0.17064,
+     "rank": 4019
+    },
+    {
+     "name": "Verdant Sun's Avatar",
+     "delta": 0.0035714285714334437,
+     "from": "loose collection",
+     "type": "Creature — Dinosaur Avatar",
+     "incl": 0.123422,
+     "rank": 2179
+    },
+    {
+     "name": "Avenger of Zendikar",
+     "delta": 0.0035714285714334437,
+     "from": "loose collection",
+     "type": "Creature — Elemental",
+     "incl": 0.114072,
+     "rank": 295
+    }
+   ]
+  },
+  "Zulaport Cutthroat": {
+   "from": "Meren (dismantled)",
+   "roles": [
+    "win_condition"
+   ],
+   "candidates": 130,
+   "backups": [
+    {
+     "name": "Blossoming Bogbeast",
+     "delta": -0.007142857142852677,
+     "from": "loose collection",
+     "type": "Creature — Beast",
+     "incl": 0.17064,
+     "rank": 4019
+    },
+    {
+     "name": "Verdant Sun's Avatar",
+     "delta": -0.03214285714285836,
+     "from": "loose collection",
+     "type": "Creature — Dinosaur Avatar",
+     "incl": 0.123422,
+     "rank": 2179
+    },
+    {
+     "name": "Avenger of Zendikar",
+     "delta": -0.03214285714285836,
+     "from": "loose collection",
+     "type": "Creature — Elemental",
+     "incl": 0.114072,
+     "rank": 295
+    }
+   ]
+  },
+  "Arcane Signet": {
+   "from": "Meren (dismantled)",
+   "roles": [
+    "ramp"
+   ],
+   "candidates": 111,
+   "backups": [
+    {
+     "name": "Rampant Growth",
+     "delta": -0.02142857142857224,
+     "from": "loose collection",
+     "type": "Sorcery",
+     "incl": 0.529219,
+     "rank": 27
+    },
+    {
+     "name": "Wight of the Reliquary",
+     "delta": -0.09642857142857508,
+     "from": "Meren (dismantled)",
+     "type": "Creature — Zombie Knight",
+     "incl": 0.267415,
+     "rank": 1266
+    },
+    {
+     "name": "Skyshroud Claim",
+     "delta": -0.057142857142864045,
+     "from": "loose collection",
+     "type": "Sorcery",
+     "incl": 0.265545,
+     "rank": 302
+    }
+   ]
+  },
+  "Blood Artist": {
+   "from": "Meren (dismantled)",
+   "roles": [
+    "utility"
+   ],
+   "candidates": 206,
+   "backups": [
+    {
+     "name": "Blech, Loafing Pest",
+     "delta": -0.003571428571419233,
+     "from": "loose collection",
+     "type": "Legendary Creature — Pest",
+     "incl": 0.16503,
+     "rank": 7292
+    },
+    {
+     "name": "Victimize",
+     "delta": -0.003571428571419233,
+     "from": "Meren (dismantled)",
+     "type": "Sorcery",
+     "incl": 0.154278,
+     "rank": 129
+    },
+    {
+     "name": "Moseo, Vein's New Dean",
+     "delta": -0.003571428571419233,
+     "from": "loose collection",
+     "type": "Legendary Creature — Bird Skeleton Warlock",
+     "incl": 0.142122,
+     "rank": 4268
+    }
+   ]
+  },
+  "Veil of Summer": {
+   "from": "Meren (dismantled)",
+   "roles": [
+    "draw",
+    "protection"
+   ],
+   "candidates": 105,
+   "backups": [
+    {
+     "name": "Silkguard",
+     "delta": 0,
+     "from": "loose collection",
+     "type": "Instant",
+     "incl": 0,
+     "rank": 2346
+    },
+    {
+     "name": "Helix Pinnacle",
+     "delta": 0,
+     "from": "loose collection",
+     "type": "Enchantment",
+     "incl": 0,
+     "rank": 4480
+    }
+   ]
+  },
+  "Deadly Tempest": {
+   "from": "loose collection",
+   "roles": [
+    "board_wipe"
+   ],
+   "candidates": 5,
+   "backups": [
+    {
+     "name": "Golgari Charm",
+     "delta": 0.035714285714291805,
+     "from": "Meren (dismantled)",
+     "type": "Instant",
+     "incl": 0.139785,
+     "rank": 1621
+    },
+    {
+     "name": "Pestilence Demon",
+     "delta": -0.0035714285714334437,
+     "from": "loose collection",
+     "type": "Creature — Demon",
+     "incl": 0,
+     "rank": 10273
+    },
+    {
+     "name": "Reiver Demon",
+     "delta": -0.0035714285714334437,
+     "from": "loose collection",
+     "type": "Creature — Demon",
+     "incl": 0,
+     "rank": 10821
+    }
+   ]
+  },
+  "Plumb the Forbidden": {
+   "from": "loose collection",
+   "roles": [
+    "draw"
+   ],
+   "candidates": 98,
+   "backups": [
+    {
+     "name": "Village Rites",
+     "delta": -0.03214285714285836,
+     "from": "Meren (dismantled)",
+     "type": "Instant",
+     "incl": 0.355774,
+     "rank": 202
+    },
+    {
+     "name": "Corrupted Conviction",
+     "delta": -0.03214285714285836,
+     "from": "loose collection",
+     "type": "Instant",
+     "incl": 0.120617,
+     "rank": 599
+    },
+    {
+     "name": "Night's Whisper",
+     "delta": 0,
+     "from": "loose collection",
+     "type": "Sorcery",
+     "incl": 0.113604,
+     "rank": 182
+    }
+   ]
+  },
+  "Warg Tactics": {
+   "from": "loose collection",
+   "roles": [
+    "removal",
+    "protection"
+   ],
+   "candidates": 66,
+   "backups": [
+    {
+     "name": "Silkguard",
+     "delta": -0.025000000000005684,
+     "from": "loose collection",
+     "type": "Instant",
+     "incl": 0,
+     "rank": 2346
+    },
+    {
+     "name": "Helix Pinnacle",
+     "delta": -0.025000000000005684,
+     "from": "loose collection",
+     "type": "Enchantment",
+     "incl": 0,
+     "rank": 4480
+    }
+   ]
+  },
+  "Assassin's Trophy": {
+   "from": "Meren (dismantled)",
+   "roles": [
+    "removal"
+   ],
+   "candidates": 58,
+   "backups": [
+    {
+     "name": "Deadly Brew",
+     "delta": 0,
+     "from": "loose collection",
+     "type": "Sorcery",
+     "incl": 0.204769,
+     "rank": 4763
+    },
+    {
+     "name": "Immoral Bargain",
+     "delta": 0.01071428571428612,
+     "from": "loose collection",
+     "type": "Sorcery",
+     "incl": 0.13698,
+     "rank": 6642
+    },
+    {
+     "name": "Witherbloom Command",
+     "delta": 0,
+     "from": "loose collection",
+     "type": "Sorcery",
+     "incl": 0.098177,
+     "rank": 8549
+    }
+   ]
+  },
+  "Mortality Spear": {
+   "from": "loose collection",
+   "roles": [
+    "removal"
+   ],
+   "candidates": 58,
+   "backups": [
+    {
+     "name": "Deadly Brew",
+     "delta": -0.025000000000005684,
+     "from": "loose collection",
+     "type": "Sorcery",
+     "incl": 0.204769,
+     "rank": 4763
+    },
+    {
+     "name": "Immoral Bargain",
+     "delta": -0.0035714285714334437,
+     "from": "loose collection",
+     "type": "Sorcery",
+     "incl": 0.13698,
+     "rank": 6642
+    },
+    {
+     "name": "Witherbloom Command",
+     "delta": -0.025000000000005684,
+     "from": "loose collection",
+     "type": "Sorcery",
+     "incl": 0.098177,
+     "rank": 8549
+    }
+   ]
+  },
+  "Kodama's Reach": {
+   "from": "The Cabbage Merchant",
+   "backfill": "Springbloom Druid",
+   "roles": [
+    "ramp"
+   ],
+   "candidates": 111,
+   "backups": [
+    {
+     "name": "Rampant Growth",
+     "delta": 0.017857142857138797,
+     "from": "loose collection",
+     "type": "Sorcery",
+     "incl": 0.529219,
+     "rank": 27
+    },
+    {
+     "name": "Wight of the Reliquary",
+     "delta": -0.035714285714291805,
+     "from": "Meren (dismantled)",
+     "type": "Creature — Zombie Knight",
+     "incl": 0.267415,
+     "rank": 1266
+    },
+    {
+     "name": "Skyshroud Claim",
+     "delta": 0.04285714285714448,
+     "from": "loose collection",
+     "type": "Sorcery",
+     "incl": 0.265545,
+     "rank": 302
+    }
+   ]
+  },
+  "Viscera Seer": {
+   "from": "Meren (dismantled)",
+   "roles": [
+    "utility"
+   ],
+   "candidates": 206,
+   "backups": [
+    {
+     "name": "Blech, Loafing Pest",
+     "delta": 0.046428571428563714,
+     "from": "loose collection",
+     "type": "Legendary Creature — Pest",
+     "incl": 0.16503,
+     "rank": 7292
+    },
+    {
+     "name": "Victimize",
+     "delta": 0.046428571428563714,
+     "from": "Meren (dismantled)",
+     "type": "Sorcery",
+     "incl": 0.154278,
+     "rank": 129
+    },
+    {
+     "name": "Moseo, Vein's New Dean",
+     "delta": 0.046428571428563714,
+     "from": "loose collection",
+     "type": "Legendary Creature — Bird Skeleton Warlock",
+     "incl": 0.142122,
+     "rank": 4268
+    }
+   ]
+  },
+  "Three Visits": {
+   "from": "loose collection",
+   "roles": [
+    "ramp"
+   ],
+   "candidates": 111,
+   "backups": [
+    {
+     "name": "Rampant Growth",
+     "delta": 0,
+     "from": "loose collection",
+     "type": "Sorcery",
+     "incl": 0.529219,
+     "rank": 27
+    },
+    {
+     "name": "Wight of the Reliquary",
+     "delta": -0.125,
+     "from": "Meren (dismantled)",
+     "type": "Creature — Zombie Knight",
+     "incl": 0.267415,
+     "rank": 1266
+    },
+    {
+     "name": "Skyshroud Claim",
+     "delta": -0.04999999999999716,
+     "from": "loose collection",
+     "type": "Sorcery",
+     "incl": 0.265545,
+     "rank": 302
+    }
+   ]
+  },
+  "Binding the Old Gods": {
+   "from": "loose collection",
+   "roles": [
+    "removal"
+   ],
+   "candidates": 58,
+   "backups": [
+    {
+     "name": "Deadly Brew",
+     "delta": -0.16428571428571104,
+     "from": "loose collection",
+     "type": "Sorcery",
+     "incl": 0.204769,
+     "rank": 4763
+    },
+    {
+     "name": "Immoral Bargain",
+     "delta": -0.15714285714285836,
+     "from": "loose collection",
+     "type": "Sorcery",
+     "incl": 0.13698,
+     "rank": 6642
+    },
+    {
+     "name": "Witherbloom Command",
+     "delta": -0.16428571428571104,
+     "from": "loose collection",
+     "type": "Sorcery",
+     "incl": 0.098177,
+     "rank": 8549
+    }
+   ]
+  },
+  "Vito, Thorn of the Dusk Rose": {
+   "from": "loose collection",
+   "roles": [
+    "utility"
+   ],
+   "candidates": 206,
+   "backups": [
+    {
+     "name": "Blech, Loafing Pest",
+     "delta": -0.02142857142857224,
+     "from": "loose collection",
+     "type": "Legendary Creature — Pest",
+     "incl": 0.16503,
+     "rank": 7292
+    },
+    {
+     "name": "Victimize",
+     "delta": 0,
+     "from": "Meren (dismantled)",
+     "type": "Sorcery",
+     "incl": 0.154278,
+     "rank": 129
+    },
+    {
+     "name": "Moseo, Vein's New Dean",
+     "delta": 0,
+     "from": "loose collection",
+     "type": "Legendary Creature — Bird Skeleton Warlock",
+     "incl": 0.142122,
+     "rank": 4268
+    }
+   ]
+  },
+  "Massacre Wurm": {
+   "from": "Meren (dismantled)",
+   "roles": [
+    "board_wipe",
+    "win_condition"
+   ],
+   "candidates": 133,
+   "backups": [
+    {
+     "name": "Golgari Charm",
+     "delta": -0.03214285714285836,
+     "from": "Meren (dismantled)",
+     "type": "Instant",
+     "incl": 0.139785,
+     "rank": 1621
+    },
+    {
+     "name": "Pestilence Demon",
+     "delta": -0.025000000000005684,
+     "from": "loose collection",
+     "type": "Creature — Demon",
+     "incl": 0,
+     "rank": 10273
+    },
+    {
+     "name": "Reiver Demon",
+     "delta": -0.025000000000005684,
+     "from": "loose collection",
+     "type": "Creature — Demon",
+     "incl": 0,
+     "rank": 10821
+    }
+   ]
+  },
+  "Sakura-Tribe Elder": {
+   "from": "Meren (dismantled)",
+   "roles": [
+    "ramp"
+   ],
+   "candidates": 111,
+   "backups": [
+    {
+     "name": "Rampant Growth",
+     "delta": 0,
+     "from": "loose collection",
+     "type": "Sorcery",
+     "incl": 0.529219,
+     "rank": 27
+    },
+    {
+     "name": "Wight of the Reliquary",
+     "delta": -0.04285714285714448,
+     "from": "Meren (dismantled)",
+     "type": "Creature — Zombie Knight",
+     "incl": 0.267415,
+     "rank": 1266
+    },
+    {
+     "name": "Skyshroud Claim",
+     "delta": -0.06071428571428328,
+     "from": "loose collection",
+     "type": "Sorcery",
+     "incl": 0.265545,
+     "rank": 302
+    }
+   ]
+  },
+  "Beast Within": {
+   "from": "loose collection",
+   "roles": [
+    "removal"
+   ],
+   "candidates": 58,
+   "backups": [
+    {
+     "name": "Deadly Brew",
+     "delta": -0.0535714285714306,
+     "from": "loose collection",
+     "type": "Sorcery",
+     "incl": 0.204769,
+     "rank": 4763
+    },
+    {
+     "name": "Immoral Bargain",
+     "delta": -0.01071428571428612,
+     "from": "loose collection",
+     "type": "Sorcery",
+     "incl": 0.13698,
+     "rank": 6642
+    },
+    {
+     "name": "Witherbloom Command",
+     "delta": -0.0535714285714306,
+     "from": "loose collection",
+     "type": "Sorcery",
+     "incl": 0.098177,
+     "rank": 8549
+    }
+   ]
+  },
+  "Blight Mound": {
+   "from": "loose collection",
+   "roles": [
+    "utility"
+   ],
+   "candidates": 206,
+   "backups": [
+    {
+     "name": "Blech, Loafing Pest",
+     "delta": -0.0035714285714334437,
+     "from": "loose collection",
+     "type": "Legendary Creature — Pest",
+     "incl": 0.16503,
+     "rank": 7292
+    },
+    {
+     "name": "Victimize",
+     "delta": 0,
+     "from": "Meren (dismantled)",
+     "type": "Sorcery",
+     "incl": 0.154278,
+     "rank": 129
+    },
+    {
+     "name": "Moseo, Vein's New Dean",
+     "delta": 0,
+     "from": "loose collection",
+     "type": "Legendary Creature — Bird Skeleton Warlock",
+     "incl": 0.142122,
+     "rank": 4268
+    }
+   ]
+  },
+  "Mirkwood Bats": {
+   "from": "loose collection",
+   "roles": [
+    "win_condition"
+   ],
+   "candidates": 130,
+   "backups": [
+    {
+     "name": "Blossoming Bogbeast",
+     "delta": -0.017857142857138797,
+     "from": "loose collection",
+     "type": "Creature — Beast",
+     "incl": 0.17064,
+     "rank": 4019
+    },
+    {
+     "name": "Verdant Sun's Avatar",
+     "delta": -0.03928571428571104,
+     "from": "loose collection",
+     "type": "Creature — Dinosaur Avatar",
+     "incl": 0.123422,
+     "rank": 2179
+    },
+    {
+     "name": "Avenger of Zendikar",
+     "delta": -0.03928571428571104,
+     "from": "loose collection",
+     "type": "Creature — Elemental",
+     "incl": 0.114072,
+     "rank": 295
+    }
+   ]
+  },
+  "Mikaeus, the Unhallowed": {
+   "from": "Meren (dismantled)",
+   "roles": [
+    "win_condition"
+   ],
+   "candidates": 130,
+   "backups": [
+    {
+     "name": "Blossoming Bogbeast",
+     "delta": -8.86571428571429,
+     "from": "loose collection",
+     "type": "Creature — Beast",
+     "incl": 0.17064,
+     "rank": 4019
+    },
+    {
+     "name": "Verdant Sun's Avatar",
+     "delta": -8.937142857142874,
+     "from": "loose collection",
+     "type": "Creature — Dinosaur Avatar",
+     "incl": 0.123422,
+     "rank": 2179
+    },
+    {
+     "name": "Avenger of Zendikar",
+     "delta": -8.937142857142874,
+     "from": "loose collection",
+     "type": "Creature — Elemental",
+     "incl": 0.114072,
+     "rank": 295
+    }
+   ]
+  },
+  "Toxic Deluge": {
+   "from": "Meren (dismantled)",
+   "roles": [
+    "board_wipe"
+   ],
+   "candidates": 5,
+   "backups": [
+    {
+     "name": "Golgari Charm",
+     "delta": -0.035714285714291805,
+     "from": "Meren (dismantled)",
+     "type": "Instant",
+     "incl": 0.139785,
+     "rank": 1621
+    },
+    {
+     "name": "Pestilence Demon",
+     "delta": -0.0035714285714334437,
+     "from": "loose collection",
+     "type": "Creature — Demon",
+     "incl": 0,
+     "rank": 10273
+    },
+    {
+     "name": "Reiver Demon",
+     "delta": -0.0035714285714334437,
+     "from": "loose collection",
+     "type": "Creature — Demon",
+     "incl": 0,
+     "rank": 10821
+    }
+   ]
+  },
+  "Sanguine Bond": {
+   "from": "loose collection",
+   "roles": [
+    "utility"
+   ],
+   "candidates": 206,
+   "backups": [
+    {
+     "name": "Blech, Loafing Pest",
+     "delta": -0.046428571428577925,
+     "from": "loose collection",
+     "type": "Legendary Creature — Pest",
+     "incl": 0.16503,
+     "rank": 7292
+    },
+    {
+     "name": "Victimize",
+     "delta": -0.046428571428577925,
+     "from": "Meren (dismantled)",
+     "type": "Sorcery",
+     "incl": 0.154278,
+     "rank": 129
+    },
+    {
+     "name": "Moseo, Vein's New Dean",
+     "delta": -0.046428571428577925,
+     "from": "loose collection",
+     "type": "Legendary Creature — Bird Skeleton Warlock",
+     "incl": 0.142122,
+     "rank": 4268
+    }
+   ]
+  },
+  "Infernal Grasp": {
+   "from": "Meren (dismantled)",
+   "roles": [
+    "removal"
+   ],
+   "candidates": 58,
+   "backups": [
+    {
+     "name": "Deadly Brew",
+     "delta": 0,
+     "from": "loose collection",
+     "type": "Sorcery",
+     "incl": 0.204769,
+     "rank": 4763
+    },
+    {
+     "name": "Immoral Bargain",
+     "delta": 0.01071428571428612,
+     "from": "loose collection",
+     "type": "Sorcery",
+     "incl": 0.13698,
+     "rank": 6642
+    },
+    {
+     "name": "Witherbloom Command",
+     "delta": 0,
+     "from": "loose collection",
+     "type": "Sorcery",
+     "incl": 0.098177,
+     "rank": 8549
+    }
+   ]
+  },
+  "Tyvar's Stand": {
+   "from": "loose collection",
+   "roles": [
+    "protection"
+   ],
+   "candidates": 8,
+   "backups": [
+    {
+     "name": "Silkguard",
+     "delta": 0,
+     "from": "loose collection",
+     "type": "Instant",
+     "incl": 0,
+     "rank": 2346
+    },
+    {
+     "name": "Helix Pinnacle",
+     "delta": 0,
+     "from": "loose collection",
+     "type": "Enchantment",
+     "incl": 0,
+     "rank": 4480
+    }
+   ]
+  },
+  "Eternal Witness": {
+   "from": "Meren (dismantled)",
+   "roles": [
+    "utility"
+   ],
+   "candidates": 206,
+   "backups": [
+    {
+     "name": "Blech, Loafing Pest",
+     "delta": 0,
+     "from": "loose collection",
+     "type": "Legendary Creature — Pest",
+     "incl": 0.16503,
+     "rank": 7292
+    },
+    {
+     "name": "Victimize",
+     "delta": 0,
+     "from": "Meren (dismantled)",
+     "type": "Sorcery",
+     "incl": 0.154278,
+     "rank": 129
+    },
+    {
+     "name": "Moseo, Vein's New Dean",
+     "delta": 0,
+     "from": "loose collection",
+     "type": "Legendary Creature — Bird Skeleton Warlock",
+     "incl": 0.142122,
+     "rank": 4268
+    }
+   ]
+  },
+  "Alhammarret's Archive": {
+   "from": "loose collection",
+   "roles": [
+    "draw"
+   ],
+   "candidates": 98,
+   "backups": [
+    {
+     "name": "Village Rites",
+     "delta": -0.04285714285714448,
+     "from": "Meren (dismantled)",
+     "type": "Instant",
+     "incl": 0.355774,
+     "rank": 202
+    },
+    {
+     "name": "Corrupted Conviction",
+     "delta": -0.04285714285714448,
+     "from": "loose collection",
+     "type": "Instant",
+     "incl": 0.120617,
+     "rank": 599
+    },
+    {
+     "name": "Night's Whisper",
+     "delta": 0.007142857142852677,
+     "from": "loose collection",
+     "type": "Sorcery",
+     "incl": 0.113604,
+     "rank": 182
+    }
+   ]
+  },
+  "Creakwood Liege": {
+   "from": "Meren (dismantled)",
+   "roles": [
+    "utility"
+   ],
+   "candidates": 206,
+   "backups": [
+    {
+     "name": "Blech, Loafing Pest",
+     "delta": 0.014285714285719564,
+     "from": "loose collection",
+     "type": "Legendary Creature — Pest",
+     "incl": 0.16503,
+     "rank": 7292
+    },
+    {
+     "name": "Moseo, Vein's New Dean",
+     "delta": 0.014285714285719564,
+     "from": "loose collection",
+     "type": "Legendary Creature — Bird Skeleton Warlock",
+     "incl": 0.142122,
+     "rank": 4268
+    },
+    {
+     "name": "Woe Strider",
+     "delta": 0.014285714285719564,
+     "from": "Meren (dismantled)",
+     "type": "Creature — Horror",
+     "incl": 0.141655,
+     "rank": 1683
+    }
+   ]
+  },
+  "Argentum Masticore": {
+   "from": "loose collection",
+   "roles": [
+    "removal",
+    "win_condition"
+   ],
+   "candidates": 174,
+   "backups": [
+    {
+     "name": "Deadly Brew",
+     "delta": -0.0535714285714306,
+     "from": "loose collection",
+     "type": "Sorcery",
+     "incl": 0.204769,
+     "rank": 4763
+    },
+    {
+     "name": "Blossoming Bogbeast",
+     "delta": 0,
+     "from": "loose collection",
+     "type": "Creature — Beast",
+     "incl": 0.17064,
+     "rank": 4019
+    },
+    {
+     "name": "Immoral Bargain",
+     "delta": -0.017857142857138797,
+     "from": "loose collection",
+     "type": "Sorcery",
+     "incl": 0.13698,
+     "rank": 6642
+    }
+   ]
+  },
+  "Tendershoot Dryad": {
+   "from": "loose collection",
+   "roles": [
+    "win_condition"
+   ],
+   "candidates": 130,
+   "backups": [
+    {
+     "name": "Blossoming Bogbeast",
+     "delta": 0,
+     "from": "loose collection",
+     "type": "Creature — Beast",
+     "incl": 0.17064,
+     "rank": 4019
+    },
+    {
+     "name": "Verdant Sun's Avatar",
+     "delta": -0.06071428571428328,
+     "from": "loose collection",
+     "type": "Creature — Dinosaur Avatar",
+     "incl": 0.123422,
+     "rank": 2179
+    },
+    {
+     "name": "Avenger of Zendikar",
+     "delta": -0.06071428571428328,
+     "from": "loose collection",
+     "type": "Creature — Elemental",
+     "incl": 0.114072,
+     "rank": 295
+    }
+   ]
+  },
+  "Skorpekh Lord": {
+   "from": "Imotekh the Stormlord",
+   "backfill": "Grim Haruspex",
+   "roles": [
+    "utility"
+   ],
+   "candidates": 206,
+   "backups": [
+    {
+     "name": "Blech, Loafing Pest",
+     "delta": 0,
+     "from": "loose collection",
+     "type": "Legendary Creature — Pest",
+     "incl": 0.16503,
+     "rank": 7292
+    },
+    {
+     "name": "Moseo, Vein's New Dean",
+     "delta": 0,
+     "from": "loose collection",
+     "type": "Legendary Creature — Bird Skeleton Warlock",
+     "incl": 0.142122,
+     "rank": 4268
+    },
+    {
+     "name": "Woe Strider",
+     "delta": 0,
+     "from": "Meren (dismantled)",
+     "type": "Creature — Horror",
+     "incl": 0.141655,
+     "rank": 1683
+    }
+   ]
+  },
+  "Deadly Dispute": {
+   "from": "Meren (dismantled)",
+   "roles": [
+    "ramp",
+    "draw"
+   ],
+   "candidates": 195,
+   "backups": [
+    {
+     "name": "Rampant Growth",
+     "delta": 0,
+     "from": "loose collection",
+     "type": "Sorcery",
+     "incl": 0.529219,
+     "rank": 27
+    },
+    {
+     "name": "Village Rites",
+     "delta": -0.1071428571428612,
+     "from": "Meren (dismantled)",
+     "type": "Instant",
+     "incl": 0.355774,
+     "rank": 202
+    },
+    {
+     "name": "Wight of the Reliquary",
+     "delta": -0.02142857142857224,
+     "from": "Meren (dismantled)",
+     "type": "Creature — Zombie Knight",
+     "incl": 0.267415,
+     "rank": 1266
+    }
+   ]
+  },
+  "Gray Merchant of Asphodel": {
+   "from": "Meren (dismantled)",
+   "roles": [
+    "win_condition"
+   ],
+   "candidates": 130,
+   "backups": [
+    {
+     "name": "Blossoming Bogbeast",
+     "delta": 0,
+     "from": "loose collection",
+     "type": "Creature — Beast",
+     "incl": 0.17064,
+     "rank": 4019
+    },
+    {
+     "name": "Verdant Sun's Avatar",
+     "delta": 0.0035714285714334437,
+     "from": "loose collection",
+     "type": "Creature — Dinosaur Avatar",
+     "incl": 0.123422,
+     "rank": 2179
+    },
+    {
+     "name": "Avenger of Zendikar",
+     "delta": 0.0035714285714334437,
+     "from": "loose collection",
+     "type": "Creature — Elemental",
+     "incl": 0.114072,
+     "rank": 295
+    }
+   ]
+  },
+  "Veinwitch Coven": {
+   "from": "loose collection",
+   "roles": [
+    "utility"
+   ],
+   "candidates": 206,
+   "backups": [
+    {
+     "name": "Blech, Loafing Pest",
+     "delta": 0,
+     "from": "loose collection",
+     "type": "Legendary Creature — Pest",
+     "incl": 0.16503,
+     "rank": 7292
+    },
+    {
+     "name": "Victimize",
+     "delta": 0,
+     "from": "Meren (dismantled)",
+     "type": "Sorcery",
+     "incl": 0.154278,
+     "rank": 129
+    },
+    {
+     "name": "Moseo, Vein's New Dean",
+     "delta": 0,
+     "from": "loose collection",
+     "type": "Legendary Creature — Bird Skeleton Warlock",
+     "incl": 0.142122,
+     "rank": 4268
+    }
+   ]
+  },
+  "Lightning Greaves": {
+   "from": "Meren (dismantled)",
+   "roles": [
+    "protection"
+   ],
+   "candidates": 8,
+   "backups": [
+    {
+     "name": "Silkguard",
+     "delta": -0.028571428571424917,
+     "from": "loose collection",
+     "type": "Instant",
+     "incl": 0,
+     "rank": 2346
+    },
+    {
+     "name": "Helix Pinnacle",
+     "delta": -0.028571428571424917,
+     "from": "loose collection",
+     "type": "Enchantment",
+     "incl": 0,
+     "rank": 4480
+    }
+   ]
+  },
+  "Idol of Oblivion": {
+   "from": "The Cabbage Merchant",
+   "backfill": "Ramunap Excavator",
+   "roles": [
+    "draw"
+   ],
+   "candidates": 98,
+   "backups": [
+    {
+     "name": "Village Rites",
+     "delta": -0.04285714285714448,
+     "from": "Meren (dismantled)",
+     "type": "Instant",
+     "incl": 0.355774,
+     "rank": 202
+    },
+    {
+     "name": "Corrupted Conviction",
+     "delta": -0.04285714285714448,
+     "from": "loose collection",
+     "type": "Instant",
+     "incl": 0.120617,
+     "rank": 599
+    },
+    {
+     "name": "Night's Whisper",
+     "delta": -0.007142857142852677,
+     "from": "loose collection",
+     "type": "Sorcery",
+     "incl": 0.113604,
+     "rank": 182
+    }
+   ]
+  },
+  "Talisman of Resilience": {
+   "from": "Meren (dismantled)",
+   "roles": [
+    "ramp"
+   ],
+   "candidates": 111,
+   "backups": [
+    {
+     "name": "Rampant Growth",
+     "delta": 0,
+     "from": "loose collection",
+     "type": "Sorcery",
+     "incl": 0.529219,
+     "rank": 27
+    },
+    {
+     "name": "Wight of the Reliquary",
+     "delta": -0.007142857142852677,
+     "from": "Meren (dismantled)",
+     "type": "Creature — Zombie Knight",
+     "incl": 0.267415,
+     "rank": 1266
+    },
+    {
+     "name": "Skyshroud Claim",
+     "delta": 0.035714285714291805,
+     "from": "loose collection",
+     "type": "Sorcery",
+     "incl": 0.265545,
+     "rank": 302
+    }
+   ]
+  },
+  "Guardian Augmenter": {
+   "from": "loose collection",
+   "roles": [
+    "utility"
+   ],
+   "candidates": 206,
+   "backups": [
+    {
+     "name": "Blech, Loafing Pest",
+     "delta": 0,
+     "from": "loose collection",
+     "type": "Legendary Creature — Pest",
+     "incl": 0.16503,
+     "rank": 7292
+    },
+    {
+     "name": "Moseo, Vein's New Dean",
+     "delta": 0,
+     "from": "loose collection",
+     "type": "Legendary Creature — Bird Skeleton Warlock",
+     "incl": 0.142122,
+     "rank": 4268
+    },
+    {
+     "name": "Woe Strider",
+     "delta": 0,
+     "from": "Meren (dismantled)",
+     "type": "Creature — Horror",
+     "incl": 0.141655,
+     "rank": 1683
+    }
+   ]
+  },
+  "Braids, Arisen Nightmare": {
+   "from": "Meren (dismantled)",
+   "roles": [
+    "draw"
+   ],
+   "candidates": 98,
+   "backups": [
+    {
+     "name": "Village Rites",
+     "delta": -0.0035714285714334437,
+     "from": "Meren (dismantled)",
+     "type": "Instant",
+     "incl": 0.355774,
+     "rank": 202
+    },
+    {
+     "name": "Corrupted Conviction",
+     "delta": -0.0035714285714334437,
+     "from": "loose collection",
+     "type": "Instant",
+     "incl": 0.120617,
+     "rank": 599
+    },
+    {
+     "name": "Night's Whisper",
+     "delta": 0.0035714285714334437,
+     "from": "loose collection",
+     "type": "Sorcery",
+     "incl": 0.113604,
+     "rank": 182
+    }
+   ]
+  },
+  "Pest Rescuer": {
+   "from": "loose collection",
+   "roles": [
+    "utility"
+   ],
+   "candidates": 206,
+   "backups": [
+    {
+     "name": "Blech, Loafing Pest",
+     "delta": 0.007142857142852677,
+     "from": "loose collection",
+     "type": "Legendary Creature — Pest",
+     "incl": 0.16503,
+     "rank": 7292
+    },
+    {
+     "name": "Victimize",
+     "delta": 0.007142857142852677,
+     "from": "Meren (dismantled)",
+     "type": "Sorcery",
+     "incl": 0.154278,
+     "rank": 129
+    },
+    {
+     "name": "Moseo, Vein's New Dean",
+     "delta": 0.007142857142852677,
+     "from": "loose collection",
+     "type": "Legendary Creature — Bird Skeleton Warlock",
+     "incl": 0.142122,
+     "rank": 4268
+    }
+   ]
+  },
+  "Priest of Forgotten Gods": {
+   "from": "Meren (dismantled)",
+   "roles": [
+    "ramp",
+    "draw"
+   ],
+   "candidates": 195,
+   "backups": [
+    {
+     "name": "Rampant Growth",
+     "delta": 0.06785714285713595,
+     "from": "loose collection",
+     "type": "Sorcery",
+     "incl": 0.529219,
+     "rank": 27
+    },
+    {
+     "name": "Village Rites",
+     "delta": -0.014285714285719564,
+     "from": "Meren (dismantled)",
+     "type": "Instant",
+     "incl": 0.355774,
+     "rank": 202
+    },
+    {
+     "name": "Wight of the Reliquary",
+     "delta": 0.057142857142864045,
+     "from": "Meren (dismantled)",
+     "type": "Creature — Zombie Knight",
+     "incl": 0.267415,
+     "rank": 1266
+    }
+   ]
+  },
+  "Cauldron of Essence": {
+   "from": "Meren (dismantled)",
+   "roles": [
+    "win_condition"
+   ],
+   "candidates": 130,
+   "backups": [
+    {
+     "name": "Blossoming Bogbeast",
+     "delta": 0.014285714285719564,
+     "from": "loose collection",
+     "type": "Creature — Beast",
+     "incl": 0.17064,
+     "rank": 4019
+    },
+    {
+     "name": "Verdant Sun's Avatar",
+     "delta": -0.03928571428571104,
+     "from": "loose collection",
+     "type": "Creature — Dinosaur Avatar",
+     "incl": 0.123422,
+     "rank": 2179
+    },
+    {
+     "name": "Avenger of Zendikar",
+     "delta": -0.03928571428571104,
+     "from": "loose collection",
+     "type": "Creature — Elemental",
+     "incl": 0.114072,
+     "rank": 295
+    }
+   ]
+  },
+  "Phyrexian Arena": {
+   "from": "Imotekh the Stormlord",
+   "backfill": "Rune-Scarred Demon",
+   "roles": [
+    "draw"
+   ],
+   "candidates": 98,
+   "backups": [
+    {
+     "name": "Village Rites",
+     "delta": -0.04285714285714448,
+     "from": "Meren (dismantled)",
+     "type": "Instant",
+     "incl": 0.355774,
+     "rank": 202
+    },
+    {
+     "name": "Corrupted Conviction",
+     "delta": -0.04285714285714448,
+     "from": "loose collection",
+     "type": "Instant",
+     "incl": 0.120617,
+     "rank": 599
+    },
+    {
+     "name": "Night's Whisper",
+     "delta": -0.0035714285714334437,
+     "from": "loose collection",
+     "type": "Sorcery",
+     "incl": 0.113604,
+     "rank": 182
+    }
+   ]
+  },
+  "Witch of the Moors": {
+   "from": "loose collection",
+   "roles": [
+    "removal",
+    "win_condition"
+   ],
+   "candidates": 174,
+   "backups": [
+    {
+     "name": "Deadly Brew",
+     "delta": -0.08571428571428896,
+     "from": "loose collection",
+     "type": "Sorcery",
+     "incl": 0.204769,
+     "rank": 4763
+    },
+    {
+     "name": "Blossoming Bogbeast",
+     "delta": 0,
+     "from": "loose collection",
+     "type": "Creature — Beast",
+     "incl": 0.17064,
+     "rank": 4019
+    },
+    {
+     "name": "Immoral Bargain",
+     "delta": -0.07500000000000284,
+     "from": "loose collection",
+     "type": "Sorcery",
+     "incl": 0.13698,
+     "rank": 6642
+    }
+   ]
+  },
+  "Morbid Opportunist": {
+   "from": "Meren (dismantled)",
+   "roles": [
+    "draw"
+   ],
+   "candidates": 98,
+   "backups": [
+    {
+     "name": "Village Rites",
+     "delta": -0.0714285714285694,
+     "from": "Meren (dismantled)",
+     "type": "Instant",
+     "incl": 0.355774,
+     "rank": 202
+    },
+    {
+     "name": "Corrupted Conviction",
+     "delta": -0.0714285714285694,
+     "from": "loose collection",
+     "type": "Instant",
+     "incl": 0.120617,
+     "rank": 599
+    },
+    {
+     "name": "Night's Whisper",
+     "delta": -0.04285714285714448,
+     "from": "loose collection",
+     "type": "Sorcery",
+     "incl": 0.113604,
+     "rank": 182
+    }
+   ]
+  },
+  "Ribtruss Roaster": {
+   "from": "The Cabbage Merchant",
+   "backfill": "Basking Broodscale",
+   "roles": [
+    "win_condition"
+   ],
+   "candidates": 130,
+   "backups": [
+    {
+     "name": "Blossoming Bogbeast",
+     "delta": 0,
+     "from": "loose collection",
+     "type": "Creature — Beast",
+     "incl": 0.17064,
+     "rank": 4019
+    },
+    {
+     "name": "Verdant Sun's Avatar",
+     "delta": -0.06428571428571672,
+     "from": "loose collection",
+     "type": "Creature — Dinosaur Avatar",
+     "incl": 0.123422,
+     "rank": 2179
+    },
+    {
+     "name": "Avenger of Zendikar",
+     "delta": -0.06428571428571672,
+     "from": "loose collection",
+     "type": "Creature — Elemental",
+     "incl": 0.114072,
+     "rank": 295
+    }
+   ]
+  },
+  "Feral Appetite": {
+   "from": "loose collection",
+   "roles": [
+    "removal"
+   ],
+   "candidates": 58,
+   "backups": [
+    {
+     "name": "Deadly Brew",
+     "delta": -0.01071428571428612,
+     "from": "loose collection",
+     "type": "Sorcery",
+     "incl": 0.204769,
+     "rank": 4763
+    },
+    {
+     "name": "Immoral Bargain",
+     "delta": 0,
+     "from": "loose collection",
+     "type": "Sorcery",
+     "incl": 0.13698,
+     "rank": 6642
+    },
+    {
+     "name": "Witherbloom Command",
+     "delta": -0.01071428571428612,
+     "from": "loose collection",
+     "type": "Sorcery",
+     "incl": 0.098177,
+     "rank": 8549
+    }
+   ]
+  },
+  "Elvish Mystic": {
+   "from": "Meren (dismantled)",
+   "roles": [
+    "ramp"
+   ],
+   "candidates": 111,
+   "backups": [
+    {
+     "name": "Rampant Growth",
+     "delta": 0.0035714285714334437,
+     "from": "loose collection",
+     "type": "Sorcery",
+     "incl": 0.529219,
+     "rank": 27
+    },
+    {
+     "name": "Wight of the Reliquary",
+     "delta": -0.02142857142857224,
+     "from": "Meren (dismantled)",
+     "type": "Creature — Zombie Knight",
+     "incl": 0.267415,
+     "rank": 1266
+    },
+    {
+     "name": "Skyshroud Claim",
+     "delta": -0.017857142857138797,
+     "from": "loose collection",
+     "type": "Sorcery",
+     "incl": 0.265545,
+     "rank": 302
+    }
+   ]
+  },
+  "Scute Swarm": {
+   "from": "loose collection",
+   "roles": [
+    "utility"
+   ],
+   "candidates": 206,
+   "backups": [
+    {
+     "name": "Blech, Loafing Pest",
+     "delta": -0.014285714285719564,
+     "from": "loose collection",
+     "type": "Legendary Creature — Pest",
+     "incl": 0.16503,
+     "rank": 7292
+    },
+    {
+     "name": "Victimize",
+     "delta": -0.007142857142852677,
+     "from": "Meren (dismantled)",
+     "type": "Sorcery",
+     "incl": 0.154278,
+     "rank": 129
+    },
+    {
+     "name": "Moseo, Vein's New Dean",
+     "delta": -0.007142857142852677,
+     "from": "loose collection",
+     "type": "Legendary Creature — Bird Skeleton Warlock",
+     "incl": 0.142122,
+     "rank": 4268
+    }
+   ]
+  },
+  "Midnight Reaper": {
+   "from": "Meren (dismantled)",
+   "roles": [
+    "draw"
+   ],
+   "candidates": 98,
+   "backups": [
+    {
+     "name": "Village Rites",
+     "delta": -0.057142857142849834,
+     "from": "Meren (dismantled)",
+     "type": "Instant",
+     "incl": 0.355774,
+     "rank": 202
+    },
+    {
+     "name": "Corrupted Conviction",
+     "delta": -0.057142857142849834,
+     "from": "loose collection",
+     "type": "Instant",
+     "incl": 0.120617,
+     "rank": 599
+    },
+    {
+     "name": "Night's Whisper",
+     "delta": -0.02142857142857224,
+     "from": "loose collection",
+     "type": "Sorcery",
+     "incl": 0.113604,
+     "rank": 182
+    }
+   ]
+  },
+  "Blooming Marsh": {
+   "from": "Meren (dismantled)",
+   "roles": [
+    "land"
+   ],
+   "candidates": 51,
+   "backups": [
+    {
+     "name": "Forest",
+     "delta": -0.0035714285714334437,
+     "from": "Meren (dismantled)",
+     "type": "Basic Land — Forest",
+     "incl": 0.920056,
+     "rank": null
+    },
+    {
+     "name": "Swamp",
+     "delta": -0.0035714285714334437,
+     "from": "Meren (dismantled)",
+     "type": "Basic Land — Swamp",
+     "incl": 0.913511,
+     "rank": null
+    },
+    {
+     "name": "Reliquary Tower",
+     "delta": -0.03928571428571104,
+     "from": "loose collection",
+     "type": "Land",
+     "incl": 0.292193,
+     "rank": 10
+    }
+   ]
+  },
+  "Eccentric Pestfinder // Turn Stones": {
+   "from": "loose collection",
+   "roles": [
+    "win_condition"
+   ],
+   "candidates": 130,
+   "backups": [
+    {
+     "name": "Blossoming Bogbeast",
+     "delta": -0.01071428571428612,
+     "from": "loose collection",
+     "type": "Creature — Beast",
+     "incl": 0.17064,
+     "rank": 4019
+    },
+    {
+     "name": "Verdant Sun's Avatar",
+     "delta": -0.02142857142857224,
+     "from": "loose collection",
+     "type": "Creature — Dinosaur Avatar",
+     "incl": 0.123422,
+     "rank": 2179
+    },
+    {
+     "name": "Avenger of Zendikar",
+     "delta": -0.02142857142857224,
+     "from": "loose collection",
+     "type": "Creature — Elemental",
+     "incl": 0.114072,
+     "rank": 295
+    }
+   ]
+  },
+  "Ophiomancer": {
+   "from": "Meren (dismantled)",
+   "roles": [
+    "utility"
+   ],
+   "candidates": 206,
+   "backups": [
+    {
+     "name": "Blech, Loafing Pest",
+     "delta": 0.01071428571428612,
+     "from": "loose collection",
+     "type": "Legendary Creature — Pest",
+     "incl": 0.16503,
+     "rank": 7292
+    },
+    {
+     "name": "Victimize",
+     "delta": 0,
+     "from": "Meren (dismantled)",
+     "type": "Sorcery",
+     "incl": 0.154278,
+     "rank": 129
+    },
+    {
+     "name": "Moseo, Vein's New Dean",
+     "delta": 0,
+     "from": "loose collection",
+     "type": "Legendary Creature — Bird Skeleton Warlock",
+     "incl": 0.142122,
+     "rank": 4268
+    }
+   ]
+  },
+  "Paradise Druid": {
+   "from": "loose collection",
+   "roles": [
+    "ramp",
+    "protection"
+   ],
+   "candidates": 119,
+   "backups": [
+    {
+     "name": "Silkguard",
+     "delta": -0.13928571428571956,
+     "from": "loose collection",
+     "type": "Instant",
+     "incl": 0,
+     "rank": 2346
+    },
+    {
+     "name": "Helix Pinnacle",
+     "delta": -0.13928571428571956,
+     "from": "loose collection",
+     "type": "Enchantment",
+     "incl": 0,
+     "rank": 4480
+    }
+   ]
+  },
+  "Imp's Mischief": {
+   "from": "Imotekh the Stormlord",
+   "backfill": "Ravenous Chupacabra",
+   "roles": [
+    "protection"
+   ],
+   "candidates": 8,
+   "backups": [
+    {
+     "name": "Silkguard",
+     "delta": -0.01071428571428612,
+     "from": "loose collection",
+     "type": "Instant",
+     "incl": 0,
+     "rank": 2346
+    },
+    {
+     "name": "Helix Pinnacle",
+     "delta": -0.01071428571428612,
+     "from": "loose collection",
+     "type": "Enchantment",
+     "incl": 0,
+     "rank": 4480
+    }
+   ]
+  },
+  "Revitalizing Repast // Old-Growth Grove": {
+   "from": "loose collection",
+   "roles": [
+    "land"
+   ],
+   "candidates": 49,
+   "backups": [
+    {
+     "name": "Reliquary Tower",
+     "delta": -0.0892857142857082,
+     "from": "loose collection",
+     "type": "Land",
+     "incl": 0.292193,
+     "rank": 10
+    },
+    {
+     "name": "Sapseep Forest",
+     "delta": -0.06428571428571672,
+     "from": "loose collection",
+     "type": "Land — Forest",
+     "incl": 0.068256,
+     "rank": 7181
+    },
+    {
+     "name": "Titan's Grave",
+     "delta": -0.08571428571428896,
+     "from": "loose collection",
+     "type": "Land",
+     "incl": 0.061711,
+     "rank": 7144
+    }
+   ]
+  },
+  "Liliana, Dreadhorde General": {
+   "from": "Meren (dismantled)",
+   "roles": [
+    "draw",
+    "removal"
+   ],
+   "candidates": 146,
+   "backups": [
+    {
+     "name": "Village Rites",
+     "delta": 0.0035714285714334437,
+     "from": "Meren (dismantled)",
+     "type": "Instant",
+     "incl": 0.355774,
+     "rank": 202
+    },
+    {
+     "name": "Vilis, Broker of Blood",
+     "delta": -0.01071428571428612,
+     "from": "loose collection",
+     "type": "Legendary Creature — Demon",
+     "incl": 0.301543,
+     "rank": 1124
+    },
+    {
+     "name": "Deadly Brew",
+     "delta": 0.014285714285719564,
+     "from": "loose collection",
+     "type": "Sorcery",
+     "incl": 0.204769,
+     "rank": 4763
+    }
+   ]
+  },
+  "Casualties of War": {
+   "from": "loose collection",
+   "roles": [
+    "removal"
+   ],
+   "candidates": 58,
+   "backups": [
+    {
+     "name": "Deadly Brew",
+     "delta": -0.017857142857138797,
+     "from": "loose collection",
+     "type": "Sorcery",
+     "incl": 0.204769,
+     "rank": 4763
+    },
+    {
+     "name": "Immoral Bargain",
+     "delta": -0.007142857142852677,
+     "from": "loose collection",
+     "type": "Sorcery",
+     "incl": 0.13698,
+     "rank": 6642
+    },
+    {
+     "name": "Witherbloom Command",
+     "delta": -0.017857142857138797,
+     "from": "loose collection",
+     "type": "Sorcery",
+     "incl": 0.098177,
+     "rank": 8549
+    }
+   ]
+  },
+  "Ashnod's Altar": {
+   "from": "Imotekh the Stormlord",
+   "backfill": "Woe Strider",
+   "roles": [
+    "ramp"
+   ],
+   "candidates": 111,
+   "backups": [
+    {
+     "name": "Rampant Growth",
+     "delta": 0.15714285714285836,
+     "from": "loose collection",
+     "type": "Sorcery",
+     "incl": 0.529219,
+     "rank": 27
+    },
+    {
+     "name": "Wight of the Reliquary",
+     "delta": 0.11428571428571388,
+     "from": "Meren (dismantled)",
+     "type": "Creature — Zombie Knight",
+     "incl": 0.267415,
+     "rank": 1266
+    },
+    {
+     "name": "Skyshroud Claim",
+     "delta": 0.18214285714286405,
+     "from": "loose collection",
+     "type": "Sorcery",
+     "incl": 0.265545,
+     "rank": 302
+    }
+   ]
+  }
+ }
+}
