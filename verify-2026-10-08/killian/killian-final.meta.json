@@ -1,0 +1,484 @@
+{
+ "cards": {
+  "Killian, Decisive Mentor": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Ajani's Chosen": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Angelic Destiny": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Animate Dead": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Arcane Lighthouse": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Archon of Sun's Grace": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Armored Skyhunter": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Breena, the Demagogue": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Burnished Hart": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Chains of Custody": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Changing Loyalty": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Coercive Impetus": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Darksteel Mutation": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Defiant Bloodlord": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Desolate Mire": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Diabolic Tutor": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Doomwake Giant": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Eidolon of Countless Battles": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Eldrazi Conscription": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Eriette of the Charmed Apple": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Fetid Heath": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Flare of Fortitude": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Flickering Ward": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Forlorn Flats": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Forum Filibuster": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Forum of Amity": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Fracture": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Ghostly Prison": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Ghoulish Impetus": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Gift of Immortality": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Hateful Eidolon": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Herald of Amity": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Isolated Chapel": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Killian, Ink Duelist": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Kor Spiritdancer": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Martial Impetus": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Mastermind's Acquisition": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Murder": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Night's Whisper": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Orzhov Charm": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Parasitic Impetus": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Pearl Medallion": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Pearl-Ear, Imperial Advisor": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Plains": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Power Word Kill": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Promise of Loyalty": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Raffine's Guidance": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Redemption Arc": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Riveteers Overlook": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Sage's Reverie": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Scriv, the Obligator": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Secluded Steppe": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Secret Rendezvous": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Sentinel's Eyes": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Shadrix Silverquill": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Sheltered by Ghosts": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Sheoldred's Edict": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Shielded by Faith": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Shineshadow Snarl": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Silverquill Campus": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Songbirds' Blessing": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Spirit Mantle": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Sram, Senior Edificer": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Starfield Mystic": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Study Hall": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Sunlit Marsh": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Super State": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Swamp": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Sword of the Animist": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Talisman of Hierarchy": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Temple of Silence": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Teyo, Lightshield Expert": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Tomik, Wielder of Law": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Transcendent Envoy": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Umbral Expanse": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Vampire Nighthawk": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Vanishing Verse": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Vault of the Archangel": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Winds of Rath": {
+   "from": "Silverquill Influence precon (SOC, in hand)",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  },
+  "Worn Powerstone": {
+   "from": "loose",
+   "roles": [],
+   "candidates": 0,
+   "backups": []
+  }
+ }
+}

@@ -53,6 +53,10 @@ const SPECS: DeckSpec[] = [
   },
   // the operator's paper Bumi deck (registered 2026-10-07; 3 landscapes are off-colour)
   // sleeved list vs the standalone fix: 3 off-colour landscapes replaced + optional upgrades from free cards only
+  { // Killian Orzhov Auras 2026-10-08: the Silverquill Influence precon rebuilt around Killian (base = stock precon list; NEW = loose cards in, OUT = precon cards cut)
+    slug: 'killian-decisive-mentor', base: read('verify-2026-10-08/killian/precon-base.txt'), now: 'verify-2026-10-08/killian/killian-final.txt',
+    meta: 'verify-2026-10-08/killian/killian-final.meta.json', guide: '.claude/skills/deck-building/reference/decks/killian-decisive-mentor.md',
+  },
   { // second-strongest paper commander 2026-10-08: the model's Minthara list with raids (objective 89.9; free pool alone 80.1 = Tron lands + filler). Badges = which sleeved deck holds the card
     slug: 'minthara-merciless-soul', now: 'verify-2026-10-08/best-deck/second-best/minthara-raids.txt', base: () => fs.readFileSync(path.join(ROOT, 'verify-2026-10-08/best-deck/second-best/minthara-raids.txt'), 'utf8'),
     meta: 'verify-2026-10-08/best-deck/second-best/minthara-raids.meta.json',
