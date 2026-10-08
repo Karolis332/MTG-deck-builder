@@ -57,7 +57,8 @@ const SPECS: DeckSpec[] = [
   // partners: Gilanra is the first line, Alena the second (paper-sync keeps one commander)
   {
     // sleeved list vs the engine-first rebuild (41 spells at 6+, engine pieces locked; near-ties live in the primer)
-    slug: 'gilanra-alena-partners', base: read('decks/paper/decks/gilanra-alena-partners.txt'), now: 'verify-2026-10-07/gilanra-engine/final.txt',
+    slug: 'gilanra-alena-partners', base: read('decks/paper/decks/gilanra-alena-partners.txt'), now: 'verify-2026-10-08/gilanra-stompy/final.txt',
+    guide: '.claude/skills/deck-building/reference/decks/gilanra-alena-partners.md',
   },
   // Urza box (no commander yet) vs the converged draft; Urza himself hot-swaps from the Inspirit box
   {
