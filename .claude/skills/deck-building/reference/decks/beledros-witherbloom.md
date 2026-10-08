@@ -24,7 +24,7 @@ List: `verify-2026-10-08/best-deck/beledros-recommended.txt` (100, draft until s
 | # | Interaction | Text (DB) | Why it works / caveat |
 |---|---|---|---|
 | 1 | Beledros untap | "Pay 10 life: Untap all lands you control. Activate only once each turn." | A second main phase of mana every turn. Pay it only when a drain refunds it the same turn (Merchant, Priest, Pest sacrifices). Never pay it below 20 with an open board against you. |
-| 2 | [[Idol of Oblivion]] draws on every turn | "{T}: Draw a card. Activate only if you created a token this turn." | Beledros makes a Pest on each player's upkeep, so Idol taps on all four turns: 4 cards per round. |
+| 2 | [[Idol of Oblivion]] draws once per round | "{T}: Draw a card. Activate only if you created a token this turn." | Beledros makes a Pest on each player's upkeep, but Idol untaps only in your untap step: one card per round, not four. Tap it at the first Pest of the round (your upkeep) so removal cannot waste the activation. |
 | 3 | [[Mirkwood Bats]] double-dips | "Whenever you create or sacrifice a token, each opponent loses 1 life." | Each upkeep Pest is a drain on creation and again when sacrificed. Treasure from [[Deadly Dispute]] and Insects from [[Scute Swarm]] count too. |
 | 4 | [[Mikaeus, the Unhallowed]] | "Other non-Human creatures you control get +1/+1 and have undying." | Pests, Saprolings, Snakes and Worms are non-Human: every token dies twice. Humans get nothing: Zulaport, Priest, Eternal Witness, Morbid Opportunist, Ophiomancer, Witch of the Moors. A creature with a +1/+1 counter does not return (CR 702.93a). |
 | 5 | [[Witch of the Moors]] | "At the beginning of your end step, if you gained life this turn, each opponent sacrifices a creature of their choice and you return up to one target creature card from your graveyard to your hand." | One Pest death in your turn switches it on: a table edict plus a rebuy every turn. |
@@ -97,7 +97,7 @@ Keep 3–4 lands (or 2 + Sol Ring/dork) with both colours and one of: a drain, a
 2. Equipping Greaves to Beledros and then trying to give him lifelink with Witch's Clinic.
 3. Expecting Humans (Zulaport, Priest, Witness, Opportunist, Ophiomancer, Witch) to return from Mikaeus undying.
 4. Paying 10 life for the untap with nothing to cast or no drain to refund it.
-5. Tapping Idol only in your own turn. Any upkeep Pest unlocks it.
+5. Holding Idol untapped "for later": it untaps once per round, so tap it at the first Pest of the round (your upkeep, or an opponent's if you missed it).
 6. Letting Alhammarret's Archive double a long Plumb or Moldervine chain into an empty library.
 7. Bojuka Bog "exile target player's graveyard" on yourself with Merchant and Witness in the yard.
 8. Killing your own Pests into Blood Artist alone (one opponent) when Zulaport or Cauldron (each opponent) is a turn away.
