@@ -1,0 +1,88 @@
+Arcane Signet | {2} | Artifact | {T}: Add one mana of any color in your commander's color identity.
+Boros Signet | {2} | Artifact | {1}, {T}: Add {R}{W}.
+Chromatic Lantern | {3} | Artifact | Lands you control have "{T}: Add one mana of any color." / {T}: Add one mana of any color.
+Mardu Banner | {3} | Artifact | {T}: Add {R}, {W}, or {B}. / {R}{W}{B}, {T}, Sacrifice this artifact: Draw a card.
+Panharmonicon | {4} | Artifact | If an artifact or creature entering causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.
+Perilous Vault | {4} | Artifact | {5}, {T}, Exile this artifact: Exile all nonland permanents.
+Rakdos Signet | {2} | Artifact | {1}, {T}: Add {B}{R}.
+Talisman of Conviction | {2} | Artifact | {T}: Add {C}. / {T}: Add {R} or {W}. This artifact deals 1 damage to you.
+Talisman of Indulgence | {2} | Artifact | {T}: Add {C}. / {T}: Add {B} or {R}. This artifact deals 1 damage to you.
+Wayfarer's Bauble | {1} | Artifact | {2}, {T}, Sacrifice this artifact: Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle.
+Camera Launcher | {3} | Artifact Creature — Construct | Exhaust — {3}: Put a +1/+1 counter on this creature. Create a 1/1 colorless Thopter artifact creature token with flying. (Activate each exhaust ability only once.)
+News Helicopter | {3} | Artifact Creature — Construct | Flying / When this creature enters, create a 1/1 green and white Human Citizen creature token.
+Solemn Simulacrum | {4} | Artifact Creature — Golem | When this creature enters, you may search your library for a basic land card, put that card onto the battlefield tapped, then shuffle. / When this creature dies, you may draw a card.
+Lightning Greaves | {2} | Artifact — Equipment | Equipped creature has haste and shroud. (It can't be the target of spells or abilities.) / Equip {0}
+Swiftfoot Boots | {2} | Artifact — Equipment | Equipped creature has hexproof and haste. (It can't be the target of spells or abilities your opponents control. It can attack and {T} no matter when it came under your control.) / Equip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)
+Bone-Cairn Butcher | {1}{R}{W}{B} | Creature — Demon | Mobilize 2 (Whenever this creature attacks, create two tapped and attacking 1/1 red Warrior creature tokens. Sacrifice them at the beginning of the next end step.) / Attacking tokens you control have deathtouch.
+Zurgo's Vanguard | {2}{R} | Creature — Dog Soldier | Mobilize 1 (Whenever this creature attacks, create a tapped and attacking 1/1 red Warrior creature token. Sacrifice it at the beginning of the next end step.) / Zurgo's Vanguard's power is equal to the number of creatures you control.
+Goldspan Dragon | {3}{R}{R} | Creature — Dragon | Flying, haste / Whenever this creature attacks or becomes the target of a spell, create a Treasure token. / Treasures you control have "{T}, Sacrifice this artifact: Add two mana of any one color."
+Scourge of Valkas | {2}{R}{R}{R} | Creature — Dragon | Flying / Whenever this creature or another Dragon you control enters, it deals X damage to any target, where X is the number of Dragons you control. / {R}: This creature gets +1/+0 until end of turn.
+Sonic Shrieker | {2}{R}{W}{B} | Creature — Dragon | Flying / When this creature enters, it deals 2 damage to any target and you gain 2 life. If a player is dealt damage this way, they discard a card.
+Terror of the Peaks | {3}{R}{R} | Creature — Dragon | Flying / Spells your opponents cast that target this creature cost an additional 3 life to cast. / Whenever another creature you control enters, this creature deals damage equal to that creature's power to any target.
+Twinflame Tyrant | {3}{R}{R} | Creature — Dragon | Flying / If a source you control would deal damage to an opponent or a permanent an opponent controls, it deals double that damage instead.
+Shock Brigade | {1}{R} | Creature — Goblin Soldier | Menace (This creature can't be blocked except by two or more creatures.) / Mobilize 1 (Whenever this creature attacks, create a tapped and attacking 1/1 red Warrior creature token. Sacrifice it at the beginning of the next end step.)
+Stadium Headliner | {R} | Creature — Goblin Warrior | Mobilize 1 (Whenever this creature attacks, create a tapped and attacking 1/1 red Warrior creature token. Sacrifice it at the beginning of the next end step.) / {1}{R}, Sacrifice this creature: It deals damage equal to the number of creatures you control to target creature.
+Voice of Victory | {1}{W} | Creature — Human Bard | Mobilize 2 (Whenever this creature attacks, create two tapped and attacking 1/1 red Warrior creature tokens. Sacrifice them at the beginning of the next end step.) / Your opponents can't cast spells during your turn.
+Hardened Tactician | {1}{W}{B} | Creature — Human Warrior | {1}, Sacrifice a token: Draw a card.
+Mardu Siegebreaker | {1}{R}{W}{B} | Creature — Human Warrior | Deathtouch, haste / When this creature enters, exile up to one other target creature you control until this creature leaves the battlefield. / Whenever this creature attacks, for each opponent, create a tapped token that's a copy of the exiled card attacking that opponent. At the beginning of your next end step, sacrifice those tokens.
+Professional Face-Breaker | {2}{R} | Creature — Human Warrior | Menace / Whenever one or more creatures you control deal combat damage to a player, create a Treasure token. / Sacrifice a Treasure: Exile the top card of your library. You may play that card this turn.
+Ogre Battledriver | {2}{R}{R} | Creature — Ogre Warrior | Whenever another creature you control enters, that creature gets +2/+0 and gains haste until end of turn. (It can attack and {T} this turn.)
+Venerated Stormsinger | {3}{B} | Creature — Orc Cleric | Mobilize 1 (Whenever this creature attacks, create a tapped and attacking 1/1 red Warrior creature token. Sacrifice it at the beginning of the next end step.) / Whenever this creature or another creature you control dies, each opponent loses 1 life and you gain 1 life.
+Dalkovan Packbeasts | {2}{W} | Creature — Ox | Vigilance / Mobilize 3 (Whenever this creature attacks, create three tapped and attacking 1/1 red Warrior creature tokens. Sacrifice them at the beginning of the next end step.)
+Fervor | {2}{R} | Enchantment | Creatures you control have haste. (They can attack and {T} as soon as they come under your control.)
+Impact Tremors | {1}{R} | Enchantment | Whenever a creature you control enters, this enchantment deals 1 damage to each opponent.
+Warleader's Call | {1}{R}{W} | Enchantment | Creatures you control get +1/+1. / Whenever a creature you control enters, this enchantment deals 1 damage to each opponent.
+Windcrag Siege | {1}{R}{W} | Enchantment | As this enchantment enters, choose Mardu or Jeskai. / • Mardu — If a creature attacking causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time. / • Jeskai — At the beginning of your upkeep, create a 1/1 red Goblin creature token. It gains lifelink and haste until end of turn.
+Enduring Courage | {2}{R}{R} | Enchantment Creature — Dog Glimmer | Whenever another creature you control enters, it gets +2/+0 and gains haste until end of turn. / When Enduring Courage dies, if it was a creature, return it to the battlefield under its owner's control. It's an enchantment. (It's not a creature.)
+Fear of Burning Alive | {4}{R}{R} | Enchantment Creature — Nightmare | When this creature enters, it deals 4 damage to each opponent. / Delirium — Whenever a source you control deals noncombat damage to an opponent, if there are four or more card types among cards in your graveyard, this creature deals that amount of damage to target creature that player controls.
+Glassworks // Shattered Yard | {2}{R} // {4}{R} | Enchantment — Room // Enchantment — Room | When you unlock this door, this Room deals 4 damage to target creature an opponent controls. / (You may cast either half. That door unlocks on the battlefield. As a sorcery, you may pay the mana cost of a locked door to unlock it.) / // / At the beginning of your end step, this Room deals 1 damage to each opponent. / (You may cast either half. That door unlocks on the battlefield. As a sorcery, you may pay the mana cost of a locked door to unlock it.)
+Thunder of Unity | {R}{W}{B} | Enchantment — Saga | (As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.) / I — You draw two cards and you lose 2 life. / II, III — Whenever a creature you control enters this turn, each opponent loses 1 life and you gain 1 life.
+Abrade | {1}{R} | Instant | Choose one — / • Abrade deals 3 damage to target creature. / • Destroy target artifact.
+Big Score | {3}{R} | Instant | As an additional cost to cast this spell, discard a card. / Draw two cards and create two Treasure tokens. (They're artifacts with "{T}, Sacrifice this token: Add one mana of any color.")
+Boros Charm | {R}{W} | Instant | Choose one — / • Boros Charm deals 4 damage to target player or planeswalker. / • Permanents you control gain indestructible until end of turn. / • Target creature gains double strike until end of turn.
+Dawn's Truce | {1}{W} | Instant | Gift a card (You may promise an opponent a gift as you cast this spell. If you do, they draw a card before its other effects.) / You and permanents you control gain hexproof until end of turn. If the gift was promised, permanents you control also gain indestructible until end of turn.
+Path to Exile | {W} | Instant | Exile target creature. Its controller may search their library for a basic land card, put that card onto the battlefield tapped, then shuffle.
+Rakdos Charm | {B}{R} | Instant | Choose one — / • Exile target player's graveyard. / • Destroy target artifact. / • Each creature deals 1 damage to its controller.
+Reprieve | {1}{W} | Instant | Return target spell to its owner's hand. / Draw a card.
+Swords to Plowshares | {W} | Instant | Exile target creature. Its controller gains life equal to its power.
+Teferi's Protection | {2}{W} | Instant | Until your next turn, your life total can't change and you gain protection from everything. All permanents you control phase out. (While they're phased out, they're treated as though they don't exist. They phase in before you untap during your untap step.) / Exile Teferi's Protection.
+Terminate | {B}{R} | Instant | Destroy target creature. It can't be regenerated.
+Thrill of Possibility | {1}{R} | Instant | As an additional cost to cast this spell, discard a card. / Draw two cards.
+Untimely Malfunction | {1}{R} | Instant | Choose one — / • Destroy target artifact. / • Change the target of target spell or ability with a single target. / • One or two target creatures can't block this turn.
+Village Rites | {B} | Instant | As an additional cost to cast this spell, sacrifice a creature. / Draw two cards.
+Arena of Glory |  | Land | This land enters tapped unless you control a Mountain. / {T}: Add {R}. / {R}, {T}, Exert this land: Add {R}{R}. If any of that mana is spent on a creature spell, it gains haste until end of turn. (An exerted permanent won't untap during your next untap step.)
+Bleachbone Verge |  | Land | {T}: Add {B}. / {T}: Add {W}. Activate only if you control a Plains or a Swamp.
+Bloodfell Caves |  | Land | This land enters tapped. / When this land enters, you gain 1 life. / {T}: Add {B} or {R}.
+Bojuka Bog |  | Land | This land enters tapped. / When this land enters, exile target player's graveyard. / {T}: Add {B}.
+Command Tower |  | Land | {T}: Add one mana of any color in your commander's color identity.
+Evolving Wilds |  | Land | {T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
+Fabled Passage |  | Land | {T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle. Then if you control four or more lands, untap that land.
+Nomad Outpost |  | Land | This land enters tapped. / {T}: Add {R}, {W}, or {B}.
+Rogue's Passage |  | Land | {T}: Add {C}. / {4}, {T}: Target creature can't be blocked this turn.
+Shattered Landscape |  | Land | {T}: Add {C}. / {T}, Sacrifice this land: Search your library for a basic Mountain, Plains, or Swamp card, put it onto the battlefield tapped, then shuffle. / Cycling {R}{W}{B} ({R}{W}{B}, Discard this card: Draw a card.)
+Shattered Sanctum |  | Land | This land enters tapped unless you control two or more other lands. / {T}: Add {W} or {B}.
+Sunbillow Verge |  | Land | {T}: Add {W}. / {T}: Add {R}. Activate only if you control a Mountain or a Plains.
+Sundown Pass |  | Land | This land enters tapped unless you control two or more other lands. / {T}: Add {R} or {W}.
+Temple of Malice |  | Land | This land enters tapped. / When this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.) / {T}: Add {B} or {R}.
+Temple of Silence |  | Land | This land enters tapped. / When this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.) / {T}: Add {W} or {B}.
+Temple of Triumph |  | Land | This land enters tapped. / When this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.) / {T}: Add {R} or {W}.
+Terramorphic Expanse |  | Land | {T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
+Wind-Scarred Crag |  | Land | This land enters tapped. / When this land enters, you gain 1 life. / {T}: Add {R} or {W}.
+Elegant Parlor |  | Land — Mountain Plains | ({T}: Add {R} or {W}.) / This land enters tapped. / When this land enters, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
+Sacred Foundry |  | Land — Mountain Plains | ({T}: Add {R} or {W}.) / As this land enters, you may pay 2 life. If you don't, it enters tapped.
+Savai Triome |  | Land — Mountain Plains Swamp | ({T}: Add {R}, {W}, or {B}.) / This land enters tapped. / Cycling {3} ({3}, Discard this card: Draw a card.)
+Godless Shrine |  | Land — Plains Swamp | ({T}: Add {W} or {B}.) / As this land enters, you may pay 2 life. If you don't, it enters tapped.
+Blood Crypt |  | Land — Swamp Mountain | ({T}: Add {B} or {R}.) / As this land enters, you may pay 2 life. If you don't, it enters tapped.
+Aurelia, the Warleader | {2}{R}{R}{W}{W} | Legendary Creature — Angel | Flying, vigilance, haste / Whenever Aurelia attacks for the first time each turn, untap all creatures you control. After this phase, there is an additional combat phase.
+Tannuk, Steadfast Second | {2}{R}{R} | Legendary Creature — Kavu Pilot | Other creatures you control have haste. / Artifact cards and red creature cards in your hand have warp {2}{R}. (You may cast a card from your hand for its warp cost. Exile that permanent at the beginning of the next end step, then you may cast it from exile on a later turn.)
+Zurgo Stormrender | {R}{W}{B} | Legendary Creature — Orc Warrior | Mobilize 1 (Whenever this creature attacks, create a tapped and attacking 1/1 red Warrior creature token. Sacrifice it at the beginning of the next end step.) / Whenever a creature token you control leaves the battlefield, draw a card if it was attacking. Otherwise, each opponent loses 1 life.
+Zurgo, Thunder's Decree | {R}{W}{B} | Legendary Creature — Orc Warrior | Mobilize 2 (Whenever this creature attacks, create two tapped and attacking 1/1 red Warrior creature tokens. Sacrifice them at the beginning of the next end step.) / During your end step, Warrior tokens you control have "This token can't be sacrificed."
+Neriv, Heart of the Storm | {1}{R}{W}{B} | Legendary Creature — Spirit Dragon | Flying / If a creature you control that entered this turn would deal damage, it deals twice that much damage instead.
+Urborg, Tomb of Yawgmoth |  | Legendary Land | Each land is a Swamp in addition to its other land types.
+Blasphemous Act | {8}{R} | Sorcery | This spell costs {1} less to cast for each creature on the battlefield. / Blasphemous Act deals 13 damage to each creature.
+Devastating Onslaught | {X}{X}{R} | Sorcery | Create X tokens that are copies of target artifact or creature you control. Those tokens gain haste until end of turn. Sacrifice them at the beginning of the next end step.
+Faithless Looting | {R} | Sorcery | Draw two cards, then discard two cards. / Flashback {2}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
+Jeska's Will | {2}{R} | Sorcery | Choose one. If you control a commander as you cast this spell, you may choose both instead. / • Add {R} for each card in target opponent's hand. / • Exile the top three cards of your library. You may play them this turn.
+Night's Whisper | {1}{B} | Sorcery | You draw two cards and lose 2 life.
+Reanimate | {B} | Sorcery | Put target creature card from a graveyard onto the battlefield under your control. You lose life equal to that card's mana value.
+Push // Pull | {1}{W/B} // {4}{B/R}{B/R} | Sorcery // Sorcery | Destroy target tapped creature. / // / Put up to two target creature cards from a single graveyard onto the battlefield under your control. They gain haste until end of turn. Sacrifice them at the beginning of the next end step.

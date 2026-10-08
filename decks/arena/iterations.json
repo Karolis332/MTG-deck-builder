@@ -207,6 +207,70 @@
         "1 Vraska, Soul of Stone",
         "1 Narset, Parter of Veils"
       ]
+    },
+    {
+      "v": 4,
+      "date": "2026-10-08",
+      "file": "decks/arena/esika-superfriends-v4.txt",
+      "note": "edited in Arena (played as \"Esika Superfriends v1\" on 2026-10-04)",
+      "added": [
+        "1 Bloom Tender",
+        "1 Chandra, Chill of Compliance",
+        "1 Counterspell",
+        "1 Dovin, Hand of Control",
+        "1 Enlightened Tutor",
+        "1 Flux Channeler",
+        "1 Jace, Reality Sculptor",
+        "1 Jegantha, the Wellspring",
+        "1 Kaya, Intangible Slayer",
+        "1 Mox Amber",
+        "1 Narset, Parter of Veils",
+        "1 Phyrexian Arena",
+        "1 Pia, Aether Ascetic",
+        "1 Saheeli, Sublime Artificer",
+        "1 Tekuthal, Inquiry Dominus",
+        "1 Teyo, the Shieldmage",
+        "1 Tezzeret, Cruel Captain",
+        "1 Theorist's Sanctum",
+        "1 Timeless Lotus",
+        "1 Vraska, Betrayal's Sting",
+        "1 Vraska, Soul of Stone",
+        "1 Way of the Healer",
+        "1 Way of the Mind Sculptor",
+        "1 Way of the Necromancer",
+        "1 Way of the Warlord",
+        "1 Way of the Wildspeaker",
+        "1 Wrenn and Realmbreaker"
+      ],
+      "removed": [
+        "1 Twinflame Tyrant",
+        "1 Purphoros, God of the Forge",
+        "1 A-The One Ring",
+        "1 Farseek",
+        "1 Mortality Spear",
+        "1 Aurora Awakener",
+        "1 Doc Samson, Super Psychiatrist",
+        "1 Bloodthirsty Conqueror",
+        "1 Starfield Vocalist",
+        "1 Dina, Soul Steeper",
+        "1 Beast Within",
+        "1 Bre of Clan Stoutarm",
+        "1 Overlord of the Hauntwoods",
+        "1 Enduring Tenacity",
+        "1 Nissa, Who Shakes the World",
+        "1 Great Divide Guide",
+        "1 Fell the Profane",
+        "1 Savai Triome",
+        "1 Enduring Vitality",
+        "1 Ajani, Outland Chaperone",
+        "1 Craterhoof Behemoth",
+        "1 Ob Nixilis, the Hate-Twisted",
+        "1 Chandra, Acolyte of Flame",
+        "1 Kiora, Behemoth Beckoner",
+        "1 Elesh Norn, Grand Cenobite",
+        "1 Terror of the Peaks",
+        "1 Forest"
+      ]
     }
   ],
   "Krenko Goblins": [
@@ -215,6 +279,76 @@
       "date": "2026-10-07",
       "file": "decks/arena/krenko-goblins-v1.txt",
       "note": "Model's 2026-10-08 Krenko list: 11 filler swaps reverted, 17 colourless/off-colour lands to Mountains",
+      "added": [],
+      "removed": []
+    }
+  ],
+  "Neriv Mardu": [
+    {
+      "v": 1,
+      "date": "2026-10-08",
+      "file": "decks/arena/neriv-mardu-v1.txt",
+      "note": "model's #2 Arena list (108.9): 11 role-window fillers → Neriv payoffs (Purphoros, Aggravated Assault, Gut, Raphael, Leonin Warleader, Raph & Leo, War Effort, Zariel, Kreat, Chandra AoF, Great Train Heist); 8 tapped/colourless lands → owned untapped duals; lab objective 99.5",
+      "added": [],
+      "removed": []
+    }
+  ],
+  "Fren": [
+    {
+      "v": 1,
+      "date": "2026-10-08",
+      "file": "decks/arena/fren-v1.txt",
+      "note": "synced from the Arena log (first seen 2026-10-02)",
+      "added": [],
+      "removed": []
+    }
+  ],
+  "Jayce MOdel planes": [
+    {
+      "v": 1,
+      "date": "2026-10-08",
+      "file": "decks/arena/jayce-model-planes-v1.txt",
+      "note": "synced from the Arena log (first seen 2026-10-01)",
+      "added": [],
+      "removed": []
+    }
+  ],
+  "Boros Superfriends": [
+    {
+      "v": 1,
+      "date": "2026-10-08",
+      "file": "decks/arena/boros-superfriends-v1.txt",
+      "note": "synced from the Arena log (first seen 2026-10-07)",
+      "added": [],
+      "removed": []
+    }
+  ],
+  "Gruul Aggro": [
+    {
+      "v": 1,
+      "date": "2026-10-08",
+      "file": "decks/arena/gruul-aggro-v1.txt",
+      "note": "synced from the Arena log (first seen 2026-10-06)",
+      "added": [],
+      "removed": []
+    }
+  ],
+  "Ashling V2 (2)": [
+    {
+      "v": 1,
+      "date": "2026-10-08",
+      "file": "decks/arena/ashling-v2-2-v1.txt",
+      "note": "synced from the Arena log (first seen 2026-10-06)",
+      "added": [],
+      "removed": []
+    }
+  ],
+  "Aeve": [
+    {
+      "v": 1,
+      "date": "2026-10-08",
+      "file": "decks/arena/aeve-v1.txt",
+      "note": "synced from the Arena log (first seen 2026-10-07)",
       "added": [],
       "removed": []
     }

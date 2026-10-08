@@ -38,6 +38,7 @@ function Get-SessionKey([string]$path) {
   return $null
 }
 
+$copied = $false
 foreach ($name in 'Player-prev.log', 'Player.log') {
   $path = Join-Path $src $name
   if (-not (Test-Path $path)) { continue }
@@ -54,7 +55,21 @@ foreach ($name in 'Player-prev.log', 'Player.log') {
       try { $in.CopyTo($fs) } finally { $fs.Dispose() }
     } finally { $in.Dispose() }
     Move-Item -Force $tmp $out
+    $copied = $true
   } catch {
     Add-Content -Path (Join-Path $dst 'archive-errors.log') -Value "$(Get-Date -Format s) $name $($_.Exception.Message)"
   }
+}
+
+# A log grew: rebuild the game reports, sync in-Arena deck edits into the ledger, refresh ARENA-STATUS.md
+# (scripts/arena-sync.ts). Output lands in sync.log next to the archived sessions.
+if ($copied) {
+  $repo = 'C:\Users\QuLeR\MTG-deck-builder'
+  $env:MTG_DB_DIR = (Join-Path $env:APPDATA 'the-black-grimoire\data') -replace '\\', '/'
+  Push-Location $repo
+  try {
+    & 'C:\Program Files\nodejs\node.exe' 'node_modules\tsx\dist\cli.mjs' 'scripts\arena-sync.ts' *>> (Join-Path $dst 'sync.log')
+  } catch {
+    Add-Content -Path (Join-Path $dst 'archive-errors.log') -Value "$(Get-Date -Format s) sync $($_.Exception.Message)"
+  } finally { Pop-Location }
 }

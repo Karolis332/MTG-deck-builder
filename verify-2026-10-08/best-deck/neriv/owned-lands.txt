@@ -1,0 +1,186 @@
+Abandoned Air Temple | Land | This land enters tapped unless you control a basic land. / {T}: Add {W}. / {3}{W}, {T}: Put a +1/+1 counter on each creature you control.
+Abraded Bluffs | Land — Desert | This land enters tapped. / When this land enters, it deals 1 damage to target opponent. / {T}: Add {R} or {W}.
+Aclazotz, Deepest Betrayal // Temple of the Dead | Legendary Creature — Bat God // Land | Flying, lifelink / Whenever Aclazotz attacks, each opponent discards a card. For each opponent who can't, you draw a card. / Whenever an opponent discards a land card, create a 1/1 black Bat creature token with flying. / When Aclazotz dies, return it to the battlefield tapped and transformed under its owner's control. / // / (Transforms from Aclazotz, Deepest Betrayal.) / {T}: Add {B}. / {2}{B}, {T}: Transform this land. Activate only if a player has one or fewer cards in hand and only as a sorcery.
+Adagia, Windswept Bastion | Land — Planet | This land enters tapped. / {T}: Add {W}. / Station (Tap another creature you control: Put charge counters equal to its power on this Planet. Station only as a sorcery.) / 12+ | {3}{W}, {T}: Create a token that's a copy of target artifact or enchantment you control, except it's legendary. Activate only as a sorcery.
+Adventurer's Inn | Land — Town | When this land enters, you gain 2 life. / {T}: Add {C}.
+Agadeem's Awakening // Agadeem, the Undercrypt | Sorcery // Land | Return from your graveyard to the battlefield any number of target creature cards that each have a different mana value X or less. / // / As this land enters, you may pay 3 life. If you don't, it enters tapped. / {T}: Add {B}.
+Amonkhet Raceway | Land | Start your engines! (If you have no speed, it starts at 1. It increases once on each of your turns when an opponent loses life. Max speed is 4.) / {T}: Add {C}. / Max speed — {T}: Target creature gains haste until end of turn.
+Ancient Den | Artifact Land | {T}: Add {W}.
+Arena of Glory | Land | This land enters tapped unless you control a Mountain. / {T}: Add {R}. / {R}, {T}, Exert this land: Add {R}{R}. If any of that mana is spent on a creature spell, it gains haste until end of turn. (An exerted permanent won't untap during your next untap step.)
+Arid Archway | Land — Desert | This land enters tapped. / When this land enters, return a land you control to its owner's hand. If another Desert was returned this way, surveil 1. (Look at the top card of your library. You may put it into your graveyard.) / {T}: Add {C}{C}.
+Asgardian Citadel | Land | This land enters tapped. / When this land enters, you gain 1 life. / {T}: Add {R} or {W}.
+Ash Barrens | Land | {T}: Add {C}. / Basic landcycling {1} ({1}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)
+Avengers Tower | Land | {T}: Add {C}. / {T}: Add one mana of any color. Spend this mana only to cast a Hero spell or to activate an ability of a Hero source. / {4}, {T}: Look at the top three cards of your library. You may reveal a Hero card from among them and put it into your hand. Put the rest on the bottom of your library in any order.
+Avishkar Raceway | Land | Start your engines! (If you have no speed, it starts at 1. It increases once on each of your turns when an opponent loses life. Max speed is 4.) / {T}: Add {C}. / Max speed — {3}, {T}, Discard a card: Draw a card.
+Baldur's Gate | Legendary Land — Gate | {T}: Add {C}. / {2}, {T}: Add X mana of any one color, where X is the number of other Gates you control.
+Bleachbone Verge | Land | {T}: Add {B}. / {T}: Add {W}. Activate only if you control a Plains or a Swamp.
+Blood Crypt | Land — Swamp Mountain | ({T}: Add {B} or {R}.) / As this land enters, you may pay 2 life. If you don't, it enters tapped.
+Bloodfell Caves | Land | This land enters tapped. / When this land enters, you gain 1 life. / {T}: Add {B} or {R}.
+Boggart Trawler // Boggart Bog | Creature — Goblin // Land | When this creature enters, exile target player's graveyard. / // / As this land enters, you may pay 3 life. If you don't, it enters tapped. / {T}: Add {B}.
+Boiling Rock Prison | Land | This land enters tapped. / {T}: Add {B} or {R}. / {4}, {T}, Sacrifice this land: Draw a card.
+Bojuka Bog | Land | This land enters tapped. / When this land enters, exile target player's graveyard. / {T}: Add {B}.
+Bonders' Enclave | Land | {T}: Add {C}. / {3}, {T}: Draw a card. Activate only if you control a creature with power 4 or greater.
+Boros Guildgate | Land — Gate | This land enters tapped. / {T}: Add {R} or {W}.
+Branch of Vitu-Ghazi | Land | {T}: Add {C}. / Disguise {3} (You may cast this card face down for {3} as a 2/2 creature with ward {2}. Turn it face up any time for its disguise cost.) / When this land is turned face up, add two mana of any one color. Until end of turn, you don't lose this mana as steps and phases end.
+Brass's Tunnel-Grinder // Tecutlan, the Searing Rift | Legendary Artifact // Legendary Land — Cave | When Brass's Tunnel-Grinder enters, discard any number of cards, then draw that many cards plus one. / At the beginning of your end step, if you descended this turn, put a bore counter on Brass's Tunnel-Grinder. Then if there are three or more bore counters on it, remove those counters and transform it. (You descended if a permanent card was put into your graveyard from anywhere.) / // / (Transforms from Brass's Tunnel-Grinder.) / {T}: Add {R}. / Whenever you cast a permanent spell using mana produced by Tecutlan, discover X, where X is that spell's mana value.
+Brokers Hideout | Land | When this land enters, sacrifice it. When you do, search your library for a basic Forest, Plains, or Island card, put it onto the battlefield tapped, then shuffle and you gain 1 life.
+Bucolic Ranch | Land — Desert | {T}: Add {C}. / {T}: Add one mana of any color. Spend this mana only to cast a Mount spell. / {3}, {T}: Look at the top card of your library. If it's a Mount card, you may reveal it and put it into your hand. If you don't put it into your hand, you may put it on the bottom of your library.
+Buried Ruin | Land | {T}: Add {C}. / {2}, {T}, Sacrifice this land: Return target artifact card from your graveyard to your hand.
+Cabaretti Courtyard | Land | When this land enters, sacrifice it. When you do, search your library for a basic Mountain, Forest, or Plains card, put it onto the battlefield tapped, then shuffle and you gain 1 life.
+Capital City | Land — Town | {T}: Add {C}. / {1}, {T}: Add one mana of any color. / Cycling {2} ({2}, Discard this card: Draw a card.)
+Captivating Cave | Land — Cave | {T}: Add {C}. / {1}, {T}: Add one mana of any color. / {4}, {T}, Sacrifice this land: Put two +1/+1 counters on target creature. Activate only as a sorcery.
+Castle Doom | Land | {T}: Add {C}. / {T}: Add one mana of any color. Spend this mana only to cast an artifact spell. / {3}, {T}, Sacrifice an artifact: Create a 3/3 colorless Robot Villain artifact creature token named Doombot. Activate only as a sorcery.
+Cavern of Souls | Land | As this land enters, choose a creature type. / {T}: Add {C}. / {T}: Add one mana of any color. Spend this mana only to cast a creature spell of the chosen type, and that spell can't be countered.
+Command Bridge | Land | This land enters tapped. / When this land enters, sacrifice it unless you tap an untapped permanent you control. / {T}: Add one mana of any color.
+Command Tower | Land | {T}: Add one mana of any color in your commander's color identity.
+Concealed Courtyard | Land | This land enters tapped unless you control two or fewer other lands. / {T}: Add {W} or {B}.
+Conduit Pylons | Land — Desert | When this land enters, surveil 1. (Look at the top card of your library. You may put it into your graveyard.) / {T}: Add {C}. / {1}, {T}: Add one mana of any color.
+Cori Mountain Monastery | Land | This land enters tapped unless you control a Plains or an Island. / {T}: Add {R}. / {3}{R}, {T}: Exile the top card of your library. Until the end of your next turn, you may play that card.
+Country Roads | Land | This land enters tapped unless you control a Mount or Vehicle. / {T}: Add {W}. / {1}{W}, {T}, Sacrifice this land: Create a 1/1 colorless Pilot creature token with "This token saddles Mounts and crews Vehicles as though its power were 2 greater." Activate only as a sorcery.
+Daily Bugle Building | Land | {T}: Add {C}. / {1}, {T}: Add one mana of any color. / Smear Campaign — {1}, {T}: Target legendary creature gains menace until end of turn. Activate only as a sorcery.
+Dark Depths | Legendary Snow Land | Dark Depths enters with ten ice counters on it. / {3}: Remove an ice counter from Dark Depths. / When Dark Depths has no ice counters on it, sacrifice it. If you do, create Marit Lage, a legendary 20/20 black Avatar creature token with flying and indestructible.
+Dark Fortress | Land | {T}: Add {C}. / {T}: Add {B} or {R}. Activate only if this land entered this turn or if you control a basic land.
+Darksteel Citadel | Artifact Land | Indestructible / {T}: Add {C}.
+Dedicated Commons | Land | This land enters tapped unless you control a planeswalker. / {T}: Add {R} or {W}.
+Deserted Temple | Land | {T}: Add {C}. / {1}, {T}: Untap target land.
+Dimension X | Land | This land enters tapped. / When this land enters, you gain 1 life. / {T}: Add {R} or {W}.
+Dowsing Device // Geode Grotto | Artifact // Land — Cave | Whenever this artifact or another artifact you control enters, up to one target creature you control gets +1/+0 and gains haste until end of turn. Then transform this artifact if you control four or more artifacts. / // / (Transforms from Dowsing Device.) / {T}: Add {R}. / {2}{R}, {T}: Until end of turn, target creature gains haste and gets +X/+0, where X is the number of artifacts you control. Activate only as a sorcery.
+Drannith Ruins | Land | {T}: Add {C}. / {2}, {T}: Put two +1/+1 counters on target non-Human creature that entered this turn.
+Eclipsed Realms | Land | As this land enters, choose Elemental, Elf, Faerie, Giant, Goblin, Kithkin, Merfolk, or Treefolk. / {T}: Add {C}. / {T}: Add one mana of any color. Spend this mana only to cast a spell of the chosen type or activate an ability of a source of the chosen type.
+Eden, Seat of the Sanctum | Land — Town | {T}: Add {C}. / {5}, {T}: Mill two cards. Then you may sacrifice this land. When you do, return another target permanent card from your graveyard to your hand.
+Edgewall Inn | Land | This land enters tapped. / As this land enters, choose a color. / {T}: Add one mana of the chosen color. / {3}, {T}, Sacrifice this land: Return target card that has an Adventure from your graveyard to your hand.
+Eiganjo, Seat of the Empire | Legendary Land | {T}: Add {W}. / Channel — {2}{W}, Discard this card: It deals 4 damage to target attacking or blocking creature. This ability costs {1} less to activate for each legendary creature you control.
+Eldrazi Temple | Land | {T}: Add {C}. / {T}: Add {C}{C}. Spend this mana only to cast colorless Eldrazi spells or activate abilities of colorless Eldrazi.
+Elegant Parlor | Land — Mountain Plains | ({T}: Add {R} or {W}.) / This land enters tapped. / When this land enters, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
+Elven Passage | Land | {T}, Pay 1 life, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle. You may behold an Elf. If you do, untap that land. (To behold an Elf, choose an Elf you control or reveal an Elf card from your hand.)
+Emergence Zone | Land | {T}: Add {C}. / {1}, {T}, Sacrifice this land: You may cast spells this turn as though they had flash.
+Escape Tunnel | Land | {T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle. / {T}, Sacrifice this land: Target creature with power 2 or less can't be blocked this turn.
+Evolving Wilds | Land | {T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
+Fabled Passage | Land | {T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle. Then if you control four or more lands, untap that land.
+Fell the Profane // Fell Mire | Instant // Land | Destroy target creature or planeswalker. / // / As this land enters, you may pay 3 life. If you don't, it enters tapped. / {T}: Add {B}.
+Fields of Strife | Land | This land enters tapped. / {T}: Add {R} or {W}. / {2}{R}{W}, {T}: Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
+Fire Nation Palace | Land | This land enters tapped unless you control a basic land. / {T}: Add {R}. / {1}{R}, {T}: Target creature you control gains firebending 4 until end of turn. (Whenever it attacks, add {R}{R}{R}{R}. This mana lasts until end of combat.)
+Fisk Tower | Land | This land enters tapped. / When this land enters, you gain 1 life. / {T}: Add {W} or {B}.
+Flooded Strand | Land | {T}, Pay 1 life, Sacrifice this land: Search your library for a Plains or Island card, put it onto the battlefield, then shuffle.
+Fomori Vault | Land | {T}: Add {C}. / {3}, {T}, Discard a card: Look at the top X cards of your library, where X is the number of artifacts you control. Put one of those cards into your hand and the rest on the bottom of your library in a random order.
+Foot Headquarters | Land | This land enters tapped. / When this land enters, you gain 1 life. / {T}: Add {W} or {B}.
+Forgotten Monument | Land — Cave | {T}: Add {C}. / Other Caves you control have "{T}, Pay 1 life: Add one mana of any color."
+Forlorn Flats | Land — Desert | This land enters tapped. / When this land enters, it deals 1 damage to target opponent. / {T}: Add {W} or {B}.
+Forum of Amity | Land | This land enters tapped. / {T}: Add {W} or {B}. / {2}{W}{B}, {T}: Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
+Foul Roads | Land | This land enters tapped unless you control a Mount or Vehicle. / {T}: Add {B}. / {1}{B}, {T}, Sacrifice this land: Create a 1/1 colorless Pilot creature token with "This token saddles Mounts and crews Vehicles as though its power were 2 greater." Activate only as a sorcery.
+Gate of the Black Dragon | Land — Swamp Gate | ({T}: Add {B}.) / Gate of the Black Dragon enters the battlefield tapped. / {3}{B}, {T}: Seek a nonland card. Activate only once.
+Gate to Tumbledown | Land — Mountain Gate | ({T}: Add {R}.) / Gate to Tumbledown enters the battlefield tapped. / {3}{R}, {T}: Seek a nonland card. Activate only once.
+Gate to the Citadel | Land — Plains Gate | ({T}: Add {W}.) / Gate to the Citadel enters the battlefield tapped. / {3}{W}, {T}: Seek a nonland card. Activate only once.
+Gateway Plaza | Land — Gate | This land enters tapped. / When this land enters, sacrifice it unless you pay {1}. / {T}: Add one mana of any color.
+Gemstone Caverns | Legendary Land | If this card is in your opening hand and you're not the starting player, you may begin the game with Gemstone Caverns on the battlefield with a luck counter on it. If you do, exile a card from your hand. / {T}: Add {C}. If Gemstone Caverns has a luck counter on it, instead add one mana of any color.
+Goblin-town | Land | This land enters tapped. / {T}: Add {B} or {R}. / {2}{B}{R}, {T}, Sacrifice this land: Put two +1/+1 counters on target Goblin or Orc you control. Activate only as a sorcery.
+Godless Shrine | Land — Plains Swamp | ({T}: Add {W} or {B}.) / As this land enters, you may pay 2 life. If you don't, it enters tapped.
+Grasping Shadows // Shadows' Lair | Enchantment // Land — Cave | Whenever a creature you control attacks alone, it gains deathtouch and lifelink until end of turn. Put a dread counter on this enchantment. Then if there are three or more dread counters on it, transform it. / // / (Transforms from Grasping Shadows.) / {T}: Add {B}. / {B}, {T}, Remove a dread counter from this land: You draw a card and you lose 1 life.
+Great Furnace | Artifact Land | {T}: Add {R}.
+Great Hall of the Biblioplex | Land | {T}: Add {C}. / {T}, Pay 1 life: Add one mana of any color. Spend this mana only to cast an instant or sorcery spell. / {5}: If this land isn't a creature, it becomes a 2/4 Wizard creature with "Whenever you cast an instant or sorcery spell, this creature gets +1/+0 until end of turn." It's still a land.
+Great Hall of the Citadel | Land | {T}: Add {C}. / {1}, {T}: Add two mana in any combination of colors. Spend this mana only to cast legendary spells.
+Hall of Echoes | Land | {T}: Add {C}. / {5}: This land becomes a copy of target creature you control until end of turn. The "legend rule" doesn't apply to permanents you control this turn.
+Hell's Kitchen | Land | This land enters tapped. / When this land enters, you gain 1 life. / {T}: Add {B} or {R}.
+Hidden Courtyard | Land — Cave | This land enters tapped. / {T}: Add {W}. / {4}{W}, {T}, Sacrifice this land: Discover 4. Activate only as a sorcery. (Exile cards from the top of your library until you exile a nonland card with mana value 4 or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)
+Hidden Necropolis | Land — Cave | This land enters tapped. / {T}: Add {B}. / {4}{B}, {T}, Sacrifice this land: Discover 4. Activate only as a sorcery. (Exile cards from the top of your library until you exile a nonland card with mana value 4 or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)
+Hidden Volcano | Land — Cave | This land enters tapped. / {T}: Add {R}. / {4}{R}, {T}, Sacrifice this land: Discover 4. Activate only as a sorcery. (Exile cards from the top of your library until you exile a nonland card with mana value 4 or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)
+Hobbit Hole | Land | {T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle. / Halflingcycling {4} ({4}, Discard this card: Search your library for a Halfling card, reveal it, put it into your hand, then shuffle.)
+Insomnia, Crown City | Land — Town | This land enters tapped. / {T}: Add {W} or {B}.
+Interplanar Beacon | Land | Whenever you cast a planeswalker spell, you gain 1 life. / {T}: Add {C}. / {1}, {T}: Add two mana of different colors. Spend this mana only to cast planeswalker spells.
+Inventors' Fair | Legendary Land | At the beginning of your upkeep, if you control three or more artifacts, you gain 1 life. / {T}: Add {C}. / {4}, {T}, Sacrifice Inventors' Fair: Search your library for an artifact card, reveal it, put it into your hand, then shuffle. Activate only if you control three or more artifacts.
+Iron Hills | Land | This land enters tapped. / {T}: Add {R} or {W}. / {2}{R}{W}, {T}, Sacrifice this land: Put two +1/+1 counters on target Dwarf you control. Activate only as a sorcery.
+Jagged Barrens | Land — Desert | This land enters tapped. / When this land enters, it deals 1 damage to target opponent. / {T}: Add {B} or {R}.
+Jasmine Dragon Tea Shop | Land | {T}: Add {C}. / {T}: Add one mana of any color. Spend this mana only to cast an Ally spell or activate an ability of an Ally source. / {5}, {T}: Create a 1/1 white Ally creature token.
+Karn's Bastion | Land | {T}: Add {C}. / {4}, {T}: Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)
+Legion Leadership // Legion Stronghold | Instant // Land | Until end of turn, double target creature's power and it gains first strike. / // / This land enters tapped. / {T}: Add {R} or {W}.
+Lindblum, Industrial Regency // Mage Siege | Land — Town // Instant — Adventure | This land enters tapped. / {T}: Add {R}. / // / Create a 0/1 black Wizard creature token with "Whenever you cast a noncreature spell, this token deals 1 damage to each opponent."
+Lupinflower Village | Land | {T}: Add {C}. / {T}: Add {W}. Spend this mana only to cast a creature spell. / {1}{W}, {T}, Sacrifice this land: Look at the top six cards of your library. You may reveal a Bat, Bird, Mouse, or Rabbit card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
+Malakir Rebirth // Malakir Mire | Instant // Land | Choose target creature. You lose 2 life. Until end of turn, that creature gains "When this creature dies, return it to the battlefield tapped under its owner's control." / // / This land enters tapped. / {T}: Add {B}.
+Maze's End | Land | This land enters tapped. / {T}: Add {C}. / {3}, {T}, Return this land to its owner's hand: Search your library for a Gate card, put it onto the battlefield, then shuffle. If you control ten or more Gates with different names, you win the game.
+Meticulous Commons | Land | This land enters tapped unless you control a planeswalker. / {T}: Add {W} or {B}.
+Midgar, City of Mako // Reactor Raid | Land — Town // Sorcery — Adventure | This land enters tapped. / {T}: Add {B}. / // / You may sacrifice an artifact or creature. If you do, draw two cards. (Then exile this card. You may play the land later from exile.)
+Mines of Moria | Legendary Land | Mines of Moria enters tapped unless you control a legendary creature. / {T}: Add {R}. / {3}{R}, {T}, Exile three cards from your graveyard: Create two Treasure tokens.
+Mirage Mesa | Land — Desert | This land enters tapped. As it enters, choose a color. / {T}: Add one mana of the chosen color.
+Mirrodin's Core | Land | {T}: Add {C}. / {T}: Put a charge counter on this land. / {T}, Remove a charge counter from this land: Add one mana of any color.
+Mistveil Plains | Land — Plains | ({T}: Add {W}.) / This land enters tapped. / {W}, {T}: Put target card from your graveyard on the bottom of your library. Activate only if you control two or more white permanents.
+Misty Palms Oasis | Land | This land enters tapped. / {T}: Add {W} or {B}. / {4}, {T}, Sacrifice this land: Draw a card.
+Misty Rainforest | Land | {T}, Pay 1 life, Sacrifice this land: Search your library for a Forest or Island card, put it onto the battlefield, then shuffle.
+Mount Doom | Legendary Land | {T}, Pay 1 life: Add {B} or {R}. / {1}{B}{R}, {T}: Mount Doom deals 1 damage to each opponent. / {5}{B}{R}, {T}, Sacrifice Mount Doom and a legendary artifact: Choose up to two creatures, then destroy the rest. Activate only as a sorcery.
+Multiversal Passage | Land | As this land enters, choose a basic land type. Then you may pay 2 life. If you don't, it enters tapped. / This land is the chosen type.
+Neglected Manor | Land | This land enters tapped unless a player has 13 or less life. / {T}: Add {W} or {B}.
+Nesting Grounds | Land | {T}: Add {C}. / {1}, {T}: Move a counter from target permanent you control onto a second target permanent. Activate only as a sorcery.
+Night Market | Land | This land enters tapped. As it enters, choose a color. / {T}: Add one mana of the chosen color. / Cycling {3} ({3}, Discard this card: Draw a card.)
+Nomad Outpost | Land | This land enters tapped. / {T}: Add {R}, {W}, or {B}.
+Northampton Farm | Land | {T}: Add {C}. / {1}, {T}: Exile target creature you own. / {2}, {T}, Sacrifice this land: Return a creature card exiled with this land to the battlefield under your control. Return each other card exiled with this land to its owner's hand.
+Ojer Axonil, Deepest Might // Temple of Power | Legendary Creature — God // Land | Trample / If a red source you control would deal an amount of noncombat damage less than Ojer Axonil's power to an opponent, that source deals damage equal to Ojer Axonil's power instead. / When Ojer Axonil dies, return it to the battlefield tapped and transformed under its owner's control. / // / (Transforms from Ojer Axonil, Deepest Might.) / {T}: Add {R}. / {2}{R}, {T}: Transform this land. Activate only if red sources you controlled dealt 4 or more noncombat damage this turn and only as a sorcery.
+Ominous Asylum | Land | This land enters tapped. / {T}: Add {B} or {R}. / {4}, {T}: Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
+Orzhov Guildgate | Land — Gate | This land enters tapped. / {T}: Add {W} or {B}.
+Petrified Hamlet | Land | When this land enters, choose a land card name. / Activated abilities of sources with the chosen name can't be activated unless they're mana abilities. / Lands with the chosen name have "{T}: Add {C}." / {T}: Add {C}.
+Phyrexian Tower | Legendary Land | {T}: Add {C}. / {T}, Sacrifice a creature: Add {B}{B}.
+Pinnacle Monk // Mystic Peak | Creature — Djinn Monk // Land | Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.) / When this creature enters, return target instant or sorcery card from your graveyard to your hand. / // / As this land enters, you may pay 3 life. If you don't, it enters tapped. / {T}: Add {R}.
+Plaza of Harmony | Land | When this land enters, if you control two or more Gates, you gain 3 life. / {T}: Add {C}. / {T}: Add one mana of any type that a Gate you control could produce.
+Rabanastre, Royal City | Land — Town | This land enters tapped. / {T}: Add {R} or {W}.
+Rakdos Guildgate | Land — Gate | This land enters tapped. / {T}: Add {B} or {R}.
+Razorgrass Ambush // Razorgrass Field | Instant // Land | Razorgrass Ambush deals 3 damage to target attacking or blocking creature. / // / As this land enters, you may pay 3 life. If you don't, it enters tapped. / {T}: Add {W}.
+Razortrap Gorge | Land | This land enters tapped unless a player has 13 or less life. / {T}: Add {B} or {R}.
+Realm of Koh | Land | This land enters tapped unless you control a basic land. / {T}: Add {B}. / {3}{B}, {T}: Create a 1/1 colorless Spirit creature token with "This token can't block or be blocked by non-Spirit creatures."
+Reliquary Tower | Land | You have no maximum hand size. / {T}: Add {C}.
+Restless Fortress | Land | This land enters tapped. / {T}: Add {W} or {B}. / {2}{W}{B}: This land becomes a 1/4 white and black Nightmare creature until end of turn. It's still a land. / Whenever this land attacks, defending player loses 2 life and you gain 2 life.
+Roadside Reliquary | Land | {T}: Add {C}. / {2}, {T}, Sacrifice this land: Draw a card if you control an artifact. Draw a card if you control an enchantment.
+Rocky Roads | Land | This land enters tapped unless you control a Mount or Vehicle. / {T}: Add {R}. / {1}{R}, {T}, Sacrifice this land: Create a 1/1 colorless Pilot creature token with "This token saddles Mounts and crews Vehicles as though its power were 2 greater." Activate only as a sorcery.
+Rogue's Passage | Land | {T}: Add {C}. / {4}, {T}: Target creature can't be blocked this turn.
+Room of Refuge | Land | This land enters tapped. As it enters, choose a color. / {T}: Add one mana of the chosen color. / {5}, {T}, Sacrifice this land: Put two +1/+1 counters on target creature. Activate only as a sorcery.
+Rumble Arena | Land | Vigilance / When this land enters, scry 1. (Look at the top card of your library. You may put it on the bottom.) / {T}: Add {C}. / {1}, {T}: Add one mana of any color.
+Sacred Foundry | Land — Mountain Plains | ({T}: Add {R} or {W}.) / As this land enters, you may pay 2 life. If you don't, it enters tapped.
+Savai Triome | Land — Mountain Plains Swamp | ({T}: Add {R}, {W}, or {B}.) / This land enters tapped. / Cycling {3} ({3}, Discard this card: Draw a card.)
+Scalding Tarn | Land | {T}, Pay 1 life, Sacrifice this land: Search your library for an Island or Mountain card, put it onto the battlefield, then shuffle.
+Scoured Barrens | Land | This land enters tapped. / When this land enters, you gain 1 life. / {T}: Add {W} or {B}.
+Secluded Courtyard | Land | As this land enters, choose a creature type. / {T}: Add {C}. / {T}: Add one mana of any color. Spend this mana only to cast a creature spell of the chosen type or activate an ability of a creature source of the chosen type.
+Secluded Starforge | Land | {T}: Add {C}. / {2}, {T}, Tap X untapped artifacts you control: Target creature gets +X/+0 until end of turn. Activate only as a sorcery. / {5}, {T}: Create a 2/2 colorless Robot artifact creature token.
+Secluded Steppe | Land | This land enters tapped. / {T}: Add {W}. / Cycling {W} ({W}, Discard this card: Draw a card.)
+Secret Tunnel | Land — Cave | This land can't be blocked. / {T}: Add {C}. / {4}, {T}: Two target creatures you control that share a creature type can't be blocked this turn.
+Shattered Landscape | Land | {T}: Add {C}. / {T}, Sacrifice this land: Search your library for a basic Mountain, Plains, or Swamp card, put it onto the battlefield tapped, then shuffle. / Cycling {R}{W}{B} ({R}{W}{B}, Discard this card: Draw a card.)
+Shattered Sanctum | Land | This land enters tapped unless you control two or more other lands. / {T}: Add {W} or {B}.
+Shatterskull Smashing // Shatterskull, the Hammer Pass | Sorcery // Land | Shatterskull Smashing deals X damage divided as you choose among up to two target creatures and/or planeswalkers. If X is 6 or more, Shatterskull Smashing deals twice X damage divided as you choose among them instead. / // / As this land enters, you may pay 3 life. If you don't, it enters tapped. / {T}: Add {R}.
+Sidequest: Catch a Fish // Cooking Campsite | Enchantment // Land | At the beginning of your upkeep, look at the top card of your library. If it's an artifact or creature card, you may reveal it and put it into your hand. If you put a card into your hand this way, create a Food token and transform this enchantment. / // / {T}: Add {W}. / {3}, {T}, Sacrifice an artifact: Put a +1/+1 counter on each creature you control. Activate only as a sorcery.
+Skycoach Waypoint | Land | {T}: Add {C}. / {3}, {T}: Target creature becomes prepared. (Only creatures with prepare spells can become prepared.)
+Snow-Covered Mountain | Basic Snow Land — Mountain | ({T}: Add {R}.)
+Snow-Covered Plains | Basic Snow Land — Plains | ({T}: Add {W}.)
+Snow-Covered Swamp | Basic Snow Land — Swamp | ({T}: Add {B}.)
+Sokenzan, Crucible of Defiance | Legendary Land | {T}: Add {R}. / Channel — {3}{R}, Discard this card: Create two 1/1 colorless Spirit creature tokens. They gain haste until end of turn. This ability costs {1} less to activate for each legendary creature you control.
+Soulstone Sanctuary | Land | {T}: Add {C}. / {4}: This land becomes a 3/3 creature with vigilance and all creature types. It's still a land.
+Spikefield Hazard // Spikefield Cave | Instant // Land | Spikefield Hazard deals 1 damage to any target. If a permanent dealt damage this way would die this turn, exile it instead. / // / This land enters tapped. / {T}: Add {R}.
+Starting Town | Land — Town | This land enters tapped unless it's your first, second, or third turn of the game. / {T}: Add {C}. / {T}, Pay 1 life: Add one mana of any color.
+Stingerquill Annex | Land | This land enters tapped unless you control a planeswalker. / {T}: Add {B} or {R}.
+Sulfurous Mire | Snow Land — Swamp Mountain | ({T}: Add {B} or {R}.) / This land enters tapped.
+Sun-Blessed Peak | Land | This land enters tapped. / {T}: Add {R} or {W}. / {4}, {T}, Sacrifice this land: Draw a card.
+Sunbillow Verge | Land | {T}: Add {W}. / {T}: Add {R}. Activate only if you control a Mountain or a Plains.
+Sundering Eruption // Volcanic Fissure | Sorcery // Land | Destroy target land. Its controller may search their library for a basic land card, put it onto the battlefield tapped, then shuffle. Creatures without flying can't block this turn. / // / As this land enters, you may pay 3 life. If you don't, it enters tapped. / {T}: Add {R}.
+Sundown Pass | Land | This land enters tapped unless you control two or more other lands. / {T}: Add {R} or {W}.
+Surveillance Room | Land | When this land enters, surveil 1. (Look at the top card of your library. You may put it into your graveyard.) / {T}: Add {C}. / {1}, {T}: Add one mana of any color.
+Susur Secundi, Void Altar | Land — Planet | This land enters tapped. / {T}: Add {B}. / Station (Tap another creature you control: Put charge counters equal to its power on this Planet. Station only as a sorcery.) / 12+ | {1}{B}, {T}, Pay 2 life, Sacrifice a creature: Draw cards equal to the sacrificed creature's power. Activate only as a sorcery.
+Takenuma, Abandoned Mire | Legendary Land | {T}: Add {B}. / Channel — {3}{B}, Discard this card: Mill three cards, then return a creature or planeswalker card from your graveyard to your hand. This ability costs {1} less to activate for each legendary creature you control.
+Tarnation Vista | Land | This land enters tapped. As it enters, choose a color. / {T}: Add one mana of the chosen color. / {1}, {T}: For each color among monocolored permanents you control, add one mana of that color.
+Temple of Malice | Land | This land enters tapped. / When this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.) / {T}: Add {B} or {R}.
+Temple of Silence | Land | This land enters tapped. / When this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.) / {T}: Add {W} or {B}.
+Temple of Triumph | Land | This land enters tapped. / When this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.) / {T}: Add {R} or {W}.
+Terrain Generator | Land | {T}: Add {C}. / {2}, {T}: You may put a basic land card from your hand onto the battlefield tapped.
+Terramorphic Expanse | Land | {T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
+The Lonely Mountain | Land — Mountain | ({T}: Add {R}.) / This land enters tapped unless you control an Equipment. / {4}{R}, {T}: Create a 2/2 red Dwarf creature token. This ability costs {1} less to activate for each Equipment you control. Activate only as a sorcery.
+Thespian's Stage | Land | {T}: Add {C}. / {2}, {T}: This land becomes a copy of target land, except it has this ability.
+Thran Portal | Land — Gate | This land enters tapped unless you control two or fewer other lands. / As this land enters, choose a basic land type. / This land is the chosen type in addition to its other types. / Mana abilities of this land cost an additional 1 life to activate.
+Thriving Bluff | Land | This land enters tapped. As it enters, choose a color other than red. / {T}: Add {R} or one mana of the chosen color.
+Thriving Heath | Land | This land enters tapped. As it enters, choose a color other than white. / {T}: Add {W} or one mana of the chosen color.
+Thriving Moor | Land | This land enters tapped. As it enters, choose a color other than black. / {T}: Add {B} or one mana of the chosen color.
+Turtle Lair | Land | {T}: Add {C}. / {T}: Add one mana of any color. Spend this mana only to cast a Ninja or Turtle spell. / {3}, {T}: Target Ninja or Turtle can't be blocked this turn.
+Unclaimed Territory | Land | As this land enters, choose a creature type. / {T}: Add {C}. / {T}: Add one mana of any color. Spend this mana only to cast a creature spell of the chosen type.
+Urborg, Tomb of Yawgmoth | Legendary Land | Each land is a Swamp in addition to its other land types.
+Valakut, the Molten Pinnacle | Land | This land enters tapped. / Whenever a Mountain you control enters, if you control at least five other Mountains, you may have this land deal 3 damage to any target. / {T}: Add {R}.
+Valgavoth's Lair | Enchantment Land | Hexproof / This land enters tapped. As it enters, choose a color. / {T}: Add one mana of the chosen color.
+Vault of Whispers | Artifact Land | {T}: Add {B}.
+Vector, Imperial Capital | Land — Town | This land enters tapped. / {T}: Add {B} or {R}.
+Vibrant Cityscape | Land | {T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
+Villainous Hideout | Land | {T}: Add {C}. / {T}: Add one mana of any color. Spend this mana only to cast a Villain spell or to activate an ability of a Villain source. / {3}, {T}: Target Villain you control connives. Activate only as a sorcery. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on that creature.)
+White Lotus Hideout | Land | {T}: Add {C}. / {T}: Add one mana of any color. Spend this mana only to cast a Lesson or Shrine spell. / {1}, {T}: Add one mana of any color.
+Wind-Scarred Crag | Land | This land enters tapped. / When this land enters, you gain 1 life. / {T}: Add {R} or {W}.
+Witch Enchanter // Witch-Blessed Meadow | Creature — Human Warlock // Land | When this creature enters, destroy target artifact or enchantment an opponent controls. / // / As this land enters, you may pay 3 life. If you don't, it enters tapped. / {T}: Add {W}.

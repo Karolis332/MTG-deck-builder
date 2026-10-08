@@ -98,6 +98,65 @@ function copyToClipboard(file: string): void {
   ]);
 }
 
+export function readLedger(): Ledger {
+  return fs.existsSync(LEDGER) ? (JSON.parse(fs.readFileSync(LEDGER, 'utf8')) as Ledger) : {};
+}
+
+/** Front-face card counts of a recorded iteration (set codes stripped). */
+export function iterationCounts(entry: Iteration): Map<string, number> {
+  return cardCounts(fs.readFileSync(path.join(ROOT, entry.file), 'utf8'));
+}
+
+export interface RecordResult {
+  entry: Iteration;
+  /** false = the card lines matched the last version, which is re-emitted */
+  bumped: boolean;
+  arenaName: string;
+  /** absolute path of the iteration file */
+  file: string;
+  cards: number;
+}
+
+/**
+ * Record `text` as the next iteration of `name`, or re-emit the last one when nothing changed.
+ * `onlyIfCardsChanged`: compare front-face card counts only (printings/sections ignored) — for
+ * lists that come back from the Arena log without set codes.
+ */
+export function recordIteration(
+  name: string,
+  text: string,
+  opts: { note?: string; commanderFirst?: boolean; onlyIfCardsChanged?: boolean } = {},
+): RecordResult {
+  const sections = splitSections(text, opts.commanderFirst ?? false);
+  const cards = SECTIONS.flatMap((s) => sections[s]);
+  if (!cards.length) throw new Error(`no card lines for "${name}"`);
+  const cardTotal = cards.reduce((n, l) => n + Number(l.split(' ')[0]), 0);
+
+  fs.mkdirSync(OUT_DIR, { recursive: true });
+  const ledger = readLedger();
+  const history = ledger[name] ?? [];
+  const last = history[history.length - 1];
+  const lastText = last ? fs.readFileSync(path.join(ROOT, last.file), 'utf8') : '';
+  const { added, removed } = last
+    ? diff(cardCounts(lastText), cardCounts(cards.join('\n')))
+    : { added: [], removed: [] }; // v1 is the baseline, not a diff
+
+  const unchanged = last && (opts.onlyIfCardsChanged
+    ? !added.length && !removed.length
+    : fingerprint(splitSections(lastText, false)) === fingerprint(sections));
+  if (last && unchanged) {
+    return { entry: last, bumped: false, arenaName: `${name} v${last.v}`, file: path.join(ROOT, last.file), cards: cardTotal };
+  }
+
+  const v = (last?.v ?? 0) + 1;
+  const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  const file = path.posix.join('decks', 'arena', `${slug}-v${v}.txt`);
+  const entry: Iteration = { v, date: new Date().toISOString().slice(0, 10), file, note: opts.note ?? '', added, removed };
+  fs.writeFileSync(path.join(ROOT, file), render(`${name} v${v}`, sections));
+  fs.writeFileSync(LEDGER, JSON.stringify({ ...ledger, [name]: [...history, entry] }, null, 2) + '\n');
+  return { entry, bumped: true, arenaName: `${name} v${v}`, file: path.join(ROOT, file), cards: cardTotal };
+}
+
 function main(): void {
   const args = process.argv.slice(2);
   const listPath = args[0];
@@ -107,46 +166,19 @@ function main(): void {
     process.exit(2);
   }
   const text = fs.readFileSync(listPath, 'utf8');
-  const sections = splitSections(text, args.includes('--commander-first'));
-  const cards = SECTIONS.flatMap((s) => sections[s]);
-  if (!cards.length) throw new Error(`no card lines in ${listPath}`);
+  const result = recordIteration(name, text, { note: flag(args, 'note'), commanderFirst: args.includes('--commander-first') });
+  const { entry, bumped, arenaName } = result;
 
-  fs.mkdirSync(OUT_DIR, { recursive: true });
-  const ledger: Ledger = fs.existsSync(LEDGER) ? JSON.parse(fs.readFileSync(LEDGER, 'utf8')) : {};
-  const history = ledger[name] ?? [];
-  const last = history[history.length - 1];
-  const lastText = last ? fs.readFileSync(path.join(ROOT, last.file), 'utf8') : '';
-  const { added, removed } = last
-    ? diff(cardCounts(lastText), cardCounts(cards.join('\n')))
-    : { added: [], removed: [] }; // v1 is the baseline, not a diff
-
-  let entry: Iteration;
-  let bumped = false;
-  if (last && fingerprint(splitSections(lastText, false)) === fingerprint(sections)) {
-    entry = last;
-    console.log(`unchanged vs v${last.v} — re-emitting it`);
-  } else {
-    bumped = true;
-    if (last && !added.length && !removed.length) console.log('same cards, different printings or sections');
-    const v = (last?.v ?? 0) + 1;
-    const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-    const file = path.posix.join('decks', 'arena', `${slug}-v${v}.txt`);
-    entry = { v, date: new Date().toISOString().slice(0, 10), file, note: flag(args, 'note') ?? '', added, removed };
-    fs.writeFileSync(path.join(ROOT, file), render(`${name} v${v}`, sections));
-    ledger[name] = [...history, entry];
-    fs.writeFileSync(LEDGER, JSON.stringify(ledger, null, 2) + '\n');
-  }
-
-  const arenaName = `${name} v${entry.v}`;
+  if (!bumped) console.log(`unchanged vs v${entry.v} — re-emitting it`);
+  else if (entry.v > 1 && !entry.added.length && !entry.removed.length) console.log('same cards, different printings or sections');
   if (arenaName.length > ARENA_NAME_SOFT_LIMIT) console.warn(`warning: "${arenaName}" is ${arenaName.length} chars; Arena may truncate it`);
-  const outFile = path.join(ROOT, entry.file);
-  console.log(`${arenaName} → ${entry.file} (${cards.reduce((n, l) => n + Number(l.split(' ')[0]), 0)} cards)`);
+  console.log(`${arenaName} → ${entry.file} (${result.cards} cards)`);
   if (bumped && entry.v > 1) {
     for (const a of entry.added) console.log(`  + ${a}`);
     for (const r of entry.removed) console.log(`  - ${r}`);
   }
   if (!args.includes('--no-clip')) {
-    copyToClipboard(outFile);
+    copyToClipboard(result.file);
     console.log('copied to clipboard — Arena: Decks → Import');
   }
 }

@@ -21,6 +21,11 @@ const OUT = [
 type DeckSpec = { slug: string; base?: () => string; now?: string; guide?: string; extra?: { label: string; names: string[] } };
 const read = (rel: string) => () => fs.readFileSync(path.join(ROOT, rel), 'utf8');
 const SPECS: DeckSpec[] = [
+  // Arena Historic Brawl Neriv (model's #2): baseline = the model's own list, so OUT = its filler swaps and the tapped/colourless lands
+  {
+    slug: 'neriv-heart-of-the-storm-arena', base: read('verify-2026-10-08/best-deck/arena-3/top-2-neriv-heart-of-the-storm.txt'), now: 'verify-2026-10-08/best-deck/neriv/neriv-arena.txt',
+    guide: '.claude/skills/deck-building/reference/decks/neriv-heart-of-the-storm-arena.md',
+  },
   // Arena Historic Brawl Krenko: baseline = the model's own list, so OUT = its filler swaps and the colourless lands
   {
     slug: 'krenko-mob-boss-arena', base: read('verify-2026-10-08/best-deck/krenko-model.txt'), now: 'verify-2026-10-08/best-deck/krenko-arena.txt',
