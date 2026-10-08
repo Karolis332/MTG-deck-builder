@@ -271,6 +271,50 @@
         "1 Terror of the Peaks",
         "1 Forest"
       ]
+    },
+    {
+      "v": 5,
+      "date": "2026-10-08",
+      "file": "decks/arena/esika-superfriends-v5.txt",
+      "note": "edited in Arena (played as \"Esika Superfriends v1\" on 2026-10-08)",
+      "added": [
+        "1 Innkeeper's Talent"
+      ],
+      "removed": [
+        "1 Way of the Deathbringer"
+      ]
+    },
+    {
+      "v": 6,
+      "date": "2026-10-08",
+      "file": "decks/arena/esika-superfriends-v6.txt",
+      "note": "v6: lab climb (verify-2026-10-08/best-deck/esika) cut 9 double-pip 5-7 MV walkers + Sheoldred/Arena; judgment fill = 9 ramp (Farseek, Wood Elves, Caryatid, Paradise Druid, 2 Talismans, Enduring Vitality, Kiora, Rampant Growth) + Forest + Jetmir's Garden; 38 lands",
+      "added": [
+        "1 Enduring Vitality",
+        "1 Farseek",
+        "1 Forest",
+        "1 Ilysian Caryatid",
+        "1 Jetmir's Garden",
+        "1 Kiora, Behemoth Beckoner",
+        "1 Paradise Druid",
+        "1 Rampant Growth",
+        "1 Talisman of Curiosity",
+        "1 Talisman of Unity",
+        "1 Wood Elves"
+      ],
+      "removed": [
+        "1 Garruk, Curse Breaker",
+        "1 Garruk, Veiled Butcher",
+        "1 Jace, Multiverse Architect",
+        "1 Jace, Reality Sculptor",
+        "1 Kaya, Intangible Slayer",
+        "1 Phyrexian Arena",
+        "1 Sarkhan the Masterless",
+        "1 Sheoldred, the Apocalypse",
+        "1 The Eternal Wanderer",
+        "1 Ugin, the Ineffable",
+        "1 Vraska, Betrayal's Sting"
+      ]
     }
   ],
   "Krenko Goblins": [

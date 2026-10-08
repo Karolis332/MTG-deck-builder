@@ -36,6 +36,11 @@ const SPECS: DeckSpec[] = [
     slug: 'krenko-mob-boss-arena', arena: 'Krenko Goblins v1', base: read('verify-2026-10-08/best-deck/krenko-model.txt'), now: 'verify-2026-10-08/best-deck/krenko-arena.txt',
     guide: '.claude/skills/deck-building/reference/decks/krenko-mob-boss-arena.md',
   },
+  // Arena Historic Brawl Esika (the deck Arena calls "Tam Superfriends v2"): baseline = the operator's in-Arena v5, so OUT = the 9 double-pip walkers + Sheoldred/Arena, NEW = the ramp + 2 lands
+  {
+    slug: 'esika-god-of-the-tree-arena', arena: 'Esika Superfriends v6', base: read('verify-2026-10-08/best-deck/esika/esika-v5.base.txt'), now: 'verify-2026-10-08/best-deck/esika/esika-v6.txt',
+    guide: '.claude/skills/deck-building/reference/decks/esika-god-of-the-tree-arena.md',
+  },
   // Beledros replaces Meren: baseline = the sleeved Meren list, so OUT = Meren cards that stay in the box, NEW = everything else
   {
     slug: 'beledros-witherbloom', base: read('verify-2026-10-08/best-deck/meren-sleeved-2026-10-08.txt'), now: 'verify-2026-10-08/best-deck/beledros-recommended.txt',

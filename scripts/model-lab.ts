@@ -37,8 +37,9 @@ class BadRequest extends Error {}
 
 // paper ownership is re-read when collection.txt or any deck file changes (registering a card mid-session must not need a restart)
 const PAPER_DIR = path.resolve('decks/paper');
+const DB_FILE = path.join(process.env.MTG_DB_DIR ?? path.resolve('data'), 'mtg-deck-builder.db');
 const ownedStamp = (source: string): string => {
-  if (source !== 'paper') return 'db';
+  if (source !== 'paper') return [DB_FILE, `${DB_FILE}-wal`].map((f) => (fs.existsSync(f) ? `${f}:${fs.statSync(f).mtimeMs}` : f)).join('|'); // arena rows live in the DB (WAL): re-read on write
   const files = [path.join(PAPER_DIR, 'collection.txt'), ...fs.readdirSync(path.join(PAPER_DIR, 'decks')).map((f) => path.join(PAPER_DIR, 'decks', f))];
   return files.map((f) => `${f}:${fs.statSync(f).mtimeMs}`).join('|');
 };
