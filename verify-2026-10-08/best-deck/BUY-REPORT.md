@@ -16,6 +16,8 @@ Base objective 101.20.
 | Next best | Fell the Profane +0.21, Journey to Eternity +0.20, Growing Rites of Itlimoc +0.20, Wood Elves +0.20, Pitiless Plunderer +0.18 — ramp-for-ramp noise |
 | Oracle buy tier as the model sees it | Skullclamp +0.01, Exquisite Blood +0.08, Ayara +0.03, Blight-Priest +0.05, Bastion +0.05, Innkeeper +0.16, Savra +0.09, Warren Soultrader +0.14 |
 
+Operator proposal 2026-10-08, Inside Information (unowned, ~$2): +0.02 in the Omnipresence slot (a tie, role `utility`); the +10.5 it shows in the Ashnod's Altar slot is the locked Altar's blind spot — after the day's swaps the classifier counts 15 ramp pieces against a window of 10–12 (Altar, Deadly Dispute, Dark Ritual, Insidious Roots, Flare all count), and every ramp card removed is worth +2 to the model.
+
 Reading: the model is saturated on this list and blind to lifegain / drain / sacrifice roles (known since the Dina and
 Zulaport backups). Nothing purchasable moves the score; the buy ranking is therefore the oracle analysis
 (`beledros-edhrec-analysis.md` §2), recorded in the guide §11 with the model Δ beside each row.

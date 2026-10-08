@@ -15,23 +15,21 @@ Deck
 1 Thunderfoot Baloth
 1 Exotic Orchard
 1 Yavimaya, Cradle of Growth
-1 Jungle Hollow
 1 Myriad Landscape
 1 Vernal Fen
 1 Fabled Passage
 1 Grim Backwoods
-1 Temple of the False God
+1 Horizon of Progress
 1 Haunted Mire
 1 Evolving Wilds
 1 Viridescent Bog
 1 Terramorphic Expanse
 1 Witherbloom Campus
-1 Blighted Woodland
 1 Vesuva
 1 Turbulent Fen
 1 Thespian's Stage
-4 Swamp
-4 Forest
+5 Swamp
+5 Forest
 1 Sol Ring
 1 Cultivate
 1 Pest Infestation
@@ -48,7 +46,7 @@ Deck
 1 Mortality Spear
 1 Kodama's Reach
 1 Viscera Seer
-1 Three Visits
+1 Flare of Cultivation
 1 Binding the Old Gods
 1 Vito, Thorn of the Dusk Rose
 1 Massacre Wurm
@@ -60,7 +58,7 @@ Deck
 1 Toxic Deluge
 1 Sanguine Bond
 1 Infernal Grasp
-1 Tyvar's Stand
+1 Dark Ritual
 1 Eternal Witness
 1 Omnipresence
 1 Creakwood Liege
@@ -69,11 +67,11 @@ Deck
 1 Skorpekh Lord
 1 Deadly Dispute
 1 Gray Merchant of Asphodel
-1 Veinwitch Coven
+1 Blech, Loafing Pest
 1 Lightning Greaves
 1 Idol of Oblivion
 1 Talisman of Resilience
-1 Guardian Augmenter
+1 Argentum Masticore
 1 Braids, Arisen Nightmare
 1 Pest Rescuer
 1 Priest of Forgotten Gods
@@ -82,7 +80,7 @@ Deck
 1 Witch of the Moors
 1 Morbid Opportunist
 1 Ribtruss Roaster
-1 Feral Appetite
+1 Insidious Roots
 1 Elvish Mystic
 1 Scute Swarm
 1 Midnight Reaper

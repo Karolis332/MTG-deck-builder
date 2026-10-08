@@ -19,6 +19,7 @@ const GAMES = gamesArg >= 0 ? Number(process.argv[gamesArg + 1]) : 100;
 const TOP = 3;
 // donor decks (guide §3 / beledros-apply.py): card -> [deck label, backfill the donor gets]
 const DONORS: Record<string, [string, string]> = {
+  'Dark Ritual': ['Imotekh the Stormlord', 'Charcoal Diamond'], // operator swap 2026-10-08 (<- Tyvar's Stand); the only free black rock backfills Imotekh
   'Pest Infestation': ['The Cabbage Merchant', 'Haywire Mite'], 'Idol of Oblivion': ['The Cabbage Merchant', 'Ramunap Excavator'],
   'Ribtruss Roaster': ['The Cabbage Merchant', 'Basking Broodscale'], "Kodama's Reach": ['The Cabbage Merchant', 'Springbloom Druid'],
   "Ashnod's Altar": ['Imotekh the Stormlord', 'Woe Strider'], 'Skorpekh Lord': ['Imotekh the Stormlord', 'Grim Haruspex'],
