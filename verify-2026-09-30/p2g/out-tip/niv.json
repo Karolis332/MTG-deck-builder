@@ -1,0 +1,1589 @@
+{
+ "metrics": {
+  "label": "niv",
+  "strategy": "midrange",
+  "tribal": null,
+  "size": 99,
+  "lands": 38,
+  "basics": 6,
+  "creatures": 21,
+  "walkers": 0,
+  "ways": 0,
+  "ms": 2334,
+  "roles": {
+   "ramp": 18,
+   "utility": 6,
+   "removal": 13,
+   "draw": 9,
+   "tutor": 2,
+   "board_wipe": 4,
+   "protection": 3,
+   "win_condition": 5,
+   "land": 39
+  },
+  "protection": [
+   "Boros Charm",
+   "Dovin's Veto",
+   "Rhythm of the Wild",
+   "Gods Willing"
+  ],
+  "wipes": {
+   "symmetric": [
+    "Supreme Verdict",
+    "Time Wipe",
+    "Austere Command",
+    "Vanquish the Horde"
+   ],
+   "oneSided": []
+  },
+  "signalHits": {
+   "ccs:Niv-Mizzet Reborn": 40,
+   "edh:Niv-Mizzet Reborn": 21,
+   "avg:Niv-Mizzet Reborn": 6
+  },
+  "edhrec": {
+   "Niv-Mizzet Reborn": 60
+  },
+  "sources": {
+   "W": 33,
+   "U": 30,
+   "B": 26,
+   "R": 27,
+   "G": 23
+  },
+  "price": {
+   "total": 148.15,
+   "overBudget": false,
+   "replaced": [
+    {
+     "out": "Scalding Tarn",
+     "in": "Glacial Fortress",
+     "saved": 35.35
+    },
+    {
+     "out": "Misty Rainforest",
+     "in": "Adarkar Wastes",
+     "saved": 35.09
+    },
+    {
+     "out": "Torment of Hailfire",
+     "in": "Dragon Mage",
+     "saved": 35.21
+    },
+    {
+     "out": "Mana Confluence",
+     "in": "Sulfur Falls",
+     "saved": 34.99
+    },
+    {
+     "out": "Marsh Flats",
+     "in": "Hinterland Harbor",
+     "saved": 32.25
+    },
+    {
+     "out": "Prismatic Vista",
+     "in": "Isolated Chapel",
+     "saved": 30.09
+    },
+    {
+     "out": "Arid Mesa",
+     "in": "Clifftop Retreat",
+     "saved": 29.71
+    },
+    {
+     "out": "Verdant Catacombs",
+     "in": "Caves of Koilos",
+     "saved": 29.14
+    },
+    {
+     "out": "Damnation",
+     "in": "Vanquish the Horde",
+     "saved": 21.33
+    },
+    {
+     "out": "Polluted Delta",
+     "in": "Shivan Reef",
+     "saved": 18.41
+    },
+    {
+     "out": "Bloodstained Mire",
+     "in": "Battlefield Forge",
+     "saved": 17.49
+    },
+    {
+     "out": "Wooded Foothills",
+     "in": "Dragonskull Summit",
+     "saved": 17.55
+    },
+    {
+     "out": "Flooded Strand",
+     "in": "Drowned Catacomb",
+     "saved": 14.59
+    },
+    {
+     "out": "Bloom Tender",
+     "in": "Ordeal of Nylea",
+     "saved": 13.38
+    },
+    {
+     "out": "Windswept Heath",
+     "in": "Sunpetal Grove",
+     "saved": 12.05
+    },
+    {
+     "out": "City of Brass",
+     "in": "Deserted Beach",
+     "saved": 10.73
+    },
+    {
+     "out": "Eladamri's Call",
+     "in": "Fierce Empath",
+     "saved": 10.65
+    },
+    {
+     "out": "Reflecting Pool",
+     "in": "Rootbound Crag",
+     "saved": 10.45
+    },
+    {
+     "out": "Swan Song",
+     "in": "Gods Willing",
+     "saved": 10.11
+    },
+    {
+     "out": "Steam Vents",
+     "in": "Sulfurous Springs",
+     "saved": 8.74
+    },
+    {
+     "out": "Sacred Foundry",
+     "in": "Overgrown Farmland",
+     "saved": 9.13
+    },
+    {
+     "out": "Black Market Connections",
+     "in": "Cloudblazer",
+     "saved": 9.77
+    },
+    {
+     "out": "Forbidden Orchard",
+     "in": "Port Town",
+     "saved": 9.29
+    },
+    {
+     "out": "Breeding Pool",
+     "in": "Yavimaya Coast",
+     "saved": 8.94
+    },
+    {
+     "out": "Lotho, Corrupt Shirriff",
+     "in": "Three Tree Mascot",
+     "saved": 9.11
+    },
+    {
+     "out": "Watery Grave",
+     "in": "Underground River",
+     "saved": 7.79
+    },
+    {
+     "out": "Blood Crypt",
+     "in": "Furycalm Snarl",
+     "saved": 8.57
+    },
+    {
+     "out": "Deathrite Shaman",
+     "in": "Trygon Predator",
+     "saved": 8.6
+    },
+    {
+     "out": "Godless Shrine",
+     "in": "Seachrome Coast",
+     "saved": 8.01
+    }
+   ]
+  },
+  "bracket": {
+   "target": 2,
+   "result": 2
+  }
+ },
+ "cards": [
+  {
+   "q": 1,
+   "name": "An Offer You Can't Refuse",
+   "cmc": 1,
+   "type": "Instant",
+   "cats": [
+    "utility"
+   ],
+   "primary": "utility",
+   "role": "utility",
+   "score": 176,
+   "price": "4.43",
+   "rank": 34
+  },
+  {
+   "q": 1,
+   "name": "Gods Willing",
+   "cmc": 1,
+   "type": "Instant",
+   "cats": [
+    "protection"
+   ],
+   "primary": "protection",
+   "role": "",
+   "score": 33,
+   "price": "0.11",
+   "rank": 3444
+  },
+  {
+   "q": 1,
+   "name": "Arcane Signet",
+   "cmc": 2,
+   "type": "Artifact",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "fixing-floor",
+   "score": 202,
+   "price": "0.74",
+   "rank": 3
+  },
+  {
+   "q": 1,
+   "name": "Artifact Mutation",
+   "cmc": 2,
+   "type": "Instant",
+   "cats": [
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 171,
+   "price": "2.42",
+   "rank": 2552
+  },
+  {
+   "q": 1,
+   "name": "Assassin's Trophy",
+   "cmc": 2,
+   "type": "Instant",
+   "cats": [
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 212,
+   "price": "1.19",
+   "rank": 122
+  },
+  {
+   "q": 1,
+   "name": "Baleful Strix",
+   "cmc": 2,
+   "type": "Artifact Creature — Bird",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 215,
+   "price": "7.19",
+   "rank": 362
+  },
+  {
+   "q": 1,
+   "name": "Boros Charm",
+   "cmc": 2,
+   "type": "Instant",
+   "cats": [
+    "removal",
+    "protection"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 196,
+   "price": "4.35",
+   "rank": 181
+  },
+  {
+   "q": 1,
+   "name": "Deadly Dispute",
+   "cmc": 2,
+   "type": "Instant",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 166,
+   "price": "0.28",
+   "rank": 131
+  },
+  {
+   "q": 1,
+   "name": "Despark",
+   "cmc": 2,
+   "type": "Instant",
+   "cats": [
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 226,
+   "price": "0.35",
+   "rank": 413
+  },
+  {
+   "q": 1,
+   "name": "Dovin's Veto",
+   "cmc": 2,
+   "type": "Instant",
+   "cats": [
+    "protection"
+   ],
+   "primary": "protection",
+   "role": "protection",
+   "score": 224,
+   "price": "3.43",
+   "rank": 232
+  },
+  {
+   "q": 1,
+   "name": "Fellwar Stone",
+   "cmc": 2,
+   "type": "Artifact",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "fixing-floor",
+   "score": 152,
+   "price": "0.61",
+   "rank": 17
+  },
+  {
+   "q": 1,
+   "name": "Growth Spiral",
+   "cmc": 2,
+   "type": "Instant",
+   "cats": [
+    "ramp",
+    "draw"
+   ],
+   "primary": "ramp",
+   "role": "ramp",
+   "score": 208,
+   "price": "0.32",
+   "rank": 237
+  },
+  {
+   "q": 1,
+   "name": "Idol of Oblivion",
+   "cmc": 2,
+   "type": "Artifact",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 176,
+   "price": "2.76",
+   "rank": 191
+  },
+  {
+   "q": 1,
+   "name": "Ordeal of Nylea",
+   "cmc": 2,
+   "type": "Enchantment — Aura",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "",
+   "score": 36,
+   "price": "0.09",
+   "rank": 4233
+  },
+  {
+   "q": 1,
+   "name": "Ornithopter of Paradise",
+   "cmc": 2,
+   "type": "Artifact Creature — Thopter",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "ramp",
+   "score": 171,
+   "price": "2.18",
+   "rank": 220
+  },
+  {
+   "q": 1,
+   "name": "Planar Genesis",
+   "cmc": 2,
+   "type": "Instant",
+   "cats": [
+    "ramp",
+    "draw"
+   ],
+   "primary": "ramp",
+   "role": "draw",
+   "score": 167,
+   "price": "0.39",
+   "rank": 1495
+  },
+  {
+   "q": 1,
+   "name": "Rakdos Charm",
+   "cmc": 2,
+   "type": "Instant",
+   "cats": [
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 237,
+   "price": "0.39",
+   "rank": 324
+  },
+  {
+   "q": 1,
+   "name": "Talisman of Conviction",
+   "cmc": 2,
+   "type": "Artifact",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "fixing-floor",
+   "score": 154,
+   "price": "0.41",
+   "rank": 151
+  },
+  {
+   "q": 1,
+   "name": "Talisman of Creativity",
+   "cmc": 2,
+   "type": "Artifact",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "fixing-floor",
+   "score": 154,
+   "price": "1.25",
+   "rank": 126
+  },
+  {
+   "q": 1,
+   "name": "Talisman of Dominance",
+   "cmc": 2,
+   "type": "Artifact",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "fixing-floor",
+   "score": 154,
+   "price": "0.72",
+   "rank": 93
+  },
+  {
+   "q": 1,
+   "name": "Talisman of Hierarchy",
+   "cmc": 2,
+   "type": "Artifact",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "fixing-floor",
+   "score": 154,
+   "price": "0.48",
+   "rank": 135
+  },
+  {
+   "q": 1,
+   "name": "Talisman of Indulgence",
+   "cmc": 2,
+   "type": "Artifact",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "fixing-floor",
+   "score": 154,
+   "price": "1.12",
+   "rank": 129
+  },
+  {
+   "q": 1,
+   "name": "Talisman of Progress",
+   "cmc": 2,
+   "type": "Artifact",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "fixing-floor",
+   "score": 154,
+   "price": "0.98",
+   "rank": 139
+  },
+  {
+   "q": 1,
+   "name": "Terminate",
+   "cmc": 2,
+   "type": "Instant",
+   "cats": [
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 185,
+   "price": "0.34",
+   "rank": 224
+  },
+  {
+   "q": 1,
+   "name": "Third Path Iconoclast",
+   "cmc": 2,
+   "type": "Creature — Human Monk",
+   "cats": [
+    "utility"
+   ],
+   "primary": "utility",
+   "role": "utility",
+   "score": 177,
+   "price": "0.33",
+   "rank": 1364
+  },
+  {
+   "q": 1,
+   "name": "Three Tree Mascot",
+   "cmc": 2,
+   "type": "Artifact Creature — Shapeshifter",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "",
+   "score": 66,
+   "price": "0.14",
+   "rank": 4220
+  },
+  {
+   "q": 1,
+   "name": "Anguished Unmaking",
+   "cmc": 3,
+   "type": "Instant",
+   "cats": [
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 206,
+   "price": "1.63",
+   "rank": 156
+  },
+  {
+   "q": 1,
+   "name": "Bedevil",
+   "cmc": 3,
+   "type": "Instant",
+   "cats": [
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 176,
+   "price": "0.27",
+   "rank": 484
+  },
+  {
+   "q": 1,
+   "name": "Chromatic Lantern",
+   "cmc": 3,
+   "type": "Artifact",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "payoff",
+   "score": 143,
+   "price": "0.64",
+   "rank": 85
+  },
+  {
+   "q": 1,
+   "name": "Faeburrow Elder",
+   "cmc": 3,
+   "type": "Creature — Treefolk Druid",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "payoff",
+   "score": 224,
+   "price": "0.47",
+   "rank": 497
+  },
+  {
+   "q": 1,
+   "name": "Fierce Empath",
+   "cmc": 3,
+   "type": "Creature — Elf",
+   "cats": [
+    "tutor"
+   ],
+   "primary": "tutor",
+   "role": "",
+   "score": 55,
+   "price": "0.15",
+   "rank": 2137
+  },
+  {
+   "q": 1,
+   "name": "General Ferrous Rokiric",
+   "cmc": 3,
+   "type": "Legendary Creature — Human Soldier",
+   "cats": [
+    "utility"
+   ],
+   "primary": "utility",
+   "role": "utility",
+   "score": 234,
+   "price": "1.10",
+   "rank": 3957
+  },
+  {
+   "q": 1,
+   "name": "Mortify",
+   "cmc": 3,
+   "type": "Instant",
+   "cats": [
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 171,
+   "price": "0.18",
+   "rank": 576
+  },
+  {
+   "q": 1,
+   "name": "Prismari Command",
+   "cmc": 3,
+   "type": "Instant",
+   "cats": [
+    "draw",
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "draw",
+   "score": 188,
+   "price": "0.29",
+   "rank": 1108
+  },
+  {
+   "q": 1,
+   "name": "Putrefy",
+   "cmc": 3,
+   "type": "Instant",
+   "cats": [
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 196,
+   "price": "0.33",
+   "rank": 339
+  },
+  {
+   "q": 1,
+   "name": "Rhythm of the Wild",
+   "cmc": 3,
+   "type": "Enchantment",
+   "cats": [
+    "protection"
+   ],
+   "primary": "protection",
+   "role": "protection",
+   "score": 163,
+   "price": "5.04",
+   "rank": 222
+  },
+  {
+   "q": 1,
+   "name": "Sai, Master Thopterist",
+   "cmc": 3,
+   "type": "Legendary Creature — Human Artificer",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 164,
+   "price": "0.68",
+   "rank": 823
+  },
+  {
+   "q": 1,
+   "name": "Soulherder",
+   "cmc": 3,
+   "type": "Creature — Spirit",
+   "cats": [
+    "utility"
+   ],
+   "primary": "utility",
+   "role": "utility",
+   "score": 193,
+   "price": "1.88",
+   "rank": 1690
+  },
+  {
+   "q": 1,
+   "name": "Temur Ascendancy",
+   "cmc": 3,
+   "type": "Enchantment",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 177,
+   "price": "4.12",
+   "rank": 891
+  },
+  {
+   "q": 1,
+   "name": "Tireless Provisioner",
+   "cmc": 3,
+   "type": "Creature — Elf Scout",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "ramp",
+   "score": 166,
+   "price": "3.98",
+   "rank": 185
+  },
+  {
+   "q": 1,
+   "name": "Trygon Predator",
+   "cmc": 3,
+   "type": "Creature — Beast",
+   "cats": [
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "",
+   "score": 143,
+   "price": "0.07",
+   "rank": 3483
+  },
+  {
+   "q": 1,
+   "name": "Villainous Wealth",
+   "cmc": 3,
+   "type": "Sorcery",
+   "cats": [
+    "utility"
+   ],
+   "primary": "utility",
+   "role": "utility",
+   "score": 184,
+   "price": "0.37",
+   "rank": 2444
+  },
+  {
+   "q": 1,
+   "name": "Void Rend",
+   "cmc": 3,
+   "type": "Instant",
+   "cats": [
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 176,
+   "price": "0.92",
+   "rank": 761
+  },
+  {
+   "q": 1,
+   "name": "Big Score",
+   "cmc": 4,
+   "type": "Instant",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 166,
+   "price": "0.36",
+   "rank": 138
+  },
+  {
+   "q": 1,
+   "name": "Brago, King Eternal",
+   "cmc": 4,
+   "type": "Legendary Creature — Spirit Noble",
+   "cats": [
+    "win_condition"
+   ],
+   "primary": "win_condition",
+   "role": "win_condition",
+   "score": 154,
+   "price": "3.09",
+   "rank": 2308
+  },
+  {
+   "q": 1,
+   "name": "Jhoira, Weatherlight Captain",
+   "cmc": 4,
+   "type": "Legendary Creature — Human Artificer",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 176,
+   "price": "0.41",
+   "rank": 1072
+  },
+  {
+   "q": 1,
+   "name": "Storm-Kiln Artist",
+   "cmc": 4,
+   "type": "Creature — Dwarf Shaman",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "ramp",
+   "score": 181,
+   "price": "1.63",
+   "rank": 199
+  },
+  {
+   "q": 1,
+   "name": "Supreme Verdict",
+   "cmc": 4,
+   "type": "Sorcery",
+   "cats": [
+    "board_wipe"
+   ],
+   "primary": "board_wipe",
+   "role": "board_wipe",
+   "score": 141,
+   "price": "2.32",
+   "rank": 472
+  },
+  {
+   "q": 1,
+   "name": "Unexpected Windfall",
+   "cmc": 4,
+   "type": "Instant",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 165,
+   "price": "3.48",
+   "rank": 272
+  },
+  {
+   "q": 1,
+   "name": "Witch Enchanter // Witch-Blessed Meadow",
+   "cmc": 4,
+   "type": "Creature — Human Warlock // Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "utility",
+   "score": 172,
+   "price": "6.31",
+   "rank": 293
+  },
+  {
+   "q": 1,
+   "name": "Bring to Light",
+   "cmc": 5,
+   "type": "Sorcery",
+   "cats": [
+    "tutor"
+   ],
+   "primary": "tutor",
+   "role": "tutor",
+   "score": 219,
+   "price": "0.38",
+   "rank": 5650
+  },
+  {
+   "q": 1,
+   "name": "Cloudblazer",
+   "cmc": 5,
+   "type": "Creature — Human Scout",
+   "cats": [
+    "draw",
+    "win_condition"
+   ],
+   "primary": "draw",
+   "role": "",
+   "score": 94,
+   "price": "0.11",
+   "rank": 3549
+  },
+  {
+   "q": 1,
+   "name": "Jegantha, the Wellspring",
+   "cmc": 5,
+   "type": "Legendary Creature — Elemental Elk",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "payoff",
+   "score": 97,
+   "price": "0.24",
+   "rank": 3869
+  },
+  {
+   "q": 1,
+   "name": "Jodah, the Unifier",
+   "cmc": 5,
+   "type": "Legendary Creature — Human Wizard",
+   "cats": [
+    "win_condition"
+   ],
+   "primary": "win_condition",
+   "role": "win_condition",
+   "score": 153,
+   "price": "3.19",
+   "rank": 2877
+  },
+  {
+   "q": 1,
+   "name": "Maelstrom Nexus",
+   "cmc": 5,
+   "type": "Enchantment",
+   "cats": [
+    "utility"
+   ],
+   "primary": "utility",
+   "role": "payoff",
+   "score": 133,
+   "price": "2.12",
+   "rank": 4877
+  },
+  {
+   "q": 1,
+   "name": "Niv-Mizzet, Guildpact",
+   "cmc": 5,
+   "type": "Legendary Creature — Dragon Avatar",
+   "cats": [
+    "win_condition"
+   ],
+   "primary": "win_condition",
+   "role": "win_condition",
+   "score": 159,
+   "price": "0.28",
+   "rank": 10978
+  },
+  {
+   "q": 1,
+   "name": "Niv-Mizzet, Supreme",
+   "cmc": 5,
+   "type": "Legendary Creature — Dragon Avatar",
+   "cats": [
+    "win_condition"
+   ],
+   "primary": "win_condition",
+   "role": "win_condition",
+   "score": 152,
+   "price": "0.29",
+   "rank": 13453
+  },
+  {
+   "q": 1,
+   "name": "Time Wipe",
+   "cmc": 5,
+   "type": "Sorcery",
+   "cats": [
+    "board_wipe"
+   ],
+   "primary": "board_wipe",
+   "role": "board_wipe",
+   "score": 134,
+   "price": "0.20",
+   "rank": 1432
+  },
+  {
+   "q": 1,
+   "name": "Austere Command",
+   "cmc": 6,
+   "type": "Sorcery",
+   "cats": [
+    "board_wipe"
+   ],
+   "primary": "board_wipe",
+   "role": "board_wipe",
+   "score": 128,
+   "price": "0.35",
+   "rank": 171
+  },
+  {
+   "q": 1,
+   "name": "Dragon Mage",
+   "cmc": 7,
+   "type": "Creature — Dragon Wizard",
+   "cats": [
+    "win_condition"
+   ],
+   "primary": "win_condition",
+   "role": "",
+   "score": 53,
+   "price": "0.18",
+   "rank": 2973
+  },
+  {
+   "q": 1,
+   "name": "Vanquish the Horde",
+   "cmc": 8,
+   "type": "Sorcery",
+   "cats": [
+    "board_wipe"
+   ],
+   "primary": "board_wipe",
+   "role": "",
+   "score": 91,
+   "price": "0.26",
+   "rank": 796
+  },
+  {
+   "q": 1,
+   "name": "Adarkar Wastes",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.36",
+   "rank": 147
+  },
+  {
+   "q": 1,
+   "name": "Battlefield Forge",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.65",
+   "rank": 121
+  },
+  {
+   "q": 1,
+   "name": "Caves of Koilos",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.58",
+   "rank": 125
+  },
+  {
+   "q": 1,
+   "name": "Clifftop Retreat",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.59",
+   "rank": 80
+  },
+  {
+   "q": 1,
+   "name": "Command Tower",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.56",
+   "rank": 2
+  },
+  {
+   "q": 1,
+   "name": "Crystal Quarry",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "1.44",
+   "rank": 5993
+  },
+  {
+   "q": 1,
+   "name": "Deserted Beach",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "1.37",
+   "rank": 270
+  },
+  {
+   "q": 1,
+   "name": "Dragonskull Summit",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.42",
+   "rank": 84
+  },
+  {
+   "q": 1,
+   "name": "Drowned Catacomb",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.70",
+   "rank": 108
+  },
+  {
+   "q": 1,
+   "name": "Exotic Orchard",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.26",
+   "rank": 9
+  },
+  {
+   "q": 1,
+   "name": "Forest",
+   "cmc": 0,
+   "type": "Basic Land — Forest",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.08",
+   "rank": null
+  },
+  {
+   "q": 1,
+   "name": "Furycalm Snarl",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.31",
+   "rank": 342
+  },
+  {
+   "q": 1,
+   "name": "Glacial Fortress",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.23",
+   "rank": 91
+  },
+  {
+   "q": 1,
+   "name": "Glimmervoid",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "4.63",
+   "rank": 4749
+  },
+  {
+   "q": 1,
+   "name": "Hallowed Fountain",
+   "cmc": 0,
+   "type": "Land — Plains Island",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "6.98",
+   "rank": 61
+  },
+  {
+   "q": 1,
+   "name": "Hinterland Harbor",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.31",
+   "rank": 97
+  },
+  {
+   "q": 1,
+   "name": "Horizon of Progress",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "7.00",
+   "rank": 1526
+  },
+  {
+   "q": 1,
+   "name": "Island",
+   "cmc": 0,
+   "type": "Basic Land — Island",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.08",
+   "rank": null
+  },
+  {
+   "q": 1,
+   "name": "Isolated Chapel",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.60",
+   "rank": 92
+  },
+  {
+   "q": 1,
+   "name": "Meteor Crater",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "3.38",
+   "rank": 7057
+  },
+  {
+   "q": 1,
+   "name": "Mountain",
+   "cmc": 0,
+   "type": "Basic Land — Mountain",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.09",
+   "rank": null
+  },
+  {
+   "q": 1,
+   "name": "Overgrown Farmland",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.95",
+   "rank": 286
+  },
+  {
+   "q": 1,
+   "name": "Overgrown Tomb",
+   "cmc": 0,
+   "type": "Land — Swamp Forest",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "8.20",
+   "rank": 71
+  },
+  {
+   "q": 1,
+   "name": "Plains",
+   "cmc": 0,
+   "type": "Basic Land — Plains",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.07",
+   "rank": null
+  },
+  {
+   "q": 1,
+   "name": "Port Town",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.27",
+   "rank": 338
+  },
+  {
+   "q": 1,
+   "name": "Rootbound Crag",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.32",
+   "rank": 127
+  },
+  {
+   "q": 1,
+   "name": "Seachrome Coast",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.53",
+   "rank": 1170
+  },
+  {
+   "q": 1,
+   "name": "Shivan Reef",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.73",
+   "rank": 115
+  },
+  {
+   "q": 1,
+   "name": "Stomping Ground",
+   "cmc": 0,
+   "type": "Land — Mountain Forest",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "6.43",
+   "rank": 70
+  },
+  {
+   "q": 1,
+   "name": "Sulfur Falls",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.27",
+   "rank": 77
+  },
+  {
+   "q": 1,
+   "name": "Sulfurous Springs",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "1.45",
+   "rank": 148
+  },
+  {
+   "q": 1,
+   "name": "Sunpetal Grove",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.74",
+   "rank": 132
+  },
+  {
+   "q": 2,
+   "name": "Swamp",
+   "cmc": 0,
+   "type": "Basic Land — Swamp",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.10",
+   "rank": null
+  },
+  {
+   "q": 1,
+   "name": "Temple Garden",
+   "cmc": 0,
+   "type": "Land — Forest Plains",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "6.60",
+   "rank": 81
+  },
+  {
+   "q": 1,
+   "name": "Thran Quarry",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "4.76",
+   "rank": 14647
+  },
+  {
+   "q": 1,
+   "name": "Underground River",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "1.36",
+   "rank": 146
+  },
+  {
+   "q": 1,
+   "name": "Yavimaya Coast",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.33",
+   "rank": 136
+  }
+ ]
+}
