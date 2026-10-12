@@ -1,0 +1,613 @@
+{
+ "metrics": {
+  "label": "tatyova-arena",
+  "strategy": "midrange",
+  "size": 99,
+  "lands": 34,
+  "mdfcSpells": 4,
+  "basics": 20,
+  "untapped": 34,
+  "untappedShare": 1,
+  "sources": {
+   "G": 25,
+   "U": 18
+  },
+  "healthSources": {
+   "W": 6,
+   "U": 22,
+   "B": 5,
+   "R": 6,
+   "G": 33
+  },
+  "honestRamp": 21,
+  "avgMv": 2.89,
+  "ms": 2022,
+  "price": {
+   "total": 0,
+   "overBudget": false
+  },
+  "bracket": {
+   "target": null,
+   "result": 4
+  }
+ },
+ "lands": [
+  {
+   "q": 1,
+   "name": "Breeding Pool",
+   "type": "Land — Forest Island",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Bridgeworks Battle // Tanglespan Bridgeworks",
+   "type": "Sorcery // Land",
+   "score": 78
+  },
+  {
+   "q": 1,
+   "name": "Command Tower",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Disciple of Freyalise // Garden of Freyalise",
+   "type": "Creature — Elf Druid // Land",
+   "score": 92
+  },
+  {
+   "q": 1,
+   "name": "Dreamroot Cascade",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Flooded Strand",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 13,
+   "name": "Forest",
+   "type": "Basic Land — Forest",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Hashep Oasis",
+   "type": "Land — Desert",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Hinterland Harbor",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Hydroelectric Specimen // Hydroelectric Laboratory",
+   "type": "Creature — Weird // Land",
+   "score": 78
+  },
+  {
+   "q": 7,
+   "name": "Island",
+   "type": "Basic Land — Island",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Misty Rainforest",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Multiversal Passage",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Scalding Tarn",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Sink into Stupor // Soporific Springs",
+   "type": "Instant // Land",
+   "score": 91
+  },
+  {
+   "q": 1,
+   "name": "Starting Town",
+   "type": "Land — Town",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Thran Portal",
+   "type": "Land — Gate",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Vineglimmer Snarl",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Willowrush Verge",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Yavimaya Coast",
+   "type": "Land",
+   "score": -9999
+  }
+ ],
+ "spells": [
+  {
+   "q": 1,
+   "name": "An Offer You Can't Refuse",
+   "cmc": 1,
+   "role": "utility",
+   "score": 146
+  },
+  {
+   "q": 1,
+   "name": "Brainstorm",
+   "cmc": 1,
+   "role": "arsenal:staple_draw",
+   "score": 96
+  },
+  {
+   "q": 1,
+   "name": "Burgeoning",
+   "cmc": 1,
+   "role": "arsenal:community_top",
+   "score": 111
+  },
+  {
+   "q": 1,
+   "name": "Bushwhack",
+   "cmc": 1,
+   "role": "arsenal:collection_substitute",
+   "score": 90
+  },
+  {
+   "q": 1,
+   "name": "Consider",
+   "cmc": 1,
+   "role": "arsenal:staple_draw",
+   "score": 92
+  },
+  {
+   "q": 1,
+   "name": "Crop Rotation",
+   "cmc": 1,
+   "role": "arsenal:community_top",
+   "score": 160
+  },
+  {
+   "q": 1,
+   "name": "Dispel",
+   "cmc": 1,
+   "role": "arsenal:staple_removal",
+   "score": 61
+  },
+  {
+   "q": 1,
+   "name": "Llanowar Elves",
+   "cmc": 1,
+   "role": "arsenal:community_top",
+   "score": 118
+  },
+  {
+   "q": 1,
+   "name": "Mystical Tutor",
+   "cmc": 1,
+   "role": "tutor",
+   "score": 116
+  },
+  {
+   "q": 1,
+   "name": "Opt",
+   "cmc": 1,
+   "role": "arsenal:staple_draw",
+   "score": 93
+  },
+  {
+   "q": 1,
+   "name": "Ponder",
+   "cmc": 1,
+   "role": "arsenal:staple_draw",
+   "score": 94
+  },
+  {
+   "q": 1,
+   "name": "Pongify",
+   "cmc": 1,
+   "role": "arsenal:community_top",
+   "score": 114
+  },
+  {
+   "q": 1,
+   "name": "Preordain",
+   "cmc": 1,
+   "role": "arsenal:staple_draw",
+   "score": 105
+  },
+  {
+   "q": 1,
+   "name": "Rapid Hybridization",
+   "cmc": 1,
+   "role": "arsenal:staple_removal",
+   "score": 113
+  },
+  {
+   "q": 1,
+   "name": "Sleight of Hand",
+   "cmc": 1,
+   "role": "arsenal:staple_draw",
+   "score": 56
+  },
+  {
+   "q": 1,
+   "name": "Spell Pierce",
+   "cmc": 1,
+   "role": "arsenal:staple_removal",
+   "score": 61
+  },
+  {
+   "q": 1,
+   "name": "Swan Song",
+   "cmc": 1,
+   "role": "arsenal:community_top",
+   "score": 121
+  },
+  {
+   "q": 1,
+   "name": "Worldly Tutor",
+   "cmc": 1,
+   "role": "tutor",
+   "score": 116
+  },
+  {
+   "q": 1,
+   "name": "Arcane Signet",
+   "cmc": 2,
+   "role": "arsenal:community_top",
+   "score": 145
+  },
+  {
+   "q": 1,
+   "name": "Broken Bond",
+   "cmc": 2,
+   "role": "arsenal:community_top",
+   "score": 115
+  },
+  {
+   "q": 1,
+   "name": "Cankerbloom",
+   "cmc": 2,
+   "role": "removal",
+   "score": 99
+  },
+  {
+   "q": 1,
+   "name": "Counterspell",
+   "cmc": 2,
+   "role": "arsenal:community_top",
+   "score": 158
+  },
+  {
+   "q": 1,
+   "name": "Explore",
+   "cmc": 2,
+   "role": "arsenal:community_top",
+   "score": 163
+  },
+  {
+   "q": 1,
+   "name": "Farseek",
+   "cmc": 2,
+   "role": "arsenal:community_top",
+   "score": 163
+  },
+  {
+   "q": 1,
+   "name": "Heroic Intervention",
+   "cmc": 2,
+   "role": "arsenal:community_top",
+   "score": 118
+  },
+  {
+   "q": 1,
+   "name": "Mind Stone",
+   "cmc": 2,
+   "role": "arsenal:staple_ramp",
+   "score": 138
+  },
+  {
+   "q": 1,
+   "name": "Negate",
+   "cmc": 2,
+   "role": "arsenal:community_top",
+   "score": 123
+  },
+  {
+   "q": 1,
+   "name": "Paradise Druid",
+   "cmc": 2,
+   "role": "arsenal:staple_ramp",
+   "score": 63
+  },
+  {
+   "q": 1,
+   "name": "Rampant Growth",
+   "cmc": 2,
+   "role": "arsenal:community_top",
+   "score": 176
+  },
+  {
+   "q": 1,
+   "name": "Return to Nature",
+   "cmc": 2,
+   "role": "arsenal:staple_removal",
+   "score": 94
+  },
+  {
+   "q": 1,
+   "name": "Beast Within",
+   "cmc": 3,
+   "role": "arsenal:community_top",
+   "score": 176
+  },
+  {
+   "q": 1,
+   "name": "Bridgeworks Battle // Tanglespan Bridgeworks",
+   "cmc": 3,
+   "role": "",
+   "score": 78
+  },
+  {
+   "q": 1,
+   "name": "Cultivate",
+   "cmc": 3,
+   "role": "arsenal:community_top",
+   "score": 186
+  },
+  {
+   "q": 1,
+   "name": "Dungeon Map",
+   "cmc": 3,
+   "role": "arsenal:collection_substitute",
+   "score": 46
+  },
+  {
+   "q": 1,
+   "name": "Elvish Archdruid",
+   "cmc": 3,
+   "role": "arsenal:collection_substitute",
+   "score": 66
+  },
+  {
+   "q": 1,
+   "name": "Eternal Witness",
+   "cmc": 3,
+   "role": "arsenal:community_top",
+   "score": 123
+  },
+  {
+   "q": 1,
+   "name": "Garruk's Uprising",
+   "cmc": 3,
+   "role": "utility",
+   "score": 159
+  },
+  {
+   "q": 1,
+   "name": "Hydroelectric Specimen // Hydroelectric Laboratory",
+   "cmc": 3,
+   "role": "",
+   "score": 78
+  },
+  {
+   "q": 1,
+   "name": "Loot, Exuberant Explorer",
+   "cmc": 3,
+   "role": "arsenal:community_top",
+   "score": 116
+  },
+  {
+   "q": 1,
+   "name": "Mossborn Hydra",
+   "cmc": 3,
+   "role": "arsenal:community_top",
+   "score": 166
+  },
+  {
+   "q": 1,
+   "name": "Reclamation Sage",
+   "cmc": 3,
+   "role": "arsenal:staple_removal",
+   "score": 118
+  },
+  {
+   "q": 1,
+   "name": "Sink into Stupor // Soporific Springs",
+   "cmc": 3,
+   "role": "",
+   "score": 91
+  },
+  {
+   "q": 1,
+   "name": "Springbloom Druid",
+   "cmc": 3,
+   "role": "arsenal:community_top",
+   "score": 150
+  },
+  {
+   "q": 1,
+   "name": "Starting Column",
+   "cmc": 3,
+   "role": "arsenal:collection_substitute",
+   "score": 80
+  },
+  {
+   "q": 1,
+   "name": "Tireless Provisioner",
+   "cmc": 3,
+   "role": "arsenal:community_top",
+   "score": 209
+  },
+  {
+   "q": 1,
+   "name": "Wood Elves",
+   "cmc": 3,
+   "role": "arsenal:staple_ramp",
+   "score": 120
+  },
+  {
+   "q": 1,
+   "name": "Aetherize",
+   "cmc": 4,
+   "role": "board_wipe",
+   "score": 93
+  },
+  {
+   "q": 1,
+   "name": "Harmonize",
+   "cmc": 4,
+   "role": "arsenal:staple_draw",
+   "score": 83
+  },
+  {
+   "q": 1,
+   "name": "Hedron Archive",
+   "cmc": 4,
+   "role": "arsenal:staple_ramp",
+   "score": 112
+  },
+  {
+   "q": 1,
+   "name": "Night of the Sweets' Revenge",
+   "cmc": 4,
+   "role": "board_wipe",
+   "score": 96
+  },
+  {
+   "q": 1,
+   "name": "Perilous Vault",
+   "cmc": 4,
+   "role": "board_wipe",
+   "score": 58
+  },
+  {
+   "q": 1,
+   "name": "Planar Engineering",
+   "cmc": 4,
+   "role": "arsenal:community_synergy",
+   "score": 78
+  },
+  {
+   "q": 1,
+   "name": "Solemn Simulacrum",
+   "cmc": 4,
+   "role": "arsenal:staple_ramp",
+   "score": 166
+  },
+  {
+   "q": 1,
+   "name": "The One Ring",
+   "cmc": 4,
+   "role": "utility",
+   "score": 169
+  },
+  {
+   "q": 1,
+   "name": "World Shaper",
+   "cmc": 4,
+   "role": "arsenal:archetype_payoff",
+   "score": 64
+  },
+  {
+   "q": 1,
+   "name": "The Unagi of Kyoshi Island",
+   "cmc": 5,
+   "role": "win_condition",
+   "score": 117
+  },
+  {
+   "q": 1,
+   "name": "Zuko's Exile",
+   "cmc": 5,
+   "role": "removal",
+   "score": 100
+  },
+  {
+   "q": 1,
+   "name": "Chronicle of Victory",
+   "cmc": 6,
+   "role": "win_condition",
+   "score": 120
+  },
+  {
+   "q": 1,
+   "name": "Disciple of Freyalise // Garden of Freyalise",
+   "cmc": 6,
+   "role": "",
+   "score": 92
+  },
+  {
+   "q": 1,
+   "name": "Earthshaker Dreadmaw",
+   "cmc": 6,
+   "role": "win_condition",
+   "score": 118
+  },
+  {
+   "q": 1,
+   "name": "Rampaging Baloths",
+   "cmc": 6,
+   "role": "arsenal:community_top",
+   "score": 196
+  },
+  {
+   "q": 1,
+   "name": "River's Rebuke",
+   "cmc": 6,
+   "role": "board_wipe",
+   "score": 55
+  },
+  {
+   "q": 1,
+   "name": "Shark Typhoon",
+   "cmc": 6,
+   "role": "win_condition",
+   "score": 121
+  },
+  {
+   "q": 1,
+   "name": "Glacier Godmaw",
+   "cmc": 7,
+   "role": "win_condition",
+   "score": 137
+  },
+  {
+   "q": 1,
+   "name": "The Great Henge",
+   "cmc": 9,
+   "role": "utility",
+   "score": 163
+  }
+ ]
+}

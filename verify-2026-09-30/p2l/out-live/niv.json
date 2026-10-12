@@ -1,0 +1,540 @@
+{
+ "metrics": {
+  "label": "niv",
+  "strategy": "midrange",
+  "size": 99,
+  "lands": 38,
+  "mdfcSpells": 0,
+  "basics": 31,
+  "untapped": 38,
+  "untappedShare": 1,
+  "sources": {
+   "B": 10,
+   "G": 13,
+   "R": 8,
+   "U": 8,
+   "W": 12
+  },
+  "healthSources": {
+   "W": 25,
+   "U": 21,
+   "B": 23,
+   "R": 22,
+   "G": 23
+  },
+  "honestRamp": 23,
+  "avgMv": 2.97,
+  "ms": 1832,
+  "price": {
+   "total": 144.5,
+   "overBudget": false
+  },
+  "bracket": {
+   "target": 2,
+   "result": 2
+  }
+ },
+ "lands": [
+  {
+   "q": 1,
+   "name": "Command Tower",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Exotic Orchard",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 8,
+   "name": "Forest",
+   "type": "Basic Land — Forest",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Godless Shrine",
+   "type": "Land — Plains Swamp",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Hallowed Fountain",
+   "type": "Land — Plains Island",
+   "score": -9999
+  },
+  {
+   "q": 5,
+   "name": "Island",
+   "type": "Basic Land — Island",
+   "score": -9999
+  },
+  {
+   "q": 5,
+   "name": "Mountain",
+   "type": "Basic Land — Mountain",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Overgrown Tomb",
+   "type": "Land — Swamp Forest",
+   "score": -9999
+  },
+  {
+   "q": 7,
+   "name": "Plains",
+   "type": "Basic Land — Plains",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Stomping Ground",
+   "type": "Land — Mountain Forest",
+   "score": -9999
+  },
+  {
+   "q": 6,
+   "name": "Swamp",
+   "type": "Basic Land — Swamp",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Temple Garden",
+   "type": "Land — Forest Plains",
+   "score": -9999
+  }
+ ],
+ "spells": [
+  {
+   "q": 1,
+   "name": "Deathrite Shaman",
+   "cmc": 1,
+   "role": "removal",
+   "score": 191
+  },
+  {
+   "q": 1,
+   "name": "Arcane Signet",
+   "cmc": 2,
+   "role": "fixing-floor",
+   "score": 202
+  },
+  {
+   "q": 1,
+   "name": "Assassin's Trophy",
+   "cmc": 2,
+   "role": "removal",
+   "score": 197
+  },
+  {
+   "q": 1,
+   "name": "Baleful Strix",
+   "cmc": 2,
+   "role": "draw",
+   "score": 229
+  },
+  {
+   "q": 1,
+   "name": "Boros Charm",
+   "cmc": 2,
+   "role": "removal",
+   "score": 194
+  },
+  {
+   "q": 1,
+   "name": "Collector's Vault",
+   "cmc": 2,
+   "role": "ramp",
+   "score": 188
+  },
+  {
+   "q": 1,
+   "name": "Deadly Dispute",
+   "cmc": 2,
+   "role": "ramp",
+   "score": 211
+  },
+  {
+   "q": 1,
+   "name": "Despark",
+   "cmc": 2,
+   "role": "removal",
+   "score": 208
+  },
+  {
+   "q": 1,
+   "name": "Dovin's Veto",
+   "cmc": 2,
+   "role": "protection",
+   "score": 208
+  },
+  {
+   "q": 1,
+   "name": "Golgari Charm",
+   "cmc": 2,
+   "role": "board_wipe",
+   "score": 136
+  },
+  {
+   "q": 1,
+   "name": "Growth Spiral",
+   "cmc": 2,
+   "role": "ramp",
+   "score": 219
+  },
+  {
+   "q": 1,
+   "name": "Idol of Oblivion",
+   "cmc": 2,
+   "role": "draw",
+   "score": 191
+  },
+  {
+   "q": 1,
+   "name": "Lunar Convocation",
+   "cmc": 2,
+   "role": "win_condition",
+   "score": 172
+  },
+  {
+   "q": 1,
+   "name": "Mind Stone",
+   "cmc": 2,
+   "role": "fixing-floor",
+   "score": 163
+  },
+  {
+   "q": 1,
+   "name": "Rakdos Charm",
+   "cmc": 2,
+   "role": "board_wipe",
+   "score": 219
+  },
+  {
+   "q": 1,
+   "name": "Sorcerer Class",
+   "cmc": 2,
+   "role": "win_condition",
+   "score": 170
+  },
+  {
+   "q": 1,
+   "name": "Sythis, Harvest's Hand",
+   "cmc": 2,
+   "role": "draw",
+   "score": 176
+  },
+  {
+   "q": 1,
+   "name": "Talisman of Conviction",
+   "cmc": 2,
+   "role": "fixing-floor",
+   "score": 169
+  },
+  {
+   "q": 1,
+   "name": "Talisman of Creativity",
+   "cmc": 2,
+   "role": "fixing-floor",
+   "score": 169
+  },
+  {
+   "q": 1,
+   "name": "Talisman of Dominance",
+   "cmc": 2,
+   "role": "fixing-floor",
+   "score": 169
+  },
+  {
+   "q": 1,
+   "name": "Talisman of Hierarchy",
+   "cmc": 2,
+   "role": "fixing-floor",
+   "score": 169
+  },
+  {
+   "q": 1,
+   "name": "Talisman of Indulgence",
+   "cmc": 2,
+   "role": "fixing-floor",
+   "score": 169
+  },
+  {
+   "q": 1,
+   "name": "Talisman of Progress",
+   "cmc": 2,
+   "role": "fixing-floor",
+   "score": 169
+  },
+  {
+   "q": 1,
+   "name": "Terminate",
+   "cmc": 2,
+   "role": "removal",
+   "score": 181
+  },
+  {
+   "q": 1,
+   "name": "Anguished Unmaking",
+   "cmc": 3,
+   "role": "removal",
+   "score": 194
+  },
+  {
+   "q": 1,
+   "name": "Braids, Arisen Nightmare",
+   "cmc": 3,
+   "role": "draw",
+   "score": 190
+  },
+  {
+   "q": 1,
+   "name": "Chromatic Lantern",
+   "cmc": 3,
+   "role": "payoff",
+   "score": 143
+  },
+  {
+   "q": 1,
+   "name": "Faeburrow Elder",
+   "cmc": 3,
+   "role": "payoff",
+   "score": 216
+  },
+  {
+   "q": 1,
+   "name": "Fierce Empath",
+   "cmc": 3,
+   "role": "",
+   "score": 55
+  },
+  {
+   "q": 1,
+   "name": "General Ferrous Rokiric",
+   "cmc": 3,
+   "role": "utility",
+   "score": 211
+  },
+  {
+   "q": 1,
+   "name": "Gluntch, the Bestower",
+   "cmc": 3,
+   "role": "draw",
+   "score": 187
+  },
+  {
+   "q": 1,
+   "name": "Lifespring Druid",
+   "cmc": 3,
+   "role": "",
+   "score": 12
+  },
+  {
+   "q": 1,
+   "name": "Loran of the Third Path",
+   "cmc": 3,
+   "role": "removal",
+   "score": 175
+  },
+  {
+   "q": 1,
+   "name": "Prismari Command",
+   "cmc": 3,
+   "role": "draw",
+   "score": 212
+  },
+  {
+   "q": 1,
+   "name": "Putrefy",
+   "cmc": 3,
+   "role": "removal",
+   "score": 181
+  },
+  {
+   "q": 1,
+   "name": "Rhythm of the Wild",
+   "cmc": 3,
+   "role": "protection",
+   "score": 181
+  },
+  {
+   "q": 1,
+   "name": "Sai, Master Thopterist",
+   "cmc": 3,
+   "role": "draw",
+   "score": 179
+  },
+  {
+   "q": 1,
+   "name": "Soulherder",
+   "cmc": 3,
+   "role": "utility",
+   "score": 176
+  },
+  {
+   "q": 1,
+   "name": "Temur Ascendancy",
+   "cmc": 3,
+   "role": "draw",
+   "score": 192
+  },
+  {
+   "q": 1,
+   "name": "Ticket Turbotubes",
+   "cmc": 3,
+   "role": "",
+   "score": 3
+  },
+  {
+   "q": 1,
+   "name": "Tireless Provisioner",
+   "cmc": 3,
+   "role": "ramp",
+   "score": 181
+  },
+  {
+   "q": 1,
+   "name": "Tireless Tracker",
+   "cmc": 3,
+   "role": "draw",
+   "score": 184
+  },
+  {
+   "q": 1,
+   "name": "Uro, Titan of Nature's Wrath",
+   "cmc": 3,
+   "role": "ramp",
+   "score": 197
+  },
+  {
+   "q": 1,
+   "name": "Void Rend",
+   "cmc": 3,
+   "role": "removal",
+   "score": 161
+  },
+  {
+   "q": 1,
+   "name": "Big Score",
+   "cmc": 4,
+   "role": "draw",
+   "score": 196
+  },
+  {
+   "q": 1,
+   "name": "Centaur Nurturer",
+   "cmc": 4,
+   "role": "",
+   "score": 3
+  },
+  {
+   "q": 1,
+   "name": "Hearthhull, the Worldseed",
+   "cmc": 4,
+   "role": "win_condition",
+   "score": 169
+  },
+  {
+   "q": 1,
+   "name": "Jhoira, Weatherlight Captain",
+   "cmc": 4,
+   "role": "draw",
+   "score": 191
+  },
+  {
+   "q": 1,
+   "name": "Kykar, Wind's Fury",
+   "cmc": 4,
+   "role": "win_condition",
+   "score": 170
+  },
+  {
+   "q": 1,
+   "name": "Professional Wrestler",
+   "cmc": 4,
+   "role": "",
+   "score": 51
+  },
+  {
+   "q": 1,
+   "name": "Roilmage's Trick",
+   "cmc": 4,
+   "role": "",
+   "score": 21
+  },
+  {
+   "q": 1,
+   "name": "Storm-Kiln Artist",
+   "cmc": 4,
+   "role": "ramp",
+   "score": 196
+  },
+  {
+   "q": 1,
+   "name": "Supreme Verdict",
+   "cmc": 4,
+   "role": "board_wipe",
+   "score": 157
+  },
+  {
+   "q": 1,
+   "name": "Toski, Bearer of Secrets",
+   "cmc": 4,
+   "role": "protection",
+   "score": 160
+  },
+  {
+   "q": 1,
+   "name": "Unexpected Windfall",
+   "cmc": 4,
+   "role": "draw",
+   "score": 195
+  },
+  {
+   "q": 1,
+   "name": "Bring to Light",
+   "cmc": 5,
+   "role": "tutor",
+   "score": 201
+  },
+  {
+   "q": 1,
+   "name": "Jegantha, the Wellspring",
+   "cmc": 5,
+   "role": "payoff",
+   "score": 112
+  },
+  {
+   "q": 1,
+   "name": "Korvold, Fae-Cursed King",
+   "cmc": 5,
+   "role": "win_condition",
+   "score": 178
+  },
+  {
+   "q": 1,
+   "name": "Maelstrom Nexus",
+   "cmc": 5,
+   "role": "payoff",
+   "score": 133
+  },
+  {
+   "q": 1,
+   "name": "The Gitrog Monster",
+   "cmc": 5,
+   "role": "win_condition",
+   "score": 172
+  },
+  {
+   "q": 1,
+   "name": "Time Wipe",
+   "cmc": 5,
+   "role": "board_wipe",
+   "score": 146
+  }
+ ]
+}

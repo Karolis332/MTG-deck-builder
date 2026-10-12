@@ -1,0 +1,551 @@
+{
+ "metrics": {
+  "label": "krenko",
+  "strategy": "tribal",
+  "size": 99,
+  "lands": 35,
+  "mdfcSpells": 3,
+  "basics": 28,
+  "untapped": 35,
+  "untappedShare": 1,
+  "sources": {
+   "R": 35
+  },
+  "healthSources": {
+   "W": 5,
+   "U": 5,
+   "B": 5,
+   "R": 43,
+   "G": 5
+  },
+  "honestRamp": 8,
+  "avgMv": 2.86,
+  "ms": 1127,
+  "price": {
+   "total": 399.73,
+   "overBudget": false
+  },
+  "bracket": {
+   "target": null,
+   "result": 2
+  }
+ },
+ "lands": [
+  {
+   "q": 1,
+   "name": "Arena of Glory",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Arid Mesa",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Bloodstained Mire",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Castle Embereth",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 28,
+   "name": "Mountain",
+   "type": "Basic Land — Mountain",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Pinnacle Monk // Mystic Peak",
+   "type": "Creature — Djinn Monk // Land",
+   "score": 54
+  },
+  {
+   "q": 1,
+   "name": "Scalding Tarn",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Shatterskull Smashing // Shatterskull, the Hammer Pass",
+   "type": "Sorcery // Land",
+   "score": 56
+  },
+  {
+   "q": 1,
+   "name": "Sundering Eruption // Volcanic Fissure",
+   "type": "Sorcery // Land",
+   "score": 61
+  },
+  {
+   "q": 1,
+   "name": "Three Tree City",
+   "type": "Legendary Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Wooded Foothills",
+   "type": "Land",
+   "score": -9999
+  }
+ ],
+ "spells": [
+  {
+   "q": 1,
+   "name": "Faithless Looting",
+   "cmc": 1,
+   "role": "draw",
+   "score": 115
+  },
+  {
+   "q": 1,
+   "name": "Goblin Grenade",
+   "cmc": 1,
+   "role": "removal",
+   "score": 117
+  },
+  {
+   "q": 1,
+   "name": "Goblin Motivator",
+   "cmc": 1,
+   "role": "utility",
+   "score": 121
+  },
+  {
+   "q": 1,
+   "name": "Reckless Lackey",
+   "cmc": 1,
+   "role": "ramp",
+   "score": 106
+  },
+  {
+   "q": 1,
+   "name": "Skirk Prospector",
+   "cmc": 1,
+   "role": "ramp",
+   "score": 204
+  },
+  {
+   "q": 1,
+   "name": "Arcane Signet",
+   "cmc": 2,
+   "role": "ramp",
+   "score": 172
+  },
+  {
+   "q": 1,
+   "name": "Battle Cry Goblin",
+   "cmc": 2,
+   "role": "synergy",
+   "score": 151
+  },
+  {
+   "q": 1,
+   "name": "Collector's Vault",
+   "cmc": 2,
+   "role": "ramp",
+   "score": 86
+  },
+  {
+   "q": 1,
+   "name": "Conspicuous Snoop",
+   "cmc": 2,
+   "role": "utility",
+   "score": 200
+  },
+  {
+   "q": 1,
+   "name": "Dragon Fodder",
+   "cmc": 2,
+   "role": "synergy",
+   "score": 164
+  },
+  {
+   "q": 1,
+   "name": "Goblin Bombardment",
+   "cmc": 2,
+   "role": "removal",
+   "score": 159
+  },
+  {
+   "q": 1,
+   "name": "Goblin Engineer",
+   "cmc": 2,
+   "role": "tutor",
+   "score": 82
+  },
+  {
+   "q": 1,
+   "name": "Goblin Instigator",
+   "cmc": 2,
+   "role": "synergy",
+   "score": 169
+  },
+  {
+   "q": 1,
+   "name": "Goblin Piledriver",
+   "cmc": 2,
+   "role": "utility",
+   "score": 138
+  },
+  {
+   "q": 1,
+   "name": "Goro-Goro, Disciple of Ryusei",
+   "cmc": 2,
+   "role": "synergy",
+   "score": 138
+  },
+  {
+   "q": 1,
+   "name": "Hexing Squelcher",
+   "cmc": 2,
+   "role": "protection",
+   "score": 127
+  },
+  {
+   "q": 1,
+   "name": "Impact Tremors",
+   "cmc": 2,
+   "role": "win_condition",
+   "score": 166
+  },
+  {
+   "q": 1,
+   "name": "Krenko's Command",
+   "cmc": 2,
+   "role": "synergy",
+   "score": 166
+  },
+  {
+   "q": 1,
+   "name": "Lightning Greaves",
+   "cmc": 2,
+   "role": "protection",
+   "score": 142
+  },
+  {
+   "q": 1,
+   "name": "Moria Marauder",
+   "cmc": 2,
+   "role": "utility",
+   "score": 110
+  },
+  {
+   "q": 1,
+   "name": "Roiling Vortex",
+   "cmc": 2,
+   "role": "board_wipe",
+   "score": 54
+  },
+  {
+   "q": 1,
+   "name": "Rundvelt Hordemaster",
+   "cmc": 2,
+   "role": "utility",
+   "score": 166
+  },
+  {
+   "q": 1,
+   "name": "Scuzzback Scrounger",
+   "cmc": 2,
+   "role": "ramp",
+   "score": 95
+  },
+  {
+   "q": 1,
+   "name": "Searslicer Goblin",
+   "cmc": 2,
+   "role": "synergy",
+   "score": 129
+  },
+  {
+   "q": 1,
+   "name": "Shatterskull Smashing // Shatterskull, the Hammer Pass",
+   "cmc": 2,
+   "role": "",
+   "score": 56
+  },
+  {
+   "q": 1,
+   "name": "Smash to Dust",
+   "cmc": 2,
+   "role": "board_wipe",
+   "score": 48
+  },
+  {
+   "q": 1,
+   "name": "Sting, the Glinting Dagger",
+   "cmc": 2,
+   "role": "utility",
+   "score": 122
+  },
+  {
+   "q": 1,
+   "name": "Swiftfoot Boots",
+   "cmc": 2,
+   "role": "protection",
+   "score": 146
+  },
+  {
+   "q": 1,
+   "name": "Thrill of Possibility",
+   "cmc": 2,
+   "role": "draw",
+   "score": 93
+  },
+  {
+   "q": 1,
+   "name": "Broadside Bombardiers",
+   "cmc": 3,
+   "role": "",
+   "score": 110
+  },
+  {
+   "q": 1,
+   "name": "Crime Novelist",
+   "cmc": 3,
+   "role": "ramp",
+   "score": 102
+  },
+  {
+   "q": 1,
+   "name": "Dragon's Hoard",
+   "cmc": 3,
+   "role": "ramp",
+   "score": 88
+  },
+  {
+   "q": 1,
+   "name": "Fable of the Mirror-Breaker // Reflection of Kiki-Jiki",
+   "cmc": 3,
+   "role": "draw",
+   "score": 142
+  },
+  {
+   "q": 1,
+   "name": "Gempalm Incinerator",
+   "cmc": 3,
+   "role": "draw",
+   "score": 151
+  },
+  {
+   "q": 1,
+   "name": "General Kreat, the Boltbringer",
+   "cmc": 3,
+   "role": "win_condition",
+   "score": 168
+  },
+  {
+   "q": 1,
+   "name": "Goblin Chieftain",
+   "cmc": 3,
+   "role": "utility",
+   "score": 207
+  },
+  {
+   "q": 1,
+   "name": "Goblin Matron",
+   "cmc": 3,
+   "role": "tutor",
+   "score": 208
+  },
+  {
+   "q": 1,
+   "name": "Goblin Sharpshooter",
+   "cmc": 3,
+   "role": "removal",
+   "score": 125
+  },
+  {
+   "q": 1,
+   "name": "Goblin Warchief",
+   "cmc": 3,
+   "role": "utility",
+   "score": 211
+  },
+  {
+   "q": 1,
+   "name": "Hobgoblin Bandit Lord",
+   "cmc": 3,
+   "role": "utility",
+   "score": 182
+  },
+  {
+   "q": 1,
+   "name": "Hordeling Outburst",
+   "cmc": 3,
+   "role": "synergy",
+   "score": 138
+  },
+  {
+   "q": 1,
+   "name": "Howlsquad Heavy",
+   "cmc": 3,
+   "role": "ramp",
+   "score": 169
+  },
+  {
+   "q": 1,
+   "name": "Krenko, Tin Street Kingpin",
+   "cmc": 3,
+   "role": "synergy",
+   "score": 183
+  },
+  {
+   "q": 1,
+   "name": "Legion Warboss",
+   "cmc": 3,
+   "role": "synergy",
+   "score": 168
+  },
+  {
+   "q": 1,
+   "name": "Palantír of Orthanc",
+   "cmc": 3,
+   "role": "draw",
+   "score": 88
+  },
+  {
+   "q": 1,
+   "name": "Pashalik Mons",
+   "cmc": 3,
+   "role": "removal",
+   "score": 206
+  },
+  {
+   "q": 1,
+   "name": "Shared Animosity",
+   "cmc": 3,
+   "role": "utility",
+   "score": 145
+  },
+  {
+   "q": 1,
+   "name": "Staff of Domination",
+   "cmc": 3,
+   "role": "draw",
+   "score": 112
+  },
+  {
+   "q": 1,
+   "name": "Sundering Eruption // Volcanic Fissure",
+   "cmc": 3,
+   "role": "",
+   "score": 61
+  },
+  {
+   "q": 1,
+   "name": "Ashling, Flame Dancer",
+   "cmc": 4,
+   "role": "ramp",
+   "score": 87
+  },
+  {
+   "q": 1,
+   "name": "Beetleback Chief",
+   "cmc": 4,
+   "role": "synergy",
+   "score": 140
+  },
+  {
+   "q": 1,
+   "name": "Empty the Warrens",
+   "cmc": 4,
+   "role": "synergy",
+   "score": 122
+  },
+  {
+   "q": 1,
+   "name": "Goblin Ringleader",
+   "cmc": 4,
+   "role": "draw",
+   "score": 177
+  },
+  {
+   "q": 1,
+   "name": "Goblin Trashmaster",
+   "cmc": 4,
+   "role": "removal",
+   "score": 203
+  },
+  {
+   "q": 1,
+   "name": "Jaxis, the Troublemaker",
+   "cmc": 4,
+   "role": "draw",
+   "score": 87
+  },
+  {
+   "q": 1,
+   "name": "Purphoros, God of the Forge",
+   "cmc": 4,
+   "role": "win_condition",
+   "score": 118
+  },
+  {
+   "q": 1,
+   "name": "Solemn Simulacrum",
+   "cmc": 4,
+   "role": "ramp",
+   "score": 103
+  },
+  {
+   "q": 1,
+   "name": "Well of Lost Dreams",
+   "cmc": 4,
+   "role": "draw",
+   "score": 88
+  },
+  {
+   "q": 1,
+   "name": "Zada, Hedron Grinder",
+   "cmc": 4,
+   "role": "utility",
+   "score": 114
+  },
+  {
+   "q": 1,
+   "name": "Pinnacle Monk // Mystic Peak",
+   "cmc": 5,
+   "role": "",
+   "score": 54
+  },
+  {
+   "q": 1,
+   "name": "Siege-Gang Commander",
+   "cmc": 5,
+   "role": "removal",
+   "score": 198
+  },
+  {
+   "q": 1,
+   "name": "Vanquisher's Banner",
+   "cmc": 5,
+   "role": "draw",
+   "score": 97
+  },
+  {
+   "q": 1,
+   "name": "Muxus, Goblin Grandee",
+   "cmc": 6,
+   "role": "win_condition",
+   "score": 171
+  },
+  {
+   "q": 1,
+   "name": "Blasphemous Act",
+   "cmc": 9,
+   "role": "board_wipe",
+   "score": 85
+  }
+ ]
+}

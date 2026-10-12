@@ -1,0 +1,551 @@
+{
+ "metrics": {
+  "label": "aeve-arena",
+  "strategy": "tribal",
+  "size": 99,
+  "lands": 35,
+  "mdfcSpells": 3,
+  "basics": 28,
+  "untapped": 35,
+  "untappedShare": 1,
+  "sources": {
+   "G": 29
+  },
+  "healthSources": {
+   "W": 5,
+   "U": 6,
+   "B": 5,
+   "R": 5,
+   "G": 40
+  },
+  "honestRamp": 21,
+  "avgMv": 2.73,
+  "ms": 2261,
+  "price": {
+   "total": 0,
+   "overBudget": false
+  },
+  "bracket": {
+   "target": null,
+   "result": 3
+  }
+ },
+ "lands": [
+  {
+   "q": 1,
+   "name": "Bridgeworks Battle // Tanglespan Bridgeworks",
+   "type": "Sorcery // Land",
+   "score": 116
+  },
+  {
+   "q": 1,
+   "name": "Cavern of Souls",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Disciple of Freyalise // Garden of Freyalise",
+   "type": "Creature — Elf Druid // Land",
+   "score": 97
+  },
+  {
+   "q": 28,
+   "name": "Forest",
+   "type": "Basic Land — Forest",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Hall of Echoes",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Misty Rainforest",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Northampton Farm",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Rogue's Passage",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Secret Tunnel",
+   "type": "Land — Cave",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Soulstone Sanctuary",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Tangled Florahedron // Tangled Vale",
+   "type": "Creature — Elemental // Land",
+   "score": 120
+  }
+ ],
+ "spells": [
+  {
+   "q": 1,
+   "name": "Bushwhack",
+   "cmc": 1,
+   "role": "",
+   "score": 115
+  },
+  {
+   "q": 1,
+   "name": "Celestial Reunion",
+   "cmc": 1,
+   "role": "tutor",
+   "score": 140
+  },
+  {
+   "q": 1,
+   "name": "Charge Through",
+   "cmc": 1,
+   "role": "utility",
+   "score": 147
+  },
+  {
+   "q": 1,
+   "name": "Crop Rotation",
+   "cmc": 1,
+   "role": "arsenal:community_top",
+   "score": 143
+  },
+  {
+   "q": 1,
+   "name": "Elvish Mystic",
+   "cmc": 1,
+   "role": "arsenal:community_top",
+   "score": 193
+  },
+  {
+   "q": 1,
+   "name": "Experiment One",
+   "cmc": 1,
+   "role": "arsenal:community_top",
+   "score": 205
+  },
+  {
+   "q": 1,
+   "name": "Glimpse of Nature",
+   "cmc": 1,
+   "role": "arsenal:community_synergy",
+   "score": 152
+  },
+  {
+   "q": 1,
+   "name": "Hardened Scales",
+   "cmc": 1,
+   "role": "arsenal:community_top",
+   "score": 164
+  },
+  {
+   "q": 1,
+   "name": "Llanowar Elves",
+   "cmc": 1,
+   "role": "arsenal:community_top",
+   "score": 193
+  },
+  {
+   "q": 1,
+   "name": "Universal Automaton",
+   "cmc": 1,
+   "role": "",
+   "score": 128
+  },
+  {
+   "q": 1,
+   "name": "Utopia Sprawl",
+   "cmc": 1,
+   "role": "arsenal:community_top",
+   "score": 107
+  },
+  {
+   "q": 1,
+   "name": "Worldly Tutor",
+   "cmc": 1,
+   "role": "tutor",
+   "score": 144
+  },
+  {
+   "q": 1,
+   "name": "Arcane Signet",
+   "cmc": 2,
+   "role": "arsenal:community_top",
+   "score": 175
+  },
+  {
+   "q": 1,
+   "name": "Basking Broodscale",
+   "cmc": 2,
+   "role": "synergy",
+   "score": 146
+  },
+  {
+   "q": 1,
+   "name": "Corrosive Ooze",
+   "cmc": 2,
+   "role": "arsenal:community_top",
+   "score": 145
+  },
+  {
+   "q": 1,
+   "name": "Emerald Medallion",
+   "cmc": 2,
+   "role": "arsenal:community_top",
+   "score": 180
+  },
+  {
+   "q": 1,
+   "name": "Explore",
+   "cmc": 2,
+   "role": "arsenal:community_top",
+   "score": 189
+  },
+  {
+   "q": 1,
+   "name": "Farseek",
+   "cmc": 2,
+   "role": "utility",
+   "score": 156
+  },
+  {
+   "q": 1,
+   "name": "Fuel Tank Feaster",
+   "cmc": 2,
+   "role": "",
+   "score": 93
+  },
+  {
+   "q": 1,
+   "name": "Heroic Intervention",
+   "cmc": 2,
+   "role": "arsenal:community_top",
+   "score": 156
+  },
+  {
+   "q": 1,
+   "name": "Kenrith's Transformation",
+   "cmc": 2,
+   "role": "arsenal:community_top",
+   "score": 167
+  },
+  {
+   "q": 1,
+   "name": "Metallic Mimic",
+   "cmc": 2,
+   "role": "synergy",
+   "score": 167
+  },
+  {
+   "q": 1,
+   "name": "Mind Stone",
+   "cmc": 2,
+   "role": "arsenal:staple_ramp",
+   "score": 143
+  },
+  {
+   "q": 1,
+   "name": "Mutagen Man, Living Ooze",
+   "cmc": 2,
+   "role": "synergy",
+   "score": 146
+  },
+  {
+   "q": 1,
+   "name": "Ozolith, the Shattered Spire",
+   "cmc": 2,
+   "role": "arsenal:community_top",
+   "score": 180
+  },
+  {
+   "q": 1,
+   "name": "Paradise Druid",
+   "cmc": 2,
+   "role": "arsenal:staple_ramp",
+   "score": 123
+  },
+  {
+   "q": 1,
+   "name": "Rampant Growth",
+   "cmc": 2,
+   "role": "arsenal:community_top",
+   "score": 194
+  },
+  {
+   "q": 1,
+   "name": "Return to Nature",
+   "cmc": 2,
+   "role": "arsenal:staple_removal",
+   "score": 97
+  },
+  {
+   "q": 1,
+   "name": "Scavenging Ooze",
+   "cmc": 2,
+   "role": "arsenal:community_top",
+   "score": 222
+  },
+  {
+   "q": 1,
+   "name": "Sylvan Library",
+   "cmc": 2,
+   "role": "arsenal:staple_draw",
+   "score": 142
+  },
+  {
+   "q": 1,
+   "name": "Tangled Florahedron // Tangled Vale",
+   "cmc": 2,
+   "role": "",
+   "score": 120
+  },
+  {
+   "q": 1,
+   "name": "Three Tree Mascot",
+   "cmc": 2,
+   "role": "",
+   "score": 132
+  },
+  {
+   "q": 1,
+   "name": "Up the Beanstalk",
+   "cmc": 2,
+   "role": "utility",
+   "score": 159
+  },
+  {
+   "q": 1,
+   "name": "Barkform Harvester",
+   "cmc": 3,
+   "role": "",
+   "score": 110
+  },
+  {
+   "q": 1,
+   "name": "Beast Within",
+   "cmc": 3,
+   "role": "arsenal:community_top",
+   "score": 149
+  },
+  {
+   "q": 1,
+   "name": "Bridgeworks Battle // Tanglespan Bridgeworks",
+   "cmc": 3,
+   "role": "",
+   "score": 116
+  },
+  {
+   "q": 1,
+   "name": "Changeling Wayfinder",
+   "cmc": 3,
+   "role": "",
+   "score": 139
+  },
+  {
+   "q": 1,
+   "name": "Chomping Changeling",
+   "cmc": 3,
+   "role": "",
+   "score": 118
+  },
+  {
+   "q": 1,
+   "name": "Cultivate",
+   "cmc": 3,
+   "role": "arsenal:community_top",
+   "score": 164
+  },
+  {
+   "q": 1,
+   "name": "Eternal Witness",
+   "cmc": 3,
+   "role": "arsenal:community_top",
+   "score": 109
+  },
+  {
+   "q": 1,
+   "name": "Garruk's Uprising",
+   "cmc": 3,
+   "role": "arsenal:community_top",
+   "score": 208
+  },
+  {
+   "q": 1,
+   "name": "Inspiring Call",
+   "cmc": 3,
+   "role": "arsenal:community_top",
+   "score": 209
+  },
+  {
+   "q": 1,
+   "name": "Miming Slime",
+   "cmc": 3,
+   "role": "arsenal:community_top",
+   "score": 107
+  },
+  {
+   "q": 1,
+   "name": "Mutable Explorer",
+   "cmc": 3,
+   "role": "synergy",
+   "score": 156
+  },
+  {
+   "q": 1,
+   "name": "Orcrist, Goblin-cleaver",
+   "cmc": 3,
+   "role": "synergy",
+   "score": 146
+  },
+  {
+   "q": 1,
+   "name": "Outcaster Trailblazer",
+   "cmc": 3,
+   "role": "",
+   "score": 142
+  },
+  {
+   "q": 1,
+   "name": "Selvala, Heart of the Wilds",
+   "cmc": 3,
+   "role": "utility",
+   "score": 156
+  },
+  {
+   "q": 1,
+   "name": "Slime Against Humanity",
+   "cmc": 3,
+   "role": "arsenal:community_top",
+   "score": 187
+  },
+  {
+   "q": 1,
+   "name": "Tribute to the World Tree",
+   "cmc": 3,
+   "role": "arsenal:community_top",
+   "score": 198
+  },
+  {
+   "q": 1,
+   "name": "Harmonize",
+   "cmc": 4,
+   "role": "arsenal:community_top",
+   "score": 111
+  },
+  {
+   "q": 1,
+   "name": "Hedron Archive",
+   "cmc": 4,
+   "role": "arsenal:staple_ramp",
+   "score": 112
+  },
+  {
+   "q": 1,
+   "name": "Night of the Sweets' Revenge",
+   "cmc": 4,
+   "role": "board_wipe",
+   "score": 108
+  },
+  {
+   "q": 1,
+   "name": "Ooze Patrol",
+   "cmc": 4,
+   "role": "",
+   "score": 86
+  },
+  {
+   "q": 1,
+   "name": "Perilous Vault",
+   "cmc": 4,
+   "role": "board_wipe",
+   "score": 43
+  },
+  {
+   "q": 1,
+   "name": "Solemn Simulacrum",
+   "cmc": 4,
+   "role": "arsenal:staple_ramp",
+   "score": 141
+  },
+  {
+   "q": 1,
+   "name": "Temperamental Oozewagg",
+   "cmc": 4,
+   "role": "arsenal:community_top",
+   "score": 156
+  },
+  {
+   "q": 1,
+   "name": "The One Ring",
+   "cmc": 4,
+   "role": "arsenal:staple_draw",
+   "score": 141
+  },
+  {
+   "q": 1,
+   "name": "Acidic Slime",
+   "cmc": 5,
+   "role": "arsenal:community_top",
+   "score": 162
+  },
+  {
+   "q": 1,
+   "name": "Doubling Season",
+   "cmc": 5,
+   "role": "arsenal:community_top",
+   "score": 117
+  },
+  {
+   "q": 1,
+   "name": "Rooftop Percher",
+   "cmc": 5,
+   "role": "",
+   "score": 52
+  },
+  {
+   "q": 1,
+   "name": "Shamanic Revelation",
+   "cmc": 5,
+   "role": "arsenal:community_top",
+   "score": 118
+  },
+  {
+   "q": 1,
+   "name": "Chronicle of Victory",
+   "cmc": 6,
+   "role": "win_condition",
+   "score": 145
+  },
+  {
+   "q": 1,
+   "name": "Disciple of Freyalise // Garden of Freyalise",
+   "cmc": 6,
+   "role": "",
+   "score": 97
+  },
+  {
+   "q": 1,
+   "name": "The Great Henge",
+   "cmc": 9,
+   "role": "arsenal:community_top",
+   "score": 161
+  }
+ ]
+}

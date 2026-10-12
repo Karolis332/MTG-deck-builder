@@ -1,0 +1,710 @@
+{
+ "metrics": {
+  "label": "tam-arena",
+  "strategy": "superfriends",
+  "size": 99,
+  "lands": 36,
+  "mdfcSpells": 2,
+  "basics": 5,
+  "untapped": 36,
+  "untappedShare": 1,
+  "sources": {
+   "B": 11,
+   "G": 18,
+   "R": 12,
+   "U": 15,
+   "W": 13
+  },
+  "healthSources": {
+   "W": 16,
+   "U": 19,
+   "B": 12,
+   "R": 18,
+   "G": 21
+  },
+  "honestRamp": 12,
+  "avgMv": 3.46,
+  "ms": 3620,
+  "price": {
+   "total": 0,
+   "overBudget": false
+  },
+  "bracket": {
+   "target": null,
+   "result": 3
+  }
+ },
+ "lands": [
+  {
+   "q": 1,
+   "name": "Bleachbone Verge",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Blood Crypt",
+   "type": "Land — Swamp Mountain",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Breeding Pool",
+   "type": "Land — Forest Island",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Bridgeworks Battle // Tanglespan Bridgeworks",
+   "type": "Sorcery // Land",
+   "score": 141
+  },
+  {
+   "q": 1,
+   "name": "Command Tower",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Deathcap Glade",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Disciple of Freyalise // Garden of Freyalise",
+   "type": "Creature — Elf Druid // Land",
+   "score": 140
+  },
+  {
+   "q": 1,
+   "name": "Dreamroot Cascade",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Flooded Strand",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Forest",
+   "type": "Basic Land — Forest",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Fortified Village",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Godless Shrine",
+   "type": "Land — Plains Swamp",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Great Hall of the Citadel",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Hallowed Fountain",
+   "type": "Land — Plains Island",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Hinterland Harbor",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Interplanar Beacon",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Island",
+   "type": "Basic Land — Island",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Misty Rainforest",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Mount Doom",
+   "type": "Legendary Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Mountain",
+   "type": "Basic Land — Mountain",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Overgrown Farmland",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Overgrown Tomb",
+   "type": "Land — Swamp Forest",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Plains",
+   "type": "Basic Land — Plains",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Rockfall Vale",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Sacred Foundry",
+   "type": "Land — Mountain Plains",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Scalding Tarn",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Shattered Sanctum",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Starting Town",
+   "type": "Land — Town",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Steam Vents",
+   "type": "Land — Island Mountain",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Stomping Ground",
+   "type": "Land — Mountain Forest",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Stormcarved Coast",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Sundown Pass",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Swamp",
+   "type": "Basic Land — Swamp",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Temple Garden",
+   "type": "Land — Forest Plains",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Vineglimmer Snarl",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Willowrush Verge",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Woodland Cemetery",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Yavimaya Coast",
+   "type": "Land",
+   "score": -9999
+  }
+ ],
+ "spells": [
+  {
+   "q": 1,
+   "name": "Path to Exile",
+   "cmc": 1,
+   "role": "arsenal:staple_removal",
+   "score": 158
+  },
+  {
+   "q": 1,
+   "name": "Pongify",
+   "cmc": 1,
+   "role": "arsenal:staple_removal",
+   "score": 176
+  },
+  {
+   "q": 1,
+   "name": "Rapid Hybridization",
+   "cmc": 1,
+   "role": "arsenal:staple_removal",
+   "score": 175
+  },
+  {
+   "q": 1,
+   "name": "Swords to Plowshares",
+   "cmc": 1,
+   "role": "arsenal:staple_removal",
+   "score": 158
+  },
+  {
+   "q": 1,
+   "name": "Azorius Signet",
+   "cmc": 2,
+   "role": "arsenal:staple_ramp",
+   "score": 162
+  },
+  {
+   "q": 1,
+   "name": "Cankerbloom",
+   "cmc": 2,
+   "role": "upgrade",
+   "score": 181
+  },
+  {
+   "q": 1,
+   "name": "Feed the Swarm",
+   "cmc": 2,
+   "role": "arsenal:staple_removal",
+   "score": 166
+  },
+  {
+   "q": 1,
+   "name": "Izzet Signet",
+   "cmc": 2,
+   "role": "arsenal:staple_ramp",
+   "score": 163
+  },
+  {
+   "q": 1,
+   "name": "Rakdos Charm",
+   "cmc": 2,
+   "role": "upgrade",
+   "score": 165
+  },
+  {
+   "q": 1,
+   "name": "Rakdos Signet",
+   "cmc": 2,
+   "role": "arsenal:staple_ramp",
+   "score": 163
+  },
+  {
+   "q": 1,
+   "name": "Talisman of Conviction",
+   "cmc": 2,
+   "role": "arsenal:staple_ramp",
+   "score": 163
+  },
+  {
+   "q": 1,
+   "name": "Talisman of Creativity",
+   "cmc": 2,
+   "role": "arsenal:staple_ramp",
+   "score": 163
+  },
+  {
+   "q": 1,
+   "name": "Talisman of Progress",
+   "cmc": 2,
+   "role": "arsenal:staple_ramp",
+   "score": 163
+  },
+  {
+   "q": 1,
+   "name": "Terminate",
+   "cmc": 2,
+   "role": "upgrade",
+   "score": 165
+  },
+  {
+   "q": 1,
+   "name": "Way of the Necromancer",
+   "cmc": 2,
+   "role": "",
+   "score": 147
+  },
+  {
+   "q": 1,
+   "name": "Way of the Pyromancer",
+   "cmc": 2,
+   "role": "",
+   "score": 122
+  },
+  {
+   "q": 1,
+   "name": "Beast Within",
+   "cmc": 3,
+   "role": "arsenal:staple_removal",
+   "score": 181
+  },
+  {
+   "q": 1,
+   "name": "Bridgeworks Battle // Tanglespan Bridgeworks",
+   "cmc": 3,
+   "role": "",
+   "score": 141
+  },
+  {
+   "q": 1,
+   "name": "Chandra, Acolyte of Flame",
+   "cmc": 3,
+   "role": "",
+   "score": 108
+  },
+  {
+   "q": 1,
+   "name": "Evolution Sage",
+   "cmc": 3,
+   "role": "arsenal:archetype_payoff",
+   "score": 205
+  },
+  {
+   "q": 1,
+   "name": "Garruk's Uprising",
+   "cmc": 3,
+   "role": "arsenal:staple_draw",
+   "score": 194
+  },
+  {
+   "q": 1,
+   "name": "Inspired Tethermage",
+   "cmc": 3,
+   "role": "",
+   "score": 103
+  },
+  {
+   "q": 1,
+   "name": "Inspiring Call",
+   "cmc": 3,
+   "role": "arsenal:archetype_payoff",
+   "score": 200
+  },
+  {
+   "q": 1,
+   "name": "Jiang Yanggu, Wildcrafter",
+   "cmc": 3,
+   "role": "",
+   "score": 87
+  },
+  {
+   "q": 1,
+   "name": "Kaito, Cunning Infiltrator",
+   "cmc": 3,
+   "role": "",
+   "score": 156
+  },
+  {
+   "q": 1,
+   "name": "Kami of Whispered Hopes",
+   "cmc": 3,
+   "role": "arsenal:archetype_payoff",
+   "score": 182
+  },
+  {
+   "q": 1,
+   "name": "Kiora, Behemoth Beckoner",
+   "cmc": 3,
+   "role": "",
+   "score": 120
+  },
+  {
+   "q": 1,
+   "name": "Narset, Parter of Veils",
+   "cmc": 3,
+   "role": "",
+   "score": 100
+  },
+  {
+   "q": 1,
+   "name": "Reclamation Sage",
+   "cmc": 3,
+   "role": "arsenal:staple_removal",
+   "score": 165
+  },
+  {
+   "q": 1,
+   "name": "Saheeli, Sublime Artificer",
+   "cmc": 3,
+   "role": "",
+   "score": 105
+  },
+  {
+   "q": 1,
+   "name": "Selvala, Heart of the Wilds",
+   "cmc": 3,
+   "role": "upgrade",
+   "score": 193
+  },
+  {
+   "q": 1,
+   "name": "Tezzeret, Cruel Captain",
+   "cmc": 3,
+   "role": "tutor",
+   "score": 162
+  },
+  {
+   "q": 1,
+   "name": "Tribute to the World Tree",
+   "cmc": 3,
+   "role": "upgrade",
+   "score": 207
+  },
+  {
+   "q": 1,
+   "name": "Way of the Cryomancer",
+   "cmc": 3,
+   "role": "",
+   "score": 68
+  },
+  {
+   "q": 1,
+   "name": "Way of the Deathbringer",
+   "cmc": 3,
+   "role": "",
+   "score": 68
+  },
+  {
+   "q": 1,
+   "name": "Way of the Mentor",
+   "cmc": 3,
+   "role": "",
+   "score": 111
+  },
+  {
+   "q": 1,
+   "name": "Way of the Paradox",
+   "cmc": 3,
+   "role": "",
+   "score": 121
+  },
+  {
+   "q": 1,
+   "name": "Way of the Warlord",
+   "cmc": 3,
+   "role": "",
+   "score": 68
+  },
+  {
+   "q": 1,
+   "name": "Angrath, Captain of Chaos",
+   "cmc": 4,
+   "role": "",
+   "score": 92
+  },
+  {
+   "q": 1,
+   "name": "Chandra, Torch of Defiance",
+   "cmc": 4,
+   "role": "",
+   "score": 100
+  },
+  {
+   "q": 1,
+   "name": "Forgotten Ancient",
+   "cmc": 4,
+   "role": "arsenal:archetype_payoff",
+   "score": 182
+  },
+  {
+   "q": 1,
+   "name": "Kaito, Bane of Nightmares",
+   "cmc": 4,
+   "role": "",
+   "score": 96
+  },
+  {
+   "q": 1,
+   "name": "Minsc & Boo, Timeless Heroes",
+   "cmc": 4,
+   "role": "",
+   "score": 139
+  },
+  {
+   "q": 1,
+   "name": "Professor Dellian Fel",
+   "cmc": 4,
+   "role": "",
+   "score": 111
+  },
+  {
+   "q": 1,
+   "name": "Quintorius, History Chaser",
+   "cmc": 4,
+   "role": "",
+   "score": 106
+  },
+  {
+   "q": 1,
+   "name": "Ral, Crackling Wit",
+   "cmc": 4,
+   "role": "win_condition",
+   "score": 157
+  },
+  {
+   "q": 1,
+   "name": "Tekuthal, Inquiry Dominus",
+   "cmc": 4,
+   "role": "arsenal:archetype_payoff",
+   "score": 158
+  },
+  {
+   "q": 1,
+   "name": "Tezzeret's Gambit",
+   "cmc": 4,
+   "role": "arsenal:archetype_payoff",
+   "score": 181
+  },
+  {
+   "q": 1,
+   "name": "The One Ring",
+   "cmc": 4,
+   "role": "arsenal:staple_draw",
+   "score": 209
+  },
+  {
+   "q": 1,
+   "name": "The Theorist, Jace Beleren",
+   "cmc": 4,
+   "role": "win_condition",
+   "score": 165
+  },
+  {
+   "q": 1,
+   "name": "Way of the Healer",
+   "cmc": 4,
+   "role": "",
+   "score": 68
+  },
+  {
+   "q": 1,
+   "name": "Fumigate",
+   "cmc": 5,
+   "role": "board_wipe",
+   "score": 103
+  },
+  {
+   "q": 1,
+   "name": "Nissa, Who Shakes the World",
+   "cmc": 5,
+   "role": "",
+   "score": 119
+  },
+  {
+   "q": 1,
+   "name": "Oath of Teferi",
+   "cmc": 5,
+   "role": "payoff",
+   "score": 116
+  },
+  {
+   "q": 1,
+   "name": "Sunfall",
+   "cmc": 5,
+   "role": "board_wipe",
+   "score": 118
+  },
+  {
+   "q": 1,
+   "name": "Way of the Mind Sculptor",
+   "cmc": 5,
+   "role": "",
+   "score": 63
+  },
+  {
+   "q": 1,
+   "name": "Way of the Wildspeaker",
+   "cmc": 5,
+   "role": "",
+   "score": 63
+  },
+  {
+   "q": 1,
+   "name": "Ajani Unrelenting",
+   "cmc": 6,
+   "role": "board_wipe",
+   "score": 147
+  },
+  {
+   "q": 1,
+   "name": "Disciple of Freyalise // Garden of Freyalise",
+   "cmc": 6,
+   "role": "",
+   "score": 140
+  },
+  {
+   "q": 1,
+   "name": "Massacre Wurm",
+   "cmc": 6,
+   "role": "board_wipe",
+   "score": 122
+  },
+  {
+   "q": 1,
+   "name": "The Eternal Wanderer",
+   "cmc": 6,
+   "role": "",
+   "score": 101
+  },
+  {
+   "q": 1,
+   "name": "Blasphemous Act",
+   "cmc": 9,
+   "role": "board_wipe",
+   "score": 143
+  },
+  {
+   "q": 1,
+   "name": "The Great Henge",
+   "cmc": 9,
+   "role": "arsenal:staple_draw",
+   "score": 253
+  }
+ ]
+}

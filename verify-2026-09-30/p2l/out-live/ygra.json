@@ -1,0 +1,618 @@
+{
+ "metrics": {
+  "label": "ygra",
+  "strategy": "aggro",
+  "size": 99,
+  "lands": 35,
+  "mdfcSpells": 5,
+  "basics": 20,
+  "untapped": 34,
+  "untappedShare": 0.97,
+  "sources": {
+   "B": 24,
+   "G": 23
+  },
+  "healthSources": {
+   "W": 13,
+   "U": 13,
+   "B": 36,
+   "R": 13,
+   "G": 35
+  },
+  "honestRamp": 13,
+  "avgMv": 2.52,
+  "ms": 1543,
+  "price": {
+   "total": 369.45,
+   "overBudget": false
+  },
+  "bracket": {
+   "target": null,
+   "result": 2
+  }
+ },
+ "lands": [
+  {
+   "q": 1,
+   "name": "Blooming Marsh",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Bridgeworks Battle // Tanglespan Bridgeworks",
+   "type": "Sorcery // Land",
+   "score": 80
+  },
+  {
+   "q": 1,
+   "name": "Darkbore Pathway // Slitherbore Pathway",
+   "type": "Land // Land",
+   "score": 97
+  },
+  {
+   "q": 1,
+   "name": "Deathcap Glade",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Disciple of Freyalise // Garden of Freyalise",
+   "type": "Creature — Elf Druid // Land",
+   "score": 80
+  },
+  {
+   "q": 1,
+   "name": "Fell the Profane // Fell Mire",
+   "type": "Instant // Land",
+   "score": 108
+  },
+  {
+   "q": 10,
+   "name": "Forest",
+   "type": "Basic Land — Forest",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Llanowar Wastes",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Mana Confluence",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Midgar, City of Mako // Reactor Raid",
+   "type": "Land — Town // Sorcery — Adventure",
+   "score": 122
+  },
+  {
+   "q": 1,
+   "name": "Multiversal Passage",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Necroblossom Snarl",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Nurturing Peatland",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Overgrown Tomb",
+   "type": "Land — Swamp Forest",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Revitalizing Repast // Old-Growth Grove",
+   "type": "Instant // Land",
+   "score": 121
+  },
+  {
+   "q": 1,
+   "name": "Starting Town",
+   "type": "Land — Town",
+   "score": -9999
+  },
+  {
+   "q": 10,
+   "name": "Swamp",
+   "type": "Basic Land — Swamp",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Three Tree City",
+   "type": "Legendary Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Turntimber Symbiosis // Turntimber, Serpentine Wood",
+   "type": "Sorcery // Land",
+   "score": 54
+  },
+  {
+   "q": 1,
+   "name": "Verdant Catacombs",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Wastewood Verge",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Woodland Cemetery",
+   "type": "Land",
+   "score": -9999
+  }
+ ],
+ "spells": [
+  {
+   "q": 1,
+   "name": "Cauldron Familiar",
+   "cmc": 1,
+   "role": "win_condition",
+   "score": 191
+  },
+  {
+   "q": 1,
+   "name": "Currency Converter",
+   "cmc": 1,
+   "role": "draw",
+   "score": 131
+  },
+  {
+   "q": 1,
+   "name": "Dark Ritual",
+   "cmc": 1,
+   "role": "ramp",
+   "score": 137
+  },
+  {
+   "q": 1,
+   "name": "Gilded Goose",
+   "cmc": 1,
+   "role": "ramp",
+   "score": 217
+  },
+  {
+   "q": 1,
+   "name": "Goldvein Hydra",
+   "cmc": 1,
+   "role": "synergy",
+   "score": 119
+  },
+  {
+   "q": 1,
+   "name": "Greedy Freebooter",
+   "cmc": 1,
+   "role": "ramp",
+   "score": 127
+  },
+  {
+   "q": 1,
+   "name": "Many Partings",
+   "cmc": 1,
+   "role": "draw",
+   "score": 126
+  },
+  {
+   "q": 1,
+   "name": "Nature's Claim",
+   "cmc": 1,
+   "role": "",
+   "score": 113
+  },
+  {
+   "q": 1,
+   "name": "Party Dude",
+   "cmc": 1,
+   "role": "synergy",
+   "score": 118
+  },
+  {
+   "q": 1,
+   "name": "Pest Infestation",
+   "cmc": 1,
+   "role": "removal",
+   "score": 116
+  },
+  {
+   "q": 1,
+   "name": "Ravenous Squirrel",
+   "cmc": 1,
+   "role": "draw",
+   "score": 162
+  },
+  {
+   "q": 1,
+   "name": "Revitalizing Repast // Old-Growth Grove",
+   "cmc": 1,
+   "role": "utility",
+   "score": 121
+  },
+  {
+   "q": 1,
+   "name": "Scavenger's Talent",
+   "cmc": 1,
+   "role": "synergy",
+   "score": 138
+  },
+  {
+   "q": 1,
+   "name": "Witch's Oven",
+   "cmc": 1,
+   "role": "synergy",
+   "score": 154
+  },
+  {
+   "q": 1,
+   "name": "Arcane Signet",
+   "cmc": 2,
+   "role": "ramp",
+   "score": 205
+  },
+  {
+   "q": 1,
+   "name": "Assassin's Trophy",
+   "cmc": 2,
+   "role": "removal",
+   "score": 116
+  },
+  {
+   "q": 1,
+   "name": "Blood Artist",
+   "cmc": 2,
+   "role": "utility",
+   "score": 122
+  },
+  {
+   "q": 1,
+   "name": "Collective Resistance",
+   "cmc": 2,
+   "role": "protection",
+   "score": 109
+  },
+  {
+   "q": 1,
+   "name": "Collector's Vault",
+   "cmc": 2,
+   "role": "ramp",
+   "score": 132
+  },
+  {
+   "q": 1,
+   "name": "Deadly Dispute",
+   "cmc": 2,
+   "role": "ramp",
+   "score": 232
+  },
+  {
+   "q": 1,
+   "name": "Fanatic of Rhonas",
+   "cmc": 2,
+   "role": "synergy",
+   "score": 114
+  },
+  {
+   "q": 1,
+   "name": "Fanatical Offering",
+   "cmc": 2,
+   "role": "synergy",
+   "score": 114
+  },
+  {
+   "q": 1,
+   "name": "Gorbag of Minas Morgul",
+   "cmc": 2,
+   "role": "draw",
+   "score": 122
+  },
+  {
+   "q": 1,
+   "name": "Lightning Greaves",
+   "cmc": 2,
+   "role": "protection",
+   "score": 160
+  },
+  {
+   "q": 1,
+   "name": "Marionette Apprentice",
+   "cmc": 2,
+   "role": "win_condition",
+   "score": 161
+  },
+  {
+   "q": 1,
+   "name": "Mind Stone",
+   "cmc": 2,
+   "role": "draw",
+   "score": 147
+  },
+  {
+   "q": 1,
+   "name": "Priest of Forgotten Gods",
+   "cmc": 2,
+   "role": "synergy",
+   "score": 115
+  },
+  {
+   "q": 1,
+   "name": "Prosperous Innkeeper",
+   "cmc": 2,
+   "role": "synergy",
+   "score": 114
+  },
+  {
+   "q": 1,
+   "name": "Swiftfoot Boots",
+   "cmc": 2,
+   "role": "protection",
+   "score": 151
+  },
+  {
+   "q": 1,
+   "name": "Syr Ginger, the Meal Ender",
+   "cmc": 2,
+   "role": "synergy",
+   "score": 128
+  },
+  {
+   "q": 1,
+   "name": "The Sackville-Bagginses",
+   "cmc": 2,
+   "role": "draw",
+   "score": 132
+  },
+  {
+   "q": 1,
+   "name": "Thornvault Forager",
+   "cmc": 2,
+   "role": "ramp",
+   "score": 163
+  },
+  {
+   "q": 1,
+   "name": "Trail of Crumbs",
+   "cmc": 2,
+   "role": "draw",
+   "score": 142
+  },
+  {
+   "q": 1,
+   "name": "Tribute to Horobi // Echo of Death's Wail",
+   "cmc": 2,
+   "role": "synergy",
+   "score": 115
+  },
+  {
+   "q": 1,
+   "name": "Voldaren Bloodcaster // Bloodbat Summoner",
+   "cmc": 2,
+   "role": "draw",
+   "score": 133
+  },
+  {
+   "q": 1,
+   "name": "Academy Manufactor",
+   "cmc": 3,
+   "role": "synergy",
+   "score": 192
+  },
+  {
+   "q": 1,
+   "name": "Ashnod's Altar",
+   "cmc": 3,
+   "role": "ramp",
+   "score": 153
+  },
+  {
+   "q": 1,
+   "name": "Beast Within",
+   "cmc": 3,
+   "role": "removal",
+   "score": 117
+  },
+  {
+   "q": 1,
+   "name": "Braids, Arisen Nightmare",
+   "cmc": 3,
+   "role": "draw",
+   "score": 147
+  },
+  {
+   "q": 1,
+   "name": "Bridgeworks Battle // Tanglespan Bridgeworks",
+   "cmc": 3,
+   "role": "",
+   "score": 80
+  },
+  {
+   "q": 1,
+   "name": "Camellia, the Seedmiser",
+   "cmc": 3,
+   "role": "synergy",
+   "score": 212
+  },
+  {
+   "q": 1,
+   "name": "Chatterfang, Squirrel General",
+   "cmc": 3,
+   "role": "removal",
+   "score": 173
+  },
+  {
+   "q": 1,
+   "name": "Cultivate",
+   "cmc": 3,
+   "role": "utility",
+   "score": 126
+  },
+  {
+   "q": 1,
+   "name": "Experimental Confectioner",
+   "cmc": 3,
+   "role": "synergy",
+   "score": 212
+  },
+  {
+   "q": 1,
+   "name": "Greta, Sweettooth Scourge",
+   "cmc": 3,
+   "role": "draw",
+   "score": 198
+  },
+  {
+   "q": 1,
+   "name": "Manglehorn",
+   "cmc": 3,
+   "role": "removal",
+   "score": 158
+  },
+  {
+   "q": 1,
+   "name": "Peregrin Took",
+   "cmc": 3,
+   "role": "draw",
+   "score": 208
+  },
+  {
+   "q": 1,
+   "name": "Ruthless Knave",
+   "cmc": 3,
+   "role": "synergy",
+   "score": 115
+  },
+  {
+   "q": 1,
+   "name": "Savvy Hunter",
+   "cmc": 3,
+   "role": "draw",
+   "score": 208
+  },
+  {
+   "q": 1,
+   "name": "Skullport Merchant",
+   "cmc": 3,
+   "role": "synergy",
+   "score": 121
+  },
+  {
+   "q": 1,
+   "name": "The Cabbage Merchant",
+   "cmc": 3,
+   "role": "ramp",
+   "score": 129
+  },
+  {
+   "q": 1,
+   "name": "Tireless Provisioner",
+   "cmc": 3,
+   "role": "ramp",
+   "score": 190
+  },
+  {
+   "q": 1,
+   "name": "Tireless Tracker",
+   "cmc": 3,
+   "role": "draw",
+   "score": 145
+  },
+  {
+   "q": 1,
+   "name": "Warren Soultrader",
+   "cmc": 3,
+   "role": "ramp",
+   "score": 176
+  },
+  {
+   "q": 1,
+   "name": "Fade from History",
+   "cmc": 4,
+   "role": "board_wipe",
+   "score": 159
+  },
+  {
+   "q": 1,
+   "name": "Fell the Profane // Fell Mire",
+   "cmc": 4,
+   "role": "",
+   "score": 108
+  },
+  {
+   "q": 1,
+   "name": "Mirkwood Bats",
+   "cmc": 4,
+   "role": "win_condition",
+   "score": 144
+  },
+  {
+   "q": 1,
+   "name": "Night of the Sweets' Revenge",
+   "cmc": 4,
+   "role": "ramp",
+   "score": 198
+  },
+  {
+   "q": 1,
+   "name": "Pitiless Plunderer",
+   "cmc": 4,
+   "role": "ramp",
+   "score": 160
+  },
+  {
+   "q": 1,
+   "name": "Tyvar Kell",
+   "cmc": 4,
+   "role": "synergy",
+   "score": 121
+  },
+  {
+   "q": 1,
+   "name": "Tamiyo's Journal",
+   "cmc": 5,
+   "role": "tutor",
+   "score": 96
+  },
+  {
+   "q": 1,
+   "name": "Disciple of Freyalise // Garden of Freyalise",
+   "cmc": 6,
+   "role": "",
+   "score": 80
+  },
+  {
+   "q": 1,
+   "name": "Season of Gathering",
+   "cmc": 6,
+   "role": "board_wipe",
+   "score": 124
+  },
+  {
+   "q": 1,
+   "name": "Turntimber Symbiosis // Turntimber, Serpentine Wood",
+   "cmc": 7,
+   "role": "",
+   "score": 54
+  }
+ ]
+}

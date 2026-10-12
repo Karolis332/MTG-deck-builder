@@ -1,0 +1,693 @@
+{
+ "metrics": {
+  "label": "tymna-thrasios",
+  "strategy": "combo",
+  "size": 99,
+  "lands": 34,
+  "mdfcSpells": 0,
+  "basics": 5,
+  "untapped": 34,
+  "untappedShare": 1,
+  "sources": {
+   "B": 23,
+   "W": 21,
+   "G": 20,
+   "U": 21
+  },
+  "healthSources": {
+   "W": 27,
+   "U": 30,
+   "B": 29,
+   "R": 14,
+   "G": 26
+  },
+  "honestRamp": 16,
+  "avgMv": 2.54,
+  "ms": 1172,
+  "price": {
+   "total": 4088.8,
+   "overBudget": false
+  },
+  "bracket": {
+   "target": null,
+   "result": 4
+  }
+ },
+ "lands": [
+  {
+   "q": 1,
+   "name": "Bayou",
+   "type": "Land — Swamp Forest",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Breeding Pool",
+   "type": "Land — Forest Island",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "City of Brass",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Command Tower",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Exotic Orchard",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Flooded Strand",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Forbidden Orchard",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Forest",
+   "type": "Basic Land — Forest",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Godless Shrine",
+   "type": "Land — Plains Swamp",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Hallowed Fountain",
+   "type": "Land — Plains Island",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Horizon of Progress",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Island",
+   "type": "Basic Land — Island",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Isolated Chapel",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Mana Confluence",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Marsh Flats",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Meteor Crater",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Misty Rainforest",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Overgrown Tomb",
+   "type": "Land — Swamp Forest",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Paliano, the High City",
+   "type": "Legendary Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Plains",
+   "type": "Basic Land — Plains",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Polluted Delta",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Prismatic Vista",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Reflecting Pool",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Scrubland",
+   "type": "Land — Plains Swamp",
+   "score": -9999
+  },
+  {
+   "q": 2,
+   "name": "Swamp",
+   "type": "Basic Land — Swamp",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Temple Garden",
+   "type": "Land — Forest Plains",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Thran Quarry",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Tropical Island",
+   "type": "Land — Forest Island",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Tundra",
+   "type": "Land — Plains Island",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Underground Sea",
+   "type": "Land — Island Swamp",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Verdant Catacombs",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Watery Grave",
+   "type": "Land — Island Swamp",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Windswept Heath",
+   "type": "Land",
+   "score": -9999
+  }
+ ],
+ "spells": [
+  {
+   "q": 1,
+   "name": "Mox Amber",
+   "cmc": 0,
+   "role": "ramp",
+   "score": 149
+  },
+  {
+   "q": 1,
+   "name": "Mox Diamond",
+   "cmc": 0,
+   "role": "ramp",
+   "score": 157
+  },
+  {
+   "q": 1,
+   "name": "An Offer You Can't Refuse",
+   "cmc": 1,
+   "role": "refill",
+   "score": 148
+  },
+  {
+   "q": 1,
+   "name": "Birds of Paradise",
+   "cmc": 1,
+   "role": "refill",
+   "score": 145
+  },
+  {
+   "q": 1,
+   "name": "Chain of Vapor",
+   "cmc": 1,
+   "role": "removal",
+   "score": 116
+  },
+  {
+   "q": 1,
+   "name": "Enlightened Tutor",
+   "cmc": 1,
+   "role": "tutor",
+   "score": 161
+  },
+  {
+   "q": 1,
+   "name": "Esper Sentinel",
+   "cmc": 1,
+   "role": "draw",
+   "score": 210
+  },
+  {
+   "q": 1,
+   "name": "Mockingbird",
+   "cmc": 1,
+   "role": "refill",
+   "score": 146
+  },
+  {
+   "q": 1,
+   "name": "Mystic Remora",
+   "cmc": 1,
+   "role": "draw",
+   "score": 199
+  },
+  {
+   "q": 1,
+   "name": "Mystical Tutor",
+   "cmc": 1,
+   "role": "tutor",
+   "score": 135
+  },
+  {
+   "q": 1,
+   "name": "Pongify",
+   "cmc": 1,
+   "role": "removal",
+   "score": 118
+  },
+  {
+   "q": 1,
+   "name": "Rapid Hybridization",
+   "cmc": 1,
+   "role": "removal",
+   "score": 117
+  },
+  {
+   "q": 1,
+   "name": "Sol Ring",
+   "cmc": 1,
+   "role": "ramp",
+   "score": 151
+  },
+  {
+   "q": 1,
+   "name": "Swan Song",
+   "cmc": 1,
+   "role": "protection",
+   "score": 171
+  },
+  {
+   "q": 1,
+   "name": "Swords to Plowshares",
+   "cmc": 1,
+   "role": "removal",
+   "score": 123
+  },
+  {
+   "q": 1,
+   "name": "Vampiric Tutor",
+   "cmc": 1,
+   "role": "tutor",
+   "score": 163
+  },
+  {
+   "q": 1,
+   "name": "Arcane Denial",
+   "cmc": 2,
+   "role": "protection",
+   "score": 158
+  },
+  {
+   "q": 1,
+   "name": "Arcane Signet",
+   "cmc": 2,
+   "role": "fixing-floor",
+   "score": 155
+  },
+  {
+   "q": 1,
+   "name": "Assassin's Trophy",
+   "cmc": 2,
+   "role": "removal",
+   "score": 113
+  },
+  {
+   "q": 1,
+   "name": "Azorius Signet",
+   "cmc": 2,
+   "role": "fixing-floor",
+   "score": 119
+  },
+  {
+   "q": 1,
+   "name": "Borne Upon a Wind",
+   "cmc": 2,
+   "role": "upgrade",
+   "score": 147
+  },
+  {
+   "q": 1,
+   "name": "Cyclonic Rift",
+   "cmc": 2,
+   "role": "board_wipe",
+   "score": 120
+  },
+  {
+   "q": 1,
+   "name": "Demonic Tutor",
+   "cmc": 2,
+   "role": "tutor",
+   "score": 166
+  },
+  {
+   "q": 1,
+   "name": "Diabolic Intent",
+   "cmc": 2,
+   "role": "tutor",
+   "score": 133
+  },
+  {
+   "q": 1,
+   "name": "Dimir Signet",
+   "cmc": 2,
+   "role": "fixing-floor",
+   "score": 120
+  },
+  {
+   "q": 1,
+   "name": "Faerie Mastermind",
+   "cmc": 2,
+   "role": "draw",
+   "score": 198
+  },
+  {
+   "q": 1,
+   "name": "Fellwar Stone",
+   "cmc": 2,
+   "role": "fixing-floor",
+   "score": 108
+  },
+  {
+   "q": 1,
+   "name": "Grand Abolisher",
+   "cmc": 2,
+   "role": "utility",
+   "score": 153
+  },
+  {
+   "q": 1,
+   "name": "Idol of Oblivion",
+   "cmc": 2,
+   "role": "draw",
+   "score": 166
+  },
+  {
+   "q": 1,
+   "name": "Mind Stone",
+   "cmc": 2,
+   "role": "fixing-floor",
+   "score": 116
+  },
+  {
+   "q": 1,
+   "name": "Orcish Bowmasters",
+   "cmc": 2,
+   "role": "removal",
+   "score": 115
+  },
+  {
+   "q": 1,
+   "name": "Reality Shift",
+   "cmc": 2,
+   "role": "removal",
+   "score": 119
+  },
+  {
+   "q": 1,
+   "name": "Sram, Senior Edificer",
+   "cmc": 2,
+   "role": "refill",
+   "score": 145
+  },
+  {
+   "q": 1,
+   "name": "Tainted Pact",
+   "cmc": 2,
+   "role": "utility",
+   "score": 156
+  },
+  {
+   "q": 1,
+   "name": "Talisman of Curiosity",
+   "cmc": 2,
+   "role": "fixing-floor",
+   "score": 99
+  },
+  {
+   "q": 1,
+   "name": "Talisman of Dominance",
+   "cmc": 2,
+   "role": "fixing-floor",
+   "score": 110
+  },
+  {
+   "q": 1,
+   "name": "Talisman of Progress",
+   "cmc": 2,
+   "role": "fixing-floor",
+   "score": 100
+  },
+  {
+   "q": 1,
+   "name": "Tataru Taru",
+   "cmc": 2,
+   "role": "draw",
+   "score": 181
+  },
+  {
+   "q": 1,
+   "name": "Wan Shi Tong, Librarian",
+   "cmc": 2,
+   "role": "draw",
+   "score": 159
+  },
+  {
+   "q": 1,
+   "name": "Ayara, First of Locthwain",
+   "cmc": 3,
+   "role": "win_condition",
+   "score": 144
+  },
+  {
+   "q": 1,
+   "name": "Beast Within",
+   "cmc": 3,
+   "role": "removal",
+   "score": 143
+  },
+  {
+   "q": 1,
+   "name": "Black Market Connections",
+   "cmc": 3,
+   "role": "draw",
+   "score": 162
+  },
+  {
+   "q": 1,
+   "name": "Braids, Arisen Nightmare",
+   "cmc": 3,
+   "role": "draw",
+   "score": 160
+  },
+  {
+   "q": 1,
+   "name": "Fierce Guardianship",
+   "cmc": 3,
+   "role": "protection",
+   "score": 158
+  },
+  {
+   "q": 1,
+   "name": "Frantic Search",
+   "cmc": 3,
+   "role": "draw",
+   "score": 158
+  },
+  {
+   "q": 1,
+   "name": "Garruk's Uprising",
+   "cmc": 3,
+   "role": "draw",
+   "score": 201
+  },
+  {
+   "q": 1,
+   "name": "Morbid Opportunist",
+   "cmc": 3,
+   "role": "draw",
+   "score": 165
+  },
+  {
+   "q": 1,
+   "name": "Phyrexian Arena",
+   "cmc": 3,
+   "role": "draw",
+   "score": 179
+  },
+  {
+   "q": 1,
+   "name": "Ranger-Captain of Eos",
+   "cmc": 3,
+   "role": "tutor",
+   "score": 131
+  },
+  {
+   "q": 1,
+   "name": "Rhystic Study",
+   "cmc": 3,
+   "role": "draw",
+   "score": 204
+  },
+  {
+   "q": 1,
+   "name": "Selvala, Heart of the Wilds",
+   "cmc": 3,
+   "role": "refill",
+   "score": 145
+  },
+  {
+   "q": 1,
+   "name": "Welcoming Vampire",
+   "cmc": 3,
+   "role": "draw",
+   "score": 160
+  },
+  {
+   "q": 1,
+   "name": "Archmage Emeritus",
+   "cmc": 4,
+   "role": "draw",
+   "score": 165
+  },
+  {
+   "q": 1,
+   "name": "Beast Whisperer",
+   "cmc": 4,
+   "role": "draw",
+   "score": 165
+  },
+  {
+   "q": 1,
+   "name": "Bident of Thassa",
+   "cmc": 4,
+   "role": "upgrade",
+   "score": 145
+  },
+  {
+   "q": 1,
+   "name": "Exemplar of Light",
+   "cmc": 4,
+   "role": "win_condition",
+   "score": 145
+  },
+  {
+   "q": 1,
+   "name": "Guardian Project",
+   "cmc": 4,
+   "role": "upgrade",
+   "score": 145
+  },
+  {
+   "q": 1,
+   "name": "Mirkwood Bats",
+   "cmc": 4,
+   "role": "win_condition",
+   "score": 152
+  },
+  {
+   "q": 1,
+   "name": "Smothering Tithe",
+   "cmc": 4,
+   "role": "ramp",
+   "score": 178
+  },
+  {
+   "q": 1,
+   "name": "Solemn Simulacrum",
+   "cmc": 4,
+   "role": "ramp",
+   "score": 158
+  },
+  {
+   "q": 1,
+   "name": "Toski, Bearer of Secrets",
+   "cmc": 4,
+   "role": "upgrade",
+   "score": 145
+  },
+  {
+   "q": 1,
+   "name": "Elspeth, Sun's Champion",
+   "cmc": 6,
+   "role": "board_wipe",
+   "score": 96
+  },
+  {
+   "q": 1,
+   "name": "Liliana, Dreadhorde General",
+   "cmc": 6,
+   "role": "removal",
+   "score": 124
+  },
+  {
+   "q": 1,
+   "name": "Summon: Bahamut",
+   "cmc": 9,
+   "role": "removal",
+   "score": 112
+  },
+  {
+   "q": 1,
+   "name": "The Great Henge",
+   "cmc": 9,
+   "role": "ramp",
+   "score": 160
+  }
+ ]
+}

@@ -1,0 +1,699 @@
+{
+ "metrics": {
+  "label": "atraxa",
+  "strategy": "superfriends",
+  "size": 99,
+  "lands": 34,
+  "mdfcSpells": 4,
+  "basics": 8,
+  "untapped": 34,
+  "untappedShare": 1,
+  "sources": {
+   "B": 19,
+   "G": 19,
+   "U": 18,
+   "W": 19
+  },
+  "healthSources": {
+   "W": 25,
+   "U": 24,
+   "B": 27,
+   "R": 12,
+   "G": 28
+  },
+  "honestRamp": 13,
+  "avgMv": 3.52,
+  "ms": 1286,
+  "price": {
+   "total": 2591.3,
+   "overBudget": false
+  },
+  "bracket": {
+   "target": null,
+   "result": 2
+  }
+ },
+ "lands": [
+  {
+   "q": 1,
+   "name": "Bayou",
+   "type": "Land — Swamp Forest",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Breeding Pool",
+   "type": "Land — Forest Island",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Bridgeworks Battle // Tanglespan Bridgeworks",
+   "type": "Sorcery // Land",
+   "score": 98
+  },
+  {
+   "q": 1,
+   "name": "City of Brass",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Command Tower",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Disciple of Freyalise // Garden of Freyalise",
+   "type": "Creature — Elf Druid // Land",
+   "score": 112
+  },
+  {
+   "q": 1,
+   "name": "Exotic Orchard",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Flooded Strand",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 2,
+   "name": "Forest",
+   "type": "Basic Land — Forest",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Godless Shrine",
+   "type": "Land — Plains Swamp",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Hallowed Fountain",
+   "type": "Land — Plains Island",
+   "score": -9999
+  },
+  {
+   "q": 2,
+   "name": "Island",
+   "type": "Basic Land — Island",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Mana Confluence",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Marsh Flats",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Misty Rainforest",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Murmuring Bosk",
+   "type": "Land — Forest",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Overgrown Tomb",
+   "type": "Land — Swamp Forest",
+   "score": -9999
+  },
+  {
+   "q": 2,
+   "name": "Plains",
+   "type": "Basic Land — Plains",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Polluted Delta",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Savannah",
+   "type": "Land — Forest Plains",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Scrubland",
+   "type": "Land — Plains Swamp",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Sink into Stupor // Soporific Springs",
+   "type": "Instant // Land",
+   "score": 135
+  },
+  {
+   "q": 1,
+   "name": "Starting Town",
+   "type": "Land — Town",
+   "score": -9999
+  },
+  {
+   "q": 2,
+   "name": "Swamp",
+   "type": "Basic Land — Swamp",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Temple Garden",
+   "type": "Land — Forest Plains",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Temple of the Dragon Queen",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Three Tree City",
+   "type": "Legendary Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Tropical Island",
+   "type": "Land — Forest Island",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Tundra",
+   "type": "Land — Plains Island",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Turntimber Symbiosis // Turntimber, Serpentine Wood",
+   "type": "Sorcery // Land",
+   "score": 111
+  },
+  {
+   "q": 1,
+   "name": "Underground Sea",
+   "type": "Land — Island Swamp",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Verdant Catacombs",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Watery Grave",
+   "type": "Land — Island Swamp",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Windswept Heath",
+   "type": "Land",
+   "score": -9999
+  }
+ ],
+ "spells": [
+  {
+   "q": 1,
+   "name": "Everflowing Chalice",
+   "cmc": 0,
+   "role": "",
+   "score": 156
+  },
+  {
+   "q": 1,
+   "name": "Mox Amber",
+   "cmc": 0,
+   "role": "",
+   "score": 136
+  },
+  {
+   "q": 1,
+   "name": "Walking Ballista",
+   "cmc": 0,
+   "role": "payoff",
+   "score": 129
+  },
+  {
+   "q": 1,
+   "name": "Skullclamp",
+   "cmc": 1,
+   "role": "draw",
+   "score": 181
+  },
+  {
+   "q": 1,
+   "name": "Sol Ring",
+   "cmc": 1,
+   "role": "ramp",
+   "score": 169
+  },
+  {
+   "q": 1,
+   "name": "Arcane Signet",
+   "cmc": 2,
+   "role": "fixing-floor",
+   "score": 160
+  },
+  {
+   "q": 1,
+   "name": "Cankerbloom",
+   "cmc": 2,
+   "role": "removal",
+   "score": 180
+  },
+  {
+   "q": 1,
+   "name": "Contagion Clasp",
+   "cmc": 2,
+   "role": "payoff",
+   "score": 129
+  },
+  {
+   "q": 1,
+   "name": "Deadly Dispute",
+   "cmc": 2,
+   "role": "ramp",
+   "score": 203
+  },
+  {
+   "q": 1,
+   "name": "Feed the Swarm",
+   "cmc": 2,
+   "role": "removal",
+   "score": 158
+  },
+  {
+   "q": 1,
+   "name": "Idol of Oblivion",
+   "cmc": 2,
+   "role": "draw",
+   "score": 196
+  },
+  {
+   "q": 1,
+   "name": "Ledger Shredder",
+   "cmc": 2,
+   "role": "",
+   "score": 164
+  },
+  {
+   "q": 1,
+   "name": "Mind Stone",
+   "cmc": 2,
+   "role": "fixing-floor",
+   "score": 188
+  },
+  {
+   "q": 1,
+   "name": "Obsessive Pursuit",
+   "cmc": 2,
+   "role": "",
+   "score": 172
+  },
+  {
+   "q": 1,
+   "name": "Origin of Metalbending",
+   "cmc": 2,
+   "role": "removal",
+   "score": 135
+  },
+  {
+   "q": 1,
+   "name": "Piper Wright, Publick Reporter",
+   "cmc": 2,
+   "role": "",
+   "score": 155
+  },
+  {
+   "q": 1,
+   "name": "Talisman of Dominance",
+   "cmc": 2,
+   "role": "fixing-floor",
+   "score": 170
+  },
+  {
+   "q": 1,
+   "name": "Talisman of Hierarchy",
+   "cmc": 2,
+   "role": "fixing-floor",
+   "score": 170
+  },
+  {
+   "q": 1,
+   "name": "Thought Vessel",
+   "cmc": 2,
+   "role": "",
+   "score": 155
+  },
+  {
+   "q": 1,
+   "name": "Thrummingbird",
+   "cmc": 2,
+   "role": "payoff",
+   "score": 180
+  },
+  {
+   "q": 1,
+   "name": "Archdruid's Charm",
+   "cmc": 3,
+   "role": "removal",
+   "score": 148
+  },
+  {
+   "q": 1,
+   "name": "Black Market Connections",
+   "cmc": 3,
+   "role": "draw",
+   "score": 216
+  },
+  {
+   "q": 1,
+   "name": "Bridgeworks Battle // Tanglespan Bridgeworks",
+   "cmc": 3,
+   "role": "",
+   "score": 98
+  },
+  {
+   "q": 1,
+   "name": "Brokers Ascendancy",
+   "cmc": 3,
+   "role": "",
+   "score": 134
+  },
+  {
+   "q": 1,
+   "name": "Evolution Sage",
+   "cmc": 3,
+   "role": "payoff",
+   "score": 189
+  },
+  {
+   "q": 1,
+   "name": "Flux Channeler",
+   "cmc": 3,
+   "role": "",
+   "score": 165
+  },
+  {
+   "q": 1,
+   "name": "Garruk's Uprising",
+   "cmc": 3,
+   "role": "draw",
+   "score": 201
+  },
+  {
+   "q": 1,
+   "name": "Ichormoon Gauntlet",
+   "cmc": 3,
+   "role": "",
+   "score": 110
+  },
+  {
+   "q": 1,
+   "name": "Kaito, Cunning Infiltrator",
+   "cmc": 3,
+   "role": "",
+   "score": 148
+  },
+  {
+   "q": 1,
+   "name": "Orzhov Advokist",
+   "cmc": 3,
+   "role": "",
+   "score": 109
+  },
+  {
+   "q": 1,
+   "name": "Sink into Stupor // Soporific Springs",
+   "cmc": 3,
+   "role": "",
+   "score": 135
+  },
+  {
+   "q": 1,
+   "name": "Stroke of Midnight",
+   "cmc": 3,
+   "role": "removal",
+   "score": 137
+  },
+  {
+   "q": 1,
+   "name": "Tezzeret, Cruel Captain",
+   "cmc": 3,
+   "role": "tutor",
+   "score": 141
+  },
+  {
+   "q": 1,
+   "name": "Tireless Provisioner",
+   "cmc": 3,
+   "role": "",
+   "score": 168
+  },
+  {
+   "q": 1,
+   "name": "Tireless Tracker",
+   "cmc": 3,
+   "role": "draw",
+   "score": 194
+  },
+  {
+   "q": 1,
+   "name": "Ajani, Strength of the Pride",
+   "cmc": 4,
+   "role": "",
+   "score": 142
+  },
+  {
+   "q": 1,
+   "name": "Damnation",
+   "cmc": 4,
+   "role": "board_wipe",
+   "score": 102
+  },
+  {
+   "q": 1,
+   "name": "Ezuri, Stalker of Spheres",
+   "cmc": 4,
+   "role": "draw",
+   "score": 186
+  },
+  {
+   "q": 1,
+   "name": "Kaito, Dancing Shadow",
+   "cmc": 4,
+   "role": "",
+   "score": 140
+  },
+  {
+   "q": 1,
+   "name": "Lethal Scheme",
+   "cmc": 4,
+   "role": "removal",
+   "score": 137
+  },
+  {
+   "q": 1,
+   "name": "Night of the Sweets' Revenge",
+   "cmc": 4,
+   "role": "board_wipe",
+   "score": 118
+  },
+  {
+   "q": 1,
+   "name": "Pitiless Plunderer",
+   "cmc": 4,
+   "role": "",
+   "score": 167
+  },
+  {
+   "q": 1,
+   "name": "Semester's End",
+   "cmc": 4,
+   "role": "",
+   "score": 110
+  },
+  {
+   "q": 1,
+   "name": "Spark Double",
+   "cmc": 4,
+   "role": "",
+   "score": 120
+  },
+  {
+   "q": 1,
+   "name": "Tekuthal, Inquiry Dominus",
+   "cmc": 4,
+   "role": "payoff",
+   "score": 222
+  },
+  {
+   "q": 1,
+   "name": "Tezzeret's Gambit",
+   "cmc": 4,
+   "role": "payoff",
+   "score": 184
+  },
+  {
+   "q": 1,
+   "name": "The Aetherspark",
+   "cmc": 4,
+   "role": "",
+   "score": 142
+  },
+  {
+   "q": 1,
+   "name": "Tyvar Kell",
+   "cmc": 4,
+   "role": "win_condition",
+   "score": 160
+  },
+  {
+   "q": 1,
+   "name": "Elspeth Conquers Death",
+   "cmc": 5,
+   "role": "",
+   "score": 107
+  },
+  {
+   "q": 1,
+   "name": "Elspeth, Storm Slayer",
+   "cmc": 5,
+   "role": "",
+   "score": 131
+  },
+  {
+   "q": 1,
+   "name": "Freyalise, Llanowar's Fury",
+   "cmc": 5,
+   "role": "removal",
+   "score": 154
+  },
+  {
+   "q": 1,
+   "name": "Inexorable Tide",
+   "cmc": 5,
+   "role": "payoff",
+   "score": 161
+  },
+  {
+   "q": 1,
+   "name": "Lolth, Spider Queen",
+   "cmc": 5,
+   "role": "",
+   "score": 142
+  },
+  {
+   "q": 1,
+   "name": "Promise of Loyalty",
+   "cmc": 5,
+   "role": "",
+   "score": 115
+  },
+  {
+   "q": 1,
+   "name": "Sphere of Safety",
+   "cmc": 5,
+   "role": "",
+   "score": 115
+  },
+  {
+   "q": 1,
+   "name": "Teferi, Temporal Pilgrim",
+   "cmc": 5,
+   "role": "win_condition",
+   "score": 165
+  },
+  {
+   "q": 1,
+   "name": "Austere Command",
+   "cmc": 6,
+   "role": "board_wipe",
+   "score": 148
+  },
+  {
+   "q": 1,
+   "name": "Bane of Progress",
+   "cmc": 6,
+   "role": "board_wipe",
+   "score": 145
+  },
+  {
+   "q": 1,
+   "name": "Disciple of Freyalise // Garden of Freyalise",
+   "cmc": 6,
+   "role": "",
+   "score": 112
+  },
+  {
+   "q": 1,
+   "name": "Season of Gathering",
+   "cmc": 6,
+   "role": "board_wipe",
+   "score": 146
+  },
+  {
+   "q": 1,
+   "name": "Vraska, Betrayal's Sting",
+   "cmc": 6,
+   "role": "ramp",
+   "score": 201
+  },
+  {
+   "q": 1,
+   "name": "Avenger of Zendikar",
+   "cmc": 7,
+   "role": "win_condition",
+   "score": 167
+  },
+  {
+   "q": 1,
+   "name": "Turntimber Symbiosis // Turntimber, Serpentine Wood",
+   "cmc": 7,
+   "role": "",
+   "score": 111
+  },
+  {
+   "q": 1,
+   "name": "Ugin, Eye of the Storms",
+   "cmc": 7,
+   "role": "",
+   "score": 124
+  },
+  {
+   "q": 1,
+   "name": "The Great Henge",
+   "cmc": 9,
+   "role": "ramp",
+   "score": 186
+  }
+ ]
+}

@@ -1,0 +1,631 @@
+{
+ "metrics": {
+  "label": "tatyova-arena",
+  "strategy": "midrange",
+  "size": 99,
+  "lands": 34,
+  "mdfcSpells": 4,
+  "basics": 17,
+  "untapped": 34,
+  "untappedShare": 1,
+  "sources": {
+   "G": 24,
+   "U": 18
+  },
+  "healthSources": {
+   "W": 6,
+   "U": 23,
+   "B": 5,
+   "R": 6,
+   "G": 32
+  },
+  "honestRamp": 26,
+  "avgMv": 2.98,
+  "ms": 2689,
+  "price": {
+   "total": 0,
+   "overBudget": false
+  },
+  "bracket": {
+   "target": null,
+   "result": 4
+  }
+ },
+ "lands": [
+  {
+   "q": 1,
+   "name": "Archway of Innovation",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Breeding Pool",
+   "type": "Land — Forest Island",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Bridgeworks Battle // Tanglespan Bridgeworks",
+   "type": "Sorcery // Land",
+   "score": 93
+  },
+  {
+   "q": 1,
+   "name": "Command Tower",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Disciple of Freyalise // Garden of Freyalise",
+   "type": "Creature — Elf Druid // Land",
+   "score": 92
+  },
+  {
+   "q": 1,
+   "name": "Dreamroot Cascade",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Flooded Strand",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 13,
+   "name": "Forest",
+   "type": "Basic Land — Forest",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Hinterland Harbor",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Hydroelectric Specimen // Hydroelectric Laboratory",
+   "type": "Creature — Weird // Land",
+   "score": 93
+  },
+  {
+   "q": 4,
+   "name": "Island",
+   "type": "Basic Land — Island",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Kishla Village",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Mistrise Village",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Misty Rainforest",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Multiversal Passage",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Otawara, Soaring City",
+   "type": "Legendary Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Scalding Tarn",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Seat of the Synod",
+   "type": "Artifact Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Sink into Stupor // Soporific Springs",
+   "type": "Instant // Land",
+   "score": 106
+  },
+  {
+   "q": 1,
+   "name": "Thran Portal",
+   "type": "Land — Gate",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Vineglimmer Snarl",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Willowrush Verge",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Yavimaya Coast",
+   "type": "Land",
+   "score": -9999
+  }
+ ],
+ "spells": [
+  {
+   "q": 1,
+   "name": "An Offer You Can't Refuse",
+   "cmc": 1,
+   "role": "arsenal:community_top",
+   "score": 146
+  },
+  {
+   "q": 1,
+   "name": "Burgeoning",
+   "cmc": 1,
+   "role": "payoff",
+   "score": 93
+  },
+  {
+   "q": 1,
+   "name": "Bushwhack",
+   "cmc": 1,
+   "role": "upgrade",
+   "score": 90
+  },
+  {
+   "q": 1,
+   "name": "Crop Rotation",
+   "cmc": 1,
+   "role": "arsenal:community_top",
+   "score": 140
+  },
+  {
+   "q": 1,
+   "name": "Elvish Mystic",
+   "cmc": 1,
+   "role": "utility",
+   "score": 108
+  },
+  {
+   "q": 1,
+   "name": "Into the Flood Maw",
+   "cmc": 1,
+   "role": "upgrade",
+   "score": 91
+  },
+  {
+   "q": 1,
+   "name": "Llanowar Elves",
+   "cmc": 1,
+   "role": "arsenal:community_top",
+   "score": 133
+  },
+  {
+   "q": 1,
+   "name": "Mystical Tutor",
+   "cmc": 1,
+   "role": "tutor",
+   "score": 116
+  },
+  {
+   "q": 1,
+   "name": "Pongify",
+   "cmc": 1,
+   "role": "arsenal:community_top",
+   "score": 114
+  },
+  {
+   "q": 1,
+   "name": "Rapid Hybridization",
+   "cmc": 1,
+   "role": "arsenal:staple_removal",
+   "score": 113
+  },
+  {
+   "q": 1,
+   "name": "Swan Song",
+   "cmc": 1,
+   "role": "arsenal:community_top",
+   "score": 121
+  },
+  {
+   "q": 1,
+   "name": "Worldly Tutor",
+   "cmc": 1,
+   "role": "tutor",
+   "score": 116
+  },
+  {
+   "q": 1,
+   "name": "Arcane Signet",
+   "cmc": 2,
+   "role": "arsenal:community_top",
+   "score": 145
+  },
+  {
+   "q": 1,
+   "name": "Basking Broodscale",
+   "cmc": 2,
+   "role": "utility",
+   "score": 111
+  },
+  {
+   "q": 1,
+   "name": "Bristly Bill, Spine Sower",
+   "cmc": 2,
+   "role": "synergy",
+   "score": 111
+  },
+  {
+   "q": 1,
+   "name": "Counterspell",
+   "cmc": 2,
+   "role": "arsenal:community_top",
+   "score": 158
+  },
+  {
+   "q": 1,
+   "name": "Explore",
+   "cmc": 2,
+   "role": "arsenal:community_top",
+   "score": 157
+  },
+  {
+   "q": 1,
+   "name": "Farseek",
+   "cmc": 2,
+   "role": "arsenal:community_top",
+   "score": 163
+  },
+  {
+   "q": 1,
+   "name": "Heroic Intervention",
+   "cmc": 2,
+   "role": "arsenal:community_top",
+   "score": 118
+  },
+  {
+   "q": 1,
+   "name": "Kenrith's Transformation",
+   "cmc": 2,
+   "role": "removal",
+   "score": 96
+  },
+  {
+   "q": 1,
+   "name": "Mind Stone",
+   "cmc": 2,
+   "role": "arsenal:staple_ramp",
+   "score": 138
+  },
+  {
+   "q": 1,
+   "name": "Negate",
+   "cmc": 2,
+   "role": "arsenal:community_top",
+   "score": 98
+  },
+  {
+   "q": 1,
+   "name": "Proft's Eidetic Memory",
+   "cmc": 2,
+   "role": "upgrade",
+   "score": 125
+  },
+  {
+   "q": 1,
+   "name": "Rampant Growth",
+   "cmc": 2,
+   "role": "arsenal:community_top",
+   "score": 159
+  },
+  {
+   "q": 1,
+   "name": "Sylvan Library",
+   "cmc": 2,
+   "role": "arsenal:staple_draw",
+   "score": 136
+  },
+  {
+   "q": 1,
+   "name": "Wan Shi Tong, Librarian",
+   "cmc": 2,
+   "role": "upgrade",
+   "score": 126
+  },
+  {
+   "q": 1,
+   "name": "Ashnod's Altar",
+   "cmc": 3,
+   "role": "arsenal:collection_substitute",
+   "score": 123
+  },
+  {
+   "q": 1,
+   "name": "Beast Within",
+   "cmc": 3,
+   "role": "arsenal:community_top",
+   "score": 176
+  },
+  {
+   "q": 1,
+   "name": "Bridgeworks Battle // Tanglespan Bridgeworks",
+   "cmc": 3,
+   "role": "",
+   "score": 93
+  },
+  {
+   "q": 1,
+   "name": "Chromatic Lantern",
+   "cmc": 3,
+   "role": "utility",
+   "score": 108
+  },
+  {
+   "q": 1,
+   "name": "Cultivate",
+   "cmc": 3,
+   "role": "arsenal:community_top",
+   "score": 175
+  },
+  {
+   "q": 1,
+   "name": "Entish Restoration",
+   "cmc": 3,
+   "role": "utility",
+   "score": 113
+  },
+  {
+   "q": 1,
+   "name": "Eternal Witness",
+   "cmc": 3,
+   "role": "arsenal:community_top",
+   "score": 123
+  },
+  {
+   "q": 1,
+   "name": "Evolution Sage",
+   "cmc": 3,
+   "role": "synergy",
+   "score": 114
+  },
+  {
+   "q": 1,
+   "name": "Garruk's Uprising",
+   "cmc": 3,
+   "role": "arsenal:staple_draw",
+   "score": 144
+  },
+  {
+   "q": 1,
+   "name": "Hydroelectric Specimen // Hydroelectric Laboratory",
+   "cmc": 3,
+   "role": "",
+   "score": 93
+  },
+  {
+   "q": 1,
+   "name": "Inspiring Call",
+   "cmc": 3,
+   "role": "upgrade",
+   "score": 125
+  },
+  {
+   "q": 1,
+   "name": "Kaito, Cunning Infiltrator",
+   "cmc": 3,
+   "role": "upgrade",
+   "score": 134
+  },
+  {
+   "q": 1,
+   "name": "Mossborn Hydra",
+   "cmc": 3,
+   "role": "arsenal:community_top",
+   "score": 139
+  },
+  {
+   "q": 1,
+   "name": "Outcaster Trailblazer",
+   "cmc": 3,
+   "role": "utility",
+   "score": 107
+  },
+  {
+   "q": 1,
+   "name": "Reclamation Sage",
+   "cmc": 3,
+   "role": "arsenal:staple_removal",
+   "score": 103
+  },
+  {
+   "q": 1,
+   "name": "Selvala, Heart of the Wilds",
+   "cmc": 3,
+   "role": "arsenal:collection_substitute",
+   "score": 125
+  },
+  {
+   "q": 1,
+   "name": "Sink into Stupor // Soporific Springs",
+   "cmc": 3,
+   "role": "",
+   "score": 106
+  },
+  {
+   "q": 1,
+   "name": "Snapping Voidcraw",
+   "cmc": 3,
+   "role": "arsenal:collection_substitute",
+   "score": 117
+  },
+  {
+   "q": 1,
+   "name": "Springbloom Druid",
+   "cmc": 3,
+   "role": "utility",
+   "score": 109
+  },
+  {
+   "q": 1,
+   "name": "Summon: Fenrir",
+   "cmc": 3,
+   "role": "arsenal:collection_substitute",
+   "score": 116
+  },
+  {
+   "q": 1,
+   "name": "Tireless Provisioner",
+   "cmc": 3,
+   "role": "arsenal:community_top",
+   "score": 210
+  },
+  {
+   "q": 1,
+   "name": "Tribute to the World Tree",
+   "cmc": 3,
+   "role": "utility",
+   "score": 139
+  },
+  {
+   "q": 1,
+   "name": "Troyan, Gutsy Explorer",
+   "cmc": 3,
+   "role": "utility",
+   "score": 115
+  },
+  {
+   "q": 1,
+   "name": "Weather Maker",
+   "cmc": 3,
+   "role": "removal",
+   "score": 94
+  },
+  {
+   "q": 1,
+   "name": "Wood Elves",
+   "cmc": 3,
+   "role": "arsenal:staple_ramp",
+   "score": 120
+  },
+  {
+   "q": 1,
+   "name": "Archmage Emeritus",
+   "cmc": 4,
+   "role": "upgrade",
+   "score": 138
+  },
+  {
+   "q": 1,
+   "name": "Eureka Moment",
+   "cmc": 4,
+   "role": "utility",
+   "score": 109
+  },
+  {
+   "q": 1,
+   "name": "Hedron Archive",
+   "cmc": 4,
+   "role": "arsenal:staple_ramp",
+   "score": 112
+  },
+  {
+   "q": 1,
+   "name": "Solemn Simulacrum",
+   "cmc": 4,
+   "role": "arsenal:staple_ramp",
+   "score": 166
+  },
+  {
+   "q": 1,
+   "name": "The One Ring",
+   "cmc": 4,
+   "role": "arsenal:staple_draw",
+   "score": 169
+  },
+  {
+   "q": 1,
+   "name": "Elfsworn Giant",
+   "cmc": 5,
+   "role": "win_condition",
+   "score": 107
+  },
+  {
+   "q": 1,
+   "name": "Zuko's Exile",
+   "cmc": 5,
+   "role": "",
+   "score": 85
+  },
+  {
+   "q": 1,
+   "name": "Disciple of Freyalise // Garden of Freyalise",
+   "cmc": 6,
+   "role": "",
+   "score": 92
+  },
+  {
+   "q": 1,
+   "name": "Primeval Bounty",
+   "cmc": 6,
+   "role": "synergy",
+   "score": 129
+  },
+  {
+   "q": 1,
+   "name": "Rampaging Baloths",
+   "cmc": 6,
+   "role": "arsenal:community_top",
+   "score": 188
+  },
+  {
+   "q": 1,
+   "name": "Glacier Godmaw",
+   "cmc": 7,
+   "role": "win_condition",
+   "score": 107
+  },
+  {
+   "q": 1,
+   "name": "Turtles in Time",
+   "cmc": 7,
+   "role": "upgrade",
+   "score": 21
+  },
+  {
+   "q": 1,
+   "name": "Sapling Nursery",
+   "cmc": 8,
+   "role": "protection",
+   "score": 108
+  },
+  {
+   "q": 1,
+   "name": "The Great Henge",
+   "cmc": 9,
+   "role": "arsenal:staple_draw",
+   "score": 178
+  }
+ ]
+}

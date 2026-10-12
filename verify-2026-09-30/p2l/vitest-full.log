@@ -1,0 +1,198 @@
+
+[1m[46m RUN [49m[22m [36mv4.0.18 [39m[90mC:/Users/QuLeR/mtg-wt-p2l[39m
+
+ [32m✓[39m tests/deck-builder-p1.test.ts [2m([22m[2m6 tests[22m[2m)[22m[33m 1390[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/sideboard-guide.test.ts [2m([22m[2m17 tests[22m[2m)[22m[33m 1874[2mms[22m[39m
+ [32m✓[39m tests/collection-build-landbase.test.ts [2m([22m[2m9 tests[22m[2m)[22m[33m 652[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/card-alternatives.test.ts [2m([22m[2m10 tests[22m[2m)[22m[33m 2337[2mms[22m[39m
+     [33m[2m✓[22m[39m excludes unknown-price candidates only when a cap is given [33m 395[2mms[22m[39m
+     [33m[2m✓[22m[39m keeps land alternatives within the deck's colour identity [33m 804[2mms[22m[39m
+     [33m[2m✓[22m[39m excludes the target land and lands already in the deck [33m 627[2mms[22m[39m
+[90mstderr[2m | tests/collection-build-synergy-minimums.test.ts[2m > [22m[2mautoBuildDeck collection mode — synergy minimums never swap in unowned cards[2m > [22m[2mbracket 3 never swaps an unowned card in for a surplus game changer
+[22m[39m[cedh-staples] cards table returned 0 rows for commander (303 staple names looked up) — is the cards table seeded?
+
+ [32m✓[39m src/lib/__tests__/deck-score-catalog.test.ts [2m([22m[2m79 tests[22m[2m)[22m[33m 2289[2mms[22m[39m
+     [33m[2m✓[22m[39m gives every entry a hash, a knowledge level and well-formed effects [33m 2176[2mms[22m[39m
+ [32m✓[39m tests/collection-build-synergy-minimums.test.ts [2m([22m[2m3 tests[22m[2m)[22m[33m 567[2mms[22m[39m
+ [32m✓[39m tests/db.test.ts [2m([22m[2m29 tests[22m[2m)[22m[33m 3074[2mms[22m[39m
+ [32m✓[39m tests/edgar-ramp-and-wipes.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 3508[2mms[22m[39m
+     [33m[2m✓[22m[39m ramp stays at or above the archetype ramp floor, and wipes survive [33m 3506[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/web-sync.test.ts [2m([22m[2m32 tests[22m[2m)[22m[33m 3177[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/tribal-pool.test.ts [2m([22m[2m6 tests[22m[2m)[22m[33m 2977[2mms[22m[39m
+     [33m[2m✓[22m[39m includes changelings even though "ooze" never appears on them [33m 1938[2mms[22m[39m
+     [33m[2m✓[22m[39m includes "choose a creature type" support (changeling query has its own limit) [33m 962[2mms[22m[39m
+ [32m✓[39m tests/analytics-api.test.ts [2m([22m[2m6 tests[22m[2m)[22m[33m 880[2mms[22m[39m
+ [32m✓[39m tests/build-api-build.test.ts [2m([22m[2m7 tests[22m[2m)[22m[33m 3067[2mms[22m[39m
+     [33m[2m✓[22m[39m marks owned:true only for cards the caller declared owned [33m 1502[2mms[22m[39m
+     [33m[2m✓[22m[39m omits the owned key entirely for a non-collection build [33m 1556[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/land-intelligence-strategy-tags.test.ts [2m([22m[2m3 tests[22m[2m)[22m[33m 4076[2mms[22m[39m
+     [33m[2m✓[22m[39m aristocrats credits sacrifice outlets (High Market) [33m 1358[2mms[22m[39m
+     [33m[2m✓[22m[39m superfriends credits proliferate (Karn's Bastion) and walker-restricted mana at full value (Interplanar Beacon) [33m 1227[2mms[22m[39m
+     [33m[2m✓[22m[39m artifacts credits artifact lands and artifact tutors (Seat of the Synod, Inventors' Fair) [33m 1488[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/first-boot.test.ts [2m([22m[2m7 tests[22m[2m)[22m[33m 984[2mms[22m[39m
+     [33m[2m✓[22m[39m a hash produced by hashPassword verifies with verifyPassword (same format the setup wizard relies on) [33m 600[2mms[22m[39m
+     [33m[2m✓[22m[39m hashes a legacy plaintext password into the scrypt format [33m 362[2mms[22m[39m
+ [32m✓[39m tests/superfriends-walker-minimum.test.ts [2m([22m[2m4 tests[22m[2m)[22m[33m 855[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/synergy-graph.test.ts [2m([22m[2m33 tests[22m[2m)[22m[33m 680[2mms[22m[39m
+     [33m[2m✓[22m[39m scores a maximal-overlap deck at the build-api /analyze cap (600 cards) in well under a second [33m 322[2mms[22m[39m
+     [33m[2m✓[22m[39m input size is capped regardless of how many cards are submitted (20,000-card flood) [33m 322[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/land-intelligence-mono-cap.test.ts [2m([22m[2m2 tests[22m[2m)[22m[33m 1792[2mms[22m[39m
+     [33m[2m✓[22m[39m at most 2 colourless lands when a nonland card has 3 pips of the colour [33m 535[2mms[22m[39m
+     [33m[2m✓[22m[39m Northampton Farm ("exile target creature you own") is not premium removal in mono [33m 1253[2mms[22m[39m
+ [32m✓[39m tests/deck-analysis-route.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 1017[2mms[22m[39m
+ [32m✓[39m tests/build-api-gate-wiring.test.ts [2m([22m[2m11 tests[22m[2m)[22m[33m 1004[2mms[22m[39m
+     [33m[2m✓[22m[39m judges the list the optimizer would leave behind [33m 344[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/land-intelligence-mono-fetch.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 1895[2mms[22m[39m
+     [33m[2m✓[22m[39m typed fetches leave a mono deck unless land payoffs are present [33m 1893[2mms[22m[39m
+ [32m✓[39m tests/deck-builder-unpriced-price-cap.test.ts [2m([22m[2m3 tests[22m[2m)[22m[33m 333[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/deck-gate.test.ts [2m([22m[2m23 tests[22m[2m)[22m[33m 329[2mms[22m[39m
+ [32m✓[39m src/app/api/ai-suggest/__tests__/passive-mode.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 181[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/land-intelligence.test.ts [2m([22m[2m4 tests[22m[2m)[22m[33m 5367[2mms[22m[39m
+     [33m[2m✓[22m[39m two-colour deck: an off-colour typed fetch (matches only 1 of 2 colours) scores below an on-colour dual and an on-colour fetch [33m 2872[2mms[22m[39m
+     [33m[2m✓[22m[39m mono-colour deck: a typed fetch matching the single colour scores as a normal mono land (no off-colour discount) [33m 584[2mms[22m[39m
+     [33m[2m✓[22m[39m generic fetch (Evolving Wilds) keeps full deck-colour credit in a 2-colour deck, not the off-colour discount [33m 1342[2mms[22m[39m
+     [33m[2m✓[22m[39m an off-colour typed fetch is still in the pool (thinning has some value) but flagged [33m 564[2mms[22m[39m
+ [32m✓[39m tests/build-api-alternatives.test.ts [2m([22m[2m10 tests[22m[2m)[22m[33m 352[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/card-classifier-default-path-identity.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 282[2mms[22m[39m
+ [32m✓[39m tests/deck-score-wiring.test.ts [2m([22m[2m7 tests[22m[2m)[22m[33m 393[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/land-intelligence-p2l-rainbows.test.ts [2m([22m[2m8 tests[22m[2m)[22m[33m 5580[2mms[22m[39m
+     [33m[2m✓[22m[39m Glimmervoid is not worth a slot over a basic in 4 colours with no census [33m 514[2mms[22m[39m
+     [33m[2m✓[22m[39m Thran Quarry is not worth a slot over a basic in 4 colours with no census [33m 802[2mms[22m[39m
+     [33m[2m✓[22m[39m Rhystic Cave is not worth a slot over a basic in 4 colours with no census [33m 744[2mms[22m[39m
+     [33m[2m✓[22m[39m Archaeological Dig is not worth a slot over a basic in 4 colours with no census [33m 392[2mms[22m[39m
+     [33m[2m✓[22m[39m Undiscovered Paradise is not worth a slot over a basic in 4 colours with no census [33m 515[2mms[22m[39m
+     [33m[2m✓[22m[39m Forsaken City is not worth a slot over a basic in 4 colours with no census [33m 666[2mms[22m[39m
+     [33m[2m✓[22m[39m Glimmervoid / Thran Quarry clear the bar once a third of the spells feed the condition [33m 1940[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/grp-id-resolver.test.ts [2m([22m[2m15 tests[22m[2m)[22m[33m 328[2mms[22m[39m
+ [32m✓[39m tests/cedh-staples.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 235[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/platform-detect.test.ts [2m([22m[2m7 tests[22m[2m)[22m[32m 105[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/land-intelligence-p2l-singleton-basics.test.ts [2m([22m[2m2 tests[22m[2m)[22m[33m 1117[2mms[22m[39m
+     [33m[2m✓[22m[39m singletonBasics caps every basic name at 1 and still fills the land count [33m 605[2mms[22m[39m
+     [33m[2m✓[22m[39m a thin nonbasic pool (pauper) goes regular basic → snow basic → any scored land, never a duplicate name [33m 509[2mms[22m[39m
+ [32m✓[39m tests/superfriends-optimizer-adds.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 260[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/land-intelligence-p2l-mono.test.ts [2m([22m[2m2 tests[22m[2m)[22m[33m 903[2mms[22m[39m
+     [33m[2m✓[22m[39m a Krenko-shaped mono-R base seats ≤ 2 lands that do not make R [33m 331[2mms[22m[39m
+     [33m[2m✓[22m[39m "deals 1 damage to you" pain lands for the deck colour (Barbarian Ring, Fogwell's Gym) leave mono-R [33m 569[2mms[22m[39m
+ [32m✓[39m src/app/api/web-sync/__tests__/route.test.ts [2m([22m[2m15 tests[22m[2m)[22m[32m 114[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/land-intelligence-p2l-mdfc.test.ts [2m([22m[2m2 tests[22m[2m)[22m[33m 1829[2mms[22m[39m
+     [33m[2m✓[22m[39m the cap is 3 and counts land backs already picked as spells [33m 1273[2mms[22m[39m
+     [33m[2m✓[22m[39m a spell-face MDFC scores as a tapped land unless its land face pays life to enter untapped [33m 552[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/sync-commander-stats.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 116[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/meta-queries.test.ts [2m([22m[2m20 tests[22m[2m)[22m[32m 55[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/utils.test.ts [2m([22m[2m21 tests[22m[2m)[22m[32m 67[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/commander-synergy-builder-patterns.test.ts [2m([22m[2m10 tests[22m[2m)[22m[32m 46[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/card-classifier.test.ts [2m([22m[2m74 tests[22m[2m)[22m[32m 42[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/scryfall-bulk.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 52[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/deck-score-v12.test.ts [2m([22m[2m60 tests[22m[2m)[22m[32m 189[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/commander-synergy.test.ts [2m([22m[2m24 tests[22m[2m)[22m[32m 45[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/deck-score.test.ts [2m([22m[2m45 tests[22m[2m)[22m[32m 185[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/deck-gate-plan.test.ts [2m([22m[2m16 tests[22m[2m)[22m[32m 45[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/deck-ingest.test.ts [2m([22m[2m19 tests[22m[2m)[22m[32m 50[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/deck-optimizer.test.ts [2m([22m[2m14 tests[22m[2m)[22m[32m 45[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/win-conditions.test.ts [2m([22m[2m11 tests[22m[2m)[22m[32m 37[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/deck-score-input.test.ts [2m([22m[2m10 tests[22m[2m)[22m[32m 35[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/commander-synergy-default-path-identity.test.ts [2m([22m[2m12 tests[22m[2m)[22m[32m 29[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/card-classifier-strict.test.ts [2m([22m[2m16 tests[22m[2m)[22m[32m 30[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/deck-builder-budget-bracket.test.ts [2m([22m[2m22 tests[22m[2m)[22m[32m 32[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/arena-log-reader.test.ts [2m([22m[2m29 tests[22m[2m)[22m[32m 25[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/arena-game-events.test.ts [2m([22m[2m22 tests[22m[2m)[22m[32m 20[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/arena-match-contract.test.ts [2m([22m[2m51 tests[22m[2m)[22m[32m 29[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/deck-builder-dead-card.test.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 21[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/deck-validation.test.ts [2m([22m[2m34 tests[22m[2m)[22m[32m 23[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/benchmark-route.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 21[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/game-state-engine.test.ts [2m([22m[2m26 tests[22m[2m)[22m[32m 20[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/craft-list.test.ts [2m([22m[2m7 tests[22m[2m)[22m[32m 19[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/mulligan-advisor.test.ts [2m([22m[2m16 tests[22m[2m)[22m[32m 15[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/bracket.test.ts [2m([22m[2m9 tests[22m[2m)[22m[32m 19[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/deck-builder-p1-picks.test.ts [2m([22m[2m7 tests[22m[2m)[22m[32m 19[2mms[22m[39m
+ [32m✓[39m tests/edhrec.test.ts [2m([22m[2m21 tests[22m[2m)[22m[32m 18[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/overlay-integration.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 14[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/collection-ownership.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 17[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/deck-builder-walker-engine.test.ts [2m([22m[2m11 tests[22m[2m)[22m[32m 14[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/constants.test.ts [2m([22m[2m19 tests[22m[2m)[22m[32m 16[2mms[22m[39m
+ [32m✓[39m src/components/match/__tests__/match-stats.test.ts [2m([22m[2m18 tests[22m[2m)[22m[32m 17[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/deck-builder-constraints.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 17[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/ai-chat-helpers.test.ts [2m([22m[2m34 tests[22m[2m)[22m[32m 15[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/mana-sources.test.ts [2m([22m[2m24 tests[22m[2m)[22m[32m 14[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/arena-parser.test.ts [2m([22m[2m26 tests[22m[2m)[22m[32m 16[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/post-match-stats.test.ts [2m([22m[2m16 tests[22m[2m)[22m[32m 15[2mms[22m[39m
+ [32m✓[39m tests/update-card-data-price-upsert.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 15[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/decklist-normalize.test.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 13[2mms[22m[39m
+ [32m✓[39m src/hooks/__tests__/use-deck-editor.test.ts [2m([22m[2m14 tests[22m[2m)[22m[32m 14[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/deck-export.test.ts [2m([22m[2m20 tests[22m[2m)[22m[32m 13[2mms[22m[39m
+ [32m✓[39m src/components/command-center/__tests__/consultant-helpers.test.ts [2m([22m[2m15 tests[22m[2m)[22m[32m 16[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/deck-fingerprint.test.ts [2m([22m[2m25 tests[22m[2m)[22m[32m 14[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/power-level-edhpl.test.ts [2m([22m[2m14 tests[22m[2m)[22m[32m 13[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/deck-auditor-draw-count.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 11[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/benchmark-metrics.test.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 12[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/deck-builder-step4b-displaceable.test.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 17[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/deck-templates.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 15[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/deck-grouping.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 12[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/card-relevance.test.ts [2m([22m[2m17 tests[22m[2m)[22m[32m 12[2mms[22m[39m
+ [32m✓[39m tests/update-card-data-prices.test.ts [2m([22m[2m13 tests[22m[2m)[22m[32m 13[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/build-hints.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 8[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/curve-score.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 7[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/highlight-detector.test.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 9[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/power-level-deck.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 7[2mms[22m[39m
+ [32m✓[39m src/components/command-center/__tests__/coverage-selectors.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 6[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/land-math.test.ts [2m([22m[2m7 tests[22m[2m)[22m[32m 5[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/commander-legality-swap.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 6[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/consistent-mana-lands.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 6[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/deck-builder-draw-cap.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 5[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/tribal-detect.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 5[2mms[22m[39m
+ [32m✓[39m tests/build-api-resolve.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 5[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/suggestion-sources.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/land-intelligence-p2l-transform.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 6[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/deck-builder-walker-support.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m src/components/command-center/__tests__/bracket-tile.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 5[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/land-intelligence-p2l-land-target.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/land-intelligence-p2l-land-payoffs.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/land-intelligence-ranking.test.ts [2m([22m[2m15 tests[22m[2m)[22m[33m 8855[2mms[22m[39m
+     [33m[2m✓[22m[39m reveal-a-type lands are tapped without the tribe and untapped with it (Temple of the Dragon Queen, Murmuring Bosk) [33m 852[2mms[22m[39m
+     [33m[2m✓[22m[39m "two or more opponents" lands are untapped in Commander and tapped in a two-player format [33m 622[2mms[22m[39m
+     [33m[2m✓[22m[39m a check land whose named basic type is a deck colour stays untapped (Woodland Cemetery in B/G) [33m 353[2mms[22m[39m
+     [33m[2m✓[22m[39m tapped tri-fetch / Landscape sit at tier 3, below a check land [33m 1027[2mms[22m[39m
+     [33m[2m✓[22m[39m Verge, channel and artifact lands are tier 2 [33m 1894[2mms[22m[39m
+     [33m[2m✓[22m[39m a tapped land producing 3 deck colours in a 3+ colour deck moves to tier 3; a tapped 2-colour land stays tier 4 [33m 569[2mms[22m[39m
+     [33m[2m✓[22m[39m Three Tree City is colourless whenever the deck has no tribe (not only in mono) [33m 544[2mms[22m[39m
+     [33m[2m✓[22m[39m Reflecting Pool is a real 4-colour source (only the Gate-only wording is never-coloured) [33m 625[2mms[22m[39m
+     [33m[2m✓[22m[39m ranking: untapped real fixing beats conditional / literally-tapped junk in a 4-colour deck [33m 547[2mms[22m[39m
+     [33m[2m✓[22m[39m the second-heaviest colour gets its sources in a 5-colour deck (Tam: B starved at 19) [33m 507[2mms[22m[39m
+     [33m[2m✓[22m[39m only lands that clear the quality bar are selected — junk never fills the 4-5 colour quota [33m 837[2mms[22m[39m
+     [33m[2m✓[22m[39m the nonbasic count follows the candidates that clear the bar, not a flat 30 [33m 465[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/land-intelligence-mono-fixing.test.ts [2m([22m[2m31 tests[22m[2m)[22m[33m 14219[2mms[22m[39m
+     [33m[2m✓[22m[39m excludes chosen-basic-type lands (Thran Portal, Multiversal Passage) in mono-green [33m 502[2mms[22m[39m
+     [33m[2m✓[22m[39m excludes an unsatisfiable conditional dual (Kishla Village names Island/Swamp) in mono-green [33m 703[2mms[22m[39m
+     [33m[2m✓[22m[39m excludes a pain land charging life for the deck's own colour (Hashep Oasis) in mono-green [33m 778[2mms[22m[39m
+     [33m[2m✓[22m[39m excludes tapped sacrifice-search-a-basic gate lands (Cabaretti Courtyard, Brokers Hideout) in mono-green [33m 423[2mms[22m[39m
+     [33m[2m✓[22m[39m excludes any-colour lands (Command Tower) in mono-green — no upside over a basic [33m 494[2mms[22m[39m
+     [33m[2m✓[22m[39m keeps utility lands that tap for the deck colour and do something (Ba Sing Se) in mono-green [33m 612[2mms[22m[39m
+     [33m[2m✓[22m[39m keeps a satisfiable conditional dual with utility (Castle Garenbrig names Forest) in mono-green [33m 1327[2mms[22m[39m
+     [33m[2m✓[22m[39m keeps manlands / colourless utility lands (Rogue's Passage) in mono-green [33m 562[2mms[22m[39m
+     [33m[2m✓[22m[39m multicolour: a sac-search-basic gate land (Cabaretti Courtyard, R/G) counts both R and G, is not excluded [33m 660[2mms[22m[39m
+     [33m[2m✓[22m[39m excludes a "choose a color" fixer (Temple of the Dragon Queen) in mono-green — not tied to a basic type [33m 624[2mms[22m[39m
+     [33m[2m✓[22m[39m excludes weak/conditional colourless utility in mono-green (Reliquary Tower, Plaza of Harmony, Branch of Vitu-Ghazi) [33m 508[2mms[22m[39m
+     [33m[2m✓[22m[39m keeps premium colourless utility (Rogue's Passage — hard unblockable) in mono-green [33m 478[2mms[22m[39m
+     [33m[2m✓[22m[39m excludes tapped basic-fetchers (Evolving Wilds, Terramorphic Expanse, Fabled Passage, Escape Tunnel) in mono-green [33m 399[2mms[22m[39m
+     [33m[2m✓[22m[39m keeps untapped fetches that can find the deck colour (Misty Rainforest, Wooded Foothills, Windswept Heath, Verdant Catacombs) in mono-green with land payoffs — real thinning, not forced (B-D9) [33m 479[2mms[22m[39m
+     [33m[2m✓[22m[39m excludes tapped sacrifice-for-basic lands with no independent mana ability (Bad River, Flood Plain, Rocky Tar Pit, Mountain Valley, Grasslands) in mono [33m 881[2mms[22m[39m
+     [33m[2m✓[22m[39m keeps manlands in mono (Mutavault, Den of the Bugbear, Inkmoth Nexus, Blinkmoth Nexus) — the creature mode is the premium payoff [33m 710[2mms[22m[39m
+     [33m[2m✓[22m[39m keeps manlands detected by oracle text, not a hardcoded list (Lair of the Hydra, Hall of Storm Giants, Mishra's Factory, Soulstone Sanctuary) [33m 744[2mms[22m[39m
+     [33m[2m✓[22m[39m keeps Cavern of Souls in mono only when the deck runs a tribe (Goblin) — excluded with no tribe [33m 373[2mms[22m[39m
+     [33m[2m✓[22m[39m keeps tapped MDFC spell-lands in mono (Valakut Awakening // Valakut Stoneforge, Khalni Ambush // Khalni Territory, Bala Ged Recovery // Bala Ged Sanctuary) — priced as tapped-land-equivalent, not excluded twice [33m 536[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/deck-optimizer-build-api.test.ts [2m([22m[2m9 tests[22m[2m)[22m[33m 49908[2mms[22m[39m
+     [33m[2m✓[22m[39m never resizes a brawl deck when adds run out (Tam, no commander_card_stats rows) [33m 12968[2mms[22m[39m
+     [33m[2m✓[22m[39m landReport counts an MDFC (Shatterskull Smashing) as one land, not two [33m 5734[2mms[22m[39m
+     [33m[2m✓[22m[39m U11 fix 3: the ratio-health land row matches landTarget.current (front-face count, not 36 via the MDFC land back) [33m 6169[2mms[22m[39m
+     [33m[2m✓[22m[39m a 60-card Standard list keeps the same after-list size [33m 2814[2mms[22m[39m
+     [33m[2m✓[22m[39m Tam (superfriends): landTarget.recommended sits inside the ratio-health land band and the formula says so [33m 6207[2mms[22m[39m
+     [33m[2m✓[22m[39m Tam (superfriends): no walker is cut for a win-condition-over-quota reason, and the reported win_condition band is the superfriends band [8,16], not the generic brawl band [33m 6090[2mms[22m[39m
+     [33m[2m✓[22m[39m Tam (superfriends): no "Way of" card is cut for any over-quota reason [33m 6125[2mms[22m[39m
+     [33m[2m✓[22m[39m a non-superfriends list (standard 60) reports the generic format band, unchanged [33m 2456[2mms[22m[39m
+     [33m[2m✓[22m[39m returns 200 with a too_many_copies finding for the merged card, no throw [33m 1339[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m109 passed[39m[22m[90m (109)[39m
+[2m      Tests [22m [1m[32m1432 passed[39m[22m[90m (1432)[39m
+[2m   Start at [22m 17:45:40
+[2m   Duration [22m 52.34s[2m (transform 10.06s, setup 0ms, import 21.54s, tests 130.57s, environment 34ms)[22m
+

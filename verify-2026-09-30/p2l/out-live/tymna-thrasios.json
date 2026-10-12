@@ -1,0 +1,671 @@
+{
+ "metrics": {
+  "label": "tymna-thrasios",
+  "strategy": "aggro",
+  "size": 99,
+  "lands": 38,
+  "mdfcSpells": 1,
+  "basics": 9,
+  "untapped": 38,
+  "untappedShare": 1,
+  "sources": {
+   "B": 22,
+   "W": 22,
+   "G": 18,
+   "U": 20
+  },
+  "healthSources": {
+   "W": 30,
+   "U": 31,
+   "B": 31,
+   "R": 13,
+   "G": 27
+  },
+  "honestRamp": 20,
+  "avgMv": 1.92,
+  "ms": 1100,
+  "price": {
+   "total": 5440.09,
+   "overBudget": false
+  },
+  "bracket": {
+   "target": null,
+   "result": 4
+  }
+ },
+ "lands": [
+  {
+   "q": 1,
+   "name": "Bayou",
+   "type": "Land — Swamp Forest",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Breeding Pool",
+   "type": "Land — Forest Island",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Caves of Koilos",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "City of Brass",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Command Tower",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Exotic Orchard",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Flooded Strand",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Forest",
+   "type": "Basic Land — Forest",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Godless Shrine",
+   "type": "Land — Plains Swamp",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Hallowed Fountain",
+   "type": "Land — Plains Island",
+   "score": -9999
+  },
+  {
+   "q": 4,
+   "name": "Island",
+   "type": "Basic Land — Island",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Isolated Chapel",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Mana Confluence",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Marsh Flats",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Misty Rainforest",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Murmuring Bosk",
+   "type": "Land — Forest",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Overgrown Tomb",
+   "type": "Land — Swamp Forest",
+   "score": -9999
+  },
+  {
+   "q": 2,
+   "name": "Plains",
+   "type": "Basic Land — Plains",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Polluted Delta",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Savannah",
+   "type": "Land — Forest Plains",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Scrubland",
+   "type": "Land — Plains Swamp",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Sink into Stupor // Soporific Springs",
+   "type": "Instant // Land",
+   "score": 100
+  },
+  {
+   "q": 1,
+   "name": "Starting Town",
+   "type": "Land — Town",
+   "score": -9999
+  },
+  {
+   "q": 2,
+   "name": "Swamp",
+   "type": "Basic Land — Swamp",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Temple Garden",
+   "type": "Land — Forest Plains",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Temple of the Dragon Queen",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Three Tree City",
+   "type": "Legendary Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Tropical Island",
+   "type": "Land — Forest Island",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Tundra",
+   "type": "Land — Plains Island",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Underground Sea",
+   "type": "Land — Island Swamp",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Vault of Champions",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Verdant Catacombs",
+   "type": "Land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Watery Grave",
+   "type": "Land — Island Swamp",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Windswept Heath",
+   "type": "Land",
+   "score": -9999
+  }
+ ],
+ "spells": [
+  {
+   "q": 1,
+   "name": "Chrome Mox",
+   "cmc": 0,
+   "role": "utility",
+   "score": 160
+  },
+  {
+   "q": 1,
+   "name": "Lion's Eye Diamond",
+   "cmc": 0,
+   "role": "utility",
+   "score": 149
+  },
+  {
+   "q": 1,
+   "name": "Lotus Petal",
+   "cmc": 0,
+   "role": "ramp",
+   "score": 168
+  },
+  {
+   "q": 1,
+   "name": "Mox Amber",
+   "cmc": 0,
+   "role": "utility",
+   "score": 159
+  },
+  {
+   "q": 1,
+   "name": "Mox Diamond",
+   "cmc": 0,
+   "role": "utility",
+   "score": 159
+  },
+  {
+   "q": 1,
+   "name": "Pact of Negation",
+   "cmc": 0,
+   "role": "protection",
+   "score": 157
+  },
+  {
+   "q": 1,
+   "name": "An Offer You Can't Refuse",
+   "cmc": 1,
+   "role": "ramp",
+   "score": 215
+  },
+  {
+   "q": 1,
+   "name": "Birds of Paradise",
+   "cmc": 1,
+   "role": "utility",
+   "score": 148
+  },
+  {
+   "q": 1,
+   "name": "Dark Ritual",
+   "cmc": 1,
+   "role": "utility",
+   "score": 167
+  },
+  {
+   "q": 1,
+   "name": "Enlightened Tutor",
+   "cmc": 1,
+   "role": "tutor",
+   "score": 184
+  },
+  {
+   "q": 1,
+   "name": "Esper Sentinel",
+   "cmc": 1,
+   "role": "draw",
+   "score": 207
+  },
+  {
+   "q": 1,
+   "name": "Flusterstorm",
+   "cmc": 1,
+   "role": "utility",
+   "score": 157
+  },
+  {
+   "q": 1,
+   "name": "Mana Vault",
+   "cmc": 1,
+   "role": "ramp",
+   "score": 172
+  },
+  {
+   "q": 1,
+   "name": "Mental Misstep",
+   "cmc": 1,
+   "role": "utility",
+   "score": 157
+  },
+  {
+   "q": 1,
+   "name": "Mockingbird",
+   "cmc": 1,
+   "role": "utility",
+   "score": 149
+  },
+  {
+   "q": 1,
+   "name": "Mystic Remora",
+   "cmc": 1,
+   "role": "draw",
+   "score": 190
+  },
+  {
+   "q": 1,
+   "name": "Mystical Tutor",
+   "cmc": 1,
+   "role": "utility",
+   "score": 145
+  },
+  {
+   "q": 1,
+   "name": "Pongify",
+   "cmc": 1,
+   "role": "removal",
+   "score": 155
+  },
+  {
+   "q": 1,
+   "name": "Rapid Hybridization",
+   "cmc": 1,
+   "role": "removal",
+   "score": 154
+  },
+  {
+   "q": 1,
+   "name": "Silence",
+   "cmc": 1,
+   "role": "utility",
+   "score": 145
+  },
+  {
+   "q": 1,
+   "name": "Sol Ring",
+   "cmc": 1,
+   "role": "ramp",
+   "score": 176
+  },
+  {
+   "q": 1,
+   "name": "Swan Song",
+   "cmc": 1,
+   "role": "protection",
+   "score": 193
+  },
+  {
+   "q": 1,
+   "name": "Swords to Plowshares",
+   "cmc": 1,
+   "role": "removal",
+   "score": 148
+  },
+  {
+   "q": 1,
+   "name": "Vampiric Tutor",
+   "cmc": 1,
+   "role": "tutor",
+   "score": 168
+  },
+  {
+   "q": 1,
+   "name": "Arcane Denial",
+   "cmc": 2,
+   "role": "protection",
+   "score": 175
+  },
+  {
+   "q": 1,
+   "name": "Arcane Signet",
+   "cmc": 2,
+   "role": "fixing-floor",
+   "score": 160
+  },
+  {
+   "q": 1,
+   "name": "Azorius Signet",
+   "cmc": 2,
+   "role": "fixing-floor",
+   "score": 139
+  },
+  {
+   "q": 1,
+   "name": "Borne Upon a Wind",
+   "cmc": 2,
+   "role": "utility",
+   "score": 149
+  },
+  {
+   "q": 1,
+   "name": "Cyclonic Rift",
+   "cmc": 2,
+   "role": "board_wipe",
+   "score": 125
+  },
+  {
+   "q": 1,
+   "name": "Deadly Dispute",
+   "cmc": 2,
+   "role": "draw",
+   "score": 159
+  },
+  {
+   "q": 1,
+   "name": "Demonic Tutor",
+   "cmc": 2,
+   "role": "tutor",
+   "score": 167
+  },
+  {
+   "q": 1,
+   "name": "Dimir Signet",
+   "cmc": 2,
+   "role": "fixing-floor",
+   "score": 140
+  },
+  {
+   "q": 1,
+   "name": "Faerie Mastermind",
+   "cmc": 2,
+   "role": "draw",
+   "score": 177
+  },
+  {
+   "q": 1,
+   "name": "Grand Abolisher",
+   "cmc": 2,
+   "role": "utility",
+   "score": 176
+  },
+  {
+   "q": 1,
+   "name": "Idol of Oblivion",
+   "cmc": 2,
+   "role": "draw",
+   "score": 182
+  },
+  {
+   "q": 1,
+   "name": "Lotho, Corrupt Shirriff",
+   "cmc": 2,
+   "role": "ramp",
+   "score": 199
+  },
+  {
+   "q": 1,
+   "name": "Mind Stone",
+   "cmc": 2,
+   "role": "fixing-floor",
+   "score": 148
+  },
+  {
+   "q": 1,
+   "name": "Negate",
+   "cmc": 2,
+   "role": "protection",
+   "score": 160
+  },
+  {
+   "q": 1,
+   "name": "Reality Shift",
+   "cmc": 2,
+   "role": "removal",
+   "score": 139
+  },
+  {
+   "q": 1,
+   "name": "Sram, Senior Edificer",
+   "cmc": 2,
+   "role": "draw",
+   "score": 154
+  },
+  {
+   "q": 1,
+   "name": "Tainted Pact",
+   "cmc": 2,
+   "role": "utility",
+   "score": 161
+  },
+  {
+   "q": 1,
+   "name": "Talisman of Curiosity",
+   "cmc": 2,
+   "role": "fixing-floor",
+   "score": 134
+  },
+  {
+   "q": 1,
+   "name": "Talisman of Dominance",
+   "cmc": 2,
+   "role": "fixing-floor",
+   "score": 145
+  },
+  {
+   "q": 1,
+   "name": "Talisman of Progress",
+   "cmc": 2,
+   "role": "fixing-floor",
+   "score": 135
+  },
+  {
+   "q": 1,
+   "name": "Talisman of Resilience",
+   "cmc": 2,
+   "role": "fixing-floor",
+   "score": 134
+  },
+  {
+   "q": 1,
+   "name": "Tataru Taru",
+   "cmc": 2,
+   "role": "draw",
+   "score": 205
+  },
+  {
+   "q": 1,
+   "name": "Thassa's Oracle",
+   "cmc": 2,
+   "role": "win_condition",
+   "score": 150
+  },
+  {
+   "q": 1,
+   "name": "Voice of Victory",
+   "cmc": 2,
+   "role": "utility",
+   "score": 155
+  },
+  {
+   "q": 1,
+   "name": "Wan Shi Tong, Librarian",
+   "cmc": 2,
+   "role": "utility",
+   "score": 138
+  },
+  {
+   "q": 1,
+   "name": "Beast Within",
+   "cmc": 3,
+   "role": "removal",
+   "score": 165
+  },
+  {
+   "q": 1,
+   "name": "Black Market Connections",
+   "cmc": 3,
+   "role": "draw",
+   "score": 169
+  },
+  {
+   "q": 1,
+   "name": "Fierce Guardianship",
+   "cmc": 3,
+   "role": "protection",
+   "score": 168
+  },
+  {
+   "q": 1,
+   "name": "Force of Negation",
+   "cmc": 3,
+   "role": "utility",
+   "score": 147
+  },
+  {
+   "q": 1,
+   "name": "Garruk's Uprising",
+   "cmc": 3,
+   "role": "draw",
+   "score": 177
+  },
+  {
+   "q": 1,
+   "name": "Rhystic Study",
+   "cmc": 3,
+   "role": "draw",
+   "score": 180
+  },
+  {
+   "q": 1,
+   "name": "Sink into Stupor // Soporific Springs",
+   "cmc": 3,
+   "role": "",
+   "score": 100
+  },
+  {
+   "q": 1,
+   "name": "Beseech the Mirror",
+   "cmc": 4,
+   "role": "utility",
+   "score": 139
+  },
+  {
+   "q": 1,
+   "name": "Smothering Tithe",
+   "cmc": 4,
+   "role": "draw",
+   "score": 197
+  },
+  {
+   "q": 1,
+   "name": "Force of Will",
+   "cmc": 5,
+   "role": "utility",
+   "score": 148
+  },
+  {
+   "q": 1,
+   "name": "Season of Gathering",
+   "cmc": 6,
+   "role": "board_wipe",
+   "score": 98
+  },
+  {
+   "q": 1,
+   "name": "The Great Henge",
+   "cmc": 9,
+   "role": "draw",
+   "score": 161
+  }
+ ]
+}
