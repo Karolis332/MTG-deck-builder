@@ -179,3 +179,22 @@ describe('isMonoColourDeadFixer', () => {
     expect(isMonoColourDeadFixer(CARDS.mindStone, ['G'])).toBe(false);
   });
 });
+
+// P2-S B-D6: "creature card with mana value 6 or greater" (Fierce Empath) is a narrow target.
+describe('narrowTutorTarget — mana value floor', () => {
+  const empath = {
+    oracle_text: 'When this creature enters, you may search your library for a creature card with mana value 6 or greater, reveal it, put it into your hand, then shuffle.',
+  };
+  it('reads the floor and the searched type', () => {
+    expect(narrowTutorTarget(empath)).toEqual({ kind: 'mv_min', value: '6', typeWord: 'creature' });
+  });
+  it('countTargets counts only that type at or above the floor', () => {
+    const deck = [
+      { name: 'Big', type_line: 'Creature — Giant', oracle_text: null, cmc: 6 },
+      { name: 'Bigger', type_line: 'Creature — Giant', oracle_text: null, cmc: 8, quantity: 2 },
+      { name: 'Small', type_line: 'Creature — Elf', oracle_text: null, cmc: 2 },
+      { name: 'Big Spell', type_line: 'Sorcery', oracle_text: null, cmc: 7 },
+    ];
+    expect(countTargets({ kind: 'mv_min', value: '6', typeWord: 'creature' }, deck)).toBe(3);
+  });
+});

@@ -29,7 +29,20 @@ import { analyzeCommanderForBuild } from './commander-analysis';
 import type { ArsenalCard } from './commander-analysis';
 import { classifyCard, getPrimaryCategory, isDrawEngine, isBoardWipe, isHonestRamp, isSymmetricCreatureWipe } from './card-classifier';
 import type { ClassifyOpts } from './card-classifier';
-import { isTribeCreature, narrowTutorTarget, countTargets, colorlessPipCount, isColorlessSource, isMonoColourDeadFixer } from './card-relevance';
+import { isTribeCreature, narrowTutorTarget, countTargets, colorlessPipCount, isColorlessSource, isMonoColourDeadFixer, enablerShortfall, TOKEN_MAKER_RE, CREATURE_GATED_RE } from './card-relevance';
+
+// P2 #8: a template whose creature band tops out here cannot feed a
+// creature-gated engine (superfriends / control / spellslinger are [8, 16]).
+const CREATURE_LIGHT_MAX = 16;
+// P2 #3: cEDH-tier staples a combo shell seats before the role quotas —
+// ≈ 8 fast mana + 6 free/cheap interaction + 6 tutors + the win line — with
+// a per-category cap so one table category cannot fill the whole floor.
+const COMBO_STAPLE_FLOOR = 24;
+const COMBO_STAPLE_CATEGORY_CAP: Record<string, number> = {
+  fast_mana: 8, tutor: 6, wincon: 3, win_condition: 3, stax: 2, hatebear: 2, default: 6,
+};
+// P2 #13: the roles Step 4c may upgrade within — the plan's quota roles.
+const UPGRADE_ROLES = new Set(['ramp', 'draw', 'tutor', 'removal', 'board_wipe', 'protection', 'win_condition']);
 import type { RelevanceCard } from './card-relevance';
 import { parseBuildHints } from './build-hints';
 import type { ParsedBuildHints } from './build-hints';
@@ -1183,7 +1196,10 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
 
   // ── cEDH staples lookup ────────────────────────────────────────────────
   const cedhStapleMap = new Map<string, { category: string; power_tier: string }>();
-  if (powerLevel === 'cedh' || powerLevel === 'optimized') {
+  // P2 #3: a combo shell reads the staples list too (scored at the
+  // 'optimized' tier below) — the strategy IS the cEDH shell, whatever
+  // powerLevel the caller passed.
+  if (powerLevel === 'cedh' || powerLevel === 'optimized' || resolvedStrategy === 'combo') {
     const staples = getCedhStaples(colors, format);
     for (const s of staples) {
       cedhStapleMap.set(s.card_name, { category: s.category, power_tier: s.power_tier });
@@ -1346,17 +1362,19 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
     snap('cmdrStats');
     // ── EDHREC commander-specific synergy (primary signal for commander) ──
     const edhrecEntry = edhrecSynergyMap.get(card.name);
+    let edhrecBonus = 0;
     if (edhrecEntry) {
       // Synergy score from EDHREC ranges roughly -1 to +1
       // Scale to 0-50 with a strong positive bias for high-synergy cards
-      score += Math.max(0, (edhrecEntry.synergy + 0.2) * 50);
+      edhrecBonus += Math.max(0, (edhrecEntry.synergy + 0.2) * 50);
 
       // Inclusion rate bonus: cards in >50% of decks are proven staples
       if (edhrecEntry.inclusion > 0.5) {
-        score += 15;
+        edhrecBonus += 15;
       } else if (edhrecEntry.inclusion > 0.3) {
-        score += 8;
+        edhrecBonus += 8;
       }
+      score += edhrecBonus;
     }
 
     snap('edhrec');
@@ -1367,11 +1385,13 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
       const winRateScore = globalRating.playedWinRate * 100;
       score += globalRating.confidence * (eloScore * 0.4 + winRateScore * 0.3);
       score += getMetaAdjustedScore(card.name, format);
-    } else if (!edhrecEntry) {
-      // Cold start AND no EDHREC data: fall back to global edhrec_rank
-      if (card.edhrec_rank !== null) {
-        score += Math.max(0, 50 - card.edhrec_rank / 400);
-      }
+    } else if (card.edhrec_rank !== null) {
+      // Cold start: fall back to global edhrec_rank. P2 #4: an EDHREC entry
+      // used to REPLACE this fallback — ≈24 for a synergy-0 staple against
+      // +50 for rank 1, so Arcane Signet, the Talismans and Path to Exile
+      // lost their slots to the entry itself. The fallback now tops the
+      // entry up to max(entry, fallback).
+      score += Math.max(0, Math.max(0, 50 - card.edhrec_rank / 400) - edhrecBonus);
     }
 
     snap('globalRank');
@@ -1390,7 +1410,15 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
     // ── Theme synergy bonus ──
     const text = (card.oracle_text || '').toLowerCase();
     const keywords = (card.keywords || '').toLowerCase();
+    // P2 #5: in a tribal build a token MAKER earns the tokens theme and the
+    // token_generation profile bonus only when it makes the tribe (or is a
+    // tribal card) — Edgar took Hangarback Walker, Dreadhorde Invasion and
+    // Lannery Storm for "create a … token". Token payoffs that create nothing
+    // themselves (Anointed Procession, Impact Tremors) keep both.
+    const offTribeTokenMaker = tribalType !== null && TOKEN_MAKER_RE.test(text)
+      && !text.includes(tribalType) && !tribalNames.has(card.name);
     for (const theme of themes) {
+      if (theme === 'tokens' && offTribeTokenMaker) continue;
       const patterns = SYNERGY_GROUPS[theme];
       if (!patterns) continue;
       for (const pattern of patterns) {
@@ -1406,6 +1434,7 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
     // Cards matching commander's trigger categories get bonus score
     if (commanderProfile) {
       for (const [category, bonus] of Object.entries(commanderProfile.scoreBonuses)) {
+        if (category === 'token_generation' && offTribeTokenMaker) continue;
         const catPatterns = SYNERGY_REQUIREMENTS_MAP[category as keyof typeof SYNERGY_REQUIREMENTS_MAP];
         if (!catPatterns) continue;
         for (const p of catPatterns) {
@@ -1454,13 +1483,29 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
     // Decks "go stale" when their card advantage is one-shot cantrips/charms.
     // Reward sticky engines (Phyrexian Arena, The Great Henge, Sylvan Library)
     // so they win draw slots over redundant one-shots. Aggro wants fewer.
-    if (isDrawEngine(card.name, card.oracle_text || '', card.type_line || '')) {
+    // P2 #8: an engine that only fires off creatures (The Great Henge,
+    // Guardian Project, Garruk's Uprising) has nothing to fire off in a
+    // creature-light template (superfriends / control / spellslinger, ≤ 16
+    // creatures): no engine bonus, and the creature-gated text is taxed like
+    // a discouraged type. The template band decides, not the deck's creature
+    // count — scoring runs before any pick exists. Walkers are exempt (their
+    // minus abilities read "creatures with power 4 or greater" too).
+    // A superfriends loyalty engine / support card is exempt too (Way of the
+    // Necromancer pays "whenever a creature you control dies" into every
+    // walker — it is the plan).
+    const template = getTemplate(resolvedStrategy);
+    const creatureGated = template.creatures[1] <= CREATURE_LIGHT_MAX
+      && !/\bPlaneswalker\b/.test(card.type_line || '')
+      && !(isSuperfriends && (isWalkerEngineCard(card) || isWalkerSupportCard(card)))
+      && CREATURE_GATED_RE.test(text);
+    if (!creatureGated && isDrawEngine(card.name, card.oracle_text || '', card.type_line || '')) {
       score += resolvedStrategy === 'aggro' ? 12 : 28;
     }
     snap('drawEngine');
+    if (creatureGated) score -= 60;
+    snap('creatureGate');
 
     // ── Archetype discouraged types penalty ──
-    const template = getTemplate(resolvedStrategy);
     if (template.discouragedTypes?.length) {
       const tl = card.type_line?.toLowerCase() ?? '';
       if (template.discouragedTypes.some(d => tl.includes(d.toLowerCase()))) {
@@ -1539,6 +1584,15 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
       if (text.includes('counter target') || text.includes('destroy') || text.includes('exile target')) score += 10;
       if (text.includes('draw')) score += 5;
       if (card.type_line.includes('Creature') && card.cmc <= 2) score -= 5;
+    } else if (resolvedStrategy === 'combo') {
+      // P2 #3: a combo shell is a cEDH curve — cheap spells, and no top end
+      // outside the staples list (Tymna+Thrasios took Elspeth SC, Liliana DG
+      // and Summon: Bahamut as its wincons at 62ccf14).
+      if (card.cmc <= 1) score += 10;
+      if (!cedhStapleMap.has(card.name)) {
+        if (card.cmc >= 5) score -= 40;
+        else if (card.cmc >= 4) score -= 20;
+      }
     } else {
       // midrange — balanced
       if (card.cmc >= 2 && card.cmc <= 4) score += 5;
@@ -1565,7 +1619,7 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
           score += 15;
         }
       }
-    } else if (powerLevel === 'optimized') {
+    } else if (powerLevel === 'optimized' || resolvedStrategy === 'combo') {
       const staple = cedhStapleMap.get(card.name);
       if (staple) {
         const tierBonus = staple.power_tier === 'cedh' ? 40
@@ -2024,6 +2078,10 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
   // See buildScoredCandidatePool — same opt-in, recomputed in this function's
   // own scope since poolResult only carries the string, not the flag.
   const isSuperfriends = resolvedStrategy === 'superfriends';
+  // A superfriends plan piece: any walker, a loyalty engine or walker support.
+  // Shared by Step 4c (never an upgrade victim) and the dead-card pass.
+  const isWalkerPlanPiece = (card: DbCard): boolean =>
+    isSuperfriends && (/\bPlaneswalker\b/.test(card.type_line || '') || isWalkerEngineCard(card) || isWalkerSupportCard(card));
   const classifyOpts: ClassifyOpts = { superfriends: isSuperfriends, strict: true };
 
   // Free-text hint: "consistent manabase" biases toward the generous end of
@@ -2258,6 +2316,37 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
     }
   }
 
+  // ── (b3) Combo staple floor (P2 #3) ───────────────────────────────────
+  // A combo shell is fast mana, free interaction, tutors and the win line.
+  // At 62ccf14 the role quotas took 58 of 60 nonland slots before Pass B,
+  // so Solemn and 3–5 MV draw bodies were seated while Chrome Mox, Force of
+  // Will and Thassa's Oracle waited on a two-slot allow-list. Seat the
+  // cEDH-tier staples the pool holds BEFORE any quota, by score, capped per
+  // staple category so the 60-tutor table cannot take the whole floor.
+  // Remembered so Step 4c never trades them for a higher-scored midrange card.
+  const comboStapleNames = new Set<string>();
+  if (resolvedStrategy === 'combo') {
+    const stapleCategory = new Map<string, string>();
+    for (const s of getCedhStaples(colors, options.format)) {
+      if (s.power_tier === 'cedh') stapleCategory.set(s.card_name, s.category);
+    }
+    const perCategory = new Map<string, number>();
+    for (const s of scored) {
+      if (comboStapleNames.size >= COMBO_STAPLE_FLOOR || totalPicked >= nonLandTarget) break;
+      const category = stapleCategory.get(s.card.name);
+      if (!category || pickedNames.has(s.card.name) || getMaxQty(s.card) <= 0) continue;
+      if ((s.card.type_line || '').split('//')[0].includes('Land')) continue;
+      const cap = COMBO_STAPLE_CATEGORY_CAP[category] ?? COMBO_STAPLE_CATEGORY_CAP.default;
+      if ((perCategory.get(category) ?? 0) >= cap) continue;
+      picked.push({ card: s.card, quantity: 1, board: 'main' });
+      pickedNames.add(s.card.name);
+      comboStapleNames.add(s.card.name);
+      perCategory.set(category, (perCategory.get(category) ?? 0) + 1);
+      totalPicked += 1;
+      reasoning.push({ cardName: s.card.name, role: 'combo-staple', reason: `cEDH ${category} staple seated before the role quotas` });
+    }
+  }
+
   // ── (c) Role-based picker on remaining pool ────────────────────────────
   // (quotas were computed above, before the arsenal pre-fill — C1)
   const remainingPool = scored.filter(s => !pickedNames.has(s.card.name));
@@ -2359,6 +2448,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
     // Picks that may make way, weakest first (pool score, then EDHREC rank).
     const removable = picked
       .filter(p => p.board === 'main' && !['commander'].includes(p.board))
+      .filter(p => !comboStapleNames.has(p.card.name)) // P2 #3: the win line classifies 'utility'
       .filter(p => {
         const cats = classifyCard(p.card.name, p.card.oracle_text || '', p.card.type_line || '', p.card.cmc || 0, undefined, classifyOpts);
         const primary = cats[0] || 'utility';
@@ -2684,7 +2774,9 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
         .sort((a, b) => b.score - a.score);
 
       // Find the lowest-scored current picks that aren't protected
-      const protectedSet = new Set(merged.protectedPatterns.map((p) => p.toLowerCase()));
+      // P2 #3: the combo staple floor's picks are the lowest-scored cards in a
+      // combo build (no popularity data) — protected like the template's names.
+      const protectedSet = new Set([...merged.protectedPatterns, ...comboStapleNames].map((p) => p.toLowerCase()));
 
       // Ramp stays displaceable down to the template's floor (U11 fix 1) —
       // a21f2ff protected it unconditionally, which pushed Tam's Arena build
@@ -2768,10 +2860,16 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
     // In 3+ colours every cheap fixing rock is plan, wherever it was seated:
     // the classifier files treasure-makers under 'ramp' too, and by score
     // they took all five of Tam's Signets.
+    // P2 #13: a card with a positive tribal / commander-profile component is
+    // a plan piece too (Ygra traded Ayara, First of Locthwain for Beast
+    // Whisperer), and an "upgrade" only exists inside the plan's quota roles —
+    // a utility/synergy primary is not a job another card does better
+    // (Tezzeret CC as 'tutor', Archmage Emeritus as 'draw' were off-plan).
     const isPlanPick = (card: DbCard): boolean =>
       payoffNames.has(card.name.toLowerCase()) || tribalNames.has(card.name) || fixingFloorNames.has(card.name)
+      || comboStapleNames.has(card.name) || synergyNames.has(card.name)
       || (colors.length >= 3 && isFixingRock(card))
-      || (isSuperfriends && (/\bPlaneswalker\b/.test(card.type_line || '') || isWalkerEngineCard(card) || isWalkerSupportCard(card)));
+      || isWalkerPlanPiece(card);
     const isSpellSlot = (card: DbCard): boolean =>
       !(card.type_line || '').split('//')[0].includes('Land') && !isLandBackDfc(card);
     const scoreOfName = (name: string): number => poolByName.get(name)?.score ?? -Infinity;
@@ -2782,6 +2880,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
       for (const p of picked) {
         if (p.board !== 'main' || p.quantity !== 1 || !isSpellSlot(p.card) || isPlanPick(p.card)) continue;
         const role = primaryOf(p.card);
+        if (!UPGRADE_ROLES.has(role)) continue;
         const w = worstByRole.get(role);
         if (!w || scoreOfName(p.card.name) < scoreOfName(w.card.name)) worstByRole.set(role, p);
       }
@@ -3278,6 +3377,9 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
             // tribal card — protect both regardless of commanderProfile presence.
             && !payoffNames.has(p.card.name.toLowerCase())
             && !tribalNames.has(p.card.name)
+            // P2 #3: a combo shell's win line (Demonic Consultation) and free
+            // interaction classify as 'utility' — never the engine fix's fodder.
+            && !comboStapleNames.has(p.card.name)
             // U11 fix 2: Step 4b's synergy-minimum backfill classifies a Way
             // of the ___ as 'utility' too (it's an enchantment, no ramp/draw/
             // removal text of its own), so without this guard the draw-engine
@@ -3318,6 +3420,10 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
   const deadPass = applyDeadCardPass(
     finalCards, poolResult.pool, colors, commanderCard?.oracle_text || undefined,
     (card) => getMaxQty(card) > 0,
+    // P2 B-D6: a walker's abilities are modal and a loyalty engine is the
+    // plan — the enabler census must not cut Kiora (power 4+) or a Way
+    // (creature dies) out of a superfriends list.
+    isWalkerPlanPiece,
   );
   finalCards = deadPass.cards;
   const deadCardsReplaced = deadPass.replacedAsDead;
@@ -3643,6 +3749,7 @@ export function applyDeadCardPass(
   colors: string[],
   commanderOracle: string | undefined,
   canPick: (card: DbCard) => boolean = () => true,
+  keep: (card: DbCard) => boolean = () => false,
 ): { cards: Array<{ card: DbCard; quantity: number; board: 'main' | 'sideboard' }>; replacedAsDead: Array<{ out: string; in: string; reason: string }> } {
   const cards = picked.map((p) => ({ ...p }));
   const replacedAsDead: Array<{ out: string; in: string; reason: string }> = [];
@@ -3653,7 +3760,7 @@ export function applyDeadCardPass(
 
   const mainCards = (): RelevanceCard[] =>
     cards.filter((c) => c.board === 'main')
-      .map((c) => ({ name: c.card.name, type_line: c.card.type_line, oracle_text: c.card.oracle_text, quantity: c.quantity }));
+      .map((c) => ({ name: c.card.name, type_line: c.card.type_line, oracle_text: c.card.oracle_text, cmc: c.card.cmc, power: c.card.power, quantity: c.quantity }));
 
   const colourlessSourceCount = (): number =>
     cards.filter((c) => c.board === 'main' && isColorlessSource(c.card)).reduce((s, c) => s + c.quantity, 0);
@@ -3663,11 +3770,16 @@ export function applyDeadCardPass(
     // Overgrown Tomb to find is live, and the nonland pool has no real land
     // to replace one with (it swapped fetches for Westvale Abbey / Dowsing Dagger).
     if (isLand(card)) return null;
+    if (keep(card)) return null;
     const target = narrowTutorTarget(card);
     if (target) {
       const count = countTargets(target, mainCards());
-      if (count < NARROW_TUTOR_MIN_TARGETS) return `narrow tutor: only ${count} ${target.value} in deck`;
+      const what = target.kind === 'mv_min' ? `${target.typeWord ?? 'card'}s at mana value ${target.value}+` : target.value;
+      if (count < NARROW_TUTOR_MIN_TARGETS) return `narrow tutor: only ${count} ${what} in deck`;
     }
+    // P2 B-D6: a payoff whose trigger names an enabler the deck lacks.
+    const shortfall = enablerShortfall(card, mainCards(), commanderOracle);
+    if (shortfall) return shortfall;
     const pips = colorlessPipCount(card.mana_cost);
     if (pips > 0) {
       const needed = pips >= 2 ? COLORLESS_SOURCES_FOR_TWO_PIPS : COLORLESS_SOURCES_FOR_ONE_PIP;

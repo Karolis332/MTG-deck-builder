@@ -106,6 +106,23 @@ describe('getEdhrecRecommendations — current EDHREC shape', () => {
     expect(data!.themes[0]).toBe('Planeswalkers');
   });
 
+  it('keeps high-inclusion staples that fall outside the synergy top 60', async () => {
+    // 70 synergy cards ahead of a Sol Ring-like staple (synergy -0.02, inclusion 0.85) and a
+    // low-inclusion filler; the staple must survive the cut, the filler must not.
+    const cardviews = Array.from({ length: 70 }, (_, i) => ({
+      name: `Synergy ${i}`, synergy: 0.5 - i * 0.001, num_decks: 100, potential_decks: 1000,
+    }));
+    cardviews.push({ name: 'Sol Ring', synergy: -0.02, num_decks: 850, potential_decks: 1000 });
+    cardviews.push({ name: 'Filler', synergy: -0.03, num_decks: 100, potential_decks: 1000 });
+    vi.stubGlobal('fetch', respond({ container: { json_dict: { cardlists: [{ cardviews }] } }, panels: {} }));
+    const data = await getEdhrecRecommendations('Tam, the Possibility');
+    const names = data!.topCards.map((c) => c.name);
+    expect(names).toHaveLength(61);
+    expect(names).toContain('Sol Ring');
+    expect(names).not.toContain('Filler');
+    expect(names.slice(0, 60)).toEqual(cardviews.slice(0, 60).map((c) => c.name));
+  });
+
   it('never caches an empty parse and re-fetches next time', async () => {
     const f = respond({ header: 'x', panels: {} });
     vi.stubGlobal('fetch', f);
