@@ -1,0 +1,96 @@
+main 1 A-Minsc & Boo, Timeless Heroes
+main 1 Aetherize
+main 1 Angrath, Captain of Chaos
+main 1 Arcane Signet
+main 1 Ashiok, Dream Render
+main 1 Beast Within
+main 1 Blasphemous Act
+main 1 Blood Crypt
+main 1 Bloom Tender
+main 1 Boros Signet
+main 1 Bountiful Landscape
+main 1 Breeding Pool
+main 1 Brokers Hideout
+main 1 Cabaretti Courtyard
+main 1 Cankerbloom
+main 1 Cayth, Famed Mechanist
+main 1 Chromanticore
+main 1 Chromatic Lantern
+main 1 Coldsteel Heart
+main 1 Command Tower
+main 1 Concealed Courtyard
+main 1 Dovin's Veto
+main 1 Dovin, Hand of Control
+main 1 Evolution Sage
+main 1 Feed the Swarm
+main 1 Flooded Strand
+main 1 Forest
+main 1 Fortified Village
+main 1 Go for the Throat
+main 1 Godless Shrine
+main 1 Golgari Charm
+main 1 Hallowed Fountain
+main 1 Hedron Archive
+main 1 Hinterland Harbor
+main 1 Huatli, the Sun's Heart
+main 1 Infinite Guideline Station
+main 1 Jace, Multiverse Architect
+main 1 Kaito, Bane of Nightmares
+main 1 Kaito, Cunning Infiltrator
+main 1 Kiora, Behemoth Beckoner
+main 1 Legion Leadership // Legion Stronghold
+main 1 Mind Stone
+main 1 Minsc & Boo, Timeless Heroes
+main 1 Misty Rainforest
+main 1 Mortify
+main 1 Mox Amber
+main 1 Oath of Teferi
+main 1 Omnath, Locus of All
+main 1 Overgrown Tomb
+main 1 Path to Exile
+main 1 Professor Dellian Fel
+main 1 Quintorius Kand
+main 1 Quintorius, History Chaser
+main 1 Rakdos Charm
+main 1 Ral, Crackling Wit
+main 1 Revitalizing Repast // Old-Growth Grove
+main 1 Sacred Foundry
+main 1 Saheeli, Sublime Artificer
+main 1 Scalding Tarn
+main 1 Shattered Landscape
+main 1 Sheltering Landscape
+main 1 Solemn Simulacrum
+main 1 Spirebluff Canal
+main 1 Steam Vents
+main 1 Stomping Ground
+main 1 Stump Stomp // Burnwillow Clearing
+main 1 Swamp
+main 1 Swords to Plowshares
+main 1 Talisman of Conviction
+main 1 Talisman of Creativity
+main 1 Talisman of Curiosity
+main 1 Talisman of Impulse
+main 1 Talisman of Indulgence
+main 1 Talisman of Progress
+main 1 Talisman of Resilience
+main 1 Talisman of Unity
+main 1 Tannuk, Memorial Ensign
+main 1 Tatyova, Benthic Druid
+main 1 Tekuthal, Inquiry Dominus
+main 1 Temple Garden
+main 1 Terminate
+main 1 Tezzeret's Gambit
+main 1 Tezzeret, Cruel Captain
+main 1 The Eternal Wanderer
+main 1 The One Ring
+main 1 The Theorist, Jace Beleren
+main 1 Thrummingbird
+main 1 Twisted Landscape
+main 1 Vineglimmer Snarl
+main 1 Waterlogged Teachings // Inundated Archive
+main 1 Woodland Cemetery
+main 1 Yavimaya Coast
+main 1 Zurgo Stormrender
+main 2 Island
+main 2 Mountain
+main 2 Plains

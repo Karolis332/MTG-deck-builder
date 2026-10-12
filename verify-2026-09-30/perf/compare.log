@@ -1,0 +1,72 @@
+== prefix-TAT wall 68.5s cpu user 21.9s sys 44.6s ELU idle 0.0s active 68.5s
+fetch 1 (22ms) sleeps>=50ms 1 sum 5000ms  SQL total 68.0s cards 81
+  30.18s n=1  SELECT c.*, lc.land_category, lc.produces_colors, lc.enters_untapped, lc.enters_untapped_condition, lc.tribal_types, lc.synergy_tags, lc.ti
+  23.31s n=373 SELECT c.* FROM cards c WHERE LOWER(c.name) = LOWER(?) AND c.set_code IS NOT NULL AND c.legalities LIKE '%"brawl":"legal"%' ORDER BY (CASE W
+  8.59s n=9628 SELECT card_name, meta_inclusion_rate, placement_weighted_score, archetype_core_rate, COALESCE(archetype_win_rate, 0) as archetype_win_rate 
+  4.86s n=143 SELECT COALESCE(SUM(col.quantity), 0) as qty FROM collection col JOIN cards c ON col.card_id = c.id WHERE col.user_id = ? AND LOWER((CASE WH
+  0.56s n=2  SELECT DISTINCT c.* FROM cards c WHERE (c.type_line NOT LIKE '%Land%' OR c.type_line LIKE '%//%') AND c.type_line != 'Card' AND c.type_line
+  0.21s n=2  SELECT card_name, inclusion_rate, avg_copies, synergy_score, deck_count, total_commander_decks FROM commander_card_stats WHERE commander_na
+  0.08s n=4814 SELECT * FROM card_performance WHERE card_name = ? AND format = ? AND opponent_colors = ''
+  0.07s n=1 SELECT c.*, col.quantity as owned_qty FROM collection col JOIN cards c ON col.card_id = c.id WHERE col.user_id = ? AND col.source = ? AND c.
+== fixed-TAT wall 38.4s cpu user 13.5s sys 24.4s ELU idle 0.0s active 38.4s
+fetch 1 (21ms) sleeps>=50ms 1 sum 5000ms  SQL total 37.9s cards 81
+  23.03s n=373 SELECT c.* FROM cards c WHERE LOWER(c.name) = LOWER(?) AND c.set_code IS NOT NULL AND c.legalities LIKE '%"brawl":"legal"%' ORDER BY (CASE W
+  8.96s n=9628 SELECT card_name, meta_inclusion_rate, placement_weighted_score, archetype_core_rate, COALESCE(archetype_win_rate, 0) as archetype_win_rate 
+  4.78s n=143 SELECT COALESCE(SUM(col.quantity), 0) as qty FROM collection col JOIN cards c ON col.card_id = c.id WHERE col.user_id = ? AND LOWER((CASE WH
+  0.54s n=2  SELECT DISTINCT c.* FROM cards c WHERE (c.type_line NOT LIKE '%Land%' OR c.type_line LIKE '%//%') AND c.type_line != 'Card' AND c.type_line
+  0.20s n=2  SELECT card_name, inclusion_rate, avg_copies, synergy_score, deck_count, total_commander_decks FROM commander_card_stats WHERE commander_na
+  0.13s n=1  SELECT c.*, lc.land_category, lc.produces_colors, lc.enters_untapped, lc.enters_untapped_condition, lc.tribal_types, lc.synergy_tags, lc.ti
+  0.08s n=1 SELECT c.*, col.quantity as owned_qty FROM collection col JOIN cards c ON col.card_id = c.id WHERE col.user_id = ? AND col.source = ? AND c.
+  0.07s n=4814 SELECT * FROM card_performance WHERE card_name = ? AND format = ? AND opponent_colors = ''
+TAT lists IDENTICAL
+== prefix-TAM wall 70.6s cpu user 24.2s sys 44.4s ELU idle 0.0s active 70.6s
+fetch 1 (18ms) sleeps>=50ms 1 sum 5000ms  SQL total 70.0s cards 96
+  29.91s n=1  SELECT c.*, lc.land_category, lc.produces_colors, lc.enters_untapped, lc.enters_untapped_condition, lc.tribal_types, lc.synergy_tags, lc.ti
+  20.30s n=333 SELECT c.* FROM cards c WHERE LOWER(c.name) = LOWER(?) AND c.set_code IS NOT NULL AND c.legalities LIKE '%"brawl":"legal"%' ORDER BY (CASE W
+  9.45s n=10084 SELECT card_name, meta_inclusion_rate, placement_weighted_score, archetype_core_rate, COALESCE(archetype_win_rate, 0) as archetype_win_rate 
+  8.52s n=252 SELECT COALESCE(SUM(col.quantity), 0) as qty FROM collection col JOIN cards c ON col.card_id = c.id WHERE col.user_id = ? AND LOWER((CASE WH
+  1.25s n=2  SELECT DISTINCT c.* FROM cards c WHERE (c.type_line NOT LIKE '%Land%' OR c.type_line LIKE '%//%') AND c.type_line != 'Card' AND c.type_line
+  0.19s n=2  SELECT card_name, inclusion_rate, avg_copies, synergy_score, deck_count, total_commander_decks FROM commander_card_stats WHERE commander_na
+  0.14s n=1 SELECT c.*, col.quantity as owned_qty FROM collection col JOIN cards c ON col.card_id = c.id WHERE col.user_id = ? AND col.source = ? AND c.
+  0.08s n=5042 SELECT * FROM card_performance WHERE card_name = ? AND format = ? AND opponent_colors = ''
+== fixed-TAM wall 41.2s cpu user 14.9s sys 25.4s ELU idle 0.0s active 41.2s
+fetch 1 (23ms) sleeps>=50ms 1 sum 5000ms  SQL total 40.5s cards 96
+  20.46s n=333 SELECT c.* FROM cards c WHERE LOWER(c.name) = LOWER(?) AND c.set_code IS NOT NULL AND c.legalities LIKE '%"brawl":"legal"%' ORDER BY (CASE W
+  9.62s n=10084 SELECT card_name, meta_inclusion_rate, placement_weighted_score, archetype_core_rate, COALESCE(archetype_win_rate, 0) as archetype_win_rate 
+  8.54s n=252 SELECT COALESCE(SUM(col.quantity), 0) as qty FROM collection col JOIN cards c ON col.card_id = c.id WHERE col.user_id = ? AND LOWER((CASE WH
+  1.23s n=2  SELECT DISTINCT c.* FROM cards c WHERE (c.type_line NOT LIKE '%Land%' OR c.type_line LIKE '%//%') AND c.type_line != 'Card' AND c.type_line
+  0.20s n=2  SELECT card_name, inclusion_rate, avg_copies, synergy_score, deck_count, total_commander_decks FROM commander_card_stats WHERE commander_na
+  0.15s n=1 SELECT c.*, col.quantity as owned_qty FROM collection col JOIN cards c ON col.card_id = c.id WHERE col.user_id = ? AND col.source = ? AND c.
+  0.12s n=1  SELECT c.*, lc.land_category, lc.produces_colors, lc.enters_untapped, lc.enters_untapped_condition, lc.tribal_types, lc.synergy_tags, lc.ti
+  0.09s n=5042 SELECT * FROM card_performance WHERE card_name = ? AND format = ? AND opponent_colors = ''
+TAM lists IDENTICAL
+== fixed-TATNC wall 10.1s cpu user 7.9s sys 2.4s ELU idle 0.0s active 10.1s
+fetch 1 (19ms) sleeps>=50ms 1 sum 5000ms  SQL total 9.7s cards 81
+  8.81s n=9632 SELECT card_name, meta_inclusion_rate, placement_weighted_score, archetype_core_rate, COALESCE(archetype_win_rate, 0) as archetype_win_rate 
+  0.59s n=2  SELECT DISTINCT c.* FROM cards c WHERE (c.type_line NOT LIKE '%Land%' OR c.type_line LIKE '%//%') AND c.type_line != 'Card' AND c.type_line
+  0.09s n=1  SELECT card_name, inclusion_rate, avg_copies, synergy_score, deck_count, total_commander_decks FROM commander_card_stats WHERE commander_na
+  0.07s n=1  SELECT c.*, lc.land_category, lc.produces_colors, lc.enters_untapped, lc.enters_untapped_condition, lc.tribal_types, lc.synergy_tags, lc.ti
+  0.07s n=4816 SELECT * FROM card_performance WHERE card_name = ? AND format = ? AND opponent_colors = ''
+  0.02s n=1 SELECT card_name, synergy_score, inclusion_rate FROM commander_synergies WHERE commander_name = ? COLLATE NOCASE ORDER BY synergy_score DESC
+  0.01s n=2  SELECT m.card_name, m.meta_inclusion_rate, m.archetype_core_rate, m.num_decks_in, m.total_decks_sampled FROM meta_card_stats m JOIN cards c
+  0.00s n=1  SELECT c.* FROM cards c WHERE c.name IN (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) AND c.color_identity NOT LIKE '%W%' AND c.col
+== base-TATNC wall 9.9s cpu user 7.7s sys 2.1s ELU idle 0.0s active 9.9s
+fetch 1 (18ms) sleeps>=50ms 1 sum 5000ms  SQL total 9.5s cards 81
+  8.67s n=9632 SELECT card_name, meta_inclusion_rate, placement_weighted_score, archetype_core_rate, COALESCE(archetype_win_rate, 0) as archetype_win_rate 
+  0.56s n=2  SELECT DISTINCT c.* FROM cards c WHERE (c.type_line NOT LIKE '%Land%' OR c.type_line LIKE '%//%') AND c.type_line != 'Card' AND c.type_line
+  0.09s n=1  SELECT c.*, lc.land_category, lc.produces_colors, lc.enters_untapped, lc.enters_untapped_condition, lc.tribal_types, lc.synergy_tags, lc.ti
+  0.08s n=1  SELECT card_name, inclusion_rate, avg_copies, synergy_score, deck_count, total_commander_decks FROM commander_card_stats WHERE commander_na
+  0.07s n=4816 SELECT * FROM card_performance WHERE card_name = ? AND format = ? AND opponent_colors = ''
+  0.02s n=1 SELECT card_name, synergy_score, inclusion_rate FROM commander_synergies WHERE commander_name = ? COLLATE NOCASE ORDER BY synergy_score DESC
+  0.01s n=2  SELECT m.card_name, m.meta_inclusion_rate, m.archetype_core_rate, m.num_decks_in, m.total_decks_sampled FROM meta_card_stats m JOIN cards c
+  0.00s n=1  SELECT c.* FROM cards c WHERE c.name IN (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) AND c.color_identity NOT LIKE '%W%' AND c.col
+== base-TAM wall 40.8s cpu user 14.9s sys 24.6s ELU idle 0.0s active 40.8s
+fetch 1 (19ms) sleeps>=50ms 1 sum 5000ms  SQL total 40.2s cards 96
+  19.52s n=318 SELECT c.* FROM cards c WHERE LOWER(c.name) = LOWER(?) AND c.set_code IS NOT NULL AND c.legalities LIKE '%"brawl":"legal"%' ORDER BY (CASE W
+  9.52s n=9808 SELECT card_name, meta_inclusion_rate, placement_weighted_score, archetype_core_rate, COALESCE(archetype_win_rate, 0) as archetype_win_rate 
+  9.18s n=244 SELECT COALESCE(SUM(col.quantity), 0) as qty FROM collection col JOIN cards c ON col.card_id = c.id WHERE col.user_id = ? AND LOWER(c.name) 
+  1.20s n=2  SELECT DISTINCT c.* FROM cards c WHERE (c.type_line NOT LIKE '%Land%' OR c.type_line LIKE '%//%') AND c.type_line != 'Card' AND c.type_line
+  0.22s n=1 SELECT c.name, SUM(col.quantity) as total FROM collection col JOIN cards c ON col.card_id = c.id GROUP BY c.name
+  0.18s n=2  SELECT card_name, inclusion_rate, avg_copies, synergy_score, deck_count, total_commander_decks FROM commander_card_stats WHERE commander_na
+  0.15s n=1 SELECT c.*, col.quantity as owned_qty FROM collection col JOIN cards c ON col.card_id = c.id WHERE col.user_id = ? AND c.set_code IS NOT NUL
+  0.08s n=4904 SELECT * FROM card_performance WHERE card_name = ? AND format = ? AND opponent_colors = ''

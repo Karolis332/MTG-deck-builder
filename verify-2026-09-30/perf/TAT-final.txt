@@ -1,0 +1,81 @@
+main 1 Aetherize
+main 1 An Offer You Can't Refuse
+main 1 Arcane Signet
+main 1 Balamb Garden, SeeD Academy // Balamb Garden, Airborne
+main 1 Beast Within
+main 1 Brainstorm
+main 1 Breeding Pool
+main 1 Bridgeworks Battle // Tanglespan Bridgeworks
+main 1 Broken Bond
+main 1 Brokers Hideout
+main 1 Burgeoning
+main 1 Bushwhack
+main 1 Cankerbloom
+main 1 Chronicle of Victory
+main 1 Command Tower
+main 1 Consider
+main 1 Counterspell
+main 1 Crop Rotation
+main 1 Cultivate
+main 1 Disciple of Freyalise // Garden of Freyalise
+main 1 Dispel
+main 1 Dungeon Map
+main 1 Earthshaker Dreadmaw
+main 1 Elvish Archdruid
+main 1 Eternal Witness
+main 1 Explore
+main 1 Farseek
+main 1 Flooded Strand
+main 1 Garruk's Uprising
+main 1 Glacier Godmaw
+main 1 Harmonize
+main 1 Hashep Oasis
+main 1 Hedron Archive
+main 1 Heroic Intervention
+main 1 Hinterland Harbor
+main 1 Llanowar Elves
+main 1 Loot, Exuberant Explorer
+main 1 Mind Stone
+main 1 Misty Rainforest
+main 1 Mossborn Hydra
+main 1 Multiversal Passage
+main 1 Mystical Tutor
+main 1 Negate
+main 1 Night of the Sweets' Revenge
+main 1 Opt
+main 1 Paradise Druid
+main 1 Perilous Vault
+main 1 Planar Engineering
+main 1 Ponder
+main 1 Pongify
+main 1 Preordain
+main 1 Rampaging Baloths
+main 1 Rampant Growth
+main 1 Rapid Hybridization
+main 1 Reclamation Sage
+main 1 Return to Nature
+main 1 River's Rebuke
+main 1 Scalding Tarn
+main 1 Shark Typhoon
+main 1 Sink into Stupor // Soporific Springs
+main 1 Sleight of Hand
+main 1 Solemn Simulacrum
+main 1 Spell Pierce
+main 1 Springbloom Druid
+main 1 Starting Column
+main 1 Swan Song
+main 1 Tangled Florahedron // Tangled Vale
+main 1 The Great Henge
+main 1 The One Ring
+main 1 The Unagi of Kyoshi Island
+main 1 Thran Portal
+main 1 Tireless Provisioner
+main 1 Vineglimmer Snarl
+main 1 Willowrush Verge
+main 1 Wood Elves
+main 1 World Shaper
+main 1 Worldly Tutor
+main 1 Yavimaya Coast
+main 1 Zuko's Exile
+main 13 Forest
+main 7 Island
