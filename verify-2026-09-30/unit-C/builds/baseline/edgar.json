@@ -1,0 +1,1608 @@
+{
+ "summary": {
+  "slug": "edgar",
+  "opts": {
+   "format": "commander",
+   "commanderName": "Edgar Markov"
+  },
+  "ms": 1181,
+  "size": 99,
+  "lands": 38,
+  "strategy": "tribal",
+  "themes": [
+   "tribal"
+  ],
+  "tribalType": "vampire",
+  "profile": {
+   "archetype": "tribal",
+   "categories": [
+    "attack_trigger",
+    "counters",
+    "token_generation"
+   ]
+  },
+  "strictCounts": {
+   "ramp": 10,
+   "draw": 16,
+   "tutor": 2,
+   "removal": 9,
+   "board_wipe": 3,
+   "protection": 3,
+   "win_condition": 10
+  },
+  "lenientCounts": {
+   "ramp": 10,
+   "draw": 16,
+   "tutor": 2,
+   "removal": 9,
+   "board_wipe": 3,
+   "protection": 4,
+   "win_condition": 12
+  },
+  "roleCounts": {
+   "fixing-floor": 5,
+   "payoff": 8,
+   "ramp": 5,
+   "draw": 9,
+   "tutor": 2,
+   "removal": 6,
+   "board_wipe": 3,
+   "protection": 3,
+   "win_condition": 4,
+   "utility": 5,
+   "synergy": 3,
+   "(none)": 46
+  },
+  "health": {
+   "grade": "A",
+   "realLands": 35,
+   "tappedLands": 11,
+   "tappedRatio": 0.29,
+   "sourcesByColor": {
+    "W": 22,
+    "U": 8,
+    "B": 32,
+    "R": 18,
+    "G": 8
+   },
+   "pipsByColor": {
+    "W": 20,
+    "U": 0,
+    "B": 55,
+    "R": 4,
+    "G": 0
+   },
+   "drawCount": 14,
+   "drawEngineCount": 11,
+   "rampCount": 10,
+   "fakeLands": [],
+   "warnings": [],
+   "deficiencies": []
+  },
+  "deadCardsReplaced": [],
+  "buildReport": "Archetype: Tribal — targeting 61 nonland slots\nRole fills:\n  ramp       11/11 OK\n  draw       10/10 OK\n  tutor      2/2 OK\n  removal    6/6 OK\n  wipes      3/3 OK\n  protection 3/3 OK\n  payoffs    15/15 OK\n  wincons    5/4 OK"
+ },
+ "cards": [
+  {
+   "name": "Arcane Signet",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Artifact",
+   "mana_cost": "{2}",
+   "edhrec_rank": 3,
+   "role": "fixing-floor",
+   "reason": "cheap rainbow fixing for multicolor deck",
+   "strict": [
+    "ramp"
+   ],
+   "lenient": [
+    "ramp"
+   ],
+   "oracle": "{T}: Add one mana of any color in your commander's color identity."
+  },
+  {
+   "name": "Mind Stone",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Artifact",
+   "mana_cost": "{2}",
+   "edhrec_rank": 32,
+   "role": "fixing-floor",
+   "reason": "cheap rainbow fixing for multicolor deck",
+   "strict": [
+    "ramp",
+    "draw"
+   ],
+   "lenient": [
+    "ramp",
+    "draw"
+   ],
+   "oracle": "{T}: Add {C}. / {1}, {T}, Sacrifice this artifact: Draw a card."
+  },
+  {
+   "name": "Talisman of Hierarchy",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Artifact",
+   "mana_cost": "{2}",
+   "edhrec_rank": 135,
+   "role": "fixing-floor",
+   "reason": "cheap rainbow fixing for multicolor deck",
+   "strict": [
+    "ramp"
+   ],
+   "lenient": [
+    "ramp"
+   ],
+   "oracle": "{T}: Add {C}. / {T}: Add {W} or {B}. This artifact deals 1 damage to you."
+  },
+  {
+   "name": "Orzhov Signet",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Artifact",
+   "mana_cost": "{2}",
+   "edhrec_rank": 188,
+   "role": "fixing-floor",
+   "reason": "cheap rainbow fixing for multicolor deck",
+   "strict": [
+    "ramp"
+   ],
+   "lenient": [
+    "ramp"
+   ],
+   "oracle": "{1}, {T}: Add {W}{B}."
+  },
+  {
+   "name": "Talisman of Indulgence",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Artifact",
+   "mana_cost": "{2}",
+   "edhrec_rank": 129,
+   "role": "fixing-floor",
+   "reason": "cheap rainbow fixing for multicolor deck",
+   "strict": [
+    "ramp"
+   ],
+   "lenient": [
+    "ramp"
+   ],
+   "oracle": "{T}: Add {C}. / {T}: Add {B} or {R}. This artifact deals 1 damage to you."
+  },
+  {
+   "name": "Skullclamp",
+   "qty": 1,
+   "cmc": 1,
+   "type_line": "Artifact — Equipment",
+   "mana_cost": "{1}",
+   "edhrec_rank": 41,
+   "role": "payoff",
+   "reason": "archetype payoff: Skullclamp",
+   "strict": [
+    "draw"
+   ],
+   "lenient": [
+    "draw"
+   ],
+   "oracle": "Equipped creature gets +1/-1. / Whenever equipped creature dies, draw two cards. / Equip {1}"
+  },
+  {
+   "name": "Butcher of Malakir",
+   "qty": 1,
+   "cmc": 7,
+   "type_line": "Creature — Vampire Warrior",
+   "mana_cost": "{5}{B}{B}",
+   "edhrec_rank": 1371,
+   "role": "payoff",
+   "reason": "archetype payoff: Butcher of Malakir",
+   "strict": [
+    "removal",
+    "win_condition"
+   ],
+   "lenient": [
+    "removal",
+    "win_condition"
+   ],
+   "oracle": "Flying / Whenever this creature or another creature you control dies, each opponent sacrifices a creature of their choice."
+  },
+  {
+   "name": "Whispersilk Cloak",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Artifact — Equipment",
+   "mana_cost": "{3}",
+   "edhrec_rank": 331,
+   "role": "payoff",
+   "reason": "archetype payoff: Whispersilk Cloak",
+   "strict": [
+    "protection"
+   ],
+   "lenient": [
+    "protection"
+   ],
+   "oracle": "Equipped creature can't be blocked and has shroud. (It can't be the target of spells or abilities.) / Equip {2}"
+  },
+  {
+   "name": "Anger",
+   "qty": 1,
+   "cmc": 4,
+   "type_line": "Creature — Incarnation",
+   "mana_cost": "{3}{R}",
+   "edhrec_rank": 347,
+   "role": "payoff",
+   "reason": "archetype payoff: Anger",
+   "strict": [
+    "utility"
+   ],
+   "lenient": [
+    "utility"
+   ],
+   "oracle": "Haste / As long as this card is in your graveyard and you control a Mountain, creatures you control have haste."
+  },
+  {
+   "name": "Adeline, Resplendent Cathar",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Legendary Creature — Human Knight",
+   "mana_cost": "{1}{W}{W}",
+   "edhrec_rank": 492,
+   "role": "payoff",
+   "reason": "archetype payoff: Adeline, Resplendent Cathar",
+   "strict": [
+    "utility"
+   ],
+   "lenient": [
+    "utility"
+   ],
+   "oracle": "Vigilance / Adeline's power is equal to the number of creatures you control. / Whenever you attack, for each opponent, create a 1/1 white Human creature token that's tapped and attacking that player or a planeswalker they control."
+  },
+  {
+   "name": "Anointed Procession",
+   "qty": 1,
+   "cmc": 4,
+   "type_line": "Enchantment",
+   "mana_cost": "{3}{W}",
+   "edhrec_rank": 364,
+   "role": "payoff",
+   "reason": "archetype payoff: Anointed Procession",
+   "strict": [
+    "utility"
+   ],
+   "lenient": [
+    "utility"
+   ],
+   "oracle": "If an effect would create one or more tokens under your control, it creates twice that many of those tokens instead."
+  },
+  {
+   "name": "Bitterblossom",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Kindred Enchantment — Faerie",
+   "mana_cost": "{1}{B}",
+   "edhrec_rank": 616,
+   "role": "payoff",
+   "reason": "archetype payoff: Bitterblossom",
+   "strict": [
+    "utility"
+   ],
+   "lenient": [
+    "utility"
+   ],
+   "oracle": "At the beginning of your upkeep, you lose 1 life and create a 1/1 black Faerie Rogue creature token with flying."
+  },
+  {
+   "name": "Walking Ballista",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Artifact Creature — Construct",
+   "mana_cost": "{X}{X}",
+   "edhrec_rank": 425,
+   "role": "payoff",
+   "reason": "archetype payoff: Walking Ballista",
+   "strict": [
+    "removal"
+   ],
+   "lenient": [
+    "removal"
+   ],
+   "oracle": "This creature enters with X +1/+1 counters on it. / {4}: Put a +1/+1 counter on this creature. / Remove a +1/+1 counter from this creature: It deals 1 damage to any target."
+  },
+  {
+   "name": "Master of Dark Rites",
+   "qty": 1,
+   "cmc": 1,
+   "type_line": "Creature — Vampire Cleric",
+   "mana_cost": "{B}",
+   "edhrec_rank": 2729,
+   "role": "ramp",
+   "reason": "ramp (role quota): Master of Dark Rites",
+   "strict": [
+    "ramp"
+   ],
+   "lenient": [
+    "ramp"
+   ],
+   "oracle": "{T}, Sacrifice another creature: Add {B}{B}{B}. Spend this mana only to cast Vampire, Cleric, and/or Demon spells."
+  },
+  {
+   "name": "Sol Ring",
+   "qty": 1,
+   "cmc": 1,
+   "type_line": "Artifact",
+   "mana_cost": "{1}",
+   "edhrec_rank": 1,
+   "role": "ramp",
+   "reason": "ramp (role quota): Sol Ring",
+   "strict": [
+    "ramp"
+   ],
+   "lenient": [
+    "ramp"
+   ],
+   "oracle": "{T}: Add {C}{C}."
+  },
+  {
+   "name": "Solemn Simulacrum",
+   "qty": 1,
+   "cmc": 4,
+   "type_line": "Artifact Creature — Golem",
+   "mana_cost": "{4}",
+   "edhrec_rank": 39,
+   "role": "ramp",
+   "reason": "ramp (role quota): Solemn Simulacrum",
+   "strict": [
+    "ramp",
+    "draw"
+   ],
+   "lenient": [
+    "ramp",
+    "draw"
+   ],
+   "oracle": "When this creature enters, you may search your library for a basic land card, put that card onto the battlefield tapped, then shuffle. / When this creature dies, you may draw a card."
+  },
+  {
+   "name": "Thought Vessel",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Artifact",
+   "mana_cost": "{2}",
+   "edhrec_rank": 21,
+   "role": "ramp",
+   "reason": "ramp (role quota): Thought Vessel",
+   "strict": [
+    "ramp"
+   ],
+   "lenient": [
+    "ramp"
+   ],
+   "oracle": "You have no maximum hand size. / {T}: Add {C}."
+  },
+  {
+   "name": "Pawn of Ulamog",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Creature — Vampire Shaman",
+   "mana_cost": "{1}{B}{B}",
+   "edhrec_rank": 1541,
+   "role": "ramp",
+   "reason": "ramp (role quota): Pawn of Ulamog",
+   "strict": [
+    "utility"
+   ],
+   "lenient": [
+    "ramp"
+   ],
+   "oracle": "Whenever this creature or another nontoken creature you control dies, you may create a 0/1 colorless Eldrazi Spawn creature token. It has \"Sacrifice this token: Add {C}.\""
+  },
+  {
+   "name": "Welcoming Vampire",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Creature — Vampire",
+   "mana_cost": "{2}{W}",
+   "edhrec_rank": 427,
+   "role": "draw",
+   "reason": "card draw (role quota): Welcoming Vampire",
+   "strict": [
+    "draw"
+   ],
+   "lenient": [
+    "draw"
+   ],
+   "oracle": "Flying / Whenever one or more other creatures you control with power 2 or less enter, draw a card. This ability triggers only once each turn."
+  },
+  {
+   "name": "Clavileño, First of the Blessed",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Legendary Creature — Vampire Cleric",
+   "mana_cost": "{1}{W}{B}",
+   "edhrec_rank": 3533,
+   "role": "draw",
+   "reason": "card draw (role quota): Clavileño, First of the Blessed",
+   "strict": [
+    "draw"
+   ],
+   "lenient": [
+    "draw"
+   ],
+   "oracle": "Whenever you attack, target attacking Vampire that isn't a Demon becomes a Demon in addition to its other types. It gains \"When this creature dies, draw a card and create a tapped 4/3 white and black Vampire Demon creature token with flying.\""
+  },
+  {
+   "name": "Twilight Prophet",
+   "qty": 1,
+   "cmc": 4,
+   "type_line": "Creature — Vampire Cleric",
+   "mana_cost": "{2}{B}{B}",
+   "edhrec_rank": 1135,
+   "role": "draw",
+   "reason": "card draw (role quota): Twilight Prophet",
+   "strict": [
+    "draw",
+    "win_condition"
+   ],
+   "lenient": [
+    "draw",
+    "win_condition"
+   ],
+   "oracle": "Flying / Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.) / At the beginning of your upkeep, if you have the city's blessing, reveal the top card of your library and put it into your hand. Each opponent loses X life and you gain X life, where X is that card's mana value."
+  },
+  {
+   "name": "High-Society Hunter",
+   "qty": 1,
+   "cmc": 5,
+   "type_line": "Creature — Vampire Noble",
+   "mana_cost": "{3}{B}{B}",
+   "edhrec_rank": 4403,
+   "role": "draw",
+   "reason": "card draw (role quota): High-Society Hunter",
+   "strict": [
+    "draw",
+    "win_condition"
+   ],
+   "lenient": [
+    "draw",
+    "win_condition"
+   ],
+   "oracle": "Flying / Whenever this creature attacks, you may sacrifice another creature. If you do, put a +1/+1 counter on this creature. / Whenever another nontoken creature dies, draw a card."
+  },
+  {
+   "name": "Champion of Dusk",
+   "qty": 1,
+   "cmc": 5,
+   "type_line": "Creature — Vampire Knight",
+   "mana_cost": "{3}{B}{B}",
+   "edhrec_rank": 3585,
+   "role": "draw",
+   "reason": "card draw (role quota): Champion of Dusk",
+   "strict": [
+    "draw"
+   ],
+   "lenient": [
+    "draw",
+    "win_condition"
+   ],
+   "oracle": "When this creature enters, you draw X cards and you lose X life, where X is the number of Vampires you control."
+  },
+  {
+   "name": "Baron Bertram Graywater",
+   "qty": 1,
+   "cmc": 4,
+   "type_line": "Legendary Creature — Vampire Noble",
+   "mana_cost": "{2}{W}{B}",
+   "edhrec_rank": 4398,
+   "role": "draw",
+   "reason": "card draw (role quota): Baron Bertram Graywater",
+   "strict": [
+    "draw"
+   ],
+   "lenient": [
+    "draw"
+   ],
+   "oracle": "Whenever one or more tokens you control enter, create a 1/1 black Vampire Rogue creature token with lifelink. This ability triggers only once each turn. / {1}{B}, Sacrifice another creature or artifact: Draw a card."
+  },
+  {
+   "name": "Crossway Troublemakers",
+   "qty": 1,
+   "cmc": 6,
+   "type_line": "Creature — Vampire",
+   "mana_cost": "{5}{B}",
+   "edhrec_rank": 3647,
+   "role": "draw",
+   "reason": "card draw (role quota): Crossway Troublemakers",
+   "strict": [
+    "draw"
+   ],
+   "lenient": [
+    "draw",
+    "win_condition"
+   ],
+   "oracle": "Attacking Vampires you control have deathtouch and lifelink. (Any amount of damage they deal to a creature is enough to destroy it. Damage dealt by those creatures also causes their controller to gain that much life.) / Whenever a Vampire you control dies, you may pay 2 life. If you do, draw a card."
+  },
+  {
+   "name": "Black Market Connections",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Enchantment",
+   "mana_cost": "{2}{B}",
+   "edhrec_rank": 130,
+   "role": "draw",
+   "reason": "card draw (role quota): Black Market Connections",
+   "strict": [
+    "draw"
+   ],
+   "lenient": [
+    "draw"
+   ],
+   "oracle": "At the beginning of your first main phase, choose one or more — / • Sell Contraband — Create a Treasure token. You lose 1 life. / • Buy Information — Draw a card. You lose 2 life. / • Hire a Mercenary — Create a 3/2 colorless Shapeshifter creature token with changeling. You lose 3 life. (It is every creature type.)"
+  },
+  {
+   "name": "Mari, the Killing Quill",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Legendary Creature — Vampire Assassin",
+   "mana_cost": "{1}{B}{B}",
+   "edhrec_rank": 2571,
+   "role": "draw",
+   "reason": "card draw (role quota): Mari, the Killing Quill",
+   "strict": [
+    "draw"
+   ],
+   "lenient": [
+    "draw"
+   ],
+   "oracle": "Whenever a creature an opponent controls dies, exile it with a hit counter on it. / Assassins, Mercenaries, and Rogues you control have deathtouch and \"Whenever this creature deals combat damage to a player, you may remove a hit counter from a card that player owns in exile. If you do, draw a card and create two Treasure tokens.\""
+  },
+  {
+   "name": "Emeritus of Woe // Demonic Tutor",
+   "qty": 1,
+   "cmc": 4,
+   "type_line": "Creature — Vampire Warlock // Sorcery",
+   "mana_cost": "{3}{B} // {1}{B}",
+   "edhrec_rank": 3158,
+   "role": "tutor",
+   "reason": "tutor (role quota): Emeritus of Woe // Demonic Tutor",
+   "strict": [
+    "tutor"
+   ],
+   "lenient": [
+    "tutor"
+   ],
+   "oracle": "This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.) / At the beginning of your end step, if two or more creatures died this turn, this creature becomes prepared. / // / Search your library for a card, put that card into your hand, then shuffle."
+  },
+  {
+   "name": "Forerunner of the Legion",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Creature — Vampire Knight",
+   "mana_cost": "{2}{W}",
+   "edhrec_rank": 6103,
+   "role": "tutor",
+   "reason": "tutor (role quota): Forerunner of the Legion",
+   "strict": [
+    "tutor"
+   ],
+   "lenient": [
+    "tutor"
+   ],
+   "oracle": "When this creature enters, you may search your library for a Vampire card, reveal it, then shuffle and put that card on top. / Whenever another Vampire you control enters, target creature gets +1/+1 until end of turn."
+  },
+  {
+   "name": "Sorin, Imperious Bloodlord",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Legendary Planeswalker — Sorin",
+   "mana_cost": "{2}{B}",
+   "edhrec_rank": 4001,
+   "role": "removal",
+   "reason": "spot removal (role quota): Sorin, Imperious Bloodlord",
+   "strict": [
+    "removal"
+   ],
+   "lenient": [
+    "removal"
+   ],
+   "oracle": "+1: Target creature you control gains deathtouch and lifelink until end of turn. If it's a Vampire, put a +1/+1 counter on it. / +1: You may sacrifice a Vampire. When you do, Sorin deals 3 damage to any target and you gain 3 life. / −3: You may put a Vampire creature card from your hand onto the battlefield."
+  },
+  {
+   "name": "Patron of the Vein",
+   "qty": 1,
+   "cmc": 6,
+   "type_line": "Creature — Vampire Shaman",
+   "mana_cost": "{4}{B}{B}",
+   "edhrec_rank": 3553,
+   "role": "removal",
+   "reason": "spot removal (role quota): Patron of the Vein",
+   "strict": [
+    "removal",
+    "win_condition"
+   ],
+   "lenient": [
+    "removal",
+    "win_condition"
+   ],
+   "oracle": "Flying / When this creature enters, destroy target creature an opponent controls. / Whenever a creature an opponent controls dies, exile it and put a +1/+1 counter on each Vampire you control."
+  },
+  {
+   "name": "Swords to Plowshares",
+   "qty": 1,
+   "cmc": 1,
+   "type_line": "Instant",
+   "mana_cost": "{W}",
+   "edhrec_rank": 11,
+   "role": "removal",
+   "reason": "spot removal (role quota): Swords to Plowshares",
+   "strict": [
+    "removal"
+   ],
+   "lenient": [
+    "removal"
+   ],
+   "oracle": "Exile target creature. Its controller gains life equal to its power."
+  },
+  {
+   "name": "Deadly Rollick",
+   "qty": 1,
+   "cmc": 4,
+   "type_line": "Instant",
+   "mana_cost": "{3}{B}",
+   "edhrec_rank": 107,
+   "role": "removal",
+   "reason": "spot removal (role quota): Deadly Rollick",
+   "strict": [
+    "removal"
+   ],
+   "lenient": [
+    "removal"
+   ],
+   "oracle": "If you control a commander, you may cast this spell without paying its mana cost. / Exile target creature."
+  },
+  {
+   "name": "Loran of the Third Path",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Legendary Creature — Human Artificer",
+   "mana_cost": "{2}{W}",
+   "edhrec_rank": 343,
+   "role": "removal",
+   "reason": "spot removal (role quota): Loran of the Third Path",
+   "strict": [
+    "draw",
+    "removal"
+   ],
+   "lenient": [
+    "draw",
+    "removal"
+   ],
+   "oracle": "Vigilance / When Loran enters, destroy up to one target artifact or enchantment. / {T}: You and target opponent each draw a card."
+  },
+  {
+   "name": "Path to Exile",
+   "qty": 1,
+   "cmc": 1,
+   "type_line": "Instant",
+   "mana_cost": "{W}",
+   "edhrec_rank": 15,
+   "role": "removal",
+   "reason": "spot removal (role quota): Path to Exile",
+   "strict": [
+    "removal"
+   ],
+   "lenient": [
+    "removal"
+   ],
+   "oracle": "Exile target creature. Its controller may search their library for a basic land card, put that card onto the battlefield tapped, then shuffle."
+  },
+  {
+   "name": "Amalia Benavides Aguirre",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Legendary Creature — Vampire Scout",
+   "mana_cost": "{W}{B}",
+   "edhrec_rank": 4157,
+   "role": "board_wipe",
+   "reason": "board wipe (role quota): Amalia Benavides Aguirre",
+   "strict": [
+    "draw",
+    "board_wipe"
+   ],
+   "lenient": [
+    "draw",
+    "board_wipe"
+   ],
+   "oracle": "Ward—Pay 3 life. / Whenever you gain life, Amalia Benavides Aguirre explores. Then destroy all other creatures if its power is exactly 20. (To have this creature explore, reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on this creature, then put the card back or put it into your graveyard.)"
+  },
+  {
+   "name": "Invasion of Fiora // Marchesa, Resolute Monarch",
+   "qty": 1,
+   "cmc": 6,
+   "type_line": "Battle — Siege // Legendary Creature — Human Noble",
+   "mana_cost": "{4}{B}{B}",
+   "edhrec_rank": 6601,
+   "role": "board_wipe",
+   "reason": "board wipe (role quota): Invasion of Fiora // Marchesa, Resolute Monarch",
+   "strict": [
+    "draw",
+    "board_wipe",
+    "win_condition"
+   ],
+   "lenient": [
+    "draw",
+    "board_wipe",
+    "win_condition"
+   ],
+   "oracle": "(As a Siege enters, choose an opponent to protect it. You and others can attack it. When it's defeated, exile it, then cast it transformed.) / When this Siege enters, choose one or both — / • Destroy all legendary creatures. / • Destroy all nonlegendary creatures. / // / Menace, deathtouch / Whenever Marchesa attacks, remove all counters from up to one target permanent. / At the beginning of your upkeep, if you haven't been dealt combat damage since your last turn, you draw a card and you lose 1 life."
+  },
+  {
+   "name": "Damnation",
+   "qty": 1,
+   "cmc": 4,
+   "type_line": "Sorcery",
+   "mana_cost": "{2}{B}{B}",
+   "edhrec_rank": 389,
+   "role": "board_wipe",
+   "reason": "board wipe (role quota): Damnation",
+   "strict": [
+    "board_wipe"
+   ],
+   "lenient": [
+    "board_wipe"
+   ],
+   "oracle": "Destroy all creatures. They can't be regenerated."
+  },
+  {
+   "name": "Yahenni, Undying Partisan",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Legendary Creature — Aetherborn Vampire",
+   "mana_cost": "{2}{B}",
+   "edhrec_rank": 1033,
+   "role": "protection",
+   "reason": "protection (role quota): Yahenni, Undying Partisan",
+   "strict": [
+    "protection"
+   ],
+   "lenient": [
+    "protection"
+   ],
+   "oracle": "Haste / Whenever a creature an opponent controls dies, put a +1/+1 counter on Yahenni. / Sacrifice another creature: Yahenni gains indestructible until end of turn."
+  },
+  {
+   "name": "Teferi's Protection",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Instant",
+   "mana_cost": "{2}{W}",
+   "edhrec_rank": 109,
+   "role": "protection",
+   "reason": "protection (role quota): Teferi's Protection",
+   "strict": [
+    "protection"
+   ],
+   "lenient": [
+    "protection"
+   ],
+   "oracle": "Until your next turn, your life total can't change and you gain protection from everything. All permanents you control phase out. (While they're phased out, they're treated as though they don't exist. They phase in before you untap during your untap step.) / Exile Teferi's Protection."
+  },
+  {
+   "name": "Venat, Heart of Hydaelyn // Hydaelyn, the Mothercrystal",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Legendary Creature — Elder Wizard // Legendary Creature — God",
+   "mana_cost": "{1}{W}{W}",
+   "edhrec_rank": 2859,
+   "role": "protection",
+   "reason": "protection (role quota): Venat, Heart of Hydaelyn // Hydaelyn, the Mothercrystal",
+   "strict": [
+    "draw",
+    "removal"
+   ],
+   "lenient": [
+    "draw",
+    "removal",
+    "protection"
+   ],
+   "oracle": "Whenever you cast a legendary spell, draw a card. This ability triggers only once each turn. / Hero's Sundering — {7}, {T}: Exile target nonland permanent. Transform Venat. Activate only as a sorcery. / // / Indestructible / Blessing of Light — At the beginning of combat on your turn, put a +1/+1 counter on another target creature you control. Until your next turn, it gains indestructible. If that creature is legendary, draw a card."
+  },
+  {
+   "name": "Bloodline Keeper // Lord of Lineage",
+   "qty": 1,
+   "cmc": 4,
+   "type_line": "Creature — Vampire // Creature — Vampire",
+   "mana_cost": "{2}{B}{B}",
+   "edhrec_rank": 2537,
+   "role": "win_condition",
+   "reason": "win condition (role quota): Bloodline Keeper // Lord of Lineage",
+   "strict": [
+    "win_condition"
+   ],
+   "lenient": [
+    "win_condition"
+   ],
+   "oracle": "Flying / {T}: Create a 2/2 black Vampire creature token with flying. / {B}: Transform this creature. Activate only if you control five or more Vampires. / // / Flying / Other Vampire creatures you control get +2/+2. / {T}: Create a 2/2 black Vampire creature token with flying."
+  },
+  {
+   "name": "Cruel Celebrant",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Creature — Vampire",
+   "mana_cost": "{W}{B}",
+   "edhrec_rank": 964,
+   "role": "win_condition",
+   "reason": "win condition (role quota): Cruel Celebrant",
+   "strict": [
+    "win_condition"
+   ],
+   "lenient": [
+    "win_condition"
+   ],
+   "oracle": "Whenever this creature or another creature or planeswalker you control dies, each opponent loses 1 life and you gain 1 life."
+  },
+  {
+   "name": "Sanctum Seeker",
+   "qty": 1,
+   "cmc": 4,
+   "type_line": "Creature — Vampire Knight",
+   "mana_cost": "{2}{B}{B}",
+   "edhrec_rank": 2331,
+   "role": "win_condition",
+   "reason": "win condition (role quota): Sanctum Seeker",
+   "strict": [
+    "win_condition"
+   ],
+   "lenient": [
+    "win_condition"
+   ],
+   "oracle": "Whenever a Vampire you control attacks, each opponent loses 1 life and you gain 1 life."
+  },
+  {
+   "name": "Malakir Bloodwitch",
+   "qty": 1,
+   "cmc": 5,
+   "type_line": "Creature — Vampire Shaman",
+   "mana_cost": "{3}{B}{B}",
+   "edhrec_rank": 3565,
+   "role": "win_condition",
+   "reason": "win condition (role quota): Malakir Bloodwitch",
+   "strict": [
+    "win_condition"
+   ],
+   "lenient": [
+    "win_condition"
+   ],
+   "oracle": "Flying, protection from white / When this creature enters, each opponent loses life equal to the number of Vampires you control. You gain life equal to the life lost this way."
+  },
+  {
+   "name": "Blood Artist",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Creature — Vampire",
+   "mana_cost": "{1}{B}",
+   "edhrec_rank": 141,
+   "role": "utility",
+   "reason": "allowlisted (arsenal/commander stats): Blood Artist",
+   "strict": [
+    "utility"
+   ],
+   "lenient": [
+    "utility"
+   ],
+   "oracle": "Whenever this creature or another creature dies, target player loses 1 life and you gain 1 life."
+  },
+  {
+   "name": "Cordial Vampire",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Creature — Vampire",
+   "mana_cost": "{B}{B}",
+   "edhrec_rank": 1874,
+   "role": "synergy",
+   "reason": "commander synergy: Cordial Vampire",
+   "strict": [
+    "utility"
+   ],
+   "lenient": [
+    "utility"
+   ],
+   "oracle": "Whenever this creature or another creature dies, put a +1/+1 counter on each Vampire you control."
+  },
+  {
+   "name": "Elenda, the Dusk Rose",
+   "qty": 1,
+   "cmc": 4,
+   "type_line": "Legendary Creature — Vampire Knight",
+   "mana_cost": "{2}{W}{B}",
+   "edhrec_rank": 1268,
+   "role": "synergy",
+   "reason": "commander synergy: Elenda, the Dusk Rose",
+   "strict": [
+    "utility"
+   ],
+   "lenient": [
+    "utility"
+   ],
+   "oracle": "Lifelink / Whenever another creature dies, put a +1/+1 counter on Elenda. / When Elenda dies, create X 1/1 white Vampire creature tokens with lifelink, where X is Elenda's power."
+  },
+  {
+   "name": "Indulgent Aristocrat",
+   "qty": 1,
+   "cmc": 1,
+   "type_line": "Creature — Vampire Noble",
+   "mana_cost": "{B}",
+   "edhrec_rank": 2567,
+   "role": "synergy",
+   "reason": "commander synergy: Indulgent Aristocrat",
+   "strict": [
+    "utility"
+   ],
+   "lenient": [
+    "utility"
+   ],
+   "oracle": "Lifelink / {2}, Sacrifice a creature: Put a +1/+1 counter on each Vampire you control."
+  },
+  {
+   "name": "Vito, Thorn of the Dusk Rose",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Legendary Creature — Vampire Cleric",
+   "mana_cost": "{2}{B}",
+   "edhrec_rank": 491,
+   "role": "utility",
+   "reason": "allowlisted (arsenal/commander stats): Vito, Thorn of the Dusk Rose",
+   "strict": [
+    "utility"
+   ],
+   "lenient": [
+    "utility"
+   ],
+   "oracle": "Whenever you gain life, target opponent loses that much life. / {3}{B}{B}: Creatures you control gain lifelink until end of turn."
+  },
+  {
+   "name": "Captivating Vampire",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Creature — Vampire",
+   "mana_cost": "{1}{B}{B}",
+   "edhrec_rank": 2491,
+   "role": "utility",
+   "reason": "allowlisted (arsenal/commander stats): Captivating Vampire",
+   "strict": [
+    "utility"
+   ],
+   "lenient": [
+    "utility"
+   ],
+   "oracle": "Other Vampire creatures you control get +1/+1. / Tap five untapped Vampires you control: Gain control of target creature. It becomes a Vampire in addition to its other types."
+  },
+  {
+   "name": "Stromkirk Captain",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Creature — Vampire Soldier",
+   "mana_cost": "{1}{B}{R}",
+   "edhrec_rank": 3049,
+   "role": "utility",
+   "reason": "allowlisted (arsenal/commander stats): Stromkirk Captain",
+   "strict": [
+    "utility"
+   ],
+   "lenient": [
+    "utility"
+   ],
+   "oracle": "First strike / Other Vampire creatures you control get +1/+1 and have first strike."
+  },
+  {
+   "name": "Legion Lieutenant",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Creature — Vampire Knight",
+   "mana_cost": "{W}{B}",
+   "edhrec_rank": 3069,
+   "role": "utility",
+   "reason": "allowlisted (arsenal/commander stats): Legion Lieutenant",
+   "strict": [
+    "utility"
+   ],
+   "lenient": [
+    "utility"
+   ],
+   "oracle": "Other Vampires you control get +1/+1."
+  },
+  {
+   "name": "Charismatic Conqueror",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Creature — Vampire Soldier",
+   "mana_cost": "{1}{W}",
+   "edhrec_rank": 1045,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "utility"
+   ],
+   "lenient": [
+    "utility"
+   ],
+   "oracle": "Vigilance / Whenever an artifact or creature an opponent controls enters untapped, they may tap that permanent. If they don't, you create a 1/1 white Vampire creature token with lifelink."
+  },
+  {
+   "name": "Drana, Liberator of Malakir",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Legendary Creature — Vampire Ally",
+   "mana_cost": "{1}{B}{B}",
+   "edhrec_rank": 1533,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "utility"
+   ],
+   "lenient": [
+    "utility"
+   ],
+   "oracle": "Flying, first strike / Whenever Drana deals combat damage to a player, put a +1/+1 counter on each attacking creature you control."
+  },
+  {
+   "name": "Edgar, Charmed Groom // Edgar Markov's Coffin",
+   "qty": 1,
+   "cmc": 4,
+   "type_line": "Legendary Creature — Vampire Noble // Legendary Artifact",
+   "mana_cost": "{2}{W}{B}",
+   "edhrec_rank": 3621,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "utility"
+   ],
+   "lenient": [
+    "utility"
+   ],
+   "oracle": "Other Vampires you control get +1/+1. / When Edgar dies, return it to the battlefield transformed under its owner's control. / // / At the beginning of your upkeep, create a 1/1 white and black Vampire creature token with lifelink and put a bloodline counter on Edgar Markov's Coffin. Then if there are three or more bloodline counters on it, remove those counters and transform it."
+  },
+  {
+   "name": "Mavren Fein, Dusk Apostle",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Legendary Creature — Vampire Cleric",
+   "mana_cost": "{2}{W}",
+   "edhrec_rank": 3828,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "utility"
+   ],
+   "lenient": [
+    "utility"
+   ],
+   "oracle": "Whenever one or more nontoken Vampires you control attack, create a 1/1 white Vampire creature token with lifelink."
+  },
+  {
+   "name": "Viscera Seer",
+   "qty": 1,
+   "cmc": 1,
+   "type_line": "Creature — Vampire Wizard",
+   "mana_cost": "{B}",
+   "edhrec_rank": 257,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "utility"
+   ],
+   "lenient": [
+    "utility"
+   ],
+   "oracle": "Sacrifice a creature: Scry 1. (Look at the top card of your library. You may put that card on the bottom.)"
+  },
+  {
+   "name": "Bloodletter of Aclazotz",
+   "qty": 1,
+   "cmc": 4,
+   "type_line": "Creature — Vampire Demon",
+   "mana_cost": "{1}{B}{B}{B}",
+   "edhrec_rank": 857,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "win_condition"
+   ],
+   "lenient": [
+    "win_condition"
+   ],
+   "oracle": "Flying / If an opponent would lose life during your turn, they lose twice that much life instead. (Damage causes loss of life.)"
+  },
+  {
+   "name": "Vampire Socialite",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Creature — Vampire Noble",
+   "mana_cost": "{B}{R}",
+   "edhrec_rank": 5337,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "utility"
+   ],
+   "lenient": [
+    "utility"
+   ],
+   "oracle": "Menace (This creature can't be blocked except by two or more creatures.) / When this creature enters, if an opponent lost life this turn, put a +1/+1 counter on each other Vampire you control. / As long as an opponent lost life this turn, each other Vampire you control enters with an additional +1/+1 counter on it."
+  },
+  {
+   "name": "Professional Face-Breaker",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Creature — Human Warrior",
+   "mana_cost": "{2}{R}",
+   "edhrec_rank": 207,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "ramp"
+   ],
+   "lenient": [
+    "utility"
+   ],
+   "oracle": "Menace / Whenever one or more creatures you control deal combat damage to a player, create a Treasure token. / Sacrifice a Treasure: Exile the top card of your library. You may play that card this turn."
+  },
+  {
+   "name": "Three Tree City",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Legendary Land",
+   "mana_cost": null,
+   "edhrec_rank": 177,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "As Three Tree City enters, choose a creature type. / {T}: Add {C}. / {2}, {T}: Choose a color. Add an amount of mana of that color equal to the number of creatures you control of the chosen type."
+  },
+  {
+   "name": "Bloodstained Mire",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land",
+   "mana_cost": null,
+   "edhrec_rank": 43,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "{T}, Pay 1 life, Sacrifice this land: Search your library for a Swamp or Mountain card, put it onto the battlefield, then shuffle."
+  },
+  {
+   "name": "Marsh Flats",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land",
+   "mana_cost": null,
+   "edhrec_rank": 51,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "{T}, Pay 1 life, Sacrifice this land: Search your library for a Plains or Swamp card, put it onto the battlefield, then shuffle."
+  },
+  {
+   "name": "Godless Shrine",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land — Plains Swamp",
+   "mana_cost": null,
+   "edhrec_rank": 60,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "({T}: Add {W} or {B}.) / As this land enters, you may pay 2 life. If you don't, it enters tapped."
+  },
+  {
+   "name": "Blood Crypt",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land — Swamp Mountain",
+   "mana_cost": null,
+   "edhrec_rank": 69,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "({T}: Add {B} or {R}.) / As this land enters, you may pay 2 life. If you don't, it enters tapped."
+  },
+  {
+   "name": "Sacred Foundry",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land — Mountain Plains",
+   "mana_cost": null,
+   "edhrec_rank": 73,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "({T}: Add {R} or {W}.) / As this land enters, you may pay 2 life. If you don't, it enters tapped."
+  },
+  {
+   "name": "Command Tower",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land",
+   "mana_cost": null,
+   "edhrec_rank": 2,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "{T}: Add one mana of any color in your commander's color identity."
+  },
+  {
+   "name": "Exotic Orchard",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land",
+   "mana_cost": null,
+   "edhrec_rank": 9,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "{T}: Add one mana of any color that a land an opponent controls could produce."
+  },
+  {
+   "name": "City of Brass",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land",
+   "mana_cost": null,
+   "edhrec_rank": 96,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "Whenever this land becomes tapped, it deals 1 damage to you. / {T}: Add one mana of any color."
+  },
+  {
+   "name": "Badlands",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land — Swamp Mountain",
+   "mana_cost": null,
+   "edhrec_rank": 383,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "({T}: Add {B} or {R}.)"
+  },
+  {
+   "name": "Scrubland",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land — Plains Swamp",
+   "mana_cost": null,
+   "edhrec_rank": 386,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "({T}: Add {W} or {B}.)"
+  },
+  {
+   "name": "Starting Town",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land — Town",
+   "mana_cost": null,
+   "edhrec_rank": 714,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "This land enters tapped unless it's your first, second, or third turn of the game. / {T}: Add {C}. / {T}, Pay 1 life: Add one mana of any color."
+  },
+  {
+   "name": "Temple of the Dragon Queen",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land",
+   "mana_cost": null,
+   "edhrec_rank": 2547,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "As this land enters, you may reveal a Dragon card from your hand. This land enters tapped unless you revealed a Dragon card this way or you control a Dragon. / As this land enters, choose a color. / {T}: Add one mana of the chosen color."
+  },
+  {
+   "name": "Dragonskull Summit",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land",
+   "mana_cost": null,
+   "edhrec_rank": 84,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "This land enters tapped unless you control a Swamp or a Mountain. / {T}: Add {B} or {R}."
+  },
+  {
+   "name": "Isolated Chapel",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land",
+   "mana_cost": null,
+   "edhrec_rank": 92,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "This land enters tapped unless you control a Plains or a Swamp. / {T}: Add {W} or {B}."
+  },
+  {
+   "name": "Caves of Koilos",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land",
+   "mana_cost": null,
+   "edhrec_rank": 125,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "{T}: Add {C}. / {T}: Add {W} or {B}. This land deals 1 damage to you."
+  },
+  {
+   "name": "Grand Coliseum",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land",
+   "mana_cost": null,
+   "edhrec_rank": 4159,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "This land enters tapped. / {T}: Add {C}. / {T}: Add one mana of any color. This land deals 1 damage to you."
+  },
+  {
+   "name": "Arid Mesa",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land",
+   "mana_cost": null,
+   "edhrec_rank": 57,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "{T}, Pay 1 life, Sacrifice this land: Search your library for a Mountain or Plains card, put it onto the battlefield, then shuffle."
+  },
+  {
+   "name": "Shattered Landscape",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land",
+   "mana_cost": null,
+   "edhrec_rank": 1947,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "{T}: Add {C}. / {T}, Sacrifice this land: Search your library for a basic Mountain, Plains, or Swamp card, put it onto the battlefield tapped, then shuffle. / Cycling {R}{W}{B} ({R}{W}{B}, Discard this card: Draw a card.)"
+  },
+  {
+   "name": "Plateau",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land — Mountain Plains",
+   "mana_cost": null,
+   "edhrec_rank": 442,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "({T}: Add {R} or {W}.)"
+  },
+  {
+   "name": "Fell the Profane // Fell Mire",
+   "qty": 1,
+   "cmc": 4,
+   "type_line": "Instant // Land",
+   "mana_cost": "{2}{B}{B}",
+   "edhrec_rank": 200,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "Destroy target creature or planeswalker. / // / As this land enters, you may pay 3 life. If you don't, it enters tapped. / {T}: Add {B}."
+  },
+  {
+   "name": "Boggart Trawler // Boggart Bog",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Creature — Goblin // Land",
+   "mana_cost": "{2}{B}",
+   "edhrec_rank": 633,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "When this creature enters, exile target player's graveyard. / // / As this land enters, you may pay 3 life. If you don't, it enters tapped. / {T}: Add {B}."
+  },
+  {
+   "name": "Agadeem's Awakening // Agadeem, the Undercrypt",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Sorcery // Land",
+   "mana_cost": "{X}{B}{B}{B}",
+   "edhrec_rank": 961,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "Return from your graveyard to the battlefield any number of target creature cards that each have a different mana value X or less. / // / As this land enters, you may pay 3 life. If you don't, it enters tapped. / {T}: Add {B}."
+  },
+  {
+   "name": "Cavern of Souls",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land",
+   "mana_cost": null,
+   "edhrec_rank": 111,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "As this land enters, choose a creature type. / {T}: Add {C}. / {T}: Add one mana of any color. Spend this mana only to cast a creature spell of the chosen type, and that spell can't be countered."
+  },
+  {
+   "name": "Swamp",
+   "qty": 10,
+   "cmc": 0,
+   "type_line": "Basic Land — Swamp",
+   "mana_cost": null,
+   "edhrec_rank": null,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "({T}: Add {B}.)"
+  },
+  {
+   "name": "Plains",
+   "qty": 3,
+   "cmc": 0,
+   "type_line": "Basic Land — Plains",
+   "mana_cost": null,
+   "edhrec_rank": null,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "({T}: Add {W}.)"
+  },
+  {
+   "name": "Mountain",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Basic Land — Mountain",
+   "mana_cost": null,
+   "edhrec_rank": null,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "({T}: Add {R}.)"
+  }
+ ]
+}

@@ -1,0 +1,1319 @@
+{
+ "summary": {
+  "slug": "krenko",
+  "opts": {
+   "format": "brawl",
+   "commanderName": "Krenko, Mob Boss"
+  },
+  "ms": 908,
+  "size": 99,
+  "lands": 38,
+  "strategy": "tribal",
+  "themes": [
+   "tribal"
+  ],
+  "tribalType": "goblin",
+  "profile": null,
+  "strictCounts": {
+   "ramp": 9,
+   "draw": 14,
+   "tutor": 2,
+   "removal": 6,
+   "board_wipe": 3,
+   "protection": 3,
+   "win_condition": 5
+  },
+  "lenientCounts": {
+   "ramp": 10,
+   "draw": 14,
+   "tutor": 2,
+   "removal": 6,
+   "board_wipe": 3,
+   "protection": 3,
+   "win_condition": 6
+  },
+  "roleCounts": {
+   "ramp": 9,
+   "(none)": 40,
+   "draw": 10,
+   "tutor": 2,
+   "removal": 6,
+   "board_wipe": 3,
+   "protection": 3,
+   "win_condition": 4,
+   "utility": 11,
+   "synergy": 11
+  },
+  "health": {
+   "grade": "A",
+   "realLands": 35,
+   "tappedLands": 5,
+   "tappedRatio": 0.13,
+   "sourcesByColor": {
+    "W": 5,
+    "U": 5,
+    "B": 5,
+    "R": 43,
+    "G": 5
+   },
+   "pipsByColor": {
+    "W": 0,
+    "U": 0,
+    "B": 0,
+    "R": 62,
+    "G": 0
+   },
+   "drawCount": 13,
+   "drawEngineCount": 8,
+   "rampCount": 10,
+   "fakeLands": [],
+   "warnings": [],
+   "deficiencies": []
+  },
+  "deadCardsReplaced": [
+   {
+    "out": "Chromatic Lantern",
+    "in": "Collector's Vault",
+    "reason": "mono-colour dead fixer"
+   }
+  ],
+  "buildReport": "Archetype: Tribal — targeting 61 nonland slots\nRole fills:\n  ramp       11/11 OK\n  draw       10/10 OK\n  tutor      2/2 OK\n  removal    6/6 OK\n  wipes      3/3 OK\n  protection 3/3 OK\n  payoffs    0/0 OK\n  wincons    4/4 OK"
+ },
+ "cards": [
+  {
+   "name": "Skirk Prospector",
+   "qty": 1,
+   "cmc": 1,
+   "type_line": "Creature — Goblin",
+   "mana_cost": "{R}",
+   "edhrec_rank": 1350,
+   "role": "ramp",
+   "reason": "ramp (role quota): Skirk Prospector",
+   "strict": [
+    "ramp"
+   ],
+   "lenient": [
+    "ramp"
+   ],
+   "oracle": "Sacrifice a Goblin: Add {R}."
+  },
+  {
+   "name": "Arcane Signet",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Artifact",
+   "mana_cost": "{2}",
+   "edhrec_rank": 3,
+   "role": "ramp",
+   "reason": "ramp (role quota): Arcane Signet",
+   "strict": [
+    "ramp"
+   ],
+   "lenient": [
+    "ramp"
+   ],
+   "oracle": "{T}: Add one mana of any color in your commander's color identity."
+  },
+  {
+   "name": "Howlsquad Heavy",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Creature — Goblin Mercenary",
+   "mana_cost": "{2}{R}",
+   "edhrec_rank": 3079,
+   "role": "ramp",
+   "reason": "ramp (role quota): Howlsquad Heavy",
+   "strict": [
+    "ramp"
+   ],
+   "lenient": [
+    "ramp"
+   ],
+   "oracle": "Start your engines! / Other Goblins you control have haste. / At the beginning of combat on your turn, create a 1/1 red Goblin creature token. That token attacks this combat if able. / Max speed — {T}: Add {R} for each Goblin you control."
+  },
+  {
+   "name": "Solemn Simulacrum",
+   "qty": 1,
+   "cmc": 4,
+   "type_line": "Artifact Creature — Golem",
+   "mana_cost": "{4}",
+   "edhrec_rank": 39,
+   "role": "ramp",
+   "reason": "ramp (role quota): Solemn Simulacrum",
+   "strict": [
+    "ramp",
+    "draw"
+   ],
+   "lenient": [
+    "ramp",
+    "draw"
+   ],
+   "oracle": "When this creature enters, you may search your library for a basic land card, put that card onto the battlefield tapped, then shuffle. / When this creature dies, you may draw a card."
+  },
+  {
+   "name": "Crime Novelist",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Creature — Goblin Bard",
+   "mana_cost": "{2}{R}",
+   "edhrec_rank": 1360,
+   "role": "ramp",
+   "reason": "ramp (role quota): Crime Novelist",
+   "strict": [
+    "ramp"
+   ],
+   "lenient": [
+    "ramp"
+   ],
+   "oracle": "Whenever you sacrifice an artifact, put a +1/+1 counter on this creature and add {R}."
+  },
+  {
+   "name": "Scuzzback Scrounger",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Creature — Goblin Warrior",
+   "mana_cost": "{1}{R}",
+   "edhrec_rank": 5254,
+   "role": "ramp",
+   "reason": "ramp (role quota): Scuzzback Scrounger",
+   "strict": [
+    "ramp"
+   ],
+   "lenient": [
+    "ramp"
+   ],
+   "oracle": "At the beginning of your first main phase, you may blight 1. If you do, create a Treasure token. (To blight 1, put a -1/-1 counter on a creature you control. A Treasure token is an artifact with \"{T}, Sacrifice this token: Add one mana of any color.\")"
+  },
+  {
+   "name": "Enterprising Scallywag",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Creature — Goblin Pirate",
+   "mana_cost": "{1}{R}",
+   "edhrec_rank": 5342,
+   "role": "ramp",
+   "reason": "ramp (role quota): Enterprising Scallywag",
+   "strict": [
+    "ramp"
+   ],
+   "lenient": [
+    "utility"
+   ],
+   "oracle": "At the beginning of your end step, if you descended this turn, create a Treasure token. (You descended if a permanent card was put into your graveyard from anywhere.)"
+  },
+  {
+   "name": "Dragon's Hoard",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Artifact",
+   "mana_cost": "{3}",
+   "edhrec_rank": 1193,
+   "role": "ramp",
+   "reason": "ramp (role quota): Dragon's Hoard",
+   "strict": [
+    "ramp",
+    "draw"
+   ],
+   "lenient": [
+    "ramp",
+    "draw"
+   ],
+   "oracle": "Whenever a Dragon you control enters, put a gold counter on this artifact. / {T}, Remove a gold counter from this artifact: Draw a card. / {T}: Add one mana of any color."
+  },
+  {
+   "name": "Ashling, Flame Dancer",
+   "qty": 1,
+   "cmc": 4,
+   "type_line": "Legendary Creature — Elemental Shaman",
+   "mana_cost": "{2}{R}{R}",
+   "edhrec_rank": 1561,
+   "role": "ramp",
+   "reason": "ramp (role quota): Ashling, Flame Dancer",
+   "strict": [
+    "ramp",
+    "draw",
+    "win_condition"
+   ],
+   "lenient": [
+    "ramp",
+    "draw",
+    "win_condition"
+   ],
+   "oracle": "You don't lose unspent red mana as steps and phases end. / Magecraft — Whenever you cast or copy an instant or sorcery spell, discard a card, then draw a card. If this is the second time this ability has resolved this turn, Ashling deals 2 damage to each opponent and each creature they control. If it's the third time, add {R}{R}{R}{R}."
+  },
+  {
+   "name": "Collector's Vault",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Artifact",
+   "mana_cost": "{2}",
+   "edhrec_rank": 1810,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "draw"
+   ],
+   "lenient": [
+    "ramp",
+    "draw"
+   ],
+   "oracle": "{2}, {T}: Draw a card, then discard a card. Create a Treasure token. (It's an artifact with \"{T}, Sacrifice this token: Add one mana of any color.\")"
+  },
+  {
+   "name": "Goblin Ringleader",
+   "qty": 1,
+   "cmc": 4,
+   "type_line": "Creature — Goblin",
+   "mana_cost": "{3}{R}",
+   "edhrec_rank": 4382,
+   "role": "draw",
+   "reason": "card draw (role quota): Goblin Ringleader",
+   "strict": [
+    "draw"
+   ],
+   "lenient": [
+    "draw"
+   ],
+   "oracle": "Haste (This creature can attack and {T} as soon as it comes under your control.) / When this creature enters, reveal the top four cards of your library. Put all Goblin cards revealed this way into your hand and the rest on the bottom of your library in any order."
+  },
+  {
+   "name": "Gempalm Incinerator",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Creature — Goblin",
+   "mana_cost": "{2}{R}",
+   "edhrec_rank": 6176,
+   "role": "draw",
+   "reason": "card draw (role quota): Gempalm Incinerator",
+   "strict": [
+    "draw"
+   ],
+   "lenient": [
+    "draw"
+   ],
+   "oracle": "Cycling {1}{R} ({1}{R}, Discard this card: Draw a card.) / When you cycle this card, you may have it deal X damage to target creature, where X is the number of Goblins on the battlefield."
+  },
+  {
+   "name": "Fable of the Mirror-Breaker // Reflection of Kiki-Jiki",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Enchantment — Saga // Enchantment Creature — Goblin Shaman",
+   "mana_cost": "{2}{R}",
+   "edhrec_rank": 1751,
+   "role": "draw",
+   "reason": "card draw (role quota): Fable of the Mirror-Breaker // Reflection of Kiki-Jiki",
+   "strict": [
+    "draw"
+   ],
+   "lenient": [
+    "draw"
+   ],
+   "oracle": "(As this Saga enters and after your draw step, add a lore counter.) / I — Create a 2/2 red Goblin Shaman creature token with \"Whenever this token attacks, create a Treasure token.\" / II — You may discard up to two cards. If you do, draw that many cards. / III — Exile this Saga, then return it to the battlefield transformed under your control. / // / {1}, {T}: Create a token that's a copy of another target nonlegendary creature you control, except it has haste. Sacrifice it at the beginning of the next end step."
+  },
+  {
+   "name": "Faithless Looting",
+   "qty": 1,
+   "cmc": 1,
+   "type_line": "Sorcery",
+   "mana_cost": "{R}",
+   "edhrec_rank": 98,
+   "role": "draw",
+   "reason": "card draw (role quota): Faithless Looting",
+   "strict": [
+    "draw"
+   ],
+   "lenient": [
+    "draw"
+   ],
+   "oracle": "Draw two cards, then discard two cards. / Flashback {2}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)"
+  },
+  {
+   "name": "Staff of Domination",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Artifact",
+   "mana_cost": "{3}",
+   "edhrec_rank": 1031,
+   "role": "draw",
+   "reason": "card draw (role quota): Staff of Domination",
+   "strict": [
+    "draw"
+   ],
+   "lenient": [
+    "draw"
+   ],
+   "oracle": "{1}: Untap this artifact. / {2}, {T}: You gain 1 life. / {3}, {T}: Untap target creature. / {4}, {T}: Tap target creature. / {5}, {T}: Draw a card."
+  },
+  {
+   "name": "Reckless Lackey",
+   "qty": 1,
+   "cmc": 1,
+   "type_line": "Creature — Goblin Pirate",
+   "mana_cost": "{R}",
+   "edhrec_rank": 6128,
+   "role": "draw",
+   "reason": "card draw (role quota): Reckless Lackey",
+   "strict": [
+    "draw"
+   ],
+   "lenient": [
+    "ramp",
+    "draw"
+   ],
+   "oracle": "First strike, haste / {2}{R}, Sacrifice this creature: Draw a card and create a Treasure token. (It's an artifact with \"{T}, Sacrifice this token: Add one mana of any color.\")"
+  },
+  {
+   "name": "Vanquisher's Banner",
+   "qty": 1,
+   "cmc": 5,
+   "type_line": "Artifact",
+   "mana_cost": "{5}",
+   "edhrec_rank": 384,
+   "role": "draw",
+   "reason": "card draw (role quota): Vanquisher's Banner",
+   "strict": [
+    "draw"
+   ],
+   "lenient": [
+    "draw"
+   ],
+   "oracle": "As this artifact enters, choose a creature type. / Creatures you control of the chosen type get +1/+1. / Whenever you cast a creature spell of the chosen type, draw a card."
+  },
+  {
+   "name": "Thrill of Possibility",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Instant",
+   "mana_cost": "{1}{R}",
+   "edhrec_rank": 211,
+   "role": "draw",
+   "reason": "card draw (role quota): Thrill of Possibility",
+   "strict": [
+    "draw"
+   ],
+   "lenient": [
+    "draw"
+   ],
+   "oracle": "As an additional cost to cast this spell, discard a card. / Draw two cards."
+  },
+  {
+   "name": "Well of Lost Dreams",
+   "qty": 1,
+   "cmc": 4,
+   "type_line": "Artifact",
+   "mana_cost": "{4}",
+   "edhrec_rank": 1129,
+   "role": "draw",
+   "reason": "card draw (role quota): Well of Lost Dreams",
+   "strict": [
+    "draw"
+   ],
+   "lenient": [
+    "draw"
+   ],
+   "oracle": "Whenever you gain life, you may pay {X}, where X is less than or equal to the amount of life you gained. If you do, draw X cards."
+  },
+  {
+   "name": "Palantír of Orthanc",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Legendary Artifact",
+   "mana_cost": "{3}",
+   "edhrec_rank": 1342,
+   "role": "draw",
+   "reason": "card draw (role quota): Palantír of Orthanc",
+   "strict": [
+    "draw"
+   ],
+   "lenient": [
+    "draw"
+   ],
+   "oracle": "At the beginning of your end step, put an influence counter on Palantír of Orthanc and scry 2. Then target opponent may have you draw a card. If that player doesn't, you mill X cards, where X is the number of influence counters on Palantír of Orthanc, and that player loses life equal to the total mana value of those cards."
+  },
+  {
+   "name": "Goblin Matron",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Creature — Goblin",
+   "mana_cost": "{2}{R}",
+   "edhrec_rank": 1791,
+   "role": "tutor",
+   "reason": "tutor (role quota): Goblin Matron",
+   "strict": [
+    "tutor"
+   ],
+   "lenient": [
+    "tutor"
+   ],
+   "oracle": "When this creature enters, you may search your library for a Goblin card, reveal that card, put it into your hand, then shuffle."
+  },
+  {
+   "name": "Goblin Engineer",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Creature — Goblin Artificer",
+   "mana_cost": "{1}{R}",
+   "edhrec_rank": 1184,
+   "role": "tutor",
+   "reason": "tutor (role quota): Goblin Engineer",
+   "strict": [
+    "tutor"
+   ],
+   "lenient": [
+    "tutor"
+   ],
+   "oracle": "When this creature enters, you may search your library for an artifact card, put it into your graveyard, then shuffle. / {R}, {T}, Sacrifice an artifact: Return target artifact card with mana value 3 or less from your graveyard to the battlefield."
+  },
+  {
+   "name": "Pashalik Mons",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Legendary Creature — Goblin Warrior",
+   "mana_cost": "{2}{R}",
+   "edhrec_rank": 2694,
+   "role": "removal",
+   "reason": "spot removal (role quota): Pashalik Mons",
+   "strict": [
+    "removal"
+   ],
+   "lenient": [
+    "removal"
+   ],
+   "oracle": "Whenever Pashalik Mons or another Goblin you control dies, Pashalik Mons deals 1 damage to any target. / {3}{R}, Sacrifice a Goblin: Create two 1/1 red Goblin creature tokens."
+  },
+  {
+   "name": "Goblin Trashmaster",
+   "qty": 1,
+   "cmc": 4,
+   "type_line": "Creature — Goblin Warrior",
+   "mana_cost": "{2}{R}{R}",
+   "edhrec_rank": 3176,
+   "role": "removal",
+   "reason": "spot removal (role quota): Goblin Trashmaster",
+   "strict": [
+    "removal"
+   ],
+   "lenient": [
+    "removal"
+   ],
+   "oracle": "Other Goblins you control get +1/+1. / Sacrifice a Goblin: Destroy target artifact."
+  },
+  {
+   "name": "Siege-Gang Commander",
+   "qty": 1,
+   "cmc": 5,
+   "type_line": "Creature — Goblin",
+   "mana_cost": "{3}{R}{R}",
+   "edhrec_rank": 1598,
+   "role": "removal",
+   "reason": "spot removal (role quota): Siege-Gang Commander",
+   "strict": [
+    "removal"
+   ],
+   "lenient": [
+    "removal",
+    "win_condition"
+   ],
+   "oracle": "When this creature enters, create three 1/1 red Goblin creature tokens. / {1}{R}, Sacrifice a Goblin: This creature deals 2 damage to any target."
+  },
+  {
+   "name": "Goblin Bombardment",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Enchantment",
+   "mana_cost": "{1}{R}",
+   "edhrec_rank": 463,
+   "role": "removal",
+   "reason": "spot removal (role quota): Goblin Bombardment",
+   "strict": [
+    "removal"
+   ],
+   "lenient": [
+    "removal"
+   ],
+   "oracle": "Sacrifice a creature: This enchantment deals 1 damage to any target."
+  },
+  {
+   "name": "Goblin Sharpshooter",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Creature — Goblin",
+   "mana_cost": "{2}{R}",
+   "edhrec_rank": 3839,
+   "role": "removal",
+   "reason": "spot removal (role quota): Goblin Sharpshooter",
+   "strict": [
+    "removal"
+   ],
+   "lenient": [
+    "removal"
+   ],
+   "oracle": "This creature doesn't untap during your untap step. / Whenever a creature dies, untap this creature. / {T}: This creature deals 1 damage to any target."
+  },
+  {
+   "name": "Goblin Grenade",
+   "qty": 1,
+   "cmc": 1,
+   "type_line": "Sorcery",
+   "mana_cost": "{R}",
+   "edhrec_rank": 6402,
+   "role": "removal",
+   "reason": "spot removal (role quota): Goblin Grenade",
+   "strict": [
+    "removal"
+   ],
+   "lenient": [
+    "removal"
+   ],
+   "oracle": "As an additional cost to cast this spell, sacrifice a Goblin. / Goblin Grenade deals 5 damage to any target."
+  },
+  {
+   "name": "Blasphemous Act",
+   "qty": 1,
+   "cmc": 9,
+   "type_line": "Sorcery",
+   "mana_cost": "{8}{R}",
+   "edhrec_rank": 22,
+   "role": "board_wipe",
+   "reason": "board wipe (role quota): Blasphemous Act",
+   "strict": [
+    "board_wipe"
+   ],
+   "lenient": [
+    "board_wipe"
+   ],
+   "oracle": "This spell costs {1} less to cast for each creature on the battlefield. / Blasphemous Act deals 13 damage to each creature."
+  },
+  {
+   "name": "Roiling Vortex",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Enchantment",
+   "mana_cost": "{1}{R}",
+   "edhrec_rank": 2529,
+   "role": "board_wipe",
+   "reason": "board wipe (role quota): Roiling Vortex",
+   "strict": [
+    "board_wipe"
+   ],
+   "lenient": [
+    "board_wipe"
+   ],
+   "oracle": "At the beginning of each player's upkeep, this enchantment deals 1 damage to them. / Whenever a player casts a spell, if no mana was spent to cast that spell, this enchantment deals 5 damage to that player. / {R}: Your opponents can't gain life this turn."
+  },
+  {
+   "name": "Star of Extinction",
+   "qty": 1,
+   "cmc": 7,
+   "type_line": "Sorcery",
+   "mana_cost": "{5}{R}{R}",
+   "edhrec_rank": 3879,
+   "role": "board_wipe",
+   "reason": "board wipe (role quota): Star of Extinction",
+   "strict": [
+    "board_wipe"
+   ],
+   "lenient": [
+    "board_wipe"
+   ],
+   "oracle": "Destroy target land. Star of Extinction deals 20 damage to each creature and each planeswalker."
+  },
+  {
+   "name": "Swiftfoot Boots",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Artifact — Equipment",
+   "mana_cost": "{2}",
+   "edhrec_rank": 12,
+   "role": "protection",
+   "reason": "protection (role quota): Swiftfoot Boots",
+   "strict": [
+    "protection"
+   ],
+   "lenient": [
+    "protection"
+   ],
+   "oracle": "Equipped creature has hexproof and haste. (It can't be the target of spells or abilities your opponents control. It can attack and {T} no matter when it came under your control.) / Equip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)"
+  },
+  {
+   "name": "Lightning Greaves",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Artifact — Equipment",
+   "mana_cost": "{2}",
+   "edhrec_rank": 13,
+   "role": "protection",
+   "reason": "protection (role quota): Lightning Greaves",
+   "strict": [
+    "protection"
+   ],
+   "lenient": [
+    "protection"
+   ],
+   "oracle": "Equipped creature has haste and shroud. (It can't be the target of spells or abilities.) / Equip {0}"
+  },
+  {
+   "name": "Hexing Squelcher",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Creature — Goblin Sorcerer",
+   "mana_cost": "{1}{R}",
+   "edhrec_rank": 602,
+   "role": "protection",
+   "reason": "protection (role quota): Hexing Squelcher",
+   "strict": [
+    "protection"
+   ],
+   "lenient": [
+    "protection"
+   ],
+   "oracle": "This spell can't be countered. / Ward—Pay 2 life. / Spells you control can't be countered. / Other creatures you control have \"Ward—Pay 2 life.\""
+  },
+  {
+   "name": "General Kreat, the Boltbringer",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Legendary Creature — Goblin Soldier",
+   "mana_cost": "{2}{R}",
+   "edhrec_rank": 2248,
+   "role": "win_condition",
+   "reason": "win condition (role quota): General Kreat, the Boltbringer",
+   "strict": [
+    "win_condition"
+   ],
+   "lenient": [
+    "win_condition"
+   ],
+   "oracle": "Whenever one or more Goblins you control attack, create a 1/1 red Goblin creature token that's tapped and attacking. / Whenever another creature you control enters, General Kreat deals 1 damage to each opponent."
+  },
+  {
+   "name": "Impact Tremors",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Enchantment",
+   "mana_cost": "{1}{R}",
+   "edhrec_rank": 201,
+   "role": "win_condition",
+   "reason": "win condition (role quota): Impact Tremors",
+   "strict": [
+    "win_condition"
+   ],
+   "lenient": [
+    "win_condition"
+   ],
+   "oracle": "Whenever a creature you control enters, this enchantment deals 1 damage to each opponent."
+  },
+  {
+   "name": "Purphoros, God of the Forge",
+   "qty": 1,
+   "cmc": 4,
+   "type_line": "Legendary Enchantment Creature — God",
+   "mana_cost": "{3}{R}",
+   "edhrec_rank": 690,
+   "role": "win_condition",
+   "reason": "win condition (role quota): Purphoros, God of the Forge",
+   "strict": [
+    "win_condition"
+   ],
+   "lenient": [
+    "win_condition"
+   ],
+   "oracle": "Indestructible / As long as your devotion to red is less than five, Purphoros isn't a creature. / Whenever another creature you control enters, Purphoros deals 2 damage to each opponent. / {2}{R}: Creatures you control get +1/+0 until end of turn."
+  },
+  {
+   "name": "Goblin Surprise",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Instant",
+   "mana_cost": "{2}{R}",
+   "edhrec_rank": 5479,
+   "role": "win_condition",
+   "reason": "win condition (role quota): Goblin Surprise",
+   "strict": [
+    "win_condition"
+   ],
+   "lenient": [
+    "utility"
+   ],
+   "oracle": "Choose one — / • Creatures you control get +2/+0 until end of turn. / • Create two 1/1 red Goblin creature tokens."
+  },
+  {
+   "name": "Goblin Warchief",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Creature — Goblin Warrior",
+   "mana_cost": "{1}{R}{R}",
+   "edhrec_rank": 2068,
+   "role": "utility",
+   "reason": "allowlisted (arsenal/commander stats): Goblin Warchief",
+   "strict": [
+    "utility"
+   ],
+   "lenient": [
+    "utility"
+   ],
+   "oracle": "Goblin spells you cast cost {1} less to cast. / Goblins you control have haste."
+  },
+  {
+   "name": "Goblin Chieftain",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Creature — Goblin",
+   "mana_cost": "{1}{R}{R}",
+   "edhrec_rank": 2576,
+   "role": "utility",
+   "reason": "allowlisted (arsenal/commander stats): Goblin Chieftain",
+   "strict": [
+    "utility"
+   ],
+   "lenient": [
+    "utility"
+   ],
+   "oracle": "Haste (This creature can attack and {T} as soon as it comes under your control.) / Other Goblin creatures you control get +1/+1 and have haste."
+  },
+  {
+   "name": "Conspicuous Snoop",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Creature — Goblin Rogue",
+   "mana_cost": "{R}{R}",
+   "edhrec_rank": 3268,
+   "role": "utility",
+   "reason": "allowlisted (arsenal/commander stats): Conspicuous Snoop",
+   "strict": [
+    "utility"
+   ],
+   "lenient": [
+    "utility"
+   ],
+   "oracle": "Play with the top card of your library revealed. / You may cast Goblin spells from the top of your library. / As long as the top card of your library is a Goblin card, this creature has all activated abilities of that card."
+  },
+  {
+   "name": "Krenko, Tin Street Kingpin",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Legendary Creature — Goblin",
+   "mana_cost": "{2}{R}",
+   "edhrec_rank": 910,
+   "role": "synergy",
+   "reason": "commander synergy: Krenko, Tin Street Kingpin",
+   "strict": [
+    "utility"
+   ],
+   "lenient": [
+    "utility"
+   ],
+   "oracle": "Whenever Krenko attacks, put a +1/+1 counter on it, then create a number of 1/1 red Goblin creature tokens equal to Krenko's power."
+  },
+  {
+   "name": "Hobgoblin Bandit Lord",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Creature — Goblin Rogue",
+   "mana_cost": "{1}{R}{R}",
+   "edhrec_rank": 3671,
+   "role": "utility",
+   "reason": "allowlisted (arsenal/commander stats): Hobgoblin Bandit Lord",
+   "strict": [
+    "utility"
+   ],
+   "lenient": [
+    "utility"
+   ],
+   "oracle": "Other Goblins you control get +1/+1. / {R}, {T}: This creature deals damage equal to the number of Goblins that entered the battlefield under your control this turn to any target."
+  },
+  {
+   "name": "Muxus, Goblin Grandee",
+   "qty": 1,
+   "cmc": 6,
+   "type_line": "Legendary Creature — Goblin Noble",
+   "mana_cost": "{4}{R}{R}",
+   "edhrec_rank": 3997,
+   "role": "utility",
+   "reason": "allowlisted (arsenal/commander stats): Muxus, Goblin Grandee",
+   "strict": [
+    "utility"
+   ],
+   "lenient": [
+    "win_condition"
+   ],
+   "oracle": "When Muxus enters, reveal the top six cards of your library. Put all Goblin creature cards with mana value 5 or less from among them onto the battlefield and the rest on the bottom of your library in a random order. / Whenever Muxus attacks, it gets +1/+1 until end of turn for each other Goblin you control."
+  },
+  {
+   "name": "Goblin Instigator",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Creature — Goblin Rogue",
+   "mana_cost": "{1}{R}",
+   "edhrec_rank": 3267,
+   "role": "synergy",
+   "reason": "commander synergy: Goblin Instigator",
+   "strict": [
+    "utility"
+   ],
+   "lenient": [
+    "utility"
+   ],
+   "oracle": "When this creature enters, create a 1/1 red Goblin creature token."
+  },
+  {
+   "name": "Legion Warboss",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Creature — Goblin Soldier",
+   "mana_cost": "{2}{R}",
+   "edhrec_rank": 1799,
+   "role": "synergy",
+   "reason": "commander synergy: Legion Warboss",
+   "strict": [
+    "utility"
+   ],
+   "lenient": [
+    "utility"
+   ],
+   "oracle": "Mentor (Whenever this creature attacks, put a +1/+1 counter on target attacking creature with lesser power.) / At the beginning of combat on your turn, create a 1/1 red Goblin creature token. That token gains haste until end of turn and attacks this combat if able."
+  },
+  {
+   "name": "Rundvelt Hordemaster",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Creature — Goblin Warrior",
+   "mana_cost": "{1}{R}",
+   "edhrec_rank": 4527,
+   "role": "utility",
+   "reason": "allowlisted (arsenal/commander stats): Rundvelt Hordemaster",
+   "strict": [
+    "utility"
+   ],
+   "lenient": [
+    "utility"
+   ],
+   "oracle": "Other Goblins you control get +1/+1. / Whenever this creature or another Goblin you control dies, exile the top card of your library. If it's a Goblin creature card, you may cast that card until the end of your next turn."
+  },
+  {
+   "name": "Krenko's Command",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Sorcery",
+   "mana_cost": "{1}{R}",
+   "edhrec_rank": 2040,
+   "role": "synergy",
+   "reason": "commander synergy: Krenko's Command",
+   "strict": [
+    "utility"
+   ],
+   "lenient": [
+    "utility"
+   ],
+   "oracle": "Create two 1/1 red Goblin creature tokens."
+  },
+  {
+   "name": "Dragon Fodder",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Sorcery",
+   "mana_cost": "{1}{R}",
+   "edhrec_rank": 1956,
+   "role": "synergy",
+   "reason": "commander synergy: Dragon Fodder",
+   "strict": [
+    "utility"
+   ],
+   "lenient": [
+    "utility"
+   ],
+   "oracle": "Create two 1/1 red Goblin creature tokens."
+  },
+  {
+   "name": "Battle Cry Goblin",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Creature — Goblin",
+   "mana_cost": "{1}{R}",
+   "edhrec_rank": 5117,
+   "role": "synergy",
+   "reason": "commander synergy: Battle Cry Goblin",
+   "strict": [
+    "utility"
+   ],
+   "lenient": [
+    "utility"
+   ],
+   "oracle": "{1}{R}: Goblins you control get +1/+0 and gain haste until end of turn. / Pack tactics — Whenever this creature attacks, if you attacked with creatures with total power 6 or greater this combat, create a 1/1 red Goblin creature token that's tapped and attacking."
+  },
+  {
+   "name": "Shared Animosity",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Enchantment",
+   "mana_cost": "{2}{R}",
+   "edhrec_rank": 684,
+   "role": "utility",
+   "reason": "allowlisted (arsenal/commander stats): Shared Animosity",
+   "strict": [
+    "utility"
+   ],
+   "lenient": [
+    "utility"
+   ],
+   "oracle": "Whenever a creature you control attacks, it gets +1/+0 until end of turn for each other attacking creature that shares a creature type with it."
+  },
+  {
+   "name": "Beetleback Chief",
+   "qty": 1,
+   "cmc": 4,
+   "type_line": "Creature — Goblin Warrior",
+   "mana_cost": "{2}{R}{R}",
+   "edhrec_rank": 3610,
+   "role": "synergy",
+   "reason": "commander synergy: Beetleback Chief",
+   "strict": [
+    "utility"
+   ],
+   "lenient": [
+    "utility"
+   ],
+   "oracle": "When this creature enters, create two 1/1 red Goblin creature tokens."
+  },
+  {
+   "name": "Hordeling Outburst",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Sorcery",
+   "mana_cost": "{1}{R}{R}",
+   "edhrec_rank": 2497,
+   "role": "synergy",
+   "reason": "commander synergy: Hordeling Outburst",
+   "strict": [
+    "utility"
+   ],
+   "lenient": [
+    "utility"
+   ],
+   "oracle": "Create three 1/1 red Goblin creature tokens."
+  },
+  {
+   "name": "Goro-Goro, Disciple of Ryusei",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Legendary Creature — Goblin Samurai",
+   "mana_cost": "{1}{R}",
+   "edhrec_rank": 3209,
+   "role": "synergy",
+   "reason": "commander synergy: Goro-Goro, Disciple of Ryusei",
+   "strict": [
+    "utility"
+   ],
+   "lenient": [
+    "utility"
+   ],
+   "oracle": "{R}: Creatures you control gain haste until end of turn. / {3}{R}{R}: Create a 5/5 red Dragon Spirit creature token with flying. Activate only if you control an attacking modified creature. (Equipment, Auras you control, and counters are modifications.)"
+  },
+  {
+   "name": "Goblin Piledriver",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Creature — Goblin Warrior",
+   "mana_cost": "{1}{R}",
+   "edhrec_rank": 6687,
+   "role": "utility",
+   "reason": "allowlisted (arsenal/commander stats): Goblin Piledriver",
+   "strict": [
+    "utility"
+   ],
+   "lenient": [
+    "utility"
+   ],
+   "oracle": "Protection from blue (This creature can't be blocked, targeted, dealt damage, or enchanted by anything blue.) / Whenever this creature attacks, it gets +2/+0 until end of turn for each other attacking Goblin."
+  },
+  {
+   "name": "Searslicer Goblin",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Creature — Goblin Warrior",
+   "mana_cost": "{1}{R}",
+   "edhrec_rank": 3754,
+   "role": "synergy",
+   "reason": "commander synergy: Searslicer Goblin",
+   "strict": [
+    "utility"
+   ],
+   "lenient": [
+    "utility"
+   ],
+   "oracle": "Raid — At the beginning of your end step, if you attacked this turn, create a 1/1 red Goblin creature token."
+  },
+  {
+   "name": "Empty the Warrens",
+   "qty": 1,
+   "cmc": 4,
+   "type_line": "Sorcery",
+   "mana_cost": "{3}{R}",
+   "edhrec_rank": 2509,
+   "role": "synergy",
+   "reason": "commander synergy: Empty the Warrens",
+   "strict": [
+    "utility"
+   ],
+   "lenient": [
+    "utility"
+   ],
+   "oracle": "Create two 1/1 red Goblin creature tokens. / Storm (When you cast this spell, copy it for each spell cast before it this turn.)"
+  },
+  {
+   "name": "Sting, the Glinting Dagger",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Legendary Artifact — Equipment",
+   "mana_cost": "{2}",
+   "edhrec_rank": 1630,
+   "role": "utility",
+   "reason": "allowlisted (arsenal/commander stats): Sting, the Glinting Dagger",
+   "strict": [
+    "utility"
+   ],
+   "lenient": [
+    "utility"
+   ],
+   "oracle": "Equipped creature gets +1/+1 and has haste. / At the beginning of each combat, untap equipped creature. / Equipped creature has first strike as long as it's blocking or blocked by a Goblin or Orc. / Equip {2}"
+  },
+  {
+   "name": "Goblin Motivator",
+   "qty": 1,
+   "cmc": 1,
+   "type_line": "Creature — Goblin Warrior",
+   "mana_cost": "{R}",
+   "edhrec_rank": 7405,
+   "role": "utility",
+   "reason": "allowlisted (arsenal/commander stats): Goblin Motivator",
+   "strict": [
+    "utility"
+   ],
+   "lenient": [
+    "utility"
+   ],
+   "oracle": "{T}: Target creature gains haste until end of turn. (It can attack and {T} this turn.)"
+  },
+  {
+   "name": "Zada, Hedron Grinder",
+   "qty": 1,
+   "cmc": 4,
+   "type_line": "Legendary Creature — Goblin Ally",
+   "mana_cost": "{3}{R}",
+   "edhrec_rank": 3421,
+   "role": "utility",
+   "reason": "allowlisted (arsenal/commander stats): Zada, Hedron Grinder",
+   "strict": [
+    "utility"
+   ],
+   "lenient": [
+    "utility"
+   ],
+   "oracle": "Whenever you cast an instant or sorcery spell that targets only Zada, copy that spell for each other creature you control that the spell could target. Each copy targets a different one of those creatures."
+  },
+  {
+   "name": "Moria Marauder",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Creature — Goblin Warrior",
+   "mana_cost": "{R}{R}",
+   "edhrec_rank": 5384,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "utility"
+   ],
+   "lenient": [
+    "utility"
+   ],
+   "oracle": "Double strike / Whenever a Goblin or Orc you control deals combat damage to a player, exile the top card of your library. You may play that card this turn."
+  },
+  {
+   "name": "Pinnacle Monk // Mystic Peak",
+   "qty": 1,
+   "cmc": 5,
+   "type_line": "Creature — Djinn Monk // Land",
+   "mana_cost": "{3}{R}{R}",
+   "edhrec_rank": 530,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.) / When this creature enters, return target instant or sorcery card from your graveyard to your hand. / // / As this land enters, you may pay 3 life. If you don't, it enters tapped. / {T}: Add {R}."
+  },
+  {
+   "name": "Sundering Eruption // Volcanic Fissure",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Sorcery // Land",
+   "mana_cost": "{2}{R}",
+   "edhrec_rank": 706,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "Destroy target land. Its controller may search their library for a basic land card, put it onto the battlefield tapped, then shuffle. Creatures without flying can't block this turn. / // / As this land enters, you may pay 3 life. If you don't, it enters tapped. / {T}: Add {R}."
+  },
+  {
+   "name": "Shatterskull Smashing // Shatterskull, the Hammer Pass",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Sorcery // Land",
+   "mana_cost": "{X}{R}{R}",
+   "edhrec_rank": 1404,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "Shatterskull Smashing deals X damage divided as you choose among up to two target creatures and/or planeswalkers. If X is 6 or more, Shatterskull Smashing deals twice X damage divided as you choose among them instead. / // / As this land enters, you may pay 3 life. If you don't, it enters tapped. / {T}: Add {R}."
+  },
+  {
+   "name": "Bloodstained Mire",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land",
+   "mana_cost": null,
+   "edhrec_rank": 43,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "{T}, Pay 1 life, Sacrifice this land: Search your library for a Swamp or Mountain card, put it onto the battlefield, then shuffle."
+  },
+  {
+   "name": "Wooded Foothills",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land",
+   "mana_cost": null,
+   "edhrec_rank": 47,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "{T}, Pay 1 life, Sacrifice this land: Search your library for a Mountain or Forest card, put it onto the battlefield, then shuffle."
+  },
+  {
+   "name": "Scalding Tarn",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land",
+   "mana_cost": null,
+   "edhrec_rank": 49,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "{T}, Pay 1 life, Sacrifice this land: Search your library for an Island or Mountain card, put it onto the battlefield, then shuffle."
+  },
+  {
+   "name": "Arid Mesa",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land",
+   "mana_cost": null,
+   "edhrec_rank": 57,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "{T}, Pay 1 life, Sacrifice this land: Search your library for a Mountain or Plains card, put it onto the battlefield, then shuffle."
+  },
+  {
+   "name": "Arena of Glory",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land",
+   "mana_cost": null,
+   "edhrec_rank": 372,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "This land enters tapped unless you control a Mountain. / {T}: Add {R}. / {R}, {T}, Exert this land: Add {R}{R}. If any of that mana is spent on a creature spell, it gains haste until end of turn. (An exerted permanent won't untap during your next untap step.)"
+  },
+  {
+   "name": "Castle Embereth",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land",
+   "mana_cost": null,
+   "edhrec_rank": 1090,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "This land enters tapped unless you control a Mountain. / {T}: Add {R}. / {1}{R}{R}, {T}: Creatures you control get +1/+0 until end of turn."
+  },
+  {
+   "name": "Three Tree City",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Legendary Land",
+   "mana_cost": null,
+   "edhrec_rank": 177,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "As Three Tree City enters, choose a creature type. / {T}: Add {C}. / {2}, {T}: Choose a color. Add an amount of mana of that color equal to the number of creatures you control of the chosen type."
+  },
+  {
+   "name": "Mountain",
+   "qty": 28,
+   "cmc": 0,
+   "type_line": "Basic Land — Mountain",
+   "mana_cost": null,
+   "edhrec_rank": null,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "({T}: Add {R}.)"
+  }
+ ]
+}

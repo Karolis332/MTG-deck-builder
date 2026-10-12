@@ -1,0 +1,393 @@
+## atraxa: baseline strategy superfriends → final strategy superfriends
+   strict  baseline {"ramp":13,"draw":24,"tutor":1,"removal":11,"board_wipe":4,"protection":0,"win_condition":3}
+   strict  final {"ramp":12,"draw":24,"tutor":1,"removal":11,"board_wipe":5,"protection":0,"win_condition":1}
+   lands 38 → 38   size 99 → 99
+   OUT (3):
+     - 1 Night of the Sweets' Revenge [4 Enchantment] role=board_wipe strict=win_condition
+     - 1 Kaito, Dancing Shadow [4 Legendary Planeswalker —] role=- strict=draw/win_condition
+     - 1 Thought Vessel [2 Artifact] role=- strict=ramp
+   IN  (3):
+     + 1 Doubling Season [5 Enchantment] role=payoff strict=utility
+     + 1 Phyrexian Scriptures [4 Enchantment — Saga] role=board_wipe strict=board_wipe
+     + 1 Garruk, Primal Hunter [5 Legendary Planeswalker —] role=- strict=draw
+## edgar: baseline strategy tribal → final strategy tribal
+   strict  baseline {"ramp":10,"draw":16,"tutor":2,"removal":9,"board_wipe":3,"protection":3,"win_condition":10}
+   strict  final {"ramp":10,"draw":15,"tutor":2,"removal":8,"board_wipe":3,"protection":3,"win_condition":11}
+   lands 38 → 38   size 99 → 99
+   OUT (2):
+     - 1 Pawn of Ulamog [3 Creature — Vampire Shama] role=ramp strict=utility
+     - 1 Venat, Heart of Hydaelyn // Hydaelyn, the Mothercrystal [3 Legendary Creature — Eld] role=protection strict=draw/removal
+   IN  (2):
+     + 1 Ophiomancer [3 Creature — Human Shaman] role=payoff strict=utility
+     + 1 Bloodthirsty Conqueror [5 Creature — Vampire Knigh] role=- strict=win_condition
+## jhoira-arena: baseline strategy spellslinger → final strategy midrange
+   strict  baseline {"ramp":12,"draw":15,"tutor":1,"removal":14,"board_wipe":2,"protection":5,"win_condition":7}
+   strict  final {"ramp":17,"draw":18,"tutor":2,"removal":9,"board_wipe":4,"protection":5,"win_condition":5}
+   lands 38 → 38   size 99 → 99
+   OUT (19):
+     - 1 Heated Argument [5 Instant] role=arsenal:collection_substitute strict=removal
+     - 1 Young Pyromancer [2 Creature — Human Shaman] role=arsenal:archetype_payoff strict=utility
+     - 1 Murmuring Mystic [4 Creature — Human Wizard] role=arsenal:archetype_payoff strict=win_condition
+     - 1 Guttersnipe [3 Creature — Goblin Shaman] role=arsenal:archetype_payoff strict=win_condition
+     - 1 Firebrand Archer [2 Creature — Human Archer] role=arsenal:archetype_payoff strict=win_condition
+     - 1 Goblin Electromancer [2 Creature — Goblin Wizard] role=arsenal:archetype_payoff strict=utility
+     - 1 Thousand-Year Storm [6 Enchantment] role=arsenal:archetype_payoff strict=utility
+     - 1 Dualcaster Mage [3 Creature — Human Wizard] role=arsenal:archetype_payoff strict=utility
+     - 1 Archmage Emeritus [4 Creature — Human Wizard] role=arsenal:archetype_payoff strict=draw
+     - 1 Adeliz, the Cinder Wind [3 Legendary Creature — Hum] role=arsenal:archetype_payoff strict=utility
+     - 1 Cool but Rude [2 Enchantment — Class] role=tutor strict=draw/win_condition
+     - 1 Mystical Tutor [1 Instant] role=tutor strict=tutor
+     - 1 Goblin Trashmaster [4 Creature — Goblin Warrio] role=- strict=removal
+     - 1 Rapid Hybridization [1 Instant] role=removal strict=removal
+     - 1 Izzet Charm [2 Instant] role=removal strict=draw/removal
+     - 1 Mizzix's Mastery [4 Sorcery] role=removal strict=removal
+     - 1 Magic Pot [3 Artifact Creature — Gobl] role=removal strict=removal
+     - 1 Abrade [2 Instant] role=removal strict=removal
+     - 1 Arena of Glory [0 Land] role=- strict=land
+   IN  (19):
+     + 1 Metallic Mimic [2 Artifact Creature — Shap] role=arsenal:archetype_payoff strict=utility
+     + 1 Myr Battlesphere [7 Artifact Creature — Myr ] role=arsenal:archetype_payoff strict=utility
+     + 1 Solemn Simulacrum [4 Artifact Creature — Gole] role=arsenal:archetype_payoff strict=ramp/draw
+     + 1 Tezzeret, Cruel Captain [3 Legendary Planeswalker —] role=arsenal:archetype_payoff strict=tutor
+     + 1 Gingerbrute [1 Artifact Creature — Food] role=arsenal:archetype_payoff strict=utility
+     + 1 Gleaming Barrier [2 Artifact Creature — Wall] role=arsenal:archetype_payoff strict=utility
+     + 1 Laboratory Maniac [3 Creature — Human Wizard] role=arsenal:community_top strict=draw/win_condition
+     + 1 Wayfarer's Bauble [1 Artifact] role=arsenal:community_top strict=ramp
+     + 1 Coldsteel Heart [2 Snow Artifact] role=arsenal:staple_ramp strict=ramp
+     + 1 Moonsilver Key [2 Artifact] role=tutor strict=tutor
+     + 1 Planar Incision [2 Instant] role=removal strict=removal
+     + 1 Weather Maker [3 Artifact] role=removal strict=ramp/removal
+     + 1 Ashling's Command [5 Kindred Instant — Elemen] role=board_wipe strict=draw/board_wipe
+     + 1 Lithobraking [3 Instant] role=board_wipe strict=board_wipe
+     + 1 Goldspan Dragon [5 Creature — Dragon] role=win_condition strict=ramp/win_condition
+     + 1 Sticky Fingers [1 Enchantment — Aura] role=draw strict=draw
+     + 1 Waterbender Ascension [2 Enchantment] role=draw strict=draw
+     + 1 The Legend of Kuruk // Avatar Kuruk [4 Enchantment — Saga // Le] role=synergy strict=draw
+     + 1 Seat of the Synod [0 Artifact Land] role=- strict=land
+## kess: baseline strategy reanimator → final strategy spellslinger
+   strict  baseline {"ramp":13,"draw":33,"tutor":3,"removal":6,"board_wipe":3,"protection":2,"win_condition":6}
+   strict  final {"ramp":12,"draw":29,"tutor":2,"removal":15,"board_wipe":2,"protection":3,"win_condition":7}
+   lands 38 → 38   size 99 → 99
+   OUT (22):
+     - 1 Reanimate [1 Sorcery] role=payoff strict=utility
+     - 1 Syr Konrad, the Grim [5 Legendary Creature — Hum] role=payoff strict=win_condition
+     - 1 Altar of Dementia [2 Artifact] role=payoff strict=utility
+     - 1 Stitcher's Supplier [1 Creature — Zombie] role=payoff strict=utility
+     - 1 Entomb [1 Instant] role=payoff strict=tutor
+     - 1 Stinkweed Imp [3 Creature — Imp] role=payoff strict=draw
+     - 1 Bloodghast [2 Creature — Vampire Spiri] role=payoff strict=utility
+     - 1 Mesmeric Orb [2 Artifact] role=payoff strict=utility
+     - 1 Ugin, Eye of the Storms [7 Legendary Planeswalker —] role=tutor strict=ramp/draw
+     - 1 Mizzix's Mastery [4 Sorcery] role=removal strict=removal
+     - 1 Toxic Deluge [3 Sorcery] role=board_wipe strict=board_wipe
+     - 1 Vohar, Vodalian Desecrator [2 Legendary Creature — Phy] role=win_condition strict=draw/win_condition
+     - 1 The Indomitable [4 Legendary Artifact — Veh] role=win_condition strict=draw
+     - 1 Ashling, Flame Dancer [4 Legendary Creature — Ele] role=win_condition strict=ramp/draw/win_condition
+     - 1 Inventive Iteration // Living Breakthrough [4 Enchantment — Saga // En] role=win_condition strict=draw/win_condition
+     - 1 Thopter Spy Network [4 Enchantment] role=win_condition strict=draw
+     - 1 Chronomancer [2 Artifact Creature — Necr] role=draw strict=draw
+     - 1 Secrets of the Dead [3 Enchantment] role=draw strict=draw
+     - 1 Palantír of Orthanc [3 Legendary Artifact] role=draw strict=draw
+     - 1 Currency Converter [1 Artifact] role=synergy strict=draw
+     - 1 Dimir Signet [2 Artifact] role=ramp strict=ramp
+     - 1 Consider [1 Instant] role=synergy strict=draw
+   IN  (22):
+     + 1 Behold the Multiverse [4 Instant] role=payoff strict=draw
+     + 1 Light Up the Stage [3 Sorcery] role=payoff strict=utility
+     + 1 Valakut Exploration [3 Enchantment] role=payoff strict=win_condition
+     + 1 Outpost Siege [4 Enchantment] role=payoff strict=removal
+     + 1 Commit // Memory [10 Instant // Sorcery] role=payoff strict=utility
+     + 1 Sai, Master Thopterist [3 Legendary Creature — Hum] role=draw strict=draw
+     + 1 Liliana, Dreadhorde General [6 Legendary Planeswalker —] role=removal strict=draw/removal
+     + 1 Terminate [2 Instant] role=removal strict=removal
+     + 1 Aetherflux Reservoir [4 Artifact] role=removal strict=removal
+     + 1 Rakdos Charm [2 Instant] role=removal strict=removal
+     + 1 Deadly Rollick [4 Instant] role=removal strict=removal
+     + 1 Lightning Bolt [1 Instant] role=removal strict=removal
+     + 1 Prismari Command [3 Instant] role=removal strict=draw/removal
+     + 1 Urabrask // The Great Work [4 Legendary Creature — Phy] role=removal strict=ramp/removal
+     + 1 Resculpt [2 Instant] role=removal strict=removal
+     + 1 Swan Song [1 Instant] role=protection strict=protection
+     + 1 Davros, Dalek Creator [4 Legendary Artifact Creat] role=win_condition strict=draw/win_condition
+     + 1 Guttersnipe [3 Creature — Goblin Shaman] role=win_condition strict=win_condition
+     + 1 Goldspan Dragon [5 Creature — Dragon] role=win_condition strict=ramp/win_condition
+     + 1 The Locust God [6 Legendary Creature — God] role=win_condition strict=draw/win_condition
+     + 1 Forensic Gadgeteer [3 Creature — Vedalken Arti] role=draw strict=draw
+     + 1 Mirrodin Besieged [3 Enchantment] role=synergy strict=draw
+## krenko: baseline strategy tribal → final strategy tribal
+   strict  baseline {"ramp":8,"draw":15,"tutor":2,"removal":6,"board_wipe":2,"protection":3,"win_condition":4}
+   strict  final {"ramp":9,"draw":14,"tutor":2,"removal":6,"board_wipe":3,"protection":3,"win_condition":5}
+   lands 38 → 38   size 99 → 99
+   OUT (3):
+     - 1 Jaxis, the Troublemaker [4 Legendary Creature — Hum] role=draw strict=draw
+     - 1 Smash to Dust [2 Sorcery] role=board_wipe strict=utility
+     - 1 Broadside Bombardiers [3 Creature — Goblin Pirate] role=- strict=utility
+   IN  (3):
+     + 1 Enterprising Scallywag [2 Creature — Goblin Pirate] role=ramp strict=ramp
+     + 1 Star of Extinction [7 Sorcery] role=board_wipe strict=board_wipe
+     + 1 Goblin Surprise [3 Instant] role=win_condition strict=win_condition
+## meren-paper: baseline strategy aristocrats → final strategy aristocrats
+   strict  baseline {"ramp":15,"draw":19,"tutor":1,"removal":9,"board_wipe":2,"protection":2,"win_condition":10}
+   strict  final {"ramp":14,"draw":17,"tutor":1,"removal":9,"board_wipe":3,"protection":3,"win_condition":11}
+   lands 38 → 38   size 99 → 99
+   OUT (2):
+     - 1 Toski, Bearer of Secrets [4 Legendary Creature — Squ] role=protection strict=draw
+     - 1 Selvala, Heart of the Wilds [3 Legendary Creature — Elf] role=ramp strict=ramp/draw
+   IN  (2):
+     + 1 Phyrexian Scriptures [4 Enchantment — Saga] role=board_wipe strict=board_wipe
+     + 1 Gyome, Master Chef [4 Legendary Creature — Tro] role=protection strict=protection/win_condition
+## tam-arena: baseline strategy superfriends → final strategy superfriends
+   strict  baseline {"ramp":11,"draw":25,"tutor":1,"removal":13,"board_wipe":2,"protection":2,"win_condition":6}
+   strict  final {"ramp":13,"draw":23,"tutor":1,"removal":12,"board_wipe":5,"protection":2,"win_condition":6}
+   lands 38 → 38   size 99 → 99
+   OUT (27):
+     - 1 Arcane Signet [2 Artifact] role=arsenal:staple_ramp strict=ramp
+     - 1 Talisman of Curiosity [2 Artifact] role=arsenal:staple_ramp strict=ramp
+     - 1 Talisman of Impulse [2 Artifact] role=arsenal:staple_ramp strict=ramp
+     - 1 Talisman of Resilience [2 Artifact] role=arsenal:staple_ramp strict=ramp
+     - 1 Boros Signet [2 Artifact] role=arsenal:staple_ramp strict=ramp
+     - 1 The One Ring [4 Legendary Artifact] role=arsenal:staple_draw strict=draw
+     - 1 Hero's Downfall [3 Instant] role=arsenal:staple_removal strict=removal
+     - 1 Cut Down [1 Instant] role=arsenal:staple_removal strict=removal
+     - 1 Terminate [2 Instant] role=removal strict=removal
+     - 1 Mortify [3 Instant] role=removal strict=removal
+     - 1 Golgari Charm [2 Instant] role=board_wipe strict=removal
+     - 1 Aetherize [4 Instant] role=board_wipe strict=utility
+     - 1 Ashling's Command [5 Kindred Instant — Elemen] role=board_wipe strict=draw/board_wipe
+     - 1 Dovin's Veto [2 Instant] role=protection strict=protection
+     - 1 Tatyova, Benthic Druid [5 Legendary Creature — Mer] role=win_condition strict=draw
+     - 1 Infinite Guideline Station [5 Legendary Artifact — Spa] role=win_condition strict=draw
+     - 1 Chromanticore [5 Enchantment Creature — M] role=win_condition strict=win_condition
+     - 1 Zurgo Stormrender [3 Legendary Creature — Orc] role=win_condition strict=draw/win_condition
+     - 1 Tannuk, Memorial Ensign [3 Legendary Creature — Kav] role=win_condition strict=draw/win_condition
+     - 1 Kaito, Bane of Nightmares [4 Legendary Planeswalker —] role=- strict=draw
+     - 1 Ashiok, Dream Render [3 Legendary Planeswalker —] role=- strict=utility
+     - 1 Jace, Multiverse Architect [5 Legendary Planeswalker —] role=- strict=draw
+     - 1 Quintorius Kand [5 Legendary Planeswalker —] role=- strict=ramp/win_condition
+     - 1 Dovin, Hand of Control [3 Legendary Planeswalker —] role=- strict=utility
+     - 1 Huatli, the Sun's Heart [3 Legendary Planeswalker —] role=- strict=utility
+     - 1 Academic Ascent [2 Instant] role=- strict=draw
+     - 1 Solve for Disappointment [2 Sorcery] role=- strict=draw
+   IN  (28):
+     + 1 Evolution Sage [3 Creature — Elf Druid] role=arsenal:archetype_payoff strict=utility
+     + 1 Tezzeret's Gambit [4 Sorcery] role=arsenal:archetype_payoff strict=draw
+     + 1 Inspiring Call [3 Instant] role=arsenal:archetype_payoff strict=draw
+     + 1 Forgotten Ancient [4 Creature — Elemental] role=arsenal:archetype_payoff strict=utility
+     + 1 Kami of Whispered Hopes [3 Creature — Spirit] role=arsenal:archetype_payoff strict=ramp
+     + 1 Mind Stone [2 Artifact] role=arsenal:staple_ramp strict=ramp/draw
+     + 1 Azorius Signet [2 Artifact] role=arsenal:staple_ramp strict=ramp
+     + 1 Rakdos Signet [2 Artifact] role=arsenal:staple_ramp strict=ramp
+     + 1 Solemn Simulacrum [4 Artifact Creature — Gole] role=arsenal:staple_ramp strict=ramp/draw
+     + 1 Cankerbloom [2 Creature — Phyrexian Fun] role=removal strict=removal
+     + 1 Reclamation Sage [3 Creature — Elf Shaman] role=removal strict=removal
+     + 1 Pongify [1 Instant] role=removal strict=removal
+     + 1 Sunfall [5 Sorcery] role=board_wipe strict=board_wipe
+     + 1 Massacre Wurm [6 Creature — Phyrexian Wur] role=board_wipe strict=board_wipe
+     + 1 Ajani Unrelenting [6 Legendary Planeswalker —] role=board_wipe strict=draw/board_wipe
+     + 1 Fumigate [5 Sorcery] role=board_wipe strict=board_wipe
+     + 1 Swan Song [1 Instant] role=protection strict=protection
+     + 1 Goldspan Dragon [5 Creature — Dragon] role=win_condition strict=ramp/win_condition
+     + 1 Mirkwood Bats [4 Creature — Bat] role=win_condition strict=win_condition
+     + 1 Bastion of Remembrance [3 Enchantment] role=win_condition strict=win_condition
+     + 1 Ral, Monsoon Mage // Ral, Leyline Prodigy [2 Legendary Creature — Hum] role=- strict=draw
+     + 1 Chandra, Acolyte of Flame [3 Legendary Planeswalker —] role=- strict=utility
+     + 1 Nissa, Who Shakes the World [5 Legendary Planeswalker —] role=- strict=ramp
+     + 1 Chandra, Torch of Defiance [4 Legendary Planeswalker —] role=- strict=ramp/removal/win_condition
+     + 1 Narset, Parter of Veils [3 Legendary Planeswalker —] role=- strict=draw
+     + 1 Inspired Tethermage [3 Creature — Elf Warrior] role=- strict=draw
+     + 1 Tomik, Orzhov Lawmage [2 Legendary Creature — Hum] role=- strict=utility
+     + 2 Forest [0 Basic Land — Forest] role=- strict=land
+## tam: baseline strategy superfriends → final strategy superfriends
+   strict  baseline {"ramp":10,"draw":25,"tutor":2,"removal":20,"board_wipe":3,"protection":3,"win_condition":9}
+   strict  final {"ramp":12,"draw":24,"tutor":1,"removal":14,"board_wipe":5,"protection":1,"win_condition":3}
+   lands 39 → 39   size 99 → 99
+   OUT (42):
+     - 1 Oath of Teferi [5 Legendary Enchantment] role=payoff strict=utility
+     - 1 Lotho, Corrupt Shirriff [2 Legendary Creature — Hal] role=ramp strict=ramp
+     - 1 Growth Spiral [2 Instant] role=ramp strict=ramp/draw
+     - 1 Deathrite Shaman [1 Creature — Elf Shaman] role=ramp strict=ramp/removal/win_condition
+     - 1 Prismari Command [3 Instant] role=draw strict=draw/removal
+     - 1 Baleful Strix [2 Artifact Creature — Bird] role=draw strict=draw
+     - 1 Kutzil, Malamet Exemplar [3 Legendary Creature — Cat] role=draw strict=draw
+     - 1 Korvold, Fae-Cursed King [5 Legendary Creature — Dra] role=draw strict=draw/win_condition
+     - 1 Kasmina, Enigma Sage [3 Legendary Planeswalker —] role=tutor strict=tutor
+     - 1 Putrefy [3 Instant] role=removal strict=removal
+     - 1 Assassin's Trophy [2 Instant] role=removal strict=removal
+     - 1 Terminate [2 Instant] role=removal strict=removal
+     - 1 Anguished Unmaking [3 Instant] role=removal strict=removal
+     - 1 Despark [2 Instant] role=removal strict=removal
+     - 1 Bedevil [3 Instant] role=removal strict=removal
+     - 1 Mortify [3 Instant] role=removal strict=removal
+     - 1 Wear // Tear [3 Instant // Instant] role=removal strict=removal
+     - 1 Rakdos Charm [2 Instant] role=board_wipe strict=removal
+     - 1 Golgari Charm [2 Instant] role=board_wipe strict=removal
+     - 1 Supreme Verdict [4 Sorcery] role=board_wipe strict=board_wipe
+     - 1 Dovin's Veto [2 Instant] role=protection strict=protection
+     - 1 Boros Charm [2 Instant] role=protection strict=removal/protection
+     - 1 Kheru Goldkeeper [4 Creature — Dragon] role=win_condition strict=ramp/win_condition
+     - 1 Teferi, Time Raveler [3 Legendary Planeswalker —] role=- strict=draw
+     - 1 Saheeli, Sublime Artificer [3 Legendary Planeswalker —] role=- strict=utility
+     - 1 Vraska, Golgari Queen [4 Legendary Planeswalker —] role=- strict=draw/removal
+     - 1 Narset of the Ancient Way [4 Legendary Planeswalker —] role=- strict=ramp/draw
+     - 1 Kiora, Behemoth Beckoner [3 Legendary Planeswalker —] role=- strict=draw
+     - 1 Dovin, Grand Arbiter [3 Legendary Planeswalker —] role=- strict=draw
+     - 1 Kaito Shizuki [3 Legendary Planeswalker —] role=- strict=draw/tutor
+     - 1 Huatli, Radiant Champion [4 Legendary Planeswalker —] role=- strict=draw
+     - 1 Garruk, Cursed Huntsman [6 Legendary Planeswalker —] role=- strict=draw/removal/win_condition
+     - 1 Tamiyo, Inquisitive Student // Tamiyo, Seasoned Scholar [1 Legendary Creature — Moo] role=- strict=ramp/draw
+     - 1 Tomik, Wielder of Law [3 Legendary Creature — Hum] role=- strict=draw
+     - 1 Tekuthal, Inquiry Dominus [4 Legendary Creature — Phy] role=- strict=win_condition
+     - 1 Eriette of the Charmed Apple [3 Legendary Creature — Hum] role=- strict=win_condition
+     - 1 Obscura Storefront [0 Land] role=- strict=land
+     - 1 Shattered Landscape [0 Land] role=- strict=land
+     - 1 Perilous Landscape [0 Land] role=- strict=land
+     - 1 Deceptive Landscape [0 Land] role=- strict=land
+     - 1 An Offer You Can't Refuse [1 Instant] role=- strict=utility
+     - 1 Fracture [2 Instant] role=- strict=removal
+   IN  (42):
+     + 1 Talisman of Hierarchy [2 Artifact] role=fixing-floor strict=ramp
+     + 1 Talisman of Progress [2 Artifact] role=fixing-floor strict=ramp
+     + 1 Branching Evolution [3 Enchantment] role=payoff strict=utility
+     + 1 Kami of Whispered Hopes [3 Creature — Spirit] role=payoff strict=ramp
+     + 1 Smothering Tithe [4 Enchantment] role=ramp strict=ramp/draw
+     + 1 Tireless Provisioner [3 Creature — Elf Scout] role=ramp strict=ramp
+     + 1 Pitiless Plunderer [4 Creature — Human Pirate] role=ramp strict=ramp
+     + 1 Black Market Connections [3 Enchantment] role=draw strict=draw
+     + 1 Garruk's Uprising [3 Enchantment] role=draw strict=draw
+     + 1 The One Ring [4 Legendary Artifact] role=draw strict=draw
+     + 1 Guardian Project [4 Enchantment] role=draw strict=draw
+     + 1 Tezzeret, Cruel Captain [3 Legendary Planeswalker —] role=tutor strict=tutor
+     + 1 Cankerbloom [2 Creature — Phyrexian Fun] role=removal strict=removal
+     + 1 Archdruid's Charm [3 Instant] role=removal strict=ramp/removal
+     + 1 Reclamation Sage [3 Creature — Elf Shaman] role=removal strict=removal
+     + 1 Nature's Claim [1 Instant] role=removal strict=removal
+     + 1 Beast Within [3 Instant] role=removal strict=removal
+     + 1 Feed the Swarm [2 Sorcery] role=removal strict=removal
+     + 1 Stroke of Midnight [3 Instant] role=removal strict=removal
+     + 1 Withering Torment [3 Instant] role=removal strict=removal
+     + 1 Season of Gathering [6 Sorcery] role=board_wipe strict=draw/board_wipe
+     + 1 Damnation [4 Sorcery] role=board_wipe strict=board_wipe
+     + 1 Cyclonic Rift [2 Instant] role=board_wipe strict=board_wipe
+     + 1 Teferi, Temporal Pilgrim [5 Legendary Planeswalker —] role=win_condition strict=draw
+     + 1 Tyvar Kell [4 Legendary Planeswalker —] role=win_condition strict=draw
+     + 1 The Aetherspark [4 Legendary Artifact Plane] role=- strict=draw
+     + 1 Ajani, Strength of the Pride [4 Legendary Planeswalker —] role=- strict=utility
+     + 1 Liliana, Dreadhorde General [6 Legendary Planeswalker —] role=- strict=draw/removal
+     + 1 Kaito, Cunning Infiltrator [3 Legendary Planeswalker —] role=- strict=draw
+     + 1 Elspeth, Storm Slayer [5 Legendary Planeswalker —] role=- strict=removal
+     + 1 Ral, Monsoon Mage // Ral, Leyline Prodigy [2 Legendary Creature — Hum] role=- strict=draw
+     + 1 Ugin, Eye of the Storms [7 Legendary Planeswalker —] role=- strict=ramp/draw
+     + 1 Ajani, Nacatl Pariah // Ajani, Nacatl Avenger [2 Legendary Creature — Cat] role=- strict=utility
+     + 1 Mangara, the Diplomat [4 Legendary Creature — Hum] role=- strict=draw
+     + 1 Semester's End [4 Instant] role=- strict=utility
+     + 1 Ichormoon Gauntlet [3 Artifact] role=- strict=utility
+     + 1 The Immortal Sun [6 Legendary Artifact] role=- strict=utility
+     + 1 Riveteers Overlook [0 Land] role=- strict=land
+     + 1 Foreboding Landscape [0 Land] role=- strict=land
+     + 1 Bountiful Landscape [0 Land] role=- strict=land
+     + 1 Twisted Landscape [0 Land] role=- strict=land
+     + 1 Evolution Sage [3 Creature — Elf Druid] role=payoff strict=utility
+## tymna-thrasios: baseline strategy aggro → final strategy combo
+   strict  baseline {"ramp":20,"draw":17,"tutor":5,"removal":5,"board_wipe":2,"protection":8,"win_condition":1}
+   strict  final {"ramp":15,"draw":26,"tutor":6,"removal":10,"board_wipe":2,"protection":4,"win_condition":7}
+   lands 39 → 39   size 99 → 99
+   OUT (22):
+     - 1 Lotus Petal [0 Artifact] role=ramp strict=ramp
+     - 1 Dark Ritual [1 Instant] role=utility strict=ramp
+     - 1 Tainted Pact [2 Instant] role=utility strict=utility
+     - 1 Chrome Mox [0 Artifact] role=utility strict=ramp
+     - 1 Negate [2 Instant] role=protection strict=protection
+     - 1 Mox Amber [0 Legendary Artifact] role=utility strict=ramp
+     - 1 Mox Diamond [0 Artifact] role=utility strict=ramp
+     - 1 Deadly Dispute [2 Instant] role=draw strict=draw
+     - 1 Flusterstorm [1 Instant] role=utility strict=utility
+     - 1 Pact of Negation [0 Instant] role=protection strict=protection
+     - 1 Mental Misstep [1 Instant] role=utility strict=protection
+     - 1 Voice of Victory [2 Creature — Human Bard] role=utility strict=utility
+     - 1 Sram, Senior Edificer [2 Legendary Creature — Dwa] role=draw strict=draw
+     - 1 Borne Upon a Wind [2 Instant] role=utility strict=draw
+     - 1 Mockingbird [1 Creature — Bird Bard] role=utility strict=utility
+     - 1 Lion's Eye Diamond [0 Artifact] role=utility strict=ramp
+     - 1 Birds of Paradise [1 Creature — Bird] role=utility strict=ramp
+     - 1 Force of Negation [3 Instant] role=utility strict=protection
+     - 1 Silence [1 Instant] role=utility strict=utility
+     - 1 Wan Shi Tong, Librarian [2 Legendary Creature — Bir] role=utility strict=draw
+     - 1 Tranquil Landscape [0 Land] role=- strict=land
+     - 1 Contaminated Landscape [0 Land] role=- strict=land
+   IN  (22):
+     + 1 Tireless Provisioner [3 Creature — Elf Scout] role=ramp strict=ramp
+     + 1 Beast Whisperer [4 Creature — Elf Druid] role=draw strict=draw
+     + 1 Morbid Opportunist [3 Creature — Human Rogue] role=draw strict=draw
+     + 1 Ranger-Captain of Eos [3 Creature — Human Soldier] role=tutor strict=tutor
+     + 1 Freyalise, Llanowar's Fury [5 Legendary Planeswalker —] role=removal strict=draw/removal
+     + 1 Liliana, Dreadhorde General [6 Legendary Planeswalker —] role=removal strict=draw/removal
+     + 1 Reclamation Sage [3 Creature — Elf Shaman] role=removal strict=removal
+     + 1 Putrefy [3 Instant] role=removal strict=removal
+     + 1 Generous Gift [3 Instant] role=removal strict=removal
+     + 1 Vaultborn Tyrant [7 Creature — Dinosaur] role=win_condition strict=draw/win_condition
+     + 1 Psychosis Crawler [5 Artifact Creature — Phyr] role=win_condition strict=draw/win_condition
+     + 1 Thought Monitor [7 Artifact Creature — Cons] role=win_condition strict=draw/win_condition
+     + 1 Soul of the Harvest [6 Creature — Elemental] role=win_condition strict=draw/win_condition
+     + 1 Mirkwood Bats [4 Creature — Bat] role=win_condition strict=win_condition
+     + 1 Return of the Wildspeaker [5 Instant] role=win_condition strict=draw/win_condition
+     + 1 Pitiless Plunderer [4 Creature — Human Pirate] role=ramp strict=ramp
+     + 1 Archmage Emeritus [4 Creature — Human Wizard] role=draw strict=draw
+     + 1 Phyrexian Arena [3 Enchantment] role=draw strict=draw
+     + 1 Braids, Arisen Nightmare [3 Legendary Creature — Nig] role=draw strict=draw
+     + 1 Guardian Project [4 Enchantment] role=draw strict=draw
+     + 1 Isolated Chapel [0 Land] role=- strict=land
+     + 1 Caves of Koilos [0 Land] role=- strict=land
+## ygra: baseline strategy aggro → final strategy aristocrats
+   strict  baseline {"ramp":13,"draw":24,"tutor":1,"removal":7,"board_wipe":2,"protection":3,"win_condition":4}
+   strict  final {"ramp":16,"draw":28,"tutor":3,"removal":8,"board_wipe":3,"protection":4,"win_condition":8}
+   lands 40 → 38   size 99 → 99
+   OUT (24):
+     - 1 Tamiyo's Journal [5 Legendary Artifact — Boo] role=tutor strict=draw
+     - 1 Nature's Claim [1 Instant] role=- strict=removal
+     - 1 Beast Within [3 Instant] role=removal strict=removal
+     - 1 Collective Resistance [2 Instant] role=protection strict=removal/protection
+     - 1 Dark Ritual [1 Instant] role=ramp strict=ramp
+     - 1 Voldaren Bloodcaster // Bloodbat Summoner [2 Creature — Vampire Wizar] role=draw strict=draw
+     - 1 Syr Ginger, the Meal Ender [2 Legendary Artifact Creat] role=synergy strict=utility
+     - 1 Greedy Freebooter [1 Creature — Human Pirate] role=ramp strict=utility
+     - 1 Cultivate [3 Sorcery] role=utility strict=ramp
+     - 1 Gorbag of Minas Morgul [2 Legendary Creature — Orc] role=draw strict=draw
+     - 1 Midgar, City of Mako // Reactor Raid [0 Land — Town // Sorcery —] role=utility strict=land
+     - 1 Revitalizing Repast // Old-Growth Grove [1 Instant // Land] role=utility strict=land
+     - 1 Skullport Merchant [3 Creature — Dwarf Citizen] role=synergy strict=draw
+     - 1 Goldvein Hydra [1 Creature — Hydra] role=synergy strict=utility
+     - 1 Party Dude [1 Enchantment — Class] role=synergy strict=draw
+     - 1 Assassin's Trophy [2 Instant] role=removal strict=removal
+     - 1 Tribute to Horobi // Echo of Death's Wail [2 Enchantment — Saga // En] role=synergy strict=draw
+     - 1 Ruthless Knave [3 Creature — Orc Pirate] role=synergy strict=draw
+     - 1 Prosperous Innkeeper [2 Creature — Halfling Citi] role=synergy strict=utility
+     - 1 Fanatic of Rhonas [2 Creature — Snake Druid] role=synergy strict=ramp
+     - 1 Fanatical Offering [2 Instant] role=synergy strict=draw
+     - 1 Bridgeworks Battle // Tanglespan Bridgeworks [3 Sorcery // Land] role=- strict=land
+     - 1 Turntimber Symbiosis // Turntimber, Serpentine Wood [7 Sorcery // Land] role=- strict=land
+     - 1 Command Tower [0 Land] role=- strict=land
+   IN  (24):
+     + 1 Woe Strider [3 Creature — Horror] role=payoff strict=utility
+     + 1 Zulaport Cutthroat [2 Creature — Human Rogue A] role=payoff strict=win_condition
+     + 1 Yahenni, Undying Partisan [3 Legendary Creature — Aet] role=payoff strict=protection
+     + 1 Bastion of Remembrance [3 Enchantment] role=payoff strict=win_condition
+     + 1 Dragon's Hoard [3 Artifact] role=ramp strict=ramp/draw
+     + 1 Waste Not [2 Enchantment] role=ramp strict=ramp/draw
+     + 1 The Gitrog Monster [5 Legendary Creature — Fro] role=ramp strict=ramp/draw
+     + 1 Magnifying Glass [3 Artifact] role=ramp strict=ramp/draw
+     + 1 The Great Henge [9 Legendary Artifact] role=ramp strict=ramp/draw
+     + 1 Obsessive Pursuit [2 Enchantment] role=draw strict=draw
+     + 1 Treasure Chest [3 Artifact] role=tutor strict=draw/tutor
+     + 1 Tezzeret, Cruel Captain [3 Legendary Planeswalker —] role=tutor strict=tutor
+     + 1 Grist, Voracious Larva // Grist, the Plague Swarm [1 Legendary Creature — Ins] role=removal strict=removal
+     + 1 Grist, the Hunger Tide [3 Legendary Planeswalker —] role=removal strict=removal/win_condition
+     + 1 Erebos, Bleak-Hearted [4 Legendary Enchantment Cr] role=removal strict=draw/removal
+     + 1 Vraska, Golgari Queen [4 Legendary Planeswalker —] role=removal strict=draw/removal
+     + 1 Phyrexian Scriptures [4 Enchantment — Saga] role=board_wipe strict=board_wipe
+     + 1 Sidequest: Hunt the Mark // Yiazmat, Ultimate Mark [5 Enchantment // Legendary] role=protection strict=ramp/removal/protection
+     + 1 High-Society Hunter [5 Creature — Vampire Noble] role=win_condition strict=draw/win_condition
+     + 1 Robot Domination [4 Enchantment — Plan] role=draw strict=draw
+     + 1 Setessan Champion [3 Creature — Human Warrior] role=draw strict=draw
+     + 1 Boggart Trawler // Boggart Bog [3 Creature — Goblin // Lan] role=- strict=land
+     + 1 Agadeem's Awakening // Agadeem, the Undercrypt [3 Sorcery // Land] role=- strict=land
+     + 1 The Black Gate [0 Legendary Land — Gate] role=- strict=land

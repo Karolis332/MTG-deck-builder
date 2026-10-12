@@ -1,0 +1,1506 @@
+{
+ "summary": {
+  "slug": "ygra",
+  "opts": {
+   "format": "brawl",
+   "commanderName": "Ygra, Eater of All"
+  },
+  "ms": 1220,
+  "size": 99,
+  "lands": 38,
+  "strategy": "aristocrats",
+  "themes": [
+   "sacrifice",
+   "tokens",
+   "draw",
+   "ramp",
+   "artifacts",
+   "counters",
+   "enchantments",
+   "graveyard"
+  ],
+  "profile": {
+   "archetype": "aristocrats",
+   "categories": [
+    "creature_dies"
+   ]
+  },
+  "strictCounts": {
+   "ramp": 16,
+   "draw": 28,
+   "tutor": 3,
+   "removal": 8,
+   "board_wipe": 3,
+   "protection": 4,
+   "win_condition": 8
+  },
+  "lenientCounts": {
+   "ramp": 20,
+   "draw": 28,
+   "tutor": 3,
+   "removal": 8,
+   "board_wipe": 4,
+   "protection": 4,
+   "win_condition": 10
+  },
+  "roleCounts": {
+   "payoff": 8,
+   "ramp": 12,
+   "draw": 15,
+   "tutor": 2,
+   "removal": 7,
+   "board_wipe": 3,
+   "protection": 3,
+   "win_condition": 5,
+   "synergy": 6,
+   "(none)": 38
+  },
+  "health": {
+   "grade": "A",
+   "realLands": 34,
+   "tappedLands": 13,
+   "tappedRatio": 0.34,
+   "sourcesByColor": {
+    "W": 10,
+    "U": 10,
+    "B": 36,
+    "R": 10,
+    "G": 31
+   },
+   "pipsByColor": {
+    "W": 0,
+    "U": 0,
+    "B": 33,
+    "R": 0,
+    "G": 28
+   },
+   "drawCount": 25,
+   "drawEngineCount": 18,
+   "rampCount": 15,
+   "fakeLands": [],
+   "warnings": [],
+   "deficiencies": []
+  },
+  "deadCardsReplaced": [],
+  "buildReport": "Archetype: Aristocrats — targeting 61 nonland slots\nRole fills:\n  ramp       12/12 OK\n  draw       15/10 OK\n  tutor      2/2 OK\n  removal    7/7 OK\n  wipes      3/3 OK\n  protection 3/3 OK\n  payoffs    8/8 OK\n  wincons    5/5 OK"
+ },
+ "cards": [
+  {
+   "name": "Pitiless Plunderer",
+   "qty": 1,
+   "cmc": 4,
+   "type_line": "Creature — Human Pirate",
+   "mana_cost": "{3}{B}",
+   "edhrec_rank": 225,
+   "role": "payoff",
+   "reason": "archetype payoff: Pitiless Plunderer",
+   "strict": [
+    "ramp"
+   ],
+   "lenient": [
+    "ramp"
+   ],
+   "oracle": "Whenever another creature you control dies, create a Treasure token. (It's an artifact with \"{T}, Sacrifice this token: Add one mana of any color.\")"
+  },
+  {
+   "name": "Ashnod's Altar",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Artifact",
+   "mana_cost": "{3}",
+   "edhrec_rank": 134,
+   "role": "payoff",
+   "reason": "archetype payoff: Ashnod's Altar",
+   "strict": [
+    "ramp"
+   ],
+   "lenient": [
+    "ramp"
+   ],
+   "oracle": "Sacrifice a creature: Add {C}{C}."
+  },
+  {
+   "name": "Woe Strider",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Creature — Horror",
+   "mana_cost": "{2}{B}",
+   "edhrec_rank": 1682,
+   "role": "payoff",
+   "reason": "archetype payoff: Woe Strider",
+   "strict": [
+    "utility"
+   ],
+   "lenient": [
+    "utility"
+   ],
+   "oracle": "When this creature enters, create a 0/1 white Goat creature token. / Sacrifice another creature: Scry 1. / Escape—{3}{B}{B}, Exile four other cards from your graveyard. (You may cast this card from your graveyard for its escape cost.) / This creature escapes with two +1/+1 counters on it."
+  },
+  {
+   "name": "Blood Artist",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Creature — Vampire",
+   "mana_cost": "{1}{B}",
+   "edhrec_rank": 141,
+   "role": "payoff",
+   "reason": "archetype payoff: Blood Artist",
+   "strict": [
+    "utility"
+   ],
+   "lenient": [
+    "utility"
+   ],
+   "oracle": "Whenever this creature or another creature dies, target player loses 1 life and you gain 1 life."
+  },
+  {
+   "name": "Priest of Forgotten Gods",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Creature — Human Cleric",
+   "mana_cost": "{1}{B}",
+   "edhrec_rank": 1392,
+   "role": "payoff",
+   "reason": "archetype payoff: Priest of Forgotten Gods",
+   "strict": [
+    "ramp",
+    "draw"
+   ],
+   "lenient": [
+    "ramp",
+    "draw"
+   ],
+   "oracle": "{T}, Sacrifice two other creatures: Any number of target players each lose 2 life and sacrifice a creature of their choice. You add {B}{B} and draw a card. (Activate only as an instant.)"
+  },
+  {
+   "name": "Zulaport Cutthroat",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Creature — Human Rogue Ally",
+   "mana_cost": "{1}{B}",
+   "edhrec_rank": 236,
+   "role": "payoff",
+   "reason": "archetype payoff: Zulaport Cutthroat",
+   "strict": [
+    "win_condition"
+   ],
+   "lenient": [
+    "win_condition"
+   ],
+   "oracle": "Whenever this creature or another creature you control dies, each opponent loses 1 life and you gain 1 life."
+  },
+  {
+   "name": "Yahenni, Undying Partisan",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Legendary Creature — Aetherborn Vampire",
+   "mana_cost": "{2}{B}",
+   "edhrec_rank": 1033,
+   "role": "payoff",
+   "reason": "archetype payoff: Yahenni, Undying Partisan",
+   "strict": [
+    "protection"
+   ],
+   "lenient": [
+    "protection"
+   ],
+   "oracle": "Haste / Whenever a creature an opponent controls dies, put a +1/+1 counter on Yahenni. / Sacrifice another creature: Yahenni gains indestructible until end of turn."
+  },
+  {
+   "name": "Bastion of Remembrance",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Enchantment",
+   "mana_cost": "{2}{B}",
+   "edhrec_rank": 332,
+   "role": "payoff",
+   "reason": "archetype payoff: Bastion of Remembrance",
+   "strict": [
+    "win_condition"
+   ],
+   "lenient": [
+    "win_condition"
+   ],
+   "oracle": "When this enchantment enters, create a 1/1 white Human Soldier creature token. / Whenever a creature you control dies, each opponent loses 1 life and you gain 1 life."
+  },
+  {
+   "name": "Gilded Goose",
+   "qty": 1,
+   "cmc": 1,
+   "type_line": "Creature — Bird",
+   "mana_cost": "{G}",
+   "edhrec_rank": 803,
+   "role": "ramp",
+   "reason": "ramp (role quota): Gilded Goose",
+   "strict": [
+    "ramp"
+   ],
+   "lenient": [
+    "ramp"
+   ],
+   "oracle": "Flying / When this creature enters, create a Food token. (It's an artifact with \"{2}, {T}, Sacrifice this token: You gain 3 life.\") / {1}{G}, {T}: Create a Food token. / {T}, Sacrifice a Food: Add one mana of any color."
+  },
+  {
+   "name": "Tireless Provisioner",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Creature — Elf Scout",
+   "mana_cost": "{2}{G}",
+   "edhrec_rank": 185,
+   "role": "ramp",
+   "reason": "ramp (role quota): Tireless Provisioner",
+   "strict": [
+    "ramp"
+   ],
+   "lenient": [
+    "ramp"
+   ],
+   "oracle": "Landfall — Whenever a land you control enters, create a Food token or a Treasure token. (Food is an artifact with \"{2}, {T}, Sacrifice this token: You gain 3 life.\" Treasure is an artifact with \"{T}, Sacrifice this token: Add one mana of any color.\")"
+  },
+  {
+   "name": "Arcane Signet",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Artifact",
+   "mana_cost": "{2}",
+   "edhrec_rank": 3,
+   "role": "ramp",
+   "reason": "ramp (role quota): Arcane Signet",
+   "strict": [
+    "ramp"
+   ],
+   "lenient": [
+    "ramp"
+   ],
+   "oracle": "{T}: Add one mana of any color in your commander's color identity."
+  },
+  {
+   "name": "Thornvault Forager",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Creature — Squirrel Ranger",
+   "mana_cost": "{1}{G}",
+   "edhrec_rank": 3263,
+   "role": "ramp",
+   "reason": "ramp (role quota): Thornvault Forager",
+   "strict": [
+    "ramp",
+    "tutor"
+   ],
+   "lenient": [
+    "ramp",
+    "tutor"
+   ],
+   "oracle": "{T}: Add {G}. / {T}, Forage: Add two mana in any combination of colors. (To forage, exile three cards from your graveyard or sacrifice a Food.) / {3}{G}, {T}: Search your library for a Squirrel card, reveal it, put it into your hand, then shuffle."
+  },
+  {
+   "name": "Mind Stone",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Artifact",
+   "mana_cost": "{2}",
+   "edhrec_rank": 32,
+   "role": "ramp",
+   "reason": "ramp (role quota): Mind Stone",
+   "strict": [
+    "ramp",
+    "draw"
+   ],
+   "lenient": [
+    "ramp",
+    "draw"
+   ],
+   "oracle": "{T}: Add {C}. / {1}, {T}, Sacrifice this artifact: Draw a card."
+  },
+  {
+   "name": "Dragon's Hoard",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Artifact",
+   "mana_cost": "{3}",
+   "edhrec_rank": 1193,
+   "role": "ramp",
+   "reason": "ramp (role quota): Dragon's Hoard",
+   "strict": [
+    "ramp",
+    "draw"
+   ],
+   "lenient": [
+    "ramp",
+    "draw"
+   ],
+   "oracle": "Whenever a Dragon you control enters, put a gold counter on this artifact. / {T}, Remove a gold counter from this artifact: Draw a card. / {T}: Add one mana of any color."
+  },
+  {
+   "name": "Waste Not",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Enchantment",
+   "mana_cost": "{1}{B}",
+   "edhrec_rank": 1246,
+   "role": "ramp",
+   "reason": "ramp (role quota): Waste Not",
+   "strict": [
+    "ramp",
+    "draw"
+   ],
+   "lenient": [
+    "ramp",
+    "draw"
+   ],
+   "oracle": "Whenever an opponent discards a creature card, create a 2/2 black Zombie creature token. / Whenever an opponent discards a land card, add {B}{B}. / Whenever an opponent discards a noncreature, nonland card, draw a card."
+  },
+  {
+   "name": "The Cabbage Merchant",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Legendary Creature — Human Citizen",
+   "mana_cost": "{2}{G}",
+   "edhrec_rank": 2283,
+   "role": "ramp",
+   "reason": "ramp (role quota): The Cabbage Merchant",
+   "strict": [
+    "ramp"
+   ],
+   "lenient": [
+    "ramp"
+   ],
+   "oracle": "Whenever an opponent casts a noncreature spell, create a Food token. (It's an artifact with \"{2}, {T}, Sacrifice this token: You gain 3 life.\") / Whenever a creature deals combat damage to you, sacrifice a Food token. / Tap two untapped Foods you control: Add one mana of any color."
+  },
+  {
+   "name": "The Gitrog Monster",
+   "qty": 1,
+   "cmc": 5,
+   "type_line": "Legendary Creature — Frog Horror",
+   "mana_cost": "{3}{B}{G}",
+   "edhrec_rank": 907,
+   "role": "ramp",
+   "reason": "ramp (role quota): The Gitrog Monster",
+   "strict": [
+    "ramp",
+    "draw"
+   ],
+   "lenient": [
+    "ramp",
+    "draw",
+    "win_condition"
+   ],
+   "oracle": "Deathtouch / At the beginning of your upkeep, sacrifice The Gitrog Monster unless you sacrifice a land. / You may play an additional land on each of your turns. / Whenever one or more land cards are put into your graveyard from anywhere, draw a card."
+  },
+  {
+   "name": "Magnifying Glass",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Artifact",
+   "mana_cost": "{3}",
+   "edhrec_rank": 9362,
+   "role": "ramp",
+   "reason": "ramp (role quota): Magnifying Glass",
+   "strict": [
+    "ramp",
+    "draw"
+   ],
+   "lenient": [
+    "ramp",
+    "draw"
+   ],
+   "oracle": "{T}: Add {C}. / {4}, {T}: Investigate. (Create a Clue token. It's an artifact with \"{2}, Sacrifice this token: Draw a card.\")"
+  },
+  {
+   "name": "Many Partings",
+   "qty": 1,
+   "cmc": 1,
+   "type_line": "Sorcery",
+   "mana_cost": "{G}",
+   "edhrec_rank": 1970,
+   "role": "ramp",
+   "reason": "ramp (role quota): Many Partings",
+   "strict": [
+    "ramp",
+    "draw"
+   ],
+   "lenient": [
+    "ramp",
+    "draw"
+   ],
+   "oracle": "Search your library for a basic land card, reveal it, put it into your hand, then shuffle. Create a Food token. (It's an artifact with \"{2}, {T}, Sacrifice this token: You gain 3 life.\")"
+  },
+  {
+   "name": "The Great Henge",
+   "qty": 1,
+   "cmc": 9,
+   "type_line": "Legendary Artifact",
+   "mana_cost": "{7}{G}{G}",
+   "edhrec_rank": 227,
+   "role": "ramp",
+   "reason": "ramp (role quota): The Great Henge",
+   "strict": [
+    "ramp",
+    "draw"
+   ],
+   "lenient": [
+    "ramp",
+    "draw"
+   ],
+   "oracle": "This spell costs {X} less to cast, where X is the greatest power among creatures you control. / {T}: Add {G}{G}. You gain 2 life. / Whenever a nontoken creature you control enters, put a +1/+1 counter on it and draw a card."
+  },
+  {
+   "name": "Deadly Dispute",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Instant",
+   "mana_cost": "{1}{B}",
+   "edhrec_rank": 131,
+   "role": "draw",
+   "reason": "card draw (role quota): Deadly Dispute",
+   "strict": [
+    "draw"
+   ],
+   "lenient": [
+    "ramp",
+    "draw"
+   ],
+   "oracle": "As an additional cost to cast this spell, sacrifice an artifact or creature. / Draw two cards and create a Treasure token. (It's an artifact with \"{T}, Sacrifice this token: Add one mana of any color.\")"
+  },
+  {
+   "name": "Greta, Sweettooth Scourge",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Legendary Creature — Human Warrior",
+   "mana_cost": "{1}{B}{G}",
+   "edhrec_rank": 5664,
+   "role": "draw",
+   "reason": "card draw (role quota): Greta, Sweettooth Scourge",
+   "strict": [
+    "draw"
+   ],
+   "lenient": [
+    "draw"
+   ],
+   "oracle": "When Greta enters, create a Food token. (It's an artifact with \"{2}, {T}, Sacrifice this token: You gain 3 life.\") / {G}, Sacrifice a Food: Put a +1/+1 counter on target creature. Activate only as a sorcery. / {1}{B}, Sacrifice a Food: You draw a card and you lose 1 life."
+  },
+  {
+   "name": "Peregrin Took",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Legendary Creature — Halfling Citizen",
+   "mana_cost": "{2}{G}",
+   "edhrec_rank": 789,
+   "role": "draw",
+   "reason": "card draw (role quota): Peregrin Took",
+   "strict": [
+    "draw"
+   ],
+   "lenient": [
+    "draw"
+   ],
+   "oracle": "If one or more tokens would be created under your control, those tokens plus an additional Food token are created instead. (It's an artifact with \"{2}, {T}, Sacrifice this token: You gain 3 life.\") / Sacrifice three Foods: Draw a card."
+  },
+  {
+   "name": "Savvy Hunter",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Creature — Human Warrior",
+   "mana_cost": "{1}{B}{G}",
+   "edhrec_rank": 3269,
+   "role": "draw",
+   "reason": "card draw (role quota): Savvy Hunter",
+   "strict": [
+    "draw"
+   ],
+   "lenient": [
+    "draw"
+   ],
+   "oracle": "Whenever this creature attacks or blocks, create a Food token. (It's an artifact with \"{2}, {T}, Sacrifice this token: You gain 3 life.\") / Sacrifice two Foods: Draw a card."
+  },
+  {
+   "name": "Braids, Arisen Nightmare",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Legendary Creature — Nightmare",
+   "mana_cost": "{1}{B}{B}",
+   "edhrec_rank": 296,
+   "role": "draw",
+   "reason": "card draw (role quota): Braids, Arisen Nightmare",
+   "strict": [
+    "draw"
+   ],
+   "lenient": [
+    "draw"
+   ],
+   "oracle": "At the beginning of your end step, you may sacrifice an artifact, creature, enchantment, land, or planeswalker. If you do, each opponent may sacrifice a permanent of their choice that shares a card type with it. For each opponent who doesn't, that player loses 2 life and you draw a card."
+  },
+  {
+   "name": "Ravenous Squirrel",
+   "qty": 1,
+   "cmc": 1,
+   "type_line": "Creature — Squirrel",
+   "mana_cost": "{B/G}",
+   "edhrec_rank": 3083,
+   "role": "draw",
+   "reason": "card draw (role quota): Ravenous Squirrel",
+   "strict": [
+    "draw"
+   ],
+   "lenient": [
+    "draw"
+   ],
+   "oracle": "Whenever you sacrifice an artifact or creature, put a +1/+1 counter on this creature. / {1}{B}{G}, Sacrifice an artifact or creature: You gain 1 life and draw a card."
+  },
+  {
+   "name": "Tireless Tracker",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Creature — Human Scout",
+   "mana_cost": "{2}{G}",
+   "edhrec_rank": 663,
+   "role": "draw",
+   "reason": "card draw (role quota): Tireless Tracker",
+   "strict": [
+    "draw"
+   ],
+   "lenient": [
+    "draw"
+   ],
+   "oracle": "Landfall — Whenever a land you control enters, investigate. (Create a Clue token. It's an artifact with \"{2}, Sacrifice this token: Draw a card.\") / Whenever you sacrifice a Clue, put a +1/+1 counter on this creature."
+  },
+  {
+   "name": "Trail of Crumbs",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Enchantment",
+   "mana_cost": "{1}{G}",
+   "edhrec_rank": 4737,
+   "role": "draw",
+   "reason": "card draw (role quota): Trail of Crumbs",
+   "strict": [
+    "draw"
+   ],
+   "lenient": [
+    "draw"
+   ],
+   "oracle": "When this enchantment enters, create a Food token. (It's an artifact with \"{2}, {T}, Sacrifice this token: You gain 3 life.\") / Whenever you sacrifice a Food, you may pay {1}. If you do, look at the top two cards of your library. You may reveal a permanent card from among them and put it into your hand. Put the rest on the bottom of your library in any order."
+  },
+  {
+   "name": "Obsessive Pursuit",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Enchantment",
+   "mana_cost": "{1}{B}",
+   "edhrec_rank": 5790,
+   "role": "draw",
+   "reason": "card draw (role quota): Obsessive Pursuit",
+   "strict": [
+    "draw"
+   ],
+   "lenient": [
+    "draw"
+   ],
+   "oracle": "When this enchantment enters and at the beginning of your upkeep, you lose 1 life and create a Clue token. (It's an artifact with \"{2}, Sacrifice this token: Draw a card.\") / Whenever you attack, put X +1/+1 counters on target attacking creature, where X is the number of permanents you've sacrificed this turn. If X is three or more, that creature gains lifelink until end of turn."
+  },
+  {
+   "name": "Collector's Vault",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Artifact",
+   "mana_cost": "{2}",
+   "edhrec_rank": 1810,
+   "role": "draw",
+   "reason": "card draw (role quota): Collector's Vault",
+   "strict": [
+    "draw"
+   ],
+   "lenient": [
+    "ramp",
+    "draw"
+   ],
+   "oracle": "{2}, {T}: Draw a card, then discard a card. Create a Treasure token. (It's an artifact with \"{T}, Sacrifice this token: Add one mana of any color.\")"
+  },
+  {
+   "name": "Treasure Chest",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Artifact",
+   "mana_cost": "{3}",
+   "edhrec_rank": 4880,
+   "role": "tutor",
+   "reason": "tutor (role quota): Treasure Chest",
+   "strict": [
+    "draw",
+    "tutor"
+   ],
+   "lenient": [
+    "draw",
+    "tutor"
+   ],
+   "oracle": "{4}, Sacrifice this artifact: Roll a d20. / 1 | Trapped! — You lose 3 life. / 2—9 | Create five Treasure tokens. / 10—19 | You gain 3 life and draw three cards. / 20 | Search your library for a card. If it's an artifact card, you may put it onto the battlefield. Otherwise, put that card into your hand. Then shuffle."
+  },
+  {
+   "name": "Tezzeret, Cruel Captain",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Legendary Planeswalker — Tezzeret",
+   "mana_cost": "{3}",
+   "edhrec_rank": 1209,
+   "role": "tutor",
+   "reason": "tutor (role quota): Tezzeret, Cruel Captain",
+   "strict": [
+    "tutor"
+   ],
+   "lenient": [
+    "tutor"
+   ],
+   "oracle": "Whenever an artifact you control enters, put a loyalty counter on Tezzeret. / 0: Untap target artifact or creature. If it's an artifact creature, put a +1/+1 counter on it. / −3: Search your library for an artifact card with mana value 1 or less, reveal it, put it into your hand, then shuffle. / −7: You get an emblem with \"At the beginning of combat on your turn, put three +1/+1 counters on target artifact you control. If it's not a creature, it becomes a 0/0 Robot artifact creature.\""
+  },
+  {
+   "name": "Chatterfang, Squirrel General",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Legendary Creature — Squirrel Warrior",
+   "mana_cost": "{2}{G}",
+   "edhrec_rank": 1049,
+   "role": "removal",
+   "reason": "spot removal (role quota): Chatterfang, Squirrel General",
+   "strict": [
+    "removal"
+   ],
+   "lenient": [
+    "removal"
+   ],
+   "oracle": "Forestwalk (This creature can't be blocked as long as defending player controls a Forest.) / If one or more tokens would be created under your control, those tokens plus that many 1/1 green Squirrel creature tokens are created instead. / {B}, Sacrifice X Squirrels: Target creature gets +X/-X until end of turn."
+  },
+  {
+   "name": "Pest Infestation",
+   "qty": 1,
+   "cmc": 1,
+   "type_line": "Sorcery",
+   "mana_cost": "{X}{X}{G}",
+   "edhrec_rank": 1071,
+   "role": "removal",
+   "reason": "spot removal (role quota): Pest Infestation",
+   "strict": [
+    "removal"
+   ],
+   "lenient": [
+    "removal"
+   ],
+   "oracle": "Destroy up to X target artifacts and/or enchantments. Create twice X 1/1 black and green Pest creature tokens with \"When this token dies, you gain 1 life.\""
+  },
+  {
+   "name": "Manglehorn",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Creature — Beast",
+   "mana_cost": "{2}{G}",
+   "edhrec_rank": 2289,
+   "role": "removal",
+   "reason": "spot removal (role quota): Manglehorn",
+   "strict": [
+    "removal"
+   ],
+   "lenient": [
+    "removal"
+   ],
+   "oracle": "When this creature enters, you may destroy target artifact. / Artifacts your opponents control enter tapped."
+  },
+  {
+   "name": "Grist, Voracious Larva // Grist, the Plague Swarm",
+   "qty": 1,
+   "cmc": 1,
+   "type_line": "Legendary Creature — Insect // Legendary Planeswalker — Grist",
+   "mana_cost": "{G}",
+   "edhrec_rank": 4639,
+   "role": "removal",
+   "reason": "spot removal (role quota): Grist, Voracious Larva // Grist, the Plague Swarm",
+   "strict": [
+    "removal"
+   ],
+   "lenient": [
+    "removal"
+   ],
+   "oracle": "Deathtouch / Whenever Grist or another creature you control enters, if it entered from your graveyard or you cast it from your graveyard, you may pay {G}. If you do, exile Grist, then return it to the battlefield transformed under its owner's control. / // / +1: Create a 1/1 black and green Insect creature token, then mill two cards. Put a deathtouch counter on the token if a black card was milled this way. / −2: Destroy target artifact or enchantment. / −6: For each creature card in your graveyard, create a token that's a copy of it, except it's a 1/1 black and green Insect."
+  },
+  {
+   "name": "Grist, the Hunger Tide",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Legendary Planeswalker — Grist",
+   "mana_cost": "{1}{B}{G}",
+   "edhrec_rank": 2005,
+   "role": "removal",
+   "reason": "spot removal (role quota): Grist, the Hunger Tide",
+   "strict": [
+    "removal",
+    "win_condition"
+   ],
+   "lenient": [
+    "removal",
+    "win_condition"
+   ],
+   "oracle": "As long as Grist isn't on the battlefield, it's a 1/1 Insect creature in addition to its other types. / +1: Create a 1/1 black and green Insect creature token, then mill a card. If an Insect card was milled this way, put a loyalty counter on Grist and repeat this process. / −2: You may sacrifice a creature. When you do, destroy target creature or planeswalker. / −5: Each opponent loses life equal to the number of creature cards in your graveyard."
+  },
+  {
+   "name": "Erebos, Bleak-Hearted",
+   "qty": 1,
+   "cmc": 4,
+   "type_line": "Legendary Enchantment Creature — God",
+   "mana_cost": "{3}{B}",
+   "edhrec_rank": 4194,
+   "role": "removal",
+   "reason": "spot removal (role quota): Erebos, Bleak-Hearted",
+   "strict": [
+    "draw",
+    "removal"
+   ],
+   "lenient": [
+    "draw",
+    "removal"
+   ],
+   "oracle": "Indestructible / As long as your devotion to black is less than five, Erebos isn't a creature. / Whenever another creature you control dies, you may pay 2 life. If you do, draw a card. / {1}{B}, Sacrifice another creature: Target creature gets -2/-1 until end of turn."
+  },
+  {
+   "name": "Vraska, Golgari Queen",
+   "qty": 1,
+   "cmc": 4,
+   "type_line": "Legendary Planeswalker — Vraska",
+   "mana_cost": "{2}{B}{G}",
+   "edhrec_rank": 4214,
+   "role": "removal",
+   "reason": "spot removal (role quota): Vraska, Golgari Queen",
+   "strict": [
+    "draw",
+    "removal"
+   ],
+   "lenient": [
+    "draw",
+    "removal"
+   ],
+   "oracle": "+2: You may sacrifice another permanent. If you do, you gain 1 life and draw a card. / −3: Destroy target nonland permanent with mana value 3 or less. / −9: You get an emblem with \"Whenever a creature you control deals combat damage to a player, that player loses the game.\""
+  },
+  {
+   "name": "Fade from History",
+   "qty": 1,
+   "cmc": 4,
+   "type_line": "Sorcery",
+   "mana_cost": "{2}{G}{G}",
+   "edhrec_rank": 4794,
+   "role": "board_wipe",
+   "reason": "board wipe (role quota): Fade from History",
+   "strict": [
+    "board_wipe"
+   ],
+   "lenient": [
+    "board_wipe"
+   ],
+   "oracle": "Each player who controls an artifact or enchantment creates a 2/2 green Bear creature token. Then destroy all artifacts and enchantments."
+  },
+  {
+   "name": "Season of Gathering",
+   "qty": 1,
+   "cmc": 6,
+   "type_line": "Sorcery",
+   "mana_cost": "{4}{G}{G}",
+   "edhrec_rank": 1754,
+   "role": "board_wipe",
+   "reason": "board wipe (role quota): Season of Gathering",
+   "strict": [
+    "draw",
+    "board_wipe"
+   ],
+   "lenient": [
+    "draw",
+    "board_wipe",
+    "win_condition"
+   ],
+   "oracle": "Choose up to five {P} worth of modes. You may choose the same mode more than once. / {P} — Put a +1/+1 counter on a creature you control. It gains vigilance and trample until end of turn. / {P}{P} — Choose artifact or enchantment. Destroy all permanents of the chosen type. / {P}{P}{P} — Draw cards equal to the greatest power among creatures you control."
+  },
+  {
+   "name": "Phyrexian Scriptures",
+   "qty": 1,
+   "cmc": 4,
+   "type_line": "Enchantment — Saga",
+   "mana_cost": "{2}{B}{B}",
+   "edhrec_rank": 4656,
+   "role": "board_wipe",
+   "reason": "board wipe (role quota): Phyrexian Scriptures",
+   "strict": [
+    "board_wipe"
+   ],
+   "lenient": [
+    "board_wipe"
+   ],
+   "oracle": "(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.) / I — Put a +1/+1 counter on up to one target creature. That creature becomes an artifact in addition to its other types. / II — Destroy all nonartifact creatures. / III — Exile all opponents' graveyards."
+  },
+  {
+   "name": "Lightning Greaves",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Artifact — Equipment",
+   "mana_cost": "{2}",
+   "edhrec_rank": 13,
+   "role": "protection",
+   "reason": "protection (role quota): Lightning Greaves",
+   "strict": [
+    "protection"
+   ],
+   "lenient": [
+    "protection"
+   ],
+   "oracle": "Equipped creature has haste and shroud. (It can't be the target of spells or abilities.) / Equip {0}"
+  },
+  {
+   "name": "Swiftfoot Boots",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Artifact — Equipment",
+   "mana_cost": "{2}",
+   "edhrec_rank": 12,
+   "role": "protection",
+   "reason": "protection (role quota): Swiftfoot Boots",
+   "strict": [
+    "protection"
+   ],
+   "lenient": [
+    "protection"
+   ],
+   "oracle": "Equipped creature has hexproof and haste. (It can't be the target of spells or abilities your opponents control. It can attack and {T} no matter when it came under your control.) / Equip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)"
+  },
+  {
+   "name": "Sidequest: Hunt the Mark // Yiazmat, Ultimate Mark",
+   "qty": 1,
+   "cmc": 5,
+   "type_line": "Enchantment // Legendary Creature — Dragon",
+   "mana_cost": "{3}{B}{B}",
+   "edhrec_rank": 12482,
+   "role": "protection",
+   "reason": "protection (role quota): Sidequest: Hunt the Mark // Yiazmat, Ultimate Mark",
+   "strict": [
+    "ramp",
+    "removal",
+    "protection"
+   ],
+   "lenient": [
+    "removal",
+    "protection",
+    "win_condition"
+   ],
+   "oracle": "When this enchantment enters, destroy up to one target creature. / At the beginning of your end step, if a creature died under an opponent's control this turn, create a Treasure token. Then if you control three or more Treasures, transform this enchantment. / // / {1}{B}, Sacrifice another creature or artifact: Yiazmat gains indestructible until end of turn. Tap it."
+  },
+  {
+   "name": "Night of the Sweets' Revenge",
+   "qty": 1,
+   "cmc": 4,
+   "type_line": "Enchantment",
+   "mana_cost": "{3}{G}",
+   "edhrec_rank": 2058,
+   "role": "win_condition",
+   "reason": "win condition (role quota): Night of the Sweets' Revenge",
+   "strict": [
+    "win_condition"
+   ],
+   "lenient": [
+    "ramp",
+    "board_wipe"
+   ],
+   "oracle": "When this enchantment enters, create a Food token. (It's an artifact with \"{2}, {T}, Sacrifice this token: You gain 3 life.\") / Foods you control have \"{T}: Add {G}.\" / {5}{G}{G}, Sacrifice this enchantment: Creatures you control get +X/+X until end of turn, where X is the number of Foods you control. Activate only as a sorcery."
+  },
+  {
+   "name": "Cauldron Familiar",
+   "qty": 1,
+   "cmc": 1,
+   "type_line": "Creature — Cat",
+   "mana_cost": "{B}",
+   "edhrec_rank": 2999,
+   "role": "win_condition",
+   "reason": "win condition (role quota): Cauldron Familiar",
+   "strict": [
+    "win_condition"
+   ],
+   "lenient": [
+    "win_condition"
+   ],
+   "oracle": "When this creature enters, each opponent loses 1 life and you gain 1 life. / Sacrifice a Food: Return this card from your graveyard to the battlefield."
+  },
+  {
+   "name": "Marionette Apprentice",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Creature — Human Artificer",
+   "mana_cost": "{1}{B}",
+   "edhrec_rank": 565,
+   "role": "win_condition",
+   "reason": "win condition (role quota): Marionette Apprentice",
+   "strict": [
+    "win_condition"
+   ],
+   "lenient": [
+    "win_condition"
+   ],
+   "oracle": "Fabricate 1 (When this creature enters, put a +1/+1 counter on it or create a 1/1 colorless Servo artifact creature token.) / Whenever another creature or artifact you control is put into a graveyard from the battlefield, each opponent loses 1 life."
+  },
+  {
+   "name": "Mirkwood Bats",
+   "qty": 1,
+   "cmc": 4,
+   "type_line": "Creature — Bat",
+   "mana_cost": "{3}{B}",
+   "edhrec_rank": 228,
+   "role": "win_condition",
+   "reason": "win condition (role quota): Mirkwood Bats",
+   "strict": [
+    "win_condition"
+   ],
+   "lenient": [
+    "win_condition"
+   ],
+   "oracle": "Flying / Whenever you create or sacrifice a token, each opponent loses 1 life."
+  },
+  {
+   "name": "High-Society Hunter",
+   "qty": 1,
+   "cmc": 5,
+   "type_line": "Creature — Vampire Noble",
+   "mana_cost": "{3}{B}{B}",
+   "edhrec_rank": 4403,
+   "role": "win_condition",
+   "reason": "win condition (role quota): High-Society Hunter",
+   "strict": [
+    "draw",
+    "win_condition"
+   ],
+   "lenient": [
+    "draw",
+    "win_condition"
+   ],
+   "oracle": "Flying / Whenever this creature attacks, you may sacrifice another creature. If you do, put a +1/+1 counter on this creature. / Whenever another nontoken creature dies, draw a card."
+  },
+  {
+   "name": "Camellia, the Seedmiser",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Legendary Creature — Squirrel Warlock",
+   "mana_cost": "{1}{B}{G}",
+   "edhrec_rank": 2704,
+   "role": "synergy",
+   "reason": "commander synergy: Camellia, the Seedmiser",
+   "strict": [
+    "utility"
+   ],
+   "lenient": [
+    "utility"
+   ],
+   "oracle": "Menace / Other Squirrels you control have menace. / Whenever you sacrifice one or more Foods, create a 1/1 green Squirrel creature token. / {2}, Forage: Put a +1/+1 counter on each other Squirrel you control. (To forage, exile three cards from your graveyard or sacrifice a Food.)"
+  },
+  {
+   "name": "Experimental Confectioner",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Creature — Human Peasant",
+   "mana_cost": "{2}{B}",
+   "edhrec_rank": 3843,
+   "role": "synergy",
+   "reason": "commander synergy: Experimental Confectioner",
+   "strict": [
+    "utility"
+   ],
+   "lenient": [
+    "utility"
+   ],
+   "oracle": "When this creature enters, create a Food token. (It's an artifact with \"{2}, {T}, Sacrifice this token: You gain 3 life.\") / Whenever you sacrifice a Food, create a 1/1 black Rat creature token with \"This token can't block.\""
+  },
+  {
+   "name": "Warren Soultrader",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Creature — Zombie Goblin Wizard",
+   "mana_cost": "{2}{B}",
+   "edhrec_rank": 415,
+   "role": "synergy",
+   "reason": "commander synergy: Warren Soultrader",
+   "strict": [
+    "utility"
+   ],
+   "lenient": [
+    "ramp"
+   ],
+   "oracle": "Pay 1 life, Sacrifice another creature: Create a Treasure token. (It's an artifact with \"{T}, Sacrifice this token: Add one mana of any color.\")"
+  },
+  {
+   "name": "Academy Manufactor",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Artifact Creature — Assembly-Worker",
+   "mana_cost": "{3}",
+   "edhrec_rank": 262,
+   "role": "synergy",
+   "reason": "commander synergy: Academy Manufactor",
+   "strict": [
+    "utility"
+   ],
+   "lenient": [
+    "utility"
+   ],
+   "oracle": "If you would create a Clue, Food, or Treasure token, instead create one of each."
+  },
+  {
+   "name": "Scavenger's Talent",
+   "qty": 1,
+   "cmc": 1,
+   "type_line": "Enchantment — Class",
+   "mana_cost": "{B}",
+   "edhrec_rank": 3970,
+   "role": "synergy",
+   "reason": "commander synergy: Scavenger's Talent",
+   "strict": [
+    "utility"
+   ],
+   "lenient": [
+    "utility"
+   ],
+   "oracle": "(Gain the next level as a sorcery to add its ability.) / Whenever one or more creatures you control die, create a Food token. This ability triggers only once each turn. / {1}{B}: Level 2 / Whenever you sacrifice a permanent, target player mills two cards. / {2}{B}: Level 3 / At the beginning of your end step, you may sacrifice three other nonland permanents. If you do, return a creature card from your graveyard to the battlefield with a finality counter on it."
+  },
+  {
+   "name": "Witch's Oven",
+   "qty": 1,
+   "cmc": 1,
+   "type_line": "Artifact",
+   "mana_cost": "{1}",
+   "edhrec_rank": 3136,
+   "role": "synergy",
+   "reason": "commander synergy: Witch's Oven",
+   "strict": [
+    "utility"
+   ],
+   "lenient": [
+    "utility"
+   ],
+   "oracle": "{T}, Sacrifice a creature: Create a Food token. If the sacrificed creature's toughness was 4 or greater, create two Food tokens instead. (They're artifacts with \"{2}, {T}, Sacrifice this token: You gain 3 life.\")"
+  },
+  {
+   "name": "Tyvar Kell",
+   "qty": 1,
+   "cmc": 4,
+   "type_line": "Legendary Planeswalker — Tyvar",
+   "mana_cost": "{2}{G}{G}",
+   "edhrec_rank": 4286,
+   "role": "draw",
+   "reason": "extra draw: Tyvar Kell",
+   "strict": [
+    "draw"
+   ],
+   "lenient": [
+    "ramp",
+    "draw"
+   ],
+   "oracle": "Elves you control have \"{T}: Add {B}.\" / +1: Put a +1/+1 counter on up to one target Elf. Untap it. It gains deathtouch until end of turn. / 0: Create a 1/1 green Elf Warrior creature token. / −6: You get an emblem with \"Whenever you cast an Elf spell, it gains haste until end of turn and you draw two cards.\""
+  },
+  {
+   "name": "Currency Converter",
+   "qty": 1,
+   "cmc": 1,
+   "type_line": "Artifact",
+   "mana_cost": "{1}",
+   "edhrec_rank": 2553,
+   "role": "draw",
+   "reason": "extra draw: Currency Converter",
+   "strict": [
+    "draw"
+   ],
+   "lenient": [
+    "draw"
+   ],
+   "oracle": "Whenever you discard a card, you may exile that card from your graveyard. / {2}, {T}: Draw a card, then discard a card. / {T}: Put a card exiled with this artifact into its owner's graveyard. If it's a land card, create a Treasure token. If it's a nonland card, create a 2/2 black Rogue creature token."
+  },
+  {
+   "name": "The Sackville-Bagginses",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Legendary Creature — Halfling Citizen",
+   "mana_cost": "{1}{B}",
+   "edhrec_rank": 9086,
+   "role": "draw",
+   "reason": "extra draw: The Sackville-Bagginses",
+   "strict": [
+    "draw"
+   ],
+   "lenient": [
+    "draw"
+   ],
+   "oracle": "When The Sackville-Bagginses enter, you may sacrifice another creature or artifact. If you do, draw a card and create a Treasure token. / Whenever you sacrifice a token, target opponent loses 1 life."
+  },
+  {
+   "name": "Robot Domination",
+   "qty": 1,
+   "cmc": 4,
+   "type_line": "Enchantment — Plan",
+   "mana_cost": "{3}{B}",
+   "edhrec_rank": 15657,
+   "role": "draw",
+   "reason": "extra draw: Robot Domination",
+   "strict": [
+    "draw"
+   ],
+   "lenient": [
+    "draw"
+   ],
+   "oracle": "Whenever one or more creature cards are put into your graveyard from anywhere, you draw a card, lose 1 life, and put a plan counter on this enchantment. / When the third plan counter is put on this enchantment, sacrifice it and create three 2/2 colorless Robot Villain artifact creature tokens."
+  },
+  {
+   "name": "Setessan Champion",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Creature — Human Warrior",
+   "mana_cost": "{2}{G}",
+   "edhrec_rank": 1035,
+   "role": "draw",
+   "reason": "extra draw: Setessan Champion",
+   "strict": [
+    "draw"
+   ],
+   "lenient": [
+    "draw"
+   ],
+   "oracle": "Constellation — Whenever an enchantment you control enters, put a +1/+1 counter on this creature and draw a card."
+  },
+  {
+   "name": "Overgrown Tomb",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land — Swamp Forest",
+   "mana_cost": null,
+   "edhrec_rank": 71,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "({T}: Add {B} or {G}.) / As this land enters, you may pay 2 life. If you don't, it enters tapped."
+  },
+  {
+   "name": "Verdant Catacombs",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land",
+   "mana_cost": null,
+   "edhrec_rank": 48,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "{T}, Pay 1 life, Sacrifice this land: Search your library for a Swamp or Forest card, put it onto the battlefield, then shuffle."
+  },
+  {
+   "name": "Woodland Cemetery",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land",
+   "mana_cost": null,
+   "edhrec_rank": 110,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "This land enters tapped unless you control a Swamp or a Forest. / {T}: Add {B} or {G}."
+  },
+  {
+   "name": "Llanowar Wastes",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land",
+   "mana_cost": null,
+   "edhrec_rank": 137,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "{T}: Add {C}. / {T}: Add {B} or {G}. This land deals 1 damage to you."
+  },
+  {
+   "name": "Deathcap Glade",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land",
+   "mana_cost": null,
+   "edhrec_rank": 345,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "This land enters tapped unless you control two or more other lands. / {T}: Add {B} or {G}."
+  },
+  {
+   "name": "Necroblossom Snarl",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land",
+   "mana_cost": null,
+   "edhrec_rank": 532,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "As this land enters, you may reveal a Swamp or Forest card from your hand. If you don't, this land enters tapped. / {T}: Add {B} or {G}."
+  },
+  {
+   "name": "Fell the Profane // Fell Mire",
+   "qty": 1,
+   "cmc": 4,
+   "type_line": "Instant // Land",
+   "mana_cost": "{2}{B}{B}",
+   "edhrec_rank": 200,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "Destroy target creature or planeswalker. / // / As this land enters, you may pay 3 life. If you don't, it enters tapped. / {T}: Add {B}."
+  },
+  {
+   "name": "Boggart Trawler // Boggart Bog",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Creature — Goblin // Land",
+   "mana_cost": "{2}{B}",
+   "edhrec_rank": 633,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "When this creature enters, exile target player's graveyard. / // / As this land enters, you may pay 3 life. If you don't, it enters tapped. / {T}: Add {B}."
+  },
+  {
+   "name": "Agadeem's Awakening // Agadeem, the Undercrypt",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Sorcery // Land",
+   "mana_cost": "{X}{B}{B}{B}",
+   "edhrec_rank": 961,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "Return from your graveyard to the battlefield any number of target creature cards that each have a different mana value X or less. / // / As this land enters, you may pay 3 life. If you don't, it enters tapped. / {T}: Add {B}."
+  },
+  {
+   "name": "Three Tree City",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Legendary Land",
+   "mana_cost": null,
+   "edhrec_rank": 177,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "As Three Tree City enters, choose a creature type. / {T}: Add {C}. / {2}, {T}: Choose a color. Add an amount of mana of that color equal to the number of creatures you control of the chosen type."
+  },
+  {
+   "name": "Starting Town",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land — Town",
+   "mana_cost": null,
+   "edhrec_rank": 714,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "This land enters tapped unless it's your first, second, or third turn of the game. / {T}: Add {C}. / {T}, Pay 1 life: Add one mana of any color."
+  },
+  {
+   "name": "Disciple of Freyalise // Garden of Freyalise",
+   "qty": 1,
+   "cmc": 6,
+   "type_line": "Creature — Elf Druid // Land",
+   "mana_cost": "{3}{G}{G}{G}",
+   "edhrec_rank": 461,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "When this creature enters, you may sacrifice another creature. If you do, you gain X life and draw X cards, where X is that creature's power. / // / As this land enters, you may pay 3 life. If you don't, it enters tapped. / {T}: Add {G}."
+  },
+  {
+   "name": "The Black Gate",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Legendary Land — Gate",
+   "mana_cost": null,
+   "edhrec_rank": 1178,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "As The Black Gate enters, you may pay 3 life. If you don't, it enters tapped. / {T}: Add {B}. / {1}{B}, {T}: Choose a player with the most life or tied for most life. Target creature can't be blocked by creatures that player controls this turn."
+  },
+  {
+   "name": "Darkbore Pathway // Slitherbore Pathway",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land // Land",
+   "mana_cost": null,
+   "edhrec_rank": 1174,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "{T}: Add {B}. / // / {T}: Add {G}."
+  },
+  {
+   "name": "Blooming Marsh",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land",
+   "mana_cost": null,
+   "edhrec_rank": 1531,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "This land enters tapped unless you control two or fewer other lands. / {T}: Add {B} or {G}."
+  },
+  {
+   "name": "Nurturing Peatland",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land",
+   "mana_cost": null,
+   "edhrec_rank": 1609,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "{T}, Pay 1 life: Add {B} or {G}. / {1}, {T}, Sacrifice this land: Draw a card."
+  },
+  {
+   "name": "Multiversal Passage",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land",
+   "mana_cost": null,
+   "edhrec_rank": 2127,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "As this land enters, choose a basic land type. Then you may pay 2 life. If you don't, it enters tapped. / This land is the chosen type."
+  },
+  {
+   "name": "Temple of the Dragon Queen",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land",
+   "mana_cost": null,
+   "edhrec_rank": 2547,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "As this land enters, you may reveal a Dragon card from your hand. This land enters tapped unless you revealed a Dragon card this way or you control a Dragon. / As this land enters, choose a color. / {T}: Add one mana of the chosen color."
+  },
+  {
+   "name": "Swamp",
+   "qty": 11,
+   "cmc": 0,
+   "type_line": "Basic Land — Swamp",
+   "mana_cost": null,
+   "edhrec_rank": null,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "({T}: Add {B}.)"
+  },
+  {
+   "name": "Forest",
+   "qty": 9,
+   "cmc": 0,
+   "type_line": "Basic Land — Forest",
+   "mana_cost": null,
+   "edhrec_rank": null,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "({T}: Add {G}.)"
+  }
+ ]
+}

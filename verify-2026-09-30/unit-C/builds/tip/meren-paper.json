@@ -1,0 +1,1493 @@
+{
+ "summary": {
+  "slug": "meren-paper",
+  "opts": {
+   "format": "commander",
+   "commanderName": "Meren of Clan Nel Toth",
+   "useCollection": true,
+   "userId": 1,
+   "collectionSource": "paper"
+  },
+  "ms": 2524,
+  "size": 99,
+  "lands": 38,
+  "strategy": "aristocrats",
+  "themes": [
+   "draw",
+   "sacrifice",
+   "counters",
+   "tokens",
+   "aggro",
+   "flying",
+   "ramp",
+   "artifacts",
+   "enchantments"
+  ],
+  "profile": {
+   "archetype": "aristocrats",
+   "categories": [
+    "creature_dies"
+   ]
+  },
+  "strictCounts": {
+   "ramp": 14,
+   "draw": 17,
+   "tutor": 1,
+   "removal": 9,
+   "board_wipe": 3,
+   "protection": 3,
+   "win_condition": 11
+  },
+  "lenientCounts": {
+   "ramp": 16,
+   "draw": 17,
+   "tutor": 2,
+   "removal": 9,
+   "board_wipe": 4,
+   "protection": 3,
+   "win_condition": 11
+  },
+  "roleCounts": {
+   "arsenal:community_top": 40,
+   "arsenal:collection_substitute": 2,
+   "arsenal:archetype_payoff": 3,
+   "draw": 7,
+   "(none)": 39,
+   "board_wipe": 1,
+   "protection": 1,
+   "ramp": 2,
+   "win_condition": 2,
+   "utility": 2
+  },
+  "health": {
+   "grade": "A",
+   "realLands": 35,
+   "tappedLands": 7,
+   "tappedRatio": 0.18,
+   "sourcesByColor": {
+    "W": 6,
+    "U": 5,
+    "B": 31,
+    "R": 8,
+    "G": 25
+   },
+   "pipsByColor": {
+    "W": 0,
+    "U": 0,
+    "B": 53,
+    "R": 0,
+    "G": 21
+   },
+   "drawCount": 17,
+   "drawEngineCount": 13,
+   "rampCount": 12,
+   "fakeLands": [],
+   "warnings": [],
+   "deficiencies": []
+  },
+  "deadCardsReplaced": [
+   {
+    "out": "Dimir House Guard",
+    "in": "Transmutation Font",
+    "reason": "narrow tutor: only 0 Card With The Same Mana Value As This in deck"
+   }
+  ],
+  "buildReport": "Archetype: Aristocrats — targeting 61 nonland slots\nRole fills:\n  ramp       16/12 OK\n  draw       15/10 OK\n  tutor      2/2 OK\n  removal    10/7 OK\n  wipes      3/3 OK\n  protection 3/3 OK\n  payoffs    9/8 OK\n  wincons    23/5 OK"
+ },
+ "cards": [
+  {
+   "name": "Sol Ring",
+   "qty": 1,
+   "cmc": 1,
+   "type_line": "Artifact",
+   "mana_cost": "{1}",
+   "edhrec_rank": 1,
+   "role": "arsenal:community_top",
+   "reason": "83% of 6898 Meren of Clan Nel Toth decks play this",
+   "strict": [
+    "ramp"
+   ],
+   "lenient": [
+    "ramp"
+   ],
+   "oracle": "{T}: Add {C}{C}."
+  },
+  {
+   "name": "Sakura-Tribe Elder",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Creature — Snake Shaman",
+   "mana_cost": "{1}{G}",
+   "edhrec_rank": 113,
+   "role": "arsenal:community_top",
+   "reason": "81% of 6898 Meren of Clan Nel Toth decks play this",
+   "strict": [
+    "ramp"
+   ],
+   "lenient": [
+    "ramp"
+   ],
+   "oracle": "Sacrifice this creature: Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle."
+  },
+  {
+   "name": "Spore Frog",
+   "qty": 1,
+   "cmc": 1,
+   "type_line": "Creature — Frog",
+   "mana_cost": "{G}",
+   "edhrec_rank": 1139,
+   "role": "arsenal:community_top",
+   "reason": "74% of 6898 Meren of Clan Nel Toth decks play this",
+   "strict": [
+    "utility"
+   ],
+   "lenient": [
+    "utility"
+   ],
+   "oracle": "Sacrifice this creature: Prevent all combat damage that would be dealt this turn."
+  },
+  {
+   "name": "Eternal Witness",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Creature — Human Shaman",
+   "mana_cost": "{1}{G}{G}",
+   "edhrec_rank": 119,
+   "role": "arsenal:community_top",
+   "reason": "74% of 6898 Meren of Clan Nel Toth decks play this",
+   "strict": [
+    "utility"
+   ],
+   "lenient": [
+    "utility"
+   ],
+   "oracle": "When this creature enters, you may return target card from your graveyard to your hand."
+  },
+  {
+   "name": "Victimize",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Sorcery",
+   "mana_cost": "{2}{B}",
+   "edhrec_rank": 128,
+   "role": "arsenal:community_top",
+   "reason": "67% of 6898 Meren of Clan Nel Toth decks play this",
+   "strict": [
+    "utility"
+   ],
+   "lenient": [
+    "utility"
+   ],
+   "oracle": "Choose two target creature cards in your graveyard. Sacrifice a creature. If you do, return the chosen cards to the battlefield tapped."
+  },
+  {
+   "name": "Viscera Seer",
+   "qty": 1,
+   "cmc": 1,
+   "type_line": "Creature — Vampire Wizard",
+   "mana_cost": "{B}",
+   "edhrec_rank": 257,
+   "role": "arsenal:community_top",
+   "reason": "66% of 6898 Meren of Clan Nel Toth decks play this",
+   "strict": [
+    "utility"
+   ],
+   "lenient": [
+    "utility"
+   ],
+   "oracle": "Sacrifice a creature: Scry 1. (Look at the top card of your library. You may put that card on the bottom.)"
+  },
+  {
+   "name": "Plaguecrafter",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Creature — Human Shaman",
+   "mana_cost": "{2}{B}",
+   "edhrec_rank": 639,
+   "role": "arsenal:community_top",
+   "reason": "63% of 6898 Meren of Clan Nel Toth decks play this",
+   "strict": [
+    "removal"
+   ],
+   "lenient": [
+    "removal"
+   ],
+   "oracle": "When this creature enters, each player sacrifices a creature or planeswalker of their choice. Each player who can't discards a card."
+  },
+  {
+   "name": "Buried Alive",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Sorcery",
+   "mana_cost": "{2}{B}",
+   "edhrec_rank": 354,
+   "role": "arsenal:community_top",
+   "reason": "60% of 6898 Meren of Clan Nel Toth decks play this",
+   "strict": [
+    "tutor"
+   ],
+   "lenient": [
+    "tutor"
+   ],
+   "oracle": "Search your library for up to three creature cards, put them into your graveyard, then shuffle."
+  },
+  {
+   "name": "Gray Merchant of Asphodel",
+   "qty": 1,
+   "cmc": 5,
+   "type_line": "Creature — Zombie",
+   "mana_cost": "{3}{B}{B}",
+   "edhrec_rank": 245,
+   "role": "arsenal:community_top",
+   "reason": "58% of 6898 Meren of Clan Nel Toth decks play this",
+   "strict": [
+    "win_condition"
+   ],
+   "lenient": [
+    "win_condition"
+   ],
+   "oracle": "When this creature enters, each opponent loses X life, where X is your devotion to black. You gain life equal to the life lost this way. (Each {B} in the mana costs of permanents you control counts toward your devotion to black.)"
+  },
+  {
+   "name": "Blood Artist",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Creature — Vampire",
+   "mana_cost": "{1}{B}",
+   "edhrec_rank": 141,
+   "role": "arsenal:community_top",
+   "reason": "55% of 6898 Meren of Clan Nel Toth decks play this",
+   "strict": [
+    "utility"
+   ],
+   "lenient": [
+    "utility"
+   ],
+   "oracle": "Whenever this creature or another creature dies, target player loses 1 life and you gain 1 life."
+  },
+  {
+   "name": "Arcane Signet",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Artifact",
+   "mana_cost": "{2}",
+   "edhrec_rank": 3,
+   "role": "arsenal:community_top",
+   "reason": "55% of 6898 Meren of Clan Nel Toth decks play this",
+   "strict": [
+    "ramp"
+   ],
+   "lenient": [
+    "ramp"
+   ],
+   "oracle": "{T}: Add one mana of any color in your commander's color identity."
+  },
+  {
+   "name": "Assassin's Trophy",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Instant",
+   "mana_cost": "{B}{G}",
+   "edhrec_rank": 122,
+   "role": "arsenal:community_top",
+   "reason": "54% of 6898 Meren of Clan Nel Toth decks play this",
+   "strict": [
+    "removal"
+   ],
+   "lenient": [
+    "removal"
+   ],
+   "oracle": "Destroy target permanent an opponent controls. Its controller may search their library for a basic land card, put it onto the battlefield, then shuffle."
+  },
+  {
+   "name": "Accursed Marauder",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Creature — Zombie Warrior",
+   "mana_cost": "{1}{B}",
+   "edhrec_rank": 475,
+   "role": "arsenal:community_top",
+   "reason": "53% of 6898 Meren of Clan Nel Toth decks play this",
+   "strict": [
+    "utility"
+   ],
+   "lenient": [
+    "utility"
+   ],
+   "oracle": "When this creature enters, each player sacrifices a nontoken creature of their choice."
+  },
+  {
+   "name": "Reanimate",
+   "qty": 1,
+   "cmc": 1,
+   "type_line": "Sorcery",
+   "mana_cost": "{B}",
+   "edhrec_rank": 54,
+   "role": "arsenal:community_top",
+   "reason": "52% of 6898 Meren of Clan Nel Toth decks play this",
+   "strict": [
+    "utility"
+   ],
+   "lenient": [
+    "utility"
+   ],
+   "oracle": "Put target creature card from a graveyard onto the battlefield under your control. You lose life equal to that card's mana value."
+  },
+  {
+   "name": "Zulaport Cutthroat",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Creature — Human Rogue Ally",
+   "mana_cost": "{1}{B}",
+   "edhrec_rank": 236,
+   "role": "arsenal:community_top",
+   "reason": "52% of 6898 Meren of Clan Nel Toth decks play this",
+   "strict": [
+    "win_condition"
+   ],
+   "lenient": [
+    "win_condition"
+   ],
+   "oracle": "Whenever this creature or another creature you control dies, each opponent loses 1 life and you gain 1 life."
+  },
+  {
+   "name": "Haywire Mite",
+   "qty": 1,
+   "cmc": 1,
+   "type_line": "Artifact Creature — Insect",
+   "mana_cost": "{1}",
+   "edhrec_rank": 683,
+   "role": "arsenal:community_top",
+   "reason": "51% of 6898 Meren of Clan Nel Toth decks play this",
+   "strict": [
+    "removal"
+   ],
+   "lenient": [
+    "removal"
+   ],
+   "oracle": "When this creature dies, you gain 2 life. / {G}, Sacrifice this creature: Exile target noncreature artifact or noncreature enchantment."
+  },
+  {
+   "name": "Grim Haruspex",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Creature — Human Wizard",
+   "mana_cost": "{2}{B}",
+   "edhrec_rank": 1142,
+   "role": "arsenal:community_top",
+   "reason": "48% of 6898 Meren of Clan Nel Toth decks play this",
+   "strict": [
+    "draw"
+   ],
+   "lenient": [
+    "draw"
+   ],
+   "oracle": "Morph {B} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.) / Whenever another nontoken creature you control dies, draw a card."
+  },
+  {
+   "name": "Braids, Arisen Nightmare",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Legendary Creature — Nightmare",
+   "mana_cost": "{1}{B}{B}",
+   "edhrec_rank": 296,
+   "role": "arsenal:community_top",
+   "reason": "47% of 6898 Meren of Clan Nel Toth decks play this",
+   "strict": [
+    "draw"
+   ],
+   "lenient": [
+    "draw"
+   ],
+   "oracle": "At the beginning of your end step, you may sacrifice an artifact, creature, enchantment, land, or planeswalker. If you do, each opponent may sacrifice a permanent of their choice that shares a card type with it. For each opponent who doesn't, that player loses 2 life and you draw a card."
+  },
+  {
+   "name": "Ashnod's Altar",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Artifact",
+   "mana_cost": "{3}",
+   "edhrec_rank": 134,
+   "role": "arsenal:community_top",
+   "reason": "47% of 6898 Meren of Clan Nel Toth decks play this",
+   "strict": [
+    "ramp"
+   ],
+   "lenient": [
+    "ramp"
+   ],
+   "oracle": "Sacrifice a creature: Add {C}{C}."
+  },
+  {
+   "name": "Carrion Feeder",
+   "qty": 1,
+   "cmc": 1,
+   "type_line": "Creature — Zombie",
+   "mana_cost": "{B}",
+   "edhrec_rank": 613,
+   "role": "arsenal:community_top",
+   "reason": "46% of 6898 Meren of Clan Nel Toth decks play this",
+   "strict": [
+    "utility"
+   ],
+   "lenient": [
+    "utility"
+   ],
+   "oracle": "This creature can't block. / Sacrifice a creature: Put a +1/+1 counter on this creature."
+  },
+  {
+   "name": "Llanowar Elves",
+   "qty": 1,
+   "cmc": 1,
+   "type_line": "Creature — Elf Druid",
+   "mana_cost": "{G}",
+   "edhrec_rank": 58,
+   "role": "arsenal:community_top",
+   "reason": "46% of 6898 Meren of Clan Nel Toth decks play this",
+   "strict": [
+    "ramp"
+   ],
+   "lenient": [
+    "ramp"
+   ],
+   "oracle": "{T}: Add {G}."
+  },
+  {
+   "name": "Cankerbloom",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Creature — Phyrexian Fungus",
+   "mana_cost": "{1}{G}",
+   "edhrec_rank": 815,
+   "role": "arsenal:community_top",
+   "reason": "43% of 6898 Meren of Clan Nel Toth decks play this",
+   "strict": [
+    "removal"
+   ],
+   "lenient": [
+    "removal"
+   ],
+   "oracle": "{1}, Sacrifice this creature: Choose one — / • Destroy target artifact. / • Destroy target enchantment. / • Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)"
+  },
+  {
+   "name": "Syr Konrad, the Grim",
+   "qty": 1,
+   "cmc": 5,
+   "type_line": "Legendary Creature — Human Knight",
+   "mana_cost": "{3}{B}{B}",
+   "edhrec_rank": 260,
+   "role": "arsenal:community_top",
+   "reason": "42% of 6898 Meren of Clan Nel Toth decks play this",
+   "strict": [
+    "win_condition"
+   ],
+   "lenient": [
+    "win_condition"
+   ],
+   "oracle": "Whenever another creature dies, or a creature card is put into a graveyard from anywhere other than the battlefield, or a creature card leaves your graveyard, Syr Konrad deals 1 damage to each opponent. / {1}{B}: Each player mills a card. (They each put the top card of their library into their graveyard.)"
+  },
+  {
+   "name": "Dread Presence",
+   "qty": 1,
+   "cmc": 4,
+   "type_line": "Creature — Nightmare",
+   "mana_cost": "{3}{B}",
+   "edhrec_rank": 2582,
+   "role": "arsenal:collection_substitute",
+   "reason": "owned draw substitute for Skullclamp",
+   "strict": [
+    "draw",
+    "removal"
+   ],
+   "lenient": [
+    "draw",
+    "removal"
+   ],
+   "oracle": "Whenever a Swamp you control enters, choose one — / • You draw a card and you lose 1 life. / • This creature deals 2 damage to any target and you gain 2 life."
+  },
+  {
+   "name": "Massacre Wurm",
+   "qty": 1,
+   "cmc": 6,
+   "type_line": "Creature — Phyrexian Wurm",
+   "mana_cost": "{3}{B}{B}{B}",
+   "edhrec_rank": 512,
+   "role": "arsenal:community_top",
+   "reason": "39% community inclusion",
+   "strict": [
+    "board_wipe"
+   ],
+   "lenient": [
+    "board_wipe",
+    "win_condition"
+   ],
+   "oracle": "When this creature enters, creatures your opponents control get -2/-2 until end of turn. / Whenever a creature an opponent controls dies, that player loses 2 life."
+  },
+  {
+   "name": "Wight of the Reliquary",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Creature — Zombie Knight",
+   "mana_cost": "{B}{G}",
+   "edhrec_rank": 1266,
+   "role": "arsenal:community_top",
+   "reason": "37% community inclusion",
+   "strict": [
+    "ramp"
+   ],
+   "lenient": [
+    "ramp"
+   ],
+   "oracle": "Vigilance / This creature gets +1/+1 for each creature card in your graveyard. / {T}, Sacrifice another creature: Search your library for a land card, put it onto the battlefield tapped, then shuffle."
+  },
+  {
+   "name": "Ravenous Chupacabra",
+   "qty": 1,
+   "cmc": 4,
+   "type_line": "Creature — Beast Horror",
+   "mana_cost": "{2}{B}{B}",
+   "edhrec_rank": 1132,
+   "role": "arsenal:community_top",
+   "reason": "37% community inclusion",
+   "strict": [
+    "removal"
+   ],
+   "lenient": [
+    "removal"
+   ],
+   "oracle": "When this creature enters, destroy target creature an opponent controls."
+  },
+  {
+   "name": "Force of Vigor",
+   "qty": 1,
+   "cmc": 4,
+   "type_line": "Instant",
+   "mana_cost": "{2}{G}{G}",
+   "edhrec_rank": 1017,
+   "role": "arsenal:collection_substitute",
+   "reason": "owned removal substitute for Fleshbag Marauder",
+   "strict": [
+    "removal"
+   ],
+   "lenient": [
+    "removal"
+   ],
+   "oracle": "If it's not your turn, you may exile a green card from your hand rather than pay this spell's mana cost. / Destroy up to two target artifacts and/or enchantments."
+  },
+  {
+   "name": "Elvish Mystic",
+   "qty": 1,
+   "cmc": 1,
+   "type_line": "Creature — Elf Druid",
+   "mana_cost": "{G}",
+   "edhrec_rank": 102,
+   "role": "arsenal:community_top",
+   "reason": "35% community inclusion",
+   "strict": [
+    "ramp"
+   ],
+   "lenient": [
+    "ramp"
+   ],
+   "oracle": "{T}: Add {G}."
+  },
+  {
+   "name": "Toxic Deluge",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Sorcery",
+   "mana_cost": "{2}{B}",
+   "edhrec_rank": 66,
+   "role": "arsenal:community_top",
+   "reason": "34% community inclusion",
+   "strict": [
+    "board_wipe"
+   ],
+   "lenient": [
+    "board_wipe"
+   ],
+   "oracle": "As an additional cost to cast this spell, pay X life. / All creatures get -X/-X until end of turn."
+  },
+  {
+   "name": "Mikaeus, the Unhallowed",
+   "qty": 1,
+   "cmc": 6,
+   "type_line": "Legendary Creature — Zombie Cleric",
+   "mana_cost": "{3}{B}{B}{B}",
+   "edhrec_rank": 1316,
+   "role": "arsenal:community_top",
+   "reason": "34% community inclusion",
+   "strict": [
+    "win_condition"
+   ],
+   "lenient": [
+    "win_condition"
+   ],
+   "oracle": "Intimidate (This creature can't be blocked except by artifact creatures and/or creatures that share a color with it.) / Whenever a Human deals damage to you, destroy it. / Other non-Human creatures you control get +1/+1 and have undying. (When a creature with undying dies, if it had no +1/+1 counters on it, return it to the battlefield under its owner's control with a +1/+1 counter on it.)"
+  },
+  {
+   "name": "Solemn Simulacrum",
+   "qty": 1,
+   "cmc": 4,
+   "type_line": "Artifact Creature — Golem",
+   "mana_cost": "{4}",
+   "edhrec_rank": 39,
+   "role": "arsenal:community_top",
+   "reason": "32% community inclusion",
+   "strict": [
+    "ramp",
+    "draw"
+   ],
+   "lenient": [
+    "ramp",
+    "draw"
+   ],
+   "oracle": "When this creature enters, you may search your library for a basic land card, put that card onto the battlefield tapped, then shuffle. / When this creature dies, you may draw a card."
+  },
+  {
+   "name": "Lightning Greaves",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Artifact — Equipment",
+   "mana_cost": "{2}",
+   "edhrec_rank": 13,
+   "role": "arsenal:community_top",
+   "reason": "31% community inclusion",
+   "strict": [
+    "protection"
+   ],
+   "lenient": [
+    "protection"
+   ],
+   "oracle": "Equipped creature has haste and shroud. (It can't be the target of spells or abilities.) / Equip {0}"
+  },
+  {
+   "name": "Village Rites",
+   "qty": 1,
+   "cmc": 1,
+   "type_line": "Instant",
+   "mana_cost": "{B}",
+   "edhrec_rank": 202,
+   "role": "arsenal:community_top",
+   "reason": "30% community inclusion",
+   "strict": [
+    "draw"
+   ],
+   "lenient": [
+    "draw"
+   ],
+   "oracle": "As an additional cost to cast this spell, sacrifice a creature. / Draw two cards."
+  },
+  {
+   "name": "Moldervine Reclamation",
+   "qty": 1,
+   "cmc": 5,
+   "type_line": "Enchantment",
+   "mana_cost": "{3}{B}{G}",
+   "edhrec_rank": 992,
+   "role": "arsenal:community_top",
+   "reason": "29% community inclusion",
+   "strict": [
+    "draw"
+   ],
+   "lenient": [
+    "draw"
+   ],
+   "oracle": "Whenever a creature you control dies, you gain 1 life and draw a card."
+  },
+  {
+   "name": "Putrefy",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Instant",
+   "mana_cost": "{1}{B}{G}",
+   "edhrec_rank": 339,
+   "role": "arsenal:community_top",
+   "reason": "29% community inclusion",
+   "strict": [
+    "removal"
+   ],
+   "lenient": [
+    "removal"
+   ],
+   "oracle": "Destroy target artifact or creature. It can't be regenerated."
+  },
+  {
+   "name": "Butcher of Malakir",
+   "qty": 1,
+   "cmc": 7,
+   "type_line": "Creature — Vampire Warrior",
+   "mana_cost": "{5}{B}{B}",
+   "edhrec_rank": 1371,
+   "role": "arsenal:community_top",
+   "reason": "28% community inclusion",
+   "strict": [
+    "removal",
+    "win_condition"
+   ],
+   "lenient": [
+    "removal",
+    "win_condition"
+   ],
+   "oracle": "Flying / Whenever this creature or another creature you control dies, each opponent sacrifices a creature of their choice."
+  },
+  {
+   "name": "Culling Ritual",
+   "qty": 1,
+   "cmc": 4,
+   "type_line": "Sorcery",
+   "mana_cost": "{2}{B}{G}",
+   "edhrec_rank": 587,
+   "role": "arsenal:community_top",
+   "reason": "28% community inclusion",
+   "strict": [
+    "ramp"
+   ],
+   "lenient": [
+    "ramp"
+   ],
+   "oracle": "Destroy each nonland permanent with mana value 2 or less. Add {B} or {G} for each permanent destroyed this way."
+  },
+  {
+   "name": "Cultivate",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Sorcery",
+   "mana_cost": "{2}{G}",
+   "edhrec_rank": 20,
+   "role": "arsenal:community_top",
+   "reason": "27% community inclusion",
+   "strict": [
+    "ramp"
+   ],
+   "lenient": [
+    "ramp"
+   ],
+   "oracle": "Search your library for up to two basic land cards, reveal those cards, put one onto the battlefield tapped and the other into your hand, then shuffle."
+  },
+  {
+   "name": "Dark Ritual",
+   "qty": 1,
+   "cmc": 1,
+   "type_line": "Instant",
+   "mana_cost": "{B}",
+   "edhrec_rank": 33,
+   "role": "arsenal:community_top",
+   "reason": "27% community inclusion",
+   "strict": [
+    "ramp"
+   ],
+   "lenient": [
+    "ramp"
+   ],
+   "oracle": "Add {B}{B}{B}."
+  },
+  {
+   "name": "Cauldron of Essence",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Artifact",
+   "mana_cost": "{1}{B}{G}",
+   "edhrec_rank": 2193,
+   "role": "arsenal:community_top",
+   "reason": "22% community inclusion",
+   "strict": [
+    "win_condition"
+   ],
+   "lenient": [
+    "win_condition"
+   ],
+   "oracle": "Whenever a creature you control dies, each opponent loses 1 life and you gain 1 life. / {1}{B}{G}, {T}, Sacrifice a creature: Return target creature card from your graveyard to the battlefield. Activate only as a sorcery."
+  },
+  {
+   "name": "Yahenni, Undying Partisan",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Legendary Creature — Aetherborn Vampire",
+   "mana_cost": "{2}{B}",
+   "edhrec_rank": 1033,
+   "role": "arsenal:archetype_payoff",
+   "reason": "creature dies payoff",
+   "strict": [
+    "protection"
+   ],
+   "lenient": [
+    "protection"
+   ],
+   "oracle": "Haste / Whenever a creature an opponent controls dies, put a +1/+1 counter on Yahenni. / Sacrifice another creature: Yahenni gains indestructible until end of turn."
+  },
+  {
+   "name": "Priest of Forgotten Gods",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Creature — Human Cleric",
+   "mana_cost": "{1}{B}",
+   "edhrec_rank": 1392,
+   "role": "arsenal:archetype_payoff",
+   "reason": "creature dies payoff",
+   "strict": [
+    "ramp",
+    "draw"
+   ],
+   "lenient": [
+    "ramp",
+    "draw"
+   ],
+   "oracle": "{T}, Sacrifice two other creatures: Any number of target players each lose 2 life and sacrifice a creature of their choice. You add {B}{B} and draw a card. (Activate only as an instant.)"
+  },
+  {
+   "name": "Woe Strider",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Creature — Horror",
+   "mana_cost": "{2}{B}",
+   "edhrec_rank": 1682,
+   "role": "arsenal:archetype_payoff",
+   "reason": "creature dies payoff",
+   "strict": [
+    "utility"
+   ],
+   "lenient": [
+    "utility"
+   ],
+   "oracle": "When this creature enters, create a 0/1 white Goat creature token. / Sacrifice another creature: Scry 1. / Escape—{3}{B}{B}, Exile four other cards from your graveyard. (You may cast this card from your graveyard for its escape cost.) / This creature escapes with two +1/+1 counters on it."
+  },
+  {
+   "name": "Morbid Opportunist",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Creature — Human Rogue",
+   "mana_cost": "{2}{B}",
+   "edhrec_rank": 249,
+   "role": "arsenal:community_top",
+   "reason": "31% community inclusion",
+   "strict": [
+    "draw"
+   ],
+   "lenient": [
+    "draw"
+   ],
+   "oracle": "Whenever one or more other creatures die, draw a card. This ability triggers only once each turn."
+  },
+  {
+   "name": "Garruk's Uprising",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Enchantment",
+   "mana_cost": "{2}{G}",
+   "edhrec_rank": 89,
+   "role": "draw",
+   "reason": "card draw (role quota): Garruk's Uprising",
+   "strict": [
+    "draw"
+   ],
+   "lenient": [
+    "draw"
+   ],
+   "oracle": "When this enchantment enters, if you control a creature with power 4 or greater, draw a card. / Creatures you control have trample. (Each of those creatures can deal excess combat damage to the player or planeswalker it's attacking.) / Whenever a creature you control with power 4 or greater enters, draw a card."
+  },
+  {
+   "name": "Idol of Oblivion",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Artifact",
+   "mana_cost": "{2}",
+   "edhrec_rank": 191,
+   "role": "draw",
+   "reason": "card draw (role quota): Idol of Oblivion",
+   "strict": [
+    "draw"
+   ],
+   "lenient": [
+    "draw"
+   ],
+   "oracle": "{T}: Draw a card. Activate only if you created a token this turn. / {8}, {T}, Sacrifice this artifact: Create a 10/10 colorless Eldrazi creature token."
+  },
+  {
+   "name": "Transmutation Font",
+   "qty": 1,
+   "cmc": 5,
+   "type_line": "Artifact",
+   "mana_cost": "{5}",
+   "edhrec_rank": 3420,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "utility"
+   ],
+   "lenient": [
+    "tutor"
+   ],
+   "oracle": "{T}: Create your choice of a Blood token, a Clue token, or a Food token. / {3}, {T}, Sacrifice three artifact tokens with different names: Search your library for an artifact card, put it onto the battlefield, then shuffle. Activate only as a sorcery."
+  },
+  {
+   "name": "Phyrexian Scriptures",
+   "qty": 1,
+   "cmc": 4,
+   "type_line": "Enchantment — Saga",
+   "mana_cost": "{2}{B}{B}",
+   "edhrec_rank": 4656,
+   "role": "board_wipe",
+   "reason": "board wipe (role quota): Phyrexian Scriptures",
+   "strict": [
+    "board_wipe"
+   ],
+   "lenient": [
+    "board_wipe"
+   ],
+   "oracle": "(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.) / I — Put a +1/+1 counter on up to one target creature. That creature becomes an artifact in addition to its other types. / II — Destroy all nonartifact creatures. / III — Exile all opponents' graveyards."
+  },
+  {
+   "name": "Gyome, Master Chef",
+   "qty": 1,
+   "cmc": 4,
+   "type_line": "Legendary Creature — Troll Warlock",
+   "mana_cost": "{2}{B}{G}",
+   "edhrec_rank": 4810,
+   "role": "protection",
+   "reason": "protection (role quota): Gyome, Master Chef",
+   "strict": [
+    "protection",
+    "win_condition"
+   ],
+   "lenient": [
+    "protection",
+    "win_condition"
+   ],
+   "oracle": "Trample / At the beginning of your end step, create a number of Food tokens equal to the number of nontoken creatures you had enter the battlefield under your control this turn. / {1}, Sacrifice a Food: Target creature gains indestructible until end of turn. Tap it."
+  },
+  {
+   "name": "High-Society Hunter",
+   "qty": 1,
+   "cmc": 5,
+   "type_line": "Creature — Vampire Noble",
+   "mana_cost": "{3}{B}{B}",
+   "edhrec_rank": 4403,
+   "role": "draw",
+   "reason": "extra draw: High-Society Hunter",
+   "strict": [
+    "draw",
+    "win_condition"
+   ],
+   "lenient": [
+    "draw",
+    "win_condition"
+   ],
+   "oracle": "Flying / Whenever this creature attacks, you may sacrifice another creature. If you do, put a +1/+1 counter on this creature. / Whenever another nontoken creature dies, draw a card."
+  },
+  {
+   "name": "Chronomancer",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Artifact Creature — Necron Wizard",
+   "mana_cost": "{1}{B}",
+   "edhrec_rank": 7612,
+   "role": "draw",
+   "reason": "extra draw: Chronomancer",
+   "strict": [
+    "draw"
+   ],
+   "lenient": [
+    "draw"
+   ],
+   "oracle": "Flying / Atomic Transmutation — {1}, {T}, Sacrifice another artifact: Draw a card. / Unearth {2}{B} ({2}{B}: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)"
+  },
+  {
+   "name": "Deadly Dispute",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Instant",
+   "mana_cost": "{1}{B}",
+   "edhrec_rank": 131,
+   "role": "draw",
+   "reason": "extra draw: Deadly Dispute",
+   "strict": [
+    "draw"
+   ],
+   "lenient": [
+    "ramp",
+    "draw"
+   ],
+   "oracle": "As an additional cost to cast this spell, sacrifice an artifact or creature. / Draw two cards and create a Treasure token. (It's an artifact with \"{T}, Sacrifice this token: Add one mana of any color.\")"
+  },
+  {
+   "name": "Smothering Abomination",
+   "qty": 1,
+   "cmc": 4,
+   "type_line": "Creature — Eldrazi",
+   "mana_cost": "{2}{B}{B}",
+   "edhrec_rank": 3857,
+   "role": "draw",
+   "reason": "extra draw: Smothering Abomination",
+   "strict": [
+    "draw",
+    "win_condition"
+   ],
+   "lenient": [
+    "draw",
+    "win_condition"
+   ],
+   "oracle": "Devoid (This card has no color.) / Flying / At the beginning of your upkeep, sacrifice a creature. / Whenever you sacrifice a creature, draw a card."
+  },
+  {
+   "name": "Tireless Provisioner",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Creature — Elf Scout",
+   "mana_cost": "{2}{G}",
+   "edhrec_rank": 185,
+   "role": "ramp",
+   "reason": "extra ramp: Tireless Provisioner",
+   "strict": [
+    "ramp"
+   ],
+   "lenient": [
+    "ramp"
+   ],
+   "oracle": "Landfall — Whenever a land you control enters, create a Food token or a Treasure token. (Food is an artifact with \"{2}, {T}, Sacrifice this token: You gain 3 life.\" Treasure is an artifact with \"{T}, Sacrifice this token: Add one mana of any color.\")"
+  },
+  {
+   "name": "Mirkwood Bats",
+   "qty": 1,
+   "cmc": 4,
+   "type_line": "Creature — Bat",
+   "mana_cost": "{3}{B}",
+   "edhrec_rank": 228,
+   "role": "win_condition",
+   "reason": "finisher: Mirkwood Bats",
+   "strict": [
+    "win_condition"
+   ],
+   "lenient": [
+    "win_condition"
+   ],
+   "oracle": "Flying / Whenever you create or sacrifice a token, each opponent loses 1 life."
+  },
+  {
+   "name": "Jerren, Corrupted Bishop // Ormendahl, the Corrupter",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Legendary Creature — Human Cleric // Legendary Creature — Demon",
+   "mana_cost": "{2}{B}",
+   "edhrec_rank": 13719,
+   "role": "draw",
+   "reason": "extra draw: Jerren, Corrupted Bishop // Ormendahl, the Corrupter",
+   "strict": [
+    "draw"
+   ],
+   "lenient": [
+    "draw"
+   ],
+   "oracle": "Whenever Jerren enters or another nontoken Human you control dies, you lose 1 life and create a 1/1 white Human creature token. / {2}: Target Human you control gains lifelink until end of turn. / At the beginning of your end step, if you have exactly 13 life, you may pay {4}{B}{B}. If you do, transform Jerren. / // / Flying, trample, lifelink / Sacrifice another creature: Draw a card."
+  },
+  {
+   "name": "Midnight Reaper",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Creature — Zombie Knight",
+   "mana_cost": "{2}{B}",
+   "edhrec_rank": 1050,
+   "role": "utility",
+   "reason": "allowlisted (arsenal/commander stats): Midnight Reaper",
+   "strict": [
+    "draw"
+   ],
+   "lenient": [
+    "draw"
+   ],
+   "oracle": "Whenever a nontoken creature you control dies, this creature deals 1 damage to you and you draw a card."
+  },
+  {
+   "name": "Dina, Essence Brewer",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Legendary Creature — Dryad Druid",
+   "mana_cost": "{1}{B}{G}",
+   "edhrec_rank": 5785,
+   "role": "utility",
+   "reason": "allowlisted (arsenal/commander stats): Dina, Essence Brewer",
+   "strict": [
+    "draw"
+   ],
+   "lenient": [
+    "draw"
+   ],
+   "oracle": "Whenever you sacrifice a creature, draw a card. This ability triggers only once each turn. / {2}, {T}, Sacrifice another creature: You gain X life and put X +1/+1 counters on target creature you control, where X is the sacrificed creature's power."
+  },
+  {
+   "name": "Fellwar Stone",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Artifact",
+   "mana_cost": "{2}",
+   "edhrec_rank": 17,
+   "role": "ramp",
+   "reason": "extra ramp: Fellwar Stone",
+   "strict": [
+    "ramp"
+   ],
+   "lenient": [
+    "ramp"
+   ],
+   "oracle": "{T}: Add one mana of any color that a land an opponent controls could produce."
+  },
+  {
+   "name": "Night of the Sweets' Revenge",
+   "qty": 1,
+   "cmc": 4,
+   "type_line": "Enchantment",
+   "mana_cost": "{3}{G}",
+   "edhrec_rank": 2058,
+   "role": "win_condition",
+   "reason": "finisher: Night of the Sweets' Revenge",
+   "strict": [
+    "win_condition"
+   ],
+   "lenient": [
+    "ramp",
+    "board_wipe"
+   ],
+   "oracle": "When this enchantment enters, create a Food token. (It's an artifact with \"{2}, {T}, Sacrifice this token: You gain 3 life.\") / Foods you control have \"{T}: Add {G}.\" / {5}{G}{G}, Sacrifice this enchantment: Creatures you control get +X/+X until end of turn, where X is the number of Foods you control. Activate only as a sorcery."
+  },
+  {
+   "name": "Overgrown Tomb",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land — Swamp Forest",
+   "mana_cost": null,
+   "edhrec_rank": 71,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "({T}: Add {B} or {G}.) / As this land enters, you may pay 2 life. If you don't, it enters tapped."
+  },
+  {
+   "name": "Woodland Cemetery",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land",
+   "mana_cost": null,
+   "edhrec_rank": 110,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "This land enters tapped unless you control a Swamp or a Forest. / {T}: Add {B} or {G}."
+  },
+  {
+   "name": "Llanowar Wastes",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land",
+   "mana_cost": null,
+   "edhrec_rank": 137,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "{T}: Add {C}. / {T}: Add {B} or {G}. This land deals 1 damage to you."
+  },
+  {
+   "name": "Necroblossom Snarl",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land",
+   "mana_cost": null,
+   "edhrec_rank": 532,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "As this land enters, you may reveal a Swamp or Forest card from your hand. If you don't, this land enters tapped. / {T}: Add {B} or {G}."
+  },
+  {
+   "name": "Boggart Trawler // Boggart Bog",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Creature — Goblin // Land",
+   "mana_cost": "{2}{B}",
+   "edhrec_rank": 633,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "When this creature enters, exile target player's graveyard. / // / As this land enters, you may pay 3 life. If you don't, it enters tapped. / {T}: Add {B}."
+  },
+  {
+   "name": "Command Tower",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land",
+   "mana_cost": null,
+   "edhrec_rank": 2,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "{T}: Add one mana of any color in your commander's color identity."
+  },
+  {
+   "name": "Blooming Marsh",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land",
+   "mana_cost": null,
+   "edhrec_rank": 1531,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "This land enters tapped unless you control two or fewer other lands. / {T}: Add {B} or {G}."
+  },
+  {
+   "name": "Disciple of Freyalise // Garden of Freyalise",
+   "qty": 1,
+   "cmc": 6,
+   "type_line": "Creature — Elf Druid // Land",
+   "mana_cost": "{3}{G}{G}{G}",
+   "edhrec_rank": 461,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "When this creature enters, you may sacrifice another creature. If you do, you gain X life and draw X cards, where X is that creature's power. / // / As this land enters, you may pay 3 life. If you don't, it enters tapped. / {T}: Add {G}."
+  },
+  {
+   "name": "Bridgeworks Battle // Tanglespan Bridgeworks",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Sorcery // Land",
+   "mana_cost": "{2}{G}",
+   "edhrec_rank": 670,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "Target creature you control gets +2/+2 until end of turn. It fights up to one target creature you don't control. (Each deals damage equal to its power to the other.) / // / As this land enters, you may pay 3 life. If you don't, it enters tapped. / {T}: Add {G}."
+  },
+  {
+   "name": "Riveteers Overlook",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land",
+   "mana_cost": null,
+   "edhrec_rank": 716,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "When this land enters, sacrifice it. When you do, search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle and you gain 1 life."
+  },
+  {
+   "name": "Twilight Mire",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land",
+   "mana_cost": null,
+   "edhrec_rank": 355,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "{T}: Add {C}. / {B/G}, {T}: Add {B}{B}, {B}{G}, or {G}{G}."
+  },
+  {
+   "name": "Exotic Orchard",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land",
+   "mana_cost": null,
+   "edhrec_rank": 9,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "{T}: Add one mana of any color that a land an opponent controls could produce."
+  },
+  {
+   "name": "Bloodstained Mire",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land",
+   "mana_cost": null,
+   "edhrec_rank": 43,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "{T}, Pay 1 life, Sacrifice this land: Search your library for a Swamp or Mountain card, put it onto the battlefield, then shuffle."
+  },
+  {
+   "name": "Mana Confluence",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land",
+   "mana_cost": null,
+   "edhrec_rank": 116,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "{T}, Pay 1 life: Add one mana of any color."
+  },
+  {
+   "name": "Windswept Heath",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land",
+   "mana_cost": null,
+   "edhrec_rank": 45,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "{T}, Pay 1 life, Sacrifice this land: Search your library for a Forest or Plains card, put it onto the battlefield, then shuffle."
+  },
+  {
+   "name": "Wooded Foothills",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land",
+   "mana_cost": null,
+   "edhrec_rank": 47,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "{T}, Pay 1 life, Sacrifice this land: Search your library for a Mountain or Forest card, put it onto the battlefield, then shuffle."
+  },
+  {
+   "name": "Viridescent Bog",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land",
+   "mana_cost": null,
+   "edhrec_rank": 721,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "{1}, {T}: Add {B}{G}."
+  },
+  {
+   "name": "Ifnir Deadlands",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land — Desert",
+   "mana_cost": null,
+   "edhrec_rank": 4450,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "{T}: Add {C}. / {T}, Pay 1 life: Add {B}. / {2}{B}{B}, {T}, Sacrifice a Desert: Put two -1/-1 counters on target creature an opponent controls. Activate only as a sorcery."
+  },
+  {
+   "name": "Swamp",
+   "qty": 14,
+   "cmc": 0,
+   "type_line": "Basic Land — Swamp",
+   "mana_cost": null,
+   "edhrec_rank": null,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "({T}: Add {B}.)"
+  },
+  {
+   "name": "Forest",
+   "qty": 6,
+   "cmc": 0,
+   "type_line": "Basic Land — Forest",
+   "mana_cost": null,
+   "edhrec_rank": null,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "({T}: Add {G}.)"
+  }
+ ]
+}

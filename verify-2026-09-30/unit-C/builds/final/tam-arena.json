@@ -1,0 +1,1750 @@
+{
+ "summary": {
+  "slug": "tam-arena",
+  "opts": {
+   "format": "brawl",
+   "commanderName": "Tam, the Possibility",
+   "useCollection": true,
+   "userId": 1,
+   "collectionSource": "arena"
+  },
+  "ms": 2525,
+  "size": 99,
+  "lands": 38,
+  "strategy": "superfriends",
+  "themes": [
+   "counters",
+   "draw",
+   "tokens",
+   "artifacts",
+   "enchantments",
+   "ramp",
+   "aggro",
+   "control",
+   "flying",
+   "spellslinger"
+  ],
+  "profile": {
+   "archetype": "superfriends",
+   "categories": [
+    "planeswalker",
+    "counters"
+   ]
+  },
+  "strictCounts": {
+   "ramp": 13,
+   "draw": 23,
+   "tutor": 1,
+   "removal": 12,
+   "board_wipe": 5,
+   "protection": 2,
+   "win_condition": 6
+  },
+  "lenientCounts": {
+   "ramp": 14,
+   "draw": 23,
+   "tutor": 1,
+   "removal": 11,
+   "board_wipe": 6,
+   "protection": 3,
+   "win_condition": 12
+  },
+  "roleCounts": {
+   "arsenal:archetype_payoff": 7,
+   "arsenal:staple_ramp": 8,
+   "arsenal:staple_removal": 6,
+   "tutor": 1,
+   "removal": 4,
+   "board_wipe": 5,
+   "protection": 1,
+   "win_condition": 3,
+   "(none)": 64
+  },
+  "health": {
+   "grade": "A",
+   "realLands": 34,
+   "tappedLands": 19,
+   "tappedRatio": 0.5,
+   "sourcesByColor": {
+    "W": 19,
+    "U": 24,
+    "B": 11,
+    "R": 22,
+    "G": 21
+   },
+   "pipsByColor": {
+    "W": 13,
+    "U": 15,
+    "B": 12,
+    "R": 16,
+    "G": 13
+   },
+   "drawCount": 12,
+   "drawEngineCount": 13,
+   "rampCount": 11,
+   "fakeLands": [],
+   "warnings": [],
+   "deficiencies": []
+  },
+  "deadCardsReplaced": [],
+  "buildReport": "Archetype: Superfriends — targeting 61 nonland slots\nRole fills:\n  ramp       19/12 OK\n  draw       13/8 OK\n  tutor      4/2 OK\n  removal    13/10 OK\n  wipes      5/5 OK\n  protection 5/3 OK\n  payoffs    12/15 SHORT\n  wincons    23/12 OK\nWarnings:\n  - role shortfall: synergy_payoff needs 15, filled 12 — pool exhausted or collection blocked"
+ },
+ "cards": [
+  {
+   "name": "Oath of Teferi",
+   "qty": 1,
+   "cmc": 5,
+   "type_line": "Legendary Enchantment",
+   "mana_cost": "{3}{W}{U}",
+   "edhrec_rank": 2984,
+   "role": "arsenal:archetype_payoff",
+   "reason": "planeswalker payoff",
+   "strict": [
+    "utility"
+   ],
+   "lenient": [
+    "utility"
+   ],
+   "oracle": "When Oath of Teferi enters, exile another target permanent you control. Return it to the battlefield under its owner's control at the beginning of the next end step. / You may activate the loyalty abilities of planeswalkers you control twice each turn rather than only once."
+  },
+  {
+   "name": "Evolution Sage",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Creature — Elf Druid",
+   "mana_cost": "{2}{G}",
+   "edhrec_rank": 403,
+   "role": "arsenal:archetype_payoff",
+   "reason": "planeswalker payoff",
+   "strict": [
+    "utility"
+   ],
+   "lenient": [
+    "utility"
+   ],
+   "oracle": "Landfall — Whenever a land you control enters, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)"
+  },
+  {
+   "name": "Tezzeret's Gambit",
+   "qty": 1,
+   "cmc": 4,
+   "type_line": "Sorcery",
+   "mana_cost": "{3}{U/P}",
+   "edhrec_rank": 950,
+   "role": "arsenal:archetype_payoff",
+   "reason": "counters payoff",
+   "strict": [
+    "draw"
+   ],
+   "lenient": [
+    "draw"
+   ],
+   "oracle": "({U/P} can be paid with either {U} or 2 life.) / Draw two cards, then proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)"
+  },
+  {
+   "name": "Tekuthal, Inquiry Dominus",
+   "qty": 1,
+   "cmc": 4,
+   "type_line": "Legendary Creature — Phyrexian Horror",
+   "mana_cost": "{2}{U}{U}",
+   "edhrec_rank": 1215,
+   "role": "arsenal:archetype_payoff",
+   "reason": "counters payoff",
+   "strict": [
+    "win_condition"
+   ],
+   "lenient": [
+    "win_condition"
+   ],
+   "oracle": "Flying / If you would proliferate, proliferate twice instead. / {1}{U/P}{U/P}, Remove three counters from among other artifacts, creatures, and planeswalkers you control: Put an indestructible counter on Tekuthal. ({U/P} can be paid with either {U} or 2 life.)"
+  },
+  {
+   "name": "Inspiring Call",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Instant",
+   "mana_cost": "{2}{G}",
+   "edhrec_rank": 280,
+   "role": "arsenal:archetype_payoff",
+   "reason": "counters payoff",
+   "strict": [
+    "draw"
+   ],
+   "lenient": [
+    "draw",
+    "protection"
+   ],
+   "oracle": "Draw a card for each creature you control with a +1/+1 counter on it. Those creatures gain indestructible until end of turn. (Damage and effects that say \"destroy\" don't destroy them.)"
+  },
+  {
+   "name": "Forgotten Ancient",
+   "qty": 1,
+   "cmc": 4,
+   "type_line": "Creature — Elemental",
+   "mana_cost": "{3}{G}",
+   "edhrec_rank": 391,
+   "role": "arsenal:archetype_payoff",
+   "reason": "counters payoff",
+   "strict": [
+    "utility"
+   ],
+   "lenient": [
+    "utility"
+   ],
+   "oracle": "Whenever a player casts a spell, you may put a +1/+1 counter on this creature. / At the beginning of your upkeep, you may move any number of +1/+1 counters from this creature onto other creatures."
+  },
+  {
+   "name": "Kami of Whispered Hopes",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Creature — Spirit",
+   "mana_cost": "{2}{G}",
+   "edhrec_rank": 401,
+   "role": "arsenal:archetype_payoff",
+   "reason": "counters payoff",
+   "strict": [
+    "ramp"
+   ],
+   "lenient": [
+    "ramp"
+   ],
+   "oracle": "If one or more +1/+1 counters would be put on a permanent you control, that many plus one +1/+1 counters are put on that permanent instead. / {T}: Add X mana of any one color, where X is this creature's power."
+  },
+  {
+   "name": "Mind Stone",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Artifact",
+   "mana_cost": "{2}",
+   "edhrec_rank": 32,
+   "role": "arsenal:staple_ramp",
+   "reason": "universal ramp staple",
+   "strict": [
+    "ramp",
+    "draw"
+   ],
+   "lenient": [
+    "ramp",
+    "draw"
+   ],
+   "oracle": "{T}: Add {C}. / {1}, {T}, Sacrifice this artifact: Draw a card."
+  },
+  {
+   "name": "Talisman of Progress",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Artifact",
+   "mana_cost": "{2}",
+   "edhrec_rank": 139,
+   "role": "arsenal:staple_ramp",
+   "reason": "universal ramp staple",
+   "strict": [
+    "ramp"
+   ],
+   "lenient": [
+    "ramp"
+   ],
+   "oracle": "{T}: Add {C}. / {T}: Add {W} or {U}. This artifact deals 1 damage to you."
+  },
+  {
+   "name": "Talisman of Conviction",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Artifact",
+   "mana_cost": "{2}",
+   "edhrec_rank": 151,
+   "role": "arsenal:staple_ramp",
+   "reason": "universal ramp staple",
+   "strict": [
+    "ramp"
+   ],
+   "lenient": [
+    "ramp"
+   ],
+   "oracle": "{T}: Add {C}. / {T}: Add {R} or {W}. This artifact deals 1 damage to you."
+  },
+  {
+   "name": "Talisman of Creativity",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Artifact",
+   "mana_cost": "{2}",
+   "edhrec_rank": 126,
+   "role": "arsenal:staple_ramp",
+   "reason": "universal ramp staple",
+   "strict": [
+    "ramp"
+   ],
+   "lenient": [
+    "ramp"
+   ],
+   "oracle": "{T}: Add {C}. / {T}: Add {U} or {R}. This artifact deals 1 damage to you."
+  },
+  {
+   "name": "Azorius Signet",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Artifact",
+   "mana_cost": "{2}",
+   "edhrec_rank": 215,
+   "role": "arsenal:staple_ramp",
+   "reason": "universal ramp staple",
+   "strict": [
+    "ramp"
+   ],
+   "lenient": [
+    "ramp"
+   ],
+   "oracle": "{1}, {T}: Add {W}{U}."
+  },
+  {
+   "name": "Rakdos Signet",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Artifact",
+   "mana_cost": "{2}",
+   "edhrec_rank": 168,
+   "role": "arsenal:staple_ramp",
+   "reason": "universal ramp staple",
+   "strict": [
+    "ramp"
+   ],
+   "lenient": [
+    "ramp"
+   ],
+   "oracle": "{1}, {T}: Add {B}{R}."
+  },
+  {
+   "name": "Hedron Archive",
+   "qty": 1,
+   "cmc": 4,
+   "type_line": "Artifact",
+   "mana_cost": "{4}",
+   "edhrec_rank": 544,
+   "role": "arsenal:staple_ramp",
+   "reason": "universal ramp staple",
+   "strict": [
+    "ramp",
+    "draw"
+   ],
+   "lenient": [
+    "ramp",
+    "draw"
+   ],
+   "oracle": "{T}: Add {C}{C}. / {2}, {T}, Sacrifice this artifact: Draw two cards."
+  },
+  {
+   "name": "Solemn Simulacrum",
+   "qty": 1,
+   "cmc": 4,
+   "type_line": "Artifact Creature — Golem",
+   "mana_cost": "{4}",
+   "edhrec_rank": 39,
+   "role": "arsenal:staple_ramp",
+   "reason": "universal ramp staple",
+   "strict": [
+    "ramp",
+    "draw"
+   ],
+   "lenient": [
+    "ramp",
+    "draw"
+   ],
+   "oracle": "When this creature enters, you may search your library for a basic land card, put that card onto the battlefield tapped, then shuffle. / When this creature dies, you may draw a card."
+  },
+  {
+   "name": "Swords to Plowshares",
+   "qty": 1,
+   "cmc": 1,
+   "type_line": "Instant",
+   "mana_cost": "{W}",
+   "edhrec_rank": 11,
+   "role": "arsenal:staple_removal",
+   "reason": "universal removal staple",
+   "strict": [
+    "removal"
+   ],
+   "lenient": [
+    "removal"
+   ],
+   "oracle": "Exile target creature. Its controller gains life equal to its power."
+  },
+  {
+   "name": "Path to Exile",
+   "qty": 1,
+   "cmc": 1,
+   "type_line": "Instant",
+   "mana_cost": "{W}",
+   "edhrec_rank": 15,
+   "role": "arsenal:staple_removal",
+   "reason": "universal removal staple",
+   "strict": [
+    "removal"
+   ],
+   "lenient": [
+    "removal"
+   ],
+   "oracle": "Exile target creature. Its controller may search their library for a basic land card, put that card onto the battlefield tapped, then shuffle."
+  },
+  {
+   "name": "Beast Within",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Instant",
+   "mana_cost": "{2}{G}",
+   "edhrec_rank": 25,
+   "role": "arsenal:staple_removal",
+   "reason": "universal removal staple",
+   "strict": [
+    "removal"
+   ],
+   "lenient": [
+    "removal"
+   ],
+   "oracle": "Destroy target permanent. Its controller creates a 3/3 green Beast creature token."
+  },
+  {
+   "name": "Heartless Act",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Instant",
+   "mana_cost": "{1}{B}",
+   "edhrec_rank": 4796,
+   "role": "arsenal:staple_removal",
+   "reason": "universal removal staple",
+   "strict": [
+    "removal"
+   ],
+   "lenient": [
+    "removal"
+   ],
+   "oracle": "Choose one — / • Destroy target creature with no counters on it. / • Remove up to three counters from target creature."
+  },
+  {
+   "name": "Go for the Throat",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Instant",
+   "mana_cost": "{1}{B}",
+   "edhrec_rank": 376,
+   "role": "arsenal:staple_removal",
+   "reason": "universal removal staple",
+   "strict": [
+    "removal"
+   ],
+   "lenient": [
+    "removal"
+   ],
+   "oracle": "Destroy target nonartifact creature."
+  },
+  {
+   "name": "Feed the Swarm",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Sorcery",
+   "mana_cost": "{1}{B}",
+   "edhrec_rank": 90,
+   "role": "arsenal:staple_removal",
+   "reason": "universal removal staple",
+   "strict": [
+    "removal"
+   ],
+   "lenient": [
+    "removal"
+   ],
+   "oracle": "Destroy target creature or enchantment an opponent controls. You lose life equal to that permanent's mana value."
+  },
+  {
+   "name": "Tezzeret, Cruel Captain",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Legendary Planeswalker — Tezzeret",
+   "mana_cost": "{3}",
+   "edhrec_rank": 1209,
+   "role": "tutor",
+   "reason": "tutor (role quota): Tezzeret, Cruel Captain",
+   "strict": [
+    "tutor"
+   ],
+   "lenient": [
+    "tutor"
+   ],
+   "oracle": "Whenever an artifact you control enters, put a loyalty counter on Tezzeret. / 0: Untap target artifact or creature. If it's an artifact creature, put a +1/+1 counter on it. / −3: Search your library for an artifact card with mana value 1 or less, reveal it, put it into your hand, then shuffle. / −7: You get an emblem with \"At the beginning of combat on your turn, put three +1/+1 counters on target artifact you control. If it's not a creature, it becomes a 0/0 Robot artifact creature.\""
+  },
+  {
+   "name": "Cankerbloom",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Creature — Phyrexian Fungus",
+   "mana_cost": "{1}{G}",
+   "edhrec_rank": 815,
+   "role": "removal",
+   "reason": "spot removal (role quota): Cankerbloom",
+   "strict": [
+    "removal"
+   ],
+   "lenient": [
+    "removal"
+   ],
+   "oracle": "{1}, Sacrifice this creature: Choose one — / • Destroy target artifact. / • Destroy target enchantment. / • Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)"
+  },
+  {
+   "name": "Reclamation Sage",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Creature — Elf Shaman",
+   "mana_cost": "{2}{G}",
+   "edhrec_rank": 330,
+   "role": "removal",
+   "reason": "spot removal (role quota): Reclamation Sage",
+   "strict": [
+    "removal"
+   ],
+   "lenient": [
+    "removal"
+   ],
+   "oracle": "When this creature enters, you may destroy target artifact or enchantment."
+  },
+  {
+   "name": "Rakdos Charm",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Instant",
+   "mana_cost": "{B}{R}",
+   "edhrec_rank": 324,
+   "role": "removal",
+   "reason": "spot removal (role quota): Rakdos Charm",
+   "strict": [
+    "removal"
+   ],
+   "lenient": [
+    "board_wipe"
+   ],
+   "oracle": "Choose one — / • Exile target player's graveyard. / • Destroy target artifact. / • Each creature deals 1 damage to its controller."
+  },
+  {
+   "name": "Pongify",
+   "qty": 1,
+   "cmc": 1,
+   "type_line": "Instant",
+   "mana_cost": "{U}",
+   "edhrec_rank": 155,
+   "role": "removal",
+   "reason": "spot removal (role quota): Pongify",
+   "strict": [
+    "removal"
+   ],
+   "lenient": [
+    "removal"
+   ],
+   "oracle": "Destroy target creature. It can't be regenerated. Its controller creates a 3/3 green Ape creature token."
+  },
+  {
+   "name": "Blasphemous Act",
+   "qty": 1,
+   "cmc": 9,
+   "type_line": "Sorcery",
+   "mana_cost": "{8}{R}",
+   "edhrec_rank": 22,
+   "role": "board_wipe",
+   "reason": "board wipe (role quota): Blasphemous Act",
+   "strict": [
+    "board_wipe"
+   ],
+   "lenient": [
+    "board_wipe"
+   ],
+   "oracle": "This spell costs {1} less to cast for each creature on the battlefield. / Blasphemous Act deals 13 damage to each creature."
+  },
+  {
+   "name": "Sunfall",
+   "qty": 1,
+   "cmc": 5,
+   "type_line": "Sorcery",
+   "mana_cost": "{3}{W}{W}",
+   "edhrec_rank": 3845,
+   "role": "board_wipe",
+   "reason": "board wipe (role quota): Sunfall",
+   "strict": [
+    "board_wipe"
+   ],
+   "lenient": [
+    "board_wipe"
+   ],
+   "oracle": "Exile all creatures. Incubate X, where X is the number of creatures exiled this way. (Create an Incubator token with X +1/+1 counters on it and \"{2}: Transform this token.\" It transforms into a 0/0 Phyrexian artifact creature.)"
+  },
+  {
+   "name": "Massacre Wurm",
+   "qty": 1,
+   "cmc": 6,
+   "type_line": "Creature — Phyrexian Wurm",
+   "mana_cost": "{3}{B}{B}{B}",
+   "edhrec_rank": 512,
+   "role": "board_wipe",
+   "reason": "board wipe (role quota): Massacre Wurm",
+   "strict": [
+    "board_wipe"
+   ],
+   "lenient": [
+    "board_wipe",
+    "win_condition"
+   ],
+   "oracle": "When this creature enters, creatures your opponents control get -2/-2 until end of turn. / Whenever a creature an opponent controls dies, that player loses 2 life."
+  },
+  {
+   "name": "Ajani Unrelenting",
+   "qty": 1,
+   "cmc": 6,
+   "type_line": "Legendary Planeswalker — Ajani",
+   "mana_cost": "{4}{R}{R}",
+   "edhrec_rank": 15919,
+   "role": "board_wipe",
+   "reason": "board wipe (role quota): Ajani Unrelenting",
+   "strict": [
+    "draw",
+    "board_wipe"
+   ],
+   "lenient": [
+    "draw",
+    "board_wipe"
+   ],
+   "oracle": "Whenever you activate a loyalty ability, create a 2/2 colorless Wizard Soldier creature token named Cadet. / +1: Creatures you control get +1/+0 and gain haste until end of turn. / −2: Discard your hand, then draw a card for each creature you control. / −3: Ajani deals 4 damage to each creature except for tokens you control."
+  },
+  {
+   "name": "Fumigate",
+   "qty": 1,
+   "cmc": 5,
+   "type_line": "Sorcery",
+   "mana_cost": "{3}{W}{W}",
+   "edhrec_rank": 1005,
+   "role": "board_wipe",
+   "reason": "board wipe (role quota): Fumigate",
+   "strict": [
+    "board_wipe"
+   ],
+   "lenient": [
+    "board_wipe"
+   ],
+   "oracle": "Destroy all creatures. You gain 1 life for each creature destroyed this way."
+  },
+  {
+   "name": "Swan Song",
+   "qty": 1,
+   "cmc": 1,
+   "type_line": "Instant",
+   "mana_cost": "{U}",
+   "edhrec_rank": 67,
+   "role": "protection",
+   "reason": "protection (role quota): Swan Song",
+   "strict": [
+    "protection"
+   ],
+   "lenient": [
+    "protection"
+   ],
+   "oracle": "Counter target enchantment, instant, or sorcery spell. Its controller creates a 2/2 blue Bird creature token with flying."
+  },
+  {
+   "name": "Goldspan Dragon",
+   "qty": 1,
+   "cmc": 5,
+   "type_line": "Creature — Dragon",
+   "mana_cost": "{3}{R}{R}",
+   "edhrec_rank": 369,
+   "role": "win_condition",
+   "reason": "win condition (role quota): Goldspan Dragon",
+   "strict": [
+    "ramp",
+    "win_condition"
+   ],
+   "lenient": [
+    "ramp",
+    "win_condition"
+   ],
+   "oracle": "Flying, haste / Whenever this creature attacks or becomes the target of a spell, create a Treasure token. / Treasures you control have \"{T}, Sacrifice this artifact: Add two mana of any one color.\""
+  },
+  {
+   "name": "Mirkwood Bats",
+   "qty": 1,
+   "cmc": 4,
+   "type_line": "Creature — Bat",
+   "mana_cost": "{3}{B}",
+   "edhrec_rank": 228,
+   "role": "win_condition",
+   "reason": "win condition (role quota): Mirkwood Bats",
+   "strict": [
+    "win_condition"
+   ],
+   "lenient": [
+    "win_condition"
+   ],
+   "oracle": "Flying / Whenever you create or sacrifice a token, each opponent loses 1 life."
+  },
+  {
+   "name": "Bastion of Remembrance",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Enchantment",
+   "mana_cost": "{2}{B}",
+   "edhrec_rank": 332,
+   "role": "win_condition",
+   "reason": "win condition (role quota): Bastion of Remembrance",
+   "strict": [
+    "win_condition"
+   ],
+   "lenient": [
+    "win_condition"
+   ],
+   "oracle": "When this enchantment enters, create a 1/1 white Human Soldier creature token. / Whenever a creature you control dies, each opponent loses 1 life and you gain 1 life."
+  },
+  {
+   "name": "Ral, Crackling Wit",
+   "qty": 1,
+   "cmc": 4,
+   "type_line": "Legendary Planeswalker — Ral",
+   "mana_cost": "{2}{U}{R}",
+   "edhrec_rank": 2224,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "draw"
+   ],
+   "lenient": [
+    "draw"
+   ],
+   "oracle": "Whenever you cast a noncreature spell, put a loyalty counter on Ral. / +1: Create a 1/1 blue and red Otter creature token with prowess. / −3: Draw three cards, then discard two cards. / −10: Draw three cards. You get an emblem with \"Instant and sorcery spells you cast have storm.\" (Whenever you cast an instant or sorcery spell, copy it for each spell cast before it this turn.)"
+  },
+  {
+   "name": "Ral, Monsoon Mage // Ral, Leyline Prodigy",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Legendary Creature — Human Wizard // Legendary Planeswalker — Ral",
+   "mana_cost": "{1}{R}",
+   "edhrec_rank": 3581,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "draw"
+   ],
+   "lenient": [
+    "draw"
+   ],
+   "oracle": "Instant and sorcery spells you cast cost {1} less to cast. / Whenever you cast an instant or sorcery spell during your turn, flip a coin. If you lose the flip, Ral deals 1 damage to you. If you win the flip, you may exile Ral. If you do, return him to the battlefield transformed under his owner's control. / // / Ral enters with an additional loyalty counter on him for each instant and sorcery spell you've cast this turn. / +1: Until your next turn, instant and sorcery spells you cast cost {1} less to cast. / −2: Ral deals 2 damage divided as you choose among one or two targets. Draw a card if you control a blue permanent other than Ral. / −8: Exile the top eight cards of your library. You may cast instant and sorcery spells from among them this turn without paying their mana costs."
+  },
+  {
+   "name": "Kaito, Cunning Infiltrator",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Legendary Planeswalker — Kaito",
+   "mana_cost": "{1}{U}{U}",
+   "edhrec_rank": 4176,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "draw"
+   ],
+   "lenient": [
+    "draw"
+   ],
+   "oracle": "Whenever a creature you control deals combat damage to a player, put a loyalty counter on Kaito. / +1: Up to one target creature you control can't be blocked this turn. Draw a card, then discard a card. / −2: Create a 2/1 blue Ninja creature token. / −9: You get an emblem with \"Whenever a player casts a spell, you create a 2/1 blue Ninja creature token.\""
+  },
+  {
+   "name": "Minsc & Boo, Timeless Heroes",
+   "qty": 1,
+   "cmc": 4,
+   "type_line": "Legendary Planeswalker — Minsc",
+   "mana_cost": "{2}{R}{G}",
+   "edhrec_rank": 3989,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "draw"
+   ],
+   "lenient": [
+    "draw",
+    "win_condition"
+   ],
+   "oracle": "When Minsc & Boo enters and at the beginning of your upkeep, you may create Boo, a legendary 1/1 red Hamster creature token with trample and haste. / +1: Put three +1/+1 counters on up to one target creature with trample or haste. / −2: Sacrifice a creature. When you do, Minsc & Boo deals X damage to any target, where X is that creature's power. If the sacrificed creature was a Hamster, draw X cards. / Minsc & Boo, Timeless Heroes can be your commander."
+  },
+  {
+   "name": "The Theorist, Jace Beleren",
+   "qty": 1,
+   "cmc": 4,
+   "type_line": "Legendary Planeswalker — Jace",
+   "mana_cost": "{2}{U}{U}",
+   "edhrec_rank": 10856,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "draw"
+   ],
+   "lenient": [
+    "draw"
+   ],
+   "oracle": "At the beginning of each opponent's draw step, you draw a card. / +1: Create a 1/1 blue Illusion creature token. / −2: For each opponent, return up to one target artifact or creature that player controls to its owner's hand. / −6: Draw three cards. Then put X +1/+1 counters on each creature you control, where X is the number of cards in your hand."
+  },
+  {
+   "name": "Chandra, Acolyte of Flame",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Legendary Planeswalker — Chandra",
+   "mana_cost": "{1}{R}{R}",
+   "edhrec_rank": 5936,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "utility"
+   ],
+   "lenient": [
+    "utility"
+   ],
+   "oracle": "0: Put a loyalty counter on each red planeswalker you control. / 0: Create two 1/1 red Elemental creature tokens. They gain haste. Sacrifice them at the beginning of the next end step. / −2: You may cast target instant or sorcery card with mana value 3 or less from your graveyard. If that spell would be put into your graveyard, exile it instead."
+  },
+  {
+   "name": "Saheeli, Sublime Artificer",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Legendary Planeswalker — Saheeli",
+   "mana_cost": "{1}{U/R}{U/R}",
+   "edhrec_rank": 2554,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "utility"
+   ],
+   "lenient": [
+    "utility"
+   ],
+   "oracle": "Whenever you cast a noncreature spell, create a 1/1 colorless Servo artifact creature token. / −2: Target artifact you control becomes a copy of another target artifact or creature you control until end of turn, except it's an artifact in addition to its other types."
+  },
+  {
+   "name": "Nissa, Who Shakes the World",
+   "qty": 1,
+   "cmc": 5,
+   "type_line": "Legendary Planeswalker — Nissa",
+   "mana_cost": "{3}{G}{G}",
+   "edhrec_rank": 1659,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "ramp"
+   ],
+   "lenient": [
+    "ramp"
+   ],
+   "oracle": "Whenever you tap a Forest for mana, add an additional {G}. / +1: Put three +1/+1 counters on up to one target noncreature land you control. Untap it. It becomes a 0/0 Elemental creature with vigilance and haste that's still a land. / −8: You get an emblem with \"Lands you control have indestructible.\" Search your library for any number of Forest cards, put them onto the battlefield tapped, then shuffle."
+  },
+  {
+   "name": "The Eternal Wanderer",
+   "qty": 1,
+   "cmc": 6,
+   "type_line": "Legendary Planeswalker",
+   "mana_cost": "{4}{W}{W}",
+   "edhrec_rank": 1828,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "utility"
+   ],
+   "lenient": [
+    "win_condition"
+   ],
+   "oracle": "No more than one creature can attack The Eternal Wanderer each combat. / +1: Exile up to one target artifact or creature. Return that card to the battlefield under its owner's control at the beginning of that player's next end step. / 0: Create a 2/2 white Samurai creature token with double strike. / −4: For each player, choose a creature that player controls. Each player sacrifices all creatures they control not chosen this way."
+  },
+  {
+   "name": "Quintorius, History Chaser",
+   "qty": 1,
+   "cmc": 4,
+   "type_line": "Legendary Planeswalker — Quintorius",
+   "mana_cost": "{2}{R}{W}",
+   "edhrec_rank": 9337,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "draw"
+   ],
+   "lenient": [
+    "draw",
+    "win_condition"
+   ],
+   "oracle": "Whenever one or more cards leave your graveyard, create a 3/2 red and white Spirit creature token. / +1: You may discard a card. If you do, draw two cards, then mill a card. / −4: Spirits you control gain double strike and vigilance until end of turn. / Quintorius, History Chaser can be your commander."
+  },
+  {
+   "name": "Kiora, Behemoth Beckoner",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Legendary Planeswalker — Kiora",
+   "mana_cost": "{2}{G/U}",
+   "edhrec_rank": 2350,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "draw"
+   ],
+   "lenient": [
+    "draw"
+   ],
+   "oracle": "Whenever a creature you control with power 4 or greater enters, draw a card. / −1: Untap target permanent."
+  },
+  {
+   "name": "Chandra, Torch of Defiance",
+   "qty": 1,
+   "cmc": 4,
+   "type_line": "Legendary Planeswalker — Chandra",
+   "mana_cost": "{2}{R}{R}",
+   "edhrec_rank": 1542,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "ramp",
+    "removal",
+    "win_condition"
+   ],
+   "lenient": [
+    "ramp",
+    "removal",
+    "win_condition"
+   ],
+   "oracle": "+1: Exile the top card of your library. You may cast that card. If you don't, Chandra deals 2 damage to each opponent. / +1: Add {R}{R}. / −3: Chandra deals 4 damage to target creature. / −7: You get an emblem with \"Whenever you cast a spell, this emblem deals 5 damage to any target.\""
+  },
+  {
+   "name": "Professor Dellian Fel",
+   "qty": 1,
+   "cmc": 4,
+   "type_line": "Legendary Planeswalker — Dellian",
+   "mana_cost": "{2}{B}{G}",
+   "edhrec_rank": 7093,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "draw",
+    "removal"
+   ],
+   "lenient": [
+    "draw",
+    "removal"
+   ],
+   "oracle": "+2: You gain 3 life. / 0: You draw a card and lose 1 life. / −3: Destroy target creature. / −6: You get an emblem with \"Whenever you gain life, target opponent loses that much life.\""
+  },
+  {
+   "name": "A-Minsc & Boo, Timeless Heroes",
+   "qty": 1,
+   "cmc": 5,
+   "type_line": "Legendary Planeswalker — Minsc",
+   "mana_cost": "{3}{R}{G}",
+   "edhrec_rank": null,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "draw"
+   ],
+   "lenient": [
+    "draw",
+    "win_condition"
+   ],
+   "oracle": "When Minsc & Boo, Timeless Heroes enters and at the beginning of your upkeep, if you don't control a creature named Boo, create Boo, a legendary 1/1 red Hamster creature token with trample and haste. / +1: Put three +1/+1 counters on up to one target creature with trample or haste. / −2: Sacrifice a creature. When you do, Minsc & Boo, Timeless Heroes deals X damage to any target, where X is that creature's power. If the sacrificed creature was a Hamster, draw X cards."
+  },
+  {
+   "name": "Narset, Parter of Veils",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Legendary Planeswalker — Narset",
+   "mana_cost": "{1}{U}{U}",
+   "edhrec_rank": 977,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "draw"
+   ],
+   "lenient": [
+    "draw"
+   ],
+   "oracle": "Each opponent can't draw more than one card each turn. / −2: Look at the top four cards of your library. You may reveal a noncreature, nonland card from among them and put it into your hand. Put the rest on the bottom of your library in a random order."
+  },
+  {
+   "name": "Angrath, Captain of Chaos",
+   "qty": 1,
+   "cmc": 4,
+   "type_line": "Legendary Planeswalker — Angrath",
+   "mana_cost": "{2}{B/R}{B/R}",
+   "edhrec_rank": 11502,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "utility"
+   ],
+   "lenient": [
+    "win_condition"
+   ],
+   "oracle": "Creatures you control have menace. / −2: Amass Zombies 2. (Put two +1/+1 counters on an Army you control. It's also a Zombie. If you don't control an Army, create a 0/0 black Zombie Army creature token first.)"
+  },
+  {
+   "name": "Mox Amber",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Legendary Artifact",
+   "mana_cost": "{0}",
+   "edhrec_rank": 203,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "ramp"
+   ],
+   "lenient": [
+    "ramp"
+   ],
+   "oracle": "{T}: Add one mana of any color among legendary creatures and planeswalkers you control."
+  },
+  {
+   "name": "Eriette of the Charmed Apple",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Legendary Creature — Human Warlock",
+   "mana_cost": "{1}{W}{B}",
+   "edhrec_rank": 3922,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "win_condition"
+   ],
+   "lenient": [
+    "win_condition"
+   ],
+   "oracle": "Each creature that's enchanted by an Aura you control can't attack you or planeswalkers you control. / At the beginning of your end step, each opponent loses X life and you gain X life, where X is the number of Auras you control."
+  },
+  {
+   "name": "Plan for All Outcomes",
+   "qty": 1,
+   "cmc": 4,
+   "type_line": "Enchantment",
+   "mana_cost": "{3}{U}",
+   "edhrec_rank": 21287,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "draw"
+   ],
+   "lenient": [
+    "draw"
+   ],
+   "oracle": "When this enchantment enters, the owner of up to one other target nonland permanent puts it on their choice of the top or bottom of their library. / Whenever you cast your first noncreature spell each turn, empower Jace 1. (Put a loyalty counter on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with \"[−1]: Surveil 1\" and \"[−3]: Draw a card.\")"
+  },
+  {
+   "name": "Way of the Necromancer",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Legendary Enchantment",
+   "mana_cost": "{1}{B}",
+   "edhrec_rank": 20505,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "draw"
+   ],
+   "lenient": [
+    "draw"
+   ],
+   "oracle": "When Way of the Necromancer enters, empower Jace 2. (Put two loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with \"[−1]: Surveil 1\" and \"[−3]: Draw a card.\") / Whenever a creature you control dies, put a loyalty counter on each planeswalker you control."
+  },
+  {
+   "name": "Way of the Mentor",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Legendary Enchantment",
+   "mana_cost": "{2}{W}",
+   "edhrec_rank": 22655,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "draw"
+   ],
+   "lenient": [
+    "draw"
+   ],
+   "oracle": "When Way of the Mentor enters, empower Jace 5. (Put five loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with \"[−1]: Surveil 1\" and \"[−3]: Draw a card.\") / Whenever you gain life, put a loyalty counter on each planeswalker you control."
+  },
+  {
+   "name": "Inspired Tethermage",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Creature — Elf Warrior",
+   "mana_cost": "{2}{G}",
+   "edhrec_rank": 29529,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "draw"
+   ],
+   "lenient": [
+    "draw"
+   ],
+   "oracle": "Whenever you put one or more loyalty counters on a planeswalker, put a +1/+1 counter on this creature. / {6}: Empower Jace 2. (Put two loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with \"[−1]: Surveil 1\" and \"[−3]: Draw a card.\")"
+  },
+  {
+   "name": "Tam's Resistance",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Sorcery",
+   "mana_cost": "{1}{G/U}",
+   "edhrec_rank": 29927,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "draw"
+   ],
+   "lenient": [
+    "draw"
+   ],
+   "oracle": "Put a +1/+1 counter on up to one target creature. It gains vigilance until end of turn. / Empower Jace 4. (Put four loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with \"[−1]: Surveil 1\" and \"[−3]: Draw a card.\")"
+  },
+  {
+   "name": "Countersculpt",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Instant",
+   "mana_cost": "{U}{U}",
+   "edhrec_rank": 21062,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "draw",
+    "protection"
+   ],
+   "lenient": [
+    "draw",
+    "protection"
+   ],
+   "oracle": "As an additional cost to cast this spell, behold a Jace or pay {1}. (To behold a Jace, choose a Jace you control or reveal a Jace card from your hand.) / Counter target spell. Empower Jace 1. (Put a loyalty counter on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with \"[−1]: Surveil 1\" and \"[−3]: Draw a card.\")"
+  },
+  {
+   "name": "Tomik, Orzhov Lawmage",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Legendary Creature — Human Advisor",
+   "mana_cost": "{1}{W}",
+   "edhrec_rank": 24029,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "utility"
+   ],
+   "lenient": [
+    "utility"
+   ],
+   "oracle": "Flying / Planeswalkers you control have \"No more than one creature can attack this planeswalker each combat.\" / {T}: Target creature with a +1/+1 counter on it gains flying until end of turn."
+  },
+  {
+   "name": "Way of the Pyromancer",
+   "qty": 1,
+   "cmc": 2,
+   "type_line": "Legendary Enchantment",
+   "mana_cost": "{1}{R}",
+   "edhrec_rank": 19395,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "draw"
+   ],
+   "lenient": [
+    "ramp",
+    "draw"
+   ],
+   "oracle": "When Way of the Pyromancer enters, empower Jace 2. (Put two loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with \"[−1]: Surveil 1\" and \"[−3]: Draw a card.\") / Planeswalkers you control have \"[+1]: Add {R}.\""
+  },
+  {
+   "name": "Flooded Strand",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land",
+   "mana_cost": null,
+   "edhrec_rank": 38,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "{T}, Pay 1 life, Sacrifice this land: Search your library for a Plains or Island card, put it onto the battlefield, then shuffle."
+  },
+  {
+   "name": "Misty Rainforest",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land",
+   "mana_cost": null,
+   "edhrec_rank": 42,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "{T}, Pay 1 life, Sacrifice this land: Search your library for a Forest or Island card, put it onto the battlefield, then shuffle."
+  },
+  {
+   "name": "Scalding Tarn",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land",
+   "mana_cost": null,
+   "edhrec_rank": 49,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "{T}, Pay 1 life, Sacrifice this land: Search your library for an Island or Mountain card, put it onto the battlefield, then shuffle."
+  },
+  {
+   "name": "Breeding Pool",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land — Forest Island",
+   "mana_cost": null,
+   "edhrec_rank": 59,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "({T}: Add {G} or {U}.) / As this land enters, you may pay 2 life. If you don't, it enters tapped."
+  },
+  {
+   "name": "Hallowed Fountain",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land — Plains Island",
+   "mana_cost": null,
+   "edhrec_rank": 61,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "({T}: Add {W} or {U}.) / As this land enters, you may pay 2 life. If you don't, it enters tapped."
+  },
+  {
+   "name": "Steam Vents",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land — Island Mountain",
+   "mana_cost": null,
+   "edhrec_rank": 64,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "({T}: Add {U} or {R}.) / As this land enters, you may pay 2 life. If you don't, it enters tapped."
+  },
+  {
+   "name": "Starting Town",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land — Town",
+   "mana_cost": null,
+   "edhrec_rank": 714,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "This land enters tapped unless it's your first, second, or third turn of the game. / {T}: Add {C}. / {T}, Pay 1 life: Add one mana of any color."
+  },
+  {
+   "name": "Godless Shrine",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land — Plains Swamp",
+   "mana_cost": null,
+   "edhrec_rank": 60,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "({T}: Add {W} or {B}.) / As this land enters, you may pay 2 life. If you don't, it enters tapped."
+  },
+  {
+   "name": "Blood Crypt",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land — Swamp Mountain",
+   "mana_cost": null,
+   "edhrec_rank": 69,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "({T}: Add {B} or {R}.) / As this land enters, you may pay 2 life. If you don't, it enters tapped."
+  },
+  {
+   "name": "Stomping Ground",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land — Mountain Forest",
+   "mana_cost": null,
+   "edhrec_rank": 70,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "({T}: Add {R} or {G}.) / As this land enters, you may pay 2 life. If you don't, it enters tapped."
+  },
+  {
+   "name": "Overgrown Tomb",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land — Swamp Forest",
+   "mana_cost": null,
+   "edhrec_rank": 71,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "({T}: Add {B} or {G}.) / As this land enters, you may pay 2 life. If you don't, it enters tapped."
+  },
+  {
+   "name": "Sacred Foundry",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land — Mountain Plains",
+   "mana_cost": null,
+   "edhrec_rank": 73,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "({T}: Add {R} or {W}.) / As this land enters, you may pay 2 life. If you don't, it enters tapped."
+  },
+  {
+   "name": "Temple Garden",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land — Forest Plains",
+   "mana_cost": null,
+   "edhrec_rank": 81,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "({T}: Add {G} or {W}.) / As this land enters, you may pay 2 life. If you don't, it enters tapped."
+  },
+  {
+   "name": "Brokers Hideout",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land",
+   "mana_cost": null,
+   "edhrec_rank": 1311,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "When this land enters, sacrifice it. When you do, search your library for a basic Forest, Plains, or Island card, put it onto the battlefield tapped, then shuffle and you gain 1 life."
+  },
+  {
+   "name": "Bountiful Landscape",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land",
+   "mana_cost": null,
+   "edhrec_rank": 1735,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "{T}: Add {C}. / {T}, Sacrifice this land: Search your library for a basic Forest, Island, or Mountain card, put it onto the battlefield tapped, then shuffle. / Cycling {G}{U}{R} ({G}{U}{R}, Discard this card: Draw a card.)"
+  },
+  {
+   "name": "Cabaretti Courtyard",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land",
+   "mana_cost": null,
+   "edhrec_rank": 969,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "When this land enters, sacrifice it. When you do, search your library for a basic Mountain, Forest, or Plains card, put it onto the battlefield tapped, then shuffle and you gain 1 life."
+  },
+  {
+   "name": "Twisted Landscape",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land",
+   "mana_cost": null,
+   "edhrec_rank": 1870,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "{T}: Add {C}. / {T}, Sacrifice this land: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle. / Cycling {B}{R}{G} ({B}{R}{G}, Discard this card: Draw a card.)"
+  },
+  {
+   "name": "Shattered Landscape",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land",
+   "mana_cost": null,
+   "edhrec_rank": 1947,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "{T}: Add {C}. / {T}, Sacrifice this land: Search your library for a basic Mountain, Plains, or Swamp card, put it onto the battlefield tapped, then shuffle. / Cycling {R}{W}{B} ({R}{W}{B}, Discard this card: Draw a card.)"
+  },
+  {
+   "name": "Sheltering Landscape",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land",
+   "mana_cost": null,
+   "edhrec_rank": 2310,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "{T}: Add {C}. / {T}, Sacrifice this land: Search your library for a basic Mountain, Forest, or Plains card, put it onto the battlefield tapped, then shuffle. / Cycling {R}{G}{W} ({R}{G}{W}, Discard this card: Draw a card.)"
+  },
+  {
+   "name": "Sink into Stupor // Soporific Springs",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Instant // Land",
+   "mana_cost": "{1}{U}{U}",
+   "edhrec_rank": 166,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "Return target spell or nonland permanent an opponent controls to its owner's hand. / // / As this land enters, you may pay 3 life. If you don't, it enters tapped. / {T}: Add {U}."
+  },
+  {
+   "name": "Hydroelectric Specimen // Hydroelectric Laboratory",
+   "qty": 1,
+   "cmc": 3,
+   "type_line": "Creature — Weird // Land",
+   "mana_cost": "{2}{U}",
+   "edhrec_rank": 609,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "Flash / When this creature enters, you may change the target of target instant or sorcery spell with a single target to this creature. / // / As this land enters, you may pay 3 life. If you don't, it enters tapped. / {T}: Add {U}."
+  },
+  {
+   "name": "Fell the Profane // Fell Mire",
+   "qty": 1,
+   "cmc": 4,
+   "type_line": "Instant // Land",
+   "mana_cost": "{2}{B}{B}",
+   "edhrec_rank": 200,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "Destroy target creature or planeswalker. / // / As this land enters, you may pay 3 life. If you don't, it enters tapped. / {T}: Add {B}."
+  },
+  {
+   "name": "Witch Enchanter // Witch-Blessed Meadow",
+   "qty": 1,
+   "cmc": 4,
+   "type_line": "Creature — Human Warlock // Land",
+   "mana_cost": "{3}{W}",
+   "edhrec_rank": 293,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "When this creature enters, destroy target artifact or enchantment an opponent controls. / // / As this land enters, you may pay 3 life. If you don't, it enters tapped. / {T}: Add {W}."
+  },
+  {
+   "name": "Hinterland Harbor",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land",
+   "mana_cost": null,
+   "edhrec_rank": 97,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "This land enters tapped unless you control a Forest or an Island. / {T}: Add {G} or {U}."
+  },
+  {
+   "name": "Yavimaya Coast",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land",
+   "mana_cost": null,
+   "edhrec_rank": 136,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "{T}: Add {C}. / {T}: Add {G} or {U}. This land deals 1 damage to you."
+  },
+  {
+   "name": "Dreamroot Cascade",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land",
+   "mana_cost": null,
+   "edhrec_rank": 173,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "This land enters tapped unless you control two or more other lands. / {T}: Add {G} or {U}."
+  },
+  {
+   "name": "Stormcarved Coast",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land",
+   "mana_cost": null,
+   "edhrec_rank": 184,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "This land enters tapped unless you control two or more other lands. / {T}: Add {U} or {R}."
+  },
+  {
+   "name": "Command Tower",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land",
+   "mana_cost": null,
+   "edhrec_rank": 2,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "{T}: Add one mana of any color in your commander's color identity."
+  },
+  {
+   "name": "Deserted Beach",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land",
+   "mana_cost": null,
+   "edhrec_rank": 270,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "This land enters tapped unless you control two or more other lands. / {T}: Add {W} or {U}."
+  },
+  {
+   "name": "Vineglimmer Snarl",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Land",
+   "mana_cost": null,
+   "edhrec_rank": 541,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "As this land enters, you may reveal a Forest or Island card from your hand. If you don't, this land enters tapped. / {T}: Add {G} or {U}."
+  },
+  {
+   "name": "Mountain",
+   "qty": 2,
+   "cmc": 0,
+   "type_line": "Basic Land — Mountain",
+   "mana_cost": null,
+   "edhrec_rank": null,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "({T}: Add {R}.)"
+  },
+  {
+   "name": "Island",
+   "qty": 2,
+   "cmc": 0,
+   "type_line": "Basic Land — Island",
+   "mana_cost": null,
+   "edhrec_rank": null,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "({T}: Add {U}.)"
+  },
+  {
+   "name": "Forest",
+   "qty": 2,
+   "cmc": 0,
+   "type_line": "Basic Land — Forest",
+   "mana_cost": null,
+   "edhrec_rank": null,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "({T}: Add {G}.)"
+  },
+  {
+   "name": "Plains",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Basic Land — Plains",
+   "mana_cost": null,
+   "edhrec_rank": null,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "({T}: Add {W}.)"
+  },
+  {
+   "name": "Swamp",
+   "qty": 1,
+   "cmc": 0,
+   "type_line": "Basic Land — Swamp",
+   "mana_cost": null,
+   "edhrec_rank": null,
+   "role": "",
+   "reason": "",
+   "strict": [
+    "land"
+   ],
+   "lenient": [
+    "land"
+   ],
+   "oracle": "({T}: Add {B}.)"
+  }
+ ]
+}
