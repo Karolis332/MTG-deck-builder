@@ -10,6 +10,7 @@
  * review 2026-09-07), and no real card name contains `%` or `_`.
  */
 import { getDb } from '../../src/lib/db';
+import { classifyCard, getPrimaryCategory } from '../../src/lib/card-classifier';
 import type { DbCard } from '../../src/lib/types';
 
 export const MAX_CARD_QUANTITY = 99;
@@ -61,6 +62,55 @@ export function makeCardResolver(): CardResolver {
     }
     memo.set(key, row);
     return row;
+  };
+}
+
+/** DB stores color_identity as a JSON-encoded array ('["R"]'); serve it compact ('R'). */
+export function parseColorIdentity(raw: string | null): string {
+  if (!raw) return '';
+  try {
+    return (JSON.parse(raw) as string[]).join('');
+  } catch {
+    return raw;
+  }
+}
+
+export interface BuildCardOut {
+  name: string;
+  quantity: number;
+  board: string;
+  type_line: string;
+  cmc: number;
+  mana_cost: string | null;
+  color_identity: string;
+  set_code: string;
+  collector_number: string;
+  image_uri_normal: string | null;
+  image_uri_small: string | null;
+  priceUsd: number | null;
+  owned?: boolean;
+  category: string;
+}
+
+/** Shared card-row -> response-card mapper for /build and the best-deck worker. */
+export function toBuildCard(card: DbCard, opts: { quantity: number; board: string; owned?: boolean }): BuildCardOut {
+  return {
+    name: card.name,
+    quantity: opts.quantity,
+    board: opts.board,
+    type_line: card.type_line,
+    cmc: card.cmc,
+    mana_cost: card.mana_cost,
+    color_identity: parseColorIdentity(card.color_identity),
+    set_code: card.set_code,
+    collector_number: card.collector_number,
+    image_uri_normal: card.image_uri_normal,
+    image_uri_small: card.image_uri_small,
+    priceUsd: card.price_usd != null ? parseFloat(card.price_usd) : null,
+    ...(opts.owned !== undefined ? { owned: opts.owned } : {}),
+    category: getPrimaryCategory(
+      classifyCard(card.name, card.oracle_text || '', card.type_line || '', card.cmc ?? 0)
+    ),
   };
 }
 

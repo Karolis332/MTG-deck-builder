@@ -9,14 +9,15 @@
  */
 import http from 'http';
 import { autoBuildDeck } from '../../src/lib/deck-builder-ai';
-import { classifyCard, getPrimaryCategory } from '../../src/lib/card-classifier';
 import { getDb } from '../../src/lib/db';
 import type { DbCard } from '../../src/lib/types';
 import { analyzeResolved } from './analysis-core';
 import { handleOptimize } from './optimize';
 import { handleMetaRoute } from './meta-routes';
 import { handleIngestRoute, startIngestSchedule } from './ingest-routes';
-import { makeCardResolver, resolveDeckLines } from './resolve';
+import { makeCardResolver, resolveDeckLines, toBuildCard, parseColorIdentity } from './resolve';
+import { handleBestDeckRoute } from './best-deck-routes';
+import { createBestDeckQueue } from './best-deck-jobs';
 import { deckText, gateDeck, readLocks, readOwnedCardNames } from './gate-wiring';
 import { scoreDeckSafely } from '../../src/lib/deck-score-input';
 import { findAlternatives } from '../../src/lib/card-alternatives';
@@ -33,6 +34,8 @@ const MAX_CONCURRENT = 2;
 // /optimize is synchronous (~0.1–1.5 s); a few in flight is plenty (review 2026-09-07).
 let activeOptimizes = 0;
 const MAX_CONCURRENT_OPTIMIZE = 4;
+
+const bestDeckQueue = createBestDeckQueue();
 
 // ponytail: the engine reads the collection table UNSCOPED (single-user design),
 // so collection builds are serialized and the table holds exactly one request's
@@ -80,16 +83,6 @@ function clearTempCollection(): void {
   try {
     getDb().prepare('DELETE FROM collection WHERE user_id = ?').run(TEMP_USER_ID);
   } catch { /* next seed also deletes */ }
-}
-
-/** DB stores color_identity as a JSON-encoded array ('["R"]'); serve it compact ('R'). */
-function parseColorIdentity(raw: string | null): string {
-  if (!raw) return '';
-  try {
-    return (JSON.parse(raw) as string[]).join('');
-  } catch {
-    return raw;
-  }
 }
 
 function json(res: http.ServerResponse, code: number, obj: unknown): void {
@@ -260,24 +253,11 @@ export async function handleBuild(body: string, res: http.ServerResponse): Promi
       elapsedMs: Date.now() - started,
       cards: result.cards.map((entry) => {
         const card = entry.card as DbCard;
-        return {
-          name: card.name,
+        return toBuildCard(card, {
           quantity: entry.quantity,
           board: entry.board,
-          type_line: card.type_line,
-          cmc: card.cmc,
-          mana_cost: card.mana_cost,
-          color_identity: parseColorIdentity(card.color_identity),
-          set_code: card.set_code,
-          collector_number: card.collector_number,
-          image_uri_normal: card.image_uri_normal,
-          image_uri_small: card.image_uri_small,
-          priceUsd: card.price_usd != null ? parseFloat(card.price_usd) : null,
-          ...(ownedNamesSet ? { owned: ownedNamesSet.has(card.name) } : {}),
-          category: getPrimaryCategory(
-            classifyCard(card.name, card.oracle_text || '', card.type_line || '', card.cmc ?? 0)
-          ),
-        };
+          owned: ownedNamesSet ? ownedNamesSet.has(card.name) : undefined,
+        });
       }),
     });
   } catch (error) {
@@ -510,7 +490,35 @@ const server = http.createServer((req, res) => {
   const [url, search = ''] = (req.url || '').split('?');
 
   if (req.method === 'GET' && url === '/health') {
-    return json(res, 200, { status: 'ok', service: 'build-api', activeBuilds });
+    return json(res, 200, { status: 'ok', service: 'build-api', activeBuilds, bestDeck: bestDeckQueue.stats() });
+  }
+
+  // Best-deck jobs run off the request path (forked worker, queued) — always key-gated,
+  // unlike /build which runs open when BUILD_API_KEY is unset.
+  if (url.startsWith('/best-deck')) {
+    if (!API_KEY || req.headers['x-api-key'] !== API_KEY) {
+      return json(res, 401, { error: 'unauthorized' });
+    }
+    if (req.method === 'GET' || req.method === 'DELETE') {
+      if (handleBestDeckRoute(req.method, url, search, '', res, bestDeckQueue)) return;
+    } else if (req.method === 'POST') {
+      let body = '';
+      let tooLarge = false;
+      req.on('data', (chunk) => {
+        if (tooLarge) return;
+        body += chunk;
+        if (body.length > 1_500_000) { // room for a ~10K-card ownedCards list
+          tooLarge = true;
+          json(res, 413, { error: 'request body too large' });
+          req.destroy();
+        }
+      });
+      req.on('end', () => {
+        if (tooLarge) return; // already responded
+        handleBestDeckRoute('POST', url, search, body, res, bestDeckQueue);
+      });
+      return;
+    }
   }
 
   // Read-only meta corpus. Key-gated like the rest of the service; the handler

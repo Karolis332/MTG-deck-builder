@@ -1,0 +1,14 @@
+{
+  "ms": 163274,
+  "stopReason": "converged",
+  "passes": 3,
+  "evaluations": 1535,
+  "screenedCount": 60,
+  "top5": [
+    "Dina, Essence Brewer (70.8)",
+    "Nalia de'Arnise (67.1)",
+    "Gyome, Master Chef (65.7)",
+    "The Destined Warrior (65.0)",
+    "Gorma, the Gullet (62.7)"
+  ]
+}
