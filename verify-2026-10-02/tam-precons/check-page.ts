@@ -21,6 +21,11 @@ const OUT = [
 type DeckSpec = { slug: string; base?: () => string; now?: string; guide?: string; arena?: string; meta?: string; extra?: { label: string; names: string[] } }; // arena = Arena deck name -> copy block emits the About/Name/Commander/Deck import format
 const read = (rel: string) => () => fs.readFileSync(path.join(ROOT, rel), 'utf8');
 const SPECS: DeckSpec[] = [
+  // Arena Competitive Brawl Anti-Venom: baseline = the operator's 141-card list, so OUT = the 41+ cuts
+  {
+    slug: 'anti-venom-horrifying-healer-arena', arena: 'Anti-Venom Airbend v2', base: read('verify-2026-10-12/anti-venom/original.txt'), now: 'verify-2026-10-12/anti-venom/final-v2.txt',
+    guide: '.claude/skills/deck-building/reference/decks/anti-venom-horrifying-healer-arena.md',
+  },
   // Arena Historic Brawl Jet (model's #1): baseline = the model's own list, so OUT = its filler swaps and the colourless/fetch lands
   {
     slug: 'jet-freedom-fighter-arena', arena: 'Jet Boros v1', base: read('verify-2026-10-08/best-deck/arena-3/top-1-jet-freedom-fighter.txt'), now: 'verify-2026-10-08/best-deck/jet/jet-arena.txt',

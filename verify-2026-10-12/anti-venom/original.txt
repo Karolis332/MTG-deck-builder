@@ -1,0 +1,106 @@
+Commander
+1 Anti-Venom, Horrifying Healer (SPM) 1
+
+Deck
+39 Plains (FRA) 382
+1 Authority of the Consuls (FDN) 137
+1 Angel's Grace (SOA) 2
+1 Cloudshift (TLE) 152
+1 Daydream (SOS) 9
+1 Enlightened Tutor (TLE) 305
+1 Ephemerate (MAR) 44
+1 Erode (SOS) 15
+1 Ethereal Armor (RTR) 9
+1 Gideon's Sacrifice (WAR) 14
+1 Helping Hand (SOA) 5
+1 Liliana the Faultless (FRA) 200
+1 Loyal Tutor (FRA) 14
+1 Path to Exile (PZA) 0
+1 Requisition Raid (SOA) 10
+1 Restoration Magic (FIN) 30
+1 Shardmage's Rescue (DSK) 29
+1 Ajani Resolute (FRA) 195
+1 All That Glitters (ELD) 2
+1 Ajani's Pridemate (FDN) 135
+1 Airbender Ascension (TLA) 6
+1 Belladonna Took (HOB) 4
+1 Bilbo's Gambit (HOB) 5
+1 Call a Surprise Witness (MKM) 6
+1 Cloud, Midgar Mercenary (FIN) 10
+1 Dawn's Truce (BLB) 9
+1 Ennis, Debate Moderator (SOS) 14
+1 Gideon's Memorial (FRA) 198
+1 Gleaming Splendor (HOB) 15
+1 Intangible Virtue (WOT) 6
+1 Personify (ECL) 28
+1 Razorgrass Ambush (MH3) 238
+1 Reprieve (HOC) 17
+1 Repurposed Enforcer (FRA) 19
+1 Rhys, the Evermore (ECL) 32
+1 Spectacular Spider-Man (SPM) 14
+1 Sheltered by Ghosts (DSK) 30
+1 Teyo, Lightshield Expert (FRA) 204
+1 The Queen of Dale (HOB) 24
+1 Voice of Victory (TDM) 33
+1 Aang's Iceberg (TLA) 5
+1 Ajani, Outland Chaperone (ECL) 4
+1 Caretaker's Talent (BLB) 6
+1 Cosmogrand Zenith (EOE) 9
+1 Flawless Maneuver (TLE) 306
+1 Koth of the Homestead (FRA) 199
+1 Monastery Mentor (MOM) 28
+1 Nadaar, Selfless Paladin (AFR) 27
+1 Oltec Matterweaver (BIG) 3
+1 Stirring Hopesinger (SOS) 35
+1 Teferi's Protection (TLE) 7
+1 Team Avatar (TLA) 38
+1 The Restoration of Eiganjo (NEO) 34
+1 The Seriema (EOE) 35
+1 The Mountain-king's Return (HOB) 22
+1 Way of the Mentor (FRA) 208
+1 Yoshimaru, Beloved Companion (FRA) 209
+1 Armageddon (SOA) 3
+1 Avatar's Wrath (TLA) 12
+1 Day of Judgment (FDN) 140
+1 Divine Reckoning (SIS) 4
+1 Flare of Fortitude (MH3) 26
+1 Flickering Hound (FRA) 7
+1 Monk Gyatso (TLE) 81
+1 Teleportation Circle (PZA) 0
+1 The Wind Crystal (FIN) 43
+1 Aang, Airbending Master (TLE) 74
+1 Elspeth, Storm Slayer (TDM) 11
+1 Exalted Sunborn (EOE) 15
+1 Gandalf the White (LTR) 19
+1 Lyra Dawnbringer (FDN) 707
+1 Sally Pride, Lioness Leader (TMT) 24
+1 Saheeli, Consul of Oversight (FRA) 203
+1 Starfield Shepherd (EOE) 37
+1 The Wandering Rescuer (DSK) 41
+1 Urza's Ruinous Blast (DAR) 39
+1 The Eternal Wanderer (ONE) 11
+1 Elesh Norn, Grand Cenobite (MUL) 68
+1 Kindred Judgment (FRA) 13
+1 Restoration Seminar (SOS) 30
+1 Moonshaker Cavalry (WOE) 21
+1 Abandoned Air Temple (TLA) 263
+1 Return to the Light Realms (FRA) 20
+1 Zetalpa, Primal Dawn (FDN) 584
+1 Guiding Hydra (FRA) 11
+1 Adagia, Windswept Bastion (EOE) 250
+1 Eiganjo, Seat of the Empire (NEO) 268
+1 Chrome Mox (SPG) 0
+1 Mox Amber (DAR) 224
+1 Mox Opal (SOM) 179
+1 Ornithopter (BRR) 37
+1 Lavaspur Boots (OTJ) 243
+1 Skateboard (TMT) 178
+1 Arcane Signet (TLE) 315
+1 Blackblade Reforged (BRR) 6
+1 Conqueror's Flail (PZA) 0
+1 Lightning Greaves (MRD) 199
+1 Ornithopter of Paradise (MH2) 232
+1 Swiftfoot Boots (TLE) 317
+1 The Echoverse Fulcrum (FRA) 169
+1 Bender's Waterskin (TLA) 255
+1 Navigation Orb (HBG) 262
