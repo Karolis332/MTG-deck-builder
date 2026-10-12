@@ -29,3 +29,4 @@
 - [Model score decides the final list](feedback_model_score_decides_final_list.md) — proposals go through the lab (0.25 bar, maybeboard otherwise); "X replaced with Y" is a decision: apply everywhere, record the delta; batch swaps, score a card in 2–3 slots (win-step bimodality) (2026-10-08)
 - [CPU cap 50%](feedback_cpu_cap_50.md) — re-apply cpu-cap.ps1 -Percent 50 at session start and before any batch; ≤2 climb shards + ≤3 heavy agents (2026-10-09)
 - [Paid tier + Stripe (test keys)](project_paid_tier_stripe.md) — Claude Opus 5 quotas 5/50/150 live 2026-10-12 on Stripe sandbox keys; live switch pending operator; prod E2E via Clerk sign-in token
+- [build-api overlay deploy](project_build_api_overlay_deploy.md) — VPS build-api = Deck Score 1.2.0 + 9-file best-deck overlay (2026-10-12); never git-archive HEAD until 1.4 is refuted
