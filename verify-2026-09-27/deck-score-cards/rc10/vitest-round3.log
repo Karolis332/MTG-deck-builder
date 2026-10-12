@@ -1,0 +1,26 @@
+
+ RUN  v4.0.18 C:/Users/QuLeR/MTG-deck-builder
+
+ ✓ src/lib/__tests__/deck-score-v14-stage2.test.ts (28 tests) 11211ms
+     ✓ never raises S when unreadable slots are added  418ms
+     ✓ pins the Commander prefix: no S zeros, S p50 83.7, total p50 28  6386ms
+     ✓ pins the Brawl prefix: no S zeros, S p50 87.1, total p50 67  3881ms
+ ✓ src/lib/__tests__/deck-score-v13-stage4c.test.ts (12 tests) 8474ms
+     ✓ measures a prefix p80 ABOVE the v1.4 norm, because this prefix lifts the coverage gate  5892ms
+     ✓ replaces the bimodal v1.3 population with a top-compressed one  1129ms
+     ✓ is strictly harsher than the shared .70 it replaces  1151ms
+ ✓ src/lib/__tests__/deck-score-coverage-round1.test.ts (15 tests) 22483ms
+     ✓ pins the Commander corpus measurement and reproduces it on a prefix  8036ms
+     ✓ pins the Brawl corpus measurement and reproduces it on a prefix  4332ms
+     ✓ closes the round-1 S = 0 MISS: the floor that caused it is retired  9484ms
+     ✓ keeps every round-1 atom above the three-corpus-card floor  416ms
+ ✓ src/lib/__tests__/deck-score-v13-stage3.test.ts (24 tests) 4364ms
+     ✓ does NOT fire on a matched negative control  2866ms
+     ✓ keeps the 101-card Brawl Cabbage list on its legality cap  678ms
+     ✓ pins ten fresh matched controls — stage 3 leaked four of them, stage 4a none  327ms
+
+ Test Files  4 passed (4)
+      Tests  79 passed (79)
+   Start at  15:21:22
+   Duration  28.85s (transform 1.65s, setup 0ms, import 5.02s, tests 46.53s, environment 1ms)
+

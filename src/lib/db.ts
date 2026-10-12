@@ -3,6 +3,9 @@ import path from 'path';
 import fs from 'fs';
 import { MIGRATIONS } from '@/db/schema';
 import { getLegalityKey } from '@/lib/constants';
+import {
+  arenaQueueToDeckFormat, bestDeckMatch, isArenaBrawlQueue, normCardName, type CandidateDeck,
+} from '@/lib/arena-deck-attribution';
 
 function resolveDbDir(): string {
   // Explicit env var takes priority
@@ -943,72 +946,133 @@ export function getArenaParsedMatches(limit = 100) {
 
 /**
  * Match an Arena match's deck cards to a saved deck.
- * Compares Arena card IDs from the match against deck_cards entries via cards.arena_id.
+ * Arena grpIds resolve via grp_id_cache + cards.arena_id. `format` is the raw Arena queue id
+ * (e.g. "Play_Brawl_Historic") or an app format; it is mapped to the app deck format before
+ * filtering — comparing the raw queue id to decks.format matched nothing.
  * Returns { deckId, confidence } or null if no match above threshold.
  */
 export function matchArenaDeckToSavedDeck(
   arenaDeckCards: Array<{ id: string; qty: number }>,
-  format?: string | null
+  format?: string | null,
+  userId?: number | null
 ): { deckId: number; deckName: string; confidence: number } | null {
   const db = getDb();
+  const deckFormat = format ? arenaQueueToDeckFormat(format) : null;
+  if (format && !deckFormat) return null; // limited / unknown queue: no saved deck to match
 
-  // Get all decks, optionally filtered by format
-  const decks = format
-    ? db.prepare('SELECT id, name, format FROM decks WHERE format = ?').all(format) as Array<{ id: number; name: string; format: string }>
-    : db.prepare('SELECT id, name, format FROM decks').all() as Array<{ id: number; name: string; format: string }>;
-
+  const where: string[] = [];
+  const params: unknown[] = [];
+  if (deckFormat) { where.push('format = ?'); params.push(deckFormat); }
+  if (userId != null) { where.push('user_id = ?'); params.push(userId); }
+  const decks = db
+    .prepare(`SELECT id, name FROM decks ${where.length ? 'WHERE ' + where.join(' AND ') : ''}`)
+    .all(...params) as Array<{ id: number; name: string }>;
   if (decks.length === 0) return null;
 
-  // Resolve Arena IDs to card names for the match deck
-  const arenaCardNames = new Map<string, number>();
-  const stmtArena = db.prepare('SELECT name FROM cards WHERE arena_id = ?');
+  const names = resolveGrpIdNames(arenaDeckCards.map((c) => c.id));
+  const played = new Map<string, number>();
   for (const ac of arenaDeckCards) {
-    const num = parseInt(ac.id, 10);
-    if (isNaN(num)) continue;
-    const card = stmtArena.get(num) as { name: string } | undefined;
-    if (card) {
-      arenaCardNames.set(card.name, (arenaCardNames.get(card.name) || 0) + ac.qty);
-    }
+    const name = names[ac.id] && normCardName(names[ac.id]);
+    if (name) played.set(name, (played.get(name) || 0) + ac.qty);
   }
+  if (played.size === 0) return null;
+  const last = arenaDeckCards[arenaDeckCards.length - 1];
+  const playedCommander = isArenaBrawlQueue(format) && last ? names[last.id] ?? null : null;
 
-  if (arenaCardNames.size === 0) return null;
-
-  // Compare against each saved deck
   const stmtDeckCards = db.prepare(`
-    SELECT c.name, dc.quantity
+    SELECT c.name, dc.quantity, dc.board
     FROM deck_cards dc
     JOIN cards c ON dc.card_id = c.id
     WHERE dc.deck_id = ? AND dc.board IN ('main', 'sideboard', 'commander', 'companion')
   `);
-
-  let bestMatch: { deckId: number; deckName: string; confidence: number } | null = null;
-
+  const candidates: CandidateDeck[] = [];
   for (const deck of decks) {
-    const savedCards = stmtDeckCards.all(deck.id) as Array<{ name: string; quantity: number }>;
-    if (savedCards.length === 0) continue;
-
-    const savedCardMap = new Map<string, number>();
-    for (const sc of savedCards) {
-      savedCardMap.set(sc.name, sc.quantity);
-    }
-
-    // Calculate overlap
-    let matchingCards = 0;
-    let totalArenaCards = 0;
-    for (const [name, qty] of Array.from(arenaCardNames.entries())) {
-      totalArenaCards += qty;
-      const savedQty = savedCardMap.get(name) || 0;
-      matchingCards += Math.min(qty, savedQty);
-    }
-
-    const confidence = totalArenaCards > 0 ? matchingCards / totalArenaCards : 0;
-
-    if (confidence >= 0.7 && (!bestMatch || confidence > bestMatch.confidence)) {
-      bestMatch = { deckId: deck.id, deckName: deck.name, confidence };
-    }
+    const rows = stmtDeckCards.all(deck.id) as Array<{ name: string; quantity: number; board: string }>;
+    if (rows.length === 0) continue;
+    const cards = new Map<string, number>();
+    for (const r of rows) cards.set(normCardName(r.name), (cards.get(normCardName(r.name)) || 0) + r.quantity);
+    const commander = rows.find((r) => r.board === 'commander')?.name ?? null;
+    candidates.push({ id: deck.id, name: deck.name, cards, commander });
   }
+  return bestDeckMatch(played, playedCommander, candidates);
+}
 
-  return bestMatch;
+/**
+ * Save an Arena-submitted decklist as a deck (built_by 'arena'). For Brawl the commander is the
+ * last entry (the GRE connectResp and EventSetDeck paths both append the command zone last).
+ * grpIds with no local card row are skipped. Null for limited queues or nothing resolvable.
+ */
+export function createDeckFromArena(
+  arenaDeckCards: Array<{ id: string; qty: number }>,
+  format: string | null,
+  userId: number | null,
+  playedAt?: string | null
+): { deckId: number; deckName: string } | null {
+  const db = getDb();
+  const deckFormat = arenaQueueToDeckFormat(format);
+  if (!deckFormat) return null;
+
+  const byArena = db.prepare("SELECT id, name FROM cards WHERE arena_id = ? ORDER BY (name LIKE 'A-%') LIMIT 1");
+  const byCache = db.prepare('SELECT c.id, c.name FROM grp_id_cache g JOIN cards c ON c.name = g.card_name WHERE g.grp_id = ? LIMIT 1');
+  const resolve = (grpId: string) => {
+    const n = Number(grpId);
+    if (!Number.isInteger(n) || n <= 0) return undefined;
+    return (byArena.get(n) ?? byCache.get(n)) as { id: string; name: string } | undefined;
+  };
+
+  const brawl = isArenaBrawlQueue(format);
+  const lastIdx = arenaDeckCards.length - 1;
+  const entries = arenaDeckCards
+    .map((c, i) => ({ card: resolve(c.id), qty: c.qty, board: brawl && i === lastIdx ? 'commander' : 'main' }))
+    .filter((e): e is { card: { id: string; name: string }; qty: number; board: string } => e.card != null);
+  if (entries.length === 0) return null;
+
+  const commander = entries.find((e) => e.board === 'commander')?.card.name;
+  const date = (playedAt ?? new Date().toISOString()).slice(0, 10);
+  const label = deckFormat[0].toUpperCase() + deckFormat.slice(1);
+  const name = commander ? `${normCardName(commander)} Deck` : `Arena ${label} Deck ${date}`;
+  const insertCard = db.prepare(
+    `INSERT INTO deck_cards (deck_id, card_id, quantity, board) VALUES (?, ?, ?, ?)
+     ON CONFLICT(deck_id, card_id, board) DO UPDATE SET quantity = quantity + excluded.quantity`
+  );
+  const deckId = db.transaction(() => {
+    const id = Number(db
+      .prepare("INSERT INTO decks (name, format, description, user_id, built_by) VALUES (?, ?, ?, ?, 'arena')")
+      .run(name, deckFormat, `Auto-imported from an Arena match (${format ?? 'unknown queue'}, ${date})`, userId)
+      .lastInsertRowid);
+    for (const e of entries) insertCard.run(id, e.card.id, e.qty, e.board);
+    return id;
+  })();
+  return { deckId, deckName: name };
+}
+
+/**
+ * Attribute one stored Arena match: link the best saved deck, else save the submitted decklist
+ * as a new deck and link that. Null for limited queues or an empty decklist.
+ */
+export function attributeArenaMatch(
+  matchId: string,
+  arenaDeckCards: Array<{ id: string; qty: number }> | null,
+  format: string | null,
+  userId: number | null,
+  playedAt?: string | null
+): { deckId: number; deckName: string; confidence: number; created: boolean } | null {
+  if (!arenaDeckCards?.length) return null;
+  const hit = matchArenaDeckToSavedDeck(arenaDeckCards, format, userId);
+  if (hit) {
+    linkArenaMatchToDeck(matchId, hit.deckId, hit.confidence);
+    return { ...hit, created: false };
+  }
+  const made = createDeckFromArena(arenaDeckCards, format, userId, playedAt);
+  if (!made) return null;
+  linkArenaMatchToDeck(matchId, made.deckId, 1);
+  return { ...made, confidence: 1, created: true };
+}
+
+/** Owner for Arena data posted without a session (Electron main process): the first account. */
+export function defaultArenaUserId(): number | null {
+  const row = getDb().prepare('SELECT id FROM users ORDER BY id LIMIT 1').get() as { id: number } | undefined;
+  return row?.id ?? null;
 }
 
 /**
@@ -1101,31 +1165,37 @@ export function getUnlinkedArenaMatches(limit = 50) {
 }
 
 /**
- * Try to auto-link all unlinked arena matches to saved decks.
+ * Attribute every unlinked arena match that carries a decklist (link or auto-create), oldest
+ * first, so later edits of an auto-created deck link to it instead of spawning a copy.
  */
-export function autoLinkArenaMatches(): { linked: number; total: number } {
+export function autoLinkArenaMatches(
+  userId: number | null = defaultArenaUserId()
+): { linked: number; created: number; total: number } {
   const db = getDb();
   const unlinked = db.prepare(
-    "SELECT id, match_id, deck_cards, format FROM arena_parsed_matches WHERE deck_id IS NULL AND deck_cards IS NOT NULL AND deck_cards != '[]' AND deck_cards != ''"
-  ).all() as Array<{ id: number; match_id: string; deck_cards: string; format: string | null }>;
+    `SELECT match_id, deck_cards, format, COALESCE(match_start_time, parsed_at) AS played_at
+     FROM arena_parsed_matches
+     WHERE deck_id IS NULL AND deck_cards IS NOT NULL AND deck_cards != '[]' AND deck_cards != ''
+     ORDER BY played_at, id`
+  ).all() as Array<{ match_id: string; deck_cards: string; format: string | null; played_at: string | null }>;
 
   let linked = 0;
+  let created = 0;
   for (const match of unlinked) {
+    let deckCards: Array<{ id: string; qty: number }>;
     try {
-      const deckCards = JSON.parse(match.deck_cards) as Array<{ id: string; qty: number }>;
-      if (deckCards.length === 0) continue;
-
-      const result = matchArenaDeckToSavedDeck(deckCards, match.format);
-      if (result) {
-        linkArenaMatchToDeck(match.match_id, result.deckId, result.confidence);
-        linked++;
-      }
+      deckCards = JSON.parse(match.deck_cards);
     } catch {
-      // skip invalid JSON
+      continue; // skip invalid JSON
+    }
+    const r = attributeArenaMatch(match.match_id, deckCards, match.format, userId, match.played_at);
+    if (r) {
+      linked++;
+      if (r.created) created++;
     }
   }
 
-  return { linked, total: unlinked.length };
+  return { linked, created, total: unlinked.length };
 }
 
 // ── Telemetry operations ──────────────────────────────────────────────────
@@ -1799,7 +1869,7 @@ export function autoLinkByCardsPlayed(): { linked: number; total: number } {
 
       deckCardSets.forEach((deckInfo, dId) => {
         // Optional format filter
-        if (match.format && deckInfo.format && match.format !== deckInfo.format) return;
+        if (match.format && deckInfo.format && arenaQueueToDeckFormat(match.format) !== deckInfo.format) return;
 
         let matching = 0;
         uniquePlayed.forEach(cardName => {

@@ -1,0 +1,33 @@
+{
+  "version": "1.7.0",
+  "name": "The Black Grimoire",
+  "url": "https://theblackgrimoire.com",
+  "description": "Free Magic: The Gathering deck builder for Commander and Brawl, ranked by patterns from nearly 4 million public decklists.",
+  "policy": "https://theblackgrimoire.com/ai.txt",
+  "permissions": {
+    "training": "allowed",
+    "inference": "allowed",
+    "search": "allowed",
+    "summarization": "allowed",
+    "citation": "allowed",
+    "embedding": "allowed"
+  },
+  "restrictions": [
+    "Do not present The Black Grimoire as an official Wizards of the Coast product; it is unofficial Fan Content.",
+    "Do not attribute win-rate claims to this site: its corpus contains popularity signals (likes/views), not match results.",
+    "Numbers are dated; cite the 'as of' date shown on https://theblackgrimoire.com/methodology."
+  ],
+  "attribution": {
+    "required": true,
+    "organization": "The Black Grimoire",
+    "url": "https://theblackgrimoire.com",
+    "contact": "https://theblackgrimoire.com/contact"
+  },
+  "resources": [
+    { "name": "Methodology", "url": "https://theblackgrimoire.com/methodology" },
+    { "name": "FAQ", "url": "https://theblackgrimoire.com/faq" },
+    { "name": "llms.txt", "url": "https://theblackgrimoire.com/llms.txt" },
+    { "name": "llms-full.txt", "url": "https://theblackgrimoire.com/llms-full.txt" }
+  ],
+  "updated": "2026-09-06"
+}

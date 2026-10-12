@@ -1,7 +1,7 @@
 file      : C:/Users/QuLeR/AppData/Local/Temp/g.txt
 format    : commander   commander: Tam, the Possibility
-totals    : 100 cards | 34 lands (34 eff.) | 65 nonland | avg MV 3.23
-curve     : 1:7 2:16 3:15 4:13 5:10 6:4
+totals    : 100 cards | 34 lands (34 eff.) | 65 nonland | avg MV 3.29
+curve     : 1:7 2:15 3:15 4:13 5:10 6:5
 VERDICT   : FAIL
 
   PASS  size        100 cards (commander wants 100)
@@ -9,7 +9,7 @@ VERDICT   : FAIL
   PASS  legality    every card legal in commander
   PASS  rules       no other format rule broken
   PASS  identity    all cards inside BGRUW
-  FAIL  ownership   1 card(s) not in the paper collection; paper collection imported 0 days ago
+  FAIL  ownership   1 card(s) not in the paper collection; paper collection imported 1 days ago
         - Noble Hierarch
   WARN  arenaNames  1 card(s) must be exported front-face only:
         - 1 Esika, God of the Tree
@@ -30,7 +30,6 @@ VERDICT   : FAIL
         - Dovin's Veto (MV 2)
         - Expansion Algorithm (MV 2)
         - Fatehold Charm (MV 2)
-        - Ripples of Potential (MV 2)
         - Sylvan Library (MV 2)
         - Talisman of Dominance (MV 2)
         - Tomik, Orzhov Lawmage (MV 2)
@@ -76,6 +75,7 @@ VERDICT   : FAIL
         - Ajani Unrelenting (MV 6)
         - Chimil, the Inner Sun (MV 6)
         - Elspeth, Sun's Champion (MV 6)
-  PASS  curve       avg MV 3.23; commander sets no cost threshold
-  PASS  wincons     8 win condition(s)/closer(s)
+        - Final Act (MV 6)
+  PASS  curve       avg MV 3.29; commander sets no cost threshold
+  PASS  wincons     9 win condition(s)/closer(s)
   PASS  locks       1 locked card(s) present and intact

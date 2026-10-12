@@ -1,0 +1,235 @@
+1	1	Sol Ring [RAID:beledros-witherbloom,bumi-unleashed,gilanra-alena-partners,imotekh-the-stormlord,inspirit-flagship-vessel,tam-the-possibility,tazri-beacon-of-unity] | Art | {T}: Add {C}{C}.
+2	0	Command Tower [RAID:beledros-witherbloom,bumi-unleashed,gilanra-alena-partners,inspirit-flagship-vessel,tam-the-possibility,tazri-beacon-of-unity] | Land | {T}: Add one mana of any color in your commander's color identity.
+13	2	Lightning Greaves [RAID:beledros-witherbloom] | Art — Equipment | Equipped creature has haste and shroud. (It can't be the target of spells or abilities.) Equip {0}
+17	2	Fellwar Stone [RAID:inspirit-flagship-vessel,tazri-beacon-of-unity] | Art | {T}: Add one mana of any color that a land an opponent controls could produce.
+19	0	Evolving Wilds [RAID:beledros-witherbloom] | Land | {T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then 
+20	3	Cultivate [RAID:beledros-witherbloom,the-cabbage-merchant] | Sorc | Search your library for up to two basic land cards, reveal those cards, put one onto the battlefield tapped an
+31	0	Myriad Landscape [RAID:beledros-witherbloom,imotekh-the-stormlord] | Land | This land enters tapped. {T}: Add {C}. {2}, {T}, Sacrifice this land: Search your library for up to two basic 
+37	3	Kodama's Reach [RAID:beledros-witherbloom,tazri-beacon-of-unity] | Sorc — Arcane | Search your library for up to two basic land cards, reveal those cards, put one onto the battlefield tapped an
+43	0	Bloodstained Mire [RAID:tazri-beacon-of-unity] | Land | {T}, Pay 1 life, Sacrifice this land: Search your library for a Swamp or Mountain card, put it onto the battle
+45	0	Windswept Heath [RAID:tazri-beacon-of-unity] | Land | {T}, Pay 1 life, Sacrifice this land: Search your library for a Forest or Plains card, put it onto the battlef
+47	0	Wooded Foothills [RAID:tazri-beacon-of-unity] | Land | {T}, Pay 1 life, Sacrifice this land: Search your library for a Mountain or Forest card, put it onto the battl
+78	0	Yavimaya, Cradle of Growth [RAID:beledros-witherbloom] | L.Land | Each land is a Forest in addition to its other land types.
+102	1	Elvish Mystic [RAID:beledros-witherbloom,bumi-unleashed,the-cabbage-merchant] | Cr — Elf Druid | {T}: Add {G}.
+113	2	Sakura-Tribe Elder [RAID:beledros-witherbloom] | Cr — Snake Shaman | Sacrifice this creature: Search your library for a basic land card, put that card onto the battlefield tapped,
+116	0	Mana Confluence [RAID:tam-the-possibility] | Land | {T}, Pay 1 life: Add one mana of any color.
+120	3	Eternal Witness [RAID:beledros-witherbloom,the-cabbage-merchant] | Cr — Human Shaman | When this creature enters, you may return target card from your graveyard to your hand.
+134	3	Ashnod's Altar [RAID:beledros-witherbloom] | Art | Sacrifice a creature: Add {C}{C}.
+166	3	Sink into Stupor // Soporific Springs [UNOWNED] | Inst | Return target spell or nonland permanent an opponent controls to its owner's hand. // As this land enters, you
+191	2	Idol of Oblivion [RAID:beledros-witherbloom] | Art | {T}: Draw a card. Activate only if you created a token this turn. {8}, {T}, Sacrifice this artifact: Create a 
+212	1	Wild Growth [RAID:the-cabbage-merchant] | Ench — Aura | Enchant land Whenever enchanted land is tapped for mana, its controller adds an additional {G}.
+221	2	Ornithopter of Paradise [RAID:inspirit-flagship-vessel] | Art Cr — Thopter | Flying {T}: Add one mana of any color.
+235	2	Explore [RAID:bumi-unleashed] | Sorc | You may play an additional land this turn. Draw a card.
+240	3	Scute Swarm [RAID:beledros-witherbloom] | Cr — Insect | Landfall — Whenever a land you control enters, create a 1/1 green Insect creature token. If you control six or
+251	3	Foundry Inspector [RAID:imotekh-the-stormlord] | Art Cr — Construct | Artifact spells you cast cost {1} less to cast.
+253	0	Everflowing Chalice [RAID:inspirit-flagship-vessel] | Art | Multikicker {2} (You may pay an additional {2} any number of times as you cast this spell.) This artifact ente
+256	2	Bloom Tender [RAID:tam-the-possibility] | Cr — Elf Druid | Vivid — {T}: For each color among permanents you control, add one mana of that color.
+258	2	Sylvan Library [RAID:tam-the-possibility] | Ench | At the beginning of your draw step, you may draw two additional cards. If you do, choose two cards in your han
+269	4	Panharmonicon [RAID:inspirit-flagship-vessel] | Art | If an artifact or creature entering causes a triggered ability of a permanent you control to trigger, that abi
+286	5	Seedborn Muse [RAID:the-cabbage-merchant] | Cr — Spirit | Untap all permanents you control during each other player's untap step.
+312	4	Phyrexian Metamorph [RAID:inspirit-flagship-vessel] | Art Cr — Phyrexian Shapeshifter | ({U/P} can be paid with either {U} or 2 life.) You may have this creature enter as a copy of any artifact or c
+368	5	Shamanic Revelation [RAID:gilanra-alena-partners] | Sorc | Draw a card for each creature you control. Ferocious — You gain 4 life for each creature you control with powe
+388	4	Toski, Bearer of Secrets [RAID:the-cabbage-merchant] | L.Cr — Squirrel | This spell can't be countered. Indestructible Toski attacks each combat if able. Whenever a creature you contr
+394	0	Spire of Industry [RAID:inspirit-flagship-vessel] | Land | {T}: Add {C}. {T}, Pay 1 life: Add one mana of any color. Activate only if you control an artifact.
+403	3	Evolution Sage [RAID:tam-the-possibility] | Cr — Elf Druid | Landfall — Whenever a land you control enters, proliferate. (Choose any number of permanents and/or players, t
+412	5	Gilded Lotus [RAID:imotekh-the-stormlord] | Art | {T}: Add three mana of any one color.
+418	2	Etherium Sculptor [RAID:inspirit-flagship-vessel] | Art Cr — Vedalken Artificer | Artifact spells you cast cost {1} less to cast.
+424	0	High Market [RAID:beledros-witherbloom] | Land | {T}: Add {C}. {T}, Sacrifice a creature: You gain 1 life.
+425	0	Walking Ballista [RAID:the-cabbage-merchant] | Art Cr — Construct | This creature enters with X +1/+1 counters on it. {4}: Put a +1/+1 counter on this creature. Remove a +1/+1 co
+429	1	Snakeskin Veil [RAID:bumi-unleashed,the-cabbage-merchant] | Inst | Put a +1/+1 counter on target creature you control. It gains hexproof until end of turn. (It can't be the targ
+446	5	Ohran Frostfang [RAID:bumi-unleashed,the-cabbage-merchant] | Snow Cr — Snake | Attacking creatures you control have deathtouch. Whenever a creature you control deals combat damage to a play
+458	12	Ghalta, Primal Hunger [RAID:gilanra-alena-partners] | L.Cr — Elder Dinosaur | This spell costs {X} less to cast, where X is the total power of creatures you control. Trample (This creature
+459	6	Disciple of Freyalise // Garden of Freyalise [UNOWNED] | Cr — Elf Druid | When this creature enters, you may sacrifice another creature. If you do, you gain X life and draw X cards, wh
+521	3	Chord of Calling [RAID:the-cabbage-merchant] | Inst | Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} 
+527	1	Veil of Summer [RAID:beledros-witherbloom,bumi-unleashed] | Inst | Draw a card if an opponent has cast a blue or black spell this turn. Spells you control can't be countered thi
+529	0	Strip Mine [RAID:bumi-unleashed] | Land | {T}: Add {C}. {T}, Sacrifice this land: Destroy target land.
+580	0	Thespian's Stage [RAID:beledros-witherbloom] | Land | {T}: Add {C}. {2}, {T}: This land becomes a copy of target land, except it has this ability.
+584	2	Emerald Medallion [RAID:the-cabbage-merchant] | Art | Green spells you cast cost {1} less to cast.
+609	3	Hydroelectric Specimen // Hydroelectric Laboratory [UNOWNED] | Cr — Weird | Flash When this creature enters, you may change the target of target instant or sorcery spell with a single ta
+622	3	Archdruid's Charm [RAID:the-cabbage-merchant] | Inst | Choose one — • Search your library for a creature or land card and reveal it. Put it onto the battlefield tapp
+671	3	Bridgeworks Battle // Tanglespan Bridgeworks [UNOWNED] | Sorc | Target creature you control gets +2/+2 until end of turn. It fights up to one target creature you don't contro
+683	1	Haywire Mite [RAID:the-cabbage-merchant] | Art Cr — Insect | When this creature dies, you gain 2 life. {G}, Sacrifice this creature: Exile target noncreature artifact or n
+707	4	Fact or Fiction [RAID:inspirit-flagship-vessel] | Inst | Reveal the top five cards of your library. An opponent separates those cards into two piles. Put one pile into
+741	3	Spelunking [RAID:tazri-beacon-of-unity] | Ench | When this enchantment enters, draw a card, then you may put a land card from your hand onto the battlefield. I
+745	2	Kenrith's Transformation [RAID:the-cabbage-merchant] | Ench — Aura | Enchant creature When this Aura enters, draw a card. Enchanted creature loses all abilities and is a green Elk
+748	6	Chimil, the Inner Sun [RAID:tam-the-possibility] | L.Art | Spells you control can't be countered. At the beginning of your end step, discover 5. (Exile cards from the to
+780	3	Springbloom Druid [RAID:the-cabbage-merchant] | Cr — Elf Druid | When this creature enters, you may sacrifice a land. If you do, search your library for up to two basic land c
+795	0	Escape Tunnel [RAID:the-cabbage-merchant] | Land | {T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then 
+802	2	Steel Overseer [RAID:inspirit-flagship-vessel] | Art Cr — Construct | {T}: Put a +1/+1 counter on each artifact creature you control.
+869	0	Lotus Field [RAID:bumi-unleashed] | Land | Hexproof This land enters tapped. When this land enters, sacrifice two lands. {T}: Add three mana of any one c
+886	2	Myr Retriever [RAID:imotekh-the-stormlord] | Art Cr — Myr | When this creature dies, return another target artifact card from your graveyard to your hand.
+906	2	Ripples of Potential [RAID:inspirit-flagship-vessel] | Inst | Proliferate, then choose any number of permanents you control that had a counter put on them this way. Those p
+923	0	Vesuva [RAID:beledros-witherbloom] | Land | You may have this land enter tapped as a copy of any land on the battlefield.
+925	3	Jaheira, Friend of the Forest [RAID:the-cabbage-merchant] | L.Cr — Human Elf Druid | Tokens you control have "{T}: Add {G}." Choose a Background (You can have a Background as a second commander.)
+969	0	Cabaretti Courtyard [RAID:tazri-beacon-of-unity] | Land | When this land enters, sacrifice it. When you do, search your library for a basic Mountain, Forest, or Plains 
+1019	4	Force of Vigor [RAID:the-cabbage-merchant] | Inst | If it's not your turn, you may exile a green card from your hand rather than pay this spell's mana cost. Destr
+1043	2	Shared Roots [RAID:bumi-unleashed] | Sorc — Lesson | Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
+1053	3	Roiling Regrowth [RAID:bumi-unleashed] | Inst | Sacrifice a land. Search your library for up to two basic land cards, put them onto the battlefield tapped, th
+1063	3	Hunter's Insight [RAID:bumi-unleashed] | Inst | Choose target creature you control. Whenever that creature deals combat damage to a player or planeswalker thi
+1066	9	Portal to Phyrexia [RAID:imotekh-the-stormlord] | Art | When this artifact enters, each opponent sacrifices three creatures of their choice. At the beginning of your 
+1067	1	Pest Infestation [RAID:beledros-witherbloom] | Sorc | Destroy up to X target artifacts and/or enchantments. Create twice X 1/1 black and green Pest creature tokens 
+1076	1	Three Steps Ahead [RAID:inspirit-flagship-vessel] | Inst | Spree (Choose one or more additional costs.) + {1}{U} — Counter target spell. + {3} — Create a token that's a 
+1139	1	Spore Frog [RAID:the-cabbage-merchant] | Cr — Frog | Sacrifice this creature: Prevent all combat damage that would be dealt this turn.
+1161	3	Glasspool Mimic // Glasspool Shore [UNOWNED] | Cr — Shapeshifter Rogue | You may have this creature enter as a copy of a creature you control, except it's a Shapeshifter Rogue in addi
+1197	3	Tezzeret, Cruel Captain [RAID:inspirit-flagship-vessel] | L.Planeswalker — Tezzeret | Whenever an artifact you control enters, put a loyalty counter on Tezzeret. 0: Untap target artifact or creatu
+1201	4	Tekuthal, Inquiry Dominus [RAID:inspirit-flagship-vessel] | L.Cr — Phyrexian Horror | Flying If you would proliferate, proliferate twice instead. {1}{U/P}{U/P}, Remove three counters from among ot
+1238	6	Bane of Progress [RAID:gilanra-alena-partners] | Cr — Elemental | When this creature enters, destroy all artifacts and enchantments. Put a +1/+1 counter on this creature for ea
+1240	3	Arachnogenesis [RAID:the-cabbage-merchant] | Inst | Create X 1/2 green Spider creature tokens with reach, where X is the number of creatures attacking you. Preven
+1257	1	Bushwhack [RAID:bumi-unleashed] | Sorc | Choose one — • Search your library for a basic land card, reveal it, put it into your hand, then shuffle. • Ta
+1270	3	Flux Channeler [RAID:tam-the-possibility] | Cr — Human Wizard | Whenever you cast a noncreature spell, proliferate. (Choose any number of permanents and/or players, then give
+1305	5	Tendershoot Dryad [RAID:beledros-witherbloom] | Cr — Dryad | Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.) At the b
+1317	0	Brokers Hideout [RAID:tazri-beacon-of-unity] | Land | When this land enters, sacrifice it. When you do, search your library for a basic Forest, Plains, or Island ca
+1346	3	Endurance [RAID:the-cabbage-merchant] | Cr — Elemental Incarnation | Flash Reach When this creature enters, up to one target player puts all the cards from their graveyard on the 
+1396	2	Invasion of Ikoria // Zilortha, Apex of Ikoria [UNOWNED] | Battle — Siege | (As a Siege enters, choose an opponent to protect it. You and others can attack it. When it's defeated, exile 
+1527	0	Horizon of Progress [RAID:beledros-witherbloom] | Land | {T}, Pay 1 life: Add one mana of any type that a land you control could produce. {3}, {T}: You may put a land 
+1642	6	Soul of the Harvest [RAID:gilanra-alena-partners] | Cr — Elemental | Trample Whenever another nontoken creature you control enters, you may draw a card.
+1644	5	Traverse the Outlands [RAID:gilanra-alena-partners] | Sorc | Search your library for up to X basic land cards, where X is the greatest power among creatures you control. P
+1656	0	Ba Sing Se [RAID:bumi-unleashed,the-cabbage-merchant] | Land | This land enters tapped unless you control a basic land. {T}: Add {G}. {2}{G}, {T}: Earthbend 2. Activate only
+1670	11	Metalwork Colossus [RAID:imotekh-the-stormlord] | Art Cr — Construct | This spell costs {X} less to cast, where X is the total mana value of noncreature artifacts you control. Sacri
+1712	7	Hornet Queen [RAID:the-cabbage-merchant] | Cr — Insect | Flying, deathtouch When this creature enters, create four 1/1 green Insect creature tokens with flying and dea
+1741	3	Uthros Research Craft [RAID:inspirit-flagship-vessel] | Art — Spacecraft | Station (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station 
+1768	4	Nyx Lotus [RAID:inspirit-flagship-vessel] | L.Art | Nyx Lotus enters tapped. {T}: Choose a color. Add an amount of mana of that color equal to your devotion to th
+1779	4	Circuitous Route [RAID:bumi-unleashed] | Sorc | Search your library for up to two basic land cards and/or Gate cards, put them onto the battlefield tapped, th
+1780	5	Deepglow Skate [RAID:inspirit-flagship-vessel] | Cr — Fish | When this creature enters, double the number of each kind of counter on any number of target permanents.
+1818	0	Great Hall of the Citadel [RAID:tam-the-possibility] | Land | {T}: Add {C}. {1}, {T}: Add two mana in any combination of colors. Spend this mana only to cast legendary spel
+1840	2	Springleaf Parade [RAID:tazri-beacon-of-unity] | Ench | When this enchantment enters, create X 1/1 colorless Shapeshifter creature tokens with changeling. (They're ev
+1857	7	Threefold Thunderhulk [RAID:inspirit-flagship-vessel] | Art Cr — Gnome | This creature enters with three +1/+1 counters on it. Whenever this creature enters or attacks, create a numbe
+1948	4	Brawn [RAID:the-cabbage-merchant] | Cr — Incarnation | Trample As long as this card is in your graveyard and you control a Forest, creatures you control have trample
+1971	1	Many Partings [RAID:the-cabbage-merchant] | Sorc | Search your library for a basic land card, reveal it, put it into your hand, then shuffle. Create a Food token
+2010	3	Thirst for Knowledge [RAID:inspirit-flagship-vessel] | Inst | Draw three cards. Then discard two cards unless you discard an artifact card.
+2023	5	Garruk's Packleader [RAID:gilanra-alena-partners] | Cr — Beast | Whenever another creature you control with power 3 or greater enters, you may draw a card.
+2031	6	Thunderfoot Baloth [RAID:beledros-witherbloom] | Cr — Beast | Trample Lieutenant — As long as you control your commander, this creature gets +2/+2 and other creatures you c
+2086	2	Paradise Druid [RAID:beledros-witherbloom] | Cr — Elf Druid | This creature has hexproof as long as it's untapped. (It can't be the target of spells or abilities your oppon
+2122	2	Basking Broodscale [RAID:the-cabbage-merchant] | Cr — Eldrazi Lizard | Devoid (This card has no color.) {1}{G}: Adapt 1. (If this creature has no +1/+1 counters on it, put a +1/+1 c
+2130	2	Masked Vandal [RAID:tazri-beacon-of-unity] | Cr — Shapeshifter | Changeling (This card is every creature type.) When this creature enters, you may exile a creature card from y
+2176	3	Earthbender Ascension [RAID:bumi-unleashed] | Ench | When this enchantment enters, earthbend 2. Then search your library for a basic land card, put it onto the bat
+2180	4	Monstrous Vortex [RAID:gilanra-alena-partners] | Ench | Whenever you cast a creature spell with power 5 or greater, discover X, where X is that spell's mana value. (E
+2194	3	Flare of Cultivation [RAID:beledros-witherbloom] | Sorc | You may sacrifice a nontoken green creature rather than pay this spell's mana cost. Search your library for up
+2264	6	Quilled Greatwurm [RAID:bumi-unleashed] | Cr — Wurm | Trample Whenever a creature you control deals combat damage during your turn, put that many +1/+1 counters on 
+2328	6	Oblivion Sower [RAID:gilanra-alena-partners] | Cr — Eldrazi | When you cast this spell, target opponent exiles the top four cards of their library, then you may put any num
+2391	3	Insight Engine [RAID:inspirit-flagship-vessel] | Art | {2}, {T}: Put a charge counter on this artifact, then draw a card for each charge counter on it.
+2428	6	Regal Behemoth [RAID:gilanra-alena-partners] | Cr — Dinosaur | Trample When this creature enters, you become the monarch. Whenever you tap a land for mana while you're the m
+2484	0	Manor Gate [RAID:ramos-dragon-engine] | Land — Gate | This land enters tapped. As this land enters, choose a color other than green. {T}: Add {G} or one mana of the
+2504	3	Chomping Changeling [RAID:tazri-beacon-of-unity] | Cr — Shapeshifter | Changeling (This card is every creature type.) When this creature enters, destroy up to one target artifact or
+2642	3	Surge Conductor [RAID:inspirit-flagship-vessel] | Art Cr — Robot | Whenever another nontoken artifact you control enters, proliferate. (Choose any number of permanents and/or pl
+2754	2	Great Divide Guide [RAID:tam-the-possibility] | Cr — Human Scout Ally | Each land and Ally you control has "{T}: Add one mana of any color."
+2887	3	Outcaster Trailblazer [RAID:gilanra-alena-partners] | Cr — Human Druid | When this creature enters, add one mana of any color. Whenever another creature you control with power 4 or gr
+2944	1	Studious First-Year // Rampant Growth [UNOWNED] | Cr — Bear Wizard | This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.
+3013	0	Rumble Arena [RAID:bumi-unleashed] | Land | Vigilance When this land enters, scry 1. (Look at the top card of your library. You may put it on the bottom.)
+3039	6	The Legend of Kyoshi // Avatar Kyoshi [UNOWNED] | Ench — Saga | (As this Saga enters and after your draw step, add a lore counter.) I — Draw cards equal to the greatest power
+3062	3	Iron Spider, Stark Upgrade [RAID:inspirit-flagship-vessel] | L.Art Cr — Spider Hero | Vigilance {T}: Put a +1/+1 counter on each artifact creature and/or Vehicle you control. {2}, Remove two +1/+1
+3106	3	Toph, the Blind Bandit [RAID:bumi-unleashed] | L.Cr — Human Warrior Ally | When Toph enters, earthbend 2. (Target land you control becomes a 0/0 creature with haste that's still a land.
+3116	4	Mightform Harmonizer [RAID:bumi-unleashed] | Cr — Insect Druid | Landfall — Whenever a land you control enters, double the power of target creature you control until end of tu
+3133	1	Autumn's Veil [RAID:the-cabbage-merchant] | Inst | Spells you control can't be countered by blue or black spells this turn, and creatures you control can't be th
+3142	0	Diamond City [RAID:gilanra-alena-partners] | Land | This land enters with a shield counter on it. (If it would be dealt damage or destroyed, remove a shield count
+3227	5	Yedora, Grave Gardener [RAID:bumi-unleashed] | L.Cr — Treefolk Druid | Whenever another nontoken creature you control dies, you may return it to the battlefield face down under its 
+3235	2	Tangled Florahedron // Tangled Vale [UNOWNED] | Cr — Elemental | {T}: Add {G}. // This land enters tapped. {T}: Add {G}.
+3263	5	Germination Practicum [RAID:bumi-unleashed] | Sorc — Lesson | Put two +1/+1 counters on each creature you control. Paradigm (Then exile this spell. After you first resolve 
+3421	5	Transmutation Font [RAID:the-cabbage-merchant] | Art | {T}: Create your choice of a Blood token, a Clue token, or a Food token. {3}, {T}, Sacrifice three artifact to
+3502	6	Planetarium of Wan Shi Tong [RAID:gilanra-alena-partners] | L.Art | {1}, {T}: Scry 2. Whenever you scry or surveil, look at the top card of your library. You may cast that card w
+3676	4	Lux Artillery [RAID:inspirit-flagship-vessel] | Art | Whenever you cast an artifact creature spell, it gains sunburst. (It enters with a +1/+1 counter on it for eac
+3741	6	Greenwarden of Murasa [RAID:gilanra-alena-partners] | Cr — Elemental | When this creature enters, you may return target card from your graveyard to your hand. When this creature die
+3747	3	Repurposing Bay [RAID:inspirit-flagship-vessel] | Art | {2}, {T}, Sacrifice another artifact: Search your library for an artifact card with mana value equal to 1 plus
+3807	3	Mutable Explorer [RAID:tazri-beacon-of-unity] | Cr — Shapeshifter | Changeling (This card is every creature type.) When this creature enters, create a tapped Mutavault token. (It
+3868	0	Turbulent Wilderness [RAID:tam-the-possibility] | Land — Forest Island | ({T}: Add {G} or {U}.) This land enters tapped unless your opponents control eight or more lands.
+4023	4	Empowered Autogenerator [RAID:inspirit-flagship-vessel] | Art | This artifact enters tapped. {T}: Put a charge counter on this artifact. Add X mana of any one color, where X 
+4071	5	Badgermole [RAID:bumi-unleashed] | Cr — Badger Mole | When this creature enters, earthbend 2. (Target land you control becomes a 0/0 creature with haste that's stil
+4091	4	Lux Cannon [RAID:inspirit-flagship-vessel] | Art | {T}: Put a charge counter on this artifact. {T}, Remove three charge counters from this artifact: Destroy targ
+4107	2	Pentad Prism [RAID:inspirit-flagship-vessel] | Art | Sunburst (This artifact enters with a charge counter on it for each color of mana spent to cast it.) Remove a 
+4143	3	Lumbering Worldwagon [RAID:bumi-unleashed] | Art — Vehicle | This Vehicle's power is equal to the number of lands you control. Whenever this Vehicle enters or attacks, you
+4150	9	Bygone Colossus [RAID:inspirit-flagship-vessel] | Art Cr — Robot Giant | Warp {3} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the
+4184	0	Interplanar Beacon [RAID:tam-the-possibility] | Land | Whenever you cast a planeswalker spell, you gain 1 life. {T}: Add {C}. {1}, {T}: Add two mana of different col
+4234	2	The Ooze [RAID:the-cabbage-merchant] | L.Art | Whenever a creature you control with a +1/+1 counter on it leaves the battlefield, create a Mutagen token for 
+4257	4	Vizier of the Menagerie [RAID:tazri-beacon-of-unity] | Cr — Snake Cleric | You may look at the top card of your library any time. You may cast creature spells from the top of your libra
+4274	3	Heartbeat of Spring [RAID:bumi-unleashed] | Ench | Whenever a player taps a land for mana, that player adds one mana of any type that land produced.
+4427	6	Primordial Sage [RAID:gilanra-alena-partners] | Cr — Spirit | Whenever you cast a creature spell, you may draw a card.
+4503	1	Lost Jitte [RAID:inspirit-flagship-vessel] | L.Art — Equipment | Whenever equipped creature deals combat damage, put a charge counter on Lost Jitte. Remove a charge counter fr
+4593	0	Cryptic Caves [RAID:bumi-unleashed] | Land | {T}: Add {C}. {1}, {T}, Sacrifice this land: Draw a card. Activate only if you control five or more lands.
+4665	1	Harmonized Trio // Brainstorm [UNOWNED] | Cr — Merfolk Bard Wizard | {T}, Tap two untapped creatures you control: This creature becomes prepared. (While it's prepared, you may cas
+4801	5	Bumi, Eclectic Earthbender [RAID:bumi-unleashed] | L.Cr — Human Noble Ally | When Bumi enters, earthbend 1. (Target land you control becomes a 0/0 creature with haste that's still a land.
+4894	2	Sarinth Steelseeker [RAID:the-cabbage-merchant] | Cr — Human Artificer Scout | Whenever an artifact you control enters, look at the top card of your library. If it's a land card, you may re
+5003	4	The Boulder, Ready to Rumble [RAID:bumi-unleashed] | L.Cr — Human Warrior Performer | Whenever The Boulder attacks, earthbend X, where X is the number of creatures you control with power 4 or grea
+5031	6	Sweet-Gum Recluse [RAID:gilanra-alena-partners] | Cr — Spider | Flash Cascade Reach When this creature enters, put three +1/+1 counters on each of any number of target creatu
+5171	4	Earth Kingdom General [RAID:bumi-unleashed] | Cr — Human Soldier Ally | When this creature enters, earthbend 2. (Target land you control becomes a 0/0 creature with haste that's stil
+5203	2	Gavel of the Righteous [RAID:inspirit-flagship-vessel] | Art — Equipment | At the beginning of combat on your turn, put a charge counter on this Equipment. Equipped creature gets +1/+1 
+5279	3	Rockalanche [RAID:bumi-unleashed] | Sorc — Lesson | Earthbend X, where X is the number of Forests you control. (Target land you control becomes a 0/0 creature wit
+5500	7	Shriekwood Devourer [RAID:gilanra-alena-partners] | Cr — Treefolk | Trample Whenever you attack with one or more creatures, untap up to X lands, where X is the greatest power amo
+5595	2	Spider-Ham, Peter Porker [RAID:the-cabbage-merchant] | L.Cr — Spider Boar Hero | When Spider-Ham enters, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this token: You gain 
+5689	5	Emeritus of Ideation // Ancestral Recall [UNOWNED] | Cr — Human Wizard | Flying, ward {2} This creature enters prepared. Whenever this creature attacks, you may exile eight cards from
+5698	7	Dawnglade Regent [RAID:gilanra-alena-partners] | Cr — Elk | When this creature enters, you become the monarch. As long as you're the monarch, permanents you control have 
+5777	5	Explore the Underdark [RAID:tazri-beacon-of-unity] | Sorc | Search your library for up to two basic land cards and/or Gate cards, put them onto the battlefield tapped, th
+5938	5	Jace, Memory Adept [RAID:tam-the-possibility] | L.Planeswalker — Jace | +1: Draw a card. Target player mills a card. 0: Target player mills ten cards. −7: Any number of target player
+5941	3	Tale of Katara and Toph [RAID:bumi-unleashed] | Ench | Creatures you control have "Whenever this creature becomes tapped for the first time during each of your turns
+6057	3	Owlbear Cub [RAID:bumi-unleashed] | Cr — Bird Bear | Mama's Coming — Whenever this creature attacks a player who controls eight or more lands, look at the top eigh
+6211	4	The Legend of Kuruk // Avatar Kuruk [UNOWNED] | Ench — Saga | (As this Saga enters and after your draw step, add a lore counter.) I, II — Scry 2, then draw a card. III — Ex
+6221	4	Solid Ground [RAID:bumi-unleashed] | Ench | When this enchantment enters, earthbend 3. (Target land you control becomes a 0/0 creature with haste that's s
+6314	3	Pest Rescuer [RAID:beledros-witherbloom] | Cr — Dryad Druid | At the beginning of each upkeep, if you don't control a Pest creature token, create a 1/1 black and green Pest
+6476	6	Flopsie, Bumi's Buddy [RAID:bumi-unleashed] | L.Cr — Ape Goat | When Flopsie enters, put a +1/+1 counter on each creature you control. Each creature you control with power 4 
+6532	5	Cracked Earth Technique [RAID:bumi-unleashed] | Sorc — Lesson | Earthbend 3, then earthbend 3. You gain 3 life. (To earthbend 3, target land you control becomes a 0/0 creatur
+6591	0	Crawling Barrens [RAID:bumi-unleashed] | Land | {T}: Add {C}. {4}: Put two +1/+1 counters on this land. Then you may have it become a 0/0 Elemental creature u
+6753	2	Frog Butler [RAID:bumi-unleashed] | Cr — Frog Spirit | Deathtouch {T}: Add one mana of any color. {2}: This creature gains reach until end of turn.
+6842	3	Canoptek Wraith [RAID:imotekh-the-stormlord] | Art Cr — Wraith | Wraith Form — This creature can't be blocked. Transdimensional Scout — When this creature deals combat damage 
+6897	2	Zimone, Quandrix Prodigy [RAID:tazri-beacon-of-unity] | L.Cr — Human Wizard | {1}, {T}: You may put a land card from your hand onto the battlefield tapped. {4}, {T}: Draw a card. If you co
+6914	2	Nissa, Steward of Elements [RAID:tam-the-possibility] | L.Planeswalker — Nissa | +2: Scry 2. 0: Look at the top card of your library. If it's a land card or a creature card with mana value le
+6924	7	Emergent Woodwurm [RAID:gilanra-alena-partners] | Cr — Wurm | Backup 3 (When this creature enters, put three +1/+1 counters on target creature. If that's another creature, 
+7003	5	Ribtruss Roaster [RAID:beledros-witherbloom] | Cr — Troll Druid | Devour 1 (As this creature enters, you may sacrifice any number of creatures. This creature enters with that m
+7014	1	Elusive Otter // Grove's Bounty [UNOWNED] | Cr — Otter | Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.) Creatures with po
+7117	1	Tamiyo, Inquisitive Student // Tamiyo, Seasoned Scholar [UNOWNED] | L.Cr — Moonfolk Wizard | Flying Whenever Tamiyo attacks, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this 
+7351	7	Spearbreaker Behemoth [RAID:gilanra-alena-partners] | Cr — Beast | Indestructible {1}: Target creature with power 5 or greater gains indestructible until end of turn.
+7597	4	Surrak, the Hunt Caller [RAID:gilanra-alena-partners] | L.Cr — Human Warrior | Formidable — At the beginning of combat on your turn, if creatures you control have total power 8 or greater, 
+7627	0	Plaza of Harmony [RAID:ramos-dragon-engine] | Land | When this land enters, if you control two or more Gates, you gain 3 life. {T}: Add {C}. {T}: Add one mana of a
+7641	6	Conclave Sledge-Captain [RAID:gilanra-alena-partners] | Cr — Elephant Soldier | Backup 1, backup 1, backup 1 (When this creature enters, put a +1/+1 counter on target creature. If that's ano
+7856	6	Tectonic Split [RAID:bumi-unleashed] | Ench | As an additional cost to cast this spell, sacrifice half the lands you control, rounded up. Hexproof Lands you
+8419	4	Drix Fatemaker [RAID:bumi-unleashed] | Cr — Drix Wizard | When this creature enters, put a +1/+1 counter on target creature. Each creature you control with a +1/+1 coun
+8514	3	Vastlands Scavenger // Bind to Life [UNOWNED] | Cr — Bear Druid | Deathtouch This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unp
+8697	3	Gilanra, Caller of Wirewood [RAID:gilanra-alena-partners] | L.Cr — Elf Druid | {T}: Add {G}. When you spend this mana to cast a spell with mana value 6 or greater, draw a card. Partner (You
+8775	3	Trudge Garden [RAID:the-cabbage-merchant] | Ench | Whenever you gain life, you may pay {2}. If you do, create a 4/4 green Fungus Beast creature token with trampl
+8889	5	Spry and Mighty [RAID:bumi-unleashed,the-cabbage-merchant] | Sorc | Choose exactly two creatures you control. You draw X cards and the chosen creatures get +X/+X and gain trample
+8956	4	Crystalline Armor [RAID:bumi-unleashed] | Ench — Aura | Enchant creature Enchanted creature gets +1/+1 for each land you control and has trample.
+9087	2	Steelswarm Operator [RAID:inspirit-flagship-vessel] | Art Cr — Robot Soldier | Flying {T}: Add {U}. Spend this mana only to cast an artifact spell. {T}: Add {U}{U}. Spend this mana only to 
+9384	3	Emil, Vastlands Roamer [RAID:the-cabbage-merchant] | L.Cr — Elf Druid | Creatures you control with +1/+1 counters on them have trample. {4}{G}, {T}: Create a 0/0 green and blue Fract
+9400	6	Garruk, Caller of Beasts [RAID:gilanra-alena-partners] | L.Planeswalker — Garruk | +1: Reveal the top five cards of your library. Put all creature cards revealed this way into your hand and the
+9800	1	Longstalk Brawl [RAID:bumi-unleashed] | Sorc | Gift a tapped Fish (You may promise an opponent a gift as you cast this spell. If you do, they create a tapped
+9847	5	Braulios of Pheres Band [RAID:bumi-unleashed] | L.Cr — Centaur Scout | Braulios's power and toughness are each equal to the number of lands you control. Whenever Braulios attacks, d
+10056	6	Elvish Aberration [RAID:gilanra-alena-partners] | Cr — Elf Mutant | {T}: Add {G}{G}{G}. Forestcycling {2} ({2}, Discard this card: Search your library for a Forest card, reveal i
+10103	3	Imoen, Mystic Trickster [RAID:tazri-beacon-of-unity] | L.Cr — Human Rogue Wizard | Ward {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unl
+10211	5	Argentum Masticore [RAID:beledros-witherbloom] | Art Cr — Phyrexian Masticore | First strike, protection from multicolored At the beginning of your upkeep, sacrifice this creature unless you
+10431	6	Sakiko, Mother of Summer [RAID:gilanra-alena-partners] | L.Cr — Snake Shaman | Whenever a creature you control deals combat damage to a player, add that much {G}. Until end of turn, you don
+10969	4	Undermountain Adventurer [RAID:tazri-beacon-of-unity] | Cr — Giant Warrior | Vigilance When this creature enters, you take the initiative. {T}: Add {G}{G}. If you've completed a dungeon, 
+11111	0	Base Camp [RAID:tazri-beacon-of-unity] | Land | This land enters tapped. {T}: Add {C}. {T}: Add one mana of any color. Spend this mana only to cast a Cleric, 
+11182	6	Ulvenwald Observer [RAID:gilanra-alena-partners] | Cr — Treefolk | Whenever a creature you control with toughness 4 or greater dies, draw a card.
+11210	4	Seismic Tutelage [RAID:bumi-unleashed] | Ench — Aura | Enchant creature When this Aura enters, put a +1/+1 counter on enchanted creature. Whenever enchanted creature
+11335	4	Nexus Mentality [RAID:tam-the-possibility] | Inst | Choose one. If you control a commander as you cast this spell, you may choose both instead. • Move all counter
+11404	4	Durnan of the Yawning Portal [RAID:tazri-beacon-of-unity] | L.Cr — Human Warrior | Whenever Durnan attacks, look at the top four cards of your library. You may exile a creature card from among 
+11510	3	Yavimaya Bloomsage // Channel [UNOWNED] | Cr — Dryad Druid | At the beginning of your end step, put a +1/+1 counter on target creature you control. Then if that creature h
+11579	2	Striding Shotcaller // Run the Play [UNOWNED] | Cr — Troll Druid | Reach Whenever one or more creatures you control deal combat damage to a player, this creature becomes prepare
+11736	3	The Destined Thief [RAID:tazri-beacon-of-unity] | L.Cr — Human Rogue | The Destined Thief can't be blocked. {U}, {T}: Another target creature you control can't be blocked this turn.
+11758	6	Paleoloth [RAID:gilanra-alena-partners] | Cr — Beast | Whenever another creature you control with power 5 or greater enters, you may return target creature card from
+11853	5	Awakening of Vitu-Ghazi [RAID:bumi-unleashed] | Inst | Put nine +1/+1 counters on target land you control. It becomes a legendary 0/0 Elemental creature with haste n
+11979	2	Bumi's Feast Lecture [RAID:the-cabbage-merchant] | Sorc — Lesson | Create a Food token. Then earthbend X, where X is twice the number of Foods you control. (A Food token is an a
+12156	2	Nimble Trapfinder [RAID:tazri-beacon-of-unity] | Cr — Human Rogue | This creature can't be blocked if you had another Cleric, Rogue, Warrior, or Wizard enter the battlefield unde
+12968	6	Nessian Wilds Ravager [RAID:gilanra-alena-partners] | Cr — Hydra | Tribute 6 (As this creature enters, an opponent of your choice may put six +1/+1 counters on it.) When this cr
+13091	3	Oko, Lorwyn Liege // Oko, Shadowmoor Scion [UNOWNED] | L.Planeswalker — Oko | At the beginning of your first main phase, you may pay {G}. If you do, transform Oko. +2: Up to one target cre
+13347	4	Halsin, Emerald Archdruid [RAID:the-cabbage-merchant] | L.Cr — Elf Druid | {1}: Until end of turn, target token you control becomes a green Bear creature with base power and toughness 4
+13717	4	Ghost Ark [RAID:imotekh-the-stormlord] | Art — Vehicle | Flying Repair Barge — Whenever this Vehicle becomes crewed, each artifact creature card in your graveyard gain
+13759	3	Jadzi, Steward of Fate // Oracle's Gift [UNOWNED] | L.Cr — Human Wizard | Jadzi enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.) When J
+14601	2	Stonework Packbeast [RAID:tazri-beacon-of-unity] | Art Cr — Beast | Stonework Packbeast is also a Cleric, Rogue, Warrior, and Wizard. {2}: Add one mana of any color.
+15044	3	Pia, Aether Ascetic [RAID:tam-the-possibility] | L.Cr — Human Druid | When Pia enters, you may discard a card. If you do, search your library for an enchantment card, reveal it, pu
+15477	5	Part in Friendship [RAID:bumi-unleashed] | Ench | Whenever a nontoken creature you control dies, reveal cards from the top of your library until you reveal a cr
+16084	9	Ghalta the Unstoppable [RAID:the-cabbage-merchant] | L.Cr — Elder Dinosaur | This spell costs {X} less to cast, where X is the greatest power among creatures you control. Trample Other cr
+16898	7	Verdant Kraken [RAID:the-cabbage-merchant] | Cr — Plant Kraken | At the beginning of each player's upkeep, you create a 3/3 green Forest Tentacle land creature token. (It has 
+18200	3	Way of the Paradox [RAID:tam-the-possibility] | L.Ench | When Way of the Paradox enters, empower Jace 5. (Put five loyalty counters on a Jace token you control. If you
+18608	5	Way of the Mind Sculptor [RAID:tam-the-possibility] | L.Ench | When Way of the Mind Sculptor enters, empower Jace 5. (Put five loyalty counters on a Jace token you control. 
+18667	6	Ginger, Queen of Sweets [RAID:the-cabbage-merchant] | L.Art Cr — Food Noble | When Ginger enters, you become the monarch. {2}, {T}, Sacrifice Ginger: You gain 6 life. At the beginning of e
+19587	2	Tajuru Paragon [RAID:tazri-beacon-of-unity] | Cr — Elf | Tajuru Paragon is also a Cleric, Rogue, Warrior, and Wizard. Kicker {3} When this creature enters, if it was k
+20540	3	Variable Chaser // Arc of Fortune [UNOWNED] | Cr — Human Wizard | Flying, prowess This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing s
+20812	2	Carnivorous Cultivator // Enroot [UNOWNED] | Cr — Elf Warlock | Deathtouch This creature enters prepared. Whenever this creature deals combat damage to a player, return targe
+21522	3	Greenhouse Propagator [RAID:the-cabbage-merchant] | Cr — Cat Druid | Whenever another creature you control enters, you gain 1 life. {T}: Add {G}.
+21973	5	Entrust the Spark [RAID:tam-the-possibility] | Sorc | You may sacrifice a planeswalker. If you do, search your library for a planeswalker card, put it onto the batt
+22384	4	Jiang Yanggu, Never Alone [RAID:the-cabbage-merchant] | L.Cr — Human Druid | When Jiang Yanggu enters, create Mowu, a legendary 3/3 green Dog creature token. At the beginning of your end 
+22422	8	Omnipresence [RAID:beledros-witherbloom] | Ench | You may cast spells with mana value less than or equal to the number of creatures you control from your hand w
+22989	5	Hungering Puppetbeast [RAID:the-cabbage-merchant] | Art Cr — Beast Construct | When this creature enters, create a Heartwood token. (It's a red and green artifact with "{T}: Add {R} or {G}.
+23090	2	Avatar of Burgeoning Echoes [RAID:tam-the-possibility] | Cr — Avatar | Landfall — Whenever a land you control enters, empower Jace 2. (Put two loyalty counters on a Jace token you c
+23972	4	Titanbones, Towering Heart [RAID:the-cabbage-merchant] | L.Cr — Skeleton Druid | Reach Whenever you gain life, put two +1/+1 counters on Titanbones. When you discard this card, you gain 3 lif
+24387	5	Way of the Wildspeaker [RAID:tam-the-possibility] | L.Ench | When Way of the Wildspeaker enters, empower Jace 7. (Put seven loyalty counters on a Jace token you control. I
+24947	3	Kiora of Salt and Sand [RAID:tam-the-possibility] | L.Cr — Merfolk Noble | Whenever you attack, if you've activated a loyalty ability this turn, untap target attacking creature. It can'

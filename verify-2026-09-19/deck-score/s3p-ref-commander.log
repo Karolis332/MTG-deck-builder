@@ -1,0 +1,12 @@
+| profile | rows | families | alt families | dups | unavailable | knots | ties | largest atom | weight sum | mean rank | T_abs p10/p50/p90 | verdict |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|
+| commander | 1426 | 182 | 182 | 20 | 0 | 434 | 175 | 5.205e-2 | 1.000000000000 | 50.000000000 | 20.40 / 55.12 / 70.08 | OK |
+| brawl | 782 | 178 | 178 | 12 | 0 | 384 | 79 | 3.851e-2 | 1.000000000000 | 50.000000000 | 61.60 / 77.53 / 88.00 | OK |
+| standard | 244 | 40 | 25 | 90 | 0 | 142 | 36 | 5.013e-2 | 1.000000000000 | 50.000000000 | 44.08 / 71.20 / 86.13 | OK |
+
+commander: 14 eligible row(s) excluded by a SCORER rule failure: commander-sample:381414287, commander-sample:381412744, commander-sample:381414040, commander-sample:381199063, commander-sample:380396317, commander-sample:381376657, commander-sample:378808542, commander-sample:381366432, commander-sample:381204290, commander-sample:380771438, commander-sample:381124378, commander-sample:352794123, commander-sample:352932966, commander-sample:367128615
+commander: written C:\Users\QuLeR\MTG-deck-builder\src\lib\deck-score-reference\commander.json (434 knots)
+brawl: 3 eligible row(s) excluded by a SCORER rule failure: brawl-sample:378796808, brawl-sample:363064196, brawl-sample:276328332
+brawl: written C:\Users\QuLeR\MTG-deck-builder\src\lib\deck-score-reference\brawl.json (384 knots)
+standard: 26 eligible row(s) excluded by a SCORER rule failure: standard:1446069, standard:1446183, standard:1446182, standard:1446208, standard:1446354, standard:1446321, standard:1446410, standard:1446408, standard:1446515, standard:1446510, standard:1446567, standard:1446563, standard:1446561, standard:1446647, standard:1446655, standard:1446706, standard:1446013, standard:1446037, standard:1446322, standard:1446572, standard:1446716, standard:1446785, standard:1446850, standard:1446820, standard:1447148, standard:1447203
+standard: written C:\Users\QuLeR\MTG-deck-builder\src\lib\deck-score-reference\standard.json (142 knots)

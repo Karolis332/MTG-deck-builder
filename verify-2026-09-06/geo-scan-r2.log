@@ -1,0 +1,166 @@
+◇ injected env (3) from .env // tip: ◈ secrets for agents [www.dotenvx.com]
+
+  geo-scraper
+  Generative Engine Optimization Compliance Tool
+
+  Target:  https://theblackgrimoire.com
+  Output:  geo-output\theblackgrimoire.com
+  Pages:   2000
+  Training: denied
+
+- Crawling site...
+[2026-09-06T14:50:28.734Z] [INFO] [crawler] Crawl starting: https://theblackgrimoire.com | domain=theblackgrimoire.com maxPages=2000 concurrency=8 frozenMode=false frozenUrlCount=0
+[2026-09-06T14:50:28.736Z] [INFO] [crawler] Fresh crawl config created | storageType=MemoryStorage configId=1788706228736
+[2026-09-06T14:50:28.866Z] [INFO] [crawler] GEO file probe: llmsTxt | url=https://theblackgrimoire.com/llms.txt status=200 length=5001 isHtml=false isJson=false served=null
+[2026-09-06T14:50:28.867Z] [INFO] [crawler] GEO file probe: llmsFullTxt | url=https://theblackgrimoire.com/llms-full.txt status=200 length=7763 isHtml=false isJson=false served=null
+[2026-09-06T14:50:28.868Z] [INFO] [crawler] GEO file probe: robotsTxt | url=https://theblackgrimoire.com/robots.txt status=200 length=1346 isHtml=false isJson=false served=null
+[2026-09-06T14:50:28.872Z] [INFO] [crawler] GEO file probe: sitemapXml | url=https://theblackgrimoire.com/sitemap.xml status=200 length=1878 isHtml=false isJson=false served=null
+[2026-09-06T14:50:29.012Z] [INFO] [crawler] GEO file probe: aiTxt | url=https://theblackgrimoire.com/ai.txt status=200 length=185 isHtml=false isJson=false served=null
+[2026-09-06T14:50:29.013Z] [INFO] [crawler] GEO file probe: aiJson | url=https://theblackgrimoire.com/ai.json status=200 length=284 isHtml=false isJson=true served=null
+[2026-09-06T14:50:29.026Z] [WARN] [crawler] GEO file fetch failed: tdmrepJson | url=https://theblackgrimoire.com/.well-known/tdmrep.json status=404
+[2026-09-06T14:50:29.028Z] [WARN] [crawler] GEO file fetch failed: securityTxt | url=https://theblackgrimoire.com/.well-known/security.txt status=404
+[2026-09-06T14:50:29.155Z] [WARN] [crawler] GEO file fetch failed: tdmPolicyJson | url=https://theblackgrimoire.com/.well-known/tdm-policy.json status=404
+[2026-09-06T14:50:29.159Z] [WARN] [crawler] GEO file fetch failed: humansTxt | url=https://theblackgrimoire.com/humans.txt status=404
+[2026-09-06T14:50:29.166Z] [WARN] [crawler] GEO file fetch failed: manifestJson | url=https://theblackgrimoire.com/manifest.json status=404
+[2026-09-06T14:50:29.172Z] [WARN] [crawler] GEO file fetch failed: bingSiteAuth | url=https://theblackgrimoire.com/BingSiteAuth.xml status=404
+[2026-09-06T14:50:29.301Z] [WARN] [crawler] GEO file fetch failed: agentsJson | url=https://theblackgrimoire.com/agents.json status=404
+[2026-09-06T14:50:29.306Z] [WARN] [crawler] GEO file fetch failed: mcpJson | url=https://theblackgrimoire.com/.well-known/mcp.json status=404
+[2026-09-06T14:50:29.315Z] [WARN] [crawler] GEO file fetch failed: agentCardJson | url=https://theblackgrimoire.com/.well-known/agent-card.json status=404
+[2026-09-06T14:50:29.334Z] [WARN] [crawler] GEO file fetch failed: securityTxt | url=https://theblackgrimoire.com/security.txt status=404
+[2026-09-06T14:50:29.358Z] [WARN] [crawler] GEO file fetch failed: tdmrepJson | url=https://theblackgrimoire.com/tdmrep.json status=404
+[2026-09-06T14:50:29.378Z] [WARN] [crawler] GEO file fetch failed: tdmPolicyJson | url=https://theblackgrimoire.com/tdm-policy.json status=404
+[2026-09-06T14:50:29.397Z] [WARN] [crawler] GEO file fetch failed: agentCardJson | url=https://theblackgrimoire.com/agent-card.json status=404
+[2026-09-06T14:50:29.414Z] [WARN] [crawler] GEO file fetch failed: mcpJson | url=https://theblackgrimoire.com/mcp.json status=404
+[32mINFO[39m [33m CheerioCrawler:[39m Starting the crawler.
+[2026-09-06T14:50:30.721Z] [INFO] [crawler] Page processed: https://theblackgrimoire.com/ | pageNum=1 internalLinksFound=11 depth=0
+[2026-09-06T14:50:30.723Z] [INFO] [crawler] Enqueuing links | url=https://theblackgrimoire.com/ sameDomainLinks=11 totalInternal=11
+[2026-09-06T14:50:30.726Z] [INFO] [crawler] Links enqueued successfully | count=11
+[2026-09-06T14:50:30.892Z] [INFO] [crawler] Page processed: https://theblackgrimoire.com/faq | pageNum=2 internalLinksFound=11 depth=1
+[2026-09-06T14:50:30.892Z] [INFO] [crawler] Enqueuing links | url=https://theblackgrimoire.com/faq sameDomainLinks=0 totalInternal=11
+[2026-09-06T14:50:30.920Z] [INFO] [crawler] Page processed: https://theblackgrimoire.com/builder | pageNum=3 internalLinksFound=7 depth=1
+[2026-09-06T14:50:30.921Z] [INFO] [crawler] Enqueuing links | url=https://theblackgrimoire.com/builder sameDomainLinks=0 totalInternal=7
+[2026-09-06T14:50:30.935Z] [INFO] [crawler] Page processed: https://theblackgrimoire.com/collection | pageNum=4 internalLinksFound=11 depth=1
+[2026-09-06T14:50:30.936Z] [INFO] [crawler] Enqueuing links | url=https://theblackgrimoire.com/collection sameDomainLinks=0 totalInternal=11
+[2026-09-06T14:50:30.965Z] [INFO] [crawler] Page processed: https://theblackgrimoire.com/decks | pageNum=5 internalLinksFound=11 depth=1
+[2026-09-06T14:50:30.965Z] [INFO] [crawler] Enqueuing links | url=https://theblackgrimoire.com/decks sameDomainLinks=0 totalInternal=11
+[2026-09-06T14:50:30.996Z] [INFO] [crawler] Page processed: https://theblackgrimoire.com/methodology | pageNum=6 internalLinksFound=11 depth=1
+[2026-09-06T14:50:30.996Z] [INFO] [crawler] Enqueuing links | url=https://theblackgrimoire.com/methodology sameDomainLinks=0 totalInternal=11
+[2026-09-06T14:50:31.016Z] [INFO] [crawler] Page processed: https://theblackgrimoire.com/about | pageNum=7 internalLinksFound=11 depth=1
+[2026-09-06T14:50:31.016Z] [INFO] [crawler] Enqueuing links | url=https://theblackgrimoire.com/about sameDomainLinks=0 totalInternal=11
+[2026-09-06T14:50:31.040Z] [INFO] [crawler] Page processed: https://theblackgrimoire.com/contact | pageNum=8 internalLinksFound=11 depth=1
+[2026-09-06T14:50:31.040Z] [INFO] [crawler] Enqueuing links | url=https://theblackgrimoire.com/contact sameDomainLinks=0 totalInternal=11
+[2026-09-06T14:50:31.059Z] [INFO] [crawler] Page processed: https://theblackgrimoire.com/privacy | pageNum=9 internalLinksFound=11 depth=1
+[2026-09-06T14:50:31.059Z] [INFO] [crawler] Enqueuing links | url=https://theblackgrimoire.com/privacy sameDomainLinks=0 totalInternal=11
+[2026-09-06T14:50:31.087Z] [INFO] [crawler] Page processed: https://theblackgrimoire.com/support | pageNum=10 internalLinksFound=11 depth=1
+[2026-09-06T14:50:31.087Z] [INFO] [crawler] Enqueuing links | url=https://theblackgrimoire.com/support sameDomainLinks=0 totalInternal=11
+[2026-09-06T14:50:31.107Z] [INFO] [crawler] Page processed: https://theblackgrimoire.com/terms | pageNum=11 internalLinksFound=11 depth=1
+[2026-09-06T14:50:31.107Z] [INFO] [crawler] Enqueuing links | url=https://theblackgrimoire.com/terms sameDomainLinks=0 totalInternal=11
+[32mINFO[39m [33m CheerioCrawler:[39m All requests from the queue have been processed, the crawler will shut down.
+[32mINFO[39m [33m CheerioCrawler:[39m Final request statistics:[90m {"requestsFinished":11,"requestsFailed":0,"retryHistogram":[11],"requestAvgFailedDurationMillis":null,"requestAvgFinishedDurationMillis":246,"requestsFinishedPerMinute":278,"requestsFailedPerMinute":0,"requestTotalDurationMillis":2711,"requestsTotal":11,"crawlerRuntimeMillis":2377}[39m
+[32mINFO[39m [33m CheerioCrawler:[39m Finished! Total 11 requests: 11 succeeded, 0 failed.[90m {"terminal":true}[39m
+[2026-09-06T14:50:31.254Z] [INFO] [crawler] Crawler finished | domain=theblackgrimoire.com pagesRaw=11 failedPages=0 durationMs=2520 langStats={} blockedLangPrefixes=[]
+[2026-09-06T14:50:31.254Z] [INFO] [crawler] Deduplicated 11 -> 8 pages by canonical URL | domain=theblackgrimoire.com
+[2026-09-06T14:50:31.471Z] [INFO] [crawler] Crawl pipeline complete: theblackgrimoire.com | pages=8 externalLinks=0 internalRedirects=0 totalTimeMs=2737
+[32m✔[39m Crawled 8 pages in 2.7s
+- Auditing GEO compliance...
+[32m✔[39m GEO Score: 73/100 (Grade: B)
+  Audit Summary:
+  1 errors · 1 warnings · 19 notices
+
+    ✓ [ai_infrastructure   ] robots.txt                              54/100  robots.txt mentions 8/23 active AI crawlers (Apr 2026 baseline)
+    ✓ [ai_infrastructure   ] sitemap.xml                            100/100  Sitemap contains 11 URLs with lastmod dates. Crawled 8 pages.
+    ✓ [ai_infrastructure   ] llms.txt                               100/100  llms.txt found — H1: yes, Blockquote: yes, H2 sections: yes, Links: yes
+    ✓ [ai_infrastructure   ] llms-full.txt                          100/100  Found llms-full.txt (7763 chars)
+    ✓ [ai_infrastructure   ] AI Policy (ai.txt / ai.json)           100/100  ai.txt: found, ai.json: found
+    ✓ [ai_infrastructure   ] AI Bot Blocking                        100/100  No visibility-category AI crawlers are blocked in robots.txt
+    ℹ [ai_infrastructure   ] AI Content Directives                    0/100  No max-snippet or max-image-preview directives found
+    ℹ [ai_infrastructure   ] Training vs Retrieval Bot Strategy      10/100  Training bots blocked: 0/9 (none). Retrieval bots allowed: 4/20 (OAI-SearchBot, ChatGPT-User, PerplexityBot, Applebot)
+    ℹ [ai_infrastructure   ] Deprecated AI Crawlers                  50/100  robots.txt references 2 deprecated AI crawler name(s): anthropic-ai, Claude-Web. Rules targeting these have no effect on current AI traffic.
+    ✓ [ai_infrastructure   ] Blanket Disallow Pattern               100/100  No blanket "User-agent: * Disallow: /" rule detected
+    ✓ [ai_infrastructure   ] E-E-A-T Path Blocking                  100/100  No E-E-A-T critical paths (/policies, /legal, /terms, /privacy, /about, /contact) are blocked
+    ℹ [ai_infrastructure   ] agent-card.json                          0/100  No /.well-known/agent-card.json found
+    ℹ [ai_infrastructure   ] agents.json                              0/100  No /agents.json found
+    ℹ [ai_infrastructure   ] mcp.json                                 0/100  No /.well-known/mcp.json found
+    ✓ [ai_infrastructure   ] Hosting Bot Accessibility              100/100  All 5 AI bots can reach the server: GPTBot, ChatGPT-User, ClaudeBot, PerplexityBot, Google-Extended
+    ✓ [ai_infrastructure   ] llms.txt content quality                72/100  llms.txt content score 72/100 — Core Facts 11/25, AI Instructions 15/15, FAQ 15/15, Niche Vocab 6/10, Partners 0/10, Original Content 15/15, Schema Skeleton 10/10.
+    ℹ [ai_infrastructure   ] AI Policy Completeness                  40/100  AI Policy 40/100 — Presence 35/35, Permissions 0/25, Attribution 5/15, Restrictions 0/10, Resources 0/10, Schema 0/5
+    ℹ [ai_infrastructure   ] TDMRep Validity                          0/100  Neither /.well-known/tdmrep.json nor /.well-known/tdm-policy.json found
+    ℹ [ai_infrastructure   ] Agent Card Validity                      0/100  No /.well-known/agent-card.json found
+    ✓ [content_quality     ] Structured Data (JSON-LD)              100/100  8/8 pages have JSON-LD (21 total items). Types: WebSite, Organization, SoftwareApplication, HowTo, WebPage, FAQPage, BreadcrumbList, TechArticle
+    ✓ [content_quality     ] FAQ Content                            100/100  12 FAQ items on 1 page(s) with FAQPage schema
+    ✓ [content_quality     ] Content Structure & Depth               63/100  2/8 pages >500 words, 2 well-structured (>=3 headings), 2 thin pages (<300 words)
+    ✓ [content_quality     ] Heading Hierarchy                      100/100  8/8 pages have headings (8 with clean H1>H2>H3). Headings exist — where flagged, the heading level ORDER needs fixing, not the headings themselves.
+    ✓ [content_quality     ] Meta Descriptions                      100/100  8/8 pages have meta descriptions (>=30 chars)
+    ✓ [content_quality     ] Content Freshness                      100/100  8/8 pages have date signals, 8 updated within 12 months, 8 with JSON-LD dates
+    ✓ [content_quality     ] Schema Markup Diversity                100/100  8 schema types found: FAQPage, HowTo, BreadcrumbList, Organization, WebSite. 5 high-value types for AEO.
+    ✓ [content_quality     ] Featured Snippet Readiness              96/100  7/7 pages have snippet-ready paragraphs (30-70 words), 6 with definition-style content
+    ℹ [content_quality     ] Answer Format Diversity                 49/100  Format types: tables (1 pages), lists (1), FAQ (1), HowTo steps (0). 3/4 format types used.
+    ✓ [content_quality     ] Voice Search Optimization               68/100  19/54 headings are questions, 7/7 pages have short direct answers
+    ✓ [content_quality     ] Duplicate Titles                       100/100  All page titles are unique
+    ✓ [content_quality     ] Duplicate Meta Descriptions            100/100  All meta descriptions are unique
+    ✓ [content_quality     ] Content Too Long for AI                100/100  No pages exceed 10,000 words
+    ℹ [content_quality     ] Paragraph Length Optimization            0/100  0/7 content pages have optimal avg paragraph length (40-75 words)
+    ℹ [content_quality     ] Answer-First Content Structure           0/100  0/7 content pages lead with direct answer paragraphs
+    ✓ [content_quality     ] Organization Schema Completeness        75/100  Organization schema: logo ✓, contactPoint ✓, sameAs ✗
+    ℹ [content_quality     ] Security Headers                        65/100  Found: HSTS, X-Frame-Options, X-Content-Type-Options. Missing: CSP (Content-Security-Policy)
+    ✓ [content_quality     ] Compression                            100/100  8/8 pages served with compression (gzip/brotli)
+    ℹ [content_quality     ] Content Quotability Score                0/100  0/7 paragraphs are self-contained and quotable (0%)
+    ℹ [content_quality     ] Topic Cluster Detection                  0/100  0 pillar page(s) detected (0 with strong content), avg 8.0 inbound links per page
+    ℹ [content_quality     ] Content Readability                     73/100  Avg Flesch Reading Ease: 43.6 (difficult). 0 page(s) scored below 30 (very difficult).
+    ✓ [content_quality     ] Structured Data Coverage                88/100  Structured data 88/100 — Org present 15/15, Org complete 6/10, Breadcrumb cov 15/15, Type cov 12/20, Diversity 15/15, Well-formed 15/15, inLanguage 10/10
+    ✓ [content_quality     ] Citable Page Types                      44/100  2/6 high-citation page-type formats present: faq, data
+    ✓ [ai_discoverability  ] Server-side Rendering                   88/100  7/8 pages have server-rendered content (>50 words without JS)
+    ● [ai_discoverability  ] Search Engine Indexing                  60/100  Indexing signals found: Sitemap in robots.txt, No noindex pages, Canonical URLs set (8/8 pages). Missing: Google Search Console verification tag, Bing Webmaster Tools verification (meta tag or BingSiteAuth.xml)
+    ✓ [ai_discoverability  ] Open Graph Tags                        100/100  8/8 pages have OG title + description, 8 with og:image. 8 with optimal title length, 8 with optimal description length.
+    ✓ [ai_discoverability  ] Author & Expertise Signals              60/100  7/7 content pages have author attribution, 0 with author bios
+    ✓ [ai_discoverability  ] Trust Signals                           60/100  Trust signals found: about page, privacy policy, terms page, site name. Missing: contact information (email, phone, or address)
+    ℹ [ai_discoverability  ] Social Proof & Authority                 0/100  0 social media links across 0 platforms
+    ℹ [ai_discoverability  ] Citation Quality                         0/100  0/7 pages with statistics, 0 with source citations, 0 with external links
+    ✓ [ai_discoverability  ] Twitter Card Tags                       80/100  twitter:card on 8/8, title 8 (8 optimal length), desc 8 (8 optimal length), image 8, site 0, creator 0. Issues: twitter:site missing (brand account); twitter:creator missing (content author)
+    ✓ [ai_discoverability  ] Breadcrumb Schema                      100/100  0 pages with HTML breadcrumbs, 7 with BreadcrumbList JSON-LD
+    — [ai_discoverability  ] hreflang Tags                            N/A  Single-language site — hreflang not applicable
+    — [ai_discoverability  ] Brand Authority Score                    N/A  Brand scan not performed (use --brand-scan to enable)
+    ✓ [foundational_seo    ] Title Tags                              85/100  8/8 pages have titles, 4 with optimal length (30-70 chars), 0 duplicate titles
+    ✓ [foundational_seo    ] Meta Descriptions                       81/100  8/8 pages have descriptions, 3 with optimal length (120-160 chars), 0 duplicates
+    ✓ [foundational_seo    ] Meta Keywords                          100/100  8/8 pages have meta keywords, 8 with 3-10 keywords
+    ✓ [foundational_seo    ] Image Alt Text                         100/100  No images found on crawled pages
+    ✓ [foundational_seo    ] Internal Linking                       100/100  Avg 11.0 internal links/page, 0 orphan pages (no inbound links)
+    ✓ [foundational_seo    ] Mobile Viewport                        100/100  8/8 pages have a viewport meta tag
+    ✓ [foundational_seo    ] HTTPS Enforcement                      100/100  All pages served over HTTPS
+    ✓ [foundational_seo    ] Broken Pages                           100/100  All 8 crawled pages returned successful status codes
+    ✓ [foundational_seo    ] Nofollow on Internal Links             100/100  No rel="nofollow" found on internal links
+    ✓ [foundational_seo    ] URL Structure Quality                  100/100  All URLs follow SEO best practices
+    ✓ [foundational_seo    ] Canonical Link Issues                  100/100  8/8 pages have valid canonical links
+    ✓ [foundational_seo    ] Semantic HTML Usage                    100/100  8/8 pages use semantic HTML tags (article, section, main, figure)
+    ▲ [foundational_seo    ] Text-to-HTML Ratio                       0/100  8 page(s) have <10% text-to-HTML ratio — too much markup, too little content
+    ✓ [foundational_seo    ] Page Response Time                     100/100  Avg response: 73ms (median of 3 samples per page). Avg stddev: ±92ms. 0 page(s) exceed 3s threshold.
+    ✓ [foundational_seo    ] Redirect Chains                        100/100  No redirect chains detected (>1 hop)
+    ✓ [foundational_seo    ] Character Encoding & Doctype           100/100  All pages declare charset and DOCTYPE
+    ✓ [foundational_seo    ] HTML Page Size                         100/100  All pages are under 2MB HTML size
+    ✓ [foundational_seo    ] Crawl Depth                            100/100  Max depth: 1, avg: 0.9. 0 page(s) are >3 clicks from homepage.
+    — [foundational_seo    ] Broken External Links                    N/A  No external links checked
+    ✓ [foundational_seo    ] Temporary Redirects                    100/100  No internal redirects detected
+    ✓ [foundational_seo    ] Missing H1 Heading                     100/100  8/8 pages have an H1 heading
+    ✓ [foundational_seo    ] Core Web Vitals                         70/100  Performance score: 70/100 (estimated). Median response: 90ms, median page size: 39KB, median scripts: 32. Issues: Missing Cache-Control headers; Heavy JavaScript: median 32 scripts per page. Use --pagespeed for real Lighthouse scores.
+    ✓ [foundational_seo    ] Mobile Readiness                       100/100  Mobile accessible: yes. Content parity: 558% (2305 vs 413 words). Viewport: present
+    ✓ [foundational_seo    ] Responsive Images                      100/100  No images found on crawled pages
+    ℹ [foundational_seo    ] Format Detection                         0/100  0/8 pages have format-detection meta tag
+    ○ [non_scored          ] security.txt                             0/100  No security.txt found
+    ○ [non_scored          ] tdmrep.json                              0/100  No TDM reservation found
+    ○ [non_scored          ] manifest.json                            0/100  No web manifest found
+    ○ [non_scored          ] humans.txt                               0/100  No humans.txt found
+
+  Overall: 73/100 (Grade: B)
+  AI Infrastructure Readiness: 73/100 (file presence — use `check` for real citation data)
+  E-E-A-T Score: 35/100 (E:5 E:12 A:0 T:18)
+  Citability: 55/100 (0/1 passages highly citable)
+  Mobile Readiness: accessible (558% content parity)
+    - Mobile version has significantly more content than desktop (2305 vs 413 words)
+
+  AI Platform Readiness:
+    Google AI Overviews    83/100 (A)
+    ChatGPT                46/100 (D)
+    Perplexity             44/100 (D)
+    Gemini                 46/100 (D)
+    Bing Copilot           60/100 (C)
+exit=0

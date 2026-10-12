@@ -1,0 +1,32 @@
+{
+  "frozenAt": "2026-09-27",
+  "scoreVersion": "1.4.0-rc10",
+  "catalogVersion": "2e5c87f5",
+  "catalogSize": 15070,
+  "catalogSha256": "e89ea252ed032582cc2b7f829eb2ba2759b6941f3c3d8085c6ab9fccd31a7721",
+  "combosSha256": "19acb60cf6b088f831c4e8a671e8ac7e7a63da6441ca34d56c15afb8bb5d8a82",
+  "planRecipes": [
+    "aggro",
+    "aristocrats",
+    "control",
+    "conversion",
+    "counters",
+    "lifegain",
+    "midrange",
+    "recursion",
+    "spells",
+    "tokens"
+  ],
+  "winFamilies": [
+    "alt_win",
+    "combat_tall",
+    "combat_wide",
+    "combo",
+    "control",
+    "drain",
+    "spells",
+    "tokens"
+  ],
+  "scheduler": "v14-stage3w"
+}
+written C:\Users\QuLeR\MTG-deck-builder\verify-2026-09-19\deck-score\domain-v14.json

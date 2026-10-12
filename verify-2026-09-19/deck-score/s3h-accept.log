@@ -1,0 +1,5 @@
+PROBE_commander=0
+PROBE_brawl=0
+PROBE_standard=0
+REPORT=0
+DONE

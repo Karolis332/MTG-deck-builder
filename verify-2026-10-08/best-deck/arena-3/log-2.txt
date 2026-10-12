@@ -1,0 +1,2 @@
+Neriv, Heart of the Storm: 108.92 [land36 ramp12 draw12 remo10 wipe3 prot6 pen0] (seeds cf 98.46 [land38 ramp14 draw13 remo8 wipe2 prot5 pen3] | previous 108.67 [land36 ramp11 draw12 remo10 wipe3 prot6 pen0]; 1 swaps, 202032 ms)
+Zurgo Stormrender: 108.59 [land36 ramp12 draw12 remo12 wipe2 prot6 pen0] (seeds cf 100.63 [land38 ramp10 draw9 remo7 wipe1 prot5 pen2] | previous 108.33 [land36 ramp12 draw12 remo11 wipe2 prot6 pen0]; 1 swaps, 178234 ms)

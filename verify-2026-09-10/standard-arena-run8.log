@@ -1,0 +1,74 @@
+=== POOL ===
+pool size: 2897 (open 2897, in-deck 0), unresolved: 12
+newest sets seen in legal pool: akr, big, blb, dft, dmr, dsk, ecc, ecl, eoc, eoe, fdn, fin, hbg, inr, j25, lci, m19, m21, mkm, msh, om1, otj, pio, pspl, rix, rvr, soa, sos, spm, sta, tdc, tdm, thb, tla, tmt, vow, woe, xln
+unresolved names: Aang, Swift Savior // Aang, Swift Savior; Aang, at the Crossroads // Aang, at the Crossroads; Birgi, God of Storytelling // Birgi, God of Storytelling; Growing Rites of Itlimoc // Growing Rites of Itlimoc; Kefka, Court Mage // Kefka, Court Mage; Ojer Axonil, Deepest Might // Ojer Axonil, Deepest Might; Scavenger Regent // Scavenger Regent; Spider-Man, Peter Parker // Spider-Man, Peter Parker; Stormshriek Feral // Stormshriek Feral; Stump Stomp // Stump Stomp; Twinmaw Stormbrood // Twinmaw Stormbrood; Whirlwing Stormbrood // Whirlwing Stormbrood
+
+=== TOP 5 ARCHETYPES (decks / WR / coverage / score) ===
+Izzet Spellementals | decks 697 | WR n/a (0-0) | coverage 92.9% | score 0.636
+Izzet | decks 113 | WR 66.5% (445-224) | coverage 93.1% | score 0.619
+Temur Prowess | decks 14 | WR n/a (0-0) | coverage 90.3% | score 0.619
+5c Elementals | decks 67 | WR n/a (0-0) | coverage 88.3% | score 0.605
+Roaming Elementals | decks 87 | WR n/a (0-0) | coverage 88.1% | score 0.604
+
+=== BUILD: Izzet Spellementals ===
+colors RU | avg nonland cmc 3.32 | land target 20 | nonland slots filled 40 (core 39, substitute 0, filler 1) | land slots filled 13 | side slots 15
+MAIN:
+  4 Eddymurk Crab [open]
+  4 Hearth Elemental [open]
+  3 Burst Lightning [open]
+  4 Opt [open]
+  4 Sleight of Hand [open]
+  4 Sunderflock [open]
+  2 Spell Snare [open]
+  2 Spell Pierce [open]
+  3 Winternight Stories [open]
+  2 Get Out [open]
+  4 Prismari Charm [open]
+  3 Traumatic Critique [open]
+  1 Redirect Lightning [open (filler)]
+  4 Spirebluff Canal [open]
+  4 Steam Vents [open]
+  4 Riverpyre Verge [open]
+  1 Multiversal Passage [open]
+  7 Island [basic (unlimited)]
+SIDEBOARD:
+  3 Annul [open]
+  4 Disdainful Stroke [open]
+  2 Hydro-Man, Fluid Felon [open]
+  2 Ral, Crackling Wit [open]
+  2 Soul-Guide Lantern [open]
+  2 Abrade [open]
+SUBSTITUTIONS (missing core card -> owned substitute):
+
+=== RUNNER-UP: Izzet ===
+  4x Spirebluff Canal (inc 100%)
+  4x Steam Vents (inc 100%)
+  3x Burst Lightning (inc 99%)
+  4x Riverpyre Verge (inc 99%)
+  4x Island (inc 94%)
+  4x Opt (inc 92%)
+  4x Sleight of Hand (inc 92%)
+  4x Eddymurk Crab (inc 91%)
+  2x Get Out (inc 90%)
+  4x Prismari Charm (inc 90%)
+  4x Sunderflock (inc 90%)
+  3x Traumatic Critique (inc 90%)
+  4x Hearth Elemental (inc 89%)
+  2x Spell Pierce (inc 88%)
+  1x Stormcarved Coast (inc 84%)
+  2x Impractical Joke (inc 82%)
+  2x Spell Snare (inc 74%)
+  3x Winternight Stories (inc 53%)
+
+=== VALIDATION (deck-validation.ts, standard) ===
+  PASS: no issues
+
+=== OPTIMIZER SCORE (advisory, deck-optimizer.ts) ===
+  legality issues: 0
+  land delta: 0 (built 20 vs target 20)
+  score: 70/100 (ratioScore fixed at 70 — full quota-ratio engine out of scope, PLACEHOLDER, see report caveats)
+
+=== BUY LIST (<=15, missing core cards vs Izzet Spellementals) ===
+  none — every core card is already in the build
+
+proposal written: C:\Users\QuLeR\MTG-deck-builder\decks\paper\proposals\standard-izzet-spellementals-arena.txt

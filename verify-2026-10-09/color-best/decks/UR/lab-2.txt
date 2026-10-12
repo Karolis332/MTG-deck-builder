@@ -1,0 +1,23 @@
+BASE obj 72.81 DS 65.0 pen 2 {"land":37,"ramp":10,"draw":12,"removal":9,"board_wipe":4,"protection":7} mana=97 curve=90 interaction=100 advantage=70 win=56 synergy=91 meta=50 structure=100
+  -2.02  Cloud Key => Ponder   DS 0.0 pen 3 mana=97 curve=91 interaction=100 advantage=75 win=56 synergy=93 meta=50 structure=100
+  -2.07  Emry, Lurker of the Loch => Opt   DS 0.0 pen 3 mana=97 curve=91 interaction=100 advantage=75 win=56 synergy=93 meta=50 structure=100
+  -0.04  Ajani Unrelenting => Slickshot Show-Off   DS 0.0 pen 2 mana=97 curve=90 interaction=100 advantage=70 win=56 synergy=91 meta=50 structure=100
+  -0.01  Titan Forge => Filigree Attendant   DS 0.0 pen 2 mana=97 curve=90 interaction=100 advantage=70 win=56 synergy=95 meta=50 structure=100
+   0.01  Ajani Unrelenting => Experimental Aviator   DS 0.0 pen 2 mana=97 curve=90 interaction=100 advantage=70 win=56 synergy=91 meta=50 structure=100
+C:\Users\QuLeR\MTG-deck-builder\verify-2026-10-09\tazri\swap-lab.ts:27
+  if (i < 0) throw new Error(`not in list: ${out}`);
+                   ^
+
+Error: not in list: Ajani Unrelenting
+    at apply (C:\Users\QuLeR\MTG-deck-builder\verify-2026-10-09\tazri\swap-lab.ts:27:20)
+    at fs (C:\Users\QuLeR\MTG-deck-builder\verify-2026-10-09\tazri\swap-lab.ts:36:9)
+    at Object.<anonymous> (C:\Users\QuLeR\MTG-deck-builder\verify-2026-10-09\tazri\swap-lab.ts:39:148)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object.transformer (C:\Users\QuLeR\MTG-deck-builder\node_modules\tsx\dist\register-D46fvsV_.cjs:3:1104)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at cjsLoader (node:internal/modules/esm/translators:309:5)
+
+Node.js v22.22.0

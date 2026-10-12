@@ -1,0 +1,36 @@
+{
+  "native": {
+    "transitions": 1,
+    "active": false,
+    "path": "/methodology",
+    "rootClasses": "fx-route"
+  },
+  "fallback": {
+    "path": "/builder",
+    "transform": "none",
+    "classes": "fx-route"
+  },
+  "focus": "solid",
+  "mobileMenu": "keyboard close passed",
+  "offscreen": "paused",
+  "hidden": "paused",
+  "reduced": {
+    "canvas": 0,
+    "moving": 0,
+    "gradient": "radial-gradient(at 100% 94%, color(srgb 0.882353 0.501961 0.258824 / 0.1), rgba(0, 0, 0, 0) 55%)"
+  },
+  "restored": "one canvas",
+  "errors": [],
+  "1280-8": {
+    "particles": 60,
+    "dpr": 2.000440237728373
+  },
+  "1280-4": {
+    "particles": 30,
+    "dpr": 2.000440237728373
+  },
+  "390-8": {
+    "particles": 30,
+    "dpr": 2.00100857286939
+  }
+}

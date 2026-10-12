@@ -1,0 +1,2 @@
+total 1372 passed 1371 failed 1 files 75
+FAIL deck-score-v14-stage3e.test.ts :: stage 3e — latency and version scoreDeck stays under 40 ms on the cEDH fixture (population p50 gate is 20 ms) :: AssertionError: expected 108.51189999999988 to be less than 100

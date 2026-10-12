@@ -1,0 +1,40 @@
+| constant | frozen | measured | n | verdict |
+|---|---:|---:|---:|---|
+| Q_SLOT_SATURATION.commander (p80, 182 families) | 0.434 | 0.434 | 1460 | MATCH |
+| Q_SLOT_SATURATION.brawl (p80, 179 families) | 0.406 | 0.404 | 797 | MISMATCH |
+| Q_SLOT_SATURATION.standard (p80, 42 families) | 0.483 | 0.483 | 360 | MATCH |
+| (retired, diagnostics only) | Q_BASELINE_JOINT_*, Q_BASELINE_CLOSING*, Q_SATURATION* | - | - | not graded |
+| band commander/control/engine | 7/17 | 6/17 | 370 | MISMATCH |
+| band commander/aristocrats/payoff | 4/16 | 4/15 | 128 | MISMATCH |
+| band commander/spells/payoff | 2/12 | 1/11 | 180 | MISMATCH |
+| band commander/tokens/payoff | 6/20 | 6/19 | 85 | MISMATCH |
+| band brawl/spells/payoff | 1/11 | 1/10 | 165 | MISMATCH |
+| band brawl/spells/closer | 4/18 | 4/19 | 165 | MISMATCH |
+| band brawl/spells/spells | 20/34 | 19/34 | 165 | MISMATCH |
+| cohort list hashes | 4523 | 4523 | 4523 | MATCH |
+| recipe/catalogue domain | 21fa0be02940 | 7b6ab426dc6f | 14924 | MISMATCH |
+| reference commander | 0adcd7361618 | 0adcd7361618 | 1426 | MISMATCH |
+| reference brawl | 4cdd4828f8e9 | 4cdd4828f8e9 | 782 | MISMATCH |
+| reference standard | 36ce6a9e1ab8 | 36ce6a9e1ab8 | 244 | MISMATCH |
+
+bands verify: 19 MISMATCH(es) at this catalogue (CATALOG_SIZE 14924):
+  - Q_SLOT_SATURATION.brawl (p80, 179 families): frozen 0.406 vs measured 0.404
+  - band commander/control/engine: frozen 7/17 vs measured 6.0/17.0 -> 6/17 (n=370)
+  - band commander/aristocrats/payoff: frozen 4/16 vs measured 4.0/15.0 -> 4/15 (n=128)
+  - band commander/spells/payoff: frozen 2/12 vs measured 1.0/11.0 -> 1/11 (n=180)
+  - band commander/tokens/payoff: frozen 6/20 vs measured 6.0/19.0 -> 6/19 (n=85)
+  - band brawl/spells/payoff: frozen 1/11 vs measured 1.0/10.0 -> 1/10 (n=165)
+  - band brawl/spells/closer: frozen 4/18 vs measured 4.0/19.0 -> 4/19 (n=165)
+  - band brawl/spells/spells: frozen 20/34 vs measured 19.0/34.0 -> 19/34 (n=165)
+  - domain catalogVersion "fdcecb38" vs "21e71c5f"
+  - domain catalogSha256 "21fa0be02940c884620b08c vs "7b6ab426dc6f2844b76416f
+  - reference commander: catalogueHash fdcecb38 vs 21e71c5f
+  - reference commander: domainHash 4b45284cb758ee71 vs 218bb3c0ca767134
+  - reference commander: tiedIntervals 168 vs 167
+  - reference commander: knot 4 20.32/4 vs 20.32/5
+  - reference brawl: catalogueHash fdcecb38 vs 21e71c5f
+  - reference brawl: domainHash 4b45284cb758ee71 vs 218bb3c0ca767134
+  - reference brawl: knots 407 vs 405
+  - reference standard: catalogueHash fdcecb38 vs 21e71c5f
+  - reference standard: domainHash 4b45284cb758ee71 vs 218bb3c0ca767134
+exit 1

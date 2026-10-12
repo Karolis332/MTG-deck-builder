@@ -1,0 +1,217 @@
+
+[1m[46m RUN [49m[22m [36mv4.0.18 [39m[90mC:/Users/QuLeR/MTG-deck-builder[39m
+
+ [31m❯[39m src/lib/__tests__/deck-score-v14-stage3g.test.ts [2m([22m[2m12 tests[22m[2m | [22m[31m1 failed[39m[2m)[22m[32m 52[2mms[22m[39m
+     [32m✓[39m a `rank` closure chooses the candidate that MAXIMISES the ranked number[32m 2[2mms[22m[39m
+     [32m✓[39m the reported access IS the ranked value, never a second recomputation[32m 0[2mms[22m[39m
+     [32m✓[39m without a `rank` the single-pool fallback still returns a real access[32m 1[2mms[22m[39m
+     [32m✓[39m monotone in DILUTION: a larger library never raises the ranked access[32m 1[2mms[22m[39m
+     [32m✓[39m monotone in OPTIONS: adding a source never lowers the maximum[32m 0[2mms[22m[39m
+     [32m✓[39m zero-output members neither size nor enter the line[32m 0[2mms[22m[39m
+     [32m✓[39m a HIGH-cost blank alone can RAISE the land fit of a flooded list[32m 12[2mms[22m[39m
+     [32m✓[39m the LOW-cost hypothesis is the one that closes it, and `worst` must see both[32m 4[2mms[22m[39m
+     [32m✓[39m a blank slot is never a cast: it earns zero colour adequacy[32m 1[2mms[22m[39m
+     [32m✓[39m a package whose upkeep buys nothing is skipped, not paid[32m 16[2mms[22m[39m
+     [32m✓[39m no turn overdraws its budget[32m 5[2mms[22m[39m
+[31m     [31m×[31m pins the scheduler and score versions for this evaluator[39m[32m 8[2mms[22m[39m
+ [31m❯[39m src/lib/__tests__/deck-score-v14-stage1d.test.ts [2m([22m[2m27 tests[22m[2m | [22m[31m1 failed[39m[2m)[22m[33m 3285[2mms[22m[39m
+     [32m✓[39m a printed ritual is recognised as one, and a rock is not[32m 2[2mms[22m[39m
+     [32m✓[39m a deck of nothing but rituals adds NO persistent mana[32m 1[2mms[22m[39m
+     [32m✓[39m the ritual is credited once, in the burst budget, and never as a per-turn carry[32m 1[2mms[22m[39m
+     [32m✓[39m a persistent mana source IS paid for, and produces from the following turn[32m 1[2mms[22m[39m
+     [32m✓[39m a 4-drop commander on T4 leaves 0 spell mana at 4 lands[32m 4[2mms[22m[39m
+     [32m✓[39m summoning sickness: the body deployed on T4 deals nothing until T5[32m 1[2mms[22m[39m
+     [32m✓[39m a deployment is debited once: the cumulative cost stops growing[32m 1[2mms[22m[39m
+     [32m✓[39m a package that would delay the finish is skipped, and spends nothing[32m 13[2mms[22m[39m
+     [32m✓[39m a package worth paying is paid ONCE, out of the same shared budget[32m 3[2mms[22m[39m
+     [32m✓[39m a deck with no cantrips reads identically with and without replacement[32m 1[2mms[22m[39m
+     [32m✓[39m replacement sees deeper, but never more copies than the deck holds[32m 1[2mms[22m[39m
+     [32m✓[39m no borrowing: a turn never casts more than its own mana pays for[32m 1[2mms[22m[39m
+     [32m✓[39m the chain is bounded by the library, not by an arbitrary factor of 2[32m 0[2mms[22m[39m
+     [32m✓[39m 120 damage aimed at one opponent is NOT a finish[32m 1[2mms[22m[39m
+     [32m✓[39m three 40-power instances ARE a finish[32m 0[2mms[22m[39m
+     [32m✓[39m an each-opponent trigger counts three times[32m 0[2mms[22m[39m
+     [32m✓[39m overkill on one opponent cannot pay another[32m 0[2mms[22m[39m
+     [32m✓[39m a wide board of small bodies splits and does finish[32m 0[2mms[22m[39m
+     [32m✓[39m the schedule refuses a single huge attacker as a whole-table finish[32m 1[2mms[22m[39m
+     [32m✓[39m horizonFor dispatches by profile[32m 0[2mms[22m[39m
+     [32m✓[39m the T1-T12 prefix is identical under H12 and H20[32m 2[2mms[22m[39m
+     [32m✓[39m a T15 close is worth u = 0.3299 at saturated access[32m 0[2mms[22m[39m
+     [32m✓[39m a route that never closes earns exactly zero, at either horizon[32m 1[2mms[22m[39m
+     [32m✓[39m a stabilising deck with no closing output builds no control line[32m 8[2mms[22m[39m
+     [33m[2m✓[22m[39m prints a paid deployment ledger and still closes T6 (OUT HIGH, band 70-85) [33m 427[2mms[22m[39m
+     [33m[2m✓[22m[39m W and the composed total are identical at H12 and H20 on the cEDH cohort [33m 2803[2mms[22m[39m
+[31m     [31m×[31m domain-v14.json records the same families and catalogue this tree scores with[39m[32m 10[2mms[22m[39m
+ [31m❯[39m src/lib/__tests__/deck-score-v14-stage3e.test.ts [2m([22m[2m11 tests[22m[2m | [22m[31m1 failed[39m[2m)[22m[33m 3310[2mms[22m[39m
+     [32m✓[39m still refuses to finance a spell below 75 % of its cost[32m 2[2mms[22m[39m
+     [32m✓[39m a one-mana turn still cannot part-pay a four-drop (the stage-1d invariant)[32m 4[2mms[22m[39m
+     [32m✓[39m standard:1446106 never gains on a reserved unknown 61st slot (was +17.52)[32m 280[2mms[22m[39m
+     [33m[2m✓[22m[39m standard:1474208 gains on NO nonland blank (was W 65.8 -> 84.2 on one) [33m 401[2mms[22m[39m
+     [33m[2m✓[22m[39m no stride list gains on its 61st reserved slot (60 Standard lists) [33m 1612[2mms[22m[39m
+     [32m✓[39m dilution never raises the ceiling on the 3-source case (N 40..200)[32m 93[2mms[22m[39m
+     [32m✓[39m an extra option never hurts (seeded source sets)[32m 164[2mms[22m[39m
+     [33m[2m✓[22m[39m less mana never helps (seeded source sets, mana scaled 0.50 -> 1.00) [33m 454[2mms[22m[39m
+     [32m✓[39m a turn leaves nothing idle while an affordable want is still open[32m 1[2mms[22m[39m
+     [32m✓[39m scoreDeck stays under 40 ms on the cEDH fixture (population p50 gate is 20 ms)[32m 288[2mms[22m[39m
+[31m     [31m×[31m bumps SCORE_VERSION and the scheduler version for the evaluator change[39m[32m 8[2mms[22m[39m
+ [31m❯[39m src/lib/__tests__/deck-score-v14-stage3b.test.ts [2m([22m[2m18 tests[22m[2m | [22m[31m6 failed[39m[2m)[22m[33m 34790[2mms[22m[39m
+     [32m✓[39m is a nonland spell at the given MV that earns nothing[32m 2[2mms[22m[39m
+     [32m✓[39m is never a producer, consumer or route member[32m 10[2mms[22m[39m
+     [32m✓[39m producer utilisation never rises when a copy leaves the deck[32m 30[2mms[22m[39m
+     [32m✓[39m mana: the blank raises the land target and scores 0 colour adequacy[32m 8[2mms[22m[39m
+     [32m✓[39m curve: the blank lands in the bin that MAXIMISES the histogram distance[32m 2[2mms[22m[39m
+     [32m✓[39m curve: a blank is never counted as a turn-2 play[32m 1[2mms[22m[39m
+     [33m[2m✓[22m[39m commander: 200 eligible lists, one random copy blanked [33m 22381[2mms[22m[39m
+[31m     [31m×[31m brawl: 200 eligible lists, one random copy blanked[39m[33m 11943[2mms[22m[39m
+[31m     [31m×[31m commander 381371853 (k=1) after replace-offplan-unknown[39m[32m 91[2mms[22m[39m
+     [32m✓[39m commander 381364921 (k=1) after replace-offplan-unknown[32m 75[2mms[22m[39m
+     [32m✓[39m commander 381152421 (k=1) after replace-offplan-unknown[32m 67[2mms[22m[39m
+[31m     [31m×[31m commander 370734291 (k=10) after replace-offplan-unknown[39m[32m 12[2mms[22m[39m
+[31m     [31m×[31m brawl 348643075 (k=1) after replace-offplan-unknown[39m[32m 54[2mms[22m[39m
+     [32m✓[39m brawl 348707178 (k=1) after replace-offplan-unknown[32m 61[2mms[22m[39m
+[31m     [31m×[31m brawl 356465177 (k=1) after replace-offplan-unknown[39m[32m 14[2mms[22m[39m
+     [32m✓[39m draws the dated Standard W/L cohort the reference was frozen on[32m 3[2mms[22m[39m
+     [32m✓[39m scores every drawn list and finds off-plan typed copies to probe[32m 33[2mms[22m[39m
+[31m   [31m×[31m SCORE_VERSION is the stage-3b evaluator[39m[32m 2[2mms[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 9 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m src/lib/__tests__/deck-score-v14-stage1d.test.ts[2m > [22m§10.8 item 6 — the W domain is frozen on this scheduler[2m > [22mdomain-v14.json records the same families and catalogue this tree scores with
+[31m[1mAssertionError[22m: expected 'v14-stage3n' to be 'v14-stage3d' // Object.is equality[39m
+
+Expected: [32m"v14-stage3[7md[27m"[39m
+Received: [31m"v14-stage3[7mn[27m"[39m
+
+[36m [2m❯[22m src/lib/__tests__/deck-score-v14-stage1d.test.ts:[2m438:30[22m[39m
+    [90m436| [39m    expect(frozen.catalogSha256).toBe('21fa0be02940c884620b08cfd3cbf95…
+    [90m437| [39m    expect(frozen.combosSha256).toBe('19acb60cf6b088f831c4e8a671e8ac7e…
+    [90m438| [39m    [34mexpect[39m(frozen[33m.[39mscheduler)[33m.[39m[34mtoBe[39m([32m'v14-stage3d'[39m)[33m;[39m
+    [90m   | [39m                             [31m^[39m
+    [90m439| [39m  })[33m;[39m
+    [90m440| [39m})[33m;[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/9]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m src/lib/__tests__/deck-score-v14-stage3b.test.ts[2m > [22m10.4 - blanking a card can lower a score, never raise one[2m > [22mbrawl: 200 eligible lists, one random copy blanked
+[31m[1mAssertionError[22m: expected [] to deeply equal [ '351214491' ][39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- [[39m
+[32m-   "351214491",[39m
+[32m- ][39m
+[31m+ [][39m
+
+[36m [2m❯[22m src/lib/__tests__/deck-score-v14-stage3b.test.ts:[2m196:54[22m[39m
+    [90m194| [39m      // stage-3 mechanisms (mean/shape estimators, clamped demands) a…
+    [90m195| [39m      // 8 violating lists at worst +9.20 M / +11.4 W became 4 at +9.1…
+    [90m196| [39m      expect(violations.map((v) => v.split('(')[0])).toEqual(KNOWN_W_S…
+    [90m   | [39m                                                     [31m^[39m
+    [90m197| [39m      [34mexpect[39m(worst)[33m.[39m[34mtoBeLessThanOrEqual[39m([34m9.13[39m)[33m;[39m
+    [90m198| [39m    })[33m;[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/9]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m src/lib/__tests__/deck-score-v14-stage3b.test.ts[2m > [22m10.4 - the stage-3 residue lists, before -> after[2m > [22mcommander 381371853 (k=1) after replace-offplan-unknown
+[31m[1mAssertionError[22m: expected 56.800000000000004 to be close to 55.2, received difference is 1.6000000000000014, but expected 0.005[39m
+[36m [2m❯[22m src/lib/__tests__/deck-score-v14-stage3b.test.ts:[2m224:36[22m[39m
+    [90m222| [39m      [34mexpect[39m(deck)[33m.[39m[34mtoBeDefined[39m()[33m;[39m
+    [90m223| [39m      [35mconst[39m before [33m=[39m [34mread[39m(profile[33m,[39m deck[33m![39m[33m,[39m deck[33m![39m[33m.[39mmain)[33m![39m[33m;[39m
+    [90m224| [39m      [34mexpect[39m(before[33m.[39mabsoluteTotal)[33m.[39m[34mtoBeCloseTo[39m(tAbsBefore[33m,[39m [34m2[39m)[33m;[39m
+    [90m   | [39m                                   [31m^[39m
+    [90m225| [39m      [35mconst[39m offPlan [33m=[39m deck[33m![39m[33m.[39mmain
+    [90m226| [39m        .filter((e) => isOffPlanTyped(deriveCardFeature(e.card), profi…
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/9]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m src/lib/__tests__/deck-score-v14-stage3b.test.ts[2m > [22m10.4 - the stage-3 residue lists, before -> after[2m > [22mcommander 370734291 (k=10) after replace-offplan-unknown
+[31m[1mAssertionError[22m: expected 20.64 to be close to 20.16, received difference is 0.4800000000000004, but expected 0.005[39m
+[36m [2m❯[22m src/lib/__tests__/deck-score-v14-stage3b.test.ts:[2m224:36[22m[39m
+    [90m222| [39m      [34mexpect[39m(deck)[33m.[39m[34mtoBeDefined[39m()[33m;[39m
+    [90m223| [39m      [35mconst[39m before [33m=[39m [34mread[39m(profile[33m,[39m deck[33m![39m[33m,[39m deck[33m![39m[33m.[39mmain)[33m![39m[33m;[39m
+    [90m224| [39m      [34mexpect[39m(before[33m.[39mabsoluteTotal)[33m.[39m[34mtoBeCloseTo[39m(tAbsBefore[33m,[39m [34m2[39m)[33m;[39m
+    [90m   | [39m                                   [31m^[39m
+    [90m225| [39m      [35mconst[39m offPlan [33m=[39m deck[33m![39m[33m.[39mmain
+    [90m226| [39m        .filter((e) => isOffPlanTyped(deriveCardFeature(e.card), profi…
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/9]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m src/lib/__tests__/deck-score-v14-stage3b.test.ts[2m > [22m10.4 - the stage-3 residue lists, before -> after[2m > [22mbrawl 348643075 (k=1) after replace-offplan-unknown
+[31m[1mAssertionError[22m: expected 88.19278350515464 to be close to 79.04, received difference is 9.15278350515463, but expected 0.005[39m
+[36m [2m❯[22m src/lib/__tests__/deck-score-v14-stage3b.test.ts:[2m224:36[22m[39m
+    [90m222| [39m      [34mexpect[39m(deck)[33m.[39m[34mtoBeDefined[39m()[33m;[39m
+    [90m223| [39m      [35mconst[39m before [33m=[39m [34mread[39m(profile[33m,[39m deck[33m![39m[33m,[39m deck[33m![39m[33m.[39mmain)[33m![39m[33m;[39m
+    [90m224| [39m      [34mexpect[39m(before[33m.[39mabsoluteTotal)[33m.[39m[34mtoBeCloseTo[39m(tAbsBefore[33m,[39m [34m2[39m)[33m;[39m
+    [90m   | [39m                                   [31m^[39m
+    [90m225| [39m      [35mconst[39m offPlan [33m=[39m deck[33m![39m[33m.[39mmain
+    [90m226| [39m        .filter((e) => isOffPlanTyped(deriveCardFeature(e.card), profi…
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/9]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m src/lib/__tests__/deck-score-v14-stage3b.test.ts[2m > [22m10.4 - the stage-3 residue lists, before -> after[2m > [22mbrawl 356465177 (k=1) after replace-offplan-unknown
+[31m[1mAssertionError[22m: expected 67.24639175257732 to be close to 65.37, received difference is 1.8763917525773195, but expected 0.005[39m
+[36m [2m❯[22m src/lib/__tests__/deck-score-v14-stage3b.test.ts:[2m224:36[22m[39m
+    [90m222| [39m      [34mexpect[39m(deck)[33m.[39m[34mtoBeDefined[39m()[33m;[39m
+    [90m223| [39m      [35mconst[39m before [33m=[39m [34mread[39m(profile[33m,[39m deck[33m![39m[33m,[39m deck[33m![39m[33m.[39mmain)[33m![39m[33m;[39m
+    [90m224| [39m      [34mexpect[39m(before[33m.[39mabsoluteTotal)[33m.[39m[34mtoBeCloseTo[39m(tAbsBefore[33m,[39m [34m2[39m)[33m;[39m
+    [90m   | [39m                                   [31m^[39m
+    [90m225| [39m      [35mconst[39m offPlan [33m=[39m deck[33m![39m[33m.[39mmain
+    [90m226| [39m        .filter((e) => isOffPlanTyped(deriveCardFeature(e.card), profi…
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/9]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m src/lib/__tests__/deck-score-v14-stage3b.test.ts[2m > [22mSCORE_VERSION is the stage-3b evaluator
+[31m[1mAssertionError[22m: expected '1.4.0-rc8' to be '1.4.0-rc4' // Object.is equality[39m
+
+Expected: [32m"1.4.0-rc[7m4[27m"[39m
+Received: [31m"1.4.0-rc[7m8[27m"[39m
+
+[36m [2m❯[22m src/lib/__tests__/deck-score-v14-stage3b.test.ts:[2m265:25[22m[39m
+    [90m263| [39m
+    [90m264| [39m[34mit[39m([32m'SCORE_VERSION is the stage-3b evaluator'[39m[33m,[39m () [33m=>[39m {
+    [90m265| [39m  [34mexpect[39m([33mSCORE_VERSION[39m)[33m.[39m[34mtoBe[39m([32m'1.4.0-rc4'[39m)[33m;[39m
+    [90m   | [39m                        [31m^[39m
+    [90m266| [39m})[33m;[39m
+    [90m267| [39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/9]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m src/lib/__tests__/deck-score-v14-stage3e.test.ts[2m > [22mstage 3e — latency and version[2m > [22mbumps SCORE_VERSION and the scheduler version for the evaluator change
+[31m[1mAssertionError[22m: expected '1.4.0-rc8' to be '1.4.0-rc5' // Object.is equality[39m
+
+Expected: [32m"1.4.0-rc[7m5[27m"[39m
+Received: [31m"1.4.0-rc[7m8[27m"[39m
+
+[36m [2m❯[22m src/lib/__tests__/deck-score-v14-stage3e.test.ts:[2m208:27[22m[39m
+    [90m206| [39m
+    [90m207| [39m  it('bumps SCORE_VERSION and the scheduler version for the evaluator …
+    [90m208| [39m    [34mexpect[39m([33mSCORE_VERSION[39m)[33m.[39m[34mtoBe[39m([32m'1.4.0-rc5'[39m)[33m;[39m
+    [90m   | [39m                          [31m^[39m
+    [90m209| [39m    [34mexpect[39m([33mW_SCHEDULER_VERSION[39m)[33m.[39m[34mtoBe[39m([32m'v14-stage3e'[39m)[33m;[39m
+    [90m210| [39m  })[33m;[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/9]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m src/lib/__tests__/deck-score-v14-stage3g.test.ts[2m > [22mstage 3h — ledger invariants and version pins[2m > [22mpins the scheduler and score versions for this evaluator
+[31m[1mAssertionError[22m: expected '1.4.0-rc8' to be '1.4.0-rc6' // Object.is equality[39m
+
+Expected: [32m"1.4.0-rc[7m6[27m"[39m
+Received: [31m"1.4.0-rc[7m8[27m"[39m
+
+[36m [2m❯[22m src/lib/__tests__/deck-score-v14-stage3g.test.ts:[2m168:27[22m[39m
+    [90m166| [39m
+    [90m167| [39m  it('pins the scheduler and score versions for this evaluator', () =>…
+    [90m168| [39m    [34mexpect[39m([33mSCORE_VERSION[39m)[33m.[39m[34mtoBe[39m([32m'1.4.0-rc6'[39m)[33m;[39m
+    [90m   | [39m                          [31m^[39m
+    [90m169| [39m    [34mexpect[39m([33mW_SCHEDULER_VERSION[39m)[33m.[39m[34mtoBe[39m([32m'v14-stage3h'[39m)[33m;[39m
+    [90m170| [39m  })[33m;[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/9]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m4 failed[39m[22m[90m (4)[39m
+[2m      Tests [22m [1m[31m9 failed[39m[22m[2m | [22m[1m[32m59 passed[39m[22m[90m (68)[39m
+[2m   Start at [22m 14:27:29
+[2m   Duration [22m 37.78s[2m (transform 2.77s, setup 0ms, import 6.99s, tests 41.44s, environment 1ms)[22m
+

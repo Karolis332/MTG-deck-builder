@@ -1,0 +1,40 @@
+# Geo-scraper health check every 5 minutes (PRIORITY)
+# MOVED 2026-07-28 to 76.13.156.187: */5 * * * * /opt/geo-scraper-monitor.sh
+
+# CF API resource scheduling every hour
+0 * * * * /opt/cf-resource-scheduler.sh
+
+# CF API pipeline: only after work hours (16-05 UTC = 18-07 Lithuanian)
+0 22 * * * /opt/grimoire-cf-api/run-pipeline.sh
+
+# Scraper + CF API watchdog every 5 minutes
+*/5 * * * * /opt/grimoire-scraper-watchdog.sh
+# MOVED 2026-07-28 to 76.13.156.187: 15 */6 * * * /opt/geo-scraper/scripts/geo-monitor-cron.sh
+*/2 * * * * /opt/gotenberg-watchdog.sh
+0 9 * * * /opt/grimoire-routines/venv/bin/python /opt/grimoire-routines/check_daily_health.py >> /var/log/grimoire-routines.log 2>&1
+# DISABLED 2026-07-28 (reads local geo-scraper.db which is now frozen; geo-scraper moved to 76.13.156.187): 0 8 * * * /opt/grimoire-routines/venv/bin/python /opt/grimoire-routines/check_geo_scraper_jobs.py >> /var/log/grimoire-routines.log 2>&1
+0 10 * * 0 /opt/grimoire-routines/venv/bin/python /opt/grimoire-routines/check_weekly_model.py >> /var/log/grimoire-routines.log 2>&1
+0 8 * * 1 /opt/grimoire-routines/venv/bin/python /opt/grimoire-routines/check_cve_triage.py >> /var/log/grimoire-routines.log 2>&1
+0 2 * * 0 /opt/grimoire-pg-backup.sh
+# Weekly dockerd restart — prevents 19d+ container churn CPU bursts
+0 3 * * 0 /usr/bin/systemctl restart docker >> /var/log/docker-weekly-restart.log 2>&1
+# F1 2026-09-27: respawn the pipeline daemon right after the docker restart kills it
+# (exit 137); run-pipeline.sh already no-ops if a daemon is still up, so this cannot
+# double-spawn against the 22:00 cron. See F1, verify-2026-09-27/cf-model/review.md.
+10 3 * * 0 /opt/grimoire-cf-api/run-pipeline.sh
+# Memory pressure + leak detection every 6h (Claude-powered)
+5 */6 * * * /opt/grimoire-routines/venv/bin/python /opt/grimoire-routines/check_memory_pressure.py >> /var/log/grimoire-routines.log 2>&1
+*/10 * * * * /opt/grimoire-routines/venv/bin/python /opt/grimoire-routines/check_cf_health.py >> /var/log/grimoire-routines.log 2>&1
+
+# CF API targeted backfill: off-hours only (16-05 UTC), clear of 22:00 nightly pipeline
+0 17 * * * /opt/grimoire-cf-api/run-targeted-backfill.sh --commanders 100
+0 1 * * * /opt/grimoire-cf-api/run-targeted-backfill.sh --commanders 100
+# F2 2026-09-27: monthly full eval SKIPped every month (guard saw the sleeping daemon's
+#   container and always bailed) and is infeasible anyway (~17h vs a 2h timeout, see F3).
+#   Replaced by the weekly phase-guarded regression eval below.
+# 0 4 1 * * /opt/grimoire-cf-api/run-full-eval.sh
+0 3 * * 3 /opt/grimoire-cf-api/ops/run-regression-eval.sh
+*/10 * * * * /opt/mbf-health/check.sh
+# Weekly commander stats refresh (Mon 03:00 UTC, clear of 22:00 pipeline + Sun 02:00 backups)
+0 3 * * 1 /opt/grimoire-cf-api/refresh-ccs.sh
+*/5 * * * * curl -sf -m 10 http://localhost/build-api/health > /dev/null || /usr/bin/pm2 restart build-api # build-api-watchdog

@@ -1,0 +1,54 @@
+screened 450/450, passed 53, last card read: Starbreach Whale
+- Ajani Resolute — planeswalker / loyalty engine — "Whenever you gain life, put a loyalty counter on Ajani. | 0: You gain 1 life. | −4: Create a 2/2 white Cat Soldier creature token" — beats: Quintorius, History Chaser (2-mana walker; the 0 feeds Way of the Mentor every turn)
+- Nahiri, Storm of Stone — planeswalker — "−X: Nahiri deals X damage to target tapped creature." — beats: Saheeli, Sublime Artificer (low)
+- Kaya, Bane of the Dead — planeswalker — "−3: Exile target creature." — beats: Quintorius, History Chaser (low, 6 mana)
+- Loyal Tutor — tutor — "Search your library for a planeswalker card, reveal it, then shuffle and put that card on top." — fills role: only Enlightened Tutor today; 1 mana, Jace +1 draws it
+- Nissa, Leyline Tamer — big creature — "Landfall — Whenever a land you control enters, draw a card. Then if this is the first time this ability has resolved this turn, reveal cards from the top of your library until you reveal a creature card. Put that card onto the battlefield" — beats: Mirkwood Bats
+- Kang the Conqueror — big creature — "Power-up — {5}{U}{U}{U}: Put a +1/+1 counter on Kang. Take an extra turn after this one. ... Reduce the cost by his mana cost if he entered this turn." — beats: Professional Face-Breaker (off Jace −3 the extra turn costs {3}{U} that turn)
+- Wiccan, Rising Magician — creature / walker reset — "Whenever you cast a noncreature spell, exile another target nonland, nontoken permanent. Return that card to the battlefield under its owner's control at the beginning of the next end step." — beats: Mirkwood Bats (low; flickers a spent walker or a Way for its empower)
+- Antiquities on the Loose — token maker — "Create two 2/2 red and white Spirit creature tokens. ... Flashback {4}{W}{W}" — beats: Way of the Healer
+- Clachan Festival — token maker — "When this enchantment enters, create two 1/1 green and white Kithkin creature tokens. | {4}{W}: Create a 1/1 green and white Kithkin creature token." — beats: Way of the Warlord
+- Avengers: Under Siege — tokens + sweeper + ramp — "I — Create two 2/1 black Villain creature tokens with menace. | II — This Saga deals 2 damage to each non-Villain creature and each opponent. | III — Create a Treasure token for each Villain you control." — beats: Way of the Healer
+- Teeming Dragonstorm — token maker — "When this enchantment enters, create two 2/2 white Soldier creature tokens." — beats: Way of the Healer (low)
+- Retrieve the Esper — token maker — "Create a 3/3 blue Robot Warrior artifact creature token. ... Flashback {5}{U}" — beats: Plan for All Outcomes (low)
+- Drag the Canal — token maker — "Create a 2/2 white and blue Detective creature token. If a creature died this turn, you gain 2 life, surveil 2, then investigate." — beats: Plan for All Outcomes
+- Hunt for Specimens — token maker — "Create a 1/1 black and green Pest creature token with "When this token dies, you gain 1 life." | Learn." — beats: Plan for All Outcomes (low)
+- Fractal Anomaly — token maker — "Create a 0/0 green and blue Fractal creature token and put X +1/+1 counters on it, where X is the number of cards you've drawn this turn." — beats: Plan for All Outcomes (low; after Jace +1 it is 2/2+)
+- Mouser Foundry — token maker — "When this artifact enters or leaves the battlefield, create a 1/1 colorless Robot artifact creature token." — beats: Plan for All Outcomes (low)
+- Salt Road Skirmish — removal + fodder — "Destroy target creature. Create two 1/1 red Warrior creature tokens. They gain haste until end of turn. Sacrifice them at the beginning of the next end step." — beats: Feed the Swarm (exile a Warrior with −3 before end step)
+- Harried Dronesmith — token engine (creature card, dilutes −3) — "At the beginning of combat on your turn, create a 1/1 colorless Thopter artifact creature token with flying. It gains haste until end of turn. Sacrifice it at the beginning of your next end step." — beats: Professional Face-Breaker
+- Foggy Swamp Spirit Keeper — token engine (creature card, dilutes −3) — "Whenever you draw your second card each turn, create a 1/1 colorless Spirit creature token" — beats: Mirkwood Bats (Jace +1 triggers it every turn)
+- Vraska, Soul of Stone — token + ramp engine (creature card, dilutes −3) — "Whenever you cast a noncreature spell, create a 1/1 colorless Sculpture Treasure artifact creature token with "{T}, Sacrifice this token: Add one mana of any color."" — beats: Pitiless Plunderer
+- Death to Our Enemies — ramp — "Whenever you cast a noncreature spell, create a tapped Treasure token and put a plan counter on this enchantment. | When the fourth plan counter is put on this enchantment, sacrifice it. When you do, it deals 7 damage divided as you choose among one or two targets." — beats: Azorius Signet
+- Dependable Quinjet — fixing — "{T}: Add one mana of any color." — beats: Azorius Signet (low; 3-mana rock, not a creature card)
+- Mentor's Guidance — draw — "When you cast this spell, copy it if you control a planeswalker, Cleric, Druid, Shaman, Warlock, or Wizard. | Scry 1, then draw a card." — beats: Big Score
+- Bewildering Blizzard — draw + walker protection — "Draw three cards. Creatures your opponents control get -3/-0 until end of turn." — beats: Big Score (low, 6 mana)
+- Rapier Wit — walker protection / cantrip — "Tap target creature. If it's your turn, put a stun counter on it. ... | Draw a card." — beats: Lightning Greaves
+- Joust Through — walker protection — "Joust Through deals 3 damage to target attacking or blocking creature. You gain 1 life." — beats: Lightning Greaves (life gain feeds Way of the Mentor)
+- Razor Rings — walker protection — "Razor Rings deals 4 damage to target attacking or blocking creature. You gain life equal to the excess damage dealt this way." — beats: Lightning Greaves
+- Harsh Annotation — removal — "Destroy target creature. Its controller creates a 1/1 white and black Inkling creature token with flying." — beats: Abrade
+- Stir Up Trouble — removal — "As an additional cost to cast this spell, sacrifice an artifact or creature or pay {4}. | Destroy target creature." — beats: Abrade (sac a token or Treasure)
+- Hellish Sideswipe — removal — "As an additional cost to cast this spell, sacrifice an artifact or creature. | Destroy target creature or Vehicle." — beats: Abrade (low)
+- Betrayer's Bargain — removal — "Betrayer's Bargain deals 5 damage to target creature. If that creature would die this turn, exile it instead." — beats: Abrade
+- Torch the Tower — removal — "Torch the Tower deals 2 damage to target creature or planeswalker. If this spell was bargained, instead it deals 3 damage to that permanent and you scry 1." — beats: Abrade
+- Impractical Joke — removal — "Damage can't be prevented this turn. Impractical Joke deals 3 damage to up to one target creature or planeswalker." — beats: Abrade (low)
+- Outpace Oblivion — removal — "When this enchantment enters, it deals 5 damage to up to one target creature or planeswalker." — beats: Resculpt
+- End of the Hunt — edict removal — "Target opponent exiles a creature or planeswalker they control with the greatest mana value among creatures and planeswalkers they control." — beats: Feed the Swarm (1v1 answer to hexproof/commander)
+- Reduce to Memory — removal — "Exile target nonland permanent. Its controller creates a 3/2 red and white Spirit creature token." — beats: Resculpt
+- Deem Inferior — removal — "This spell costs {1} less to cast for each card you've drawn this turn. | The owner of target nonland permanent puts it into their library second from the top or on the bottom." — beats: Resculpt (2 mana after Jace +1)
+- Nahiri's Binding — removal — "Enchant creature or planeswalker | Enchanted permanent can't attack or block, and its activated abilities can't be activated." — beats: Rakdos Charm
+- Prison Sentence — removal — "When this Aura enters, scry 2. | Enchanted creature can't attack or block, and its activated abilities can't be activated." — beats: Rakdos Charm (low)
+- Liminal Hold — removal — "When this enchantment enters, exile up to one target nonland permanent an opponent controls until this enchantment leaves the battlefield. You gain 2 life." — beats: Rakdos Charm (low)
+- Glass Casket — removal — "When this artifact enters, exile target creature an opponent controls with mana value 3 or less until this artifact leaves the battlefield." — beats: Abrade (low)
+- Death in the Family — removal — "Exile target creature with mana value 3 or less." — beats: Abrade (low)
+- Seam Rip — removal — "When this enchantment enters, exile target nonland permanent an opponent controls with mana value 2 or less until this enchantment leaves the battlefield." — beats: Rakdos Charm (low)
+- Mardu Charm — removal / tokens — "Mardu Charm deals 4 damage to target creature. | • Create two 1/1 white Warrior creature tokens. They gain first strike until end of turn." — beats: Abrade (low; {R}{W}{B})
+- Tergrid's Shadow — edict — "Each player sacrifices two creatures. | Foretell {2}{B}{B}" — beats: Feed the Swarm (low)
+- Swat Away — counter / removal — "This spell costs {2} less to cast if a creature is attacking you. | The owner of target spell or creature puts it on their choice of the top or bottom of their library." — beats: Sink into Stupor // Soporific Springs (low)
+- Riverwalk Technique — counter / removal — "The owner of target nonland permanent puts it on their choice of the top or bottom of their library. | • Counter target noncreature spell." — beats: Sink into Stupor // Soporific Springs (low)
+- Ruinous Waterbending — small sweeper sparing walkers — "All creatures get -2/-2 until end of turn." — fills role: no cheap sweeper; beats Fumigate on cost
+- Wildfire Howl — small sweeper sparing walkers — "Wildfire Howl deals 2 damage to each creature." — fills role: no cheap sweeper
+- Seismic Rupture — small sweeper sparing walkers — "Seismic Rupture deals 2 damage to each creature without flying." — fills role: no cheap sweeper (low)
+- Explosive Getaway — sweeper that saves one of ours — "Exile up to one target artifact or creature. Return it to the battlefield under its owner's control at the beginning of the next end step. | Explosive Getaway deals 4 damage to each creature." — beats: Fumigate
+- Artistic Process — sweeper / removal / token — "Artistic Process deals 6 damage to target creature. | • Artistic Process deals 2 damage to each creature you don't control. | • Create a 3/3 blue and red Elemental creature token with flying." — beats: Fumigate (low)
+- Lithobraking — small sweeper + ramp — "Create a Lander token. Then you may sacrifice an artifact. When you do, Lithobraking deals 2 damage to each creature." — fills role: no cheap sweeper (low)

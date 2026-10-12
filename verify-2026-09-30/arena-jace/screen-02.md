@@ -1,0 +1,94 @@
+screened 450/450, passed 93, last card read: Ashling's Command
+- Aclazotz, Deepest Betrayal // Temple of the Dead — big creature / land — "Flying, lifelink | Whenever Aclazotz attacks, each opponent discards a card." — beats: Mirkwood Bats
+- Black Mage's Rod — fodder (noncreature card, makes a token) — "Job select (When this Equipment enters, create a 1/1 colorless Hero creature token, then attach this to it.)" — beats: Way of the Healer
+- Gold-Forged Thopteryx — walker protection — "Each legendary permanent you control has ward {2}." — beats: Lightning Greaves (dilution: 2-drop creature hit)
+- Final Parting — tutor — "Search your library for two cards. Put one into your hand and the other into your graveyard." — beats: fills tutor gap (only Enlightened Tutor)
+- Firebender Ascension — fodder (noncreature card) — "When this enchantment enters, create a 2/2 red Soldier creature token with firebending 1." — beats: Way of the Healer
+- Ashiok, Dream Render — planeswalker / hate — "Spells and abilities your opponents control can't cause their controller to search their library." — beats: Quintorius, History Chaser
+- Essence Scatter — counterspell — "Counter target creature spell." — beats: Negate (depth)
+- Gandalf the White — big creature / Way-trigger doubler — "If a legendary permanent or an artifact entering or leaving the battlefield causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time." — beats: Solemn Simulacrum
+- Fire Covenant — removal (one-sided wipe) — "Fire Covenant deals X damage divided as you choose among any number of target creatures." — beats: Abrade
+- Mischievous Mystic — token engine off Jace +1 — "Whenever you draw your second card each turn, create a 1/1 blue Faerie creature token with flying." — beats: Professional Face-Breaker (dilution: 2-drop creature hit)
+- Fog Bank — walker protection (blocker) — "Prevent all combat damage that would be dealt to and dealt by this creature." — beats: Lightning Greaves (dilution: 0-power creature hit)
+- Miscast — counterspell — "Counter target instant or sorcery spell unless its controller pays {3}." — beats: Negate (depth)
+- Nowhere to Run — removal — "When this enchantment enters, target creature an opponent controls gets -3/-3 until end of turn." — beats: Abrade
+- Fell — removal — "Destroy target creature." — beats: Feed the Swarm
+- Kefka, Court Mage // Kefka, Ruler of Ruin — big creature — "Whenever Kefka enters or attacks, each player discards a card. Then you draw a card for each card type among cards discarded this way." — beats: Mirkwood Bats
+- Longshot, Rebel Bowman — cost reducer for walkers / damage — "Noncreature spells you cast cost {1} less to cast. | Whenever you cast a noncreature spell, Longshot deals 2 damage to each opponent." — beats: Pitiless Plunderer
+- Spider-Sense — counterspell — "Counter target instant spell, sorcery spell, or triggered ability." — beats: Negate
+- Overlord of the Floodpits — big creature / draw — "Whenever this permanent enters or attacks, draw two cards, then discard a card." — beats: Mirkwood Bats
+- Spikefield Hazard // Spikefield Cave — land / removal — "Spikefield Hazard deals 1 damage to any target." — beats: Evolving Wilds
+- Dragonstorm Globe — ramp / fixing — "{T}: Add one mana of any color." — beats: Azorius Signet
+- Settle the Wreckage — walker protection / wipe — "Exile all attacking creatures target player controls." — beats: Fumigate
+- Black Waltz No. 3 — creature hit / damage — "Flying, deathtouch | Whenever you cast a noncreature spell, Black Waltz No. 3 deals 2 damage to each opponent." — beats: Pitiless Plunderer
+- Daze — counterspell (free) — "You may return an Island you control to its owner's hand rather than pay this spell's mana cost. | Counter target spell unless its controller pays {1}." — beats: Negate
+- Arcanis the Omnipotent — big creature / draw — "{T}: Draw three cards." — beats: Massacre Wurm
+- Cornered by Black Mages — removal + fodder — "Target opponent sacrifices a creature of their choice. | Create a 0/1 black Wizard creature token" — beats: Feed the Swarm
+- Rumble Arena — land / fixing — "{T}: Add {C}. | {1}, {T}: Add one mana of any color." — beats: Terramorphic Expanse
+- Appa, Steadfast Guardian — walker protection / loyalty reset — "When Appa enters, airbend any number of other target nonland permanents you control. (Exile them. While each one is exiled, its owner may cast it for {2} rather than its mana cost.)" — beats: Solemn Simulacrum
+- Eaten Alive — removal (uses fodder) — "As an additional cost to cast this spell, sacrifice a creature or pay {3}{B}. | Exile target creature or planeswalker." — beats: Feed the Swarm
+- Emeritus of Woe // Demonic Tutor — tutor + body — "This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.) | // | Search your library for a card, put that card into your hand, then shuffle." — beats: fills tutor gap
+- River's Rebuke — one-sided wipe — "Return all nonland permanents target player controls to their owner's hand." — beats: Fumigate
+- Marang River Regent // Coil and Catch — big creature / draw — "When this creature enters, return up to two other target nonland permanents to their owners' hands. | // | Draw three cards, then discard a card." — beats: Mirkwood Bats
+- Firdoch Core — ramp / fixing — "{T}: Add one mana of any color." — beats: Azorius Signet
+- Duress — cheap interaction — "You choose a noncreature, nonland card from it. That player discards that card." — beats: fills discard gap
+- Ojer Pakpatiq, Deepest Epoch // Temple of Cyclical Time — creature hit / value — "Whenever you cast an instant spell from your hand, it gains rebound." — beats: Archmage Emeritus
+- Daily Bugle Building — land / fixing — "{T}: Add {C}. | {1}, {T}: Add one mana of any color." — beats: Terramorphic Expanse
+- Bane of Bala Ged — big creature — "Whenever this creature attacks, defending player exiles two permanents they control." — beats: Solemn Simulacrum
+- Ovika, Enigma Goliath — big creature / tokens — "Whenever you cast a noncreature spell, create X 1/1 red Phyrexian Goblin creature tokens, where X is the mana value of that spell." — beats: Mirkwood Bats
+- Krang, Utrom Warlord — big creature (−3 hit only; 9 MV) — "Flying, trample, indestructible, haste" — beats: Solemn Simulacrum
+- Oscorp Industries — land / fixing — "{T}: Add {U}, {B}, or {R}." — beats: Terramorphic Expanse
+- Aang, Swift Savior // Aang and La, Ocean's Fury — removal / tempo — "When Aang enters, airbend up to one other target creature or spell." — beats: Resculpt
+- Riptide Gearhulk — big creature / removal — "Double strike | When this creature enters, for each opponent, put up to one target nonland permanent that player controls into its owner's library third from the top." — beats: Mirkwood Bats
+- Mana Sculpt — counterspell — "Counter target spell." — beats: Negate
+- Capital City — land / fixing — "{1}, {T}: Add one mana of any color. | Cycling {2}" — beats: Terramorphic Expanse
+- Lightning Helix — removal / burn — "Lightning Helix deals 3 damage to any target and you gain 3 life." — beats: Abrade
+- Reckoner Bankbuster — card draw + fodder — "{2}, {T}, Remove a charge counter from this Vehicle: Draw a card. Then if there are no charge counters on this Vehicle, create a Treasure token and a 1/1 colorless Pilot creature token" — beats: Mind Stone
+- White Auracite — removal / ramp — "When this artifact enters, exile target nonland permanent an opponent controls until this artifact leaves the battlefield. | {T}: Add {W}." — beats: Abrade
+- Fire Magic — small sweeper sparing walkers — "Firaga — {5} — Fire Magic deals 3 damage to each creature." — beats: Blasphemous Act (depth)
+- Divine Reckoning — wipe sparing walkers — "Each player chooses a creature they control. Destroy the rest." — beats: Fumigate
+- Sunfall — wipe + fodder — "Exile all creatures. Incubate X, where X is the number of creatures exiled this way." — beats: Fumigate
+- Hop to It — fodder (noncreature card) — "Create three 1/1 white Rabbit creature tokens." — beats: Way of the Healer
+- Ozai, the Phoenix King — big creature — "Trample, firebending 4, haste | Ozai has flying and indestructible as long as you have six or more unspent mana." — beats: Massacre Wurm
+- Eaten by Piranhas — removal (flash) — "Enchanted creature loses all abilities and is a black Skeleton creature with base power and toughness 1/1." — beats: Abrade
+- Smaug the Magnificent — big creature / ramp — "Flying, haste | Whenever Smaug attacks, he deals damage equal to the number of Treasures you control to any target. | At the beginning of your upkeep, create a Treasure token." — beats: Goldspan Dragon
+- Airbending Lesson — removal / draw — "Airbend target nonland permanent. | Draw a card." — beats: Resculpt
+- Ob Nixilis, the Hate-Twisted — planeswalker / removal — "Whenever an opponent draws a card, Ob Nixilis deals 1 damage to that player. | −2: Destroy target creature. Its controller draws two cards." — beats: Quintorius, History Chaser
+- Shoot the Sheriff — removal — "Destroy target non-outlaw creature." — beats: Abrade
+- Amazing Acrobatics — counterspell — "Choose one or both — | • Counter target spell. | • Tap one or two target creatures." — beats: Negate
+- Unwanted Remake — removal — "Destroy target creature. Its controller manifests dread." — beats: Abrade
+- Ossification — removal — "When this Aura enters, exile target creature or planeswalker an opponent controls until this Aura leaves the battlefield." — beats: Abrade
+- The Legend of Yangchen // Avatar Yangchen — removal / draw / body — "I — Starting with you, each player chooses up to one permanent with mana value 3 or greater from among permanents your opponents control. Exile those permanents. | II — You may have target opponent draw three cards. If you do, draw three cards." — beats: Ajani Unrelenting
+- Cayth, Famed Mechanist — loyalty support (proliferate) + fodder — "{2}, {T}: Choose one — | • Populate. | • Proliferate." — beats: Plan for All Outcomes (dilution: 4-drop creature hit)
+- Phial of Galadriel — ramp / fixing — "{T}: Add one mana of any color." — beats: Azorius Signet
+- The Emperor of Palamecia // The Lord Master of Hell — ramp for walkers — "{T}: Add {U} or {R}. Spend this mana only to cast a noncreature spell." — beats: Solemn Simulacrum (dilution: 2-drop creature hit)
+- Liliana's Triumph — removal (edict) — "Each opponent sacrifices a creature of their choice." — beats: Feed the Swarm
+- Overlord of the Boilerbilges — big creature / removal — "Whenever this permanent enters or attacks, it deals 4 damage to any target." — beats: Mirkwood Bats
+- Dreadbore — removal — "Destroy target creature or planeswalker." — beats: Feed the Swarm
+- Serum Snare — tempo + proliferate — "Return target nonland permanent to its owner's hand. If that permanent had mana value 3 or less, proliferate." — beats: Resculpt
+- Absolute Virtue — big creature / protection — "This spell can't be countered. | Flying | You have protection from each of your opponents." — beats: Solemn Simulacrum
+- Remand — counterspell / draw — "Counter target spell. If that spell is countered this way, put it into its owner's hand instead of into that player's graveyard. | Draw a card." — beats: Negate
+- Stormchaser's Talent — fodder (noncreature card) — "When this Class enters, create a 1/1 blue and red Otter creature token with prowess." — beats: Way of the Healer
+- Wizard's Retort — counterspell — "Counter target spell." — beats: Negate
+- Heartless Act — removal — "Destroy target creature with no counters on it." — beats: Abrade
+- Tithing Blade // Consuming Sepulcher — removal (edict) — "When this artifact enters, each opponent sacrifices a creature of their choice." — beats: Feed the Swarm
+- Villainous Wrath — wipe sparing walkers — "Target opponent loses life equal to the number of creatures they control. Then destroy all creatures." — beats: Fumigate
+- Kaito, Bane of Nightmares — planeswalker — "0: Surveil 2. Then draw a card for each opponent who lost life this turn. | −2: Tap target creature. Put two stun counters on it." — beats: Quintorius, History Chaser
+- Aang, Airbending Master — creature hit / removal / tokens — "When Aang enters, airbend another target creature. | At the beginning of your upkeep, create a 1/1 white Ally creature token for each experience counter you have." — beats: Solemn Simulacrum
+- Cut Down — removal — "Destroy target creature with total power and toughness 5 or less." — beats: Abrade
+- The Wanderer — planeswalker / walker protection — "Prevent all noncombat damage that would be dealt to you and other permanents you control. | −2: Exile target creature with power 4 or greater." — beats: Saheeli, Sublime Artificer
+- Ruthless Lawbringer — removal (uses fodder) — "When this creature enters, you may sacrifice another creature. When you do, destroy target nonland permanent." — beats: Professional Face-Breaker (dilution: 3-drop creature hit)
+- Astrologian's Planisphere — fodder (noncreature card) — "Job select (When this Equipment enters, create a 1/1 colorless Hero creature token, then attach this to it.)" — beats: Way of the Healer
+- Final Vengeance — removal (uses fodder) — "As an additional cost to cast this spell, sacrifice a creature or enchantment. | Exile target creature." — beats: Feed the Swarm
+- White Lotus Hideout — land / fixing — "{T}: Add {C}. | {1}, {T}: Add one mana of any color." — beats: Terramorphic Expanse
+- Splinter's Technique — tutor — "Search your library for a card, put that card into your hand, then shuffle." — beats: fills tutor gap
+- Quintorius Kand — planeswalker / fodder — "+1: Create a 3/2 red and white Spirit creature token. | −3: Discover 4." — beats: Quintorius, History Chaser
+- Goblin Surprise — fodder (instant) — "Create two 1/1 red Goblin creature tokens." — beats: Way of the Healer
+- United Front — fodder (scalable) — "Create X 1/1 white Ally creature tokens, then put a +1/+1 counter on each creature you control." — beats: Way of the Healer
+- All-Fates Scroll — ramp / fixing / late draw — "{T}: Add one mana of any color. | {7}, {T}, Sacrifice this artifact: Draw X cards, where X is the number of differently named lands you control." — beats: Azorius Signet
+- Worthy Cost — removal (uses fodder) — "As an additional cost to cast this spell, sacrifice a creature. | Exile target creature or planeswalker." — beats: Feed the Swarm
+- Typhoid Rats — walker protection (blocker) — "Deathtouch" — beats: Lightning Greaves (dilution: 1-drop creature hit)
+- Glen Elendra Guardian — counterspell on a body — "{1}{U}, Remove a counter from this creature: Counter target noncreature spell. Its controller draws a card." — beats: Negate (dilution: 3-drop creature hit)
+- Cruel Tutor — tutor — "Search your library for a card, then shuffle and put that card on top. You lose 2 life." — beats: fills tutor gap
+- Emeritus of Ideation // Ancestral Recall — creature hit / draw — "Flying, ward {2} | This creature enters prepared. | // | Target player draws three cards." — beats: Archmage Emeritus
+- No More Lies — counterspell — "Counter target spell unless its controller pays {3}. If that spell is countered this way, exile it instead of putting it into its owner's graveyard." — beats: Negate

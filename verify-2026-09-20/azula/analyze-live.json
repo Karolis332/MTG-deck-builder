@@ -1,0 +1,357 @@
+{
+ "commander": "Fire Lord Azula",
+ "archetype": "spellslinger",
+ "tribalType": "Human",
+ "iss": 51,
+ "topSynergyPairs": [
+  {
+   "a": "Big Score",
+   "b": "Bulk Up",
+   "weight": 4,
+   "reasons": [
+    "Bulk Up consumes graveyard_fill \u2190 Big Score produces graveyard_fill"
+   ]
+  },
+  {
+   "a": "Big Score",
+   "b": "Diabolic Intent",
+   "weight": 4,
+   "reasons": [
+    "Diabolic Intent consumes sacrifice_fodder \u2190 Big Score produces sacrifice_fodder"
+   ]
+  },
+  {
+   "a": "Storm-Kiln Artist",
+   "b": "Diabolic Intent",
+   "weight": 4,
+   "reasons": [
+    "Storm-Kiln Artist consumes spells_cast \u2190 Diabolic Intent produces spells_cast",
+    "Diabolic Intent consumes sacrifice_fodder \u2190 Storm-Kiln Artist produces sacrifice_fodder"
+   ]
+  },
+  {
+   "a": "Unexpected Windfall",
+   "b": "Bulk Up",
+   "weight": 4,
+   "reasons": [
+    "Bulk Up consumes graveyard_fill \u2190 Unexpected Windfall produces graveyard_fill"
+   ]
+  },
+  {
+   "a": "Unexpected Windfall",
+   "b": "Diabolic Intent",
+   "weight": 4,
+   "reasons": [
+    "Diabolic Intent consumes sacrifice_fodder \u2190 Unexpected Windfall produces sacrifice_fodder"
+   ]
+  },
+  {
+   "a": "Thrill of Possibility",
+   "b": "Bulk Up",
+   "weight": 4,
+   "reasons": [
+    "Bulk Up consumes graveyard_fill \u2190 Thrill of Possibility produces graveyard_fill"
+   ]
+  },
+  {
+   "a": "Demand Answers",
+   "b": "Bulk Up",
+   "weight": 4,
+   "reasons": [
+    "Bulk Up consumes graveyard_fill \u2190 Demand Answers produces graveyard_fill"
+   ]
+  },
+  {
+   "a": "Bulk Up",
+   "b": "Ashling, Flame Dancer",
+   "weight": 4,
+   "reasons": [
+    "Bulk Up consumes graveyard_fill \u2190 Ashling, Flame Dancer produces graveyard_fill",
+    "Ashling, Flame Dancer consumes spells_cast \u2190 Bulk Up produces spells_cast"
+   ]
+  }
+ ],
+ "curveScore": {
+  "score": 46,
+  "perBucket": {
+   "0": 0,
+   "1": -5,
+   "2": 8,
+   "3": -5,
+   "4": 4,
+   "5": -3,
+   "6": 1,
+   "7+": 0
+  },
+  "notes": [
+   "Missing 1-drops (7 vs target 12)",
+   "Too many 2-drops (25 vs target 17)",
+   "Missing 3-drops (9 vs target 14)",
+   "Too many 4-drops (12 vs target 8)",
+   "Missing 5-drops (2 vs target 5)",
+   "Average CMC 3.00 is high (target ~2.50)"
+  ]
+ },
+ "winPlan": {
+  "route": "spell_burn",
+  "description": "Chain cheap spells into damage/value payoffs (spellslinger/storm).",
+  "keyCards": {
+   "enablers": [
+    "Dark Ritual",
+    "Lightning Bolt",
+    "Electrodominance",
+    "Thrill of Possibility",
+    "Narset's Reversal",
+    "Redirect Lightning",
+    "The Last Agni Kai",
+    "Demand Answers",
+    "Borne Upon a Wind",
+    "Counterspell",
+    "Brainstorm",
+    "Bulk Up",
+    "An Offer You Can't Refuse",
+    "Fists of Flame",
+    "Opt",
+    "Lightning Strike",
+    "Diabolic Intent",
+    "Entomb"
+   ],
+   "payoffs": [
+    "Storm-Kiln Artist",
+    "Archmage Emeritus",
+    "Firebending Student",
+    "Electro, Assaulting Battery",
+    "Ashling, Flame Dancer",
+    "Guttersnipe",
+    "Talrand, Sky Summoner",
+    "Murmuring Mystic",
+    "Adeliz, the Cinder Wind",
+    "Stormchaser Mage"
+   ],
+   "protection": [
+    "Swiftfoot Boots",
+    "Redirect Lightning",
+    "Counterspell",
+    "Lightning Greaves",
+    "Niv-Mizzet, Parun"
+   ],
+   "tutors": [
+    "Razaketh, the Foulblooded",
+    "Beseech the Mirror",
+    "Diabolic Intent",
+    "Fabricate",
+    "Entomb"
+   ]
+  },
+  "missingPieces": [],
+  "cardRoles": {
+   "Arcane Signet": "off_plan",
+   "Frantic Search": "off_plan",
+   "Big Score": "off_plan",
+   "Storm-Kiln Artist": "payoff",
+   "Archmage Emeritus": "payoff",
+   "Dark Ritual": "enabler",
+   "Lightning Bolt": "enabler",
+   "Electrodominance": "enabler",
+   "Swiftfoot Boots": "protection",
+   "Unexpected Windfall": "off_plan",
+   "Thrill of Possibility": "enabler",
+   "Seething Song": "off_plan",
+   "Narset's Reversal": "enabler",
+   "Talisman of Creativity": "off_plan",
+   "Talisman of Dominance": "off_plan",
+   "Redirect Lightning": "enabler",
+   "The Last Agni Kai": "enabler",
+   "Leyline of Anticipation": "off_plan",
+   "High Fae Trickster": "off_plan",
+   "Demand Answers": "enabler",
+   "Borne Upon a Wind": "enabler",
+   "Counterspell": "enabler",
+   "Brainstorm": "enabler",
+   "Talisman of Indulgence": "off_plan",
+   "Ozai, the Phoenix King": "off_plan",
+   "Firebending Student": "payoff",
+   "Dualcaster Mage": "off_plan",
+   "Electro, Assaulting Battery": "payoff",
+   "Bulk Up": "enabler",
+   "An Offer You Can't Refuse": "enabler",
+   "Lightning Greaves": "protection",
+   "Izzet Signet": "off_plan",
+   "Fists of Flame": "enabler",
+   "Goblin Electromancer": "off_plan",
+   "Etali, Primal Storm": "off_plan",
+   "Sozin's Comet": "off_plan",
+   "Fated Firepower": "off_plan",
+   "Azula, Cunning Usurper": "off_plan",
+   "Firebender Ascension": "off_plan",
+   "Ashling, Flame Dancer": "payoff",
+   "Opt": "enabler",
+   "Blasphemous Act": "off_plan",
+   "Guttersnipe": "payoff",
+   "Torrential Gearhulk": "off_plan",
+   "Lightning Strike": "enabler",
+   "Bident of Thassa": "off_plan",
+   "Talrand, Sky Summoner": "payoff",
+   "Baral, Chief of Compliance": "off_plan",
+   "Murmuring Mystic": "payoff",
+   "Coastal Piracy": "off_plan",
+   "Niv-Mizzet, Parun": "protection",
+   "Adeliz, the Cinder Wind": "payoff",
+   "Stormchaser Mage": "payoff",
+   "Combat Celebrant": "off_plan",
+   "Faerie Mastermind": "off_plan",
+   "Mind Stone": "off_plan",
+   "Razaketh, the Foulblooded": "tutor_for_plan",
+   "Beseech the Mirror": "tutor_for_plan",
+   "Diabolic Intent": "enabler",
+   "Fabricate": "tutor_for_plan",
+   "Entomb": "enabler"
+  }
+ },
+ "mulliganCriteria": [
+  "2-4 lands",
+  "a play on turn 2 or 3, or ramp if not",
+  "a spell burn plan piece (e.g. Dark Ritual or Lightning Bolt or Storm-Kiln Artist)"
+ ],
+ "gameChangers": {
+  "count": 0,
+  "names": []
+ },
+ "categories": {
+  "ramp": 15,
+  "draw": 12,
+  "utility": 13,
+  "removal": 4,
+  "protection": 4,
+  "win_condition": 7,
+  "board_wipe": 1,
+  "tutor": 5,
+  "land": 38
+ },
+ "stats": {
+  "totalCards": 99,
+  "landCount": 38,
+  "avgCmc": 3
+ },
+ "unresolved": [],
+ "deckScore": {
+  "version": "1.2.0",
+  "score": 26,
+  "provisional": true,
+  "components": [
+   {
+    "key": "mana",
+    "score": 91.4,
+    "weight": 20.61855670103093,
+    "reason": "38.8 effective lands vs 36.0; B has 21/40 timely sources."
+   },
+   {
+    "key": "curve",
+    "score": 85.1,
+    "weight": 10.309278350515465,
+    "reason": "2-drops 25/17; 100% chance of a useful play by turn 2."
+   },
+   {
+    "key": "interaction",
+    "score": 80,
+    "weight": 16.494845360824744,
+    "reason": "8.7/12.0 effective answers, 7/7.0 cheap; weakest coverage: permanent."
+   },
+   {
+    "key": "advantage",
+    "score": 87.6,
+    "weight": 14.43298969072165,
+    "reason": "29.0/10.0 draw units by turn 6; 6 cheap velocity cards."
+   },
+   {
+    "key": "win",
+    "score": 47.5,
+    "weight": 20.61855670103093,
+    "reason": "Creature pressure (7 threats): closes T12, access 18% (u=0.50); shared bottleneck, protection access 66%; none."
+   },
+   {
+    "key": "synergy",
+    "score": 7.9,
+    "weight": 17.52577319587629,
+    "reason": "43% supports spells; weakest dependency closer 1/4; 0 unsupported payoffs."
+   },
+   {
+    "key": "meta",
+    "score": 50,
+    "weight": 0,
+    "reason": "no context: 0 dated lists, 0% coverage; insufficient data; snapshot none."
+   },
+   {
+    "key": "structure",
+    "score": 100,
+    "weight": 0,
+    "reason": "5/5 rule checks verified; none; cap none."
+   }
+  ],
+  "gates": [
+   {
+    "key": "structure",
+    "kind": "rules",
+    "status": "pass",
+    "cap": null,
+    "reason": "5/5 rule checks verified; none; cap none."
+   },
+   {
+    "key": "size",
+    "kind": "rules",
+    "status": "pass",
+    "cap": null,
+    "reason": "100 cards (commander wants 100)"
+   },
+   {
+    "key": "singleton",
+    "kind": "rules",
+    "status": "pass",
+    "cap": null,
+    "reason": "singleton respected (basics exempt)"
+   },
+   {
+    "key": "legality",
+    "kind": "rules",
+    "status": "pass",
+    "cap": null,
+    "reason": "every card legal in commander"
+   },
+   {
+    "key": "rules",
+    "kind": "rules",
+    "status": "pass",
+    "cap": null,
+    "reason": "no other format rule broken"
+   },
+   {
+    "key": "identity",
+    "kind": "rules",
+    "status": "pass",
+    "cap": null,
+    "reason": "all cards inside BRU"
+   },
+   {
+    "key": "quality_cap",
+    "kind": "quality",
+    "status": "warn",
+    "cap": 26.3,
+    "reason": "quality cap 20+0.8*min(M,W,S)=26.3 from mana=91.4, win=47.5, synergy=7.9."
+   },
+   {
+    "key": "coverage",
+    "kind": "evidence",
+    "status": "warn",
+    "cap": null,
+    "reason": "57% of nonland copies are typed in the effect catalogue \u2014 provisional: effect coverage, not calibrated."
+   },
+   {
+    "key": "meta_evidence",
+    "kind": "evidence",
+    "status": "warn",
+    "cap": null,
+    "reason": "no corpus snapshot supplied \u2014 meta fit defaulted to 50."
+   }
+  ]
+ }
+}

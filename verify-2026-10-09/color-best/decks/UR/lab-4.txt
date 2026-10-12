@@ -1,0 +1,12 @@
+BASE obj 81.74 DS 71.8 pen 1 {"land":37,"ramp":10,"draw":12,"removal":12,"board_wipe":4,"protection":7} mana=95 curve=89 interaction=100 advantage=70 win=65 synergy=93 meta=50 structure=100
+   0.01  Sky Diamond => Sol Ring   DS 0.0 pen 1 mana=94 curve=89 interaction=100 advantage=70 win=65 synergy=93 meta=50 structure=100
+  -0.00  Decanter of Endless Water => Arcane Signet   DS 0.0 pen 1 mana=95 curve=90 interaction=100 advantage=70 win=65 synergy=93 meta=50 structure=100
+   0.02  Trumpeting Carnosaur => Steel Hellkite   DS 0.0 pen 1 mana=95 curve=89 interaction=100 advantage=70 win=65 synergy=91 meta=50 structure=100
+  -0.04  Hoard-Smelter Dragon => Explosive Derailment   DS 0.0 pen 1 mana=95 curve=90 interaction=100 advantage=70 win=65 synergy=95 meta=50 structure=100
+   0.02  Soul-Guide Lantern => Unauthorized Exit   DS 0.0 pen 1 mana=91 curve=89 interaction=100 advantage=70 win=65 synergy=93 meta=50 structure=100
+   0.01  Sapphire Medallion => Chrome Host Seedshark   DS 0.0 pen 1 mana=95 curve=88 interaction=100 advantage=70 win=65 synergy=93 meta=50 structure=100
+  -0.01  Cloud Key => Tetsuko Umezawa, Fugitive   DS 0.0 pen 1 mana=94 curve=90 interaction=100 advantage=70 win=65 synergy=93 meta=50 structure=100
+   0.00  Windswept Heath => Fabled Passage   DS 0.0 pen 1 mana=95 curve=89 interaction=100 advantage=70 win=65 synergy=93 meta=50 structure=100
+   0.04  Reliquary Tower => Command Tower   DS 0.0 pen 1 mana=95 curve=89 interaction=100 advantage=70 win=65 synergy=93 meta=50 structure=100
+   0.08  Temple of the False God => Exotic Orchard   DS 0.0 pen 1 mana=95 curve=89 interaction=100 advantage=70 win=65 synergy=93 meta=50 structure=100
+ALL  obj 81.85 (0.11) DS 71.8 pen 1 {"land":37,"ramp":10,"draw":11,"removal":11,"board_wipe":4,"protection":7} mana=97 curve=91 interaction=100 advantage=70 win=65 synergy=93 meta=50 structure=100

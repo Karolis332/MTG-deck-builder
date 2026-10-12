@@ -1,0 +1,15 @@
+BASE obj 75.49 DS 63.6 pen 0 {"land":37,"ramp":12,"draw":10,"removal":10,"board_wipe":3,"protection":5} mana=92 curve=92 interaction=100 advantage=75 win=55 synergy=100 meta=50 structure=100
+   0.07  Bloodstained Mire => Agna Qel'a   DS 0.0 pen 0 mana=93 curve=92 interaction=100 advantage=75 win=55 synergy=100 meta=50 structure=100
+   0.08  Windswept Heath => Desert of the Mindful   DS 0.0 pen 0 mana=93 curve=92 interaction=100 advantage=75 win=55 synergy=100 meta=50 structure=100
+   0.07  Wooded Foothills => Hidden Cataract   DS 0.0 pen 0 mana=93 curve=92 interaction=100 advantage=75 win=55 synergy=100 meta=50 structure=100
+   0.04  Cabaretti Courtyard => Sunken Palace   DS 0.0 pen 0 mana=93 curve=92 interaction=100 advantage=75 win=55 synergy=100 meta=50 structure=100
+   0.00  Riveteers Overlook => Fabled Passage   DS 0.0 pen 0 mana=93 curve=92 interaction=100 advantage=75 win=55 synergy=100 meta=50 structure=100
+   0.10  Reliquary Tower => Study Hall   DS 0.0 pen 0 mana=92 curve=92 interaction=100 advantage=75 win=55 synergy=100 meta=50 structure=100
+  -2.03  Giant's Boulder => Arcane Signet   DS 0.0 pen 1 mana=93 curve=91 interaction=100 advantage=75 win=55 synergy=100 meta=50 structure=100
+   0.02  Breaker of Creation => Thought Monitor   DS 0.0 pen 0 mana=92 curve=92 interaction=100 advantage=75 win=55 synergy=100 meta=50 structure=100
+  -2.00  Devourer of Destiny => Experimental Aviator   DS 0.0 pen 1 mana=92 curve=93 interaction=100 advantage=75 win=55 synergy=100 meta=50 structure=100
+  -0.00  Ginger, Queen of Sweets => Torrential Gearhulk   DS 0.0 pen 0 mana=91 curve=92 interaction=100 advantage=75 win=55 synergy=100 meta=50 structure=100
+  -0.06  Bygone Colossus => Mishra's Bauble   DS 0.0 pen 0 mana=92 curve=92 interaction=100 advantage=75 win=55 synergy=100 meta=50 structure=100
+  -3.86  Contagion Clasp => Commander's Sphere   DS 0.0 pen 2 mana=93 curve=93 interaction=100 advantage=75 win=55 synergy=100 meta=50 structure=100
+  -0.04  Mana Confluence => Terramorphic Expanse   DS 0.0 pen 0 mana=92 curve=92 interaction=100 advantage=75 win=55 synergy=100 meta=50 structure=100
+ALL  obj 60.11 (-15.38) DS 58.0 pen 5 {"land":37,"ramp":13,"draw":13,"removal":7,"board_wipe":3,"protection":5} mana=97 curve=93 interaction=100 advantage=75 win=48 synergy=100 meta=50 structure=100

@@ -1,0 +1,9 @@
+BASE obj 70.04 DS 58.0 pen 0 {"land":38,"ramp":11,"draw":10,"removal":12,"board_wipe":3,"protection":4} mana=90 curve=87 interaction=100 advantage=82 win=48 synergy=88 meta=50 structure=100
+   5.64  Corpse Churn => Junji, the Midnight Sky   DS 5.6 pen 0 mana=90 curve=89 interaction=100 advantage=82 win=55 synergy=88 meta=50 structure=100
+   5.57  Body Double => Geralf, the Fleshwright   DS 5.6 pen 0 mana=90 curve=87 interaction=100 advantage=82 win=55 synergy=95 meta=50 structure=100
+   0.02  Noxious Gearhulk => Titan Forge   DS 0.0 pen 0 mana=90 curve=87 interaction=100 advantage=82 win=48 synergy=88 meta=50 structure=100
+   5.62  Wishclaw Talisman => Junji, the Midnight Sky   DS 5.6 pen 0 mana=90 curve=89 interaction=100 advantage=82 win=55 synergy=91 meta=50 structure=100
+   5.61  Ashiok, Dream Render => Junji, the Midnight Sky   DS 5.6 pen 0 mana=90 curve=87 interaction=100 advantage=82 win=55 synergy=91 meta=50 structure=100
+   3.62  Cruel Calculations => Junji, the Midnight Sky   DS 5.6 pen 1 mana=90 curve=87 interaction=100 advantage=77 win=55 synergy=91 meta=50 structure=100
+   0.00  Devourer of Destiny => Junji, the Midnight Sky   DS 0.0 pen 0 mana=90 curve=89 interaction=100 advantage=82 win=48 synergy=91 meta=50 structure=100
+ALL  obj 29.10 (-40.94) DS 19.0 pen 1 {"land":38,"ramp":11,"draw":9,"removal":10,"board_wipe":3,"protection":4} mana=90 curve=90 interaction=100 advantage=75 win=55 synergy=95 meta=50 structure=0

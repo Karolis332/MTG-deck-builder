@@ -1,0 +1,1 @@
+Gyome, Master Chef: 100.67 [land38 ramp12 draw10 remo11 wipe4 prot6 pen0] (seeds cf 61.93 [land37 ramp21 draw10 remo8 wipe3 prot2 pen12] | previous 100.16 [land38 ramp12 draw11 remo12 wipe3 prot6 pen0]; 19 swaps, 507294 ms)

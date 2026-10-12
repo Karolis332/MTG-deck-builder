@@ -1,0 +1,77 @@
+=== POOL ===
+pool size: 2892 (open 2892, in-deck 0), unresolved: 12
+newest sets seen in legal pool: akr, big, blb, dft, dmr, dsk, ecc, ecl, eoc, eoe, fdn, fin, hbg, inr, j25, lci, m19, m21, mkm, msh, om1, otj, pio, pspl, rix, rvr, soa, sos, spm, sta, tdc, tdm, thb, tla, tmt, woe, xln
+unresolved names: Aang, Swift Savior // Aang, Swift Savior; Aang, at the Crossroads // Aang, at the Crossroads; Birgi, God of Storytelling // Birgi, God of Storytelling; Growing Rites of Itlimoc // Growing Rites of Itlimoc; Kefka, Court Mage // Kefka, Court Mage; Ojer Axonil, Deepest Might // Ojer Axonil, Deepest Might; Scavenger Regent // Scavenger Regent; Spider-Man, Peter Parker // Spider-Man, Peter Parker; Stormshriek Feral // Stormshriek Feral; Stump Stomp // Stump Stomp; Twinmaw Stormbrood // Twinmaw Stormbrood; Whirlwing Stormbrood // Whirlwing Stormbrood
+
+=== TOP 5 ARCHETYPES (decks / WR / coverage / score) ===
+Izzet | decks 113 | WR 66.5% (445-224) | coverage 92.6% | score 0.616
+Grixis | decks 17 | WR 71.7% (66-26) | coverage 79.7% | score 0.571
+Mardu | decks 24 | WR 70.4% (100-42) | coverage 76.3% | score 0.537
+Mono-Green | decks 145 | WR 69.6% (619-271) | coverage 71.4% | score 0.497
+Four-Color (no G) | decks 44 | WR 66.9% (164-81) | coverage 70.6% | score 0.473
+
+=== BUILD: Izzet ===
+colors RU | avg nonland cmc 3.33 | land target 17 | nonland slots filled 43 (core 39, substitute 0, filler 4) | land slots filled 13 | side slots 15
+MAIN:
+  3 Burst Lightning [open]
+  3 Opt [open]
+  3 Sleight of Hand [open]
+  4 Eddymurk Crab [open]
+  2 Get Out [open]
+  4 Prismari Charm [open]
+  4 Sunderflock [open]
+  3 Traumatic Critique [open]
+  4 Hearth Elemental [open]
+  2 Spell Pierce [open]
+  2 Impractical Joke [open]
+  2 Spell Snare [open]
+  3 Winternight Stories [open]
+  4 Redirect Lightning [open (filler)]
+  4 Spirebluff Canal [open]
+  3 Steam Vents [open]
+  4 Riverpyre Verge [open]
+  1 Multiversal Passage [open]
+  1 Thundering Falls [open]
+  4 Island [basic (unlimited)]
+SIDEBOARD:
+  4 Colorstorm Stallion [open]
+  3 Annul [open]
+  4 Disdainful Stroke [open]
+  2 Ral, Crackling Wit [open]
+  2 Sear [open]
+SUBSTITUTIONS (missing core card -> owned substitute):
+
+=== RUNNER-UP: Grixis ===
+  3x Riverpyre Verge (inc 100%)
+  3x Spirebluff Canal (inc 100%)
+  3x Steam Vents (inc 100%)
+  3x Mountain (inc 88%)
+  3x Ancestral Anger (inc 71%)
+  3x Callous Sell-Sword (inc 71%)
+  4x Elusive Otter (inc 71%)
+  2x Multiversal Passage (inc 71%)
+  4x Slickshot Show-Off (inc 71%)
+  4x Starting Town (inc 71%)
+  4x Wild Ride (inc 71%)
+  2x Drake Hatcher (inc 65%)
+  1x Shore Up (inc 65%)
+  4x Leyline of Resonance (inc 59%)
+  2x Octopus Form (inc 59%)
+  3x Pym Particles (inc 59%)
+  2x Secret Identity (inc 59%)
+  4x Stadium Headliner (inc 59%)
+  2x Might of the Meek (inc 53%)
+  3x Turn Inside Out (inc 53%)
+
+=== VALIDATION (deck-validation.ts, standard) ===
+  PASS: no issues
+
+=== OPTIMIZER SCORE (advisory, deck-optimizer.ts) ===
+  legality issues: 0
+  land delta: 0 (built 17 vs target 17)
+  score: 70/100 (ratioScore fixed at 70 — full quota-ratio engine out of scope, PLACEHOLDER, see report caveats)
+
+=== BUY LIST (<=15, missing core cards vs Izzet) ===
+  1x Stormcarved Coast (core inclusion 84%, $4.81)
+
+proposal written: C:\Users\QuLeR\MTG-deck-builder\decks\paper\proposals\standard-izzet-arena.txt

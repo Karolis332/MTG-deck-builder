@@ -1,0 +1,42 @@
+======== deck-score-coverage-round1.test.ts :: pins the Commander corpus measurement and reproduces it on a prefix :: [('deck-score-coverage-round1.test.ts', '165')]
+AssertionError: expected 0.305 to be close to 0.315, received difference is 0.010000000000000009, but expected 0.005
+======== deck-score-coverage-round1.test.ts :: pins the Brawl corpus measurement and reproduces it on a prefix :: [('deck-score-coverage-round1.test.ts', '180')]
+AssertionError: expected 0.23 to be close to 0.25, received difference is 0.01999999999999999, but expected 0.005
+======== deck-score-coverage-round1.test.ts :: closes the round-1 S = 0 MISS: the floor that caused it is retired :: [('deck-score-coverage-round1.test.ts', '196')]
+AssertionError: expected 87.5 to be close to 87.1, received difference is 0.4000000000000057, but expected 0.05
+======== deck-score-v13-stage2.test.ts :: pins the first 20 section-5 validation piles :: [('deck-score-v13-stage2.test.ts', '313')]
+AssertionError: expected [ 65, 46, 60, 47, 59, 65, 65, …(13) ] to deeply equal [ 65, 46, 60, 47, 59, 65, 63, …(13) ]
+======== deck-score-v13-stage2.test.ts :: pins ten controls whose seeds and source lists are disjoint from training :: [('deck-score-v13-stage2.test.ts', '331')]
+AssertionError: expected [ Array(10) ] to deeply equal [ Array(10) ]
+======== deck-score-v13-stage3.test.ts :: pins ten fresh matched controls — stage 3 leaked four of them, stage 4a none :: [('deck-score-v13-stage3.test.ts', '457')]
+AssertionError: expected [ Array(10) ] to deeply equal [ Array(10) ]
+======== deck-score-v13-stage4a.test.ts :: freezes every re-measured band at the measurement :: [('deck-score-v13-stage4a.test.ts', '132')]
+AssertionError: control.engine: expected [ 6, 17 ] to deeply equal [ 7, 17 ]
+======== deck-score-v13-stage4a.test.ts :: pins the first twenty fresh stride-drawn controls :: [('deck-score-v13-stage4a.test.ts', '224')]
+AssertionError: expected [ 56, 48, 66, 46, 44, 41, 58, …(13) ] to deeply equal [ 56, 48, 66, 46, 45, 44, 58, …(13) ]
+======== deck-score-v13-stage4b.test.ts :: pins the measured p25/p90 pairs :: [('deck-score-v13-stage4b.test.ts', '155')]
+AssertionError: expected { min: 19, max: 34 } to deeply equal { min: 20, max: 34 }
+======== deck-score-v13-stage4c.test.ts :: replaces the bimodal v1.3 population with a top-compressed one :: [('deck-score-v13-stage4c.test.ts', '214')]
+AssertionError: expected 81.67500081675001 to be close to 81.27, received difference is 0.4050008167500181, but expected 0.05
+======== deck-score-v14-stage1c.test.ts :: the spellslinger family is part of the frozen W domain :: [('deck-score-v14-stage1c.test.ts', '421')]
+AssertionError: expected 'e89ea252ed032582cc2b7f829eb2ba2759b69…' to be '21fa0be02940c884620b08cfd3cbf9558fb42…' // Object.is equality
+======== deck-score-v14-stage1d.test.ts :: domain-v14.json records the same families and catalogue this tree scores with :: [('deck-score-v14-stage1d.test.ts', '436')]
+AssertionError: expected 'e89ea252ed032582cc2b7f829eb2ba2759b69…' to be '21fa0be02940c884620b08cfd3cbf9558fb42…' // Object.is equality
+======== deck-score-v14-stage2.test.ts :: freezes p80 of Q_slot per profile, each an exact rational in its slot count :: [('deck-score-v14-stage2.test.ts', '272')]
+AssertionError: expected 0.4040404 to be close to 0.40606060606060607, received difference is 0.0020202060606060446, but expected 5e-7
+======== deck-score-v14-stage2.test.ts :: pins the Commander prefix: no S zeros, S p50 83.7, total p50 28 :: [('deck-score-v14-stage2.test.ts', '431')]
+AssertionError: expected 55 to be 53 // Object.is equality
+======== deck-score-v14-stage2.test.ts :: pins the Brawl prefix: no S zeros, S p50 87.1, total p50 67 :: [('deck-score-v14-stage2.test.ts', '441')]
+AssertionError: expected 87.5 to be close to 87.1, received difference is 0.4000000000000057, but expected 0.05
+======== deck-score-v14-stage2c.test.ts :: pins the commander reference population and hash :: [('deck-score-v14-stage2c.test.ts', '164')]
+AssertionError: expected 167 to be 168 // Object.is equality
+======== deck-score-v14-stage2c.test.ts :: pins the brawl reference population and hash :: [('deck-score-v14-stage2c.test.ts', '176')]
+AssertionError: expected 404 to be 407 // Object.is equality
+======== deck-score-v14-stage2c.test.ts :: pins the measured anchor ranks :: [('deck-score-v14-stage2c.test.ts', '244')]
+AssertionError: expected 79.27470347113196 to be close to 79.1, received difference is 0.17470347113196283, but expected 0.005
+======== deck-score-v14-stage3.test.ts :: keeps the retained 200-list ctrl93 top tail inside <= 20/200 in both profiles :: [('deck-score-v14-stage3.test.ts', '360')]
+AssertionError: expected 16 to be 20 // Object.is equality
+======== deck-score-v14-stage3b.test.ts :: brawl 348643075 (k=1) after replace-offplan-unknown :: [('deck-score-v14-stage3b.test.ts', '227')]
+AssertionError: expected 88.26494845360824 to be close to 88.19, received difference is 0.07494845360824343, but expected 0.005
+======== deck-score-v14-stage3b.test.ts :: brawl 356465177 (k=1) after replace-offplan-unknown :: [('deck-score-v14-stage3b.test.ts', '227')]
+AssertionError: expected 67.30412371134021 to be close to 67.25, received difference is 0.054123711340210434, but expected 0.005

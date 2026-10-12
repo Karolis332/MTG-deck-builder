@@ -1,0 +1,83 @@
+  ▲ Next.js 14.2.35
+  - Local:        http://localhost:3000
+
+ ✓ Starting...
+ ✓ Ready in 5.7s
+ ○ Compiling /_not-found ...
+Browserslist: browsers data (caniuse-lite) is 8 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+ ✓ Compiled /_not-found in 3.6s (535 modules)
+ GET /lt 404 in 4023ms
+ ✓ Compiled in 700ms (276 modules)
+ GET /lt 404 in 54ms
+ GET /lt 404 in 42ms
+ GET /lt 404 in 39ms
+ GET /lt 404 in 58ms
+ GET /lt 404 in 58ms
+ GET /lt 404 in 72ms
+ GET /lt 404 in 56ms
+ GET /lt 404 in 29ms
+ GET /lt 404 in 74ms
+ ✓ Compiled /login in 406ms (555 modules)
+ GET /lt 404 in 425ms
+ GET /login 200 in 609ms
+ GET /lt 404 in 60ms
+ GET /lt 404 in 31ms
+ GET /lt 404 in 60ms
+ GET /lt 404 in 40ms
+ GET /lt 404 in 73ms
+ GET /lt 404 in 75ms
+ GET /lt 404 in 74ms
+ GET /lt 404 in 66ms
+ GET /lt 404 in 42ms
+ ○ Compiling /api/auth/register ...
+ ✓ Compiled /api/auth/register in 555ms (403 modules)
+ POST /api/auth/register 201 in 797ms
+ ✓ Compiled / in 174ms (673 modules)
+ GET / 200 in 305ms
+ GET / 200 in 62ms
+ GET / 200 in 59ms
+ ✓ Compiled /api/auth/login in 138ms (409 modules)
+ POST /api/auth/login 200 in 276ms
+ ○ Compiling /deck/[id] ...
+ ✓ Compiled /deck/[id] in 1011ms (805 modules)
+ GET /deck/123 200 in 1600ms
+ ⚠ Cross origin request detected from 127.0.0.1 to /_next/* resource. In a future major version of Next.js, you will need to explicitly configure "allowedDevOrigins" in next.config to allow this.
+Read more: https://nextjs.org/docs/app/api-reference/config/next-config-js/allowedDevOrigins
+ ✓ Compiled /api/decks/[id]/build-explanation in 263ms (478 modules)
+ ✓ Compiled (483 modules)
+ GET /api/auth/me 200 in 528ms
+ ✓ Compiled /api/cf-player in 125ms (486 modules)
+ GET /api/auth/me 200 in 277ms
+ POST /api/cf-player 200 in 316ms
+ GET /api/decks/123 200 in 985ms
+ GET /api/decks/123/build-explanation 200 in 988ms
+ ✓ Compiled /api/deck-analysis in 171ms (495 modules)
+ ✓ Compiled in 1ms (495 modules)
+ POST /api/cf-player 200 in 373ms
+ ✓ Compiled /api/arena-matches in 0ms (495 modules)
+ ✓ Compiled in 0ms (504 modules)
+ GET /api/deck-analysis?deckId=123 200 in 727ms
+ ✓ Compiled /api/decks in 0ms (504 modules)
+ GET /api/decks/123/build-explanation 200 in 690ms
+ GET /api/decks/123 200 in 721ms
+ ✓ Compiled in 0ms (506 modules)
+ GET /api/favourites?deck_id=123 200 in 881ms
+ GET /api/arena-matches 200 in 880ms
+ GET /api/ai-suggest/ml-check?deck_id=123 200 in 887ms
+ GET /api/decks 200 in 558ms
+ ✓ Compiled /api/ai-suggest in 312ms (522 modules)
+ GET /api/favourites?deck_id=123 200 in 517ms
+ GET /api/arena-matches 200 in 516ms
+ GET /api/ai-suggest/ml-check?deck_id=123 200 in 517ms
+ GET /api/decks 200 in 496ms
+ POST /api/ai-suggest 200 in 1499ms
+ POST /api/ai-suggest 200 in 1498ms
+ GET /api/favourites?deck_id=123 200 in 900ms
+ GET /api/arena-matches 200 in 937ms
+ GET /api/decks 200 in 67ms
+ GET /api/favourites?deck_id=123 200 in 44ms
+ GET /api/arena-matches 200 in 72ms
+ GET /api/decks 200 in 77ms
+[?25h

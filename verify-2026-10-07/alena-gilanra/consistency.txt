@@ -24,7 +24,7 @@
 1 Gigantic Big Bear
 1 Llanowar Elves
 1 Monstrous Vortex
-16 Mountain
+15 Mountain
 1 Myojin of Roaring Blades
 1 Oblivion Sower
 1 Outcaster Trailblazer
@@ -40,7 +40,6 @@
 1 Farseek
 1 Selvala, Heart of the Wilds
 1 The Legend of Kyoshi
-1 Shriekwood Devourer
 1 Slinza, the Spiked Stampede
 1 Sol Ring
 1 Soul of the Harvest
@@ -69,3 +68,5 @@
 1 Riveteers Overlook
 1 Evolving Wilds
 1 Skyshroud Claim
+1 Apex Devastator
+1 Horizon of Progress

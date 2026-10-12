@@ -1,0 +1,14 @@
+py sim.py var/B.txt --games 40000 > var/B.o.out
+py sim.py var/B.txt --games 40000 --chump > var/B.c.out
+py sim.py var/F1.txt --games 40000 > var/F1.o.out
+py sim.py var/F1.txt --games 40000 --chump > var/F1.c.out
+py sim.py var/BlotL.txt --games 20000 > var/BlotL.o.out
+py sim.py var/BlotL.txt --games 20000 --chump > var/BlotL.c.out
+py sim.py var/BlotX.txt --games 20000 > var/BlotX.o.out
+py sim.py var/BlotX.txt --games 20000 --chump > var/BlotX.c.out
+py sim.py var/BtecX.txt --games 20000 > var/BtecX.o.out
+py sim.py var/BtecX.txt --games 20000 --chump > var/BtecX.c.out
+py sim.py var/BtecL.txt --games 20000 > var/BtecL.o.out
+py sim.py var/BtecL.txt --games 20000 --chump > var/BtecL.c.out
+py sim.py var/F1rg.txt --games 20000 > var/F1rg.o.out
+py sim.py var/F1rg.txt --games 20000 --chump > var/F1rg.c.out

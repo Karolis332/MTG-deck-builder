@@ -1,0 +1,26 @@
+screened 450/450, passed 25, last card read: Opal Lake Gatekeepers
+- Fatehold Charm — loyalty support / fodder (Jace token) + draw or bounce — "Draw a card. Empower Jace 2." / "Return target spell or creature to its owner's hand." — beats: Plan for All Outcomes
+- The Spot, Living Portal — big creature (removal on reveal) — "When The Spot enters, exile up to one target nonland permanent and up to one target nonland permanent card from a graveyard." — beats: Mirkwood Bats
+- Liliana the Repentant — walker recursion on a cheap body (dilutes −3; mill trigger) — "Exhaust — {5}{B}: Return target creature or planeswalker card from your graveyard to the battlefield." — beats: Professional Face-Breaker
+- Powerstone Fracture — removal (hits walkers, eats a token) — "As an additional cost to cast this spell, sacrifice an artifact or creature. | Destroy target creature or planeswalker." — beats: Feed the Swarm
+- Sound the Trumpets — counterspell (role short) — "Counter target spell. If that spell's mana value was 2 or less, recruit." — beats: fills the counter role (deck has 3)
+- Draconic Visitor — big creature / Treasure payoff — "If one or more artifact tokens would be created under your control, that many 5/5 red Dragon creature tokens with flying are created instead." — beats: Pitiless Plunderer
+- Call the Cavalry — noncreature token fodder — "Create two 2/2 white Knight creature tokens with vigilance." — beats: Way of the Healer
+- Group Project — cheap noncreature token fodder — "Create a 2/2 red and white Spirit creature token. | Flashback—Tap three untapped creatures you control." — beats: Way of the Healer
+- Malicious Eclipse — cheap sweeper that spares walkers — "All creatures get -2/-2 until end of turn. If a creature an opponent controls would die this turn, exile it instead." — beats: Fumigate (vs aggro starts)
+- Theorist's Sanctum — land that makes Jace tokens (fodder + walker) — "{2}{U}, {T}: Empower Jace 2." — beats: Evolving Wilds
+- Voltage Surge — 1-mana removal that hits walkers — "Voltage Surge deals 2 damage to target creature or planeswalker. If this spell's additional cost was paid, Voltage Surge deals 4 damage instead." — beats: Abrade
+- Cloak and Dagger, Entwined — creature with disruption on reveal — "Deathtouch, lifelink | ... You may exile a nonland card from their hand or the chosen creature until Cloak and Dagger leave the battlefield." — beats: Mirkwood Bats
+- Mystical Tether — removal (flash option) — "When this enchantment enters, exile target artifact or creature an opponent controls until this enchantment leaves the battlefield." — beats: Feed the Swarm
+- Tractor Beam — steal best threat — "You control enchanted permanent. | Enchanted permanent doesn't untap during its controller's untap step." — beats: Resculpt
+- Riddlemaster Sphinx — big flyer with tempo on reveal — "Flying | When this creature enters, you may return target creature an opponent controls to its owner's hand." — beats: Mirkwood Bats
+- Vanish from Sight — instant tuck for any nonland permanent (answers walkers) — "Target nonland permanent's owner puts it on their choice of the top or bottom of their library. Surveil 1." — beats: Resculpt
+- Trip Up — instant tuck, never dead — "Target nonland permanent's owner puts it on their choice of the top or bottom of their library. | Cycling {2}" — beats: Resculpt
+- Countersculpt — 2-mana hard counter that makes a Jace token — "As an additional cost to cast this spell, behold a Jace or pay {1}. | Counter target spell. Empower Jace 1." — beats: Negate
+- Super Villain Lockup — 2-mana flash exile on an attacker — "Flash | When this enchantment enters, exile target tapped creature an opponent controls until this enchantment leaves the battlefield." — beats: Feed the Swarm
+- Explosive Prodigy — cheap removal on a body (dilutes −3) — "Vivid — When this creature enters, it deals X damage to target creature an opponent controls, where X is the number of colors among permanents you control." — beats: Professional Face-Breaker
+- Lassoed by the Law — removal + fodder in one noncreature card — "exile target nonland permanent an opponent controls until this enchantment leaves the battlefield. | When this enchantment enters, create a 1/1 red Mercenary creature token" — beats: Resculpt
+- Way of the Mind Sculptor — loyalty support + draw — "empower Jace 5. ... Whenever you activate a loyalty ability, if you removed two or more loyalty counters to activate it, draw a card." — beats: Way of the Healer
+- Gideon's Memorial — walker ramp + attacker removal — "{T}: Add one mana of any color. Spend this mana only to cast a planeswalker spell. | {1}{W}, Discard this card: It deals 4 damage to target attacking or blocking creature." — beats: Lightning Greaves
+- Garruk, Veiled Butcher — planeswalker (edict + 4/4 fodder + discard) — "−2: Each player sacrifices a creature of their choice. If you sacrificed a creature this way, create a 4/4 green Beast creature token with trample." — beats: Quintorius, History Chaser
+- Sphinx's Approach — instant card draw — "Draw two cards." — beats: Big Score

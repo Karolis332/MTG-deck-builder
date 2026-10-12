@@ -1,0 +1,18 @@
+py sim.py var/base2.txt --games 40000 > var/base2.o.out
+py sim.py var/base2.txt --games 40000 --chump > var/base2.c.out
+py sim.py var/C1.txt --games 40000 > var/C1.o.out
+py sim.py var/C1.txt --games 40000 --chump > var/C1.c.out
+py sim.py var/rgIfr2.txt --games 20000 > var/rgIfr2.o.out
+py sim.py var/rgIfr2.txt --games 20000 --chump > var/rgIfr2.c.out
+py sim.py var/rgLoot2.txt --games 20000 > var/rgLoot2.o.out
+py sim.py var/rgLoot2.txt --games 20000 --chump > var/rgLoot2.c.out
+py sim.py var/rgThr2.txt --games 20000 > var/rgThr2.o.out
+py sim.py var/rgThr2.txt --games 20000 --chump > var/rgThr2.c.out
+py sim.py var/rgSeize2.txt --games 20000 > var/rgSeize2.o.out
+py sim.py var/rgSeize2.txt --games 20000 --chump > var/rgSeize2.c.out
+py sim.py var/lotusY2.txt --games 20000 > var/lotusY2.o.out
+py sim.py var/lotusY2.txt --games 20000 --chump > var/lotusY2.c.out
+py sim.py var/lotusL2.txt --games 20000 > var/lotusL2.o.out
+py sim.py var/lotusL2.txt --games 20000 --chump > var/lotusL2.c.out
+py sim.py var/lotusF2.txt --games 20000 > var/lotusF2.o.out
+py sim.py var/lotusF2.txt --games 20000 --chump > var/lotusF2.c.out

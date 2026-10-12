@@ -1,0 +1,77 @@
+file      : verify-2026-10-09/color-best/decks/WR/final.txt
+format    : commander   commander: Duke Ulder Ravengard
+totals    : 100 cards | 36 lands (36 eff.) | 63 nonland | avg MV 3.48
+curve     : 0:1 1:9 2:15 3:11 4:10 5:3 6:8 7:6
+VERDICT   : FAIL
+
+  PASS  size        100 cards (commander wants 100)
+  PASS  singleton   singleton respected (basics exempt)
+  PASS  legality    every card legal in commander
+  PASS  rules       no other format rule broken
+  PASS  identity    all cards inside RW
+  PASS  ownership   all cards owned; paper collection imported 0 days ago
+  PASS  arenaNames  every line uses a name Arena accepts
+  WARN  lands       36 lands (+0 MDFC land backs = 36 effective); Karsten wants 40 ±2
+  FAIL  plan        4/63 nonland cards interact (6%) — commander wants: creates tokens
+        - Walking Ballista (MV 0)
+        - Basilisk Collar (MV 1)
+        - Cloudshift (MV 1)
+        - Dispatch (MV 1)
+        - Faithless Looting (MV 1)
+        - Final Showdown (MV 1)
+        - Path to Exile (MV 1)
+        - Sol Ring (MV 1)
+        - Swords to Plowshares (MV 1)
+        - Wayfarer's Bauble (MV 1)
+        - Abrade (MV 2)
+        - All That Glitters (MV 2)
+        - Arcane Signet (MV 2)
+        - Boros Charm (MV 2)
+        - Darksteel Mutation (MV 2)
+        - Dawnbringer Cleric (MV 2)
+        - Grand Abolisher (MV 2)
+        - Pearl Medallion (MV 2)
+        - Return the Favor (MV 2)
+        - Selfless Spirit (MV 2)
+        - Sheltered by Ghosts (MV 2)
+        - Sword of the Animist (MV 2)
+        - Talisman of Conviction (MV 2)
+        - Thought Vessel (MV 2)
+        - Thrill of Possibility (MV 2)
+        - Another Round (MV 3)
+        - Chaos Warp (MV 3)
+        - Chromatic Lantern (MV 3)
+        - Cloud Key (MV 3)
+        - Commander's Sphere (MV 3)
+        - Foundry Inspector (MV 3)
+        - Generous Gift (MV 3)
+        - Ghostly Prison (MV 3)
+        - Nadaar, Selfless Paladin (MV 3)
+        - Secret Rendezvous (MV 3)
+        - Blade Historian (MV 4)
+        - Caves of Chaos Adventurer (MV 4)
+        - Firemane Commando (MV 4)
+        - Hedron Archive (MV 4)
+        - Mangara, the Diplomat (MV 4)
+        - Panharmonicon (MV 4)
+        - Seasoned Dungeoneer (MV 4)
+        - Solemn Simulacrum (MV 4)
+        - Thran Dynamo (MV 4)
+        - Gilded Lotus (MV 5)
+        - Terror of the Peaks (MV 5)
+        - Combustible Gearhulk (MV 6)
+        - Eldrazi Ravager (MV 6)
+        - Etali, Primal Storm (MV 6)
+        - Sami, Wildcat Captain (MV 6)
+        - Steel Hellkite (MV 6)
+        - Trumpeting Carnosaur (MV 6)
+        - Warstorm Surge (MV 6)
+        - Angel of the Ruins (MV 7)
+        - Bane of Bala Ged (MV 7)
+        - Hour of Reckoning (MV 7)
+        - Kindred Judgment (MV 7)
+        - Meteor Golem (MV 7)
+        - Blasphemous Act (MV 9)
+  PASS  curve       avg MV 3.48; commander sets no cost threshold
+  PASS  wincons     16 win condition(s)/closer(s)
+  PASS  locks       4 locked card(s) present and intact

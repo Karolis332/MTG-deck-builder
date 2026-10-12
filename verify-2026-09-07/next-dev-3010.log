@@ -1,0 +1,351 @@
+  ▲ Next.js 14.2.35
+  - Local:        http://localhost:3010
+
+ ✓ Starting...
+ ✓ Ready in 1630ms
+ ○ Compiling /login ...
+Browserslist: browsers data (caniuse-lite) is 8 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+ ✓ Compiled /login in 2.4s (566 modules)
+ ✓ Compiled in 502ms (276 modules)
+ GET /login 200 in 72ms
+ ○ Compiling /api/auth/login ...
+ ✓ Compiled /api/auth/login in 529ms (402 modules)
+ POST /api/auth/login 200 in 782ms
+ ○ Compiling /deck/[id] ...
+ ✓ Compiled /deck/[id] in 771ms (794 modules)
+ GET /deck/123 200 in 1373ms
+ ⚠ Cross origin request detected from 127.0.0.1 to /_next/* resource. In a future major version of Next.js, you will need to explicitly configure "allowedDevOrigins" in next.config to allow this.
+Read more: https://nextjs.org/docs/app/api-reference/config/next-config-js/allowedDevOrigins
+ ✓ Compiled /api/decks/[id]/build-explanation in 128ms (471 modules)
+ ✓ Compiled (476 modules)
+ GET /api/auth/me 200 in 364ms
+ ✓ Compiled /api/cf-player in 107ms (479 modules)
+ GET /api/auth/me 200 in 236ms
+ POST /api/cf-player 200 in 276ms
+ POST /api/cf-player 200 in 43ms
+ GET /api/decks/123 200 in 818ms
+ GET /api/decks/123/build-explanation 200 in 828ms
+ ✓ Compiled /api/deck-analysis in 136ms (488 modules)
+ ✓ Compiled /api/arena-matches in 0ms (488 modules)
+ ✓ Compiled in 0ms (497 modules)
+ GET /api/deck-analysis?deckId=123 200 in 580ms
+ GET /api/decks/123/build-explanation 200 in 536ms
+ GET /api/decks/123 200 in 554ms
+ GET /api/arena-matches 200 in 466ms
+ GET /api/ai-suggest/ml-check?deck_id=123 200 in 487ms
+ GET /api/favourites?deck_id=123 200 in 484ms
+ ✓ Compiled /api/decks in 128ms (499 modules)
+ GET /api/favourites?deck_id=123 200 in 281ms
+ GET /api/decks 200 in 354ms
+ GET /api/ai-suggest/ml-check?deck_id=123 200 in 291ms
+ GET /api/arena-matches 200 in 326ms
+ GET /api/favourites?deck_id=123 200 in 66ms
+ ✓ Compiled /api/ai-suggest in 261ms (515 modules)
+ GET /api/arena-matches 200 in 420ms
+ GET /api/decks 200 in 426ms
+ GET /api/favourites?deck_id=123 200 in 397ms
+ POST /api/ai-suggest 200 in 1136ms
+ POST /api/ai-suggest 200 in 1136ms
+ GET /api/decks 200 in 751ms
+ GET /api/arena-matches 200 in 780ms
+ ✓ Compiled /api/cards/search in 149ms (518 modules)
+ GET /api/decks 200 in 226ms
+ GET /api/cards/search?q=Jodah%2C%20the%20Unifier&limit=1 200 in 363ms
+ GET /api/cards/search?q=Zoraline%2C%20Cosmos%20Caller&limit=1 200 in 360ms
+ GET /api/cards/search?q=Flubs%2C%20the%20Fool&limit=1 200 in 357ms
+ GET /api/cards/search?q=Geralf%2C%20the%20Fleshwright&limit=1 200 in 357ms
+ GET /api/cards/search?q=Bristly%20Bill%2C%20Spine%20Sower&limit=1 200 in 294ms
+ GET /api/cards/search?q=Jodah%2C%20the%20Unifier&limit=1 200 in 77ms
+ GET /api/cards/search?q=Zoraline%2C%20Cosmos%20Caller&limit=1 200 in 77ms
+ GET /api/cards/search?q=Flubs%2C%20the%20Fool&limit=1 200 in 77ms
+ GET /api/cards/search?q=Geralf%2C%20the%20Fleshwright&limit=1 200 in 76ms
+ GET /api/cards/search?q=Bristly%20Bill%2C%20Spine%20Sower&limit=1 200 in 74ms
+ GET /api/cards/search?q=Bristly%20Bill%2C%20Spine%20Sower&limit=1 200 in 16ms
+ GET /api/cards/search?q=Flubs%2C%20the%20Fool&limit=1 200 in 34ms
+ GET /api/cards/search?q=Geralf%2C%20the%20Fleshwright&limit=1 200 in 53ms
+ GET /api/cards/search?q=Bristly%20Bill%2C%20Spine%20Sower&limit=1 200 in 51ms
+ POST /api/auth/login 200 in 100ms
+ GET /deck/123 200 in 144ms
+ GET /api/auth/me 200 in 27ms
+ GET /api/decks/123 200 in 44ms
+ GET /api/decks/123/build-explanation 200 in 53ms
+ GET /api/auth/me 200 in 30ms
+ GET /api/decks/123 200 in 46ms
+ GET /api/decks/123/build-explanation 200 in 49ms
+ POST /api/cf-player 200 in 59ms
+ GET /api/ai-suggest/ml-check?deck_id=123 200 in 35ms
+ GET /api/decks 200 in 33ms
+ GET /api/arena-matches 200 in 63ms
+ GET /api/favourites?deck_id=123 200 in 71ms
+ GET /api/ai-suggest/ml-check?deck_id=123 200 in 61ms
+ GET /api/decks 200 in 31ms
+ GET /api/arena-matches 200 in 57ms
+ POST /api/cf-player 200 in 60ms
+ GET /api/favourites?deck_id=123 200 in 62ms
+ GET /api/decks 200 in 48ms
+ GET /api/arena-matches 200 in 41ms
+ GET /api/favourites?deck_id=123 200 in 48ms
+ GET /api/decks 200 in 49ms
+ GET /api/arena-matches 200 in 55ms
+ GET /api/favourites?deck_id=123 200 in 57ms
+ GET /api/cards/search?q=Jodah%2C%20the%20Unifier&limit=1 200 in 110ms
+ GET /api/cards/search?q=Zoraline%2C%20Cosmos%20Caller&limit=1 200 in 109ms
+ GET /api/cards/search?q=Flubs%2C%20the%20Fool&limit=1 200 in 107ms
+ GET /api/cards/search?q=Geralf%2C%20the%20Fleshwright&limit=1 200 in 97ms
+ GET /api/cards/search?q=Bristly%20Bill%2C%20Spine%20Sower&limit=1 200 in 84ms
+ GET /api/cards/search?q=Jodah%2C%20the%20Unifier&limit=1 200 in 65ms
+ GET /api/cards/search?q=Zoraline%2C%20Cosmos%20Caller&limit=1 200 in 64ms
+ GET /api/cards/search?q=Flubs%2C%20the%20Fool&limit=1 200 in 64ms
+ GET /api/cards/search?q=Geralf%2C%20the%20Fleshwright&limit=1 200 in 85ms
+ GET /api/cards/search?q=Bristly%20Bill%2C%20Spine%20Sower&limit=1 200 in 82ms
+ GET /api/cards/search?q=Zoraline%2C%20Cosmos%20Caller&limit=1 200 in 57ms
+ GET /api/cards/search?q=Flubs%2C%20the%20Fool&limit=1 200 in 57ms
+ GET /api/cards/search?q=Geralf%2C%20the%20Fleshwright&limit=1 200 in 56ms
+ GET /api/deck-analysis?deckId=123 200 in 116ms
+ POST /api/ai-suggest 200 in 682ms
+ POST /api/ai-suggest 200 in 682ms
+ POST /api/arena-matches 200 in 82ms
+ POST /api/arena-matches 200 in 81ms
+ POST /api/arena-matches 200 in 80ms
+ POST /api/arena-matches 200 in 80ms
+ POST /api/arena-matches 200 in 80ms
+ POST /api/arena-matches 200 in 79ms
+ POST /api/arena-matches 200 in 78ms
+ POST /api/arena-matches 200 in 78ms
+ POST /api/arena-matches 200 in 78ms
+ POST /api/arena-matches 200 in 77ms
+ POST /api/arena-matches 200 in 77ms
+ POST /api/arena-matches 200 in 77ms
+ ✓ Compiled / in 352ms (721 modules)
+ GET / 200 in 502ms
+ ✓ Compiled /api/auth/me in 91ms (465 modules)
+ ✓ Compiled (472 modules)
+ GET /api/decks 200 in 329ms
+ GET /api/auth/me 200 in 326ms
+ GET /api/collection 200 in 422ms
+ GET /api/cards/search?q=&limit=1 200 in 434ms
+ GET /api/decks 200 in 42ms
+ ✓ Compiled /api/cf-player in 105ms (474 modules)
+ GET /api/cards/search?q=&limit=1 200 in 253ms
+ GET /api/auth/me 200 in 257ms
+ GET /api/collection 200 in 332ms
+ POST /api/cf-player 200 in 360ms
+ POST /api/cf-player 200 in 26ms
+ ✓ Compiled /api/decks/[id]/build-explanation in 306ms (487 modules)
+ ✓ Compiled (489 modules)
+ GET /api/decks/122 200 in 506ms
+ GET /api/decks/122/build-explanation 200 in 519ms
+ GET /api/decks/122 200 in 30ms
+ GET /api/decks/122/build-explanation 200 in 30ms
+ ✓ Compiled /api/favourites in 140ms (491 modules)
+ GET /api/cards/search?q=_healthcheck_ 500 in 952ms
+ ✓ Compiled /api/deck-analysis in 0ms (493 modules)
+ GET /api/arena-matches 200 in 370ms
+ ✓ Compiled /api/arena-telemetry in 1ms (502 modules)
+ ✓ Compiled in 1ms (504 modules)
+ GET /api/ai-suggest/ml-check?deck_id=122 200 in 738ms
+ GET /api/decks 200 in 732ms
+ ✓ Compiled /api/ai-suggest in 0ms (504 modules)
+ GET /api/favourites?deck_id=122 200 in 916ms
+ ✓ Compiled in 0ms (520 modules)
+ GET /api/arena-matches 200 in 776ms
+ GET /api/deck-analysis?deckId=122 200 in 1008ms
+ ✓ Compiled in 0ms (520 modules)
+ POST /api/arena-telemetry 200 in 1057ms
+ ✓ Compiled in 1ms (520 modules)
+ GET /api/ai-suggest/ml-check?deck_id=122 200 in 724ms
+ GET /api/decks 200 in 725ms
+ ✓ Compiled in 0ms (520 modules)
+ POST /api/ai-suggest 200 in 1466ms
+ POST /api/ai-suggest 200 in 1600ms
+ GET /api/favourites?deck_id=122 200 in 1380ms
+ GET /api/arena-matches 200 in 1380ms
+ GET /api/decks 200 in 1088ms
+ GET /api/arena-matches 200 in 52ms
+ GET /api/favourites?deck_id=122 200 in 54ms
+ GET /api/decks 200 in 53ms
+ GET /api/cards/search?q=Jodah%2C%20the%20Unifier&limit=1 200 in 99ms
+ GET /api/cards/search?q=Zoraline%2C%20Cosmos%20Caller&limit=1 200 in 98ms
+ GET /api/cards/search?q=Flubs%2C%20the%20Fool&limit=1 200 in 97ms
+ GET /api/cards/search?q=Geralf%2C%20the%20Fleshwright&limit=1 200 in 104ms
+ GET /api/cards/search?q=Bristly%20Bill%2C%20Spine%20Sower&limit=1 200 in 103ms
+ GET /api/favourites?deck_id=122 200 in 108ms
+ GET /api/cards/search?q=Jodah%2C%20the%20Unifier&limit=1 200 in 76ms
+ GET /api/cards/search?q=Zoraline%2C%20Cosmos%20Caller&limit=1 200 in 76ms
+ GET /api/cards/search?q=Flubs%2C%20the%20Fool&limit=1 200 in 96ms
+ GET /api/cards/search?q=Geralf%2C%20the%20Fleshwright&limit=1 200 in 94ms
+ GET /api/cards/search?q=Bristly%20Bill%2C%20Spine%20Sower&limit=1 200 in 94ms
+ GET /api/cards/search?q=Zoraline%2C%20Cosmos%20Caller&limit=1 200 in 62ms
+ GET /api/cards/search?q=Flubs%2C%20the%20Fool&limit=1 200 in 60ms
+ ✓ Compiled /api/decks/auto-build in 183ms (522 modules)
+ POST /api/decks/auto-build 200 in 922ms
+ GET /api/decks/124 200 in 64ms
+ GET /api/decks/124/build-explanation 200 in 83ms
+ GET /api/decks/124 200 in 34ms
+ GET /api/decks/124/build-explanation 200 in 33ms
+ GET /api/ai-suggest/ml-check?deck_id=124 200 in 41ms
+ GET /api/decks 200 in 51ms
+ GET /api/favourites?deck_id=124 200 in 62ms
+ GET /api/arena-matches 200 in 110ms
+ GET /api/ai-suggest/ml-check?deck_id=124 200 in 96ms
+ GET /api/decks 200 in 93ms
+ GET /api/favourites?deck_id=124 200 in 43ms
+ GET /api/arena-matches 200 in 79ms
+ GET /api/decks 200 in 63ms
+ GET /api/favourites?deck_id=124 200 in 68ms
+ GET /api/arena-matches 200 in 64ms
+ GET /api/decks 200 in 72ms
+ GET /api/favourites?deck_id=124 200 in 40ms
+ GET /api/arena-matches 200 in 79ms
+ GET /api/cards/search?q=Jodah%2C%20the%20Unifier&limit=1 200 in 145ms
+ GET /api/cards/search?q=Zoraline%2C%20Cosmos%20Caller&limit=1 200 in 144ms
+ GET /api/cards/search?q=Flubs%2C%20the%20Fool&limit=1 200 in 142ms
+ GET /api/cards/search?q=Geralf%2C%20the%20Fleshwright&limit=1 200 in 137ms
+ GET /api/cards/search?q=Bristly%20Bill%2C%20Spine%20Sower&limit=1 200 in 106ms
+ GET /api/cards/search?q=Jodah%2C%20the%20Unifier&limit=1 200 in 85ms
+ GET /api/cards/search?q=Zoraline%2C%20Cosmos%20Caller&limit=1 200 in 84ms
+ GET /api/cards/search?q=Flubs%2C%20the%20Fool&limit=1 200 in 83ms
+ GET /api/cards/search?q=Geralf%2C%20the%20Fleshwright&limit=1 200 in 83ms
+ GET /api/cards/search?q=Bristly%20Bill%2C%20Spine%20Sower&limit=1 200 in 85ms
+ GET /api/cards/search?q=Geralf%2C%20the%20Fleshwright&limit=1 200 in 35ms
+ GET /api/cards/search?q=Geralf%2C%20the%20Fleshwright&limit=1 200 in 28ms
+ GET /api/deck-analysis?deckId=124 200 in 34ms
+ POST /api/ai-suggest 200 in 953ms
+ POST /api/ai-suggest 200 in 952ms
+ POST /api/arena-telemetry 200 in 20ms
+ POST /api/arena-telemetry 200 in 15ms
+ POST /api/arena-telemetry 200 in 29ms
+ POST /api/arena-telemetry 200 in 29ms
+ POST /api/arena-matches 200 in 36ms
+ ○ Compiling /deck-builder ...
+ ✓ Compiled /deck-builder in 515ms (729 modules)
+ ✓ Compiled /api/settings in 102ms (471 modules)
+ ✓ Compiled (473 modules)
+ GET /api/decks 200 in 262ms
+ GET /api/settings 200 in 270ms
+ GET /api/decks 200 in 20ms
+ GET /api/settings 200 in 26ms
+ ✓ Compiled /api/decks/[id] in 82ms (478 modules)
+ DELETE /api/decks/124 200 in 138ms
+ ✓ Compiled /api/arena-telemetry in 160ms (393 modules)
+ POST /api/arena-telemetry 200 in 206ms
+ POST /api/arena-telemetry 200 in 16ms
+ POST /api/arena-telemetry 200 in 18ms
+ POST /api/arena-telemetry 200 in 16ms
+ POST /api/arena-telemetry 200 in 17ms
+ ✓ Compiled /api/arena-matches in 223ms (399 modules)
+ POST /api/arena-telemetry 200 in 371ms
+ POST /api/arena-telemetry 200 in 372ms
+ POST /api/arena-matches 200 in 458ms
+ POST /api/arena-telemetry 200 in 59ms
+ POST /api/arena-telemetry 200 in 20ms
+ POST /api/arena-telemetry 200 in 28ms
+ POST /api/arena-telemetry 200 in 21ms
+ POST /api/arena-matches 200 in 39ms
+ POST /api/arena-telemetry 200 in 47ms
+ POST /api/arena-telemetry 200 in 45ms
+ POST /api/arena-telemetry 200 in 26ms
+ POST /api/arena-telemetry 200 in 37ms
+ POST /api/arena-telemetry 200 in 33ms
+ POST /api/arena-telemetry 200 in 34ms
+ POST /api/arena-matches 200 in 40ms
+ ✓ Compiled /api/decks/[id] in 323ms (482 modules)
+ DELETE /api/decks/122 200 in 606ms
+ POST /api/arena-telemetry 200 in 74ms
+ POST /api/arena-telemetry 200 in 18ms
+ POST /api/arena-telemetry 200 in 17ms
+ POST /api/arena-matches 200 in 102ms
+ POST /api/arena-telemetry 200 in 111ms
+ POST /api/arena-telemetry 200 in 111ms
+ POST /api/arena-telemetry 200 in 29ms
+ POST /api/arena-telemetry 200 in 18ms
+ POST /api/arena-telemetry 200 in 18ms
+ POST /api/arena-telemetry 200 in 16ms
+ POST /api/arena-telemetry 200 in 29ms
+ POST /api/arena-telemetry 200 in 28ms
+ POST /api/arena-matches 200 in 36ms
+ POST /api/arena-telemetry 200 in 14ms
+ POST /api/arena-telemetry 200 in 15ms
+ POST /api/arena-matches 200 in 26ms
+ POST /api/arena-telemetry 200 in 32ms
+ POST /api/arena-telemetry 200 in 31ms
+ POST /api/arena-telemetry 200 in 16ms
+ POST /api/arena-telemetry 200 in 15ms
+ POST /api/arena-telemetry 200 in 18ms
+ POST /api/arena-matches 200 in 29ms
+ POST /api/arena-telemetry 200 in 35ms
+ POST /api/arena-telemetry 200 in 34ms
+ POST /api/arena-telemetry 200 in 18ms
+ POST /api/arena-telemetry 200 in 20ms
+ POST /api/arena-telemetry 200 in 17ms
+ POST /api/arena-telemetry 200 in 18ms
+ POST /api/arena-telemetry 200 in 27ms
+ POST /api/arena-telemetry 200 in 27ms
+ POST /api/arena-matches 200 in 32ms
+ POST /api/arena-telemetry 200 in 19ms
+ POST /api/arena-telemetry 200 in 17ms
+ POST /api/arena-telemetry 200 in 19ms
+ POST /api/arena-telemetry 200 in 16ms
+ ○ Compiling /collection ...
+ ✓ Compiled /collection in 1005ms (712 modules)
+ ✓ Compiled in 446ms (347 modules)
+ ✓ Compiled /api/collection in 297ms (468 modules)
+ GET /api/collection?page=1&limit=50&source=paper 200 in 569ms
+ GET /api/collection?page=1&limit=50&source=paper 200 in 153ms
+ ✓ Compiled /api/settings in 205ms (470 modules)
+ ✓ Compiled (472 modules)
+ GET /api/settings 200 in 471ms
+ GET /api/decks 200 in 481ms
+ GET /api/settings 200 in 29ms
+ GET /api/decks 200 in 31ms
+ ✓ Compiled /duel in 391ms (811 modules)
+ GET /api/decks 200 in 33ms
+ GET /api/decks 200 in 18ms
+ GET /api/decks 200 in 25ms
+ GET /api/settings 200 in 29ms
+ GET /api/decks 200 in 27ms
+ GET /api/settings 200 in 32ms
+ ✓ Compiled /api/arena-telemetry in 170ms (478 modules)
+ POST /api/arena-telemetry 200 in 239ms
+ ✓ Compiled /api/arena-matches in 217ms (484 modules)
+ POST /api/arena-telemetry 200 in 567ms
+ POST /api/arena-telemetry 200 in 567ms
+ POST /api/arena-matches 200 in 592ms
+ POST /api/arena-telemetry 200 in 19ms
+ POST /api/arena-telemetry 200 in 20ms
+ POST /api/arena-telemetry 200 in 17ms
+ POST /api/arena-telemetry 200 in 18ms
+ POST /api/arena-matches 200 in 30ms
+ POST /api/arena-telemetry 200 in 36ms
+ POST /api/arena-telemetry 200 in 35ms
+ POST /api/arena-telemetry 200 in 18ms
+ POST /api/arena-telemetry 200 in 18ms
+ POST /api/arena-telemetry 200 in 18ms
+ POST /api/arena-telemetry 200 in 19ms
+ POST /api/arena-matches 200 in 30ms
+ POST /api/arena-telemetry 200 in 38ms
+ POST /api/arena-telemetry 200 in 36ms
+ POST /api/arena-telemetry 200 in 74ms
+ POST /api/arena-telemetry 200 in 20ms
+ POST /api/arena-telemetry 200 in 16ms
+ POST /api/arena-telemetry 200 in 27ms
+ POST /api/arena-telemetry 200 in 26ms
+ POST /api/arena-matches 200 in 32ms
+ POST /api/arena-telemetry 200 in 17ms
+ ✓ Compiled in 447ms (349 modules)
+ ✓ Compiled in 762ms (709 modules)
+ ✓ Compiled in 518ms (709 modules)
+ ✓ Compiled /api/arena-telemetry in 86ms (393 modules)
+ POST /api/arena-telemetry 200 in 160ms
+ POST /api/arena-telemetry 200 in 22ms
+ ✓ Compiled /api/auth/login in 311ms (474 modules)
+ POST /api/auth/login 200 in 472ms
+ ✓ Compiled /api/decks/[id]/optimize-apply in 288ms (496 modules)
+ POST /api/decks/123/optimize-apply 200 in 2302ms
+ POST /api/arena-telemetry 200 in 24ms
+ POST /api/arena-telemetry 200 in 38ms
+ POST /api/arena-telemetry 200 in 38ms
+ ✓ Compiled /api/arena-matches in 312ms (399 modules)
+ POST /api/arena-matches 200 in 403ms

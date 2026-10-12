@@ -1,0 +1,21 @@
+BASE obj 81.74 DS 71.8 pen 1 {"land":37,"ramp":10,"draw":12,"removal":12,"board_wipe":4,"protection":7} mana=95 curve=89 interaction=100 advantage=70 win=65 synergy=93 meta=50 structure=100
+  -0.01  Devourer of Destiny => Explosive Derailment   DS 0.0 pen 1 mana=94 curve=90 interaction=100 advantage=70 win=65 synergy=95 meta=50 structure=100
+  -1.97  Cityscape Leveler => Flame of Anor   DS 0.0 pen 2 mana=94 curve=89 interaction=100 advantage=70 win=65 synergy=95 meta=50 structure=100
+   0.03  Cityscape Leveler => Desculpting Blast   DS 0.0 pen 1 mana=94 curve=90 interaction=100 advantage=70 win=65 synergy=93 meta=50 structure=100
+C:\Users\QuLeR\MTG-deck-builder\verify-2026-10-09\tazri\swap-lab.ts:27
+  if (i < 0) throw new Error(`not in list: ${out}`);
+                   ^
+
+Error: not in list: Cityscape Leveler
+    at apply (C:\Users\QuLeR\MTG-deck-builder\verify-2026-10-09\tazri\swap-lab.ts:27:20)
+    at fs (C:\Users\QuLeR\MTG-deck-builder\verify-2026-10-09\tazri\swap-lab.ts:36:9)
+    at Object.<anonymous> (C:\Users\QuLeR\MTG-deck-builder\verify-2026-10-09\tazri\swap-lab.ts:39:148)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object.transformer (C:\Users\QuLeR\MTG-deck-builder\node_modules\tsx\dist\register-D46fvsV_.cjs:3:1104)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at cjsLoader (node:internal/modules/esm/translators:309:5)
+
+Node.js v22.22.0

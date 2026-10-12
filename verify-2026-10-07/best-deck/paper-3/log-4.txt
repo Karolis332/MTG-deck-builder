@@ -1,0 +1,5 @@
+Beledros Witherbloom: 101.19 [land38 ramp12 draw10 remo11 wipe3 prot6 pen0] (seeds cf 54.32 [land37 ramp19 draw12 remo11 wipe1 prot2 pen10] | previous 78.94 [land36 ramp19 draw10 remo9 wipe1 prot4 pen10]; 11 swaps, 264541 ms)
+Gyome, Master Chef: 100.16 [land38 ramp12 draw11 remo12 wipe3 prot6 pen0] (seeds cf 61.93 [land37 ramp21 draw10 remo8 wipe3 prot2 pen12] | previous 74.15 [land36 ramp21 draw9 remo8 wipe2 prot6 pen13]; 10 swaps, 195590 ms)
+Junji, the Midnight Sky: 79.73 [land35 ramp12 draw12 remo10 wipe3 prot5 pen0] (seeds cf 61.74 [land36 ramp13 draw14 remo10 wipe2 prot2 pen5] | previous 58.53 [land34 ramp17 draw14 remo10 wipe2 prot2 pen10]; 10 swaps, 112544 ms)
+Ob Nixilis of the Black Oath: 87.76 [land37 ramp12 draw11 remo12 wipe3 prot5 pen0] (seeds cf 59.27 [land36 ramp15 draw12 remo8 wipe5 prot2 pen7] | previous 69.13 [land34 ramp16 draw13 remo9 wipe5 prot2 pen9]; 12 swaps, 97680 ms)
+The Destined Warrior: 90.96 [land37 ramp12 draw11 remo10 wipe4 prot6 pen0] (seeds cf 65.32 [land37 ramp10 draw16 remo5 wipe1 prot8 pen13] | previous 50.60 [land37 ramp10 draw17 remo3 wipe1 prot13 pen21]; 10 swaps, 145777 ms)

@@ -1,0 +1,3 @@
+cards 22391 · known 14830 (66.2%) · partial 7561
+wrote C:\Users\QuLeR\MTG-deck-builder\src\lib\deck-score-catalog\entries\generated.json (10615 KB, 14830 entries)
+wrote C:\Users\QuLeR\MTG-deck-builder\src\lib\deck-score-catalog\entries\generated-partial.json (5371 KB, 7561 entries)

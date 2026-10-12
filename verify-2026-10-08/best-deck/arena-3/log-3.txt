@@ -1,0 +1,2 @@
+Slash, Reptile Rampager: 108.37 [land37 ramp12 draw12 remo10 wipe2 prot6 pen0] (seeds cf 101.12 [land38 ramp12 draw10 remo8 wipe1 prot7 pen2] | previous 108.11 [land37 ramp12 draw12 remo10 wipe2 prot6 pen0]; 1 swaps, 120304 ms)
+Zurgo, Thunder's Decree: 108.56 [land36 ramp12 draw12 remo12 wipe2 prot6 pen0] (seeds cf 99.14 [land36 ramp7 draw9 remo10 wipe1 prot7 pen3] | previous 108.56 [land36 ramp12 draw12 remo12 wipe2 prot6 pen0]; 0 swaps, 105385 ms)

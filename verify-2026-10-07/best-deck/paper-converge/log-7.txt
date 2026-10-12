@@ -1,0 +1,1 @@
+Peregrin Took: 103.96 (seed 99.80, 44 swaps, 582181 ms)

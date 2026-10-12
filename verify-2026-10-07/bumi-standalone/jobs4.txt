@@ -1,0 +1,18 @@
+py sim.py var/sleeved.txt --games 40000 > var/sleeved.o.out
+py sim.py var/sleeved.txt --games 40000 --chump > var/sleeved.c.out
+py sim.py var/F2.txt --games 40000 > var/F2.o.out
+py sim.py var/F2.txt --games 40000 --chump > var/F2.c.out
+py sim.py var/Xlair.txt --games 40000 > var/Xlair.o.out
+py sim.py var/Xlair.txt --games 40000 --chump > var/Xlair.c.out
+py sim.py var/Xorch.txt --games 40000 > var/Xorch.o.out
+py sim.py var/Xorch.txt --games 40000 --chump > var/Xorch.c.out
+py sim.py var/Xboots.txt --games 40000 > var/Xboots.o.out
+py sim.py var/Xboots.txt --games 40000 --chump > var/Xboots.c.out
+py sim.py var/Xcult.txt --games 40000 > var/Xcult.o.out
+py sim.py var/Xcult.txt --games 40000 --chump > var/Xcult.c.out
+py sim.py var/Xnissa.txt --games 40000 > var/Xnissa.o.out
+py sim.py var/Xnissa.txt --games 40000 --chump > var/Xnissa.c.out
+py sim.py var/Xov.txt --games 40000 > var/Xov.o.out
+py sim.py var/Xov.txt --games 40000 --chump > var/Xov.c.out
+py sim.py var/Xrg.txt --games 40000 > var/Xrg.o.out
+py sim.py var/Xrg.txt --games 40000 --chump > var/Xrg.c.out

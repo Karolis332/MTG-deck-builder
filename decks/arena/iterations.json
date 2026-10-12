@@ -315,6 +315,38 @@
         "1 Ugin, the Ineffable",
         "1 Vraska, Betrayal's Sting"
       ]
+    },
+    {
+      "v": 7,
+      "date": "2026-10-09",
+      "file": "decks/arena/esika-superfriends-v7.txt",
+      "note": "edited in Arena (played as \"Esika Superfriends v1\" on 2026-10-08)",
+      "added": [
+        "1 Garruk, Curse Breaker",
+        "1 Garruk, Veiled Butcher",
+        "1 Jace, Multiverse Architect",
+        "1 Jace, Reality Sculptor",
+        "1 Kaya, Intangible Slayer",
+        "1 Phyrexian Arena",
+        "1 Sarkhan the Masterless",
+        "1 Sheoldred, the Apocalypse",
+        "1 The Eternal Wanderer",
+        "1 Ugin, the Ineffable",
+        "1 Vraska, Betrayal's Sting"
+      ],
+      "removed": [
+        "1 Enduring Vitality",
+        "1 Farseek",
+        "1 Forest",
+        "1 Ilysian Caryatid",
+        "1 Jetmir's Garden",
+        "1 Kiora, Behemoth Beckoner",
+        "1 Paradise Druid",
+        "1 Rampant Growth",
+        "1 Talisman of Curiosity",
+        "1 Talisman of Unity",
+        "1 Wood Elves"
+      ]
     }
   ],
   "Krenko Goblins": [
@@ -405,6 +437,82 @@
       "note": "model #1 Arena list (objective 109.0), 27 filler swaps + 9 land swaps, 34 lands + 3 MDFC",
       "added": [],
       "removed": []
+    }
+  ],
+  "Krrik": [
+    {
+      "v": 1,
+      "date": "2026-10-12",
+      "file": "decks/arena/krrik-v1.txt",
+      "note": "synced from the Arena log (first seen ?)",
+      "added": [],
+      "removed": []
+    }
+  ],
+  "MYTHIC MIKE NEW DINOS!!!!": [
+    {
+      "v": 1,
+      "date": "2026-10-12",
+      "file": "decks/arena/mythic-mike-new-dinos-v1.txt",
+      "note": "synced from the Arena log (first seen 2026-10-12)",
+      "added": [],
+      "removed": []
+    }
+  ],
+  "Boros Superfriends (2)": [
+    {
+      "v": 1,
+      "date": "2026-10-12",
+      "file": "decks/arena/boros-superfriends-2-v1.txt",
+      "note": "synced from the Arena log (first seen 2026-10-12)",
+      "added": [],
+      "removed": []
+    }
+  ],
+  "Anti-Venom Airbend": [
+    {
+      "v": 1,
+      "date": "2026-10-12",
+      "file": "decks/arena/anti-venom-airbend-v1.txt",
+      "note": "quick list: Gyatso airbend engine + Altar/Greaves combo, plainscyclers, catch-up ramp; 141 -> 100",
+      "added": [],
+      "removed": []
+    },
+    {
+      "v": 2,
+      "date": "2026-10-12",
+      "file": "decks/arena/anti-venom-airbend-v2.txt",
+      "note": "converged: builder + refuter (Panharmonicon for Mesmeric Orb); Perilous Myr kill, Chrome Mox + Flawless (Competitive Brawl)",
+      "added": [
+        "1 Éowyn, Lady of Rohan",
+        "1 The Arkenstone",
+        "1 Perilous Myr",
+        "1 Panharmonicon",
+        "1 Krang, Utrom Warlord",
+        "1 Coldsteel Heart",
+        "1 Network Terminal",
+        "1 Chrome Mox",
+        "1 Flawless Maneuver",
+        "1 Tune Up",
+        "1 The One Ring",
+        "1 Witch Enchanter",
+        "1 Plains"
+      ],
+      "removed": [
+        "1 Aang, the Last Airbender",
+        "1 Lavaspur Boots",
+        "1 Cloudshift",
+        "1 Cloudbound Moogle",
+        "1 Mind Stone",
+        "1 Mox Amber",
+        "1 Mox Opal",
+        "1 Ticket Tortoise",
+        "1 Sheltered by Ghosts",
+        "1 Day of Judgment",
+        "1 Urza's Ruinous Blast",
+        "1 Helping Hand",
+        "1 Ancient Den"
+      ]
     }
   ]
 }

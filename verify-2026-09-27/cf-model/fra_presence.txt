@@ -1,0 +1,287 @@
+Codie, Ravenous Codex|2|8|0
+Sureshot Sower|5|9|0
+Shatterwing Pegasus|6|15|1
+Skilled Battlecarver|5|15|1
+Rampart Hunter|6|15|0
+Tether Technician|5|16|0
+Vinelasher Adept|8|17|0
+Graft Surgeon|8|18|0
+Cryotheory Adept|6|18|0
+Undulating Witness|8|18|0
+Gallia, Tragic Host|6|19|2
+Theoretical Necromancer|9|20|0
+Grim Repriser|4|21|1
+Mind Meanderer|5|22|1
+Eardrum Rattler|9|23|3
+Blessed Ghoul|4|23|1
+Twisted Fates|6|23|1
+Predictive Preparations|8|25|0
+Charge the Sanctum|7|27|2
+Danitha, Spear of Agony|9|28|2
+Terminal Criticism|10|28|1
+Heartstring Puller|8|30|0
+Warrior's Blades|7|31|3
+Bestial Incursion|9|31|3
+Arni, Renowned Champion|9|31|1
+Frostbite Pyromental|6|32|2
+Yargle, Goliath of Otaria|11|33|3
+Fateshaper Aspirant|8|33|0
+Afterthought Sentry|14|33|0
+Awaken the Inferno|8|35|0
+Living Library|13|36|1
+Divining Duelist|10|37|0
+Null Summoner|6|37|1
+Essence Burn|8|38|1
+Recursive Recruitment|7|38|1
+Wrath of the Bloodmane|11|39|1
+Fulminous Forte|8|42|1
+Wrecking Gecko|7|42|1
+Extrapolate the Impossible|12|43|2
+Chandra's Emberling|11|43|1
+Apex Witchstalker|12|43|1
+Stinging Vitriol|6|44|2
+Flourishing Grapple|9|45|1
+Tetsuko Umezawa, Pursuer|11|45|3
+Teyo, Diamondblade Mage|10|45|1
+Desperate Futurescribe|5|47|1
+Clash of Elements|7|47|3
+Puppet Crafting|9|50|1
+Precise Redaction|11|51|3
+Tethermage's Advantage|10|52|2
+Silence the Echo|12|53|4
+Budding Insurgent|10|53|2
+Medic's Kitesail|18|54|2
+Ruric Thar, Magecrusher|13|58|4
+Break Under Pressure|10|58|3
+Infinite Coursework|11|58|2
+Refute Destiny|10|59|2
+Marwyn, the Clearcutter|12|61|1
+Extended Absence|12|62|1
+Ferocity of the Hunt|6|62|1
+Edgar, Moonlit Sovereign|8|63|6
+Mabel, Bitter Recluse|13|64|4
+Hunter's Axe|13|66|1
+Hapatra, the Desert Fang|7|69|7
+Loot, the Anomaly|13|69|4
+Memory Trap|12|72|4
+Jiang Yanggu, Alone|11|75|6
+Your Fate Ends Here|9|75|1
+Rescue Girl, First Responder|13|75|6
+Karn, Gilded Guardian|2|76|5
+Winter, Team Player|12|79|6
+Screeching Soulbreaker|9|79|2
+Craftwork Crusher|5|79|1
+Arni, Humble Scribe|13|80|2
+Room of Refuge|23|82|0
+Icy Reception|13|83|8
+Tam, the Possibility|2|83|4
+Pia, Determined Rebuilder|10|85|4
+Mabel, Valley Hero|7|88|4
+Traxos, Academy Guardian|11|88|3
+Yoshimaru, Scrappy Stray|9|91|5
+Twinned Vision|7|95|5
+Kiora of Fire and Ashes|12|97|6
+Ruric Thar, Biomagus|14|97|6
+Surveillance Phantasm|11|101|3
+Fblthp, Knows the Way|13|101|8
+Artifist Acumen|11|102|2
+Primal Witchstalker|6|104|5
+Traxos, Scourge Eternal|16|109|7
+Gallia, the Merrymaker|11|110|6
+Edgar, Ancient Bloodlord|8|115|10
+Unflinching Hortimancer|12|116|5
+Proft, Sinister Mastermind|10|118|2
+Hapatra, the Desert Frost|14|120|6
+Vraska, the Cutting Glare|7|125|12
+Something Worth Saving|14|128|13
+Vindictive Triumph|7|128|12
+Surgical Precision|10|128|5
+Solitary Cell|8|131|10
+Command the Stage|13|134|5
+Rank Rat|11|139|6
+Seasoned Cryomancer|13|142|8
+Void Extrapolator // Omit Variables|5|146|3
+Tam's Resistance|8|146|12
+Arcane Amphisbaena|13|149|17
+Massacre Girl, Most Wanted|11|150|9
+Campus Crier|12|155|8
+Theorix Metamage // Omit Variables|6|156|3
+Whiplash Wordsmith // Vicious Verse|5|158|3
+Hexhaven Battalion|12|162|3
+Winter, Tormented Loner|14|163|12
+Prophesied End|12|165|13
+Restore with Empathy|14|167|6
+Danitha, Sword of Hope|11|172|13
+Yuriko, Blade of the Mighty|15|175|10
+Guiding Hydra|14|176|11
+Saheeli, Consul of Oversight|8|179|1
+Murmuring Volume|21|180|8
+Generous Revival|13|183|13
+Semester Foreseer // Peer Review|6|184|3
+Violent Echoes|12|187|6
+Inspired Tethermage|14|187|14
+Gideon the Oathless|13|189|14
+Academic Ascent|11|190|12
+Loot, the Nexus|15|194|11
+Saheeli, Jewel of Avishkar|7|195|4
+Darklight Phoenix|13|196|10
+Rise of the Deathbringer|14|199|10
+Solve for Disappointment|12|200|13
+Perfected Theory|15|200|13
+Yuriko, Hope from the Shadows|14|206|11
+Koth of the Homestead|14|206|7
+Blossom-Blessed Angel // Seed Suture|6|207|2
+Karn, Argent Defender|22|209|14
+Compel Brutality|14|214|13
+Hallway Heckler // Vicious Verse|5|221|5
+Lyra, Tolarian Archangel|15|221|18
+Marwyn, the Preserver|15|228|16
+Thalia, the Survivor|16|234|19
+Germinate Recruits|14|237|9
+Teyo, Lightshield Expert|14|248|11
+Mindseeker Oculus|14|249|8
+No Admittance|14|249|12
+Kiora of Salt and Sand|8|251|11
+Dark Matter Manipulator|14|257|13
+Curse-Marred Demon|15|268|15
+Keeper of the Quiet Hour|20|271|17
+Stingerquill Charm|7|279|6
+Proft, Consulting Detective|13|279|4
+Titanbones, Towering Heart|12|282|22
+Multiply by Zero|16|283|16
+Konstrari Charm|7|290|13
+Lich's Relic|14|292|16
+Theorix Charm|8|298|12
+Bloombrute|8|300|5
+Omnipresence|16|310|23
+Emergency Phytomedic // Seed Suture|6|318|4
+Fatehold Chronologist // Peer Review|8|318|5
+Cruel Calculations|15|322|17
+Gardenize|16|328|13
+The Echoverse Fulcrum|27|330|23
+Solarium Sentry|8|330|13
+Paradox Shaper // Omit Variables|8|334|15
+Way of the Wildspeaker|16|342|13
+Greenhouse Propagator|13|360|22
+Konstrari Annex|6|362|6
+Yoshimaru, Beloved Companion|14|370|10
+Way of the Warlord|11|391|11
+Eye of Jace|25|393|9
+Vigorbloom Annex|7|394|6
+Cast Away Doubt|15|398|22
+Face Yourself|15|406|17
+Kwia Vigorbloom|9|407|30
+Stingerquill Voxmancer // Vicious Verse|8|410|17
+Formidable Commons|7|411|6
+Roiling Canopy|13|412|19
+Fblthp, Impossibly Lost|16|416|29
+Way of the Deathbringer|16|419|14
+Repurposed Enforcer|15|422|21
+Vigorbloom Vanguard // Seed Suture|8|424|15
+Koth, the Geomancer|14|426|21
+Prudent Fateseer // Peer Review|8|427|10
+Tenured Tethermage|7|427|3
+Stingerquill Annex|7|429|7
+Hungering Puppetbeast|11|444|6
+Pompous Battlemage // Improvised Act|12|450|9
+Transformative Commons|7|453|6
+Vraska, Soul of Stone|5|459|24
+Meticulous Commons|8|464|7
+Dedicated Commons|7|470|6
+Ingris Stingerquill|8|480|38
+Tomik, Izzet Sparkmage|14|484|5
+Archive Arbiter|21|497|9
+Aerid Konstrari|9|499|32
+Simulacrum Shaper|15|501|30
+Ajani's Anguish|16|503|22
+Innovative Commons|6|515|7
+Master of Barbs|10|523|5
+Pyre Rhymer // Molten Tide|12|524|12
+Tomik, Orzhov Lawmage|16|530|9
+Avatar of Burgeoning Echoes|9|532|27
+Theorix Annex|8|533|7
+Carnivorous Cultivator // Enroot|13|542|20
+Verdant Kraken|15|549|24
+Jiang Yanggu, Never Alone|13|554|11
+Ghalta the Immovable|16|588|23
+Protege's Awakening|16|617|30
+Fatehold Annex|8|620|10
+Vigorbloom Charm|9|633|24
+Entrust the Spark|9|655|13
+Lyra, Archangel of Dawn|17|661|28
+Konstrari Improviser // Soul Tether|6|670|4
+Hexhaven Dueling Arena|21|671|7
+Identity Echo|15|679|15
+Vraska's Final Mercy|15|697|19
+Proctor of Potential|9|701|6
+Rewrite Regrets|16|725|26
+Sphinx's Approach|14|731|21
+Stingcaster Mage|17|738|99
+Way of the Healer|16|741|21
+Variable Chaser // Arc of Fortune|14|755|10
+Hall of Echoes|30|769|32
+Garruk, Veiled Butcher|15|799|59
+Theorist's Proxy|16|821|39
+Gideon's Memorial|17|863|25
+Way of the Mentor|17|867|30
+Jace, Multiverse Architect|3|881|8
+Draconic Visitor|16|916|39
+Pia, Aether Ascetic|16|936|58
+Way of the Cryomancer|17|1010|45
+Ghalta the Unstoppable|16|1014|77
+Diviner of Victory // Unwind History|14|1037|13
+Way of the Mind Sculptor|16|1072|18
+Liliana the Repentant|16|1094|98
+Way of the Paradox|16|1162|18
+Samut, Hazoret's Champion|17|1173|26
+Kindred Judgment|15|1185|27
+Denzilore Fatehold|9|1211|22
+Countersculpt|15|1262|39
+Tinybones, Pocket Nuisance|14|1285|65
+Jace, Reality Sculptor|17|1354|21
+Garruk, Curse Breaker|16|1377|83
+Way of the Necromancer|17|1406|36
+Heartwood Crafter // Soul Tether|8|1421|17
+Overwrite the Multiverse|16|1435|33
+Flickering Hound|17|1447|66
+Return to the Light Realms|17|1447|66
+Samut, Tyrant of Naktamun|17|1458|73
+Uldaros Theorix|8|1465|17
+Dack Fayden, Helping Hand|14|1484|7
+Theorist's Sanctum|17|1508|44
+The Ur-Sphinx|5|1562|7
+Sphinx of False Conclusions|13|1609|18
+Woodwork Prodigy // Soul Tether|8|1640|26
+Venser, Fervent Forger|13|1644|4
+Way of the Pyromancer|17|1683|28
+Tamiyo, Upriser Crowned|8|1808|8
+Jace's Machinations|16|1908|41
+Ginger, Queen of Sweets|28|1951|17
+Enlightened Confidant|17|2004|70
+Teferi's Reproach|16|2006|15
+Jhoira, Weatherlight Corsair|13|2011|10
+Emrakul, the Exigent Doom|31|2029|98
+Niv-Mizzet, Ghost Counsel|9|2053|35
+Bloodline Recollector // Ancestral Craving|16|2127|174
+Hexhaven Invigorator|17|2166|156
+Plan for All Outcomes|15|2191|13
+Geist of Saint Thalia|17|2384|95
+Sanctum Lurker|17|2391|30
+Loyal Tutor|17|2404|62
+Nissa, Leyline Tamer|3|2415|9
+Omnath, Locus of the Void|32|2514|36
+Memnarch, the Warden|27|2690|26
+Ob Nixilis, the Ascended|17|2853|27
+Fatehold Charm|9|2888|28
+Turbulent Crater|9|3127|26
+Ajani Unrelenting|17|3196|89
+Ajani Resolute|17|3310|121
+Turbulent Wetlands|9|3437|30
+Chandra, Chill of Compliance|17|3553|177
+Turbulent Shore|9|3555|27
+Craterclaw Colossus|17|4096|138
+Avacyn, Angel of Horror|17|4180|70
+Liliana the Faultless|17|4393|174
+Darksteel Angel|32|5847|243
+The Theorist, Jace Beleren|17|6933|259
+Chandra, Torch of Defiance|18|46896|1059

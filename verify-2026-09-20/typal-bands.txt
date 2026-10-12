@@ -1,0 +1,4 @@
+typal cohort: 934 decks
+| role | p10 | p25 | median | p75 | p90 |
+| payoff | 2 | 4 | 8 | 14 | 19 |
+| enabler | 3 | 6 | 11 | 17 | 26 |

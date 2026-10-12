@@ -1,5 +1,7 @@
 # Gilanra, Caller of Wirewood + Alena, Kessig Trapper — paper Commander, big and stompy
 
+Review 2026-10-09: proposed swaps in verify-2026-10-09/color-best/eval/gilanra-alena-partners/REVIEW.md (refuted: REFUTE.md), not yet applied. This guide describes the unsleeved draft `verify-2026-10-08/gilanra-stompy/final.txt`; the sleeved deck `decks/paper/decks/gilanra-alena-partners.txt` differs and has no guide of its own.
+
 Pilot guide for `verify-2026-10-08/gilanra-stompy/final.txt` (2026-10-08 rebuild; the sleeved list is `decks/paper/decks/gilanra-alena-partners.txt` until the operator confirms the swaps). Base = the 2026-10-07 engine-first build (`verify-2026-10-07/gilanra-engine/`, 39 lands, goldfish-verified), patched for the cards Beledros took, the unfound Three Visits, and the operator's brief: Hexhaven Invigorator plus more Reality Fracture cards, "fun, big and stompy". No Opus refuter pass (agents barred this session) — the 10-07 refuter verdicts that still apply are kept.
 
 ## 1. Plan
@@ -7,14 +9,14 @@ Pilot guide for `verify-2026-10-08/gilanra-stompy/final.txt` (2026-10-08 rebuild
 **One plan: ramp on turns 1–3, Gilanra on 3, Alena on 5, then one fatty per turn — each fatty is a card (Gilanra, Selvala, Packleader, Primordial Sage, Soul of the Harvest), a burst of red mana (Alena) and damage on entry (Warstorm Surge, Terror of the Peaks) — until Moraug, Shriekwood or Ghalta ends it.** Backup: cascade value (Apex Devastator, Boarding Party, Trumpeting Carnosaur's discover, Monstrous Vortex) that keeps the fatties coming through a wipe.
 
 ```
-T1 Llanowar / Frog / Florahedron  =>  T2 Signet / Talisman / Ruby / Caryatid  =>  T3 Gilanra (or Selvala, Loot, Shaper)  =>  T4 Surrak / Invigorator / Kyoshi  =>  T5 Alena  =>  T6+ a 6+ drop every turn: Gilanra's mana draws, Alena taps for its power next turn
+T1 Llanowar  =>  T2 Frog / Florahedron / Signet / Talisman / Ruby / Caryatid  =>  T3 Gilanra (or Selvala, Loot, Shaper)  =>  T4 Surrak / Invigorator / Kyoshi  =>  T5 Alena  =>  T6+ a 6+ drop every turn: Gilanra's mana draws, Alena taps for its power next turn
 ```
 
 ## 2. Engine map
 
 | # | Card | Oracle (verbatim) | Role |
 |---|---|---|---|
-| 1 | [[Gilanra, Caller of Wirewood]] | "{T}: Add {G}. When you spend this mana to cast a spell with mana value 6 or greater, draw a card." | 41 spells of MV 6+ in the 98: every big drop paid with her {G} is a card. ⚠️ Her mana must be spent on the 6+ spell itself. |
+| 1 | [[Gilanra, Caller of Wirewood]] | "{T}: Add {G}. When you spend this mana to cast a spell with mana value 6 or greater, draw a card." | 37 spells of MV 6+ in the 98: every big drop paid with her {G} is a card. ⚠️ Her mana must be spent on the 6+ spell itself. |
 | 2 | [[Alena, Kessig Trapper]] | "{T}: Add an amount of {R} equal to the greatest power among creatures you control that entered this turn." | Cast a fatty precombat, tap Alena for its power in main phase 2: a 6-drop refunds six red. ⚠️ Only creatures that entered *this turn* count; she cannot tap the turn she enters (summoning sickness, {T} ability). |
 | 3 | [[Selvala, Heart of the Wilds]] | "{G}, {T}: Add X mana in any combination of colors, where X is the greatest power among creatures you control." / "Whenever another creature enters, its controller may draw a card if its power is greater than each other creature's power." | Nets X − 1 every turn from T4 with any 4-power body; the draw is symmetric — opponents' biggest ETBs draw too. |
 | 4 | [[Loot, the Nexus]] | "{T}: Choose a color. Add one mana of that color for each different power among creatures you control." | Powers 1, 2, 4, 6, 7 on board = 5 mana. Gilanra's draw does not apply (it is Loot's mana), but it pays for the 10-drops. |
@@ -22,9 +24,9 @@ T1 Llanowar / Frog / Florahedron  =>  T2 Signet / Talisman / Ruby / Caryatid  =>
 | 6 | [[Moraug, Fury of Akoum]] | "Landfall — Whenever a land you control enters, if it's your main phase, there's an additional combat phase after this phase. At the beginning of that combat, untap all creatures you control." / "Each creature you control gets +1/+0 for each time it has attacked this turn." | Land drop in main 1 = two combats; Fabled Passage, Riveteers Overlook, Gruul Turf (bounce, replay) and Traverse the Outlands are extra combats. ⚠️ Fetch in a main phase, never at instant speed. |
 | 7 | [[Shriekwood Devourer]] | "Whenever you attack with one or more creatures, untap up to X lands, where X is the greatest power among those creatures." | Attack with a 7-power creature = seven lands untapped for main phase 2: a second fatty every turn. |
 | 8 | [[Sakiko, Mother of Summer]] | "Whenever a creature you control deals combat damage to a player, add that much {G}. Until end of turn, you don't lose this mana as steps and phases end." | Combat damage is green mana for main phase 2 — with Gilanra's draw on the 6+ spell it buys. |
-| 9 | [[Hexhaven Invigorator]] | "Vigilance / Whenever this creature is dealt damage, you may search your library for up to that many land cards, put them onto the battlefield tapped, then shuffle." | 6/6 for {G}{G}{G}{G}. [[Gruul Ragebeast]] ("Whenever this creature or another creature you control enters, that creature fights target creature an opponent controls") makes it fight on entry: the damage it takes is lands. Block with it; every Moraug landfall from it is another combat. |
+| 9 | [[Hexhaven Invigorator]] | "Vigilance / Whenever this creature is dealt damage, you may search your library for up to that many land cards, put them onto the battlefield tapped, then shuffle." | 6/6 for {G}{G}{G}{G}. [[Gruul Ragebeast]] ("Whenever this creature or another creature you control enters, that creature fights target creature an opponent controls") makes it fight on entry: the damage it takes is lands. Block with it for lands; only lands fetched in your main phase (Ragebeast's fight, a Warstorm/Terror trigger on it) give Moraug combats — lands from blocks or combat damage do not. |
 | 10 | [[Warstorm Surge]] / [[Terror of the Peaks]] | "Whenever a creature you control enters, it deals damage equal to its power to any target." / "Whenever another creature you control enters, this creature deals damage equal to that creature's power to any target." | Every fatty is 6–12 to the face or a removal spell. Both out = double. |
-| 11 | [[Identity Echo]] | "{3}{R}: Exile target creature or planeswalker you control. Reveal cards from the top of your library until you reveal a creature or planeswalker card. Put that card onto the battlefield … Activate only as a sorcery." | Turn a Llanowar Elves, Frog, Caryatid, Florahedron or a Beast token into the next creature in the library (36 of 39 are 5+ power). ⚠️ The exiled creature does not come back. Cascade/discover do not trigger (not cast); Warstorm, Terror, Packleader, Soul, Selvala do. |
+| 11 | [[Identity Echo]] | "{3}{R}: Exile target creature or planeswalker you control. Reveal cards from the top of your library until you reveal a creature or planeswalker card. Put that card onto the battlefield … Activate only as a sorcery." | Turn a Llanowar Elves, Frog, Caryatid, Florahedron or a Beast token into the next creature in the library (32 of 47 creatures print 5+ power, plus Ulvenwald Hydra). ⚠️ The exiled creature does not come back. Cascade/discover do not trigger (not cast); Warstorm, Terror, Packleader, Soul, Selvala do. |
 | 12 | [[Apex Devastator]] / [[Ghalta, Primal Hunger]] / [[Earthshaker Dreadmaw]] | "Cascade, cascade, cascade, cascade" / "This spell costs {X} less to cast, where X is the total power of creatures you control. / Trample" / "Trample / When this creature enters, draw a card for each other Dinosaur you control." | The top end: Apex is five spells for ten mana (Gilanra draws, Alena taps 10); Ghalta costs {G}{G} with 10 power on board; Dreadmaw draws for Ghalta, Etali, Burning Sun's Avatar, Trumpeting Carnosaur and Regal Behemoth. |
 | 13 | [[Spinerock Knoll]] | "{R}, {T}: You may play the exiled card without paying its mana cost if an opponent was dealt 7 or more damage this turn." | One Warstorm/Terror trigger or one fatty's combat damage unlocks it — exile a 6+ drop. |
 
@@ -42,8 +44,8 @@ Why 39: the 10-07 engine build measured the sleeved 36-land list at keep-7 .60 a
 ## 4. Turn plan
 
 ```
-T1  Forest, Llanowar / Frog / Florahedron (a tapped dual if no 1-drop)
-T2  Signet / Talisman / Ruby / Caryatid; hold Konstrari Charm mana later, not now
+T1  Forest, Llanowar (a tapped dual if no 1-drop)
+T2  Frog / Florahedron / Signet / Talisman / Ruby / Caryatid; hold Konstrari Charm mana later, not now
 T3  Gilanra (she is the card engine) — or Selvala / Loot / Shaper if Gilanra's G is not there
 T4  Surrak (haste for everything from T5), Hexhaven Invigorator, Kyoshi, or Garruk's Packleader
 T5  Alena, or a 6-drop off Gilanra + rocks (draw a card); Warstorm Surge / Terror if the board is empty of fatties
@@ -103,6 +105,6 @@ Reality Fracture cards in the list: Hexhaven Invigorator, Loot, the Nexus, Simul
 | Rorix Bladewing | Konstrari Charm | the sleeved 6/5 flying haste; goldfish +0.07 Alena chains, within noise — the operator's call if the Charm feels small |
 | Edgar, Moonlit Sovereign (FRA) | Simulacrum Shaper | if the operator wants an 8th FRA card: flash 4/4 that grows when you skip a spell — not stompy |
 | Ruric Thar, the Unbowed / Slinza / Spearbreaker Behemoth / Calamity / Foe-Razer Regent / Nessian Wilds Ravager / Emergent Woodwurm | any 6-drop | the sleeved fatties the engine build cut for consistency (Ruric hits you for your 12 noncreature spells; Spearbreaker needs held mana); Slinza's fights feed Invigorator |
-| Kozilek, the Great Distortion / Terastodon / Avenger of Zendikar / Cityscape Leveler / Earthshaker Dreadmaw | Oblivion Sower / Emissary of Grudges | bigger top end if the games show mana to spare |
+| Kozilek, the Great Distortion / Terastodon / Avenger of Zendikar / Cityscape Leveler | Oblivion Sower / Emissary of Grudges | bigger top end if the games show mana to spare |
 | Skyshroud Claim / Rampant Growth / Harrow | a 6-drop | if the goldfish keep-7 drops under .70 after sleeving |
 | Vastlands Scavenger | Outcaster Trailblazer | the 10-07 refuter's pick; cheats the best fatty for 5 |

@@ -1,0 +1,2 @@
+PASS bumi-unleashed.json: list verify-2026-10-07/bumi-standalone/final.txt (100 cards), 11 swaps, 4 win conditions
+  warn near-tie alternative is also in the list: Forest

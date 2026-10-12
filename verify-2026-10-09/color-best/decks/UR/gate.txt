@@ -1,0 +1,19 @@
+file      : verify-2026-10-09/color-best/decks/UR/final.txt
+format    : commander   commander: Saheeli, Jewel of Avishkar
+totals    : 100 cards | 36 lands (36.4 eff.) | 63 nonland | avg MV 3.13
+curve     : 0:2 1:8 2:17 3:17 4:8 5:2 6:4 7:5
+VERDICT   : FAIL
+
+  PASS  size        100 cards (commander wants 100)
+  PASS  singleton   singleton respected (basics exempt)
+  PASS  legality    every card legal in commander
+  PASS  rules       no other format rule broken
+  PASS  identity    all cards inside RU
+  PASS  ownership   all cards owned; paper collection imported 0 days ago
+  FAIL  arenaNames  1 line(s) use "Front // Back" — Arena answers "unknown card title". Use:
+        - 1 Sink into Stupor
+  WARN  lands       36 lands (+1 MDFC land backs = 36.4 effective); Karsten wants 39 ±2
+  PASS  plan        51/63 nonland cards interact (81%) — commander wants: noncreature spell; only 40/63 (63%) can satisfy it
+  PASS  curve       avg MV 3.13; commander sets no cost threshold
+  PASS  wincons     8 win condition(s)/closer(s)
+  PASS  locks       4 locked card(s) present and intact

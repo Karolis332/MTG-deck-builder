@@ -1,0 +1,12 @@
+  PASS  size        100 cards (commander wants 100)
+  PASS  singleton   singleton respected (basics exempt)
+  PASS  legality    every card legal in commander
+  PASS  rules       no other format rule broken
+  FAIL  identity    39 card(s) outside G
+  PASS  ownership   all cards owned; paper collection imported 0 days ago
+  WARN  arenaNames  2 card(s) must be exported front-face only:
+  WARN  lands       39 lands (+1 MDFC land backs = 39.4 effective); Karsten wants 45 ±2
+  PASS  plan        41/59 nonland cards interact (69%) — commander wants: mana value 6+; only 41/59 (69%) can satisfy it
+  PASS  curve       avg MV 5.39; 18/59 nonland cards below the commander's 6-mana threshold (31%)
+  PASS  wincons     40 win condition(s)/closer(s)
+  PASS  locks       1 locked card(s) present and intact

@@ -1,0 +1,255 @@
+[
+  {
+    "name": "home",
+    "scrollWidth": 1720,
+    "frame": {
+      "left": 204,
+      "right": 1516
+    },
+    "escaped": [],
+    "canvas": 1,
+    "errors": []
+  },
+  {
+    "name": "builder",
+    "scrollWidth": 1720,
+    "frame": {
+      "left": 204,
+      "right": 1516
+    },
+    "escaped": [],
+    "canvas": 1,
+    "errors": []
+  },
+  {
+    "name": "commanders",
+    "scrollWidth": 1720,
+    "frame": {
+      "left": 204,
+      "right": 1516
+    },
+    "escaped": [],
+    "canvas": 0,
+    "errors": []
+  },
+  {
+    "name": "commanders/the-ur-dragon",
+    "scrollWidth": 1720,
+    "frame": {
+      "left": 204,
+      "right": 1516
+    },
+    "escaped": [],
+    "canvas": 0,
+    "errors": []
+  },
+  {
+    "name": "commanders/the-ur-dragon/brawl",
+    "scrollWidth": 1720,
+    "frame": {
+      "left": 204,
+      "right": 1516
+    },
+    "escaped": [],
+    "canvas": 0,
+    "errors": []
+  },
+  {
+    "name": "dashboard",
+    "scrollWidth": 1720,
+    "frame": {
+      "left": 324,
+      "right": 1636
+    },
+    "escaped": [],
+    "canvas": 0,
+    "errors": []
+  },
+  {
+    "name": "dashboard/collection",
+    "scrollWidth": 1720,
+    "frame": {
+      "left": 324,
+      "right": 1636
+    },
+    "escaped": [],
+    "canvas": 0,
+    "errors": []
+  },
+  {
+    "name": "dashboard/matches",
+    "scrollWidth": 1720,
+    "frame": {
+      "left": 324,
+      "right": 1636
+    },
+    "escaped": [],
+    "canvas": 0,
+    "errors": []
+  },
+  {
+    "name": "dashboard/ai",
+    "scrollWidth": 1720,
+    "frame": {
+      "left": 324,
+      "right": 1636
+    },
+    "escaped": [],
+    "canvas": 0,
+    "errors": []
+  },
+  {
+    "name": "dashboard/decks/new",
+    "scrollWidth": 1720,
+    "frame": {
+      "left": 324,
+      "right": 1636
+    },
+    "escaped": [],
+    "canvas": 0,
+    "errors": []
+  },
+  {
+    "name": "dashboard/fx-check",
+    "scrollWidth": 1720,
+    "frame": {
+      "left": 324,
+      "right": 1636
+    },
+    "escaped": [],
+    "canvas": 0,
+    "errors": []
+  },
+  {
+    "name": "optimizer",
+    "scrollWidth": 1720,
+    "frame": {
+      "left": 204,
+      "right": 1516
+    },
+    "escaped": [],
+    "canvas": 0,
+    "errors": []
+  },
+  {
+    "name": "download",
+    "scrollWidth": 1720,
+    "frame": {
+      "left": 204,
+      "right": 1516
+    },
+    "escaped": [],
+    "canvas": 0,
+    "errors": []
+  },
+  {
+    "name": "collection",
+    "scrollWidth": 1720,
+    "frame": {
+      "left": 204,
+      "right": 1516
+    },
+    "escaped": [],
+    "canvas": 0,
+    "errors": []
+  },
+  {
+    "name": "decks",
+    "scrollWidth": 1720,
+    "frame": {
+      "left": 204,
+      "right": 1516
+    },
+    "escaped": [],
+    "canvas": 0,
+    "errors": []
+  },
+  {
+    "name": "favorites",
+    "scrollWidth": 1720,
+    "frame": {
+      "left": 204,
+      "right": 1516
+    },
+    "escaped": [],
+    "canvas": 0,
+    "errors": []
+  },
+  {
+    "name": "methodology",
+    "scrollWidth": 1720,
+    "frame": {
+      "left": 204,
+      "right": 1516
+    },
+    "escaped": [],
+    "canvas": 0,
+    "errors": []
+  },
+  {
+    "name": "about",
+    "scrollWidth": 1720,
+    "frame": {
+      "left": 204,
+      "right": 1516
+    },
+    "escaped": [],
+    "canvas": 0,
+    "errors": []
+  },
+  {
+    "name": "faq",
+    "scrollWidth": 1720,
+    "frame": {
+      "left": 204,
+      "right": 1516
+    },
+    "escaped": [],
+    "canvas": 0,
+    "errors": []
+  },
+  {
+    "name": "support",
+    "scrollWidth": 1720,
+    "frame": {
+      "left": 204,
+      "right": 1516
+    },
+    "escaped": [],
+    "canvas": 0,
+    "errors": []
+  },
+  {
+    "name": "contact",
+    "scrollWidth": 1720,
+    "frame": {
+      "left": 204,
+      "right": 1516
+    },
+    "escaped": [],
+    "canvas": 0,
+    "errors": []
+  },
+  {
+    "name": "privacy",
+    "scrollWidth": 1720,
+    "frame": {
+      "left": 204,
+      "right": 1516
+    },
+    "escaped": [],
+    "canvas": 0,
+    "errors": []
+  },
+  {
+    "name": "terms",
+    "scrollWidth": 1720,
+    "frame": {
+      "left": 204,
+      "right": 1516
+    },
+    "escaped": [],
+    "canvas": 0,
+    "errors": []
+  }
+]

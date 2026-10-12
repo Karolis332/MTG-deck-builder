@@ -1,0 +1,10 @@
+total 1372 passed 1363 failed 9 files 75
+FAIL deck-score-coverage-round1.test.ts :: coverage round 1 — real-list typed coverage pins the Commander corpus measurement and reproduces it on a prefix :: AssertionError: expected 0.305 to be close to 0.315, received difference is 0.010000000000000009, but expected 0.005
+FAIL deck-score-coverage-round1.test.ts :: coverage round 1 — real-list typed coverage pins the Brawl corpus measurement and reproduces it on a prefix :: AssertionError: expected 0.23 to be close to 0.25, received difference is 0.01999999999999999, but expected 0.005
+FAIL deck-score-coverage-round1.test.ts :: coverage round 1 — real-list typed coverage closes the round-1 S = 0 MISS: the floor that caused it is retired :: AssertionError: expected 55 to be 53 // Object.is equality
+FAIL deck-score-v13-stage2.test.ts :: §9.2 fresh matched negative controls pins ten controls whose seeds and source lists are disjoint from training :: AssertionError: expected [ Array(10) ] to deeply equal [ Array(10) ]
+FAIL deck-score-v13-stage3.test.ts :: stage 3 acceptance, fixture-backed pins ten fresh matched controls — stage 3 leaked four of them, stage 4a none :: AssertionError: expected [ Array(10) ] to deeply equal [ Array(10) ]
+FAIL deck-score-v13-stage4a.test.ts :: stage 4a acceptance, fixture-backed pins the first twenty fresh stride-drawn controls :: AssertionError: expected [ 56, 48, 66, 46, 45, 44, 58, …(13) ] to deeply equal [ 56, 48, 66, 46, 45, 44, 58, …(13) ]
+FAIL deck-score-v13-stage4c.test.ts :: stage 4c — Brawl S spread replaces the bimodal v1.3 population with a top-compressed one :: AssertionError: expected 0.5458333333333333 to be close to 0.554, received difference is 0.008166666666666766, but expected 0.005
+FAIL deck-score-v14-stage2.test.ts :: v1.4 stage 2 — real-list distribution pins the Commander prefix: no S zeros, S p50 83.7, total p50 28 :: AssertionError: expected 55 to be 53 // Object.is equality
+FAIL deck-score-v14-stage2.test.ts :: v1.4 stage 2 — real-list distribution pins the Brawl prefix: no S zeros, S p50 87.1, total p50 67 :: AssertionError: expected 77 to be 76 // Object.is equality

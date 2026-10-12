@@ -1,0 +1,168 @@
+{
+  "version": 1,
+  "deck": {
+    "name": "Urza, Lord High Artificer",
+    "commanders": ["Urza, Lord High Artificer"],
+    "colours": "mono-U artifacts",
+    "format": "commander",
+    "list": "verify-2026-10-06/urza-found/final-3.txt",
+    "status": "proposed"
+  },
+  "summary": "Every artifact is a mana source and Construct power under [[Urza, Lord High Artificer]]. Cast rocks and tokens to grow N (artifacts controlled), copy the Construct with [[Worldwalker Helm]] or [[Ember Island Production]], then close with [[Sun Quan, Lord of Wu]]'s horsemanship, [[Super State]], or a kicked [[Rite of Replication]] on [[Whirler Rogue]]. [[The Legend of Kuruk]] buys a second alpha. The box was a Talrand spells shell (13 instants/sorceries, 24 artifacts); it loses to the artifact half, 26 artifact spells to 20 instants/sorceries in the final list, so the spell package was cut wholesale and the deck rebuilt around Urza's mana engine.",
+  "phases": [
+    { "turns": "T1-3", "goal": "Land a cheap accelerant so Urza can land on curve.", "cards": ["Arcane Signet", "Sky Diamond", "Sapphire Medallion", "Noble's Purse", "Commander's Sphere", "Palladium Myr", "Worn Powerstone"] },
+    { "turns": "T4-6", "goal": "Urza online, grow N with token engines and untap artifacts for extra mana.", "cards": ["Urza, Lord High Artificer", "Sai, Master Thopterist", "Efficient Construction", "Chrome Host Seedshark", "Worldwalker Helm", "Traxos, Scourge of Kroog", "Golem Foundry", "Glaring Fleshraker"] },
+    { "turns": "Close, T7-9", "goal": "Copy the Construct ahead of the kill turn, then swing for the table.", "cards": ["Super State", "Sun Quan, Lord of Wu", "Rite of Replication", "Ember Island Production", "The Legend of Kuruk", "Whirler Rogue"] }
+  ],
+  "engine": [
+    { "title": "Mana", "flow": ["Cast an artifact", "[[Urza, Lord High Artificer]] taps it for {U}", "[[Traxos, Scourge of Kroog]] untaps on a historic cast", "another {U}"], "note": "Urza: \"Tap an untapped artifact you control: Add {U}.\" Traxos: \"Whenever you cast a historic spell, untap Traxos.\" Every artifact, legendary or Saga spell refunds the tap." },
+    { "title": "N growers", "flow": ["[[Sai, Master Thopterist]] + [[Efficient Construction]]: a Thopter per artifact spell", "[[Worldwalker Helm]] copies the new token", "N +3 per artifact spell (the spell and two Thopters), +5 with Helm's Maps"], "note": "Each Thopter is its own token-creation event, so Helm adds a Map for each." },
+    { "title": "Copy before the kill turn", "flow": ["[[Ember Island Production]] copies the Construct a turn early (a 4/4 Hero base, so (4 + N)/(4 + N))", "opponent's end step: [[Worldwalker Helm]] copies it again", "both tokens can attack next turn"], "note": "Summoning-sick copies can tap for Urza, just not attack (CR 302.6)." },
+    { "title": "Protection", "flow": ["[[Padeem, Consul of Innovation]]: artifacts you control have hexproof", "[[Soul of New Phyrexia]] {5}: indestructible until end of turn", "7 counters (Counterspell, Negate, Flare of Denial, Strix Serenade, Bane's Contingency, You Find the Villains' Lair, Katara's Reversal) back them up"] },
+    { "title": "One-sided wipe", "flow": ["[[Soul of New Phyrexia]] {5}: our board gets indestructible", "[[The Echoverse Fulcrum]] {5}, {T}, exile: destroy all creatures", "every permanent we control survives, Urza and the Constructs included; only opponents' creatures die"], "note": "10 mana in total; never tap Fulcrum for Urza mana that turn." },
+    { "title": "Extra turn", "flow": ["[[The Legend of Kuruk]] flips to Avatar Kuruk at chapter III", "attack first", "main phase 2: waterbend {20} with lands, rocks and non-attackers", "take an extra turn; everything untaps"] }
+  ],
+  "winConditions": [
+    {
+      "name": "Sun Quan alpha",
+      "pieces": ["Sun Quan, Lord of Wu", "Worldwalker Helm", "Ember Island Production"],
+      "flow": ["Last turn: [[Ember Island Production]] copies the Construct", "opponent's end step: [[Worldwalker Helm]] copies it again", "kill turn: cast [[Sun Quan, Lord of Wu]] -- horsemanship is static", "[[Worldwalker Helm]] again: N = 12, that copy stays home"],
+      "damage": "12 + 12 + 16 = 40 unblockable to one opponent at N = 12",
+      "turn": "~T9, pilot guide §Line A"
+    },
+    {
+      "name": "Super State",
+      "pieces": ["Super State", "Worldwalker Helm"],
+      "flow": ["cast [[Super State]] on a Construct: base 9/9, flying, first strike, trample, haste", "[[Worldwalker Helm]] copy + a Map: N = 12", "attack: 21/21 hits the defender", "Super State deals that much damage to each other opponent"],
+      "damage": "21 to the defender, 21 to each other opponent; a second hit (next turn or Kuruk's extra turn) doubles it",
+      "turn": "~T9-10, pilot guide §Line B"
+    },
+    {
+      "name": "Fleshraker + kicked Rite on Whirler",
+      "pieces": ["Glaring Fleshraker", "Whirler Rogue", "Rite of Replication", "Worldwalker Helm"],
+      "flow": ["kicked [[Rite of Replication]] on [[Whirler Rogue]]: five more Whirlers, each blue so they skip Fleshraker", "each Whirler ETB makes two Thopters: 10 colourless tokens", "[[Glaring Fleshraker]] pings 1 per colourless ETB: 10 to each opponent", "the 15 new artifacts pay six Whirler unblockable activations"],
+      "damage": "30 combat + 10 burn = 40 to one opponent, plus 10 to each other opponent",
+      "turn": "~T8, pilot guide §Line C"
+    },
+    {
+      "name": "Extra turn (Kuruk)",
+      "pieces": ["The Legend of Kuruk"],
+      "flow": ["[[The Legend of Kuruk]] flips at chapter III", "attack with Sun Quan or Super State first", "main 2: waterbend {20} with lands, rocks and non-attackers", "extra turn: everything untaps, last turn's tokens attack"],
+      "damage": "repeats whichever primary line already closed, against a table that has no time to answer it",
+      "turn": "the turn after the primary line, when held up"
+    }
+  ],
+  "metrics": {
+    "columns": ["Metric", "Box (86, no commander)", "Final list (100)"],
+    "rows": [
+      { "label": "Lands", "values": ["34 (27 Island + 7 utility) + Hydroelectric Specimen MDFC", "35 (30 Island + 5 utility) + Sink into Stupor MDFC"] },
+      { "label": "Avg mana value", "values": ["n/a (spells shell, not built around Urza)", "3.38 (3.11 in the 10-02 draft, 3.52 in the 10-06 rebuild)"] },
+      { "label": "Karsten land target", "values": ["n/a", "39.5-40.2 regression vs 38.4 in the 10-06 rebuild; the operator then cut to 35 + Sink (35.4), accepted because Urza makes every artifact a mana source"] },
+      { "label": "Synergy pairs (rule-based)", "values": ["n/a", "760-939 pairs across build rounds, median 20-25 per card"] }
+    ],
+    "note": "verify-2026-10-02/urza/build-report.md §4-5; verify-2026-10-06/urza-found/build-report.md §4"
+  },
+  "swaps": [
+    { "out": "Talrand, Sky Summoner", "in": "Sai, Master Thopterist", "role": "engine", "reason": "Talrand triggers on the box's 13 instants/sorceries (20 in the final list) and its Drakes are not artifacts. Sai triggers on the final list's 26 artifact spells and every Thopter taps for Urza and pumps the Construct.", "quoteOut": "Whenever you cast an instant or sorcery spell, create a 2/2 blue Drake creature token with flying.", "quoteIn": "Whenever you cast an artifact spell, create a 1/1 colorless Thopter artifact creature token with flying.", "evidence": "verify-2026-10-02/urza/build-report.md §3 row 1" },
+    { "out": "Archmage Emeritus", "in": "Chrome Host Seedshark", "role": "draw/tokens", "reason": "Emeritus only draws off instants/sorceries (20 in the final list); Seedshark incubates on all 43 noncreature spells and the Incubators are artifact tokens that feed N.", "evidence": "verify-2026-10-02/urza/build-report.md §3 row 2" },
+    { "out": "Baral, Chief of Compliance", "in": "Geist of Saint Thalia", "role": "cost reducer", "reason": "Baral only discounts instants/sorceries (20); Geist discounts all 43 noncreature spells, including the deck's artifacts.", "evidence": "verify-2026-10-02/urza/build-report.md §3 row 3" },
+    { "out": "Archaeomancer", "in": "Padeem, Consul of Innovation", "role": "recursion -> protection", "reason": "Archaeomancer only rebuys instants/sorceries. Its 10-02 replacement, Emeritus of Ideation, was never located; the 10-06 fill, Reconnaissance Mission, lost to Padeem in the refuter pass. Padeem gives every artifact hexproof and draws a card on upkeep while we control the highest-MV artifact.", "evidence": "verify-2026-10-06/urza-found/REFUTE.md" },
+    { "out": "Solve the Equation", "in": "Scour for Scrap", "role": "tutor", "reason": "Solve only finds instants/sorceries. Scour for Scrap finds or regrows an artifact (Helm, Meteor Golem, the Fulcrum).", "quoteIn": "Search your library for an artifact card, reveal it, put it into your hand, then shuffle. / Return target artifact card from your graveyard to your hand.", "evidence": "verify-2026-10-02/urza/build-report.md §3 row 5" },
+    { "out": "Opt", "in": "The Echoverse Fulcrum", "role": "cheap draw -> operator lock", "reason": "Opt's scry-1-draw-1 was first replaced by Mishra's Bauble, which the operator then locked out in favour of the Fulcrum: a 2-MV legendary artifact that loots on entry (draw, then discard), counts for N, and doubles as a one-sided wipe with Soul of New Phyrexia.", "evidence": "verify-2026-10-06/urza-found/build-report.md §2 row 20" },
+    { "out": "Consider", "in": "April O'Neil, Hacktivist", "role": "draw engine", "reason": "Consider draws one card once. April draws at your end step, one card per card type among spells cast that turn: roughly two once the deck casts artifacts and instants in the same turn (lands are not spells).", "quoteIn": "At the beginning of your end step, draw a card for each card type among spells you've cast this turn.", "evidence": "verify-2026-10-06/urza-found/build-report.md §2 row 10" },
+    { "out": "Ponder", "in": "Stock Up", "role": "draw", "reason": "Ponder looks at 3 and draws 1. Stock Up looks at 5 and puts 2 into hand, net card advantage. It traded out to Distant Melody for a round and was put back; Distant Melody needs a type anchor the deck doesn't have enough of.", "evidence": "verify-2026-10-02/urza/build-report.md §3 row 8; verify-2026-10-06/urza-found/build-report.md §2 row 2" },
+    { "out": "Frantic Search", "in": "Cerebral Download", "role": "draw", "reason": "Frantic Search is card-neutral (draw 2, discard 2). Cerebral Download surveils X (= artifacts controlled) at instant speed, then draws three.", "quoteIn": "Surveil X, where X is the number of artifacts you control. Then draw three cards.", "evidence": "verify-2026-10-06/urza-found/build-report.md §1" },
+    { "out": "Winternight Stories", "in": "Pensive Professor", "role": "draw engine", "reason": "Winternight draws three and discards two (or one creature), once plus a {4}{U} harmonize recast. Pensive Professor repeats an increment draw while mana spent exceeds its power or toughness; its first replacement, Commander's Insight, is not owned (a precon-list registration), so the slot reverted to the Professor.", "evidence": "verify-2026-10-02/urza/build-report.md §3 row 10; CLAUDE.md Session Log 2026-10-06" },
+    { "out": "Commandeer", "in": "You Find the Villains' Lair", "role": "counter", "reason": "Commandeer only steals noncreature spells and costs {5}{U}{U} or two blue cards. The Lair counters anything for {1}{U}{U} or draws two, then discards two.", "evidence": "verify-2026-10-02/urza/build-report.md §3 row 11" },
+    { "out": "Spell Pierce", "in": "Strix Serenade", "role": "counter", "reason": "Spell Pierce is beaten by a spare {2}. Strix Serenade is a hard {U} counter on artifacts, creatures or planeswalkers, which covers the deck's own threat types on the stack.", "evidence": "verify-2026-10-02/urza/build-report.md §3 row 12" },
+    { "out": "Hydro-Man, Fluid Felon", "in": "Filigree Attendant", "role": "threat", "reason": "Hydro-Man becomes a land every end step and only pumps off blue spells. Its first replacement, Patchwork Automaton, grows a single counter at a time; Filigree Attendant is a flier whose power equals the number of artifacts controlled outright.", "quoteIn": "Flying / Filigree Attendant's power is equal to the number of artifacts you control.", "evidence": "verify-2026-10-02/urza/build-report.md §3 row 13; verify-2026-10-06/urza-found/build-report.md §1" },
+    { "out": "Tempest Djinn", "in": "Kappa Cannoneer", "role": "threat", "reason": "Tempest Djinn only counts basic Islands. Kappa has ward 4 and gets a +1/+1 counter and \"can't be blocked this turn\" every time it or another artifact enters, which the deck does constantly.", "evidence": "verify-2026-10-02/urza/build-report.md §3 row 14" },
+    { "out": "Donatello, Way with Machines", "in": "Hangarback Walker", "role": "threat", "reason": "Donatello is a 1/2 that gains one counter per artifact ETB. Hangarback is an X artifact that converts its own counters into flying Thopters on death, feeding N a second time.", "evidence": "verify-2026-10-02/urza/build-report.md §3 row 15" },
+    { "out": "Traxos, Academy Guardian", "in": "Flesh Duplicate", "role": "threat", "reason": "Academy Guardian is a 1/5 flying, vigilance, prowess body with no artifact payoff. Its intended replacement line (Stonecoil Serpent) was cut by the refuter for Flesh Duplicate, which can copy Urza himself.", "evidence": "verify-2026-10-02/urza/build-report.md §3 row 16; verify-2026-10-02/urza/REFUTE.md" },
+    { "out": "Mu Yanling, Sky Dancer", "in": "Super State", "role": "finisher", "reason": "Mu Yanling's -3 makes a single 4/4 a turn late. Super State turns one Construct into a 9/9-plus-N flying, first-strike, trample haste threat that deals its damage to every other opponent too.", "quoteIn": "Enchanted creature has base power and toughness 9/9 and has flying, first strike, trample, and haste. / Whenever enchanted creature deals combat damage to an opponent, it deals that much damage to each other opponent.", "evidence": "verify-2026-10-02/urza/build-report.md §3 row 17" },
+    { "out": "Uthros Psionicist", "in": "Sapphire Medallion", "role": "cost reducer", "reason": "Uthros only discounts the second spell each turn. Sapphire Medallion discounts every blue spell, including Urza and Sun Quan.", "evidence": "verify-2026-10-02/urza/build-report.md §3 row 18" },
+    { "out": "Shimmer Myr", "in": "Palladium Myr", "role": "ramp", "reason": "Shimmer Myr only gives artifacts flash (Unstoppable Plan already leaves mana open on opponents' turns). Palladium Myr adds {C}{C}, a colourless source Glaring Fleshraker needs for its {2}{C}.", "evidence": "verify-2026-10-02/urza/build-report.md §3 row 19" },
+    { "out": "Coretapper", "in": "Golem Foundry", "role": "engine", "reason": "Coretapper puts one charge counter on one artifact. Golem Foundry may put a charge counter on itself per artifact spell, and removing three makes a 3/3 Golem artifact token, so it grows N on its own and adds a body; the operator's final pass restored it alongside the newer Traxos, Scourge of Kroog rather than cutting one for the other.", "evidence": "verify-2026-10-02/urza/build-report.md §3 row 20; CLAUDE.md Session Log 2026-10-06" },
+    { "out": "Decanter of Endless Water", "in": "Arcane Signet", "role": "ramp", "reason": "Both tap for one mana, but Decanter costs 3 and Arcane Signet costs 2, which is the difference between a turn-3 and turn-4 Urza.", "evidence": "verify-2026-10-02/urza/build-report.md §3 row 21" },
+    { "out": "Hedron Archive", "in": "Secluded Starforge", "role": "ramp -> land", "reason": "Hedron Archive's {C}{C} at 4 mana was first slated to become Sol Ring (never found), then the 38th land instead: Secluded Starforge taps for {C} and late-game makes a 2/2 Robot for {5}.", "evidence": "verify-2026-10-02/urza/build-report.md §3 row 22; verify-2026-10-06/urza-found/build-report.md §2 row 17" },
+    { "out": "Expedition Map", "in": "Deduce", "role": "utility -> cheap draw", "reason": "The Map's land tutor was going to fetch Rogue's Passage, which the operator does not own and which was removed from the registry; the slot went instead to Deduce, an instant \"Draw a card. Investigate.\" whose Clue is one more artifact for N.", "evidence": "verify-2026-10-02/urza/build-report.md §3 row 23; CLAUDE.md Session Log 2026-10-06" },
+    { "out": "Hammer of Nazahn", "in": "Bane's Contingency", "role": "equipment -> counter", "reason": "Hammer attaches itself on entry but protects one creature at a time ({4} to move it). Bane's Contingency is a hard counter that also scries 2 and draws a card when the countered spell targets Urza, a commander we control.", "quoteIn": "Counter target spell. If that spell targets a commander you control, instead counter that spell, scry 2, then draw a card.", "evidence": "verify-2026-10-02/urza/build-report.md §3 row 24; verify-2026-10-06/urza-found/build-report.md §1" },
+    { "out": "Sewer-veillance Cam", "in": null, "role": "cut", "reason": "The Cam is a one-shot sacrifice artifact. Its 10-02 replacement was an Island (Karsten wanted 37.5-38.1 lands then); the operator's cut to 35 lands took that Island out again, so the three Islands added are the Sandbar, Coliseum and Wilds slots.", "evidence": "verify-2026-10-02/urza/build-report.md §3 row 25" },
+    { "out": "Vexing Bauble", "in": "Flare of Denial", "role": "counter", "reason": "Vexing Bauble counters our own free Urza {5} and Planetarium casts. Flare of Denial is free if you sacrifice a nontoken blue creature, with no self-mill downside.", "evidence": "verify-2026-10-02/urza/build-report.md §3 row 26" },
+    { "out": "The Eternity Elevator", "in": "Worn Powerstone", "role": "ramp", "reason": "The Elevator is 5 mana for {C}{C}{C}; Worn Powerstone makes {C}{C}, one mana less, for two mana less, which matters for a turn-4 Urza.", "evidence": "verify-2026-10-02/urza/build-report.md §3 row 27" },
+    { "out": "Burnished Hart", "in": "Solemn Simulacrum", "role": "ramp", "reason": "Burnished Hart sacrifices for two basics at a total of 6 mana. Solemn lands a basic on ETB for 4 and draws a card when it dies.", "evidence": "verify-2026-10-02/urza/build-report.md §3 row 28" },
+    { "out": "Hydroelectric Specimen", "in": "Sink into Stupor", "role": "MDFC land", "reason": "Both are land/spell MDFCs; Sink's spell side bounces a spell or nonland permanent an opponent controls, which answers more boards than Hydroelectric's single-target redirect.", "evidence": "verify-2026-10-02/urza/build-report.md §3 row 29" },
+    { "out": "Lonely Sandbar", "in": "Island", "role": "land count", "reason": "Lonely Sandbar enters tapped; an untapped Island also counts for Waterbending Scroll's \"costs {1} less to activate for each Island you control\".", "evidence": "verify-2026-10-02/urza/build-report.md §3 row 30" },
+    { "out": "Cephalid Coliseum", "in": "Island", "role": "land count", "reason": "Coliseum's draw-3-discard-3 needs threshold, and its mana ability deals 1 damage to you on every tap; an Island asks for nothing and still counts for Agna Qel'a.", "evidence": "verify-2026-10-02/urza/build-report.md §3 row 31" },
+    { "out": "Evolving Wilds", "in": "Island", "role": "land count", "reason": "Evolving Wilds fetches a tapped Island; a real Island in the deck is untapped from turn one.", "evidence": "verify-2026-10-02/urza/build-report.md §3 row 32" },
+    { "out": "Witching Well", "in": "Cryogen Relic", "role": "cheap draw", "reason": "Witching Well needs \"{3}{U}, Sacrifice\" for its draw-2. Cryogen Relic draws a card on either entering or leaving the battlefield, so it is never a dead draw.", "evidence": "verify-2026-10-06/urza-found/build-report.md §2 row 1" },
+    { "out": "Steel Hellkite", "in": "Soul of New Phyrexia", "role": "protection", "reason": "Steel Hellkite eats spare mana one +1/+0 at a time. Soul of New Phyrexia gives the whole board indestructible for {5}, which protects the Construct from wipes and turns The Echoverse Fulcrum's \"destroy all creatures\" one-sided.", "evidence": "verify-2026-10-06/urza-found/build-report.md §2 row 15" },
+    { "out": "Dawnsire, Sunstar Dreadnought", "in": "Sun Quan, Lord of Wu", "role": "finisher", "reason": "Dawnsire needs a station turn before it threatens anything. Sun Quan's horsemanship is static the moment he resolves: the whole team is unblockable that turn.", "quoteIn": "Creatures you control have horsemanship. (They can't be blocked except by creatures with horsemanship.)", "evidence": "verify-2026-10-06/urza-found/build-report.md §2 row 13" },
+    { "out": null, "in": "Urza, Lord High Artificer", "role": "commander", "reason": "The box has no commander. Urza hot-swaps in from the Inspirit box, where Emry, Lurker of the Loch takes his old slot; Urza's \"tap an untapped artifact: add {U}\" is what makes the rest of this box's 24 artifacts worth anything.", "evidence": "verify-2026-10-02/urza/build-report.md §1" },
+    { "out": null, "in": "Efficient Construction", "role": "engine", "reason": "A second Thopter-per-artifact-spell trigger alongside Sai; doubles the rate N grows off cheap artifacts.", "evidence": "verify-2026-10-02/urza/build-report.md §3 row 33" },
+    { "out": null, "in": "Worldwalker Helm", "role": "engine", "reason": "Copies an artifact token at instant speed; used on an opponent's end step so the new Construct can attack next turn.", "quoteIn": "{1}{U}, {T}: Create a token that's a copy of target artifact token you control.", "evidence": "verify-2026-10-02/urza/build-report.md §3 row 34" },
+    { "out": null, "in": "Glaring Fleshraker", "role": "engine/burn", "reason": "Pings 1 to each opponent on every colourless creature ETB (Spawn, Thopters, Constructs, Golems). With Whirler Rogue and a kicked Rite, this is Win line C's 10 damage.", "evidence": "verify-2026-10-02/urza/build-report.md §3 row 35" },
+    { "out": null, "in": "Bident of Thassa", "role": "card flow", "reason": "Draws a card whenever a creature connects; the deck's Thopter swarm triggers it often once Whirler Rogue and Sai are online.", "evidence": "verify-2026-10-02/urza/build-report.md §3 row 37" },
+    { "out": null, "in": "Planetarium of Wan Shi Tong", "role": "card advantage", "reason": "Scry 2 for {1}, then once a turn cast the scryed card free; a repeatable Urza-adjacent card engine that also counts as an artifact for N.", "evidence": "verify-2026-10-02/urza/build-report.md §3 row 36" },
+    { "out": null, "in": "Rite of Replication", "role": "finisher", "reason": "Kicked ({2}{U}{U} + {5}, 8 with Sapphire Medallion), it makes five token copies; on Urza that is five Constructs and five Maps (with Helm) in one spell, since the legend rule removes the legendary copies but their ETBs still resolve (CR 704.5j), or on Whirler Rogue it is Win line C.", "quoteIn": "Create a token that's a copy of target creature. If this spell was kicked, create five of those tokens instead.", "evidence": "verify-2026-10-02/urza/build-report.md §3 row 16 (Cityscape Leveler unavailable); verify-2026-10-06/urza-found/build-report.md §1" },
+    { "out": null, "in": "Noble's Purse", "role": "ramp", "reason": "Makes three Treasures, each one a one-shot artifact that also counts for N; strictly more than Wayfarer's Bauble's single land fetch.", "evidence": "verify-2026-10-02/urza/build-report.md §3 row 44; verify-2026-10-06/urza-found/build-report.md §2 row 6" },
+    { "out": null, "in": "Katara's Reversal", "role": "counter", "reason": "Counters up to four spells or abilities and untaps up to four artifacts, which refunds Urza mana through the counter itself.", "quoteIn": "Counter up to four target spells and/or abilities. / Untap up to four target artifacts and/or creatures.", "evidence": "verify-2026-10-06/urza-found/build-report.md §2 row 7" },
+    { "out": null, "in": "Curse of the Swine", "role": "removal", "reason": "Exiles X creatures at once (X scales with Urza mana), an answer to go-wide boards alongside River's Rebuke and the Fulcrum.", "evidence": "verify-2026-10-02/urza/build-report.md §3 row 39" },
+    { "out": null, "in": "Zuko's Exile", "role": "removal", "reason": "Instant exile of an artifact, creature or enchantment; its first slot (Entrancing Melody, unavailable) was a steal effect, but exile answers indestructible threats the steal couldn't.", "evidence": "verify-2026-10-02/urza/build-report.md §3 row 40; verify-2026-10-06/urza-found/build-report.md §2 row 19" },
+    { "out": null, "in": "Tractor Beam", "role": "removal/theft", "reason": "A cheap Control Magic-style aura on a creature, with Unstoppable Plan untapping it to use the stolen creature's own abilities.", "evidence": "verify-2026-10-02/urza/build-report.md §3 row 42" },
+    { "out": null, "in": "Ember Island Production", "role": "clone", "reason": "Copies the Construct a turn early on a 4/4 Hero base, so the copy is (4 + N)/(4 + N); this is the setup step of win line A.", "quoteIn": "Create a token that's a copy of target creature you control, except it's not legendary and it's a 4/4 Hero in addition to its other types.", "evidence": "verify-2026-10-06/urza-found/build-report.md §1" },
+    { "out": null, "in": "Traxos, Scourge of Kroog", "role": "threat/mana", "reason": "A 7/7 trample for 4 that untaps on every historic (legendary or artifact) cast, refunding an Urza tap; restored alongside Golem Foundry in the operator's final pass rather than cutting one for the other.", "quoteIn": "Whenever you cast a historic spell, untap Traxos.", "evidence": "verify-2026-10-06/urza-found/build-report.md §2 row 14; CLAUDE.md Session Log 2026-10-06" },
+    { "out": null, "in": "River's Rebuke", "role": "wipe", "reason": "A one-sided bounce of all nonland permanents a chosen opponent controls; it took the slot of Perplexing Test, a 10-02 pool add that was never located.", "quoteIn": "Return all nonland permanents target player controls to their owner's hand.", "evidence": "verify-2026-10-02/urza/build-report.md §3 row 43" }
+  ],
+  "keepers": [
+    { "card": "The Echoverse Fulcrum", "why": "A 2-MV artifact that looks like a cantrip, but it is the operator's locked one-sided wipe with Soul of New Phyrexia: destroy all creatures while our board is indestructible." },
+    { "card": "Soul of New Phyrexia", "why": "A 6-MV 6/6 trampler that reads like a plain fatty; its {5} activated ability is what makes the Fulcrum one-sided and saves the Construct from any symmetric wipe." },
+    { "card": "Secluded Starforge", "why": "Looks like a do-nothing colourless land, but it took the unavailable Sol Ring's slot as the 38th land and stayed through the operator's cut to 35 and a late robot-maker once mana is free." },
+    { "card": "Padeem, Consul of Innovation", "why": "A small 1/4 body that looks skippable, but it gives every artifact hexproof -- Constructs, Helm, and every rock -- and draws a card on each upkeep while we control the highest-MV artifact." },
+    { "card": "The Legend of Kuruk", "why": "A slow 3-chapter Saga that does nothing the turn it lands; by chapter III it is an extra turn via waterbend {20}, which repeats whichever win line already closed." },
+    { "card": "Worn Powerstone", "why": "A vanilla {C}{C} rock with no text beyond ramp; it is in the deck purely to hit Karsten's land-equivalent count for a turn-4 Urza." },
+    { "card": "Ghostly Flicker", "why": "Reads like a 2-for-nothing bounce spell, but exiling and returning Urza makes a brand-new Construct ETB, and it dodges removal aimed at him." },
+    { "card": "Karn, the Great Creator", "why": "A 4-MV planeswalker with a narrow +1 (animate one artifact); it locks down an opponent's artifact-based hate piece and its -2 can rebuy an exiled Soul of New Phyrexia." }
+  ],
+  "nearTies": [
+    { "kept": "Soul of New Phyrexia", "alt": "Torrential Gearhulk", "note": "Board-wide indestructible plus the Fulcrum one-sided line, vs a flash 2-for-1 with no protection text; the Fulcrum interaction decided it." },
+    { "kept": "Bane's Contingency", "alt": "Countersculpt", "note": "Both are 3-mana hard counters; Bane's also scries 2 and draws when the countered spell targets a commander we control, i.e. Urza, which happens often." },
+    { "kept": "Pensive Professor", "alt": "Commander's Insight", "note": "Insight is an instant X-draw, but it is a precon-list registration the operator does not actually own; the Professor's repeating draw took the slot instead." },
+    { "kept": "Padeem, Consul of Innovation", "alt": "God-Pharaoh's Statue", "note": "Statue makes opponents' spells cost {2} more and drains 1 at each of our end steps, for 6 MV; Padeem's hexproof plus a conditional upkeep draw protects our own board instead, which the deck needs more." },
+    { "kept": "Secluded Starforge", "alt": "Hedron Archive", "note": "A land (the 38th when picked, still one of the 35 after the operator's cut) vs a 4-MV rock plus draw; the land count won once Sol Ring could not be found." }
+  ],
+  "mulligan": {
+    "keep": [
+      "3-4 lands (44% of 7-card hands)",
+      "2 lands plus a rock or cost reducer (18% of hands; 10 candidates: Arcane Signet, Sky Diamond, Sapphire Medallion, Noble's Purse, Commander's Sphere, Palladium Myr, Cloud Key, Worn Powerstone, Bender's Waterskin, Geist of Saint Thalia)",
+      "Sink into Stupor counts as a land toward the keep threshold",
+      "any hand with Urza plus two lands and a cheap artifact"
+    ],
+    "mulligan": [
+      "0-1 lands (20% of hands)",
+      "5+ lands (6% of hands)",
+      "2 lands with no rock or reducer (12% of hands)",
+      "a hand with 2+ of the 8 cards costing 6 or more (River's Rebuke, Kappa, Planetarium, Super State, Sun Quan, Soul of New Phyrexia, Thought Monitor, Meteor Golem)"
+    ]
+  },
+  "pilotRules": [
+    "Make Construct copies the turn before the kill turn, not on it: Ember Island Production early, Worldwalker Helm at an opponent's end step.",
+    "Pay for spells with lands, rocks, Maps, Spawn and this turn's tokens, not attackers; a tapped artifact still counts for N.",
+    "Cast Sun Quan before combat on the kill turn; only he can't attack, and his grant is static the instant he resolves.",
+    "Copies of Urza die to the legend rule before their ETB triggers go on the stack, but the Constructs they make still arrive; keep the original (it is the commander).",
+    "Super State's second damage trigger is not combat damage, so Bident of Thassa only draws off the hit itself.",
+    "With The Legend of Kuruk, attack first, then waterbend {20} in main phase 2; Exhaust means the ability works only once per Kuruk.",
+    "Protect Urza with a counter or Ghostly Flicker before tapping out; flicker also rebuilds the board with a new Construct.",
+    "Never activate The Echoverse Fulcrum while the Construct plus Super State is the only threat on the table, unless Soul of New Phyrexia is already up."
+  ],
+  "sources": [
+    "verify-2026-10-02/urza/build-report.md",
+    "verify-2026-10-02/urza/REFUTE.md",
+    "verify-2026-10-02/urza/verdicts.md",
+    "verify-2026-10-06/urza-found/build-report.md",
+    "verify-2026-10-06/urza-found/REFUTE.md",
+    "verify-2026-10-06/urza-found/found-all.md",
+    ".claude/skills/deck-building/reference/decks/urza-lord-high-artificer.md",
+    "CLAUDE.md Session Log 2026-10-02 and 2026-10-06 (Urza entries)"
+  ]
+}

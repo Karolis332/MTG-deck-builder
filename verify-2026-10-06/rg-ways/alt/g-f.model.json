@@ -1,0 +1,858 @@
+{
+ "format": "standard",
+ "deckName": null,
+ "commander": null,
+ "partner": null,
+ "stats": {
+  "totalCards": 60,
+  "landCount": 23,
+  "avgCmc": 3.62,
+  "colors": [
+   "G",
+   "R"
+  ]
+ },
+ "score": 80,
+ "health": [
+  {
+   "category": "land",
+   "label": "Lands",
+   "current": 23,
+   "target": {
+    "min": 22,
+    "max": 26,
+    "target": 24
+   },
+   "status": "ok",
+   "color": "text-green-400"
+  },
+  {
+   "category": "ramp",
+   "label": "Ramp",
+   "current": 15,
+   "target": {
+    "min": 4,
+    "max": 8,
+    "target": 6
+   },
+   "status": "high",
+   "color": "text-yellow-400"
+  },
+  {
+   "category": "draw",
+   "label": "Card Draw",
+   "current": 3,
+   "target": {
+    "min": 4,
+    "max": 8,
+    "target": 6
+   },
+   "status": "low",
+   "color": "text-red-400"
+  },
+  {
+   "category": "removal",
+   "label": "Removal",
+   "current": 8,
+   "target": {
+    "min": 6,
+    "max": 10,
+    "target": 8
+   },
+   "status": "ok",
+   "color": "text-green-400"
+  },
+  {
+   "category": "board_wipe",
+   "label": "Board Wipes",
+   "current": 3,
+   "target": {
+    "min": 1,
+    "max": 3,
+    "target": 2
+   },
+   "status": "ok",
+   "color": "text-green-400"
+  },
+  {
+   "category": "protection",
+   "label": "Protection",
+   "current": 1,
+   "target": {
+    "min": 2,
+    "max": 4,
+    "target": 3
+   },
+   "status": "low",
+   "color": "text-red-400"
+  },
+  {
+   "category": "synergy",
+   "label": "Commander Synergy",
+   "current": 0,
+   "target": {
+    "min": 0,
+    "max": 10,
+    "target": 0
+   },
+   "status": "ok",
+   "color": "text-green-400"
+  },
+  {
+   "category": "win_condition",
+   "label": "Win Conditions",
+   "current": 5,
+   "target": {
+    "min": 4,
+    "max": 8,
+    "target": 6
+   },
+   "status": "ok",
+   "color": "text-green-400"
+  }
+ ],
+ "curve": {
+  "1": 8,
+  "2": 9,
+  "3": 3,
+  "4": 5,
+  "5": 5,
+  "6": 3,
+  "7": 4
+ },
+ "notes": [
+  "Consider cutting 7 ramp (currently 15, maximum 8)",
+  "Add 1 more card draw (currently 3, minimum 4)",
+  "Add 1 more protection (currently 1, minimum 2)",
+  "Average CMC 3.62 is too high (target: 2.7). Cut expensive cards."
+ ],
+ "mana": {
+  "demand": {
+   "W": 0,
+   "U": 0,
+   "B": 0,
+   "R": 29,
+   "G": 21
+  },
+  "sources": {
+   "G": 18,
+   "R": 15
+  },
+  "warnings": []
+ },
+ "landTarget": {
+  "current": 23,
+  "effective": 23,
+  "recommended": 23,
+  "mdfcLandBacks": 0,
+  "cheapSpells": 11,
+  "formula": "19.59 + 1.90 × average mana value − 0.28 × cheap draw/ramp spells (60-card deck)"
+ },
+ "legality": [],
+ "cuts": [
+  {
+   "name": "Emrakul, the Exigent Doom",
+   "quantity": 2,
+   "category": "ramp",
+   "cmc": 10,
+   "score": 4,
+   "hard": false,
+   "reasons": [
+    "Ramp over quota (15/8) — weakest ramp slot",
+    "Not among the top 500 standard meta cards"
+   ],
+   "reason": "Ramp over quota (15/8) — weakest ramp slot; Not among the top 500 standard meta cards"
+  },
+  {
+   "name": "Aerid Konstrari",
+   "quantity": 1,
+   "category": "ramp",
+   "cmc": 4,
+   "score": 4,
+   "hard": false,
+   "reasons": [
+    "Ramp over quota (15/8) — weakest ramp slot",
+    "Not among the top 500 standard meta cards"
+   ],
+   "reason": "Ramp over quota (15/8) — weakest ramp slot; Not among the top 500 standard meta cards"
+  },
+  {
+   "name": "Way of the Paradox",
+   "quantity": 1,
+   "category": "ramp",
+   "cmc": 3,
+   "score": 4,
+   "hard": false,
+   "reasons": [
+    "Ramp over quota (15/8) — weakest ramp slot",
+    "Not among the top 500 standard meta cards"
+   ],
+   "reason": "Ramp over quota (15/8) — weakest ramp slot; Not among the top 500 standard meta cards"
+  },
+  {
+   "name": "Way of the Pyromancer",
+   "quantity": 2,
+   "category": "ramp",
+   "cmc": 2,
+   "score": 4,
+   "hard": false,
+   "reasons": [
+    "Ramp over quota (15/8) — weakest ramp slot",
+    "Not among the top 500 standard meta cards"
+   ],
+   "reason": "Ramp over quota (15/8) — weakest ramp slot; Not among the top 500 standard meta cards"
+  },
+  {
+   "name": "Spider Manifestation",
+   "quantity": 2,
+   "category": "ramp",
+   "cmc": 2,
+   "score": 3,
+   "hard": false,
+   "reasons": [
+    "Ramp over quota (15/8) — weakest ramp slot"
+   ],
+   "reason": "Ramp over quota (15/8) — weakest ramp slot"
+  },
+  {
+   "name": "Llanowar Elves",
+   "quantity": 2,
+   "category": "ramp",
+   "cmc": 1,
+   "score": 3,
+   "hard": false,
+   "reasons": [
+    "Ramp over quota (15/8) — weakest ramp slot"
+   ],
+   "reason": "Ramp over quota (15/8) — weakest ramp slot"
+  }
+ ],
+ "adds": [
+  {
+   "name": "Meltstrider's Resolve",
+   "quantity": 2,
+   "category": "utility",
+   "type_line": "Enchantment — Aura",
+   "cmc": 1,
+   "mana_cost": "{G}",
+   "image_uri_small": "https://cards.scryfall.io/small/front/5/3/53c08af4-b975-4d9d-baba-73e6727f2778.jpg?1783905933",
+   "reason": "In 52% of similar community decks (258/500)",
+   "score": 84.9,
+   "owned": true
+  },
+  {
+   "name": "Gene Pollinator",
+   "quantity": 2,
+   "category": "ramp",
+   "type_line": "Artifact Creature — Robot Insect",
+   "cmc": 1,
+   "mana_cost": "{G}",
+   "image_uri_small": "https://cards.scryfall.io/small/front/c/e/ce7a8eec-a029-4ee1-b2d6-405d903d4640.jpg?1783905937",
+   "reason": "In 49% of similar community decks (243/500)",
+   "score": 84.15,
+   "owned": true
+  },
+  {
+   "name": "Multiversal Passage",
+   "quantity": 2,
+   "category": "land",
+   "type_line": "Land",
+   "cmc": 0,
+   "mana_cost": null,
+   "image_uri_small": "https://cards.scryfall.io/small/front/2/1/21502958-a8e3-494a-9be9-bebbbb1dd9dc.jpg?1757546942",
+   "reason": "In 46% of similar community decks (231/500)",
+   "score": 83.55,
+   "owned": true
+  },
+  {
+   "name": "Keen-Eyed Curator",
+   "quantity": 2,
+   "category": "removal",
+   "type_line": "Creature — Raccoon Scout",
+   "cmc": 2,
+   "mana_cost": "{G}{G}",
+   "image_uri_small": "https://cards.scryfall.io/small/front/8/c/8cf33d80-0704-4dc4-8e8d-1dcbcbc35add.jpg?1783910807",
+   "reason": "In 33% of similar community decks (164/500)",
+   "score": 80.2,
+   "owned": true
+  },
+  {
+   "name": "Self-Destruct",
+   "quantity": 2,
+   "category": "utility",
+   "type_line": "Instant",
+   "cmc": 2,
+   "mana_cost": "{1}{R}",
+   "image_uri_small": "https://cards.scryfall.io/small/front/7/6/7661003c-bf83-46bb-bcc0-8fbf5819ffa8.jpg?1783906597",
+   "reason": "#14 Standard meta card by inclusion and placement",
+   "score": 77.2,
+   "owned": true
+  },
+  {
+   "name": "Clockwork Percussionist",
+   "quantity": 2,
+   "category": "utility",
+   "type_line": "Artifact Creature — Monkey Toy",
+   "cmc": 1,
+   "mana_cost": "{R}",
+   "image_uri_small": "https://cards.scryfall.io/small/front/1/0/10986e5a-9fc6-41e2-8352-289328245171.jpg?1783909471",
+   "reason": "#17 Standard meta card by inclusion and placement",
+   "score": 76.6,
+   "owned": true
+  },
+  {
+   "name": "Byway Barterer",
+   "quantity": 2,
+   "category": "draw",
+   "type_line": "Creature — Raccoon Rogue",
+   "cmc": 3,
+   "mana_cost": "{2}{R}",
+   "image_uri_small": "https://cards.scryfall.io/small/front/f/4/f41fc718-641b-4f32-a8c1-3e5591a05bf8.jpg?1783910824",
+   "reason": "#20 Standard meta card by inclusion and placement",
+   "score": 76,
+   "owned": true
+  },
+  {
+   "name": "Hawkeye, Master Marksman",
+   "quantity": 2,
+   "category": "removal",
+   "type_line": "Legendary Creature — Human Archer Hero",
+   "cmc": 2,
+   "mana_cost": "{1}{R}",
+   "image_uri_small": "https://cards.scryfall.io/small/front/9/9/9991b684-0ae0-4aa4-8f22-a9c473f5d69c.jpg?1783902931",
+   "reason": "#22 Standard meta card by inclusion and placement",
+   "score": 75.6,
+   "owned": true
+  },
+  {
+   "name": "Stalactite Dagger",
+   "quantity": 2,
+   "category": "utility",
+   "type_line": "Artifact — Equipment",
+   "cmc": 2,
+   "mana_cost": "{2}",
+   "image_uri_small": "https://cards.scryfall.io/small/front/6/9/6954df09-95f3-46cf-9ba8-2a1aea653d8f.jpg?1783904396",
+   "reason": "#25 Standard meta card by inclusion and placement",
+   "score": 75,
+   "owned": true
+  },
+  {
+   "name": "Cantankerous Keepers",
+   "quantity": 2,
+   "category": "win_condition",
+   "type_line": "Creature — Elf Soldier",
+   "cmc": 6,
+   "mana_cost": "{5}{G}",
+   "image_uri_small": "https://cards.scryfall.io/small/front/f/a/fae46a70-a6d3-4584-859d-6c7425fb1508.jpg?1785152413",
+   "reason": "#30 Standard meta card by inclusion and placement",
+   "score": 74,
+   "owned": true
+  },
+  {
+   "name": "Champions of the Perfect",
+   "quantity": 2,
+   "category": "draw",
+   "type_line": "Creature — Elf Warrior",
+   "cmc": 4,
+   "mana_cost": "{3}{G}",
+   "image_uri_small": "https://cards.scryfall.io/small/front/4/f/4f359211-8be5-4818-b73c-14f24b7ddb21.jpg?1783904433",
+   "reason": "#31 Standard meta card by inclusion and placement",
+   "score": 73.8,
+   "owned": true
+  },
+  {
+   "name": "Dwynen's Elite",
+   "quantity": 2,
+   "category": "utility",
+   "type_line": "Creature — Elf Warrior",
+   "cmc": 2,
+   "mana_cost": "{1}{G}",
+   "image_uri_small": "https://cards.scryfall.io/small/front/8/9/89d94c28-ea2e-4a3d-935f-6b2d9f2efc7a.jpg?1783909060",
+   "reason": "#33 Standard meta card by inclusion and placement",
+   "score": 73.4,
+   "owned": true
+  }
+ ],
+ "swaps": [
+  {
+   "cut": "Emrakul, the Exigent Doom",
+   "add": "Gene Pollinator",
+   "reason": "Ramp over quota (15/8) — weakest ramp slot; Not among the top 500 standard meta cards"
+  },
+  {
+   "cut": "Aerid Konstrari",
+   "add": "Meltstrider's Resolve",
+   "reason": "Ramp over quota (15/8) — weakest ramp slot; Not among the top 500 standard meta cards"
+  },
+  {
+   "cut": "Way of the Paradox",
+   "add": "Keen-Eyed Curator",
+   "reason": "Ramp over quota (15/8) — weakest ramp slot; Not among the top 500 standard meta cards"
+  },
+  {
+   "cut": "Way of the Pyromancer",
+   "add": "Self-Destruct",
+   "reason": "Ramp over quota (15/8) — weakest ramp slot; Not among the top 500 standard meta cards"
+  },
+  {
+   "cut": "Spider Manifestation",
+   "add": "Clockwork Percussionist",
+   "reason": "Ramp over quota (15/8) — weakest ramp slot"
+  },
+  {
+   "cut": "Llanowar Elves",
+   "add": "Byway Barterer",
+   "reason": "Ramp over quota (15/8) — weakest ramp slot"
+  }
+ ],
+ "lockedFromCuts": [],
+ "gate": {
+  "verdict": "pass",
+  "format": "standard",
+  "commander": null,
+  "totals": {
+   "cards": 60,
+   "lands": 23,
+   "effectiveLands": 23,
+   "nonland": 37,
+   "avgMv": 3.08
+  },
+  "curve": {
+   "1": 11,
+   "2": 8,
+   "3": 4,
+   "4": 4,
+   "5": 5,
+   "6": 3,
+   "7": 2
+  },
+  "plan": null,
+  "unresolved": [],
+  "checks": [
+   {
+    "id": "size",
+    "status": "pass",
+    "detail": "60 cards (standard wants 60)"
+   },
+   {
+    "id": "singleton",
+    "status": "pass",
+    "detail": "no card over 4 copies"
+   },
+   {
+    "id": "legality",
+    "status": "pass",
+    "detail": "every card legal in standard"
+   },
+   {
+    "id": "rules",
+    "status": "pass",
+    "detail": "no other format rule broken"
+   },
+   {
+    "id": "identity",
+    "status": "pass",
+    "detail": "not a commander format"
+   },
+   {
+    "id": "ownership",
+    "status": "pass",
+    "detail": "every card is in the caller-supplied pool"
+   },
+   {
+    "id": "arenaNames",
+    "status": "pass",
+    "detail": "every line uses a name Arena accepts"
+   },
+   {
+    "id": "lands",
+    "status": "pass",
+    "detail": "23 lands (+0 MDFC land backs = 23 effective); Karsten wants 23 ±2"
+   },
+   {
+    "id": "plan",
+    "status": "pass",
+    "detail": "no commander — plan not checked"
+   },
+   {
+    "id": "curve",
+    "status": "pass",
+    "detail": "avg MV 3.08"
+   },
+   {
+    "id": "wincons",
+    "status": "pass",
+    "detail": "6 win condition(s)/closer(s)",
+    "cards": [
+     "Chandra, Torch of Defiance",
+     "Curse-Marred Demon",
+     "Garruk, Curse Breaker",
+     "Terror of the Peaks",
+     "Overlord of the Hauntwoods",
+     "Craterhoof Behemoth"
+    ]
+   },
+   {
+    "id": "locks",
+    "status": "pass",
+    "detail": "1 locked card(s) present and intact",
+    "cards": [
+     "Stomping Ground"
+    ]
+   }
+  ]
+ },
+ "analysis": null,
+ "deckScore": {
+  "version": "1.4.0-rc10",
+  "score": 78,
+  "provisional": true,
+  "components": [
+   {
+    "key": "mana",
+    "score": 98.2,
+    "weight": 21.73913043478261,
+    "reason": "23 effective lands vs 23.0; R has 15/16 timely sources."
+   },
+   {
+    "key": "curve",
+    "score": 83,
+    "weight": 17.391304347826086,
+    "reason": "3-drops 3/10; 100% chance of a useful play by turn 2."
+   },
+   {
+    "key": "interaction",
+    "score": 95.3,
+    "weight": 21.73913043478261,
+    "reason": "9.3/4.0 effective answers, 6/3.8 cheap; weakest coverage: stack."
+   },
+   {
+    "key": "advantage",
+    "score": 82.3,
+    "weight": 10.869565217391305,
+    "reason": "5.7/2.0 draw units by turn 4; 3 cheap velocity cards."
+   },
+   {
+    "key": "win",
+    "score": 85,
+    "weight": 15.217391304347826,
+    "reason": "Creature pressure (2 threats): closes T6, access 96% (u=1.00); shared bottleneck, protection access 0%; none."
+   },
+   {
+    "key": "synergy",
+    "score": 72.4,
+    "weight": 13.043478260869565,
+    "reason": "35% of the library supports aggro; U 21.0/60; weakest dependency pressure 4.0/4; 0 unsupported payoffs."
+   },
+   {
+    "key": "meta",
+    "score": 50,
+    "weight": 0,
+    "reason": "no context: 0 dated lists, 0% coverage; insufficient data; snapshot none."
+   },
+   {
+    "key": "structure",
+    "score": 100,
+    "weight": 0,
+    "reason": "4/4 rule checks verified; none; cap none."
+   }
+  ],
+  "gates": [
+   {
+    "key": "structure",
+    "kind": "rules",
+    "status": "pass",
+    "cap": null,
+    "reason": "4/4 rule checks verified; none; cap none."
+   },
+   {
+    "key": "size",
+    "kind": "rules",
+    "status": "pass",
+    "cap": null,
+    "reason": "60 cards (standard wants 60)"
+   },
+   {
+    "key": "singleton",
+    "kind": "rules",
+    "status": "pass",
+    "cap": null,
+    "reason": "no card over 4 copies"
+   },
+   {
+    "key": "legality",
+    "kind": "rules",
+    "status": "pass",
+    "cap": null,
+    "reason": "every card legal in standard"
+   },
+   {
+    "key": "rules",
+    "kind": "rules",
+    "status": "pass",
+    "cap": null,
+    "reason": "no other format rule broken"
+   },
+   {
+    "key": "quality_cap",
+    "kind": "quality",
+    "status": "warn",
+    "cap": 77.9,
+    "reason": "quality cap 20+0.8*min(M,W,S)=77.9 from mana=98.2, win=85, synergy=72.4."
+   },
+   {
+    "key": "coverage",
+    "kind": "evidence",
+    "status": "warn",
+    "cap": null,
+    "reason": "62% of nonland copies are typed in the effect catalogue — provisional: effect coverage, not calibrated."
+   },
+   {
+    "key": "meta_evidence",
+    "kind": "evidence",
+    "status": "warn",
+    "cap": null,
+    "reason": "no corpus snapshot supplied — meta fit defaulted to 50."
+   }
+  ],
+  "absoluteTotal": 77.92000000000002,
+  "absoluteTotalDisplay": 78,
+  "rank": 63.22641594516598,
+  "rankDisplay": 63,
+  "headline": {
+   "kind": "rank",
+   "value": 63.22641594516598
+  },
+  "reference": {
+   "profile": "standard",
+   "referenceVersion": "1.4.0-ref1",
+   "families": 40,
+   "rows": 244,
+   "frozenAt": "2026-09-22"
+  },
+  "evidence": "provisional"
+ },
+ "bracket": null,
+ "main": [
+  {
+   "name": "Llanowar Elves",
+   "quantity": 4,
+   "category": "ramp",
+   "type_line": "Creature — Elf Druid",
+   "cmc": 1,
+   "mana_cost": "{G}",
+   "image_uri_small": "https://cards.scryfall.io/small/front/6/a/6a0b230b-d391-4998-a3f7-7b158a0ec2cd.jpg?1783909057"
+  },
+  {
+   "name": "Spider Manifestation",
+   "quantity": 4,
+   "category": "ramp",
+   "type_line": "Creature — Spider Avatar",
+   "cmc": 2,
+   "mana_cost": "{1}{R/G}",
+   "image_uri_small": "https://cards.scryfall.io/small/front/9/9/99223677-b8a5-48f1-8009-e8475eada7db.jpg?1783905310"
+  },
+  {
+   "name": "Burst Lightning",
+   "quantity": 4,
+   "category": "removal",
+   "type_line": "Instant",
+   "cmc": 1,
+   "mana_cost": "{R}",
+   "image_uri_small": "https://cards.scryfall.io/small/front/a/e/aec5d380-d354-4750-931a-6c91853e2edc.jpg?1783909068"
+  },
+  {
+   "name": "Sear",
+   "quantity": 2,
+   "category": "removal",
+   "type_line": "Instant",
+   "cmc": 2,
+   "mana_cost": "{1}{R}",
+   "image_uri_small": "https://cards.scryfall.io/small/front/a/e/aeb4612c-758b-4492-ba03-eb6741b4176e.jpg?1783904441"
+  },
+  {
+   "name": "Way of the Pyromancer",
+   "quantity": 3,
+   "category": "ramp",
+   "type_line": "Legendary Enchantment",
+   "cmc": 2,
+   "mana_cost": "{1}{R}",
+   "image_uri_small": "https://cards.scryfall.io/small/front/c/1/c1a00020-7c14-4503-a057-5763704bb83e.jpg?1788878311"
+  },
+  {
+   "name": "Way of the Paradox",
+   "quantity": 1,
+   "category": "ramp",
+   "type_line": "Legendary Enchantment",
+   "cmc": 3,
+   "mana_cost": "{2}{G}",
+   "image_uri_small": "https://cards.scryfall.io/small/front/9/8/98dc5470-507a-4364-8480-42607255e56c.jpg?1789729606"
+  },
+  {
+   "name": "Chandra, Torch of Defiance",
+   "quantity": 2,
+   "category": "removal",
+   "type_line": "Legendary Planeswalker — Chandra",
+   "cmc": 4,
+   "mana_cost": "{2}{R}{R}",
+   "image_uri_small": "https://cards.scryfall.io/small/front/2/e/2eac0eaa-55b2-444a-863d-c66769aab4ee.jpg?1690004652"
+  },
+  {
+   "name": "Curse-Marred Demon",
+   "quantity": 2,
+   "category": "tutor",
+   "type_line": "Creature — Demon",
+   "cmc": 4,
+   "mana_cost": "{2}{R}{R}",
+   "image_uri_small": "https://cards.scryfall.io/small/front/8/f/8f827e50-0a08-4bc8-98b1-b26c9af15ef2.jpg?1789470818"
+  },
+  {
+   "name": "Aerid Konstrari",
+   "quantity": 1,
+   "category": "ramp",
+   "type_line": "Legendary Creature — Elder Sphinx",
+   "cmc": 4,
+   "mana_cost": "{1}{R}{G}{G}",
+   "image_uri_small": "https://cards.scryfall.io/small/front/f/1/f17d2792-b075-4c47-ad38-e7a7eaee5f8c.jpg?1788878199"
+  },
+  {
+   "name": "Garruk, Curse Breaker",
+   "quantity": 2,
+   "category": "draw",
+   "type_line": "Legendary Planeswalker — Garruk",
+   "cmc": 5,
+   "mana_cost": "{3}{G}{G}",
+   "image_uri_small": "https://cards.scryfall.io/small/front/9/0/90ca5812-ceb5-46bd-b049-aed7ff10e6af.jpg?1788329370"
+  },
+  {
+   "name": "Terror of the Peaks",
+   "quantity": 2,
+   "category": "win_condition",
+   "type_line": "Creature — Dragon",
+   "cmc": 5,
+   "mana_cost": "{3}{R}{R}",
+   "image_uri_small": "https://cards.scryfall.io/small/front/9/0/904ff94a-4db4-44a6-8593-89c32905b3fc.jpg?1783911813"
+  },
+  {
+   "name": "Overlord of the Hauntwoods",
+   "quantity": 1,
+   "category": "win_condition",
+   "type_line": "Enchantment Creature — Avatar Horror",
+   "cmc": 5,
+   "mana_cost": "{3}{G}{G}",
+   "image_uri_small": "https://cards.scryfall.io/small/front/0/5/05d08ff1-edcc-4c76-96e0-683b3da36ebb.jpg?1783909450"
+  },
+  {
+   "name": "Ajani Unrelenting",
+   "quantity": 3,
+   "category": "board_wipe",
+   "type_line": "Legendary Planeswalker — Ajani",
+   "cmc": 6,
+   "mana_cost": "{4}{R}{R}",
+   "image_uri_small": "https://cards.scryfall.io/small/front/b/c/bc3c096f-7f6c-474c-a2c8-75d3e6ddd6f5.jpg?1788329317"
+  },
+  {
+   "name": "Craterhoof Behemoth",
+   "quantity": 2,
+   "category": "win_condition",
+   "type_line": "Creature — Beast",
+   "cmc": 8,
+   "mana_cost": "{5}{G}{G}{G}",
+   "image_uri_small": "https://cards.scryfall.io/small/front/2/7/276f5cee-a501-4658-bd4d-7a044bf1ccbc.jpg?1783907345"
+  },
+  {
+   "name": "Emrakul, the Exigent Doom",
+   "quantity": 2,
+   "category": "ramp",
+   "type_line": "Legendary Creature — Eldrazi",
+   "cmc": 10,
+   "mana_cost": "{10}",
+   "image_uri_small": "https://cards.scryfall.io/small/front/c/3/c3ff8dd3-88a8-49dc-a59b-e2748680623c.jpg?1789060137"
+  },
+  {
+   "name": "Stomping Ground",
+   "quantity": 2,
+   "category": "land",
+   "type_line": "Land — Mountain Forest",
+   "cmc": 0,
+   "mana_cost": null,
+   "image_uri_small": "https://cards.scryfall.io/small/front/6/9/69be21b4-c613-47c6-ba57-f4785861af3e.jpg?1752947608"
+  },
+  {
+   "name": "Rockfall Vale",
+   "quantity": 4,
+   "category": "land",
+   "type_line": "Land",
+   "cmc": 0,
+   "mana_cost": null,
+   "image_uri_small": "https://cards.scryfall.io/small/front/d/c/dcdea659-ecaf-4abe-be0f-64e105abb104.jpg?1783906974"
+  },
+  {
+   "name": "Konstrari Annex",
+   "quantity": 2,
+   "category": "land",
+   "type_line": "Land",
+   "cmc": 0,
+   "mana_cost": null,
+   "image_uri_small": "https://cards.scryfall.io/small/front/3/9/39c805e3-82cd-42a9-80fe-8d81712a94ea.jpg?1789556993"
+  },
+  {
+   "name": "Starting Town",
+   "quantity": 2,
+   "category": "land",
+   "type_line": "Land — Town",
+   "cmc": 0,
+   "mana_cost": null,
+   "image_uri_small": "https://cards.scryfall.io/small/front/f/c/fc7d1912-7e27-49ef-bd98-375d975a42b0.jpg?1783906546"
+  },
+  {
+   "name": "Ba Sing Se",
+   "quantity": 1,
+   "category": "land",
+   "type_line": "Land",
+   "cmc": 0,
+   "mana_cost": null,
+   "image_uri_small": "https://cards.scryfall.io/small/front/b/d/bdf3b2be-d0cd-4a3c-a10e-82d32c12d3bd.jpg?1783904912"
+  },
+  {
+   "name": "Forest",
+   "quantity": 7,
+   "category": "land",
+   "type_line": "Basic Land — Forest",
+   "cmc": 0,
+   "mana_cost": null,
+   "image_uri_small": "https://cards.scryfall.io/small/front/b/4/b460f5f7-c7c9-400c-8419-23d614f45bf9.jpg?1767773926"
+  },
+  {
+   "name": "Mountain",
+   "quantity": 5,
+   "category": "land",
+   "type_line": "Basic Land — Mountain",
+   "cmc": 0,
+   "mana_cost": null,
+   "image_uri_small": "https://cards.scryfall.io/small/front/2/9/295b92bc-d66f-45d8-9bbe-5f5f13e39fd4.jpg?1767773878"
+  },
+  {
+   "name": "Way of the Warlord",
+   "quantity": 1,
+   "category": "draw",
+   "type_line": "Legendary Enchantment",
+   "cmc": 3,
+   "mana_cost": "{2}{R}",
+   "image_uri_small": "https://cards.scryfall.io/small/front/6/d/6d86e410-20c4-4248-96bf-5780ece6274a.jpg?1789729585"
+  },
+  {
+   "name": "Tyvar, the Pummeler",
+   "quantity": 1,
+   "category": "protection",
+   "type_line": "Legendary Creature — Elf Warrior",
+   "cmc": 3,
+   "mana_cost": "{1}{G}{G}",
+   "image_uri_small": "https://cards.scryfall.io/small/front/5/f/5f7687b1-630a-4e95-89c7-eaf456d8cb68.jpg?1783909447"
+  }
+ ],
+ "sideboard": [],
+ "unresolved": [],
+ "truncated": false,
+ "elapsedMs": 280
+}

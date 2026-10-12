@@ -1,0 +1,71 @@
++ export 'MTG_DB_DIR=C:\Users\QuLeR\MTG-deck-builder\data'
++ MTG_DB_DIR='C:\Users\QuLeR\MTG-deck-builder\data'
++ npx tsx scripts/deck-score-bands.ts freeze --write
+| constant | frozen | measured | n | action |
+|---|---:|---:|---:|---|
+| Q_SLOT_SATURATION.commander | 0.43434343 | 0.43434343 | 1460 | unchanged |
+| Q_SLOT_SATURATION.brawl | 0.40606061 | 0.40606061 | 797 | unchanged |
+| Q_SLOT_SATURATION.standard | 0.48333333 | 0.48333333 | 360 | unchanged |
+
+bands freeze: 0 constant(s) moved; WRITTEN to deck-score-norms.ts / deck-score-plans.ts — re-run `bands verify` and the suite.
+§10.8: every S norm here is PROVISIONAL until the corrected W domain lands.
++ npx tsx scripts/deck-score-bands.ts reference freeze --write
+| profile | rows | families | alt families | dups | unavailable | knots | ties | largest atom | weight sum | mean rank | T_abs p10/p50/p90 | verdict |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|
+| commander | 1429 | 182 | 182 | 20 | 0 | 431 | 183 | 5.064e-2 | 1.000000000000 | 50.000000000 | 20.40 / 52.80 / 67.84 | OK |
+| brawl | 783 | 179 | 179 | 12 | 0 | 306 | 76 | 6.040e-2 | 1.000000000000 | 50.000000000 | 61.52 / 75.76 / 84.40 | OK |
+| standard | 244 | 40 | 25 | 90 | 0 | 120 | 35 | 8.201e-2 | 1.000000000000 | 50.000000000 | 32.00 / 68.08 / 86.13 | OK |
+
+commander: 11 eligible row(s) excluded by a SCORER rule failure: commander-sample:381414287, commander-sample:381412744, commander-sample:381414040, commander-sample:381199063, commander-sample:378808542, commander-sample:381204290, commander-sample:380771438, commander-sample:381124378, commander-sample:352794123, commander-sample:352932966, commander-sample:367128615
+commander: written C:\Users\QuLeR\MTG-deck-builder\src\lib\deck-score-reference\commander.json (431 knots)
+brawl: 2 eligible row(s) excluded by a SCORER rule failure: brawl-sample:378796808, brawl-sample:363064196
+brawl: written C:\Users\QuLeR\MTG-deck-builder\src\lib\deck-score-reference\brawl.json (306 knots)
+standard: 26 eligible row(s) excluded by a SCORER rule failure: standard:1446069, standard:1446183, standard:1446182, standard:1446208, standard:1446354, standard:1446321, standard:1446410, standard:1446408, standard:1446515, standard:1446510, standard:1446567, standard:1446563, standard:1446561, standard:1446647, standard:1446655, standard:1446706, standard:1446013, standard:1446037, standard:1446322, standard:1446572, standard:1446716, standard:1446785, standard:1446850, standard:1446820, standard:1447148, standard:1447203
+standard: written C:\Users\QuLeR\MTG-deck-builder\src\lib\deck-score-reference\standard.json (120 knots)
++ npx tsx scripts/deck-score-bands.ts domain --write
+{
+  "frozenAt": "2026-09-22",
+  "scoreVersion": "1.4.0-rc5",
+  "catalogVersion": "fdcecb38",
+  "catalogSize": 14924,
+  "catalogSha256": "21fa0be02940c884620b08cfd3cbf9558fb42abf1f7d31428c38fda167da2c6b",
+  "combosSha256": "19acb60cf6b088f831c4e8a671e8ac7e7a63da6441ca34d56c15afb8bb5d8a82",
+  "planRecipes": [
+    "aggro",
+    "aristocrats",
+    "control",
+    "conversion",
+    "counters",
+    "lifegain",
+    "midrange",
+    "recursion",
+    "spells",
+    "tokens"
+  ],
+  "winFamilies": [
+    "alt_win",
+    "combat_tall",
+    "combat_wide",
+    "combo",
+    "control",
+    "drain",
+    "spells",
+    "tokens"
+  ],
+  "scheduler": "v14-stage3e"
+}
+written C:\Users\QuLeR\MTG-deck-builder\verify-2026-09-19\deck-score\domain-v14.json
++ npx tsx scripts/deck-score-bands.ts verify
+| constant | frozen | measured | n | verdict |
+|---|---:|---:|---:|---|
+| Q_SLOT_SATURATION.commander (p80, 182 families) | 0.434 | 0.434 | 1460 | MATCH |
+| Q_SLOT_SATURATION.brawl (p80, 179 families) | 0.406 | 0.406 | 797 | MATCH |
+| Q_SLOT_SATURATION.standard (p80, 42 families) | 0.483 | 0.483 | 360 | MATCH |
+| (retired, diagnostics only) | Q_BASELINE_JOINT_*, Q_BASELINE_CLOSING*, Q_SATURATION* | - | - | not graded |
+| cohort list hashes | 4523 | 4523 | 4523 | MATCH |
+| recipe/catalogue domain | 21fa0be02940 | 21fa0be02940 | 14924 | MATCH |
+| reference commander | 39d02d7d10c2 | 39d02d7d10c2 | 1429 | MATCH |
+| reference brawl | 982547fe13cf | 982547fe13cf | 783 | MATCH |
+| reference standard | 36ce6a9e1ab8 | 36ce6a9e1ab8 | 244 | MATCH |
+
+bands verify: OK — every frozen constant reproduces at this catalogue (CATALOG_SIZE 14924; 45 band cells re-measured, 0 mismatches).

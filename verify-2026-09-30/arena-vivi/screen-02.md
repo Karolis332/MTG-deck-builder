@@ -1,0 +1,155 @@
+screened 450/450, passed 154, last card read: Case of the Shattered Pact
+- Burst Lightning — cheap burn / removal — "Burst Lightning deals 2 damage to any target. If this spell was kicked, it deals 4 damage instead." — beats: Abrade
+- White Lotus Hideout — utility land — "{1}, {T}: Add one mana of any color." — beats: Secluded Courtyard
+- Abhorrent Oculus — creature payoff — "As an additional cost to cast this spell, exile six cards from your graveyard. | Flying | At the beginning of each opponent's upkeep, manifest dread." — beats: Clinquant Skymage
+- Roiling Dragonstorm — cheap draw — "When this enchantment enters, draw two cards, then discard a card." — beats: Hard Evidence
+- Throes of Chaos — extra-spell engine — "Cascade | Retrace" — beats: Involuntary Employment
+- Instant Ramen — cheap cantrip artifact — "Flash | When this artifact enters, draw a card." — beats: Hard Evidence
+- Zoyowa's Justice — cheap removal — "The owner of target artifact or creature with mana value 1 or greater shuffles it into their library. Then that player discovers X" — beats: Planar Incision
+- Prismari Charm — cheap modal cantrip / removal — "Surveil 2, then draw a card. | • Prismari Charm deals 1 damage to each of one or two targets. | • Return target nonland permanent to its owner's hand." — beats: Deduce
+- Captain America's Shield — Vivi protection — "Indestructible | Equipped creature gets +0/+8 and has vigilance." — beats: Training Grounds
+- Blazing Firesinger // Seething Song — ritual — "This creature enters prepared. (While it's prepared, you may cast a copy of its spell.) | // | Add {R}{R}{R}{R}{R}." — beats: Ashnod's Altar
+- Accumulate Wisdom — cheap cantrip — "Look at the top three cards of your library. Put one of those cards into your hand and the rest on the bottom" — beats: Hard Evidence
+- Mirror of Galadriel — mana sink — "{5}, {T}: Scry 1, then draw a card. This ability costs {1} less to activate for each legendary creature you control." — beats: Agatha's Soul Cauldron
+- Warlord's Fury — cheap cantrip — "Creatures you control gain first strike until end of turn. | Draw a card." — beats: Hard Evidence
+- Glen Elendra Guardian — counter on a body — "Flash | Flying | {1}{U}, Remove a counter from this creature: Counter target noncreature spell." — beats: Clinquant Skymage
+- Soothing of Sméagol — cheap tempo — "Return target nontoken creature to its owner's hand. The Ring tempts you." — beats: Planar Incision
+- Essence Capture — counterspell — "Counter target creature spell. Put a +1/+1 counter on up to one target creature you control." — beats: Planar Incision
+- Emeritus of Ideation // Ancestral Recall — card draw on a body — "This creature enters prepared. | // | Target player draws three cards." — beats: Mulldrifter
+- Wild Ride — Vivi haste / recursion — "Target creature gets +3/+0 and gains haste until end of turn. | Harmonize {4}{R}" — beats: Involuntary Employment
+- Winternight Stories — card draw — "Draw three cards. Then discard two cards unless you discard a creature card. | Harmonize {4}{U}" — beats: Seize the Spoils
+- Get Out — counterspell / Vivi save — "Counter target creature or enchantment spell. | • Return one or two target creatures and/or enchantments you own to your hand." — beats: Planar Incision
+- Impolite Entrance — Vivi haste cantrip — "Target creature gains trample and haste until end of turn. | Draw a card." — beats: Hard Evidence
+- Chandra, Acolyte of Flame — spell recursion engine — "−2: You may cast target instant or sorcery card with mana value 3 or less from your graveyard." — beats: Involuntary Employment
+- Don't Make a Sound — cheap counter — "Counter target spell unless its controller pays {2}. If they do, surveil 2." — beats: Planar Incision
+- Firebending Lesson — cheap removal — "Firebending Lesson deals 2 damage to target creature. If this spell was kicked, it deals 5 damage to that creature instead." — beats: Abrade
+- Ashling's Command — draw + ramp — "Choose two — | • Target player draws two cards. | • Target player creates two Treasure tokens." — beats: Involuntary Employment
+- Louisoix's Sacrifice — counter — "Counter target activated ability, triggered ability, or noncreature spell." — beats: Planar Incision
+- Iroh's Demonstration — cheap removal — "Iroh's Demonstration deals 4 damage to target creature." — beats: Abrade
+- Captivating Cave — utility land — "{1}, {T}: Add one mana of any color." — beats: Secluded Courtyard
+- Rodeo Pyromancers — ritual on a body — "Whenever you cast your first spell each turn, add {R}{R}." — beats: Murmuring Mystic
+- The Legend of Kuruk // Avatar Kuruk — card draw + spell payoff — "I, II — Scry 2, then draw a card. | // | Whenever you cast a spell, create a 1/1 colorless Spirit creature token" — beats: Hard Evidence
+- Magmatic Insight — cheap draw — "As an additional cost to cast this spell, discard a land card. | Draw two cards." — beats: Thrill of Possibility
+- Energybending — cheap cantrip — "Lands you control gain all basic land types until end of turn. | Draw a card." — beats: Hard Evidence
+- Dragonologist — spell tutor on a body — "look at the top six cards of your library. You may reveal an instant, sorcery, or Dragon card from among them and put it into your hand." — beats: Clinquant Skymage
+- Lasting Tarfire — win condition / burn engine — "At the beginning of each end step, if you put a counter on a creature this turn, this enchantment deals 2 damage to each opponent." — beats: Impact Tremors
+- Wisdom of Ages — mana sink / recursion — "Return all instant and sorcery cards from your graveyard to your hand. You have no maximum hand size for the rest of the game." — beats: Involuntary Employment
+- Racers' Scoreboard — draw + cost reducer — "When this artifact enters, draw two cards, then discard a card. | Max speed — Spells you cast cost {1} less to cast." — beats: Panharmonicon
+- Price of Freedom — cheap removal cantrip — "Destroy target artifact or land an opponent controls. | Draw a card." — beats: Abrade
+- Dive Down — Vivi protection — "Target creature you control gets +0/+3 and gains hexproof until end of turn." — beats: Training Grounds
+- Hex Magic — card draw — "Exile all the cards from your hand, then draw that many cards. Until the end of your next turn, you may play cards exiled this way." — beats: Seize the Spoils
+- Thunder Magic — cheap scalable removal — "Thunder — {0} — Thunder Magic deals 2 damage to target creature. | • Thundara — {3} — 4 damage | • Thundaga — {5}{R} — 8 damage" — beats: Abrade
+- Stormshriek Feral // Flush Out — cheap draw — "Discard a card. If you do, draw two cards." — beats: Thrill of Possibility
+- Airship Engine Room — U/R utility land — "{T}: Add {U} or {R}. | {4}, {T}, Sacrifice this land: Draw a card." — beats: Secluded Courtyard
+- Yue, the Moon Spirit — free-cast engine — "Waterbend {5}, {T}: You may cast a noncreature spell from your hand without paying its mana cost." — beats: Clinquant Skymage
+- Bone Saw — free noncreature spell (Vivi trigger) — "{0} | Equipped creature gets +1/+0. | Equip {1}" — beats: Training Grounds
+- Demonic Ruckus — Vivi evasion + card — "Enchanted creature gets +1/+1 and has menace and trample. | When this Aura is put into a graveyard from the battlefield, draw a card. | Plot {R}" — beats: Sticky Fingers
+- Roaring Furnace // Steaming Sauna — removal + draw engine — "this Room deals damage equal to the number of cards in your hand to target creature an opponent controls. | // | At the beginning of your end step, draw a card." — beats: Waterbender Ascension
+- Candy Trail — cheap noncreature spell / draw — "When this artifact enters, scry 2. | {2}, {T}, Sacrifice this artifact: You gain 3 life and draw a card." — beats: Hard Evidence
+- The Mechanist, Aerial Artisan — spell payoff draw engine — "Whenever you cast a noncreature spell, create a Clue token." — beats: Clinquant Skymage
+- Solstice Revelations — free-cast / impulse — "Exile cards from the top of your library until you exile a nonland card. You may cast that card without paying its mana cost if the spell's mana value is less than the number of Mountains you control." — beats: Seize the Spoils
+- Glen Elendra's Answer — counter — "This spell can't be countered. | Counter all spells your opponents control and all abilities your opponents control." — beats: Planar Incision
+- Slagstorm — sweeper / burn — "Slagstorm deals 3 damage to each creature. | • Slagstorm deals 3 damage to each player." — beats: Blasphemous Act
+- Pearl of Wisdom — draw — "This spell costs {1} less to cast if you control an Otter. | Draw two cards." — beats: Seize the Spoils
+- Gandalf the Grey — spell payoff / win condition — "Whenever you cast an instant or sorcery spell, choose one that hasn't been chosen — | • Gandalf deals 3 damage to each opponent. | • Copy target instant or sorcery spell you control." — beats: Ovika, Enigma Goliath
+- Divert Disaster — cheap counter — "Counter target spell unless its controller pays {2}. If they do, you create a Lander token." — beats: Planar Incision
+- Emeritus of Conflict // Lightning Bolt — burn on a body — "Whenever you cast your third spell each turn, this creature becomes prepared. | // | Lightning Bolt deals 3 damage to any target." — beats: Young Pyromancer
+- Pyroclasm — cheap sweeper (Vivi survives) — "Pyroclasm deals 2 damage to each creature." — beats: Blasphemous Act
+- Dreams of Laguna — cheap cantrip x2 — "Surveil 1, then draw a card. | Flashback {3}{U}" — beats: Deduce
+- Rapturous Moment — draw + ritual — "Draw three cards, then discard two cards. Add {U}{U}{R}{R}{R}." — beats: Involuntary Employment
+- Sanar, Unfinished Genius // Wild Idea — tutor + treasure — "Sanar enters prepared. | {T}: Create a Treasure token. Activate only if you've cast an instant or sorcery spell this turn. | // | Search your library for an instant or sorcery card" — beats: Young Pyromancer
+- Molten-Core Maestro — spell payoff / mana — "Whenever you cast an instant or sorcery spell, put a +1/+1 counter on this creature. If five or more mana was spent to cast that spell, add an amount of {R} equal to this creature's power." — beats: Electrostatic Infantry
+- Unstable Experiment — cheap cantrip — "Target player draws a card, then up to one target creature you control connives." — beats: Deduce
+- Spider-Man No More — cheap removal — "Enchanted creature is a Citizen with base power and toughness 1/1. It has defender and loses all other abilities." — beats: Planar Incision
+- Spectral Denial — cheap counter — "This spell costs {1} less to cast for each creature you control with power 4 or greater. | Counter target spell unless its controller pays {X}." — beats: Planar Incision
+- You Come to a River — cheap tempo / Vivi evasion — "Return target nonland permanent to its owner's hand. | • Target creature gets +1/+0 until end of turn and can't be blocked this turn." — beats: Planar Incision
+- Floodpits Drowner — removal on a body — "Flash | When this creature enters, tap target creature an opponent controls and put a stun counter on it. | {1}{U}, {T}: Shuffle this creature and target creature with a stun counter on it into their owners' libraries." — beats: Clinquant Skymage
+- Ill-Timed Explosion — draw + sweeper — "Draw two cards. Then you may discard two cards. When you do, Ill-Timed Explosion deals X damage to each creature" — beats: Blasphemous Act
+- Gandalf's Sanction — removal / burn — "Gandalf's Sanction deals X damage to target creature, where X is the number of instant and sorcery cards in your graveyard. Excess damage is dealt to that creature's controller instead." — beats: Abrade
+- Spectacle Summit — U/R utility land — "{T}: Add {U} or {R}. | {2}{U}{R}, {T}: Surveil 1." — beats: Secluded Courtyard
+- Slick Sequence — cheap burn cantrip — "Slick Sequence deals 2 damage to any target. If you've cast another spell this turn, draw a card." — beats: Abrade
+- Harnesser of Storms — spell payoff card advantage — "Whenever you cast a noncreature or Otter spell, you may exile the top card of your library. Until end of turn, you may play that card." — beats: Clinquant Skymage
+- The Dawning Archaic — recursion finisher — "This spell costs {1} less to cast for each instant and sorcery card in your graveyard. | Whenever The Dawning Archaic attacks, you may cast target instant or sorcery card from your graveyard without paying its mana cost." — beats: Ovika, Enigma Goliath
+- Picklock Prankster // Free the Fae — cheap instant card selection — "Mill four cards. Then put an instant, sorcery, or Faerie card from among the milled cards into your hand." — beats: Deduce
+- Vision of Love — cheap draw — "You may sacrifice an artifact or discard a card. If you do, draw two cards." — beats: Thrill of Possibility
+- Sokka's Haiku — counter + draw — "Counter target spell. | Draw a card, then mill three cards. | Untap target land." — beats: Planar Incision
+- Spell Snare — cheap counter — "Counter target spell with mana value 2." — beats: Planar Incision
+- Thor, God of Thunder — spell payoff / win condition — "Whenever you cast a noncreature spell, Thor deals damage equal to that spell's mana value to any target." — beats: Ovika, Enigma Goliath
+- Repulse — tempo cantrip — "Return target creature to its owner's hand. | Draw a card." — beats: Planar Incision
+- Curious Obsession — Vivi draw aura — "Enchanted creature gets +1/+1 and has "Whenever this creature deals combat damage to a player, you may draw a card."" — beats: Curiosity
+- Traumatic Critique — X spell burn + draw — "Traumatic Critique deals X damage to any target. Draw two cards, then discard a card." — beats: Involuntary Employment
+- North Pole Patrol — untap Vivi (double mana) — "{T}: Untap another target permanent you control." — beats: Clinquant Skymage
+- Honest Work — cheap removal — "Enchanted creature loses all abilities and is a Citizen with base power and toughness 1/1" — beats: Planar Incision
+- Pym Particles — Vivi evasion cantrip — "Target creature gains vigilance until end of turn and can't be blocked this turn. | Draw a card." — beats: Hard Evidence
+- Faithless Salvaging — cheap loot, two casts — "Discard a card, then draw a card. | Rebound" — beats: Thrill of Possibility
+- Guidelight Matrix — cheap cantrip artifact — "When this artifact enters, draw a card." — beats: Hard Evidence
+- Great Hall of the Biblioplex — utility land for spells — "{T}, Pay 1 life: Add one mana of any color. Spend this mana only to cast an instant or sorcery spell." — beats: Secluded Courtyard
+- Dispelling Exhale — cheap counter — "Counter target spell unless its controller pays {2}." — beats: Planar Incision
+- Burning Curiosity — impulse draw — "Exile the top two cards of your library. If this spell's additional cost was paid, exile the top three cards instead. Until the end of your next turn, you may play those cards." — beats: Seize the Spoils
+- Glassworks // Shattered Yard — removal + burn engine — "this Room deals 4 damage to target creature an opponent controls. | // | At the beginning of your end step, this Room deals 1 damage to each opponent." — beats: Impact Tremors
+- Fleeting Distraction — cheap cantrip — "Target creature gets -1/-0 until end of turn. | Draw a card." — beats: Hard Evidence
+- Melded Moxite — cheap draw artifact — "When this artifact enters, you may discard a card. If you do, draw two cards." — beats: Hard Evidence
+- Gandalf, Goblins' Bane // Flameshape — second Vivi body — "Whenever you cast a noncreature spell, Gandalf gets +1/+1 until end of turn and deals 1 damage to each opponent." — beats: Tempest Angler
+- Unholy Heat — cheap removal — "Unholy Heat deals 2 damage to target creature or planeswalker. | Delirium — Unholy Heat deals 6 damage instead" — beats: Abrade
+- Sewer-veillance Cam — cheap flash artifact / draw — "Flash | When this artifact enters or leaves the battlefield, you may tap or untap target creature. | {3}{U}, Sacrifice this artifact: Draw two cards." — beats: Hard Evidence
+- Chakra Meditation — recursion + draw engine — "return up to one target instant or sorcery card from your graveyard to your hand. | Whenever you cast an instant or sorcery spell, draw a card. Then discard a card" — beats: Curiosity
+- Dragon's Approach — face burn — "Dragon's Approach deals 3 damage to each opponent." — beats: Impact Tremors
+- Twist Reality — hard counter — "Counter target spell. | • Manifest dread." — beats: Planar Incision
+- Heroes' Hangout — cheap impulse — "Exile the top two cards of your library. Choose one of them. Until the end of your next turn, you may play that card." — beats: Hard Evidence
+- Slickshot Show-Off — spell payoff attacker — "Flying, haste | Whenever you cast a noncreature spell, this creature gets +2/+0 until end of turn. | Plot {1}{R}" — beats: Electrostatic Infantry
+- Dirgur Island Dragon // Skimming Strike — cheap cantrip omen — "Tap up to one target creature. Draw a card." — beats: Deduce
+- Surveillance Room — utility land — "When this land enters, surveil 1. | {1}, {T}: Add one mana of any color." — beats: Secluded Courtyard
+- Experimental Synthesizer — cheap impulse artifact — "When this artifact enters or leaves the battlefield, exile the top card of your library. Until end of turn, you may play that card." — beats: Hard Evidence
+- Bounce Off — cheap tempo — "Return target creature or Vehicle to its owner's hand." — beats: Planar Incision
+- Spinerock Tyrant — spell copy engine — "Whenever you cast an instant or sorcery spell with a single target, you may copy it." — beats: Ovika, Enigma Goliath
+- Ice Magic — cheap scalable tempo / removal — "Blizzard — {0} — Return target creature to its owner's hand. | • Blizzara — {2} — Target creature's owner puts it on their choice of the top or bottom of their library." — beats: Planar Incision
+- Focus the Mind — draw — "This spell costs {2} less to cast if you've cast another spell this turn. | Draw three cards, then discard a card." — beats: Seize the Spoils
+- Abstract Paintmage — spell ramp on a body — "At the beginning of your first main phase, add {U}{R}. Spend this mana only to cast instant and sorcery spells." — beats: Clinquant Skymage
+- Goliath Daydreamer — spell recursion engine — "Whenever this creature attacks, you may cast a spell from among cards you own in exile with dream counters on them without paying its mana cost." — beats: Murmuring Mystic
+- Uthros Psionicist — cost reducer — "The second spell you cast each turn costs {2} less to cast." — beats: Clinquant Skymage
+- Micromancer — spell tutor on a body — "search your library for an instant or sorcery card with mana value 1, reveal it, put it into your hand" — beats: Clinquant Skymage
+- Hawkeye, Young Avenger — damage amplifier (Vivi pings) — "If a source you control would deal noncombat damage to an opponent or a permanent an opponent controls, instead it deals that much damage plus X, where X is Hawkeye's power." — beats: Murmuring Mystic
+- Glamdring, Foe-hammer // Gleam of Death — cost reducer scaling with Vivi — "Instant and sorcery spells you cast cost {X} less to cast, where X is equipped creature's power. | // | Mill six cards, then put all instant and sorcery cards from among them into your hand." — beats: Training Grounds
+- Shantotto, Tactician Magician — spell payoff draw — "Whenever you cast a noncreature spell, Shantotto gets +X/+0 until end of turn, where X is the amount of mana spent to cast that spell. If X is 4 or more, draw a card." — beats: Tempest Angler
+- Energy Refractor — cheap cantrip artifact / filter — "When this artifact enters, draw a card. | {2}: Add one mana of any color." — beats: Hard Evidence
+- Unauthorized Exit — cheap tempo — "Return target nonland permanent to its owner's hand. Surveil 1." — beats: Planar Incision
+- Unending Whisper — cheap cantrip, recastable — "Draw a card. | Harmonize {5}{U}" — beats: Hard Evidence
+- Dual Strike — spell copy — "When you next cast an instant or sorcery spell with mana value 4 or less this turn, copy that spell. | Foretell {R}" — beats: Planar Incision
+- Galvanic Relay — storm card advantage — "Exile the top card of your library. During your next turn, you may play that card. | Storm" — beats: Seize the Spoils
+- Runescale Stormbrood // Chilling Screech — cheap counter omen — "Counter target spell with mana value 2 or less." — beats: Planar Incision
+- Skullcrack — face burn — "Players can't gain life this turn. Damage can't be prevented this turn. Skullcrack deals 3 damage to target player or planeswalker." — beats: Impact Tremors
+- Painter's Studio // Defaced Gallery — impulse draw — "When you unlock this door, exile the top two cards of your library. You may play them until the end of your next turn." — beats: Seize the Spoils
+- Thunderdrum Soloist — spell payoff burn — "Opus — Whenever you cast an instant or sorcery spell, this creature deals 1 damage to each opponent. If five or more mana was spent to cast that spell, this creature deals 3 damage to each opponent instead." — beats: Young Pyromancer
+- Prompto Argentum — spell payoff ramp — "Selfie Shot — Whenever you cast a noncreature spell, if at least four mana was spent to cast it, create a Treasure token." — beats: Electrostatic Infantry
+- Kid Loki — Vivi protection — "Each creature you control that you've put one or more +1/+1 counters on this turn has hexproof." — beats: Training Grounds
+- Thirst for Identity — draw — "Draw three cards. Then discard two cards unless you discard a creature card." — beats: Seize the Spoils
+- Play with Fire — cheap burn — "Play with Fire deals 2 damage to any target. If a player is dealt damage this way, scry 1." — beats: Abrade
+- Bring the Ending — cheap counter — "Counter target spell unless its controller pays {2}." — beats: Planar Incision
+- Professor Zei, Anthropologist — looter + recursion — "{T}, Discard a card: Draw a card. | {1}, {T}, Sacrifice Professor Zei: Return target instant or sorcery card from your graveyard to your hand." — beats: Clinquant Skymage
+- Kickoff Celebrations — cheap draw — "When this enchantment enters, you may discard a card. If you do, draw two cards." — beats: Hard Evidence
+- Secret Identity — Vivi protection — "Conceal — Until end of turn, target creature you control becomes a Citizen with base power and toughness 1/1 and gains hexproof." — beats: Training Grounds
+- Choreographed Sparks — spell copy — "Copy target instant or sorcery spell you control. You may choose new targets for the copy." — beats: Planar Incision
+- Stern Lesson — instant draw — "Draw two cards, then discard a card. Create a tapped Powerstone token." — beats: Seize the Spoils
+- Tolarian Terror — cheap threat — "This spell costs {1} less to cast for each instant and sorcery card in your graveyard. | Ward {2}" — beats: Ovika, Enigma Goliath
+- Steal the Show — wheel / removal — "Target player discards any number of cards, then draws that many cards. | • Steal the Show deals damage equal to the number of instant and sorcery cards in your graveyard to target creature or planeswalker." — beats: Seize the Spoils
+- Broadside Barrage — removal + loot — "Broadside Barrage deals 5 damage to target creature or planeswalker. Draw a card, then discard a card." — beats: Abrade
+- Fall of the Hammer — removal via Vivi's power — "Target creature you control deals damage equal to its power to another target creature." — beats: Abrade
+- Stuck in Summoner's Sanctum — flash removal — "Flash | Enchanted permanent doesn't untap during its controller's untap step and its activated abilities can't be activated." — beats: Planar Incision
+- The Theorist, Jace Beleren — card advantage engine — "At the beginning of each opponent's draw step, you draw a card. | −2: return up to one target artifact or creature that player controls to its owner's hand." — beats: Involuntary Employment
+- Skateboard — cheap Vivi haste / tap — "When this Equipment enters, tap target permanent. | Equipped creature gets +1/+0 and has haste. | Equip {1}" — beats: Training Grounds
+- Highspire Bell-Ringer — cost reducer — "Flying | The second spell you cast each turn costs {1} less to cast." — beats: Clinquant Skymage
+- Noggle the Mind — flash removal — "Flash | Enchanted creature loses all abilities and is a colorless Noggle with base power and toughness 1/1." — beats: Planar Incision
+- Adeliz, the Cinder Wind — Vivi (Wizard) pump / evasive threat — "Flying, haste | Whenever you cast an instant or sorcery spell, Wizards you control get +1/+1 until end of turn." — beats: Tempest Angler
+- Barrels of Blasting Jelly — cheap rock — "{1}: Add one mana of any color. Activate only once each turn." — beats: Wayfarer's Bauble
+- Namor the Sub-Mariner — spell payoff tokens — "Whenever you cast a noncreature spell with one or more blue mana symbols in its mana cost, create that many 1/1 blue Merfolk creature tokens." — beats: Murmuring Mystic
+- Eject — uncounterable tempo cantrip — "This spell can't be countered. | Return target nonland permanent to its owner's hand. | Draw a card." — beats: Planar Incision
+- Hawkeye's Bow — Vivi tap ping — "Whenever equipped creature becomes tapped, it deals 1 damage to each opponent. | Equip {1}" — beats: Impact Tremors
+- Arcane Epiphany — instant draw — "This spell costs {1} less to cast if you control a Wizard. | Draw three cards." — beats: Seize the Spoils
+- Mental Modulation — cheap cantrip tempo — "This spell costs {1} less to cast during your turn. | Tap target artifact or creature. | Draw a card." — beats: Deduce
+- Splatter Technique — draw / sweeper — "Draw four cards. | • Splatter Technique deals 4 damage to each creature and planeswalker." — beats: Blasphemous Act
+- Doublecast — spell copy — "When you next cast an instant or sorcery spell this turn, copy that spell." — beats: Planar Incision
+- Seize Opportunity — instant impulse — "Exile the top two cards of your library. Until the end of your next turn, you may play those cards." — beats: Seize the Spoils
+- Whoosh! — cheap tempo cantrip — "Return target nonland permanent to its owner's hand. If this spell was kicked, draw a card." — beats: Planar Incision
+- Fleeting Reflection — Vivi protection + untap — "Target creature you control gains hexproof until end of turn. Untap that creature." — beats: Training Grounds
+- Overflowing Insight — mana sink draw — "Target player draws seven cards." — beats: Involuntary Employment
+- Divergent Equation — X spell recursion — "Return up to X target instant and/or sorcery cards from your graveyard to your hand." — beats: Involuntary Employment

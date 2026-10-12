@@ -1,7 +1,7 @@
 file      : C:/Users/QuLeR/AppData/Local/Temp/g.txt
 format    : commander   commander: Sisay, Weatherlight Captain
-totals    : 100 cards | 34 lands (34 eff.) | 65 nonland | avg MV 3.32
-curve     : 1:7 2:13 3:16 4:14 5:11 6:4
+totals    : 100 cards | 34 lands (34 eff.) | 65 nonland | avg MV 3.38
+curve     : 1:7 2:12 3:16 4:14 5:11 6:5
 VERDICT   : FAIL
 
   PASS  size        100 cards (commander wants 100)
@@ -9,7 +9,7 @@ VERDICT   : FAIL
   PASS  legality    every card legal in commander
   PASS  rules       no other format rule broken
   PASS  identity    all cards inside BGRUW
-  FAIL  ownership   10 card(s) not in the paper collection; paper collection imported 0 days ago
+  FAIL  ownership   10 card(s) not in the paper collection; paper collection imported 1 days ago
         - Sisay, Weatherlight Captain
         - Carth the Lion
         - Oath of Kaya
@@ -36,7 +36,6 @@ VERDICT   : FAIL
         - Bloom Tender (MV 2)
         - Counterspell (MV 2)
         - Dovin's Veto (MV 2)
-        - Ripples of Potential (MV 2)
         - Sylvan Library (MV 2)
         - Talisman of Dominance (MV 2)
         - Tomik, Orzhov Lawmage (MV 2)
@@ -84,7 +83,8 @@ VERDICT   : FAIL
         - Way of the Wildspeaker (MV 5)
         - Chimil, the Inner Sun (MV 6)
         - Elspeth, Sun's Champion (MV 6)
+        - Final Act (MV 6)
         - Teferi, Temporal Archmage (MV 6)
-  PASS  curve       avg MV 3.32; commander sets no cost threshold
-  PASS  wincons     7 win condition(s)/closer(s)
+  PASS  curve       avg MV 3.38; commander sets no cost threshold
+  PASS  wincons     8 win condition(s)/closer(s)
   PASS  locks       1 locked card(s) present and intact

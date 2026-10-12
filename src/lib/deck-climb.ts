@@ -41,6 +41,43 @@ export interface ClimbOptions<C extends ClimbCard = ClimbCard> {
    * card to fund two cheaper ones" because climbDeck never considers multi-card swaps.
    */
   canSwap?: (deck: readonly C[], slot: number, card: C) => boolean;
+  /** Called after every internal evaluation with the running count — lets a caller move a
+   * progress bar within a pass. No hook = zero behavioural change (purely an observer). */
+  onEvaluate?: (evaluationsSoFar: number) => void;
+}
+
+export interface RemovalRank {
+  i: number;
+  name: string;
+  loss: number;
+}
+
+/**
+ * Score every non-locked slot as if it were blank (repeatable names share one evaluation),
+ * sorted weakest-first. Exported so a caller other than `climbDeck` (the best-deck v2 report
+ * pass) can find a deck's weakest slots without re-implementing this scan — `score` is the
+ * caller's own evaluation counter/hook, not re-derived here.
+ */
+export function rankRemovable<C extends ClimbCard>(
+  deck: readonly C[],
+  current: number,
+  score: (d: readonly (C | null)[]) => number,
+  opts: { locked?: ReadonlySet<string>; repeatable?: ReadonlySet<string> } = {},
+): RemovalRank[] {
+  const locked = opts.locked ?? new Set<string>();
+  const repeatable = opts.repeatable ?? new Set<string>();
+  const lossByName = new Map<string, number>();
+  const ranked: RemovalRank[] = [];
+  deck.forEach((card, i) => {
+    if (locked.has(card.name)) return;
+    let loss = repeatable.has(card.name) ? lossByName.get(card.name) : undefined;
+    if (loss === undefined) {
+      loss = current - score(withSlot(deck, i, null));
+      if (repeatable.has(card.name)) lossByName.set(card.name, loss);
+    }
+    ranked.push({ i, name: card.name, loss });
+  });
+  return ranked.sort((a, b) => a.loss - b.loss);
 }
 
 export interface ClimbSwap {
@@ -70,7 +107,7 @@ export interface ClimbResult<C extends ClimbCard> {
 /** Deck slot array; null = blank slot (used only for the removal ranking). */
 export type Evaluate<C> = (deck: readonly (C | null)[]) => number;
 
-function withSlot<C>(deck: readonly (C | null)[], i: number, card: C | null): (C | null)[] {
+export function withSlot<C>(deck: readonly (C | null)[], i: number, card: C | null): (C | null)[] {
   const next = deck.slice();
   next[i] = card;
   return next;
@@ -93,6 +130,7 @@ export function climbDeck<C extends ClimbCard>(
   let evaluations = 0;
   const score = (d: readonly (C | null)[]): number => {
     evaluations++;
+    opts.onEvaluate?.(evaluations);
     return evaluate(d);
   };
 
@@ -102,18 +140,7 @@ export function climbDeck<C extends ClimbCard>(
 
   for (let pass = 1; pass <= maxPasses; pass++) {
     // 1. removal ranking (repeatable names share one evaluation)
-    const lossByName = new Map<string, number>();
-    const removable: { i: number; loss: number }[] = [];
-    deck.forEach((card, i) => {
-      if (locked.has(card.name)) return;
-      let loss = repeatable.has(card.name) ? lossByName.get(card.name) : undefined;
-      if (loss === undefined) {
-        loss = current - score(withSlot(deck, i, null));
-        if (repeatable.has(card.name)) lossByName.set(card.name, loss);
-      }
-      removable.push({ i, loss });
-    });
-    removable.sort((a, b) => a.loss - b.loss);
+    const removable = rankRemovable(deck, current, score, { locked, repeatable });
     if (!removable.length) break;
 
     // 2. add ranking in the weakest slot

@@ -1,0 +1,14 @@
+resolve: Illuminor Szeras | type Legendary Artifact Creature — Necron | isCommander true | in owned list true
+pre-rank: 268 candidates, Illuminor at index 90
+Illuminor seed (= screen) objective 57.65
+  #1 Mirri, Weatherlight Duelist 84.69
+  #2 Mikaeus, the Unhallowed 83.57
+  #3 Astarion, the Decadent 81.47
+  #4 Saheeli, Jewel of Avishkar 80.73
+  #5 Sai, Master Thopterist 77.46
+  #6 Nadaar, Selfless Paladin 77.26
+  #7 Ruric Thar, the Unbowed 75.63
+  #8 Pizza Face, Gastromancer 75.50
+  #9 Breya, Etherium Shaper 74.54
+  #10 Duke Ulder Ravengard 72.82
+EXIT=0

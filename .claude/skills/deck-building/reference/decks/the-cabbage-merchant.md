@@ -1,8 +1,10 @@
 # The Cabbage Merchant — pilot guide (paper, 4-player pod, 40 life)
 
-List: `decks/paper/decks/the-cabbage-merchant.txt`. ⚠️ **It has 99 cards**; the 09-28 review proposed Elvish Archdruid as the 100th.
+Review 2026-10-09: proposed swaps in verify-2026-10-09/color-best/eval/the-cabbage-merchant/REVIEW.md (refuted: REFUTE.md), not yet applied.
+
+List: `decks/paper/decks/the-cabbage-merchant.txt`. ⚠️ **It has 99 cards**; the 09-28 review proposed Elvish Archdruid as the 100th; the 10-09 review proposes Lembas instead (not applied).
 - Lands: 33 (27 Forest + Ash Barrens, Ba Sing Se, Escape Tunnel, Gingerbread Cabin, Mosswort Bridge, Nesting Grounds), plus the Bridgeworks Battle and Disciple of Freyalise MDFC lands.
-- Ramp: Llanowar Elves, Elvish Mystic, Gilded Goose, Wild Growth, Emerald Medallion, Many Partings, Cultivate, Kodama's Reach, Tireless Provisioner, Greenhouse Propagator, Jaheira, The Earth King.
+- Ramp: Llanowar Elves, Elvish Mystic, Gilded Goose, Wild Growth, Emerald Medallion, Many Partings, Cultivate, Springbloom Druid, Tireless Provisioner, Greenhouse Propagator, Jaheira, The Earth King. Ramunap Excavator ("You may play lands from your graveyard") replays Escape Tunnel and Springbloom's sacrificed land for Provisioner landfall.
 - Oracle text is from the DB. Rulings: Scryfall API; CR at https://yawgatog.com/resources/magic-rules/.
 
 ## 1. Plan in 3 lines
@@ -15,7 +17,7 @@ List: `decks/paper/decks/the-cabbage-merchant.txt`. ⚠️ **It has 99 cards**; 
 | # | Win line (most frequent first) | Closer text (DB) |
 |---|---|---|
 | 1 | Wide trample alpha | Garruk's Uprising: "Creatures you control have trample." · Return of the Wildspeaker: "Non-Human creatures you control get +3/+3 until end of turn." · Night of the Sweets' Revenge: "{5}{G}{G}, Sacrifice this enchantment: Creatures you control get +X/+X until end of turn, where X is the number of Foods you control." · Ghalta: "Other creatures you control have trample." |
-| 2 | Displaced Dinosaurs | "As a historic permanent you control enters, it becomes a 7/7 Dinosaur creature in addition to its other types." Every Food, Clue and Treasure becomes a 7/7. Uprising then draws: "Whenever a creature you control with power 4 or greater enters, draw a card." Ruling: it "enters as a 7/7", so power-4 triggers see it ([rulings](https://api.scryfall.com/cards/43319645-53b0-41f6-be90-9690e86e12d3/rulings)). |
+| 2 | Displaced Dinosaurs | "As a historic permanent you control enters, it becomes a 7/7 Dinosaur creature in addition to its other types." Every Food, Clue and Treasure that enters after it becomes a 7/7 (tokens already on the battlefield are unaffected). Uprising then draws: "Whenever a creature you control with power 4 or greater enters, draw a card." Ruling: it "enters as a 7/7", so power-4 triggers see it ([rulings](https://api.scryfall.com/cards/43319645-53b0-41f6-be90-9690e86e12d3/rulings)). |
 | 3 | Fat bodies + connect draw | Hornet Queen ("create four 1/1 … flying and deathtouch"), Verdant Kraken, Feasting Troll King, Ghalta. Draw on connect: Ohran Frostfang ("Attacking creatures you control have deathtouch." / "Whenever a creature you control deals combat damage to a player, draw a card.") and Toski. |
 | 4 | Halsin Bears | "{1}: Until end of turn, target token you control becomes a green Bear creature with base power and toughness 4/4". Spider-Ham gives Bears +1/+1. Only tokens you have controlled since your turn began can attack (CR 302.6). |
 | 5 | Trudge loop → Ballista | Unbounded mana, tokens and draws (§2 row 3). Then Walking Ballista: "Remove a +1/+1 counter from this creature: It deals 1 damage to any target." |
@@ -28,10 +30,10 @@ List: `decks/paper/decks/the-cabbage-merchant.txt`. ⚠️ **It has 99 cards**; 
 | 3 | **Trudge loop** (Trudge + Took + Manufactor + Wurmlet or Propagator + Jaheira) | Jaheira: "Tokens you control have '{T}: Add {G}.'" | Each {2} paid makes Beast + Food + Clue + Treasure. The three noncreature tokens tap for {G}{G}{G} (no summoning sickness; they are not creatures), so you net +{G}. Wurmlet gives 3 new triggers per pass; Propagator gives 1. Both are unbounded. Start it by sacrificing a Food ("{2}, {T}, Sacrifice this token: You gain 3 life"). Kill: Took's "Sacrifice three Foods: Draw a card" draws to Ballista; cast it with huge X. Night of the Sweets' Revenge in Jaheira's place is mana-neutral (Food {G} + Treasure). |
 | 4 | Commander Food mana | "Whenever an opponent casts a noncreature spell, create a Food token." / "Tap two untapped Foods you control: Add one mana of any color." | The tapping is a cost and uses no {T} symbol, so summoning-sick Food creatures (under Dinosaurs) can still pay it (CR 302.6). With Took + Manufactor, each opponent spell gives 2 Food + 2 Clue + 2 Treasure. |
 | 5 | Jiang Yanggu / Seedborn Muse | Jiang: "At the beginning of your end step, untap all tokens you control." · Seedborn: "Untap all permanents you control during each other player's untap step." | With Jaheira, you have all your token mana on opponents' turns for Chord of Calling (convoke), Second Harvest, Return of the Wildspeaker, Arachnogenesis and Force of Vigor. |
-| 6 | Verdant Kraken + Idol of Oblivion | Kraken: "At the beginning of each player's upkeep, you create a 3/3 green Forest Tentacle land creature token." · Idol: "{T}: Draw a card. Activate only if you created a token this turn." | You get a token on every player's turn, so Idol draws every turn. With Took + Manufactor that is +3 artifacts per upkeep (Wurmlet/Trudge). |
+| 6 | Verdant Kraken | Kraken: "At the beginning of each player's upkeep, you create a 3/3 green Forest Tentacle land creature token." | You get a token on every player's turn. With Took + Manufactor that is +3 artifacts per upkeep (Wurmlet/Trudge). |
 | 7 | Second Harvest | "For each token you control, create a token that's a copy of that permanent." | Copying N Food/Clue/Treasure tokens with Manufactor out gives N of each type, plus Took's extra Food. Copies do not keep Halsin's Bear effect (CR 707.2 copies only printed values). |
 | 8 | Food-sacrifice payoffs | Trail of Crumbs: "Whenever you sacrifice a Food, you may pay {1}. If you do, look at the top two cards". · Wicked Wolf: "Sacrifice a Food: Put a +1/+1 counter on this creature. It gains indestructible until end of turn. Tap it." · Feasting Troll King: "Sacrifice three Foods: Return this card from your graveyard to the battlefield. Activate only during your turn." | Every Food spent digs, protects or rebuys. Hungering Puppetbeast's "{1}, Sacrifice another artifact" is the repeatable artifact outlet. |
-| 9 | Tutors for the engine | Chord of Calling: "creature card with mana value X or less" · Invasion of Ikoria: "non-Human creature card" · Archdruid's Charm: "creature or land card" · Transmutation Font: "Search your library for an artifact card, put it onto the battlefield" | Took is a Halfling (non-Human, Invasion-legal); Manufactor is an Assembly-Worker. Jaheira is a Human, so not Invasion. Font finds Manufactor. |
+| 9 | Tutors for the engine | Chord of Calling: "creature card with mana value X or less" · Invasion of Ikoria: "non-Human creature card" · Archdruid's Charm: "creature or land card" · Transmutation Font: "{3}, {T}, Sacrifice three artifact tokens with different names: Search your library for an artifact card, put it onto the battlefield, then shuffle. Activate only as a sorcery." | Took is a Halfling (non-Human, Invasion-legal); Manufactor is an Assembly-Worker. Jaheira is a Human, so not Invasion. Font finds Manufactor. |
 
 **Does NOT work the way it looks**
 - ❌ **Displaced Dinosaurs breaks the Trudge loop.** Food, Clue and Treasure enter as summoning-sick 7/7 creatures. That means:
@@ -50,7 +52,7 @@ List: `decks/paper/decks/the-cabbage-merchant.txt`. ⚠️ **It has 99 cards**; 
 | T1 | Forest, Llanowar Elves | Forest, Gilded Goose or Wild Growth |
 | T2 | Forest, **The Cabbage Merchant** | Many Partings + Tough Cookie, or Elvish Mystic + 2-drop |
 | T3 | Forest, Peregrin Took + Teething Wurmlet | **The Cabbage Merchant** + 1-drop |
-| T4 | Academy Manufactor + Trail of Crumbs (Trail's Food → 2 Food, 2 Clue, 2 Treasure → 6 Wurmlet triggers) | Cultivate / Kodama's Reach, or Jaheira + Tough Cookie |
+| T4 | Academy Manufactor + Trail of Crumbs (Trail's Food → 2 Food, 2 Clue, 2 Treasure → 6 Wurmlet triggers) | Cultivate / Springbloom Druid, or Jaheira + Tough Cookie |
 | T5 | Trudge Garden + Jaheira; sacrifice a Food → loop → draw to Ballista → win | Peregrin Took + Trail of Crumbs, or Garruk's Uprising |
 | T6 | — | Hornet Queen / Displaced Dinosaurs / Verdant Kraken; swing with trample once the board is bigger than the table's |
 
@@ -67,7 +69,7 @@ Keep: 3+ lands, or 2 lands + a 1-mana accelerant. You also need one engine piece
 |---|---|
 | Forest, Hornet Queen, Verdant Kraken, Displaced Dinosaurs, Feasting Troll King, Ghalta, Seedborn Muse | 1 land; every spell costs 5+ |
 | Forest, Forest, Forest, Forest, Mosswort Bridge, Nesting Grounds, Autumn's Veil | 6 lands, one narrow protection spell |
-| Forest, Gilded Goose, Spore Frog, Arachnogenesis, Force of Vigor, Pest Infestation, Kenrith's Transformation | 1 land, all reactive; Goose is one-shot mana without Foods |
+| Forest, Gilded Goose, Spore Frog, Arachnogenesis, Force of Vigor, Haywire Mite, Kenrith's Transformation | 1 land, all reactive; Goose is one-shot mana without Foods |
 
 ## 5. Lines to visualise each turn
 - **Hold up:**
@@ -86,7 +88,7 @@ Keep: 3+ lands, or 2 lands + a 1-mana accelerant. You also need one engine piece
   4. Night of the Sweets' Revenge (+X = Foods) is sorcery speed: crack it precombat.
 - **Threat cues:**
   - Fliers are your problem (reach: Endurance, Titanbones, Arachnogenesis Spiders; Hornet Queen).
-  - Kill artifact and enchantment hate first: Force of Vigor, Archdruid's Charm "Exile target artifact or enchantment", Pest Infestation.
+  - Kill artifact and enchantment hate first: Force of Vigor, Archdruid's Charm "Exile target artifact or enchantment", Haywire Mite ("{G}, Sacrifice this creature: Exile target noncreature artifact or noncreature enchantment.").
 
 ## 6. Misplays to avoid
 1. Applying Manufactor before Took. You lose a third of the tokens.
@@ -104,7 +106,7 @@ Keep: 3+ lands, or 2 lands + a 1-mana accelerant. You also need one engine piece
 | Threat | Why it hurts | Play-around |
 |---|---|---|
 | Board wipes | No wipes of its own; the plan is a wide board | Hold the second wave (Hornet Queen, Dinosaurs, Second Harvest); Wicked Wolf indestructible; Feasting Troll King rebuys with 3 Foods |
-| Artifact hate | Foods, Clues, Treasures, Manufactor, Font, Idol | Spread engines across enchantments (Trudge, Trail, Night, Uprising) and creatures (Took, Jaheira) |
+| Artifact hate | Foods, Clues, Treasures, Manufactor, Font | Spread engines across enchantments (Trudge, Trail, Night, Uprising) and creatures (Took, Jaheira) |
 | Creature-light tables | The commander needs opponents' noncreature spells, and that is the only Food source when Took is absent | Rely on Took/Trail/Goose/Cookie Foods instead |
 | Fliers | Ground deck | Hornet Queen deathtouch fliers, reach (Endurance, Titanbones, Arachnogenesis), Kenrith's Transformation ("loses all abilities"), Bridgeworks Battle fight |
 | Fast combo | Interaction is light: Force of Vigor, Archdruid's Charm, Kenrith's, Endurance | Hold Force of Vigor for the combo artifact/enchantment; Endurance vs graveyard combo |

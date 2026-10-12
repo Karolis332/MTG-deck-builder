@@ -1,0 +1,67 @@
+file      : verify-2026-10-09/color-best/decks/UG/final.txt
+format    : commander   commander: The Goose Mother
+totals    : 100 cards | 36 lands (36 eff.) | 63 nonland | avg MV 2.98
+curve     : 1:9 2:21 3:15 4:7 5:5 6:3 7:3
+VERDICT   : FAIL
+
+  PASS  size        100 cards (commander wants 100)
+  PASS  singleton   singleton respected (basics exempt)
+  PASS  legality    every card legal in commander
+  PASS  rules       no other format rule broken
+  PASS  identity    all cards inside GU
+  PASS  ownership   all cards owned; paper collection imported 0 days ago
+  PASS  arenaNames  every line uses a name Arena accepts
+  PASS  lands       36 lands (+0 MDFC land backs = 36 effective); Karsten wants 38 ±2
+  FAIL  plan        14/63 nonland cards interact (22%) — commander wants: draws cards, creates tokens
+        - Hardened Scales (MV 1)
+        - Llanowar Elves (MV 1)
+        - Pongify (MV 1)
+        - Primal Might (MV 1)
+        - Rapid Hybridization (MV 1)
+        - Swan Song (MV 1)
+        - Teething Wurmlet (MV 1)
+        - Arcane Signet (MV 2)
+        - Benevolent Hydra (MV 2)
+        - Counterspell (MV 2)
+        - Curse of the Swine (MV 2)
+        - Cyclonic Rift (MV 2)
+        - Farseek (MV 2)
+        - Feasting Hobbit (MV 2)
+        - Heroic Intervention (MV 2)
+        - Hydroid Krasis (MV 2)
+        - Lembas (MV 2)
+        - Nature's Lore (MV 2)
+        - Negate (MV 2)
+        - Ozolith, the Shattered Spire (MV 2)
+        - Primordial Hydra (MV 2)
+        - Rampant Growth (MV 2)
+        - Simic Charm (MV 2)
+        - Steelbane Hydra (MV 2)
+        - Syr Ginger, the Meal Ender (MV 2)
+        - Beast Within (MV 3)
+        - Garruk's Uprising (MV 3)
+        - Guardian Augmenter (MV 3)
+        - Kami of Whispered Hopes (MV 3)
+        - Lifeblood Hydra (MV 3)
+        - Peregrin Took (MV 3)
+        - Quandrix Command (MV 3)
+        - Rishkar, Peema Renegade (MV 3)
+        - Universal Surveillance (MV 3)
+        - Earth Rumble (MV 4)
+        - Forgotten Ancient (MV 4)
+        - Planar Engineering (MV 4)
+        - Wicked Wolf (MV 4)
+        - Acidic Slime (MV 5)
+        - Evacuation (MV 5)
+        - Return of the Wildspeaker (MV 5)
+        - Tanazir Quandrix (MV 5)
+        - Tatyova, Benthic Druid (MV 5)
+        - Cyberdrive Awakener (MV 6)
+        - Feasting Troll King (MV 6)
+        - Kappa Cannoneer (MV 6)
+        - Displaced Dinosaurs (MV 7)
+        - Foe-Razer Regent (MV 7)
+        - Thought Monitor (MV 7)
+  PASS  curve       avg MV 2.98; commander sets no cost threshold
+  PASS  wincons     9 win condition(s)/closer(s)
+  PASS  locks       2 locked card(s) present and intact

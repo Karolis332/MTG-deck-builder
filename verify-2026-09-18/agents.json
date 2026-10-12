@@ -1,0 +1,33 @@
+{
+  "site": "https://theblackgrimoire.com",
+  "updated": "2026-09-08",
+  "summary": "The Black Grimoire is a free Magic: The Gathering deck builder and optimizer (Commander, Brawl, Standard) that states a reason for every suggestion. Built by Karolis Paulikas, Lithuania. Unofficial Fan Content, not affiliated with Wizards of the Coast.",
+  "agents": [
+    {
+      "name": "deck-optimizer",
+      "description": "Paste any decklist; get ranked cuts and adds with reasons, land target (Karsten), colour sources, legality problems.",
+      "url": "https://theblackgrimoire.com/optimizer",
+      "input": "decklist text (Arena, Moxfield, Archidekt, MTGO, plain names) + format",
+      "output": "score, role quotas, cuts, adds, swaps, optimized list"
+    },
+    {
+      "name": "deck-builder",
+      "description": "Commander/Brawl/Standard Brawl deck construction from a commander name.",
+      "url": "https://theblackgrimoire.com/builder"
+    },
+    {
+      "name": "commander-stats",
+      "description": "EDHREC-style per-commander card statistics with lift synergy.",
+      "url": "https://theblackgrimoire.com/commanders"
+    }
+  ],
+  "machine_readable": {
+    "llms_txt": "https://theblackgrimoire.com/llms.txt",
+    "llms_full_txt": "https://theblackgrimoire.com/llms-full.txt",
+    "ai_policy": "https://theblackgrimoire.com/ai.json",
+    "agent_card": "https://theblackgrimoire.com/.well-known/agent-card.json",
+    "sitemap": "https://theblackgrimoire.com/sitemap.xml"
+  },
+  "attribution": "Quote with a link to the page cited. Data sources: Moxfield, Archidekt, EDHREC (likes/views, no win rates); MTGO league and challenge results with win-loss for Standard.",
+  "contact": "https://theblackgrimoire.com/contact"
+}

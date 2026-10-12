@@ -1,0 +1,275 @@
+
+==== Tam, the Possibility [BGRUW] strategy=midrange main=99
+lands=38 basics=8 nonbasics=30
+basics: 2 Swamp, 2 Forest, 2 Island, 1 Plains, 1 Mountain
+pips: {"W":10,"U":15,"B":22,"R":7,"G":21}
+scoreLandsForDeck: 448 candidates (collectionOnly, any user/source)
+picked nonbasics: rank score | name | colours | tapped | arenaQty anyQty | tier cat
+  #1 272 | Multiversal Passage |  | untapped | 4 8 | 2 tribal | enters untapped; produces WUBRG; matches heavy color (B) | As this land enters, choose a basic land type. Then you may pay 2 life. If you don't, it enters tapped. / This land is the chosen type.
+  #2 267 | Thran Portal |  | untapped | 1 2 | 2 fast | enters untapped; produces WUBRG; matches heavy color (B) | This land enters tapped unless you control two or fewer other lands. / As this land enters, choose a basic land type. / This land is the cho
+  #3 266 | A-Thran Portal |  | untapped | 0 1 | 2 tribal | enters untapped; produces WUBRG; matches heavy color (B) | As A-Thran Portal enters, choose a basic land type. / Thran Portal is the chosen type in addition to its other types. / Mana abilities of A-
+  #4 246 | Command Tower | BGRUW | untapped | 32 39 | 3 utility | enters untapped; produces BGRUW; matches heavy color (B) | {T}: Add one mana of any color in your commander's color identity.
+  #5 246 | Mana Confluence | BGRUW | untapped | 0 1 | 3 utility | enters untapped; produces BGRUW; matches heavy color (B) | {T}, Pay 1 life: Add one mana of any color.
+  #6 246 | Gemstone Caverns | BGRUW | untapped | 1 2 | 3 utility | enters untapped; produces BGRUW; matches heavy color (B) | If this card is in your opening hand and you're not the starting player, you may begin the game with Gemstone Caverns on the battlefield wit
+  #11 236 | Branch of Vitu-Ghazi | BGRUW | untapped | 1 2 | 3 utility | enters untapped; produces BGRUW; matches heavy color (B) | {T}: Add {C}. / Disguise {3} (You may cast this card face down for {3} as a 2/2 creature with ward {2}. Turn it face up any time for its dis
+  #12 236 | Plaza of Harmony | BGRUW | untapped | 1 3 | 3 utility | enters untapped; produces BGRUW; matches heavy color (B) | When this land enters, if you control two or more Gates, you gain 3 life. / {T}: Add {C}. / {T}: Add one mana of any type that a Gate you co
+  #13 236 | Mirrodin's Core | BGRUW | untapped | 1 2 | 3 utility | enters untapped; produces BGRUW; matches heavy color (B) | {T}: Add {C}. / {T}: Put a charge counter on this land. / {T}, Remove a charge counter from this land: Add one mana of any color.
+  #14 236 | Forgotten Monument | BGRUW | untapped | 2 4 | 3 utility | enters untapped; produces BGRUW; matches heavy color (B) | {T}: Add {C}. / Other Caves you control have "{T}, Pay 1 life: Add one mana of any color."
+  #15 216 | Bloodstained Mire |  | untapped | 0 1 | 1 fetch | enters untapped; produces BR; matches heavy color (B) | {T}, Pay 1 life, Sacrifice this land: Search your library for a Swamp or Mountain card, put it onto the battlefield, then shuffle.
+  #16 216 | Godless Shrine | BW | untapped | 4 6 | 1 shock | enters untapped; produces BW; matches heavy color (B) | ({T}: Add {W} or {B}.) / As this land enters, you may pay 2 life. If you don't, it enters tapped.
+  #17 216 | Blood Crypt | BR | untapped | 8 12 | 1 shock | enters untapped; produces BR; matches heavy color (B) | ({T}: Add {B} or {R}.) / As this land enters, you may pay 2 life. If you don't, it enters tapped.
+  #18 216 | Overgrown Tomb | BG | untapped | 8 13 | 1 shock | enters untapped; produces BG; matches heavy color (B) | ({T}: Add {B} or {G}.) / As this land enters, you may pay 2 life. If you don't, it enters tapped.
+  #19 210 | Flooded Strand |  | untapped | 2 3 | 1 fetch | enters untapped; produces WU | {T}, Pay 1 life, Sacrifice this land: Search your library for a Plains or Island card, put it onto the battlefield, then shuffle.
+  #20 210 | Misty Rainforest |  | untapped | 2 3 | 1 fetch | enters untapped; produces UG | {T}, Pay 1 life, Sacrifice this land: Search your library for a Forest or Island card, put it onto the battlefield, then shuffle.
+  #21 210 | Windswept Heath |  | untapped | 0 1 | 1 fetch | enters untapped; produces WG | {T}, Pay 1 life, Sacrifice this land: Search your library for a Forest or Plains card, put it onto the battlefield, then shuffle.
+  #22 210 | Wooded Foothills |  | untapped | 0 1 | 1 fetch | enters untapped; produces RG | {T}, Pay 1 life, Sacrifice this land: Search your library for a Mountain or Forest card, put it onto the battlefield, then shuffle.
+  #23 210 | Scalding Tarn |  | untapped | 2 3 | 1 fetch | enters untapped; produces UR | {T}, Pay 1 life, Sacrifice this land: Search your library for an Island or Mountain card, put it onto the battlefield, then shuffle.
+  #24 210 | Breeding Pool | GU | untapped | 4 7 | 1 shock | enters untapped; produces GU | ({T}: Add {G} or {U}.) / As this land enters, you may pay 2 life. If you don't, it enters tapped.
+  #25 210 | Hallowed Fountain | UW | untapped | 8 13 | 1 shock | enters untapped; produces UW | ({T}: Add {W} or {U}.) / As this land enters, you may pay 2 life. If you don't, it enters tapped.
+  #26 210 | Steam Vents | RU | untapped | 8 13 | 1 shock | enters untapped; produces RU | ({T}: Add {U} or {R}.) / As this land enters, you may pay 2 life. If you don't, it enters tapped.
+  #27 210 | Stomping Ground | GR | untapped | 2 4 | 1 shock | enters untapped; produces GR | ({T}: Add {R} or {G}.) / As this land enters, you may pay 2 life. If you don't, it enters tapped.
+  #28 210 | Sacred Foundry | RW | untapped | 8 13 | 1 shock | enters untapped; produces RW | ({T}: Add {R} or {W}.) / As this land enters, you may pay 2 life. If you don't, it enters tapped.
+  #29 210 | Temple Garden | GW | untapped | 8 12 | 1 shock | enters untapped; produces GW | ({T}: Add {G} or {W}.) / As this land enters, you may pay 2 life. If you don't, it enters tapped.
+  #30 206 | Evolving Wilds |  | untapped | 72 77 | 3 utility | produces WUBRG; matches heavy color (B) | {T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
+  #31 206 | Terramorphic Expanse |  | untapped | 24 30 | 3 utility | produces WUBRG; matches heavy color (B) | {T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
+  #32 206 | Fabled Passage |  | untapped | 12 16 | 3 utility | produces WUBRG; matches heavy color (B) | {T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle. Then if you control f
+  #38 205 | Riveteers Overlook |  | untapped | 0 2 | 1 fetch | produces BRG; matches heavy color (B) | When this land enters, sacrifice it. When you do, search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefie
+  #39 204 | Escape Tunnel |  | untapped | 8 13 | 3 utility | produces WUBRG; matches heavy color (B) | {T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle. / {T}, Sacrifice this
+nonbasic untapped=30 tapped=0 notOwnedOnArena=6
+owned Arena fixers: 204, picked 15, missed 189
+lowest picked score: 204
+  MISSED #44 204 | Thriving Bluff | BGRUW | tapped | tier 4 tapped | ci ["R"] | produces BGRUW; matches heavy color (B)
+  MISSED #43 204 | Thriving Grove | BGRUW | tapped | tier 4 tapped | ci ["G"] | produces BGRUW; matches heavy color (B)
+  MISSED #42 204 | Thriving Heath | BGRUW | tapped | tier 4 tapped | ci ["W"] | produces BGRUW; matches heavy color (B)
+  MISSED #41 204 | Thriving Isle | BGRUW | tapped | tier 4 tapped | ci ["U"] | produces BGRUW; matches heavy color (B)
+  MISSED #45 204 | Thriving Moor | BGRUW | tapped | tier 4 tapped | ci ["B"] | produces BGRUW; matches heavy color (B)
+  MISSED #58 195 | Revitalizing Repast // Old-Growth Grove | BG | untapped | tier 2 pathway | ci ["B","G"] | enters untapped; produces BG; matches heavy color (B); MDFC (spell+land)
+  MISSED #59 193 | Waterlogged Teachings // Inundated Archive | BU | untapped | tier 2 pathway | ci ["B","U"] | enters untapped; produces BU; matches heavy color (B); MDFC (spell+land)
+  MISSED #60 188 | Legion Leadership // Legion Stronghold | RW | untapped | tier 2 pathway | ci ["R","W"] | enters untapped; produces RW; MDFC (spell+land)
+  MISSED #61 187 | Stump Stomp // Burnwillow Clearing | GR | untapped | tier 2 pathway | ci ["G","R"] | enters untapped; produces GR; MDFC (spell+land)
+  MISSED #64 186 | Woodland Cemetery | BG | untapped | tier 2 check | ci ["B","G"] | enters untapped; produces BG; matches heavy color (B)
+  MISSED #68 184 | Concealed Courtyard | BW | untapped | tier 2 fast | ci ["B","W"] | enters untapped; produces BW; matches heavy color (B)
+  MISSED #69 184 | Mount Doom | BR | untapped | tier 2 pain | ci ["B","R"] | enters untapped; produces BR; matches heavy color (B)
+  MISSED #72 180 | Hinterland Harbor | GU | untapped | tier 2 check | ci ["G","U"] | enters untapped; produces GU
+  MISSED #75 180 | Yavimaya Coast | GU | untapped | tier 2 pain | ci ["G","U"] | enters untapped; produces GU
+  MISSED #77 180 | Starting Town | BGRUW | tapped | tier 4 tapped | ci [] | produces BGRUW; matches heavy color (B)
+  MISSED #79 179 | Vineglimmer Snarl | GU | untapped | tier 2 filter | ci ["G","U"] | enters untapped; produces GU
+  MISSED #78 179 | Fortified Village | GW | untapped | tier 2 filter | ci ["G","W"] | enters untapped; produces GW
+  MISSED #86 178 | Valgavoth's Lair | BGRUW | tapped | tier 4 tapped | ci [] | produces BGRUW; matches heavy color (B)
+  MISSED #88 177 | Spirebluff Canal | RU | untapped | tier 2 fast | ci ["R","U"] | enters untapped; produces RU
+  MISSED #89 176 | Gateway Plaza | BGRUW | tapped | tier 4 tapped | ci [] | produces BGRUW; matches heavy color (B)
+  MISSED #90 174 | Command Bridge | BGRUW | tapped | tier 4 tapped | ci [] | produces BGRUW; matches heavy color (B)
+  MISSED #91 172 | Mirage Mesa | BGRUW | tapped | tier 4 tapped | ci [] | produces BGRUW; matches heavy color (B)
+  MISSED #94 171 | Edgewall Inn | BGRUW | tapped | tier 4 tapped | ci [] | produces BGRUW; matches heavy color (B)
+  MISSED #93 171 | Tarnation Vista | BGRUW | tapped | tier 4 tapped | ci [] | produces BGRUW; matches heavy color (B)
+  MISSED #92 171 | Night Market | BGRUW | tapped | tier 4 tapped | ci [] | produces BGRUW; matches heavy color (B)
+  MISSED #95 171 | Room of Refuge | BGRUW | tapped | tier 4 tapped | ci [] | produces BGRUW; matches heavy color (B)
+  MISSED #96 170 | Balamb Garden, SeeD Academy // Balamb Garden, Airborne | GU | untapped | tier 2 pathway | ci ["G","U"] | enters untapped; produces GU
+  MISSED #104 159 | Unclaimed Territory | BGRUW | untapped | tier 2 tribal | ci [] | enters untapped; restricted producer; produces BGRUW; matches heavy color (B)
+  MISSED #103 159 | Secluded Courtyard | BGRUW | untapped | tier 2 tribal | ci [] | enters untapped; restricted producer; produces BGRUW; matches heavy color (B)
+  MISSED #102 159 | Cavern of Souls | BGRUW | untapped | tier 2 tribal | ci [] | enters untapped; restricted producer; produces BGRUW; matches heavy color (B)
+  MISSED #119 153 | Eclipsed Realms | BGRUW | untapped | tier 2 tribal | ci [] | enters untapped; restricted producer; produces BGRUW; matches heavy color (B)
+  MISSED #126 149 | Great Hall of the Biblioplex | BGRUW | untapped | tier 2 creature_land | ci [] | enters untapped; restricted producer; produces BGRUW; matches heavy color (B)
+  MISSED #128 148 | Conduit Pylons | BGRUW | untapped | tier 3 utility | ci [] | enters untapped; conditional colored mana; produces BGRUW; matches heavy color (B)
+  MISSED #132 147 | Baldur's Gate | BGRUW | untapped | tier 3 utility | ci [] | enters untapped; conditional colored mana; produces BGRUW; matches heavy color (B)
+  MISSED #134 146 | Rumble Arena | BGRUW | untapped | tier 3 utility | ci [] | enters untapped; conditional colored mana; produces BGRUW; matches heavy color (B)
+  MISSED #136 145 | Capital City | BGRUW | untapped | tier 3 utility | ci [] | enters untapped; conditional colored mana; produces BGRUW; matches heavy color (B)
+  MISSED #135 145 | Daily Bugle Building | BGRUW | untapped | tier 3 utility | ci [] | enters untapped; conditional colored mana; produces BGRUW; matches heavy color (B)
+  MISSED #137 145 | Savage Lands | BGR | tapped | tier 4 tapped | ci ["B","G","R"] | produces BGR; matches heavy color (B)
+  MISSED #139 142 | Captivating Cave | BGRUW | untapped | tier 3 utility | ci [] | enters untapped; conditional colored mana; produces BGRUW; matches heavy color (B)
+  MISSED #140 142 | Surveillance Room | BGRUW | untapped | tier 3 utility | ci [] | enters untapped; conditional colored mana; produces BGRUW; matches heavy color (B)
+  MISSED #143 139 | Mystic Monastery | RUW | tapped | tier 4 tapped | ci ["R","U","W"] | produces RUW
+  MISSED #153 125 | Great Hall of the Citadel | BGRUW | untapped | tier 3 utility | ci [] | enters untapped; restricted producer; conditional colored mana; produces BGRUW; matches heavy color (B)
+  MISSED #157 120 | Nomad Outpost | BRW | tapped | tier 4 tapped | ci ["B","R","W"] | produces BRW; matches heavy color (B)
+  MISSED #158 120 | Opulent Palace | BGU | tapped | tier 4 tapped | ci ["B","G","U"] | produces BGU; matches heavy color (B)
+  MISSED #160 120 | Sandsteppe Citadel | BGW | tapped | tier 4 tapped | ci ["B","G","W"] | produces BGW; matches heavy color (B)
+  MISSED #155 120 | Interplanar Beacon | BGRUW | untapped | tier 3 utility | ci [] | enters untapped; restricted producer; produces BGRUW; matches heavy color (B)
+  MISSED #159 120 | Savai Triome | BRW | tapped | tier 4 tapped | ci ["B","R","W"] | produces BRW; matches heavy color (B)
+  MISSED #156 120 | Jasmine Dragon Tea Shop | BGRUW | untapped | tier 3 utility | ci [] | enters untapped; restricted producer; produces BGRUW; matches heavy color (B)
+  MISSED #172 119 | Bucolic Ranch | BGRUW | untapped | tier 3 utility | ci [] | enters untapped; restricted producer; produces BGRUW; matches heavy color (B)
+  MISSED #167 119 | White Lotus Hideout | BGRUW | untapped | tier 3 utility | ci [] | enters untapped; restricted producer; conditional colored mana; produces BGRUW; matches heavy color (B)
+  MISSED #168 119 | Turtle Lair | BGRUW | untapped | tier 3 utility | ci [] | enters untapped; restricted producer; produces BGRUW; matches heavy color (B)
+  MISSED #169 119 | Avengers Tower | BGRUW | untapped | tier 3 utility | ci [] | enters untapped; restricted producer; produces BGRUW; matches heavy color (B)
+  MISSED #171 119 | Castle Doom | BGRUW | untapped | tier 3 utility | ci [] | enters untapped; restricted producer; produces BGRUW; matches heavy color (B)
+  MISSED #170 119 | Villainous Hideout | BGRUW | untapped | tier 3 utility | ci [] | enters untapped; restricted producer; produces BGRUW; matches heavy color (B)
+  MISSED #186 115 | Temple of Malady | BG | tapped | tier 3 temple | ci ["B","G"] | produces BG; matches heavy color (B)
+  MISSED #184 115 | Temple of Silence | BW | tapped | tier 3 temple | ci ["B","W"] | produces BW; matches heavy color (B)
+  MISSED #185 115 | Temple of Deceit | BU | tapped | tier 3 temple | ci ["B","U"] | produces BU; matches heavy color (B)
+  MISSED #187 115 | Temple of Malice | BR | tapped | tier 3 temple | ci ["B","R"] | produces BR; matches heavy color (B)
+  MISSED #190 115 | Deathcap Glade | BG | tapped | tier 4 tapped | ci ["B","G"] | produces BG; matches heavy color (B)
+  MISSED #188 115 | Shattered Sanctum | BW | tapped | tier 4 tapped | ci ["B","W"] | produces BW; matches heavy color (B)
+  MISSED #200 114 | Bloodfell Caves | BR | tapped | tier 4 gainland | ci ["B","R"] | produces BR; matches heavy color (B)
+  MISSED #198 114 | Frontier Bivouac | GRU | tapped | tier 4 tapped | ci ["G","R","U"] | produces GRU
+  MISSED #195 114 | Jetmir's Garden | GRW | tapped | tier 4 tapped | ci ["G","R","W"] | produces GRW
+  MISSED #194 114 | Bleachbone Verge | BW | untapped | tier 3 utility | ci ["B","W"] | enters untapped; conditional colored mana; produces BW; matches heavy color (B)
+  MISSED #199 114 | Oscorp Industries | BRU | tapped | tier 4 tapped | ci ["B","R","U"] | produces BRU; matches heavy color (B)
+  MISSED #203 112 | Riverpyre Verge | RU | untapped | tier 3 utility | ci ["R","U"] | enters untapped; conditional colored mana; produces RU
+  MISSED #202 112 | Sunbillow Verge | RW | untapped | tier 3 utility | ci ["R","W"] | enters untapped; conditional colored mana; produces RW
+  MISSED #204 112 | Willowrush Verge | GU | untapped | tier 3 utility | ci ["G","U"] | enters untapped; conditional colored mana; produces GU
+  MISSED #218 110 | Dreamroot Cascade | GU | tapped | tier 4 tapped | ci ["G","U"] | produces GU
+  MISSED #219 110 | Stormcarved Coast | RU | tapped | tier 4 tapped | ci ["R","U"] | produces RU
+  MISSED #221 109 | Temple of Epiphany | RU | tapped | tier 3 temple | ci ["R","U"] | produces RU
+  MISSED #224 109 | Temple of Mystery | GU | tapped | tier 3 temple | ci ["G","U"] | produces GU
+  MISSED #222 109 | Temple of Triumph | RW | tapped | tier 3 temple | ci ["R","W"] | produces RW
+  MISSED #226 109 | Temple of Abandon | GR | tapped | tier 3 temple | ci ["G","R"] | produces GR
+  MISSED #223 109 | Temple of Enlightenment | UW | tapped | tier 3 temple | ci ["U","W"] | produces UW
+  MISSED #225 109 | Temple of Plenty | GW | tapped | tier 3 temple | ci ["G","W"] | produces GW
+  MISSED #227 109 | Sundown Pass | RW | tapped | tier 4 tapped | ci ["R","W"] | produces RW
+  MISSED #234 107 | Tangled Islet | GU | tapped | tier 4 tapped | ci ["G","U"] | produces GU
+  MISSED #236 106 | Witherbloom Campus | BG | tapped | tier 3 temple | ci ["B","G"] | produces BG; matches heavy color (B)
+  MISSED #235 106 | Dark Fortress | BR | untapped | tier 3 utility | ci ["B","R"] | enters untapped; conditional colored mana; produces BR; matches heavy color (B)
+  MISSED #237 106 | Hidden Lair | BU | untapped | tier 3 utility | ci ["B","U"] | enters untapped; conditional colored mana; produces BU; matches heavy color (B)
+  MISSED #239 105 | Urban Retreat | GUW | tapped | tier 4 tapped | ci ["G","U","W"] | produces GUW
+  MISSED #240 100 | Quandrix Campus | GU | tapped | tier 3 temple | ci ["G","U"] | produces GU
+  MISSED #280 90 | Scoured Barrens | BW | tapped | tier 4 gainland | ci ["B","W"] | produces BW; matches heavy color (B)
+  MISSED #283 89 | Dismal Backwater | BU | tapped | tier 4 gainland | ci ["B","U"] | produces BU; matches heavy color (B)
+  MISSED #281 89 | Jungle Hollow | BG | tapped | tier 4 gainland | ci ["B","G"] | produces BG; matches heavy color (B)
+  MISSED #287 88 | Golgari Guildgate | BG | tapped | tier 4 tapped | ci ["B","G"] | produces BG; matches heavy color (B)
+  MISSED #291 87 | Dimir Guildgate | BU | tapped | tier 4 tapped | ci ["B","U"] | produces BU; matches heavy color (B)
+  MISSED #292 87 | Orzhov Guildgate | BW | tapped | tier 4 tapped | ci ["B","W"] | produces BW; matches heavy color (B)
+  MISSED #293 87 | Rakdos Guildgate | BR | tapped | tier 4 tapped | ci ["B","R"] | produces BR; matches heavy color (B)
+  MISSED #303 85 | Rockfall Vale | GR | tapped | tier 4 tapped | ci ["G","R"] | produces GR
+  MISSED #305 84 | Deserted Beach | UW | tapped | tier 4 tapped | ci ["U","W"] | produces UW
+  MISSED #306 84 | Overgrown Farmland | GW | tapped | tier 4 tapped | ci ["G","W"] | produces GW
+  MISSED #313 84 | Restless Cottage | BG | tapped | tier 4 tapped | ci ["B","G"] | produces BG; matches heavy color (B)
+  MISSED #310 84 | Commercial District | GR | tapped | tier 4 tapped | ci ["G","R"] | produces GR
+  MISSED #307 84 | Hedge Maze | GU | tapped | tier 4 tapped | ci ["G","U"] | produces GU
+  MISSED #312 84 | Lush Portico | GW | tapped | tier 4 tapped | ci ["G","W"] | produces GW
+  MISSED #311 84 | Meticulous Archive | UW | tapped | tier 4 tapped | ci ["U","W"] | produces UW
+  MISSED #308 84 | Thundering Falls | RU | tapped | tier 4 tapped | ci ["R","U"] | produces RU
+  MISSED #317 83 | Blossoming Sands | GW | tapped | tier 4 gainland | ci ["G","W"] | produces GW
+  MISSED #316 83 | Swiftwater Cliffs | RU | tapped | tier 4 gainland | ci ["R","U"] | produces RU
+  MISSED #318 83 | Thornwood Falls | GU | tapped | tier 4 gainland | ci ["G","U"] | produces GU
+  MISSED #319 83 | Tranquil Cove | UW | tapped | tier 4 gainland | ci ["U","W"] | produces UW
+  MISSED #315 83 | Wind-Scarred Crag | RW | tapped | tier 4 gainland | ci ["R","W"] | produces RW
+  MISSED #314 83 | Elegant Parlor | RW | tapped | tier 4 tapped | ci ["R","W"] | produces RW
+  MISSED #320 83 | Jagged Barrens | BR | tapped | tier 4 tapped | ci ["B","R"] | produces BR; matches heavy color (B)
+  MISSED #322 82 | Rugged Highlands | GR | tapped | tier 4 gainland | ci ["G","R"] | produces GR
+  MISSED #324 82 | Simic Guildgate | GU | tapped | tier 4 tapped | ci ["G","U"] | produces GU
+  MISSED #323 82 | Radiant Grove | GW | tapped | tier 4 tapped | ci ["G","W"] | produces GW
+  MISSED #326 82 | Restless Fortress | BW | tapped | tier 4 gainland | ci ["B","W"] | produces BW; matches heavy color (B)
+  MISSED #325 82 | Treno, Dark City | BU | tapped | tier 4 tapped | ci ["B","U"] | produces BU; matches heavy color (B)
+  MISSED #328 81 | Boros Guildgate | RW | tapped | tier 4 tapped | ci ["R","W"] | produces RW
+  MISSED #327 81 | Izzet Guildgate | RU | tapped | tier 4 tapped | ci ["R","U"] | produces RU
+  MISSED #329 81 | Selesnya Guildgate | GW | tapped | tier 4 tapped | ci ["G","W"] | produces GW
+  MISSED #330 81 | Azorius Guildgate | UW | tapped | tier 4 tapped | ci ["U","W"] | produces UW
+  MISSED #331 81 | Gruul Guildgate | GR | tapped | tier 4 tapped | ci ["G","R"] | produces GR
+  MISSED #337 81 | Sulfurous Mire | BR | tapped | tier 4 tapped | ci ["B","R"] | produces BR; matches heavy color (B)
+  MISSED #335 81 | Festering Gulch | BG | tapped | tier 4 tapped | ci ["B","G"] | produces BG; matches heavy color (B)
+  MISSED #334 81 | Forlorn Flats | BW | tapped | tier 4 tapped | ci ["B","W"] | produces BW; matches heavy color (B)
+  MISSED #346 81 | Murky Sewer | BU | tapped | tier 4 tapped | ci ["B","U"] | produces BU; matches heavy color (B)
+  MISSED #344 81 | Neglected Manor | BW | tapped | tier 4 tapped | ci ["B","W"] | produces BW; matches heavy color (B)
+  MISSED #343 81 | Razortrap Gorge | BR | tapped | tier 4 tapped | ci ["B","R"] | produces BR; matches heavy color (B)
+  MISSED #345 81 | Strangled Cemetery | BG | tapped | tier 4 tapped | ci ["B","G"] | produces BG; matches heavy color (B)
+  MISSED #336 81 | Gohn, Town of Ruin | BG | tapped | tier 4 tapped | ci ["B","G"] | produces BG; matches heavy color (B)
+  MISSED #333 81 | Insomnia, Crown City | BW | tapped | tier 4 tapped | ci ["B","W"] | produces BW; matches heavy color (B)
+  MISSED #332 81 | Vector, Imperial Capital | BR | tapped | tier 4 tapped | ci ["B","R"] | produces BR; matches heavy color (B)
+  MISSED #340 81 | Boiling Rock Prison | BR | tapped | tier 4 tapped | ci ["B","R"] | produces BR; matches heavy color (B)
+  MISSED #349 81 | Foggy Bottom Swamp | BG | tapped | tier 4 tapped | ci ["B","G"] | produces BG; matches heavy color (B)
+  MISSED #350 81 | Misty Palms Oasis | BW | tapped | tier 4 tapped | ci ["B","W"] | produces BW; matches heavy color (B)
+  MISSED #347 81 | Serpent's Pass | BU | tapped | tier 4 tapped | ci ["B","U"] | produces BU; matches heavy color (B)
+  MISSED #342 81 | Ominous Asylum | BR | tapped | tier 4 tapped | ci ["B","R"] | produces BR; matches heavy color (B)
+  MISSED #341 81 | Sinister Hideout | BU | tapped | tier 4 tapped | ci ["B","U"] | produces BU; matches heavy color (B)
+  MISSED #352 81 | Foot Headquarters | BW | tapped | tier 4 gainland | ci ["B","W"] | produces BW; matches heavy color (B)
+  MISSED #351 81 | Illegitimate Business | BG | tapped | tier 4 gainland | ci ["B","G"] | produces BG; matches heavy color (B)
+  MISSED #348 81 | Forum of Amity | BW | tapped | tier 4 tapped | ci ["B","W"] | produces BW; matches heavy color (B)
+  MISSED #339 81 | Titan's Grave | BG | tapped | tier 4 tapped | ci ["B","G"] | produces BG; matches heavy color (B)
+  MISSED #353 81 | Goblin-town | BR | tapped | tier 4 tapped | ci ["B","R"] | produces BR; matches heavy color (B)
+  MISSED #356 81 | Mirkwood | BG | tapped | tier 4 tapped | ci ["B","G"] | produces BG; matches heavy color (B)
+  MISSED #354 81 | Fisk Tower | BW | tapped | tier 4 gainland | ci ["B","W"] | produces BW; matches heavy color (B)
+  MISSED #355 81 | Hell's Kitchen | BR | tapped | tier 4 gainland | ci ["B","R"] | produces BR; matches heavy color (B)
+  MISSED #360 81 | Formidable Commons | BG | tapped | tier 4 tapped | ci ["B","G"] | produces BG; matches heavy color (B)
+  MISSED #358 81 | Meticulous Commons | BW | tapped | tier 4 tapped | ci ["B","W"] | produces BW; matches heavy color (B)
+  MISSED #359 81 | Stingerquill Annex | BR | tapped | tier 4 tapped | ci ["B","R"] | produces BR; matches heavy color (B)
+  MISSED #357 81 | Theorix Annex | BU | tapped | tier 4 tapped | ci ["B","U"] | produces BU; matches heavy color (B)
+  MISSED #363 79 | Raging Ravine | GR | tapped | tier 4 tapped | ci ["G","R"] | produces GR
+  MISSED #364 79 | Abraded Bluffs | RW | tapped | tier 4 tapped | ci ["R","W"] | produces RW
+  MISSED #365 78 | Bristling Backwoods | GR | tapped | tier 4 tapped | ci ["G","R"] | produces GR
+  MISSED #367 77 | Arctic Treeline | GW | tapped | tier 4 tapped | ci ["G","W"] | produces GW
+  MISSED #370 76 | Thornglint Bridge | GW | tapped | tier 4 tapped | ci ["G","W"] | produces GW
+  MISSED #369 76 | Baron, Airship Kingdom | RU | tapped | tier 4 tapped | ci ["R","U"] | produces RU
+  MISSED #371 76 | Rabanastre, Royal City | RW | tapped | tier 4 tapped | ci ["R","W"] | produces RW
+  MISSED #377 75 | Celestial Colonnade | UW | tapped | tier 4 tapped | ci ["U","W"] | produces UW
+  MISSED #386 75 | Tranquil Expanse | GW | tapped | tier 4 tapped | ci ["G","W"] | produces GW
+  MISSED #382 75 | Botanical Plaza | GW | tapped | tier 4 tapped | ci ["G","W"] | produces GW
+  MISSED #388 75 | Abandoned Campground | UW | tapped | tier 4 tapped | ci ["U","W"] | produces UW
+  MISSED #395 75 | Etched Cornfield | GW | tapped | tier 4 tapped | ci ["G","W"] | produces GW
+  MISSED #394 75 | Lakeside Shack | GU | tapped | tier 4 tapped | ci ["G","U"] | produces GU
+  MISSED #376 75 | Gongaga, Reactor Town | GR | tapped | tier 4 tapped | ci ["G","R"] | produces GR
+  MISSED #374 75 | Guadosalam, Farplane Gateway | GU | tapped | tier 4 tapped | ci ["G","U"] | produces GU
+  MISSED #372 75 | Sharlayan, Nation of Scholars | UW | tapped | tier 4 tapped | ci ["U","W"] | produces UW
+  MISSED #375 75 | Windurst, Federation Center | GW | tapped | tier 4 tapped | ci ["G","W"] | produces GW
+  MISSED #378 75 | Airship Engine Room | RU | tapped | tier 4 tapped | ci ["R","U"] | produces RU
+  MISSED #381 75 | Kyoshi Village | GW | tapped | tier 4 tapped | ci ["G","W"] | produces GW
+  MISSED #383 75 | Meditation Pools | GU | tapped | tier 4 tapped | ci ["G","U"] | produces GU
+  MISSED #384 75 | North Pole Gates | UW | tapped | tier 4 tapped | ci ["U","W"] | produces UW
+  MISSED #380 75 | Omashu City | GR | tapped | tier 4 tapped | ci ["G","R"] | produces GR
+  MISSED #385 75 | Sun-Blessed Peak | RW | tapped | tier 4 tapped | ci ["R","W"] | produces RW
+  MISSED #393 75 | Savage Mansion | GR | tapped | tier 4 tapped | ci ["G","R"] | produces GR
+  MISSED #391 75 | Suburban Sanctuary | GW | tapped | tier 4 tapped | ci ["G","W"] | produces GW
+  MISSED #392 75 | University Campus | UW | tapped | tier 4 tapped | ci ["U","W"] | produces UW
+  MISSED #396 75 | Dimension X | RW | tapped | tier 4 gainland | ci ["R","W"] | produces RW
+  MISSED #397 75 | Mutant Town | GU | tapped | tier 4 gainland | ci ["G","U"] | produces GU
+  MISSED #399 75 | TCRI Building | RU | tapped | tier 4 gainland | ci ["R","U"] | produces RU
+  MISSED #390 75 | Fields of Strife | RW | tapped | tier 4 tapped | ci ["R","W"] | produces RW
+  MISSED #389 75 | Paradox Gardens | GU | tapped | tier 4 tapped | ci ["G","U"] | produces GU
+  MISSED #387 75 | Spectacle Summit | RU | tapped | tier 4 tapped | ci ["R","U"] | produces RU
+  MISSED #403 75 | Elvenking's Halls | GU | tapped | tier 4 tapped | ci ["G","U"] | produces GU
+  MISSED #398 75 | Iron Hills | RW | tapped | tier 4 tapped | ci ["R","W"] | produces RW
+  MISSED #405 75 | Lake-town | UW | tapped | tier 4 tapped | ci ["U","W"] | produces UW
+  MISSED #400 75 | Asgardian Citadel | RW | tapped | tier 4 gainland | ci ["R","W"] | produces RW
+  MISSED #401 75 | Avengers Hangar | UW | tapped | tier 4 gainland | ci ["U","W"] | produces UW
+  MISSED #404 75 | Los Diablos Missile Base | GR | tapped | tier 4 gainland | ci ["G","R"] | produces GR
+  MISSED #402 75 | Pym Technologies | GU | tapped | tier 4 gainland | ci ["G","U"] | produces GU
+  MISSED #408 75 | Dedicated Commons | RW | tapped | tier 4 tapped | ci ["R","W"] | produces RW
+  MISSED #406 75 | Fatehold Annex | UW | tapped | tier 4 tapped | ci ["U","W"] | produces UW
+  MISSED #407 75 | Innovative Commons | RU | tapped | tier 4 tapped | ci ["R","U"] | produces RU
+  MISSED #411 75 | Konstrari Annex | GR | tapped | tier 4 tapped | ci ["G","R"] | produces GR
+  MISSED #409 75 | Transformative Commons | GU | tapped | tier 4 tapped | ci ["G","U"] | produces GU
+  MISSED #410 75 | Vigorbloom Annex | GW | tapped | tier 4 tapped | ci ["G","W"] | produces GW
+scored top 45 (* = picked):
+  #1 272 Multiversal Passage *
+  #2 267 Thran Portal *
+  #3 266 A-Thran Portal [NOT ARENA] *
+  #4 246 Command Tower *
+  #5 246 Mana Confluence [NOT ARENA] *
+  #6 246 Gemstone Caverns *
+  #7 246 Command Tower *
+  #8 246 Command Tower *
+  #9 246 Command Tower *
+  #10 246 Gemstone Caverns *
+  #11 236 Branch of Vitu-Ghazi *
+  #12 236 Plaza of Harmony *
+  #13 236 Mirrodin's Core *
+  #14 236 Forgotten Monument *
+  #15 216 Bloodstained Mire [NOT ARENA] *
+  #16 216 Godless Shrine *
+  #17 216 Blood Crypt *
+  #18 216 Overgrown Tomb *
+  #19 210 Flooded Strand *
+  #20 210 Misty Rainforest *
+  #21 210 Windswept Heath [NOT ARENA] *
+  #22 210 Wooded Foothills [NOT ARENA] *
+  #23 210 Scalding Tarn *
+  #24 210 Breeding Pool *
+  #25 210 Hallowed Fountain *
+  #26 210 Steam Vents *
+  #27 210 Stomping Ground *
+  #28 210 Sacred Foundry *
+  #29 210 Temple Garden *
+  #30 206 Evolving Wilds *
+  #31 206 Terramorphic Expanse *
+  #32 206 Fabled Passage *
+  #33 206 Evolving Wilds *
+  #34 206 Terramorphic Expanse *
+  #35 206 Terramorphic Expanse *
+  #36 206 Fabled Passage *
+  #37 206 Fabled Passage *
+  #38 205 Riveteers Overlook [NOT ARENA] *
+  #39 204 Escape Tunnel *
+  #40 204 Escape Tunnel *
+  #41 204 Thriving Isle
+  #42 204 Thriving Heath
+  #43 204 Thriving Grove
+  #44 204 Thriving Bluff
+  #45 204 Thriving Moor

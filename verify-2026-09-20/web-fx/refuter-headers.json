@@ -1,0 +1,390 @@
+[
+  {
+    "state": "signed-out",
+    "width": 1280,
+    "headerLeft": 48,
+    "headerRight": 1232,
+    "headerW": 1183,
+    "rowScrollW": 1183,
+    "rowClientW": 1183,
+    "rowOverflowPx": 0,
+    "docOverflow": 0,
+    "navVisible": 7,
+    "labelsVisible": [],
+    "headerRowHeight": 56,
+    "lineH": 20,
+    "wrapped": [],
+    "escaped": [],
+    "detail": [
+      {
+        "cls": "flex shrink-0 items-center gap",
+        "left": 64,
+        "right": 302,
+        "w": 237,
+        "h": 32
+      },
+      {
+        "cls": "header-nav items-center gap-0.",
+        "left": 419,
+        "right": 711,
+        "w": 292,
+        "h": 40
+      },
+      {
+        "cls": "header-actions flex shrink-0 i",
+        "left": 829,
+        "right": 1216,
+        "w": 387,
+        "h": 40
+      }
+    ]
+  },
+  {
+    "state": "signed-out",
+    "width": 1440,
+    "headerLeft": 117,
+    "headerRight": 1323,
+    "headerW": 1206,
+    "rowScrollW": 1206,
+    "rowClientW": 1206,
+    "rowOverflowPx": 0,
+    "docOverflow": 0,
+    "navVisible": 7,
+    "labelsVisible": [
+      "Collection",
+      "Decks",
+      "Commanders"
+    ],
+    "headerRowHeight": 56,
+    "lineH": 20,
+    "wrapped": [],
+    "escaped": [],
+    "detail": [
+      {
+        "cls": "flex shrink-0 items-center gap",
+        "left": 133,
+        "right": 165,
+        "w": 32,
+        "h": 32
+      },
+      {
+        "cls": "header-nav items-center gap-0.",
+        "left": 279,
+        "right": 806,
+        "w": 527,
+        "h": 40
+      },
+      {
+        "cls": "header-actions flex shrink-0 i",
+        "left": 920,
+        "right": 1307,
+        "w": 387,
+        "h": 40
+      }
+    ]
+  },
+  {
+    "state": "signed-out",
+    "width": 1720,
+    "headerLeft": 262,
+    "headerRight": 1458,
+    "headerW": 1196,
+    "rowScrollW": 1196,
+    "rowClientW": 1196,
+    "rowOverflowPx": 0,
+    "docOverflow": 0,
+    "navVisible": 7,
+    "labelsVisible": [
+      "Collection",
+      "Decks",
+      "Commanders"
+    ],
+    "headerRowHeight": 56,
+    "lineH": 20,
+    "wrapped": [],
+    "escaped": [],
+    "detail": [
+      {
+        "cls": "flex shrink-0 items-center gap",
+        "left": 278,
+        "right": 310,
+        "w": 32,
+        "h": 32
+      },
+      {
+        "cls": "header-nav items-center gap-0.",
+        "left": 419,
+        "right": 946,
+        "w": 527,
+        "h": 40
+      },
+      {
+        "cls": "header-actions flex shrink-0 i",
+        "left": 1055,
+        "right": 1442,
+        "w": 387,
+        "h": 40
+      }
+    ]
+  },
+  {
+    "state": "signed-out",
+    "width": 1920,
+    "headerLeft": 362,
+    "headerRight": 1558,
+    "headerW": 1196,
+    "rowScrollW": 1196,
+    "rowClientW": 1196,
+    "rowOverflowPx": 0,
+    "docOverflow": 0,
+    "navVisible": 7,
+    "labelsVisible": [
+      "Collection",
+      "Decks",
+      "Commanders"
+    ],
+    "headerRowHeight": 56,
+    "lineH": 20,
+    "wrapped": [],
+    "escaped": [],
+    "detail": [
+      {
+        "cls": "flex shrink-0 items-center gap",
+        "left": 378,
+        "right": 410,
+        "w": 32,
+        "h": 32
+      },
+      {
+        "cls": "header-nav items-center gap-0.",
+        "left": 519,
+        "right": 1046,
+        "w": 527,
+        "h": 40
+      },
+      {
+        "cls": "header-actions flex shrink-0 i",
+        "left": 1155,
+        "right": 1542,
+        "w": 387,
+        "h": 40
+      }
+    ]
+  },
+  {
+    "state": "signed-in",
+    "width": 1280,
+    "headerLeft": 48,
+    "headerRight": 1232,
+    "headerW": 1183,
+    "rowScrollW": 1183,
+    "rowClientW": 1183,
+    "rowOverflowPx": 0,
+    "docOverflow": 0,
+    "navVisible": 8,
+    "labelsVisible": [],
+    "headerRowHeight": 56,
+    "lineH": 20,
+    "wrapped": [],
+    "escaped": [],
+    "detail": [
+      {
+        "cls": "flex shrink-0 items-center gap",
+        "left": 64,
+        "right": 302,
+        "w": 237,
+        "h": 32
+      },
+      {
+        "cls": "header-nav items-center gap-0.",
+        "left": 398,
+        "right": 732,
+        "w": 334,
+        "h": 40
+      },
+      {
+        "cls": "header-actions flex shrink-0 i",
+        "left": 829,
+        "right": 1216,
+        "w": 387,
+        "h": 40
+      }
+    ]
+  },
+  {
+    "state": "signed-in",
+    "width": 1440,
+    "headerLeft": 117,
+    "headerRight": 1323,
+    "headerW": 1206,
+    "rowScrollW": 1206,
+    "rowClientW": 1206,
+    "rowOverflowPx": 0,
+    "docOverflow": 0,
+    "navVisible": 8,
+    "labelsVisible": [
+      "Collection",
+      "Decks",
+      "Commanders"
+    ],
+    "headerRowHeight": 56,
+    "lineH": 20,
+    "wrapped": [],
+    "escaped": [],
+    "detail": [
+      {
+        "cls": "flex shrink-0 items-center gap",
+        "left": 133,
+        "right": 165,
+        "w": 32,
+        "h": 32
+      },
+      {
+        "cls": "header-nav items-center gap-0.",
+        "left": 258,
+        "right": 827,
+        "w": 569,
+        "h": 40
+      },
+      {
+        "cls": "header-actions flex shrink-0 i",
+        "left": 920,
+        "right": 1307,
+        "w": 387,
+        "h": 40
+      }
+    ]
+  },
+  {
+    "state": "signed-in",
+    "width": 1720,
+    "headerLeft": 262,
+    "headerRight": 1458,
+    "headerW": 1196,
+    "rowScrollW": 1196,
+    "rowClientW": 1196,
+    "rowOverflowPx": 0,
+    "docOverflow": 0,
+    "navVisible": 8,
+    "labelsVisible": [
+      "Collection",
+      "Decks",
+      "Commanders"
+    ],
+    "headerRowHeight": 56,
+    "lineH": 20,
+    "wrapped": [],
+    "escaped": [],
+    "detail": [
+      {
+        "cls": "flex shrink-0 items-center gap",
+        "left": 278,
+        "right": 310,
+        "w": 32,
+        "h": 32
+      },
+      {
+        "cls": "header-nav items-center gap-0.",
+        "left": 398,
+        "right": 967,
+        "w": 569,
+        "h": 40
+      },
+      {
+        "cls": "header-actions flex shrink-0 i",
+        "left": 1055,
+        "right": 1442,
+        "w": 387,
+        "h": 40
+      }
+    ]
+  },
+  {
+    "state": "signed-in",
+    "width": 1920,
+    "headerLeft": 362,
+    "headerRight": 1558,
+    "headerW": 1196,
+    "rowScrollW": 1196,
+    "rowClientW": 1196,
+    "rowOverflowPx": 0,
+    "docOverflow": 0,
+    "navVisible": 8,
+    "labelsVisible": [
+      "Collection",
+      "Decks",
+      "Commanders"
+    ],
+    "headerRowHeight": 56,
+    "lineH": 20,
+    "wrapped": [],
+    "escaped": [],
+    "detail": [
+      {
+        "cls": "flex shrink-0 items-center gap",
+        "left": 378,
+        "right": 410,
+        "w": 32,
+        "h": 32
+      },
+      {
+        "cls": "header-nav items-center gap-0.",
+        "left": 498,
+        "right": 1067,
+        "w": 569,
+        "h": 40
+      },
+      {
+        "cls": "header-actions flex shrink-0 i",
+        "left": 1155,
+        "right": 1542,
+        "w": 387,
+        "h": 40
+      }
+    ]
+  },
+  {
+    "state": "methodology-frame",
+    "width": 1280,
+    "hL": 48,
+    "hR": 1232,
+    "fL": 0,
+    "fR": 1280,
+    "doc": 0,
+    "corpus": "4,225,041",
+    "updated": "2026-09-19"
+  },
+  {
+    "state": "methodology-frame",
+    "width": 1440,
+    "hL": 117,
+    "hR": 1323,
+    "fL": 64,
+    "fR": 1376,
+    "doc": 0,
+    "corpus": "4,225,041",
+    "updated": "2026-09-19"
+  },
+  {
+    "state": "methodology-frame",
+    "width": 1720,
+    "hL": 262,
+    "hR": 1458,
+    "fL": 204,
+    "fR": 1516,
+    "doc": 0,
+    "corpus": "4,225,041",
+    "updated": "2026-09-19"
+  },
+  {
+    "state": "methodology-frame",
+    "width": 1920,
+    "hL": 362,
+    "hR": 1558,
+    "fL": 304,
+    "fR": 1616,
+    "doc": 0,
+    "corpus": "4,225,041",
+    "updated": "2026-09-19"
+  }
+]

@@ -1,0 +1,82 @@
+file      : verify-2026-10-09/color-best/decks/UB/final.txt
+format    : commander   commander: Uldaros Theorix
+totals    : 100 cards | 34 lands (35.5 eff.) | 65 nonland | avg MV 3.42
+curve     : 1:7 2:21 3:14 4:8 5:5 6:2 7:8
+VERDICT   : FAIL
+
+  PASS  size        100 cards (commander wants 100)
+  PASS  singleton   singleton respected (basics exempt)
+  PASS  legality    every card legal in commander
+  PASS  rules       no other format rule broken
+  PASS  identity    all cards inside BU
+  PASS  ownership   all cards owned; paper collection imported 0 days ago
+  FAIL  arenaNames  6 line(s) use "Front // Back" — Arena answers "unknown card title". Use:
+        - 1 Boggart Trawler
+        - 1 Emeritus of Woe
+        - 1 Glasspool Mimic
+        - 1 Grave Researcher
+        - 1 Hydroelectric Specimen
+        - 1 Sink into Stupor
+  WARN  lands       34 lands (+4 MDFC land backs = 35.5 effective); Karsten wants 38 ±2
+  FAIL  plan        7/65 nonland cards interact (11%) — commander wants: general value
+        - Culling the Weak (MV 1)
+        - Into the Flood Maw (MV 1)
+        - Pongify (MV 1)
+        - Rapid Hybridization (MV 1)
+        - Reanimate (MV 1)
+        - Swan Song (MV 1)
+        - Wayfarer's Bauble (MV 1)
+        - Animate Dead (MV 2)
+        - Arcane Denial (MV 2)
+        - Arcane Signet (MV 2)
+        - Bitter Triumph (MV 2)
+        - Counterspell (MV 2)
+        - Cyclonic Rift (MV 2)
+        - Feed the Swarm (MV 2)
+        - Flesh Duplicate (MV 2)
+        - Negate (MV 2)
+        - Night's Whisper (MV 2)
+        - Ornithopter of Paradise (MV 2)
+        - Ripples of Undeath (MV 2)
+        - Sign in Blood (MV 2)
+        - Sword of the Animist (MV 2)
+        - Talisman of Dominance (MV 2)
+        - Theorix Charm (MV 2)
+        - Thought Vessel (MV 2)
+        - Ashiok, Dream Render (MV 3)
+        - Boggart Trawler (MV 3)
+        - Buried Alive (MV 3)
+        - Chromatic Lantern (MV 3)
+        - Cruel Calculations (MV 3)
+        - Frantic Search (MV 3)
+        - Glasspool Mimic (MV 3)
+        - Hydroelectric Specimen (MV 3)
+        - Propaganda (MV 3)
+        - Sink into Stupor (MV 3)
+        - Windfall (MV 3)
+        - Worn Powerstone (MV 3)
+        - Diabolic Tutor (MV 4)
+        - Emeritus of Woe (MV 4)
+        - Fact or Fiction (MV 4)
+        - Panharmonicon (MV 4)
+        - Phyrexian Metamorph (MV 4)
+        - Thran Dynamo (MV 4)
+        - Visage Bandit (MV 4)
+        - Body Double (MV 5)
+        - Evacuation (MV 5)
+        - Junji, the Midnight Sky (MV 5)
+        - Ob Nixilis of the Black Oath (MV 5)
+        - Syr Konrad, the Grim (MV 5)
+        - Grave Titan (MV 6)
+        - Noxious Gearhulk (MV 6)
+        - Butcher of Malakir (MV 7)
+        - Devourer of Destiny (MV 7)
+        - Meteor Golem (MV 7)
+        - Archfiend of Despair (MV 8)
+        - Armaggon, Future Shark (MV 8)
+        - Cityscape Leveler (MV 8)
+        - Pestilence Demon (MV 8)
+        - Rise of the Dark Realms (MV 9)
+  PASS  curve       avg MV 3.42; commander sets no cost threshold
+  PASS  wincons     13 win condition(s)/closer(s)
+  PASS  locks       1 locked card(s) present and intact

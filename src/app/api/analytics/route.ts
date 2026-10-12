@@ -2,34 +2,29 @@ import { NextResponse } from 'next/server';
 import { getDb } from '@/lib/db';
 
 // GET /api/analytics
-// Returns all analytics snapshots for the dashboard.
-// If no snapshots exist (Python script hasn't run), computes live summaries from DB.
+// Returns live analytics from match_logs + arena_parsed_matches for the dashboard.
+// card_performance comes from the analytics_snapshots table (Python analyze_meta.py) when present.
 export async function GET() {
   try {
     const db = getDb();
 
-    // Try to read pre-computed snapshots first
+    // Pre-computed snapshots (Python pipeline)
     const snapshots = db
       .prepare('SELECT snapshot_type, data, created_at FROM analytics_snapshots')
       .all() as Array<{ snapshot_type: string; data: string; created_at: string }>;
 
-    if (snapshots.length > 0) {
-      const result: Record<string, unknown> = {};
-      let latestUpdate = '';
-      for (const s of snapshots) {
-        try {
-          result[s.snapshot_type] = JSON.parse(s.data);
-        } catch {
-          result[s.snapshot_type] = null;
-        }
-        if (s.created_at > latestUpdate) latestUpdate = s.created_at;
-      }
-      result.last_updated = latestUpdate;
-      return NextResponse.json(result);
-    }
-
-    // Fallback: compute live from raw tables
+    // Live tables win: a snapshot is only written when the Python step runs, so serving it
+    // whole froze deck performance at its last run. Snapshots only fill card_performance,
+    // which has no live equivalent.
     const live = computeLiveAnalytics(db);
+    const cardPerf = snapshots.find((s) => s.snapshot_type === 'card_performance');
+    if (cardPerf) {
+      try {
+        return NextResponse.json({ ...live, card_performance: JSON.parse(cardPerf.data) });
+      } catch {
+        // malformed snapshot: fall through to the live-only payload
+      }
+    }
     return NextResponse.json(live);
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Failed to load analytics';
@@ -84,6 +79,7 @@ function computeLiveAnalytics(db: ReturnType<typeof getDb>) {
 
   // Deck performance from manual match logs + arena parsed matches
   const deckRows = db.prepare(`
+    SELECT * FROM (
     SELECT deck_id, deck_name, format,
            SUM(total_games) as total_games,
            SUM(wins) as wins
@@ -105,8 +101,18 @@ function computeLiveAnalytics(db: ReturnType<typeof getDb>) {
       GROUP BY am.deck_id
     )
     GROUP BY deck_id
-    ORDER BY wins * 1.0 / SUM(total_games) DESC
-  `).all() as Array<{ deck_id: number; deck_name: string | null; format: string | null; total_games: number; wins: number }>;
+    UNION ALL
+    -- Arena matches with no deck (limited queues, no decklist captured): one bucket, listed first
+    -- so the gap stays visible above the top-N cut
+    SELECT NULL as deck_id, 'Unmatched (Arena)' as deck_name, 'arena' as format,
+           COUNT(*) as total_games,
+           SUM(CASE WHEN result = 'win' THEN 1 ELSE 0 END) as wins
+    FROM arena_parsed_matches
+    WHERE deck_id IS NULL
+    HAVING COUNT(*) > 0
+    )
+    ORDER BY deck_id IS NOT NULL, wins * 1.0 / total_games DESC
+  `).all() as Array<{ deck_id: number | null; deck_name: string | null; format: string | null; total_games: number; wins: number }>;
 
   const deckPerf = deckRows.map((r) => ({
     deck_id: r.deck_id,

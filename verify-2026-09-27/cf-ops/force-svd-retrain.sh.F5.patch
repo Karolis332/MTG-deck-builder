@@ -1,0 +1,18 @@
+--- force-svd-retrain.sh	2026-09-27 11:37:37.274284890 +0000
++++ force-svd-retrain.sh	2026-09-27 12:11:52.110697471 +0000
+@@ -74,8 +74,13 @@
+   fi
+ 
+   local last_start last_complete
+-  last_start=$(grep -F '=== Nightly Pipeline Starting ===' /var/log/grimoire-pipeline.log | tail -1 | cut -d',' -f1)
+-  last_complete=$(grep -F '=== Pipeline complete in' /var/log/grimoire-pipeline.log | tail -1 | cut -d',' -f1)
++  # F5 2026-09-27: also read the most recent logrotate copytruncate rotation (.log.1),
++  # OLDEST FIRST, so a cycle that started before rotation is still visible but a rotated
++  # marker never supersedes a newer live one (weekly rotation otherwise blinds this gate
++  # through the 3h15m margin for up to a week after each rotation). See
++  # verify-2026-09-27/cf-model/review.md F5, and the same fix in ops/run-regression-eval.sh.
++  last_start=$(cat /var/log/grimoire-pipeline.log.1 /var/log/grimoire-pipeline.log 2>/dev/null | grep -F '=== Nightly Pipeline Starting ===' | tail -1 | cut -d',' -f1)
++  last_complete=$(cat /var/log/grimoire-pipeline.log.1 /var/log/grimoire-pipeline.log 2>/dev/null | grep -F '=== Pipeline complete in' | tail -1 | cut -d',' -f1)
+   if [ -z "$last_complete" ]; then
+     echo "daemon idle: NO (no completion marker found)"; return 1
+   fi

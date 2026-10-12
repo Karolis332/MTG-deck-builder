@@ -1,0 +1,71 @@
+70 free UWR cards with no line in build-report-2.md:
+Ajani's Chosen | {2}{W}{W} | Creature — Cat Soldier
+Alhammarret's Archive | {5} | Legendary Artifact
+Angelic Destiny | {2}{W}{W} | Enchantment — Aura
+Archon of Sun's Grace | {2}{W}{W} | Creature — Archon
+Armored Skyhunter | {3}{W} | Creature — Cat Knight
+Baeloth Barrityl, Entertainer | {4}{R} | Legendary Creature — Elf Shaman
+Bane of Bala Ged | {7} | Creature — Eldrazi
+Brass Infiniscope | {4} | Artifact
+Bre of Clan Stoutarm | {2}{R}{W} | Legendary Creature — Giant Warrior
+Breaker of Creation | {6}{C}{C} | Creature — Eldrazi
+Calamity, Galloping Inferno | {4}{R}{R} | Legendary Creature — Horse Mount
+Caves of Chaos Adventurer | {3}{R} | Creature — Human Barbarian
+Cityscape Leveler | {8} | Artifact Creature — Construct
+Combat Calligrapher | {3}{W} | Creature — Bird Cleric
+Deekah, Fractal Theorist | {4}{U} | Legendary Creature — Human Wizard
+Descendants' Fury | {3}{R} | Enchantment
+Devourer of Destiny | {5}{C}{C} | Creature — Eldrazi
+Double Down | {3}{U} | Enchantment
+Eldrazi Conscription | {8} | Kindred Enchantment — Eldrazi Aura
+Eldrazi Ravager | {5}{C} | Creature — Eldrazi
+Emeritus of Ideation | {3}{U}{U} // {U} | Creature — Human Wizard // Instant
+Fell the Mighty | {4}{W} | Sorcery
+Feywild Caretaker | {4}{U} | Creature — Orc Wizard
+Firemane Commando | {3}{W} | Creature — Angel Soldier
+Firemind Vessel | {4} | Artifact
+Forum Filibuster | {3}{W}{W} | Enchantment
+Grim Poppet | {7} | Artifact Creature — Scarecrow
+Harmonized Crescendo | {4}{U}{U} | Instant
+Hellspur Posse Boss | {2}{R}{R} | Creature — Lizard Rogue
+Herald of Amity | {3}{W} | Creature — Griffin
+Hexhaven Battalion | {4}{W}{W} | Sorcery
+Hypothesizzle | {3}{U}{R} | Instant
+Jaya, Venerated Firemage | {4}{R} | Legendary Planeswalker — Jaya
+Jazal Goldmane | {2}{W}{W} | Legendary Creature — Cat Warrior
+Jem Lightfoote, Sky Explorer | {2}{W}{U} | Legendary Creature — Human Scout
+Kozilek, the Great Distortion | {8}{C}{C} | Legendary Creature — Eldrazi
+Kraum, Violent Cacophony | {2}{U}{R} | Legendary Creature — Zombie Horror
+Luxurious Locomotive | {5} | Artifact — Vehicle
+Marauding Sphinx | {3}{U}{U} | Creature — Sphinx Rogue
+Moraug, Fury of Akoum | {4}{R}{R} | Legendary Creature — Minotaur Warrior
+Necron Monolith | {7} | Artifact — Vehicle
+Nulldrifter | {7} | Creature — Eldrazi Elemental
+Omni-Changeling | {3}{U}{U} | Creature — Shapeshifter
+Owlin Spiralmancer | {3}{U} | Creature — Bird Wizard
+Paradise Plume | {4} | Artifact
+Perplexing Test | {3}{U}{U} | Instant
+Plan for All Outcomes | {3}{U} | Enchantment
+Planetarium of Wan Shi Tong | {6} | Legendary Artifact
+Promise of Loyalty | {4}{W} | Sorcery
+Protege's Awakening | {3}{U} | Sorcery
+Reconnaissance Mission | {2}{U}{U} | Enchantment
+Rodeo Pyromancers | {3}{R} | Creature — Human Mercenary
+Sage's Reverie | {3}{W} | Enchantment — Aura
+Sarkhan, the Dragonspeaker | {3}{R}{R} | Legendary Planeswalker — Sarkhan
+Sea Gate Colossus | {7} | Artifact Creature — Golem Warrior
+Songbirds' Blessing | {3}{W} | Enchantment — Aura
+Step Between Worlds | {3}{U}{U} | Sorcery
+Territory Forge | {4}{R} | Artifact
+Terror of the Peaks | {3}{R}{R} | Creature — Dragon
+The Wanderer | {3}{W} | Legendary Planeswalker
+Tomb of Horrors Adventurer | {5}{U} | Creature — Elf Monk
+Tome of the Guildpact | {5} | Artifact — Book
+Venser's Journal | {5} | Artifact — Book
+Village Pillagers | {3}{R}{R} | Creature — Goblin Warrior
+Violent Echoes | {2}{R}{R} | Instant
+Visage Bandit | {3}{U} | Creature — Shapeshifter Rogue
+Winds of Rath | {3}{W}{W} | Sorcery
+Wishing Well | {3}{U} | Artifact
+Yuriko, Blade of the Mighty | {3}{W} | Legendary Creature — Human Samurai
+Zimone's Hypothesis | {3}{U}{U} | Instant

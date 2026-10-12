@@ -1,0 +1,14 @@
+BASE obj 81.74 DS 71.8 pen 1 {"land":37,"ramp":10,"draw":12,"removal":12,"board_wipe":4,"protection":7} mana=95 curve=89 interaction=100 advantage=70 win=65 synergy=93 meta=50 structure=100
+   0.01  Sky Diamond => Sol Ring   DS 0.0 pen 1 mana=94 curve=89 interaction=100 advantage=70 win=65 synergy=93 meta=50 structure=100
+  -0.00  Decanter of Endless Water => Arcane Signet   DS 0.0 pen 1 mana=95 curve=90 interaction=100 advantage=70 win=65 synergy=93 meta=50 structure=100
+   0.00  Trumpeting Carnosaur => Chrome Host Seedshark   DS 0.0 pen 1 mana=95 curve=89 interaction=100 advantage=70 win=65 synergy=91 meta=50 structure=100
+  -0.00  Hoard-Smelter Dragon => Tetsuko Umezawa, Fugitive   DS 0.0 pen 1 mana=95 curve=90 interaction=100 advantage=70 win=65 synergy=93 meta=50 structure=100
+  -6.77  Ajani Unrelenting => Ponder   DS -6.7 pen 1 mana=95 curve=90 interaction=100 advantage=75 win=56 synergy=95 meta=50 structure=100
+  -8.77  Titan Forge => Opt   DS -6.7 pen 2 mana=94 curve=90 interaction=100 advantage=75 win=56 synergy=93 meta=50 structure=100
+  -1.91  Cityscape Leveler => Fire // Ice   DS 0.0 pen 2 mana=95 curve=89 interaction=100 advantage=70 win=65 synergy=93 meta=50 structure=100
+  -2.00  Devourer of Destiny => Thought Monitor   DS 0.0 pen 2 mana=95 curve=89 interaction=100 advantage=70 win=65 synergy=100 meta=50 structure=100
+   0.00  Windswept Heath => Fabled Passage   DS 0.0 pen 1 mana=95 curve=89 interaction=100 advantage=70 win=65 synergy=93 meta=50 structure=100
+   0.04  Reliquary Tower => Command Tower   DS 0.0 pen 1 mana=95 curve=89 interaction=100 advantage=70 win=65 synergy=93 meta=50 structure=100
+   0.08  Temple of the False God => Exotic Orchard   DS 0.0 pen 1 mana=95 curve=89 interaction=100 advantage=70 win=65 synergy=93 meta=50 structure=100
+  -0.04  Soul-Guide Lantern => Mishra's Bauble   DS 0.0 pen 1 mana=95 curve=88 interaction=100 advantage=70 win=65 synergy=93 meta=50 structure=100
+ALL  obj 57.18 (-24.57) DS 59.2 pen 7 {"land":37,"ramp":10,"draw":15,"removal":7,"board_wipe":3,"protection":7} mana=97 curve=91 interaction=100 advantage=79 win=49 synergy=98 meta=50 structure=100

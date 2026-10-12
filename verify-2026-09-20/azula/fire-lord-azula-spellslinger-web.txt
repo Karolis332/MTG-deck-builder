@@ -1,0 +1,92 @@
+Commander
+1 Fire Lord Azula
+
+Deck
+1 Arcane Signet
+1 Frantic Search
+1 Big Score
+1 Storm-Kiln Artist
+1 Archmage Emeritus
+1 Dark Ritual
+1 Lightning Bolt
+1 Electrodominance
+1 Swiftfoot Boots
+1 Unexpected Windfall
+1 Thrill of Possibility
+1 Seething Song
+1 Narset's Reversal
+1 Talisman of Creativity
+1 Talisman of Dominance
+1 Redirect Lightning
+1 The Last Agni Kai
+1 Leyline of Anticipation
+1 High Fae Trickster
+1 Demand Answers
+1 Borne Upon a Wind
+1 Counterspell
+1 Brainstorm
+1 Talisman of Indulgence
+1 Ozai, the Phoenix King
+1 Firebending Student
+1 Dualcaster Mage
+1 Electro, Assaulting Battery
+1 Bulk Up
+1 An Offer You Can't Refuse
+1 Lightning Greaves
+1 Izzet Signet
+1 Fists of Flame
+1 Goblin Electromancer
+1 Etali, Primal Storm
+1 Sozin's Comet
+1 Fated Firepower
+1 Azula, Cunning Usurper
+1 Firebender Ascension
+1 Ashling, Flame Dancer
+1 Opt
+1 Blasphemous Act
+1 Guttersnipe
+1 Torrential Gearhulk
+1 Lightning Strike
+1 Bident of Thassa
+1 Talrand, Sky Summoner
+1 Baral, Chief of Compliance
+1 Murmuring Mystic
+1 Coastal Piracy
+1 Niv-Mizzet, Parun
+1 Adeliz, the Cinder Wind
+1 Stormchaser Mage
+1 Combat Celebrant
+1 Faerie Mastermind
+1 Mind Stone
+1 Razaketh, the Foulblooded
+1 Beseech the Mirror
+1 Diabolic Intent
+1 Fabricate
+1 Entomb
+1 Bloodstained Mire
+1 Scalding Tarn
+1 Steam Vents
+1 Blood Crypt
+1 Polluted Delta
+1 Watery Grave
+1 Three Tree City
+1 Multiversal Passage
+1 Temple of the Dragon Queen
+1 Sulfur Falls
+1 Dragonskull Summit
+1 Shivan Reef
+1 Thran Portal
+1 Command Tower
+1 Maestros Theater
+1 Seething Landscape
+1 Drowned Catacomb
+1 Bloodsoaked Insight
+1 Wooded Foothills
+1 Arid Mesa
+1 Sulfurous Springs
+1 Rush of Inspiration
+1 Mana Confluence
+1 Reflecting Pool
+7 Mountain
+5 Island
+2 Swamp

@@ -1,0 +1,5 @@
+BASE obj 83.34 DS 72.1 pen 0 {"land":35,"ramp":10,"draw":10,"removal":10,"board_wipe":3,"protection":3} mana=84 curve=90 interaction=94 advantage=70 win=67 synergy=65 meta=50 structure=100
+  -3.79  Walking Ballista => Take Up the Shield   DS -1.8 pen 1 mana=84 curve=91 interaction=95 advantage=70 win=69 synergy=63 meta=50 structure=100
+  -5.13  Explorer's Scope => Rustler Rampage   DS -5.1 pen 0 mana=84 curve=90 interaction=94 advantage=70 win=59 synergy=63 meta=50 structure=100
+   0.02  The Echoverse Fulcrum => Shatter the Sky   DS 0.0 pen 0 mana=84 curve=89 interaction=94 advantage=65 win=67 synergy=65 meta=50 structure=100
+ALL  obj 77.63 (-5.71) DS 68.3 pen 1 {"land":35,"ramp":10,"draw":10,"removal":9,"board_wipe":3,"protection":4} mana=83 curve=90 interaction=95 advantage=65 win=60 synergy=61 meta=50 structure=100

@@ -1,0 +1,4 @@
+Chainer, Dementia Master: 80.43 [land38 ramp12 draw12 remo11 wipe4 prot3 pen0] (seeds cf 65.39 [land37 ramp15 draw12 remo10 wipe2 prot3 pen4] | previous 60.26 [land38 ramp18 draw12 remo11 wipe2 prot3 pen7]; 8 swaps, 188492 ms)
+Illuminor Szeras: 80.29 [land38 ramp12 draw10 remo12 wipe3 prot3 pen0] (seeds cf 67.59 [land36 ramp9 draw12 remo8 wipe3 prot1 pen5] | previous 67.95 [land35 ramp14 draw13 remo8 wipe3 prot2 pen6]; 9 swaps, 110423 ms)
+Liliana the Repentant: 79.90 [land38 ramp12 draw11 remo10 wipe4 prot3 pen0] (seeds cf 61.20 [land37 ramp12 draw11 remo9 wipe2 prot2 pen3] | previous 57.32 [land35 ramp16 draw12 remo8 wipe2 prot2 pen8]; 14 swaps, 126925 ms)
+Pizza Face, Gastromancer: 100.11 [land38 ramp12 draw11 remo11 wipe3 prot6 pen0] (seeds cf 45.41 [land37 ramp22 draw10 remo6 wipe2 prot4 pen15] | previous 69.72 [land37 ramp21 draw9 remo7 wipe2 prot4 pen14]; 15 swaps, 190706 ms)

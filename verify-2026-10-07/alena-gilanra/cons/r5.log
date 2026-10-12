@@ -1,0 +1,25 @@
+Traceback (most recent call last):
+  File "C:\Users\QuLeR\MTG-deck-builder\verify-2026-10-07\alena-gilanra\sim4.py", line 436, in <module>
+    run(p, games, basics=b)
+    ~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\QuLeR\MTG-deck-builder\verify-2026-10-07\alena-gilanra\sim4.py", line 421, in run
+    o = play(names, specs, rng)
+  File "C:\Users\QuLeR\MTG-deck-builder\verify-2026-10-07\alena-gilanra\sim4.py", line 408, in play
+    g.turn(t)
+    ~~~~~~^^^
+  File "C:\Users\QuLeR\MTG-deck-builder\verify-2026-10-07\alena-gilanra\sim4.py", line 342, in turn
+    self.hand.remove(c); self.cast(c)
+                         ~~~~~~~~~^^^
+  File "C:\Users\QuLeR\MTG-deck-builder\verify-2026-10-07\alena-gilanra\sim4.py", line 180, in cast
+    self.resolve(n, s)
+    ~~~~~~~~~~~~^^^^^^
+  File "C:\Users\QuLeR\MTG-deck-builder\verify-2026-10-07\alena-gilanra\sim4.py", line 233, in resolve
+    elif tag == 'tavern': self.to_hand(5, lambda c: self.S[c]['creature'] and not self.is_land(c))
+                          ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\QuLeR\MTG-deck-builder\verify-2026-10-07\alena-gilanra\sim4.py", line 240, in to_hand
+    hits = [c for c in top if ok(c)]
+                              ~~^^^
+  File "C:\Users\QuLeR\MTG-deck-builder\verify-2026-10-07\alena-gilanra\sim4.py", line 233, in <lambda>
+    elif tag == 'tavern': self.to_hand(5, lambda c: self.S[c]['creature'] and not self.is_land(c))
+                                                    ~~~~~~~~~^^^^^^^^^^^^
+KeyError: 'creature'

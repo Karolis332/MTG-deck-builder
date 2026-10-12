@@ -1,0 +1,97 @@
+Commander
+1 Inspirit, Flagship Vessel
+
+Deck
+1 Sol Ring
+1 Arcane Signet
+1 Everflowing Chalice
+1 Pentad Prism
+1 Fellwar Stone
+1 Ornithopter of Paradise
+1 Steelswarm Operator
+1 Enthusiastic Mechanaut
+1 Astral Cornucopia
+1 Urza, Lord High Artificer
+1 Nyx Lotus
+1 Empowered Autogenerator
+1 Etherium Sculptor
+1 Jhoira, Weatherlight Captain
+1 Uthros Research Craft
+1 Thirst for Knowledge
+1 Thought Monitor
+1 Reverse Engineer
+1 Universal Surveillance
+1 Insight Engine
+1 Etched Oracle
+1 Fact or Fiction
+1 Swords to Plowshares
+1 Generous Gift
+1 Dispatch
+1 Bovine Intervention
+1 Sheltered by Ghosts
+1 Lux Cannon
+1 Chaos Warp
+1 Swan Song
+1 Three Steps Ahead
+1 Counterspell
+1 Final Showdown
+1 Cyclonic Rift
+1 Organic Extinction
+1 Ripples of Potential
+1 Cyberdrive Awakener
+1 Kilo, Apogee Mind
+1 Surge Conductor
+1 Tekuthal, Inquiry Dominus
+1 Deepglow Skate
+1 Lasting Tarfire
+1 Steel Overseer
+1 Iron Spider, Stark Upgrade
+1 Boros Charm
+1 Improvised Arsenal
+1 Panharmonicon
+1 Lost Jitte
+1 Depthshaker Titan
+1 Alibou, Ancient Witness
+1 Darksteel Reactor
+1 Lux Artillery
+1 All That Glitters
+1 Gavel of the Righteous
+1 Kappa Cannoneer
+1 Craterclaw Colossus
+1 Blade Historian
+1 Phyrexian Metamorph
+1 Tezzeret, Cruel Captain
+1 Bygone Colossus
+1 Traxos, Scourge of Kroog
+1 Command Tower
+1 Exotic Orchard
+1 Spire of Industry
+1 Inventors' Fair
+1 Sacred Foundry
+1 Battlefield Forge
+1 Adarkar Wastes
+1 Shivan Reef
+1 Glacial Fortress
+1 Sulfur Falls
+1 Clifftop Retreat
+1 Radiant Summit
+1 Cascade Bluffs
+1 Rugged Prairie
+1 Skycloud Expanse
+1 Fabled Passage
+1 Mystic Monastery
+1 Path of Ancestry
+1 Irrigated Farmland
+1 Temple of Enlightenment
+1 Temple of Epiphany
+1 Razortide Bridge
+1 Silverbluff Bridge
+1 Rustvale Bridge
+1 Seat of the Synod
+1 Great Furnace
+1 Ancient Den
+1 Karn's Bastion
+6 Island
+2 Mountain
+1 Plains
+1 Inspiring Vantage

@@ -1,0 +1,122 @@
+{
+  "version": 1,
+  "deck": {
+    "name": "Tazri, Beacon of Unity",
+    "commanders": ["Tazri, Beacon of Unity"],
+    "colours": "WUBRG",
+    "format": "commander",
+    "list": "decks/paper/decks/tazri-beacon-of-unity.txt",
+    "status": "sleeved"
+  },
+  "summary": "Fix five colours early and deploy cheap party creatures so [[Tazri, Beacon of Unity]] costs as little as {W}. Use her activated dig to refuel the party every turn, then attack with anthems, double strike and extra combats behind [[Grand Abolisher]] or [[Heroic Intervention]].",
+  "phases": [
+    { "turns": "T1-3", "goal": "fix five colours and land 1-2 cheap party creatures", "cards": ["Farseek", "Nature's Lore", "Kodama's Reach", "Weathered Wayfarer", "Land Tax"] },
+    { "turns": "T3-5", "goal": "cast Tazri cheap off the party discount and start digging", "cards": ["Tazri, Beacon of Unity", "Zimone, Quandrix Prodigy", "Ingenious Prodigy"] },
+    { "turns": "T5-7", "goal": "attack with anthems, double strike and extra combats behind protection", "cards": ["Blade Historian", "Karlach, Fury of Avernus", "Najeela, the Blade-Blossom", "Grand Abolisher", "Heroic Intervention"] }
+  ],
+  "engine": [
+    {
+      "title": "Party count",
+      "flow": ["[[Changeling Outcast]] and [[Chomping Changeling]] count as every creature type", "[[Tazri, Beacon of Unity]] costs {1} less per creature in your party", "A full Cleric/Rogue/Warrior/Wizard party drops her to {W}"]
+    },
+    {
+      "title": "Karlach + Blade Historian",
+      "flow": ["Attack with a wide board", "[[Karlach, Fury of Avernus]] untaps all attackers and grants first strike, adding a second combat phase", "[[Blade Historian]] grants every attacker double strike", "Two combats, each with two damage steps"],
+      "note": "Karlach does not have to be among the attacking creatures (Scryfall ruling), so keep her home as a value engine, not a combat risk."
+    },
+    {
+      "title": "Najeela + Warriors",
+      "flow": ["Every changeling and every [[Springleaf Parade]] token is a Warrior", "[[Najeela, the Blade-Blossom]] makes a tapped, attacking 1/1 Warrior token whenever a Warrior attacks", "In the end-of-combat step, pay {W}{U}{B}{R}{G} to untap all attackers, grant trample/lifelink/haste, and add another combat"],
+      "note": "Najeela's own tokens were never declared as attacking creatures, so they do not re-trigger Najeela, Ingris Stingerquill or Harper Recruiter (Scryfall ruling)."
+    },
+    {
+      "title": "Tazri's dig",
+      "flow": ["Activate {2/U}{2/B}{2/R}{2/G} at any time, no timing restriction", "Look at the top six cards of your library", "Take up to two Cleric, Rogue, Warrior, Wizard and/or Ally cards into hand"]
+    }
+  ],
+  "winConditions": [
+    {
+      "name": "Full-party alpha",
+      "pieces": ["Blade Historian", "Karlach, Fury of Avernus", "Grand Abolisher", "Najeela, the Blade-Blossom"],
+      "flow": ["Full party assembled, 5+ creatures ready to attack", "[[Grand Abolisher]] stops instant-speed answers during your turn", "Attack: [[Blade Historian]] grants double strike to every attacker", "[[Karlach, Fury of Avernus]] untaps attackers and adds a second combat phase", "[[Najeela, the Blade-Blossom]] makes more Warrior tokens off each attack to refuel"],
+      "damage": "5+ attackers x double strike x 2 combat phases, usually lethal to one opponent",
+      "turn": "T7 (pilot guide rank 1)"
+    },
+    {
+      "name": "Najeela + Springleaf Parade infinite combats",
+      "pieces": ["Najeela, the Blade-Blossom", "Springleaf Parade"],
+      "flow": ["[[Springleaf Parade]] tokens can tap for any colour of mana", "Attack with 5+ creature tokens", "Pay the first {W}{U}{B}{R}{G} from lands or tokens that stayed home", "[[Najeela, the Blade-Blossom]] untaps all attackers, gives haste, adds a combat", "Tap 5 untapped attacking tokens for the next {W}{U}{B}{R}{G}; repeat", "Each Warrior attacking in the next combat makes another token"],
+      "damage": "loops until every opponent is dead",
+      "turn": "late game, with 5+ attacking creature tokens and a first {W}{U}{B}{R}{G} from lands or tokens that did not attack (attacking tokens are tapped, and new ones need haste, CR 302.6; pilot guide rank 3)"
+    },
+    {
+      "name": "Ping per attacker",
+      "pieces": ["Ingris Stingerquill", "Burakos, Party Leader"],
+      "flow": ["Attack with a wide board", "[[Ingris Stingerquill]] deals 1 damage to each opponent per attacking creature", "[[Burakos, Party Leader]] makes the defending player lose X life and makes X Treasures, X = your party size"],
+      "damage": "attackers x 1 (Ingris) plus party size (Burakos) per combat, doubling with Karlach's second combat",
+      "turn": "T6+ (pilot guide rank 4)"
+    }
+  ],
+  "swaps": [
+    { "out": "Concerted Defense", "in": "Blade Historian", "role": "anthem", "reason": "Blade Historian grants every attacker double strike while it is on the battlefield. Concerted Defense is a one-shot counterspell that only taxes a noncreature spell, and misses creature spells entirely.", "quoteOut": "Counter target noncreature spell unless its controller pays {1} plus an additional {1} for each creature in your party.", "quoteIn": "Attacking creatures you control have double strike.", "evidence": "REFUTE.md Tazri swap #1", "verdict": "recommended" },
+    { "out": "Bar the Gate", "in": "Springleaf Parade", "role": "token engine", "reason": "Springleaf Parade's tokens, plus Najeela's untap-and-haste, build toward infinite combats. Bar the Gate is a one-shot counterspell on a creature or walker spell with no lasting board presence.", "quoteOut": "Counter target creature or planeswalker spell. Venture into the dungeon.", "quoteIn": "Creature tokens you control have \"{T}: Add one mana of any color.\"", "evidence": "REFUTE.md Tazri swap #2", "verdict": "recommended" },
+    { "out": "Solemn Doomguide", "in": "Generous Gift", "role": "removal", "reason": "Generous Gift is an instant answer to any permanent, land or otherwise. Solemn Doomguide is a 5-MV Cleric whose unearth only helps creature cards already in the graveyard.", "quoteOut": "Each creature card in your graveyard that's a Cleric, Rogue, Warrior, and/or Wizard has unearth {1}{B}.", "quoteIn": "Destroy target permanent. Its controller creates a 3/3 green Elephant creature token.", "evidence": "REFUTE.md Tazri swap #3", "verdict": "recommended" },
+    { "out": "Acererak the Archlich", "in": "Infernal Grasp", "role": "removal", "reason": "Infernal Grasp is unconditional creature removal for two mana. Acererak never stays on the battlefield: its own enter trigger returns it to hand unless you've completed Tomb of Annihilation.", "quoteOut": "When Acererak enters, if you haven't completed Tomb of Annihilation, return Acererak to its owner's hand and venture into the dungeon.", "quoteIn": "Destroy target creature. You lose 2 life.", "evidence": "REFUTE.md Tazri swap #4", "verdict": "recommended" },
+    { "out": "Multiclass Baldric", "in": "Grand Abolisher", "role": "protection", "reason": "Grand Abolisher is a Cleric that locks out instant-speed answers on your alpha turn. Multiclass Baldric only prevents damage to the single equipped creature, and needs a full party to even do that.", "quoteOut": "As long as you have a full party, prevent all damage that would be dealt to equipped creature.", "quoteIn": "During your turn, your opponents can't cast spells or activate abilities of artifacts, creatures, or enchantments.", "evidence": "REFUTE.md Tazri swap #5", "verdict": "recommended" },
+    { "out": "Yuan-Ti Malison", "in": "Land Tax", "role": "card advantage", "reason": "With 10 basics in the list, Land Tax refuels three basics to hand most upkeeps it is behind on lands. Yuan-Ti Malison is a 2/1 Rogue whose evasion only works while it attacks alone.", "quoteOut": "This creature can't be blocked as long as it's attacking alone.", "quoteIn": "At the beginning of your upkeep, if an opponent controls more lands than you, you may search your library for up to three basic land cards, reveal them, put them into your hand, then shuffle.", "evidence": "REFUTE.md Tazri swap #6", "verdict": "recommended" },
+    { "out": "You Find a Cursed Idol", "in": "Twilight Prophet", "role": "card advantage", "reason": "Twilight Prophet is a recurring Vampire Cleric that drains and draws every upkeep once you have the city's blessing. You Find a Cursed Idol is a one-shot modal sorcery, and Chomping Changeling already covers its artifact/enchantment removal mode.", "quoteOut": "Steal Its Eyes — Create a Treasure token and venture into the dungeon.", "quoteIn": "At the beginning of your upkeep, if you have the city's blessing, reveal the top card of your library and put it into your hand. Each opponent loses X life and you gain X life, where X is that card's mana value.", "evidence": "REFUTE.md Tazri swap #7", "verdict": "recommended" },
+    { "out": "Thwart the Grave", "in": "The Destined Thief", "role": "card advantage", "reason": "The Destined Thief loots when your creatures deal combat damage to a player (draws three instead with a full party), can't be blocked itself, and for {U} and a tap makes another creature unblockable. Thwart the Grave is a party-discounted reanimation spell with no self-mill to feed it.", "quoteOut": "Return target creature card and up to one target Cleric, Rogue, Warrior, or Wizard creature card from your graveyard to the battlefield.", "quoteIn": "Whenever one or more creatures you control deal combat damage to one or more players, draw a card, then discard a card. If you have a full party, instead draw three cards.", "evidence": "REFUTE.md Tazri swap #8", "verdict": "recommended" },
+    { "out": "Shadowheart, Dark Justiciar", "in": "Putrefy", "role": "removal", "reason": "Putrefy is unconditional artifact or creature removal that can't be regenerated. Shadowheart's draw engine costs a creature sacrifice every activation, which this deck would rather keep attacking with. The party loses a Cleric, but the removal is worth it.", "quoteOut": "{1}{B}, {T}, Sacrifice another creature: Draw X cards, where X is that creature's power.", "quoteIn": "Destroy target artifact or creature. It can't be regenerated.", "evidence": "REFUTE.md Tazri swap #9", "verdict": "recommended" },
+    { "out": "Safana, Calimport Cutthroat", "in": "Kamiz, Obscura Oculus", "role": "party, evasion", "reason": "Kamiz makes an attacker unblockable and connives on every attack, Rogue for Rogue. Safana makes one Treasure per end step, and only while you hold the initiative.", "quoteOut": "At the beginning of your end step, if you have the initiative, create a Treasure token.", "quoteIn": "Whenever you attack, target attacking creature can't be blocked this turn. It connives.", "evidence": "REFUTE.md Tazri swap #10", "verdict": "recommended" },
+    { "out": "Hama Pashar, Ruin Seeker", "in": "Mangara, the Diplomat", "role": "party, card draw", "reason": "Mangara is a lifelink Cleric that draws off wide attacks and off an opponent's second spell each turn. Hama Pashar is a Wizard whose only text doubles dungeon room triggers, which this pass removed 7 venture/initiative cards' worth of support for.", "quoteOut": "Room abilities of dungeons you own trigger an additional time.", "quoteIn": "Whenever an opponent attacks with creatures, if two or more of those creatures are attacking you and/or planeswalkers you control, draw a card.", "evidence": "REFUTE.md Tazri swap #11", "verdict": "recommended" },
+    { "out": "Feywild Caretaker", "in": "Ingris Stingerquill", "role": "wincon, party", "reason": "Ingris pings every opponent for 1 per attacker, and its {4} makes a Wizard Soldier token and gives your creatures haste, a direct payoff for Najeela and Karlach's extra combats. REFUTE.md's original pairing was Keen Duelist for this slot, but its missed-swap pass found Ingris beats Keen Duelist too: Keen Duelist's draw is symmetric, feeding the targeted opponent a card as well. Feywild Caretaker is a 5-drop that takes the initiative and then makes one 1/1 flyer per end step while you keep it.", "quoteOut": "At the beginning of your end step, if you have the initiative, create a 1/1 blue Faerie Dragon creature token with flying.", "quoteIn": "Whenever a creature you control attacks, that creature deals 1 damage to each opponent.", "evidence": "REFUTE.md Tazri swap #12 and section 5 missed swap #2", "verdict": "recommended" },
+    { "out": "Varis, Silverymoon Ranger", "in": "Weathered Wayfarer", "role": "land fixing", "reason": "Weathered Wayfarer fetches any land to hand once an opponent is ahead on lands, which this five-colour manabase needs. Varis is an Elf Ranger, not a party type, and its venture only triggers once per turn off any creature or walker cast.", "quoteOut": "Whenever you cast a creature or planeswalker spell, venture into the dungeon. This ability triggers only once each turn.", "quoteIn": "{W}, {T}: Search your library for a land card, reveal it, put it into your hand, then shuffle. Activate only if an opponent controls more lands than you.", "evidence": "REFUTE.md Tazri swap #13", "verdict": "recommended" },
+    { "out": "Sefris of the Hidden Ways", "in": "Ingenious Prodigy", "role": "party, card draw", "reason": "Ingenious Prodigy is a Wizard for Wizard swap that can't be blocked by bigger creatures and draws a card off its own counters. Sefris only pays off once you are completing dungeons, which this pass largely cut from the list.", "quoteOut": "Whenever one or more creature cards are put into your graveyard from anywhere, venture into the dungeon. This ability triggers only once each turn.", "quoteIn": "Skulk (This creature can't be blocked by creatures with greater power.) This creature enters with X +1/+1 counters on it. At the beginning of your upkeep, if this creature has one or more +1/+1 counters on it, you may remove a +1/+1 counter from it. If you do, draw a card.", "evidence": "REFUTE.md Tazri swap #14", "verdict": "recommended" },
+    { "out": "Triumphant Adventurer", "in": "Chomping Changeling", "role": "party, removal", "reason": "Chomping Changeling is every creature type (always a party hit) and destroys an artifact or enchantment on entry, covering attack-tax enchantments like Ghostly Prison. Triumphant Adventurer is a Human Knight, not a party type.", "quoteOut": "During your turn, this creature has first strike. Whenever this creature attacks, venture into the dungeon.", "quoteIn": "Changeling (This card is every creature type.) When this creature enters, destroy up to one target artifact or enchantment.", "evidence": "REFUTE.md Tazri swap #15", "verdict": "recommended" },
+    { "out": "Archpriest of Iona", "in": "Zimone, Quandrix Prodigy", "role": "party, ramp/draw", "reason": "Zimone is a 2-MV Human Wizard that turns Land Tax's fetched basics into an extra land drop and draws extra cards once you hit 8 lands. REFUTE.md's missed-swap pass corrected the original pairing (Realmwalker for Archpriest): the stop proof had missed that the precon's unlisted cards are mostly Wizards, and Zimone (at least 5.5 on the builder's scale) beats Realmwalker (5.0), the weakest kept card.", "quoteOut": "At the beginning of combat on your turn, if you have a full party, target creature gets +1/+1 and gains flying until end of turn.", "quoteIn": "{1}, {T}: You may put a land card from your hand onto the battlefield tapped. {4}, {T}: Draw a card. If you control eight or more lands, draw two cards instead.", "evidence": "REFUTE.md Tazri swap #16 and section 5 missed swap #3", "verdict": "recommended" },
+    { "out": "Nadaar, Selfless Paladin", "in": "Torens, Fist of the Angels", "role": "party, token engine", "reason": "Torens makes a 1/1 Human Soldier token with training on every creature spell you cast, a direct feeder for the go-wide plan. Nadaar is a Dragon Knight, not a party type, and its anthem needs a completed dungeon that this pass mostly cut support for.", "quoteOut": "Other creatures you control get +1/+1 as long as you've completed a dungeon.", "quoteIn": "Whenever you cast a creature spell, create a 1/1 green and white Human Soldier creature token with training.", "evidence": "REFUTE.md Tazri swap #17", "verdict": "recommended" },
+    { "out": "Bojuka Bog", "in": "Eclipsed Steppe", "role": "land", "reason": "Eclipsed Steppe is typed Plains Swamp, so the deck's fetches can find it, and it enters untapped with two or more basics on the battlefield. Bojuka Bog always enters tapped and its graveyard-hate trigger does nothing for this deck's plan.", "quoteOut": "This land enters tapped. When this land enters, exile target player's graveyard.", "quoteIn": "This land enters tapped unless you control two or more basic lands.", "evidence": "REFUTE.md Tazri swap L1", "verdict": "recommended" },
+    { "out": "Ash Barrens", "in": "Sodden Verdure", "role": "land", "reason": "Sodden Verdure is typed Forest Island and taps for U, the deck's tightest colour, while entering untapped with two or more basics. Ash Barrens is a {C} land, or for {1} a basic landcycler (tazri-report.md L2).", "quoteOut": "Basic landcycling {1} ({1}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)", "quoteIn": "This land enters tapped unless you control two or more basic lands.", "evidence": "REFUTE.md Tazri swap L2", "verdict": "recommended" }
+  ],
+  "keepers": [
+    { "card": "Spelunking", "why": "Its ruling: lands simply put onto the battlefield tapped (Farseek, Kodama's Reach, the Courtyard/Hideout fetches) enter untapped, and self-tapping lands (tri-lands, a shock you don't pay 2 life for) can enter untapped because you choose the order of the two effects." },
+    { "card": "Stick Together", "why": "It is symmetric (each player keeps up to one Cleric, Rogue, Warrior and Wizard), so it hurts the go-wide board too. It earns its slot when the board is already against you: you keep a full party of four, while opponents whose creatures are not party types keep fewer. Never cast it while ahead on board (pilot guide)." },
+    { "card": "Coveted Prize", "why": "It tutors any card to hand; with a full party it then casts a spell of mana value 4 or less from hand for free (the tutored card may be that spell). It most often finds Blade Historian, Grand Abolisher or Destined Warrior, not the whole combo, since the ruling confirms the free cast happens on resolution and X must be 0 (no free Springleaf Parade)." },
+    { "card": "Linvala, Shield of Sea Gate", "why": "Looks like a plain 3-mana flyer, but her full-party ability can be pointed at a mana rock or the best blocker on the alpha turn, and she sacrifices herself for hexproof or indestructible when the board is under pressure." },
+    { "card": "Mirror Entity", "why": "A mana sink that only shines with the Springleaf Parade token army; at X=0 it kills your own board, since it overwrites base power and toughness to 0/0 (Scryfall ruling). Activate after blocks, with X high enough that Tazri (4/6) and Zagras (4/4) do not shrink." }
+  ],
+  "nearTies": [],
+  "mulligan": {
+    "keep": [
+      "3+ lands including a W source plus one other colour",
+      "at least 1 ramp or fixing piece (Farseek, Nature's Lore, Weathered Wayfarer, a rock)",
+      "at least 2 party creatures at mana value 3 or less",
+      "one party creature plus Tazri's dig mana is acceptable, since Tazri is free card flow from the command zone"
+    ],
+    "mulligan": [
+      "no white source: Tazri, Grand Abolisher and Stick Together all strand (Blade Historian's hybrid cost can be paid with red)",
+      "6+ lands and land-fetch spells with zero creatures",
+      "two tapped lands and nothing castable before T4",
+      "a hand of only 4+ MV party payoffs with no mana fixing"
+    ]
+  },
+  "pilotRules": [
+    "Activate Tazri's dig at the end of an opponent's turn, before yours; it has no timing restriction.",
+    "Fill missing party slots with the dig before digging for Najeela, Karlach or Blade Historian.",
+    "Commit 4-5 bodies to the board, but keep 1-2 party creatures in hand against a sweeper; Tazri's dig rebuilds the rest.",
+    "Attack order: combat triggers resolve, then everything except Najeela/Karlach/Ingris attacks, then Najeela's tokens, then blocks, then Mirror Entity's X, then damage, then Najeela's end-of-combat activation.",
+    "Never tap a Parade or Najeela token made this turn for mana without haste (CR 302.6).",
+    "Hold Heroic Intervention or Selfless Spirit until the board is fully committed, then fire it against a destroy-based wipe.",
+    "Use Grand Abolisher only on your own turn; it does nothing to protect against instant-speed answers on an opponent's turn.",
+    "Mangara, the Diplomat trades Hama Pashar's Wizard slot for a Cleric; keep casting Mangara into open mana anyway: the extra draws from wide attacks and from punishing a second spell matter more than the dungeon package this list cut."
+  ],
+  "sources": [
+    "decks/paper/decks/tazri-beacon-of-unity.txt",
+    "verify-2026-10-07/primers/base/tazri-beacon-of-unity.txt",
+    "verify-2026-10-02/tam-precons/tazri-report.md",
+    "verify-2026-10-02/tam-precons/REFUTE.md",
+    "verify-2026-10-02/tam-precons/newcards-report.md",
+    ".claude/skills/deck-building/reference/decks/tazri-beacon-of-unity.md",
+    "CLAUDE.md Session Log, 2026-10-02 entries"
+  ]
+}

@@ -1,0 +1,81 @@
+=== POOL ===
+pool size: 2897 (open 2897, in-deck 0), unresolved: 12
+newest sets seen in legal pool: akr, big, blb, dft, dmr, dsk, ecc, ecl, eoc, eoe, fdn, fin, hbg, inr, j25, lci, m19, m21, mkm, msh, om1, otj, pio, pspl, rix, rvr, soa, sos, spm, sta, tdc, tdm, thb, tla, tmt, vow, woe, xln
+unresolved names: Aang, Swift Savior // Aang, Swift Savior; Aang, at the Crossroads // Aang, at the Crossroads; Birgi, God of Storytelling // Birgi, God of Storytelling; Growing Rites of Itlimoc // Growing Rites of Itlimoc; Kefka, Court Mage // Kefka, Court Mage; Ojer Axonil, Deepest Might // Ojer Axonil, Deepest Might; Scavenger Regent // Scavenger Regent; Spider-Man, Peter Parker // Spider-Man, Peter Parker; Stormshriek Feral // Stormshriek Feral; Stump Stomp // Stump Stomp; Twinmaw Stormbrood // Twinmaw Stormbrood; Whirlwing Stormbrood // Whirlwing Stormbrood
+
+=== TOP 5 ARCHETYPES (decks / WR / coverage / score) ===
+Izzet Spellementals | decks 697 | WR n/a (0-0) | coverage 92.9% | score 0.636
+Izzet | decks 113 | WR 66.5% (445-224) | coverage 93.1% | score 0.619
+Temur Prowess | decks 14 | WR n/a (0-0) | coverage 90.3% | score 0.619
+5c Elementals | decks 67 | WR n/a (0-0) | coverage 88.3% | score 0.605
+Roaming Elementals | decks 87 | WR n/a (0-0) | coverage 88.1% | score 0.604
+
+=== BUILD: Izzet Prowess ===
+colors URG | avg nonland cmc 1.73 | land target 21 | nonland slots filled 39 (core 20, substitute 19, filler 0) | land slots filled 15 | side slots 15
+MAIN:
+  4 Slickshot Show-Off [open]
+  4 Opt [open]
+  4 Sleight of Hand [open]
+  4 Burst Lightning [open]
+  4 Boomerang Basics [open]
+  4 Stock Up [open]
+  3 Eddymurk Crab [open]
+  3 Flow State [open]
+  1 Flow State [open]
+  3 Bounce Off [open]
+  1 Bounce Off [open]
+  1 Secret Identity [open]
+  3 Elusive Otter [open]
+  4 Spirebluff Canal [open]
+  4 Steam Vents [open]
+  4 Riverpyre Verge [open]
+  2 Multiversal Passage [open]
+  1 Willowrush Verge [open]
+  6 Island [basic (unlimited)]
+SIDEBOARD:
+  4 Spell Pierce [open]
+  2 Ral, Crackling Wit [open]
+  2 Get Out [open]
+  2 Soul-Guide Lantern [open]
+  4 Sear [open]
+  1 Slagstorm [open]
+SUBSTITUTIONS (missing core card -> owned substitute):
+  Stormchaser's Talent -> 4x Sleight of Hand
+  Sleight of Hand -> 4x Boomerang Basics
+  Boomerang Basics -> 4x Stock Up
+  Stock Up -> 3x Flow State
+  Flow State -> 3x Bounce Off
+  Bounce Off -> 1x Secret Identity
+
+=== RUNNER-UP: Izzet ===
+  4x Spirebluff Canal (inc 100%)
+  4x Steam Vents (inc 100%)
+  3x Burst Lightning (inc 99%)
+  4x Riverpyre Verge (inc 99%)
+  4x Island (inc 94%)
+  4x Opt (inc 92%)
+  4x Sleight of Hand (inc 92%)
+  4x Eddymurk Crab (inc 91%)
+  2x Get Out (inc 90%)
+  4x Prismari Charm (inc 90%)
+  4x Sunderflock (inc 90%)
+  3x Traumatic Critique (inc 90%)
+  4x Hearth Elemental (inc 89%)
+  2x Spell Pierce (inc 88%)
+  1x Stormcarved Coast (inc 84%)
+  2x Impractical Joke (inc 82%)
+  2x Spell Snare (inc 74%)
+  3x Winternight Stories (inc 53%)
+
+=== VALIDATION (deck-validation.ts, standard) ===
+  PASS: no issues
+
+=== OPTIMIZER SCORE (advisory, deck-optimizer.ts) ===
+  legality issues: 0
+  land delta: 0 (built 21 vs target 21)
+  score: 70/100 (ratioScore fixed at 70 — full quota-ratio engine out of scope, PLACEHOLDER, see report caveats)
+
+=== BUY LIST (<=15, missing core cards vs Izzet Prowess) ===
+  4x Stormchaser's Talent (core inclusion 100%, $3.47)
+
+proposal written: C:\Users\QuLeR\MTG-deck-builder\decks\paper\proposals\standard-izzet-prowess-arena.txt

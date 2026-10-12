@@ -1,0 +1,46 @@
+2 Forsaken Miner
+3 Shoot the Sheriff
+1 Bitter Triumph
+1 Insatiable Avarice
+1 Lost Jitte
+1 Peter Parker's Camera
+1 Lavaspur Boots
+2 Undying Malice
+3 Corrupted Conviction
+1 Infestation Sage
+1 Fountainport Bell
+2 Unfortunate Accident
+1 Callous Inspector
+1 The Soul Stone
+1 Torpor Orb
+1 Wishclaw Talisman
+1 Day of Black Sun
+1 Bloodghast
+2 Umbral Collar Zealot
+1 Lively Dirge
+1 Outrageous Robbery
+1 Bandit's Talent
+1 Morlun, Devourer of Spiders
+1 Vengeful Bloodwitch
+1 Feed the Swarm
+1 Nullpriest of Oblivion
+1 Mazemind Tome
+1 Dread Summons
+1 Joo Dee, One of Many
+1 Servant of the Stinger
+1 Raven of Fell Omens
+1 Blood Hustler
+1 Blooming Marsh
+1 Concealed Courtyard
+1 Festering Gulch
+1 Forlorn Flats
+1 Jagged Barrens
+1 Jungle Hollow
+1 Mudflat Village
+1 Overgrown Tomb
+12 Swamp
+
+// Sideboard
+1 Elegy Acolyte
+1 Realm of Koh
+1 Rush of Dread

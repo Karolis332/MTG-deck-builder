@@ -1,0 +1,10 @@
+BASE obj 82.20 DS 70.1 pen 0 {"land":36,"ramp":12,"draw":10,"removal":11,"board_wipe":4,"protection":6} mana=89 curve=91 interaction=96 advantage=75 win=63 synergy=74 meta=50 structure=100
+   0.00  Sram, Senior Edificer => Violent Echoes   DS 0.0 pen 0 mana=83 curve=91 interaction=96 advantage=75 win=63 synergy=72 meta=50 structure=100
+  -2.01  Ajani Resolute => Village Pillagers   DS 0.0 pen 1 mana=89 curve=91 interaction=96 advantage=75 win=63 synergy=74 meta=50 structure=100
+   0.08  Decanter of Endless Water => Boros Locket   DS 0.0 pen 0 mana=89 curve=91 interaction=96 advantage=75 win=63 synergy=74 meta=50 structure=100
+  -0.00  Cloud Key => Another Round   DS 0.0 pen 0 mana=89 curve=91 interaction=96 advantage=75 win=63 synergy=74 meta=50 structure=100
+  -0.05  Squad Commander => Steel Hellkite   DS 0.0 pen 0 mana=89 curve=90 interaction=96 advantage=75 win=63 synergy=73 meta=50 structure=100
+  -0.14  Bender's Waterskin => Sami, Wildcat Captain   DS 0.0 pen 0 mana=89 curve=90 interaction=96 advantage=75 win=63 synergy=74 meta=50 structure=100
+  -0.02  Talon Gates of Madara => Fabled Passage   DS 0.0 pen 0 mana=89 curve=91 interaction=96 advantage=75 win=63 synergy=74 meta=50 structure=100
+   0.03  Kindred Judgment => Chains of Custody   DS 0.0 pen 0 mana=89 curve=92 interaction=96 advantage=75 win=63 synergy=77 meta=50 structure=100
+ALL  obj 73.61 (-8.59) DS 63.6 pen 1 {"land":36,"ramp":11,"draw":11,"removal":13,"board_wipe":4,"protection":5} mana=84 curve=90 interaction=96 advantage=75 win=55 synergy=72 meta=50 structure=100

@@ -1,0 +1,472 @@
+Abraded Bluffs | own 1 | other - | ins 0 | free 1
+Adarkar Wastes | own 1 | other - | ins 1 | free 0
+Ancient Den | own 1 | other - | ins 1 | free 0
+Arcane Lighthouse | own 1 | other - | ins 0 | free 1
+Arid Archway | own 1 | other - | ins 0 | free 1
+Ash Barrens | own 2 | other the1 | ins 0 | free 1
+Astral Cornucopia | own 1 | other - | ins 1 | free 0
+Base Camp | own 1 | other taz1 | ins 0 | free 0
+Battlefield Forge | own 1 | other - | ins 1 | free 0
+Bloodstained Mire | own 1 | other taz1 | ins 0 | free 0
+Brokers Hideout | own 1 | other taz1 | ins 0 | free 0
+Buried Ruin | own 1 | other - | ins 1 | free 0
+Cabaretti Courtyard | own 1 | other taz1 | ins 0 | free 0
+Cascade Bluffs | own 1 | other - | ins 1 | free 0
+Clifftop Retreat | own 2 | other tam1 | ins 1 | free 0
+Command Tower | own 5 | other mer1,tam1,taz1 | ins 1 | free 1
+Conduit Pylons | own 2 | other - | ins 0 | free 2
+Dedicated Commons | own 1 | other tam1 | ins 0 | free 0
+Deserted Beach | own 1 | other tam1 | ins 0 | free 0
+Eroded Canyon | own 2 | other - | ins 0 | free 2
+Escape Tunnel | own 1 | other the1 | ins 0 | free 0
+Everflowing Chalice | own 1 | other - | ins 1 | free 0
+Evolving Wilds | own 1 | other - | ins 1 | free 0
+Exotic Orchard | own 5 | other mer1,tam1,taz1 | ins 1 | free 1
+Fabled Passage | own 3 | other mer1 | ins 0 | free 2
+Fatehold Annex | own 1 | other tam1 | ins 0 | free 0
+Glacial Fortress | own 1 | other - | ins 1 | free 0
+Glittering Massif | own 1 | other - | ins 1 | free 0
+Great Furnace | own 1 | other - | ins 1 | free 0
+Great Hall of the Citadel | own 1 | other tam1 | ins 0 | free 0
+Hallowed Fountain | own 1 | other taz1 | ins 0 | free 0
+Hangarback Walker | own 1 | other - | ins 1 | free 0
+Hidden Grotto | own 1 | other - | ins 0 | free 1
+High Market | own 1 | other mer1 | ins 0 | free 0
+Innovative Commons | own 1 | other tam1 | ins 0 | free 0
+Inspiring Vantage | own 1 | other taz1 | ins 0 | free 0
+Interplanar Beacon | own 1 | other tam1 | ins 0 | free 0
+Irrigated Farmland | own 1 | other - | ins 1 | free 0
+Karn's Bastion | own 1 | other - | ins 1 | free 0
+Lonely Arroyo | own 1 | other - | ins 0 | free 1
+Lonely Sandbar | own 1 | other - | ins 1 | free 0
+Maestros Theater | own 1 | other - | ins 0 | free 1
+Mana Confluence | own 1 | other tam1 | ins 0 | free 0
+Mirage Mesa | own 1 | other - | ins 0 | free 1
+Mishra's Bauble | own 1 | other - | ins 0 | free 1
+Muraganda Raceway | own 1 | other - | ins 0 | free 1
+Myriad Landscape | own 2 | other imo1,mer1 | ins 0 | free 0
+Mystic Monastery | own 1 | other - | ins 1 | free 0
+Nesting Grounds | own 2 | other the1 | ins 0 | free 1
+Opal Palace | own 2 | other - | ins 0 | free 2
+Path of Ancestry | own 5 | other mer1,taz1 | ins 0 | free 3
+Plaza of Harmony | own 1 | other ram1 | ins 0 | free 0
+Radiant Fountain | own 1 | other - | ins 0 | free 1
+Radiant Summit | own 1 | other - | ins 1 | free 0
+Razortide Bridge | own 1 | other - | ins 1 | free 0
+Reliquary Tower | own 1 | other - | ins 0 | free 1
+Riveteers Overlook | own 2 | other - | ins 0 | free 2
+Rogue's Passage | own 2 | other - | ins 0 | free 2
+Rugged Prairie | own 1 | other - | ins 1 | free 0
+Rumble Arena | own 1 | other - | ins 0 | free 1
+Rustvale Bridge | own 1 | other - | ins 1 | free 0
+Sacred Foundry | own 2 | other taz1 | ins 1 | free 0
+Sandstorm Verge | own 1 | other - | ins 0 | free 1
+Seachrome Coast | own 1 | other tam1 | ins 0 | free 0
+Seat of the Synod | own 1 | other - | ins 1 | free 0
+Secluded Steppe | own 1 | other - | ins 1 | free 0
+Shivan Reef | own 2 | other tam1 | ins 1 | free 0
+Silverbluff Bridge | own 1 | other - | ins 1 | free 0
+Skycloud Expanse | own 1 | other - | ins 1 | free 0
+Skycoach Waypoint | own 1 | other - | ins 0 | free 1
+Spire of Industry | own 1 | other - | ins 1 | free 0
+Spirebluff Canal | own 1 | other taz1 | ins 0 | free 0
+Steam Vents | own 1 | other taz1 | ins 0 | free 0
+Stonecoil Serpent | own 1 | other - | ins 0 | free 1
+Study Hall | own 3 | other - | ins 0 | free 3
+Sulfur Falls | own 1 | other - | ins 1 | free 0
+Tarnation Vista | own 1 | other - | ins 0 | free 1
+Temple of Enlightenment | own 1 | other - | ins 1 | free 0
+Temple of Epiphany | own 1 | other - | ins 1 | free 0
+Temple of the False God | own 2 | other - | ins 0 | free 2
+Temple of Triumph | own 1 | other - | ins 1 | free 0
+Terramorphic Expanse | own 4 | other - | ins 0 | free 4
+The Mycosynth Gardens | own 1 | other - | ins 1 | free 0
+Walking Ballista | own 1 | other the1 | ins 0 | free 0
+War Room | own 1 | other - | ins 0 | free 1
+Windswept Heath | own 1 | other taz1 | ins 0 | free 0
+Witch's Clinic | own 1 | other - | ins 0 | free 1
+Wooded Foothills | own 1 | other taz1 | ins 0 | free 0
+Archpriest of Iona | own 1 | other - | ins 0 | free 1
+Concerted Defense | own 1 | other - | ins 0 | free 1
+Consign to Memory | own 1 | other - | ins 0 | free 1
+Dispatch | own 1 | other - | ins 1 | free 0
+Elixir of Immortality | own 1 | other - | ins 0 | free 1
+Erode | own 1 | other tam1 | ins 0 | free 0
+Explosive Derailment | own 2 | other - | ins 0 | free 2
+Eye of Jace | own 1 | other - | ins 0 | free 1
+Final Showdown | own 1 | other - | ins 0 | free 1
+Flickering Ward | own 1 | other - | ins 0 | free 1
+Fountainport Bell | own 1 | other - | ins 0 | free 1
+Getaway Glamer | own 1 | other - | ins 0 | free 1
+Ingenious Prodigy | own 1 | other taz1 | ins 0 | free 0
+Jailbreak Scheme | own 1 | other - | ins 0 | free 1
+Land Tax | own 1 | other taz1 | ins 0 | free 0
+Lavaspur Boots | own 1 | other - | ins 0 | free 1
+Liliana the Faultless | own 1 | other tam1 | ins 0 | free 0
+Lost Jitte | own 1 | other - | ins 0 | free 1
+Loyal Tutor | own 1 | other - | ins 0 | free 1
+Metamorphic Blast | own 2 | other - | ins 0 | free 2
+Multiclass Baldric | own 1 | other - | ins 0 | free 1
+Path to Exile | own 1 | other tam1 | ins 0 | free 0
+Peter Parker's Camera | own 0 | other - | ins 0 | free 0
+Phantom Interference | own 3 | other - | ins 0 | free 3
+Practiced Tactics | own 1 | other - | ins 0 | free 1
+Raffine's Guidance | own 1 | other - | ins 0 | free 1
+Rapid Hybridization | own 1 | other - | ins 0 | free 1
+Requisition Raid | own 1 | other - | ins 0 | free 1
+Rustler Rampage | own 2 | other - | ins 0 | free 2
+Sentinel's Eyes | own 1 | other - | ins 0 | free 1
+Sol Ring | own 6 | other imo1,mer1,tam1,taz1 | ins 1 | free 1
+Soul-Guide Lantern | own 1 | other - | ins 1 | free 0
+Spell Pierce | own 1 | other - | ins 0 | free 1
+Strix Serenade | own 1 | other - | ins 0 | free 1
+Swan Song | own 1 | other - | ins 1 | free 0
+Swords to Plowshares | own 2 | other taz1 | ins 1 | free 0
+Syncopate | own 1 | other - | ins 0 | free 1
+Take the Fall | own 1 | other - | ins 0 | free 1
+Three Steps Ahead | own 1 | other - | ins 0 | free 1
+Wayfarer's Bauble | own 2 | other imo1 | ins 0 | free 1
+Weathered Wayfarer | own 1 | other taz1 | ins 0 | free 0
+Abrade | own 1 | other - | ins 0 | free 1
+Academic Ascent | own 1 | other - | ins 0 | free 1
+Ajani Resolute | own 1 | other tam1 | ins 0 | free 0
+Arcane Signet | own 6 | other imo1,mer1,tam1,taz1 | ins 1 | free 1
+Boros Charm | own 1 | other - | ins 0 | free 1
+Bovine Intervention | own 1 | other - | ins 0 | free 1
+Brimstone Roundup | own 1 | other - | ins 0 | free 1
+Campus Crier | own 1 | other - | ins 0 | free 1
+Cathartic Pyre | own 1 | other - | ins 0 | free 1
+Cathartic Reunion | own 1 | other - | ins 0 | free 1
+Caught in the Crossfire | own 1 | other - | ins 0 | free 1
+Contagion Clasp | own 1 | other - | ins 0 | free 1
+Coretapper | own 1 | other - | ins 1 | free 0
+Countersculpt | own 1 | other - | ins 0 | free 1
+Counterspell | own 1 | other tam1 | ins 0 | free 0
+Curse of the Swine | own 1 | other - | ins 0 | free 1
+Darksteel Mutation | own 1 | other - | ins 0 | free 1
+Dawnbringer Cleric | own 1 | other - | ins 0 | free 1
+Deadeye Duelist | own 1 | other - | ins 0 | free 1
+Demon's Horn | own 1 | other - | ins 0 | free 1
+Demonic Ruckus | own 1 | other - | ins 0 | free 1
+Dovin's Veto | own 1 | other tam1 | ins 0 | free 0
+Emerald Medallion | own 1 | other the1 | ins 0 | free 0
+Enthusiastic Mechanaut | own 1 | other - | ins 1 | free 0
+Entrancing Melody | own 1 | other - | ins 0 | free 1
+Essence Burn | own 1 | other - | ins 0 | free 1
+Essence Capture | own 2 | other - | ins 0 | free 2
+Expansion Algorithm | own 1 | other - | ins 0 | free 1
+Experimental Augury | own 1 | other - | ins 1 | free 0
+Fatehold Charm | own 1 | other - | ins 0 | free 1
+Fellwar Stone | own 2 | other taz1 | ins 0 | free 1
+Fierce Retribution | own 1 | other - | ins 0 | free 1
+Flesh Duplicate | own 1 | other - | ins 0 | free 1
+Fling | own 1 | other - | ins 0 | free 1
+Gavel of the Righteous | own 1 | other - | ins 1 | free 0
+Geist of Saint Thalia | own 1 | other tam1 | ins 0 | free 0
+Gleaming Barrier | own 1 | other - | ins 0 | free 1
+Grand Abolisher | own 1 | other taz1 | ins 0 | free 0
+Highway Robbery | own 1 | other - | ins 0 | free 1
+Hindering Light | own 2 | other - | ins 0 | free 2
+Idol of False Gods | own 1 | other - | ins 0 | free 1
+Idol of Oblivion | own 1 | other the1 | ins 0 | free 0
+Journey to Nowhere | own 1 | other - | ins 0 | free 1
+Kor Spiritdancer | own 1 | other - | ins 0 | free 1
+Lasting Tarfire | own 1 | other - | ins 0 | free 1
+Lembas | own 1 | other - | ins 0 | free 1
+Lightning Greaves | own 1 | other mer1 | ins 0 | free 0
+Magda, the Hoardmaster | own 1 | other - | ins 0 | free 1
+Magebane Lizard | own 1 | other - | ins 0 | free 1
+Mazemind Tome | own 1 | other - | ins 0 | free 1
+Moxite Refinery | own 1 | other - | ins 1 | free 0
+Myr Retriever | own 1 | other imo1 | ins 0 | free 0
+Negate | own 1 | other - | ins 0 | free 1
+Nimble Trapfinder | own 1 | other taz1 | ins 0 | free 0
+No Admittance | own 1 | other - | ins 0 | free 1
+Ornithopter of Paradise | own 1 | other - | ins 0 | free 1
+Patchwork Automaton | own 1 | other - | ins 0 | free 1
+Pentad Prism | own 1 | other - | ins 1 | free 0
+Proctor of Potential | own 1 | other - | ins 0 | free 1
+Prophetic Prism | own 1 | other - | ins 0 | free 1
+Pull from Tomorrow | own 1 | other - | ins 1 | free 0
+Repurposed Enforcer | own 1 | other - | ins 0 | free 1
+Return the Favor | own 3 | other - | ins 0 | free 3
+Ride Down | own 1 | other - | ins 0 | free 1
+Ripples of Potential | own 1 | other - | ins 1 | free 0
+Selfless Spirit | own 1 | other taz1 | ins 0 | free 0
+Sheltered by Ghosts | own 1 | other - | ins 0 | free 1
+Shifting Grift | own 2 | other - | ins 0 | free 2
+Skullcrack | own 1 | other - | ins 0 | free 1
+Slick Sequence | own 1 | other - | ins 0 | free 1
+Slickshot Show-Off | own 1 | other - | ins 0 | free 1
+Spirit Mantle | own 1 | other - | ins 0 | free 1
+Sram, Senior Edificer | own 1 | other - | ins 0 | free 1
+Starfield Mystic | own 1 | other - | ins 0 | free 1
+Steel Overseer | own 1 | other - | ins 1 | free 0
+Steelswarm Operator | own 1 | other - | ins 1 | free 0
+Sterling Keykeeper | own 1 | other - | ins 0 | free 1
+Stonework Packbeast | own 1 | other taz1 | ins 0 | free 0
+Sun Droplet | own 1 | other - | ins 0 | free 1
+Sword of the Animist | own 1 | other - | ins 0 | free 1
+Sygg, Wanderwine Wisdom // Sygg, Wanderbrine Shield | own 0 | other - | ins 0 | free 0
+Syr Ginger, the Meal Ender | own 1 | other the1 | ins 0 | free 0
+Tablet of Compleation | own 1 | other - | ins 0 | free 1
+Take Up the Shield | own 1 | other - | ins 0 | free 1
+Talisman of Conviction | own 1 | other tam1 | ins 0 | free 0
+Talisman of Progress | own 1 | other tam1 | ins 0 | free 0
+Teyo, Lightshield Expert | own 1 | other - | ins 0 | free 1
+The Echoverse Fulcrum | own 2 | other - | ins 0 | free 2
+The Key to the Vault | own 1 | other - | ins 0 | free 1
+The Ooze | own 1 | other the1 | ins 0 | free 0
+Thought Vessel | own 1 | other imo1 | ins 0 | free 0
+Thrummingbird | own 2 | other tam1 | ins 1 | free 0
+Tomik, Orzhov Lawmage | own 1 | other - | ins 0 | free 1
+Torpor Orb | own 1 | other - | ins 0 | free 1
+Transcendent Envoy | own 1 | other - | ins 0 | free 1
+Unsettled Mariner | own 1 | other taz1 | ins 0 | free 0
+Way of the Pyromancer | own 1 | other tam1 | ins 0 | free 0
+Yuan-Ti Malison | own 1 | other - | ins 0 | free 1
+Academy Manufactor | own 1 | other the1 | ins 0 | free 0
+Adaptive Automaton | own 1 | other - | ins 0 | free 1
+Adept Watershaper | own 1 | other - | ins 0 | free 1
+All-Fates Scroll | own 1 | other - | ins 1 | free 0
+Another Round | own 1 | other - | ins 0 | free 1
+Ashnod's Altar | own 1 | other imo1 | ins 0 | free 0
+Aven Interrupter | own 1 | other - | ins 0 | free 1
+Azorius Locket | own 1 | other - | ins 0 | free 1
+Bandit's Haul | own 1 | other - | ins 0 | free 1
+Bar the Gate | own 1 | other - | ins 0 | free 1
+Barkform Harvester | own 1 | other - | ins 0 | free 1
+Bender's Waterskin | own 1 | other - | ins 0 | free 1
+Bitterthorn, Nissa's Animus | own 1 | other - | ins 0 | free 1
+Boros Locket | own 1 | other - | ins 0 | free 1
+Breeches, the Blastmaker | own 1 | other - | ins 0 | free 1
+Burning Curiosity | own 1 | other - | ins 0 | free 1
+Burnished Hart | own 1 | other - | ins 0 | free 1
+Canoptek Wraith | own 1 | other imo1 | ins 0 | free 0
+Chains of Custody | own 1 | other - | ins 0 | free 1
+Chromatic Lantern | own 1 | other taz1 | ins 0 | free 0
+Cloud Key | own 1 | other - | ins 1 | free 0
+Commander's Insight | own 1 | other - | ins 0 | free 1
+Commander's Sphere | own 2 | other - | ins 0 | free 2
+Cruel Calculations | own 1 | other - | ins 0 | free 1
+Deepmuck Desperado | own 1 | other - | ins 0 | free 1
+Dovin, Hand of Control | own 1 | other - | ins 0 | free 1
+Druidic Satchel | own 1 | other - | ins 0 | free 1
+Eidolon of Countless Battles | own 1 | other - | ins 0 | free 1
+Eiganjo Dynastorian // Replenish | own 0 | other - | ins 0 | free 0
+Elementalist's Palette | own 1 | other - | ins 0 | free 1
+Emeritus of Truce // Swords to Plowshares | own 0 | other - | ins 0 | free 0
+Emry, Lurker of the Loch | own 1 | other - | ins 1 | free 0
+Ferocification | own 1 | other - | ins 0 | free 1
+Firdoch Core | own 1 | other - | ins 0 | free 1
+Flame of Anor | own 1 | other - | ins 0 | free 1
+Flux Channeler | own 1 | other tam1 | ins 0 | free 0
+Fortune, Loyal Steed | own 1 | other - | ins 0 | free 1
+Foundry Inspector | own 1 | other imo1 | ins 0 | free 0
+Frantic Search | own 1 | other - | ins 0 | free 1
+Generous Gift | own 1 | other taz1 | ins 0 | free 0
+Geralf, the Fleshwright | own 2 | other - | ins 0 | free 2
+Ghostly Prison | own 1 | other - | ins 0 | free 1
+Gift of Immortality | own 1 | other - | ins 0 | free 1
+Glasspool Mimic // Glasspool Shore | own 0 | other - | ins 0 | free 0
+Golem Foundry | own 1 | other - | ins 1 | free 0
+Hama Pashar, Ruin Seeker | own 1 | other - | ins 0 | free 1
+Harper Recruiter | own 1 | other taz1 | ins 0 | free 0
+Identity Echo | own 1 | other - | ins 0 | free 1
+Imoen, Mystic Trickster | own 1 | other taz1 | ins 0 | free 0
+Inspirit, Flagship Vessel | own 1 | other - | ins 1 | free 0
+Ionize | own 1 | other - | ins 0 | free 1
+Iron Spider, Stark Upgrade | own 1 | other - | ins 1 | free 0
+Keeper of the Quiet Hour | own 1 | other - | ins 0 | free 1
+Kilo, Apogee Mind | own 1 | other - | ins 1 | free 0
+Lilah, Undefeated Slickshot | own 1 | other - | ins 0 | free 1
+Linvala, Shield of Sea Gate | own 1 | other taz1 | ins 0 | free 0
+Lotus Ring | own 1 | other - | ins 0 | free 1
+Loxodon Warhammer | own 1 | other - | ins 0 | free 1
+Martial Impetus | own 1 | other - | ins 0 | free 1
+Mindseeker Oculus | own 1 | other - | ins 0 | free 1
+Mirror Entity | own 1 | other taz1 | ins 0 | free 0
+Mu Yanling, Sky Dancer | own 1 | other - | ins 0 | free 1
+Murmuring Volume | own 1 | other - | ins 0 | free 1
+Nadaar, Selfless Paladin | own 1 | other - | ins 0 | free 1
+Nils, Discipline Enforcer | own 1 | other - | ins 0 | free 1
+Nimble Brigand | own 1 | other - | ins 0 | free 1
+One Last Job | own 1 | other - | ins 0 | free 1
+Palladium Myr | own 1 | other - | ins 0 | free 1
+Patrolling Peacemaker | own 1 | other - | ins 1 | free 0
+Pearl-Ear, Imperial Advisor | own 1 | other - | ins 0 | free 1
+Pinnacle Emissary | own 1 | other - | ins 1 | free 0
+Potioner's Trove | own 1 | other - | ins 0 | free 1
+Pristine Talisman | own 1 | other - | ins 0 | free 1
+Redemption Arc | own 1 | other - | ins 0 | free 1
+Resourceful Defense | own 1 | other - | ins 1 | free 0
+Saheeli, Sublime Artificer | own 1 | other tam1 | ins 0 | free 0
+Secret Rendezvous | own 1 | other - | ins 0 | free 1
+Seize the Secrets | own 1 | other - | ins 0 | free 1
+Seize the Spoils | own 1 | other - | ins 0 | free 1
+Shielded by Faith | own 1 | other - | ins 0 | free 1
+Skewer the Critics | own 1 | other - | ins 0 | free 1
+Slickshot Lockpicker | own 1 | other - | ins 0 | free 1
+Slickshot Vault-Buster | own 1 | other - | ins 0 | free 1
+Solar Array | own 1 | other - | ins 1 | free 0
+Stroke of Genius | own 1 | other - | ins 0 | free 1
+Surge Conductor | own 1 | other - | ins 1 | free 0
+Take for a Ride | own 1 | other - | ins 0 | free 1
+Teyo, the Shieldmage | own 1 | other - | ins 0 | free 1
+Tezzeret, Cruel Captain | own 1 | other - | ins 1 | free 0
+The Destined Thief | own 1 | other taz1 | ins 0 | free 0
+The Destined White Mage | own 1 | other taz1 | ins 0 | free 0
+Thirst for Knowledge | own 1 | other - | ins 1 | free 0
+Titan Forge | own 1 | other - | ins 1 | free 0
+Treasure Nabber | own 1 | other - | ins 0 | free 1
+Universal Surveillance | own 1 | other - | ins 1 | free 0
+Uthros Psionicist | own 1 | other - | ins 1 | free 0
+Uthros Research Craft | own 1 | other - | ins 1 | free 0
+Variable Chaser // Arc of Fortune | own 0 | other - | ins 0 | free 0
+Way of the Cryomancer | own 1 | other - | ins 0 | free 1
+Way of the Mentor | own 1 | other tam1 | ins 0 | free 0
+Way of the Warlord | own 1 | other tam1 | ins 0 | free 0
+White Plume Adventurer | own 1 | other taz1 | ins 0 | free 0
+Wickersmith's Tools | own 1 | other - | ins 0 | free 1
+Worldwalker Helm | own 1 | other - | ins 0 | free 1
+Worn Powerstone | own 1 | other - | ins 0 | free 1
+You Find the Villains' Lair | own 1 | other - | ins 0 | free 1
+Ajani's Chosen | own 1 | other - | ins 0 | free 1
+Alms Collector | own 1 | other - | ins 0 | free 1
+Angelic Destiny | own 1 | other - | ins 0 | free 1
+Archangel of Tithes | own 1 | other tam1 | ins 0 | free 0
+Archon of Sun's Grace | own 1 | other - | ins 0 | free 1
+Armored Skyhunter | own 1 | other - | ins 0 | free 1
+Blade Historian | own 1 | other taz1 | ins 0 | free 0
+Brass Infiniscope | own 1 | other - | ins 0 | free 1
+Bre of Clan Stoutarm | own 1 | other - | ins 0 | free 1
+Caves of Chaos Adventurer | own 1 | other - | ins 0 | free 1
+Chain Reaction | own 1 | other - | ins 1 | free 0
+Chandra, Fire Artisan | own 1 | other - | ins 0 | free 1
+Chandra, Spark Hunter | own 1 | other - | ins 0 | free 1
+Chandra, Torch of Defiance | own 1 | other tam1 | ins 0 | free 0
+Combat Calligrapher | own 1 | other - | ins 0 | free 1
+Crystalline Crawler | own 1 | other - | ins 1 | free 0
+Darksteel Reactor | own 1 | other - | ins 1 | free 0
+Double Down | own 1 | other - | ins 0 | free 1
+Empowered Autogenerator | own 1 | other - | ins 1 | free 0
+Etched Oracle | own 1 | other - | ins 1 | free 0
+Fire // Ice | own 0 | other - | ins 0 | free 0
+Firemane Commando | own 1 | other - | ins 0 | free 1
+Firemind Vessel | own 1 | other - | ins 0 | free 1
+Flickering Hound | own 1 | other - | ins 0 | free 1
+Ghost Ark | own 1 | other imo1 | ins 0 | free 0
+Hellspur Posse Boss | own 1 | other - | ins 0 | free 1
+Herald of Amity | own 1 | other - | ins 0 | free 1
+Jazal Goldmane | own 1 | other - | ins 0 | free 1
+Jem Lightfoote, Sky Explorer | own 1 | other - | ins 0 | free 1
+Jhoira, Weatherlight Captain | own 1 | other - | ins 1 | free 0
+Kasmina, Enigmatic Mentor | own 1 | other - | ins 0 | free 1
+Kraum, Violent Cacophony | own 1 | other - | ins 0 | free 1
+Lux Artillery | own 1 | other - | ins 1 | free 0
+Lux Cannon | own 1 | other - | ins 1 | free 0
+Mangara, the Diplomat | own 1 | other taz1 | ins 0 | free 0
+Midnight Pathlighter | own 1 | other taz1 | ins 0 | free 0
+Mindless Automaton | own 1 | other - | ins 1 | free 0
+Nahiri, Storm of Stone | own 1 | other - | ins 0 | free 1
+Nexus Mentality | own 1 | other tam1 | ins 0 | free 0
+Nyx Lotus | own 1 | other - | ins 0 | free 1
+Outlaws' Merriment | own 1 | other taz1 | ins 0 | free 0
+Owlin Spiralmancer | own 1 | other - | ins 0 | free 1
+Paradise Plume | own 1 | other - | ins 0 | free 1
+Phyrexian Metamorph | own 1 | other - | ins 1 | free 0
+Plan for All Outcomes | own 1 | other - | ins 0 | free 1
+Protege's Awakening | own 1 | other - | ins 0 | free 1
+Ral Zarek | own 1 | other tam1 | ins 0 | free 0
+Reconnaissance Mission | own 1 | other - | ins 0 | free 1
+Rodeo Pyromancers | own 1 | other - | ins 0 | free 1
+Sage's Reverie | own 1 | other - | ins 0 | free 1
+Seasoned Dungeoneer | own 1 | other taz1 | ins 0 | free 0
+Settle the Wreckage | own 1 | other tam1 | ins 0 | free 0
+Shatter the Sky | own 1 | other - | ins 0 | free 1
+Solemn Simulacrum | own 2 | other imo1,mer1 | ins 0 | free 0
+Songbirds' Blessing | own 1 | other - | ins 0 | free 1
+Sphinx of False Conclusions | own 1 | other - | ins 0 | free 1
+Squad Commander | own 1 | other taz1 | ins 0 | free 0
+Tekuthal, Inquiry Dominus | own 1 | other - | ins 1 | free 0
+Tezzeret's Gambit | own 1 | other - | ins 1 | free 0
+The Wanderer | own 1 | other - | ins 0 | free 1
+Tractor Beam | own 1 | other - | ins 1 | free 0
+Traxos, Scourge of Kroog | own 1 | other - | ins 0 | free 1
+Violent Echoes | own 1 | other - | ins 0 | free 1
+Visage Bandit | own 2 | other - | ins 0 | free 2
+Way of the Healer | own 1 | other tam1 | ins 0 | free 0
+Yuriko, Blade of the Mighty | own 1 | other - | ins 0 | free 1
+Alhammarret's Archive | own 1 | other - | ins 0 | free 1
+Alibou, Ancient Witness | own 1 | other - | ins 1 | free 0
+Baeloth Barrityl, Entertainer | own 1 | other - | ins 0 | free 1
+Deekah, Fractal Theorist | own 1 | other - | ins 0 | free 1
+Deepglow Skate | own 1 | other - | ins 1 | free 0
+Emeritus of Ideation // Ancestral Recall | own 0 | other - | ins 0 | free 0
+Fell the Mighty | own 1 | other - | ins 0 | free 1
+Feywild Caretaker | own 1 | other - | ins 0 | free 1
+Forum Filibuster | own 1 | other - | ins 0 | free 1
+Fumigate | own 2 | other tam1 | ins 1 | free 0
+Gilded Lotus | own 1 | other imo1 | ins 0 | free 0
+Hypothesizzle | own 1 | other - | ins 0 | free 1
+Jace, Memory Adept | own 1 | other tam1 | ins 0 | free 0
+Jace, Reality Sculptor | own 1 | other tam1 | ins 0 | free 0
+Jaya, Venerated Firemage | own 1 | other - | ins 0 | free 1
+Karlach, Fury of Avernus | own 1 | other taz1 | ins 0 | free 0
+Luxurious Locomotive | own 1 | other - | ins 0 | free 1
+Marauding Sphinx | own 1 | other - | ins 0 | free 1
+Omni-Changeling | own 1 | other - | ins 0 | free 1
+Perplexing Test | own 1 | other - | ins 0 | free 1
+Promise of Loyalty | own 1 | other - | ins 0 | free 1
+Quintorius Kand | own 1 | other tam1 | ins 0 | free 0
+Sarkhan the Masterless | own 1 | other tam1 | ins 0 | free 0
+Sarkhan, the Dragonspeaker | own 1 | other - | ins 0 | free 1
+Step Between Worlds | own 1 | other - | ins 0 | free 1
+Stick Together | own 1 | other taz1 | ins 0 | free 0
+Territory Forge | own 1 | other - | ins 0 | free 1
+Terror of the Peaks | own 1 | other - | ins 0 | free 1
+The Eternity Elevator | own 1 | other - | ins 1 | free 0
+Tome of the Guildpact | own 1 | other - | ins 0 | free 1
+Transmutation Font | own 1 | other the1 | ins 0 | free 0
+Venser's Journal | own 1 | other - | ins 0 | free 1
+Village Pillagers | own 1 | other - | ins 0 | free 1
+Way of the Mind Sculptor | own 1 | other tam1 | ins 0 | free 0
+Winds of Rath | own 1 | other - | ins 0 | free 1
+Zimone's Hypothesis | own 1 | other - | ins 0 | free 1
+Ajani Unrelenting | own 1 | other tam1 | ins 0 | free 0
+Calamity, Galloping Inferno | own 2 | other - | ins 0 | free 2
+Chandra, Awakened Inferno | own 1 | other tam1 | ins 0 | free 0
+Chimil, the Inner Sun | own 1 | other tam1 | ins 0 | free 0
+Eldrazi Ravager | own 1 | other - | ins 0 | free 1
+Elspeth, Sun's Champion | own 1 | other tam1 | ins 0 | free 0
+Ginger, Queen of Sweets | own 1 | other the1 | ins 0 | free 0
+Hexhaven Battalion | own 1 | other - | ins 0 | free 1
+Kappa Cannoneer | own 1 | other - | ins 1 | free 0
+Moraug, Fury of Akoum | own 1 | other - | ins 0 | free 1
+Planetarium of Wan Shi Tong | own 1 | other - | ins 0 | free 1
+Spoils of Adventure | own 1 | other taz1 | ins 0 | free 0
+Tomb of Horrors Adventurer | own 1 | other - | ins 0 | free 1
+Angel of the Ruins | own 1 | other - | ins 1 | free 0
+Bane of Bala Ged | own 1 | other - | ins 0 | free 1
+Depthshaker Titan | own 1 | other - | ins 1 | free 0
+Devourer of Destiny | own 1 | other - | ins 0 | free 1
+Grim Poppet | own 1 | other - | ins 0 | free 1
+Kindred Judgment | own 1 | other - | ins 0 | free 1
+Necron Monolith | own 1 | other - | ins 0 | free 1
+Nulldrifter | own 1 | other - | ins 0 | free 1
+Sea Gate Colossus | own 1 | other - | ins 0 | free 1
+Thought Monitor | own 1 | other - | ins 1 | free 0
+Threefold Thunderhulk | own 1 | other - | ins 1 | free 0
+Wake the Past | own 1 | other - | ins 1 | free 0
+Breaker of Creation | own 1 | other - | ins 0 | free 1
+Cityscape Leveler | own 1 | other - | ins 0 | free 1
+Eldrazi Conscription | own 1 | other - | ins 0 | free 1
+Blasphemous Act | own 1 | other taz1 | ins 0 | free 0
+Bygone Colossus | own 1 | other - | ins 0 | free 1
+Portal to Phyrexia | own 1 | other imo1 | ins 0 | free 0
+Everything Comes to Dust | own 1 | other - | ins 0 | free 1
+Kozilek, the Great Distortion | own 1 | other - | ins 0 | free 1
+Organic Extinction | own 1 | other - | ins 1 | free 0
+Metalwork Colossus | own 1 | other imo1 | ins 0 | free 0
+Zookeeper Mechan | own 0 | other - | ins 0 | free 0
+Peter Parker's Camera | own 0 | other - | ins 0 | free 0

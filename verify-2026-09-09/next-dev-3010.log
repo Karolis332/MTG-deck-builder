@@ -1,0 +1,16 @@
+  ▲ Next.js 14.2.35
+  - Local:        http://localhost:3010
+
+ ✓ Starting...
+ ✓ Ready in 4.2s
+ ○ Compiling / ...
+Browserslist: browsers data (caniuse-lite) is 8 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+ ✓ Compiled / in 2.6s (566 modules)
+ GET / 200 in 3159ms
+ ✓ Compiled in 578ms (276 modules)
+ ○ Compiling /api/decks/[id]/power-level ...
+ ✓ Compiled /api/decks/[id]/power-level in 587ms (397 modules)
+ GET /api/decks/127/power-level 401 in 1111ms
+ ✓ Compiled in 66ms

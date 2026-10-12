@@ -1,0 +1,5 @@
+Bosco, Just a Bear: 99.85 [land37 ramp11 draw12 remo10 wipe3 prot6 pen0] (seeds cf 37.08 [land38 ramp22 draw15 remo3 wipe1 prot5 pen22] | previous 46.51 [land33 ramp24 draw15 remo4 wipe1 prot8 pen27]; 15 swaps, 165852 ms)
+Honest Rutstein: 99.83 [land37 ramp12 draw11 remo12 wipe3 prot5 pen0] (seeds cf 48.65 [land40 ramp14 draw18 remo10 wipe2 prot2 pen12] | previous 77.57 [land40 ramp14 draw16 remo10 wipe2 prot3 pen9]; 17 swaps, 165566 ms)
+Koh, the Face Stealer: 87.39 [land36 ramp12 draw10 remo12 wipe3 prot3 pen0] (seeds cf 59.50 [land36 ramp14 draw11 remo9 wipe2 prot3 pen4] | previous 72.55 [land34 ramp15 draw13 remo9 wipe2 prot3 pen7]; 10 swaps, 126552 ms)
+Peregrin Took: 97.53 [land38 ramp11 draw12 remo10 wipe2 prot6 pen1] (seeds cf 42.35 [land38 ramp23 draw13 remo5 wipe1 prot4 pen19] | previous 51.80 [land32 ramp25 draw13 remo6 wipe1 prot7 pen24]; 15 swaps, 139795 ms)
+The Goose Mother: 99.36 [land38 ramp10 draw11 remo11 wipe4 prot7 pen1] (seeds cf 38.44 [land36 ramp23 draw13 remo4 wipe2 prot6 pen19] | previous 57.23 [land33 ramp23 draw13 remo7 wipe2 prot10 pen22]; 15 swaps, 164152 ms)

@@ -1,0 +1,14 @@
+BASE obj 71.30 DS 71.4 pen 6 {"land":36,"ramp":16,"draw":11,"removal":10,"board_wipe":3,"protection":8} mana=89 curve=93 interaction=95 advantage=70 win=64 synergy=70 meta=50 structure=100
+   0.01  Thought Vessel => Sol Ring   DS 0.0 pen 6 mana=89 curve=94 interaction=95 advantage=70 win=64 synergy=70 meta=50 structure=100
+   0.01  Decanter of Endless Water => Arcane Signet   DS 0.0 pen 6 mana=90 curve=92 interaction=95 advantage=70 win=64 synergy=70 meta=50 structure=100
+   2.18  Fellwar Stone => Firemane Commando   DS 0.3 pen 5 mana=82 curve=94 interaction=95 advantage=70 win=65 synergy=70 meta=50 structure=100
+   1.85  Wayfarer's Bauble => Eusocial Engineering   DS 0.0 pen 5 mana=84 curve=93 interaction=95 advantage=70 win=64 synergy=70 meta=50 structure=100
+   1.90  Ornithopter of Paradise => Forum Filibuster   DS 0.0 pen 5 mana=83 curve=94 interaction=95 advantage=70 win=64 synergy=70 meta=50 structure=100
+   1.55  Snakeskin Veil => Overrun   DS -0.5 pen 5 mana=89 curve=93 interaction=95 advantage=70 win=64 synergy=73 meta=50 structure=100
+   0.31  Panharmonicon => Mycoloth   DS 0.3 pen 6 mana=89 curve=93 interaction=95 advantage=70 win=65 synergy=84 meta=50 structure=100
+   0.30  Sapphire Medallion => Selesnya Charm   DS 0.3 pen 6 mana=89 curve=93 interaction=95 advantage=70 win=65 synergy=73 meta=50 structure=100
+  -8.36  Foundry Inspector => Hexhaven Battalion   DS -6.4 pen 7 mana=89 curve=93 interaction=95 advantage=70 win=56 synergy=70 meta=50 structure=100
+   0.07  Bloodstained Mire => Command Tower   DS 0.0 pen 6 mana=91 curve=93 interaction=95 advantage=70 win=64 synergy=70 meta=50 structure=100
+  -0.08  Talon Gates of Madara => Fabled Passage   DS 0.0 pen 6 mana=91 curve=93 interaction=95 advantage=70 win=64 synergy=70 meta=50 structure=100
+   0.05  Reliquary Tower => Plains   DS 0.0 pen 6 mana=90 curve=93 interaction=95 advantage=70 win=64 synergy=70 meta=50 structure=100
+ALL  obj 74.46 (3.16) DS 71.0 pen 4 {"land":36,"ramp":14,"draw":13,"removal":11,"board_wipe":3,"protection":7} mana=84 curve=92 interaction=95 advantage=70 win=64 synergy=77 meta=50 structure=100

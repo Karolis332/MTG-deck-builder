@@ -1,0 +1,19 @@
+
+[1m[46m RUN [49m[22m [36mv4.0.18 [39m[90mC:/Users/QuLeR/MTG-deck-builder[39m
+
+ [32m✓[39m src/lib/__tests__/deck-score-v14-stage3.test.ts [2m([22m[2m22 tests[22m[2m)[22m[33m 21680[2mms[22m[39m
+     [33m[2m✓[22m[39m every one of the 25 stride lists fails structurally at k = 1, 5 and 10 deletions [33m 1633[2mms[22m[39m
+     [33m[2m✓[22m[39m price, popularity, rarity, set, printing, art and input order move nothing [33m 465[2mms[22m[39m
+     [33m[2m✓[22m[39m input order alone moves nothing [33m 449[2mms[22m[39m
+     [33m[2m✓[22m[39m quantity representation (n entries of 1 vs one entry of n) moves nothing [33m 392[2mms[22m[39m
+     [33m[2m✓[22m[39m a different printing of the same basic land moves nothing [33m 376[2mms[22m[39m
+     [33m[2m✓[22m[39m replacing proved-zero-use typed copies with unknown slots: dS <= 1e-6, drank <= 1 [33m 3590[2mms[22m[39m
+     [33m[2m✓[22m[39m adding zero-credit unknown slots never raises S (k = 1, 5, 10) [33m 2773[2mms[22m[39m
+     [33m[2m✓[22m[39m breaking an on-plan proof never gains: S and W are non-increasing [33m 1024[2mms[22m[39m
+     [33m[2m✓[22m[39m keeps the retained 200-list ctrl93 top tail inside <= 20/200 in both profiles [33m 10589[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m1 passed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[32m22 passed[39m[22m[90m (22)[39m
+[2m   Start at [22m 14:31:56
+[2m   Duration [22m 24.37s[2m (transform 820ms, setup 0ms, import 2.45s, tests 21.68s, environment 0ms)[22m
+

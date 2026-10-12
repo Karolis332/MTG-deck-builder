@@ -1,0 +1,83 @@
+file      : verify-2026-10-09/color-best/decks/WU/final.txt
+format    : commander   commander: Linvala, Shield of Sea Gate
+totals    : 100 cards | 36 lands (36.8 eff.) | 63 nonland | avg MV 3.06
+curve     : 1:11 2:15 3:15 4:14 5:2 6:2 7:4
+VERDICT   : FAIL
+
+  PASS  size        100 cards (commander wants 100)
+  PASS  singleton   singleton respected (basics exempt)
+  PASS  legality    every card legal in commander
+  PASS  rules       no other format rule broken
+  PASS  identity    all cards inside UW
+  PASS  ownership   all cards owned; paper collection imported 0 days ago
+  FAIL  arenaNames  3 line(s) use "Front // Back" — Arena answers "unknown card title". Use:
+        - 1 Emeritus of Truce
+        - 1 Glasspool Mimic
+        - 1 Sink into Stupor
+  PASS  lands       36 lands (+2 MDFC land backs = 36.8 effective); Karsten wants 38 ±2
+  FAIL  plan        1/63 nonland cards interact (2%) — commander wants: general value
+        - Archpriest of Iona (MV 1)
+        - Concerted Defense (MV 1)
+        - Land Tax (MV 1)
+        - Multiclass Baldric (MV 1)
+        - Path to Exile (MV 1)
+        - Pongify (MV 1)
+        - Practiced Tactics (MV 1)
+        - Sol Ring (MV 1)
+        - Swan Song (MV 1)
+        - Swords to Plowshares (MV 1)
+        - Wayfarer's Bauble (MV 1)
+        - Arcane Signet (MV 2)
+        - Counterspell (MV 2)
+        - Cyclonic Rift (MV 2)
+        - Dovin's Veto (MV 2)
+        - Fellwar Stone (MV 2)
+        - Grand Abolisher (MV 2)
+        - Negate (MV 2)
+        - Nimble Trapfinder (MV 2)
+        - Ornithopter of Paradise (MV 2)
+        - Resculpt (MV 2)
+        - Selfless Spirit (MV 2)
+        - Stonework Packbeast (MV 2)
+        - Sword of the Animist (MV 2)
+        - Talisman of Progress (MV 2)
+        - Unsettled Mariner (MV 2)
+        - Aven Interrupter (MV 3)
+        - Barkform Harvester (MV 3)
+        - Emeritus of Truce (MV 3)
+        - Firdoch Core (MV 3)
+        - Frantic Search (MV 3)
+        - Generous Gift (MV 3)
+        - Ghostly Prison (MV 3)
+        - Gift of Immortality (MV 3)
+        - Glasspool Mimic (MV 3)
+        - Harper Recruiter (MV 3)
+        - Mirror Entity (MV 3)
+        - Nadaar, Selfless Paladin (MV 3)
+        - Propaganda (MV 3)
+        - Sink into Stupor (MV 3)
+        - Archangel of Tithes (MV 4)
+        - Bident of Thassa (MV 4)
+        - Coastal Piracy (MV 4)
+        - Fact or Fiction (MV 4)
+        - Firemane Commando (MV 4)
+        - Jazal Goldmane (MV 4)
+        - Lux Cannon (MV 4)
+        - Mangara, the Diplomat (MV 4)
+        - Reconnaissance Mission (MV 4)
+        - Shatter the Sky (MV 4)
+        - Solemn Simulacrum (MV 4)
+        - Squad Commander (MV 4)
+        - Thran Dynamo (MV 4)
+        - Whirler Rogue (MV 4)
+        - Fumigate (MV 5)
+        - Stick Together (MV 5)
+        - Spoils of Adventure (MV 6)
+        - Sun Quan, Lord of Wu (MV 6)
+        - Angel of the Ruins (MV 7)
+        - Devourer of Destiny (MV 7)
+        - Sea Gate Colossus (MV 7)
+        - Cityscape Leveler (MV 8)
+  PASS  curve       avg MV 3.06; commander sets no cost threshold
+  PASS  wincons     8 win condition(s)/closer(s)
+  PASS  locks       3 locked card(s) present and intact

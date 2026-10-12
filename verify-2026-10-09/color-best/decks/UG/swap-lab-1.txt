@@ -1,0 +1,14 @@
+BASE obj 90.08 DS 78.6 pen 0 {"land":36,"ramp":12,"draw":10,"removal":10,"board_wipe":3,"protection":6} mana=89 curve=91 interaction=99 advantage=70 win=73 synergy=100 meta=50 structure=100
+   0.01  Thought Vessel => Arcane Signet   DS 0.0 pen 0 mana=89 curve=91 interaction=99 advantage=70 win=73 synergy=100 meta=50 structure=100
+  -0.01  Meteor Golem => Beast Within   DS 0.0 pen 0 mana=94 curve=92 interaction=99 advantage=70 win=73 synergy=100 meta=50 structure=100
+   0.01  Devourer of Destiny => Resculpt   DS 0.0 pen 0 mana=94 curve=91 interaction=99 advantage=70 win=73 synergy=100 meta=50 structure=100
+  -0.02  Earth Rumble => Decisive Denial   DS 0.0 pen 0 mana=94 curve=90 interaction=100 advantage=70 win=73 synergy=100 meta=50 structure=100
+  -0.04  Urza, Lord High Artificer => Innkeeper's Talent   DS 0.0 pen 0 mana=94 curve=90 interaction=99 advantage=70 win=73 synergy=98 meta=50 structure=100
+  -2.01  Planar Engineering => Rishkar, Peema Renegade   DS 0.0 pen 1 mana=89 curve=91 interaction=99 advantage=70 win=73 synergy=100 meta=50 structure=100
+   0.03  Universal Surveillance => Tezzeret's Gambit   DS 0.0 pen 0 mana=89 curve=91 interaction=99 advantage=70 win=73 synergy=100 meta=50 structure=100
+  -0.00  Cleanup Crew => Cankerbloom   DS 0.0 pen 0 mana=94 curve=91 interaction=99 advantage=70 win=73 synergy=100 meta=50 structure=100
+   0.00  Temple of the False God => Fabled Passage   DS 0.0 pen 0 mana=89 curve=91 interaction=99 advantage=70 win=73 synergy=100 meta=50 structure=100
+   0.07  Reliquary Tower => Rain-Slicked Copse   DS 0.0 pen 0 mana=89 curve=91 interaction=99 advantage=70 win=73 synergy=100 meta=50 structure=100
+   0.00  Simic Guildgate => Lumbering Falls   DS 0.0 pen 0 mana=89 curve=91 interaction=99 advantage=70 win=73 synergy=100 meta=50 structure=100
+   0.03  Uthros, Titanic Godcore => Quandrix Campus   DS 0.0 pen 0 mana=89 curve=91 interaction=99 advantage=70 win=73 synergy=100 meta=50 structure=100
+ALL  obj 90.11 (0.03) DS 78.6 pen 0 {"land":36,"ramp":12,"draw":10,"removal":10,"board_wipe":3,"protection":6} mana=96 curve=90 interaction=100 advantage=70 win=73 synergy=100 meta=50 structure=100

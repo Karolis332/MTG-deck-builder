@@ -22,7 +22,7 @@ export interface BestDeckJobInput {
 }
 
 /** The engine's internal stages plus the one the worker synthesizes right before `done` (contract). */
-export type BestDeckStage = 'resolving' | 'screening' | 'climbing' | 'finalizing';
+export type BestDeckStage = 'resolving' | 'screening' | 'climbing' | 'reporting' | 'finalizing';
 
 /** The full contract progress shape — every field always present (refuter H2: a partial object
  * made the web's `bestObjective !== null` check pass for `undefined` and crash on `.toFixed`). */
@@ -76,7 +76,10 @@ interface Job {
   priority: number; // 0 = pro/commander, 1 = free
   seq: number; // FIFO tiebreaker within a priority band
   status: JobStatus;
-  request: RunBestDeckRequest;
+  /** Cleared once the job settles (done/failed/cancelled) — memory hygiene: a finished job's
+   * result/progress already carry everything a caller needs, so there's no reason to keep
+   * potentially-large `ownedCards` around for the 60-minute sweep window. */
+  request?: RunBestDeckRequest;
   progress?: Partial<BestDeckProgress>;
   result?: unknown;
   error?: string;
@@ -181,6 +184,7 @@ export function createBestDeckQueue(opts: CreateBestDeckQueueOpts = {}): BestDec
     job.error = error;
     job.finishedAt = now();
     job.settled = true;
+    job.request = undefined;
     tryStartNext();
   }
 
@@ -192,7 +196,7 @@ export function createBestDeckQueue(opts: CreateBestDeckQueueOpts = {}): BestDec
       finishJob(job, 'failed', undefined, 'timed out');
     }, HARD_TIMEOUT_MS);
     job.handle = startJob(
-      job.request,
+      job.request!, // always set while queued/running — cleared only after finishJob, which this precedes
       (msg) => {
         if (msg.type === 'progress') job.progress = msg.progress;
         else if (msg.type === 'done') finishJob(job, 'done', msg.result);

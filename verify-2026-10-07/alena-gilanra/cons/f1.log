@@ -1,0 +1,2 @@
+deck.txt                 36L | keep7 0.604 | 4 drops by T4 0.837 | 6+ threat T5 0.770 T6 0.906 | spells T1-8 11.61 | screw 0.036 | flood>=3 0.481 (mean 3.75) | idle T5-8 0.087 | extra draws 11.18 | free 1.25 | 6+ by T8 6.44 | <=1 by T7 0.086
+final.txt                36L | keep7 0.638 | 4 drops by T4 0.835 | 6+ threat T5 0.784 T6 0.924 | spells T1-8 12.20 | screw 0.026 | flood>=3 0.580 (mean 4.35) | idle T5-8 0.098 | extra draws 12.31 | free 1.11 | 6+ by T8 6.38 | <=1 by T7 0.070

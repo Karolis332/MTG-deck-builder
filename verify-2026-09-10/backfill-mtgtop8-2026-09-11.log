@@ -1,0 +1,612 @@
+============================================================
+MTGTop8 Tournament Scraper
+Database: C:\Users\QuLeR\AppData\Roaming\the-black-grimoire\data\mtg-deck-builder.db
+Formats: standard
+Max events per format: 120
+Started: 2026-09-11T01:41:09.245207
+============================================================
+
+Fetching format page: https://www.mtgtop8.com/format?f=ST
+
+Fetching format page: https://www.mtgtop8.com/format?f=ST&cp=2
+
+Fetching format page: https://www.mtgtop8.com/format?f=ST&cp=3
+  Found 59 events
+  [1/59] BIG MAGIC Open Vol.15 - Champions Cup Premium Qualifier (2026-08-31)
+    12 decks listed
+    [1] #1 4/5C Control — 75 cards
+    [2] #2 Boros Aggro — 75 cards
+    [3] #3 Mono Black Aggro — 75 cards
+    [4] #4 Selesnya Aggro — 75 cards
+    [5] #5 Dimir Aggro — 75 cards
+    [6] #6 Izzet Control — 75 cards
+    [7] #7 Mono Green Landfall — 75 cards
+    [8] #8 Superior Reanimator — 75 cards
+    [9] #9 Izzet Spellementals — 75 cards
+    [10] #10 Izzet Spellementals — 75 cards
+    [11] #11 Mono Green Landfall — 75 cards
+    [12] #12 Temur Aggro — 75 cards
+  [2/59] MTGO League (2026-09-09)
+    8 decks listed
+    [1] #1 Jeskai Control — 75 cards
+    [2] #2 Jund Aggro — 75 cards
+    [3] #3 Mono Green Aggro — 75 cards
+    [4] #4 Mono Green Landfall — 75 cards
+    [5] #5 Dimir Aggro — 75 cards
+    [6] #6 Orzhov Aggro — 75 cards
+    [7] #7 Orzhov Aggro — 75 cards
+    [8] #8 Boros Aggro — 75 cards
+  [3/59] MTGO Challenge 16 (2026-09-09)
+    8 decks listed
+    [1] #1 Izzet Spellementals — 75 cards
+    [2] #2 Mono Green Aggro — 75 cards
+    [3] #3 Dimir Aggro — 75 cards
+    [4] #4 Mono Green Landfall — 75 cards
+    [5] #5 4/5C Control — 75 cards
+    [6] #6 Boros Dragons — 75 cards
+    [7] #7 Jund Aggro — 75 cards
+    [8] #8 Mono Green Landfall — 75 cards
+  [4/59] MTGO Challenge 32 (2026-09-08)
+    16 decks listed
+    [1] #1 Izzet Spellementals — 76 cards
+    [2] #2 Izzet Spellementals — 76 cards
+    [3] #3 Boros Dwarves — 75 cards
+    [4] #4 Jund Aggro — 75 cards
+    [5] #5 4c Legends — 75 cards
+    [6] #6 Dimir Aggro — 75 cards
+    [7] #7 Dimir Aggro — 75 cards
+    [8] #8 Jund Aggro — 75 cards
+    [9] #9 Selesnya Landfall — 75 cards
+    [10] #10 Bant Airbending — 75 cards
+    [11] #11 Azorius Momo — 75 cards
+    [12] #12 Boros Tokens — 75 cards
+    [13] #13 Jund Aggro — 75 cards
+    [14] #14 4/5C Control — 75 cards
+    [15] #15 Izzet Spellementals — 75 cards
+    [16] #16 Izzet Spellementals — 75 cards
+  [5/59] MTGO League (2026-09-08)
+    8 decks listed
+    [1] #1 Mono Green Landfall — 75 cards
+    [2] #2 UW Control — 75 cards
+    [3] #3 Boros Aggro — 75 cards
+    [4] #4 Orzhov Aggro — 75 cards
+    [5] #5 Jund Aggro — 75 cards
+    [6] #6 Boros Tokens — 75 cards
+    [7] #7 Mardu Aggro — 75 cards
+    [8] #8 Izzet Spellementals — 75 cards
+  [6/59] MTGO Challenge 32 (2026-09-07)
+    16 decks listed
+    [1] #1 Superior Doomsday — 75 cards
+    [2] #2 Jund Aggro — 75 cards
+    [3] #3 Boros Tokens — 75 cards
+    [4] #4 Izzet Spellementals — 75 cards
+    [5] #5 Boros Dwarves — 75 cards
+    [6] #6 Dimir Aggro — 75 cards
+    [7] #7 Dimir Aggro — 75 cards
+    [8] #8 Izzet Spellementals — 75 cards
+    [9] #9 UW Control — 75 cards
+    [10] #10 Boros Aggro — 75 cards
+    [11] #11 Dimir Aggro — 75 cards
+    [12] #12 Mardu Aggro — 75 cards
+    [13] #13 Izzet Spellementals — 75 cards
+    [14] #14 Izzet Spellementals — 75 cards
+    [15] #15 Azorius Momo — 75 cards
+    [16] #16 UW Control — 75 cards
+  [7/59] MTGO League (2026-09-07)
+    7 decks listed
+    [1] #1 Izzet Spellementals — 75 cards
+    [2] #2 Mono Green Landfall — 75 cards
+    [3] #3 4/5C Control — 75 cards
+    [4] #4 Boros Tokens — 75 cards
+    [5] #5 Boros Dragons — 75 cards
+    [6] #6 Boros Dwarves — 75 cards
+    [7] #7 Izzet Spellementals — 75 cards
+  [8/59] RCQ (2026-09-06)
+    4 decks listed
+    [1] #1 Selesnya Counters — 75 cards
+    [2] #2 Dimir Aggro — 75 cards
+    [3] #3 Izzet Spellementals — 75 cards
+    [4] #4 Jeskai Black — 75 cards
+  [9/59] Store Championship (2026-09-06)
+    3 decks listed
+    [1] #1 Grixis Monument — 75 cards
+    [2] #2 Mono Green Landfall — 75 cards
+    [3] #3 Grixis Discard — 76 cards
+  [10/59] Sunday ReCQ 1:00pm (2026-09-06)
+    8 decks listed
+    [1] #1 UR Aggro — 75 cards
+    [2] #2 Izzet Spellementals — 75 cards
+    [3] #3 Boros Aggro — 75 cards
+    [4] #4 Boros Tokens — 75 cards
+    [5] #5 Azorius Momo — 75 cards
+    [6] #6 Jeskai Control — 75 cards
+    [7] #7 Sultai Control — 75 cards
+    [8] #8 Superior Doomsday — 75 cards
+  [11/59] Super Sunday RCQ 9:30am (2026-09-06)
+    16 decks listed
+    [1] #1 Orzhov Control — 75 cards
+    [2] #2 4/5C Control — 75 cards
+    [3] #3 Jeskai Tablet — 75 cards
+    [4] #4 Sultai Control — 75 cards
+    [5] #5 Dimir Control — 75 cards
+    [6] #6 Mono Green Landfall — 75 cards
+    [7] #7 Selesnya Landfall — 75 cards
+    [8] #8 Sultai Control — 75 cards
+    [9] #9 4/5C Control — 75 cards
+    [10] #10 Boros Aggro — 75 cards
+    [11] #11 Mardu Aggro — 75 cards
+    [12] #12 Mono Green Aggro — 75 cards
+    [13] #13 Mono Green Aggro — 75 cards
+    [14] #14 Mono Green Landfall — 75 cards
+    [15] #15 Mono Green Landfall — 75 cards
+    [16] #16 Weenie White — 75 cards
+  [12/59] RCQ #2 (2026-09-06)
+    4 decks listed
+    [1] #1 Mono Green Landfall — 75 cards
+    [2] #2 Sultai Control — 75 cards
+    [3] #3 4/5C Control — 75 cards
+    [4] #4 Mardu Aggro — 75 cards
+  [13/59] MTGO League (2026-09-06)
+    8 decks listed
+    [1] #1 Jeskai Tablet — 75 cards
+    [2] #2 Mono Green Landfall — 75 cards
+    [3] #3 4/5C Control — 76 cards
+    [4] #4 UW Control — 75 cards
+    [5] #5 Izzet Spellementals — 75 cards
+    [6] #6 Izzet Spellementals — 75 cards
+    [7] #7 Dimir Aggro — 75 cards
+    [8] #8 Boros Aggro — 75 cards
+  [14/59] Super Liga Estándar (2026-09-05)
+    8 decks listed
+    [1] #1 Superior Doomsday — 75 cards
+    [2] #2 Dimir Aggro — 75 cards
+    [3] #3 Dimir Aggro — 75 cards
+    [4] #4 Superior Reanimator — 75 cards
+    [5] #5 Bant Airbending — 75 cards
+    [6] #6 Boros Aggro — 75 cards
+    [7] #7 Jeskai Tablet — 75 cards
+    [8] #8 Mono Green Landfall — 75 cards
+  [15/59] RCQ (2026-09-05)
+    4 decks listed
+    [1] #1 Mono Black Aggro — 75 cards
+    [2] #2 Dimir Aggro — 75 cards
+    [3] #3 Azorius Aggro — 75 cards
+    [4] #4 Orzhov Aggro — 75 cards
+  [16/59] Saturday ReCQ 4:00pm (2026-09-05)
+    8 decks listed
+    [1] #1 Boro Dragons — 75 cards
+    [2] #2 Mono Green Landfall — 75 cards
+    [3] #3 Izzet Spellementals — 75 cards
+    [4] #4 Orzhov Aggro — 75 cards
+    [5] #5 4/5C Control — 75 cards
+    [6] #6 Boros Aggro — 75 cards
+    [7] #7 Dimir Aggro — 75 cards
+    [8] #8 Jeskai Pinnacle Aggro — 76 cards
+  [17/59] RCQ (2026-09-05)
+    4 decks listed
+    [1] #1 Selesnya Aggro — 75 cards
+    [2] #2 Sultai Control — 76 cards
+    [3] #3 4/5C Control — 75 cards
+    [4] #4 Boros Dragons — 76 cards
+  [18/59] RCQ (2026-09-05)
+    3 decks listed
+    [1] #1 Dimir Tempo — 75 cards
+    [2] #2 Izzet Spellementals — 75 cards
+    [3] #3 Naya Delirium — 75 cards
+  [19/59] Saturday ReCQ 2:00pm (2026-09-05)
+    8 decks listed
+    [1] #1 UW Control — 75 cards
+    [2] #2 Azorius Aggro — 75 cards
+    [3] #3 4/5C Control — 75 cards
+    [4] #4 Mono Green Landfall — 75 cards
+    [5] #5 Boros Aggro — 75 cards
+    [6] #6 Jeskai Pinnacle Aggro — 76 cards
+    [7] #7 Sultai Control — 75 cards
+    [8] #8 Weenie White — 75 cards
+  [20/59] Champions Cup Store Qualifier (2026-09-05)
+    8 decks listed
+    [1] #1 Izzet Spellementals — 75 cards
+    [2] #2 Izzet Spellementals — 75 cards
+    [3] #3 4/5C Control — 75 cards
+    [4] #4 Izzet Spellementals — 75 cards
+    [5] #5 Boros Aggro — 75 cards
+    [6] #6 Izzet Spellementals — 75 cards
+    [7] #7 Simic Aggro — 75 cards
+    [8] #8 Superior Reanimator — 75 cards
+  [21/59] Central America Magic Series (2026-09-05)
+    4 decks listed
+    [1] #1 Mono Red Control - Improvisation Capstone — 75 cards
+    [2] #2 Izzet Spellementals — 75 cards
+    [3] #3 Boros Aggro — 75 cards
+    [4] #4 Izzet Spellementals — 75 cards
+  [22/59] The Decks to Beat - August '26 (2026-08-31)
+    8 decks listed
+    [1] #1 Dimir Aggro — 75 cards
+    [2] #2 Mono Green Aggro — 75 cards
+    [3] #3 Izzet Spellementals — 75 cards
+    [4] #4 Mardu Aggro — 75 cards
+    [5] #5 Orzhov Amali — 75 cards
+    [6] #6 Jeskai Tablet — 75 cards
+    [7] #7 Selesnya Aggro — 75 cards
+    [8] #8 Superior Doomsday — 75 cards
+  [23/59] The Rogue Corner - September '26 (2026-08-31)
+    3 decks listed
+    [1] #1 Jeskai Pinnacle Affinity — 75 cards
+    [2] #1 Abzan Control — 75 cards
+    [3] #7 Mono Red Control - Improvisation Capstone — 75 cards
+  [24/59] Planeswalker Series: Competitive (2026-09-05)
+    4 decks listed
+    [1] #1 Mono Green Landfall — 75 cards
+    [2] #2 WW Aura — 75 cards
+    [3] #3 4/5C Control — 75 cards
+    [4] #4 Boros Aggro — 75 cards
+  [25/59] RCQ (2026-09-05)
+    8 decks listed
+    [1] #1 Dimir Aggro — 75 cards
+    [2] #2 Mono R Dragons — 75 cards
+    [3] #3 Dimir Doomsday — 75 cards
+    [4] #4 Mono G Landfall — 75 cards
+    [5] #5 4c Control — 75 cards
+    [6] #6 Bant Airbending — 75 cards
+    [7] #7 Izzet Spellementals — 75 cards
+    [8] #8 Mono B Aggro — 75 cards
+  [26/59] RCQ (2026-09-05)
+    4 decks listed
+    [1] #1 4/5C Control — 76 cards
+    [2] #2 Golgari Control — 75 cards
+    [3] #3 4/5C Control — 75 cards
+    [4] #4 Sultai Control — 75 cards
+  [27/59] RCQ (2026-09-05)
+    4 decks listed
+    [1] #1 Superior Doomsday — 75 cards
+    [2] #2 Boros Aggro — 75 cards
+    [3] #3 Dimir Aggro — 75 cards
+    [4] #4 Izzet Spellementals — 75 cards
+  [28/59] The Hobbit Store Champs (2026-09-05)
+    4 decks listed
+    [1] #1 Mono Black Aggro — 75 cards
+    [2] #2 Izzet Control — 75 cards
+    [3] #3 Azorious Control — 76 cards
+    [4] #4 Izzet Spellementals — 75 cards
+  [29/59] MTGO League (2026-09-05)
+    8 decks listed
+    [1] #1 Izzet Spellementals — 75 cards
+    [2] #2 Orzhov Aggro — 75 cards
+    [3] #3 Boros Aggro — 75 cards
+    [4] #4 Jund Aggro — 75 cards
+    [5] #5 Mono Green Landfall — 75 cards
+    [6] #6 Superior Reanimator — 75 cards
+    [7] #7 Orzhov Aggro — 75 cards
+    [8] #8 4/5C Control — 75 cards
+  [30/59] MTGO Challenge 32 (2026-09-05)
+    16 decks listed
+    [1] #1 Izzet Spellementals — 75 cards
+    [2] #2 Mardu Aggro — 75 cards
+    [3] #3 Dimir Aggro — 75 cards
+    [4] #4 Izzet Spellementals — 75 cards
+    [5] #5 Izzet Spellementals — 75 cards
+    [6] #6 Izzet Spellementals — 75 cards
+    [7] #7 Mono Green Aggro — 75 cards
+    [8] #8 Mono Green Aggro — 75 cards
+    [9] #9 Orzhov Aggro — 75 cards
+    [10] #10 Izzet Spellementals — 75 cards
+    [11] #11 Boros Aggro — 75 cards
+    [12] #12 Izzet Spellementals — 75 cards
+    [13] #13 4/5C Control — 75 cards
+    [14] #14 Jund Aggro — 75 cards
+    [15] #15 Dimir Aggro — 75 cards
+    [16] #16 Izzet Spellementals — 75 cards
+  [31/59] Friday ReCQ 4:00pm (2026-09-04)
+    8 decks listed
+    [1] #1 Mono Green Landfall — 75 cards
+    [2] #2 Mardu Aggro — 75 cards
+    [3] #3 Mono Green Landfall — 75 cards
+    [4] #4 UW Control — 75 cards
+    [5] #5 Azorius Aggro — 75 cards
+    [6] #6 Jeskai Pinnacle Aggro — 76 cards
+    [7] #7 Red Deck Wins — 75 cards
+    [8] #8 Selesnya Landfall — 75 cards
+  [32/59] MTGO Challenge 32 (2026-09-04)
+    16 decks listed
+    [1] #1 Mono Green Landfall — 75 cards
+    [2] #2 Jund Aggro — 75 cards
+    [3] #3 4/5C Control — 75 cards
+    [4] #4 4/5C Control — 75 cards
+    [5] #5 Dimir Aggro — 75 cards
+    [6] #6 Selesnya Landfall — 75 cards
+    [7] #7 Sultai Control — 75 cards
+    [8] #8 Superior Doomsday — 75 cards
+    [9] #9 Boros Aggro — 75 cards
+    [10] #10 Izzet Spellementals — 75 cards
+    [11] #11 Izzet Spellementals — 75 cards
+    [12] #12 Izzet Spellementals — 75 cards
+    [13] #13 Dimir Aggro — 75 cards
+    [14] #14 Mono Green Landfall — 75 cards
+    [15] #15 Mono Black Aggro — 75 cards
+    [16] #16 Izzet Spellementals — 75 cards
+  [33/59] Champions Cup Store Qualifier (2026-09-04)
+    8 decks listed
+    [1] #1 Superior Reanimator — 75 cards
+    [2] #2 Boros Aggro — 75 cards
+    [3] #3 Azorius Aggro — 75 cards
+    [4] #4 Izzet Spellementals — 75 cards
+    [5] #5 Boros Aggro — 75 cards
+    [6] #6 Izzet Spellementals — 75 cards
+    [7] #7 Izzet Spellementals — 75 cards
+    [8] #8 Superior Reanimator — 75 cards
+  [34/59] Friday ReCQ 2:00pm (2026-09-04)
+    8 decks listed
+    [1] #1 Superior Reanimator — 75 cards
+    [2] #2 Izzet Spellementals — 75 cards
+    [3] #3 Mono Green Aggro — 75 cards
+    [4] #4 Superior Doomsday — 75 cards
+    [5] #5 Izzet Spellementals — 75 cards
+    [6] #6 Sultai Control — 75 cards
+    [7] #7 Superior Reanimator — 75 cards
+    [8] #8 UR Aggro — 75 cards
+  [35/59] Friday ReCQ 12:00pm (2026-09-04)
+    8 decks listed
+    [1] #1 Boros Aggro — 75 cards
+    [2] #2 4/5C Control — 75 cards
+    [3] #3 Izzet Spellementals — 75 cards
+    [4] #4 Mono Green Landfall — 75 cards
+    [5] #5 Mono Black Aggro — 75 cards
+    [6] #6 Superior Doomsday — 75 cards
+    [7] #7 UW Control — 75 cards
+    [8] #8 Weenie White — 75 cards
+  [36/59] MTGO Challenge 32 (2026-09-04)
+    16 decks listed
+    [1] #1 Mono Green Landfall — 75 cards
+    [2] #2 Boros Aggro — 75 cards
+    [3] #3 4/5C Control — 75 cards
+    [4] #4 Izzet Spellementals — 75 cards
+    [5] #5 Gruul Aggro — 75 cards
+    [6] #6 Jeskai Control — 75 cards
+    [7] #7 Mono Black Aggro — 75 cards
+    [8] #8 UR Aggro — 75 cards
+    [9] #9 Izzet Spellementals — 75 cards
+    [10] #10 Izzet Spellementals — 75 cards
+    [11] #11 Dimir Aggro — 75 cards
+    [12] #12 Dimir Aggro — 75 cards
+    [13] #13 UW Control — 75 cards
+    [14] #14 Superior Doomsday — 75 cards
+    [15] #15 Mono Green Landfall — 75 cards
+    [16] #16 Dimir Control — 75 cards
+  [37/59] MTGO League (2026-09-04)
+    8 decks listed
+    [1] #1 4/5C Control — 75 cards
+    [2] #2 Mono Green Landfall — 75 cards
+    [3] #3 Superior Doomsday — 75 cards
+    [4] #4 Boros Aggro — 75 cards
+    [5] #5 Mono Green Landfall — 75 cards
+    [6] #6 Orzhov Aggro — 75 cards
+    [7] #7 Mono Green Landfall — 75 cards
+    [8] #8 Izzet Spellementals — 75 cards
+  [38/59] MTGO League (2026-09-03)
+    8 decks listed
+    [1] #1 Izzet Spellementals — 75 cards
+    [2] #2 Azorius Momo — 75 cards
+    [3] #3 Mono Black Aggro — 75 cards
+    [4] #4 Superior Doomsday — 75 cards
+    [5] #5 Boros Aggro — 75 cards
+    [6] #6 Dimir Aggro — 76 cards
+    [7] #7 Mardu Aggro — 75 cards
+    [8] #8 Boros Aggro — 75 cards
+  [39/59] MTGO Challenge 16 (2026-09-03)
+    8 decks listed
+    [1] #1 Izzet Control — 75 cards
+    [2] #2 Izzet Spellementals — 75 cards
+    [3] #3 4/5C Control — 75 cards
+    [4] #4 Mono Green Landfall — 75 cards
+    [5] #5 4/5C Control — 75 cards
+    [6] #6 Boros Aggro — 75 cards
+    [7] #7 Dimir Aggro — 75 cards
+    [8] #8 Sultai Control — 75 cards
+  [40/59] MTGO Challenge 16 (2026-09-02)
+    16 decks listed
+    [1] #1 Mono Green Aggro — 75 cards
+    [2] #2 Izzet Spellementals — 75 cards
+    [3] #3 Dimir Aggro — 75 cards
+    [4] #4 Omniscience Combo — 75 cards
+    [5] #5 4/5C Control — 75 cards
+    [6] #6 Azorius Momo — 75 cards
+    [7] #7 Boros Aggro — 75 cards
+    [8] #8 Mono Green Landfall — 75 cards
+    [9] #9 4/5C Control — 75 cards
+    [10] #10 Dimir Control — 75 cards
+    [11] #11 4/5C Control — 75 cards
+    [12] #12 Superior Doomsday — 75 cards
+    [13] #13 Izzet Spellementals — 75 cards
+    [14] #14 Selesnya Landfall — 75 cards
+    [15] #15 Mono Green Aggro — 75 cards
+    [16] #16 Sultai Control — 75 cards
+  [41/59] MTGO Challenge 32 (2026-09-01)
+    16 decks listed
+    [1] #1 Izzet Spellementals — 75 cards
+    [2] #2 Dimir Aggro — 75 cards
+    [3] #3 Izzet Spellementals — 75 cards
+    [4] #4 Mono Green Aggro — 75 cards
+    [5] #5 Boros Aggro — 75 cards
+    [6] #6 Dimir Aggro — 75 cards
+    [7] #7 Dimir Aggro — 75 cards
+    [8] #8 Mardu Aggro — 75 cards
+    [9] #9 Izzet Spellementals — 75 cards
+    [10] #10 Boros Aggro — 75 cards
+    [11] #11 Mono Green Landfall — 75 cards
+    [12] #12 Izzet Spellementals — 75 cards
+    [13] #13 Mono Black Aggro — 75 cards
+    [14] #14 Izzet Spellementals — 75 cards
+    [15] #15 Boros Aggro — 75 cards
+    [16] #16 Mono Green Landfall — 75 cards
+  [42/59] RCQ (2026-09-01)
+    2 decks listed
+    [1] #1 Izzet Spellementals — 75 cards
+    [2] #2 Izzet Spellementals — 75 cards
+  [43/59] MTGO League (2026-09-01)
+    8 decks listed
+    [1] #1 Orzhov Aggro — 75 cards
+    [2] #2 Boros Control — 75 cards
+    [3] #3 Golgari Control — 75 cards
+    [4] #4 Boros Aggro — 75 cards
+    [5] #5 Izzet Spellementals — 75 cards
+    [6] #6 Mono Green Landfall — 75 cards
+    [7] #7 UR Aggro — 75 cards
+    [8] #8 Boros Aggro — 75 cards
+  [44/59] RCQ (2026-08-30)
+    4 decks listed
+    [1] #1 Temur Elementals — 75 cards
+    [2] #2 Momo Flyers — 78 cards
+    [3] #3 Mardu Discard — 75 cards
+    [4] #4 Selesnya Landfall — 75 cards
+  [45/59] MTGO Challenge 32 (2026-08-30)
+    16 decks listed
+    [1] #1 Mono Green Landfall — 75 cards
+    [2] #2 Bant Airbending — 75 cards
+    [3] #3 Izzet Spellementals — 75 cards
+    [4] #4 Selesnya Landfall — 75 cards
+    [5] #5 Mono Green Landfall — 75 cards
+    [6] #6 Mono Green Landfall — 75 cards
+    [7] #7 Mono Green Landfall — 75 cards
+    [8] #8 Superior Doomsday — 75 cards
+    [9] #9 Dimir Aggro — 75 cards
+    [10] #10 Mono Green Landfall — 75 cards
+    [11] #11 Izzet Spellementals — 75 cards
+    [12] #12 4/5C Control — 75 cards
+    [13] #13 Selesnya Landfall — 75 cards
+    [14] #14 UW Control — 75 cards
+    [15] #15 Boros Aggro — 75 cards
+    [16] #16 Dimir Aggro — 75 cards
+  [46/59] The Last Sun 2026 Qualifier (2026-08-30)
+    4 decks listed
+    [1] #1 Dimir Aggro — 75 cards
+    [2] #2 Izzet Spellementals — 75 cards
+    [3] #3 4/5C Control — 75 cards
+    [4] #4 Mono Green Aggro — 75 cards
+  [47/59] MTGO League (2026-08-30)
+    8 decks listed
+    [1] #1 Izzet Spellementals — 75 cards
+    [2] #2 Boros Aggro — 75 cards
+    [3] #3 Dimir Aggro — 75 cards
+    [4] #4 4/5C Control — 75 cards
+    [5] #5 4/5C Control — 75 cards
+    [6] #6 Boros Aggro — 75 cards
+    [7] #7 Jeskai Tablet — 75 cards
+    [8] #8 Mono Green Aggro — 75 cards
+  [48/59] RCQ (2026-08-30)
+    3 decks listed
+    [1] #1 Jeskai Tablet — 75 cards
+    [2] #2 Mono Green Landfall — 75 cards
+    [3] #3 Mono Green Aggro — 75 cards
+  [49/59] 27th Kyushu Shogun Championship (2026-08-29)
+    3 decks listed
+    [1] #27 Dimir Aggro — 75 cards
+    [2] #None Azorius Aggro — 75 cards
+    [3] #None Dimir Aggro — 75 cards
+  [50/59] The Last Sun 2026 Qualifier (2026-08-29)
+    3 decks listed
+    [1] #1 Mono Green Aggro — 75 cards
+    [2] #2 Dimir Control — 75 cards
+    [3] #3 Mono Green Aggro — 75 cards
+  [51/59] The Last Sun 2026 Qualifier (2026-08-29)
+    3 decks listed
+    [1] #1 Boros Aggro — 75 cards
+    [2] #2 4/5C Control — 75 cards
+    [3] #3 Jeskai Tablet — 75 cards
+  [52/59] RCQ (2026-08-29)
+    8 decks listed
+    [1] #1 Monogreen Landfall — 75 cards
+    [2] #2 Monogreen Landfall — 75 cards
+    [3] #3 Dimir Aggro — 75 cards
+    [4] #4 Jeskai Control — 75 cards
+    [5] #5 Abzan Control — 75 cards
+    [6] #6 Boros Aggro — 75 cards
+    [7] #7 Izzet Aggro — 75 cards
+    [8] #8 Jeskai Aggro — 75 cards
+  [53/59] 2-Slot RCQ - Free-Entry (2026-08-29)
+    8 decks listed
+    [1] #1 Mono Green Landfall — 75 cards
+    [2] #2 Elves — 75 cards
+    [3] #3 4c Control — 75 cards
+    [4] #4 Mono Green Landfall — 75 cards
+    [5] #5 4c Control — 75 cards
+    [6] #6 Azorius Momo — 75 cards
+    [7] #7 Boros Aggro — 75 cards
+    [8] #8 Omniscience Combo — 75 cards
+  [54/59] RCQ (2026-08-29)
+    8 decks listed
+    [1] #1 UR Aggro — 75 cards
+    [2] #2 Mono-green Landfall — 75 cards
+    [3] #3 Dimir Midrange — 75 cards
+    [4] #4 Uw Control — 75 cards
+    [5] #5 Azorius Aggro — 75 cards
+    [6] #6 Mono-green Landfall — 75 cards
+    [7] #7 Selesnya Aggro — 75 cards
+    [8] #8 Uw Control — 75 cards
+  [55/59] RCQ (2026-08-29)
+    8 decks listed
+    [1] #1 Mono R Dragons — 75 cards
+    [2] #2 Mono G Landfall — 75 cards
+    [3] #3 4c Control — 75 cards
+    [4] #4 Dimir Doomsday — 75 cards
+    [5] #5 Dimir Aggro — 75 cards
+    [6] #6 Mono B Demons — 75 cards
+    [7] #7 Mono G Landfall — 75 cards
+    [8] #8 Mono G Landfall — 75 cards
+  [56/59] MTGO Challenge 32 (2026-08-29)
+    16 decks listed
+    [1] #1 Izzet Spellementals — 75 cards
+    [2] #2 Mono Green Landfall — 75 cards
+    [3] #3 Dimir Aggro — 75 cards
+    [4] #4 Mono Green Aggro — 75 cards
+    [5] #5 Dimir Aggro — 75 cards
+    [6] #6 Gruul Aggro — 75 cards
+    [7] #7 Superior Doomsday — 75 cards
+    [8] #8 UW Control — 75 cards
+    [9] #9 Orzhov Aggro — 75 cards
+    [10] #10 Izzet Spellementals — 75 cards
+    [11] #11 Mono Black Aggro — 75 cards
+    [12] #12 Selesnya Landfall — 75 cards
+    [13] #13 Mono Green Aggro — 75 cards
+    [14] #14 Dimir Aggro — 75 cards
+    [15] #15 UR Aggro — 75 cards
+    [16] #16 Mono Green Landfall — 75 cards
+  [57/59] MTGO Challenge 32 (2026-08-28)
+    16 decks listed
+    [1] #1 Dimir Aggro — 75 cards
+    [2] #2 UW Control — 75 cards
+    [3] #3 Mono Black Aggro — 75 cards
+    [4] #4 Mono Green Landfall — 75 cards
+    [5] #5 Boros Aggro — 75 cards
+    [6] #6 Jeskai Control — 75 cards
+    [7] #7 Mono Green Aggro — 75 cards
+    [8] #8 Superior Doomsday — 76 cards
+    [9] #9 Izzet Spellementals — 75 cards
+    [10] #10 Bant Airbending — 75 cards
+    [11] #11 Mono Green Aggro — 75 cards
+    [12] #12 Mono Green Aggro — 75 cards
+    [13] #13 Mono Green Aggro — 75 cards
+    [14] #14 Mono Green Aggro — 75 cards
+    [15] #15 Mardu Aggro — 75 cards
+    [16] #16 Gruul Aggro — 75 cards
+  [58/59] Friday Night Showdown (2026-08-28)
+    2 decks listed
+    [1] #1 Jeskai Lessons — 75 cards
+    [2] #2 Mono Red Aggro — 75 cards
+  [59/59] MTGO League (2026-08-28)
+    8 decks listed
+    [1] #1 Izzet Spellementals — 75 cards
+    [2] #2 Orzhov Aggro — 75 cards
+    [3] #3 UR Aggro — 75 cards
+    [4] #4 UW Control — 75 cards
+    [5] #5 Mono Green Landfall — 75 cards
+    [6] #6 Superior Reanimator — 75 cards
+    [7] #7 UR Aggro — 75 cards
+    [8] #8 Mono Green Aggro — 75 cards
+
+============================================================
+Summary
+  Events found:     59
+  Decks saved:      472
+  Skipped (recent): 0
+  Errors:           0
+Finished: 2026-09-11T01:57:18.526283

@@ -1,0 +1,251 @@
+  request error for https://www.mtgo.com/decklists/standard?year=2026&month=8: HTTPSConnectionPool(host='www.mtgo.com', port=443): Read timed out. (read timeout=30) (attempt 1)
+  request error for https://www.mtgo.com/decklists/standard?year=2026&month=8: HTTPSConnectionPool(host='www.mtgo.com', port=443): Read timed out. (read timeout=30) (attempt 2)
+  request error for https://www.mtgo.com/decklist/standard-league-2026-08-1511015: HTTPSConnectionPool(host='www.mtgo.com', port=443): Read timed out. (read timeout=30) (attempt 1)
+  request error for https://www.mtgo.com/decklist/standard-league-2026-08-1411015: HTTPSConnectionPool(host='www.mtgo.com', port=443): Read timed out. (read timeout=30) (attempt 1)
+  request error for https://www.mtgo.com/decklist/standard-league-2026-08-1311015: HTTPSConnectionPool(host='www.mtgo.com', port=443): Read timed out. (read timeout=30) (attempt 1)
+  request error for https://www.mtgo.com/decklist/standard-league-2026-08-1511015: HTTPSConnectionPool(host='www.mtgo.com', port=443): Read timed out. (read timeout=30) (attempt 2)
+  request error for https://www.mtgo.com/decklist/standard-league-2026-08-1411015: HTTPSConnectionPool(host='www.mtgo.com', port=443): Read timed out. (read timeout=30) (attempt 2)
+  request error for https://www.mtgo.com/decklist/standard-challenge-32-2026-08-1312851628: HTTPSConnectionPool(host='www.mtgo.com', port=443): Read timed out. (read timeout=30) (attempt 1)
+  request error for https://www.mtgo.com/decklist/standard-league-2026-08-1211015: HTTPSConnectionPool(host='www.mtgo.com', port=443): Read timed out. (read timeout=30) (attempt 1)
+  request error for https://www.mtgo.com/decklist/standard-league-2026-08-1110879: HTTPSConnectionPool(host='www.mtgo.com', port=443): Read timed out. (read timeout=30) (attempt 1)
+  request error for https://www.mtgo.com/decklist/standard-league-2026-08-1211015: HTTPSConnectionPool(host='www.mtgo.com', port=443): Read timed out. (read timeout=30) (attempt 2)
+  request error for https://www.mtgo.com/decklist/standard-league-2026-08-1110879: HTTPSConnectionPool(host='www.mtgo.com', port=443): Read timed out. (read timeout=30) (attempt 2)
+  ! no data for standard-challenge-32-2026-08-1112851611
+  request error for https://www.mtgo.com/decklist/standard-league-2026-08-1111015: HTTPSConnectionPool(host='www.mtgo.com', port=443): Read timed out. (read timeout=30) (attempt 1)
+  request error for https://www.mtgo.com/decklist/standard-league-2026-08-1110879: HTTPSConnectionPool(host='www.mtgo.com', port=443): Read timed out. (read timeout=30) (attempt 3)
+  request error for https://www.mtgo.com/decklist/standard-league-2026-08-1111015: HTTPSConnectionPool(host='www.mtgo.com', port=443): Read timed out. (read timeout=30) (attempt 2)
+  ! no data for standard-league-2026-08-1110879
+  request error for https://www.mtgo.com/decklist/standard-league-2026-08-1010879: HTTPSConnectionPool(host='www.mtgo.com', port=443): Read timed out. (read timeout=30) (attempt 1)
+  request error for https://www.mtgo.com/decklist/standard-league-2026-08-1111015: HTTPSConnectionPool(host='www.mtgo.com', port=443): Read timed out. (read timeout=30) (attempt 3)
+  request error for https://www.mtgo.com/decklist/standard-league-2026-08-1010879: HTTPSConnectionPool(host='www.mtgo.com', port=443): Read timed out. (read timeout=30) (attempt 2)
+  ! no data for standard-league-2026-08-1111015
+  request error for https://www.mtgo.com/decklist/standard-league-2026-08-0910879: HTTPSConnectionPool(host='www.mtgo.com', port=443): Read timed out. (read timeout=30) (attempt 1)
+  ! no data for standard-challenge-32-2026-08-0712850815
+  ! no data for standard-league-2026-08-0710879
+  ! no data for standard-challenge-32-2026-08-0712850805
+  ! no data for standard-league-2026-08-0610879
+  ! no data for standard-challenge-32-2026-08-0612850613
+  request error for https://www.mtgo.com/decklist/standard-league-2026-07-3010879: HTTPSConnectionPool(host='www.mtgo.com', port=443): Read timed out. (read timeout=30) (attempt 1)
+  request error for https://www.mtgo.com/decklist/standard-league-2026-07-2810879: HTTPSConnectionPool(host='www.mtgo.com', port=443): Read timed out. (read timeout=30) (attempt 1)
+  request error for https://www.mtgo.com/decklist/standard-league-2026-07-3010879: HTTPSConnectionPool(host='www.mtgo.com', port=443): Read timed out. (read timeout=30) (attempt 2)
+  request error for https://www.mtgo.com/decklist/standard-league-2026-07-2610879: HTTPSConnectionPool(host='www.mtgo.com', port=443): Read timed out. (read timeout=30) (attempt 1)
+  request error for https://www.mtgo.com/decklist/standard-challenge-32-2026-07-2512848205: HTTPSConnectionPool(host='www.mtgo.com', port=443): Read timed out. (read timeout=30) (attempt 1)
+  request error for https://www.mtgo.com/decklist/standard-challenge-32-2026-07-2512848200: HTTPSConnectionPool(host='www.mtgo.com', port=443): Read timed out. (read timeout=30) (attempt 1)
+  request error for https://www.mtgo.com/decklist/standard-challenge-32-2026-07-2512848205: HTTPSConnectionPool(host='www.mtgo.com', port=443): Read timed out. (read timeout=30) (attempt 2)
+  request error for https://www.mtgo.com/decklist/standard-league-2026-07-2210879: HTTPSConnectionPool(host='www.mtgo.com', port=443): Read timed out. (read timeout=30) (attempt 1)
+  request error for https://www.mtgo.com/decklist/standard-league-2026-07-2110879: HTTPSConnectionPool(host='www.mtgo.com', port=443): Read timed out. (read timeout=30) (attempt 1)
+  request error for https://www.mtgo.com/decklist/standard-league-2026-07-2210879: HTTPSConnectionPool(host='www.mtgo.com', port=443): Read timed out. (read timeout=30) (attempt 2)
+  request error for https://www.mtgo.com/decklist/standard-league-2026-07-2010879: HTTPSConnectionPool(host='www.mtgo.com', port=443): Read timed out. (read timeout=30) (attempt 1)
+  request error for https://www.mtgo.com/decklist/standard-league-2026-07-2110879: HTTPSConnectionPool(host='www.mtgo.com', port=443): Read timed out. (read timeout=30) (attempt 2)
+  request error for https://www.mtgo.com/decklist/standard-league-2026-07-2210879: HTTPSConnectionPool(host='www.mtgo.com', port=443): Read timed out. (read timeout=30) (attempt 3)
+  ! no data for standard-league-2026-07-2210879
+  request error for https://www.mtgo.com/decklist/standard-league-2026-07-2010879: HTTPSConnectionPool(host='www.mtgo.com', port=443): Read timed out. (read timeout=30) (attempt 2)
+  request error for https://www.mtgo.com/decklist/standard-league-2026-07-2110879: HTTPSConnectionPool(host='www.mtgo.com', port=443): Read timed out. (read timeout=30) (attempt 3)
+  ! no data for standard-league-2026-07-2110879
+  request error for https://www.mtgo.com/decklist/standard-league-2026-07-1410879: HTTPSConnectionPool(host='www.mtgo.com', port=443): Read timed out. (read timeout=30) (attempt 1)
+  request error for https://www.mtgo.com/decklist/standard-league-2026-07-1210879: HTTPSConnectionPool(host='www.mtgo.com', port=443): Read timed out. (read timeout=30) (attempt 1)
+  request error for https://www.mtgo.com/decklist/standard-league-2026-07-1410879: HTTPSConnectionPool(host='www.mtgo.com', port=443): Read timed out. (read timeout=30) (attempt 2)
+  request error for https://www.mtgo.com/decklist/standard-league-2026-07-1110879: HTTPSConnectionPool(host='www.mtgo.com', port=443): Read timed out. (read timeout=30) (attempt 1)
+  ! no data for standard-league-2026-07-0910879
+  request error for https://www.mtgo.com/decklist/standard-league-2026-06-2310660: HTTPSConnectionPool(host='www.mtgo.com', port=443): Read timed out. (read timeout=30) (attempt 1)
+  request error for https://www.mtgo.com/decklist/standard-league-2026-06-2210660: HTTPSConnectionPool(host='www.mtgo.com', port=443): Read timed out. (read timeout=30) (attempt 1)
+  request error for https://www.mtgo.com/decklist/standard-league-2026-06-2110660: HTTPSConnectionPool(host='www.mtgo.com', port=443): Read timed out. (read timeout=30) (attempt 1)
+  request error for https://www.mtgo.com/decklist/standard-league-2026-06-2210660: HTTPSConnectionPool(host='www.mtgo.com', port=443): Read timed out. (read timeout=30) (attempt 2)
+  request error for https://www.mtgo.com/decklist/standard-league-2026-06-2010660: HTTPSConnectionPool(host='www.mtgo.com', port=443): Read timed out. (read timeout=30) (attempt 1)
+  request error for https://www.mtgo.com/decklist/standard-league-2026-06-2110660: HTTPSConnectionPool(host='www.mtgo.com', port=443): Read timed out. (read timeout=30) (attempt 2)
+  request error for https://www.mtgo.com/decklist/standard-league-2026-06-2010660: HTTPSConnectionPool(host='www.mtgo.com', port=443): Read timed out. (read timeout=30) (attempt 2)
+  request error for https://www.mtgo.com/decklist/standard-league-2026-06-1810660: HTTPSConnectionPool(host='www.mtgo.com', port=443): Read timed out. (read timeout=30) (attempt 1)
+  request error for https://www.mtgo.com/decklist/standard-league-2026-06-1710660: HTTPSConnectionPool(host='www.mtgo.com', port=443): Read timed out. (read timeout=30) (attempt 1)
+  request error for https://www.mtgo.com/decklist/standard-league-2026-06-1810660: HTTPSConnectionPool(host='www.mtgo.com', port=443): Read timed out. (read timeout=30) (attempt 2)
+  request error for https://www.mtgo.com/decklist/standard-league-2026-06-1510660: HTTPSConnectionPool(host='www.mtgo.com', port=443): Read timed out. (read timeout=30) (attempt 1)
+  request error for https://www.mtgo.com/decklist/standard-league-2026-06-1810660: HTTPSConnectionPool(host='www.mtgo.com', port=443): Read timed out. (read timeout=30) (attempt 3)
+  request error for https://www.mtgo.com/decklist/standard-league-2026-06-1410660: HTTPSConnectionPool(host='www.mtgo.com', port=443): Read timed out. (read timeout=30) (attempt 1)
+  ! no data for standard-league-2026-06-1810660
+  ! no data for standard-challenge-32-2026-06-1512844351
+  request error for https://www.mtgo.com/decklist/standard-league-2026-06-1410660: HTTPSConnectionPool(host='www.mtgo.com', port=443): Read timed out. (read timeout=30) (attempt 2)
+  request error for https://www.mtgo.com/decklist/standard-challenge-32-2026-06-1312844322: HTTPSConnectionPool(host='www.mtgo.com', port=443): Read timed out. (read timeout=30) (attempt 1)
+  request error for https://www.mtgo.com/decklist/standard-league-2026-06-1110660: HTTPSConnectionPool(host='www.mtgo.com', port=443): Read timed out. (read timeout=30) (attempt 1)
+  request error for https://www.mtgo.com/decklist/standard-league-2026-06-1010660: HTTPSConnectionPool(host='www.mtgo.com', port=443): Read timed out. (read timeout=30) (attempt 1)
+  request error for https://www.mtgo.com/decklist/standard-league-2026-06-0910660: HTTPSConnectionPool(host='www.mtgo.com', port=443): Read timed out. (read timeout=30) (attempt 1)
+  request error for https://www.mtgo.com/decklist/standard-league-2026-06-1110660: HTTPSConnectionPool(host='www.mtgo.com', port=443): Read timed out. (read timeout=30) (attempt 2)
+  request error for https://www.mtgo.com/decklist/standard-league-2026-06-1010660: HTTPSConnectionPool(host='www.mtgo.com', port=443): Read timed out. (read timeout=30) (attempt 2)
+  ! no data for standard-league-2026-06-1110660
+  ! no data for standard-challenge-32-2026-06-0812843830
+  ! no data for standard-league-2026-06-0810660
+  ! no data for standard-challenge-32-2026-06-0712843820
+  ! no data for standard-league-2026-06-0710660
+  ! no data for standard-challenge-32-2026-06-0612843800
+  ! no data for standard-challenge-32-2026-06-0612843795
+Started: 2026-09-11T01:25:11.292232
+[standard] 219 events listed, 37 already saved, fetching 182 with 3 worker(s)
+  standard-challenge-16-2026-09-1012854059: 32 decks parsed, 32 saved
+  standard-league-2026-09-1011015: 6 decks parsed, 6 saved
+  standard-challenge-16-2026-09-0912853786: 24 decks parsed, 24 saved
+  standard-league-2026-09-0911015: 8 decks parsed, 8 saved
+  standard-challenge-32-2026-09-0812853721: 32 decks parsed, 32 saved
+  standard-league-2026-08-2011015: 8 decks parsed, 7 saved
+  standard-league-2026-08-1911015: 14 decks parsed, 14 saved
+  standard-challenge-32-2026-08-1812851725: 32 decks parsed, 32 saved
+  standard-league-2026-08-1811015: 13 decks parsed, 12 saved
+  standard-challenge-32-2026-08-1712851694: 32 decks parsed, 32 saved
+  standard-league-2026-08-1711015: 14 decks parsed, 14 saved
+  standard-challenge-32-2026-08-1612851684: 32 decks parsed, 32 saved
+  standard-league-2026-08-1611015: 10 decks parsed, 10 saved
+  standard-challenge-32-2026-08-1512851664: 32 decks parsed, 32 saved
+  standard-challenge-32-2026-08-1512851659: 32 decks parsed, 32 saved
+  standard-league-2026-08-1511015: 0 decks parsed, 0 saved
+  standard-challenge-32-2026-08-1412851651: 32 decks parsed, 32 saved
+  standard-league-2026-08-1411015: 0 decks parsed, 0 saved
+  standard-challenge-32-2026-08-1412851641: 32 decks parsed, 32 saved
+  standard-league-2026-08-1311015: 0 decks parsed, 0 saved
+  standard-challenge-32-2026-08-1312851628: 32 decks parsed, 32 saved
+  standard-league-2026-08-1211015: 16 decks parsed, 12 saved
+  standard-challenge-32-2026-08-1012851126: 32 decks parsed, 32 saved
+  standard-league-2026-08-1010879: 0 decks parsed, 0 saved
+  standard-challenge-32-2026-08-0912851116: 32 decks parsed, 32 saved
+  standard-league-2026-08-0910879: 5 decks parsed, 5 saved
+  standard-challenge-32-2026-08-0812851135: 32 decks parsed, 32 saved
+  standard-challenge-32-2026-08-0812850823: 32 decks parsed, 32 saved
+  standard-league-2026-08-0810879: 0 decks parsed, 0 saved
+  standard-league-2026-08-0510879: 2 decks parsed, 2 saved
+  standard-challenge-32-2026-08-0412849506: 32 decks parsed, 32 saved
+  standard-league-2026-08-0410879: 8 decks parsed, 8 saved
+  standard-challenge-32-2026-08-0312849496: 32 decks parsed, 32 saved
+  standard-league-2026-08-0310879: 7 decks parsed, 7 saved
+  standard-challenge-32-2026-08-0212849486: 32 decks parsed, 32 saved
+  standard-league-2026-08-0210879: 3 decks parsed, 2 saved
+  standard-showcase-qualifier-2026-08-0112849423: 29 decks parsed, 29 saved
+  standard-challenge-32-2026-08-0112849466: 32 decks parsed, 32 saved
+  standard-challenge-32-2026-08-0112849461: 32 decks parsed, 32 saved
+  standard-league-2026-08-0110879: 5 decks parsed, 4 saved
+  standard-challenge-32-2026-07-3112849453: 32 decks parsed, 32 saved
+  standard-league-2026-07-3110879: 3 decks parsed, 3 saved
+  standard-challenge-32-2026-07-3112849443: 32 decks parsed, 32 saved
+  standard-league-2026-07-3010879: 2 decks parsed, 2 saved
+  standard-challenge-32-2026-07-3012849430: 32 decks parsed, 32 saved
+  standard-league-2026-07-2910879: 8 decks parsed, 7 saved
+  standard-challenge-32-2026-07-2812848245: 32 decks parsed, 32 saved
+  standard-league-2026-07-2810879: 0 decks parsed, 0 saved
+  standard-challenge-32-2026-07-2712848235: 32 decks parsed, 32 saved
+  standard-league-2026-07-2710879: 6 decks parsed, 6 saved
+  standard-challenge-32-2026-07-2612848225: 32 decks parsed, 32 saved
+  standard-league-2026-07-2610879: 3 decks parsed, 3 saved
+  standard-challenge-32-2026-07-2512848205: 32 decks parsed, 32 saved
+  standard-challenge-32-2026-07-2512848200: 32 decks parsed, 32 saved
+  standard-league-2026-07-2510879: 2 decks parsed, 2 saved
+  standard-challenge-32-2026-07-2412848192: 32 decks parsed, 32 saved
+  standard-league-2026-07-2410879: 6 decks parsed, 6 saved
+  standard-challenge-32-2026-07-2412848182: 32 decks parsed, 32 saved
+  standard-league-2026-07-2310879: 3 decks parsed, 3 saved
+  standard-challenge-32-2026-07-2312848169: 32 decks parsed, 32 saved
+  standard-last-chance-2026-07-2212847740: 32 decks parsed, 32 saved
+  standard-challenge-32-2026-07-2112847734: 32 decks parsed, 32 saved
+  standard-last-chance-2026-07-2112847729: 21 decks parsed, 21 saved
+  standard-challenge-32-2026-07-2012847725: 0 decks parsed, 0 saved
+  standard-last-chance-2026-07-2012847723: 32 decks parsed, 32 saved
+  standard-last-chance-2026-07-2012847718: 28 decks parsed, 28 saved
+  standard-league-2026-07-2010879: 3 decks parsed, 3 saved
+  standard-challenge-32-2026-07-1912847716: 32 decks parsed, 32 saved
+  standard-league-2026-07-1910879: 7 decks parsed, 7 saved
+  standard-challenge-32-2026-07-1812847697: 32 decks parsed, 32 saved
+  standard-league-2026-07-1810879: 2 decks parsed, 2 saved
+  standard-challenge-32-2026-07-1712847684: 32 decks parsed, 32 saved
+  standard-league-2026-07-1710879: 2 decks parsed, 2 saved
+  standard-challenge-32-2026-07-1712847680: 32 decks parsed, 32 saved
+  standard-league-2026-07-1610879: 5 decks parsed, 5 saved
+  standard-challenge-32-2026-07-1612847673: 32 decks parsed, 32 saved
+  standard-league-2026-07-1510879: 2 decks parsed, 2 saved
+  standard-challenge-32-2026-07-1412847168: 32 decks parsed, 32 saved
+  standard-league-2026-07-1410879: 2 decks parsed, 2 saved
+  standard-challenge-32-2026-07-1312847158: 32 decks parsed, 32 saved
+  standard-league-2026-07-1310879: 2 decks parsed, 2 saved
+  standard-challenge-32-2026-07-1212847148: 32 decks parsed, 32 saved
+  standard-league-2026-07-1210879: 6 decks parsed, 6 saved
+  standard-showcase-challenge-2026-07-1112847088: 32 decks parsed, 32 saved
+  standard-challenge-32-2026-07-1112847125: 32 decks parsed, 32 saved
+  standard-league-2026-07-1110879: 6 decks parsed, 6 saved
+  standard-challenge-32-2026-07-1012847117: 32 decks parsed, 32 saved
+  standard-league-2026-07-1010879: 0 decks parsed, 0 saved
+  standard-challenge-32-2026-07-1012847107: 32 decks parsed, 32 saved
+  standard-challenge-32-2026-07-0912847094: 32 decks parsed, 32 saved
+  standard-league-2026-07-0810879: 0 decks parsed, 0 saved
+  standard-challenge-32-2026-07-0712846527: 32 decks parsed, 32 saved
+  standard-league-2026-07-0710879: 6 decks parsed, 6 saved
+  standard-challenge-32-2026-07-0612846517: 32 decks parsed, 32 saved
+  standard-league-2026-07-0610879: 7 decks parsed, 7 saved
+  standard-challenge-32-2026-07-0512846507: 32 decks parsed, 32 saved
+  standard-league-2026-07-0510879: 4 decks parsed, 4 saved
+  standard-challenge-32-2026-07-0412846487: 32 decks parsed, 32 saved
+  standard-challenge-32-2026-07-0412846482: 32 decks parsed, 32 saved
+  standard-league-2026-07-0410879: 3 decks parsed, 3 saved
+  standard-challenge-32-2026-07-0312846474: 32 decks parsed, 32 saved
+  standard-league-2026-07-0310879: 6 decks parsed, 6 saved
+  standard-challenge-32-2026-07-0312846464: 32 decks parsed, 32 saved
+  standard-league-2026-07-0210879: 1 decks parsed, 1 saved
+  standard-challenge-32-2026-07-0212846451: 32 decks parsed, 32 saved
+  standard-league-2026-07-0110879: 4 decks parsed, 4 saved
+  standard-challenge-32-2026-06-3012845710: 32 decks parsed, 32 saved
+  standard-league-2026-06-3010879: 5 decks parsed, 4 saved
+  standard-challenge-32-2026-06-2912845700: 32 decks parsed, 32 saved
+  standard-league-2026-06-2910879: 4 decks parsed, 4 saved
+  standard-challenge-32-2026-06-2812845690: 32 decks parsed, 32 saved
+  standard-rc-super-qualifier-2026-06-2812845613: 32 decks parsed, 32 saved
+  standard-league-2026-06-2810879: 2 decks parsed, 2 saved
+  standard-challenge-32-2026-06-2712845670: 32 decks parsed, 32 saved
+  standard-challenge-32-2026-06-2712845665: 32 decks parsed, 32 saved
+  standard-league-2026-06-2710879: 5 decks parsed, 5 saved
+  standard-challenge-32-2026-06-2612845657: 32 decks parsed, 32 saved
+  standard-league-2026-06-2610879: 3 decks parsed, 3 saved
+  standard-challenge-32-2026-06-2612845647: 32 decks parsed, 32 saved
+  standard-league-2026-06-2510879: 3 decks parsed, 3 saved
+  standard-challenge-32-2026-06-2512845634: 32 decks parsed, 32 saved
+  standard-league-2026-06-2410879: 1 decks parsed, 1 saved
+  standard-challenge-32-2026-06-2312845616: 32 decks parsed, 32 saved
+  standard-league-2026-06-2310660: 0 decks parsed, 0 saved
+  standard-league-2026-06-2310879: 0 decks parsed, 0 saved
+  standard-challenge-32-2026-06-2212844888: 32 decks parsed, 32 saved
+  standard-league-2026-06-2210660: 0 decks parsed, 0 saved
+  standard-challenge-32-2026-06-2112844878: 32 decks parsed, 32 saved
+  standard-league-2026-06-2110660: 0 decks parsed, 0 saved
+  standard-challenge-32-2026-06-2012844858: 32 decks parsed, 32 saved
+  standard-challenge-32-2026-06-2012844853: 32 decks parsed, 32 saved
+  standard-league-2026-06-2010660: 0 decks parsed, 0 saved
+  standard-challenge-32-2026-06-1912844845: 32 decks parsed, 32 saved
+  standard-league-2026-06-1910660: 0 decks parsed, 0 saved
+  standard-challenge-32-2026-06-1912844835: 32 decks parsed, 32 saved
+  standard-challenge-32-2026-06-1812844822: 32 decks parsed, 32 saved
+  standard-league-2026-06-1710660: 0 decks parsed, 0 saved
+  standard-challenge-32-2026-06-1612844909: 32 decks parsed, 32 saved
+  standard-league-2026-06-1610660: 0 decks parsed, 0 saved
+  standard-league-2026-06-1510660: 2 decks parsed, 2 saved
+  standard-challenge-32-2026-06-1412844341: 32 decks parsed, 32 saved
+  standard-league-2026-06-1410660: 6 decks parsed, 6 saved
+  standard-challenge-32-2026-06-1312844322: 32 decks parsed, 32 saved
+  standard-challenge-32-2026-06-1312844317: 32 decks parsed, 32 saved
+  standard-league-2026-06-1310660: 4 decks parsed, 4 saved
+  standard-challenge-32-2026-06-1212844309: 32 decks parsed, 32 saved
+  standard-league-2026-06-1210660: 4 decks parsed, 4 saved
+  standard-challenge-32-2026-06-1212844299: 32 decks parsed, 32 saved
+  standard-challenge-32-2026-06-1112844284: 32 decks parsed, 32 saved
+  standard-league-2026-06-1010660: 0 decks parsed, 0 saved
+  standard-challenge-32-2026-06-0912843840: 32 decks parsed, 32 saved
+  standard-league-2026-06-0910660: 0 decks parsed, 0 saved
+  standard-league-2026-06-0610660: 7 decks parsed, 7 saved
+  standard-challenge-32-2026-06-0512843787: 32 decks parsed, 32 saved
+  standard-league-2026-06-0510660: 3 decks parsed, 3 saved
+  standard-challenge-32-2026-06-0512843777: 32 decks parsed, 32 saved
+  standard-league-2026-06-0410660: 4 decks parsed, 4 saved
+  standard-challenge-32-2026-06-0412843764: 32 decks parsed, 32 saved
+  standard-league-2026-06-0310660: 8 decks parsed, 8 saved
+  standard-league-2026-06-0210660: 5 decks parsed, 5 saved
+  standard-challenge-32-2026-06-0112843438: 32 decks parsed, 32 saved
+  standard-league-2026-06-0110660: 5 decks parsed, 5 saved
+
+============================================================
+Summary
+  events_found     219
+  events_fetched   162
+  decks_saved      3039
+  skipped          37
+  errors           20
+Finished: 2026-09-11T01:49:01.185798 (1430s)

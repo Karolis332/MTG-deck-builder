@@ -1,0 +1,76 @@
+file      : C:/Users/QuLeR/AppData/Local/Temp/g-gil-final.txt
+format    : commander   commander: Gilanra, Caller of Wirewood
+totals    : 100 cards | 38 lands (38.4 eff.) | 60 nonland | avg MV 4.8
+curve     : 1:4 2:10 3:5 4:5 5:5 6:22 7:9
+VERDICT   : FAIL
+
+  PASS  size        100 cards (commander wants 100)
+  PASS  singleton   singleton respected (basics exempt)
+  PASS  legality    every card legal in commander
+  PASS  rules       no other format rule broken
+  FAIL  identity    40 card(s) outside G
+        - Burning Sun's Avatar
+        - Combustible Gearhulk
+        - Cyclops of Eternal Fury
+        - Drakuseth, Maw of Flames
+        - Emissary of Grudges
+        - Gruul Ragebeast
+        - Gruul Turf
+        - Hideous Taskmaster
+        - Moraug, Fury of Akoum
+        - Mountain
+        - Myojin of Roaring Blades
+        - Pyrewood Gearhulk
+        - Roxanne, Starfall Savant
+        - Ruby, Daring Tracker
+        - Samut, Tyrant Smasher
+        - Savage Mansion
+        - Sheltered Thicket
+        - Slinza, the Spiked Stampede
+        - Smellerbee, Rebel Fighter
+        - Spider Manifestation
+        - Spinerock Knoll
+        - Talisman of Impulse
+        - Temur Battle Rage
+        - Terror of the Peaks
+        - Trumpeting Carnosaur
+        - Warstorm Surge
+  PASS  ownership   all cards owned; paper collection imported 0 days ago
+  WARN  arenaNames  3 card(s) must be exported front-face only:
+        - 1 Tangled Florahedron
+        - 1 The Legend of Kyoshi
+        - 1 Vastlands Scavenger
+  WARN  lands       38 lands (+1 MDFC land backs = 38.4 effective); Karsten wants 43 ±2
+  WARN  plan        31/60 nonland cards interact (52%) — commander wants: mana value 6+; only 31/60 (52%) can satisfy it
+        - Bushwhack (MV 1)
+        - Elvish Mystic (MV 1)
+        - Llanowar Elves (MV 1)
+        - Sol Ring (MV 1)
+        - Arcane Signet (MV 2)
+        - Cream of the Crop (MV 2)
+        - Farseek (MV 2)
+        - Ilysian Caryatid (MV 2)
+        - Nature's Lore (MV 2)
+        - Ruby, Daring Tracker (MV 2)
+        - Spider Manifestation (MV 2)
+        - Talisman of Impulse (MV 2)
+        - Tangled Florahedron (MV 2)
+        - Temur Battle Rage (MV 2)
+        - Beast Within (MV 3)
+        - Master's Guidance (MV 3)
+        - Outcaster Trailblazer (MV 3)
+        - Selvala, Heart of the Wilds (MV 3)
+        - Vastlands Scavenger (MV 3)
+        - Monstrous Vortex (MV 4)
+        - Samut, Tyrant Smasher (MV 4)
+        - Skyshroud Claim (MV 4)
+        - Smellerbee, Rebel Fighter (MV 4)
+        - Surrak, the Hunt Caller (MV 4)
+        - Garruk's Packleader (MV 5)
+        - Roxanne, Starfall Savant (MV 5)
+        - Slinza, the Spiked Stampede (MV 5)
+        - Terror of the Peaks (MV 5)
+        - Traverse the Outlands (MV 5)
+  PASS  curve       avg MV 4.80; 29/60 nonland cards below the commander's 6-mana threshold (48%)
+  PASS  wincons     32 win condition(s)/closer(s)
+  PASS  locks       1 locked card(s) present and intact

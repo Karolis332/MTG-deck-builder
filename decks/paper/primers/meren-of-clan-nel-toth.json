@@ -1,0 +1,116 @@
+{
+  "version": 1,
+  "deck": {
+    "name": "Meren of Clan Nel Toth",
+    "commanders": ["Meren of Clan Nel Toth"],
+    "colours": "BG",
+    "format": "commander",
+    "list": "decks/paper/decks/meren-of-clan-nel-toth.txt",
+    "status": "sleeved"
+  },
+  "summary": "Feed sacrifice outlets with fodder (tokens and ETB creatures). [[Meren of Clan Nel Toth]] turns every death of another creature you control into an experience counter and, at the end step, either returns a graveyard creature at or under that experience total or puts it into hand. Drain payoffs (Zulaport, Cauldron, Konrad) convert the death count straight into damage, with a two-card [[Basking Broodscale]] loop as the unbounded closer when it is assembled.",
+  "phases": [
+    { "turns": "T1-3", "goal": "Hit 2-3 lands plus a dork, land an outlet before Meren.", "cards": ["Llanowar Elves", "Elvish Mystic", "Viscera Seer", "Sakura-Tribe Elder", "Woodland Cemetery"] },
+    { "turns": "T4-6", "goal": "Cast Meren with an outlet and fodder already down; start banking experience and drains.", "cards": ["Meren of Clan Nel Toth", "Blood Artist", "Zulaport Cutthroat", "Ophiomancer", "Plaguecrafter", "Long Feng, Grand Secretariat", "Basking Broodscale"] },
+    { "turns": "Close", "goal": "Assemble the Broodscale loop or chain edicts/Gray Merchant rebuys until the table is dead.", "cards": ["Basking Broodscale", "Long Feng, Grand Secretariat", "Mazirek, Kraul Death Priest", "Gray Merchant of Asphodel", "Syr Konrad, the Grim", "Jarad, Golgari Lich Lord"] }
+  ],
+  "engine": [
+    {
+      "title": "Broodscale + Long Feng loop",
+      "flow": ["[[Basking Broodscale]] makes a Spawn", "sac the Spawn to itself", "[[Long Feng, Grand Secretariat]] counter on Broodscale", "counter triggers another Spawn", "repeat"],
+      "note": "The Spawn is its own free outlet. A token reaches the graveyard before it ceases to exist (CR 111.7), so Long Feng's \"another creature you control or a land you control is put into a graveyard from the battlefield\" fires every pass. Each loop is one death (feeds Zulaport/Cauldron/Konrad) and one experience counter for Meren."
+    },
+    {
+      "title": "Broodscale + Mazirek loop",
+      "flow": ["[[Basking Broodscale]] makes a Spawn", "sacrifice the Spawn", "[[Mazirek, Kraul Death Priest]] counter on every creature", "repeat for unbounded +1/+1s", "[[Jarad, Golgari Lich Lord]] sacs a huge creature for damage"],
+      "note": "Mazirek: \"Whenever a player sacrifices another permanent, put a +1/+1 counter on each creature you control.\" A Spawn sacrifice counts. With the team pumped, Jarad's \"Sacrifice another creature: Each opponent loses life equal to the sacrificed creature's power\" kills outright."
+    },
+    {
+      "title": "Threshold sacrifice at Meren's end step",
+      "flow": ["[[Meren of Clan Nel Toth]] end-step trigger targets a graveyard creature card", "sacrifice fodder in response for experience", "trigger resolves, comparing that card's mana value with the new total", "at or under: battlefield; over: hand"],
+      "note": "Ruling: the count is the number of experience counters as the ability resolves, so sacrifices made in response still raise the threshold for that trigger. The target is chosen when the trigger goes on the stack (CR 603.3d), so a creature sacrificed in response can't be it."
+    },
+    {
+      "title": "Mikaeus mass undying",
+      "flow": ["[[Mikaeus, the Unhallowed]] grants undying to non-Humans", "sacrifice a Chupacabra/Gray Merchant/Blood Artist to a free outlet", "it returns with a +1/+1 counter, re-triggering any ETB", "repeat once per eligible creature"],
+      "note": "\"Other non-Human creatures you control get +1/+1 and have undying.\" Each eligible creature only loops once, since the returned copy carries the counter and undying checks for \"no +1/+1 counters on it\"."
+    }
+  ],
+  "winConditions": [
+    {
+      "name": "Aristocrat attrition",
+      "pieces": ["Zulaport Cutthroat", "Cauldron of Essence", "Blood Artist", "Syr Konrad, the Grim"],
+      "flow": ["loop or chain sacrifices all game", "each death triggers Zulaport/Cauldron/Konrad", "opponents lose 1 life per death (Konrad also pings per creature card leaving your graveyard)", "40 deaths (4-player pod) closes the table"],
+      "damage": "1 life per death per payoff on board; a 10-pass Broodscale loop with two payoffs out is 20 damage to each opponent",
+      "turn": "T6-8 estimate (not simulated), once the loop or a payoff plus fodder is assembled"
+    },
+    {
+      "name": "Gray Merchant recursion",
+      "pieces": ["Meren of Clan Nel Toth", "Gray Merchant of Asphodel", "Saw in Half", "Mikaeus, the Unhallowed"],
+      "flow": ["cast or reanimate [[Gray Merchant of Asphodel]] for a devotion drain", "sacrifice it for an experience counter", "Meren rebuys it at the end step (mana value 5)", "repeat each turn devotion supports a real drain"],
+      "damage": "X life per cast, where X is devotion to black; two ETBs via [[Saw in Half]] double it in one turn",
+      "turn": "T7+ once devotion is built"
+    },
+    {
+      "name": "Broodscale loop kill",
+      "pieces": ["Basking Broodscale", "Long Feng, Grand Secretariat", "Mazirek, Kraul Death Priest", "Zulaport Cutthroat"],
+      "flow": ["assemble Broodscale with Long Feng or Mazirek", "loop Spawn creation and sacrifice", "each pass drains 1 (Zulaport/Cauldron/Konrad) or pumps the team (Mazirek)", "loop to 40+ total drain, or swing lethal off Mazirek counters"],
+      "damage": "unbounded — stop at 40+ drains for a 4-player pod, or once Mazirek counters clear everyone's life total in combat",
+      "turn": "as early as T3-4 (pilot guide §3 ideal line loops on T4; T3 off the Sol Ring keep below); later turns not simulated"
+    }
+  ],
+  "metrics": {
+    "columns": ["Metric", "List"],
+    "rows": [
+      { "label": "Draw sources (09-28 Fable review)", "values": ["11 after the cut (Sylvan Library was 1 of 12: Dispute, Rites, Haruspex, Reaper, Opportunist, Moldervine, Liliana DG, ...)"] },
+      { "label": "Always-tapped lands / 35", "values": ["5"] }
+    ],
+    "note": "verify-2026-10-02/tam-precons/REFUTE.md §6 (donor integrity note on the Sylvan Library move)."
+  },
+  "swaps": [
+    {
+      "out": "Sylvan Library",
+      "in": null,
+      "role": "draw",
+      "reason": "Sylvan Library left Meren for Tam, where the operator named this exact move to pair it with Tam's walker-loyalty payoffs. Meren still runs 11 other draw sources (Deadly Dispute, Village Rites, Grim Haruspex, Midnight Reaper, Morbid Opportunist, Moldervine Reclamation, Liliana, Dreadhorde General, ...), so the loss is small and no replacement was added.",
+      "quoteOut": "At the beginning of your draw step, you may draw two additional cards. If you do, choose two cards in your hand drawn this turn. For each of those cards, pay 4 life or put the card on top of your library.",
+      "evidence": "REFUTE.md row 5 (Tam side) and §6 donor-integrity note: \"Library is 1 of Meren's 12 draw sources ... so the loss is small\"",
+      "verdict": "operator"
+    }
+  ],
+  "keepers": [
+    { "card": "The Gitrog, Ravenous Ride", "why": "An operator lock (09-28 audit, final-swaps.json: 'The Gitrog, Ravenous Ride stays'). A 6/5 trample, haste body; after it deals combat damage, sacrificing the creature that saddled it draws X cards and puts up to X lands onto the battlefield, X = that creature's power." },
+    { "card": "Long Feng, Grand Secretariat", "why": "The only other Broodscale-loop partner besides Mazirek, and it also counts land deaths (Fabled Passage, Myriad Landscape) as loop fuel. Nothing else in the identity replaces it." },
+    { "card": "Golgari Charm", "why": "Regenerates your whole board against destroy-based wipes, including your own Culling Ritual. It does nothing against -X/-X (Toxic Deluge, Massacre Wurm): a creature with toughness 0 is put into the graveyard and regeneration can't replace that (CR 704.5f). Its other modes kill X/1 tokens or an enchantment." },
+    { "card": "Chthonian Nightmare", "why": "Slow (needs energy and a sacrifice each activation) but it is repeatable reanimation that also feeds Meren's experience count on the sacrifice. It is one of four non-Meren reanimation effects (with Reanimate, Victimize and Cauldron of Essence), and the only one that returns to hand to be reused." },
+    { "card": "Braids, Cabal Minion", "why": "A symmetric sacrifice tax looks risky, but every upkeep an opponent pays with a real permanent while the operator pays with tokens (Ophiomancer's Snake, Jadar's decayed Zombie). Stays for the fodder-asymmetry it creates." },
+    { "card": "Culling Ritual", "why": "With Golgari Charm it is one-sided against creatures: it destroys every nonland permanent with MV 2 or less and adds mana for each, while regeneration saves the operator's own small creatures (not Sol Ring or other MV 2 or less noncreatures)." }
+  ],
+  "nearTies": [],
+  "mulligan": {
+    "keep": [
+      "Swamp, Woodland Cemetery, Forest, Llanowar Elves, Viscera Seer, Blood Artist, Deadly Dispute — Meren on T3 with an outlet and a payoff down",
+      "Swamp, Swamp, Blooming Marsh, Sol Ring, Basking Broodscale, Long Feng, Grand Secretariat, Infernal Grasp — two-card loop by T3",
+      "Command Tower, Swamp, Myriad Landscape, Sakura-Tribe Elder, Plaguecrafter, Village Rites, Midnight Reaper — ramp into Meren T4 with rebuy-able fodder"
+    ],
+    "mulligan": [
+      "Swamp, Forest, Gray Merchant of Asphodel, Massacre Wurm, Rune-Scarred Demon, Butcher of Malakir, Toxic Deluge — 2 lands, every spell but Toxic Deluge costs 5+",
+      "Swamp, Forest, Bojuka Bog, Temple of Malady, Grim Backwoods, High Market, Toxic Deluge — 6 lands, 2 of them colourless-only, one reactive spell",
+      "Llanowar Elves, Elvish Mystic, Swamp, Victimize, Reanimate, Chthonian Nightmare, Saw in Half — 1 land; every spell needs a graveyard or board that is not there yet"
+    ]
+  },
+  "pilotRules": [
+    "Get an outlet (Viscera Seer, Carrion Feeder, Woe Strider) down before Meren, so a removal spell on Meren still banks experience.",
+    "At the end step: count experience first, then sacrifice in response to the trigger if you are one mana value short of the best target.",
+    "Never equip Lightning Greaves to Broodscale or Long Feng's target — shroud blocks your own targeting.",
+    "With Liliana, Dreadhorde General or Moldervine Reclamation out, every Spawn death is a mandatory draw: 40 deaths with one drain payoff is 40 draws (80 with both). Broodscale's Spawn is a 'may', so stop the loop before the library runs out.",
+    "Meren's target is locked in when the trigger goes on the stack, before any other end-step trigger (Braids, Arisen Nightmare) resolves — it cannot return a creature Braids just sacrificed.",
+    "Mikaeus grants no undying to Humans (Meren, Plaguecrafter, Ophiomancer, Syr Konrad, Long Feng, Braids, Cabal Minion are all Human), and undying never returns a creature that had a +1/+1 counter."
+  ],
+  "sources": [
+    "decks/paper/decks/meren-of-clan-nel-toth.txt",
+    "verify-2026-10-07/primers/base/meren-of-clan-nel-toth.txt",
+    "verify-2026-10-02/tam-precons/REFUTE.md",
+    ".claude/skills/deck-building/reference/decks/meren-of-clan-nel-toth.md"
+  ]
+}

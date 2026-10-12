@@ -1,0 +1,46 @@
+  ▲ Next.js 14.2.35
+  - Local:        http://localhost:3010
+
+ ✓ Starting...
+ ✓ Ready in 5.6s
+ ○ Compiling / ...
+Browserslist: browsers data (caniuse-lite) is 8 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+ ✓ Compiled / in 3.3s (566 modules)
+ GET / 200 in 4038ms
+ ✓ Compiled in 719ms (276 modules)
+ ✓ Compiled /api/arena-matches in 481ms (327 modules)
+ POST /api/arena-matches 200 in 746ms
+ POST /api/arena-matches 200 in 747ms
+ POST /api/arena-matches 200 in 747ms
+ POST /api/arena-matches 200 in 746ms
+ POST /api/arena-matches 200 in 746ms
+ POST /api/arena-matches 200 in 750ms
+ POST /api/arena-matches 200 in 748ms
+ GET / 200 in 847ms
+ ✓ Compiled /api/cards/search in 136ms (399 modules)
+ ✓ Compiled (406 modules)
+ GET /api/collection 401 in 439ms
+ GET /api/auth/me 401 in 447ms
+ GET /api/cards/search?q=&limit=1 200 in 496ms
+ GET /api/decks 401 in 505ms
+ GET /api/collection 401 in 89ms
+ GET /api/auth/me 401 in 94ms
+ GET /api/cards/search?q=&limit=1 200 in 42ms
+ GET /api/decks 401 in 43ms
+ GET /api/cards/search?q=_healthcheck_ 500 in 1116ms
+ ✓ Compiled /api/arena-telemetry in 86ms (408 modules)
+ POST /api/arena-telemetry 200 in 179ms
+ POST /api/arena-telemetry 200 in 179ms
+ POST /api/arena-telemetry 200 in 179ms
+ POST /api/arena-telemetry 200 in 178ms
+ POST /api/arena-telemetry 200 in 177ms
+ POST /api/arena-telemetry 200 in 174ms
+ POST /api/arena-telemetry 200 in 174ms
+ POST /api/arena-telemetry 200 in 173ms
+ POST /api/arena-telemetry 200 in 173ms
+ POST /api/arena-telemetry 200 in 172ms
+ POST /api/arena-telemetry 200 in 172ms
+ POST /api/arena-telemetry 200 in 171ms
+ POST /api/arena-telemetry 200 in 180ms

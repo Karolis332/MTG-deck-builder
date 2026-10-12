@@ -1,0 +1,253 @@
+[
+  {
+    "page": "home",
+    "width": 1280,
+    "theme": "light",
+    "overflow": {
+      "width": 1280,
+      "offenders": []
+    },
+    "violations": []
+  },
+  {
+    "page": "builder",
+    "width": 1280,
+    "theme": "light",
+    "overflow": {
+      "width": 1280,
+      "offenders": []
+    },
+    "violations": []
+  },
+  {
+    "page": "commanders",
+    "width": 1280,
+    "theme": "light",
+    "overflow": {
+      "width": 1280,
+      "offenders": []
+    },
+    "violations": []
+  },
+  {
+    "page": "dashboard/fx-check",
+    "width": 1280,
+    "theme": "light",
+    "overflow": {
+      "width": 1280,
+      "offenders": []
+    },
+    "violations": []
+  },
+  {
+    "page": "optimizer",
+    "width": 1280,
+    "theme": "light",
+    "overflow": {
+      "width": 1280,
+      "offenders": []
+    },
+    "violations": []
+  },
+  {
+    "page": "download",
+    "width": 1280,
+    "theme": "light",
+    "overflow": {
+      "width": 1280,
+      "offenders": []
+    },
+    "violations": []
+  },
+  {
+    "page": "commanders/the-ur-dragon",
+    "width": 1280,
+    "theme": "light",
+    "overflow": {
+      "width": 1280,
+      "offenders": []
+    },
+    "violations": []
+  },
+  {
+    "page": "home",
+    "width": 1280,
+    "theme": "dark",
+    "overflow": {
+      "width": 1280,
+      "offenders": []
+    },
+    "violations": []
+  },
+  {
+    "page": "builder",
+    "width": 1280,
+    "theme": "dark",
+    "overflow": {
+      "width": 1280,
+      "offenders": []
+    },
+    "violations": []
+  },
+  {
+    "page": "commanders",
+    "width": 1280,
+    "theme": "dark",
+    "overflow": {
+      "width": 1280,
+      "offenders": []
+    },
+    "violations": []
+  },
+  {
+    "page": "dashboard/fx-check",
+    "width": 1280,
+    "theme": "dark",
+    "overflow": {
+      "width": 1280,
+      "offenders": []
+    },
+    "violations": []
+  },
+  {
+    "page": "optimizer",
+    "width": 1280,
+    "theme": "dark",
+    "overflow": {
+      "width": 1280,
+      "offenders": []
+    },
+    "violations": []
+  },
+  {
+    "page": "download",
+    "width": 1280,
+    "theme": "dark",
+    "overflow": {
+      "width": 1280,
+      "offenders": []
+    },
+    "violations": []
+  },
+  {
+    "page": "commanders/the-ur-dragon",
+    "width": 1280,
+    "theme": "dark",
+    "overflow": {
+      "width": 1280,
+      "offenders": []
+    },
+    "violations": []
+  },
+  {
+    "page": "home",
+    "width": 390,
+    "theme": "light",
+    "overflow": {
+      "width": 390,
+      "offenders": []
+    },
+    "violations": []
+  },
+  {
+    "page": "builder",
+    "width": 390,
+    "theme": "light",
+    "overflow": {
+      "width": 390,
+      "offenders": []
+    },
+    "violations": []
+  },
+  {
+    "page": "commanders",
+    "width": 390,
+    "theme": "light",
+    "overflow": {
+      "width": 390,
+      "offenders": []
+    },
+    "violations": []
+  },
+  {
+    "page": "dashboard/fx-check",
+    "width": 390,
+    "theme": "light",
+    "overflow": {
+      "width": 390,
+      "offenders": []
+    },
+    "violations": []
+  },
+  {
+    "page": "optimizer",
+    "width": 390,
+    "theme": "light",
+    "overflow": {
+      "width": 390,
+      "offenders": []
+    },
+    "violations": []
+  },
+  {
+    "page": "download",
+    "width": 390,
+    "theme": "light",
+    "overflow": {
+      "width": 390,
+      "offenders": []
+    },
+    "violations": []
+  },
+  {
+    "page": "commanders/the-ur-dragon",
+    "width": 390,
+    "theme": "light",
+    "overflow": {
+      "width": 390,
+      "offenders": [
+        {
+          "tag": "SPAN",
+          "class": "text-muted-foreground",
+          "text": " by Joey_EDHREC"
+        },
+        {
+          "tag": "SPAN",
+          "class": "text-muted-foreground",
+          "text": " by Joey_EDHREC"
+        },
+        {
+          "tag": "SPAN",
+          "class": "text-muted-foreground",
+          "text": " by MTG_Eric"
+        },
+        {
+          "tag": "SPAN",
+          "class": "text-muted-foreground",
+          "text": " by Bodal"
+        }
+      ]
+    },
+    "violations": []
+  },
+  {
+    "page": "home",
+    "width": 390,
+    "theme": "dark",
+    "overflow": {
+      "width": 390,
+      "offenders": []
+    },
+    "violations": []
+  },
+  {
+    "page": "builder",
+    "width": 390,
+    "theme": "dark",
+    "overflow": {
+      "width": 390,
+      "offenders": []
+    },
+    "violations": []
+  }
+]

@@ -1,0 +1,129 @@
+{
+  "version": 1,
+  "deck": {
+    "name": "Tam, the Possibility",
+    "commanders": ["Tam, the Possibility"],
+    "colours": "WUBRG",
+    "format": "commander",
+    "list": "decks/paper/decks/tam-the-possibility.txt",
+    "status": "sleeved"
+  },
+  "summary": "Ramp into [[Tam, the Possibility]], then stack [[Way of the Paradox]] and [[Way of the Mentor]] so every loyalty activation gains 1 life and that life puts a counter on every walker. Deploy a walker a turn behind that lifegain loop, then turn the loyalty surplus into a burn grind, a Jace-25 mill lock, or 10 poison.",
+  "phases": [
+    { "turns": "T1-3", "goal": "ramp into Tam with rocks and dorks", "cards": ["Sol Ring", "Arcane Signet", "Talisman of Conviction", "Bloom Tender", "Faeburrow Elder", "Tam, the Possibility"] },
+    { "turns": "T3-6", "goal": "stack Way of the Paradox and Way of the Mentor, then a walker a turn", "cards": ["Way of the Paradox", "Way of the Mentor", "Ajani Resolute", "Oko, Thief of Crowns", "Jace, Reality Sculptor"] },
+    { "turns": "T6+", "goal": "convert the loyalty surplus into an ultimate, the Jace lock, or poison", "cards": ["Tam, the Possibility", "Jace, Memory Adept", "Vraska, Betrayal's Sting", "Way of the Warlord"] }
+  ],
+  "engine": [
+    {
+      "title": "Paradox x Mentor",
+      "flow": ["Activate any walker's loyalty ability", "[[Way of the Paradox]] triggers: gain 1 life, play an extra land", "[[Way of the Mentor]] triggers off that lifegain: +1 loyalty on every walker you control"],
+      "note": "The loyalty cost is paid first (CR 606.4). A walker taken to 0 by its own cost dies to state-based actions (CR 704.5i) before the Mentor counter arrives — Mentor never refunds a minus-to-zero."
+    },
+    {
+      "title": "Five-colour mana for Tam",
+      "flow": ["[[Bloom Tender]] or [[Faeburrow Elder]] reads colours among your permanents", "Add one mana per colour among them", "[[Timeless Lotus]] taps for {W}{U}{B}{R}{G} outright", "With all five colours, Tam's activation is paid in a single tap"]
+    },
+    {
+      "title": "Jace token stack",
+      "flow": ["The seven Ways each empower the Jace token (34 loyalty total)", "[[Jace, Reality Sculptor]]'s +1 empowers it again, X = Islands you control", "Token, [[Jace, Reality Sculptor]] and [[Jace, Memory Adept]] all count toward 25 loyalty among Jaces"],
+      "note": "Empower never puts counters on Jace, Reality Sculptor or Jace, Memory Adept themselves, only on the token (Scryfall ruling)."
+    },
+    {
+      "title": "Tam's proliferate",
+      "flow": ["Every walker activation for the turn has resolved", "[[Tam, the Possibility]]: {W}{U}{B}{R}{G}, {T}: proliferate X times, X = planeswalker types among your planeswalkers", "Every walker (and any poison counters placed) gets +1"],
+      "note": "X locks when the ability resolves. {T} is in the cost, so Tam can't activate it the turn it enters (summoning sickness, CR 302.6)."
+    }
+  ],
+  "winConditions": [
+    {
+      "name": "Walker burn grind",
+      "pieces": ["Way of the Mentor", "Way of the Warlord", "Chandra, Awakened Inferno", "Kaya, Intangible Slayer", "Tezzeret, Master of the Bridge"],
+      "flow": ["Cast walkers first for Tam's discount, then activate low-loyalty walkers", "[[Way of the Mentor]] puts a loyalty counter on every walker off each lifegain", "[[Way of the Warlord]] grants [-4]: 2 damage to up to one creature or planeswalker and 2 to a player", "[[Chandra, Awakened Inferno]] +2 gives each opponent a 1-damage-per-upkeep emblem", "[[Kaya, Intangible Slayer]] +2 drains 3 more"],
+      "damage": "2 (Warlord) + 3 (Kaya) + 1/turn recurring (Chandra emblem), scaling with every walker under Mentor",
+      "turn": "T6-9, no single card required (pilot guide rank 1; an estimate, not simulated)"
+    },
+    {
+      "name": "Jace-25 mill lock",
+      "pieces": ["Jace, Reality Sculptor", "Jace, Memory Adept", "Entrust the Spark"],
+      "flow": ["[[Entrust the Spark]] sacrifices a spent walker to fetch another Jace", "The Ways empower the Jace token toward 25 loyalty among Jaces", "[[Jace, Reality Sculptor]] 0: exile all but the bottom card of each opponent's library (needs 25+ loyalty among Jaces)", "[[Jace, Memory Adept]] -7: any number of target players each draw 20 cards"],
+      "damage": "opponents are forced through their nearly-empty library and deck out",
+      "turn": "rarely: the sleeved list is lock-ready by T7 / T9 in .06 / .08 of games (verify-2026-10-03/tam-wincon/build-report.md §2)"
+    },
+    {
+      "name": "Poison",
+      "pieces": ["Vraska, Betrayal's Sting", "Atomize", "Flux Channeler"],
+      "flow": ["[[Vraska, Betrayal's Sting]] -9: give a player poison counters up to 9", "Cast [[Atomize]] or any other noncreature spell the same turn", "[[Flux Channeler]] triggers off that noncreature spell and proliferates", "Poison goes to 10, the player loses"],
+      "damage": "10 poison counters = loss",
+      "turn": "T8+, once Vraska is at 9 loyalty and a proliferate source is in hand"
+    }
+  ],
+  "metrics": {
+    "columns": ["Metric", "09-30 fixed point (35 lands)", "precon pass (35 lands, before the Plains cut)"],
+    "rows": [
+      { "label": "Expected untapped W by T3", "values": ["7.6", "9.1"] },
+      { "label": "Expected untapped U by T3", "values": ["10.2", "11.1"] },
+      { "label": "Expected untapped B by T3", "values": ["5.5", "7.8"] },
+      { "label": "Expected untapped R by T3", "values": ["5.8", "5.9"] },
+      { "label": "Expected untapped G by T3", "values": ["5.6", "7.5"] },
+      { "label": "Lands tapped on T3", "values": ["18", "13"] }
+    ],
+    "note": "tam-report.md's mana model, run before the operator's later Plains-for-Nexus-Mentality swap took the list to 34 lands; directionally still correct (fewer walker-gated lands, more always-untapped duals)."
+  },
+  "swaps": [
+    { "out": "Vraska's Final Mercy", "in": "Anguished Unmaking", "role": "removal", "reason": "Anguished Unmaking is an instant that exiles any nonland permanent, not just a creature or walker, and its 3-life cost is regained by three loyalty activations under Way of the Paradox (1 life each). Vraska's Final Mercy is a {B}{B} sorcery limited to creatures and walkers, and its other mode (Empower Jace 6) is redundant: the seven Ways already empower the token for 34 loyalty total.", "quoteOut": "You lose 2 life. Destroy target creature or planeswalker.", "quoteIn": "Exile target nonland permanent. You lose 3 life.", "evidence": "REFUTE.md swap #4", "verdict": "recommended" },
+    { "out": "Meticulous Commons", "in": "Caves of Koilos", "role": "land", "reason": "Caves of Koilos is untapped from turn 1. Meticulous Commons needs a planeswalker already on the battlefield to enter untapped, which REFUTE.md's sim puts at 0.06 untapped on turn 3.", "quoteOut": "This land enters tapped unless you control a planeswalker.", "quoteIn": "{T}: Add {W} or {B}. This land deals 1 damage to you.", "evidence": "REFUTE.md swap #2 (sim)", "verdict": "recommended" },
+    { "out": "Isolated Chapel", "in": "Turbulent Moor", "role": "land", "reason": "Turbulent Moor is typed Plains Swamp, so it turns on Clifftop Retreat, Dragonskull Summit and Bleachbone Verge's white side; its own tapped clause depends on opponents' lands, not on its type. Isolated Chapel's only enabler before this swap was the deck's single Plains, which the operator later cut outright (see swap 8).", "quoteOut": "This land enters tapped unless you control a Plains or a Swamp.", "quoteIn": "This land enters tapped unless your opponents control eight or more lands.", "evidence": "REFUTE.md swap #8", "verdict": "recommended" },
+    { "out": "Transformative Commons", "in": "Yavimaya Coast", "role": "land", "reason": "Yavimaya Coast is untapped G/U from turn 1, against a land that needs a planeswalker in play first to enter untapped.", "quoteOut": "This land enters tapped unless you control a planeswalker.", "quoteIn": "{T}: Add {G} or {U}. This land deals 1 damage to you.", "evidence": "REFUTE.md swap #6", "verdict": "recommended" },
+    { "out": "Formidable Commons", "in": "Turbulent Wilderness", "role": "land", "reason": "REFUTE.md's swap #7 donated Llanowar Wastes from Meren for this slot, but the operator kept Llanowar Wastes in Meren's own list instead. Turbulent Wilderness, untapped once opponents control 8+ lands between them (about T3 in a 4-player pod, LEARNINGS.md 2026-10-02), took the slot instead, still beating Formidable Commons' planeswalker-gated condition.", "quoteOut": "This land enters tapped unless you control a planeswalker. {T}: Add {B} or {G}.", "quoteIn": "This land enters tapped unless your opponents control eight or more lands.", "evidence": "REFUTE.md swap #7; Session Log 2026-10-02 (Meren v10)", "verdict": "operator" },
+    { "out": "Farseek", "in": "Uro, Titan of Nature's Wrath", "role": "ramp", "reason": "Uro's enter/attack trigger is itself a Way of the Mentor trigger (lifegain puts loyalty on every walker) and an Ajani Resolute trigger, the land it puts onto the battlefield is not forced tapped (and, like any land, triggers Evolution Sage's proliferate), and Escape lets it repeat later. Farseek's fetched land always enters tapped, and REFUTE.md names Farseek the weakest kept accelerant from the 09-30 fixed point.", "quoteOut": "Search your library for a Plains, Island, Swamp, or Mountain card, put it onto the battlefield tapped, then shuffle.", "quoteIn": "Whenever Uro enters or attacks, you gain 3 life and draw a card, then you may put a land card from your hand onto the battlefield.", "evidence": "REFUTE.md section 5, missed swap 1", "verdict": "recommended" },
+    { "out": "The Wanderer", "in": "Sylvan Library", "role": "card draw", "reason": "The Wanderer has no planeswalker type (it adds nothing to Tam's proliferate X) and no plus ability (its only ability is -2). Sylvan Library gives two extra cards of selection every draw step from turn 3 (cast on turn 2), paid for with the life Paradox and Mentor are already generating. Cost of the swap: The Wanderer's prevention no longer stops the damage from Tam's 3 painlands and 3 Talismans.", "quoteOut": "Prevent all noncombat damage that would be dealt to you and other permanents you control.", "quoteIn": "At the beginning of your draw step, you may draw two additional cards. If you do, choose two cards in your hand drawn this turn. For each of those cards, pay 4 life or put the card on top of your library.", "evidence": "REFUTE.md swap #5", "verdict": "recommended" },
+    { "out": "Plains", "in": "Nexus Mentality", "role": "operator variant", "reason": "REFUTE.md's swap #1 paired Nexus Mentality with cutting Entrust the Spark, but the operator kept Entrust to sacrifice a spent Jace token for a fresh walker (Session Log 2026-10-02). The deck's sole Plains came out instead, dropping Tam to 34 lands, and Nexus Mentality took that slot: an instant that moves a Jace token's counters onto another walker for an early ultimate, or strips them to draw that many cards; with Tam (a commander) on the battlefield it may do both.", "quoteIn": "Move all counters from target nonland permanent you control onto another target nonland permanent you control.", "evidence": "REFUTE.md swap #1; Session Log 2026-10-02", "verdict": "operator" },
+    { "out": "Woodland Cemetery", "in": "Dragonskull Summit", "role": "registry fix", "reason": "A physical box check (decks/paper/deck-check.html) found Dragonskull Summit sleeved in the Tam box and Woodland Cemetery not. This is a registry correction to match the physical deck, not a strategic choice between the two check lands.", "evidence": "Session Log 2026-10-02 (v8 box check)", "verdict": "operator" }
+  ],
+  "keepers": [
+    { "card": "Evolution Sage", "why": "'Landfall — Whenever a land you control enters, proliferate.' can add a loyalty counter to every walker on every land drop, and Way of the Paradox's extra land drops repeat it. tam-report.md's stop proof ranks Phyrexian Arena below it; REFUTE.md section 4 ranks Tomik, Wielder of Law and Solarium Sentry below it." },
+    { "card": "Settle the Wreckage", "why": "Settle actually stops the attack at instant speed. tam-report.md's stop proof ranks Promise of Loyalty below it: Promise is a sorcery, and each player keeps one creature, so it also sacrifices Tam's own mana dorks." },
+    { "card": "Vigorbloom Charm", "why": "At instant speed it gives a walker hexproof and indestructible until end of turn, which stops targeted removal and destroy effects; it does not stop combat damage, which still removes loyalty (CR 306.8, 704.5i). Its draw-a-card-and-gain-3-life mode is a Mentor trigger. REFUTE.md section 4 rejects Tomik, Wielder of Law on other grounds: it is a conditional draw body, not protection, and its 3-life tax deters the two-attacker attacks that trigger it." },
+    { "card": "Quintorius Kand", "why": "tam-report.md's stop proof ranks Mangara, the Diplomat below it: [[Chimil, the Inner Sun]]'s end-step discover 5 and Quintorius's own -3 (discover 4) cast spells from exile, and each one makes Quintorius deal 2 damage to each opponent. It also has a plus ability and adds a planeswalker type to Tam's proliferate count (REFUTE.md section 4)." },
+    { "card": "Entrust the Spark", "why": "Looks replaceable by Nexus Mentality (REFUTE.md's original pairing), but the operator kept it specifically to sacrifice a spent Jace token for a fresh walker (Session Log 2026-10-02)." },
+    { "card": "Sarkhan the Masterless", "why": "Does not combine with the loyalty engine: '+1: each planeswalker you control becomes a 4/4 red Dragon' strips Tam's X to 0 and wastes that turn's Mentor triggers (pilot guide misplay warning). It stays as a one-time surprise lethal swing with evasion when the grind is too slow, not as a combo piece." }
+  ],
+  "nearTies": [
+    { "kept": "Rootbound Crag", "alt": "Konstrari Annex", "note": "REFUTE.md section 5: a checkland with 3 enablers is untapped 0.19/0.22/0.25 on T2-T4 against 0.00/0.06/0.28 for a walker-gated land, and the walker-gated land only pulls ahead from T5 (0.51 vs 0.28). Left to the operator; Rootbound Crag is also the owned, sleeved copy." },
+    { "kept": "Nomad Outpost", "alt": "Path of Ancestry", "note": "tam-report.md's swap #3 recommended Path of Ancestry (any WUBRG colour, plus a scry when spent on a creature sharing Tam's type) over Nomad Outpost (R/W/B only); both always enter tapped. The operator kept the sleeved Nomad Outpost." }
+  ],
+  "mulligan": {
+    "keep": [
+      "3-4 lands including a G and a U source for Tam, plus a third colour",
+      "at least 1 accelerant ([[Sol Ring]], a Signet or Talisman, [[Bloom Tender]], [[Faeburrow Elder]])",
+      "at least 1 engine piece ([[Way of the Paradox]] or [[Way of the Mentor]]) or a cheap walker ([[Ajani Resolute]], [[Oko, Thief of Crowns]])",
+      "a 2-lander only with Sol Ring or a Signet plus 2-drops, and only on the draw"
+    ],
+    "mulligan": [
+      "no green or blue source: Tam never resolves",
+      "6+ lands with no accelerant and no engine piece",
+      "one tapped land and nothing to ramp off before T3",
+      "a wrath in hand next to 5+ spells needing colours you don't have"
+    ]
+  },
+  "pilotRules": [
+    "Cast walkers before activating abilities: every later activation's Mentor counter then lands on them too. Interplanar Beacon gains 1 life when a walker is cast, Liliana the Faultless when one enters.",
+    "Activate plus/0 abilities on low-loyalty walkers before the minuses: each Mentor trigger raises every walker first.",
+    "Fire Tam's proliferate only after every other activation that turn has resolved.",
+    "Never spend a walker's last loyalty on its own ability cost expecting Mentor to refund it - it dies first (CR 704.5i).",
+    "Hold Counterspell or Dovin's Veto for a sweeper or walker removal, not a creature spell.",
+    "Close the Jace-25 lock with Jace, Memory Adept's -7 the same turn you activate Jace, Reality Sculptor's 0, or hold an answer for the swing-back.",
+    "Sarkhan's +1 strips every walker's type for the turn: use it only as a surprise lethal swing, never mid-combo.",
+    "Treat Nexus Mentality as two separate lines: move counters for an early ultimate, or strip + draw off a spent Jace token."
+  ],
+  "sources": [
+    "decks/paper/decks/tam-the-possibility.txt",
+    "verify-2026-10-07/primers/base/tam-the-possibility.txt",
+    "verify-2026-10-02/tam-precons/tam-report.md",
+    "verify-2026-10-02/tam-precons/REFUTE.md",
+    "verify-2026-10-02/tam-precons/newcards-report.md",
+    ".claude/skills/deck-building/reference/decks/tam-the-possibility.md",
+    "CLAUDE.md Session Log, 2026-10-02 entries"
+  ]
+}

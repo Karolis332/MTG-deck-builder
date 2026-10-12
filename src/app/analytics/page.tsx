@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
-  PieChart, Pie, Cell, LineChart, Line, Legend,
+  PieChart, Pie, Cell, LineChart, Line, Legend, LabelList,
 } from 'recharts';
 
 interface AnalyticsData {
@@ -12,7 +12,7 @@ interface AnalyticsData {
     total_games: number; wins: number; losses: number; draws: number; win_rate: number;
   }>;
   deck_performance: { decks: Array<{
-    deck_id: number; deck_name: string; format: string;
+    deck_id: number | null; deck_name: string; format: string;
     total_games: number; wins: number; win_rate: number;
   }> };
   card_performance: {
@@ -36,6 +36,18 @@ const TYPE_COLORS: Record<string, string> = {
   Creature: '#22c55e', Instant: '#3b82f6', Sorcery: '#ef4444',
   Artifact: '#a855f7', Enchantment: '#eab308', Planeswalker: '#f97316',
   Land: '#6b7280', Other: '#64748b',
+};
+
+// Recharts' default tooltip text colors fall back to a dark theme, invisible on our dark cards.
+const TOOLTIP_PROPS = {
+  contentStyle: {
+    backgroundColor: 'hsl(var(--card))',
+    border: '1px solid hsl(var(--border))',
+    borderRadius: 8,
+    fontSize: 12,
+  },
+  itemStyle: { color: 'hsl(var(--foreground))' },
+  labelStyle: { color: 'hsl(var(--foreground))' },
 };
 
 export default function AnalyticsPage() {
@@ -194,15 +206,7 @@ export default function AnalyticsPage() {
                 tickFormatter={(v: string) => v.slice(5)}
               />
               <YAxis tick={{ fontSize: 10, fill: 'hsl(var(--foreground))' }} stroke="hsl(var(--muted-foreground))" />
-              <Tooltip
-                contentStyle={{
-                  backgroundColor: 'hsl(var(--card))',
-                  border: '1px solid hsl(var(--border))',
-                  borderRadius: 8,
-                  fontSize: 12,
-                  color: 'hsl(var(--foreground))',
-                }}
-              />
+              <Tooltip {...TOOLTIP_PROPS} />
               <Legend wrapperStyle={{ fontSize: 11 }} />
               <Line type="monotone" dataKey="games" stroke="hsl(var(--primary))" name="Games" strokeWidth={2} />
               <Line type="monotone" dataKey="wins" stroke="#22c55e" name="Wins" strokeWidth={2} />
@@ -230,10 +234,14 @@ export default function AnalyticsPage() {
               return (
                 <div
                   key={i}
-                  className={`flex-1 rounded-t transition-all ${barColor}`}
+                  className={`flex flex-1 items-end justify-center overflow-hidden rounded-t transition-all ${barColor}`}
                   style={{ height: `${Math.max(height, day.games > 0 ? 15 : 4)}%` }}
                   title={`${day.date}: ${day.wins}W/${day.games - day.wins}L (${day.games > 0 ? Math.round(wr) : 0}%)`}
-                />
+                >
+                  {day.games > 0 && (
+                    <span className="text-[7px] font-bold leading-none text-white">{Math.round(wr)}</span>
+                  )}
+                </div>
               );
             })}
           </div>
@@ -260,15 +268,10 @@ export default function AnalyticsPage() {
                 <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
                 <XAxis dataKey="cmc" tick={{ fontSize: 11, fill: 'hsl(var(--foreground))' }} stroke="hsl(var(--muted-foreground))" />
                 <YAxis tick={{ fontSize: 11, fill: 'hsl(var(--foreground))' }} stroke="hsl(var(--muted-foreground))" />
-                <Tooltip
-                  contentStyle={{
-                    backgroundColor: 'hsl(var(--card))',
-                    border: '1px solid hsl(var(--border))',
-                    borderRadius: 8,
-                    fontSize: 12,
-                  }}
-                />
-                <Bar dataKey="count" fill="hsl(var(--primary))" radius={[4, 4, 0, 0]} />
+                <Tooltip {...TOOLTIP_PROPS} />
+                <Bar dataKey="count" fill="hsl(var(--primary))" radius={[4, 4, 0, 0]}>
+                  <LabelList dataKey="count" position="top" fill="hsl(var(--foreground))" fontSize={11} />
+                </Bar>
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -286,23 +289,21 @@ export default function AnalyticsPage() {
                   nameKey="name"
                   cx="50%"
                   cy="50%"
-                  outerRadius={80}
+                  outerRadius={70}
                   strokeWidth={2}
                   stroke="hsl(var(--card))"
+                  label={({ percent }: { percent: number }) => `${Math.round(percent * 100)}%`}
+                  labelLine
                 >
                   {colorData.map((entry, i) => (
                     <Cell key={i} fill={entry.color} />
                   ))}
                 </Pie>
-                <Tooltip
-                  contentStyle={{
-                    backgroundColor: 'hsl(var(--card))',
-                    border: '1px solid hsl(var(--border))',
-                    borderRadius: 8,
-                    fontSize: 12,
-                  }}
+                <Tooltip {...TOOLTIP_PROPS} />
+                <Legend
+                  wrapperStyle={{ fontSize: 11 }}
+                  formatter={(value: string) => <span style={{ color: 'hsl(var(--foreground))' }}>{value}</span>}
                 />
-                <Legend wrapperStyle={{ fontSize: 11 }} />
               </PieChart>
             </ResponsiveContainer>
           </div>
@@ -316,19 +317,13 @@ export default function AnalyticsPage() {
               <BarChart data={typeData} layout="vertical">
                 <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
                 <XAxis type="number" tick={{ fontSize: 11, fill: 'hsl(var(--foreground))' }} stroke="hsl(var(--muted-foreground))" />
-                <YAxis dataKey="name" type="category" width={90} tick={{ fontSize: 11, fill: 'hsl(var(--foreground))' }} stroke="hsl(var(--muted-foreground))" />
-                <Tooltip
-                  contentStyle={{
-                    backgroundColor: 'hsl(var(--card))',
-                    border: '1px solid hsl(var(--border))',
-                    borderRadius: 8,
-                    fontSize: 12,
-                  }}
-                />
+                <YAxis dataKey="name" type="category" width={90} interval={0} tick={{ fontSize: 11, fill: 'hsl(var(--foreground))' }} stroke="hsl(var(--muted-foreground))" />
+                <Tooltip {...TOOLTIP_PROPS} />
                 <Bar dataKey="value" radius={[0, 4, 4, 0]}>
                   {typeData.map((entry, i) => (
                     <Cell key={i} fill={entry.color} />
                   ))}
+                  <LabelList dataKey="value" position="right" fill="hsl(var(--foreground))" fontSize={11} />
                 </Bar>
               </BarChart>
             </ResponsiveContainer>
@@ -340,36 +335,45 @@ export default function AnalyticsPage() {
           <div className="rounded-2xl border border-border bg-card p-4">
             <h2 className="mb-3 text-sm font-semibold">Deck Performance</h2>
             <div className="space-y-2">
-              {data.deck_performance.decks.slice(0, 10).map((deck) => (
-                <Link
-                  key={deck.deck_id}
-                  href={`/deck/${deck.deck_id}`}
-                  className="group flex items-center gap-3 rounded-lg px-3 py-2 transition-colors hover:bg-accent/50"
-                >
-                  <div className="flex-1 min-w-0">
-                    <div className="text-sm font-medium">{deck.deck_name}</div>
-                    <div className="text-[10px] text-muted-foreground capitalize">
-                      {deck.format} &middot; {deck.total_games} games &middot; {deck.wins}W
+              {data.deck_performance.decks.slice(0, 10).map((deck) => {
+                const rowClass = 'group flex items-center gap-3 rounded-lg px-3 py-2 transition-colors hover:bg-accent/50';
+                const rowContent = (
+                  <>
+                    <div className="flex-1 min-w-0">
+                      <div className="text-sm font-medium">{deck.deck_name}</div>
+                      <div className="text-[10px] text-muted-foreground capitalize">
+                        {deck.format} &middot; {deck.total_games} games &middot; {deck.wins}W
+                      </div>
                     </div>
-                  </div>
-                  {/* Mini win-rate bar */}
-                  <div className="hidden w-16 sm:block">
-                    <div className="h-1.5 w-full overflow-hidden rounded-full bg-accent">
-                      <div
-                        className={`h-full rounded-full ${
-                          deck.win_rate > 55 ? 'bg-green-500' : deck.win_rate >= 45 ? 'bg-yellow-500' : 'bg-red-500'
-                        }`}
-                        style={{ width: `${Math.min(deck.win_rate, 100)}%` }}
-                      />
+                    {/* Mini win-rate bar */}
+                    <div className="hidden w-16 sm:block">
+                      <div className="h-1.5 w-full overflow-hidden rounded-full bg-accent">
+                        <div
+                          className={`h-full rounded-full ${
+                            deck.win_rate > 55 ? 'bg-green-500' : deck.win_rate >= 45 ? 'bg-yellow-500' : 'bg-red-500'
+                          }`}
+                          style={{ width: `${Math.min(deck.win_rate, 100)}%` }}
+                        />
+                      </div>
                     </div>
+                    <div className={`text-right text-sm font-bold ${
+                      deck.win_rate > 55 ? 'text-green-400' : deck.win_rate >= 45 ? 'text-yellow-400' : 'text-red-400'
+                    }`}>
+                      <div>{deck.win_rate}%</div>
+                      <div className="text-[10px] font-normal text-muted-foreground">{deck.wins}/{deck.total_games}</div>
+                    </div>
+                  </>
+                );
+                return deck.deck_id != null ? (
+                  <Link key={deck.deck_id} href={`/deck/${deck.deck_id}`} className={rowClass}>
+                    {rowContent}
+                  </Link>
+                ) : (
+                  <div key="unmatched" className={rowClass}>
+                    {rowContent}
                   </div>
-                  <div className={`text-sm font-bold ${
-                    deck.win_rate > 55 ? 'text-green-400' : deck.win_rate >= 45 ? 'text-yellow-400' : 'text-red-400'
-                  }`}>
-                    {deck.win_rate}%
-                  </div>
-                </Link>
-              ))}
+                );
+              })}
             </div>
           </div>
         )}

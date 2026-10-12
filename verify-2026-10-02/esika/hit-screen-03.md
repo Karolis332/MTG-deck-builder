@@ -1,0 +1,46 @@
+screened 247/247, passed 36, last card read: Riddlemaster Sphinx
+
+- Don & Leo, Problem Solvers — value/engine creature — "exile up to one target artifact you control and up to one target creature you control. Then return them to the battlefield" — beats Pia, Aether Ascetic because it repeats every end step, re-triggering your own ETBs (including future Bridge hits) indefinitely.
+- Wan Shi Tong, All-Knowing — removal/engine — "target nonland permanent's owner puts it into their library second from the top or on the bottom" + "create two 1/1 ... Spirit creature tokens" whenever cards go to a library — neutralises a threat on entry and keeps paying off repeatably.
+- Savanti Romero, Time's Exile — finisher/value engine — "put a +1/+1 counter on Savanti Romero. Then you draw X cards and lose X life" — a self-growing card-advantage engine that gets better every combat, beats the static Archon body.
+- Twinmaw Stormbrood // Charring Bite — finisher/engine — "When this creature enters, you gain 5 life" — direct Way of the Mentor/Way of the Paradox fuel on a flying body, beats Archon's passive lifelink for raw life-gain burst.
+- Deceit — removal — "return up to one other target nonland permanent to its owner's hand" / "target opponent reveals their hand. You choose a nonland card ... discards that card" — flexible modal disruption on a 5/5 body.
+- Ellywick Tumblestrum — planeswalker — "Look at the top six cards of your library. You may reveal a creature card from among them and put it into your hand" — immediate card selection plus an ultimate, beats Chandra's narrower kit.
+- Alabaster Host Intercessor — removal — "exile target creature an opponent controls until this creature leaves the battlefield" — true O-ring removal on entry, neutralises the best threat on board.
+- Mechanozoa — removal/tempo — "tap target artifact or creature an opponent controls and put a stun counter on it" — locks a permanent down for an extra turn cycle.
+- Ice Flan — removal/tempo — "tap target artifact or creature an opponent controls. Put a stun counter on it" — same lockdown effect as Mechanozoa, repeatable across the pool.
+- Sonic Shrieker — removal/engine — "it deals 2 damage to any target and you gain 2 life. If a player is dealt damage this way, they discard a card" — damage, life gain, and disruption in one ETB.
+- Ka-Zar of the Savage Land — value engine — "You may play lands from the top of your library" + a 2/2 token with landfall growth — repeatable card advantage every turn it's alive.
+- Wolverine, Fierce Fighter — removal — "he fights up to one other target creature" with built-in damage redirection to make the fight lopsided — kills a blocker/threat on entry and survives it.
+- Undercity Eliminator — removal — "you may sacrifice an artifact or creature. When you do, exile target creature an opponent controls" — hard exile removal on entry.
+- Bruse Tarl, Roving Rancher — value engine — "exile the top card of your library. If it's a land card, create a 2/2 ... Ox ... Otherwise, you may cast it until the end of your next turn" — repeatable card/token advantage on both entry and every attack.
+- Tazri, Beacon of Unity — value engine — "Look at the top six cards of your library. You may reveal up to two ... cards from among them and put them into your hand" (repeatable activated ability) — a reusable dig that keeps generating hand advantage.
+- Samut, Tyrant Smasher — planeswalker — "Creatures you control have haste" — turns every future Bridge hit into an immediate attacker, a static that compounds far beyond Chandra's one-shot value.
+- Blighted Blackthorn — value engine — "Whenever this creature enters or attacks, you may blight 2. If you do, you draw a card" — repeatable card draw on a body that keeps paying off each combat.
+- Mighty Mutanimals — engine — "Alliance — Whenever another creature you control enters, put a +1/+1 counter on target creature you control" — a counter engine that triggers off every subsequent Bridge hit.
+- Infernal Captor — removal/tempo — "gain control of target artifact or creature until end of turn. Untap that permanent. It gains haste" — steals and swings with the opponent's best creature the turn it lands.
+- Hama, the Bloodbender — value/disruption engine — "target opponent mills three cards. Exile up to one noncreature, nonland card from that player's graveyard. ... you may cast the exiled card ... by waterbending {X}" — ongoing disruption plus a repeatable free-cast engine.
+- Nissa, Leyline Tamer — finisher/engine — "reveal cards from the top of your library until you reveal a creature card. Put that card onto the battlefield" — effectively a second Prismatic Bridge trigger every turn a land enters, on a deathtouch/vigilance body; clears the bar by a wide margin.
+- Cloud of Darkness — removal — "target creature an opponent controls gets -X/-X ... where X is the number of permanent cards in your graveyard" — scalable removal on a flying body.
+- Kitsune, Dragon's Daughter — removal/engine — "you may exchange control of two other target creatures controlled by different players" — a repeatable steal effect every time it enters or connects.
+- Wiccan, Rising Magician — value engine — "exile another target nonland, nontoken permanent. Return that card to the battlefield under its owner's control at the beginning of the next end step" — resets your own ETBs (and future Bridge hits) every time you cast a noncreature spell.
+- Territorial Bruntar — value engine — "exile cards from the top of your library until you exile a nonland card. You may cast that card this turn" on every landfall — repeatable free spells on a reach body.
+- Flickering Hound — value engine — "exile up to one other target creature you control, then return that card to the battlefield under its owner's control" whenever you cast a creature spell — re-triggers ETBs repeatedly.
+- Kang the Conqueror — finisher — "Put a +1/+1 counter on Kang. Take an extra turn after this one" — a repeatable extra-turn engine, among the strongest win conditions in the pool.
+- Nahiri, Storm of Stone — planeswalker/removal — "Nahiri deals X damage to target tapped creature" — a planeswalker with built-in scalable removal, beats Chandra on utility.
+- Sanar, Innovative First-Year — value engine — "reveal cards from the top of your library until you reveal X nonland cards, where X is the number of colors among permanents you control. For each of those colors, you may exile a card of that color ... You may cast the exiled cards this turn" — automatic, repeatable card advantage that scales well in a 5-color Esika shell.
+- Super-Skrull — removal/value engine (flexible) — "{4}{R}: Super-Skrull deals 4 damage to target creature" / "{5}{U}: Target player draws four cards" — a flying toolbox body offering repeatable removal or card draw on demand.
+- Colossus of the Blood Age — engine — "it deals 3 damage to each opponent and you gain 3 life" plus a death-trigger loot — direct damage, life-gain fuel, and card filtering in one package.
+- Orysa, Tide Choreographer — value engine — "When Orysa enters, draw two cards" — clean, unconditional card advantage ahead of the bar.
+- Ray Fillet, Man Ray — value engine — "{2}, Remove a +1/+1 counter from a creature you control: Draw a card" fed by its own Mutagen token — a repeatable card-draw engine on a flying body.
+- Kaya, Bane of the Dead — planeswalker/removal — "−3: Exile target creature" — hard removal stapled to a planeswalker, clears the bar over Chandra.
+- Prismabasher — finisher — "up to X target creatures you control get +X/+X until end of turn, where X is the number of colors among permanents you control" — a scalable team pump finisher that gets huge in a 5-color superfriends shell.
+- The Spot, Living Portal — removal — "exile up to one target nonland permanent and up to one target nonland permanent card from a graveyard" — two-for-one exile disruption on entry.
+- Grim Reaper, Lethal Legionnaire — finisher/value engine — "return target creature card from your graveyard to the battlefield tapped and attacking with a finality counter on it" — a repeatable reanimation attack trigger every combat.
+- Miasma Demon — removal — "you may discard any number of cards. When you do, up to that many target creatures each get -2/-2" — flexible multi-target removal on a flying body.
+- Spider-Woman, Secret Agent — removal — "tap target creature an opponent controls. That creature can't become untapped for as long as you control Spider-Woman" — a lasting lockdown on the opponent's best threat.
+- Tragic Banshee — removal — "target creature an opponent controls gets -1/-1 ... If a creature died this turn, that creature gets -13/-13 instead" — scalable removal that can outright kill almost anything once morbid is live.
+- Primordial Gnawer — value engine — "discover 3" on death — free card/spell advantage whenever it trades or dies, beating Pia's one-shot tutor.
+- Riddlemaster Sphinx — removal — "you may return target creature an opponent controls to its owner's hand" — tempo removal on an evasive flying body.
+
+Top 5: Nissa, Leyline Tamer; Kang the Conqueror; Samut, Tyrant Smasher; Kaya, Bane of the Dead; Grim Reaper, Lethal Legionnaire.

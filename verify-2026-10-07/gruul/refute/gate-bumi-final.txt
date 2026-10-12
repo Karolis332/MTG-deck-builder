@@ -1,0 +1,77 @@
+file      : C:/Users/QuLeR/AppData/Local/Temp/g-bumi-final.txt
+format    : commander   commander: Bumi, Unleashed
+totals    : 100 cards | 38 lands (38 eff.) | 61 nonland | avg MV 3.18
+curve     : 1:10 2:13 3:13 4:11 5:9 6:5
+VERDICT   : FAIL
+
+  PASS  size        100 cards (commander wants 100)
+  PASS  singleton   singleton respected (basics exempt)
+  PASS  legality    every card legal in commander
+  PASS  rules       no other format rule broken
+  PASS  identity    all cards inside GR
+  PASS  ownership   all cards owned; paper collection imported 0 days ago
+  WARN  arenaNames  1 card(s) must be exported front-face only:
+        - 1 The Legend of Kyoshi
+  PASS  lands       38 lands (+0 MDFC land backs = 38 effective); Karsten wants 38 ±2
+  FAIL  plan        3/61 nonland cards interact (5%) — commander wants: general value
+        - Elvish Mystic (MV 1)
+        - Hardened Scales (MV 1)
+        - Lavaspur Boots (MV 1)
+        - Llanowar Elves (MV 1)
+        - Longstalk Brawl (MV 1)
+        - Silkguard (MV 1)
+        - Snakeskin Veil (MV 1)
+        - Sol Ring (MV 1)
+        - Tyvar's Stand (MV 1)
+        - Veil of Summer (MV 1)
+        - Arcane Signet (MV 2)
+        - Cankerbloom (MV 2)
+        - Explore (MV 2)
+        - Farseek (MV 2)
+        - Ilysian Caryatid (MV 2)
+        - Innkeeper's Talent (MV 2)
+        - Nature's Lore (MV 2)
+        - Rocky Rebuke (MV 2)
+        - Ruby, Daring Tracker (MV 2)
+        - Shared Roots (MV 2)
+        - Temur Battle Rage (MV 2)
+        - The Last Agni Kai (MV 2)
+        - Three Visits (MV 2)
+        - Beast Within (MV 3)
+        - Bitter Work (MV 3)
+        - Clear Shot (MV 3)
+        - Cultivate (MV 3)
+        - Domri, Anarch of Bolas (MV 3)
+        - Guardian Augmenter (MV 3)
+        - Hunter's Insight (MV 3)
+        - Kami of Whispered Hopes (MV 3)
+        - Master's Guidance (MV 3)
+        - Rockalanche (MV 3)
+        - Tale of Katara and Toph (MV 3)
+        - Toph, the Blind Bandit (MV 3)
+        - Bumi Bash (MV 4)
+        - Decimate (MV 4)
+        - Drix Fatemaker (MV 4)
+        - Halana and Alena, Partners (MV 4)
+        - Skyshroud Claim (MV 4)
+        - Smellerbee, Rebel Fighter (MV 4)
+        - Solid Ground (MV 4)
+        - The Boulder, Ready to Rumble (MV 4)
+        - The Earth King (MV 4)
+        - Toph, Greatest Earthbender (MV 4)
+        - Awakening of Vitu-Ghazi (MV 5)
+        - Badgermole (MV 5)
+        - Bumi, Eclectic Earthbender (MV 5)
+        - Cracked Earth Technique (MV 5)
+        - Germination Practicum (MV 5)
+        - Nissa, Who Shakes the World (MV 5)
+        - Ohran Frostfang (MV 5)
+        - Overrun (MV 5)
+        - Shamanic Revelation (MV 5)
+        - Flopsie, Bumi's Buddy (MV 6)
+        - Quilled Greatwurm (MV 6)
+        - The Legend of Kyoshi (MV 6)
+        - Thunderfoot Baloth (MV 6)
+  PASS  curve       avg MV 3.18; commander sets no cost threshold
+  PASS  wincons     12 win condition(s)/closer(s)
+  PASS  locks       1 locked card(s) present and intact

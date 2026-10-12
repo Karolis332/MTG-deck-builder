@@ -1,0 +1,75 @@
+=== POOL ===
+pool size: 3252 (open 3252, in-deck 0), unresolved: 0
+newest sets seen in legal pool: akr, big, blb, dft, dmr, dsk, ecc, ecl, eoc, eoe, fdn, fin, hbg, hob, inr, j25, lci, m19, m21, mkm, msc, msh, om1, otj, pio, pspl, rix, rvr, soa, sos, spm, sta, tdc, tdm, thb, tla, tmt, vow, woe, xln
+unresolved names: 
+
+=== TOP 5 ARCHETYPES (decks / WR / coverage / score) ===
+Izzet Spellementals | decks 697 | WR n/a (0-0) | coverage 92.9% | score 0.636
+Temur Prowess | decks 14 | WR n/a (0-0) | coverage 91.9% | score 0.630
+Izzet | decks 113 | WR 66.5% (445-224) | coverage 93.1% | score 0.619
+5c Elementals | decks 67 | WR n/a (0-0) | coverage 88.3% | score 0.605
+Roaming Elementals | decks 87 | WR n/a (0-0) | coverage 88.1% | score 0.604
+
+=== BUILD: Izzet Spellementals ===
+colors RU | avg nonland cmc 3.32 | land target 20 | nonland slots filled 40 (core 39, substitute 0, filler 1) | land slots filled 13 | side slots 15
+MAIN:
+  4 Eddymurk Crab [open]
+  4 Hearth Elemental [open]
+  3 Burst Lightning [open]
+  4 Opt [open]
+  4 Sleight of Hand [open]
+  4 Sunderflock [open]
+  2 Spell Snare [open]
+  2 Spell Pierce [open]
+  3 Winternight Stories [open]
+  2 Get Out [open]
+  4 Prismari Charm [open]
+  3 Traumatic Critique [open]
+  1 Redirect Lightning [open (filler)]
+  4 Spirebluff Canal [open]
+  4 Steam Vents [open]
+  4 Riverpyre Verge [open]
+  1 Multiversal Passage [open]
+  7 Island [basic (unlimited)]
+SIDEBOARD:
+  4 Annul [open]
+  4 Disdainful Stroke [open]
+  1 Broadside Barrage [open]
+  2 Hydro-Man, Fluid Felon [open]
+  2 Ral, Crackling Wit [open]
+  2 Soul-Guide Lantern [open]
+SUBSTITUTIONS (missing core card -> owned substitute):
+
+=== RUNNER-UP: Temur Prowess ===
+  4x Elusive Otter (inc 100%)
+  4x Opt (inc 100%)
+  3x Riverpyre Verge (inc 100%)
+  4x Sleight of Hand (inc 100%)
+  4x Slickshot Show-Off (inc 100%)
+  4x Spirebluff Canal (inc 100%)
+  4x Steam Vents (inc 100%)
+  4x Stormchaser's Talent (inc 100%)
+  3x Wild Ride (inc 100%)
+  3x Multiversal Passage (inc 93%)
+  2x Boomerang Basics (inc 86%)
+  3x Drake Hatcher (inc 86%)
+  4x Starting Town (inc 79%)
+  4x Callous Sell-Sword (inc 71%)
+  4x Turn Inside Out (inc 71%)
+  3x Burst Lightning (inc 64%)
+  3x Full Bore (inc 64%)
+  1x Mountain (inc 57%)
+  1x Secret Identity (inc 50%)
+
+=== VALIDATION (deck-validation.ts, standard) ===
+  PASS: no issues
+
+=== OPTIMIZER SCORE (advisory, deck-optimizer.ts) ===
+  legality issues: 0
+  land delta: 0 (built 20 vs target 20)
+  score: 70/100 (ratioScore fixed at 70 — full quota-ratio engine out of scope, PLACEHOLDER, see report caveats)
+
+=== BUY LIST (<=15, missing core cards vs Izzet Spellementals) ===
+  none — every core card is already in the build
+
+proposal written: C:\Users\QuLeR\MTG-deck-builder\decks\paper\proposals\standard-izzet-spellementals-arena0903.txt

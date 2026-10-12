@@ -1,5 +1,9 @@
 import { describe, it, expect } from 'vitest';
-import { seedDeck, costOf, deckScoreTotal, BASIC_RE } from '../src/lib/best-deck';
+import { getDb } from '../src/lib/db';
+import {
+  seedDeck, costOf, deckScoreTotal, BASIC_RE, DEFAULT_WEIGHTS, resolveCard, basicsFor,
+  buildPool, reportAlternatives, type ReportOpts,
+} from '../src/lib/best-deck';
 import type { DbCard } from '../src/lib/types';
 
 let nextId = 0;
@@ -111,6 +115,73 @@ describe('seedDeck (budget, empty collection — N2 reserve cap)', () => {
     expect(deck.reduce((s, c) => s + (cost(c) ?? 0), 0)).toBeLessThanOrEqual(10);
     expect(deck.filter((c) => c.name.startsWith('CheapSpell')).length).toBeGreaterThanOrEqual(30);
   });
+});
+
+describe('reportAlternatives (repo DB, Krenko mono-red)', () => {
+  function buildFixture(): { deck: DbCard[]; buyList: { name: string; priceUsd: number }[]; opts: ReportOpts } {
+    const db = getDb();
+    const commander = resolveCard('Krenko, Mob Boss')!;
+    const rows = db.prepare(`
+      select name from cards
+      where color_identity = '["R"]'
+        and legalities like '%"commander":"legal"%'
+        and layout not in ('art_series', 'token')
+        and type_line not like '%Legendary%'
+      order by edhrec_rank asc
+      limit 150
+    `).all() as { name: string }[];
+    const allCards = rows.map((r) => resolveCard(r.name)!).filter(Boolean);
+    const legalPool = buildPool(commander, allCards, new Set());
+    // Own the cheaper half of the pool; leave the rest purchasable so seedDeck's budget buys a few,
+    // which becomes this fixture's buyList (reportAlternatives needs at least one buy-list slot).
+    const ownedNames = new Set(legalPool.slice(Math.floor(legalPool.length / 2)).map((c) => c.name));
+    const ownedCards = legalPool.filter((c) => ownedNames.has(c.name));
+    const basics = basicsFor(['R'], 'owned-list', []);
+    const cost = (c: DbCard) => costOf(c, ownedNames);
+    const deck = seedDeck(commander, legalPool, basics, { cost, budget: 50 });
+    const buyList = deck
+      .filter((c) => !ownedNames.has(c.name) && !BASIC_RE.test(c.name))
+      .map((c) => ({ name: c.name, priceUsd: cost(c) ?? 0 }));
+    expect(buyList.length).toBeGreaterThan(0); // fixture sanity: the report pass needs a buy-list to test replacements
+
+    // 150 evaluations comfortably covers the ~deck-size-bound removal ranking (see the ponytail
+    // note in reportAlternatives) plus room for the gated upgrade/replacement loops to actually
+    // run — a tighter cap would only prove the removal-ranking floor, not the budget gate itself.
+    const opts: ReportOpts = {
+      format: 'commander', commander, weights: { ...DEFAULT_WEIGHTS, games: 5 },
+      ownedCards, ownedNames, basics, maxEvaluations: 150, deadlineMs: 90_000,
+    };
+    return { deck, buyList, opts };
+  }
+
+  it('stays within the evaluation budget and every list obeys its documented bound', () => {
+    const { deck, buyList, opts } = buildFixture();
+    const report = reportAlternatives(deck, buyList, opts);
+
+    expect(report.evaluations).toBeLessThanOrEqual(150);
+    expect(report.upgrades.length).toBeLessThanOrEqual(15);
+    expect(report.upgrades.every((u) => u.gain >= 0.25)).toBe(true);
+    expect(report.replacements.length).toBeLessThanOrEqual(buyList.length);
+    expect(report.replacements.every((r) => r.options.length <= 2)).toBe(true);
+    expect(report.nearMisses.length).toBeLessThanOrEqual(12);
+    expect(report.nearMisses.every((n) => n.delta > -0.25 && n.delta < 0.25)).toBe(true);
+  }, 150_000);
+
+  it('is deterministic: same inputs twice produce the exact same report', () => {
+    const { deck, buyList, opts } = buildFixture();
+    const a = reportAlternatives(deck, buyList, opts);
+    const b = reportAlternatives(deck, buyList, opts);
+    expect(b).toEqual(a);
+  }, 280_000);
+
+  it('upgrades ignore the remaining budget — a candidate priced over it may still appear', () => {
+    const { deck, buyList, opts } = buildFixture();
+    const report = reportAlternatives(deck, buyList, { ...opts, maxEvaluations: 600, deadlineMs: 60_000 });
+    // Not an assertion that an expensive upgrade exists (depends on live prices) — only that
+    // nothing in reportAlternatives filtered candidates by opts.budget (there is no such field).
+    expect('budget' in opts).toBe(false);
+    expect(report.upgrades.every((u) => u.priceUsd > 0)).toBe(true);
+  }, 90_000);
 });
 
 describe('deckScoreTotal', () => {

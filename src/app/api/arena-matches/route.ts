@@ -3,7 +3,8 @@ import {
   storeArenaParsedMatch,
   getArenaParsedMatches,
   resolveArenaIds,
-  matchArenaDeckToSavedDeck,
+  attributeArenaMatch,
+  defaultArenaUserId,
   linkArenaMatchToDeck,
   autoLinkArenaMatches,
   autoLinkByCardsPlayed,
@@ -13,6 +14,7 @@ import {
   resolveGrpIdNames,
 } from '@/lib/db';
 import { reportGameOutcomeToCF } from '@/lib/cf-api-client';
+import { getAuthUser } from '@/lib/auth-middleware';
 import { isWebSyncConfigured, syncPendingMatches } from '@/lib/web-sync';
 import { deriveFromMatch, hasContractFields } from './_derive';
 import type { ArenaMatch } from '@/lib/arena-log-reader';
@@ -23,12 +25,14 @@ export async function POST(request: NextRequest) {
 
     // Handle bulk auto-link request — two passes: deck_cards first, then cards_played for remaining
     if (body.action === 'auto-link') {
-      const pass1 = autoLinkArenaMatches();
+      const userId = (await getAuthUser(request))?.userId ?? defaultArenaUserId();
+      const pass1 = autoLinkArenaMatches(userId);
       const pass2 = autoLinkByCardsPlayed();
       return NextResponse.json({
         ok: true,
         linked: pass1.linked + pass2.linked,
         total: pass1.total + pass2.total,
+        decksCreated: pass1.created,
         byDeckCards: pass1.linked,
         byCardsPlayed: pass2.linked,
       });
@@ -103,17 +107,14 @@ export async function POST(request: NextRequest) {
       derived,
     });
 
-    // Auto-link to saved deck if we have deck cards
+    // Attribute a newly stored match to a deck: link the best saved deck, else save the
+    // submitted decklist as a new deck. Re-POSTs keep their existing (possibly manual) link.
     let deckMatch = null;
-    if (storeResult.success && deckCards?.length > 0) {
-      deckMatch = matchArenaDeckToSavedDeck(deckCards, format);
-      if (deckMatch) {
-        linkArenaMatchToDeck(matchId, deckMatch.deckId, deckMatch.confidence);
-        // Feed the bandit: game outcome = delayed reward across the deck's cards.
-        // Re-POSTs of an already-stored match can double-fire; the Arena watcher
-        // posts each match once, so accepted (same quirk as ML features below).
-        reportGameOutcomeToCF(deckMatch.deckId, result).catch(() => {});
-      }
+    if (storeResult.success && storeResult.id && deckCards?.length > 0) {
+      const userId = (await getAuthUser(request))?.userId ?? defaultArenaUserId();
+      deckMatch = attributeArenaMatch(matchId, deckCards, format || null, userId, body.startedAt ?? null);
+      // Feed the bandit: game outcome = delayed reward across the deck's cards.
+      if (deckMatch) reportGameOutcomeToCF(deckMatch.deckId, result).catch(() => {});
     }
 
     // Compute ML features if match was stored

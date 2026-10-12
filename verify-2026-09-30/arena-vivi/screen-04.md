@@ -1,0 +1,63 @@
+screened 431/431, passed 62, last card read: Vhal, Eager Scholar
+- Hapatra, the Desert Frost — combo/engine (untap Vivi) — "{2}{U}: Untap target creature." — beats: Clinquant Skymage (Vivi power ≥ 4 = infinite U/R mana; with Training Grounds the untap costs {U}, so power ≥ 2 suffices; ETB stun is tempo)
+- Command the Stage — extra-spell engine — "At the beginning of each upkeep, if an opponent was dealt noncombat damage last turn, return this card from your graveyard to your hand." — beats: Impact Tremors (Vivi pings every turn, so it recurs every turn: 3 mana = trigger + 2/2 each turn)
+- Rewrite History — draw engine / recursion — "Whenever one or more creatures you control become tapped, draw a card, then discard a card and put a plan counter on this enchantment." / "return up to two target instant and/or sorcery cards from your graveyard to your hand." — beats: Curiosity (Vivi taps for mana every turn)
+- Inspiring Easel — mana rock + copy engine — "{T}: Add one mana of any color. Spend this mana only to cast an instant or sorcery spell." / "It perpetually incorporates {U}{R} and gains "When you cast this spell, copy it."" — beats: Chromatic Lantern
+- Way of the Cryomancer — copy engine + planeswalker token — "empower Jace 5" / "Planeswalkers you control have "[−3]: When you next cast an instant or sorcery spell this turn, copy that spell."" — beats: Panharmonicon (also works with Ral)
+- Way of the Pyromancer — ramp + planeswalker token — "empower Jace 2" / "Planeswalkers you control have "[+1]: Add {R}."" — beats: Wayfarer's Bauble (2-mana noncreature spell that leaves a repeating mana source)
+- Way of the Warlord — planeswalker token + burn — "empower Jace 5" / "Planeswalkers you control have "[−4]: This planeswalker deals 2 damage to up to one target creature or planeswalker and 2 damage to target player."" — beats: Impact Tremors
+- Protege's Awakening — draw + planeswalker token — "Empower Jace 6. ... Draw a card." — beats: Seize the Spoils
+- Plan for All Outcomes — removal + planeswalker engine — "the owner of up to one other target nonland permanent puts it on their choice of the top or bottom of their library." / "Whenever you cast your first noncreature spell each turn, empower Jace 1." — beats: Planar Incision
+- Illuminating Lash — burn + draw — "Illuminating Lash deals 3 damage to any target." / "You get a one-time boon with "When you cast a noncreature spell, draw a card."" — beats: Thrill of Possibility
+- No Admittance — burn + planeswalker token — "No Admittance deals 3 damage to any target. | Empower Jace 1." — beats: Abrade
+- Tome Blast — burn, two triggers — "Tome Blast deals 2 damage to any target. | Flashback {4}{R}" — beats: Seize the Spoils
+- Boulder Dash — burn — "Boulder Dash deals 2 damage to any target and 1 damage to any other target." — beats: Planar Incision
+- Melt Through — cheap burn — "Melt Through deals 2 damage to any target." — beats: Planar Incision
+- Voltage Surge — cheap removal — "Voltage Surge deals 2 damage to target creature or planeswalker. If this spell's additional cost was paid, Voltage Surge deals 4 damage instead." — beats: Resculpt (Treasures/Clues pay the sacrifice)
+- Wrath of the Bloodmane — removal — "This spell costs {1} less to cast if you control a legendary creature. | Wrath of the Bloodmane deals 4 damage to target creature or planeswalker." — beats: Abrade ({1}{R} for 4 with Vivi out)
+- Pinecone Strike — removal — "Pinecone Strike deals 3 damage to target creature. If that creature would die this turn, exile it instead. | • Destroy target artifact token." — beats: Resculpt
+- Invasive Maneuvers — removal — "Invasive Maneuvers deals 3 damage to target creature." — beats: Resculpt
+- Unsubtle Mockery — removal — "Unsubtle Mockery deals 4 damage to target creature. Surveil 1." — beats: Resculpt
+- Jennika's Technique — instant sweeper — "Jennika's Technique deals 2 damage to each creature." / "Sneak {R}" — beats: Blasphemous Act vs go-wide (Vivi survives once she has counters)
+- Inescapable Blaze — finisher burn — "This spell can't be countered. | Inescapable Blaze deals 6 damage to any target." — beats: Involuntary Employment (Vivi mana sink to the face)
+- Spicy Oatmeal Pizza — burn artifact — "When this artifact enters, it deals 4 damage to any target and 3 damage to you." — beats: Involuntary Employment
+- Ajani's Anguish — X burn (role missing) — "When this enchantment enters, it deals X damage to any target." — beats: Impact Tremors (turns Vivi mana into face damage)
+- Photon Blast Barrage — X removal — "When you cast this spell, copy it X times. You may choose new targets for the copies. | Photon Blast Barrage deals 1 damage to target creature." — beats: Planar Incision (scalable creature kill / mini-sweep)
+- Icy Reception — counter (creatures/legendaries) — "Counter target creature or legendary spell unless its controller pays {3}. | • Target creature gets -5/-0 until end of turn." — beats: Negate (covers what Negate cannot)
+- Sound the Trumpets — counter — "Counter target spell. If that spell's mana value was 2 or less, recruit." — beats: Three Steps Ahead as a hard counter
+- Countersculpt — counter + planeswalker token — "Counter target spell. Empower Jace 1." — beats: Three Steps Ahead as a hard counter
+- Machinist's Dismissal — counter — "This spell costs {1} less to cast for each artifact you control and each artifact card in your hand. | Counter target noncreature spell." — beats: Negate only with Treasures/rocks out (doubt, included)
+- Failed Fording — cheap bounce — "Return target nonland permanent to its owner's hand." — beats: Sink into Stupor // Soporific Springs on mana
+- Clash of Elements — instant removal — "Its owner may put it on top of their library. If they do, Clash of Elements deals 2 damage to them. If they didn't put the card on top of their library, they put it on the bottom." — beats: Resculpt
+- Housemeld — removal/steal — "Exile target creature. The exiled card perpetually becomes an enchantment. At the beginning of your next end step, put it onto the battlefield under your control." — beats: Resculpt
+- Depower — cantrip + tempo — "This spell costs {2} less to cast if it targets an attacking creature. | Target creature gets -4/-0 until end of turn. | Draw a card." — beats: Deduce
+- Glint — Vivi protection (role missing) — "Target creature you control gets +0/+3 and gains hexproof until end of turn." — beats: Planar Incision
+- Perfected Theory — Vivi pump / mana — "• Target creature has base power and toughness 4/5 until end of turn." — beats: Hard Evidence (1-mana trigger; Vivi taps for 4 + counters)
+- Fractalize — X pump — "target creature becomes a green and blue Fractal with base power and toughness each equal to X plus 1." — beats: Waterbender Ascension (X-mana instant that makes Vivi lethal-sized; doubt, included)
+- Mind Transfer Protocol — cantrip + pump — "target artifact or creature becomes an artifact creature with base power and toughness 4/5. | Draw a card." — beats: Deduce
+- Super Speed — haste enabler (role missing) — "Flash | Enchant creature | ... Enchanted creature gets +1/+0 and has haste." — beats: Curiosity (Vivi taps the turn she lands)
+- Piece It Together — 1-mana cantrip — "Draw a card." — beats: Hard Evidence
+- Swiftspear's Teachings — 1-mana cantrip — "Draw a card." — beats: Hard Evidence
+- Artifist Acumen — 1-mana cantrip — "Creatures you control gain first strike until end of turn. | Draw a card." — beats: Hard Evidence
+- Surge of Acclaim — draw/tutor, two casts — "• Seek a nonland card. | Jump-start" — beats: Deduce
+- Preponderant Pearl — 1-mana cantrip artifact — "When this artifact enters, conjure a card named Ponder into your hand." — beats: Hard Evidence (two triggers for {U}+{U})
+- Puca's Eye — cantrip artifact — "When this artifact enters, draw a card, then choose a color." — beats: Wayfarer's Bauble
+- Eye of Jace — 1-mana trigger + reach — "At the beginning of your upkeep, surveil 1. Then if there are seven or more cards in your graveyard, sacrifice this artifact, it deals 2 damage to each opponent" — beats: Wayfarer's Bauble
+- Sphinx's Approach — instant draw — "Draw two cards." — beats: Deduce
+- Murmuring Volume — rock + loot — "{T}: Add one mana of any color. | {2}, {T}, Discard a card: Draw a card." — beats: Chromatic Lantern
+- Goblin Firebomb — cheap artifact + late removal — "Flash | {7}, {T}, Sacrifice this artifact: Destroy target permanent." — beats: Wayfarer's Bauble (Vivi pays the 7)
+- Limitless Rekindling — storm — "Conjure a random instant or sorcery card from the Lorwyn Eclipsed expansion into exile. Until end of turn, you may cast that card without paying its mana cost. | Storm" — beats: Involuntary Employment (doubt, included)
+- Reflective Rimekin — copy — "you get a one-time boon with "When you cast an instant or sorcery spell with mana value 3 or less, copy it."" — beats: Clinquant Skymage (doubt, included)
+- Tomik, Izzet Sparkmage — payoff creature — "If a source you control would deal noncombat damage to an opponent or a permanent an opponent controls, it deals that much damage plus 1 instead." — beats: Electrostatic Infantry (every Vivi ping = 2, stacks with Artist's Talent)
+- Saheeli, Jewel of Avishkar — payoff creature — "Thopters you control have haste. | Whenever you cast a noncreature spell, create a 1/1 colorless Thopter artifact creature token with flying." — beats: Murmuring Mystic
+- Draconic Visitor — finisher — "If one or more artifact tokens would be created under your control, that many 5/5 red Dragon creature tokens with flying are created instead." — beats: Clinquant Skymage (Treasures/Clues become 5/5 flyers)
+- Traxos, Academy Guardian — cheap evasive prowess — "This spell costs {2} less to cast if you've cast a noncreature spell this turn. | Flying, vigilance | Prowess" — beats: Clinquant Skymage
+- Lyra, Tolarian Archangel — draw payoff — "At the beginning of each end step, if you've drawn three or more cards this turn, create a 3/3 blue Angel creature token with flying. | {3}{U}{U}: Until end of turn, whenever Lyra deals combat damage to a player, draw two cards." — beats: Clinquant Skymage
+- Proft, Consulting Detective — draw engine — "Whenever you scry or surveil, you may pay {2}. If you do, put a +1/+1 counter on Proft and draw a card." — beats: Tempest Angler
+- Seasoned Cryomancer — draw creature — "When this creature enters, draw two cards, then discard two cards. When you discard one or more nonland cards this way, tap up to that many target creatures and put a stun counter on each of them. | {3}{U}{U}, Exile this card from your graveyard: Draw two cards." — beats: Clinquant Skymage
+- Variable Chaser // Arc of Fortune — wheel + prowess flyer — "Flying, prowess" / "Each player may discard their hand and draw seven cards." — beats: Clinquant Skymage (doubt, included)
+- Gallia, the Merrymaker — haste enabler — "Each other creature you control with a +1/+1 counter on it has haste." — beats: Young Pyromancer (Vivi gets a counter from the first spell, then taps; doubt, included)
+- Innovative Commons — U/R dual — "This land enters tapped unless you control a planeswalker. | {T}: Add {U} or {R}." — beats: Temple of Epiphany (untapped with Ral / Jace tokens)
+- Theorist's Sanctum — utility Island — "As this land enters, you may behold a Jace. If you don't, this land enters tapped. | {2}{U}, {T}: Empower Jace 2." — beats: Ash Barrens (fetchable Island; doubt, included)
+- Gate to Seatower — utility Island — "{3}{U}, {T}: Seek a nonland card. Activate only once." — beats: Ash Barrens (fetchable Island)
+- Gate to Tumbledown — utility Mountain — "{3}{R}, {T}: Seek a nonland card. Activate only once." — beats: Buried Ruin (fetchable Mountain)

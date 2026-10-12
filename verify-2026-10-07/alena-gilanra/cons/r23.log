@@ -1,0 +1,3 @@
+s6.txt                   38L | keep7 0.715 | 4 drops by T4 0.889 | 6+ threat T5 0.772 T6 0.946 | spells T1-8 12.74 | screw 0.008 | flood>=3 0.643 (mean 4.90) | idle T5-8 0.171 | extra draws 11.65 | free 1.09 | 6+ by T8 5.94 | <=1 by T7 0.054
+s7.txt                   38L | keep7 0.729 | 4 drops by T4 0.888 | 6+ threat T5 0.766 T6 0.949 | spells T1-8 12.66 | screw 0.009 | flood>=3 0.632 (mean 4.73) | idle T5-8 0.198 | extra draws 11.01 | free 1.00 | 6+ by T8 5.73 | <=1 by T7 0.057
+s8.txt                   38L | keep7 0.730 | 4 drops by T4 0.903 | 6+ threat T5 0.768 T6 0.949 | spells T1-8 12.43 | screw 0.007 | flood>=3 0.598 (mean 4.45) | idle T5-8 0.201 | extra draws 10.88 | free 0.99 | 6+ by T8 5.75 | <=1 by T7 0.053

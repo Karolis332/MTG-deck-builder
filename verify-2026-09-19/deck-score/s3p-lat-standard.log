@@ -1,0 +1,19 @@
+node:fs:438
+      path = getValidatedPath(path);
+             ^
+
+TypeError [ERR_INVALID_ARG_TYPE]: The "path" argument must be of type string or an instance of Buffer or URL. Received undefined
+    at Object.readFileSync (node:fs:438:14)
+    at readSample (C:\Users\QuLeR\MTG-deck-builder\scripts\deck-score-piles.ts:89:20)
+    at <anonymous> (C:\Users\QuLeR\MTG-deck-builder\scripts\_scratch\s3i-lat.ts:8:16)
+    at Object.<anonymous> (C:\Users\QuLeR\MTG-deck-builder\scripts\_scratch\s3i-lat.ts:29:155)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object.transformer (C:\Users\QuLeR\MTG-deck-builder\node_modules\tsx\dist\register-D46fvsV_.cjs:3:1104)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24) {
+  code: 'ERR_INVALID_ARG_TYPE'
+}
+
+Node.js v22.22.0

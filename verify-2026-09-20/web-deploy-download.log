@@ -1,0 +1,106 @@
+npm warn EBADENGINE Unsupported engine {
+npm warn EBADENGINE   package: 'openai@7.18.0',
+npm warn EBADENGINE   required: { node: '>=22.0.0' },
+npm warn EBADENGINE   current: { node: 'v20.20.2', npm: '10.8.2' }
+npm warn EBADENGINE }
+
+up to date in 1s
+
+> black-grimoire-web@0.1.0 build
+> next build
+
+▲ Next.js 16.2.3 (Turbopack)
+- Environments: .env.local
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 17.4s
+  Running TypeScript ...
+  Finished TypeScript in 12.7s ...
+  Collecting page data using 3 workers ...
+⚠ Using edge runtime on a page currently disables static generation for that page
+  Generating static pages using 3 workers (0/163) ...
+  Generating static pages using 3 workers (40/163) 
+  Generating static pages using 3 workers (81/163) 
+  Generating static pages using 3 workers (122/163) 
+✓ Generating static pages using 3 workers (163/163) in 23.7s
+  Finalizing page optimization ...
+
+Route (app)                                     Revalidate  Expire
+┌ ○ /                                                   1h      1y
+├ ○ /_not-found
+├ ○ /about
+├ ƒ /api/analyze
+├ ƒ /api/build
+├ ƒ /api/cards
+├ ƒ /api/catalog
+├ ƒ /api/catalog/[id]
+├ ƒ /api/collection
+├ ƒ /api/commander-stats
+├ ƒ /api/commanders
+├ ƒ /api/consult
+├ ƒ /api/decks
+├ ƒ /api/decks/[id]
+├ ƒ /api/decks/[id]/consult
+├ ƒ /api/feedback
+├ ƒ /api/matches
+├ ƒ /api/matches/ping
+├ ƒ /api/optimize
+├ ƒ /api/stripe/checkout
+├ ƒ /api/stripe/webhook
+├ ƒ /api/sync-token
+├ ○ /apple-icon.png
+├ ○ /builder
+├ ○ /collection
+├ ○ /commanders
+├ ● /commanders/[slug]                                  1d      1y
+│ ├ /commanders/y-shtola-night-s-blessed                1d      1y
+│ ├ /commanders/witherbloom-the-balancer                1d      1y
+│ ├ /commanders/the-ur-dragon                           1d      1y
+│ └ [+57 more paths]
+├ ● /commanders/[slug]/brawl                            1d      1y
+│ ├ /commanders/y-shtola-night-s-blessed/brawl          1d      1y
+│ ├ /commanders/witherbloom-the-balancer/brawl          1d      1y
+│ ├ /commanders/the-ur-dragon/brawl                     1d      1y
+│ └ [+57 more paths]
+├ ○ /contact
+├ ƒ /dashboard
+├ ○ /dashboard/ai
+├ ○ /dashboard/collection
+├ ƒ /dashboard/decks/[id]
+├ ○ /dashboard/decks/new
+├ ƒ /dashboard/matches
+├ ○ /decks
+├ ƒ /decks/[id]
+├ ○ /download                                           1h      1y
+├ ○ /faq
+├ ○ /favorites
+├ ○ /icon.png
+├ ○ /methodology                                        1h      1y
+├ ƒ /opengraph-image
+├ ○ /optimizer
+├ ○ /privacy
+├ ○ /robots.txt
+├ ƒ /sign-in/[[...sign-in]]
+├ ƒ /sign-up/[[...sign-up]]
+├ ○ /sitemap.xml                                        1h      1y
+├ ○ /support
+├ ○ /terms
+└ ƒ /twitter-image
+
+
+ƒ Proxy (Middleware)
+
+○  (Static)   prerendered as static content
+●  (SSG)      prerendered as static HTML (uses generateStaticParams)
+ƒ  (Dynamic)  server-rendered on demand
+
+[PM2] Applying action restartProcessId on app [black-grimoire-web](ids: [ 3 ])
+[PM2] [black-grimoire-web](3) ✓
+┌────┬───────────────────────┬─────────────┬─────────┬─────────┬──────────┬────────┬──────┬───────────┬──────────┬──────────┬──────────┬──────────┐
+│ id │ name                  │ namespace   │ version │ mode    │ pid      │ uptime │ ↺    │ status    │ cpu      │ mem      │ user     │ watching │
+├────┼───────────────────────┼─────────────┼─────────┼─────────┼──────────┼────────┼──────┼───────────┼──────────┼──────────┼──────────┼──────────┤
+│ 3  │ black-grimoire-web    │ default     │ 16.2.3  │ fork    │ 4112343  │ 0s     │ 18   │ online    │ 0%       │ 0b       │ root     │ disabled │
+│ 2  │ build-api             │ default     │ 1.0.0-… │ fork    │ 3949324  │ 2h     │ 6    │ online    │ 0%       │ 0b       │ root     │ disabled │
+│ 1  │ mebyface-monitor      │ default     │ 1.0.0   │ fork    │ 355866   │ 8D     │ 0    │ online    │ 0%       │ 0b       │ root     │ disabled │
+│ 0  │ telegram-bot          │ default     │ N/A     │ fork    │ N/A      │ 8D     │ 0    │ online    │ 0%       │ 0b       │ root     │ disabled │
+└────┴───────────────────────┴─────────────┴─────────┴─────────┴──────────┴────────┴──────┴───────────┴──────────┴──────────┴──────────┴──────────┘

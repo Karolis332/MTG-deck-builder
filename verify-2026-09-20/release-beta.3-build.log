@@ -1,0 +1,200 @@
+
+> the-black-grimoire@1.0.0-beta.3 dist:win
+> concurrently "npm:build" "npm:build:electron" && electron-builder --win
+
+[build:electron] 
+[build:electron] > the-black-grimoire@1.0.0-beta.3 build:electron
+[build:electron] > tsc -p tsconfig.electron.json
+[build:electron] 
+[build] 
+[build] > the-black-grimoire@1.0.0-beta.3 build
+[build] > next build && node scripts/postbuild-standalone.js
+[build] 
+[build:electron] npm run build:electron exited with code 0
+[build]   ▲ Next.js 14.2.35
+[build] 
+[build]    Creating an optimized production build ...
+[build] Browserslist: browsers data (caniuse-lite) is 8 months old. Please run:
+[build]   npx update-browserslist-db@latest
+[build]   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+[build] Browserslist: caniuse-lite is outdated. Please run:
+[build]   npx update-browserslist-db@latest
+[build]   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+[build]  ✓ Compiled successfully
+[build]    Linting and checking validity of types ...
+[build] 
+[build] ./src/app/overlay-game/page.tsx
+[build] 101:9  Warning: The 'deckList' logical expression could make the dependencies of useEffect Hook (at line 151) change on every render. To fix this, wrap the initialization of 'deckList' in its own useMemo() Hook.  react-hooks/exhaustive-deps
+[build] 
+[build] ./src/components/card-inline.tsx
+[build] 51:9  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+[build] 68:11  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+[build] 116:11  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+[build] 
+[build] ./src/components/command-center/tiles/BenchmarkTile.tsx
+[build] 135:21  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+[build] 
+[build] ./src/components/draft-tracker.tsx
+[build] 154:19  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+[build] 
+[build] ./src/components/game-narrative.tsx
+[build] 142:9  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+[build] 154:11  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+[build] 202:11  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+[build] 
+[build] ./src/components/screen-recorder-controls.tsx
+[build] 113:21  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+[build] 
+[build] info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/basic-features/eslint#disabling-rules
+[build]    Collecting page data ...
+[build]    Generating static pages (0/67) ...
+[build]    Generating static pages (16/67) 
+[build]    Generating static pages (33/67) 
+[build]    Generating static pages (50/67) 
+[build]  ✓ Generating static pages (67/67)
+[build]    Finalizing page optimization ...
+[build]    Collecting build traces ...
+[build] 
+[build] Route (app)                              Size     First Load JS
+[build] ┌ ○ /                                    2.37 kB        98.7 kB
+[build] ├ ○ /_not-found                          876 B          88.4 kB
+[build] ├ ○ /analytics                           12.1 kB         207 kB
+[build] ├ ○ /analytics/matches                   6.56 kB         209 kB
+[build] ├ ƒ /api/ai-suggest                      0 B                0 B
+[build] ├ ƒ /api/ai-suggest/apply                0 B                0 B
+[build] ├ ƒ /api/ai-suggest/benchmark            0 B                0 B
+[build] ├ ƒ /api/ai-suggest/chat                 0 B                0 B
+[build] ├ ƒ /api/ai-suggest/dismiss              0 B                0 B
+[build] ├ ƒ /api/ai-suggest/ml-check             0 B                0 B
+[build] ├ ƒ /api/ai-suggest/ml-predictions       0 B                0 B
+[build] ├ ○ /api/ai-suggest/stats                0 B                0 B
+[build] ├ ○ /api/analytics                       0 B                0 B
+[build] ├ ƒ /api/arena-collection                0 B                0 B
+[build] ├ ƒ /api/arena-matches                   0 B                0 B
+[build] ├ ƒ /api/arena-matches/reparse           0 B                0 B
+[build] ├ ƒ /api/arena-telemetry                 0 B                0 B
+[build] ├ ƒ /api/arena-telemetry/analyze         0 B                0 B
+[build] ├ ƒ /api/auth/login                      0 B                0 B
+[build] ├ ƒ /api/auth/logout                     0 B                0 B
+[build] ├ ƒ /api/auth/me                         0 B                0 B
+[build] ├ ƒ /api/auth/register                   0 B                0 B
+[build] ├ ƒ /api/billing/checkout                0 B                0 B
+[build] ├ ƒ /api/billing/portal                  0 B                0 B
+[build] ├ ƒ /api/billing/subscription            0 B                0 B
+[build] ├ ƒ /api/billing/webhook                 0 B                0 B
+[build] ├ ƒ /api/card-ratings                    0 B                0 B
+[build] ├ ƒ /api/cards/autocomplete              0 B                0 B
+[build] ├ ƒ /api/cards/search                    0 B                0 B
+[build] ├ ƒ /api/cards/seed                      0 B                0 B
+[build] ├ ƒ /api/cf-events                       0 B                0 B
+[build] ├ ƒ /api/cf-optimize                     0 B                0 B
+[build] ├ ƒ /api/cf-player                       0 B                0 B
+[build] ├ ƒ /api/collection                      0 B                0 B
+[build] ├ ƒ /api/collection/import               0 B                0 B
+[build] ├ ƒ /api/collection/import-csv           0 B                0 B
+[build] ├ ƒ /api/data-export                     0 B                0 B
+[build] ├ ƒ /api/deck-analysis                   0 B                0 B
+[build] ├ ƒ /api/deck-analysis/coverage          0 B                0 B
+[build] ├ ƒ /api/deck-combos                     0 B                0 B
+[build] ├ ƒ /api/deck-versions                   0 B                0 B
+[build] ├ ƒ /api/deck-versions/restore           0 B                0 B
+[build] ├ ƒ /api/decks                           0 B                0 B
+[build] ├ ƒ /api/decks/[id]                      0 B                0 B
+[build] ├ ƒ /api/decks/[id]/benchmark            0 B                0 B
+[build] ├ ƒ /api/decks/[id]/build-explanation    0 B                0 B
+[build] ├ ƒ /api/decks/[id]/import-update        0 B                0 B
+[build] ├ ƒ /api/decks/[id]/optimize-apply       0 B                0 B
+[build] ├ ƒ /api/decks/[id]/power-level          0 B                0 B
+[build] ├ ƒ /api/decks/auto-build                0 B                0 B
+[build] ├ ƒ /api/decks/claude-build              0 B                0 B
+[build] ├ ƒ /api/decks/craft-path                0 B                0 B
+[build] ├ ƒ /api/decks/pilot-guide               0 B                0 B
+[build] ├ ƒ /api/edhrec-consensus                0 B                0 B
+[build] ├ ƒ /api/favourites                      0 B                0 B
+[build] ├ ƒ /api/game-deck-preference            0 B                0 B
+[build] ├ ƒ /api/live-session                    0 B                0 B
+[build] ├ ƒ /api/live-session/result             0 B                0 B
+[build] ├ ƒ /api/match-logs                      0 B                0 B
+[build] ├ ƒ /api/match-logs/analyze              0 B                0 B
+[build] ├ ƒ /api/meta                            0 B                0 B
+[build] ├ ƒ /api/ml-pipeline                     0 B                0 B
+[build] ├ ƒ /api/mtgjson-enrich                  0 B                0 B
+[build] ├ ƒ /api/settings                        0 B                0 B
+[build] ├ ƒ /api/settings/test-provider          0 B                0 B
+[build] ├ ƒ /api/sideboard-guide                 0 B                0 B
+[build] ├ ƒ /api/similar-decks                   0 B                0 B
+[build] ├ ƒ /api/web-sync                        0 B                0 B
+[build] ├ ○ /collection                          5.04 kB         116 kB
+[build] ├ ○ /deck-builder                        6.22 kB         109 kB
+[build] ├ ƒ /deck/[id]                           41.3 kB         160 kB
+[build] ├ ○ /draft                               3.05 kB        90.6 kB
+[build] ├ ○ /duel                                5.13 kB         112 kB
+[build] ├ ○ /game                                11.2 kB         106 kB
+[build] ├ ○ /icon.png                            0 B                0 B
+[build] ├ ○ /landing                             5.5 kB           93 kB
+[build] ├ ○ /login                               1.85 kB        98.2 kB
+[build] ├ ○ /overlay-game                        2.75 kB        90.3 kB
+[build] └ ○ /register                            1.93 kB        98.2 kB
+[build] + First Load JS shared by all            87.6 kB
+[build]   ├ chunks/117-dc2085224911815f.js       31.9 kB
+[build]   ├ chunks/fd9d1056-8f30798a98e82aca.js  53.6 kB
+[build]   └ other shared chunks (total)          2.01 kB
+[build] 
+[build] 
+[build] ○  (Static)   prerendered as static content
+[build] ƒ  (Dynamic)  server-rendered on demand
+[build] 
+[build] [postbuild] Copied .next/static into standalone
+[build] [postbuild] Copied better-sqlite3 into standalone/node_modules
+[build] [postbuild] Copied bindings into standalone/node_modules
+[build] [postbuild] Copied file-uri-to-path into standalone/node_modules
+[build] [postbuild] Copied prebuild-install into standalone/node_modules
+[build] [postbuild] Copied arena_grp_ids.json into standalone/data
+[build] [postbuild] Removed blocked file from standalone/data/: card_model.joblib
+[build] [postbuild] Removed blocked file from standalone/data/: export-standard.db
+[build] [postbuild] Removed blocked file from standalone/data/: grimoire-build.db
+[build] [postbuild] Removed blocked file from standalone/data/: mtg-deck-builder.db
+[build] [postbuild] Removed blocked file from standalone/data/: mtg-deck-builder.db-shm
+[build] [postbuild] Removed blocked file from standalone/data/: mtg-deck-builder.db-wal
+[build] [postbuild] Removed blocked file from standalone/data/: pipeline_failures.json
+[build] [postbuild] Removed blocked file from standalone/data/: pipeline_report.json
+[build] [postbuild] Removed blocked file from standalone/data/: smoke-goldfish.db
+[build] [postbuild] Removed blocked file from standalone/data/: smoke-goldfish.db-shm
+[build] [postbuild] Removed blocked file from standalone/data/: smoke-goldfish.db-wal
+[build] [postbuild] Removed blocked file from standalone/data/: smoke-mtgo.db
+[build] [postbuild] Removed blocked file from standalone/data/: smoke-mtgo.db-shm
+[build] [postbuild] Removed blocked file from standalone/data/: smoke-mtgo.db-wal
+[build] [postbuild] Removed blocked file from standalone/data/: smoke-mtgo2.db
+[build] [postbuild] Removed blocked file from standalone/data/: smoke-top8.db
+[build] [postbuild] Removed blocked file from standalone/data/: test-export.db
+[build] [postbuild] Done
+[build] npm run build exited with code 0
+  • electron-builder  version=25.1.8 os=10.0.26200
+  • loaded configuration  file=C:\Users\QuLeR\MTG-deck-builder\electron-builder.yml
+  • executing @electron/rebuild  electronVersion=33.4.11 arch=x64 buildFromSource=false appDir=./
+  • installing native dependencies  arch=x64
+  • preparing       moduleName=better-sqlite3 arch=x64
+  • finished        moduleName=better-sqlite3 arch=x64
+  • completed installing native dependencies
+  • packaging       platform=win32 arch=x64 electron=33.4.11 appOutDir=dist-electron\win-unpacked
+  • asar usage is disabled — this is strongly not recommended  solution=enable asar and use asarUnpack to unpack files that must be externally available
+[afterPack] Removing stale build/Release/better_sqlite3.node
+[afterPack] Rebuilding better-sqlite3 for Electron v33.4.11
+[afterPack] Location: C:\Users\QuLeR\MTG-deck-builder\dist-electron\win-unpacked\resources\standalone\node_modules\better-sqlite3
+[afterPack] better-sqlite3 rebuilt successfully
+[afterPack] Synced Electron-ABI better_sqlite3.node into app/node_modules
+  • asar usage is disabled — this is strongly not recommended  solution=enable asar and use asarUnpack to unpack files that must be externally available
+  • signing with signtool.exe  path=dist-electron\win-unpacked\the-black-grimoire.exe
+  • no signing info identified, signing is skipped  signHook=false cscInfo=null
+  • building        target=zip arch=x64 file=dist-electron\the-black-grimoire-1.0.0-beta.3-win-x64.zip
+  • building        target=nsis file=dist-electron\the-black-grimoire-1.0.0-beta.3-win-x64.exe archs=x64 oneClick=false perMachine=false
+  • signing with signtool.exe  path=dist-electron\win-unpacked\resources\elevate.exe
+  • no signing info identified, signing is skipped  signHook=false cscInfo=null
+  • signing with signtool.exe  path=dist-electron\__uninstaller-nsis-the-black-grimoire.exe
+  • no signing info identified, signing is skipped  signHook=false cscInfo=null
+  • signing with signtool.exe  path=dist-electron\the-black-grimoire-1.0.0-beta.3-win-x64.exe
+  • no signing info identified, signing is skipped  signHook=false cscInfo=null
+  • building block map  blockMapFile=dist-electron\the-black-grimoire-1.0.0-beta.3-win-x64.exe.blockmap
+  • building        target=portable file=dist-electron\the-black-grimoire-1.0.0-beta.3-portable.exe archs=x64
+  • signing with signtool.exe  path=dist-electron\the-black-grimoire-1.0.0-beta.3-portable.exe
+  • no signing info identified, signing is skipped  signHook=false cscInfo=null

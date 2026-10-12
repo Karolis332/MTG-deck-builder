@@ -1,0 +1,13 @@
+| profile | rows | families | alt families | dups | unavailable | knots | ties | largest atom | weight sum | mean rank | T_abs p10/p50/p90 | verdict |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|
+| commander | 0 | 0 | 182 | 20 | 1440 | 0 | 0 | 0.000e+0 | 0.000000000000 | - | NaN / NaN / NaN | BLOCKED |
+| brawl | 0 | 0 | 179 | 12 | 785 | 0 | 0 | 0.000e+0 | 0.000000000000 | - | NaN / NaN / NaN | BLOCKED |
+| standard | 244 | 40 | 25 | 90 | 0 | 135 | 37 | 8.803e-2 | 1.000000000000 | 50.000000000 | 44.08 / 69.68 / 86.24 | OK |
+
+commander: 1440 eligible row(s) have no finite absolute total (first: commander-sample:381413007 — no resolved main-board card: all 76 library slot(s) are unresolved names.; commander-sample:381392623 — no resolved main-board card: all 100 library slot(s) are unresolved names.; commander-sample:381414287 — no resolved main-board card: all 74 library slot(s) are unresolved names.)
+commander: only 0 independent families (<30); alternative grouping would give 182
+brawl: 785 eligible row(s) have no finite absolute total (first: brawl-sample:381158609 — no resolved main-board card: all 76 library slot(s) are unresolved names.; brawl-sample:380052515 — no resolved main-board card: all 69 library slot(s) are unresolved names.; brawl-sample:376088969 — no resolved main-board card: all 83 library slot(s) are unresolved names.)
+brawl: only 0 independent families (<30); alternative grouping would give 179
+standard: 26 eligible row(s) excluded by a SCORER rule failure: standard:1446069, standard:1446183, standard:1446182, standard:1446208, standard:1446354, standard:1446321, standard:1446410, standard:1446408, standard:1446515, standard:1446510, standard:1446567, standard:1446563, standard:1446561, standard:1446647, standard:1446655, standard:1446706, standard:1446013, standard:1446037, standard:1446322, standard:1446572, standard:1446716, standard:1446785, standard:1446850, standard:1446820, standard:1447148, standard:1447203
+
+dry run — pass --write to freeze

@@ -1,0 +1,14 @@
+
+up to date in 1s
+rebuilt dependencies successfully
+[PM2] Applying action restartProcessId on app [build-api](ids: [ 2 ])
+[PM2] [build-api](2) ✓
+┌────┬───────────────────────┬─────────────┬─────────┬─────────┬──────────┬────────┬──────┬───────────┬──────────┬──────────┬──────────┬──────────┐
+│ id │ name                  │ namespace   │ version │ mode    │ pid      │ uptime │ ↺    │ status    │ cpu      │ mem      │ user     │ watching │
+├────┼───────────────────────┼─────────────┼─────────┼─────────┼──────────┼────────┼──────┼───────────┼──────────┼──────────┼──────────┼──────────┤
+│ 3  │ black-grimoire-web    │ default     │ 16.2.3  │ fork    │ 3909902  │ 38m    │ 16   │ online    │ 0%       │ 0b       │ root     │ disabled │
+│ 2  │ build-api             │ default     │ 1.0.0-… │ fork    │ 3949324  │ 0s     │ 6    │ online    │ 0%       │ 0b       │ root     │ disabled │
+│ 1  │ mebyface-monitor      │ default     │ 1.0.0   │ fork    │ 355866   │ 8D     │ 0    │ online    │ 0%       │ 0b       │ root     │ disabled │
+│ 0  │ telegram-bot          │ default     │ N/A     │ fork    │ N/A      │ 8D     │ 0    │ online    │ 0%       │ 0b       │ root     │ disabled │
+└────┴───────────────────────┴─────────────┴─────────┴─────────┴──────────┴────────┴──────┴───────────┴──────────┴──────────┴──────────┴──────────┘
+{"status":"ok","service":"build-api","activeBuilds":0}

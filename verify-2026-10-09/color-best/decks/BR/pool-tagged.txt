@@ -1,0 +1,637 @@
+FREE                                           mv0 r 1036 Arcane Lighthouse |Land|{T}: Add {C}. {1}, {T}: Until end of turn, creatures your opponents control lose hexproof and shroud and can't
+FREE                                           mv0 r 1497 Arid Archway |Land — Deser|This land enters tapped. When this land enters, return a land you control to its owner's hand. If another Dese
+IN FREE                                        mv0 r  210 Ash Barrens |Land|{T}: Add {C}. Basic landcycling {1} ({1}, Discard this card: Search your library for a basic land card, reveal
+FREE                                           mv0 r 1316 Astral Cornucopia |Art|This artifact enters with X charge counters on it. {T}: Choose a color. Add one mana of that color for each ch
+RAID:tazri-beacon-of-unity                     mv0 r11111 Base Camp |Land|This land enters tapped. {T}: Add {C}. {T}: Add one mana of any color. Spend this mana only to cast a Cleric,
+FREE                                           mv0 r 2886 Basilisk Gate |Land — Gate|{T}: Add {C}. {2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you contr
+FREE                                           mv0 r 1662 Blast Zone |Land|This land enters with a charge counter on it. {T}: Add {C}. {X}{X}, {T}: Put X charge counters on this land. {
+IN RAID:tazri-beacon-of-unity                  mv0 r   43 Bloodstained Mire |Land|{T}, Pay 1 life, Sacrifice this land: Search your library for a Swamp or Mountain card, put it onto the battle
+FREE                                           mv0 r   24 Bojuka Bog |Land|This land enters tapped. When this land enters, exile target player's graveyard. {T}: Add {B}.
+RAID:tazri-beacon-of-unity                     mv0 r 1317 Brokers Hideout |Land|When this land enters, sacrifice it. When you do, search your library for a basic Forest, Plains, or Island ca
+IN FREE                                        mv0 r  193 Buried Ruin |Land|{T}: Add {C}. {2}, {T}, Sacrifice this land: Return target artifact card from your graveyard to your hand.
+RAID:tazri-beacon-of-unity                     mv0 r  969 Cabaretti Courtyard |Land|When this land enters, sacrifice it. When you do, search your library for a basic Mountain, Forest, or Plains
+IN FREE                                        mv0 r  686 Canyon Slough |Land — Swamp|({T}: Add {B} or {R}.) This land enters tapped. Cycling {2} ({2}, Discard this card: Draw a card.)
+FREE                                           mv0 r 5815 Cloudpost |Land — Locus|This land enters tapped. {T}: Add {C} for each Locus on the battlefield.
+RAID:beledros-witherbloom,bumi-unleashed,gilan mv0 r    2 Command Tower |Land|{T}: Add one mana of any color in your commander's color identity.
+FREE                                           mv0 r 2009 Conduit Pylons |Land — Deser|When this land enters, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
+RAID:bumi-unleashed                            mv0 r 6591 Crawling Barrens |Land|{T}: Add {C}. {4}: Put two +1/+1 counters on this land. Then you may have it become a 0/0 Elemental creature u
+RAID:imotekh-the-stormlord                     mv0 r 1709 Crypt of Agadeem |Land|This land enters tapped. {T}: Add {B}. {2}, {T}: Add {B} for each black creature card in your graveyard.
+RAID:bumi-unleashed                            mv0 r 4593 Cryptic Caves |Land|{T}: Add {C}. {1}, {T}, Sacrifice this land: Draw a card. Activate only if you control five or more lands.
+FREE                                           mv0 r 1472 Dark Depths |L.Snow Land|Dark Depths enters with ten ice counters on it. {3}: Remove an ice counter from Dark Depths. When Dark Depths
+RAID:gilanra-alena-partners                    mv0 r 3142 Diamond City |Land|This land enters with a shield counter on it. (If it would be dealt damage or destroyed, remove a shield count
+IN RAID:tam-the-possibility                    mv0 r   84 Dragonskull Summit |Land|This land enters tapped unless you control a Swamp or a Mountain. {T}: Add {B} or {R}.
+IN RAID:the-cabbage-merchant                   mv0 r  795 Escape Tunnel |Land|{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then
+IN RAID:inspirit-flagship-vessel               mv0 r  253 Everflowing Chalice |Art|Multikicker {2} (You may pay an additional {2} any number of times as you cast this spell.) This artifact ente
+RAID:beledros-witherbloom                      mv0 r   19 Evolving Wilds |Land|{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then
+FREE                                           mv0 r    9 Exotic Orchard |Land|{T}: Add one mana of any color that a land an opponent controls could produce.
+FREE                                           mv0 r   44 Fabled Passage |Land|{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then
+FREE                                           mv0 r 6597 Glimmerpost |Land — Locus|When this land enters, you gain 1 life for each Locus on the battlefield. {T}: Add {C}.
+IN RAID:inspirit-flagship-vessel               mv0 r  375 Great Furnace |Art Land|{T}: Add {R}.
+RAID:tam-the-possibility                       mv0 r 1818 Great Hall of the Citadel |Land|{T}: Add {C}. {1}, {T}: Add two mana in any combination of colors. Spend this mana only to cast legendary spel
+FREE                                           mv0 r 1522 Hangarback Walker |Art Cr — Con|This creature enters with X +1/+1 counters on it. When this creature dies, create a 1/1 colorless Thopter arti
+FREE                                           mv0 r 2255 Hidden Grotto |Land|When this land enters, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
+RAID:beledros-witherbloom                      mv0 r  424 High Market |Land|{T}: Add {C}. {T}, Sacrifice a creature: You gain 1 life.
+RAID:beledros-witherbloom                      mv0 r 1527 Horizon of Progress |Land|{T}, Pay 1 life: Add one mana of any type that a land you control could produce. {3}, {T}: You may put a land
+FREE                                           mv0 r 4445 Ifnir Deadlands |Land — Deser|{T}: Add {C}. {T}, Pay 1 life: Add {B}. {2}{B}{B}, {T}, Sacrifice a Desert: Put two -1/-1 counters on target c
+RAID:tam-the-possibility                       mv0 r 4184 Interplanar Beacon |Land|Whenever you cast a planeswalker spell, you gain 1 life. {T}: Add {C}. {1}, {T}: Add two mana of different col
+IN RAID:inspirit-flagship-vessel               mv0 r  267 Inventors' Fair |L.Land|At the beginning of your upkeep, if you control three or more artifacts, you gain 1 life. {T}: Add {C}. {4}, {
+IN FREE                                        mv0 r 3886 Jagged Barrens |Land — Deser|This land enters tapped. When this land enters, it deals 1 damage to target opponent. {T}: Add {B} or {R}.
+IN RAID:inspirit-flagship-vessel               mv0 r  206 Karn's Bastion |Land|{T}: Add {C}. {4}, {T}: Proliferate. (Choose any number of permanents and/or players, then give each another c
+FREE                                           mv0 r 1871 Lazotep Quarry |Land — Deser|{T}: Add {C}. {T}, Sacrifice a creature: Add one mana of any color. {X}{2}, {T}, Sacrifice a Desert: Exile tar
+RAID:bumi-unleashed                            mv0 r  869 Lotus Field |Land|Hexproof This land enters tapped. When this land enters, sacrifice two lands. {T}: Add three mana of any one c
+FREE                                           mv0 r 1285 Maestros Theater |Land|When this land enters, sacrifice it. When you do, search your library for a basic Island, Swamp, or Mountain c
+IN RAID:tam-the-possibility                    mv0 r  116 Mana Confluence |Land|{T}, Pay 1 life: Add one mana of any color.
+FREE                                           mv0 r 4339 Mirage Mesa |Land — Deser|This land enters tapped. As it enters, choose a color. {T}: Add one mana of the chosen color.
+FREE                                           mv0 r 1106 Mishra's Bauble |Art|{T}, Sacrifice this artifact: Look at the top card of target player's library. Draw a card at the beginning of
+IN RAID:imotekh-the-stormlord                  mv0 r  702 Mortuary Mire |Land|This land enters tapped. When this land enters, you may put target creature card from your graveyard on top of
+FREE                                           mv0 r 2963 Mudflat Village |Land|{T}: Add {C}. {T}: Add {B}. Spend this mana only to cast a creature spell. {1}{B}, {T}, Sacrifice this land: R
+FREE                                           mv0 r 1421 Muraganda Raceway |Land|Start your engines! (If you have no speed, it starts at 1. It increases once on each of your turns when an opp
+RAID:beledros-witherbloom,imotekh-the-stormlor mv0 r   31 Myriad Landscape |Land|This land enters tapped. {T}: Add {C}. {2}, {T}, Sacrifice this land: Search your library for up to two basic
+IN FREE                                        mv0 r  561 Nesting Grounds |Land|{T}: Add {C}. {1}, {T}: Move a counter from target permanent you control onto a second target permanent. Activ
+IN FREE                                        mv0 r  681 Opal Palace |Land|{T}: Add {C}. {1}, {T}: Add one mana of any color in your commander's color identity. If you spend this mana t
+IN FREE                                        mv0 r   14 Path of Ancestry |Land|This land enters tapped. {T}: Add one mana of any color in your commander's color identity. When that mana is
+FREE                                           mv0 r 2630 Planar Nexus |Land|This land is every nonbasic land type. (Nonbasic land types include Cave, Desert, Gate, Lair, Locus, Mine, Pow
+RAID:ramos-dragon-engine                       mv0 r 7627 Plaza of Harmony |Land|When this land enters, if you control two or more Gates, you gain 3 life. {T}: Add {C}. {T}: Add one mana of a
+FREE                                           mv0 r 1548 Radiant Fountain |Land|When this land enters, you gain 2 life. {T}: Add {C}.
+IN FREE                                        mv0 r  512 Rakdos Carnarium |Land|This land enters tapped. When this land enters, return a land you control to its owner's hand. {T}: Add {B}{R}
+FREE                                           mv0 r 5813 Realm of Koh |Land|This land enters tapped unless you control a basic land. {T}: Add {B}. {3}{B}, {T}: Create a 1/1 colorless Spi
+IN FREE                                        mv0 r   10 Reliquary Tower |Land|You have no maximum hand size. {T}: Add {C}.
+IN FREE                                        mv0 r  716 Riveteers Overlook |Land|When this land enters, sacrifice it. When you do, search your library for a basic Swamp, Mountain, or Forest c
+IN RAID:bumi-unleashed                         mv0 r   18 Rogue's Passage |Land|{T}: Add {C}. {4}, {T}: Target creature can't be blocked this turn.
+RAID:bumi-unleashed                            mv0 r 3013 Rumble Arena |Land|Vigilance When this land enters, scry 1. (Look at the top card of your library. You may put it on the bottom.)
+FREE                                           mv0 r 6427 Sandstorm Verge |Land — Deser|{T}: Add {C}. {3}, {T}: Target creature can't block this turn. Activate only as a sorcery.
+FREE                                           mv0 r 3770 Secluded Starforge |Land|{T}: Add {C}. {2}, {T}, Tap X untapped artifacts you control: Target creature gets +X/+0 until end of turn. Ac
+FREE                                           mv0 r 9992 Skycoach Waypoint |Land|{T}: Add {C}. {3}, {T}: Target creature becomes prepared. (Only creatures with prepare spells can become prepa
+IN FREE                                        mv0 r   94 Smoldering Marsh |Land — Swamp|({T}: Add {B} or {R}.) This land enters tapped unless you control two or more basic lands.
+IN RAID:gilanra-alena-partners                 mv0 r  781 Spinerock Knoll |Land|Hideaway 4 (When this land enters, look at the top four cards of your library, exile one face down, then put t
+IN RAID:inspirit-flagship-vessel               mv0 r  394 Spire of Industry |Land|{T}: Add {C}. {T}, Pay 1 life: Add one mana of any color. Activate only if you control an artifact.
+RAID:tam-the-possibility                       mv0 r23301 Stingerquill Annex |Land|This land enters tapped unless you control a planeswalker. {T}: Add {B} or {R}.
+FREE                                           mv0 r 1514 Stonecoil Serpent |Art Cr — Sna|Reach, trample, protection from multicolored This creature enters with X +1/+1 counters on it.
+IN RAID:bumi-unleashed                         mv0 r  529 Strip Mine |Land|{T}: Add {C}. {T}, Sacrifice this land: Destroy target land.
+FREE                                           mv0 r 3543 Study Hall |Land|{T}: Add {C}. {1}, {T}: Add one mana of any color. When you spend this mana to cast your commander, scry X, wh
+IN FREE                                        mv0 r  570 Talon Gates of Madara |Land — Gate|When this land enters, up to one target creature phases out. {T}: Add {C}. {1}, {T}: Add one mana of any color
+FREE                                           mv0 r 9199 Tarnation Vista |Land|This land enters tapped. As it enters, choose a color. {T}: Add one mana of the chosen color. {1}, {T}: For ea
+IN FREE                                        mv0 r   82 Temple of the False God |Land|{T}: Add {C}{C}. Activate only if you control five or more lands.
+FREE                                           mv0 r   28 Terramorphic Expanse |Land|{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then
+FREE                                           mv0 r  854 The Mycosynth Gardens |Land — Spher|{T}: Add {C}. {1}, {T}: Add one mana of any color. {X}, {T}: This land becomes a copy of target nontoken artif
+RAID:beledros-witherbloom                      mv0 r  580 Thespian's Stage |Land|{T}: Add {C}. {2}, {T}: This land becomes a copy of target land, except it has this ability.
+FREE                                           mv0 r 8042 Trenchpost |Land — Locus|{T}: Add {C}. {3}, {T}: Target player mills a card for each Locus you control.
+FREE                                           mv0 r  842 Urza's Mine |Land — Urza'|{T}: Add {C}. If you control an Urza's Power-Plant and an Urza's Tower, add {C}{C} instead.
+FREE                                           mv0 r  843 Urza's Power Plant |Land — Urza'|{T}: Add {C}. If you control an Urza's Mine and an Urza's Tower, add {C}{C} instead.
+IN FREE                                        mv0 r  835 Urza's Tower |Land — Urza'|{T}: Add {C}. If you control an Urza's Mine and an Urza's Power-Plant, add {C}{C}{C} instead.
+RAID:beledros-witherbloom                      mv0 r  923 Vesuva |Land|You may have this land enter tapped as a copy of any land on the battlefield.
+FREE                                           mv0 r 2683 Volatile Fault |Land — Cave|{T}: Add {C}. {1}, {T}, Sacrifice this land: Destroy target nonbasic land an opponent controls. That player ma
+RAID:the-cabbage-merchant                      mv0 r  425 Walking Ballista |Art Cr — Con|This creature enters with X +1/+1 counters on it. {4}: Put a +1/+1 counter on this creature. Remove a +1/+1 co
+IN RAID:tazri-beacon-of-unity                  mv0 r   45 Windswept Heath |Land|{T}, Pay 1 life, Sacrifice this land: Search your library for a Forest or Plains card, put it onto the battlef
+IN RAID:tazri-beacon-of-unity                  mv0 r   47 Wooded Foothills |Land|{T}, Pay 1 life, Sacrifice this land: Search your library for a Mountain or Forest card, put it onto the battl
+RAID:beledros-witherbloom                      mv0 r   78 Yavimaya, Cradle of Growth |L.Land|Each land is a Forest in addition to its other land types.
+IN FREE                                        mv1 r  254 Basilisk Collar |Art — Equipm|Equipped creature has deathtouch and lifelink. (Any amount of damage it deals to a creature is enough to destr
+RAID:imotekh-the-stormlord                     mv1 r 4946 Black Sun's Twilight |Inst|Up to one target creature gets -X/-X until end of turn. If X is 5 or more, return a creature card with mana va
+FREE                                           mv1 r 5868 Blood Celebrant |Cr — Human C|{B}, Pay 1 life: Add one mana of any color.
+FREE                                           mv1 r 2612 Blood Pet |Cr — Thrull|Sacrifice this creature: Add {B}.
+FREE                                           mv1 r16401 Callous Inspector |Cr — Human S|Menace (This creature can't be blocked except by two or more creatures.) When this creature dies, it deals 1 d
+FREE                                           mv1 r  613 Carrion Feeder |Cr — Zombie|This creature can't block. Sacrifice a creature: Put a +1/+1 counter on this creature.
+RAID:tazri-beacon-of-unity                     mv1 r  682 Changeling Outcast |Cr — Shapesh|Changeling (This card is every creature type.) This creature can't block and can't be blocked.
+IN FREE                                        mv1 r  599 Corrupted Conviction |Inst|As an additional cost to cast this spell, sacrifice a creature. Draw two cards.
+RAID:imotekh-the-stormlord                     mv1 r  519 Culling the Weak |Inst|As an additional cost to cast this spell, sacrifice a creature. Add {B}{B}{B}{B}.
+RAID:beledros-witherbloom                      mv1 r   33 Dark Ritual |Inst|Add {B}{B}{B}.
+FREE                                           mv1 r 1445 Elixir of Immortality |Art|{2}, {T}: You gain 5 life. Shuffle this artifact and your graveyard into their owner's library.
+FREE                                           mv1 r  454 Expedition Map |Art|{2}, {T}, Sacrifice this artifact: Search your library for a land card, reveal it, put it into your hand, then
+FREE                                           mv1 r 2252 Explorer's Scope |Art — Equipm|Whenever equipped creature attacks, look at the top card of your library. If it's a land card, you may put it
+FREE                                           mv1 r12300 Explosive Derailment |Inst|Spree (Choose one or more additional costs.) + {2} — Explosive Derailment deals 4 damage to target creature. +
+FREE                                           mv1 r22251 Eye of Jace |Art|At the beginning of your upkeep, surveil 1. Then if there are seven or more cards in your graveyard, sacrifice
+IN RAID:bumi-unleashed                         mv1 r   98 Faithless Looting |Sorc|Draw two cards, then discard two cards. Flashback {2}{R} (You may cast this card from your graveyard for its f
+FREE                                           mv1 r 5684 Font of Agonies |Ench|Whenever you pay life, put that many blood counters on this enchantment. {1}{B}, Remove four blood counters fr
+IN FREE                                        mv1 r 2440 Forsaken Miner |Cr — Skeleto|This creature can't block. Whenever you commit a crime, you may pay {B}. If you do, return this card from your
+FREE                                           mv1 r 5291 Fountainport Bell |Art|When this artifact enters, you may search your library for a basic land card, reveal it, then shuffle and put
+FREE                                           mv1 r14793 Full Bore |Inst|Target creature you control gets +3/+2 until end of turn. If that creature was cast for its warp cost, it also
+FREE                                           mv1 r17186 Giant's Boulder |Art|When this artifact enters, scry 2. (Look at the top two cards of your library, then put any number of them on
+FREE                                           mv1 r15826 Gonti's Machinations |Ench|Whenever you lose life for the first time each turn, you get {E}. (You get an energy counter. Damage causes lo
+FREE                                           mv1 r10351 Gutterbones |Cr — Skeleto|This creature enters tapped. {1}{B}: Return this card from your graveyard to your hand. Activate only during y
+FREE                                           mv1 r 4855 Hateful Eidolon |Ench Cr — Sp|Lifelink Whenever an enchanted creature dies, draw a card for each Aura you controlled that was attached to it
+IN FREE                                        mv1 r 3887 Infestation Sage |Cr — Elf War|When this creature dies, create a 1/1 black and green Insect creature token with flying.
+IN RAID:imotekh-the-stormlord                  mv1 r 1202 Insatiable Avarice |Sorc|Spree (Choose one or more additional costs.) + {2} — Search your library for a card, then shuffle and put that
+RAID:tam-the-possibility                       mv1 r  765 Kaya's Ghostform |Ench — Aura|Enchant creature or planeswalker you control When enchanted permanent dies or is put into exile, return that c
+FREE                                           mv1 r 1530 Lavaspur Boots |Art — Equipm|Equipped creature gets +1/+0 and has haste and ward {1}. (Whenever it becomes the target of a spell or ability
+FREE                                           mv1 r 3006 Library of Leng |Art|You have no maximum hand size. If an effect causes you to discard a card, discard it, but you may put it on to
+RAID:inspirit-flagship-vessel                  mv1 r 4503 Lost Jitte |L.Art — Equi|Whenever equipped creature deals combat damage, put a charge counter on Lost Jitte. Remove a charge counter fr
+FREE                                           mv1 r 7151 Multiclass Baldric |Art — Equipm|Equipped creature has lifelink if you control a Cleric, deathtouch if you control a Rogue, haste if you contro
+RAID:                                          mv1 r24031 Battlemage // Improvised Act |Cr — Goblin |Prowess This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprep
+FREE                                           mv1 r 9158 Raise Dead |Sorc|Return target creature card from your graveyard to your hand.
+IN FREE                                        mv1 r   54 Reanimate |Sorc|Put target creature card from a graveyard onto the battlefield under your control. You lose life equal to that
+RAID:beledros-witherbloom,bumi-unleashed,gilan mv1 r    1 Sol Ring |Art|{T}: Add {C}{C}.
+FREE                                           mv1 r 1355 Soul-Guide Lantern |Art|When this artifact enters, exile target card from a graveyard. {T}, Sacrifice this artifact: Exile each oppone
+FREE                                           mv1 r13229 Suffer the Past |Inst|Exile X target cards from target player's graveyard. For each card exiled this way, that player loses 1 life a
+FREE                                           mv1 r 1767 Supernatural Stamina |Inst|Until end of turn, target creature gets +2/+0 and gains "When this creature dies, return it to the battlefield
+FREE                                           mv1 r 1308 Undying Malice |Inst|Until end of turn, target creature gains "When this creature dies, return it to the battlefield tapped under i
+FREE                                           mv1 r19148 Unfortunate Accident |Inst|Spree (Choose one or more additional costs.) + {2}{B} — Destroy target creature. + {1} — Create a 1/1 red Merc
+FREE                                           mv1 r 5402 Vampiric Link |Ench — Aura|Enchant creature Whenever enchanted creature deals damage, you gain that much life.
+FREE                                           mv1 r 1298 Vexing Bauble |Art|Whenever a player casts a spell, if no mana was spent to cast it, counter that spell. {1}, {T}, Sacrifice this
+RAID:beledros-witherbloom                      mv1 r  202 Village Rites |Inst|As an additional cost to cast this spell, sacrifice a creature. Draw two cards.
+RAID:beledros-witherbloom                      mv1 r  257 Viscera Seer |Cr — Vampire|Sacrifice a creature: Scry 1. (Look at the top card of your library. You may put that card on the bottom.)
+IN FREE                                        mv1 r  125 Wayfarer's Bauble |Art|{2}, {T}, Sacrifice this artifact: Search your library for a basic land card, put that card onto the battlefie
+FREE                                           mv1 r 5860 Wild Ride |Sorc|Target creature gets +3/+0 and gains haste until end of turn. Harmonize {4}{R} (You may cast this card from yo
+IN RAID:inspirit-flagship-vessel               mv2 r  144 Abrade |Inst|Choose one — • Abrade deals 3 damage to target creature. • Destroy target artifact.
+FREE                                           mv2 r  477 Accursed Marauder |Cr — Zombie |When this creature enters, each player sacrifices a nontoken creature of their choice.
+RAID:                                          mv2 r 7508 of Bhaal // Bone Offering |Art|{2}{B}, {T}, Exile a creature you control: Return target creature card from your graveyard to the battlefield.
+IN FREE                                        mv2 r  223 Animate Dead |Ench — Aura|Enchant creature card in a graveyard When this Aura enters, if it's on the battlefield, it loses "enchant crea
+FREE                                           mv2 r    3 Arcane Signet |Art|{T}: Add one mana of any color in your commander's color identity.
+FREE                                           mv2 r 4228 Bandit's Talent |Ench — Class|(Gain the next level as a sorcery to add its ability.) When this Class enters, each opponent discards two card
+RAID:imotekh-the-stormlord                     mv2 r  833 Bitter Triumph |Inst|As an additional cost to cast this spell, discard a card or pay 3 life. Destroy target creature or planeswalke
+FREE                                           mv2 r 1933 Black Sun's Zenith |Sorc|Put X -1/-1 counters on each creature. Shuffle Black Sun's Zenith into its owner's library.
+RAID:beledros-witherbloom                      mv2 r  141 Blood Artist |Cr — Vampire|Whenever this creature or another creature dies, target player loses 1 life and you gain 1 life.
+FREE                                           mv2 r13083 Blood Hustler |Cr — Vampire|Whenever you commit a crime, put a +1/+1 counter on this creature. This ability triggers only once each turn.
+IN FREE                                        mv2 r 1010 Bloodghast |Cr — Vampire|This creature can't block. This creature has haste as long as an opponent has 10 or less life. Landfall — When
+FREE                                           mv2 r11084 Brimstone Roundup |Ench|Whenever you cast your second spell each turn, create a 1/1 red Mercenary creature token with "{T}: Target cre
+RAID:bumi-unleashed                            mv2 r 1438 Bulk Up |Inst|Double target creature's power until end of turn. Flashback {4}{R}{R} (You may cast this card from your gravey
+FREE                                           mv2 r 4147 Cathartic Pyre |Inst|Choose one — • Cathartic Pyre deals 3 damage to target creature or planeswalker. • Discard up to two cards, th
+FREE                                           mv2 r 1109 Cathartic Reunion |Sorc|As an additional cost to cast this spell, discard two cards. Draw three cards.
+FREE                                           mv2 r16162 Caught in the Crossfire |Inst|Spree (Choose one or more additional costs.) + {1} — Caught in the Crossfire deals 2 damage to each outlaw cre
+FREE                                           mv2 r 6429 Changing Loyalty |Ench — Aura|Flash Replicate {2} (When you cast this spell, copy it for each time you paid its replicate cost. You may choo
+IN RAID:imotekh-the-stormlord                  mv2 r  698 Charcoal Diamond |Art|This artifact enters tapped. {T}: Add {B}.
+RAID:imotekh-the-stormlord                     mv2 r 7634 Chronomancer |Art Cr — Nec|Flying Atomic Transmutation — {1}, {T}, Sacrifice another artifact: Draw a card. Unearth {2}{B} ({2}{B}: Retur
+FREE                                           mv2 r 2357 Chthonian Nightmare |Ench|When this enchantment enters, you get {E}{E}{E} (three energy counters). Pay X {E}, Sacrifice a creature, Retu
+FREE                                           mv2 r 2437 Consuming Corruption |Inst|Consuming Corruption deals X damage to target creature or planeswalker and you gain X life, where X is the num
+FREE                                           mv2 r 1419 Contagion Clasp |Art|When this artifact enters, put a -1/-1 counter on target creature. {4}, {T}: Proliferate. (Choose any number o
+FREE                                           mv2 r 5614 Coretapper |Art Cr — Myr|{T}: Put a charge counter on target artifact. Sacrifice this creature: Put two charge counters on target artif
+FREE                                           mv2 r 7315 Corpse Churn |Inst|Mill three cards, then you may return a creature card from your graveyard to your hand. (To mill three cards,
+FREE                                           mv2 r 3193 Damnable Pact |Sorc|Target player draws X cards and loses X life.
+FREE                                           mv2 r 6338 Day of Black Sun |Sorc|Each creature with mana value X or less loses all abilities until end of turn. Destroy those creatures.
+FREE                                           mv2 r16607 Deadeye Duelist |Cr — Human A|Reach {1}, {T}: This creature deals 1 damage to target opponent.
+RAID:beledros-witherbloom,imotekh-the-stormlor mv2 r  131 Deadly Dispute |Inst|As an additional cost to cast this spell, sacrifice an artifact or creature. Draw two cards and create a Treas
+FREE                                           mv2 r 6533 Demon's Horn |Art|Whenever a player casts a black spell, you may gain 1 life.
+FREE                                           mv2 r 6781 Demonic Ruckus |Ench — Aura|Enchant creature Enchanted creature gets +1/+1 and has menace and trample. When this Aura is put into a gravey
+FREE                                           mv2 r 3729 Dread Summons |Sorc|Each player mills X cards. For each creature card put into a graveyard this way, you create a tapped 2/2 black
+IN FREE                                        mv2 r 1415 Dreadhorde Invasion |Ench|At the beginning of your upkeep, you lose 1 life and amass Zombies 1. (Put a +1/+1 counter on an Army you cont
+RAID:the-cabbage-merchant                      mv2 r  584 Emerald Medallion |Art|Green spells you cast cost {1} less to cast.
+FREE                                           mv2 r11478 Emergency Weld |Sorc|Return target artifact or creature card from your graveyard to your hand. Create a 1/1 colorless Soldier artif
+FREE                                           mv2 r 5372 Emperor of Bones |Cr — Skeleto|At the beginning of combat on your turn, exile up to one target card from a graveyard. {1}{B}: Adapt 2. Whenev
+FREE                                           mv2 r30859 Essence Burn |Inst|Essence Burn deals 5 damage to target black or green creature or planeswalker. If that permanent would die thi
+FREE                                           mv2 r 3900 Eviscerator's Insight |Inst|As an additional cost to cast this spell, sacrifice an artifact or creature. Draw two cards. Flashback {4}{B}
+IN RAID:imotekh-the-stormlord                  mv2 r   91 Feed the Swarm |Sorc|Destroy target creature or enchantment an opponent controls. You lose life equal to that permanent's mana valu
+IN RAID:inspirit-flagship-vessel,tazri-beacon- mv2 r   17 Fellwar Stone |Art|{T}: Add one mana of any color that a land an opponent controls could produce.
+RAID:bumi-unleashed                            mv2 r 1869 Fists of Flame |Inst|Draw a card. Until end of turn, target creature gains trample and gets +1/+0 for each card you've drawn this t
+RAID:bumi-unleashed,gilanra-alena-partners     mv2 r 1453 Fling |Inst|As an additional cost to cast this spell, sacrifice a creature. Fling deals damage equal to the sacrificed cre
+RAID:inspirit-flagship-vessel                  mv2 r 5203 Gavel of the Righteous |Art — Equipm|At the beginning of combat on your turn, put a charge counter on this Equipment. Equipped creature gets +1/+1
+FREE                                           mv2 r 6786 Gleaming Barrier |Art Cr — Wal|Defender When this creature dies, create a Treasure token. (It's an artifact with "{T}, Sacrifice this token:
+RAID:bumi-unleashed                            mv2 r 3896 Haste Magic |Inst|Target creature gets +3/+1 and gains haste until end of turn. Exile the top card of your library. You may play
+FREE                                           mv2 r 4290 Highway Robbery |Sorc|You may discard a card or sacrifice a land. If you do, draw two cards. Plot {1}{R} (You may pay {1}{R} and exi
+FREE                                           mv2 r14152 Hungry Ghoul |Cr — Zombie|{1}, Sacrifice another creature: Put a +1/+1 counter on this creature.
+FREE                                           mv2 r 5115 Idol of False Gods |Kindred Art |{1}{C}, {T}: Create a 0/1 colorless Eldrazi Spawn creature token with "Sacrifice this token: Add {C}." Wheneve
+RAID:beledros-witherbloom                      mv2 r  191 Idol of Oblivion |Art|{T}: Draw a card. Activate only if you created a token this turn. {8}, {T}, Sacrifice this artifact: Create a
+RAID:beledros-witherbloom                      mv2 r  659 Imp's Mischief |Inst|Change the target of target spell with a single target. You lose life equal to that spell's mana value.
+RAID:inspirit-flagship-vessel                  mv2 r 9424 Improvised Arsenal |Art — Equipm|Equipped creature gets +1/+0 for each artifact you control. {4}{R}: Create a token that's a copy of this Equip
+RAID:beledros-witherbloom,tazri-beacon-of-unit mv2 r  261 Infernal Grasp |Inst|Destroy target creature. You lose 2 life.
+FREE                                           mv2 r18337 Intermediate Chirography |Ench — Class|(Gain the next level as a sorcery to add its ability.) When this Class enters, create a 2/1 white and black In
+IN FREE                                        mv2 r 1336 Jadar, Ghoulcaller of Nephalia |L.Cr — Human|At the beginning of your end step, if you control no creatures with decayed, create a 2/2 black Zombie creatur
+FREE                                           mv2 r11561 Joo Dee, One of Many |Cr — Human A|{B}, {T}: Surveil 1. Create a token that's a copy of this creature, then sacrifice an artifact or creature. Ac
+FREE                                           mv2 r 3195 Keen Duelist |Cr — Human W|At the beginning of your upkeep, you and target opponent each reveal the top card of your library. You each lo
+RAID:inspirit-flagship-vessel                  mv2 r 6308 Lasting Tarfire |Ench|At the beginning of each end step, if you put a counter on a creature this turn, this enchantment deals 2 dama
+FREE                                           mv2 r 3415 Lembas |Art — Food|When this artifact enters, scry 1, then draw a card. {2}, {T}, Sacrifice this artifact: You gain 3 life. When
+RAID:beledros-witherbloom                      mv2 r   13 Lightning Greaves |Art — Equipm|Equipped creature has haste and shroud. (It can't be the target of spells or abilities.) Equip {0}
+RAID:imotekh-the-stormlord                     mv2 r16934 Liliana the Repentant |L.Cr — Human|Whenever another creature or planeswalker you control enters, mill two cards. Exhaust — {5}{B}: Return target
+RAID:imotekh-the-stormlord                     mv2 r 1690 Lively Dirge |Sorc|Spree (Choose one or more additional costs.) + {1} — Search your library for a card, put it into your graveyar
+FREE                                           mv2 r 2005 Magda, the Hoardmaster |L.Cr — Dwarf|Whenever you commit a crime, create a tapped Treasure token. This ability triggers only once each turn. (Targe
+FREE                                           mv2 r 5406 Magebane Lizard |Cr — Lizard|Whenever a player casts a noncreature spell, this creature deals damage to that player equal to the number of
+IN RAID:imotekh-the-stormlord                  mv2 r  566 Marionette Apprentice |Cr — Human A|Fabricate 1 (When this creature enters, put a +1/+1 counter on it or create a 1/1 colorless Servo artifact cre
+FREE                                           mv2 r 6438 Mazemind Tome |Art — Book|{T}, Put a page counter on this artifact: Scry 1. (Look at the top card of your library. You may put that card
+FREE                                           mv2 r 5955 Mindblade Render |Cr — Azra Wa|Whenever your opponents are dealt combat damage, if any of that damage was dealt by a Warrior, you draw a card
+FREE                                           mv2 r 9389 Morlun, Devourer of Spiders |L.Cr — Vampi|Lifelink Morlun enters with X +1/+1 counters on him. When Morlun enters, he deals X damage to target opponent.
+FREE                                           mv2 r13849 Mourner's Surprise |Sorc|Return up to one target creature card from your graveyard to your hand. Create a 1/1 red Mercenary creature to
+FREE                                           mv2 r 5139 Moxite Refinery |Art|{2}, {T}, Remove X counters from an artifact or creature you control: Choose one. Activate only as a sorcery.
+RAID:imotekh-the-stormlord                     mv2 r  886 Myr Retriever |Art Cr — Myr|When this creature dies, return another target artifact card from your graveyard to your hand.
+IN FREE                                        mv2 r 2370 Nether Traitor |Cr — Spirit|Haste Shadow (This creature can block or be blocked by only creatures with shadow.) Whenever another creature
+IN FREE                                        mv2 r  182 Night's Whisper |Sorc|You draw two cards and lose 2 life.
+FREE                                           mv2 r26612 No Admittance |Sorc|No Admittance deals 3 damage to any target. Empower Jace 1. (Put a loyalty counter on a Jace token you control
+FREE                                           mv2 r 6395 Noble's Purse |Art|This artifact enters tapped and with three coin counters on it. {T}, Remove a coin counter from this artifact:
+FREE                                           mv2 r 4808 Nullpriest of Oblivion |Cr — Vampire|Kicker {3}{B} (You may pay an additional {3}{B} as you cast this spell.) Lifelink Menace (This creature can't
+FREE                                           mv2 r 5717 Oft-Nabbed Goat |Cr — Goat|{1}: Draw a card. Gain control of this creature and put a -1/-1 counter on it. Only your opponents may activat
+IN RAID:inspirit-flagship-vessel               mv2 r  221 Ornithopter of Paradise |Art Cr — Tho|Flying {T}: Add one mana of any color.
+FREE                                           mv2 r 4767 Outrageous Robbery |Inst|Target opponent exiles the top X cards of their library face down. You may look at and play those cards for as
+FREE                                           mv2 r 7139 Patchwork Automaton |Art Cr — Con|Ward {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unl
+FREE                                           mv2 r  440 Pearl Medallion |Art|White spells you cast cost {1} less to cast.
+RAID:inspirit-flagship-vessel                  mv2 r 4107 Pentad Prism |Art|Sunburst (This artifact enters with a charge counter on it for each color of mana spent to cast it.) Remove a
+FREE                                           mv2 r 1356 Persist |Sorc|Return target nonlegendary creature card from your graveyard to the battlefield with a -1/-1 counter on it.
+FREE                                           mv2 r 1149 Plumb the Forbidden |Inst|As an additional cost to cast this spell, you may sacrifice one or more creatures. When you do, copy this spel
+FREE                                           mv2 r 8361 Power Word Kill |Inst|Destroy target non-Angel, non-Demon, non-Devil, non-Dragon creature.
+RAID:beledros-witherbloom                      mv2 r 1390 Priest of Forgotten Gods |Cr — Human C|{T}, Sacrifice two other creatures: Any number of target players each lose 2 life and sacrifice a creature of
+FREE                                           mv2 r 4983 Prophetic Prism |Art|When this artifact enters, draw a card. {1}, {T}: Add one mana of any color.
+RAID:imotekh-the-stormlord                     mv2 r 9062 Psychomancer |Art Cr — Nec|Flying Harbinger of Despair — Whenever this creature or another nontoken artifact you control is put into a gr
+FREE                                           mv2 r11583 Raven of Fell Omens |Cr — Bird|Flying Whenever you commit a crime, each opponent loses 1 life and you gain 1 life. This ability triggers only
+FREE                                           mv2 r12140 Razorlash Transmogrant |Art Cr — Zom|This creature can't block. {4}{B}{B}: Return this card from your graveyard to the battlefield with a +1/+1 cou
+IN FREE                                        mv2 r  579 Return the Favor |Inst|Spree (Choose one or more additional costs.) + {1} — Copy target instant spell, sorcery spell, activated abili
+RAID:imotekh-the-stormlord                     mv2 r  531 Ripples of Undeath |Ench|At the beginning of your first main phase, mill three cards. Then you may pay {1} and 3 life. If you do, put a
+FREE                                           mv2 r  357 Sapphire Medallion |Art|Blue spells you cast cost {1} less to cast.
+FREE                                           mv2 r11816 Scourge of the Skyclaves |Cr — Demon|Kicker {4}{B} When you cast this spell, if it was kicked, each player loses half their life, rounded up. Scour
+FREE                                           mv2 r10424 Servant of the Stinger |Cr — Human W|Deathtouch Whenever this creature deals combat damage to a player, if you've committed a crime this turn, you
+FREE                                           mv2 r 1148 Sheoldred's Edict |Inst|Choose one — • Each opponent sacrifices a nontoken creature of their choice. • Each opponent sacrifices a crea
+FREE                                           mv2 r 4175 Shoot the Sheriff |Inst|Destroy target non-outlaw creature. (Assassins, Mercenaries, Pirates, Rogues, and Warlocks are outlaws. Everyo
+IN FREE                                        mv2 r  233 Sign in Blood |Sorc|Target player draws two cards and loses 2 life.
+FREE                                           mv2 r10182 Skullcrack |Inst|Players can't gain life this turn. Damage can't be prevented this turn. Skullcrack deals 3 damage to target pl
+FREE                                           mv2 r 9376 Slickshot Show-Off |Cr — Bird Wi|Flying, haste Whenever you cast a noncreature spell, this creature gets +2/+0 until end of turn. Plot {1}{R} (
+FREE                                           mv2 r27243 Solve for Disappointment |Sorc|Target opponent reveals their hand. You choose a nonland permanent card from it. That player discards that car
+FREE                                           mv2 r16403 Sorcerous Spyglass |Art|As this artifact enters, look at an opponent's hand, then choose any card name. Activated abilities of sources
+FREE                                           mv2 r 3272 Soulless Jailer |Art Cr — Phy|Permanent cards in graveyards can't enter the battlefield. Players can't cast noncreature spells from graveyar
+RAID:beledros-witherbloom                      mv2 r 1985 Starscape Cleric |Cr — Bat Cle|Offspring {2}{B} (You may pay an additional {2}{B} as you cast this spell. If you do, when this creature enter
+RAID:inspirit-flagship-vessel                  mv2 r  802 Steel Overseer |Art Cr — Con|{T}: Put a +1/+1 counter on each artifact creature you control.
+RAID:                                          mv2 r 4624 Sanguinist // Exsanguinate |Cr — Vampire|Whenever you attack, target creature gains deathtouch until end of turn. Whenever that creature deals combat d
+FREE                                           mv2 r10511 Sting, Bilbo's Sword |L.Art — Equi|Flash When Sting enters, put a hone counter on Sting for each creature target opponent controls. Attach Sting
+FREE                                           mv2 r24679 Stingerquill Charm |Inst|Choose one — • Stingerquill Charm deals 3 damage to any target. • Target creature gains first strike and death
+RAID:tazri-beacon-of-unity                     mv2 r14601 Stonework Packbeast |Art Cr — Bea|Stonework Packbeast is also a Cleric, Rogue, Warrior, and Wizard. {2}: Add one mana of any color.
+FREE                                           mv2 r10337 Sun Droplet |Art|Whenever you're dealt damage, put that many charge counters on this artifact. At the beginning of each upkeep,
+IN FREE                                        mv2 r  234 Sword of the Animist |L.Art — Equi|Equipped creature gets +1/+1. Whenever equipped creature attacks, you may search your library for a basic land
+RAID:the-cabbage-merchant                      mv2 r 3021 Syr Ginger, the Meal Ender |L.Art Cr — F|Syr Ginger has trample, hexproof, and haste as long as an opponent controls a planeswalker. Whenever another a
+FREE                                           mv2 r13291 Tablet of Compleation |Art|{T}: Put an oil counter on this artifact. {T}: Add {C}. Activate only if this artifact has two or more oil cou
+RAID:bumi-unleashed                            mv2 r 1455 Temur Battle Rage |Inst|Target creature gains double strike until end of turn. Ferocious — That creature also gains trample until end
+IN FREE                                        mv2 r  225 Terminate |Inst|Destroy target creature. It can't be regenerated.
+FREE                                           mv2 r22908 The Echoverse Fulcrum |L.Art|When The Echoverse Fulcrum enters, draw a card, then discard a card. {5}, {T}, Exile The Echoverse Fulcrum: De
+RAID:bumi-unleashed                            mv2 r 2025 The Last Agni Kai |Inst|Target creature you control fights target creature an opponent controls. If the creature the opponent controls
+RAID:the-cabbage-merchant                      mv2 r 4234 The Ooze |L.Art|Whenever a creature you control with a +1/+1 counter on it leaves the battlefield, create a Mutagen token for
+IN RAID:imotekh-the-stormlord                  mv2 r  905 The Soul Stone |L.Art — Infi|Indestructible {T}: Add {B}. {6}{B}, {T}, Exile a creature you control: Harness The Soul Stone. (Once harnesse
+FREE                                           mv2 r 5958 Thieves' Tools |Art — Equipm|When this Equipment enters, create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add on
+IN RAID:imotekh-the-stormlord                  mv2 r   21 Thought Vessel |Art|You have no maximum hand size. {T}: Add {C}.
+IN RAID:bumi-unleashed                         mv2 r  211 Thrill of Possibility |Inst|As an additional cost to cast this spell, discard a card. Draw two cards.
+FREE                                           mv2 r 3513 Torpor Orb |Art|Creatures entering don't cause abilities to trigger.
+RAID:imotekh-the-stormlord                     mv2 r 9373 Triarch Praetorian |Art Cr — Nec|Flying Dynastic Codes — When this creature enters from a graveyard, you draw two cards and you lose 2 life. Un
+FREE                                           mv2 r 1309 Umbral Collar Zealot |Cr — Human C|Sacrifice another creature or artifact: Surveil 1. (Look at the top card of your library. You may put it into
+FREE                                           mv2 r 3913 Unlicensed Hearse |Art — Vehicl|{T}: Exile up to two target cards from a single graveyard. Unlicensed Hearse's power and toughness are each eq
+FREE                                           mv2 r 1758 Vengeful Bloodwitch |Cr — Vampire|Whenever this creature or another creature you control dies, target opponent loses 1 life and you gain 1 life.
+FREE                                           mv2 r10353 Vial Smasher, Gleeful Grenadier |L.Cr — Gobli|Whenever another outlaw you control enters, Vial Smasher deals 1 damage to target opponent. (Assassins, Mercen
+FREE                                           mv2 r 9941 Victim of Night |Inst|Destroy target non-Vampire, non-Werewolf, non-Zombie creature.
+FREE                                           mv2 r 4286 Vraan, Executioner Thane |L.Cr — Phyre|Whenever one or more other creatures you control die, each opponent loses 2 life and you gain 2 life. This abi
+FREE                                           mv2 r21279 Vraska's Final Mercy |Sorc|Choose one — • You lose 2 life. Destroy target creature or planeswalker. • You lose 2 life. Empower Jace 6. (P
+FREE                                           mv2 r16484 Way of the Pyromancer |L.Ench|When Way of the Pyromancer enters, empower Jace 2. (Put two loyalty counters on a Jace token you control. If y
+RAID:imotekh-the-stormlord                     mv2 r  523 Wishclaw Talisman |Art|This artifact enters with three wish counters on it. {1}, {T}, Remove a wish counter from this artifact: Searc
+FREE                                           mv2 r14135 Wreckage Wickerfolk |Art Cr — Sca|Flying When this creature enters, surveil 2. (Look at the top two cards of your library, then put any number o
+FREE                                           mv2 r 2866 Wrecking Ball Arm |L.Art — Equi|Equipped creature has base power and toughness 7/7 and can't be blocked by creatures with power 2 or less. Equ
+FREE                                           mv2 r10801 Zhentarim Bandit |Cr — Halflin|Whenever this creature attacks, you may pay 1 life. If you do, create a Treasure token. (It's an artifact with
+RAID:inspirit-flagship-vessel                  mv2 r 6439 Zookeeper Mechan |Art Cr — Rob|{T}: Add {R}. {6}{R}: Target creature you control gets +4/+0 until end of turn. Activate only as a sorcery.
+RAID:beledros-witherbloom                      mv2 r  236 Zulaport Cutthroat |Cr — Human R|Whenever this creature or another creature you control dies, each opponent loses 1 life and you gain 1 life.
+IN RAID:the-cabbage-merchant                   mv3 r  262 Academy Manufactor |Art Cr — Ass|If you would create a Clue, Food, or Treasure token, instead create one of each.
+FREE                                           mv3 r 5861 Acererak the Archlich |L.Cr — Zombi|When Acererak enters, if you haven't completed Tomb of Annihilation, return Acererak to its owner's hand and v
+FREE                                           mv3 r 1769 Adaptive Automaton |Art Cr — Con|As this creature enters, choose a creature type. This creature is the chosen type in addition to its other typ
+FREE                                           mv3 r 1720 Alesha, Who Laughs at Fate |L.Cr — Human|First strike Whenever Alesha attacks, put a +1/+1 counter on it. Raid — At the beginning of your end step, if
+FREE                                           mv3 r 5485 All-Fates Scroll |Art|{T}: Add one mana of any color. {7}, {T}, Sacrifice this artifact: Draw X cards, where X is the number of diff
+RAID:imotekh-the-stormlord                     mv3 r 3211 Archenemy's Charm |Inst|Choose one — • Exile target creature or planeswalker. • Return one or two target creature and/or planeswalker
+FREE                                           mv3 r 7798 Arnyn, Deathbloom Botanist |L.Cr — Vampi|Deathtouch Whenever a creature you control with power or toughness 1 or less dies, target opponent loses 2 lif
+RAID:beledros-witherbloom                      mv3 r  134 Ashnod's Altar |Art|Sacrifice a creature: Add {C}{C}.
+IN FREE                                        mv3 r 7466 At Knifepoint |Ench|During your turn, outlaws you control have first strike. (Assassins, Mercenaries, Pirates, Rogues, and Warlock
+FREE                                           mv3 r13460 Azula, Ruthless Firebender |L.Cr — Human|Firebending 1 (Whenever this creature attacks, add {R}. This mana lasts until end of combat.) Whenever Azula a
+FREE                                           mv3 r 5440 Bandit's Haul |Art|Whenever you commit a crime, put a loot counter on this artifact. This ability triggers only once each turn. (
+FREE                                           mv3 r 4376 Barkform Harvester |Art Cr — Sha|Changeling (This card is every creature type.) Reach {2}: Put target card from your graveyard on the bottom of
+FREE                                           mv3 r12111 Baron Helmut Zemo |L.Cr — Human|Whenever you cast a black spell from your hand, Baron Helmut Zemo connives. Boast — Exile any number of black
+IN FREE                                        mv3 r  484 Bedevil |Inst|Destroy target artifact, creature, or planeswalker.
+FREE                                           mv3 r  556 Bender's Waterskin |Art|Untap this artifact during each other player's untap step. {T}: Add one mana of any color.
+FREE                                           mv3 r 1940 Bitterthorn, Nissa's Animus |L.Art — Equi|Living weapon (When this Equipment enters, create a 0/0 black Phyrexian Germ creature token, then attach this
+RAID:beledros-witherbloom                      mv3 r 3822 Blight Mound |Ench|Attacking Pests you control get +1/+0 and have menace. Whenever a nontoken creature you control dies, create a
+FREE                                           mv3 r 6783 Bloodthirsty Aerialist |Cr — Vampire|Flying Whenever you gain life, put a +1/+1 counter on this creature.
+FREE                                           mv3 r 3066 Blowfly Infestation |Ench|Whenever a creature dies, if it had a -1/-1 counter on it, put a -1/-1 counter on target creature.
+RAID:                                          mv3 r  632 Trawler // Boggart Bog |Cr — Goblin|When this creature enters, exile target player's graveyard. // As this land enters, you may pay 3 life. If you
+RAID:beledros-witherbloom                      mv3 r  298 Braids, Arisen Nightmare |L.Cr — Night|At the beginning of your end step, you may sacrifice an artifact, creature, enchantment, land, or planeswalker
+FREE                                           mv3 r  354 Buried Alive |Sorc|Search your library for up to three creature cards, put them into your graveyard, then shuffle.
+FREE                                           mv3 r 8900 Burning Curiosity |Sorc|As an additional cost to cast this spell, you may blight 1. (You may put a -1/-1 counter on a creature you con
+FREE                                           mv3 r  499 Burnished Hart |Art Cr — Elk|{3}, Sacrifice this creature: Search your library for up to two basic land cards, put them onto the battlefiel
+RAID:imotekh-the-stormlord                     mv3 r 6842 Canoptek Wraith |Art Cr — Wra|Wraith Form — This creature can't be blocked. Transdimensional Scout — When this creature deals combat damage
+IN RAID:inspirit-flagship-vessel               mv3 r   29 Chaos Warp |Inst|The owner of target permanent shuffles it into their library, then reveals the top card of their library. If i
+IN FREE                                        mv3 r   85 Chromatic Lantern |Art|Lands you control have "{T}: Add one mana of any color." {T}: Add one mana of any color.
+FREE                                           mv3 r  606 Cloud Key |Art|As this artifact enters, choose artifact, creature, enchantment, instant, or sorcery. Spells you cast of the c
+FREE                                           mv3 r 6910 Coercive Impetus |Ench — Aura|Enchant creature Enchanted creature gets +1/+1 and is goaded. (It attacks each combat if able and attacks a pl
+IN FREE                                        mv3 r   53 Commander's Sphere |Art|{T}: Add one mana of any color in your commander's color identity. Sacrifice this artifact: Draw a card.
+FREE                                           mv3 r11922 Davriel, Rogue Shadowmage |L.Planeswalk|At the beginning of each opponent's upkeep, if that player has one or fewer cards in hand, Davriel deals 2 dam
+FREE                                           mv3 r  319 Decanter of Endless Water |Art|You have no maximum hand size. {T}: Add one mana of any color.
+FREE                                           mv3 r13765 Deliver Unto Evil |Sorc|Choose up to four target cards in your graveyard. If you control a Bolas planeswalker, return those cards to y
+RAID:imotekh-the-stormlord                     mv3 r  921 Dismember |Inst|({B/P} can be paid with either {B} or 2 life.) Target creature gets -5/-5 until end of turn.
+FREE                                           mv3 r10496 Druidic Satchel |Art|{2}, {T}: Reveal the top card of your library. If it's a creature card, create a 1/1 green Saproling creature
+FREE                                           mv3 r 6468 Dusk Urchins |Cr — Ouphe|Whenever this creature attacks or blocks, put a -1/-1 counter on it. When this creature dies, draw a card for
+RAID:                                          mv3 r11330 God of Death // Throne of Death |L.Cr — God|Deathtouch At the beginning of your upkeep, exile two cards from your graveyard. If you can't, sacrifice Egon
+FREE                                           mv3 r 3974 Elementalist's Palette |Art|Whenever you cast a spell with {X} in its mana cost, put two charge counters on this artifact. {T}: Add one ma
+FREE                                           mv3 r 6699 Embrace the Unknown |Sorc|Exile the top two cards of your library. Until the end of your next turn, you may play those cards. Retrace (Y
+FREE                                           mv3 r 5307 Everlasting Torment |Ench|Players can't gain life. Damage can't be prevented. All damage is dealt as though its source had wither. (A so
+FREE                                           mv3 r 8357 Fallen Ideal |Ench — Aura|Enchant creature Enchanted creature has flying and "Sacrifice a creature: This creature gets +2/+1 until end o
+FREE                                           mv3 r14263 Ferocification |Ench|At the beginning of combat on your turn, choose one — • Target creature you control gets +2/+0 until end of tu
+FREE                                           mv3 r 3197 Firdoch Core |Kindred Art |Changeling (This card is every creature type.) {T}: Add one mana of any color. {4}: This artifact becomes a 4/
+FREE                                           mv3 r 2715 Fire Covenant |Inst|As an additional cost to cast this spell, pay X life. Fire Covenant deals X damage divided as you choose among
+RAID:imotekh-the-stormlord                     mv3 r12243 Flayed One |Art Cr — Nec|Lifelink Flesh Flayer — When this creature enters, mill three cards.
+IN RAID:imotekh-the-stormlord                  mv3 r  251 Foundry Inspector |Art Cr — Con|Artifact spells you cast cost {1} less to cast.
+FREE                                           mv3 r 2614 Ghoulish Impetus |Ench — Aura|Enchant creature Enchanted creature gets +1/+1, has deathtouch, and is goaded. (It attacks each combat if able
+FREE                                           mv3 r 1207 Glaring Fleshraker |Cr — Eldrazi|Whenever you cast a colorless spell, create a 0/1 colorless Eldrazi Spawn creature token with "Sacrifice this
+FREE                                           mv3 r 5674 Golem Foundry |Art|Whenever you cast an artifact spell, you may put a charge counter on this artifact. Remove three charge counte
+RAID:                                          mv3 r 2231 Researcher // Reanimate |Cr — Troll W|At the beginning of your upkeep, surveil 1. Then if there are three or more creature cards in your graveyard,
+IN RAID:imotekh-the-stormlord                  mv3 r 1143 Grim Haruspex |Cr — Human W|Morph {B} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph
+FREE                                           mv3 r14644 Heartless Pillage |Sorc|Target opponent discards two cards. Raid — If you attacked this turn, create a Treasure token. (It's an artifa
+FREE                                           mv3 r20339 Identity Echo |Ench|{3}{R}: Exile target creature or planeswalker you control. Reveal cards from the top of your library until you
+RAID:imotekh-the-stormlord                     mv3 r 5334 Illuminor Szeras |L.Art Cr — N|Secrets of the Soul — {T}, Sacrifice another creature: Add an amount of {B} equal to the sacrificed creature's
+RAID:tazri-beacon-of-unity                     mv3 r16077 Ingris Stingerquill |L.Cr — Elder|Flying Whenever a creature you control attacks, that creature deals 1 damage to each opponent. {4}: Create a 2
+FREE                                           mv3 r  980 Inspiring Statuary |Art|Nonartifact spells you cast have improvise. (Your artifacts can help cast those spells. Each artifact you tap
+RAID:inspirit-flagship-vessel                  mv3 r 3062 Iron Spider, Stark Upgrade |L.Art Cr — S|Vigilance {T}: Put a +1/+1 counter on each artifact creature and/or Vehicle you control. {2}, Remove two +1/+1
+RAID:                                          mv3 r13748 Corrupted Bishop // Ormendahl, the Corrupter |L.Cr — Human|Whenever Jerren enters or another nontoken Human you control dies, you lose 1 life and create a 1/1 white Huma
+FREE                                           mv3 r26664 Keeper of the Quiet Hour |Art Cr — Chi|When this creature enters, empower Jace 2. (Put two loyalty counters on a Jace token you control. If you don't
+FREE                                           mv3 r 3732 Kolaghan's Command |Inst|Choose two — • Return target creature card from your graveyard to your hand. • Target player discards a card.
+FREE                                           mv3 r11887 Lotus Ring |Art — Equipm|Indestructible Equipped creature gets +3/+3 and has vigilance and "{T}, Sacrifice this creature: Add three man
+FREE                                           mv3 r  974 Loxodon Warhammer |Art — Equipm|Equipped creature gets +3/+0 and has trample and lifelink. Equip {3}
+RAID:imotekh-the-stormlord                     mv3 r15080 Lychguard |Art Cr — Nec|Guardian Protocols — {3}{B}, Sacrifice this creature: Return all legendary creature cards from your graveyard
+FREE                                           mv3 r 1049 Midnight Reaper |Cr — Zombie |Whenever a nontoken creature you control dies, this creature deals 1 damage to you and you draw a card.
+FREE                                           mv3 r 1315 Mirage Mirror |Art|{2}: This artifact becomes a copy of target artifact, creature, enchantment, or land until end of turn.
+RAID:beledros-witherbloom                      mv3 r  248 Morbid Opportunist |Cr — Human R|Whenever one or more other creatures die, draw a card. This ability triggers only once each turn.
+FREE                                           mv3 r 4268 Moseo, Vein's New Dean |L.Cr — Bird |Flying When Moseo enters, create a 1/1 black and green Pest creature token with "Whenever this token attacks,
+IN FREE                                        mv3 r  861 Murder |Inst|Destroy target creature.
+RAID:                                          mv3 r 1673 Rider // Swift End |Cr — Zombie |Lifelink When this creature dies, put it on the bottom of its owner's library. // Destroy target creature or p
+FREE                                           mv3 r23720 Murmuring Volume |Art — Book|{T}: Add one mana of any color. {2}, {T}, Discard a card: Draw a card.
+RAID:                                          mv3 r 8396 Lorespinner // Wheel of Fortune |Cr — Jackal |At the beginning of your upkeep, if a player has one or fewer cards in hand, this creature becomes prepared. (
+FREE                                           mv3 r 2936 Necroskitter |Cr — Element|Wither (This deals damage to creatures in the form of -1/-1 counters.) Whenever a creature an opponent control
+FREE                                           mv3 r 5749 Oblivion Stone |Art|{4}, {T}: Put a fate counter on target permanent. {5}, {T}, Sacrifice this artifact: Destroy each nonland perm
+RAID:imotekh-the-stormlord                     mv3 r10374 Ominous Harvest |Sorc|Gravestorm (When you cast this spell, copy it for each permanent put into a graveyard from the battlefield thi
+RAID:beledros-witherbloom                      mv3 r  634 Ophiomancer |Cr — Human S|At the beginning of each upkeep, if you control no Snakes, create a 1/1 black Snake creature token with deatht
+FREE                                           mv3 r 4006 Oubliette |Ench|When this enchantment enters, target creature phases out until this enchantment leaves the battlefield. Tap th
+FREE                                           mv3 r 1723 Painful Truths |Sorc|Converge — You draw X cards and lose X life, where X is the number of colors of mana spent to cast this spell.
+FREE                                           mv3 r  738 Palladium Myr |Art Cr — Myr|{T}: Add {C}{C}.
+FREE                                           mv3 r 2818 Parasitic Impetus |Ench — Aura|Enchant creature Enchanted creature gets +2/+2 and is goaded. (It attacks each combat if able and attacks a pl
+RAID:beledros-witherbloom                      mv3 r  103 Phyrexian Arena |Ench|At the beginning of your upkeep, you draw a card and lose 1 life.
+FREE                                           mv3 r28489 Pia, Determined Rebuilder |L.Cr — Human|When Pia enters, create a 1/1 colorless Thopter artifact creature token with flying. {5}{R}: Target creature g
+FREE                                           mv3 r  639 Plaguecrafter |Cr — Human S|When this creature enters, each player sacrifices a creature or planeswalker of their choice. Each player who
+FREE                                           mv3 r11083 Potioner's Trove |Art|{T}: Add one mana of any color. {T}: You gain 2 life. Activate only if you've cast an instant or sorcery spell
+FREE                                           mv3 r 9824 Pox |Sorc|Each player loses a third of their life, then discards a third of the cards in their hand, then sacrifices a t
+FREE                                           mv3 r 1349 Pristine Talisman |Art|{T}: Add {C}. You gain 1 life.
+RAID:                                          mv3 r21764 Rhymer // Molten Tide |Cr — Element|Prowess This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprep
+FREE                                           mv3 r 2350 Qarsi Revenant |Cr — Vampire|Flying, deathtouch, lifelink Renew — {2}{B}, Exile this card from your graveyard: Put a flying counter, a deat
+FREE                                           mv3 r11704 Rakish Crew |Ench|When this enchantment enters, create a 1/1 red Mercenary creature token with "{T}: Target creature you control
+FREE                                           mv3 r11473 Rattleback Apothecary |Cr — Gorgon |Deathtouch Whenever you commit a crime, target creature you control gains your choice of menace or lifelink un
+FREE                                           mv3 r13560 Reckless Spite |Inst|Destroy two target nonblack creatures. You lose 5 life.
+FREE                                           mv3 r 5273 Rush of Dread |Sorc|Spree (Choose one or more additional costs.) + {1} — Target opponent sacrifices half the creatures they contro
+FREE                                           mv3 r10910 Safana, Calimport Cutthroat |L.Cr — Human|Menace At the beginning of your end step, if you have the initiative, create a Treasure token. Create three of
+FREE                                           mv3 r16441 Sautekh Immortal |Art Cr — Nec|Flash Elite Troops — This creature enters with a +1/+1 counter on it for each creature that died this turn.
+RAID:beledros-witherbloom                      mv3 r  582 Saw in Half |Inst|Destroy target creature. If that creature dies this way, its controller creates two tokens that are copies of
+FREE                                           mv3 r 8054 Screams from Within |Ench — Aura|Enchant creature Enchanted creature gets -1/-1. When enchanted creature dies, return this card from your grave
+RAID:bumi-unleashed                            mv3 r  757 Seize the Spoils |Sorc|As an additional cost to cast this spell, discard a card. Draw two cards and create a Treasure token. (It's an
+FREE                                           mv3 r 5708 Shadow, Mysterious Assassin |L.Cr — Human|Deathtouch Throw — Whenever Shadow deals combat damage to a player, you may sacrifice another nonland permanen
+FREE                                           mv3 r 1345 Shimmer Myr |Art Cr — Myr|Flash You may cast artifact spells as though they had flash.
+FREE                                           mv3 r17220 Sigil of Myrkul |Ench|At the beginning of combat on your turn, mill a card. When you do, if there are four or more creature cards in
+FREE                                           mv3 r10965 Silversmote Ghoul |Cr — Zombie |At the beginning of your end step, if you gained 3 or more life this turn, return this card from your graveyar
+FREE                                           mv3 r 5032 Sinister Gnarlbark |Cr — Treefol|At the beginning of your end step, draw a card and blight 1. (Put a -1/-1 counter on a creature you control.)
+FREE                                           mv3 r 9202 Skewer the Critics |Sorc|Spectacle {R} (You may cast this spell for its spectacle cost rather than its mana cost if an opponent lost li
+RAID:beledros-witherbloom                      mv3 r 7733 Skorpekh Lord |Art Cr — Nec|Menace Command Protocols — Other artifact creatures you control get +1/+0 and have menace. Unearth {2}{B} ({2}
+FREE                                           mv3 r 4572 Solar Array |Art|{T}: Add one mana of any color. When you next cast an artifact spell this turn, that spell gains sunburst. (If
+RAID:bumi-unleashed                            mv3 r 6748 Summon: G.F. Ifrit |Ench Cr — Sa|(As this Saga enters and after your draw step, add a lore counter. Sacrifice after IV.) I, II — You may discar
+RAID:inspirit-flagship-vessel                  mv3 r 2642 Surge Conductor |Art Cr — Rob|Whenever another nontoken artifact you control enters, proliferate. (Choose any number of permanents and/or pl
+RAID:bumi-unleashed                            mv3 r 3638 Tablet of Discovery |Art|When this artifact enters, mill a card. You may play that card this turn. (To mill a card, put the top card of
+FREE                                           mv3 r12800 Take for a Ride |Sorc|Take for a Ride has flash as long as you've committed a crime this turn. (Targeting opponents, anything they c
+RAID:inspirit-flagship-vessel                  mv3 r 1197 Tezzeret, Cruel Captain |L.Planeswalk|Whenever an artifact you control enters, put a loyalty counter on Tezzeret. 0: Untap target artifact or creatu
+FREE                                           mv3 r 7942 Tip the Scales |Sorc|Sacrifice a creature. When you do, all creatures get -X/-X until end of turn, where X is the sacrificed creatu
+FREE                                           mv3 r 8180 Titan Forge |Art|{3}, {T}: Put a charge counter on this artifact. {T}, Remove three charge counters from this artifact: Create
+RAID:beledros-witherbloom,tam-the-possibility  mv3 r   66 Toxic Deluge |Sorc|As an additional cost to cast this spell, pay X life. All creatures get -X/-X until end of turn.
+FREE                                           mv3 r 1471 Treasure Nabber |Cr — Goblin |Whenever an opponent taps an artifact for mana, gain control of that artifact until the end of your next turn.
+FREE                                           mv3 r 8938 Unseal the Necropolis |Inst|Each player mills three cards. Then you return up to two creature cards from your graveyard to your hand. (To
+FREE                                           mv3 r 1754 Vampire Nighthawk |Cr — Vampire|Flying Deathtouch (Any amount of damage this deals to a creature is enough to destroy it.) Lifelink (Damage de
+FREE                                           mv3 r 1959 Varragoth, Bloodsky Sire |L.Cr — Demon|Deathtouch Boast — {1}{B}: Target player searches their library for a card, then shuffles and puts that card o
+FREE                                           mv3 r 4189 Veinwitch Coven |Cr — Vampire|Menace Whenever you gain life, you may pay {B}. If you do, return target creature card from your graveyard to
+IN FREE                                        mv3 r  129 Victimize |Sorc|Choose two target creature cards in your graveyard. Sacrifice a creature. If you do, return the chosen cards t
+RAID:beledros-witherbloom                      mv3 r  492 Vito, Thorn of the Dusk Rose |L.Cr — Vampi|Whenever you gain life, target opponent loses that much life. {3}{B}{B}: Creatures you control gain lifelink u
+FREE                                           mv3 r24037 Way of the Warlord |L.Ench|When Way of the Warlord enters, empower Jace 5. (Put five loyalty counters on a Jace token you control. If you
+FREE                                           mv3 r 8595 Wickersmith's Tools |Art|Whenever one or more -1/-1 counters are put on a creature, put a charge counter on this artifact. {T}: Add one
+RAID:imotekh-the-stormlord                     mv3 r 1683 Woe Strider |Cr — Horror|When this creature enters, create a 0/1 white Goat creature token. Sacrifice another creature: Scry 1. Escape—
+FREE                                           mv3 r  572 Worn Powerstone |Art|This artifact enters tapped. {T}: Add {C}{C}.
+RAID:beledros-witherbloom                      mv3 r 1031 Yahenni, Undying Partisan |L.Cr — Aethe|Haste Whenever a creature an opponent controls dies, put a +1/+1 counter on Yahenni. Sacrifice another creatur
+IN FREE                                        mv4 r11355 Akul the Unrepentant |L.Cr — Scorp|Flying, trample Sacrifice three other creatures: You may put a creature card from your hand onto the battlefie
+FREE                                           mv4 r 5952 Ancient Craving |Sorc|You draw three cards and you lose 3 life.
+FREE                                           mv4 r11499 Angrath, Captain of Chaos |L.Planeswalk|Creatures you control have menace. −2: Amass Zombies 2. (Put two +1/+1 counters on an Army you control. It's a
+RAID:imotekh-the-stormlord                     mv4 r 4315 Biotransference |Ench|Creatures you control are artifacts in addition to their other types. The same is true for creature spells you
+FREE                                           mv4 r 7419 Bismuth Mindrender |Cr — Eldrazi|Devoid (This card has no color.) Menace Whenever this creature deals combat damage to a player, that player ex
+FREE                                           mv4 r 6445 Bloodtracker |Cr — Vampire|Flying {B}, Pay 2 life: Put a +1/+1 counter on this creature. When this creature leaves the battlefield, draw
+FREE                                           mv4 r 4793 Braids, Cabal Minion |L.Cr — Human|At the beginning of each player's upkeep, that player sacrifices an artifact, creature, or land of their choic
+FREE                                           mv4 r 8083 Brass Infiniscope |Art|{T}: Add {C}{C}. When you next cast a spell with {X} in its mana cost this turn, you draw a card and gain half
+RAID:bumi-unleashed                            mv4 r11149 Bumi Bash |Sorc|Choose one — • Bumi Bash deals damage equal to the number of lands you control to target creature. • Destroy t
+RAID:tazri-beacon-of-unity                     mv4 r 6593 Burakos, Party Leader |L.Cr — Orc|Burakos is also a Cleric, Rogue, Warrior, and Wizard. Whenever Burakos attacks, defending player loses X life
+FREE                                           mv4 r 7738 Caves of Chaos Adventurer |Cr — Human B|Trample When this creature enters, you take the initiative. Whenever this creature attacks, exile the top card
+FREE                                           mv4 r  708 Chain Reaction |Sorc|Chain Reaction deals X damage to each creature, where X is the number of creatures on the battlefield.
+FREE                                           mv4 r10649 Chandra, Fire Artisan |L.Planeswalk|Whenever one or more loyalty counters are removed from Chandra, she deals that much damage to target opponent
+RAID:inspirit-flagship-vessel                  mv4 r 6407 Chandra, Spark Hunter |L.Planeswalk|At the beginning of combat on your turn, choose up to one target Vehicle you control. Until end of turn, it be
+RAID:tam-the-possibility                       mv4 r 1523 Chandra, Torch of Defiance |L.Planeswalk|+1: Exile the top card of your library. You may cast that card. If you don't, Chandra deals 2 damage to each o
+FREE                                           mv4 r 6073 Corpse Augur |Cr — Zombie |When this creature dies, you draw X cards and you lose X life, where X is the number of creature cards in targ
+RAID:imotekh-the-stormlord                     mv4 r  526 Crypt Ghast |Cr — Spirit|Extort (Whenever you cast a spell, you may pay {W/B}. If you do, each opponent loses 1 life and you gain that
+RAID:imotekh-the-stormlord                     mv4 r 9243 Cryptek |Art Cr — Nec|{1}{B}, {T}: Choose another target artifact creature you control. When that creature dies this turn, return it
+FREE                                           mv4 r 2923 Crystalline Crawler |Art Cr — Con|Converge — This creature enters with a +1/+1 counter on it for each color of mana spent to cast it. Remove a +
+FREE                                           mv4 r 2026 Daretti, Scrap Savant |L.Planeswalk|+2: Discard up to two cards, then draw that many cards. −2: Sacrifice an artifact. If you do, return target ar
+FREE                                           mv4 r 3681 Darksteel Reactor |Art|Indestructible (Effects that say "destroy" don't destroy this artifact.) At the beginning of your upkeep, you
+FREE                                           mv4 r 4543 Descendants' Fury |Ench|Whenever one or more creatures you control deal combat damage to a player, you may sacrifice one of them. If y
+FREE                                           mv4 r 8700 Desecration Demon |Cr — Demon|Flying At the beginning of each combat, any opponent may sacrifice a creature of their choice. If a player doe
+IN FREE                                        mv4 r  485 Diabolic Tutor |Sorc|Search your library for a card, put that card into your hand, then shuffle.
+FREE                                           mv4 r 5469 Dimir House Guard |Cr — Skeleto|Fear (This creature can't be blocked except by artifact creatures and/or black creatures.) Sacrifice a creatur
+FREE                                           mv4 r13149 Drag to the Underworld |Inst|This spell costs {X} less to cast, where X is your devotion to black. (Each {B} in the mana costs of permanent
+FREE                                           mv4 r 2587 Dread Presence |Cr — Nightma|Whenever a Swamp you control enters, choose one — • You draw a card and you lose 1 life. • This creature deals
+IN RAID:imotekh-the-stormlord                  mv4 r  538 Dread Return |Sorc|Return target creature card from your graveyard to the battlefield. Flashback—Sacrifice three creatures. (You
+FREE                                           mv4 r 5245 Elegy Acolyte |Cr — Human C|Lifelink Whenever one or more creatures you control deal combat damage to a player, you draw a card and lose 1
+RAID:                                          mv4 r 3079 of Woe // Demonic Tutor |Cr — Vampire|This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.
+RAID:inspirit-flagship-vessel                  mv4 r 4023 Empowered Autogenerator |Art|This artifact enters tapped. {T}: Put a charge counter on this artifact. Add X mana of any one color, where X
+FREE                                           mv4 r14082 Essence Pulse |Sorc|You gain 2 life. Each creature gets -X/-X until end of turn, where X is the amount of life you gained this tur
+FREE                                           mv4 r 8856 Etched Oracle |Art Cr — Wiz|Sunburst (This creature enters with a +1/+1 counter on it for each color of mana spent to cast it.) {1}, Remov
+FREE                                           mv4 r 4254 Firemind Vessel |Art|This artifact enters tapped. {T}: Add two mana of different colors.
+RAID:imotekh-the-stormlord                     mv4 r13717 Ghost Ark |Art — Vehicl|Flying Repair Barge — Whenever this Vehicle becomes crewed, each artifact creature card in your graveyard gain
+FREE                                           mv4 r 2082 Gonti, Lord of Luxury |L.Cr — Aethe|Deathtouch When Gonti enters, look at the top four cards of target opponent's library, exile one of them face
+FREE                                           mv4 r 4168 Grave Venerations |Ench|When this enchantment enters, you become the monarch. At the beginning of your end step, if you're the monarch
+FREE                                           mv4 r 2201 Greed |Ench|{B}, Pay 2 life: Draw a card.
+FREE                                           mv4 r 4007 Grim Servant |Cr — Zombie |Menace When this creature enters, search your library for a card with mana value less than or equal to your de
+FREE                                           mv4 r  727 Hammer of Nazahn |L.Art — Equi|Whenever Hammer of Nazahn or another Equipment you control enters, you may attach that Equipment to target cre
+FREE                                           mv4 r  544 Hedron Archive |Art|{T}: Add {C}{C}. {2}, {T}, Sacrifice this artifact: Draw two cards.
+IN FREE                                        mv4 r 7763 Hellspur Posse Boss |Cr — Lizard |Other outlaws you control have haste. (Assassins, Mercenaries, Pirates, Rogues, and Warlocks are outlaws.) Whe
+FREE                                           mv4 r10020 Hoarder's Greed |Sorc|You lose 2 life and draw two cards, then clash with an opponent. If you win, repeat this process. (Each clashi
+FREE                                           mv4 r13273 Hostile Investigator |Cr — Ogre Ro|When this creature enters, target opponent discards a card. Whenever one or more players discard one or more c
+RAID:imotekh-the-stormlord                     mv4 r 4959 Imotekh the Stormlord |L.Art Cr — N|Phaeron — Whenever one or more artifact cards leave your graveyard, create two 2/2 black Necron Warrior artifa
+FREE                                           mv4 r 6382 Interdimensional Web Watch |Art|When this artifact enters, exile the top two cards of your library. Until the end of your next turn, you may p
+FREE                                           mv4 r 2121 Karn, the Great Creator |L.Planeswalk|Activated abilities of artifacts your opponents control can't be activated. +1: Until your next turn, up to on
+RAID:imotekh-the-stormlord                     mv4 r11374 Lokhust Heavy Destroyer |Art Cr — Nec|Flying Enmitic Exterminator — When this creature enters, each player sacrifices a creature of their choice. Un
+RAID:inspirit-flagship-vessel                  mv4 r 3676 Lux Artillery |Art|Whenever you cast an artifact creature spell, it gains sunburst. (It enters with a +1/+1 counter on it for eac
+RAID:inspirit-flagship-vessel                  mv4 r 4091 Lux Cannon |Art|{T}: Put a charge counter on this artifact. {T}, Remove three charge counters from this artifact: Destroy targ
+FREE                                           mv4 r 1700 Massacre Girl, Known Killer |L.Cr — Human|Menace Creatures you control have wither. (They deal damage to creatures in the form of -1/-1 counters.) Whene
+FREE                                           mv4 r 8656 Mastermind's Acquisition |Sorc|Choose one — • Search your library for a card, put it into your hand, then shuffle. • Put a card you own from
+FREE                                           mv4 r11021 Merchant of Venom |Cr — Cat War|Menace When this creature enters, each player sacrifices a creature of their choice. Whenever a player sacrifi
+FREE                                           mv4 r 4809 Mindless Automaton |Art Cr — Con|This creature enters with two +1/+1 counters on it. {1}, Discard a card: Put a +1/+1 counter on this creature.
+RAID:beledros-witherbloom,imotekh-the-stormlor mv4 r  228 Mirkwood Bats |Cr — Bat|Flying Whenever you create or sacrifice a token, each opponent loses 1 life.
+RAID:imotekh-the-stormlord                     mv4 r12683 Necron Overlord |Art Cr — Nec|Relentless March — {X}, {T}, Tap X untapped artifacts you control: Target opponent loses X life.
+FREE                                           mv4 r 4580 Necrotic Ooze |Cr — Ooze|As long as this creature is on the battlefield, it has all activated abilities of all creature cards in all gr
+RAID:inspirit-flagship-vessel                  mv4 r 1768 Nyx Lotus |L.Art|Nyx Lotus enters tapped. {T}: Choose a color. Add an amount of mana of that color equal to your devotion to th
+FREE                                           mv4 r 5702 Pact Weapon |Art — Equipm|As long as this Equipment is attached to a creature, you don't lose the game for having 0 or less life. Whenev
+IN RAID:inspirit-flagship-vessel               mv4 r  269 Panharmonicon |Art|If an artifact or creature entering causes a triggered ability of a permanent you control to trigger, that abi
+FREE                                           mv4 r11072 Paradise Plume |Art|As this artifact enters, choose a color. Whenever a player casts a spell of the chosen color, you may gain 1 l
+FREE                                           mv4 r 9280 Phoenix Fleet Airship |Art — Vehicl|Flying At the beginning of your end step, if you sacrificed a permanent this turn, create a token that's a cop
+RAID:imotekh-the-stormlord                     mv4 r 4676 Phyrexian Scriptures |Ench — Saga|(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.) I — Put a +1/+1 count
+RAID:imotekh-the-stormlord                     mv4 r 6364 Pitiless Carnage |Sorc|Sacrifice any number of permanents you control, then draw that many cards. Plot {1}{B}{B} (You may pay {1}{B}{
+RAID:imotekh-the-stormlord                     mv4 r14048 Plasmancer |Art Cr — Nec|Flying Dynastic Advisor — When this creature enters, search your library for a basic Swamp card, reveal it, pu
+FREE                                           mv4 r 1404 Rankle, Master of Pranks |L.Cr — Faeri|Flying, haste Whenever Rankle deals combat damage to a player, choose any number — • Each player discards a ca
+RAID:tazri-beacon-of-unity                     mv4 r 5881 Ravenloft Adventurer |Cr — Human R|When this creature enters, you take the initiative. If a creature an opponent controls would die, instead exil
+RAID:imotekh-the-stormlord                     mv4 r 1135 Ravenous Chupacabra |Cr — Beast H|When this creature enters, destroy target creature an opponent controls.
+FREE                                           mv4 r21534 Rewrite Regrets |Sorc|Return target creature or planeswalker card with mana value 6 or less from your graveyard to the battlefield.
+FREE                                           mv4 r 6269 Rodeo Pyromancers |Cr — Human M|Whenever you cast your first spell each turn, add {R}{R}.
+FREE                                           mv4 r 2028 Sangromancer |Cr — Vampire|Flying Whenever a creature an opponent controls dies, you may gain 3 life. Whenever an opponent discards a car
+FREE                                           mv4 r 4425 Seer's Sundial |Art|Landfall — Whenever a land you control enters, you may pay {2}. If you do, draw a card.
+FREE                                           mv4 r 3479 Shadowheart, Dark Justiciar |L.Cr — Human|{1}{B}, {T}, Sacrifice another creature: Draw X cards, where X is that creature's power. Choose a Background (
+FREE                                           mv4 r 9761 Sivriss, Nightmare Speaker |L.Cr — Snake|{T}, Sacrifice another creature or an artifact: For each opponent, you mill a card, then return that card from
+FREE                                           mv4 r 5704 Skinrender |Cr — Phyrexi|When this creature enters, put three -1/-1 counters on target creature.
+FREE                                           mv4 r17060 Skorpekh Destroyer |Art Cr — Nec|Deathtouch Hyperphase Threshers — Whenever an artifact you control enters, this creature gains first strike un
+RAID:bumi-unleashed                            mv4 r 8171 Smellerbee, Rebel Fighter |L.Cr — Human|First strike Other creatures you control have haste. Whenever Smellerbee attacks, you may discard your hand. I
+IN FREE                                        mv4 r 3865 Smothering Abomination |Cr — Eldrazi|Devoid (This card has no color.) Flying At the beginning of your upkeep, sacrifice a creature. Whenever you sa
+IN FREE                                        mv4 r   39 Solemn Simulacrum |Art Cr — Gol|When this creature enters, you may search your library for a basic land card, put that card onto the battlefie
+FREE                                           mv4 r 4994 Soul Snuffers |Cr — Element|When this creature enters, put a -1/-1 counter on each creature.
+FREE                                           mv4 r 1046 Syphon Mind |Sorc|Each other player discards a card. You draw a card for each card discarded this way.
+RAID:imotekh-the-stormlord                     mv4 r10101 Szarekh, the Silent King |L.Art Cr — N|Flying My Will Be Done — Whenever Szarekh attacks, mill three cards. You may put an artifact creature card or
+FREE                                           mv4 r 5619 Tendrils of Agony |Sorc|Target player loses 2 life and you gain 2 life. Storm (When you cast this spell, copy it for each spell cast b
+FREE                                           mv4 r 9141 Tendrils of Corruption |Inst|Tendrils of Corruption deals X damage to target creature and you gain X life, where X is the number of Swamps
+FREE                                           mv4 r 7437 Terminal Agony |Sorc|Destroy target creature. Madness {B}{R} (If you discard this card, discard it into exile. When you do, cast it
+FREE                                           mv4 r30353 Teyo, Diamondblade Mage |L.Cr — Human|Flash When Teyo enters, target permanent you control gains deathtouch until end of turn. Put a +1/+1 counter o
+RAID:imotekh-the-stormlord                     mv4 r 1176 The Darkness Crystal |L.Art|Black spells you cast cost {1} less to cast. If a nontoken creature an opponent controls would die, instead ex
+RAID:imotekh-the-stormlord                     mv4 r 8745 Their Number Is Legion |Sorc|Create X tapped 2/2 black Necron Warrior artifact creature tokens, then you gain life equal to the number of a
+FREE                                           mv4 r10058 Thorin, Mountain-king |L.Cr — Dwarf|Trample When Thorin enters, attach any number of target Equipment you control to target creature you control.
+IN FREE                                        mv4 r  196 Thran Dynamo |Art|{T}: Add {C}{C}{C}.
+FREE                                           mv4 r14201 Tragedy Feaster |Cr — Demon|Trample Ward—Discard a card. Infusion — At the beginning of your end step, sacrifice a permanent unless you ga
+FREE                                           mv4 r26911 Traxos, Scourge Eternal |L.Art Cr — D|Trample Traxos doesn't untap during your untap step. Whenever you cast an artifact or creature spell, untap Tr
+FREE                                           mv4 r 3951 Traxos, Scourge of Kroog |L.Art Cr — D|Trample Traxos enters tapped and doesn't untap during your untap step. Whenever you cast a historic spell, unt
+FREE                                           mv4 r10996 Treasure Keeper |Art Cr — Con|When this creature dies, reveal cards from the top of your library until you reveal a nonland card with mana v
+FREE                                           mv4 r 1905 Tree of Perdition |Cr — Plant|Defender {T}: Exchange target opponent's life total with this creature's toughness.
+RAID:tazri-beacon-of-unity                     mv4 r 1138 Twilight Prophet |Cr — Vampire|Flying Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.) A
+FREE                                           mv4 r11612 Vicious Battlerager |Cr — Dwarf B|When this creature enters, you take the initiative. Spiked Retribution — Whenever this creature becomes blocke
+FREE                                           mv4 r27704 Violent Echoes |Inst|Violent Echoes deals 6 damage to target creature or planeswalker. If excess damage was dealt to that permanent
+FREE                                           mv4 r 6242 Whisper, Blood Liturgist |L.Cr — Human|{T}, Sacrifice two creatures: Return target creature card from your graveyard to the battlefield.
+FREE                                           mv4 r 3370 Zombify |Sorc|Return target creature card from your graveyard to the battlefield.
+RAID:gilanra-alena-partners                    mv5 r 7717 Alena, Kessig Trapper |L.Cr — Human|First strike {T}: Add an amount of {R} equal to the greatest power among creatures you control that entered th
+FREE                                           mv5 r  966 Alhammarret's Archive |L.Art|If you would gain life, you gain twice that much life instead. If you would draw a card except the first one y
+RAID:imotekh-the-stormlord                     mv5 r 6765 Anrakyr the Traveller |L.Art Cr — N|Lord of the Pyrrhian Legions — Whenever Anrakyr the Traveller attacks, you may cast an artifact spell from you
+FREE                                           mv5 r 1284 Archfiend of Ifnir |Cr — Demon|Flying Whenever you cycle or discard another card, put a -1/-1 counter on each creature your opponents control
+RAID:beledros-witherbloom                      mv5 r10211 Argentum Masticore |Art Cr — Phy|First strike, protection from multicolored At the beginning of your upkeep, sacrifice this creature unless you
+FREE                                           mv5 r 4282 Baeloth Barrityl, Entertainer |L.Cr — Elf S|Creatures your opponents control with power less than Baeloth Barrityl's power are goaded. (They attack each c
+FREE                                           mv5 r15288 Bond of Revival |Sorc|Return target creature card from your graveyard to the battlefield. It gains haste until your next turn.
+FREE                                           mv5 r 5541 Chainer, Dementia Master |L.Cr — Human|All Nightmares get +1/+1. {B}{B}{B}, Pay 3 life: Put target creature card from a graveyard onto the battlefiel
+RAID:tazri-beacon-of-unity                     mv5 r 6899 Coveted Prize |Sorc|This spell costs {1} less to cast for each creature in your party. (Your party consists of up to one each of C
+FREE                                           mv5 r 2599 Dawnsire, Sunstar Dreadnought |L.Art — Spac|Station (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station
+RAID:imotekh-the-stormlord                     mv5 r 3493 Decorum Dissertation |Sorc — Lesso|Target player draws two cards and loses 2 life. Paradigm (Then exile this spell. After you first resolve a spe
+FREE                                           mv5 r 6817 Defiling Daemogoth |Cr — Demon|Menace Whenever a creature you control deals combat damage to a player, you gain 1 life. At the beginning of y
+FREE                                           mv5 r 6580 Dire Fleet Ravager |Cr — Orc Pir|Menace, deathtouch When this creature enters, each player loses a third of their life, rounded up.
+FREE                                           mv5 r 1845 Doomwake Giant |Ench Cr — Gi|Constellation — Whenever this creature or another enchantment you control enters, creatures your opponents con
+FREE                                           mv5 r 6978 Epicure of Blood |Cr — Vampire|Whenever you gain life, each opponent loses 1 life.
+FREE                                           mv5 r 7662 Eventide's Shadow |Sorc|Remove any number of counters from among permanents on the battlefield. You draw cards and lose life equal to
+FREE                                           mv5 r 3208 Geode Golem |Art Cr — Gol|Trample Whenever this creature deals combat damage to a player, you may cast your commander from the command z
+RAID:imotekh-the-stormlord                     mv5 r  412 Gilded Lotus |Art|{T}: Add three mana of any one color.
+RAID:beledros-witherbloom                      mv5 r  244 Gray Merchant of Asphodel |Cr — Zombie|When this creature enters, each opponent loses X life, where X is your devotion to black. You gain life equal
+FREE                                           mv5 r 4400 High-Society Hunter |Cr — Vampire|Flying Whenever this creature attacks, you may sacrifice another creature. If you do, put a +1/+1 counter on t
+FREE                                           mv5 r 6196 Incremental Blight |Sorc|Put a -1/-1 counter on target creature, two -1/-1 counters on another target creature, and three -1/-1 counter
+FREE                                           mv5 r13751 Jaya, Venerated Firemage |L.Planeswalk|If another red source you control would deal damage to a permanent or player, it deals that much damage plus 1
+IN FREE                                        mv5 r 1232 Junji, the Midnight Sky |L.Cr — Drago|Flying, menace When Junji dies, choose one — • Each opponent discards two cards and loses 2 life. • Put target
+RAID:tazri-beacon-of-unity                     mv5 r 1060 Karlach, Fury of Avernus |L.Cr — Tiefl|Whenever you attack, if it's the first combat phase of the turn, untap all attacking creatures. They gain firs
+FREE                                           mv5 r 5513 Kulrath Knight |Cr — Element|Flying Wither (This deals damage to creatures in the form of -1/-1 counters.) Creatures your opponents control
+FREE                                           mv5 r 8262 Luxurious Locomotive |Art — Vehicl|Whenever this Vehicle attacks, create a Treasure token for each creature that crewed it this turn. (They're ar
+FREE                                           mv5 r10843 Marshland Bloodcaster |Cr — Vampire|Flying {1}{B}, {T}: Rather than pay the mana cost of the next spell you cast this turn, you may pay life equal
+FREE                                           mv5 r24483 Massacre Girl, Most Wanted |L.Cr — Human|Whenever another creature or planeswalker you control dies, Massacre Girl deals 1 damage to target opponent an
+RAID:imotekh-the-stormlord                     mv5 r 4953 Necron Deathmark |Art Cr — Nec|Flash Synaptic Disintegrator — When this creature enters, destroy up to one target creature and target player
+FREE                                           mv5 r13834 No One Left Behind |Sorc|This spell costs {3} less to cast if it targets a creature card with mana value 3 or less. Return target creat
+RAID:tam-the-possibility                       mv5 r 9661 Ob Nixilis of the Black Oath |L.Planeswalk|+2: Each opponent loses 1 life. You gain life equal to the life lost this way. −2: Create a 5/5 black Demon cr
+RAID:tam-the-possibility                       mv5 r 4171 Ob Nixilis, the Hate-Twisted |L.Planeswalk|Whenever an opponent draws a card, Ob Nixilis deals 1 damage to that player. −2: Destroy target creature. Its
+IN FREE                                        mv5 r21349 Overzealous Muscle |Cr — Ogre Me|Whenever you commit a crime during your turn, this creature gains indestructible until end of turn. (Targeting
+FREE                                           mv5 r 2594 Puppeteer Clique |Cr — Faerie |Flying When this creature enters, put target creature card from an opponent's graveyard onto the battlefield u
+RAID:imotekh-the-stormlord                     mv5 r10462 Royal Warden |Art Cr — Nec|Phalanx Commander — When this creature enters, create two tapped 2/2 black Necron Warrior artifact creature to
+RAID:beledros-witherbloom                      mv5 r  504 Sanguine Bond |Ench|Whenever you gain life, target opponent loses that much life.
+RAID:tam-the-possibility                       mv5 r 5736 Sarkhan the Masterless |L.Planeswalk|Whenever a creature attacks you or a planeswalker you control, each Dragon you control deals 1 damage to that
+FREE                                           mv5 r14817 Sarkhan, the Dragonspeaker |L.Planeswalk|+1: Until end of turn, Sarkhan becomes a legendary 4/4 red Dragon creature with flying, indestructible, and ha
+FREE                                           mv5 r 2930 Skirge Familiar |Cr — Phyrexi|Flying Discard a card: Add {B}.
+FREE                                           mv5 r11417 Solemn Doomguide |Cr — Tieflin|Flying Each creature card in your graveyard that's a Cleric, Rogue, Warrior, and/or Wizard has unearth {1}{B}.
+IN FREE                                        mv5 r  260 Syr Konrad, the Grim |L.Cr — Human|Whenever another creature dies, or a creature card is put into a graveyard from anywhere other than the battle
+FREE                                           mv5 r18366 Territory Forge |Art|When this artifact enters, if you cast it, exile target artifact or land. This artifact has all activated abil
+IN RAID:gilanra-alena-partners                 mv5 r  517 Terror of the Peaks |Cr — Dragon|Flying Spells your opponents cast that target this creature cost an additional 3 life to cast. Whenever anothe
+FREE                                           mv5 r 1596 The Eternity Elevator |L.Art — Spac|{T}: Add {C}{C}{C}. Station (Tap another creature you control: Put charge counters equal to its power on this
+FREE                                           mv5 r 5158 The Scorpion God |L.Cr — God|Whenever a creature with a -1/-1 counter on it dies, draw a card. {1}{B}{R}: Put a -1/-1 counter on another ta
+FREE                                           mv5 r10904 Tivash, Gloom Summoner |L.Cr — Human|Lifelink At the beginning of your end step, if you gained life this turn, you may pay X life, where X is the a
+FREE                                           mv5 r 6792 Tome of the Guildpact |Art — Book|Whenever you cast a multicolored spell, draw a card. {T}: Add one mana of any color.
+RAID:the-cabbage-merchant                      mv5 r 3421 Transmutation Font |Art|{T}: Create your choice of a Blood token, a Clue token, or a Food token. {3}, {T}, Sacrifice three artifact to
+FREE                                           mv5 r14937 Triarch Stalker |Art Cr — Nec|Targeting Relay — At the beginning of combat on your turn, choose an opponent. Creatures attacking the last ch
+FREE                                           mv5 r 1990 Venser's Journal |Art — Book|You have no maximum hand size. At the beginning of your upkeep, you gain 1 life for each card in your hand.
+FREE                                           mv5 r 5512 Village Pillagers |Cr — Goblin |Wither (This deals damage to creatures in the form of -1/-1 counters.) When this creature enters, it deals 1 d
+IN FREE                                        mv5 r28488 Winter, Team Player |L.Cr — Human|Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1}
+RAID:beledros-witherbloom                      mv5 r 2567 Witch of the Moors |Cr — Human W|Deathtouch At the beginning of your end step, if you gained life this turn, each opponent sacrifices a creatur
+FREE                                           mv5 r 4379 Zuko's Exile |Inst — Lesso|Exile target artifact, creature, or enchantment. Its controller creates a Clue token. (It's an artifact with "
+FREE                                           mv6 r 6082 Aberrant Return |Sorc|Put one, two, or three target creature cards from graveyards onto the battlefield under your control. Each of
+IN RAID:tam-the-possibility                    mv6 r13735 Ajani Unrelenting |L.Planeswalk|Whenever you activate a loyalty ability, create a 2/2 colorless Wizard Soldier creature token named Cadet. +1:
+RAID:gilanra-alena-partners                    mv6 r 5023 Aurora Phoenix |Cr — Phoenix|Flying Cascade (When you cast this spell, exile cards from the top of your library until you exile a nonland c
+RAID:gilanra-alena-partners                    mv6 r 7841 Boarding Party |Cr — Human P|Haste Cascade (When you cast this spell, exile cards from the top of your library until you exile a nonland ca
+RAID:gilanra-alena-partners                    mv6 r10722 Burning Sun's Avatar |Cr — Dinosau|When this creature enters, it deals 3 damage to target opponent or planeswalker and 3 damage to up to one targ
+FREE                                           mv6 r 6493 Calamity, Galloping Inferno |L.Cr — Horse|Haste Whenever Calamity attacks while saddled, choose a nonlegendary creature that saddled it this turn and cr
+FREE                                           mv6 r 4997 Carnifex Demon |Cr — Phyrexi|Flying This creature enters with two -1/-1 counters on it. {B}, Remove a -1/-1 counter from this creature: Put
+IN RAID:tam-the-possibility                    mv6 r 3342 Chandra, Awakened Inferno |L.Planeswalk|This spell can't be countered. +2: Each opponent gets an emblem with "At the beginning of your upkeep, this em
+RAID:tam-the-possibility                       mv6 r  748 Chimil, the Inner Sun |L.Art|Spells you control can't be countered. At the beginning of your end step, discover 5. (Exile cards from the to
+FREE                                           mv6 r16377 Cloudkill |Sorc|All creatures get -X/-X until end of turn, where X is the greatest mana value of a commander you own on the ba
+IN RAID:gilanra-alena-partners                 mv6 r 1029 Combustible Gearhulk |Art Cr — Con|First strike When this creature enters, target opponent may have you draw three cards. If the player doesn't,
+RAID:gilanra-alena-partners                    mv6 r16384 Cyclops of Eternal Fury |Ench Cr — Cy|Creatures you control have haste.
+FREE                                           mv6 r 3757 Deadly Tempest |Sorc|Destroy all creatures. Each player loses life equal to the number of creatures they controlled that were destr
+FREE                                           mv6 r 5371 Doomsday Excruciator |Cr — Demon|Flying When this creature enters, if it was cast, each player exiles all but the bottom six cards of their lib
+FREE                                           mv6 r 9952 Eldrazi Ravager |Cr — Eldrazi|Annihilator 1 (Whenever this creature attacks, defending player sacrifices a permanent of their choice.) Sacri
+RAID:gilanra-alena-partners                    mv6 r19390 Emissary of Grudges |Cr — Efreet|Flying, haste As this creature enters, secretly choose an opponent. Reveal the player you chose: Choose new ta
+IN RAID:gilanra-alena-partners                 mv6 r  279 Etali, Primal Storm |L.Cr — Elder|Whenever Etali attacks, exile the top card of each player's library, then you may cast any number of spells fr
+RAID:tam-the-possibility                       mv6 r 3736 Final Act |Sorc|Choose one or more — • Destroy all creatures. • Destroy all planeswalkers. • Destroy all battles. • Exile all
+RAID:the-cabbage-merchant                      mv6 r18667 Ginger, Queen of Sweets |L.Art Cr — F|When Ginger enters, you become the monarch. {2}, {T}, Sacrifice Ginger: You gain 6 life. At the beginning of e
+FREE                                           mv6 r 2435 God-Pharaoh's Statue |L.Art|Spells your opponents cast cost {2} more to cast. At the beginning of your end step, each opponent loses 1 lif
+IN FREE                                        mv6 r 1392 Grave Titan |Cr — Giant|Deathtouch Whenever this creature enters or attacks, create two 2/2 black Zombie creature tokens.
+FREE                                           mv6 r 3709 Haunting Voyage |Sorc|Choose a creature type. Return up to two creature cards of that type from your graveyard to the battlefield. I
+FREE                                           mv6 r14624 Hexmark Destroyer |Art Cr — Nec|Multi-threat Eliminator — This creature can't be blocked except by six or more creatures. Unearth {4}{B}{B} ({
+RAID:gilanra-alena-partners                    mv6 r 9662 Hoard-Smelter Dragon |Cr — Dragon|Flying {3}{R}: Destroy target artifact. This creature gets +X/+0 until end of turn, where X is that artifact's
+FREE                                           mv6 r 9522 Koh, the Face Stealer |L.Cr — Shape|When Koh enters, exile up to one other target creature. Whenever another nontoken creature dies, you may exile
+RAID:beledros-witherbloom                      mv6 r  785 Liliana, Dreadhorde General |L.Planeswalk|Whenever a creature you control dies, draw a card. +1: Create a 2/2 black Zombie creature token. −4: Each play
+RAID:imotekh-the-stormlord                     mv6 r 1569 Marionette Master |Cr — Human A|Fabricate 3 (When this creature enters, put three +1/+1 counters on it or create three 1/1 colorless Servo art
+RAID:beledros-witherbloom                      mv6 r  513 Massacre Wurm |Cr — Phyrexi|When this creature enters, creatures your opponents control get -2/-2 until end of turn. Whenever a creature a
+FREE                                           mv6 r 2855 Metamorphosis Fanatic |Cr — Human C|Lifelink When this creature enters, return up to one target creature card from your graveyard to the battlefie
+FREE                                           mv6 r 4689 Midnight Banshee |Cr — Spirit|Wither (This deals damage to creatures in the form of -1/-1 counters.) At the beginning of your upkeep, put a
+RAID:beledros-witherbloom                      mv6 r 1322 Mikaeus, the Unhallowed |L.Cr — Zombi|Intimidate (This creature can't be blocked except by artifact creatures and/or creatures that share a color wi
+FREE                                           mv6 r  972 Moraug, Fury of Akoum |L.Cr — Minot|Each creature you control gets +1/+0 for each time it has attacked this turn. Landfall — Whenever a land you c
+IN FREE                                        mv6 r 1002 Noxious Gearhulk |Art Cr — Con|Menace When this creature enters, you may destroy another target creature. If a creature is destroyed this way
+RAID:gilanra-alena-partners                    mv6 r 2328 Oblivion Sower |Cr — Eldrazi|When you cast this spell, target opponent exiles the top four cards of their library, then you may put any num
+RAID:gilanra-alena-partners                    mv6 r 3502 Planetarium of Wan Shi Tong |L.Art|{1}, {T}: Scry 2. Whenever you scry or surveil, look at the top card of your library. You may cast that card w
+FREE                                           mv6 r 5985 Pontiff of Blight |Cr — Zombie |Extort (Whenever you cast a spell, you may pay {W/B}. If you do, each opponent loses 1 life and you gain that
+RAID:gilanra-alena-partners                    mv6 r19032 Rorix Bladewing |L.Cr — Drago|Flying, haste
+FREE                                           mv6 r 3512 Soul of New Phyrexia |Art Cr — Phy|Trample {5}: Permanents you control gain indestructible until end of turn. {5}, Exile this card from your grav
+FREE                                           mv6 r 1186 Steel Hellkite |Art Cr — Dra|Flying {2}: This creature gets +1/+0 until end of turn. {X}: Destroy each nonland permanent with mana value X
+FREE                                           mv6 r12502 Taste of Death |Sorc|Each player sacrifices three creatures of their choice. You create three Food tokens. (They're artifacts with
+RAID:imotekh-the-stormlord                     mv6 r11023 The War in Heaven |Ench — Saga|(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.) I — You draw three ca
+RAID:imotekh-the-stormlord                     mv6 r 3941 Their Name Is Death |Sorc|Destroy all nonartifact creatures.
+FREE                                           mv6 r 8905 Thwart the Grave |Sorc|This spell costs {1} less to cast for each creature in your party. (Your party consists of up to one each of C
+RAID:imotekh-the-stormlord                     mv6 r10235 Trazyn the Infinite |L.Art Cr — N|Deathtouch Prismatic Gallery — As long as Trazyn is on the battlefield, it has all activated abilities of all
+RAID:gilanra-alena-partners                    mv6 r 1647 Trumpeting Carnosaur |Cr — Dinosau|Trample When this creature enters, discover 5. {2}{R}, Discard this card: It deals 3 damage to target creature
+RAID:tam-the-possibility                       mv6 r 1307 Vraska, Betrayal's Sting |L.Planeswalk|Compleated ({B/P} can be paid with {B} or 2 life. If life was paid, this planeswalker enters with two fewer lo
+IN RAID:gilanra-alena-partners                 mv6 r  731 Warstorm Surge |Ench|Whenever a creature you control enters, it deals damage equal to its power to any target.
+RAID:tazri-beacon-of-unity                     mv6 r10249 Zagras, Thief of Heartbeats |L.Cr — Vampi|This spell costs {1} less to cast for each creature in your party. Flying, deathtouch, haste Other creatures y
+FREE                                           mv7 r 3360 Bane of Bala Ged |Cr — Eldrazi|Whenever this creature attacks, defending player exiles two permanents they control.
+IN FREE                                        mv7 r 1375 Butcher of Malakir |Cr — Vampire|Flying Whenever this creature or another creature you control dies, each opponent sacrifices a creature of the
+RAID:inspirit-flagship-vessel                  mv7 r12586 Craterclaw Colossus |Art Cr — Bea|Haste When this creature enters, creatures you control gain trample and get +X/+0 until end of turn, where X i
+FREE                                           mv7 r 5960 Defiant Bloodlord |Cr — Vampire|Flying Whenever you gain life, target opponent loses that much life.
+RAID:inspirit-flagship-vessel                  mv7 r 4332 Depthshaker Titan |Art Cr — Rob|When this creature enters, any number of target noncreature artifacts you control become 3/3 artifact creature
+FREE                                           mv7 r 8278 Devourer of Destiny |Cr — Eldrazi|You may reveal this card from your opening hand. If you do, at the beginning of your first upkeep, look at the
+IN RAID:gilanra-alena-partners                 mv7 r 1119 Drakuseth, Maw of Flames |L.Cr — Drago|Flying Whenever Drakuseth attacks, Drakuseth deals 4 damage to any target and 3 damage to each of up to two ot
+FREE                                           mv7 r 8574 Grim Poppet |Art Cr — Sca|This creature enters with three -1/-1 counters on it. Remove a -1/-1 counter from this creature: Put a -1/-1 c
+RAID:gilanra-alena-partners                    mv7 r 7213 Havoc Eater |Cr — Element|Flying When this creature enters, for each opponent, goad up to one target creature that opponent controls. Pu
+RAID:gilanra-alena-partners                    mv7 r 3897 Hideous Taskmaster |Cr — Eldrazi|Devoid (This card has no color.) When you cast this spell, for each opponent, gain control of up to one target
+FREE                                           mv7 r11749 Hollow Marauder |Cr — Specter|This spell costs {1} less to cast for each creature card in your graveyard. Flying When this creature enters,
+FREE                                           mv7 r 7920 Liliana, Death Wielder |L.Planeswalk|+2: Put a -1/-1 counter on up to one target creature. −3: Destroy target creature with a -1/-1 counter on it.
+FREE                                           mv7 r  799 Meteor Golem |Art Cr — Gol|When this creature enters, destroy target nonland permanent an opponent controls.
+FREE                                           mv7 r 5655 Myr Enforcer |Art Cr — Myr|Affinity for artifacts (This spell costs {1} less to cast for each artifact you control.)
+FREE                                           mv7 r11065 Necron Monolith |Art — Vehicl|Flying, indestructible Eternity Gate — Whenever this Vehicle attacks, mill three cards. For each creature card
+FREE                                           mv7 r 1289 Peer into the Abyss |Sorc|Target player draws cards equal to half the number of cards in their library and loses half their life. Round
+IN RAID:imotekh-the-stormlord                  mv7 r 1301 Rune-Scarred Demon |Cr — Demon|Flying When this creature enters, search your library for a card, put it into your hand, then shuffle.
+FREE                                           mv7 r20307 Sea Gate Colossus |Art Cr — Gol|This spell costs {1} less to cast for each creature in your party. (Your party consists of up to one each of C
+FREE                                           mv7 r 9865 Shard of the Void Dragon |Cr — C'tan|Flying Spear of the Void Dragon — Whenever this creature attacks, each opponent sacrifices a nonland permanent
+FREE                                           mv7 r 2288 Super State |L.Ench — Aur|Enchant creature you control Enchanted creature has base power and toughness 9/9 and has flying, first strike,
+RAID:imotekh-the-stormlord                     mv7 r 9579 Technomancer |Art Cr — Nec|When this creature enters, mill three cards, then return any number of artifact creature cards with total mana
+RAID:inspirit-flagship-vessel                  mv7 r 1857 Threefold Thunderhulk |Art Cr — Gno|This creature enters with three +1/+1 counters on it. Whenever this creature enters or attacks, create a numbe
+RAID:gilanra-alena-partners                    mv7 r11987 Tyrant of Discord |Cr — Element|When this creature enters, target opponent chooses a permanent they control at random and sacrifices it. If a
+FREE                                           mv8 r 2568 Archfiend of Despair |Cr — Demon|Flying Your opponents can't gain life. At the beginning of each end step, each opponent loses life equal to th
+IN FREE                                        mv8 r 9863 Armaggon, Future Shark |L.Cr — Shark|Flash When Armaggon enters, destroy up to three target creatures.
+RAID:gilanra-alena-partners                    mv8 r 7678 Avatar of Slaughter |Cr — Avatar|All creatures have double strike and attack each combat if able.
+FREE                                           mv8 r 3954 Breaker of Creation |Cr — Eldrazi|When you cast this spell, you gain 1 life for each colorless permanent you control. Hexproof from each color A
+FREE                                           mv8 r 2108 Cityscape Leveler |Art Cr — Con|Trample When you cast this spell and whenever this creature attacks, destroy up to one target nonland permanen
+FREE                                           mv8 r 1593 Eldrazi Conscription |Kindred Ench|Enchant creature Enchanted creature gets +10/+10 and has trample and annihilator 2. (Whenever it attacks, defe
+RAID:gilanra-alena-partners                    mv8 r 9440 Myojin of Roaring Blades |L.Cr — Spiri|Myojin of Roaring Blades enters with an indestructible counter on it if you cast it from your hand. Remove an
+FREE                                           mv8 r10064 Overwhelming Forces |Sorc|Destroy all creatures target opponent controls. Draw a card for each creature destroyed this way.
+FREE                                           mv8 r10273 Pestilence Demon |Cr — Demon|Flying {B}: This creature deals 1 damage to each creature and each player.
+FREE                                           mv8 r10821 Reiver Demon |Cr — Demon|Flying When this creature enters, if you cast it from your hand, destroy all nonartifact, nonblack creatures.
+FREE                                           mv8 r 5626 Shard of the Nightbringer |Cr — C'tan|Flying Drain Life — When this creature enters, if you cast it, target opponent loses half their life, rounded
+FREE                                           mv8 r 1124 Vilis, Broker of Blood |L.Cr — Demon|Flying {B}, Pay 2 life: Target creature gets -1/-1 until end of turn. Whenever you lose life, draw that many c
+IN RAID:tazri-beacon-of-unity                  mv9 r   22 Blasphemous Act |Sorc|This spell costs {1} less to cast for each creature on the battlefield. Blasphemous Act deals 13 damage to eac
+RAID:inspirit-flagship-vessel                  mv9 r 4150 Bygone Colossus |Art Cr — Rob|Warp {3} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the
+RAID:imotekh-the-stormlord                     mv9 r 1066 Portal to Phyrexia |Art|When this artifact enters, each opponent sacrifices three creatures of their choice. At the beginning of your
+FREE                                           mv9 r  491 Rise of the Dark Realms |Sorc|Put all creature cards from all graveyards onto the battlefield under your control.
+FREE                                           mv10 r 1565 Kozilek, the Great Distortion |L.Cr — Eldra|When you cast this spell, if you have fewer than seven cards in hand, draw cards equal to the difference. Mena
+FREE                                           mv11 r 2367 Darksteel Colossus |Art Cr — Gol|Trample (This creature can deal excess combat damage to the player or planeswalker it's attacking.) Indestruct
+RAID:imotekh-the-stormlord                     mv11 r 1670 Metalwork Colossus |Art Cr — Con|This spell costs {X} less to cast, where X is the total mana value of noncreature artifacts you control. Sacri

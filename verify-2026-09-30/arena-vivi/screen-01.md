@@ -1,0 +1,216 @@
+screened 450/450, passed 215, last card read: Goblin Negotiation
+- Swiftfoot Boots — protection — "Equipped creature has hexproof and haste" — beats: Agatha's Soul Cauldron
+- Lightning Greaves — protection — "Equipped creature has haste and shroud" — beats: Agatha's Soul Cauldron
+- Swan Song — counterspell — "Counter target enchantment, instant, or sorcery spell" — beats: An Offer You Can't Refuse
+- Otawara, Soaring City — utility land — "Channel — {3}{U}, Discard this card: Return target artifact, creature, enchantment, or planeswalker to its owner's hand" — beats: Reliquary Tower
+- The One Ring — card draw / protection — "{T}: Put a burden counter on The One Ring, then draw a card for each burden counter" — beats: Panharmonicon
+- Jeska's Will — ritual + card advantage — "Add {R} for each card in target opponent's hand. | • Exile the top three cards of your library. You may play them this turn" — beats: Involuntary Employment
+- Roaming Throne — engine (creature) — "If a triggered ability of another creature you control of the chosen type triggers, it triggers an additional time" — beats: Clinquant Skymage
+- Pongify — removal — "Destroy target creature. It can't be regenerated" — beats: Resculpt
+- Mox Amber — mana rock / 0-cost trigger — "{T}: Add one mana of any color among legendary creatures and planeswalkers you control" — beats: Ashnod's Altar
+- Karn's Bastion — utility land — "{4}, {T}: Proliferate" — beats: Darksteel Citadel
+- Mithril Coat — protection — "Flash | Indestructible | When Mithril Coat enters, attach it to target legendary creature you control" — beats: Agatha's Soul Cauldron
+- Gamble — tutor — "Search your library for a card, put that card into your hand, discard a card at random" — beats: Contentious Plan
+- Mox Opal — mana rock / 0-cost trigger — "Metalcraft — {T}: Add one mana of any color" — beats: Ashnod's Altar
+- Archmage Emeritus — card draw engine (creature) — "Magecraft — Whenever you cast or copy an instant or sorcery spell, draw a card" — beats: Clinquant Skymage
+- Untimely Malfunction — removal / protection — "Change the target of target spell or ability with a single target" — beats: Planar Incision
+- Seething Song — ritual — "Add {R}{R}{R}{R}{R}" — beats: Involuntary Employment
+- Seat of the Synod — land (artifact) — "{T}: Add {U}" — beats: Darksteel Citadel
+- Arena of Glory — land / haste — "{R}, {T}, Exert this land: Add {R}{R}. If any of that mana is spent on a creature spell, it gains haste" — beats: Darksteel Citadel
+- Great Furnace — land (artifact) — "{T}: Add {R}" — beats: Darksteel Citadel
+- Mistrise Village — utility land — "{U}, {T}: The next spell you cast this turn can't be countered" — beats: Reliquary Tower
+- Underworld Breach — extra-spell engine — "Each nonland card in your graveyard has escape" — beats: Impact Tremors
+- Guttersnipe — spell payoff (creature) — "Whenever you cast an instant or sorcery spell, this creature deals 2 damage to each opponent" — beats: Electrostatic Infantry
+- Demand Answers — card draw — "sacrifice an artifact or discard a card. | Draw two cards" — beats: Thrill of Possibility
+- Birgi, God of Storytelling // Harnfel, Horn of Bounty — ritual engine (creature) — "Whenever you cast a spell, add {R}. Until end of turn, you don't lose this mana" — beats: Storm-Kiln Artist
+- Bolt Bend — protection — "This spell costs {3} less to cast if you control a creature with power 4 or greater. | Change the target of target spell or ability" — beats: Planar Incision
+- Pinnacle Monk // Mystic Peak — land face + recursion — "return target instant or sorcery card from your graveyard to your hand. | // | {T}: Add {R}" — beats: Temple of Epiphany
+- Emergence Zone — utility land — "{1}, {T}, Sacrifice this land: You may cast spells this turn as though they had flash" — beats: Darksteel Citadel
+- Bonders' Enclave — utility land — "{3}, {T}: Draw a card. Activate only if you control a creature with power 4 or greater" — beats: Reliquary Tower
+- Redirect Lightning — protection — "pay 5 life or pay {2}. | Change the target of target spell or ability with a single target" — beats: Planar Incision
+- Displacer Kitten — engine (creature) — "Whenever you cast a noncreature spell, exile up to one target nonland permanent you control, then return that card" — beats: Clinquant Skymage
+- Thespian's Stage — utility land (combo with Dark Depths) — "{2}, {T}: This land becomes a copy of target land, except it has this ability" — beats: Darksteel Citadel
+- Return the Favor — copy / protection — "Copy target instant spell, sorcery spell, activated ability, or triggered ability. | + {1} — Change the target" — beats: Planar Incision
+- Tibalt's Trickery — counterspell — "Counter target spell" — beats: Negate
+- Hexing Squelcher — protection (creature) — "Spells you control can't be countered. | Other creatures you control have "Ward—Pay 2 life."" — beats: Electrostatic Infantry
+- Hydroelectric Specimen // Hydroelectric Laboratory — land face + protection — "change the target of target instant or sorcery spell with a single target to this creature. | // | {T}: Add {U}" — beats: Temple of Epiphany
+- Thundering Falls — U/R dual — "({T}: Add {U} or {R}.) | This land enters tapped. | When this land enters, surveil 1" — beats: Temple of Epiphany
+- Wizard Class — card draw / sink — "When this Class becomes level 2, draw two cards. | ... Whenever you draw a card, put a +1/+1 counter on target creature" — beats: Waterbender Ascension
+- Treasure Cruise — card draw — "Delve | Draw three cards" — beats: Big Score
+- Harmonic Prodigy — trigger doubler (creature) — "If a triggered ability of a Shaman or another Wizard you control triggers, that ability triggers an additional time" — beats: Electrostatic Infantry
+- Goblin Electromancer — cost reducer (creature) — "Instant and sorcery spells you cast cost {1} less to cast" — beats: Third Path Iconoclast
+- Into the Flood Maw — removal — "Return target creature an opponent controls to its owner's hand. If the gift was promised, instead return target nonland permanent" — beats: Resculpt
+- Aggravated Assault — win condition (Vivi untap loop) — "{3}{R}{R}: Untap all creatures you control. After this main phase, there is an additional combat phase" — beats: Waterbender Ascension
+- Sundering Eruption // Volcanic Fissure — land face — "// | {T}: Add {R}" — beats: Terramorphic Expanse
+- Starting Town — land — "{T}, Pay 1 life: Add one mana of any color" — beats: Ash Barrens
+- Pyretic Ritual — ritual — "Add {R}{R}{R}" — beats: Involuntary Employment
+- Narset's Reversal — copy / protection — "Copy target instant or sorcery spell, then return it to its owner's hand" — beats: Planar Incision
+- Grapeshot — storm finisher — "Grapeshot deals 1 damage to any target. | Storm" — beats: Impact Tremors
+- Valley Floodcaller — flash enabler (creature) — "You may cast noncreature spells as though they had flash" — beats: Leyline of Anticipation
+- Imprisoned in the Moon — removal — "Enchanted permanent is a colorless land with "{T}: Add {C}" and loses all other card types and abilities" — beats: Resculpt
+- Brain Freeze — storm finisher — "Target player mills three cards. | Storm" — beats: Contentious Plan
+- Twinflame Tyrant — damage doubler (creature) — "If a source you control would deal damage to an opponent or a permanent an opponent controls, it deals double that damage instead" — beats: Goldspan Dragon
+- Escape Tunnel — fetch land — "{T}, Sacrifice this land: Search your library for a basic land card" — beats: Evolving Wilds
+- Coruscation Mage — spell payoff (creature) — "Whenever you cast a noncreature spell, this creature deals 1 damage to each opponent" — beats: Electrostatic Infantry
+- Mizzix's Mastery — extra-spell engine — "Exile target card that's an instant or sorcery from your graveyard. For each card exiled this way, copy it, and you may cast the copy without paying its mana cost" — beats: Involuntary Employment
+- High Fae Trickster — flash enabler (creature) — "You may cast spells as though they had flash" — beats: Leyline of Anticipation
+- Riverpyre Verge — U/R dual — "{T}: Add {R}. | {T}: Add {U}. Activate only if you control an Island or a Mountain" — beats: Temple of Epiphany
+- Spell Pierce — counterspell — "Counter target noncreature spell unless its controller pays {2}" — beats: Negate
+- Dispel — counterspell — "Counter target instant spell" — beats: Negate
+- Archmage of Runes — cost reducer + draw (creature) — "Instant and sorcery spells you cast cost {1} less to cast. | Whenever you cast an instant or sorcery spell, draw a card" — beats: Mulldrifter
+- Monument to Endurance — discard payoff — "Whenever you discard a card, choose one ... Draw a card. | • Create a Treasure token. | • Each opponent loses 3 life" — beats: Panharmonicon
+- Stormcatch Mentor — cost reducer (creature) — "Haste | Prowess | Instant and sorcery spells you cast cost {1} less to cast" — beats: Third Path Iconoclast
+- Tezzeret's Gambit — card draw — "Draw two cards, then proliferate" — beats: Contentious Plan
+- Crashing Drawbridge — haste enabler (creature) — "{T}: Creatures you control gain haste until end of turn" — beats: Electrostatic Infantry
+- Narset, Parter of Veils — card advantage — "Each opponent can't draw more than one card each turn. | −2: Look at the top four cards ... put it into your hand" — beats: Contentious Plan
+- Sokenzan, Crucible of Defiance — utility land — "Channel — {3}{R}, Discard this card: Create two 1/1 colorless Spirit creature tokens" — beats: Darksteel Citadel
+- Strike It Rich — ritual / double trigger — "Create a Treasure token. | Flashback {2}{R}" — beats: Hard Evidence
+- Mines of Moria — utility land — "{3}{R}, {T}, Exile three cards from your graveyard: Create two Treasure tokens" — beats: Darksteel Citadel
+- Thriving Isle — U/R dual — "{T}: Add {U} or one mana of the chosen color" — beats: Temple of Epiphany
+- Rewind — counterspell — "Counter target spell. Untap up to four lands" — beats: Negate
+- Swiftwater Cliffs — U/R dual — "{T}: Add {U} or {R}" — beats: Temple of Epiphany
+- Slip Out the Back — protection — "Put a +1/+1 counter on target creature. It phases out" — beats: Planar Incision
+- Mishra's Bauble — 0-cost cantrip — "{T}, Sacrifice this artifact: Look at the top card of target player's library. Draw a card at the beginning of the next turn's upkeep" — beats: Hard Evidence
+- Cathartic Reunion — card draw — "discard two cards. | Draw three cards" — beats: Thrill of Possibility
+- Great Train Heist — extra combat / untap Vivi — "Untap all creatures you control. If it's your combat phase, there is an additional combat phase" — beats: Waterbender Ascension
+- Firebrand Archer — spell payoff (creature) — "Whenever you cast a noncreature spell, this creature deals 1 damage to each opponent" — beats: Electrostatic Infantry
+- Fiery Inscription — spell payoff — "Whenever you cast an instant or sorcery spell, this enchantment deals 2 damage to each opponent" — beats: Impact Tremors
+- Thriving Bluff — U/R dual — "{T}: Add {R} or one mana of the chosen color" — beats: Temple of Epiphany
+- Expedite — cantrip / haste — "Target creature gains haste until end of turn. | Draw a card" — beats: Hard Evidence
+- Light Up the Stage — card advantage — "Spectacle {R} | Exile the top two cards of your library. Until the end of your next turn, you may play those cards" — beats: Contentious Plan
+- Wan Shi Tong, Librarian — X sink (creature) — "put X +1/+1 counters on him. Then draw half X cards, rounded down" — beats: Mulldrifter
+- Stock Up — card draw — "Look at the top five cards of your library. Put two of them into your hand" — beats: Contentious Plan
+- Enter the Enigma — cantrip / evasion — "Target creature can't be blocked this turn. | Draw a card" — beats: Hard Evidence
+- Past in Flames — extra-spell engine — "Each instant and sorcery card in your graveyard gains flashback until end of turn" — beats: Involuntary Employment
+- Flux Channeler — proliferate engine (creature) — "Whenever you cast a noncreature spell, proliferate" — beats: Electrostatic Infantry
+- Electro, Assaulting Battery — ritual engine (creature) — "Whenever you cast an instant or sorcery spell, add {R}. | When Electro leaves the battlefield, you may pay {X}. When you do, he deals X damage to target player" — beats: Storm-Kiln Artist
+- Experimental Augury — cantrip / proliferate — "Put one of them into your hand and the rest on the bottom of your library in any order. Proliferate" — beats: Contentious Plan
+- All Will Be One — counter payoff — "Whenever you put one or more counters on a permanent or player, this enchantment deals that much damage to target opponent" — beats: Impact Tremors
+- Thousand-Year Storm — copy engine — "Whenever you cast an instant or sorcery spell, copy it for each other instant and sorcery spell you've cast before it this turn" — beats: Panharmonicon
+- Lindblum, Industrial Regency // Mage Siege — land face + pinger — "Create a 0/1 black Wizard creature token with "Whenever you cast a noncreature spell, this token deals 1 damage to each opponent."" — beats: Temple of Epiphany
+- Shatterskull Smashing // Shatterskull, the Hammer Pass — land face + removal — "Shatterskull Smashing deals X damage divided as you choose among up to two target creatures and/or planeswalkers. | // | {T}: Add {R}" — beats: Terramorphic Expanse
+- Boltwave — burn — "Boltwave deals 3 damage to each opponent" — beats: Hard Evidence
+- Grab the Prize — card draw / burn — "Draw two cards. If the discarded card wasn't a land card, Grab the Prize deals 2 damage to each opponent" — beats: Thrill of Possibility
+- Bulk Up — pump / mana doubler — "Double target creature's power until end of turn. | Flashback {4}{R}{R}" — beats: Contentious Plan
+- Fling — finisher — "Fling deals damage equal to the sacrificed creature's power to any target" — beats: Involuntary Employment
+- Dark Depths — win condition (combo with Thespian's Stage) — "create Marit Lage, a legendary 20/20 black Avatar creature token with flying and indestructible" — beats: Darksteel Citadel
+- Long River's Pull — counterspell — "Counter target creature spell. If the gift was promised, instead counter target spell" — beats: Negate
+- Kessig Flamebreather — spell payoff (creature) — "Whenever you cast a noncreature spell, this creature deals 1 damage to each opponent" — beats: Electrostatic Infantry
+- Lavaspur Boots — protection / haste — "Equipped creature gets +1/+0 and has haste and ward {1}" — beats: Agatha's Soul Cauldron
+- Izzet Charm — counter / removal / draw — "Counter target noncreature spell unless its controller pays {2}. | • Izzet Charm deals 2 damage to target creature. | • Draw two cards, then discard two cards" — beats: Abrade
+- Ojer Axonil, Deepest Might // Temple of Power — damage amplifier (creature) — "If a red source you control would deal an amount of noncombat damage less than Ojer Axonil's power to an opponent, that source deals damage equal to Ojer Axonil's power instead" — beats: Goldspan Dragon
+- Chandra, Torch of Defiance — card advantage / ramp — "+1: Exile the top card of your library. You may cast that card. | +1: Add {R}{R}. | −3: Chandra deals 4 damage to target creature" — beats: Involuntary Employment
+- Fiery Confluence — burn / sweeper — "Fiery Confluence deals 2 damage to each opponent. | • Destroy target artifact" — beats: Blasphemous Act
+- Electrostatic Field — spell payoff (creature) — "Whenever you cast an instant or sorcery spell, this creature deals 1 damage to each opponent" — beats: Electrostatic Infantry
+- Fire Nation Palace — utility land — "{1}{R}, {T}: Target creature you control gains firebending 4 until end of turn" — beats: Darksteel Citadel
+- Run Away Together — removal — "Choose two target creatures controlled by different players. Return those creatures to their owners' hands" — beats: Resculpt
+- Unstoppable Plan — untap engine — "At the beginning of your end step, untap all nonland permanents you control" — beats: Waterbender Ascension
+- Dragon's Rage Channeler — spell payoff (creature) — "Whenever you cast a noncreature spell, surveil 1" — beats: Electrostatic Infantry
+- Fists of Flame — cantrip / pump — "Draw a card. Until end of turn, target creature gains trample and gets +1/+0 for each card you've drawn this turn" — beats: Hard Evidence
+- Tormenting Voice — card draw — "discard a card. | Draw two cards" — beats: Thrill of Possibility
+- Flashback — extra-spell engine — "Target instant or sorcery card in your graveyard gains flashback until end of turn" — beats: Contentious Plan
+- Witness Protection — removal — "Enchanted creature loses all abilities and is a green and white Citizen creature with base power and toughness 1/1" — beats: Resculpt
+- Chart a Course — card draw — "Draw two cards. Then discard a card unless you attacked this turn" — beats: Thrill of Possibility
+- Conduit Pylons — land — "{1}, {T}: Add one mana of any color" — beats: Ash Barrens
+- The Last Agni Kai — removal / ritual — "Target creature you control fights target creature an opponent controls. If the creature the opponent controls is dealt excess damage this way, add that much {R}" — beats: Abrade
+- Crash Through — cantrip — "Creatures you control gain trample until end of turn. | Draw a card" — beats: Hard Evidence
+- Kozilek's Command — removal / X sink — "Target player scries X, then draws a card. | • Exile target creature with mana value X or less" — beats: Resculpt
+- Balmor, Battlemage Captain — spell payoff (creature) — "Whenever you cast an instant or sorcery spell, creatures you control get +1/+0 and gain trample" — beats: Electrostatic Infantry
+- Reckless Impulse — card advantage — "Exile the top two cards of your library. Until the end of your next turn, you may play those cards" — beats: Contentious Plan
+- Multiversal Passage — U/R dual — "As this land enters, choose a basic land type. Then you may pay 2 life. If you don't, it enters tapped" — beats: Temple of Epiphany
+- Wrenn's Resolve — card advantage — "Exile the top two cards of your library. Until the end of your next turn, you may play those cards" — beats: Contentious Plan
+- Glimpse the Impossible — card advantage — "Exile the top three cards of your library. You may play those cards this turn" — beats: Contentious Plan
+- Niv-Mizzet, Visionary — draw engine (creature) — "Whenever a source you control deals noncombat damage to an opponent, you draw that many cards" — beats: Ovika, Enigma Goliath
+- Think Twice — cantrip — "Draw a card. | Flashback {2}{U}" — beats: Deduce
+- Combat Research — draw aura / protection — "Whenever this creature deals combat damage to a player, draw a card. | As long as enchanted creature is legendary, it gets +1/+1 and has ward {1}" — beats: Curiosity
+- Shock — burn — "Shock deals 2 damage to any target" — beats: Hard Evidence
+- Sword of Wealth and Power — protection / copy — "protection from instants and from sorceries. | Whenever equipped creature deals combat damage to a player, create a Treasure token. When you next cast an instant or sorcery spell this turn, copy that spell" — beats: Agatha's Soul Cauldron
+- Virtue of Knowledge // Vantress Visions — trigger copy — "Copy target activated or triggered ability you control" — beats: Panharmonicon
+- Laughing Mad — card draw — "Draw two cards. | Flashback {3}{R}" — beats: Seize the Spoils
+- Lightning Strike — burn — "Lightning Strike deals 3 damage to any target" — beats: Abrade
+- Disdainful Stroke — counterspell — "Counter target spell with mana value 4 or greater" — beats: Negate
+- Crimson Wisps — cantrip / haste — "Target creature becomes red and gains haste until end of turn. | Draw a card" — beats: Hard Evidence
+- Erebor Flamesmith — spell payoff (creature) — "Whenever you cast an instant or sorcery spell, this creature deals 1 damage to each opponent" — beats: Electrostatic Infantry
+- Agna Qel'a — utility land — "{2}{U}, {T}: Draw a card, then discard a card" — beats: Reliquary Tower
+- Saheeli, Sublime Artificer — spell payoff — "Whenever you cast a noncreature spell, create a 1/1 colorless Servo artifact creature token" — beats: Third Path Iconoclast
+- Twinferno — copy / double strike — "When you cast your next instant or sorcery spell this turn, copy that spell. | • Target creature you control gains double strike" — beats: Contentious Plan
+- Quick Study — card draw — "Draw two cards" — beats: Deduce
+- Tectonic Hazard — burn / sweeper — "Tectonic Hazard deals 1 damage to each opponent and each creature they control" — beats: Hard Evidence
+- Essence Scatter — counterspell — "Counter target creature spell" — beats: Negate
+- Miscast — counterspell — "Counter target instant or sorcery spell unless its controller pays {3}" — beats: Negate
+- Resonating Lute — mana engine — "Lands you control have "{T}: Add two mana of any one color. Spend this mana only to cast instant and sorcery spells."" — beats: Chromatic Lantern
+- Longshot, Rebel Bowman — cost reducer + payoff (creature) — "Noncreature spells you cast cost {1} less to cast. | Whenever you cast a noncreature spell, Longshot deals 2 damage to each opponent" — beats: Storm-Kiln Artist
+- Spider-Sense — counterspell — "Counter target instant spell, sorcery spell, or triggered ability" — beats: Negate
+- Overlord of the Floodpits — draw engine — "Whenever this permanent enters or attacks, draw two cards, then discard a card" — beats: Mulldrifter
+- Spikefield Hazard // Spikefield Cave — land face + removal — "Spikefield Hazard deals 1 damage to any target. | // | {T}: Add {R}" — beats: Terramorphic Expanse
+- Bitter Reunion — card draw / haste — "you may discard a card. If you do, draw two cards. | {1}, Sacrifice this enchantment: Creatures you control gain haste" — beats: Hard Evidence
+- Fated Firepower — damage amplifier — "Flash | it deals that much damage plus an amount of damage equal to the number of fire counters on this enchantment instead" — beats: Impact Tremors
+- Unsummon — removal — "Return target creature to its owner's hand" — beats: Resculpt
+- Sleight of Hand — cantrip — "Look at the top two cards of your library. Put one of them into your hand" — beats: Hard Evidence
+- Daze — counterspell — "You may return an Island you control to its owner's hand rather than pay this spell's mana cost. | Counter target spell unless its controller pays {1}" — beats: Negate
+- Magic Damper — protection / untap Vivi — "Target creature you control gets +1/+1 and gains hexproof until end of turn. Untap it" — beats: Planar Incision
+- Rumble Arena — land — "{1}, {T}: Add one mana of any color" — beats: Ash Barrens
+- Bria, Riptide Rogue — evasion engine (creature) — "Whenever you cast a noncreature spell, target creature you control can't be blocked this turn" — beats: Kraum, Violent Cacophony
+- River's Rebuke — sweeper — "Return all nonland permanents target player controls to their owner's hand" — beats: Blasphemous Act
+- Octopus Form — protection / untap Vivi — "Target creature you control gets +1/+1 and gains hexproof until end of turn. Untap it" — beats: Planar Incision
+- Marang River Regent // Coil and Catch — card draw — "Draw three cards, then discard a card" — beats: Mulldrifter
+- The Endstone — draw engine — "Whenever you play a land or cast a spell, draw a card" — beats: Panharmonicon
+- Ojer Pakpatiq, Deepest Epoch // Temple of Cyclical Time — extra-spell engine (creature) — "Whenever you cast an instant spell from your hand, it gains rebound" — beats: Ovika, Enigma Goliath
+- Renegade Tactics — cantrip — "Target creature can't block this turn. | Draw a card" — beats: Hard Evidence
+- Daily Bugle Building — land / evasion — "{1}, {T}: Add one mana of any color. | Smear Campaign — {1}, {T}: Target legendary creature gains menace" — beats: Ash Barrens
+- Monstrous Rage — pump / mana — "Target creature gets +2/+0 until end of turn. Create a Monster Role token attached to it" — beats: Hard Evidence
+- Lembas — cantrip artifact — "When this artifact enters, scry 1, then draw a card" — beats: Hard Evidence
+- Spirit Water Revival — card draw — "Draw two cards. If this spell's additional cost was paid, instead shuffle your graveyard into your library, draw seven cards" — beats: Big Score
+- Blazing Crescendo — pump / card advantage — "Target creature gets +3/+1 until end of turn. | Exile the top card of your library. Until the end of your next turn, you may play that card" — beats: Hard Evidence
+- Cori Mountain Monastery — utility land — "{3}{R}, {T}: Exile the top card of your library. Until the end of your next turn, you may play that card" — beats: Darksteel Citadel
+- Fervor — haste enabler — "Creatures you control have haste" — beats: Waterbender Ascension
+- Winged Words — card draw — "This spell costs {1} less to cast if you control a creature with flying. | Draw two cards" — beats: Deduce
+- Ral, Monsoon Mage // Ral, Leyline Prodigy — cost reducer (creature) — "Instant and sorcery spells you cast cost {1} less to cast" — beats: Third Path Iconoclast
+- Abandon Attachments — card draw — "You may discard a card. If you do, draw two cards" — beats: Thrill of Possibility
+- Mana Sculpt — counterspell / ritual — "Counter target spell. If you control a Wizard, add an amount of {C} equal to the amount of mana spent to cast that spell" — beats: Negate
+- Tablet of Discovery — mana rock — "{T}: Add {R}{R}. Spend this mana only to cast instant and sorcery spells" — beats: Chromatic Lantern
+- Devastating Onslaught — X sink / finisher — "Create X tokens that are copies of target artifact or creature you control. Those tokens gain haste" — beats: Involuntary Employment
+- Capital City — land — "{1}, {T}: Add one mana of any color. | Cycling {2}" — beats: Ash Barrens
+- It'll Quench Ya! — counterspell — "Counter target spell unless its controller pays {2}" — beats: Negate
+- Syncopate — counterspell / X — "Counter target spell unless its controller pays {X}" — beats: Negate
+- Fire Magic — sweeper — "Fira — {2} — Fire Magic deals 2 damage to each creature" — beats: Blasphemous Act
+- Might of the Meek — cantrip — "Target creature gains trample until end of turn. | Draw a card" — beats: Hard Evidence
+- Nibelheim Aflame — one-sided sweeper — "Choose target creature you control. It deals damage equal to its power to each other creature" — beats: Blasphemous Act
+- Eaten by Piranhas — removal — "Flash | Enchanted creature loses all abilities and is a black Skeleton creature with base power and toughness 1/1" — beats: Resculpt
+- Haste Magic — pump / haste / card advantage — "Target creature gets +3/+1 and gains haste until end of turn. Exile the top card of your library. You may play it" — beats: Hard Evidence
+- Sazacap's Brew — card draw — "Target player draws two cards" — beats: Thrill of Possibility
+- Hidden Volcano — utility land — "{4}{R}, {T}, Sacrifice this land: Discover 4" — beats: Darksteel Citadel
+- Cryogen Relic — cantrip artifact — "When this artifact enters or leaves the battlefield, draw a card" — beats: Hard Evidence
+- Firespitter Whelp — spell payoff (creature) — "Whenever you cast a noncreature or Dragon spell, this creature deals 1 damage to each opponent" — beats: Electrostatic Infantry
+- Virtue of Courage // Embereth Blaze — card advantage engine — "Whenever a source you control deals noncombat damage to an opponent, you may exile that many cards from the top of your library. You may play those cards this turn" — beats: Impact Tremors
+- Volcanic Torrent — sweeper / cascade — "Cascade | Volcanic Torrent deals X damage to each creature and planeswalker your opponents control, where X is the number of spells you've cast this turn" — beats: Blasphemous Act
+- Hide on the Ceiling — protection / X — "Exile X target artifacts and/or creatures. Return the exiled cards to the battlefield" — beats: Planar Incision
+- Hidden Strings — untap Vivi — "You may tap or untap target permanent, then you may tap or untap another target permanent" — beats: Contentious Plan
+- Amazing Acrobatics — counterspell — "Counter target spell. | • Tap one or two target creatures" — beats: Negate
+- Kaito, Cunning Infiltrator — evasion / loot — "+1: Up to one target creature you control can't be blocked this turn. Draw a card, then discard a card" — beats: Waterbender Ascension
+- Witch's Mark — card draw — "You may discard a card. If you do, draw two cards" — beats: Thrill of Possibility
+- Prismari, the Inspiration — storm engine (creature) — "Instant and sorcery spells you cast have storm" — beats: Ovika, Enigma Goliath
+- Wizard's Staff — trigger doubler — "If a triggered ability of equipped creature triggers, that ability triggers an additional time. | Equip Wizard {1}" — beats: Agatha's Soul Cauldron
+- Boomerang Basics — removal — "Return target nonland permanent to its owner's hand" — beats: Resculpt
+- Suplex — removal — "Suplex deals 3 damage to target creature. If that creature would die this turn, exile it instead. | • Exile target artifact" — beats: Abrade
+- Mjölnir, Hammer of Thor — damage doubler / removal — "When Mjölnir enters, it deals 4 damage to up to one target creature. | Double all damage equipped creature would deal. | Equip worthy {1}" — beats: Agatha's Soul Cauldron
+- Ancestors' Aid — pump / ritual — "Target creature gets +2/+0 and gains first strike until end of turn. | Create a Treasure token" — beats: Hard Evidence
+- Matoya, Archon Elder — draw engine (creature) — "Whenever you scry or surveil, draw a card" — beats: Clinquant Skymage
+- The Emperor of Palamecia // The Lord Master of Hell — mana engine (creature) — "{T}: Add {U} or {R}. Spend this mana only to cast a noncreature spell" — beats: Third Path Iconoclast
+- Waterbending Lesson — card draw — "Draw three cards. Then discard a card unless you waterbend {2}" — beats: Big Score
+- You Find Some Prisoners — removal / card advantage — "Destroy target artifact. | • Interrogate Them — Exile the top three cards of target opponent's library. Choose one of them" — beats: Abrade
+- Flow State — card draw — "If there is an instant card and a sorcery card in your graveyard, instead put two of them into your hand" — beats: Contentious Plan
+- Overlord of the Boilerbilges — burn / removal — "Impending 4—{2}{R}{R} | Whenever this permanent enters or attacks, it deals 4 damage to any target" — beats: Involuntary Employment
+- Annul — counterspell — "Counter target artifact or enchantment spell" — beats: Negate
+- Serum Snare — removal / proliferate — "Return target nonland permanent to its owner's hand. If that permanent had mana value 3 or less, proliferate" — beats: Resculpt
+- Thran Portal — U/R dual — "This land enters tapped unless you control two or fewer other lands. | As this land enters, choose a basic land type" — beats: Temple of Epiphany
+- Remand — counterspell / cantrip — "Counter target spell. If that spell is countered this way, put it into its owner's hand | Draw a card" — beats: Negate
+- Wizard's Retort — counterspell — "This spell costs {1} less to cast if you control a Wizard. | Counter target spell" — beats: Negate
+- Mathemagics — X sink / card draw — "Target player draws 2ˣ cards" — beats: Big Score
+- Harmonized Trio // Brainstorm — cantrip — "// | Draw three cards, then put two cards from your hand on top of your library" — beats: Deduce
+- Ancestral Anger — cantrip — "Target creature gains trample and gets +X/+0 until end of turn | Draw a card" — beats: Hard Evidence
+- Taigam, Master Opportunist — copy engine (creature) — "Flurry — Whenever you cast your second spell each turn, copy it" — beats: Kraum, Violent Cacophony
+- Romantic Rendezvous — card draw — "Discard a card, then draw two cards" — beats: Thrill of Possibility
+- Rile — cantrip — "Rile deals 1 damage to target creature you control. That creature gains trample until end of turn. | Draw a card" — beats: Hard Evidence
+- Hidden Cataract — utility land — "{4}{U}, {T}, Sacrifice this land: Discover 4" — beats: Reliquary Tower
+- Opera Love Song — card advantage / pump — "Exile the top two cards of your library. You may play those cards until your next end step" — beats: Contentious Plan

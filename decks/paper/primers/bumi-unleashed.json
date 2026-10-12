@@ -1,0 +1,459 @@
+{
+  "version": 1,
+  "deck": {
+    "name": "Bumi, Unleashed",
+    "commanders": [
+      "Bumi, Unleashed"
+    ],
+    "colours": "RG",
+    "format": "commander",
+    "list": "verify-2026-10-07/bumi-standalone/final.txt",
+    "status": "proposed"
+  },
+  "summary": "Review 2026-10-09: proposed swaps in verify-2026-10-09/color-best/eval/bumi-unleashed/REVIEW.md (refuted: REFUTE.md), not yet applied. This primer describes the unapplied 10-07 draft (verify-2026-10-07/bumi-standalone/final.txt), not the sleeved list. Ramp on lands into [[Bumi, Unleashed]] on turn 4–5. Earthbend turns lands into hasty land creatures with +1/+1 counters. When Bumi deals combat damage to a player, he will \"untap all lands you control\" and add a combat in which \"Only land creatures can attack\", so every land creature attacks twice and every land taps for mana twice. [[Toph, Greatest Earthbender]] gives land creatures double strike, which makes it 4 hits per land per turn; [[Temur Battle Rage]], [[Overrun]] and [[Awakening of Vitu-Ghazi]] close.",
+  "phases": [
+    {
+      "turns": "T1–3",
+      "goal": "Two ramp pieces that put lands on the battlefield (lands untap under Bumi; rocks do not), plus a first land creature.",
+      "cards": [
+        "Elvish Mystic",
+        "Sol Ring",
+        "Nature's Lore",
+        "Farseek",
+        "Rampant Growth",
+        "Cultivate",
+        "Toph, the Blind Bandit",
+        "Earthbender Ascension"
+      ]
+    },
+    {
+      "turns": "T4–6",
+      "goal": "Bumi with haste (Boots, Smellerbee, Halana and Alena), then double strike and counter growth.",
+      "cards": [
+        "Bumi, Unleashed",
+        "Lavaspur Boots",
+        "Smellerbee, Rebel Fighter",
+        "Halana and Alena, Partners",
+        "Toph, Greatest Earthbender",
+        "Nissa, Who Shakes the World",
+        "Germination Practicum",
+        "Solid Ground"
+      ]
+    },
+    {
+      "turns": "Close",
+      "goal": "Bumi connects with 2+ land creatures out; spend the untapped lands on instants and sinks before the land-only combat.",
+      "cards": [
+        "Temur Battle Rage",
+        "Overrun",
+        "Awakening of Vitu-Ghazi",
+        "Lair of the Hydra",
+        "Rockalanche",
+        "Cracked Earth Technique",
+        "Flopsie, Bumi's Buddy",
+        "Silkguard"
+      ]
+    }
+  ],
+  "engine": [
+    {
+      "title": "Bumi's second combat",
+      "flow": [
+        "[[Bumi, Unleashed]] enters: earthbend 4 (a 4/4 haste land)",
+        "Bumi deals combat damage to a player",
+        "untap all lands you control",
+        "extra combat: land creatures only",
+        "lands tap again for main phase 2"
+      ],
+      "note": "The \"Only land creatures can attack\" restriction applies only to the combat Bumi creates (Scryfall ruling 2025-10-02). Extra phases go directly after the current phase (CR 500.8)."
+    },
+    {
+      "title": "Double strike on every land",
+      "flow": [
+        "[[Toph, Greatest Earthbender]] for 4 mana: earthbend 4",
+        "land creatures have double strike",
+        "each land hits twice per combat",
+        "Bumi's extra combat: 4 hits per land"
+      ],
+      "note": "Two combat damage steps per combat (CR 510.4)."
+    },
+    {
+      "title": "Counters every combat",
+      "flow": [
+        "[[Halana and Alena, Partners]]: X counters at the beginning of combat",
+        "[[Tale of Katara and Toph]]: +1 counter on first tap",
+        "[[Solid Ground]]: one extra counter each time",
+        "Bumi's extra combat triggers Halana again"
+      ],
+      "note": "\"At the beginning of combat on your turn\" triggers in every combat phase, including Bumi's."
+    },
+    {
+      "title": "Lands come back",
+      "flow": [
+        "earthbended land dies or is exiled",
+        "\"return it to the battlefield tapped\" (CR 701.66a)",
+        "[[Fling]] or [[Roiling Regrowth]] sacrifice it for free",
+        "it returns as a plain land, ready to earthbend again"
+      ],
+      "note": "The returned land is a new object: its counters and creature status are gone."
+    },
+    {
+      "title": "Nissa and Yavimaya",
+      "flow": [
+        "[[Yavimaya, Cradle of Growth]]: every land is a Forest",
+        "[[Nissa, Who Shakes the World]]: every land taps for an extra {G}",
+        "Nissa +1 on a noncreature land: three counters, untap, haste, vigilance",
+        "[[Rockalanche]] earthbends X = all lands"
+      ],
+      "note": "Not buildable since 2026-10-08: the only Yavimaya is sleeved in Beledros. Without it, Nissa's extra {G} and Rockalanche's X count Forests only, and Nissa's +1 cannot target a land that is already a creature."
+    }
+  ],
+  "winConditions": [
+    {
+      "name": "Bumi + Toph double strike",
+      "pieces": [
+        "Bumi, Unleashed",
+        "Toph, Greatest Earthbender"
+      ],
+      "flow": [
+        "board held since the turn began: Bumi, Toph, two 4/4 land creatures",
+        "combat 1: Bumi 5 + Toph 3 + two lands 4 × 2",
+        "Bumi connects: untap all lands",
+        "combat 2, lands only: two lands 4 × 2"
+      ],
+      "damage": "(5 + 3 + 2 × 4 × 2) + (2 × 4 × 2) = 24 + 16 = 40 to one opponent, unblocked. The two lands are Bumi's earthbend 4 and Toph's earthbend 4 (X = 4 mana spent).",
+      "turn": "Draft list (F2), not the sleeved deck: goldfish median T6, P(kill ≤ T6) .655; with one chump blocker per combat median T7, P(≤ T7) .688 (bumi-standalone/var/F2.o.out, F2.c.out). Sleeved: .556 / .553 (metrics table)"
+    },
+    {
+      "name": "Temur Battle Rage on Bumi",
+      "pieces": [
+        "Bumi, Unleashed",
+        "Temur Battle Rage"
+      ],
+      "flow": [
+        "Bumi attacks with three 4/4 land creatures",
+        "[[Temur Battle Rage]] on Bumi: double strike",
+        "first-strike and regular damage: two Bumi triggers",
+        "two extra land-only combats"
+      ],
+      "damage": "combat 1: Bumi 5 × 2 + 3 × 4 = 22; combat 2: 12; combat 3: 0, because both untaps resolve in combat 1 and the lands stay tapped after attacking in combat 2 (only vigilance lands such as Rumble Arena or Nissa's attack again); total 34 to one opponent",
+      "turn": "T6–7 (no double strike needed from Toph)"
+    },
+    {
+      "name": "Overrun through both combats",
+      "pieces": [
+        "Bumi, Unleashed",
+        "Overrun"
+      ],
+      "flow": [
+        "earthbend first (Overrun affects only creatures on resolution, CR 611.2c)",
+        "[[Overrun]]: +3/+3 and trample until end of turn",
+        "combat 1: Bumi 8 + four 2/2 lands at 5",
+        "combat 2: four lands at 5 again"
+      ],
+      "damage": "(8 + 4 × 5) + 4 × 5 = 28 + 20 = 48; trample pushes 4 of 5 past a 1/1 chump",
+      "turn": "T6–8; the swap Owlbear Cub → Overrun moved chump P(≤ T7) +.019 (var/Xov vs F2)"
+    },
+    {
+      "name": "Mana sinks after Bumi's untap",
+      "pieces": [
+        "Bumi, Unleashed",
+        "Lair of the Hydra",
+        "Awakening of Vitu-Ghazi"
+      ],
+      "flow": [
+        "Bumi connects: all lands untap",
+        "[[Awakening of Vitu-Ghazi]] (instant): nine counters, haste",
+        "[[Lair of the Hydra]]: {X}{G} becomes X/X",
+        "both attack in the land-only combat"
+      ],
+      "damage": "with 10 lands: tap 5 for Vitu-Ghazi on one untapped land (9/9 haste), then 3 more pay {2}{G} for a 2/2 Lair. That is 11 more damage in the land-only combat, 22 with Toph.",
+      "turn": "backup line when blockers or removal thin the board"
+    }
+  ],
+  "metrics": {
+    "columns": [
+      "Metric",
+      "Sleeved",
+      "Proposed"
+    ],
+    "rows": [
+      {
+        "label": "Keep 7 (3–5 lands, or 2 lands + MV ≤ 2 ramp)",
+        "values": [
+          ".593",
+          ".623"
+        ]
+      },
+      {
+        "label": "4th land played on T4",
+        "values": [
+          ".732",
+          ".765"
+        ]
+      },
+      {
+        "label": "Bumi cast by T5",
+        "values": [
+          ".787",
+          ".834"
+        ]
+      },
+      {
+        "label": "Screwed (< 4 mana sources at end of T5)",
+        "values": [
+          ".056",
+          ".016"
+        ]
+      },
+      {
+        "label": "Flooded (> 8 lands seen by T8, no sink)",
+        "values": [
+          ".005",
+          ".004"
+        ]
+      },
+      {
+        "label": "Spells cast T1–8",
+        "values": [
+          "11.68",
+          "12.56"
+        ]
+      },
+      {
+        "label": "Goldfish kill: median turn (P ≤ T6, mean)",
+        "values": [
+          "T6 (.556, 6.61)",
+          "T6 (.655, 6.37)"
+        ]
+      },
+      {
+        "label": "One chump per combat: median turn (P ≤ T7, mean)",
+        "values": [
+          "T7 (.553, 7.62)",
+          "T7 (.688, 7.23)"
+        ]
+      }
+    ],
+    "note": "verify-2026-10-07/bumi-standalone/sim.py (gruul/refute/hh.py + patch_sim.py), 40,000 games per list, seed 7; var/sleeved.*.out and var/F2.*.out. Draw on T1, first mulligan free, then London 6/5. Kill = 40 combat damage to one opponent. Attack model: creatures held since the turn began or with haste attack; earthbended lands have haste; a land creature tapped for mana does not attack; each Bumi combat-damage event untaps all lands and adds one land-only combat; Toph = land creatures double strike. Chump: each combat the opponent blocks the biggest non-evasive attacker with a 1/1; trample pushes power − 1 through. The sleeved list's three illegal landscapes are simulated as tapped fetches."
+  },
+  "swaps": [
+    {
+      "out": "Sheltering Landscape",
+      "in": "Riveteers Overlook",
+      "role": "land (illegal fix)",
+      "reason": "Its cycling cost has {W}, so its colour identity is GRW (CR 903.4) and it is illegal under Bumi. Riveteers Overlook does the same job for R/G: it fetches a basic Mountain or Forest tapped, and the land plus the fetched basic are two landfall triggers for Mightform Harmonizer and Earthbender Ascension.",
+      "quoteOut": "Cycling {R}{G}{W}",
+      "quoteIn": "When this land enters, sacrifice it. When you do, search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped",
+      "evidence": "Gate identity PASS; fixes with fetches vs basics vs Yavimaya all within noise: var/L1–L7 open P(≤T6) .547–.569, sleeved .550. Owned 2, used 0; the Gilanra proposal (alena-gilanra/consistency.txt) wants the other copy.",
+      "verdict": "recommended"
+    },
+    {
+      "out": "Tranquil Landscape",
+      "in": "Yavimaya, Cradle of Growth",
+      "role": "land (illegal fix)",
+      "reason": "Cycling {G}{W}{U} makes it GUW (CR 903.4), so it is illegal. Yavimaya enters untapped and makes the five colourless utility lands (Strip Mine, Cryptic Caves, Crawling Barrens, Rogue's Passage, Rumble Arena) tap for {G}. It also turns [[Rockalanche]] into earthbend X = every land and gives [[Nissa, Who Shakes the World]]'s extra {G} to every land.",
+      "quoteOut": "Cycling {G}{W}{U}",
+      "quoteIn": "Each land is a Forest in addition to its other land types.",
+      "evidence": "var/L6 (Overlook, Yavimaya, Terramorphic) open .551 / chump .174 vs sleeved .550 / .169; links: Rockalanche, Nissa. Unavailable since 2026-10-08: the only copy is sleeved in Beledros.",
+      "verdict": "recommended"
+    },
+    {
+      "out": "Twisted Landscape",
+      "in": "Terramorphic Expanse",
+      "role": "land (illegal fix)",
+      "reason": "Cycling {B}{R}{G} makes it BGR (CR 903.4), so it is illegal. Terramorphic Expanse is the same fetch without the cycling: either basic, tapped, and two landfall triggers. Owned 4; since 2026-10-08 one is sleeved in Beledros, 3 free.",
+      "quoteOut": "Cycling {B}{R}{G}",
+      "quoteIn": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.",
+      "evidence": "var/L1–L7 (all within noise); Evolving Wilds, Fabled Passage and Sheltered Thicket are in the Gilanra proposal",
+      "verdict": "recommended"
+    },
+    {
+      "out": "Lotus Field",
+      "in": "Lair of the Hydra",
+      "role": "land",
+      "reason": "Lotus Field enters tapped and sacrifices two lands, which costs two earthbend targets and two lands that would untap under Bumi, for +1 mana. Lair of the Hydra is a {G} land, and after Bumi untaps everything its {X}{G} makes it an X/X land creature for the land-only combat.",
+      "quoteOut": "When this land enters, sacrifice two lands.",
+      "quoteIn": "{X}{G}: Until end of turn, this land becomes an X/X green Hydra creature. It's still a land.",
+      "evidence": "var/BlotL vs B: open P(≤T6) +.029, chump P(≤T7) +.031, screwed .056 → .024; leave-one-out var/Xlair vs F2: −.021 / −.029",
+      "verdict": "optional"
+    },
+    {
+      "out": "Tectonic Split",
+      "in": "Exotic Orchard",
+      "role": "land (33 → 34)",
+      "reason": "Tectonic Split costs 6 mana and half your lands, which means half the land army or half the earthbend targets. It adds no damage, because the deck has few sinks for triple mana. The 34th land is an untapped Exotic Orchard. With Yavimaya out, every opponent land is a Forest, so the Orchard makes at least {G}.",
+      "quoteOut": "As an additional cost to cast this spell, sacrifice half the lands you control, rounded up.",
+      "quoteIn": "{T}: Add one mana of any color that a land an opponent controls could produce.",
+      "evidence": "var/BtecX vs B: open +.033, chump +.026, mean −.09 / −.10; leave-one-out var/Xorch vs F2: −.019 / −.027. Orchard owned 5, used 4.",
+      "verdict": "optional"
+    },
+    {
+      "out": "Haste Magic",
+      "in": "Lavaspur Boots",
+      "role": "haste",
+      "reason": "Haste Magic gives haste once. Boots give Bumi haste on every cast, including recasts after removal, for {1} to equip, plus ward {1}. That puts Bumi's double combat on the turn he lands.",
+      "quoteOut": "Target creature gets +3/+1 and gains haste until end of turn.",
+      "quoteIn": "Equipped creature gets +1/+0 and has haste and ward {1}.",
+      "evidence": "small gain, about 3 standard errors: var/boots vs base open +.015, spells +.20; leave-one-out var/Xboots vs F2: −.009 / −.011, spells −.18",
+      "verdict": "optional"
+    },
+    {
+      "out": "Circuitous Route",
+      "in": "Cultivate",
+      "role": "ramp",
+      "reason": "Route costs 4 for two tapped basics. Cultivate costs 3 for one tapped basic plus one in hand, so a T2 dork into T3 Cultivate gives Bumi on T4, and the second land is next turn's drop.",
+      "quoteOut": "Search your library for up to two basic land cards and/or Gate cards, put them onto the battlefield tapped",
+      "quoteIn": "put one onto the battlefield tapped and the other into your hand",
+      "evidence": "small gain, about 3 standard errors: var/cultR vs base open +.017, 4th land T4 +.012; leave-one-out var/Xcult vs F2: −.008 / −.012. Cultivate owned 2: since 2026-10-08 Cabbage and Beledros use both, so none is free.",
+      "verdict": "optional"
+    },
+    {
+      "out": "Earth Kingdom General",
+      "in": "Nissa, Who Shakes the World",
+      "role": "earthbend engine",
+      "reason": "The General earthbends 2 once. Nissa makes a new 3-counter land creature with haste and vigilance every turn. Vigilance means it attacks and still taps for mana. She also doubles the mana of every land under Yavimaya, which is doubled again by Bumi's untap.",
+      "quoteOut": "When this creature enters, earthbend 2.",
+      "quoteIn": "Put three +1/+1 counters on up to one target noncreature land you control. Untap it. It becomes a 0/0 Elemental creature with vigilance and haste that's still a land.",
+      "evidence": "var/nissaE vs base chump +.020, mean −.07; leave-one-out var/Xnissa vs F2: chump −.023, spells −.42; synergy links 21 → 33",
+      "verdict": "optional"
+    },
+    {
+      "out": "Owlbear Cub",
+      "in": "Overrun",
+      "role": "finisher",
+      "reason": "Owlbear Cub's trigger counts the defending player's lands, so before then it is a 3/3, and it cannot attack in Bumi's land-only combat. Overrun lasts until end of turn, so every land creature gets +3/+3 and trample in both combats. Trample also beats chump blockers.",
+      "quoteOut": "Whenever this creature attacks a player who controls eight or more lands",
+      "quoteIn": "Creatures you control get +3/+3 and gain trample until end of turn.",
+      "evidence": "var/ovOwl vs base chump +.017, mean −.06; leave-one-out var/Xov vs F2: chump −.019; synergy links 8 → 30",
+      "verdict": "optional"
+    },
+    {
+      "out": "Faithless Looting",
+      "in": "Rampant Growth",
+      "role": "ramp",
+      "reason": "Looting is card disadvantage and links to no card in the deck. Rampant Growth puts a land on the battlefield, which is an earthbend target that untaps under Bumi. It also turns 2-land hands into keeps (2 lands + ramp).",
+      "quoteOut": "Draw two cards, then discard two cards.",
+      "quoteIn": "Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle.",
+      "evidence": "var/rgLoot2 vs base2: keep 7 +.018, open +.013, chump +.021; F1rg vs F1: open +.019, chump +.022. One copy owned: Thrill / Seize slots measured the same (rgThr2, rgSeize2). Leave-one-out var/Xrg vs F2: −.014 / −.023, keep 7 −.010.",
+      "verdict": "optional"
+    },
+    {
+      "out": "Veil of Summer",
+      "in": "Silkguard",
+      "role": "protection",
+      "reason": "Veil stops only blue and black removal. At X = 0, Silkguard costs the same {G} and gives hexproof to every modified creature. Every earthbended land has +1/+1 counters, so it is modified (CR 700.9), and one card protects Bumi with a counter plus the whole land army from any colour.",
+      "quoteOut": "You and permanents you control gain hexproof from blue and from black until end of turn.",
+      "quoteIn": "Auras, Equipment, and modified creatures you control gain hexproof until end of turn.",
+      "evidence": "synergy links 0 → 22 at equal cost (synergy.py on var/B.txt, var/F1sk.txt); the goldfish does not model removal",
+      "verdict": "optional"
+    }
+  ],
+  "keepers": [
+    {
+      "card": "Tablet of Discovery",
+      "why": "A 3-MV rock that does not untap under Bumi. Every owned replacement tested within noise: Kami of Whispered Hopes (var/kamiT +.009 / +.006), Cultivate (var/cultT +.010 / +.012). The one spare Cultivate went to Circuitous Route's slot."
+    },
+    {
+      "card": "Commander's Sphere",
+      "why": "Same as Tablet: Kami of Whispered Hopes measured +.007 / +.001 (var/kamiS). It fixes both colours, and \"Sacrifice this artifact: Draw a card\" late."
+    },
+    {
+      "card": "Seismic Tutelage",
+      "why": "\"Whenever enchanted creature attacks, double the number of +1/+1 counters on it\" triggers in Bumi's extra combat too, so it doubles twice per turn on a land creature. Hardened Scales measured −.010 open (var/scales)."
+    },
+    {
+      "card": "Crystalline Armor",
+      "why": "+1/+1 per land and trample on Bumi or a land creature. Innkeeper's Talent measured +.002 / −.017 (var/inn)."
+    },
+    {
+      "card": "Amarant Coral",
+      "why": "\"it deals that much damage to each other opponent\". The one-opponent goldfish undercounts this card by up to 3×. Overrun into its slot measured the same as into Owlbear Cub's, and Owlbear is the weaker card (var/ovAma)."
+    },
+    {
+      "card": "Strip Mine",
+      "why": "Kills a utility land. Earthbended and sacrificed, it returns tapped (CR 701.66a) for a second use. Strip Mine → land measured +.010 / −.001, which is noise (var/stripF)."
+    },
+    {
+      "card": "Heartbeat of Spring",
+      "why": "Doubles land mana, and Bumi untaps the lands, so it pays twice on the kill turn. Domri, Anarch of Bolas measured +.009 / +.006, which is noise (var/domri)."
+    },
+    {
+      "card": "Thrill of Possibility",
+      "why": "Filtering with no links, but only one Rampant Growth is owned, and it went to Faithless Looting's slot. Thrill and Seize the Spoils measured the same (var/rgThr2, rgSeize2)."
+    },
+    {
+      "card": "Earth Rumble",
+      "why": "Earthbend 2 plus a fight is removal. Nissa took Earth Kingdom General's slot instead: var/nissaR vs nissaE differ by .008 open, which is noise, and the General has no interaction."
+    },
+    {
+      "card": "Fling",
+      "why": "Sacrifice an earthbended land creature: it deals its power to any target and the land returns tapped (CR 701.66a)."
+    }
+  ],
+  "nearTies": [
+    {
+      "kept": "Savage Smash",
+      "alt": "Rocky Rebuke",
+      "note": "Rebuke is {1}{G}, instant and one-sided, so it is more efficient, but both link to the same 18 power-4 cards. Below the bar of a sim gain or +2 links."
+    },
+    {
+      "kept": "Snakeskin Veil",
+      "alt": "Tyvar's Stand",
+      "note": "Stand adds indestructible against wraths; Snakeskin's counter links it to 16 cards."
+    },
+    {
+      "kept": "Frog Butler",
+      "alt": "Ilysian Caryatid",
+      "note": "Caryatid makes two mana with a power-4 creature. var/cary +.007 / +.005, which is noise, and the Gilanra proposal holds it."
+    },
+    {
+      "kept": "Terramorphic Expanse",
+      "alt": "Forest",
+      "note": "Basics for the three fixes measured open .569 vs .551 (var/L4 vs L6), but the registry shows 65/65 Forests and 26/26 Mountains already in decks. Use spare basics if the operator has them."
+    },
+    {
+      "kept": "Cultivate",
+      "alt": "Skyshroud Claim",
+      "note": "Both Cultivates are sleeved since 2026-10-08 (Cabbage, Beledros). Claim gives two untapped Forests for 4 mana. It measured +.000 / −.002 in Circuitous Route's slot (var/claim), against Cultivate's +.017 open (var/cultR), and the Gilanra proposal holds it."
+    }
+  ],
+  "mulligan": {
+    "keep": [
+      "3–5 lands with a 2-MV ramp piece ([[Nature's Lore]], [[Farseek]], [[Rampant Growth]], [[Elvish Mystic]]): Bumi on T4–5.",
+      "2 lands + [[Sol Ring]] or a 1–2 MV ramp spell: the London keep rule; the deck has 14 ramp pieces.",
+      "3 lands + [[Toph, the Blind Bandit]] or [[Earthbender Ascension]] + a 4-drop: first land creature on T3.",
+      "4 lands + [[Toph, Greatest Earthbender]] or [[Lavaspur Boots]]: Bumi swings the turn he lands."
+    ],
+    "mulligan": [
+      "0–1 land, even with Sol Ring.",
+      "2 lands and no ramp: 4th land on T4 falls under .5.",
+      "6–7 lands, or 5 lands with no spell below MV 4.",
+      "2 lands and only 5–6 drops ([[Flopsie, Bumi's Buddy]], [[Quilled Greatwurm]], [[Germination Practicum]]).",
+      "Only Mountains and red sources with a hand of {G}{G} cards: 21 green sources vs 13 red, so green comes, but slowly."
+    ]
+  },
+  "pilotRules": [
+    "Before combat, never tap a land creature for mana unless Bumi will connect: a tapped land creature cannot attack, and Bumi's trigger untaps it for the land-only combat.",
+    "Earthbend [[Rumble Arena]] first: it has vigilance, so as a land creature it attacks and still taps for mana (CR 702.20b).",
+    "[[Temur Battle Rage]] goes on Bumi, not on a land: each Bumi damage step adds one more land-only combat (CR 500.8).",
+    "Cast [[Awakening of Vitu-Ghazi]] after Bumi's untap and before the extra combat: the 9/9 has haste and joins the land-only attack.",
+    "Earthbend before [[Overrun]] and [[Germination Practicum]]: their pumps only apply to creatures on the battlefield at resolution (CR 611.2c).",
+    "[[Halana and Alena, Partners]] trigger at the beginning of every combat, Bumi's extra combat too. Target a land creature, because Bumi cannot attack in that combat.",
+    "Hold [[Silkguard]] or [[Snakeskin Veil]] for removal aimed at Bumi on the kill turn. If an earthbended land dies anyway, it returns tapped.",
+    "Sacrifice an earthbended land to [[Fling]] or [[Roiling Regrowth]]: it comes back tapped. You lose the counters, not the land."
+  ],
+  "sources": [
+    "decks/paper/decks/bumi-unleashed.txt",
+    "verify-2026-10-07/primers/BUMI-BRIEF.md",
+    "verify-2026-10-07/bumi-standalone/build-report.md",
+    "verify-2026-10-07/bumi-standalone/sim.py",
+    "verify-2026-10-07/bumi-standalone/patch_sim.py",
+    "verify-2026-10-07/bumi-standalone/synergy.py",
+    "verify-2026-10-07/bumi-standalone/var/",
+    "verify-2026-10-07/gruul/bumi/build-report.md",
+    "verify-2026-10-07/gruul/refute/rulings.txt",
+    "verify-2026-10-07/gruul/pool.md",
+    "Comprehensive Rules 2026-09-25: 302.6, 500.8, 510.4, 611.2c, 700.9, 701.66a, 702.20b, 903.4"
+  ]
+}

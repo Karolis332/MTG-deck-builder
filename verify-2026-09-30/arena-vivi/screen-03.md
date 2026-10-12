@@ -1,0 +1,151 @@
+screened 450/450, passed 150, last card read: Textbook Tabulator
+- Fiery Annihilation — removal — "Fiery Annihilation deals 5 damage to target creature. Exile up to one target Equipment attached to that creature. If that creature would die this turn, exile it instead." — beats: Planar Incision
+- Teachings of the Archaics — draw — "If an opponent has more cards in hand than you, draw two cards." — beats: Hard Evidence
+- Devoted Duelist — creature payoff — "Flurry — Whenever you cast your second spell each turn, this creature deals 1 damage to each opponent." — beats: Electrostatic Infantry
+- Kick in the Door — Vivi haste/pump — "Put a +1/+1 counter on target creature. That creature gains haste until end of turn" — beats: Impact Tremors
+- Choco-Comet — X burn finisher — "Choco-Comet deals X damage to any target." — beats: Involuntary Employment
+- Scorching Dragonfire — removal — "Scorching Dragonfire deals 3 damage to target creature or planeswalker. If that creature or planeswalker would die this turn, exile it instead." — beats: Planar Incision
+- Northampton Farm — land / Vivi protection — "{1}, {T}: Exile target creature you own. | {2}, {T}, Sacrifice this land: Return a creature card exiled with this land to the battlefield under your control." — beats: Buried Ruin
+- Stonesplitter Bolt — X removal — "Stonesplitter Bolt deals X damage to target creature or planeswalker. If this spell was bargained, it deals twice X damage to that permanent instead." — beats: Planar Incision
+- Wild Unraveling — counter — "As an additional cost to cast this spell, blight 2 or pay {1}. | Counter target spell." — beats: Planar Incision (fills counter density — 3 counters in list)
+- Donatello's Technique — draw — "Sneak {U} | Draw two cards." — beats: Hard Evidence
+- Zaffai and the Tempests — spell engine creature — "Once during each of your turns, you may cast an instant or sorcery spell from your hand without paying its mana cost." — beats: Clinquant Skymage
+- Arcane Infusion — draw / flashback — "Look at the top four cards of your library. You may reveal an instant or sorcery card from among them and put it into your hand. | Flashback {3}{U}{R}" — beats: Hard Evidence
+- Lunatic Pandora — utility artifact — "{2}, {T}: Surveil 1. | {6}, {T}, Sacrifice Lunatic Pandora: Destroy target nonland permanent." — beats: Wayfarer's Bauble
+- Brush Off — counter — "This spell costs {1}{U} less to cast if it targets an instant or sorcery spell. | Counter target spell." — beats: Planar Incision
+- Concerted Defense — counter — "Counter target noncreature spell unless its controller pays {1} plus an additional {1} for each creature in your party." — beats: Planar Incision
+- Giantfall — removal — "Target creature you control deals damage equal to its power to target creature an opponent controls. | • Destroy target artifact." — beats: Planar Incision
+- We Say Thee Nay! — counter — "Counter target spell unless its controller pays {2}." — beats: Planar Incision
+- Confusticate and Bebother — counter / draw — "• Counter target spell unless its controller pays {4}. | • Draw two cards, then discard a card." — beats: Deduce
+- Twin Bolt — removal — "Twin Bolt deals 2 damage divided as you choose among one or two targets." — beats: Planar Incision
+- Electro's Bolt — removal — "Electro's Bolt deals 4 damage to target creature. | Mayhem {1}{R}" — beats: Planar Incision
+- Fresh Start — removal aura — "Flash | Enchant creature | Enchanted creature gets -5/-0 and loses all abilities." — beats: Planar Incision
+- Hard-Won Jitte — Vivi finisher — "Equipped creature has double strike. | Equip {2}" — beats: Waterbender Ascension
+- Seize the Secrets — draw — "This spell costs {1} less to cast if you've committed a crime this turn. | Draw two cards." — beats: Hard Evidence
+- Felonious Rage — haste — "Target creature you control gets +2/+0 and gains haste until end of turn." — beats: Impact Tremors
+- Chase Inspiration — Vivi protection — "Target creature you control gets +0/+3 and gains hexproof until end of turn." — fills: protection (none in list)
+- Procrastinate — X removal — "Tap target creature. Put twice X stun counters on it." — beats: Planar Incision
+- Lost in Memories — flashback engine — "target instant or sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost." — beats: Curiosity
+- Hydro-Channeler — mana — "{T}: Add {U}. Spend this mana only to cast an instant or sorcery spell. | {1}, {T}: Add one mana of any color. Spend this mana only to cast an instant or sorcery spell." — beats: Clinquant Skymage
+- Experimental Overload — token + regrowth — "Create an X/X blue and red Weird creature token, where X is the number of instant and sorcery cards in your graveyard. Then you may return an instant or sorcery card from your graveyard to your hand." — beats: Involuntary Employment
+- School Daze — counter / draw — "• Do Homework — Draw three cards. | • Fight Crime — Counter target spell. Draw a card." — beats: Involuntary Employment
+- Arcane Flight — Vivi evasion — "Enchanted creature gets +1/+1 and has flying." — beats: Waterbender Ascension
+- Glacial Dragonhunt — draw + removal — "Draw a card, then you may discard a card. When you discard a nonland card this way, Glacial Dragonhunt deals 3 damage to target creature." — beats: Deduce
+- Muse Seeker — draw engine creature — "Opus — Whenever you cast an instant or sorcery spell, draw a card. Then discard a card unless five or more mana was spent to cast that spell." — beats: Clinquant Skymage
+- Desculpting Blast — bounce — "Return target nonland permanent to its owner's hand." — beats: Planar Incision
+- Omni-Cheese Pizza — cantrip artifact / mana — "When this artifact enters, draw a card. | {1}, {T}, Sacrifice this artifact: Add one mana of any color." — beats: Wayfarer's Bauble
+- Illvoi Light Jammer — Vivi protection — "Flash | When this Equipment enters, attach it to target creature you control. That creature gains hexproof until end of turn." — fills: protection (none in list)
+- TCRI Building — land — "This land enters tapped. | When this land enters, you gain 1 life. | {T}: Add {U} or {R}." — beats: Terramorphic Expanse
+- Riddles in the Dark — draw — "Look at the top four cards of your library and separate them into a face-down pile and a face-up pile. An opponent chooses one of the piles. Put that pile into your hand and the other into your graveyard." — beats: Deduce
+- Dragonfly Swarm — creature — "Flying, ward {1} | This creature's power is equal to the number of noncreature, nonland cards in your graveyard." — beats: Clinquant Skymage
+- Storm of Memories — storm finisher — "Storm | Exile an instant or sorcery card with mana value 3 or less from your graveyard at random. You may cast it without paying its mana cost." — beats: Involuntary Employment
+- Overwhelming Surge — removal — "• Overwhelming Surge deals 3 damage to target creature. | • Destroy target noncreature artifact." — beats: Planar Incision
+- Ether — spell copy — "{T}, Exile this artifact: Add {U}. When you next cast an instant or sorcery spell this turn, copy that spell." — beats: Panharmonicon
+- Jaya, Venerated Firemage — damage amplifier — "If another red source you control would deal damage to a permanent or player, it deals that much damage plus 1 to that permanent or player instead. | −2: Jaya deals 2 damage to any target." — beats: Impact Tremors
+- Uncover the Moon-Letters — draw engine — "Whenever you cast a noncreature spell, you may draw X cards, where X is the amount of mana spent to cast that spell. If you do, discard two cards." — beats: Impact Tremors
+- Chandra, Novice Pyromancer — ritual / burn — "−1: Add {R}{R}. | −2: Chandra deals 2 damage to any target." — beats: Involuntary Employment
+- Panicked Altisaur — burn body — "{T}: This creature deals 2 damage to each opponent." — beats: Clinquant Skymage
+- Ooze Spill — counter — "Counter target spell. Create a Mutagen token." — beats: Planar Incision
+- Stall Out — removal — "Tap target creature or Vehicle, then put three stun counters on it. | Cycling {2}" — beats: Planar Incision
+- Out of Air — counter — "This spell costs {2} less to cast if it targets a creature spell. | Counter target spell." — beats: Planar Incision
+- Banishing Betrayal — bounce — "Return target nonland permanent to its owner's hand. Surveil 1." — beats: Planar Incision
+- Goblin Goliath — finisher — "{3}{R}, {T}: If a source you control would deal damage to an opponent this turn, it deals double that damage to that player instead." — beats: Involuntary Employment
+- Metamorphic Blast — spree removal / draw — "+ {1} — Until end of turn, target creature becomes a white Rabbit with base power and toughness 0/1. | + {3} — Target player draws two cards." — beats: Deduce
+- Mica, Reader of Ruins — copy engine — "Whenever you cast an instant or sorcery spell, you may sacrifice an artifact. If you do, copy that spell and you may choose new targets for the copy." — beats: Clinquant Skymage
+- Colorstorm Stallion — creature — "Opus — Whenever you cast an instant or sorcery spell, this creature gets +1/+1 until end of turn. If five or more mana was spent to cast that spell, create a token that's a copy of this creature." — beats: Electrostatic Infantry
+- Jadzi, Steward of Fate // Oracle's Gift — draw / X sink — "When Jadzi enters, draw two cards, then discard two cards. | // | Create X 0/0 green and blue Fractal creature tokens, then put X +1/+1 counters on each Fractal you control." — beats: Clinquant Skymage
+- Aquitect's Defenses — Vivi protection — "Flash | Enchant creature you control | When this Aura enters, enchanted creature gains hexproof until end of turn." — fills: protection (none in list)
+- Ruinous Rampage — burn — "• Ruinous Rampage deals 3 damage to each opponent. | • Exile all artifacts with mana value 3 or less." — beats: Impact Tremors
+- Frantic Confrontation — X pump finisher — "Target creature you control gets +X/+0 and gains first strike and trample until end of turn." — beats: Waterbender Ascension
+- Change the Equation — counter — "• Counter target spell with mana value 2 or less. | • Counter target red or green spell with mana value 6 or less." — beats: Planar Incision
+- Inverted Iceberg // Iceberg Titan — cantrip artifact — "When this artifact enters, mill a card, then draw a card." — beats: Hard Evidence
+- Sleep Magic — removal aura — "When this Aura enters, tap enchanted creature. | Enchanted creature doesn't untap during its controller's untap step." — beats: Planar Incision
+- Ferocification — haste / evasion — "• Target creature you control gets +2/+0 until end of turn. | • Target creature you control gains menace and haste until end of turn." — beats: Waterbender Ascension
+- Enigma Drake — creature — "Flying | Enigma Drake's power is equal to the number of instant and sorcery cards in your graveyard." — beats: Clinquant Skymage
+- Uthros Scanship — draw artifact — "When this Spacecraft enters, draw two cards, then discard a card." — beats: Hard Evidence
+- Ringing Strike Mastery — removal aura — "Enchanted creature doesn't untap during its controller's untap step. | Enchanted creature has "{5}: Untap this creature."" — beats: Planar Incision
+- Blossombind — removal aura — "When this Aura enters, tap enchanted creature. | Enchanted creature can't become untapped and can't have counters put on it." — beats: Planar Incision
+- Lodestone Needle // Guidestone Compass — flash stun — "Flash | When this artifact enters, tap up to one target artifact or creature and put two stun counters on it." — beats: Planar Incision
+- Ultros, Obnoxious Octopus — creature — "Whenever you cast a noncreature spell, if at least four mana was spent to cast it, tap target creature an opponent controls and put a stun counter on it." — beats: Electrostatic Infantry
+- Strangle — removal — "Strangle deals 3 damage to target creature or planeswalker." — beats: Planar Incision
+- Sear — removal — "Sear deals 4 damage to target creature or planeswalker." — beats: Planar Incision
+- Does Machines — draw — "When this Class enters, mill two cards, draw two cards, then discard two cards." — beats: Hard Evidence
+- Full Bore — pump — "Target creature you control gets +3/+2 until end of turn." — beats: Waterbender Ascension
+- Frozen in Ice — removal aura — "When this Aura enters, tap enchanted creature. | Enchanted creature loses all abilities and can't become untapped." — beats: Planar Incision
+- Kumano Faces Kakkazan // Etching of Kumano — cheap ping — "I — This Saga deals 1 damage to each opponent and each planeswalker they control." — beats: Impact Tremors
+- End-Blaze Epiphany — X removal — "End-Blaze Epiphany deals X damage to target creature." — beats: Planar Incision
+- Vibrant Outburst — burn — "Vibrant Outburst deals 3 damage to any target. Tap up to one target creature." — beats: Abrade
+- Saheeli's Lattice // Mastercraft Raptor — draw artifact — "When this artifact enters, you may discard a card. If you do, draw two cards." — beats: Hard Evidence
+- Key to the Side-Door — evasion — "{2}, {T}: Target creature can't be blocked this turn." — beats: Rogue's Passage
+- Make Disappear — counter — "Counter target spell unless its controller pays {2}." — beats: Planar Incision
+- Take the Fall — cantrip — "Target creature gets -1/-0 until end of turn. It gets -4/-0 until end of turn instead if you control an outlaw. | Draw a card." — beats: Hard Evidence
+- Cryoshatter — removal aura — "Enchanted creature gets -5/-0. | When enchanted creature becomes tapped or is dealt damage, destroy it." — beats: Planar Incision
+- Blooming Blast — burn — "Blooming Blast deals 2 damage to target creature. If the gift was promised, Blooming Blast also deals 3 damage to that creature's controller." — beats: Planar Incision
+- Geist of Saint Thalia — cost reducer — "Flying | Noncreature spells you cast cost {1} less to cast." — beats: Tempest Angler
+- Hearth Elemental // Stoke Genius — draw — "Discard your hand, then draw two cards." — beats: Hard Evidence
+- Plunder the Trollshaws — cantrip / flashback — "Draw a card. If this spell was cast from a graveyard, draw two cards instead. | Flashback {3}{U}" — beats: Hard Evidence
+- Pedal to the Metal — X pump — "Target creature gets +X/+0 and gains first strike until end of turn." — beats: Waterbender Ascension
+- Dependable Quinjet — mana rock — "Flying | {T}: Add one mana of any color. | Crew 4" — beats: Chromatic Lantern
+- Shackle Slinger — creature — "Whenever you cast your second spell each turn, choose target creature an opponent controls. If it's tapped, put a stun counter on it. Otherwise, tap it." — beats: Electrostatic Infantry
+- Loki Laufeyson — copy engine — "{1}, {T}: When you next cast an instant or sorcery spell with mana value less than or equal to Loki's power this turn, copy that spell." — beats: Electrostatic Infantry
+- Retro-Mutation — removal aura — "Flash | Enchant creature | Enchanted creature is a Turtle with base power and toughness 0/1. It can't attack and loses all abilities." — beats: Planar Incision
+- Stop Cold — removal aura — "Flash | Enchant artifact or creature | When this Aura enters, tap enchanted permanent. | Enchanted permanent loses all abilities and doesn't untap during its controller's untap step." — beats: Planar Incision
+- Unnerving Grasp — bounce — "Return up to one target nonland permanent to its owner's hand. Manifest dread." — beats: Planar Incision
+- Roku's Mastery — X removal — "Roku's Mastery deals X damage to target creature. If X is 4 or more, scry 2." — beats: Planar Incision
+- Riverwalk Technique — counter / tuck — "• The owner of target nonland permanent puts it on their choice of the top or bottom of their library. | • Counter target noncreature spell." — beats: Planar Incision
+- Channeled Dragonfire — burn — "Channeled Dragonfire deals 2 damage to any target. | Harmonize {5}{R}{R}" — beats: Planar Incision
+- Violent Urge — pump — "Target creature gets +1/+0 and gains first strike until end of turn. | Delirium — If there are four or more card types among cards in your graveyard, that creature gains double strike until end of turn." — beats: Waterbender Ascension
+- Sorcerer's Wand — ping — "Equipped creature has "{T}: This creature deals 1 damage to target player or planeswalker. If this creature is a Wizard, it deals 2 damage instead."" — beats: Impact Tremors
+- Death to Our Enemies — engine / finisher — "Whenever you cast a noncreature spell, create a tapped Treasure token and put a plan counter on this enchantment. | When the fourth plan counter is put on this enchantment, sacrifice it. When you do, it deals 7 damage divided as you choose among one or two targets." — beats: Impact Tremors
+- Cursed Windbreaker — Vivi evasion — "Equipped creature has flying. | Equip {3}" — beats: Waterbender Ascension
+- Burn, Burn, Tree and Fern — removal + ramp — "I — This Saga deals 6 damage to target creature an opponent controls. | II — Destroy target artifact an opponent controls. | III, IV — Add {R}." — beats: Involuntary Employment
+- Fractal Anomaly — token — "Create a 0/0 green and blue Fractal creature token and put X +1/+1 counters on it, where X is the number of cards you've drawn this turn." — beats: Hard Evidence
+- Plasma Bolt — burn — "Plasma Bolt deals 2 damage to any target. | Void — Plasma Bolt deals 3 damage instead if a nonland permanent left the battlefield this turn or a spell was warped this turn." — beats: Planar Incision
+- Torch the Tower — removal — "Torch the Tower deals 2 damage to target creature or planeswalker. If this spell was bargained, instead it deals 3 damage to that permanent and you scry 1." — beats: Planar Incision
+- Rig for War — pump — "Target creature gets +3/+0 and gains reach and first strike until end of turn." — beats: Waterbender Ascension
+- Ambitious Assault — pump / cantrip — "Creatures you control get +2/+0 until end of turn. If you control a modified creature, draw a card." — beats: Waterbender Ascension
+- Impractical Joke — removal — "Damage can't be prevented this turn. Impractical Joke deals 3 damage to up to one target creature or planeswalker." — beats: Planar Incision
+- I Am Iron Man — cantrip — "Until end of turn, target artifact or creature becomes an artifact creature with base power and toughness 4/4 and gains flying. | Draw a card." — beats: Hard Evidence
+- Deny Entry — counter — "Counter target creature spell. Draw a card, then discard a card." — beats: Planar Incision
+- Brackish Blunder — bounce — "Return target creature to its owner's hand. If it was tapped, create a Map token." — beats: Planar Incision
+- Steamcore Scholar — draw creature — "Flying, vigilance | When this creature enters, draw two cards. Then discard two cards unless you discard an instant or sorcery card or a creature card with flying." — beats: Clinquant Skymage
+- Futurist Forge — cantrip artifact — "When this artifact enters, draw a card. | {3}{U}, Sacrifice this artifact: Draw two cards." — beats: Hard Evidence
+- Cinder Strike — removal — "Cinder Strike deals 2 damage to target creature. It deals 4 damage to that creature instead if this spell's additional cost was paid." — beats: Planar Incision
+- Ureni's Rebuff — bounce — "Return target creature to its owner's hand. | Harmonize {5}{U}" — beats: Planar Incision
+- Torch the Witness — X removal — "Torch the Witness deals twice X damage to target creature. If excess damage was dealt to that creature this way, investigate." — beats: Planar Incision
+- April O'Neil, Hacktivist — draw engine — "At the beginning of your end step, draw a card for each card type among spells you've cast this turn." — beats: Clinquant Skymage
+- Falcon's Wing Harness — Vivi evasion + protection — "When this Equipment enters, attach it to target creature you control. | Equipped creature gets +1/+1 and has flying and ward {1}." — beats: Waterbender Ascension
+- Giant's Boulder — mana rock / cantrip — "When this artifact enters, scry 2. | {1}, {T}: Add one mana of any color. | {7}, {T}, Sacrifice this artifact: Destroy target permanent." — beats: Wayfarer's Bauble
+- Tweeze — burn — "Tweeze deals 3 damage to any target. You may discard a card. If you do, draw a card." — beats: Abrade
+- Hidetsugu's Second Rite — finisher — "If target player has exactly 10 life, Hidetsugu's Second Rite deals 10 damage to that player." — beats: Involuntary Employment
+- Kang the Conqueror — extra-turn mana sink — "Flying | Power-up — {5}{U}{U}{U}: Put a +1/+1 counter on Kang. Take an extra turn after this one." — beats: Clinquant Skymage
+- Betrayer's Bargain — removal — "Betrayer's Bargain deals 5 damage to target creature. If that creature would die this turn, exile it instead." — beats: Planar Incision
+- Manhole Missile — removal — "Manhole Missile deals 3 damage to target creature. You may put a card from your hand on the bottom of your library. If you do, draw a card." — beats: Planar Incision
+- Uncharted Voyage — removal — "Target creature's owner puts it on their choice of the top or bottom of their library. | Surveil 1." — beats: Planar Incision
+- Samut, Hazoret's Champion — haste — "Creatures you control have haste." — beats: Electrostatic Infantry
+- Most Decrepit Old Bird // Speak Secrets — draw — "Mill four cards, then put an instant or sorcery card from among them into your hand." — beats: Hard Evidence
+- Swat Away — removal / counter — "This spell costs {2} less to cast if a creature is attacking you. | The owner of target spell or creature puts it on their choice of the top or bottom of their library." — beats: Planar Incision
+- Galvanize — removal — "Galvanize deals 3 damage to target creature. If you've drawn two or more cards this turn, Galvanize deals 5 damage to that creature instead." — beats: Planar Incision
+- Smaug's Fury — pump — "Target creature gets +3/+0 and gains reach and first strike until end of turn." — beats: Waterbender Ascension
+- Old Fat Spider Can't See Me — Vivi protection / draw — "I — Target creature you control gains hexproof for as long as this Saga remains on the battlefield. | II — Prevent all damage that would be dealt by up to one target creature for as long as this Saga remains on the battlefield. | III, IV — Draw a card." — fills: protection (none in list)
+- Reiterating Bolt — removal — "Reiterating Bolt deals 3 damage to target creature or planeswalker." — beats: Planar Incision
+- Enchanted River's Grasp — removal aura — "When this Aura enters, tap enchanted creature and remove all counters from it. | Enchanted creature loses all abilities and doesn't untap during its controller's untap step." — beats: Planar Incision
+- Case of the Filched Falcon — cantrip — "When this Case enters, investigate." — beats: Hard Evidence
+- Improvised Club — burn — "As an additional cost to cast this spell, sacrifice an artifact or creature. | Improvised Club deals 4 damage to any target." — beats: Planar Incision
+- Outpace Oblivion — removal + burn — "When this enchantment enters, it deals 5 damage to up to one target creature or planeswalker. | {2}, Sacrifice this enchantment: It deals 2 damage to each player who doesn't have max speed." — beats: Involuntary Employment
+- Deem Inferior — removal — "This spell costs {1} less to cast for each card you've drawn this turn. | The owner of target nonland permanent puts it into their library second from the top or on the bottom." — beats: Planar Incision
+- Mentor's Guidance — draw — "When you cast this spell, copy it if you control a planeswalker, Cleric, Druid, Shaman, Warlock, or Wizard. | Scry 1, then draw a card." — beats: Deduce
+- Madame Web, Clairvoyant — card engine — "You may cast Spider spells and noncreature spells from the top of your library." — beats: Clinquant Skymage
+- Thrór's Map — land tutor / loot — "When Thrór's Map enters, search your library for a basic land card, reveal it, put it into your hand, then shuffle. | {2}, {T}: Draw a card, then discard a card." — beats: Wayfarer's Bauble
+- Molten Exhale — removal — "Molten Exhale deals 4 damage to target creature or planeswalker." — beats: Planar Incision
+- Skycrash — artifact removal / cycler — "Destroy target artifact. | Cycling {R}" — beats: Planar Incision
+- Temporal Cleansing — removal — "Convoke | The owner of target nonland permanent puts it into their library second from the top or on the bottom." — beats: Planar Incision
+- Rover Blades — Vivi finisher — "Double strike | Equipped creature has double strike. | Equip {4}" — beats: Waterbender Ascension
+- Curious Inquiry — draw aura — "Enchanted creature gets +1/+1 and has "Whenever this creature deals combat damage to a player, investigate."" — beats: Waterbender Ascension
+- Spellbook Seeker // Careful Study — draw — "Draw two cards, then discard two cards." — beats: Hard Evidence
+- Flood the Engine — removal aura — "Enchant creature or Vehicle | When this Aura enters, tap enchanted permanent. | Enchanted permanent loses all abilities and doesn't untap during its controller's untap step." — beats: Planar Incision
+- Sugar Coat — removal aura — "Flash | Enchant creature or Food | Enchanted permanent is a colorless Food artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life" and loses all other card types and abilities." — beats: Planar Incision
+- Bespoke Bō — bounce + equipment — "When this Equipment enters, return up to one other target nonland permanent to its owner's hand." — beats: Planar Incision
+- Pigment Wrangler // Striking Palette — spell copy — "When you next cast an instant or sorcery spell this turn, copy that spell. You may choose new targets for the copy." — beats: Panharmonicon
+- Intrude on the Mind — draw — "Reveal the top five cards of your library and separate them into two piles. An opponent chooses one of those piles. Put that pile into your hand and the other into your graveyard." — beats: Deduce
+- Bombard — removal — "Bombard deals 4 damage to target creature." — beats: Planar Incision

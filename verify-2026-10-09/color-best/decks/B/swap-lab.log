@@ -1,0 +1,14 @@
+BASE obj 78.31 DS 66.4 pen 0 {"land":38,"ramp":12,"draw":10,"removal":11,"board_wipe":3,"protection":3} mana=83 curve=89 interaction=68 advantage=75 win=58 synergy=74 meta=50 structure=100
+   0.10  Windswept Heath => Swamp   DS 0.0 pen 0 mana=84 curve=89 interaction=68 advantage=75 win=58 synergy=74 meta=50 structure=100
+   0.13  Wooded Foothills => Swamp   DS 0.0 pen 0 mana=84 curve=89 interaction=68 advantage=75 win=58 synergy=74 meta=50 structure=100
+   0.11  Brokers Hideout => Swamp   DS 0.0 pen 0 mana=84 curve=89 interaction=68 advantage=75 win=58 synergy=74 meta=50 structure=100
+   0.00  Cabaretti Courtyard => Fabled Passage   DS 0.0 pen 0 mana=84 curve=89 interaction=68 advantage=75 win=58 synergy=74 meta=50 structure=100
+   0.00  Mana Confluence => Swamp   DS 0.0 pen 0 mana=83 curve=89 interaction=68 advantage=75 win=58 synergy=74 meta=50 structure=100
+   0.10  Dark Depths => Bojuka Bog   DS 0.0 pen 0 mana=84 curve=89 interaction=68 advantage=75 win=58 synergy=74 meta=50 structure=100
+   0.00  Great Hall of the Citadel => Swamp   DS 0.0 pen 0 mana=84 curve=89 interaction=68 advantage=75 win=58 synergy=74 meta=50 structure=100
+  -1.83  Demon's Horn => Sol Ring   DS 0.0 pen 1 mana=83 curve=89 interaction=68 advantage=75 win=58 synergy=74 meta=50 structure=100
+   0.00  Fellwar Stone => Arcane Signet   DS 0.0 pen 0 mana=83 curve=89 interaction=68 advantage=75 win=58 synergy=74 meta=50 structure=100
+  -2.02  Overzealous Muscle => Defiling Daemogoth   DS 0.0 pen 1 mana=82 curve=89 interaction=65 advantage=75 win=58 synergy=77 meta=50 structure=100
+  -2.02  Soul of New Phyrexia => Emeritus of Woe // Demonic Tutor   DS 0.0 pen 1 mana=82 curve=89 interaction=65 advantage=75 win=58 synergy=74 meta=50 structure=100
+  -0.29  Chromatic Lantern => Shard of the Nightbringer   DS 0.0 pen 0 mana=81 curve=87 interaction=68 advantage=75 win=58 synergy=72 meta=50 structure=100
+ALL  obj 74.53 (-3.77) DS 66.4 pen 2 {"land":38,"ramp":12,"draw":10,"removal":11,"board_wipe":3,"protection":1} mana=87 curve=87 interaction=62 advantage=75 win=58 synergy=74 meta=50 structure=100

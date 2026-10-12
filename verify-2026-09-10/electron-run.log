@@ -1,0 +1,978 @@
+
+[IPC] ensureWatcherRunning called, watcher=false
+[IPC] logPath=C:\Users\QuLeR\AppData\LocalLow\Wizards Of The Coast\MTGA\Player.log, exists=true
+[IPC] Auto-starting watcher with catchUp=true
+[IPC] startWatcherInternal: logPath=C:\Users\QuLeR\AppData\LocalLow\Wizards Of The Coast\MTGA\Player.log, catchUp=true
+[IPC] creating ArenaLogWatcher
+[IPC] warmResolverFromJson: loaded 26572 cards from arena_grp_ids.json
+[IPC] getResolver: dbPath=C:\Users\QuLeR\AppData\Roaming\the-black-grimoire\data\mtg-deck-builder.db, exists=true
+[IPC] getResolver: DB connection failed: Error: The module '\\?\C:\Users\QuLeR\MTG-deck-builder\node_modules\better-sqlite3\build\Release\better_sqlite3.node'
+was compiled against a different Node.js version using
+NODE_MODULE_VERSION 127. This version of Node.js requires
+NODE_MODULE_VERSION 130. Please try re-compiling or re-installing
+the module (for instance, using `npm rebuild` or `npm install`).
+[IPC] calling watcher.start()
+[Telemetry] watcher.start() called, catchUp=true, logPath=C:\Users\QuLeR\AppData\LocalLow\Wizards Of The Coast\MTGA\Player.log
+[Telemetry] backfilled 7 matches from C:\Users\QuLeR\AppData\LocalLow\Wizards Of The Coast\MTGA\Player-prev.log
+[Telemetry] processContentStreaming called, contentLen=5242880, bufferLen=0
+[Telemetry] extracted 988 total blocks, processed=0
+[Telemetry] streaming: 988 blocks → 1146 events [zone_change:115, card_played:47, game_state_update:678, turn_change:27, phase_change:215, life_total_change:30, card_drawn:23, intermission:3, match_start:2, deck_submission:2, mulligan_prompt:2, match_complete:2] | gsm:678 zt:121(hit:115/miss:6) oid:98 shuf:180 del:961 | ctx: grpIds=68 zones=17 chains=214
+[Telemetry] Late-join detected — bootstrapping engine from game_state_update
+[Telemetry] Late-join logger created for match: unknown-1789148431178
+[Telemetry] cardName(87340): cache="Glimpse the Core"
+[Telemetry] cardName(87340): cache="Glimpse the Core"
+[Telemetry] EMIT_LOG[1]: type=action text="You cast Glimpse the Core"
+[IPC] broadcast game-log-entry: type=action text="You cast Glimpse the Core"
+[Telemetry] EMIT_LOG[2]: type=turn text="Turn 2: You"
+[IPC] broadcast game-log-entry: type=turn text="Turn 2: You"
+[Telemetry] turn_change T4, logger=true, actions=2
+[Telemetry] flush(final=false): 3 actions, summary=false
+[IPC] server not ready, queuing telemetry flush (3 actions, queue size: 1)
+[Telemetry] EMIT_LOG: PENDING phase="Precombat Main"
+[Telemetry] cardName(101043): cache="Forest"
+[Telemetry] cardName(87340): cache="Glimpse the Core"
+[Telemetry] EMIT_LOG: PENDING phase="Declare Attackers"
+[Telemetry] EMIT_LOG: PENDING phase="Postcombat Main"
+[Telemetry] EMIT_LOG: PENDING phase="End Step"
+[Telemetry] EMIT_LOG[3]: type=turn text="Turn 3: Opponent"
+[IPC] broadcast game-log-entry: type=turn text="Turn 3: Opponent"
+[Telemetry] turn_change T5, logger=true, actions=9
+[Telemetry] EMIT_LOG[4]: type=life text="You gained 5 life (20 → 25)"
+[IPC] broadcast game-log-entry: type=life text="You gained 5 life (20 → 25)"
+[Telemetry] EMIT_LOG[5]: type=life text="Opponent gained 3 life (20 → 23)"
+[IPC] broadcast game-log-entry: type=life text="Opponent gained 3 life (20 → 23)"
+[Telemetry] cardName(73291): cache="Coveted Prize"
+[Telemetry] cardName(73291): cache="Coveted Prize"
+[Telemetry] EMIT_LOG[6]: type=action text="Opponent drew a card"
+[IPC] broadcast game-log-entry: type=action text="Opponent drew a card"
+[Telemetry] EMIT_LOG: PENDING phase="Draw Step"
+[Telemetry] EMIT_LOG: PENDING phase="Precombat Main"
+[Telemetry] cardName(77233): cache="Yuan-Ti Fang-Blade"
+[Telemetry] cardName(77233): cache="Yuan-Ti Fang-Blade"
+[IPC] broadcast game-log-entry: type=phase text="Precombat Main"
+[Telemetry] EMIT_LOG[8]: type=action text="Opponent cast Yuan-Ti Fang-Blade"
+[IPC] broadcast game-log-entry: type=action text="Opponent cast Yuan-Ti Fang-Blade"
+[Telemetry] cardName(77233): cache="Yuan-Ti Fang-Blade"
+[Telemetry] EMIT_LOG: PENDING phase="Declare Attackers"
+[Telemetry] EMIT_LOG: PENDING phase="Postcombat Main"
+[Telemetry] EMIT_LOG: PENDING phase="End Step"
+[Telemetry] EMIT_LOG[9]: type=turn text="Turn 3: You"
+[IPC] broadcast game-log-entry: type=turn text="Turn 3: You"
+[Telemetry] turn_change T6, logger=true, actions=22
+[Telemetry] EMIT_LOG: PENDING phase="Draw Step"
+[Telemetry] EMIT_LOG: PENDING phase="Precombat Main"
+[Telemetry] cardName(100639): cache="Weather Maker"
+[Telemetry] cardName(100639): cache="Weather Maker"
+[IPC] broadcast game-log-entry: type=phase text="Precombat Main"
+[Telemetry] EMIT_LOG[11]: type=action text="You cast Weather Maker"
+[IPC] broadcast game-log-entry: type=action text="You cast Weather Maker"
+[Telemetry] cardName(100639): cache="Weather Maker"
+[Telemetry] EMIT_LOG: PENDING phase="Declare Attackers"
+[Telemetry] EMIT_LOG: PENDING phase="Postcombat Main"
+[Telemetry] EMIT_LOG: PENDING phase="End Step"
+[Telemetry] EMIT_LOG[12]: type=turn text="Turn 4: Opponent"
+[IPC] broadcast game-log-entry: type=turn text="Turn 4: Opponent"
+[Telemetry] turn_change T7, logger=true, actions=32
+[Telemetry] flush(final=false): 30 actions, summary=false
+[IPC] server not ready, queuing telemetry flush (30 actions, queue size: 2)
+[Telemetry] cardName(96191): cache="Forest"
+[Telemetry] cardName(96191): cache="Forest"
+[Telemetry] EMIT_LOG[13]: type=action text="Opponent drew a card"
+[IPC] broadcast game-log-entry: type=action text="Opponent drew a card"
+[Telemetry] EMIT_LOG: PENDING phase="Draw Step"
+[Telemetry] EMIT_LOG: PENDING phase="Precombat Main"
+[Telemetry] cardName(96191): cache="Forest"
+[Telemetry] cardName(96191): cache="Forest"
+[IPC] broadcast game-log-entry: type=phase text="Precombat Main"
+[Telemetry] EMIT_LOG[15]: type=action text="Opponent played Forest"
+[IPC] broadcast game-log-entry: type=action text="Opponent played Forest"
+[Telemetry] cardName(68714): cache="Chromatic Lantern"
+[Telemetry] cardName(68714): cache="Chromatic Lantern"
+[Telemetry] EMIT_LOG[16]: type=action text="Opponent cast Chromatic Lantern"
+[IPC] broadcast game-log-entry: type=action text="Opponent cast Chromatic Lantern"
+[Telemetry] cardName(68714): cache="Chromatic Lantern"
+[Telemetry] EMIT_LOG: PENDING phase="Declare Attackers"
+[Telemetry] EMIT_LOG: PENDING phase="Declare Blockers"
+[IPC] broadcast game-log-entry: type=phase text="Declare Blockers"
+[Telemetry] EMIT_LOG[18]: type=life text="You took 2 damage (25 → 23)"
+[IPC] broadcast game-log-entry: type=life text="You took 2 damage (25 → 23)"
+[Telemetry] EMIT_LOG: PENDING phase="Combat Damage"
+[Telemetry] EMIT_LOG: PENDING phase="Postcombat Main"
+[Telemetry] cardName(73263): cache="Nimble Trapfinder"
+[Telemetry] cardName(73263): cache="Nimble Trapfinder"
+[IPC] broadcast game-log-entry: type=phase text="Postcombat Main"
+[Telemetry] EMIT_LOG[20]: type=action text="Opponent cast Nimble Trapfinder"
+[IPC] broadcast game-log-entry: type=action text="Opponent cast Nimble Trapfinder"
+[Telemetry] cardName(73263): cache="Nimble Trapfinder"
+[Telemetry] EMIT_LOG: PENDING phase="End Step"
+[Telemetry] EMIT_LOG[21]: type=turn text="Turn 4: You"
+[IPC] broadcast game-log-entry: type=turn text="Turn 4: You"
+[Telemetry] turn_change T8, logger=true, actions=48
+[Telemetry] EMIT_LOG: PENDING phase="Draw Step"
+[Telemetry] EMIT_LOG: PENDING phase="Precombat Main"
+[Telemetry] cardName(101042): cache="Mountain"
+[Telemetry] cardName(101042): cache="Mountain"
+[IPC] broadcast game-log-entry: type=phase text="Precombat Main"
+[Telemetry] EMIT_LOG[23]: type=action text="You played Mountain"
+[IPC] broadcast game-log-entry: type=action text="You played Mountain"
+[Telemetry] cardName(19991): cache="Seething Song"
+[Telemetry] cardName(19991): cache="Seething Song"
+[Telemetry] EMIT_LOG[24]: type=action text="You cast Seething Song"
+[IPC] broadcast game-log-entry: type=action text="You cast Seething Song"
+[Telemetry] cardName(19991): cache="Seething Song"
+[Telemetry] cardName(100624): cache="Raph & Mikey, Troublemakers"
+[Telemetry] cardName(100624): cache="Raph & Mikey, Troublemakers"
+[Telemetry] EMIT_LOG: PENDING phase="Declare Attackers"
+[Telemetry] cardName(51569): cache="Worldspine Wurm"
+[Telemetry] EMIT_LOG: PENDING phase="Declare Blockers"
+[IPC] broadcast game-log-entry: type=phase text="Declare Blockers"
+[Telemetry] EMIT_LOG[26]: type=life text="Opponent took 22 damage (23 → 1)"
+[IPC] broadcast game-log-entry: type=life text="Opponent took 22 damage (23 → 1)"
+[Telemetry] EMIT_LOG: PENDING phase="Combat Damage"
+[Telemetry] EMIT_LOG: PENDING phase="Postcombat Main"
+[Telemetry] EMIT_LOG: PENDING phase="End Step"
+[Telemetry] EMIT_LOG[27]: type=turn text="Turn 5: Opponent"
+[IPC] broadcast game-log-entry: type=turn text="Turn 5: Opponent"
+[Telemetry] turn_change T9, logger=true, actions=62
+[Telemetry] cardName(77323): cache="Barrowin of Clan Undurr"
+[Telemetry] cardName(77323): cache="Barrowin of Clan Undurr"
+[Telemetry] EMIT_LOG[28]: type=action text="Opponent drew a card"
+[IPC] broadcast game-log-entry: type=action text="Opponent drew a card"
+[Telemetry] EMIT_LOG: PENDING phase="Draw Step"
+[Telemetry] EMIT_LOG: PENDING phase="Precombat Main"
+[Telemetry] cardName(73449): cache="Spoils of Adventure"
+[Telemetry] cardName(73449): cache="Spoils of Adventure"
+[IPC] broadcast game-log-entry: type=phase text="Precombat Main"
+[Telemetry] EMIT_LOG[30]: type=action text="Opponent cast Spoils of Adventure"
+[IPC] broadcast game-log-entry: type=action text="Opponent cast Spoils of Adventure"
+[Telemetry] cardName(79417): cache="Command Tower"
+[Telemetry] cardName(79417): cache="Command Tower"
+[Telemetry] EMIT_LOG[31]: type=action text="Opponent drew a card"
+[IPC] broadcast game-log-entry: type=action text="Opponent drew a card"
+[Telemetry] cardName(81190): cache="A-Ellywick Tumblestrum"
+[Telemetry] cardName(81190): cache="A-Ellywick Tumblestrum"
+[Telemetry] EMIT_LOG[31]: COLLAPSED x2: "Opponent drew a card (x2)"
+[IPC] broadcast game-log-update: text="Opponent drew a card (x2)"
+[Telemetry] cardName(93923): cache="Thrill of Possibility"
+[Telemetry] cardName(93923): cache="Thrill of Possibility"
+[Telemetry] EMIT_LOG[32]: type=action text="Opponent drew a card"
+[IPC] broadcast game-log-entry: type=action text="Opponent drew a card"
+[Telemetry] cardName(73449): cache="Spoils of Adventure"
+[Telemetry] EMIT_LOG[33]: type=life text="Opponent gained 3 life (1 → 4)"
+[IPC] broadcast game-log-entry: type=life text="Opponent gained 3 life (1 → 4)"
+[Telemetry] cardName(79417): cache="Command Tower"
+[Telemetry] cardName(79417): cache="Command Tower"
+[Telemetry] EMIT_LOG[34]: type=action text="Opponent played Command Tower"
+[IPC] broadcast game-log-entry: type=action text="Opponent played Command Tower"
+[Telemetry] EMIT_LOG: PENDING phase="Declare Attackers"
+[Telemetry] flush(final=false): 43 actions, summary=false
+[IPC] server not ready, queuing telemetry flush (43 actions, queue size: 3)
+[Telemetry] match_start: logger created for c09dec12-d02f-4dc6-90e8-0b133bd9fbaf
+[Telemetry] EMIT_LOG[1]: type=system text="Play_Brawl_Historic — QuLeR vs thirdofwinter"
+[IPC] broadcast game-log-entry: type=system text="Play_Brawl_Historic — QuLeR vs thirdofwinter"
+[Telemetry] EMIT_LOG[2]: type=life text="QuLeR's life is 25"
+[IPC] broadcast game-log-entry: type=life text="QuLeR's life is 25"
+[Telemetry] EMIT_LOG[3]: type=life text="thirdofwinter's life is 25"
+[IPC] broadcast game-log-entry: type=life text="thirdofwinter's life is 25"
+[Telemetry] EMIT_LOG[4]: type=system text="Opening hand"
+[IPC] broadcast game-log-entry: type=system text="Opening hand"
+[Telemetry] EMIT_LOG[5]: type=turn text="Turn 1: thirdofwinter"
+[IPC] broadcast game-log-entry: type=turn text="Turn 1: thirdofwinter"
+[Telemetry] turn_change T1, logger=true, actions=5
+[Telemetry] EMIT_LOG: PENDING phase="Precombat Main"
+[Telemetry] cardName(93990): cache="Paradise Druid"
+[Telemetry] cardName(93990): cache="Paradise Druid"
+[IPC] broadcast game-log-entry: type=phase text="Precombat Main"
+[Telemetry] EMIT_LOG[7]: type=action text="thirdofwinter played Paradise Druid"
+[IPC] broadcast game-log-entry: type=action text="thirdofwinter played Paradise Druid"
+[Telemetry] cardName(89181): cache="Commercial District"
+[Telemetry] cardName(89181): cache="Commercial District"
+[Telemetry] EMIT_LOG[8]: type=action text="QuLeR cast Commercial District"
+[IPC] broadcast game-log-entry: type=action text="QuLeR cast Commercial District"
+[Telemetry] cardName(93636): cache="Hinterland Sanctifier"
+[Telemetry] EMIT_LOG: PENDING phase="Declare Attackers"
+[Telemetry] EMIT_LOG: PENDING phase="Postcombat Main"
+[Telemetry] EMIT_LOG: PENDING phase="End Step"
+[Telemetry] EMIT_LOG[9]: type=turn text="Turn 1: QuLeR"
+[IPC] broadcast game-log-entry: type=turn text="Turn 1: QuLeR"
+[Telemetry] turn_change T2, logger=true, actions=15
+[Telemetry] cardName(100078): cache="Gruul Signet"
+[Telemetry] cardName(100078): cache="Gruul Signet"
+[Telemetry] EMIT_LOG[10]: type=action text="QuLeR drew Gruul Signet"
+[IPC] broadcast game-log-entry: type=action text="QuLeR drew Gruul Signet"
+[Telemetry] EMIT_LOG: PENDING phase="Draw Step"
+[Telemetry] EMIT_LOG: PENDING phase="Precombat Main"
+[Telemetry] cardName(69407): cache="Stomping Ground"
+[Telemetry] cardName(69407): cache="Stomping Ground"
+[IPC] broadcast game-log-entry: type=phase text="Precombat Main"
+[Telemetry] EMIT_LOG[12]: type=action text="QuLeR played Stomping Ground"
+[IPC] broadcast game-log-entry: type=action text="QuLeR played Stomping Ground"
+[Telemetry] EMIT_LOG: PENDING phase="Declare Attackers"
+[Telemetry] EMIT_LOG: PENDING phase="Postcombat Main"
+[Telemetry] EMIT_LOG: PENDING phase="End Step"
+[Telemetry] EMIT_LOG[13]: type=turn text="Turn 2: thirdofwinter"
+[IPC] broadcast game-log-entry: type=turn text="Turn 2: thirdofwinter"
+[Telemetry] turn_change T3, logger=true, actions=26
+[Telemetry] flush(final=false): 27 actions, summary=false
+[IPC] server not ready, queuing telemetry flush (27 actions, queue size: 4)
+[Telemetry] cardName(73291): cache="Coveted Prize"
+[Telemetry] cardName(73291): cache="Coveted Prize"
+[Telemetry] EMIT_LOG[14]: type=action text="thirdofwinter drew a card"
+[IPC] broadcast game-log-entry: type=action text="thirdofwinter drew a card"
+[Telemetry] EMIT_LOG: PENDING phase="Draw Step"
+[Telemetry] EMIT_LOG: PENDING phase="Precombat Main"
+[Telemetry] cardName(73291): cache="Coveted Prize"
+[Telemetry] cardName(73291): cache="Coveted Prize"
+[IPC] broadcast game-log-entry: type=phase text="Precombat Main"
+[Telemetry] EMIT_LOG[16]: type=action text="thirdofwinter played Coveted Prize"
+[IPC] broadcast game-log-entry: type=action text="thirdofwinter played Coveted Prize"
+[Telemetry] EMIT_LOG: PENDING phase="Declare Attackers"
+[Telemetry] EMIT_LOG: PENDING phase="Declare Blockers"
+[IPC] broadcast game-log-entry: type=phase text="Declare Blockers"
+[Telemetry] EMIT_LOG[18]: type=life text="QuLeR took 1 damage (25 → 24)"
+[IPC] broadcast game-log-entry: type=life text="QuLeR took 1 damage (25 → 24)"
+[Telemetry] EMIT_LOG: PENDING phase="Combat Damage"
+[Telemetry] EMIT_LOG: PENDING phase="Postcombat Main"
+[Telemetry] EMIT_LOG: PENDING phase="End Step"
+[Telemetry] EMIT_LOG[19]: type=turn text="Turn 2: QuLeR"
+[IPC] broadcast game-log-entry: type=turn text="Turn 2: QuLeR"
+[Telemetry] turn_change T4, logger=true, actions=40
+[Telemetry] cardName(87372): cache="Spelunking"
+[Telemetry] cardName(87372): cache="Spelunking"
+[Telemetry] EMIT_LOG[20]: type=action text="QuLeR drew Spelunking"
+[IPC] broadcast game-log-entry: type=action text="QuLeR drew Spelunking"
+[Telemetry] EMIT_LOG: PENDING phase="Draw Step"
+[Telemetry] EMIT_LOG: PENDING phase="Precombat Main"
+[Telemetry] cardName(96183): cache="Island"
+[Telemetry] cardName(96183): cache="Island"
+[IPC] broadcast game-log-entry: type=phase text="Precombat Main"
+[Telemetry] EMIT_LOG[22]: type=action text="QuLeR played Island"
+[IPC] broadcast game-log-entry: type=action text="QuLeR played Island"
+[Telemetry] fingerprint: loaded 0 user decks
+[Telemetry] cardName(100078): cache="Gruul Signet"
+[Telemetry] cardName(100078): cache="Gruul Signet"
+[Telemetry] EMIT_LOG[23]: type=action text="QuLeR cast Gruul Signet"
+[IPC] broadcast game-log-entry: type=action text="QuLeR cast Gruul Signet"
+[Telemetry] fingerprint: loaded 0 user decks
+[Telemetry] cardName(100078): cache="Gruul Signet"
+[Telemetry] EMIT_LOG: PENDING phase="Declare Attackers"
+[Telemetry] EMIT_LOG: PENDING phase="Postcombat Main"
+[Telemetry] EMIT_LOG: PENDING phase="End Step"
+[Telemetry] EMIT_LOG[24]: type=turn text="Turn 3: thirdofwinter"
+[IPC] broadcast game-log-entry: type=turn text="Turn 3: thirdofwinter"
+[Telemetry] turn_change T5, logger=true, actions=52
+[Telemetry] EMIT_LOG: PENDING phase="Draw Step"
+[Telemetry] EMIT_LOG: PENDING phase="Precombat Main"
+[Telemetry] cardName(105182): cache="Forest"
+[Telemetry] cardName(105182): cache="Forest"
+[IPC] broadcast game-log-entry: type=phase text="Precombat Main"
+[Telemetry] EMIT_LOG[26]: type=action text="thirdofwinter played Forest"
+[IPC] broadcast game-log-entry: type=action text="thirdofwinter played Forest"
+[Telemetry] cardName(68714): cache="Chromatic Lantern"
+[Telemetry] cardName(68714): cache="Chromatic Lantern"
+[Telemetry] EMIT_LOG[27]: type=action text="thirdofwinter cast Chromatic Lantern"
+[IPC] broadcast game-log-entry: type=action text="thirdofwinter cast Chromatic Lantern"
+[Telemetry] cardName(93722): cache="Dazzling Angel"
+[Telemetry] EMIT_LOG[28]: type=life text="thirdofwinter gained 1 life (25 → 26)"
+[IPC] broadcast game-log-entry: type=life text="thirdofwinter gained 1 life (25 → 26)"
+[Telemetry] EMIT_LOG: PENDING phase="Declare Attackers"
+[Telemetry] EMIT_LOG: PENDING phase="Declare Blockers"
+[IPC] broadcast game-log-entry: type=phase text="Declare Blockers"
+[Telemetry] EMIT_LOG[30]: type=life text="QuLeR took 1 damage (24 → 23)"
+[IPC] broadcast game-log-entry: type=life text="QuLeR took 1 damage (24 → 23)"
+[Telemetry] EMIT_LOG: PENDING phase="Combat Damage"
+[Telemetry] EMIT_LOG: PENDING phase="Postcombat Main"
+[Telemetry] EMIT_LOG: PENDING phase="End Step"
+[Telemetry] EMIT_LOG[31]: type=turn text="Turn 3: QuLeR"
+[IPC] broadcast game-log-entry: type=turn text="Turn 3: QuLeR"
+[Telemetry] turn_change T6, logger=true, actions=67
+[Telemetry] flush(final=false): 41 actions, summary=false
+[IPC] server not ready, queuing telemetry flush (41 actions, queue size: 5)
+[Telemetry] cardName(73449): cache="Spoils of Adventure"
+[Telemetry] cardName(73449): cache="Spoils of Adventure"
+[Telemetry] EMIT_LOG[32]: type=action text="QuLeR drew Spoils of Adventure"
+[IPC] broadcast game-log-entry: type=action text="QuLeR drew Spoils of Adventure"
+[Telemetry] fingerprint: loaded 0 user decks
+[Telemetry] EMIT_LOG: PENDING phase="Draw Step"
+[Telemetry] EMIT_LOG: PENDING phase="Precombat Main"
+[Telemetry] cardName(87372): cache="Spelunking"
+[Telemetry] cardName(87372): cache="Spelunking"
+[IPC] broadcast game-log-entry: type=phase text="Precombat Main"
+[Telemetry] EMIT_LOG[34]: type=action text="QuLeR cast Spelunking"
+[IPC] broadcast game-log-entry: type=action text="QuLeR cast Spelunking"
+[Telemetry] fingerprint: loaded 0 user decks
+[Telemetry] cardName(87372): cache="Spelunking"
+[Telemetry] cardName(98587): cache="Hallowed Fountain"
+[Telemetry] cardName(98587): cache="Hallowed Fountain"
+[Telemetry] EMIT_LOG[35]: type=action text="QuLeR drew Hallowed Fountain"
+[IPC] broadcast game-log-entry: type=action text="QuLeR drew Hallowed Fountain"
+[Telemetry] fingerprint: loaded 0 user decks
+[Telemetry] cardName(98587): cache="Hallowed Fountain"
+[Telemetry] cardName(98587): cache="Hallowed Fountain"
+[Telemetry] EMIT_LOG[36]: type=action text="QuLeR played Hallowed Fountain"
+[IPC] broadcast game-log-entry: type=action text="QuLeR played Hallowed Fountain"
+[Telemetry] fingerprint: loaded 0 user decks
+[Telemetry] cardName(79718): cache="Takenuma, Abandoned Mire"
+[Telemetry] cardName(79718): cache="Takenuma, Abandoned Mire"
+[Telemetry] EMIT_LOG[37]: type=action text="QuLeR played Takenuma, Abandoned Mire"
+[IPC] broadcast game-log-entry: type=action text="QuLeR played Takenuma, Abandoned Mire"
+[Telemetry] fingerprint: loaded 0 user decks
+[Telemetry] EMIT_LOG: PENDING phase="Declare Attackers"
+[Telemetry] EMIT_LOG: PENDING phase="Postcombat Main"
+[Telemetry] EMIT_LOG: PENDING phase="End Step"
+[Telemetry] EMIT_LOG[38]: type=turn text="Turn 4: thirdofwinter"
+[IPC] broadcast game-log-entry: type=turn text="Turn 4: thirdofwinter"
+[Telemetry] turn_change T7, logger=true, actions=81
+[IPC] highlight: spell_flurry sev=5 "3 spells in one turn!"
+[Telemetry] cardName(101042): cache="Mountain"
+[Telemetry] cardName(101042): cache="Mountain"
+[Telemetry] EMIT_LOG[39]: type=action text="QuLeR drew Mountain"
+[IPC] broadcast game-log-entry: type=action text="QuLeR drew Mountain"
+[Telemetry] fingerprint: loaded 0 user decks
+[Telemetry] EMIT_LOG: PENDING phase="Draw Step"
+[Telemetry] EMIT_LOG: PENDING phase="Precombat Main"
+[Telemetry] cardName(105182): cache="Forest"
+[Telemetry] cardName(105182): cache="Forest"
+[IPC] broadcast game-log-entry: type=phase text="Precombat Main"
+[Telemetry] EMIT_LOG[41]: type=action text="thirdofwinter played Forest"
+[IPC] broadcast game-log-entry: type=action text="thirdofwinter played Forest"
+[Telemetry] cardName(87051): cache="Smothering Tithe"
+[Telemetry] cardName(87051): cache="Smothering Tithe"
+[Telemetry] EMIT_LOG[42]: type=action text="thirdofwinter cast Smothering Tithe"
+[IPC] broadcast game-log-entry: type=action text="thirdofwinter cast Smothering Tithe"
+[Telemetry] cardName(87051): cache="Smothering Tithe"
+[Telemetry] EMIT_LOG: PENDING phase="Declare Attackers"
+[Telemetry] EMIT_LOG: PENDING phase="Declare Blockers"
+[IPC] broadcast game-log-entry: type=phase text="Declare Blockers"
+[Telemetry] EMIT_LOG[44]: type=life text="QuLeR took 3 damage (23 → 20)"
+[IPC] broadcast game-log-entry: type=life text="QuLeR took 3 damage (23 → 20)"
+[Telemetry] EMIT_LOG: PENDING phase="Combat Damage"
+[Telemetry] EMIT_LOG: PENDING phase="Postcombat Main"
+[Telemetry] EMIT_LOG: PENDING phase="End Step"
+[Telemetry] EMIT_LOG[45]: type=turn text="Turn 4: QuLeR"
+[IPC] broadcast game-log-entry: type=turn text="Turn 4: QuLeR"
+[Telemetry] turn_change T8, logger=true, actions=96
+[Telemetry] cardName(77329): cache="Hama Pashar, Ruin Seeker"
+[Telemetry] cardName(77329): cache="Hama Pashar, Ruin Seeker"
+[Telemetry] EMIT_LOG[46]: type=action text="QuLeR drew Hama Pashar, Ruin Seeker"
+[IPC] broadcast game-log-entry: type=action text="QuLeR drew Hama Pashar, Ruin Seeker"
+[Telemetry] fingerprint: loaded 0 user decks
+[Telemetry] EMIT_LOG: PENDING phase="Draw Step"
+[Telemetry] EMIT_LOG: PENDING phase="Precombat Main"
+[Telemetry] cardName(94077): cache="Vizier of the Menagerie"
+[Telemetry] cardName(94077): cache="Vizier of the Menagerie"
+[IPC] broadcast game-log-entry: type=phase text="Precombat Main"
+[Telemetry] EMIT_LOG[48]: type=action text="QuLeR cast Vizier of the Menagerie"
+[IPC] broadcast game-log-entry: type=action text="QuLeR cast Vizier of the Menagerie"
+[Telemetry] fingerprint: loaded 0 user decks
+[Telemetry] cardName(94077): cache="Vizier of the Menagerie"
+[Telemetry] EMIT_LOG: PENDING phase="Declare Attackers"
+[Telemetry] EMIT_LOG: PENDING phase="Postcombat Main"
+[Telemetry] EMIT_LOG: PENDING phase="End Step"
+[Telemetry] EMIT_LOG[49]: type=turn text="Turn 5: thirdofwinter"
+[IPC] broadcast game-log-entry: type=turn text="Turn 5: thirdofwinter"
+[Telemetry] turn_change T9, logger=true, actions=107
+[Telemetry] flush(final=false): 40 actions, summary=false
+[IPC] server not ready, queuing telemetry flush (40 actions, queue size: 6)
+[Telemetry] cardName(101042): cache="Mountain"
+[Telemetry] cardName(101042): cache="Mountain"
+[Telemetry] EMIT_LOG[50]: type=action text="QuLeR drew Mountain"
+[IPC] broadcast game-log-entry: type=action text="QuLeR drew Mountain"
+[Telemetry] fingerprint: loaded 0 user decks
+[Telemetry] EMIT_LOG: PENDING phase="Draw Step"
+[Telemetry] EMIT_LOG: PENDING phase="Precombat Main"
+[Telemetry] cardName(101042): cache="Mountain"
+[Telemetry] cardName(101042): cache="Mountain"
+[IPC] broadcast game-log-entry: type=phase text="Precombat Main"
+[Telemetry] EMIT_LOG[52]: type=action text="QuLeR played Mountain"
+[IPC] broadcast game-log-entry: type=action text="QuLeR played Mountain"
+[Telemetry] fingerprint: loaded 0 user decks
+[Telemetry] cardName(87173): cache="Thousand Moons Smithy"
+[Telemetry] cardName(87173): cache="Thousand Moons Smithy"
+[Telemetry] EMIT_LOG[53]: type=action text="thirdofwinter cast Thousand Moons Smithy"
+[IPC] broadcast game-log-entry: type=action text="thirdofwinter cast Thousand Moons Smithy"
+[Telemetry] cardName(87173): cache="Thousand Moons Smithy"
+[Telemetry] EMIT_LOG[54]: type=life text="thirdofwinter gained 1 life (26 → 27)"
+[IPC] broadcast game-log-entry: type=life text="thirdofwinter gained 1 life (26 → 27)"
+[Telemetry] EMIT_LOG[55]: type=life text="thirdofwinter gained 1 life (27 → 28)"
+[IPC] broadcast game-log-entry: type=life text="thirdofwinter gained 1 life (27 → 28)"
+[Telemetry] cardName(101042): cache="Mountain"
+[Telemetry] cardName(101042): cache="Mountain"
+[Telemetry] EMIT_LOG[56]: type=action text="QuLeR cast Mountain"
+[IPC] broadcast game-log-entry: type=action text="QuLeR cast Mountain"
+[Telemetry] fingerprint: loaded 0 user decks
+[Telemetry] cardName(88900): cache="Treasure"
+[Telemetry] EMIT_LOG[57]: type=action text="thirdofwinter sacrificed Treasure"
+[IPC] broadcast game-log-entry: type=action text="thirdofwinter sacrificed Treasure"
+[Telemetry] cardName(93850): cache="Authority of the Consuls"
+[Telemetry] EMIT_LOG: PENDING phase="Declare Attackers"
+[Telemetry] EMIT_LOG: PENDING phase="Postcombat Main"
+[Telemetry] EMIT_LOG: PENDING phase="End Step"
+[Telemetry] EMIT_LOG[58]: type=turn text="Turn 5: QuLeR"
+[IPC] broadcast game-log-entry: type=turn text="Turn 5: QuLeR"
+[Telemetry] turn_change T10, logger=true, actions=122
+[Telemetry] cardName(102713): cache="Dreamroot Cascade"
+[Telemetry] cardName(102713): cache="Dreamroot Cascade"
+[Telemetry] EMIT_LOG[59]: type=action text="QuLeR drew Dreamroot Cascade"
+[IPC] broadcast game-log-entry: type=action text="QuLeR drew Dreamroot Cascade"
+[Telemetry] fingerprint: loaded 0 user decks
+[Telemetry] EMIT_LOG: PENDING phase="Draw Step"
+[Telemetry] EMIT_LOG: PENDING phase="Precombat Main"
+[Telemetry] cardName(102713): cache="Dreamroot Cascade"
+[Telemetry] cardName(102713): cache="Dreamroot Cascade"
+[IPC] broadcast game-log-entry: type=phase text="Precombat Main"
+[Telemetry] EMIT_LOG[61]: type=action text="QuLeR played Dreamroot Cascade"
+[IPC] broadcast game-log-entry: type=action text="QuLeR played Dreamroot Cascade"
+[Telemetry] fingerprint: loaded 0 user decks
+[Telemetry] cardName(77347): cache="Dungeon Map"
+[Telemetry] cardName(77347): cache="Dungeon Map"
+[Telemetry] EMIT_LOG[62]: type=action text="QuLeR cast Dungeon Map"
+[IPC] broadcast game-log-entry: type=action text="QuLeR cast Dungeon Map"
+[Telemetry] fingerprint: loaded 0 user decks
+[Telemetry] cardName(77347): cache="Dungeon Map"
+[Telemetry] cardName(73232): cache="Tazri, Beacon of Unity"
+[Telemetry] cardName(73232): cache="Tazri, Beacon of Unity"
+[Telemetry] EMIT_LOG[63]: type=life text="thirdofwinter gained 1 life (28 → 29)"
+[IPC] broadcast game-log-entry: type=life text="thirdofwinter gained 1 life (28 → 29)"
+[Telemetry] EMIT_LOG: PENDING phase="Declare Attackers"
+[Telemetry] EMIT_LOG: PENDING phase="Postcombat Main"
+[Telemetry] EMIT_LOG: PENDING phase="End Step"
+[Telemetry] EMIT_LOG[64]: type=turn text="Turn 6: thirdofwinter"
+[IPC] broadcast game-log-entry: type=turn text="Turn 6: thirdofwinter"
+[Telemetry] turn_change T11, logger=true, actions=135
+[Telemetry] cardName(98124): cache="Aerith, Last Ancient"
+[Telemetry] cardName(98124): cache="Aerith, Last Ancient"
+[Telemetry] EMIT_LOG[65]: type=action text="thirdofwinter drew a card"
+[IPC] broadcast game-log-entry: type=action text="thirdofwinter drew a card"
+[Telemetry] EMIT_LOG: PENDING phase="Draw Step"
+[Telemetry] EMIT_LOG: PENDING phase="Precombat Main"
+[Telemetry] cardName(98124): cache="Aerith, Last Ancient"
+[Telemetry] cardName(98124): cache="Aerith, Last Ancient"
+[IPC] broadcast game-log-entry: type=phase text="Precombat Main"
+[Telemetry] EMIT_LOG[67]: type=life text="thirdofwinter gained 1 life (29 → 30)"
+[IPC] broadcast game-log-entry: type=life text="thirdofwinter gained 1 life (29 → 30)"
+[Telemetry] EMIT_LOG[68]: type=life text="thirdofwinter gained 1 life (30 → 31)"
+[IPC] broadcast game-log-entry: type=life text="thirdofwinter gained 1 life (30 → 31)"
+[Telemetry] EMIT_LOG: PENDING phase="Declare Attackers"
+[Telemetry] EMIT_LOG: PENDING phase="Postcombat Main"
+[Telemetry] EMIT_LOG: PENDING phase="End Step"
+[Telemetry] EMIT_LOG[69]: type=turn text="Turn 6: QuLeR"
+[IPC] broadcast game-log-entry: type=turn text="Turn 6: QuLeR"
+[Telemetry] turn_change T12, logger=true, actions=147
+[Telemetry] flush(final=false): 40 actions, summary=false
+[IPC] server not ready, queuing telemetry flush (40 actions, queue size: 7)
+[Telemetry] cardName(90824): cache="Bridgeworks Battle"
+[Telemetry] cardName(90824): cache="Bridgeworks Battle"
+[Telemetry] EMIT_LOG[70]: type=action text="QuLeR drew Bridgeworks Battle"
+[IPC] broadcast game-log-entry: type=action text="QuLeR drew Bridgeworks Battle"
+[Telemetry] fingerprint: loaded 0 user decks
+[Telemetry] EMIT_LOG: PENDING phase="Draw Step"
+[Telemetry] EMIT_LOG: PENDING phase="Precombat Main"
+[Telemetry] cardName(90824): cache="Bridgeworks Battle"
+[Telemetry] cardName(90824): cache="Bridgeworks Battle"
+[IPC] broadcast game-log-entry: type=phase text="Precombat Main"
+[Telemetry] EMIT_LOG[72]: type=action text="QuLeR played Bridgeworks Battle"
+[IPC] broadcast game-log-entry: type=action text="QuLeR played Bridgeworks Battle"
+[Telemetry] fingerprint: loaded 0 user decks
+[Telemetry] cardName(77329): cache="Hama Pashar, Ruin Seeker"
+[Telemetry] cardName(77329): cache="Hama Pashar, Ruin Seeker"
+[Telemetry] EMIT_LOG[73]: type=action text="QuLeR cast Hama Pashar, Ruin Seeker"
+[IPC] broadcast game-log-entry: type=action text="QuLeR cast Hama Pashar, Ruin Seeker"
+[Telemetry] fingerprint: loaded 0 user decks
+[Telemetry] cardName(77329): cache="Hama Pashar, Ruin Seeker"
+[Telemetry] EMIT_LOG[74]: type=life text="thirdofwinter gained 1 life (31 → 32)"
+[IPC] broadcast game-log-entry: type=life text="thirdofwinter gained 1 life (31 → 32)"
+[Telemetry] EMIT_LOG: PENDING phase="Declare Attackers"
+[Telemetry] EMIT_LOG: PENDING phase="Postcombat Main"
+[Telemetry] EMIT_LOG: PENDING phase="End Step"
+[Telemetry] EMIT_LOG[75]: type=turn text="Turn 7: thirdofwinter"
+[IPC] broadcast game-log-entry: type=turn text="Turn 7: thirdofwinter"
+[Telemetry] turn_change T13, logger=true, actions=160
+[Telemetry] EMIT_LOG: PENDING phase="Draw Step"
+[Telemetry] EMIT_LOG: PENDING phase="Precombat Main"
+[Telemetry] cardName(105174): cache="Plains"
+[Telemetry] cardName(105174): cache="Plains"
+[IPC] broadcast game-log-entry: type=phase text="Precombat Main"
+[Telemetry] EMIT_LOG[77]: type=action text="thirdofwinter played Plains"
+[IPC] broadcast game-log-entry: type=action text="thirdofwinter played Plains"
+[Telemetry] cardName(98124): cache="Aerith, Last Ancient"
+[Telemetry] cardName(98124): cache="Aerith, Last Ancient"
+[Telemetry] EMIT_LOG[78]: type=action text="thirdofwinter cast Aerith, Last Ancient"
+[IPC] broadcast game-log-entry: type=action text="thirdofwinter cast Aerith, Last Ancient"
+[Telemetry] EMIT_LOG[79]: type=life text="thirdofwinter gained 1 life (32 → 33)"
+[IPC] broadcast game-log-entry: type=life text="thirdofwinter gained 1 life (32 → 33)"
+[Telemetry] EMIT_LOG[80]: type=life text="thirdofwinter gained 1 life (33 → 34)"
+[IPC] broadcast game-log-entry: type=life text="thirdofwinter gained 1 life (33 → 34)"
+[Telemetry] cardName(82862): cache="Wurmcoil Engine"
+[Telemetry] EMIT_LOG[81]: type=life text="thirdofwinter gained 1 life (34 → 35)"
+[IPC] broadcast game-log-entry: type=life text="thirdofwinter gained 1 life (34 → 35)"
+[Telemetry] EMIT_LOG[82]: type=life text="thirdofwinter gained 1 life (35 → 36)"
+[IPC] broadcast game-log-entry: type=life text="thirdofwinter gained 1 life (35 → 36)"
+[Telemetry] EMIT_LOG: PENDING phase="Declare Attackers"
+[Telemetry] EMIT_LOG: PENDING phase="Declare Blockers"
+[Telemetry] cardName(94077): cache="Vizier of the Menagerie"
+[Telemetry] EMIT_LOG: PENDING phase="Combat Damage"
+[Telemetry] EMIT_LOG: PENDING phase="Postcombat Main"
+[Telemetry] EMIT_LOG: PENDING phase="End Step"
+[Telemetry] EMIT_LOG[83]: type=turn text="Turn 7: QuLeR"
+[IPC] broadcast game-log-entry: type=turn text="Turn 7: QuLeR"
+[Telemetry] turn_change T14, logger=true, actions=177
+[Telemetry] cardName(102719): cache="Shattered Sanctum"
+[Telemetry] cardName(102719): cache="Shattered Sanctum"
+[Telemetry] EMIT_LOG[84]: type=action text="QuLeR drew Shattered Sanctum"
+[IPC] broadcast game-log-entry: type=action text="QuLeR drew Shattered Sanctum"
+[Telemetry] fingerprint: loaded 0 user decks
+[Telemetry] EMIT_LOG: PENDING phase="Draw Step"
+[Telemetry] EMIT_LOG: PENDING phase="Precombat Main"
+[Telemetry] cardName(102719): cache="Shattered Sanctum"
+[Telemetry] cardName(102719): cache="Shattered Sanctum"
+[IPC] broadcast game-log-entry: type=phase text="Precombat Main"
+[Telemetry] EMIT_LOG[86]: type=action text="QuLeR played Shattered Sanctum"
+[IPC] broadcast game-log-entry: type=action text="QuLeR played Shattered Sanctum"
+[Telemetry] fingerprint: loaded 0 user decks
+[Telemetry] cardName(81188): cache="A-Fates' Reversal"
+[Telemetry] cardName(81188): cache="A-Fates' Reversal"
+[Telemetry] EMIT_LOG[87]: type=action text="QuLeR cast A-Fates' Reversal"
+[IPC] broadcast game-log-entry: type=action text="QuLeR cast A-Fates' Reversal"
+[Telemetry] fingerprint: loaded 0 user decks
+[Telemetry] cardName(94077): cache="Vizier of the Menagerie"
+[Telemetry] cardName(81188): cache="A-Fates' Reversal"
+[Telemetry] EMIT_LOG[88]: type=life text="thirdofwinter gained 1 life (36 → 37)"
+[IPC] broadcast game-log-entry: type=life text="thirdofwinter gained 1 life (36 → 37)"
+[Telemetry] EMIT_LOG[89]: type=life text="thirdofwinter gained 1 life (37 → 38)"
+[IPC] broadcast game-log-entry: type=life text="thirdofwinter gained 1 life (37 → 38)"
+[Telemetry] flush(final=false): 39 actions, summary=false
+[IPC] server not ready, queuing telemetry flush (39 actions, queue size: 8)
+[Telemetry] match_complete: logHistory=89, result=loss
+[Telemetry] EMIT_LOG[90]: type=result text="Defeat."
+[IPC] broadcast game-log-entry: type=result text="Defeat."
+[Telemetry] post-match-stats: turns=0 drawn=0 mvp=null
+[Telemetry] flush(final=true): 1 actions, summary=true
+[IPC] server not ready, queuing telemetry flush (1 actions, queue size: 9)
+[Telemetry] match_start: logger created for 47ac00a9-3745-40cd-b562-0839259c0949
+[Telemetry] EMIT_LOG[1]: type=system text="Brawl_Ladder — QuLeR vs Medvih"
+[IPC] broadcast game-log-entry: type=system text="Brawl_Ladder — QuLeR vs Medvih"
+[Telemetry] EMIT_LOG[2]: type=life text="Medvih's life is 25"
+[IPC] broadcast game-log-entry: type=life text="Medvih's life is 25"
+[Telemetry] EMIT_LOG[3]: type=life text="QuLeR's life is 25"
+[IPC] broadcast game-log-entry: type=life text="QuLeR's life is 25"
+[Telemetry] EMIT_LOG[4]: type=system text="Opening hand"
+[IPC] broadcast game-log-entry: type=system text="Opening hand"
+[Telemetry] cardName(93636): cache="Hinterland Sanctifier"
+[Telemetry] EMIT_LOG[5]: type=turn text="Turn 1: QuLeR"
+[IPC] broadcast game-log-entry: type=turn text="Turn 1: QuLeR"
+[Telemetry] turn_change T1, logger=true, actions=5
+[Telemetry] EMIT_LOG: PENDING phase="Precombat Main"
+[Telemetry] cardName(96190): cache="Mountain"
+[Telemetry] cardName(96190): cache="Mountain"
+[IPC] broadcast game-log-entry: type=phase text="Precombat Main"
+[Telemetry] EMIT_LOG[7]: type=action text="QuLeR played Mountain"
+[IPC] broadcast game-log-entry: type=action text="QuLeR played Mountain"
+[Telemetry] cardName(88511): cache="Wayfarer's Bauble"
+[Telemetry] cardName(88511): cache="Wayfarer's Bauble"
+[Telemetry] EMIT_LOG[8]: type=action text="QuLeR cast Wayfarer's Bauble"
+[IPC] broadcast game-log-entry: type=action text="QuLeR cast Wayfarer's Bauble"
+[Telemetry] cardName(88511): cache="Wayfarer's Bauble"
+[Telemetry] EMIT_LOG: PENDING phase="Declare Attackers"
+[Telemetry] EMIT_LOG: PENDING phase="Postcombat Main"
+[Telemetry] EMIT_LOG: PENDING phase="End Step"
+[Telemetry] EMIT_LOG[9]: type=turn text="Turn 1: Medvih"
+[IPC] broadcast game-log-entry: type=turn text="Turn 1: Medvih"
+[Telemetry] turn_change T2, logger=true, actions=15
+[Telemetry] EMIT_LOG: PENDING phase="Draw Step"
+[Telemetry] EMIT_LOG: PENDING phase="Precombat Main"
+[Telemetry] cardName(100648): cache="Plains"
+[Telemetry] cardName(100648): cache="Plains"
+[IPC] broadcast game-log-entry: type=phase text="Precombat Main"
+[Telemetry] EMIT_LOG[11]: type=action text="Medvih played Plains"
+[IPC] broadcast game-log-entry: type=action text="Medvih played Plains"
+[Telemetry] cardName(93855): cache="Healer's Hawk"
+[Telemetry] cardName(93855): cache="Healer's Hawk"
+[Telemetry] EMIT_LOG[12]: type=action text="Medvih cast Healer's Hawk"
+[IPC] broadcast game-log-entry: type=action text="Medvih cast Healer's Hawk"
+[Telemetry] cardName(93855): cache="Healer's Hawk"
+[Telemetry] EMIT_LOG: PENDING phase="Declare Attackers"
+[Telemetry] EMIT_LOG: PENDING phase="Postcombat Main"
+[Telemetry] EMIT_LOG: PENDING phase="End Step"
+[Telemetry] EMIT_LOG[13]: type=turn text="Turn 2: QuLeR"
+[IPC] broadcast game-log-entry: type=turn text="Turn 2: QuLeR"
+[Telemetry] turn_change T3, logger=true, actions=26
+[Telemetry] flush(final=false): 27 actions, summary=false
+[IPC] server not ready, queuing telemetry flush (27 actions, queue size: 10)
+[Telemetry] cardName(96190): cache="Mountain"
+[Telemetry] cardName(96190): cache="Mountain"
+[Telemetry] EMIT_LOG[14]: type=action text="QuLeR drew Mountain"
+[IPC] broadcast game-log-entry: type=action text="QuLeR drew Mountain"
+[Telemetry] EMIT_LOG: PENDING phase="Draw Step"
+[Telemetry] EMIT_LOG: PENDING phase="Precombat Main"
+[Telemetry] cardName(96190): cache="Mountain"
+[Telemetry] cardName(96190): cache="Mountain"
+[IPC] broadcast game-log-entry: type=phase text="Precombat Main"
+[Telemetry] EMIT_LOG[16]: type=action text="QuLeR played Mountain"
+[IPC] broadcast game-log-entry: type=action text="QuLeR played Mountain"
+[Telemetry] cardName(96190): cache="Mountain"
+[Telemetry] EMIT_LOG: PENDING phase="Declare Attackers"
+[Telemetry] EMIT_LOG: PENDING phase="Postcombat Main"
+[Telemetry] EMIT_LOG: PENDING phase="End Step"
+[Telemetry] EMIT_LOG[17]: type=turn text="Turn 2: Medvih"
+[IPC] broadcast game-log-entry: type=turn text="Turn 2: Medvih"
+[Telemetry] turn_change T4, logger=true, actions=37
+[Telemetry] EMIT_LOG: PENDING phase="Draw Step"
+[Telemetry] EMIT_LOG: PENDING phase="Precombat Main"
+[Telemetry] cardName(100651): cache="Mountain"
+[Telemetry] cardName(100651): cache="Mountain"
+[IPC] broadcast game-log-entry: type=phase text="Precombat Main"
+[Telemetry] EMIT_LOG[19]: type=action text="Medvih played Mountain"
+[IPC] broadcast game-log-entry: type=action text="Medvih played Mountain"
+[Telemetry] EMIT_LOG: PENDING phase="Declare Attackers"
+[Telemetry] EMIT_LOG: PENDING phase="Declare Blockers"
+[IPC] broadcast game-log-entry: type=phase text="Declare Blockers"
+[Telemetry] EMIT_LOG[21]: type=life text="QuLeR took 1 damage (25 → 24)"
+[IPC] broadcast game-log-entry: type=life text="QuLeR took 1 damage (25 → 24)"
+[Telemetry] EMIT_LOG[22]: type=life text="Medvih gained 1 life (25 → 26)"
+[IPC] broadcast game-log-entry: type=life text="Medvih gained 1 life (25 → 26)"
+[Telemetry] EMIT_LOG: PENDING phase="Combat Damage"
+[Telemetry] EMIT_LOG: PENDING phase="Postcombat Main"
+[Telemetry] EMIT_LOG: PENDING phase="End Step"
+[Telemetry] EMIT_LOG[23]: type=turn text="Turn 3: QuLeR"
+[IPC] broadcast game-log-entry: type=turn text="Turn 3: QuLeR"
+[Telemetry] turn_change T5, logger=true, actions=51
+[Telemetry] cardName(96190): cache="Mountain"
+[Telemetry] cardName(96190): cache="Mountain"
+[Telemetry] EMIT_LOG[24]: type=action text="QuLeR drew Mountain"
+[IPC] broadcast game-log-entry: type=action text="QuLeR drew Mountain"
+[Telemetry] EMIT_LOG: PENDING phase="Draw Step"
+[Telemetry] EMIT_LOG: PENDING phase="Precombat Main"
+[Telemetry] cardName(96190): cache="Mountain"
+[Telemetry] cardName(96190): cache="Mountain"
+[IPC] broadcast game-log-entry: type=phase text="Precombat Main"
+[Telemetry] EMIT_LOG[26]: type=action text="QuLeR played Mountain"
+[IPC] broadcast game-log-entry: type=action text="QuLeR played Mountain"
+[Telemetry] cardName(90964): cache="Ashling, Flame Dancer"
+[Telemetry] cardName(90964): cache="Ashling, Flame Dancer"
+[Telemetry] EMIT_LOG: PENDING phase="Declare Attackers"
+[Telemetry] EMIT_LOG: PENDING phase="Postcombat Main"
+[Telemetry] EMIT_LOG: PENDING phase="End Step"
+[Telemetry] EMIT_LOG[27]: type=turn text="Turn 3: Medvih"
+[IPC] broadcast game-log-entry: type=turn text="Turn 3: Medvih"
+[Telemetry] turn_change T6, logger=true, actions=62
+[Telemetry] flush(final=false): 36 actions, summary=false
+[IPC] server not ready, queuing telemetry flush (36 actions, queue size: 11)
+[Telemetry] cardName(94077): cache="Vizier of the Menagerie"
+[Telemetry] cardName(94077): cache="Vizier of the Menagerie"
+[Telemetry] EMIT_LOG[28]: type=action text="Medvih drew a card"
+[IPC] broadcast game-log-entry: type=action text="Medvih drew a card"
+[Telemetry] EMIT_LOG: PENDING phase="Draw Step"
+[Telemetry] EMIT_LOG: PENDING phase="Precombat Main"
+[Telemetry] cardName(100651): cache="Mountain"
+[Telemetry] cardName(100651): cache="Mountain"
+[IPC] broadcast game-log-entry: type=phase text="Precombat Main"
+[Telemetry] EMIT_LOG[30]: type=action text="Medvih played Mountain"
+[IPC] broadcast game-log-entry: type=action text="Medvih played Mountain"
+[Telemetry] cardName(100623): cache="Raph & Leo, Sibling Rivals"
+[Telemetry] cardName(100623): cache="Raph & Leo, Sibling Rivals"
+[Telemetry] EMIT_LOG[31]: type=action text="Medvih cast Raph & Leo, Sibling Rivals"
+[IPC] broadcast game-log-entry: type=action text="Medvih cast Raph & Leo, Sibling Rivals"
+[Telemetry] cardName(100623): cache="Raph & Leo, Sibling Rivals"
+[Telemetry] EMIT_LOG: PENDING phase="Declare Attackers"
+[Telemetry] EMIT_LOG: PENDING phase="Declare Blockers"
+[IPC] broadcast game-log-entry: type=phase text="Declare Blockers"
+[Telemetry] EMIT_LOG[33]: type=life text="QuLeR took 1 damage (24 → 23)"
+[IPC] broadcast game-log-entry: type=life text="QuLeR took 1 damage (24 → 23)"
+[Telemetry] EMIT_LOG[34]: type=life text="Medvih gained 1 life (26 → 27)"
+[IPC] broadcast game-log-entry: type=life text="Medvih gained 1 life (26 → 27)"
+[Telemetry] EMIT_LOG: PENDING phase="Combat Damage"
+[Telemetry] EMIT_LOG: PENDING phase="Postcombat Main"
+[Telemetry] EMIT_LOG: PENDING phase="End Step"
+[Telemetry] EMIT_LOG[35]: type=turn text="Turn 4: QuLeR"
+[IPC] broadcast game-log-entry: type=turn text="Turn 4: QuLeR"
+[Telemetry] turn_change T7, logger=true, actions=78
+[Telemetry] cardName(90822): cache="Sundering Eruption"
+[Telemetry] cardName(90822): cache="Sundering Eruption"
+[Telemetry] EMIT_LOG[36]: type=action text="QuLeR drew Sundering Eruption"
+[IPC] broadcast game-log-entry: type=action text="QuLeR drew Sundering Eruption"
+[Telemetry] EMIT_LOG: PENDING phase="Draw Step"
+[Telemetry] EMIT_LOG: PENDING phase="Precombat Main"
+[Telemetry] cardName(96190): cache="Mountain"
+[Telemetry] cardName(96190): cache="Mountain"
+[IPC] broadcast game-log-entry: type=phase text="Precombat Main"
+[Telemetry] EMIT_LOG[38]: type=action text="QuLeR played Mountain"
+[IPC] broadcast game-log-entry: type=action text="QuLeR played Mountain"
+[Telemetry] cardName(102796): cache="Jeska's Will"
+[Telemetry] cardName(102796): cache="Jeska's Will"
+[Telemetry] EMIT_LOG[39]: type=action text="QuLeR cast Jeska's Will"
+[IPC] broadcast game-log-entry: type=action text="QuLeR cast Jeska's Will"
+[Telemetry] cardName(90822): cache="Sundering Eruption"
+[Telemetry] EMIT_LOG[40]: type=action text="QuLeR discarded Sundering Eruption"
+[IPC] broadcast game-log-entry: type=action text="QuLeR discarded Sundering Eruption"
+[Telemetry] cardName(93359): cache="Crimson Wisps"
+[Telemetry] cardName(93359): cache="Crimson Wisps"
+[Telemetry] EMIT_LOG[41]: type=action text="QuLeR drew Crimson Wisps"
+[IPC] broadcast game-log-entry: type=action text="QuLeR drew Crimson Wisps"
+[Telemetry] fingerprint: loaded 0 user decks
+[Telemetry] cardName(87372): cache="Spelunking"
+[Telemetry] EMIT_LOG[42]: type=action text="Spelunking was exiled"
+[IPC] broadcast game-log-entry: type=action text="Spelunking was exiled"
+[Telemetry] cardName(88917): cache="Gamble"
+[Telemetry] EMIT_LOG[43]: type=action text="Gamble was exiled"
+[IPC] broadcast game-log-entry: type=action text="Gamble was exiled"
+[Telemetry] cardName(73449): cache="Spoils of Adventure"
+[Telemetry] EMIT_LOG[44]: type=action text="Spoils of Adventure was exiled"
+[IPC] broadcast game-log-entry: type=action text="Spoils of Adventure was exiled"
+[Telemetry] cardName(102796): cache="Jeska's Will"
+[Telemetry] cardName(90492): cache="Slickshot Show-Off"
+[Telemetry] cardName(90492): cache="Slickshot Show-Off"
+[Telemetry] cardName(88917): cache="Gamble"
+[Telemetry] EMIT_LOG[45]: type=life text="Medvih took 2 damage (27 → 25)"
+[IPC] broadcast game-log-entry: type=life text="Medvih took 2 damage (27 → 25)"
+[Telemetry] flush(final=false): 25 actions, summary=false
+[IPC] server not ready, queuing telemetry flush (25 actions, queue size: 12)
+[Telemetry] match_complete: logHistory=45, result=win
+[Telemetry] EMIT_LOG[46]: type=result text="Victory!"
+[IPC] broadcast game-log-entry: type=result text="Victory!"
+[Telemetry] post-match-stats: turns=0 drawn=0 mvp=null
+[Telemetry] flush(final=true): 1 actions, summary=true
+[IPC] server not ready, queuing telemetry flush (1 actions, queue size: 13)
+[IPC] watcher.start() completed OK
+[IPC] server marked ready, draining 13 queued telemetry flushes
+[ArenaCardCache] Seeding 26572 grpId mappings from bundled v0.1.14056.1313448...
+[ArenaCardCache] Seed error: Error: The module '\\?\C:\Users\QuLeR\MTG-deck-builder\node_modules\better-sqlite3\build\Release\better_sqlite3.node'
+was compiled against a different Node.js version using
+NODE_MODULE_VERSION 127. This version of Node.js requires
+NODE_MODULE_VERSION 130. Please try re-compiling or re-installing
+the module (for instance, using `npm rebuild` or `npm install`).
+    at process.func [as dlopen] (node:electron/js2c/node_init:2:2559)
+    at Module._extensions..node (node:internal/modules/cjs/loader:1602:18)
+    at Object.func [as .node] (node:electron/js2c/node_init:2:2559)
+    at Module.load (node:internal/modules/cjs/loader:1295:32)
+    at Module._load (node:internal/modules/cjs/loader:1111:12)
+    at c._load (node:electron/js2c/node_init:2:16955)
+    at Module.require (node:internal/modules/cjs/loader:1318:19)
+    at require (node:internal/modules/helpers:179:18)
+    at bindings (C:\Users\QuLeR\MTG-deck-builder\node_modules\bindings\bindings.js:112:48)
+    at new Database (C:\Users\QuLeR\MTG-deck-builder\node_modules\better-sqlite3\lib\database.js:48:64) {
+  code: 'ERR_DLOPEN_FAILED'
+}
+[IPC] checkArenaCardDbUpdate: starting
+[IPC] checkArenaCardDbUpdate: database not available
+[Telemetry] processContentStreaming called, contentLen=900, bufferLen=0
+[Telemetry] extracted 0 total blocks, processed=0
+[Telemetry] processContentStreaming called, contentLen=214, bufferLen=900
+[Telemetry] extracted 0 total blocks, processed=0
+[Telemetry] processContentStreaming called, contentLen=536, bufferLen=1114
+[Telemetry] extracted 0 total blocks, processed=0
+[Telemetry] processContentStreaming called, contentLen=25, bufferLen=1650
+[Telemetry] extracted 0 total blocks, processed=0
+[Telemetry] processContentStreaming called, contentLen=366, bufferLen=1675
+[Telemetry] extracted 0 total blocks, processed=0
+[Telemetry] processContentStreaming called, contentLen=364, bufferLen=2041
+[Telemetry] extracted 0 total blocks, processed=0
+[Telemetry] processContentStreaming called, contentLen=397, bufferLen=2405
+[Telemetry] extracted 0 total blocks, processed=0
+[Telemetry] processContentStreaming called, contentLen=88, bufferLen=2802
+[Telemetry] extracted 0 total blocks, processed=0
+[Telemetry] processContentStreaming called, contentLen=183, bufferLen=2890
+[Telemetry] extracted 0 total blocks, processed=0
+[Telemetry] processContentStreaming called, contentLen=699, bufferLen=3073
+[Telemetry] extracted 1 total blocks, processed=0
+[Telemetry] streaming: 1 blocks → 0 events [] | gsm:0 zt:0(hit:0/miss:0) oid:0 shuf:0 del:0 | ctx: grpIds=0 zones=0 chains=0
+[Telemetry] processContentStreaming called, contentLen=974, bufferLen=3772
+[Telemetry] extracted 1 total blocks, processed=1
+[Telemetry] processContentStreaming called, contentLen=206, bufferLen=4746
+[Telemetry] extracted 1 total blocks, processed=1
+[Telemetry] processContentStreaming called, contentLen=131, bufferLen=4952
+[Telemetry] extracted 2 total blocks, processed=1
+[Telemetry] streaming: 1 blocks → 0 events [] | gsm:0 zt:0(hit:0/miss:0) oid:0 shuf:0 del:0 | ctx: grpIds=0 zones=0 chains=0
+[Telemetry] processContentStreaming called, contentLen=344786, bufferLen=5083
+[Telemetry] extracted 2 total blocks, processed=2
+[Telemetry] processContentStreaming called, contentLen=116, bufferLen=349869
+[Telemetry] extracted 3 total blocks, processed=2
+[Telemetry] streaming: 1 blocks → 0 events [] | gsm:0 zt:0(hit:0/miss:0) oid:0 shuf:0 del:0 | ctx: grpIds=0 zones=0 chains=0
+[Telemetry] processContentStreaming called, contentLen=130, bufferLen=349985
+[Telemetry] extracted 4 total blocks, processed=3
+[Telemetry] streaming: 1 blocks → 0 events [] | gsm:0 zt:0(hit:0/miss:0) oid:0 shuf:0 del:0 | ctx: grpIds=0 zones=0 chains=0
+[Telemetry] processContentStreaming called, contentLen=344, bufferLen=350115
+[Telemetry] extracted 4 total blocks, processed=4
+[Telemetry] processContentStreaming called, contentLen=201, bufferLen=350459
+[Telemetry] extracted 4 total blocks, processed=4
+[Telemetry] processContentStreaming called, contentLen=145, bufferLen=350660
+[Telemetry] extracted 4 total blocks, processed=4
+[Telemetry] processContentStreaming called, contentLen=9349, bufferLen=350805
+[Telemetry] extracted 7 total blocks, processed=4
+[Telemetry] streaming: 3 blocks → 0 events [] | gsm:0 zt:0(hit:0/miss:0) oid:0 shuf:0 del:0 | ctx: grpIds=0 zones=0 chains=0
+[Telemetry] processContentStreaming called, contentLen=520437, bufferLen=360154
+[Telemetry] extracted 7 total blocks, processed=7
+[Telemetry] processContentStreaming called, contentLen=6171, bufferLen=880591
+[Telemetry] extracted 12 total blocks, processed=7
+[Telemetry] streaming: 5 blocks → 0 events [] | gsm:0 zt:0(hit:0/miss:0) oid:0 shuf:0 del:0 | ctx: grpIds=0 zones=0 chains=0
+[Telemetry] processContentStreaming called, contentLen=15413, bufferLen=250000
+[Telemetry] extracted 5 total blocks, processed=5
+[Telemetry] processContentStreaming called, contentLen=1055315, bufferLen=265413
+[Telemetry] extracted 6 total blocks, processed=5
+[Telemetry] streaming: 1 blocks → 0 events [] | gsm:0 zt:0(hit:0/miss:0) oid:0 shuf:0 del:0 | ctx: grpIds=0 zones=0 chains=0
+[Telemetry] processContentStreaming called, contentLen=6017, bufferLen=250000
+[Telemetry] extracted 1 total blocks, processed=1
+[Telemetry] processContentStreaming called, contentLen=185, bufferLen=256017
+[Telemetry] extracted 1 total blocks, processed=1
+[Telemetry] processContentStreaming called, contentLen=38571, bufferLen=256202
+[Telemetry] extracted 4 total blocks, processed=1
+[Telemetry] streaming: 3 blocks → 0 events [] | gsm:0 zt:0(hit:0/miss:0) oid:0 shuf:0 del:0 | ctx: grpIds=0 zones=0 chains=0
+[Telemetry] processContentStreaming called, contentLen=143, bufferLen=294773
+[Telemetry] extracted 4 total blocks, processed=4
+[Telemetry] processContentStreaming called, contentLen=307, bufferLen=294916
+[Telemetry] extracted 6 total blocks, processed=4
+[Telemetry] streaming: 2 blocks → 0 events [] | gsm:0 zt:0(hit:0/miss:0) oid:0 shuf:0 del:0 | ctx: grpIds=0 zones=0 chains=0
+[Telemetry] processContentStreaming called, contentLen=6083, bufferLen=295223
+[Telemetry] extracted 6 total blocks, processed=6
+[Telemetry] processContentStreaming called, contentLen=33, bufferLen=301306
+[Telemetry] extracted 6 total blocks, processed=6
+[Telemetry] processContentStreaming called, contentLen=2527, bufferLen=301339
+[Telemetry] extracted 6 total blocks, processed=6
+[Telemetry] processContentStreaming called, contentLen=223, bufferLen=303866
+[Telemetry] extracted 6 total blocks, processed=6
+[Telemetry] processContentStreaming called, contentLen=493, bufferLen=0
+[Telemetry] extracted 0 total blocks, processed=0
+[Telemetry] processContentStreaming called, contentLen=621, bufferLen=493
+[Telemetry] extracted 0 total blocks, processed=0
+[Telemetry] processContentStreaming called, contentLen=481, bufferLen=1114
+[Telemetry] extracted 0 total blocks, processed=0
+[Telemetry] processContentStreaming called, contentLen=80, bufferLen=1595
+[Telemetry] extracted 0 total blocks, processed=0
+[Telemetry] processContentStreaming called, contentLen=258, bufferLen=1675
+[Telemetry] extracted 0 total blocks, processed=0
+[Telemetry] processContentStreaming called, contentLen=472, bufferLen=1933
+[Telemetry] extracted 0 total blocks, processed=0
+[Telemetry] processContentStreaming called, contentLen=397, bufferLen=2405
+[Telemetry] extracted 0 total blocks, processed=0
+[Telemetry] processContentStreaming called, contentLen=88, bufferLen=2802
+[Telemetry] extracted 0 total blocks, processed=0
+[Telemetry] processContentStreaming called, contentLen=183, bufferLen=2890
+[Telemetry] extracted 0 total blocks, processed=0
+[Telemetry] processContentStreaming called, contentLen=137, bufferLen=3073
+[Telemetry] extracted 1 total blocks, processed=0
+[Telemetry] streaming: 1 blocks → 0 events [] | gsm:0 zt:0(hit:0/miss:0) oid:0 shuf:0 del:0 | ctx: grpIds=0 zones=0 chains=0
+[Telemetry] processContentStreaming called, contentLen=1498, bufferLen=3210
+[Telemetry] extracted 1 total blocks, processed=1
+[Telemetry] processContentStreaming called, contentLen=38, bufferLen=4708
+[Telemetry] extracted 1 total blocks, processed=1
+[Telemetry] processContentStreaming called, contentLen=235, bufferLen=4746
+[Telemetry] extracted 1 total blocks, processed=1
+[Telemetry] processContentStreaming called, contentLen=102, bufferLen=4981
+[Telemetry] extracted 2 total blocks, processed=1
+[Telemetry] streaming: 1 blocks → 0 events [] | gsm:0 zt:0(hit:0/miss:0) oid:0 shuf:0 del:0 | ctx: grpIds=0 zones=0 chains=0
+[Telemetry] processContentStreaming called, contentLen=344786, bufferLen=5083
+[Telemetry] extracted 2 total blocks, processed=2
+[Telemetry] processContentStreaming called, contentLen=116, bufferLen=349869
+[Telemetry] extracted 3 total blocks, processed=2
+[Telemetry] streaming: 1 blocks → 0 events [] | gsm:0 zt:0(hit:0/miss:0) oid:0 shuf:0 del:0 | ctx: grpIds=0 zones=0 chains=0
+[Telemetry] processContentStreaming called, contentLen=130, bufferLen=349985
+[Telemetry] extracted 4 total blocks, processed=3
+[Telemetry] streaming: 1 blocks → 0 events [] | gsm:0 zt:0(hit:0/miss:0) oid:0 shuf:0 del:0 | ctx: grpIds=0 zones=0 chains=0
+[Telemetry] processContentStreaming called, contentLen=545, bufferLen=350115
+[Telemetry] extracted 4 total blocks, processed=4
+[Telemetry] processContentStreaming called, contentLen=145, bufferLen=350660
+[Telemetry] extracted 4 total blocks, processed=4
+[Telemetry] processContentStreaming called, contentLen=491, bufferLen=350805
+[Telemetry] extracted 7 total blocks, processed=4
+[Telemetry] streaming: 3 blocks → 0 events [] | gsm:0 zt:0(hit:0/miss:0) oid:0 shuf:0 del:0 | ctx: grpIds=0 zones=0 chains=0
+[Telemetry] processContentStreaming called, contentLen=8858, bufferLen=351296
+[Telemetry] extracted 7 total blocks, processed=7
+[Telemetry] processContentStreaming called, contentLen=520535, bufferLen=360154
+[Telemetry] extracted 7 total blocks, processed=7
+[Telemetry] processContentStreaming called, contentLen=6171, bufferLen=880689
+[Telemetry] extracted 12 total blocks, processed=7
+[Telemetry] streaming: 5 blocks → 0 events [] | gsm:0 zt:0(hit:0/miss:0) oid:0 shuf:0 del:0 | ctx: grpIds=0 zones=0 chains=0
+[Telemetry] processContentStreaming called, contentLen=15413, bufferLen=250000
+[Telemetry] extracted 5 total blocks, processed=5
+[Telemetry] processContentStreaming called, contentLen=1055315, bufferLen=265413
+[Telemetry] extracted 6 total blocks, processed=5
+[Telemetry] streaming: 1 blocks → 0 events [] | gsm:0 zt:0(hit:0/miss:0) oid:0 shuf:0 del:0 | ctx: grpIds=0 zones=0 chains=0
+[Telemetry] processContentStreaming called, contentLen=6017, bufferLen=250000
+[Telemetry] extracted 1 total blocks, processed=1
+[Telemetry] processContentStreaming called, contentLen=970, bufferLen=256017
+[Telemetry] extracted 3 total blocks, processed=1
+[Telemetry] streaming: 2 blocks → 0 events [] | gsm:0 zt:0(hit:0/miss:0) oid:0 shuf:0 del:0 | ctx: grpIds=0 zones=0 chains=0
+[Telemetry] processContentStreaming called, contentLen=37929, bufferLen=256987
+[Telemetry] extracted 4 total blocks, processed=3
+[Telemetry] streaming: 1 blocks → 0 events [] | gsm:0 zt:0(hit:0/miss:0) oid:0 shuf:0 del:0 | ctx: grpIds=0 zones=0 chains=0
+[Telemetry] processContentStreaming called, contentLen=427, bufferLen=294916
+[Telemetry] extracted 6 total blocks, processed=4
+[Telemetry] streaming: 2 blocks → 0 events [] | gsm:0 zt:0(hit:0/miss:0) oid:0 shuf:0 del:0 | ctx: grpIds=0 zones=0 chains=0
+[Telemetry] processContentStreaming called, contentLen=5928, bufferLen=295343
+[Telemetry] extracted 6 total blocks, processed=6
+[Telemetry] processContentStreaming called, contentLen=35, bufferLen=301271
+[Telemetry] extracted 6 total blocks, processed=6
+[Telemetry] processContentStreaming called, contentLen=33, bufferLen=301306
+[Telemetry] extracted 6 total blocks, processed=6
+[Telemetry] processContentStreaming called, contentLen=246, bufferLen=301339
+[Telemetry] extracted 8 total blocks, processed=6
+[Telemetry] streaming: 2 blocks → 0 events [] | gsm:0 zt:0(hit:0/miss:0) oid:0 shuf:0 del:0 | ctx: grpIds=0 zones=0 chains=0
+[Telemetry] processContentStreaming called, contentLen=269, bufferLen=301585
+[Telemetry] extracted 9 total blocks, processed=8
+[Telemetry] streaming: 1 blocks → 0 events [] | gsm:0 zt:0(hit:0/miss:0) oid:0 shuf:0 del:0 | ctx: grpIds=0 zones=0 chains=0
+[Telemetry] processContentStreaming called, contentLen=69922, bufferLen=301854
+[Telemetry] extracted 11 total blocks, processed=9
+[Telemetry] streaming: 2 blocks → 0 events [] | gsm:0 zt:0(hit:0/miss:0) oid:0 shuf:0 del:0 | ctx: grpIds=0 zones=0 chains=0
+[Telemetry] processContentStreaming called, contentLen=4942, bufferLen=371776
+[Telemetry] extracted 12 total blocks, processed=11
+[Telemetry] streaming: 1 blocks → 0 events [] | gsm:0 zt:0(hit:0/miss:0) oid:0 shuf:0 del:0 | ctx: grpIds=0 zones=0 chains=0
+[Telemetry] processContentStreaming called, contentLen=401, bufferLen=376718
+[Telemetry] extracted 12 total blocks, processed=12
+[Telemetry] processContentStreaming called, contentLen=17124, bufferLen=377119
+[Telemetry] extracted 12 total blocks, processed=12
+[Telemetry] processContentStreaming called, contentLen=20730, bufferLen=394243
+[Telemetry] extracted 16 total blocks, processed=12
+[Telemetry] streaming: 4 blocks → 5 events [match_start:1, deck_submission:1, life_total_change:2, game_state_update:1] | gsm:1 zt:0(hit:0/miss:0) oid:0 shuf:0 del:198 | ctx: grpIds=2 zones=17 chains=0
+[Telemetry] match_start: logger created for 756eb47c-70f6-4bcd-bcbd-bf52837e1d89
+[Telemetry] EMIT_LOG[1]: type=system text="Play_Brawl_Historic — QuLeR vs Unsub"
+[IPC] broadcast game-log-entry: type=system text="Play_Brawl_Historic — QuLeR vs Unsub"
+[Telemetry] EMIT_LOG[2]: type=life text="Unsub's life is 25"
+[IPC] broadcast game-log-entry: type=life text="Unsub's life is 25"
+[Telemetry] EMIT_LOG[3]: type=life text="QuLeR's life is 25"
+[IPC] broadcast game-log-entry: type=life text="QuLeR's life is 25"
+[Telemetry] processContentStreaming called, contentLen=64, bufferLen=414973
+[Telemetry] extracted 16 total blocks, processed=16
+[Telemetry] processContentStreaming called, contentLen=707, bufferLen=415037
+[Telemetry] extracted 17 total blocks, processed=16
+[Telemetry] streaming: 1 blocks → 0 events [] | gsm:0 zt:0(hit:0/miss:0) oid:0 shuf:0 del:0 | ctx: grpIds=2 zones=17 chains=0
+[Telemetry] processContentStreaming called, contentLen=15772, bufferLen=415744
+[Telemetry] extracted 19 total blocks, processed=17
+[Telemetry] streaming: 2 blocks → 1 events [game_state_update:1] | gsm:1 zt:0(hit:0/miss:0) oid:0 shuf:0 del:0 | ctx: grpIds=10 zones=17 chains=0
+[Telemetry] processContentStreaming called, contentLen=34, bufferLen=431516
+[Telemetry] extracted 19 total blocks, processed=19
+[Telemetry] processContentStreaming called, contentLen=3951, bufferLen=431550
+[Telemetry] extracted 20 total blocks, processed=19
+[Telemetry] streaming: 1 blocks → 2 events [game_state_update:1, mulligan_prompt:1] | gsm:1 zt:0(hit:0/miss:0) oid:0 shuf:0 del:0 | ctx: grpIds=10 zones=17 chains=0
+[Telemetry] EMIT_LOG[4]: type=system text="Opening hand"
+[IPC] broadcast game-log-entry: type=system text="Opening hand"
+[Telemetry] processContentStreaming called, contentLen=16004, bufferLen=435501
+[Telemetry] extracted 22 total blocks, processed=20
+[Telemetry] streaming: 2 blocks → 6 events [turn_change:1, phase_change:2, game_state_update:3] | gsm:3 zt:0(hit:0/miss:0) oid:0 shuf:0 del:0 | ctx: grpIds=10 zones=17 chains=0
+[Telemetry] EMIT_LOG[5]: type=turn text="Turn 1: Unsub"
+[IPC] broadcast game-log-entry: type=turn text="Turn 1: Unsub"
+[Telemetry] turn_change T1, logger=true, actions=5
+[Telemetry] EMIT_LOG: PENDING phase="Precombat Main"
+[Telemetry] processContentStreaming called, contentLen=54209, bufferLen=451505
+[Telemetry] extracted 25 total blocks, processed=22
+[Telemetry] streaming: 3 blocks → 30 events [zone_change:2, card_played:1, game_state_update:17, phase_change:8, turn_change:1, card_drawn:1] | gsm:17 zt:2(hit:2/miss:0) oid:2 shuf:0 del:0 | ctx: grpIds=12 zones=17 chains=2
+[Telemetry] cardName(97172): cache="Forest"
+[Telemetry] cardName(97172): cache="Forest"
+[IPC] broadcast game-log-entry: type=phase text="Precombat Main"
+[Telemetry] EMIT_LOG[7]: type=action text="Unsub played Forest"
+[IPC] broadcast game-log-entry: type=action text="Unsub played Forest"
+[Telemetry] EMIT_LOG: PENDING phase="Declare Attackers"
+[Telemetry] EMIT_LOG: PENDING phase="Postcombat Main"
+[Telemetry] EMIT_LOG: PENDING phase="End Step"
+[Telemetry] EMIT_LOG[8]: type=turn text="Turn 1: QuLeR"
+[IPC] broadcast game-log-entry: type=turn text="Turn 1: QuLeR"
+[Telemetry] turn_change T2, logger=true, actions=14
+[Telemetry] cardName(77277): deck="Zariel, Archduke of Avernus"
+[Telemetry] cardName(77277): deck="Zariel, Archduke of Avernus"
+[Telemetry] EMIT_LOG[9]: type=action text="QuLeR drew Zariel, Archduke of Avernus"
+[IPC] broadcast game-log-entry: type=action text="QuLeR drew Zariel, Archduke of Avernus"
+[Telemetry] EMIT_LOG: PENDING phase="Draw Step"
+[Telemetry] EMIT_LOG: PENDING phase="Precombat Main"
+[Telemetry] processContentStreaming called, contentLen=4828, bufferLen=250000
+[Telemetry] extracted 24 total blocks, processed=24
+[Telemetry] processContentStreaming called, contentLen=223, bufferLen=254828
+[Telemetry] extracted 24 total blocks, processed=24

@@ -1,0 +1,20 @@
+BASE obj 78.18 DS 71.0 pen 2 {"land":36,"ramp":13,"draw":12,"removal":11,"board_wipe":3,"protection":7} mana=84 curve=92 interaction=95 advantage=70 win=64 synergy=79 meta=50 structure=100
+  -0.00  Foundry Inspector => Primeval Bounty   DS 0.0 pen 2 mana=84 curve=92 interaction=95 advantage=70 win=64 synergy=86 meta=50 structure=100
+  -0.03  Foundry Inspector => Mirror Entity   DS 0.0 pen 2 mana=84 curve=92 interaction=95 advantage=70 win=64 synergy=77 meta=50 structure=100
+C:\Users\QuLeR\MTG-deck-builder\verify-2026-10-09\tazri\swap-lab.ts:27
+  if (i < 0) throw new Error(`not in list: ${out}`);
+                   ^
+
+Error: not in list: Foundry Inspector
+    at apply (C:\Users\QuLeR\MTG-deck-builder\verify-2026-10-09\tazri\swap-lab.ts:27:20)
+    at fs (C:\Users\QuLeR\MTG-deck-builder\verify-2026-10-09\tazri\swap-lab.ts:36:9)
+    at Object.<anonymous> (C:\Users\QuLeR\MTG-deck-builder\verify-2026-10-09\tazri\swap-lab.ts:39:148)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object.transformer (C:\Users\QuLeR\MTG-deck-builder\node_modules\tsx\dist\register-D46fvsV_.cjs:3:1104)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at cjsLoader (node:internal/modules/esm/translators:309:5)
+
+Node.js v22.22.0

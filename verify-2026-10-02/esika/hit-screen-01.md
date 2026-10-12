@@ -1,0 +1,82 @@
+screened 247/247, passed 80, last card read: Cloud, Planet's Champion
+
+- Gray Merchant of Asphodel — finisher — "each opponent loses X life... You gain life equal to the life lost" — beats Archon of Sun's Grace because it's a lump drain+lifegain swing that can be a near-kill and still feeds Mentor/Paradox.
+- Witch Enchanter // Witch-Blessed Meadow — removal — "destroy target artifact or enchantment an opponent controls" — beats Pia, Aether Ascetic because it answers a threat on entry instead of just tutoring one.
+- Goldspan Dragon — ramp/finisher — "create a Treasure token... Treasures you control have '{T}, Sacrifice: Add two mana of any one color'" — beats Great Divide Guide because it's an evasive hasty threat AND doubled mana fixing.
+- Tatyova, Benthic Druid — engine — "Landfall — you gain 1 life and draw a card" — beats Pia, Aether Ascetic because every land drop is a repeatable life+card event that also feeds Mentor/Paradox.
+- Massacre Wurm — removal — "creatures your opponents control get -2/-2... that player loses 2 life" — beats Archon of Sun's Grace because it's a one-sided board wipe on entry.
+- Mulldrifter — value — "When this creature enters, draw two cards" — beats Pia, Aether Ascetic with bigger immediate card advantage.
+- Purphoros, God of the Forge — engine — "Whenever another creature you control enters, Purphoros deals 2 damage to each opponent" — beats Pia, Aether Ascetic because every future Bridge hit now pings the opponent.
+- Twinflame Tyrant — finisher enabler — "it deals double that damage instead" — beats Archon of Sun's Grace by doubling every damage source already in the deck (Purphoros, Niv-Mizzet, drains).
+- Enduring Tenacity — engine/finisher — "Whenever you gain life, target opponent loses that much life" — beats Archon of Sun's Grace because it turns the deck's lifegain plan into a second win condition, and it's resilient (returns as an enchantment).
+- Meteor Golem — removal — "destroy target nonland permanent an opponent controls" — beats Pia, Aether Ascetic with unconditional removal on entry.
+- Myr Battlesphere — finisher — "create four 1/1 colorless Myr" — beats Archon of Sun's Grace with more immediate board presence (5 bodies at once).
+- Nyxbloom Ancient — ramp — "it produces three times as much of that mana instead" — beats Great Divide Guide by tripling all mana, not just fixing it.
+- Tekuthal, Inquiry Dominus — engine — "If you would proliferate, proliferate twice instead" — beats Pia, Aether Ascetic because it doubles every proliferate (Tam, Evolution Sage, Flux Channeler, Cayth below) that grows walker loyalty.
+- Valgavoth, Terror Eater — finisher — "Flying, lifelink... During your turn, you may play cards exiled with Valgavoth" — beats Archon of Sun's Grace with a bigger evasive lifelinker plus card advantage and a hard-to-remove ward.
+- Rune-Scarred Demon — value — "search your library for a card, put it into your hand" — beats Pia, Aether Ascetic by tutoring any card instead of just an enchantment.
+- Exalted Sunborn — engine — "If one or more tokens would be created under your control, twice that many... are created instead" — beats Pia, Aether Ascetic by doubling every token this deck makes, including planeswalker ultimates.
+- Adrix and Nev, Twincasters — engine — "twice that many of those tokens are created instead" — beats Pia, Aether Ascetic the same way as Exalted Sunborn, with a resilient ward body.
+- Acidic Slime — removal — "destroy target artifact, enchantment, or land" — beats Pia, Aether Ascetic with flexible unconditional removal.
+- Zetalpa, Primal Dawn — finisher — "Flying, double strike, vigilance, trample, indestructible" — beats Archon of Sun's Grace as a nearly unremovable, unblockable-in-practice clock.
+- Savage Ventmaw — ramp — "add {R}{R}{R}{G}{G}{G}" on attack — beats Great Divide Guide with a bigger recurring mana burst to fuel loyalty abilities.
+- Lyra Dawnbringer — finisher/engine — "Flying, first strike, lifelink" — beats Archon of Sun's Grace with a bigger evasive lifelink body that feeds Mentor/Paradox every combat.
+- Starfield Vocalist — engine — "that ability triggers an additional time" — beats Pia, Aether Ascetic because it doubles every ETB this deck has, including every future Bridge hit.
+- The Walls of Ba Sing Se — value — "Other permanents you control have indestructible" — beats Pia, Aether Ascetic by protecting the whole planeswalker board at once.
+- Koma, World-Eater — finisher — "create four 3/3 blue Serpent creature tokens" on combat damage — beats Archon of Sun's Grace with an uncounterable, warded body that snowballs into an army.
+- Niv-Mizzet, Visionary — engine — "you draw that many cards" off any noncombat damage — beats Pia, Aether Ascetic by turning every damage-dealing loyalty ability into card draw.
+- Overlord of the Balemurk — value — "mill four cards, then you may return a non-Avatar creature card or a planeswalker card from your graveyard to your hand" — beats Pia, Aether Ascetic with repeatable planeswalker recursion.
+- Summon: Primal Odin — removal/finisher — "Destroy target creature... loses the game" — beats Archon of Sun's Grace with guaranteed removal plus a near-unbeatable combat-damage clause.
+- Saheeli, Sublime Artificer — planeswalker — "create a 1/1 colorless Servo artifact creature token" on noncreature cast — beats Chandra, Acolyte of Flame with sticky passive token generation.
+- Prime Speaker Zegana — value — "draw cards equal to its power" — beats Pia, Aether Ascetic with often-large card draw.
+- Longshot, Rebel Bowman — engine — "Longshot deals 2 damage to each opponent" on noncreature cast — beats Pia, Aether Ascetic with repeatable reach off the deck's removal/spells.
+- Overlord of the Floodpits — value — "draw two cards, then discard a card" on enter or attack — beats Pia, Aether Ascetic with repeated card selection.
+- Regal Caracal — engine — "Other Cats you control get +1/+1 and have lifelink" plus two lifelink tokens — beats Pia, Aether Ascetic with multiple repeated lifegain triggers for Mentor/Paradox.
+- Black Waltz No. 3 — engine — "deals 2 damage to each opponent" on noncreature cast — beats Pia, Aether Ascetic with an evasive deathtouch body and repeatable reach.
+- Arcanis the Omnipotent — value — "{T}: Draw three cards" — beats Pia, Aether Ascetic with a repeatable huge card-advantage engine.
+- The Legend of Kyoshi // Avatar Kyoshi — value/engine — "Draw cards equal to the greatest power among creatures you control" then "Lands you control have trample and hexproof... {T}: Add X mana of any one color" — beats Great Divide Guide by ending as a bigger, protected mana engine.
+- Kenrith, the Returned King — value — five modal activated abilities (ramp/counters/lifegain/draw/reanimation) — beats Pia, Aether Ascetic as a repeatable toolbox.
+- Marang River Regent // Coil and Catch — removal/tempo — "return up to two other target nonland permanents to their owners' hands" — beats Pia, Aether Ascetic by bouncing two threats at once.
+- Bane of Bala Ged — removal — "defending player exiles two permanents they control" on attack — beats Archon of Sun's Grace with repeatable double exile.
+- Invasion of Zendikar // Awakened Skyclave — ramp — "search your library for up to two basic land cards, put them onto the battlefield tapped" then "{T}: Add one mana of any color" — beats Great Divide Guide with immediate ramp that flips into any-color fixing.
+- Cloudblazer — value — "you gain 2 life and draw two cards" — beats Pia, Aether Ascetic with immediate card and life swing.
+- Riptide Gearhulk — removal/tempo — "put up to one target nonland permanent that player controls into its owner's library third from the top" — beats Pia, Aether Ascetic with a double-strike body and real removal.
+- Clone — value — "enter as a copy of any creature on the battlefield" — beats Pia, Aether Ascetic by flexibly copying the best creature in play.
+- Jegantha, the Wellspring — ramp — "{T}: Add {W}{U}{B}{R}{G}" — beats Great Divide Guide with perfect five-color fixing in one activation.
+- Breaker of Creation — finisher — "Annihilator 2" — beats Archon of Sun's Grace with a brutal attack-trigger clock plus hexproof from every color.
+- Smaug the Magnificent — ramp/finisher — "create a Treasure token" each upkeep, scaling attack damage — beats Great Divide Guide with repeatable treasure production and reach.
+- Beza, the Bounding Spring — value — ETB checks four conditions, each granting a Treasure, 4 life, two tokens, or a card — beats Pia, Aether Ascetic by usually hitting several modes at once.
+- The Legend of Roku // Avatar Roku — value/ramp — "Exile the top three cards... you may play those cards" then "{8}: Create a 4/4 red Dragon creature token with flying and firebending 4" — beats Pia, Aether Ascetic with guaranteed Saga value into a recurring mana/token engine.
+- Kaito, Cunning Infiltrator — planeswalker — "Up to one target creature you control can't be blocked... Draw a card, then discard a card" — beats Chandra, Acolyte of Flame with evasion enabling plus looting.
+- Vizier of the Menagerie — ramp/value — "You may cast creature spells from the top of your library... spend mana of any type to cast creature spells" — beats Great Divide Guide with ongoing card selection and colorless-cost casting.
+- The Legend of Yangchen // Avatar Yangchen — removal/value — "Exile those permanents" (opponent's MV 3+ permanent) then "you may have target opponent draw three cards. If you do, draw three cards" — beats Archon of Sun's Grace with guaranteed Saga removal.
+- Cayth, Famed Mechanist — engine — "Choose one — Populate. Proliferate." — beats Pia, Aether Ascetic with a repeatable proliferate that grows every walker's loyalty.
+- Zuko, Exiled Prince — ramp/value — "add {R}{R}{R}" and "Exile the top card of your library. You may play that card this turn" on attack — beats Great Divide Guide with recurring mana plus card advantage.
+- Zodiark, Umbral God — removal — "each player sacrifices half the non-God creatures they control" — beats Archon of Sun's Grace as a likely one-sided board wipe in a deck that runs few creatures, and it's indestructible.
+- Overlord of the Boilerbilges — removal/finisher — "it deals 4 damage to any target" on enter or attack — beats Archon of Sun's Grace with repeatable flexible burn.
+- Absolute Virtue — finisher — "You have protection from each of your opponents" — beats Archon of Sun's Grace as a near-unkillable, unblockable-in-practice 8/8 flyer in 1v1.
+- Brightglass Gearhulk — value — "search your library for up to two artifact, creature, and/or enchantment cards... put them into your hand" — beats Pia, Aether Ascetic by tutoring two cards instead of one.
+- Avatar Roku, Firebender — ramp — "add six {R}" whenever a player attacks — beats Great Divide Guide with a huge recurring mana burst to fuel loyalty abilities.
+- Elenda, Saint of Dusk — finisher/engine — "Elenda gets an additional +5/+5" once your life is far above starting — beats Archon of Sun's Grace because the deck's own lifegain plan (Mentor/Paradox) turns her into an evasive 9/9+ menace lifelinker.
+- Aang, at the Crossroads // Aang, Destined Savior — value — "put a creature card with mana value 4 or less from among them onto the battlefield" — beats Pia, Aether Ascetic with a free extra permanent plus a later mana engine.
+- Omni-Changeling — value — "enter as a copy of any creature on the battlefield" — beats Pia, Aether Ascetic the same way Clone does, with changeling as a bonus.
+- Quintorius Kand — planeswalker — "Discover 4" at -3 — beats Chandra, Acolyte of Flame with a much stronger loyalty kit.
+- Omnath, Locus of All — value — "add three mana in any combination of its colors and put it into your hand" — beats Great Divide Guide with free recurring card and mana advantage.
+- Gaius van Baelsar — removal — "Each player sacrifices a nontoken creature of their choice" (mode) — beats Pia, Aether Ascetic as flexible, likely one-sided removal in a token-light deck.
+- Emeritus of Ideation // Ancestral Recall — value — "This creature enters prepared" — beats Pia, Aether Ascetic because it hands you a free, instant-speed copy of Ancestral Recall for {U}.
+- Eirdu, Carrier of Dawn // Isilu, Carrier of Twilight — finisher/engine — "Flying, lifelink" plus "Each other nontoken creature you control has persist" after flip — beats Archon of Sun's Grace with a resilient evasive lifelinker that protects the rest of the board.
+- The Legend of Kuruk // Avatar Kuruk — value — "Scry 2, then draw a card" (twice guaranteed) — beats Pia, Aether Ascetic with guaranteed card selection into a later token/extra-turn engine.
+- Zariel, Archduke of Avernus — planeswalker — "Creatures you control get +1/+0 and gain haste" — beats Chandra, Acolyte of Flame with a stronger, cheaper loyalty kit.
+- Raph & Mikey, Troublemakers — engine/finisher — "reveal cards... until you reveal a creature card. Put that card onto the battlefield tapped and attacking" on attack — beats Archon of Sun's Grace by acting as a second Bridge every combat.
+- Huatli, the Sun's Heart — planeswalker — "You gain life equal to the greatest toughness among creatures you control" — beats Chandra, Acolyte of Flame with 7 starting loyalty and a repeatable lifegain line that feeds Mentor/Paradox.
+- Vile Mutilator — removal — "each opponent sacrifices a nontoken enchantment... then sacrifices a nontoken creature" — beats Archon of Sun's Grace with a double edict on entry.
+- Maelstrom Archangel — finisher/engine — "you may cast a spell from your hand without paying its mana cost" on combat damage — beats Archon of Sun's Grace with free spells every time it connects.
+- Combustion Man — removal — "destroy target permanent unless its controller has Combustion Man deal damage to them equal to his power" — beats Archon of Sun's Grace with a repeatable destroy-or-burn clock on attack.
+- Kasmina, Enigmatic Mentor — planeswalker — "create a 2/2 blue Wizard creature token. Draw a card, then discard a card" — beats Chandra, Acolyte of Flame with a taxing static ability protecting your board plus card selection.
+- The Rise of Sozin // Fire Lord Sozin — removal — "Destroy all creatures" — beats Archon of Sun's Grace with a guaranteed board wipe on chapter I.
+- Summon: Anima — value — "You draw a card and you lose 1 life" (x3) then "Each opponent sacrifices a creature... and loses 3 life" — beats Pia, Aether Ascetic with guaranteed multi-turn card advantage plus an edict finish.
+- Progenitus — finisher — "Protection from everything" — beats Archon of Sun's Grace as a functionally unkillable 10/10 finisher.
+- Black Cat, Cunning Thief — value — "exile two of them face down... You may play the exiled cards for as long as they remain exiled" — beats Pia, Aether Ascetic by stealing two cards from the opponent's deck.
+- Medomai the Ageless — finisher — "take an extra turn after this one" on combat damage — beats Archon of Sun's Grace because compounding extra turns end games fast.
+- Fear of Burning Alive — finisher — "it deals 4 damage to each opponent" on entry — beats Archon of Sun's Grace with immediate reach straight at the opponent's face, plus conditional follow-up removal.
+- Elegy Acolyte — engine — "you draw a card and lose 1 life" whenever your creatures deal combat damage, plus lifelink — beats Pia, Aether Ascetic with repeatable card advantage tied to the deck's lifegain plan.

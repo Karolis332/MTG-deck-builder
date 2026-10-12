@@ -26,4 +26,15 @@ describe('climbDeck canSwap (buy budget)', () => {
     // Without the gate the high-value, unaffordable cards win the swap — proof the hook is load-bearing.
     expect(withoutHook.deck.some((c) => c.price === 1000)).toBe(true);
   });
+
+  it('onEvaluate is a pure observer: identical deck/score/evaluations with or without it, ticking once per evaluation', () => {
+    const without = climbDeck(start, pool, evaluate, { batch: 5, topK: 5, canSwap });
+    const ticks: number[] = [];
+    const withHook = climbDeck(start, pool, evaluate, { batch: 5, topK: 5, canSwap, onEvaluate: (n) => ticks.push(n) });
+
+    expect(withHook.deck).toEqual(without.deck);
+    expect(withHook.score).toBe(without.score);
+    expect(withHook.evaluations).toBe(without.evaluations);
+    expect(ticks).toEqual(Array.from({ length: withHook.evaluations }, (_, i) => i + 1));
+  });
 });

@@ -1,0 +1,80 @@
+file      : verify-2026-10-09/color-best/decks/B/final.txt
+format    : commander   commander: Ob Nixilis of the Black Oath
+totals    : 100 cards | 38 lands (38 eff.) | 61 nonland | avg MV 3.92
+curve     : 1:5 2:12 3:11 4:16 5:4 6:5 7:8
+VERDICT   : FAIL
+
+  PASS  size        100 cards (commander wants 100)
+  PASS  singleton   singleton respected (basics exempt)
+  PASS  legality    every card legal in commander
+  PASS  rules       no other format rule broken
+  PASS  identity    all cards inside B
+  PASS  ownership   all cards owned; paper collection imported 0 days ago
+  FAIL  arenaNames  2 line(s) use "Front // Back" — Arena answers "unknown card title". Use:
+        - 1 Emeritus of Woe
+        - 1 Murderous Rider
+  WARN  lands       38 lands (+0 MDFC land backs = 38 effective); Karsten wants 41 ±2
+  FAIL  plan        1/61 nonland cards interact (2%) — commander wants: creates tokens, drains opponents
+        - Expedition Map (MV 1)
+        - Kaya's Ghostform (MV 1)
+        - Reanimate (MV 1)
+        - Sol Ring (MV 1)
+        - Wayfarer's Bauble (MV 1)
+        - Animate Dead (MV 2)
+        - Arcane Signet (MV 2)
+        - Bitter Triumph (MV 2)
+        - Black Sun's Zenith (MV 2)
+        - Charcoal Diamond (MV 2)
+        - Consuming Corruption (MV 2)
+        - Feed the Swarm (MV 2)
+        - Night's Whisper (MV 2)
+        - Ornithopter of Paradise (MV 2)
+        - Sign in Blood (MV 2)
+        - Sword of the Animist (MV 2)
+        - Thought Vessel (MV 2)
+        - Buried Alive (MV 3)
+        - Burnished Hart (MV 3)
+        - Dismember (MV 3)
+        - Murder (MV 3)
+        - Murderous Rider (MV 3)
+        - Oubliette (MV 3)
+        - Plaguecrafter (MV 3)
+        - Vampire Nighthawk (MV 3)
+        - Varragoth, Bloodsky Sire (MV 3)
+        - Victimize (MV 3)
+        - Worn Powerstone (MV 3)
+        - Crypt Ghast (MV 4)
+        - Desecration Demon (MV 4)
+        - Diabolic Tutor (MV 4)
+        - Dread Presence (MV 4)
+        - Dread Return (MV 4)
+        - Emeritus of Woe (MV 4)
+        - Gonti, Lord of Luxury (MV 4)
+        - Greed (MV 4)
+        - Nyx Lotus (MV 4)
+        - Ravenous Chupacabra (MV 4)
+        - Solemn Simulacrum (MV 4)
+        - Syphon Mind (MV 4)
+        - Tendrils of Corruption (MV 4)
+        - The Darkness Crystal (MV 4)
+        - Thran Dynamo (MV 4)
+        - Twilight Prophet (MV 4)
+        - Alhammarret's Archive (MV 5)
+        - Defiling Daemogoth (MV 5)
+        - Ob Nixilis, the Hate-Twisted (MV 5)
+        - Chimil, the Inner Sun (MV 6)
+        - Deadly Tempest (MV 6)
+        - Grave Titan (MV 6)
+        - Pontiff of Blight (MV 6)
+        - Soul of New Phyrexia (MV 6)
+        - Butcher of Malakir (MV 7)
+        - Rune-Scarred Demon (MV 7)
+        - Archfiend of Despair (MV 8)
+        - Pestilence Demon (MV 8)
+        - Reiver Demon (MV 8)
+        - Shard of the Nightbringer (MV 8)
+        - Vilis, Broker of Blood (MV 8)
+        - Rise of the Dark Realms (MV 9)
+  PASS  curve       avg MV 3.92; commander sets no cost threshold
+  PASS  wincons     15 win condition(s)/closer(s)
+  PASS  locks       2 locked card(s) present and intact

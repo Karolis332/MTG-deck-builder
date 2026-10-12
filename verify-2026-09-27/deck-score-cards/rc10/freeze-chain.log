@@ -1,0 +1,10 @@
+== domain --write
+exit 0 domain --write
+== freeze --write
+exit 0 freeze --write
+== reference --write
+exit 0 reference --write
+== verify
+exit 0 verify
+== verify
+exit 0 verify

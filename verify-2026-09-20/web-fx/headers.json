@@ -1,0 +1,374 @@
+[
+  {
+    "state": "signed-out",
+    "width": 1280,
+    "headerWidth": 1183.21875,
+    "overflow": false,
+    "escaped": [],
+    "labels": [
+      {
+        "text": "Collection",
+        "height": 0,
+        "display": "none"
+      },
+      {
+        "text": "Decks",
+        "height": 0,
+        "display": "none"
+      },
+      {
+        "text": "Commanders",
+        "height": 0,
+        "display": "none"
+      },
+      {
+        "text": "Favorites",
+        "height": 0,
+        "display": "none"
+      },
+      {
+        "text": "Builder",
+        "height": 0,
+        "display": "none"
+      },
+      {
+        "text": "Optimizer",
+        "height": 0,
+        "display": "none"
+      },
+      {
+        "text": "Methodology",
+        "height": 0,
+        "display": "none"
+      }
+    ]
+  },
+  {
+    "state": "signed-out",
+    "width": 1440,
+    "headerWidth": 1205.625,
+    "overflow": false,
+    "escaped": [],
+    "labels": [
+      {
+        "text": "Collection",
+        "height": 20,
+        "display": "block"
+      },
+      {
+        "text": "Decks",
+        "height": 20,
+        "display": "block"
+      },
+      {
+        "text": "Commanders",
+        "height": 20,
+        "display": "block"
+      },
+      {
+        "text": "Favorites",
+        "height": 0,
+        "display": "none"
+      },
+      {
+        "text": "Builder",
+        "height": 0,
+        "display": "none"
+      },
+      {
+        "text": "Optimizer",
+        "height": 0,
+        "display": "none"
+      },
+      {
+        "text": "Methodology",
+        "height": 0,
+        "display": "none"
+      }
+    ]
+  },
+  {
+    "state": "signed-out",
+    "width": 1720,
+    "headerWidth": 1196,
+    "overflow": false,
+    "escaped": [],
+    "labels": [
+      {
+        "text": "Collection",
+        "height": 20,
+        "display": "block"
+      },
+      {
+        "text": "Decks",
+        "height": 20,
+        "display": "block"
+      },
+      {
+        "text": "Commanders",
+        "height": 20,
+        "display": "block"
+      },
+      {
+        "text": "Favorites",
+        "height": 0,
+        "display": "none"
+      },
+      {
+        "text": "Builder",
+        "height": 0,
+        "display": "none"
+      },
+      {
+        "text": "Optimizer",
+        "height": 0,
+        "display": "none"
+      },
+      {
+        "text": "Methodology",
+        "height": 0,
+        "display": "none"
+      }
+    ]
+  },
+  {
+    "state": "signed-out",
+    "width": 1920,
+    "headerWidth": 1196,
+    "overflow": false,
+    "escaped": [],
+    "labels": [
+      {
+        "text": "Collection",
+        "height": 20,
+        "display": "block"
+      },
+      {
+        "text": "Decks",
+        "height": 20,
+        "display": "block"
+      },
+      {
+        "text": "Commanders",
+        "height": 20,
+        "display": "block"
+      },
+      {
+        "text": "Favorites",
+        "height": 0,
+        "display": "none"
+      },
+      {
+        "text": "Builder",
+        "height": 0,
+        "display": "none"
+      },
+      {
+        "text": "Optimizer",
+        "height": 0,
+        "display": "none"
+      },
+      {
+        "text": "Methodology",
+        "height": 0,
+        "display": "none"
+      }
+    ]
+  },
+  {
+    "state": "signed-in",
+    "width": 1280,
+    "headerWidth": 1183.21875,
+    "overflow": false,
+    "escaped": [],
+    "labels": [
+      {
+        "text": "Collection",
+        "height": 0,
+        "display": "none"
+      },
+      {
+        "text": "Decks",
+        "height": 0,
+        "display": "none"
+      },
+      {
+        "text": "Commanders",
+        "height": 0,
+        "display": "none"
+      },
+      {
+        "text": "Favorites",
+        "height": 0,
+        "display": "none"
+      },
+      {
+        "text": "Builder",
+        "height": 0,
+        "display": "none"
+      },
+      {
+        "text": "Optimizer",
+        "height": 0,
+        "display": "none"
+      },
+      {
+        "text": "Methodology",
+        "height": 0,
+        "display": "none"
+      },
+      {
+        "text": "My Decks",
+        "height": 0,
+        "display": "none"
+      }
+    ]
+  },
+  {
+    "state": "signed-in",
+    "width": 1440,
+    "headerWidth": 1205.625,
+    "overflow": false,
+    "escaped": [],
+    "labels": [
+      {
+        "text": "Collection",
+        "height": 20,
+        "display": "block"
+      },
+      {
+        "text": "Decks",
+        "height": 20,
+        "display": "block"
+      },
+      {
+        "text": "Commanders",
+        "height": 20,
+        "display": "block"
+      },
+      {
+        "text": "Favorites",
+        "height": 0,
+        "display": "none"
+      },
+      {
+        "text": "Builder",
+        "height": 0,
+        "display": "none"
+      },
+      {
+        "text": "Optimizer",
+        "height": 0,
+        "display": "none"
+      },
+      {
+        "text": "Methodology",
+        "height": 0,
+        "display": "none"
+      },
+      {
+        "text": "My Decks",
+        "height": 0,
+        "display": "none"
+      }
+    ]
+  },
+  {
+    "state": "signed-in",
+    "width": 1720,
+    "headerWidth": 1196,
+    "overflow": false,
+    "escaped": [],
+    "labels": [
+      {
+        "text": "Collection",
+        "height": 20,
+        "display": "block"
+      },
+      {
+        "text": "Decks",
+        "height": 20,
+        "display": "block"
+      },
+      {
+        "text": "Commanders",
+        "height": 20,
+        "display": "block"
+      },
+      {
+        "text": "Favorites",
+        "height": 0,
+        "display": "none"
+      },
+      {
+        "text": "Builder",
+        "height": 0,
+        "display": "none"
+      },
+      {
+        "text": "Optimizer",
+        "height": 0,
+        "display": "none"
+      },
+      {
+        "text": "Methodology",
+        "height": 0,
+        "display": "none"
+      },
+      {
+        "text": "My Decks",
+        "height": 0,
+        "display": "none"
+      }
+    ]
+  },
+  {
+    "state": "signed-in",
+    "width": 1920,
+    "headerWidth": 1196,
+    "overflow": false,
+    "escaped": [],
+    "labels": [
+      {
+        "text": "Collection",
+        "height": 20,
+        "display": "block"
+      },
+      {
+        "text": "Decks",
+        "height": 20,
+        "display": "block"
+      },
+      {
+        "text": "Commanders",
+        "height": 20,
+        "display": "block"
+      },
+      {
+        "text": "Favorites",
+        "height": 0,
+        "display": "none"
+      },
+      {
+        "text": "Builder",
+        "height": 0,
+        "display": "none"
+      },
+      {
+        "text": "Optimizer",
+        "height": 0,
+        "display": "none"
+      },
+      {
+        "text": "Methodology",
+        "height": 0,
+        "display": "none"
+      },
+      {
+        "text": "My Decks",
+        "height": 0,
+        "display": "none"
+      }
+    ]
+  }
+]

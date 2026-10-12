@@ -1,0 +1,13 @@
+Traverse the Outlands=>Chromatic Lantern
+Traverse the Outlands=>Poison Dart Frog
+Traverse the Outlands=>Sage of the Maze
+Paleoloth=>Poison Dart Frog
+Elvish Aberration=>Poison Dart Frog
+Elvish Aberration=>Chromatic Lantern
+Paleoloth=>Mana Reflection
+Paleoloth=>Hydra Broodmaster
+Mountain=>Horizon of Progress
+Spinerock Knoll=>Horizon of Progress
+Paleoloth=>Chromatic Lantern
+Oblivion Sower=>Poison Dart Frog
+Paleoloth=>Vivien Reid

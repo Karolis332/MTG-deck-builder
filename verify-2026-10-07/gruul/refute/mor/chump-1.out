@@ -1,0 +1,5 @@
+final.txt        38L | keep7 0.717 | 4th land T4 0.812 | Bumi T5 0.839 | Gil T3 0.000 Alena T5 0.000 | screw 0.015 | flood 0.015 | spells T1-8 12.90 | clock median T7 (P<=T6 0.359, <=T7 0.756, <=T8 0.917, mean 6.99)
+b-BlossomingBo.txt 38L | keep7 0.722 | 4th land T4 0.814 | Bumi T5 0.840 | Gil T3 0.000 Alena T5 0.000 | screw 0.014 | flood 0.014 | spells T1-8 12.84 | clock median T7 (P<=T6 0.363, <=T7 0.763, <=T8 0.919, mean 6.98)
+b-EarthRumble.txt 38L | keep7 0.714 | 4th land T4 0.816 | Bumi T5 0.839 | Gil T3 0.000 Alena T5 0.000 | screw 0.013 | flood 0.016 | spells T1-8 12.79 | clock median T7 (P<=T6 0.355, <=T7 0.744, <=T8 0.911, mean 7.02)
+b-EdgarMoonlit.txt 38L | keep7 0.721 | 4th land T4 0.808 | Bumi T5 0.837 | Gil T3 0.000 Alena T5 0.000 | screw 0.015 | flood 0.014 | spells T1-8 12.79 | clock median T7 (P<=T6 0.360, <=T7 0.754, <=T8 0.911, mean 7.00)
+b-Forest.txt     39L | keep7 0.734 | 4th land T4 0.833 | Bumi T5 0.849 | Gil T3 0.000 Alena T5 0.000 | screw 0.011 | flood 0.017 | spells T1-8 12.96 | clock median T7 (P<=T6 0.361, <=T7 0.766, <=T8 0.919, mean 6.97)

@@ -1,0 +1,464 @@
+[
+  {
+    "phase": "after",
+    "page": "home",
+    "width": 1280,
+    "theme": "light",
+    "p95": 16.8,
+    "median": 16.7,
+    "frames": 359,
+    "longTasks": [],
+    "cls": 0.00001882476806640625,
+    "lcp": 748,
+    "canvasP95": 0.3,
+    "canvasMax": 0.5,
+    "canvasFrames": 360,
+    "canvasMean": 0.13,
+    "willChange": 2,
+    "willChangeList": [
+      "DIV.tome-overlay",
+      "DIV.rune-orbit"
+    ],
+    "animations": 26,
+    "overflow": false,
+    "scrollWidth": 1280,
+    "inner": 1280,
+    "offenders": [],
+    "noCanvasP95": 16.7,
+    "bytes": {
+      "js": 1100313,
+      "css": 28613,
+      "jsRaw": 6415877,
+      "cssRaw": 180751
+    },
+    "errors": []
+  },
+  {
+    "phase": "after",
+    "page": "home",
+    "width": 1280,
+    "theme": "dark",
+    "p95": 16.7,
+    "median": 16.7,
+    "frames": 360,
+    "longTasks": [],
+    "cls": 0.00001882476806640625,
+    "lcp": 684,
+    "canvasP95": 0.3,
+    "canvasMax": 0.5,
+    "canvasFrames": 361,
+    "canvasMean": 0.15,
+    "willChange": 2,
+    "willChangeList": [
+      "DIV.tome-overlay",
+      "DIV.rune-orbit"
+    ],
+    "animations": 26,
+    "overflow": false,
+    "scrollWidth": 1280,
+    "inner": 1280,
+    "offenders": [],
+    "noCanvasP95": 16.7,
+    "bytes": {
+      "js": 1100313,
+      "css": 28613,
+      "jsRaw": 6415877,
+      "cssRaw": 180751
+    },
+    "errors": []
+  },
+  {
+    "phase": "after",
+    "page": "home",
+    "width": 390,
+    "theme": "light",
+    "p95": 16.8,
+    "median": 16.7,
+    "frames": 360,
+    "longTasks": [],
+    "cls": 0,
+    "lcp": 684,
+    "canvasP95": 0.2,
+    "canvasMax": 0.5,
+    "canvasFrames": 361,
+    "canvasMean": 0.12,
+    "willChange": 2,
+    "willChangeList": [
+      "DIV.tome-overlay",
+      "DIV.rune-orbit"
+    ],
+    "animations": 26,
+    "overflow": false,
+    "scrollWidth": 390,
+    "inner": 390,
+    "offenders": [
+      {
+        "tag": "svg",
+        "cls": "[object SVGAnimatedString]",
+        "right": 414
+      },
+      {
+        "tag": "g",
+        "cls": "[object SVGAnimatedString]",
+        "right": 408
+      },
+      {
+        "tag": "path",
+        "cls": "[object SVGAnimatedString]",
+        "right": 408
+      },
+      {
+        "tag": "path",
+        "cls": "[object SVGAnimatedString]",
+        "right": 408
+      },
+      {
+        "tag": "path",
+        "cls": "[object SVGAnimatedString]",
+        "right": 408
+      },
+      {
+        "tag": "path",
+        "cls": "[object SVGAnimatedString]",
+        "right": 408
+      }
+    ],
+    "noCanvasP95": 16.7,
+    "bytes": {
+      "js": 1100313,
+      "css": 28613,
+      "jsRaw": 6415877,
+      "cssRaw": 180751
+    },
+    "errors": []
+  },
+  {
+    "phase": "after",
+    "page": "home",
+    "width": 390,
+    "theme": "dark",
+    "p95": 16.8,
+    "median": 16.7,
+    "frames": 360,
+    "longTasks": [],
+    "cls": 0,
+    "lcp": 756,
+    "canvasP95": 0.3,
+    "canvasMax": 0.5,
+    "canvasFrames": 361,
+    "canvasMean": 0.14,
+    "willChange": 2,
+    "willChangeList": [
+      "DIV.tome-overlay",
+      "DIV.rune-orbit"
+    ],
+    "animations": 26,
+    "overflow": false,
+    "scrollWidth": 390,
+    "inner": 390,
+    "offenders": [
+      {
+        "tag": "svg",
+        "cls": "[object SVGAnimatedString]",
+        "right": 415
+      },
+      {
+        "tag": "g",
+        "cls": "[object SVGAnimatedString]",
+        "right": 409
+      },
+      {
+        "tag": "path",
+        "cls": "[object SVGAnimatedString]",
+        "right": 409
+      },
+      {
+        "tag": "path",
+        "cls": "[object SVGAnimatedString]",
+        "right": 409
+      },
+      {
+        "tag": "path",
+        "cls": "[object SVGAnimatedString]",
+        "right": 409
+      },
+      {
+        "tag": "path",
+        "cls": "[object SVGAnimatedString]",
+        "right": 409
+      }
+    ],
+    "noCanvasP95": 16.7,
+    "bytes": {
+      "js": 1100313,
+      "css": 28613,
+      "jsRaw": 6415877,
+      "cssRaw": 180751
+    },
+    "errors": []
+  },
+  {
+    "phase": "after",
+    "page": "builder",
+    "width": 1280,
+    "theme": "light",
+    "p95": 16.7,
+    "median": 16.7,
+    "frames": 360,
+    "longTasks": [],
+    "cls": 0.005971907043457032,
+    "lcp": 412,
+    "canvasP95": 0.3,
+    "canvasMax": 0.5,
+    "canvasFrames": 361,
+    "canvasMean": 0.17,
+    "willChange": 1,
+    "willChangeList": [
+      "DIV.tome-overlay"
+    ],
+    "animations": 10,
+    "overflow": false,
+    "scrollWidth": 1280,
+    "inner": 1280,
+    "offenders": [],
+    "noCanvasP95": 16.7,
+    "bytes": {
+      "js": 1038066,
+      "css": 25116,
+      "jsRaw": 5992452,
+      "cssRaw": 164598
+    },
+    "errors": []
+  },
+  {
+    "phase": "after",
+    "page": "builder",
+    "width": 1280,
+    "theme": "dark",
+    "p95": 16.7,
+    "median": 16.7,
+    "frames": 360,
+    "longTasks": [],
+    "cls": 0.005971907043457032,
+    "lcp": 440,
+    "canvasP95": 0.3,
+    "canvasMax": 0.5,
+    "canvasFrames": 361,
+    "canvasMean": 0.16,
+    "willChange": 1,
+    "willChangeList": [
+      "DIV.tome-overlay"
+    ],
+    "animations": 10,
+    "overflow": false,
+    "scrollWidth": 1280,
+    "inner": 1280,
+    "offenders": [],
+    "noCanvasP95": 16.8,
+    "bytes": {
+      "js": 1038066,
+      "css": 25116,
+      "jsRaw": 5992452,
+      "cssRaw": 164598
+    },
+    "errors": []
+  },
+  {
+    "phase": "after",
+    "page": "builder",
+    "width": 390,
+    "theme": "light",
+    "p95": 16.7,
+    "median": 16.7,
+    "frames": 360,
+    "longTasks": [],
+    "cls": 0.0098614439512555,
+    "lcp": 356,
+    "canvasP95": 0.2,
+    "canvasMax": 0.5,
+    "canvasFrames": 361,
+    "canvasMean": 0.13,
+    "willChange": 1,
+    "willChangeList": [
+      "DIV.tome-overlay"
+    ],
+    "animations": 10,
+    "overflow": false,
+    "scrollWidth": 390,
+    "inner": 390,
+    "offenders": [],
+    "noCanvasP95": 16.8,
+    "bytes": {
+      "js": 1038066,
+      "css": 25116,
+      "jsRaw": 5992452,
+      "cssRaw": 164598
+    },
+    "errors": []
+  },
+  {
+    "phase": "after",
+    "page": "builder",
+    "width": 390,
+    "theme": "dark",
+    "p95": 16.8,
+    "median": 16.7,
+    "frames": 360,
+    "longTasks": [],
+    "cls": 0.0098614439512555,
+    "lcp": 364,
+    "canvasP95": 0.3,
+    "canvasMax": 0.3,
+    "canvasFrames": 361,
+    "canvasMean": 0.12,
+    "willChange": 1,
+    "willChangeList": [
+      "DIV.tome-overlay"
+    ],
+    "animations": 10,
+    "overflow": false,
+    "scrollWidth": 390,
+    "inner": 390,
+    "offenders": [],
+    "noCanvasP95": 16.8,
+    "bytes": {
+      "js": 1038066,
+      "css": 25116,
+      "jsRaw": 5992452,
+      "cssRaw": 164598
+    },
+    "errors": []
+  },
+  {
+    "phase": "after",
+    "page": "commanders",
+    "width": 1280,
+    "theme": "light",
+    "p95": 16.7,
+    "median": 16.7,
+    "frames": 360,
+    "longTasks": [],
+    "cls": 0.006948413085937501,
+    "lcp": 360,
+    "canvasP95": 0,
+    "canvasMax": 0,
+    "canvasFrames": 0,
+    "canvasMean": 0,
+    "willChange": 1,
+    "willChangeList": [
+      "DIV.tome-overlay"
+    ],
+    "animations": 9,
+    "overflow": false,
+    "scrollWidth": 1280,
+    "inner": 1280,
+    "offenders": [],
+    "noCanvasP95": 16.8,
+    "bytes": {
+      "js": 992024,
+      "css": 25116,
+      "jsRaw": 5492448,
+      "cssRaw": 164598
+    },
+    "errors": []
+  },
+  {
+    "phase": "after",
+    "page": "commanders",
+    "width": 1280,
+    "theme": "dark",
+    "p95": 16.8,
+    "median": 16.7,
+    "frames": 360,
+    "longTasks": [],
+    "cls": 0.006948413085937501,
+    "lcp": 384,
+    "canvasP95": 0,
+    "canvasMax": 0,
+    "canvasFrames": 0,
+    "canvasMean": 0,
+    "willChange": 1,
+    "willChangeList": [
+      "DIV.tome-overlay"
+    ],
+    "animations": 9,
+    "overflow": false,
+    "scrollWidth": 1280,
+    "inner": 1280,
+    "offenders": [],
+    "noCanvasP95": 16.7,
+    "bytes": {
+      "js": 992024,
+      "css": 25116,
+      "jsRaw": 5492448,
+      "cssRaw": 164598
+    },
+    "errors": []
+  },
+  {
+    "phase": "after",
+    "page": "commanders",
+    "width": 390,
+    "theme": "light",
+    "p95": 16.8,
+    "median": 16.7,
+    "frames": 360,
+    "longTasks": [],
+    "cls": 0.012104227391395245,
+    "lcp": 304,
+    "canvasP95": 0,
+    "canvasMax": 0,
+    "canvasFrames": 0,
+    "canvasMean": 0,
+    "willChange": 1,
+    "willChangeList": [
+      "DIV.tome-overlay"
+    ],
+    "animations": 9,
+    "overflow": false,
+    "scrollWidth": 390,
+    "inner": 390,
+    "offenders": [],
+    "noCanvasP95": 16.8,
+    "bytes": {
+      "js": 992024,
+      "css": 25116,
+      "jsRaw": 5492448,
+      "cssRaw": 164598
+    },
+    "errors": []
+  },
+  {
+    "phase": "after",
+    "page": "commanders",
+    "width": 390,
+    "theme": "dark",
+    "p95": 16.7,
+    "median": 16.7,
+    "frames": 360,
+    "longTasks": [],
+    "cls": 0.012104227391395245,
+    "lcp": 324,
+    "canvasP95": 0,
+    "canvasMax": 0,
+    "canvasFrames": 0,
+    "canvasMean": 0,
+    "willChange": 1,
+    "willChangeList": [
+      "DIV.tome-overlay"
+    ],
+    "animations": 9,
+    "overflow": false,
+    "scrollWidth": 390,
+    "inner": 390,
+    "offenders": [],
+    "noCanvasP95": 16.8,
+    "bytes": {
+      "js": 992024,
+      "css": 25116,
+      "jsRaw": 5492448,
+      "cssRaw": 164598
+    },
+    "errors": []
+  }
+]

@@ -1,0 +1,386 @@
+## Inspirit, Flagship Vessel | {U}{R}{W} | Legendary Artifact — Spacecraft | 5/5
+Station (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 8+.)
+1+ | At the beginning of combat on your turn, put your choice of a +1/+1 counter or two charge counters on up to one other target artifact.
+8+ | Flying
+Other artifacts you control have hexproof and indestructible.
+
+## Abrade | {1}{R} | Instant | None/None
+Choose one —
+• Abrade deals 3 damage to target creature.
+• Destroy target artifact.
+
+## Adarkar Wastes | None | Land | None/None
+{T}: Add {C}.
+{T}: Add {W} or {U}. This land deals 1 damage to you.
+
+## Alibou, Ancient Witness | {3}{R}{W} | Legendary Artifact Creature — Golem | 4/5
+Other artifact creatures you control have haste.
+Whenever one or more artifact creatures you control attack, Alibou deals X damage to any target and you scry X, where X is the number of tapped artifacts you control.
+
+## All That Glitters | {1}{W} | Enchantment — Aura | None/None
+Enchant creature
+Enchanted creature gets +1/+1 for each artifact and/or enchantment you control.
+
+## Ancient Den | None | Artifact Land | None/None
+{T}: Add {W}.
+
+## Arcane Signet | {2} | Artifact | None/None
+{T}: Add one mana of any color in your commander's color identity.
+
+## Archway of Innovation | None | Land | None/None
+This land enters tapped unless you control an Island.
+{T}: Add {U}.
+{U}, {T}: The next spell you cast this turn has improvise. (Your artifacts can help cast that spell. Each artifact you tap after you're done activating mana abilities pays for {1}.)
+
+## Battlefield Forge | None | Land | None/None
+{T}: Add {C}.
+{T}: Add {R} or {W}. This land deals 1 damage to you.
+
+## Blade Historian | {R/W}{R/W}{R/W}{R/W} | Creature — Human Cleric | 2/3
+Attacking creatures you control have double strike.
+
+## Boros Charm | {R}{W} | Instant | None/None
+Choose one —
+• Boros Charm deals 4 damage to target player or planeswalker.
+• Permanents you control gain indestructible until end of turn.
+• Target creature gains double strike until end of turn.
+
+## Bygone Colossus | {9} | Artifact Creature — Robot Giant | 9/9
+Warp {3} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)
+
+## Cascade Bluffs | None | Land | None/None
+{T}: Add {C}.
+{U/R}, {T}: Add {U}{U}, {U}{R}, or {R}{R}.
+
+## Chandra, Spark Hunter | {3}{R} | Legendary Planeswalker — Chandra | None/None
+At the beginning of combat on your turn, choose up to one target Vehicle you control. Until end of turn, it becomes an artifact creature and gains haste.
++2: You may sacrifice an artifact or discard a card. If you do, draw a card.
+0: Create a 3/2 colorless Vehicle artifact token with crew 1.
+−7: You get an emblem with "Whenever an artifact you control enters, this emblem deals 3 damage to any target."
+
+## Chaos Warp | {2}{R} | Instant | None/None
+The owner of target permanent shuffles it into their library, then reveals the top card of their library. If it's a permanent card, they put it onto the battlefield.
+
+## Clifftop Retreat | None | Land | None/None
+This land enters tapped unless you control a Mountain or a Plains.
+{T}: Add {R} or {W}.
+
+## Command Tower | None | Land | None/None
+{T}: Add one mana of any color in your commander's color identity.
+
+## Counterspell | {U}{U} | Instant | None/None
+Counter target spell.
+
+## Craterclaw Colossus | {4}{R}{R}{R} | Artifact Creature — Beast Construct | 5/5
+Haste
+When this creature enters, creatures you control gain trample and get +X/+0 until end of turn, where X is the number of artifacts you control.
+
+## Cyberdrive Awakener | {5}{U} | Artifact Creature — Construct | 4/4
+Flying
+Other artifact creatures you control have flying.
+When this creature enters, each noncreature artifact you control becomes a 4/4 artifact creature until end of turn.
+
+## Cyclonic Rift | {1}{U} | Instant | None/None
+Return target nonland permanent you don't control to its owner's hand.
+Overload {6}{U} (You may cast this spell for its overload cost. If you do, change "target" in its text to "each.")
+
+## Deepglow Skate | {4}{U} | Creature — Fish | 3/3
+When this creature enters, double the number of each kind of counter on any number of target permanents.
+
+## Depthshaker Titan | {5}{R}{R} | Artifact Creature — Robot | 5/5
+When this creature enters, any number of target noncreature artifacts you control become 3/3 artifact creatures. Sacrifice them at the beginning of the next end step.
+Each artifact creature you control has melee, trample, and haste. (Whenever a creature with melee attacks, it gets +1/+1 until end of turn for each opponent you attacked this combat.)
+
+## Dispatch | {W} | Instant | None/None
+Tap target creature.
+Metalcraft — If you control three or more artifacts, exile that creature.
+
+## Empowered Autogenerator | {4} | Artifact | None/None
+This artifact enters tapped.
+{T}: Put a charge counter on this artifact. Add X mana of any one color, where X is the number of charge counters on this artifact.
+
+## Enthusiastic Mechanaut | {U}{R} | Artifact Creature — Goblin Artificer | 2/2
+Flying
+Artifact spells you cast cost {1} less to cast.
+
+## Etherium Sculptor | {1}{U} | Artifact Creature — Vedalken Artificer | 1/2
+Artifact spells you cast cost {1} less to cast.
+
+## Everflowing Chalice | {0} | Artifact | None/None
+Multikicker {2} (You may pay an additional {2} any number of times as you cast this spell.)
+This artifact enters with a charge counter on it for each time it was kicked.
+{T}: Add {C} for each charge counter on this artifact.
+
+## Exotic Orchard | None | Land | None/None
+{T}: Add one mana of any color that a land an opponent controls could produce.
+
+## Fabled Passage | None | Land | None/None
+{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle. Then if you control four or more lands, untap that land.
+
+## Fact or Fiction | {3}{U} | Instant | None/None
+Reveal the top five cards of your library. An opponent separates those cards into two piles. Put one pile into your hand and the other into your graveyard.
+
+## Fellwar Stone | {2} | Artifact | None/None
+{T}: Add one mana of any color that a land an opponent controls could produce.
+
+## Final Showdown | {W} | Instant | None/None
+Spree (Choose one or more additional costs.)
++ {1} — All creatures lose all abilities until end of turn.
++ {1} — Choose a creature you control. It gains indestructible until end of turn.
++ {3}{W}{W} — Destroy all creatures.
+
+## Gavel of the Righteous | {2} | Artifact — Equipment | None/None
+At the beginning of combat on your turn, put a charge counter on this Equipment.
+Equipped creature gets +1/+1 for each counter on this Equipment.
+As long as this Equipment has four or more counters on it, equipped creature has double strike.
+Equip—Pay {3} or remove a counter from this Equipment.
+
+## Generous Gift | {2}{W} | Instant | None/None
+Destroy target permanent. Its controller creates a 3/3 green Elephant creature token.
+
+## Glacial Fortress | None | Land | None/None
+This land enters tapped unless you control a Plains or an Island.
+{T}: Add {W} or {U}.
+
+## Great Furnace | None | Artifact Land | None/None
+{T}: Add {R}.
+
+## Improvised Arsenal | {1}{R} | Artifact — Equipment | None/None
+Equipped creature gets +1/+0 for each artifact you control.
+{4}{R}: Create a token that's a copy of this Equipment.
+Equip {R}
+
+## Insight Engine | {2}{U} | Artifact | None/None
+{2}, {T}: Put a charge counter on this artifact, then draw a card for each charge counter on it.
+
+## Inspiring Vantage | None | Land | None/None
+This land enters tapped unless you control two or fewer other lands.
+{T}: Add {R} or {W}.
+
+## Inventors' Fair | None | Legendary Land | None/None
+At the beginning of your upkeep, if you control three or more artifacts, you gain 1 life.
+{T}: Add {C}.
+{4}, {T}, Sacrifice Inventors' Fair: Search your library for an artifact card, reveal it, put it into your hand, then shuffle. Activate only if you control three or more artifacts.
+
+## Iron Spider, Stark Upgrade | {3} | Legendary Artifact Creature — Spider Hero | 2/3
+Vigilance
+{T}: Put a +1/+1 counter on each artifact creature and/or Vehicle you control.
+{2}, Remove two +1/+1 counters from among artifacts you control: Draw a card.
+
+## Irrigated Farmland | None | Land — Plains Island | None/None
+({T}: Add {W} or {U}.)
+This land enters tapped.
+Cycling {2} ({2}, Discard this card: Draw a card.)
+
+## Jhoira, Weatherlight Captain | {2}{U}{R} | Legendary Creature — Human Artificer | 3/3
+Whenever you cast a historic spell, draw a card. (Artifacts, legendaries, and Sagas are historic.)
+
+## Karn's Bastion | None | Land | None/None
+{T}: Add {C}.
+{4}, {T}: Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)
+
+## Kilo, Apogee Mind | {U}{R}{W} | Legendary Artifact Creature — Robot Artificer | 3/3
+Haste
+Whenever Kilo becomes tapped, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)
+
+## Lasting Tarfire | {1}{R} | Enchantment | None/None
+At the beginning of each end step, if you put a counter on a creature this turn, this enchantment deals 2 damage to each opponent.
+
+## Lost Jitte | {1} | Legendary Artifact — Equipment | None/None
+Whenever equipped creature deals combat damage, put a charge counter on Lost Jitte.
+Remove a charge counter from Lost Jitte: Choose one —
+• Untap target land.
+• Target creature can't block this turn.
+• Put a +1/+1 counter on equipped creature.
+Equip {1}
+
+## Lux Artillery | {4} | Artifact | None/None
+Whenever you cast an artifact creature spell, it gains sunburst. (It enters with a +1/+1 counter on it for each color of mana spent to cast it.)
+At the beginning of your end step, if there are thirty or more counters among artifacts and creatures you control, this artifact deals 10 damage to each opponent.
+
+## Lux Cannon | {4} | Artifact | None/None
+{T}: Put a charge counter on this artifact.
+{T}, Remove three charge counters from this artifact: Destroy target permanent.
+
+## Mystic Monastery | None | Land | None/None
+This land enters tapped.
+{T}: Add {U}, {R}, or {W}.
+
+## Nyx Lotus | {4} | Legendary Artifact | None/None
+Nyx Lotus enters tapped.
+{T}: Choose a color. Add an amount of mana of that color equal to your devotion to that color. (Your devotion to a color is the number of mana symbols of that color in the mana costs of permanents you control.)
+
+## One Last Job | {2}{W} | Sorcery | None/None
+Spree (Choose one or more additional costs.)
++ {2} — Return target creature card from your graveyard to the battlefield.
++ {1} — Return target Mount or Vehicle card from your graveyard to the battlefield.
++ {1} — Return target Aura or Equipment card from your graveyard to the battlefield attached to a creature you control.
+
+## Ornithopter of Paradise | {2} | Artifact Creature — Thopter | 0/2
+Flying
+{T}: Add one mana of any color.
+
+## Panharmonicon | {4} | Artifact | None/None
+If an artifact or creature entering causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.
+
+## Path of Ancestry | None | Land | None/None
+This land enters tapped.
+{T}: Add one mana of any color in your commander's color identity. When that mana is spent to cast a creature spell that shares a creature type with your commander, scry 1. (Look at the top card of your library. You may put that card on the bottom.)
+
+## Pentad Prism | {2} | Artifact | None/None
+Sunburst (This artifact enters with a charge counter on it for each color of mana spent to cast it.)
+Remove a charge counter from this artifact: Add one mana of any color.
+
+## Phyrexian Metamorph | {3}{U/P} | Artifact Creature — Phyrexian Shapeshifter | 0/0
+({U/P} can be paid with either {U} or 2 life.)
+You may have this creature enter as a copy of any artifact or creature on the battlefield, except it's an artifact in addition to its other types.
+
+## Radiant Summit | None | Land — Mountain Plains | None/None
+({T}: Add {R} or {W}.)
+This land enters tapped unless you control two or more basic lands.
+
+## Rapid Hybridization | {U} | Instant | None/None
+Destroy target creature. It can't be regenerated. That creature's controller creates a 3/3 green Frog Lizard creature token.
+
+## Razortide Bridge | None | Artifact Land | None/None
+This land enters tapped.
+Indestructible
+{T}: Add {W} or {U}.
+
+## Repurposing Bay | {2}{U} | Artifact | None/None
+{2}, {T}, Sacrifice another artifact: Search your library for an artifact card with mana value equal to 1 plus the sacrificed artifact's mana value, put that card onto the battlefield, then shuffle. Activate only as a sorcery.
+
+## Ripples of Potential | {1}{U} | Instant | None/None
+Proliferate, then choose any number of permanents you control that had a counter put on them this way. Those permanents phase out. (To proliferate, choose any number of permanents and/or players, then give each another counter of each kind already there. Treat phased-out permanents and anything attached to them as though they don't exist until their controller's next turn.)
+
+## Rugged Prairie | None | Land | None/None
+{T}: Add {C}.
+{R/W}, {T}: Add {R}{R}, {R}{W}, or {W}{W}.
+
+## Rustvale Bridge | None | Artifact Land | None/None
+This land enters tapped.
+Indestructible
+{T}: Add {R} or {W}.
+
+## Sacred Foundry | None | Land — Mountain Plains | None/None
+({T}: Add {R} or {W}.)
+As this land enters, you may pay 2 life. If you don't, it enters tapped.
+
+## Seat of the Synod | None | Artifact Land | None/None
+{T}: Add {U}.
+
+## Shivan Reef | None | Land | None/None
+{T}: Add {C}.
+{T}: Add {U} or {R}. This land deals 1 damage to you.
+
+## Silverbluff Bridge | None | Artifact Land | None/None
+This land enters tapped.
+Indestructible
+{T}: Add {U} or {R}.
+
+## Skycloud Expanse | None | Land | None/None
+{1}, {T}: Add {W}{U}.
+
+## Sol Ring | {1} | Artifact | None/None
+{T}: Add {C}{C}.
+
+## Spire of Industry | None | Land | None/None
+{T}: Add {C}.
+{T}, Pay 1 life: Add one mana of any color. Activate only if you control an artifact.
+
+## Steel Overseer | {2} | Artifact Creature — Construct | 1/1
+{T}: Put a +1/+1 counter on each artifact creature you control.
+
+## Steelswarm Operator | {1}{U} | Artifact Creature — Robot Soldier | 1/1
+Flying
+{T}: Add {U}. Spend this mana only to cast an artifact spell.
+{T}: Add {U}{U}. Spend this mana only to activate abilities of artifact sources.
+
+## Sulfur Falls | None | Land | None/None
+This land enters tapped unless you control an Island or a Mountain.
+{T}: Add {U} or {R}.
+
+## Surge Conductor | {3} | Artifact Creature — Robot | 3/2
+Whenever another nontoken artifact you control enters, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)
+
+## Swan Song | {U} | Instant | None/None
+Counter target enchantment, instant, or sorcery spell. Its controller creates a 2/2 blue Bird creature token with flying.
+
+## Swords to Plowshares | {W} | Instant | None/None
+Exile target creature. Its controller gains life equal to its power.
+
+## Tekuthal, Inquiry Dominus | {2}{U}{U} | Legendary Creature — Phyrexian Horror | 3/5
+Flying
+If you would proliferate, proliferate twice instead.
+{1}{U/P}{U/P}, Remove three counters from among other artifacts, creatures, and planeswalkers you control: Put an indestructible counter on Tekuthal. ({U/P} can be paid with either {U} or 2 life.)
+
+## Temple of Enlightenment | None | Land | None/None
+This land enters tapped.
+When this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)
+{T}: Add {W} or {U}.
+
+## Temple of Epiphany | None | Land | None/None
+This land enters tapped.
+When this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)
+{T}: Add {U} or {R}.
+
+## Tezzeret, Cruel Captain | {3} | Legendary Planeswalker — Tezzeret | None/None
+Whenever an artifact you control enters, put a loyalty counter on Tezzeret.
+0: Untap target artifact or creature. If it's an artifact creature, put a +1/+1 counter on it.
+−3: Search your library for an artifact card with mana value 1 or less, reveal it, put it into your hand, then shuffle.
+−7: You get an emblem with "At the beginning of combat on your turn, put three +1/+1 counters on target artifact you control. If it's not a creature, it becomes a 0/0 Robot artifact creature."
+
+## Thirst for Knowledge | {2}{U} | Instant | None/None
+Draw three cards. Then discard two cards unless you discard an artifact card.
+
+## Thought Monitor | {6}{U} | Artifact Creature — Construct | 2/2
+Affinity for artifacts (This spell costs {1} less to cast for each artifact you control.)
+Flying
+When this creature enters, draw two cards.
+
+## Three Steps Ahead | {U} | Instant | None/None
+Spree (Choose one or more additional costs.)
++ {1}{U} — Counter target spell.
++ {3} — Create a token that's a copy of target artifact or creature you control.
++ {2} — Draw two cards, then discard a card.
+
+## Threefold Thunderhulk | {7} | Artifact Creature — Gnome | 0/0
+This creature enters with three +1/+1 counters on it.
+Whenever this creature enters or attacks, create a number of 1/1 colorless Gnome artifact creature tokens equal to its power.
+{2}, Sacrifice another artifact: Put a +1/+1 counter on this creature.
+
+## Traxos, Scourge of Kroog | {4} | Legendary Artifact Creature — Dragon Construct | 7/7
+Trample
+Traxos enters tapped and doesn't untap during your untap step.
+Whenever you cast a historic spell, untap Traxos. (Artifacts, legendaries, and Sagas are historic.)
+
+## Universal Surveillance | {X}{U}{U}{U} | Sorcery | None/None
+Improvise (Your artifacts can help cast this spell. Each artifact you tap after you're done activating mana abilities pays for {1}.)
+Draw X cards.
+
+## Emry, Lurker of the Loch | {2}{U} | Legendary Creature — Merfolk Wizard | 1/2
+Affinity for artifacts (This spell costs {1} less to cast for each artifact you control.)
+When Emry enters, mill four cards.
+{T}: Choose target artifact card in your graveyard. You may cast that card this turn. (You still pay its costs. Timing rules still apply.)
+
+## Uthros Research Craft | {2}{U} | Artifact — Spacecraft | 0/8
+Station (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 12+.)
+3+ | Whenever you cast an artifact spell, draw a card. Put a charge counter on this Spacecraft.
+12+ | Flying
+This Spacecraft gets +1/+0 for each artifact you control.
+
+## Uthros, Titanic Godcore | None | Land — Planet | None/None
+This land enters tapped.
+{T}: Add {U}.
+Station (Tap another creature you control: Put charge counters equal to its power on this Planet. Station only as a sorcery.)
+12+ | {U}, {T}: Add {U} for each artifact you control.
+
+## Voyage Home | {5}{W}{U} | Sorcery | None/None
+Affinity for artifacts (This spell costs {1} less to cast for each artifact you control.)
+You draw three cards and gain 3 life.
+
+## Zookeeper Mechan | {1}{R} | Artifact Creature — Robot | 1/3
+{T}: Add {R}.
+{6}{R}: Target creature you control gets +4/+0 until end of turn. Activate only as a sorcery.
+
+TOTAL 100

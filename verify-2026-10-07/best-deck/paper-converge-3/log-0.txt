@@ -1,0 +1,1 @@
+Beledros Witherbloom: 100.87 [land36 ramp12 draw10 remo12 wipe4 prot6 pen0] (seeds cf 54.32 [land37 ramp19 draw12 remo11 wipe1 prot2 pen10] | previous 78.94 [land36 ramp19 draw10 remo9 wipe1 prot4 pen10]; 7 swaps, 201530 ms)

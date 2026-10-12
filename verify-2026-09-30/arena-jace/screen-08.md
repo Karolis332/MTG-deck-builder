@@ -1,0 +1,47 @@
+screened 375/375, passed 46, last card read: Waystone's Guidance
+- Identity Echo — engine (repeatable Jace −3) — "{3}{R}: Exile target creature or planeswalker you control. Reveal cards from the top of your library until you reveal a creature or planeswalker card. Put that card onto the battlefield" — beats: Plan for All Outcomes
+- Theorist's Proxy — cheap fodder + walker token (creature card: dilutes −3) — "Flash | When this creature enters, empower Jace 3." — beats: Hydroelectric Specimen // Hydroelectric Laboratory
+- Vraska's Final Mercy — removal (hits walkers) / walker-token fodder — "You lose 2 life. Destroy target creature or planeswalker. | • You lose 2 life. Empower Jace 6." — beats: Feed the Swarm
+- Rewrite Regrets — recursion + loyalty support — "Return target creature or planeswalker card with mana value 6 or less from your graveyard to the battlefield. | Empower Jace 2." — beats: Way of the Healer
+- Lich's Relic — removal (creature or walker, artifact for Enlightened Tutor/Tezzeret) — "When this Equipment enters, you may pay {2}. When you do, for each opponent, destroy up to one target creature or planeswalker that player controls." — beats: Feed the Swarm
+- Old Hob, Alleycat Blues — repeatable fodder each turn (creature card: dilutes −3) — "At the beginning of combat on your turn, create a 2/2 red Mutant creature token." — beats: Professional Face-Breaker
+- Tomik, Orzhov Lawmage — walker protection + cheap body (creature card: dilutes −3) — "Planeswalkers you control have \"No more than one creature can attack this planeswalker each combat.\"" — beats: Lightning Greaves
+- Fatehold Annex — dual land W/U — "This land enters tapped unless you control a planeswalker. | {T}: Add {W} or {U}." — beats: Evolving Wilds
+- Cast Away Doubt — card draw — "Draw two cards. Cast Away Doubt deals 2 damage to each player." — beats: Deadly Dispute
+- Protege's Awakening — loyalty support / walker-token fodder + cantrip — "Empower Jace 6. | Draw a card." — beats: Way of the Healer
+- Theorix Annex — dual land U/B — "This land enters tapped unless you control a planeswalker. | {T}: Add {U} or {B}." — beats: Terramorphic Expanse
+- Innovative Commons — dual land U/R — "This land enters tapped unless you control a planeswalker. | {T}: Add {U} or {R}." — beats: Cori Mountain Monastery
+- Dedicated Commons — dual land R/W — "This land enters tapped unless you control a planeswalker. | {T}: Add {R} or {W}." — beats: Arena of Glory
+- Living History — 2-mana noncreature token maker (fodder) — "When this enchantment enters, create a 2/2 red and white Spirit creature token." — beats: Plan for All Outcomes
+- Saheeli, Jewel of Avishkar — repeatable fodder engine (creature card: dilutes −3) — "Whenever you cast a noncreature spell, create a 1/1 colorless Thopter artifact creature token with flying." — beats: Pitiless Plunderer
+- Meticulous Commons — dual land W/B — "This land enters tapped unless you control a planeswalker. | {T}: Add {W} or {B}." — beats: Thran Portal
+- Stingerquill Annex — dual land B/R — "This land enters tapped unless you control a planeswalker. | {T}: Add {B} or {R}." — beats: Mistrise Village
+- Teyo, Lightshield Expert — instant-speed walker protection + cheap body (creature card: dilutes −3) — "Flash | When Teyo enters, target permanent you control gains hexproof until end of turn. ... Put a loyalty counter on it if it's a planeswalker." — beats: Lightning Greaves
+- Rise of the Deathbringer — instant sweeper that spares walkers / draw — "• All creatures get -3/-3 until end of turn." — beats: Fumigate
+- Stingerquill Charm — removal / instant-speed fodder — "• Stingerquill Charm deals 3 damage to any target. | ... | • Create a 2/2 colorless Wizard Soldier creature token named Cadet." — beats: Abrade
+- Winter, Tormented Loner — edict on a body, eats a spent walker (creature card: dilutes −3) — "When Winter enters, you may sacrifice a creature or planeswalker. When you do, each opponent sacrifices a creature of their choice." — beats: Mirkwood Bats
+- Murmuring Volume — any-colour rock + loot — "{T}: Add one mana of any color. | {2}, {T}, Discard a card: Draw a card." — beats: Mind Stone
+- Seasoned Cryomancer — value body, stun + flashback draw (creature card: dilutes −3) — "When this creature enters, draw two cards, then discard two cards. When you discard one or more nonland cards this way, tap up to that many target creatures and put a stun counter on each of them. | {3}{U}{U}, Exile this card from your graveyard: Draw two cards." — beats: Archmage Emeritus
+- Mindseeker Oculus — body + walker token, two fodder pieces (creature card: dilutes −3) — "When this creature enters, empower Jace 4." — beats: Boggart Trawler // Boggart Bog
+- No Admittance — removal (any target) + walker-token fodder — "No Admittance deals 3 damage to any target. | Empower Jace 1." — beats: Abrade
+- Academic Ascent — instant-speed walker-token fodder — "Target creature gets +2/+2 and gains flying until end of turn. | Empower Jace 2." — beats: Way of the Pyromancer
+- Solve for Disappointment — targeted discard (role the deck lacks) + fodder — "Target opponent reveals their hand. You choose a nonland permanent card from it. That player discards that card. | Empower Jace 1." — beats: Negate
+- Command the Stage — recurring noncreature token maker (Mount Doom / Chandra pings recur it) — "Create a 2/2 colorless Wizard Soldier creature token named Cadet ... At the beginning of each upkeep, if an opponent was dealt noncombat damage last turn, return this card from your graveyard to your hand." — beats: Plan for All Outcomes
+- Hexhaven Battalion — mass fodder + walker token, landcycles — "Create three 2/2 colorless Wizard Soldier creature tokens named Cadet. Empower Jace 2. | Basic landcycling {2}" — beats: Way of the Healer
+- Kiora of Fire and Ashes — big reveal that brings its own fodder — "When Kiora enters, create a 5/5 red Dragon creature token with flying. | {8}: Create a 5/5 red Dragon creature token with flying." — beats: Solemn Simulacrum
+- Icy Reception — creature/commander counter (gap: Negate and Swan Song miss creatures) — "• Counter target creature or legendary spell unless its controller pays {3}." — beats: Negate
+- Extended Absence — instant exile creature or walker — "Exile target creature or planeswalker. Extended Absence deals 1 damage to each opponent and you gain 1 life." — beats: Feed the Swarm
+- Mabel, Bitter Recluse — 1-mana fodder body, shrinks enemy walkers (creature card: dilutes −3) — "Deathtouch | When Mabel enters, remove up to three counters from another target creature or planeswalker." — beats: Boggart Trawler // Boggart Bog
+- Clash of Elements — instant answer to any nonland permanent (walkers included) — "Choose target nonland permanent. Its owner may put it on top of their library. If they do, Clash of Elements deals 2 damage to them. If they didn't put the card on top of their library, they put it on the bottom." — beats: Resculpt
+- Silence the Echo — 2-mana removal that converts a spent walker — "As an additional cost to cast this spell, sacrifice a creature or planeswalker or pay {3}. | Destroy target creature or planeswalker." — beats: Feed the Swarm
+- Wrath of the Bloodmane — instant burn for creature or walker — "Wrath of the Bloodmane deals 4 damage to target creature or planeswalker." — beats: Abrade
+- Crucias, Titan of the Waves — card advantage + treasure engine (creature card: dilutes −3) — "At the beginning of your end step, you may discard a card. If you do, create a Treasure token and choose ambitious or expedient. ... seek a card" — beats: Professional Face-Breaker
+- Hangarback Assembler — 2-mana noncreature that puts a body down (fodder) — "When this artifact enters, conjure a card named Hangarback Walker onto the battlefield, then put a +1/+1 counter on it." — beats: Plan for All Outcomes
+- Housemeld — removal that steals (returns as an enchantment, so no −3 dilution) — "Exile target creature. The exiled card perpetually becomes an enchantment. At the beginning of your next end step, put it onto the battlefield under your control." — beats: Feed the Swarm
+- Illuminating Lash — removal (any target) + draw boon — "Illuminating Lash deals 3 damage to any target. | You get a one-time boon with \"When you cast a noncreature spell, draw a card.\"" — beats: Abrade
+- Impose Hierarchy — 2-mana instant removal — "Destroy target creature with mana value 4 or less. You gain 1 life for each creature card in its controller's hand." — beats: Feed the Swarm
+- Lonely End — instant removal or walker attack — "• Target creature get -3/-3 until end of turn. | • Remove three loyalty counters from target planeswalker." — beats: Feed the Swarm
+- Song of Point Prime — 2-mana edict (1v1) — "Each opponent sacrifices a creature of their choice." — beats: Feed the Swarm
+- Speedbrood Stalker — double edict on a lifelink flier, real reveal (creature card, still high-impact) — "Flying, Lifelink | When this creature enters, choose target opponent. Secretly choose a creature or planeswalker that player controls. That player sacrifices a creature or planeswalker of their choice, then sacrifices the chosen permanent." — beats: Mirkwood Bats
+- Surge of Acclaim — instant card advantage, twice — "• Seek a nonland card. | Jump-start" — beats: Mind Stone
+- Unforgiving Overtake — sorcery removal without life loss — "Destroy target creature or Vehicle. Its controller loses 2 life." — beats: Feed the Swarm

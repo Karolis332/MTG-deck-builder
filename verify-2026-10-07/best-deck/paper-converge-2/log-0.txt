@@ -1,0 +1,1 @@
+Baba Lysaga, Night Witch: 101.33 [land38 ramp12 draw10 remo10 wipe3 prot6 pen0] (seeds cf 29.90 [land37 ramp19 draw4 remo8 wipe2 prot2 pen17] | previous 100.84 [land38 ramp12 draw11 remo11 wipe3 prot6 pen0]; 10 swaps, 430284 ms)

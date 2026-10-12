@@ -37,12 +37,15 @@ PAYOFF = {  # payoff card -> which other cards it rewards
     'Thunderfoot Baloth': ANY, 'Pyrewood Gearhulk': ANY, 'Avatar of Slaughter': ANY, 'Vastlands Scavenger': ANY,
     'Sweet-Gum Recluse': ANY, 'Conclave Sledge-Captain': ANY, 'Emergent Woodwurm': ANY,
     'Calamity, Galloping Inferno': lambda c: c['creature'] and not c['legend'],
+    'Moraug, Fury of Akoum': ANY, 'Cream of the Crop': ANY,  # 2026-10-07 consistency pass
 }
 NAMED = [  # explicit pairs: cascade, monarch, fight, landfall, power boosters for Alena
     ({'Aurora Phoenix'}, {'Boarding Party', 'Sweet-Gum Recluse'}),
     ({'Regal Behemoth'}, {'Dawnglade Regent'}),
     ({'Foe-Razer Regent'}, {'Gruul Ragebeast', 'Slinza, the Spiked Stampede', 'Nessian Wilds Ravager'}),
     ({'Rampaging Baloths'}, {"Nature's Lore", 'Farseek', 'Planar Engineering', 'Traverse the Outlands', 'Ulvenwald Hydra', 'Oblivion Sower'}),
+    ({'Rampaging Baloths', 'Moraug, Fury of Akoum'}, {'Three Visits', 'Skyshroud Claim', "Nature's Lore", 'Farseek', 'Planar Engineering', 'Traverse the Outlands', 'Ulvenwald Hydra', 'Oblivion Sower'}),
+    ({'Cream of the Crop'}, {'Planetarium of Wan Shi Tong'}),
     ({'Alena, Kessig Trapper'}, {'Sweet-Gum Recluse', 'Conclave Sledge-Captain', 'Emergent Woodwurm', 'Pyrewood Gearhulk', 'Thunderfoot Baloth'}),
 ]
 

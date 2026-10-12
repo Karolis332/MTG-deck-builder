@@ -1,0 +1,7 @@
+BASE obj 81.74 DS 71.8 pen 1 {"land":37,"ramp":10,"draw":12,"removal":12,"board_wipe":4,"protection":7} mana=95 curve=89 interaction=100 advantage=70 win=65 synergy=93 meta=50 structure=100
+  -0.00  Trumpeting Carnosaur => Desculpting Blast   DS 0.0 pen 1 mana=95 curve=90 interaction=100 advantage=70 win=65 synergy=91 meta=50 structure=100
+   0.01  Perplexing Test => Tetsuko Umezawa, Fugitive   DS 0.0 pen 1 mana=95 curve=89 interaction=100 advantage=70 win=65 synergy=91 meta=50 structure=100
+  -0.83  Return the Favor => Mishra's Bauble   DS -0.8 pen 1 mana=95 curve=88 interaction=100 advantage=70 win=64 synergy=95 meta=50 structure=100
+  -6.69  Titan Forge => Experimental Aviator   DS -6.7 pen 1 mana=94 curve=90 interaction=100 advantage=70 win=56 synergy=91 meta=50 structure=100
+   0.03  Temple of the False God => Cephalid Coliseum   DS 0.0 pen 1 mana=95 curve=89 interaction=100 advantage=70 win=65 synergy=93 meta=50 structure=100
+ALL  obj 74.44 (-7.30) DS 64.4 pen 1 {"land":37,"ramp":10,"draw":13,"removal":12,"board_wipe":3,"protection":6} mana=95 curve=90 interaction=100 advantage=70 win=56 synergy=88 meta=50 structure=100

@@ -1,0 +1,304 @@
+{
+  "version": 1,
+  "deck": {
+    "name": "Gilanra + Alena: big-drop engine",
+    "commanders": ["Gilanra, Caller of Wirewood", "Alena, Kessig Trapper"],
+    "colours": "RG",
+    "format": "commander",
+    "list": "verify-2026-10-07/gilanra-engine/final.txt",
+    "status": "proposed"
+  },
+  "summary": "Every spell of mana value 6 or more paid with [[Gilanra, Caller of Wirewood]]'s {G} draws a card, and every big creature that enters lets [[Alena, Kessig Trapper]] tap for its power in {R} to cast the next one. The list keeps **41 big drops** and buys consistency with 39 lands, 4 landcycling fatties and 9 ramp pieces of mana value 1–2. It wins with haste ([[Cyclops of Eternal Fury]], [[Surrak, the Hunt Caller]]) plus a team pump ([[Thunderfoot Baloth]], [[Pyrewood Gearhulk]]), or with damage when creatures enter ([[Terror of the Peaks]], [[Warstorm Surge]]).",
+  "phases": [
+    {
+      "turns": "T1–3",
+      "goal": "Make 4–5 mana by T3: a 1–2 mana dork, rock or [[Three Visits]], then Gilanra on T2–3. Selvala or Trailblazer on T3.",
+      "cards": ["Llanowar Elves", "Poison Dart Frog", "Ilysian Caryatid", "Sol Ring", "Arcane Signet", "Three Visits", "Gilanra, Caller of Wirewood", "Selvala, Heart of the Wilds"]
+    },
+    {
+      "turns": "T4–6",
+      "goal": "Cast Alena on T4–5 and the first big drop, and get a draw engine online. Landcycle a fatty instead of missing a land drop.",
+      "cards": ["Alena, Kessig Trapper", "Soul of the Harvest", "Primordial Sage", "Garruk's Packleader", "Monstrous Vortex", "The Legend of Kyoshi", "Paleoloth", "Slavering Branchsnapper"]
+    },
+    {
+      "turns": "T6–8 (close)",
+      "goal": "Haste plus a team pump for one big swing, or a wave of creatures that each deal their power as they enter. Sim median kill: T7.",
+      "cards": ["Cyclops of Eternal Fury", "Surrak, the Hunt Caller", "Thunderfoot Baloth", "Pyrewood Gearhulk", "Terror of the Peaks", "Warstorm Surge", "Apex Devastator", "Myojin of Roaring Blades"]
+    }
+  ],
+  "engine": [
+    {
+      "title": "Gilanra draws",
+      "flow": ["[[Gilanra, Caller of Wirewood]] taps for {G}", "{G} pays a 6+ mana value spell", "draw a card"],
+      "note": "Once per turn: 3.51 draws by T8 (sim6, metrics2.log). Never spend her {G} on a cheap spell."
+    },
+    {
+      "title": "Alena chain",
+      "flow": ["green fatty with lands + Gilanra", "[[Alena, Kessig Trapper]] taps {R} = its power", "red fatty: [[Drakuseth, Maw of Flames]] or [[Tyrant of Discord]]"],
+      "note": "Alena makes only {R}. 16 of the 41 big drops need no {G}: cast the green one first, then the red or colourless one with her mana."
+    },
+    {
+      "title": "A card per fatty",
+      "flow": ["[[Soul of the Harvest]] or [[Primordial Sage]] in play", "cast a big creature", "draw a card"],
+      "note": "[[Garruk's Packleader]] (power 3+), [[Selvala, Heart of the Wilds]] (biggest creature) and [[Outcaster Trailblazer]] (power 4+) stack with them."
+    },
+    {
+      "title": "Free big spells",
+      "flow": ["[[Monstrous Vortex]] or [[Apex Devastator]]", "discover or cascade", "a free spell; 39 of 57 hits are 6+"],
+      "note": "[[Planetarium of Wan Shi Tong]] adds a free cast after each scry; [[Etali, Primal Storm]] casts from the top of every library."
+    },
+    {
+      "title": "Attack mana for main phase 2",
+      "flow": ["attack with [[Shriekwood Devourer]], [[Savage Ventmaw]] or [[Sakiko, Mother of Summer]] out", "lands untap, {R}{R}{R}{G}{G}{G}, or {G} per damage", "cast the next big drop after combat"]
+    },
+    {
+      "title": "Recursion",
+      "flow": ["[[Paleoloth]] in play", "a power-5+ creature enters", "return a creature card to hand"],
+      "note": "[[Greenwarden of Murasa]] returns any card on entering and again on dying."
+    }
+  ],
+  "winConditions": [
+    {
+      "name": "Haste + Thunderfoot alpha (primary)",
+      "pieces": ["Cyclops of Eternal Fury", "Thunderfoot Baloth", "Drakuseth, Maw of Flames", "Alena, Kessig Trapper"],
+      "flow": ["[[Cyclops of Eternal Fury]] in play since last turn", "lands + Gilanra cast [[Thunderfoot Baloth]] (draw)", "[[Alena, Kessig Trapper]] taps for 7 {R}", "[[Drakuseth, Maw of Flames]] for {4}{R}{R}{R}", "attack: haste, +2/+2, trample"],
+      "damage": "Thunderfoot 7 + Drakuseth 9 + Cyclops 7 = 23 trample, + Drakuseth's attack trigger 4 = 27 to one player; the next swing kills",
+      "turn": "T7–8 (sim6 goldfish median kill T7, by T8 .906)"
+    },
+    {
+      "name": "Damage on entering (backup, works through blockers)",
+      "pieces": ["Terror of the Peaks", "Apex Devastator", "Alena, Kessig Trapper"],
+      "flow": ["[[Terror of the Peaks]] in play", "cast [[Apex Devastator]]: 10 damage", "4 cascades: each creature hit deals its power", "[[Alena, Kessig Trapper]] taps for 10: another fatty"],
+      "damage": "10 + 4 cascades × ~4 (45 of 57 hits are creatures, average power ~5) ≈ 26, + Alena's next fatty 6–7 ≈ 32, split among any targets",
+      "turn": "T7–9"
+    },
+    {
+      "name": "Myojin reach",
+      "pieces": ["Myojin of Roaring Blades"],
+      "flow": ["cast [[Myojin of Roaring Blades]] from hand", "it enters with an indestructible counter", "remove it: 7 damage to each of up to three targets"],
+      "damage": "7 to each opponent (21 total) the turn it lands; it finishes players the alphas left low",
+      "turn": "T7+"
+    }
+  ],
+  "metrics": {
+    "columns": ["Metric", "Sleeved", "Engine-first"],
+    "rows": [
+      { "label": "Lands / spells of MV 6+", "values": ["36 / 46", "39 / 41"] },
+      { "label": "Keep 7", "values": [".601", ".727"] },
+      { "label": "4th land on T4", "values": [".835", ".903"] },
+      { "label": "Gilanra by T3", "values": [".947", ".934"] },
+      { "label": "Alena by T5", "values": [".926", ".959"] },
+      { "label": "6+ MV spells cast by T8", "values": ["9.03", "12.09"] },
+      { "label": "Gilanra draws by T8", "values": ["3.48", "3.51"] },
+      { "label": "Alena chain turns by T10", "values": ["3.96", "3.92"] },
+      { "label": "Screwed (< 4 sources T5)", "values": [".036", ".008"] },
+      { "label": "Flooded (> 8 lands seen by T8)", "values": [".626", ".822"] },
+      { "label": "Goldfish: median turn to deal 40", "values": ["T8", "T7"] }
+    ],
+    "note": "verify-2026-10-07/gilanra-engine/sim6.py (extends gruul/gilanra/sim5.py and alena-gilanra/sim4.py), 25,000 games, seed 7: metrics.log, metrics2.log. The model has no blockers, removal or opponents. Alena chains fall slightly because extra ramp often makes her tap unneeded. Flood counts every land drawn; this list draws about 5 more cards by T8."
+  },
+  "swaps": [
+    {
+      "out": "Avatar of Slaughter", "in": "Apex Devastator", "role": "big drop",
+      "reason": "Avatar's double strike and forced attacks are symmetric, so they arm every opponent too. Apex is mana value 10, so it draws off Gilanra, Alena taps for 10, and each of its four cascades casts a free card (39 of 57 hits are 6+ mana value).",
+      "quoteOut": "All creatures have double strike and attack each combat if able.",
+      "quoteIn": "Cascade, cascade, cascade, cascade",
+      "evidence": "screen-final.log: Avatar back = spells T1–8 −2.10, 6+ casts −1.44"
+    },
+    {
+      "out": "Calamity, Galloping Inferno", "in": "Gigantic Big Bear", "role": "big drop",
+      "reason": "Calamity is a 4-power body whose copies need saddling, so Alena taps for 4. Big Bear is a 10/7 with haste and hexproof: it attacks at once, Alena taps for 10, and spot removal cannot touch it.",
+      "quoteOut": "Whenever Calamity attacks while saddled, choose a nonlegendary creature that saddled it this turn",
+      "quoteIn": "This spell can't be countered … Hexproof, haste",
+      "evidence": "screen-final.log: Calamity back = kill by T7 −.020"
+    },
+    {
+      "out": "Conclave Sledge-Captain", "in": "Slavering Branchsnapper", "role": "big drop / land",
+      "reason": "Sledge-Captain is a 4/4 for 6 that spends its counters on backup. Branchsnapper is a 7/6 trampler, and for {2} it fetches a Forest when the hand is short of lands.",
+      "quoteOut": "Backup 1, backup 1, backup 1",
+      "quoteIn": "Trample / Forestcycling {2}",
+      "evidence": "screen-final.log: Sledge-Captain back = 4th land on T4 −.018"
+    },
+    {
+      "out": "Nessian Wilds Ravager", "in": "Saber-Tooth Moose-Lion", "role": "big drop / land",
+      "reason": "With Tribute the opponent chooses the outcome: a 12/12 that never fights, or a fight they can afford. Moose-Lion is a fixed 7/7 that can also be a land for {2}.",
+      "quoteOut": "an opponent of your choice may put six +1/+1 counters on it",
+      "quoteIn": "Reach / Forestcycling {2}",
+      "evidence": "screen-final.log: Ravager back = 4th land on T4 −.019, kill by T7 −.007"
+    },
+    {
+      "out": "Emergent Woodwurm", "in": "Spinewoods Armadillo", "role": "big drop / land",
+      "reason": "Woodwurm costs 7 for a 4/4 (Alena taps for 4); its value needs a later attack. Armadillo is a 7/7 with ward 3 for 6, or a basic land plus 3 life for {1}{G}.",
+      "quoteOut": "Backup 3",
+      "quoteIn": "{1}{G}, Discard this card: Search your library for a basic land card or a Desert card",
+      "evidence": "screen-final.log: Woodwurm back = 4th land on T4 −.021, spells −.31"
+    },
+    {
+      "out": "Havoc Eater", "in": "The Legend of Kyoshi", "role": "big drop / draw",
+      "reason": "Havoc Eater is a 3/3 whose size depends on what the opponents control. Kyoshi draws cards equal to our greatest power (7–10 here), then returns as a creature that taps for that much mana.",
+      "quoteOut": "Put X +1/+1 counters on this creature, where X is the total power of creatures goaded this way.",
+      "quoteIn": "I — Draw cards equal to the greatest power among creatures you control.",
+      "evidence": "screen-final.log: Havoc Eater back = spells −1.18, kill by T7 −.032"
+    },
+    {
+      "out": "Hoard-Smelter Dragon", "in": "Cleanup Crew", "role": "answer",
+      "reason": "Hoard-Smelter answers artifacts only. Cleanup Crew is a 6/6 that destroys an artifact or an enchantment, or exiles a graveyard card; the deck had no other enchantment answer.",
+      "quoteOut": "{3}{R}: Destroy target artifact.",
+      "quoteIn": "Destroy target enchantment … Exile target card from a graveyard",
+      "evidence": "screen-final.log: Hoard-Smelter back = spells −.03 (a near-tie in the sim; enchantment coverage decides)"
+    },
+    {
+      "out": "Fling", "in": "Poison Dart Frog", "role": "ramp",
+      "reason": "Fling costs a creature and does nothing for the engine. The Frog is a second-turn mana creature of either colour, which puts Gilanra out on T2.",
+      "quoteOut": "As an additional cost to cast this spell, sacrifice a creature.",
+      "quoteIn": "{T}: Add one mana of any color.",
+      "evidence": "screen-final.log: Fling back = keep 7 −.015, 4th land −.008 (Fling gains kill by T7 +.013)"
+    },
+    {
+      "out": "Planar Engineering", "in": "Three Visits", "role": "ramp",
+      "reason": "Planar Engineering costs 4 and sacrifices two lands, for a net +2 tapped lands. Three Visits costs 2 for an untapped Forest, and it can fetch Sheltered Thicket for red.",
+      "quoteOut": "Sacrifice two lands. Search your library for four basic land cards, put them onto the battlefield tapped",
+      "quoteIn": "Search your library for a Forest card, put it onto the battlefield, then shuffle.",
+      "evidence": "screen-final.log: Planar back = keep 7 −.011, spells −.24"
+    },
+    {
+      "out": "Roxanne, Starfall Savant", "in": "Ilysian Caryatid", "role": "ramp",
+      "reason": "Roxanne costs 5 and her Meteorite enters tapped. Caryatid costs 2 and taps for two mana once a 4-power creature is out, which is every board from T4.",
+      "quoteOut": "create a tapped colorless artifact token named Meteorite",
+      "quoteIn": "If you control a creature with power 4 or greater, add two mana of any one color instead.",
+      "evidence": "screen-final.log: Roxanne back = spells −.89, keep 7 −.018"
+    },
+    {
+      "out": "Slinza, the Spiked Stampede", "in": "Tangled Florahedron", "role": "ramp / land",
+      "reason": "Slinza's discount covers only the 6 Beasts and she arrives on T5. Florahedron is a T2 mana creature, or a land when the hand is short.",
+      "quoteOut": "Beast spells you cast cost {2} less to cast.",
+      "quoteIn": "{T}: Add {G}.",
+      "evidence": "screen-final.log: Slinza back = keep 7 −.014, spells −.39"
+    },
+    {
+      "out": "Foe-Razer Regent", "in": "Selvala, Heart of the Wilds", "role": "ramp / draw",
+      "reason": "Foe-Razer is a 4/5 for 7 whose fight needs a target. Selvala costs 3, taps for mana equal to our greatest power (7+ from T5), and draws whenever a new biggest creature enters.",
+      "quoteOut": "When this creature enters, you may have it fight target creature you don't control.",
+      "quoteIn": "{G}, {T}: Add X mana in any combination of colors, where X is the greatest power among creatures you control.",
+      "evidence": "screen-final.log: Foe-Razer back = spells −1.04, kill by T7 −.023"
+    },
+    {
+      "out": "Ruric Thar, the Unbowed", "in": "Beast Within", "role": "answer",
+      "reason": "Ruric deals 6 to us for each of our 12 noncreature spells (rocks, Three Visits, Vortex, Warstorm, Planetarium, Garruk, Kyoshi), and it must attack every combat. Beast Within is an instant answer to any permanent.",
+      "quoteOut": "Whenever a player casts a noncreature spell, Ruric Thar deals 6 damage to that player.",
+      "quoteIn": "Destroy target permanent.",
+      "evidence": "screen-final.log: the sim shows Ruric +.28 spells because it ignores the self-damage and Beast Within's interaction; decided on text"
+    },
+    {
+      "out": "Bane of Progress", "in": "Mountain", "role": "land (37th)",
+      "reason": "Bane destroys our own Sol Ring, Signet, Talisman, Planetarium, Vortex, Warstorm, Cyclops and both Gearhulks. A land in its slot raises keeps and speeds the clock.",
+      "quoteOut": "When this creature enters, destroy all artifacts and enchantments.",
+      "evidence": "screen-final.log: Bane back = keep 7 −.026, kill by T7 −.024"
+    },
+    {
+      "out": "Spearbreaker Behemoth", "in": "Konstrari Annex", "role": "land (38th)",
+      "reason": "Spearbreaker's protection needs {1} held per creature, and this deck spends all its mana each turn. Annex is an R/G source; the green count for {1}{G}{G} needs it.",
+      "quoteOut": "{1}: Target creature with power 5 or greater gains indestructible until end of turn.",
+      "quoteIn": "{T}: Add {R} or {G}.",
+      "evidence": "screen-final.log: Spearbreaker back = spells −.78, kill by T7 −.037"
+    },
+    {
+      "out": "Sweet-Gum Recluse", "in": "Evolving Wilds", "role": "land (39th)",
+      "reason": "Recluse is a 0/3 whose cascade usually hits a cheap mana piece, and its counters need creatures that entered this turn. Evolving Wilds is the 39th land and finds either colour.",
+      "quoteOut": "put three +1/+1 counters on each of any number of target creatures that entered this turn",
+      "quoteIn": "Search your library for a basic land card, put it onto the battlefield tapped",
+      "evidence": "screen-final.log: Recluse back = keep 7 −.015, 4th land −.018, kill by T7 −.012; 38-land variant = final-38.txt",
+      "verdict": "optional"
+    },
+    {
+      "out": "Diamond City", "in": "Sheltered Thicket", "role": "colour",
+      "reason": "Diamond City makes colourless mana in a deck with {R}{R}{R} and {1}{G}{G} costs. Thicket counts for both colours, Three Visits can fetch it, and it cycles late.",
+      "quoteOut": "{T}: Add {C}.",
+      "quoteIn": "Cycling {2}",
+      "evidence": "colours3.py: R for {3}{R}{R}{R} needs 26.63 of 39 lands, has 27.50; G for {1}{G}{G} needs 26.63, has 26.75"
+    },
+    {
+      "out": "Forest", "in": "Horizon of Progress", "role": "colour",
+      "reason": "An untapped land that taps for either colour once a Forest and a Mountain are out. It also draws a card when flooded.",
+      "quoteIn": "{T}, Pay 1 life: Add one mana of any type that a land you control could produce.",
+      "evidence": "screen-final.log: Forest back = ±0; colours3.py keeps both colours above the Karsten line"
+    },
+    {
+      "out": "Forest", "in": "Fabled Passage", "role": "colour",
+      "reason": "It fetches whichever basic is missing, and from 4 lands on the land enters untapped.",
+      "quoteIn": "Then if you control four or more lands, untap that land.",
+      "evidence": "screen-final.log: Forest back = ±0"
+    },
+    {
+      "out": "Forest", "in": "Riveteers Overlook", "role": "colour",
+      "reason": "A tapped fetch for either basic. A Forest here would play faster (+.33 spells), but red would drop to 26.5 of the 26.63 sources {3}{R}{R}{R} needs.",
+      "quoteIn": "search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped",
+      "evidence": "screen-final.log: Forest back = spells +.33; colours3.py R 27.50 → 26.50 < 26.63"
+    }
+  ],
+  "keepers": [
+    { "card": "Planetarium of Wan Shi Tong", "why": "A 6-drop that does nothing the turn it lands, but each scry then casts the top card for free. It is a gate lock." },
+    { "card": "Oblivion Sower", "why": "Locked. It is colourless, so Alena's {R} pays all of it, and it steals the lands it reveals." },
+    { "card": "Paleoloth", "why": "Locked. Every power-5+ creature that enters returns a creature card to hand, so the big drops never run out." },
+    { "card": "Etali, Primal Storm", "why": "Locked. Each attack casts free spells from the top of every library, and Alena's {R} pays its {4}{R}{R}." },
+    { "card": "Greenwarden of Murasa", "why": "Locked. It returns any card on entering and again when it dies." },
+    { "card": "Sakiko, Mother of Summer", "why": "A 3/3 for 6, but every point of combat damage becomes {G} that lasts into main phase 2. It was the sim's biggest single card (+2.8 spells), an upper bound because the goldfish never blocks." },
+    { "card": "Savage Ventmaw", "why": "A 4/4 flier that adds {R}{R}{R}{G}{G}{G} on each attack: a free 6-drop after combat. It beat Spearbreaker by +.77 spells (screen-A.log)." },
+    { "card": "Ghalta, Primal Hunger", "why": "It costs {X} less for our total power, so with two fatties out it costs {G}{G}." },
+    { "card": "Ulvenwald Observer", "why": "A board wipe that kills five toughness-4 creatures draws five. It beat Orchard Strider and Topiary Panther (screen-B.log)." },
+    { "card": "Shamanic Revelation", "why": "It beat Master's Guidance in the same slot by +.71 spells (screen-D.log)." },
+    { "card": "Traverse the Outlands", "why": "It fetches as many basics as our greatest power (5–10). It beat Skyshroud Claim by +.71 spells (screen-D.log)." },
+    { "card": "Tyrant of Discord", "why": "Alena's {R} pays its {4}{R}{R}{R}, and it removes nonland permanents at random until a land goes. Vastlands Scavenger in its slot loses 6+ casts −.21 and chains −.06 (screen-final.log)." }
+  ],
+  "nearTies": [
+    { "kept": "Ulvenwald Observer", "alt": "Realm Seekers", "note": "Seekers gains +.53 spells in the sim, but its size (cards in all hands) was assumed to be 12 + ours. Observer is wipe insurance. The same holds against Dawnglade Regent (+.59)." },
+    { "kept": "Surrak, the Hunt Caller", "alt": "Samut, Tyrant Smasher", "note": "Within noise over three runs. Samut is a planeswalker that survives creature wipes and gives the whole team haste." },
+    { "kept": "Cleanup Crew", "alt": "Hoard-Smelter Dragon", "note": "Equal in the sim. Crew also hits enchantments and graveyards; Smelter is a 5/5 flier." },
+    { "kept": "Poison Dart Frog", "alt": "Fling", "note": "The Frog keeps more hands (+.015). Fling kills one turn sooner more often (+.013 by T7) as a sacrifice-to-face finisher." },
+    { "kept": "Rorix Bladewing", "alt": "Avatar of Slaughter", "note": "The goldfish favours Avatar (+.019 by T7) because opponents' creatures do not exist there; its double strike is symmetric. A 40th land in Rorix's slot (final-40.txt) is also close: keep .739, 6+ casts 12.30, kill by T8 .915. It is not taken because it leaves exactly 40 big drops, the floor." },
+    { "kept": "Mountain", "alt": "Sweet-Gum Recluse", "note": "38-land variant (final-38.txt): keep .710 vs .727, kill by T7 .556 vs .574, Alena chains 3.95 vs 3.92." }
+  ],
+  "mulligan": {
+    "keep": [
+      "3–5 lands and any 6-drop: keep (the sim's keep rule).",
+      "2 lands plus [[Llanowar Elves]], [[Poison Dart Frog]], [[Ilysian Caryatid]], [[Tangled Florahedron]], [[Sol Ring]] or [[Three Visits]]: keep.",
+      "3 lands plus [[Gilanra, Caller of Wirewood]]'s third land and a landcycler such as [[Slavering Branchsnapper]]: keep, because the cycler is the 4th land.",
+      "4 lands plus [[Soul of the Harvest]] or [[Primordial Sage]]: keep; the draw engine lands on T4–5."
+    ],
+    "mulligan": [
+      "0–1 land, even with a mana creature.",
+      "2 lands and no ramp piece of mana value 1–2: a landcycler costs the whole T2 and still leaves the hand short.",
+      "6–7 lands: the first mulligan is free in a pod."
+    ]
+  },
+  "pilotRules": [
+    "Spend [[Gilanra, Caller of Wirewood]]'s {G} on a spell of mana value 6 or more; it draws only then.",
+    "Cast the biggest creature first, then tap [[Alena, Kessig Trapper]]: she counts the greatest power that entered this turn.",
+    "Alena makes only {R}. Pay green {G}{G} fatties with lands and Gilanra; pay red or colourless ones ([[Drakuseth, Maw of Flames]], [[Oblivion Sower]], [[Tyrant of Discord]]) with Alena.",
+    "Landcycle [[Slavering Branchsnapper]], [[Saber-Tooth Moose-Lion]] or [[Spinewoods Armadillo]] whenever you would miss a land drop before T5; after that, cast them.",
+    "With [[Shriekwood Devourer]], [[Savage Ventmaw]] or [[Sakiko, Mother of Summer]] out, attack first and cast the next big drop in main phase 2.",
+    "Cast [[Paleoloth]] before the fatty wave: each later power-5+ creature returns one from the graveyard.",
+    "Cast [[Myojin of Roaring Blades]] from hand; only then does it enter with the indestructible counter that fires 7 damage at three targets.",
+    "Hold [[Beast Within]] for a combo piece or a board-wipe threat; [[Cleanup Crew]] handles enchantments and graveyards."
+  ],
+  "sources": [
+    "verify-2026-10-07/primers/GILANRA-ENGINE-BRIEF.md",
+    "verify-2026-10-07/gilanra-engine/build-report.md",
+    "verify-2026-10-07/gilanra-engine/final.txt",
+    "verify-2026-10-07/gilanra-engine/final-38.txt",
+    "verify-2026-10-07/gilanra-engine/sim6.py",
+    "verify-2026-10-07/gilanra-engine/metrics.log",
+    "verify-2026-10-07/gilanra-engine/metrics2.log",
+    "verify-2026-10-07/gilanra-engine/screen-final.log",
+    "verify-2026-10-07/gilanra-engine/screen-A.log",
+    "verify-2026-10-07/gilanra-engine/screen-B.log",
+    "verify-2026-10-07/gilanra-engine/screen-C.log",
+    "verify-2026-10-07/gilanra-engine/screen-D.log",
+    "verify-2026-10-07/gilanra-engine/screen-E.log",
+    "verify-2026-10-07/gilanra-engine/colours3.py",
+    "verify-2026-10-07/gruul/pool.md",
+    "verify-2026-10-07/alena-gilanra/consistency-report.md",
+    "verify-2026-10-07/gruul/gilanra/build-report.md",
+    "decks/paper/decks/gilanra-alena-partners.txt"
+  ]
+}

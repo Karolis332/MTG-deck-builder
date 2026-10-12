@@ -1512,3 +1512,196 @@ Create a 1/1 white Ally creature token. Put a +1/+1 counter on it for each creat
 
 ### Shared Roots | {1}{G} (MV 2) | Sorcery — Lesson
 Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
+
+### Apex Devastator [ADDED 2026-10-07: operator owns it, currently in the unregistered Omo precon box] | {8}{G}{G} (MV 10) | Creature — Chimera Hydra 10/10
+Cascade, cascade, cascade, cascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom of your library in a random order.)
+
+### Urza's Tower [ADDED 2026-10-07: Omo precon] |  (MV 0) | Land — Urza's Tower
+{T}: Add {C}. If you control an Urza's Mine and an Urza's Power-Plant, add {C}{C}{C} instead.
+
+### Urza's Mine [ADDED 2026-10-07: Omo precon] |  (MV 0) | Land — Urza's Mine
+{T}: Add {C}. If you control an Urza's Power-Plant and an Urza's Tower, add {C}{C} instead.
+
+### Urza's Power Plant [ADDED 2026-10-07: Omo precon] |  (MV 0) | Land — Urza's Power-Plant
+{T}: Add {C}. If you control an Urza's Mine and an Urza's Tower, add {C}{C} instead.
+
+### Floriferous Vinewall [ADDED 2026-10-07: Omo precon] | {1}{G} (MV 2) | Creature — Plant Wall 0/2
+Defender
+When this creature enters, look at the top six cards of your library. You may reveal a land card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
+
+### Hidden Nursery [ADDED 2026-10-07: Omo precon] |  (MV 0) | Land — Cave
+This land enters tapped.
+{T}: Add {G}.
+{4}{G}, {T}, Sacrifice this land: Discover 4. Activate only as a sorcery. (Exile cards from the top of your library until you exile a nonland card with mana value 4 or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)
+
+### Satyr Wayfinder [ADDED 2026-10-07: Omo precon] | {1}{G} (MV 2) | Creature — Satyr 1/1
+When this creature enters, reveal the top four cards of your library. You may put a land card from among them into your hand. Put the rest into your graveyard.
+
+### Elvish Rejuvenator [ADDED 2026-10-07: Omo precon] | {2}{G} (MV 3) | Creature — Elf Druid 1/1
+When this creature enters, look at the top five cards of your library. You may put a land card from among them onto the battlefield tapped. Put the rest on the bottom of your library in a random order.
+
+### Planar Nexus [ADDED 2026-10-07: Omo precon] |  (MV 0) | Land
+This land is every nonbasic land type. (Nonbasic land types include Cave, Desert, Gate, Lair, Locus, Mine, Power-Plant, Sphere, Tower, and Urza's.)
+{T}: Add {C}.
+{1}, {T}: Add one mana of any color.
+
+### Desert Warfare [ADDED 2026-10-07: Omo precon] | {3}{G} (MV 4) | Enchantment
+Whenever you sacrifice a Desert and whenever a Desert card is put into your graveyard from your hand or library, put that card onto the battlefield under your control at the beginning of your next end step.
+At the beginning of combat on your turn, if you control five or more Deserts, create that many 1/1 red, green, and white Sand Warrior creature tokens. They gain haste.
+
+### Sage of the Maze [ADDED 2026-10-07: Omo precon] | {2}{G} (MV 3) | Creature — Elf Wizard 1/3
+{T}: Add two mana in any combination of colors.
+{T}: Until end of turn, target land you control becomes an X/X Citizen creature with haste in addition to its other types, where X is twice the number of Gates you control. Activate only as a sorcery.
+Tap an untapped Gate you control: Untap this creature.
+
+### Talon Gates of Madara [ADDED 2026-10-07: Omo precon] |  (MV 0) | Land — Gate
+When this land enters, up to one target creature phases out.
+{T}: Add {C}.
+{1}, {T}: Add one mana of any color.
+{4}: Put this card from your hand onto the battlefield.
+
+### Trenchpost [ADDED 2026-10-07: Omo precon] |  (MV 0) | Land — Locus
+{T}: Add {C}.
+{3}, {T}: Target player mills a card for each Locus you control.
+
+### Volatile Fault [ADDED 2026-10-07: Omo precon] |  (MV 0) | Land — Cave
+{T}: Add {C}.
+{1}, {T}, Sacrifice this land: Destroy target nonbasic land an opponent controls. That player may search their library for a basic land card, put it onto the battlefield, then shuffle. You create a Treasure token.
+
+### Hour of Promise [ADDED 2026-10-07: Omo precon] | {4}{G} (MV 5) | Sorcery
+Search your library for up to two land cards, put them onto the battlefield tapped, then shuffle. Then if you control three or more Deserts, create two 2/2 black Zombie creature tokens.
+
+### Thespian's Stage [ADDED 2026-10-07: Omo precon] |  (MV 0) | Land
+{T}: Add {C}.
+{2}, {T}: This land becomes a copy of target land, except it has this ability.
+
+### Dryad of the Ilysian Grove [ADDED 2026-10-07: Omo precon] | {2}{G} (MV 3) | Enchantment Creature — Nymph Dryad 2/4
+You may play an additional land on each of your turns.
+Lands you control are every basic land type in addition to their other types.
+
+### Poison Dart Frog [ADDED 2026-10-07: Omo precon] | {1}{G} (MV 2) | Creature — Frog 1/1
+Reach
+{T}: Add one mana of any color.
+{2}: This creature gains deathtouch until end of turn.
+
+### Vesuva [ADDED 2026-10-07: Omo precon] |  (MV 0) | Land
+You may have this land enter tapped as a copy of any land on the battlefield.
+
+### Yavimaya, Cradle of Growth [ADDED 2026-10-07: Omo precon] |  (MV 0) | Legendary Land
+Each land is a Forest in addition to its other land types.
+
+### Avenger of Zendikar [ADDED 2026-10-07: Omo precon] | {5}{G}{G} (MV 7) | Creature — Elemental 5/5
+When this creature enters, create a 0/1 green Plant creature token for each land you control.
+Landfall — Whenever a land you control enters, you may put a +1/+1 counter on each Plant creature you control.
+
+### Cloudpost [ADDED 2026-10-07: Omo precon] |  (MV 0) | Land — Locus
+This land enters tapped.
+{T}: Add {C} for each Locus on the battlefield.
+
+### Dark Depths [ADDED 2026-10-07: Omo precon] |  (MV 0) | Legendary Snow Land
+Dark Depths enters with ten ice counters on it.
+{3}: Remove an ice counter from Dark Depths.
+When Dark Depths has no ice counters on it, sacrifice it. If you do, create Marit Lage, a legendary 20/20 black Avatar creature token with flying and indestructible.
+
+### Glimmerpost [ADDED 2026-10-07: Omo precon] |  (MV 0) | Land — Locus
+When this land enters, you gain 1 life for each Locus on the battlefield.
+{T}: Add {C}.
+
+### Hashep Oasis [ADDED 2026-10-07: Omo precon] |  (MV 0) | Land — Desert
+{T}: Add {C}.
+{T}, Pay 1 life: Add {G}.
+{1}{G}{G}, {T}, Sacrifice a Desert: Target creature gets +3/+3 until end of turn. Activate only as a sorcery.
+
+### Rampant Frogantua [ADDED 2026-10-07: Omo precon] | {2}{G} (MV 3) | Creature — Frog 3/3
+Trample
+This creature gets +10/+10 for each player who has lost the game.
+Whenever this creature deals combat damage to a player, you may mill that many cards. Put any number of land cards from among them onto the battlefield tapped.
+
+### Basilisk Gate [ADDED 2026-10-07: Omo precon] |  (MV 0) | Land — Gate
+{T}: Add {C}.
+{2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.
+
+### Scute Swarm [ADDED 2026-10-07: Omo precon] | {2}{G} (MV 3) | Creature — Insect 1/1
+Landfall — Whenever a land you control enters, create a 1/1 green Insect creature token. If you control six or more lands, create a token that's a copy of this creature instead.
+
+### Sylvan Scrying [ADDED 2026-10-07: Omo precon] | {1}{G} (MV 2) | Sorcery
+Search your library for a land card, reveal it, put it into your hand, then shuffle.
+
+### Acidic Slime [ADDED 2026-10-07: Omo precon] | {3}{G}{G} (MV 5) | Creature — Ooze 2/2
+Deathtouch (Any amount of damage this deals to a creature is enough to destroy it.)
+When this creature enters, destroy target artifact, enchantment, or land.
+
+### Blast Zone [ADDED 2026-10-07: Omo precon] |  (MV 0) | Land
+This land enters with a charge counter on it.
+{T}: Add {C}.
+{X}{X}, {T}: Put X charge counters on this land.
+{3}, {T}, Sacrifice this land: Destroy each nonland permanent with mana value equal to the number of charge counters on this land.
+
+### Desert of the Indomitable [ADDED 2026-10-07: Omo precon] |  (MV 0) | Land — Desert
+This land enters tapped.
+{T}: Add {G}.
+Cycling {1}{G} ({1}{G}, Discard this card: Draw a card.)
+
+### Hydra Broodmaster [ADDED 2026-10-07: Omo precon] | {4}{G}{G} (MV 6) | Creature — Hydra 7/7
+{X}{X}{G}: Monstrosity X. (If this creature isn't monstrous, put X +1/+1 counters on it and it becomes monstrous.)
+When this creature becomes monstrous, create X X/X green Hydra creature tokens.
+
+### Horizon of Progress [ADDED 2026-10-07: Omo precon] |  (MV 0) | Land
+{T}, Pay 1 life: Add one mana of any type that a land you control could produce.
+{3}, {T}: You may put a land card from your hand onto the battlefield tapped.
+{1}, {T}, Sacrifice this land: Draw a card.
+
+### Lair of the Hydra [ADDED 2026-10-07: Omo precon] |  (MV 0) | Land
+If you control two or more other lands, this land enters tapped.
+{T}: Add {G}.
+{X}{G}: Until end of turn, this land becomes an X/X green Hydra creature. It's still a land. X can't be 0.
+
+### Mirage Mirror [ADDED 2026-10-07: Omo precon] | {3} (MV 3) | Artifact
+{2}: This artifact becomes a copy of target artifact, creature, enchantment, or land until end of turn.
+
+### Mana Reflection [ADDED 2026-10-07: Omo precon] | {4}{G}{G} (MV 6) | Enchantment
+If you tap a permanent for mana, it produces twice as much of that mana instead.
+
+### Oblivion Stone [ADDED 2026-10-07: Omo precon] | {3} (MV 3) | Artifact
+{4}, {T}: Put a fate counter on target permanent.
+{5}, {T}, Sacrifice this artifact: Destroy each nonland permanent without a fate counter on it, then remove all fate counters from all permanents.
+
+### Seer's Sundial [ADDED 2026-10-07: Omo precon] | {4} (MV 4) | Artifact
+Landfall — Whenever a land you control enters, you may pay {2}. If you do, draw a card.
+
+### Skullwinder [ADDED 2026-10-07: Omo precon] | {2}{G} (MV 3) | Creature — Snake 1/3
+Deathtouch
+When this creature enters, return target card from your graveyard to your hand, then choose an opponent. That player returns a card from their graveyard to their hand.
+
+### Terastodon [ADDED 2026-10-07: Omo precon] | {6}{G}{G} (MV 8) | Creature — Elephant 9/9
+When this creature enters, you may destroy up to three target noncreature permanents. For each permanent put into a graveyard this way, its controller creates a 3/3 green Elephant creature token.
+
+### Vivien Reid [ADDED 2026-10-07: Omo precon] | {3}{G}{G} (MV 5) | Legendary Planeswalker — Vivien
++1: Look at the top four cards of your library. You may reveal a creature or land card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
+−3: Destroy target artifact, enchantment, or creature with flying.
+−8: You get an emblem with "Creatures you control get +2/+2 and have vigilance, trample, and indestructible."
+
+### Lazotep Quarry [ADDED 2026-10-07: Omo precon] |  (MV 0) | Land — Desert
+{T}: Add {C}.
+{T}, Sacrifice a creature: Add one mana of any color.
+{X}{2}, {T}, Sacrifice a Desert: Exile target creature card with mana value X from your graveyard. Create a token that's a copy of it, except it's a 4/4 black Zombie. Activate only as a sorcery.
+
+### Chromatic Lantern [ADDED 2026-10-07: second copy from the dismantled Omo precon, free] | {3} (MV 3) | Artifact
+Lands you control have "{T}: Add one mana of any color."
+{T}: Add one mana of any color.
+
+### Ramunap Excavator [ADDED 2026-10-07: second copy from the dismantled Omo precon, free] | {2}{G} (MV 3) | Creature — Snake Cleric 2/3
+You may play lands from your graveyard.
+
+### Sol Ring [ADDED 2026-10-07: second copy from the dismantled Omo precon, free] | {1} (MV 1) | Artifact
+{T}: Add {C}{C}.
+
+### Arcane Signet [ADDED 2026-10-07: second copy from the dismantled Omo precon, free] | {2} (MV 2) | Artifact
+{T}: Add one mana of any color in your commander's color identity.
+
+### Rampaging Baloths [ADDED 2026-10-07: second copy from the dismantled Omo precon, free] | {4}{G}{G} (MV 6) | Creature — Beast 6/6
+Trample
+Landfall — Whenever a land you control enters, create a 4/4 green Beast creature token.
+
+### Command Tower [ADDED 2026-10-07: second copy from the dismantled Omo precon, free] |  (MV 0) | Land
+{T}: Add one mana of any color in your commander's color identity.

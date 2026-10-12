@@ -1,0 +1,5 @@
+BASE obj 81.74 DS 71.8 pen 1 {"land":37,"ramp":10,"draw":12,"removal":12,"board_wipe":4,"protection":7} mana=95 curve=89 interaction=100 advantage=70 win=65 synergy=93 meta=50 structure=100
+  -8.77  Titan Forge => Ponder   DS -6.7 pen 2 mana=94 curve=90 interaction=100 advantage=75 win=56 synergy=93 meta=50 structure=100
+   0.03  Temple of the False God => Cephalid Coliseum   DS 0.0 pen 1 mana=95 curve=89 interaction=100 advantage=70 win=65 synergy=93 meta=50 structure=100
+  -6.70  Ajani Unrelenting => Torrential Gearhulk   DS -6.7 pen 1 mana=95 curve=89 interaction=100 advantage=70 win=56 synergy=93 meta=50 structure=100
+ALL  obj 75.03 (-6.71) DS 65.0 pen 1 {"land":37,"ramp":10,"draw":12,"removal":12,"board_wipe":3,"protection":7} mana=94 curve=90 interaction=100 advantage=75 win=56 synergy=93 meta=50 structure=100

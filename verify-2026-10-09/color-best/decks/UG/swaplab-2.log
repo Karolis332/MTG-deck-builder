@@ -1,0 +1,12 @@
+BASE obj 90.08 DS 78.6 pen 0 {"land":36,"ramp":12,"draw":10,"removal":10,"board_wipe":3,"protection":6} mana=89 curve=91 interaction=99 advantage=70 win=73 synergy=100 meta=50 structure=100
+  -0.01  Meteor Golem => Beast Within   DS 0.0 pen 0 mana=94 curve=92 interaction=99 advantage=70 win=73 synergy=100 meta=50 structure=100
+   0.01  Thought Vessel => Arcane Signet   DS 0.0 pen 0 mana=89 curve=91 interaction=99 advantage=70 win=73 synergy=100 meta=50 structure=100
+   0.00  Reliquary Tower => Fabled Passage   DS 0.0 pen 0 mana=89 curve=91 interaction=99 advantage=70 win=73 synergy=100 meta=50 structure=100
+   0.04  Simic Guildgate => Exotic Orchard   DS 0.0 pen 0 mana=89 curve=91 interaction=99 advantage=70 win=73 synergy=100 meta=50 structure=100
+   0.09  Temple of the False God => Command Tower   DS 0.0 pen 0 mana=89 curve=91 interaction=99 advantage=70 win=73 synergy=100 meta=50 structure=100
+   0.03  Uthros, Titanic Godcore => Lumbering Falls   DS 0.0 pen 0 mana=89 curve=91 interaction=99 advantage=70 win=73 synergy=100 meta=50 structure=100
+   0.11  Urza, Lord High Artificer => Rishkar, Peema Renegade   DS 0.0 pen 0 mana=89 curve=91 interaction=99 advantage=70 win=73 synergy=100 meta=50 structure=100
+   0.03  Inspiring Statuary => Tanazir Quandrix   DS 0.0 pen 0 mana=89 curve=91 interaction=99 advantage=70 win=73 synergy=100 meta=50 structure=100
+   0.00  Devourer of Destiny => Primal Might   DS 0.0 pen 0 mana=94 curve=91 interaction=99 advantage=70 win=73 synergy=100 meta=50 structure=100
+   0.00  Cleanup Crew => Quandrix Command   DS 0.0 pen 0 mana=94 curve=92 interaction=100 advantage=70 win=73 synergy=100 meta=50 structure=100
+ALL  obj 90.34 (0.26) DS 78.6 pen 0 {"land":36,"ramp":12,"draw":10,"removal":10,"board_wipe":3,"protection":6} mana=96 curve=93 interaction=100 advantage=70 win=73 synergy=100 meta=50 structure=100

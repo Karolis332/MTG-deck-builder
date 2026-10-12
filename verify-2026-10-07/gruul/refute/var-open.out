@@ -1,0 +1,4 @@
+final.txt        38L | keep7 0.717 | 4th land T4 0.810 | Bumi T5 0.848 | Gil T3 0.000 Alena T5 0.000 | screw 0.015 | flood 0.016 | spells T1-8 13.48 | clock median T6 (P<=T6 0.709, <=T7 0.923, <=T8 0.970, mean 6.25)
+v1-pyrewood.txt  38L | keep7 0.726 | 4th land T4 0.811 | Bumi T5 0.840 | Gil T3 0.000 Alena T5 0.000 | screw 0.015 | flood 0.016 | spells T1-8 13.41 | clock median T6 (P<=T6 0.689, <=T7 0.913, <=T8 0.968, mean 6.28)
+v2-bogbeast.txt  38L | keep7 0.720 | 4th land T4 0.807 | Bumi T5 0.845 | Gil T3 0.000 Alena T5 0.000 | screw 0.013 | flood 0.017 | spells T1-8 13.41 | clock median T6 (P<=T6 0.703, <=T7 0.920, <=T8 0.970, mean 6.25)
+v3-samut.txt     38L | keep7 0.723 | 4th land T4 0.814 | Bumi T5 0.839 | Gil T3 0.000 Alena T5 0.000 | screw 0.014 | flood 0.014 | spells T1-8 13.28 | clock median T6 (P<=T6 0.694, <=T7 0.921, <=T8 0.971, mean 6.27)

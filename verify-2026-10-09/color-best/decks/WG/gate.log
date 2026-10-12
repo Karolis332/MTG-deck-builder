@@ -1,0 +1,81 @@
+file      : verify-2026-10-09/color-best/decks/WG/final.txt
+format    : commander   commander: Mirri, Weatherlight Duelist
+totals    : 100 cards | 36 lands (36 eff.) | 63 nonland | avg MV 3.46
+curve     : 1:6 2:18 3:12 4:10 5:9 6:3 7:5
+VERDICT   : FAIL
+
+  PASS  size        100 cards (commander wants 100)
+  PASS  singleton   singleton respected (basics exempt)
+  PASS  legality    every card legal in commander
+  PASS  rules       no other format rule broken
+  PASS  identity    all cards inside GW
+  PASS  ownership   all cards owned; paper collection imported 0 days ago
+  PASS  arenaNames  every line uses a name Arena accepts
+  WARN  lands       36 lands (+0 MDFC land backs = 36 effective); Karsten wants 39 ±2
+  FAIL  plan        0/63 nonland cards interact (0%) — commander wants: general value
+        - Basilisk Collar (MV 1)
+        - Final Showdown (MV 1)
+        - Hardened Scales (MV 1)
+        - Path to Exile (MV 1)
+        - Sol Ring (MV 1)
+        - Swords to Plowshares (MV 1)
+        - Ajani Resolute (MV 2)
+        - All That Glitters (MV 2)
+        - Arcane Signet (MV 2)
+        - Darksteel Mutation (MV 2)
+        - Farseek (MV 2)
+        - Grand Abolisher (MV 2)
+        - Heroic Intervention (MV 2)
+        - Kenrith's Transformation (MV 2)
+        - Nature's Lore (MV 2)
+        - Rampant Growth (MV 2)
+        - Selesnya Charm (MV 2)
+        - Selfless Spirit (MV 2)
+        - Spirit Mantle (MV 2)
+        - Sram, Senior Edificer (MV 2)
+        - Sword of the Animist (MV 2)
+        - Talisman of Unity (MV 2)
+        - Vigorbloom Charm (MV 2)
+        - Warg Tactics (MV 2)
+        - Academy Manufactor (MV 3)
+        - Chromatic Lantern (MV 3)
+        - Garruk's Uprising (MV 3)
+        - Generous Gift (MV 3)
+        - Ghostly Prison (MV 3)
+        - Guardian Augmenter (MV 3)
+        - Harrow (MV 3)
+        - Harvest Season (MV 3)
+        - Hunter's Insight (MV 3)
+        - Loxodon Warhammer (MV 3)
+        - Nadaar, Selfless Paladin (MV 3)
+        - Tireless Provisioner (MV 3)
+        - Alms Collector (MV 4)
+        - Armored Skyhunter (MV 4)
+        - Firemane Commando (MV 4)
+        - Hammer of Nazahn (MV 4)
+        - Harmonize (MV 4)
+        - Jazal Goldmane (MV 4)
+        - Skyshroud Claim (MV 4)
+        - Squad Commander (MV 4)
+        - Thran Dynamo (MV 4)
+        - Toski, Bearer of Secrets (MV 4)
+        - Eusocial Engineering (MV 5)
+        - Fell the Mighty (MV 5)
+        - Forum Filibuster (MV 5)
+        - Mycoloth (MV 5)
+        - Ohran Frostfang (MV 5)
+        - Overrun (MV 5)
+        - Return of the Wildspeaker (MV 5)
+        - Seedborn Muse (MV 5)
+        - Shamanic Revelation (MV 5)
+        - Elspeth, Sun's Champion (MV 6)
+        - Primeval Bounty (MV 6)
+        - Rampaging Baloths (MV 6)
+        - Avenger of Zendikar (MV 7)
+        - Devourer of Destiny (MV 7)
+        - Meteor Golem (MV 7)
+        - Cityscape Leveler (MV 8)
+        - Terastodon (MV 8)
+  PASS  curve       avg MV 3.46; commander sets no cost threshold
+  PASS  wincons     14 win condition(s)/closer(s)
+  PASS  locks       3 locked card(s) present and intact

@@ -1,0 +1,697 @@
+RAID:inspirit-flagship-vessel            Ancient Den|Art Land|{T}: Add {W}.
+FREE                                     Arcane Lighthouse|Land|{T}: Add {C}. {1}, {T}: Until end of turn, creatures your opponents control lose hexproof and shroud and can't
+FREE                                     Arid Archway|Land — Desert|This land enters tapped. When this land enters, return a land you control to its owner's hand. If another Dese
+FREE                                     Ash Barrens|Land|{T}: Add {C}. Basic landcycling {1} ({1}, Discard this card: Search your library for a basic land card, reveal
+FREE                                     Astral Cornucopia|Art|This artifact enters with X charge counters on it. {T}: Choose a color. Add one mana of that color for each ch
+RAID:bumi-unleashed,the-cabbage-merchant Ba Sing Se|Land|This land enters tapped unless you control a basic land. {T}: Add {G}. {2}{G}, {T}: Earthbend 2. Activate only
+RAID:tazri-beacon-of-unity               Base Camp|Land|This land enters tapped. {T}: Add {C}. {T}: Add one mana of any color. Spend this mana only to cast a Cleric,
+FREE                                     Basilisk Gate|Land — Gate|{T}: Add {C}. {2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you contr
+FREE                                     Blast Zone|Land|This land enters with a charge counter on it. {T}: Add {C}. {X}{X}, {T}: Put X charge counters on this land. {
+FREE                                     Blighted Woodland|Land|{T}: Add {C}. {3}{G}, {T}, Sacrifice this land: Search your library for up to two basic land cards, put them o
+RAID:tazri-beacon-of-unity               Bloodstained Mire|Land|{T}, Pay 1 life, Sacrifice this land: Search your library for a Swamp or Mountain card, put it onto the battle
+RAID:tazri-beacon-of-unity               Brokers Hideout|Land|When this land enters, sacrifice it. When you do, search your library for a basic Forest, Plains, or Island ca
+FREE                                     Buried Ruin|Land|{T}: Add {C}. {2}, {T}, Sacrifice this land: Return target artifact card from your graveyard to your hand.
+RAID:tazri-beacon-of-unity               Cabaretti Courtyard|Land|When this land enters, sacrifice it. When you do, search your library for a basic Mountain, Forest, or Plains
+FREE                                     Cloudpost|Land — Locus|This land enters tapped. {T}: Add {C} for each Locus on the battlefield.
+RAID:beledros-witherbloom,bumi-unleashed Command Tower|Land|{T}: Add one mana of any color in your commander's color identity.
+FREE                                     Conduit Pylons|Land — Desert|When this land enters, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
+RAID:bumi-unleashed                      Crawling Barrens|Land|{T}: Add {C}. {4}: Put two +1/+1 counters on this land. Then you may have it become a 0/0 Elemental creature u
+FREE                                     Creosote Heath|Land — Desert|This land enters tapped. When this land enters, it deals 1 damage to target opponent. {T}: Add {G} or {W}.
+RAID:bumi-unleashed                      Cryptic Caves|Land|{T}: Add {C}. {1}, {T}, Sacrifice this land: Draw a card. Activate only if you control five or more lands.
+FREE                                     Dark Depths|L.Snow Land|Dark Depths enters with ten ice counters on it. {3}: Remove an ice counter from Dark Depths. When Dark Depths
+FREE                                     Desert of the Indomitable|Land — Desert|This land enters tapped. {T}: Add {G}. Cycling {1}{G} ({1}{G}, Discard this card: Draw a card.)
+RAID:gilanra-alena-partners              Diamond City|Land|This land enters with a shield counter on it. (If it would be dealt damage or destroyed, remove a shield count
+RAID:the-cabbage-merchant                Escape Tunnel|Land|{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then
+RAID:inspirit-flagship-vessel            Everflowing Chalice|Art|Multikicker {2} (You may pay an additional {2} any number of times as you cast this spell.) This artifact ente
+RAID:beledros-witherbloom                Evolving Wilds|Land|{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then
+FREE                                     Exotic Orchard|Land|{T}: Add one mana of any color that a land an opponent controls could produce.
+FREE                                     Fabled Passage|Land|{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then
+RAID:the-cabbage-merchant                Gingerbread Cabin|Land — Forest|({T}: Add {G}.) This land enters tapped unless you control three or more other Forests. When this land enters
+FREE                                     Glimmerpost|Land — Locus|When this land enters, you gain 1 life for each Locus on the battlefield. {T}: Add {C}.
+RAID:tam-the-possibility                 Great Hall of the Citadel|Land|{T}: Add {C}. {1}, {T}: Add two mana in any combination of colors. Spend this mana only to cast legendary spel
+FREE                                     Hangarback Walker|Art Cr — Construct|This creature enters with X +1/+1 counters on it. When this creature dies, create a 1/1 colorless Thopter arti
+FREE                                     Hashep Oasis|Land — Desert|{T}: Add {C}. {T}, Pay 1 life: Add {G}. {1}{G}{G}, {T}, Sacrifice a Desert: Target creature gets +3/+3 until e
+FREE                                     Hidden Grotto|Land|When this land enters, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
+FREE                                     Hidden Nursery|Land — Cave|This land enters tapped. {T}: Add {G}. {4}{G}, {T}, Sacrifice this land: Discover 4. Activate only as a sorcer
+RAID:beledros-witherbloom                High Market|Land|{T}: Add {C}. {T}, Sacrifice a creature: You gain 1 life.
+RAID:beledros-witherbloom                Horizon of Progress|Land|{T}, Pay 1 life: Add one mana of any type that a land you control could produce. {3}, {T}: You may put a land
+RAID:tam-the-possibility                 Interplanar Beacon|Land|Whenever you cast a planeswalker spell, you gain 1 life. {T}: Add {C}. {1}, {T}: Add two mana of different col
+RAID:inspirit-flagship-vessel            Inventors' Fair|L.Land|At the beginning of your upkeep, if you control three or more artifacts, you gain 1 life. {T}: Add {C}. {4}, {
+RAID:inspirit-flagship-vessel            Karn's Bastion|Land|{T}: Add {C}. {4}, {T}: Proliferate. (Choose any number of permanents and/or players, then give each another c
+FREE                                     Lair of the Hydra|Land|If you control two or more other lands, this land enters tapped. {T}: Add {G}. {X}{G}: Until end of turn, this
+FREE                                     Lazotep Quarry|Land — Desert|{T}: Add {C}. {T}, Sacrifice a creature: Add one mana of any color. {X}{2}, {T}, Sacrifice a Desert: Exile tar
+RAID:bumi-unleashed                      Lotus Field|Land|Hexproof This land enters tapped. When this land enters, sacrifice two lands. {T}: Add three mana of any one c
+FREE                                     Maestros Theater|Land|When this land enters, sacrifice it. When you do, search your library for a basic Island, Swamp, or Mountain c
+RAID:tam-the-possibility                 Mana Confluence|Land|{T}, Pay 1 life: Add one mana of any color.
+RAID:ramos-dragon-engine                 Manor Gate|Land — Gate|This land enters tapped. As this land enters, choose a color other than green. {T}: Add {G} or one mana of the
+FREE                                     Mirage Mesa|Land — Desert|This land enters tapped. As it enters, choose a color. {T}: Add one mana of the chosen color.
+FREE                                     Mishra's Bauble|Art|{T}, Sacrifice this artifact: Look at the top card of target player's library. Draw a card at the beginning of
+RAID:the-cabbage-merchant                Mosswort Bridge|Land|Hideaway 4 (When this land enters, look at the top four cards of your library, exile one face down, then put t
+FREE                                     Muraganda Raceway|Land|Start your engines! (If you have no speed, it starts at 1. It increases once on each of your turns when an opp
+RAID:beledros-witherbloom,imotekh-the-st Myriad Landscape|Land|This land enters tapped. {T}: Add {C}. {2}, {T}, Sacrifice this land: Search your library for up to two basic
+FREE                                     Nesting Grounds|Land|{T}: Add {C}. {1}, {T}: Move a counter from target permanent you control onto a second target permanent. Activ
+FREE                                     Opal Palace|Land|{T}: Add {C}. {1}, {T}: Add one mana of any color in your commander's color identity. If you spend this mana t
+FREE                                     Oran-Rief, the Vastwood|Land|This land enters tapped. {T}: Add {G}. {T}: Put a +1/+1 counter on each green creature that entered this turn.
+RAID:tam-the-possibility                 Overgrown Farmland|Land|This land enters tapped unless you control two or more other lands. {T}: Add {G} or {W}.
+FREE                                     Path of Ancestry|Land|This land enters tapped. {T}: Add one mana of any color in your commander's color identity. When that mana is
+FREE                                     Planar Nexus|Land|This land is every nonbasic land type. (Nonbasic land types include Cave, Desert, Gate, Lair, Locus, Mine, Pow
+RAID:ramos-dragon-engine                 Plaza of Harmony|Land|When this land enters, if you control two or more Gates, you gain 3 life. {T}: Add {C}. {T}: Add one mana of a
+FREE                                     Radiant Fountain|Land|When this land enters, you gain 2 life. {T}: Add {C}.
+FREE                                     Reliquary Tower|Land|You have no maximum hand size. {T}: Add {C}.
+FREE                                     Riveteers Overlook|Land|When this land enters, sacrifice it. When you do, search your library for a basic Swamp, Mountain, or Forest c
+RAID:bumi-unleashed                      Rogue's Passage|Land|{T}: Add {C}. {4}, {T}: Target creature can't be blocked this turn.
+RAID:bumi-unleashed                      Rumble Arena|Land|Vigilance When this land enters, scry 1. (Look at the top card of your library. You may put it on the bottom.)
+FREE                                     Sandstorm Verge|Land — Desert|{T}: Add {C}. {3}, {T}: Target creature can't block this turn. Activate only as a sorcery.
+FREE                                     Sapseep Forest|Land — Forest|({T}: Add {G}.) This land enters tapped. {G}, {T}: You gain 1 life. Activate only if you control two or more g
+FREE                                     Secluded Starforge|Land|{T}: Add {C}. {2}, {T}, Tap X untapped artifacts you control: Target creature gets +X/+0 until end of turn. Ac
+FREE                                     Secluded Steppe|Land|This land enters tapped. {T}: Add {W}. Cycling {W} ({W}, Discard this card: Draw a card.)
+FREE                                     Skycoach Waypoint|Land|{T}: Add {C}. {3}, {T}: Target creature becomes prepared. (Only creatures with prepare spells can become prepa
+RAID:inspirit-flagship-vessel            Spire of Industry|Land|{T}: Add {C}. {T}, Pay 1 life: Add one mana of any color. Activate only if you control an artifact.
+FREE                                     Stonecoil Serpent|Art Cr — Snake|Reach, trample, protection from multicolored This creature enters with X +1/+1 counters on it.
+RAID:bumi-unleashed                      Strip Mine|Land|{T}: Add {C}. {T}, Sacrifice this land: Destroy target land.
+FREE                                     Study Hall|Land|{T}: Add {C}. {1}, {T}: Add one mana of any color. When you spend this mana to cast your commander, scry X, wh
+FREE                                     Talon Gates of Madara|Land — Gate|When this land enters, up to one target creature phases out. {T}: Add {C}. {1}, {T}: Add one mana of any color
+FREE                                     Tarnation Vista|Land|This land enters tapped. As it enters, choose a color. {T}: Add one mana of the chosen color. {1}, {T}: For ea
+FREE                                     Temple of the False God|Land|{T}: Add {C}{C}. Activate only if you control five or more lands.
+FREE                                     Terramorphic Expanse|Land|{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then
+FREE                                     The Mycosynth Gardens|Land — Sphere|{T}: Add {C}. {1}, {T}: Add one mana of any color. {X}, {T}: This land becomes a copy of target nontoken artif
+RAID:beledros-witherbloom                Thespian's Stage|Land|{T}: Add {C}. {2}, {T}: This land becomes a copy of target land, except it has this ability.
+FREE                                     Trenchpost|Land — Locus|{T}: Add {C}. {3}, {T}: Target player mills a card for each Locus you control.
+FREE                                     Urza's Mine|Land — Urza's Mine|{T}: Add {C}. If you control an Urza's Power-Plant and an Urza's Tower, add {C}{C} instead.
+FREE                                     Urza's Power Plant|Land — Urza's Power-Plant|{T}: Add {C}. If you control an Urza's Mine and an Urza's Tower, add {C}{C} instead.
+FREE                                     Urza's Tower|Land — Urza's Tower|{T}: Add {C}. If you control an Urza's Mine and an Urza's Power-Plant, add {C}{C}{C} instead.
+RAID:beledros-witherbloom                Vesuva|Land|You may have this land enter tapped as a copy of any land on the battlefield.
+RAID:tam-the-possibility                 Vigorbloom Annex|Land|This land enters tapped unless you control a planeswalker. {T}: Add {G} or {W}.
+FREE                                     Volatile Fault|Land — Cave|{T}: Add {C}. {1}, {T}, Sacrifice this land: Destroy target nonbasic land an opponent controls. That player ma
+RAID:the-cabbage-merchant                Walking Ballista|Art Cr — Construct|This creature enters with X +1/+1 counters on it. {4}: Put a +1/+1 counter on this creature. Remove a +1/+1 co
+RAID:tazri-beacon-of-unity               Windswept Heath|Land|{T}, Pay 1 life, Sacrifice this land: Search your library for a Forest or Plains card, put it onto the battlef
+RAID:tazri-beacon-of-unity               Wooded Foothills|Land|{T}, Pay 1 life, Sacrifice this land: Search your library for a Mountain or Forest card, put it onto the battl
+RAID:beledros-witherbloom                Yavimaya, Cradle of Growth|L.Land|Each land is a Forest in addition to its other land types.
+FREE                                     Abundant Growth|Ench — Aura|Enchant land When this Aura enters, draw a card. Enchanted land has "{T}: Add one mana of any color."
+FREE                                     Animist's Awakening|Sorc|Reveal the top X cards of your library. Put all land cards from among them onto the battlefield tapped and the
+FREE                                     Ankle Biter|Cr — Snake|Deathtouch
+FREE                                     Archpriest of Iona|Cr — Human Cleric|Archpriest of Iona's power is equal to the number of creatures in your party. (Your party consists of up to on
+RAID:the-cabbage-merchant                Autumn's Veil|Inst|Spells you control can't be countered by blue or black spells this turn, and creatures you control can't be th
+FREE                                     Avacyn's Pilgrim|Cr — Human Monk|{T}: Add {W}.
+FREE                                     Basilisk Collar|Art — Equipment|Equipped creature has deathtouch and lifelink. (Any amount of damage it deals to a creature is enough to destr
+FREE                                     Blisterpod|Cr — Eldrazi Drone|Devoid (This card has no color.) When this creature dies, create a 1/1 colorless Eldrazi Scion creature token.
+RAID:bumi-unleashed                      Bushwhack|Sorc|Choose one — • Search your library for a basic land card, reveal it, put it into your hand, then shuffle. • Ta
+FREE                                     Carpet of Flowers|Ench|At the beginning of each of your main phases, if you haven't added mana with this ability this turn, you may a
+FREE                                     Cloudshift|Inst|Exile target creature you control, then return that card to the battlefield under your control.
+RAID:inspirit-flagship-vessel            Dispatch|Inst|Tap target creature. Metalcraft — If you control three or more artifacts, exile that creature.
+FREE                                     Elixir of Immortality|Art|{2}, {T}: You gain 5 life. Shuffle this artifact and your graveyard into their owner's library.
+RAID:beledros-witherbloom,bumi-unleashed Elvish Mystic|Cr — Elf Druid|{T}: Add {G}.
+RAID:tam-the-possibility                 Erode|Inst|Destroy target creature or planeswalker. Its controller may search their library for a basic land card, put it
+FREE                                     Expedition Map|Art|{2}, {T}, Sacrifice this artifact: Search your library for a land card, reveal it, put it into your hand, then
+FREE                                     Explorer's Scope|Art — Equipment|Whenever equipped creature attacks, look at the top card of your library. If it's a land card, you may put it
+FREE                                     Eye of Jace|Art|At the beginning of your upkeep, surveil 1. Then if there are seven or more cards in your graveyard, sacrifice
+RAID:inspirit-flagship-vessel            Final Showdown|Inst|Spree (Choose one or more additional costs.) + {1} — All creatures lose all abilities until end of turn. + {1}
+FREE                                     Flickering Ward|Ench — Aura|Enchant creature As this Aura enters, choose a color. Enchanted creature has protection from the chosen color.
+FREE                                     Fog|Inst|Prevent all combat damage that would be dealt this turn.
+FREE                                     Fountainport Bell|Art|When this artifact enters, you may search your library for a basic land card, reveal it, then shuffle and put
+FREE                                     Gene Pollinator|Art Cr — Robot Insect|{T}, Tap an untapped permanent you control: Add one mana of any color.
+FREE                                     Getaway Glamer|Inst|Spree (Choose one or more additional costs.) + {1} — Exile target nontoken creature. Return it to the battlefi
+FREE                                     Giant Growth|Inst|Target creature gets +3/+3 until end of turn.
+FREE                                     Giant's Boulder|Art|When this artifact enters, scry 2. (Look at the top two cards of your library, then put any number of them on
+RAID:the-cabbage-merchant                Gilded Goose|Cr — Bird|Flying When this creature enters, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this token:
+FREE                                     Goldvein Hydra|Cr — Hydra|Vigilance, trample, haste This creature enters with X +1/+1 counters on it. When this creature dies, create a
+FREE                                     Guac & Marshmallow Pizza|Art — Food|Flash When this artifact enters, target creature gets +2/+2 until end of turn. Untap it. {2}, {T}, Sacrifice t
+FREE                                     Guiding Hydra|Cr — Hydra Horror|This creature enters with X +1/+1 counters on it. At the beginning of combat on your turn, you may remove a +1
+FREE                                     Hardened Scales|Ench|If one or more +1/+1 counters would be put on a creature you control, that many plus one +1/+1 counters are pu
+RAID:the-cabbage-merchant                Haywire Mite|Art Cr — Insect|When this creature dies, you gain 2 life. {G}, Sacrifice this creature: Exile target noncreature artifact or n
+FREE                                     Helix Pinnacle|Ench|Shroud (This enchantment can't be the target of spells or abilities.) {X}: Put X tower counters on this enchan
+FREE                                     Kinetic Ooze|Cr — Ooze|This creature enters with X +1/+1 counters on it. When this creature enters, destroy up to one target artifact
+RAID:tazri-beacon-of-unity               Land Tax|Ench|At the beginning of your upkeep, if an opponent controls more lands than you, you may search your library for
+FREE                                     Lavaspur Boots|Art — Equipment|Equipped creature gets +1/+0 and has haste and ward {1}. (Whenever it becomes the target of a spell or ability
+FREE                                     Library of Leng|Art|You have no maximum hand size. If an effect causes you to discard a card, discard it, but you may put it on to
+RAID:tam-the-possibility                 Liliana the Faultless|L.Cr — Human Cleric|Whenever another creature or planeswalker you control enters, you gain 1 life. {1}, {T}, Discard a card: Ano
+FREE                                     Llanowar Elves|Cr — Elf Druid|{T}: Add {G}.
+RAID:bumi-unleashed                      Longstalk Brawl|Sorc|Gift a tapped Fish (You may promise an opponent a gift as you cast this spell. If you do, they create a tapped
+RAID:inspirit-flagship-vessel            Lost Jitte|L.Art — Equipment|Whenever equipped creature deals combat damage, put a charge counter on Lost Jitte. Remove a charge counter fr
+FREE                                     Loyal Tutor|Inst|Search your library for a planeswalker card, reveal it, then shuffle and put that card on top.
+FREE                                     Magus of the Candelabra|Cr — Human Wizard|{X}, {T}: Untap X target lands.
+FREE                                     Mana Bloom|Ench|This enchantment enters with X charge counters on it. Remove a charge counter from this enchantment: Add one m
+RAID:the-cabbage-merchant                Many Partings|Sorc|Search your library for a basic land card, reveal it, put it into your hand, then shuffle. Create a Food token
+FREE                                     Meltstrider's Gear|Art — Equipment|When this Equipment enters, attach it to target creature you control. Equipped creature gets +2/+1 and has rea
+FREE                                     Multiclass Baldric|Art — Equipment|Equipped creature has lifelink if you control a Cleric, deathtouch if you control a Rogue, haste if you contro
+FREE                                     Party Dude|Ench — Class|(Gain the next level as a sorcery to add its ability.) When this Class enters, each player creates a Food toke
+RAID:tam-the-possibility                 Path to Exile|Inst|Exile target creature. Its controller may search their library for a basic land card, put that card onto the b
+RAID:beledros-witherbloom                Pest Infestation|Sorc|Destroy up to X target artifacts and/or enchantments. Create twice X 1/1 black and green Pest creature tokens
+FREE                                     Pillar Launch|Inst|Target creature gets +2/+2 and gains reach until end of turn. Untap it.
+FREE                                     Practiced Tactics|Inst|Choose target attacking or blocking creature. Practiced Tactics deals damage to that creature equal to twice t
+FREE                                     Primal Might|Sorc|Target creature you control gets +X/+X until end of turn. Then it fights up to one target creature you don't c
+FREE                                     Raffine's Guidance|Ench — Aura|Enchant creature Enchanted creature gets +1/+1. You may cast this card from your graveyard by paying {2}{W} ra
+FREE                                     Requisition Raid|Sorc|Spree (Choose one or more additional costs.) + {1} — Destroy target artifact. + {1} — Destroy target enchantme
+FREE                                     Rustler Rampage|Inst|Spree (Choose one or more additional costs.) + {1} — Untap all creatures target player controls. + {1} — Targe
+FREE                                     Sentinel's Eyes|Ench — Aura|Enchant creature Enchanted creature gets +1/+1 and has vigilance. Escape—{W}, Exile two other cards from your
+FREE                                     Silkguard|Inst|Put a +1/+1 counter on each of up to X target creatures you control. Auras, Equipment, and modified creatures
+RAID:bumi-unleashed,the-cabbage-merchant Snakeskin Veil|Inst|Put a +1/+1 counter on target creature you control. It gains hexproof until end of turn. (It can't be the targ
+RAID:beledros-witherbloom,bumi-unleashed Sol Ring|Art|{T}: Add {C}{C}.
+FREE                                     Soul-Guide Lantern|Art|When this artifact enters, exile target card from a graveyard. {T}, Sacrifice this artifact: Exile each oppone
+RAID:the-cabbage-merchant                Spore Frog|Cr — Frog|Sacrifice this creature: Prevent all combat damage that would be dealt this turn.
+FREE                                     Studious First-Year // Rampant Growth|Cr — Bear Wizard|This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so
+RAID:inspirit-flagship-vessel,tazri-beac Swords to Plowshares|Inst|Exile target creature. Its controller gains life equal to its power.
+RAID:the-cabbage-merchant                Teething Wurmlet|Cr — Wurm|This creature has deathtouch as long as you control three or more artifacts. Whenever an artifact you control
+FREE                                     Trash the Town|Inst|Spree (Choose one or more additional costs.) + {2} — Put two +1/+1 counters on target creature. + {1} — Target
+FREE                                     Tyvar's Stand|Inst|Target creature you control gets +X/+X and gains hexproof and indestructible until end of turn. (It can't be t
+RAID:beledros-witherbloom,bumi-unleashed Veil of Summer|Inst|Draw a card if an opponent has cast a blue or black spell this turn. Spells you control can't be countered thi
+FREE                                     Vexing Bauble|Art|Whenever a player casts a spell, if no mana was spent to cast it, counter that spell. {1}, {T}, Sacrifice this
+FREE                                     Wayfarer's Bauble|Art|{2}, {T}, Sacrifice this artifact: Search your library for a basic land card, put that card onto the battlefie
+RAID:tazri-beacon-of-unity               Weathered Wayfarer|Cr — Human Nomad Cleric|{W}, {T}: Search your library for a land card, reveal it, put it into your hand, then shuffle. Activate onl
+RAID:the-cabbage-merchant                Wild Growth|Ench — Aura|Enchant land Whenever enchanted land is tapped for mana, its controller adds an additional {G}.
+FREE                                     Wildwood Scourge|Cr — Hydra|This creature enters with X +1/+1 counters on it. Whenever one or more +1/+1 counters are put on another non-H
+FREE                                     Academic Ascent|Inst|Target creature gets +2/+2 and gains flying until end of turn. Empower Jace 2. (Put two loyalty counters on a
+FREE                                     Airbender Ascension|Ench|When this enchantment enters, airbend up to one target creature. Whenever a creature you control enters, put a
+RAID:tam-the-possibility                 Ajani Resolute|L.Planeswalker — Ajani|Whenever you gain life, put a loyalty counter on Ajani. 0: You gain 1 life. −4: Create a 2/2 white Cat Soldier
+RAID:inspirit-flagship-vessel            All That Glitters|Ench — Aura|Enchant creature Enchanted creature gets +1/+1 for each artifact and/or enchantment you control.
+FREE                                     Animal Attendant|Cr — Human Citizen|{T}: Add one mana of any color. If that mana is spent to cast a non-Human creature spell, that creature enters
+FREE                                     Arcane Amphisbaena|Cr — Snake|Deathtouch When this creature enters, empower Jace 2. (Put two loyalty counters on a Jace token you control. I
+FREE                                     Arcane Signet|Art|{T}: Add one mana of any color in your commander's color identity.
+RAID:the-cabbage-merchant                Basking Broodscale|Cr — Eldrazi Lizard|Devoid (This card has no color.) {1}{G}: Adapt 1. (If this creature has no +1/+1 counters on it, put a +1/+1 c
+FREE                                     Benevolent Hydra|Cr — Hydra|This creature enters with X +1/+1 counters on it. If one or more +1/+1 counters would be put on another creatu
+RAID:tam-the-possibility                 Bloom Tender|Cr — Elf Druid|Vivid — {T}: For each color among permanents you control, add one mana of that color.
+FREE                                     Bristlebane Battler|Cr — Kithkin Soldier|Trample, ward {2} This creature enters with five -1/-1 counters on it. Whenever another creature you control
+FREE                                     Broodhatch Nantuko|Cr — Insect Druid|Whenever this creature is dealt damage, you may create that many 1/1 green Insect creature tokens. Morph {2}{G
+RAID:the-cabbage-merchant                Bumi's Feast Lecture|Sorc — Lesson|Create a Food token. Then earthbend X, where X is twice the number of Foods you control. (A Food token is an a
+FREE                                     Campus Crier|Cr — Human Advisor|{1}, Exile this card from your graveyard: Empower Jace 2. (Put two loyalty counters on a Jace token you contro
+FREE                                     Cankerbloom|Cr — Phyrexian Fungus|{1}, Sacrifice this creature: Choose one — • Destroy target artifact. • Destroy target enchantment. • Prolifer
+FREE                                     Carnivorous Cultivator // Enroot|Cr — Elf Warlock|Deathtouch This creature enters prepared. Whenever this creature deals combat damage to a player, re
+FREE                                     Channeler Initiate|Cr — Human Druid|When this creature enters, put three -1/-1 counters on target creature you control. {T}, Remove a -1/-1 counte
+FREE                                     Contagion Clasp|Art|When this artifact enters, put a -1/-1 counter on target creature. {4}, {T}: Proliferate. (Choose any number o
+FREE                                     Coretapper|Art Cr — Myr|{T}: Put a charge counter on target artifact. Sacrifice this creature: Put two charge counters on target artif
+FREE                                     Cream of the Crop|Ench|Whenever a creature you control enters, you may look at the top X cards of your library, where X is that creat
+FREE                                     Dance of the Tumbleweeds|Sorc|Spree (Choose one or more additional costs.) + {1} — Search your library for a basic land card or a Desert car
+FREE                                     Darksteel Mutation|Ench — Aura|Enchant creature Enchanted creature is an Insect artifact creature with base power and toughness 0/1 and has i
+FREE                                     Dawnbringer Cleric|Cr — Human Cleric|When this creature enters, choose one — • Cure Wounds — You gain 2 life. • Dispel Magic — Destroy target encha
+FREE                                     Demon's Horn|Art|Whenever a player casts a black spell, you may gain 1 life.
+FREE                                     Devoted Druid|Cr — Elf Druid|{T}: Add {G}. Put a -1/-1 counter on this creature: Untap this creature.
+RAID:the-cabbage-merchant                Emerald Medallion|Art|Green spells you cast cost {1} less to cast.
+RAID:bumi-unleashed                      Explore|Sorc|You may play an additional land this turn. Draw a card.
+RAID:bumi-unleashed,tazri-beacon-of-unit Farseek|Sorc|Search your library for a Plains, Island, Swamp, or Mountain card, put it onto the battlefield tapped, then sh
+FREE                                     Fblthp, Knows the Way|L.Cr — Homunculus Scout|Domain — Fblthp's power is equal to the number of basic land types among lands you control. When Fblthp
+RAID:the-cabbage-merchant                Feasting Hobbit|Cr — Halfling Citizen|Devour Food 3 (As this creature enters, you may sacrifice any number of Foods. It enters with three times that
+RAID:inspirit-flagship-vessel,tazri-beac Fellwar Stone|Art|{T}: Add one mana of any color that a land an opponent controls could produce.
+FREE                                     Fertile Ground|Ench — Aura|Enchant land Whenever enchanted land is tapped for mana, its controller adds an additional one mana of any col
+FREE                                     Fierce Retribution|Inst|Cleave {5}{W} (You may cast this spell for its cleave cost. If you do, remove the words in square brackets.) D
+FREE                                     Floriferous Vinewall|Cr — Plant Wall|Defender When this creature enters, look at the top six cards of your library. You may reveal a land card from
+RAID:bumi-unleashed                      Frog Butler|Cr — Frog Spirit|Deathtouch {T}: Add one mana of any color. {2}: This creature gains reach until end of turn.
+FREE                                     Gatecreeper Vine|Cr — Plant|Defender When this creature enters, you may search your library for a basic land card or a Gate card, reveal i
+RAID:inspirit-flagship-vessel            Gavel of the Righteous|Art — Equipment|At the beginning of combat on your turn, put a charge counter on this Equipment. Equipped creature gets +1/+1
+FREE                                     Gleaming Barrier|Art Cr — Wall|Defender When this creature dies, create a Treasure token. (It's an artifact with "{T}, Sacrifice this token:
+RAID:tazri-beacon-of-unity               Grand Abolisher|Cr — Human Cleric|During your turn, your opponents can't cast spells or activate abilities of artifacts, creatures, or enchantme
+RAID:tam-the-possibility                 Great Divide Guide|Cr — Human Scout Ally|Each land and Ally you control has "{T}: Add one mana of any color."
+FREE                                     Hardbristle Bandit|Cr — Plant Rogue|{T}: Add one mana of any color. Whenever you commit a crime, untap this creature. This ability triggers only o
+RAID:tazri-beacon-of-unity               Heroic Intervention|Inst|Permanents you control gain hexproof and indestructible until end of turn.
+FREE                                     Idol of False Gods|Kindred Art — Eldrazi|{1}{C}, {T}: Create a 0/1 colorless Eldrazi Spawn creature token with "Sacrifice this token: Add {C}." Whenev
+RAID:beledros-witherbloom                Idol of Oblivion|Art|{T}: Draw a card. Activate only if you created a token this turn. {8}, {T}, Sacrifice this artifact: Create a
+FREE                                     Ilysian Caryatid|Cr — Plant|{T}: Add one mana of any color. If you control a creature with power 4 or greater, add two mana of any one col
+FREE                                     Innkeeper's Talent|Ench — Class|(Gain the next level as a sorcery to add its ability.) At the beginning of combat on your turn, put a +1/+1 co
+FREE                                     Invasion of Ikoria // Zilortha, Apex of Ikoria|Battle — Siege|(As a Siege enters, choose an opponent to protect it. You and others can attack it. When
+FREE                                     Journey to Nowhere|Ench|When this enchantment enters, exile target creature. When this enchantment leaves the battlefield, return the
+FREE                                     Kamahl's Druidic Vow|L.Sorc|(You may cast a legendary sorcery only if you control a legendary creature or planeswalker.) Look at the top X
+RAID:the-cabbage-merchant                Kenrith's Transformation|Ench — Aura|Enchant creature When this Aura enters, draw a card. Enchanted creature loses all abilities and is a green Elk
+FREE                                     Kor Spiritdancer|Cr — Kor Wizard|This creature gets +2/+2 for each Aura attached to it. Whenever you cast an Aura spell, you may draw a card.
+FREE                                     Lattice Library|Ench|This enchantment enters with X study counters on it. When this enchantment enters and whenever you cast your f
+FREE                                     Lembas|Art — Food|When this artifact enters, scry 1, then draw a card. {2}, {T}, Sacrifice this artifact: You gain 3 life. When
+RAID:beledros-witherbloom                Lightning Greaves|Art — Equipment|Equipped creature has haste and shroud. (It can't be the target of spells or abilities.) Equip {0}
+FREE                                     Lion Umbra|Ench — Aura|Enchant modified creature (Equipment, Auras its controller controls, and counters are modifications.) Enchante
+FREE                                     Malevolent Rumble|Sorc|Reveal the top four cards of your library. You may put a permanent card from among them into your hand. Put th
+RAID:tazri-beacon-of-unity               Masked Vandal|Cr — Shapeshifter|Changeling (This card is every creature type.) When this creature enters, you may exile a creature card from y
+FREE                                     Mazemind Tome|Art — Book|{T}, Put a page counter on this artifact: Scry 1. (Look at the top card of your library. You may put that card
+FREE                                     Moxite Refinery|Art|{2}, {T}, Remove X counters from an artifact or creature you control: Choose one. Activate only as a sorcery.
+RAID:imotekh-the-stormlord               Myr Retriever|Art Cr — Myr|When this creature dies, return another target artifact card from your graveyard to your hand.
+RAID:bumi-unleashed,tazri-beacon-of-unit Nature's Lore|Sorc|Search your library for a Forest card, put that card onto the battlefield, then shuffle.
+FREE                                     Nightshade Dryad|Cr — Dryad|Deathtouch {T}: Add {C}. {T}: Add one mana of any color.
+FREE                                     Noble's Purse|Art|This artifact enters tapped and with three coin counters on it. {T}, Remove a coin counter from this artifact:
+FREE                                     Noxious Newt|Cr — Salamander|Deathtouch {T}: Add {G}.
+FREE                                     Open the Way|Sorc|X can't be greater than the number of players in the game. Reveal cards from the top of your library until you
+FREE                                     Ordeal of Nylea|Ench — Aura|Enchant creature Whenever enchanted creature attacks, put a +1/+1 counter on it. Then if it has three or more
+RAID:inspirit-flagship-vessel            Ornithopter of Paradise|Art Cr — Thopter|Flying {T}: Add one mana of any color.
+FREE                                     Ozolith, the Shattered Spire|L.Art|If one or more +1/+1 counters would be put on an artifact or creature you control, that many plus one +1/+1 co
+RAID:beledros-witherbloom                Paradise Druid|Cr — Elf Druid|This creature has hexproof as long as it's untapped. (It can't be the target of spells or abilities your oppon
+FREE                                     Patchwork Automaton|Art Cr — Construct|Ward {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unl
+FREE                                     Pearl Medallion|Art|White spells you cast cost {1} less to cast.
+RAID:inspirit-flagship-vessel            Pentad Prism|Art|Sunburst (This artifact enters with a charge counter on it for each color of mana spent to cast it.) Remove a
+FREE                                     Poison Dart Frog|Cr — Frog|Reach {T}: Add one mana of any color. {2}: This creature gains deathtouch until end of turn.
+FREE                                     Primordial Hydra|Cr — Hydra|This creature enters with X +1/+1 counters on it. At the beginning of your upkeep, double the number of +1/+1
+FREE                                     Prophetic Prism|Art|When this artifact enters, draw a card. {1}, {T}: Add one mana of any color.
+FREE                                     Rampant Growth|Sorc|Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle.
+FREE                                     Regrowth|Sorc|Return target card from your graveyard to your hand.
+FREE                                     Repurposed Enforcer|Cr — Human Soldier|Whenever this creature attacks, empower Jace X, where X is the number of creatures you control. (Put that many
+FREE                                     Rocky Rebuke|Inst|Target creature you control deals damage equal to its power to target creature an opponent controls.
+RAID:beledros-witherbloom                Sakura-Tribe Elder|Cr — Snake Shaman|Sacrifice this creature: Search your library for a basic land card, put that card onto the battlefield tapped,
+FREE                                     Sapphire Medallion|Art|Blue spells you cast cost {1} less to cast.
+RAID:the-cabbage-merchant                Sarinth Steelseeker|Cr — Human Artificer Scout|Whenever an artifact you control enters, look at the top card of your library. If it's a land card, you
+FREE                                     Satyr Wayfinder|Cr — Satyr|When this creature enters, reveal the top four cards of your library. You may put a land card from among them
+FREE                                     Selesnya Charm|Inst|Choose one — • Target creature gets +2/+2 and gains trample until end of turn. • Exile target creature with po
+RAID:tazri-beacon-of-unity               Selfless Spirit|Cr — Spirit Cleric|Flying Sacrifice this creature: Creatures you control gain indestructible until end of turn.
+FREE                                     Seraphic Steed|Cr — Unicorn Mount|First strike, lifelink Whenever this creature attacks while saddled, create a 3/3 white Angel creature token w
+RAID:bumi-unleashed                      Shared Roots|Sorc — Lesson|Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
+FREE                                     Sheltered by Ghosts|Ench — Aura|Enchant creature you control When this Aura enters, exile target nonland permanent an opponent controls until
+FREE                                     Shortcut to Mushrooms|Ench|When this enchantment enters, the Ring tempts you. At the beginning of your end step, if a permanent you contr
+FREE                                     Solarium Sentry|Cr — Cat Soldier|Whenever an opponent casts a spell with mana value 2 or less, you gain 2 life.
+FREE                                     Sorcerous Spyglass|Art|As this artifact enters, look at an opponent's hand, then choose any card name. Activated abilities of sources
+FREE                                     Soulless Jailer|Art Cr — Phyrexian Golem|Permanent cards in graveyards can't enter the battlefield. Players can't cast noncreature spells from graveya
+RAID:the-cabbage-merchant                Spider-Ham, Peter Porker|L.Cr — Spider Boar Hero|When Spider-Ham enters, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this token:
+FREE                                     Spirit Mantle|Ench — Aura|Enchant creature Enchanted creature gets +1/+1 and has protection from creatures.
+RAID:tazri-beacon-of-unity               Springleaf Parade|Ench|When this enchantment enters, create X 1/1 colorless Shapeshifter creature tokens with changeling. (They're ev
+FREE                                     Sram, Senior Edificer|L.Cr — Dwarf Advisor|Whenever you cast an Aura, Equipment, or Vehicle spell, draw a card.
+FREE                                     Starfield Mystic|Cr — Human Cleric|Enchantment spells you cast cost {1} less to cast. Whenever an enchantment you control is put into a graveyard
+RAID:inspirit-flagship-vessel            Steel Overseer|Art Cr — Construct|{T}: Put a +1/+1 counter on each artifact creature you control.
+FREE                                     Steelbane Hydra|Cr — Turtle Hydra|This creature enters with X +1/+1 counters on it. {2}{G}, Remove a +1/+1 counter from this creature: Destroy t
+FREE                                     Sterling Keykeeper|Cr — Human Mercenary|{2}, {T}: Tap target non-Mount creature.
+FREE                                     Sting, Bilbo's Sword|L.Art — Equipment|Flash When Sting enters, put a hone counter on Sting for each creature target opponent controls. Attach Sting
+RAID:tazri-beacon-of-unity               Stonework Packbeast|Art Cr — Beast|Stonework Packbeast is also a Cleric, Rogue, Warrior, and Wizard. {2}: Add one mana of any color.
+FREE                                     Sun Droplet|Art|Whenever you're dealt damage, put that many charge counters on this artifact. At the beginning of each upkeep,
+FREE                                     Sword of the Animist|L.Art — Equipment|Equipped creature gets +1/+1. Whenever equipped creature attacks, you may search your library for a basic land
+RAID:tam-the-possibility                 Sylvan Library|Ench|At the beginning of your draw step, you may draw two additional cards. If you do, choose two cards in your han
+FREE                                     Sylvan Scrying|Sorc|Search your library for a land card, reveal it, put it into your hand, then shuffle.
+RAID:the-cabbage-merchant                Syr Ginger, the Meal Ender|L.Art Cr — Food Knight|Syr Ginger has trample, hexproof, and haste as long as an opponent controls a planeswalker. Whenever
+FREE                                     Tablet of Compleation|Art|{T}: Put an oil counter on this artifact. {T}: Add {C}. Activate only if this artifact has two or more oil cou
+RAID:tazri-beacon-of-unity               Tajuru Paragon|Cr — Elf|Tajuru Paragon is also a Cleric, Rogue, Warrior, and Wizard. Kicker {3} When this creature enters, if it was k
+FREE                                     Take Up the Shield|Inst|Put a +1/+1 counter on target creature. It gains lifelink and indestructible until end of turn. (Damage and ef
+FREE                                     Talisman of Unity|Art|{T}: Add {C}. {T}: Add {G} or {W}. This artifact deals 1 damage to you.
+FREE                                     Tangle|Inst|Prevent all combat damage that would be dealt this turn. Each attacking creature doesn't untap during its cont
+FREE                                     Tangled Florahedron // Tangled Vale|Cr — Elemental|{T}: Add {G}. // This land enters tapped. {T}: Add {G}.
+FREE                                     Tarmogoyf|Cr — Lhurgoyf|Tarmogoyf's power is equal to the number of card types among cards in all graveyards and its toughness is equa
+FREE                                     Teyo, Lightshield Expert|L.Cr — Human Cleric|Flash When Teyo enters, target permanent you control gains hexproof until end of turn. Put a +1/+1 counte
+FREE                                     The Echoverse Fulcrum|L.Art|When The Echoverse Fulcrum enters, draw a card, then discard a card. {5}, {T}, Exile The Echoverse Fulcrum: De
+RAID:the-cabbage-merchant                The Ooze|L.Art|Whenever a creature you control with a +1/+1 counter on it leaves the battlefield, create a Mutagen token for
+RAID:imotekh-the-stormlord               Thought Vessel|Art|You have no maximum hand size. {T}: Add {C}.
+FREE                                     Tomik, Orzhov Lawmage|L.Cr — Human Advisor|Flying Planeswalkers you control have "No more than one creature can attack this planeswalker each combat."
+FREE                                     Torpor Orb|Art|Creatures entering don't cause abilities to trigger.
+RAID:the-cabbage-merchant                Tough Cookie|Art Cr — Food Golem|When this creature enters, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this token: You ga
+RAID:the-cabbage-merchant                Trail of Crumbs|Ench|When this enchantment enters, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this token: You
+FREE                                     Transcendent Envoy|Ench Cr — Griffin|Flying Aura spells you cast cost {1} less to cast.
+FREE                                     Unlicensed Hearse|Art — Vehicle|{T}: Exile up to two target cards from a single graveyard. Unlicensed Hearse's power and toughness are each eq
+RAID:the-cabbage-merchant                Unlucky Cabbage Merchant|Cr — Human Citizen|When this creature enters, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this token: Yo
+RAID:tam-the-possibility                 Vigorbloom Charm|Inst|Choose one — • Target permanent you control gains hexproof and indestructible until end of turn. • You draw a
+FREE                                     Vivien's Arkbow|L.Art|{X}, {T}, Discard a card: Look at the top X cards of your library. You may put a creature card with mana value
+FREE                                     Warg Tactics|Inst|Choose one — • Destroy target creature with flying. • Put a +1/+1 counter on target creature you control. It g
+FREE                                     Wildborn Preserver|Cr — Elf Archer|Flash (You may cast this spell any time you could cast an instant.) Reach (This creature can block creatures w
+FREE                                     Wrecking Ball Arm|L.Art — Equipment|Equipped creature has base power and toughness 7/7 and can't be blocked by creatures with power 2 or less. Equ
+FREE                                     You Find a Cursed Idol|Sorc|Choose one — • Smash It — Destroy target artifact. • Lift the Curse — Destroy target enchantment. • Steal Its
+RAID:the-cabbage-merchant                Academy Manufactor|Art Cr — Assembly-Worker|If you would create a Clue, Food, or Treasure token, instead create one of each.
+FREE                                     Adaptive Automaton|Art Cr — Construct|As this creature enters, choose a creature type. This creature is the chosen type in addition to its other typ
+FREE                                     Adept Watershaper|Cr — Merfolk Cleric|Other tapped creatures you control have indestructible.
+FREE                                     All-Fates Scroll|Art|{T}: Add one mana of any color. {7}, {T}, Sacrifice this artifact: Draw X cards, where X is the number of diff
+FREE                                     Another Round|Sorc|Exile any number of creatures you control, then return them to the battlefield under their owner's control. Th
+RAID:the-cabbage-merchant                Arachnogenesis|Inst|Create X 1/2 green Spider creature tokens with reach, where X is the number of creatures attacking you. Preven
+RAID:the-cabbage-merchant                Archdruid's Charm|Inst|Choose one — • Search your library for a creature or land card and reveal it. Put it onto the battlefield tapp
+RAID:beledros-witherbloom                Ashnod's Altar|Art|Sacrifice a creature: Add {C}{C}.
+FREE                                     Aven Interrupter|Cr — Bird Rogue|Flash Flying When this creature enters, exile target spell. It becomes plotted. (Its owner may cast it as a so
+FREE                                     Bandit's Haul|Art|Whenever you commit a crime, put a loot counter on this artifact. This ability triggers only once each turn. (
+FREE                                     Barkform Harvester|Art Cr — Shapeshifter|Changeling (This card is every creature type.) Reach {2}: Put target card from your graveyard on the bottom o
+FREE                                     Beast Within|Inst|Destroy target permanent. Its controller creates a 3/3 green Beast creature token.
+FREE                                     Bender's Waterskin|Art|Untap this artifact during each other player's untap step. {T}: Add one mana of any color.
+FREE                                     Bioengineered Future|Ench|When this enchantment enters, create a Lander token. (It's an artifact with "{2}, {T}, Sacrifice this token: S
+FREE                                     Bitterthorn, Nissa's Animus|L.Art — Equipment|Living weapon (When this Equipment enters, create a 0/0 black Phyrexian Germ creature token, then attach
+FREE                                     Bloated Contaminator|Cr — Phyrexian Beast|Trample Toxic 1 (Players dealt combat damage by this creature also get a poison counter.) Whenever this crea
+FREE                                     Bridgeworks Battle // Tanglespan Bridgeworks|Sorc|Target creature you control gets +2/+2 until end of turn. It fights up to one target creature you do
+FREE                                     Burnished Hart|Art Cr — Elk|{3}, Sacrifice this creature: Search your library for up to two basic land cards, put them onto the battlefiel
+RAID:imotekh-the-stormlord               Canoptek Wraith|Art Cr — Wraith|Wraith Form — This creature can't be blocked. Transdimensional Scout — When this creature deals combat damage
+FREE                                     Case of the Trampled Garden|Ench — Case|When this Case enters, distribute two +1/+1 counters among one or two target creatures you control. To solve —
+FREE                                     Chains of Custody|Ench — Aura|Enchant creature you control When this Aura enters, exile target nonland permanent an opponent controls until
+RAID:tazri-beacon-of-unity               Chomping Changeling|Cr — Shapeshifter|Changeling (This card is every creature type.) When this creature enters, destroy up to one target artifact or
+RAID:the-cabbage-merchant                Chord of Calling|Inst|Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1}
+FREE                                     Chromatic Lantern|Art|Lands you control have "{T}: Add one mana of any color." {T}: Add one mana of any color.
+FREE                                     Clear Shot|Inst|Target creature you control gets +1/+1 until end of turn. It deals damage equal to its power to target creatur
+FREE                                     Cloud Key|Art|As this artifact enters, choose artifact, creature, enchantment, instant, or sorcery. Spells you cast of the c
+FREE                                     Commander's Sphere|Art|{T}: Add one mana of any color in your commander's color identity. Sacrifice this artifact: Draw a card.
+RAID:beledros-witherbloom,the-cabbage-me Cultivate|Sorc|Search your library for up to two basic land cards, reveal those cards, put one onto the battlefield tapped an
+FREE                                     Cycle of Renewal|Inst — Lesson|Sacrifice a land. Search your library for up to two basic land cards, put them onto the battlefield tapped, th
+FREE                                     Decanter of Endless Water|Art|You have no maximum hand size. {T}: Add one mana of any color.
+FREE                                     District Guide|Cr — Elf Scout|When this creature enters, you may search your library for a basic land card or Gate card, reveal it, put it i
+FREE                                     Druidic Satchel|Art|{2}, {T}: Reveal the top card of your library. If it's a creature card, create a 1/1 green Saproling creature
+FREE                                     Dryad of the Ilysian Grove|Ench Cr — Nymph Dryad|You may play an additional land on each of your turns. Lands you control are every basic land type in
+RAID:bumi-unleashed                      Earthbender Ascension|Ench|When this enchantment enters, earthbend 2. Then search your library for a basic land card, put it onto the bat
+FREE                                     Eidolon of Countless Battles|Ench Cr — Spirit|Bestow {2}{W}{W} (If you cast this card for its bestow cost, it's an Aura spell with enchant creature. I
+FREE                                     Eiganjo Dynastorian // Replenish|Cr — Fox Advisor|Vigilance Whenever you attack with two or more creatures, this creature becomes prepared. (While it'
+FREE                                     Elementalist's Palette|Art|Whenever you cast a spell with {X} in its mana cost, put two charge counters on this artifact. {T}: Add one ma
+FREE                                     Elvish Archdruid|Cr — Elf Druid|Other Elf creatures you control get +1/+1. {T}: Add {G} for each Elf you control.
+FREE                                     Elvish Rejuvenator|Cr — Elf Druid|When this creature enters, look at the top five cards of your library. You may put a land card from among them
+FREE                                     Elvish Spirit Guide|Cr — Elf Spirit|Exile this card from your hand: Add {G}.
+FREE                                     Emeritus of Truce // Swords to Plowshares|Cr — Cat Cleric|When this creature enters, target player creates a 1/1 white and black Inkling creature toke
+RAID:the-cabbage-merchant                Emil, Vastlands Roamer|L.Cr — Elf Druid|Creatures you control with +1/+1 counters on them have trample. {4}{G}, {T}: Create a 0/0 green and blue Fract
+RAID:the-cabbage-merchant                Endurance|Cr — Elemental Incarnation|Flash Reach When this creature enters, up to one target player puts all the cards from their graveyard on the
+FREE                                     Erinis, Gloom Stalker|L.Cr — Halfling Ranger|Deathtouch Whenever Erinis attacks, return target land card from your graveyard to the battlefield. Choos
+RAID:beledros-witherbloom,the-cabbage-me Eternal Witness|Cr — Human Shaman|When this creature enters, you may return target card from your graveyard to your hand.
+RAID:tam-the-possibility                 Evolution Sage|Cr — Elf Druid|Landfall — Whenever a land you control enters, proliferate. (Choose any number of permanents and/or players, t
+RAID:tam-the-possibility                 Faeburrow Elder|Cr — Treefolk Druid|Vigilance This creature gets +1/+1 for each color among permanents you control. {T}: For each color among perm
+FREE                                     Feral Appetite|Ench|Attacking Pests you control get +1/+0 and have deathtouch. {1}{G}: Exile target card from a graveyard. If a cr
+FREE                                     Firdoch Core|Kindred Art — Shapeshifter|Changeling (This card is every creature type.) {T}: Add one mana of any color. {4}: This artifact becomes a 4/
+RAID:beledros-witherbloom                Flare of Cultivation|Sorc|You may sacrifice a nontoken green creature rather than pay this spell's mana cost. Search your library for up
+FREE                                     Fortune, Loyal Steed|L.Cr — Beast Mount|When Fortune enters, scry 2. Whenever Fortune attacks while saddled, at end of combat, exile it and up to one
+RAID:imotekh-the-stormlord               Foundry Inspector|Art Cr — Construct|Artifact spells you cast cost {1} less to cast.
+FREE                                     Fractal Harness|Art — Equipment|When this Equipment enters, create a 0/0 green and blue Fractal creature token. Put X +1/+1 counters on it and
+FREE                                     Freestrider Lookout|Cr — Human Rogue|Reach Whenever you commit a crime, look at the top five cards of your library. You may put a land card from am
+RAID:the-cabbage-merchant                Garruk's Uprising|Ench|When this enchantment enters, if you control a creature with power 4 or greater, draw a card. Creatures you co
+RAID:inspirit-flagship-vessel,tazri-beac Generous Gift|Inst|Destroy target permanent. Its controller creates a 3/3 green Elephant creature token.
+FREE                                     Generous Revival|Sorc|Return target creature card with mana value 3 or less from your graveyard to the battlefield with an additiona
+FREE                                     Ghostly Prison|Ench|Creatures can't attack you unless their controller pays {2} for each creature they control that's attacking yo
+RAID:the-cabbage-merchant                Giant Opportunity|Sorc|You may sacrifice two Foods. If you do, create a 7/7 green Giant creature token. Otherwise, create three Food
+FREE                                     Gift of Immortality|Ench — Aura|Enchant creature When enchanted creature dies, return that card to the battlefield under its owner's control.
+FREE                                     Gift of Paradise|Ench — Aura|Enchant land When this Aura enters, you gain 3 life. Enchanted land has "{T}: Add two mana of any one color."
+RAID:gilanra-alena-partners              Gilanra, Caller of Wirewood|L.Cr — Elf Druid|{T}: Add {G}. When you spend this mana to cast a spell with mana value 6 or greater, draw a card. Partner
+FREE                                     Glaring Fleshraker|Cr — Eldrazi Drone|Whenever you cast a colorless spell, create a 0/1 colorless Eldrazi Spawn creature token with "Sacrifice this
+FREE                                     Golem Foundry|Art|Whenever you cast an artifact spell, you may put a charge counter on this artifact. Remove three charge counte
+RAID:the-cabbage-merchant                Greenhouse Propagator|Cr — Cat Druid|Whenever another creature you control enters, you gain 1 life. {T}: Add {G}.
+FREE                                     Guardian Augmenter|Cr — Troll Wizard|Flash Commander creatures you control get +2/+2. Commanders you control have hexproof.
+RAID:tazri-beacon-of-unity               Harper Recruiter|Cr — Human Warrior|Flying Whenever this creature attacks, look at the top four cards of your library. You may reveal a Cleric car
+FREE                                     Harrow|Inst|As an additional cost to cast this spell, sacrifice a land. Search your library for up to two basic land cards
+FREE                                     Harvest Season|Sorc|Search your library for up to X basic land cards, where X is the number of tapped creatures you control, put t
+RAID:bumi-unleashed                      Heartbeat of Spring|Ench|Whenever a player taps a land for mana, that player adds one mana of any type that land produced.
+FREE                                     Honor Troll|Cr — Troll Druid|Vigilance If you would gain life, you gain that much life plus 1 instead. This creature gets +2/+1 as long as
+FREE                                     Hornet Nest|Cr — Insect|Defender (This creature can't attack.) Whenever this creature is dealt damage, create that many 1/1 green Inse
+RAID:bumi-unleashed                      Hunter's Insight|Inst|Choose target creature you control. Whenever that creature deals combat damage to a player or planeswalker thi
+FREE                                     Inspired Tethermage|Cr — Elf Warrior|Whenever you put one or more loyalty counters on a planeswalker, put a +1/+1 counter on this creature. {6}: Em
+FREE                                     Inspiring Statuary|Art|Nonartifact spells you cast have improvise. (Your artifacts can help cast those spells. Each artifact you tap
+RAID:inspirit-flagship-vessel            Iron Spider, Stark Upgrade|L.Art Cr — Spider Hero|Vigilance {T}: Put a +1/+1 counter on each artifact creature and/or Vehicle you control. {2}, Remove
+RAID:the-cabbage-merchant                Jaheira, Friend of the Forest|L.Cr — Human Elf Druid|Tokens you control have "{T}: Add {G}." Choose a Background (You can have a Background as a secon
+FREE                                     Jiang Yanggu, Wildcrafter|L.Planeswalker — Yanggu|Each creature you control with a +1/+1 counter on it has "{T}: Add one mana of any color." −1: Put a
+FREE                                     Kami of Whispered Hopes|Cr — Spirit|If one or more +1/+1 counters would be put on a permanent you control, that many plus one +1/+1 counters are p
+FREE                                     Keeper of the Quiet Hour|Art Cr — Chimera|When this creature enters, empower Jace 2. (Put two loyalty counters on a Jace token you control. If you don
+FREE                                     Knockout Maneuver|Sorc|Put a +1/+1 counter on target creature you control, then it deals damage equal to its power to target creature
+RAID:beledros-witherbloom,tazri-beacon-o Kodama's Reach|Sorc — Arcane|Search your library for up to two basic land cards, reveal those cards, put one onto the battlefield tapped an
+FREE                                     Lifeblood Hydra|Cr — Hydra|Trample This creature enters with X +1/+1 counters on it. When this creature dies, you gain life and draw card
+FREE                                     Lifecrafter's Bestiary|Art|At the beginning of your upkeep, scry 1. Whenever you cast a creature spell, you may pay {G}. If you do, draw
+FREE                                     Loot, Exuberant Explorer|L.Cr — Beast Noble|You may play an additional land on each of your turns. {4}{G}{G}, {T}: Look at the top six cards of your l
+FREE                                     Loot, the Nexus|L.Cr — Beast Noble|{T}: Choose a color. Add one mana of that color for each different power among creatures you control.
+FREE                                     Lotus Ring|Art — Equipment|Indestructible Equipped creature gets +3/+3 and has vigilance and "{T}, Sacrifice this creature: Add three man
+FREE                                     Loxodon Warhammer|Art — Equipment|Equipped creature gets +3/+0 and has trample and lifelink. Equip {3}
+RAID:bumi-unleashed                      Lumbering Worldwagon|Art — Vehicle|This Vehicle's power is equal to the number of lands you control. Whenever this Vehicle enters or attacks, you
+FREE                                     Martial Impetus|Ench — Aura|Enchant creature Enchanted creature gets +1/+1 and is goaded. (It attacks each combat if able and attacks a pl
+FREE                                     Master Chef|L.Ench — Background|Commander creatures you own have "This creature enters with an additional +1/+1 counter on it" and "Other crea
+FREE                                     Master's Guidance|Ench|Whenever you attack with two or more legendary creatures, put a +1/+1 counter on each of up to two target atta
+FREE                                     Match the Odds|Sorc — Lesson|Create a 1/1 white Ally creature token. Put a +1/+1 counter on it for each creature your opponents control.
+FREE                                     Mirage Mirror|Art|{2}: This artifact becomes a copy of target artifact, creature, enchantment, or land until end of turn.
+FREE                                     Mirri, Weatherlight Duelist|L.Cr — Cat Warrior|First strike Whenever Mirri attacks, each opponent can't block with more than one creature this combat.
+RAID:tazri-beacon-of-unity               Mirror Entity|Cr — Shapeshifter|Changeling (This card is every creature type.) {X}: Until end of turn, creatures you control have base power a
+FREE                                     Murmuring Volume|Art — Book|{T}: Add one mana of any color. {2}, {T}, Discard a card: Draw a card.
+RAID:tazri-beacon-of-unity               Mutable Explorer|Cr — Shapeshifter|Changeling (This card is every creature type.) When this creature enters, create a tapped Mutavault token. (It
+FREE                                     Nadaar, Selfless Paladin|L.Cr — Dragon Knight|Vigilance Whenever Nadaar enters or attacks, venture into the dungeon. (Enter the first room or advance
+FREE                                     Nev, the Practical Dean|L.Cr — Merfolk Wizard|Creatures you control with counters on them have trample. Whenever you cast your first spell with {X} in
+FREE                                     Nils, Discipline Enforcer|L.Cr — Human Cleric|At the beginning of your end step, for each player, put a +1/+1 counter on up to one target creature tha
+FREE                                     Oblivion Stone|Art|{4}, {T}: Put a fate counter on target permanent. {5}, {T}, Sacrifice this artifact: Destroy each nonland perm
+RAID:inspirit-flagship-vessel            One Last Job|Sorc|Spree (Choose one or more additional costs.) + {2} — Return target creature card from your graveyard to the ba
+FREE                                     Ornery Tumblewagg|Cr — Brushwagg Mount|At the beginning of combat on your turn, put a +1/+1 counter on target creature. Whenever this creature attack
+RAID:gilanra-alena-partners              Outcaster Trailblazer|Cr — Human Druid|When this creature enters, add one mana of any color. Whenever another creature you control with power 4 or gr
+RAID:bumi-unleashed                      Owlbear Cub|Cr — Bird Bear|Mama's Coming — Whenever this creature attacks a player who controls eight or more lands, look at the top eigh
+FREE                                     Palladium Myr|Art Cr — Myr|{T}: Add {C}{C}.
+FREE                                     Patrolling Peacemaker|Art Cr — Robot Soldier|This creature enters with two +1/+1 counters on it. Whenever an opponent commits a crime, proliferate. (T
+FREE                                     Pearl-Ear, Imperial Advisor|L.Cr — Fox Advisor|Lifelink Enchantment spells you cast have affinity for Auras. (They cost {1} less to cast for each Aura
+RAID:the-cabbage-merchant                Peregrin Took|L.Cr — Halfling Citizen|If one or more tokens would be created under your control, those tokens plus an additional Food token are crea
+RAID:beledros-witherbloom                Pest Rescuer|Cr — Dryad Druid|At the beginning of each upkeep, if you don't control a Pest creature token, create a 1/1 black and green Pest
+RAID:tam-the-possibility                 Pia, Aether Ascetic|L.Cr — Human Druid|When Pia enters, you may discard a card. If you do, search your library for an enchantment card, reveal it, pu
+FREE                                     Potioner's Trove|Art|{T}: Add one mana of any color. {T}: You gain 2 life. Activate only if you've cast an instant or sorcery spell
+FREE                                     Predator Ooze|Cr — Ooze|Indestructible (Damage and effects that say "destroy" don't destroy this creature.) Whenever this creature att
+FREE                                     Pristine Talisman|Art|{T}: Add {C}. You gain 1 life.
+FREE                                     Puca's Covenant|Ench|Whenever a creature you control with a counter on it dies, you may return another target permanent card with m
+FREE                                     Pulse of Murasa|Inst|Return target creature or land card from a graveyard to its owner's hand. You gain 6 life.
+FREE                                     Rampant Frogantua|Cr — Frog|Trample This creature gets +10/+10 for each player who has lost the game. Whenever this creature deals combat
+FREE                                     Ramunap Excavator|Cr — Snake Cleric|You may play lands from your graveyard.
+FREE                                     Realmwalker|Cr — Shapeshifter|Changeling (This card is every creature type.) As this creature enters, choose a creature type. You may look a
+FREE                                     Redemption Arc|Ench — Aura|Enchant creature Enchanted creature has indestructible and is goaded. (It attacks each combat if able and atta
+FREE                                     Resourceful Defense|Ench|Whenever a permanent you control leaves the battlefield, if it had counters on it, put those counters on targe
+FREE                                     Rishkar, Peema Renegade|L.Cr — Elf Druid|When Rishkar enters, put a +1/+1 counter on each of up to two target creatures. Each creature you control wit
+RAID:bumi-unleashed                      Rockalanche|Sorc — Lesson|Earthbend X, where X is the number of Forests you control. (Target land you control becomes a 0/0 creature wit
+RAID:bumi-unleashed                      Roiling Regrowth|Inst|Sacrifice a land. Search your library for up to two basic land cards, put them onto the battlefield tapped, th
+FREE                                     Sage of the Maze|Cr — Elf Wizard|{T}: Add two mana in any combination of colors. {T}: Until end of turn, target land you control becomes an X/X
+FREE                                     Sandman, Shifting Scoundrel|L.Cr — Sand Elemental Villain|Sandman's power and toughness are each equal to the number of lands you control. Sandman can
+RAID:beledros-witherbloom                Scute Swarm|Cr — Insect|Landfall — Whenever a land you control enters, create a 1/1 green Insect creature token. If you control six or
+FREE                                     Secret Rendezvous|Sorc|You and target opponent each draw three cards.
+FREE                                     Selvala, Heart of the Wilds|L.Cr — Elf Scout|Whenever another creature enters, its controller may draw a card if its power is greater than each other
+FREE                                     Shielded by Faith|Ench — Aura|Enchant creature Enchanted creature has indestructible. Whenever a creature enters, you may attach this Aura t
+FREE                                     Shimmer Myr|Art Cr — Myr|Flash You may cast artifact spells as though they had flash.
+FREE                                     Simulacrum Shaper|Cr — Elf Druid|When this creature enters, you may search your library for a basic land card, put that card onto the battlefie
+FREE                                     Skullwinder|Cr — Snake|Deathtouch When this creature enters, return target card from your graveyard to your hand, then choose an oppo
+FREE                                     Solar Array|Art|{T}: Add one mana of any color. When you next cast an artifact spell this turn, that spell gains sunburst. (If
+RAID:tazri-beacon-of-unity               Spelunking|Ench|When this enchantment enters, draw a card, then you may put a land card from your hand onto the battlefield. I
+FREE                                     Split the Spoils|Sorc|Exile up to five target permanent cards from your graveyard and separate them into two piles. An opponent choo
+FREE                                     Split Up|Sorc|Choose one — • Destroy all tapped creatures. • Destroy all untapped creatures.
+RAID:the-cabbage-merchant                Springbloom Druid|Cr — Elf Druid|When this creature enters, you may sacrifice a land. If you do, search your library for up to two basic land c
+RAID:inspirit-flagship-vessel            Surge Conductor|Art Cr — Robot|Whenever another nontoken artifact you control enters, proliferate. (Choose any number of permanents and/or pl
+RAID:bumi-unleashed                      Tale of Katara and Toph|Ench|Creatures you control have "Whenever this creature becomes tapped for the first time during each of your turns
+FREE                                     Team Avatar|Ench|Whenever a creature you control attacks alone, it gets +X/+X until end of turn, where X is the number of creat
+FREE                                     Teyo, the Shieldmage|L.Planeswalker — Teyo|You have hexproof. (You can't be the target of spells or abilities your opponents control.) −2: Create a 0/
+RAID:inspirit-flagship-vessel            Tezzeret, Cruel Captain|L.Planeswalker — Tezzeret|Whenever an artifact you control enters, put a loyalty counter on Tezzeret. 0: Untap target artifact
+RAID:the-cabbage-merchant                The Cabbage Merchant|L.Cr — Human Citizen|Whenever an opponent casts a noncreature spell, create a Food token. (It's an artifact with "{2}, {T}, Sacri
+RAID:tazri-beacon-of-unity               The Destined White Mage|L.Cr — Human Cleric|Lifelink {W}, {T}: Another target creature you control gains lifelink until end of turn. Whenever you gain
+FREE                                     The Seriema|L.Art — Spacecraft|When The Seriema enters, search your library for a legendary creature card, reveal it, put it into your hand,
+RAID:bumi-unleashed,the-cabbage-merchant Tireless Provisioner|Cr — Elf Scout|Landfall — Whenever a land you control enters, create a Food token or a Treasure token. (Food is an artifact w
+FREE                                     Titan Forge|Art|{3}, {T}: Put a charge counter on this artifact. {T}, Remove three charge counters from this artifact: Create
+RAID:bumi-unleashed                      Toph, the Blind Bandit|L.Cr — Human Warrior Ally|When Toph enters, earthbend 2. (Target land you control becomes a 0/0 creature with haste that's stil
+RAID:tazri-beacon-of-unity               Torens, Fist of the Angels|L.Cr — Human Cleric|Training (Whenever this creature attacks with another creature with greater power, put a +1/+1 counter
+RAID:the-cabbage-merchant                Trudge Garden|Ench|Whenever you gain life, you may pay {2}. If you do, create a 4/4 green Fungus Beast creature token with trampl
+FREE                                     Unbound Flourishing|Ench|Whenever you cast a permanent spell with a mana cost that contains {X}, double the value of X. Whenever you ca
+FREE                                     Undergrowth Champion|Cr — Elemental|If damage would be dealt to this creature while it has a +1/+1 counter on it, prevent that damage and remove a
+FREE                                     Varis, Silverymoon Ranger|L.Cr — Human Elf Ranger|Reach, ward {1} Whenever you cast a creature or planeswalker spell, venture into the dungeon. This a
+FREE                                     Vastlands Scavenger // Bind to Life|Cr — Bear Druid|Deathtouch This creature enters prepared. (While it's prepared, you may cast a copy of its spell.
+FREE                                     Vivien, Champion of the Wilds|L.Planeswalker — Vivien|You may cast creature spells as though they had flash. +1: Until your next turn, up to one targe
+FREE                                     Way of the Mentor|L.Ench|When Way of the Mentor enters, empower Jace 5. (Put five loyalty counters on a Jace token you control. If you
+RAID:tam-the-possibility                 Way of the Paradox|L.Ench|When Way of the Paradox enters, empower Jace 5. (Put five loyalty counters on a Jace token you control. If you
+RAID:tazri-beacon-of-unity               White Plume Adventurer|Cr — Orc Cleric|When this creature enters, you take the initiative. At the beginning of each opponent's upkeep, untap a creatu
+FREE                                     Wickersmith's Tools|Art|Whenever one or more -1/-1 counters are put on a creature, put a charge counter on this artifact. {T}: Add one
+FREE                                     Worn Powerstone|Art|This artifact enters tapped. {T}: Add {C}{C}.
+FREE                                     Yavimaya Bloomsage // Channel|Cr — Dryad Druid|At the beginning of your end step, put a +1/+1 counter on target creature you control. Then if that cre
+FREE                                     Yoshimaru, Beloved Companion|L.Cr — Dog|If one or more +1/+1 counters would be put on a creature you control, that many plus one +1/+1 counters are pu
+FREE                                     You Happen On a Glade|Inst|Choose one — • Journey On — Search your library for up to two basic land cards, reveal them, put them into you
+FREE                                     Ajani's Chosen|Cr — Cat Soldier|Whenever an enchantment you control enters, create a 2/2 white Cat creature token. If that enchantment is an A
+FREE                                     Alms Collector|Cr — Cat Cleric|Flash If an opponent would draw two or more cards, instead you and that player each draw a card.
+FREE                                     Angelic Destiny|Ench — Aura|Enchant creature Enchanted creature gets +4/+4, has flying and first strike, and is an Angel in addition to it
+RAID:tam-the-possibility                 Archangel of Tithes|Cr — Angel|Flying As long as this creature is untapped, creatures can't attack you or planeswalkers you control unless th
+FREE                                     Archon of Sun's Grace|Cr — Archon|Flying Lifelink (Damage dealt by this creature also causes you to gain that much life.) Pegasus creatures you
+FREE                                     Armored Skyhunter|Cr — Cat Knight|Flying Whenever this creature attacks, look at the top six cards of your library. You may put an Aura or Equip
+FREE                                     Bloodspore Thrinax|Cr — Lizard|Devour 1 (As this creature enters, you may sacrifice any number of creatures. It enters with that many +1/+1 c
+FREE                                     Brass Infiniscope|Art|{T}: Add {C}{C}. When you next cast a spell with {X} in its mana cost this turn, you draw a card and gain half
+RAID:the-cabbage-merchant                Brawn|Cr — Incarnation|Trample As long as this card is in your graveyard and you control a Forest, creatures you control have trample
+FREE                                     Buried in the Garden|Ench — Aura|Enchant land When this Aura enters, exile target nonland permanent you don't control until this Aura leaves th
+RAID:bumi-unleashed                      Circuitous Route|Sorc|Search your library for up to two basic land cards and/or Gate cards, put them onto the battlefield tapped, th
+FREE                                     Colossal Rattlewurm|Cr — Wurm|Colossal Rattlewurm has flash as long as you control a Desert. Trample {1}{G}, Exile this card from your grave
+FREE                                     Combat Calligrapher|Cr — Bird Cleric|Flying Inklings can't attack you or planeswalkers you control. Whenever a player attacks one of your opponents
+RAID:bumi-unleashed                      Crystalline Armor|Ench — Aura|Enchant creature Enchanted creature gets +1/+1 for each land you control and has trample.
+FREE                                     Crystalline Crawler|Art Cr — Construct|Converge — This creature enters with a +1/+1 counter on it for each color of mana spent to cast it. Remove a +
+FREE                                     Darksteel Reactor|Art|Indestructible (Effects that say "destroy" don't destroy this artifact.) At the beginning of your upkeep, you
+FREE                                     Desert Warfare|Ench|Whenever you sacrifice a Desert and whenever a Desert card is put into your graveyard from your hand or librar
+RAID:bumi-unleashed                      Drix Fatemaker|Cr — Drix Wizard|When this creature enters, put a +1/+1 counter on target creature. Each creature you control with a +1/+1 coun
+RAID:tazri-beacon-of-unity               Durnan of the Yawning Portal|L.Cr — Human Warrior|Whenever Durnan attacks, look at the top four cards of your library. You may exile a creature card f
+RAID:bumi-unleashed                      Earth Kingdom General|Cr — Human Soldier Ally|When this creature enters, earthbend 2. (Target land you control becomes a 0/0 creature with haste that'
+RAID:bumi-unleashed                      Earth Rumble|Sorc|Earthbend 2. When you do, up to one target creature you control fights target creature an opponent controls. (
+RAID:inspirit-flagship-vessel            Empowered Autogenerator|Art|This artifact enters tapped. {T}: Put a charge counter on this artifact. Add X mana of any one color, where X
+FREE                                     Etched Oracle|Art Cr — Wizard|Sunburst (This creature enters with a +1/+1 counter on it for each color of mana spent to cast it.) {1}, Remov
+FREE                                     Firemane Commando|Cr — Angel Soldier|Flying Whenever you attack with two or more creatures, draw a card. Whenever another player attacks with two o
+FREE                                     Firemind Vessel|Art|This artifact enters tapped. {T}: Add two mana of different colors.
+FREE                                     Flare of Fortitude|Inst|You may sacrifice a nontoken white creature rather than pay this spell's mana cost. Until end of turn, your li
+FREE                                     Flickering Hound|Cr — Dog|Whenever you cast a creature spell, exile up to one other target creature you control, then return that card t
+RAID:the-cabbage-merchant                Force of Vigor|Inst|If it's not your turn, you may exile a green card from your hand rather than pay this spell's mana cost. Destr
+FREE                                     Forgotten Ancient|Cr — Elemental|Whenever a player casts a spell, you may put a +1/+1 counter on this creature. At the beginning of your upkeep
+RAID:imotekh-the-stormlord               Ghost Ark|Art — Vehicle|Flying Repair Barge — Whenever this Vehicle becomes crewed, each artifact creature card in your graveyard gain
+RAID:the-cabbage-merchant                Halsin, Emerald Archdruid|L.Cr — Elf Druid|{1}: Until end of turn, target token you control becomes a green Bear creature with base power and toughnes
+FREE                                     Hammer of Nazahn|L.Art — Equipment|Whenever Hammer of Nazahn or another Equipment you control enters, you may attach that Equipment to target cre
+FREE                                     Harmonize|Sorc|Draw three cards.
+FREE                                     Healing Technique|Sorc|Demonstrate (When you cast this spell, you may copy it. If you do, choose an opponent to also copy it. Players
+FREE                                     Hedron Archive|Art|{T}: Add {C}{C}. {2}, {T}, Sacrifice this artifact: Draw two cards.
+FREE                                     Herald of Amity|Cr — Griffin|Flying When this creature enters, exile the top eight cards of your library. You may cast an Aura spell from a
+FREE                                     Hexhaven Invigorator|Cr — Chimera Horror|Vigilance Whenever this creature is dealt damage, you may search your library for up to that many land cards,
+FREE                                     Interdimensional Web Watch|Art|When this artifact enters, exile the top two cards of your library. Until the end of your next turn, you may p
+FREE                                     Jazal Goldmane|L.Cr — Cat Warrior|First strike (This creature deals combat damage before creatures without first strike.) {3}{W}{W}: Attacking c
+RAID:the-cabbage-merchant                Jiang Yanggu, Never Alone|L.Cr — Human Druid|When Jiang Yanggu enters, create Mowu, a legendary 3/3 green Dog creature token. At the beginning of your
+FREE                                     Karn, the Great Creator|L.Planeswalker — Karn|Activated abilities of artifacts your opponents control can't be activated. +1: Until your next turn, up
+FREE                                     Kozilek's Predator|Cr — Eldrazi Drone|When this creature enters, create two 0/1 colorless Eldrazi Spawn creature tokens. They have "Sacrifice this t
+RAID:inspirit-flagship-vessel            Lux Artillery|Art|Whenever you cast an artifact creature spell, it gains sunburst. (It enters with a +1/+1 counter on it for eac
+RAID:inspirit-flagship-vessel            Lux Cannon|Art|{T}: Put a charge counter on this artifact. {T}, Remove three charge counters from this artifact: Destroy targ
+RAID:tazri-beacon-of-unity               Mangara, the Diplomat|L.Cr — Human Cleric|Lifelink Whenever an opponent attacks with creatures, if two or more of those creatures are attacking you an
+FREE                                     Map the Frontier|Sorc|Search your library for up to two basic land cards and/or Desert cards, put them onto the battlefield tapped,
+RAID:bumi-unleashed                      Mightform Harmonizer|Cr — Insect Druid|Landfall — Whenever a land you control enters, double the power of target creature you control until end of tu
+FREE                                     Mindless Automaton|Art Cr — Construct|This creature enters with two +1/+1 counters on it. {1}, Discard a card: Put a +1/+1 counter on this creature.
+RAID:gilanra-alena-partners              Monstrous Vortex|Ench|Whenever you cast a creature spell with power 5 or greater, discover X, where X is that spell's mana value. (E
+FREE                                     Myconid Spore Tender|Cr — Fungus|Infesting Spores — When this creature enters, destroy up to one target artifact or enchantment.
+RAID:the-cabbage-merchant                Night of the Sweets' Revenge|Ench|When this enchantment enters, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this token: You
+RAID:inspirit-flagship-vessel            Nyx Lotus|L.Art|Nyx Lotus enters tapped. {T}: Choose a color. Add an amount of mana of that color equal to your devotion to th
+FREE                                     Omenpath Journey|Ench|When this enchantment enters, search your library for up to five land cards that have different names, exile t
+FREE                                     Oviya, Automech Artisan|L.Cr — Human Artificer|Each creature that's attacking one of your opponents has trample. {G}, {T}: You may put a creature or V
+RAID:inspirit-flagship-vessel            Panharmonicon|Art|If an artifact or creature entering causes a triggered ability of a permanent you control to trigger, that abi
+FREE                                     Paradise Plume|Art|As this artifact enters, choose a color. Whenever a player casts a spell of the chosen color, you may gain 1 l
+RAID:gilanra-alena-partners              Planar Engineering|Sorc|Sacrifice two lands. Search your library for four basic land cards, put them onto the battlefield tapped, then
+FREE                                     Sage's Reverie|Ench — Aura|Enchant creature When this Aura enters, draw a card for each Aura you control that's attached to a creature. E
+RAID:tazri-beacon-of-unity               Seasoned Dungeoneer|Cr — Human Warrior|When this creature enters, you take the initiative. Whenever you attack, target attacking Cleric, Rogue, Warri
+RAID:the-cabbage-merchant                Second Harvest|Inst|For each token you control, create a token that's a copy of that permanent.
+FREE                                     Seer's Sundial|Art|Landfall — Whenever a land you control enters, you may pay {2}. If you do, draw a card.
+RAID:bumi-unleashed                      Seismic Tutelage|Ench — Aura|Enchant creature When this Aura enters, put a +1/+1 counter on enchanted creature. Whenever enchanted creature
+RAID:tam-the-possibility                 Settle the Wreckage|Inst|Exile all attacking creatures target player controls. That player may search their library for that many basic
+FREE                                     Shatter the Sky|Sorc|Each player who controls a creature with power 4 or greater draws a card. Then destroy all creatures.
+FREE                                     Skyshroud Claim|Sorc|Search your library for up to two Forest cards, put them onto the battlefield, then shuffle.
+FREE                                     Solemn Simulacrum|Art Cr — Golem|When this creature enters, you may search your library for a basic land card, put that card onto the battlefie
+RAID:bumi-unleashed                      Solid Ground|Ench|When this enchantment enters, earthbend 3. (Target land you control becomes a 0/0 creature with haste that's s
+FREE                                     Songbirds' Blessing|Ench — Aura|Enchant creature Whenever enchanted creature attacks, reveal cards from the top of your library until you reve
+RAID:tazri-beacon-of-unity               Squad Commander|Cr — Kor Warrior|When this creature enters, create a 1/1 white Kor Warrior creature token for each creature in your party. (You
+RAID:gilanra-alena-partners              Surrak, the Hunt Caller|L.Cr — Human Warrior|Formidable — At the beginning of combat on your turn, if creatures you control have total power 8 or grea
+RAID:bumi-unleashed                      The Boulder, Ready to Rumble|L.Cr — Human Warrior Performer|Whenever The Boulder attacks, earthbend X, where X is the number of creatures you control
+RAID:bumi-unleashed,the-cabbage-merchant The Earth King|L.Cr — Human Noble Ally|When The Earth King enters, create a 4/4 green Bear creature token. Whenever one or more creatures you control
+FREE                                     The Wanderer|L.Planeswalker|Prevent all noncombat damage that would be dealt to you and other permanents you control. −2: Exile target cre
+FREE                                     Thran Dynamo|Art|{T}: Add {C}{C}{C}.
+RAID:the-cabbage-merchant                Titanbones, Towering Heart|L.Cr — Skeleton Druid|Reach Whenever you gain life, put two +1/+1 counters on Titanbones. When you discard this card, you g
+RAID:the-cabbage-merchant                Toski, Bearer of Secrets|L.Cr — Squirrel|This spell can't be countered. Indestructible Toski attacks each combat if able. Whenever a creature you cont
+FREE                                     Traxos, Scourge Eternal|L.Art Cr — Dragon Construct|Trample Traxos doesn't untap during your untap step. Whenever you cast an artifact or creature spe
+FREE                                     Traxos, Scourge of Kroog|L.Art Cr — Dragon Construct|Trample Traxos enters tapped and doesn't untap during your untap step. Whenever you cast a histor
+FREE                                     Treasure Keeper|Art Cr — Construct|When this creature dies, reveal cards from the top of your library until you reveal a nonland card with mana v
+RAID:tazri-beacon-of-unity               Undermountain Adventurer|Cr — Giant Warrior|Vigilance When this creature enters, you take the initiative. {T}: Add {G}{G}. If you've completed a dunge
+RAID:tazri-beacon-of-unity               Vizier of the Menagerie|Cr — Snake Cleric|You may look at the top card of your library any time. You may cast creature spells from the top of your lib
+RAID:tam-the-possibility                 Way of the Healer|L.Ench|When Way of the Healer enters, empower Jace 5. (Put five loyalty counters on a Jace token you control. If you
+RAID:the-cabbage-merchant                Wicked Wolf|Cr — Wolf|When this creature enters, it fights up to one target creature you don't control. Sacrifice a Food: Put a +1/+
+FREE                                     Wickerbough Elder|Cr — Treefolk Shaman|This creature enters with a -1/-1 counter on it. {G}, Remove a -1/-1 counter from this creature: Destroy targe
+FREE                                     You Meet in a Tavern|Sorc|Choose one — • Form a Party — Look at the top five cards of your library. You may reveal any number of creatur
+FREE                                     Yuriko, Blade of the Mighty|L.Cr — Human Samurai|During combat, players can't cast spells or activate abilities that aren't mana abilities. Whenever a
+FREE                                     Acidic Slime|Cr — Ooze|Deathtouch (Any amount of damage this deals to a creature is enough to destroy it.) When this creature enters,
+FREE                                     Ageless Entity|Cr — Elemental|Whenever you gain life, put that many +1/+1 counters on this creature.
+FREE                                     Alhammarret's Archive|L.Art|If you would gain life, you gain twice that much life instead. If you would draw a card except the first one y
+RAID:beledros-witherbloom                Argentum Masticore|Art Cr — Phyrexian Masticore|First strike, protection from multicolored At the beginning of your upkeep, sacrifice this creature un
+RAID:bumi-unleashed                      Awakening of Vitu-Ghazi|Inst|Put nine +1/+1 counters on target land you control. It becomes a legendary 0/0 Elemental creature with haste n
+RAID:bumi-unleashed                      Badgermole|Cr — Badger Mole|When this creature enters, earthbend 2. (Target land you control becomes a 0/0 creature with haste that's stil
+FREE                                     Blossoming Bogbeast|Cr — Beast|Whenever this creature attacks, you gain 2 life. Then creatures you control gain trample and get +X/+X until e
+FREE                                     Bosco, Just a Bear|L.Cr — Bear|When Bosco enters, create a Food token for each legendary creature you control. (It's an artifact with "{2}, {
+RAID:bumi-unleashed                      Braulios of Pheres Band|L.Cr — Centaur Scout|Braulios's power and toughness are each equal to the number of lands you control. Whenever Braulios attac
+RAID:bumi-unleashed                      Bumi, Eclectic Earthbender|L.Cr — Human Noble Ally|When Bumi enters, earthbend 1. (Target land you control becomes a 0/0 creature with haste that's st
+RAID:bumi-unleashed                      Cracked Earth Technique|Sorc — Lesson|Earthbend 3, then earthbend 3. You gain 3 life. (To earthbend 3, target land you control becomes a 0/0 creatur
+FREE                                     Dawnsire, Sunstar Dreadnought|L.Art — Spacecraft|Station (Tap another creature you control: Put charge counters equal to its power on this Spacecraft.
+FREE                                     Edgar, Moonlit Sovereign|L.Cr — Werewolf Noble|Flash At the beginning of your end step, if you didn't cast a spell this turn, put two +1/+1 counters o
+FREE                                     Elemental Teachings|Inst — Lesson|Search your library for up to four land cards with different names and reveal them. An opponent chooses two of
+FREE                                     Eusocial Engineering|Ench|Landfall — Whenever a land you control enters, create a 2/2 colorless Robot artifact creature token. Warp {1}{
+RAID:tazri-beacon-of-unity               Explore the Underdark|Sorc|Search your library for up to two basic land cards and/or Gate cards, put them onto the battlefield tapped, th
+FREE                                     Fell the Mighty|Sorc|Destroy all creatures with power greater than target creature's power.
+FREE                                     Flourishing Defenses|Ench|Whenever a -1/-1 counter is put on a creature, you may create a 1/1 green Elf Warrior creature token.
+FREE                                     Forum Filibuster|Ench|At the beginning of your upkeep, create a 2/1 white and black Inkling creature token with flying. When you do,
+FREE                                     Fumigate|Sorc|Destroy all creatures. You gain 1 life for each creature destroyed this way.
+FREE                                     Gandalf the White|L.Cr — Avatar Wizard|Flash You may cast legendary spells and artifact spells as though they had flash. If a legendary permanent or
+RAID:gilanra-alena-partners              Garruk's Packleader|Cr — Beast|Whenever another creature you control with power 3 or greater enters, you may draw a card.
+FREE                                     Geode Golem|Art Cr — Golem|Trample Whenever this creature deals combat damage to a player, you may cast your commander from the command z
+RAID:bumi-unleashed                      Germination Practicum|Sorc — Lesson|Put two +1/+1 counters on each creature you control. Paradigm (Then exile this spell. After you first resolve
+FREE                                     Gigantosaurus|Cr — Dinosaur|
+RAID:imotekh-the-stormlord               Gilded Lotus|Art|{T}: Add three mana of any one color.
+FREE                                     Heroes' Bane|Cr — Hydra|This creature enters with four +1/+1 counters on it. {2}{G}{G}: Put X +1/+1 counters on this creature, where X
+FREE                                     Hour of Promise|Sorc|Search your library for up to two land cards, put them onto the battlefield tapped, then shuffle. Then if you
+RAID:the-cabbage-merchant                Hungering Puppetbeast|Art Cr — Beast Construct|When this creature enters, create a Heartwood token. (It's a red and green artifact with "{T}: Add {R}
+FREE                                     Luxurious Locomotive|Art — Vehicle|Whenever this Vehicle attacks, create a Treasure token for each creature that crewed it this turn. (They're ar
+FREE                                     Moldgraf Millipede|Cr — Insect Horror|When this creature enters, mill three cards, then put a +1/+1 counter on this creature for each creature card
+FREE                                     Mycoloth|Cr — Fungus|Devour 2 (As this creature enters, you may sacrifice any number of creatures. It enters with twice that many +
+FREE                                     Nissa, Who Shakes the World|L.Planeswalker — Nissa|Whenever you tap a Forest for mana, add an additional {G}. +1: Put three +1/+1 counters on up to on
+RAID:bumi-unleashed,the-cabbage-merchant Ohran Frostfang|Snow Cr — Snake|Attacking creatures you control have deathtouch. Whenever a creature you control deals combat damage to a play
+FREE                                     Overrun|Sorc|Creatures you control get +3/+3 and gain trample until end of turn. (Each of those creatures can deal excess c
+RAID:bumi-unleashed                      Part in Friendship|Ench|Whenever a nontoken creature you control dies, reveal cards from the top of your library until you reveal a cr
+FREE                                     Perennial Behemoth|Art Cr — Beast|You may play lands from your graveyard. Unearth {G}{G} ({G}{G}: Return this card from your graveyard to the ba
+FREE                                     Predatory Impetus|Ench — Aura|Enchant creature Enchanted creature gets +3/+3, must be blocked if able, and is goaded. (It attacks each comba
+FREE                                     Promise of Loyalty|Sorc|Each player puts a vow counter on a creature they control and sacrifices the rest. Each of those creatures can
+RAID:the-cabbage-merchant                Return of the Wildspeaker|Inst|Choose one — • Draw cards equal to the greatest power among non-Human creatures you control. • Non-Human creat
+RAID:beledros-witherbloom                Ribtruss Roaster|Cr — Troll Druid|Devour 1 (As this creature enters, you may sacrifice any number of creatures. This creature enters with that m
+FREE                                     Saheeli, Consul of Oversight|L.Cr — Human Advisor|Flying Whenever you scry or surveil, create a 1/1 colorless Thopter artifact creature token with fly
+RAID:the-cabbage-merchant                Seedborn Muse|Cr — Spirit|Untap all permanents you control during each other player's untap step.
+RAID:gilanra-alena-partners              Shamanic Revelation|Sorc|Draw a card for each creature you control. Ferocious — You gain 4 life for each creature you control with powe
+FREE                                     Spider-Man, Brooklyn Visionary|L.Cr — Spider Human Hero|Web-slinging {2}{G} (You may cast this spell for {2}{G} if you also return a tapped creature y
+RAID:bumi-unleashed,the-cabbage-merchant Spry and Mighty|Sorc|Choose exactly two creatures you control. You draw X cards and the chosen creatures get +X/+X and gain trample
+RAID:tazri-beacon-of-unity               Stick Together|Sorc|Each player chooses a party from among creatures they control, then sacrifices the rest. (To choose a party, c
+RAID:beledros-witherbloom                Tendershoot Dryad|Cr — Dryad|Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.) At the b
+FREE                                     The Eternity Elevator|L.Art — Spacecraft|{T}: Add {C}{C}{C}. Station (Tap another creature you control: Put charge counters equal to its power on this
+FREE                                     Tome of the Guildpact|Art — Book|Whenever you cast a multicolored spell, draw a card. {T}: Add one mana of any color.
+RAID:the-cabbage-merchant                Transmutation Font|Art|{T}: Create your choice of a Blood token, a Clue token, or a Food token. {3}, {T}, Sacrifice three artifact to
+RAID:gilanra-alena-partners              Traverse the Outlands|Sorc|Search your library for up to X basic land cards, where X is the greatest power among creatures you control. P
+FREE                                     Venser's Journal|Art — Book|You have no maximum hand size. At the beginning of your upkeep, you gain 1 life for each card in your hand.
+FREE                                     Verdurous Gearhulk|Art Cr — Construct|Trample When this creature enters, distribute four +1/+1 counters among any number of target creatures you con
+FREE                                     Vivien Reid|L.Planeswalker — Vivien|+1: Look at the top four cards of your library. You may reveal a creature or land card from among them and put
+RAID:tam-the-possibility                 Way of the Wildspeaker|L.Ench|When Way of the Wildspeaker enters, empower Jace 7. (Put seven loyalty counters on a Jace token you control. I
+FREE                                     Wilderland Scrounger|Cr — Wolf|Ferocious — Whenever this creature attacks while you control a creature with power 4 or greater, put a +1/+1 c
+FREE                                     Winds of Rath|Sorc|Destroy all creatures that aren't enchanted. They can't be regenerated.
+RAID:bumi-unleashed                      Yedora, Grave Gardener|L.Cr — Treefolk Druid|Whenever another nontoken creature you control dies, you may return it to the battlefield face down under
+FREE                                     Zuko's Exile|Inst — Lesson|Exile target artifact, creature, or enchantment. Its controller creates a Clue token. (It's an artifact with "
+FREE                                     Arlinn, Voice of the Pack|L.Planeswalker — Arlinn|Each creature you control that's a Wolf or a Werewolf enters with an additional +1/+1 counter on it.
+FREE                                     Baloth Woodcrasher|Cr — Beast|Landfall — Whenever a land you control enters, this creature gets +4/+4 and gains trample until end of turn. (
+RAID:gilanra-alena-partners              Bane of Progress|Cr — Elemental|When this creature enters, destroy all artifacts and enchantments. Put a +1/+1 counter on this creature for ea
+RAID:tam-the-possibility                 Chimil, the Inner Sun|L.Art|Spells you control can't be countered. At the beginning of your end step, discover 5. (Exile cards from the to
+FREE                                     Cleanup Crew|Cr — Human Citizen|When this creature enters, choose one — • Destroy target artifact. • Destroy target enchantment. • Exile targe
+RAID:gilanra-alena-partners              Conclave Sledge-Captain|Cr — Elephant Soldier|Backup 1, backup 1, backup 1 (When this creature enters, put a +1/+1 counter on target creature. If that
+FREE                                     Disciple of Freyalise // Garden of Freyalise|Cr — Elf Druid|When this creature enters, you may sacrifice another creature. If you do, you gain X life
+FREE                                     Earthshaker Dreadmaw|Cr — Dinosaur|Trample When this creature enters, draw a card for each other Dinosaur you control.
+FREE                                     Eldrazi Ravager|Cr — Eldrazi|Annihilator 1 (Whenever this creature attacks, defending player sacrifices a permanent of their choice.) Sacri
+RAID:tam-the-possibility                 Elspeth, Sun's Champion|L.Planeswalker — Elspeth|+1: Create three 1/1 white Soldier creature tokens. −3: Destroy all creatures with power 4 or greater
+RAID:gilanra-alena-partners              Elvish Aberration|Cr — Elf Mutant|{T}: Add {G}{G}{G}. Forestcycling {2} ({2}, Discard this card: Search your library for a Forest card, reveal i
+FREE                                     Ezzaroot Channeler|Cr — Treefolk Druid|Reach Creature spells you cast cost {X} less to cast, where X is the amount of life you gained this turn. {T}:
+RAID:the-cabbage-merchant                Feasting Troll King|Cr — Troll Noble|Vigilance, trample When this creature enters, if you cast it from your hand, create three Food tokens. (They'r
+RAID:bumi-unleashed                      Flopsie, Bumi's Buddy|L.Cr — Ape Goat|When Flopsie enters, put a +1/+1 counter on each creature you control. Each creature you control with power 4
+RAID:gilanra-alena-partners              Garruk, Caller of Beasts|L.Planeswalker — Garruk|+1: Reveal the top five cards of your library. Put all creature cards revealed this way into your han
+RAID:the-cabbage-merchant                Ginger, Queen of Sweets|L.Art Cr — Food Noble|When Ginger enters, you become the monarch. {2}, {T}, Sacrifice Ginger: You gain 6 life. At the beginnin
+FREE                                     God-Pharaoh's Statue|L.Art|Spells your opponents cast cost {2} more to cast. At the beginning of your end step, each opponent loses 1 lif
+RAID:gilanra-alena-partners              Greenwarden of Murasa|Cr — Elemental|When this creature enters, you may return target card from your graveyard to your hand. When this creature die
+FREE                                     Hexhaven Battalion|Sorc|Create three 2/2 colorless Wizard Soldier creature tokens named Cadet. Empower Jace 2. (Put two loyalty counte
+FREE                                     Hydra Broodmaster|Cr — Hydra|{X}{X}{G}: Monstrosity X. (If this creature isn't monstrous, put X +1/+1 counters on it and it becomes monstro
+FREE                                     Lumra, Bellow of the Woods|L.Cr — Elemental Bear|Reach, vigilance Lumra's power and toughness are each equal to the number of lands you control. When
+FREE                                     Mana Reflection|Ench|If you tap a permanent for mana, it produces twice as much of that mana instead.
+RAID:gilanra-alena-partners              Nessian Wilds Ravager|Cr — Hydra|Tribute 6 (As this creature enters, an opponent of your choice may put six +1/+1 counters on it.) When this cr
+FREE                                     Nissa's Renewal|Sorc|Search your library for up to three basic land cards, put them onto the battlefield tapped, then shuffle. You
+RAID:gilanra-alena-partners              Oblivion Sower|Cr — Eldrazi|When you cast this spell, target opponent exiles the top four cards of their library, then you may put any num
+FREE                                     Orchard Strider|Cr — Treefolk|When this creature enters, create two Food tokens. (They're artifacts with "{2}, {T}, Sacrifice this token: Yo
+RAID:gilanra-alena-partners              Paleoloth|Cr — Beast|Whenever another creature you control with power 5 or greater enters, you may return target creature card from
+RAID:gilanra-alena-partners              Planetarium of Wan Shi Tong|L.Art|{1}, {T}: Scry 2. Whenever you scry or surveil, look at the top card of your library. You may cast that card w
+FREE                                     Primeval Bounty|Ench|Whenever you cast a creature spell, create a 3/3 green Beast creature token. Whenever you cast a noncreature s
+RAID:gilanra-alena-partners              Primordial Sage|Cr — Spirit|Whenever you cast a creature spell, you may draw a card.
+RAID:bumi-unleashed                      Quilled Greatwurm|Cr — Wurm|Trample Whenever a creature you control deals combat damage during your turn, put that many +1/+1 counters on
+FREE                                     Rampaging Baloths|Cr — Beast|Trample Landfall — Whenever a land you control enters, create a 4/4 green Beast creature token.
+FREE                                     Realm Seekers|Cr — Elf Scout|This creature enters with X +1/+1 counters on it, where X is the total number of cards in all players' hands.
+RAID:gilanra-alena-partners              Regal Behemoth|Cr — Dinosaur|Trample When this creature enters, you become the monarch. Whenever you tap a land for mana while you're the m
+FREE                                     Saber-Tooth Moose-Lion|Cr — Elk Cat|Reach Forestcycling {2} ({2}, Discard this card: Search your library for a Forest card, reveal it, put it into
+RAID:gilanra-alena-partners              Sakiko, Mother of Summer|L.Cr — Snake Shaman|Whenever a creature you control deals combat damage to a player, add that much {G}. Until end of turn, yo
+FREE                                     Slavering Branchsnapper|Cr — Lizard|Trample Forestcycling {2} ({2}, Discard this card: Search your library for a Forest card, reveal it, put it in
+FREE                                     Soul of New Phyrexia|Art Cr — Phyrexian Avatar|Trample {5}: Permanents you control gain indestructible until end of turn. {5}, Exile this card from yo
+RAID:gilanra-alena-partners              Soul of the Harvest|Cr — Elemental|Trample Whenever another nontoken creature you control enters, you may draw a card.
+FREE                                     Spinewoods Armadillo|Cr — Armadillo|Reach Ward {3} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter
+FREE                                     Steel Hellkite|Art Cr — Dragon|Flying {2}: This creature gets +1/+0 until end of turn. {X}: Destroy each nonland permanent with mana value X
+RAID:gilanra-alena-partners              Sweet-Gum Recluse|Cr — Spider|Flash Cascade Reach When this creature enters, put three +1/+1 counters on each of any number of target creatu
+RAID:bumi-unleashed                      Tectonic Split|Ench|As an additional cost to cast this spell, sacrifice half the lands you control, rounded up. Hexproof Lands you
+FREE                                     The Legend of Kyoshi // Avatar Kyoshi|Ench — Saga|(As this Saga enters and after your draw step, add a lore counter.) I — Draw cards equal to the grea
+RAID:beledros-witherbloom                Thunderfoot Baloth|Cr — Beast|Trample Lieutenant — As long as you control your commander, this creature gets +2/+2 and other creatures you c
+FREE                                     Topiary Panther|Cr — Plant Cat|Trample Basic landcycling {1}{G} ({1}{G}, Discard this card: Search your library for a basic land card, reveal
+FREE                                     Ulvenwald Hydra|Cr — Hydra|Reach Ulvenwald Hydra's power and toughness are each equal to the number of lands you control. When this creat
+RAID:gilanra-alena-partners              Ulvenwald Observer|Cr — Treefolk|Whenever a creature you control with toughness 4 or greater dies, draw a card.
+FREE                                     Verdant Confluence|Sorc|Choose three. You may choose the same mode more than once. • Put two +1/+1 counters on target creature. • Retu
+FREE                                     Veteran Adventurer|Cr — Human|Veteran Adventurer is also a Cleric, Rogue, Warrior, and Wizard. This spell costs {1} less to cast for each cr
+FREE                                     Angel of the Ruins|Art Cr — Angel|Flying When this creature enters, exile up to two target artifacts and/or enchantments. Plainscycling {2} ({2}
+FREE                                     Avenger of Zendikar|Cr — Elemental|When this creature enters, create a 0/1 green Plant creature token for each land you control. Landfall — Whene
+FREE                                     Bane of Bala Ged|Cr — Eldrazi|Whenever this creature attacks, defending player exiles two permanents they control.
+RAID:gilanra-alena-partners              Dawnglade Regent|Cr — Elk|When this creature enters, you become the monarch. As long as you're the monarch, permanents you control have
+FREE                                     Devourer of Destiny|Cr — Eldrazi|You may reveal this card from your opening hand. If you do, at the beginning of your first upkeep, look at the
+RAID:the-cabbage-merchant                Displaced Dinosaurs|Cr — Dinosaur|As a historic permanent you control enters, it becomes a 7/7 Dinosaur creature in addition to its other types.
+RAID:gilanra-alena-partners              Emergent Woodwurm|Cr — Wurm|Backup 3 (When this creature enters, put three +1/+1 counters on target creature. If that's another creature,
+FREE                                     Ferrafor, Young Yew|L.Cr — Treefolk Druid|When Ferrafor enters, create a number of 1/1 green Saproling creature tokens equal to the number of counters
+RAID:gilanra-alena-partners              Foe-Razer Regent|Cr — Dragon|Flying When this creature enters, you may have it fight target creature you don't control. Whenever a creature
+FREE                                     Gigantic Big Bear|Cr — Bear|This spell can't be countered. Hexproof, haste
+FREE                                     Grim Poppet|Art Cr — Scarecrow|This creature enters with three -1/-1 counters on it. Remove a -1/-1 counter from this creature: Put a -1/-1 c
+RAID:the-cabbage-merchant                Hornet Queen|Cr — Insect|Flying, deathtouch When this creature enters, create four 1/1 green Insect creature tokens with flying and dea
+FREE                                     Hour of Reckoning|Sorc|Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1}
+FREE                                     Kindred Judgment|Sorc|Choose a creature type. Destroy all creatures that aren't of the chosen type.
+FREE                                     Meteor Golem|Art Cr — Golem|When this creature enters, destroy target nonland permanent an opponent controls.
+FREE                                     Molimo, Maro-Sorcerer|L.Cr — Elemental Sorcerer|Trample (This creature can deal excess combat damage to the player or planeswalker it's attacking.) Mo
+FREE                                     Myr Enforcer|Art Cr — Myr|Affinity for artifacts (This spell costs {1} less to cast for each artifact you control.)
+FREE                                     Necron Monolith|Art — Vehicle|Flying, indestructible Eternity Gate — Whenever this Vehicle attacks, mill three cards. For each creature card
+FREE                                     Sea Gate Colossus|Art Cr — Golem Warrior|This spell costs {1} less to cast for each creature in your party. (Your party consists of up to one each of
+RAID:gilanra-alena-partners              Shriekwood Devourer|Cr — Treefolk|Trample Whenever you attack with one or more creatures, untap up to X lands, where X is the greatest power amo
+RAID:gilanra-alena-partners              Spearbreaker Behemoth|Cr — Beast|Indestructible {1}: Target creature with power 5 or greater gains indestructible until end of turn.
+FREE                                     Super State|L.Ench — Aura|Enchant creature you control Enchanted creature has base power and toughness 9/9 and has flying, first strike,
+RAID:inspirit-flagship-vessel            Threefold Thunderhulk|Art Cr — Gnome|This creature enters with three +1/+1 counters on it. Whenever this creature enters or attacks, create a numbe
+RAID:the-cabbage-merchant                Verdant Kraken|Cr — Plant Kraken|At the beginning of each player's upkeep, you create a 3/3 green Forest Tentacle land creature token. (It has
+FREE                                     Verdant Sun's Avatar|Cr — Dinosaur Avatar|Whenever this creature or another creature you control enters, you gain life equal to that creature's toughn
+FREE                                     Avatar Kyoshi, Earthbender|L.Cr — Human Avatar|During your turn, Avatar Kyoshi has hexproof. At the beginning of combat on your turn, earthbend 8, the
+FREE                                     Breaker of Creation|Cr — Eldrazi|When you cast this spell, you gain 1 life for each colorless permanent you control. Hexproof from each color A
+FREE                                     Cityscape Leveler|Art Cr — Construct|Trample When you cast this spell and whenever this creature attacks, destroy up to one target nonland permanen
+FREE                                     Eldrazi Conscription|Kindred Ench — Eldrazi Aura|Enchant creature Enchanted creature gets +10/+10 and has trample and annihilator 2. (Whenever it atta
+RAID:beledros-witherbloom                Omnipresence|Ench|You may cast spells with mana value less than or equal to the number of creatures you control from your hand w
+FREE                                     Terastodon|Cr — Elephant|When this creature enters, you may destroy up to three target noncreature permanents. For each permanent put i
+FREE                                     Through the Forest Gate|Sorc|Look at the top twenty cards of your library, put any number of land cards from among them onto the battlefiel
+RAID:inspirit-flagship-vessel            Bygone Colossus|Art Cr — Robot Giant|Warp {3} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the
+RAID:the-cabbage-merchant                Ghalta the Unstoppable|L.Cr — Elder Dinosaur|This spell costs {X} less to cast, where X is the greatest power among creatures you control. Trample Oth
+RAID:imotekh-the-stormlord               Portal to Phyrexia|Art|When this artifact enters, each opponent sacrifices three creatures of their choice. At the beginning of your
+FREE                                     Sproutback Trudge|Cr — Fungus Beast|This spell costs {X} less to cast, where X is the amount of life you gained this turn. Trample At the beginnin
+FREE                                     Apex Devastator|Cr — Chimera Hydra|Cascade, cascade, cascade, cascade (When you cast this spell, exile cards from the top of your library until y
+FREE                                     Everything Comes to Dust|Sorc|Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1}
+FREE                                     Kozilek, the Great Distortion|L.Cr — Eldrazi|When you cast this spell, if you have fewer than seven cards in hand, draw cards equal to the difference.
+FREE                                     Organic Extinction|Sorc|Improvise (Your artifacts can help cast this spell. Each artifact you tap after you're done activating mana ab
+FREE                                     Darksteel Colossus|Art Cr — Golem|Trample (This creature can deal excess combat damage to the player or planeswalker it's attacking.) Indestruct
+RAID:imotekh-the-stormlord               Metalwork Colossus|Art Cr — Construct|This spell costs {X} less to cast, where X is the total mana value of noncreature artifacts you control. Sacri
+RAID:gilanra-alena-partners              Ghalta, Primal Hunger|L.Cr — Elder Dinosaur|This spell costs {X} less to cast, where X is the total power of creatures you control. Trample (This crea

@@ -310,6 +310,8 @@ export function MatchDetailModal({ matchId, onClose }: MatchDetailModalProps) {
                       <YAxis tick={{ fontSize: 10 }} stroke="#666" width={30} />
                       <Tooltip
                         contentStyle={{ backgroundColor: '#1a1a1a', border: '1px solid #333', fontSize: '11px' }}
+                        itemStyle={{ color: '#e4ddd2' }}
+                        labelStyle={{ color: '#e4ddd2' }}
                         labelFormatter={(v) => `Turn ${v}`}
                       />
                       <Line type="monotone" dataKey="player" stroke="#d4a24e" strokeWidth={2} dot={false} name="You" />

@@ -50,6 +50,9 @@ const fakeResult: RunBestDeckResult = {
   note: null,
   unresolved: [],
   ownedResolved: 2,
+  upgrades: [{ name: 'Sol Ring', priceUsd: 2, replaces: 'Owned Card', gain: 1.5 }],
+  replacements: [{ forCard: 'Bought Card', options: [{ name: 'Owned Card', delta: -0.1 }] }],
+  nearMisses: [{ name: 'Fake Commander', owned: false, priceUsd: null, delta: 0.1, slot: 'Owned Card' }],
 };
 
 const fakeRequest = { owned: [{ name: 'Owned Card' }, { name: 'Sol Ring' }], budgetUsd: 10 };
@@ -87,5 +90,26 @@ describe('buildDoneResult — full BuildResult/BestDeckResult key set (refuter H
     expect(price.total).toBeCloseTo(3.34, 2);
     expect(price.maxDeckPrice).toBe(10);
     expect(price.maxCardPrice).toBeNull();
+  });
+
+  it('v2: upgrades/replacements/nearMisses carry imageUri resolved from the card rows (null for an unknown name)', () => {
+    const out = buildDoneResult(fakeResult, fakeRequest, 1234) as Record<string, unknown>;
+
+    const upgrades = out.upgrades as Array<Record<string, unknown>>;
+    expect(upgrades).toHaveLength(1);
+    expect(upgrades[0]).toMatchObject({ name: 'Sol Ring', priceUsd: 2, replaces: 'Owned Card', gain: 1.5 });
+    expect(upgrades[0].imageUri === null || typeof upgrades[0].imageUri === 'string').toBe(true);
+
+    const replacements = out.replacements as Array<Record<string, unknown>>;
+    expect(replacements).toHaveLength(1);
+    expect(replacements[0].forCard).toBe('Bought Card');
+    const options = replacements[0].options as Array<Record<string, unknown>>;
+    expect(options[0]).toMatchObject({ name: 'Owned Card', delta: -0.1 });
+    expect('imageUri' in options[0]).toBe(true);
+
+    const nearMisses = out.nearMisses as Array<Record<string, unknown>>;
+    expect(nearMisses).toHaveLength(1);
+    // "Fake Commander" is not a real card in the DB — imageUri must fall back to null, not throw.
+    expect(nearMisses[0]).toMatchObject({ name: 'Fake Commander', owned: false, priceUsd: null, delta: 0.1, slot: 'Owned Card', imageUri: null });
   });
 });

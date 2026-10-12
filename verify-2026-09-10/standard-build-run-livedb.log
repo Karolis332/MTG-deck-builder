@@ -1,0 +1,110 @@
+=== POOL ===
+pool size: 264 (open 219, in-deck 45), unresolved: 0
+newest sets seen in legal pool: big, blb, cmm, dft, dsk, ecc, ecl, eoc, eoe, fdn, fin, hob, lci, mkm, msh, otj, sos, spm, tdc, tdm, tla, tmt, woe
+unresolved names: 
+
+=== TOP 5 ARCHETYPES (decks / WR / coverage / score) ===
+Mono-Black | decks 19 | WR 66.7% (68-34) | coverage 21.7% | score 0.145
+Four-Color (no G) | decks 44 | WR 66.9% (164-81) | coverage 15.7% | score 0.105
+Dimir | decks 112 | WR 67.5% (466-224) | coverage 15.5% | score 0.105
+Selesnya | decks 30 | WR 62.8% (115-68) | coverage 16.4% | score 0.103
+Sultai | decks 27 | WR 65.0% (91-49) | coverage 15.4% | score 0.100
+
+=== BUILD: Mono-Black ===
+colors B | avg nonland cmc 1.61 | land target 20 | nonland slots filled 40 (core 5, substitute 1, filler 34) | land slots filled 8 | side slots 3
+MAIN:
+  2 Forsaken Miner [open]
+  3 Shoot the Sheriff [open]
+  1 Bitter Triumph [in:imotekh-the-stormlord]
+  1 Insatiable Avarice [in:imotekh-the-stormlord (filler)]
+  1 Lost Jitte [open (filler)]
+  1 Lavaspur Boots [open (filler)]
+  1 Peter Parker's Camera [open (filler)]
+  3 Corrupted Conviction [open (filler)]
+  2 Undying Malice [open (filler)]
+  1 Fountainport Bell [open (filler)]
+  1 Infestation Sage [open (filler)]
+  2 Unfortunate Accident [open (filler)]
+  1 Callous Inspector [open (filler)]
+  1 The Soul Stone [in:imotekh-the-stormlord (filler)]
+  1 Torpor Orb [open (filler)]
+  1 Lively Dirge [in:imotekh-the-stormlord (filler)]
+  1 Wishclaw Talisman [in:imotekh-the-stormlord (filler)]
+  1 Day of Black Sun [open (filler)]
+  1 Bloodghast [in:meren-of-clan-nel-toth (filler)]
+  1 Morlun, Devourer of Spiders [open (filler)]
+  1 Outrageous Robbery [open (filler)]
+  2 Umbral Collar Zealot [in:imotekh-the-stormlord (filler)]
+  1 Bandit's Talent [open (filler)]
+  1 Vengeful Bloodwitch [open (filler)]
+  1 Gleaming Barrier [open (filler)]
+  1 Wreckage Wickerfolk [open (filler)]
+  1 Joo Dee, One of Many [open (filler)]
+  1 Nullpriest of Oblivion [open (filler)]
+  1 Prophetic Prism [open (filler)]
+  1 Dread Summons [open (filler)]
+  1 Servant of the Stinger [open (filler)]
+  1 Feed the Swarm [in:imotekh-the-stormlord (filler)]
+  1 Blooming Marsh [in:meren-of-clan-nel-toth]
+  1 Concealed Courtyard [in:tazri-beacon-of-unity]
+  1 Festering Gulch [open]
+  1 Forlorn Flats [open]
+  1 Jagged Barrens [open]
+  1 Jungle Hollow [open]
+  1 Mudflat Village [open]
+  1 Overgrown Tomb [in:tazri-beacon-of-unity]
+  12 Swamp [basic (unlimited)]
+SIDEBOARD:
+  1 Elegy Acolyte [open]
+  1 Realm of Koh [open]
+  1 Rush of Dread [open]
+SUBSTITUTIONS (missing core card -> owned substitute):
+  Shoot the Sheriff -> 1x Bitter Triumph
+
+=== RUNNER-UP: Four-Color (no G) ===
+  2x Steam Vents (inc 100%)
+  4x Great Hall of the Biblioplex (inc 98%)
+  3x Inevitable Defeat (inc 98%)
+  3x Jeskai Revelation (inc 98%)
+  2x Shattered Sanctum (inc 98%)
+  2x Flashback (inc 95%)
+  2x Sacred Foundry (inc 95%)
+  4x Stock Up (inc 95%)
+  4x Tablet of Discovery (inc 95%)
+  1x Plains (inc 84%)
+  1x Island (inc 82%)
+  2x Consult the Star Charts (inc 75%)
+  2x Together as One (inc 75%)
+  2x Firebending Lesson (inc 70%)
+  1x Mistrise Village (inc 68%)
+  2x Sear (inc 68%)
+  1x Sundown Pass (inc 66%)
+  2x Riverpyre Verge (inc 55%)
+  2x Starting Town (inc 55%)
+  2x Deadly Cover-Up (inc 52%)
+  2x Hallowed Fountain (inc 52%)
+  1x Swamp (inc 52%)
+  1x Meticulous Archive (inc 50%)
+  2x Shoot the Sheriff (inc 50%)
+  1x Stormcarved Coast (inc 50%)
+
+=== VALIDATION (deck-validation.ts, standard) ===
+  PASS: no issues
+
+=== OPTIMIZER SCORE (advisory, deck-optimizer.ts) ===
+  legality issues: 0
+  land delta: 0 (built 20 vs target 20)
+  score: 70/100 (ratioScore fixed at 70 — full quota-ratio engine out of scope, PLACEHOLDER, see report caveats)
+
+=== BUY LIST (<=15, missing core cards vs Mono-Black) ===
+  4x Corpses of the Lost (core inclusion 84%, $0.34)
+  2x Requiting Hex (core inclusion 84%, $1.01)
+  3x Soulstone Sanctuary (core inclusion 84%, $1.00)
+  4x Desolation Prowler (core inclusion 79%, $0.22)
+  4x Dissection Practice (core inclusion 79%, $0.23)
+  3x Gollum, Riddle Master (core inclusion 79%, $2.76)
+  4x Iridescent Vinelasher (core inclusion 79%, $2.10)
+  4x Nighthowl Pursuer (core inclusion 79%, $0.20)
+  4x Sunset Saboteur (core inclusion 79%, $0.31)
+
+proposal written: C:\Users\QuLeR\MTG-deck-builder\decks\paper\proposals\standard-mono-black.txt

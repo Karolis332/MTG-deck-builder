@@ -1,0 +1,74 @@
+file      : verify-2026-10-09/color-best/decks/R/final.txt
+format    : commander   commander: Magda, the Hoardmaster
+totals    : 100 cards | 38 lands (38 eff.) | 61 nonland | avg MV 3.79
+curve     : 0:2 1:4 2:12 3:13 4:8 5:6 6:12 7:4
+VERDICT   : FAIL
+
+  PASS  size        100 cards (commander wants 100)
+  PASS  singleton   singleton respected (basics exempt)
+  PASS  legality    every card legal in commander
+  PASS  rules       no other format rule broken
+  PASS  identity    all cards inside R
+  PASS  ownership   all cards owned; paper collection imported 0 days ago
+  PASS  arenaNames  every line uses a name Arena accepts
+  WARN  lands       38 lands (+0 MDFC land backs = 38 effective); Karsten wants 41 ±2
+  FAIL  plan        5/61 nonland cards interact (8%) — commander wants: creates tokens
+        - Mishra's Bauble (MV 0)
+        - Walking Ballista (MV 0)
+        - Basilisk Collar (MV 1)
+        - Explosive Derailment (MV 1)
+        - Faithless Looting (MV 1)
+        - Wayfarer's Bauble (MV 1)
+        - Abrade (MV 2)
+        - Arcane Signet (MV 2)
+        - Cathartic Pyre (MV 2)
+        - Deadeye Duelist (MV 2)
+        - Fellwar Stone (MV 2)
+        - Mazemind Tome (MV 2)
+        - Myr Retriever (MV 2)
+        - Return the Favor (MV 2)
+        - Steel Overseer (MV 2)
+        - Syr Ginger, the Meal Ender (MV 2)
+        - Thrill of Possibility (MV 2)
+        - Unlicensed Hearse (MV 2)
+        - Bandit's Haul (MV 3)
+        - Burnished Hart (MV 3)
+        - Chaos Warp (MV 3)
+        - Cloud Key (MV 3)
+        - Commander's Sphere (MV 3)
+        - Foundry Inspector (MV 3)
+        - Inspiring Statuary (MV 3)
+        - Loxodon Warhammer (MV 3)
+        - Mirage Mirror (MV 3)
+        - Palladium Myr (MV 3)
+        - Take for a Ride (MV 3)
+        - Chain Reaction (MV 4)
+        - Chandra, Fire Artisan (MV 4)
+        - Descendants' Fury (MV 4)
+        - Hammer of Nazahn (MV 4)
+        - Hedron Archive (MV 4)
+        - Panharmonicon (MV 4)
+        - Solemn Simulacrum (MV 4)
+        - Thran Dynamo (MV 4)
+        - Gilded Lotus (MV 5)
+        - Jaya, Venerated Firemage (MV 5)
+        - Karlach, Fury of Avernus (MV 5)
+        - Sarkhan, the Dragonspeaker (MV 5)
+        - Terror of the Peaks (MV 5)
+        - Chandra, Awakened Inferno (MV 6)
+        - Chimil, the Inner Sun (MV 6)
+        - Combustible Gearhulk (MV 6)
+        - Etali, Primal Storm (MV 6)
+        - God-Pharaoh's Statue (MV 6)
+        - Hoard-Smelter Dragon (MV 6)
+        - Moraug, Fury of Akoum (MV 6)
+        - Soul of New Phyrexia (MV 6)
+        - Steel Hellkite (MV 6)
+        - Warstorm Surge (MV 6)
+        - Devourer of Destiny (MV 7)
+        - Drakuseth, Maw of Flames (MV 7)
+        - Meteor Golem (MV 7)
+        - Blasphemous Act (MV 9)
+  PASS  curve       avg MV 3.79; commander sets no cost threshold
+  PASS  wincons     15 win condition(s)/closer(s)
+  PASS  locks       2 locked card(s) present and intact

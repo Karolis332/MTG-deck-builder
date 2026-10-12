@@ -1,0 +1,12 @@
+Windswept Heath => Swamp
+Wooded Foothills => Swamp
+Brokers Hideout => Swamp
+Cabaretti Courtyard => Fabled Passage
+Mana Confluence => Swamp
+Dark Depths => Bojuka Bog
+Great Hall of the Citadel => Swamp
+Demon's Horn => Sol Ring
+Fellwar Stone => Arcane Signet
+Overzealous Muscle => Defiling Daemogoth
+Soul of New Phyrexia => Emeritus of Woe // Demonic Tutor
+Chromatic Lantern => Shard of the Nightbringer

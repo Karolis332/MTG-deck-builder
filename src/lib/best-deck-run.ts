@@ -12,7 +12,8 @@ import { climbDeck, type ClimbOptions } from './deck-climb';
 import type { DbCard } from './types';
 import {
   BASIC_RE, DECK_SIZE, DEFAULT_WEIGHTS, basicsFor, buildPool, cfStats, costOf, identityOf,
-  isCommander, legalIn, makeScorer, powerOf, resolveCard, seedDeck, type Weights,
+  isCommander, legalIn, makeScorer, powerOf, reportAlternatives, resolveCard, seedDeck,
+  type ReportNearMiss, type ReportReplacement, type ReportUpgrade, type Weights,
 } from './best-deck';
 
 const FORMAT = 'commander';
@@ -58,12 +59,14 @@ export interface RunBestDeckOpts {
 }
 
 const OPT_DEFAULTS: Required<RunBestDeckOpts> = {
+  // screenTop: Infinity — screen every owned commander by default (still bounded by the 35%
+  // screening-time cutoff below); callers that want the old top-N behaviour still can.
   games: 100, maxPasses: 3, topK: 12, batch: 6, epsilon: 0.25,
-  screenTop: 60, ownedCap: 400, buyCap: 300, deadlineMs: 210_000,
+  screenTop: Infinity, ownedCap: 400, buyCap: 300, deadlineMs: 210_000,
 };
 
 export interface RunBestDeckProgress {
-  stage: 'resolving' | 'screening' | 'climbing';
+  stage: 'resolving' | 'screening' | 'climbing' | 'reporting';
   screened?: number;
   toScreen?: number;
   commander?: string | null;
@@ -98,6 +101,10 @@ export interface RunBestDeckResult {
   unresolved: string[];
   /** Distinct owned names (quantity >= 1) that resolved to a card — for the caller's `collectionMatched`. */
   ownedResolved: number;
+  // v2 (contract): the bounded post-climb report pass.
+  upgrades: ReportUpgrade[];
+  replacements: ReportReplacement[];
+  nearMisses: ReportNearMiss[];
 }
 
 export interface CommanderStatsRow { card_name: string; inclusion_rate: number }
@@ -240,9 +247,16 @@ async function climbWithBudget(
   let passesRun = 0;
   for (let pass = 1; pass <= o.maxPasses; pass++) {
     if (Date.now() >= deadlineAt) { stopReason = 'deadline'; break; }
-    onProgress?.({ stage: 'climbing', commander: commander.name, pass, maxPasses: o.maxPasses, evaluations, bestObjective: scorer(deck).objective });
+    const bestSoFar = scorer(deck).objective;
+    const evaluationsBeforePass = evaluations;
+    onProgress?.({ stage: 'climbing', commander: commander.name, pass, maxPasses: o.maxPasses, evaluations, bestObjective: bestSoFar });
+    // Progress within the pass, throttled — a tick per evaluation would flood the IPC pipe to a
+    // build-api worker's parent for no benefit the UI could show faster than ~5 evaluations apart.
+    const onEvaluate = (n: number): void => {
+      if (n % 5 === 0) onProgress?.({ stage: 'climbing', commander: commander.name, pass, maxPasses: o.maxPasses, evaluations: evaluationsBeforePass + n, bestObjective: bestSoFar });
+    };
     const r = climbDeck(deck, candidatePool, (d) => scorer(d).objective, {
-      maxPasses: 1, topK: o.topK, batch: o.batch, epsilon: o.epsilon, repeatable, canSwap,
+      maxPasses: 1, topK: o.topK, batch: o.batch, epsilon: o.epsilon, repeatable, canSwap, onEvaluate,
     });
     deck = r.deck;
     swaps += r.swaps.length;
@@ -349,6 +363,11 @@ export async function runBestDeck(
     ...finalDeck.filter((c) => !ownedNames.has(c.name) && !BASIC_RE.test(c.name)).map((c) => ({ name: c.name, priceUsd: costFn(c) ?? 0 })),
   ];
 
+  onProgress?.({ stage: 'reporting', evaluations: climbResult.evaluations });
+  const report = reportAlternatives(finalDeck, buyList, {
+    format: FORMAT, commander, weights, ownedCards: dedupOwned, ownedNames, basics,
+  });
+
   return {
     commander,
     deck: finalDeck.map((c) => ({ ...c, owned: ownedNames.has(c.name) || BASIC_RE.test(c.name) })),
@@ -362,6 +381,9 @@ export async function runBestDeck(
     note,
     unresolved,
     ownedResolved,
+    upgrades: report.upgrades,
+    replacements: report.replacements,
+    nearMisses: report.nearMisses,
   };
 }
 

@@ -1,0 +1,2 @@
+Jet, Freedom Fighter: 109.01 [land37 ramp12 draw12 remo9 wipe2 prot6 pen0] (seeds cf 102.61 [land37 ramp8 draw9 remo12 wipe1 prot4 pen1] | previous 108.74 [land37 ramp12 draw12 remo10 wipe2 prot6 pen0]; 1 swaps, 154558 ms)
+Uglúk of the White Hand: 108.65 [land35 ramp12 draw12 remo9 wipe2 prot6 pen0] (seeds cf 101.67 [land36 ramp12 draw12 remo8 wipe2 prot2 pen1] | previous 108.38 [land35 ramp12 draw12 remo9 wipe2 prot6 pen0]; 1 swaps, 139626 ms)

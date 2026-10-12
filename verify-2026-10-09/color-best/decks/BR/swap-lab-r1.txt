@@ -1,0 +1,14 @@
+BASE obj 77.96 DS 66.5 pen 0 {"land":37,"ramp":12,"draw":12,"removal":10,"board_wipe":3,"protection":3} mana=92 curve=87 interaction=60 advantage=88 win=58 synergy=86 meta=50 structure=100
+  -0.04  Academy Manufactor => Vengeful Bloodwitch   DS 0.0 pen 0 mana=92 curve=85 interaction=60 advantage=88 win=58 synergy=86 meta=50 structure=100
+   0.01  Foundry Inspector => Massacre Girl, Most Wanted   DS 0.0 pen 0 mana=92 curve=87 interaction=60 advantage=88 win=58 synergy=84 meta=50 structure=100
+   0.01  Winter, Team Player => Moseo, Vein's New Dean   DS 0.0 pen 0 mana=92 curve=87 interaction=60 advantage=88 win=58 synergy=88 meta=50 structure=100
+  -2.03  Overzealous Muscle => Rakish Crew   DS 0.0 pen 1 mana=92 curve=87 interaction=57 advantage=88 win=58 synergy=88 meta=50 structure=100
+  -0.01  Basilisk Collar => Unfortunate Accident   DS 0.0 pen 0 mana=92 curve=87 interaction=68 advantage=88 win=58 synergy=88 meta=50 structure=100
+   0.07  Thought Vessel => Arcane Signet   DS 0.0 pen 0 mana=93 curve=87 interaction=60 advantage=88 win=58 synergy=86 meta=50 structure=100
+   0.00  Urza's Tower => Fabled Passage   DS 0.0 pen 0 mana=93 curve=87 interaction=60 advantage=88 win=58 synergy=86 meta=50 structure=100
+   0.00  Reliquary Tower => Terramorphic Expanse   DS 0.0 pen 0 mana=93 curve=87 interaction=60 advantage=88 win=58 synergy=86 meta=50 structure=100
+   0.00  Windswept Heath => Maestros Theater   DS 0.0 pen 0 mana=93 curve=87 interaction=60 advantage=88 win=58 synergy=86 meta=50 structure=100
+   0.09  Nesting Grounds => Lazotep Quarry   DS 0.0 pen 0 mana=93 curve=87 interaction=60 advantage=88 win=58 synergy=86 meta=50 structure=100
+   0.06  Karn's Bastion => Swamp   DS 0.0 pen 0 mana=93 curve=87 interaction=60 advantage=88 win=58 synergy=86 meta=50 structure=100
+  -2.03  Return the Favor => Pia, Determined Rebuilder   DS -0.1 pen 1 mana=93 curve=88 interaction=49 advantage=88 win=58 synergy=86 meta=50 structure=100
+ALL  obj 74.12 (-3.85) DS 66.4 pen 2 {"land":37,"ramp":12,"draw":12,"removal":12,"board_wipe":3,"protection":1} mana=97 curve=87 interaction=55 advantage=88 win=58 synergy=91 meta=50 structure=100

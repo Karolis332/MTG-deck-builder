@@ -1,0 +1,62 @@
+file      : verify-2026-10-09/color-best/decks/W/final.txt
+format    : commander   commander: Pearl-Ear, Imperial Advisor
+totals    : 100 cards | 35 lands (35 eff.) | 64 nonland | avg MV 2.94
+curve     : 0:1 1:12 2:14 3:17 4:13 5:4 7:3
+VERDICT   : FAIL
+
+  PASS  size        100 cards (commander wants 100)
+  PASS  singleton   singleton respected (basics exempt)
+  PASS  legality    every card legal in commander
+  PASS  rules       no other format rule broken
+  PASS  identity    all cards inside W
+  PASS  ownership   all cards owned; paper collection imported 0 days ago
+  FAIL  arenaNames  2 line(s) use "Front // Back" — Arena answers "unknown card title". Use:
+        - 1 Eiganjo Dynastorian
+        - 1 Emeritus of Truce
+  WARN  lands       35 lands (+0 MDFC land backs = 35 effective); Karsten wants 39 ±2
+  FAIL  plan        22/64 nonland cards interact (34%) — commander wants: enchantment spell; only 22/64 (34%) can satisfy it
+        - Walking Ballista (MV 0)
+        - Basilisk Collar (MV 1)
+        - Erode (MV 1)
+        - Explorer's Scope (MV 1)
+        - Final Showdown (MV 1)
+        - Lavaspur Boots (MV 1)
+        - Multiclass Baldric (MV 1)
+        - Path to Exile (MV 1)
+        - Swords to Plowshares (MV 1)
+        - Wayfarer's Bauble (MV 1)
+        - Fellwar Stone (MV 2)
+        - Kor Spiritdancer (MV 2)
+        - Pearl Medallion (MV 2)
+        - Sram, Senior Edificer (MV 2)
+        - Starfield Mystic (MV 2)
+        - Sword of the Animist (MV 2)
+        - Thought Vessel (MV 2)
+        - Wrecking Ball Arm (MV 2)
+        - Bitterthorn, Nissa's Animus (MV 3)
+        - Commander's Sphere (MV 3)
+        - Decanter of Endless Water (MV 3)
+        - Eiganjo Dynastorian (MV 3)
+        - Emeritus of Truce (MV 3)
+        - Generous Gift (MV 3)
+        - Lotus Ring (MV 3)
+        - Loxodon Warhammer (MV 3)
+        - Secret Rendezvous (MV 3)
+        - Ajani's Chosen (MV 4)
+        - Archon of Sun's Grace (MV 4)
+        - Armored Skyhunter (MV 4)
+        - Flare of Fortitude (MV 4)
+        - Hammer of Nazahn (MV 4)
+        - Herald of Amity (MV 4)
+        - Mangara, the Diplomat (MV 4)
+        - Shatter the Sky (MV 4)
+        - Solemn Simulacrum (MV 4)
+        - Yuriko, Blade of the Mighty (MV 4)
+        - Gilded Lotus (MV 5)
+        - Promise of Loyalty (MV 5)
+        - Winds of Rath (MV 5)
+        - Zuko's Exile (MV 5)
+        - Kozilek, the Great Distortion (MV 10)
+  PASS  curve       avg MV 2.94; commander sets no cost threshold
+  PASS  wincons     8 win condition(s)/closer(s)
+  PASS  locks       2 locked card(s) present and intact

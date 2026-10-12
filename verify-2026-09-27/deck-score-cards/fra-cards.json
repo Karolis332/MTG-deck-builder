@@ -1,0 +1,2234 @@
+[
+{
+"name": "Academic Ascent",
+"set": "fra",
+"oracle_id": "406e853b-713f-4c89-9efb-aca74a11183f",
+"type_line": "Instant"
+},
+{
+"name": "Aerid Konstrari",
+"set": "fra",
+"oracle_id": "172a8f58-c420-4497-b962-c5853f923667",
+"type_line": "Legendary Creature \u2014 Elder Sphinx"
+},
+{
+"name": "Afterthought Sentry",
+"set": "fra",
+"oracle_id": "f0c533a2-751a-4c5a-8cec-b83da3c8c62f",
+"type_line": "Artifact Creature \u2014 Gargoyle"
+},
+{
+"name": "Ajani Resolute",
+"set": "fra",
+"oracle_id": "0d60c095-4c6c-4618-8ef3-508f3d454efa",
+"type_line": "Legendary Planeswalker \u2014 Ajani"
+},
+{
+"name": "Ajani's Anguish",
+"set": "fra",
+"oracle_id": "4a37f4a0-2869-4f81-b51b-4c3e7e0e0671",
+"type_line": "Enchantment"
+},
+{
+"name": "Ajani Unrelenting",
+"set": "fra",
+"oracle_id": "71620e92-45a4-49cb-94d5-348013ecf886",
+"type_line": "Legendary Planeswalker \u2014 Ajani"
+},
+{
+"name": "Akroma, Angel of Fury",
+"set": "frc",
+"oracle_id": "2b80faaf-92fd-4fa0-a3f6-8bb263e7ff1d",
+"type_line": "Legendary Creature \u2014 Angel"
+},
+{
+"name": "Apex Witchstalker",
+"set": "fra",
+"oracle_id": "253d0cf7-65d3-4f13-aaf2-aae5bb60ac46",
+"type_line": "Creature \u2014 Wolf"
+},
+{
+"name": "Arcane Amphisbaena",
+"set": "fra",
+"oracle_id": "5c151e3b-fcf2-4adb-a60b-9eff0c360705",
+"type_line": "Creature \u2014 Snake"
+},
+{
+"name": "Arcane Signet",
+"set": "frc",
+"oracle_id": "0bc7f093-bef0-4f1a-852c-4b75ebf54838",
+"type_line": "Artifact"
+},
+{
+"name": "Archfiend of Despair",
+"set": "frc",
+"oracle_id": "9c36760b-57c5-488b-afc9-ef141942c6ab",
+"type_line": "Creature \u2014 Demon"
+},
+{
+"name": "Archive Arbiter",
+"set": "fra",
+"oracle_id": "36cb3d18-019c-464d-b591-8c87e1b81f31",
+"type_line": "Artifact Creature \u2014 Sphinx"
+},
+{
+"name": "Archon of Cruelty",
+"set": "frc",
+"oracle_id": "aa1a6646-c1e6-4bff-9092-43ee3e137914",
+"type_line": "Creature \u2014 Archon"
+},
+{
+"name": "Arni, Humble Scribe",
+"set": "fra",
+"oracle_id": "a680d1ab-99f2-43d0-b289-5fdba4083d03",
+"type_line": "Legendary Creature \u2014 Human Wizard"
+},
+{
+"name": "Arni, Renowned Champion",
+"set": "fra",
+"oracle_id": "1a929c4f-ae1f-44d9-a0a7-2ca2dc928dee",
+"type_line": "Legendary Creature \u2014 Human Berserker"
+},
+{
+"name": "Artifist Acumen",
+"set": "fra",
+"oracle_id": "129b41cf-8327-42f0-b186-1111b42c08ab",
+"type_line": "Sorcery"
+},
+{
+"name": "Avacyn, Angel of Horror",
+"set": "frc",
+"oracle_id": "4af61d45-7114-4eb4-a905-9e03caf87454",
+"type_line": "Legendary Creature \u2014 Angel"
+},
+{
+"name": "Avatar of Burgeoning Echoes",
+"set": "fra",
+"oracle_id": "08e8a63c-9fcc-48cf-a9af-15cbaeec943f",
+"type_line": "Creature \u2014 Avatar"
+},
+{
+"name": "Awaken the Inferno",
+"set": "fra",
+"oracle_id": "e729fce5-a1cf-4e95-9fd5-fccf4f704d31",
+"type_line": "Sorcery"
+},
+{
+"name": "Azorius Signet",
+"set": "frc",
+"oracle_id": "e018773f-95b3-49a3-9674-6f04ddef2092",
+"type_line": "Artifact"
+},
+{
+"name": "Battlefield Forge",
+"set": "frc",
+"oracle_id": "6b75b94e-83b7-457e-ac41-7ca90b5a59aa",
+"type_line": "Land"
+},
+{
+"name": "Bestial Incursion",
+"set": "fra",
+"oracle_id": "bc00f29a-e9d2-4b86-bb22-33b686ac4365",
+"type_line": "Sorcery"
+},
+{
+"name": "Blazing Crescendo",
+"set": "fra",
+"oracle_id": "6344c96a-efa5-4125-8219-d333228391cf",
+"type_line": "Instant"
+},
+{
+"name": "Blessed Ghoul",
+"set": "fra",
+"oracle_id": "fe99d90e-4809-4310-a3f7-ceb540511d55",
+"type_line": "Creature \u2014 Zombie Cleric"
+},
+{
+"name": "Bloodline Recollector // Ancestral Craving",
+"set": "fra",
+"oracle_id": "c8e9a7e1-28ae-40e3-8715-1bb0aa2057c7",
+"type_line": "Creature \u2014 Vampire Warlock // Instant"
+},
+{
+"name": "Bloombrute",
+"set": "fra",
+"oracle_id": "b7040175-7411-43a8-9b46-dba1d7c2135d",
+"type_line": "Creature \u2014 Plant Elemental"
+},
+{
+"name": "Blossom-Blessed Angel // Seed Suture",
+"set": "fra",
+"oracle_id": "cd61c26b-8d3c-4730-92f2-0d94d961bafd",
+"type_line": "Creature \u2014 Angel Cleric // Sorcery"
+},
+{
+"name": "Brainstorm",
+"set": "frc",
+"oracle_id": "36cd2364-d113-47d1-b2c4-b088d9eb88dd",
+"type_line": "Instant"
+},
+{
+"name": "Brainsurge",
+"set": "frc",
+"oracle_id": "46c727cb-1f47-4775-8af4-0230ef53966b",
+"type_line": "Instant"
+},
+{
+"name": "Break Under Pressure",
+"set": "fra",
+"oracle_id": "8dd23c50-cc84-4064-89cd-8d52fbfbd4ab",
+"type_line": "Instant"
+},
+{
+"name": "Budding Insurgent",
+"set": "fra",
+"oracle_id": "723669e0-4a04-45ec-8c76-b1a369aa6892",
+"type_line": "Creature \u2014 Dryad Scout"
+},
+{
+"name": "Campus Crier",
+"set": "fra",
+"oracle_id": "c1a9d60f-a469-48f9-8f1c-3ca5ae86bd64",
+"type_line": "Creature \u2014 Human Advisor"
+},
+{
+"name": "Carnivorous Cultivator // Enroot",
+"set": "fra",
+"oracle_id": "db655c5a-06f6-42bc-8180-d9ca1c1d939a",
+"type_line": "Creature \u2014 Elf Warlock // Sorcery"
+},
+{
+"name": "Cast Away Doubt",
+"set": "fra",
+"oracle_id": "bcf29dd7-6d5a-4139-958e-7c59434c0770",
+"type_line": "Sorcery"
+},
+{
+"name": "Caves of Koilos",
+"set": "frc",
+"oracle_id": "33de01e9-ce5a-42d4-afcb-343cd54a6d80",
+"type_line": "Land"
+},
+{
+"name": "Chandra, Chill of Compliance",
+"set": "fra",
+"oracle_id": "c3dfa1e2-6785-49a0-a194-fb842a8eb63c",
+"type_line": "Legendary Planeswalker \u2014 Chandra"
+},
+{
+"name": "Chandra's Emberling",
+"set": "fra",
+"oracle_id": "d3576617-7867-4c3d-aa31-d6742483465b",
+"type_line": "Creature \u2014 Gremlin Elemental"
+},
+{
+"name": "Chandra, Torch of Defiance",
+"set": "fra",
+"oracle_id": "12cc800c-c7be-4811-8207-fd01a99cc892",
+"type_line": "Legendary Planeswalker \u2014 Chandra"
+},
+{
+"name": "Charge the Sanctum",
+"set": "fra",
+"oracle_id": "9d835137-584c-46bd-952e-4b2812bba1a3",
+"type_line": "Instant"
+},
+{
+"name": "Chromatic Lantern",
+"set": "frc",
+"oracle_id": "539f5396-d99a-417d-a84c-dff7930b5900",
+"type_line": "Artifact"
+},
+{
+"name": "Clash of Elements",
+"set": "fra",
+"oracle_id": "78304a06-4c9a-4cdf-b67f-067d88762381",
+"type_line": "Instant"
+},
+{
+"name": "Clifftop Retreat",
+"set": "frc",
+"oracle_id": "d7faa3c8-46cf-46b2-bfa4-89000307cf18",
+"type_line": "Land"
+},
+{
+"name": "Codie, Ravenous Codex",
+"set": "fra",
+"oracle_id": "a17e414c-8de0-47fd-bcbc-540c7fec7642",
+"type_line": "Legendary Artifact Creature \u2014 Book Construct"
+},
+{
+"name": "Command the Stage",
+"set": "fra",
+"oracle_id": "13bfc51f-d079-40ef-a4ba-47d06d3150a3",
+"type_line": "Sorcery"
+},
+{
+"name": "Command Tower",
+"set": "frc",
+"oracle_id": "0895c9b7-ae7d-4bb3-af17-3b75deb50a25",
+"type_line": "Land"
+},
+{
+"name": "Compel Brutality",
+"set": "fra",
+"oracle_id": "3a9059ac-c595-4e71-b704-b04d2d47db70",
+"type_line": "Instant"
+},
+{
+"name": "Contaminated Landscape",
+"set": "frc",
+"oracle_id": "28196fd9-00c9-4cd0-b603-0eec8511ec79",
+"type_line": "Land"
+},
+{
+"name": "Countersculpt",
+"set": "fra",
+"oracle_id": "fc3353e9-fe24-4ca7-bff8-9da767f2903a",
+"type_line": "Instant"
+},
+{
+"name": "Craftwork Crusher",
+"set": "fra",
+"oracle_id": "d25284b9-50e4-4dcb-9aaf-6f6478c4a90a",
+"type_line": "Artifact Creature \u2014 Boar Construct"
+},
+{
+"name": "Craterclaw Colossus",
+"set": "fra",
+"oracle_id": "71355b51-e70e-47b0-8460-933af3567141",
+"type_line": "Artifact Creature \u2014 Beast Construct"
+},
+{
+"name": "Cruel Calculations",
+"set": "fra",
+"oracle_id": "69b96fe5-9733-4b43-bd66-075742e142d9",
+"type_line": "Sorcery"
+},
+{
+"name": "Cryotheory Adept",
+"set": "fra",
+"oracle_id": "a9b3ee21-1af1-4e7e-8e48-d7c90d056f5c",
+"type_line": "Creature \u2014 Human Wizard"
+},
+{
+"name": "Currency Converter",
+"set": "frc",
+"oracle_id": "981298e6-ddee-49c0-9377-f47f019b4138",
+"type_line": "Artifact"
+},
+{
+"name": "Cursed Mirror",
+"set": "frc",
+"oracle_id": "4d67e2a7-4aa7-44cc-853b-500d7aac046d",
+"type_line": "Artifact"
+},
+{
+"name": "Curse-Marred Demon",
+"set": "fra",
+"oracle_id": "f30a084c-5705-40f5-8e0d-2083d33973c7",
+"type_line": "Creature \u2014 Demon"
+},
+{
+"name": "Dack Fayden, Helping Hand",
+"set": "frc",
+"oracle_id": "3b21abb0-9a58-4e62-9650-4b04ce2bfb12",
+"type_line": "Legendary Creature \u2014 Human Advisor"
+},
+{
+"name": "Danitha, Spear of Agony",
+"set": "fra",
+"oracle_id": "4b5c7f11-75f2-4bad-86cd-f0232861f569",
+"type_line": "Legendary Creature \u2014 Human Knight"
+},
+{
+"name": "Danitha, Sword of Hope",
+"set": "fra",
+"oracle_id": "f7b754d3-9863-420d-895d-00e70b8b078a",
+"type_line": "Legendary Creature \u2014 Human Knight"
+},
+{
+"name": "Darklight Phoenix",
+"set": "fra",
+"oracle_id": "e4b51c2d-7e56-435b-89d6-85e33df65879",
+"type_line": "Creature \u2014 Phoenix"
+},
+{
+"name": "Dark Matter Manipulator",
+"set": "fra",
+"oracle_id": "6a3862f0-8dfc-4ac9-8eb9-faefcad685d4",
+"type_line": "Creature \u2014 Human Warlock"
+},
+{
+"name": "Darksteel Angel",
+"set": "frc",
+"oracle_id": "d0259f7d-9bd7-4722-8fb9-439768308516",
+"type_line": "Artifact Creature \u2014 Angel"
+},
+{
+"name": "Dedicated Commons",
+"set": "fra",
+"oracle_id": "d4e0749a-e179-4c19-8536-bf8f1a198549",
+"type_line": "Land"
+},
+{
+"name": "Denzilore Fatehold",
+"set": "fra",
+"oracle_id": "0f8de7f0-c61d-415d-b4db-4959374343da",
+"type_line": "Legendary Creature \u2014 Elder Sphinx"
+},
+{
+"name": "Deserted Beach",
+"set": "fra",
+"oracle_id": "f0ec8681-da50-466b-8cdd-1dc710deccd9",
+"type_line": "Land"
+},
+{
+"name": "Despark",
+"set": "frc",
+"oracle_id": "bd16434d-55ea-4c5a-a9ef-752971a4af16",
+"type_line": "Instant"
+},
+{
+"name": "Desperate Futurescribe",
+"set": "fra",
+"oracle_id": "83c12f50-e5a1-479d-afab-edb0b40412f2",
+"type_line": "Creature \u2014 Kor Scout"
+},
+{
+"name": "Dimir Signet",
+"set": "frc",
+"oracle_id": "7d881c57-0bd9-4c57-aa4a-b10808b86143",
+"type_line": "Artifact"
+},
+{
+"name": "Diviner of Victory // Unwind History",
+"set": "fra",
+"oracle_id": "e7b78acd-5288-4528-97a8-a5b43de90bf5",
+"type_line": "Creature \u2014 Dwarf Wizard // Sorcery"
+},
+{
+"name": "Divining Duelist",
+"set": "fra",
+"oracle_id": "d0ce03fa-2284-4217-85b2-4db6b8a88c94",
+"type_line": "Creature \u2014 Merfolk Wizard"
+},
+{
+"name": "Draconic Visitor",
+"set": "fra",
+"oracle_id": "6745e850-68f6-480b-a1e0-e06180dde169",
+"type_line": "Creature \u2014 Dragon"
+},
+{
+"name": "Dreadhorde Invasion",
+"set": "frc",
+"oracle_id": "01deabbb-af6a-4998-99a7-35b7cfa9ef77",
+"type_line": "Enchantment"
+},
+{
+"name": "Drowned Catacomb",
+"set": "frc",
+"oracle_id": "819fc966-434e-470f-91e9-a38df974ad17",
+"type_line": "Land"
+},
+{
+"name": "Eardrum Rattler",
+"set": "fra",
+"oracle_id": "25151d18-8e73-4b0d-a8d2-e5fa291e5729",
+"type_line": "Creature \u2014 Human Bard"
+},
+{
+"name": "Edgar, Ancient Bloodlord",
+"set": "fra",
+"oracle_id": "cab2bc93-f38b-4301-ac42-05765615586b",
+"type_line": "Legendary Creature \u2014 Vampire Noble"
+},
+{
+"name": "Edgar, Moonlit Sovereign",
+"set": "fra",
+"oracle_id": "1917bda6-c0e1-4c80-8009-74c28cf6b8e9",
+"type_line": "Legendary Creature \u2014 Werewolf Noble"
+},
+{
+"name": "Elspeth, Sun's Champion",
+"set": "frc",
+"oracle_id": "05e6b243-48a6-4a42-bc5f-413441de9c33",
+"type_line": "Legendary Planeswalker \u2014 Elspeth"
+},
+{
+"name": "Emergency Phytomedic // Seed Suture",
+"set": "fra",
+"oracle_id": "7737ccdc-49f2-463e-8ffd-43ab98d11f45",
+"type_line": "Creature \u2014 Dryad Cleric // Sorcery"
+},
+{
+"name": "Emrakul, the Exigent Doom",
+"set": "fra",
+"oracle_id": "4421ab7d-6d9b-4edd-b5a0-53a8ed84da6f",
+"type_line": "Legendary Creature \u2014 Eldrazi"
+},
+{
+"name": "Enlightened Confidant",
+"set": "fra",
+"oracle_id": "a139eb7f-3853-490c-a839-35d0e5aed7b5",
+"type_line": "Creature \u2014 Kor Cleric"
+},
+{
+"name": "Entrust the Spark",
+"set": "fra",
+"oracle_id": "b796ecc8-a2e8-4ab9-8736-6825b650434d",
+"type_line": "Sorcery"
+},
+{
+"name": "Essence Burn",
+"set": "fra",
+"oracle_id": "f1216f36-00fd-4d03-85c1-f4910a02d4d0",
+"type_line": "Instant"
+},
+{
+"name": "Exotic Orchard",
+"set": "frc",
+"oracle_id": "27b047e3-0d41-45e2-98e9-9391d7923a1e",
+"type_line": "Land"
+},
+{
+"name": "Extended Absence",
+"set": "fra",
+"oracle_id": "973fb1e3-83d5-4763-bea8-799b426a8848",
+"type_line": "Instant"
+},
+{
+"name": "Extrapolate the Impossible",
+"set": "fra",
+"oracle_id": "1f47c869-f4a9-43b0-aec0-8da4e3a3fec5",
+"type_line": "Sorcery"
+},
+{
+"name": "Eye of Jace",
+"set": "fra",
+"oracle_id": "c8f802ad-4621-4f71-b52d-fbc55853dc88",
+"type_line": "Artifact"
+},
+{
+"name": "Fabled Passage",
+"set": "frc",
+"oracle_id": "0c85b8f7-0bd0-4680-9ec5-d4b110460a54",
+"type_line": "Land"
+},
+{
+"name": "Face Yourself",
+"set": "fra",
+"oracle_id": "3c0fe71c-bee1-41d3-aeb5-1723028eedde",
+"type_line": "Sorcery"
+},
+{
+"name": "Fact or Fiction",
+"set": "frc",
+"oracle_id": "437b2dab-15e0-4b9a-a204-58622d37a3b3",
+"type_line": "Instant"
+},
+{
+"name": "Fatehold Annex",
+"set": "fra",
+"oracle_id": "d35876a3-e891-43d3-a50c-69e8469497e0",
+"type_line": "Land"
+},
+{
+"name": "Fatehold Charm",
+"set": "fra",
+"oracle_id": "313aee0e-4090-4589-b323-a4edbda21c68",
+"type_line": "Instant"
+},
+{
+"name": "Fatehold Chronologist // Peer Review",
+"set": "fra",
+"oracle_id": "1063822f-47d3-42e9-8a21-f62b12609fe1",
+"type_line": "Creature \u2014 Bird Wizard // Sorcery"
+},
+{
+"name": "Fateshaper Aspirant",
+"set": "fra",
+"oracle_id": "bb3996b6-b68d-4ea1-b3dd-1600f8da2f1c",
+"type_line": "Creature \u2014 Rhino Cleric"
+},
+{
+"name": "Fblthp, Impossibly Lost",
+"set": "fra",
+"oracle_id": "17e7212e-69d8-4014-af98-447baed2cae7",
+"type_line": "Legendary Creature \u2014 Homunculus"
+},
+{
+"name": "Fblthp, Knows the Way",
+"set": "fra",
+"oracle_id": "48b891b6-3175-4864-bb98-af131098c557",
+"type_line": "Legendary Creature \u2014 Homunculus Scout"
+},
+{
+"name": "Fellwar Stone",
+"set": "frc",
+"oracle_id": "95560508-7ac9-4be9-8a3f-3c7d5b52807b",
+"type_line": "Artifact"
+},
+{
+"name": "Ferocity of the Hunt",
+"set": "fra",
+"oracle_id": "747a1b36-eb4f-44e6-9e5a-bb1a0259a471",
+"type_line": "Enchantment \u2014 Aura"
+},
+{
+"name": "Fetid Heath",
+"set": "frc",
+"oracle_id": "42bf259d-4bb9-49c3-b4ec-223dca62f4d6",
+"type_line": "Land"
+},
+{
+"name": "Flawless Maneuver",
+"set": "frc",
+"oracle_id": "4e183439-17d2-47ff-9d99-5e22821d91e3",
+"type_line": "Instant"
+},
+{
+"name": "Flickering Hound",
+"set": "fra",
+"oracle_id": "162421d2-8761-437f-bed9-578b61c96f1f",
+"type_line": "Creature \u2014 Dog"
+},
+{
+"name": "Flourishing Grapple",
+"set": "fra",
+"oracle_id": "6b4f1569-2025-46a8-89ba-79859208b04e",
+"type_line": "Instant"
+},
+{
+"name": "Forest",
+"set": "fra",
+"oracle_id": "b34bb2dc-c1af-4d77-b0b3-a0fb342a5fc6",
+"type_line": "Basic Land \u2014 Forest"
+},
+{
+"name": "Formidable Commons",
+"set": "fra",
+"oracle_id": "3e51c060-1e86-4a0e-8fee-8b7273161468",
+"type_line": "Land"
+},
+{
+"name": "Frostbite Pyromental",
+"set": "fra",
+"oracle_id": "9a104f73-597b-49e3-8088-13db31f61900",
+"type_line": "Creature \u2014 Elemental"
+},
+{
+"name": "Fulminous Forte",
+"set": "fra",
+"oracle_id": "2a29d028-d1a4-413f-9c01-d6842294420a",
+"type_line": "Instant"
+},
+{
+"name": "Gallia, the Merrymaker",
+"set": "fra",
+"oracle_id": "87f39199-3e4b-44fa-8406-62019eb43c10",
+"type_line": "Legendary Creature \u2014 Satyr"
+},
+{
+"name": "Gallia, Tragic Host",
+"set": "fra",
+"oracle_id": "58285b70-0d13-4723-b5a4-91fb6f9ccf03",
+"type_line": "Legendary Creature \u2014 Zombie Satyr"
+},
+{
+"name": "Gardenize",
+"set": "fra",
+"oracle_id": "e74a2a4c-ca3c-49e8-9b0f-b4d1bb91fb54",
+"type_line": "Enchantment"
+},
+{
+"name": "Garruk, Curse Breaker",
+"set": "fra",
+"oracle_id": "184d4672-05a9-4182-8b3f-3561fb33ed62",
+"type_line": "Legendary Planeswalker \u2014 Garruk"
+},
+{
+"name": "Garruk, Veiled Butcher",
+"set": "fra",
+"oracle_id": "4a6972fe-348a-4a19-a1d0-bdf8f1f9c792",
+"type_line": "Legendary Planeswalker \u2014 Garruk"
+},
+{
+"name": "Geist of Saint Thalia",
+"set": "fra",
+"oracle_id": "ef32a4a9-14e2-4738-b4c2-53ce5e1d2a53",
+"type_line": "Legendary Creature \u2014 Spirit Cleric"
+},
+{
+"name": "Generous Revival",
+"set": "fra",
+"oracle_id": "f8601f5f-0f7c-4689-9d15-137f1e82c49c",
+"type_line": "Sorcery"
+},
+{
+"name": "Germinate Recruits",
+"set": "fra",
+"oracle_id": "2c3a1313-a66e-4317-9732-e4ff9288b0db",
+"type_line": "Instant"
+},
+{
+"name": "Ghalta the Immovable",
+"set": "fra",
+"oracle_id": "0d496c6e-8f7b-420f-9197-dacd2feb528f",
+"type_line": "Legendary Creature \u2014 Elder Dinosaur"
+},
+{
+"name": "Ghalta the Unstoppable",
+"set": "fra",
+"oracle_id": "8e5ea773-a60b-4502-9db5-ce93fa61cc89",
+"type_line": "Legendary Creature \u2014 Elder Dinosaur"
+},
+{
+"name": "Gideon's Memorial",
+"set": "fra",
+"oracle_id": "c8f08704-7330-4fa9-b456-2e96aa252a2c",
+"type_line": "Legendary Artifact"
+},
+{
+"name": "Gideon the Oathless",
+"set": "fra",
+"oracle_id": "7afa530f-ea51-4bee-af3b-59b83ea5cb25",
+"type_line": "Legendary Creature \u2014 Human Mercenary"
+},
+{
+"name": "Ginger, Queen of Sweets",
+"set": "frc",
+"oracle_id": "5ea93956-085d-409b-bd95-dd669fa69eeb",
+"type_line": "Legendary Artifact Creature \u2014 Food Noble"
+},
+{
+"name": "Glacial Fortress",
+"set": "frc",
+"oracle_id": "027dd013-baa7-4111-b3c9-f4d1414e9c45",
+"type_line": "Land"
+},
+{
+"name": "Graft Surgeon",
+"set": "fra",
+"oracle_id": "fe7938ce-6289-4bf8-a8f5-85ecccbb7f86",
+"type_line": "Creature \u2014 Human Cleric"
+},
+{
+"name": "Grand Crescendo",
+"set": "frc",
+"oracle_id": "dc600c06-8239-409e-b53d-20f813a3f5e7",
+"type_line": "Instant"
+},
+{
+"name": "Greenhouse Propagator",
+"set": "fra",
+"oracle_id": "b6b77cb9-49a5-4d1a-ae2d-02ae176dc1fa",
+"type_line": "Creature \u2014 Cat Druid"
+},
+{
+"name": "Grim Repriser",
+"set": "fra",
+"oracle_id": "e853e2fb-f90d-4934-aa70-c8d3cdf12e56",
+"type_line": "Creature \u2014 Zombie Bard"
+},
+{
+"name": "Guiding Hydra",
+"set": "fra",
+"oracle_id": "24f1445c-16c9-45c0-be56-0266e6c78cdb",
+"type_line": "Creature \u2014 Hydra Horror"
+},
+{
+"name": "Hall of Echoes",
+"set": "fra",
+"oracle_id": "dc0a51d4-5b7e-4987-b1fe-349fd118a625",
+"type_line": "Land"
+},
+{
+"name": "Hallway Heckler // Vicious Verse",
+"set": "fra",
+"oracle_id": "d1af8018-35b5-4b6f-93c8-1ed6bd8c92b1",
+"type_line": "Creature \u2014 Elemental Sorcerer // Sorcery"
+},
+{
+"name": "Hapatra, the Desert Fang",
+"set": "fra",
+"oracle_id": "6894345f-52a6-46e4-b278-0783087daee1",
+"type_line": "Legendary Creature \u2014 Human Cleric"
+},
+{
+"name": "Hapatra, the Desert Frost",
+"set": "fra",
+"oracle_id": "ac0f161a-e5ec-4a95-9f37-305bdf1ac900",
+"type_line": "Legendary Creature \u2014 Human Wizard"
+},
+{
+"name": "Haunted Ridge",
+"set": "fra",
+"oracle_id": "e2a37967-4212-4553-9f77-bcb613405807",
+"type_line": "Land"
+},
+{
+"name": "Heartstring Puller",
+"set": "fra",
+"oracle_id": "2cdcf65c-03d2-416f-8a3f-0322f75e8595",
+"type_line": "Creature \u2014 Elf Sorcerer"
+},
+{
+"name": "Heartwood Crafter // Soul Tether",
+"set": "fra",
+"oracle_id": "c8b3a070-408e-4a8f-8597-6476eeec0a5f",
+"type_line": "Creature \u2014 Elf Artificer // Sorcery"
+},
+{
+"name": "Hexhaven Battalion",
+"set": "fra",
+"oracle_id": "158823ed-6015-437a-82b0-8dadb1e9aab2",
+"type_line": "Sorcery"
+},
+{
+"name": "Hexhaven Dueling Arena",
+"set": "fra",
+"oracle_id": "2cc075da-f79b-4050-84eb-2c1b9a30260c",
+"type_line": "Land"
+},
+{
+"name": "Hexhaven Invigorator",
+"set": "fra",
+"oracle_id": "12d617b1-c95b-4b1c-a586-ccfdf5898b03",
+"type_line": "Creature \u2014 Chimera Horror"
+},
+{
+"name": "Hungering Puppetbeast",
+"set": "fra",
+"oracle_id": "690ae865-87bd-46b2-8e65-c53bd80c1a18",
+"type_line": "Artifact Creature \u2014 Beast Construct"
+},
+{
+"name": "Hunter's Axe",
+"set": "fra",
+"oracle_id": "d7d59fef-1401-464b-b1bb-ee5da92cde51",
+"type_line": "Artifact \u2014 Equipment"
+},
+{
+"name": "Icy Reception",
+"set": "fra",
+"oracle_id": "612c7807-be70-4e2f-afd2-3d3c03eddbbe",
+"type_line": "Instant"
+},
+{
+"name": "Identity Echo",
+"set": "fra",
+"oracle_id": "4dbf8c43-d7c5-4037-875e-6accd87aaf6f",
+"type_line": "Enchantment"
+},
+{
+"name": "Infinite Coursework",
+"set": "fra",
+"oracle_id": "666b34b5-a0c2-43e3-befd-7c3979313682",
+"type_line": "Enchantment \u2014 Aura"
+},
+{
+"name": "Ingris Stingerquill",
+"set": "fra",
+"oracle_id": "bda098cb-31ec-41a1-a9d7-122877cc69d2",
+"type_line": "Legendary Creature \u2014 Elder Sphinx"
+},
+{
+"name": "Innovative Commons",
+"set": "fra",
+"oracle_id": "6812e4d3-0034-4fc8-9ee9-520f76a0ea94",
+"type_line": "Land"
+},
+{
+"name": "Inspired Tethermage",
+"set": "fra",
+"oracle_id": "80c2784b-f27d-4a51-9380-171eb32b961d",
+"type_line": "Creature \u2014 Elf Warrior"
+},
+{
+"name": "Island",
+"set": "fra",
+"oracle_id": "b2c6aa39-2d2a-459c-a555-fb48ba993373",
+"type_line": "Basic Land \u2014 Island"
+},
+{
+"name": "Isolated Chapel",
+"set": "frc",
+"oracle_id": "7e5d9efe-48a9-434b-bb09-056e0e09cc9a",
+"type_line": "Land"
+},
+{
+"name": "Izzet Signet",
+"set": "frc",
+"oracle_id": "2fda4fe7-8b0c-489c-a000-6d358e614e34",
+"type_line": "Artifact"
+},
+{
+"name": "Jace, Multiverse Architect",
+"set": "frc",
+"oracle_id": "3321c134-bf5b-4f63-8035-fca0bbdfa86b",
+"type_line": "Legendary Planeswalker \u2014 Jace"
+},
+{
+"name": "Jace, Reality Sculptor",
+"set": "fra",
+"oracle_id": "bf0e9e00-fba5-448a-9052-ae730aea4bf8",
+"type_line": "Legendary Planeswalker \u2014 Jace"
+},
+{
+"name": "Jace's Machinations",
+"set": "fra",
+"oracle_id": "89bd056d-8f5b-4d0e-b80a-58a984e21100",
+"type_line": "Instant"
+},
+{
+"name": "Jhoira, Weatherlight Corsair",
+"set": "frc",
+"oracle_id": "cf9b0bb5-d545-4efd-9255-39b10c2be0ee",
+"type_line": "Legendary Creature \u2014 Human Pirate"
+},
+{
+"name": "Jiang Yanggu, Alone",
+"set": "fra",
+"oracle_id": "fa8b3557-b35a-4a68-ab85-cf09683f3bc5",
+"type_line": "Legendary Creature \u2014 Human Berserker"
+},
+{
+"name": "Jiang Yanggu, Never Alone",
+"set": "fra",
+"oracle_id": "4ba661d7-1cb8-4fec-bfaa-5f2797235fcf",
+"type_line": "Legendary Creature \u2014 Human Druid"
+},
+{
+"name": "Karn, Argent Defender",
+"set": "fra",
+"oracle_id": "aecc621f-67da-41a7-9d47-05ded302ae35",
+"type_line": "Legendary Artifact Creature \u2014 Golem"
+},
+{
+"name": "Karn, Gilded Guardian",
+"set": "fra",
+"oracle_id": "20b90a18-ff62-4995-b0d6-fbef44dca357",
+"type_line": "Legendary Artifact Creature \u2014 Golem"
+},
+{
+"name": "Keeper of the Quiet Hour",
+"set": "fra",
+"oracle_id": "ecdfee75-15fd-41ea-89d4-4bfc1fa4d032",
+"type_line": "Artifact Creature \u2014 Chimera"
+},
+{
+"name": "Kher Keep",
+"set": "frc",
+"oracle_id": "79638767-fbc7-451a-b29f-d93f2ac6f102",
+"type_line": "Legendary Land"
+},
+{
+"name": "Kindred Judgment",
+"set": "fra",
+"oracle_id": "b5dce42a-a769-4d7d-b29e-8722f79d4092",
+"type_line": "Sorcery"
+},
+{
+"name": "Kiora of Fire and Ashes",
+"set": "fra",
+"oracle_id": "02b41d0e-82e7-4307-8cc4-8175ff78ea1f",
+"type_line": "Legendary Creature \u2014 Merfolk Noble"
+},
+{
+"name": "Kiora of Salt and Sand",
+"set": "fra",
+"oracle_id": "e70bb7f8-8098-49c5-929c-68f63cd821c5",
+"type_line": "Legendary Creature \u2014 Merfolk Noble"
+},
+{
+"name": "Konstrari Annex",
+"set": "fra",
+"oracle_id": "31ea4f3f-392a-4319-a95b-eb28790a80e6",
+"type_line": "Land"
+},
+{
+"name": "Konstrari Charm",
+"set": "fra",
+"oracle_id": "40961b23-b153-434a-aeb9-b9c2ff613dcb",
+"type_line": "Instant"
+},
+{
+"name": "Konstrari Improviser // Soul Tether",
+"set": "fra",
+"oracle_id": "bad2e3b2-ad47-4e17-b35e-0fcc13e82937",
+"type_line": "Creature \u2014 Human Artificer // Sorcery"
+},
+{
+"name": "Koth of the Homestead",
+"set": "fra",
+"oracle_id": "567aeb60-a441-41b1-98f4-54510d299317",
+"type_line": "Legendary Creature \u2014 Human Citizen"
+},
+{
+"name": "Koth, the Geomancer",
+"set": "fra",
+"oracle_id": "3b17da84-ae4d-4fc1-a327-85e54e6156c6",
+"type_line": "Legendary Creature \u2014 Human Warrior"
+},
+{
+"name": "Kwia Vigorbloom",
+"set": "fra",
+"oracle_id": "07a28621-e617-46b0-af3e-2efb03b5056a",
+"type_line": "Legendary Creature \u2014 Elder Sphinx"
+},
+{
+"name": "Last Gasp",
+"set": "fra",
+"oracle_id": "a82c3860-4dd6-4ffd-aa8f-ab8df687db6c",
+"type_line": "Instant"
+},
+{
+"name": "Lich's Relic",
+"set": "fra",
+"oracle_id": "0540eaca-0e03-4831-955a-192ae2b87d35",
+"type_line": "Artifact \u2014 Equipment"
+},
+{
+"name": "Liliana the Faultless",
+"set": "fra",
+"oracle_id": "22c2e66d-a2a1-46db-a70a-dff5ad5d6c14",
+"type_line": "Legendary Creature \u2014 Human Cleric"
+},
+{
+"name": "Liliana the Repentant",
+"set": "fra",
+"oracle_id": "5eb4403f-f199-4f75-a7c6-e76783f9b07d",
+"type_line": "Legendary Creature \u2014 Human Warlock"
+},
+{
+"name": "Lingering Souls",
+"set": "frc",
+"oracle_id": "0b8c3337-04dd-4798-8203-6d8b8cfb936b",
+"type_line": "Sorcery"
+},
+{
+"name": "Living Library",
+"set": "fra",
+"oracle_id": "81f022a7-fd19-4340-b8a0-6b11ab3e9d91",
+"type_line": "Artifact Creature \u2014 Book Illusion"
+},
+{
+"name": "Loot, the Anomaly",
+"set": "fra",
+"oracle_id": "e0142e7d-7b0b-4290-a56c-5fa950fdccf8",
+"type_line": "Legendary Creature \u2014 Beast Horror"
+},
+{
+"name": "Loot, the Nexus",
+"set": "fra",
+"oracle_id": "a99ce9db-9b7d-45a0-bee7-0875fc62ca48",
+"type_line": "Legendary Creature \u2014 Beast Noble"
+},
+{
+"name": "Loyal Tutor",
+"set": "fra",
+"oracle_id": "7e52f151-d1f6-4fcb-9b21-1baecae27da6",
+"type_line": "Instant"
+},
+{
+"name": "Lyra, Archangel of Dawn",
+"set": "fra",
+"oracle_id": "0fca3328-484f-4050-925e-91840710b5d6",
+"type_line": "Legendary Creature \u2014 Angel Knight"
+},
+{
+"name": "Lyra, Tolarian Archangel",
+"set": "fra",
+"oracle_id": "d9060fff-0b65-4b3d-930d-6e36315b802c",
+"type_line": "Legendary Creature \u2014 Angel Wizard"
+},
+{
+"name": "Mabel, Bitter Recluse",
+"set": "fra",
+"oracle_id": "36924990-8e3a-434e-bcd1-f03603cb350d",
+"type_line": "Legendary Creature \u2014 Mouse Warlock"
+},
+{
+"name": "Mabel, Valley Hero",
+"set": "fra",
+"oracle_id": "ab56f7cf-9538-45b5-a657-1e2ebef1e92b",
+"type_line": "Legendary Creature \u2014 Mouse Soldier"
+},
+{
+"name": "Martial Coup",
+"set": "frc",
+"oracle_id": "2b7c4dab-e432-4b34-b058-3cec5c0d72df",
+"type_line": "Sorcery"
+},
+{
+"name": "Marwyn, the Clearcutter",
+"set": "fra",
+"oracle_id": "aff4e43d-cafa-47de-8e39-011f9254a26a",
+"type_line": "Legendary Creature \u2014 Elf Warrior"
+},
+{
+"name": "Marwyn, the Preserver",
+"set": "fra",
+"oracle_id": "eb03f6c1-c94f-4f09-b2e9-a55ce5533653",
+"type_line": "Legendary Creature \u2014 Elf Druid"
+},
+{
+"name": "Massacre Girl, Most Wanted",
+"set": "fra",
+"oracle_id": "81f35914-73bf-429f-ba20-32e23ac30159",
+"type_line": "Legendary Creature \u2014 Human Assassin"
+},
+{
+"name": "Mass Polymorph",
+"set": "frc",
+"oracle_id": "b133129d-1ffb-4b78-9f5b-852d163cc9b7",
+"type_line": "Sorcery"
+},
+{
+"name": "Master of Barbs",
+"set": "fra",
+"oracle_id": "e8c36337-135c-460d-a1da-cc01743dda71",
+"type_line": "Creature \u2014 Lizard Bard"
+},
+{
+"name": "Medic's Kitesail",
+"set": "fra",
+"oracle_id": "eacfe895-5106-437c-b8c1-2ff03c107744",
+"type_line": "Artifact \u2014 Equipment"
+},
+{
+"name": "Memnarch, the Warden",
+"set": "frc",
+"oracle_id": "f2630b02-fb48-4167-8a47-8284f7d4c484",
+"type_line": "Legendary Artifact Creature \u2014 Wizard"
+},
+{
+"name": "Memory Trap",
+"set": "fra",
+"oracle_id": "70616a8c-9b6c-408e-8f3e-2c348ec136d8",
+"type_line": "Enchantment"
+},
+{
+"name": "Meticulous Commons",
+"set": "fra",
+"oracle_id": "7fdd471f-ec95-4aa7-8f8a-ad8946de5ab4",
+"type_line": "Land"
+},
+{
+"name": "Mind Meanderer",
+"set": "fra",
+"oracle_id": "18d1765b-3b60-4dda-93a6-d02a4e53f185",
+"type_line": "Creature \u2014 Bird Fish Illusion"
+},
+{
+"name": "Mindseeker Oculus",
+"set": "fra",
+"oracle_id": "aa9547b3-e4e4-4557-9dd1-3aa9a7cb9937",
+"type_line": "Creature \u2014 Homunculus"
+},
+{
+"name": "Mountain",
+"set": "fra",
+"oracle_id": "a3fb7228-e76b-4e96-a40e-20b5fed75685",
+"type_line": "Basic Land \u2014 Mountain"
+},
+{
+"name": "Multiply by Zero",
+"set": "fra",
+"oracle_id": "d940611f-f84d-43fa-82d6-eecb4fb54164",
+"type_line": "Instant"
+},
+{
+"name": "Murmuring Volume",
+"set": "fra",
+"oracle_id": "4baa7847-dfcc-4aa3-aa64-2deeaa3f013b",
+"type_line": "Artifact \u2014 Book"
+},
+{
+"name": "Mystic Gate",
+"set": "frc",
+"oracle_id": "e9f5feb2-2c1a-46ce-885a-4f378d7d10af",
+"type_line": "Land"
+},
+{
+"name": "Nissa, Leyline Tamer",
+"set": "frc",
+"oracle_id": "6067b8d0-5b00-402c-967d-e35a1304fafc",
+"type_line": "Legendary Creature \u2014 Elf Wizard"
+},
+{
+"name": "Niv-Mizzet, Ghost Counsel",
+"set": "frc",
+"oracle_id": "a5350327-e84c-44b6-8359-87882e521048",
+"type_line": "Legendary Creature \u2014 Spirit Dragon"
+},
+{
+"name": "No Admittance",
+"set": "fra",
+"oracle_id": "d53ae01b-87e1-48e1-9fc3-23a734ce6622",
+"type_line": "Sorcery"
+},
+{
+"name": "Null Summoner",
+"set": "fra",
+"oracle_id": "56c412be-daab-4461-931f-1e2ea8ecd75d",
+"type_line": "Creature \u2014 Human Warlock"
+},
+{
+"name": "Ob Nixilis, the Ascended",
+"set": "frc",
+"oracle_id": "3a49b518-61c8-4dea-8008-c5edf8384581",
+"type_line": "Legendary Creature \u2014 Angel"
+},
+{
+"name": "Occult Epiphany",
+"set": "frc",
+"oracle_id": "6df1c314-b97b-4bbc-8b7e-a07785347a49",
+"type_line": "Instant"
+},
+{
+"name": "Omnath, Locus of the Void",
+"set": "frc",
+"oracle_id": "579225b5-50e2-4891-8871-0bf6dbc07e33",
+"type_line": "Legendary Creature \u2014 Elemental"
+},
+{
+"name": "Omnipresence",
+"set": "fra",
+"oracle_id": "8dad1fa8-3533-4e3c-b9b3-fcd57b20a33d",
+"type_line": "Enchantment"
+},
+{
+"name": "Overgrown Farmland",
+"set": "fra",
+"oracle_id": "709d2f10-1585-48c3-9058-ddd5f62f0452",
+"type_line": "Land"
+},
+{
+"name": "Overlord of the Mistmoors",
+"set": "frc",
+"oracle_id": "7e64b1dc-a238-4bff-98ff-2bea44340568",
+"type_line": "Enchantment Creature \u2014 Avatar Horror"
+},
+{
+"name": "Overwrite the Multiverse",
+"set": "fra",
+"oracle_id": "d0372cde-bf30-4a1b-93bb-9ff4ac1c116d",
+"type_line": "Sorcery"
+},
+{
+"name": "Paradox Shaper // Omit Variables",
+"set": "fra",
+"oracle_id": "511951ed-fbff-4e44-9429-27f237496672",
+"type_line": "Creature \u2014 Octopus Wizard // Sorcery"
+},
+{
+"name": "Path of Ancestry",
+"set": "frc",
+"oracle_id": "b473e293-59e3-4e04-acf2-622604aeb25f",
+"type_line": "Land"
+},
+{
+"name": "Path to Exile",
+"set": "frc",
+"oracle_id": "d683d985-9888-4d21-8b5f-69e69ce4a03b",
+"type_line": "Instant"
+},
+{
+"name": "Perfected Theory",
+"set": "fra",
+"oracle_id": "d824a319-fa74-42e4-9cbe-dba1576d6bad",
+"type_line": "Instant"
+},
+{
+"name": "Perilous Landscape",
+"set": "frc",
+"oracle_id": "e2b472dd-047d-47eb-9ebb-df6aa4b52dd4",
+"type_line": "Land"
+},
+{
+"name": "Pia, Aether Ascetic",
+"set": "fra",
+"oracle_id": "6519dc16-4960-4220-aaa8-7e4279743714",
+"type_line": "Legendary Creature \u2014 Human Druid"
+},
+{
+"name": "Pia, Determined Rebuilder",
+"set": "fra",
+"oracle_id": "a49c0c64-ea87-44f4-9acf-e7181962aeb2",
+"type_line": "Legendary Creature \u2014 Human Artificer"
+},
+{
+"name": "Plains",
+"set": "fra",
+"oracle_id": "bc71ebf6-2056-41f7-be35-b2e5c34afa99",
+"type_line": "Basic Land \u2014 Plains"
+},
+{
+"name": "Plan for All Outcomes",
+"set": "fra",
+"oracle_id": "7fd2cac5-cd29-4a47-9e89-9c6be39a0b67",
+"type_line": "Enchantment"
+},
+{
+"name": "Pompous Battlemage // Improvised Act",
+"set": "fra",
+"oracle_id": "33e3793c-098f-4897-88f3-9f9ce9081e0f",
+"type_line": "Creature \u2014 Goblin Sorcerer // Sorcery"
+},
+{
+"name": "Prairie Stream",
+"set": "frc",
+"oracle_id": "5330e24a-8568-446e-840a-594cd08bd1bc",
+"type_line": "Land \u2014 Plains Island"
+},
+{
+"name": "Precise Redaction",
+"set": "fra",
+"oracle_id": "c251b676-0e98-4047-bed1-d72c83aa8da0",
+"type_line": "Instant"
+},
+{
+"name": "Predictive Preparations",
+"set": "fra",
+"oracle_id": "d06a5642-861b-4b0d-9ea5-07046b7e1d37",
+"type_line": "Sorcery"
+},
+{
+"name": "Primal Witchstalker",
+"set": "fra",
+"oracle_id": "c21fafaf-4510-4752-a501-606ae68e6699",
+"type_line": "Creature \u2014 Wolf"
+},
+{
+"name": "Proctor of Potential",
+"set": "fra",
+"oracle_id": "c612ba0a-5134-45fa-a762-f4621bda4f83",
+"type_line": "Creature \u2014 Human Cleric"
+},
+{
+"name": "Proft, Consulting Detective",
+"set": "fra",
+"oracle_id": "45473bdb-b96f-4213-a46d-b2dbdf6b5e56",
+"type_line": "Legendary Creature \u2014 Human Detective"
+},
+{
+"name": "Proft, Sinister Mastermind",
+"set": "fra",
+"oracle_id": "a350856c-87f2-4605-999f-4e26aa362a55",
+"type_line": "Legendary Creature \u2014 Human Rogue"
+},
+{
+"name": "Prophesied End",
+"set": "fra",
+"oracle_id": "45f4d057-5134-40a2-9590-ddba73a65582",
+"type_line": "Instant"
+},
+{
+"name": "Protege's Awakening",
+"set": "fra",
+"oracle_id": "07617648-6490-4719-acec-7705671f7e01",
+"type_line": "Sorcery"
+},
+{
+"name": "Proteus Staff",
+"set": "frc",
+"oracle_id": "97024e8e-dfde-4769-bc27-c3d6fad19e7c",
+"type_line": "Artifact"
+},
+{
+"name": "Prudent Fateseer // Peer Review",
+"set": "fra",
+"oracle_id": "63f67baa-3f37-41b8-9ee6-3c37f828917d",
+"type_line": "Creature \u2014 Dwarf Wizard // Sorcery"
+},
+{
+"name": "Puppet Crafting",
+"set": "fra",
+"oracle_id": "d13c111a-ebfc-48ac-b734-f203c7c29d21",
+"type_line": "Enchantment \u2014 Aura"
+},
+{
+"name": "Pyre Rhymer // Molten Tide",
+"set": "fra",
+"oracle_id": "8940f503-fc6d-4fae-be74-22c660cae1a7",
+"type_line": "Creature \u2014 Elemental Sorcerer // Instant"
+},
+{
+"name": "Radiant Summit",
+"set": "frc",
+"oracle_id": "5dd0cc44-4647-4857-ad3b-22494099d08a",
+"type_line": "Land \u2014 Mountain Plains"
+},
+{
+"name": "Rakdos Signet",
+"set": "frc",
+"oracle_id": "3adb7681-977f-4a32-9ec8-51481b958268",
+"type_line": "Artifact"
+},
+{
+"name": "Rampart Hunter",
+"set": "fra",
+"oracle_id": "0867755a-9fb9-42ad-897e-6206fbfbc1f8",
+"type_line": "Creature \u2014 Horror"
+},
+{
+"name": "Rank Rat",
+"set": "fra",
+"oracle_id": "64e7ef06-ba30-4b19-9d44-ca77944cc930",
+"type_line": "Creature \u2014 Zombie Rat"
+},
+{
+"name": "Recursive Recruitment",
+"set": "fra",
+"oracle_id": "b73e35b0-b8c9-471a-bdff-f7dc8f453d7a",
+"type_line": "Sorcery"
+},
+{
+"name": "Reflecting Pool",
+"set": "frc",
+"oracle_id": "67f43ac6-2a58-4b53-b5d7-0330e2a252e2",
+"type_line": "Land"
+},
+{
+"name": "Refute Destiny",
+"set": "fra",
+"oracle_id": "2a18b3f0-8a78-46d8-b60f-3cd634062f1b",
+"type_line": "Sorcery"
+},
+{
+"name": "Repurposed Enforcer",
+"set": "fra",
+"oracle_id": "b775a404-ec0a-47ff-bb9d-eae2273d945b",
+"type_line": "Creature \u2014 Human Soldier"
+},
+{
+"name": "Rescue Girl, First Responder",
+"set": "fra",
+"oracle_id": "df6fc0b4-333b-4f6c-804c-ba6c8e29c88e",
+"type_line": "Legendary Creature \u2014 Human Cleric"
+},
+{
+"name": "Restless Anchorage",
+"set": "frc",
+"oracle_id": "91320daf-f69c-4350-b0fc-4bb37a6904b1",
+"type_line": "Land"
+},
+{
+"name": "Restless Spire",
+"set": "frc",
+"oracle_id": "0ca4e80e-c19c-4b74-b531-c5a4dc5a8ba9",
+"type_line": "Land"
+},
+{
+"name": "Restore with Empathy",
+"set": "fra",
+"oracle_id": "cb1e697f-6689-4f0b-8725-61d51432b8dd",
+"type_line": "Instant"
+},
+{
+"name": "Return to the Light Realms",
+"set": "fra",
+"oracle_id": "217e76ca-ea94-417c-b5b0-82e2302eeee8",
+"type_line": "Sorcery"
+},
+{
+"name": "Rewrite Regrets",
+"set": "fra",
+"oracle_id": "42565432-3a17-4274-87fc-016ab900e313",
+"type_line": "Sorcery"
+},
+{
+"name": "Rise of the Deathbringer",
+"set": "fra",
+"oracle_id": "57ea9f63-8267-4303-a3dd-9ded220294dc",
+"type_line": "Instant"
+},
+{
+"name": "Rockfall Vale",
+"set": "fra",
+"oracle_id": "185c70c1-8403-4ae5-b45d-3679d4ee092a",
+"type_line": "Land"
+},
+{
+"name": "Roiling Canopy",
+"set": "fra",
+"oracle_id": "c6e87760-4cd0-4281-82d4-7a377ea960ad",
+"type_line": "Land"
+},
+{
+"name": "Room of Refuge",
+"set": "fra",
+"oracle_id": "27d5b2eb-94fe-45fb-806c-354044de7ba5",
+"type_line": "Land"
+},
+{
+"name": "Ruric Thar, Biomagus",
+"set": "fra",
+"oracle_id": "873fa095-5662-407a-bd24-9a1c4712a428",
+"type_line": "Legendary Creature \u2014 Ogre Crab Wizard"
+},
+{
+"name": "Ruric Thar, Magecrusher",
+"set": "fra",
+"oracle_id": "453b2b3c-7df5-4515-9565-82f603cf451b",
+"type_line": "Legendary Creature \u2014 Ogre Warrior"
+},
+{
+"name": "Saheeli, Consul of Oversight",
+"set": "fra",
+"oracle_id": "dfa95c0e-393d-4b22-9de3-45a7efc0ba14",
+"type_line": "Legendary Creature \u2014 Human Advisor"
+},
+{
+"name": "Saheeli, Jewel of Avishkar",
+"set": "fra",
+"oracle_id": "83705258-1f42-41db-a32e-de99ffd759eb",
+"type_line": "Legendary Creature \u2014 Human Artificer"
+},
+{
+"name": "Samut, Hazoret's Champion",
+"set": "fra",
+"oracle_id": "add02a36-8811-438b-a8e1-f5c8a8146b4e",
+"type_line": "Legendary Creature \u2014 Human Warrior Cleric"
+},
+{
+"name": "Samut, Tyrant of Naktamun",
+"set": "fra",
+"oracle_id": "a275f7ac-7dae-4422-875a-f34f24b6f28a",
+"type_line": "Legendary Creature \u2014 Human Wizard"
+},
+{
+"name": "Sanctum Lurker",
+"set": "fra",
+"oracle_id": "3ebd64d2-c178-45a2-a51f-9869754baa0f",
+"type_line": "Creature \u2014 Horror"
+},
+{
+"name": "Screeching Soulbreaker",
+"set": "fra",
+"oracle_id": "47e33aa1-2f54-471c-a484-de13bcd2dceb",
+"type_line": "Creature \u2014 Siren Bard"
+},
+{
+"name": "Seasoned Cryomancer",
+"set": "fra",
+"oracle_id": "c3936db3-d3b6-4a92-9773-6f3c52dc419d",
+"type_line": "Creature \u2014 Human Wizard"
+},
+{
+"name": "Secure the Wastes",
+"set": "frc",
+"oracle_id": "b2347910-d6c6-4681-8316-7ef27056485c",
+"type_line": "Instant"
+},
+{
+"name": "Semester Foreseer // Peer Review",
+"set": "fra",
+"oracle_id": "21b8d59f-a90d-44ff-a2e3-9f439ac3e14a",
+"type_line": "Creature \u2014 Human Wizard // Sorcery"
+},
+{
+"name": "Serra's Emissary",
+"set": "frc",
+"oracle_id": "7a56c6e1-0509-4783-9b29-cf3163977166",
+"type_line": "Creature \u2014 Angel"
+},
+{
+"name": "Shark Typhoon",
+"set": "frc",
+"oracle_id": "8c0520fa-276b-4d21-b4a9-dce1fce59f6b",
+"type_line": "Enchantment"
+},
+{
+"name": "Shatterwing Pegasus",
+"set": "fra",
+"oracle_id": "7d6641e7-4d14-4a06-b588-0c752af529bd",
+"type_line": "Creature \u2014 Pegasus"
+},
+{
+"name": "Shipwreck Marsh",
+"set": "fra",
+"oracle_id": "5f42b67f-87fd-4f98-a0e8-0c8313f4bbc8",
+"type_line": "Land"
+},
+{
+"name": "Shivan Reef",
+"set": "frc",
+"oracle_id": "0fe16212-66c3-4e45-a641-7391e9b2e304",
+"type_line": "Land"
+},
+{
+"name": "Silence the Echo",
+"set": "fra",
+"oracle_id": "43654381-c55c-4d6d-abfd-12932ceb5a4a",
+"type_line": "Sorcery"
+},
+{
+"name": "Simulacrum Shaper",
+"set": "fra",
+"oracle_id": "9e45e2da-7064-4ec0-8d09-55fc7d1aeaa8",
+"type_line": "Creature \u2014 Elf Druid"
+},
+{
+"name": "Skilled Battlecarver",
+"set": "fra",
+"oracle_id": "4fc7c7a0-bfff-4833-a0d0-a38dc29e9dfb",
+"type_line": "Creature \u2014 Human Warrior"
+},
+{
+"name": "Skrelv's Hive",
+"set": "frc",
+"oracle_id": "06d219ff-0083-4c2a-b5b3-2b84bb58f57e",
+"type_line": "Enchantment"
+},
+{
+"name": "Solarium Sentry",
+"set": "fra",
+"oracle_id": "afddba56-f9a0-4917-8167-c9fd17ca9954",
+"type_line": "Creature \u2014 Cat Soldier"
+},
+{
+"name": "Solitary Cell",
+"set": "fra",
+"oracle_id": "66a22b35-3dc0-4a74-8474-e73293403de6",
+"type_line": "Artifact"
+},
+{
+"name": "Sol Ring",
+"set": "frc",
+"oracle_id": "6ad8011d-3471-4369-9d68-b264cc027487",
+"type_line": "Artifact"
+},
+{
+"name": "Solve for Disappointment",
+"set": "fra",
+"oracle_id": "3241a3f5-7ae5-4497-9dd2-a55f3370a055",
+"type_line": "Sorcery"
+},
+{
+"name": "Something Worth Saving",
+"set": "fra",
+"oracle_id": "46cf0e3e-3c3e-4eb8-a71a-4b4b87744ced",
+"type_line": "Instant"
+},
+{
+"name": "Sphinx of False Conclusions",
+"set": "fra",
+"oracle_id": "9f004382-c57b-4fde-af97-0c85516c3cf4",
+"type_line": "Creature \u2014 Sphinx Illusion"
+},
+{
+"name": "Sphinx's Approach",
+"set": "fra",
+"oracle_id": "48b1ac27-430f-4fd9-a71b-6ad125c57fe3",
+"type_line": "Instant"
+},
+{
+"name": "Staff of the Storyteller",
+"set": "frc",
+"oracle_id": "0c4e2c90-c17b-42cc-b4d7-cf75970fbe90",
+"type_line": "Artifact"
+},
+{
+"name": "Stingcaster Mage",
+"set": "fra",
+"oracle_id": "056b651e-e0e2-4333-9235-d1ffe8fcca29",
+"type_line": "Creature \u2014 Human Wizard"
+},
+{
+"name": "Stingerquill Annex",
+"set": "fra",
+"oracle_id": "26e20ae5-4059-4d63-9db5-6e12421d1aba",
+"type_line": "Land"
+},
+{
+"name": "Stingerquill Charm",
+"set": "fra",
+"oracle_id": "987aadac-d6a6-4e50-9468-9e8e53cc5529",
+"type_line": "Instant"
+},
+{
+"name": "Stingerquill Voxmancer // Vicious Verse",
+"set": "fra",
+"oracle_id": "e8f755f7-ec93-4d2e-bffc-c719984fa13d",
+"type_line": "Creature \u2014 Goblin Sorcerer // Sorcery"
+},
+{
+"name": "Stinging Vitriol",
+"set": "fra",
+"oracle_id": "624cf822-0b4e-4f0c-9893-a53cb094f616",
+"type_line": "Sorcery"
+},
+{
+"name": "Stroke of Midnight",
+"set": "frc",
+"oracle_id": "9a107e48-3d50-4941-95b1-10f2b29a4245",
+"type_line": "Instant"
+},
+{
+"name": "Sulfur Falls",
+"set": "frc",
+"oracle_id": "6a6c5e17-6465-4a1f-9d63-8a3ce2edc522",
+"type_line": "Land"
+},
+{
+"name": "Sulfurous Springs",
+"set": "frc",
+"oracle_id": "f5c38c01-4a40-469f-91a0-7479daf4e8e7",
+"type_line": "Land"
+},
+{
+"name": "Sunfall",
+"set": "frc",
+"oracle_id": "fb3f5097-0da0-458c-8508-60823567e2da",
+"type_line": "Sorcery"
+},
+{
+"name": "Sunken Ruins",
+"set": "frc",
+"oracle_id": "e6415ffb-8b7a-41c3-bedf-0d4112b7b795",
+"type_line": "Land"
+},
+{
+"name": "Sureshot Sower",
+"set": "fra",
+"oracle_id": "5bbc9d7d-91bd-4a58-8d19-f7be650720b7",
+"type_line": "Creature \u2014 Human Archer"
+},
+{
+"name": "Surgical Precision",
+"set": "fra",
+"oracle_id": "0caccec3-4942-499a-9434-0c94389afcf8",
+"type_line": "Sorcery"
+},
+{
+"name": "Surveillance Phantasm",
+"set": "fra",
+"oracle_id": "b97648b7-ae98-45c9-8f0f-a52d6faf2d2d",
+"type_line": "Creature \u2014 Bird Illusion"
+},
+{
+"name": "Swamp",
+"set": "fra",
+"oracle_id": "56719f6a-1a6c-4c0a-8d21-18f7d7350b68",
+"type_line": "Basic Land \u2014 Swamp"
+},
+{
+"name": "Swords to Plowshares",
+"set": "frc",
+"oracle_id": "b1544f21-7e98-461b-aed5-e748b0168c52",
+"type_line": "Instant"
+},
+{
+"name": "Synthetic Destiny",
+"set": "frc",
+"oracle_id": "640a7d2c-42c4-4ea7-bd5b-72f12a65785e",
+"type_line": "Instant"
+},
+{
+"name": "Talisman of Creativity",
+"set": "frc",
+"oracle_id": "14d2979d-5728-42d7-a027-0eb1f754655d",
+"type_line": "Artifact"
+},
+{
+"name": "Talisman of Dominance",
+"set": "frc",
+"oracle_id": "4c0a0448-b9d6-43a0-8549-64066dac63f0",
+"type_line": "Artifact"
+},
+{
+"name": "Talisman of Indulgence",
+"set": "frc",
+"oracle_id": "1d9aeaaa-66f6-41cb-9bac-162d6fd8662c",
+"type_line": "Artifact"
+},
+{
+"name": "Talisman of Progress",
+"set": "frc",
+"oracle_id": "00e35322-1a9a-41e3-9ce1-359c8eaa3bc7",
+"type_line": "Artifact"
+},
+{
+"name": "Tamiyo, Upriser Crowned",
+"set": "frc",
+"oracle_id": "8e0f2e26-1e14-422a-aafe-e1da38ab10a3",
+"type_line": "Legendary Creature \u2014 Moonfolk Warrior"
+},
+{
+"name": "Tam's Resistance",
+"set": "fra",
+"oracle_id": "7500b7dc-588d-46bd-acc5-885dcd464668",
+"type_line": "Sorcery"
+},
+{
+"name": "Tam, the Possibility",
+"set": "fra",
+"oracle_id": "c92c7744-0c92-4a36-9ada-4ffca812009e",
+"type_line": "Legendary Creature \u2014 Gorgon Wizard"
+},
+{
+"name": "Tarmogoyf",
+"set": "fra",
+"oracle_id": "45900b2f-f6a9-4c42-9642-008f3c1cf6dd",
+"type_line": "Creature \u2014 Lhurgoyf"
+},
+{
+"name": "Teferi's Reproach",
+"set": "frc",
+"oracle_id": "9381b4a5-a8e0-412d-bc7f-ae15afa0f135",
+"type_line": "Instant"
+},
+{
+"name": "Tenured Tethermage",
+"set": "fra",
+"oracle_id": "571cb06d-55b5-46e4-9678-1f74aca73068",
+"type_line": "Creature \u2014 Human Artificer"
+},
+{
+"name": "Terminal Criticism",
+"set": "fra",
+"oracle_id": "213b0814-f768-4408-9cb7-6f5960bcbb7a",
+"type_line": "Instant"
+},
+{
+"name": "Tethermage's Advantage",
+"set": "fra",
+"oracle_id": "b4f89885-eeb9-46c7-9820-9758b624ca24",
+"type_line": "Instant"
+},
+{
+"name": "Tether Technician",
+"set": "fra",
+"oracle_id": "a9d0657f-2c5e-4b6f-b8ae-d657cc0f7aef",
+"type_line": "Creature \u2014 Minotaur Artificer"
+},
+{
+"name": "Tetsuko Umezawa, Fugitive",
+"set": "fra",
+"oracle_id": "ceeeacbc-01b0-4421-aaca-2ce6cdbe45d7",
+"type_line": "Legendary Creature \u2014 Human Rogue"
+},
+{
+"name": "Tetsuko Umezawa, Pursuer",
+"set": "fra",
+"oracle_id": "708d4567-a5a3-437f-bae4-ae10f1537aa9",
+"type_line": "Legendary Creature \u2014 Human Mercenary"
+},
+{
+"name": "Teyo, Diamondblade Mage",
+"set": "fra",
+"oracle_id": "a3bfbe1a-7831-45bd-9e42-790c28f6054c",
+"type_line": "Legendary Creature \u2014 Human Warlock"
+},
+{
+"name": "Teyo, Lightshield Expert",
+"set": "fra",
+"oracle_id": "77a9fac6-3c26-4456-9e0b-f5839a3dcae2",
+"type_line": "Legendary Creature \u2014 Human Cleric"
+},
+{
+"name": "Thalia, the Survivor",
+"set": "fra",
+"oracle_id": "55ef129e-698e-424f-be3c-3fbba6c2cc3e",
+"type_line": "Legendary Creature \u2014 Human Soldier"
+},
+{
+"name": "The Echoverse Fulcrum",
+"set": "fra",
+"oracle_id": "c04197ad-d2f3-499f-b863-bed0c869519c",
+"type_line": "Legendary Artifact"
+},
+{
+"name": "Theoretical Necromancer",
+"set": "fra",
+"oracle_id": "6c5ed756-b999-49f7-9a52-fb8196202f0f",
+"type_line": "Creature \u2014 Vampire Warlock"
+},
+{
+"name": "Theorist's Proxy",
+"set": "fra",
+"oracle_id": "0089acfe-da66-4dd7-b1e5-4d7407f58257",
+"type_line": "Creature \u2014 Illusion"
+},
+{
+"name": "Theorist's Sanctum",
+"set": "fra",
+"oracle_id": "37513bd8-7303-4ac6-a7a7-224184faf758",
+"type_line": "Land \u2014 Island"
+},
+{
+"name": "Theorix Annex",
+"set": "fra",
+"oracle_id": "00ad5200-5179-4d1b-8bb3-a09e1b31be58",
+"type_line": "Land"
+},
+{
+"name": "Theorix Charm",
+"set": "fra",
+"oracle_id": "cf527bbd-e898-4aa9-909d-daec2f4b62ad",
+"type_line": "Instant"
+},
+{
+"name": "Theorix Metamage // Omit Variables",
+"set": "fra",
+"oracle_id": "92a0aa44-0ef7-4e6f-8288-7c33067c5fd1",
+"type_line": "Creature \u2014 Shade Wizard // Sorcery"
+},
+{
+"name": "The Theorist, Jace Beleren",
+"set": "fra",
+"oracle_id": "89a6e876-0b00-4671-9652-766fd7ef9bf2",
+"type_line": "Legendary Planeswalker \u2014 Jace"
+},
+{
+"name": "The Ur-Sphinx",
+"set": "frc",
+"oracle_id": "4a3fdb8e-4699-4bd9-84e6-3cc7fea0e1ef",
+"type_line": "Legendary Creature \u2014 Sphinx Avatar"
+},
+{
+"name": "Tinybones, Pocket Nuisance",
+"set": "fra",
+"oracle_id": "97dcf9fb-3f2f-4aa6-959a-e3c4889c1673",
+"type_line": "Legendary Creature \u2014 Skeleton Rogue"
+},
+{
+"name": "Titanbones, Towering Heart",
+"set": "fra",
+"oracle_id": "510bccb1-61cd-49f1-a54a-80352653d1e3",
+"type_line": "Legendary Creature \u2014 Skeleton Druid"
+},
+{
+"name": "Tomik, Izzet Sparkmage",
+"set": "fra",
+"oracle_id": "16604fee-cd8d-41e4-8269-3c7ff756613d",
+"type_line": "Legendary Creature \u2014 Human Wizard"
+},
+{
+"name": "Tomik, Orzhov Lawmage",
+"set": "fra",
+"oracle_id": "7a501f7e-eec8-45f7-9ac3-483fd8f5ca5e",
+"type_line": "Legendary Creature \u2014 Human Advisor"
+},
+{
+"name": "Transformative Commons",
+"set": "fra",
+"oracle_id": "8ec56e2a-380f-4de7-9fb7-52de803008fc",
+"type_line": "Land"
+},
+{
+"name": "Traxos, Academy Guardian",
+"set": "fra",
+"oracle_id": "7b9a574f-6d56-421b-8fbd-94da1e6e3ce1",
+"type_line": "Legendary Artifact Creature \u2014 Dragon Construct"
+},
+{
+"name": "Traxos, Scourge Eternal",
+"set": "fra",
+"oracle_id": "acf4abde-4034-4fcf-b531-78c935aecd8c",
+"type_line": "Legendary Artifact Creature \u2014 Dragon Construct"
+},
+{
+"name": "Turbulent Crater",
+"set": "frc",
+"oracle_id": "e86a0b64-fe4a-4ea8-99e8-35860dbac765",
+"type_line": "Land \u2014 Swamp Mountain"
+},
+{
+"name": "Turbulent Shore",
+"set": "frc",
+"oracle_id": "c13c5f07-dac5-47d0-a088-e24b9fbec3c5",
+"type_line": "Land \u2014 Plains Island"
+},
+{
+"name": "Turbulent Wetlands",
+"set": "frc",
+"oracle_id": "b51c8659-ec4f-4213-beb1-49a7acd7366c",
+"type_line": "Land \u2014 Island Swamp"
+},
+{
+"name": "Twinned Vision",
+"set": "fra",
+"oracle_id": "fa1cc78f-26bc-4d5d-973b-7cb7d7490973",
+"type_line": "Instant"
+},
+{
+"name": "Twisted Fates",
+"set": "fra",
+"oracle_id": "3ce30a19-e716-478f-be89-e2d95753cfed",
+"type_line": "Sorcery"
+},
+{
+"name": "Uldaros Theorix",
+"set": "fra",
+"oracle_id": "020d561b-2e5d-439e-9e6a-318d23e73542",
+"type_line": "Legendary Creature \u2014 Elder Sphinx"
+},
+{
+"name": "Underground River",
+"set": "frc",
+"oracle_id": "857febd9-cdd7-4f8e-a852-d88084b0cfbc",
+"type_line": "Land"
+},
+{
+"name": "Undulating Witness",
+"set": "fra",
+"oracle_id": "77b684b8-227b-40de-80b4-15d0e70914f4",
+"type_line": "Creature \u2014 Serpent"
+},
+{
+"name": "Unflinching Hortimancer",
+"set": "fra",
+"oracle_id": "7cd0bd74-2463-4e9d-9802-69ac4ef6d543",
+"type_line": "Creature \u2014 Human Cleric"
+},
+{
+"name": "Unsummon",
+"set": "fra",
+"oracle_id": "837182db-1bf3-4a2c-bd01-1af9d9873561",
+"type_line": "Instant"
+},
+{
+"name": "Variable Chaser // Arc of Fortune",
+"set": "fra",
+"oracle_id": "67c603cc-ad66-4a1c-8386-5901c9c01bfb",
+"type_line": "Creature \u2014 Human Wizard // Sorcery"
+},
+{
+"name": "Venser, Fervent Forger",
+"set": "frc",
+"oracle_id": "9b1ae6d8-0cf3-4a67-9241-37f4bc5ddbdd",
+"type_line": "Legendary Creature \u2014 Human Sorcerer"
+},
+{
+"name": "Verdant Kraken",
+"set": "fra",
+"oracle_id": "83c61083-b357-4775-a855-5a9013cc2bdf",
+"type_line": "Creature \u2014 Plant Kraken"
+},
+{
+"name": "Vigorbloom Annex",
+"set": "fra",
+"oracle_id": "fcb35d42-bcd2-427c-9640-ff3602b79912",
+"type_line": "Land"
+},
+{
+"name": "Vigorbloom Charm",
+"set": "fra",
+"oracle_id": "826f17d1-3806-4579-8b1b-2082b7b03d69",
+"type_line": "Instant"
+},
+{
+"name": "Vigorbloom Vanguard // Seed Suture",
+"set": "fra",
+"oracle_id": "bd416426-d037-45e3-9647-816bf982cbea",
+"type_line": "Creature \u2014 Troll Druid // Sorcery"
+},
+{
+"name": "Vindictive Triumph",
+"set": "fra",
+"oracle_id": "d6b478d1-5015-49ba-b1aa-cbc2b08107a6",
+"type_line": "Instant"
+},
+{
+"name": "Vinelasher Adept",
+"set": "fra",
+"oracle_id": "b5918fb0-c33f-4e33-ac6d-8f94723d4296",
+"type_line": "Creature \u2014 Rhino Soldier"
+},
+{
+"name": "Violent Echoes",
+"set": "fra",
+"oracle_id": "e8ecec61-cc47-4051-a599-0e7470764488",
+"type_line": "Instant"
+},
+{
+"name": "Void Extrapolator // Omit Variables",
+"set": "fra",
+"oracle_id": "517f84b5-cf99-410d-96ea-910740231dac",
+"type_line": "Creature \u2014 Aetherborn Warlock // Sorcery"
+},
+{
+"name": "Vraska's Final Mercy",
+"set": "fra",
+"oracle_id": "7799413d-e313-4a05-ad28-f4c926c26d28",
+"type_line": "Sorcery"
+},
+{
+"name": "Vraska, Soul of Stone",
+"set": "fra",
+"oracle_id": "cad63b31-667b-4518-bc49-be4ffb82bc63",
+"type_line": "Legendary Creature \u2014 Gorgon Wizard"
+},
+{
+"name": "Vraska, the Cutting Glare",
+"set": "fra",
+"oracle_id": "580de511-863c-4b7a-9d2e-fcdf6e12d54b",
+"type_line": "Legendary Creature \u2014 Gorgon Assassin"
+},
+{
+"name": "Warrior's Blades",
+"set": "fra",
+"oracle_id": "f47419a5-b975-4934-a987-ea064a0c7c1a",
+"type_line": "Artifact \u2014 Equipment"
+},
+{
+"name": "Way of the Cryomancer",
+"set": "fra",
+"oracle_id": "7d32c63d-aa9e-4f5d-a3e6-51377a786009",
+"type_line": "Legendary Enchantment"
+},
+{
+"name": "Way of the Deathbringer",
+"set": "fra",
+"oracle_id": "54775625-bf44-4035-969e-7e70578c8b98",
+"type_line": "Legendary Enchantment"
+},
+{
+"name": "Way of the Healer",
+"set": "fra",
+"oracle_id": "cb27dc83-85ee-4f54-b032-41cd1806d3ac",
+"type_line": "Legendary Enchantment"
+},
+{
+"name": "Way of the Mentor",
+"set": "fra",
+"oracle_id": "ce924285-f4c5-44e6-909b-f5f7d302ebaf",
+"type_line": "Legendary Enchantment"
+},
+{
+"name": "Way of the Mind Sculptor",
+"set": "fra",
+"oracle_id": "94be2e86-ba0e-4b8d-9b9c-114adacb26db",
+"type_line": "Legendary Enchantment"
+},
+{
+"name": "Way of the Necromancer",
+"set": "fra",
+"oracle_id": "f3087daa-d2ff-4227-abff-3398da6297af",
+"type_line": "Legendary Enchantment"
+},
+{
+"name": "Way of the Paradox",
+"set": "fra",
+"oracle_id": "76771cd1-6b74-49bb-9421-8845fe344567",
+"type_line": "Legendary Enchantment"
+},
+{
+"name": "Way of the Pyromancer",
+"set": "fra",
+"oracle_id": "68d3f547-674a-4d8a-b02f-01bc2f161916",
+"type_line": "Legendary Enchantment"
+},
+{
+"name": "Way of the Warlord",
+"set": "fra",
+"oracle_id": "10721d62-dc68-43b4-bfa2-dcb8cf8ea980",
+"type_line": "Legendary Enchantment"
+},
+{
+"name": "Way of the Wildspeaker",
+"set": "fra",
+"oracle_id": "501580b9-692c-4804-be34-012a25ba8adf",
+"type_line": "Legendary Enchantment"
+},
+{
+"name": "Whiplash Wordsmith // Vicious Verse",
+"set": "fra",
+"oracle_id": "e1ffb884-a89e-4e2a-9beb-8bd5838b6a94",
+"type_line": "Creature \u2014 Vampire Sorcerer // Sorcery"
+},
+{
+"name": "Whirlwind of Thought",
+"set": "frc",
+"oracle_id": "6467cbb7-1e4e-482d-a20f-6cb9fc0f1ad1",
+"type_line": "Enchantment"
+},
+{
+"name": "White Sun's Twilight",
+"set": "frc",
+"oracle_id": "a38828be-781e-4340-9c6f-f40b1d34773f",
+"type_line": "Sorcery"
+},
+{
+"name": "Windcrag Siege",
+"set": "frc",
+"oracle_id": "64df560a-905f-45d1-bc70-14d99e3112d3",
+"type_line": "Enchantment"
+},
+{
+"name": "Winter, Team Player",
+"set": "fra",
+"oracle_id": "254f133a-eee5-48b9-b19f-110555e49300",
+"type_line": "Legendary Creature \u2014 Human Warrior"
+},
+{
+"name": "Winter, Tormented Loner",
+"set": "fra",
+"oracle_id": "84eaac2e-74ce-4a16-9faa-409df7c58eb3",
+"type_line": "Legendary Creature \u2014 Human Warlock"
+},
+{
+"name": "Woodwork Prodigy // Soul Tether",
+"set": "fra",
+"oracle_id": "f3ed157f-a09b-405f-aec4-0e7a81d80fc8",
+"type_line": "Creature \u2014 Cat Druid // Sorcery"
+},
+{
+"name": "Wrath of the Bloodmane",
+"set": "fra",
+"oracle_id": "c1994d6a-984d-4b75-9198-1f1822eab6eb",
+"type_line": "Instant"
+},
+{
+"name": "Wrecking Gecko",
+"set": "fra",
+"oracle_id": "4a9e0294-c967-4e90-b776-6d3195034a23",
+"type_line": "Artifact Creature \u2014 Lizard Construct"
+},
+{
+"name": "Yargle, Glutton of Urborg",
+"set": "fra",
+"oracle_id": "ed66cd31-958f-4b28-82a3-e04acc819afc",
+"type_line": "Legendary Creature \u2014 Frog Spirit"
+},
+{
+"name": "Yargle, Goliath of Otaria",
+"set": "fra",
+"oracle_id": "014d0bcd-b80f-4c43-8f00-f4c31e8f3370",
+"type_line": "Legendary Creature \u2014 Frog Spirit"
+},
+{
+"name": "Yoshimaru, Beloved Companion",
+"set": "fra",
+"oracle_id": "c00a0be5-d9a9-4263-a87e-7bf2d128ab3a",
+"type_line": "Legendary Creature \u2014 Dog"
+},
+{
+"name": "Yoshimaru, Scrappy Stray",
+"set": "fra",
+"oracle_id": "c87da757-3daa-4874-a1e4-be0aa2adcb28",
+"type_line": "Legendary Creature \u2014 Dog"
+},
+{
+"name": "Your Fate Ends Here",
+"set": "fra",
+"oracle_id": "28a362c2-0c99-48e0-b9cb-485a6c1f350b",
+"type_line": "Instant"
+},
+{
+"name": "Yuriko, Blade of the Mighty",
+"set": "fra",
+"oracle_id": "f89b0143-4b19-4ab1-a96b-356b21e435ef",
+"type_line": "Legendary Creature \u2014 Human Samurai"
+},
+{
+"name": "Yuriko, Hope from the Shadows",
+"set": "fra",
+"oracle_id": "983f4fde-ab04-44f0-a294-c3b472de0b19",
+"type_line": "Legendary Creature \u2014 Human Ninja"
+}
+]

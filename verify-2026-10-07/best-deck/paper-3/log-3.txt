@@ -1,0 +1,5 @@
+Baron Helmut Zemo: 79.92 [land38 ramp12 draw12 remo10 wipe3 prot5 pen0] (seeds cf 58.69 [land37 ramp12 draw13 remo8 wipe3 prot2 pen4] | previous 62.94 [land36 ramp14 draw15 remo8 wipe3 prot2 pen8]; 13 swaps, 181312 ms)
+Gorma, the Gullet: 100.68 [land36 ramp12 draw10 remo11 wipe3 prot6 pen0] (seeds cf 62.72 [land36 ramp13 draw11 remo11 wipe2 prot1 pen4] | previous 80.54 [land34 ramp13 draw10 remo9 wipe2 prot1 pen6]; 13 swaps, 224412 ms)
+Jolene, Plundering Pugilist: 98.60 [land38 ramp12 draw12 remo11 wipe5 prot6 pen1] (seeds cf 39.27 [land37 ramp26 draw14 remo6 wipe2 prot4 pen21] | previous 49.72 [land33 ramp27 draw14 remo7 wipe1 prot8 pen26]; 16 swaps, 145901 ms)
+Nalia de'Arnise: 88.90 [land38 ramp12 draw10 remo10 wipe4 prot5 pen0] (seeds cf 67.05 [land36 ramp10 draw11 remo9 wipe1 prot5 pen3] | previous 74.50 [land35 ramp8 draw12 remo8 wipe1 prot5 pen6]; 14 swaps, 177406 ms)
+Tazri, Beacon of Unity: 99.66 [land38 ramp11 draw10 remo12 wipe3 prot6 pen0] (seeds cf 61.02 [land36 ramp14 draw8 remo4 wipe0 prot4 pen13] | sleeved 62.61 [land36 ramp17 draw13 remo6 wipe1 prot4 pen12] | previous 67.16 [land35 ramp15 draw9 remo3 wipe0 prot9 pen17]; 15 swaps, 229726 ms)

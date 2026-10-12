@@ -1,0 +1,86 @@
+  FREE                   Agna Qel'a                               Land | This land enters tapped unless you control a basic land. {T}: Add {U}. {2}{U}, {T}: Draw a card, then discard 
+  FREE                   Arcane Lighthouse                        Land | {T}: Add {C}. {1}, {T}: Until end of turn, creatures your opponents control lose hexproof and shroud and can't
+  RAID:inspirit          Archway of Innovation                    Land | This land enters tapped unless you control an Island. {T}: Add {U}. {U}, {T}: The next spell you cast this tur
+  FREE                   Arid Archway                             Land — Des | This land enters tapped. When this land enters, return a land you control to its owner's hand. If another Dese
+* FREE                   Ash Barrens                              Land | {T}: Add {C}. Basic landcycling {1} ({1}, Discard this card: Search your library for a basic land card, reveal
+  RAID:tazri             Base Camp                                Land | This land enters tapped. {T}: Add {C}. {T}: Add one mana of any color. Spend this mana only to cast a Cleric, 
+  FREE                   Basilisk Gate                            Land — Gat | {T}: Add {C}. {2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you contr
+  FREE                   Blast Zone                               Land | This land enters with a charge counter on it. {T}: Add {C}. {X}{X}, {T}: Put X charge counters on this land. {
+  RAID:tazri             Bloodstained Mire                        Land | {T}, Pay 1 life, Sacrifice this land: Search your library for a Swamp or Mountain card, put it onto the battle
+  FREE                   Bojuka Bog                               Land | This land enters tapped. When this land enters, exile target player's graveyard. {T}: Add {B}.
+  RAID:tazri             Brokers Hideout                          Land | When this land enters, sacrifice it. When you do, search your library for a basic Forest, Plains, or Island ca
+* FREE                   Buried Ruin                              Land | {T}: Add {C}. {2}, {T}, Sacrifice this land: Return target artifact card from your graveyard to your hand.
+  RAID:tazri             Cabaretti Courtyard                      Land | When this land enters, sacrifice it. When you do, search your library for a basic Mountain, Forest, or Plains 
+* FREE                   Cephalid Coliseum                        Land | {T}: Add {U}. This land deals 1 damage to you. Threshold — {U}, {T}, Sacrifice this land: Target player draws 
+  FREE                   Cloudpost                                Land — Loc | This land enters tapped. {T}: Add {C} for each Locus on the battlefield.
+  RAID:beledros,bumi,gil Command Tower                            Land | {T}: Add one mana of any color in your commander's color identity.
+  FREE                   Conduit Pylons                           Land — Des | When this land enters, surveil 1. (Look at the top card of your library. You may put it into your graveyard.) 
+  RAID:bumi              Crawling Barrens                         Land | {T}: Add {C}. {4}: Put two +1/+1 counters on this land. Then you may have it become a 0/0 Elemental creature u
+  RAID:imotekh           Crypt of Agadeem                         Land | This land enters tapped. {T}: Add {B}. {2}, {T}: Add {B} for each black creature card in your graveyard.
+  RAID:bumi              Cryptic Caves                            Land | {T}: Add {C}. {1}, {T}, Sacrifice this land: Draw a card. Activate only if you control five or more lands.
+  FREE                   Dark Depths                              L.Snow Lan | Dark Depths enters with ten ice counters on it. {3}: Remove an ice counter from Dark Depths. When Dark Depths 
+  FREE                   Desert of the Mindful                    Land — Des | This land enters tapped. {T}: Add {U}. Cycling {1}{U} ({1}{U}, Discard this card: Draw a card.)
+  RAID:gilanra           Diamond City                             Land | This land enters with a shield counter on it. (If it would be dealt damage or destroyed, remove a shield count
+  RAID:the               Escape Tunnel                            Land | {T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then 
+  RAID:beledros          Evolving Wilds                           Land | {T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then 
+  FREE                   Exotic Orchard                           Land | {T}: Add one mana of any color that a land an opponent controls could produce.
+  FREE                   Fabled Passage                           Land | {T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then 
+  FREE                   Glimmerpost                              Land — Loc | When this land enters, you gain 1 life for each Locus on the battlefield. {T}: Add {C}.
+  RAID:tam               Great Hall of the Citadel                Land | {T}: Add {C}. {1}, {T}: Add two mana in any combination of colors. Spend this mana only to cast legendary spel
+  FREE                   Hidden Cataract                          Land — Cav | This land enters tapped. {T}: Add {U}. {4}{U}, {T}, Sacrifice this land: Discover 4. Activate only as a sorcer
+  FREE                   Hidden Grotto                            Land | When this land enters, surveil 1. (Look at the top card of your library. You may put it into your graveyard.) 
+  RAID:beledros          High Market                              Land | {T}: Add {C}. {T}, Sacrifice a creature: You gain 1 life.
+  RAID:beledros          Horizon of Progress                      Land | {T}, Pay 1 life: Add one mana of any type that a land you control could produce. {3}, {T}: You may put a land 
+  FREE                   Ifnir Deadlands                          Land — Des | {T}: Add {C}. {T}, Pay 1 life: Add {B}. {2}{B}{B}, {T}, Sacrifice a Desert: Put two -1/-1 counters on target c
+  RAID:tam               Interplanar Beacon                       Land | Whenever you cast a planeswalker spell, you gain 1 life. {T}: Add {C}. {1}, {T}: Add two mana of different col
+* RAID:inspirit          Inventors' Fair                          L.Land | At the beginning of your upkeep, if you control three or more artifacts, you gain 1 life. {T}: Add {C}. {4}, {
+* RAID:inspirit          Karn's Bastion                           Land | {T}: Add {C}. {4}, {T}: Proliferate. (Choose any number of permanents and/or players, then give each another c
+  FREE                   Lazotep Quarry                           Land — Des | {T}: Add {C}. {T}, Sacrifice a creature: Add one mana of any color. {X}{2}, {T}, Sacrifice a Desert: Exile tar
+  FREE                   Lonely Sandbar                           Land | This land enters tapped. {T}: Add {U}. Cycling {U} ({U}, Discard this card: Draw a card.)
+  RAID:bumi              Lotus Field                              Land | Hexproof This land enters tapped. When this land enters, sacrifice two lands. {T}: Add three mana of any one c
+  FREE                   Maestros Theater                         Land | When this land enters, sacrifice it. When you do, search your library for a basic Island, Swamp, or Mountain c
+* RAID:tam               Mana Confluence                          Land | {T}, Pay 1 life: Add one mana of any color.
+  FREE                   Mirage Mesa                              Land — Des | This land enters tapped. As it enters, choose a color. {T}: Add one mana of the chosen color.
+* RAID:imotekh           Mortuary Mire                            Land | This land enters tapped. When this land enters, you may put target creature card from your graveyard on top of
+  FREE                   Mudflat Village                          Land | {T}: Add {C}. {T}: Add {B}. Spend this mana only to cast a creature spell. {1}{B}, {T}, Sacrifice this land: R
+  FREE                   Muraganda Raceway                        Land | Start your engines! (If you have no speed, it starts at 1. It increases once on each of your turns when an opp
+  RAID:beledros,imotekh  Myriad Landscape                         Land | This land enters tapped. {T}: Add {C}. {2}, {T}, Sacrifice this land: Search your library for up to two basic 
+* FREE                   Nesting Grounds                          Land | {T}: Add {C}. {1}, {T}: Move a counter from target permanent you control onto a second target permanent. Activ
+* FREE                   Opal Palace                              Land | {T}: Add {C}. {1}, {T}: Add one mana of any color in your commander's color identity. If you spend this mana t
+* FREE                   Path of Ancestry                         Land | This land enters tapped. {T}: Add one mana of any color in your commander's color identity. When that mana is 
+  FREE                   Planar Nexus                             Land | This land is every nonbasic land type. (Nonbasic land types include Cave, Desert, Gate, Lair, Locus, Mine, Pow
+  RAID:ramos             Plaza of Harmony                         Land | When this land enters, if you control two or more Gates, you gain 3 life. {T}: Add {C}. {T}: Add one mana of a
+  FREE                   Radiant Fountain                         Land | When this land enters, you gain 2 life. {T}: Add {C}.
+  FREE                   Realm of Koh                             Land | This land enters tapped unless you control a basic land. {T}: Add {B}. {3}{B}, {T}: Create a 1/1 colorless Spi
+* FREE                   Reliquary Tower                          Land | You have no maximum hand size. {T}: Add {C}.
+* FREE                   Riveteers Overlook                       Land | When this land enters, sacrifice it. When you do, search your library for a basic Swamp, Mountain, or Forest c
+* RAID:bumi              Rogue's Passage                          Land | {T}: Add {C}. {4}, {T}: Target creature can't be blocked this turn.
+  RAID:bumi              Rumble Arena                             Land | Vigilance When this land enters, scry 1. (Look at the top card of your library. You may put it on the bottom.)
+  FREE                   Sandstorm Verge                          Land — Des | {T}: Add {C}. {3}, {T}: Target creature can't block this turn. Activate only as a sorcery.
+* FREE                   Seat of the Synod                        Art Land | {T}: Add {U}.
+  FREE                   Secluded Starforge                       Land | {T}: Add {C}. {2}, {T}, Tap X untapped artifacts you control: Target creature gets +X/+0 until end of turn. Ac
+* RAID:tam               Shipwreck Marsh                          Land | This land enters tapped unless you control two or more other lands. {T}: Add {U} or {B}.
+  FREE                   Skycoach Waypoint                        Land | {T}: Add {C}. {3}, {T}: Target creature becomes prepared. (Only creatures with prepare spells can become prepa
+  FREE                   Soured Springs                           Land — Des | This land enters tapped. When this land enters, it deals 1 damage to target opponent. {T}: Add {U} or {B}.
+* RAID:inspirit          Spire of Industry                        Land | {T}: Add {C}. {T}, Pay 1 life: Add one mana of any color. Activate only if you control an artifact.
+* RAID:bumi              Strip Mine                               Land | {T}: Add {C}. {T}, Sacrifice this land: Destroy target land.
+  FREE                   Study Hall                               Land | {T}: Add {C}. {1}, {T}: Add one mana of any color. When you spend this mana to cast your commander, scry X, wh
+* FREE                   Sunken Hollow                            Land — Isl | ({T}: Add {U} or {B}.) This land enters tapped unless you control two or more basic lands.
+  FREE                   Sunken Palace                            Land — Cav | This land enters tapped. {T}: Add {U}. {1}{U}, {T}, Exile seven cards from your graveyard: Add {U}. When you s
+* FREE                   Talon Gates of Madara                    Land — Gat | When this land enters, up to one target creature phases out. {T}: Add {C}. {1}, {T}: Add one mana of any color
+  FREE                   Tarnation Vista                          Land | This land enters tapped. As it enters, choose a color. {T}: Add one mana of the chosen color. {1}, {T}: For ea
+* FREE                   Temple of the False God                  Land | {T}: Add {C}{C}. Activate only if you control five or more lands.
+  FREE                   Terramorphic Expanse                     Land | {T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then 
+* FREE                   The Mycosynth Gardens                    Land — Sph | {T}: Add {C}. {1}, {T}: Add one mana of any color. {X}, {T}: This land becomes a copy of target nontoken artif
+  RAID:tam               Theorix Annex                            Land | This land enters tapped unless you control a planeswalker. {T}: Add {U} or {B}.
+  RAID:beledros          Thespian's Stage                         Land | {T}: Add {C}. {2}, {T}: This land becomes a copy of target land, except it has this ability.
+  FREE                   Trenchpost                               Land — Loc | {T}: Add {C}. {3}, {T}: Target player mills a card for each Locus you control.
+* FREE                   Urza's Mine                              Land — Urz | {T}: Add {C}. If you control an Urza's Power-Plant and an Urza's Tower, add {C}{C} instead.
+* FREE                   Urza's Power Plant                       Land — Urz | {T}: Add {C}. If you control an Urza's Mine and an Urza's Tower, add {C}{C} instead.
+* FREE                   Urza's Tower                             Land — Urz | {T}: Add {C}. If you control an Urza's Mine and an Urza's Power-Plant, add {C}{C}{C} instead.
+  RAID:inspirit          Uthros, Titanic Godcore                  Land — Pla | This land enters tapped. {T}: Add {U}. Station (Tap another creature you control: Put charge counters equal to
+  RAID:beledros          Vesuva                                   Land | You may have this land enter tapped as a copy of any land on the battlefield.
+  FREE                   Volatile Fault                           Land — Cav | {T}: Add {C}. {1}, {T}, Sacrifice this land: Destroy target nonbasic land an opponent controls. That player ma
+* RAID:tazri             Windswept Heath                          Land | {T}, Pay 1 life, Sacrifice this land: Search your library for a Forest or Plains card, put it onto the battlef
+* RAID:tazri             Wooded Foothills                         Land | {T}, Pay 1 life, Sacrifice this land: Search your library for a Mountain or Forest card, put it onto the battl
+  RAID:beledros          Yavimaya, Cradle of Growth               L.Land | Each land is a Forest in addition to its other land types.

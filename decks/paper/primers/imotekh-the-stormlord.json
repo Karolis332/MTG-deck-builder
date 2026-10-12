@@ -1,0 +1,116 @@
+{
+  "version": 1,
+  "deck": {
+    "name": "Imotekh the Stormlord",
+    "commanders": ["Imotekh the Stormlord"],
+    "colours": "B",
+    "format": "commander",
+    "list": "decks/paper/decks/imotekh-the-stormlord.txt",
+    "status": "sleeved"
+  },
+  "summary": "Fill the graveyard with artifact creatures (mill, sacrifice) then pull them back out. [[Imotekh the Stormlord]]'s Phaeron trigger reads \"Whenever one or more artifact cards leave your graveyard, create two 2/2 black Necron Warrior artifact creature tokens\" — unearth, reanimation and self-return effects all qualify. [[Biotransference]] makes every creature card an artifact, so Imotekh's trigger and the Warriors it spawns feed drain payoffs (Konrad, Apprentice, Bats) on every death.",
+  "phases": [
+    { "turns": "T1-3", "goal": "Ramp into Imotekh and start filling the graveyard.", "cards": ["Sol Ring", "Arcane Signet", "Wayfarer's Bauble", "Imotekh the Stormlord", "Psychomancer"] },
+    { "turns": "T4-6", "goal": "Land Biotransference, start unearthing one creature at a time for Warriors, assemble a drain payoff.", "cards": ["Biotransference", "Royal Warden", "Triarch Praetorian", "Marionette Apprentice", "Syr Konrad, the Grim", "Ghost Ark"] },
+    { "turns": "Close", "goal": "Loop Metalwork Colossus through Ashnod's Altar for unbounded Warriors and drains, or swing with a buffed Warrior army.", "cards": ["Metalwork Colossus", "Ashnod's Altar", "Marionette Master", "Necron Overlord", "Skorpekh Lord"] }
+  ],
+  "engine": [
+    {
+      "title": "Unearth a creature for two Warriors",
+      "flow": ["unearth [[Royal Warden]] or [[Chronomancer]] from the graveyard", "the card leaves the graveyard", "[[Imotekh the Stormlord]] Phaeron triggers once", "create two 2/2 Necron Warrior tokens"],
+      "note": "Ruling: if multiple artifact cards leave the graveyard at the same time, the Phaeron ability triggers only once, so returns are sequenced one at a time, not stacked, for maximum triggers."
+    },
+    {
+      "title": "Metalwork Colossus loop",
+      "flow": ["cast [[Metalwork Colossus]]", "sacrifice it to [[Ashnod's Altar]] for {C}{C}", "sacrifice two Warriors to return Colossus to hand", "Imotekh triggers off Colossus leaving the graveyard for +2 Warriors", "recast and repeat"],
+      "note": "Metalwork Colossus costs {X} less where X is the total mana value of noncreature artifacts controlled; it is free to cast at 11+ noncreature-artifact mana value, and mana-neutral with Ashnod's Altar out at 9+ (Altar itself counts 3). Each pass is also a sacrifice, so Syr Konrad and Marionette Apprentice drain on it."
+    },
+    {
+      "title": "Biotransference turns every creature into a Warrior-feeding artifact",
+      "flow": ["[[Biotransference]] resolves: creatures you control become artifacts", "cast any creature spell", "lose 1 life, create a 2/2 Necron Warrior token", "[[Marionette Master]] now drains on every creature you lose"],
+      "note": "Konrad, Apprentice and Bats never needed artifacts; Master ('an artifact you control') and Psychomancer ('nontoken artifact') gain from it. Without Biotransference, only the deck's native Necrons, Solemn Simulacrum, Myr Retriever, Metalwork Colossus, Foundry Inspector and Canoptek Wraith are artifact creature cards."
+    },
+    {
+      "title": "Ghost Ark crews with summoning-sick Warriors",
+      "flow": ["crew [[Ghost Ark]] with 2 power of untapped creatures (fresh Warriors qualify)", "every artifact creature card in the graveyard gains unearth {3} until end of turn", "unearth two or three of them for extra Imotekh triggers that turn"],
+      "note": "Crewing taps \"other untapped creatures\" as a cost (CR 702.122a), not the creature's own {T} ability, so a Warrior made this turn (CR 302.6 only restricts a creature's own tap abilities) can still crew."
+    }
+  ],
+  "winConditions": [
+    {
+      "name": "Drain attrition off token deaths",
+      "pieces": ["Marionette Apprentice", "Mirkwood Bats", "Syr Konrad, the Grim", "Psychomancer"],
+      "flow": ["unearth or loop creatures through the graveyard", "Imotekh makes Warrior pairs each time", "sacrifice Warriors to Ashnod's Altar or combat losses", "each death/token event drains 1 through Apprentice/Bats/Konrad"],
+      "damage": "per Metalwork Colossus loop pass, each opponent loses Konrad 4 (3 deaths + Colossus leaving the graveyard) + Apprentice 3 + Bats 4 (2 tokens sacrificed, 2 created) = 11 (pilot guide §2 row 6)",
+      "turn": "T7-9 estimate (not simulated), once Biotransference and a payoff are both down"
+    },
+    {
+      "name": "Necron Overlord tap-down",
+      "pieces": ["Necron Overlord", "Imotekh the Stormlord"],
+      "flow": ["accumulate untapped Warriors from Imotekh triggers", "activate Necron Overlord: tap X untapped artifacts", "target opponent loses X life"],
+      "damage": "X life for {X} mana, tapping Necron Overlord and X untapped artifacts: 6 Warriors plus {6} is 6 life from one opponent",
+      "turn": "T8+ (estimate); Necron Overlord itself must have been under your control since the turn began ({T} in the cost, CR 302.6); summoning-sick Warriors can still pay this cost (CR 302.6 restricts only a creature's own tap abilities, and this is an activated ability of Necron Overlord, not of the Warriors)"
+    },
+    {
+      "name": "Metalwork Colossus loop kill",
+      "pieces": ["Metalwork Colossus", "Ashnod's Altar", "Syr Konrad, the Grim", "Marionette Apprentice"],
+      "flow": ["assemble the loop (engine row 2)", "loop until each opponent has taken 40+ from Konrad/Apprentice/Bats", "watch library size — stop or sacrifice Liliana the Repentant first if she is out"],
+      "damage": "unbounded across passes: Konrad 4 + Apprentice 3 = 7 per opponent per pass, so 6 passes take three opponents from 40 (4 passes with Mirkwood Bats too, 11 per pass; pilot guide §2 row 6)",
+      "turn": "T7 at the earliest (pilot guide §3 ideal line sets it up on T6); needs 9+ noncreature-artifact mana value with Ashnod's Altar"
+    }
+  ],
+  "metrics": {
+    "columns": ["Metric", "List"],
+    "rows": [
+      { "label": "Lands / 35", "values": ["32 Swamp, Crypt of Agadeem, Mortuary Mire, Myriad Landscape"] },
+      { "label": "Imotekh-trigger sources (unearth/reanimation)", "values": ["13 (5 unearth creatures, Reanimate, Dread Return, Black Sun's Twilight, Lively Dirge, Technomancer, The War in Heaven III, The Soul Stone, Liliana the Repentant exhaust)"] }
+    ],
+    "note": "verify-2026-10-02/tam-precons/newcards-report.md stop-proof pass; .claude/skills/deck-building/reference/decks/imotekh-the-stormlord.md §2."
+  },
+  "swaps": [
+    {
+      "out": "Razorlash Transmogrant",
+      "in": "Liliana the Repentant",
+      "role": "recursion / engine",
+      "reason": "Liliana's mill triggers off every creature or planeswalker entering, so an Imotekh Warrior pair mills 4 cards, and every creature card among them is a Syr Konrad ping (and, under Biotransference, an artifact card for a later Imotekh trigger). Her Exhaust ability (\"Return target creature or planeswalker card from your graveyard to the battlefield\") is one Imotekh trigger when it returns an artifact card (any creature card under Biotransference). Razorlash Transmogrant can't block, and its self-return (also an Imotekh trigger) costs {4}{B}{B} unless an opponent controls 4+ nonbasic lands; it was the 09-28 review's #3 weakest card.",
+      "quoteOut": "This creature can't block. {4}{B}{B}: Return this card from your graveyard to the battlefield with a +1/+1 counter on it. This ability costs {4} less to activate if an opponent controls four or more nonbasic lands.",
+      "quoteIn": "Whenever another creature or planeswalker you control enters, mill two cards. Exhaust — {5}{B}: Return target creature or planeswalker card from your graveyard to the battlefield.",
+      "evidence": "newcards-report.md row 2 of §1 (\"Liliana the Repentant → Imotekh, OUT Razorlash Transmogrant\") and its REJECT note for Meren (\"the mill is mandatory per Spawn in the Broodscale loop\")",
+      "verdict": "recommended"
+    }
+  ],
+  "keepers": [
+    { "card": "Trazyn the Infinite", "why": "A static ability grants \"all activated abilities of all artifact cards in your graveyard,\" so Ashnod's Altar, Chronomancer and Illuminor Szeras (a native artifact) in the graveyard become Trazyn's own activated abilities; their costs still apply. No unearth creature replicates this." },
+    { "card": "Szarekh, the Silent King", "why": "\"Mill three ... put an artifact creature card ... into your hand\" triggers on every Szarekh attack, loading the graveyard and refilling the hand in the same ability, unlike the deck's one-shot mill (Flayed One, The War in Heaven chapter II)." },
+    { "card": "Imp's Mischief", "why": "The deck's only protection spell for Imotekh or Biotransference — redirecting a removal or counter at the cost of life equal to that spell's mana value. No other card in the list fills this role." },
+    { "card": "The Darkness Crystal", "why": "Not a wipe: a replacement effect (\"If a nontoken creature an opponent controls would die, instead exile it and you gain 2 life\") that later puts one of those creatures onto the battlefield under your control for {4}{B}{B}, {T}. The operator's own creatures still die normally, but Syr Konrad gets nothing from opposing deaths (pilot guide §2)." },
+    { "card": "Portal to Phyrexia", "why": "Strips three creatures from each opponent and then reanimates a creature every upkeep; a high-impact top end the deck has no cheaper replacement for, and Anrakyr the Traveller can cast it from the graveyard for life instead of mana." }
+  ],
+  "nearTies": [],
+  "mulligan": {
+    "keep": [
+      "Swamp, Swamp, Swamp, Sol Ring, Psychomancer, Deadly Dispute, Buried Alive — Imotekh T3; Dispute sacrifices Psychomancer for a drain plus an artifact in the yard; Buried Alive sets up the Colossus loop",
+      "Swamp, Swamp, Crypt of Agadeem, Arcane Signet, Umbral Collar Zealot, Biotransference, Reanimate — Biotransference T3 then Imotekh; Zealot surveils targets for Reanimate",
+      "Swamp, Swamp, Swamp, Mortuary Mire, Flayed One, Marionette Apprentice, Phyrexian Arena — lands, card flow, a graveyard filler and a payoff"
+    ],
+    "mulligan": [
+      "Swamp, Metalwork Colossus, Portal to Phyrexia, Technomancer, Their Name Is Death, The War in Heaven, Gilded Lotus — 1 land; everything costs 5+ and Colossus is not cheap without a board of noncreature artifacts",
+      "Swamp x5, Myriad Landscape, Dark Ritual — flood; Dark Ritual has nothing to cast",
+      "Swamp, Swamp, Dread Return, Reanimate, Black Sun's Twilight, Imp's Mischief, Dismember — no ramp, no bodies; every spell needs a graveyard that is still empty"
+    ]
+  },
+  "pilotRules": [
+    "Return creatures from the graveyard one at a time where possible — multiple cards leaving at once is still only one Imotekh trigger.",
+    "Unearthed creatures don't die, they're exiled at end of turn (CR 702.84a), so sacrificing them triggers nothing except Psychomancer and Ashnod's Altar's mana.",
+    "Count noncreature-artifact mana value before starting the Colossus loop: it needs 11+ to cast free, or 9+ with Ashnod's Altar out to run mana-neutral.",
+    "Check the battlefield for Liliana the Repentant before looping: her mandatory mill takes 6 cards per Colossus pass (Colossus and two Warriors entering; 8 with Biotransference's Warrior), so count the library first.",
+    "Biotransference costs 1 life per artifact spell cast; Psychomancer's extra life gain offsets it during a long loop.",
+    "Cast Their Name Is Death or Phyrexian Scriptures only with Biotransference out, or when every creature the operator controls is already an artifact; otherwise Konrad, Crypt Ghast, Bats, Apprentice, Master, Zealot and Liliana die too."
+  ],
+  "sources": [
+    "decks/paper/decks/imotekh-the-stormlord.txt",
+    "verify-2026-10-07/primers/base/imotekh-the-stormlord.txt",
+    "verify-2026-10-02/tam-precons/newcards-report.md",
+    ".claude/skills/deck-building/reference/decks/imotekh-the-stormlord.md"
+  ]
+}

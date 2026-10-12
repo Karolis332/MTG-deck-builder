@@ -1,0 +1,1 @@
+Gorma, the Gullet: 101.63 [land38 ramp12 draw10 remo10 wipe3 prot6 pen0] (seeds cf 62.72 [land36 ramp13 draw11 remo11 wipe2 prot1 pen4] | previous 100.68 [land36 ramp12 draw10 remo11 wipe3 prot6 pen0]; 26 swaps, 690613 ms)

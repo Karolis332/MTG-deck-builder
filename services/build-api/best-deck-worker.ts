@@ -7,9 +7,15 @@
  * `server.listen(PORT)` at import time and would try to re-bind the same port in this process.
  */
 import { runBestDeck, BestDeckInputError, type RunBestDeckRequest, type RunBestDeckProgress, type RunBestDeckResult } from '../../src/lib/best-deck-run';
+import { resolveCard } from '../../src/lib/best-deck';
 import { scoreDeckSafely } from '../../src/lib/deck-score-input';
 import { toBuildCard } from './resolve';
 import type { DbCard } from '../../src/lib/types';
+
+/** Same convention as the rest of the API (`image_uri_small`, e.g. `ai-suggest/route.ts`). */
+function imageUriOf(name: string): string | null {
+  return resolveCard(name)?.image_uri_small ?? null;
+}
 
 type DoneMessage = { type: 'done'; result: unknown };
 type FailedMessage = { type: 'failed'; error: string; inputError?: boolean };
@@ -86,6 +92,12 @@ export function buildDoneResult(result: RunBestDeckResult, request: RunBestDeckR
     commanders: result.commanders,
     note: result.note,
     unresolved: result.unresolved,
+    upgrades: result.upgrades.map((u) => ({ ...u, imageUri: imageUriOf(u.name) })),
+    replacements: result.replacements.map((r) => ({
+      forCard: r.forCard,
+      options: r.options.map((o) => ({ ...o, imageUri: imageUriOf(o.name) })),
+    })),
+    nearMisses: result.nearMisses.map((n) => ({ ...n, imageUri: imageUriOf(n.name) })),
     price: {
       currency: 'USD',
       total: buyUsd,

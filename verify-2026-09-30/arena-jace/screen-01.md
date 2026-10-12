@@ -1,0 +1,133 @@
+screened 450/450, passed 132, last card read: Ajani's Pridemate
+- Swiftfoot Boots — protection — "Equipped creature has hexproof and haste." — beats: Lightning Greaves (shroud blocks Jace −3 targeting the wearer; hexproof does not)
+- An Offer You Can't Refuse — counter — "Counter target noncreature spell. Its controller creates two Treasure tokens." — beats: Swan Song
+- Fabled Passage — land/fixing — "Then if you control four or more lands, untap that land." — beats: Evolving Wilds
+- Brainstorm — card draw — "Draw three cards, then put two cards from your hand on top of your library in any order." — beats: Frantic Search
+- Urborg, Tomb of Yawgmoth — land/fixing — "Each land is a Swamp in addition to its other land types." — beats: Evolving Wilds (turns on Bleachbone Verge and every B pip)
+- Chromatic Lantern — ramp/fixing — "Lands you control have "{T}: Add one mana of any color." | {T}: Add one mana of any color." — beats: Mind Stone
+- Otawara, Soaring City — land/utility — "Channel — {3}{U}, Discard this card: Return target artifact, creature, enchantment, or planeswalker to its owner's hand." — beats: Island
+- Phyrexian Arena — card draw — "At the beginning of your upkeep, you draw a card and lose 1 life." — beats: Frantic Search
+- Jeska's Will — ramp/card draw — "If you control a commander as you cast this spell, you may choose both instead." — beats: Big Score
+- Wayfarer's Bauble — ramp/fixing — "{2}, {T}, Sacrifice this artifact: Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle." — beats: Mind Stone
+- Ponder — card draw — "Look at the top three cards of your library, then put them back in any order. You may shuffle. | Draw a card." — beats: Frantic Search
+- Lightning Bolt — removal — "Lightning Bolt deals 3 damage to any target." — beats: Abrade
+- Mystical Tutor — tutor — "Search your library for an instant or sorcery card, reveal it, then shuffle and put that card on top." — beats: Enlightened Tutor (fills the instant/sorcery tutor gap)
+- Rakdos Signet — ramp — "{1}, {T}: Add {B}{R}." — beats: Mind Stone
+- Izzet Signet — ramp — "{1}, {T}: Add {U}{R}." — beats: Mind Stone
+- Boros Charm — protection/reach — "Boros Charm deals 4 damage to target player or planeswalker. | • Permanents you control gain indestructible until end of turn." — beats: Lightning Greaves
+- Night's Whisper — card draw — "You draw two cards and lose 2 life." — beats: Frantic Search
+- Karn's Bastion — loyalty support — "{4}, {T}: Proliferate." — beats: Evolving Wilds (colourless land is the cost)
+- Preordain — card draw — "Scry 2, then draw a card." — beats: Frantic Search
+- Ornithopter of Paradise — ramp/fixing/fodder — "Flying | {T}: Add one mana of any color." — beats: Mind Stone (creature card: dilutes the −3)
+- Dovin's Veto — counter — "This spell can't be countered. | Counter target noncreature spell." — beats: Negate
+- Malakir Rebirth // Malakir Mire — land/MDFC — "This land enters tapped. | {T}: Add {B}." — beats: Swamp
+- Gamble — tutor — "Search your library for a card, put that card into your hand, discard a card at random, then shuffle." — beats: Enlightened Tutor (any card)
+- Mox Opal — ramp — "Metalcraft — {T}: Add one mana of any color. Activate only if you control three or more artifacts." — beats: Mind Stone
+- Takenuma, Abandoned Mire — land/utility — "Channel — {3}{B}, Discard this card: Mill three cards, then return a creature or planeswalker card from your graveyard to your hand." — beats: Swamp
+- Boros Signet — ramp — "{1}, {T}: Add {R}{W}." — beats: Mind Stone
+- Orcish Bowmasters — creature/interaction — "Flash | When this creature enters and whenever an opponent draws a card except the first one they draw in each of their draw steps, this creature deals 1 damage to any target. Then amass Orcs 1." — beats: Mirkwood Bats (creature card: dilutes the −3)
+- Exsanguinate — win condition — "Each opponent loses X life. You gain life equal to the life lost this way." — beats: Mirkwood Bats (fills win-con gap)
+- Ragavan, Nimble Pilferer — creature — "Whenever Ragavan deals combat damage to a player, create a Treasure token and exile the top card of that player's library. Until end of turn, you may cast that card." — beats: Professional Face-Breaker (creature card: dilutes the −3)
+- Aetherize — protection/fog — "Return all attacking creatures to their owner's hand." — beats: Lightning Greaves (fills fog gap)
+- Temple of Epiphany — land — "When this land enters, scry 1. | {T}: Add {U} or {R}." — beats: Terramorphic Expanse
+- Witch Enchanter // Witch-Blessed Meadow — land/MDFC — "When this creature enters, destroy target artifact or enchantment an opponent controls. | // | {T}: Add {W}." — beats: Plains
+- Temple of Silence — land — "When this land enters, scry 1. | {T}: Add {W} or {B}." — beats: Terramorphic Expanse
+- Seat of the Synod — land — "{T}: Add {U}." (Artifact Land, feeds Mox Opal metalcraft) — beats: Island
+- Temple of Triumph — land — "When this land enters, scry 1. | {T}: Add {R} or {W}." — beats: Terramorphic Expanse
+- Temple of Enlightenment — land — "When this land enters, scry 1. | {T}: Add {W} or {U}." — beats: Terramorphic Expanse
+- Authority of the Consuls — protection — "Creatures your opponents control enter tapped." — beats: Lightning Greaves (stops haste attacks on walkers)
+- Dawn's Truce — protection — "You and permanents you control gain hexproof until end of turn. If the gift was promised, permanents you control also gain indestructible until end of turn." — beats: Lightning Greaves
+- Temple of Deceit — land — "When this land enters, scry 1. | {T}: Add {U} or {B}." — beats: Terramorphic Expanse
+- Mystic Monastery — land — "This land enters tapped. | {T}: Add {U}, {R}, or {W}." — beats: Terramorphic Expanse
+- Nomad Outpost — land — "This land enters tapped. | {T}: Add {R}, {W}, or {B}." — beats: Terramorphic Expanse
+- Eiganjo, Seat of the Empire — land/utility — "Channel — {2}{W}, Discard this card: It deals 4 damage to target attacking or blocking creature." — beats: Plains
+- Great Furnace — land — "{T}: Add {R}." (Artifact Land, feeds Mox Opal metalcraft) — beats: Mountain
+- Temple of Malice — land — "When this land enters, scry 1. | {T}: Add {B} or {R}." — beats: Terramorphic Expanse
+- Sheoldred, the Apocalypse — big creature — "Whenever you draw a card, you gain 2 life. | Whenever an opponent draws a card, they lose 2 life." — beats: Mirkwood Bats
+- Ancient Den — land — "{T}: Add {W}." (Artifact Land, feeds Mox Opal metalcraft) — beats: Plains
+- Savai Triome — land — "({T}: Add {R}, {W}, or {B}.) | This land enters tapped. | Cycling {3}" — beats: Terramorphic Expanse (fetchable)
+- Voice of Victory — creature/protection — "Your opponents can't cast spells during your turn." — beats: Mirkwood Bats (creature card: dilutes the −3)
+- Terror of the Peaks — big creature — "Whenever another creature you control enters, this creature deals damage equal to that creature's power to any target." — beats: Mirkwood Bats
+- Pinnacle Monk // Mystic Peak — land/MDFC — "As this land enters, you may pay 3 life. If you don't, it enters tapped. | {T}: Add {R}." — beats: Mountain
+- Displacer Kitten — loyalty support/creature — "Whenever you cast a noncreature spell, exile up to one target nonland permanent you control, then return that card to the battlefield under its owner's control." — beats: Archmage Emeritus (resets a spent walker to full loyalty; creature card: dilutes the −3)
+- Bender's Waterskin — ramp/fixing — "Untap this artifact during each other player's untap step. | {T}: Add one mana of any color." — beats: Mind Stone
+- Mortify — removal — "Destroy target creature or enchantment." — beats: Feed the Swarm
+- Thespian's Stage — win condition (with Dark Depths) — "{2}, {T}: This land becomes a copy of target land, except it has this ability." — beats: Evolving Wilds (colourless land is the cost)
+- Vault of Whispers — land — "{T}: Add {B}." (Artifact Land, feeds Mox Opal metalcraft) — beats: Swamp
+- Thundering Falls — land — "({T}: Add {U} or {R}.) | This land enters tapped. | When this land enters, surveil 1." — beats: Terramorphic Expanse (fetchable)
+- Caretaker's Talent — card draw — "Whenever one or more tokens you control enter, draw a card. This ability triggers only once each turn." — beats: Frantic Search
+- Treasure Cruise — card draw — "Delve | Draw three cards." — beats: Frantic Search
+- Meticulous Archive — land — "({T}: Add {W} or {U}.) | This land enters tapped. | When this land enters, surveil 1." — beats: Terramorphic Expanse (fetchable)
+- Into the Flood Maw — tempo/protection — "Return target creature an opponent controls to its owner's hand. If the gift was promised, instead return target nonland permanent an opponent controls to its owner's hand." — beats: Resculpt
+- Sundering Eruption // Volcanic Fissure — land/MDFC — "As this land enters, you may pay 3 life. If you don't, it enters tapped. | {T}: Add {R}." — beats: Mountain
+- Narset's Reversal — counter — "Copy target instant or sorcery spell, then return it to its owner's hand. You may choose new targets for the copy." — beats: Swan Song
+- Flare of Fortitude — protection — "Until end of turn, your life total can't change, and permanents you control gain hexproof and indestructible." — beats: Lightning Greaves
+- Imprisoned in the Moon — removal — "Enchant creature, land, or planeswalker | Enchanted permanent is a colorless land with "{T}: Add {C}" and loses all other card types and abilities." — beats: Feed the Swarm
+- Elegant Parlor — land — "({T}: Add {R} or {W}.) | This land enters tapped. | When this land enters, surveil 1." — beats: Terramorphic Expanse (fetchable)
+- Twinflame Tyrant — big creature — "If a source you control would deal damage to an opponent or a permanent an opponent controls, it deals double that damage instead." — beats: Mirkwood Bats
+- Bitter Triumph — removal — "Destroy target creature or planeswalker." — beats: Feed the Swarm
+- Thrummingbird — loyalty support — "Whenever this creature deals combat damage to a player, proliferate." — beats: Mirkwood Bats (creature card: dilutes the −3)
+- Elesh Norn, Grand Cenobite — big creature — "Other creatures you control get +2/+2. | Creatures your opponents control get -2/-2." — beats: Mirkwood Bats
+- Expressive Iteration — card draw — "Put one of them into your hand, put one of them on the bottom of your library, and exile one of them. You may play the exiled card this turn." — beats: Frantic Search
+- Spell Pierce — counter — "Counter target noncreature spell unless its controller pays {2}." — beats: Swan Song
+- The Soul Stone — ramp — "Indestructible | {T}: Add {B}." — beats: Mind Stone
+- Tezzeret's Gambit — card draw/loyalty support — "Draw two cards, then proliferate." — beats: Big Score
+- Agadeem's Awakening // Agadeem, the Undercrypt — land/MDFC — "As this land enters, you may pay 3 life. If you don't, it enters tapped. | {T}: Add {B}." — beats: Swamp
+- Cabaretti Courtyard — land/fixing — "search your library for a basic Mountain, Forest, or Plains card, put it onto the battlefield tapped, then shuffle and you gain 1 life." — beats: Evolving Wilds (fetches shocks)
+- Sokenzan, Crucible of Defiance — land/token fodder — "Channel — {3}{R}, Discard this card: Create two 1/1 colorless Spirit creature tokens." — beats: Mountain
+- Jhoira, Weatherlight Captain — card draw engine — "Whenever you cast a historic spell, draw a card. (Artifacts, legendaries, and Sagas are historic.)" — beats: Archmage Emeritus (creature card: dilutes the −3)
+- Three Steps Ahead — counter — "+ {1}{U} — Counter target spell. | + {3} — Create a token that's a copy of target artifact or creature you control. | + {2} — Draw two cards, then discard a card." — beats: Negate
+- Restoration Magic — protection — "Cure — {0} — Target permanent gains hexproof and indestructible until end of turn." — beats: Lightning Greaves
+- Vivi Ornitier — ramp creature — "{0}: Add X mana in any combination of {U} and/or {R}, where X is Vivi Ornitier's power." — beats: Archmage Emeritus (creature card: dilutes the −3)
+- Sheoldred's Edict — removal — "• Each opponent sacrifices a nontoken creature of their choice. | • Each opponent sacrifices a planeswalker of their choice." — beats: Feed the Swarm
+- Painful Quandary — win condition/tax — "Whenever an opponent casts a spell, that player loses 5 life unless they discard a card." — beats: Mirkwood Bats
+- Midgar, City of Mako // Reactor Raid — land/card draw — "This land enters tapped. | {T}: Add {B}. | // | You may sacrifice an artifact or creature. If you do, draw two cards." — beats: Swamp
+- Legion Leadership // Legion Stronghold — land/MDFC — "This land enters tapped. | {T}: Add {R} or {W}." — beats: Terramorphic Expanse
+- Archon of Sun's Grace — creature/token maker — "Constellation — Whenever an enchantment you control enters, create a 2/2 white Pegasus creature token with flying." — beats: Mirkwood Bats (creature card: dilutes the −3)
+- Shark Typhoon — token maker (noncreature) — "Whenever you cast a noncreature spell, create an X/X blue Shark creature token with flying, where X is that spell's mana value. | Cycling {X}{1}{U} | When you cycle this card, create an X/X blue Shark creature token with flying." — beats: Way of the Healer
+- Stock Up — card draw — "Look at the top five cards of your library. Put two of them into your hand and the rest on the bottom of your library in any order." — beats: Frantic Search
+- Fracture — removal — "Destroy target artifact, enchantment, or planeswalker." — beats: Feed the Swarm
+- Windcrag Siege — token maker (noncreature) — "• Jeskai — At the beginning of your upkeep, create a 1/1 red Goblin creature token. It gains lifelink and haste until end of turn." — beats: Way of the Healer
+- Flux Channeler — loyalty support — "Whenever you cast a noncreature spell, proliferate." — beats: Mirkwood Bats (creature card: dilutes the −3)
+- Valgavoth, Terror Eater — big creature — "Flying, lifelink | Ward—Sacrifice three nonland permanents. | If a card you didn't control would be put into an opponent's graveyard from anywhere, exile it instead." — beats: Mirkwood Bats
+- Rune-Scarred Demon — big creature — "When this creature enters, search your library for a card, put it into your hand, then shuffle." — beats: Mirkwood Bats
+- Brokers Hideout — land/fixing — "search your library for a basic Forest, Plains, or Island card, put it onto the battlefield tapped, then shuffle and you gain 1 life." — beats: Evolving Wilds (fetches shocks)
+- Experimental Augury — card draw/loyalty support — "Put one of them into your hand and the rest on the bottom of your library in any order. Proliferate." — beats: Frantic Search
+- Exalted Sunborn — creature/token doubler — "If one or more tokens would be created under your control, twice that many of those tokens are created instead." — beats: Mirkwood Bats (creature card: dilutes the −3)
+- Third Path Iconoclast — creature/token maker — "Whenever you cast a noncreature spell, create a 1/1 colorless Soldier artifact creature token." — beats: Mirkwood Bats (creature card: dilutes the −3)
+- All Will Be One — win condition — "Whenever you put one or more counters on a permanent or player, this enchantment deals that much damage to target opponent, creature an opponent controls, or planeswalker an opponent controls." — beats: Mirkwood Bats (every +1, empower and proliferate becomes damage)
+- Waterlogged Teachings // Inundated Archive — land/MDFC — "Search your library for an instant card or a card with flash, reveal it, put it into your hand, then shuffle. | // | This land enters tapped. | {T}: Add {U} or {B}." — beats: Terramorphic Expanse
+- Lindblum, Industrial Regency // Mage Siege — land/token fodder — "This land enters tapped. | {T}: Add {R}. | // | Create a 0/1 black Wizard creature token" — beats: Mountain
+- Shatterskull Smashing // Shatterskull, the Hammer Pass — land/MDFC removal — "Shatterskull Smashing deals X damage divided as you choose among up to two target creatures and/or planeswalkers." — beats: Mountain
+- Dark Depths — win condition (with Thespian's Stage) — "When Dark Depths has no ice counters on it, sacrifice it. If you do, create Marit Lage, a legendary 20/20 black Avatar creature token with flying and indestructible." — beats: Evolving Wilds (colourless land is the cost)
+- Long River's Pull — counter — "Counter target creature spell. If the gift was promised, instead counter target spell." — beats: Swan Song
+- Izzet Charm — removal/counter — "• Counter target noncreature spell unless its controller pays {2}. | • Izzet Charm deals 2 damage to target creature. | • Draw two cards, then discard two cards." — beats: Abrade
+- Avatar's Wrath — board wipe (spares walkers) — "Choose up to one target creature, then airbend all other creatures. (Exile them. While each one is exiled, its owner may cast it for {2} rather than its mana cost.)" — beats: Fumigate
+- Fiery Confluence — removal/reach — "• Fiery Confluence deals 1 damage to each creature. | • Fiery Confluence deals 2 damage to each opponent. | • Destroy target artifact." — beats: Abrade
+- Replicating Ring — ramp/fixing — "{T}: Add one mana of any color." — beats: Mind Stone
+- Urza's Ruinous Blast — board wipe (spares legendary walkers and Ways) — "Exile all nonland permanents that aren't legendary." — beats: Fumigate
+- Zetalpa, Primal Dawn — big creature — "Flying, double strike, vigilance, trample, indestructible" — beats: Mirkwood Bats
+- Lyra Dawnbringer — big creature — "Flying | First strike | Lifelink" — beats: Mirkwood Bats
+- Grateful Apparition — loyalty support — "Whenever this creature deals combat damage to a player or planeswalker, proliferate." — beats: Mirkwood Bats (creature card: dilutes the −3)
+- Razorgrass Ambush // Razorgrass Field — land/MDFC removal — "Razorgrass Ambush deals 3 damage to target attacking or blocking creature. | // | {T}: Add {W}." — beats: Plains
+- Razaketh, the Foulblooded — big creature — "Pay 2 life, Sacrifice another creature: Search your library for a card, put that card into your hand, then shuffle." — beats: Mirkwood Bats
+- Touch the Spirit Realm — removal — "When this enchantment enters, exile up to one target artifact or creature until this enchantment leaves the battlefield." — beats: Feed the Swarm
+- Bitterbloom Bearer — token engine — "At the beginning of your upkeep, you lose 1 life and create a 1/1 blue and black Faerie creature token with flying." — beats: Mirkwood Bats (creature card: dilutes the −3)
+- Erode — removal — "Destroy target creature or planeswalker. Its controller may search their library for a basic land card" — beats: Feed the Swarm
+- Day of Judgment — board wipe (spares walkers) — "Destroy all creatures." — beats: Fumigate
+- Black Sun's Zenith — board wipe (spares walkers) — "Put X -1/-1 counters on each creature. Shuffle Black Sun's Zenith into its owner's library." — beats: Fumigate
+- Shattered Landscape — land/fixing — "{T}, Sacrifice this land: Search your library for a basic Mountain, Plains, or Swamp card, put it onto the battlefield tapped" — beats: Evolving Wilds (untapped, fetches shocks)
+- Dragon Fodder — token maker (noncreature) — "Create two 1/1 red Goblin creature tokens." — beats: Way of the Healer
+- Witness Protection — removal — "Enchanted creature loses all abilities and is a green and white Citizen creature with base power and toughness 1/1" — beats: Feed the Swarm
+- Hero's Downfall — removal — "Destroy target creature or planeswalker." — beats: Feed the Swarm
+- Conduit Pylons — land/fixing — "When this land enters, surveil 1. | {T}: Add {C}. | {1}, {T}: Add one mana of any color." — beats: Evolving Wilds
+- Krenko's Command — token maker (noncreature) — "Create two 1/1 red Goblin creature tokens." — beats: Way of the Healer
+- Karn, the Great Creator — planeswalker — "+1: Until your next turn, up to one target noncreature artifact becomes an artifact creature with power and toughness each equal to its mana value." — beats: Saheeli, Sublime Artificer (animates a rock into −3 fodder; −2 has no sideboard in Arena Brawl)
+- Overlord of the Balemurk — creature/recursion — "Impending 5—{1}{B} | Whenever this permanent enters or attacks, mill four cards, then you may return a non-Avatar creature card or a planeswalker card from your graveyard to your hand." — beats: Mirkwood Bats
+- Contentious Plan — loyalty support — "Proliferate. | Draw a card." — beats: Way of the Healer
+- Virtue of Knowledge // Vantress Visions — loyalty support — "Copy target activated or triggered ability you control. You may choose new targets for the copy." (copies a loyalty activation or a Way empower) — beats: Plan for All Outcomes
+- Summon: Primal Odin — creature — "I — Gungnir — Destroy target creature an opponent controls. | II — Zantetsuken — This creature gains "Whenever this creature deals combat damage to a player, that player loses the game."" — beats: Mirkwood Bats
+- Singularity Rupture — board wipe (spares walkers) — "Destroy all creatures, then any number of target players each mill half their library, rounded down." — beats: Fumigate
+- Circle of Power — card draw/token fodder — "You draw two cards and you lose 2 life. Create a 0/1 black Wizard creature token" — beats: Big Score
+- Banishing Light — removal — "When this enchantment enters, exile target nonland permanent an opponent controls until this enchantment leaves the battlefield." — beats: Feed the Swarm
+- Crib Swap — removal — "Exile target creature. Its controller creates a 1/1 colorless Shapeshifter creature token with changeling." — beats: Feed the Swarm

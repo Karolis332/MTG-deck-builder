@@ -1,0 +1,2 @@
+x35.txt                  35L | keep7 0.675 | 4 drops by T4 0.852 | 6+ threat T5 0.748 T6 0.936 | spells T1-8 12.45 | screw 0.015 | flood>=3 0.521 (mean 3.84) | flooded+no gas 0.097 | extra draws 10.62 | free 0.94 | 6+ by T8 5.64 | <=1 by T7 0.066
+x37.txt                  37L | keep7 0.698 | 4 drops by T4 0.877 | 6+ threat T5 0.777 T6 0.950 | spells T1-8 12.57 | screw 0.010 | flood>=3 0.579 (mean 4.33) | flooded+no gas 0.118 | extra draws 11.00 | free 1.02 | 6+ by T8 5.85 | <=1 by T7 0.052

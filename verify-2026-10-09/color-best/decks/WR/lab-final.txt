@@ -1,0 +1,13 @@
+BASE obj 82.20 DS 70.1 pen 0 {"land":36,"ramp":12,"draw":10,"removal":11,"board_wipe":4,"protection":6} mana=89 curve=91 interaction=96 advantage=75 win=63 synergy=74 meta=50 structure=100
+   0.05  Decanter of Endless Water => Sol Ring   DS 0.0 pen 0 mana=89 curve=90 interaction=96 advantage=75 win=63 synergy=74 meta=50 structure=100
+   0.00  Bender's Waterskin => Arcane Signet   DS 0.0 pen 0 mana=89 curve=90 interaction=96 advantage=75 win=63 synergy=77 meta=50 structure=100
+   0.03  Reliquary Tower => Command Tower   DS 0.0 pen 0 mana=89 curve=91 interaction=96 advantage=75 win=63 synergy=74 meta=50 structure=100
+   0.02  Nesting Grounds => Exotic Orchard   DS 0.0 pen 0 mana=89 curve=91 interaction=96 advantage=75 win=63 synergy=74 meta=50 structure=100
+  -0.06  Adaptive Automaton => Bane of Bala Ged   DS 0.0 pen 0 mana=83 curve=90 interaction=96 advantage=75 win=63 synergy=74 meta=50 structure=100
+   0.01  Academy Manufactor => Firemane Commando   DS 0.0 pen 0 mana=89 curve=91 interaction=96 advantage=75 win=63 synergy=72 meta=50 structure=100
+   0.00  Magda, the Hoardmaster => Sheltered by Ghosts   DS 0.0 pen 0 mana=83 curve=91 interaction=96 advantage=75 win=63 synergy=74 meta=50 structure=100
+  -0.03  Ajani Resolute => Eldrazi Ravager   DS 0.0 pen 0 mana=83 curve=90 interaction=96 advantage=75 win=63 synergy=72 meta=50 structure=100
+  -0.02  Emerald Medallion => Steel Hellkite   DS 0.0 pen 0 mana=83 curve=90 interaction=96 advantage=75 win=63 synergy=74 meta=50 structure=100
+   0.02  Sapphire Medallion => Another Round   DS 0.0 pen 0 mana=89 curve=91 interaction=96 advantage=75 win=63 synergy=74 meta=50 structure=100
+  -2.02  Sram, Senior Edificer => Sami, Wildcat Captain   DS 0.0 pen 1 mana=83 curve=90 interaction=96 advantage=75 win=63 synergy=72 meta=50 structure=100
+ALL  obj 82.20 (-0.01) DS 70.1 pen 0 {"land":36,"ramp":12,"draw":11,"removal":12,"board_wipe":4,"protection":6} mana=85 curve=86 interaction=96 advantage=75 win=63 synergy=70 meta=50 structure=100

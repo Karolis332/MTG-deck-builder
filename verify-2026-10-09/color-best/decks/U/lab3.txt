@@ -1,0 +1,8 @@
+BASE obj 75.72 DS 63.6 pen 0 {"land":37,"ramp":12,"draw":10,"removal":10,"board_wipe":3,"protection":5} mana=96 curve=92 interaction=100 advantage=75 win=55 synergy=100 meta=50 structure=100
+  -0.23  Giant's Boulder => Into the Flood Maw   DS 0.0 pen 0 mana=96 curve=92 interaction=100 advantage=75 win=55 synergy=100 meta=50 structure=100
+   0.00  Sky Diamond => Arcane Signet   DS 0.0 pen 0 mana=96 curve=92 interaction=100 advantage=75 win=55 synergy=100 meta=50 structure=100
+   0.02  Breaker of Creation => Thought Monitor   DS 0.0 pen 0 mana=96 curve=92 interaction=100 advantage=75 win=55 synergy=100 meta=50 structure=100
+   0.00  Ginger, Queen of Sweets => Torrential Gearhulk   DS 0.0 pen 0 mana=96 curve=92 interaction=100 advantage=75 win=55 synergy=100 meta=50 structure=100
+  -0.06  Bygone Colossus => Mishra's Bauble   DS 0.0 pen 0 mana=96 curve=92 interaction=100 advantage=75 win=55 synergy=100 meta=50 structure=100
+   0.00  Mana Confluence => Conduit Pylons   DS 0.0 pen 0 mana=95 curve=92 interaction=100 advantage=75 win=55 synergy=100 meta=50 structure=100
+ALL  obj 69.86 (-5.85) DS 58.0 pen 0 {"land":37,"ramp":11,"draw":12,"removal":10,"board_wipe":3,"protection":5} mana=95 curve=92 interaction=100 advantage=75 win=48 synergy=100 meta=50 structure=100

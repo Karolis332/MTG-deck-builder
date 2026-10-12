@@ -1,0 +1,80 @@
+file      : C:/Users/QuLeR/AppData/Local/Temp/g.txt
+format    : commander   commander: Bumi, Unleashed
+totals    : 100 cards | 34 lands (34 eff.) | 65 nonland | avg MV 3.25
+curve     : 1:7 2:14 3:16 4:14 5:12 6:2
+VERDICT   : FAIL
+
+  PASS  size        100 cards (commander wants 100)
+  PASS  singleton   singleton respected (basics exempt)
+  PASS  legality    every card legal in commander
+  PASS  rules       no other format rule broken
+  PASS  identity    all cards inside GR
+  PASS  ownership   all cards owned; paper collection imported 0 days ago
+  PASS  arenaNames  every line uses a name Arena accepts
+  WARN  lands       34 lands (+0 MDFC land backs = 34 effective); Karsten wants 38 ±2
+  FAIL  plan        3/65 nonland cards interact (5%) — commander wants: general value
+        - Bushwhack (MV 1)
+        - Elvish Mystic (MV 1)
+        - Lavaspur Boots (MV 1)
+        - Longstalk Brawl (MV 1)
+        - Silkguard (MV 1)
+        - Snakeskin Veil (MV 1)
+        - Sol Ring (MV 1)
+        - Bulk Up (MV 2)
+        - Explore (MV 2)
+        - Farseek (MV 2)
+        - Fists of Flame (MV 2)
+        - Fling (MV 2)
+        - Frog Butler (MV 2)
+        - Nature's Lore (MV 2)
+        - Rampant Growth (MV 2)
+        - Shared Roots (MV 2)
+        - Spider Manifestation (MV 2)
+        - Talisman of Impulse (MV 2)
+        - Temur Battle Rage (MV 2)
+        - The Last Agni Kai (MV 2)
+        - Thrill of Possibility (MV 2)
+        - Bitter Work (MV 3)
+        - Commander's Sphere (MV 3)
+        - Cultivate (MV 3)
+        - Heartbeat of Spring (MV 3)
+        - Hunter's Insight (MV 3)
+        - Lumbering Worldwagon (MV 3)
+        - Rockalanche (MV 3)
+        - Roiling Regrowth (MV 3)
+        - Savage Smash (MV 3)
+        - Seize the Spoils (MV 3)
+        - Summon: G.F. Ifrit (MV 3)
+        - Tablet of Discovery (MV 3)
+        - Tale of Katara and Toph (MV 3)
+        - Toph, the Blind Bandit (MV 3)
+        - Amarant Coral (MV 4)
+        - Bumi Bash (MV 4)
+        - Crystalline Armor (MV 4)
+        - Decimate (MV 4)
+        - Drix Fatemaker (MV 4)
+        - Earth Rumble (MV 4)
+        - Halana and Alena, Partners (MV 4)
+        - Seismic Tutelage (MV 4)
+        - Smellerbee, Rebel Fighter (MV 4)
+        - Solid Ground (MV 4)
+        - The Boulder, Ready to Rumble (MV 4)
+        - The Earth King (MV 4)
+        - Toph, Greatest Earthbender (MV 4)
+        - Awakening of Vitu-Ghazi (MV 5)
+        - Badgermole (MV 5)
+        - Braulios of Pheres Band (MV 5)
+        - Bumi, Eclectic Earthbender (MV 5)
+        - Cracked Earth Technique (MV 5)
+        - Germination Practicum (MV 5)
+        - Nissa, Who Shakes the World (MV 5)
+        - Ohran Frostfang (MV 5)
+        - Overrun (MV 5)
+        - Part in Friendship (MV 5)
+        - Spry and Mighty (MV 5)
+        - Yedora, Grave Gardener (MV 5)
+        - Flopsie, Bumi's Buddy (MV 6)
+        - Quilled Greatwurm (MV 6)
+  PASS  curve       avg MV 3.25; commander sets no cost threshold
+  PASS  wincons     14 win condition(s)/closer(s)
+  PASS  locks       0 locked card(s) present and intact

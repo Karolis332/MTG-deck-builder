@@ -1,0 +1,7 @@
+final.txt        38L | keep7 0.732 | 4th land T4 0.898 | Bumi T5 0.000 | Gil T3 0.919 Alena T5 0.956 | screw 0.007 | flood 0.071 | spells T1-8 16.71 | clock median T7 (P<=T6 0.152, <=T7 0.665, <=T8 0.938, mean 7.26)
+g-AvatarofSlau.txt 38L | keep7 0.733 | 4th land T4 0.896 | Bumi T5 0.000 | Gil T3 0.921 Alena T5 0.958 | screw 0.009 | flood 0.070 | spells T1-8 16.79 | clock median T7 (P<=T6 0.142, <=T7 0.664, <=T8 0.935, mean 7.28)
+g-BitterWork.txt 38L | keep7 0.736 | 4th land T4 0.897 | Bumi T5 0.000 | Gil T3 0.924 Alena T5 0.962 | screw 0.007 | flood 0.056 | spells T1-8 16.67 | clock median T7 (P<=T6 0.115, <=T7 0.601, <=T8 0.925, mean 7.38)
+g-EtaliPrimalS.txt 38L | keep7 0.738 | 4th land T4 0.897 | Bumi T5 0.000 | Gil T3 0.917 Alena T5 0.955 | screw 0.006 | flood 0.073 | spells T1-8 16.70 | clock median T7 (P<=T6 0.124, <=T7 0.629, <=T8 0.930, mean 7.34)
+g-Forest.txt     39L | keep7 0.755 | 4th land T4 0.910 | Bumi T5 0.000 | Gil T3 0.933 Alena T5 0.967 | screw 0.006 | flood 0.073 | spells T1-8 16.97 | clock median T7 (P<=T6 0.135, <=T7 0.652, <=T8 0.940, mean 7.29)
+g-HalanaandAle.txt 38L | keep7 0.741 | 4th land T4 0.902 | Bumi T5 0.000 | Gil T3 0.920 Alena T5 0.958 | screw 0.008 | flood 0.072 | spells T1-8 16.50 | clock median T7 (P<=T6 0.119, <=T7 0.608, <=T8 0.924, mean 7.37)
+g-Paleoloth.txt  38L | keep7 0.736 | 4th land T4 0.898 | Bumi T5 0.000 | Gil T3 0.922 Alena T5 0.957 | screw 0.010 | flood 0.070 | spells T1-8 16.77 | clock median T7 (P<=T6 0.124, <=T7 0.634, <=T8 0.932, mean 7.34)

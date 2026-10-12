@@ -1,0 +1,1 @@
+Pizza Face, Gastromancer: 101.29 [land38 ramp12 draw10 remo12 wipe3 prot6 pen0] (seeds cf 45.41 [land37 ramp22 draw10 remo6 wipe2 prot4 pen15] | previous 100.11 [land38 ramp12 draw11 remo11 wipe3 prot6 pen0]; 8 swaps, 335293 ms)

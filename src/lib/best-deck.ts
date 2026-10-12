@@ -12,10 +12,11 @@
  */
 import type { Statement } from 'better-sqlite3';
 import { getDb } from './db';
+import { rankRemovable, withSlot } from './deck-climb';
 import { scoreDeckSafely, type DeckScorePayload } from './deck-score-input';
 import { goldfish, type GoldfishStats } from './goldfish-sim';
 import { computePowerLevel } from './power-level-edhpl';
-import { classifyCard, computeRatioHealth, getFormatRatios, type CardCategory, type ClassifiedCard } from './card-classifier';
+import { classifyCard, computeRatioHealth, getFormatRatios, getPrimaryCategory, type CardCategory, type ClassifiedCard } from './card-classifier';
 import type { DbCard } from './types';
 
 export interface Weights { tempo: number; keep: number; role: number; games: number }
@@ -235,6 +236,176 @@ export function makeScorer(format: string, commander: DbCard, w: Weights) {
     const { penalty, roles } = rolePenalty(deck, format);
     return { model, gf, roles, rolePenalty: penalty, objective: deckScoreTotal(model) + w.tempo * gf.tempo + w.keep * gf.keep7 - w.role * penalty };
   };
+}
+
+// ── Report pass (v2): bounded model-scored upgrades / replacements / near-misses ────────────
+// Contract: `C:\Users\QuLeR\.claude\harness\briefs\best-deck-contract.md` ("v2" fields).
+
+let priceRankedStmt: Statement | undefined;
+/** A broad, EDHREC-rank-ordered, priced-only pool — deduped by name (printings share a name but
+ * are different rows). `n` is generous relative to `limit` so identity/legality filtering in JS
+ * afterwards doesn't starve a narrow colour identity (same shape as `edhrecFallbackCards`). */
+function priceRankedCards(n: number): DbCard[] {
+  priceRankedStmt ??= getDb().prepare(
+    "select * from cards where price_usd is not null and layout not in ('art_series','token') order by edhrec_rank asc limit ?",
+  );
+  const rows = priceRankedStmt.all(n) as DbCard[];
+  return [...new Map(rows.map((c) => [c.name, c])).values()];
+}
+
+/**
+ * Unowned, priced, in-identity, legal, not already in the deck — sorted by this commander's
+ * inclusion rate (desc) then EDHREC rank (asc), ties by name. Budget is deliberately ignored
+ * here: the upgrades pass tests gain-per-dollar itself, so filtering by price here would hide a
+ * correct (if expensive) upgrade before it's even scored.
+ */
+export function buyCandidatesForReport(
+  commander: DbCard, format: string, ownedNames: ReadonlySet<string>, inDeckNames: ReadonlySet<string>, limit: number,
+): DbCard[] {
+  const identity = identityOf(commander);
+  const incl = cfStats(commander.name);
+  const pool = priceRankedCards(limit * 50);
+  return pool
+    .filter((c) => c.name !== commander.name && !ownedNames.has(c.name) && !inDeckNames.has(c.name)
+      && legalIn(c, format) && identityOf(c).every((x) => identity.includes(x)))
+    .sort((a, b) => (incl.get(b.name) ?? 0) - (incl.get(a.name) ?? 0) || (a.edhrec_rank ?? 1e6) - (b.edhrec_rank ?? 1e6) || a.name.localeCompare(b.name))
+    .slice(0, limit);
+}
+
+export interface ReportUpgrade { name: string; priceUsd: number; replaces: string; gain: number }
+export interface ReportReplacementOption { name: string; delta: number }
+export interface ReportReplacement { forCard: string; options: ReportReplacementOption[] }
+export interface ReportNearMiss { name: string; owned: boolean; priceUsd: number | null; delta: number; slot: string }
+export interface ReportResult {
+  upgrades: ReportUpgrade[];
+  replacements: ReportReplacement[];
+  nearMisses: ReportNearMiss[];
+  evaluations: number;
+}
+
+export interface ReportOpts {
+  format: string;
+  commander: DbCard;
+  weights: Weights;
+  /** Resolved owned cards (for same-role replacement candidates), not just names. */
+  ownedCards: readonly DbCard[];
+  ownedNames: ReadonlySet<string>;
+  basics: readonly DbCard[];
+  /** Default: ≤ 600 evaluations. */
+  maxEvaluations?: number;
+  /** Default: ≤ 60s, relative to now. */
+  deadlineMs?: number;
+  /** Minimum |delta| to count as an upgrade; also the near-miss band's half-width. Default 0.25. */
+  epsilon?: number;
+}
+
+const REPORT_UPGRADE_CANDIDATES = 30;
+const REPORT_UPGRADE_MAX = 15;
+const REPORT_UPGRADE_SLOTS = 6; // K in the brief
+const REPORT_REPLACEMENT_CANDIDATES = 5;
+const REPORT_REPLACEMENT_MAX = 2;
+const REPORT_NEAR_MISS_MAX = 12;
+export const REPORT_MAX_EVALUATIONS = 600;
+export const REPORT_DEADLINE_MS = 60_000;
+
+/**
+ * Bounded post-climb report: top unowned upgrades (budget ignored, ranked gain/$), the best owned
+ * stand-ins for each buy-list card, and everything tested that landed in neither bucket (the
+ * maybeboard). Stops issuing new tests once the evaluation or wall-clock budget is spent — a
+ * partially-filled report (fewer than the max rows) is the correct behaviour under pressure, not
+ * a bug. Deterministic: every candidate list and every output list has a name tiebreak.
+ */
+export function reportAlternatives(
+  deck: readonly DbCard[], buyList: readonly { name: string; priceUsd: number }[], opts: ReportOpts,
+): ReportResult {
+  const deadlineAt = Date.now() + (opts.deadlineMs ?? REPORT_DEADLINE_MS);
+  const maxEvaluations = opts.maxEvaluations ?? REPORT_MAX_EVALUATIONS;
+  const epsilon = opts.epsilon ?? MIN_GAIN_DEFAULT;
+  const scorer = makeScorer(opts.format, opts.commander, opts.weights);
+  const repeatable = new Set(opts.basics.map((b) => b.name));
+
+  let evaluations = 0;
+  const withinBudget = (): boolean => evaluations < maxEvaluations && Date.now() < deadlineAt;
+  const score = (d: readonly (DbCard | null)[]): number => {
+    evaluations++;
+    return scorer(d).objective;
+  };
+
+  // ponytail: this removal ranking isn't itself budget-gated — it always costs up to one
+  // evaluation per non-basic deck slot (DECK_SIZE = 99, well under maxEvaluations' 600 default),
+  // same as climbDeck's own per-pass ranking. Only safe because the deck size is fixed and small;
+  // gate it too if `reportAlternatives` is ever asked to rank something unbounded.
+  const current = score(deck);
+  const deckNames = new Set(deck.map((c) => c.name));
+  const weakSlots = rankRemovable(deck, current, score, { repeatable }).slice(0, REPORT_UPGRADE_SLOTS);
+
+  // Every candidate tested (upgrade or replacement), keyed by name, remembering the
+  // smallest-magnitude delta seen — the near-miss pass reuses this rather than re-testing.
+  const tested = new Map<string, { delta: number; slot: string; owned: boolean; priceUsd: number | null }>();
+  const remember = (name: string, delta: number, slot: string, owned: boolean, priceUsd: number | null): void => {
+    const prior = tested.get(name);
+    if (!prior || Math.abs(delta) < Math.abs(prior.delta)) tested.set(name, { delta, slot, owned, priceUsd });
+  };
+
+  // ── upgrades: top unpriced candidates tested on the K weakest slots, budget ignored ──
+  const upgrades: ReportUpgrade[] = [];
+  if (withinBudget() && weakSlots.length) {
+    const candidates = buyCandidatesForReport(opts.commander, opts.format, opts.ownedNames, deckNames, REPORT_UPGRADE_CANDIDATES);
+    for (const cand of candidates) {
+      if (!withinBudget()) break;
+      const price = costOf(cand, opts.ownedNames);
+      if (price === null || price <= 0) continue;
+      let bestDelta = -Infinity;
+      let bestSlot = weakSlots[0].name;
+      for (const slot of weakSlots) {
+        if (!withinBudget()) break;
+        const delta = score(withSlot(deck, slot.i, cand)) - current;
+        if (delta > bestDelta) { bestDelta = delta; bestSlot = slot.name; }
+      }
+      remember(cand.name, bestDelta, bestSlot, false, price);
+      if (bestDelta >= epsilon) {
+        upgrades.push({ name: cand.name, priceUsd: price, replaces: bestSlot, gain: Math.round(bestDelta * 100) / 100 });
+      }
+    }
+  }
+  upgrades.sort((a, b) => (b.gain / b.priceUsd) - (a.gain / a.priceUsd) || a.name.localeCompare(b.name));
+  const upgradesOut = upgrades.slice(0, REPORT_UPGRADE_MAX);
+
+  // ── replacements: per buy-list card, the best owned same-role stand-ins for its slot ──
+  const incl = cfStats(opts.commander.name);
+  const ownedNotInDeck = opts.ownedCards.filter((c) => !deckNames.has(c.name) && !BASIC_RE.test(c.name));
+  const replacements: ReportReplacement[] = [];
+  for (const buyEntry of buyList) {
+    if (!withinBudget() || buyEntry.name === opts.commander.name) continue;
+    const slotIdx = deck.findIndex((c) => c.name === buyEntry.name);
+    if (slotIdx === -1) continue;
+    const slotCard = deck[slotIdx];
+    const role = getPrimaryCategory(classifyCard(slotCard.name, slotCard.oracle_text || '', slotCard.type_line, slotCard.cmc));
+    const candidates = ownedNotInDeck
+      .filter((c) => getPrimaryCategory(classifyCard(c.name, c.oracle_text || '', c.type_line, c.cmc)) === role)
+      .sort((a, b) => (incl.get(b.name) ?? 0) - (incl.get(a.name) ?? 0) || (a.edhrec_rank ?? 1e6) - (b.edhrec_rank ?? 1e6) || a.name.localeCompare(b.name))
+      .slice(0, REPORT_REPLACEMENT_CANDIDATES);
+
+    const options: ReportReplacementOption[] = [];
+    for (const cand of candidates) {
+      if (!withinBudget()) break;
+      const delta = Math.round((score(withSlot(deck, slotIdx, cand)) - current) * 100) / 100;
+      options.push({ name: cand.name, delta });
+      remember(cand.name, delta, slotCard.name, true, null);
+    }
+    options.sort((a, b) => b.delta - a.delta || a.name.localeCompare(b.name));
+    replacements.push({ forCard: buyEntry.name, options: options.slice(0, REPORT_REPLACEMENT_MAX) });
+  }
+  replacements.sort((a, b) => a.forCard.localeCompare(b.forCard));
+
+  // ── near-misses: everything tested above that landed within ε of entering (the maybeboard) ──
+  const nearMisses: ReportNearMiss[] = [...tested.entries()]
+    .filter(([, v]) => v.delta > -epsilon && v.delta < epsilon)
+    .map(([name, v]) => ({ name, owned: v.owned, priceUsd: v.priceUsd, delta: v.delta, slot: v.slot }))
+    .sort((a, b) => b.delta - a.delta || a.name.localeCompare(b.name))
+    .slice(0, REPORT_NEAR_MISS_MAX);
+
+  return { upgrades: upgradesOut, replacements, nearMisses, evaluations };
 }
 
 export function powerOf(deck: readonly DbCard[], commander: DbCard): { powerLevel: number; bracket: number } {

@@ -1,0 +1,523 @@
+3	2	Arcane Signet | Art | {T}: Add one mana of any color in your commander's color identity.
+9	0	Exotic Orchard | Land | {T}: Add one mana of any color that a land an opponent controls could produce.
+25	3	Beast Within | Inst | Destroy target permanent. Its controller creates a 3/3 green Beast creature token.
+28	0	Terramorphic Expanse | Land | {T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then 
+39	4	Solemn Simulacrum | Art Cr — Golem | When this creature enters, you may search your library for a basic land card, put that card onto the battlefie
+44	0	Fabled Passage | Land | {T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then 
+52	2	Arcane Denial | Inst | Counter target spell. Its controller may draw up to two cards at the beginning of the next turn's upkeep. You 
+53	3	Commander's Sphere | Art | {T}: Add one mana of any color in your commander's color identity. Sacrifice this artifact: Draw a card.
+85	3	Chromatic Lantern | Art | Lands you control have "{T}: Add one mana of any color." {T}: Add one mana of any color.
+99	3	Frantic Search | Inst | Draw two cards, then discard two cards. Untap up to three lands.
+112	3	Propaganda | Ench | Creatures can't attack you unless their controller pays {2} for each creature they control that's attacking yo
+125	1	Wayfarer's Bauble | Art | {2}, {T}, Sacrifice this artifact: Search your library for a basic land card, put that card onto the battlefie
+146	1	Ponder | Sorc | Look at the top three cards of your library, then put them back in any order. You may shuffle. Draw a card.
+159	3	Windfall | Sorc | Each player discards their hand, then draws cards equal to the greatest number of cards a player discarded thi
+193	0	Buried Ruin | Land | {T}: Add {C}. {2}, {T}, Sacrifice this land: Return target artifact card from your graveyard to your hand.
+196	4	Thran Dynamo | Art | {T}: Add {C}{C}{C}.
+210	0	Ash Barrens | Land | {T}: Add {C}. Basic landcycling {1} ({1}, Discard this card: Search your library for a basic land card, reveal
+217	1	Opt | Inst | Scry 1. (Look at the top card of your library. You may put that card on the bottom.) Draw a card.
+234	2	Sword of the Animist | L.Art — Equipment | Equipped creature gets +1/+1. Whenever equipped creature attacks, you may search your library for a basic land
+238	2	Growth Spiral | Inst | Draw a card. You may put a land card from your hand onto the battlefield.
+249	3	Harrow | Inst | As an additional cost to cast this spell, sacrifice a land. Search your library for up to two basic land cards
+254	1	Basilisk Collar | Art — Equipment | Equipped creature has deathtouch and lifelink. (Any amount of damage it deals to a creature is enough to destr
+255	4	Archmage Emeritus | Cr — Human Wizard | Magecraft — Whenever you cast or copy an instant or sorcery spell, draw a card.
+295	7	Avenger of Zendikar | Cr — Elemental | When this creature enters, create a 0/1 green Plant creature token for each land you control. Landfall — Whene
+302	4	Skyshroud Claim | Sorc | Search your library for up to two Forest cards, put them onto the battlefield, then shuffle.
+310	3	Dryad of the Ilysian Grove | Ench Cr — Nymph Dryad | You may play an additional land on each of your turns. Lands you control are every basic land type in addition
+319	3	Decanter of Endless Water | Art | You have no maximum hand size. {T}: Add one mana of any color.
+326	4	Harmonize | Sorc | Draw three cards.
+357	2	Sapphire Medallion | Art | Blue spells you cast cost {1} less to cast.
+369	1	Consider | Inst | Surveil 1. (Look at the top card of your library. You may put it into your graveyard.) Draw a card.
+385	6	Rampaging Baloths | Cr — Beast | Trample Landfall — Whenever a land you control enters, create a 4/4 green Beast creature token.
+410	3	Selvala, Heart of the Wilds | L.Cr — Elf Scout | Whenever another creature enters, its controller may draw a card if its power is greater than each other creat
+438	4	Bident of Thassa | L.Ench Art | Whenever a creature you control deals combat damage to a player, you may draw a card. {1}{U}, {T}: Creatures y
+440	2	Pearl Medallion | Art | White spells you cast cost {1} less to cast.
+454	1	Expedition Map | Art | {2}, {T}, Sacrifice this artifact: Search your library for a land card, reveal it, put it into your hand, then
+488	3	Ramunap Excavator | Cr — Snake Cleric | You may play lands from your graveyard.
+499	3	Burnished Hart | Art Cr — Elk | {3}, Sacrifice this creature: Search your library for up to two basic land cards, put them onto the battlefiel
+544	4	Hedron Archive | Art | {T}: Add {C}{C}. {2}, {T}, Sacrifice this artifact: Draw two cards.
+556	3	Bender's Waterskin | Art | Untap this artifact during each other player's untap step. {T}: Add one mana of any color.
+561	0	Nesting Grounds | Land | {T}: Add {C}. {1}, {T}: Move a counter from target permanent you control onto a second target permanent. Activ
+570	0	Talon Gates of Madara | Land — Gate | When this land enters, up to one target creature phases out. {T}: Add {C}. {1}, {T}: Add one mana of any color
+572	3	Worn Powerstone | Art | This artifact enters tapped. {T}: Add {C}{C}.
+591	3	Ghostly Flicker | Inst | Exile two target artifacts, creatures, and/or lands you control, then return those cards to the battlefield un
+605	3	Emry, Lurker of the Loch | L.Cr — Merfolk Wizard | Affinity for artifacts (This spell costs {1} less to cast for each artifact you control.) When Emry enters, mi
+606	3	Cloud Key | Art | As this artifact enters, choose artifact, creature, enchantment, instant, or sorcery. Spells you cast of the c
+607	3	Realmwalker | Cr — Shapeshifter | Changeling (This card is every creature type.) As this creature enters, choose a creature type. You may look a
+638	8	Treasure Cruise | Sorc | Delve (Each card you exile from your graveyard while casting this spell pays for {1}.) Draw three cards.
+649	4	Distant Melody | Sorc | Choose a creature type. Draw a card for each permanent you control of that type.
+653	1	Fog | Inst | Prevent all combat damage that would be dealt this turn.
+687	1	Into the Flood Maw | Inst | Gift a tapped Fish (You may promise an opponent a gift as you cast this spell. If you do, they create a tapped
+689	2	Innkeeper's Talent | Ench — Class | (Gain the next level as a sorcery to add its ability.) At the beginning of combat on your turn, put a +1/+1 co
+716	0	Riveteers Overlook | Land | When this land enters, sacrifice it. When you do, search your library for a basic Swamp, Mountain, or Forest c
+721	1	Tyvar's Stand | Inst | Target creature you control gets +X/+X and gains hexproof and indestructible until end of turn. (It can't be t
+727	4	Hammer of Nazahn | L.Art — Equipment | Whenever Hammer of Nazahn or another Equipment you control enters, you may attach that Equipment to target cre
+738	3	Palladium Myr | Art Cr — Myr | {T}: Add {C}{C}.
+749	3	Elvish Spirit Guide | Cr — Elf Spirit | Exile this card from your hand: Add {G}.
+794	4	Talrand, Sky Summoner | L.Cr — Merfolk Wizard | Whenever you cast an instant or sorcery spell, create a 2/2 blue Drake creature token with flying.
+809	2	Sky Diamond | Art | This artifact enters tapped. {T}: Add {U}.
+819	2	Cankerbloom | Cr — Phyrexian Fungus | {1}, Sacrifice this creature: Choose one — • Destroy target artifact. • Destroy target enchantment. • Prolifer
+823	3	Sai, Master Thopterist | L.Cr — Human Artificer | Whenever you cast an artifact spell, create a 1/1 colorless Thopter artifact creature token with flying. {1}{U
+835	0	Urza's Tower | Land — Urza's Tower | {T}: Add {C}. If you control an Urza's Mine and an Urza's Power-Plant, add {C}{C}{C} instead.
+836	2	Thrummingbird | Cr — Phyrexian Bird Horror | Flying Whenever this creature deals combat damage to a player, proliferate. (Choose any number of permanents a
+842	0	Urza's Mine | Land — Urza's Mine | {T}: Add {C}. If you control an Urza's Power-Plant and an Urza's Tower, add {C}{C} instead.
+843	0	Urza's Power Plant | Land — Urza's Power-Plant | {T}: Add {C}. If you control an Urza's Mine and an Urza's Tower, add {C}{C} instead.
+851	0	Cephalid Coliseum | Land | {T}: Add {U}. This land deals 1 damage to you. Threshold — {U}, {T}, Sacrifice this land: Target player draws 
+854	0	The Mycosynth Gardens | Land — Sphere | {T}: Add {C}. {1}, {T}: Add one mana of any color. {X}, {T}: This land becomes a copy of target nontoken artif
+875	3	Rishkar, Peema Renegade | L.Cr — Elf Druid | When Rishkar enters, put a +1/+1 counter on each of up to two target creatures. Each creature you control with
+880	3	Elvish Archdruid | Cr — Elf Druid | Other Elf creatures you control get +1/+1. {T}: Add {G} for each Elf you control.
+882	3	Loot, Exuberant Explorer | L.Cr — Beast Noble | You may play an additional land on each of your turns. {4}{G}{G}, {T}: Look at the top six cards of your libra
+892	4	Rite of Replication | Sorc | Kicker {5} (You may pay an additional {5} as you cast this spell.) Create a token that's a copy of target crea
+900	4	Reconnaissance Mission | Ench | Whenever a creature you control deals combat damage to a player, you may draw a card. Cycling {2} ({2}, Discar
+902	1	Spell Pierce | Inst | Counter target noncreature spell unless its controller pays {2}.
+903	4	Padeem, Consul of Innovation | L.Cr — Vedalken Artificer | Artifacts you control have hexproof. (They can't be the targets of spells or abilities your opponents control.
+915	2	Resculpt | Inst | Exile target artifact or creature. Its controller creates a 4/4 blue and red Elemental creature token.
+932	3	Solve the Equation | Sorc | Search your library for an instant or sorcery card, reveal it, put it into your hand, then shuffle.
+933	0	Blighted Woodland | Land | {T}: Add {C}. {3}{G}, {T}, Sacrifice this land: Search your library for up to two basic land cards, put them o
+937	2	Pull from Tomorrow | Inst | Draw X cards, then discard a card.
+949	4	Tezzeret's Gambit | Sorc | ({U/P} can be paid with either {U} or 2 life.) Draw two cards, then proliferate. (Choose any number of permane
+966	5	Alhammarret's Archive | L.Art | If you would gain life, you gain twice that much life instead. If you would draw a card except the first one y
+967	2	Devoted Druid | Cr — Elf Druid | {T}: Add {G}. Put a -1/-1 counter on this creature: Untap this creature.
+968	4	Archaeomancer | Cr — Human Wizard | When this creature enters, return target instant or sorcery card from your graveyard to your hand.
+974	3	Loxodon Warhammer | Art — Equipment | Equipped creature gets +3/+0 and has trample and lifelink. Equip {3}
+1036	0	Arcane Lighthouse | Land | {T}: Add {C}. {1}, {T}: Until end of turn, creatures your opponents control lose hexproof and shroud and can't
+1045	10	Apex Devastator | Cr — Chimera Hydra | Cascade, cascade, cascade, cascade (When you cast this spell, exile cards from the top of your library until y
+1075	1	Strix Serenade | Inst | Counter target artifact, creature, or planeswalker spell. Its controller creates a 2/2 blue Bird creature toke
+1085	2	Fertile Ground | Ench — Aura | Enchant land Whenever enchanted land is tapped for mana, its controller adds an additional one mana of any col
+1106	0	Mishra's Bauble | Art | {T}, Sacrifice this artifact: Look at the top card of target player's library. Draw a card at the beginning of
+1127	6	Lumra, Bellow of the Woods | L.Cr — Elemental Bear | Reach, vigilance Lumra's power and toughness are each equal to the number of lands you control. When Lumra ent
+1140	0	Lonely Sandbar | Land | This land enters tapped. {T}: Add {U}. Cycling {U} ({U}, Discard this card: Draw a card.)
+1186	6	Steel Hellkite | Art Cr — Dragon | Flying {2}: This creature gets +1/+0 until end of turn. {X}: Destroy each nonland permanent with mana value X 
+1207	3	Glaring Fleshraker | Cr — Eldrazi Drone | Whenever you cast a colorless spell, create a 0/1 colorless Eldrazi Spawn creature token with "Sacrifice this 
+1244	3	Stock Up | Sorc | Look at the top five cards of your library. Put two of them into your hand and the rest on the bottom of your 
+1246	2	Wan Shi Tong, Librarian | L.Cr — Bird Spirit | Flash Flying, vigilance When Wan Shi Tong enters, put X +1/+1 counters on him. Then draw half X cards, rounded
+1285	0	Maestros Theater | Land | When this land enters, sacrifice it. When you do, search your library for a basic Island, Swamp, or Mountain c
+1293	2	Sylvan Scrying | Sorc | Search your library for a land card, reveal it, put it into your hand, then shuffle.
+1298	1	Vexing Bauble | Art | Whenever a player casts a spell, if no mana was spent to cast it, counter that spell. {1}, {T}, Sacrifice this
+1304	1	Carpet of Flowers | Ench | At the beginning of each of your main phases, if you haven't added mana with this ability this turn, you may a
+1315	3	Mirage Mirror | Art | {2}: This artifact becomes a copy of target artifact, creature, enchantment, or land until end of turn.
+1316	0	Astral Cornucopia | Art | This artifact enters with X charge counters on it. {T}: Choose a color. Add one mana of that color for each ch
+1318	2	Finale of Revelation | Sorc | Draw X cards. If X is 10 or more, instead shuffle your graveyard into your library, draw X cards, untap up to 
+1328	2	Experimental Augury | Inst | Look at the top three cards of your library. Put one of them into your hand and the rest on the bottom of your
+1341	2	Baral, Chief of Compliance | L.Cr — Human Wizard | Instant and sorcery spells you cast cost {1} less to cast. Whenever a spell or ability you control counters a 
+1345	3	Shimmer Myr | Art Cr — Myr | Flash You may cast artifact spells as though they had flash.
+1349	3	Pristine Talisman | Art | {T}: Add {C}. You gain 1 life.
+1355	1	Soul-Guide Lantern | Art | When this artifact enters, exile target card from a graveyard. {T}, Sacrifice this artifact: Exile each oppone
+1385	2	Regrowth | Sorc | Return target card from your graveyard to your hand.
+1419	2	Contagion Clasp | Art | When this artifact enters, put a -1/-1 counter on target creature. {4}, {T}: Proliferate. (Choose any number o
+1421	0	Muraganda Raceway | Land | Start your engines! (If you have no speed, it starts at 1. It increases once on each of your turns when an opp
+1425	8	Terastodon | Cr — Elephant | When this creature enters, you may destroy up to three target noncreature permanents. For each permanent put i
+1428	3	Lifecrafter's Bestiary | Art | At the beginning of your upkeep, scry 1. Whenever you cast a creature spell, you may pay {G}. If you do, draw 
+1443	3	Flare of Denial | Inst | You may sacrifice a nontoken blue creature rather than pay this spell's mana cost. Counter target spell.
+1445	1	Elixir of Immortality | Art | {2}, {T}: You gain 5 life. Shuffle this artifact and your graveyard into their owner's library.
+1472	0	Dark Depths | L.Snow Land | Dark Depths enters with ten ice counters on it. {3}: Remove an ice counter from Dark Depths. When Dark Depths 
+1497	0	Arid Archway | Land — Desert | This land enters tapped. When this land enters, return a land you control to its owner's hand. If another Dese
+1514	0	Stonecoil Serpent | Art Cr — Snake | Reach, trample, protection from multicolored This creature enters with X +1/+1 counters on it.
+1517	4	Coastal Piracy | Ench | Whenever a creature you control deals combat damage to an opponent, you may draw a card.
+1522	0	Hangarback Walker | Art Cr — Construct | This creature enters with X +1/+1 counters on it. When this creature dies, create a 1/1 colorless Thopter arti
+1526	2	Dour Port-Mage | Cr — Frog Wizard | Whenever one or more other creatures you control leave the battlefield without dying, draw a card. {1}{U}, {T}
+1530	1	Lavaspur Boots | Art — Equipment | Equipped creature gets +1/+0 and has haste and ward {1}. (Whenever it becomes the target of a spell or ability
+1548	0	Radiant Fountain | Land | When this land enters, you gain 2 life. {T}: Add {C}.
+1562	3	Uro, Titan of Nature's Wrath | L.Cr — Elder Giant | When Uro enters, sacrifice it unless it escaped. Whenever Uro enters or attacks, you gain 3 life and draw a ca
+1565	10	Kozilek, the Great Distortion | L.Cr — Eldrazi | When you cast this spell, if you have fewer than seven cards in hand, draw cards equal to the difference. Mena
+1593	8	Eldrazi Conscription | Kindred Ench — Eldrazi Aura | Enchant creature Enchanted creature gets +10/+10 and has trample and annihilator 2. (Whenever it attacks, defe
+1594	2	Kiora's Follower | Cr — Merfolk | {T}: Untap another target permanent.
+1596	5	The Eternity Elevator | L.Art — Spacecraft | {T}: Add {C}{C}{C}. Station (Tap another creature you control: Put charge counters equal to its power on this 
+1652	2	Tetsuko Umezawa, Fugitive | L.Cr — Human Rogue | Creatures you control with power or toughness 1 or less can't be blocked.
+1662	0	Blast Zone | Land | This land enters with a charge counter on it. {T}: Add {C}. {X}{X}, {T}: Put X charge counters on this land. {
+1664	5	Nissa, Who Shakes the World | L.Planeswalker — Nissa | Whenever you tap a Forest for mana, add an additional {G}. +1: Put three +1/+1 counters on up to one target no
+1685	2	Open the Way | Sorc | X can't be greater than the number of players in the game. Reveal cards from the top of your library until you
+1702	5	Overrun | Sorc | Creatures you control get +3/+3 and gain trample until end of turn. (Each of those creatures can deal excess c
+1769	3	Adaptive Automaton | Art Cr — Construct | As this creature enters, choose a creature type. This creature is the chosen type in addition to its other typ
+1774	2	Satyr Wayfinder | Cr — Satyr | When this creature enters, reveal the top four cards of your library. You may put a land card from among them 
+1777	2	Ilysian Caryatid | Cr — Plant | {T}: Add one mana of any color. If you control a creature with power 4 or greater, add two mana of any one col
+1795	3	Unstoppable Plan | Ench | At the beginning of your end step, untap all nonland permanents you control.
+1826	6	Mana Reflection | Ench | If you tap a permanent for mana, it produces twice as much of that mana instead.
+1871	0	Lazotep Quarry | Land — Desert | {T}: Add {C}. {T}, Sacrifice a creature: Add one mana of any color. {X}{2}, {T}, Sacrifice a Desert: Exile tar
+1914	7	Commandeer | Inst | You may exile two blue cards from your hand rather than pay this spell's mana cost. Gain control of target non
+1924	3	Cycle of Renewal | Inst — Lesson | Sacrifice a land. Search your library for up to two basic land cards, put them onto the battlefield tapped, th
+1940	3	Bitterthorn, Nissa's Animus | L.Art — Equipment | Living weapon (When this Equipment enters, create a 0/0 black Phyrexian Germ creature token, then attach this 
+1990	5	Venser's Journal | Art — Book | You have no maximum hand size. At the beginning of your upkeep, you gain 1 life for each card in your hand.
+2009	0	Conduit Pylons | Land — Desert | When this land enters, surveil 1. (Look at the top card of your library. You may put it into your graveyard.) 
+2016	4	Eureka Moment | Inst | Draw two cards. You may put a land card from your hand onto the battlefield.
+2057	2	Volatile Stormdrake | Cr — Drake | Flying, hexproof from activated and triggered abilities When this creature enters, exchange control of this cr
+2093	1	Personal Tutor | Sorc | Search your library for a sorcery card, reveal it, then shuffle and put that card on top.
+2097	5	Mycoloth | Cr — Fungus | Devour 2 (As this creature enters, you may sacrifice any number of creatures. It enters with twice that many +
+2108	8	Cityscape Leveler | Art Cr — Construct | Trample When you cast this spell and whenever this creature attacks, destroy up to one target nonland permanen
+2109	3	Drown in Dreams | Inst | Choose one. If you control a commander as you cast this spell, you may choose both instead. • Target player dr
+2112	5	Perplexing Test | Inst | Choose one — • Return all creature tokens to their owners' hands. • Return all nontoken creatures to their own
+2121	4	Karn, the Great Creator | L.Planeswalker — Karn | Activated abilities of artifacts your opponents control can't be activated. +1: Until your next turn, up to on
+2179	7	Verdant Sun's Avatar | Cr — Dinosaur Avatar | Whenever this creature or another creature you control enters, you gain life equal to that creature's toughnes
+2185	6	Primeval Bounty | Ench | Whenever you cast a creature spell, create a 3/3 green Beast creature token. Whenever you cast a noncreature s
+2187	2	The Key to the Vault | L.Art — Equipment | Whenever equipped creature deals combat damage to a player, look at that many cards from the top of your libra
+2202	2	Contentious Plan | Sorc | Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind alre
+2242	2	Poison Dart Frog | Cr — Frog | Reach {T}: Add one mana of any color. {2}: This creature gains deathtouch until end of turn.
+2252	1	Explorer's Scope | Art — Equipment | Whenever equipped creature attacks, look at the top card of your library. If it's a land card, you may put it 
+2255	0	Hidden Grotto | Land | When this land enters, surveil 1. (Look at the top card of your library. You may put it into your graveyard.) 
+2261	4	Whirler Rogue | Cr — Human Rogue Artificer | When this creature enters, create two 1/1 colorless Thopter artifact creature tokens with flying. Tap two unta
+2288	7	Super State | L.Ench — Aura | Enchant creature you control Enchanted creature has base power and toughness 9/9 and has flying, first strike,
+2346	1	Silkguard | Inst | Put a +1/+1 counter on each of up to X target creatures you control. Auras, Equipment, and modified creatures 
+2367	11	Darksteel Colossus | Art Cr — Golem | Trample (This creature can deal excess combat damage to the player or planeswalker it's attacking.) Indestruct
+2390	6	Earthshaker Dreadmaw | Cr — Dinosaur | Trample When this creature enters, draw a card for each other Dinosaur you control.
+2404	5	Urban Evolution | Sorc | Draw three cards. You may play an additional land this turn.
+2435	6	God-Pharaoh's Statue | L.Art | Spells your opponents cast cost {2} more to cast. At the beginning of your end step, each opponent loses 1 lif
+2438	1	Abundant Growth | Ench — Aura | Enchant land When this Aura enters, draw a card. Enchanted land has "{T}: Add one mana of any color."
+2454	3	Harvest Season | Sorc | Search your library for up to X basic land cards, where X is the number of tapped creatures you control, put t
+2464	0	Agna Qel'a | Land | This land enters tapped unless you control a basic land. {T}: Add {U}. {2}{U}, {T}: Draw a card, then discard 
+2487	8	Aminatou's Augury | Sorc | Exile the top eight cards of your library. You may put a land card from among them onto the battlefield. Until
+2495	4	Scour for Scrap | Inst | Choose one or both — • Search your library for an artifact card, reveal it, put it into your hand, then shuffl
+2496	1	Animist's Awakening | Sorc | Reveal the top X cards of your library. Put all land cards from among them onto the battlefield tapped and the
+2497	7	Nulldrifter | Cr — Eldrazi Elemental | When you cast this spell, draw two cards. Flying Annihilator 1 (Whenever this creature attacks, defending play
+2538	2	Doc Aurlock, Grizzled Genius | L.Cr — Bear Druid | Spells you cast from your graveyard or from exile cost {2} less to cast. Plotting cards from your hand costs {
+2599	5	Dawnsire, Sunstar Dreadnought | L.Art — Spacecraft | Station (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station 
+2610	3	Bloated Contaminator | Cr — Phyrexian Beast | Trample Toxic 1 (Players dealt combat damage by this creature also get a poison counter.) Whenever this creatu
+2628	4	Efficient Construction | Ench | Whenever you cast an artifact spell, create a 1/1 colorless Thopter artifact creature token with flying.
+2630	0	Planar Nexus | Land | This land is every nonbasic land type. (Nonbasic land types include Cave, Desert, Gate, Lair, Locus, Mine, Pow
+2646	3	Quick Study | Inst | Draw two cards.
+2648	6	Harmonized Crescendo | Inst | Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} 
+2683	0	Volatile Fault | Land — Cave | {T}: Add {C}. {1}, {T}, Sacrifice this land: Destroy target nonbasic land an opponent controls. That player ma
+2704	6	Torrential Gearhulk | Art Cr — Construct | Flash When this creature enters, you may cast target instant card from your graveyard without paying its mana 
+2748	2	Fog Bank | Cr — Wall | Defender (This creature can't attack.) Flying Prevent all combat damage that would be dealt to and dealt by th
+2755	2	Flesh Duplicate | Cr — Shapeshifter Rebel | You may have this creature enter as a copy of any creature on the battlefield, except it has vanishing 3 if th
+2791	2	Nightshade Dryad | Cr — Dryad | Deathtouch {T}: Add {C}. {T}: Add one mana of any color.
+2803	3	Hornet Nest | Cr — Insect | Defender (This creature can't attack.) Whenever this creature is dealt damage, create that many 1/1 green Inse
+2850	6	Ulvenwald Hydra | Cr — Hydra | Reach Ulvenwald Hydra's power and toughness are each equal to the number of lands you control. When this creat
+2866	2	Wrecking Ball Arm | L.Art — Equipment | Equipped creature has base power and toughness 7/7 and can't be blocked by creatures with power 2 or less. Equ
+2886	0	Basilisk Gate | Land — Gate | {T}: Add {C}. {2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you contr
+2914	1	Unsummon | Inst | Return target creature to its owner's hand.
+2923	4	Crystalline Crawler | Art Cr — Construct | Converge — This creature enters with a +1/+1 counter on it for each color of mana spent to cast it. Remove a +
+3006	1	Library of Leng | Art | You have no maximum hand size. If an effect causes you to discard a card, discard it, but you may put it on to
+3011	2	Malevolent Rumble | Sorc | Reveal the top four cards of your library. You may put a permanent card from among them into your hand. Put th
+3160	6	River's Rebuke | Sorc | Return all nonland permanents target player controls to their owner's hand.
+3187	0	Rain-Slicked Copse | Land — Forest Island | ({T}: Add {G} or {U}.) This land enters tapped. Cycling {2} ({2}, Discard this card: Draw a card.)
+3197	3	Firdoch Core | Kindred Art — Shapeshifter | Changeling (This card is every creature type.) {T}: Add one mana of any color. {4}: This artifact becomes a 4/
+3200	4	Oviya, Automech Artisan | L.Cr — Human Artificer | Each creature that's attacking one of your opponents has trample. {G}, {T}: You may put a creature or Vehicle 
+3208	5	Geode Golem | Art Cr — Golem | Trample Whenever this creature deals combat damage to a player, you may cast your commander from the command z
+3234	1	Ingenious Prodigy | Cr — Human Wizard | Skulk (This creature can't be blocked by creatures with greater power.) This creature enters with X +1/+1 coun
+3272	2	Soulless Jailer | Art Cr — Phyrexian Golem | Permanent cards in graveyards can't enter the battlefield. Players can't cast noncreature spells from graveyar
+3277	5	Hour of Promise | Sorc | Search your library for up to two land cards, put them onto the battlefield tapped, then shuffle. Then if you 
+3292	2	Decisive Denial | Inst | Choose one — • Target creature you control fights target creature you don't control. (Each deals damage equal 
+3299	1	Giant Growth | Inst | Target creature gets +3/+3 until end of turn.
+3336	2	Lion Umbra | Ench — Aura | Enchant modified creature (Equipment, Auras its controller controls, and counters are modifications.) Enchante
+3360	7	Bane of Bala Ged | Cr — Eldrazi | Whenever this creature attacks, defending player exiles two permanents they control.
+3372	3	Worldwalker Helm | Art | If you would create one or more artifact tokens, instead create those tokens plus an additional Map token. (It
+3481	6	Bonny Pall, Clearcutter | L.Cr — Giant Scout | Reach When Bonny Pall enters, create Beau, a legendary blue Ox creature token with "Beau's power and toughness
+3511	3	Chrome Host Seedshark | Cr — Phyrexian Shark | Flying Whenever you cast a noncreature spell, incubate X, where X is that spell's mana value. (Create an Incub
+3512	6	Soul of New Phyrexia | Art Cr — Phyrexian Avatar | Trample {5}: Permanents you control gain indestructible until end of turn. {5}, Exile this card from your grav
+3513	2	Torpor Orb | Art | Creatures entering don't cause abilities to trigger.
+3537	3	Stroke of Genius | Inst | Target player draws X cards.
+3543	0	Study Hall | Land | {T}: Add {C}. {1}, {T}: Add one mana of any color. When you spend this mana to cast your commander, scry X, wh
+3668	4	Map the Frontier | Sorc | Search your library for up to two basic land cards and/or Desert cards, put them onto the battlefield tapped, 
+3671	0	Desert of the Indomitable | Land — Desert | This land enters tapped. {T}: Add {G}. Cycling {1}{G} ({1}{G}, Discard this card: Draw a card.)
+3679	1	Magus of the Candelabra | Cr — Human Wizard | {X}, {T}: Untap X target lands.
+3681	4	Darksteel Reactor | Art | Indestructible (Effects that say "destroy" don't destroy this artifact.) At the beginning of your upkeep, you 
+3687	3	Skullwinder | Cr — Snake | Deathtouch When this creature enters, return target card from your graveyard to your hand, then choose an oppo
+3688	0	Hidden Nursery | Land — Cave | This land enters tapped. {T}: Add {G}. {4}{G}, {T}, Sacrifice this land: Discover 4. Activate only as a sorcer
+3739	1	Wildwood Scourge | Cr — Hydra | This creature enters with X +1/+1 counters on it. Whenever one or more +1/+1 counters are put on another non-H
+3744	0	Desert of the Mindful | Land — Desert | This land enters tapped. {T}: Add {U}. Cycling {1}{U} ({1}{U}, Discard this card: Draw a card.)
+3770	0	Secluded Starforge | Land | {T}: Add {C}. {2}, {T}, Tap X untapped artifacts you control: Target creature gets +X/+0 until end of turn. Ac
+3778	1	Syncopate | Inst | Counter target spell unless its controller pays {X}. If that spell is countered this way, exile it instead of 
+3873	5	Flourishing Defenses | Ench | Whenever a -1/-1 counter is put on a creature, you may create a 1/1 green Elf Warrior creature token.
+3879	1	Primal Might | Sorc | Target creature you control gets +X/+X until end of turn. Then it fights up to one target creature you don't c
+3913	2	Unlicensed Hearse | Art — Vehicle | {T}: Exile up to two target cards from a single graveyard. Unlicensed Hearse's power and toughness are each eq
+3937	3	Vivien, Champion of the Wilds | L.Planeswalker — Vivien | You may cast creature spells as though they had flash. +1: Until your next turn, up to one target creature gai
+3951	4	Traxos, Scourge of Kroog | L.Art Cr — Dragon Construct | Trample Traxos enters tapped and doesn't untap during your untap step. Whenever you cast a historic spell, unt
+3954	8	Breaker of Creation | Cr — Eldrazi | When you cast this spell, you gain 1 life for each colorless permanent you control. Hexproof from each color A
+3969	2	Cryogen Relic | Art | When this artifact enters or leaves the battlefield, draw a card. {1}{U}, Sacrifice this artifact: Put a stun 
+3974	3	Elementalist's Palette | Art | Whenever you cast a spell with {X} in its mana cost, put two charge counters on this artifact. {T}: Add one ma
+4019	5	Blossoming Bogbeast | Cr — Beast | Whenever this creature attacks, you gain 2 life. Then creatures you control gain trample and get +X/+X until e
+4043	4	Altered Ego | Cr — Shapeshifter | This spell can't be countered. You may have this creature enter as a copy of any creature on the battlefield, 
+4076	5	Vivien Reid | L.Planeswalker — Vivien | +1: Look at the top four cards of your library. You may reveal a creature or land card from among them and put
+4152	3	Amazing Acrobatics | Inst | Choose one or both — • Counter target spell. • Tap one or two target creatures.
+4242	2	Ordeal of Nylea | Ench — Aura | Enchant creature Whenever enchanted creature attacks, put a +1/+1 counter on it. Then if it has three or more 
+4254	4	Firemind Vessel | Art | This artifact enters tapped. {T}: Add two mana of different colors.
+4287	5	Replication Technique | Sorc | Demonstrate (When you cast this spell, you may copy it. If you do, choose an opponent to also copy it. Players
+4292	5	Perennial Behemoth | Art Cr — Beast | You may play lands from your graveyard. Unearth {G}{G} ({G}{G}: Return this card from your graveyard to the ba
+4304	8	Avatar Kyoshi, Earthbender | L.Cr — Human Avatar | During your turn, Avatar Kyoshi has hexproof. At the beginning of combat on your turn, earthbend 8, then untap
+4306	6	Hydra Broodmaster | Cr — Hydra | {X}{X}{G}: Monstrosity X. (If this creature isn't monstrous, put X +1/+1 counters on it and it becomes monstro
+4329	3	Master Chef | L.Ench — Background | Commander creatures you own have "This creature enters with an additional +1/+1 counter on it" and "Other crea
+4339	0	Mirage Mesa | Land — Desert | This land enters tapped. As it enters, choose a color. {T}: Add one mana of the chosen color.
+4368	3	Quandrix Command | Inst | Choose two — • Return target creature or planeswalker to its owner's hand. • Counter target artifact or enchan
+4376	3	Barkform Harvester | Art Cr — Shapeshifter | Changeling (This card is every creature type.) Reach {2}: Put target card from your graveyard on the bottom of
+4379	5	Zuko's Exile | Inst — Lesson | Exile target artifact, creature, or enchantment. Its controller creates a Clue token. (It's an artifact with "
+4409	5	Gigantosaurus | Cr — Dinosaur | 
+4415	0	Hashep Oasis | Land — Desert | {T}: Add {C}. {T}, Pay 1 life: Add {G}. {1}{G}{G}, {T}, Sacrifice a Desert: Target creature gets +3/+3 until e
+4425	4	Seer's Sundial | Art | Landfall — Whenever a land you control enters, you may pay {2}. If you do, draw a card.
+4480	1	Helix Pinnacle | Ench | Shroud (This enchantment can't be the target of spells or abilities.) {X}: Put X tower counters on this enchan
+4559	0	Sunken Palace | Land — Cave | This land enters tapped. {T}: Add {U}. {1}{U}, {T}, Exile seven cards from your graveyard: Add {U}. When you s
+4572	3	Solar Array | Art | {T}: Add one mana of any color. When you next cast an artifact spell this turn, that spell gains sunburst. (If
+4749	5	Deekah, Fractal Theorist | L.Cr — Human Wizard | Magecraft — Whenever you cast or copy an instant or sorcery spell, create a 0/0 green and blue Fractal creatur
+4775	0	Quandrix Campus | Land | This land enters tapped. {T}: Add {G} or {U}. {4}, {T}: Scry 1. (Look at the top card of your library. You may
+4809	4	Mindless Automaton | Art Cr — Construct | This creature enters with two +1/+1 counters on it. {1}, Discard a card: Put a +1/+1 counter on this creature.
+4873	0	Lumbering Falls | Land | This land enters tapped. {T}: Add {G} or {U}. {2}{G}{U}: Until end of turn, this land becomes a 3/3 green and 
+4883	2	Deduce | Inst | Draw a card. Investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this token: Draw a card.
+4887	2	Biomass Mutation | Inst | Creatures you control have base power and toughness X/X until end of turn.
+4983	2	Prophetic Prism | Art | When this artifact enters, draw a card. {1}, {T}: Add one mana of any color.
+4998	0	Lush Oasis | Land — Desert | This land enters tapped. When this land enters, it deals 1 damage to target opponent. {T}: Add {G} or {U}.
+5101	3	Ornery Tumblewagg | Cr — Brushwagg Mount | At the beginning of combat on your turn, put a +1/+1 counter on target creature. Whenever this creature attack
+5115	2	Idol of False Gods | Kindred Art — Eldrazi | {1}{C}, {T}: Create a 0/1 colorless Eldrazi Spawn creature token with "Sacrifice this token: Add {C}." Wheneve
+5120	3	Omo, Queen of Vesuva | L.Cr — Shapeshifter Noble | Whenever Omo enters or attacks, put an everything counter on each of up to one target land and up to one targe
+5130	4	Wickerbough Elder | Cr — Treefolk Shaman | This creature enters with a -1/-1 counter on it. {G}, Remove a -1/-1 counter from this creature: Destroy targe
+5136	3	Fblthp, Lost on the Range | L.Cr — Homunculus | Ward {2} You may look at the top card of your library any time. The top card of your library has plot. The plo
+5139	2	Moxite Refinery | Art | {2}, {T}, Remove X counters from an artifact or creature you control: Choose one. Activate only as a sorcery. 
+5267	3	Rampant Frogantua | Cr — Frog | Trample This creature gets +10/+10 for each player who has lost the game. Whenever this creature deals combat 
+5289	0	Hidden Cataract | Land — Cave | This land enters tapped. {T}: Add {U}. {4}{U}, {T}, Sacrifice this land: Discover 4. Activate only as a sorcer
+5291	1	Fountainport Bell | Art | When this artifact enters, you may search your library for a basic land card, reveal it, then shuffle and put 
+5301	5	Omni-Changeling | Cr — Shapeshifter | Changeling (This card is every creature type.) Convoke (Your creatures can help cast this spell. Each creature
+5398	3	Elvish Rejuvenator | Cr — Elf Druid | When this creature enters, look at the top five cards of your library. You may put a land card from among them
+5409	2	Cream of the Crop | Ench | Whenever a creature you control enters, you may look at the top X cards of your library, where X is that creat
+5440	3	Bandit's Haul | Art | Whenever you commit a crime, put a loot counter on this artifact. This ability triggers only once each turn. (
+5485	3	All-Fates Scroll | Art | {T}: Add one mana of any color. {7}, {T}, Sacrifice this artifact: Draw X cards, where X is the number of diff
+5534	4	Mocking Doppelganger | Cr — Shapeshifter | Flash You may have this creature enter as a copy of a creature an opponent controls, except it has "Other crea
+5559	5	Elemental Teachings | Inst — Lesson | Search your library for up to four land cards with different names and reveal them. An opponent chooses two of
+5579	3	Freestrider Lookout | Cr — Human Rogue | Reach Whenever you commit a crime, look at the top five cards of your library. You may put a land card from am
+5609	3	Troyan, Gutsy Explorer | L.Cr — Vedalken Scout | {T}: Add {G}{U}. Spend this mana only to cast spells with mana value 5 or greater or spells with {X} in their 
+5614	2	Coretapper | Art Cr — Myr | {T}: Put a charge counter on target artifact. Sacrifice this creature: Put two charge counters on target artif
+5624	3	Candlekeep Sage | L.Ench — Background | Commander creatures you own have "When this creature enters or leaves the battlefield, draw a card."
+5655	7	Myr Enforcer | Art Cr — Myr | Affinity for artifacts (This spell costs {1} less to cast for each artifact you control.)
+5674	3	Golem Foundry | Art | Whenever you cast an artifact spell, you may put a charge counter on this artifact. Remove three charge counte
+5723	3	Pensive Professor | Cr — Human Wizard | Increment (Whenever you cast a spell, if the amount of mana you spent is greater than this creature's power or
+5748	3	Sage of the Maze | Cr — Elf Wizard | {T}: Add two mana in any combination of colors. {T}: Until end of turn, target land you control becomes an X/X
+5749	3	Oblivion Stone | Art | {4}, {T}: Put a fate counter on target permanent. {5}, {T}, Sacrifice this artifact: Destroy each nonland perm
+5754	3	Day's Undoing | Sorc | Each player shuffles their hand and graveyard into their library, then draws seven cards. If it's your turn, e
+5815	0	Cloudpost | Land — Locus | This land enters tapped. {T}: Add {C} for each Locus on the battlefield.
+5828	2	Channeler Initiate | Cr — Human Druid | When this creature enters, put three -1/-1 counters on target creature you control. {T}, Remove a -1/-1 counte
+5843	2	Essence Capture | Inst | Counter target creature spell. Put a +1/+1 counter on up to one target creature you control.
+5862	3	Winternight Stories | Sorc | Draw three cards. Then discard two cards unless you discard a creature card. Harmonize {4}{U} (You may cast th
+5864	3	You Find the Villains' Lair | Inst | Choose one — • Foil Their Scheme — Counter target spell. • Learn Their Secrets — Draw two cards, then discard 
+5970	2	Gatecreeper Vine | Cr — Plant | Defender When this creature enters, you may search your library for a basic land card or a Gate card, reveal i
+5986	4	Omenpath Journey | Ench | When this enchantment enters, search your library for up to five land cards that have different names, exile t
+6009	1	Ankle Biter | Cr — Snake | Deathtouch
+6040	5	Subterfuge | Cr — Elemental Incarnation | When this creature enters, target creature gains flying and "Whenever this creature deals combat damage to a p
+6060	1	Trash the Town | Inst | Spree (Choose one or more additional costs.) + {2} — Put two +1/+1 counters on target creature. + {1} — Target
+6099	2	Kamahl's Druidic Vow | L.Sorc | (You may cast a legendary sorcery only if you control a legendary creature or planeswalker.) Look at the top X
+6113	10	Octavia, Living Thesis | L.Cr — Elemental Octopus | This spell costs {8} less to cast if you have eight or more instant and/or sorcery cards in your graveyard. Wa
+6123	2	Tam, Mindful First-Year | L.Cr — Gorgon Wizard | Each other creature you control has hexproof from each of its colors. {T}: Target creature you control becomes
+6126	2	Expansion Algorithm | Sorc | Proliferate X times. (To proliferate, choose any number of permanents and/or players, then give each another c
+6150	2	Tangle | Inst | Prevent all combat damage that would be dealt this turn. Each attacking creature doesn't untap during its cont
+6153	5	Body Double | Cr — Shapeshifter | You may have this creature enter as a copy of any creature card in a graveyard.
+6175	4	Double Down | Ench | Whenever you cast an outlaw spell, copy that spell. (Assassins, Mercenaries, Pirates, Rogues, and Warlocks are
+6224	6	Tomb of Horrors Adventurer | Cr — Elf Monk | When this creature enters, you take the initiative. Whenever you cast your second spell each turn, copy it. If
+6225	1	Gene Pollinator | Art Cr — Robot Insect | {T}, Tap an untapped permanent you control: Add one mana of any color.
+6236	3	Copy Land | Ench | You may have this enchantment enter as a copy of any land on the battlefield, except it's an enchantment in ad
+6284	3	Predator Ooze | Cr — Ooze | Indestructible (Damage and effects that say "destroy" don't destroy this creature.) Whenever this creature att
+6349	2	Noxious Newt | Cr — Salamander | Deathtouch {T}: Add {G}.
+6372	3	Fractal Harness | Art — Equipment | When this Equipment enters, create a 0/0 green and blue Fractal creature token. Put X +1/+1 counters on it and
+6382	4	Interdimensional Web Watch | Art | When this artifact enters, exile the top two cards of your library. Until the end of your next turn, you may p
+6395	2	Noble's Purse | Art | This artifact enters tapped and with three coin counters on it. {T}, Remove a coin counter from this artifact:
+6399	3	Jiang Yanggu, Wildcrafter | L.Planeswalker — Yanggu | Each creature you control with a +1/+1 counter on it has "{T}: Add one mana of any color." −1: Put a +1/+1 cou
+6420	2	Lost in the Maze | Ench | Flash When this enchantment enters, tap X target creatures. Put a stun counter on each of those creatures you 
+6427	0	Sandstorm Verge | Land — Desert | {T}: Add {C}. {3}, {T}: Target creature can't block this turn. Activate only as a sorcery.
+6438	2	Mazemind Tome | Art — Book | {T}, Put a page counter on this artifact: Scry 1. (Look at the top card of your library. You may put that card
+6497	2	Shifting Grift | Sorc | Spree (Choose one or more additional costs.) + {2} — Exchange control of two target creatures. + {1} — Exchang
+6517	3	Bane's Contingency | Inst | Counter target spell. If that spell targets a commander you control, instead counter that spell, scry 2, then 
+6518	4	Kasmina, Enigmatic Mentor | L.Planeswalker — Kasmina | Spells your opponents cast that target a creature or planeswalker you control cost {2} more to cast. −2: Creat
+6533	2	Demon's Horn | Art | Whenever a player casts a black spell, you may gain 1 life.
+6579	3	Esoteric Duplicator | Art — Clue | Whenever you sacrifice this artifact or another artifact, you may pay {2}. If you do, at the beginning of the 
+6583	5	Eusocial Engineering | Ench | Landfall — Whenever a land you control enters, create a 2/2 colorless Robot artifact creature token. Warp {1}{
+6597	0	Glimmerpost | Land — Locus | When this land enters, you gain 1 life for each Locus on the battlefield. {T}: Add {C}.
+6610	4	Yue, the Moon Spirit | L.Cr — Spirit Ally | Flying, vigilance Waterbend {5}, {T}: You may cast a noncreature spell from your hand without paying its mana 
+6688	2	Aggressive Biomancy | Sorc | Create X tokens that are copies of target creature you control, except they have "When this token enters, it f
+6715	5	Ember Island Production | Sorc | Choose one — • Create a token that's a copy of target creature you control, except it's not legendary and it's
+6786	2	Gleaming Barrier | Art Cr — Wall | Defender When this creature dies, create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: 
+6792	5	Tome of the Guildpact | Art — Book | Whenever you cast a multicolored spell, draw a card. {T}: Add one mana of any color.
+6809	5	Spider-Man, Brooklyn Visionary | L.Cr — Spider Human Hero | Web-slinging {2}{G} (You may cast this spell for {2}{G} if you also return a tapped creature you control to it
+6845	3	Gift of Paradise | Ench — Aura | Enchant land When this Aura enters, you gain 3 life. Enchanted land has "{T}: Add two mana of any one color."
+6872	2	Dance of the Tumbleweeds | Sorc | Spree (Choose one or more additional costs.) + {1} — Search your library for a basic land card or a Desert car
+6928	3	Geralf, the Fleshwright | L.Cr — Human Warlock | Whenever you cast a spell during your turn other than your first spell that turn, create a 2/2 blue and black 
+6980	5	Oversimplify | Sorc | Exile all creatures. Each player creates a 0/0 green and blue Fractal creature token and puts a number of +1/+
+7139	2	Patchwork Automaton | Art Cr — Construct | Ward {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unl
+7151	1	Multiclass Baldric | Art — Equipment | Equipped creature has lifelink if you control a Cleric, deathtouch if you control a Rogue, haste if you contro
+7171	1	Kinetic Ooze | Cr — Ooze | This creature enters with X +1/+1 counters on it. When this creature enters, destroy up to one target artifact
+7181	0	Sapseep Forest | Land — Forest | ({T}: Add {G}.) This land enters tapped. {G}, {T}: You gain 1 life. Activate only if you control two or more g
+7303	1	Consign to Memory | Inst | Replicate {1} (When you cast this spell, copy it for each time you paid its replicate cost. You may choose new
+7360	4	Visage Bandit | Cr — Shapeshifter Rogue | You may have this creature enter as a copy of a creature you control, except it's a Shapeshifter Rogue in addi
+7499	2	Broodhatch Nantuko | Cr — Insect Druid | Whenever this creature is dealt damage, you may create that many 1/1 green Insect creature tokens. Morph {2}{G
+7507	2	Waterbending Scroll | Art | {6}, {T}: Draw a card. This ability costs {1} less to activate for each Island you control.
+7575	3	Zimone, Infinite Analyst | L.Cr — Human Wizard | The first spell you cast with {X} in its mana cost each turn costs {1} less to cast for each +1/+1 counter on 
+7579	2	Quandrix Charm | Inst | Choose one — • Counter target spell unless its controller pays {2}. • Destroy target enchantment. • Target cre
+7685	6	Rise from the Tides | Sorc | Create a tapped 2/2 black Zombie creature token for each instant and sorcery card in your graveyard.
+7805	4	Desert Warfare | Ench | Whenever you sacrifice a Desert and whenever a Desert card is put into your graveyard from your hand or librar
+7815	3	Erinis, Gloom Stalker | L.Cr — Halfling Ranger | Deathtouch Whenever Erinis attacks, return target land card from your graveyard to the battlefield. Choose a B
+7862	8	Through the Forest Gate | Sorc | Look at the top twenty cards of your library, put any number of land cards from among them onto the battlefiel
+7890	5	Verdurous Gearhulk | Art Cr — Construct | Trample When this creature enters, distribute four +1/+1 counters among any number of target creatures you con
+7939	5	Heroes' Bane | Cr — Hydra | This creature enters with four +1/+1 counters on it. {2}{G}{G}: Put X +1/+1 counters on this creature, where X
+7988	2	Rocky Rebuke | Inst | Target creature you control deals damage equal to its power to target creature an opponent controls.
+8015	5	Reverse Engineer | Sorc | Improvise (Your artifacts can help cast this spell. Each artifact you tap after you're done activating mana ab
+8042	0	Trenchpost | Land — Locus | {T}: Add {C}. {3}, {T}: Target player mills a card for each Locus you control.
+8075	4	Owlin Spiralmancer | Cr — Bird Wizard | Flying, vigilance Whenever you cast your first spell with {X} in its mana cost each turn, you may copy it. You
+8083	4	Brass Infiniscope | Art | {T}: Add {C}{C}. When you next cast a spell with {X} in its mana cost this turn, you draw a card and gain half
+8163	3	Primo, the Unbounded | L.Cr — Fractal Wolf | Trample Primo enters with twice X +1/+1 counters on it. Whenever one or more creatures you control with base p
+8180	3	Titan Forge | Art | {3}, {T}: Put a charge counter on this artifact. {T}, Remove three charge counters from this artifact: Create 
+8202	4	Filigree Attendant | Art Cr — Homunculus | Flying Filigree Attendant's power is equal to the number of artifacts you control.
+8232	2	Hardbristle Bandit | Cr — Plant Rogue | {T}: Add one mana of any color. Whenever you commit a crime, untap this creature. This ability triggers only o
+8262	5	Luxurious Locomotive | Art — Vehicle | Whenever this Vehicle attacks, create a Treasure token for each creature that crewed it this turn. (They're ar
+8343	6	Sun Quan, Lord of Wu | L.Cr — Human Soldier | Creatures you control have horsemanship. (They can't be blocked except by creatures with horsemanship.)
+8350	3	Puca's Covenant | Ench | Whenever a creature you control with a counter on it dies, you may return another target permanent card with m
+8386	5	Tanazir Quandrix | L.Cr — Elder Dragon | Flying, trample When Tanazir Quandrix enters, double the number of +1/+1 counters on target creature you contr
+8413	5	Zimone's Hypothesis | Inst | You may put a +1/+1 counter on a creature. Then choose odd or even. Return each creature with power of the cho
+8416	3	Undergrowth Champion | Cr — Elemental | If damage would be dealt to this creature while it has a +1/+1 counter on it, prevent that damage and remove a
+8531	7	Ferrafor, Young Yew | L.Cr — Treefolk Druid | When Ferrafor enters, create a number of 1/1 green Saproling creature tokens equal to the number of counters a
+8574	7	Grim Poppet | Art Cr — Scarecrow | This creature enters with three -1/-1 counters on it. Remove a -1/-1 counter from this creature: Put a -1/-1 c
+8588	3	Nev, the Practical Dean | L.Cr — Merfolk Wizard | Creatures you control with counters on them have trample. Whenever you cast your first spell with {X} in its m
+8595	3	Wickersmith's Tools | Art | Whenever one or more -1/-1 counters are put on a creature, put a charge counter on this artifact. {T}: Add one
+8634	2	Yuan-Ti Malison | Cr — Snake Rogue | This creature can't be blocked as long as it's attacking alone. Whenever this creature deals combat damage to 
+8673	3	Feral Appetite | Ench | Attacking Pests you control get +1/+0 and have deathtouch. {1}{G}: Exile target card from a graveyard. If a cr
+8686	3	District Guide | Cr — Elf Scout | When this creature enters, you may search your library for a basic land card or Gate card, reveal it, put it i
+8712	6	Nissa's Renewal | Sorc | Search your library for up to three basic land cards, put them onto the battlefield tapped, then shuffle. You 
+8856	4	Etched Oracle | Art Cr — Wizard | Sunburst (This creature enters with a +1/+1 counter on it for each color of mana spent to cast it.) {1}, Remov
+8881	0	Paradox Gardens | Land | This land enters tapped. {T}: Add {G} or {U}. {2}{G}{U}, {T}: Surveil 1. (Look at the top card of your library
+8982	4	Summary Dismissal | Inst | Exile all other spells and counter all abilities.
+9035	2	Emissary Escort | Art Cr — Robot Soldier | This creature gets +X/+0, where X is the greatest mana value among other artifacts you control.
+9057	1	Mana Bloom | Ench | This enchantment enters with X charge counters on it. Remove a charge counter from this enchantment: Add one m
+9097	1	Occult Epiphany | Inst | Draw X cards, then discard X cards. Create a 1/1 white Spirit creature token with flying for each card type am
+9188	3	Sandman, Shifting Scoundrel | L.Cr — Sand Elemental Villain | Sandman's power and toughness are each equal to the number of lands you control. Sandman can't be blocked by c
+9190	1	Sewer-veillance Cam | Art | Flash When this artifact enters or leaves the battlefield, you may tap or untap target creature. {3}{U}, Sacri
+9199	0	Tarnation Vista | Land | This land enters tapped. As it enters, choose a color. {T}: Add one mana of the chosen color. {1}, {T}: For ea
+9218	2	Quandrix Apprentice | Cr — Human Wizard | Magecraft — Whenever you cast or copy an instant or sorcery spell, look at the top three cards of your library
+9283	3	Bioengineered Future | Ench | When this enchantment enters, create a Lander token. (It's an artifact with "{2}, {T}, Sacrifice this token: S
+9287	4	Bloodspore Thrinax | Cr — Lizard | Devour 1 (As this creature enters, you may sacrifice any number of creatures. It enters with that many +1/+1 c
+9370	6	Realm Seekers | Cr — Elf Scout | This creature enters with X +1/+1 counters on it, where X is the total number of cards in all players' hands. 
+9388	3	Exclude | Inst | Counter target creature spell. Draw a card.
+9428	2	Wildborn Preserver | Cr — Elf Archer | Flash (You may cast this spell any time you could cast an instant.) Reach (This creature can block creatures w
+9467	5	Feywild Caretaker | Cr — Orc Wizard | When this creature enters, you take the initiative. At the beginning of your end step, if you have the initiat
+9475	3	You Happen On a Glade | Inst | Choose one — • Journey On — Search your library for up to two basic land cards, reveal them, put them into you
+9479	2	Tarmogoyf | Cr — Lhurgoyf | Tarmogoyf's power is equal to the number of card types among cards in all graveyards and its toughness is equa
+9604	5	Moldgraf Millipede | Cr — Insect Horror | When this creature enters, mill three cards, then put a +1/+1 counter on this creature for each creature card 
+9701	3	Uthros Psionicist | Cr — Jellyfish Scientist | The second spell you cast each turn costs {2} less to cast.
+9755	2	Lattice Library | Ench | This enchantment enters with X study counters on it. When this enchantment enters and whenever you cast your f
+9837	2	Unauthorized Exit | Inst | Return target nonland permanent to its owner's hand. Surveil 1. (Look at the top card of your library. You may
+9855	2	Echoing Truth | Inst | Return target nonland permanent and all other permanents with the same name as that permanent to their owners'
+9886	4	Reenact the Crime | Inst | Exile target nonland card in a graveyard that was put there from anywhere this turn. Copy it. You may cast the
+9952	6	Eldrazi Ravager | Cr — Eldrazi | Annihilator 1 (Whenever this creature attacks, defending player sacrifices a permanent of their choice.) Sacri
+9992	0	Skycoach Waypoint | Land | {T}: Add {C}. {3}, {T}: Target creature becomes prepared. (Only creatures with prepare spells can become prepa
+10015	3	Bar the Gate | Inst | Counter target creature or planeswalker spell. Venture into the dungeon. (Enter the first room or advance to t
+10028	1	Portent of Calamity | Sorc | Reveal the top X cards of your library. For each card type, you may exile a card of that type from among them.
+10107	6	Ezzaroot Channeler | Cr — Treefolk Druid | Reach Creature spells you cast cost {X} less to cast, where X is the amount of life you gained this turn. {T}:
+10158	3	Deepmuck Desperado | Cr — Homarid Mercenary | Whenever you commit a crime, each opponent mills three cards. This ability triggers only once each turn. (Targ
+10254	4	Colossal Rattlewurm | Cr — Wurm | Colossal Rattlewurm has flash as long as you control a Desert. Trample {1}{G}, Exile this card from your grave
+10337	2	Sun Droplet | Art | Whenever you're dealt damage, put that many charge counters on this artifact. At the beginning of each upkeep,
+10428	2	Duelist of the Mind | Cr — Human Advisor | Flying, vigilance Duelist of the Mind's power is equal to the number of cards you've drawn this turn. Whenever
+10496	3	Druidic Satchel | Art | {2}, {T}: Reveal the top card of your library. If it's a creature card, create a 1/1 green Saproling creature 
+10511	2	Sting, Bilbo's Sword | L.Art — Equipment | Flash When Sting enters, put a hone counter on Sting for each creature target opponent controls. Attach Sting 
+10601	2	Extraordinary Journey | Ench | When this enchantment enters, exile up to X target creatures. For each of those cards, its owner may play it f
+10606	1	Party Dude | Ench — Class | (Gain the next level as a sorcery to add its ability.) When this Class enters, each player creates a Food toke
+10700	4	Kozilek's Predator | Cr — Eldrazi Drone | When this creature enters, create two 0/1 colorless Eldrazi Spawn creature tokens. They have "Sacrifice this t
+10734	3	Pulse of Murasa | Inst | Return target creature or land card from a graveyard to its owner's hand. You gain 6 life.
+10775	5	Step Between Worlds | Sorc | Each player may shuffle their hand and graveyard into their library. Each player who does draws seven cards. E
+10804	2	Wonderscape Sage | Cr — Moonfolk Wizard | Flying {T}, Return a land you control to its owner's hand: Draw a card. Then discard a card unless that land h
+10828	4	Jyoti, Moag Ancient | L.Cr — Elemental | When Jyoti enters, create a 1/1 green Forest Dryad land creature token for each time you've cast your commande
+10856	2	Bristlebane Battler | Cr — Kithkin Soldier | Trample, ward {2} This creature enters with five -1/-1 counters on it. Whenever another creature you control e
+10861	1	Pillar Launch | Inst | Target creature gets +2/+2 and gains reach until end of turn. Untap it.
+10950	3	Case of the Trampled Garden | Ench — Case | When this Case enters, distribute two +1/+1 counters among one or two target creatures you control. To solve —
+10996	4	Treasure Keeper | Art Cr — Construct | When this creature dies, reveal cards from the top of your library until you reveal a nonland card with mana v
+11027	1	Blisterpod | Cr — Eldrazi Drone | Devoid (This card has no color.) When this creature dies, create a 1/1 colorless Eldrazi Scion creature token.
+11065	7	Necron Monolith | Art — Vehicle | Flying, indestructible Eternity Gate — Whenever this Vehicle attacks, mill three cards. For each creature card
+11072	4	Paradise Plume | Art | As this artifact enters, choose a color. Whenever a player casts a spell of the chosen color, you may gain 1 l
+11083	3	Potioner's Trove | Art | {T}: Add one mana of any color. {T}: You gain 2 life. Activate only if you've cast an instant or sorcery spell
+11120	7	Gigantic Big Bear | Cr — Bear | This spell can't be countered. Hexproof, haste
+11223	3	Knockout Maneuver | Sorc | Put a +1/+1 counter on target creature you control, then it deals damage equal to its power to target creature
+11251	4	Healing Technique | Sorc | Demonstrate (When you cast this spell, you may copy it. If you do, choose an opponent to also copy it. Players
+11281	2	Entrancing Melody | Sorc | Gain control of target creature with mana value X.
+11287	3	Master's Guidance | Ench | Whenever you attack with two or more legendary creatures, put a +1/+1 counter on each of up to two target atta
+11352	4	Wishing Well | Art | {T}: Put a coin counter on this artifact. When you do, you may cast target instant or sorcery card with mana v
+11422	1	Witching Well | Art | When this artifact enters, scry 2. (Look at the top two cards of your library, then put any number of them on 
+11423	6	Verdant Confluence | Sorc | Choose three. You may choose the same mode more than once. • Put two +1/+1 counters on target creature. • Retu
+11609	3	Slickshot Lockpicker | Cr — Human Rogue | When this creature enters, target instant or sorcery card in your graveyard gains flashback until end of turn.
+11621	3	Zimone, All-Questioning | L.Cr — Human Wizard | At the beginning of your end step, if a land entered the battlefield under your control this turn and you cont
+11696	6	Orchard Strider | Cr — Treefolk | When this creature enters, create two Food tokens. (They're artifacts with "{2}, {T}, Sacrifice this token: Yo
+11778	4	Katara's Reversal | Inst | Counter up to four target spells and/or abilities. Untap up to four target artifacts and/or creatures.
+11887	3	Lotus Ring | Art — Equipment | Indestructible Equipped creature gets +3/+3 and has vigilance and "{T}, Sacrifice this creature: Add three man
+11920	2	Geist of Saint Thalia | L.Cr — Spirit Cleric | Flying Noncreature spells you cast cost {1} less to cast.
+11973	7	Molimo, Maro-Sorcerer | L.Cr — Elemental Sorcerer | Trample (This creature can deal excess combat damage to the player or planeswalker it's attacking.) Molimo's p
+11975	2	Hydro-Man, Fluid Felon | L.Cr — Elemental Villain | Whenever you cast a blue spell, if Hydro-Man is a creature, he gets +1/+1 until end of turn. At the beginning 
+11994	3	Match the Odds | Sorc — Lesson | Create a 1/1 white Ally creature token. Put a +1/+1 counter on it for each creature your opponents control.
+12015	3	March from Velis Vel | Sorc | Choose a nonbasic land type. Each land you control of that type becomes a copy of target creature you control 
+12161	2	Animal Attendant | Cr — Human Citizen | {T}: Add one mana of any color. If that mana is spent to cast a non-Human creature spell, that creature enters
+12162	2	Shortcut to Mushrooms | Ench | When this enchantment enters, the Ring tempts you. At the beginning of your end step, if a permanent you contr
+12262	3	Clear Shot | Inst | Target creature you control gets +1/+1 until end of turn. It deals damage equal to its power to target creatur
+12334	6	Baloth Woodcrasher | Cr — Beast | Landfall — Whenever a land you control enters, this creature gets +4/+4 and gains trample until end of turn. (
+12373	6	Slavering Branchsnapper | Cr — Lizard | Trample Forestcycling {2} ({2}, Discard this card: Search your library for a Forest card, reveal it, put it in
+12383	6	Arlinn, Voice of the Pack | L.Planeswalker — Arlinn | Each creature you control that's a Wolf or a Werewolf enters with an additional +1/+1 counter on it. −2: Creat
+12432	1	Candlestick | Art — Clue Equipment | Equipped creature gets +1/+1 and has "Whenever this creature attacks, surveil 2." (Look at the top two cards o
+12501	1	Concerted Defense | Inst | Counter target noncreature spell unless its controller pays {1} plus an additional {1} for each creature in yo
+12563	2	You Find a Cursed Idol | Sorc | Choose one — • Smash It — Destroy target artifact. • Lift the Curse — Destroy target enchantment. • Steal Its 
+12876	3	Seize the Secrets | Sorc | This spell costs {1} less to cast if you've committed a crime this turn. (Targeting opponents, anything they c
+12930	1	Phantom Interference | Inst | Spree (Choose one or more additional costs.) + {3} — Create a 2/2 white Spirit creature token with flying. + {
+13291	2	Tablet of Compleation | Art | {T}: Put an oil counter on this artifact. {T}: Add {C}. Activate only if this artifact has two or more oil cou
+13302	5	Bosco, Just a Bear | L.Cr — Bear | When Bosco enters, create a Food token for each legendary creature you control. (It's an artifact with "{2}, {
+13317	3	Mu Yanling, Sky Dancer | L.Planeswalker — Yanling | +2: Until your next turn, up to one target creature gets -2/-0 and loses flying. −3: Create a 4/4 blue Element
+13377	3	Donatello, Way with Machines | L.Cr — Mutant Ninja Turtle | Flying Whenever an artifact you control enters, put a +1/+1 counter on Donatello.
+13422	2	Desculpting Blast | Inst | Return target nonland permanent to its owner's hand. If it was attacking, create a 1/1 colorless Drone artifac
+13486	5	Cerebral Download | Inst | Surveil X, where X is the number of artifacts you control. Then draw three cards. (To surveil X, look at the t
+13582	5	Memory Guardian | Art Cr — Robot Artificer | Affinity for artifacts (This spell costs {1} less to cast for each artifact you control.) Flying
+13741	6	Pol Jamaar, Illusionist | L.Cr — Human Illusion Wizard | Flying When Pol Jamaar enters, choose a creature type. Draw a card for each creature you control of that type.
+13768	5	Predatory Impetus | Ench — Aura | Enchant creature Enchanted creature gets +3/+3, must be blocked if able, and is goaded. (It attacks each comba
+13936	2	Floriferous Vinewall | Cr — Plant Wall | Defender When this creature enters, look at the top six cards of your library. You may reveal a land card from
+14014	4	Hexhaven Invigorator | Cr — Chimera Horror | Vigilance Whenever this creature is dealt damage, you may search your library for up to that many land cards, 
+14038	1	Metamorphic Blast | Inst | Spree (Choose one or more additional costs.) + {1} — Until end of turn, target creature becomes a white Rabbit
+14170	3	Tempest Djinn | Cr — Djinn | Flying This creature gets +1/+0 for each basic Island you control.
+14392	4	Careful Consideration | Inst | Target player draws four cards, then discards three cards. If you cast this spell during your main phase, inst
+14442	6	Topiary Panther | Cr — Plant Cat | Trample Basic landcycling {1}{G} ({1}{G}, Discard this card: Search your library for a basic land card, reveal
+14575	9	The Lord of the Eagles | L.Cr — Bird Noble | Flash This spell costs {X} less to cast, where X is the total power of creatures you control with flying. Flyi
+14710	5	Ageless Entity | Cr — Elemental | Whenever you gain life, put that many +1/+1 counters on this creature.
+14755	3	Simic Locket | Art | {T}: Add {G} or {U}. {G/U}{G/U}{G/U}{G/U}, {T}, Sacrifice this artifact: Draw two cards.
+14919	3	Honor Troll | Cr — Troll Druid | Vigilance If you would gain life, you gain that much life plus 1 instead. This creature gets +2/+1 as long as 
+14941	6	Spinewoods Armadillo | Cr — Armadillo | Reach Ward {3} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter 
+14961	1	Guac & Marshmallow Pizza | Art — Food | Flash When this artifact enters, target creature gets +2/+2 until end of turn. Untap it. {2}, {T}, Sacrifice t
+15082	3	Varis, Silverymoon Ranger | L.Cr — Human Elf Ranger | Reach, ward {1} Whenever you cast a creature or planeswalker spell, venture into the dungeon. This ability tri
+15113	8	Interdisciplinary Mascot | Cr — Elemental Fractal | Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} 
+15169	4	You Meet in a Tavern | Sorc | Choose one — • Form a Party — Look at the top five cards of your library. You may reveal any number of creatur
+15192	6	Saber-Tooth Moose-Lion | Cr — Elk Cat | Reach Forestcycling {2} ({2}, Discard this card: Search your library for a Forest card, reveal it, put it into
+15217	1	Take the Fall | Inst | Target creature gets -1/-0 until end of turn. It gets -4/-0 until end of turn instead if you control an outlaw
+15238	5	Wilderland Scrounger | Cr — Wolf | Ferocious — Whenever this creature attacks while you control a creature with power 4 or greater, put a +1/+1 c
+15686	9	Sproutback Trudge | Cr — Fungus Beast | This spell costs {X} less to cast, where X is the amount of life you gained this turn. Trample At the beginnin
+15718	4	Myconid Spore Tender | Cr — Fungus | Infesting Spores — When this creature enters, destroy up to one target artifact or enchantment.
+15799	1	Sapphire Charm | Inst | Choose one — • Target player draws a card at the beginning of the next turn's upkeep. • Target creature gains 
+15809	2	Warg Tactics | Inst | Choose one — • Destroy target creature with flying. • Put a +1/+1 counter on target creature you control. It g
+15828	1	Jailbreak Scheme | Sorc | Spree (Choose one or more additional costs.) + {3} — Put a +1/+1 counter on target creature. It can't be block
+16141	5	Venus, Torn Between Worlds | L.Cr — Mutant Frog Turtle | Whenever Venus is dealt damage, put that many +1/+1 counters on her. (She must survive the damage to get the c
+16337	3	Nimble Brigand | Cr — Human Rogue | This creature can't be blocked if you've committed a crime this turn. (Targeting opponents, anything they cont
+16403	2	Sorcerous Spyglass | Art | As this artifact enters, look at an opponent's hand, then choose any card name. Activated abilities of sources
+16617	2	Vivien's Arkbow | L.Art | {X}, {T}, Discard a card: Look at the top X cards of your library. You may put a creature card with mana value
+16993	5	Jace, Reality Sculptor | L.Planeswalker — Jace | +1: Empower Jace X, where X is the number of Islands you control. −3: Until your next turn, whenever a creatur
+17186	1	Giant's Boulder | Art | When this artifact enters, scry 2. (Look at the top two cards of your library, then put any number of them on 
+17438	4	April O'Neil, Hacktivist | L.Cr — Human Scientist | At the beginning of your end step, draw a card for each card type among spells you've cast this turn.
+18301	4	Sphinx of False Conclusions | Cr — Sphinx Illusion | Flash Flying Whenever this creature attacks, draw a card, then discard a card. When this creature dies, if it 
+18370	1	Meltstrider's Gear | Art — Equipment | When this Equipment enters, attach it to target creature you control. Equipped creature gets +2/+1 and has rea
+18445	5	Marauding Sphinx | Cr — Sphinx Rogue | Flying, vigilance, ward {2} Whenever you commit a crime, surveil 2. This ability triggers only once each turn.
+18517	3	Simulacrum Shaper | Cr — Elf Druid | When this creature enters, you may search your library for a basic land card, put that card onto the battlefie
+18613	4	Plan for All Outcomes | Ench | When this enchantment enters, the owner of up to one other target nonland permanent puts it on their choice of
+18680	2	Countersculpt | Inst | As an additional cost to cast this spell, behold a Jace or pay {1}. (To behold a Jace, choose a Jace you contr
+18700	3	April, Reporter of the Weird | L.Cr — Human Detective | Whenever April deals combat damage to a player, draw that many cards, then discard a card.
+19372	3	Mondo Gecko | L.Cr — Lizard Mutant | {1}, Discard a card: Until end of turn, Mondo Gecko becomes the color of your choice and gains hexproof from t
+19971	3	Way of the Cryomancer | L.Ench | When Way of the Cryomancer enters, empower Jace 5. (Put five loyalty counters on a Jace token you control. If 
+20260	4	Tractor Beam | Ench — Aura | Enchant creature or Spacecraft When this Aura enters, tap enchanted permanent. You control enchanted permanent
+20307	7	Sea Gate Colossus | Art Cr — Golem Warrior | This spell costs {1} less to cast for each creature in your party. (Your party consists of up to one each of C
+20546	2	Fblthp, Impossibly Lost | L.Cr — Homunculus | When one or more of your opponents are dealt combat damage during your turn, draw two cards. If your library h
+20780	5	Experimental Aviator | Cr — Human Artificer | Flying When this creature enters, create two 1/1 colorless Thopter artifact creature tokens with flying.
+21055	4	Nimble Thopterist | Cr — Vedalken Artificer | When this creature enters, create a 1/1 colorless Thopter artifact creature token with flying.
+21256	1	Flight | Ench — Aura | Enchant creature Enchanted creature has flying.
+22068	2	Awakened Awareness | Ench — Aura | Enchant artifact or creature When this Aura enters, put X +1/+1 counters on enchanted permanent. As long as en
+22128	3	Split the Spoils | Sorc | Exile up to five target permanent cards from your graveyard and separate them into two piles. An opponent choo
+22251	1	Eye of Jace | Art | At the beginning of your upkeep, surveil 1. Then if there are seven or more cards in your graveyard, sacrifice
+22591	4	Protege's Awakening | Sorc | Empower Jace 6. (Put six loyalty counters on a Jace token you control. If you don't control one, first create 
+22594	3	Loot, the Nexus | L.Cr — Beast Noble | {T}: Choose a color. Add one mana of that color for each different power among creatures you control.
+22908	2	The Echoverse Fulcrum | L.Art | When The Echoverse Fulcrum enters, draw a card, then discard a card. {5}, {T}, Exile The Echoverse Fulcrum: De
+23074	0	Transformative Commons | Land | This land enters tapped unless you control a planeswalker. {T}: Add {G} or {U}.
+23277	6	Veteran Adventurer | Cr — Human | Veteran Adventurer is also a Cleric, Rogue, Warrior, and Wizard. This spell costs {1} less to cast for each cr
+23278	3	Cruel Calculations | Sorc | Draw X cards, where X is the number of cards that were put into target player's graveyard from their library t
+23720	3	Murmuring Volume | Art — Book | {T}: Add one mana of any color. {2}, {T}, Discard a card: Draw a card.
+24293	1	Yuriko, Hope from the Shadows | L.Cr — Human Ninja | Flash When Yuriko enters, choose one — • Target creature gets -X/-0 until end of turn, where X is the number o
+24906	2	Proft, Consulting Detective | L.Cr — Human Detective | Whenever you scry or surveil, you may pay {2}. If you do, put a +1/+1 counter on Proft and draw a card. (Draw 
+25801	3	Seasoned Cryomancer | Cr — Human Wizard | When this creature enters, draw two cards, then discard two cards. When you discard one or more nonland cards 
+25993	3	Mindseeker Oculus | Cr — Homunculus | When this creature enters, empower Jace 4. (Put four loyalty counters on a Jace token you control. If you don'
+26664	3	Keeper of the Quiet Hour | Art Cr — Chimera | When this creature enters, empower Jace 2. (Put two loyalty counters on a Jace token you control. If you don't
+26710	4	Traxos, Academy Guardian | L.Art Cr — Dragon Construct | This spell costs {2} less to cast if you've cast a noncreature spell this turn. Flying, vigilance Prowess (Whe
+26911	4	Traxos, Scourge Eternal | L.Art Cr — Dragon Construct | Trample Traxos doesn't untap during your untap step. Whenever you cast an artifact or creature spell, untap Tr
+27398	3	Slickshot Vault-Buster | Cr — Human Rogue | Vigilance This creature gets +2/+0 as long as you've committed a crime this turn. (Targeting opponents, anythi
+27641	5	Edgar, Moonlit Sovereign | L.Cr — Werewolf Noble | Flash At the beginning of your end step, if you didn't cast a spell this turn, put two +1/+1 counters on Edgar
+27686	2	Fblthp, Knows the Way | L.Cr — Homunculus Scout | Domain — Fblthp's power is equal to the number of basic land types among lands you control. When Fblthp enters
+28003	3	Inspired Tethermage | Cr — Elf Warrior | Whenever you put one or more loyalty counters on a planeswalker, put a +1/+1 counter on this creature. {6}: Em
+28030	2	Arcane Amphisbaena | Cr — Snake | Deathtouch When this creature enters, empower Jace 2. (Put two loyalty counters on a Jace token you control. I
+28535	2	Tam's Resistance | Sorc | Put a +1/+1 counter on up to one target creature. It gains vigilance until end of turn. Empower Jace 4. (Put f

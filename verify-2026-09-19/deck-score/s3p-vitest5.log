@@ -1,0 +1,342 @@
+
+[1m[46m RUN [49m[22m [36mv4.0.18 [39m[90mC:/Users/QuLeR/MTG-deck-builder[39m
+
+ [31m❯[39m src/lib/__tests__/deck-score-v14-stage1c.test.ts [2m([22m[2m32 tests[22m[2m | [22m[31m1 failed[39m[2m)[22m[33m 378[2mms[22m[39m
+     [32m✓[39m a deck with no noncreature spells casts nothing[32m 22[2mms[22m[39m
+     [32m✓[39m casts are bounded by the turn mana AND by what has been drawn[32m 5[2mms[22m[39m
+     [32m✓[39m the mana the casts spend is never more than the turn has[32m 4[2mms[22m[39m
+     [32m✓[39m reads Guttersnipe as damage to the whole table per instant/sorcery[32m 3[2mms[22m[39m
+     [32m✓[39m reads a +1/+1-counter-and-ping commander as both, on the noncreature suite[32m 1[2mms[22m[39m
+     [32m✓[39m reads a token-per-cast maker as accumulating body power[32m 1[2mms[22m[39m
+     [32m✓[39m a draw-only cast trigger supplies no finishing output[32m 2[2mms[22m[39m
+     [32m✓[39m a Defender gains no pump or counter from its own trigger[32m 0[2mms[22m[39m
+     [32m✓[39m pingers with NOTHING to cast schedule zero output[32m 2[2mms[22m[39m
+     [32m✓[39m pingers WITH a spell suite schedule positive output[32m 50[2mms[22m[39m
+[31m     [31m×[31m a pinger big enough to reach the predicate builds the spells line[39m[32m 40[2mms[22m[39m
+     [32m✓[39m a spell suite with NO cast trigger builds no spells line and says so[32m 98[2mms[22m[39m
+     [32m✓[39m the spells line closes faster than the same deck without its pingers[32m 11[2mms[22m[39m
+     [32m✓[39m a cast trigger declares a shared key and a turn-varying spend[32m 6[2mms[22m[39m
+     [32m✓[39m the shared spell spend follows the suite, not the number of pingers[32m 13[2mms[22m[39m
+     [32m✓[39m a printed ritual with a countable yield is typed; an unbounded one is not[32m 1[2mms[22m[39m
+     [32m✓[39m an unbounded ritual adds no burst mana and is named in the trace[32m 3[2mms[22m[39m
+     [32m✓[39m a ritual is paid once, in the burst budget, and never in the ramp bonus[32m 2[2mms[22m[39m
+     [32m✓[39m a storm copy count comes from the schedule, not a constant[32m 3[2mms[22m[39m
+     [32m✓[39m a storm spell with no damage or life loss proves nothing[32m 2[2mms[22m[39m
+     [32m✓[39m an {X} drain is measured against the WHOLE table[32m 1[2mms[22m[39m
+     [32m✓[39m parses a multi-{X} cost and its damage multiplier[32m 0[2mms[22m[39m
+     [32m✓[39m a conditional "unless that player sacrifices" clause is not provable damage[32m 0[2mms[22m[39m
+     [32m✓[39m burstFinish returns no turn when no payoff reaches the predicate[32m 4[2mms[22m[39m
+     [32m✓[39m burstFinish returns the first turn a payoff DOES reach it[32m 2[2mms[22m[39m
+     [32m✓[39m resolves a planeswalker with its printed starting loyalty[32m 48[2mms[22m[39m
+     [32m✓[39m the one fixture walker the rules credit now supplies output, and it is small[32m 24[2mms[22m[39m
+     [32m✓[39m a walker resolved that way schedules non-zero finisher output[32m 6[2mms[22m[39m
+     [32m✓[39m a family that scheduled and fell short reports a schedule_short, not an absence[32m 13[2mms[22m[39m
+     [32m✓[39m a deck with no output source at all reports the absence instead[32m 2[2mms[22m[39m
+     [32m✓[39m `--profile commander` no longer swallows the named subcommand[32m 1[2mms[22m[39m
+     [32m✓[39m the spellslinger family is part of the frozen W domain[32m 4[2mms[22m[39m
+ [31m❯[39m src/lib/__tests__/deck-score-v12.test.ts [2m([22m[2m62 tests[22m[2m | [22m[31m1 failed[39m[2m)[22m[33m 726[2mms[22m[39m
+     [32m✓[39m scores a junk-heavy list on the useful mass it actually has, not 0[32m 40[2mms[22m[39m
+     [32m✓[39m gives no useful mass at all when nothing is on any plan[32m 2[2mms[22m[39m
+     [32m✓[39m reports R without multiplying by it, and keeps b_S at 0[32m 4[2mms[22m[39m
+     [32m✓[39m never exceeds 100, and saturates exactly at the frozen p80[32m 8[2mms[22m[39m
+     [32m✓[39m assigns a card that fills two roles to exactly one of them[32m 3[2mms[22m[39m
+     [32m✓[39m gives an unknown-mechanic copy no on-plan credit but keeps it in F[32m 2[2mms[22m[39m
+     [32m✓[39m bounds infrastructure Q mass by the direct plan mass it serves[32m 3[2mms[22m[39m
+     [32m✓[39m reads a creature-and-burn list as aggro, not the midrange fallback[32m 7[2mms[22m[39m
+     [32m✓[39m scoreDeck no longer labels every commanderless Standard deck midrange[32m 109[2mms[22m[39m
+     [32m✓[39m every recipe declares an essential role and an ordered band[32m 2[2mms[22m[39m
+     [32m✓[39m commander zeroes meta, divides by (1-w_meta), and still sums to 100[32m 0[2mms[22m[39m
+     [32m✓[39m brawl zeroes meta, divides by (1-w_meta), and still sums to 100[32m 0[2mms[22m[39m
+     [32m✓[39m standard zeroes meta, divides by (1-w_meta), and still sums to 100[32m 0[2mms[22m[39m
+     [32m✓[39m does not change when a corpus snapshot is supplied or removed[32m 51[2mms[22m[39m
+     [32m✓[39m ships seed entries and hashes their reviewed oracle text[32m 1[2mms[22m[39m
+     [32m✓[39m marks a catalogued card covered and supported where no regex identifies it[32m 0[2mms[22m[39m
+     [32m✓[39m falls back to the regex path when the live oracle text has drifted[32m 1[2mms[22m[39m
+     [32m✓[39m reports typed coverage with no cap and marks the total provisional[32m 44[2mms[22m[39m
+     [32m✓[39m credits a creature-token maker as pressure but never a Treasure maker[32m 1[2mms[22m[39m
+     [32m✓[39m rejects a body that does not pay for itself against the plan clock[32m 0[2mms[22m[39m
+     [32m✓[39m gives a body-only creature list no on-plan credit at all[32m 8[2mms[22m[39m
+     [32m✓[39m scales the budget with the deck's own land density[32m 0[2mms[22m[39m
+     [32m✓[39m keeps the land-mean cutoff for the Commander-family profiles only[32m 4[2mms[22m[39m
+     [32m✓[39m withdraws pressure credit from an identical list that cannot cast it[32m 2[2mms[22m[39m
+     [32m✓[39m drops R below 1 as soon as one essential is under its floor[32m 1[2mms[22m[39m
+     [32m✓[39m never credits infrastructure more Q mass than the essentials it serves[32m 5[2mms[22m[39m
+     [32m✓[39m reads a sacrifice engine as aristocrats, not as a midrange pile[32m 11[2mms[22m[39m
+     [32m✓[39m reads a life-gain / drain engine as lifegain[32m 4[2mms[22m[39m
+     [32m✓[39m reads a cast-trigger engine as spells[32m 3[2mms[22m[39m
+     [32m✓[39m still orders the pair on useful mass, with the pile gap measured[32m 12[2mms[22m[39m
+     [32m✓[39m does not let a 0-power body delete the whole combat line[32m 21[2mms[22m[39m
+     [32m✓[39m counts creature-token makers with no converter, and Food makers only with one[32m 18[2mms[22m[39m
+[31m     [31m×[31m sees a producer printed on the commander[39m[32m 30[2mms[22m[39m
+     [32m✓[39m halves a producer whose trigger needs an opponent to act[32m 11[2mms[22m[39m
+     [32m✓[39m sizes a counted token from the board it counts[32m 20[2mms[22m[39m
+     [32m✓[39m credits the token its printed power, not a flat 2[32m 34[2mms[22m[39m
+     [32m✓[39m fires when the engine, the early answers and the finishers are all there[32m 45[2mms[22m[39m
+     [32m✓[39m refuses a deck whose card advantage is all one-shot[32m 26[2mms[22m[39m
+     [32m✓[39m refuses a deck with fewer than two cheap answers[32m 22[2mms[22m[39m
+     [32m✓[39m refuses the same shell when its finisher output cannot reach the table[32m 28[2mms[22m[39m
+     [32m✓[39m reads a party deck as typal and scores it on that plan[32m 3[2mms[22m[39m
+     [32m✓[39m needs both the bodies and the cards that read them[32m 2[2mms[22m[39m
+     [32m✓[39m counts artifacts as a theme when two cards read the count[32m 4[2mms[22m[39m
+     [32m✓[39m reads subtypes from the JSON column and from the type line[32m 1[2mms[22m[39m
+     [32m✓[39m does not read a payoff out of party reminder text[32m 1[2mms[22m[39m
+     [32m✓[39m counts a maker of the tribe as an enabler, not as nothing[32m 1[2mms[22m[39m
+     [32m✓[39m carries the band measured against these predicates, not the earlier loose ones[32m 1[2mms[22m[39m
+     [32m✓[39m prefers the recipe that explains more of the deck[32m 2[2mms[22m[39m
+     [32m✓[39m planFit is the U objective itself, and S is its transform[32m 1[2mms[22m[39m
+     [32m✓[39m caps fodder at three bodies per outlet/payoff copy[32m 6[2mms[22m[39m
+     [32m✓[39m leaves a deck with real throughput untouched[32m 2[2mms[22m[39m
+     [32m✓[39m scores an assembled combo deck on its own line[32m 18[2mms[22m[39m
+     [32m✓[39m gives a pile holding the piece but no tutors nothing for it[32m 3[2mms[22m[39m
+     [32m✓[39m counts a tutor only when its search filter can reach a piece[32m 2[2mms[22m[39m
+     [32m✓[39m emits a closing line from W only for an assembled family[32m 39[2mms[22m[39m
+     [32m✓[39m keeps an uncovered copy in F while giving it no on-plan credit[32m 5[2mms[22m[39m
+     [32m✓[39m applies the Commander floor to a 99-card list and the 60-card floor below it[32m 2[2mms[22m[39m
+     [32m✓[39m does not raise S when every typed payoff is blanked (whole-deck property)[32m 7[2mms[22m[39m
+     [32m✓[39m does not let a payoff role keep R when its typed copies become vanilla[32m 11[2mms[22m[39m
+     [32m✓[39m strands a dependent payoff that has no producers to consume (v1.3: u, not B)[32m 4[2mms[22m[39m
+     [32m✓[39m cannot raise S by re-selecting a looser recipe after copies are removed[32m 20[2mms[22m[39m
+     [32m✓[39m withdraws coverage from a reviewed card whose printing no longer matches[32m 1[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/deck-score-v14-stage3e.test.ts [2m([22m[2m11 tests[22m[2m)[22m[33m 7096[2mms[22m[39m
+     [33m[2m✓[22m[39m standard:1446106 never gains on a reserved unknown 61st slot (was +17.52) [33m 788[2mms[22m[39m
+     [33m[2m✓[22m[39m standard:1474208 gains on NO nonland blank (was W 65.8 -> 84.2 on one) [33m 842[2mms[22m[39m
+     [33m[2m✓[22m[39m no stride list gains on its 61st reserved slot (60 Standard lists) [33m 2866[2mms[22m[39m
+     [33m[2m✓[22m[39m less mana never helps (seeded source sets, mana scaled 0.50 -> 1.00) [33m 1059[2mms[22m[39m
+     [33m[2m✓[22m[39m scoreDeck stays under 40 ms on the cEDH fixture (population p50 gate is 20 ms) [33m 1070[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/land-intelligence.test.ts [2m([22m[2m4 tests[22m[2m)[22m[33m 18711[2mms[22m[39m
+     [33m[2m✓[22m[39m two-colour deck: an off-colour typed fetch (matches only 1 of 2 colours) scores below an on-colour dual and an on-colour fetch [33m 11476[2mms[22m[39m
+     [33m[2m✓[22m[39m mono-colour deck: a typed fetch matching the single colour scores as a normal mono land (no off-colour discount) [33m 2846[2mms[22m[39m
+     [33m[2m✓[22m[39m generic fetch (Evolving Wilds) keeps full deck-colour credit in a 2-colour deck, not the off-colour discount [33m 3089[2mms[22m[39m
+     [33m[2m✓[22m[39m an off-colour typed fetch is still in the pool (thinning has some value) but flagged [33m 1294[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/deck-score-v14-stage1a.test.ts [2m([22m[2m23 tests[22m[2m)[22m[33m 21221[2mms[22m[39m
+     [33m[2m✓[22m[39m the two formerly line-less cEDH lists assemble the Brewmaster line and clear 80 [33m 315[2mms[22m[39m
+     [33m[2m✓[22m[39m all 30 cEDH Top-16 lists have W > 0 and an assembled closing line, median total >= 85 [33m 3650[2mms[22m[39m
+     [33m[2m✓[22m[39m gives the 200 constrained-random piles no closing line — but §10.1 now keeps none of them under 25 [33m 15907[2mms[22m[39m
+     [33m[2m✓[22m[39m typed coverage does not drop on any fixture or cEDH list [33m 555[2mms[22m[39m
+[90mstdout[2m | src/lib/__tests__/deck-score-v14-stage2c.test.ts[2m > [22m[2m§10.9 stage 5 — latency[2m > [22m[2mscores the eligible Commander stride well under 20 ms median
+[22m[39mlatency n=200 cold 114.73 ms, p50 77.65 ms, p95 153.41 ms, max 246.49 ms
+
+ [32m✓[39m src/lib/__tests__/deck-score-v14-stage2c.test.ts [2m([22m[2m38 tests[22m[2m)[22m[33m 27771[2mms[22m[39m
+     [33m[2m✓[22m[39m carries the unrounded total, and `score` is still its rounding [33m 7260[2mms[22m[39m
+     [33m[2m✓[22m[39m a provisional list uses the SAME CDF, unshifted [33m 1001[2mms[22m[39m
+     [33m[2m✓[22m[39m an uncalibrated format returns null rank and never borrows a CDF [33m 1395[2mms[22m[39m
+     [33m[2m✓[22m[39m exposes the same unrounded total through the pure scorer [33m 308[2mms[22m[39m
+     [33m[2m✓[22m[39m scores the eligible Commander stride well under 20 ms median [33m 17158[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/deck-score-v13-stage4c.test.ts [2m([22m[2m12 tests[22m[2m)[22m[33m 29525[2mms[22m[39m
+     [33m[2m✓[22m[39m measures a prefix p80 ABOVE the v1.4 norm, because this prefix lifts the coverage gate [33m 21379[2mms[22m[39m
+     [33m[2m✓[22m[39m replaces the bimodal v1.3 population with a top-compressed one [33m 3644[2mms[22m[39m
+     [33m[2m✓[22m[39m is strictly harsher than the shared .70 it replaces [33m 3680[2mms[22m[39m
+     [33m[2m✓[22m[39m stays OUT of 45-65 because its party PAYOFFS, not its bodies, are the bound [33m 799[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/deck-score-v13.test.ts [2m([22m[2m19 tests[22m[2m)[22m[33m 5363[2mms[22m[39m
+     [33m[2m✓[22m[39m tazri-beacon-of-unity is over 80% typed [33m 1382[2mms[22m[39m
+     [33m[2m✓[22m[39m tazri-upgraded-arena is over 80% typed [33m 3494[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/deck-score-v13-stage2.test.ts [2m([22m[2m16 tests[22m[2m)[22m[33m 32321[2mms[22m[39m
+     [33m[2m✓[22m[39m pins the first 20 section-5 validation piles [33m 10731[2mms[22m[39m
+     [33m[2m✓[22m[39m pins ten controls whose seeds and source lists are disjoint from training [33m 21495[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/deck-score-v14-stage3c.test.ts [2m([22m[2m17 tests[22m[2m)[22m[33m 16023[2mms[22m[39m
+     [33m[2m✓[22m[39m 381364921: the voltron-schedule residue is pinned at +1.44 [33m 2623[2mms[22m[39m
+     [33m[2m✓[22m[39m adding unknown slots to a Standard list never raises S [33m 12971[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/deck-score-v13-stage3.test.ts [2m([22m[2m24 tests[22m[2m)[22m[33m 35334[2mms[22m[39m
+     [33m[2m✓[22m[39m does NOT fire on a matched negative control [33m 24484[2mms[22m[39m
+     [33m[2m✓[22m[39m reads the Cabbage paper list as its Food engine, inside 55-70 [33m 2258[2mms[22m[39m
+     [33m[2m✓[22m[39m keeps the 101-card Brawl Cabbage list on its legality cap [33m 5874[2mms[22m[39m
+     [33m[2m✓[22m[39m pins the cEDH holdout median at or above 85 [33m 319[2mms[22m[39m
+     [33m[2m✓[22m[39m pins ten fresh matched controls — stage 3 leaked four of them, stage 4a none [33m 1568[2mms[22m[39m
+     [33m[2m✓[22m[39m never reads a closing plan on a matched control [33m 596[2mms[22m[39m
+ [32m✓[39m tests/db.test.ts [2m([22m[2m28 tests[22m[2m)[22m[33m 6459[2mms[22m[39m
+     [33m[2m✓[22m[39m inserts and retrieves a card [33m 305[2mms[22m[39m
+     [33m[2m✓[22m[39m enforces unique primary key on cards [33m 337[2mms[22m[39m
+     [33m[2m✓[22m[39m stores and retrieves synergy data [33m 447[2mms[22m[39m
+     [33m[2m✓[22m[39m enforces unique commander + card pair [33m 348[2mms[22m[39m
+     [33m[2m✓[22m[39m upserts on conflict [33m 451[2mms[22m[39m
+     [33m[2m✓[22m[39m stores ML predictions per deck [33m 328[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/deck-score-v13-stage4a.test.ts [2m([22m[2m12 tests[22m[2m)[22m[33m 35075[2mms[22m[39m
+     [33m[2m✓[22m[39m holds out every §5 fixture commander from both cohorts [33m 23170[2mms[22m[39m
+     [33m[2m✓[22m[39m pins the first twenty fresh stride-drawn controls [33m 3718[2mms[22m[39m
+     [33m[2m✓[22m[39m keeps 1,000 training controls in-sample at the rate the floor promises [33m 3402[2mms[22m[39m
+     [33m[2m✓[22m[39m pins the one anchor still out of band, with its cause [33m 4305[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/deck-score-catalog.test.ts [2m([22m[2m79 tests[22m[2m)[22m[33m 15048[2mms[22m[39m
+     [33m[2m✓[22m[39m gives every entry a hash, a knowledge level and well-formed effects [33m 14819[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/deck-score-v14-stage0.test.ts [2m([22m[2m30 tests[22m[2m)[22m[33m 4014[2mms[22m[39m
+     [33m[2m✓[22m[39m exists and carries every source row exactly once [33m 2373[2mms[22m[39m
+     [33m[2m✓[22m[39m hashes still describe the sample CSVs on disk [33m 1279[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/sideboard-guide.test.ts [2m([22m[2m17 tests[22m[2m)[22m[33m 2075[2mms[22m[39m
+ [32m✓[39m tests/deck-analysis-route.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 2781[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/deck-score-v14-stage1b.test.ts [2m([22m[2m26 tests[22m[2m)[22m[33m 4715[2mms[22m[39m
+     [33m[2m✓[22m[39m classifies deterministically: the same list yields the same notes every time [33m 309[2mms[22m[39m
+     [33m[2m✓[22m[39m cabbage-cedh-input builds a control line at T20 but still closes on its Food schedule [33m 1825[2mms[22m[39m
+     [33m[2m✓[22m[39m standard-1445867-aljce keeps a closing schedule after the control correction [33m 984[2mms[22m[39m
+ [32m✓[39m tests/build-api-gate-wiring.test.ts [2m([22m[2m11 tests[22m[2m)[22m[33m 1596[2mms[22m[39m
+     [33m[2m✓[22m[39m judges the list the optimizer would leave behind [33m 424[2mms[22m[39m
+     [33m[2m✓[22m[39m runs ownership against the caller-supplied pool [33m 489[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/web-sync.test.ts [2m([22m[2m32 tests[22m[2m)[22m[33m 4383[2mms[22m[39m
+ [32m✓[39m tests/auth-login-route.test.ts [2m([22m[2m7 tests[22m[2m)[22m[33m 1722[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/deck-score-v13-stage4b.test.ts [2m([22m[2m18 tests[22m[2m)[22m[33m 39817[2mms[22m[39m
+     [33m[2m✓[22m[39m is a different corpus from the Commander one, with its own draw seeds [33m 726[2mms[22m[39m
+     [33m[2m✓[22m[39m excludes every §5 fixture commander and draws Brawl-legal 100-card piles [33m 18046[2mms[22m[39m
+     [33m[2m✓[22m[39m keeps Ballooncon on its real line — the one-card-pool rule would not [33m 982[2mms[22m[39m
+     [33m[2m✓[22m[39m reads no closing plan on fresh Commander controls [33m 15959[2mms[22m[39m
+     [33m[2m✓[22m[39m scores a coverage-matched Brawl control under 25 with S <= 5 [33m 3535[2mms[22m[39m
+     [33m[2m✓[22m[39m keeps Kuja and Azula in band and the 101-card Cabbage list capped [33m 331[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/synergy-graph.test.ts [2m([22m[2m33 tests[22m[2m)[22m[33m 812[2mms[22m[39m
+     [33m[2m✓[22m[39m scores a maximal-overlap deck at the build-api /analyze cap (600 cards) in well under a second [33m 368[2mms[22m[39m
+     [33m[2m✓[22m[39m input size is capped regardless of how many cards are submitted (20,000-card flood) [33m 395[2mms[22m[39m
+ [32m✓[39m tests/analytics-api.test.ts [2m([22m[2m6 tests[22m[2m)[22m[33m 1215[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/card-alternatives.test.ts [2m([22m[2m10 tests[22m[2m)[22m[33m 1675[2mms[22m[39m
+     [33m[2m✓[22m[39m excludes unknown-price candidates only when a cap is given [33m 340[2mms[22m[39m
+     [33m[2m✓[22m[39m keeps land alternatives within the deck's colour identity [33m 456[2mms[22m[39m
+     [33m[2m✓[22m[39m excludes the target land and lands already in the deck [33m 388[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/deck-score-v14-stage2.test.ts [2m([22m[2m28 tests[22m[2m)[22m[33m 34048[2mms[22m[39m
+     [33m[2m✓[22m[39m never raises S when proved-zero-use typed copies are deleted [32m 300[2mms[22m[39m
+     [33m[2m✓[22m[39m never raises S when unreadable slots are added [33m 1630[2mms[22m[39m
+     [33m[2m✓[22m[39m pins the Commander prefix: no S zeros, S p50 83.7, total p50 28 [33m 18065[2mms[22m[39m
+     [33m[2m✓[22m[39m pins the Brawl prefix: no S zeros, S p50 87.1, total p50 67 [33m 12362[2mms[22m[39m
+     [33m[2m✓[22m[39m gives an undersized library the same W as the same list padded to N0 [33m 646[2mms[22m[39m
+     [33m[2m✓[22m[39m moves ONE cell and refuses a cell it cannot locate [33m 502[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/deck-gate.test.ts [2m([22m[2m18 tests[22m[2m)[22m[33m 428[2mms[22m[39m
+ [32m✓[39m src/app/api/ai-suggest/__tests__/passive-mode.test.ts [2m([22m[2m3 tests[22m[2m)[22m[33m 770[2mms[22m[39m
+     [33m[2m✓[22m[39m returns CF recommendations tagged source: collaborative-filtering and never calls an LLM [33m 664[2mms[22m[39m
+ [32m✓[39m tests/cedh-staples.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 299[2mms[22m[39m
+ [32m✓[39m tests/deck-score-wiring.test.ts [2m([22m[2m9 tests[22m[2m)[22m[33m 831[2mms[22m[39m
+     [33m[2m✓[22m[39m carries an additive deckScore payload for a Brawl (commander-family) list [33m 376[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/grp-id-resolver.test.ts [2m([22m[2m15 tests[22m[2m)[22m[33m 321[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/first-boot.test.ts [2m([22m[2m7 tests[22m[2m)[22m[33m 941[2mms[22m[39m
+     [33m[2m✓[22m[39m a hash produced by hashPassword verifies with verifyPassword (same format the setup wizard relies on) [33m 661[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/platform-detect.test.ts [2m([22m[2m7 tests[22m[2m)[22m[33m 366[2mms[22m[39m
+     [33m[2m✓[22m[39m isPremium returns true when subscription is active pro [33m 337[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/sync-commander-stats.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 148[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/deck-score-v14-stage1d.test.ts [2m([22m[2m27 tests[22m[2m)[22m[33m 11818[2mms[22m[39m
+     [33m[2m✓[22m[39m prints a paid deployment ledger and still closes T6 (OUT HIGH, band 70-85) [33m 1361[2mms[22m[39m
+     [33m[2m✓[22m[39m W and the composed total are identical at H12 and H20 on the cEDH cohort [33m 10357[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/deck-score.test.ts [2m([22m[2m45 tests[22m[2m)[22m[33m 471[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/scryfall-bulk.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 84[2mms[22m[39m
+ [32m✓[39m tests/build-api-alternatives.test.ts [2m([22m[2m10 tests[22m[2m)[22m[33m 409[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/utils.test.ts [2m([22m[2m21 tests[22m[2m)[22m[32m 54[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/meta-queries.test.ts [2m([22m[2m20 tests[22m[2m)[22m[32m 66[2mms[22m[39m
+ [32m✓[39m src/app/api/web-sync/__tests__/route.test.ts [2m([22m[2m15 tests[22m[2m)[22m[32m 124[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/deck-ingest.test.ts [2m([22m[2m19 tests[22m[2m)[22m[32m 63[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/card-classifier.test.ts [2m([22m[2m71 tests[22m[2m)[22m[32m 51[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/win-conditions.test.ts [2m([22m[2m11 tests[22m[2m)[22m[32m 44[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/deck-optimizer.test.ts [2m([22m[2m9 tests[22m[2m)[22m[32m 37[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/commander-synergy.test.ts [2m([22m[2m10 tests[22m[2m)[22m[32m 33[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/arena-match-contract.test.ts [2m([22m[2m51 tests[22m[2m)[22m[32m 83[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/deck-score-v14-stage3g.test.ts [2m([22m[2m12 tests[22m[2m)[22m[32m 89[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/benchmark-route.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 21[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/deck-score-input.test.ts [2m([22m[2m10 tests[22m[2m)[22m[32m 79[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/deck-builder-budget-bracket.test.ts [2m([22m[2m14 tests[22m[2m)[22m[32m 30[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/deck-validation.test.ts [2m([22m[2m34 tests[22m[2m)[22m[32m 26[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/arena-log-reader.test.ts [2m([22m[2m29 tests[22m[2m)[22m[32m 36[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/arena-game-events.test.ts [2m([22m[2m22 tests[22m[2m)[22m[32m 26[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/constants.test.ts [2m([22m[2m19 tests[22m[2m)[22m[32m 23[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/ai-chat-helpers.test.ts [2m([22m[2m34 tests[22m[2m)[22m[32m 20[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/mulligan-advisor.test.ts [2m([22m[2m16 tests[22m[2m)[22m[32m 19[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/bracket.test.ts [2m([22m[2m9 tests[22m[2m)[22m[32m 22[2mms[22m[39m
+ [32m✓[39m src/components/match/__tests__/match-stats.test.ts [2m([22m[2m18 tests[22m[2m)[22m[32m 21[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/craft-list.test.ts [2m([22m[2m7 tests[22m[2m)[22m[32m 24[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/game-state-engine.test.ts [2m([22m[2m26 tests[22m[2m)[22m[32m 22[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/arena-parser.test.ts [2m([22m[2m26 tests[22m[2m)[22m[32m 22[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/deck-builder-constraints.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 23[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/post-match-stats.test.ts [2m([22m[2m16 tests[22m[2m)[22m[32m 21[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/decklist-normalize.test.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 23[2mms[22m[39m
+ [32m✓[39m src/hooks/__tests__/use-deck-editor.test.ts [2m([22m[2m14 tests[22m[2m)[22m[32m 16[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/overlay-integration.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 23[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/highlight-detector.test.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 12[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/benchmark-metrics.test.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 12[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/land-math.test.ts [2m([22m[2m7 tests[22m[2m)[22m[32m 9[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/deck-fingerprint.test.ts [2m([22m[2m25 tests[22m[2m)[22m[32m 17[2mms[22m[39m
+ [32m✓[39m src/components/command-center/__tests__/consultant-helpers.test.ts [2m([22m[2m15 tests[22m[2m)[22m[32m 25[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/power-level-edhpl.test.ts [2m([22m[2m14 tests[22m[2m)[22m[32m 17[2mms[22m[39m
+ [32m✓[39m tests/edhrec.test.ts [2m([22m[2m14 tests[22m[2m)[22m[32m 11[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/curve-score.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 15[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/deck-export.test.ts [2m([22m[2m20 tests[22m[2m)[22m[32m 18[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/deck-grouping.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 17[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/mana-sources.test.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 7[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/deck-templates.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 12[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/build-hints.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 13[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/power-level-deck.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 9[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/tribal-detect.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 9[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/commander-legality-swap.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 5[2mms[22m[39m
+ [32m✓[39m src/components/command-center/__tests__/coverage-selectors.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 9[2mms[22m[39m
+ [32m✓[39m tests/build-api-resolve.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 8[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/suggestion-sources.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 5[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/consistent-mana-lands.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 7[2mms[22m[39m
+ [32m✓[39m src/components/command-center/__tests__/bracket-tile.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 5[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/deck-score-v14-stage3d.test.ts [2m([22m[2m12 tests[22m[2m)[22m[33m 52117[2mms[22m[39m
+     [33m[2m✓[22m[39m no stride list closes faster on its 61st reserved slot (30 Standard lists) [33m 2020[2mms[22m[39m
+     [33m[2m✓[22m[39m 381364921: blanking the pump source now LOSES (was +1.44) [33m 9458[2mms[22m[39m
+     [33m[2m✓[22m[39m deleting one random nonland copy never raises W (seeded, 3 profiles) [33m 24317[2mms[22m[39m
+     [33m[2m✓[22m[39m blanking one random nonland copy never raises W (seeded, 3 profiles) [33m 15966[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/deck-score-coverage-round1.test.ts [2m([22m[2m15 tests[22m[2m)[22m[33m 59185[2mms[22m[39m
+     [33m[2m✓[22m[39m pins the Commander corpus measurement and reproduces it on a prefix [33m 26735[2mms[22m[39m
+     [33m[2m✓[22m[39m pins the Brawl corpus measurement and reproduces it on a prefix [33m 14816[2mms[22m[39m
+     [33m[2m✓[22m[39m closes the round-1 S = 0 MISS: the floor that caused it is retired [33m 16619[2mms[22m[39m
+     [33m[2m✓[22m[39m keeps every round-1 atom above the three-corpus-card floor [33m 697[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/deck-score-v14-stage3.test.ts [2m([22m[2m22 tests[22m[2m)[22m[33m 63540[2mms[22m[39m
+     [33m[2m✓[22m[39m reserved unresolved slots count toward the size: 96 resolved + 3 unknown is legal [33m 386[2mms[22m[39m
+     [33m[2m✓[22m[39m every one of the 25 stride lists fails structurally at k = 1, 5 and 10 deletions [33m 6511[2mms[22m[39m
+     [33m[2m✓[22m[39m a Brawl list short of 99 fails the same way [33m 798[2mms[22m[39m
+     [33m[2m✓[22m[39m price, popularity, rarity, set, printing, art and input order move nothing [33m 1495[2mms[22m[39m
+     [33m[2m✓[22m[39m input order alone moves nothing [33m 1829[2mms[22m[39m
+     [33m[2m✓[22m[39m quantity representation (n entries of 1 vs one entry of n) moves nothing [33m 2228[2mms[22m[39m
+     [33m[2m✓[22m[39m a different printing of the same basic land moves nothing [33m 1813[2mms[22m[39m
+     [33m[2m✓[22m[39m replacing proved-zero-use typed copies with unknown slots: dS <= 1e-6, drank <= 1 [33m 17424[2mms[22m[39m
+     [33m[2m✓[22m[39m adding zero-credit unknown slots never raises S (k = 1, 5, 10) [33m 10077[2mms[22m[39m
+     [33m[2m✓[22m[39m breaking an on-plan proof never gains: S and W are non-increasing [33m 1889[2mms[22m[39m
+     [33m[2m✓[22m[39m keeps the retained 200-list ctrl93 top tail inside <= 20/200 in both profiles [33m 18753[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/deck-score-v14-stage3b.test.ts [2m([22m[2m18 tests[22m[2m)[22m[33m 80239[2mms[22m[39m
+     [33m[2m✓[22m[39m commander: 200 eligible lists, one random copy blanked [33m 61562[2mms[22m[39m
+     [33m[2m✓[22m[39m brawl: 200 eligible lists, one random copy blanked [33m 17613[2mms[22m[39m
+ [31m❯[39m tests/build-api-build.test.ts [2m([22m[2m7 tests[22m[2m | [22m[31m1 failed[39m[2m)[22m[33m 120929[2mms[22m[39m
+     [32m✓[39m rejects an out-of-range bracket[32m 3[2mms[22m[39m
+     [32m✓[39m rejects a non-integer bracket[32m 1[2mms[22m[39m
+     [32m✓[39m rejects a negative maxCardPrice[32m 0[2mms[22m[39m
+     [32m✓[39m rejects a negative maxDeckPrice[32m 0[2mms[22m[39m
+     [32m✓[39m rejects string values for the numeric fields[32m 1[2mms[22m[39m
+[31m     [31m×[31m marks owned:true only for cards the caller declared owned[39m[33m 80326[2mms[22m[39m
+     [33m[2m✓[22m[39m omits the owned key entirely for a non-collection build [33m 40593[2mms[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 3 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m tests/build-api-build.test.ts[2m > [22mPOST /build — owned flag on cards[][2m > [22mmarks owned:true only for cards the caller declared owned
+[31m[1mError[22m: Test timed out in 60000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".[39m
+[36m [2m❯[22m tests/build-api-build.test.ts:[2m77:3[22m[39m
+    [90m 75| [39m    [33m.[39m[34mfilter[39m((n) [33m=>[39m n [33m!==[39m [32m'Journey to Eternity'[39m)[33m;[39m [90m// not in the repo DB[39m
+    [90m 76| [39m
+    [90m 77| [39m  it('marks owned:true only for cards the caller declared owned', asyn…
+    [90m   | [39m  [31m^[39m
+    [90m 78| [39m    [35mconst[39m { status[33m,[39m body } [33m=[39m [35mawait[39m [34mbuild[39m({
+    [90m 79| [39m      commanderName[33m:[39m [32m'Krenko, Mob Boss'[39m[33m,[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m src/lib/__tests__/deck-score-v12.test.ts[2m > [22msection 8 W: token producers, zero-power bodies and the opponent prior[2m > [22msees a producer printed on the commander
+[31m[1mAssertionError[22m: expected 0 to be greater than 0[39m
+[36m [2m❯[22m src/lib/__tests__/deck-score-v12.test.ts:[2m594:33[22m[39m
+    [90m592| [39m    const withCommander = computeWin('brawl', normsFor('brawl'), 'toke…
+    [90m593| [39m    const without = computeWin('brawl', normsFor('brawl'), 'tokens', 6…
+    [90m594| [39m    [34mexpect[39m(withCommander[33m.[39mscore)[33m.[39m[34mtoBeGreaterThan[39m(without[33m.[39mscore)[33m;[39m
+    [90m   | [39m                                [31m^[39m
+    [90m595| [39m  })[33m;[39m
+    [90m596| [39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m src/lib/__tests__/deck-score-v14-stage1c.test.ts[2m > [22m§9.4 cast triggers — typed per-cast output[2m > [22ma pinger big enough to reach the predicate builds the spells line
+[31m[1mAssertionError[22m: expected [ 'combat_wide' ] to include 'spells'[39m
+[36m [2m❯[22m src/lib/__tests__/deck-score-v14-stage1c.test.ts:[2m195:19[22m[39m
+    [90m193| [39m    const main = [entry({ name: 'Mega Snipe', text: BIG_PINGER, qty: 4…
+    [90m194| [39m    [35mconst[39m { built } [33m=[39m [34mauditOf[39m(main)[33m;[39m
+    [90m195| [39m    [34mexpect[39m(built)[33m.[39m[34mtoContain[39m([32m'spells'[39m)[33m;[39m
+    [90m   | [39m                  [31m^[39m
+    [90m196| [39m  })[33m;[39m
+    [90m197| [39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m3 failed[39m[22m[2m | [22m[1m[32m90 passed[39m[22m[90m (93)[39m
+[2m      Tests [22m [1m[31m3 failed[39m[22m[2m | [22m[1m[32m1537 passed[39m[22m[90m (1540)[39m
+[2m   Start at [22m 17:50:03
+[2m   Duration [22m 127.60s[2m (transform 33.95s, setup 0ms, import 130.40s, tests 744.18s, environment 26ms)[22m
+

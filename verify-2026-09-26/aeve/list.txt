@@ -1,0 +1,79 @@
+About
+Name Aeve, Progenitor Ooze — Spellslinger
+
+Commander
+1 Aeve, Progenitor Ooze
+
+Deck
+1 Emerald Medallion (MH3) 291
+1 Scavenging Ooze (FDN) 232
+1 Cultivate (FIC) 300
+1 Acidic Slime (CMM) 270
+1 Beast Within (EOC) 93
+1 Llanowar Elves (FDN) 227
+1 Garruk's Uprising (FDN) 220
+1 Rampant Growth (FIC) 313
+1 Inspiring Call (FDN) 226
+1 Elvish Mystic (M14) 169
+1 Heroic Intervention (TLE) 43
+1 Doubling Season (FDN) 216
+1 Experiment One (RVR) 137
+1 Hardened Scales (LCC) 243
+1 Return of the Wildspeaker (ELD) 172
+1 Arcane Signet (ELD) 331
+1 Tribute to the World Tree (MOM) 211
+1 Temperamental Oozewagg (MH3) 172
+1 Crop Rotation (ULG) 98
+1 Ozolith, the Shattered Spire (MOM) 198
+1 Chatterstorm (MH2) 152
+1 Craterhoof Behemoth (TDM) 138
+1 Beastmaster Ascension (NCC) 283
+1 Explore (TLE) 259
+1 Shamanic Revelation (NCC) 311
+1 Corrosive Ooze (DOM) 158
+1 Harmonize (ECC) 111
+1 Miming Slime (UMA) 173
+1 The Great Henge (TLE) 41
+1 Kenrith's Transformation (AFC) 162
+1 Noxious Revival (SPG) 73
+1 Eternal Witness (CMM) 286
+1 Utopia Sprawl (RVR) 159
+1 Glimpse of Nature (CHK) 210
+1 Mind Stone (WTH) 153
+1 Coldsteel Heart (CSP) 136
+1 Hedron Archive (FDN) 726
+1 Chromatic Lantern (GRN) 233
+1 Paradise Druid (AFC) 165
+1 Wood Elves (MOC) 316
+1 Solemn Simulacrum (M21) 239
+1 Sylvan Library (DMR) 179
+1 Up the Beanstalk (WOE) 195
+1 Return to Nature (MOC) 309
+1 Reclamation Sage (FDN) 231
+1 Worldly Tutor (DMR) 185
+1 Celestial Reunion (ECL) 170
+1 Moonsilver Key (MID) 255
+1 Radioactive Spider (SPM) 111
+1 Tezzeret, Cruel Captain (EOE) 2
+1 Formidable Speaker (ECL) 176
+1 Courier of Comestibles (TMT) 112
+1 Bushwhack (FDN) 215
+1 Kozilek's Command (MH3) 11
+1 You Find a Cursed Idol (AFR) 213
+1 Magic Pot (FIN) 263
+1 Soul-Guide Lantern (EOC) 143
+1 Pick Your Poison (MKM) 170
+1 Seedship Impact (EOE) 205
+1 Weather Maker (TMT) 182
+1 Night of the Sweets' Revenge (WOE) 178
+1 Misty Rainforest (SPG) 111
+1 Disciple of Freyalise (MH3) 250
+1 Bridgeworks Battle (MH3) 249
+1 Tangled Florahedron (ZNR) 211
+1 Multiversal Passage (OM1) 181
+1 Hashep Oasis (AKR) 301
+1 Kishla Village (TDM) 259
+1 Thran Portal (DMU) 259
+1 Cabaretti Courtyard (EOC) 151
+1 Brokers Hideout (SNC) 248
+28 Forest (FIN) 306

@@ -1,0 +1,86 @@
+Commander
+1 A-Vivi Ornitier
+
+Deck
+1 Abrade
+1 Aggravated Assault
+1 Ajani's Anguish
+1 An Offer You Can't Refuse
+1 Arcane Signet
+1 Archmage Emeritus
+1 Artist's Talent
+1 Birgi, God of Storytelling
+1 Brainstorm
+1 Burst Lightning
+1 Chandra, Torch of Defiance
+1 Chase Inspiration
+1 Choco-Comet
+1 Command Tower
+1 Consider
+1 Counterspell
+1 Curiosity
+1 Daze
+1 Dive Down
+1 Expressive Iteration
+1 Fabled Passage
+1 Faithless Looting
+1 Fiery Annihilation
+1 Fire Magic
+1 Fleeting Reflection
+1 Flooded Strand
+1 Frantic Search
+1 Gamble
+1 Grapeshot
+1 Guttersnipe
+1 Hapatra, the Desert Frost
+1 Harmonic Prodigy
+1 Into the Flood Maw
+9 Island
+1 Izzet Charm
+1 Izzet Signet
+1 Jeska's Will
+1 Light Up the Stage
+1 Lightning Bolt
+1 Lightning Greaves
+1 Lightning Strike
+1 Magic Damper
+1 Mishra's Bauble
+1 Misty Rainforest
+10 Mountain
+1 Mox Amber
+1 Multiversal Passage
+1 Mystic Sanctuary
+1 Mystical Tutor
+1 Negate
+1 Nibelheim Aflame
+1 Ojer Axonil, Deepest Might
+1 Opt
+1 Otawara, Soaring City
+1 Past in Flames
+1 Ponder
+1 Pongify
+1 Preordain
+1 Ral, Crackling Wit
+1 Rapid Hybridization
+1 Riverpyre Verge
+1 Scalding Tarn
+1 Shatterskull Smashing
+1 Sink into Stupor
+1 Sokenzan, Crucible of Defiance
+1 Spell Pierce
+1 Spikefield Hazard
+1 Spirebluff Canal
+1 Steam Vents
+1 Stormcarved Coast
+1 Swan Song
+1 Swiftfoot Boots
+1 Talisman of Creativity
+1 The One Ring
+1 Three Steps Ahead
+1 Tomik, Izzet Sparkmage
+1 Traumatic Critique
+1 Treasure Cruise
+1 Unexpected Windfall
+1 Unholy Heat
+1 Wizard's Retort
+1 Wrath of the Bloodmane

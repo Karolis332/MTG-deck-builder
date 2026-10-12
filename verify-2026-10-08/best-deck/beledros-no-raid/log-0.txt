@@ -1,0 +1,2 @@
+banned 487 names (front-face matches 486)
+Beledros Witherbloom: 91.95 [land38 ramp12 draw11 remo10 wipe3 prot6 pen0] (seeds cf 62.78 [land37 ramp14 draw12 remo10 wipe2 prot1 pen5] | previous 80.84 [land37 ramp15 draw10 remo13 wipe3 prot3 pen4]; 7 swaps, 213198 ms)

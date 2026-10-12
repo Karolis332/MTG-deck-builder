@@ -1,0 +1,14 @@
+| constant | frozen | measured | n | verdict |
+|---|---:|---:|---:|---|
+| Q_SLOT_SATURATION.commander (p80, 182 families) | 0.434 | 0.434 | 1460 | MATCH |
+| Q_SLOT_SATURATION.brawl (p80, 179 families) | 0.406 | 0.406 | 797 | MATCH |
+| Q_SLOT_SATURATION.standard (p80, 42 families) | 0.483 | 0.483 | 360 | MATCH |
+| (retired, diagnostics only) | Q_BASELINE_JOINT_*, Q_BASELINE_CLOSING*, Q_SATURATION* | - | - | not graded |
+| cohort list hashes | 4523 | 4523 | 4523 | MATCH |
+| recipe/catalogue domain | 21fa0be02940 | 21fa0be02940 | 14924 | MATCH |
+| reference commander | 0adcd7361618 | 0adcd7361618 | 1426 | MATCH |
+| reference brawl | 4cdd4828f8e9 | 4cdd4828f8e9 | 782 | MATCH |
+| reference standard | 36ce6a9e1ab8 | 36ce6a9e1ab8 | 244 | MATCH |
+
+bands verify: OK — every frozen constant reproduces at this catalogue (CATALOG_SIZE 14924; 45 band cells re-measured, 0 mismatches).
+exit 0

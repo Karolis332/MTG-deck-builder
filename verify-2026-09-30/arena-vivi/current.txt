@@ -1,0 +1,90 @@
+Commander
+1 A-Vivi Ornitier
+
+Deck
+1 Abrade
+1 Agatha's Soul Cauldron
+1 An Offer You Can't Refuse
+1 Arcane Signet
+1 Artist's Talent
+1 Ash Barrens
+1 Ashling, Flame Dancer
+1 Ashnod's Altar
+1 Big Score
+1 Blasphemous Act
+1 Brainstorm
+1 Brass's Tunnel-Grinder
+1 Buried Ruin
+1 Cavern of Souls
+1 Chromatic Lantern
+1 Clinquant Skymage
+1 Command Tower
+1 Consider
+1 Contentious Plan
+1 Counterspell
+1 Curiosity
+1 Darksteel Citadel
+1 Deduce
+1 Dramatic Reversal
+1 Dualcaster Mage
+1 Electrostatic Infantry
+1 Evolving Wilds
+1 Expressive Iteration
+1 Fabled Passage
+1 Faithless Looting
+1 Flooded Strand
+1 Frantic Search
+1 Gemstone Caverns
+1 Goldspan Dragon
+1 Hard Evidence
+1 Impact Tremors
+1 Involuntary Employment
+7 Island
+1 Izzet Signet
+1 Kraum, Violent Cacophony
+1 Leyline of Anticipation
+1 Lightning Bolt
+1 Mind Stone
+1 Misty Rainforest
+8 Mountain
+1 Mulldrifter
+1 Murmuring Mystic
+1 Mystic Sanctuary
+1 Mystical Tutor
+1 Negate
+1 Opt
+1 Ovika, Enigma Goliath
+1 Panharmonicon
+1 Planar Incision
+1 Ponder
+1 Preordain
+1 Proft's Eidetic Memory
+1 Ragavan, Nimble Pilferer
+1 Ral, Crackling Wit
+1 Rapid Hybridization
+1 Reliquary Tower
+1 Resculpt
+1 Rogue's Passage
+1 Scalding Tarn
+1 Secluded Courtyard
+1 Seize the Spoils
+1 Shark Typhoon
+1 Sink into Stupor
+1 Spirebluff Canal
+1 Steam Vents
+1 Sticky Fingers
+1 Storm-Kiln Artist
+1 Stormcarved Coast
+1 Stormchaser's Talent
+1 Talisman of Creativity
+1 Tempest Angler
+1 Temple of Epiphany
+1 Terramorphic Expanse
+1 Third Path Iconoclast
+1 Three Steps Ahead
+1 Thrill of Possibility
+1 Training Grounds
+1 Unexpected Windfall
+1 Waterbender Ascension
+1 Wayfarer's Bauble
+1 Young Pyromancer

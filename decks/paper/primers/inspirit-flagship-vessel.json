@@ -1,0 +1,107 @@
+{
+  "version": 1,
+  "deck": {
+    "name": "Inspirit, Flagship Vessel",
+    "commanders": ["Inspirit, Flagship Vessel"],
+    "colours": "UWR artifacts",
+    "format": "commander",
+    "list": "verify-2026-10-06/urza-found/inspirit-hotswap.txt",
+    "status": "proposed"
+  },
+  "summary": "Station [[Inspirit, Flagship Vessel]] to 8+ charge counters by T4-5 so every other artifact gains hexproof and indestructible, then spend its two charge counters a turn on draw or mana. Once protected, the artifact pile becomes hasty tramplers via [[Depthshaker Titan]] or [[Cyberdrive Awakener]] into [[Repurposing Bay]]. This is the sleeved list with [[Emry, Lurker of the Loch]] in for [[Urza, Lord High Artificer]], who hot-swapped out to become the commander of the new Urza box; Emry is the deck's only way to cast an artifact from the graveyard, and her affinity makes her cheap on a wide board.",
+  "phases": [
+    { "turns": "T1-3", "goal": "Two mana pieces, Inspirit down on T3.", "cards": ["Sol Ring", "Etherium Sculptor", "Arcane Signet", "Inspirit, Flagship Vessel"] },
+    { "turns": "T4-6", "goal": "Station to 8, feed a charge sink, build draw.", "cards": ["Bygone Colossus", "Traxos, Scourge of Kroog", "Emry, Lurker of the Loch", "Insight Engine", "Repurposing Bay", "Kilo, Apogee Mind"] },
+    { "turns": "Close, T7+", "goal": "One protected finisher behind Inspirit's hexproof-and-indestructible shield.", "cards": ["Depthshaker Titan", "Cyberdrive Awakener", "Craterclaw Colossus", "Improvised Arsenal", "Boros Charm", "Swan Song"] }
+  ],
+  "engine": [
+    { "title": "Reach 8 counters fast", "flow": ["T3 [[Inspirit, Flagship Vessel]]", "warp [[Bygone Colossus]] for {3}: a 9/9", "tap it to station: 9 charge counters", "8+: flying, other artifacts hexproof and indestructible"], "note": "Summoning-sick creatures may still station; CR 302.6 only stops a creature's own tap abilities and attacks, not Inspirit's cost of tapping it." },
+    { "title": "Reach 8 counters (Traxos line)", "flow": ["[[Traxos, Scourge of Kroog]] enters tapped", "[[Emry, Lurker of the Loch]] for {U} (affinity, a historic spell) untaps Traxos", "station: Traxos 7 + Emry 1", "Inspirit at 8 the same turn"] },
+    { "title": "Charge sinks, one a turn", "flow": ["1+ trigger: two charge counters on [[Insight Engine]]", "{2}, {T}: a third charge counter, draw 3", "next turn: 6 cards"], "note": "Also feeds Empowered Autogenerator (3, then 6, then 9 mana) and Gavel of the Righteous toward double strike." },
+    { "title": "Proliferate", "flow": ["[[Kilo, Apogee Mind]] taps to station", "\"whenever Kilo becomes tapped, proliferate\"", "[[Tekuthal, Inquiry Dominus]]: proliferate twice instead", "+2 on every charge, +1/+1 and loyalty pile"] },
+    { "title": "Recursion", "flow": ["[[Repurposing Bay]] sacrifices Cyberdrive Awakener (MV 6)", "puts [[Craterclaw Colossus]] (MV 7) onto the battlefield free", "next turn: [[Emry, Lurker of the Loch]], {T}: cast Cyberdrive from the graveyard", "a second animation turn"] },
+    { "title": "Protection", "flow": ["Inspirit at 8+: other artifacts have hexproof and indestructible", "[[Boros Charm]]: permanents you control gain indestructible (stops destroy effects)", "[[Ripples of Potential]]: proliferate, then the permanents that got a counter phase out, dodging exile and bounce"], "note": "Inspirit itself is outside its own shield; Jhoira, Tekuthal, Skate, Blade Historian, Emry, Chandra and Tezzeret are also unshielded non-artifacts." }
+  ],
+  "winConditions": [
+    {
+      "name": "Depthshaker Titan alpha",
+      "pieces": ["Depthshaker Titan", "Inspirit, Flagship Vessel", "Traxos, Scourge of Kroog"],
+      "flow": ["pay for [[Depthshaker Titan]] with lands, keep rocks untapped", "its ETB turns five noncreature artifacts into 3/3s, sacrificed at the next end step", "all artifact creatures get melee, trample and haste", "attack all three opponents, splitting the melee +3/+3 each"],
+      "damage": "68 trample total (about 22 per opponent); 136 with Blade Historian's double strike already out",
+      "turn": "~T8-9, pilot guide line A"
+    },
+    {
+      "name": "Cyberdrive -> Repurposing Bay -> Craterclaw",
+      "pieces": ["Cyberdrive Awakener", "Repurposing Bay", "Craterclaw Colossus"],
+      "flow": ["[[Repurposing Bay]] already in play since the turn began", "[[Cyberdrive Awakener]]: every noncreature artifact becomes a 4/4 until end of turn", "Bay sacrifices Cyberdrive (MV 6) and puts [[Craterclaw Colossus]] (MV 7) onto the battlefield", "Craterclaw: creatures you control get +X/+0 and trample, X = artifacts you control"],
+      "damage": "146 trample across the table on the reference board (10 artifacts plus Bay and Craterclaw)",
+      "turn": "~T9, pilot guide line B"
+    },
+    {
+      "name": "Commander damage (backup)",
+      "pieces": ["Improvised Arsenal", "Boros Charm"],
+      "flow": ["Inspirit at 8+, flying", "[[Improvised Arsenal]], equip {R}: power = 5 + N (N = artifacts controlled)", "[[Boros Charm]]: double strike", "swing for lethal commander damage"],
+      "damage": "21+ commander damage from 6 artifacts (2 x (5 + N) >= 21 from N = 6)",
+      "turn": "backup, any turn Inspirit is unanswered"
+    },
+    {
+      "name": "Lux Artillery drain (grind)",
+      "pieces": ["Lux Artillery", "Lasting Tarfire"],
+      "flow": ["station and proliferate every turn", "[[Deepglow Skate]] doubles every counter", "[[Lux Artillery]] sees 30+ counters among artifacts and creatures", "10 damage to each opponent at each of your end steps"],
+      "damage": "10 to each opponent at each of your end steps, +2 more at every end step with Lasting Tarfire active",
+      "turn": "grind backup once Inspirit is stabilized, not a single-turn kill"
+    }
+  ],
+  "metrics": {
+    "columns": ["Metric", "Sleeved (with Urza)", "Proposed (with Emry)"],
+    "rows": [
+      { "label": "Total cards", "values": ["100", "100"] },
+      { "label": "Lands", "values": ["38", "38 (unchanged)"] },
+      { "label": "Commander-slot artifact recursion", "values": ["none (Urza is a mana/threat piece, not recursion)", "Emry, Lurker of the Loch recasts a graveyard artifact each turn"] }
+    ],
+    "note": "This is a single 1-for-1 hot-swap; no other card or land count changed. verify-2026-10-02/urza/build-report.md §7 (hot swap decision); CLAUDE.md Session Log 2026-10-02 (Inspirit entry)"
+  },
+  "swaps": [
+    { "out": "Urza, Lord High Artificer", "in": "Emry, Lurker of the Loch", "role": "commander-adjacent slot -> recursion", "reason": "Urza moved to become the commander of the new Urza box, built around his own mana engine (27 artifacts there; this list has 41). Emry has affinity for artifacts (cheap once the board is wide) and is this deck's only way to cast a sacrificed or countered artifact from the graveyard -- the Cyberdrive line's second animation turn (recasting the Cyberdrive the Bay sacrificed) depends on her.", "quoteOut": "Tap an untapped artifact you control: Add {U}.", "quoteIn": "{T}: Choose target artifact card in your graveyard. You may cast that card this turn. (You still pay its costs. Timing rules still apply.)", "evidence": "verify-2026-10-02/urza/build-report.md §1 and §7; .claude/skills/deck-building/reference/decks/inspirit-flagship-vessel.md", "verdict": "operator" }
+  ],
+  "keepers": [
+    { "card": "Emry, Lurker of the Loch", "why": "A 1/2 body with no combat role looks cuttable, but it is the deck's only way to cast an artifact from the graveyard (One Last Job returns only creature, Vehicle and Equipment cards): it rebuys a sacrificed Cyberdrive Awakener, a countered finisher, or an artifact discarded to Thirst for Knowledge." },
+    { "card": "Lux Artillery", "why": "Does nothing until 30 counters are on board; it is the deck's grind win condition once the combo turn is answered, and Deepglow Skate or Tekuthal gets there fast." },
+    { "card": "Jhoira, Weatherlight Captain", "why": "A 3/3 with no combat text, but \"whenever you cast a historic spell, draw a card\" fires on nearly every artifact, legendary or Saga the deck plays." },
+    { "card": "Kilo, Apogee Mind", "why": "A 3/3 vanilla-looking body; it adds 3 charge counters when it stations and proliferates on every tap, which is what pushes Inspirit to 8 a turn early." },
+    { "card": "Repurposing Bay", "why": "Looks like a narrow sacrifice outlet, but it must already be in play before the Cyberdrive turn (a creature that arrives that turn can't tap), so it has to be kept in play a turn ahead of the combo, not fetched reactively." },
+    { "card": "Swan Song", "why": "A 1-mana counter with a drawback (the caster gets a 2/2 flying Bird) that looks like a sideboard card, but it is the deck's cheapest answer to a board wipe before the alpha swing." }
+  ],
+  "nearTies": [],
+  "mulligan": {
+    "keep": [
+      "3-5 lands (53.6% of 7-card hands) with a mana piece costing 2 or less",
+      "53.7% of hands hold one of the 10 cheap rocks: Sol Ring, Arcane Signet, Fellwar Stone, Everflowing Chalice, Pentad Prism, Ornithopter of Paradise, Steelswarm Operator, Zookeeper Mechan, Etherium Sculptor, Enthusiastic Mechanaut",
+      "2 lands (28.1% of hands) only with Sol Ring or Arcane Signet plus a second 2-drop",
+      "example keep: Command Tower, Sacred Foundry, Island, Sol Ring, Etherium Sculptor, Insight Engine, Counterspell (T2 Sculptor + Engine, T3 Inspirit)"
+    ],
+    "mulligan": [
+      "0-1 lands",
+      "6+ lands with no mana rock",
+      "no way to make all of U, R and W by turn 3",
+      "a hand built around Bygone Colossus with no mana support -- mana is what makes the T3 Inspirit, not the warp body"
+    ]
+  },
+  "pilotRules": [
+    "On the kill turn, pay with lands: a tapped rock becomes a tapped creature once animated and can't attack.",
+    "Cyberdrive Awakener animates rocks cast this turn, but those are creatures that arrived this turn (CR 302.6): tap them for mana while paying for Cyberdrive, before it resolves.",
+    "Cyberdrive knocks an Equipment that's also a creature off anything it equips (CR 301.5c); never cast it on the Improvised Arsenal turn.",
+    "Never target Inspirit below 8 counters with Depthshaker Titan -- every target is sacrificed at the next end step, and sacrifice gets past indestructible.",
+    "Never add Final Showdown's \"all creatures lose all abilities\" mode to a wipe: Inspirit's own grant is a static ability, and losing it kills our own artifact creatures.",
+    "Traxos, Scourge of Kroog enters tapped; follow it with a historic spell (Emry, Sol Ring, Lost Jitte) before stationing, so it untaps and still has power to give.",
+    "Bygone Colossus is exiled at the next end step (recasting from exile costs {9}); station with it the same turn you warp it in.",
+    "Ripples of Potential phases Inspirit out until your next untap step; cast it only on an opponent's turn."
+  ],
+  "sources": [
+    "verify-2026-10-02/inspirit/build-report.md",
+    "verify-2026-10-02/inspirit/REFUTE.md",
+    "verify-2026-10-02/urza/build-report.md",
+    ".claude/skills/deck-building/reference/decks/inspirit-flagship-vessel.md",
+    "CLAUDE.md Session Log 2026-10-02 (Inspirit) and 2026-10-06 (Urza hot-swap)"
+  ]
+}

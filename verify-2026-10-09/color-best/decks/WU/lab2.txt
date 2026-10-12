@@ -1,0 +1,14 @@
+BASE obj 82.47 DS 71.0 pen 0 {"land":38,"ramp":12,"draw":12,"removal":10,"board_wipe":3,"protection":6} mana=94 curve=89 interaction=100 advantage=65 win=64 synergy=91 meta=50 structure=100
+   0.00  Bloodstained Mire => Fabled Passage   DS 0.0 pen 0 mana=94 curve=89 interaction=100 advantage=65 win=64 synergy=91 meta=50 structure=100
+   0.07  Wooded Foothills => Exotic Orchard   DS 0.0 pen 0 mana=94 curve=89 interaction=100 advantage=65 win=64 synergy=91 meta=50 structure=100
+   0.03  Reliquary Tower => Plains   DS 0.0 pen 0 mana=94 curve=89 interaction=100 advantage=65 win=64 synergy=91 meta=50 structure=100
+   0.07  Nesting Grounds => Plains   DS 0.0 pen 0 mana=94 curve=89 interaction=100 advantage=65 win=64 synergy=91 meta=50 structure=100
+   0.06  Temple of the False God => Plains   DS 0.0 pen 0 mana=94 curve=89 interaction=100 advantage=65 win=64 synergy=91 meta=50 structure=100
+   0.02  Bane of Bala Ged => Sun Quan, Lord of Wu   DS 0.0 pen 0 mana=93 curve=90 interaction=100 advantage=65 win=64 synergy=91 meta=50 structure=100
+   0.02  Ajani Resolute => Barkform Harvester   DS 0.0 pen 0 mana=94 curve=90 interaction=100 advantage=65 win=64 synergy=88 meta=50 structure=100
+   0.00  Nadaar, Selfless Paladin => Whirler Rogue   DS 0.0 pen 0 mana=93 curve=87 interaction=100 advantage=65 win=64 synergy=91 meta=50 structure=100
+  -0.02  Sky Diamond => Sol Ring   DS 0.0 pen 0 mana=93 curve=89 interaction=100 advantage=65 win=64 synergy=91 meta=50 structure=100
+   0.05  Thought Vessel => Arcane Signet   DS 0.0 pen 0 mana=94 curve=89 interaction=100 advantage=65 win=64 synergy=91 meta=50 structure=100
+   0.00  Chromatic Lantern => Firdoch Core   DS 0.0 pen 0 mana=94 curve=89 interaction=100 advantage=65 win=64 synergy=91 meta=50 structure=100
+  -0.01  Pearl Medallion => Tetsuko Umezawa, Fugitive   DS 0.0 pen 0 mana=93 curve=89 interaction=100 advantage=65 win=64 synergy=93 meta=50 structure=100
+ALL  obj 76.19 (-6.28) DS 64.4 pen 0 {"land":38,"ramp":12,"draw":12,"removal":10,"board_wipe":3,"protection":6} mana=96 curve=90 interaction=100 advantage=65 win=56 synergy=91 meta=50 structure=100

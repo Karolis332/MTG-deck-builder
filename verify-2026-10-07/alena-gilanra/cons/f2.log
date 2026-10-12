@@ -1,0 +1,17 @@
+c36.txt                  36L | keep7 0.683 | 4 drops by T4 0.868 | 6+ threat T5 0.788 T6 0.946 | spells T1-8 12.73 | screw 0.012 | flood>=3 0.597 (mean 4.57) | idle T5-8 0.145 | extra draws 12.25 | free 1.06 | 6+ by T8 6.16 | <=1 by T7 0.052
+Traceback (most recent call last):
+  File "C:\Users\QuLeR\MTG-deck-builder\verify-2026-10-07\alena-gilanra\sim4.py", line 440, in <module>
+    run(p, games, basics=b)
+    ~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\QuLeR\MTG-deck-builder\verify-2026-10-07\alena-gilanra\sim4.py", line 425, in run
+    o = play(names, specs, rng)
+  File "C:\Users\QuLeR\MTG-deck-builder\verify-2026-10-07\alena-gilanra\sim4.py", line 410, in play
+    g.turn(t)
+    ~~~~~~^^^
+  File "C:\Users\QuLeR\MTG-deck-builder\verify-2026-10-07\alena-gilanra\sim4.py", line 307, in turn
+    cands = [c for c in set(self.hand) if not self.is_land(c) or (c == 'Tangled Florahedron // Tangled Vale')]
+                                              ~~~~~~~~~~~~^^^
+  File "C:\Users\QuLeR\MTG-deck-builder\verify-2026-10-07\alena-gilanra\sim4.py", line 91, in is_land
+    def is_land(self, n): return self.S[n]['land'] or n == 'Tangled Florahedron // Tangled Vale'
+                                 ~~~~~~^^^
+KeyError: 'Tangled Vale'

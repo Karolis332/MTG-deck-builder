@@ -1,0 +1,4 @@
+a11.txt                  36L | keep7 0.634 | 4 drops by T4 0.832 | 6+ threat T5 0.759 T6 0.922 | spells T1-8 11.70 | screw 0.023 | flood>=3 0.505 (mean 3.68) | extra draws 10.54 | free 0.93 | 6+ by T8 5.84 | <=1 by T7 0.072
+a12.txt                  36L | keep7 0.650 | 4 drops by T4 0.831 | 6+ threat T5 0.767 T6 0.927 | spells T1-8 11.97 | screw 0.023 | flood>=3 0.511 (mean 3.77) | extra draws 10.80 | free 0.94 | 6+ by T8 5.97 | <=1 by T7 0.068
+a13.txt                  37L | keep7 0.655 | 4 drops by T4 0.854 | 6+ threat T5 0.773 T6 0.931 | spells T1-8 11.87 | screw 0.020 | flood>=3 0.549 (mean 4.03) | extra draws 10.76 | free 0.97 | 6+ by T8 6.02 | <=1 by T7 0.064
+a14.txt                  36L | keep7 0.655 | 4 drops by T4 0.834 | 6+ threat T5 0.765 T6 0.925 | spells T1-8 11.81 | screw 0.021 | flood>=3 0.534 (mean 3.87) | extra draws 10.59 | free 0.92 | 6+ by T8 5.89 | <=1 by T7 0.071

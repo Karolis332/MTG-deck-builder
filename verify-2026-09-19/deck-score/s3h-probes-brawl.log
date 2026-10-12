@@ -1,0 +1,25 @@
+## §10.4 gaming probes — brawl training stride (1141 fully resolved lists)
+
+Allowance for the WHOLE k-copy edit: max +0 S (1e-6), +1 displayed total,
++1 unrounded rank and +1 displayed rank (§10.9 item 5).
+`rank absent` counts edits where one endpoint left the rank domain: no
+numeric rank delta exists there, so it is counted, never graded as 0.
+`swap-lands` and `metadata` are equivalences: |ΔS| and |Δtotal| must be 0.
+`add-ramp-unmatched` is an UNMATCHED edit: extra ramp can be a real mana
+upgrade, so its movement is reported, not graded.
+The `ΔU>0` columns hold the lists where the edit raised the §10.2 useful
+mass itself — a real assignment gain, reported and excluded from grading.
+`repaired` counts edits that removed a card the deck was ILLEGAL for:
+lifting a rule failure is a benefit, so those totals are not graded.
+
+| probe | k | lists | skipped | max ΔS | max ΔT_abs | max Δtotal | max Δrank | max Δrank shown | S viol | total viol | rank viol | rank absent | repaired | ΔU>0 | max ΔU | max ΔS there | worst lists |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|
+| delete-offplan-typed | 1 | 953 | 188 | 0.00 | 0.00 | 0 | 0.00 | 0 | 0 | 0 | 0 | 953 | 0 | 0 | 0.0 | 0.0 | — |
+| replace-offplan-unknown | 1 | 953 | 188 | 0.00 | 9.60 | 9 | 43.25 | 43 | 0 | 1 | 1 | 305 | 5 | 0 | 0.0 | 0.0 | 276328779(rank+43.25/disp+43) |
+| add-untyped | 1 | 0 | 1141 | 0.00 | 0.00 | 0 | 0.00 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0.0 | 0.0 | — |
+| add-unknown-slots | 1 | 1141 | 0 | 0.00 | 3.68 | 4 | 9.25 | 9 | 0 | 1 | 1 | 346 | 2 | 0 | 0.0 | 0.0 | 365001669(rank+9.25/disp+9) |
+| add-untyped-unmatched | 1 | 1141 | 0 | 0.00 | 0.00 | 0 | 0.00 | 0 | 0 | 0 | 0 | 1141 | 2 | 0 | 0.0 | 0.0 | — |
+| add-saturated-staples | 1 | 1109 | 32 | 0.00 | 0.00 | 0 | 0.00 | 0 | 0 | 0 | 0 | 1003 | 1 | 106 | 2.0 | 4.1 | — |
+| add-ramp-unmatched | 1 | 1141 | 0 | 0.00 | 0.00 | 0 | 0.00 | 0 | 0 | 0 | 0 | 116 | 0 | 1025 | 7.7 | 18.5 | — |
+| swap-lands | 1 | 1000 | 141 | 0.00 | 0.00 | 0 | 0.00 | 0 | 0 | 0 | 0 | 301 | 0 | 0 | 0.0 | 0.0 | — |
+| metadata | - | 1141 | 0 | 0.00 | 0.00 | 0 | 0.00 | 0 | 0 | 0 | 0 | 346 | 0 | 0 | 0.0 | 0.0 | — |

@@ -1,0 +1,533 @@
+[
+  {
+    "url": "https://theblackgrimoire.com",
+    "status": "200",
+    "title": "The Black Grimoire — Free Commander &amp; Brawl Deck Builder",
+    "title_len": 60,
+    "desc": "The Black Grimoire is a free Magic: The Gathering deck builder for Commander and Brawl, ranked by patterns from nearly 4 million real decklists. No accounts, no paywall.",
+    "desc_len": 169,
+    "canonical": "https://theblackgrimoire.com",
+    "robots_meta": "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1",
+    "og_title": "The Black Grimoire — Free Commander &amp; Brawl Deck Builder",
+    "og_image": true,
+    "tw_card": "summary_large_image",
+    "h1_count": 1,
+    "h1_text": [
+      "Find your next commander"
+    ],
+    "jsonld_types": [
+      "HowTo",
+      "Organization",
+      "SoftwareApplication",
+      "WebPage",
+      "WebSite"
+    ],
+    "lang": "en",
+    "hreflang": [],
+    "viewport": true,
+    "word_count": 639
+  },
+  {
+    "url": "https://theblackgrimoire.com/builder",
+    "status": "200",
+    "title": "The Black Grimoire — Free Commander &amp; Brawl Deck Builder",
+    "title_len": 60,
+    "desc": "The Black Grimoire is a free Magic: The Gathering deck builder for Commander and Brawl, ranked by patterns from nearly 4 million real decklists. No accounts, no paywall.",
+    "desc_len": 169,
+    "canonical": "https://theblackgrimoire.com/builder",
+    "robots_meta": "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1",
+    "og_title": "The Black Grimoire — Free Commander &amp; Brawl Deck Builder",
+    "og_image": true,
+    "tw_card": "summary_large_image",
+    "h1_count": 0,
+    "h1_text": [],
+    "jsonld_types": [],
+    "lang": "en",
+    "hreflang": [],
+    "viewport": true,
+    "word_count": 101
+  },
+  {
+    "url": "https://theblackgrimoire.com/optimizer",
+    "status": "200",
+    "title": "Deck Optimizer — The Black Grimoire",
+    "title_len": 35,
+    "desc": "Paste any Commander, Brawl or 60-card Arena/paper decklist and get ranked cuts and adds with a stated reason for each, a Karsten land count, a colour-source check and legality problems. Free, no account.",
+    "desc_len": 203,
+    "canonical": "https://theblackgrimoire.com/optimizer",
+    "robots_meta": "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1",
+    "og_title": "The Black Grimoire — Free Commander &amp; Brawl Deck Builder",
+    "og_image": true,
+    "tw_card": "summary_large_image",
+    "h1_count": 1,
+    "h1_text": [
+      "Optimize a deck you already have"
+    ],
+    "jsonld_types": [
+      "BreadcrumbList",
+      "HowTo",
+      "WebPage"
+    ],
+    "lang": "en",
+    "hreflang": [],
+    "viewport": true,
+    "word_count": 373
+  },
+  {
+    "url": "https://theblackgrimoire.com/commanders",
+    "status": "200",
+    "title": "Commander search — The Black Grimoire — The Black Grimoire",
+    "title_len": 58,
+    "desc": "Search thousands of Commander and Brawl commanders to see the most-played cards, the highest-synergy picks, and real public decklists for each one.",
+    "desc_len": 147,
+    "canonical": "https://theblackgrimoire.com/commanders",
+    "robots_meta": "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1",
+    "og_title": "The Black Grimoire — Free Commander &amp; Brawl Deck Builder",
+    "og_image": true,
+    "tw_card": "summary_large_image",
+    "h1_count": 1,
+    "h1_text": [
+      "Commander search"
+    ],
+    "jsonld_types": [
+      "BreadcrumbList",
+      "WebPage"
+    ],
+    "lang": "en",
+    "hreflang": [],
+    "viewport": true,
+    "word_count": 172
+  },
+  {
+    "url": "https://theblackgrimoire.com/decks",
+    "status": "200",
+    "title": "The Black Grimoire — Free Commander &amp; Brawl Deck Builder",
+    "title_len": 60,
+    "desc": "The Black Grimoire is a free Magic: The Gathering deck builder for Commander and Brawl, ranked by patterns from nearly 4 million real decklists. No accounts, no paywall.",
+    "desc_len": 169,
+    "canonical": "https://theblackgrimoire.com/decks",
+    "robots_meta": "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1",
+    "og_title": "The Black Grimoire — Free Commander &amp; Brawl Deck Builder",
+    "og_image": true,
+    "tw_card": "summary_large_image",
+    "h1_count": 1,
+    "h1_text": [
+      "Deck Catalogue"
+    ],
+    "jsonld_types": [],
+    "lang": "en",
+    "hreflang": [],
+    "viewport": true,
+    "word_count": 155
+  },
+  {
+    "url": "https://theblackgrimoire.com/collection",
+    "status": "200",
+    "title": "The Black Grimoire — Free Commander &amp; Brawl Deck Builder",
+    "title_len": 60,
+    "desc": "The Black Grimoire is a free Magic: The Gathering deck builder for Commander and Brawl, ranked by patterns from nearly 4 million real decklists. No accounts, no paywall.",
+    "desc_len": 169,
+    "canonical": "https://theblackgrimoire.com/collection",
+    "robots_meta": "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1",
+    "og_title": "The Black Grimoire — Free Commander &amp; Brawl Deck Builder",
+    "og_image": true,
+    "tw_card": "summary_large_image",
+    "h1_count": 1,
+    "h1_text": [
+      "Your Collection"
+    ],
+    "jsonld_types": [],
+    "lang": "en",
+    "hreflang": [],
+    "viewport": true,
+    "word_count": 179
+  },
+  {
+    "url": "https://theblackgrimoire.com/methodology",
+    "status": "200",
+    "title": "Methodology — The Black Grimoire",
+    "title_len": 32,
+    "desc": "How The Black Grimoire ranks cards: collaborative filtering, a synergy graph, the WotC bracket classifier, and Karsten&#x27;s land formula — with stated limitations.",
+    "desc_len": 165,
+    "canonical": "https://theblackgrimoire.com/methodology",
+    "robots_meta": "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1",
+    "og_title": "The Black Grimoire — Free Commander &amp; Brawl Deck Builder",
+    "og_image": true,
+    "tw_card": "summary_large_image",
+    "h1_count": 1,
+    "h1_text": [
+      "How the engine works"
+    ],
+    "jsonld_types": [
+      "BreadcrumbList",
+      "TechArticle",
+      "WebPage"
+    ],
+    "lang": "en",
+    "hreflang": [],
+    "viewport": true,
+    "word_count": 1226
+  },
+  {
+    "url": "https://theblackgrimoire.com/faq",
+    "status": "200",
+    "title": "FAQ — The Black Grimoire",
+    "title_len": 24,
+    "desc": "Is The Black Grimoire free? Does it support Brawl on Arena? Where does the deck data come from? Answers to the 12 most common questions.",
+    "desc_len": 136,
+    "canonical": "https://theblackgrimoire.com/faq",
+    "robots_meta": "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1",
+    "og_title": "The Black Grimoire — Free Commander &amp; Brawl Deck Builder",
+    "og_image": true,
+    "tw_card": "summary_large_image",
+    "h1_count": 1,
+    "h1_text": [
+      "Frequently asked questions"
+    ],
+    "jsonld_types": [
+      "BreadcrumbList",
+      "FAQPage",
+      "WebPage"
+    ],
+    "lang": "en",
+    "hreflang": [],
+    "viewport": true,
+    "word_count": 791
+  },
+  {
+    "url": "https://theblackgrimoire.com/about",
+    "status": "200",
+    "title": "About — The Black Grimoire",
+    "title_len": 26,
+    "desc": "The Black Grimoire is built by Karolis Paulikas, a solo developer in Lithuania, from nearly 4 million scraped Commander and Brawl decklists.",
+    "desc_len": 140,
+    "canonical": "https://theblackgrimoire.com/about",
+    "robots_meta": "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1",
+    "og_title": "The Black Grimoire — Free Commander &amp; Brawl Deck Builder",
+    "og_image": true,
+    "tw_card": "summary_large_image",
+    "h1_count": 1,
+    "h1_text": [
+      "About"
+    ],
+    "jsonld_types": [
+      "BreadcrumbList",
+      "Person",
+      "WebPage"
+    ],
+    "lang": "en",
+    "hreflang": [],
+    "viewport": true,
+    "word_count": 540
+  },
+  {
+    "url": "https://theblackgrimoire.com/contact",
+    "status": "200",
+    "title": "Contact — The Black Grimoire",
+    "title_len": 28,
+    "desc": "Reach the developer of The Black Grimoire through the contact form. No public email or phone number is listed.",
+    "desc_len": 110,
+    "canonical": "https://theblackgrimoire.com/contact",
+    "robots_meta": "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1",
+    "og_title": "The Black Grimoire — Free Commander &amp; Brawl Deck Builder",
+    "og_image": true,
+    "tw_card": "summary_large_image",
+    "h1_count": 1,
+    "h1_text": [
+      "Contact"
+    ],
+    "jsonld_types": [
+      "BreadcrumbList",
+      "WebPage"
+    ],
+    "lang": "en",
+    "hreflang": [],
+    "viewport": true,
+    "word_count": 153
+  },
+  {
+    "url": "https://theblackgrimoire.com/support",
+    "status": "200",
+    "title": "Support — The Black Grimoire",
+    "title_len": 28,
+    "desc": "The Black Grimoire is free for players, funded by donations. See how to support it.",
+    "desc_len": 83,
+    "canonical": "https://theblackgrimoire.com/support",
+    "robots_meta": "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1",
+    "og_title": "The Black Grimoire — Free Commander &amp; Brawl Deck Builder",
+    "og_image": true,
+    "tw_card": "summary_large_image",
+    "h1_count": 1,
+    "h1_text": [
+      "Support The Black Grimoire"
+    ],
+    "jsonld_types": [
+      "BreadcrumbList",
+      "WebPage"
+    ],
+    "lang": "en",
+    "hreflang": [],
+    "viewport": true,
+    "word_count": 357
+  },
+  {
+    "url": "https://theblackgrimoire.com/privacy",
+    "status": "200",
+    "title": "Privacy Policy — The Black Grimoire",
+    "title_len": 35,
+    "desc": "The Black Grimoire&#x27;s privacy policy: no accounts, no tracking cookies, collection data stays in your browser.",
+    "desc_len": 114,
+    "canonical": "https://theblackgrimoire.com/privacy",
+    "robots_meta": "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1",
+    "og_title": "The Black Grimoire — Free Commander &amp; Brawl Deck Builder",
+    "og_image": true,
+    "tw_card": "summary_large_image",
+    "h1_count": 1,
+    "h1_text": [
+      "Privacy Policy"
+    ],
+    "jsonld_types": [
+      "BreadcrumbList",
+      "WebPage"
+    ],
+    "lang": "en",
+    "hreflang": [],
+    "viewport": true,
+    "word_count": 561
+  },
+  {
+    "url": "https://theblackgrimoire.com/terms",
+    "status": "200",
+    "title": "Terms of Service — The Black Grimoire",
+    "title_len": 37,
+    "desc": "Terms of service for The Black Grimoire deck builder.",
+    "desc_len": 53,
+    "canonical": "https://theblackgrimoire.com/terms",
+    "robots_meta": "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1",
+    "og_title": "The Black Grimoire — Free Commander &amp; Brawl Deck Builder",
+    "og_image": true,
+    "tw_card": "summary_large_image",
+    "h1_count": 1,
+    "h1_text": [
+      "Terms of Service"
+    ],
+    "jsonld_types": [
+      "BreadcrumbList",
+      "WebPage"
+    ],
+    "lang": "en",
+    "hreflang": [],
+    "viewport": true,
+    "word_count": 454
+  },
+  {
+    "url": "https://theblackgrimoire.com/favorites",
+    "status": "200",
+    "title": "The Black Grimoire — Free Commander &amp; Brawl Deck Builder",
+    "title_len": 60,
+    "desc": "The Black Grimoire is a free Magic: The Gathering deck builder for Commander and Brawl, ranked by patterns from nearly 4 million real decklists. No accounts, no paywall.",
+    "desc_len": 169,
+    "canonical": "https://theblackgrimoire.com/favorites",
+    "robots_meta": "noindex, nofollow",
+    "og_title": "The Black Grimoire — Free Commander &amp; Brawl Deck Builder",
+    "og_image": true,
+    "tw_card": "summary_large_image",
+    "h1_count": 0,
+    "h1_text": [],
+    "jsonld_types": [],
+    "lang": "en",
+    "hreflang": [],
+    "viewport": true,
+    "word_count": 145
+  },
+  {
+    "url": "https://theblackgrimoire.com/sign-up",
+    "status": "200",
+    "title": "The Black Grimoire — Free Commander &amp; Brawl Deck Builder",
+    "title_len": 60,
+    "desc": "The Black Grimoire is a free Magic: The Gathering deck builder for Commander and Brawl, ranked by patterns from nearly 4 million real decklists. No accounts, no paywall.",
+    "desc_len": 169,
+    "canonical": null,
+    "robots_meta": "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1",
+    "og_title": "The Black Grimoire — Free Commander &amp; Brawl Deck Builder",
+    "og_image": true,
+    "tw_card": "summary_large_image",
+    "h1_count": 0,
+    "h1_text": [],
+    "jsonld_types": [],
+    "lang": "en",
+    "hreflang": [],
+    "viewport": true,
+    "word_count": 101
+  },
+  {
+    "url": "https://theblackgrimoire.com/sign-in",
+    "status": "200",
+    "title": "The Black Grimoire — Free Commander &amp; Brawl Deck Builder",
+    "title_len": 60,
+    "desc": "The Black Grimoire is a free Magic: The Gathering deck builder for Commander and Brawl, ranked by patterns from nearly 4 million real decklists. No accounts, no paywall.",
+    "desc_len": 169,
+    "canonical": null,
+    "robots_meta": "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1",
+    "og_title": "The Black Grimoire — Free Commander &amp; Brawl Deck Builder",
+    "og_image": true,
+    "tw_card": "summary_large_image",
+    "h1_count": 0,
+    "h1_text": [],
+    "jsonld_types": [],
+    "lang": "en",
+    "hreflang": [],
+    "viewport": true,
+    "word_count": 101
+  },
+  {
+    "url": "https://theblackgrimoire.com/dashboard",
+    "status": "200",
+    "title": "The Black Grimoire — Free Commander &amp; Brawl Deck Builder",
+    "title_len": 60,
+    "desc": "The Black Grimoire is a free Magic: The Gathering deck builder for Commander and Brawl, ranked by patterns from nearly 4 million real decklists. No accounts, no paywall.",
+    "desc_len": 169,
+    "canonical": null,
+    "robots_meta": "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1",
+    "og_title": "The Black Grimoire — Free Commander &amp; Brawl Deck Builder",
+    "og_image": true,
+    "tw_card": "summary_large_image",
+    "h1_count": 0,
+    "h1_text": [],
+    "jsonld_types": [],
+    "lang": "en",
+    "hreflang": [],
+    "viewport": true,
+    "word_count": 101
+  },
+  {
+    "url": "https://theblackgrimoire.com/commanders/be-lakor-the-dark-master",
+    "status": "200",
+    "title": "Be&#x27;lakor, the Dark Master — top cards, synergies and decks — The Black Grimoire",
+    "title_len": 84,
+    "desc": "Be&#x27;lakor, the Dark Master appears in 4,618 public decks. The most-played cards are Swamp, Mountain and Island. The strongest synergies by lift are Great Unclean One, Venomcrawler and Bloodcrusher of Khorne.",
+    "desc_len": 211,
+    "canonical": "https://theblackgrimoire.com/commanders/be-lakor-the-dark-master",
+    "robots_meta": "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1",
+    "og_title": "Be&#x27;lakor, the Dark Master — top cards, synergies and decks — The Black Grimoire",
+    "og_image": true,
+    "tw_card": "summary_large_image",
+    "h1_count": 1,
+    "h1_text": [
+      "Be&#x27;lakor, the Dark Master"
+    ],
+    "jsonld_types": [
+      "BreadcrumbList",
+      "ItemList",
+      "WebPage"
+    ],
+    "lang": "en",
+    "hreflang": [],
+    "viewport": true,
+    "word_count": 1452
+  },
+  {
+    "url": "https://theblackgrimoire.com/commanders/zurgo-stormrender",
+    "status": "200",
+    "title": "Zurgo Stormrender — top cards, synergies and decks — The Black Grimoire",
+    "title_len": 71,
+    "desc": "Zurgo Stormrender appears in 6,700 public decks. The most-played cards are Plains, Mountain and Swamp. The strongest synergies by lift are Bone Devourer, Twilight Drover and Eliminate the Competition.",
+    "desc_len": 200,
+    "canonical": "https://theblackgrimoire.com/commanders/zurgo-stormrender",
+    "robots_meta": "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1",
+    "og_title": "Zurgo Stormrender — top cards, synergies and decks — The Black Grimoire",
+    "og_image": true,
+    "tw_card": "summary_large_image",
+    "h1_count": 1,
+    "h1_text": [
+      "Zurgo Stormrender"
+    ],
+    "jsonld_types": [
+      "BreadcrumbList",
+      "ItemList",
+      "WebPage"
+    ],
+    "lang": "en",
+    "hreflang": [],
+    "viewport": true,
+    "word_count": 1409
+  },
+  {
+    "url": "https://theblackgrimoire.com/commanders/t-challa-the-black-panther",
+    "status": "200",
+    "title": "T&#x27;Challa, the Black Panther — top cards, synergies and decks — The Black Grimoire",
+    "title_len": 86,
+    "desc": "T&#x27;Challa, the Black Panther appears in 3,405 public decks. The most-played cards are Forest, Plains and Command Tower. The strongest synergies by lift are Metalwork Colossus, Ingenious Smith and Midnight Angel Armor.",
+    "desc_len": 221,
+    "canonical": "https://theblackgrimoire.com/commanders/t-challa-the-black-panther",
+    "robots_meta": "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1",
+    "og_title": "T&#x27;Challa, the Black Panther — top cards, synergies and decks — The Black Grimoire",
+    "og_image": true,
+    "tw_card": "summary_large_image",
+    "h1_count": 1,
+    "h1_text": [
+      "T&#x27;Challa, the Black Panther"
+    ],
+    "jsonld_types": [
+      "BreadcrumbList",
+      "ItemList",
+      "WebPage"
+    ],
+    "lang": "en",
+    "hreflang": [],
+    "viewport": true,
+    "word_count": 1418
+  },
+  {
+    "url": "https://theblackgrimoire.com/commanders/child-of-alara",
+    "status": "200",
+    "title": "Child of Alara — top cards, synergies and decks — The Black Grimoire",
+    "title_len": 68,
+    "desc": "Child of Alara appears in 3,790 public decks. The most-played cards are Command Tower, Forest and Plains. The strongest synergies by lift are Nasty End, Corrupted Conviction and Elspeth Tirel.",
+    "desc_len": 192,
+    "canonical": "https://theblackgrimoire.com/commanders/child-of-alara",
+    "robots_meta": "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1",
+    "og_title": "Child of Alara — top cards, synergies and decks — The Black Grimoire",
+    "og_image": true,
+    "tw_card": "summary_large_image",
+    "h1_count": 1,
+    "h1_text": [
+      "Child of Alara"
+    ],
+    "jsonld_types": [
+      "BreadcrumbList",
+      "ItemList",
+      "WebPage"
+    ],
+    "lang": "en",
+    "hreflang": [],
+    "viewport": true,
+    "word_count": 1347
+  },
+  {
+    "url": "https://theblackgrimoire.com/commanders/noctis-prince-of-lucis",
+    "status": "200",
+    "title": "Noctis, Prince of Lucis — top cards, synergies and decks — The Black Grimoire",
+    "title_len": 77,
+    "desc": "Noctis, Prince of Lucis appears in 2,644 public decks. The most-played cards are Sol Ring, Command Tower and Arcane Signet. The strongest synergies by lift are Soul Diviner, Power Conduit and O&#x27;aka, Traveling Merchant.",
+    "desc_len": 223,
+    "canonical": "https://theblackgrimoire.com/commanders/noctis-prince-of-lucis",
+    "robots_meta": "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1",
+    "og_title": "Noctis, Prince of Lucis — top cards, synergies and decks — The Black Grimoire",
+    "og_image": true,
+    "tw_card": "summary_large_image",
+    "h1_count": 1,
+    "h1_text": [
+      "Noctis, Prince of Lucis"
+    ],
+    "jsonld_types": [
+      "BreadcrumbList",
+      "ItemList",
+      "WebPage"
+    ],
+    "lang": "en",
+    "hreflang": [],
+    "viewport": true,
+    "word_count": 1363
+  }
+]

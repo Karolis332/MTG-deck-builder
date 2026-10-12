@@ -1,0 +1,440 @@
+[
+  {
+    "phase": "baseline",
+    "page": "home",
+    "width": 1280,
+    "theme": "light",
+    "p95": 16.7,
+    "frames": 360,
+    "longTasks": [],
+    "cls": 0.00009699316024780274,
+    "idleCls": 0,
+    "lcp": 636,
+    "canvasP95": 0,
+    "canvasMax": 0,
+    "willChange": 3,
+    "overflow": true,
+    "offenders": [
+      {
+        "tag": "DIV",
+        "cls": "flex items-center gap-2"
+      },
+      {
+        "tag": "A",
+        "cls": "group/button inline-flex shrink-0 items-center justify-center border border-transparent bg-clip-padd"
+      },
+      {
+        "tag": "svg",
+        "cls": "[object SVGAnimatedString]"
+      },
+      {
+        "tag": "path",
+        "cls": "[object SVGAnimatedString]"
+      },
+      {
+        "tag": "path",
+        "cls": "[object SVGAnimatedString]"
+      },
+      {
+        "tag": "path",
+        "cls": "[object SVGAnimatedString]"
+      }
+    ],
+    "bytes": {
+      "js": 429870,
+      "css": 25073,
+      "jsRaw": 1476850,
+      "cssRaw": 140001
+    },
+    "errors": []
+  },
+  {
+    "phase": "baseline",
+    "page": "home",
+    "width": 1280,
+    "theme": "dark",
+    "p95": 16.7,
+    "frames": 360,
+    "longTasks": [],
+    "cls": 0.00009699316024780274,
+    "idleCls": 0,
+    "lcp": 500,
+    "canvasP95": 0,
+    "canvasMax": 0,
+    "willChange": 3,
+    "overflow": true,
+    "offenders": [
+      {
+        "tag": "DIV",
+        "cls": "flex items-center gap-2"
+      },
+      {
+        "tag": "A",
+        "cls": "group/button inline-flex shrink-0 items-center justify-center border border-transparent bg-clip-padd"
+      },
+      {
+        "tag": "svg",
+        "cls": "[object SVGAnimatedString]"
+      },
+      {
+        "tag": "path",
+        "cls": "[object SVGAnimatedString]"
+      },
+      {
+        "tag": "path",
+        "cls": "[object SVGAnimatedString]"
+      },
+      {
+        "tag": "path",
+        "cls": "[object SVGAnimatedString]"
+      }
+    ],
+    "bytes": {
+      "js": 429870,
+      "css": 25073,
+      "jsRaw": 1476850,
+      "cssRaw": 140001
+    },
+    "errors": []
+  },
+  {
+    "phase": "baseline",
+    "page": "home",
+    "width": 390,
+    "theme": "light",
+    "p95": 16.8,
+    "frames": 360,
+    "longTasks": [],
+    "cls": 0,
+    "idleCls": 0,
+    "lcp": 468,
+    "canvasP95": 0,
+    "canvasMax": 0,
+    "willChange": 3,
+    "overflow": false,
+    "offenders": [],
+    "bytes": {
+      "js": 403116,
+      "css": 25073,
+      "jsRaw": 1392929,
+      "cssRaw": 140001
+    },
+    "errors": []
+  },
+  {
+    "phase": "baseline",
+    "page": "home",
+    "width": 390,
+    "theme": "dark",
+    "p95": 16.8,
+    "frames": 360,
+    "longTasks": [],
+    "cls": 0,
+    "idleCls": 0,
+    "lcp": 464,
+    "canvasP95": 0,
+    "canvasMax": 0,
+    "willChange": 3,
+    "overflow": false,
+    "offenders": [],
+    "bytes": {
+      "js": 403116,
+      "css": 25073,
+      "jsRaw": 1392929,
+      "cssRaw": 140001
+    },
+    "errors": []
+  },
+  {
+    "phase": "baseline",
+    "page": "builder",
+    "width": 1280,
+    "theme": "light",
+    "p95": 16.8,
+    "frames": 360,
+    "longTasks": [],
+    "cls": 0.2809612274169922,
+    "idleCls": 0,
+    "lcp": 712,
+    "canvasP95": 0,
+    "canvasMax": 0,
+    "willChange": 3,
+    "overflow": true,
+    "offenders": [
+      {
+        "tag": "DIV",
+        "cls": "flex items-center gap-2"
+      },
+      {
+        "tag": "A",
+        "cls": "group/button inline-flex shrink-0 items-center justify-center border bg-clip-padding font-heading fo"
+      },
+      {
+        "tag": "SPAN",
+        "cls": "hidden sm:inline"
+      },
+      {
+        "tag": "A",
+        "cls": "group/button inline-flex shrink-0 items-center justify-center border border-transparent bg-clip-padd"
+      },
+      {
+        "tag": "svg",
+        "cls": "[object SVGAnimatedString]"
+      },
+      {
+        "tag": "path",
+        "cls": "[object SVGAnimatedString]"
+      }
+    ],
+    "bytes": {
+      "js": 429870,
+      "css": 25073,
+      "jsRaw": 1476850,
+      "cssRaw": 140001
+    },
+    "errors": []
+  },
+  {
+    "phase": "baseline",
+    "page": "builder",
+    "width": 1280,
+    "theme": "dark",
+    "p95": 16.8,
+    "frames": 360,
+    "longTasks": [],
+    "cls": 0.2809612274169922,
+    "idleCls": 0,
+    "lcp": 708,
+    "canvasP95": 0,
+    "canvasMax": 0,
+    "willChange": 3,
+    "overflow": true,
+    "offenders": [
+      {
+        "tag": "DIV",
+        "cls": "flex items-center gap-2"
+      },
+      {
+        "tag": "A",
+        "cls": "group/button inline-flex shrink-0 items-center justify-center border bg-clip-padding font-heading fo"
+      },
+      {
+        "tag": "SPAN",
+        "cls": "hidden sm:inline"
+      },
+      {
+        "tag": "A",
+        "cls": "group/button inline-flex shrink-0 items-center justify-center border border-transparent bg-clip-padd"
+      },
+      {
+        "tag": "svg",
+        "cls": "[object SVGAnimatedString]"
+      },
+      {
+        "tag": "path",
+        "cls": "[object SVGAnimatedString]"
+      }
+    ],
+    "bytes": {
+      "js": 429870,
+      "css": 25073,
+      "jsRaw": 1476850,
+      "cssRaw": 140001
+    },
+    "errors": []
+  },
+  {
+    "phase": "baseline",
+    "page": "builder",
+    "width": 390,
+    "theme": "light",
+    "p95": 16.8,
+    "frames": 360,
+    "longTasks": [],
+    "cls": 0.5032114346499692,
+    "idleCls": 0,
+    "lcp": 192,
+    "canvasP95": 0,
+    "canvasMax": 0,
+    "willChange": 3,
+    "overflow": false,
+    "offenders": [],
+    "bytes": {
+      "js": 315295,
+      "css": 25073,
+      "jsRaw": 1047422,
+      "cssRaw": 140001
+    },
+    "errors": []
+  },
+  {
+    "phase": "baseline",
+    "page": "builder",
+    "width": 390,
+    "theme": "dark",
+    "p95": 16.7,
+    "frames": 360,
+    "longTasks": [],
+    "cls": 0.5032114346499692,
+    "idleCls": 0,
+    "lcp": 164,
+    "canvasP95": 0,
+    "canvasMax": 0,
+    "willChange": 3,
+    "overflow": false,
+    "offenders": [],
+    "bytes": {
+      "js": 315295,
+      "css": 25073,
+      "jsRaw": 1047422,
+      "cssRaw": 140001
+    },
+    "errors": []
+  },
+  {
+    "phase": "baseline",
+    "page": "commanders",
+    "width": 1280,
+    "theme": "light",
+    "p95": 16.8,
+    "frames": 360,
+    "longTasks": [],
+    "cls": 0.007429779052734375,
+    "idleCls": 0,
+    "lcp": 272,
+    "canvasP95": 0,
+    "canvasMax": 0,
+    "willChange": 3,
+    "overflow": true,
+    "offenders": [
+      {
+        "tag": "DIV",
+        "cls": "flex items-center gap-2"
+      },
+      {
+        "tag": "A",
+        "cls": "group/button inline-flex shrink-0 items-center justify-center border bg-clip-padding font-heading fo"
+      },
+      {
+        "tag": "SPAN",
+        "cls": "hidden sm:inline"
+      },
+      {
+        "tag": "A",
+        "cls": "group/button inline-flex shrink-0 items-center justify-center border border-transparent bg-clip-padd"
+      },
+      {
+        "tag": "svg",
+        "cls": "[object SVGAnimatedString]"
+      },
+      {
+        "tag": "path",
+        "cls": "[object SVGAnimatedString]"
+      }
+    ],
+    "bytes": {
+      "js": 436465,
+      "css": 25073,
+      "jsRaw": 1496896,
+      "cssRaw": 140001
+    },
+    "errors": []
+  },
+  {
+    "phase": "baseline",
+    "page": "commanders",
+    "width": 1280,
+    "theme": "dark",
+    "p95": 16.7,
+    "frames": 360,
+    "longTasks": [],
+    "cls": 0.007429779052734375,
+    "idleCls": 0,
+    "lcp": 284,
+    "canvasP95": 0,
+    "canvasMax": 0,
+    "willChange": 3,
+    "overflow": true,
+    "offenders": [
+      {
+        "tag": "DIV",
+        "cls": "flex items-center gap-2"
+      },
+      {
+        "tag": "A",
+        "cls": "group/button inline-flex shrink-0 items-center justify-center border bg-clip-padding font-heading fo"
+      },
+      {
+        "tag": "SPAN",
+        "cls": "hidden sm:inline"
+      },
+      {
+        "tag": "A",
+        "cls": "group/button inline-flex shrink-0 items-center justify-center border border-transparent bg-clip-padd"
+      },
+      {
+        "tag": "svg",
+        "cls": "[object SVGAnimatedString]"
+      },
+      {
+        "tag": "path",
+        "cls": "[object SVGAnimatedString]"
+      }
+    ],
+    "bytes": {
+      "js": 436465,
+      "css": 25073,
+      "jsRaw": 1496896,
+      "cssRaw": 140001
+    },
+    "errors": []
+  },
+  {
+    "phase": "baseline",
+    "page": "commanders",
+    "width": 390,
+    "theme": "light",
+    "p95": 16.7,
+    "frames": 360,
+    "longTasks": [],
+    "cls": 0.013105656276294852,
+    "idleCls": 0,
+    "lcp": 240,
+    "canvasP95": 0,
+    "canvasMax": 0,
+    "willChange": 3,
+    "overflow": false,
+    "offenders": [],
+    "bytes": {
+      "js": 327316,
+      "css": 25073,
+      "jsRaw": 1084037,
+      "cssRaw": 140001
+    },
+    "errors": []
+  },
+  {
+    "phase": "baseline",
+    "page": "commanders",
+    "width": 390,
+    "theme": "dark",
+    "p95": 16.8,
+    "frames": 360,
+    "longTasks": [],
+    "cls": 0.013105656276294852,
+    "idleCls": 0,
+    "lcp": 240,
+    "canvasP95": 0,
+    "canvasMax": 0,
+    "willChange": 3,
+    "overflow": false,
+    "offenders": [],
+    "bytes": {
+      "js": 327316,
+      "css": 25073,
+      "jsRaw": 1084037,
+      "cssRaw": 140001
+    },
+    "errors": []
+  }
+]

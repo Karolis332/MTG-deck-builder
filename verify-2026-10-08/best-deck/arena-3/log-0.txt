@@ -1,0 +1,2 @@
+High Perfect Morcant: 108.52 [land39 ramp11 draw12 remo9 wipe2 prot6 pen0] (seeds cf 97.10 [land39 ramp10 draw8 remo6 wipe1 prot5 pen3] | previous 108.52 [land39 ramp11 draw12 remo9 wipe2 prot6 pen0]; 0 swaps, 75951 ms)
+The Neutrinos: 108.12 [land39 ramp11 draw12 remo11 wipe2 prot6 pen0] (seeds cf 99.25 [land39 ramp7 draw12 remo10 wipe1 prot5 pen2] | previous 108.12 [land39 ramp11 draw12 remo11 wipe2 prot6 pen0]; 0 swaps, 74659 ms)

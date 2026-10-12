@@ -60,7 +60,7 @@ Keep: 3–4 lands (or 2 + Sol Ring/dork) that make both colours, plus one cheap 
 
 | Mulligan | Why |
 |---|---|
-| Swamp, Forest, Gray Merchant, Massacre Wurm, Rune-Scarred Demon, Butcher of Malakir, Toxic Deluge | 2 lands, everything costs 5+; no play before T5 |
+| Swamp, Forest, Gray Merchant, Massacre Wurm, Rune-Scarred Demon, Butcher of Malakir, Toxic Deluge | 2 lands, nothing but a wipe (Deluge) costs under 5; no development before T5 |
 | Swamp, Forest, Bojuka Bog, Temple of Malady, Grim Backwoods, High Market, Toxic Deluge | 6 lands (2 colourless-only), one reactive spell |
 | Llanowar Elves, Elvish Mystic, Swamp, Victimize, Reanimate, Chthonian Nightmare, Saw in Half | 1 land; every spell needs a full graveyard or a board |
 
@@ -78,7 +78,7 @@ Keep: 3–4 lands (or 2 + Sol Ring/dork) that make both colours, plus one cheap 
   - Toxic Deluge ("All creatures get -X/-X until end of turn") only when behind. Before it resolves, sacrifice your board for experience and drains.
   - Undying returns arrive as new objects (CR 400.7) after Deluge or Massacre Wurm's -X/-X.
   - Culling Ritual: count your own MV ≤ 2 rocks and Seer/Artist first.
-- **Protect the win turn:** Greaves on Meren or Mazirek (never on Broodscale), Repast for "indestructible until end of turn", Golgari Charm regenerate against a -1/-1 sweep, Yahenni "Sacrifice another creature: Yahenni gains indestructible".
+- **Protect the win turn:** Greaves on Meren or Mazirek (never on Broodscale), Repast for "indestructible until end of turn", Golgari Charm regenerate against a destroy sweep (not against -X/-X: dying at 0 toughness is not destruction, CR 704.5f), Yahenni "Sacrifice another creature: Yahenni gains indestructible".
 - **Threat cues:**
   - Graveyard hate on the table is your top kill target (Assassin's Trophy, Haywire Mite: "Exile target noncreature artifact or noncreature enchantment").
   - Save Bojuka Bog for an opposing reanimator.

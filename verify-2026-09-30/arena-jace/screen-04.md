@@ -1,0 +1,77 @@
+screened 450/450, passed 76, last card read: Tonberry
+- Twist Reality — counterspell (+ face-down 2/2 fodder) — "• Counter target spell. | • Manifest dread." — beats: Sink into Stupor // Soporific Springs
+- Network Terminal — ramp/fixing — "{T}: Add one mana of any color. | {1}, {T}, Tap another untapped artifact you control: Draw a card, then discard a card." — beats: Mind Stone
+- Weather Maker — ramp/fixing — "{T}: Add one mana of any color. | {T}, Remove three charge counters from this artifact: It deals 3 damage to any target." — beats: Mind Stone
+- Ral Zarek, Guest Lecturer — planeswalker (Way carrier, −3 hit) — "+1: Surveil 2. | −1: Any number of target players each discard a card. | −2: Return target creature card with mana value 3 or less from your graveyard to the battlefield." — beats: Quintorius, History Chaser
+- Stalactite Dagger — non-creature fodder — "When this Equipment enters, create a 1/1 colorless Shapeshifter creature token with changeling." — beats: Lightning Greaves
+- Dirgur Island Dragon // Skimming Strike — reveal target / cantrip — "Flying | Ward {2}" / "Tap up to one target creature. Draw a card." — beats: Mirkwood Bats
+- Surveillance Room — land/fixing — "When this land enters, surveil 1. | {T}: Add {C}. | {1}, {T}: Add one mana of any color." — beats: Terramorphic Expanse
+- Perilous Snare — removal (any nonland permanent) — "When this artifact enters, exile target nonland permanent an opponent controls until this artifact leaves the battlefield." — beats: Abrade
+- Experimental Synthesizer — non-creature fodder / impulse draw — "When this artifact enters or leaves the battlefield, exile the top card of your library. Until end of turn, you may play that card. | {2}{R}, Sacrifice this artifact: Create a 2/2 white Samurai creature token with vigilance." — beats: Lightning Greaves
+- Koh, the Face Stealer — reveal target with removal — "When Koh enters, exile up to one other target creature. | Whenever another nontoken creature dies, you may exile it." — beats: Mirkwood Bats
+- Spinerock Tyrant — reveal target — "Flying | Wither | Whenever you cast an instant or sorcery spell with a single target, you may copy it." — beats: Mirkwood Bats
+- Web Up — removal (any nonland permanent) — "When this enchantment enters, exile target nonland permanent an opponent controls until this enchantment leaves the battlefield." — beats: Abrade
+- Momentum Breaker — removal (edict, strong 1v1) — "When this enchantment enters, each opponent sacrifices a creature or Vehicle of their choice. Each opponent who can't discards a card." — beats: Feed the Swarm
+- Focus the Mind — draw — "This spell costs {2} less to cast if you've cast another spell this turn. | Draw three cards, then discard a card." — beats: Frantic Search
+- Memories Returning — draw (3 of top 5) — "Reveal the top five cards of your library. Put one of them into your hand. Then choose an opponent. They put one on the bottom of your library. Then you put one into your hand." — beats: Big Score
+- Mandibular Kite — non-creature fodder (1 mana) — "Living weapon (When this Equipment enters, create a 0/0 black Phyrexian Germ creature token, then attach this to it.) | Equipped creature gets +1/+1 and has flying." — beats: Lightning Greaves
+- Destined Confrontation — board wipe sparing walkers — "Each player chooses any number of creatures they control with total power 4 or less, then sacrifices all other creatures they control." — beats: Fumigate
+- Shroudstomper — reveal target — "Deathtouch | Whenever this creature enters or attacks, each opponent loses 2 life. You gain 2 life and draw a card." — beats: Mirkwood Bats
+- Armaggon, Future Shark — reveal target (3-for-1) — "Flash | When Armaggon enters, destroy up to three target creatures." — beats: Mirkwood Bats
+- Arbiter of Woe — reveal target (sac cost skipped when revealed) — "Flying | When this creature enters, each opponent discards a card and loses 2 life. You draw a card and gain 2 life." — beats: Mirkwood Bats
+- Withering Curse — board wipe sparing walkers — "All creatures get -2/-2 until end of turn. | Infusion — If you gained life this turn, destroy all creatures instead." — beats: Fumigate
+- Doctor Doom — reveal target (two tokens + draw engine) — "When Doctor Doom enters, create two 3/3 colorless Robot Villain artifact creature tokens named Doombot. | As long as you control an artifact creature or a Plan, Doctor Doom has indestructible. | At the beginning of your end step, you draw a card and lose 1 life." — beats: Mirkwood Bats
+- Glimmerburst — draw + non-creature fodder (instant) — "Draw two cards. Create a 1/1 white Glimmer enchantment creature token." — beats: Big Score
+- Darkness Descends — board wipe sparing walkers — "Put two -1/-1 counters on each creature." — beats: Fumigate
+- Bogslither's Embrace — removal (2-mana exile with a token to blight) — "As an additional cost to cast this spell, blight 1 or pay {3}. | Exile target creature." — beats: Feed the Swarm
+- Thirst for Identity — draw (instant) — "Draw three cards. Then discard two cards unless you discard a creature card." — beats: Frantic Search
+- Citizen's Crowbar — non-creature fodder + artifact/enchantment removal — "When this Equipment enters, create a 1/1 green and white Citizen creature token, then attach this Equipment to it. | Equipped creature gets +1/+1 and has "{W}, {T}, Sacrifice Citizen's Crowbar: Destroy target artifact or enchantment."" — beats: Lightning Greaves
+- Bring the Ending — counterspell — "Counter target spell unless its controller pays {2}." — beats: Sink into Stupor // Soporific Springs
+- Grand Entryway // Elegant Rotunda — non-creature fodder — "When you unlock this door, create a 1/1 white Glimmer enchantment creature token." — beats: Lightning Greaves
+- Send in the Pest — non-creature fodder + discard — "Each opponent discards a card. You create a 1/1 black and green Pest creature token" — beats: Lightning Greaves
+- Quarrel's End — draw + non-creature fodder — "As an additional cost to cast this spell, discard a card. | Draw two cards and create a 1/1 white Human Soldier creature token." — beats: Big Score
+- Stern Lesson — draw (instant) — "Draw two cards, then discard a card. Create a tapped Powerstone token." — beats: Frantic Search
+- Shinestriker — reveal target (draw 4 in four colours) — "Flying | Vivid — When this creature enters, draw cards equal to the number of colors among permanents you control." — beats: Mirkwood Bats
+- Beyond the Quiet — board wipe sparing walkers (exile) — "Exile all creatures and Spacecraft." — beats: Fumigate
+- Broadside Barrage — removal (creature or walker) + loot — "Broadside Barrage deals 5 damage to target creature or planeswalker. Draw a card, then discard a card." — beats: Abrade
+- Crushing Disappointment — draw (instant) — "Each player loses 2 life. You draw two cards." — beats: Big Score
+- Curator of Destinies — reveal target (uncounterable, fact-or-fiction) — "This spell can't be countered. | Flying | When this creature enters, look at the top five cards of your library and separate them into a face-down pile and a face-up pile. An opponent chooses one of those piles. Put that pile into your hand and the other into your graveyard." — beats: Mirkwood Bats
+- Sephiroth, Planet's Heir — reveal target (mini-wipe) — "Vigilance | When Sephiroth enters, creatures your opponents control get -2/-2 until end of turn. | Whenever a creature an opponent controls dies, put a +1/+1 counter on Sephiroth." — beats: Mirkwood Bats
+- Deadly Precision — removal (1 mana with a token/Treasure) — "As an additional cost to cast this spell, pay {4} or sacrifice an artifact or creature. | Destroy target creature." — beats: Feed the Swarm
+- Strategic Betrayal — removal (edict + graveyard exile, 1v1) — "Target opponent exiles a creature they control and their graveyard." — beats: Feed the Swarm
+- Noosegraf Mob — reveal target / fodder engine — "This creature enters with five +1/+1 counters on it. | Whenever a player casts a spell, remove a +1/+1 counter from this creature. If you do, create a 2/2 black Zombie creature token." — beats: Mirkwood Bats
+- Origin of Spider-Man — non-creature fodder — "I — Create a 2/1 green Spider creature token with reach." — beats: Lightning Greaves
+- Ajani, Outland Chaperone — planeswalker (token every turn = −3 fodder) — "+1: Create a 1/1 green and white Kithkin creature token. | −2: Ajani deals 4 damage to target tapped creature. | −8: Look at the top X cards of your library, where X is your life total. You may put any number of nonland permanent cards with mana value 3 or less from among them onto the battlefield." — beats: Quintorius, History Chaser
+- Sage's Nouliths — non-creature fodder — "Job select (When this Equipment enters, create a 1/1 colorless Hero creature token, then attach this to it.)" — beats: Lightning Greaves
+- Potioner's Trove — ramp/fixing (+ Way of the Mentor lifegain) — "{T}: Add one mana of any color. | {T}: You gain 2 life. Activate only if you've cast an instant or sorcery spell this turn." — beats: Mind Stone
+- Arcane Epiphany — draw (instant) — "This spell costs {1} less to cast if you control a Wizard. | Draw three cards." — beats: Big Score
+- Mirrodin's Core — land/fixing — "{T}: Add {C}. | {T}: Put a charge counter on this land. | {T}, Remove a charge counter from this land: Add one mana of any color." — beats: Evolving Wilds
+- Earth Kingdom Jailer — removal on a body (weak creature: dilutes the −3) — "When this creature enters, exile up to one target artifact, creature, or enchantment an opponent controls with mana value 3 or greater until this creature leaves the battlefield." — beats: Abrade
+- Emergency Weld — non-creature fodder + recursion — "Return target artifact or creature card from your graveyard to your hand. Create a 1/1 colorless Soldier artifact creature token." — beats: Lightning Greaves
+- Desolation of Smaug — board wipe sparing walkers — "Desolation of Smaug deals 3 damage to each non-Dragon creature." — beats: Fumigate
+- Splatter Technique — draw / sweeper (modal) — "• Draw four cards. | • Splatter Technique deals 4 damage to each creature and planeswalker." — beats: Big Score
+- Angrath, Captain of Chaos — planeswalker (Way carrier, −3 hit; weak on its own) — "Creatures you control have menace. | −2: Amass Zombies 2." — beats: Quintorius, History Chaser
+- Anoint with Affliction — removal (instant exile, MV ≤ 3) — "Exile target creature if it has mana value 3 or less." — beats: Feed the Swarm
+- Aerith Rescue Mission — non-creature fodder ×3 / tap-down — "• Take the Elevator — Create three 1/1 colorless Hero creature tokens. | • Take 59 Flights of Stairs — Tap up to three target creatures. Put a stun counter on one of them." — beats: Lightning Greaves
+- Fire Nation Occupation — non-creature fodder engine (counterspells make tokens) — "When this enchantment enters, create a 2/2 red Soldier creature token with firebending 1. | Whenever you cast a spell during an opponent's turn, create a 2/2 red Soldier creature token with firebending 1." — beats: Lightning Greaves
+- Silverquill Charm — removal / drain (modal instant) — "• Exile target creature with power 2 or less. | • Each opponent loses 3 life and you gain 3 life." — beats: Feed the Swarm
+- Rakish Crew — non-creature fodder — "When this enchantment enters, create a 1/1 red Mercenary creature token" — beats: Lightning Greaves
+- Embrace Oblivion — removal (1 mana with a token/Treasure) — "As an additional cost to cast this spell, sacrifice an artifact or creature. | Destroy target creature or Spacecraft." — beats: Feed the Swarm
+- Stasis Snare — removal (flash exile) — "Flash | When this enchantment enters, exile target creature an opponent controls until this enchantment leaves the battlefield." — beats: Abrade
+- Fiery Annihilation — removal (instant, exiles) — "Fiery Annihilation deals 5 damage to target creature. Exile up to one target Equipment attached to that creature. If that creature would die this turn, exile it instead." — beats: Abrade
+- Davriel, Rogue Shadowmage — planeswalker (Way carrier, −3 hit; weak on its own) — "At the beginning of each opponent's upkeep, if that player has one or fewer cards in hand, Davriel deals 2 damage to them. | −1: Target player discards a card." — beats: Quintorius, History Chaser
+- Cruel Truths — draw (instant) — "Surveil 2, then draw two cards. You lose 2 life." — beats: Big Score
+- Moment of Reckoning — removal / late-game 4-for-1 — "Choose up to four. You may choose the same mode more than once. | • Destroy target nonland permanent. | • Return target nonland permanent card from your graveyard to the battlefield." — beats: Blasphemous Act
+- Choco-Comet — removal (any target) + non-creature fodder — "Choco-Comet deals X damage to any target. | Create a 2/2 green Bird creature token" — beats: Abrade
+- Scorching Dragonfire — removal (creature or walker, exiles) — "Scorching Dragonfire deals 3 damage to target creature or planeswalker. If that creature or planeswalker would die this turn, exile it instead." — beats: Abrade
+- Stonesplitter Bolt — removal (creature or walker, scalable) — "Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.) | Stonesplitter Bolt deals X damage to target creature or planeswalker. If this spell was bargained, it deals twice X damage to that permanent instead." — beats: Abrade
+- Madame Web, Clairvoyant — reveal target (card-advantage engine) — "You may look at the top card of your library any time. | You may cast Spider spells and noncreature spells from the top of your library." — beats: Mirkwood Bats
+- Vayne's Treachery — removal (instant, kicker sac a token) — "Target creature gets -2/-2 until end of turn. If this spell was kicked, that creature gets -6/-6 until end of turn instead." — beats: Feed the Swarm
+- Corpses of the Lost — non-creature fodder — "When this enchantment enters, create a 2/2 black Skeleton Pirate creature token." — beats: Lightning Greaves
+- The Last Ronin's Technique — non-creature fodder ×3 (instant) — "Create three 1/1 white Ninja Turtle Spirit creature tokens." — beats: Lightning Greaves
+- Reckless Blaze — board wipe sparing walkers — "Reckless Blaze deals 5 damage to each creature. Whenever a creature you control dealt damage this way dies this turn, add {R}." — beats: Fumigate
+- Wild Unraveling — counterspell (hard counter, 2 mana with a token to blight) — "As an additional cost to cast this spell, blight 2 or pay {1}. | Counter target spell." — beats: Sink into Stupor // Soporific Springs
+- Foot Headquarters — land (lifegain feeds Way of the Mentor) — "This land enters tapped. | When this land enters, you gain 1 life. | {T}: Add {W} or {B}." — beats: Plains
+- Dimension X — land (lifegain feeds Way of the Mentor) — "This land enters tapped. | When this land enters, you gain 1 life. | {T}: Add {R} or {W}." — beats: Plains
+- Starseer Mentor — reveal target (Talisman pings enable it) — "Flying, vigilance | At the beginning of your end step, if you gained or lost life this turn, target opponent loses 3 life unless they sacrifice a nonland permanent of their choice or discard a card." — beats: Mirkwood Bats
+- Misty Palms Oasis — land — "This land enters tapped. | {T}: Add {W} or {B}. | {4}, {T}, Sacrifice this land: Draw a card." — beats: Plains

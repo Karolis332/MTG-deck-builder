@@ -1,0 +1,214 @@
+
+ RUN  v4.0.18 C:/Users/QuLeR/MTG-deck-builder
+
+ ✓ src/lib/__tests__/deck-score-v14-stage3.test.ts (22 tests) 51727ms
+     ✓ reserved unresolved slots count toward the size: 96 resolved + 3 unknown is legal  350ms
+     ✓ every one of the 25 stride lists fails structurally at k = 1, 5 and 10 deletions  7667ms
+     ✓ a Brawl list short of 99 fails the same way  1473ms
+     ✓ price, popularity, rarity, set, printing, art and input order move nothing  2366ms
+     ✓ input order alone moves nothing  2124ms
+     ✓ quantity representation (n entries of 1 vs one entry of n) moves nothing  1708ms
+     ✓ a different printing of the same basic land moves nothing  2014ms
+     ✓ replacing proved-zero-use typed copies with unknown slots: dS <= 1e-6, drank <= 1  9277ms
+     ✓ adding zero-credit unknown slots never raises S (k = 1, 5, 10)  4967ms
+     ✓ breaking an on-plan proof never gains: S and W are non-increasing  1704ms
+     ✓ keeps the retained 200-list ctrl93 top tail inside <= 20/200 in both profiles  17530ms
+ ✓ src/lib/__tests__/deck-score-v14-stage3b.test.ts (18 tests) 73255ms
+     ✓ commander: 200 eligible lists, one random copy blanked  53933ms
+     ✓ brawl: 200 eligible lists, one random copy blanked  18150ms
+     ✓ commander 381371853 (k=1) after replace-offplan-unknown  348ms
+ ❯ src/lib/__tests__/deck-score-coverage-round1.test.ts (15 tests | 1 failed) 23397ms
+     ✓ pins the Commander corpus measurement and reproduces it on a prefix  8287ms
+     ✓ pins the Brawl corpus measurement and reproduces it on a prefix  4511ms
+     × closes the round-1 S = 0 MISS: the floor that caused it is retired 9899ms
+     ✓ keeps every round-1 atom above the three-corpus-card floor  452ms
+     ✓ gives every atom a POSITIVE: a real corpus sentence it claims 18ms
+     ✓ gives every atom 90 NEGATIVES: the other atoms’ sentences, bar 12 known overlaps 13ms
+     ✓ routes a negative pump to `answer`, not to a zero-power threat 47ms
+     ✓ types a keyword-only line and preserves loyalty and cleave brackets 2ms
+     ✓ leaves Chaos Warp `known` WITHOUT answer credit, and says so 1ms
+     ✓ freezes each constant at the value its method measured 1ms
+     ✓ records the direction: every floor ROSE, so S got harsher, not kinder 0ms
+     ✓ pins both S windows, which is what the rise cost 0ms
+     ✓ loads the shards well inside the 250 ms budget 163ms
+     ✓ types the staples at the head of the coverage queue 0ms
+     ✓ grew the universe to the corpus, which is where the coverage came from 0ms
+ ✓ src/lib/__tests__/deck-score-v13-stage4b.test.ts (18 tests) 8326ms
+     ✓ excludes every §5 fixture commander and draws Brawl-legal 100-card piles  2113ms
+     ✓ keeps Ballooncon on its real line — the one-card-pool rule would not  307ms
+     ✓ reads no closing plan on fresh Commander controls  4119ms
+     ✓ scores a coverage-matched Brawl control under 25 with S <= 5  1269ms
+ ✓ src/lib/__tests__/deck-score-v13-stage4a.test.ts (12 tests) 7189ms
+     ✓ holds out every §5 fixture commander from both cohorts  3329ms
+     ✓ pins the first twenty fresh stride-drawn controls  1338ms
+     ✓ keeps 1,000 training controls in-sample at the rate the floor promises  1214ms
+     ✓ pins the one anchor still out of band, with its cause  1180ms
+ ❯ src/lib/__tests__/deck-score-v13-stage3.test.ts (24 tests | 1 failed) 5060ms
+     ✓ maps every recipe key, with no family left on an unmeasured default 2ms
+     ✓ freezes ONE floor at the MEASURED p95 of the per-pile maximum 0ms
+     ✓ keeps the three v1.3 recipes off the Standard path 2ms
+     ✓ fires on a typed producer/converter/output list 20ms
+     ✓ does NOT fire on a matched negative control  3194ms
+     ✓ bounds producers by the converters that spend them 1ms
+     ✓ fires on a typed maker/payoff/value list 2ms
+     ✓ does NOT fire on a matched negative control 5ms
+     ✓ fires on a typed payoff/source/carrier list 1ms
+     ✓ refuses a creature that merely CARRIES a counter as a payoff 0ms
+     ✓ does NOT fire on a matched negative control 5ms
+     ✓ credits a tutor that reaches a PRESENT piece, once 2ms
+     ✓ credits nothing for a tutor that can only reach an ABSENT piece 0ms
+     ✓ refuses a tutor whose DESTINATION is the graveyard 0ms
+     ✓ refuses a tutor too slow for the line, and stops at two hops 1ms
+     ✓ credits line-compatible protection and recovery, not an unrelated body 0ms
+     ✓ credits timely stax that binds opponents, not a symmetric wall with no exit 0ms
+     ✓ freezes the support bands measured on the cEDH TRAINING split 0ms
+     ✓ admits a complete backup line into the same pieces role 0ms
+     ✓ reads the Cabbage paper list as its Food engine, inside 55-70  354ms
+     ✓ keeps the 101-card Brawl Cabbage list on its legality cap  877ms
+     ✓ pins the cEDH holdout median at or above 85 56ms
+     × pins ten fresh matched controls — stage 3 leaked four of them, stage 4a none 384ms
+     ✓ never reads a closing plan on a matched control 150ms
+ ✓ src/lib/__tests__/deck-score-v13-stage2.test.ts (16 tests) 6027ms
+     ✓ pins the first 20 section-5 validation piles  2162ms
+     ✓ pins ten controls whose seeds and source lists are disjoint from training  3826ms
+ ❯ src/lib/__tests__/deck-score-v14-stage2.test.ts (28 tests | 1 failed) 10272ms
+     ✓ divides by D = max(N0, N), so an undersized library keeps its legal denominator 4ms
+     ✓ pads an undersized library with uncredited slots instead of shrinking the denominator 1ms
+     ✓ dilutes with reserved unresolved slots — they enter D and earn nothing 24ms
+     ✓ freezes the useful-role caps at N0, so added unknown slots cannot enlarge a quota 1ms
+     ✓ credits each physical copy at most once across the modes it could fill 0ms
+     ✓ re-spends a copy parked in a role that is already at its bound 0ms
+     ✓ ranks recipes on that same U — planFit IS Q_slot 3ms
+     ✓ reports the same objective it selected on 1ms
+     ✓ cannot expose a better omitted recipe by deleting a zero-use copy 1ms
+     ✓ keeps the legacy field and its weakest-requirement reason 1ms
+     ✓ leaves S independent of R: the score is the U/D transform alone 1ms
+     ✓ still invalidates a recipe whose essential role the deck holds nothing for 1ms
+     ✓ reads absence as absence, not as a missed deadline 0ms
+     ✓ freezes p80 of Q_slot per profile, each an exact rational in its slot count 0ms
+     ✓ retires the fitted floors from S — b is zero for every profile and plan 3ms
+     ✓ keeps the band cells at the value `bands verify` re-measures 1ms
+     ✓ returns null rather than a substituted component score 0ms
+     ✓ resolves the stride list the probes run on 1ms
+     ✓ moves neither S nor the total under the metadata permutation 33ms
+     ✓ moves neither S nor the total when basics are swapped for another printing 31ms
+     ✓ never raises S when proved-zero-use typed copies are deleted 65ms
+     ✓ never raises S when unreadable slots are added  385ms
+     ✓ pins the Commander prefix: no S zeros, S p50 83.7, total p50 28  5684ms
+     × pins the Brawl prefix: no S zeros, S p50 87.1, total p50 67 3722ms
+     ✓ gives an undersized library the same W as the same list padded to N0 117ms
+     ✓ round-trips the real norms file when nothing moved 1ms
+     ✓ round-trips every frozen band cell in the real recipe file 14ms
+     ✓ moves ONE cell and refuses a cell it cannot locate 173ms
+stdout | src/lib/__tests__/deck-score-v14-stage2c.test.ts > §10.9 stage 5 — latency > scores the eligible Commander stride well under 20 ms median
+latency n=200 cold 38.76 ms, p50 28.49 ms, p95 49.07 ms, max 69.89 ms
+
+ ✓ src/lib/__tests__/deck-score-v14-stage2c.test.ts (38 tests) 7952ms
+     ✓ carries the unrounded total, and `score` is still its rounding  1088ms
+     ✓ scores the eligible Commander stride well under 20 ms median  6064ms
+ ❯ src/lib/__tests__/deck-score-v13-stage4c.test.ts (12 tests | 1 failed) 8298ms
+     ✓ freezes the Commander table it was cut from, and .70 IS its p80 2ms
+     ✓ freezes Q_SATURATION_BRAWL at p80 of the BRAWL distribution 1ms
+     ✓ leaves the Commander constant untouched, enumerated over every format 0ms
+     ✓ measures a prefix p80 ABOVE the v1.4 norm, because this prefix lifts the coverage gate  6126ms
+     × replaces the bimodal v1.3 population with a top-compressed one 995ms
+     ✓ is strictly harsher than the shared .70 it replaces  898ms
+     ✓ drives S through planFit for the Brawl profile only 0ms
+     ✓ is frozen at the holdout p95, above the Commander floor 0ms
+     ✓ dispatches every plan floor by profile, combo included 1ms
+     ✓ types the four multi-card shapes from its queue and leaves the rest 0ms
+     ✓ stays OUT of 45-65 because its party PAYOFFS, not its bodies, are the bound 271ms
+     ✓ bumps to the deployable candidate 0ms
+ ✓ src/lib/__tests__/deck-score-v14-stage1c.test.ts (32 tests) 130ms
+ ✓ src/lib/__tests__/deck-score-v14-stage1d.test.ts (27 tests) 3210ms
+     ✓ prints a paid deployment ledger and still closes T6 (OUT HIGH, band 70-85)  393ms
+     ✓ W and the composed total are identical at H12 and H20 on the cEDH cohort  2781ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/lib/__tests__/deck-score-coverage-round1.test.ts > coverage round 1 — real-list typed coverage > closes the round-1 S = 0 MISS: the floor that caused it is retired
+AssertionError: expected 77 to be 76 // Object.is equality
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- 76[39m
+[31m+ 77[39m
+
+ ❯ src/lib/__tests__/deck-score-coverage-round1.test.ts:203:35
+    201|     // rc10 re-freeze: cmd 50 -> 53, brawl 74 -> 76.
+    202|     expect(pct(cmd.totals, 50)).toBe(55); // rc10 card-data re-freeze …
+    203|     expect(pct(brawl.totals, 50)).toBe(76);
+       |                                   ^
+    204|   }, 120_000);
+    205| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯
+
+ FAIL  src/lib/__tests__/deck-score-v13-stage3.test.ts > stage 3 acceptance, fixture-backed > pins ten fresh matched controls — stage 3 leaked four of them, stage 4a none
+AssertionError: expected [ 77.2, 100, 68.6, 74.4, 72.1, …(5) ] to deeply equal [ 77.2, 100, 68.6, 74.4, 72.1, …(5) ]
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[33m@@ -3,10 +3,10 @@[39m
+[2m    100,[22m
+[2m    68.6,[22m
+[2m    74.4,[22m
+[2m    72.1,[22m
+[2m    69.8,[22m
+[31m+   81.9,[39m
+[2m    79.5,[22m
+[32m-   84.2,[39m
+[32m-   77.2,[39m
+[2m    79.5,[22m
+[31m+   81.9,[39m
+[2m  ][22m
+
+ ❯ src/lib/__tests__/deck-score-v13-stage3.test.ts:458:17
+    456|     // [27,26,25,50,26,26,27,22,20,26] -> below.
+    457|     expect(scored.map((r) => r.score)).toEqual([26, 27, 26, 26, 22, 26…
+    458|     expect(syn).toEqual([77.2, 100, 68.6, 74.4, 72.1, 69.8, 79.5, 84.2…
+       |                 ^
+    459|     expect(syn.filter((v) => v <= 5).length).toBe(0);
+    460|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯
+
+ FAIL  src/lib/__tests__/deck-score-v13-stage4c.test.ts > stage 4c — Brawl S spread > replaces the bimodal v1.3 population with a top-compressed one
+AssertionError: expected 0.5458333333333333 to be close to 0.554, received difference is 0.008166666666666766, but expected 0.005
+ ❯ src/lib/__tests__/deck-score-v13-stage4c.test.ts:218:59
+    216|     expect(pct(S, 90)).toBe(100);
+    217|     expect(S.filter((x) => x <= 0.05).length).toBe(0);
+    218|     expect(S.filter((x) => x >= 99.95).length / S.length).toBeCloseTo(…
+       |                                                           ^
+    219|   }, 120_000);
+    220| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+ FAIL  src/lib/__tests__/deck-score-v14-stage2.test.ts > v1.4 stage 2 — real-list distribution > pins the Brawl prefix: no S zeros, S p50 87.1, total p50 67
+AssertionError: expected 77 to be 76 // Object.is equality
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- 76[39m
+[31m+ 77[39m
+
+ ❯ src/lib/__tests__/deck-score-v14-stage2.test.ts:442:24
+    440|     expect(brawl.zero).toBe(0);
+    441|     expect(brawl.sp50).toBeCloseTo(87.5, 1); // rc10 card-data re-free…
+    442|     expect(brawl.tp50).toBe(76); // rc10 re-freeze: 74 -> 76
+       |                        ^
+    443|   });
+    444| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯
+
+
+ Test Files  4 failed | 8 passed (12)
+      Tests  4 failed | 258 passed (262)
+   Start at  15:18:50
+   Duration  122.91s (transform 8.95s, setup 0ms, import 35.71s, tests 204.84s, environment 2ms)
+

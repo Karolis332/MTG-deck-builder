@@ -1,0 +1,1 @@
+Dina, Essence Brewer: 101.48 [land38 ramp12 draw10 remo10 wipe3 prot6 pen0] (seeds cf 70.88 [land36 ramp10 draw10 remo13 wipe2 prot2 pen3] | previous 101.01 [land38 ramp12 draw11 remo10 wipe3 prot6 pen0]; 14 swaps, 436449 ms)

@@ -1,0 +1,10 @@
+Meteor Golem => Beast Within
+Thought Vessel => Arcane Signet
+Reliquary Tower => Fabled Passage
+Simic Guildgate => Exotic Orchard
+Temple of the False God => Command Tower
+Uthros, Titanic Godcore => Lumbering Falls
+Urza, Lord High Artificer => Rishkar, Peema Renegade
+Inspiring Statuary => Tanazir Quandrix
+Devourer of Destiny => Primal Might
+Cleanup Crew => Quandrix Command

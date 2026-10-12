@@ -1,0 +1,5 @@
+[harness 09:30:03] codex gpt-6-astra in /c/Users/QuLeR/black-grimoire-web
+[harness 09:56:41] codex unavailable (quota / version / auth) — see log.txt
+[harness 09:56:41] done executor=codex rc=75 report=/c/Users/QuLeR/.claude/harness/runs/20260920-093003-web-fx-dark-runes-astra-2026-09-20/report.md
+----- report (codex) -----
+EXIT 75

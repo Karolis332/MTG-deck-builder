@@ -1,0 +1,134 @@
+priced rows 32992 | priced with NULL edhrec_rank 1381
+report pool (limit 1500): null-rank rows 1381 | distinct names 1399
+[268.1s] run: objective 103.96 climb {"converged":false,"stopReason":"max-passes","passes":3,"evaluations":1934,"swaps":9,"poolSize":616} buyUsd 41.62 upgrades 0 repl 40 near 12
+replacements (full):
+  Adorned Pouncer: Basilisk Collar 0.01 [in-id] | Eternal Witness 0.01 [in-id]
+  Ajani, Caller of the Pride: Ghostly Prison 0.01 [in-id] | All That Glitters 0 [in-id]
+  Arahbo, the First Fang: Eternal Witness 0 [in-id] | Ghostly Prison 0 [in-id]
+  Austere Command: Elspeth, Sun's Champion 0 [in-id] | Blasphemous Act -72.64 [OFF-ID R]
+  Balan, Wandering Knight: Tendershoot Dryad 0.02 [in-id] | Gray Merchant of Asphodel -72.64 [OFF-ID B]
+  Behemoth Sledge: Eternal Witness 0 [in-id] | Ghostly Prison 0 [in-id]
+  Bloodforged Battle-Axe: Ghostly Prison 0.04 [in-id] | Eternal Witness 0.03 [in-id]
+  Blossoming Sands: Blighted Woodland -0.02 [in-id] | Bloodstained Mire -0.02 [in-id]
+  Bronzehide Lion: Selfless Spirit 0 [in-id] | Snakeskin Veil -0.02 [in-id]
+  Canopy Vista: Secluded Steppe -0.03 [in-id] | Blighted Woodland -0.04 [in-id]
+  Felidar Retreat: Eternal Witness -0.01 [in-id] | Ghostly Prison -0.01 [in-id]
+  Felidar Sovereign: Tendershoot Dryad -33.58 [in-id] | Mirkwood Bats -72.64 [OFF-ID B]
+  Feline Sovereign: Kenrith's Transformation 0 [in-id] | Chaos Warp -72.6 [OFF-ID R]
+  Fleecemane Lion: Ghostly Prison 0.02 [in-id] | Basilisk Collar 0.01 [in-id]
+  Forge Anew: Ghostly Prison 0 [in-id] | All That Glitters -0.01 [in-id]
+  Fortified Village: Secluded Steppe -0.03 [in-id] | Blighted Woodland -0.04 [in-id]
+  Graypelt Refuge: Secluded Steppe -0.04 [in-id] | Blighted Woodland -0.05 [in-id]
+  Helpful Hunter: Lifecrafter's Bestiary 0.01 [in-id] | Sylvan Library 0.01 [in-id]
+  Holdout Settlement: Blighted Woodland 0 [in-id] | Bloodstained Mire 0 [in-id]
+  Jareth, Leonine Titan: Snakeskin Veil 0.64 [in-id] | Selfless Spirit 0.55 [in-id]
+  Jedit Ojanen of Efrava: Tendershoot Dryad -0.01 [in-id] | Mirkwood Bats -72.63 [OFF-ID B]
+  Keeper of Fables: Garruk's Uprising 0.01 [in-id] | Hunter's Insight 0.01 [in-id]
+  Kemba, Kha Regent: Ghostly Prison 0 [in-id] | All That Glitters -0.01 [in-id]
+  King of the Pride: Eternal Witness 0 [in-id] | Ghostly Prison 0 [in-id]
+  Krosan Verge: Secluded Steppe 0.02 [in-id] | Blighted Woodland 0.01 [in-id]
+  Lion Sash: Kenrith's Transformation 0 [in-id] | Abrade -72.61 [OFF-ID R]
+  Open the Armory: Chord of Calling -0.47 [in-id] | Buried Alive -72.62 [OFF-ID B]
+  Patchwork Banner: Nature's Lore 0 [in-id] | Rampant Growth 0 [in-id]
+  Pridemalkin: All That Glitters 0.01 [in-id] | Darksteel Mutation 0.01 [in-id]
+  Qasali Pridemage: Kenrith's Transformation 0 [in-id] | Assassin's Trophy -72.6 [OFF-ID BG]
+  Radiant Grove: Blighted Woodland 0.01 [in-id] | Bloodstained Mire 0.01 [in-id]
+  Razorverge Thicket: Secluded Steppe -0.06 [in-id] | Blighted Woodland -0.1 [in-id]
+  Regal Caracal: Tendershoot Dryad 0 [in-id] | Mirkwood Bats -72.62 [OFF-ID B]
+  Scattered Groves: Secluded Steppe -0.11 [in-id] | Blighted Woodland -0.17 [in-id]
+  Selesnya Guildgate: Blighted Woodland 0.02 [in-id] | Bloodstained Mire 0.02 [in-id]
+  Selesnya Sanctuary: Blighted Woodland 0 [in-id] | Bloodstained Mire 0 [in-id]
+  Selesnya Signet: Cultivate -0.1 [in-id] | Nature's Lore -0.12 [in-id]
+  Skyknight Squire: Ghostly Prison 0.02 [in-id] | Eternal Witness 0.01 [in-id]
+  Sungrass Prairie: Secluded Steppe -0.03 [in-id] | Blighted Woodland -0.04 [in-id]
+  White Sun's Zenith: All That Glitters 0.01 [in-id] | Darksteel Mutation 0.01 [in-id]
+nearMisses (remaining budget $8.38):
+  Boseiju, Who Endures owned=false $48.2 delta=0.150 slot=Fleecemane Lion [in-id] UNAFFORDABLE
+  Ancient Tomb owned=false $121.56 delta=0.136 slot=Fleecemane Lion [in-id] UNAFFORDABLE
+  Arid Mesa owned=false $27.03 delta=0.136 slot=Fleecemane Lion [in-id] UNAFFORDABLE
+  Flooded Strand owned=false $15.92 delta=0.136 slot=Fleecemane Lion [in-id] UNAFFORDABLE
+  Marsh Flats owned=false $31.85 delta=0.136 slot=Fleecemane Lion [in-id] UNAFFORDABLE
+  Misty Rainforest owned=false $36.53 delta=0.136 slot=Fleecemane Lion [in-id] UNAFFORDABLE
+  Polluted Delta owned=false $21.03 delta=0.136 slot=Fleecemane Lion [in-id] UNAFFORDABLE
+  Scalding Tarn owned=false $36.65 delta=0.136 slot=Fleecemane Lion [in-id] UNAFFORDABLE
+  Urborg, Tomb of Yawgmoth owned=false $54.99 delta=0.136 slot=Fleecemane Lion [in-id] UNAFFORDABLE
+  Verdant Catacombs owned=false $29.63 delta=0.136 slot=Fleecemane Lion [in-id] UNAFFORDABLE
+  Esper Sentinel owned=false $59.98 delta=0.039 slot=Fabled Passage [in-id] UNAFFORDABLE
+  Ancestral Hot Dog Minotaur owned=false $0.34 delta=0.011 slot=Evolving Wilds [in-id]
+[329.7s] direct report #2: 61.3s, evaluations 94, identical arrays to run's report: false (repl 0, near 0)
+base objective (report scorer) 103.957 vs run objective 103.957
+weakest 10 slots: Fabled Passage(-0.02), Evolving Wilds(-0.01), Fleecemane Lion(0.01), Sram, Senior Edificer(0.01), Adorned Pouncer(0.02), Fertile Ground(0.04), Buried Ruin(0.04), Keeper of Fables(0.04), Helpful Hunter(0.04), Rogue's Passage(0.06)
+candidates 30, lands 10, with Mirri inclusion>0 5; cfStats rows 300
+  Three Visits                     $5.73 incl 0.22 rank 40  best6 -1.88 best20 -1.88 @Fabled Passage
+  Birds of Paradise                $9.85 incl 0.19 rank 35  best6 -1.88 best20 -1.88 @Evolving Wilds
+  Boseiju, Who Endures             $48.2 incl 0.14 rank 77 LAND best6 0.15 best20 0.15 @Helpful Hunter
+  Smothering Tithe                 $57.33 incl 0.14 rank 65  best6 -1.85 best20 -1.85 @Fabled Passage
+  Esper Sentinel                   $59.98 incl 0.14 rank 79  best6 0.04 best20 0.04 @Fabled Passage
+  Polluted Delta                   $21.03 incl 0.00 rank 36 LAND best6 0.14 best20 0.14 @Fleecemane Lion
+  Flooded Strand                   $15.92 incl 0.00 rank 38 LAND best6 0.14 best20 0.14 @Fleecemane Lion
+  Misty Rainforest                 $36.53 incl 0.00 rank 42 LAND best6 0.14 best20 0.14 @Fleecemane Lion
+  Verdant Catacombs                $29.63 incl 0.00 rank 48 LAND best6 0.14 best20 0.14 @Fleecemane Lion
+  Scalding Tarn                    $36.65 incl 0.00 rank 49 LAND best6 0.14 best20 0.14 @Fleecemane Lion
+  Marsh Flats                      $31.85 incl 0.00 rank 51 LAND best6 0.14 best20 0.14 @Fleecemane Lion
+  Arid Mesa                        $27.03 incl 0.00 rank 57 LAND best6 0.14 best20 0.14 @Fleecemane Lion
+  Ancient Tomb                     $121.56 incl 0.00 rank 68 LAND best6 0.14 best20 0.14 @Fleecemane Lion
+  Urborg, Tomb of Yawgmoth         $54.99 incl 0.00 rank 75 LAND best6 0.14 best20 0.14 @Fleecemane Lion
+  Ancestral Hot Dog Minotaur       $0.34 incl 0.00 rank null  best6 0.01 best20 0.01 @Evolving Wilds
+  Carnival Elephant Meteor         $0.23 incl 0.00 rank null  best6 0.01 best20 0.01 @Evolving Wilds
+  Contortionist Otter Storm        $0.22 incl 0.00 rank null  best6 0.01 best20 0.01 @Evolving Wilds
+  Cool Fluffy Loxodon              $0.22 incl 0.00 rank null  best6 0.01 best20 0.01 @Evolving Wilds
+  Cursed Firebreathing Yogurt      $0.27 incl 0.00 rank null  best6 0.01 best20 0.01 @Evolving Wilds
+  Deep-Fried Plague Myr            $0.21 incl 0.00 rank null  best6 0.01 best20 0.01 @Evolving Wilds
+  Demonic Tourist Laser            $0.21 incl 0.00 rank null  best6 0.01 best20 0.01 @Evolving Wilds
+  Eldrazi Guacamole Tightrope      $4.86 incl 0.00 rank null  best6 0.01 best20 0.01 @Evolving Wilds
+  Elemental Time Flamingo          $0.21 incl 0.00 rank null  best6 0.01 best20 0.01 @Evolving Wilds
+  Eternal Acrobat Toast            $0.24 incl 0.00 rank null  best6 0.01 best20 0.01 @Evolving Wilds
+  Familiar Beeble Mascot           $0.23 incl 0.00 rank null  best6 0.01 best20 0.01 @Evolving Wilds
+  Geek Lotus Warrior               $0.2 incl 0.00 rank null  best6 0.01 best20 0.01 @Evolving Wilds
+  Giant Mana Cake                  $0.18 incl 0.00 rank null  best6 0.01 best20 0.01 @Evolving Wilds
+  Goblin Coward Parade             $0.2 incl 0.00 rank null  best6 0.01 best20 0.01 @Evolving Wilds
+  Happy Dead Squirrel              $0.27 incl 0.00 rank null  best6 -1.87 best20 -1.87 @Adorned Pouncer
+  Jetpack Death Seltzer            $0.18 incl 0.00 rank null  best6 0.01 best20 0.01 @Evolving Wilds
+[374.4s] done candidates
+  CF Sunpetal Grove                   $0.34 incl 0.58 inReportList false best6 0.15 @Fleecemane Lion
+  CF Kutzil, Malamet Exemplar         $2.86 incl 0.53 inReportList false best6 0.05 @Fabled Passage
+  CF Leonin Warleader                 $5.99 incl 0.43 inReportList false best6 0.10 @Fabled Passage
+  CF Mirari's Wake                    $7.43 incl 0.39 inReportList false best6 -1.92 @Sram, Senior Edificer
+  CF Bountiful Promenade              $5.56 incl 0.38 inReportList false best6 0.15 @Fleecemane Lion
+  CF Brimaz, King of Oreskos          $8.63 incl 0.36 inReportList false best6 0.05 @Fabled Passage
+  CF Pride Sovereign                  $4.32 incl 0.35 inReportList false best6 0.05 @Fabled Passage
+  CF Qasali Slingers                  $12.52 incl 0.33 inReportList false best6 0.08 @Sram, Senior Edificer
+  CF Temple of Plenty                 $0.34 incl 0.30 inReportList false best6 0.13 @Fleecemane Lion
+  CF Sovereign Okinec Ahau            $4.59 incl 0.30 inReportList false best6 0.10 @Fabled Passage
+  CF Beastmaster Ascension            $6.91 incl 0.28 inReportList false best6 0.05 @Fabled Passage
+  CF Blackblade Reforged              $3.21 incl 0.27 inReportList false best6 0.06 @Fabled Passage
+  CF Hungry Lynx                      $6.12 incl 0.27 inReportList false best6 0.06 @Fabled Passage
+  CF Brushland                        $1.6 incl 0.25 inReportList false best6 0.15 @Fleecemane Lion
+  CF Branchloft Pathway // Boulderloft Pathway $3.5 incl 0.25 inReportList false best6 0.15 @Fleecemane Lion
+  CF Gavony Township                  $6.14 incl 0.25 inReportList false best6 0.14 @Fleecemane Lion
+  CF Sigarda's Aid                    $18.06 incl 0.24 inReportList false best6 0.04 @Fabled Passage
+  CF Prowling Serpopard               $3.77 incl 0.24 inReportList false best6 -1.95 @Fabled Passage
+  CF Teferi's Protection              $46.73 incl 0.23 inReportList false best6 -1.95 @Fabled Passage
+  CF Three Visits                     $5.73 incl 0.22 inReportList true best6 -1.88 @Fabled Passage
+  CF Aura Shards                      $27.41 incl 0.22 inReportList false best6 0.05 @Fabled Passage
+  CF Puresteel Paladin                $2.48 incl 0.22 inReportList false best6 0.05 @Fabled Passage
+  CF Flawless Maneuver                $5.51 incl 0.20 inReportList false best6 -1.95 @Fabled Passage
+  CF Shadowspear                      $31.12 incl 0.20 inReportList false best6 -1.35 @Adorned Pouncer
+  CF Leonin Shikari                   $5.21 incl 0.20 inReportList false best6 0.06 @Fabled Passage
+  CF Birds of Paradise                $9.85 incl 0.19 inReportList true best6 -1.88 @Evolving Wilds
+  CF Eladamri's Call                  $10.94 incl 0.19 inReportList false best6 0.05 @Fabled Passage
+  CF Hushwood Verge                   $8.87 incl 0.19 inReportList false best6 0.15 @Fleecemane Lion
+  CF Akroma's Will                    $15.66 incl 0.18 inReportList false best6 0.10 @Fabled Passage
+  CF Nacatl War-Pride                 $1.93 incl 0.18 inReportList false best6 0.08 @Evolving Wilds
+  CF Wooded Bastion                   $16.74 incl 0.18 inReportList false best6 0.15 @Fleecemane Lion
+  CF Steelshaper's Gift               $9.62 incl 0.18 inReportList false best6 0.04 @Fabled Passage
+  CF Sword of Feast and Famine        $42.24 incl 0.18 inReportList false best6 0.05 @Fabled Passage
+  CF Herald's Horn                    $5.88 incl 0.18 inReportList false best6 0.05 @Fabled Passage
+  CF Ocelot Pride                     $42.3 incl 0.17 inReportList false best6 0.04 @Fabled Passage
+  CF Kemba, Kha Enduring              $0.31 incl 0.17 inReportList false best6 0.06 @Fabled Passage
+  CF Enlightened Tutor                $37.89 incl 0.17 inReportList false best6 0.04 @Fabled Passage
+  CF Mithril Coat                     $28.12 incl 0.16 inReportList false best6 0.05 @Fabled Passage
+  CF Animal Sanctuary                 $3.65 incl 0.15 inReportList false best6 0.14 @Fleecemane Lion
+  CF Oreskos Explorer                 $0.4 incl 0.15 inReportList false best6 0.06 @Fabled Passage
+[382.8s] CF-top unowned tested 40, gain>=0.25: 0
+EXIT=0

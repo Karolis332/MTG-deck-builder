@@ -1,0 +1,169 @@
+
+> the-black-grimoire@1.0.0-alpha.5 build
+> next build && node scripts/postbuild-standalone.js
+
+  ▲ Next.js 14.2.35
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully
+   Linting and checking validity of types ...
+
+./src/app/overlay-game/page.tsx
+101:9  Warning: The 'deckList' logical expression could make the dependencies of useEffect Hook (at line 151) change on every render. To fix this, wrap the initialization of 'deckList' in its own useMemo() Hook.  react-hooks/exhaustive-deps
+
+./src/components/card-inline.tsx
+51:9  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+68:11  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+116:11  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./src/components/command-center/tiles/BenchmarkTile.tsx
+135:21  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./src/components/draft-tracker.tsx
+154:19  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./src/components/game-narrative.tsx
+142:9  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+154:11  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+202:11  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./src/components/screen-recorder-controls.tsx
+113:21  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/basic-features/eslint#disabling-rules
+   Collecting page data ...
+   Generating static pages (0/67) ...
+   Generating static pages (16/67) 
+   Generating static pages (33/67) 
+   Generating static pages (50/67) 
+ ✓ Generating static pages (67/67)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                              Size     First Load JS
+┌ ○ /                                    2.37 kB        98.7 kB
+├ ○ /_not-found                          876 B          88.4 kB
+├ ○ /analytics                           12.1 kB         207 kB
+├ ○ /analytics/matches                   6.56 kB         209 kB
+├ ƒ /api/ai-suggest                      0 B                0 B
+├ ƒ /api/ai-suggest/apply                0 B                0 B
+├ ƒ /api/ai-suggest/benchmark            0 B                0 B
+├ ƒ /api/ai-suggest/chat                 0 B                0 B
+├ ƒ /api/ai-suggest/dismiss              0 B                0 B
+├ ƒ /api/ai-suggest/ml-check             0 B                0 B
+├ ƒ /api/ai-suggest/ml-predictions       0 B                0 B
+├ ○ /api/ai-suggest/stats                0 B                0 B
+├ ○ /api/analytics                       0 B                0 B
+├ ƒ /api/arena-collection                0 B                0 B
+├ ƒ /api/arena-matches                   0 B                0 B
+├ ƒ /api/arena-matches/reparse           0 B                0 B
+├ ƒ /api/arena-telemetry                 0 B                0 B
+├ ƒ /api/arena-telemetry/analyze         0 B                0 B
+├ ƒ /api/auth/login                      0 B                0 B
+├ ƒ /api/auth/logout                     0 B                0 B
+├ ƒ /api/auth/me                         0 B                0 B
+├ ƒ /api/auth/register                   0 B                0 B
+├ ƒ /api/billing/checkout                0 B                0 B
+├ ƒ /api/billing/portal                  0 B                0 B
+├ ƒ /api/billing/subscription            0 B                0 B
+├ ƒ /api/billing/webhook                 0 B                0 B
+├ ƒ /api/card-ratings                    0 B                0 B
+├ ƒ /api/cards/autocomplete              0 B                0 B
+├ ƒ /api/cards/search                    0 B                0 B
+├ ƒ /api/cards/seed                      0 B                0 B
+├ ƒ /api/cf-events                       0 B                0 B
+├ ƒ /api/cf-optimize                     0 B                0 B
+├ ƒ /api/cf-player                       0 B                0 B
+├ ƒ /api/collection                      0 B                0 B
+├ ƒ /api/collection/import               0 B                0 B
+├ ƒ /api/collection/import-csv           0 B                0 B
+├ ƒ /api/data-export                     0 B                0 B
+├ ƒ /api/deck-analysis                   0 B                0 B
+├ ƒ /api/deck-analysis/coverage          0 B                0 B
+├ ƒ /api/deck-combos                     0 B                0 B
+├ ƒ /api/deck-versions                   0 B                0 B
+├ ƒ /api/deck-versions/restore           0 B                0 B
+├ ƒ /api/decks                           0 B                0 B
+├ ƒ /api/decks/[id]                      0 B                0 B
+├ ƒ /api/decks/[id]/benchmark            0 B                0 B
+├ ƒ /api/decks/[id]/build-explanation    0 B                0 B
+├ ƒ /api/decks/[id]/import-update        0 B                0 B
+├ ƒ /api/decks/auto-build                0 B                0 B
+├ ƒ /api/decks/claude-build              0 B                0 B
+├ ƒ /api/decks/craft-path                0 B                0 B
+├ ƒ /api/decks/pilot-guide               0 B                0 B
+├ ƒ /api/edhrec-consensus                0 B                0 B
+├ ƒ /api/favourites                      0 B                0 B
+├ ƒ /api/game-deck-preference            0 B                0 B
+├ ƒ /api/live-session                    0 B                0 B
+├ ƒ /api/live-session/result             0 B                0 B
+├ ƒ /api/match-logs                      0 B                0 B
+├ ƒ /api/match-logs/analyze              0 B                0 B
+├ ƒ /api/meta                            0 B                0 B
+├ ƒ /api/ml-pipeline                     0 B                0 B
+├ ƒ /api/mtgjson-enrich                  0 B                0 B
+├ ƒ /api/settings                        0 B                0 B
+├ ƒ /api/settings/test-provider          0 B                0 B
+├ ƒ /api/sideboard-guide                 0 B                0 B
+├ ƒ /api/similar-decks                   0 B                0 B
+├ ○ /collection                          5.04 kB         116 kB
+├ ○ /deck-builder                        6.22 kB         109 kB
+├ ƒ /deck/[id]                           40.3 kB         159 kB
+├ ○ /draft                               3.05 kB        90.6 kB
+├ ○ /duel                                5.13 kB         112 kB
+├ ○ /game                                11.2 kB         106 kB
+├ ○ /icon.png                            0 B                0 B
+├ ○ /landing                             5.5 kB           93 kB
+├ ○ /login                               1.76 kB        98.1 kB
+├ ○ /overlay-game                        2.75 kB        90.3 kB
+└ ○ /register                            1.93 kB        98.2 kB
++ First Load JS shared by all            87.6 kB
+  ├ chunks/117-dc2085224911815f.js       31.9 kB
+  ├ chunks/fd9d1056-8f30798a98e82aca.js  53.6 kB
+  └ other shared chunks (total)          2.01 kB
+
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+
+[postbuild] Copied .next/static into standalone
+[postbuild] Copied better-sqlite3 into standalone/node_modules
+[postbuild] Copied bindings into standalone/node_modules
+[postbuild] Copied file-uri-to-path into standalone/node_modules
+[postbuild] Copied prebuild-install into standalone/node_modules
+[postbuild] Copied arena_grp_ids.json into standalone/data
+[postbuild] Done
+
+> the-black-grimoire@1.0.0-alpha.5 build:electron
+> tsc -p tsconfig.electron.json
+
+  • electron-builder  version=25.1.8 os=10.0.26200
+  • loaded configuration  file=C:\Users\QuLeR\MTG-deck-builder-release\electron-builder.yml
+  • executing @electron/rebuild  electronVersion=33.4.11 arch=x64 buildFromSource=false appDir=./
+  • installing native dependencies  arch=x64
+  • preparing       moduleName=better-sqlite3 arch=x64
+  • finished        moduleName=better-sqlite3 arch=x64
+  • completed installing native dependencies
+  • packaging       platform=win32 arch=x64 electron=33.4.11 appOutDir=C:\Users\QuLeR\MTG-deck-builder\dist-electron-release\win-unpacked
+  • asar usage is disabled — this is strongly not recommended  solution=enable asar and use asarUnpack to unpack files that must be externally available
+[afterPack] Removing stale build/Release/better_sqlite3.node
+[afterPack] Rebuilding better-sqlite3 for Electron v33.4.11
+[afterPack] Location: C:\Users\QuLeR\MTG-deck-builder\dist-electron-release\win-unpacked\resources\standalone\node_modules\better-sqlite3
+[afterPack] better-sqlite3 rebuilt successfully
+[afterPack] Synced Electron-ABI better_sqlite3.node into app/node_modules
+  • asar usage is disabled — this is strongly not recommended  solution=enable asar and use asarUnpack to unpack files that must be externally available
+  • signing with signtool.exe  path=C:\Users\QuLeR\MTG-deck-builder\dist-electron-release\win-unpacked\the-black-grimoire.exe
+  • no signing info identified, signing is skipped  signHook=false cscInfo=null
+  • building        target=zip arch=x64 file=C:\Users\QuLeR\MTG-deck-builder\dist-electron-release\The Black Grimoire-1.0.0-alpha.5-win-x64.zip
+  • building        target=nsis file=C:\Users\QuLeR\MTG-deck-builder\dist-electron-release\The Black Grimoire-1.0.0-alpha.5-win-x64.exe archs=x64 oneClick=false perMachine=false
+  • signing with signtool.exe  path=C:\Users\QuLeR\MTG-deck-builder\dist-electron-release\win-unpacked\resources\elevate.exe
+  • no signing info identified, signing is skipped  signHook=false cscInfo=null
+  • signing with signtool.exe  path=C:\Users\QuLeR\MTG-deck-builder\dist-electron-release\__uninstaller-nsis-the-black-grimoire.exe
+  • no signing info identified, signing is skipped  signHook=false cscInfo=null
+  • signing with signtool.exe  path=C:\Users\QuLeR\MTG-deck-builder\dist-electron-release\The Black Grimoire-1.0.0-alpha.5-win-x64.exe
+  • no signing info identified, signing is skipped  signHook=false cscInfo=null
+  • building block map  blockMapFile=C:\Users\QuLeR\MTG-deck-builder\dist-electron-release\The Black Grimoire-1.0.0-alpha.5-win-x64.exe.blockmap
+  • building        target=portable file=C:\Users\QuLeR\MTG-deck-builder\dist-electron-release\The Black Grimoire-1.0.0-alpha.5-portable.exe archs=x64
+  • signing with signtool.exe  path=C:\Users\QuLeR\MTG-deck-builder\dist-electron-release\The Black Grimoire-1.0.0-alpha.5-portable.exe
+  • no signing info identified, signing is skipped  signHook=false cscInfo=null
+RELEASE_EXIT=0

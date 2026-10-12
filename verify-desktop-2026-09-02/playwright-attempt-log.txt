@@ -1,0 +1,25 @@
+2026-09-02T16:43:56.309Z launching C:/Users/QuLeR/MTG-deck-builder/dist-electron/win-unpacked/the-black-grimoire.exe
+FATAL electron.launch: Timeout 180000ms exceeded.
+Call log:
+[2m  - <launching> "C:/Users/QuLeR/MTG-deck-builder/dist-electron/win-unpacked/the-black-grimoire.exe" "--inspect=0" "--remote-debugging-port=0"[22m
+[2m  - <launched> pid=27628[22m
+[2m  - [pid=27628][out][22m
+[2m  - [pid=27628][err] Debugger listening on ws://127.0.0.1:59550/360590a4-b6a2-458a-a48b-1880af4d7dbc[22m
+[2m  - [pid=27628][err] For help, see: https://nodejs.org/en/docs/inspector[22m
+[2m  - <ws connecting> ws://127.0.0.1:59550/360590a4-b6a2-458a-a48b-1880af4d7dbc[22m
+[2m  - <ws connected> ws://127.0.0.1:59550/360590a4-b6a2-458a-a48b-1880af4d7dbc[22m
+[2m  - [pid=27628][err] Debugger attached.[22m
+
+    at async main (C:\Users\QuLeR\bg-e2e.mjs:17:15) {
+  log: [
+    '  - <launching> "C:/Users/QuLeR/MTG-deck-builder/dist-electron/win-unpacked/the-black-grimoire.exe" "--inspect=0" "--remote-debugging-port=0"',
+    '  - <launched> pid=27628',
+    '  - [pid=27628][out]',
+    '  - [pid=27628][err] Debugger listening on ws://127.0.0.1:59550/360590a4-b6a2-458a-a48b-1880af4d7dbc',
+    '  - [pid=27628][err] For help, see: https://nodejs.org/en/docs/inspector',
+    '  - <ws connecting> ws://127.0.0.1:59550/360590a4-b6a2-458a-a48b-1880af4d7dbc',
+    '  - <ws connected> ws://127.0.0.1:59550/360590a4-b6a2-458a-a48b-1880af4d7dbc',
+    '  - [pid=27628][err] Debugger attached.'
+  ],
+  name: 'TimeoutError'
+}

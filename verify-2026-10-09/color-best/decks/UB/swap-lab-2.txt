@@ -1,0 +1,13 @@
+BASE obj 75.51 DS 63.6 pen 0 {"land":38,"ramp":11,"draw":11,"removal":11,"board_wipe":3,"protection":4} mana=86 curve=89 interaction=100 advantage=82 win=55 synergy=93 meta=50 structure=100
+   0.00  Windswept Heath => Fabled Passage   DS 0.0 pen 0 mana=88 curve=89 interaction=100 advantage=82 win=55 synergy=93 meta=50 structure=100
+   0.09  Wooded Foothills => Swamp   DS 0.0 pen 0 mana=87 curve=89 interaction=100 advantage=82 win=55 synergy=93 meta=50 structure=100
+   0.00  Talon Gates of Madara => Exotic Orchard   DS 0.0 pen 0 mana=88 curve=89 interaction=100 advantage=82 win=55 synergy=93 meta=50 structure=100
+   0.08  Reliquary Tower => Swamp   DS 0.0 pen 0 mana=87 curve=89 interaction=100 advantage=82 win=55 synergy=93 meta=50 structure=100
+   0.05  Doomsday Excruciator => Grave Titan   DS 0.0 pen 0 mana=86 curve=89 interaction=100 advantage=82 win=55 synergy=95 meta=50 structure=100
+  -0.02  Foundry Inspector => Archfiend of Despair   DS 0.0 pen 0 mana=86 curve=87 interaction=100 advantage=82 win=55 synergy=93 meta=50 structure=100
+  -5.59  Titan Forge => Noxious Gearhulk   DS -5.6 pen 0 mana=86 curve=89 interaction=100 advantage=82 win=48 synergy=91 meta=50 structure=100
+   0.00  Fellwar Stone => Arcane Signet   DS 0.0 pen 0 mana=86 curve=89 interaction=100 advantage=82 win=55 synergy=93 meta=50 structure=100
+   0.03  Tendrils of Agony => Emeritus of Woe // Demonic Tutor   DS 0.0 pen 0 mana=86 curve=89 interaction=100 advantage=82 win=55 synergy=93 meta=50 structure=100
+  -5.58  Geralf, the Fleshwright => Body Double   DS -5.6 pen 0 mana=86 curve=89 interaction=100 advantage=82 win=48 synergy=86 meta=50 structure=100
+  -0.02  Sapphire Medallion => Corpse Churn   DS 0.0 pen 0 mana=86 curve=89 interaction=100 advantage=82 win=55 synergy=95 meta=50 structure=100
+ALL  obj 70.13 (-5.38) DS 58.0 pen 0 {"land":38,"ramp":11,"draw":10,"removal":12,"board_wipe":3,"protection":4} mana=90 curve=87 interaction=100 advantage=82 win=48 synergy=88 meta=50 structure=100

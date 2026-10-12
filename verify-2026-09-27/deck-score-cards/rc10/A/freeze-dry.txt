@@ -1,0 +1,8 @@
+| constant | frozen | measured | n | action |
+|---|---:|---:|---:|---|
+| Q_SLOT_SATURATION.commander | 0.43434343 | 0.43434343 | 1460 | unchanged |
+| Q_SLOT_SATURATION.brawl | 0.40404040 | 0.40404040 | 797 | unchanged |
+| Q_SLOT_SATURATION.standard | 0.48333333 | 0.48333333 | 360 | unchanged |
+
+bands freeze: 0 constant(s) moved; dry run, pass --write to apply.
+§10.8: every S norm here is PROVISIONAL until the corrected W domain lands.

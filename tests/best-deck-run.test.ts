@@ -105,7 +105,7 @@ describe('runBestDeck integration (repo DB, no commander given)', () => {
     const nonBasicCounts = new Map<string, number>();
     for (const c of result.deck) if (!/^(?:Mountain|Wastes)$/.test(c.name)) nonBasicCounts.set(c.name, (nonBasicCounts.get(c.name) ?? 0) + 1);
     expect([...nonBasicCounts.values()].every((n) => n === 1)).toBe(true);
-  }, 90_000);
+  }, 240_000); // v2: the report pass (up to 600 evaluations / 60s) now runs after the climb too
 
   it('stops screening early once 35% of an expiring deadline has passed, and still climbs the best seen so far', async () => {
     const db = getDb();
@@ -129,6 +129,60 @@ describe('runBestDeck integration (repo DB, no commander given)', () => {
 
     expect(result.commanders.length).toBeLessThan(3);
     expect(result.deck).toHaveLength(99);
+  }, 90_000);
+});
+
+describe('runBestDeck v2 — report pass + screenTop default (repo DB)', () => {
+  it('emits a reporting-stage progress event and returns bounded upgrades/replacements/nearMisses', async () => {
+    const db = getDb();
+    const pool = db.prepare(`
+      select name from cards
+      where color_identity = '["R"]'
+        and legalities like '%"commander":"legal"%'
+        and layout not in ('art_series', 'token')
+        and type_line not like '%Legendary%'
+      order by edhrec_rank asc
+      limit 120
+    `).all() as { name: string }[];
+    const owned = [{ name: 'Krenko, Mob Boss' }, ...pool.map((r) => ({ name: r.name }))];
+    const progress: RunBestDeckProgress[] = [];
+
+    const result = await runBestDeck(
+      { owned, budgetUsd: 25 },
+      (p) => progress.push(p),
+      { games: 5, maxPasses: 1, screenTop: 4, ownedCap: 100, buyCap: 20 },
+    );
+
+    expect(progress.some((p) => p.stage === 'reporting')).toBe(true);
+    expect(Array.isArray(result.upgrades)).toBe(true);
+    expect(result.upgrades.length).toBeLessThanOrEqual(15);
+    expect(Array.isArray(result.replacements)).toBe(true);
+    expect(result.replacements.every((r) => r.options.length <= 2)).toBe(true);
+    expect(Array.isArray(result.nearMisses)).toBe(true);
+    expect(result.nearMisses.length).toBeLessThanOrEqual(12);
+  }, 240_000);
+
+  it('screenTop defaults to screening every owned commander (bounded only by the 35% screening-time cutoff)', async () => {
+    const db = getDb();
+    const spells = db.prepare(`
+      select name from cards
+      where color_identity = '["R"]'
+        and legalities like '%"commander":"legal"%'
+        and layout not in ('art_series', 'token')
+        and type_line not like '%Legendary%'
+      order by edhrec_rank asc
+      limit 60
+    `).all() as { name: string }[];
+    // 3 owned mono-red commander candidates, no screenTop override, plenty of deadline left.
+    const owned = [{ name: 'Krenko, Mob Boss' }, { name: 'Etali, Primal Storm' }, { name: 'Hanweir, the Writhing Township' }, ...spells.map((r) => ({ name: r.name }))];
+
+    const result = await runBestDeck(
+      { owned, budgetUsd: 25 },
+      undefined,
+      { games: 5, maxPasses: 1, ownedCap: 100, buyCap: 20 },
+    );
+
+    expect(result.commanders.length).toBe(3); // all 3 candidates screened (contract caps the returned list at 10, not the screen itself)
   }, 90_000);
 });
 

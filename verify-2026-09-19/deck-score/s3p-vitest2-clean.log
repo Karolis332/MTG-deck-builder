@@ -1,0 +1,987 @@
+
+ RUN  v4.0.18 C:/Users/QuLeR/MTG-deck-builder
+
+ ✓ src/lib/__tests__/deck-score-v14-stage1d.test.ts (27 tests) 6589ms
+     ✓ prints a paid deployment ledger and still closes T6 (OUT HIGH, band 70-85)  1084ms
+     ✓ W and the composed total are identical at H12 and H20 on the cEDH cohort  5359ms
+ ❯ src/lib/__tests__/deck-score-v14-stage1a.test.ts (23 tests | 1 failed) 21140ms
+     ✓ assembles Devoted Druid + Hazel's Brewmaster when the graveyard route and the outlet are both there 134ms
+     ✓ refuses the Brewmaster line when no card can put a creature into a graveyard 50ms
+     ✓ assembles Devoted Druid + Swift Reconfiguration with a mana outlet 30ms
+     ✓ OUTLET PROBE: removing the only mana outlet removes the line 70ms
+     ✓ assembles Kiki-Jiki with an untapper and needs no separate outlet (the copies have haste) 26ms
+     ✓ refuses the Kiki line with Kiki-Jiki alone 29ms
+     ✓ assembles Mikaeus + Walking Ballista as a self-finishing damage loop 28ms
+     ✓ refuses the Mikaeus line without a damage sacrifice 30ms
+     ✓ assembles Exquisite Blood + Sanguine Bond as a self-finishing drain loop 28ms
+     ✓ refuses the drain loop with only one half of the mirror 28ms
+     ✓ Thassa's Oracle + Demonic Consultation is built, and alt-win may outrank it on u 34ms
+     ✓ refuses Isochron Scepter + Dramatic Reversal below three nonland mana sources 30ms
+     ✓ assembles Isochron Scepter + Dramatic Reversal once three nonland mana sources are there 30ms
+     ✓ refuses Food Chain when the only outlet cannot be cast with creature-only mana 54ms
+     ✓ TUTOR PROBE: removing every tutor keeps the line but drops its access 51ms
+     ✓ a command-zone unbounded draw sink finds the outlet instead of drawing it 57ms
+     ✓ no line is admitted without a resource/tutor/finish trace 91ms
+     ✓ every slot, tutor and outlet names a distinct card and every combo has a prerequisite 7ms
+     ✓ the two formerly line-less cEDH lists assemble the Brewmaster line and clear 80  338ms
+     ✓ all 30 cEDH Top-16 lists have W > 0 and an assembled closing line, median total >= 85  2593ms
+     × gives the 200 constrained-random piles no closing line — but §10.1 now keeps none of them under 25 16537ms
+     ✓ typed coverage does not drop on any fixture or cEDH list  850ms
+     ✓ every card the combo tables name is in the catalogue under its printed text 9ms
+ ❯ src/lib/__tests__/deck-score-v14-stage3e.test.ts (11 tests | 1 failed) 13567ms
+     ✓ still refuses to finance a spell below 75 % of its cost 2ms
+     ✓ a one-mana turn still cannot part-pay a four-drop (the stage-1d invariant) 8ms
+     ✓ standard:1446106 never gains on a reserved unknown 61st slot (was +17.52)  1071ms
+     ✓ standard:1474208 gains on NO nonland blank (was W 65.8 -> 84.2 on one)  1566ms
+     ✓ no stride list gains on its 61st reserved slot (60 Standard lists)  6269ms
+     ✓ dilution never raises the ceiling on the 3-source case (N 40..200)  640ms
+     ✓ an extra option never hurts (seeded source sets)  681ms
+     ✓ less mana never helps (seeded source sets, mana scaled 0.50 -> 1.00)  2027ms
+     ✓ a turn leaves nothing idle while an affordable want is still open 38ms
+     × scoreDeck stays under 40 ms on the cEDH fixture (population p50 gate is 20 ms) 1220ms
+     ✓ bumps SCORE_VERSION and the scheduler version for the evaluator change 0ms
+ ✓ src/lib/__tests__/deck-score-v14-stage3c.test.ts (17 tests) 17207ms
+     ✓ 381364921: the voltron-schedule residue is pinned at +1.44  3075ms
+     ✓ adding unknown slots to a Standard list never raises S  13795ms
+ ✓ tests/deck-analysis-route.test.ts (1 test) 3406ms
+ ❯ src/lib/__tests__/deck-score-v12.test.ts (62 tests | 1 failed) 935ms
+     ✓ scores a junk-heavy list on the useful mass it actually has, not 0 16ms
+     ✓ gives no useful mass at all when nothing is on any plan 3ms
+     ✓ reports R without multiplying by it, and keeps b_S at 0 4ms
+     ✓ never exceeds 100, and saturates exactly at the frozen p80 5ms
+     ✓ assigns a card that fills two roles to exactly one of them 1ms
+     ✓ gives an unknown-mechanic copy no on-plan credit but keeps it in F 2ms
+     ✓ bounds infrastructure Q mass by the direct plan mass it serves 1ms
+     ✓ reads a creature-and-burn list as aggro, not the midrange fallback 3ms
+     ✓ scoreDeck no longer labels every commanderless Standard deck midrange 72ms
+     ✓ every recipe declares an essential role and an ordered band 9ms
+     ✓ commander zeroes meta, divides by (1-w_meta), and still sums to 100 1ms
+     ✓ brawl zeroes meta, divides by (1-w_meta), and still sums to 100 1ms
+     ✓ standard zeroes meta, divides by (1-w_meta), and still sums to 100 0ms
+     ✓ does not change when a corpus snapshot is supplied or removed 52ms
+     ✓ ships seed entries and hashes their reviewed oracle text 2ms
+     ✓ marks a catalogued card covered and supported where no regex identifies it 1ms
+     ✓ falls back to the regex path when the live oracle text has drifted 0ms
+     ✓ reports typed coverage with no cap and marks the total provisional 25ms
+     ✓ credits a creature-token maker as pressure but never a Treasure maker 2ms
+     ✓ rejects a body that does not pay for itself against the plan clock 0ms
+     ✓ gives a body-only creature list no on-plan credit at all 3ms
+     ✓ scales the budget with the deck's own land density 0ms
+     ✓ keeps the land-mean cutoff for the Commander-family profiles only 2ms
+     ✓ withdraws pressure credit from an identical list that cannot cast it 2ms
+     ✓ drops R below 1 as soon as one essential is under its floor 1ms
+     ✓ never credits infrastructure more Q mass than the essentials it serves 2ms
+     ✓ reads a sacrifice engine as aristocrats, not as a midrange pile 7ms
+     ✓ reads a life-gain / drain engine as lifegain 4ms
+     ✓ reads a cast-trigger engine as spells 4ms
+     ✓ still orders the pair on useful mass, with the pile gap measured 9ms
+     ✓ does not let a 0-power body delete the whole combat line 62ms
+     ✓ counts creature-token makers with no converter, and Food makers only with one 12ms
+     × sees a producer printed on the commander 16ms
+     ✓ halves a producer whose trigger needs an opponent to act 10ms
+     ✓ sizes a counted token from the board it counts 7ms
+     ✓ credits the token its printed power, not a flat 2 13ms
+     ✓ fires when the engine, the early answers and the finishers are all there 62ms
+     ✓ refuses a deck whose card advantage is all one-shot 155ms
+     ✓ refuses a deck with fewer than two cheap answers 19ms
+     ✓ refuses the same shell when its finisher output cannot reach the table 104ms
+     ✓ reads a party deck as typal and scores it on that plan 4ms
+     ✓ needs both the bodies and the cards that read them 4ms
+     ✓ counts artifacts as a theme when two cards read the count 2ms
+     ✓ reads subtypes from the JSON column and from the type line 0ms
+     ✓ does not read a payoff out of party reminder text 1ms
+     ✓ counts a maker of the tribe as an enabler, not as nothing 1ms
+     ✓ carries the band measured against these predicates, not the earlier loose ones 1ms
+     ✓ prefers the recipe that explains more of the deck 7ms
+     ✓ planFit is the U objective itself, and S is its transform 3ms
+     ✓ caps fodder at three bodies per outlet/payoff copy 1ms
+     ✓ leaves a deck with real throughput untouched 1ms
+     ✓ scores an assembled combo deck on its own line 15ms
+     ✓ gives a pile holding the piece but no tutors nothing for it 44ms
+     ✓ counts a tutor only when its search filter can reach a piece 4ms
+     ✓ emits a closing line from W only for an assembled family 62ms
+     ✓ keeps an uncovered copy in F while giving it no on-plan credit 1ms
+     ✓ applies the Commander floor to a 99-card list and the 60-card floor below it 2ms
+     ✓ does not raise S when every typed payoff is blanked (whole-deck property) 9ms
+     ✓ does not let a payoff role keep R when its typed copies become vanilla 58ms
+     ✓ strands a dependent payoff that has no producers to consume (v1.3: u, not B) 3ms
+     ✓ cannot raise S by re-selecting a looser recipe after copies are removed 10ms
+     ✓ withdraws coverage from a reviewed card whose printing no longer matches 0ms
+ ❯ src/lib/__tests__/deck-score-v14-stage1c.test.ts (32 tests | 1 failed) 439ms
+     ✓ a deck with no noncreature spells casts nothing 10ms
+     ✓ casts are bounded by the turn mana AND by what has been drawn 3ms
+     ✓ the mana the casts spend is never more than the turn has 6ms
+     ✓ reads Guttersnipe as damage to the whole table per instant/sorcery 2ms
+     ✓ reads a +1/+1-counter-and-ping commander as both, on the noncreature suite 2ms
+     ✓ reads a token-per-cast maker as accumulating body power 1ms
+     ✓ a draw-only cast trigger supplies no finishing output 2ms
+     ✓ a Defender gains no pump or counter from its own trigger 0ms
+     ✓ pingers with NOTHING to cast schedule zero output 2ms
+     ✓ pingers WITH a spell suite schedule positive output 38ms
+     × a pinger big enough to reach the predicate builds the spells line 39ms
+     ✓ a spell suite with NO cast trigger builds no spells line and says so 90ms
+     ✓ the spells line closes faster than the same deck without its pingers 10ms
+     ✓ a cast trigger declares a shared key and a turn-varying spend 3ms
+     ✓ the shared spell spend follows the suite, not the number of pingers 59ms
+     ✓ a printed ritual with a countable yield is typed; an unbounded one is not 1ms
+     ✓ an unbounded ritual adds no burst mana and is named in the trace 17ms
+     ✓ a ritual is paid once, in the burst budget, and never in the ramp bonus 16ms
+     ✓ a storm copy count comes from the schedule, not a constant 1ms
+     ✓ a storm spell with no damage or life loss proves nothing 0ms
+     ✓ an {X} drain is measured against the WHOLE table 1ms
+     ✓ parses a multi-{X} cost and its damage multiplier 0ms
+     ✓ a conditional "unless that player sacrifices" clause is not provable damage 0ms
+     ✓ burstFinish returns no turn when no payoff reaches the predicate 4ms
+     ✓ burstFinish returns the first turn a payoff DOES reach it 2ms
+     ✓ resolves a planeswalker with its printed starting loyalty 102ms
+     ✓ the one fixture walker the rules credit now supplies output, and it is small 10ms
+     ✓ a walker resolved that way schedules non-zero finisher output 1ms
+     ✓ a family that scheduled and fell short reports a schedule_short, not an absence 6ms
+     ✓ a deck with no output source at all reports the absence instead 2ms
+     ✓ `--profile commander` no longer swallows the named subcommand 0ms
+     ✓ the spellslinger family is part of the frozen W domain 2ms
+ ✓ src/lib/__tests__/deck-score-v14-stage3g.test.ts (12 tests) 73ms
+ ❯ src/lib/__tests__/deck-score-v14-stage1b.test.ts (26 tests | 1 failed) 5225ms
+     ✓ reads a damage planeswalker from its PRINTED loyalty and debits a minus ability 11ms
+     ✓ gives a DRAW-ONLY walker zero finishing output (§9.4: no generic walker damage) 6ms
+     ✓ refuses a walker whose printed loyalty is unreadable — unknown output cannot prove a finish 2ms
+     ✓ counts each-opponent walker damage against the whole table 1ms
+     ✓ pays a manland animation every attack and removes the land from mana production 1ms
+     ✓ reads repeatable burn from its printed activation cost 1ms
+     ✓ scales draw-damage by the actual scheduled draw EVENTS and honours a per-turn limit 2ms
+     ✓ counts the ordinary draw step plus typed repeatable draw, bounded at three events 2ms
+     ✓ builds NO control line for a removal-and-draw-only list — the T8 default is gone 160ms
+     ✓ rejects the control line when it holds no card with typed finisher output 46ms
+     ✓ rejects the control line when its typed finisher output cannot reach the table 83ms
+     ✓ computes a real t* when the output DOES reach the table 41ms
+     ✓ never reports a finish past the section 10.8 horizon — the t* search stops at T20 55ms
+     ✓ applies joint access once: J stays below certainty and the control line is never an assembled closing line 32ms
+     ✓ classifies deterministically: the same list yields the same notes every time  474ms
+     ✓ reports a partial combo as a missing piece, never as an absent family 95ms
+     ✓ says nothing about a combo whose pieces are all absent 87ms
+     ✓ exposes the finish shortfall with the number it fell short by 4ms
+     ✓ admits Protean Hulk only when a complete creature package fits the fetch budget 210ms
+     ✓ admits the graveyard-tutor + reanimation pair only with a real target in the library 202ms
+     ✓ admits the blink loop only with an ETB payoff that converts the triggers 115ms
+     ✓ turns unbounded mana into a finish through a library sink plus an alternate win 144ms
+     ✓ refuses the alternate-win route when the library sink is missing 65ms
+     × cabbage-cedh-input builds a control line at T20 but still closes on its Food schedule 1875ms
+     ✓ standard-1445867-aljce keeps a closing schedule after the control correction  1487ms
+     ✓ pins the frozen recipe/catalogue domain (§10.7 stage 1b) 3ms
+stdout | src/lib/__tests__/deck-score-v14-stage2c.test.ts > §10.9 stage 5 — latency > scores the eligible Commander stride well under 20 ms median
+latency n=200 cold 153.52 ms, p50 91.47 ms, p95 217.89 ms, max 307.00 ms
+
+ ❯ src/lib/__tests__/deck-score-v14-stage2c.test.ts (38 tests | 9 failed) 31950ms
+     ✓ is 0 below the support and 100 above it 5ms
+     ✓ gives a tied value the midpoint of its tied interval 1ms
+     ✓ gives an untied knot below + half its own mass 1ms
+     ✓ returns the cumulative weight BELOW between knots — no interpolation 1ms
+     ✓ is monotone: t1 <= t2 implies rank(t1) <= rank(t2) 12ms
+     ✓ weights sum to 1 and the weighted training mean rank is 50 0ms
+     ✓ weights by family, not by list: a 10-list family still carries 1/F 0ms
+     ✓ distinguishes the unrounded rank from the displayed one at a band edge 0ms
+     ✓ rejects an incompatible reference version 0ms
+     ✓ rejects a reference frozen on another score version 1ms
+     ✓ rejects an unfrozen (0-knot) reference and a missing one 1ms
+     ✓ admits commander and brawl, and NO other format 0ms
+     × pins the commander reference population and hash 29ms
+     × pins the brawl reference population and hash 3ms
+     ✓ has weights summing to 1 and a weighted mean rank of 50 in both 13ms
+     ✓ keeps the knots sorted with consistent cumulative weights 50ms
+     × 1 meren-powerhouse verdict is PASS 2ms
+     ✓ 2 cabbage-cedh-input verdict is PASS 0ms
+     ✓ 3 precon-witherbloom verdict is PASS 0ms
+     × 4 the-cabbage-merchant verdict is PASS 1ms
+     ✓ 5 imotekh-the-stormlord verdict is PASS 0ms
+     ✓ 6 tazri-beacon-of-unity verdict is PASS 0ms
+     × 10 tazri-upgraded-arena verdict is PASS 3ms
+     ✓ 11 kuja-genome-sorcerer-arena verdict is FAIL 1ms
+     ✓ 12 vivi-battery-arena verdict is PASS 0ms
+     ✓ 14 cedhtop16-ballooncon6 verdict is PASS 0ms
+     × 15 standard-1445893-univerce verdict is PASS 1ms
+     × 16 standard-1445867-aljce verdict is PASS 5ms
+     ✓ 13 fire-lord-azula-competitive verdict is FAIL 0ms
+     × pins the measured anchor ranks 1ms
+     ✓ carries the unrounded total, and `score` is still its rounding  7261ms
+     ✓ ranks the UNROUNDED total in the profile CDF, evidence label aside 252ms
+     ✓ a provisional list uses the SAME CDF, unshifted  887ms
+     ✓ a confirmed rule failure leaves the rank domain but keeps the cap and components 215ms
+     ✓ an uncalibrated format returns null rank and never borrows a CDF  1523ms
+     ✓ never throws when a profile has no reference file 142ms
+     ✓ exposes the same unrounded total through the pure scorer 257ms
+     × scores the eligible Commander stride well under 20 ms median 21272ms
+ ✓ src/lib/__tests__/deck-score-v13-stage4c.test.ts (12 tests) 33304ms
+     ✓ measures a prefix p80 ABOVE the v1.4 norm, because this prefix lifts the coverage gate  24800ms
+     ✓ replaces the bimodal v1.3 population with a top-compressed one  3328ms
+     ✓ is strictly harsher than the shared .70 it replaces  3617ms
+     ✓ stays OUT of 45-65 because its party PAYOFFS, not its bodies, are the bound  1541ms
+ ❯ src/lib/__tests__/deck-score-v13-stage3.test.ts (24 tests | 2 failed) 33446ms
+     ✓ maps every recipe key, with no family left on an unmeasured default 4ms
+     ✓ freezes ONE floor at the MEASURED p95 of the per-pile maximum 1ms
+     ✓ keeps the three v1.3 recipes off the Standard path 3ms
+     ✓ fires on a typed producer/converter/output list 32ms
+     ✓ does NOT fire on a matched negative control  24844ms
+     ✓ bounds producers by the converters that spend them 2ms
+     ✓ fires on a typed maker/payoff/value list 9ms
+     ✓ does NOT fire on a matched negative control 95ms
+     ✓ fires on a typed payoff/source/carrier list 3ms
+     ✓ refuses a creature that merely CARRIES a counter as a payoff 0ms
+     ✓ does NOT fire on a matched negative control 22ms
+     ✓ credits a tutor that reaches a PRESENT piece, once 5ms
+     ✓ credits nothing for a tutor that can only reach an ABSENT piece 1ms
+     ✓ refuses a tutor whose DESTINATION is the graveyard 0ms
+     ✓ refuses a tutor too slow for the line, and stops at two hops 1ms
+     ✓ credits line-compatible protection and recovery, not an unrelated body 1ms
+     ✓ credits timely stax that binds opponents, not a symmetric wall with no exit 1ms
+     ✓ freezes the support bands measured on the cEDH TRAINING split 1ms
+     ✓ admits a complete backup line into the same pieces role 1ms
+     × reads the Cabbage paper list as its Food engine, inside 55-70 2730ms
+     ✓ keeps the 101-card Brawl Cabbage list on its legality cap  3366ms
+     ✓ pins the cEDH holdout median at or above 85  392ms
+     × pins ten fresh matched controls — stage 3 leaked four of them, stage 4a none 1388ms
+     ✓ never reads a closing plan on a matched control  526ms
+ ❯ src/lib/__tests__/deck-score-v13-stage2.test.ts (16 tests | 2 failed) 36304ms
+     ✓ prices the modal 24/60 Standard deck exactly as the spec states 3ms
+     ✓ earns nothing when the cost exceeds the deadline 0ms
+     ✓ repairs the round-4 defect: the modal five-drop is no longer refused at T5 8ms
+     ✓ flows the fraction into BOTH Q and R, never into an integer pool 34ms
+     ✓ gives aggro pressure T3 and ONE combined reach/protection/reload role T4 1ms
+     ✓ gives midrange threats T7 through MV7 with the output test still applied 1ms
+     ✓ gives control stabilisation T3, engine T5 and finisher T10 4ms
+     ✓ pins the bands measured on the training split with this same evaluator 1ms
+     ✓ lets a typed manland finisher supply R without entering nonland Q 6ms
+     ✓ freezes b at the measurement, under the .70 rejection line 0ms
+     ✓ applies b outside Standard only, to every recipe but combo 1ms
+     ✓ scores a generic plan 0 at Q <= b and at most 5 just above it 0ms
+     ✓ uses the SAME objective in planFit and in the reported S 22ms
+     ✓ keeps the Standard recipes out of every other profile 2ms
+     × pins the first 20 section-5 validation piles 11853ms
+     × pins ten controls whose seeds and source lists are disjoint from training 24363ms
+ ✓ src/lib/__tests__/card-alternatives.test.ts (10 tests) 4918ms
+     ✓ excludes unknown-price candidates only when a cap is given  408ms
+     ✓ keeps land alternatives within the deck's colour identity  2081ms
+     ✓ excludes the target land and lands already in the deck  1632ms
+ ✓ src/lib/__tests__/land-intelligence.test.ts (4 tests) 8329ms
+     ✓ two-colour deck: an off-colour typed fetch (matches only 1 of 2 colours) scores below an on-colour dual and an on-colour fetch  2601ms
+     ✓ mono-colour deck: a typed fetch matching the single colour scores as a normal mono land (no off-colour discount)  2292ms
+     ✓ generic fetch (Evolving Wilds) keeps full deck-colour credit in a 2-colour deck, not the off-colour discount  1472ms
+     ✓ an off-colour typed fetch is still in the pool (thinning has some value) but flagged  1960ms
+ ✓ src/lib/__tests__/deck-score-v13.test.ts (19 tests) 7250ms
+     ✓ tazri-beacon-of-unity is over 80% typed  562ms
+     ✓ tazri-upgraded-arena is over 80% typed  6141ms
+ ✓ src/lib/__tests__/deck-score-v14-stage0.test.ts (30 tests) 4283ms
+     ✓ exists and carries every source row exactly once  2695ms
+     ✓ hashes still describe the sample CSVs on disk  1078ms
+ ❯ src/lib/__tests__/deck-score-v13-stage4a.test.ts (12 tests | 3 failed) 40662ms
+     ✓ splits by commander, not by file position, so no commander is in both 200ms
+     ✓ holds out every §5 fixture commander from both cohorts  24142ms
+     ✓ orders each cohort round-robin, so any prefix is commander-balanced 3ms
+     × freezes every re-measured band at the measurement 15ms
+     ✓ leaves aggro without a cmd band — its training cohort is 7 lists 0ms
+     ✓ measures the bands at 99 cards and scales by N 0ms
+     ✓ freezes b at the JOINT p95 of 1,000 training controls, method recorded 1ms
+     ✓ maps every recipe to the joint floor, combo and Standard excepted 2ms
+     × pins the first twenty fresh stride-drawn controls 3340ms
+     ✓ keeps 1,000 training controls in-sample at the rate the floor promises  5189ms
+     ✓ reads vivi-battery-arena as `spells` at R = 1 and still misses its band 299ms
+     × pins the one anchor still out of band, with its cause 7467ms
+ ✓ tests/db.test.ts (28 tests) 7014ms
+     ✓ adds role_override column to deck_cards (migration 40)  360ms
+     ✓ adds reason column to cf_cache (migration 41)  436ms
+     ✓ inserts and retrieves a card  302ms
+     ✓ enforces unique primary key on cards  324ms
+     ✓ enforces unique commander + card pair  356ms
+     ✓ stores and retrieves JSON snapshot data  436ms
+     ✓ stores ML predictions per deck  659ms
+ ✓ tests/auth-login-route.test.ts (7 tests) 1541ms
+ ✓ src/lib/__tests__/web-sync.test.ts (32 tests) 4686ms
+ ✓ tests/build-api-gate-wiring.test.ts (11 tests) 1555ms
+     ✓ judges the list the optimizer would leave behind  369ms
+     ✓ runs ownership against the caller-supplied pool  542ms
+ ❯ src/lib/__tests__/deck-score-v13-stage4b.test.ts (18 tests | 1 failed) 42164ms
+     ✓ splits by commander, so no commander grades a band it was fitted to 80ms
+     ✓ is a different corpus from the Commander one, with its own draw seeds  719ms
+     ✓ excludes every §5 fixture commander and draws Brawl-legal 100-card piles  17949ms
+     ✓ freezes a Brawl band exactly where the cohort cleared 30 lists 9ms
+     ✓ leaves the under-30 recipes on the Commander band, with no brawl entry 1ms
+     ✓ pins the measured p25/p90 pairs 2ms
+     ✓ pins the dynamic typal band, measured on 285 themed Brawl lists 1ms
+     ✓ routes each profile to its own band at the same library size 3ms
+     ✓ enumerates the three floors, one per profile, plus the closing floor 3ms
+     ✓ freezes the joint Brawl floor at its measured value, method and n 0ms
+     ✓ freezes the measured control p95 and keeps it far below the positives 0ms
+     ✓ keeps Ballooncon on its real line — the one-card-pool rule would not  838ms
+     ✓ reads no closing plan on fresh Commander controls  18669ms
+     ✓ scores a coverage-matched Brawl control under 25 with S <= 5  3699ms
+     ✓ puts Vivi back in band on the Brawl spells band, not on a moved floor 39ms
+     × keeps Kuja and Azula in band and the 101-card Cabbage list capped 70ms
+     ✓ reads tazri-upgraded as party typal once its commander is typed — and still scores it a pile 63ms
+     ✓ types the commander as a party payoff the typal recipe can see 15ms
+ ✓ src/lib/__tests__/sideboard-guide.test.ts (17 tests) 2393ms
+ ✓ src/lib/__tests__/first-boot.test.ts (7 tests) 1070ms
+     ✓ a hash produced by hashPassword verifies with verifyPassword (same format the setup wizard relies on)  717ms
+     ✓ hashes a legacy plaintext password into the scrypt format  309ms
+ ✓ src/app/api/ai-suggest/__tests__/passive-mode.test.ts (3 tests) 1054ms
+     ✓ returns CF recommendations tagged source: collaborative-filtering and never calls an LLM  823ms
+ ✓ tests/deck-score-wiring.test.ts (9 tests) 1334ms
+     ✓ carries an additive deckScore payload for a Brawl (commander-family) list  592ms
+ ✓ src/lib/__tests__/deck-score.test.ts (45 tests) 692ms
+ ✓ src/lib/__tests__/synergy-graph.test.ts (33 tests) 1101ms
+     ✓ scores a maximal-overlap deck at the build-api /analyze cap (600 cards) in well under a second  597ms
+     ✓ input size is capped regardless of how many cards are submitted (20,000-card flood)  461ms
+ ✓ src/lib/__tests__/platform-detect.test.ts (7 tests) 123ms
+ ✓ tests/analytics-api.test.ts (6 tests) 1424ms
+ ❯ src/lib/__tests__/deck-score-v14-stage2.test.ts (28 tests | 2 failed) 38458ms
+     ✓ divides by D = max(N0, N), so an undersized library keeps its legal denominator 54ms
+     ✓ pads an undersized library with uncredited slots instead of shrinking the denominator 20ms
+     ✓ dilutes with reserved unresolved slots — they enter D and earn nothing 211ms
+     ✓ freezes the useful-role caps at N0, so added unknown slots cannot enlarge a quota 6ms
+     ✓ credits each physical copy at most once across the modes it could fill 22ms
+     ✓ re-spends a copy parked in a role that is already at its bound 8ms
+     ✓ ranks recipes on that same U — planFit IS Q_slot 10ms
+     ✓ reports the same objective it selected on 2ms
+     ✓ cannot expose a better omitted recipe by deleting a zero-use copy 5ms
+     ✓ keeps the legacy field and its weakest-requirement reason 2ms
+     ✓ leaves S independent of R: the score is the U/D transform alone 5ms
+     ✓ still invalidates a recipe whose essential role the deck holds nothing for 2ms
+     ✓ reads absence as absence, not as a missed deadline 0ms
+     ✓ freezes p80 of Q_slot per profile, each an exact rational in its slot count 0ms
+     ✓ retires the fitted floors from S — b is zero for every profile and plan 3ms
+     ✓ keeps the band cells at the value `bands verify` re-measures 3ms
+     ✓ returns null rather than a substituted component score 2ms
+     ✓ resolves the stride list the probes run on 2ms
+     ✓ moves neither S nor the total under the metadata permutation 131ms
+     ✓ moves neither S nor the total when basics are swapped for another printing 132ms
+     ✓ never raises S when proved-zero-use typed copies are deleted  423ms
+     ✓ never raises S when unreadable slots are added  1329ms
+     × pins the Commander prefix: no S zeros, S p50 83.7, total p50 28 21959ms
+     × pins the Brawl prefix: no S zeros, S p50 87.1, total p50 67 12780ms
+     ✓ gives an undersized library the same W as the same list padded to N0  588ms
+     ✓ round-trips the real norms file when nothing moved 1ms
+     ✓ round-trips every frozen band cell in the real recipe file 79ms
+     ✓ moves ONE cell and refuses a cell it cannot locate  647ms
+ ✓ src/lib/__tests__/deck-gate.test.ts (18 tests) 586ms
+ ✓ src/app/api/web-sync/__tests__/route.test.ts (15 tests) 201ms
+ ✓ tests/build-api-alternatives.test.ts (10 tests) 576ms
+ ✓ src/lib/__tests__/sync-commander-stats.test.ts (2 tests) 170ms
+ ✓ src/lib/__tests__/grp-id-resolver.test.ts (15 tests) 397ms
+ ✓ tests/cedh-staples.test.ts (4 tests) 295ms
+ ✓ src/lib/__tests__/scryfall-bulk.test.ts (3 tests) 66ms
+ ✓ src/lib/__tests__/meta-queries.test.ts (20 tests) 80ms
+ ✓ src/lib/__tests__/win-conditions.test.ts (11 tests) 40ms
+ ✓ src/lib/__tests__/utils.test.ts (21 tests) 69ms
+ ✓ src/lib/__tests__/arena-match-contract.test.ts (51 tests) 54ms
+ ✓ src/lib/__tests__/card-classifier.test.ts (71 tests) 47ms
+ ✓ src/lib/__tests__/deck-ingest.test.ts (19 tests) 61ms
+ ✓ src/lib/__tests__/deck-optimizer.test.ts (9 tests) 33ms
+ ✓ src/lib/__tests__/deck-validation.test.ts (34 tests) 36ms
+ ✓ src/lib/__tests__/arena-log-reader.test.ts (29 tests) 25ms
+ ✓ src/lib/__tests__/mulligan-advisor.test.ts (16 tests) 25ms
+ ✓ src/lib/__tests__/deck-score-input.test.ts (10 tests) 59ms
+ ✓ src/lib/__tests__/benchmark-route.test.ts (6 tests) 24ms
+ ✓ src/lib/__tests__/craft-list.test.ts (7 tests) 27ms
+ ✓ src/lib/__tests__/commander-synergy.test.ts (10 tests) 32ms
+ ✓ src/lib/__tests__/bracket.test.ts (9 tests) 28ms
+ ✓ src/lib/__tests__/constants.test.ts (19 tests) 18ms
+ ✓ src/lib/__tests__/arena-game-events.test.ts (22 tests) 22ms
+ ✓ src/lib/__tests__/game-state-engine.test.ts (26 tests) 26ms
+ ✓ src/lib/__tests__/ai-chat-helpers.test.ts (34 tests) 28ms
+ ✓ src/lib/__tests__/deck-builder-budget-bracket.test.ts (14 tests) 24ms
+ ✓ src/lib/__tests__/decklist-normalize.test.ts (8 tests) 15ms
+ ✓ src/lib/__tests__/arena-parser.test.ts (26 tests) 25ms
+ ✓ src/lib/__tests__/deck-score-catalog.test.ts (79 tests) 15437ms
+     ✓ gives every entry a hash, a knowledge level and well-formed effects  15213ms
+ ✓ src/lib/__tests__/deck-fingerprint.test.ts (25 tests) 13ms
+ ✓ src/components/match/__tests__/match-stats.test.ts (18 tests) 18ms
+ ✓ src/lib/__tests__/deck-builder-constraints.test.ts (4 tests) 19ms
+ ✓ src/lib/__tests__/deck-grouping.test.ts (3 tests) 14ms
+ ✓ src/lib/__tests__/overlay-integration.test.ts (4 tests) 15ms
+ ✓ src/lib/__tests__/deck-templates.test.ts (4 tests) 13ms
+ ✓ src/lib/__tests__/post-match-stats.test.ts (16 tests) 16ms
+ ✓ tests/edhrec.test.ts (14 tests) 10ms
+ ✓ src/lib/__tests__/deck-export.test.ts (20 tests) 13ms
+ ✓ src/hooks/__tests__/use-deck-editor.test.ts (14 tests) 16ms
+ ✓ src/lib/__tests__/benchmark-metrics.test.ts (8 tests) 14ms
+ ✓ src/lib/__tests__/highlight-detector.test.ts (8 tests) 11ms
+ ✓ src/lib/__tests__/land-math.test.ts (7 tests) 11ms
+ ✓ src/lib/__tests__/commander-legality-swap.test.ts (6 tests) 8ms
+ ✓ src/components/command-center/__tests__/consultant-helpers.test.ts (15 tests) 18ms
+ ✓ src/lib/__tests__/curve-score.test.ts (6 tests) 13ms
+ ✓ src/lib/__tests__/power-level-edhpl.test.ts (14 tests) 19ms
+ ✓ src/lib/__tests__/suggestion-sources.test.ts (1 test) 8ms
+ ✓ src/lib/__tests__/build-hints.test.ts (4 tests) 14ms
+ ✓ src/lib/__tests__/power-level-deck.test.ts (5 tests) 8ms
+ ✓ src/components/command-center/__tests__/coverage-selectors.test.ts (4 tests) 11ms
+ ✓ src/lib/__tests__/mana-sources.test.ts (8 tests) 13ms
+ ✓ tests/build-api-resolve.test.ts (2 tests) 10ms
+ ✓ src/lib/__tests__/tribal-detect.test.ts (3 tests) 6ms
+ ✓ src/components/command-center/__tests__/bracket-tile.test.ts (3 tests) 9ms
+ ✓ src/lib/__tests__/consistent-mana-lands.test.ts (5 tests) 6ms
+ ✓ src/lib/__tests__/deck-score-v14-stage3d.test.ts (12 tests) 56200ms
+     ✓ no stride list closes faster on its 61st reserved slot (30 Standard lists)  1956ms
+     ✓ 381364921: blanking the pump source now LOSES (was +1.44)  8532ms
+     ✓ deleting one random nonland copy never raises W (seeded, 3 profiles)  27475ms
+     ✓ blanking one random nonland copy never raises W (seeded, 3 profiles)  17886ms
+ ❯ src/lib/__tests__/deck-score-coverage-round1.test.ts (15 tests | 1 failed) 65043ms
+     ✓ pins the Commander corpus measurement and reproduces it on a prefix  30364ms
+     ✓ pins the Brawl corpus measurement and reproduces it on a prefix  16309ms
+     × closes the round-1 S = 0 MISS: the floor that caused it is retired 17254ms
+     ✓ keeps every round-1 atom above the three-corpus-card floor  730ms
+     ✓ gives every atom a POSITIVE: a real corpus sentence it claims 39ms
+     ✓ gives every atom 90 NEGATIVES: the other atoms’ sentences, bar 12 known overlaps 27ms
+     ✓ routes a negative pump to `answer`, not to a zero-power threat 76ms
+     ✓ types a keyword-only line and preserves loyalty and cleave brackets 4ms
+     ✓ leaves Chaos Warp `known` WITHOUT answer credit, and says so 1ms
+     ✓ freezes each constant at the value its method measured 2ms
+     ✓ records the direction: every floor ROSE, so S got harsher, not kinder 0ms
+     ✓ pins both S windows, which is what the rise cost 1ms
+     ✓ loads the shards well inside the 250 ms budget 231ms
+     ✓ types the staples at the head of the coverage queue 0ms
+     ✓ grew the universe to the corpus, which is where the coverage came from 0ms
+ ❯ src/lib/__tests__/deck-score-v14-stage3.test.ts (22 tests | 1 failed) 69226ms
+     ✓ a full 99-card commander list passes the size check and carries a rank 225ms
+     ✓ an undersized commander list is a STRUCTURAL FAILURE: no rank, total 0-19 104ms
+     ✓ reserved unresolved slots count toward the size: 96 resolved + 3 unknown is legal  665ms
+     ✓ every one of the 25 stride lists fails structurally at k = 1, 5 and 10 deletions  8515ms
+     ✓ an OVERSIZED list still fails (the pre-existing rule is untouched) 101ms
+     ✓ a Brawl list short of 99 fails the same way  1466ms
+     ✓ advantage is identical at 95 submitted copies and at 95 + 4 blank slots 0ms
+     ✓ mana is never raised by padding 95 submitted copies with 4 blank slots 0ms
+     ✓ curve is never raised by padding 95 submitted copies with 4 blank slots 0ms
+     ✓ the denominator has teeth: each density really moves when N moves 4ms
+     ✓ interaction never divided by N at all (E/E* are absolute counts) 11ms
+     ✓ price, popularity, rarity, set, printing, art and input order move nothing  2226ms
+     ✓ input order alone moves nothing  2465ms
+     ✓ quantity representation (n entries of 1 vs one entry of n) moves nothing  2243ms
+     ✓ a different printing of the same basic land moves nothing  1707ms
+     ✓ replacing proved-zero-use typed copies with unknown slots: dS <= 1e-6, drank <= 1  18694ms
+     ✓ adding zero-credit unknown slots never raises S (k = 1, 5, 10)  9021ms
+     ✓ breaking an on-plan proof never gains: S and W are non-increasing  2118ms
+     ✓ bumps SCORE_VERSION for the evaluator change 0ms
+     ✓ pins the re-frozen commander/brawl references (13 scorer-rule rows left) 0ms
+     ✓ admits Standard on the DECLARED tournament-event frame (42 families >= 30) 0ms
+     × keeps the retained 200-list ctrl93 top tail inside <= 20/200 in both profiles 19640ms
+ ✓ src/lib/__tests__/deck-score-v14-stage3b.test.ts (18 tests) 88286ms
+     ✓ commander: 200 eligible lists, one random copy blanked  68138ms
+     ✓ brawl: 200 eligible lists, one random copy blanked  18813ms
+     ✓ commander 381371853 (k=1) after replace-offplan-unknown  303ms
+ ❯ tests/build-api-build.test.ts (7 tests | 1 failed) 126620ms
+     ✓ rejects an out-of-range bracket 4ms
+     ✓ rejects a non-integer bracket 1ms
+     ✓ rejects a negative maxCardPrice 0ms
+     ✓ rejects a negative maxDeckPrice 1ms
+     ✓ rejects string values for the numeric fields 1ms
+     × marks owned:true only for cards the caller declared owned 84757ms
+     ✓ omits the owned key entirely for a non-collection build  41855ms
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 27 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/build-api-build.test.ts > POST /build — owned flag on cards[] > marks owned:true only for cards the caller declared owned
+Error: Test timed out in 60000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ tests/build-api-build.test.ts:77:3
+     75|     .filter((n) => n !== 'Journey to Eternity'); // not in the repo DB
+     76| 
+     77|   it('marks owned:true only for cards the caller declared owned', asyn…
+       |   ^
+     78|     const { status, body } = await build({
+     79|       commanderName: 'Krenko, Mob Boss',
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/27]⎯
+
+ FAIL  src/lib/__tests__/deck-score-coverage-round1.test.ts > coverage round 1 — real-list typed coverage > closes the round-1 S = 0 MISS: the floor that caused it is retired
+AssertionError: expected 50 to be 29 // Object.is equality
+
+- Expected
++ Received
+
+- 29
++ 50
+
+ ❯ src/lib/__tests__/deck-score-coverage-round1.test.ts:200:33
+    198|     // norms were held fixed for attribution — and the totals move pur…
+    199|     // through W under the quality cap: Commander 54 -> 28, Brawl 76 -…
+    200|     expect(pct(cmd.totals, 50)).toBe(29) // stage 3d: the banded affor…
+       |                                 ^
+    201|     expect(pct(brawl.totals, 50)).toBe(68);
+    202|   }, 120_000);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/27]⎯
+
+ FAIL  src/lib/__tests__/deck-score-v12.test.ts > section 8 W: token producers, zero-power bodies and the opponent prior > sees a producer printed on the commander
+AssertionError: expected 0 to be greater than 0
+ ❯ src/lib/__tests__/deck-score-v12.test.ts:594:33
+    592|     const withCommander = computeWin('brawl', normsFor('brawl'), 'toke…
+    593|     const without = computeWin('brawl', normsFor('brawl'), 'tokens', 6…
+    594|     expect(withCommander.score).toBeGreaterThan(without.score);
+       |                                 ^
+    595|   });
+    596| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/27]⎯
+
+ FAIL  src/lib/__tests__/deck-score-v13-stage2.test.ts > §9.1 dispatch is by FORMAT: the Standard change moves no Commander deck > pins the first 20 section-5 validation piles
+AssertionError: expected [ 59, 46, 55, 47, 59, 59, 56, …(13) ] to deeply equal [ 50, 26, 55, 26, 54, 54, 50, …(13) ]
+
+- Expected
++ Received
+
+  [
+-   50,
+-   26,
++   59,
++   46,
++   55,
++   47,
++   59,
++   59,
++   56,
+    55,
+-   26,
++   59,
+    54,
++   60,
++   55,
++   63,
++   56,
++   60,
+    54,
+-   50,
++   60,
++   60,
+    51,
+    54,
+-   50,
+-   55,
+-   48,
+-   57,
+-   52,
+-   55,
+-   46,
+-   55,
+-   55,
+-   27,
+-   41,
+  ]
+
+ ❯ src/lib/__tests__/deck-score-v13-stage2.test.ts:310:20
+    308|     // T20 Commander horizon). Piles fall: p50 60 -> 50, and four of t…
+    309|     // twenty now land under 25. Measured, not fitted.
+    310|     expect(scores).toEqual([50, 26, 55, 26, 54, 54, 50, 51, 54, 50, 55…
+       |                    ^
+    311|   });
+    312| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/27]⎯
+
+ FAIL  src/lib/__tests__/deck-score-v13-stage2.test.ts > §9.2 fresh matched negative controls > pins ten controls whose seeds and source lists are disjoint from training
+AssertionError: expected [ Array(10) ] to deeply equal [ Array(10) ]
+
+- Expected
++ Received
+
+  [
+-   22,
+-   22,
+-   22,
+    27,
+-   22,
++   26,
++   25,
++   50,
+    26,
++   26,
++   27,
+    22,
+    20,
+-   20,
+-   22,
++   26,
+  ]
+
+ ❯ src/lib/__tests__/deck-score-v13-stage2.test.ts:325:59
+    323|     // just enough output to clear it by one or two points. Against the
+    324|     // measured direction and reported as such.
+    325|     expect(controls.map((c) => scoreDeck(c.input).score)).toEqual([22,…
+       |                                                           ^
+    326|     for (const c of controls) {
+    327|       expect(c.input.main.reduce((a, rc) => a + rc.quantity, 0)).toBe(…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/27]⎯
+
+ FAIL  src/lib/__tests__/deck-score-v13-stage3.test.ts > stage 3 acceptance, fixture-backed > reads the Cabbage paper list as its Food engine, inside 55-70
+AssertionError: expected 59 to be 54 // Object.is equality
+
+- Expected
++ Received
+
+- 54
++ 59
+
+ ❯ src/lib/__tests__/deck-score-v13-stage3.test.ts:420:26
+    418|     // paid deployment delays the Food engine by a turn; the plan and …
+    419|     // unchanged, so this is W alone through the quality cap.
+    420|     expect(result.score).toBe(54);
+       |                          ^
+    421|   });
+    422| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/27]⎯
+
+ FAIL  src/lib/__tests__/deck-score-v13-stage3.test.ts > stage 3 acceptance, fixture-backed > pins ten fresh matched controls — stage 3 leaked four of them, stage 4a none
+AssertionError: expected [ Array(10) ] to deeply equal [ Array(10) ]
+
+- Expected
++ Received
+
+  [
+-   22,
+-   22,
+-   22,
+    27,
+-   22,
++   26,
++   25,
++   50,
+    26,
++   26,
++   27,
+    22,
+    20,
+-   20,
+-   22,
++   26,
+  ]
+
+ ❯ src/lib/__tests__/deck-score-v13-stage3.test.ts:456:40
+    454|     // ten assemble just enough output to clear the rule floor by a po…
+    455|     // two. Against the measured direction; reported, not tuned.
+    456|     expect(scored.map((r) => r.score)).toEqual([22, 22, 22, 27, 22, 26…
+       |                                        ^
+    457|     expect(syn).toEqual([77.2, 100, 68.6, 74.4, 72.1, 69.8, 79.5, 84.2…
+    458|     expect(syn.filter((v) => v <= 5).length).toBe(0);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/27]⎯
+
+ FAIL  src/lib/__tests__/deck-score-v13-stage4a.test.ts > stage 4a — Commander bands re-measured through evaluatePlan > freezes every re-measured band at the measurement
+AssertionError: conversion.output: expected [ 4, 11 ] to deeply equal [ 5, 11 ]
+
+- Expected
++ Received
+
+  [
+-   5,
++   4,
+    11,
+  ]
+
+ ❯ src/lib/__tests__/deck-score-v13-stage4a.test.ts:131:71
+    129|         const role = recipe.roles.find((r) => r.key === roleKey);
+    130|         expect(role, `${key}.${roleKey}`).toBeDefined();
+    131|         expect([role!.cmd?.min, role!.cmd?.max], `${key}.${roleKey}`).…
+       |                                                                       ^
+    132|       }
+    133|     }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/27]⎯
+
+ FAIL  src/lib/__tests__/deck-score-v13-stage4a.test.ts > stage 4a acceptance, fixture-backed > pins the first twenty fresh stride-drawn controls
+AssertionError: expected [ 51, 48, 60, 46, 45, 29, 51, …(13) ] to deeply equal [ 22, 48, 55, 46, 45, 29, 28, …(13) ]
+
+- Expected
++ Received
+
+  [
+-   22,
++   51,
+    48,
+-   55,
++   60,
+    46,
+    45,
+    29,
+-   28,
+-   55,
++   51,
++   60,
+    20,
+-   55,
+-   55,
++   60,
++   60,
+    31,
+-   55,
+-   54,
+-   57,
+-   22,
++   60,
++   61,
++   63,
++   30,
+    56,
+-   54,
+-   38,
+-   51,
++   61,
++   55,
++   55,
+  ]
+
+ ❯ src/lib/__tests__/deck-score-v13-stage4a.test.ts:220:40
+    218|     const scored = controls.map((r) => scoreDeck(r.input));
+    219|     expect(new Set(controls.map((c) => c.commander)).size).toBe(20);
+    220|     expect(scored.map((r) => r.score)).toEqual(
+       |                                        ^
+    221|       // RE-PINNED by v1.4 stage 1d: the section 10.8 resource correct…
+    222|       // cost a pile more than they cost a real list, so these fall fr…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/27]⎯
+
+ FAIL  src/lib/__tests__/deck-score-v13-stage4a.test.ts > stage 4a acceptance, fixture-backed > pins the one anchor still out of band, with its cause
+AssertionError: expected 62 to be 56 // Object.is equality
+
+- Expected
++ Received
+
+- 56
++ 62
+
+ ❯ src/lib/__tests__/deck-score-v13-stage4a.test.ts:312:70
+    310|     // engine, and the quality cap `20 + .8*min(M,W,S)` binds on W. Me…
+    311|     // and reported, not tuned back.
+    312|     expect(scoreDeck(byName('meren-powerhouse').load().input).score).t…
+       |                                                                      ^
+    313|     expect(scoreDeck(byName('the-cabbage-merchant').load().input).scor…
+    314|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/27]⎯
+
+ FAIL  src/lib/__tests__/deck-score-v13-stage4b.test.ts > stage 4b — Brawl fixture readings > keeps Kuja and Azula in band and the 101-card Cabbage list capped
+AssertionError: expected 81 to be 63 // Object.is equality
+
+- Expected
++ Received
+
+- 63
++ 81
+
+ ❯ src/lib/__tests__/deck-score-v13-stage4b.test.ts:341:24
+    339|     // are now paid from one per-turn budget, so the spell schedule ar…
+    340|     // later and W is the binding term in the quality cap. Reported.
+    341|     expect(kuja.total).toBe(63) // stage 3d: kuja 56 -> 63, the schedu…
+       |                        ^
+    342|     const azula = read('fire-lord-azula-competitive');
+    343|     expect(azula.reason).toContain('supports spells');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[11/27]⎯
+
+ FAIL  src/lib/__tests__/deck-score-v14-stage1a.test.ts > v1.4 stage 1a — corpus regression > gives the 200 constrained-random piles no closing line — but §10.1 now keeps none of them under 25
+AssertionError: expected [ { score: 21, …(5) }, …(5) ] to have a length of 9 but got 6
+
+- Expected
++ Received
+
+- 9
++ 6
+
+ ❯ src/lib/__tests__/deck-score-v14-stage1a.test.ts:327:46
+    325|     // 8 -> 15 under 25, p50 59 -> 50, max 72 -> 57. Still short of se…
+    326|     // 10.1's numeric gate, which stays OPEN. Pinned, not fitted.
+    327|     expect(rows.filter((r) => r.score < 25)).toHaveLength(9);
+       |                                              ^
+    328|     const totals = rows.map((r) => r.score).sort((a, b) => a - b);
+    329|     expect(totals[Math.round(0.5 * (totals.length - 1))]).toBe(51);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[12/27]⎯
+
+ FAIL  src/lib/__tests__/deck-score-v14-stage1b.test.ts > v1.4 stage 1b — fixtures and frozen domain (§10.7) > cabbage-cedh-input builds a control line at T20 but still closes on its Food schedule
+AssertionError: expected 'Token/Food conversion (6 bodies): clo…' to match /…/Food conversion \(\d+ bodies\): closes T12
+
+- Expected: 
+/^Token\/Food conversion \(\d+ bodies\): closes T12/
+
++ Received: 
+"Token/Food conversion (6 bodies): closes T11, access 41% (u=0.57); shared bottleneck, protection access 87%; none."
+
+ ❯ src/lib/__tests__/deck-score-v14-stage1b.test.ts:376:22
+    374|     expect(built).toContain('control');
+    375|     const w = computeWin('commander', normsFor('commander'), 'midrange…
+    376|     expect(w.reason).toMatch(/^Token\/Food conversion \(\d+ bodies\): …
+       |                      ^
+    377|     expect(w.score).toBeCloseTo(49.0, 0);
+    378|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[13/27]⎯
+
+ FAIL  src/lib/__tests__/deck-score-v14-stage1c.test.ts > §9.4 cast triggers — typed per-cast output > a pinger big enough to reach the predicate builds the spells line
+AssertionError: expected [ 'combat_wide' ] to include 'spells'
+ ❯ src/lib/__tests__/deck-score-v14-stage1c.test.ts:195:19
+    193|     const main = [entry({ name: 'Mega Snipe', text: BIG_PINGER, qty: 4…
+    194|     const { built } = auditOf(main);
+    195|     expect(built).toContain('spells');
+       |                   ^
+    196|   });
+    197| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[14/27]⎯
+
+ FAIL  src/lib/__tests__/deck-score-v14-stage2.test.ts > v1.4 stage 2 — real-list distribution > pins the Commander prefix: no S zeros, S p50 83.7, total p50 28
+AssertionError: expected 50 to be 29 // Object.is equality
+
+- Expected
++ Received
+
+- 29
++ 50
+
+ ❯ src/lib/__tests__/deck-score-v14-stage2.test.ts:431:22
+    429|     expect(cmd.zero).toBe(0);
+    430|     expect(cmd.sp50).toBeCloseTo(83.7, 1);
+    431|     expect(cmd.tp50).toBe(29) // stage 3d;
+       |                      ^
+    432|   });
+    433| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[15/27]⎯
+
+ FAIL  src/lib/__tests__/deck-score-v14-stage2.test.ts > v1.4 stage 2 — real-list distribution > pins the Brawl prefix: no S zeros, S p50 87.1, total p50 67
+AssertionError: expected 74 to be 68 // Object.is equality
+
+- Expected
++ Received
+
+- 68
++ 74
+
+ ❯ src/lib/__tests__/deck-score-v14-stage2.test.ts:442:24
+    440|     expect(brawl.zero).toBe(0);
+    441|     expect(brawl.sp50).toBeCloseTo(87.1, 1);
+    442|     expect(brawl.tp50).toBe(68) // stage 3d;
+       |                        ^
+    443|   });
+    444| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[16/27]⎯
+
+ FAIL  src/lib/__tests__/deck-score-v14-stage2c.test.ts > §10.9 item 2 — the frozen references > pins the commander reference population and hash
+AssertionError: expected 1426 to be 1429 // Object.is equality
+
+- Expected
++ Received
+
+- 1429
++ 1426
+
+ ❯ src/lib/__tests__/deck-score-v14-stage2c.test.ts:157:28
+    155| 
+    156|   it('pins the commander reference population and hash', () => {
+    157|     expect(commander.rows).toBe(1429);
+       |                            ^
+    158|     expect(commander.families).toBe(182);
+    159|     expect(commander.knots.length).toBe(399) // stage 3d re-freeze;
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[17/27]⎯
+
+ FAIL  src/lib/__tests__/deck-score-v14-stage2c.test.ts > §10.9 item 2 — the frozen references > pins the brawl reference population and hash
+AssertionError: expected 782 to be 783 // Object.is equality
+
+- Expected
++ Received
+
+- 783
++ 782
+
+ ❯ src/lib/__tests__/deck-score-v14-stage2c.test.ts:166:24
+    164| 
+    165|   it('pins the brawl reference population and hash', () => {
+    166|     expect(brawl.rows).toBe(783);
+       |                        ^
+    167|     expect(brawl.families).toBe(179);
+    168|     expect(brawl.knots.length).toBe(208) // stage 3d re-freeze;
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[18/27]⎯
+
+ FAIL  src/lib/__tests__/deck-score-v14-stage2c.test.ts > §10.9 item 7 — the 16 anchors, graded on unrounded rank > 1 meren-powerhouse verdict is PASS
+ FAIL  src/lib/__tests__/deck-score-v14-stage2c.test.ts > §10.9 item 7 — the 16 anchors, graded on unrounded rank > 4 the-cabbage-merchant verdict is PASS
+ FAIL  src/lib/__tests__/deck-score-v14-stage2c.test.ts > §10.9 item 7 — the 16 anchors, graded on unrounded rank > 10 tazri-upgraded-arena verdict is PASS
+ FAIL  src/lib/__tests__/deck-score-v14-stage2c.test.ts > §10.9 item 7 — the 16 anchors, graded on unrounded rank > 15 standard-1445893-univerce verdict is PASS
+ FAIL  src/lib/__tests__/deck-score-v14-stage2c.test.ts > §10.9 item 7 — the 16 anchors, graded on unrounded rank > 16 standard-1445867-aljce verdict is PASS
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ src/lib/__tests__/deck-score-v14-stage2c.test.ts:220:57
+    218|     it(`${name} verdict is ${expected ? 'PASS' : 'FAIL'}`, () => {
+    219|       const rank = ref && tAbs !== null ? rankOf(ref, tAbs) : null;
+    220|       expect(rank !== null && rank >= lo && rank <= hi).toBe(expected);
+       |                                                         ^
+    221|     });
+    222|   }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[19/27]⎯
+
+ FAIL  src/lib/__tests__/deck-score-v14-stage2c.test.ts > §10.9 item 7 — the 16 anchors, graded on unrounded rank > pins the measured anchor ranks
+AssertionError: expected 55.00883045525895 to be close to 73.13, received difference is 18.121169544741043, but expected 0.005
+ ❯ src/lib/__tests__/deck-score-v14-stage2c.test.ts:228:38
+    226|     // unclamped recipe demands moved the Commander and Standard knots…
+    227|     // are byte-identical): 79.84, 24.45 -> 24.47, 99.77, 99.86, 8.34.
+    228|     expect(rankOf(commander, 56.24)).toBeCloseTo(73.13, 2);
+       |                                      ^
+    229|     expect(rankOf(commander, 22.560000000000002)).toBeCloseTo(23.88, 2…
+    230|     expect(rankOf(commander, 92.02474226804125)).toBeCloseTo(99.77, 2);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[20/27]⎯
+
+ FAIL  src/lib/__tests__/deck-score-v14-stage2c.test.ts > §10.9 stage 5 — latency > scores the eligible Commander stride well under 20 ms median
+AssertionError: expected 91.4694 to be less than 60
+ ❯ src/lib/__tests__/deck-score-v14-stage2c.test.ts:435:17
+    433|     // vitest runs 80+ files in parallel workers, so this in-suite pin…
+    434|     // (31.6 ms observed under contention on 2026-09-21 with the true …
+    435|     expect(p50).toBeLessThan(60);
+       |                 ^
+    436|   });
+    437| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[21/27]⎯
+
+ FAIL  src/lib/__tests__/deck-score-v14-stage3.test.ts > stage 3 — version, references and the retained top tail > keeps the retained 200-list ctrl93 top tail inside <= 20/200 in both profiles
+AssertionError: expected 11 to be 15 // Object.is equality
+
+- Expected
++ Received
+
+- 15
++ 11
+
+ ❯ src/lib/__tests__/deck-score-v14-stage3.test.ts:357:26
+    355|     // measured by `bands real --piles 1000` at this version
+    356|     expect(counts.commander).toBe(0);
+    357|     expect(counts.brawl).toBe(15); // rc8 re-freeze: was 1
+       |                          ^
+    358|   });
+    359| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[22/27]⎯
+
+ FAIL  src/lib/__tests__/deck-score-v14-stage3e.test.ts > stage 3e — latency and version > scoreDeck stays under 40 ms on the cEDH fixture (population p50 gate is 20 ms)
+AssertionError: expected 111.66877999999997 to be less than 40
+ ❯ src/lib/__tests__/deck-score-v14-stage3e.test.ts:204:42
+    202|     const t0 = performance.now();
+    203|     for (let i = 0; i < 5; i++) scoreDeck(deck.input);
+    204|     expect((performance.now() - t0) / 5).toBeLessThan(40);
+       |                                          ^
+    205|   });
+    206| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[23/27]⎯
+
+
+ Test Files  14 failed | 79 passed (93)
+      Tests  27 failed | 1513 passed (1540)
+   Start at  17:30:09
+   Duration  133.60s (transform 41.63s, setup 0ms, import 138.92s, tests 797.86s, environment 29ms)
+

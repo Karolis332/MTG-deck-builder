@@ -1,0 +1,1 @@
+Izoni, Thousand-Eyed: 100.34 [land38 ramp12 draw10 remo12 wipe3 prot6 pen0] (seeds cf 62.91 [land38 ramp14 draw10 remo10 wipe2 prot1 pen5] | previous 100.09 [land38 ramp12 draw12 remo10 wipe3 prot6 pen0]; 9 swaps, 466808 ms)
