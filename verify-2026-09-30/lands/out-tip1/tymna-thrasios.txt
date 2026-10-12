@@ -1,0 +1,40 @@
+# tymna-thrasios — {"format":"commander","commanderName":"Tymna the Weaver","partnerName":"Thrasios, Triton Hero"} (1263 ms) engine C:/Users/QuLeR/mtg-wt-lands
+strategy aggro tribal - size 99
+lands 39 (real 39, mdfc-spell 0, basics 9, nonbasic 30) untapped-T1-3 39/39 = 100 %
+sources(land)/target: B 27(+8 rocks)/30 pips 11 worst {1}{B}{B}{B} | W 23(+7 rocks)/26 pips 12 worst {W}{W} | G 18(+8 rocks)/19 pips 8 worst {4}{G}{G} | U 23(+10 rocks)/26 pips 26 worst {U}{U}
+health {"grade":"A","realLands":39,"tappedLands":8,"tappedRatio":0.21,"pipsByColor":{"W":11,"U":24,"B":10,"R":0,"G":7},"drawCount":16,"drawEngineCount":11,"rampCount":17,"fakeLands":[],"warnings":[],"deficiencies":[]} price $5303.16 bracket null->4
+
+1 Command Tower                                | BGRUW  | utility              t3 | untapped | 
+1 Exotic Orchard                               | BGRUW  | utility              t3 | untapped | 
+1 Polluted Delta                               | UB     | fetch                t1 | untapped | 
+1 Flooded Strand                               | WU     | fetch                t1 | untapped | 
+1 Misty Rainforest                             | UG     | fetch                t1 | untapped | 
+1 Verdant Catacombs                            | BG     | fetch                t1 | untapped | 
+1 Watery Grave                                 | BU     | shock                t1 | untapped | 
+1 Marsh Flats                                  | WB     | fetch                t1 | untapped | 
+1 Breeding Pool                                | GU     | shock                t1 | untapped | 
+1 Godless Shrine                               | BW     | shock                t1 | untapped | 
+1 Hallowed Fountain                            | UW     | shock                t1 | untapped | 
+1 Overgrown Tomb                               | BG     | shock                t1 | untapped | 
+1 Isolated Chapel                              | BW     | check                t2 | untapped | 
+1 City of Brass                                | BGRUW  | pain                 t2 | untapped | 
+1 Mana Confluence                              | BGRUW  | pain                 t2 | untapped | 
+1 Caves of Koilos                              | BW     | pain                 t2 | untapped | 
+1 Reflecting Pool                              | BGRUW  | utility              t3 | untapped | 
+1 Vault of Champions                           | BW     | bond                 t2 | untapped | 
+1 Prismatic Vista                              | BWGU   | utility              t3 | untapped | 
+1 Shattered Sanctum                            | BW     | slow                 t2 | untapped | 
+1 Underground Sea                              | BU     | dual_original        t1 | untapped | 
+1 Tropical Island                              | GU     | dual_original        t1 | untapped | 
+1 Tundra                                       | UW     | dual_original        t1 | untapped | 
+1 Scrubland                                    | BW     | dual_original        t1 | untapped | 
+1 Bayou                                        | BG     | dual_original        t1 | untapped | 
+1 Forbidden Orchard                            | BGRUW  | utility              t3 | untapped | 
+1 Horizon of Progress                          | BGRUW  | utility              t3 | untapped | 
+1 Tarnished Citadel                            | BGRUW  | utility              t3 | untapped | 
+1 Glimmervoid                                  | BGRUW  | utility              t3 | untapped | 
+1 Lotus Vale                                   | BGRUW  | utility              t3 | untapped | 
+3 Swamp                                        | B      | basic                t4 | untapped | 
+2 Plains                                       | W      | basic                t4 | untapped | 
+1 Forest                                       | G      | basic                t4 | untapped | 
+3 Island                                       | U      | basic                t4 | untapped | 

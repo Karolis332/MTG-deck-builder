@@ -1,0 +1,40 @@
+# atraxa — {"format":"commander","commanderName":"Atraxa, Praetors' Voice"} (1175 ms) engine C:/Users/QuLeR/mtg-audit-wt
+strategy superfriends tribal - size 99
+lands 38 (real 38, mdfc-spell 0, basics 8, nonbasic 30) untapped-T1-3 31/38 = 82 %
+sources(land)/target: B 21(+8 rocks)/22 pips 15 worst {2}{B}{B} | G 23(+8 rocks)/33 pips 25 worst {G}{G}{G} | U 21(+6 rocks)/24 pips 19 worst {1}{U}{U} | W 22(+6 rocks)/22 pips 15 worst {2}{W}{W}
+health {"grade":"A","realLands":38,"tappedLands":10,"tappedRatio":0.26,"pipsByColor":{"W":14,"U":17,"B":13,"R":0,"G":24},"drawCount":14,"drawEngineCount":16,"rampCount":12,"fakeLands":[],"warnings":[],"deficiencies":[]} price $2540.72 bracket null->2
+
+1 Command Tower                                | BGRUW  | utility              t3 | untapped | 
+1 Exotic Orchard                               | BGRUW  | utility              t3 | untapped | 
+1 Polluted Delta                               | UB     | fetch                t1 | untapped | 
+1 Flooded Strand                               | WU     | fetch                t1 | untapped | 
+1 Misty Rainforest                             | UG     | fetch                t1 | untapped | 
+1 Windswept Heath                              | WG     | fetch                t1 | untapped | 
+1 Verdant Catacombs                            | BG     | fetch                t1 | untapped | 
+1 Watery Grave                                 | BU     | shock                t1 | untapped | 
+1 Marsh Flats                                  | WB     | fetch                t1 | untapped | 
+1 Breeding Pool                                | GU     | shock                t1 | untapped | 
+1 Godless Shrine                               | BW     | shock                t1 | untapped | 
+1 Hallowed Fountain                            | UW     | shock                t1 | untapped | 
+1 Overgrown Tomb                               | BG     | shock                t1 | untapped | 
+1 Temple Garden                                | GW     | shock                t1 | untapped | 
+1 City of Brass                                | BGRUW  | pain                 t2 | untapped | 
+1 Three Tree City                              | BGRUW  | tribal               t2 | untapped | 
+1 Underground Sea                              | BU     | dual_original        t1 | untapped | 
+1 Tropical Island                              | GU     | dual_original        t1 | untapped | 
+1 Tundra                                       | UW     | dual_original        t1 | untapped | 
+1 Scrubland                                    | BW     | dual_original        t1 | untapped | 
+1 Bayou                                        | BG     | dual_original        t1 | untapped | 
+1 Savannah                                     | GW     | dual_original        t1 | untapped | 
+1 Starting Town                                | BGRUW  | conditional_untapped t2 | untapped | 
+1 Brokers Hideout                              | WUG    | fetch                t1 | TAPPED   | 
+1 Foreboding Landscape                         | UBG    | fetch                t1 | TAPPED   | 
+1 Tranquil Landscape                           | WUG    | fetch                t1 | TAPPED   | 
+1 Deceptive Landscape                          | WBG    | fetch                t1 | TAPPED   | 
+1 Temple of the Dragon Queen                   | BGRUW  | filter               t2 | TAPPED   | 
+1 Murmuring Bosk                               | BGW    | pain                 t2 | TAPPED   | 
+1 Grand Coliseum                               | BGRUW  | pain                 t2 | TAPPED   | 
+2 Forest                                       | G      | basic                t4 | untapped | 
+2 Plains                                       | W      | basic                t4 | untapped | 
+2 Island                                       | U      | basic                t4 | untapped | 
+2 Swamp                                        | B      | basic                t4 | untapped | 

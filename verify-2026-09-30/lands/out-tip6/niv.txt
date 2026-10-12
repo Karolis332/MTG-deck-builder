@@ -1,0 +1,21 @@
+# niv — {"format":"commander","commanderName":"Niv-Mizzet Reborn","maxDeckPrice":150,"bracket":2} (1824 ms) engine C:/Users/QuLeR/mtg-wt-lands
+strategy midrange tribal - size 99
+lands 38 (real 38, mdfc-spell 0, basics 28, nonbasic 10) untapped-T1-3 38/38 = 100 %
+sources(land)/target: B 12(+12 rocks)/24 pips 20 worst {1}{B}{B} | G 15(+9 rocks)/17 pips 23 worst {G}{U} | R 11(+12 rocks)/22 pips 20 worst {2}{R}{R} | U 11(+12 rocks)/17 pips 18 worst {G}{U} | W 14(+12 rocks)/22 pips 19 worst {1}{W}{W}{U}
+health {"grade":"A","realLands":38,"tappedLands":5,"tappedRatio":0.13,"pipsByColor":{"W":18,"U":17,"B":19,"R":18,"G":22},"drawCount":25,"drawEngineCount":17,"rampCount":19,"fakeLands":[],"warnings":[],"deficiencies":[]} price $148.92 bracket 2->2
+
+1 Command Tower                                | BGRUW  | utility              t3 | untapped | 
+1 Exotic Orchard                               | BGRUW  | utility              t3 | untapped | 
+1 Godless Shrine                               | BW     | shock                t1 | untapped | 
+1 Hallowed Fountain                            | UW     | shock                t1 | untapped | 
+1 Stomping Ground                              | GR     | shock                t1 | untapped | 
+1 Overgrown Tomb                               | BG     | shock                t1 | untapped | 
+1 Temple Garden                                | GW     | shock                t1 | untapped | 
+1 Horizon of Progress                          | BGRUW  | utility              t3 | untapped | 
+1 Glimmervoid                                  | BGRUW  | utility              t3 | untapped | 
+1 Crystal Quarry                               | BGRUW  | utility              t3 | untapped | 
+5 Swamp                                        | B      | basic                t4 | untapped | 
+7 Forest                                       | G      | basic                t4 | untapped | 
+5 Mountain                                     | R      | basic                t4 | untapped | 
+5 Island                                       | U      | basic                t4 | untapped | 
+6 Plains                                       | W      | basic                t4 | untapped | 

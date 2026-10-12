@@ -1,0 +1,84 @@
+# meren — {"format":"commander","commanderName":"Meren of Clan Nel Toth","useCollection":true,"userId":1,"collectionSource":"paper"} (1863 ms) engine C:/Users/QuLeR/mtg-wt-lands
+strategy aristocrats tribal - size 99
+lands 38 (real 34, mdfc-spell 4, basics 20, nonbasic 14) untapped-T1-3 33/34 = 97 %
+sources(land)/target: B 24(+2 rocks)/26 pips 51 worst {3}{B}{B}{B} | G 22(+5 rocks)/24 pips 24 worst {1}{G}{G}
+health {"grade":"A","realLands":34,"tappedLands":8,"tappedRatio":0.21,"pipsByColor":{"W":0,"U":0,"B":50,"R":0,"G":23},"drawCount":19,"drawEngineCount":15,"rampCount":13,"fakeLands":[],"warnings":[],"deficiencies":[]} price $0.00 bracket null->2
+
+1 Command Tower                                | BGRUW  | utility              t3 | untapped | 
+1 Exotic Orchard                               | BGRUW  | utility              t3 | untapped | 
+1 Bloodstained Mire                            | BR     | fetch                t1 | untapped | 
+1 Windswept Heath                              | WG     | fetch                t1 | untapped | 
+1 Wooded Foothills                             | RG     | fetch                t1 | untapped | 
+1 Overgrown Tomb                               | BG     | shock                t1 | untapped | 
+1 Woodland Cemetery                            | BG     | check                t2 | untapped | 
+1 Mana Confluence                              | BGRUW  | pain                 t2 | untapped | 
+1 Llanowar Wastes                              | BG     | pain                 t2 | untapped | 
+1 Twilight Mire                                | BG     | utility              t3 | untapped | 
+1 Necroblossom Snarl                           | BG     | filter               t2 | TAPPED   | 
+1 Viridescent Bog                              | BG     | utility              t3 | untapped | 
+1 Blooming Marsh                               | BG     | fast                 t2 | untapped | 
+1 Ifnir Deadlands                              | B      | pain                 t2 | untapped | 
+11 Swamp                                        | B      | basic                t4 | untapped | 
+9 Forest                                       | G      | basic                t4 | untapped | 
+1 Disciple of Freyalise // Garden of Freyalise | G      | shock                t1 | untapped | mdfc-spell 
+1 Boggart Trawler // Boggart Bog               | B      | shock                t1 | untapped | mdfc-spell 
+1 Bridgeworks Battle // Tanglespan Bridgeworks | (G)    | shock                t1 | untapped | mdfc-spell 
+1 Revitalizing Repast // Old-Growth Grove      | (BG)   | tapped               t4 | TAPPED   | mdfc-spell 
+
+--- owned paper nonbasic CI-legal lands benched: 56
+Path of Ancestry                             | BGRUW  | temple               t3 | TAPPED   | r14
+Rogue's Passage                              | C      | utility              t3 | untapped | r18
+Evolving Wilds                               |        | utility              t3 | TAPPED   | r19
+Bojuka Bog                                   | B      | tapped               t4 | TAPPED   | r24
+Terramorphic Expanse                         |        | utility              t3 | TAPPED   | r28
+Myriad Landscape                             | C      | tapped               t4 | TAPPED   | r31
+Fabled Passage                               |        | utility              t3 | TAPPED   | r44
+Temple of the False God                      | C      | utility              t3 | untapped | r82
+Mosswort Bridge                              | G      | tapped               t4 | TAPPED   | r195
+Ash Barrens                                  | C      | utility              t3 | untapped | r210
+Golgari Rot Farm                             | BG     | bounce               t3 | TAPPED   | r335
+Temple of Malady                             | BG     | temple               t3 | TAPPED   | r368
+High Market                                  | C      | utility              t3 | untapped | r424
+Nesting Grounds                              | C      | utility              t3 | untapped | r560
+Opal Palace                                  | BCGRUW | utility              t3 | untapped | r680
+Vernal Fen                                   | BG     | tapped               t4 | untapped | r687
+Mortuary Mire                                | B      | tapped               t4 | TAPPED   | r699
+Riveteers Overlook                           |        | fetch                t3 | TAPPED   | r716
+Jungle Hollow                                | BG     | gainland             t4 | TAPPED   | r787
+Escape Tunnel                                |        | utility              t3 | TAPPED   | r797
+Blighted Woodland                            | C      | utility              t3 | untapped | r929
+Cabaretti Courtyard                          |        | fetch                t3 | TAPPED   | r969
+Witch's Clinic                               | C      | utility              t3 | untapped | r1068
+Maestros Theater                             |        | fetch                t3 | TAPPED   | r1281
+Haunted Mire                                 | BG     | tapped               t4 | TAPPED   | r1299
+Brokers Hideout                              |        | fetch                t3 | TAPPED   | r1311
+Muraganda Raceway                            | C      | utility              t3 | untapped | r1427
+Arid Archway                                 | C      | bounce               t3 | TAPPED   | r1497
+Radiant Fountain                             | C      | utility              t3 | untapped | r1552
+Ba Sing Se                                   | G      | tapped               t4 | untapped | r1664
+Crypt of Agadeem                             | B      | tapped               t4 | TAPPED   | r1713
+Great Hall of the Citadel                    | BCGRUW | utility              t3 | untapped | r1820
+Festering Thicket                            | BG     | tapped               t4 | TAPPED   | r1890
+Conduit Pylons                               | BCGRUW | utility              t3 | untapped | r2012
+Grim Backwoods                               | C      | utility              t3 | untapped | r2085
+Hidden Grotto                                | BCGRUW | utility              t3 | untapped | r2257
+Manor Gate                                   | BGRUW  | tapped               t4 | TAPPED   | r2483
+Gingerbread Cabin                            | G      | gainland             t4 | untapped | r2865
+Mudflat Village                              | BC     | utility              t3 | untapped | r2948
+Rumble Arena                                 | BCGRUW | utility              t3 | untapped | r3027
+Tangled Florahedron // Tangled Vale          | G      | tapped               t4 | TAPPED   | r3235
+Turbulent Fen                                | BG     | tapped               t4 | untapped | r3378
+Study Hall                                   | BCGRUW | utility              t3 | untapped | r3566
+Interplanar Beacon                           | BCGRUW | utility              t3 | untapped | r4280
+Mirage Mesa                                  | BGRUW  | tapped               t4 | TAPPED   | r4325
+Festering Gulch                              | BG     | tapped               t4 | TAPPED   | r5382
+Realm of Koh                                 | B      | tapped               t4 | untapped | r5837
+Sandstorm Verge                              | C      | utility              t3 | untapped | r6410
+Witherbloom Campus                           | BG     | temple               t3 | TAPPED   | r6501
+Titan's Grave                                | BG     | tapped               t4 | TAPPED   | r7208
+Sapseep Forest                               | G      | gainland             t4 | TAPPED   | r7213
+Plaza of Harmony                             | BCGRUW | utility              t3 | untapped | r7624
+Tarnation Vista                              | BGRUW  | tapped               t4 | TAPPED   | r9184
+Skycoach Waypoint                            | C      | utility              t3 | untapped | r10263
+Base Camp                                    | BCGRUW | tapped               t4 | TAPPED   | r11109
+Formidable Commons                           | BG     | tapped               t4 | untapped | r26403

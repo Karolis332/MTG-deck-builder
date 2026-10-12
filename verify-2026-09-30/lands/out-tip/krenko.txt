@@ -1,0 +1,23 @@
+# krenko — {"format":"brawl","commanderName":"Krenko, Mob Boss"} (988 ms) engine C:/Users/QuLeR/mtg-wt-lands
+strategy tribal tribal goblin size 99
+lands 38 (real 35, mdfc-spell 3, basics 22, nonbasic 13) untapped-T1-3 35/35 = 100 %
+sources(land)/target: R 31(+6 rocks)/26 pips 63 worst {R}{R}
+health {"grade":"A","realLands":35,"tappedLands":6,"tappedRatio":0.16,"pipsByColor":{"W":0,"U":0,"B":0,"R":61,"G":0},"drawCount":14,"drawEngineCount":9,"rampCount":10,"fakeLands":[],"warnings":[],"deficiencies":[]} price $407.52 bracket null->2
+
+1 Cavern of Souls                              | (BCGRUW) | tribal               t2 | untapped | 
+1 Three Tree City                              | BGRUW  | tribal               t2 | untapped | 
+1 Prismatic Vista                              | R      | utility              t3 | untapped | 
+1 Arena of Glory                               | R      | check                t2 | untapped | 
+1 Great Furnace                                | R      | artifact             t2 | untapped | 
+1 Sokenzan, Crucible of Defiance               | R      | channel              t2 | untapped | 
+1 Castle Embereth                              | R      | check                t2 | untapped | 
+1 Fire Nation Palace                           | R      | tapped               t4 | untapped | 
+1 Mutavault                                    | (C)    | creature_land        t2 | untapped | 
+1 Inkmoth Nexus                                | (C)    | creature_land        t2 | untapped | 
+1 Blinkmoth Nexus                              | (C)    | creature_land        t2 | untapped | 
+1 Barbarian Ring                               | (R)    | pain                 t2 | untapped | 
+1 Fogwell's Gym                                | R      | pain                 t2 | untapped | 
+22 Mountain                                     | R      | basic                t4 | untapped | 
+1 Pinnacle Monk // Mystic Peak                 | R      | shock                t1 | untapped | mdfc-spell 
+1 Sundering Eruption // Volcanic Fissure       | (R)    | shock                t1 | untapped | mdfc-spell 
+1 Shatterskull Smashing // Shatterskull, the Hammer Pass | (R)    | shock                t1 | untapped | mdfc-spell 

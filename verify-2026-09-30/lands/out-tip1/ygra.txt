@@ -1,0 +1,28 @@
+# ygra — {"format":"brawl","commanderName":"Ygra, Eater of All"} (1486 ms) engine C:/Users/QuLeR/mtg-wt-lands
+strategy aggro tribal - size 99
+lands 40 (real 35, mdfc-spell 5, basics 20, nonbasic 15) untapped-T1-3 33/35 = 94 %
+sources(land)/target: B 26(+9 rocks)/24 pips 27 worst {1}{B}{B} | G 23(+9 rocks)/22 pips 31 worst {2}{G}{G}
+health {"grade":"A","realLands":35,"tappedLands":12,"tappedRatio":0.3,"pipsByColor":{"W":0,"U":0,"B":25,"R":0,"G":30},"drawCount":21,"drawEngineCount":11,"rampCount":19,"fakeLands":[],"warnings":[],"deficiencies":[]} price $364.47 bracket null->2
+
+1 Command Tower                                | BGRUW  | utility              t3 | untapped | 
+1 Verdant Catacombs                            | BG     | fetch                t1 | untapped | 
+1 Overgrown Tomb                               | BG     | shock                t1 | untapped | 
+1 Woodland Cemetery                            | BG     | check                t2 | untapped | 
+1 Mana Confluence                              | BGRUW  | pain                 t2 | untapped | 
+1 Llanowar Wastes                              | BG     | pain                 t2 | untapped | 
+1 Reflecting Pool                              | BGRUW  | utility              t3 | untapped | 
+1 Deathcap Glade                               | BG     | slow                 t2 | untapped | 
+1 Necroblossom Snarl                           | BG     | filter               t2 | TAPPED   | 
+1 Wastewood Verge                              | BG     | verge                t2 | untapped | 
+1 Darkbore Pathway // Slitherbore Pathway      | BG     | pathway              t2 | untapped | 
+1 Midgar, City of Mako // Reactor Raid         | (B)    | tapped               t4 | TAPPED   | allowlisted (arsenal/commander stats): Midgar, City of Mako // Reactor Raid
+1 Blooming Marsh                               | BG     | fast                 t2 | untapped | 
+1 Nurturing Peatland                           | BG     | pain                 t2 | untapped | 
+1 Multiversal Passage                          | B      | shock                t1 | untapped | 
+11 Swamp                                        | B      | basic                t4 | untapped | 
+9 Forest                                       | G      | basic                t4 | untapped | 
+1 Fell the Profane // Fell Mire                | (B)    | shock                t1 | untapped | mdfc-spell 
+1 Disciple of Freyalise // Garden of Freyalise | G      | shock                t1 | untapped | mdfc-spell 
+1 Boggart Trawler // Boggart Bog               | B      | shock                t1 | untapped | mdfc-spell 
+1 Revitalizing Repast // Old-Growth Grove      | (BG)   | tapped               t4 | TAPPED   | mdfc-spell allowlisted (arsenal/commander stats): Revitalizing Repast // Old-Growth Grove
+1 Agadeem's Awakening // Agadeem, the Undercrypt | (B)    | shock                t1 | untapped | mdfc-spell 

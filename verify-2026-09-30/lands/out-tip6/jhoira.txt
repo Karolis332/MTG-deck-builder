@@ -1,0 +1,94 @@
+# jhoira — {"format":"brawl","commanderName":"Jhoira, Weatherlight Captain","useCollection":true,"userId":1,"collectionSource":"arena"} (1643 ms) engine C:/Users/QuLeR/mtg-wt-lands
+strategy spellslinger tribal - size 99
+lands 38 (real 34, mdfc-spell 4, basics 14, nonbasic 20) untapped-T1-3 34/34 = 100 %
+sources(land)/target: R 21(+6 rocks)/24 pips 28 worst {1}{R}{R} | U 19(+5 rocks)/26 pips 28 worst {U}{U}
+health {"grade":"A","realLands":34,"tappedLands":13,"tappedRatio":0.34,"pipsByColor":{"W":0,"U":25,"B":0,"R":27,"G":0},"drawCount":15,"drawEngineCount":6,"rampCount":12,"fakeLands":[],"warnings":[],"deficiencies":[]} price $0.00 bracket null->4
+
+1 Command Tower                                | BGRUW  | utility              t3 | untapped | 
+1 Flooded Strand                               | WU     | fetch                t1 | untapped | 
+1 Misty Rainforest                             | UG     | fetch                t1 | untapped | 
+1 Scalding Tarn                                | UR     | fetch                t1 | untapped | 
+1 Steam Vents                                  | RU     | shock                t1 | untapped | 
+1 Otawara, Soaring City                        | U      | channel              t2 | untapped | 
+1 Stormcarved Coast                            | RU     | slow                 t2 | untapped | 
+1 Seat of the Synod                            | U      | artifact             t2 | untapped | 
+1 Arena of Glory                               | R      | check                t2 | untapped | 
+1 Great Furnace                                | R      | artifact             t2 | untapped | 
+1 Mistrise Village                             | U      | check                t2 | untapped | 
+1 Riverpyre Verge                              | RU     | verge                t2 | untapped | 
+1 Archway of Innovation                        | U      | check                t2 | untapped | 
+1 Sokenzan, Crucible of Defiance               | R      | channel              t2 | untapped | 
+1 Spirebluff Canal                             | RU     | fast                 t2 | untapped | 
+1 Multiversal Passage                          | R      | shock                t1 | untapped | 
+1 Cori Mountain Monastery                      | R      | check                t2 | untapped | 
+1 Thran Portal                                 | R      | fast                 t2 | untapped | 
+1 Soulstone Sanctuary                          | (C)    | creature_land        t2 | untapped | 
+1 Hall of Echoes                               | (C)    | creature_land        t2 | untapped | 
+8 Mountain                                     | R      | basic                t4 | untapped | 
+6 Island                                       | U      | basic                t4 | untapped | 
+1 Sink into Stupor // Soporific Springs        | (U)    | shock                t1 | untapped | mdfc-spell 
+1 Pinnacle Monk // Mystic Peak                 | R      | shock                t1 | untapped | mdfc-spell 
+1 Hydroelectric Specimen // Hydroelectric Laboratory | U      | shock                t1 | untapped | mdfc-spell 
+1 Sundering Eruption // Volcanic Fissure       | (R)    | shock                t1 | untapped | mdfc-spell 
+
+--- owned arena nonbasic CI-legal lands benched: 109
+Reliquary Tower                              | C      | utility              t3 | untapped | r10
+Rogue's Passage                              | C      | utility              t3 | untapped | r18
+Evolving Wilds                               |        | utility              t3 | TAPPED   | r19
+Terramorphic Expanse                         |        | utility              t3 | TAPPED   | r28
+Fabled Passage                               |        | utility              t3 | TAPPED   | r44
+Urborg, Tomb of Yawgmoth                     | B      | utility              t3 | untapped | r75
+Cavern of Souls                              | BCGRUW | tribal               t2 | untapped | r111
+Mystic Sanctuary                             | U      | tapped               t4 | untapped | r174
+Gemstone Caverns                             | BCGRUW | utility              t3 | untapped | r180
+Buried Ruin                                  | C      | utility              t3 | untapped | r193
+Karn's Bastion                               | C      | utility              t3 | untapped | r206
+Ash Barrens                                  | C      | utility              t3 | untapped | r210
+Secluded Courtyard                           | BCGRUW | tribal               t2 | untapped | r219
+Unclaimed Territory                          | BCGRUW | tribal               t2 | untapped | r247
+Inventors' Fair                              | C      | utility              t3 | untapped | r267
+Darksteel Citadel                            | C      | artifact             t2 | untapped | r284
+Temple of Epiphany                           | RU     | temple               t3 | TAPPED   | r291
+Emergence Zone                               | C      | utility              t3 | untapped | r539
+Bonders' Enclave                             | C      | utility              t3 | untapped | r548
+Nesting Grounds                              | C      | utility              t3 | untapped | r560
+Thespian's Stage                             | C      | utility              t3 | untapped | r579
+Thundering Falls                             | RU     | tapped               t4 | TAPPED   | r629
+Starting Town                                | BCGRUW | conditional_untapped t2 | untapped | r714
+Escape Tunnel                                |        | utility              t3 | TAPPED   | r797
+Cabaretti Courtyard                          |        | fetch                t3 | TAPPED   | r969
+Mines of Moria                               | R      | tapped               t4 | untapped | r998
+Thriving Isle                                | BGRUW  | tapped               t4 | TAPPED   | r1008
+Swiftwater Cliffs                            | RU     | gainland             t4 | TAPPED   | r1066
+Lonely Sandbar                               | U      | tapped               t4 | TAPPED   | r1141
+Thriving Bluff                               | BGRUW  | tapped               t4 | TAPPED   | r1201
+Uthros, Titanic Godcore                      | U      | tapped               t4 | TAPPED   | r1310
+Brokers Hideout                              |        | fetch                t3 | TAPPED   | r1311
+Valakut, the Molten Pinnacle                 | R      | tapped               t4 | TAPPED   | r1320
+Secret Tunnel                                | C      | utility              t3 | untapped | r1328
+Lindblum, Industrial Regency // Mage Siege   | R      | tapped               t4 | TAPPED   | r1401
+Shatterskull Smashing // Shatterskull, the Hammer Pass | R      | shock                t1 | untapped | r1404
+Vibrant Cityscape                            |        | utility              t3 | TAPPED   | r1405
+Dark Depths                                  |        | utility              t3 | untapped | r1471
+Arid Archway                                 | C      | bounce               t3 | TAPPED   | r1497
+Adventurer's Inn                             | C      | utility              t3 | untapped | r1512
+Ojer Axonil, Deepest Might // Temple of Power | R      | pathway              t2 | untapped | r1537
+Deserted Temple                              | C      | utility              t3 | untapped | r1584
+Brass's Tunnel-Grinder // Tecutlan, the Searing Rift | R      | pathway              t2 | untapped | r1588
+Fomori Vault                                 | C      | utility              t3 | untapped | r1606
+Fire Nation Palace                           | R      | tapped               t4 | untapped | r1668
+Valgavoth's Lair                             | BGRUW  | tapped               t4 | TAPPED   | r1695
+Eldrazi Temple                               | C      | utility              t3 | untapped | r1705
+Izzet Guildgate                              | RU     | tapped               t4 | TAPPED   | r1796
+Great Hall of the Citadel                    | BCGRUW | utility              t3 | untapped | r1820
+Terrain Generator                            | C      | utility              t3 | untapped | r1880
+Conduit Pylons                               | BCGRUW | utility              t3 | untapped | r2012
+Amonkhet Raceway                             | C      | utility              t3 | untapped | r2346
+Agna Qel'a                                   | U      | tapped               t4 | untapped | r2482
+Baldur's Gate                                | BCGRUW | utility              t3 | untapped | r2565
+Gateway Plaza                                | BGRUW  | tapped               t4 | TAPPED   | r2621
+Spikefield Hazard // Spikefield Cave         | R      | tapped               t4 | TAPPED   | r2925
+Maze's End                                   | C      | tapped               t4 | TAPPED   | r2951
+Rumble Arena                                 | BCGRUW | utility              t3 | untapped | r3027
+Eclipsed Realms                              | BCGRUW | tribal               t2 | untapped | r3167
+Ojer Pakpatiq, Deepest Epoch // Temple of Cyclical Time | U      | pathway              t2 | untapped | r3292

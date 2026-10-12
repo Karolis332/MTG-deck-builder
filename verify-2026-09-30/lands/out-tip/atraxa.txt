@@ -1,0 +1,44 @@
+# atraxa — {"format":"commander","commanderName":"Atraxa, Praetors' Voice"} (1231 ms) engine C:/Users/QuLeR/mtg-wt-lands
+strategy superfriends tribal - size 99
+lands 38 (real 36, mdfc-spell 2, basics 4, nonbasic 32) untapped-T1-3 36/36 = 100 %
+sources(land)/target: B 20(+7 rocks)/22 pips 15 worst {2}{B}{B} | G 23(+7 rocks)/33 pips 25 worst {G}{G}{G} | U 21(+5 rocks)/24 pips 19 worst {1}{U}{U} | W 21(+5 rocks)/22 pips 15 worst {2}{W}{W}
+health {"grade":"A","realLands":36,"tappedLands":10,"tappedRatio":0.26,"pipsByColor":{"W":14,"U":17,"B":13,"R":0,"G":24},"drawCount":14,"drawEngineCount":16,"rampCount":12,"fakeLands":[],"warnings":[],"deficiencies":[]} price $2604.28 bracket null->2
+
+1 Command Tower                                | BGRUW  | utility              t3 | untapped | 
+1 Exotic Orchard                               | BGRUW  | utility              t3 | untapped | 
+1 Polluted Delta                               | UB     | fetch                t1 | untapped | 
+1 Flooded Strand                               | WU     | fetch                t1 | untapped | 
+1 Misty Rainforest                             | UG     | fetch                t1 | untapped | 
+1 Windswept Heath                              | WG     | fetch                t1 | untapped | 
+1 Verdant Catacombs                            | BG     | fetch                t1 | untapped | 
+1 Watery Grave                                 | BU     | shock                t1 | untapped | 
+1 Marsh Flats                                  | WB     | fetch                t1 | untapped | 
+1 Breeding Pool                                | GU     | shock                t1 | untapped | 
+1 Godless Shrine                               | BW     | shock                t1 | untapped | 
+1 Hallowed Fountain                            | UW     | shock                t1 | untapped | 
+1 Overgrown Tomb                               | BG     | shock                t1 | untapped | 
+1 Temple Garden                                | GW     | shock                t1 | untapped | 
+1 City of Brass                                | BGRUW  | pain                 t2 | untapped | 
+1 Hinterland Harbor                            | GU     | check                t2 | untapped | 
+1 Mana Confluence                              | BGRUW  | pain                 t2 | untapped | 
+1 Sunpetal Grove                               | GW     | check                t2 | untapped | 
+1 Reflecting Pool                              | BGRUW  | utility              t3 | untapped | 
+1 Prismatic Vista                              | BGUW   | utility              t3 | untapped | 
+1 Underground Sea                              | BU     | dual_original        t1 | untapped | 
+1 Tropical Island                              | GU     | dual_original        t1 | untapped | 
+1 Tundra                                       | UW     | dual_original        t1 | untapped | 
+1 Scrubland                                    | BW     | dual_original        t1 | untapped | 
+1 Bayou                                        | BG     | dual_original        t1 | untapped | 
+1 Savannah                                     | GW     | dual_original        t1 | untapped | 
+1 Forbidden Orchard                            | BGRUW  | utility              t3 | untapped | 
+1 Horizon of Progress                          | BGRUW  | utility              t3 | untapped | 
+1 Great Hall of the Citadel                    | (BCGRUW) | utility              t3 | untapped | 
+1 Interplanar Beacon                           | (BCGRUW) | utility              t3 | untapped | 
+1 Glimmervoid                                  | BGRUW  | utility              t3 | untapped | 
+1 Meteor Crater                                | BGRUW  | utility              t3 | untapped | 
+1 Swamp                                        | B      | basic                t4 | untapped | 
+1 Forest                                       | G      | basic                t4 | untapped | 
+1 Island                                       | U      | basic                t4 | untapped | 
+1 Plains                                       | W      | basic                t4 | untapped | 
+1 Disciple of Freyalise // Garden of Freyalise | G      | shock                t1 | untapped | mdfc-spell 
+1 Bridgeworks Battle // Tanglespan Bridgeworks | (G)    | shock                t1 | untapped | mdfc-spell 

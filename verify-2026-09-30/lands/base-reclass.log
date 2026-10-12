@@ -1,0 +1,11 @@
+tam             lands 38 real 34 basics  8 untapped 33/34 | B11/24 G14/17 R12/17 U19/26 W11/19 | 3088 ms
+tatyova         lands 38 real 34 basics 20 untapped 33/34 | G26/24 U19/26 | 1873 ms
+aeve            lands 38 real 35 basics 28 untapped 35/35 | G31/33 | 1973 ms
+meren           lands 38 real 35 basics 20 untapped 33/35 | B28/26 G20/24 | 2294 ms
+jhoira          lands 38 real 34 basics 20 untapped 34/34 | R20/24 U23/26 | 1940 ms
+atraxa          lands 38 real 34 basics  8 untapped 32/34 | B19/22 G20/33 U18/24 W19/22 | 1117 ms
+niv             lands 38 real 38 basics 31 untapped 38/38 | B10/24 G13/17 R8/22 U8/17 W12/22 | 2102 ms
+krenko          lands 38 real 35 basics 28 untapped 35/35 | R36/26 | 1161 ms
+tymna-thrasios  lands 39 real 38 basics  9 untapped 36/38 | B22/30 W22/26 G18/19 U20/26 | 1089 ms
+ygra            lands 40 real 35 basics 20 untapped 33/35 | B24/24 G24/22 | 1293 ms
+exit 0

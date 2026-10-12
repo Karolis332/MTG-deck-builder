@@ -1,0 +1,76 @@
+# aeve — {"format":"brawl","commanderName":"Aeve, Progenitor Ooze","useCollection":true,"userId":1,"collectionSource":"arena"} (1611 ms) engine C:/Users/QuLeR/mtg-wt-lands
+strategy tribal tribal ooze size 99
+lands 38 (real 36, mdfc-spell 2, basics 31, nonbasic 5) untapped-T1-3 36/36 = 100 %
+sources(land)/target: G 34(+9 rocks)/33 pips 58 worst {G}{G}{G}
+health {"grade":"A","realLands":36,"tappedLands":3,"tappedRatio":0.08,"pipsByColor":{"W":0,"U":0,"B":0,"R":0,"G":55},"drawCount":19,"drawEngineCount":9,"rampCount":19,"fakeLands":[],"warnings":[],"deficiencies":[]} price $0.00 bracket null->3
+
+1 Misty Rainforest                             | UG     | fetch                t1 | untapped | 
+1 Cavern of Souls                              | (BCGRUW) | tribal               t2 | untapped | 
+1 Ba Sing Se                                   | G      | tapped               t4 | untapped | 
+1 Soulstone Sanctuary                          | (C)    | creature_land        t2 | untapped | 
+1 Hall of Echoes                               | (C)    | creature_land        t2 | untapped | 
+31 Forest                                       | G      | basic                t4 | untapped | 
+1 Disciple of Freyalise // Garden of Freyalise | G      | shock                t1 | untapped | mdfc-spell 
+1 Bridgeworks Battle // Tanglespan Bridgeworks | (G)    | shock                t1 | untapped | mdfc-spell 
+
+--- owned arena nonbasic CI-legal lands benched: 89
+Command Tower                                | BGRUW  | utility              t3 | untapped | r2
+Reliquary Tower                              | C      | utility              t3 | untapped | r10
+Rogue's Passage                              | C      | utility              t3 | untapped | r18
+Evolving Wilds                               |        | utility              t3 | TAPPED   | r19
+Terramorphic Expanse                         |        | utility              t3 | TAPPED   | r28
+Flooded Strand                               |        | fetch                t1 | untapped | r38
+Fabled Passage                               |        | utility              t3 | TAPPED   | r44
+Scalding Tarn                                |        | fetch                t1 | untapped | r49
+Urborg, Tomb of Yawgmoth                     | B      | utility              t3 | untapped | r75
+Gemstone Caverns                             | BCGRUW | utility              t3 | untapped | r180
+Buried Ruin                                  | C      | utility              t3 | untapped | r193
+Karn's Bastion                               | C      | utility              t3 | untapped | r206
+Ash Barrens                                  | C      | utility              t3 | untapped | r210
+Secluded Courtyard                           | BCGRUW | tribal               t2 | untapped | r219
+Unclaimed Territory                          | BCGRUW | tribal               t2 | untapped | r247
+Inventors' Fair                              | C      | utility              t3 | untapped | r267
+Darksteel Citadel                            | C      | artifact             t2 | untapped | r284
+Emergence Zone                               | C      | utility              t3 | untapped | r539
+Bonders' Enclave                             | C      | utility              t3 | untapped | r548
+Nesting Grounds                              | C      | utility              t3 | untapped | r560
+Growing Rites of Itlimoc // Itlimoc, Cradle of the Sun | G      | pathway              t2 | untapped | r572
+Thespian's Stage                             | C      | utility              t3 | untapped | r579
+Starting Town                                | BCGRUW | conditional_untapped t2 | untapped | r714
+Escape Tunnel                                |        | utility              t3 | TAPPED   | r797
+Evendo, Waking Haven                         | G      | tapped               t4 | TAPPED   | r926
+Cabaretti Courtyard                          |        | fetch                t3 | TAPPED   | r969
+Thriving Grove                               | BGRUW  | tapped               t4 | TAPPED   | r1177
+Brokers Hideout                              |        | fetch                t3 | TAPPED   | r1311
+Secret Tunnel                                | C      | utility              t3 | untapped | r1328
+Vibrant Cityscape                            |        | utility              t3 | TAPPED   | r1405
+Dark Depths                                  |        | utility              t3 | untapped | r1471
+Arid Archway                                 | C      | bounce               t3 | TAPPED   | r1497
+Adventurer's Inn                             | C      | utility              t3 | untapped | r1512
+Deserted Temple                              | C      | utility              t3 | untapped | r1584
+Fomori Vault                                 | C      | utility              t3 | untapped | r1606
+Valgavoth's Lair                             | BGRUW  | tapped               t4 | TAPPED   | r1695
+Eldrazi Temple                               | C      | utility              t3 | untapped | r1705
+Great Hall of the Citadel                    | BCGRUW | utility              t3 | untapped | r1820
+Terrain Generator                            | C      | utility              t3 | untapped | r1880
+Conduit Pylons                               | BCGRUW | utility              t3 | untapped | r2012
+Multiversal Passage                          |        | shock                t1 | untapped | r2127
+Amonkhet Raceway                             | C      | utility              t3 | untapped | r2346
+Baldur's Gate                                | BCGRUW | utility              t3 | untapped | r2565
+Gateway Plaza                                | BGRUW  | tapped               t4 | TAPPED   | r2621
+Maze's End                                   | C      | tapped               t4 | TAPPED   | r2951
+Oakhollow Village                            | CG     | utility              t3 | untapped | r2957
+Rumble Arena                                 | BCGRUW | utility              t3 | untapped | r3027
+Eclipsed Realms                              | BCGRUW | tribal               t2 | untapped | r3167
+Tangled Florahedron // Tangled Vale          | G      | tapped               t4 | TAPPED   | r3235
+Daily Bugle Building                         | BCGRUW | utility              t3 | untapped | r3343
+Command Bridge                               | BGRUW  | tapped               t4 | TAPPED   | r3466
+Eden, Seat of the Sanctum                    | C      | utility              t3 | untapped | r3665
+Capital City                                 | BCGRUW | utility              t3 | untapped | r3723
+Secluded Starforge                           | C      | utility              t3 | untapped | r3790
+Avishkar Raceway                             | C      | utility              t3 | untapped | r3816
+Roadside Reliquary                           | C      | utility              t3 | untapped | r3901
+Interplanar Beacon                           | BCGRUW | utility              t3 | untapped | r4280
+Mirage Mesa                                  | BGRUW  | tapped               t4 | TAPPED   | r4325
+Jasmine Dragon Tea Shop                      | BCGRUW | utility              t3 | untapped | r4347
+Hashep Oasis                                 | CG     | pain                 t2 | untapped | r4409

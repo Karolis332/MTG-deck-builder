@@ -1,0 +1,2 @@
+niv             lands 38 real 38 basics 27 untapped 38/38 | B12/24 G18/17 R12/22 U13/17 W15/22 | 1818 ms
+tymna-thrasios  lands 39 real 38 basics  5 untapped 38/38 | B26/30 W25/26 G22/19 U22/26 | 891 ms

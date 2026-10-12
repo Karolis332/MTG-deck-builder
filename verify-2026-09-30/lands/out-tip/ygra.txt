@@ -1,0 +1,45 @@
+# ygra — {"format":"brawl","commanderName":"Ygra, Eater of All"} (1269 ms) engine C:/Users/QuLeR/mtg-wt-lands
+strategy aggro tribal - size 99
+lands 40 (real 33, mdfc-spell 7, basics 3, nonbasic 30) untapped-T1-3 31/33 = 94 %
+sources(land)/target: B 27(+9 rocks)/24 pips 27 worst {1}{B}{B} | G 20(+9 rocks)/22 pips 31 worst {2}{G}{G}
+health {"grade":"A","realLands":33,"tappedLands":17,"tappedRatio":0.43,"pipsByColor":{"W":0,"U":0,"B":25,"R":0,"G":30},"drawCount":21,"drawEngineCount":11,"rampCount":19,"fakeLands":[],"warnings":[],"deficiencies":[]} price $530.92 bracket null->2
+
+1 Command Tower                                | BGRUW  | utility              t3 | untapped | 
+1 Polluted Delta                               | UB     | fetch                t1 | untapped | 
+1 Bloodstained Mire                            | BR     | fetch                t1 | untapped | 
+1 Verdant Catacombs                            | BG     | fetch                t1 | untapped | 
+1 Marsh Flats                                  | WB     | fetch                t1 | untapped | 
+1 Overgrown Tomb                               | BG     | shock                t1 | untapped | 
+1 Boseiju, Who Endures                         | G      | channel              t2 | untapped | 
+1 Woodland Cemetery                            | BG     | check                t2 | untapped | 
+1 Mana Confluence                              | BGRUW  | pain                 t2 | untapped | 
+1 Llanowar Wastes                              | BG     | pain                 t2 | untapped | 
+1 Reflecting Pool                              | BGRUW  | utility              t3 | untapped | 
+1 Prismatic Vista                              | BG     | utility              t3 | untapped | 
+1 Takenuma, Abandoned Mire                     | B      | channel              t2 | untapped | 
+1 Deathcap Glade                               | BG     | slow                 t2 | untapped | 
+1 Necroblossom Snarl                           | BG     | filter               t2 | TAPPED   | 
+1 Vault of Whispers                            | B      | artifact             t2 | untapped | 
+1 Castle Locthwain                             | B      | check                t2 | untapped | 
+1 Wastewood Verge                              | BG     | verge                t2 | untapped | 
+1 Spymaster's Vault                            | B      | check                t2 | untapped | 
+1 Darkbore Pathway // Slitherbore Pathway      | BG     | pathway              t2 | untapped | 
+1 The Black Gate                               | B      | shock                t1 | untapped | 
+1 Midgar, City of Mako // Reactor Raid         | (B)    | tapped               t4 | TAPPED   | allowlisted (arsenal/commander stats): Midgar, City of Mako // Reactor Raid
+1 Westvale Abbey // Ormendahl, Profane Prince  | (C)    | pathway              t2 | untapped | 
+1 Blooming Marsh                               | BG     | fast                 t2 | untapped | 
+1 Tree of Tales                                | G      | artifact             t2 | untapped | 
+1 Nurturing Peatland                           | BG     | pain                 t2 | untapped | 
+1 Multiversal Passage                          | B      | shock                t1 | untapped | 
+1 Thran Portal                                 | B      | fast                 t2 | untapped | 
+1 Kishla Village                               | G      | check                t2 | untapped | 
+1 Meteor Crater                                | BGRUW  | utility              t3 | untapped | 
+2 Swamp                                        | B      | basic                t4 | untapped | 
+1 Forest                                       | G      | basic                t4 | untapped | 
+1 Fell the Profane // Fell Mire                | (B)    | shock                t1 | untapped | mdfc-spell 
+1 Disciple of Freyalise // Garden of Freyalise | G      | shock                t1 | untapped | mdfc-spell 
+1 Bridgeworks Battle // Tanglespan Bridgeworks | (G)    | shock                t1 | untapped | mdfc-spell 
+1 Revitalizing Repast // Old-Growth Grove      | (BG)   | tapped               t4 | TAPPED   | mdfc-spell allowlisted (arsenal/commander stats): Revitalizing Repast // Old-Growth Grove
+1 Turntimber Symbiosis // Turntimber, Serpentine Wood | (G)    | shock                t1 | untapped | mdfc-spell 
+1 Treasure Map // Treasure Cove                | (BCGRUW) | pathway              t2 | untapped | mdfc-spell 
+1 Tarrian's Journal // The Tomb of Aclazotz    | (B)    | pathway              t2 | untapped | mdfc-spell 

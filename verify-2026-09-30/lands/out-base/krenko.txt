@@ -1,0 +1,17 @@
+# krenko — {"format":"brawl","commanderName":"Krenko, Mob Boss"} (872 ms) engine C:/Users/QuLeR/mtg-audit-wt
+strategy tribal tribal goblin size 99
+lands 38 (real 35, mdfc-spell 3, basics 28, nonbasic 7) untapped-T1-3 35/35 = 100 %
+sources(land)/target: R 36(+7 rocks)/26 pips 63 worst {R}{R}
+health {"grade":"A","realLands":35,"tappedLands":5,"tappedRatio":0.13,"pipsByColor":{"W":0,"U":0,"B":0,"R":61,"G":0},"drawCount":14,"drawEngineCount":9,"rampCount":10,"fakeLands":[],"warnings":[],"deficiencies":[]} price $399.73 bracket null->2
+
+1 Bloodstained Mire                            | BR     | fetch                t1 | untapped | 
+1 Wooded Foothills                             | RG     | fetch                t1 | untapped | 
+1 Scalding Tarn                                | UR     | fetch                t1 | untapped | 
+1 Arid Mesa                                    | WR     | fetch                t1 | untapped | 
+1 Three Tree City                              | BGRUW  | tribal               t2 | untapped | 
+1 Arena of Glory                               | R      | check                t2 | untapped | 
+1 Castle Embereth                              | R      | check                t2 | untapped | 
+28 Mountain                                     | R      | basic                t4 | untapped | 
+1 Pinnacle Monk // Mystic Peak                 | R      | shock                t1 | untapped | mdfc-spell 
+1 Sundering Eruption // Volcanic Fissure       | (R)    | shock                t1 | untapped | mdfc-spell 
+1 Shatterskull Smashing // Shatterskull, the Hammer Pass | (R)    | shock                t1 | untapped | mdfc-spell 

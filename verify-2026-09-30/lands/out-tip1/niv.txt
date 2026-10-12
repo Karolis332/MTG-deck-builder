@@ -1,0 +1,18 @@
+# niv — {"format":"commander","commanderName":"Niv-Mizzet Reborn","maxDeckPrice":150,"bracket":2} (2226 ms) engine C:/Users/QuLeR/mtg-wt-lands
+strategy midrange tribal - size 99
+lands 38 (real 38, mdfc-spell 0, basics 31, nonbasic 7) untapped-T1-3 38/38 = 100 %
+sources(land)/target: B 9(+13 rocks)/24 pips 19 worst {1}{B}{B} | G 13(+10 rocks)/17 pips 23 worst {G}{U} | R 8(+13 rocks)/22 pips 19 worst {2}{R}{R} | U 9(+13 rocks)/17 pips 18 worst {G}{U} | W 12(+13 rocks)/22 pips 19 worst {1}{W}{W}{U}
+health {"grade":"A","realLands":38,"tappedLands":5,"tappedRatio":0.13,"pipsByColor":{"W":18,"U":17,"B":17,"R":17,"G":22},"drawCount":25,"drawEngineCount":17,"rampCount":20,"fakeLands":[],"warnings":[],"deficiencies":[]} price $144.48 bracket 2->2
+
+1 Command Tower                                | BGRUW  | utility              t3 | untapped | 
+1 Exotic Orchard                               | BGRUW  | utility              t3 | untapped | 
+1 Godless Shrine                               | BW     | shock                t1 | untapped | 
+1 Hallowed Fountain                            | UW     | shock                t1 | untapped | 
+1 Stomping Ground                              | GR     | shock                t1 | untapped | 
+1 Overgrown Tomb                               | BG     | shock                t1 | untapped | 
+1 Temple Garden                                | GW     | shock                t1 | untapped | 
+5 Swamp                                        | B      | basic                t4 | untapped | 
+8 Forest                                       | G      | basic                t4 | untapped | 
+5 Mountain                                     | R      | basic                t4 | untapped | 
+6 Island                                       | U      | basic                t4 | untapped | 
+7 Plains                                       | W      | basic                t4 | untapped | 

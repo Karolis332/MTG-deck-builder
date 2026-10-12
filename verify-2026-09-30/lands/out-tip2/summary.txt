@@ -1,0 +1,3 @@
+tam             lands 38 real 35 basics  8 untapped 34/35 | B15/24 G13/17 R10/17 U19/26 W11/19 | 2954 ms
+tatyova         lands 38 real 34 basics 20 untapped 33/34 | G25/24 U19/26 | 1879 ms
+meren           lands 38 real 34 basics 20 untapped 33/34 | B29/26 G17/24 | 1945 ms

@@ -1,0 +1,40 @@
+# atraxa — {"format":"commander","commanderName":"Atraxa, Praetors' Voice"} (1494 ms) engine C:/Users/QuLeR/mtg-wt-lands
+strategy superfriends tribal - size 99
+lands 38 (real 38, mdfc-spell 0, basics 8, nonbasic 30) untapped-T1-3 38/38 = 100 %
+sources(land)/target: B 23(+7 rocks)/22 pips 15 worst {2}{B}{B} | G 35(+7 rocks)/33 pips 25 worst {G}{G}{G} | U 25(+5 rocks)/24 pips 19 worst {1}{U}{U} | W 25(+5 rocks)/22 pips 15 worst {2}{W}{W}
+health {"grade":"A","realLands":38,"tappedLands":3,"tappedRatio":0.08,"pipsByColor":{"W":14,"U":17,"B":13,"R":0,"G":24},"drawCount":14,"drawEngineCount":16,"rampCount":12,"fakeLands":[],"warnings":[],"deficiencies":[]} price $1578.17 bracket null->2
+
+1 Command Tower                                | BGRUW  | utility              t3 | untapped | 
+1 Exotic Orchard                               | BGRUW  | utility              t3 | untapped | 
+1 Misty Rainforest                             | UG     | fetch                t1 | untapped | 
+1 Windswept Heath                              | WG     | fetch                t1 | untapped | 
+1 Verdant Catacombs                            | BG     | fetch                t1 | untapped | 
+1 Breeding Pool                                | GU     | shock                t1 | untapped | 
+1 Overgrown Tomb                               | BG     | shock                t1 | untapped | 
+1 Temple Garden                                | GW     | shock                t1 | untapped | 
+1 City of Brass                                | BGRUW  | pain                 t2 | untapped | 
+1 Mana Confluence                              | BGRUW  | pain                 t2 | untapped | 
+1 Reflecting Pool                              | BGRUW  | utility              t3 | untapped | 
+1 Prismatic Vista                              | BGUW   | utility              t3 | untapped | 
+1 Tropical Island                              | GU     | dual_original        t1 | untapped | 
+1 Bayou                                        | BG     | dual_original        t1 | untapped | 
+1 Savannah                                     | GW     | dual_original        t1 | untapped | 
+1 Forbidden Orchard                            | BGRUW  | utility              t3 | untapped | 
+1 Horizon of Progress                          | BGRUW  | utility              t3 | untapped | 
+1 Tarnished Citadel                            | BGRUW  | utility              t3 | untapped | 
+1 Glimmervoid                                  | BGRUW  | utility              t3 | untapped | 
+1 Lotus Vale                                   | BGRUW  | utility              t3 | untapped | 
+1 Meteor Crater                                | BGRUW  | utility              t3 | untapped | 
+1 Treva's Ruins                                | GUW    | utility              t3 | untapped | 
+1 Rainbow Vale                                 | BGRUW  | utility              t3 | untapped | 
+1 Thran Quarry                                 | BGRUW  | utility              t3 | untapped | 
+1 Undiscovered Paradise                        | BGRUW  | utility              t3 | untapped | 
+1 Archaeological Dig                           | BGRUW  | utility              t3 | untapped | 
+1 Rhystic Cave                                 | BGRUW  | utility              t3 | untapped | 
+1 Forsaken City                                | BGRUW  | utility              t3 | untapped | 
+1 Paliano, the High City                       | BGRUW  | utility              t3 | untapped | 
+1 Aysen Abbey                                  | GUW    | utility              t3 | untapped | 
+1 Swamp                                        | B      | basic                t4 | untapped | 
+5 Forest                                       | G      | basic                t4 | untapped | 
+1 Island                                       | U      | basic                t4 | untapped | 
+1 Plains                                       | W      | basic                t4 | untapped | 

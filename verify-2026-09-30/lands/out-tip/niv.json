@@ -1,0 +1,503 @@
+{
+ "key": "niv",
+ "opts": {
+  "format": "commander",
+  "commanderName": "Niv-Mizzet Reborn",
+  "maxDeckPrice": 150,
+  "bracket": 2
+ },
+ "ms": 1818,
+ "ci": [
+  "B",
+  "G",
+  "R",
+  "U",
+  "W"
+ ],
+ "strategy": "midrange",
+ "landCount": 38,
+ "realCount": 38,
+ "basicCount": 27,
+ "untappedCount": 38,
+ "landSources": {
+  "W": 15,
+  "U": 13,
+  "B": 12,
+  "R": 12,
+  "G": 18
+ },
+ "allSources": {
+  "W": 27,
+  "U": 25,
+  "B": 24,
+  "R": 24,
+  "G": 27
+ },
+ "target": {
+  "G": 17,
+  "W": 22,
+  "U": 17,
+  "B": 24,
+  "R": 22
+ },
+ "pips": {
+  "G": 24,
+  "W": 19,
+  "U": 19,
+  "B": 18,
+  "R": 19
+ },
+ "worst": {
+  "G": "{G}{U}",
+  "W": "{1}{W}{W}{U}",
+  "U": "{G}{U}",
+  "B": "{1}{B}{B}",
+  "R": "{2}{R}{R}"
+ },
+ "lands": [
+  {
+   "qty": 1,
+   "name": "Command Tower",
+   "front": true,
+   "colors": "BGRUW",
+   "untapped": true,
+   "cat": "utility",
+   "tier": 3,
+   "price": "0.56",
+   "rank": 2,
+   "note": ""
+  },
+  {
+   "qty": 1,
+   "name": "Exotic Orchard",
+   "front": true,
+   "colors": "BGRUW",
+   "untapped": true,
+   "cat": "utility",
+   "tier": 3,
+   "price": "0.26",
+   "rank": 9,
+   "note": ""
+  },
+  {
+   "qty": 1,
+   "name": "Hallowed Fountain",
+   "front": true,
+   "colors": "UW",
+   "untapped": true,
+   "cat": "shock",
+   "tier": 1,
+   "price": "6.98",
+   "rank": 61,
+   "note": ""
+  },
+  {
+   "qty": 1,
+   "name": "Stomping Ground",
+   "front": true,
+   "colors": "GR",
+   "untapped": true,
+   "cat": "shock",
+   "tier": 1,
+   "price": "6.43",
+   "rank": 70,
+   "note": ""
+  },
+  {
+   "qty": 1,
+   "name": "Overgrown Tomb",
+   "front": true,
+   "colors": "BG",
+   "untapped": true,
+   "cat": "shock",
+   "tier": 1,
+   "price": "8.20",
+   "rank": 71,
+   "note": ""
+  },
+  {
+   "qty": 1,
+   "name": "Temple Garden",
+   "front": true,
+   "colors": "GW",
+   "untapped": true,
+   "cat": "shock",
+   "tier": 1,
+   "price": "6.60",
+   "rank": 81,
+   "note": ""
+  },
+  {
+   "qty": 1,
+   "name": "Horizon of Progress",
+   "front": true,
+   "colors": "BGRUW",
+   "untapped": true,
+   "cat": "utility",
+   "tier": 3,
+   "price": "7.00",
+   "rank": 1526,
+   "note": ""
+  },
+  {
+   "qty": 1,
+   "name": "Glimmervoid",
+   "front": true,
+   "colors": "BGRUW",
+   "untapped": true,
+   "cat": "utility",
+   "tier": 3,
+   "price": "4.63",
+   "rank": 4749,
+   "note": ""
+  },
+  {
+   "qty": 1,
+   "name": "Crystal Quarry",
+   "front": true,
+   "colors": "BGRUW",
+   "untapped": true,
+   "cat": "utility",
+   "tier": 3,
+   "price": "1.44",
+   "rank": 5993,
+   "note": ""
+  },
+  {
+   "qty": 1,
+   "name": "Meteor Crater",
+   "front": true,
+   "colors": "BGRUW",
+   "untapped": true,
+   "cat": "utility",
+   "tier": 3,
+   "price": "3.38",
+   "rank": 7057,
+   "note": ""
+  },
+  {
+   "qty": 1,
+   "name": "Thran Quarry",
+   "front": true,
+   "colors": "BGRUW",
+   "untapped": true,
+   "cat": "utility",
+   "tier": 3,
+   "price": "4.76",
+   "rank": 14647,
+   "note": ""
+  },
+  {
+   "qty": 4,
+   "name": "Swamp",
+   "front": true,
+   "colors": "B",
+   "untapped": true,
+   "cat": "basic",
+   "tier": 4,
+   "price": "0.10",
+   "rank": null,
+   "note": ""
+  },
+  {
+   "qty": 8,
+   "name": "Forest",
+   "front": true,
+   "colors": "G",
+   "untapped": true,
+   "cat": "basic",
+   "tier": 4,
+   "price": "0.08",
+   "rank": null,
+   "note": ""
+  },
+  {
+   "qty": 4,
+   "name": "Mountain",
+   "front": true,
+   "colors": "R",
+   "untapped": true,
+   "cat": "basic",
+   "tier": 4,
+   "price": "0.09",
+   "rank": null,
+   "note": ""
+  },
+  {
+   "qty": 5,
+   "name": "Island",
+   "front": true,
+   "colors": "U",
+   "untapped": true,
+   "cat": "basic",
+   "tier": 4,
+   "price": "0.08",
+   "rank": null,
+   "note": ""
+  },
+  {
+   "qty": 6,
+   "name": "Plains",
+   "front": true,
+   "colors": "W",
+   "untapped": true,
+   "cat": "basic",
+   "tier": 4,
+   "price": "0.07",
+   "rank": null,
+   "note": ""
+  }
+ ],
+ "bench": [],
+ "health": {
+  "grade": "A",
+  "realLands": 38,
+  "tappedLands": 4,
+  "tappedRatio": 0.11,
+  "sourcesByColor": {
+   "W": 27,
+   "U": 25,
+   "B": 24,
+   "R": 24,
+   "G": 27
+  },
+  "pipsByColor": {
+   "W": 18,
+   "U": 18,
+   "B": 17,
+   "R": 17,
+   "G": 23
+  },
+  "drawCount": 25,
+  "drawEngineCount": 17,
+  "rampCount": 19,
+  "fakeLands": [],
+  "warnings": [],
+  "deficiencies": []
+ },
+ "price": {
+  "currency": "USD",
+  "total": 148.21,
+  "unpricedCount": 0,
+  "maxCardPrice": null,
+  "maxDeckPrice": 150,
+  "excludedByCardCap": 0,
+  "replacedForBudget": [
+   {
+    "out": "Bayou",
+    "in": "Forest",
+    "saved": 247.8
+   },
+   {
+    "out": "The Great Henge",
+    "in": "Centaur Nurturer",
+    "saved": 64.5
+   },
+   {
+    "out": "Scalding Tarn",
+    "in": "Plains",
+    "saved": 35.58
+   },
+   {
+    "out": "Misty Rainforest",
+    "in": "Forest",
+    "saved": 35.45
+   },
+   {
+    "out": "Mana Confluence",
+    "in": "Forest",
+    "saved": 35.26
+   },
+   {
+    "out": "Chromatic Orrery",
+    "in": "Lifespring Druid",
+    "saved": 33.84
+   },
+   {
+    "out": "Marsh Flats",
+    "in": "Plains",
+    "saved": 32.56
+   },
+   {
+    "out": "Prismatic Vista",
+    "in": "Swamp",
+    "saved": 30.69
+   },
+   {
+    "out": "Arid Mesa",
+    "in": "Plains",
+    "saved": 30.3
+   },
+   {
+    "out": "Verdant Catacombs",
+    "in": "Forest",
+    "saved": 29.72
+   },
+   {
+    "out": "Polluted Delta",
+    "in": "Swamp",
+    "saved": 19.14
+   },
+   {
+    "out": "Bloodstained Mire",
+    "in": "Swamp",
+    "saved": 18.14
+   },
+   {
+    "out": "Wooded Foothills",
+    "in": "Mountain",
+    "saved": 17.97
+   },
+   {
+    "out": "Flooded Strand",
+    "in": "Forest",
+    "saved": 15.29
+   },
+   {
+    "out": "Bloom Tender",
+    "in": "Ticket Turbotubes",
+    "saved": 13.39
+   },
+   {
+    "out": "Windswept Heath",
+    "in": "Plains",
+    "saved": 12.79
+   },
+   {
+    "out": "City of Brass",
+    "in": "Plains",
+    "saved": 12.1
+   },
+   {
+    "out": "Eladamri's Call",
+    "in": "Fierce Empath",
+    "saved": 10.65
+   },
+   {
+    "out": "Reflecting Pool",
+    "in": "Island",
+    "saved": 10.77
+   },
+   {
+    "out": "Steam Vents",
+    "in": "Mountain",
+    "saved": 10.19
+   },
+   {
+    "out": "Sacred Foundry",
+    "in": "Mountain",
+    "saved": 10.08
+   },
+   {
+    "out": "Black Market Connections",
+    "in": "Roilmage's Trick",
+    "saved": 9.84
+   },
+   {
+    "out": "Forbidden Orchard",
+    "in": "Island",
+    "saved": 9.56
+   },
+   {
+    "out": "Breeding Pool",
+    "in": "Island",
+    "saved": 9.27
+   },
+   {
+    "out": "Lotho, Corrupt Shirriff",
+    "in": "Professional Wrestler",
+    "saved": 9.16
+   },
+   {
+    "out": "Watery Grave",
+    "in": "Forest",
+    "saved": 9.15
+   },
+   {
+    "out": "Blood Crypt",
+    "in": "Island",
+    "saved": 8.88
+   },
+   {
+    "out": "Deathrite Shaman",
+    "in": "Trygon Predator",
+    "saved": 8.6
+   },
+   {
+    "out": "Godless Shrine",
+    "in": "Forest",
+    "saved": 8.54
+   }
+  ],
+  "overBudget": false
+ },
+ "bracket": {
+  "target": 2,
+  "result": 2,
+  "reasons": [],
+  "swapped": []
+ },
+ "nonlands": [
+  "Arcane Signet",
+  "Talisman of Dominance",
+  "Talisman of Creativity",
+  "Talisman of Indulgence",
+  "Talisman of Hierarchy",
+  "Talisman of Progress",
+  "Talisman of Conviction",
+  "Mind Stone",
+  "Faeburrow Elder",
+  "Chromatic Lantern",
+  "Maelstrom Nexus",
+  "Lifespring Druid",
+  "Jegantha, the Wellspring",
+  "Ticket Turbotubes",
+  "Professional Wrestler",
+  "Growth Spiral",
+  "Deadly Dispute",
+  "Uro, Titan of Nature's Wrath",
+  "Baleful Strix",
+  "Prismari Command",
+  "Big Score",
+  "Unexpected Windfall",
+  "Temur Ascendancy",
+  "Jhoira, Weatherlight Captain",
+  "Roilmage's Trick",
+  "Idol of Oblivion",
+  "Braids, Arisen Nightmare",
+  "Bring to Light",
+  "Fierce Empath",
+  "Despark",
+  "Assassin's Trophy",
+  "Anguished Unmaking",
+  "Boros Charm",
+  "Trygon Predator",
+  "Terminate",
+  "Putrefy",
+  "Loran of the Third Path",
+  "Void Rend",
+  "Rakdos Charm",
+  "Supreme Verdict",
+  "Time Wipe",
+  "Golgari Charm",
+  "Dovin's Veto",
+  "Rhythm of the Wild",
+  "Toski, Bearer of Secrets",
+  "Korvold, Fae-Cursed King",
+  "Lunar Convocation",
+  "The Gitrog Monster",
+  "Sorcerer Class",
+  "Kykar, Wind's Fury",
+  "Hearthhull, the Worldseed",
+  "General Ferrous Rokiric",
+  "Storm-Kiln Artist",
+  "Collector's Vault",
+  "Gluntch, the Bestower",
+  "Centaur Nurturer",
+  "Tireless Tracker",
+  "Tireless Provisioner",
+  "Sai, Master Thopterist",
+  "Soulherder",
+  "Sythis, Harvest's Hand"
+ ]
+}

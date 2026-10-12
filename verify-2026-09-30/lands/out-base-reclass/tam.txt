@@ -1,0 +1,102 @@
+# tam — {"format":"brawl","commanderName":"Tam, the Possibility","useCollection":true,"userId":1,"collectionSource":"arena"} (3088 ms) engine C:/Users/QuLeR/mtg-audit-wt
+strategy superfriends tribal - size 99
+lands 38 (real 34, mdfc-spell 4, basics 8, nonbasic 26) untapped-T1-3 33/34 = 97 %
+sources(land)/target: B 11(+3 rocks)/24 pips 22 worst {1}{B}{B} | G 14(+5 rocks)/17 pips 14 worst {B}{G} | R 12(+8 rocks)/17 pips 16 worst {B}{R} | U 19(+5 rocks)/26 pips 25 worst {U}{U} | W 11(+5 rocks)/19 pips 18 worst {W}
+health {"grade":"B","realLands":34,"tappedLands":23,"tappedRatio":0.61,"pipsByColor":{"W":16,"U":19,"B":19,"R":15,"G":9},"drawCount":15,"drawEngineCount":17,"rampCount":10,"fakeLands":[],"warnings":["61% of lands enter tapped — slow starts likely"],"deficiencies":[]} price $0.00 bracket null->3
+
+1 Command Tower                                | BGRUW  | utility              t3 | untapped | 
+1 Flooded Strand                               | WU     | fetch                t1 | untapped | 
+1 Misty Rainforest                             | UG     | fetch                t1 | untapped | 
+1 Scalding Tarn                                | UR     | fetch                t1 | untapped | 
+1 Breeding Pool                                | GU     | shock                t1 | untapped | 
+1 Godless Shrine                               | BW     | shock                t1 | untapped | 
+1 Hallowed Fountain                            | UW     | shock                t1 | untapped | 
+1 Steam Vents                                  | RU     | shock                t1 | untapped | 
+1 Blood Crypt                                  | BR     | shock                t1 | untapped | 
+1 Stomping Ground                              | GR     | shock                t1 | untapped | 
+1 Overgrown Tomb                               | BG     | shock                t1 | untapped | 
+1 Sacred Foundry                               | RW     | shock                t1 | untapped | 
+1 Temple Garden                                | GW     | shock                t1 | untapped | 
+1 Hinterland Harbor                            | GU     | check                t2 | untapped | 
+1 Woodland Cemetery                            | BG     | check                t2 | untapped | 
+1 Yavimaya Coast                               | GU     | pain                 t2 | untapped | 
+1 Dreamroot Cascade                            | GU     | slow                 t2 | untapped | 
+1 Stormcarved Coast                            | RU     | slow                 t2 | untapped | 
+1 Rockfall Vale                                | GR     | slow                 t2 | untapped | 
+1 Deserted Beach                               | UW     | slow                 t2 | untapped | 
+1 Vineglimmer Snarl                            | GU     | filter               t2 | TAPPED   | 
+1 Starting Town                                | BGRUW  | conditional_untapped t2 | untapped | 
+1 Riverpyre Verge                              | RU     | verge                t2 | untapped | 
+1 Willowrush Verge                             | GU     | verge                t2 | untapped | 
+1 Spirebluff Canal                             | RU     | fast                 t2 | untapped | 
+1 Multiversal Passage                          | B      | shock                t1 | untapped | 
+1 Island                                       | U      | basic                t4 | untapped | 
+4 Swamp                                        | B      | basic                t4 | untapped | mana fix: +Swamp for B shortfall
+2 Plains                                       | W      | basic                t4 | untapped | 
+1 Mountain                                     | R      | basic                t4 | untapped | 
+1 Sink into Stupor // Soporific Springs        | (U)    | shock                t1 | untapped | mdfc-spell 
+1 Fell the Profane // Fell Mire                | (B)    | shock                t1 | untapped | mdfc-spell 
+1 Witch Enchanter // Witch-Blessed Meadow      | W      | shock                t1 | untapped | mdfc-spell 
+1 Hydroelectric Specimen // Hydroelectric Laboratory | U      | shock                t1 | untapped | mdfc-spell 
+
+--- owned arena nonbasic CI-legal lands benched: 304
+Reliquary Tower                              | C      | utility              t3 | untapped | r10
+Rogue's Passage                              | C      | utility              t3 | untapped | r18
+Evolving Wilds                               |        | utility              t3 | TAPPED   | r19
+Bojuka Bog                                   | B      | tapped               t4 | TAPPED   | r24
+Terramorphic Expanse                         |        | utility              t3 | TAPPED   | r28
+Fabled Passage                               |        | utility              t3 | TAPPED   | r44
+Urborg, Tomb of Yawgmoth                     | B      | utility              t3 | untapped | r75
+Otawara, Soaring City                        | U      | channel              t2 | untapped | r88
+Cavern of Souls                              | BCGRUW | tribal               t2 | untapped | r111
+Mystic Sanctuary                             | U      | tapped               t4 | untapped | r174
+Gemstone Caverns                             | BCGRUW | utility              t3 | untapped | r180
+Buried Ruin                                  | C      | utility              t3 | untapped | r193
+Phyrexian Tower                              | BC     | utility              t3 | untapped | r194
+Karn's Bastion                               | C      | utility              t3 | untapped | r206
+Ash Barrens                                  | C      | utility              t3 | untapped | r210
+Secluded Courtyard                           | BCGRUW | tribal               t2 | untapped | r219
+Malakir Rebirth // Malakir Mire              | B      | tapped               t4 | TAPPED   | r238
+Takenuma, Abandoned Mire                     | B      | channel              t2 | untapped | r244
+Unclaimed Territory                          | BCGRUW | tribal               t2 | untapped | r247
+Sundown Pass                                 | RW     | slow                 t2 | untapped | r263
+Shattered Sanctum                            | BW     | slow                 t2 | untapped | r266
+Inventors' Fair                              | C      | utility              t3 | untapped | r267
+Darksteel Citadel                            | C      | artifact             t2 | untapped | r284
+Overgrown Farmland                           | GW     | slow                 t2 | untapped | r286
+Temple of Epiphany                           | RU     | temple               t3 | TAPPED   | r291
+Temple of Silence                            | BW     | temple               t3 | TAPPED   | r305
+Seat of the Synod                            | U      | artifact             t2 | untapped | r314
+Temple of Triumph                            | RW     | temple               t3 | TAPPED   | r315
+Temple of Enlightenment                      | UW     | temple               t3 | TAPPED   | r321
+Temple of Mystery                            | GU     | temple               t3 | TAPPED   | r333
+Fortified Village                            | GW     | filter               t2 | TAPPED   | r344
+Deathcap Glade                               | BG     | slow                 t2 | untapped | r345
+Temple of Deceit                             | BU     | temple               t3 | TAPPED   | r357
+Jetmir's Garden                              | GRW    | tapped               t4 | TAPPED   | r365
+Temple of Malady                             | BG     | temple               t3 | TAPPED   | r368
+Arena of Glory                               | R      | check                t2 | untapped | r372
+Mystic Monastery                             | RUW    | tapped               t4 | TAPPED   | r374
+Nomad Outpost                                | BRW    | tapped               t4 | TAPPED   | r377
+Eiganjo, Seat of the Empire                  | W      | channel              t2 | untapped | r378
+Great Furnace                                | R      | artifact             t2 | untapped | r379
+Opulent Palace                               | BGU    | tapped               t4 | TAPPED   | r381
+Mistrise Village                             | U      | check                t2 | untapped | r385
+Frontier Bivouac                             | GRU    | tapped               t4 | TAPPED   | r399
+Temple of Malice                             | BR     | temple               t3 | TAPPED   | r454
+Disciple of Freyalise // Garden of Freyalise | G      | shock                t1 | untapped | r461
+Ancient Den                                  | W      | artifact             t2 | untapped | r488
+Savai Triome                                 | BRW    | tapped               t4 | TAPPED   | r495
+Temple of Plenty                             | GW     | temple               t3 | TAPPED   | r501
+Sandsteppe Citadel                           | BGW    | tapped               t4 | TAPPED   | r508
+Pinnacle Monk // Mystic Peak                 | R      | shock                t1 | untapped | r530
+Emergence Zone                               | C      | utility              t3 | untapped | r539
+Temple of Abandon                            | GR     | temple               t3 | TAPPED   | r542
+Bonders' Enclave                             | C      | utility              t3 | untapped | r548
+Hedge Maze                                   | GU     | tapped               t4 | TAPPED   | r552
+Nesting Grounds                              | C      | utility              t3 | untapped | r560
+Growing Rites of Itlimoc // Itlimoc, Cradle of the Sun | G      | pathway              t2 | untapped | r572
+Thespian's Stage                             | C      | utility              t3 | untapped | r579
+Vault of Whispers                            | B      | artifact             t2 | untapped | r614
+Thundering Falls                             | RU     | tapped               t4 | TAPPED   | r629
+Boggart Trawler // Boggart Bog               | B      | shock                t1 | untapped | r633

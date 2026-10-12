@@ -1,0 +1,843 @@
+{
+ "key": "meren",
+ "opts": {
+  "format": "commander",
+  "commanderName": "Meren of Clan Nel Toth",
+  "useCollection": true,
+  "userId": 1,
+  "collectionSource": "paper"
+ },
+ "ms": 1863,
+ "ci": [
+  "B",
+  "G"
+ ],
+ "strategy": "aristocrats",
+ "landCount": 38,
+ "realCount": 34,
+ "basicCount": 20,
+ "untappedCount": 33,
+ "landSources": {
+  "W": 4,
+  "U": 3,
+  "B": 24,
+  "R": 5,
+  "G": 22
+ },
+ "allSources": {
+  "W": 6,
+  "U": 5,
+  "B": 26,
+  "R": 7,
+  "G": 27
+ },
+ "target": {
+  "G": 24,
+  "B": 26
+ },
+ "pips": {
+  "G": 24,
+  "B": 51
+ },
+ "worst": {
+  "G": "{1}{G}{G}",
+  "B": "{3}{B}{B}{B}"
+ },
+ "lands": [
+  {
+   "qty": 1,
+   "name": "Command Tower",
+   "front": true,
+   "colors": "BGRUW",
+   "untapped": true,
+   "cat": "utility",
+   "tier": 3,
+   "price": "0.56",
+   "rank": 2,
+   "note": ""
+  },
+  {
+   "qty": 1,
+   "name": "Exotic Orchard",
+   "front": true,
+   "colors": "BGRUW",
+   "untapped": true,
+   "cat": "utility",
+   "tier": 3,
+   "price": "0.26",
+   "rank": 9,
+   "note": ""
+  },
+  {
+   "qty": 1,
+   "name": "Bloodstained Mire",
+   "front": true,
+   "colors": "BR",
+   "untapped": true,
+   "cat": "fetch",
+   "tier": 1,
+   "price": "18.14",
+   "rank": 43,
+   "note": ""
+  },
+  {
+   "qty": 1,
+   "name": "Windswept Heath",
+   "front": true,
+   "colors": "WG",
+   "untapped": true,
+   "cat": "fetch",
+   "tier": 1,
+   "price": "12.79",
+   "rank": 45,
+   "note": ""
+  },
+  {
+   "qty": 1,
+   "name": "Wooded Foothills",
+   "front": true,
+   "colors": "RG",
+   "untapped": true,
+   "cat": "fetch",
+   "tier": 1,
+   "price": "17.97",
+   "rank": 47,
+   "note": ""
+  },
+  {
+   "qty": 1,
+   "name": "Overgrown Tomb",
+   "front": true,
+   "colors": "BG",
+   "untapped": true,
+   "cat": "shock",
+   "tier": 1,
+   "price": "8.20",
+   "rank": 71,
+   "note": ""
+  },
+  {
+   "qty": 1,
+   "name": "Woodland Cemetery",
+   "front": true,
+   "colors": "BG",
+   "untapped": true,
+   "cat": "check",
+   "tier": 2,
+   "price": "1.07",
+   "rank": 110,
+   "note": ""
+  },
+  {
+   "qty": 1,
+   "name": "Mana Confluence",
+   "front": true,
+   "colors": "BGRUW",
+   "untapped": true,
+   "cat": "pain",
+   "tier": 2,
+   "price": "35.26",
+   "rank": 116,
+   "note": ""
+  },
+  {
+   "qty": 1,
+   "name": "Llanowar Wastes",
+   "front": true,
+   "colors": "BG",
+   "untapped": true,
+   "cat": "pain",
+   "tier": 2,
+   "price": "0.77",
+   "rank": 137,
+   "note": ""
+  },
+  {
+   "qty": 1,
+   "name": "Twilight Mire",
+   "front": true,
+   "colors": "BG",
+   "untapped": true,
+   "cat": "utility",
+   "tier": 3,
+   "price": "0.35",
+   "rank": 355,
+   "note": ""
+  },
+  {
+   "qty": 1,
+   "name": "Necroblossom Snarl",
+   "front": true,
+   "colors": "BG",
+   "untapped": false,
+   "cat": "filter",
+   "tier": 2,
+   "price": "0.47",
+   "rank": 532,
+   "note": ""
+  },
+  {
+   "qty": 1,
+   "name": "Viridescent Bog",
+   "front": true,
+   "colors": "BG",
+   "untapped": true,
+   "cat": "utility",
+   "tier": 3,
+   "price": "0.35",
+   "rank": 721,
+   "note": ""
+  },
+  {
+   "qty": 1,
+   "name": "Blooming Marsh",
+   "front": true,
+   "colors": "BG",
+   "untapped": true,
+   "cat": "fast",
+   "tier": 2,
+   "price": "3.45",
+   "rank": 1531,
+   "note": ""
+  },
+  {
+   "qty": 1,
+   "name": "Ifnir Deadlands",
+   "front": true,
+   "colors": "B",
+   "untapped": true,
+   "cat": "pain",
+   "tier": 2,
+   "price": "0.24",
+   "rank": 4450,
+   "note": ""
+  },
+  {
+   "qty": 11,
+   "name": "Swamp",
+   "front": true,
+   "colors": "B",
+   "untapped": true,
+   "cat": "basic",
+   "tier": 4,
+   "price": "0.10",
+   "rank": null,
+   "note": ""
+  },
+  {
+   "qty": 9,
+   "name": "Forest",
+   "front": true,
+   "colors": "G",
+   "untapped": true,
+   "cat": "basic",
+   "tier": 4,
+   "price": "0.08",
+   "rank": null,
+   "note": ""
+  },
+  {
+   "qty": 1,
+   "name": "Disciple of Freyalise // Garden of Freyalise",
+   "front": false,
+   "colors": "G",
+   "untapped": true,
+   "cat": "shock",
+   "tier": 1,
+   "price": "3.78",
+   "rank": 461,
+   "note": ""
+  },
+  {
+   "qty": 1,
+   "name": "Boggart Trawler // Boggart Bog",
+   "front": false,
+   "colors": "B",
+   "untapped": true,
+   "cat": "shock",
+   "tier": 1,
+   "price": "1.61",
+   "rank": 633,
+   "note": ""
+  },
+  {
+   "qty": 1,
+   "name": "Bridgeworks Battle // Tanglespan Bridgeworks",
+   "front": false,
+   "colors": "(G)",
+   "untapped": true,
+   "cat": "shock",
+   "tier": 1,
+   "price": "1.31",
+   "rank": 670,
+   "note": ""
+  },
+  {
+   "qty": 1,
+   "name": "Revitalizing Repast // Old-Growth Grove",
+   "front": false,
+   "colors": "(BG)",
+   "untapped": false,
+   "cat": "tapped",
+   "tier": 4,
+   "price": "1.81",
+   "rank": 749,
+   "note": ""
+  }
+ ],
+ "bench": [
+  {
+   "name": "Path of Ancestry",
+   "rank": 14,
+   "cat": "temple",
+   "tier": 3,
+   "untapped": false,
+   "produced": "BGRUW"
+  },
+  {
+   "name": "Rogue's Passage",
+   "rank": 18,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "C"
+  },
+  {
+   "name": "Evolving Wilds",
+   "rank": 19,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": false,
+   "produced": ""
+  },
+  {
+   "name": "Bojuka Bog",
+   "rank": 24,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "B"
+  },
+  {
+   "name": "Terramorphic Expanse",
+   "rank": 28,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": false,
+   "produced": ""
+  },
+  {
+   "name": "Myriad Landscape",
+   "rank": 31,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "C"
+  },
+  {
+   "name": "Fabled Passage",
+   "rank": 44,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": false,
+   "produced": ""
+  },
+  {
+   "name": "Temple of the False God",
+   "rank": 82,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "C"
+  },
+  {
+   "name": "Mosswort Bridge",
+   "rank": 195,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "G"
+  },
+  {
+   "name": "Ash Barrens",
+   "rank": 210,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "C"
+  },
+  {
+   "name": "Golgari Rot Farm",
+   "rank": 335,
+   "cat": "bounce",
+   "tier": 3,
+   "untapped": false,
+   "produced": "BG"
+  },
+  {
+   "name": "Temple of Malady",
+   "rank": 368,
+   "cat": "temple",
+   "tier": 3,
+   "untapped": false,
+   "produced": "BG"
+  },
+  {
+   "name": "High Market",
+   "rank": 424,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "C"
+  },
+  {
+   "name": "Nesting Grounds",
+   "rank": 560,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "C"
+  },
+  {
+   "name": "Opal Palace",
+   "rank": 680,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "BCGRUW"
+  },
+  {
+   "name": "Vernal Fen",
+   "rank": 687,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": true,
+   "produced": "BG"
+  },
+  {
+   "name": "Mortuary Mire",
+   "rank": 699,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "B"
+  },
+  {
+   "name": "Riveteers Overlook",
+   "rank": 716,
+   "cat": "fetch",
+   "tier": 3,
+   "untapped": false,
+   "produced": ""
+  },
+  {
+   "name": "Jungle Hollow",
+   "rank": 787,
+   "cat": "gainland",
+   "tier": 4,
+   "untapped": false,
+   "produced": "BG"
+  },
+  {
+   "name": "Escape Tunnel",
+   "rank": 797,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": false,
+   "produced": ""
+  },
+  {
+   "name": "Blighted Woodland",
+   "rank": 929,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "C"
+  },
+  {
+   "name": "Cabaretti Courtyard",
+   "rank": 969,
+   "cat": "fetch",
+   "tier": 3,
+   "untapped": false,
+   "produced": ""
+  },
+  {
+   "name": "Witch's Clinic",
+   "rank": 1068,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "C"
+  },
+  {
+   "name": "Maestros Theater",
+   "rank": 1281,
+   "cat": "fetch",
+   "tier": 3,
+   "untapped": false,
+   "produced": ""
+  },
+  {
+   "name": "Haunted Mire",
+   "rank": 1299,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "BG"
+  },
+  {
+   "name": "Brokers Hideout",
+   "rank": 1311,
+   "cat": "fetch",
+   "tier": 3,
+   "untapped": false,
+   "produced": ""
+  },
+  {
+   "name": "Muraganda Raceway",
+   "rank": 1427,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "C"
+  },
+  {
+   "name": "Arid Archway",
+   "rank": 1497,
+   "cat": "bounce",
+   "tier": 3,
+   "untapped": false,
+   "produced": "C"
+  },
+  {
+   "name": "Radiant Fountain",
+   "rank": 1552,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "C"
+  },
+  {
+   "name": "Ba Sing Se",
+   "rank": 1664,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": true,
+   "produced": "G"
+  },
+  {
+   "name": "Crypt of Agadeem",
+   "rank": 1713,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "B"
+  },
+  {
+   "name": "Great Hall of the Citadel",
+   "rank": 1820,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "BCGRUW"
+  },
+  {
+   "name": "Festering Thicket",
+   "rank": 1890,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "BG"
+  },
+  {
+   "name": "Conduit Pylons",
+   "rank": 2012,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "BCGRUW"
+  },
+  {
+   "name": "Grim Backwoods",
+   "rank": 2085,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "C"
+  },
+  {
+   "name": "Hidden Grotto",
+   "rank": 2257,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "BCGRUW"
+  },
+  {
+   "name": "Manor Gate",
+   "rank": 2483,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "BGRUW"
+  },
+  {
+   "name": "Gingerbread Cabin",
+   "rank": 2865,
+   "cat": "gainland",
+   "tier": 4,
+   "untapped": true,
+   "produced": "G"
+  },
+  {
+   "name": "Mudflat Village",
+   "rank": 2948,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "BC"
+  },
+  {
+   "name": "Rumble Arena",
+   "rank": 3027,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "BCGRUW"
+  },
+  {
+   "name": "Tangled Florahedron // Tangled Vale",
+   "rank": 3235,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "G"
+  },
+  {
+   "name": "Turbulent Fen",
+   "rank": 3378,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": true,
+   "produced": "BG"
+  },
+  {
+   "name": "Study Hall",
+   "rank": 3566,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "BCGRUW"
+  },
+  {
+   "name": "Interplanar Beacon",
+   "rank": 4280,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "BCGRUW"
+  },
+  {
+   "name": "Mirage Mesa",
+   "rank": 4325,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "BGRUW"
+  },
+  {
+   "name": "Festering Gulch",
+   "rank": 5382,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "BG"
+  },
+  {
+   "name": "Realm of Koh",
+   "rank": 5837,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": true,
+   "produced": "B"
+  },
+  {
+   "name": "Sandstorm Verge",
+   "rank": 6410,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "C"
+  },
+  {
+   "name": "Witherbloom Campus",
+   "rank": 6501,
+   "cat": "temple",
+   "tier": 3,
+   "untapped": false,
+   "produced": "BG"
+  },
+  {
+   "name": "Titan's Grave",
+   "rank": 7208,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "BG"
+  },
+  {
+   "name": "Sapseep Forest",
+   "rank": 7213,
+   "cat": "gainland",
+   "tier": 4,
+   "untapped": false,
+   "produced": "G"
+  },
+  {
+   "name": "Plaza of Harmony",
+   "rank": 7624,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "BCGRUW"
+  },
+  {
+   "name": "Tarnation Vista",
+   "rank": 9184,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "BGRUW"
+  },
+  {
+   "name": "Skycoach Waypoint",
+   "rank": 10263,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "C"
+  },
+  {
+   "name": "Base Camp",
+   "rank": 11109,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "BCGRUW"
+  },
+  {
+   "name": "Formidable Commons",
+   "rank": 26403,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": true,
+   "produced": "BG"
+  }
+ ],
+ "health": {
+  "grade": "A",
+  "realLands": 34,
+  "tappedLands": 8,
+  "tappedRatio": 0.21,
+  "sourcesByColor": {
+   "W": 6,
+   "U": 5,
+   "B": 26,
+   "R": 7,
+   "G": 27
+  },
+  "pipsByColor": {
+   "W": 0,
+   "U": 0,
+   "B": 50,
+   "R": 0,
+   "G": 23
+  },
+  "drawCount": 19,
+  "drawEngineCount": 15,
+  "rampCount": 13,
+  "fakeLands": [],
+  "warnings": [],
+  "deficiencies": []
+ },
+ "price": {
+  "currency": "USD",
+  "total": 0,
+  "unpricedCount": 0,
+  "maxCardPrice": null,
+  "maxDeckPrice": null,
+  "excludedByCardCap": 0,
+  "replacedForBudget": [],
+  "overBudget": false
+ },
+ "bracket": {
+  "target": null,
+  "result": 2,
+  "reasons": [],
+  "swapped": []
+ },
+ "nonlands": [
+  "Sol Ring",
+  "Sakura-Tribe Elder",
+  "Spore Frog",
+  "Eternal Witness",
+  "Victimize",
+  "Viscera Seer",
+  "Plaguecrafter",
+  "Buried Alive",
+  "Gray Merchant of Asphodel",
+  "Blood Artist",
+  "Arcane Signet",
+  "Assassin's Trophy",
+  "Accursed Marauder",
+  "Reanimate",
+  "Zulaport Cutthroat",
+  "Haywire Mite",
+  "Grim Haruspex",
+  "Braids, Arisen Nightmare",
+  "Ashnod's Altar",
+  "Carrion Feeder",
+  "Llanowar Elves",
+  "Cankerbloom",
+  "Syr Konrad, the Grim",
+  "Dread Presence",
+  "Massacre Wurm",
+  "Wight of the Reliquary",
+  "Ravenous Chupacabra",
+  "Force of Vigor",
+  "Elvish Mystic",
+  "Toxic Deluge",
+  "Mikaeus, the Unhallowed",
+  "Solemn Simulacrum",
+  "Lightning Greaves",
+  "Village Rites",
+  "Moldervine Reclamation",
+  "Putrefy",
+  "Butcher of Malakir",
+  "Culling Ritual",
+  "Cultivate",
+  "Dark Ritual",
+  "Cauldron of Essence",
+  "Yahenni, Undying Partisan",
+  "Priest of Forgotten Gods",
+  "Woe Strider",
+  "Morbid Opportunist",
+  "Garruk's Uprising",
+  "Idol of Oblivion",
+  "Transmutation Font",
+  "Night of the Sweets' Revenge",
+  "Toski, Bearer of Secrets",
+  "High-Society Hunter",
+  "Chronomancer",
+  "Deadly Dispute",
+  "Smothering Abomination",
+  "Tireless Provisioner",
+  "Mirkwood Bats",
+  "Jerren, Corrupted Bishop // Ormendahl, the Corrupter",
+  "Midnight Reaper",
+  "Dina, Essence Brewer",
+  "Fellwar Stone",
+  "Selvala, Heart of the Wilds"
+ ]
+}

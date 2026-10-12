@@ -1,0 +1,3021 @@
+{
+ "key": "tam",
+ "opts": {
+  "format": "brawl",
+  "commanderName": "Tam, the Possibility",
+  "useCollection": true,
+  "userId": 1,
+  "collectionSource": "arena"
+ },
+ "ms": 2954,
+ "ci": [
+  "B",
+  "G",
+  "R",
+  "U",
+  "W"
+ ],
+ "strategy": "superfriends",
+ "landCount": 38,
+ "realCount": 35,
+ "basicCount": 8,
+ "untappedCount": 34,
+ "landSources": {
+  "W": 11,
+  "U": 19,
+  "B": 15,
+  "R": 10,
+  "G": 13
+ },
+ "allSources": {
+  "W": 15,
+  "U": 23,
+  "B": 17,
+  "R": 17,
+  "G": 17
+ },
+ "target": {
+  "W": 19,
+  "U": 26,
+  "G": 17,
+  "B": 24,
+  "R": 17
+ },
+ "pips": {
+  "W": 18,
+  "U": 25,
+  "G": 14,
+  "B": 22,
+  "R": 16
+ },
+ "worst": {
+  "W": "{W}",
+  "U": "{U}{U}",
+  "G": "{B}{G}",
+  "B": "{1}{B}{B}",
+  "R": "{B}{R}"
+ },
+ "lands": [
+  {
+   "qty": 1,
+   "name": "Command Tower",
+   "front": true,
+   "colors": "BGRUW",
+   "untapped": true,
+   "cat": "utility",
+   "tier": 3,
+   "price": "0.56",
+   "rank": 2,
+   "note": ""
+  },
+  {
+   "qty": 1,
+   "name": "Flooded Strand",
+   "front": true,
+   "colors": "WU",
+   "untapped": true,
+   "cat": "fetch",
+   "tier": 1,
+   "price": "15.29",
+   "rank": 38,
+   "note": ""
+  },
+  {
+   "qty": 1,
+   "name": "Misty Rainforest",
+   "front": true,
+   "colors": "UG",
+   "untapped": true,
+   "cat": "fetch",
+   "tier": 1,
+   "price": "35.45",
+   "rank": 42,
+   "note": ""
+  },
+  {
+   "qty": 1,
+   "name": "Scalding Tarn",
+   "front": true,
+   "colors": "UR",
+   "untapped": true,
+   "cat": "fetch",
+   "tier": 1,
+   "price": "35.58",
+   "rank": 49,
+   "note": ""
+  },
+  {
+   "qty": 1,
+   "name": "Breeding Pool",
+   "front": true,
+   "colors": "GU",
+   "untapped": true,
+   "cat": "shock",
+   "tier": 1,
+   "price": "9.27",
+   "rank": 59,
+   "note": ""
+  },
+  {
+   "qty": 1,
+   "name": "Godless Shrine",
+   "front": true,
+   "colors": "BW",
+   "untapped": true,
+   "cat": "shock",
+   "tier": 1,
+   "price": "8.54",
+   "rank": 60,
+   "note": ""
+  },
+  {
+   "qty": 1,
+   "name": "Hallowed Fountain",
+   "front": true,
+   "colors": "UW",
+   "untapped": true,
+   "cat": "shock",
+   "tier": 1,
+   "price": "6.98",
+   "rank": 61,
+   "note": ""
+  },
+  {
+   "qty": 1,
+   "name": "Steam Vents",
+   "front": true,
+   "colors": "RU",
+   "untapped": true,
+   "cat": "shock",
+   "tier": 1,
+   "price": "10.19",
+   "rank": 64,
+   "note": ""
+  },
+  {
+   "qty": 1,
+   "name": "Blood Crypt",
+   "front": true,
+   "colors": "BR",
+   "untapped": true,
+   "cat": "shock",
+   "tier": 1,
+   "price": "8.88",
+   "rank": 69,
+   "note": ""
+  },
+  {
+   "qty": 1,
+   "name": "Overgrown Tomb",
+   "front": true,
+   "colors": "BG",
+   "untapped": true,
+   "cat": "shock",
+   "tier": 1,
+   "price": "8.20",
+   "rank": 71,
+   "note": ""
+  },
+  {
+   "qty": 1,
+   "name": "Hinterland Harbor",
+   "front": true,
+   "colors": "GU",
+   "untapped": true,
+   "cat": "check",
+   "tier": 2,
+   "price": "0.31",
+   "rank": 97,
+   "note": ""
+  },
+  {
+   "qty": 1,
+   "name": "Woodland Cemetery",
+   "front": true,
+   "colors": "BG",
+   "untapped": true,
+   "cat": "check",
+   "tier": 2,
+   "price": "1.07",
+   "rank": 110,
+   "note": ""
+  },
+  {
+   "qty": 1,
+   "name": "Yavimaya Coast",
+   "front": true,
+   "colors": "GU",
+   "untapped": true,
+   "cat": "pain",
+   "tier": 2,
+   "price": "0.33",
+   "rank": 136,
+   "note": ""
+  },
+  {
+   "qty": 1,
+   "name": "Dreamroot Cascade",
+   "front": true,
+   "colors": "GU",
+   "untapped": true,
+   "cat": "slow",
+   "tier": 2,
+   "price": "1.12",
+   "rank": 173,
+   "note": ""
+  },
+  {
+   "qty": 1,
+   "name": "Stormcarved Coast",
+   "front": true,
+   "colors": "RU",
+   "untapped": true,
+   "cat": "slow",
+   "tier": 2,
+   "price": "2.54",
+   "rank": 184,
+   "note": ""
+  },
+  {
+   "qty": 1,
+   "name": "Takenuma, Abandoned Mire",
+   "front": true,
+   "colors": "B",
+   "untapped": true,
+   "cat": "channel",
+   "tier": 2,
+   "price": "10.92",
+   "rank": 244,
+   "note": ""
+  },
+  {
+   "qty": 1,
+   "name": "Shattered Sanctum",
+   "front": true,
+   "colors": "BW",
+   "untapped": true,
+   "cat": "slow",
+   "tier": 2,
+   "price": "1.98",
+   "rank": 266,
+   "note": ""
+  },
+  {
+   "qty": 1,
+   "name": "Deserted Beach",
+   "front": true,
+   "colors": "UW",
+   "untapped": true,
+   "cat": "slow",
+   "tier": 2,
+   "price": "1.37",
+   "rank": 270,
+   "note": ""
+  },
+  {
+   "qty": 1,
+   "name": "Deathcap Glade",
+   "front": true,
+   "colors": "BG",
+   "untapped": true,
+   "cat": "slow",
+   "tier": 2,
+   "price": "2.90",
+   "rank": 345,
+   "note": ""
+  },
+  {
+   "qty": 1,
+   "name": "Vineglimmer Snarl",
+   "front": true,
+   "colors": "GU",
+   "untapped": false,
+   "cat": "filter",
+   "tier": 2,
+   "price": "0.19",
+   "rank": 541,
+   "note": ""
+  },
+  {
+   "qty": 1,
+   "name": "Starting Town",
+   "front": true,
+   "colors": "BGRUW",
+   "untapped": true,
+   "cat": "conditional_untapped",
+   "tier": 2,
+   "price": "11.61",
+   "rank": 714,
+   "note": ""
+  },
+  {
+   "qty": 1,
+   "name": "Bleachbone Verge",
+   "front": true,
+   "colors": "BW",
+   "untapped": true,
+   "cat": "verge",
+   "tier": 2,
+   "price": "10.90",
+   "rank": 791,
+   "note": ""
+  },
+  {
+   "qty": 1,
+   "name": "Riverpyre Verge",
+   "front": true,
+   "colors": "RU",
+   "untapped": true,
+   "cat": "verge",
+   "tier": 2,
+   "price": "18.59",
+   "rank": 856,
+   "note": ""
+  },
+  {
+   "qty": 1,
+   "name": "Willowrush Verge",
+   "front": true,
+   "colors": "GU",
+   "untapped": true,
+   "cat": "verge",
+   "tier": 2,
+   "price": "5.77",
+   "rank": 1043,
+   "note": ""
+  },
+  {
+   "qty": 1,
+   "name": "Concealed Courtyard",
+   "front": true,
+   "colors": "BW",
+   "untapped": true,
+   "cat": "fast",
+   "tier": 2,
+   "price": "1.06",
+   "rank": 1173,
+   "note": ""
+  },
+  {
+   "qty": 1,
+   "name": "Mount Doom",
+   "front": true,
+   "colors": "BR",
+   "untapped": true,
+   "cat": "pain",
+   "tier": 2,
+   "price": "8.33",
+   "rank": 1208,
+   "note": ""
+  },
+  {
+   "qty": 1,
+   "name": "Spirebluff Canal",
+   "front": true,
+   "colors": "RU",
+   "untapped": true,
+   "cat": "fast",
+   "tier": 2,
+   "price": "5.00",
+   "rank": 1575,
+   "note": ""
+  },
+  {
+   "qty": 2,
+   "name": "Swamp",
+   "front": true,
+   "colors": "B",
+   "untapped": true,
+   "cat": "basic",
+   "tier": 4,
+   "price": "0.10",
+   "rank": null,
+   "note": ""
+  },
+  {
+   "qty": 1,
+   "name": "Forest",
+   "front": true,
+   "colors": "G",
+   "untapped": true,
+   "cat": "basic",
+   "tier": 4,
+   "price": "0.08",
+   "rank": null,
+   "note": ""
+  },
+  {
+   "qty": 1,
+   "name": "Mountain",
+   "front": true,
+   "colors": "R",
+   "untapped": true,
+   "cat": "basic",
+   "tier": 4,
+   "price": "0.09",
+   "rank": null,
+   "note": ""
+  },
+  {
+   "qty": 2,
+   "name": "Island",
+   "front": true,
+   "colors": "U",
+   "untapped": true,
+   "cat": "basic",
+   "tier": 4,
+   "price": "0.08",
+   "rank": null,
+   "note": ""
+  },
+  {
+   "qty": 2,
+   "name": "Plains",
+   "front": true,
+   "colors": "W",
+   "untapped": true,
+   "cat": "basic",
+   "tier": 4,
+   "price": "0.07",
+   "rank": null,
+   "note": ""
+  },
+  {
+   "qty": 1,
+   "name": "Fell the Profane // Fell Mire",
+   "front": false,
+   "colors": "(B)",
+   "untapped": true,
+   "cat": "shock",
+   "tier": 1,
+   "price": "4.92",
+   "rank": 200,
+   "note": ""
+  },
+  {
+   "qty": 1,
+   "name": "Boggart Trawler // Boggart Bog",
+   "front": false,
+   "colors": "B",
+   "untapped": true,
+   "cat": "shock",
+   "tier": 1,
+   "price": "1.61",
+   "rank": 633,
+   "note": ""
+  },
+  {
+   "qty": 1,
+   "name": "Agadeem's Awakening // Agadeem, the Undercrypt",
+   "front": false,
+   "colors": "(B)",
+   "untapped": true,
+   "cat": "shock",
+   "tier": 1,
+   "price": "28.57",
+   "rank": 961,
+   "note": ""
+  }
+ ],
+ "bench": [
+  {
+   "name": "Reliquary Tower",
+   "rank": 10,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "C"
+  },
+  {
+   "name": "Rogue's Passage",
+   "rank": 18,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "C"
+  },
+  {
+   "name": "Evolving Wilds",
+   "rank": 19,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": false,
+   "produced": ""
+  },
+  {
+   "name": "Bojuka Bog",
+   "rank": 24,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "B"
+  },
+  {
+   "name": "Terramorphic Expanse",
+   "rank": 28,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": false,
+   "produced": ""
+  },
+  {
+   "name": "Fabled Passage",
+   "rank": 44,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": false,
+   "produced": ""
+  },
+  {
+   "name": "Stomping Ground",
+   "rank": 70,
+   "cat": "shock",
+   "tier": 1,
+   "untapped": true,
+   "produced": "GR"
+  },
+  {
+   "name": "Sacred Foundry",
+   "rank": 73,
+   "cat": "shock",
+   "tier": 1,
+   "untapped": true,
+   "produced": "RW"
+  },
+  {
+   "name": "Urborg, Tomb of Yawgmoth",
+   "rank": 75,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "B"
+  },
+  {
+   "name": "Temple Garden",
+   "rank": 81,
+   "cat": "shock",
+   "tier": 1,
+   "untapped": true,
+   "produced": "GW"
+  },
+  {
+   "name": "Otawara, Soaring City",
+   "rank": 88,
+   "cat": "channel",
+   "tier": 2,
+   "untapped": true,
+   "produced": "U"
+  },
+  {
+   "name": "Cavern of Souls",
+   "rank": 111,
+   "cat": "tribal",
+   "tier": 2,
+   "untapped": true,
+   "produced": "BCGRUW"
+  },
+  {
+   "name": "Sink into Stupor // Soporific Springs",
+   "rank": 166,
+   "cat": "shock",
+   "tier": 1,
+   "untapped": true,
+   "produced": "U"
+  },
+  {
+   "name": "Mystic Sanctuary",
+   "rank": 174,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": true,
+   "produced": "U"
+  },
+  {
+   "name": "Gemstone Caverns",
+   "rank": 180,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "BCGRUW"
+  },
+  {
+   "name": "Buried Ruin",
+   "rank": 193,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "C"
+  },
+  {
+   "name": "Phyrexian Tower",
+   "rank": 194,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "BC"
+  },
+  {
+   "name": "Karn's Bastion",
+   "rank": 206,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "C"
+  },
+  {
+   "name": "Ash Barrens",
+   "rank": 210,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "C"
+  },
+  {
+   "name": "Secluded Courtyard",
+   "rank": 219,
+   "cat": "tribal",
+   "tier": 2,
+   "untapped": true,
+   "produced": "BCGRUW"
+  },
+  {
+   "name": "Rockfall Vale",
+   "rank": 226,
+   "cat": "slow",
+   "tier": 2,
+   "untapped": true,
+   "produced": "GR"
+  },
+  {
+   "name": "Malakir Rebirth // Malakir Mire",
+   "rank": 238,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "B"
+  },
+  {
+   "name": "Unclaimed Territory",
+   "rank": 247,
+   "cat": "tribal",
+   "tier": 2,
+   "untapped": true,
+   "produced": "BCGRUW"
+  },
+  {
+   "name": "Sundown Pass",
+   "rank": 263,
+   "cat": "slow",
+   "tier": 2,
+   "untapped": true,
+   "produced": "RW"
+  },
+  {
+   "name": "Inventors' Fair",
+   "rank": 267,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "C"
+  },
+  {
+   "name": "Darksteel Citadel",
+   "rank": 284,
+   "cat": "artifact",
+   "tier": 2,
+   "untapped": true,
+   "produced": "C"
+  },
+  {
+   "name": "Overgrown Farmland",
+   "rank": 286,
+   "cat": "slow",
+   "tier": 2,
+   "untapped": true,
+   "produced": "GW"
+  },
+  {
+   "name": "Temple of Epiphany",
+   "rank": 291,
+   "cat": "temple",
+   "tier": 3,
+   "untapped": false,
+   "produced": "RU"
+  },
+  {
+   "name": "Witch Enchanter // Witch-Blessed Meadow",
+   "rank": 293,
+   "cat": "shock",
+   "tier": 1,
+   "untapped": true,
+   "produced": "W"
+  },
+  {
+   "name": "Temple of Silence",
+   "rank": 305,
+   "cat": "temple",
+   "tier": 3,
+   "untapped": false,
+   "produced": "BW"
+  },
+  {
+   "name": "Seat of the Synod",
+   "rank": 314,
+   "cat": "artifact",
+   "tier": 2,
+   "untapped": true,
+   "produced": "U"
+  },
+  {
+   "name": "Temple of Triumph",
+   "rank": 315,
+   "cat": "temple",
+   "tier": 3,
+   "untapped": false,
+   "produced": "RW"
+  },
+  {
+   "name": "Temple of Enlightenment",
+   "rank": 321,
+   "cat": "temple",
+   "tier": 3,
+   "untapped": false,
+   "produced": "UW"
+  },
+  {
+   "name": "Temple of Mystery",
+   "rank": 333,
+   "cat": "temple",
+   "tier": 3,
+   "untapped": false,
+   "produced": "GU"
+  },
+  {
+   "name": "Fortified Village",
+   "rank": 344,
+   "cat": "filter",
+   "tier": 2,
+   "untapped": false,
+   "produced": "GW"
+  },
+  {
+   "name": "Temple of Deceit",
+   "rank": 357,
+   "cat": "temple",
+   "tier": 3,
+   "untapped": false,
+   "produced": "BU"
+  },
+  {
+   "name": "Jetmir's Garden",
+   "rank": 365,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "GRW"
+  },
+  {
+   "name": "Temple of Malady",
+   "rank": 368,
+   "cat": "temple",
+   "tier": 3,
+   "untapped": false,
+   "produced": "BG"
+  },
+  {
+   "name": "Arena of Glory",
+   "rank": 372,
+   "cat": "check",
+   "tier": 2,
+   "untapped": true,
+   "produced": "R"
+  },
+  {
+   "name": "Mystic Monastery",
+   "rank": 374,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "RUW"
+  },
+  {
+   "name": "Nomad Outpost",
+   "rank": 377,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "BRW"
+  },
+  {
+   "name": "Eiganjo, Seat of the Empire",
+   "rank": 378,
+   "cat": "channel",
+   "tier": 2,
+   "untapped": true,
+   "produced": "W"
+  },
+  {
+   "name": "Great Furnace",
+   "rank": 379,
+   "cat": "artifact",
+   "tier": 2,
+   "untapped": true,
+   "produced": "R"
+  },
+  {
+   "name": "Opulent Palace",
+   "rank": 381,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "BGU"
+  },
+  {
+   "name": "Mistrise Village",
+   "rank": 385,
+   "cat": "check",
+   "tier": 2,
+   "untapped": true,
+   "produced": "U"
+  },
+  {
+   "name": "Frontier Bivouac",
+   "rank": 399,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "GRU"
+  },
+  {
+   "name": "Temple of Malice",
+   "rank": 454,
+   "cat": "temple",
+   "tier": 3,
+   "untapped": false,
+   "produced": "BR"
+  },
+  {
+   "name": "Disciple of Freyalise // Garden of Freyalise",
+   "rank": 461,
+   "cat": "shock",
+   "tier": 1,
+   "untapped": true,
+   "produced": "G"
+  },
+  {
+   "name": "Ancient Den",
+   "rank": 488,
+   "cat": "artifact",
+   "tier": 2,
+   "untapped": true,
+   "produced": "W"
+  },
+  {
+   "name": "Savai Triome",
+   "rank": 495,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "BRW"
+  },
+  {
+   "name": "Temple of Plenty",
+   "rank": 501,
+   "cat": "temple",
+   "tier": 3,
+   "untapped": false,
+   "produced": "GW"
+  },
+  {
+   "name": "Sandsteppe Citadel",
+   "rank": 508,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "BGW"
+  },
+  {
+   "name": "Pinnacle Monk // Mystic Peak",
+   "rank": 530,
+   "cat": "shock",
+   "tier": 1,
+   "untapped": true,
+   "produced": "R"
+  },
+  {
+   "name": "Emergence Zone",
+   "rank": 539,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "C"
+  },
+  {
+   "name": "Temple of Abandon",
+   "rank": 542,
+   "cat": "temple",
+   "tier": 3,
+   "untapped": false,
+   "produced": "GR"
+  },
+  {
+   "name": "Bonders' Enclave",
+   "rank": 548,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "C"
+  },
+  {
+   "name": "Hedge Maze",
+   "rank": 552,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "GU"
+  },
+  {
+   "name": "Nesting Grounds",
+   "rank": 560,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "C"
+  },
+  {
+   "name": "Growing Rites of Itlimoc // Itlimoc, Cradle of the Sun",
+   "rank": 572,
+   "cat": "pathway",
+   "tier": 2,
+   "untapped": true,
+   "produced": "G"
+  },
+  {
+   "name": "Thespian's Stage",
+   "rank": 579,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "C"
+  },
+  {
+   "name": "Hydroelectric Specimen // Hydroelectric Laboratory",
+   "rank": 609,
+   "cat": "shock",
+   "tier": 1,
+   "untapped": true,
+   "produced": "U"
+  },
+  {
+   "name": "Vault of Whispers",
+   "rank": 614,
+   "cat": "artifact",
+   "tier": 2,
+   "untapped": true,
+   "produced": "B"
+  },
+  {
+   "name": "Thundering Falls",
+   "rank": 629,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "RU"
+  },
+  {
+   "name": "Savage Lands",
+   "rank": 646,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "BGR"
+  },
+  {
+   "name": "Commercial District",
+   "rank": 660,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "GR"
+  },
+  {
+   "name": "Bridgeworks Battle // Tanglespan Bridgeworks",
+   "rank": 670,
+   "cat": "shock",
+   "tier": 1,
+   "untapped": true,
+   "produced": "G"
+  },
+  {
+   "name": "Meticulous Archive",
+   "rank": 682,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "UW"
+  },
+  {
+   "name": "Sundering Eruption // Volcanic Fissure",
+   "rank": 706,
+   "cat": "shock",
+   "tier": 1,
+   "untapped": true,
+   "produced": "R"
+  },
+  {
+   "name": "Lush Portico",
+   "rank": 732,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "GW"
+  },
+  {
+   "name": "Revitalizing Repast // Old-Growth Grove",
+   "rank": 749,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "BG"
+  },
+  {
+   "name": "Scoured Barrens",
+   "rank": 750,
+   "cat": "gainland",
+   "tier": 4,
+   "untapped": false,
+   "produced": "BW"
+  },
+  {
+   "name": "Elegant Parlor",
+   "rank": 768,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "RW"
+  },
+  {
+   "name": "Jungle Hollow",
+   "rank": 787,
+   "cat": "gainland",
+   "tier": 4,
+   "untapped": false,
+   "produced": "BG"
+  },
+  {
+   "name": "Escape Tunnel",
+   "rank": 797,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": false,
+   "produced": ""
+  },
+  {
+   "name": "Sunbillow Verge",
+   "rank": 816,
+   "cat": "verge",
+   "tier": 2,
+   "untapped": true,
+   "produced": "RW"
+  },
+  {
+   "name": "Archway of Innovation",
+   "rank": 922,
+   "cat": "check",
+   "tier": 2,
+   "untapped": true,
+   "produced": "U"
+  },
+  {
+   "name": "Evendo, Waking Haven",
+   "rank": 926,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "G"
+  },
+  {
+   "name": "Bloodfell Caves",
+   "rank": 940,
+   "cat": "gainland",
+   "tier": 4,
+   "untapped": false,
+   "produced": "BR"
+  },
+  {
+   "name": "Cabaretti Courtyard",
+   "rank": 969,
+   "cat": "fetch",
+   "tier": 3,
+   "untapped": false,
+   "produced": ""
+  },
+  {
+   "name": "Sokenzan, Crucible of Defiance",
+   "rank": 996,
+   "cat": "channel",
+   "tier": 2,
+   "untapped": true,
+   "produced": "R"
+  },
+  {
+   "name": "Mines of Moria",
+   "rank": 998,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": true,
+   "produced": "R"
+  },
+  {
+   "name": "Thriving Isle",
+   "rank": 1008,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "BGRUW"
+  },
+  {
+   "name": "Dismal Backwater",
+   "rank": 1014,
+   "cat": "gainland",
+   "tier": 4,
+   "untapped": false,
+   "produced": "BU"
+  },
+  {
+   "name": "Wind-Scarred Crag",
+   "rank": 1036,
+   "cat": "gainland",
+   "tier": 4,
+   "untapped": false,
+   "produced": "RW"
+  },
+  {
+   "name": "Swiftwater Cliffs",
+   "rank": 1066,
+   "cat": "gainland",
+   "tier": 4,
+   "untapped": false,
+   "produced": "RU"
+  },
+  {
+   "name": "Blossoming Sands",
+   "rank": 1080,
+   "cat": "gainland",
+   "tier": 4,
+   "untapped": false,
+   "produced": "GW"
+  },
+  {
+   "name": "Thriving Heath",
+   "rank": 1093,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "BGRUW"
+  },
+  {
+   "name": "Thornwood Falls",
+   "rank": 1096,
+   "cat": "gainland",
+   "tier": 4,
+   "untapped": false,
+   "produced": "GU"
+  },
+  {
+   "name": "Tranquil Cove",
+   "rank": 1101,
+   "cat": "gainland",
+   "tier": 4,
+   "untapped": false,
+   "produced": "UW"
+  },
+  {
+   "name": "Lonely Sandbar",
+   "rank": 1141,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "U"
+  },
+  {
+   "name": "Abandoned Air Temple",
+   "rank": 1176,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": true,
+   "produced": "W"
+  },
+  {
+   "name": "Thriving Grove",
+   "rank": 1177,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "BGRUW"
+  },
+  {
+   "name": "Thriving Bluff",
+   "rank": 1201,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "BGRUW"
+  },
+  {
+   "name": "Midgar, City of Mako // Reactor Raid",
+   "rank": 1216,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "B"
+  },
+  {
+   "name": "Legion Leadership // Legion Stronghold",
+   "rank": 1218,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "RW"
+  },
+  {
+   "name": "Thriving Moor",
+   "rank": 1222,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "BGRUW"
+  },
+  {
+   "name": "Stump Stomp // Burnwillow Clearing",
+   "rank": 1279,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "GR"
+  },
+  {
+   "name": "Uthros, Titanic Godcore",
+   "rank": 1310,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "U"
+  },
+  {
+   "name": "Brokers Hideout",
+   "rank": 1311,
+   "cat": "fetch",
+   "tier": 3,
+   "untapped": false,
+   "produced": ""
+  },
+  {
+   "name": "Valakut, the Molten Pinnacle",
+   "rank": 1320,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "R"
+  },
+  {
+   "name": "Secret Tunnel",
+   "rank": 1328,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "C"
+  },
+  {
+   "name": "Tangled Islet",
+   "rank": 1383,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "GU"
+  },
+  {
+   "name": "Waterlogged Teachings // Inundated Archive",
+   "rank": 1395,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "BU"
+  },
+  {
+   "name": "Lindblum, Industrial Regency // Mage Siege",
+   "rank": 1401,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "R"
+  },
+  {
+   "name": "Shatterskull Smashing // Shatterskull, the Hammer Pass",
+   "rank": 1404,
+   "cat": "shock",
+   "tier": 1,
+   "untapped": true,
+   "produced": "R"
+  },
+  {
+   "name": "Vibrant Cityscape",
+   "rank": 1405,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": false,
+   "produced": ""
+  },
+  {
+   "name": "Rugged Highlands",
+   "rank": 1436,
+   "cat": "gainland",
+   "tier": 4,
+   "untapped": false,
+   "produced": "GR"
+  },
+  {
+   "name": "Secluded Steppe",
+   "rank": 1468,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "W"
+  },
+  {
+   "name": "Dark Depths",
+   "rank": 1471,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": ""
+  },
+  {
+   "name": "Arid Archway",
+   "rank": 1497,
+   "cat": "bounce",
+   "tier": 3,
+   "untapped": false,
+   "produced": "C"
+  },
+  {
+   "name": "Adventurer's Inn",
+   "rank": 1512,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "C"
+  },
+  {
+   "name": "Radiant Grove",
+   "rank": 1535,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "GW"
+  },
+  {
+   "name": "Ojer Axonil, Deepest Might // Temple of Power",
+   "rank": 1537,
+   "cat": "pathway",
+   "tier": 2,
+   "untapped": true,
+   "produced": "R"
+  },
+  {
+   "name": "Simic Guildgate",
+   "rank": 1558,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "GU"
+  },
+  {
+   "name": "Deserted Temple",
+   "rank": 1584,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "C"
+  },
+  {
+   "name": "Brass's Tunnel-Grinder // Tecutlan, the Searing Rift",
+   "rank": 1588,
+   "cat": "pathway",
+   "tier": 2,
+   "untapped": true,
+   "produced": "R"
+  },
+  {
+   "name": "Fomori Vault",
+   "rank": 1606,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "C"
+  },
+  {
+   "name": "Adagia, Windswept Bastion",
+   "rank": 1624,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "W"
+  },
+  {
+   "name": "Golgari Guildgate",
+   "rank": 1629,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "BG"
+  },
+  {
+   "name": "Ba Sing Se",
+   "rank": 1664,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": true,
+   "produced": "G"
+  },
+  {
+   "name": "Fire Nation Palace",
+   "rank": 1668,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": true,
+   "produced": "R"
+  },
+  {
+   "name": "Valgavoth's Lair",
+   "rank": 1695,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "BGRUW"
+  },
+  {
+   "name": "Eldrazi Temple",
+   "rank": 1705,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "C"
+  },
+  {
+   "name": "Bountiful Landscape",
+   "rank": 1735,
+   "cat": "fetch",
+   "tier": 3,
+   "untapped": false,
+   "produced": "C"
+  },
+  {
+   "name": "Izzet Guildgate",
+   "rank": 1796,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "RU"
+  },
+  {
+   "name": "Dimir Guildgate",
+   "rank": 1818,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "BU"
+  },
+  {
+   "name": "Great Hall of the Citadel",
+   "rank": 1820,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "BCGRUW"
+  },
+  {
+   "name": "Susur Secundi, Void Altar",
+   "rank": 1823,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "B"
+  },
+  {
+   "name": "Razorgrass Ambush // Razorgrass Field",
+   "rank": 1850,
+   "cat": "shock",
+   "tier": 1,
+   "untapped": true,
+   "produced": "W"
+  },
+  {
+   "name": "Boros Guildgate",
+   "rank": 1851,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "RW"
+  },
+  {
+   "name": "Twisted Landscape",
+   "rank": 1870,
+   "cat": "fetch",
+   "tier": 3,
+   "untapped": false,
+   "produced": "C"
+  },
+  {
+   "name": "Terrain Generator",
+   "rank": 1880,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "C"
+  },
+  {
+   "name": "Shattered Landscape",
+   "rank": 1947,
+   "cat": "fetch",
+   "tier": 3,
+   "untapped": false,
+   "produced": "C"
+  },
+  {
+   "name": "Orzhov Guildgate",
+   "rank": 1985,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "BW"
+  },
+  {
+   "name": "Conduit Pylons",
+   "rank": 2012,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "BCGRUW"
+  },
+  {
+   "name": "Rakdos Guildgate",
+   "rank": 2043,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "BR"
+  },
+  {
+   "name": "Selesnya Guildgate",
+   "rank": 2075,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "GW"
+  },
+  {
+   "name": "Azorius Guildgate",
+   "rank": 2094,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "UW"
+  },
+  {
+   "name": "Multiversal Passage",
+   "rank": 2127,
+   "cat": "shock",
+   "tier": 1,
+   "untapped": true,
+   "produced": ""
+  },
+  {
+   "name": "Gruul Guildgate",
+   "rank": 2161,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "GR"
+  },
+  {
+   "name": "Sheltering Landscape",
+   "rank": 2310,
+   "cat": "fetch",
+   "tier": 3,
+   "untapped": false,
+   "produced": "C"
+  },
+  {
+   "name": "Amonkhet Raceway",
+   "rank": 2346,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "C"
+  },
+  {
+   "name": "Agna Qel'a",
+   "rank": 2482,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": true,
+   "produced": "U"
+  },
+  {
+   "name": "Baldur's Gate",
+   "rank": 2565,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "BCGRUW"
+  },
+  {
+   "name": "Aclazotz, Deepest Betrayal // Temple of the Dead",
+   "rank": 2572,
+   "cat": "pathway",
+   "tier": 2,
+   "untapped": true,
+   "produced": "B"
+  },
+  {
+   "name": "Gateway Plaza",
+   "rank": 2621,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "BGRUW"
+  },
+  {
+   "name": "Raging Ravine",
+   "rank": 2770,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "GR"
+  },
+  {
+   "name": "Mistveil Plains",
+   "rank": 2811,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "W"
+  },
+  {
+   "name": "Spikefield Hazard // Spikefield Cave",
+   "rank": 2925,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "R"
+  },
+  {
+   "name": "Maze's End",
+   "rank": 2951,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "C"
+  },
+  {
+   "name": "Oakhollow Village",
+   "rank": 2957,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "CG"
+  },
+  {
+   "name": "Abraded Bluffs",
+   "rank": 2992,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "RW"
+  },
+  {
+   "name": "Rumble Arena",
+   "rank": 3027,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "BCGRUW"
+  },
+  {
+   "name": "Eclipsed Realms",
+   "rank": 3167,
+   "cat": "tribal",
+   "tier": 2,
+   "untapped": true,
+   "produced": "BCGRUW"
+  },
+  {
+   "name": "Tangled Florahedron // Tangled Vale",
+   "rank": 3235,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "G"
+  },
+  {
+   "name": "Ojer Pakpatiq, Deepest Epoch // Temple of Cyclical Time",
+   "rank": 3292,
+   "cat": "pathway",
+   "tier": 2,
+   "untapped": true,
+   "produced": "U"
+  },
+  {
+   "name": "Daily Bugle Building",
+   "rank": 3343,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "BCGRUW"
+  },
+  {
+   "name": "Restless Cottage",
+   "rank": 3460,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "BG"
+  },
+  {
+   "name": "Command Bridge",
+   "rank": 3466,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "BGRUW"
+  },
+  {
+   "name": "Cori Mountain Monastery",
+   "rank": 3527,
+   "cat": "check",
+   "tier": 2,
+   "untapped": true,
+   "produced": "R"
+  },
+  {
+   "name": "Oscorp Industries",
+   "rank": 3544,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "BRU"
+  },
+  {
+   "name": "Bristling Backwoods",
+   "rank": 3643,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "GR"
+  },
+  {
+   "name": "Eden, Seat of the Sanctum",
+   "rank": 3665,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "C"
+  },
+  {
+   "name": "Capital City",
+   "rank": 3723,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "BCGRUW"
+  },
+  {
+   "name": "Secluded Starforge",
+   "rank": 3790,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "C"
+  },
+  {
+   "name": "Avishkar Raceway",
+   "rank": 3816,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "C"
+  },
+  {
+   "name": "Jagged Barrens",
+   "rank": 3868,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "BR"
+  },
+  {
+   "name": "Roadside Reliquary",
+   "rank": 3901,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "C"
+  },
+  {
+   "name": "Hidden Volcano",
+   "rank": 3951,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "R"
+  },
+  {
+   "name": "Arctic Treeline",
+   "rank": 3975,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "GW"
+  },
+  {
+   "name": "Interplanar Beacon",
+   "rank": 4280,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "BCGRUW"
+  },
+  {
+   "name": "Mirage Mesa",
+   "rank": 4325,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "BGRUW"
+  },
+  {
+   "name": "Jasmine Dragon Tea Shop",
+   "rank": 4347,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "BCGRUW"
+  },
+  {
+   "name": "Hashep Oasis",
+   "rank": 4409,
+   "cat": "pain",
+   "tier": 2,
+   "untapped": true,
+   "produced": "CG"
+  },
+  {
+   "name": "Baron, Airship Kingdom",
+   "rank": 4477,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "RU"
+  },
+  {
+   "name": "Treno, Dark City",
+   "rank": 4519,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "BU"
+  },
+  {
+   "name": "Thornglint Bridge",
+   "rank": 4530,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "GW"
+  },
+  {
+   "name": "Thran Portal",
+   "rank": 4593,
+   "cat": "fast",
+   "tier": 2,
+   "untapped": true,
+   "produced": ""
+  },
+  {
+   "name": "Restless Fortress",
+   "rank": 4711,
+   "cat": "gainland",
+   "tier": 4,
+   "untapped": false,
+   "produced": "BW"
+  },
+  {
+   "name": "Rabanastre, Royal City",
+   "rank": 4714,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "RW"
+  },
+  {
+   "name": "Urban Retreat",
+   "rank": 4760,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "GUW"
+  },
+  {
+   "name": "Quandrix Campus",
+   "rank": 4763,
+   "cat": "temple",
+   "tier": 3,
+   "untapped": false,
+   "produced": "GU"
+  },
+  {
+   "name": "Lupinflower Village",
+   "rank": 4862,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "CW"
+  },
+  {
+   "name": "Kishla Village",
+   "rank": 4883,
+   "cat": "check",
+   "tier": 2,
+   "untapped": true,
+   "produced": "G"
+  },
+  {
+   "name": "Sharlayan, Nation of Scholars",
+   "rank": 4934,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "UW"
+  },
+  {
+   "name": "Guadosalam, Farplane Gateway",
+   "rank": 5095,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "GU"
+  },
+  {
+   "name": "Vector, Imperial Capital",
+   "rank": 5098,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "BR"
+  },
+  {
+   "name": "Windurst, Federation Center",
+   "rank": 5208,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "GW"
+  },
+  {
+   "name": "Insomnia, Crown City",
+   "rank": 5225,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "BW"
+  },
+  {
+   "name": "Hidden Cataract",
+   "rank": 5273,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "U"
+  },
+  {
+   "name": "Forlorn Flats",
+   "rank": 5275,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "BW"
+  },
+  {
+   "name": "White Lotus Hideout",
+   "rank": 5333,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "BCGRUW"
+  },
+  {
+   "name": "Festering Gulch",
+   "rank": 5382,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "BG"
+  },
+  {
+   "name": "Drannith Ruins",
+   "rank": 5477,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "C"
+  },
+  {
+   "name": "Gohn, Town of Ruin",
+   "rank": 5526,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "BG"
+  },
+  {
+   "name": "Gongaga, Reactor Town",
+   "rank": 5553,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "GR"
+  },
+  {
+   "name": "Celestial Colonnade",
+   "rank": 5570,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "UW"
+  },
+  {
+   "name": "Hidden Courtyard",
+   "rank": 5644,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "W"
+  },
+  {
+   "name": "Soulstone Sanctuary",
+   "rank": 5705,
+   "cat": "creature_land",
+   "tier": 2,
+   "untapped": true,
+   "produced": "C"
+  },
+  {
+   "name": "Turtle Lair",
+   "rank": 5709,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "BCGRUW"
+  },
+  {
+   "name": "Dowsing Device // Geode Grotto",
+   "rank": 5743,
+   "cat": "pathway",
+   "tier": 2,
+   "untapped": true,
+   "produced": "R"
+  },
+  {
+   "name": "Realm of Koh",
+   "rank": 5837,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": true,
+   "produced": "B"
+  },
+  {
+   "name": "Sulfurous Mire",
+   "rank": 5852,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "BR"
+  },
+  {
+   "name": "Hidden Necropolis",
+   "rank": 5912,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "B"
+  },
+  {
+   "name": "Dark Fortress",
+   "rank": 6077,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "BCR"
+  },
+  {
+   "name": "Captivating Cave",
+   "rank": 6196,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "BCGRUW"
+  },
+  {
+   "name": "Balamb Garden, SeeD Academy // Balamb Garden, Airborne",
+   "rank": 6318,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "GU"
+  },
+  {
+   "name": "Witherbloom Campus",
+   "rank": 6501,
+   "cat": "temple",
+   "tier": 3,
+   "untapped": false,
+   "produced": "BG"
+  },
+  {
+   "name": "Airship Engine Room",
+   "rank": 6554,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "RU"
+  },
+  {
+   "name": "Night Market",
+   "rank": 6631,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "BGRUW"
+  },
+  {
+   "name": "Omashu City",
+   "rank": 6959,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "GR"
+  },
+  {
+   "name": "Kyoshi Village",
+   "rank": 6991,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "GW"
+  },
+  {
+   "name": "Hidden Lair",
+   "rank": 6998,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "BCU"
+  },
+  {
+   "name": "Titan's Grave",
+   "rank": 7208,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "BG"
+  },
+  {
+   "name": "Botanical Plaza",
+   "rank": 7333,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "GW"
+  },
+  {
+   "name": "Avengers Tower",
+   "rank": 7360,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "BCGRUW"
+  },
+  {
+   "name": "Boiling Rock Prison",
+   "rank": 7470,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "BR"
+  },
+  {
+   "name": "Meditation Pools",
+   "rank": 7510,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "GU"
+  },
+  {
+   "name": "Sinister Hideout",
+   "rank": 7523,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "BU"
+  },
+  {
+   "name": "Branch of Vitu-Ghazi",
+   "rank": 7530,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "BCGRUW"
+  },
+  {
+   "name": "North Pole Gates",
+   "rank": 7571,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "UW"
+  },
+  {
+   "name": "Sun-Blessed Peak",
+   "rank": 7578,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "RW"
+  },
+  {
+   "name": "Plaza of Harmony",
+   "rank": 7624,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "BCGRUW"
+  },
+  {
+   "name": "Ominous Asylum",
+   "rank": 7931,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "BR"
+  },
+  {
+   "name": "Villainous Hideout",
+   "rank": 7988,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "BCGRUW"
+  },
+  {
+   "name": "Razortrap Gorge",
+   "rank": 7996,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": true,
+   "produced": "BR"
+  },
+  {
+   "name": "Hobbit Hole",
+   "rank": 7997,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": false,
+   "produced": ""
+  },
+  {
+   "name": "Sidequest: Catch a Fish // Cooking Campsite",
+   "rank": 8073,
+   "cat": "pathway",
+   "tier": 2,
+   "untapped": true,
+   "produced": "W"
+  },
+  {
+   "name": "Tranquil Expanse",
+   "rank": 8138,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "GW"
+  },
+  {
+   "name": "Neglected Manor",
+   "rank": 8147,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": true,
+   "produced": "BW"
+  },
+  {
+   "name": "The Lonely Mountain",
+   "rank": 8152,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": true,
+   "produced": "R"
+  },
+  {
+   "name": "Spectacle Summit",
+   "rank": 8200,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "RU"
+  },
+  {
+   "name": "Country Roads",
+   "rank": 8414,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": true,
+   "produced": "W"
+  },
+  {
+   "name": "Strangled Cemetery",
+   "rank": 8473,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": true,
+   "produced": "BG"
+  },
+  {
+   "name": "Murky Sewer",
+   "rank": 8541,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": true,
+   "produced": "BU"
+  },
+  {
+   "name": "Serpent's Pass",
+   "rank": 8606,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "BU"
+  },
+  {
+   "name": "Elven Passage",
+   "rank": 8656,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": false,
+   "produced": ""
+  },
+  {
+   "name": "Castle Doom",
+   "rank": 8696,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "BCGRUW"
+  },
+  {
+   "name": "Forum of Amity",
+   "rank": 8761,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "BW"
+  },
+  {
+   "name": "Foggy Bottom Swamp",
+   "rank": 8817,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "BG"
+  },
+  {
+   "name": "Great Hall of the Biblioplex",
+   "rank": 8818,
+   "cat": "pain",
+   "tier": 2,
+   "untapped": true,
+   "produced": "BCGRUW"
+  },
+  {
+   "name": "Abandoned Campground",
+   "rank": 8865,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": true,
+   "produced": "UW"
+  },
+  {
+   "name": "Paradox Gardens",
+   "rank": 8946,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "GU"
+  },
+  {
+   "name": "Fields of Strife",
+   "rank": 9073,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "RW"
+  },
+  {
+   "name": "Tarnation Vista",
+   "rank": 9184,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "BGRUW"
+  },
+  {
+   "name": "Suburban Sanctuary",
+   "rank": 9188,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "GW"
+  },
+  {
+   "name": "University Campus",
+   "rank": 9207,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "UW"
+  },
+  {
+   "name": "The Surgical Bay",
+   "rank": 9239,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "U"
+  },
+  {
+   "name": "Petrified Hamlet",
+   "rank": 9381,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "C"
+  },
+  {
+   "name": "Surveillance Room",
+   "rank": 9487,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "BCGRUW"
+  },
+  {
+   "name": "Savage Mansion",
+   "rank": 9494,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "GR"
+  },
+  {
+   "name": "Edgewall Inn",
+   "rank": 9884,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "BGRUW"
+  },
+  {
+   "name": "Lakeside Shack",
+   "rank": 9921,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": true,
+   "produced": "GU"
+  },
+  {
+   "name": "Misty Palms Oasis",
+   "rank": 9965,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "BW"
+  },
+  {
+   "name": "Skycoach Waypoint",
+   "rank": 10263,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "C"
+  },
+  {
+   "name": "Rocky Roads",
+   "rank": 10405,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": true,
+   "produced": "R"
+  },
+  {
+   "name": "Etched Cornfield",
+   "rank": 10579,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": true,
+   "produced": "GW"
+  },
+  {
+   "name": "Illegitimate Business",
+   "rank": 10878,
+   "cat": "gainland",
+   "tier": 4,
+   "untapped": false,
+   "produced": "BG"
+  },
+  {
+   "name": "Foot Headquarters",
+   "rank": 11182,
+   "cat": "gainland",
+   "tier": 4,
+   "untapped": false,
+   "produced": "BW"
+  },
+  {
+   "name": "Mirrodin's Core",
+   "rank": 11326,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "BCGRUW"
+  },
+  {
+   "name": "Twists and Turns // Mycoid Maze",
+   "rank": 11959,
+   "cat": "pathway",
+   "tier": 2,
+   "untapped": true,
+   "produced": "G"
+  },
+  {
+   "name": "Northampton Farm",
+   "rank": 12150,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "C"
+  },
+  {
+   "name": "Dimension X",
+   "rank": 12266,
+   "cat": "gainland",
+   "tier": 4,
+   "untapped": false,
+   "produced": "RW"
+  },
+  {
+   "name": "Mutant Town",
+   "rank": 13324,
+   "cat": "gainland",
+   "tier": 4,
+   "untapped": false,
+   "produced": "GU"
+  },
+  {
+   "name": "Iron Hills",
+   "rank": 13360,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "RW"
+  },
+  {
+   "name": "Grasping Shadows // Shadows' Lair",
+   "rank": 13425,
+   "cat": "pathway",
+   "tier": 2,
+   "untapped": true,
+   "produced": "B"
+  },
+  {
+   "name": "TCRI Building",
+   "rank": 13544,
+   "cat": "gainland",
+   "tier": 4,
+   "untapped": false,
+   "produced": "RU"
+  },
+  {
+   "name": "Asgardian Citadel",
+   "rank": 13918,
+   "cat": "gainland",
+   "tier": 4,
+   "untapped": false,
+   "produced": "RW"
+  },
+  {
+   "name": "Avengers Hangar",
+   "rank": 14106,
+   "cat": "gainland",
+   "tier": 4,
+   "untapped": false,
+   "produced": "UW"
+  },
+  {
+   "name": "Forgotten Monument",
+   "rank": 14143,
+   "cat": "pain",
+   "tier": 2,
+   "untapped": true,
+   "produced": "BCGRUW"
+  },
+  {
+   "name": "Bucolic Ranch",
+   "rank": 14175,
+   "cat": "utility",
+   "tier": 3,
+   "untapped": true,
+   "produced": "BCGRUW"
+  },
+  {
+   "name": "Goblin-town",
+   "rank": 14288,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "BR"
+  },
+  {
+   "name": "Fisk Tower",
+   "rank": 14836,
+   "cat": "gainland",
+   "tier": 4,
+   "untapped": false,
+   "produced": "BW"
+  },
+  {
+   "name": "Hell's Kitchen",
+   "rank": 14919,
+   "cat": "gainland",
+   "tier": 4,
+   "untapped": false,
+   "produced": "BR"
+  },
+  {
+   "name": "Foul Roads",
+   "rank": 14966,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": true,
+   "produced": "B"
+  },
+  {
+   "name": "Pym Technologies",
+   "rank": 15623,
+   "cat": "gainland",
+   "tier": 4,
+   "untapped": false,
+   "produced": "GU"
+  },
+  {
+   "name": "Elvenking's Halls",
+   "rank": 16216,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "GU"
+  },
+  {
+   "name": "Los Diablos Missile Base",
+   "rank": 16425,
+   "cat": "gainland",
+   "tier": 4,
+   "untapped": false,
+   "produced": "GR"
+  },
+  {
+   "name": "Mirkwood",
+   "rank": 17411,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "BG"
+  },
+  {
+   "name": "Lake-town",
+   "rank": 17955,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "UW"
+  },
+  {
+   "name": "Hall of Echoes",
+   "rank": 19515,
+   "cat": "creature_land",
+   "tier": 2,
+   "untapped": true,
+   "produced": "C"
+  },
+  {
+   "name": "Theorist's Sanctum",
+   "rank": 19784,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "U"
+  },
+  {
+   "name": "Roiling Canopy",
+   "rank": 22377,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "G"
+  },
+  {
+   "name": "Fatehold Annex",
+   "rank": 24164,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": true,
+   "produced": "UW"
+  },
+  {
+   "name": "Theorix Annex",
+   "rank": 25235,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": true,
+   "produced": "BU"
+  },
+  {
+   "name": "Innovative Commons",
+   "rank": 25356,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": true,
+   "produced": "RU"
+  },
+  {
+   "name": "Dedicated Commons",
+   "rank": 25466,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": true,
+   "produced": "RW"
+  },
+  {
+   "name": "Meticulous Commons",
+   "rank": 25875,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": true,
+   "produced": "BW"
+  },
+  {
+   "name": "Transformative Commons",
+   "rank": 26114,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": true,
+   "produced": "GU"
+  },
+  {
+   "name": "Stingerquill Annex",
+   "rank": 26352,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": true,
+   "produced": "BR"
+  },
+  {
+   "name": "Formidable Commons",
+   "rank": 26403,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": true,
+   "produced": "BG"
+  },
+  {
+   "name": "Vigorbloom Annex",
+   "rank": 26653,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": true,
+   "produced": "GW"
+  },
+  {
+   "name": "Konstrari Annex",
+   "rank": 27254,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": true,
+   "produced": "GR"
+  },
+  {
+   "name": "Room of Refuge",
+   "rank": 30585,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "BGRUW"
+  },
+  {
+   "name": "Gate of the Black Dragon",
+   "rank": null,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "B"
+  },
+  {
+   "name": "Gate to Manorborn",
+   "rank": null,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "G"
+  },
+  {
+   "name": "Gate to Seatower",
+   "rank": null,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "U"
+  },
+  {
+   "name": "Gate to Tumbledown",
+   "rank": null,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "R"
+  },
+  {
+   "name": "Gate to the Citadel",
+   "rank": null,
+   "cat": "tapped",
+   "tier": 4,
+   "untapped": false,
+   "produced": "W"
+  },
+  {
+   "name": "Snow-Covered Forest",
+   "rank": null,
+   "cat": "basic",
+   "tier": 4,
+   "untapped": true,
+   "produced": "G"
+  },
+  {
+   "name": "Snow-Covered Island",
+   "rank": null,
+   "cat": "basic",
+   "tier": 4,
+   "untapped": true,
+   "produced": "U"
+  },
+  {
+   "name": "Snow-Covered Mountain",
+   "rank": null,
+   "cat": "basic",
+   "tier": 4,
+   "untapped": true,
+   "produced": "R"
+  },
+  {
+   "name": "Snow-Covered Plains",
+   "rank": null,
+   "cat": "basic",
+   "tier": 4,
+   "untapped": true,
+   "produced": "W"
+  },
+  {
+   "name": "Snow-Covered Swamp",
+   "rank": null,
+   "cat": "basic",
+   "tier": 4,
+   "untapped": true,
+   "produced": "B"
+  }
+ ],
+ "health": {
+  "grade": "A",
+  "realLands": 35,
+  "tappedLands": 20,
+  "tappedRatio": 0.53,
+  "sourcesByColor": {
+   "W": 15,
+   "U": 23,
+   "B": 17,
+   "R": 17,
+   "G": 17
+  },
+  "pipsByColor": {
+   "W": 16,
+   "U": 19,
+   "B": 19,
+   "R": 15,
+   "G": 9
+  },
+  "drawCount": 15,
+  "drawEngineCount": 17,
+  "rampCount": 10,
+  "fakeLands": [],
+  "warnings": [],
+  "deficiencies": []
+ },
+ "price": {
+  "currency": "USD",
+  "total": 0,
+  "unpricedCount": 0,
+  "maxCardPrice": null,
+  "maxDeckPrice": null,
+  "excludedByCardCap": 0,
+  "replacedForBudget": [],
+  "overBudget": false
+ },
+ "bracket": {
+  "target": null,
+  "result": 3,
+  "reasons": [
+   "1 game changer(s): The One Ring"
+  ],
+  "swapped": []
+ },
+ "nonlands": [
+  "Oath of Teferi",
+  "Arcane Signet",
+  "Talisman of Progress",
+  "Talisman of Conviction",
+  "Talisman of Curiosity",
+  "Talisman of Creativity",
+  "Talisman of Impulse",
+  "Talisman of Resilience",
+  "Boros Signet",
+  "Hedron Archive",
+  "The One Ring",
+  "Swords to Plowshares",
+  "Path to Exile",
+  "Beast Within",
+  "Heartless Act",
+  "Go for the Throat",
+  "Feed the Swarm",
+  "Hero's Downfall",
+  "Cut Down",
+  "Terminate",
+  "Mortify",
+  "Rakdos Charm",
+  "Golgari Charm",
+  "Aetherize",
+  "Blasphemous Act",
+  "Ashling's Command",
+  "Dovin's Veto",
+  "Tatyova, Benthic Druid",
+  "Infinite Guideline Station",
+  "Ral, Crackling Wit",
+  "Chromanticore",
+  "Zurgo Stormrender",
+  "Tannuk, Memorial Ensign",
+  "Kiora, Behemoth Beckoner",
+  "Saheeli, Sublime Artificer",
+  "Minsc & Boo, Timeless Heroes",
+  "Tezzeret, Cruel Captain",
+  "Kaito, Cunning Infiltrator",
+  "Professor Dellian Fel",
+  "Quintorius, History Chaser",
+  "Kaito, Bane of Nightmares",
+  "Ashiok, Dream Render",
+  "The Theorist, Jace Beleren",
+  "Jace, Multiverse Architect",
+  "Quintorius Kand",
+  "Dovin, Hand of Control",
+  "A-Minsc & Boo, Timeless Heroes",
+  "The Eternal Wanderer",
+  "Angrath, Captain of Chaos",
+  "Huatli, the Sun's Heart",
+  "Mox Amber",
+  "Tekuthal, Inquiry Dominus",
+  "Eriette of the Charmed Apple",
+  "Tam's Resistance",
+  "Plan for All Outcomes",
+  "Way of the Necromancer",
+  "Way of the Mentor",
+  "Countersculpt",
+  "Way of the Pyromancer",
+  "Academic Ascent",
+  "Solve for Disappointment"
+ ]
+}
