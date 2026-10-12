@@ -11,14 +11,14 @@ import type { ResolvedCard } from '../../services/build-api/analysis-core';
 import { analyzeCommander, mergeProfiles } from './commander-synergy';
 import type { Archetype } from './deck-templates';
 import {
-  weightsFor, normsFor, qualityCap, profileOf, SCORE_VERSION, referenceLibrarySize,
+  weightsFor, normsFor, qualityCap, profileOf, SCORE_VERSION, referenceLibrarySize, archetypeMultiplier,
   QUALITY_CAP_INTERCEPT, QUALITY_CAP_SLOPE, COVERAGE_EVIDENCE_THRESHOLD,
   HARD_CAP_INVALID, type ScoreFormat, type ComponentKey, type ScoreTuning,
 } from './deck-score-norms';
 import { selectPlan, evaluateClosing, betterPlan, isManlandFinisher, type PlanKey, type PlanSlots } from './deck-score-plans';
 import { producerUtilisation } from './deck-score-producers';
 import { computeStructure, type ScoreGate } from './deck-score-gates';
-import { computeMana, computeCurve, type DeckEntry } from './deck-score-mana';
+import { computeMana, computeCurve, type DeckEntry, worstCaseMana } from './deck-score-mana';
 import { computeInteraction, computeAdvantage } from './deck-score-interaction';
 import { computeWin } from './deck-score-win';
 import { computeSynergy } from './deck-score-synergy';
@@ -219,6 +219,19 @@ export function scoreDeck(input: Readonly<DeckScoreInput>, tuning?: Readonly<Sco
   const utilisation = producerUtilisation(nonLandEntries, commanderEntries);
   const plan = selectPlan(Math.max(1, N), nonLandEntries, planSupply, utilisation, profile, slots);
   const archetype = inferArchetype(commanderFeatures, archetypeOfPlan(plan.recipe.key));
+  // §10.10 item 4 / 3j OPEN 2: with a slot reserved, the inferred plan is not
+  // settled evidence — blanking one card on `1445867` moved the read from
+  // control to aggro and halved `E* = interactionUnitsTarget * mult`, i.e. the
+  // REQUIREMENT fell in the deck's favour. While any slot is reserved, the
+  // requirement multipliers take the WORST case over the archetypes the
+  // identified cards admit. aggro < neutral < control on all three multipliers
+  // (.5/.75/.5 < 1/1/1 < 1.3/1/1.3), so the worst case is one archetype.
+  const requirementArchetype = structure.reservedSlots > 0
+    ? (plan.admissible ?? []).reduce((worst, key) => {
+      const a = inferArchetype(commanderFeatures, archetypeOfPlan(key));
+      return archetypeMultiplier(a).interactionUnits > archetypeMultiplier(worst).interactionUnits ? a : worst;
+    }, archetype)
+    : archetype;
   const commanderCmc = commanderFeatures.reduce((max, f) => Math.max(max, f.c), 0);
 
   // v1.4 stage 3b (§10.4 / §10.9 item 5): "Unknown slots never improve evidence
@@ -242,18 +255,33 @@ export function scoreDeck(input: Readonly<DeckScoreInput>, tuning?: Readonly<Sco
     ...nonLandEntries.map((e) => e.feature.c),
   );
   // Every hypothesis for what the unreadable line was — a spell, a land, or an
-  // MDFC's half land — scored, and the WORST kept (§10.9 item 5).
+  // MDFC's half land, at either end of the cost range — scored, and the WORST
+  // kept (§10.9 item 5).
+  //
+  // v1.4 stage 3h: the COST was not a hypothesis, and one fixed pessimistic MV
+  // is not pessimistic for every component. `karstenAt` scales the land
+  // requirement with `avgMv`, so an MV-7 imputation RAISES both `Lstar` and
+  // `Lsurplus`; on a land-FLOODED list that shrinks the surplus arm of
+  // `deviation` and blanking a card paid +0.1 M (`brawl:348651320`, either
+  // MDFC; same channel at `brawl:348693450` on +1 unknown slot). The low-cost
+  // hypothesis is the worst case for that arm, so the cost joins the kind as a
+  // hypothesis dimension and `worst` still takes the minimum per component:
+  // the slot can only ever lower a score, never invent replacement credit.
+  const mvHypotheses = [pessimisticMv, 0];
   const estimatorSets: DeckEntry[][] = structure.reservedSlots > 0
-    ? (['spell', 'land', 'mdfc'] as const).map((kind) =>
-      [...mainEntries, { feature: blankFeature(pessimisticMv, kind), quantity: structure.reservedSlots }])
+    ? (['spell', 'land', 'mdfc'] as const).flatMap((kind) => mvHypotheses.map((mv) =>
+      [...mainEntries, { feature: blankFeature(mv, kind), quantity: structure.reservedSlots }]))
     : [mainEntries];
   const worst = <T extends { score: number }>(f: (entries: DeckEntry[]) => T): T =>
     estimatorSets.map(f).reduce((a, b) => (b.score < a.score ? b : a));
 
-  const mana = worst((entries) => computeMana(format, norms, accessSlots, entries, commanderFeatures, slots.n0 ?? accessSlots));
+  // stage 3j: M's hypotheses are worst-cased PER SUB-TERM (`worstCaseMana`),
+  // not on the composed score — see the note there.
+  const mana = worstCaseMana(estimatorSets.map((entries) =>
+    computeMana(format, norms, accessSlots, entries, commanderFeatures, slots.n0 ?? accessSlots)));
   const curve = worst((entries) => computeCurve(format, norms, archetype, accessSlots, entries, commanderCmc));
-  const interaction = computeInteraction(format, norms, archetype, N, mainEntries);
-  const advantage = computeAdvantage(format, norms, archetype, accessSlots, mainEntries);
+  const interaction = computeInteraction(format, norms, requirementArchetype, N, mainEntries);
+  const advantage = computeAdvantage(format, norms, requirementArchetype, accessSlots, mainEntries);
   const win = worst((entries) => computeWin(format, norms, archetype, accessSlots, entries, commanderFeatures, {
     E: interaction.E, Estar: interaction.Estar,
     D: advantage.D, Dstar: advantage.Dstar, hasDrawEngine: advantage.hasDrawEngine,

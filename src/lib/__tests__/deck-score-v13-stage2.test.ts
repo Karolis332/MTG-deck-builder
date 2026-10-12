@@ -307,7 +307,10 @@ describe('§9.1 dispatch is by FORMAT: the Standard change moves no Commander de
     // RE-PINNED by v1.4 stage 1d (section 10.8 resource corrections plus the
     // T20 Commander horizon). Piles fall: p50 60 -> 50, and four of the
     // twenty now land under 25. Measured, not fitted.
-    expect(scores).toEqual([50, 26, 55, 26, 54, 54, 50, 51, 54, 50, 55, 48, 57, 52, 55, 46, 55, 55, 27, 41]);
+    // rc9 re-freeze: [50,26,55,26,54,54,50,51,54,50,55,48,57,52,55,46,55,55,27,41] -> below
+    // rc10 re-freeze (scripts/_scratch/s3u-pins.ts, live loadRandomPiles(20)):
+    // [59,46,55,47,59,59,56,55,59,54,60,55,63,56,60,54,60,60,51,54] -> below.
+    expect(scores).toEqual([65, 46, 60, 47, 59, 65, 63, 55, 59, 59, 60, 55, 63, 56, 60, 54, 70, 60, 51, 54]);
   });
 });
 
@@ -322,7 +325,10 @@ describe('§9.2 fresh matched negative controls', () => {
     // the rule floor of 20; the T20 horizon lets a matched control assemble
     // just enough output to clear it by one or two points. Against the
     // measured direction and reported as such.
-    expect(controls.map((c) => scoreDeck(c.input).score)).toEqual([22, 22, 22, 27, 22, 26, 22, 20, 20, 22]);
+    // rc9 re-freeze: [22,22,22,27,22,26,22,20,20,22] -> below
+    // rc10 re-freeze (scripts/_scratch/s3u-pins.ts, live loadMatchedPiles(10,2000,0xf00d0000,0.93)):
+    // [27,26,25,50,26,26,27,22,20,26] -> below.
+    expect(controls.map((c) => scoreDeck(c.input).score)).toEqual([27, 51, 26, 50, 26, 26, 27, 22, 20, 26]);
     for (const c of controls) {
       expect(c.input.main.reduce((a, rc) => a + rc.quantity, 0)).toBe(99);
       expect(c.lands).toBeGreaterThanOrEqual(20);

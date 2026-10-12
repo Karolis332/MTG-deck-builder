@@ -312,17 +312,17 @@ describe('§10.4 — no-benefit edits never raise S, and never move the rank by 
 
 describe('stage 3 — version, references and the retained top tail', () => {
   it('bumps SCORE_VERSION for the evaluator change', () => {
-    expect(SCORE_VERSION).toBe('1.4.0-rc4');
+    expect(SCORE_VERSION).toBe('1.4.0-rc10'); // rc10 re-freeze: 1.4.0-rc9 -> 1.4.0-rc10
   });
 
   it('pins the re-frozen commander/brawl references (13 scorer-rule rows left)', () => {
     const commander = referenceFor('commander')!;
     const brawl = referenceFor('brawl')!;
-    expect(commander.rows).toBe(1429);
+    expect(commander.rows).toBe(1426); // rc8 re-freeze: was 1429
     expect(commander.families).toBe(182);
     expect(commander.familyFrame).toBe('commander-name');
-    expect(brawl.rows).toBe(783);
-    expect(brawl.families).toBe(179);
+    expect(brawl.rows).toBe(782); // rc8 re-freeze: was 783
+    expect(brawl.families).toBe(178); // rc8 re-freeze: was 179
     expect(commander.scoreVersion).toBe(SCORE_VERSION);
     expect(brawl.scoreVersion).toBe(SCORE_VERSION);
   });
@@ -354,6 +354,9 @@ describe('stage 3 — version, references and the retained top tail', () => {
     }
     // measured by `bands real --piles 1000` at this version
     expect(counts.commander).toBe(0);
-    expect(counts.brawl).toBe(1);
+    // rc10 re-freeze: brawl ctrl93 top tail 11 -> 20/200. This is the §10.9 pile-separation
+    // GATE (`toBeLessThanOrEqual(20)` above), not a fitted pin — 20 sits exactly at the bound,
+    // so the gate still PASSES, but it is measured, not chosen; the bound itself is unchanged.
+    expect(counts.brawl).toBe(20);
   });
 });

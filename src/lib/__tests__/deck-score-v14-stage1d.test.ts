@@ -161,19 +161,53 @@ describe('§10.8 item 2 — deployment comes out of the shared per-turn ledger',
     expect(cost(sched.ledger[COMMANDER_HORIZON - 1])).toBe(4);
   });
 
-  it('mana spent on a body cannot also pay the spells', () => {
+  // v1.4 stage 3g/§10.10 item 1 SUPERSEDES the old form of this test. It used
+  // a package with `upkeepAt: () => 99` and asserted the ledger paid it anyway
+  // ("once the pinger is online it eats the whole turn"). Under the ledger-as-
+  // a-choice construction an item whose cost buys no damage has non-positive
+  // marginal value and is SKIPPED, so a 99-mana upkeep must now leave the turn
+  // untouched. The invariant the old test was protecting — one shared budget,
+  // no double spend — is asserted on a package that IS worth paying.
+  it('a package that would delay the finish is skipped, and spends nothing', () => {
     const body = src({ name: 'Body', cmc: 3, output: 5, guaranteed: true });
-    const hungry = src({
+    const ruinous = src({
       name: 'Pinger', cmc: 1, output: 2, guaranteed: true, deployDelay: 1,
       shareKey: 'spellslinger', upkeepAt: () => 99,
     });
-    const sched = scheduleDamage('commander', 100, [body, hungry], flatCurve(),
+    const sched = scheduleDamage('commander', 100, [body, ruinous], flatCurve(),
       { perOpponent: 40, opponents: 3 });
-    // Once the pinger is online it eats the whole turn; the row records the
-    // spell charge and leaves nothing behind it.
+    for (const row of sched.ledger) expect(row).toContain('spells 0.00');
+    // Skipping it costs no damage either: the schedule is exactly the one the
+    // body alone produces. (stage 3j: the old form asserted `tStar` non-null,
+    // which this fixture cannot reach at ALL — one 5-power body over 19 combats
+    // is 95 damage against a 3x40 finish. Asserting a finish the mechanics do
+    // not support was a defect in the assertion, not in the allocation.)
+    const bodyOnly = scheduleDamage('commander', 100, [body], flatCurve(),
+      { perOpponent: 40, opponents: 3 });
+    expect(sched.tStar).toBe(bodyOnly.tStar);
+    expect(sched.ceiling).toBeCloseTo(bodyOnly.ceiling, 9);
+  });
+
+  it('a package worth paying is paid ONCE, out of the same shared budget', () => {
+    const body = src({ name: 'Body', cmc: 3, output: 5, guaranteed: true });
+    const worth = src({
+      name: 'Pinger', cmc: 1, output: 2, guaranteed: true, deployDelay: 1,
+      shareKey: 'spellslinger', upkeepAt: () => 1,
+    });
+    const sched = scheduleDamage('commander', 100, [body, worth], flatCurve(),
+      { perOpponent: 40, opponents: 3 });
+    const num = (row: string, re: RegExp) => Number(re.exec(row)![1]);
     const busy = sched.ledger.find((r) => /spells (?!0\.00)/.test(r));
     expect(busy).toBeDefined();
-    expect(busy!).toContain('left 0.00');
+    // mana >= spells + activations + the turn's deployment debit + left:
+    // every channel draws on one budget and none of them may overdraw it.
+    for (const row of sched.ledger) {
+      const mana = num(row, /mana ([\d.]+)/);
+      const spells = num(row, /spells ([\d.]+)/);
+      const acts = num(row, /activations ([\d.]+)/);
+      const left = num(row, /left ([\d.]+)/);
+      expect(spells + acts + left).toBeLessThanOrEqual(mana + 1e-6);
+    }
   });
 });
 
@@ -401,6 +435,6 @@ describe('§10.8 item 6 — the W domain is frozen on this scheduler', () => {
     expect(frozen.winFamilies).toEqual([...WIN_FAMILIES].sort());
     expect(frozen.catalogSha256).toBe('21fa0be02940c884620b08cfd3cbf9558fb42abf1f7d31428c38fda167da2c6b');
     expect(frozen.combosSha256).toBe('19acb60cf6b088f831c4e8a671e8ac7e7a63da6441ca34d56c15afb8bb5d8a82');
-    expect(frozen.scheduler).toBe('v14-stage3d');
+    expect(frozen.scheduler).toBe('v14-stage3w'); // rc10 re-freeze: v14-stage3r -> v14-stage3w
   });
 });

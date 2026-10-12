@@ -122,11 +122,14 @@ describe('stage 3d — dilution: a bigger library never closes faster', () => {
     }
   });
 
-  it('pins the repaired schedule on standard:1474218 (W 42.5 -> 60.1 at N=60)', () => {
+  it('pins the repaired schedule on standard:1474218 (W 60.1 -> 85.0 at stage 3e)', () => {
     if (!deck) return;
     const p = read(deck.main);
-    expect(W(p)).toBeCloseTo(60.1, 1);
-    expect(p.components.find((c) => c.key === 'win')!.reason).toContain('closes T7');
+    // stage 3e: the turn that used to strand 1.98 mana now spends it out, so
+    // the same line closes a turn earlier at N=60 too (re-pinned, cause = the
+    // deployment optimiser).
+    expect(W(p)).toBeCloseTo(85.0, 1);
+    expect(p.components.find((c) => c.key === 'win')!.reason).toContain('closes T6');
   });
 
   it('no stride list closes faster on its 61st reserved slot (30 Standard lists)', () => {
@@ -199,17 +202,15 @@ describe('stage 3d — deletion and blanking never gain', () => {
     for (const d of sampleStride('commander', 25)) run(d.id, 'commander', d.main, d.commander);
     for (const d of sampleStride('brawl', 25)) run(d.id, 'brawl', d.main, d.commander);
     for (const d of standardStride(25)) run(d.id, 'standard', d.main, []);
-    // One Standard residue remains, and it is a DIFFERENT mechanism from the
-    // step this stage removed: the deployment greedy still spends the turn in
-    // one fixed output-per-mana order, so a better-ratio source can take mana
-    // a slower-ratio source needed EARLIER. Pinned for stage 4, not hidden.
-    expect(violators).toEqual(['standard:1474208']);
+    // Stage 3e closed the last residue: the turn is now an optimum over a
+    // feasible set that only grows with the wants, so no blank can gain.
+    expect(violators).toEqual([]);
   });
 });
 
 describe('stage 3d — version', () => {
   it('bumps SCORE_VERSION and the scheduler version for the evaluator change', () => {
-    expect(SCORE_VERSION).toBe('1.4.0-rc4');
-    expect(W_SCHEDULER_VERSION).toBe('v14-stage3d');
+    expect(SCORE_VERSION).toBe('1.4.0-rc10'); // rc10 re-freeze: 1.4.0-rc9 -> 1.4.0-rc10
+    expect(W_SCHEDULER_VERSION).toBe('v14-stage3w'); // rc10 re-freeze: v14-stage3r -> v14-stage3w
   });
 });

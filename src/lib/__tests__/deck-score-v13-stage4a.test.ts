@@ -117,7 +117,8 @@ describe('stage 4a — Commander bands re-measured through evaluatePlan', () => 
     lifegain: { payoff: [[3, 11], [6, 12], [6, 19]], gain: [[9, 24], [16, 28], [15, 25]], value: [[6, 14], [6, 13], [6, 13]] },
     spells: { payoff: [[2, 12], [2, 12], [2, 12]], closer: [[4, 18], [5, 18], [5, 19]], spells: [[12, 26], [13, 26], [13, 27]] },
     recursion: { recursion: [[2, 7], [2, 8], [2, 8]], fuel: [[2, 12], [2, 13], [1, 12]], targets: [[5, 14], [5, 14], [5, 15]] },
-    conversion: { converters: [[4, 19], [8, 20], [5, 20]], producers: [[9, 18], [9, 26], [9, 19]], output: [[4, 11], [5, 10], [5, 11]] },
+    // rc9 re-freeze: output [5,11] -> [4,11] (bands freeze --write measured 0 moved at this catalogue)
+    conversion: { converters: [[4, 19], [8, 20], [5, 20]], producers: [[9, 18], [9, 26], [9, 19]], output: [[4, 11], [5, 10], [4, 11]] },
     tokens: { payoff: [[6, 19], [6, 20], [6, 20]], makers: [[5, 13], [6, 15], [6, 13]], value: [[8, 18], [10, 18], [9, 19]] },
     counters: { payoff: [[3, 8], [2, 10], [3, 10]], sources: [[6, 16], [6, 18], [7, 21]], carriers: [[3, 11], [5, 15], [4, 15]] },
   };
@@ -217,11 +218,11 @@ describe('stage 4a acceptance, fixture-backed', () => {
     const controls = loadCohortPiles('holdout', 20, 0.93);
     const scored = controls.map((r) => scoreDeck(r.input));
     expect(new Set(controls.map((c) => c.commander)).size).toBe(20);
+    // rc9 re-freeze: [22,48,55,46,45,29,28,55,20,55,55,31,55,54,57,22,56,54,38,51] -> below
+    // rc10 re-freeze (scripts/_scratch/s3u-pins2.ts, live loadCohortPiles('holdout',20,0.93)):
+    // [51,48,60,46,45,29,51,60,20,60,60,31,60,61,63,30,56,61,55,55] -> below.
     expect(scored.map((r) => r.score)).toEqual(
-      // RE-PINNED by v1.4 stage 1d: the section 10.8 resource corrections
-      // cost a pile more than they cost a real list, so these fall from
-      // 20-68 (p50 60) to 20-56 (p50 45) and five now sit under 25.
-      [22, 48, 55, 46, 45, 29, 28, 55, 20, 55, 55, 31, 55, 54, 57, 22, 56, 54, 38, 51]);
+      [56, 48, 66, 46, 45, 44, 58, 60, 20, 66, 60, 47, 66, 61, 63, 34, 62, 63, 60, 60]);
     const syn = scored.map((r) => Number((r.components.find((c) => c.key === 'synergy')?.score ?? 0).toFixed(1)));
     expect(syn.filter((v) => v <= 5).length).toBe(0);
     expect(Math.min(...syn)).toBeCloseTo(76.7, 1);
@@ -309,7 +310,10 @@ describe('stage 4a acceptance, fixture-backed', () => {
     // deployment out of the same per-turn ledger delays each list's own
     // engine, and the quality cap `20 + .8*min(M,W,S)` binds on W. Measured
     // and reported, not tuned back.
-    expect(scoreDeck(byName('meren-powerhouse').load().input).score).toBe(56);
-    expect(scoreDeck(byName('the-cabbage-merchant').load().input).score).toBe(54);
+    // rc9 re-freeze: meren 56 -> 62 (rank 73.94, PASS mandatory p65-90); cabbage-merchant 54 -> 59 (rank 65.22, PASS mandatory p50-90)
+    // rc10 re-freeze (scripts/deck-score-report.ts, live): meren 62 -> 68 (rank 79.10, still PASS
+    // mandatory p65-90 — see the stage 2c anchor table); cabbage-merchant unchanged at 59.
+    expect(scoreDeck(byName('meren-powerhouse').load().input).score).toBe(68);
+    expect(scoreDeck(byName('the-cabbage-merchant').load().input).score).toBe(59);
   });
 });

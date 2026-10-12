@@ -287,7 +287,8 @@ export function loadRandomPiles(count: number): DeckScoreInput[] {
        AND layout NOT IN ('art_series','token','double_faced_token','emblem')
        AND type_line <> 'Card // Card'
        AND type_line NOT LIKE 'Basic Land%'
-       AND name <> 'The Cabbage Merchant'`
+       AND name <> 'The Cabbage Merchant'
+     ORDER BY id`
   ).all() as DbCard[];
   const eligible = rows.filter((c) => parseIdentity(c.color_identity).every((col) => identity.includes(col)));
   const landCount = getColorAdjustment(Math.max(1, identity.length)).lands;
@@ -311,10 +312,10 @@ export const FIXTURES: FixtureSpec[] = [
   { name: 'meren-powerhouse', format: 'commander', band: '65-80', purpose: 'Required powerhouse anchor', load: () => loadTextFixture('decks/paper/proposals/meren-powerhouse.txt', 'commander', 'Meren of Clan Nel Toth') },
   { name: 'cabbage-cedh-input', format: 'commander', band: '35-50', purpose: 'Required reviewed web build', load: () => loadTextFixture('verify-2026-09-19/cabbage-cedh-input.txt', 'commander', null) },
   { name: 'precon-witherbloom', format: 'commander', band: '40-55', purpose: 'Witherbloom Witchcraft precon', load: () => loadTextFixture('verify-2026-09-09/precon-witherbloom-list.txt', 'commander', 'Willowdusk, Essence Seer') },
-  { name: 'the-cabbage-merchant', format: 'commander', band: '55-70', purpose: 'Food deck, real conversion support', load: () => loadTextFixture('decks/paper/decks/the-cabbage-merchant.txt', 'commander', 'The Cabbage Merchant') },
-  { name: 'imotekh-the-stormlord', format: 'commander', band: '45-65', purpose: 'Artifact/graveyard plan', load: () => loadTextFixture('decks/paper/decks/imotekh-the-stormlord.txt', 'commander', 'Imotekh the Stormlord') },
-  { name: 'tazri-beacon-of-unity', format: 'commander', band: '40-60', purpose: 'Five-color party plan', load: () => loadTextFixture('decks/paper/decks/tazri-beacon-of-unity.txt', 'commander', 'Tazri, Beacon of Unity') },
-  { name: 'meren-of-clan-nel-toth', format: 'commander', band: '0-19', purpose: 'As stored: 101 cards', load: () => loadTextFixture('decks/paper/decks/meren-of-clan-nel-toth.txt', 'commander', 'Meren of Clan Nel Toth') },
+  { name: 'the-cabbage-merchant', format: 'commander', band: '55-70', purpose: 'Food deck, real conversion support', load: () => loadTextFixture('decks/test-builds/deck-score-fixtures/the-cabbage-merchant.txt', 'commander', 'The Cabbage Merchant') },
+  { name: 'imotekh-the-stormlord', format: 'commander', band: '45-65', purpose: 'Artifact/graveyard plan', load: () => loadTextFixture('decks/test-builds/deck-score-fixtures/imotekh-the-stormlord.txt', 'commander', 'Imotekh the Stormlord') },
+  { name: 'tazri-beacon-of-unity', format: 'commander', band: '40-60', purpose: 'Five-color party plan', load: () => loadTextFixture('decks/test-builds/deck-score-fixtures/tazri-beacon-of-unity.txt', 'commander', 'Tazri, Beacon of Unity') },
+  { name: 'meren-of-clan-nel-toth', format: 'commander', band: '0-19', purpose: 'As stored: 101 cards', load: () => loadTextFixture('decks/test-builds/deck-score-fixtures/meren-of-clan-nel-toth.txt', 'commander', 'Meren of Clan Nel Toth') },
   { name: 'ramos-dragon-engine', format: 'commander', band: '0-19', purpose: 'As stored: 3-card incomplete list', load: () => loadTextFixture('decks/paper/decks/ramos-dragon-engine.txt', 'commander', 'Ramos, Dragon Engine') },
   { name: 'cabbage-merchant-current-brawl', format: 'brawl', band: '0-19', purpose: 'As stored: 101 cards', load: () => loadTextFixture('decks/brawl/cabbage-merchant-current.txt', 'brawl', 'The Cabbage Merchant') },
   { name: 'tazri-upgraded-arena', format: 'brawl', band: '45-65', purpose: 'Singleton, five-color source demands', load: () => loadTextFixture('decks/brawl/tazri-upgraded-arena.txt', 'brawl', null) },

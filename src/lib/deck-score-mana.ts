@@ -18,6 +18,33 @@ export interface DeckEntry {
 export interface ComponentOutput {
   score: number;
   reason: string;
+  /** M's sub-terms, published so an unresolved-slot hypothesis can be kept
+   * pessimistic PER TERM (see `worstCaseMana`). */
+  parts?: { landFit: number; colorFit: number; earlyMana: number };
+}
+
+/** §10.9 item 5 / v1.4 stage 3j: the worst case over the unresolved-slot
+ * hypotheses, taken PER SUB-TERM. Taking the minimum of the composed score
+ * was not pessimistic: the land hypothesis puts the blank slots in the LAND
+ * pile, which removes them from `colorFit`'s denominator, and once `landFit`
+ * is already clipped to 0 that colour gain leaks straight through — blanking
+ * four copies paid +1.5 M on `standard:1478800`. Each term now takes its own
+ * minimum, so no hypothesis can be pessimal for one term and generous in
+ * another. Invariant (D)/(B): blanking/diluting can lower M, never raise it. */
+export function worstCaseMana(results: readonly ComponentOutput[]): ComponentOutput {
+  const lowest = results.reduce((a, b) => (b.score < a.score ? b : a));
+  const parts = results.map((r) => r.parts).filter((p): p is NonNullable<ComponentOutput['parts']> => !!p);
+  if (parts.length !== results.length) return lowest;
+  const worst = {
+    landFit: Math.min(...parts.map((p) => p.landFit)),
+    colorFit: Math.min(...parts.map((p) => p.colorFit)),
+    earlyMana: Math.min(...parts.map((p) => p.earlyMana)),
+  };
+  return { score: manaScoreOf(worst), reason: lowest.reason, parts: worst };
+}
+
+function manaScoreOf(p: { landFit: number; colorFit: number; earlyMana: number }): number {
+  return 100 * (0.45 * p.landFit + 0.45 * p.colorFit + 0.10 * p.earlyMana);
 }
 
 const ENTERS_TAPPED = /enters (?:the battlefield )?tapped/i;
@@ -60,7 +87,10 @@ export function computeMana(
   const nonLand = mainEntries.filter((e) => !e.feature.isLand);
   const landEntries = mainEntries.filter((e) => e.feature.isLand);
   const F = nonLand.reduce((s, e) => s + e.quantity, 0);
-  if (N <= 0 || F === 0) return { score: 0, reason: '0 effective lands vs 0; no nonland spells to color-check.' };
+  if (N <= 0 || F === 0) {
+    return { score: 0, parts: { landFit: 0, colorFit: 0, earlyMana: 0 },
+      reason: '0 effective lands vs 0; no nonland spells to color-check.' };
+  }
 
   const totalCmc = nonLand.reduce((s, e) => s + e.feature.c * e.quantity, 0);
   const avgMv = totalCmc / F;
@@ -143,10 +173,12 @@ export function computeMana(
     .reduce((s, e) => s + e.quantity, 0);
   const earlyMana = clip(H(N, untappedLands, 7, 1) / 0.95);
 
-  const score = 100 * (0.45 * landFit + 0.45 * colorFit + 0.10 * earlyMana);
+  const parts = { landFit, colorFit, earlyMana };
+  const score = manaScoreOf(parts);
   const weakestLabel = weakest ? `${weakest.color} has ${weakest.K}/${weakest.R < 0 ? '∞' : weakest.R}` : 'no colored demand';
   return {
     score,
+    parts,
     reason: `${Leff} effective lands vs ${Lstar.toFixed(1)}; ${weakestLabel} timely sources.`,
   };
 }

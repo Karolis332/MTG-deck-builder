@@ -324,10 +324,13 @@ describe('v1.4 stage 1a — corpus regression', () => {
     // cantrip ledger) cost a pile far more than they cost a real list, so
     // 8 -> 15 under 25, p50 59 -> 50, max 72 -> 57. Still short of section
     // 10.1's numeric gate, which stays OPEN. Pinned, not fitted.
-    expect(rows.filter((r) => r.score < 25)).toHaveLength(9);
+    // rc9 re-freeze: under-25 9 -> 6, p50 51 -> 55, max 63 -> 65.
+    // rc10 re-freeze (scripts/_scratch/s3u-pins3.ts, live loadDataset(200).piles):
+    // under-25 6 -> 5, p50 55 -> 57, max 65 -> 70.
+    expect(rows.filter((r) => r.score < 25)).toHaveLength(5);
     const totals = rows.map((r) => r.score).sort((a, b) => a - b);
-    expect(totals[Math.round(0.5 * (totals.length - 1))]).toBe(51);
-    expect(totals[totals.length - 1]).toBe(63);
+    expect(totals[Math.round(0.5 * (totals.length - 1))]).toBe(57);
+    expect(totals[totals.length - 1]).toBe(70);
   });
 
   it('typed coverage does not drop on any fixture or cEDH list', () => {

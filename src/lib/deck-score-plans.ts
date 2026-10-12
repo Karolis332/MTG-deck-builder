@@ -557,7 +557,7 @@ export const PLAN_RECIPES: readonly PlanRecipe[] = [
     roles: [
       { key: 'converters', essential: true, min: 2, max: 10, cmd: { min: 5, max: 20 }, fills: storedResourceConverter },
       { key: 'producers', essential: true, min: 5, max: 13, cmd: { min: 9, max: 19 }, servedBy: { roles: ['converters'], ratio: 3 }, fills: storedResourceProducer },
-      { key: 'output', essential: true, min: 2, max: 7, cmd: { min: 5, max: 11 }, deadline: 6, fills: engineOutput(6, 3, 0.75) },
+      { key: 'output', essential: true, min: 2, max: 7, cmd: { min: 4, max: 11 }, deadline: 6, fills: engineOutput(6, 3, 0.75) },
       { key: 'value', essential: false, min: 0, max: 8, fills: velocity(5) },
       { key: 'answers', essential: false, min: 0, max: 5, fills: answer(5) },
       { key: 'fixing', essential: false, infrastructure: true, min: 0, max: 8, fills: infrastructure },
@@ -793,6 +793,12 @@ export interface PlanEvaluation {
    * whenever another recipe is at least partially executed. */
   hasEmptyEssential: boolean;
   weakest: { key: string; supply: number; required: number };
+  /** §10.10 item 4: the plan keys the IDENTIFIED cards admit — every candidate
+   * that is not a misread of the deck (`hasEmptyEssential` = a recipe the deck
+   * holds zero pieces for). Set by `selectPlan` only; a reserved unknown slot
+   * could still resolve into any of these, so a requirement that depends on the
+   * inferred plan must take its worst case over this set. */
+  admissible?: readonly PlanKey[];
 }
 
 /**
@@ -1170,7 +1176,12 @@ export function selectPlan(
   slots?: Readonly<PlanSlots>,
 ): PlanEvaluation {
   const evaluations = candidatePlans(N, nonLand, guaranteed, shared, profile, slots);
-  return evaluations.reduce((best, c) => betterPlan(best, c, profile), evaluations[0]);
+  const best = evaluations.reduce((b, c) => betterPlan(b, c, profile), evaluations[0]);
+  return {
+    ...best,
+    admissible: [...new Set(evaluations.filter((e) => !e.hasEmptyEssential)
+      .map((e) => e.recipe.key).concat(best.recipe.key))],
+  };
 }
 
 

@@ -27,7 +27,7 @@ import {
   type ComboSlot, type TypedCombo,
 } from './deck-score-catalog/combos';
 import {
-  finisherOutputOf, drawEventsPerTurn, allocateDamage, horizonFor, MAX_TURN,
+  finisherOutputOf, drawEventsPerTurn, allocateDamage, horizonFor, MAX_TURN, COMMANDER_HORIZON,
   type DamageUnit, type FinisherKind,
 } from './deck-score-finishers';
 import {
@@ -35,7 +35,7 @@ import {
   type SpellSchedule, type BurstPayoff,
 } from './deck-score-spells';
 import { clip, H, Hf, buildDisjointAccessPolynomial, readAccessAt, drawSampleSizes, type Pool } from './deck-score-math';
-import { gameShape, type FormatNorms, type ScoreFormat } from './deck-score-norms';
+import { gameShape, normsFor, type FormatNorms, type ScoreFormat } from './deck-score-norms';
 import type { DeckEntry, ComponentOutput } from './deck-score-mana';
 import type { CardFeature } from './deck-score-features';
 import type { Archetype } from './deck-templates';
@@ -53,6 +53,19 @@ interface Recipe {
   criticalNames: Set<string>;
   /** Closing turn from an output schedule. Set = skip the mana-readiness scan. */
   tStar?: number;
+  /** v1.4 stage 3i: the turn that MAXIMISES §1's utility over `t >= t*`, when
+   * it differs from the first finish (§10.8: "report the first finish and the
+   * utility-maximising turn separately"). `pools`/`label` describe THIS turn's
+   * line, so `evaluateRecipe` values what was selected. */
+  valueTurn?: number;
+  /** v1.4 stage 3j: the utility the LINE SELECTION actually maximised, for the
+   * families that pick their line per turn (`maximiseOverTurns`). Valuing the
+   * stored line at OTHER turns scores (line(t1), t2) pairs the selection never
+   * considered, and that cross-product is NOT monotone under dilution: on
+   * `brawl:365001669` +1 unknown slot moved the argmax from T6 (r4, 39 members)
+   * to T8 (r2, 30 members), and re-scanning that cheaper line back at T6 raised
+   * W by 13.1. Invariant (D)/(B): selection = valuation, so no re-maximisation. */
+  selected?: { u: number; access: number; turn: number };
   /** §10.6.1 audited execution trace; copied onto the emitted `ClosingLine`. */
   trace?: { resource: string; tutor: string; finish: string };
 }
@@ -68,7 +81,7 @@ interface Recipe {
  * deployment rule, the cantrip ledger, the finish predicate or the horizon
  * changes - every S norm measured against an older value is superseded.
  */
-export const W_SCHEDULER_VERSION = 'v14-stage3d';
+export const W_SCHEDULER_VERSION = 'v14-stage3w';
 
 export const WIN_FAMILIES: readonly string[] = [
   'combo', 'combat_wide', 'tokens', 'drain', 'combat_tall', 'alt_win', 'control', 'spells',
@@ -119,6 +132,18 @@ function poolR(pool: RecipePool): number {
  * // whose other eleven members cost 1-2 and zeroes every curated deck
  * // (measured). Upgrade path is per-pool cost-bin variants, not a sort order.
  */
+/**
+ * The ONE access quantity: the disjoint-pool polynomial over a recipe's
+ * COMPLETE pool list, averaged over the turn's draw sample. `evaluateRecipe`,
+ * the control family's `J` and — since v1.4 stage 3h — `bestLine`'s candidate
+ * ranking all read it, so selection and valuation are the same monotone number.
+ */
+function poolsAccess(format: ScoreFormat, N: number, t: number, pools: readonly RecipePool[]): number {
+  const poly = buildDisjointAccessPolynomial(N, pools.map((p) => ({ K: poolK(p), r: poolR(p) })));
+  const ns = drawSampleSizes(format, t);
+  return ns.reduce((s, n) => s + readAccessAt(poly, N, n), 0) / ns.length;
+}
+
 function poolCost(pool: RecipePool): number {
   let cost = 0;
   let needed = pool.r;
@@ -162,6 +187,14 @@ function dedupeMembers(members: readonly Member[]): Member[] {
  * (`deck-score-spells.ts`), so neither budget can count the same copy.
  */
 function isPersistentManaSource(f: CardFeature): boolean {
+  // A persistent source is a PERMANENT. `isPrintedRitual` only rejects rituals
+  // with a countable printed yield, so an unbounded one ("Add {R} for each
+  // card in target opponent's hand", Jeska's Will) slipped through and was
+  // credited a mana EVERY turn — and casting it out of the schedule's own
+  // budget cost more than it returned, so deleting it RAISED the ceiling
+  // (`commander 381382642`). An instant/sorcery never persists.
+  const tl = f.card.type_line || '';
+  if (tl.includes('Instant') || tl.includes('Sorcery')) return false;
   return f.isRamp && f.c <= 3 && !isPrintedRitual(f);
 }
 
@@ -192,6 +225,10 @@ export interface ManaCurve {
   spendableAt(t: number): number;
   /** Ramp mana online at the horizon — the number the old scalar reported. */
   bonus: number;
+  /** The persistent mana sources themselves. §10.10 item 1: the damage schedule
+   * pays for the copies it CHOOSES out of its own budget, so it needs the
+   * roster, not this curve's expected-value prepass. */
+  ramp?: readonly { name: string; cmc: number; quantity: number }[];
   trace: string;
 }
 
@@ -239,6 +276,7 @@ export function manaCurveFor(
     at: (t) => total[clampT(t)],
     spendableAt: (t) => Math.max(0, total[clampT(t)] - spend[clampT(t)]),
     bonus: online,
+    ramp: ramp.map((r) => ({ name: r.name, cmc: r.cmc, quantity: r.quantity })),
     trace: `${ramp.length} persistent mana source(s), ${online.toFixed(2)} online by T${horizon};`
       + ` mana T3/T6/T${horizon} ${total[clampT(3)].toFixed(2)}/${total[clampT(6)].toFixed(2)}/${total[horizon].toFixed(2)}`
       + `, spendable ${(total[clampT(3)] - spend[clampT(3)]).toFixed(2)}/${(total[clampT(6)] - spend[clampT(6)]).toFixed(2)}`
@@ -271,9 +309,22 @@ export interface Source {
   /** Output on turn `t` when it varies (a cast trigger follows the deck's own
    * spell schedule). `output` stays the mean, which is what sizes the pool. */
   outputAt?: (t: number) => number;
-  /** Sources sharing this key split ONE `upkeepAt` expenditure per turn. */
+  /** Sources sharing this key draw on ONE pool of casts per turn. */
   shareKey?: string;
+  /** This row's output is only reachable by paying an EXTRA pool (the Food
+   * conversion toll). A line may always decline it, so `bestLine` scans the
+   * toll-free variant of every theta level too - see its note. */
+  tolled?: boolean;
+  /** The mana ONE chosen cast costs (10.10 item 1: a price, never a
+   * compulsory package charge). */
   upkeepAt?: (t: number) => number;
+  /** Casts turn `t` can offer - the CAP on how many are choosable. */
+  castsAt?: (t: number) => number;
+  /** The part of `outputAt(t)` the permanent produces on its OWN, with no cast
+   * made this turn. 10.10 items 1-2: the rest is credited only through casts
+   * the scheduler chooses and pays for, so an `act`/`dep` span carries this
+   * part and the `share` span carries the remainder. */
+  stackedAt?: (t: number) => number;
   /** Section 10.8 item 1: `output` is dealt to EVERY opponent at once, so its
    * per-opponent size is `output / opponents`. */
   eachOpponent?: boolean;
@@ -402,10 +453,78 @@ export function scheduleDamage(
   const paid = new Array(sources.length).fill(0);
   const firstPaid = new Array(sources.length).fill(Infinity);
   const paidCum: number[][] = sources.map(() => new Array(horizon + 2).fill(0));
+  // §10.10 item 2, reserved future-payment ledger: a chosen deployment whose
+  // claimed output needs a per-turn activation/upkeep payment reserves that
+  // payment on every turn it claims output for. Later turns enter net of
+  // `due(t)`, and an optional deployment may not be taken if it makes a
+  // reservation unpayable — "a damage coefficient alone cannot fund its future
+  // payments". Setting a use to zero removes its future costs and output
+  // together, because the reservation is only written when the item is taken.
+  const due = new Array(horizon + 2).fill(0);
   const indexOf = new Map(sources.map((s, i) => [s, i]));
   let deploySpend = 0;
+  let rampSpend = 0;
+  // §10.10 item 1: the ramp is a CHOICE inside the same allocation, not an
+  // expected-value prepass. `manaCurveFor` still prices it for the spell/burst
+  // ledgers; the damage schedule pays for the copies it actually wants out of
+  // its own per-turn budget, so diluting a ramp copy can no longer hand the
+  // deployment a hundredth of freed mana (stage 3g phase 1, `348699891`).
+  const ramp = (manaCurve.ramp ?? []).map((r) => ({ ...r, paid: 0 }));
+  let rampOnline = 0;
+  const norms = normsFor(format);
+  const decayAt = (s: number): number =>
+    Math.pow(2, -Math.max(0, s - norms.fastClosingTurn) / norms.delayHalfLifeTurns);
+  /** §10.10's common currency: decay-discounted damage from turn `from` to H,
+   * expressed relative to turn `t`, so an item that pays now and one that pays
+   * later are comparable in ONE order. */
+  // §10.10 item 2 / §10.8: values are read against the PROFILE's planning
+  // horizon, never the current search bound, so an H12 diagnostic truncates the
+  // same H20-planned trace instead of re-prioritising it.
+  const planHorizon = format === 'commander' ? COMMANDER_HORIZON : MAX_TURN;
+  const futureFactor = (t: number, from: number): number => {
+    let f = 0;
+    for (let s = Math.max(2, from); s <= planHorizon; s++) f += decayAt(s) / decayAt(t);
+    return f;
+  };
+  /** §10.10 item 2: an item's OWN causal damage, by turn, per unit of `x`.
+   * `per` = copies firing per unit x; `from`/`to` bound the turns it fires.
+   * No other item is re-simulated and no unchosen future spell appears. */
+  interface ProjSpan {
+    from: number; to: number; src: Source; per: number;
+    /** Which half of a cast trigger output this span causes. A body/`dep`
+     * carries only what the permanent makes on its own; the shared cast
+     * package carries the cast-driven half. Sources with no split are
+     * `stacked` and read their whole output (10.10 items 1-2). */
+    part: 'stacked' | 'cast';
+    /** 10.10 R2: this span's damage is the cast package this deployment
+     * reserved, so it is NOT counted a second time by the tau scan or the
+     * settlement - the `share` item that buys those casts carries it.
+     * Valuation only. */
+    reserved?: boolean;
+  }
+  interface TurnItem {
+    kind: 'share' | 'act' | 'dep' | 'ramp';
+    i: number; key: string; cost: number; want: number; value: number;
+    spans: ProjSpan[];
+    /** Per-copy mana this item owes on EVERY turn of its spans (0 for a body
+     * that just attacks). Reserved in `due` when the item is taken. */
+    upkeep?: number;
+    /** 10.10 R2: per-copy mana this deployment reserves on turn `s` for the
+     * casts it commits to buy there. Indexed by turn. */
+    reserve?: number[];
+  }
   for (let t = 1; t <= horizon; t++) {
-    const produced = manaCurve.spendableAt(t);
+    // §10.10 item 2: B_entry = what this state's paid sources produce, less the
+    // compulsory dues its OWN previous choices created (none are modelled here:
+    // every upkeep in this schedule is optional with the printed non-payment
+    // consequence). Lands are one drop a turn; the ramp online is what this
+    // schedule chose to cast and paid for.
+    const produced = t + rampOnline;
+    // §10.10 item 2: `B_entry` is net of the compulsory dues this state's own
+    // previous choices created. The hold is released to the activation that
+    // owns it as soon as that activation is taken (below), so a due is never
+    // charged twice.
+    const dueNow = Math.min(due[t] ?? 0, produced);
     let budget = produced;
     let spellSpend = 0;
     let upkeepSpend = 0;
@@ -426,91 +545,478 @@ export function scheduleDamage(
     };
     // Every cast trigger on the board fires off the SAME spells, so the turn's
     // spell mana is charged once for the whole family and only in proportion to
-    // how much of it is online.
+    // how much of it is online. §10.10 item 1: that package is OPTIONAL - it is
+    // boxed at B_entry like every other item, it competes in the same value
+    // order, and a family that buys no damage is skipped entirely.
     const sharedScale = new Map<string, number>();
+    /** Price of ONE cast, by share key. */
+    const sharedSpend = new Map<string, number>();
+    /** Casts turn `t` offers that key - a CAP, never a charge. */
+    const sharedCasts = new Map<string, number>();
     for (const s of priced) {
-      if (!s.shareKey || sharedScale.has(s.shareKey)) continue;
+      if (!s.shareKey || sharedSpend.has(s.shareKey)) continue;
       const online = onlineCopies(s);
       if (online === null || online <= 0) continue;
-      const spend = (s.upkeepAt ? s.upkeepAt(t) : 0) * Math.min(1, online);
-      const scale = spend > 0 ? Math.min(1, budget / spend) : 1;
-      sharedScale.set(s.shareKey, scale);
-      spellSpend += Math.min(budget, spend);
-      budget = Math.max(0, budget - spend);
+      // A package that declares its casts is priced PER CAST; one that does not
+      // keeps the v1.4 form - a single all-or-nothing unit, priced at what the
+      // online share of it would spend.
+      const price = s.upkeepAt ? s.upkeepAt(t) : 0;
+      sharedSpend.set(s.shareKey, s.castsAt ? price : price * Math.min(1, online));
+      sharedCasts.set(s.shareKey, s.castsAt ? s.castsAt(t) : 1);
     }
-    // Anthems first, so the pump is known before bodies become damage units.
+    // ── the turn's items, every box frozen at B_entry BEFORE any is paid ──
+    const items: TurnItem[] = [];
+    const box = (want: number, cost: number): number =>
+      (cost <= 0 ? want : Math.min(want, affordable(produced, cost)));
+    // Anthems resolve first, and only because a pump changes what a body is
+    // worth. Every typed anthem carries cost 0, so this is §10.10's "resolve
+    // positive-value zero-cost items under their finite resource bounds first".
+    // ponytail: a priced anthem is valued at its bonus over the bodies already
+    // online; upgrade path is a joint pump/body solve if a costed anthem types.
+    const bodiesOnline = priced.reduce((sum, s) =>
+      sum + (s.kind === 'anthem' ? 0 : (onlineCopies(s) ?? 0) * (s.bodies ?? 0)), 0);
     for (const s of priced) {
       if (s.kind !== 'anthem') continue;
       const online = onlineCopies(s);
       if (online === null) continue;
-      let copies = online;
       const spend = (s.upkeepMana ?? 0) + (s.manaForgone ?? 0);
+      let copies = box(online, spend);
       if (spend > 0) {
+        if ((s.outputAt ? s.outputAt(t) : s.output) * bodiesOnline <= 0) continue;
         copies = Math.min(copies, budget / spend);
-        if (copies <= 0) continue;
+        if (copies <= 1e-9) continue;
         budget -= copies * spend;
         upkeepSpend += copies * spend;
       }
-      const unit = (s.outputAt ? s.outputAt(t) : s.output) * (s.shareKey ? sharedScale.get(s.shareKey) ?? 1 : 1);
+      const unit = s.outputAt ? s.outputAt(t) : s.output;
       pumpPerBody += Math.min(copies, MAX_STACKED_PUMP) * unit;
     }
-    for (const s of priced) {
+    // Activations, deployments, the shared spell package and the ramp all
+    // compete in ONE value order (§10.10 item 2), never in category prepasses.
+    /** One copy's damage at turn `at`, split into the two channels the
+     * finish predicate needs: damage to EVERY opponent, and one assignable
+     * unit of power (overkill on a unit is not reassignable). */
+    // Pure in `(s, at, part)` for the whole of turn `t` — `pumpPerBody` is
+    // final once the anthems above resolved and `opponents` is fixed. The same
+    // triple is asked for by the `dep` value loop, the `cum` build, every tau's
+    // `finishesBy` and the settlement pass, so it is memoised EXACTLY (same
+    // object, no recomputation, no approximation).
+    const ptCache = new Map<number, { each: number; power: number }>();
+    const perTurnOf = (
+      s: Source, at: number, part: 'stacked' | 'cast',
+    ): { each: number; power: number } => {
+      const ck = (((indexOf.get(s) as number) ?? -1) * (horizon + 2) + at) * 2
+        + (part === 'cast' ? 1 : 0);
+      const hit = ptCache.get(ck);
+      if (hit !== undefined) return hit;
+      const full = s.outputAt ? s.outputAt(at) : s.output;
+      const eachFull = s.eachOpponentAt ? s.eachOpponentAt(at) : (s.eachOpponent ? full / opponents : 0);
+      // What this copy deals with NO cast made this turn. A source outside a
+      // cast package owns its whole output and schedules exactly as it did
+      // before (a body, a walker, an animated land); a member of a cast
+      // package with no declared split is cast-driven end to end.
+      const onOwn = s.stackedAt ? s.stackedAt(at) : (s.shareKey ? 0 : full);
+      const eachOnOwn = s.stackedAt || s.shareKey ? 0 : eachFull;
+      const unit = part === 'stacked' ? onOwn : Math.max(0, full - onOwn);
+      const each = part === 'stacked' ? eachOnOwn : Math.max(0, eachFull - eachOnOwn);
+      // The body (and any pump raising it) belongs to the permanent, never to
+      // the cast package.
+      const out = { each,
+        power: Math.max(0, unit - each * opponents)
+          + (part === 'stacked' ? pumpPerBody * (s.bodies ?? 0) : 0) };
+      ptCache.set(ck, out);
+      return out;
+    };
+    const perCopyNow = (s: Source, scale: number): number => {
+      const unit = (s.outputAt ? s.outputAt(t) : s.output) * scale;
+      const perOpp = s.eachOpponentAt ? s.eachOpponentAt(t) * scale : (s.eachOpponent ? unit / opponents : 0);
+      const single = Math.max(0, unit - perOpp * opponents);
+      return perOpp * opponents + single + pumpPerBody * (s.bodies ?? 0);
+    };
+    /** The cast-driven half of one copy output this turn, at full casts. */
+    const castPartNow = (s: Source): number => {
+      const d = perTurnOf(s, t, 'cast');
+      return d.each * opponents + d.power;
+    };
+    for (const [key, price] of sharedSpend) {
+      const nCasts = sharedCasts.get(key) ?? 0;
+      const spans: ProjSpan[] = [];
+      let now = 0;
+      // One unit of `x` is ONE CHOSEN CAST, so the whole expected package is
+      // `nCasts` units and a span carries the per-cast share of each online
+      // copy CAST-DRIVEN output. The permanent own stacked output is not here:
+      // it rides its `act`/`dep` span and needs no cast to happen.
+      for (const s of priced) {
+        if (s.shareKey !== key) continue;
+        const online = onlineCopies(s);
+        if (online === null) continue;
+        now += online * castPartNow(s);
+        if (nCasts > 1e-9) spans.push({ from: t, to: t, src: s, per: online / nCasts, part: 'cast' });
+      }
+      if (now <= 0 || price <= 0 || nCasts <= 1e-9) {
+        sharedScale.set(key, price > 0 && nCasts > 1e-9 ? 0 : 1);
+        continue;
+      }
+      items.push({ kind: 'share', i: 0, key, cost: price, want: box(nCasts, price),
+        value: now / nCasts, spans });
+    }
+    for (let i = 0; i < priced.length; i++) {
+      const s = priced[i];
       if (s.kind === 'anthem') continue;
       const online = onlineCopies(s);
       if (online === null) continue;
-      let copies = online;
       const spend = (s.upkeepMana ?? 0) + (s.manaForgone ?? 0);
-      if (spend > 0) {
-        copies = Math.min(copies, budget / spend);
-        if (copies <= 0) continue;
-        budget -= copies * spend;
-        upkeepSpend += copies * spend;
-      }
-      const scale = s.shareKey ? sharedScale.get(s.shareKey) ?? 1 : 1;
-      const unit = (s.outputAt ? s.outputAt(t) : s.output) * scale;
-      // Split this copy's table output into the part every opponent takes and
-      // the part that has to be aimed at one opponent.
-      const perOpp = s.eachOpponentAt
-        ? s.eachOpponentAt(t) * scale
-        : (s.eachOpponent ? unit / opponents : 0);
-      const single = Math.max(0, unit - perOpp * opponents);
-      const bodies = s.bodies ?? 0;
-      const unitPower = single + pumpPerBody * bodies;
-      eachOpponentTurn += copies * perOpp;
-      if (unitPower > 1e-9) units.push({ power: unitPower, count: copies });
-      const dealt = copies * (perOpp * opponents + unitPower);
-      turnOutput += dealt;
-      if (s.kind && dealt > 0) detail.push(`T${t} ${s.name} (${s.kind}) ${dealt.toFixed(2)}`);
+      // 10.10 R1: an activation's value is what its span carries - the
+      // permanent's OWN output. The cast-driven half is bought, at a price,
+      // through the shared cast package; valuing it here credited casts
+      // nobody chose (3t STOP 2).
+      const nowD = perTurnOf(s, t, 'stacked');
+      const now = nowD.each * opponents + nowD.power;
+      if (now <= 1e-12) continue;
+      items.push({ kind: 'act', i, key: `act:${s.name}`, cost: spend, want: box(online, spend), value: now,
+        spans: [{ from: t, to: t, src: s, per: 1, part: 'stacked' }] });
     }
-    if (pumpPerBody > 0) detail.push(`T${t} pump +${pumpPerBody.toFixed(2)} per body`);
-    // Deployment, out of what the turn has left. A copy is only castable once
-    // it has been drawn; a land-based source (a manland) costs no mana because
-    // its land drop is already what `manaCurve` counts.
     for (const { s, i } of deployOrder) {
       const cap = s.guaranteed ? 1 : s.quantity * seenBy(format, N, t, extraDraws);
       const want = cap - paid[i];
       if (want <= 1e-9) continue;
       const cost = Math.max(0, s.cmc);
-      // A spell is cast in ONE turn: the turn has to cover a whole copy's cost.
-      // Without this the ledger financed a 4-drop over turns 1-3 a quarter of a
-      // copy at a time, which is not a legal deployment at any of those turns.
-      // v1.4 stage 3d: that rule was a hard `cost > budget -> skip`, i.e. a STEP
-      // in the residual budget, and the residual is a continuous decreasing
-      // function of N and of the other sources present. One 61st card shrank
-      // every earlier `want` by a hair, the residual crossed a later source's
-      // cost, and a whole extra copy was deployed - `standard:1474218` closed
-      // T8 -> T7 on dilution, `381364921` T13 -> T12 on a deletion. `affordable`
-      // keeps the same tightness (a quarter-budget turn still buys ~0.4 % of a
-      // copy) without the discontinuity: it is the chance the turn's actual
-      // leftover covers one whole copy, not a truncation of the expectation.
-      const take = cost <= 0 ? want : Math.min(want, affordable(budget, cost));
-      if (take <= 1e-9) { if (budget <= 1e-9) break; continue; }
-      paid[i] += take;
-      budget -= take * cost;
-      deploySpend += take * cost;
-      if (!Number.isFinite(firstPaid[i])) firstPaid[i] = t;
+      // §10.10 items 2/4: the affordability box is frozen at the turn's ENTRY
+      // budget, so it never moves with a competing item's want; the shared mana
+      // constraint below is the only thing the items compete for.
+      const delay = s.deployDelay ?? 0;
+      const life = s.turns ?? Infinity;
+      const from = t + 1 + delay;
+      const to = Number.isFinite(life) ? Math.min(horizon, t + delay + life) : horizon;
+      // 10.10 items 1-2: what this deployment is worth is what IT causes. For a
+      // cast trigger that is its stacked half only - the cast-driven half is
+      // bought turn by turn through the shared cast package, at a price, and
+      // valuing it here credited casts nobody chose: `s.output` is the MEAN of
+      // `outputAt` over the IDENTIFIED library, so removing one off-plan answer
+      // made the library cheaper, raised every cast count, moved the value of
+      // three zero-stacked cast triggers and re-ordered the turn-3 deployment
+      // knapsack (`commander 381147684`: T3 deployment 3.87 -> 4.02, t* 11 ->
+      // 10, +5.15 T_abs on a strictly worse deck).
+      let value = 0;
+      // 10.10 R2: a cast-trigger deployment is valued by the CASTS IT
+      // RESERVES. On every turn of its span it commits to buy, at that turn's
+      // per-cast price, as many casts as the turn offers and as production net
+      // of the standing reservations can pay; those commitments are written
+      // into `due` when the item is taken (below) and released as the casts
+      // are bought. Zero use => no reservation and value 0: a pinger with
+      // nothing to cast is correctly worth nothing, and a deployment whose
+      // reserved casts are unpayable is filtered by `payable()`.
+      let reserve: number[] | undefined;
+      if (s.stackedAt || s.shareKey) {
+        const spans: ProjSpan[] = [{ from, to, src: s, per: 1, part: 'stacked' }];
+        let castValue = 0;
+        for (let u = from; u <= to; u++) {
+          const d = perTurnOf(s, u, 'stacked');
+          value += (d.each * opponents + d.power) * (decayAt(u) / decayAt(t));
+          const c = perTurnOf(s, u, 'cast');
+          const castUnit = c.each * opponents + c.power;
+          // A package that does not declare its casts is ONE all-or-nothing
+          // unit, exactly as `sharedCasts` prices it; reading 0 here left
+          // every such deployment worth nothing and it was never deployed.
+          const nCasts = s.castsAt ? s.castsAt(u) : 1;
+          if (castUnit <= 1e-12 || nCasts <= 1e-9) continue;
+          const price = s.upkeepAt ? s.upkeepAt(u) : 0;
+          const room = price > 1e-9
+            ? Math.max(0, (u + rampOnline) - (due[u] ?? 0)) / price : Infinity;
+          const x = Math.min(nCasts, room);
+          if (x <= 1e-9) continue;
+          castValue += castUnit * (x / nCasts) * (decayAt(u) / decayAt(t));
+          if (price > 1e-9) {
+            if (!reserve) reserve = new Array(horizon + 2).fill(0);
+            reserve[u] = x * price;
+          }
+        }
+        if (castValue > 1e-12) {
+          value += castValue;
+          spans.push({ from, to, src: s, per: 1, part: 'cast', reserved: true });
+        }
+        if (value <= 1e-12) continue;
+        items.push({ kind: 'dep', i, key: `dep:${s.name}`, cost, want: box(want, cost), value,
+          spans, reserve, upkeep: (s.upkeepMana ?? 0) + (s.manaForgone ?? 0) });
+        continue;
+      }
+      value = s.output * futureFactor(t, from);
+      if (value <= 1e-12) continue;
+      items.push({ kind: 'dep', i, key: `dep:${s.name}`, cost, want: box(want, cost), value,
+        spans: [{ from, to, src: s, per: 1, part: 'stacked' }],
+        upkeep: (s.upkeepMana ?? 0) + (s.manaForgone ?? 0) });
     }
+    // A ramp copy is priced in the same currency: the mana it will produce,
+    // valued at the best damage per mana this turn can actually buy.
+    const lambda = items.reduce((m, it) => (it.kind === 'dep' && it.cost > 0
+      ? Math.max(m, it.value / it.cost) : m), 0);
+    if (lambda > 0 && rampOnline < RAMP_CAP - 1e-9) {
+      for (let j = 0; j < ramp.length; j++) {
+        const r = ramp[j];
+        const want = Math.min(r.quantity * seenBy(format, N, t, 0) - r.paid, RAMP_CAP - rampOnline);
+        if (want <= 1e-9) continue;
+        const cost = Math.max(0, r.cmc);
+        items.push({ kind: 'ramp', i: j, key: `ramp:${r.name}`, cost,
+          want: box(want, cost), value: lambda * futureFactor(t, t + 1), spans: [] });
+      }
+    }
+    // Fractional knapsack over the shared budget: descending value per mana,
+    // positive-value zero-cost items first, canonical key as the tie-break.
+    const live = items.filter((it) => it.want > 1e-9);
+    const density = (it: TurnItem): number => (it.cost <= 0 ? Infinity : it.value / it.cost);
+    /** Fill `take` along `seq` under one shared mana constraint; returns the
+     * budget left. Wants are the boxes frozen at `B_entry`; nothing is
+     * recomputed against the residual. */
+    /** Copies of a deployment whose future reservations are payable: on every
+     * turn it claims output for, `due(s) + x*upkeep` must fit that turn's
+     * production. */
+    const payable = (it: TurnItem): number => {
+      if (it.kind !== 'dep') return Infinity;
+      let room = Infinity;
+      if (it.reserve) {
+        for (let s = t; s <= horizon; s++) {
+          const q = it.reserve[s] ?? 0;
+          if (q > 1e-9) room = Math.min(room, Math.max(0, (s + rampOnline) - due[s]) / q);
+        }
+      }
+      const c = it.upkeep ?? 0;
+      if (c <= 1e-9) return room;
+      for (const sp of it.spans) {
+        for (let s = sp.from; s <= Math.min(sp.to, horizon); s++) {
+          room = Math.min(room, Math.max(0, (s + rampOnline) - due[s]) / c);
+        }
+      }
+      return room;
+    };
+    const fill = (seq: readonly TurnItem[], into: Map<string, number>, budget0: number): number => {
+      let b = budget0;
+      // The hold this turn's own dues place on OPTIONAL new spending. An
+      // activation that owns a reservation releases it as it is taken.
+      // stage 3o: the hold may never exceed what this turn's activations can
+      // actually absorb. `due` reserves an OPTIONAL per-turn payment on every
+      // turn of a deployment's span, but on a turn where the activation is not
+      // even offered - `box` zeroes it below 75 % of its cost, so an unanimated
+      // manland has no `act` item at all - the reservation holds mana against a
+      // payment that cannot be made. That hold sat at `produced` on the early
+      // turns, so `b - held` was a near-zero residual and an INFINITESIMAL
+      // change in the expected deployed copies (`quantity * seenBy(N)`) moved
+      // the free mana by tens of percent: +4 unknown slots on `standard:1445903`
+      // shrank the reservation, bought more ramp on T3/T4 and closed the kill a
+      // turn EARLIER (t* 10 -> 9, W 23.9 -> 33.7, total +7.8). A reservation is
+      // only real up to the payment on offer, so it is bounded by it; the
+      // release below is unchanged (SS 10.10 item 1: a debit that is a choice is
+      // charged when the choice is taken).
+      // 10.10 R2: a cast-trigger deployment reserves the price of the casts
+      // it commits to; the `share` item IS that purchase, so it releases the
+      // hold exactly as an `act` does.
+      const offered = live.reduce((sum, it) =>
+        sum + (it.kind === 'act' || it.kind === 'share' ? it.want * it.cost : 0), 0);
+      let held = Math.min(dueNow, offered);
+      for (const it of live) {
+        if (it.kind === 'act' || it.kind === 'share') held -= (into.get(it.key) ?? 0) * it.cost;
+      }
+      held = Math.max(0, held);
+      // §10.10 item 2: `RAMP_CAP` is ONE shared resource. Each ramp item's want
+      // was boxed against the whole remaining room, so two options could each
+      // take it and the total paid overshot the cap — mana spent on copies that
+      // produce nothing, and an ADDED ramp option lowered the optimum
+      // (`commander 381382642`). The room is spent once, along the value order.
+      let rampRoom = RAMP_CAP - rampOnline;
+      for (const it of live) if (it.kind === 'ramp') rampRoom -= into.get(it.key) ?? 0;
+      for (const it of seq) {
+        let room = Math.min(it.want - (into.get(it.key) ?? 0), payable(it));
+        if (it.kind === 'ramp') room = Math.min(room, Math.max(0, rampRoom));
+        if (room <= 1e-9) continue;
+        const cap = it.kind === 'dep' || it.kind === 'ramp' ? Math.max(0, b - held) : b;
+        const x = it.cost <= 0 ? room : Math.min(room, cap / it.cost);
+        if (x <= 1e-9) continue;
+        into.set(it.key, (into.get(it.key) ?? 0) + x);
+        b -= x * it.cost;
+        if (it.kind === 'ramp') rampRoom -= x;
+        if (it.kind === 'act' || it.kind === 'share') held = Math.max(0, held - x * it.cost);
+      }
+      return b;
+    };
+    const byValue = live.filter((it) => it.value > 1e-12)
+      .sort((a, b) => density(b) - density(a) || a.key.localeCompare(b.key));
+    // ── §10.10 item 2: "Finish has priority over terminal output" ──
+    // For tau = t..H ascending, solve the same turn problem with value =
+    // each item's own projected damage through tau and test the finish
+    // predicate for EVERY opponent. The first feasible tau wins; then the
+    // leftover budget maximises the discounted contribution; ties break on
+    // least spend, then canonical id. With no feasible tau this is exactly
+    // the previous objective. Closes 3j OPEN 1: the per-turn value maximum
+    // preferred a body whose discounted future output beat the activation
+    // that closed a turn earlier, and W reads the FIRST FINISH.
+    const spanUnits = (it: TurnItem, s: number, x: number, out: DamageUnit[]): number => {
+      let each = 0;
+      for (const sp of it.spans) {
+        if (s < sp.from || s > sp.to || sp.reserved) continue;
+        const d = perTurnOf(sp.src, s, sp.part);
+        each += d.each * sp.per * x;
+        if (d.power > 1e-9) out.push({ power: d.power, count: sp.per * x });
+      }
+      return each;
+    };
+    const needed = remaining.reduce((sum, r) => sum + r, 0);
+    const scan = Number.isFinite(needed) && needed > 1e-9 && live.length > 0 && budget > 1e-9;
+    // Cumulative aggregate damage per unit of x, by tau — the cheap necessary
+    // condition that keeps the per-opponent simulation off the hot path.
+    const cum = new Map<string, number[]>();
+    /** The turns an item's spans actually cover — outside them `spanUnits` is
+     * identically zero, so the cumulative array is flat there. An `act` or
+     * `share` span is a single turn, so this is the whole horizon of work for
+     * most items. */
+    const spanLo = (it: TurnItem): number =>
+      it.spans.reduce((m, sp) => Math.min(m, sp.from), Infinity);
+    const spanHi = (it: TurnItem): number =>
+      it.spans.reduce((m, sp) => Math.max(m, sp.to), -Infinity);
+    if (scan) {
+      for (const it of live) {
+        const arr = new Array(horizon + 2).fill(0);
+        let acc = 0;
+        const lo = Math.max(Math.max(2, t), spanLo(it));
+        const hi = Math.min(horizon, spanHi(it));
+        for (let s = Math.max(2, t); s <= horizon; s++) {
+          if (s >= lo && s <= hi) {
+            const u: DamageUnit[] = [];
+            acc += spanUnits(it, s, 1, u) * opponents + u.reduce((sum, x) => sum + x.power * x.count, 0);
+          }
+          arr[s] = acc;
+        }
+        cum.set(it.key, arr);
+      }
+    }
+    const aggregate = (alloc: Map<string, number>, tau: number): number => {
+      let sum = 0;
+      for (const [k, x] of alloc) sum += ((cum.get(k) as number[])?.[tau] ?? 0) * x;
+      return sum;
+    };
+    /** The FIRST turn `alloc` clears every opponent, or `Infinity`. Identical
+     * to `finishesBy(alloc, tau)` for every tau (`finishTurnOf <= tau`), and
+     * computed once instead of once per tau. */
+    const finishTurnOf = (alloc: Map<string, number>, upTo: number): number => {
+      const rem = remaining.slice();
+      for (let s = Math.max(2, t); s <= upTo; s++) {
+        const u: DamageUnit[] = [];
+        let each = 0;
+        for (const it of live) {
+          const x = alloc.get(it.key) ?? 0;
+          if (x > 1e-9) each += spanUnits(it, s, x, u);
+        }
+        allocateDamage(rem, each, u);
+        if (rem.every((r) => r <= 1e-9)) return s;
+      }
+      return Infinity;
+    };
+    const finishesBy = (alloc: Map<string, number>, tau: number): boolean => {
+      const rem = remaining.slice();
+      for (let s = Math.max(2, t); s <= tau; s++) {
+        const u: DamageUnit[] = [];
+        let each = 0;
+        for (const it of live) {
+          const x = alloc.get(it.key) ?? 0;
+          if (x > 1e-9) each += spanUnits(it, s, x, u);
+        }
+        allocateDamage(rem, each, u);
+        if (rem.every((r) => r <= 1e-9)) return true;
+      }
+      return false;
+    };
+    let chosen: Map<string, number> | null = null;
+    // `byValue`, `budget` and every closure `fill` reads are fixed for the whole
+    // tau scan, so the ordinary value allocation and the turn it finishes on do
+    // not depend on tau: both are computed once instead of once per tau.
+    let byContribution: Map<string, number> | null = null;
+    let byContributionFinish = Infinity;
+    for (let tau = Math.max(2, t); scan && tau <= horizon && chosen === null; tau++) {
+      const seq = live
+        .filter((it) => ((cum.get(it.key) as number[])[tau] ?? 0) > 1e-12)
+        .sort((a, b) => {
+          const da = a.cost <= 0 ? Infinity : (cum.get(a.key) as number[])[tau] / a.cost;
+          const db = b.cost <= 0 ? Infinity : (cum.get(b.key) as number[])[tau] / b.cost;
+          return db - da || a.key.localeCompare(b.key);
+        });
+      if (seq.length === 0) continue;
+      // Ceiling first: if the whole budget spent on projected damage cannot
+      // reach every opponent by tau, no allocation can, and the per-opponent
+      // simulation is skipped.
+      const witness = new Map<string, number>();
+      fill(seq, witness, budget);
+      if (aggregate(witness, tau) + 1e-9 < needed) continue;
+      if (!finishesBy(witness, tau)) continue;
+      // "then maximise the discounted contribution subject to that finish":
+      // the ordinary value allocation is tried FIRST, so the finish rule only
+      // moves an allocation that would otherwise miss this tau. The projected
+      // -density fill is the fallback witness (max projected damage).
+      if (byContribution === null) {
+        byContribution = new Map<string, number>();
+        fill(byValue, byContribution, budget);
+        byContributionFinish = finishTurnOf(byContribution, horizon);
+      }
+      chosen = aggregate(byContribution, tau) + 1e-9 >= needed
+        && byContributionFinish <= tau ? byContribution : witness;
+    }
+    const take = chosen ?? new Map<string, number>();
+    for (const it of live) budget -= (take.get(it.key) ?? 0) * it.cost;
+    budget = fill(byValue, take, budget);
+    for (const it of live) {
+      const x = take.get(it.key) ?? 0;
+      if (x <= 1e-9) continue;
+      if (it.kind === 'share') {
+        sharedScale.set(it.key, x / (sharedCasts.get(it.key) || 1));
+        spellSpend += x * it.cost;
+      }
+      else if (it.kind === 'act') upkeepSpend += x * it.cost;
+      else if (it.kind === 'dep') {
+        paid[it.i] += x; deploySpend += x * it.cost;
+        if (!Number.isFinite(firstPaid[it.i])) firstPaid[it.i] = t;
+        const c = it.upkeep ?? 0;
+        if (c > 1e-9) {
+          for (const sp of it.spans) {
+            for (let s = sp.from; s <= Math.min(sp.to, horizon); s++) due[s] += x * c;
+          }
+        }
+        if (it.reserve) {
+          for (let s = t; s <= horizon; s++) {
+            const q = it.reserve[s] ?? 0;
+            if (q > 1e-9) due[s] += x * q;
+          }
+        }
+      } else { ramp[it.i].paid += x; rampSpend += x * it.cost; }
+    }
+    for (const [key] of sharedSpend) if (!sharedScale.has(key)) sharedScale.set(key, 0);
+    // ── what the chosen allocation actually deals ──
+    for (const s of priced) {
+      if (s.kind === 'anthem') continue;
+      // 10.10 R1: the two halves of ONE row settle exactly as the two spans
+      // that were chosen and paid for. The permanent's own output rides the
+      // `act` copies; the cast-driven half rides the SHARE package, whose
+      // value and span were built over every online copy — so it is credited
+      // on the online copies at the scale of the casts actually bought, and
+      // NO damage is credited without a chosen, priced cast. That scale is
+      // ZERO when no share item was taken, never the old `?? 1`, which
+      // credited a spellslinger's whole cast output free against a body row
+      // of the same card; and a pinger with no stacked output has no `act`
+      // item at all, which silently dropped its bought casts (3t STOP 2).
+      const actCopies = take.get(`act:${s.name}`) ?? 0;
+      const scale = s.shareKey ? sharedScale.get(s.shareKey) ?? 0 : 0;
+      const castCopies = scale > 1e-9 ? (onlineCopies(s) ?? 0) : 0;
+      if (actCopies <= 1e-9 && castCopies <= 1e-9) continue;
+      const st = perTurnOf(s, t, 'stacked');
+      const ct = perTurnOf(s, t, 'cast');
+      const castPower = ct.power * scale;
+      eachOpponentTurn += actCopies * st.each + castCopies * ct.each * scale;
+      if (st.power > 1e-9 && actCopies > 1e-9) units.push({ power: st.power, count: actCopies });
+      if (castPower > 1e-9 && castCopies > 1e-9) units.push({ power: castPower, count: castCopies });
+      const dealt = actCopies * (st.each * opponents + st.power)
+        + castCopies * (ct.each * scale * opponents + castPower);
+      turnOutput += dealt;
+      if (s.kind && dealt > 0) detail.push(`T${t} ${s.name} (${s.kind}) ${dealt.toFixed(2)}`);
+    }
+    if (pumpPerBody > 0) detail.push(`T${t} pump +${pumpPerBody.toFixed(2)} per body`);
     for (let i = 0; i < sources.length; i++) paidCum[i][t] = paid[i];
+    rampOnline = Math.min(RAMP_CAP, ramp.reduce((sum, r) => sum + r.paid, 0));
     if (t >= 2) {
       allocateDamage(remaining, eachOpponentTurn, units);
       perTurn.push(turnOutput);
@@ -520,6 +1026,7 @@ export function scheduleDamage(
     shortfall[t] = Math.max(...remaining);
     ledger.push(`T${t} mana ${produced.toFixed(2)} | spells ${spellSpend.toFixed(2)}`
       + ` | activations ${upkeepSpend.toFixed(2)} | deployment ${deploySpend.toFixed(2)} cumulative`
+      + ` | ramp ${rampSpend.toFixed(2)} cumulative`
       + ` | left ${budget.toFixed(2)} | table damage ${turnOutput.toFixed(2)}`
       + ` | opponents ${remaining.map((r) => r.toFixed(1)).join('/')}`);
   }
@@ -548,6 +1055,53 @@ function combatsBy(tStar: number): number {
 }
 
 /**
+ * §1 W's utility is a MAXIMUM over the feasible turns —
+ * `u_l = max_{t >= t*} [Phi_l(t)] * clip(J_l(n(t))/pWin) * d_p(t)` — and NOT
+ * its value at `t*` alone. Stage 3h's residual was exactly that short-circuit:
+ * `r = ceil(target/(combatsBy(t)*theta))` FALLS as `t` grows and
+ * `drawSampleSizes(t)` deepens, so a deck whose clock slipped one turn under
+ * dilution bought a cheaper, better-accessed line and W ROSE on an added
+ * unknown slot (`commander:381372568` +7.68). Evaluated here, the value of
+ * every turn is a function of `t` alone; raising `t*` only SHRINKS the
+ * feasible set `{t : t* <= t <= H}`, so the maximum cannot rise (§10.10
+ * item 3's nesting argument).
+ *
+ * `Phi` needs no separate test: the damage schedule is cumulative, so its
+ * predicate holds at every `t >= t*`.
+ *
+ * Access is memoised on `(t, the pools' (K, r) shape)` — the only inputs
+ * `poolsAccess` reads — because the theta scan re-asks for the same shapes on
+ * every turn.
+ */
+function maximiseOverTurns(
+  format: ScoreFormat, N: number, tStar: number, sources: readonly Source[], target: number,
+  poolSizeCap: number, poolsFor: (names: ReadonlySet<string>, r: number) => RecipePool[],
+): { turn: number; line: { r: number; names: Set<string>; access: number }; u: number } | null {
+  const norms = normsFor(format);
+  const memo = new Map<string, number>();
+  const accessOf = (t: number, pools: readonly RecipePool[]): number => {
+    const key = `${t}|${pools.map((p) => `${poolK(p)}:${poolR(p)}`).join(',')}`;
+    const hit = memo.get(key);
+    if (hit !== undefined) return hit;
+    const value = poolsAccess(format, N, t, pools);
+    memo.set(key, value);
+    return value;
+  };
+  let best: { turn: number; line: { r: number; names: Set<string>; access: number }; u: number } | null = null;
+  for (let t = tStar; t <= horizonFor(format); t++) {
+    const line = bestLine(format, N, t, sources, target, combatsBy(t), poolSizeCap,
+      (names, r) => accessOf(t, poolsFor(names, r)));
+    if (line === null) continue;
+    const u = clip(line.access / norms.winAccessTarget)
+      * Math.pow(2, -Math.max(0, t - norms.fastClosingTurn) / norms.delayHalfLifeTurns);
+    // Ties keep the EARLIER turn: the decay is non-increasing, so a later turn
+    // ties only by accident of access and the earlier close is the honest one.
+    if (best === null || u > best.u + 1e-12) best = { turn: t, line, u };
+  }
+  return best;
+}
+
+/**
  * §1 W "bounded cost/output bins": pick the `r` CHEAPEST supported threats and
  * size `r` from THOSE members' mean output, so cost and output describe the
  * same cards.
@@ -569,6 +1123,7 @@ function combatsBy(tStar: number): number {
 export function bestLine(
   format: ScoreFormat, N: number, tStar: number,
   members: readonly Source[], target: number, combats: number, poolSizeCap: number,
+  rank?: (names: ReadonlySet<string>, r: number) => number,
 ): { r: number; names: Set<string>; access: number } | null {
   // Zero-output members are not threats and must not SIZE the line either: one
   // 0/0 Walking Ballista sorted first made `mean` 0 and returned null, deleting
@@ -594,14 +1149,29 @@ export function bestLine(
   for (const theta of thresholds) {
     const subset = positive.filter((m) => m.output >= theta);
     const r = Math.min(poolSizeCap, Math.max(1, Math.ceil(target / (combats * theta))));
-    const guaranteed = subset.reduce((sum, m) => sum + (m.guaranteed ? m.quantity : 0), 0);
-    const K = subset.reduce((sum, m) => sum + (m.guaranteed ? 0 : m.quantity), 0);
-    const rEff = Math.max(0, r - guaranteed);
-    const access = ns.reduce((sum, n) => sum + H(N, K, n, rEff), 0) / ns.length;
+    // v1.4 stage 3h: SELECTION = VALUATION. Stage 3g ranked on the VERIFIED
+    // subset only, which is still not what the evaluator reads: the recipe
+    // values the chosen line with `readAccessAt` over its COMPLETE pool list
+    // including `extraPools` (the token converter, the drain outlet/fodder, the
+    // control engine). Ranking a single pool by `H` therefore ordered theta
+    // candidates differently from the number reported, and a hair of N flipped
+    // the argmax (`378293112`: Token/Food 41xr10 -> 5xr2 on one added slot,
+    // stage 3g phase 1 class b). Each caller now supplies `rank`, building that
+    // candidate's full pool set and evaluating it, so the maximised quantity is
+    // the one that is reported.
+    const names = new Set(subset.map((m) => m.name));
+    let access: number;
+    if (rank) access = rank(names, r);
+    else {
+      const guaranteed = subset.reduce((sum, m) => sum + (m.guaranteed ? m.quantity : 0), 0);
+      const K = subset.reduce((sum, m) => sum + (m.guaranteed ? 0 : m.quantity), 0);
+      const rEff = Math.max(0, r - guaranteed);
+      access = ns.reduce((sum, n) => sum + H(N, K, n, rEff), 0) / ns.length;
+    }
     // Ties break on the SMALLER line, then on the higher output floor, so the
     // choice is a deterministic function of the identified set.
     if (!best || access > best.access + 1e-12 || (access > best.access - 1e-12 && r < best.r)) {
-      best = { r, names: new Set(subset.map((m) => m.name)), access };
+      best = { r, names, access };
     }
   }
   return best;
@@ -670,6 +1240,7 @@ function typedFinisherSources(
       upkeepMana: o.upkeepMana, manaForgone: o.manaForgone, turns: o.turns,
       deployDelay: o.deployDelay, kind: o.kind, trace: o.trace,
       outputAt: o.outputAt, shareKey: o.shareKey, upkeepAt: o.upkeepAt,
+      castsAt: o.castsAt, stackedAt: o.stackedAt,
       // Only an animated land actually attacks; a walker, a pinger and a draw
       // trigger put no body on the board for a pump to raise.
       bodies: o.kind === 'manland' ? 1 : 0,
@@ -954,13 +1525,79 @@ function typedComboRecipes(all: readonly Candidate[], opponents: number, audit?:
  * "Food is not a creature without a conversion effect" is satisfied by the
  * converter's presence, not assumed.
  */
+/**
+ * 10.10 R1 / stage 3v: ONE PHYSICAL CARD IS ONE ROW. A card that both attacks
+ * and carries a typed trigger entered a family twice - once from `bodies`,
+ * once from `typedFinisherSources` - so the ledger paid its mana twice, the
+ * per-card keys (`act:<name>`, `dep:<name>`) collided, and `bestLine` sized a
+ * line from two rows of a singleton (`deck-score-v12.test.ts:594`: r = 2 for a
+ * commander, `poolR` 1, no library copy, access 0, W 0).
+ *
+ * The merged row keeps the split 10.10 needs: the body's power is output the
+ * permanent makes on its OWN (`stackedAt`), the trigger's is cast-driven and
+ * only credited through a bought cast. Merging BEFORE `bestLine` is also what
+ * keeps theta monotone under blanking: one blanked card removes exactly one
+ * row from every theta subset.
+ */
+function mergeSources(sources: readonly Source[], opponents: number): Source[] {
+  const by = new Map<string, Source[]>();
+  for (const s of sources) {
+    const g = by.get(s.name);
+    if (g) g.push(s); else by.set(s.name, [s]);
+  }
+  const out: Source[] = [];
+  for (const group of by.values()) {
+    if (group.length === 1) { out.push(group[0]); continue; }
+    const full = (s: Source, u: number): number => (s.outputAt ? s.outputAt(u) : s.output);
+    const own = (s: Source, u: number): number =>
+      (s.stackedAt ? s.stackedAt(u) : (s.shareKey ? 0 : full(s, u)));
+    const each = (s: Source, u: number): number =>
+      (s.eachOpponentAt ? s.eachOpponentAt(u) : (s.eachOpponent ? full(s, u) / opponents : 0));
+    const sum = (f: (s: Source, u: number) => number) =>
+      (u: number): number => group.reduce((acc, s) => acc + f(s, u), 0);
+    // The cast package (share key, per-cast price, cast cap) belongs to the
+    // trigger half; there is at most one per card.
+    const host = group.find((s) => s.shareKey) ?? group[0];
+    out.push({
+      name: host.name,
+      cmc: Math.max(...group.map((s) => s.cmc)),
+      quantity: Math.max(...group.map((s) => s.quantity)),
+      guaranteed: group.some((s) => s.guaranteed),
+      output: group.reduce((acc, s) => acc + s.output, 0),
+      upkeepMana: group.reduce((acc, s) => acc + (s.upkeepMana ?? 0), 0),
+      manaForgone: group.reduce((acc, s) => acc + (s.manaForgone ?? 0), 0),
+      turns: Math.max(...group.map((s) => s.turns ?? Infinity)),
+      deployDelay: Math.min(...group.map((s) => s.deployDelay ?? 0)),
+      kind: group.find((s) => s.kind)?.kind,
+      trace: group.map((s) => s.trace).filter((x) => !!x).join(' + ') || undefined,
+      bodies: group.reduce((acc, s) => acc + (s.bodies ?? 0), 0),
+      outputAt: sum(full),
+      stackedAt: sum(own),
+      eachOpponentAt: sum(each),
+      shareKey: host.shareKey,
+      upkeepAt: host.upkeepAt,
+      castsAt: host.castsAt,
+      tolled: group.some((s) => s.tolled),
+    });
+  }
+  return out;
+}
+
 function scheduleRecipe(
   id: string, label: (r: number, t: number) => string, format: ScoreFormat, N: number,
-  sources: Source[], verified: Member[], extraPools: RecipePool[], manaCurve: ManaCurve,
+  sources: Source[], verified: Member[],
+  /** §10.4 / stage 3h "selection = valuation": the prerequisite pools this
+   * recipe owes are a function of the line actually chosen, never a fixed toll.
+   * A converter pool charged against a line that holds no Food producer made
+   * DELETING the deck's last converter raise joint access 5.3x (`commander
+   * 380158752`, `Fallen Ideal`: [r=1 q=1] vanished with it, access .0429 ->
+   * .2287, W 11 -> 38.3, +21.84 T_abs on a strictly worse deck). */
+  extraPools: (names: ReadonlySet<string>) => RecipePool[], manaCurve: ManaCurve,
   finish: FinishTarget, poolSizeCap: number, extraDraws: number, audit?: Audit,
 ): Recipe | null {
   const target = finish.perOpponent * finish.opponents;
   if (sources.length === 0) return note(audit, id, `${id}.no_output_source`, 'no card in the family produces output');
+  sources = mergeSources(sources, Math.max(1, Math.round(finish.opponents)));
   if (verified.length === 0) return note(audit, id, `${id}.unverified`, 'every output source is only partially supported (s < 1)');
   const schedule = scheduleDamage(format, N, sources, manaCurve, finish, extraDraws);
   const tStar = schedule.tStar;
@@ -969,8 +1606,43 @@ function scheduleRecipe(
       `${schedule.ceiling.toFixed(1)} of ${target} expected damage by T${horizonFor(format)}`
       + `, shortfall ${schedule.shortfall[horizonFor(format)].toFixed(1)} on the most-alive opponent`);
   }
-  const line = bestLine(format, N, tStar, sources, target, combatsBy(tStar), poolSizeCap);
-  if (line === null) return note(audit, id, `${id}.no_positive_output`, 'every scheduled source has zero output');
+  // v1.4 stage 3w (10.4): a TOLLED row (a Food/Treasure producer) is only
+  // usable by a line that ALSO pays its converter pool, and `extraPools`
+  // attaches that toll when the chosen names hold one. Charging it per THETA
+  // SUBSET made the candidate set GROW on deletion: at `commander:381391389`
+  // blanking the only Treasure producer above theta 3 deleted the toll and
+  // raised the SAME theta-3 line's access .007604 -> .019493 (u .022 -> .049,
+  // W 2.0 -> 4.3, total +1.84 - the total is the 20+.8*W cap). The toll-free
+  // line always exists (a pure creature-token line needs no converter), so it
+  // is evaluated as its OWN variant - with its OWN schedule, because a line
+  // that declines the Food may not close on the turn the Food bought. Each
+  // variant's row set is a fixed function of the deck, so deleting a row only
+  // ever weakens a variant; the maximum over the two cannot rise.
+  // The closure builds EXACTLY the pool list this function returns below, so
+  // `bestLine` maximises the access the recipe is then valued at.
+  // No fallback to the WHOLE `verified` list: a theta-subset that holds no
+  // verified member has no verified access, and substituting every verified
+  // card let an unverified 1-member line read access 1.000000 against .181818
+  // for the SAME line with a second member (v1.4 stage 3n). An empty pool with
+  // `r > 0` is now read as unsatisfiable (access 0) by the access polynomial,
+  // which is what "no supported copy is in this line" means.
+  const poolsFor = (names: ReadonlySet<string>, r: number): RecipePool[] =>
+    [{ members: verified.filter((m) => names.has(m.name)), r }, ...extraPools(names)];
+  const lean = sources.filter((s) => !s.tolled);
+  const leanRun = lean.length > 0 && lean.length < sources.length
+    ? (() => {
+      const leanSchedule = scheduleDamage(format, N, lean, manaCurve, finish, extraDraws);
+      if (leanSchedule.tStar === null) return null;
+      const leanBest = maximiseOverTurns(format, N, leanSchedule.tStar, lean, target, poolSizeCap, poolsFor);
+      return leanBest && { rows: lean, schedule: leanSchedule, tStar: leanSchedule.tStar, best: leanBest };
+    })()
+    : null;
+  const fullBest = maximiseOverTurns(format, N, tStar, sources, target, poolSizeCap, poolsFor);
+  const full = fullBest && { rows: sources, schedule, tStar, best: fullBest };
+  const run = leanRun && (!full || leanRun.best.u > full.best.u + 1e-12) ? leanRun : full;
+  if (run === null) return note(audit, id, `${id}.no_positive_output`, 'every scheduled source has zero output');
+  const best = run.best;
+  const line = best.line;
   const r = line.r;
   // Section 10.8, unmasked at H20: `requiredCopies` sizes `r` from the
   // POSITIVE-output sources only, so the access pool behind it must hold the
@@ -978,13 +1650,14 @@ function scheduleRecipe(
   // creatures raise `J_l` from 0 to .01 - "adding free 0-power bodies never
   // raises Win" inverted - because they widened the pool without ever being
   // asked to deal damage. At T12 both sides were W = 0 and the mismatch was
-  // invisible. Falls back to the whole verified list when no positive source
-  // is verified, which is the pre-existing behaviour for that case.
-  const poolMembers = verified.filter((m) => line.names.has(m.name));
-  const pools: RecipePool[] = [{ members: poolMembers.length > 0 ? poolMembers : verified, r }, ...extraPools];
+  // invisible.
+  const pools: RecipePool[] = poolsFor(line.names, r);
   return {
-    id, label: label(r, tStar), pools, extraCost: 0, tStar, schedule,
-    criticalNames: new Set([...sources.map((s) => s.name), ...extraPools.flatMap((p) => p.members.map((m) => m.name))]),
+    id, label: label(r, best.turn), pools, extraCost: 0, tStar: run.tStar,
+    valueTurn: best.turn, schedule: run.schedule,
+    selected: { u: best.u, access: best.line.access, turn: best.turn },
+    criticalNames: new Set([...run.rows.map((s) => s.name),
+      ...extraPools(line.names).flatMap((p) => p.members.map((m) => m.name))]),
   };
 }
 
@@ -1023,7 +1696,7 @@ function pressureRecipes(
   // pool would count the card twice.
   const pressureVerified = dedupeMembers([...verifiedBodies, ...typed.verified]);
   const pressure = scheduleRecipe('combat_wide', (r) => `Creature pressure (${r} threats)`,
-    format, N, pressureSources, pressureVerified, [], manaCurve, finish, poolSizeCap, typed.extraDraws, audit);
+    format, N, pressureSources, pressureVerified, () => [], manaCurve, finish, poolSizeCap, typed.extraDraws, audit);
   if (pressure) out.push(pressure);
 
   // (4) Conversion is its OWN variant, never a replacement: a deck with both a
@@ -1103,16 +1776,27 @@ function pressureRecipes(
     // ponytail: a flat 2 power per producer per turn, the v1 assumption kept.
     // Upgrade path is a curated per-card token table.
     const isCommanderProducer = (e: DeckEntry) => commanders.includes(e.feature);
+    const foodNames = new Set(foodMakers.map((e) => e.feature.card.name));
     const converted: Source[] = [
       ...bodies,
-      ...producers.map((e) => sourceOf(e.feature, e.quantity, producerOutput(e.feature), isCommanderProducer(e))),
+      ...producers.map((e) => ({
+        ...sourceOf(e.feature, e.quantity, producerOutput(e.feature), isCommanderProducer(e)),
+        // Only this half owes the conversion toll; `mergeSources` ORs it onto
+        // the card's single row, and `bestLine` scans the toll-free line too.
+        tolled: foodNames.has(e.feature.card.name),
+      })),
     ];
     const verifiedConverted = dedupeMembers([
       ...verifiedBodies,
       ...producers.filter((e) => e.feature.s >= 1)
         .map((e) => toMember(e.feature, e.quantity, isCommanderProducer(e))),
     ]);
-    const extra: RecipePool[] = foodMakers.length > 0 ? [{ members: converters, r: 1 }] : [];
+    // The conversion toll is owed by the line that actually runs a Food-like
+    // producer. A pure creature-token line needs no converter, so charging it
+    // one made losing the converter a gain.
+    const extra = (names: ReadonlySet<string>): RecipePool[] =>
+      (foodMakers.length > 0 && [...foodNames].some((n) => names.has(n))
+        ? [{ members: converters, r: 1 }] : []);
     const tokens = scheduleRecipe('tokens', (r) => `Token/Food conversion (${r} bodies)`,
       format, N, [...converted, ...typed.sources], [...verifiedConverted, ...typed.verified],
       extra, manaCurve, finish, poolSizeCap, typed.extraDraws, audit);
@@ -1173,24 +1857,30 @@ function drainRecipe(
     return note(audit, 'drain', 'drain.schedule_short',
       `${combatCeiling(format, N, sources, manaCurve, extraDraws).toFixed(1)} of ${drainTarget} drain by T${horizonFor(format)}`);
   }
-  const payoffLine = bestLine(format, N, tStar, sources, drainTarget, combatsBy(tStar), poolSizeCap);
-  if (payoffLine === null) return note(audit, 'drain', 'drain.no_positive_output', 'no payoff with positive output');
+  // v1.4 stage 3h: rank on the recipe's WHOLE pool list (outlet + payoffs +
+  // fodder), the same joint access `evaluateRecipe` reads back.
+  const drainPools = (names: ReadonlySet<string>, r: number): RecipePool[] => [
+    { members: outlets, r: 1 },
+    { members: payoffs.filter((m) => names.has(m.name)), r },
+    // v1.4 stage 3b (§10.4): the DEMAND is frozen at three bodies. Clamping
+    // it to the copies this deck happens to hold made the requirement fall
+    // when fodder was deleted or blanked, which RAISED joint access.
+    { members: fodder, r: 3 },
+  ];
+  const bestDrain = maximiseOverTurns(format, N, tStar, sources, drainTarget, poolSizeCap, drainPools);
+  if (bestDrain === null) return note(audit, 'drain', 'drain.no_positive_output', 'no payoff with positive output');
+  const payoffLine = bestDrain.line;
   const rPayoff = payoffLine.r;
 
   return {
     id: 'drain',
     label: `Aristocrats drain (${triggersPerTurn}/turn, ${rPayoff} payoffs)`,
-    pools: [
-      { members: outlets, r: 1 },
-      { members: payoffs.filter((m) => payoffLine.names.has(m.name)), r: rPayoff },
-      // v1.4 stage 3b (§10.4): the DEMAND is frozen at three bodies. Clamping
-      // it to the copies this deck happens to hold made the requirement fall
-      // when fodder was deleted or blanked, which RAISED joint access.
-      { members: fodder, r: 3 },
-    ],
+    pools: drainPools(payoffLine.names, rPayoff),
     extraCost: 1,
     criticalNames: new Set([...outlets, ...payoffs, ...fodder].map((m) => m.name)),
+    selected: { u: bestDrain.u, access: payoffLine.access, turn: bestDrain.turn },
     tStar,
+    valueTurn: bestDrain.turn,
   };
 }
 
@@ -1327,25 +2017,28 @@ function controlRecipe(
       + `, shortfall ${schedule.shortfall[horizonFor(format)].toFixed(1)}`);
   }
   const tStar = schedule.tStar;
-  const finisherLine = bestLine(format, N, tStar, finisherSources, combatTarget, combatsBy(tStar), norms.poolSizeCap);
-  const rFinisher = finisherLine?.r ?? 1;
-
   // §9.4 JOINT access: the engine that sustains the plan and the finisher that
   // ends it are BOTH required by t*, so they enter one disjoint polynomial and
   // J is read once. Applying it again inside the output would double-charge.
+  // Built BEFORE the line so `bestLine` can rank its candidates on this same
+  // joint quantity (v1.4 stage 3h: selection = valuation).
   const engines: Member[] = pickMembers(nonLand, commanders, (f) => f.isDrawEngine && f.s >= 1);
   const finisherNames = new Set(finishers.map((m) => m.name));
   const enginePool: RecipePool = { members: engines.filter((m) => !finisherNames.has(m.name)), r: 1 };
   // Same rule: the finisher demand comes from the output schedule, never from
   // the number of finishers that happen to be identified.
-  const finisherPool: RecipePool = {
-    members: finisherLine ? finishers.filter((m) => finisherLine.names.has(m.name)) : finishers,
-    r: rFinisher,
+  const controlPools = (names: ReadonlySet<string> | null, r: number): RecipePool[] => {
+    const finisherPool: RecipePool = {
+      members: names ? finishers.filter((m) => names.has(m.name)) : finishers, r,
+    };
+    return enginePool.members.length > 0 ? [enginePool, finisherPool] : [finisherPool];
   };
-  const pools = enginePool.members.length > 0 ? [enginePool, finisherPool] : [finisherPool];
-  const poly = buildDisjointAccessPolynomial(N, pools.map((pl) => ({ K: poolK(pl), r: poolR(pl) })));
-  const ns = drawSampleSizes(format, tStar);
-  const J = ns.reduce((sum, n) => sum + readAccessAt(poly, N, n), 0) / ns.length;
+  const finisherLine = bestLine(format, N, tStar, finisherSources, combatTarget, combatsBy(tStar),
+    norms.poolSizeCap, (names, r) => poolsAccess(format, N, tStar, controlPools(names, r)));
+  const rFinisher = finisherLine?.r ?? 1;
+  const pools = controlPools(finisherLine ? finisherLine.names : null, rFinisher);
+  const finisherPool = pools[pools.length - 1];
+  const J = poolsAccess(format, N, tStar, pools);
 
   // §9.4 `u_control = durable * J(t*) * 2^(-max(0, t* - Tfast)/h)`. The spec
   // writes the constant 6; it means Tfast, which the frozen norms put at 7 for
@@ -1399,7 +2092,7 @@ function spellsRecipes(
   if (castSources.length > 0) {
     const verified = typed.verified.filter((m) => typed.castNames.has(m.name));
     const line = scheduleRecipe('spells', (r, t) => `Spellslinger cast triggers (${r} sources, closes T${t})`,
-      format, N, castSources, verified, [], manaCurve, finish, poolSizeCap, typed.extraDraws, audit);
+      format, N, castSources, verified, () => [], manaCurve, finish, poolSizeCap, typed.extraDraws, audit);
     if (line) {
       line.trace = {
         resource: sched.trace,
@@ -1487,18 +2180,33 @@ interface RecipeEval { recipe: Recipe; u: number; atTurn: number; access: number
 function evaluateRecipe(
   format: ScoreFormat, norms: FormatNorms, N: number, recipe: Recipe, manaCurve: ManaCurve,
 ): RecipeEval {
-  const pools: Pool[] = recipe.pools.map((p) => ({ K: poolK(p), r: poolR(p) }));
-  const poly = buildDisjointAccessPolynomial(N, pools);
-  const accessAt = (t: number): number => {
-    const ns = drawSampleSizes(format, t);
-    return ns.reduce((s, n) => s + readAccessAt(poly, N, n), 0) / ns.length;
-  };
+  // stage 3j: the selection already maximised §1's utility over the feasible
+  // turns WITH the line that turn chose; re-scanning the stored line over every
+  // other turn is a different (and non-monotone) objective. See `Recipe.selected`.
+  if (recipe.selected) {
+    return { recipe, u: recipe.selected.u, atTurn: recipe.selected.turn, access: recipe.selected.access };
+  }
+  const accessAt = (t: number): number => poolsAccess(format, N, t, recipe.pools);
   const scoreAt = (t: number, access: number): number =>
     clip(access / norms.winAccessTarget) * Math.pow(2, -Math.max(0, t - norms.fastClosingTurn) / norms.delayHalfLifeTurns);
 
+  // stage 3i: §1's utility is the MAXIMUM over the feasible turns, and a
+  // scheduled recipe's feasible set is `t* <= t <= H` (its damage schedule is
+  // cumulative, so `Phi` holds at every later turn). Valuing it at `t*` alone
+  // let an added unknown slot RAISE W: the clock slipped a turn, `n(t)`
+  // deepened and access beat the decay (`commander:381372590` Voltron T8 4% ->
+  // T9 5%, +2.24 total). Scanning restores §10.10 item 3's nesting argument —
+  // a later `t*` can only remove turns from this maximum. `maximiseOverTurns`
+  // already did this for the families whose LINE also moves with `t`; here the
+  // pools are fixed, so one scan over the same `scoreAt` is the whole rule.
   if (recipe.tStar != null) {
-    const access = accessAt(recipe.tStar);
-    return { recipe, u: scoreAt(recipe.tStar, access), atTurn: recipe.tStar, access };
+    let best: RecipeEval = { recipe, u: -1, atTurn: recipe.tStar, access: 0 };
+    for (let t = recipe.tStar; t <= horizonFor(format); t++) {
+      const access = accessAt(t);
+      const u = scoreAt(t, access);
+      if (u > best.u + 1e-12) best = { recipe, u, atTurn: t, access };
+    }
+    return best;
   }
 
   const totalCost = recipe.pools.reduce((s, p) => s + poolCost(p), 0) + recipe.extraCost;
@@ -1764,17 +2472,34 @@ export function computeWin(
     .map((r) => evalOf(format, norms, N, r, manaCurve, control));
   evals.sort((a, b) => b.u - a.u || a.recipe.id.localeCompare(b.recipe.id));
 
-  const best = evals[0];
-  const secondDisjoint = evals.find((e) => e !== best && ![...e.recipe.criticalNames].some((n) => best.recipe.criticalNames.has(n)));
-  const u1 = best.u;
-  const u2 = secondDisjoint?.u ?? 0;
-
   const protectPool = nonLand.filter((e) => e.feature.isProtection && e.feature.c <= 2);
   const Kprotect = protectPool.reduce((s, e) => s + e.quantity, 0);
   const ns = drawSampleSizes(format, norms.fastClosingTurn);
   const protect = clip(ns.reduce((s, n) => s + H(N, Kprotect, n, 1), 0) / ns.length / 0.70);
 
-  const score = 100 * (0.85 * u1 + 0.15 * Math.max(u2, u1 * protect));
+  // v1.4 stage 3n: the primary and its independent backup are ONE choice, and
+  // taking the primary greedily as the `u` argmax is not that choice's maximum
+  // — the backup term depends on which critical names the primary already
+  // spent. Measured on `brawl 365001669`: blanking one card cost the Token/Food
+  // line the argmax, Creature pressure took over, and because ITS critical
+  // names are narrower the alternate-win line became independent, so the backup
+  // went u .06 -> .50 and W ROSE 63.0 -> 67.7 on a DELETION (arm D, +1 unknown
+  // slot, the same row inverted). The winning pair existed in the base arm too;
+  // greedy never looked at it. Maximising over the pairs makes the reported
+  // number a maximum over a feasible set, which removing a card can only
+  // shrink (§10.10 item 3). `evals` is sorted by u then id, so a tie still
+  // keeps the same primary the greedy rule picked.
+  const pairs = evals.map((e) => {
+    const second = evals.find((o) => o !== e
+      && ![...o.recipe.criticalNames].some((n) => e.recipe.criticalNames.has(n)));
+    return { e, second, value: 0.85 * e.u + 0.15 * Math.max(second?.u ?? 0, e.u * protect) };
+  });
+  const pair = pairs.reduce((a, b) => (b.value > a.value + 1e-12 ? b : a));
+  const best = pair.e;
+  const secondDisjoint = pair.second;
+  const u1 = best.u;
+
+  const score = 100 * pair.value;
   const backup = secondDisjoint
     ? `independent backup ${secondDisjoint.recipe.label} u=${secondDisjoint.u.toFixed(2)}`
     : `shared bottleneck, protection access ${Math.round(protect * 100)}%`;

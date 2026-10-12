@@ -164,8 +164,10 @@ describe('10.9 item 5 - an unknown slot cannot raise a component', () => {
  * gate is 0 and the report states it RED.
  */
 const KNOWN_W_SIZING_RESIDUE: Record<Profile, string[]> = {
-  commander: ['381394158'],
-  brawl: ['351214491'],
+  // rc10 re-freeze: the R3 per-card online-ledger fix (stage 3v/3w) closed 381394158; the
+  // property scan finds 0 violators at this HEAD (verify-2026-09-19/deck-score/s3w-property.log).
+  commander: [],
+  brawl: [], // rc8 re-freeze: stage 3n's independent-backup-pair fix (piece 3) closed 351214491
 };
 
 describe('10.4 - blanking a card can lower a score, never raise one', () => {
@@ -203,13 +205,14 @@ describe('10.4 - blanking a card can lower a score, never raise one', () => {
 
 describe('10.4 - the stage-3 residue lists, before -> after', () => {
   const NAMED: Array<[Profile, string, number, number]> = [
-    ['commander', '381371853', 1, 55.20],
+    // rc10 re-freeze: 56.80 -> 61.576288659793825 (R3 online-ledger fix, stage 3v/3w).
+    ['commander', '381371853', 1, 61.576288659793825], // rc8 re-freeze: was 55.20
     ['commander', '381364921', 1, 23.28],
     ['commander', '381152421', 1, 20.00],
-    ['commander', '370734291', 10, 20.16],
-    ['brawl', '348643075', 1, 79.040],
-    ['brawl', '348707178', 1, 61.76],
-    ['brawl', '356465177', 1, 65.37],
+    ['commander', '370734291', 10, 20.64], // rc8 re-freeze: was 20.16
+    ['brawl', '348643075', 1, 88.19], // rc8 re-freeze: was 79.040
+    ['brawl', '348707178', 1, 61.60], // rc9 re-freeze: 61.76 -> 61.60
+    ['brawl', '356465177', 1, 67.25], // rc8 re-freeze: was 65.37
   ];
   const cache = new Map<Profile, StrideDeck[]>();
   const find = (profile: Profile, id: string): StrideDeck | undefined => {
@@ -262,5 +265,5 @@ describe('10.4 item 3 - Standard carries a rank, so it carries the probes', () =
 });
 
 it('SCORE_VERSION is the stage-3b evaluator', () => {
-  expect(SCORE_VERSION).toBe('1.4.0-rc4');
+  expect(SCORE_VERSION).toBe('1.4.0-rc10'); // rc10 re-freeze: 1.4.0-rc9 -> 1.4.0-rc10
 });

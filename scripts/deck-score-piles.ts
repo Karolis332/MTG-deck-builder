@@ -109,13 +109,23 @@ export function readCommanderSample(): SampleDeck[] {
   return readSample('commander');
 }
 
-/** One pass over `cards` beats 229k parameterised lookups. */
+/** One pass over `cards` beats 229k parameterised lookups.
+ *
+ * v1.4 stage 3i: `ORDER BY id` is LOAD-BEARING, not tidiness. 73 names carry
+ * more than one printing in this table and all 73 differ in a scored field
+ * (50 in `legalities`, 41 in `oracle_text`), so "first row wins" below picks
+ * the deck's legality and its typed reading. Without an explicit order that
+ * choice is SQLite's physical row order, which moves whenever the table is
+ * rewritten (a card refresh, a vacuum, the desktop app writing through WAL) —
+ * the same stride then rescores a handful of lists differently and the frozen
+ * reference drifts with no scorer edit (stage 3h: brawl knots 364 -> 357,
+ * tiedIntervals 75 -> 73). The printing id is the canonical tie-break. */
 export function cardsByName(): Map<string, DbCard> {
   if (byNameCache) return byNameCache;
   const rows = getDb().prepare(
     `SELECT id, name, mana_cost, cmc, type_line, oracle_text, colors, color_identity, keywords,
             legalities, power, toughness, loyalty, produced_mana, edhrec_rank, layout, subtypes, game_changer
-     FROM cards WHERE type_line <> 'Card // Card'`
+     FROM cards WHERE type_line <> 'Card // Card' ORDER BY id`
   ).all() as DbCard[];
   const map = new Map<string, DbCard>();
   for (const row of rows) {
@@ -228,7 +238,8 @@ export function controlPool(profile: SampleProfile = 'commander'): PoolCard[] {
      WHERE json_extract(legalities,'$.${LEGALITY_KEY[profile]}')='legal'
        AND layout NOT IN ('art_series','token','double_faced_token','emblem')
        AND type_line <> 'Card // Card'
-       AND type_line NOT LIKE 'Basic Land%'`
+       AND type_line NOT LIKE 'Basic Land%'
+     ORDER BY id`
   ).all() as DbCard[];
   const built = rows
     .filter((c) => !/\bLand\b/.test(c.type_line || ''))

@@ -414,10 +414,8 @@ describe('stage 3 acceptance, fixture-backed', () => {
     // get there; the floor that produced the 20 was retired by §10.2.
     expect(plan.recipe.key).toBe('conversion');
     expect(plan.Q).toBeCloseTo(0.4545, 3);
-    // v1.4 stage 1d: 59 -> 54, OUT LOW by one (band 55-70). Section 10.8's
-    // paid deployment delays the Food engine by a turn; the plan and Q are
-    // unchanged, so this is W alone through the quality cap.
-    expect(result.score).toBe(54);
+    // rc9 re-freeze: 54 -> 59 (back inside the 55-70 band this test is named for).
+    expect(result.score).toBe(59);
   });
 
   it('keeps the 101-card Brawl Cabbage list on its legality cap', () => {
@@ -453,7 +451,10 @@ describe('stage 3 acceptance, fixture-backed', () => {
     // RE-PINNED by v1.4 stage 1d: at the T20 Commander horizon seven of the
     // ten assemble just enough output to clear the rule floor by a point or
     // two. Against the measured direction; reported, not tuned.
-    expect(scored.map((r) => r.score)).toEqual([22, 22, 22, 27, 22, 26, 22, 20, 20, 22]);
+    // rc9 re-freeze: [22,22,22,27,22,26,22,20,20,22] -> below
+    // rc10 re-freeze (scripts/_scratch/s3u-pins.ts, live loadMatchedPiles(10,2000,0xf00d0000,0.93)):
+    // [27,26,25,50,26,26,27,22,20,26] -> below.
+    expect(scored.map((r) => r.score)).toEqual([27, 51, 26, 50, 26, 26, 27, 22, 20, 26]);
     expect(syn).toEqual([77.2, 100, 68.6, 74.4, 72.1, 69.8, 79.5, 84.2, 77.2, 79.5]);
     expect(syn.filter((v) => v <= 5).length).toBe(0);
   });

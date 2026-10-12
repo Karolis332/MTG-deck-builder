@@ -38,7 +38,7 @@ import { MAX_TURN, MAX_HORIZON, horizonFor, allocateDamage, type DamageUnit, typ
 import { drawSampleSizes } from './deck-score-math';
 import type { ScoreFormat } from './deck-score-norms';
 import type { DeckEntry } from './deck-score-mana';
-import type { CardFeature } from './deck-score-features';
+import { BLANK_CARD_ID, type CardFeature } from './deck-score-features';
 
 /** Every cast-trigger source shares ONE spell expenditure per turn (§9.4
  * "debit shared mana, fodder and life once"): two Guttersnipes fire off the
@@ -102,7 +102,17 @@ function isInstantOrSorcery(f: CardFeature): boolean {
 /** A spell that is not a creature spell — what a "noncreature spell" trigger
  * watches for. Lands are not cast at all. */
 function isNoncreatureSpell(f: CardFeature): boolean {
-  return !f.isLand && !/\bCreature\b/.test(f.card.type_line || '');
+  return !f.isLand && !isBlankSlot(f) && !/\bCreature\b/.test(f.card.type_line || '');
+}
+
+/** §10.9 item 5 / §10.10 item 2: the pessimistic imputation of an unresolved
+ * slot exists on the COST side only. A blank is never a cast, never a
+ * noncreature spell and never a trigger source, so it can supply no output
+ * coefficient — counting it inflated `castSeries`, moved a cast trigger's mean
+ * output and, through `bestLine`'s θ grid, paid `378789207` +26 W for one added
+ * unknown slot (stage 3g phase 1, class b). */
+export function isBlankSlot(f: CardFeature): boolean {
+  return f.card.oracle_id === BLANK_CARD_ID;
 }
 
 /** Expected copies of a `K`-copy suite among the cards seen by turn `t`. */
@@ -382,18 +392,18 @@ export function castTriggerFinisher(
   // ALREADY on the battlefield, so the stack starts at the turn its own mana
   // cost is first payable — not at turn 1.
   const onlineTurn = Math.max(1, Math.ceil(f.c));
-  const outputAt = (t: number): number => {
-    const casts = trig.oncePerTurn ? Math.min(1, series[t] ?? 0) : (series[t] ?? 0);
+  const stackedAt = (t: number): number => {
     const since = Math.max(0, (cum[t - 1] ?? 0) - (cum[Math.min(t - 1, onlineTurn)] ?? 0));
     const stacked = trig.oncePerTurn ? Math.min(Math.max(0, t - 1 - onlineTurn), since) : since;
-    return (trig.perCastDamage + trig.perCastTempPower) * casts + trig.perCastPermPower * stacked;
+    return trig.perCastPermPower * stacked;
   };
+  const castsAt = (t: number): number =>
+    (trig.oncePerTurn ? Math.min(1, series[t] ?? 0) : (series[t] ?? 0));
+  const outputAt = (t: number): number =>
+    (trig.perCastDamage + trig.perCastTempPower) * castsAt(t) + stackedAt(t);
   // The per-opponent part of `outputAt`: the ping every opponent takes. What is
   // left (counters, tokens, prowess) is single-target combat power.
-  const eachOpponentAt = (t: number): number => {
-    const casts = trig.oncePerTurn ? Math.min(1, series[t] ?? 0) : (series[t] ?? 0);
-    return trig.perCastEachOpponent * casts;
-  };
+  const eachOpponentAt = (t: number): number => trig.perCastEachOpponent * castsAt(t);
   // FIXED 2..MAX_TURN window, never the horizon: `perTurn` sizes the access
   // pool, and a horizon-dependent mean would change a Commander list's T1-T12
   // access between H12 and H20 (section 10.8 item 4).
@@ -414,7 +424,17 @@ export function castTriggerFinisher(
     eachOpponentAt,
     makesTokens: trig.makesTokens,
     shareKey: SPELL_SHARE_KEY,
-    upkeepAt: (t: number) => sched.manaSpent[t] ?? 0,
+    stackedAt,
+    // Section 10.10 items 1-2: a cast is a CHOICE, never a compulsory debit
+    // taken from an expectation over the identified library. `upkeepAt` is the
+    // PRICE OF ONE CAST - the library's mean spell MV, which removing a single
+    // non-source card does not move - and `castsAt` is the CAP on how many
+    // casts turn `t` can offer.
+    castsAt,
+    upkeepAt: (t: number) => {
+      const casts = series[t] ?? 0;
+      return casts > 1e-9 ? (sched.manaSpent[t] ?? 0) / casts : 0;
+    },
     trace: trig.trace,
   };
 }

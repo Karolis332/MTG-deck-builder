@@ -130,7 +130,17 @@ export const J_MAX_DEGREE = 19;
  * the spec imposes on recipe scheduling (<=12 turns => n<=19 for Commander).
  */
 export function buildDisjointAccessPolynomial(N: number, pools: Pool[]): Poly {
-  const active = pools.filter((p) => p.r > 0 && p.K > 0);
+  // `K>0` was part of this filter and dropped an UNSATISFIABLE pool (r library
+  // copies still wanted, none in the pool) as if it imposed no constraint —
+  // access 1 for a requirement nothing can meet. Dropping the member that made
+  // the requirement real therefore RAISED access (v1.4 stage 3n: commander
+  // 381392048 blank, .0517 -> .3154). Kept in the product, `poolPoly` zeroes
+  // every coefficient below `r` over a 0-copy binomial and the access is 0,
+  // which is what "cannot be drawn" means. `r<=0` still drops (§1).
+  const active = pools.filter((p) => p.r > 0);
+  // Short-circuit of the same arithmetic: `poolPoly` over a 0-copy binomial is
+  // all zeros below `r`, so the product is the zero polynomial.
+  if (active.some((p) => p.K <= 0)) return new Array(J_MAX_DEGREE + 1).fill(0);
   const usedK = active.reduce((s, p) => s + p.K, 0);
   const leftover = Math.max(0, N - usedK);
   let product = polyBinomial(leftover, J_MAX_DEGREE);

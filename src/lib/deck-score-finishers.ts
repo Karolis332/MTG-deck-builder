@@ -169,6 +169,14 @@ export interface FinisherOutput {
    * over the scheduled turns, which is what sizes the access pool.
    */
   outputAt?: (t: number) => number;
+  /** Casts turn `t` can offer a cast trigger - the CAP on the `share` item's
+   * quantity. Section 10.10 item 1: never a charge, only a bound. */
+  castsAt?: (t: number) => number;
+  /** The part of `outputAt(t)` this permanent produces on its OWN - counters
+   * already stacked, a body - with no cast made this turn. Section 10.10
+   * items 1-2: the rest is cast-driven and is credited only for casts the
+   * scheduler chooses and pays for. */
+  stackedAt?: (t: number) => number;
   /** A cast trigger whose accumulating output is CREATURE TOKENS: the token
    * family must not also credit the card as a flat per-turn producer. */
   makesTokens?: boolean;

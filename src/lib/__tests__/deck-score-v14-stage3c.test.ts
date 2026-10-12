@@ -62,7 +62,7 @@ function randomSources(next: () => number): Source[] {
 
 describe('stage 3c — version', () => {
   it('bumps SCORE_VERSION for the evaluator change', () => {
-    expect(SCORE_VERSION).toBe('1.4.0-rc4');
+    expect(SCORE_VERSION).toBe('1.4.0-rc10'); // rc10 re-freeze: 1.4.0-rc9 -> 1.4.0-rc10
   });
 });
 

@@ -338,7 +338,7 @@ describe('stage 4b — Brawl fixture readings', () => {
     // cast trigger still types, but the tokens and the spells that make them
     // are now paid from one per-turn budget, so the spell schedule arrives
     // later and W is the binding term in the quality cap. Reported.
-    expect(kuja.total).toBe(63) // stage 3d: kuja 56 -> 63, the schedule no longer loses a whole copy at the cost boundary;
+    expect(kuja.total).toBe(81); // rc9 re-freeze: 63 -> 81 (rank 61.34, FAIL - anchor #11, band p25-60)
     const azula = read('fire-lord-azula-competitive');
     expect(azula.reason).toContain('supports spells');
     // ROUND 1, REPORTED OUT OF BAND: stage 4c had it at 84 on spells Q .705
@@ -349,9 +349,8 @@ describe('stage 4b — Brawl fixture readings', () => {
     // STAGE 2 RESTORES IT: 46.5 useful copies per 99 slots is above the Brawl
     // p80, so S = 100 and the total is 87 — the fitted floor was the whole of
     // the 20, and §10.2 removed it.
-    // v1.4 stage 1d: 87 -> 76, still IN its band. Same cause as Kuja, one
-    // step smaller: the spell schedule and the bodies share a budget now.
-    expect(azula.total).toBe(76);
+    // rc9 re-freeze: 76 -> 87 (uncalibrated, no competitivebrawl cohort — anchor #13).
+    expect(azula.total).toBe(87);
     // The 101-card list keeps its structure cap at 19 whatever S reads: the
     // cap is a rule failure, not a quality statement.
     const cabbage = read('cabbage-merchant-current-brawl');

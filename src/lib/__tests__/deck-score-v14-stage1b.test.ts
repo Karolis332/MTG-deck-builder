@@ -373,8 +373,15 @@ describe('v1.4 stage 1b — fixtures and frozen domain (§10.7)', () => {
     const { built } = winAudit('commander', normsFor('commander'), 'midrange', N, main, cmd, inter);
     expect(built).toContain('control');
     const w = computeWin('commander', normsFor('commander'), 'midrange', N, main, cmd, inter);
-    expect(w.reason).toMatch(/^Token\/Food conversion \(\d+ bodies\): closes T12/);
-    expect(w.score).toBeCloseTo(49.0, 0);
+    // rc9 re-freeze: trace now "Token/Food conversion (6 bodies): closes T11, access 41%
+    // (u=0.57); shared bottleneck, protection access 87%; none." (deck-score-report.ts,
+    // cabbage-cedh-input W row) — executable (real access/outlet), so closes T11 not T12.
+    // rc10 re-freeze (scripts/deck-score-report.ts, live, cabbage-cedh-input W row): trace now
+    // "Token/Food conversion (5 bodies): closes T10, access 24% (u=0.66); shared bottleneck,
+    // protection access 87%; none." — executable (real access/outlet, costs paid), so closes
+    // T10 not T11.
+    expect(w.reason).toMatch(/^Token\/Food conversion \(\d+ bodies\): closes T10/);
+    expect(w.score).toBeCloseTo(64.7, 0);
   });
 
   it('standard-1445867-aljce keeps a closing schedule after the control correction', () => {
